@@ -1,0 +1,753 @@
+/* CTSEvanPreach — unit 1. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "evanpreach",
+ "unit": 1,
+ "totalUnits": 10,
+ "filePrefix": "CTSEvanPreach",
+ "prevHref": null,
+ "nextHref": "CTSEvanPreachUnit2.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "What is the primary intent of evangelistic preaching?",
+    "es": "¿Cuál es el propósito principal de la predicación evangelística?"
+   },
+   "options": {
+    "en": [
+     "Building church administrative structure and committee work",
+     "Teaching deep theology to mature believers only",
+     "Encouraging discouraged Christians without calling for any response",
+     "Bringing men and women to Christ for a personal response of repentance and faith"
+    ],
+    "es": [
+     "Construir la estructura administrativa de la iglesia y el trabajo de comités",
+     "Enseñar teología profunda solo a creyentes maduros",
+     "Animar a cristianos desanimados sin llamar a una respuesta",
+     "Llevar a hombres y mujeres a Cristo para una respuesta personal de arrepentimiento y fe"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "In 2 Corinthians 5:20, Paul calls those who carry the gospel:",
+    "es": "En 2 Corintios 5:20, Pablo llama a quienes llevan el evangelio:"
+   },
+   "options": {
+    "en": [
+     "Soldiers of the cross",
+     "Stewards of mysteries",
+     "Ambassadors for Christ",
+     "Watchmen on the wall"
+    ],
+    "es": [
+     "Soldados de la cruz",
+     "Mayordomos de los misterios",
+     "Embajadores en nombre de Cristo",
+     "Atalayas sobre el muro"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "Romans 3:23 teaches that:",
+    "es": "Romanos 3:23 enseña que:"
+   },
+   "options": {
+    "en": [
+     "The wages of sin is death and only the lawless will perish",
+     "All have sinned and fall short of the glory of God",
+     "God so loved the world that He sent His only Son",
+     "There is therefore now no condemnation to those who are in Christ Jesus"
+    ],
+    "es": [
+     "La paga del pecado es muerte y solo los inicuos perecerán",
+     "Todos pecaron y están destituidos de la gloria de Dios",
+     "De tal manera amó Dios al mundo, que envió a Su Hijo unigénito",
+     "Por lo tanto, ahora no hay condenación para los que están en Cristo Jesús"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "Where is the Great Commission found?",
+    "es": "¿Dónde se encuentra la Gran Comisión?"
+   },
+   "options": {
+    "en": [
+     "Matthew 28:19",
+     "Romans 10:9",
+     "Acts 1:8",
+     "John 3:16"
+    ],
+    "es": [
+     "Mateo 28:19",
+     "Romanos 10:9",
+     "Hechos 1:8",
+     "Juan 3:16"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "According to Romans 1:16, the gospel is:",
+    "es": "Según Romanos 1:16, el evangelio es:"
+   },
+   "options": {
+    "en": [
+     "A philosophy for ethical living without supernatural claims",
+     "A hidden wisdom revealed only to the apostles",
+     "A new law replacing the old covenant for ethnic Israel",
+     "The power of God to salvation for everyone who believes"
+    ],
+    "es": [
+     "Una filosofía para vida ética sin afirmaciones sobrenaturales",
+     "Una sabiduría oculta revelada solo a los apóstoles",
+     "Una nueva ley que reemplaza el antiguo pacto para el Israel étnico",
+     "El poder de Dios para salvación a todo aquel que cree"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "Which is NOT one of the three outline types combined in evangelistic preaching?",
+    "es": "¿Cuál NO es uno de los tres tipos de bosquejos combinados en la predicación evangelística?"
+   },
+   "options": {
+    "en": [
+     "Deductive topical",
+     "Allegorical mystical",
+     "Inductive textual",
+     "Expository"
+    ],
+    "es": [
+     "Deductivo topical",
+     "Alegórico místico",
+     "Inductivo textual",
+     "Expositivo"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "A deductive topical outline:",
+    "es": "Un bosquejo deductivo topical:"
+   },
+   "options": {
+    "en": [
+     "Walks verse by verse through a short passage of Scripture",
+     "Starts with specific facts of one verse and works backward to a keyword",
+     "States the main subject first and supports it with multiple texts from Scripture",
+     "Builds points around alliterated letters only, ignoring the text"
+    ],
+    "es": [
+     "Avanza versículo por versículo a través de un pasaje corto de la Escritura",
+     "Comienza con hechos específicos de un versículo y trabaja hacia atrás hasta una palabra clave",
+     "Declara primero el tema principal y lo apoya con múltiples textos de la Escritura",
+     "Construye puntos alrededor de letras aliteradas solamente, ignorando el texto"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "An inductive textual outline:",
+    "es": "Un bosquejo inductivo textual:"
+   },
+   "options": {
+    "en": [
+     "Starts with specific facts in one verse and works backward to form the keyword and points",
+     "Moves verse by verse through several chapters at a time",
+     "Allegorizes parables to find hidden meaning behind the words",
+     "Pulls supporting texts from anywhere in Scripture and lists them"
+    ],
+    "es": [
+     "Comienza con hechos específicos de un versículo y trabaja hacia atrás para formar la palabra clave y los puntos",
+     "Avanza versículo por versículo a través de varios capítulos a la vez",
+     "Alegoriza parábolas para encontrar significado oculto detrás de las palabras",
+     "Extrae textos de apoyo de cualquier parte de la Escritura y los enumera"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "An expository outline:",
+    "es": "Un bosquejo expositivo:"
+   },
+   "options": {
+    "en": [
+     "Starts with the conclusion and works backward to the introduction",
+     "Ignores the immediate text in favor of cross-references from other books",
+     "Moves verse by verse through a short passage, drawing out truths as it goes",
+     "Has no keyword and no parallel points"
+    ],
+    "es": [
+     "Comienza con la conclusión y trabaja hacia atrás hasta la introducción",
+     "Ignora el texto inmediato en favor de referencias cruzadas de otros libros",
+     "Avanza versículo por versículo a través de un pasaje corto, extrayendo verdades a medida que avanza",
+     "No tiene palabra clave ni puntos paralelos"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "The keyword in the WiseSpeak method must always be:",
+    "es": "La palabra clave en el método WiseSpeak debe ser siempre:"
+   },
+   "options": {
+    "en": [
+     "A short verb in the imperative mood",
+     "A plural noun",
+     "A proper name from the passage",
+     "An adjective that describes God"
+    ],
+    "es": [
+     "Un verbo corto en modo imperativo",
+     "Un sustantivo plural",
+     "Un nombre propio del pasaje",
+     "Un adjetivo que describe a Dios"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "Each point in the outline must be:",
+    "es": "Cada punto en el bosquejo debe ser:"
+   },
+   "options": {
+    "en": [
+     "A short singular of the plural keyword, five words or less, parallel in form",
+     "At least ten words long to be clear",
+     "A full paragraph of explanation with cross-references",
+     "A direct quotation of the keyword itself, repeated unchanged"
+    ],
+    "es": [
+     "Un singular corto de la palabra clave plural, cinco palabras o menos, paralelo en forma",
+     "De al menos diez palabras para ser claro",
+     "Un párrafo completo de explicación con referencias cruzadas",
+     "Una cita directa de la palabra clave misma, repetida sin cambios"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "In Example 1 (Romans 10:9–10), the keyword chosen was:",
+    "es": "En el Ejemplo 1 (Romanos 10:9–10), la palabra clave escogida fue:"
+   },
+   "options": {
+    "en": [
+     "reasons",
+     "facts",
+     "ways",
+     "conditions"
+    ],
+    "es": [
+     "razones",
+     "hechos",
+     "caminos",
+     "condiciones"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "In Example 2 (John 3:16), the keyword chosen was:",
+    "es": "En el Ejemplo 2 (Juan 3:16), la palabra clave escogida fue:"
+   },
+   "options": {
+    "en": [
+     "reasons",
+     "conditions",
+     "commands",
+     "promises"
+    ],
+    "es": [
+     "razones",
+     "condiciones",
+     "mandamientos",
+     "promesas"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "In Example 3 (John 1:1), the keyword chosen was:",
+    "es": "En el Ejemplo 3 (Juan 1:1), la palabra clave escogida fue:"
+   },
+   "options": {
+    "en": [
+     "truths",
+     "steps",
+     "facts",
+     "doors"
+    ],
+    "es": [
+     "verdades",
+     "pasos",
+     "hechos",
+     "puertas"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "The probing question for the Romans 10:9–10 example was:",
+    "es": "La pregunta de sondeo para el ejemplo de Romanos 10:9–10 fue:"
+   },
+   "options": {
+    "en": [
+     "Who is the Word?",
+     "What must I do to be saved?",
+     "Why did God send His Son?",
+     "When will Christ return?"
+    ],
+    "es": [
+     "¿Quién es el Verbo?",
+     "¿Qué debo hacer para ser salvo?",
+     "¿Por qué envió Dios a Su Hijo?",
+     "¿Cuándo regresará Cristo?"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "The one-sentence evangelistic objective always aims at:",
+    "es": "El objetivo evangelístico de una sola oración siempre apunta a:"
+   },
+   "options": {
+    "en": [
+     "Filling the offering plate at the end of the service",
+     "Defending doctrinal purity against contemporary error",
+     "Comforting the saints with assurances of heaven",
+     "A definite personal decision for Christ today"
+    ],
+    "es": [
+     "Llenar el plato de la ofrenda al final del servicio",
+     "Defender la pureza doctrinal contra el error contemporáneo",
+     "Consolar a los santos con seguridades del cielo",
+     "Una decisión personal definida por Cristo hoy"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "The preacher's heart, according to this unit, must be:",
+    "es": "El corazón del predicador, según esta unidad, debe estar:"
+   },
+   "options": {
+    "en": [
+     "Broken for the lost, feeling the weight of eternity",
+     "Detached and academic, leaving emotion to the singers",
+     "Focused on personal reputation as a skilled orator",
+     "Indifferent to outcomes since results belong only to God"
+    ],
+    "es": [
+     "Quebrantado por los perdidos, sintiendo el peso de la eternidad",
+     "Distante y académico, dejando la emoción a los cantores",
+     "Enfocado en la reputación personal como orador hábil",
+     "Indiferente a los resultados ya que pertenecen solo a Dios"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "All three outline types obey the same rules. This means:",
+    "es": "Los tres tipos de bosquejos obedecen las mismas reglas. Esto significa:"
+   },
+   "options": {
+    "en": [
+     "They all use the same Bible passage every time",
+     "They all begin with a hymn and a public reading of the Law",
+     "They all run exactly thirty minutes in delivery",
+     "The keyword is always a plural noun and points are short parallel singulars"
+    ],
+    "es": [
+     "Todos usan el mismo pasaje bíblico cada vez",
+     "Todos comienzan con un himno y una lectura pública de la Ley",
+     "Todos duran exactamente treinta minutos en la entrega",
+     "La palabra clave es siempre un sustantivo plural y los puntos son singulares cortos paralelos"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "Even when preaching to believers, the evangelistic sermon should:",
+    "es": "Aun cuando se predica a creyentes, el sermón evangelístico debe:"
+   },
+   "options": {
+    "en": [
+     "Avoid mentioning salvation to keep believers comfortable",
+     "Be shaped so any unsaved listener hears a clear way of salvation",
+     "Focus exclusively on prophecy charts and end-times speculation",
+     "Be limited to Old Testament texts only, never the New"
+    ],
+    "es": [
+     "Evitar mencionar la salvación para mantener cómodos a los creyentes",
+     "Moldearse para que cualquier oyente no salvo escuche un camino claro de salvación",
+     "Enfocarse exclusivamente en cuadros proféticos y especulación sobre los últimos tiempos",
+     "Limitarse solo a textos del Antiguo Testamento, nunca al Nuevo"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "The expository example (John 1:1) gave three 'facts' about the Word. These were:",
+    "es": "El ejemplo expositivo (Juan 1:1) dio tres 'hechos' acerca del Verbo. Estos fueron:"
+   },
+   "options": {
+    "en": [
+     "The Word saves; The Word teaches; The Word heals",
+     "The Word died; The Word rose; The Word ascended",
+     "The Word existed first; The Word was with God; The Word was God",
+     "The Word loves; The Word judges; The Word reigns"
+    ],
+    "es": [
+     "El Verbo salva; El Verbo enseña; El Verbo sana",
+     "El Verbo murió; El Verbo resucitó; El Verbo ascendió",
+     "El Verbo existía primero; El Verbo estaba con Dios; El Verbo era Dios",
+     "El Verbo ama; El Verbo juzga; El Verbo reina"
+    ]
+   },
+   "answer": 2
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "In one sentence, what is the primary intent of evangelistic preaching?",
+    "es": "En una oración, ¿cuál es el propósito principal de la predicación evangelística?"
+   },
+   "keywords": {
+    "en": [
+     "bring",
+     "christ",
+     "gospel",
+     "decision",
+     "repent",
+     "faith",
+     "trust",
+     "savior"
+    ],
+    "es": [
+     "llevar",
+     "cristo",
+     "evangel",
+     "decisi",
+     "arrepent",
+     "fe",
+     "confi",
+     "salvador"
+    ]
+   },
+   "model": {
+    "en": "Evangelistic preaching is preaching with the primary intent of bringing men and women to Christ. It is a deliberate proclamation of the gospel that calls for a personal response of repentance and faith, presenting Jesus so clearly and urgently that the listener is compelled to trust Him as Savior and Lord.",
+    "es": "La predicación evangelística es predicar con la intención primaria de llevar a hombres y mujeres a Cristo. Es una proclamación deliberada del evangelio que llama a una respuesta personal de arrepentimiento y fe, presentando a Jesús tan clara y urgentemente que el oyente es impulsado a confiar en Él como Salvador y Señor."
+   }
+  },
+  {
+   "prompt": {
+    "en": "According to 2 Corinthians 5:20, what does Paul call those who carry the gospel, and what is their appeal to the listener?",
+    "es": "Según 2 Corintios 5:20, ¿cómo llama Pablo a quienes llevan el evangelio, y cuál es su llamado al oyente?"
+   },
+   "keywords": {
+    "en": [
+     "ambassad",
+     "reconcil",
+     "christ",
+     "behalf",
+     "implor",
+     "plead",
+     "beseech",
+     "stead"
+    ],
+    "es": [
+     "embajad",
+     "reconcili",
+     "cristo",
+     "nombre",
+     "rog",
+     "supl",
+     "lugar",
+     "plead"
+    ]
+   },
+   "model": {
+    "en": "In 2 Corinthians 5:20 Paul calls gospel preachers ambassadors for Christ, as though God were pleading through them; on Christ's behalf they implore people to be reconciled to God. The preacher speaks in Christ's stead, carrying the King's message of reconciliation.",
+    "es": "En 2 Corintios 5:20 Pablo llama a los predicadores del evangelio embajadores de Cristo, como si Dios rogara por medio de ellos; en nombre de Cristo ruegan a la gente que se reconcilie con Dios. El predicador habla en lugar de Cristo, llevando el mensaje de reconciliación del Rey."
+   }
+  },
+  {
+   "prompt": {
+    "en": "List the three biblical reasons given in this unit for preaching evangelistically.",
+    "es": "Enumere las tres razones bíblicas dadas en esta unidad para predicar evangelísticamente."
+   },
+   "keywords": {
+    "en": [
+     "lost",
+     "power",
+     "gospel",
+     "sermon",
+     "commission",
+     "souls",
+     "perish",
+     "urgent"
+    ],
+    "es": [
+     "perdid",
+     "poder",
+     "evangel",
+     "sermón",
+     "comisi",
+     "almas",
+     "perec",
+     "urgen"
+    ]
+   },
+   "model": {
+    "en": "This unit gives three biblical reasons to preach evangelistically: the lost are perishing and need Christ; the gospel is the power of God to salvation; and the Great Commission makes evangelism the central mandate, so every sermon should carry an evangelistic aim.",
+    "es": "Esta unidad da tres razones bíblicas para predicar evangelísticamente: los perdidos están pereciendo y necesitan a Cristo; el evangelio es el poder de Dios para salvación; y la Gran Comisión hace de la evangelización el mandato central, así que cada sermón debe llevar un fin evangelístico."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Name the three outline types combined in evangelistic preaching.",
+    "es": "Nombre los tres tipos de bosquejos combinados en la predicación evangelística."
+   },
+   "keywords": {
+    "en": [
+     "deduct",
+     "topical",
+     "induct",
+     "textual",
+     "expositor",
+     "three",
+     "outline",
+     "combin"
+    ],
+    "es": [
+     "deduct",
+     "topical",
+     "induct",
+     "textual",
+     "expositiv",
+     "tres",
+     "esquem",
+     "combin"
+    ]
+   },
+   "model": {
+    "en": "Evangelistic preaching combines three outline types: the deductive topical outline, the inductive textual outline, and the expository outline. All three obey the same keyword discipline and keep the sermon moving toward a decision for Christ.",
+    "es": "La predicación evangelística combina tres tipos de esquema: el esquema topical deductivo, el esquema textual inductivo y el esquema expositivo. Los tres obedecen la misma disciplina de palabra clave y mantienen el sermón avanzando hacia una decisión por Cristo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "State the rule for what part of speech the keyword must be, and explain in one sentence why.",
+    "es": "Indique la regla sobre qué clase gramatical debe ser la palabra clave, y explique en una oración por qué."
+   },
+   "keywords": {
+    "en": [
+     "plural",
+     "noun",
+     "singular",
+     "point",
+     "parallel",
+     "unified",
+     "remember",
+     "keyword"
+    ],
+    "es": [
+     "plural",
+     "sustantiv",
+     "singular",
+     "punto",
+     "paralel",
+     "unific",
+     "recordar",
+     "clave"
+    ]
+   },
+   "model": {
+    "en": "The keyword must always be a plural noun, because every point in the outline is then a clean singular of that plural. This keeps the sermon unified, parallel in form, and easy for the listener to remember long after the closing prayer.",
+    "es": "La palabra clave debe ser siempre un sustantivo plural, porque cada punto del esquema es entonces un singular limpio de ese plural. Esto mantiene el sermón unificado, paralelo en forma, y fácil de recordar para el oyente mucho después de la oración final."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the rule about the length and form of each outline point, and why short points matter in evangelistic preaching.",
+    "es": "Explique la regla sobre la longitud y forma de cada punto del esquema, y por qué los puntos cortos importan en la predicación evangelística."
+   },
+   "keywords": {
+    "en": [
+     "five",
+     "short",
+     "word",
+     "parallel",
+     "singular",
+     "remember",
+     "clear",
+     "point"
+    ],
+    "es": [
+     "cinco",
+     "cort",
+     "palabra",
+     "paralel",
+     "singular",
+     "recordar",
+     "clar",
+     "punto"
+    ]
+   },
+   "model": {
+    "en": "Each outline point must be short - five words or less - parallel in form, and a singular of the plural keyword. Short, parallel points keep the message clear and memorable so the listener can carry the sermon home and act on it.",
+    "es": "Cada punto del esquema debe ser corto - cinco palabras o menos - paralelo en forma, y un singular de la palabra clave plural. Los puntos cortos y paralelos mantienen el mensaje claro y memorable para que el oyente lleve el sermón a casa y actúe."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Using the Romans 10:9-10 example, explain how the plural-noun keyword is chosen and how the points flow from it.",
+    "es": "Usando el ejemplo de Romanos 10:9-10, explique cómo se elige la palabra clave (sustantivo plural) y cómo fluyen los puntos de ella."
+   },
+   "keywords": {
+    "en": [
+     "condition",
+     "plural",
+     "confess",
+     "believe",
+     "receive",
+     "point",
+     "salvation",
+     "keyword"
+    ],
+    "es": [
+     "condicion",
+     "plural",
+     "confes",
+     "cre",
+     "recib",
+     "punto",
+     "salvaci",
+     "clave"
+    ]
+   },
+   "model": {
+    "en": "From Romans 10:9-10 the probing question is 'What must I do to be saved?' The plural-noun keyword chosen is 'conditions,' and each point is a singular of it: confess with your mouth, believe in your heart, receive God's salvation. The keyword controls the whole outline.",
+    "es": "De Romanos 10:9-10 la pregunta es '¿Qué debo hacer para ser salvo?' La palabra clave plural elegida es 'condiciones,' y cada punto es un singular de ella: confesar con tu boca, creer en tu corazón, recibir la salvación de Dios. La palabra clave controla todo el esquema."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Using the John 3:16 example, explain how a single verse yields a plural-noun keyword and three parallel points.",
+    "es": "Usando el ejemplo de Juan 3:16, explique cómo un solo versículo produce una palabra clave (sustantivo plural) y tres puntos paralelos."
+   },
+   "keywords": {
+    "en": [
+     "reason",
+     "love",
+     "eternal",
+     "world",
+     "plural",
+     "point",
+     "sent",
+     "keyword"
+    ],
+    "es": [
+     "razon",
+     "amor",
+     "etern",
+     "mundo",
+     "plural",
+     "punto",
+     "envió",
+     "clave"
+    ]
+   },
+   "model": {
+    "en": "John 3:16 answers 'Why did God send His Son?' The single verse yields the plural-noun keyword 'reasons,' and three parallel points unfold from it: show His love, offer eternal life, save the world. One verse, worked inductively, becomes a complete evangelistic outline.",
+    "es": "Juan 3:16 responde '¿Por qué envió Dios a Su Hijo?' El solo versículo produce la palabra clave plural 'razones,' y tres puntos paralelos surgen de ella: mostrar Su amor, ofrecer vida eterna, salvar al mundo. Un versículo, trabajado inductivamente, se vuelve un esquema evangelístico completo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe in one or two sentences the heart attitude the preacher must carry into the pulpit.",
+    "es": "Describa en una o dos oraciones la actitud del corazón que el predicador debe llevar al púlpito."
+   },
+   "keywords": {
+    "en": [
+     "broken",
+     "lost",
+     "burden",
+     "eternit",
+     "passion",
+     "love",
+     "compass",
+     "pray"
+    ],
+    "es": [
+     "quebrant",
+     "perdid",
+     "carga",
+     "eternid",
+     "pasi",
+     "amor",
+     "compasi",
+     "oraci"
+    ]
+   },
+   "model": {
+    "en": "The preacher must carry a broken heart for the lost, feeling the weight of eternity and a burden for souls. This passion and compassion, born in prayer at the cross, is what makes the message burn; the man behind the pulpit must first remember what he was rescued from.",
+    "es": "El predicador debe llevar un corazón quebrantado por los perdidos, sintiendo el peso de la eternidad y una carga por las almas. Esta pasión y compasión, nacida en oración al pie de la cruz, es lo que hace arder el mensaje; el hombre tras el púlpito debe recordar primero de qué fue rescatado."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Where is the Great Commission found in Scripture, and what does it command us to do?",
+    "es": "¿Dónde se encuentra la Gran Comisión en la Escritura, y qué nos manda hacer?"
+   },
+   "keywords": {
+    "en": [
+     "matthew",
+     "commission",
+     "disciple",
+     "nation",
+     "baptiz",
+     "teach",
+     "go",
+     "command"
+    ],
+    "es": [
+     "mateo",
+     "comisi",
+     "discípul",
+     "nacion",
+     "bautiz",
+     "enseñ",
+     "id",
+     "mand"
+    ]
+   },
+   "model": {
+    "en": "The Great Commission is found in Matthew 28:19-20. It commands us to go and make disciples of all the nations, baptizing them and teaching them to observe all that Christ commanded. Evangelism is not optional; it is the Commission itself.",
+    "es": "La Gran Comisión se encuentra en Mateo 28:19-20. Nos manda ir y hacer discípulos de todas las naciones, bautizándolos y enseñándoles a guardar todo lo que Cristo mandó. La evangelización no es opcional; es la Comisión misma."
+   }
+  }
+ ]
+};

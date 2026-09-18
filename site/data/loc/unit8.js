@@ -1,43 +1,833 @@
-/* CTSLOC - unit 8: per-unit configuration and content. */
-
-const UNIT = 8;
-
-var CFG={course:'loc',unit:8,totalUnits:10,progressKey:'cts_loc_progress',
-  next:'CTSLOCUnit9.html',cert:'CTSLOCCertificate.html',lockKey:`cts_loc_u${UNIT}_lock`,showReg:false};
-
-var DATA={"mc": [{"en": "Before the high priest, asked if He was the Christ, Jesus answered:", "es": "Ante el sumo sacerdote, preguntado si era el Cristo, Jesús respondió:", "oen": ["“I will not say”", "“You have said it, but no”", "“I am”", "“Ask My disciples”"], "oes": ["“No lo diré”", "“Tú lo dices, mas no”", "“Yo soy”", "“Preguntad a mis discípulos”"], "c": 23, "xen": "Mark 14:62.", "xes": "Marcos 14:62."}, {"en": "The high priest reacted to Jesus' answer by:", "es": "El sumo sacerdote reaccionó a la respuesta de Jesús:", "oen": ["setting Him free", "fleeing", "praising Him", "tearing his clothes and crying “blasphemy”"], "oes": ["poniéndole en libertad", "huyendo", "alabándole", "rasgando sus vestiduras y clamando “blasfemia”"], "c": 31, "xen": "Mark 14:63–64.", "xes": "Marcos 14:63–64."}, {"en": "In the courtyard, Peter:", "es": "En el patio, Pedro:", "oen": ["denied Jesus three times, then wept bitterly", "slept", "defended Jesus boldly", "fought the guards"], "oes": ["negó a Jesús tres veces, y luego lloró amargamente", "durmió", "defendió a Jesús con valor", "peleó con los guardias"], "c": 35, "xen": "Luke 22:61–62.", "xes": "Lucas 22:61–62."}, {"en": "Pilate's verdict about Jesus was:", "es": "El veredicto de Pilato sobre Jesús fue:", "oen": ["“He deserves death”", "“I find no fault in this Man”", "“Let the priests decide”", "“He is a rebel”"], "oes": ["“Merece la muerte”", "“Ninguna falta hallo en este hombre”", "“Decidan los sacerdotes”", "“Es un rebelde”"], "c": 43, "xen": "Luke 23:4.", "xes": "Lucas 23:4."}, {"en": "The prisoner released instead of Jesus was:", "es": "El preso soltado en lugar de Jesús fue:", "oen": ["Simon", "Lazarus", "Judas", "Barabbas"], "oes": ["Simón", "Lázaro", "Judas", "Barrabás"], "c": 52, "xen": "Matthew 27:26.", "xes": "Mateo 27:26."}, {"en": "When Pilate washed his hands, the people cried:", "es": "Cuando Pilato se lavó las manos, el pueblo clamó:", "oen": ["“We are innocent”", "“His blood be on us and on our children”", "“Free Him”", "“Long live the King”"], "oes": ["“Somos inocentes”", "“Su sangre sea sobre nosotros, y sobre nuestros hijos”", "“Suéltale”", "“¡Viva el Rey!”"], "c": 57, "xen": "Matthew 27:25.", "xes": "Mateo 27:25."}, {"en": "On the way to Golgotha, the cross was carried by:", "es": "Camino al Gólgota, la cruz fue llevada por:", "oen": ["Simon of Cyrene", "John", "Peter", "a Roman soldier"], "oes": ["Simón de Cirene", "Juan", "Pedro", "un soldado romano"], "c": 63, "xen": "Luke 23:26.", "xes": "Lucas 23:26."}, {"en": "Jesus was crucified between:", "es": "Jesús fue crucificado entre:", "oen": ["two priests", "two soldiers", "two robbers, one on each side", "two disciples"], "oes": ["dos sacerdotes", "dos soldados", "dos ladrones, uno a cada lado", "dos discípulos"], "c": 72, "xen": "Luke 23:33.", "xes": "Lucas 23:33."}, {"en": "To His enemies from the cross, Jesus said:", "es": "A sus enemigos desde la cruz, Jesús dijo:", "oen": ["“Let them be cursed”", "“Father, forgive them, for they do not know what they do”", "“I will repay”", "“Depart from Me”"], "oes": ["“Sean malditos”", "“Padre, perdónalos, porque no saben lo que hacen”", "“Yo pagaré”", "“Apartaos de mí”"], "c": 78, "xen": "Luke 23:34.", "xes": "Lucas 23:34."}, {"en": "To the penitent thief Jesus promised:", "es": "Al ladrón arrepentido Jesús prometió:", "oen": ["“Wait for the last day”", "“Your sins remain”", "“Today you will be with Me in Paradise”", "“Ask again later”"], "oes": ["“Espera el día postrero”", "“Tus pecados permanecen”", "“Hoy estarás conmigo en el paraíso”", "“Pide otra vez después”"], "c": 86, "xen": "Luke 23:43 — immediate, conscious presence with Christ.", "xes": "Lucas 23:43 — presencia inmediata y consciente con Cristo."}, {"en": "The cry of dereliction was:", "es": "El clamor de abandono fue:", "oen": ["“Why do they hate Me?”", "“Where are My friends?”", "“Save Yourself”", "“My God, My God, why have You forsaken Me?”"], "oes": ["“¿Por qué me odian?”", "“¿Dónde están mis amigos?”", "“Sálvate a ti mismo”", "“Dios mío, Dios mío, ¿por qué me has desamparado?”"], "c": 94, "xen": "Matthew 27:46 — quoting Psalm 22, bearing our judgment.", "xes": "Mateo 27:46 — citando el Salmo 22, llevando nuestro juicio."}, {"en": "“It is finished” (John 19:30) translates the Greek word:", "es": "“Consumado es” (Juan 19:30) traduce la palabra griega:", "oen": ["tetelestai — “paid in full / accomplished”", "hosanna", "hallelujah", "maranatha"], "oes": ["tetelestai — “pagado por completo / consumado”", "hosanna", "aleluya", "maranata"], "c": 98, "xen": "The work of redemption accomplished.", "xes": "La obra de redención consumada."}, {"en": "Jesus' last word, in willing surrender, was:", "es": "La última palabra de Jesús, en entrega voluntaria, fue:", "oen": ["“I am undone”", "“Father, into Your hands I commit My spirit”", "“Let Me live”", "“It is too much”"], "oes": ["“Estoy deshecho”", "“Padre, en tus manos encomiendo mi espíritu”", "“Dejadme vivir”", "“Es demasiado”"], "c": 106, "xen": "Luke 23:46 — no man took His life; He laid it down.", "xes": "Lucas 23:46 — ningún hombre le quitó la vida; Él la puso."}, {"en": "At Jesus' death the temple veil was:", "es": "A la muerte de Jesús el velo del templo fue:", "oen": ["left untouched", "repaired", "set on fire", "torn in two from top to bottom"], "oes": ["dejado intacto", "reparado", "incendiado", "rasgado en dos de arriba abajo"], "c": 115, "xen": "Matthew 27:51.", "xes": "Mateo 27:51."}, {"en": "The tearing of the veil from top to bottom signified:", "es": "El rasgarse del velo de arriba abajo significó:", "oen": ["the way into God's presence opened by His blood", "a new festival", "the temple's wealth", "God's anger only"], "oes": ["el camino a la presencia de Dios abierto por su sangre", "una nueva fiesta", "la riqueza del templo", "solo la ira de Dios"], "c": 119, "xen": "Hebrews 10:19–20 — a new and living way.", "xes": "Hebreos 10:19–20 — un camino nuevo y vivo."}, {"en": "Seeing how Jesus died, the Roman centurion said:", "es": "Viendo cómo murió Jesús, el centurión romano dijo:", "oen": ["“He was a rebel”", "“He was only a man”", "“Truly this was the Son of God!”", "nothing at all"], "oes": ["“Era un rebelde”", "“Era solo un hombre”", "“Verdaderamente este era el Hijo de Dios”", "nada en absoluto"], "c": 128, "xen": "Matthew 27:54 — a pagan confesses what the council denied.", "xes": "Mateo 27:54 — un pagano confiesa lo que el concilio negó."}, {"en": "When the soldier pierced Jesus' side, there came out:", "es": "Cuando el soldado traspasó el costado de Jesús, salió:", "oen": ["only water", "blood and water — proof He was truly dead", "nothing", "fire"], "oes": ["solo agua", "sangre y agua — prueba de que estaba verdaderamente muerto", "nada", "fuego"], "c": 134, "xen": "John 19:34.", "xes": "Juan 19:34."}, {"en": "That Jesus' legs were not broken fulfilled the Scripture about:", "es": "Que no le quebraran las piernas a Jesús cumplió la Escritura sobre:", "oen": ["the Passover lamb — “not one of His bones shall be broken”", "the bronze serpent", "the scapegoat", "the ark"], "oes": ["el cordero pascual — “no será quebrado hueso suyo”", "la serpiente de bronce", "el macho cabrío", "el arca"], "c": 140, "xen": "John 19:36.", "xes": "Juan 19:36."}, {"en": "Jesus' body was buried by:", "es": "El cuerpo de Jesús fue sepultado por:", "oen": ["the apostles", "the Roman soldiers", "Joseph of Arimathea, with Nicodemus", "His mother alone"], "oes": ["los apóstoles", "los soldados romanos", "José de Arimatea, con Nicodemo", "su madre sola"], "c": 149, "xen": "John 19:38–42.", "xes": "Juan 19:38–42."}, {"en": "After the burial, the chief priests:", "es": "Tras la sepultura, los principales sacerdotes:", "oen": ["repented", "removed the body", "opened the tomb", "set a guard and sealed the stone"], "oes": ["se arrepintieron", "quitaron el cuerpo", "abrieron el sepulcro", "pusieron guardia y sellaron la piedra"], "c": 157, "xen": "Matthew 27:62–66.", "xes": "Mateo 27:62–66."}], "sa": [{"en": "Describe the Jewish trial and Peter's denial (Mark 14; Luke 22).", "es": "Describa el juicio judío y la negación de Pedro (Marcos 14; Lucas 22).", "men": "Led before Annas and Caiaphas, Jesus faced false witnesses. When the high priest asked if He was the Christ, the Son of the Blessed, He answered “I am,” and the priest tore his clothes, crying blasphemy; they judged Him worthy of death. Meanwhile Peter denied Him three times in the courtyard, and when the rooster crowed and the Lord looked at him, he went out and wept bitterly.", "mes": "Llevado ante Anás y Caifás, Jesús enfrentó testigos falsos. Cuando el sumo sacerdote preguntó si era el Cristo, el Hijo del Bendito, respondió “Yo soy,” y el sacerdote rasgó sus vestiduras clamando blasfemia; le juzgaron reo de muerte. Entre tanto Pedro le negó tres veces en el patio, y cuando cantó el gallo y el Señor le miró, salió fuera y lloró amargamente.", "ken": ["caiaphas", "christ", "blasphemy", "death", "peter", "denied", "rooster", "wept"], "kes": ["caifas", "cristo", "blasfem", "muerte", "pedro", "nego", "gallo", "lloro"]}, {"en": "Describe the Roman trial before Pilate (Matt 27; Luke 23; John 18-19).", "es": "Describa el juicio romano ante Pilato (Mateo 27; Lucas 23; Juan 18-19).", "men": "Pilate examined Jesus and declared, “I find no fault in this Man,” even after his wife warned him. He offered the crowd a choice, but they cried for Barabbas the murderer and “Crucify Him.” Pilate washed his hands, and the people said, “His blood be on us.” He had Jesus scourged; the soldiers crowned Him with thorns, robed Him in purple, and mocked, “Hail, King of the Jews.”", "mes": "Pilato examinó a Jesús y declaró: “Ninguna falta hallo en este hombre,” aun después que su mujer le advirtió. Ofreció a la multitud una elección, pero clamaron por Barrabás el homicida y “¡Crucifícale!” Pilato se lavó las manos, y el pueblo dijo: “Su sangre sea sobre nosotros.” Mandó azotar a Jesús; los soldados le coronaron de espinas, le vistieron de púrpura y se burlaron: “¡Salve, Rey de los judíos!”", "ken": ["pilate", "fault", "barabbas", "crucify", "scourged", "thorns", "king", "wash"], "kes": ["pilato", "falta", "barrabas", "crucif", "azotar", "espina", "rey", "lavar"]}, {"en": "Describe the crucifixion at Golgotha (Luke 23; Matt 27; Psalm 22).", "es": "Describa la crucifixión en el Gólgota (Lucas 23; Mateo 27; Salmo 22).", "men": "Too weak to carry the cross, Jesus had Simon of Cyrene compelled to bear it to Golgotha. He told the weeping women to weep for themselves. There they crucified Him between two robbers, fixed the charge “King of the Jews” above His head, and cast lots for His garments, fulfilling Psalm 22. The passersby and one of the robbers mocked Him at first.", "mes": "Demasiado débil para cargar la cruz, a Jesús le obligaron a Simón de Cirene a llevarla al Gólgota. Dijo a las mujeres que lloraban que llorasen por sí mismas. Allí le crucificaron entre dos ladrones, fijaron la acusación “Rey de los judíos” sobre su cabeza, y echaron suertes sobre sus vestidos, cumpliendo el Salmo 22. Los que pasaban y uno de los ladrones se burlaron de Él al principio.", "ken": ["cross", "simon", "golgotha", "crucif", "robber", "king", "lots", "mock"], "kes": ["cruz", "simon", "golgota", "crucif", "ladron", "rey", "suerte", "burl"]}, {"en": "Explain the first three of the seven words from the cross (Luke 23; John 19).", "es": "Explique las primeras tres de las siete palabras desde la cruz (Lucas 23; Juan 19).", "men": "From the cross Jesus first prayed for His executioners, “Father, forgive them, for they do not know what they do.” To the penitent thief who asked to be remembered, He promised, “Today you will be with Me in Paradise,” that very day in conscious joy. And to His mother and the disciple John, He said, “Woman, behold your son... behold your mother,” caring for Mary even while dying.", "mes": "Desde la cruz Jesús oró primero por sus verdugos: “Padre, perdónalos, porque no saben lo que hacen.” Al ladrón arrepentido que pidió ser recordado, le prometió: “Hoy estarás conmigo en el paraíso,” ese mismo día en gozo consciente. Y a su madre y al discípulo Juan, dijo: “Mujer, he ahí tu hijo... he ahí tu madre,” cuidando de María aun mientras moría.", "ken": ["father", "forgive", "thief", "paradise", "today", "mother", "john", "cross"], "kes": ["padre", "perdon", "ladron", "paraiso", "hoy", "madre", "juan", "cruz"]}, {"en": "Explain the cry of dereliction and its meaning (Matt 27:46; Psalm 22).", "es": "Explique el clamor de abandono y su significado (Mateo 27:46; Salmo 22).", "men": "From the noon darkness Jesus cried, “My God, My God, why have You forsaken Me?” quoting Psalm 22. In that hour He bore the judgment our sin deserved, tasting in our place the forsaking that was ours, so that we might never be forsaken. It was not that the Father ceased to love the Son, but that the Son, bearing our sin, endured the abandonment sin deserves.", "mes": "Desde las tinieblas del mediodía Jesús clamó: “¿Dios mío, Dios mío, por qué me has desamparado?” citando el Salmo 22. En aquella hora llevó el juicio que nuestro pecado merecía, gustando en nuestro lugar el desamparo que era nuestro, para que nunca fuésemos desamparados. No fue que el Padre dejara de amar al Hijo, sino que el Hijo, llevando nuestro pecado, soportó el abandono que el pecado merece.", "ken": ["forsaken", "darkness", "judgment", "sin", "psalm", "father", "bore", "abandon"], "kes": ["desampar", "tinieblas", "juicio", "pecado", "salmo", "padre", "llevo", "abandono"]}, {"en": "Explain “It is finished” and the final word (John 19:30; Luke 23:46).", "es": "Explique “Consumado es” y la palabra final (Juan 19:30; Lucas 23:46).", "men": "Jesus cried, “It is finished,” one word in Greek, tetelestai, meaning the work of redemption was accomplished and the debt of sin paid in full. Then in willing surrender He said, “Father, into Your hands I commit My spirit,” and gave up His spirit. No man took His life; He laid it down. Even in dying He was Lord of His own death.", "mes": "Jesús clamó: “Consumado es,” una palabra en griego, tetelestai, que significa que la obra de redención se cumplió y la deuda del pecado fue pagada por completo. Luego, en entrega voluntaria, dijo: “Padre, en tus manos encomiendo mi espíritu,” y entregó el espíritu. Ningún hombre le quitó la vida; Él la puso. Aun en su morir era Señor de su propia muerte.", "ken": ["finished", "tetelestai", "paid", "debt", "father", "spirit", "redemption", "surrender"], "kes": ["consumado", "tetelestai", "pagad", "deuda", "padre", "espiritu", "redencion", "entreg"]}, {"en": "Describe the signs at Jesus' death: the veil, the centurion, and the pierced side (Matt 27; John 19).", "es": "Describa las señales a la muerte de Jesús: el velo, el centurión y el costado traspasado (Mateo 27; Juan 19).", "men": "At His death the temple veil was torn in two from top to bottom, opening the way into God's presence, for behind it stood the Most Holy Place where only the high priest could enter. The earth quaked, and the Roman centurion confessed, “Truly this was the Son of God.” A soldier pierced His side, and blood and water came out, proving He was truly dead, yet not a bone was broken, fulfilling the Passover lamb.", "mes": "A su muerte el velo del templo se rasgó en dos de arriba abajo, abriendo el camino a la presencia de Dios, pues tras él estaba el Lugar Santísimo donde solo el sumo sacerdote podía entrar. La tierra tembló, y el centurión romano confesó: “Verdaderamente este era el Hijo de Dios.” Un soldado le traspasó el costado, y salió sangre y agua, probando que estaba muerto, mas ningún hueso fue quebrado, cumpliendo el cordero pascual.", "ken": ["veil", "temple", "centurion", "pierced", "blood", "dead", "bone", "quake"], "kes": ["velo", "templo", "centurion", "traspas", "sangre", "muerto", "hueso", "temblo"]}, {"en": "Describe the burial of Jesus (John 19; Matt 27; Isaiah 53).", "es": "Describa la sepultura de Jesús (Juan 19; Mateo 27; Isaías 53).", "men": "Joseph of Arimathea, a secret disciple, took courage and asked Pilate for the body. With Nicodemus, who brought a hundred pounds of spices, he wrapped it in linen and laid it in his own new tomb cut from rock, rolling a great stone across the door. So He was with the rich in His death, as Isaiah foretold. The chief priests set a guard and sealed the stone.", "mes": "José de Arimatea, un discípulo secreto, cobró ánimo y pidió a Pilato el cuerpo. Con Nicodemo, que trajo cien libras de especias, lo envolvió en lienzos y lo puso en su propio sepulcro nuevo abierto en la roca, rodando una gran piedra a la entrada. Así estuvo con los ricos en su muerte, como Isaías anunció. Los principales sacerdotes pusieron guardia y sellaron la piedra.", "ken": ["joseph", "arimathea", "nicodemus", "tomb", "linen", "stone", "guard", "seal"], "kes": ["jose", "arimatea", "nicodemo", "sepulcro", "lienzo", "piedra", "guardia", "sell"]}, {"en": "What does the cross mean, and how does Barabbas picture substitution?", "es": "¿Qué significa la cruz, y cómo retrata Barrabás la sustitución?", "men": "The cross means the Lamb of God was slain in our place. “It is finished” declares the price of sin paid in full; the torn veil declares the way to God opened; the forsaken cry shows He bore the judgment we deserved. Like Barabbas, the guilty go free because the innocent died. This is the gospel: the just died for the unjust to bring us to God, His death counted as ours.", "mes": "La cruz significa que el Cordero de Dios fue inmolado en nuestro lugar. “Consumado es” declara el precio del pecado pagado por completo; el velo rasgado declara el camino a Dios abierto; el clamor de abandono muestra que llevó el juicio que merecíamos. Como Barrabás, los culpables quedan libres porque el inocente murió. Este es el evangelio: el justo murió por los injustos para llevarnos a Dios, su muerte contada como nuestra.", "ken": ["lamb", "slain", "paid", "sin", "veil", "barabbas", "just", "gospel"], "kes": ["cordero", "inmolad", "pagad", "pecado", "velo", "barrabas", "justo", "evangelio"]}, {"en": "How do the divine and human stand together at the cross and tomb?", "es": "¿Cómo están juntos lo divino y lo humano en la cruz y la tumba?", "men": "The divine and human stand together: the eternal Son died as a man, commending His spirit to the Father, and the Lord of glory was wrapped in linen and laid in a borrowed grave. The death was real, the price was paid, the Lamb was slain. The stone was rolled, the seal set, the guard posted — yet in three days all of it would be undone, for the grave could not keep the Lamb of God.", "mes": "Lo divino y lo humano están juntos: el Hijo eterno murió como hombre, encomendando su espíritu al Padre, y el Señor de gloria fue envuelto en lienzos y puesto en una tumba prestada. La muerte fue real, el precio pagado, el Cordero inmolado. La piedra fue rodada, el sello puesto, la guardia apostada — mas en tres días todo sería deshecho, porque la tumba no podía retener al Cordero de Dios.", "ken": ["divine", "human", "died", "spirit", "grave", "lamb", "stone", "undone"], "kes": ["divino", "humano", "murio", "espiritu", "tumba", "cordero", "piedra", "deshecho"]}]};
-
-var I18N={
- en:{title:'The Life of Christ',unit:`Unit ${UNIT} · The Cross`,lang:'Espa\u00f1ol',
-   mc:'Multiple Choice',sa:'Short Answer',greet:function(n){return n?('Student: '+n):'';},
-   track:function(t){return t==='cert'?'Certificate track':t==='mdiv'?'M.Div. track':'Th.M. track';},
-   saNoteCert:'On the Certificate track the short answers are practice and do not count toward passing \u2014 but study each model answer.',
-   saNoteMast:'On the masters tracks you must pass at least 7 of 10 short answers (3 of 8 keywords each).',
-   check:'Check answer',already:'Answered',model:'Model answer \u2014 study this',
-   pass:'Pass \u2014 you engaged the material ('+''+')',blank:'Please write your answer first.',minLen:'Please write your own answer first (at least 100 characters), then check it against the model answer below.',
-   complete:`Complete Unit ${UNIT}`,
-   epigraph:'“It is finished!” (John 19:30)',
-   mGood:`✓ Unit complete. You may continue to Unit ${UNIT + 1}.`,
-   mShort:'Keep going \u2014 review the material and try again.',
-   nextTxt:`Next: Unit ${UNIT + 1} →`,
-   mh:'Welcome to The Life of Christ',mp:'Please register once. Your name and track carry across every CTS course on this site.',
-   mnl:'Your name',mtl:'Track',mgo:'Begin',
-   hitFmt:function(h){return h+' of 8 keywords';},
-   passV:'Pass',softV:'Practice noted'},
- es:{title:'La Vida de Cristo',unit:`Unidad ${UNIT} · La Cruz`,lang:'English',
-   mc:'Opci\u00f3n m\u00faltiple',sa:'Respuesta breve',greet:function(n){return n?('Estudiante: '+n):'';},
-   track:function(t){return t==='cert'?'Pista de Certificado':t==='mdiv'?'Pista de M.Div.':'Pista de Th.M.';},
-   saNoteCert:'En la pista de Certificado las respuestas breves son pr\u00e1ctica y no cuentan para aprobar, pero estudie cada respuesta modelo.',
-   saNoteMast:'En las pistas de maestr\u00eda debe aprobar al menos 7 de 10 respuestas breves (3 de 8 palabras clave cada una).',
-   check:'Revisar respuesta',already:'Respondida',model:'Respuesta modelo \u2014 est\u00fadiela',
-   pass:'',blank:'Por favor escriba su respuesta primero.',minLen:'Escriba primero su propia respuesta (al menos 100 caracteres), luego compárela con la respuesta modelo abajo.',
-   complete:`Completar la Unidad ${UNIT}`,
-   epigraph:'“Consumado es.” (Juan 19:30)',
-   mGood:`✓ Unidad completa. Puede continuar a la Unidad ${UNIT + 1}.`,
-   mShort:'Siga adelante \u2014 repase el material e int\u00e9ntelo de nuevo.',
-   nextTxt:`Siguiente: Unidad ${UNIT + 1} →`,
-   mh:'Bienvenido a La Vida de Cristo',mp:'Reg\u00edstrese una sola vez. Su nombre y pista se conservan en todos los cursos CTS de este sitio.',
-   mnl:'Su nombre',mtl:'Pista',mgo:'Comenzar',
-   hitFmt:function(h){return h+' de 8 palabras clave';},
-   passV:'Aprobada',softV:'Pr\u00e1ctica registrada'}
+/* CTSLOC — unit 8. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "loc",
+ "unit": 8,
+ "totalUnits": 10,
+ "filePrefix": "CTSLOC",
+ "prevHref": "CTSLOCUnit7.html",
+ "nextHref": "CTSLOCUnit9.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "Before the high priest, asked if He was the Christ, Jesus answered:",
+    "es": "Ante el sumo sacerdote, preguntado si era el Cristo, Jesús respondió:"
+   },
+   "options": {
+    "en": [
+     "“I will not say”",
+     "“You have said it, but no”",
+     "“I am”",
+     "“Ask My disciples”"
+    ],
+    "es": [
+     "“No lo diré”",
+     "“Tú lo dices, mas no”",
+     "“Yo soy”",
+     "“Preguntad a mis discípulos”"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Mark 14:62.",
+    "es": "Marcos 14:62."
+   }
+  },
+  {
+   "stem": {
+    "en": "The high priest reacted to Jesus' answer by:",
+    "es": "El sumo sacerdote reaccionó a la respuesta de Jesús:"
+   },
+   "options": {
+    "en": [
+     "setting Him free",
+     "fleeing",
+     "praising Him",
+     "tearing his clothes and crying “blasphemy”"
+    ],
+    "es": [
+     "poniéndole en libertad",
+     "huyendo",
+     "alabándole",
+     "rasgando sus vestiduras y clamando “blasfemia”"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Mark 14:63–64.",
+    "es": "Marcos 14:63–64."
+   }
+  },
+  {
+   "stem": {
+    "en": "In the courtyard, Peter:",
+    "es": "En el patio, Pedro:"
+   },
+   "options": {
+    "en": [
+     "denied Jesus three times, then wept bitterly",
+     "slept",
+     "defended Jesus boldly",
+     "fought the guards"
+    ],
+    "es": [
+     "negó a Jesús tres veces, y luego lloró amargamente",
+     "durmió",
+     "defendió a Jesús con valor",
+     "peleó con los guardias"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Luke 22:61–62.",
+    "es": "Lucas 22:61–62."
+   }
+  },
+  {
+   "stem": {
+    "en": "Pilate's verdict about Jesus was:",
+    "es": "El veredicto de Pilato sobre Jesús fue:"
+   },
+   "options": {
+    "en": [
+     "“He deserves death”",
+     "“I find no fault in this Man”",
+     "“Let the priests decide”",
+     "“He is a rebel”"
+    ],
+    "es": [
+     "“Merece la muerte”",
+     "“Ninguna falta hallo en este hombre”",
+     "“Decidan los sacerdotes”",
+     "“Es un rebelde”"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Luke 23:4.",
+    "es": "Lucas 23:4."
+   }
+  },
+  {
+   "stem": {
+    "en": "The prisoner released instead of Jesus was:",
+    "es": "El preso soltado en lugar de Jesús fue:"
+   },
+   "options": {
+    "en": [
+     "Simon",
+     "Lazarus",
+     "Judas",
+     "Barabbas"
+    ],
+    "es": [
+     "Simón",
+     "Lázaro",
+     "Judas",
+     "Barrabás"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Matthew 27:26.",
+    "es": "Mateo 27:26."
+   }
+  },
+  {
+   "stem": {
+    "en": "When Pilate washed his hands, the people cried:",
+    "es": "Cuando Pilato se lavó las manos, el pueblo clamó:"
+   },
+   "options": {
+    "en": [
+     "“We are innocent”",
+     "“His blood be on us and on our children”",
+     "“Free Him”",
+     "“Long live the King”"
+    ],
+    "es": [
+     "“Somos inocentes”",
+     "“Su sangre sea sobre nosotros, y sobre nuestros hijos”",
+     "“Suéltale”",
+     "“¡Viva el Rey!”"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Matthew 27:25.",
+    "es": "Mateo 27:25."
+   }
+  },
+  {
+   "stem": {
+    "en": "On the way to Golgotha, the cross was carried by:",
+    "es": "Camino al Gólgota, la cruz fue llevada por:"
+   },
+   "options": {
+    "en": [
+     "Simon of Cyrene",
+     "John",
+     "Peter",
+     "a Roman soldier"
+    ],
+    "es": [
+     "Simón de Cirene",
+     "Juan",
+     "Pedro",
+     "un soldado romano"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Luke 23:26.",
+    "es": "Lucas 23:26."
+   }
+  },
+  {
+   "stem": {
+    "en": "Jesus was crucified between:",
+    "es": "Jesús fue crucificado entre:"
+   },
+   "options": {
+    "en": [
+     "two priests",
+     "two soldiers",
+     "two robbers, one on each side",
+     "two disciples"
+    ],
+    "es": [
+     "dos sacerdotes",
+     "dos soldados",
+     "dos ladrones, uno a cada lado",
+     "dos discípulos"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Luke 23:33.",
+    "es": "Lucas 23:33."
+   }
+  },
+  {
+   "stem": {
+    "en": "To His enemies from the cross, Jesus said:",
+    "es": "A sus enemigos desde la cruz, Jesús dijo:"
+   },
+   "options": {
+    "en": [
+     "“Let them be cursed”",
+     "“Father, forgive them, for they do not know what they do”",
+     "“I will repay”",
+     "“Depart from Me”"
+    ],
+    "es": [
+     "“Sean malditos”",
+     "“Padre, perdónalos, porque no saben lo que hacen”",
+     "“Yo pagaré”",
+     "“Apartaos de mí”"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Luke 23:34.",
+    "es": "Lucas 23:34."
+   }
+  },
+  {
+   "stem": {
+    "en": "To the penitent thief Jesus promised:",
+    "es": "Al ladrón arrepentido Jesús prometió:"
+   },
+   "options": {
+    "en": [
+     "“Wait for the last day”",
+     "“Your sins remain”",
+     "“Today you will be with Me in Paradise”",
+     "“Ask again later”"
+    ],
+    "es": [
+     "“Espera el día postrero”",
+     "“Tus pecados permanecen”",
+     "“Hoy estarás conmigo en el paraíso”",
+     "“Pide otra vez después”"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Luke 23:43 — immediate, conscious presence with Christ.",
+    "es": "Lucas 23:43 — presencia inmediata y consciente con Cristo."
+   }
+  },
+  {
+   "stem": {
+    "en": "The cry of dereliction was:",
+    "es": "El clamor de abandono fue:"
+   },
+   "options": {
+    "en": [
+     "“Why do they hate Me?”",
+     "“Where are My friends?”",
+     "“Save Yourself”",
+     "“My God, My God, why have You forsaken Me?”"
+    ],
+    "es": [
+     "“¿Por qué me odian?”",
+     "“¿Dónde están mis amigos?”",
+     "“Sálvate a ti mismo”",
+     "“Dios mío, Dios mío, ¿por qué me has desamparado?”"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Matthew 27:46 — quoting Psalm 22, bearing our judgment.",
+    "es": "Mateo 27:46 — citando el Salmo 22, llevando nuestro juicio."
+   }
+  },
+  {
+   "stem": {
+    "en": "“It is finished” (John 19:30) translates the Greek word:",
+    "es": "“Consumado es” (Juan 19:30) traduce la palabra griega:"
+   },
+   "options": {
+    "en": [
+     "tetelestai — “paid in full / accomplished”",
+     "hosanna",
+     "hallelujah",
+     "maranatha"
+    ],
+    "es": [
+     "tetelestai — “pagado por completo / consumado”",
+     "hosanna",
+     "aleluya",
+     "maranata"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The work of redemption accomplished.",
+    "es": "La obra de redención consumada."
+   }
+  },
+  {
+   "stem": {
+    "en": "Jesus' last word, in willing surrender, was:",
+    "es": "La última palabra de Jesús, en entrega voluntaria, fue:"
+   },
+   "options": {
+    "en": [
+     "“I am undone”",
+     "“Father, into Your hands I commit My spirit”",
+     "“Let Me live”",
+     "“It is too much”"
+    ],
+    "es": [
+     "“Estoy deshecho”",
+     "“Padre, en tus manos encomiendo mi espíritu”",
+     "“Dejadme vivir”",
+     "“Es demasiado”"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Luke 23:46 — no man took His life; He laid it down.",
+    "es": "Lucas 23:46 — ningún hombre le quitó la vida; Él la puso."
+   }
+  },
+  {
+   "stem": {
+    "en": "At Jesus' death the temple veil was:",
+    "es": "A la muerte de Jesús el velo del templo fue:"
+   },
+   "options": {
+    "en": [
+     "left untouched",
+     "repaired",
+     "set on fire",
+     "torn in two from top to bottom"
+    ],
+    "es": [
+     "dejado intacto",
+     "reparado",
+     "incendiado",
+     "rasgado en dos de arriba abajo"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Matthew 27:51.",
+    "es": "Mateo 27:51."
+   }
+  },
+  {
+   "stem": {
+    "en": "The tearing of the veil from top to bottom signified:",
+    "es": "El rasgarse del velo de arriba abajo significó:"
+   },
+   "options": {
+    "en": [
+     "the way into God's presence opened by His blood",
+     "a new festival",
+     "the temple's wealth",
+     "God's anger only"
+    ],
+    "es": [
+     "el camino a la presencia de Dios abierto por su sangre",
+     "una nueva fiesta",
+     "la riqueza del templo",
+     "solo la ira de Dios"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Hebrews 10:19–20 — a new and living way.",
+    "es": "Hebreos 10:19–20 — un camino nuevo y vivo."
+   }
+  },
+  {
+   "stem": {
+    "en": "Seeing how Jesus died, the Roman centurion said:",
+    "es": "Viendo cómo murió Jesús, el centurión romano dijo:"
+   },
+   "options": {
+    "en": [
+     "“He was a rebel”",
+     "“He was only a man”",
+     "“Truly this was the Son of God!”",
+     "nothing at all"
+    ],
+    "es": [
+     "“Era un rebelde”",
+     "“Era solo un hombre”",
+     "“Verdaderamente este era el Hijo de Dios”",
+     "nada en absoluto"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Matthew 27:54 — a pagan confesses what the council denied.",
+    "es": "Mateo 27:54 — un pagano confiesa lo que el concilio negó."
+   }
+  },
+  {
+   "stem": {
+    "en": "When the soldier pierced Jesus' side, there came out:",
+    "es": "Cuando el soldado traspasó el costado de Jesús, salió:"
+   },
+   "options": {
+    "en": [
+     "only water",
+     "blood and water — proof He was truly dead",
+     "nothing",
+     "fire"
+    ],
+    "es": [
+     "solo agua",
+     "sangre y agua — prueba de que estaba verdaderamente muerto",
+     "nada",
+     "fuego"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "John 19:34.",
+    "es": "Juan 19:34."
+   }
+  },
+  {
+   "stem": {
+    "en": "That Jesus' legs were not broken fulfilled the Scripture about:",
+    "es": "Que no le quebraran las piernas a Jesús cumplió la Escritura sobre:"
+   },
+   "options": {
+    "en": [
+     "the Passover lamb — “not one of His bones shall be broken”",
+     "the bronze serpent",
+     "the scapegoat",
+     "the ark"
+    ],
+    "es": [
+     "el cordero pascual — “no será quebrado hueso suyo”",
+     "la serpiente de bronce",
+     "el macho cabrío",
+     "el arca"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "John 19:36.",
+    "es": "Juan 19:36."
+   }
+  },
+  {
+   "stem": {
+    "en": "Jesus' body was buried by:",
+    "es": "El cuerpo de Jesús fue sepultado por:"
+   },
+   "options": {
+    "en": [
+     "the apostles",
+     "the Roman soldiers",
+     "Joseph of Arimathea, with Nicodemus",
+     "His mother alone"
+    ],
+    "es": [
+     "los apóstoles",
+     "los soldados romanos",
+     "José de Arimatea, con Nicodemo",
+     "su madre sola"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "John 19:38–42.",
+    "es": "Juan 19:38–42."
+   }
+  },
+  {
+   "stem": {
+    "en": "After the burial, the chief priests:",
+    "es": "Tras la sepultura, los principales sacerdotes:"
+   },
+   "options": {
+    "en": [
+     "repented",
+     "removed the body",
+     "opened the tomb",
+     "set a guard and sealed the stone"
+    ],
+    "es": [
+     "se arrepintieron",
+     "quitaron el cuerpo",
+     "abrieron el sepulcro",
+     "pusieron guardia y sellaron la piedra"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Matthew 27:62–66.",
+    "es": "Mateo 27:62–66."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Describe the Jewish trial and Peter's denial (Mark 14; Luke 22).",
+    "es": "Describa el juicio judío y la negación de Pedro (Marcos 14; Lucas 22)."
+   },
+   "keywords": {
+    "en": [
+     "caiaphas",
+     "christ",
+     "blasphemy",
+     "death",
+     "peter",
+     "denied",
+     "rooster",
+     "wept"
+    ],
+    "es": [
+     "caifas",
+     "cristo",
+     "blasfem",
+     "muerte",
+     "pedro",
+     "nego",
+     "gallo",
+     "lloro"
+    ]
+   },
+   "model": {
+    "en": "Led before Annas and Caiaphas, Jesus faced false witnesses. When the high priest asked if He was the Christ, the Son of the Blessed, He answered “I am,” and the priest tore his clothes, crying blasphemy; they judged Him worthy of death. Meanwhile Peter denied Him three times in the courtyard, and when the rooster crowed and the Lord looked at him, he went out and wept bitterly.",
+    "es": "Llevado ante Anás y Caifás, Jesús enfrentó testigos falsos. Cuando el sumo sacerdote preguntó si era el Cristo, el Hijo del Bendito, respondió “Yo soy,” y el sacerdote rasgó sus vestiduras clamando blasfemia; le juzgaron reo de muerte. Entre tanto Pedro le negó tres veces en el patio, y cuando cantó el gallo y el Señor le miró, salió fuera y lloró amargamente."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the Roman trial before Pilate (Matt 27; Luke 23; John 18-19).",
+    "es": "Describa el juicio romano ante Pilato (Mateo 27; Lucas 23; Juan 18-19)."
+   },
+   "keywords": {
+    "en": [
+     "pilate",
+     "fault",
+     "barabbas",
+     "crucify",
+     "scourged",
+     "thorns",
+     "king",
+     "wash"
+    ],
+    "es": [
+     "pilato",
+     "falta",
+     "barrabas",
+     "crucif",
+     "azotar",
+     "espina",
+     "rey",
+     "lavar"
+    ]
+   },
+   "model": {
+    "en": "Pilate examined Jesus and declared, “I find no fault in this Man,” even after his wife warned him. He offered the crowd a choice, but they cried for Barabbas the murderer and “Crucify Him.” Pilate washed his hands, and the people said, “His blood be on us.” He had Jesus scourged; the soldiers crowned Him with thorns, robed Him in purple, and mocked, “Hail, King of the Jews.”",
+    "es": "Pilato examinó a Jesús y declaró: “Ninguna falta hallo en este hombre,” aun después que su mujer le advirtió. Ofreció a la multitud una elección, pero clamaron por Barrabás el homicida y “¡Crucifícale!” Pilato se lavó las manos, y el pueblo dijo: “Su sangre sea sobre nosotros.” Mandó azotar a Jesús; los soldados le coronaron de espinas, le vistieron de púrpura y se burlaron: “¡Salve, Rey de los judíos!”"
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the crucifixion at Golgotha (Luke 23; Matt 27; Psalm 22).",
+    "es": "Describa la crucifixión en el Gólgota (Lucas 23; Mateo 27; Salmo 22)."
+   },
+   "keywords": {
+    "en": [
+     "cross",
+     "simon",
+     "golgotha",
+     "crucif",
+     "robber",
+     "king",
+     "lots",
+     "mock"
+    ],
+    "es": [
+     "cruz",
+     "simon",
+     "golgota",
+     "crucif",
+     "ladron",
+     "rey",
+     "suerte",
+     "burl"
+    ]
+   },
+   "model": {
+    "en": "Too weak to carry the cross, Jesus had Simon of Cyrene compelled to bear it to Golgotha. He told the weeping women to weep for themselves. There they crucified Him between two robbers, fixed the charge “King of the Jews” above His head, and cast lots for His garments, fulfilling Psalm 22. The passersby and one of the robbers mocked Him at first.",
+    "es": "Demasiado débil para cargar la cruz, a Jesús le obligaron a Simón de Cirene a llevarla al Gólgota. Dijo a las mujeres que lloraban que llorasen por sí mismas. Allí le crucificaron entre dos ladrones, fijaron la acusación “Rey de los judíos” sobre su cabeza, y echaron suertes sobre sus vestidos, cumpliendo el Salmo 22. Los que pasaban y uno de los ladrones se burlaron de Él al principio."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the first three of the seven words from the cross (Luke 23; John 19).",
+    "es": "Explique las primeras tres de las siete palabras desde la cruz (Lucas 23; Juan 19)."
+   },
+   "keywords": {
+    "en": [
+     "father",
+     "forgive",
+     "thief",
+     "paradise",
+     "today",
+     "mother",
+     "john",
+     "cross"
+    ],
+    "es": [
+     "padre",
+     "perdon",
+     "ladron",
+     "paraiso",
+     "hoy",
+     "madre",
+     "juan",
+     "cruz"
+    ]
+   },
+   "model": {
+    "en": "From the cross Jesus first prayed for His executioners, “Father, forgive them, for they do not know what they do.” To the penitent thief who asked to be remembered, He promised, “Today you will be with Me in Paradise,” that very day in conscious joy. And to His mother and the disciple John, He said, “Woman, behold your son... behold your mother,” caring for Mary even while dying.",
+    "es": "Desde la cruz Jesús oró primero por sus verdugos: “Padre, perdónalos, porque no saben lo que hacen.” Al ladrón arrepentido que pidió ser recordado, le prometió: “Hoy estarás conmigo en el paraíso,” ese mismo día en gozo consciente. Y a su madre y al discípulo Juan, dijo: “Mujer, he ahí tu hijo... he ahí tu madre,” cuidando de María aun mientras moría."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the cry of dereliction and its meaning (Matt 27:46; Psalm 22).",
+    "es": "Explique el clamor de abandono y su significado (Mateo 27:46; Salmo 22)."
+   },
+   "keywords": {
+    "en": [
+     "forsaken",
+     "darkness",
+     "judgment",
+     "sin",
+     "psalm",
+     "father",
+     "bore",
+     "abandon"
+    ],
+    "es": [
+     "desampar",
+     "tinieblas",
+     "juicio",
+     "pecado",
+     "salmo",
+     "padre",
+     "llevo",
+     "abandono"
+    ]
+   },
+   "model": {
+    "en": "From the noon darkness Jesus cried, “My God, My God, why have You forsaken Me?” quoting Psalm 22. In that hour He bore the judgment our sin deserved, tasting in our place the forsaking that was ours, so that we might never be forsaken. It was not that the Father ceased to love the Son, but that the Son, bearing our sin, endured the abandonment sin deserves.",
+    "es": "Desde las tinieblas del mediodía Jesús clamó: “¿Dios mío, Dios mío, por qué me has desamparado?” citando el Salmo 22. En aquella hora llevó el juicio que nuestro pecado merecía, gustando en nuestro lugar el desamparo que era nuestro, para que nunca fuésemos desamparados. No fue que el Padre dejara de amar al Hijo, sino que el Hijo, llevando nuestro pecado, soportó el abandono que el pecado merece."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain “It is finished” and the final word (John 19:30; Luke 23:46).",
+    "es": "Explique “Consumado es” y la palabra final (Juan 19:30; Lucas 23:46)."
+   },
+   "keywords": {
+    "en": [
+     "finished",
+     "tetelestai",
+     "paid",
+     "debt",
+     "father",
+     "spirit",
+     "redemption",
+     "surrender"
+    ],
+    "es": [
+     "consumado",
+     "tetelestai",
+     "pagad",
+     "deuda",
+     "padre",
+     "espiritu",
+     "redencion",
+     "entreg"
+    ]
+   },
+   "model": {
+    "en": "Jesus cried, “It is finished,” one word in Greek, tetelestai, meaning the work of redemption was accomplished and the debt of sin paid in full. Then in willing surrender He said, “Father, into Your hands I commit My spirit,” and gave up His spirit. No man took His life; He laid it down. Even in dying He was Lord of His own death.",
+    "es": "Jesús clamó: “Consumado es,” una palabra en griego, tetelestai, que significa que la obra de redención se cumplió y la deuda del pecado fue pagada por completo. Luego, en entrega voluntaria, dijo: “Padre, en tus manos encomiendo mi espíritu,” y entregó el espíritu. Ningún hombre le quitó la vida; Él la puso. Aun en su morir era Señor de su propia muerte."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the signs at Jesus' death: the veil, the centurion, and the pierced side (Matt 27; John 19).",
+    "es": "Describa las señales a la muerte de Jesús: el velo, el centurión y el costado traspasado (Mateo 27; Juan 19)."
+   },
+   "keywords": {
+    "en": [
+     "veil",
+     "temple",
+     "centurion",
+     "pierced",
+     "blood",
+     "dead",
+     "bone",
+     "quake"
+    ],
+    "es": [
+     "velo",
+     "templo",
+     "centurion",
+     "traspas",
+     "sangre",
+     "muerto",
+     "hueso",
+     "temblo"
+    ]
+   },
+   "model": {
+    "en": "At His death the temple veil was torn in two from top to bottom, opening the way into God's presence, for behind it stood the Most Holy Place where only the high priest could enter. The earth quaked, and the Roman centurion confessed, “Truly this was the Son of God.” A soldier pierced His side, and blood and water came out, proving He was truly dead, yet not a bone was broken, fulfilling the Passover lamb.",
+    "es": "A su muerte el velo del templo se rasgó en dos de arriba abajo, abriendo el camino a la presencia de Dios, pues tras él estaba el Lugar Santísimo donde solo el sumo sacerdote podía entrar. La tierra tembló, y el centurión romano confesó: “Verdaderamente este era el Hijo de Dios.” Un soldado le traspasó el costado, y salió sangre y agua, probando que estaba muerto, mas ningún hueso fue quebrado, cumpliendo el cordero pascual."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the burial of Jesus (John 19; Matt 27; Isaiah 53).",
+    "es": "Describa la sepultura de Jesús (Juan 19; Mateo 27; Isaías 53)."
+   },
+   "keywords": {
+    "en": [
+     "joseph",
+     "arimathea",
+     "nicodemus",
+     "tomb",
+     "linen",
+     "stone",
+     "guard",
+     "seal"
+    ],
+    "es": [
+     "jose",
+     "arimatea",
+     "nicodemo",
+     "sepulcro",
+     "lienzo",
+     "piedra",
+     "guardia",
+     "sell"
+    ]
+   },
+   "model": {
+    "en": "Joseph of Arimathea, a secret disciple, took courage and asked Pilate for the body. With Nicodemus, who brought a hundred pounds of spices, he wrapped it in linen and laid it in his own new tomb cut from rock, rolling a great stone across the door. So He was with the rich in His death, as Isaiah foretold. The chief priests set a guard and sealed the stone.",
+    "es": "José de Arimatea, un discípulo secreto, cobró ánimo y pidió a Pilato el cuerpo. Con Nicodemo, que trajo cien libras de especias, lo envolvió en lienzos y lo puso en su propio sepulcro nuevo abierto en la roca, rodando una gran piedra a la entrada. Así estuvo con los ricos en su muerte, como Isaías anunció. Los principales sacerdotes pusieron guardia y sellaron la piedra."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does the cross mean, and how does Barabbas picture substitution?",
+    "es": "¿Qué significa la cruz, y cómo retrata Barrabás la sustitución?"
+   },
+   "keywords": {
+    "en": [
+     "lamb",
+     "slain",
+     "paid",
+     "sin",
+     "veil",
+     "barabbas",
+     "just",
+     "gospel"
+    ],
+    "es": [
+     "cordero",
+     "inmolad",
+     "pagad",
+     "pecado",
+     "velo",
+     "barrabas",
+     "justo",
+     "evangelio"
+    ]
+   },
+   "model": {
+    "en": "The cross means the Lamb of God was slain in our place. “It is finished” declares the price of sin paid in full; the torn veil declares the way to God opened; the forsaken cry shows He bore the judgment we deserved. Like Barabbas, the guilty go free because the innocent died. This is the gospel: the just died for the unjust to bring us to God, His death counted as ours.",
+    "es": "La cruz significa que el Cordero de Dios fue inmolado en nuestro lugar. “Consumado es” declara el precio del pecado pagado por completo; el velo rasgado declara el camino a Dios abierto; el clamor de abandono muestra que llevó el juicio que merecíamos. Como Barrabás, los culpables quedan libres porque el inocente murió. Este es el evangelio: el justo murió por los injustos para llevarnos a Dios, su muerte contada como nuestra."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How do the divine and human stand together at the cross and tomb?",
+    "es": "¿Cómo están juntos lo divino y lo humano en la cruz y la tumba?"
+   },
+   "keywords": {
+    "en": [
+     "divine",
+     "human",
+     "died",
+     "spirit",
+     "grave",
+     "lamb",
+     "stone",
+     "undone"
+    ],
+    "es": [
+     "divino",
+     "humano",
+     "murio",
+     "espiritu",
+     "tumba",
+     "cordero",
+     "piedra",
+     "deshecho"
+    ]
+   },
+   "model": {
+    "en": "The divine and human stand together: the eternal Son died as a man, commending His spirit to the Father, and the Lord of glory was wrapped in linen and laid in a borrowed grave. The death was real, the price was paid, the Lamb was slain. The stone was rolled, the seal set, the guard posted — yet in three days all of it would be undone, for the grave could not keep the Lamb of God.",
+    "es": "Lo divino y lo humano están juntos: el Hijo eterno murió como hombre, encomendando su espíritu al Padre, y el Señor de gloria fue envuelto en lienzos y puesto en una tumba prestada. La muerte fue real, el precio pagado, el Cordero inmolado. La piedra fue rodada, el sello puesto, la guardia apostada — mas en tres días todo sería deshecho, porque la tumba no podía retener al Cordero de Dios."
+   }
+  }
+ ]
 };

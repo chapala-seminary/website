@@ -1,43 +1,753 @@
-/* CTSActs - unit 1: per-unit configuration and content. */
-
-const UNIT = 1;
-
-const CURRENT_UNIT = 1;
-
-const NEXT_URL = 'CTSActsUnit2.html';
-
-const mcQuestions = [
-    { textEn: "1. Acts is the second volume by Luke. The first verse describes his Gospel as the account of all that Jesus:", textEs: "1. Hechos es el segundo volumen escrito por Lucas. El primer versículo describe su Evangelio como el relato de todo lo que Jesús:", optionsEn: ["began to do and teach", "finished doing", "tried but failed to accomplish", "predicted would happen"], optionsEs: ["comenzó a hacer y a enseñar", "terminó de hacer", "intentó pero no logró", "predijo que sucedería"], correct: 0 },
-    { textEn: "2. Acts was most likely written around:", textEs: "2. Hechos fue escrito muy probablemente alrededor de:", optionsEn: ["AD 30–35", "AD 50–55", "AD 62–63", "AD 90–100"], optionsEs: ["30–35 d.C.", "50–55 d.C.", "62–63 d.C.", "90–100 d.C."], correct: 2 },
-    { textEn: "3. The Greek word tekmeriois (translated 'infallible proofs' in Acts 1:3) means:", textEs: "3. La palabra griega tekmeriois (traducida 'pruebas indubitables' en Hechos 1:3) significa:", optionsEn: ["Symbolic gestures", "Religious traditions", "Mystical visions", "Incontrovertible courtroom-grade evidence"], optionsEs: ["Gestos simbólicos", "Tradiciones religiosas", "Visiones místicas", "Evidencia incontrovertible al nivel de un tribunal"], correct: 3 },
-    { textEn: "4. Acts 1:8 names four geographic spheres of witness. They are:", textEs: "4. Hechos 1:8 menciona cuatro esferas geográficas de testimonio. Son:", optionsEn: ["Galilee, Judea, Samaria, Egypt", "Jerusalem, Judea, Samaria, the end of the earth", "Israel, Greece, Rome, Spain", "Bethlehem, Nazareth, Capernaum, Jerusalem"], optionsEs: ["Galilea, Judea, Samaria, Egipto", "Jerusalén, Judea, Samaria, lo último de la tierra", "Israel, Grecia, Roma, España", "Belén, Nazaret, Capernaum, Jerusalén"], correct: 1 },
-    { textEn: "5. Before Pentecost the disciples were commanded to:", textEs: "5. Antes de Pentecostés se ordenó a los discípulos:", optionsEn: ["Wait in Jerusalem for the promised Holy Spirit", "Begin preaching immediately", "Return to Galilee", "Replace all twelve apostles"], optionsEs: ["Esperar en Jerusalén la promesa del Espíritu Santo", "Comenzar a predicar inmediatamente", "Volver a Galilea", "Reemplazar a los doce apóstoles"], correct: 0 },
-    { textEn: "6. The number of believers gathered in the upper room before Pentecost was approximately:", textEs: "6. El número de creyentes reunidos en el aposento alto antes de Pentecostés era aproximadamente:", optionsEn: ["12", "70", "120", "500"], optionsEs: ["12", "70", "120", "500"], correct: 2 },
-    { textEn: "7. The Feast of Pentecost was also called:", textEs: "7. La Fiesta de Pentecostés también se llamaba:", optionsEn: ["Passover", "The Day of Atonement", "Tabernacles", "The Feast of Firstfruits / Feast of Weeks"], optionsEs: ["Pascua", "Día de la Expiación", "Tabernáculos", "Fiesta de las Primicias / Fiesta de las Semanas"], correct: 3 },
-    { textEn: "8. The three signs accompanying the Spirit's coming at Pentecost were:", textEs: "8. Las tres señales que acompañaron la venida del Espíritu en Pentecostés fueron:", optionsEn: ["Earthquake, lightning, thunder", "Wind, fire, and tongues", "Vision, voice, and dove", "Star, angel, and song"], optionsEs: ["Terremoto, relámpago, trueno", "Viento, fuego y lenguas", "Visión, voz y paloma", "Estrella, ángel y canción"], correct: 1 },
-    { textEn: "9. The miracle of tongues at Pentecost was primarily a miracle of:", textEs: "9. El milagro de las lenguas en Pentecostés fue primeramente un milagro de:", optionsEn: ["Hearing — each pilgrim heard in his own dialect", "Speaking in unknown angelic languages", "Mystical ecstasy", "Translation by interpreters"], optionsEs: ["Oír — cada peregrino oía en su propio dialecto", "Hablar en lenguas angélicas desconocidas", "Éxtasis místico", "Traducción por intérpretes"], correct: 0 },
-    { textEn: "10. Pentecost is sometimes called 'Babel reversed' because:", textEs: "10. A Pentecostés a veces se le llama 'Babel al revés' porque:", optionsEn: ["A new tower was built", "God scattered the languages again", "Languages that were scattered were now used to unite all nations under the gospel", "Confusion fell on the apostles"], optionsEs: ["Se edificó una nueva torre", "Dios esparció de nuevo los idiomas", "Las lenguas que fueron esparcidas ahora unían a las naciones bajo el evangelio", "Cayó confusión sobre los apóstoles"], correct: 2 },
-    { textEn: "11. Peter's Pentecost sermon quoted prophecy primarily from:", textEs: "11. El sermón de Pedro en Pentecostés citó profecías principalmente de:", optionsEn: ["Isaiah", "Malachi", "Daniel", "Joel and Psalms"], optionsEs: ["Isaías", "Malaquías", "Daniel", "Joel y los Salmos"], correct: 3 },
-    { textEn: "12. Peter's response to 'What shall we do?' was:", textEs: "12. La respuesta de Pedro a '¿Qué haremos?' fue:", optionsEn: ["Wait for another revelation", "Repent and be baptized in the name of Jesus Christ", "Travel to Jerusalem", "Make a sacrifice in the temple"], optionsEs: ["Esperar otra revelación", "Arrepentirse y bautizarse en el nombre de Jesucristo", "Viajar a Jerusalén", "Hacer un sacrificio en el templo"], correct: 1 },
-    { textEn: "13. The number added to the church on the day of Pentecost was approximately:", textEs: "13. El número añadido a la iglesia en el día de Pentecostés fue aproximadamente:", optionsEn: ["300", "1,000", "3,000", "10,000"], optionsEs: ["300", "1,000", "3,000", "10,000"], correct: 2 },
-    { textEn: "14. The four marks of the early church in Acts 2:42 are:", textEs: "14. Las cuatro marcas de la iglesia primitiva en Hechos 2:42 son:", optionsEn: ["Doctrine, fellowship, breaking of bread, prayer", "Building, budget, board, bylaws", "Singing, preaching, giving, healing", "Baptism, communion, marriage, burial"], optionsEs: ["Doctrina, comunión, partimiento del pan, oración", "Edificio, presupuesto, junta, estatutos", "Canto, predicación, ofrenda, sanidad", "Bautismo, comunión, matrimonio, sepultura"], correct: 0 },
-    { textEn: "15. According to Acts 2:47, who added new believers to the church each day?", textEs: "15. Según Hechos 2:47, ¿quién añadía cada día nuevos creyentes a la iglesia?", optionsEn: ["The apostles", "The synagogue rulers", "The deacons", "The Lord"], optionsEs: ["Los apóstoles", "Los principales de las sinagogas", "Los diáconos", "El Señor"], correct: 3 },
-    { textEn: "16. The Hebrides Revival of 1949 was sparked through the prayers of:", textEs: "16. El Avivamiento de las Hébridas de 1949 se encendió por las oraciones de:", optionsEn: ["Two young pastors", "Two elderly sisters in Barvas", "A traveling evangelist", "A government minister"], optionsEs: ["Dos jóvenes pastores", "Dos hermanas ancianas en Barvas", "Un evangelista itinerante", "Un ministro del gobierno"], correct: 1 },
-    { textEn: "17. The Greek word ekklesia means:", textEs: "17. La palabra griega ekklesia significa:", optionsEn: ["A holy building", "The called-out assembly", "A priestly council", "A synagogue"], optionsEs: ["Un edificio sagrado", "La asamblea llamada afuera", "Un concilio sacerdotal", "Una sinagoga"], correct: 1 },
-    { textEn: "18. Frank Morison, the British lawyer, set out to write a book disproving the resurrection. The first chapter of his finished book was titled:", textEs: "18. Frank Morison, el abogado británico, se propuso escribir un libro refutando la resurrección. El primer capítulo de su libro terminado se titulaba:", optionsEn: ["The Book That Refused to Be Written", "The Death of God", "Why I Doubt", "Beyond the Tomb"], optionsEs: ["El libro que se negó a ser escrito", "La muerte de Dios", "Por qué dudo", "Más allá de la tumba"], correct: 0 },
-    { textEn: "19. The instructor's contrarian view of the choice of Matthias is that Peter:", textEs: "19. La opinión contraria del profesor sobre la elección de Matías es que Pedro:", optionsEn: ["Made the right choice with the Spirit's leading", "Was forced into the choice by the others", "Should have chosen one of the women instead", "Acted before the Holy Spirit had been poured out, and Matthias is never mentioned again"], optionsEs: ["Hizo la elección correcta con la dirección del Espíritu", "Fue forzado a la elección por los demás", "Debió haber escogido a una mujer", "Actuó antes de que el Espíritu Santo fuera derramado, y Matías nunca vuelve a ser mencionado"], correct: 3 },
-    { textEn: "20. Peter ended his Pentecost sermon by saying the promise of the Spirit is for:", textEs: "20. Pedro terminó su sermón de Pentecostés diciendo que la promesa del Espíritu es para:", optionsEn: ["Only the Twelve apostles", "Only the people of Israel", "All who are afar off, as many as the Lord our God will call", "Only those baptized that day"], optionsEs: ["Solo los doce apóstoles", "Solo el pueblo de Israel", "Todos los que están lejos, cuantos el Señor nuestro Dios llamare", "Solo los bautizados ese día"], correct: 2 }
-];
-
-const kwQuestions = [
-    { textEn: "21. Explain why Acts is best understood as 'volume two' of Luke's writing. What does this teach about the ongoing ministry of the risen Christ?", textEs: "21. Explique por qué Hechos se entiende mejor como 'volumen dos' del escrito de Lucas. ¿Qué enseña esto sobre el ministerio continuo del Cristo resucitado?", kwEn: ["luke", "began", "ascen", "contin", "spirit", "risen", "church", "volume"], kwEs: ["lucas", "comenz", "ascen", "contin", "espíritu", "resuci", "iglesia", "volumen"], modelEn: "Luke wrote Acts as the sequel to his Gospel, picking up the story where the Gospel ended \u2014 with the risen Christ's ascension \u2014 and continuing it into the life of the church. Because the book begins with 'the former treatise... of all that Jesus began both to do and teach,' Acts is properly volume two: the record of what the ascended Christ continues to do through the church by His Spirit. This teaches that Jesus' ministry did not stop at the ascension; He is still working, now through His body on earth, empowered by the Holy Spirit.", modelEs: "Lucas escribi\u00f3 Hechos como la secuela de su Evangelio, retomando la historia donde termin\u00f3 el Evangelio \u2014 con la ascensi\u00f3n de Cristo resucitado \u2014 y continu\u00e1ndola en la vida de la iglesia. Como el libro comienza con 'el primer tratado... de todas las cosas que Jes\u00fas comenz\u00f3 a hacer y a ense\u00f1ar,' Hechos es propiamente el volumen dos: el registro de lo que el Cristo ascendido contin\u00faa haciendo a trav\u00e9s de la iglesia por su Esp\u00edritu. Esto ense\u00f1a que el ministerio de Jes\u00fas no se detuvo en la ascensi\u00f3n; \u00c9l sigue obrando, ahora a trav\u00e9s de su cuerpo en la tierra, empoderado por el Esp\u00edritu Santo." },
-    { textEn: "22. Why did Jesus command the disciples to wait before going on mission? What does this teach about Spirit-empowered ministry today?", textEs: "22. ¿Por qué mandó Jesús a los discípulos esperar antes de salir a la misión? ¿Qué enseña esto sobre el ministerio empoderado por el Espíritu hoy?", kwEn: ["wait", "spirit", "power", "patien", "obey", "jerusalem", "promise", "father"], kwEs: ["esper", "espíritu", "poder", "pacien", "obedec", "jerusal", "promesa", "padre"], modelEn: "Jesus commanded the disciples to wait in Jerusalem for the promise of the Father rather than launching out immediately, because mission without the Spirit's power is just human effort dressed in religious clothes. Waiting required them to obey before they understood, and rushing ahead in their own strength would have produced noise, not fruit \u2014 patience under Christ's command was itself an act of trust. This teaches that Spirit-empowered ministry today still starts with waiting on God rather than substituting programs, personality, or hustle for the power that only the Holy Spirit supplies.", modelEs: "Jes\u00fas mand\u00f3 a los disc\u00edpulos esperar en Jerusal\u00e9n la promesa del Padre en lugar de salir de inmediato, porque la misi\u00f3n sin el poder del Esp\u00edritu es solo esfuerzo humano vestido de ropa religiosa. Esperar requer\u00eda obedecer antes de entender, y lanzarse en sus propias fuerzas habr\u00eda producido ruido, no fruto; la paciencia bajo el mandato de Cristo era en s\u00ed un acto de confianza. Esto ense\u00f1a que el ministerio empoderado por el Esp\u00edritu hoy todav\u00eda comienza esperando en Dios, en lugar de sustituir programas o personalidad por el poder que solo el Esp\u00edritu Santo provee." },
-    { textEn: "23. Describe the three signs of Pentecost (wind, fire, tongues). What is the Old Testament background for each?", textEs: "23. Describa las tres señales de Pentecostés (viento, fuego, lenguas). ¿Cuál es el trasfondo del Antiguo Testamento para cada una?", kwEn: ["wind", "fire", "tongue", "spirit", "presen", "babel", "pentec", "sign"], kwEs: ["viento", "fuego", "lengua", "espíritu", "presen", "babel", "pentec", "señal"], modelEn: "The three signs of Pentecost were the sound of a rushing wind, tongues of fire, and speaking in other tongues, each drawing on Old Testament background. Wind recalls the ruach of God that hovered over creation and breathed life into dry bones in Ezekiel; fire recalls God's presence at Sinai and the pillar of fire that led Israel; and tongues fulfill both the scattering at Babel and the promise that God's Spirit would be poured out on all flesh in Joel. Together the three signs announce that the same God who created, led, and judged is now filling His church with His manifest presence.", modelEs: "Las tres se\u00f1ales de Pentecost\u00e9s fueron el sonido de un viento recio, lenguas de fuego, y hablar en otras lenguas, cada una con trasfondo del Antiguo Testamento. El viento recuerda el ruaj de Dios que se mov\u00eda sobre la creaci\u00f3n y sopl\u00f3 vida en los huesos secos de Ezequiel; el fuego recuerda la presencia de Dios en Sina\u00ed y la columna de fuego que guiaba a Israel; y las lenguas cumplen tanto la dispersi\u00f3n de Babel como la promesa de que el Esp\u00edritu de Dios ser\u00eda derramado sobre toda carne seg\u00fan Joel. Juntas, las tres se\u00f1ales anuncian que el mismo Dios que cre\u00f3, guio y juzg\u00f3 ahora llena a su iglesia con su presencia manifiesta." },
-    { textEn: "24. How is Pentecost the reversal of Babel? What does this say about God's plan for all nations?", textEs: "24. ¿Cómo es Pentecostés la reversa de Babel? ¿Qué dice esto sobre el plan de Dios para todas las naciones?", kwEn: ["babel", "lang", "nation", "unit", "gospel", "scatter", "gather", "tongue"], kwEs: ["babel", "lengua", "nacion", "unid", "evangelio", "esparc", "reun", "idioma"], modelEn: "Pentecost reverses Babel: at Babel, God confused one language into many and scattered the nations because of prideful rebellion, but at Pentecost the Spirit enabled people of many languages to hear the gospel each in their own tongue, gathering the nations rather than scattering them. This does not erase linguistic diversity \u2014 the miracle was hearing, not everyone suddenly speaking one language \u2014 but it shows God's plan was always for all nations to be united in worship of Him, undoing the fracture of Babel through the unifying message of the gospel.", modelEs: "Pentecost\u00e9s revierte Babel: en Babel, Dios confundi\u00f3 un idioma en muchos y esparci\u00f3 a las naciones por la rebeli\u00f3n orgullosa, pero en Pentecost\u00e9s el Esp\u00edritu permiti\u00f3 que personas de muchos idiomas oyeran el evangelio cada uno en su propia lengua, reuniendo a las naciones en lugar de esparcirlas. Esto no borra la diversidad de idiomas \u2014 el milagro fue el o\u00edr, no que todos hablaran de repente un solo idioma \u2014 pero muestra que el plan de Dios siempre fue que todas las naciones estuvieran unidas en adoraci\u00f3n a \u00c9l, deshaciendo la fractura de Babel mediante el mensaje unificador del evangelio." },
-    { textEn: "25. Outline Peter's Pentecost sermon (Acts 2:14–41). What is the structure and what is the central claim?", textEs: "25. Bosqueje el sermón de Pedro en Pentecostés (Hechos 2:14–41). ¿Cuál es la estructura y cuál es la afirmación central?", kwEn: ["joel", "david", "psalm", "resurrec", "lord", "christ", "repent", "spirit"], kwEs: ["joel", "david", "salmo", "resurrec", "señor", "cristo", "arrepent", "espíritu"], modelEn: "Peter's Pentecost sermon has three movements: first he explains the phenomenon by quoting Joel's prophecy that God would pour out His Spirit on all flesh; second he presents the case for Jesus as Messiah using David's own psalm about the Holy One not seeing corruption, since David himself died and was buried but spoke prophetically of the resurrection of the Christ; third he applies it directly, calling his hearers to repent. The central claim is that this Jesus, whom they crucified, God has made both Lord and Christ, and the only right response is repentance and baptism in His name.", modelEs: "El serm\u00f3n de Pedro en Pentecost\u00e9s tiene tres movimientos: primero explica el fen\u00f3meno citando la profec\u00eda de Joel de que Dios derramar\u00eda su Esp\u00edritu sobre toda carne; segundo presenta el caso de Jes\u00fas como Mes\u00edas usando el propio salmo de David sobre el Santo que no ver\u00eda corrupci\u00f3n, ya que David mismo muri\u00f3 y fue sepultado pero habl\u00f3 prof\u00e9ticamente de la resurrecci\u00f3n del Cristo; tercero aplica esto directamente, llamando a sus oyentes a arrepentirse. La afirmaci\u00f3n central es que a este Jes\u00fas, a quien crucificaron, Dios lo ha hecho Se\u00f1or y Cristo, y la \u00fanica respuesta correcta es el arrepentimiento y el bautismo en su nombre." },
-    { textEn: "26. The early church in Acts 2:42 had four marks: doctrine, fellowship, breaking of bread, and prayers. Which of these does the modern church most often neglect, and why?", textEs: "26. La iglesia primitiva en Hechos 2:42 tenía cuatro marcas: doctrina, comunión, partimiento del pan, y oraciones. ¿Cuál de estas descuida más a menudo la iglesia moderna, y por qué?", kwEn: ["doctrin", "fellow", "bread", "prayer", "church", "neglect", "modern", "marks"], kwEs: ["doctrin", "comuni", "pan", "oraci", "iglesia", "descuid", "moderna", "marcas"], modelEn: "The early church in Acts 2:42 devoted themselves to four marks: the apostles' doctrine, fellowship, breaking of bread, and prayers. Of these, the modern church most often neglects doctrine and prayer \u2014 doctrine because teaching feels less exciting than programs and entertainment, and prayer because it requires patience and dependence that a busy, self-sufficient culture resists. The early church's devotion to all four marks together is what made it powerful; when a church neglects any one of them, especially sound doctrine or fervent prayer, it drifts into shallow fellowship without depth or truth.", modelEs: "La iglesia primitiva en Hechos 2:42 se dedicaba a cuatro marcas: la doctrina de los ap\u00f3stoles, la comuni\u00f3n, el partimiento del pan y las oraciones. De estas, la iglesia moderna descuida m\u00e1s a menudo la doctrina y la oraci\u00f3n \u2014 la doctrina porque ense\u00f1ar parece menos emocionante que los programas y el entretenimiento, y la oraci\u00f3n porque exige paciencia y dependencia que una cultura ocupada y autosuficiente resiste. La devoci\u00f3n de la iglesia primitiva a las cuatro marcas juntas fue lo que la hizo poderosa; cuando una iglesia descuida alguna de ellas, especialmente la sana doctrina o la oraci\u00f3n ferviente, cae en una comuni\u00f3n superficial sin profundidad ni verdad." },
-    { textEn: "27. Explain Acts 1:8 as the structural outline of the entire book of Acts.", textEs: "27. Explique Hechos 1:8 como el bosquejo estructural de todo el libro de Hechos.", kwEn: ["jerusalem", "judea", "samaria", "earth", "witness", "outline", "spirit", "uttermost"], kwEs: ["jerusal", "judea", "samaria", "tierra", "testig", "bosquejo", "espíritu", "último"], modelEn: "Acts 1:8 gives the structural outline of the entire book: 'you shall be witnesses to Me in Jerusalem, and in all Judea and Samaria, and to the end of the earth.' Chapters 1\u20137 cover the witness in Jerusalem, chapters 8\u201312 the spread into Judea and Samaria, and chapters 13\u201328 the advance to the uttermost parts of the earth through Paul's missionary journeys. This single verse is the Spirit-empowered outline of Acts and the ongoing pattern for the church's mission: witness starts near and moves outward, always by the Spirit's power.", modelEs: "Hechos 1:8 da el bosquejo estructural de todo el libro: 'me ser\u00e9is testigos en Jerusal\u00e9n, en toda Judea, en Samaria y hasta lo \u00faltimo de la tierra.' Los cap\u00edtulos 1\u20137 cubren el testimonio en Jerusal\u00e9n, los cap\u00edtulos 8\u201312 la expansi\u00f3n a Judea y Samaria, y los cap\u00edtulos 13\u201328 el avance hasta lo \u00faltimo de la tierra a trav\u00e9s de los viajes misioneros de Pablo. Este solo vers\u00edculo es el bosquejo empoderado por el Esp\u00edritu de Hechos y el patr\u00f3n continuo de la misi\u00f3n de la iglesia: el testigo comienza cerca y se mueve hacia afuera, siempre por el poder del Esp\u00edritu." },
-    { textEn: "28. The Hebrides Revival was born in the persistent prayer of two elderly women. What does this teach about the kind of prayer God answers with revival?", textEs: "28. El Avivamiento de las Hébridas nació de la oración persistente de dos mujeres ancianas. ¿Qué enseña esto sobre el tipo de oración que Dios responde con avivamiento?", kwEn: ["prayer", "persist", "reviv", "burden", "interce", "women", "humble", "spirit"], kwEs: ["oraci", "persist", "avivam", "carga", "interce", "mujeres", "humild", "espíritu"], modelEn: "The Hebrides Revival began when two elderly, praying women interceded for their island for months, burdened that the church had lost its power, until God moved in extraordinary conviction and awakening. This teaches that the prayer God answers with revival is not polished or public but humble, persistent intercession from people who carry a genuine burden for the lost \u2014 often unnoticed people whom the world would never expect to move a nation. Revival is not manufactured by strategy; it is birthed in the quiet, Spirit-led persistence of praying saints.", modelEs: "El Avivamiento de las H\u00e9bridas comenz\u00f3 cuando dos mujeres ancianas dedicadas a la oraci\u00f3n intercedieron por su isla durante meses, cargadas porque la iglesia hab\u00eda perdido su poder, hasta que Dios se movi\u00f3 en convicci\u00f3n y despertar extraordinarios. Esto ense\u00f1a que la oraci\u00f3n que Dios responde con avivamiento no es pulida ni p\u00fablica, sino intercesi\u00f3n humilde y persistente de personas que llevan una carga genuina por los perdidos \u2014 a menudo personas desapercibidas a quienes el mundo nunca esperar\u00eda que movieran una naci\u00f3n. El avivamiento no se fabrica con estrategia; nace en la persistencia humilde y guiada por el Esp\u00edritu de los santos que oran." },
-    { textEn: "29. What is your personal 'Jerusalem,' your 'Judea and Samaria,' and your 'end of the earth'? Be specific.", textEs: "29. ¿Cuál es su 'Jerusalén' personal, su 'Judea y Samaria' y su 'último de la tierra'? Sea específico.", kwEn: ["jerusalem", "judea", "samaria", "earth", "personal", "specific", "witness", "near"], kwEs: ["jerusal", "judea", "samaria", "tierra", "personal", "específ", "testig", "cerca"], modelEn: "My personal 'Jerusalem' is my own household and closest circle \u2014 the people nearest to me who most need to see Christ lived out day to day. My 'Judea and Samaria' is my local congregation and community, including relationships that are familiar but sometimes strained, much like the tension between Jews and Samaritans. My 'end of the earth' is the specific unreached people or region God has laid on my heart beyond my own culture. Being specific about all three keeps witness from staying vague \u2014 Acts 1:8 was never meant to be a slogan but a personal, concrete assignment near and far.", modelEs: "Mi 'Jerusal\u00e9n' personal es mi propio hogar y c\u00edrculo m\u00e1s cercano \u2014 las personas m\u00e1s pr\u00f3ximas a m\u00ed que m\u00e1s necesitan ver a Cristo vivido cada d\u00eda. Mi 'Judea y Samaria' es mi congregaci\u00f3n local y mi comunidad, incluyendo relaciones familiares pero a veces tensas, como la tensi\u00f3n entre jud\u00edos y samaritanos. Mi '\u00faltimo de la tierra' es el pueblo o regi\u00f3n espec\u00edficos no alcanzados que Dios ha puesto en mi coraz\u00f3n m\u00e1s all\u00e1 de mi propia cultura. Ser espec\u00edfico sobre los tres mantiene mi llamado a ser testigo anclado en lo concreto \u2014 Hechos 1:8 nunca fue un lema sino una asignaci\u00f3n personal, cerca y lejos." },
-    { textEn: "30. How does Acts 2:39 ('the promise is to you... to all who are afar off') apply directly to your life and ministry today?", textEs: "30. ¿Cómo se aplica Hechos 2:39 ('la promesa es para vosotros... y para todos los que están lejos') directamente a su vida y ministerio hoy?", kwEn: ["promise", "spirit", "gentile", "today", "afar", "apply", "minis", "person"], kwEs: ["promesa", "espíritu", "gentil", "hoy", "lejos", "aplic", "minis", "person"], modelEn: "Acts 2:39 promises that the gift of the Spirit is not only for the apostles or the Jewish crowd at Pentecost but 'to you and to your children, and to all who are afar off, as many as the Lord our God will call' \u2014 which includes Gentiles like me today. This applies directly to my life because the same Spirit poured out then is available now, and to my ministry because it means no person is too far off, culturally or geographically, to be included in God's promise; my task is simply to keep making that promise known and apply it in every context I'm sent to.", modelEs: "Hechos 2:39 promete que el don del Esp\u00edritu no es solo para los ap\u00f3stoles o la multitud jud\u00eda en Pentecost\u00e9s sino 'para vosotros, para vuestros hijos, y para todos los que est\u00e1n lejos, para cuantos el Se\u00f1or nuestro Dios llame' \u2014 lo cual me incluye a m\u00ed como gentil hoy. Esto se aplica directamente a mi vida porque el mismo Esp\u00edritu derramado entonces est\u00e1 disponible ahora, y a mi ministerio porque significa que ninguna persona est\u00e1 demasiado lejos, cultural o geogr\u00e1ficamente, para ser incluida en la promesa de Dios; mi tarea es simplemente seguir dando a conocer esa promesa y aplicarla en cada contexto al que sea enviado." }
-];
+/* CTSActs — unit 1. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "acts",
+ "unit": 1,
+ "totalUnits": 11,
+ "filePrefix": "CTSActs",
+ "prevHref": null,
+ "nextHref": "CTSActsUnit2.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "Acts is the second volume by Luke. The first verse describes his Gospel as the account of all that Jesus:",
+    "es": "Hechos es el segundo volumen escrito por Lucas. El primer versículo describe su Evangelio como el relato de todo lo que Jesús:"
+   },
+   "options": {
+    "en": [
+     "began to do and teach",
+     "finished doing",
+     "tried but failed to accomplish",
+     "predicted would happen"
+    ],
+    "es": [
+     "comenzó a hacer y a enseñar",
+     "terminó de hacer",
+     "intentó pero no logró",
+     "predijo que sucedería"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "Acts was most likely written around:",
+    "es": "Hechos fue escrito muy probablemente alrededor de:"
+   },
+   "options": {
+    "en": [
+     "AD 30–35",
+     "AD 50–55",
+     "AD 62–63",
+     "AD 90–100"
+    ],
+    "es": [
+     "30–35 d.C.",
+     "50–55 d.C.",
+     "62–63 d.C.",
+     "90–100 d.C."
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "The Greek word tekmeriois (translated 'infallible proofs' in Acts 1:3) means:",
+    "es": "La palabra griega tekmeriois (traducida 'pruebas indubitables' en Hechos 1:3) significa:"
+   },
+   "options": {
+    "en": [
+     "Symbolic gestures",
+     "Religious traditions",
+     "Mystical visions",
+     "Incontrovertible courtroom-grade evidence"
+    ],
+    "es": [
+     "Gestos simbólicos",
+     "Tradiciones religiosas",
+     "Visiones místicas",
+     "Evidencia incontrovertible al nivel de un tribunal"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "Acts 1:8 names four geographic spheres of witness. They are:",
+    "es": "Hechos 1:8 menciona cuatro esferas geográficas de testimonio. Son:"
+   },
+   "options": {
+    "en": [
+     "Galilee, Judea, Samaria, Egypt",
+     "Jerusalem, Judea, Samaria, the end of the earth",
+     "Israel, Greece, Rome, Spain",
+     "Bethlehem, Nazareth, Capernaum, Jerusalem"
+    ],
+    "es": [
+     "Galilea, Judea, Samaria, Egipto",
+     "Jerusalén, Judea, Samaria, lo último de la tierra",
+     "Israel, Grecia, Roma, España",
+     "Belén, Nazaret, Capernaum, Jerusalén"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "Before Pentecost the disciples were commanded to:",
+    "es": "Antes de Pentecostés se ordenó a los discípulos:"
+   },
+   "options": {
+    "en": [
+     "Wait in Jerusalem for the promised Holy Spirit",
+     "Begin preaching immediately",
+     "Return to Galilee",
+     "Replace all twelve apostles"
+    ],
+    "es": [
+     "Esperar en Jerusalén la promesa del Espíritu Santo",
+     "Comenzar a predicar inmediatamente",
+     "Volver a Galilea",
+     "Reemplazar a los doce apóstoles"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "The number of believers gathered in the upper room before Pentecost was approximately:",
+    "es": "El número de creyentes reunidos en el aposento alto antes de Pentecostés era aproximadamente:"
+   },
+   "options": {
+    "en": [
+     "12",
+     "70",
+     "120",
+     "500"
+    ],
+    "es": [
+     "12",
+     "70",
+     "120",
+     "500"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "The Feast of Pentecost was also called:",
+    "es": "La Fiesta de Pentecostés también se llamaba:"
+   },
+   "options": {
+    "en": [
+     "Passover",
+     "The Day of Atonement",
+     "Tabernacles",
+     "The Feast of Firstfruits / Feast of Weeks"
+    ],
+    "es": [
+     "Pascua",
+     "Día de la Expiación",
+     "Tabernáculos",
+     "Fiesta de las Primicias / Fiesta de las Semanas"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "The three signs accompanying the Spirit's coming at Pentecost were:",
+    "es": "Las tres señales que acompañaron la venida del Espíritu en Pentecostés fueron:"
+   },
+   "options": {
+    "en": [
+     "Earthquake, lightning, thunder",
+     "Wind, fire, and tongues",
+     "Vision, voice, and dove",
+     "Star, angel, and song"
+    ],
+    "es": [
+     "Terremoto, relámpago, trueno",
+     "Viento, fuego y lenguas",
+     "Visión, voz y paloma",
+     "Estrella, ángel y canción"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "The miracle of tongues at Pentecost was primarily a miracle of:",
+    "es": "El milagro de las lenguas en Pentecostés fue primeramente un milagro de:"
+   },
+   "options": {
+    "en": [
+     "Hearing — each pilgrim heard in his own dialect",
+     "Speaking in unknown angelic languages",
+     "Mystical ecstasy",
+     "Translation by interpreters"
+    ],
+    "es": [
+     "Oír — cada peregrino oía en su propio dialecto",
+     "Hablar en lenguas angélicas desconocidas",
+     "Éxtasis místico",
+     "Traducción por intérpretes"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "Pentecost is sometimes called 'Babel reversed' because:",
+    "es": "A Pentecostés a veces se le llama 'Babel al revés' porque:"
+   },
+   "options": {
+    "en": [
+     "A new tower was built",
+     "God scattered the languages again",
+     "Languages that were scattered were now used to unite all nations under the gospel",
+     "Confusion fell on the apostles"
+    ],
+    "es": [
+     "Se edificó una nueva torre",
+     "Dios esparció de nuevo los idiomas",
+     "Las lenguas que fueron esparcidas ahora unían a las naciones bajo el evangelio",
+     "Cayó confusión sobre los apóstoles"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "Peter's Pentecost sermon quoted prophecy primarily from:",
+    "es": "El sermón de Pedro en Pentecostés citó profecías principalmente de:"
+   },
+   "options": {
+    "en": [
+     "Isaiah",
+     "Malachi",
+     "Daniel",
+     "Joel and Psalms"
+    ],
+    "es": [
+     "Isaías",
+     "Malaquías",
+     "Daniel",
+     "Joel y los Salmos"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "Peter's response to 'What shall we do?' was:",
+    "es": "La respuesta de Pedro a '¿Qué haremos?' fue:"
+   },
+   "options": {
+    "en": [
+     "Wait for another revelation",
+     "Repent and be baptized in the name of Jesus Christ",
+     "Travel to Jerusalem",
+     "Make a sacrifice in the temple"
+    ],
+    "es": [
+     "Esperar otra revelación",
+     "Arrepentirse y bautizarse en el nombre de Jesucristo",
+     "Viajar a Jerusalén",
+     "Hacer un sacrificio en el templo"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "The number added to the church on the day of Pentecost was approximately:",
+    "es": "El número añadido a la iglesia en el día de Pentecostés fue aproximadamente:"
+   },
+   "options": {
+    "en": [
+     "300",
+     "1,000",
+     "3,000",
+     "10,000"
+    ],
+    "es": [
+     "300",
+     "1,000",
+     "3,000",
+     "10,000"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "The four marks of the early church in Acts 2:42 are:",
+    "es": "Las cuatro marcas de la iglesia primitiva en Hechos 2:42 son:"
+   },
+   "options": {
+    "en": [
+     "Doctrine, fellowship, breaking of bread, prayer",
+     "Building, budget, board, bylaws",
+     "Singing, preaching, giving, healing",
+     "Baptism, communion, marriage, burial"
+    ],
+    "es": [
+     "Doctrina, comunión, partimiento del pan, oración",
+     "Edificio, presupuesto, junta, estatutos",
+     "Canto, predicación, ofrenda, sanidad",
+     "Bautismo, comunión, matrimonio, sepultura"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "According to Acts 2:47, who added new believers to the church each day?",
+    "es": "Según Hechos 2:47, ¿quién añadía cada día nuevos creyentes a la iglesia?"
+   },
+   "options": {
+    "en": [
+     "The apostles",
+     "The synagogue rulers",
+     "The deacons",
+     "The Lord"
+    ],
+    "es": [
+     "Los apóstoles",
+     "Los principales de las sinagogas",
+     "Los diáconos",
+     "El Señor"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "The Hebrides Revival of 1949 was sparked through the prayers of:",
+    "es": "El Avivamiento de las Hébridas de 1949 se encendió por las oraciones de:"
+   },
+   "options": {
+    "en": [
+     "Two young pastors",
+     "Two elderly sisters in Barvas",
+     "A traveling evangelist",
+     "A government minister"
+    ],
+    "es": [
+     "Dos jóvenes pastores",
+     "Dos hermanas ancianas en Barvas",
+     "Un evangelista itinerante",
+     "Un ministro del gobierno"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "The Greek word ekklesia means:",
+    "es": "La palabra griega ekklesia significa:"
+   },
+   "options": {
+    "en": [
+     "A holy building",
+     "The called-out assembly",
+     "A priestly council",
+     "A synagogue"
+    ],
+    "es": [
+     "Un edificio sagrado",
+     "La asamblea llamada afuera",
+     "Un concilio sacerdotal",
+     "Una sinagoga"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "Frank Morison, the British lawyer, set out to write a book disproving the resurrection. The first chapter of his finished book was titled:",
+    "es": "Frank Morison, el abogado británico, se propuso escribir un libro refutando la resurrección. El primer capítulo de su libro terminado se titulaba:"
+   },
+   "options": {
+    "en": [
+     "The Book That Refused to Be Written",
+     "The Death of God",
+     "Why I Doubt",
+     "Beyond the Tomb"
+    ],
+    "es": [
+     "El libro que se negó a ser escrito",
+     "La muerte de Dios",
+     "Por qué dudo",
+     "Más allá de la tumba"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "The instructor's contrarian view of the choice of Matthias is that Peter:",
+    "es": "La opinión contraria del profesor sobre la elección de Matías es que Pedro:"
+   },
+   "options": {
+    "en": [
+     "Made the right choice with the Spirit's leading",
+     "Was forced into the choice by the others",
+     "Should have chosen one of the women instead",
+     "Acted before the Holy Spirit had been poured out, and Matthias is never mentioned again"
+    ],
+    "es": [
+     "Hizo la elección correcta con la dirección del Espíritu",
+     "Fue forzado a la elección por los demás",
+     "Debió haber escogido a una mujer",
+     "Actuó antes de que el Espíritu Santo fuera derramado, y Matías nunca vuelve a ser mencionado"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "Peter ended his Pentecost sermon by saying the promise of the Spirit is for:",
+    "es": "Pedro terminó su sermón de Pentecostés diciendo que la promesa del Espíritu es para:"
+   },
+   "options": {
+    "en": [
+     "Only the Twelve apostles",
+     "Only the people of Israel",
+     "All who are afar off, as many as the Lord our God will call",
+     "Only those baptized that day"
+    ],
+    "es": [
+     "Solo los doce apóstoles",
+     "Solo el pueblo de Israel",
+     "Todos los que están lejos, cuantos el Señor nuestro Dios llamare",
+     "Solo los bautizados ese día"
+    ]
+   },
+   "answer": 2
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Explain why Acts is best understood as 'volume two' of Luke's writing. What does this teach about the ongoing ministry of the risen Christ?",
+    "es": "Explique por qué Hechos se entiende mejor como 'volumen dos' del escrito de Lucas. ¿Qué enseña esto sobre el ministerio continuo del Cristo resucitado?"
+   },
+   "keywords": {
+    "en": [
+     "luke",
+     "began",
+     "ascen",
+     "contin",
+     "spirit",
+     "risen",
+     "church",
+     "volume"
+    ],
+    "es": [
+     "lucas",
+     "comenz",
+     "ascen",
+     "contin",
+     "espíritu",
+     "resuci",
+     "iglesia",
+     "volumen"
+    ]
+   },
+   "model": {
+    "en": "Luke wrote Acts as the sequel to his Gospel, picking up the story where the Gospel ended — with the risen Christ's ascension — and continuing it into the life of the church. Because the book begins with 'the former treatise... of all that Jesus began both to do and teach,' Acts is properly volume two: the record of what the ascended Christ continues to do through the church by His Spirit. This teaches that Jesus' ministry did not stop at the ascension; He is still working, now through His body on earth, empowered by the Holy Spirit.",
+    "es": "Lucas escribió Hechos como la secuela de su Evangelio, retomando la historia donde terminó el Evangelio — con la ascensión de Cristo resucitado — y continuándola en la vida de la iglesia. Como el libro comienza con 'el primer tratado... de todas las cosas que Jesús comenzó a hacer y a enseñar,' Hechos es propiamente el volumen dos: el registro de lo que el Cristo ascendido continúa haciendo a través de la iglesia por su Espíritu. Esto enseña que el ministerio de Jesús no se detuvo en la ascensión; Él sigue obrando, ahora a través de su cuerpo en la tierra, empoderado por el Espíritu Santo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why did Jesus command the disciples to wait before going on mission? What does this teach about Spirit-empowered ministry today?",
+    "es": "¿Por qué mandó Jesús a los discípulos esperar antes de salir a la misión? ¿Qué enseña esto sobre el ministerio empoderado por el Espíritu hoy?"
+   },
+   "keywords": {
+    "en": [
+     "wait",
+     "spirit",
+     "power",
+     "patien",
+     "obey",
+     "jerusalem",
+     "promise",
+     "father"
+    ],
+    "es": [
+     "esper",
+     "espíritu",
+     "poder",
+     "pacien",
+     "obedec",
+     "jerusal",
+     "promesa",
+     "padre"
+    ]
+   },
+   "model": {
+    "en": "Jesus commanded the disciples to wait in Jerusalem for the promise of the Father rather than launching out immediately, because mission without the Spirit's power is just human effort dressed in religious clothes. Waiting required them to obey before they understood, and rushing ahead in their own strength would have produced noise, not fruit — patience under Christ's command was itself an act of trust. This teaches that Spirit-empowered ministry today still starts with waiting on God rather than substituting programs, personality, or hustle for the power that only the Holy Spirit supplies.",
+    "es": "Jesús mandó a los discípulos esperar en Jerusalén la promesa del Padre en lugar de salir de inmediato, porque la misión sin el poder del Espíritu es solo esfuerzo humano vestido de ropa religiosa. Esperar requería obedecer antes de entender, y lanzarse en sus propias fuerzas habría producido ruido, no fruto; la paciencia bajo el mandato de Cristo era en sí un acto de confianza. Esto enseña que el ministerio empoderado por el Espíritu hoy todavía comienza esperando en Dios, en lugar de sustituir programas o personalidad por el poder que solo el Espíritu Santo provee."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the three signs of Pentecost (wind, fire, tongues). What is the Old Testament background for each?",
+    "es": "Describa las tres señales de Pentecostés (viento, fuego, lenguas). ¿Cuál es el trasfondo del Antiguo Testamento para cada una?"
+   },
+   "keywords": {
+    "en": [
+     "wind",
+     "fire",
+     "tongue",
+     "spirit",
+     "presen",
+     "babel",
+     "pentec",
+     "sign"
+    ],
+    "es": [
+     "viento",
+     "fuego",
+     "lengua",
+     "espíritu",
+     "presen",
+     "babel",
+     "pentec",
+     "señal"
+    ]
+   },
+   "model": {
+    "en": "The three signs of Pentecost were the sound of a rushing wind, tongues of fire, and speaking in other tongues, each drawing on Old Testament background. Wind recalls the ruach of God that hovered over creation and breathed life into dry bones in Ezekiel; fire recalls God's presence at Sinai and the pillar of fire that led Israel; and tongues fulfill both the scattering at Babel and the promise that God's Spirit would be poured out on all flesh in Joel. Together the three signs announce that the same God who created, led, and judged is now filling His church with His manifest presence.",
+    "es": "Las tres señales de Pentecostés fueron el sonido de un viento recio, lenguas de fuego, y hablar en otras lenguas, cada una con trasfondo del Antiguo Testamento. El viento recuerda el ruaj de Dios que se movía sobre la creación y sopló vida en los huesos secos de Ezequiel; el fuego recuerda la presencia de Dios en Sinaí y la columna de fuego que guiaba a Israel; y las lenguas cumplen tanto la dispersión de Babel como la promesa de que el Espíritu de Dios sería derramado sobre toda carne según Joel. Juntas, las tres señales anuncian que el mismo Dios que creó, guio y juzgó ahora llena a su iglesia con su presencia manifiesta."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How is Pentecost the reversal of Babel? What does this say about God's plan for all nations?",
+    "es": "¿Cómo es Pentecostés la reversa de Babel? ¿Qué dice esto sobre el plan de Dios para todas las naciones?"
+   },
+   "keywords": {
+    "en": [
+     "babel",
+     "lang",
+     "nation",
+     "unit",
+     "gospel",
+     "scatter",
+     "gather",
+     "tongue"
+    ],
+    "es": [
+     "babel",
+     "lengua",
+     "nacion",
+     "unid",
+     "evangelio",
+     "esparc",
+     "reun",
+     "idioma"
+    ]
+   },
+   "model": {
+    "en": "Pentecost reverses Babel: at Babel, God confused one language into many and scattered the nations because of prideful rebellion, but at Pentecost the Spirit enabled people of many languages to hear the gospel each in their own tongue, gathering the nations rather than scattering them. This does not erase linguistic diversity — the miracle was hearing, not everyone suddenly speaking one language — but it shows God's plan was always for all nations to be united in worship of Him, undoing the fracture of Babel through the unifying message of the gospel.",
+    "es": "Pentecostés revierte Babel: en Babel, Dios confundió un idioma en muchos y esparció a las naciones por la rebelión orgullosa, pero en Pentecostés el Espíritu permitió que personas de muchos idiomas oyeran el evangelio cada uno en su propia lengua, reuniendo a las naciones en lugar de esparcirlas. Esto no borra la diversidad de idiomas — el milagro fue el oír, no que todos hablaran de repente un solo idioma — pero muestra que el plan de Dios siempre fue que todas las naciones estuvieran unidas en adoración a Él, deshaciendo la fractura de Babel mediante el mensaje unificador del evangelio."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Outline Peter's Pentecost sermon (Acts 2:14–41). What is the structure and what is the central claim?",
+    "es": "Bosqueje el sermón de Pedro en Pentecostés (Hechos 2:14–41). ¿Cuál es la estructura y cuál es la afirmación central?"
+   },
+   "keywords": {
+    "en": [
+     "joel",
+     "david",
+     "psalm",
+     "resurrec",
+     "lord",
+     "christ",
+     "repent",
+     "spirit"
+    ],
+    "es": [
+     "joel",
+     "david",
+     "salmo",
+     "resurrec",
+     "señor",
+     "cristo",
+     "arrepent",
+     "espíritu"
+    ]
+   },
+   "model": {
+    "en": "Peter's Pentecost sermon has three movements: first he explains the phenomenon by quoting Joel's prophecy that God would pour out His Spirit on all flesh; second he presents the case for Jesus as Messiah using David's own psalm about the Holy One not seeing corruption, since David himself died and was buried but spoke prophetically of the resurrection of the Christ; third he applies it directly, calling his hearers to repent. The central claim is that this Jesus, whom they crucified, God has made both Lord and Christ, and the only right response is repentance and baptism in His name.",
+    "es": "El sermón de Pedro en Pentecostés tiene tres movimientos: primero explica el fenómeno citando la profecía de Joel de que Dios derramaría su Espíritu sobre toda carne; segundo presenta el caso de Jesús como Mesías usando el propio salmo de David sobre el Santo que no vería corrupción, ya que David mismo murió y fue sepultado pero habló proféticamente de la resurrección del Cristo; tercero aplica esto directamente, llamando a sus oyentes a arrepentirse. La afirmación central es que a este Jesús, a quien crucificaron, Dios lo ha hecho Señor y Cristo, y la única respuesta correcta es el arrepentimiento y el bautismo en su nombre."
+   }
+  },
+  {
+   "prompt": {
+    "en": "The early church in Acts 2:42 had four marks: doctrine, fellowship, breaking of bread, and prayers. Which of these does the modern church most often neglect, and why?",
+    "es": "La iglesia primitiva en Hechos 2:42 tenía cuatro marcas: doctrina, comunión, partimiento del pan, y oraciones. ¿Cuál de estas descuida más a menudo la iglesia moderna, y por qué?"
+   },
+   "keywords": {
+    "en": [
+     "doctrin",
+     "fellow",
+     "bread",
+     "prayer",
+     "church",
+     "neglect",
+     "modern",
+     "marks"
+    ],
+    "es": [
+     "doctrin",
+     "comuni",
+     "pan",
+     "oraci",
+     "iglesia",
+     "descuid",
+     "moderna",
+     "marcas"
+    ]
+   },
+   "model": {
+    "en": "The early church in Acts 2:42 devoted themselves to four marks: the apostles' doctrine, fellowship, breaking of bread, and prayers. Of these, the modern church most often neglects doctrine and prayer — doctrine because teaching feels less exciting than programs and entertainment, and prayer because it requires patience and dependence that a busy, self-sufficient culture resists. The early church's devotion to all four marks together is what made it powerful; when a church neglects any one of them, especially sound doctrine or fervent prayer, it drifts into shallow fellowship without depth or truth.",
+    "es": "La iglesia primitiva en Hechos 2:42 se dedicaba a cuatro marcas: la doctrina de los apóstoles, la comunión, el partimiento del pan y las oraciones. De estas, la iglesia moderna descuida más a menudo la doctrina y la oración — la doctrina porque enseñar parece menos emocionante que los programas y el entretenimiento, y la oración porque exige paciencia y dependencia que una cultura ocupada y autosuficiente resiste. La devoción de la iglesia primitiva a las cuatro marcas juntas fue lo que la hizo poderosa; cuando una iglesia descuida alguna de ellas, especialmente la sana doctrina o la oración ferviente, cae en una comunión superficial sin profundidad ni verdad."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain Acts 1:8 as the structural outline of the entire book of Acts.",
+    "es": "Explique Hechos 1:8 como el bosquejo estructural de todo el libro de Hechos."
+   },
+   "keywords": {
+    "en": [
+     "jerusalem",
+     "judea",
+     "samaria",
+     "earth",
+     "witness",
+     "outline",
+     "spirit",
+     "uttermost"
+    ],
+    "es": [
+     "jerusal",
+     "judea",
+     "samaria",
+     "tierra",
+     "testig",
+     "bosquejo",
+     "espíritu",
+     "último"
+    ]
+   },
+   "model": {
+    "en": "Acts 1:8 gives the structural outline of the entire book: 'you shall be witnesses to Me in Jerusalem, and in all Judea and Samaria, and to the end of the earth.' Chapters 1–7 cover the witness in Jerusalem, chapters 8–12 the spread into Judea and Samaria, and chapters 13–28 the advance to the uttermost parts of the earth through Paul's missionary journeys. This single verse is the Spirit-empowered outline of Acts and the ongoing pattern for the church's mission: witness starts near and moves outward, always by the Spirit's power.",
+    "es": "Hechos 1:8 da el bosquejo estructural de todo el libro: 'me seréis testigos en Jerusalén, en toda Judea, en Samaria y hasta lo último de la tierra.' Los capítulos 1–7 cubren el testimonio en Jerusalén, los capítulos 8–12 la expansión a Judea y Samaria, y los capítulos 13–28 el avance hasta lo último de la tierra a través de los viajes misioneros de Pablo. Este solo versículo es el bosquejo empoderado por el Espíritu de Hechos y el patrón continuo de la misión de la iglesia: el testigo comienza cerca y se mueve hacia afuera, siempre por el poder del Espíritu."
+   }
+  },
+  {
+   "prompt": {
+    "en": "The Hebrides Revival was born in the persistent prayer of two elderly women. What does this teach about the kind of prayer God answers with revival?",
+    "es": "El Avivamiento de las Hébridas nació de la oración persistente de dos mujeres ancianas. ¿Qué enseña esto sobre el tipo de oración que Dios responde con avivamiento?"
+   },
+   "keywords": {
+    "en": [
+     "prayer",
+     "persist",
+     "reviv",
+     "burden",
+     "interce",
+     "women",
+     "humble",
+     "spirit"
+    ],
+    "es": [
+     "oraci",
+     "persist",
+     "avivam",
+     "carga",
+     "interce",
+     "mujeres",
+     "humild",
+     "espíritu"
+    ]
+   },
+   "model": {
+    "en": "The Hebrides Revival began when two elderly, praying women interceded for their island for months, burdened that the church had lost its power, until God moved in extraordinary conviction and awakening. This teaches that the prayer God answers with revival is not polished or public but humble, persistent intercession from people who carry a genuine burden for the lost — often unnoticed people whom the world would never expect to move a nation. Revival is not manufactured by strategy; it is birthed in the quiet, Spirit-led persistence of praying saints.",
+    "es": "El Avivamiento de las Hébridas comenzó cuando dos mujeres ancianas dedicadas a la oración intercedieron por su isla durante meses, cargadas porque la iglesia había perdido su poder, hasta que Dios se movió en convicción y despertar extraordinarios. Esto enseña que la oración que Dios responde con avivamiento no es pulida ni pública, sino intercesión humilde y persistente de personas que llevan una carga genuina por los perdidos — a menudo personas desapercibidas a quienes el mundo nunca esperaría que movieran una nación. El avivamiento no se fabrica con estrategia; nace en la persistencia humilde y guiada por el Espíritu de los santos que oran."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What is your personal 'Jerusalem,' your 'Judea and Samaria,' and your 'end of the earth'? Be specific.",
+    "es": "¿Cuál es su 'Jerusalén' personal, su 'Judea y Samaria' y su 'último de la tierra'? Sea específico."
+   },
+   "keywords": {
+    "en": [
+     "jerusalem",
+     "judea",
+     "samaria",
+     "earth",
+     "personal",
+     "specific",
+     "witness",
+     "near"
+    ],
+    "es": [
+     "jerusal",
+     "judea",
+     "samaria",
+     "tierra",
+     "personal",
+     "específ",
+     "testig",
+     "cerca"
+    ]
+   },
+   "model": {
+    "en": "My personal 'Jerusalem' is my own household and closest circle — the people nearest to me who most need to see Christ lived out day to day. My 'Judea and Samaria' is my local congregation and community, including relationships that are familiar but sometimes strained, much like the tension between Jews and Samaritans. My 'end of the earth' is the specific unreached people or region God has laid on my heart beyond my own culture. Being specific about all three keeps witness from staying vague — Acts 1:8 was never meant to be a slogan but a personal, concrete assignment near and far.",
+    "es": "Mi 'Jerusalén' personal es mi propio hogar y círculo más cercano — las personas más próximas a mí que más necesitan ver a Cristo vivido cada día. Mi 'Judea y Samaria' es mi congregación local y mi comunidad, incluyendo relaciones familiares pero a veces tensas, como la tensión entre judíos y samaritanos. Mi 'último de la tierra' es el pueblo o región específicos no alcanzados que Dios ha puesto en mi corazón más allá de mi propia cultura. Ser específico sobre los tres mantiene mi llamado a ser testigo anclado en lo concreto — Hechos 1:8 nunca fue un lema sino una asignación personal, cerca y lejos."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How does Acts 2:39 ('the promise is to you... to all who are afar off') apply directly to your life and ministry today?",
+    "es": "¿Cómo se aplica Hechos 2:39 ('la promesa es para vosotros... y para todos los que están lejos') directamente a su vida y ministerio hoy?"
+   },
+   "keywords": {
+    "en": [
+     "promise",
+     "spirit",
+     "gentile",
+     "today",
+     "afar",
+     "apply",
+     "minis",
+     "person"
+    ],
+    "es": [
+     "promesa",
+     "espíritu",
+     "gentil",
+     "hoy",
+     "lejos",
+     "aplic",
+     "minis",
+     "person"
+    ]
+   },
+   "model": {
+    "en": "Acts 2:39 promises that the gift of the Spirit is not only for the apostles or the Jewish crowd at Pentecost but 'to you and to your children, and to all who are afar off, as many as the Lord our God will call' — which includes Gentiles like me today. This applies directly to my life because the same Spirit poured out then is available now, and to my ministry because it means no person is too far off, culturally or geographically, to be included in God's promise; my task is simply to keep making that promise known and apply it in every context I'm sent to.",
+    "es": "Hechos 2:39 promete que el don del Espíritu no es solo para los apóstoles o la multitud judía en Pentecostés sino 'para vosotros, para vuestros hijos, y para todos los que están lejos, para cuantos el Señor nuestro Dios llame' — lo cual me incluye a mí como gentil hoy. Esto se aplica directamente a mi vida porque el mismo Espíritu derramado entonces está disponible ahora, y a mi ministerio porque significa que ninguna persona está demasiado lejos, cultural o geográficamente, para ser incluida en la promesa de Dios; mi tarea es simplemente seguir dando a conocer esa promesa y aplicarla en cada contexto al que sea enviado."
+   }
+  }
+ ]
+};

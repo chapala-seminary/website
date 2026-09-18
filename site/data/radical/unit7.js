@@ -1,187 +1,865 @@
-/* CTSRadical - unit 7: per-unit configuration and content. */
-
-const UNIT = 7;
-
-const COURSE = 'radical';
-
-const NEXT_UNIT_URL = 'CTSRadicalUnit8.html';
-
-const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
-
-const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
-
-const PROGRESS_KEY  = `cts_${COURSE}_progress`;
-
-let progress = {};
-
-const unitTitlesEn = [
-    "Unit 1 - Foundation: Old Wineskins, New Wine",
-    "Unit 2 - What Jesus Did With the Law",
-    "Unit 3 - Love God",
-    "Unit 4 - Love Neighbor",
-    "Unit 5 - Be Holy",
-    "Unit 6 - Be Forgiving",
-    `Unit ${UNIT} - Be Humble`,
-    `Unit ${UNIT + 1} - Be Generous`,
-    "Unit 9 - Trust God",
-    "Unit 10 - Be Prayerful",
-    "Unit 11 - Be Kind",
-    "Unit 12 - Be a Disciplemaker",
-    "Unit 13 - Capstone: Turning the World Upside Down"
-];
-
-const mcQuestions = [
-    { textEn: "1. According to 1 Peter 5:5, how does God respond to the proud and to the humble?", textEs: "1. Según 1 Pedro 5:5, ¿cómo responde Dios a los soberbios y a los humildes?",
-      optionsEn: ["He blesses both equally", "He resists the proud but gives grace to the humble", "He ignores the proud", "He tests the humble"],
-      optionsEs: ["Bendice a ambos por igual", "Resiste a los soberbios pero da gracia a los humildes", "Ignora a los soberbios", "Prueba a los humildes"],
-      explanationEn: "God actively resists the proud but gives grace to the humble; pride sets a person against grace, while humility opens the heart to receive it.", explanationEs: "Dios resiste activamente a los soberbios pero da gracia a los humildes; la soberbia pone a la persona contra la gracia, la humildad abre el corazón para recibirla.", correct: 1 },
-    { textEn: "2. What is the 'inverted economy' of the Christian life described in the lesson?", textEs: "2. ¿Cuál es la 'economía invertida' de la vida cristiana que describe la lección?",
-      optionsEn: ["Work harder to climb higher", "Wealth proves God's favor", "The way up is down — we humble ourselves and let God exalt us", "Self-promotion is rewarded"],
-      optionsEs: ["Trabajar más para escalar más alto", "La riqueza prueba el favor de Dios", "El camino hacia arriba es hacia abajo — nos humillamos y dejamos que Dios nos exalte", "La autopromoción es recompensada"],
-      explanationEn: "The way up is down: we humble ourselves under God's mighty hand and trust Him to exalt us in due time, rather than climbing by self-promotion.", explanationEs: "El camino hacia arriba es hacia abajo: nos humillamos bajo la poderosa mano de Dios y confiamos en que Él nos exalte a su tiempo, en vez de escalar por autopromoción.", correct: 2 },
-    { textEn: "3. According to the lesson, what is humility NOT?", textEs: "3. Según la lección, ¿qué NO es la humildad?",
-      optionsEn: ["Self-hatred or a low opinion of oneself", "Thinking of oneself less", "Esteeming others", "Receiving correction calmly"],
-      optionsEs: ["El odio a uno mismo o una baja opinión de uno mismo", "Pensar menos en uno mismo", "Estimar a los demás", "Recibir la corrección con calma"],
-      explanationEn: "Humility is not self-hatred or a low opinion of oneself; the proud and the self-loathing are alike absorbed with self.", explanationEs: "La humildad no es el odio a uno mismo ni una baja opinión de uno mismo; el soberbio y el que se desprecia están igualmente absortos en sí mismos.", correct: 0 },
-    { textEn: "4. The lesson sums up humility with which memorable line?", textEs: "4. La lección resume la humildad con ¿cuál frase memorable?",
-      optionsEn: ["Think the worst of yourself", "Always put yourself first", "Never accept a compliment", "True servants don't think less of themselves; they think of themselves less"],
-      optionsEs: ["Piensa lo peor de ti mismo", "Ponte siempre primero", "Nunca aceptes un elogio", "Los verdaderos siervos no piensan menos de sí mismos; piensan menos en sí mismos"],
-      explanationEn: "Humility is not thinking poorly of yourself; true servants don't think less of themselves, they simply think of themselves less.", explanationEs: "La humildad no es pensar mal de ti mismo; los verdaderos siervos no piensan menos de sí mismos, sencillamente piensan menos en sí mismos.", correct: 3 },
-    { textEn: "5. Why does the lesson call pride 'the root sin'?", textEs: "5. ¿Por qué llama la lección a la soberbia 'el pecado raíz'?",
-      optionsEn: ["It only affects leaders", "It is the least common sin", "It is the self-exaltation tangled into every other sin — the creature usurping God's throne", "It is harmless"],
-      optionsEs: ["Solo afecta a los líderes", "Es el pecado menos común", "Es la autoexaltación enredada en todo otro pecado — la criatura usurpando el trono de Dios", "Es inofensiva"],
-      explanationEn: "Pride is closer to the root of all sin: the desire to be as God, to sit at the center where only God belongs; every other sin has that self-exaltation in it.", explanationEs: "La soberbia está más cerca de la raíz de todo pecado: el deseo de ser como Dios, de sentarse en el centro donde solo Dios pertenece; todo otro pecado tiene esa autoexaltación.", correct: 2 },
-    { textEn: "6. What 'false gods' did Charles Colson say we must repent of?", textEs: "6. ¿De qué 'falsos dioses' dijo Charles Colson que debemos arrepentirnos?",
-      optionsEn: ["Family and friendship", "Materialism, power, success, and personal autonomy", "Rest and leisure", "Art and music"],
-      optionsEs: ["La familia y la amistad", "El materialismo, el poder, el éxito, y la autonomía personal", "El descanso y el ocio", "El arte y la música"],
-      explanationEn: "Colson said we must repent of idolatry — the false gods of materialism, power, success, and personal autonomy — each a way of making ourselves the center.", explanationEs: "Colson dijo que debemos arrepentirnos de la idolatría — los falsos dioses del materialismo, el poder, el éxito y la autonomía personal — cada uno una manera de hacernos el centro.", correct: 1 },
-    { textEn: "7. According to Philippians 2, what is the deepest reason to be humble?", textEs: "7. Según Filipenses 2, ¿cuál es la razón más honda para ser humilde?",
-      optionsEn: ["Humility is the very mind of Christ, who made Himself of no reputation", "It impresses others", "It earns rewards", "It avoids conflict"],
-      optionsEs: ["La humildad es la mismísima mente de Cristo, que se anonadó a sí mismo", "Impresiona a los demás", "Gana recompensas", "Evita el conflicto"],
-      explanationEn: "Humility is the mind of Christ: being in the form of God, He made Himself of no reputation, took the form of a servant, and humbled Himself to death on a cross.", explanationEs: "La humildad es la mente de Cristo: siendo en forma de Dios, se anonadó a sí mismo, tomó forma de siervo, y se humilló hasta la muerte de cruz.", correct: 0 },
-    { textEn: "8. What does it mean that humility is 'Christlikeness,' not a technique?", textEs: "8. ¿Qué significa que la humildad es 'semejanza a Cristo,' no una técnica?",
-      optionsEn: ["It is a personality trait some are born with", "It is a skill mastered by practice alone", "It is unrelated to Christ", "When we lower ourselves to serve and esteem others, we think the very thoughts of Jesus"],
-      optionsEs: ["Es un rasgo de personalidad con que algunos nacen", "Es una destreza dominada solo por la práctica", "No tiene relación con Cristo", "Cuando nos abajamos para servir y estimar a otros, pensamos los mismísimos pensamientos de Jesús"],
-      explanationEn: "Humility is Christlikeness: lowering ourselves to serve and esteem others, we walk the downward path Jesus walked and let His mind be in us.", explanationEs: "La humildad es semejanza a Cristo: al abajarnos para servir y estimar a otros, caminamos el sendero descendente que Jesús caminó y dejamos que su mente esté en nosotros.", correct: 3 },
-    { textEn: "9. How does Colson say the world's standards compare to God's?", textEs: "9. ¿Cómo dice Colson que los criterios del mundo se comparan con los de Dios?",
-      optionsEn: ["They mostly agree", "Every standard the world uses is the opposite of God's measure", "They are irrelevant", "God adopts the world's standards"],
-      optionsEs: ["Concuerdan en su mayoría", "Todo criterio que usa el mundo es lo opuesto de la medida de Dios", "Son irrelevantes", "Dios adopta los criterios del mundo"],
-      explanationEn: "Every standard the world uses to judge men is the opposite of God's: the world prizes riches, recognition, and power; God exalts the poor in spirit, the humble, the servant.", explanationEs: "Todo criterio que el mundo usa para juzgar es lo opuesto del de Dios: el mundo aprecia riquezas, reconocimiento y poder; Dios exalta al pobre en espíritu, al humilde, al siervo.", correct: 1 },
-    { textEn: "10. In Matthew 20:25-28, how did Jesus redirect the desire for greatness?", textEs: "10. En Mateo 20:25-28, ¿cómo redirigió Jesús el deseo de grandeza?",
-      optionsEn: ["Whoever desires to be great must become a servant", "He forbade greatness entirely", "He said the strongest should rule", "He said greatness is impossible"],
-      optionsEs: ["El que desee ser grande debe hacerse siervo", "Prohibió la grandeza por completo", "Dijo que el más fuerte debe gobernar", "Dijo que la grandeza es imposible"],
-      explanationEn: "Jesus did not abolish greatness but redirected it: it shall not be so among you; whoever would be great must be a servant, as He came to serve and give His life.", explanationEs: "Jesús no abolió la grandeza sino que la redirigió: entre vosotros no será así; el que quiera ser grande debe ser siervo, como Él vino a servir y dar su vida.", correct: 0 },
-    { textEn: "11. Whose feet did Jesus wash on the night He was betrayed, and what is striking about it?", textEs: "11. ¿Los pies de quién lavó Jesús la noche en que fue entregado, y qué es notable de ello?",
-      optionsEn: ["Only Peter's, to honor him", "No one's; He only taught about it", "Only the eleven faithful disciples", "His disciples' feet, including Judas's, who would soon betray Him"],
-      optionsEs: ["Solo los de Pedro, para honrarlo", "Los de nadie; solo enseñó sobre ello", "Solo los de los once discípulos fieles", "Los pies de sus discípulos, incluidos los de Judas, que pronto lo traicionaría"],
-      explanationEn: "The Lord of glory took the slave's task and washed His disciples' feet — even Judas's — then said we ought to wash one another's feet. Real greatness kneels.", explanationEs: "El Señor de la gloria tomó la tarea del esclavo y lavó los pies de sus discípulos — aun los de Judas — y dijo que debemos lavarnos los pies unos a otros. La verdadera grandeza se arrodilla.", correct: 3 },
-    { textEn: "12. In the service Wayne attended, what did hammering the nail into the cross represent?", textEs: "12. En el culto al que Wayne asistió, ¿qué representaba clavar el clavo en la cruz?",
-      optionsEn: ["That Jesus was a victim of Rome alone", "A symbol of carpentry skill", "That we all had a hand in nailing Jesus to the cross — humility before God as sinners", "That suffering is meaningless"],
-      optionsEs: ["Que Jesús fue víctima solo de Roma", "Un símbolo de destreza en carpintería", "Que todos tuvimos parte en clavar a Jesús en la cruz — humildad ante Dios como pecadores", "Que el sufrimiento no tiene sentido"],
-      explanationEn: "Each person drove the nail to confess that we all helped nail Jesus to the cross; the deepest humility is knowing we are sinners for whom Christ had to die.", explanationEs: "Cada persona clavó el clavo para confesar que todos ayudamos a clavar a Jesús en la cruz; la humildad más honda es saber que somos pecadores por quienes Cristo tuvo que morir.", correct: 2 },
-    { textEn: "13. What does the lesson say about borrowing leadership patterns from empire and corporation?", textEs: "13. ¿Qué dice la lección sobre tomar prestados patrones de liderazgo del imperio y la corporación?",
-      optionsEn: ["They guarantee humility", "They are ideal for the church", "They should be expanded", "They build religious hierarchies where men rule over men, contrary to Jesus"],
-      optionsEs: ["Garantizan la humildad", "Son ideales para la iglesia", "Deberían ampliarse", "Construyen jerarquías religiosas donde los hombres se enseñorean, contrario a Jesús"],
-      explanationEn: "Borrowing patterns from empire, military, and corporation builds hierarchies where men rule over men — pride in religious clothing, the very thing Jesus said should not be so.", explanationEs: "Tomar patrones del imperio, lo militar y la corporación construye jerarquías donde los hombres se enseñorean — soberbia con ropa religiosa, justo lo que Jesús dijo que no debía ser así.", correct: 3 },
-    { textEn: "14. How does Galatians 6:2 ('bear one another's burdens') connect to humility?", textEs: "14. ¿Cómo conecta Gálatas 6:2 ('sobrellevad las cargas') con la humildad?",
-      optionsEn: ["It teaches self-sufficiency", "It applies only to leaders", "It takes humility to admit we have burdens and let others help us", "It discourages vulnerability"],
-      optionsEs: ["Enseña la autosuficiencia", "Aplica solo a líderes", "Hace falta humildad para admitir que tenemos cargas y dejar que otros nos ayuden", "Desalienta la vulnerabilidad"],
-      explanationEn: "It takes humility to admit we have burdens; a proud heart hides its troubles to protect its image, but a humble heart is vulnerable and lets others help.", explanationEs: "Hace falta humildad para admitir que tenemos cargas; un corazón soberbio esconde sus problemas para proteger su imagen, pero un corazón humilde es vulnerable y deja que otros ayuden.", correct: 2 },
-    { textEn: "15. In the parable of the Pharisee and tax collector (Luke 18), who went home justified?", textEs: "15. En la parábola del fariseo y el publicano (Lucas 18), ¿quién descendió justificado a su casa?",
-      optionsEn: ["The tax collector who begged, 'God, be merciful to me a sinner'", "Both equally", "The Pharisee who listed his virtues", "Neither"],
-      optionsEs: ["El publicano que rogó: 'Dios, sé propicio a mí, pecador'", "Ambos por igual", "El fariseo que enumeró sus virtudes", "Ninguno"],
-      explanationEn: "The broken, humble tax collector — not the impressive Pharisee — went home justified; God resists the one and gives grace to the other.", explanationEs: "El publicano quebrantado y humilde — no el fariseo impresionante — descendió justificado; Dios resiste al uno y da gracia al otro.", correct: 0 },
-    { textEn: "16. What promise is folded into 'humble yourselves under the mighty hand of God'?", textEs: "16. ¿Qué promesa está plegada en 'humillaos bajo la poderosa mano de Dios'?",
-      optionsEn: ["That we will grovel forever", "That He may exalt us in due time", "That we will become rich", "That we will never suffer"],
-      optionsEs: ["Que nos arrastraremos para siempre", "Que él nos exalte a su tiempo", "Que nos haremos ricos", "Que nunca sufriremos"],
-      explanationEn: "We take the low place and trust God to do the lifting, in His time and way — 'that He may exalt you in due time.'", explanationEs: "Tomamos el lugar bajo y confiamos en que Dios haga el levantar, a su tiempo y a su manera — 'para que él os exalte cuando fuere tiempo.'", correct: 1 },
-    { textEn: "17. How is Christ Himself the pattern of humble-then-exalted?", textEs: "17. ¿Cómo es Cristo mismo el patrón de humillado-luego-exaltado?",
-      optionsEn: ["He humbled Himself to death on a cross, therefore God highly exalted Him", "He avoided suffering", "He exalted Himself first", "He was never exalted"],
-      optionsEs: ["Se humilló hasta la muerte de cruz, por eso Dios le exaltó hasta lo sumo", "Evitó el sufrimiento", "Se exaltó a sí mismo primero", "Nunca fue exaltado"],
-      explanationEn: "Christ humbled Himself to the death of the cross, and therefore God highly exalted Him and gave Him the name above every name — the descent was real, and so was the exaltation.", explanationEs: "Cristo se humilló hasta la muerte de cruz, y por eso Dios le exaltó hasta lo sumo y le dio el nombre sobre todo nombre — el descenso fue real, y también la exaltación.", correct: 0 },
-    { textEn: "18. What does it mean to 'be clothed with humility'?", textEs: "18. ¿Qué significa 'revestirse de humildad'?",
-      optionsEn: ["To wait until we feel humble", "To deliberately put it on — choosing to think of ourselves less and serve, as Jesus wrapped a towel", "To hide our gifts", "To dress plainly"],
-      optionsEs: ["Esperar hasta sentirnos humildes", "Ponérsela deliberadamente — eligiendo pensar menos en nosotros y servir, como Jesús se ciñó una toalla", "Esconder nuestros dones", "Vestir con sencillez"],
-      explanationEn: "Humility is a garment we put on deliberately, as Jesus wrapped Himself in a towel; we don't wait to feel it but choose to serve and esteem others.", explanationEs: "La humildad es una prenda que nos ponemos deliberadamente, como Jesús se ciñó una toalla; no esperamos a sentirla sino que elegimos servir y estimar a los demás.", correct: 1 },
-    { textEn: "19. According to the lesson, how does humility actually free us?", textEs: "19. Según la lección, ¿cómo nos libera de veras la humildad?",
-      optionsEn: ["By making us wealthy", "By removing all responsibility", "By making us invisible", "It frees us from the exhausting work of defending and promoting ourselves, freeing us to love"],
-      optionsEs: ["Haciéndonos ricos", "Quitando toda responsabilidad", "Haciéndonos invisibles", "Nos libra del agotador trabajo de defendernos y promovernos, librándonos para amar"],
-      explanationEn: "Humility frees us from the exhausting race for status and the work of defending and promoting ourselves, freeing us instead to love.", explanationEs: "La humildad nos libra de la agotadora carrera por el estatus y del trabajo de defendernos y promovernos, librándonos en cambio para amar.", correct: 3 },
-    { textEn: "20. What is the final picture of humility the lesson leaves us with?", textEs: "20. ¿Cuál es la imagen final de la humildad que nos deja la lección?",
-      optionsEn: ["A throne and a crown", "A ladder to climb", "The God who left His throne, took a towel, and knelt — humility as following Him down", "A trophy to win"],
-      optionsEs: ["Un trono y una corona", "Una escalera que escalar", "El Dios que dejó su trono, tomó una toalla, y se arrodilló — la humildad como seguirlo hacia abajo", "Un trofeo que ganar"],
-      explanationEn: "Humility is the shape of a life that caught the mind of Christ — the God who left His throne, took a towel, and knelt; to be humble is to follow Him down.", explanationEs: "La humildad es la forma de una vida que captó la mente de Cristo — el Dios que dejó su trono, tomó una toalla, y se arrodilló; ser humilde es seguirlo hacia abajo.", correct: 2 }
-];
-
-const kwQuestions = [
-    { textEn: "21. Explain the 'divine economy' of 1 Peter 5:5-6 and why pride and humility matter so much to God.",
-      textEs: "21. Explique la 'economía divina' de 1 Pedro 5:5-6 y por qué la soberbia y la humildad le importan tanto a Dios.",
-      kw_en: ["resists", "proud", "grace", "humble", "down", "exalt", "due time", "surrender"],
-      kw_es: ["resiste", "soberbios", "gracia", "humildes", "abajo", "exalte", "su tiempo", "entrega"],
-      modelEn: "Peter says God resists the proud but gives grace to the humble, and then tells us to humble ourselves under God's mighty hand that He may exalt us in due time. This reveals an inverted economy in which the way up is down. Pride does not merely displease God; it sets a person against the very current of His grace, while humility opens the heart to receive it. So the whole Christian life runs on surrender rather than self-promotion: we lower ourselves and trust God to lift us in His own time and way. This is not a strategy for getting exalted, which would be pride wearing humility's clothes, but a genuine surrender that leaves the lifting to God.",
-      modelEs: "Pedro dice que Dios resiste a los soberbios pero da gracia a los humildes, y luego nos dice que nos humillemos bajo la poderosa mano de Dios para que Él nos exalte a su tiempo. Esto revela una economía invertida en la cual el camino hacia arriba es hacia abajo. La soberbia no solo desagrada a Dios; pone a la persona contra la corriente misma de su gracia, mientras que la humildad abre el corazón para recibirla. Así que toda la vida cristiana corre sobre la entrega y no la autopromoción: nos abajamos y confiamos en que Dios nos levante a su tiempo y a su manera. Esto no es una estrategia para ser exaltados, lo cual sería soberbia vestida de humildad, sino una entrega genuina que deja el levantar en manos de Dios.",
-      },
-    { textEn: "22. What is humility, and what is it NOT? Use the line about thinking of oneself less.",
-      textEs: "22. ¿Qué es la humildad, y qué NO es? Use la frase sobre pensar menos en uno mismo.",
-      kw_en: ["self-hatred", "less", "absorbed", "esteem", "others", "gift", "outward", "worth"],
-      kw_es: ["odio", "menos", "absortos", "estimar", "otros", "don", "afuera", "valor"],
-      modelEn: "Humility is easily misunderstood as self-hatred, groveling, or a low opinion of oneself, but that is not what Scripture means. As it has well been said, true servants do not think less of themselves; they simply think of themselves less. The proud person and the self-loathing person are alike in one way, for both are absorbed with themselves, and humility is the freedom of a self that has stopped staring at itself. Paul gives its positive shape: in lowliness of mind let each esteem others better than himself. Humility looks outward and upward, reckoning others worth genuine care and God worthy of all. It does not deny our gifts but remembers that whatever we have is a gift received, so the humble person takes a compliment or a correction with the same steadiness, since his sense of worth rests on neither.",
-      modelEs: "La humildad se malentiende fácilmente como odio a uno mismo, servilismo, o una baja opinión de uno mismo, pero no es eso lo que la Escritura quiere decir. Como bien se ha dicho, los verdaderos siervos no piensan menos de sí mismos; sencillamente piensan menos en sí mismos. El soberbio y el que se desprecia se parecen en una cosa, pues ambos están absortos en sí mismos, y la humildad es la libertad de un yo que ha dejado de mirarse. Pablo da su forma positiva: con humildad, estimando cada uno a los demás como superiores a sí mismo. La humildad mira hacia afuera y hacia arriba, considerando a los otros dignos de verdadero cuidado y a Dios digno de todo. No niega nuestros dones sino que recuerda que todo lo que tenemos es un don recibido, así que el humilde toma un elogio o una corrección con la misma serenidad, ya que su sentido de valor no descansa en ninguno.",
-      },
-    { textEn: "23. Why does the lesson call pride 'the root sin,' and what false gods does Colson name?",
-      textEs: "23. ¿Por qué llama la lección a la soberbia 'el pecado raíz,' y qué falsos dioses nombra Colson?",
-      kw_en: ["root", "destruction", "creature", "throne", "Colson", "materialism", "power", "center"],
-      kw_es: ["raíz", "destrucción", "criatura", "trono", "Colson", "materialismo", "poder", "centro"],
-      modelEn: "Pride is not just one sin among many but closer to the root of them all, for pride goes before destruction and a haughty spirit before a fall. It was pride that first turned a creature against the Creator, the desire to be as God and to sit at the center where only God belongs, and every other sin has some of that self-exaltation tangled into it. This is why God must resist the proud: pride is the human heart usurping God's throne, and His opposition to it is mercy, not cruelty. Charles Colson named its modern forms, saying we must repent of the false gods of materialism, power, success, and personal autonomy, each a way of making ourselves the center. Humility is simply the truth coming back into focus, that God is God and we are His creatures dependent on Him for every breath.",
-      modelEs: "La soberbia no es solo un pecado entre muchos sino más cerca de ser la raíz de todos, pues antes del quebrantamiento es la soberbia y antes de la caída la altivez de espíritu. Fue la soberbia lo que primero volvió a una criatura contra el Creador, el deseo de ser como Dios y de sentarse en el centro donde solo Dios pertenece, y todo otro pecado tiene algo de esa autoexaltación enredada. Por esto Dios debe resistir a los soberbios: la soberbia es el corazón humano usurpando el trono de Dios, y su oposición es misericordia, no crueldad. Charles Colson nombró sus formas modernas, diciendo que debemos arrepentirnos de los falsos dioses del materialismo, el poder, el éxito, y la autonomía personal, cada uno una manera de hacernos el centro. La humildad es sencillamente la verdad volviendo a enfocarse, que Dios es Dios y nosotros somos sus criaturas dependientes de Él por cada aliento.",
-      },
-    { textEn: "24. Explain how Philippians 2:5-8 shows humility to be the mind of Christ.",
-      textEs: "24. Explique cómo Filipenses 2:5-8 muestra que la humildad es la mente de Cristo.",
-      kw_en: ["mind of Christ", "reputation", "servant", "humbled", "cross", "downward", "Christlikeness", "rights"],
-      kw_es: ["mente de Cristo", "reputación", "siervo", "humilló", "cruz", "descendente", "semejanza a Cristo", "derechos"],
-      modelEn: "The deepest reason to be humble is that humility is the very mind of Christ. He who was God in His own right did not cling to His rights but made Himself of no reputation, took the form of a servant, and humbled Himself all the way down to the death of the cross. The whole movement of His life was downward, from heaven's throne to a manger, from glory to a cross, and every step of that descent was service. This means humility is not finally a technique or personality trait but Christlikeness. When we lower ourselves to serve, esteem others, and refuse to grasp at our rights, we are thinking the very thoughts of Jesus and walking the path He walked. The call to be humble is the call to let this mind be in us which was also in Christ Jesus, letting His self-giving love become our pattern.",
-      modelEs: "La razón más honda para ser humildes es que la humildad es la mismísima mente de Cristo. Él, que era Dios por derecho propio, no se aferró a sus derechos sino que se anonadó a sí mismo, tomó forma de siervo, y se humilló todo el camino hasta la muerte de cruz. Todo el movimiento de su vida fue hacia abajo, del trono del cielo a un pesebre, de la gloria a una cruz, y cada paso de ese descenso fue servicio. Esto significa que la humildad no es al final una técnica ni un rasgo de personalidad sino la semejanza a Cristo. Cuando nos abajamos para servir, estimar a otros, y rehusar aferrarnos a nuestros derechos, pensamos los mismísimos pensamientos de Jesús y caminamos el sendero que Él caminó. El llamado a ser humildes es el llamado a tener este sentir que hubo en Cristo Jesús, dejando que su amor abnegado se vuelva nuestro patrón.",
-      },
-    { textEn: "25. How does the gospel invert the world's ladder of values? Use Colson's contrasts.",
-      textEs: "25. ¿Cómo invierte el evangelio la escalera de valores del mundo? Use los contrastes de Colson.",
-      kw_en: ["opposite", "rich", "recognized", "powerful", "servant", "ladder", "kingdom", "freeing"],
-      kw_es: ["opuesto", "rico", "reconocido", "poderoso", "siervo", "escalera", "reino", "liberadora"],
-      modelEn: "Once we see the mind of Christ, we realize how completely it overturns the world's scale of values. As Colson put it, every standard the world uses to judge men is the opposite of God's measure. The world says to be rich is to be blessed, but God blesses the poor in spirit. The world says to be recognized and applauded is to have arrived, but God exalts the humble. The world says to be powerful is to be great, but Jesus says you must become a servant to be great. This is not a minor adjustment to the world's ladder but a different ladder entirely, pointing the other direction, for the kingdom of God does not run on the same fuel as the kingdoms of men. This is freeing news, because the whole exhausting race for status is one we are free to step out of, since in Christ the lowest place has become the place of honor.",
-      modelEs: "Una vez que vemos la mente de Cristo, nos damos cuenta de cuán completamente trastorna la escala de valores del mundo. Como dijo Colson, todo criterio que el mundo usa para juzgar a los hombres es lo opuesto de la medida de Dios. El mundo dice que ser rico es ser bendecido, pero Dios bendice al pobre en espíritu. El mundo dice que ser reconocido y aplaudido es haber llegado, pero Dios exalta al humilde. El mundo dice que ser poderoso es ser grande, pero Jesús dice que debes hacerte siervo para ser grande. Esto no es un ajuste menor a la escalera del mundo sino una escalera enteramente distinta, que apunta en la otra dirección, pues el reino de Dios no funciona con el mismo combustible que los reinos de los hombres. Ésta es noticia liberadora, porque toda la agotadora carrera por el estatus es una de la que somos libres para salir, ya que en Cristo el lugar más bajo se ha vuelto el lugar de honor.",
-      },
-    { textEn: "26. Explain Matthew 20:25-28 and how the foot-washing of John 13 shows that 'real greatness kneels.'",
-      textEs: "26. Explique Mateo 20:25-28 y cómo el lavamiento de pies de Juan 13 muestra que 'la verdadera grandeza se arrodilla.'",
-      kw_en: ["greatness", "servant", "lord it over", "ransom", "towel", "Judas", "kneels", "wash"],
-      kw_es: ["grandeza", "siervo", "enseñorean", "rescate", "toalla", "Judas", "arrodilla", "lavar"],
-      modelEn: "Jesus did not abolish the desire for greatness but redirected it, saying it shall not be so among you. Among the nations the rulers lord it over people, and greatness means having others under you, but in the kingdom greatness means getting under others to lift them, so whoever would be great must be a servant. He proves it by example, for the Son of Man came not to be served but to serve and to give His life a ransom for many. On the night He was betrayed, knowing the Father had given all things into His hands, Jesus rose, wrapped a towel around His waist, and washed His disciples' feet, including the feet of Judas who would betray Him within hours. The Lord of glory took the slave's task and said we ought to wash one another's feet. Here is the whole lesson in one picture: real greatness kneels.",
-      modelEs: "Jesús no abolió el deseo de grandeza sino que lo redirigió, diciendo que entre vosotros no será así. Entre las naciones los príncipes se enseñorean de la gente, y la grandeza significa tener a otros bajo uno, pero en el reino la grandeza significa ponerse debajo de otros para levantarlos, así que el que quiera ser grande debe ser siervo. Lo prueba con el ejemplo, pues el Hijo del Hombre no vino para ser servido sino para servir y dar su vida en rescate por muchos. La noche en que fue entregado, sabiendo que el Padre había puesto todas las cosas en sus manos, Jesús se levantó, se ciñó una toalla a la cintura, y lavó los pies de sus discípulos, incluidos los pies de Judas que lo traicionaría en pocas horas. El Señor de la gloria tomó la tarea del esclavo y dijo que debemos lavarnos los pies unos a otros. Aquí está toda la lección en una imagen: la verdadera grandeza se arrodilla.",
-      },
-    { textEn: "27. Describe the foot-washing-and-nail service and the two-fold meaning of humility it teaches.",
-      textEs: "27. Describa el culto del lavamiento de pies y el clavo y el doble significado de humildad que enseña.",
-      kw_en: ["reenacted", "shoes", "washed", "cross", "nail", "hammering", "sinners", "die"],
-      kw_es: ["representó", "zapatos", "lavó", "cruz", "clavo", "clavar", "pecadores", "morir"],
-      modelEn: "Wayne once attended a service where the pastor reenacted the closing days of Jesus' life. Everyone was asked to remove their shoes, and each person knelt and washed another's feet, showing that humility is something we do, not merely admire. Then at the front stood a wooden cross with a nail set in it, and every one of the worshipers took a turn driving that nail in, to confess that we had all helped nail Jesus to the cross. The service teaches a two-fold humility. First, foot-washing makes humility toward others personal and embodied, a thing done on the knees. Second, the nail roots humility before God, for the deepest humility is not merely thinking ourselves lower than other people but knowing we are sinners for whom Christ had to die, and that our own pride helped drive the nail.",
-      modelEs: "Wayne una vez asistió a un culto donde el pastor representó los últimos días de la vida de Jesús. Se pidió a todos que se quitaran los zapatos, y cada persona se arrodilló y lavó los pies de otra, mostrando que la humildad es algo que hacemos, no solo que admiramos. Luego al frente había una cruz de madera con un clavo puesto en ella, y cada uno de los adoradores tomó su turno para clavar ese clavo, confesando que todos habíamos ayudado a clavar a Jesús en la cruz. El culto enseña una humildad doble. Primero, el lavamiento de pies hace personal y encarnada la humildad hacia los demás, algo hecho de rodillas. Segundo, el clavo arraiga la humildad ante Dios, pues la humildad más honda no es solo pensarnos más bajos que las demás personas sino saber que somos pecadores por quienes Cristo tuvo que morir, y que nuestra propia soberbia ayudó a clavar el clavo.",
-      },
-    { textEn: "28. What does humility look like among God's people, in leadership and in honesty about struggles?",
-      textEs: "28. ¿Cómo se ve la humildad entre el pueblo de Dios, en el liderazgo y en la honestidad sobre las luchas?",
-      kw_en: ["hierarchy", "rule over", "servants", "submitted", "burdens", "vulnerable", "image", "honest"],
-      kw_es: ["jerarquía", "enseñorean", "siervos", "sumisos", "cargas", "vulnerable", "imagen", "honesto"],
-      modelEn: "Humility has sharp implications for the church. Too often we have borrowed leadership patterns from the empire, the military, and the corporate world, building religious hierarchies where men rule over men, the very thing Jesus said should not be so among us. Pride dressed in religious clothing produces domination, manipulation, and autocratic rule, ending in personal failure, while the early church knew leaders who walked in humility, were submitted to one another, served rather than dominated, and released others into ministry. Humility also shows in a quieter way, the willingness to be honest about our own struggles. Paul says to bear one another's burdens and so fulfill the law of Christ, and it takes humility even to admit we have burdens. A proud heart hides its troubles to protect its image, but a humble heart is vulnerable and forthright, and so receives the grace God gives through others.",
-      modelEs: "La humildad tiene implicaciones agudas para la iglesia. Con demasiada frecuencia hemos tomado prestados patrones de liderazgo del imperio, lo militar, y el mundo corporativo, construyendo jerarquías religiosas donde los hombres se enseñorean de los hombres, justo lo que Jesús dijo que no debía ser así entre nosotros. La soberbia vestida de ropa religiosa produce dominación, manipulación, y gobierno autocrático, terminando en fracaso personal, mientras que la iglesia primitiva conocía líderes que andaban en humildad, sumisos unos a otros, que servían en vez de dominar, y soltaban a otros al ministerio. La humildad también se muestra de manera más callada, la disposición a ser honestos sobre nuestras propias luchas. Pablo dice que sobrellevemos los unos las cargas de los otros y cumplamos así la ley de Cristo, y hace falta humildad hasta para admitir que tenemos cargas. Un corazón soberbio esconde sus problemas para proteger su imagen, pero un corazón humilde es vulnerable y franco, y así recibe la gracia que Dios da por medio de otros.",
-      },
-    { textEn: "29. Use the Pharisee and tax collector (Luke 18) to explain the promise that God exalts the humble.",
-      textEs: "29. Use al fariseo y al publicano (Lucas 18) para explicar la promesa de que Dios exalta al humilde.",
-      kw_en: ["Pharisee", "tax collector", "mercy", "justified", "exalt", "due time", "low place", "lifting"],
-      kw_es: ["fariseo", "publicano", "misericordia", "justificado", "exaltar", "su tiempo", "lugar bajo", "levantar"],
-      modelEn: "Jesus pictured two men praying, a proud Pharisee who informed God of his virtues, and a tax collector who could only beat his breast and beg, God be merciful to me a sinner. It was the broken, humble man, not the impressive one, who went home justified, for God resists the one and gives grace to the other, and the way up really is down. There is a promise folded into the command to humble ourselves under God's mighty hand, namely that He may exalt us in due time. We are not asked to grovel in the dust forever but to take the low place and trust God to do the lifting, in His time and way. The pattern is Christ's own, who humbled Himself to the death of the cross, and therefore God highly exalted Him; what we surrender to God's mighty hand, that hand will one day raise.",
-      modelEs: "Jesús pintó a dos hombres orando, un fariseo soberbio que informaba a Dios de sus virtudes, y un publicano que solo podía herir su pecho y rogar, Dios sé propicio a mí pecador. Fue el hombre quebrantado y humilde, no el impresionante, quien descendió justificado a su casa, pues Dios resiste al uno y da gracia al otro, y el camino hacia arriba de veras es hacia abajo. Hay una promesa plegada dentro del mandamiento de humillarnos bajo la poderosa mano de Dios, a saber, que Él nos exalte a su tiempo. No se nos pide que nos arrastremos en el polvo para siempre sino que tomemos el lugar bajo y confiemos en que Dios haga el levantar, a su tiempo y a su manera. El patrón es el de Cristo mismo, que se humilló hasta la muerte de cruz, y por eso Dios le exaltó hasta lo sumo; lo que entregamos a la poderosa mano de Dios, esa mano un día lo levantará.",
-      },
-    { textEn: "30. What does it mean to 'be clothed with humility,' and how does humility free us?",
-      textEs: "30. ¿Qué significa 'revestirse de humildad,' y cómo nos libera la humildad?",
-      kw_en: ["clothed", "deliberately", "towel", "choose", "serve", "freed", "promoting", "love"],
-      kw_es: ["revestir", "deliberadamente", "toalla", "elegir", "servir", "librados", "promover", "amar"],
-      modelEn: "Peter's command comes back with all its weight and hope: be clothed with humility. It is a garment we put on deliberately, the way Jesus deliberately wrapped Himself in a towel. We do not wait to feel humble but choose to think of ourselves less, to esteem others, to take the lower place, and to serve. As we do, we discover we are not diminished but freed, freed from the exhausting work of defending and promoting ourselves, and freed to love. Humility is therefore not one more virtue to achieve but the shape of a life that has caught the mind of Christ, the God who left His throne, took a towel, and knelt. To be humble is to follow Him down, confident that the God who raised Him will in due time raise all who walk that downward road with Him, for God resists the proud but to the humble gives grace upon grace.",
-      modelEs: "El mandamiento de Pedro vuelve con todo su peso y su esperanza: revestíos de humildad. Es una prenda que nos ponemos deliberadamente, como Jesús deliberadamente se ciñó una toalla. No esperamos a sentirnos humildes sino que elegimos pensar menos en nosotros mismos, estimar a los demás, tomar el lugar más bajo, y servir. Al hacerlo, descubrimos que no somos disminuidos sino librados, librados del agotador trabajo de defendernos y promovernos, y librados para amar. La humildad, por tanto, no es una virtud más que alcanzar sino la forma de una vida que ha captado la mente de Cristo, el Dios que dejó su trono, tomó una toalla, y se arrodilló. Ser humilde es seguirlo hacia abajo, confiados en que el Dios que lo levantó, a su tiempo, levantará a todos los que caminen ese camino descendente con Él, pues Dios resiste a los soberbios pero al humilde da gracia sobre gracia.",
-      }
-];
+/* CTSRadical — unit 7. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "radical",
+ "unit": 7,
+ "totalUnits": 13,
+ "filePrefix": "CTSRadical",
+ "prevHref": "CTSRadicalUnit6.html",
+ "nextHref": "CTSRadicalUnit8.html",
+ "unitTitles": {
+  "en": [
+   "Unit 1 - Foundation: Old Wineskins, New Wine",
+   "Unit 2 - What Jesus Did With the Law",
+   "Unit 3 - Love God",
+   "Unit 4 - Love Neighbor",
+   "Unit 5 - Be Holy",
+   "Unit 6 - Be Forgiving",
+   "Unit 7 - Be Humble",
+   "Unit 8 - Be Generous",
+   "Unit 9 - Trust God",
+   "Unit 10 - Be Prayerful",
+   "Unit 11 - Be Kind",
+   "Unit 12 - Be a Disciplemaker",
+   "Unit 13 - Capstone: Turning the World Upside Down"
+  ],
+  "es": [
+   "Unit 1 - Foundation: Old Wineskins, New Wine",
+   "Unit 2 - What Jesus Did With the Law",
+   "Unit 3 - Love God",
+   "Unit 4 - Love Neighbor",
+   "Unit 5 - Be Holy",
+   "Unit 6 - Be Forgiving",
+   "Unit 7 - Be Humble",
+   "Unit 8 - Be Generous",
+   "Unit 9 - Trust God",
+   "Unit 10 - Be Prayerful",
+   "Unit 11 - Be Kind",
+   "Unit 12 - Be a Disciplemaker",
+   "Unit 13 - Capstone: Turning the World Upside Down"
+  ]
+ },
+ "mc": [
+  {
+   "stem": {
+    "en": "According to 1 Peter 5:5, how does God respond to the proud and to the humble?",
+    "es": "Según 1 Pedro 5:5, ¿cómo responde Dios a los soberbios y a los humildes?"
+   },
+   "options": {
+    "en": [
+     "He blesses both equally",
+     "He resists the proud but gives grace to the humble",
+     "He ignores the proud",
+     "He tests the humble"
+    ],
+    "es": [
+     "Bendice a ambos por igual",
+     "Resiste a los soberbios pero da gracia a los humildes",
+     "Ignora a los soberbios",
+     "Prueba a los humildes"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "God actively resists the proud but gives grace to the humble; pride sets a person against grace, while humility opens the heart to receive it.",
+    "es": "Dios resiste activamente a los soberbios pero da gracia a los humildes; la soberbia pone a la persona contra la gracia, la humildad abre el corazón para recibirla."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is the 'inverted economy' of the Christian life described in the lesson?",
+    "es": "¿Cuál es la 'economía invertida' de la vida cristiana que describe la lección?"
+   },
+   "options": {
+    "en": [
+     "Work harder to climb higher",
+     "Wealth proves God's favor",
+     "The way up is down — we humble ourselves and let God exalt us",
+     "Self-promotion is rewarded"
+    ],
+    "es": [
+     "Trabajar más para escalar más alto",
+     "La riqueza prueba el favor de Dios",
+     "El camino hacia arriba es hacia abajo — nos humillamos y dejamos que Dios nos exalte",
+     "La autopromoción es recompensada"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The way up is down: we humble ourselves under God's mighty hand and trust Him to exalt us in due time, rather than climbing by self-promotion.",
+    "es": "El camino hacia arriba es hacia abajo: nos humillamos bajo la poderosa mano de Dios y confiamos en que Él nos exalte a su tiempo, en vez de escalar por autopromoción."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to the lesson, what is humility NOT?",
+    "es": "Según la lección, ¿qué NO es la humildad?"
+   },
+   "options": {
+    "en": [
+     "Self-hatred or a low opinion of oneself",
+     "Thinking of oneself less",
+     "Esteeming others",
+     "Receiving correction calmly"
+    ],
+    "es": [
+     "El odio a uno mismo o una baja opinión de uno mismo",
+     "Pensar menos en uno mismo",
+     "Estimar a los demás",
+     "Recibir la corrección con calma"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Humility is not self-hatred or a low opinion of oneself; the proud and the self-loathing are alike absorbed with self.",
+    "es": "La humildad no es el odio a uno mismo ni una baja opinión de uno mismo; el soberbio y el que se desprecia están igualmente absortos en sí mismos."
+   }
+  },
+  {
+   "stem": {
+    "en": "The lesson sums up humility with which memorable line?",
+    "es": "La lección resume la humildad con ¿cuál frase memorable?"
+   },
+   "options": {
+    "en": [
+     "Think the worst of yourself",
+     "Always put yourself first",
+     "Never accept a compliment",
+     "True servants don't think less of themselves; they think of themselves less"
+    ],
+    "es": [
+     "Piensa lo peor de ti mismo",
+     "Ponte siempre primero",
+     "Nunca aceptes un elogio",
+     "Los verdaderos siervos no piensan menos de sí mismos; piensan menos en sí mismos"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Humility is not thinking poorly of yourself; true servants don't think less of themselves, they simply think of themselves less.",
+    "es": "La humildad no es pensar mal de ti mismo; los verdaderos siervos no piensan menos de sí mismos, sencillamente piensan menos en sí mismos."
+   }
+  },
+  {
+   "stem": {
+    "en": "Why does the lesson call pride 'the root sin'?",
+    "es": "¿Por qué llama la lección a la soberbia 'el pecado raíz'?"
+   },
+   "options": {
+    "en": [
+     "It only affects leaders",
+     "It is the least common sin",
+     "It is the self-exaltation tangled into every other sin — the creature usurping God's throne",
+     "It is harmless"
+    ],
+    "es": [
+     "Solo afecta a los líderes",
+     "Es el pecado menos común",
+     "Es la autoexaltación enredada en todo otro pecado — la criatura usurpando el trono de Dios",
+     "Es inofensiva"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Pride is closer to the root of all sin: the desire to be as God, to sit at the center where only God belongs; every other sin has that self-exaltation in it.",
+    "es": "La soberbia está más cerca de la raíz de todo pecado: el deseo de ser como Dios, de sentarse en el centro donde solo Dios pertenece; todo otro pecado tiene esa autoexaltación."
+   }
+  },
+  {
+   "stem": {
+    "en": "What 'false gods' did Charles Colson say we must repent of?",
+    "es": "¿De qué 'falsos dioses' dijo Charles Colson que debemos arrepentirnos?"
+   },
+   "options": {
+    "en": [
+     "Family and friendship",
+     "Materialism, power, success, and personal autonomy",
+     "Rest and leisure",
+     "Art and music"
+    ],
+    "es": [
+     "La familia y la amistad",
+     "El materialismo, el poder, el éxito, y la autonomía personal",
+     "El descanso y el ocio",
+     "El arte y la música"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Colson said we must repent of idolatry — the false gods of materialism, power, success, and personal autonomy — each a way of making ourselves the center.",
+    "es": "Colson dijo que debemos arrepentirnos de la idolatría — los falsos dioses del materialismo, el poder, el éxito y la autonomía personal — cada uno una manera de hacernos el centro."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to Philippians 2, what is the deepest reason to be humble?",
+    "es": "Según Filipenses 2, ¿cuál es la razón más honda para ser humilde?"
+   },
+   "options": {
+    "en": [
+     "Humility is the very mind of Christ, who made Himself of no reputation",
+     "It impresses others",
+     "It earns rewards",
+     "It avoids conflict"
+    ],
+    "es": [
+     "La humildad es la mismísima mente de Cristo, que se anonadó a sí mismo",
+     "Impresiona a los demás",
+     "Gana recompensas",
+     "Evita el conflicto"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Humility is the mind of Christ: being in the form of God, He made Himself of no reputation, took the form of a servant, and humbled Himself to death on a cross.",
+    "es": "La humildad es la mente de Cristo: siendo en forma de Dios, se anonadó a sí mismo, tomó forma de siervo, y se humilló hasta la muerte de cruz."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does it mean that humility is 'Christlikeness,' not a technique?",
+    "es": "¿Qué significa que la humildad es 'semejanza a Cristo,' no una técnica?"
+   },
+   "options": {
+    "en": [
+     "It is a personality trait some are born with",
+     "It is a skill mastered by practice alone",
+     "It is unrelated to Christ",
+     "When we lower ourselves to serve and esteem others, we think the very thoughts of Jesus"
+    ],
+    "es": [
+     "Es un rasgo de personalidad con que algunos nacen",
+     "Es una destreza dominada solo por la práctica",
+     "No tiene relación con Cristo",
+     "Cuando nos abajamos para servir y estimar a otros, pensamos los mismísimos pensamientos de Jesús"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Humility is Christlikeness: lowering ourselves to serve and esteem others, we walk the downward path Jesus walked and let His mind be in us.",
+    "es": "La humildad es semejanza a Cristo: al abajarnos para servir y estimar a otros, caminamos el sendero descendente que Jesús caminó y dejamos que su mente esté en nosotros."
+   }
+  },
+  {
+   "stem": {
+    "en": "How does Colson say the world's standards compare to God's?",
+    "es": "¿Cómo dice Colson que los criterios del mundo se comparan con los de Dios?"
+   },
+   "options": {
+    "en": [
+     "They mostly agree",
+     "Every standard the world uses is the opposite of God's measure",
+     "They are irrelevant",
+     "God adopts the world's standards"
+    ],
+    "es": [
+     "Concuerdan en su mayoría",
+     "Todo criterio que usa el mundo es lo opuesto de la medida de Dios",
+     "Son irrelevantes",
+     "Dios adopta los criterios del mundo"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Every standard the world uses to judge men is the opposite of God's: the world prizes riches, recognition, and power; God exalts the poor in spirit, the humble, the servant.",
+    "es": "Todo criterio que el mundo usa para juzgar es lo opuesto del de Dios: el mundo aprecia riquezas, reconocimiento y poder; Dios exalta al pobre en espíritu, al humilde, al siervo."
+   }
+  },
+  {
+   "stem": {
+    "en": "In Matthew 20:25-28, how did Jesus redirect the desire for greatness?",
+    "es": "En Mateo 20:25-28, ¿cómo redirigió Jesús el deseo de grandeza?"
+   },
+   "options": {
+    "en": [
+     "Whoever desires to be great must become a servant",
+     "He forbade greatness entirely",
+     "He said the strongest should rule",
+     "He said greatness is impossible"
+    ],
+    "es": [
+     "El que desee ser grande debe hacerse siervo",
+     "Prohibió la grandeza por completo",
+     "Dijo que el más fuerte debe gobernar",
+     "Dijo que la grandeza es imposible"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Jesus did not abolish greatness but redirected it: it shall not be so among you; whoever would be great must be a servant, as He came to serve and give His life.",
+    "es": "Jesús no abolió la grandeza sino que la redirigió: entre vosotros no será así; el que quiera ser grande debe ser siervo, como Él vino a servir y dar su vida."
+   }
+  },
+  {
+   "stem": {
+    "en": "Whose feet did Jesus wash on the night He was betrayed, and what is striking about it?",
+    "es": "¿Los pies de quién lavó Jesús la noche en que fue entregado, y qué es notable de ello?"
+   },
+   "options": {
+    "en": [
+     "Only Peter's, to honor him",
+     "No one's; He only taught about it",
+     "Only the eleven faithful disciples",
+     "His disciples' feet, including Judas's, who would soon betray Him"
+    ],
+    "es": [
+     "Solo los de Pedro, para honrarlo",
+     "Los de nadie; solo enseñó sobre ello",
+     "Solo los de los once discípulos fieles",
+     "Los pies de sus discípulos, incluidos los de Judas, que pronto lo traicionaría"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The Lord of glory took the slave's task and washed His disciples' feet — even Judas's — then said we ought to wash one another's feet. Real greatness kneels.",
+    "es": "El Señor de la gloria tomó la tarea del esclavo y lavó los pies de sus discípulos — aun los de Judas — y dijo que debemos lavarnos los pies unos a otros. La verdadera grandeza se arrodilla."
+   }
+  },
+  {
+   "stem": {
+    "en": "In the service Wayne attended, what did hammering the nail into the cross represent?",
+    "es": "En el culto al que Wayne asistió, ¿qué representaba clavar el clavo en la cruz?"
+   },
+   "options": {
+    "en": [
+     "That Jesus was a victim of Rome alone",
+     "A symbol of carpentry skill",
+     "That we all had a hand in nailing Jesus to the cross — humility before God as sinners",
+     "That suffering is meaningless"
+    ],
+    "es": [
+     "Que Jesús fue víctima solo de Roma",
+     "Un símbolo de destreza en carpintería",
+     "Que todos tuvimos parte en clavar a Jesús en la cruz — humildad ante Dios como pecadores",
+     "Que el sufrimiento no tiene sentido"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Each person drove the nail to confess that we all helped nail Jesus to the cross; the deepest humility is knowing we are sinners for whom Christ had to die.",
+    "es": "Cada persona clavó el clavo para confesar que todos ayudamos a clavar a Jesús en la cruz; la humildad más honda es saber que somos pecadores por quienes Cristo tuvo que morir."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does the lesson say about borrowing leadership patterns from empire and corporation?",
+    "es": "¿Qué dice la lección sobre tomar prestados patrones de liderazgo del imperio y la corporación?"
+   },
+   "options": {
+    "en": [
+     "They guarantee humility",
+     "They are ideal for the church",
+     "They should be expanded",
+     "They build religious hierarchies where men rule over men, contrary to Jesus"
+    ],
+    "es": [
+     "Garantizan la humildad",
+     "Son ideales para la iglesia",
+     "Deberían ampliarse",
+     "Construyen jerarquías religiosas donde los hombres se enseñorean, contrario a Jesús"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Borrowing patterns from empire, military, and corporation builds hierarchies where men rule over men — pride in religious clothing, the very thing Jesus said should not be so.",
+    "es": "Tomar patrones del imperio, lo militar y la corporación construye jerarquías donde los hombres se enseñorean — soberbia con ropa religiosa, justo lo que Jesús dijo que no debía ser así."
+   }
+  },
+  {
+   "stem": {
+    "en": "How does Galatians 6:2 ('bear one another's burdens') connect to humility?",
+    "es": "¿Cómo conecta Gálatas 6:2 ('sobrellevad las cargas') con la humildad?"
+   },
+   "options": {
+    "en": [
+     "It teaches self-sufficiency",
+     "It applies only to leaders",
+     "It takes humility to admit we have burdens and let others help us",
+     "It discourages vulnerability"
+    ],
+    "es": [
+     "Enseña la autosuficiencia",
+     "Aplica solo a líderes",
+     "Hace falta humildad para admitir que tenemos cargas y dejar que otros nos ayuden",
+     "Desalienta la vulnerabilidad"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "It takes humility to admit we have burdens; a proud heart hides its troubles to protect its image, but a humble heart is vulnerable and lets others help.",
+    "es": "Hace falta humildad para admitir que tenemos cargas; un corazón soberbio esconde sus problemas para proteger su imagen, pero un corazón humilde es vulnerable y deja que otros ayuden."
+   }
+  },
+  {
+   "stem": {
+    "en": "In the parable of the Pharisee and tax collector (Luke 18), who went home justified?",
+    "es": "En la parábola del fariseo y el publicano (Lucas 18), ¿quién descendió justificado a su casa?"
+   },
+   "options": {
+    "en": [
+     "The tax collector who begged, 'God, be merciful to me a sinner'",
+     "Both equally",
+     "The Pharisee who listed his virtues",
+     "Neither"
+    ],
+    "es": [
+     "El publicano que rogó: 'Dios, sé propicio a mí, pecador'",
+     "Ambos por igual",
+     "El fariseo que enumeró sus virtudes",
+     "Ninguno"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The broken, humble tax collector — not the impressive Pharisee — went home justified; God resists the one and gives grace to the other.",
+    "es": "El publicano quebrantado y humilde — no el fariseo impresionante — descendió justificado; Dios resiste al uno y da gracia al otro."
+   }
+  },
+  {
+   "stem": {
+    "en": "What promise is folded into 'humble yourselves under the mighty hand of God'?",
+    "es": "¿Qué promesa está plegada en 'humillaos bajo la poderosa mano de Dios'?"
+   },
+   "options": {
+    "en": [
+     "That we will grovel forever",
+     "That He may exalt us in due time",
+     "That we will become rich",
+     "That we will never suffer"
+    ],
+    "es": [
+     "Que nos arrastraremos para siempre",
+     "Que él nos exalte a su tiempo",
+     "Que nos haremos ricos",
+     "Que nunca sufriremos"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "We take the low place and trust God to do the lifting, in His time and way — 'that He may exalt you in due time.'",
+    "es": "Tomamos el lugar bajo y confiamos en que Dios haga el levantar, a su tiempo y a su manera — 'para que él os exalte cuando fuere tiempo.'"
+   }
+  },
+  {
+   "stem": {
+    "en": "How is Christ Himself the pattern of humble-then-exalted?",
+    "es": "¿Cómo es Cristo mismo el patrón de humillado-luego-exaltado?"
+   },
+   "options": {
+    "en": [
+     "He humbled Himself to death on a cross, therefore God highly exalted Him",
+     "He avoided suffering",
+     "He exalted Himself first",
+     "He was never exalted"
+    ],
+    "es": [
+     "Se humilló hasta la muerte de cruz, por eso Dios le exaltó hasta lo sumo",
+     "Evitó el sufrimiento",
+     "Se exaltó a sí mismo primero",
+     "Nunca fue exaltado"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Christ humbled Himself to the death of the cross, and therefore God highly exalted Him and gave Him the name above every name — the descent was real, and so was the exaltation.",
+    "es": "Cristo se humilló hasta la muerte de cruz, y por eso Dios le exaltó hasta lo sumo y le dio el nombre sobre todo nombre — el descenso fue real, y también la exaltación."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does it mean to 'be clothed with humility'?",
+    "es": "¿Qué significa 'revestirse de humildad'?"
+   },
+   "options": {
+    "en": [
+     "To wait until we feel humble",
+     "To deliberately put it on — choosing to think of ourselves less and serve, as Jesus wrapped a towel",
+     "To hide our gifts",
+     "To dress plainly"
+    ],
+    "es": [
+     "Esperar hasta sentirnos humildes",
+     "Ponérsela deliberadamente — eligiendo pensar menos en nosotros y servir, como Jesús se ciñó una toalla",
+     "Esconder nuestros dones",
+     "Vestir con sencillez"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Humility is a garment we put on deliberately, as Jesus wrapped Himself in a towel; we don't wait to feel it but choose to serve and esteem others.",
+    "es": "La humildad es una prenda que nos ponemos deliberadamente, como Jesús se ciñó una toalla; no esperamos a sentirla sino que elegimos servir y estimar a los demás."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to the lesson, how does humility actually free us?",
+    "es": "Según la lección, ¿cómo nos libera de veras la humildad?"
+   },
+   "options": {
+    "en": [
+     "By making us wealthy",
+     "By removing all responsibility",
+     "By making us invisible",
+     "It frees us from the exhausting work of defending and promoting ourselves, freeing us to love"
+    ],
+    "es": [
+     "Haciéndonos ricos",
+     "Quitando toda responsabilidad",
+     "Haciéndonos invisibles",
+     "Nos libra del agotador trabajo de defendernos y promovernos, librándonos para amar"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Humility frees us from the exhausting race for status and the work of defending and promoting ourselves, freeing us instead to love.",
+    "es": "La humildad nos libra de la agotadora carrera por el estatus y del trabajo de defendernos y promovernos, librándonos en cambio para amar."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is the final picture of humility the lesson leaves us with?",
+    "es": "¿Cuál es la imagen final de la humildad que nos deja la lección?"
+   },
+   "options": {
+    "en": [
+     "A throne and a crown",
+     "A ladder to climb",
+     "The God who left His throne, took a towel, and knelt — humility as following Him down",
+     "A trophy to win"
+    ],
+    "es": [
+     "Un trono y una corona",
+     "Una escalera que escalar",
+     "El Dios que dejó su trono, tomó una toalla, y se arrodilló — la humildad como seguirlo hacia abajo",
+     "Un trofeo que ganar"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Humility is the shape of a life that caught the mind of Christ — the God who left His throne, took a towel, and knelt; to be humble is to follow Him down.",
+    "es": "La humildad es la forma de una vida que captó la mente de Cristo — el Dios que dejó su trono, tomó una toalla, y se arrodilló; ser humilde es seguirlo hacia abajo."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Explain the 'divine economy' of 1 Peter 5:5-6 and why pride and humility matter so much to God.",
+    "es": "Explique la 'economía divina' de 1 Pedro 5:5-6 y por qué la soberbia y la humildad le importan tanto a Dios."
+   },
+   "keywords": {
+    "en": [
+     "resists",
+     "proud",
+     "grace",
+     "humble",
+     "down",
+     "exalt",
+     "due time",
+     "surrender"
+    ],
+    "es": [
+     "resiste",
+     "soberbios",
+     "gracia",
+     "humildes",
+     "abajo",
+     "exalte",
+     "su tiempo",
+     "entrega"
+    ]
+   },
+   "model": {
+    "en": "Peter says God resists the proud but gives grace to the humble, and then tells us to humble ourselves under God's mighty hand that He may exalt us in due time. This reveals an inverted economy in which the way up is down. Pride does not merely displease God; it sets a person against the very current of His grace, while humility opens the heart to receive it. So the whole Christian life runs on surrender rather than self-promotion: we lower ourselves and trust God to lift us in His own time and way. This is not a strategy for getting exalted, which would be pride wearing humility's clothes, but a genuine surrender that leaves the lifting to God.",
+    "es": "Pedro dice que Dios resiste a los soberbios pero da gracia a los humildes, y luego nos dice que nos humillemos bajo la poderosa mano de Dios para que Él nos exalte a su tiempo. Esto revela una economía invertida en la cual el camino hacia arriba es hacia abajo. La soberbia no solo desagrada a Dios; pone a la persona contra la corriente misma de su gracia, mientras que la humildad abre el corazón para recibirla. Así que toda la vida cristiana corre sobre la entrega y no la autopromoción: nos abajamos y confiamos en que Dios nos levante a su tiempo y a su manera. Esto no es una estrategia para ser exaltados, lo cual sería soberbia vestida de humildad, sino una entrega genuina que deja el levantar en manos de Dios."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What is humility, and what is it NOT? Use the line about thinking of oneself less.",
+    "es": "¿Qué es la humildad, y qué NO es? Use la frase sobre pensar menos en uno mismo."
+   },
+   "keywords": {
+    "en": [
+     "self-hatred",
+     "less",
+     "absorbed",
+     "esteem",
+     "others",
+     "gift",
+     "outward",
+     "worth"
+    ],
+    "es": [
+     "odio",
+     "menos",
+     "absortos",
+     "estimar",
+     "otros",
+     "don",
+     "afuera",
+     "valor"
+    ]
+   },
+   "model": {
+    "en": "Humility is easily misunderstood as self-hatred, groveling, or a low opinion of oneself, but that is not what Scripture means. As it has well been said, true servants do not think less of themselves; they simply think of themselves less. The proud person and the self-loathing person are alike in one way, for both are absorbed with themselves, and humility is the freedom of a self that has stopped staring at itself. Paul gives its positive shape: in lowliness of mind let each esteem others better than himself. Humility looks outward and upward, reckoning others worth genuine care and God worthy of all. It does not deny our gifts but remembers that whatever we have is a gift received, so the humble person takes a compliment or a correction with the same steadiness, since his sense of worth rests on neither.",
+    "es": "La humildad se malentiende fácilmente como odio a uno mismo, servilismo, o una baja opinión de uno mismo, pero no es eso lo que la Escritura quiere decir. Como bien se ha dicho, los verdaderos siervos no piensan menos de sí mismos; sencillamente piensan menos en sí mismos. El soberbio y el que se desprecia se parecen en una cosa, pues ambos están absortos en sí mismos, y la humildad es la libertad de un yo que ha dejado de mirarse. Pablo da su forma positiva: con humildad, estimando cada uno a los demás como superiores a sí mismo. La humildad mira hacia afuera y hacia arriba, considerando a los otros dignos de verdadero cuidado y a Dios digno de todo. No niega nuestros dones sino que recuerda que todo lo que tenemos es un don recibido, así que el humilde toma un elogio o una corrección con la misma serenidad, ya que su sentido de valor no descansa en ninguno."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why does the lesson call pride 'the root sin,' and what false gods does Colson name?",
+    "es": "¿Por qué llama la lección a la soberbia 'el pecado raíz,' y qué falsos dioses nombra Colson?"
+   },
+   "keywords": {
+    "en": [
+     "root",
+     "destruction",
+     "creature",
+     "throne",
+     "Colson",
+     "materialism",
+     "power",
+     "center"
+    ],
+    "es": [
+     "raíz",
+     "destrucción",
+     "criatura",
+     "trono",
+     "Colson",
+     "materialismo",
+     "poder",
+     "centro"
+    ]
+   },
+   "model": {
+    "en": "Pride is not just one sin among many but closer to the root of them all, for pride goes before destruction and a haughty spirit before a fall. It was pride that first turned a creature against the Creator, the desire to be as God and to sit at the center where only God belongs, and every other sin has some of that self-exaltation tangled into it. This is why God must resist the proud: pride is the human heart usurping God's throne, and His opposition to it is mercy, not cruelty. Charles Colson named its modern forms, saying we must repent of the false gods of materialism, power, success, and personal autonomy, each a way of making ourselves the center. Humility is simply the truth coming back into focus, that God is God and we are His creatures dependent on Him for every breath.",
+    "es": "La soberbia no es solo un pecado entre muchos sino más cerca de ser la raíz de todos, pues antes del quebrantamiento es la soberbia y antes de la caída la altivez de espíritu. Fue la soberbia lo que primero volvió a una criatura contra el Creador, el deseo de ser como Dios y de sentarse en el centro donde solo Dios pertenece, y todo otro pecado tiene algo de esa autoexaltación enredada. Por esto Dios debe resistir a los soberbios: la soberbia es el corazón humano usurpando el trono de Dios, y su oposición es misericordia, no crueldad. Charles Colson nombró sus formas modernas, diciendo que debemos arrepentirnos de los falsos dioses del materialismo, el poder, el éxito, y la autonomía personal, cada uno una manera de hacernos el centro. La humildad es sencillamente la verdad volviendo a enfocarse, que Dios es Dios y nosotros somos sus criaturas dependientes de Él por cada aliento."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain how Philippians 2:5-8 shows humility to be the mind of Christ.",
+    "es": "Explique cómo Filipenses 2:5-8 muestra que la humildad es la mente de Cristo."
+   },
+   "keywords": {
+    "en": [
+     "mind of Christ",
+     "reputation",
+     "servant",
+     "humbled",
+     "cross",
+     "downward",
+     "Christlikeness",
+     "rights"
+    ],
+    "es": [
+     "mente de Cristo",
+     "reputación",
+     "siervo",
+     "humilló",
+     "cruz",
+     "descendente",
+     "semejanza a Cristo",
+     "derechos"
+    ]
+   },
+   "model": {
+    "en": "The deepest reason to be humble is that humility is the very mind of Christ. He who was God in His own right did not cling to His rights but made Himself of no reputation, took the form of a servant, and humbled Himself all the way down to the death of the cross. The whole movement of His life was downward, from heaven's throne to a manger, from glory to a cross, and every step of that descent was service. This means humility is not finally a technique or personality trait but Christlikeness. When we lower ourselves to serve, esteem others, and refuse to grasp at our rights, we are thinking the very thoughts of Jesus and walking the path He walked. The call to be humble is the call to let this mind be in us which was also in Christ Jesus, letting His self-giving love become our pattern.",
+    "es": "La razón más honda para ser humildes es que la humildad es la mismísima mente de Cristo. Él, que era Dios por derecho propio, no se aferró a sus derechos sino que se anonadó a sí mismo, tomó forma de siervo, y se humilló todo el camino hasta la muerte de cruz. Todo el movimiento de su vida fue hacia abajo, del trono del cielo a un pesebre, de la gloria a una cruz, y cada paso de ese descenso fue servicio. Esto significa que la humildad no es al final una técnica ni un rasgo de personalidad sino la semejanza a Cristo. Cuando nos abajamos para servir, estimar a otros, y rehusar aferrarnos a nuestros derechos, pensamos los mismísimos pensamientos de Jesús y caminamos el sendero que Él caminó. El llamado a ser humildes es el llamado a tener este sentir que hubo en Cristo Jesús, dejando que su amor abnegado se vuelva nuestro patrón."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How does the gospel invert the world's ladder of values? Use Colson's contrasts.",
+    "es": "¿Cómo invierte el evangelio la escalera de valores del mundo? Use los contrastes de Colson."
+   },
+   "keywords": {
+    "en": [
+     "opposite",
+     "rich",
+     "recognized",
+     "powerful",
+     "servant",
+     "ladder",
+     "kingdom",
+     "freeing"
+    ],
+    "es": [
+     "opuesto",
+     "rico",
+     "reconocido",
+     "poderoso",
+     "siervo",
+     "escalera",
+     "reino",
+     "liberadora"
+    ]
+   },
+   "model": {
+    "en": "Once we see the mind of Christ, we realize how completely it overturns the world's scale of values. As Colson put it, every standard the world uses to judge men is the opposite of God's measure. The world says to be rich is to be blessed, but God blesses the poor in spirit. The world says to be recognized and applauded is to have arrived, but God exalts the humble. The world says to be powerful is to be great, but Jesus says you must become a servant to be great. This is not a minor adjustment to the world's ladder but a different ladder entirely, pointing the other direction, for the kingdom of God does not run on the same fuel as the kingdoms of men. This is freeing news, because the whole exhausting race for status is one we are free to step out of, since in Christ the lowest place has become the place of honor.",
+    "es": "Una vez que vemos la mente de Cristo, nos damos cuenta de cuán completamente trastorna la escala de valores del mundo. Como dijo Colson, todo criterio que el mundo usa para juzgar a los hombres es lo opuesto de la medida de Dios. El mundo dice que ser rico es ser bendecido, pero Dios bendice al pobre en espíritu. El mundo dice que ser reconocido y aplaudido es haber llegado, pero Dios exalta al humilde. El mundo dice que ser poderoso es ser grande, pero Jesús dice que debes hacerte siervo para ser grande. Esto no es un ajuste menor a la escalera del mundo sino una escalera enteramente distinta, que apunta en la otra dirección, pues el reino de Dios no funciona con el mismo combustible que los reinos de los hombres. Ésta es noticia liberadora, porque toda la agotadora carrera por el estatus es una de la que somos libres para salir, ya que en Cristo el lugar más bajo se ha vuelto el lugar de honor."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain Matthew 20:25-28 and how the foot-washing of John 13 shows that 'real greatness kneels.'",
+    "es": "Explique Mateo 20:25-28 y cómo el lavamiento de pies de Juan 13 muestra que 'la verdadera grandeza se arrodilla.'"
+   },
+   "keywords": {
+    "en": [
+     "greatness",
+     "servant",
+     "lord it over",
+     "ransom",
+     "towel",
+     "Judas",
+     "kneels",
+     "wash"
+    ],
+    "es": [
+     "grandeza",
+     "siervo",
+     "enseñorean",
+     "rescate",
+     "toalla",
+     "Judas",
+     "arrodilla",
+     "lavar"
+    ]
+   },
+   "model": {
+    "en": "Jesus did not abolish the desire for greatness but redirected it, saying it shall not be so among you. Among the nations the rulers lord it over people, and greatness means having others under you, but in the kingdom greatness means getting under others to lift them, so whoever would be great must be a servant. He proves it by example, for the Son of Man came not to be served but to serve and to give His life a ransom for many. On the night He was betrayed, knowing the Father had given all things into His hands, Jesus rose, wrapped a towel around His waist, and washed His disciples' feet, including the feet of Judas who would betray Him within hours. The Lord of glory took the slave's task and said we ought to wash one another's feet. Here is the whole lesson in one picture: real greatness kneels.",
+    "es": "Jesús no abolió el deseo de grandeza sino que lo redirigió, diciendo que entre vosotros no será así. Entre las naciones los príncipes se enseñorean de la gente, y la grandeza significa tener a otros bajo uno, pero en el reino la grandeza significa ponerse debajo de otros para levantarlos, así que el que quiera ser grande debe ser siervo. Lo prueba con el ejemplo, pues el Hijo del Hombre no vino para ser servido sino para servir y dar su vida en rescate por muchos. La noche en que fue entregado, sabiendo que el Padre había puesto todas las cosas en sus manos, Jesús se levantó, se ciñó una toalla a la cintura, y lavó los pies de sus discípulos, incluidos los pies de Judas que lo traicionaría en pocas horas. El Señor de la gloria tomó la tarea del esclavo y dijo que debemos lavarnos los pies unos a otros. Aquí está toda la lección en una imagen: la verdadera grandeza se arrodilla."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the foot-washing-and-nail service and the two-fold meaning of humility it teaches.",
+    "es": "Describa el culto del lavamiento de pies y el clavo y el doble significado de humildad que enseña."
+   },
+   "keywords": {
+    "en": [
+     "reenacted",
+     "shoes",
+     "washed",
+     "cross",
+     "nail",
+     "hammering",
+     "sinners",
+     "die"
+    ],
+    "es": [
+     "representó",
+     "zapatos",
+     "lavó",
+     "cruz",
+     "clavo",
+     "clavar",
+     "pecadores",
+     "morir"
+    ]
+   },
+   "model": {
+    "en": "Wayne once attended a service where the pastor reenacted the closing days of Jesus' life. Everyone was asked to remove their shoes, and each person knelt and washed another's feet, showing that humility is something we do, not merely admire. Then at the front stood a wooden cross with a nail set in it, and every one of the worshipers took a turn driving that nail in, to confess that we had all helped nail Jesus to the cross. The service teaches a two-fold humility. First, foot-washing makes humility toward others personal and embodied, a thing done on the knees. Second, the nail roots humility before God, for the deepest humility is not merely thinking ourselves lower than other people but knowing we are sinners for whom Christ had to die, and that our own pride helped drive the nail.",
+    "es": "Wayne una vez asistió a un culto donde el pastor representó los últimos días de la vida de Jesús. Se pidió a todos que se quitaran los zapatos, y cada persona se arrodilló y lavó los pies de otra, mostrando que la humildad es algo que hacemos, no solo que admiramos. Luego al frente había una cruz de madera con un clavo puesto en ella, y cada uno de los adoradores tomó su turno para clavar ese clavo, confesando que todos habíamos ayudado a clavar a Jesús en la cruz. El culto enseña una humildad doble. Primero, el lavamiento de pies hace personal y encarnada la humildad hacia los demás, algo hecho de rodillas. Segundo, el clavo arraiga la humildad ante Dios, pues la humildad más honda no es solo pensarnos más bajos que las demás personas sino saber que somos pecadores por quienes Cristo tuvo que morir, y que nuestra propia soberbia ayudó a clavar el clavo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does humility look like among God's people, in leadership and in honesty about struggles?",
+    "es": "¿Cómo se ve la humildad entre el pueblo de Dios, en el liderazgo y en la honestidad sobre las luchas?"
+   },
+   "keywords": {
+    "en": [
+     "hierarchy",
+     "rule over",
+     "servants",
+     "submitted",
+     "burdens",
+     "vulnerable",
+     "image",
+     "honest"
+    ],
+    "es": [
+     "jerarquía",
+     "enseñorean",
+     "siervos",
+     "sumisos",
+     "cargas",
+     "vulnerable",
+     "imagen",
+     "honesto"
+    ]
+   },
+   "model": {
+    "en": "Humility has sharp implications for the church. Too often we have borrowed leadership patterns from the empire, the military, and the corporate world, building religious hierarchies where men rule over men, the very thing Jesus said should not be so among us. Pride dressed in religious clothing produces domination, manipulation, and autocratic rule, ending in personal failure, while the early church knew leaders who walked in humility, were submitted to one another, served rather than dominated, and released others into ministry. Humility also shows in a quieter way, the willingness to be honest about our own struggles. Paul says to bear one another's burdens and so fulfill the law of Christ, and it takes humility even to admit we have burdens. A proud heart hides its troubles to protect its image, but a humble heart is vulnerable and forthright, and so receives the grace God gives through others.",
+    "es": "La humildad tiene implicaciones agudas para la iglesia. Con demasiada frecuencia hemos tomado prestados patrones de liderazgo del imperio, lo militar, y el mundo corporativo, construyendo jerarquías religiosas donde los hombres se enseñorean de los hombres, justo lo que Jesús dijo que no debía ser así entre nosotros. La soberbia vestida de ropa religiosa produce dominación, manipulación, y gobierno autocrático, terminando en fracaso personal, mientras que la iglesia primitiva conocía líderes que andaban en humildad, sumisos unos a otros, que servían en vez de dominar, y soltaban a otros al ministerio. La humildad también se muestra de manera más callada, la disposición a ser honestos sobre nuestras propias luchas. Pablo dice que sobrellevemos los unos las cargas de los otros y cumplamos así la ley de Cristo, y hace falta humildad hasta para admitir que tenemos cargas. Un corazón soberbio esconde sus problemas para proteger su imagen, pero un corazón humilde es vulnerable y franco, y así recibe la gracia que Dios da por medio de otros."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Use the Pharisee and tax collector (Luke 18) to explain the promise that God exalts the humble.",
+    "es": "Use al fariseo y al publicano (Lucas 18) para explicar la promesa de que Dios exalta al humilde."
+   },
+   "keywords": {
+    "en": [
+     "Pharisee",
+     "tax collector",
+     "mercy",
+     "justified",
+     "exalt",
+     "due time",
+     "low place",
+     "lifting"
+    ],
+    "es": [
+     "fariseo",
+     "publicano",
+     "misericordia",
+     "justificado",
+     "exaltar",
+     "su tiempo",
+     "lugar bajo",
+     "levantar"
+    ]
+   },
+   "model": {
+    "en": "Jesus pictured two men praying, a proud Pharisee who informed God of his virtues, and a tax collector who could only beat his breast and beg, God be merciful to me a sinner. It was the broken, humble man, not the impressive one, who went home justified, for God resists the one and gives grace to the other, and the way up really is down. There is a promise folded into the command to humble ourselves under God's mighty hand, namely that He may exalt us in due time. We are not asked to grovel in the dust forever but to take the low place and trust God to do the lifting, in His time and way. The pattern is Christ's own, who humbled Himself to the death of the cross, and therefore God highly exalted Him; what we surrender to God's mighty hand, that hand will one day raise.",
+    "es": "Jesús pintó a dos hombres orando, un fariseo soberbio que informaba a Dios de sus virtudes, y un publicano que solo podía herir su pecho y rogar, Dios sé propicio a mí pecador. Fue el hombre quebrantado y humilde, no el impresionante, quien descendió justificado a su casa, pues Dios resiste al uno y da gracia al otro, y el camino hacia arriba de veras es hacia abajo. Hay una promesa plegada dentro del mandamiento de humillarnos bajo la poderosa mano de Dios, a saber, que Él nos exalte a su tiempo. No se nos pide que nos arrastremos en el polvo para siempre sino que tomemos el lugar bajo y confiemos en que Dios haga el levantar, a su tiempo y a su manera. El patrón es el de Cristo mismo, que se humilló hasta la muerte de cruz, y por eso Dios le exaltó hasta lo sumo; lo que entregamos a la poderosa mano de Dios, esa mano un día lo levantará."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does it mean to 'be clothed with humility,' and how does humility free us?",
+    "es": "¿Qué significa 'revestirse de humildad,' y cómo nos libera la humildad?"
+   },
+   "keywords": {
+    "en": [
+     "clothed",
+     "deliberately",
+     "towel",
+     "choose",
+     "serve",
+     "freed",
+     "promoting",
+     "love"
+    ],
+    "es": [
+     "revestir",
+     "deliberadamente",
+     "toalla",
+     "elegir",
+     "servir",
+     "librados",
+     "promover",
+     "amar"
+    ]
+   },
+   "model": {
+    "en": "Peter's command comes back with all its weight and hope: be clothed with humility. It is a garment we put on deliberately, the way Jesus deliberately wrapped Himself in a towel. We do not wait to feel humble but choose to think of ourselves less, to esteem others, to take the lower place, and to serve. As we do, we discover we are not diminished but freed, freed from the exhausting work of defending and promoting ourselves, and freed to love. Humility is therefore not one more virtue to achieve but the shape of a life that has caught the mind of Christ, the God who left His throne, took a towel, and knelt. To be humble is to follow Him down, confident that the God who raised Him will in due time raise all who walk that downward road with Him, for God resists the proud but to the humble gives grace upon grace.",
+    "es": "El mandamiento de Pedro vuelve con todo su peso y su esperanza: revestíos de humildad. Es una prenda que nos ponemos deliberadamente, como Jesús deliberadamente se ciñó una toalla. No esperamos a sentirnos humildes sino que elegimos pensar menos en nosotros mismos, estimar a los demás, tomar el lugar más bajo, y servir. Al hacerlo, descubrimos que no somos disminuidos sino librados, librados del agotador trabajo de defendernos y promovernos, y librados para amar. La humildad, por tanto, no es una virtud más que alcanzar sino la forma de una vida que ha captado la mente de Cristo, el Dios que dejó su trono, tomó una toalla, y se arrodilló. Ser humilde es seguirlo hacia abajo, confiados en que el Dios que lo levantó, a su tiempo, levantará a todos los que caminen ese camino descendente con Él, pues Dios resiste a los soberbios pero al humilde da gracia sobre gracia."
+   }
+  }
+ ]
+};

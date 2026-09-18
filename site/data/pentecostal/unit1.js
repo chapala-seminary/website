@@ -1,99 +1,284 @@
-/* CTSPentecostal - unit 1: per-unit configuration and content. */
-
-const UNIT = 1;
-
-var SKEY = 'cts_u01_intro';
-
-var MCQ = [
- { correct:3,
-   q:{en:"This course studies the Pentecostal and charismatic movement because —",
-      es:"Este curso estudia el movimiento pentecostal y carismático porque —"},
-   opts:[
-     {en:"it is small and unimportant", es:"es pequeño y sin importancia"},
-     {en:"Scripture never mentions the Holy Spirit", es:"la Escritura nunca menciona al Espíritu Santo"},
-     {en:"it has no bearing on Latin America", es:"no tiene relación con América Latina"},
-     {en:"it is one of the largest and fastest-growing streams of Christianity, especially strong where this course is read", es:"es una de las corrientes más grandes y de más rápido crecimiento del cristianismo, especialmente fuerte donde se lee este curso"} ],
-   exp:{en:"By careful estimate the movement numbers near 644 million — roughly a quarter of the world's Christians — and its congregations are everywhere in Latin America.",
-        es:"Por estimación cuidadosa el movimiento cuenta cerca de 644 millones — aproximadamente una cuarta parte de los cristianos del mundo — y sus congregaciones están por todas partes en América Latina."} },
- { correct:1,
-   q:{en:"The word “charismatic” comes from a Greek word meaning —",
-      es:"La palabra “carismático” viene de una palabra griega que significa —"},
-   opts:[
-     {en:"tongues", es:"lenguas"},
-     {en:"gift of grace, and broadly describes Christians in the historic churches and beyond who embrace the same gifts without necessarily leaving their traditions", es:"don de gracia, y describe ampliamente a los cristianos de las iglesias históricas y más allá que abrazan los mismos dones sin necesariamente dejar sus tradiciones"},
-     {en:"denomination", es:"denominación"},
-     {en:"prophecy", es:"profecía"} ],
-   exp:{en:"From charisma, a gift of grace; the charismatic renewal carried the Pentecostal experience into the historic Protestant and Catholic churches.",
-        es:"De charisma, un don de gracia; la renovación carismática llevó la experiencia pentecostal a las iglesias históricas protestantes y católicas."} },
- { correct:0,
-   q:{en:"The two questions this course is careful to keep apart are —",
-      es:"Las dos preguntas que este curso tiene cuidado de mantener separadas son —"},
-   opts:[
-     {en:"whether a gift is real, and whether a particular experience is required of every believer", es:"si un don es real, y si una experiencia particular se requiere de todo creyente"},
-     {en:"whether God exists, and whether the Bible is true", es:"si Dios existe, y si la Biblia es verdadera"},
-     {en:"whether to pray, and whether to read Scripture", es:"si orar, y si leer la Escritura"},
-     {en:"whether the church should meet, and whether to sing", es:"si la iglesia debe reunirse, y si cantar"} ],
-   exp:{en:"The reality of a gift and the requiring of an experience are different questions; the answer to one does not settle the other.",
-        es:"La realidad de un don y el requerir una experiencia son preguntas diferentes; la respuesta a una no resuelve la otra."} },
- { correct:2,
-   q:{en:"On genuinely disputed questions, this course —",
-      es:"En las preguntas genuinamente disputadas, este curso —"},
-   opts:[
-     {en:"always declares one side simply right", es:"siempre declara a un lado simplemente correcto"},
-     {en:"refuses to mention them", es:"rehúsa mencionarlas"},
-     {en:"sets out each faithful position at its strongest and imposes no verdict, as the seminary does with the millennium", es:"expone cada postura fiel en su forma más fuerte y no impone veredicto, como el seminario lo hace con el milenio"},
-     {en:"says Scripture gives no guidance at all", es:"dice que la Escritura no da ninguna guía"} ],
-   exp:{en:"Where faithful, Bible-loving Christians differ, the course gives a fair hearing to each and leaves the reader to weigh them before God.",
-        es:"Donde cristianos fieles que aman la Biblia difieren, el curso da una audiencia justa a cada uno y deja al lector sopesarlas ante Dios."} },
- { correct:3,
-   q:{en:"This course judges a movement —",
-      es:"Este curso juzga un movimiento —"},
-   opts:[
-     {en:"by its worst and most famous preachers", es:"por sus peores y más famosos predicadores"},
-     {en:"by its television programs", es:"por sus programas de televisión"},
-     {en:"by its size alone", es:"por su tamaño solamente"},
-     {en:"by its Scriptures and its faithful, while judging a teaching on its own terms by the Word", es:"por sus Escrituras y sus fieles, mientras juzga una enseñanza por sí misma según la Palabra"} ],
-   exp:{en:"A teaching is weighed by Scripture; a movement by its Scriptures and its faithful, not by its distortions.",
-        es:"Una enseñanza se sopesa por la Escritura; un movimiento por sus Escrituras y sus fieles, no por sus distorsiones."} },
- { correct:2,
-   q:{en:"Toward the hundreds of millions in the movement, this course takes the posture of —",
-      es:"Hacia los cientos de millones en el movimiento, este curso toma la postura de —"},
-   opts:[
-     {en:"enemies to be refuted", es:"enemigos para ser refutados"},
-     {en:"strangers to be ignored", es:"extraños para ser ignorados"},
-     {en:"family to be understood, holding truth and love together even where something must be lovingly declined", es:"familia para ser entendida, sosteniendo juntas la verdad y el amor aun donde algo deba declinarse con amor"},
-     {en:"rivals to be defeated", es:"rivales para ser derrotados"} ],
-   exp:{en:"The great majority are brothers and sisters in Christ; the course is honest about real errors without slandering the many for the faults of a few.",
-        es:"La gran mayoría son hermanos y hermanas en Cristo; el curso es honesto sobre los errores reales sin calumniar a los muchos por las faltas de unos pocos."} },
- { correct:1,
-   q:{en:"Regarding what it will settle, this course —",
-      es:"En cuanto a lo que resolverá, este curso —"},
-   opts:[
-     {en:"promises a verdict on every question", es:"promete un veredicto sobre cada pregunta"},
-     {en:"settles what Scripture settles and deliberately leaves open what Scripture leaves open, giving tools to weigh the rest", es:"resuelve lo que la Escritura resuelve y deja abierto deliberadamente lo que la Escritura deja abierto, dando herramientas para sopesar el resto"},
-     {en:"settles nothing at all", es:"no resuelve nada en absoluto"},
-     {en:"avoids Scripture entirely", es:"evita la Escritura por completo"} ],
-   exp:{en:"Some things are plain in Scripture and are stated plainly; others are genuinely disputed and are left open, with the strongest cases set side by side.",
-        es:"Algunas cosas son claras en la Escritura y se declaran con claridad; otras son genuinamente disputadas y se dejan abiertas, con los casos más fuertes puestos lado a lado."} }
-];
-
-var SA = [
- { kw:{ en:["pentecostal","charismatic","grace","gifts","historic","denominations","movement","family"],
-        es:["pentecostal","carismatico","gracia","dones","historicas","denominaciones","movimiento","familia"] },
-   q:{en:"Define the terms Pentecostal and charismatic, and explain what this course means by the movement.",
-      es:"Defina los términos pentecostal y carismático, y explique qué entiende este curso por el movimiento."},
-   model:{en:"Pentecostal names the movement that began in the early twentieth century, emphasizing the baptism in the Holy Spirit and the gifts, classically with tongues as its sign, and forming its own denominations. Charismatic comes from the Greek word for a gift of grace and broadly describes Christians in the historic Protestant and Catholic churches, and beyond, who embrace the same gifts without necessarily leaving their traditions. By the movement this course means the whole family together: classical Pentecostals, charismatics in the historic churches, third-wave evangelicals, and the vast independent churches.",
-          es:"Pentecostal nombra el movimiento que comenzó a principios del siglo veinte, recalcando el bautismo en el Espíritu Santo y los dones, clásicamente con las lenguas como su señal, y formando sus propias denominaciones. Carismático viene de la palabra griega para un don de gracia y describe ampliamente a los cristianos de las iglesias históricas protestantes y católicas, y más allá, que abrazan los mismos dones sin necesariamente dejar sus tradiciones. Por el movimiento este curso entiende toda la familia junta: pentecostales clásicos, carismáticos en las iglesias históricas, evangélicos de la tercera ola, y las vastas iglesias independientes."} },
- { kw:{ en:["gift","real","required","experience","disputed","strongest","verdict","scripture"],
-        es:["don","real","requiere","experiencia","disputadas","fuerte","veredicto","escritura"] },
-   q:{en:"State the two questions this course keeps apart, and describe how it approaches genuinely disputed questions.",
-      es:"Exponga las dos preguntas que este curso mantiene separadas, y describa cómo aborda las preguntas genuinamente disputadas."},
-   model:{en:"The course keeps apart two questions: whether a gift is real — whether the Spirit still gives it — and whether a particular experience is required of every believer. These are different, and the answer to one does not settle the other. On genuinely disputed questions, the course does not declare one side simply right; instead it sets out each faithful position at its strongest and imposes no verdict, as the seminary does with the millennium, leaving the reader to weigh them before God. Through it all, everything is measured by Scripture as the final authority.",
-          es:"El curso mantiene separadas dos preguntas: si un don es real — si el Espíritu todavía lo da — y si una experiencia particular se requiere de todo creyente. Estas son diferentes, y la respuesta a una no resuelve la otra. En las preguntas genuinamente disputadas, el curso no declara a un lado simplemente correcto; en cambio expone cada postura fiel en su forma más fuerte y no impone veredicto, como el seminario lo hace con el milenio, dejando al lector sopesarlas ante Dios. A través de todo, todo se mide por la Escritura como la autoridad final."} },
- { kw:{ en:["brothers","family","honest","errors","slander","settle","open","scripture"],
-        es:["hermanos","familia","honesto","errores","calumniar","resuelve","abierto","escritura"] },
-   q:{en:"Describe the charitable posture this course takes toward the movement, and what it will and will not settle.",
-      es:"Describa la postura caritativa que este curso toma hacia el movimiento, y lo que resolverá y lo que no."},
-   model:{en:"The course takes the posture of charity: the great majority in the movement are our brothers and sisters in Christ, family to be understood rather than enemies to be refuted. It is honest about real errors, such as the prosperity gospel and certain excesses, yet it refuses to slander the many for the faults of a few, holding truth and love together. As for its conclusions, it settles what Scripture plainly settles and deliberately leaves open what Scripture leaves open, giving the reader a fair hearing of the strongest cases and the tools to weigh the rest before God.",
-          es:"El curso toma la postura de la caridad: la gran mayoría en el movimiento son nuestros hermanos y hermanas en Cristo, familia para ser entendida en vez de enemigos para ser refutados. Es honesto sobre los errores reales, como el evangelio de la prosperidad y ciertos excesos, pero rehúsa calumniar a los muchos por las faltas de unos pocos, sosteniendo juntas la verdad y el amor. En cuanto a sus conclusiones, resuelve lo que la Escritura resuelve claramente y deja abierto deliberadamente lo que la Escritura deja abierto, dando al lector una audiencia justa de los casos más fuertes y las herramientas para sopesar el resto ante Dios."} }
-];
+/* CTSPentecostal — unit 1. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "pentecostal",
+ "unit": 1,
+ "totalUnits": 12,
+ "filePrefix": "CTSPentecostal",
+ "prevHref": null,
+ "nextHref": "CTSPentecostalUnit2.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "This course studies the Pentecostal and charismatic movement because —",
+    "es": "Este curso estudia el movimiento pentecostal y carismático porque —"
+   },
+   "options": {
+    "en": [
+     "it is small and unimportant",
+     "Scripture never mentions the Holy Spirit",
+     "it has no bearing on Latin America",
+     "it is one of the largest and fastest-growing streams of Christianity, especially strong where this course is read"
+    ],
+    "es": [
+     "es pequeño y sin importancia",
+     "la Escritura nunca menciona al Espíritu Santo",
+     "no tiene relación con América Latina",
+     "es una de las corrientes más grandes y de más rápido crecimiento del cristianismo, especialmente fuerte donde se lee este curso"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "By careful estimate the movement numbers near 644 million — roughly a quarter of the world's Christians — and its congregations are everywhere in Latin America.",
+    "es": "Por estimación cuidadosa el movimiento cuenta cerca de 644 millones — aproximadamente una cuarta parte de los cristianos del mundo — y sus congregaciones están por todas partes en América Latina."
+   }
+  },
+  {
+   "stem": {
+    "en": "The word “charismatic” comes from a Greek word meaning —",
+    "es": "La palabra “carismático” viene de una palabra griega que significa —"
+   },
+   "options": {
+    "en": [
+     "tongues",
+     "gift of grace, and broadly describes Christians in the historic churches and beyond who embrace the same gifts without necessarily leaving their traditions",
+     "denomination",
+     "prophecy"
+    ],
+    "es": [
+     "lenguas",
+     "don de gracia, y describe ampliamente a los cristianos de las iglesias históricas y más allá que abrazan los mismos dones sin necesariamente dejar sus tradiciones",
+     "denominación",
+     "profecía"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "From charisma, a gift of grace; the charismatic renewal carried the Pentecostal experience into the historic Protestant and Catholic churches.",
+    "es": "De charisma, un don de gracia; la renovación carismática llevó la experiencia pentecostal a las iglesias históricas protestantes y católicas."
+   }
+  },
+  {
+   "stem": {
+    "en": "The two questions this course is careful to keep apart are —",
+    "es": "Las dos preguntas que este curso tiene cuidado de mantener separadas son —"
+   },
+   "options": {
+    "en": [
+     "whether a gift is real, and whether a particular experience is required of every believer",
+     "whether God exists, and whether the Bible is true",
+     "whether to pray, and whether to read Scripture",
+     "whether the church should meet, and whether to sing"
+    ],
+    "es": [
+     "si un don es real, y si una experiencia particular se requiere de todo creyente",
+     "si Dios existe, y si la Biblia es verdadera",
+     "si orar, y si leer la Escritura",
+     "si la iglesia debe reunirse, y si cantar"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The reality of a gift and the requiring of an experience are different questions; the answer to one does not settle the other.",
+    "es": "La realidad de un don y el requerir una experiencia son preguntas diferentes; la respuesta a una no resuelve la otra."
+   }
+  },
+  {
+   "stem": {
+    "en": "On genuinely disputed questions, this course —",
+    "es": "En las preguntas genuinamente disputadas, este curso —"
+   },
+   "options": {
+    "en": [
+     "always declares one side simply right",
+     "refuses to mention them",
+     "sets out each faithful position at its strongest and imposes no verdict, as the seminary does with the millennium",
+     "says Scripture gives no guidance at all"
+    ],
+    "es": [
+     "siempre declara a un lado simplemente correcto",
+     "rehúsa mencionarlas",
+     "expone cada postura fiel en su forma más fuerte y no impone veredicto, como el seminario lo hace con el milenio",
+     "dice que la Escritura no da ninguna guía"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Where faithful, Bible-loving Christians differ, the course gives a fair hearing to each and leaves the reader to weigh them before God.",
+    "es": "Donde cristianos fieles que aman la Biblia difieren, el curso da una audiencia justa a cada uno y deja al lector sopesarlas ante Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "This course judges a movement —",
+    "es": "Este curso juzga un movimiento —"
+   },
+   "options": {
+    "en": [
+     "by its worst and most famous preachers",
+     "by its television programs",
+     "by its size alone",
+     "by its Scriptures and its faithful, while judging a teaching on its own terms by the Word"
+    ],
+    "es": [
+     "por sus peores y más famosos predicadores",
+     "por sus programas de televisión",
+     "por su tamaño solamente",
+     "por sus Escrituras y sus fieles, mientras juzga una enseñanza por sí misma según la Palabra"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "A teaching is weighed by Scripture; a movement by its Scriptures and its faithful, not by its distortions.",
+    "es": "Una enseñanza se sopesa por la Escritura; un movimiento por sus Escrituras y sus fieles, no por sus distorsiones."
+   }
+  },
+  {
+   "stem": {
+    "en": "Toward the hundreds of millions in the movement, this course takes the posture of —",
+    "es": "Hacia los cientos de millones en el movimiento, este curso toma la postura de —"
+   },
+   "options": {
+    "en": [
+     "enemies to be refuted",
+     "strangers to be ignored",
+     "family to be understood, holding truth and love together even where something must be lovingly declined",
+     "rivals to be defeated"
+    ],
+    "es": [
+     "enemigos para ser refutados",
+     "extraños para ser ignorados",
+     "familia para ser entendida, sosteniendo juntas la verdad y el amor aun donde algo deba declinarse con amor",
+     "rivales para ser derrotados"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The great majority are brothers and sisters in Christ; the course is honest about real errors without slandering the many for the faults of a few.",
+    "es": "La gran mayoría son hermanos y hermanas en Cristo; el curso es honesto sobre los errores reales sin calumniar a los muchos por las faltas de unos pocos."
+   }
+  },
+  {
+   "stem": {
+    "en": "Regarding what it will settle, this course —",
+    "es": "En cuanto a lo que resolverá, este curso —"
+   },
+   "options": {
+    "en": [
+     "promises a verdict on every question",
+     "settles what Scripture settles and deliberately leaves open what Scripture leaves open, giving tools to weigh the rest",
+     "settles nothing at all",
+     "avoids Scripture entirely"
+    ],
+    "es": [
+     "promete un veredicto sobre cada pregunta",
+     "resuelve lo que la Escritura resuelve y deja abierto deliberadamente lo que la Escritura deja abierto, dando herramientas para sopesar el resto",
+     "no resuelve nada en absoluto",
+     "evita la Escritura por completo"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Some things are plain in Scripture and are stated plainly; others are genuinely disputed and are left open, with the strongest cases set side by side.",
+    "es": "Algunas cosas son claras en la Escritura y se declaran con claridad; otras son genuinamente disputadas y se dejan abiertas, con los casos más fuertes puestos lado a lado."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Define the terms Pentecostal and charismatic, and explain what this course means by the movement.",
+    "es": "Defina los términos pentecostal y carismático, y explique qué entiende este curso por el movimiento."
+   },
+   "keywords": {
+    "en": [
+     "pentecostal",
+     "charismatic",
+     "grace",
+     "gifts",
+     "historic",
+     "denominations",
+     "movement",
+     "family"
+    ],
+    "es": [
+     "pentecostal",
+     "carismatico",
+     "gracia",
+     "dones",
+     "historicas",
+     "denominaciones",
+     "movimiento",
+     "familia"
+    ]
+   },
+   "model": {
+    "en": "Pentecostal names the movement that began in the early twentieth century, emphasizing the baptism in the Holy Spirit and the gifts, classically with tongues as its sign, and forming its own denominations. Charismatic comes from the Greek word for a gift of grace and broadly describes Christians in the historic Protestant and Catholic churches, and beyond, who embrace the same gifts without necessarily leaving their traditions. By the movement this course means the whole family together: classical Pentecostals, charismatics in the historic churches, third-wave evangelicals, and the vast independent churches.",
+    "es": "Pentecostal nombra el movimiento que comenzó a principios del siglo veinte, recalcando el bautismo en el Espíritu Santo y los dones, clásicamente con las lenguas como su señal, y formando sus propias denominaciones. Carismático viene de la palabra griega para un don de gracia y describe ampliamente a los cristianos de las iglesias históricas protestantes y católicas, y más allá, que abrazan los mismos dones sin necesariamente dejar sus tradiciones. Por el movimiento este curso entiende toda la familia junta: pentecostales clásicos, carismáticos en las iglesias históricas, evangélicos de la tercera ola, y las vastas iglesias independientes."
+   }
+  },
+  {
+   "prompt": {
+    "en": "State the two questions this course keeps apart, and describe how it approaches genuinely disputed questions.",
+    "es": "Exponga las dos preguntas que este curso mantiene separadas, y describa cómo aborda las preguntas genuinamente disputadas."
+   },
+   "keywords": {
+    "en": [
+     "gift",
+     "real",
+     "required",
+     "experience",
+     "disputed",
+     "strongest",
+     "verdict",
+     "scripture"
+    ],
+    "es": [
+     "don",
+     "real",
+     "requiere",
+     "experiencia",
+     "disputadas",
+     "fuerte",
+     "veredicto",
+     "escritura"
+    ]
+   },
+   "model": {
+    "en": "The course keeps apart two questions: whether a gift is real — whether the Spirit still gives it — and whether a particular experience is required of every believer. These are different, and the answer to one does not settle the other. On genuinely disputed questions, the course does not declare one side simply right; instead it sets out each faithful position at its strongest and imposes no verdict, as the seminary does with the millennium, leaving the reader to weigh them before God. Through it all, everything is measured by Scripture as the final authority.",
+    "es": "El curso mantiene separadas dos preguntas: si un don es real — si el Espíritu todavía lo da — y si una experiencia particular se requiere de todo creyente. Estas son diferentes, y la respuesta a una no resuelve la otra. En las preguntas genuinamente disputadas, el curso no declara a un lado simplemente correcto; en cambio expone cada postura fiel en su forma más fuerte y no impone veredicto, como el seminario lo hace con el milenio, dejando al lector sopesarlas ante Dios. A través de todo, todo se mide por la Escritura como la autoridad final."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the charitable posture this course takes toward the movement, and what it will and will not settle.",
+    "es": "Describa la postura caritativa que este curso toma hacia el movimiento, y lo que resolverá y lo que no."
+   },
+   "keywords": {
+    "en": [
+     "brothers",
+     "family",
+     "honest",
+     "errors",
+     "slander",
+     "settle",
+     "open",
+     "scripture"
+    ],
+    "es": [
+     "hermanos",
+     "familia",
+     "honesto",
+     "errores",
+     "calumniar",
+     "resuelve",
+     "abierto",
+     "escritura"
+    ]
+   },
+   "model": {
+    "en": "The course takes the posture of charity: the great majority in the movement are our brothers and sisters in Christ, family to be understood rather than enemies to be refuted. It is honest about real errors, such as the prosperity gospel and certain excesses, yet it refuses to slander the many for the faults of a few, holding truth and love together. As for its conclusions, it settles what Scripture plainly settles and deliberately leaves open what Scripture leaves open, giving the reader a fair hearing of the strongest cases and the tools to weigh the rest before God.",
+    "es": "El curso toma la postura de la caridad: la gran mayoría en el movimiento son nuestros hermanos y hermanas en Cristo, familia para ser entendida en vez de enemigos para ser refutados. Es honesto sobre los errores reales, como el evangelio de la prosperidad y ciertos excesos, pero rehúsa calumniar a los muchos por las faltas de unos pocos, sosteniendo juntas la verdad y el amor. En cuanto a sus conclusiones, resuelve lo que la Escritura resuelve claramente y deja abierto deliberadamente lo que la Escritura deja abierto, dando al lector una audiencia justa de los casos más fuertes y las herramientas para sopesar el resto ante Dios."
+   }
+  }
+ ]
+};

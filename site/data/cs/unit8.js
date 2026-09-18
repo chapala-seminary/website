@@ -1,9 +1,383 @@
-/* CTSCS - unit 8: per-unit configuration and content. */
-
-const UNIT = 8;
-
-const THIS_UNIT = 8;
-
-const UNIT_LABELS = ["0 · Foundation","1 · The Dying","2 · Surgery","3 · The Abused","4 · Forced Termination","5 · Conflict Resolution","6 · Depression","7 · Grief","8 · Anxiety & Fear","9 · Anger & Forgiveness","10 · Addiction","11 · General Distress","12 · When to Refer"];
-
-const UNITS = {"8": {"mcq": [{"textEn": "This unit teaches that the command 'do not be anxious' / 'fear not' should be brought to a frightened person as:", "textEs": "Esta unidad enseña que el mandato 'no os afanéis' / 'no temáis' debe traerse a una persona asustada como:", "options": [{"en": "A club to rebuke their weak faith", "es": "Un garrote para reprender su fe débil"}, {"en": "Proof they are not truly saved", "es": "Prueba de que no son verdaderamente salvos"}, {"en": "A loving invitation and promise, not a rebuke", "es": "Una invitación y promesa amorosa, no una reprensión"}, {"en": "A reason to avoid the topic", "es": "Una razón para evitar el tema"}], "correct": 2, "explainEn": "Scripture says 'fear not' as a loving invitation and promise; a trembling person flogged with 'you just need more faith' only has shame added to fear.", "explainEs": "La Escritura dice 'no temáis' como invitación y promesa amorosa; una persona temblorosa azotada con 'solo necesitas más fe' solo recibe vergüenza añadida al miedo."}, {"textEn": "In the storm on Galilee, Jesus asked 'Why are you afraid?' :", "textEs": "En la tormenta de Galilea, Jesús preguntó '¿Por qué estáis amedrentados?':", "options": [{"en": "Before calming the storm, while they were drowning", "es": "Antes de calmar la tormenta, mientras se ahogaban"}, {"en": "To shame them publicly", "es": "Para avergonzarlos públicamente"}, {"en": "And then left them in the storm", "es": "Y luego los dejó en la tormenta"}, {"en": "After he had stilled the storm, when they were safe — and they were left full of awe", "es": "Después de calmar la tormenta, cuando estaban a salvo — y quedaron llenos de asombro"}], "correct": 3, "explainEn": "He asked after stilling the storm, when they were safe; the disciples were left in wonder — 'Who then is this?' — which is the beginning of the cure for fear.", "explainEs": "Preguntó tras calmar la tormenta, cuando estaban a salvo; los discípulos quedaron en asombro — '¿Quién es éste?' — que es el comienzo de la cura para el miedo."}, {"textEn": "According to the unit, the one pattern that always feeds anxiety is:", "textEs": "Según la unidad, el único patrón que siempre alimenta la ansiedad es:", "options": [{"en": "Talking about it", "es": "Hablar de ello"}, {"en": "Avoidance — fleeing the feared thing, which makes the fear grow and the world shrink", "es": "La evitación — huir de lo temido, lo que hace crecer el miedo y encoger el mundo"}, {"en": "Prayer", "es": "La oración"}, {"en": "Seeing a doctor", "es": "Ver a un médico"}], "correct": 1, "explainEn": "Every time we flee what we fear, the fear grows stronger and our world grows smaller; responsibility is reframed as choosing not to feed fear by running.", "explainEs": "Cada vez que huimos de lo que tememos, el miedo se fortalece y nuestro mundo se encoge; la responsabilidad se replantea como elegir no alimentar el miedo huyendo."}, {"textEn": "The unit defines courage as:", "textEs": "La unidad define el valor como:", "options": [{"en": "Doing the right thing while afraid", "es": "Hacer lo correcto estando con miedo"}, {"en": "Never feeling any fear", "es": "Nunca sentir miedo alguno"}, {"en": "Avoiding all danger", "es": "Evitar todo peligro"}, {"en": "Pretending to be brave", "es": "Fingir ser valiente"}], "correct": 0, "explainEn": "Courage is not the absence of fear but doing the right thing while afraid; the person cannot will the fear away but can choose the next action in spite of it.", "explainEs": "El valor no es la ausencia de miedo sino hacer lo correcto estando con miedo; la persona no puede desear que el miedo se vaya pero puede elegir la próxima acción a pesar de él."}, {"textEn": "When God says 'fear not' in Isaiah 41:10, the unit emphasizes that He adds:", "textEs": "Cuando Dios dice 'no temas' en Isaías 41:10, la unidad enfatiza que añade:", "options": [{"en": "'because you are strong enough'", "es": "'porque eres lo bastante fuerte'"}, {"en": "'or you will be punished'", "es": "'o serás castigado'"}, {"en": "'for I am with you' — a Presence to lean on, not just a command to feel differently", "es": "'porque yo estoy contigo' — una Presencia en quien apoyarse, no solo una orden de sentir distinto"}, {"en": "nothing further", "es": "nada más"}], "correct": 2, "explainEn": "God almost never merely says 'stop being afraid'; He says 'fear not, for I am with you.' The cure is a Presence to lean on, not a command to feel differently.", "explainEs": "Dios casi nunca dice meramente 'deja de temer'; dice 'no temas, porque yo estoy contigo.' La cura es una Presencia en quien apoyarse, no una orden de sentir distinto."}, {"textEn": "Regarding panic attacks and severe anxiety, the unit advises the pastor to:", "textEs": "Respecto a los ataques de pánico y la ansiedad severa, la unidad aconseja al pastor:", "options": [{"en": "Treat them purely as a spiritual problem", "es": "Tratarlos puramente como un problema espiritual"}, {"en": "Handle them entirely alone", "es": "Manejarlos del todo solo"}, {"en": "Tell the person to ignore them", "es": "Decirle a la persona que los ignore"}, {"en": "Recognize they can have physical causes and bring in medical and professional help alongside his care", "es": "Reconocer que pueden tener causas físicas y traer ayuda médica y profesional junto a su cuidado"}], "correct": 3, "explainEn": "Anxiety can have deep physical and chemical roots; recurring panic or anxiety that stops daily life is more than a pastor should carry alone, calling for help alongside.", "explainEs": "La ansiedad puede tener raíces físicas y químicas profundas; el pánico recurrente o la ansiedad que detiene la vida diaria es más de lo que un pastor debe cargar solo, y pide ayuda junto a la suya."}, {"textEn": "Wolpe's 'systematic desensitization' is the clinical name for:", "textEs": "La 'desensibilización sistemática' de Wolpe es el nombre clínico de:", "options": [{"en": "Facing a feared thing gradually in small steps while staying relaxed, so the body learns it is survivable", "es": "Enfrentar lo temido gradualmente en pequeños pasos manteniéndose relajado, para que el cuerpo aprenda que es sobrevivible"}, {"en": "Avoiding the feared thing forever", "es": "Evitar lo temido para siempre"}, {"en": "Taking medication only", "es": "Tomar solo medicación"}, {"en": "Forcing someone into their worst fear all at once", "es": "Forzar a alguien a su peor miedo todo de una vez"}], "correct": 0, "explainEn": "Fears learned by association can be unlearned the same way, through graded, relaxed exposure — the clinical name for Step Eight's facing fear by degrees rather than fleeing.", "explainEs": "Los miedos aprendidos por asociación pueden desaprenderse igual, mediante exposición gradual y relajada — el nombre clínico de enfrentar el miedo por grados en vez de huir, del Paso Ocho."}, {"textEn": "Reality Therapy's most useful contribution for the anxious, per the unit, is that it:", "textEs": "La contribución más útil de la Terapia de la Realidad para el ansioso, según la unidad, es que:", "options": [{"en": "Endlessly analyzes the past", "es": "Analiza el pasado sin fin"}, {"en": "Cuts through 'I can't help it' to the truth that, while one cannot choose to feel unafraid, one can choose the next action", "es": "Corta el 'no lo puedo evitar' hacia la verdad de que, aunque uno no puede elegir sentirse sin miedo, puede elegir la próxima acción"}, {"en": "Tells people their feelings don't matter", "es": "Les dice a las personas que sus sentimientos no importan"}, {"en": "Removes all responsibility", "es": "Quita toda responsabilidad"}], "correct": 1, "explainEn": "Reality Therapy focuses on present choices and behavior, cutting paralysis with the freeing truth that one can choose the next action even when one cannot choose the feeling.", "explainEs": "La Terapia de la Realidad se enfoca en elecciones y conducta presentes, cortando la parálisis con la verdad liberadora de que uno puede elegir la próxima acción aun cuando no puede elegir el sentimiento."}, {"textEn": "The biblical caution against Reality Therapy is that it can:", "textEs": "La advertencia bíblica contra la Terapia de la Realidad es que puede:", "options": [{"en": "Speak as if the human will alone were enough, when Scripture knows the will is weak and needs the Spirit", "es": "Hablar como si la voluntad humana sola bastara, cuando la Escritura sabe que la voluntad es débil y necesita el Espíritu"}, {"en": "Never help anyone", "es": "Nunca ayudar a nadie"}, {"en": "Be demonic in origin", "es": "Ser de origen demoníaco"}, {"en": "Require ignoring all behavior", "es": "Exigir ignorar toda conducta"}], "correct": 0, "explainEn": "It can speak as if the will were enough ('just choose better'), but 'the spirit is willing but the flesh is weak'; we need the Spirit's help and a renewed heart, not resolve alone.", "explainEs": "Puede hablar como si la voluntad bastara ('solo elige mejor'), pero 'el espíritu está dispuesto, mas la carne es débil'; necesitamos la ayuda del Espíritu y un corazón renovado, no solo resolución."}, {"textEn": "The deepest cure for fear, according to the unit, is finally:", "textEs": "La cura más honda para el miedo, según la unidad, es al final:", "options": [{"en": "The absence of all storms", "es": "La ausencia de toda tormenta"}, {"en": "A better technique", "es": "Una mejor técnica"}, {"en": "A calmer body alone", "es": "Solo un cuerpo más calmado"}, {"en": "A trust that rests in the character of God — the presence of the Lord of the storm, not the absence of the storm", "es": "Una confianza que descansa en el carácter de Dios — la presencia del Señor de la tormenta, no la ausencia de la tormenta"}], "correct": 3, "explainEn": "Behavioral tools teach the body a feared thing is survivable, but only the gospel teaches the heart we are held by a Father from whose love nothing can separate us.", "explainEs": "Las herramientas conductuales enseñan al cuerpo que lo temido es sobrevivible, pero solo el evangelio enseña al corazón que somos sostenidos por un Padre de cuyo amor nada nos puede separar."}], "shortAnswer": [{"textEn": "Why must the pastor avoid treating anxiety as simple weak faith, and how does the storm on Galilee shape his approach?", "textEs": "¿Por qué debe el pastor evitar tratar la ansiedad como simple fe débil, y cómo moldea su enfoque la tormenta de Galilea?", "modelEn": "Like depression, anxiety must not be treated as mere faithlessness. Scripture's 'fear not' and 'do not be anxious' are loving invitations and promises, not a club to beat the fearful; a trembling person flogged with 'you just need more faith' only has shame added to fear. Anxiety can also have deep physical and chemical roots — a racing heart and flood of dread can rise from the body itself. The storm on Galilee shapes the approach: the disciples, experienced fishermen, were terrified as the boat filled, and Jesus, after stilling the storm, asked 'Why are you afraid?' — note, after they were safe, not while drowning. They were left full of awe: 'Who then is this?' That wonder is the beginning of the cure: not that storms never come, but that the One in the boat is Lord even of the wind. So the pastor comes not to scold the fear away but to help carry it toward the God who says 'fear not, for I am with you.'", "modelEs": "Como la depresión, la ansiedad no debe tratarse como mera falta de fe. El 'no temáis' y 'no os afanéis' de la Escritura son invitaciones y promesas amorosas, no un garrote para golpear al temeroso; una persona temblorosa azotada con 'solo necesitas más fe' solo recibe vergüenza añadida al miedo. La ansiedad también puede tener raíces físicas y químicas profundas — un corazón acelerado y una marea de pavor pueden surgir del cuerpo mismo. La tormenta de Galilea moldea el enfoque: los discípulos, pescadores experimentados, estaban aterrados mientras la barca se llenaba, y Jesús, tras calmar la tormenta, preguntó '¿Por qué estáis amedrentados?' — note, después de estar a salvo, no mientras se ahogaban. Quedaron llenos de asombro: '¿Quién es éste?' Ese asombro es el comienzo de la cura: no que las tormentas nunca vengan, sino que Aquel en la barca es Señor aun del viento. Así que el pastor viene no a reñir el miedo sino a ayudar a llevarlo hacia el Dios que dice 'no temas, porque yo estoy contigo.'", "kw_en": ["like", "depres", "anxiet", "treate", "mere", "faithl", "script", "fear"], "kw_es": ["depres", "ansied", "tratar", "mera", "falta", "temáis", "afanéi", "escrit"]}, {"textEn": "Explain how Step Five (Responsibility) is reframed for the anxious person, including the role of avoidance and the unit's definition of courage.", "textEs": "Explique cómo se replantea el Paso Cinco (Responsabilidad) para la persona ansiosa, incluyendo el papel de la evitación y la definición de valor de la unidad.", "modelEn": "As with depression, Step Five is never 'your fear is your fault.' But there is a true and freeing responsibility the anxious person can take: recognizing that, while they cannot will the fear away, they can choose their next action in spite of it. The unit defines courage as not the absence of fear but doing the right thing while afraid. The key pattern to see is avoidance: every time we flee what we fear, the fear grows stronger and our world grows smaller. So responsibility is reframed as the choice to stop feeding the fear by running, and instead to take the next small, do-able step toward what has been avoided — not recklessly or all at once, but deliberately. The person is not responsible for feeling afraid; they are invited to take responsibility for what they do next.", "modelEs": "Como con la depresión, el Paso Cinco nunca es 'tu miedo es tu culpa.' Pero hay una responsabilidad verdadera y liberadora que la persona ansiosa puede tomar: reconocer que, aunque no pueden desear que el miedo se vaya, pueden elegir su próxima acción a pesar de él. La unidad define el valor no como la ausencia de miedo sino como hacer lo correcto estando con miedo. El patrón clave a ver es la evitación: cada vez que huimos de lo que tememos, el miedo se fortalece y nuestro mundo se encoge. Así que la responsabilidad se replantea como la elección de dejar de alimentar el miedo huyendo, y en cambio dar el siguiente pequeño paso realizable hacia lo evitado — no de modo imprudente ni todo de una vez, sino deliberadamente. La persona no es responsable de sentir miedo; se le invita a tomar responsabilidad de lo que hace después.", "kw_en": ["depres", "step", "five", "never", "fear", "fault", "true", "freein"], "kw_es": ["depres", "paso", "cinco", "miedo", "culpa", "respon", "verdad", "libera"]}, {"textEn": "Describe how God says 'fear not' in Scripture (Isaiah 41:10; Philippians 4:6-7; Matthew 6; 1 Peter 5:7), and what the counselor brings in Step Nine.", "textEs": "Describa cómo dice Dios 'no temas' en la Escritura (Isaías 41:10; Filipenses 4:6-7; Mateo 6; 1 Pedro 5:7), y qué trae el consejero en el Paso Nueve.", "modelEn": "'Fear not' is said to be Scripture's most repeated command, but notice how God says it. He almost never merely says 'stop being afraid'; He says 'fear not, for I am with you' (Isaiah 41:10) — the cure is a Presence to lean on, not a command to feel differently. Philippians 4:6-7 does not stop at 'do not be anxious'; it gives the path (prayer and thanksgiving) and the promise that the peace of God, surpassing understanding, will guard our hearts. In Matthew 6 Jesus reasons gently with worry: look at the birds and lilies; your Father feeds and clothes them, and you are worth more; do not be anxious about tomorrow. Peter says, 'cast all your anxieties on him, because he cares for you' (1 Peter 5:7). The counselor brings these, and lets a real wonder stand: he cannot promise the storms will not come or explain why this person carries this fear. What he holds out is what the disciples learned in the boat — the cure for fear is finally not the absence of the storm but the presence of the Lord of the storm.", "modelEs": "Se dice que 'no temas' es el mandato más repetido de la Escritura, pero note cómo lo dice Dios. Casi nunca dice meramente 'deja de temer'; dice 'no temas, porque yo estoy contigo' (Isaías 41:10) — la cura es una Presencia en quien apoyarse, no una orden de sentir distinto. Filipenses 4:6-7 no se detiene en 'no os afanéis'; da el camino (oración y acción de gracias) y la promesa de que la paz de Dios, que sobrepasa el entendimiento, guardará nuestros corazones. En Mateo 6 Jesús razona con suavidad con la preocupación: miren las aves y los lirios; su Padre los alimenta y viste, y ustedes valen más; no se afanen por el mañana. Pedro dice: 'echando toda vuestra ansiedad sobre él, porque él tiene cuidado de vosotros' (1 Pedro 5:7). El consejero trae estas, y deja que un verdadero asombro permanezca: no puede prometer que las tormentas no vendrán ni explicar por qué esta persona lleva este miedo. Lo que sostiene es lo que los discípulos aprendieron en la barca — la cura para el miedo no es al final la ausencia de la tormenta sino la presencia del Señor de la tormenta.", "kw_en": ["fear", "said", "script", "repeat", "comman", "notice", "says", "almost"], "kw_es": ["dice", "temas", "mandat", "repeti", "escrit", "note", "cómo", "dios"]}, {"textEn": "Explain the two roads in Step Eight (avoidance vs. facing fear by degrees) and what the nervous system learns from each.", "textEs": "Explique los dos caminos del Paso Ocho (evitación vs. enfrentar el miedo por grados) y qué aprende el sistema nervioso de cada uno.", "modelEn": "The road of avoidance feels safer in the moment but always narrows the life: one feared thing avoided becomes two, then ten, until the world shrinks to a single room. The road of facing fear by degrees feels harder at first but always widens the life. Each small fear faced and survived teaches the nervous system a truer lesson than any argument: 'I felt the fear, I went anyway, and I was not destroyed.' This is honest work — the counselor admits it is not instant and that fear will protest loudly the first times it is disobeyed. But he holds out the real and reachable hope that anxiety, faced with help, loosens its grip, and a life need not keep getting smaller. The freer life is reached one faced fear at a time. (This is what Wolpe called systematic desensitization: graded, relaxed exposure unlearns the fear that avoidance feeds.)", "modelEs": "El camino de la evitación se siente más seguro en el momento pero siempre estrecha la vida: una cosa temida evitada se vuelve dos, luego diez, hasta que el mundo se encoge a un solo cuarto. El camino de enfrentar el miedo por grados se siente más difícil al principio pero siempre ensancha la vida. Cada pequeño miedo enfrentado y sobrevivido le enseña al sistema nervioso una lección más verdadera que cualquier argumento: 'sentí el miedo, fui de todos modos, y no fui destruido.' Este es trabajo honesto — el consejero admite que no es instantáneo y que el miedo protestará a gritos las primeras veces que se le desobedezca. Pero sostiene la esperanza real y alcanzable de que la ansiedad, enfrentada con ayuda, afloja su agarre, y una vida no tiene que seguir empequeñeciéndose. La vida más libre se alcanza un miedo enfrentado a la vez. (Esto es lo que Wolpe llamó desensibilización sistemática: la exposición gradual y relajada desaprende el miedo que la evitación alimenta.)", "kw_en": ["road", "avoida", "feels", "safer", "moment", "always", "narrow", "life"], "kw_es": ["camino", "evitac", "siente", "seguro", "moment", "estrec", "vida", "cosa"]}, {"textEn": "Summarize the value and the biblical caution of the Reality Therapy and Behavioral approaches for anxiety.", "textEs": "Resuma el valor y la advertencia bíblica de los enfoques de Terapia de la Realidad y Conductual para la ansiedad.", "modelEn": "Reality Therapy (Glasser) turns from analyzing the past to present choices, asking 'What are you doing now? Is it working? What could you choose differently?' It holds us responsible for our choices without excusing them by our history — useful for cutting the paralysis of 'I can't help it' to the truth that one can choose the next action even when one cannot choose the feeling. The Behavioral approach (Wolpe) adds systematic desensitization: facing a feared thing gradually while relaxed so the body learns it is survivable. Both carry real, usable wisdom. The biblical caution: Reality Therapy can speak as if the will alone were enough ('just choose better'), but the will is weak — 'the spirit is willing but the flesh is weak' — and we need the Spirit's help and a renewed heart. And both can quiet the symptom while leaving the soul's deeper need untouched, for the final cure for fear is not a calmer body or a better choice but trust resting in the character of God. The tools teach the nervous system a fear is survivable; only the gospel teaches the heart we are held by a Father from whose love nothing can separate us. The technique serves; it does not save.", "modelEs": "La Terapia de la Realidad (Glasser) vuelve del análisis del pasado a las elecciones presentes, preguntando '¿Qué estás haciendo ahora? ¿Te funciona? ¿Qué podrías elegir distinto?' Nos hace responsables de nuestras elecciones sin excusarlas por nuestra historia — útil para cortar la parálisis del 'no lo puedo evitar' hacia la verdad de que uno puede elegir la próxima acción aun cuando no puede elegir el sentimiento. El enfoque Conductual (Wolpe) añade la desensibilización sistemática: enfrentar lo temido gradualmente mientras se está relajado para que el cuerpo aprenda que es sobrevivible. Ambos llevan sabiduría real y utilizable. La advertencia bíblica: la Terapia de la Realidad puede hablar como si la voluntad sola bastara ('solo elige mejor'), pero la voluntad es débil — 'el espíritu está dispuesto, mas la carne es débil' — y necesitamos la ayuda del Espíritu y un corazón renovado. Y ambos pueden acallar el síntoma dejando intacta la necesidad más honda del alma, pues la cura final para el miedo no es un cuerpo más calmado ni una mejor elección sino la confianza que descansa en el carácter de Dios. Las herramientas enseñan al sistema nervioso que un miedo es sobrevivible; solo el evangelio enseña al corazón que somos sostenidos por un Padre de cuyo amor nada nos puede separar. La técnica sirve; no salva.", "kw_en": ["realit", "therap", "glasse", "turns", "analyz", "past", "presen", "choice"], "kw_es": ["terapi", "realid", "glasse", "vuelve", "anális", "pasado", "elecci", "presen"]}]}};
+/* CTSCS — unit 8. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "cs",
+ "unit": 8,
+ "totalUnits": 13,
+ "filePrefix": "CTSCS",
+ "prevHref": "CTSCSUnit7.html",
+ "nextHref": "CTSCSUnit9.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "This unit teaches that the command 'do not be anxious' / 'fear not' should be brought to a frightened person as:",
+    "es": "Esta unidad enseña que el mandato 'no os afanéis' / 'no temáis' debe traerse a una persona asustada como:"
+   },
+   "options": {
+    "en": [
+     "A club to rebuke their weak faith",
+     "Proof they are not truly saved",
+     "A loving invitation and promise, not a rebuke",
+     "A reason to avoid the topic"
+    ],
+    "es": [
+     "Un garrote para reprender su fe débil",
+     "Prueba de que no son verdaderamente salvos",
+     "Una invitación y promesa amorosa, no una reprensión",
+     "Una razón para evitar el tema"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "In the storm on Galilee, Jesus asked 'Why are you afraid?' :",
+    "es": "En la tormenta de Galilea, Jesús preguntó '¿Por qué estáis amedrentados?':"
+   },
+   "options": {
+    "en": [
+     "Before calming the storm, while they were drowning",
+     "To shame them publicly",
+     "And then left them in the storm",
+     "After he had stilled the storm, when they were safe — and they were left full of awe"
+    ],
+    "es": [
+     "Antes de calmar la tormenta, mientras se ahogaban",
+     "Para avergonzarlos públicamente",
+     "Y luego los dejó en la tormenta",
+     "Después de calmar la tormenta, cuando estaban a salvo — y quedaron llenos de asombro"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "According to the unit, the one pattern that always feeds anxiety is:",
+    "es": "Según la unidad, el único patrón que siempre alimenta la ansiedad es:"
+   },
+   "options": {
+    "en": [
+     "Talking about it",
+     "Avoidance — fleeing the feared thing, which makes the fear grow and the world shrink",
+     "Prayer",
+     "Seeing a doctor"
+    ],
+    "es": [
+     "Hablar de ello",
+     "La evitación — huir de lo temido, lo que hace crecer el miedo y encoger el mundo",
+     "La oración",
+     "Ver a un médico"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "The unit defines courage as:",
+    "es": "La unidad define el valor como:"
+   },
+   "options": {
+    "en": [
+     "Doing the right thing while afraid",
+     "Never feeling any fear",
+     "Avoiding all danger",
+     "Pretending to be brave"
+    ],
+    "es": [
+     "Hacer lo correcto estando con miedo",
+     "Nunca sentir miedo alguno",
+     "Evitar todo peligro",
+     "Fingir ser valiente"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "When God says 'fear not' in Isaiah 41:10, the unit emphasizes that He adds:",
+    "es": "Cuando Dios dice 'no temas' en Isaías 41:10, la unidad enfatiza que añade:"
+   },
+   "options": {
+    "en": [
+     "'because you are strong enough'",
+     "'or you will be punished'",
+     "'for I am with you' — a Presence to lean on, not just a command to feel differently",
+     "nothing further"
+    ],
+    "es": [
+     "'porque eres lo bastante fuerte'",
+     "'o serás castigado'",
+     "'porque yo estoy contigo' — una Presencia en quien apoyarse, no solo una orden de sentir distinto",
+     "nada más"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "Regarding panic attacks and severe anxiety, the unit advises the pastor to:",
+    "es": "Respecto a los ataques de pánico y la ansiedad severa, la unidad aconseja al pastor:"
+   },
+   "options": {
+    "en": [
+     "Treat them purely as a spiritual problem",
+     "Handle them entirely alone",
+     "Tell the person to ignore them",
+     "Recognize they can have physical causes and bring in medical and professional help alongside his care"
+    ],
+    "es": [
+     "Tratarlos puramente como un problema espiritual",
+     "Manejarlos del todo solo",
+     "Decirle a la persona que los ignore",
+     "Reconocer que pueden tener causas físicas y traer ayuda médica y profesional junto a su cuidado"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "Wolpe's 'systematic desensitization' is the clinical name for:",
+    "es": "La 'desensibilización sistemática' de Wolpe es el nombre clínico de:"
+   },
+   "options": {
+    "en": [
+     "Facing a feared thing gradually in small steps while staying relaxed, so the body learns it is survivable",
+     "Avoiding the feared thing forever",
+     "Taking medication only",
+     "Forcing someone into their worst fear all at once"
+    ],
+    "es": [
+     "Enfrentar lo temido gradualmente en pequeños pasos manteniéndose relajado, para que el cuerpo aprenda que es sobrevivible",
+     "Evitar lo temido para siempre",
+     "Tomar solo medicación",
+     "Forzar a alguien a su peor miedo todo de una vez"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "Reality Therapy's most useful contribution for the anxious, per the unit, is that it:",
+    "es": "La contribución más útil de la Terapia de la Realidad para el ansioso, según la unidad, es que:"
+   },
+   "options": {
+    "en": [
+     "Endlessly analyzes the past",
+     "Cuts through 'I can't help it' to the truth that, while one cannot choose to feel unafraid, one can choose the next action",
+     "Tells people their feelings don't matter",
+     "Removes all responsibility"
+    ],
+    "es": [
+     "Analiza el pasado sin fin",
+     "Corta el 'no lo puedo evitar' hacia la verdad de que, aunque uno no puede elegir sentirse sin miedo, puede elegir la próxima acción",
+     "Les dice a las personas que sus sentimientos no importan",
+     "Quita toda responsabilidad"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "The biblical caution against Reality Therapy is that it can:",
+    "es": "La advertencia bíblica contra la Terapia de la Realidad es que puede:"
+   },
+   "options": {
+    "en": [
+     "Speak as if the human will alone were enough, when Scripture knows the will is weak and needs the Spirit",
+     "Never help anyone",
+     "Be demonic in origin",
+     "Require ignoring all behavior"
+    ],
+    "es": [
+     "Hablar como si la voluntad humana sola bastara, cuando la Escritura sabe que la voluntad es débil y necesita el Espíritu",
+     "Nunca ayudar a nadie",
+     "Ser de origen demoníaco",
+     "Exigir ignorar toda conducta"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "The deepest cure for fear, according to the unit, is finally:",
+    "es": "La cura más honda para el miedo, según la unidad, es al final:"
+   },
+   "options": {
+    "en": [
+     "The absence of all storms",
+     "A better technique",
+     "A calmer body alone",
+     "A trust that rests in the character of God — the presence of the Lord of the storm, not the absence of the storm"
+    ],
+    "es": [
+     "La ausencia de toda tormenta",
+     "Una mejor técnica",
+     "Solo un cuerpo más calmado",
+     "Una confianza que descansa en el carácter de Dios — la presencia del Señor de la tormenta, no la ausencia de la tormenta"
+    ]
+   },
+   "answer": 3
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Why must the pastor avoid treating anxiety as simple weak faith, and how does the storm on Galilee shape his approach?",
+    "es": "¿Por qué debe el pastor evitar tratar la ansiedad como simple fe débil, y cómo moldea su enfoque la tormenta de Galilea?"
+   },
+   "keywords": {
+    "en": [
+     "like",
+     "depres",
+     "anxiet",
+     "treate",
+     "mere",
+     "faithl",
+     "script",
+     "fear"
+    ],
+    "es": [
+     "depres",
+     "ansied",
+     "tratar",
+     "mera",
+     "falta",
+     "temáis",
+     "afanéi",
+     "escrit"
+    ]
+   },
+   "model": {
+    "en": "Like depression, anxiety must not be treated as mere faithlessness. Scripture's 'fear not' and 'do not be anxious' are loving invitations and promises, not a club to beat the fearful; a trembling person flogged with 'you just need more faith' only has shame added to fear. Anxiety can also have deep physical and chemical roots — a racing heart and flood of dread can rise from the body itself. The storm on Galilee shapes the approach: the disciples, experienced fishermen, were terrified as the boat filled, and Jesus, after stilling the storm, asked 'Why are you afraid?' — note, after they were safe, not while drowning. They were left full of awe: 'Who then is this?' That wonder is the beginning of the cure: not that storms never come, but that the One in the boat is Lord even of the wind. So the pastor comes not to scold the fear away but to help carry it toward the God who says 'fear not, for I am with you.'",
+    "es": "Como la depresión, la ansiedad no debe tratarse como mera falta de fe. El 'no temáis' y 'no os afanéis' de la Escritura son invitaciones y promesas amorosas, no un garrote para golpear al temeroso; una persona temblorosa azotada con 'solo necesitas más fe' solo recibe vergüenza añadida al miedo. La ansiedad también puede tener raíces físicas y químicas profundas — un corazón acelerado y una marea de pavor pueden surgir del cuerpo mismo. La tormenta de Galilea moldea el enfoque: los discípulos, pescadores experimentados, estaban aterrados mientras la barca se llenaba, y Jesús, tras calmar la tormenta, preguntó '¿Por qué estáis amedrentados?' — note, después de estar a salvo, no mientras se ahogaban. Quedaron llenos de asombro: '¿Quién es éste?' Ese asombro es el comienzo de la cura: no que las tormentas nunca vengan, sino que Aquel en la barca es Señor aun del viento. Así que el pastor viene no a reñir el miedo sino a ayudar a llevarlo hacia el Dios que dice 'no temas, porque yo estoy contigo.'"
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain how Step Five (Responsibility) is reframed for the anxious person, including the role of avoidance and the unit's definition of courage.",
+    "es": "Explique cómo se replantea el Paso Cinco (Responsabilidad) para la persona ansiosa, incluyendo el papel de la evitación y la definición de valor de la unidad."
+   },
+   "keywords": {
+    "en": [
+     "depres",
+     "step",
+     "five",
+     "never",
+     "fear",
+     "fault",
+     "true",
+     "freein"
+    ],
+    "es": [
+     "depres",
+     "paso",
+     "cinco",
+     "miedo",
+     "culpa",
+     "respon",
+     "verdad",
+     "libera"
+    ]
+   },
+   "model": {
+    "en": "As with depression, Step Five is never 'your fear is your fault.' But there is a true and freeing responsibility the anxious person can take: recognizing that, while they cannot will the fear away, they can choose their next action in spite of it. The unit defines courage as not the absence of fear but doing the right thing while afraid. The key pattern to see is avoidance: every time we flee what we fear, the fear grows stronger and our world grows smaller. So responsibility is reframed as the choice to stop feeding the fear by running, and instead to take the next small, do-able step toward what has been avoided — not recklessly or all at once, but deliberately. The person is not responsible for feeling afraid; they are invited to take responsibility for what they do next.",
+    "es": "Como con la depresión, el Paso Cinco nunca es 'tu miedo es tu culpa.' Pero hay una responsabilidad verdadera y liberadora que la persona ansiosa puede tomar: reconocer que, aunque no pueden desear que el miedo se vaya, pueden elegir su próxima acción a pesar de él. La unidad define el valor no como la ausencia de miedo sino como hacer lo correcto estando con miedo. El patrón clave a ver es la evitación: cada vez que huimos de lo que tememos, el miedo se fortalece y nuestro mundo se encoge. Así que la responsabilidad se replantea como la elección de dejar de alimentar el miedo huyendo, y en cambio dar el siguiente pequeño paso realizable hacia lo evitado — no de modo imprudente ni todo de una vez, sino deliberadamente. La persona no es responsable de sentir miedo; se le invita a tomar responsabilidad de lo que hace después."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe how God says 'fear not' in Scripture (Isaiah 41:10; Philippians 4:6-7; Matthew 6; 1 Peter 5:7), and what the counselor brings in Step Nine.",
+    "es": "Describa cómo dice Dios 'no temas' en la Escritura (Isaías 41:10; Filipenses 4:6-7; Mateo 6; 1 Pedro 5:7), y qué trae el consejero en el Paso Nueve."
+   },
+   "keywords": {
+    "en": [
+     "fear",
+     "said",
+     "script",
+     "repeat",
+     "comman",
+     "notice",
+     "says",
+     "almost"
+    ],
+    "es": [
+     "dice",
+     "temas",
+     "mandat",
+     "repeti",
+     "escrit",
+     "note",
+     "cómo",
+     "dios"
+    ]
+   },
+   "model": {
+    "en": "'Fear not' is said to be Scripture's most repeated command, but notice how God says it. He almost never merely says 'stop being afraid'; He says 'fear not, for I am with you' (Isaiah 41:10) — the cure is a Presence to lean on, not a command to feel differently. Philippians 4:6-7 does not stop at 'do not be anxious'; it gives the path (prayer and thanksgiving) and the promise that the peace of God, surpassing understanding, will guard our hearts. In Matthew 6 Jesus reasons gently with worry: look at the birds and lilies; your Father feeds and clothes them, and you are worth more; do not be anxious about tomorrow. Peter says, 'cast all your anxieties on him, because he cares for you' (1 Peter 5:7). The counselor brings these, and lets a real wonder stand: he cannot promise the storms will not come or explain why this person carries this fear. What he holds out is what the disciples learned in the boat — the cure for fear is finally not the absence of the storm but the presence of the Lord of the storm.",
+    "es": "Se dice que 'no temas' es el mandato más repetido de la Escritura, pero note cómo lo dice Dios. Casi nunca dice meramente 'deja de temer'; dice 'no temas, porque yo estoy contigo' (Isaías 41:10) — la cura es una Presencia en quien apoyarse, no una orden de sentir distinto. Filipenses 4:6-7 no se detiene en 'no os afanéis'; da el camino (oración y acción de gracias) y la promesa de que la paz de Dios, que sobrepasa el entendimiento, guardará nuestros corazones. En Mateo 6 Jesús razona con suavidad con la preocupación: miren las aves y los lirios; su Padre los alimenta y viste, y ustedes valen más; no se afanen por el mañana. Pedro dice: 'echando toda vuestra ansiedad sobre él, porque él tiene cuidado de vosotros' (1 Pedro 5:7). El consejero trae estas, y deja que un verdadero asombro permanezca: no puede prometer que las tormentas no vendrán ni explicar por qué esta persona lleva este miedo. Lo que sostiene es lo que los discípulos aprendieron en la barca — la cura para el miedo no es al final la ausencia de la tormenta sino la presencia del Señor de la tormenta."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the two roads in Step Eight (avoidance vs. facing fear by degrees) and what the nervous system learns from each.",
+    "es": "Explique los dos caminos del Paso Ocho (evitación vs. enfrentar el miedo por grados) y qué aprende el sistema nervioso de cada uno."
+   },
+   "keywords": {
+    "en": [
+     "road",
+     "avoida",
+     "feels",
+     "safer",
+     "moment",
+     "always",
+     "narrow",
+     "life"
+    ],
+    "es": [
+     "camino",
+     "evitac",
+     "siente",
+     "seguro",
+     "moment",
+     "estrec",
+     "vida",
+     "cosa"
+    ]
+   },
+   "model": {
+    "en": "The road of avoidance feels safer in the moment but always narrows the life: one feared thing avoided becomes two, then ten, until the world shrinks to a single room. The road of facing fear by degrees feels harder at first but always widens the life. Each small fear faced and survived teaches the nervous system a truer lesson than any argument: 'I felt the fear, I went anyway, and I was not destroyed.' This is honest work — the counselor admits it is not instant and that fear will protest loudly the first times it is disobeyed. But he holds out the real and reachable hope that anxiety, faced with help, loosens its grip, and a life need not keep getting smaller. The freer life is reached one faced fear at a time. (This is what Wolpe called systematic desensitization: graded, relaxed exposure unlearns the fear that avoidance feeds.)",
+    "es": "El camino de la evitación se siente más seguro en el momento pero siempre estrecha la vida: una cosa temida evitada se vuelve dos, luego diez, hasta que el mundo se encoge a un solo cuarto. El camino de enfrentar el miedo por grados se siente más difícil al principio pero siempre ensancha la vida. Cada pequeño miedo enfrentado y sobrevivido le enseña al sistema nervioso una lección más verdadera que cualquier argumento: 'sentí el miedo, fui de todos modos, y no fui destruido.' Este es trabajo honesto — el consejero admite que no es instantáneo y que el miedo protestará a gritos las primeras veces que se le desobedezca. Pero sostiene la esperanza real y alcanzable de que la ansiedad, enfrentada con ayuda, afloja su agarre, y una vida no tiene que seguir empequeñeciéndose. La vida más libre se alcanza un miedo enfrentado a la vez. (Esto es lo que Wolpe llamó desensibilización sistemática: la exposición gradual y relajada desaprende el miedo que la evitación alimenta.)"
+   }
+  },
+  {
+   "prompt": {
+    "en": "Summarize the value and the biblical caution of the Reality Therapy and Behavioral approaches for anxiety.",
+    "es": "Resuma el valor y la advertencia bíblica de los enfoques de Terapia de la Realidad y Conductual para la ansiedad."
+   },
+   "keywords": {
+    "en": [
+     "realit",
+     "therap",
+     "glasse",
+     "turns",
+     "analyz",
+     "past",
+     "presen",
+     "choice"
+    ],
+    "es": [
+     "terapi",
+     "realid",
+     "glasse",
+     "vuelve",
+     "anális",
+     "pasado",
+     "elecci",
+     "presen"
+    ]
+   },
+   "model": {
+    "en": "Reality Therapy (Glasser) turns from analyzing the past to present choices, asking 'What are you doing now? Is it working? What could you choose differently?' It holds us responsible for our choices without excusing them by our history — useful for cutting the paralysis of 'I can't help it' to the truth that one can choose the next action even when one cannot choose the feeling. The Behavioral approach (Wolpe) adds systematic desensitization: facing a feared thing gradually while relaxed so the body learns it is survivable. Both carry real, usable wisdom. The biblical caution: Reality Therapy can speak as if the will alone were enough ('just choose better'), but the will is weak — 'the spirit is willing but the flesh is weak' — and we need the Spirit's help and a renewed heart. And both can quiet the symptom while leaving the soul's deeper need untouched, for the final cure for fear is not a calmer body or a better choice but trust resting in the character of God. The tools teach the nervous system a fear is survivable; only the gospel teaches the heart we are held by a Father from whose love nothing can separate us. The technique serves; it does not save.",
+    "es": "La Terapia de la Realidad (Glasser) vuelve del análisis del pasado a las elecciones presentes, preguntando '¿Qué estás haciendo ahora? ¿Te funciona? ¿Qué podrías elegir distinto?' Nos hace responsables de nuestras elecciones sin excusarlas por nuestra historia — útil para cortar la parálisis del 'no lo puedo evitar' hacia la verdad de que uno puede elegir la próxima acción aun cuando no puede elegir el sentimiento. El enfoque Conductual (Wolpe) añade la desensibilización sistemática: enfrentar lo temido gradualmente mientras se está relajado para que el cuerpo aprenda que es sobrevivible. Ambos llevan sabiduría real y utilizable. La advertencia bíblica: la Terapia de la Realidad puede hablar como si la voluntad sola bastara ('solo elige mejor'), pero la voluntad es débil — 'el espíritu está dispuesto, mas la carne es débil' — y necesitamos la ayuda del Espíritu y un corazón renovado. Y ambos pueden acallar el síntoma dejando intacta la necesidad más honda del alma, pues la cura final para el miedo no es un cuerpo más calmado ni una mejor elección sino la confianza que descansa en el carácter de Dios. Las herramientas enseñan al sistema nervioso que un miedo es sobrevivible; solo el evangelio enseña al corazón que somos sostenidos por un Padre de cuyo amor nada nos puede separar. La técnica sirve; no salva."
+   }
+  }
+ ]
+};

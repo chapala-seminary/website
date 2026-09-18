@@ -18,7 +18,7 @@ const SITE = path.join(path.dirname(new URL(import.meta.url).pathname), '..', 's
 const args = Object.fromEntries(process.argv.slice(2).map((a, i, A) =>
   a.startsWith('--') ? [a.slice(2), A[i + 1] && !A[i + 1].startsWith('--') ? A[i + 1] : true] : []).filter(Boolean));
 
-const NAMES = ['DATA', 'CFG', 'mcQuestions', 'kwQuestions', 'saQuestions', 'MC', 'SA', 'MCQ', 'QUESTIONS',
+const NAMES = ['DATA', 'CFG', 'UNITS', 'KEY', 'ANSWERS', 'ANS', 'KW', 'mcQuestions', 'kwQuestions', 'saQuestions', 'MC', 'SA', 'MCQ', 'QUESTIONS',
   'unitTitlesEn', 'unitTitlesEs', 'UNIT', 'UNITS', 'TOTAL_UNITS', 'totalUnits',
   'NEXT_URL', 'NEXT_UNIT_URL', 'NEXT_HREF', 'PREV_URL', 'PREV_UNIT_URL', 'PREV_HREF'];
 
@@ -28,8 +28,10 @@ function loadGlobals(file) {
   const ctx = { console, window: {}, localStorage: { getItem: () => null, setItem() {} }, document: {}, __out: null };
   vm.createContext(ctx);
   vm.runInContext(code, ctx, { timeout: 5000 });
+  lastWindow = ctx.window;
   return ctx.__out;
 }
+let lastWindow = {};
 
 const first = (...v) => v.find(x => x !== undefined && x !== null);
 const pair = (en, es) => (en === undefined && es === undefined) ? undefined : { en: en ?? '', es: es ?? en ?? '' };
@@ -61,8 +63,68 @@ function decodeC(q, pos, nOptions) {
   return (d >= 0 && d < nOptions) ? d : undefined;
 }
 
-function mapMC(q, pos) {
+function mapMC(q, pos, keyArr) {
+  /* options given as {A:{en,es}, B:{...}} with the answer in a separate
+     course-level key array. Keeping the key out of the question object was
+     presumably to make it less obvious in the source. */
+  if (q.options && typeof q.options === 'object' && !Array.isArray(q.options)) {
+    const letters = Object.keys(q.options).filter(k => /^[A-H]$/.test(k)).sort();
+    if (letters.length) {
+      const stem = biOf(q, 'q', 'stem', 'text', 'prompt');
+      if (!stem) return null;
+      let answer = first(q.correct, q.answer, q.ans,
+        Array.isArray(keyArr) ? keyArr[pos] : undefined);
+      if (typeof answer === 'string') answer = letters.indexOf(answer.toUpperCase());
+      if (typeof answer !== 'number' || answer < 0 || answer >= letters.length) return null;
+      const val = (L, lang) => {
+        const o = q.options[L];
+        return (o && typeof o === 'object') ? (o[lang] ?? o.en) : o;
+      };
+      const why = biOf(q, 'why', 'explanation', 'expl');
+      return {
+        stem: { en: stripNum(stem.en), es: stripNum(stem.es) },
+        options: { en: letters.map(L => val(L, 'en')), es: letters.map(L => val(L, 'es')) },
+        answer,
+        ...(why ? { why } : {}),
+      };
+    }
+  }
+  return mapMC_(q, pos);
+}
+
+function mapMC_(q, pos) {
+  // letter-keyed options inside a language object: {en:{stem,a,b,c,d}, correct:'D'}
+  if (q.en && typeof q.en === 'object' && typeof q.en.stem === 'string') {
+    const letters = ['a', 'b', 'c', 'd', 'e', 'f'].filter(L => q.en[L] !== undefined);
+    if (letters.length) {
+      let answer = q.correct ?? q.answer;
+      if (typeof answer === 'string') answer = 'ABCDEF'.indexOf(answer.toUpperCase());
+      if (typeof answer !== 'number' || answer < 0 || answer >= letters.length) return null;
+      const es = q.es && typeof q.es === 'object' ? q.es : q.en;
+      return {
+        stem: pair(stripNum(q.en.stem), stripNum(es.stem ?? q.en.stem)),
+        options: { en: letters.map(L => q.en[L]), es: letters.map(L => es[L] ?? q.en[L]) },
+        answer,
+        ...(q.en.why || q.en.explanation ? { why: pair(q.en.why ?? q.en.explanation,
+                                                       es.why ?? es.explanation) } : {}),
+      };
+    }
+  }
   // compact shape used by a few courses: {en,es,oen,oes,c,xen,xes}
+  if (typeof q.en === 'string' && (Array.isArray(q.oen) || Array.isArray(q.optionsEn))) {
+    const oen = q.oen ?? q.optionsEn, oes = q.oes ?? q.optionsEs ?? oen;
+    let ans = first(q.c, q.correct, q.answer);
+    if (typeof ans === 'string') ans = 'ABCDEFGH'.indexOf(ans.toUpperCase());
+    if (typeof ans !== 'number') ans = decodeC(q, pos, oen.length);
+    if (typeof ans !== 'number' || ans < 0 || ans >= oen.length) return null;
+    return {
+      stem: pair(stripNum(q.en), stripNum(q.es)),
+      options: { en: oen, es: Array.isArray(oes) ? oes : oen },
+      answer: ans,
+      ...(q.xen !== undefined || q.fcEn !== undefined
+        ? { why: pair(q.xen ?? q.fcEn, q.xes ?? q.fcEs) } : {}),
+    };
+  }
   if (typeof q.en === 'string' && Array.isArray(q.oen)) {
     let answer = first(q.correct, q.answer);
     if (typeof answer === 'string') answer = 'ABCDEFGH'.indexOf(answer.toUpperCase());
@@ -78,9 +140,9 @@ function mapMC(q, pos) {
   const stemRaw = biOf(q, 'stem', 'text', 'prompt', 'q');
   if (!stemRaw) return null;
   const stem = { en: stripNum(stemRaw.en), es: stripNum(stemRaw.es) };
-  let oEn = q.optionsEn ?? (q.options && q.options.en) ?? (q.opts && q.opts.en) ??
+  let oEn = q.optionsEn ?? q.options_en ?? q.optsEn ?? (q.options && q.options.en) ?? (q.opts && q.opts.en) ??
             (Array.isArray(q.options) ? q.options : undefined) ?? (Array.isArray(q.opts) ? q.opts : undefined);
-  let oEs = q.optionsEs ?? (q.options && q.options.es) ?? (q.opts && q.opts.es) ?? oEn;
+  let oEs = q.optionsEs ?? q.options_es ?? q.optsEs ?? (q.options && q.options.es) ?? (q.opts && q.opts.es) ?? oEn;
   // some courses give one array of {en,es} per option rather than two arrays
   if (Array.isArray(oEn) && oEn.length && oEn[0] && typeof oEn[0] === 'object' &&
       ('en' in oEn[0] || 'es' in oEn[0])) {
@@ -94,7 +156,7 @@ function mapMC(q, pos) {
     a.every(x => typeof x === 'string' && /^\s*[A-H][.)]\s+/.test(x));
   if (labelled(oEn)) oEn = oEn.map(x => x.replace(/^\s*[A-H][.)]\s+/, ''));
   if (labelled(oEs)) oEs = oEs.map(x => x.replace(/^\s*[A-H][.)]\s+/, ''));
-  let answer = first(q.correct, q.answer, q.correctIndex);
+  let answer = first(q.correct, q.answer, q.correctIndex, q.ans);
   if (typeof answer === 'string') answer = 'ABCDEFGH'.indexOf(answer.toUpperCase());
   if (typeof answer !== 'number') answer = decodeC(q, pos, oEn.length);
   if (typeof answer !== 'number' || answer < 0 || answer >= oEn.length) return null;
@@ -108,20 +170,38 @@ function mapMC(q, pos) {
 }
 
 function mapSA(q) {
-  if (typeof q.en === 'string' && (q.men !== undefined || q.ken !== undefined)) {
+  // {en:{prompt|stem}, es:{...}, kw_en:[...]} used by one course family
+  if (q.en && typeof q.en === 'object' && (q.en.stem || q.en.prompt)) {
+    const es = q.es && typeof q.es === 'object' ? q.es : q.en;
+    const kEn = q.kw_en ?? q.kwEn ?? q.en.kw;
+    return {
+      prompt: pair(stripNum(q.en.stem ?? q.en.prompt), stripNum(es.stem ?? es.prompt ?? q.en.stem ?? q.en.prompt)),
+      ...(Array.isArray(kEn) ? { keywords: { en: kEn, es: q.kw_es ?? q.kwEs ?? kEn } } : {}),
+      ...(q.model_en || q.en.model ? { model: pair(q.model_en ?? q.en.model, q.model_es ?? es.model) } : {}),
+    };
+  }
+  // prompt in a bare bilingual pair, with keywords/model alongside
+  if (typeof q.en === 'string' &&
+      (q.men !== undefined || q.ken !== undefined ||
+       q.kw_en !== undefined || q.kwEn !== undefined ||
+       q.modelEn !== undefined || q.model_en !== undefined)) {
+    const kEn = q.ken ?? q.kw_en ?? q.kwEn ?? q.concepts;
+    const kEs = q.kes ?? q.kw_es ?? q.kwEs ?? kEn;
+    const mEn = q.men ?? q.modelEn ?? q.model_en;
+    const mEs = q.mes ?? q.modelEs ?? q.model_es;
     return {
       prompt: pair(stripNum(q.en), stripNum(q.es)),
-      ...(Array.isArray(q.ken) ? { keywords: { en: q.ken, es: Array.isArray(q.kes) ? q.kes : q.ken } } : {}),
-      ...(q.men !== undefined ? { model: pair(q.men, q.mes) } : {}),
+      ...(Array.isArray(kEn) ? { keywords: { en: kEn, es: Array.isArray(kEs) ? kEs : kEn } } : {}),
+      ...(mEn !== undefined ? { model: pair(mEn, mEs) } : {}),
     };
   }
   const promptRaw = biOf(q, 'prompt', 'stem', 'text', 'q');
   if (!promptRaw) return null;
   const prompt = { en: stripNum(promptRaw.en), es: stripNum(promptRaw.es) };
-  const kEn = q.kw_en ?? (q.keywords && q.keywords.en) ?? (q.kw && q.kw.en) ??
+  const kEn = q.kw_en ?? q.kwEn ?? (q.keywords && q.keywords.en) ?? (q.kw && q.kw.en) ??
               (Array.isArray(q.keywords) ? q.keywords : undefined) ?? (Array.isArray(q.kw) ? q.kw : undefined);
-  const kEs = q.kw_es ?? (q.keywords && q.keywords.es) ?? (q.kw && q.kw.es) ?? kEn;
-  const model = biOf(q, 'model', 'answer', 'explanation');
+  const kEs = q.kw_es ?? q.kwEs ?? (q.keywords && q.keywords.es) ?? (q.kw && q.kw.es) ?? kEn;
+  const model = biOf(q, 'model', 'model_', 'answer', 'explanation');
   return {
     prompt,
     ...(Array.isArray(kEn) ? { keywords: { en: kEn, es: Array.isArray(kEs) ? kEs : kEn } } : {}),
@@ -144,14 +224,22 @@ const problems = [];
 for (const { n, file } of unitFiles) {
   const dataFile = path.join(SITE, 'data', slug, `unit${n}.js`);
   if (!fs.existsSync(dataFile)) { problems.push(`unit ${n}: no data file (still inline)`); continue; }
-  let g;
-  try { g = loadGlobals(dataFile); }
+  let g, ctxWindow;
+  try { g = loadGlobals(dataFile); ctxWindow = lastWindow; }
   catch (e) { problems.push(`unit ${n}: data file will not evaluate — ${e.message}`); continue; }
 
+  // Genesis stores lesson text and questions together in one object, and its
+  // page renders the lesson from it, so that object must survive the port.
+  const G = ctxWindow.CTS_GENESIS_UNIT;
+  if (G) { g.mcQuestions = G.mcq; g.kwQuestions = G.sa; }
   const D = g.DATA && typeof g.DATA === 'object' ? g.DATA : {};
-  const rawMC = first(g.mcQuestions, g.MC, g.MCQ, g.QUESTIONS, D.mc) || [];
-  const rawSA = first(g.kwQuestions, g.saQuestions, g.SA, D.sa) || [];
-  const mc = rawMC.map((q, i) => mapMC(q, i)), sa = rawSA.map(mapSA);
+  // a course may keep its units in one object keyed by unit number
+  const Un = (g.UNITS && typeof g.UNITS === 'object' && !Array.isArray(g.UNITS))
+    ? (g.UNITS[n] || g.UNITS[String(n)] || {}) : {};
+  const rawMC = first(g.mcQuestions, g.MC, g.MCQ, g.QUESTIONS, D.mc, Un.mcq, Un.mc) || [];
+  const rawSA = first(g.kwQuestions, g.saQuestions, g.SA, g.KW, D.sa, Un.shortAnswer, Un.sa) || [];
+  const keyArr = first(g.KEY, g.ANSWERS, g.ANS);
+  const mc = rawMC.map((q, i) => mapMC(q, i, keyArr)), sa = rawSA.map(mapSA);
   if (rawMC.length && mc.some(x => x === null)) { problems.push(`unit ${n}: ${mc.filter(x => !x).length}/${mc.length} MC unmapped`); continue; }
   if (rawSA.length && sa.some(x => x === null)) { problems.push(`unit ${n}: ${sa.filter(x => !x).length}/${rawSA.length} SA unmapped`); continue; }
   if (!mc.length && !sa.length) { problems.push(`unit ${n}: no questions found`); continue; }
@@ -177,7 +265,11 @@ if (!args.apply) { console.log('  (analysis only — pass --apply to write)'); p
 if (problems.length) { console.error('  refusing to write: unmapped units'); process.exit(1); }
 
 for (const b of built) {
-  fs.writeFileSync(b.dataFile,
+  const prior = fs.readFileSync(b.dataFile, 'utf8');
+  const keep = prior.includes('CTS_GENESIS_UNIT')
+    ? prior.replace(/\n?window\.CTS_UNIT = [\s\S]*$/, '') + '\n\n'
+    : '';
+  fs.writeFileSync(b.dataFile, keep +
     `/* ${course} — unit ${b.n}. Content only; all policy lives in cts-engine.js. */\n` +
     `window.CTS_UNIT = ${JSON.stringify(b.obj, null, 1)};\n`);
   const p = path.join(SITE, b.file);

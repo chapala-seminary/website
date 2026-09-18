@@ -1,0 +1,753 @@
+/* CTSEvanPreach — unit 4. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "evanpreach",
+ "unit": 4,
+ "totalUnits": 10,
+ "filePrefix": "CTSEvanPreach",
+ "prevHref": "CTSEvanPreachUnit3.html",
+ "nextHref": "CTSEvanPreachUnit5.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "What sermon-planning method does this unit teach?",
+    "es": "¿Qué método de planificación de sermones enseña esta unidad?"
+   },
+   "options": {
+    "en": [
+     "The Question Method",
+     "The Word Method",
+     "The Interview Method",
+     "The Textual Method"
+    ],
+    "es": [
+     "El Método de la Pregunta",
+     "El Método de la Palabra",
+     "El Método de la Entrevista",
+     "El Método Textual"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "Where does the Word Method come from?",
+    "es": "¿De dónde viene el Método de la Palabra?"
+   },
+   "options": {
+    "en": [
+     "Hermeneutics Unit 5",
+     "WiseSpeak Unit 2",
+     "WiseSpeak Unit 8",
+     "Pastoral Ministries Unit 4"
+    ],
+    "es": [
+     "Hermenéutica Unidad 5",
+     "WiseSpeak Unidad 2",
+     "WiseSpeak Unidad 8",
+     "Ministerios Pastorales Unidad 4"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "The Word Method follows which approach?",
+    "es": "¿Qué enfoque sigue el Método de la Palabra?"
+   },
+   "options": {
+    "en": [
+     "Inductive — begin with the text and work backward to the keyword",
+     "Deductive — start with a topic and find proof-texts",
+     "Allegorical — find hidden meaning in symbols",
+     "Anecdotal — start with a story from personal experience"
+    ],
+    "es": [
+     "Inductivo — comenzar con el texto y trabajar hacia atrás hasta la palabra clave",
+     "Deductivo — comenzar con un tema y buscar textos de prueba",
+     "Alegórico — encontrar significado oculto en símbolos",
+     "Anecdótico — comenzar con una historia de experiencia personal"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "In the Word Method, the keyword must always be:",
+    "es": "En el Método de la Palabra, la palabra clave debe ser siempre:"
+   },
+   "options": {
+    "en": [
+     "A verb in the imperative",
+     "A proper name from the passage",
+     "An adjective that modifies God",
+     "A plural noun drawn from the text"
+    ],
+    "es": [
+     "Un verbo en imperativo",
+     "Un nombre propio del pasaje",
+     "Un adjetivo que modifica a Dios",
+     "Un sustantivo plural tomado del texto"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "Each point in the outline must be:",
+    "es": "Cada punto en el bosquejo debe ser:"
+   },
+   "options": {
+    "en": [
+     "A complete paragraph that explains a doctrine in full",
+     "A short singular of the plural keyword",
+     "A direct quotation of a creed",
+     "A rhetorical question without an answer"
+    ],
+    "es": [
+     "Un párrafo completo que explica una doctrina en detalle",
+     "Un singular corto de la palabra clave plural",
+     "Una cita directa de un credo",
+     "Una pregunta retórica sin respuesta"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "What is the maximum length of each point?",
+    "es": "¿Cuál es la longitud máxima de cada punto?"
+   },
+   "options": {
+    "en": [
+     "One sentence of any length",
+     "Three words exactly",
+     "Five words or less",
+     "Ten words or less"
+    ],
+    "es": [
+     "Una oración de cualquier longitud",
+     "Tres palabras exactamente",
+     "Cinco palabras o menos",
+     "Diez palabras o menos"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "Parallel structure in the points exists primarily to:",
+    "es": "La estructura paralela en los puntos existe principalmente para:"
+   },
+   "options": {
+    "en": [
+     "Help the listener remember the sermon easily",
+     "Demonstrate the preacher's vocabulary",
+     "Match the rhyme schemes of hymnody",
+     "Imitate the style of Hebrew poetry"
+    ],
+    "es": [
+     "Ayudar al oyente a recordar el sermón fácilmente",
+     "Demostrar el vocabulario del predicador",
+     "Coincidir con los esquemas de rima de la himnodia",
+     "Imitar el estilo de la poesía hebrea"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "In the John 1:1 example, the keyword chosen is:",
+    "es": "En el ejemplo de Juan 1:1, la palabra clave escogida es:"
+   },
+   "options": {
+    "en": [
+     "truths",
+     "steps",
+     "reasons",
+     "facts"
+    ],
+    "es": [
+     "verdades",
+     "pasos",
+     "razones",
+     "hechos"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "In the John 1:1 example, the three facts about the Word are:",
+    "es": "En el ejemplo de Juan 1:1, los tres hechos sobre el Verbo son:"
+   },
+   "options": {
+    "en": [
+     "The Word created; The Word redeemed; The Word reigns",
+     "The Word existed first; The Word was with God; The Word was God",
+     "The Word teaches; The Word saves; The Word judges",
+     "The Word died; The Word rose; The Word ascended"
+    ],
+    "es": [
+     "El Verbo creó; El Verbo redimió; El Verbo reina",
+     "El Verbo existía primero; El Verbo estaba con Dios; El Verbo era Dios",
+     "El Verbo enseña; El Verbo salva; El Verbo juzga",
+     "El Verbo murió; El Verbo resucitó; El Verbo ascendió"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "The Philippian jailer story used as a Word Method example comes from:",
+    "es": "La historia del carcelero de Filipos como ejemplo del Método de la Palabra viene de:"
+   },
+   "options": {
+    "en": [
+     "Acts 2",
+     "Acts 9",
+     "Acts 16",
+     "Acts 26"
+    ],
+    "es": [
+     "Hechos 2",
+     "Hechos 9",
+     "Hechos 16",
+     "Hechos 26"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "In the Philippian jailer example, the keyword chosen is:",
+    "es": "En el ejemplo del carcelero de Filipos, la palabra clave escogida es:"
+   },
+   "options": {
+    "en": [
+     "answers",
+     "questions",
+     "requirements",
+     "steps"
+    ],
+    "es": [
+     "respuestas",
+     "preguntas",
+     "requisitos",
+     "pasos"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "What is the FIRST of the seven practical steps for using the Word Method?",
+    "es": "¿Cuál es el PRIMER paso de los siete pasos prácticos para usar el Método de la Palabra?"
+   },
+   "options": {
+    "en": [
+     "Read the chosen text carefully",
+     "Write the one-sentence evangelistic objective",
+     "Form the subject around the keyword",
+     "Add a clear invitation at the end"
+    ],
+    "es": [
+     "Leer el texto elegido con cuidado",
+     "Escribir el objetivo evangelístico de una sola oración",
+     "Formar el tema alrededor de la palabra clave",
+     "Agregar una invitación clara al final"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "In the Romans 10:9–10 worked outline, the keyword is:",
+    "es": "En el bosquejo trabajado de Romanos 10:9–10, la palabra clave es:"
+   },
+   "options": {
+    "en": [
+     "reasons",
+     "facts",
+     "conditions",
+     "steps"
+    ],
+    "es": [
+     "razones",
+     "hechos",
+     "condiciones",
+     "pasos"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "In the Romans 10:9–10 worked outline, the first point is:",
+    "es": "En el bosquejo trabajado de Romanos 10:9–10, el primer punto es:"
+   },
+   "options": {
+    "en": [
+     "Be baptized in water",
+     "Confess with your mouth",
+     "Receive the Holy Spirit",
+     "Hear the gospel preached"
+    ],
+    "es": [
+     "Ser bautizados en agua",
+     "Confesar con la boca",
+     "Recibir el Espíritu Santo",
+     "Escuchar el evangelio predicado"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "In the Acts 2:38 worked outline, the keyword is:",
+    "es": "En el bosquejo trabajado de Hechos 2:38, la palabra clave es:"
+   },
+   "options": {
+    "en": [
+     "conditions",
+     "facts",
+     "steps",
+     "commands"
+    ],
+    "es": [
+     "condiciones",
+     "hechos",
+     "pasos",
+     "mandatos"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "In the Acts 2:38 worked outline, the third point is:",
+    "es": "En el bosquejo trabajado de Hechos 2:38, el tercer punto es:"
+   },
+   "options": {
+    "en": [
+     "Receive the Holy Spirit",
+     "Believe in your heart",
+     "Be baptized in water",
+     "Repent of your sins"
+    ],
+    "es": [
+     "Recibir el Espíritu Santo",
+     "Creer en el corazón",
+     "Ser bautizados en agua",
+     "Arrepentirse de sus pecados"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "When a single verse does not contain every point needed, the Word Method:",
+    "es": "Cuando un solo versículo no contiene cada punto necesario, el Método de la Palabra:"
+   },
+   "options": {
+    "en": [
+     "Must be abandoned in favor of an allegorical approach",
+     "Limits the sermon to two points instead of three",
+     "Forces the preacher to invent additional points",
+     "Uses additional supporting texts while the keyword still controls the outline"
+    ],
+    "es": [
+     "Debe abandonarse a favor de un enfoque alegórico",
+     "Limita el sermón a dos puntos en lugar de tres",
+     "Obliga al predicador a inventar puntos adicionales",
+     "Usa textos de apoyo adicionales mientras la palabra clave sigue controlando el bosquejo"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "The purpose of the one-sentence evangelistic objective is to:",
+    "es": "El propósito del objetivo evangelístico de una sola oración es:"
+   },
+   "options": {
+    "en": [
+     "Keep the focus on leading people to Christ",
+     "Summarize the preacher's life story in brief",
+     "State the historical setting of the passage",
+     "Conclude the sermon without any call for response"
+    ],
+    "es": [
+     "Mantener el enfoque en llevar a las personas a Cristo",
+     "Resumir brevemente la historia de vida del predicador",
+     "Indicar el contexto histórico del pasaje",
+     "Concluir el sermón sin ningún llamado a respuesta"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "How many practical planning methods does WiseSpeak Unit 8 give for evangelistic sermons?",
+    "es": "¿Cuántos métodos prácticos de planificación da la Unidad 8 de WiseSpeak para sermones evangelísticos?"
+   },
+   "options": {
+    "en": [
+     "Two",
+     "Four",
+     "Six",
+     "Seven"
+    ],
+    "es": [
+     "Dos",
+     "Cuatro",
+     "Seis",
+     "Siete"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "The most distinguishing feature of the inductive approach is that it:",
+    "es": "La característica más distintiva del enfoque inductivo es que:"
+   },
+   "options": {
+    "en": [
+     "Begins with a creedal statement and works toward the text",
+     "Begins with a story from the preacher's life",
+     "Begins with the specific facts in the text and works backward to discover the keyword",
+     "Begins with applications and works backward to find a text"
+    ],
+    "es": [
+     "Comienza con una declaración credal y trabaja hacia el texto",
+     "Comienza con una historia de la vida del predicador",
+     "Comienza con los hechos específicos del texto y trabaja hacia atrás para descubrir la palabra clave",
+     "Comienza con aplicaciones y trabaja hacia atrás para encontrar un texto"
+    ]
+   },
+   "answer": 2
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Define the Word Method in your own words.",
+    "es": "Defina el Método de la Palabra en sus propias palabras."
+   },
+   "keywords": {
+    "en": [
+     "text",
+     "keyword",
+     "plural",
+     "noun",
+     "point",
+     "singular",
+     "induct",
+     "bible"
+    ],
+    "es": [
+     "text",
+     "clave",
+     "plural",
+     "sustantiv",
+     "punto",
+     "singular",
+     "induct",
+     "biblia"
+    ]
+   },
+   "model": {
+    "en": "The Word Method starts with the biblical text itself: we read the passage, find a key word or idea that stands out, and let it become the plural-noun keyword for the whole sermon. Every point is a singular of that keyword, so the method is inductive and text-driven.",
+    "es": "El Método de la Palabra comienza con el texto bíblico mismo: leemos el pasaje, hallamos una palabra o idea clave que sobresale, y dejamos que se vuelva la palabra clave (sustantivo plural) de todo el sermón. Cada punto es un singular de esa clave, así que el método es inductivo y guiado por el texto."
+   }
+  },
+  {
+   "prompt": {
+    "en": "List the seven practical steps for using the Word Method.",
+    "es": "Enumere los siete pasos prácticos para usar el Método de la Palabra."
+   },
+   "keywords": {
+    "en": [
+     "read",
+     "probing",
+     "keyword",
+     "subject",
+     "point",
+     "objectiv",
+     "invit",
+     "select"
+    ],
+    "es": [
+     "leer",
+     "pregunta",
+     "clave",
+     "sujeto",
+     "punto",
+     "objetiv",
+     "invit",
+     "selec"
+    ]
+   },
+   "model": {
+    "en": "The seven steps are: read the text, ask the probing question, select the plural-noun keyword, form the subject, build the short parallel points, write the one-sentence objective, and close with the invitation.",
+    "es": "Los siete pasos son: leer el texto, hacer la pregunta, seleccionar la palabra clave plural, formar el sujeto, construir los puntos cortos y paralelos, escribir el objetivo de una frase, y cerrar con la invitación."
+   }
+  },
+  {
+   "prompt": {
+    "en": "In the John 1:1 example, what keyword is chosen and what are the three points?",
+    "es": "En el ejemplo de Juan 1:1, ¿qué palabra clave se escoge y cuáles son los tres puntos?"
+   },
+   "keywords": {
+    "en": [
+     "fact",
+     "word",
+     "existed",
+     "first",
+     "god",
+     "point",
+     "john",
+     "keyword"
+    ],
+    "es": [
+     "hecho",
+     "verbo",
+     "existi",
+     "primer",
+     "dios",
+     "punto",
+     "juan",
+     "clave"
+    ]
+   },
+   "model": {
+    "en": "In the John 1:1 example the keyword is 'facts,' and the three points are: the Word existed first, the Word was with God, and the Word was God. Each point is a clean singular of the keyword 'facts.'",
+    "es": "En el ejemplo de Juan 1:1 la palabra clave es 'hechos,' y los tres puntos son: el Verbo existía primero, el Verbo estaba con Dios, y el Verbo era Dios. Cada punto es un singular limpio de la palabra clave 'hechos.'"
+   }
+  },
+  {
+   "prompt": {
+    "en": "What text does the Philippian jailer story come from, and what keyword and points does it yield?",
+    "es": "¿De qué texto viene la historia del carcelero de Filipos, y qué palabra clave y puntos produce?"
+   },
+   "keywords": {
+    "en": [
+     "acts",
+     "step",
+     "hear",
+     "believe",
+     "baptiz",
+     "jailer",
+     "gospel",
+     "jesus"
+    ],
+    "es": [
+     "hechos",
+     "paso",
+     "oir",
+     "cre",
+     "bautiz",
+     "carceler",
+     "evangel",
+     "jesus"
+    ]
+   },
+   "model": {
+    "en": "The Philippian jailer story comes from Acts 16. The keyword is 'steps,' and the three points are: hear the gospel, believe in Jesus, be baptized - each a short singular of the keyword 'steps.'",
+    "es": "La historia del carcelero de Filipos viene de Hechos 16. La palabra clave es 'pasos,' y los tres puntos son: oir el evangelio, creer en Jesús, ser bautizado - cada uno un singular corto de la palabra clave 'pasos.'"
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why is the Word Method called inductive rather than deductive?",
+    "es": "¿Por qué se llama inductivo al Método de la Palabra en lugar de deductivo?"
+   },
+   "keywords": {
+    "en": [
+     "begin",
+     "text",
+     "specific",
+     "backward",
+     "work",
+     "induct",
+     "speak",
+     "fact"
+    ],
+    "es": [
+     "comenz",
+     "text",
+     "específic",
+     "atrás",
+     "trabaj",
+     "induct",
+     "habl",
+     "hecho"
+    ]
+   },
+   "model": {
+    "en": "The Word Method is inductive rather than deductive because it begins with the specific facts in the text and works backward to discover the keyword and subject, letting the text itself speak instead of imposing an outside topic.",
+    "es": "El Método de la Palabra es inductivo y no deductivo porque comienza con los hechos específicos del texto y trabaja hacia atrás para descubrir la palabra clave y el sujeto, dejando que el texto mismo hable en lugar de imponer un tema externo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Give the three points from the Romans 10:9–10 'conditions' example.",
+    "es": "Dé los tres puntos del ejemplo 'condiciones' de Romanos 10:9–10."
+   },
+   "keywords": {
+    "en": [
+     "confess",
+     "mouth",
+     "believe",
+     "heart",
+     "receive",
+     "salvat",
+     "condition",
+     "point"
+    ],
+    "es": [
+     "confes",
+     "boca",
+     "cre",
+     "corazón",
+     "recib",
+     "salvaci",
+     "condicion",
+     "punto"
+    ]
+   },
+   "model": {
+    "en": "The three points from the Romans 10:9-10 'conditions' example are: confess with your mouth, believe in your heart, and receive God's salvation - each a singular of the keyword 'conditions.'",
+    "es": "Los tres puntos del ejemplo de 'condiciones' de Romanos 10:9-10 son: confesar con tu boca, creer en tu corazón, y recibir la salvación de Dios - cada uno un singular de la palabra clave 'condiciones.'"
+   }
+  },
+  {
+   "prompt": {
+    "en": "Give the three points from the Acts 2:38 'commands' example.",
+    "es": "Dé los tres puntos del ejemplo 'mandatos' de Hechos 2:38."
+   },
+   "keywords": {
+    "en": [
+     "repent",
+     "sin",
+     "baptiz",
+     "receive",
+     "spirit",
+     "command",
+     "point",
+     "pentecost"
+    ],
+    "es": [
+     "arrepent",
+     "pecado",
+     "bautiz",
+     "recib",
+     "espíritu",
+     "mand",
+     "punto",
+     "pentecost"
+    ]
+   },
+   "model": {
+    "en": "The three points from the Acts 2:38 'commands' example are: repent of your sins, be baptized, and receive the Holy Spirit - each a singular of the keyword 'commands.'",
+    "es": "Los tres puntos del ejemplo de 'mandatos' de Hechos 2:38 son: arrepentirse de tus pecados, ser bautizado, y recibir el Espíritu Santo - cada uno un singular de la palabra clave 'mandatos.'"
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why are short parallel points important in evangelistic preaching?",
+    "es": "¿Por qué son importantes los puntos cortos y paralelos en la predicación evangelística?"
+   },
+   "keywords": {
+    "en": [
+     "remember",
+     "easy",
+     "listen",
+     "unity",
+     "parallel",
+     "short",
+     "memorabl",
+     "follow"
+    ],
+    "es": [
+     "recordar",
+     "fácil",
+     "oyent",
+     "unidad",
+     "paralel",
+     "cort",
+     "memorabl",
+     "segu"
+    ]
+   },
+   "model": {
+    "en": "Short, parallel points are important because they are easy for the listener to follow and remember. Their parallel form gives the sermon unity, so the message can be carried home and acted on after the service.",
+    "es": "Los puntos cortos y paralelos son importantes porque son fáciles de seguir y recordar para el oyente. Su forma paralela da unidad al sermón, así que el mensaje puede llevarse a casa y ponerse en práctica después del servicio."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How does the Word Method handle the case when a single verse does not contain every point needed?",
+    "es": "¿Cómo maneja el Método de la Palabra el caso cuando un solo versículo no contiene cada punto necesario?"
+   },
+   "keywords": {
+    "en": [
+     "support",
+     "text",
+     "keyword",
+     "control",
+     "outline",
+     "passage",
+     "add",
+     "unified"
+    ],
+    "es": [
+     "apoy",
+     "text",
+     "clave",
+     "control",
+     "esquem",
+     "pasaje",
+     "añad",
+     "unific"
+    ]
+   },
+   "model": {
+    "en": "When a single verse does not contain every point, the Word Method adds supporting texts from other passages, but the chosen keyword still controls the outline so the additional texts stay unified under one plural-noun keyword.",
+    "es": "Cuando un solo versículo no contiene cada punto, el Método de la Palabra añade textos de apoyo de otros pasajes, pero la palabra clave elegida sigue controlando el esquema para que los textos adicionales permanezcan unificados bajo una palabra clave plural."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Identify the family of planning methods this unit draws on, and explain which one this unit focuses on and how it works.",
+    "es": "Identifique la familia de métodos de planificación de la que parte esta unidad, y explique en cuál se enfoca y cómo funciona."
+   },
+   "keywords": {
+    "en": [
+     "four",
+     "method",
+     "word",
+     "wisespeak",
+     "text",
+     "keyword",
+     "induct",
+     "plan"
+    ],
+    "es": [
+     "cuatro",
+     "método",
+     "palabra",
+     "wisespeak",
+     "text",
+     "clave",
+     "induct",
+     "plan"
+    ]
+   },
+   "model": {
+    "en": "WiseSpeak Unit 8 gives four practical planning methods, and this unit focuses on the Word Method. It works inductively: begin with the biblical text, let a key word become the plural-noun keyword, and build short parallel points as singulars of it.",
+    "es": "La Unidad 8 de WiseSpeak da cuatro métodos prácticos de planificación, y esta unidad se enfoca en el Método de la Palabra. Funciona inductivamente: comenzar con el texto bíblico, dejar que una palabra clave se vuelva el sustantivo plural clave, y construir puntos cortos y paralelos como singulares de ella."
+   }
+  }
+ ]
+};

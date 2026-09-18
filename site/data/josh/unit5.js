@@ -1,0 +1,753 @@
+/* CTSJosh — unit 5. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "josh",
+ "unit": 5,
+ "totalUnits": 10,
+ "filePrefix": "CTSJosh",
+ "prevHref": "CTSJoshUnit4.html",
+ "nextHref": "CTSJoshUnit6.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "What single anchor phrase from John Fischer's song captures the lesson of Joshua 7?",
+    "es": "¿Qué frase ancla de la canción de John Fischer captura la lección de Josué 7?"
+   },
+   "options": {
+    "en": [
+     "\"Pride goes before a fall.\"",
+     "\"You don't sin alone.\"",
+     "\"Be sure your sin will find you out.\"",
+     "\"Confess your faults one to another.\""
+    ],
+    "es": [
+     "«El orgullo precede a la caída».",
+     "«No pecas a solas».",
+     "«Tu pecado os alcanzará».",
+     "«Confesaos vuestras ofensas unos a otros»."
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "After Jericho fell, what was Israel's first major military setback?",
+    "es": "Después de que cayó Jericó, ¿cuál fue el primer revés militar mayor de Israel?"
+   },
+   "options": {
+    "en": [
+     "Ai routed the 3,000 sent against it",
+     "The siege of Hebron failed",
+     "The Gibeonites deceived them",
+     "The Amorites attacked at night"
+    ],
+    "es": [
+     "Hai derrotó a los 3,000 enviados contra ella",
+     "El sitio de Hebrón fracasó",
+     "Los gabaonitas los engañaron",
+     "Los amorreos atacaron de noche"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "How many Israelites were killed in the first attack on Ai?",
+    "es": "¿Cuántos israelitas murieron en el primer ataque contra Hai?"
+   },
+   "options": {
+    "en": [
+     "Twelve",
+     "Twenty-four",
+     "Thirty-six",
+     "One hundred"
+    ],
+    "es": [
+     "Doce",
+     "Veinticuatro",
+     "Treinta y seis",
+     "Cien"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "What does Joshua 7:2-5 reveal as the FIRST reason for the defeat at Ai?",
+    "es": "¿Qué revela Josué 7:2-5 como la PRIMERA razón de la derrota en Hai?"
+   },
+   "options": {
+    "en": [
+     "Failure of equipment",
+     "Numerical inferiority",
+     "Pride and over-confidence based on the spies' report",
+     "Disloyalty in the ranks"
+    ],
+    "es": [
+     "Falla del equipo",
+     "Inferioridad numérica",
+     "Orgullo y exceso de confianza basados en el reporte de los espías",
+     "Deslealtad en las filas"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "Which Old Testament proverb does Wayne use to describe the spiritual posture before defeat?",
+    "es": "¿Qué proverbio usa Wayne para describir la postura espiritual antes de la derrota?"
+   },
+   "options": {
+    "en": [
+     "\"Pride goes before destruction, and a haughty spirit before a fall.\" (Proverbs 16:18)",
+     "\"The fear of the LORD is the beginning of wisdom.\"",
+     "\"A soft answer turns away wrath.\"",
+     "\"Trust in the LORD with all your heart.\""
+    ],
+    "es": [
+     "«Antes del quebrantamiento es la soberbia». (Proverbios 16:18)",
+     "«El temor de Jehová es el principio de la sabiduría».",
+     "«La blanda respuesta quita la ira».",
+     "«Fíate de Jehová de todo tu corazón»."
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "What did Dr. C. J. Fowler put on God's altar before he found peace?",
+    "es": "¿Qué puso el Dr. C. J. Fowler sobre el altar de Dios antes de encontrar paz?"
+   },
+   "options": {
+    "en": [
+     "His Bible and his pulpit notes",
+     "A gold-headed cane and a stovepipe hat",
+     "The deed to his home",
+     "His salary check"
+    ],
+    "es": [
+     "Su Biblia y sus notas de púlpito",
+     "Un bastón de cabeza dorada y un sombrero de copa",
+     "La escritura de su casa",
+     "Su cheque de sueldo"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "What did God ultimately show Dr. Fowler was the real obstacle to his sanctification?",
+    "es": "¿Qué le mostró Dios al Dr. Fowler que era el verdadero obstáculo a su santificación?"
+   },
+   "options": {
+    "en": [
+     "A grudge against a deacon",
+     "Professional pride - desire to pastor a large church and hold prominent places",
+     "A secret sin from his youth",
+     "Worry about his family's finances"
+    ],
+    "es": [
+     "Un rencor contra un diácono",
+     "Orgullo profesional - deseo de pastorear una iglesia grande y tener lugares prominentes",
+     "Un pecado secreto de su juventud",
+     "Preocupación por las finanzas de su familia"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "What is the SECOND reason for the defeat at Ai that Wayne identifies?",
+    "es": "¿Cuál es la SEGUNDA razón de la derrota en Hai que Wayne identifica?"
+   },
+   "options": {
+    "en": [
+     "Lack of equipment",
+     "Poor scouting of the terrain",
+     "Untrained soldiers",
+     "Neglect of prayer - silence before the battle"
+    ],
+    "es": [
+     "Falta de equipo",
+     "Mal reconocimiento del terreno",
+     "Soldados no entrenados",
+     "Descuido de la oración - silencio antes de la batalla"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "Wayne quotes a verse that ends, \"And Satan trembles when he sees / The weakest saint upon his ____.\"",
+    "es": "Wayne cita una estrofa que termina: «Y Satanás tiembla cuando ve / Al santo más débil sobre sus ____»."
+   },
+   "options": {
+    "en": [
+     "Feet",
+     "Rooftop",
+     "Watchtower",
+     "Knees"
+    ],
+    "es": [
+     "Pies",
+     "Techo",
+     "Atalaya",
+     "Rodillas"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "What did Achan take from the spoils of Jericho?",
+    "es": "¿Qué tomó Acán de los despojos de Jericó?"
+   },
+   "options": {
+    "en": [
+     "A bronze sword and a silver shield",
+     "A Babylonian cloak, silver, and a wedge of gold",
+     "Two oxen and a war horse",
+     "Pottery and grain"
+    ],
+    "es": [
+     "Una espada de bronce y un escudo de plata",
+     "Un manto babilónico, plata y una cuña de oro",
+     "Dos bueyes y un caballo de guerra",
+     "Cerámica y grano"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "When God explained the defeat to Joshua, what was the underlying problem?",
+    "es": "Cuando Dios le explicó la derrota a Josué, ¿cuál era el problema de fondo?"
+   },
+   "options": {
+    "en": [
+     "The army was outnumbered",
+     "The spies had lied",
+     "The covenant was broken; one man had taken what was devoted to God",
+     "The LORD had withdrawn His promise"
+    ],
+    "es": [
+     "El ejército estaba superado en número",
+     "Los espías habían mentido",
+     "El pacto estaba roto; un hombre había tomado lo que estaba dedicado a Dios",
+     "El SEÑOR había retirado Su promesa"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "In the \"Ring the Bell\" story, what did the dying farmer do that brought his healing?",
+    "es": "En la historia de «Toca la campana», ¿qué hizo el granjero moribundo que trajo su sanidad?"
+   },
+   "options": {
+    "en": [
+     "He confessed his faults to each of his children one by one",
+     "He recited the Lord's Prayer aloud",
+     "He had the elders anoint him with oil",
+     "He drank a remedy his wife prepared"
+    ],
+    "es": [
+     "Confesó sus faltas a cada uno de sus hijos uno por uno",
+     "Recitó el Padrenuestro en voz alta",
+     "Hizo que los ancianos lo ungieran con aceite",
+     "Bebió un remedio que su esposa preparó"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "What James verse does Wayne attach to the Ring-the-Bell story?",
+    "es": "¿Qué versículo de Santiago vincula Wayne a la historia de Toca-la-Campana?"
+   },
+   "options": {
+    "en": [
+     "\"Faith without works is dead.\"",
+     "\"Confess your faults one to another, that ye may be healed.\"",
+     "\"Resist the devil and he will flee from you.\"",
+     "\"The prayer of a righteous man avails much.\""
+    ],
+    "es": [
+     "«La fe sin obras es muerta».",
+     "«Confesaos vuestras ofensas unos a otros, para que seáis sanados».",
+     "«Resistid al diablo, y huirá de vosotros».",
+     "«La oración eficaz del justo puede mucho»."
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "Who was Karla Faye Tucker?",
+    "es": "¿Quién fue Karla Faye Tucker?"
+   },
+   "options": {
+    "en": [
+     "A pickax killer who became a born-again Christian in prison and was executed Feb 3, 1998",
+     "A holiness preacher converted at a camp meeting",
+     "A missionary to New Guinea who died in the field",
+     "The wife of Achan in rabbinic tradition"
+    ],
+    "es": [
+     "Una asesina con pico que se hizo cristiana nacida de nuevo en prisión y fue ejecutada el 3 de febrero de 1998",
+     "Una predicadora de santidad convertida en una reunión de campamento",
+     "Una misionera a Nueva Guinea que murió en el campo",
+     "La esposa de Acán en tradición rabínica"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "Who wrote a song based on the Achan/Ai story while serving on Wayne's church staff?",
+    "es": "¿Quién escribió una canción basada en la historia de Acán/Hai mientras servía en el equipo de la iglesia de Wayne?"
+   },
+   "options": {
+    "en": [
+     "Luci Shaw",
+     "Ray Stedman",
+     "Doug Goins",
+     "John Fischer"
+    ],
+    "es": [
+     "Luci Shaw",
+     "Ray Stedman",
+     "Doug Goins",
+     "John Fischer"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "How is a monkey caught in the New Guinea gourd-trap illustration?",
+    "es": "¿Cómo es atrapado un mono en la ilustración de la trampa de calabaza de Nueva Guinea?"
+   },
+   "options": {
+    "en": [
+     "Hunters startle it from the canopy",
+     "It falls asleep eating the bait",
+     "It steps on a hidden snare",
+     "It refuses to let go of the nuts in its fist and cannot pull its hand free"
+    ],
+    "es": [
+     "Cazadores lo asustan desde el dosel",
+     "Se queda dormido comiendo el cebo",
+     "Pisa un lazo oculto",
+     "Se rehúsa a soltar las nueces en su puño y no puede sacar la mano"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "What is the literal meaning of Achan's name?",
+    "es": "¿Cuál es el significado literal del nombre Acán?"
+   },
+   "options": {
+    "en": [
+     "Trouble",
+     "Beloved",
+     "Wandering",
+     "Hidden"
+    ],
+    "es": [
+     "Problema",
+     "Amado",
+     "Errante",
+     "Oculto"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "When God spoke to Joshua about attacking Ai a second time, what were His first words?",
+    "es": "Cuando Dios le habló a Josué sobre atacar a Hai por segunda vez, ¿cuáles fueron Sus primeras palabras?"
+   },
+   "options": {
+    "en": [
+     "\"I have given you the city's spoils.\"",
+     "\"Sharpen your swords.\"",
+     "\"Do not fear or be dismayed.\"",
+     "\"Build an altar on Mount Ebal.\""
+    ],
+    "es": [
+     "«Te he entregado los despojos de la ciudad».",
+     "«Afilen sus espadas».",
+     "«No temas ni desmayes».",
+     "«Edifica un altar en el monte Ebal»."
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "Where did Joshua build an altar after Ai was taken (Joshua 8:30)?",
+    "es": "¿Dónde edificó Josué un altar después de que fue tomada Hai (Josué 8:30)?"
+   },
+   "options": {
+    "en": [
+     "Mount Sinai",
+     "Mount Gerizim",
+     "Mount Carmel",
+     "Mount Ebal"
+    ],
+    "es": [
+     "Monte Sinaí",
+     "Monte Gerizim",
+     "Monte Carmelo",
+     "Monte Ebal"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "What did Joshua do at Mount Ebal and Mount Gerizim after the altar was built (Joshua 8:32-35)?",
+    "es": "¿Qué hizo Josué en el monte Ebal y el monte Gerizim después de que se edificó el altar (Josué 8:32-35)?"
+   },
+   "options": {
+    "en": [
+     "He divided the Promised Land among the tribes",
+     "He commissioned the priests as judges",
+     "He inscribed the Law on stones and read all the blessings and curses to the assembly",
+     "He led the people in a national fast"
+    ],
+    "es": [
+     "Repartió la Tierra Prometida entre las tribus",
+     "Comisionó a los sacerdotes como jueces",
+     "Inscribió la Ley en piedras y leyó todas las bendiciones y maldiciones a la asamblea",
+     "Dirigió al pueblo en un ayuno nacional"
+    ]
+   },
+   "answer": 2
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "State Wayne's central principle about sin, captured in John Fischer's song.",
+    "es": "Enuncia el principio central de Wayne sobre el pecado, capturado en la canción de John Fischer."
+   },
+   "keywords": {
+    "en": [
+     "alone",
+     "sin",
+     "other",
+     "effect",
+     "consequen",
+     "famil",
+     "ripple",
+     "love"
+    ],
+    "es": [
+     "solas",
+     "pecado",
+     "otros",
+     "efecto",
+     "consecuen",
+     "familia",
+     "ondas",
+     "aman"
+    ]
+   },
+   "model": {
+    "en": "Joshua 7 teaches the other half of the truth: sometimes bad things happen to people who do bad things, and the consequences fall on the people they love. One man, Achan, took, and the whole nation suffered; thirty-six men died on the slope of Ai. Wayne's story of Dave and Debbie shows the same ripple: a father's neglect pulled five children away from church, and the effects reached the ones he loved most. You do not sin alone. Sin spreads outward like ripples on a stream, and others always feel it.",
+    "es": "Josué 7 enseña la otra mitad de la verdad: a veces les pasan cosas malas a personas que hacen cosas malas, y las consecuencias caen sobre la gente que aman. Un hombre, Acán, tomó, y toda la nación sufrió; treinta y seis hombres murieron en la cuesta de Hai. La historia de Dave y Debbie muestra la misma onda: el descuido de un padre alejó a cinco hijos de la iglesia, y los efectos alcanzaron a los que más amaba. No pecas a solas. El pecado se extiende como ondas en un arroyo, y otros siempre lo sienten."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Identify the three reasons for failure that Wayne draws from Joshua 7.",
+    "es": "Identifica las tres razones del fracaso que Wayne saca de Josué 7."
+   },
+   "keywords": {
+    "en": [
+     "pride",
+     "prayer",
+     "disobe",
+     "neglect",
+     "sin",
+     "ai",
+     "confiden",
+     "achan"
+    ],
+    "es": [
+     "orgullo",
+     "oración",
+     "desobed",
+     "descuido",
+     "pecado",
+     "hai",
+     "confian",
+     "acán"
+    ]
+   },
+   "model": {
+    "en": "Three reasons explain the defeat at Ai. First, pride: after Jericho fell without a sword, the confident spies advised sending only three thousand men, and Joshua agreed without asking God, for pride goes before a fall. Second, neglect of prayer: the text records no prayer before the battle; the weakest saint on his knees has more power than the strongest army on the slope. Third, disobedience: Achan's hidden sin had broken the covenant. Pride opened the door, prayerlessness left it open, and Achan's disobedience walked through it.",
+    "es": "Tres razones explican la derrota en Hai. Primero, el orgullo: tras caer Jericó sin espada, los espías confiados aconsejaron enviar solo tres mil hombres, y Josué accedió sin preguntar a Dios, pues antes de la caída va la altivez. Segundo, el descuido de la oración: el texto no registra oración antes de la batalla; el santo más débil de rodillas tiene más poder que el ejército más fuerte. Tercero, la desobediencia: el pecado oculto de Acán había roto el pacto. El orgullo abrió la puerta, la falta de oración la dejó abierta, y la desobediencia de Acán entró por ella."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Summarize Dr. C. J. Fowler's altar story and what he learned about pride.",
+    "es": "Resume la historia del altar del Dr. C. J. Fowler y lo que aprendió sobre el orgullo."
+   },
+   "keywords": {
+    "en": [
+     "fowler",
+     "cane",
+     "hat",
+     "altar",
+     "professional",
+     "pride",
+     "prominen",
+     "reputation"
+    ],
+    "es": [
+     "fowler",
+     "bastón",
+     "sombrero",
+     "altar",
+     "profesional",
+     "orgullo",
+     "prominen",
+     "reputación"
+    ]
+   },
+   "model": {
+    "en": "Dr. C. J. Fowler, a noted holiness preacher, went to the altar seeking to be sanctified and laid down many things, including his gold-headed cane and his stovepipe hat. Yet the witness did not come. When he asked God what remained, God showed him a professional pride, a desire to be known as pastor of a large church and to hold places of prominence. Only when he surrendered his reputation to God did peace come. God then gave him a wider usefulness than pride could ever have won. The deepest idol is often the love of one's own prominence.",
+    "es": "El Dr. C. J. Fowler, un notable predicador de santidad, fue al altar buscando ser santificado y entregó muchas cosas, incluyendo su bastón de cabeza dorada y su sombrero de copa. Pero el testimonio no llegaba. Cuando preguntó a Dios qué quedaba, Dios le mostró un orgullo profesional, un deseo de ser conocido como pastor de una iglesia grande y de tener lugares de prominencia. Solo cuando entregó su reputación a Dios vino la paz. Dios le dio una utilidad más amplia de la que el orgullo jamás habría ganado. El ídolo más profundo suele ser el amor a la propia prominencia."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain why \\\"Pride goes before destruction\\\" applied to Joshua's response to the spies' report.",
+    "es": "Explica por qué «Antes del quebrantamiento es la soberbia» se aplicó a la respuesta de Josué al reporte de los espías."
+   },
+   "keywords": {
+    "en": [
+     "pride",
+     "spies",
+     "report",
+     "confiden",
+     "fall",
+     "ai",
+     "prayer",
+     "three"
+    ],
+    "es": [
+     "orgullo",
+     "espía",
+     "reporte",
+     "confian",
+     "caída",
+     "hai",
+     "oración",
+     "tres"
+    ]
+   },
+   "model": {
+    "en": "After Jericho, pride and overconfidence set the trap. The spies brought back a confident report: the people of Ai are few, send only two or three thousand men. Joshua took the report without praying about it. The men of Ai routed them, and thirty-six fell. Proverbs warns, pride goes before destruction and a haughty spirit before a fall. The army was riding a winning streak, so no one asked God; the confident report rested on a sin no one had dealt with, and the fall came at Ai.",
+    "es": "Tras Jericó, el orgullo y el exceso de confianza prepararon la trampa. Los espías trajeron un reporte confiado: los de Hai son pocos, envía solo dos o tres mil hombres. Josué tomó el reporte sin orar. Los hombres de Hai los derrotaron, y treinta y seis cayeron. Proverbios advierte: antes del quebrantamiento es la soberbia, y antes de la caída la altivez. El ejército venía de una racha ganadora, así que nadie preguntó a Dios; el reporte confiado descansaba sobre un pecado no tratado, y la caída vino en Hai."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe how the \\\"Ring the Bell\\\" story illustrates James's command about confession.",
+    "es": "Describe cómo la historia de «Toca la campana» ilustra el mandato de Santiago sobre la confesión."
+   },
+   "keywords": {
+    "en": [
+     "confess",
+     "fault",
+     "heal",
+     "ring",
+     "bell",
+     "farmer",
+     "james",
+     "hidden"
+    ],
+    "es": [
+     "confes",
+     "falta",
+     "sanid",
+     "campana",
+     "toca",
+     "granjero",
+     "santiago",
+     "oculto"
+    ]
+   },
+   "model": {
+    "en": "Wayne illustrates confession with a dying farmer. Resigned to death, he suddenly told his wife, Ring the bell, the signal for the family to gather for goodbye. As they wept around him he began confessing his faults to his children one by one, where he had wronged them. When he was through he asked for his clothes: the Lord had healed him. Confession can heal a home. James 5:16 says, confess your faults one to another that ye may be healed. Confession is the only thing that drags hidden sin into the open where God can deal with it; the bell has to be rung.",
+    "es": "Wayne ilustra la confesión con un granjero moribundo. Resignado a morir, de repente dijo a su esposa: Toca la campana, la señal para que la familia se reuniera a despedirse. Mientras lloraban a su alrededor comenzó a confesar sus faltas a sus hijos uno por uno, donde los había agraviado. Al terminar pidió su ropa: el Señor lo había sanado. Santiago 5:16 dice: confesaos vuestras ofensas unos a otros, para que seáis sanados. La confesión es lo único que saca el pecado oculto a la luz donde Dios puede tratarlo; hay sanidad cuando se toca la campana."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain why Achan's whole household was punished and what lesson it teaches about sin's reach.",
+    "es": "Explica por qué toda la casa de Acán fue castigada y qué lección enseña sobre el alcance del pecado."
+   },
+   "keywords": {
+    "en": [
+     "famil",
+     "household",
+     "consequen",
+     "ripple",
+     "alone",
+     "sin",
+     "other",
+     "spread"
+    ],
+    "es": [
+     "familia",
+     "casa",
+     "consecuen",
+     "ondas",
+     "solas",
+     "pecado",
+     "otros",
+     "extiende"
+    ]
+   },
+   "model": {
+    "en": "John Fischer's refrain says it: you don't sin alone. Achan buried his loot in his own tent, but the consequences spread to the whole camp and finally to his own household. Sin is never private; like ripples on a stream it spreads outward from one heart to family and others who never touched the stolen goods. The thirty-six who died at Ai never saw Achan's tent, yet they bore his sin. No one sins in isolation; what we hide always reaches the people around us.",
+    "es": "El estribillo de John Fischer lo dice: no pecas a solas. Acán enterró su botín en su propia tienda, pero las consecuencias se extendieron a todo el campamento y al fin a su propia casa. El pecado nunca es privado; como ondas en un arroyo se extiende hacia afuera de un corazón a la familia y a otros que nunca tocaron lo robado. Los treinta y seis que murieron en Hai nunca vieron la tienda de Acán, pero cargaron su pecado. Nadie peca en aislamiento; lo que escondemos siempre alcanza a la gente a nuestro alrededor."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Identify the meaning of Achan's name and how it relates to the Valley of Achor.",
+    "es": "Identifica el significado del nombre Acán y cómo se relaciona con el Valle de Acor."
+   },
+   "keywords": {
+    "en": [
+     "trouble",
+     "achan",
+     "achor",
+     "valley",
+     "name",
+     "hope",
+     "door",
+     "hosea"
+    ],
+    "es": [
+     "problema",
+     "acán",
+     "acor",
+     "valle",
+     "nombre",
+     "esperanza",
+     "puerta",
+     "oseas"
+    ]
+   },
+   "model": {
+    "en": "Achan and his family were dealt with publicly in a valley that took its name from the event: the Valley of Achor, which means trouble. The sin that troubled Israel was brought into the open and judged, and the covenant was restored. But the story does not end in trouble. Centuries later Hosea 2:15 promises that God will make the Valley of Achor a door of hope. The very place named for trouble becomes, in grace, the doorway through which hope enters; sin confessed and judged opens the way back to blessing.",
+    "es": "Acán y su familia fueron tratados públicamente en un valle que tomó su nombre del suceso: el Valle de Acor, que significa problema. El pecado que turbó a Israel fue sacado a la luz y juzgado, y el pacto fue restaurado. Pero la historia no termina en problema. Siglos después Oseas 2:15 promete que Dios hará del Valle de Acor una puerta de esperanza. El mismo lugar llamado por el problema se vuelve, por gracia, la puerta por donde entra la esperanza; el pecado confesado y juzgado abre el camino de regreso a la bendición."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the New Guinea monkey-trap illustration and what it teaches about holding onto sin.",
+    "es": "Describe la ilustración de la trampa para monos y lo que enseña sobre aferrarse al pecado."
+   },
+   "keywords": {
+    "en": [
+     "monkey",
+     "gourd",
+     "nuts",
+     "let",
+     "slave",
+     "grasp",
+     "hand",
+     "release"
+    ],
+    "es": [
+     "mono",
+     "calabaza",
+     "nueces",
+     "soltar",
+     "esclav",
+     "agarr",
+     "mano",
+     "puño"
+    ]
+   },
+   "model": {
+    "en": "The New Guinea monkey trap is a gourd tied down, with a hole just big enough for an open hand. Inside are nuts. The monkey reaches in, grasps a fistful, and cannot pull his closed hand back through the hole. He could be free in an instant if he would simply let go of the nuts, but he will not release them, and so he is caught. That is the slave to sin: not held by the trap but by his own refusal to open his hand. Sin keeps no one it cannot persuade to keep holding on.",
+    "es": "La trampa para monos de Nueva Guinea es una calabaza atada, con un agujero apenas del tamaño de una mano abierta. Adentro hay nueces. El mono mete la mano, agarra un puño lleno, y no puede sacar su mano cerrada por el agujero. Podría quedar libre al instante si simplemente soltara las nueces, pero no quiere soltarlas, y así queda atrapado. Ese es el esclavo del pecado: no lo retiene la trampa sino su propia negativa a abrir la mano. El pecado no retiene a nadie a quien no convenza de seguir aferrado."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Summarize what changed for Israel after Achan was dealt with and they returned to Ai (Joshua 8).",
+    "es": "Resume qué cambió para Israel después de que se trató con Acán y regresaron a Hai (Josué 8)."
+   },
+   "keywords": {
+    "en": [
+     "fear",
+     "ambush",
+     "victory",
+     "given",
+     "restor",
+     "dismayed",
+     "ai",
+     "covenant"
+    ],
+    "es": [
+     "temas",
+     "emboscada",
+     "victoria",
+     "entregado",
+     "restaur",
+     "desmay",
+     "hai",
+     "pacto"
+    ]
+   },
+   "model": {
+    "en": "Once Achan's sin was judged and the covenant restored, God spoke to Joshua again: Do not fear or be dismayed; take all the people and go up to Ai, for I have given its king and land into your hand. This time God's strategy used an ambush, drawing the men of Ai out of the city, then taking it from behind. The same Ai that routed Israel a week earlier now fell, and the victory came. The lesson: with sin dealt with and the covenant restored, the city that could not be taken was given.",
+    "es": "Una vez que el pecado de Acán fue juzgado y el pacto restaurado, Dios habló a Josué otra vez: No temas ni desmayes; toma a todo el pueblo y sube a Hai, porque he entregado en tu mano a su rey y su tierra. Esta vez la estrategia de Dios usó una emboscada, sacando a los hombres de Hai de la ciudad, y luego tomándola por detrás. La misma Hai que derrotó a Israel una semana antes ahora cayó, y vino la victoria. La lección: tratado el pecado y restaurado el pacto, la ciudad que no se podía tomar fue entregada."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the significance of building the altar on Mount Ebal and reading the Law (Joshua 8:30-35).",
+    "es": "Explica la significancia de construir el altar en el monte Ebal y leer la Ley (Josué 8:30-35)."
+   },
+   "keywords": {
+    "en": [
+     "altar",
+     "ebal",
+     "gerizim",
+     "law",
+     "bless",
+     "curse",
+     "read",
+     "covenant"
+    ],
+    "es": [
+     "altar",
+     "ebal",
+     "gerizim",
+     "ley",
+     "bendic",
+     "maldic",
+     "leyó",
+     "pacto"
+    ]
+   },
+   "model": {
+    "en": "After the victory, Joshua climbed Mount Ebal and built an altar to the LORD, then read the whole Law aloud over the assembled nation, every word, blessings and curses both. Half the tribes stood on Mount Gerizim for the blessings and half on Mount Ebal for the curses, with the law read between them. The covenant that Achan had broken was now publicly renewed before all Israel. God will gladly bless an army that has dealt with its sin and gathered again around His altar and His Word.",
+    "es": "Tras la victoria, Josué subió al monte Ebal y edificó un altar a Jehová, luego leyó toda la Ley en voz alta sobre la nación reunida, cada palabra, bendiciones y maldiciones por igual. La mitad de las tribus se puso en el monte Gerizim para las bendiciones y la mitad en el monte Ebal para las maldiciones, con la ley leída entre ellos. El pacto que Acán había roto fue ahora renovado públicamente ante todo Israel. Dios bendecirá con gusto a un ejército que ha tratado su pecado y se ha reunido de nuevo alrededor de Su altar y Su Palabra."
+   }
+  }
+ ]
+};

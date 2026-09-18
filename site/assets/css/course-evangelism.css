@@ -1,0 +1,52 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: #f2eee6; color: #22201d; line-height: 1.55; font-size: 17px; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.card { background: #fffdfa; border-radius: 20px; padding: 30px; margin-bottom: 25px; border: 1px solid #d7cec1; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.toggle-btn, .nav-btn, .clear-btn { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 8px 20px; cursor: pointer; font-family: inherit; margin-bottom: 15px; margin-right: 10px; }
+.clear-btn { background: #a0512a; }
+.nav-bar { background: #e8dfd3; padding: 12px 20px; border-radius: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.progress-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.progress-grid a { background: #d7cec1; padding: 5px 12px; border-radius: 30px; text-decoration: none; color: #22201d; font-size: 0.85rem; }
+.progress-grid a.completed { background: #5b3a1f; color: white; }
+.progress-grid a.active { background: #f4c542; color: #222; font-weight: bold; }
+h1, h2, h3 { color: #5b3a1f; }
+h2 { margin: 25px 0 10px; border-left: 4px solid #f4c542; padding-left: 15px; }
+h3 { margin: 15px 0 8px; }
+.attribution { font-size: 0.95rem; color: #6b5840; font-style: italic; margin-bottom: 16px; }
+blockquote { margin: 14px 0; padding: 10px 14px; border-left: 4px solid #5b3a1f; background: #f4ede2; font-style: italic; }
+.track-banner { background: #5b3a1f; color: white; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-weight: bold; }
+.question { border: 1px solid #d7cec1; border-radius: 12px; padding: 16px; margin-bottom: 20px; background: white; }
+.option { display: block; width: 100%; text-align: left; border: 1px solid #d7cec1; border-radius: 8px; padding: 10px; margin: 8px 0; cursor: pointer; background: #fcfbf8; font-family: inherit; font-size: 0.95rem; }
+.option:hover { background: #f6f1e8; }
+.option.correct { background: #e8f5ea; border-color: #b9dfc2; }
+.option.wrong { background: #fae8e8; border-color: #efc2c2; }
+.kw-answer { width: 100%; min-height: 90px; padding: 10px; border: 1px solid #d7cec1; border-radius: 8px; font-family: inherit; font-size: 1rem; margin: 8px 0; }
+.kw-answer:disabled { background: #f5f0e8; cursor: not-allowed; }
+button.small { background: #5b3a1f; color: white; border: none; border-radius: 30px; padding: 5px 15px; cursor: pointer; font-family: inherit; margin-right: 10px; margin-top: 5px; }
+button.small:disabled { background: #aaa; cursor: not-allowed; }
+.feedback-text { margin-top: 8px; font-size: 0.9rem; padding: 6px 10px; border-radius: 8px; }
+.feedback-text.correct { background: #e8f5ea; color: #1f6b3b; }
+.feedback-text.incorrect { background: #fae8e8; color: #8a1f1f; }
+.lockout-banner { background: #f8d7da; color: #721c24; padding: 12px 16px; border-radius: 12px; margin-bottom: 15px; font-weight: bold; border: 1px solid #f5c6cb; }
+body.lang-en .lang-en { display: inline; }
+body.lang-en .lang-es { display: none; }
+body.lang-es .lang-en { display: none; }
+body.lang-es .lang-es { display: inline; }
+body.lang-en div.lang-en { display: block; }
+body.lang-es div.lang-es { display: block; }
+.registration-panel { background: #f5efe6; border-radius: 16px; padding: 20px; margin-bottom: 25px; }
+.reg-row { display: flex; flex-wrap: wrap; gap: 20px; }
+.reg-group { flex: 1; min-width: 200px; }
+.reg-group label { display: block; font-weight: bold; font-size: 0.85rem; margin-bottom: 3px; }
+.reg-group input, .reg-group select { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #d7cec1; font-family: inherit; }
+.scale-box { background: #fdfaf3; border: 1px solid #d7cec1; border-radius: 10px; padding: 14px 18px; margin: 14px 0; }
+.scale-box h4 { color: #5b3a1f; margin-top: 0; }
+.scale-box ol { margin-left: 1.4rem; }
+.scale-box ol li { margin-bottom: 6px; }
+@media print {
+  .toggle-btn, .clear-btn, .nav-bar, .registration-panel, button, .question input[type="radio"], textarea, .lockout-banner { display: none !important; }
+  body { background: white; }
+  .card { box-shadow: none; border: none; }
+}
+.model-answer-box { margin-top: 12px; padding: 12px 14px; background: #fbf3d9; border: 1px solid #e4c95b; border-left: 5px solid #c9a227; border-radius: 8px; color: #4a3c10; font-size: 0.95em; line-height: 1.5; }
+.model-answer-box strong { color: #7a5c00; }

@@ -1,0 +1,761 @@
+/* CTSCH — unit 6. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "ch",
+ "unit": 6,
+ "totalUnits": 10,
+ "filePrefix": "CTSCH",
+ "prevHref": "CTSCHUnit5.html",
+ "nextHref": "CTSCHUnit7.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "Which pope's bull Unam Sanctam (1302) declared submission to the Roman pontiff necessary for salvation?",
+    "es": "¿La bula Unam Sanctam (1302) de qué papa declaró la sumisión al pontífice romano necesaria para la salvación?"
+   },
+   "options": {
+    "en": [
+     "Boniface VIII",
+     "Innocent III",
+     "Gregory XI",
+     "Martin V"
+    ],
+    "es": [
+     "Bonifacio VIII",
+     "Inocencio III",
+     "Gregorio XI",
+     "Martín V"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Boniface VIII issued Unam Sanctam in 1302. The next year he was attacked at Anagni by agents of King Philip IV of France and died of the shock — the high-water claim met its political reality.",
+    "es": "Bonifacio VIII emitió Unam Sanctam en 1302. Al año siguiente fue atacado en Anagni por agentes del Rey Felipe IV de Francia y murió del choque — el reclamo más alto se encontró con su realidad política."
+   }
+  },
+  {
+   "stem": {
+    "en": "Where was the papacy effectively held under French control from 1309 to 1377?",
+    "es": "¿Dónde fue el papado efectivamente retenido bajo control francés de 1309 a 1377?"
+   },
+   "options": {
+    "en": [
+     "Constantinople",
+     "Paris",
+     "Avignon",
+     "Wittenberg"
+    ],
+    "es": [
+     "Constantinopla",
+     "París",
+     "Aviñón",
+     "Wittenberg"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The Avignon papacy (1309-1377) — called the Babylonian Captivity of the church by Italians — saw seven successive French popes living in Avignon, never visiting Rome.",
+    "es": "El papado de Aviñón (1309-1377) — llamado la Cautividad Babilónica de la iglesia por los italianos — vio siete papas franceses sucesivos viviendo en Aviñón, nunca visitando Roma."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was the Western Schism (1378–1417)?",
+    "es": "¿Qué fue el Cisma de Occidente (1378-1417)?"
+   },
+   "options": {
+    "en": [
+     "The split between East and West in 1054",
+     "The split between Catholics and Anabaptists",
+     "The Reformation",
+     "A 40-year period when there were two and then three rival popes simultaneously, each excommunicating the others"
+    ],
+    "es": [
+     "La separación entre Oriente y Occidente en 1054",
+     "La separación entre católicos y anabaptistas",
+     "La Reforma",
+     "Un período de 40 años cuando había dos y luego tres papas rivales simultáneamente, cada uno excomulgando a los otros"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "After Gregory XI returned to Rome and died, rival popes were elected in Rome and Avignon. The 1409 Council of Pisa added a third pope. The Council of Constance finally ended the schism in 1417 by deposing all three and electing Martin V.",
+    "es": "Después de que Gregorio XI regresó a Roma y murió, papas rivales fueron elegidos en Roma y Aviñón. El Concilio de Pisa de 1409 añadió un tercer papa. El Concilio de Constanza finalmente terminó el cisma en 1417 deponiendo a los tres y eligiendo a Martín V."
+   }
+  },
+  {
+   "stem": {
+    "en": "Which council ended the Western Schism, condemned Wycliffe posthumously, and burned Hus?",
+    "es": "¿Qué concilio terminó el Cisma de Occidente, condenó a Wiclef póstumamente, y quemó a Hus?"
+   },
+   "options": {
+    "en": [
+     "The Council of Constance (1414-1418)",
+     "The Council of Pisa",
+     "The Council of Trent",
+     "The Fourth Lateran Council"
+    ],
+    "es": [
+     "El Concilio de Constanza (1414-1418)",
+     "El Concilio de Pisa",
+     "El Concilio de Trento",
+     "El Cuarto Concilio de Letrán"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The Council of Constance (1414-1418) accomplished all three: deposed all three papal claimants, elected Martin V, condemned Wycliffe (ordering his bones dug up and burned), and burned Jan Hus on July 6, 1415.",
+    "es": "El Concilio de Constanza (1414-1418) logró las tres cosas: depuso a los tres reclamantes papales, eligió a Martín V, condenó a Wiclef (ordenando sus huesos desenterrados y quemados), y quemó a Juan Hus el 6 de julio de 1415."
+   }
+  },
+  {
+   "stem": {
+    "en": "Who is called the 'Morning Star of the Reformation'?",
+    "es": "¿A quién se llama la «Estrella Matutina de la Reforma»?"
+   },
+   "options": {
+    "en": [
+     "Jan Hus",
+     "Erasmus of Rotterdam",
+     "William Tyndale",
+     "John Wycliffe"
+    ],
+    "es": [
+     "Juan Hus",
+     "Erasmo de Rotterdam",
+     "Guillermo Tyndale",
+     "Juan Wiclef"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "John Wycliffe (c. 1330-1384), Oxford theologian, is called the Morning Star of the Reformation. He taught Scripture's supreme authority, the church as the body of the elect, the priesthood of all believers in seed, rejection of transubstantiation, and produced the first complete English Bible (1382).",
+    "es": "Juan Wiclef (c. 1330-1384), teólogo de Oxford, se llama la Estrella Matutina de la Reforma. Enseñó la autoridad suprema de la Escritura, la iglesia como cuerpo de los elegidos, el sacerdocio de todos los creyentes en semilla, el rechazo de la transubstanciación, y produjo la primera Biblia inglesa completa (1382)."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did Wycliffe's followers in England come to be called?",
+    "es": "¿Cómo se llegó a llamar a los seguidores de Wiclef en Inglaterra?"
+   },
+   "options": {
+    "en": [
+     "Hussites",
+     "Pietists",
+     "Anabaptists",
+     "Lollards"
+    ],
+    "es": [
+     "Husitas",
+     "Pietistas",
+     "Anabaptistas",
+     "Lolardos"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The Lollards were Wycliffe's English followers. They were hunted under the law De Heretico Comburendo (1401) but never disappeared — when Tyndale's English New Testament arrived in 1526, Lollards were still there to receive it.",
+    "es": "Los lolardos eran los seguidores ingleses de Wiclef. Fueron cazados bajo la ley De Heretico Comburendo (1401) pero nunca desaparecieron — cuando el Nuevo Testamento inglés de Tyndale llegó en 1526, los lolardos aún estaban allí para recibirlo."
+   }
+  },
+  {
+   "stem": {
+    "en": "In what year was Jan Hus burned at the stake at the Council of Constance?",
+    "es": "¿En qué año fue Juan Hus quemado en la hoguera en el Concilio de Constanza?"
+   },
+   "options": {
+    "en": [
+     "1415",
+     "1384",
+     "1417",
+     "1517"
+    ],
+    "es": [
+     "1415",
+     "1384",
+     "1417",
+     "1517"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Hus was burned on July 6, 1415, after being arrested in violation of the Holy Roman Emperor's safe-conduct, denied his books at trial, and refusing to recant teachings he had not held.",
+    "es": "Hus fue quemado el 6 de julio de 1415, después de ser arrestado en violación del salvoconducto del Emperador del Sacro Imperio Romano, negado sus libros en el juicio, y rehusando retractarse de enseñanzas que no había sostenido."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did Jan Hus famously say at the stake about a swan to come a hundred years later?",
+    "es": "¿Qué dijo famosamente Juan Hus en la hoguera sobre un cisne que vendría cien años después?"
+   },
+   "options": {
+    "en": [
+     "\"You will hear a swan that you can neither roast nor boil\" — meaning Luther",
+     "\"The grass withers, the flower fades\"",
+     "\"Here I stand, I can do no other\"",
+     "\"Lord, do not hold this sin against them\""
+    ],
+    "es": [
+     "«Oirán un cisne al que no podrán ni asar ni hervir» — refiriéndose a Lutero",
+     "«Sécase la hierba, marchítase la flor»",
+     "«Aquí estoy, no puedo hacer otra cosa»",
+     "«Señor, no les tomes en cuenta este pecado»"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Hus's name means 'goose' in Czech. He paraphrased: 'Today you are roasting a goose, but a hundred years from now you will hear a swan that you can neither roast nor boil.' A century later Luther appeared in Wittenberg.",
+    "es": "El nombre Hus significa «ganso» en checo. Parafraseó: «Hoy están asando un ganso, pero dentro de cien años oirán un cisne al que no podrán ni asar ni hervir». Un siglo después Lutero apareció en Wittenberg."
+   }
+  },
+  {
+   "stem": {
+    "en": "What happened to Wycliffe's body after the Council of Constance condemned him in 1415?",
+    "es": "¿Qué pasó con el cuerpo de Wiclef después de que el Concilio de Constanza lo condenó en 1415?"
+   },
+   "options": {
+    "en": [
+     "He was honored with a tomb in Westminster Abbey",
+     "His remains were sent to the pope",
+     "His body was preserved as a relic",
+     "His bones were dug up, burned, and his ashes scattered in the river Swift"
+    ],
+    "es": [
+     "Fue honrado con una tumba en la Abadía de Westminster",
+     "Sus restos fueron enviados al papa",
+     "Su cuerpo fue preservado como reliquia",
+     "Sus huesos fueron desenterrados, quemados, y sus cenizas esparcidas en el río Swift"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "More than 30 years after Wycliffe's natural death in 1384, the Council of Constance ordered his bones dug up and burned. Thomas Fuller noted the Swift carried his ashes to the sea, and the sea to every shore — 'the emblem of his doctrine, dispersed over all the world.'",
+    "es": "Más de 30 años después de la muerte natural de Wiclef en 1384, el Concilio de Constanza ordenó sus huesos desenterrados y quemados. Thomas Fuller notó que el Swift llevó sus cenizas al mar, y el mar a cada orilla — «el emblema de su doctrina, dispersa sobre todo el mundo»."
+   }
+  },
+  {
+   "stem": {
+    "en": "What devotional book, written around 1418-1427 and traditionally ascribed to Thomas a Kempis, became one of the most influential Christian devotional works ever written?",
+    "es": "¿Qué libro devocional, escrito alrededor de 1418-1427 y tradicionalmente atribuido a Tomás de Kempis, se convirtió en una de las obras devocionales cristianas más influyentes jamás escritas?"
+   },
+   "options": {
+    "en": [
+     "The Imitation of Christ",
+     "The Confessions",
+     "The Pilgrim's Progress",
+     "The Cloud of Unknowing"
+    ],
+    "es": [
+     "La Imitación de Cristo",
+     "Las Confesiones",
+     "El Progreso del Peregrino",
+     "La Nube del No-Saber"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The Imitation of Christ has been translated into more languages than any Christian book except the Bible. Wesley credited it as one of the books God used in his salvation. It remains in print and read by Catholics, Protestants, and Orthodox.",
+    "es": "La Imitación de Cristo ha sido traducida a más idiomas que cualquier libro cristiano excepto la Biblia. Wesley la acreditó como uno de los libros que Dios usó en su salvación. Permanece en imprenta y leída por católicos, protestantes, y ortodoxos."
+   }
+  },
+  {
+   "stem": {
+    "en": "What lay movement based in the Netherlands ran schools that educated both Erasmus and (in their network elsewhere) the young Luther?",
+    "es": "¿Qué movimiento laico basado en los Países Bajos dirigía escuelas que educaron tanto a Erasmo como (en su red en otra parte) al joven Lutero?"
+   },
+   "options": {
+    "en": [
+     "The Cistercians",
+     "The Brethren of the Common Life",
+     "The Dominicans",
+     "The Franciscans"
+    ],
+    "es": [
+     "Los cistercienses",
+     "Los Hermanos de la Vida Común",
+     "Los dominicos",
+     "Los franciscanos"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The Brethren of the Common Life ran schools across the Low Countries and Germany. Their school at Deventer educated Erasmus. The institution the late-medieval papacy could not fix was being prepared from below by quiet schools and devotional teachers.",
+    "es": "Los Hermanos de la Vida Común dirigían escuelas a través de los Países Bajos y Alemania. Su escuela en Deventer educó a Erasmo. La institución que el papado medieval tardío no podía arreglar estaba siendo preparada desde abajo por escuelas tranquilas y maestros devocionales."
+   }
+  },
+  {
+   "stem": {
+    "en": "What Renaissance technical revolution around 1450 made it possible to mass-produce books, including Bibles?",
+    "es": "¿Qué revolución técnica renacentista alrededor de 1450 hizo posible producir libros en masa, incluyendo Biblias?"
+   },
+   "options": {
+    "en": [
+     "The water mill",
+     "The compass",
+     "Movable-type printing (Gutenberg)",
+     "The astrolabe"
+    ],
+    "es": [
+     "El molino de agua",
+     "La brújula",
+     "La imprenta de tipos móviles (Gutenberg)",
+     "El astrolabio"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Around 1450 Johannes Gutenberg of Mainz developed movable-type printing. The first major book off his press was a Latin Bible. By 1500 over 1000 presses were operating across Europe — without which the Reformation could not have spread.",
+    "es": "Alrededor de 1450 Juan Gutenberg de Maguncia desarrolló la imprenta de tipos móviles. El primer libro mayor de su imprenta fue una Biblia latina. Para 1500 más de 1000 prensas operaban a través de Europa — sin lo cual la Reforma no podría haberse extendido."
+   }
+  },
+  {
+   "stem": {
+    "en": "Who produced the first printed Greek New Testament in 1516, the very text Luther would use to translate the New Testament into German?",
+    "es": "¿Quién produjo el primer Nuevo Testamento griego impreso en 1516, el mismísimo texto que Lutero usaría para traducir el Nuevo Testamento al alemán?"
+   },
+   "options": {
+    "en": [
+     "Lorenzo Valla",
+     "Erasmus of Rotterdam",
+     "Thomas a Kempis",
+     "Johannes Gutenberg"
+    ],
+    "es": [
+     "Lorenzo Valla",
+     "Erasmo de Rotterdam",
+     "Tomás de Kempis",
+     "Juan Gutenberg"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Erasmus produced the Novum Instrumentum in 1516 — a printed Greek New Testament with his own new Latin translation alongside. The saying goes: 'Erasmus laid the egg that Luther hatched.'",
+    "es": "Erasmo produjo el Novum Instrumentum en 1516 — un Nuevo Testamento griego impreso con su propia nueva traducción latina al lado. El dicho va: «Erasmo puso el huevo que Lutero incubó»."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was the Renaissance motto, summarizing its return to original sources?",
+    "es": "¿Cuál era el lema renacentista, resumiendo su regreso a las fuentes originales?"
+   },
+   "options": {
+    "en": [
+     "Sola fide ('faith alone')",
+     "Soli Deo gloria ('glory to God alone')",
+     "Ad fontes ('back to the sources')",
+     "Ora et labora ('pray and work')"
+    ],
+    "es": [
+     "Sola fide («solo fe»)",
+     "Soli Deo gloria («gloria solo a Dios»)",
+     "Ad fontes («de regreso a las fuentes»)",
+     "Ora et labora («ora y trabaja»)"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Ad fontes — 'back to the sources' — captured the humanist program of stripping medieval layers off and reading the Greek and Hebrew originals directly. It was the indispensable scholarly precondition for the Reformation's return to Scripture.",
+    "es": "Ad fontes — «de regreso a las fuentes» — capturó el programa humanista de quitar las capas medievales y leer los originales griegos y hebreos directamente. Era la precondición erudita indispensable para el regreso de la Reforma a la Escritura."
+   }
+  },
+  {
+   "stem": {
+    "en": "Who used textual criticism in the 1440s to prove the Donation of Constantine was a medieval forgery?",
+    "es": "¿Quién usó la crítica textual en la década de 1440 para probar que la Donación de Constantino era una falsificación medieval?"
+   },
+   "options": {
+    "en": [
+     "Erasmus of Rotterdam",
+     "Lorenzo Valla",
+     "Thomas a Kempis",
+     "Boniface VIII"
+    ],
+    "es": [
+     "Erasmo de Rotterdam",
+     "Lorenzo Valla",
+     "Tomás de Kempis",
+     "Bonifacio VIII"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Lorenzo Valla used linguistic and historical analysis to expose the Donation of Constantine as a forgery. He also wrote Annotations on the New Testament showing the Vulgate sometimes mistranslated the Greek. A foundational moment in biblical textual criticism.",
+    "es": "Lorenzo Valla usó análisis lingüístico e histórico para exponer la Donación de Constantino como falsificación. También escribió Anotaciones sobre el Nuevo Testamento mostrando que la Vulgata a veces traducía mal el griego. Un momento fundacional en la crítica textual bíblica."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did the saying 'Erasmus laid the egg that Luther hatched' mean?",
+    "es": "¿Qué significaba el dicho «Erasmo puso el huevo que Lutero incubó»?"
+   },
+   "options": {
+    "en": [
+     "Erasmus and Luther were biological brothers",
+     "Erasmus and Luther had identical theology",
+     "Erasmus secretly funded Luther",
+     "Erasmus's Greek New Testament and humanist scholarship made Luther's Reformation possible, even though Erasmus himself never left Catholicism"
+    ],
+    "es": [
+     "Erasmo y Lutero eran hermanos biológicos",
+     "Erasmo y Lutero tenían teología idéntica",
+     "Erasmo financió a Lutero en secreto",
+     "El Nuevo Testamento griego y la erudición humanista de Erasmo hicieron posible la Reforma de Lutero, aunque Erasmo mismo nunca dejó el catolicismo"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The saying captures the historical reality: without Erasmus's Greek New Testament, his satires of clerical corruption, and the textual-critical method he popularized, Luther's Reformation could not have spread the way it did. Erasmus himself remained Catholic and disagreed with Luther on the bondage of the will.",
+    "es": "El dicho captura la realidad histórica: sin el Nuevo Testamento griego de Erasmo, sus sátiras de la corrupción clerical, y el método crítico-textual que popularizó, la Reforma de Lutero no podría haberse extendido como lo hizo. Erasmo mismo permaneció católico y discrepó con Lutero sobre la esclavitud de la voluntad."
+   }
+  },
+  {
+   "stem": {
+    "en": "What were the Hussite Wars (1419-1434)?",
+    "es": "¿Qué fueron las Guerras Husitas (1419-1434)?"
+   },
+   "options": {
+    "en": [
+     "The wars between Catholics and Anabaptists",
+     "The Crusades against the Muslims",
+     "A 15-year armed defense by Bohemian Hussites against imperial crusades sent to crush them after Hus's execution",
+     "A war between the Holy Roman Emperor and the Pope"
+    ],
+    "es": [
+     "Las guerras entre católicos y anabaptistas",
+     "Las Cruzadas contra los musulmanes",
+     "Una defensa armada de 15 años por los husitas bohemios contra las cruzadas imperiales enviadas a aplastarlos después de la ejecución de Hus",
+     "Una guerra entre el Emperador del Sacro Imperio Romano y el Papa"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "After Hus was burned, infuriated Czechs defenestrated Catholic councilors of Prague (1419) and fortified Bohemia. Under blind general Jan Žižka, Bohemian peasants defeated successive imperial crusades for 15 years. The wars ended in compromise allowing communion in both kinds for the laity in Bohemia.",
+    "es": "Después de que Hus fue quemado, los checos enfurecidos defenestraron a los concejales católicos de Praga (1419) y fortificaron Bohemia. Bajo el general ciego Jan Žižka, los campesinos bohemios derrotaron cruzadas imperiales sucesivas por 15 años. Las guerras terminaron en compromiso permitiendo la comunión en ambas especies para el laicado en Bohemia."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did Wycliffe's circle produce around 1382 that became one of his most important practical legacies?",
+    "es": "¿Qué produjo el círculo de Wiclef alrededor de 1382 que se convirtió en uno de sus legados prácticos más importantes?"
+   },
+   "options": {
+    "en": [
+     "The Latin Vulgate",
+     "The first complete translation of the Bible into English (the Wycliffe Bible)",
+     "The Imitation of Christ",
+     "A printed Greek New Testament"
+    ],
+    "es": [
+     "La Vulgata Latina",
+     "La primera traducción completa de la Biblia al inglés (la Biblia de Wiclef)",
+     "La Imitación de Cristo",
+     "Un Nuevo Testamento griego impreso"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The Wycliffe Bible (c. 1382), translated from the Latin Vulgate, was the first complete English Bible. It was hand-copied and read at risk of arrest. The Lollards preserved it for 150 years until Tyndale produced his New Testament in 1526.",
+    "es": "La Biblia de Wiclef (c. 1382), traducida de la Vulgata latina, fue la primera Biblia inglesa completa. Fue copiada a mano y leída al riesgo de arresto. Los lolardos la preservaron durante 150 años hasta que Tyndale produjo su Nuevo Testamento en 1526."
+   }
+  },
+  {
+   "stem": {
+    "en": "In what city did Jan Hus preach in Czech to thousands at his Bethlehem Chapel?",
+    "es": "¿En qué ciudad predicaba Juan Hus en checo a miles en su Capilla de Belén?"
+   },
+   "options": {
+    "en": [
+     "Wittenberg",
+     "Constance",
+     "Prague",
+     "Geneva"
+    ],
+    "es": [
+     "Wittenberg",
+     "Constanza",
+     "Praga",
+     "Ginebra"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Hus was professor at the University of Prague and preached in his native Czech (rather than Latin) to ordinary citizens at Bethlehem Chapel. His preaching helped make Bohemia the most reform-friendly territory in Europe before Luther.",
+    "es": "Hus era profesor en la Universidad de Praga y predicaba en su checo nativo (en lugar del latín) a ciudadanos ordinarios en la Capilla de Belén. Su predicación ayudó a hacer de Bohemia el territorio más amigable a la reforma en Europa antes de Lutero."
+   }
+  },
+  {
+   "stem": {
+    "en": "What 1 Peter 4:12 attitude does the suffering of the late-medieval forerunners reinforce for the modern Christian?",
+    "es": "¿Qué actitud de 1 Pedro 4:12 refuerza el sufrimiento de los precursores medievales tardíos para el cristiano moderno?"
+   },
+   "options": {
+    "en": [
+     "That comfort and prosperity are signs of God's favor",
+     "That suffering for the gospel is not strange — it is the Christian norm, and sometimes the institutional church herself becomes the persecutor",
+     "That heretics deserve their punishment",
+     "That God always rescues His people from earthly suffering"
+    ],
+    "es": [
+     "Que la comodidad y la prosperidad son señales del favor de Dios",
+     "Que sufrir por el evangelio no es extraño — es la norma cristiana, y a veces la iglesia institucional misma se vuelve la perseguidora",
+     "Que los herejes merecen su castigo",
+     "Que Dios siempre rescata a Su pueblo del sufrimiento terrenal"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "'Beloved, do not think it strange concerning the fiery trial' (1 Pet 4:12). Wycliffe, Hus, and the Lollards were killed by Christian Europe, not pagan persecutors — a permanent reminder that the institutional church is not the gospel and that faithful believers may face suffering from the very institutions that claim to speak for Christ.",
+    "es": "«Amados, no os sorprendáis del fuego de prueba» (1 Pe 4:12). Wiclef, Hus, y los lolardos fueron matados por la Europa cristiana, no por perseguidores paganos — un recordatorio permanente de que la iglesia institucional no es el evangelio y que los creyentes fieles pueden enfrentar sufrimiento de las mismísimas instituciones que claman hablar por Cristo."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Trace the decline of the medieval papacy from Boniface VIII through the end of the Western Schism in 1417.",
+    "es": "Traza el declive del papado medieval desde Bonifacio VIII hasta el fin del Cisma de Occidente en 1417."
+   },
+   "keywords": {
+    "en": [
+     "boniface",
+     "anagni",
+     "avignon",
+     "schism",
+     "constance",
+     "three popes"
+    ],
+    "es": [
+     "bonifacio",
+     "anagni",
+     "aviñón",
+     "cisma",
+     "constanza",
+     "tres papas"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Summarize John Wycliffe's five teachings and explain why he is called the Morning Star of the Reformation.",
+    "es": "Resume las cinco enseñanzas de Juan Wiclef y explica por qué se le llama la Estrella Matutina de la Reforma."
+   },
+   "keywords": {
+    "en": [
+     "scripture",
+     "authority",
+     "elect",
+     "priesthood",
+     "transubstantiation",
+     "english bible"
+    ],
+    "es": [
+     "escritura",
+     "autoridad",
+     "elegidos",
+     "sacerdocio",
+     "transubstanciación",
+     "biblia inglesa"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Tell the story of Jan Hus from his preaching at Prague to his death at Constance.",
+    "es": "Cuenta la historia de Juan Hus desde su predicación en Praga hasta su muerte en Constanza."
+   },
+   "keywords": {
+    "en": [
+     "prague",
+     "bethlehem",
+     "indulgences",
+     "sigismund",
+     "constance",
+     "swan",
+     "goose"
+    ],
+    "es": [
+     "praga",
+     "belén",
+     "indulgencias",
+     "segismundo",
+     "constanza",
+     "cisne",
+     "ganso"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the suffering of the late-medieval forerunners and explain what their fate teaches about the relationship of the institutional church to the gospel.",
+    "es": "Describe el sufrimiento de los precursores medievales tardíos y explica lo que su destino enseña sobre la relación de la iglesia institucional con el evangelio."
+   },
+   "keywords": {
+    "en": [
+     "lollards",
+     "hus",
+     "wycliffe",
+     "bones",
+     "burned",
+     "christian"
+    ],
+    "es": [
+     "lolardos",
+     "hus",
+     "wiclef",
+     "huesos",
+     "quemados",
+     "cristiana"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe medieval mysticism and the influence of the Imitation of Christ.",
+    "es": "Describe el misticismo medieval y la influencia de la Imitación de Cristo."
+   },
+   "keywords": {
+    "en": [
+     "eckhart",
+     "tauler",
+     "thomas a kempis",
+     "imitation",
+     "common life",
+     "luther"
+    ],
+    "es": [
+     "eckhart",
+     "tauler",
+     "tomás de kempis",
+     "imitación",
+     "vida común",
+     "lutero"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain how the Renaissance prepared the way for the Reformation, naming Valla, Gutenberg, and Erasmus.",
+    "es": "Explica cómo el Renacimiento preparó el camino para la Reforma, nombrando a Valla, Gutenberg, y Erasmo."
+   },
+   "keywords": {
+    "en": [
+     "ad fontes",
+     "valla",
+     "donation",
+     "gutenberg",
+     "press",
+     "erasmus",
+     "greek new testament"
+    ],
+    "es": [
+     "ad fontes",
+     "valla",
+     "donación",
+     "gutenberg",
+     "imprenta",
+     "erasmo",
+     "nuevo testamento griego"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the Lollards and the Hussites and explain how each preserved the witness of their masters.",
+    "es": "Describe a los lolardos y a los husitas y explica cómo cada uno preservó el testimonio de sus maestros."
+   },
+   "keywords": {
+    "en": [
+     "lollards",
+     "wycliffe",
+     "hidden",
+     "bibles",
+     "tyndale",
+     "hussites",
+     "bohemia",
+     "prague"
+    ],
+    "es": [
+     "lolardos",
+     "wiclef",
+     "escondidas",
+     "biblias",
+     "tyndale",
+     "husitas",
+     "bohemia",
+     "praga"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain Erasmus's contribution and the meaning of 'Erasmus laid the egg that Luther hatched.'",
+    "es": "Explica la contribución de Erasmo y el significado de «Erasmo puso el huevo que Lutero incubó»."
+   },
+   "keywords": {
+    "en": [
+     "erasmus",
+     "novum instrumentum",
+     "greek",
+     "latin",
+     "satire",
+     "catholic"
+    ],
+    "es": [
+     "erasmo",
+     "novum instrumentum",
+     "griego",
+     "latín",
+     "sátira",
+     "católico"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "List the conditions in place by 1500 that made the Reformation of Unit 7 possible.",
+    "es": "Enumera las condiciones en su lugar para 1500 que hicieron posible la Reforma de la Unidad 7."
+   },
+   "keywords": {
+    "en": [
+     "papacy",
+     "forerunners",
+     "mystics",
+     "printing",
+     "greek",
+     "press"
+    ],
+    "es": [
+     "papado",
+     "precursores",
+     "místicos",
+     "imprenta",
+     "griego",
+     "prensa"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Give four pastoral applications Wayne draws from the late medieval crisis for ministry today.",
+    "es": "Da cuatro aplicaciones pastorales que Wayne saca de la crisis medieval tardía para el ministerio hoy."
+   },
+   "keywords": {
+    "en": [
+     "institutions",
+     "forerunners",
+     "devotional",
+     "burns",
+     "own",
+     "church"
+    ],
+    "es": [
+     "instituciones",
+     "precursores",
+     "devocional",
+     "quema",
+     "propia",
+     "iglesia"
+    ]
+   }
+  }
+ ]
+};

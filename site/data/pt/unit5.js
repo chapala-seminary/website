@@ -1,156 +1,753 @@
-/* CTSPT - unit 5: per-unit configuration and content. */
-
-const UNIT = 5;
-
-const CURRENT_UNIT = 5;
-
-const NEXT_URL = 'CTSPTUnit6.html';
-
-const PREV_URL = 'CTSPTUnit4.html';
-
-const mcQuestions = [
-  {textEn:"1. What does the way a person prays reveal, according to this unit?",
-   textEs:"1. ¿Qué revela la manera en que una persona ora, según esta unidad?",
-   optionsEn:["A great deal about who they are — almost like a fingerprint of the soul", "The exact number of years they have been a believer", "Their nationality and native language", "Nothing of any spiritual importance"],
-   optionsEs:["Mucho de quién es — casi como una huella digital del alma", "El número exacto de años que han sido creyentes", "Su nacionalidad y lengua materna", "Nada de importancia espiritual alguna"],correct:0},
-  {textEn:"2. In the Gospels, where do most of Peter's requests to Jesus center?",
-   textEs:"2. En los Evangelios, ¿en torno a quién se centran la mayoría de las peticiones de Pedro a Jesús?",
-   optionsEn:["On the poor of distant nations", "On the temple in Jerusalem", "On Peter himself", "On the Roman authorities"],
-   optionsEs:["En los pobres de naciones lejanas", "En el templo de Jerusalén", "En Pedro mismo", "En las autoridades romanas"],correct:2},
-  {textEn:"3. In his later letters, on whom is Peter's focus fixed?",
-   textEs:"3. En sus cartas posteriores, ¿en quién está fijo el enfoque de Pedro?",
-   optionsEn:["On himself, even more than before", "On God the Father, Christ, and others", "On his own reputation", "On the wealth of the churches"],
-   optionsEs:["En sí mismo, aún más que antes", "En Dios el Padre, Cristo, y los demás", "En su propia reputación", "En las riquezas de las iglesias"],correct:1},
-  {textEn:"4. What does Peter's growth from the Gospels to his epistles teach us about reading the prayers of Scripture?",
-   textEs:"4. ¿Qué nos enseña el crecimiento de Pedro, de los Evangelios a sus epístolas, sobre leer las oraciones de la Escritura?",
-   optionsEn:["That only apostles can pray rightly", "That prayers should never be written down", "That we should ignore the Old Testament prayers", "That in them we watch a soul grow and learn how our own prayers may grow"],
-   optionsEs:["Que solo los apóstoles pueden orar bien", "Que las oraciones nunca deben escribirse", "Que debemos ignorar las oraciones del Antiguo Testamento", "Que en ellas contemplamos crecer un alma y aprendemos cómo pueden crecer las nuestras"],correct:3},
-  {textEn:"5. Which book of the Bible is described as, in effect, a whole collection of prayers set to music?",
-   textEs:"5. ¿Qué libro de la Biblia se describe como, en efecto, toda una colección de oraciones puestas en música?",
-   optionsEn:["The book of Revelation", "The book of Leviticus", "The book of Psalms", "The book of Proverbs"],
-   optionsEs:["El libro de Apocalipsis", "El libro de Levítico", "El libro de los Salmos", "El libro de Proverbios"],correct:2},
-  {textEn:"6. Which is the largest group of Psalms, pouring out grief and crying to God for help?",
-   textEs:"6. ¿Cuál es el grupo más grande de Salmos, que derrama dolor y clama a Dios por ayuda?",
-   optionsEn:["Psalms of lament", "Psalms of thanksgiving", "Royal Psalms", "Songs of Ascent"],
-   optionsEs:["Salmos de lamento", "Salmos de acción de gracias", "Salmos reales", "Cánticos graduales"],correct:0},
-  {textEn:"7. What do the imprecatory Psalms teach us to do with our anger?",
-   textEs:"7. ¿Qué nos enseñan a hacer los Salmos imprecatorios con nuestra ira?",
-   optionsEn:["To act on it immediately", "To hand it over to God's justice rather than taking revenge ourselves", "To deny that we feel it", "To write hateful letters to our enemies"],
-   optionsEs:["Actuar sobre ella de inmediato", "Entregarla a la justicia de Dios en lugar de tomar venganza nosotros mismos", "Negar que la sentimos", "Escribir cartas de odio a nuestros enemigos"],correct:1},
-  {textEn:"8. According to this unit, memorizing a portion of Scripture and carrying it in the heart is...",
-   textEs:"8. Según esta unidad, memorizar una porción de la Escritura y llevarla en el corazón es...",
-   optionsEn:["A waste of valuable time", "Something only children should do", "Forbidden to ordinary believers", "Itself a kind of prayer, letting God's Word dwell in us"],
-   optionsEs:["Un desperdicio de tiempo valioso", "Algo que solo los niños deben hacer", "Prohibido a los creyentes comunes", "En sí misma una clase de oración, que deja morar en nosotros la Palabra de Dios"],correct:3},
-  {textEn:"9. What did the Lord promise in Matthew 18:19–20 about praying together?",
-   textEs:"9. ¿Qué prometió el Señor en Mateo 18:19–20 acerca de orar juntos?",
-   optionsEn:["That only large crowds may pray together", "That group prayer is weaker than private prayer", "Where two or three gather in His name, He is in the midst of them", "That agreement in prayer is impossible"],
-   optionsEs:["Que solo las grandes multitudes pueden orar juntas", "Que la oración en grupo es más débil que la privada", "Donde dos o tres se congregan en su nombre, Él está en medio de ellos", "Que el acuerdo en la oración es imposible"],correct:2},
-  {textEn:"10. In a timed prayer chain, what does a group covenant to do?",
-   textEs:"10. En una cadena de oración por tiempo, ¿a qué se compromete un grupo?",
-   optionsEn:["To pray only once a year", "To cover a full day hour by hour so prayer never ceases for a cause", "To pray only for themselves", "To replace church services with prayer"],
-   optionsEs:["A orar solo una vez al año", "A cubrir un día entero hora por hora para que la oración nunca cese por una causa", "A orar solo por sí mismos", "A reemplazar los cultos de la iglesia con oración"],correct:1},
-  {textEn:"11. A 'prayer walk' involves...",
-   textEs:"11. Una 'caminata de oración' consiste en...",
-   optionsEn:["Walking a neighborhood or hospital corridor, praying before each home or room", "Refusing to pray for strangers", "Walking quickly for physical exercise only", "Walking away from the church in protest"],
-   optionsEs:["Recorrer un vecindario o pasillo de hospital, orando delante de cada casa o cuarto", "Negarse a orar por desconocidos", "Caminar rápido solo para hacer ejercicio físico", "Alejarse de la iglesia en protesta"],correct:0},
-  {textEn:"12. What does the unit say makes corporate prayer one of the great engines of the church's life?",
-   textEs:"12. ¿Qué dice la unidad que hace de la oración colectiva uno de los grandes motores de la vida de la iglesia?",
-   optionsEn:["The size of the building", "The volume of the voices", "The musical instruments used", "Agreement among believers and the presence of Christ in the midst"],
-   optionsEs:["El tamaño del edificio", "El volumen de las voces", "Los instrumentos musicales usados", "El acuerdo entre los creyentes y la presencia de Cristo en medio"],correct:3},
-  {textEn:"13. The Hebrew word for fasting, tsom, carries the idea of...",
-   textEs:"13. La palabra hebrea para ayunar, tsom, lleva la idea de...",
-   optionsEn:["Feasting and celebration", "'Covering the mouth' and 'afflicting,' or humbling, the soul", "Sleeping through the day", "Gaining strength through food"],
-   optionsEs:["Festejar y celebrar", "'Cubrir la boca' y 'afligir,' o humillar, el alma", "Dormir todo el día", "Ganar fuerza por medio del alimento"],correct:1},
-  {textEn:"14. For what purpose did Old Testament believers fast, as in Esther 4:16?",
-   textEs:"14. ¿Con qué propósito ayunaban los creyentes del Antiguo Testamento, como en Ester 4:16?",
-   optionsEn:["To lose weight quickly", "To prepare for a great feast", "To impress their neighbors", "To seek God in a time of crisis"],
-   optionsEs:["Para bajar de peso rápidamente", "Para prepararse para un gran banquete", "Para impresionar a sus vecinos", "Para buscar a Dios en tiempo de crisis"],correct:3},
-  {textEn:"15. How does this unit suggest we may also understand Jesus' forty-day fast before His temptation?",
-   textEs:"15. ¿Cómo sugiere esta unidad que también podemos entender el ayuno de cuarenta días de Jesús antes de su tentación?",
-   optionsEn:["As proof that fasting is meaningless", "As a sign He was unprepared", "That, leaning on the Father as His only sustenance, He met the tempter from spiritual strength", "That He was simply too weak to resist"],
-   optionsEs:["Como prueba de que el ayuno no tiene sentido", "Como señal de que no estaba preparado", "Que, apoyándose en el Padre como su único sustento, enfrentó al tentador desde la fuerza espiritual", "Que simplemente estaba demasiado débil para resistir"],correct:2},
-  {textEn:"16. What does fasting reveal about our own hearts, according to the unit?",
-   textEs:"16. ¿Qué revela el ayuno acerca de nuestro propio corazón, según la unidad?",
-   optionsEn:["The feelings we had been covering with 'comfort foods,' which we must hand to God", "That we never struggle with anything", "That we have no need of God", "That we are better than others"],
-   optionsEs:["Los sentimientos que habíamos cubierto con 'alimentos de consuelo,' que debemos entregar a Dios", "Que nunca luchamos con nada", "Que no tenemos necesidad de Dios", "Que somos mejores que otros"],correct:0},
-  {textEn:"17. What wise caution does the unit give about fasting from food?",
-   textEs:"17. ¿Qué advertencia prudente da la unidad sobre el ayuno de alimentos?",
-   optionsEn:["Fasting should be done only by pastors", "Everyone must fast for forty days at once", "Those with diabetes or other conditions should consult a doctor before attempting it", "Fasting must always be announced publicly"],
-   optionsEs:["El ayuno solo deben hacerlo los pastores", "Todos deben ayunar cuarenta días de una vez", "Quienes tienen diabetes u otras condiciones deben consultar a un médico antes de intentarlo", "El ayuno siempre debe anunciarse públicamente"],correct:2},
-  {textEn:"18. Besides food, from what else may a believer fast?",
-   textEs:"18. Además del alimento, ¿de qué más puede ayunar un creyente?",
-   optionsEn:["From praying for others", "From reading the Bible", "From attending church", "From television, a sport, or any lawful thing, giving the freed time to God"],
-   optionsEs:["De orar por otros", "De leer la Biblia", "De asistir a la iglesia", "De la televisión, un deporte, o cualquier cosa lícita, dando a Dios el tiempo así liberado"],correct:3},
-  {textEn:"19. As a general rule, how should we treat our fasting?",
-   textEs:"19. Por regla general, ¿cómo debemos tratar nuestro ayuno?",
-   optionsEn:["Keep it between ourselves and God rather than parading it", "Demand others fast with us", "Announce it on social media", "Use it to win arguments"],
-   optionsEs:["Guardarlo entre nosotros y Dios en lugar de exhibirlo", "Exigir que otros ayunen con nosotros", "Anunciarlo en las redes sociales", "Usarlo para ganar discusiones"],correct:0},
-  {textEn:"20. How do the disciplines of prayer and fasting relate to our salvation, according to the unit?",
-   textEs:"20. ¿Cómo se relacionan las disciplinas de la oración y el ayuno con nuestra salvación, según la unidad?",
-   optionsEn:["They earn our salvation by hard effort", "They do not earn God's favor but are gifts by which His children draw near to their Father", "They replace faith in Christ", "They make us better than other Christians"],
-   optionsEs:["Ganan nuestra salvación por el esfuerzo", "No ganan el favor de Dios, sino que son dones por los cuales sus hijos se acercan a su Padre", "Reemplazan la fe en Cristo", "Nos hacen mejores que otros cristianos"],correct:1}
-];
-
-const kwQuestions = [
-    {textEn:"21. What does the way a person prays reveal about them, and what image is used for this?",
-   textEs:"21. ¿Qué revela de una persona la manera en que ora, y qué imagen se usa para esto?",
-   kwEn:["reveal","who","fingerprint","soul","identity","prayer","person","character"],
-   kwEs:["revela","quien","huella","alma","identidad","oracion","persona","caracter"],
-      modelEn: 'The way a person prays reveals a great deal about who they are; the lesson calls it a fingerprint of the soul. Peter\'s early prayers in the Gospels center on himself — asking to walk on water, to be saved, how many times he must forgive — while his later prayers as an old man in his letters focus on God and on others, showing that our prayers reveal our spiritual growth or lack of it.',
-      modelEs: 'La manera en que una persona ora revela mucho acerca de quién es; la lección la llama la huella digital del alma. Las primeras oraciones de Pedro en los Evangelios se centran en él mismo — pidiendo caminar sobre el agua, ser salvado, cuántas veces debe perdonar — mientras que sus oraciones posteriores como anciano en sus cartas se enfocan en Dios y en otros, mostrando que nuestras oraciones revelan nuestro crecimiento espiritual o la falta de él.' },
-    {textEn:"22. How did Peter's prayers change from the Gospels to his later letters?",
-   textEs:"22. ¿Cómo cambiaron las oraciones de Pedro de los Evangelios a sus cartas posteriores?",
-   kwEn:["peter","gospels","himself","letters","god","others","growth","focus"],
-   kwEs:["pedro","evangelios","mismo","cartas","dios","otros","crecimiento","enfoque"],
-      modelEn: 'In the Gospels, Peter\'s prayers center on himself — his safety, his generosity, his own needs. Some thirty or forty years later, in his letters, his prayers focus entirely on God the Father and Christ, and on ‘us’ and ‘you,’ his readers, as in 1 Peter 1:3. The impetuous, self-centered fisherman had become a shepherd whose heart was fixed on God and on others.',
-      modelEs: 'En los Evangelios, las oraciones de Pedro se centran en él mismo — su seguridad, su generosidad, sus propias necesidades. Unos treinta o cuarenta años después, en sus cartas, sus oraciones se enfocan por completo en Dios el Padre y Cristo, y en \'nosotros\' y \'vosotros\', sus lectores, como en 1 Pedro 1:3. El impetuoso pescador centrado en sí mismo se había convertido en un pastor cuyo corazón estaba fijo en Dios y en otros.' },
-    {textEn:"23. Name several kinds of Psalms and what each expresses.",
-   textEs:"23. Mencione varias clases de Salmos y lo que cada una expresa.",
-   kwEn:["lament","praise","thanksgiving","penitential","confidence","messianic","grief","trust"],
-   kwEs:["lamento","alabanza","gracias","penitencial","confianza","mesianico","dolor","confianza"],
-      modelEn: 'The Psalms include several kinds: Psalms of lament, the largest group, pouring out grief and crying for help (Psalm 13); Psalms of praise, lifting up God\'s majesty (Psalm 8, Psalm 150); penitential Psalms confessing sin (Psalm 51); Psalms of confidence resting in God amid danger (Psalm 23); and Messianic Psalms pointing to Christ (Psalm 22). Each gives words for a different season of the heart.',
-      modelEs: 'Los Salmos incluyen varias clases: los Salmos de lamento, el grupo más grande, que derraman dolor y claman por ayuda (Salmos 13); los Salmos de alabanza, que exaltan la majestad de Dios (Salmos 8, Salmos 150); los Salmos penitenciales que confiesan pecado (Salmos 51); los Salmos de confianza que descansan en Dios en medio del peligro (Salmos 23); y los Salmos mesiánicos que apuntan a Cristo (Salmos 22). Cada uno da palabras para una temporada diferente del corazón.' },
-    {textEn:"24. Why is memorizing Scripture described as itself a kind of prayer?",
-   textEs:"24. ¿Por qué se describe el memorizar la Escritura como en sí misma una clase de oración?",
-   kwEn:["memorize","word","dwell","heart","shape","scripture","carry","prayer"],
-   kwEs:["memorizar","palabra","morar","corazon","forma","escritura","llevar","oracion"],
-      modelEn: 'Memorizing Scripture is described as itself a kind of prayer because it lets the Word of God dwell in us and shape our speech to Him. When we do not have words to pray, we can borrow the words God Himself has given, carrying them in our hearts so they form how we speak to Him even without a Bible open in front of us.',
-      modelEs: 'Memorizar la Escritura se describe como en sí misma una clase de oración porque deja que la Palabra de Dios more en nosotros y forme nuestro hablar hacia Él. Cuando no tenemos palabras para orar, podemos tomar prestadas las palabras que Dios mismo nos ha dado, llevándolas en el corazón para que formen cómo le hablamos aun sin tener una Biblia abierta delante.' },
-    {textEn:"25. What did Jesus promise in Matthew 18:19–20 about praying together?",
-   textEs:"25. ¿Qué prometió Jesús en Mateo 18:19–20 acerca de orar juntos?",
-   kwEn:["two","three","gather","name","midst","agree","christ","present"],
-   kwEs:["dos","tres","congregan","nombre","medio","acuerdo","cristo","presente"],
-      modelEn: 'Jesus promised that if two of us agree on earth concerning anything we ask, it will be done for us by the Father in heaven, and that where two or three are gathered together in His name, He is there in the midst of them (Matthew 18:19-20). This shows there is extraordinary power available to the church when believers pray together in agreement, and that Christ Himself is present with them.',
-      modelEs: 'Jesús prometió que si dos de nosotros nos ponemos de acuerdo en la tierra acerca de cualquier cosa que pidamos, nos será hecho por el Padre que está en los cielos, y que donde dos o tres se reúnen en su nombre, Él está en medio de ellos (Mateo 18:19-20). Esto muestra que hay un poder extraordinario disponible para la iglesia cuando los creyentes oran juntos de acuerdo, y que el mismo Cristo está presente con ellos.' },
-    {textEn:"26. Describe at least three forms of corporate prayer.",
-   textEs:"26. Describa al menos tres formas de oración colectiva.",
-   kwEn:["popcorn","intercession","chain","team","walk","together","group","agreement"],
-   kwEs:["palomitas","intercesion","cadena","equipo","caminata","juntos","grupo","acuerdo"],
-      modelEn: 'Corporate prayer takes several forms: \'popcorn\' prayer, where each person prays briefly as the Spirit leads; united intercession, a group lifting up a specific need together; the prayer chain, where a request passes from one believer to the next; the prayer team, where specific requests are brought to a few others to agree in prayer; and the prayer walk, walking a neighborhood or building while praying for it.',
-      modelEs: 'La oración colectiva toma varias formas: la oración de \'palomitas\', donde cada persona ora brevemente según el Espíritu la guía; la intercesión unida, un grupo que levanta juntos una necesidad específica; la cadena de oración, donde una petición pasa de un creyente a otro; el equipo de oración, donde se traen peticiones específicas a unos pocos para acordar en oración; y la caminata de oración, caminando un vecindario o edificio mientras se ora por él.' },
-    {textEn:"27. What does the Hebrew word for fasting (tsom) mean, and what is biblical fasting?",
-   textEs:"27. ¿Qué significa la palabra hebrea para ayunar (tsom), y qué es el ayuno bíblico?",
-   kwEn:["cover","mouth","afflict","humble","soul","abstain","food","god"],
-   kwEs:["cubrir","boca","afligir","humillar","alma","abstener","alimento","dios"],
-      modelEn: 'The Hebrew word for fasting, tsom, carries the idea of \'covering the mouth\' and of \'afflicting,\' or humbling, the soul. Biblical fasting is never merely skipping meals but a genuine humbling of oneself before God, abstaining from food as a spiritual exercise rather than simply a dietary choice.',
-      modelEs: 'La palabra hebrea para ayunar, tsom, lleva la idea de \'cubrir la boca\' y de \'afligir,\' o humillar, el alma. El ayuno bíblico nunca es meramente saltarse comidas sino una humillación genuina de uno mismo delante de Dios, absteniéndose de alimento como un ejercicio espiritual y no simplemente una elección dietética.' },
-    {textEn:"28. For what purposes did believers fast in the Old Testament?",
-   textEs:"28. ¿Con qué propósitos ayunaban los creyentes en el Antiguo Testamento?",
-   kwEn:["seek","god","repentance","mourning","crisis","humble","turn","grief"],
-   kwEs:["buscar","dios","arrepentimiento","luto","crisis","humillar","volver","dolor"],
-      modelEn: 'In the Old Testament, believers fasted to seek God in crisis, as Esther called for a three-day fast (Esther 4:16); to show repentance (1 Samuel 7:6); and to mourn (1 Samuel 31:13). In each case fasting expressed a humbled, earnest heart turning to God rather than being merely a ritual or dietary practice.',
-      modelEs: 'En el Antiguo Testamento, los creyentes ayunaban para buscar a Dios en crisis, como Ester pidió un ayuno de tres días (Ester 4:16); para mostrar arrepentimiento (1 Samuel 7:6); y para hacer duelo (1 Samuel 31:13). En cada caso el ayuno expresaba un corazón humillado y sincero que se volvía a Dios, y no era meramente un ritual o práctica dietética.' },
-    {textEn:"29. What does fasting teach us about God, and what does it reveal in us?",
-   textEs:"29. ¿Qué nos enseña el ayuno acerca de Dios, y qué revela en nosotros?",
-   kwEn:["god","sustenance","strength","food","feelings","cover","heart","trust"],
-   kwEs:["dios","sustento","fuerza","alimento","sentimientos","cubrir","corazon","confiar"],
-      modelEn: 'Fasting teaches us that God Himself is our true food and strength, as Jesus showed when He fasted forty days and answered temptation from a place of spiritual strength, not weakness. It also reveals our own hearts: when we cannot reach for comfort foods, we are forced to face the feelings we had been covering and hand them to God.',
-      modelEs: 'El ayuno nos enseña que Dios mismo es nuestro verdadero alimento y fuerza, como mostró Jesús cuando ayunó cuarenta días y respondió a la tentación desde un lugar de fuerza espiritual, no de debilidad. También revela nuestro propio corazón: cuando no podemos recurrir a alimentos de consuelo, nos vemos forzados a enfrentar los sentimientos que habíamos estado cubriendo y entregárselos a Dios.' },
-    {textEn:"30. What cautions and forms of fasting does the unit give?",
-   textEs:"30. ¿Qué advertencias y formas de ayuno da la unidad?",
-   kwEn:["doctor","diabetes","gently","television","private","lawful","food","time"],
-   kwEs:["medico","diabetes","suavidad","television","privado","licito","alimento","tiempo"],
-      modelEn: 'The unit cautions that fasting from food can be genuinely dangerous for those with diabetes or other medical conditions, who should consult a doctor first, and suggests beginners start gently with a single twenty-four-hour fast. It also notes that fasting need not always be from food — one may fast from television or a hobby — and that fasting should be kept private between the believer and God rather than paraded before others.',
-      modelEs: 'La unidad advierte que ayunar de alimento puede ser genuinamente peligroso para quienes tienen diabetes u otras condiciones médicas, quienes deben consultar a un médico primero, y sugiere que los principiantes comiencen suavemente con un solo ayuno de veinticuatro horas. También señala que el ayuno no siempre tiene que ser de alimento — uno puede ayunar de la televisión o un pasatiempo — y que el ayuno debe mantenerse privado entre el creyente y Dios en lugar de exhibirse ante otros.' }
-
-];
+/* CTSPT — unit 5. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "pt",
+ "unit": 5,
+ "totalUnits": 10,
+ "filePrefix": "CTSPT",
+ "prevHref": "CTSPTUnit4.html",
+ "nextHref": "CTSPTUnit6.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "What does the way a person prays reveal, according to this unit?",
+    "es": "¿Qué revela la manera en que una persona ora, según esta unidad?"
+   },
+   "options": {
+    "en": [
+     "A great deal about who they are — almost like a fingerprint of the soul",
+     "The exact number of years they have been a believer",
+     "Their nationality and native language",
+     "Nothing of any spiritual importance"
+    ],
+    "es": [
+     "Mucho de quién es — casi como una huella digital del alma",
+     "El número exacto de años que han sido creyentes",
+     "Su nacionalidad y lengua materna",
+     "Nada de importancia espiritual alguna"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "In the Gospels, where do most of Peter's requests to Jesus center?",
+    "es": "En los Evangelios, ¿en torno a quién se centran la mayoría de las peticiones de Pedro a Jesús?"
+   },
+   "options": {
+    "en": [
+     "On the poor of distant nations",
+     "On the temple in Jerusalem",
+     "On Peter himself",
+     "On the Roman authorities"
+    ],
+    "es": [
+     "En los pobres de naciones lejanas",
+     "En el templo de Jerusalén",
+     "En Pedro mismo",
+     "En las autoridades romanas"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "In his later letters, on whom is Peter's focus fixed?",
+    "es": "En sus cartas posteriores, ¿en quién está fijo el enfoque de Pedro?"
+   },
+   "options": {
+    "en": [
+     "On himself, even more than before",
+     "On God the Father, Christ, and others",
+     "On his own reputation",
+     "On the wealth of the churches"
+    ],
+    "es": [
+     "En sí mismo, aún más que antes",
+     "En Dios el Padre, Cristo, y los demás",
+     "En su propia reputación",
+     "En las riquezas de las iglesias"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "What does Peter's growth from the Gospels to his epistles teach us about reading the prayers of Scripture?",
+    "es": "¿Qué nos enseña el crecimiento de Pedro, de los Evangelios a sus epístolas, sobre leer las oraciones de la Escritura?"
+   },
+   "options": {
+    "en": [
+     "That only apostles can pray rightly",
+     "That prayers should never be written down",
+     "That we should ignore the Old Testament prayers",
+     "That in them we watch a soul grow and learn how our own prayers may grow"
+    ],
+    "es": [
+     "Que solo los apóstoles pueden orar bien",
+     "Que las oraciones nunca deben escribirse",
+     "Que debemos ignorar las oraciones del Antiguo Testamento",
+     "Que en ellas contemplamos crecer un alma y aprendemos cómo pueden crecer las nuestras"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "Which book of the Bible is described as, in effect, a whole collection of prayers set to music?",
+    "es": "¿Qué libro de la Biblia se describe como, en efecto, toda una colección de oraciones puestas en música?"
+   },
+   "options": {
+    "en": [
+     "The book of Revelation",
+     "The book of Leviticus",
+     "The book of Psalms",
+     "The book of Proverbs"
+    ],
+    "es": [
+     "El libro de Apocalipsis",
+     "El libro de Levítico",
+     "El libro de los Salmos",
+     "El libro de Proverbios"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "Which is the largest group of Psalms, pouring out grief and crying to God for help?",
+    "es": "¿Cuál es el grupo más grande de Salmos, que derrama dolor y clama a Dios por ayuda?"
+   },
+   "options": {
+    "en": [
+     "Psalms of lament",
+     "Psalms of thanksgiving",
+     "Royal Psalms",
+     "Songs of Ascent"
+    ],
+    "es": [
+     "Salmos de lamento",
+     "Salmos de acción de gracias",
+     "Salmos reales",
+     "Cánticos graduales"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "What do the imprecatory Psalms teach us to do with our anger?",
+    "es": "¿Qué nos enseñan a hacer los Salmos imprecatorios con nuestra ira?"
+   },
+   "options": {
+    "en": [
+     "To act on it immediately",
+     "To hand it over to God's justice rather than taking revenge ourselves",
+     "To deny that we feel it",
+     "To write hateful letters to our enemies"
+    ],
+    "es": [
+     "Actuar sobre ella de inmediato",
+     "Entregarla a la justicia de Dios en lugar de tomar venganza nosotros mismos",
+     "Negar que la sentimos",
+     "Escribir cartas de odio a nuestros enemigos"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "According to this unit, memorizing a portion of Scripture and carrying it in the heart is...",
+    "es": "Según esta unidad, memorizar una porción de la Escritura y llevarla en el corazón es..."
+   },
+   "options": {
+    "en": [
+     "A waste of valuable time",
+     "Something only children should do",
+     "Forbidden to ordinary believers",
+     "Itself a kind of prayer, letting God's Word dwell in us"
+    ],
+    "es": [
+     "Un desperdicio de tiempo valioso",
+     "Algo que solo los niños deben hacer",
+     "Prohibido a los creyentes comunes",
+     "En sí misma una clase de oración, que deja morar en nosotros la Palabra de Dios"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "What did the Lord promise in Matthew 18:19–20 about praying together?",
+    "es": "¿Qué prometió el Señor en Mateo 18:19–20 acerca de orar juntos?"
+   },
+   "options": {
+    "en": [
+     "That only large crowds may pray together",
+     "That group prayer is weaker than private prayer",
+     "Where two or three gather in His name, He is in the midst of them",
+     "That agreement in prayer is impossible"
+    ],
+    "es": [
+     "Que solo las grandes multitudes pueden orar juntas",
+     "Que la oración en grupo es más débil que la privada",
+     "Donde dos o tres se congregan en su nombre, Él está en medio de ellos",
+     "Que el acuerdo en la oración es imposible"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "In a timed prayer chain, what does a group covenant to do?",
+    "es": "En una cadena de oración por tiempo, ¿a qué se compromete un grupo?"
+   },
+   "options": {
+    "en": [
+     "To pray only once a year",
+     "To cover a full day hour by hour so prayer never ceases for a cause",
+     "To pray only for themselves",
+     "To replace church services with prayer"
+    ],
+    "es": [
+     "A orar solo una vez al año",
+     "A cubrir un día entero hora por hora para que la oración nunca cese por una causa",
+     "A orar solo por sí mismos",
+     "A reemplazar los cultos de la iglesia con oración"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "A 'prayer walk' involves...",
+    "es": "Una 'caminata de oración' consiste en..."
+   },
+   "options": {
+    "en": [
+     "Walking a neighborhood or hospital corridor, praying before each home or room",
+     "Refusing to pray for strangers",
+     "Walking quickly for physical exercise only",
+     "Walking away from the church in protest"
+    ],
+    "es": [
+     "Recorrer un vecindario o pasillo de hospital, orando delante de cada casa o cuarto",
+     "Negarse a orar por desconocidos",
+     "Caminar rápido solo para hacer ejercicio físico",
+     "Alejarse de la iglesia en protesta"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "What does the unit say makes corporate prayer one of the great engines of the church's life?",
+    "es": "¿Qué dice la unidad que hace de la oración colectiva uno de los grandes motores de la vida de la iglesia?"
+   },
+   "options": {
+    "en": [
+     "The size of the building",
+     "The volume of the voices",
+     "The musical instruments used",
+     "Agreement among believers and the presence of Christ in the midst"
+    ],
+    "es": [
+     "El tamaño del edificio",
+     "El volumen de las voces",
+     "Los instrumentos musicales usados",
+     "El acuerdo entre los creyentes y la presencia de Cristo en medio"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "The Hebrew word for fasting, tsom, carries the idea of...",
+    "es": "La palabra hebrea para ayunar, tsom, lleva la idea de..."
+   },
+   "options": {
+    "en": [
+     "Feasting and celebration",
+     "'Covering the mouth' and 'afflicting,' or humbling, the soul",
+     "Sleeping through the day",
+     "Gaining strength through food"
+    ],
+    "es": [
+     "Festejar y celebrar",
+     "'Cubrir la boca' y 'afligir,' o humillar, el alma",
+     "Dormir todo el día",
+     "Ganar fuerza por medio del alimento"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "For what purpose did Old Testament believers fast, as in Esther 4:16?",
+    "es": "¿Con qué propósito ayunaban los creyentes del Antiguo Testamento, como en Ester 4:16?"
+   },
+   "options": {
+    "en": [
+     "To lose weight quickly",
+     "To prepare for a great feast",
+     "To impress their neighbors",
+     "To seek God in a time of crisis"
+    ],
+    "es": [
+     "Para bajar de peso rápidamente",
+     "Para prepararse para un gran banquete",
+     "Para impresionar a sus vecinos",
+     "Para buscar a Dios en tiempo de crisis"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "How does this unit suggest we may also understand Jesus' forty-day fast before His temptation?",
+    "es": "¿Cómo sugiere esta unidad que también podemos entender el ayuno de cuarenta días de Jesús antes de su tentación?"
+   },
+   "options": {
+    "en": [
+     "As proof that fasting is meaningless",
+     "As a sign He was unprepared",
+     "That, leaning on the Father as His only sustenance, He met the tempter from spiritual strength",
+     "That He was simply too weak to resist"
+    ],
+    "es": [
+     "Como prueba de que el ayuno no tiene sentido",
+     "Como señal de que no estaba preparado",
+     "Que, apoyándose en el Padre como su único sustento, enfrentó al tentador desde la fuerza espiritual",
+     "Que simplemente estaba demasiado débil para resistir"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "What does fasting reveal about our own hearts, according to the unit?",
+    "es": "¿Qué revela el ayuno acerca de nuestro propio corazón, según la unidad?"
+   },
+   "options": {
+    "en": [
+     "The feelings we had been covering with 'comfort foods,' which we must hand to God",
+     "That we never struggle with anything",
+     "That we have no need of God",
+     "That we are better than others"
+    ],
+    "es": [
+     "Los sentimientos que habíamos cubierto con 'alimentos de consuelo,' que debemos entregar a Dios",
+     "Que nunca luchamos con nada",
+     "Que no tenemos necesidad de Dios",
+     "Que somos mejores que otros"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "What wise caution does the unit give about fasting from food?",
+    "es": "¿Qué advertencia prudente da la unidad sobre el ayuno de alimentos?"
+   },
+   "options": {
+    "en": [
+     "Fasting should be done only by pastors",
+     "Everyone must fast for forty days at once",
+     "Those with diabetes or other conditions should consult a doctor before attempting it",
+     "Fasting must always be announced publicly"
+    ],
+    "es": [
+     "El ayuno solo deben hacerlo los pastores",
+     "Todos deben ayunar cuarenta días de una vez",
+     "Quienes tienen diabetes u otras condiciones deben consultar a un médico antes de intentarlo",
+     "El ayuno siempre debe anunciarse públicamente"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "Besides food, from what else may a believer fast?",
+    "es": "Además del alimento, ¿de qué más puede ayunar un creyente?"
+   },
+   "options": {
+    "en": [
+     "From praying for others",
+     "From reading the Bible",
+     "From attending church",
+     "From television, a sport, or any lawful thing, giving the freed time to God"
+    ],
+    "es": [
+     "De orar por otros",
+     "De leer la Biblia",
+     "De asistir a la iglesia",
+     "De la televisión, un deporte, o cualquier cosa lícita, dando a Dios el tiempo así liberado"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "As a general rule, how should we treat our fasting?",
+    "es": "Por regla general, ¿cómo debemos tratar nuestro ayuno?"
+   },
+   "options": {
+    "en": [
+     "Keep it between ourselves and God rather than parading it",
+     "Demand others fast with us",
+     "Announce it on social media",
+     "Use it to win arguments"
+    ],
+    "es": [
+     "Guardarlo entre nosotros y Dios en lugar de exhibirlo",
+     "Exigir que otros ayunen con nosotros",
+     "Anunciarlo en las redes sociales",
+     "Usarlo para ganar discusiones"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "How do the disciplines of prayer and fasting relate to our salvation, according to the unit?",
+    "es": "¿Cómo se relacionan las disciplinas de la oración y el ayuno con nuestra salvación, según la unidad?"
+   },
+   "options": {
+    "en": [
+     "They earn our salvation by hard effort",
+     "They do not earn God's favor but are gifts by which His children draw near to their Father",
+     "They replace faith in Christ",
+     "They make us better than other Christians"
+    ],
+    "es": [
+     "Ganan nuestra salvación por el esfuerzo",
+     "No ganan el favor de Dios, sino que son dones por los cuales sus hijos se acercan a su Padre",
+     "Reemplazan la fe en Cristo",
+     "Nos hacen mejores que otros cristianos"
+    ]
+   },
+   "answer": 1
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "What does the way a person prays reveal about them, and what image is used for this?",
+    "es": "¿Qué revela de una persona la manera en que ora, y qué imagen se usa para esto?"
+   },
+   "keywords": {
+    "en": [
+     "reveal",
+     "who",
+     "fingerprint",
+     "soul",
+     "identity",
+     "prayer",
+     "person",
+     "character"
+    ],
+    "es": [
+     "revela",
+     "quien",
+     "huella",
+     "alma",
+     "identidad",
+     "oracion",
+     "persona",
+     "caracter"
+    ]
+   },
+   "model": {
+    "en": "The way a person prays reveals a great deal about who they are; the lesson calls it a fingerprint of the soul. Peter's early prayers in the Gospels center on himself — asking to walk on water, to be saved, how many times he must forgive — while his later prayers as an old man in his letters focus on God and on others, showing that our prayers reveal our spiritual growth or lack of it.",
+    "es": "La manera en que una persona ora revela mucho acerca de quién es; la lección la llama la huella digital del alma. Las primeras oraciones de Pedro en los Evangelios se centran en él mismo — pidiendo caminar sobre el agua, ser salvado, cuántas veces debe perdonar — mientras que sus oraciones posteriores como anciano en sus cartas se enfocan en Dios y en otros, mostrando que nuestras oraciones revelan nuestro crecimiento espiritual o la falta de él."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How did Peter's prayers change from the Gospels to his later letters?",
+    "es": "¿Cómo cambiaron las oraciones de Pedro de los Evangelios a sus cartas posteriores?"
+   },
+   "keywords": {
+    "en": [
+     "peter",
+     "gospels",
+     "himself",
+     "letters",
+     "god",
+     "others",
+     "growth",
+     "focus"
+    ],
+    "es": [
+     "pedro",
+     "evangelios",
+     "mismo",
+     "cartas",
+     "dios",
+     "otros",
+     "crecimiento",
+     "enfoque"
+    ]
+   },
+   "model": {
+    "en": "In the Gospels, Peter's prayers center on himself — his safety, his generosity, his own needs. Some thirty or forty years later, in his letters, his prayers focus entirely on God the Father and Christ, and on ‘us’ and ‘you,’ his readers, as in 1 Peter 1:3. The impetuous, self-centered fisherman had become a shepherd whose heart was fixed on God and on others.",
+    "es": "En los Evangelios, las oraciones de Pedro se centran en él mismo — su seguridad, su generosidad, sus propias necesidades. Unos treinta o cuarenta años después, en sus cartas, sus oraciones se enfocan por completo en Dios el Padre y Cristo, y en 'nosotros' y 'vosotros', sus lectores, como en 1 Pedro 1:3. El impetuoso pescador centrado en sí mismo se había convertido en un pastor cuyo corazón estaba fijo en Dios y en otros."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Name several kinds of Psalms and what each expresses.",
+    "es": "Mencione varias clases de Salmos y lo que cada una expresa."
+   },
+   "keywords": {
+    "en": [
+     "lament",
+     "praise",
+     "thanksgiving",
+     "penitential",
+     "confidence",
+     "messianic",
+     "grief",
+     "trust"
+    ],
+    "es": [
+     "lamento",
+     "alabanza",
+     "gracias",
+     "penitencial",
+     "confianza",
+     "mesianico",
+     "dolor",
+     "confianza"
+    ]
+   },
+   "model": {
+    "en": "The Psalms include several kinds: Psalms of lament, the largest group, pouring out grief and crying for help (Psalm 13); Psalms of praise, lifting up God's majesty (Psalm 8, Psalm 150); penitential Psalms confessing sin (Psalm 51); Psalms of confidence resting in God amid danger (Psalm 23); and Messianic Psalms pointing to Christ (Psalm 22). Each gives words for a different season of the heart.",
+    "es": "Los Salmos incluyen varias clases: los Salmos de lamento, el grupo más grande, que derraman dolor y claman por ayuda (Salmos 13); los Salmos de alabanza, que exaltan la majestad de Dios (Salmos 8, Salmos 150); los Salmos penitenciales que confiesan pecado (Salmos 51); los Salmos de confianza que descansan en Dios en medio del peligro (Salmos 23); y los Salmos mesiánicos que apuntan a Cristo (Salmos 22). Cada uno da palabras para una temporada diferente del corazón."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why is memorizing Scripture described as itself a kind of prayer?",
+    "es": "¿Por qué se describe el memorizar la Escritura como en sí misma una clase de oración?"
+   },
+   "keywords": {
+    "en": [
+     "memorize",
+     "word",
+     "dwell",
+     "heart",
+     "shape",
+     "scripture",
+     "carry",
+     "prayer"
+    ],
+    "es": [
+     "memorizar",
+     "palabra",
+     "morar",
+     "corazon",
+     "forma",
+     "escritura",
+     "llevar",
+     "oracion"
+    ]
+   },
+   "model": {
+    "en": "Memorizing Scripture is described as itself a kind of prayer because it lets the Word of God dwell in us and shape our speech to Him. When we do not have words to pray, we can borrow the words God Himself has given, carrying them in our hearts so they form how we speak to Him even without a Bible open in front of us.",
+    "es": "Memorizar la Escritura se describe como en sí misma una clase de oración porque deja que la Palabra de Dios more en nosotros y forme nuestro hablar hacia Él. Cuando no tenemos palabras para orar, podemos tomar prestadas las palabras que Dios mismo nos ha dado, llevándolas en el corazón para que formen cómo le hablamos aun sin tener una Biblia abierta delante."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What did Jesus promise in Matthew 18:19–20 about praying together?",
+    "es": "¿Qué prometió Jesús en Mateo 18:19–20 acerca de orar juntos?"
+   },
+   "keywords": {
+    "en": [
+     "two",
+     "three",
+     "gather",
+     "name",
+     "midst",
+     "agree",
+     "christ",
+     "present"
+    ],
+    "es": [
+     "dos",
+     "tres",
+     "congregan",
+     "nombre",
+     "medio",
+     "acuerdo",
+     "cristo",
+     "presente"
+    ]
+   },
+   "model": {
+    "en": "Jesus promised that if two of us agree on earth concerning anything we ask, it will be done for us by the Father in heaven, and that where two or three are gathered together in His name, He is there in the midst of them (Matthew 18:19-20). This shows there is extraordinary power available to the church when believers pray together in agreement, and that Christ Himself is present with them.",
+    "es": "Jesús prometió que si dos de nosotros nos ponemos de acuerdo en la tierra acerca de cualquier cosa que pidamos, nos será hecho por el Padre que está en los cielos, y que donde dos o tres se reúnen en su nombre, Él está en medio de ellos (Mateo 18:19-20). Esto muestra que hay un poder extraordinario disponible para la iglesia cuando los creyentes oran juntos de acuerdo, y que el mismo Cristo está presente con ellos."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe at least three forms of corporate prayer.",
+    "es": "Describa al menos tres formas de oración colectiva."
+   },
+   "keywords": {
+    "en": [
+     "popcorn",
+     "intercession",
+     "chain",
+     "team",
+     "walk",
+     "together",
+     "group",
+     "agreement"
+    ],
+    "es": [
+     "palomitas",
+     "intercesion",
+     "cadena",
+     "equipo",
+     "caminata",
+     "juntos",
+     "grupo",
+     "acuerdo"
+    ]
+   },
+   "model": {
+    "en": "Corporate prayer takes several forms: 'popcorn' prayer, where each person prays briefly as the Spirit leads; united intercession, a group lifting up a specific need together; the prayer chain, where a request passes from one believer to the next; the prayer team, where specific requests are brought to a few others to agree in prayer; and the prayer walk, walking a neighborhood or building while praying for it.",
+    "es": "La oración colectiva toma varias formas: la oración de 'palomitas', donde cada persona ora brevemente según el Espíritu la guía; la intercesión unida, un grupo que levanta juntos una necesidad específica; la cadena de oración, donde una petición pasa de un creyente a otro; el equipo de oración, donde se traen peticiones específicas a unos pocos para acordar en oración; y la caminata de oración, caminando un vecindario o edificio mientras se ora por él."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does the Hebrew word for fasting (tsom) mean, and what is biblical fasting?",
+    "es": "¿Qué significa la palabra hebrea para ayunar (tsom), y qué es el ayuno bíblico?"
+   },
+   "keywords": {
+    "en": [
+     "cover",
+     "mouth",
+     "afflict",
+     "humble",
+     "soul",
+     "abstain",
+     "food",
+     "god"
+    ],
+    "es": [
+     "cubrir",
+     "boca",
+     "afligir",
+     "humillar",
+     "alma",
+     "abstener",
+     "alimento",
+     "dios"
+    ]
+   },
+   "model": {
+    "en": "The Hebrew word for fasting, tsom, carries the idea of 'covering the mouth' and of 'afflicting,' or humbling, the soul. Biblical fasting is never merely skipping meals but a genuine humbling of oneself before God, abstaining from food as a spiritual exercise rather than simply a dietary choice.",
+    "es": "La palabra hebrea para ayunar, tsom, lleva la idea de 'cubrir la boca' y de 'afligir,' o humillar, el alma. El ayuno bíblico nunca es meramente saltarse comidas sino una humillación genuina de uno mismo delante de Dios, absteniéndose de alimento como un ejercicio espiritual y no simplemente una elección dietética."
+   }
+  },
+  {
+   "prompt": {
+    "en": "For what purposes did believers fast in the Old Testament?",
+    "es": "¿Con qué propósitos ayunaban los creyentes en el Antiguo Testamento?"
+   },
+   "keywords": {
+    "en": [
+     "seek",
+     "god",
+     "repentance",
+     "mourning",
+     "crisis",
+     "humble",
+     "turn",
+     "grief"
+    ],
+    "es": [
+     "buscar",
+     "dios",
+     "arrepentimiento",
+     "luto",
+     "crisis",
+     "humillar",
+     "volver",
+     "dolor"
+    ]
+   },
+   "model": {
+    "en": "In the Old Testament, believers fasted to seek God in crisis, as Esther called for a three-day fast (Esther 4:16); to show repentance (1 Samuel 7:6); and to mourn (1 Samuel 31:13). In each case fasting expressed a humbled, earnest heart turning to God rather than being merely a ritual or dietary practice.",
+    "es": "En el Antiguo Testamento, los creyentes ayunaban para buscar a Dios en crisis, como Ester pidió un ayuno de tres días (Ester 4:16); para mostrar arrepentimiento (1 Samuel 7:6); y para hacer duelo (1 Samuel 31:13). En cada caso el ayuno expresaba un corazón humillado y sincero que se volvía a Dios, y no era meramente un ritual o práctica dietética."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does fasting teach us about God, and what does it reveal in us?",
+    "es": "¿Qué nos enseña el ayuno acerca de Dios, y qué revela en nosotros?"
+   },
+   "keywords": {
+    "en": [
+     "god",
+     "sustenance",
+     "strength",
+     "food",
+     "feelings",
+     "cover",
+     "heart",
+     "trust"
+    ],
+    "es": [
+     "dios",
+     "sustento",
+     "fuerza",
+     "alimento",
+     "sentimientos",
+     "cubrir",
+     "corazon",
+     "confiar"
+    ]
+   },
+   "model": {
+    "en": "Fasting teaches us that God Himself is our true food and strength, as Jesus showed when He fasted forty days and answered temptation from a place of spiritual strength, not weakness. It also reveals our own hearts: when we cannot reach for comfort foods, we are forced to face the feelings we had been covering and hand them to God.",
+    "es": "El ayuno nos enseña que Dios mismo es nuestro verdadero alimento y fuerza, como mostró Jesús cuando ayunó cuarenta días y respondió a la tentación desde un lugar de fuerza espiritual, no de debilidad. También revela nuestro propio corazón: cuando no podemos recurrir a alimentos de consuelo, nos vemos forzados a enfrentar los sentimientos que habíamos estado cubriendo y entregárselos a Dios."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What cautions and forms of fasting does the unit give?",
+    "es": "¿Qué advertencias y formas de ayuno da la unidad?"
+   },
+   "keywords": {
+    "en": [
+     "doctor",
+     "diabetes",
+     "gently",
+     "television",
+     "private",
+     "lawful",
+     "food",
+     "time"
+    ],
+    "es": [
+     "medico",
+     "diabetes",
+     "suavidad",
+     "television",
+     "privado",
+     "licito",
+     "alimento",
+     "tiempo"
+    ]
+   },
+   "model": {
+    "en": "The unit cautions that fasting from food can be genuinely dangerous for those with diabetes or other medical conditions, who should consult a doctor first, and suggests beginners start gently with a single twenty-four-hour fast. It also notes that fasting need not always be from food — one may fast from television or a hobby — and that fasting should be kept private between the believer and God rather than paraded before others.",
+    "es": "La unidad advierte que ayunar de alimento puede ser genuinamente peligroso para quienes tienen diabetes u otras condiciones médicas, quienes deben consultar a un médico primero, y sugiere que los principiantes comiencen suavemente con un solo ayuno de veinticuatro horas. También señala que el ayuno no siempre tiene que ser de alimento — uno puede ayunar de la televisión o un pasatiempo — y que el ayuno debe mantenerse privado entre el creyente y Dios en lugar de exhibirse ante otros."
+   }
+  }
+ ]
+};

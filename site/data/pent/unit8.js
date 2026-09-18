@@ -1,47 +1,833 @@
-/* CTSPent - unit 8: per-unit configuration and content. */
-
-const UNIT = 8;
-
-const NEXT_URL = "CTSPentUnit9.html";
-
-const PREV_URL = "CTSPentUnit7.html";
-
-const IS_LAST_UNIT = false;
-
-const SHOW_REGISTRATION_CARD = false;
-
-const mcQuestions = [
-    { textEn: "1. What book of the Bible was the first book Hebrew children studied?", textEs: "1. ¿Cuál libro de la Biblia fue el primero que estudiaban los niños hebreos?", optionsEn: ["A. Genesis", "B. Exodus", "C. Leviticus", "D. Deuteronomy"], optionsEs: ["A. Génesis", "B. Éxodo", "C. Levítico", "D. Deuteronomio"], correct: 2, correctFeedbackEn: "Correct! Leviticus was the first book Hebrew children studied, yet modern Christians avoid it.", correctFeedbackEs: "¡Correcto! Levítico era el primer libro que estudiaban los niños hebreos, y sin embargo los cristianos modernos lo evitan.", incorrectFeedbackEn: "Leviticus — the foundation of worship and sacrifice for Hebrew children.", incorrectFeedbackEs: "Levítico — el fundamento de la adoración y el sacrificio para los niños hebreos." },
-    { textEn: "2. The Hebrew word for sacrifice, 'zebah,' also carries what meaning?", textEs: "2. La palabra hebrea para sacrificio, 'zebah', ¿qué otro significado tiene?", optionsEn: ["A. Fellowship", "B. Death", "C. Payment", "D. Law"], optionsEs: ["A. Comunión", "B. Muerte", "C. Pago", "D. Ley"], correct: 0, correctFeedbackEn: "Yes. Zebah means sacrifice but also fellowship — God hosted His people with a meal.", correctFeedbackEs: "Sí. Zebah significa sacrificio pero también comunión — Dios hospedaba a Su pueblo con una comida.", incorrectFeedbackEn: "Zebah means sacrifice and fellowship — a communal meal with God.", incorrectFeedbackEs: "Zebah significa sacrificio y comunión — una comida en común con Dios." },
-    { textEn: "3. In the burnt offering, the worshiper laid his hand on the animal's head to signify what?", textEs: "3. En el holocausto, el adorador ponía su mano sobre la cabeza del animal para significar qué?", optionsEn: ["A. Identification as substitute", "B. Ownership", "C. Thankfulness", "D. Victory"], optionsEs: ["A. Identificación como sustituto", "B. Propiedad", "C. Agradecimiento", "D. Victoria"], correct: 0, correctFeedbackEn: "Correct. He was 'supporting himself' on the animal, identifying with it as his substitute.", correctFeedbackEs: "Correcto. Se estaba 'apoyando' sobre el animal, identificándose con él como su sustituto.", incorrectFeedbackEn: "Laying on hands identified the animal as the worshiper's substitute.", incorrectFeedbackEs: "El poner las manos identificaba al animal como el sustituto del adorador." },
-    { textEn: "4. The complete consumption of the burnt offering symbolized what two things?", textEs: "4. El consumo completo del holocausto simbolizaba qué dos cosas?", optionsEn: ["A. Christ's total sacrifice and the worshiper's total dedication", "B. God's anger and judgment", "C. The priest's authority", "D. The value of the animal"], optionsEs: ["A. El sacrificio total de Cristo y la dedicación total del adorador", "B. La ira y el juicio de Dios", "C. La autoridad del sacerdote", "D. El valor del animal"], correct: 0, correctFeedbackEn: "Yes. The burnt offering pointed to Christ's complete sacrifice and called for total surrender.", correctFeedbackEs: "Sí. El holocausto señalaba al sacrificio completo de Cristo y llamaba a la entrega total.", incorrectFeedbackEn: "Total consumption = Christ's total sacrifice + our total dedication.", incorrectFeedbackEs: "Consumo total = el sacrificio total de Cristo + nuestra dedicación total." },
-    { textEn: "5. What could not be offered in a grain offering because it symbolized corruption?", textEs: "5. ¿Qué no podía ofrecerse en una ofrenda de grano porque simbolizaba corrupción?", optionsEn: ["A. Salt", "B. Leaven (yeast)", "C. Oil", "D. Frankincense"], optionsEs: ["A. Sal", "B. Levadura", "C. Aceite", "D. Incienso"], correct: 1, correctFeedbackEn: "Correct. Leaven symbolized corruption and was forbidden in grain offerings.", correctFeedbackEs: "Correcto. La levadura simbolizaba corrupción y estaba prohibida en las ofrendas de grano.", incorrectFeedbackEn: "Leaven (yeast) symbolized corruption and was forbidden.", incorrectFeedbackEs: "La levadura simbolizaba corrupción y estaba prohibida." },
-    { textEn: "6. Every grain offering was seasoned with what, called 'the salt of the covenant'?", textEs: "6. Toda ofrenda de grano se sazonaba con qué, llamada 'la sal del pacto'?", optionsEn: ["A. Sugar", "B. Pepper", "C. Salt", "D. Cinnamon"], optionsEs: ["A. Azúcar", "B. Pimienta", "C. Sal", "D. Canela"], correct: 2, correctFeedbackEn: "Yes. Salt preserves and purifies — a reminder of the covenant's permanence.", correctFeedbackEs: "Sí. La sal preserva y purifica — un recordatorio de la permanencia del pacto.", incorrectFeedbackEn: "Salt — 'the salt of the covenant of your God' (Leviticus 2:13).", incorrectFeedbackEs: "Sal — 'la sal del pacto de tu Dios' (Levítico 2:13)." },
-    { textEn: "7. The peace or fellowship offering was a time of what?", textEs: "7. La ofrenda de paz o de comunión era un tiempo de qué?", optionsEn: ["A. Celebration, eating, and singing", "B. Mourning", "C. Fasting", "D. Silent prayer"], optionsEs: ["A. Celebración, comida y cánticos", "B. Duelo", "C. Ayuno", "D. Oración en silencio"], correct: 0, correctFeedbackEn: "Yes. The peace offering was festive — a meal celebrating restored fellowship with God.", correctFeedbackEs: "Sí. La ofrenda de paz era festiva — una comida que celebraba la comunión restaurada con Dios.", incorrectFeedbackEn: "The peace offering was a festive meal — eating, drinking, talking, and singing.", incorrectFeedbackEs: "La ofrenda de paz era una comida festiva — comer, beber, hablar y cantar." },
-    { textEn: "8. What was offered on the altar from the peace offering, and what did this symbolize?", textEs: "8. ¿Qué se ofrecía sobre el altar de la ofrenda de paz, y qué simbolizaba esto?", optionsEn: ["A. The fat, kidneys, and liver — emotions and future to God", "B. The whole animal — total destruction", "C. Only the blood", "D. The bones"], optionsEs: ["A. La grosura, los riñones y el hígado — las emociones y el futuro a Dios", "B. Todo el animal — destrucción total", "C. Solo la sangre", "D. Los huesos"], correct: 0, correctFeedbackEn: "Correct. The fat (best portion), kidneys (emotions), and liver (future) were given to God.", correctFeedbackEs: "Correcto. La grosura (la mejor porción), los riñones (las emociones) y el hígado (el futuro) se daban a Dios.", incorrectFeedbackEn: "The fat, kidneys, and liver — giving emotions and future to God.", incorrectFeedbackEs: "La grosura, los riñones y el hígado — entregando las emociones y el futuro a Dios." },
-    { textEn: "9. The sin offering in Leviticus 4 primarily dealt with what kind of sins?", textEs: "9. La ofrenda por el pecado en Levítico 4 trataba principalmente qué tipo de pecados?", optionsEn: ["A. Intentional, defiant sins", "B. Sins against foreigners", "C. Ceremonial uncleanness only", "D. Unintentional sins"], optionsEs: ["A. Pecados intencionales y desafiantes", "B. Pecados contra extranjeros", "C. Solo impureza ceremonial", "D. Pecados no intencionales"], correct: 3, correctFeedbackEn: "Yes. The sin offering covered unintentional sins — things done without knowing they were wrong.", correctFeedbackEs: "Sí. La ofrenda por el pecado cubría los pecados no intencionales — cosas hechas sin saber que estaban mal.", incorrectFeedbackEn: "The sin offering was for unintentional sins — 'when' not 'if' a person sins.", incorrectFeedbackEs: "La ofrenda por el pecado era para pecados no intencionales — 'cuando', no 'si', una persona peca." },
-    { textEn: "10. For a common person, what animal was offered as a sin offering?", textEs: "10. Para una persona común, ¿qué animal se ofrecía como ofrenda por el pecado?", optionsEn: ["A. A bull", "B. A male goat", "C. A female goat or lamb", "D. Two turtledoves"], optionsEs: ["A. Un toro", "B. Un macho cabrío", "C. Una cabra o cordera", "D. Dos tórtolas"], correct: 2, correctFeedbackEn: "Correct. A female goat or lamb — God made provision for everyone.", correctFeedbackEs: "Correcto. Una cabra o cordera — Dios hizo provisión para todos.", incorrectFeedbackEn: "Leviticus 4:28 — a female goat or lamb without blemish.", incorrectFeedbackEs: "Levítico 4:28 — una cabra sin defecto." },
-    { textEn: "11. Why was the animal burned outside the camp for the priest's or nation's sin offering?", textEs: "11. ¿Por qué se quemaba el animal fuera del campamento para la ofrenda por el pecado del sacerdote o de la nación?", optionsEn: ["A. To hide it", "B. Because it was worthless", "C. To save fuel", "D. So no one would profit from a sin offering"], optionsEs: ["A. Para esconderlo", "B. Porque no valía nada", "C. Para ahorrar combustible", "D. Para que nadie se beneficiara de una ofrenda por el pecado"], correct: 3, correctFeedbackEn: "Yes. Burning outside the camp ensured no one economically benefited from a sin offering.", correctFeedbackEs: "Sí. Quemarlo fuera del campamento aseguraba que nadie se beneficiara económicamente de una ofrenda por el pecado.", incorrectFeedbackEn: "It was burned outside the camp so no one would profit from sin.", incorrectFeedbackEs: "Se quemaba fuera del campamento para que nadie lucrara con el pecado." },
-    { textEn: "12. What did the guilt offering require in addition to the animal sacrifice?", textEs: "12. ¿Qué requería la ofrenda por la culpa además del sacrificio del animal?", optionsEn: ["A. Fasting", "B. A pilgrimage", "C. A written confession", "D. Restitution plus 20%"], optionsEs: ["A. Ayuno", "B. Una peregrinación", "C. Una confesión escrita", "D. Restitución más un 20%"], correct: 3, correctFeedbackEn: "Correct. Restitution (restoring what was taken plus a fifth) was required before forgiveness.", correctFeedbackEs: "Correcto. La restitución (restaurar lo tomado más una quinta parte) se requería antes del perdón.", incorrectFeedbackEn: "The guilt offering required restitution — restore plus add 20%.", incorrectFeedbackEs: "La ofrenda por la culpa requería restitución — restaurar y añadir un 20%." },
-    { textEn: "13. Jesus referenced the principle of the guilt offering when He said what in Matthew 5?", textEs: "13. Jesús hizo referencia al principio de la ofrenda por la culpa cuando dijo qué en Mateo 5?", optionsEn: ["A. 'Love your enemies'", "B. 'First be reconciled to your brother, then come offer your gift'", "C. 'Sell all you have'", "D. 'Pray without ceasing'"], optionsEs: ["A. 'Amad a vuestros enemigos'", "B. 'Reconcíliate primero con tu hermano, y luego ven y ofrece tu ofrenda'", "C. 'Vende todo lo que tienes'", "D. 'Orad sin cesar'"], correct: 1, correctFeedbackEn: "Yes. Jesus taught that worship requires reconciled relationships — the same principle as the guilt offering.", correctFeedbackEs: "Sí. Jesús enseñó que la adoración requiere relaciones reconciliadas — el mismo principio que la ofrenda por la culpa.", incorrectFeedbackEn: "Matthew 5:23-24 — 'First be reconciled to your brother, then come and offer your gift.'", incorrectFeedbackEs: "Mateo 5:23-24 — 'Reconcíliate primero con tu hermano, y entonces ven y ofrece tu ofrenda.'" },
-    { textEn: "14. How often was the Day of Atonement (Yom Kippur) observed?", textEs: "14. ¿Con qué frecuencia se observaba el Día de la Expiación (Yom Kipur)?", optionsEn: ["A. Weekly", "B. Monthly", "C. Yearly", "D. Every seven years"], optionsEs: ["A. Semanalmente", "B. Mensualmente", "C. Anualmente", "D. Cada siete años"], correct: 2, correctFeedbackEn: "Correct. Once a year, on the tenth day of the seventh month — the holiest day of Israel's calendar.", correctFeedbackEs: "Correcto. Una vez al año, el día diez del mes séptimo — el día más santo del calendario de Israel.", incorrectFeedbackEn: "The Day of Atonement was observed once a year (Leviticus 16).", incorrectFeedbackEs: "El Día de la Expiación se observaba una vez al año (Levítico 16)." },
-    { textEn: "15. What was done with the scapegoat on the Day of Atonement?", textEs: "15. ¿Qué se hacía con el macho cabrío expiatorio en el Día de la Expiación?", optionsEn: ["A. It was sacrificed on the altar", "B. It was sent into the wilderness bearing the sins of the people", "C. It was released into the camp", "D. It was given to the poor"], optionsEs: ["A. Se sacrificaba sobre el altar", "B. Se enviaba al desierto llevando los pecados del pueblo", "C. Se soltaba en el campamento", "D. Se daba a los pobres"], correct: 1, correctFeedbackEn: "Yes. The high priest confessed Israel's sins over the scapegoat, which was then sent away — a picture of sins removed.", correctFeedbackEs: "Sí. El sumo sacerdote confesaba los pecados de Israel sobre el macho cabrío, que luego era enviado lejos — una imagen de los pecados quitados.", incorrectFeedbackEn: "The scapegoat carried the sins of the people into the wilderness (Leviticus 16:21-22).", incorrectFeedbackEs: "El macho cabrío expiatorio llevaba los pecados del pueblo al desierto (Levítico 16:21-22)." },
-    { textEn: "16. The blood of the sacrificed goat on the Day of Atonement was sprinkled on what?", textEs: "16. La sangre del macho cabrío sacrificado en el Día de la Expiación se rociaba sobre qué?", optionsEn: ["A. The altar of burnt offering", "B. The mercy seat (cover of the Ark)", "C. The people", "D. The tent of meeting"], optionsEs: ["A. El altar del holocausto", "B. El propiciatorio (la cubierta del Arca)", "C. El pueblo", "D. El tabernáculo de reunión"], correct: 1, correctFeedbackEn: "Correct. The blood was sprinkled on the mercy seat in the Holy of Holies.", correctFeedbackEs: "Correcto. La sangre se rociaba sobre el propiciatorio en el Lugar Santísimo.", incorrectFeedbackEn: "The blood was sprinkled on the mercy seat — the place of atonement.", incorrectFeedbackEs: "La sangre se rociaba sobre el propiciatorio — el lugar de la expiación." },
-    { textEn: "17. What does Hebrews 9 say about Christ's sacrifice in relation to the Day of Atonement?", textEs: "17. ¿Qué dice Hebreos 9 acerca del sacrificio de Cristo en relación con el Día de la Expiación?", optionsEn: ["A. Christ's sacrifice must be repeated yearly", "B. Christ entered heaven's Holy of Holies once for all with His own blood", "C. Christ's sacrifice was less effective", "D. Christ abolished atonement"], optionsEs: ["A. El sacrificio de Cristo debe repetirse cada año", "B. Cristo entró en el Lugar Santísimo del cielo una vez para siempre con Su propia sangre", "C. El sacrificio de Cristo fue menos eficaz", "D. Cristo abolió la expiación"], correct: 1, correctFeedbackEn: "Yes! Christ's once-for-all sacrifice fulfilled what the Day of Atonement pictured.", correctFeedbackEs: "¡Sí! El sacrificio de Cristo, una vez para siempre, cumplió lo que el Día de la Expiación representaba.", incorrectFeedbackEn: "Hebrews 9:12 — 'He entered the Most Holy Place once for all by His own blood, obtaining eternal redemption.'", incorrectFeedbackEs: "Hebreos 9:12 — 'entró una sola vez en el Lugar Santísimo por su propia sangre, obteniendo eterna redención.'" },
-    { textEn: "18. What was to be kept burning continually on the altar?", textEs: "18. ¿Qué debía mantenerse ardiendo continuamente sobre el altar?", optionsEn: ["A. Incense", "B. Candles", "C. Oil", "D. Fire"], optionsEs: ["A. Incienso", "B. Velas", "C. Aceite", "D. Fuego"], correct: 3, correctFeedbackEn: "Correct. The fire was never to go out — access to God through sacrifice is always open.", correctFeedbackEs: "Correcto. El fuego nunca debía apagarse — el acceso a Dios por medio del sacrificio siempre está abierto.", incorrectFeedbackEn: "The fire on the altar was to be kept burning continually (Leviticus 6:12-13).", incorrectFeedbackEs: "El fuego del altar debía mantenerse ardiendo continuamente (Levítico 6:12-13)." },
-    { textEn: "19. God made provision for the very poorest person to bring what as a sin offering?", textEs: "19. Dios hizo provisión para que la persona más pobre trajera qué como ofrenda por el pecado?", optionsEn: ["A. Nothing", "B. Two turtledoves", "C. Fine flour without oil or incense", "D. A prayer only"], optionsEs: ["A. Nada", "B. Dos tórtolas", "C. Flor de harina sin aceite ni incienso", "D. Solo una oración"], correct: 2, correctFeedbackEn: "Yes. Even fine flour was acceptable for the poorest — God's grace extends to everyone.", correctFeedbackEs: "Sí. Aun la flor de harina era aceptable para el más pobre — la gracia de Dios se extiende a todos.", incorrectFeedbackEn: "Leviticus 5:11 — fine flour without oil or incense for the poorest.", incorrectFeedbackEs: "Levítico 5:11 — flor de harina sin aceite ni incienso para el más pobre." },
-    { textEn: "20. According to Hebrews 10:4, what could the blood of bulls and goats NOT do?", textEs: "20. Según Hebreos 10:4, ¿qué NO podía hacer la sangre de toros y machos cabríos?", optionsEn: ["A. Cost money", "B. Be offered by priests", "C. Be sprinkled", "D. Take away sins"], optionsEs: ["A. Costar dinero", "B. Ser ofrecida por sacerdotes", "C. Ser rociada", "D. Quitar los pecados"], correct: 3, correctFeedbackEn: "Correct. The sacrifices pictured forgiveness but could not accomplish what Christ alone would do.", correctFeedbackEs: "Correcto. Los sacrificios representaban el perdón pero no podían lograr lo que solo Cristo haría.", incorrectFeedbackEn: "Hebrews 10:4 — 'It is not possible that the blood of bulls and goats could take away sins.'", incorrectFeedbackEs: "Hebreos 10:4 — 'la sangre de los toros y de los machos cabríos no puede quitar los pecados.'" }
-];
-
-const saQuestions = [
-    { id: `sa_u${UNIT}_1`, textEn: "Why is Leviticus important for Christians today, despite being often avoided?", textEs: "¿Por qué es importante Levítico para los cristianos de hoy, a pesar de ser a menudo evitado?", kw_en: ["referen", "40", "times", "new", "testame", "hebrews", "sacrific", "system"], kw_es: ["referen", "40", "veces", "nuevo", "testame", "hebreos", "sistema", "sacrific"], explanationEn: "Leviticus is referenced 40 times in the NT and is essential for understanding Christ's sacrifice as our High Priest and substitute.", explanationEs: "Levítico es referenciado 40 veces en el NT y es esencial para entender el sacrificio de Cristo como nuestro Sumo Sacerdote y sustituto." },
-    { id: `sa_u${UNIT}_2`, textEn: "Describe the burnt offering — what it symbolized and how it was performed.", textEs: "Describa el holocausto — lo que simbolizaba y cómo se realizaba.", kw_en: ["male", "without", "defect", "hand", "head", "substit", "total", "consump"], kw_es: ["macho", "sin", "defecto", "mano", "sobre", "cabeza", "sustitu", "consumi"], explanationEn: "A male without defect, hand laid on head identifying substitute, entire animal burned — symbolizing total dedication and pointing to Christ's total sacrifice.", explanationEs: "Un macho sin defecto, mano puesta sobre la cabeza identificando al sustituto, animal entero quemado — simbolizando dedicación total y apuntando al sacrificio total de Cristo." },
-    { id: `sa_u${UNIT}_3`, textEn: "What made the grain offering accessible to the poor, and what did the salt represent?", textEs: "¿Qué hacía accesible la ofrenda de grano a los pobres, y qué representaba la sal?", kw_en: ["fine", "flour", "oil", "incense", "poorest", "salt", "covenan", "preserv"], kw_es: ["harina", "fina", "sin", "aceite", "inciens", "más", "pobre", "sal"], explanationEn: "The poorest could bring fine flour. Salt represented the preserving, purifying nature of God's covenant.", explanationEs: "El más pobre podía traer harina fina. La sal representaba la naturaleza preservadora y purificadora del pacto de Dios." },
-    { id: `sa_u${UNIT}_4`, textEn: "What was the peace offering, and how did it demonstrate God's grace?", textEs: "¿Qué era la ofrenda de paz, y cómo demostraba la gracia de Dios?", kw_en: ["celebra", "meal", "shalom", "wholene", "fat", "burned", "most", "meat"], kw_es: ["comida", "celebra", "shalom", "plenitu", "grasa", "quemada", "mayor", "parte"], explanationEn: "A celebratory meal where most of the meat was returned to the worshiper — God hosted His people in grace.", explanationEs: "Una comida celebratoria donde la mayor parte de la carne era devuelta al adorador — Dios hospedaba a Su pueblo en gracia." },
-    { id: `sa_u${UNIT}_5`, textEn: "How did the sin offering vary based on who sinned, and why?", textEs: "¿Cómo variaba la ofrenda por el pecado según quién pecaba, y por qué?", kw_en: ["more", "public", "sin", "male", "goat", "common", "female", "greater"], kw_es: ["cuanto", "más", "público", "impacto", "cabrío", "común", "hembra", "cabra"], explanationEn: "The more public the sin's impact, the greater the offering — greater responsibility requires stricter atonement.", explanationEs: "Cuanto más público el impacto del pecado, mayor la ofrenda — mayor responsabilidad requiere expiación más estricta." },
-    { id: `sa_u${UNIT}_6`, textEn: "What two things did the guilt offering require beyond the sacrifice itself?", textEs: "¿Qué dos cosas requería la ofrenda por la culpa más allá del sacrificio mismo?", kw_en: ["restitu", "return", "fifth", "confess", "make", "right", "neighbo", "unfaith"], kw_es: ["restitu", "añadir", "devolve", "parte", "confesi", "restaur", "prójimo", "infiel"], explanationEn: "Restitution (return what was taken) plus adding 20% — showing that forgiveness doesn't remove responsibility to make things right.", explanationEs: "Restitución (devolver lo tomado) más añadir 20% — mostrando que el perdón no elimina la responsabilidad de restaurar." },
-    { id: `sa_u${UNIT}_7`, textEn: "Describe the two goats on the Day of Atonement and what each represented.", textEs: "Describa los dos machos cabríos en el Día de la Expiación y lo que cada uno representaba.", kw_en: ["sacrifi", "goat", "blood", "mercy", "seat", "paid", "penalty", "scapego"], kw_es: ["macho", "cabrío", "sacrifi", "sangre", "sobre", "propici", "pagó", "pena"], explanationEn: "One sacrificed — blood on mercy seat (penalty paid). One scapegoat — sins sent away (guilt removed). Both point to Christ.", explanationEs: "Uno sacrificado — sangre sobre el propiciatorio (pena pagada). Un chivo expiatorio — pecados enviados lejos (culpa eliminada). Ambos apuntan a Cristo." },
-    { id: `sa_u${UNIT}_8`, textEn: "What did the perpetual fire on the altar symbolize?", textEs: "¿Qué simbolizaba el fuego perpetuo en el altar?", kw_en: ["never", "through", "continu", "access", "presenc", "sacrific", "always", "availab"], kw_es: ["nunca", "través", "acceso", "continu", "presenc", "sacrific", "siempre", "disponi"], explanationEn: "Access to God through sacrifice was never closed — a picture of God's constant readiness to receive repentant sinners.", explanationEs: "El acceso a Dios a través del sacrificio nunca estaba cerrado — una imagen de la disposición constante de Dios para recibir a pecadores arrepentidos." },
-    { id: `sa_u${UNIT}_9`, textEn: "How did God make forgiveness accessible to every economic level in Israel?", textEs: "¿Cómo hizo Dios que el perdón fuera accesible para cada nivel económico en Israel?", kw_en: ["bull", "flour", "poor", "bird", "wealth", "faith", "povert", "fine"], kw_es: ["becerro", "harina", "pobre", "ave", "riqueza", "fe", "pobrez", "fina"], explanationEn: "God provided a sliding scale of offerings — from a bull to fine flour — so no one was turned away due to poverty.", explanationEs: "Dios proveyó una escala móvil de ofrendas — desde un becerro hasta harina fina — para que nadie fuera rechazado por pobreza." },
-    { id: `sa_u${UNIT}_10`, textEn: "According to Hebrews 9-10, how does Christ's sacrifice surpass the Old Testament sacrificial system?", textEs: "Según Hebreos 9-10, ¿cómo supera el sacrificio de Cristo al sistema sacrificial del Antiguo Testamento?", kw_en: ["once", "christ", "sacrifi", "blood", "eternal", "redempt", "repetit", "veil"], kw_es: ["vez", "siempre", "propia", "sangre", "eterna", "redenci", "sin", "repetic"], explanationEn: "Christ's sacrifice is once-for-all, never to be repeated, using His own blood, obtaining eternal redemption, and giving us direct access to God.", explanationEs: "El sacrificio de Cristo es de una vez para siempre, nunca repetido, usando Su propia sangre, obteniendo redención eterna, y dándonos acceso directo a Dios." }
-];
+/* CTSPent — unit 8. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "pent",
+ "unit": 8,
+ "totalUnits": 12,
+ "filePrefix": "CTSPent",
+ "prevHref": "CTSPentUnit7.html",
+ "nextHref": "CTSPentUnit9.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "What book of the Bible was the first book Hebrew children studied?",
+    "es": "¿Cuál libro de la Biblia fue el primero que estudiaban los niños hebreos?"
+   },
+   "options": {
+    "en": [
+     "Genesis",
+     "Exodus",
+     "Leviticus",
+     "Deuteronomy"
+    ],
+    "es": [
+     "Génesis",
+     "Éxodo",
+     "Levítico",
+     "Deuteronomio"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct! Leviticus was the first book Hebrew children studied, yet modern Christians avoid it.",
+    "es": "¡Correcto! Levítico era el primer libro que estudiaban los niños hebreos, y sin embargo los cristianos modernos lo evitan."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Hebrew word for sacrifice, 'zebah,' also carries what meaning?",
+    "es": "La palabra hebrea para sacrificio, 'zebah', ¿qué otro significado tiene?"
+   },
+   "options": {
+    "en": [
+     "Fellowship",
+     "Death",
+     "Payment",
+     "Law"
+    ],
+    "es": [
+     "Comunión",
+     "Muerte",
+     "Pago",
+     "Ley"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Yes. Zebah means sacrifice but also fellowship — God hosted His people with a meal.",
+    "es": "Sí. Zebah significa sacrificio pero también comunión — Dios hospedaba a Su pueblo con una comida."
+   }
+  },
+  {
+   "stem": {
+    "en": "In the burnt offering, the worshiper laid his hand on the animal's head to signify what?",
+    "es": "En el holocausto, el adorador ponía su mano sobre la cabeza del animal para significar qué?"
+   },
+   "options": {
+    "en": [
+     "Identification as substitute",
+     "Ownership",
+     "Thankfulness",
+     "Victory"
+    ],
+    "es": [
+     "Identificación como sustituto",
+     "Propiedad",
+     "Agradecimiento",
+     "Victoria"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. He was 'supporting himself' on the animal, identifying with it as his substitute.",
+    "es": "Correcto. Se estaba 'apoyando' sobre el animal, identificándose con él como su sustituto."
+   }
+  },
+  {
+   "stem": {
+    "en": "The complete consumption of the burnt offering symbolized what two things?",
+    "es": "El consumo completo del holocausto simbolizaba qué dos cosas?"
+   },
+   "options": {
+    "en": [
+     "Christ's total sacrifice and the worshiper's total dedication",
+     "God's anger and judgment",
+     "The priest's authority",
+     "The value of the animal"
+    ],
+    "es": [
+     "El sacrificio total de Cristo y la dedicación total del adorador",
+     "La ira y el juicio de Dios",
+     "La autoridad del sacerdote",
+     "El valor del animal"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Yes. The burnt offering pointed to Christ's complete sacrifice and called for total surrender.",
+    "es": "Sí. El holocausto señalaba al sacrificio completo de Cristo y llamaba a la entrega total."
+   }
+  },
+  {
+   "stem": {
+    "en": "What could not be offered in a grain offering because it symbolized corruption?",
+    "es": "¿Qué no podía ofrecerse en una ofrenda de grano porque simbolizaba corrupción?"
+   },
+   "options": {
+    "en": [
+     "Salt",
+     "Leaven (yeast)",
+     "Oil",
+     "Frankincense"
+    ],
+    "es": [
+     "Sal",
+     "Levadura",
+     "Aceite",
+     "Incienso"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. Leaven symbolized corruption and was forbidden in grain offerings.",
+    "es": "Correcto. La levadura simbolizaba corrupción y estaba prohibida en las ofrendas de grano."
+   }
+  },
+  {
+   "stem": {
+    "en": "Every grain offering was seasoned with what, called 'the salt of the covenant'?",
+    "es": "Toda ofrenda de grano se sazonaba con qué, llamada 'la sal del pacto'?"
+   },
+   "options": {
+    "en": [
+     "Sugar",
+     "Pepper",
+     "Salt",
+     "Cinnamon"
+    ],
+    "es": [
+     "Azúcar",
+     "Pimienta",
+     "Sal",
+     "Canela"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Yes. Salt preserves and purifies — a reminder of the covenant's permanence.",
+    "es": "Sí. La sal preserva y purifica — un recordatorio de la permanencia del pacto."
+   }
+  },
+  {
+   "stem": {
+    "en": "The peace or fellowship offering was a time of what?",
+    "es": "La ofrenda de paz o de comunión era un tiempo de qué?"
+   },
+   "options": {
+    "en": [
+     "Celebration, eating, and singing",
+     "Mourning",
+     "Fasting",
+     "Silent prayer"
+    ],
+    "es": [
+     "Celebración, comida y cánticos",
+     "Duelo",
+     "Ayuno",
+     "Oración en silencio"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Yes. The peace offering was festive — a meal celebrating restored fellowship with God.",
+    "es": "Sí. La ofrenda de paz era festiva — una comida que celebraba la comunión restaurada con Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was offered on the altar from the peace offering, and what did this symbolize?",
+    "es": "¿Qué se ofrecía sobre el altar de la ofrenda de paz, y qué simbolizaba esto?"
+   },
+   "options": {
+    "en": [
+     "The fat, kidneys, and liver — emotions and future to God",
+     "The whole animal — total destruction",
+     "Only the blood",
+     "The bones"
+    ],
+    "es": [
+     "La grosura, los riñones y el hígado — las emociones y el futuro a Dios",
+     "Todo el animal — destrucción total",
+     "Solo la sangre",
+     "Los huesos"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. The fat (best portion), kidneys (emotions), and liver (future) were given to God.",
+    "es": "Correcto. La grosura (la mejor porción), los riñones (las emociones) y el hígado (el futuro) se daban a Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "The sin offering in Leviticus 4 primarily dealt with what kind of sins?",
+    "es": "La ofrenda por el pecado en Levítico 4 trataba principalmente qué tipo de pecados?"
+   },
+   "options": {
+    "en": [
+     "Intentional, defiant sins",
+     "Sins against foreigners",
+     "Ceremonial uncleanness only",
+     "Unintentional sins"
+    ],
+    "es": [
+     "Pecados intencionales y desafiantes",
+     "Pecados contra extranjeros",
+     "Solo impureza ceremonial",
+     "Pecados no intencionales"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Yes. The sin offering covered unintentional sins — things done without knowing they were wrong.",
+    "es": "Sí. La ofrenda por el pecado cubría los pecados no intencionales — cosas hechas sin saber que estaban mal."
+   }
+  },
+  {
+   "stem": {
+    "en": "For a common person, what animal was offered as a sin offering?",
+    "es": "Para una persona común, ¿qué animal se ofrecía como ofrenda por el pecado?"
+   },
+   "options": {
+    "en": [
+     "A bull",
+     "A male goat",
+     "A female goat or lamb",
+     "Two turtledoves"
+    ],
+    "es": [
+     "Un toro",
+     "Un macho cabrío",
+     "Una cabra o cordera",
+     "Dos tórtolas"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. A female goat or lamb — God made provision for everyone.",
+    "es": "Correcto. Una cabra o cordera — Dios hizo provisión para todos."
+   }
+  },
+  {
+   "stem": {
+    "en": "Why was the animal burned outside the camp for the priest's or nation's sin offering?",
+    "es": "¿Por qué se quemaba el animal fuera del campamento para la ofrenda por el pecado del sacerdote o de la nación?"
+   },
+   "options": {
+    "en": [
+     "To hide it",
+     "Because it was worthless",
+     "To save fuel",
+     "So no one would profit from a sin offering"
+    ],
+    "es": [
+     "Para esconderlo",
+     "Porque no valía nada",
+     "Para ahorrar combustible",
+     "Para que nadie se beneficiara de una ofrenda por el pecado"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Yes. Burning outside the camp ensured no one economically benefited from a sin offering.",
+    "es": "Sí. Quemarlo fuera del campamento aseguraba que nadie se beneficiara económicamente de una ofrenda por el pecado."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did the guilt offering require in addition to the animal sacrifice?",
+    "es": "¿Qué requería la ofrenda por la culpa además del sacrificio del animal?"
+   },
+   "options": {
+    "en": [
+     "Fasting",
+     "A pilgrimage",
+     "A written confession",
+     "Restitution plus 20%"
+    ],
+    "es": [
+     "Ayuno",
+     "Una peregrinación",
+     "Una confesión escrita",
+     "Restitución más un 20%"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. Restitution (restoring what was taken plus a fifth) was required before forgiveness.",
+    "es": "Correcto. La restitución (restaurar lo tomado más una quinta parte) se requería antes del perdón."
+   }
+  },
+  {
+   "stem": {
+    "en": "Jesus referenced the principle of the guilt offering when He said what in Matthew 5?",
+    "es": "Jesús hizo referencia al principio de la ofrenda por la culpa cuando dijo qué en Mateo 5?"
+   },
+   "options": {
+    "en": [
+     "'Love your enemies'",
+     "'First be reconciled to your brother, then come offer your gift'",
+     "'Sell all you have'",
+     "'Pray without ceasing'"
+    ],
+    "es": [
+     "'Amad a vuestros enemigos'",
+     "'Reconcíliate primero con tu hermano, y luego ven y ofrece tu ofrenda'",
+     "'Vende todo lo que tienes'",
+     "'Orad sin cesar'"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Yes. Jesus taught that worship requires reconciled relationships — the same principle as the guilt offering.",
+    "es": "Sí. Jesús enseñó que la adoración requiere relaciones reconciliadas — el mismo principio que la ofrenda por la culpa."
+   }
+  },
+  {
+   "stem": {
+    "en": "How often was the Day of Atonement (Yom Kippur) observed?",
+    "es": "¿Con qué frecuencia se observaba el Día de la Expiación (Yom Kipur)?"
+   },
+   "options": {
+    "en": [
+     "Weekly",
+     "Monthly",
+     "Yearly",
+     "Every seven years"
+    ],
+    "es": [
+     "Semanalmente",
+     "Mensualmente",
+     "Anualmente",
+     "Cada siete años"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. Once a year, on the tenth day of the seventh month — the holiest day of Israel's calendar.",
+    "es": "Correcto. Una vez al año, el día diez del mes séptimo — el día más santo del calendario de Israel."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was done with the scapegoat on the Day of Atonement?",
+    "es": "¿Qué se hacía con el macho cabrío expiatorio en el Día de la Expiación?"
+   },
+   "options": {
+    "en": [
+     "It was sacrificed on the altar",
+     "It was sent into the wilderness bearing the sins of the people",
+     "It was released into the camp",
+     "It was given to the poor"
+    ],
+    "es": [
+     "Se sacrificaba sobre el altar",
+     "Se enviaba al desierto llevando los pecados del pueblo",
+     "Se soltaba en el campamento",
+     "Se daba a los pobres"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Yes. The high priest confessed Israel's sins over the scapegoat, which was then sent away — a picture of sins removed.",
+    "es": "Sí. El sumo sacerdote confesaba los pecados de Israel sobre el macho cabrío, que luego era enviado lejos — una imagen de los pecados quitados."
+   }
+  },
+  {
+   "stem": {
+    "en": "The blood of the sacrificed goat on the Day of Atonement was sprinkled on what?",
+    "es": "La sangre del macho cabrío sacrificado en el Día de la Expiación se rociaba sobre qué?"
+   },
+   "options": {
+    "en": [
+     "The altar of burnt offering",
+     "The mercy seat (cover of the Ark)",
+     "The people",
+     "The tent of meeting"
+    ],
+    "es": [
+     "El altar del holocausto",
+     "El propiciatorio (la cubierta del Arca)",
+     "El pueblo",
+     "El tabernáculo de reunión"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. The blood was sprinkled on the mercy seat in the Holy of Holies.",
+    "es": "Correcto. La sangre se rociaba sobre el propiciatorio en el Lugar Santísimo."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does Hebrews 9 say about Christ's sacrifice in relation to the Day of Atonement?",
+    "es": "¿Qué dice Hebreos 9 acerca del sacrificio de Cristo en relación con el Día de la Expiación?"
+   },
+   "options": {
+    "en": [
+     "Christ's sacrifice must be repeated yearly",
+     "Christ entered heaven's Holy of Holies once for all with His own blood",
+     "Christ's sacrifice was less effective",
+     "Christ abolished atonement"
+    ],
+    "es": [
+     "El sacrificio de Cristo debe repetirse cada año",
+     "Cristo entró en el Lugar Santísimo del cielo una vez para siempre con Su propia sangre",
+     "El sacrificio de Cristo fue menos eficaz",
+     "Cristo abolió la expiación"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Yes! Christ's once-for-all sacrifice fulfilled what the Day of Atonement pictured.",
+    "es": "¡Sí! El sacrificio de Cristo, una vez para siempre, cumplió lo que el Día de la Expiación representaba."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was to be kept burning continually on the altar?",
+    "es": "¿Qué debía mantenerse ardiendo continuamente sobre el altar?"
+   },
+   "options": {
+    "en": [
+     "Incense",
+     "Candles",
+     "Oil",
+     "Fire"
+    ],
+    "es": [
+     "Incienso",
+     "Velas",
+     "Aceite",
+     "Fuego"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. The fire was never to go out — access to God through sacrifice is always open.",
+    "es": "Correcto. El fuego nunca debía apagarse — el acceso a Dios por medio del sacrificio siempre está abierto."
+   }
+  },
+  {
+   "stem": {
+    "en": "God made provision for the very poorest person to bring what as a sin offering?",
+    "es": "Dios hizo provisión para que la persona más pobre trajera qué como ofrenda por el pecado?"
+   },
+   "options": {
+    "en": [
+     "Nothing",
+     "Two turtledoves",
+     "Fine flour without oil or incense",
+     "A prayer only"
+    ],
+    "es": [
+     "Nada",
+     "Dos tórtolas",
+     "Flor de harina sin aceite ni incienso",
+     "Solo una oración"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Yes. Even fine flour was acceptable for the poorest — God's grace extends to everyone.",
+    "es": "Sí. Aun la flor de harina era aceptable para el más pobre — la gracia de Dios se extiende a todos."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to Hebrews 10:4, what could the blood of bulls and goats NOT do?",
+    "es": "Según Hebreos 10:4, ¿qué NO podía hacer la sangre de toros y machos cabríos?"
+   },
+   "options": {
+    "en": [
+     "Cost money",
+     "Be offered by priests",
+     "Be sprinkled",
+     "Take away sins"
+    ],
+    "es": [
+     "Costar dinero",
+     "Ser ofrecida por sacerdotes",
+     "Ser rociada",
+     "Quitar los pecados"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. The sacrifices pictured forgiveness but could not accomplish what Christ alone would do.",
+    "es": "Correcto. Los sacrificios representaban el perdón pero no podían lograr lo que solo Cristo haría."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Why is Leviticus important for Christians today, despite being often avoided?",
+    "es": "¿Por qué es importante Levítico para los cristianos de hoy, a pesar de ser a menudo evitado?"
+   },
+   "keywords": {
+    "en": [
+     "referen",
+     "40",
+     "times",
+     "new",
+     "testame",
+     "hebrews",
+     "sacrific",
+     "system"
+    ],
+    "es": [
+     "referen",
+     "40",
+     "veces",
+     "nuevo",
+     "testame",
+     "hebreos",
+     "sistema",
+     "sacrific"
+    ]
+   },
+   "model": {
+    "en": "Leviticus is referenced 40 times in the NT and is essential for understanding Christ's sacrifice as our High Priest and substitute.",
+    "es": "Levítico es referenciado 40 veces en el NT y es esencial para entender el sacrificio de Cristo como nuestro Sumo Sacerdote y sustituto."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the burnt offering — what it symbolized and how it was performed.",
+    "es": "Describa el holocausto — lo que simbolizaba y cómo se realizaba."
+   },
+   "keywords": {
+    "en": [
+     "male",
+     "without",
+     "defect",
+     "hand",
+     "head",
+     "substit",
+     "total",
+     "consump"
+    ],
+    "es": [
+     "macho",
+     "sin",
+     "defecto",
+     "mano",
+     "sobre",
+     "cabeza",
+     "sustitu",
+     "consumi"
+    ]
+   },
+   "model": {
+    "en": "A male without defect, hand laid on head identifying substitute, entire animal burned — symbolizing total dedication and pointing to Christ's total sacrifice.",
+    "es": "Un macho sin defecto, mano puesta sobre la cabeza identificando al sustituto, animal entero quemado — simbolizando dedicación total y apuntando al sacrificio total de Cristo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What made the grain offering accessible to the poor, and what did the salt represent?",
+    "es": "¿Qué hacía accesible la ofrenda de grano a los pobres, y qué representaba la sal?"
+   },
+   "keywords": {
+    "en": [
+     "fine",
+     "flour",
+     "oil",
+     "incense",
+     "poorest",
+     "salt",
+     "covenan",
+     "preserv"
+    ],
+    "es": [
+     "harina",
+     "fina",
+     "sin",
+     "aceite",
+     "inciens",
+     "más",
+     "pobre",
+     "sal"
+    ]
+   },
+   "model": {
+    "en": "The poorest could bring fine flour. Salt represented the preserving, purifying nature of God's covenant.",
+    "es": "El más pobre podía traer harina fina. La sal representaba la naturaleza preservadora y purificadora del pacto de Dios."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What was the peace offering, and how did it demonstrate God's grace?",
+    "es": "¿Qué era la ofrenda de paz, y cómo demostraba la gracia de Dios?"
+   },
+   "keywords": {
+    "en": [
+     "celebra",
+     "meal",
+     "shalom",
+     "wholene",
+     "fat",
+     "burned",
+     "most",
+     "meat"
+    ],
+    "es": [
+     "comida",
+     "celebra",
+     "shalom",
+     "plenitu",
+     "grasa",
+     "quemada",
+     "mayor",
+     "parte"
+    ]
+   },
+   "model": {
+    "en": "A celebratory meal where most of the meat was returned to the worshiper — God hosted His people in grace.",
+    "es": "Una comida celebratoria donde la mayor parte de la carne era devuelta al adorador — Dios hospedaba a Su pueblo en gracia."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How did the sin offering vary based on who sinned, and why?",
+    "es": "¿Cómo variaba la ofrenda por el pecado según quién pecaba, y por qué?"
+   },
+   "keywords": {
+    "en": [
+     "more",
+     "public",
+     "sin",
+     "male",
+     "goat",
+     "common",
+     "female",
+     "greater"
+    ],
+    "es": [
+     "cuanto",
+     "más",
+     "público",
+     "impacto",
+     "cabrío",
+     "común",
+     "hembra",
+     "cabra"
+    ]
+   },
+   "model": {
+    "en": "The more public the sin's impact, the greater the offering — greater responsibility requires stricter atonement.",
+    "es": "Cuanto más público el impacto del pecado, mayor la ofrenda — mayor responsabilidad requiere expiación más estricta."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What two things did the guilt offering require beyond the sacrifice itself?",
+    "es": "¿Qué dos cosas requería la ofrenda por la culpa más allá del sacrificio mismo?"
+   },
+   "keywords": {
+    "en": [
+     "restitu",
+     "return",
+     "fifth",
+     "confess",
+     "make",
+     "right",
+     "neighbo",
+     "unfaith"
+    ],
+    "es": [
+     "restitu",
+     "añadir",
+     "devolve",
+     "parte",
+     "confesi",
+     "restaur",
+     "prójimo",
+     "infiel"
+    ]
+   },
+   "model": {
+    "en": "Restitution (return what was taken) plus adding 20% — showing that forgiveness doesn't remove responsibility to make things right.",
+    "es": "Restitución (devolver lo tomado) más añadir 20% — mostrando que el perdón no elimina la responsabilidad de restaurar."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the two goats on the Day of Atonement and what each represented.",
+    "es": "Describa los dos machos cabríos en el Día de la Expiación y lo que cada uno representaba."
+   },
+   "keywords": {
+    "en": [
+     "sacrifi",
+     "goat",
+     "blood",
+     "mercy",
+     "seat",
+     "paid",
+     "penalty",
+     "scapego"
+    ],
+    "es": [
+     "macho",
+     "cabrío",
+     "sacrifi",
+     "sangre",
+     "sobre",
+     "propici",
+     "pagó",
+     "pena"
+    ]
+   },
+   "model": {
+    "en": "One sacrificed — blood on mercy seat (penalty paid). One scapegoat — sins sent away (guilt removed). Both point to Christ.",
+    "es": "Uno sacrificado — sangre sobre el propiciatorio (pena pagada). Un chivo expiatorio — pecados enviados lejos (culpa eliminada). Ambos apuntan a Cristo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What did the perpetual fire on the altar symbolize?",
+    "es": "¿Qué simbolizaba el fuego perpetuo en el altar?"
+   },
+   "keywords": {
+    "en": [
+     "never",
+     "through",
+     "continu",
+     "access",
+     "presenc",
+     "sacrific",
+     "always",
+     "availab"
+    ],
+    "es": [
+     "nunca",
+     "través",
+     "acceso",
+     "continu",
+     "presenc",
+     "sacrific",
+     "siempre",
+     "disponi"
+    ]
+   },
+   "model": {
+    "en": "Access to God through sacrifice was never closed — a picture of God's constant readiness to receive repentant sinners.",
+    "es": "El acceso a Dios a través del sacrificio nunca estaba cerrado — una imagen de la disposición constante de Dios para recibir a pecadores arrepentidos."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How did God make forgiveness accessible to every economic level in Israel?",
+    "es": "¿Cómo hizo Dios que el perdón fuera accesible para cada nivel económico en Israel?"
+   },
+   "keywords": {
+    "en": [
+     "bull",
+     "flour",
+     "poor",
+     "bird",
+     "wealth",
+     "faith",
+     "povert",
+     "fine"
+    ],
+    "es": [
+     "becerro",
+     "harina",
+     "pobre",
+     "ave",
+     "riqueza",
+     "fe",
+     "pobrez",
+     "fina"
+    ]
+   },
+   "model": {
+    "en": "God provided a sliding scale of offerings — from a bull to fine flour — so no one was turned away due to poverty.",
+    "es": "Dios proveyó una escala móvil de ofrendas — desde un becerro hasta harina fina — para que nadie fuera rechazado por pobreza."
+   }
+  },
+  {
+   "prompt": {
+    "en": "According to Hebrews 9-10, how does Christ's sacrifice surpass the Old Testament sacrificial system?",
+    "es": "Según Hebreos 9-10, ¿cómo supera el sacrificio de Cristo al sistema sacrificial del Antiguo Testamento?"
+   },
+   "keywords": {
+    "en": [
+     "once",
+     "christ",
+     "sacrifi",
+     "blood",
+     "eternal",
+     "redempt",
+     "repetit",
+     "veil"
+    ],
+    "es": [
+     "vez",
+     "siempre",
+     "propia",
+     "sangre",
+     "eterna",
+     "redenci",
+     "sin",
+     "repetic"
+    ]
+   },
+   "model": {
+    "en": "Christ's sacrifice is once-for-all, never to be repeated, using His own blood, obtaining eternal redemption, and giving us direct access to God.",
+    "es": "El sacrificio de Cristo es de una vez para siempre, nunca repetido, usando Su propia sangre, obteniendo redención eterna, y dándonos acceso directo a Dios."
+   }
+  }
+ ]
+};

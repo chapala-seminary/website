@@ -1,187 +1,865 @@
-/* CTSRadical - unit 9: per-unit configuration and content. */
-
-const UNIT = 9;
-
-const COURSE = 'radical';
-
-const NEXT_UNIT_URL = 'CTSRadicalUnit10.html';
-
-const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
-
-const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
-
-const PROGRESS_KEY  = `cts_${COURSE}_progress`;
-
-let progress = {};
-
-const unitTitlesEn = [
-    "Unit 1 - Foundation: Old Wineskins, New Wine",
-    "Unit 2 - What Jesus Did With the Law",
-    "Unit 3 - Love God",
-    "Unit 4 - Love Neighbor",
-    "Unit 5 - Be Holy",
-    "Unit 6 - Be Forgiving",
-    "Unit 7 - Be Humble",
-    "Unit 8 - Be Generous",
-    `Unit ${UNIT} - Trust God`,
-    `Unit ${UNIT + 1} - Be Prayerful`,
-    "Unit 11 - Be Kind",
-    "Unit 12 - Be a Disciplemaker",
-    "Unit 13 - Capstone: Turning the World Upside Down"
-];
-
-const mcQuestions = [
-    { textEn: "1. According to Proverbs 3:5-6, what are we told NOT to lean on?", textEs: "1. Según Proverbios 3:5-6, ¿en qué se nos dice que NO estribemos?",
-      optionsEn: ["The counsel of the wise", "The promises of God", "Our own understanding", "The church"],
-      optionsEs: ["El consejo de los sabios", "Las promesas de Dios", "Nuestra propia prudencia", "La iglesia"],
-      explanationEn: "We are to trust the LORD with all our heart and lean not on our own understanding — letting go of the handrail of our own calculations to rest our weight on God.", explanationEs: "Hemos de confiar en Jehová de todo nuestro corazón y no estribar en nuestra propia prudencia — soltando el pasamanos de nuestros cálculos para descansar en Dios.", correct: 2 },
-    { textEn: "2. How does the lesson use the wineskins image for trust?", textEs: "2. ¿Cómo usa la lección la imagen de los odres para la confianza?",
-      optionsEn: ["Old skins stretch best", "The wine should be kept small", "Wineskins are about money only", "New wine expands; only new wineskins stretch to hold a faith beyond what feels safe"],
-      optionsEs: ["Los odres viejos se estiran mejor", "El vino debe mantenerse pequeño", "Los odres son solo sobre dinero", "El vino nuevo se expande; solo los odres nuevos se estiran para contener una fe más allá de lo seguro"],
-      explanationEn: "New wine ferments and expands, bursting brittle old skins; new wineskins stretch. Jesus calls us to a faith that stretches beyond what feels safe — radical trust.", explanationEs: "El vino nuevo fermenta y se expande, reventando los odres viejos; los odres nuevos se estiran. Jesús nos llama a una fe que se estira más allá de lo seguro — confianza radical.", correct: 3 },
-    { textEn: "3. In Mark 4, where was Jesus during the violent storm, and what did He do?", textEs: "3. En Marcos 4, ¿dónde estaba Jesús durante la violenta tormenta, y qué hizo?",
-      optionsEn: ["Asleep in the stern; He rose and stilled the wind and waves with a word", "On the shore; He watched", "Rowing the boat; He bailed water", "He had not yet arrived"],
-      optionsEs: ["Dormido en la popa; se levantó y aquietó el viento y las olas con una palabra", "En la orilla; observaba", "Remando; achicaba agua", "Aún no había llegado"],
-      explanationEn: "Jesus was asleep on a cushion in the stern; awakened, He rebuked the wind and said 'Peace, be still,' and the storm ceased — even wind and sea obey Him.", explanationEs: "Jesús dormía sobre un cabezal en la popa; despertado, reprendió al viento y dijo 'Calla, enmudece,' y la tormenta cesó — aun el viento y el mar le obedecen.", correct: 0 },
-    { textEn: "4. What is the central lesson of the calming of the storm?", textEs: "4. ¿Cuál es la lección central del aquietamiento de la tormenta?",
-      optionsEn: ["Storms will never come to believers", "The Lord of the storm is in the boat with you; His presence is greater than any wave", "Faith guarantees calm seas", "Experienced sailors never fear"],
-      optionsEs: ["Las tormentas nunca vendrán a los creyentes", "El Señor de la tormenta está en la barca contigo; su presencia es mayor que cualquier ola", "La fe garantiza mares calmados", "Los marineros expertos nunca temen"],
-      explanationEn: "The lesson is not that storms never come, but that the Lord of the storm is in the boat with you; radical trust knows His presence is greater than any wave.", explanationEs: "La lección no es que las tormentas nunca vengan, sino que el Señor de la tormenta está en la barca contigo; la confianza radical sabe que su presencia es mayor que cualquier ola.", correct: 1 },
-    { textEn: "5. How did Elisabeth Elliot demonstrate radical trust?", textEs: "5. ¿Cómo demostró Elisabeth Elliot la confianza radical?",
-      optionsEn: ["She demanded justice", "She abandoned the mission field", "She went to live among the very tribe that killed her husband, and many came to faith", "She returned to America permanently"],
-      optionsEs: ["Exigió justicia", "Abandonó el campo misionero", "Fue a vivir entre la misma tribu que mató a su esposo, y muchos vinieron a la fe", "Regresó a América permanentemente"],
-      explanationEn: "Widowed at 29, Elisabeth trusted the Lord of the storm and went to live among the Huaorani who killed her husband; in time many — even some who held the spears — came to faith.", explanationEs: "Viuda a los 29, Elisabeth confió en el Señor de la tormenta y fue a vivir entre los huaorani que mataron a su esposo; con el tiempo muchos — aun algunos que empuñaron las lanzas — vinieron a la fe.", correct: 2 },
-    { textEn: "6. The lesson says faith rests on 'presence over outcome.' What does this mean?", textEs: "6. La lección dice que la fe descansa en 'la presencia por encima del resultado.' ¿Qué significa?",
-      optionsEn: ["God always gives the calm we ask for", "Faith does not always stop the storm, but always anchors us to the Savior who rules it", "Outcomes don't matter at all", "We should expect no help"],
-      optionsEs: ["Dios siempre da la calma que pedimos", "La fe no siempre detiene la tormenta, pero siempre nos ancla al Salvador que la gobierna", "Los resultados no importan en nada", "No debemos esperar ayuda"],
-      explanationEn: "Elliot's storm was not calmed as she wished — her husband was not returned — yet Christ ruled over it; faith anchors us to the Savior even when the storm is not stopped.", explanationEs: "La tormenta de Elliot no fue calmada como deseaba — su esposo no le fue devuelto — pero Cristo reinó sobre ella; la fe nos ancla al Salvador aun cuando la tormenta no se detiene.", correct: 1 },
-    { textEn: "7. In Matthew 6, to what does Jesus point to teach us not to worry?", textEs: "7. En Mateo 6, ¿a qué señala Jesús para enseñarnos a no afanarnos?",
-      optionsEn: ["The wealth of kings", "The strength of armies", "The wisdom of philosophers", "The birds of the air and the lilies of the field, which the Father feeds and clothes"],
-      optionsEs: ["La riqueza de los reyes", "La fuerza de los ejércitos", "La sabiduría de los filósofos", "Las aves del cielo y los lirios del campo, que el Padre alimenta y viste"],
-      explanationEn: "Jesus points to birds that neither sow nor reap yet are fed, and lilies that neither toil nor spin yet outshine Solomon; if God so cares for them, how much more for us.", explanationEs: "Jesús señala aves que ni siembran ni siegan y son alimentadas, y lirios que ni trabajan ni hilan y superan a Salomón; si Dios así los cuida, cuánto más a nosotros.", correct: 3 },
-    { textEn: "8. According to Jesus, what does worry actually accomplish?", textEs: "8. Según Jesús, ¿qué logra en realidad la preocupación?",
-      optionsEn: ["Nothing — it cannot add a single hour to our lives", "It pleases God", "It solves problems", "It adds years to life"],
-      optionsEs: ["Nada — no puede añadir una sola hora a nuestra vida", "Agrada a Dios", "Resuelve problemas", "Añade años a la vida"],
-      explanationEn: "Jesus asks who by worrying can add one cubit to his stature; worry accomplishes nothing and is a failure to reckon with the Father's care.", explanationEs: "Jesús pregunta quién, afanándose, puede añadir un codo a su estatura; la preocupación no logra nada y es una falta de contar con el cuidado del Padre.", correct: 0 },
-    { textEn: "9. What is the antidote to worry that Jesus gives in Matthew 6:33?", textEs: "9. ¿Cuál es el antídoto contra la preocupación que Jesús da en Mateo 6:33?",
-      optionsEn: ["Save more money", "Work harder for security", "Seek first the kingdom of God and His righteousness, and all these things will be added", "Ignore your needs"],
-      optionsEs: ["Ahorrar más dinero", "Trabajar más por seguridad", "Buscar primeramente el reino de Dios y su justicia, y todas estas cosas serán añadidas", "Ignorar tus necesidades"],
-      explanationEn: "The antidote is to seek first God's kingdom and righteousness, trusting that the Father who knows our needs will add all these things; trust surrenders anxiety to Him.", explanationEs: "El antídoto es buscar primero el reino y la justicia de Dios, confiando en que el Padre que conoce nuestras necesidades añadirá todas estas cosas; la confianza le entrega la ansiedad.", correct: 2 },
-    { textEn: "10. The lesson contrasts 'what if?' with 'even if.' What is the point?", textEs: "10. La lección contrasta '¿qué tal si?' con 'aun si.' ¿Cuál es el punto?",
-      optionsEn: ["Both are forms of fear", "'What if' is the language of faith", "'Even if' means giving up", "Anxiety asks 'what if?'; faith answers 'even if' — God is still faithful no matter the circumstance"],
-      optionsEs: ["Ambos son formas de miedo", "'¿Qué tal si?' es el idioma de la fe", "'Aun si' significa rendirse", "La ansiedad pregunta '¿qué tal si?'; la fe responde 'aun si' — Dios sigue siendo fiel pase lo que pase"],
-      explanationEn: "Anxiety multiplies 'what if?' fears that may never come; faith rests on 'even if' — even if the fridge is empty, God is faithful and knows what we need.", explanationEs: "La ansiedad multiplica temores de '¿qué tal si?' que quizá nunca lleguen; la fe descansa en el 'aun si' — aun si el refrigerador está vacío, Dios es fiel y sabe lo que necesitamos.", correct: 3 },
-    { textEn: "11. What daily disciplines of trust does the lesson recommend?", textEs: "11. ¿Qué disciplinas diarias de confianza recomienda la lección?",
-      optionsEn: ["Worry productively and plan for every outcome", "Surrender worries, seek first the kingdom, and thank God for provision before seeing it", "Avoid all risk", "Keep your needs hidden"],
-      optionsEs: ["Preocuparse productivamente y planear cada resultado", "Entregar las preocupaciones, buscar primero el reino, y agradecer a Dios por la provisión antes de verla", "Evitar todo riesgo", "Mantener ocultas tus necesidades"],
-      explanationEn: "Surrender each worry to the Lord, seek first the kingdom over anxiety, and thank God for provision even before seeing it, for gratitude is faith remembering He never fails.", explanationEs: "Entrega cada preocupación al Señor, busca primero el reino por encima de la ansiedad, y agradece a Dios por la provisión aun antes de verla, pues la gratitud es la fe que recuerda que Él nunca falla.", correct: 1 },
-    { textEn: "12. What does Hebrews 11:8 say about Abraham's obedience?", textEs: "12. ¿Qué dice Hebreos 11:8 sobre la obediencia de Abraham?",
-      optionsEn: ["He went out, not knowing where he was going", "He refused until he saw the land", "He sent others ahead", "He demanded a detailed plan first"],
-      optionsEs: ["Salió sin saber a dónde iba", "Rehusó hasta ver la tierra", "Envió a otros adelante", "Exigió primero un plan detallado"],
-      explanationEn: "By faith Abraham obeyed and went out, not knowing where he was going — radical trust obeys before the map is clear, staking all on God's promise rather than sight.", explanationEs: "Por la fe Abraham obedeció y salió sin saber a dónde iba — la confianza radical obedece antes de que el mapa esté claro, apostándolo todo a la promesa de Dios y no a la vista.", correct: 0 },
-    { textEn: "13. What did Adoniram Judson endure, and what did he write in his darkest hour?", textEs: "13. ¿Qué soportó Adoniram Judson, y qué escribió en su hora más oscura?",
-      optionsEn: ["He gave up and went home", "Quick success; 'God rewards fast'", "Years of slowness, prison, and loss; yet 'the future is as bright as the promises of God'", "He never faced hardship"],
-      optionsEs: ["Se rindió y volvió a casa", "Éxito rápido; 'Dios recompensa pronto'", "Años de lentitud, prisión y pérdida; pero 'el futuro es tan brillante como las promesas de Dios'", "Nunca enfrentó dificultad"],
-      explanationEn: "Judson waited seven years for a convert, buried children, was imprisoned, and lost his wife; yet he wrote that the future is as bright as the promises of God.", explanationEs: "Judson esperó siete años por un convertido, enterró hijos, fue encarcelado, y perdió a su esposa; pero escribió que el futuro es tan brillante como las promesas de Dios.", correct: 2 },
-    { textEn: "14. What does 2 Corinthians 5:7 ('walk by faith, not by sight') mean in this lesson?", textEs: "14. ¿Qué significa 2 Corintios 5:7 ('andamos por fe, no por vista') en esta lección?",
-      optionsEn: ["Ignore reality entirely", "Let God's promises decide what we believe and do, even when present reality looks impossible", "Only act on what you can see", "Faith and sight are the same"],
-      optionsEs: ["Ignorar la realidad por completo", "Dejar que las promesas de Dios decidan qué creemos y hacemos, aun cuando la realidad parezca imposible", "Actuar solo sobre lo que se ve", "La fe y la vista son lo mismo"],
-      explanationEn: "To walk by sight lets only visible evidence decide; to walk by faith lets God's promises decide, even when reality makes them look impossible — as Abraham and Judson did.", explanationEs: "Andar por vista deja que solo la evidencia visible decida; andar por fe deja que las promesas de Dios decidan, aun cuando la realidad las haga parecer imposibles — como Abraham y Judson.", correct: 1 },
-    { textEn: "15. How does the lesson describe the relationship between faith and feelings?", textEs: "15. ¿Cómo describe la lección la relación entre la fe y los sentimientos?",
-      optionsEn: ["Feelings are reliable guides to truth", "Faith requires having no feelings", "We should always obey our feelings", "Emotions report how things feel, not how they are; when feelings say 'fear,' faith says 'follow'"],
-      optionsEs: ["Los sentimientos son guías confiables a la verdad", "La fe exige no tener sentimientos", "Siempre debemos obedecer los sentimientos", "Las emociones reportan cómo se sienten las cosas, no cómo son; cuando dicen 'miedo,' la fe dice 'sígueme'"],
-      explanationEn: "Emotions are real but not reliable guides; they report how things feel, not how they are. Faith acts on truth — when feeling says 'fear,' faith says 'follow.'", explanationEs: "Las emociones son reales pero no guías confiables; reportan cómo se sienten las cosas, no cómo son. La fe actúa sobre la verdad — cuando el sentimiento dice 'miedo,' la fe dice 'sígueme.'", correct: 3 },
-    { textEn: "16. Does walking by faith mean denying our emotions? How does the lesson answer?", textEs: "16. ¿Andar por fe significa negar nuestras emociones? ¿Cómo responde la lección?",
-      optionsEn: ["No — Jesus was honest about anguish in Gethsemane; faith refuses to let feeling have the final word", "Yes, Christians never feel fear", "Feelings should always rule", "Yes, all feeling must be suppressed"],
-      optionsEs: ["No — Jesús fue honesto sobre la angustia en Getsemaní; la fe se niega a dejar que el sentimiento tenga la última palabra", "Sí, los cristianos nunca sienten miedo", "Los sentimientos siempre deben gobernar", "Sí, todo sentimiento debe suprimirse"],
-      explanationEn: "It is not the denial of feeling — Jesus was honest about anguish in Gethsemane — but the refusal to let feeling have the final word; we acknowledge fear, then choose to trust.", explanationEs: "No es la negación del sentimiento — Jesús fue honesto sobre la angustia en Getsemaní — sino la negativa a dejar que el sentimiento tenga la última palabra; reconocemos el miedo, luego elegimos confiar.", correct: 0 },
-    { textEn: "17. The lesson names three things Jesus is Lord over. What are they?", textEs: "17. La lección nombra tres cosas sobre las que Jesús es Señor. ¿Cuáles son?",
-      optionsEn: ["Past, present, and angels", "Money, time, and health", "Storms, worry, and sight (the unseen future)", "Law, temple, and nations"],
-      optionsEs: ["Pasado, presente y ángeles", "Dinero, tiempo y salud", "Las tormentas, la preocupación, y la vista (el futuro no visto)", "La ley, el templo y las naciones"],
-      explanationEn: "He is Lord over storms (wind and waves obey Him), over worry (the Father knows our needs), and of sight (our future rests on His promises).", explanationEs: "Él es Señor sobre las tormentas (el viento y las olas le obedecen), sobre la preocupación (el Padre conoce nuestras necesidades), y de la vista (nuestro futuro descansa en sus promesas).", correct: 2 },
-    { textEn: "18. What is the 'old way' that bursts under the pressure of life's storms?", textEs: "18. ¿Cuál es la 'vieja manera' que revienta bajo la presión de las tormentas de la vida?",
-      optionsEn: ["Fear, anxiety, and self-reliance", "Prayer and worship", "Generosity and humility", "Faith and obedience"],
-      optionsEs: ["El miedo, la ansiedad, y la autosuficiencia", "La oración y la adoración", "La generosidad y la humildad", "La fe y la obediencia"],
-      explanationEn: "The old way — fear, anxiety, and self-reliance — bursts like a brittle wineskin under life's pressure; the new life in Christ stretches us to hold faith.", explanationEs: "La vieja manera — el miedo, la ansiedad, y la autosuficiencia — revienta como un odre frágil bajo la presión de la vida; la vida nueva en Cristo nos estira para contener la fe.", correct: 0 },
-    { textEn: "19. When the storm rises, what is radical trust's first instinct?", textEs: "19. Cuando se levanta la tormenta, ¿cuál es el primer instinto de la confianza radical?",
-      optionsEn: ["To panic and act fast", "To pray first rather than panic first — turning to the One who commands the storm", "To solve it alone", "To wait passively"],
-      optionsEs: ["Entrar en pánico y actuar rápido", "Orar primero en vez de entrar en pánico primero — volverse a Aquel que manda la tormenta", "Resolverla solo", "Esperar pasivamente"],
-      explanationEn: "The first instinct of radical trust is to pray first rather than panic first, turning immediately to the One asleep in the stern who is Lord of wind and waves.", explanationEs: "El primer instinto de la confianza radical es orar primero en vez de entrar en pánico primero, volviéndose de inmediato a Aquel dormido en la popa que es Señor del viento y las olas.", correct: 1 },
-    { textEn: "20. What closing question does the unit press on each believer?", textEs: "20. ¿Qué pregunta final apremia la unidad sobre cada creyente?",
-      optionsEn: ["How much can you give?", "Which church should you join?", "How long have you believed?", "Where do you need radical trust today — in a storm, in worries, or in an unseen future?"],
-      optionsEs: ["¿Cuánto puedes dar?", "¿A qué iglesia debes unirte?", "¿Cuánto tiempo has creído?", "¿Dónde necesitas confianza radical hoy — en una tormenta, en preocupaciones, o en un futuro no visto?"],
-      explanationEn: "The Lord of storms, worry, and sight is the same Lord, calling each of us to stretch — to lean less on our own understanding and trust Him more deeply.", explanationEs: "El Señor de las tormentas, la preocupación, y la vista es el mismo Señor, que nos llama a estirarnos — a estribar menos en nuestra prudencia y confiar en Él más hondamente.", correct: 3 }
-];
-
-const kwQuestions = [
-    { textEn: "21. Explain Proverbs 3:5-6 and how the wineskins image frames radical trust.",
-      textEs: "21. Explique Proverbios 3:5-6 y cómo la imagen de los odres enmarca la confianza radical.",
-      kw_en: ["trust", "heart", "understanding", "wineskins", "stretch", "expand", "safe", "lean"],
-      kw_es: ["confiar", "corazón", "prudencia", "odres", "estirar", "expande", "seguro", "estribar"],
-      modelEn: "Proverbs tells us to trust in the LORD with all our heart and lean not on our own understanding, and in all our ways to acknowledge Him. We are to trust with all our heart, not a cautious portion, and specifically to stop leaning on our own understanding, which is the hard part because our understanding is exactly what we reach for when life turns frightening. When Jesus said no one pours new wine into old wineskins, He described the radical new life He brings: new wine ferments and expands, bursting brittle old skins, while new wineskins stretch to hold it. In the same way Jesus calls His disciples into a faith that stretches us beyond what feels safe or comfortable, a radical trust that does not collapse under storms, worries, or uncertainty, resting our whole weight on God rather than on our own calculations.",
-      modelEs: "Proverbios nos dice que confiemos en Jehová de todo nuestro corazón y no estribemos en nuestra propia prudencia, y que en todos nuestros caminos lo reconozcamos. Hemos de confiar de todo el corazón, no con una porción cautelosa, y específicamente dejar de estribar en nuestra propia prudencia, que es la parte difícil porque nuestra prudencia es justo lo que buscamos cuando la vida se vuelve temible. Cuando Jesús dijo que nadie echa vino nuevo en odres viejos, describió la vida nueva y radical que trae: el vino nuevo fermenta y se expande, reventando los odres viejos y frágiles, mientras que los odres nuevos se estiran para contenerlo. De la misma manera Jesús llama a sus discípulos a una fe que nos estira más allá de lo que se siente seguro o cómodo, una confianza radical que no se derrumba bajo las tormentas, las preocupaciones, ni la incertidumbre, descansando todo nuestro peso en Dios y no en nuestros propios cálculos.",
-      },
-    { textEn: "22. Recount the calming of the storm (Mark 4) and state its central lesson.",
-      textEs: "22. Relate el aquietamiento de la tormenta (Marcos 4) y exponga su lección central.",
-      kw_en: ["storm", "asleep", "stern", "rebuked", "Peace", "boat", "presence", "wave"],
-      kw_es: ["tormenta", "dormido", "popa", "reprendió", "Calla", "barca", "presencia", "ola"],
-      modelEn: "Jesus asked His disciples to cross the Sea of Galilee, and a violent storm broke out so fierce that the boat began filling with water. These were seasoned fishermen, yet the waves terrified them, and Jesus was asleep in the stern on a cushion. They woke Him crying, Teacher, do You not care that we are perishing? He rose, rebuked the wind, and said to the sea, Peace, be still, and there was a great calm, so that they whispered, Who can this be, that even the wind and the sea obey Him? The lesson is not that storms will never come, but that the Lord of the storm is in the boat with you, and His presence is greater than any wave. His question was not why the storm came but how is it you have no faith, for faith is simply remembering who is in the boat.",
-      modelEs: "Jesús pidió a sus discípulos cruzar el mar de Galilea, y estalló una violenta tormenta tan feroz que la barca empezó a llenarse de agua. Eran pescadores experimentados, pero las olas los aterrorizaron, y Jesús dormía en la popa sobre un cabezal. Lo despertaron clamando, Maestro, ¿no tienes cuidado que perecemos? Se levantó, reprendió al viento, y dijo al mar, Calla, enmudece, y fue hecha grande bonanza, de modo que susurraron, ¿Quién es éste, que aun el viento y el mar le obedecen? La lección no es que las tormentas nunca vendrán, sino que el Señor de la tormenta está en la barca contigo, y su presencia es mayor que cualquier ola. Su pregunta no fue por qué vino la tormenta sino cómo es que no tenéis fe, pues la fe es sencillamente recordar quién está en la barca.",
-      },
-    { textEn: "23. How does Elisabeth Elliot's story illustrate trusting the Lord over storms?",
-      textEs: "23. ¿Cómo ilustra la historia de Elisabeth Elliot el confiar en el Señor sobre las tormentas?",
-      kw_en: ["missionaries", "widow", "tribe", "husband", "bitterness", "Huaorani", "faith", "trusted"],
-      kw_es: ["misioneros", "viuda", "tribu", "esposo", "amargura", "huaorani", "fe", "confió"],
-      modelEn: "In 1956 five young missionaries were speared to death in Ecuador while trying to reach the Huaorani tribe, and Jim Elliot's wife Elisabeth, just twenty-nine with a baby daughter, was left a widow. She could have surrendered to bitterness and fear, but instead she trusted the Lord of the storm. Two years later she went to live among the very tribe that had killed her husband, showing them the love of Christ, and in time many Huaorani came to faith, including some of the men who had held the spears. Her story shows that radical trust does not depend on the storm being calmed the way we wish, for her husband was not returned to her, yet the same Jesus who stilled the Sea of Galilee ruled over her deeper storm and brought a harvest she could never have engineered.",
-      modelEs: "En 1956 cinco jóvenes misioneros fueron asesinados a lanzazos en Ecuador al tratar de alcanzar a la tribu huaorani, y la esposa de Jim Elliot, Elisabeth, de apenas veintinueve años y con una hija bebé, quedó viuda. Pudo haberse entregado a la amargura y el miedo, pero en cambio confió en el Señor de la tormenta. Dos años después fue a vivir entre la misma tribu que había matado a su esposo, mostrándoles el amor de Cristo, y con el tiempo muchos huaorani vinieron a la fe, incluidos algunos de los hombres que habían empuñado las lanzas. Su historia muestra que la confianza radical no depende de que la tormenta sea calmada como deseamos, pues su esposo no le fue devuelto, y sin embargo el mismo Jesús que aquietó el mar de Galilea reinó sobre su tormenta más honda y trajo una cosecha que ella jamás habría podido producir.",
-      },
-    { textEn: "24. Explain 'presence over outcome' and why it corrects a shallow idea of trust.",
-      textEs: "24. Explique 'la presencia por encima del resultado' y por qué corrige una idea superficial de la confianza.",
-      kw_en: ["calm", "anchors", "outcome", "shallow", "rescue", "commands", "pray first", "presence"],
-      kw_es: ["calma", "ancla", "resultado", "superficial", "rescate", "manda", "orar primero", "presencia"],
-      modelEn: "Elliot's story teaches what trust actually rests on, because her storm was never calmed in the way she might have wished and her husband was not given back. Yet the same Jesus who stilled the sea was unmistakably with her and ruled over the deeper storm. Faith does not always stop the storm; what it always does is anchor us to the Savior who rules over it. This corrects a shallow idea of trust, for we often assume that trusting God means He will give us the calm we ask for, the healing or rescue or restored situation. But the disciples' deepest need in the boat was not calmer water but to know who was with them. You may not be able to calm your storm, but you can rest in the One who commands it, so the first instinct of radical trust when the wind rises is to pray first rather than panic first.",
-      modelEs: "La historia de Elliot enseña en qué descansa de veras la confianza, porque su tormenta nunca fue calmada como ella habría deseado y su esposo no le fue devuelto. Y sin embargo el mismo Jesús que aquietó el mar estuvo inconfundiblemente con ella y reinó sobre la tormenta más honda. La fe no siempre detiene la tormenta; lo que siempre hace es anclarnos al Salvador que reina sobre ella. Esto corrige una idea superficial de la confianza, pues a menudo suponemos que confiar en Dios significa que nos dará la calma que pedimos, la sanidad o el rescate o la situación restaurada. Pero la necesidad más honda de los discípulos en la barca no era agua más calmada sino saber quién estaba con ellos. Quizá no puedas calmar tu tormenta, pero puedes descansar en Aquel que la manda, así que el primer instinto de la confianza radical cuando se levanta el viento es orar primero en vez de entrar en pánico primero.",
-      },
-    { textEn: "25. Explain how Matthew 6:25-34 teaches us to trust the Lord over worry.",
-      textEs: "25. Explique cómo Mateo 6:25-34 nos enseña a confiar en el Señor sobre la preocupación.",
-      kw_en: ["worry", "birds", "lilies", "Father feeds", "single hour", "kingdom", "added", "needs"],
-      kw_es: ["afanéis", "aves", "lirios", "Padre alimenta", "una hora", "reino", "añadidas", "necesidades"],
-      modelEn: "From the dramatic storm Jesus turns to the quiet daily storm of anxiety over food, drink, and clothing. He says do not worry about your life and points to the birds of the air, which neither sow nor reap nor gather into barns, yet the heavenly Father feeds them, and to the lilies of the field, which neither toil nor spin, yet not even Solomon in all his glory was arrayed like one of them. If God so clothes the grass, will He not much more clothe us? Then He asks which of us by worrying can add a single hour or cubit to our lives, exposing worry as accomplishing nothing and failing to reckon with the Father's care. So He gives the antidote: seek first the kingdom of God and His righteousness, and all these things will be added. Radical trust surrenders anxiety to the Father who already knows exactly what we need before we ask.",
-      modelEs: "De la dramática tormenta Jesús se vuelve a la tormenta callada y diaria de la ansiedad por la comida, la bebida y el vestido. Dice no os afanéis por vuestra vida y señala las aves del cielo, que ni siembran ni siegan ni recogen en graneros, y sin embargo el Padre celestial las alimenta, y los lirios del campo, que ni trabajan ni hilan, y sin embargo ni aun Salomón con toda su gloria fue vestido así como uno de ellos. Si Dios así viste la hierba, ¿no nos vestirá mucho más a nosotros? Luego pregunta quién de nosotros, afanándose, puede añadir una sola hora o un codo a su vida, desenmascarando la preocupación como algo que no logra nada y que no cuenta con el cuidado del Padre. Así que da el antídoto: buscad primeramente el reino de Dios y su justicia, y todas estas cosas serán añadidas. La confianza radical entrega la ansiedad al Padre que ya sabe exactamente lo que necesitamos antes de pedir.",
-      },
-    { textEn: "26. Explain the move from 'what if?' to 'even if,' using the testimony of provision.",
-      textEs: "26. Explique el paso de '¿qué tal si?' a 'aun si,' usando el testimonio de provisión.",
-      kw_en: ["what if", "even if", "anxiety", "faithful", "fridge", "groceries", "fear", "provision"],
-      kw_es: ["qué tal si", "aun si", "ansiedad", "fiel", "refrigerador", "comestibles", "temor", "provisión"],
-      modelEn: "The practical shape of trusting God over worry is a change of vocabulary in the heart. Anxiety speaks the language of what if, asking what if the paycheck runs out, what if the diagnosis is bad, what if I cannot provide. Faith answers in the language of even if: even if the paycheck is small, even if the refrigerator is empty, even if the future is uncertain, God is still faithful and still knows what I need. Believers have testified to this in hard economic seasons. Picture a single mother in a deep recession, out of work, the fridge nearly empty, who breaks down one night and prays that though she does not know how they will eat, she trusts God; the next morning a friend from church arrives with bags of groceries, saying she felt God telling her of the need. Such testimonies make one point: God shows us we need not live in fear, because He knows what we need before we ask.",
-      modelEs: "La forma práctica de confiar en Dios sobre la preocupación es un cambio de vocabulario en el corazón. La ansiedad habla el idioma del qué tal si, preguntando qué tal si se acaba el sueldo, qué tal si el diagnóstico es malo, qué tal si no puedo proveer. La fe responde en el idioma del aun si: aun si el sueldo es pequeño, aun si el refrigerador está vacío, aun si el futuro es incierto, Dios sigue siendo fiel y sigue sabiendo lo que necesito. Los creyentes han dado testimonio de esto en temporadas económicas duras. Imagine a una madre soltera en una profunda recesión, sin trabajo, el refrigerador casi vacío, que se quiebra una noche y ora que aunque no sabe cómo comerán, confía en Dios; a la mañana siguiente una amiga de la iglesia llega con bolsas de comestibles, diciendo que sintió que Dios le avisó de la necesidad. Tales testimonios exponen un punto: Dios nos muestra que no tenemos que vivir en temor, porque Él sabe lo que necesitamos antes de pedir.",
-      },
-    { textEn: "27. Explain how Hebrews 11:8 and Abraham show trusting the Lord of sight.",
-      textEs: "27. Explique cómo Hebreos 11:8 y Abraham muestran el confiar en el Señor de la vista.",
-      kw_en: ["Abraham", "not knowing", "inheritance", "promise", "dead", "obey", "future", "unseen"],
-      kw_es: ["Abraham", "sin saber", "herencia", "promesa", "muertos", "obedecer", "futuro", "no visto"],
-      modelEn: "The third stretching of trust concerns the future we cannot see. Hebrews 11:8 tells us that by faith Abraham obeyed when he was called to go out to a place he would receive as an inheritance, and he went out not knowing where he was going. Romans 4 adds that he believed God's promise of a son even when his body and Sarah's were as good as dead. This is radical trust at its furthest reach: to obey before the map is clear and to stake everything on the promise of God rather than on the evidence of our eyes. The unseen future does not frighten such faith, because it rests not on what can presently be seen but on the One who has promised. Abraham did not need to see the land to leave for it; he needed only to trust the God who called him, and so he became the pattern of all who walk by faith into a future they cannot yet make out.",
-      modelEs: "El tercer estiramiento de la confianza concierne al futuro que no podemos ver. Hebreos 11:8 nos dice que por la fe Abraham obedeció cuando fue llamado a salir al lugar que había de recibir por herencia, y salió sin saber a dónde iba. Romanos 4 añade que creyó la promesa de Dios de un hijo aun cuando su cuerpo y el de Sara estaban como muertos. Ésta es la confianza radical en su alcance más extremo: obedecer antes de que el mapa esté claro y apostarlo todo a la promesa de Dios en vez de a la evidencia de nuestros ojos. El futuro no visto no asusta a tal fe, porque descansa no en lo que se puede ver al presente sino en Aquel que ha prometido. Abraham no necesitó ver la tierra para salir hacia ella; solo necesitó confiar en el Dios que lo llamó, y así se volvió el patrón de todos los que andan por fe hacia un futuro que aún no logran distinguir.",
-      },
-    { textEn: "28. How does Adoniram Judson illustrate walking by faith and not by sight?",
-      textEs: "28. ¿Cómo ilustra Adoniram Judson el andar por fe y no por vista?",
-      kw_en: ["Judson", "Burma", "convert", "prison", "failure", "bright", "promises", "Myanmar"],
-      kw_es: ["Judson", "Birmania", "convertido", "prisión", "fracaso", "brillante", "promesas", "Myanmar"],
-      modelEn: "In 1812 Adoniram and Ann Judson sailed from Boston to Burma as among the first American missionaries, leaving family and security for a dangerous unknown. The work was agonizingly slow, with seven years passing before the first convert; disease struck repeatedly and they buried children; Adoniram was imprisoned nearly two years in filthy conditions while Ann risked her life daily to bring him food until her own health failed and she died young. From the outside it looked like failure. Yet in his darkest hour Adoniram wrote that the future is as bright as the promises of God. He could not see the harvest in his lifetime, but he trusted the Lord of sight, and today more than four million Christians in Myanmar trace their spiritual heritage to the Judsons' faithfulness, proving that to walk by faith is to let God's promises decide even when reality looks impossible.",
-      modelEs: "En 1812 Adoniram y Ann Judson zarparon de Boston a Birmania como de los primeros misioneros estadounidenses, dejando familia y seguridad por un desconocido peligroso. La obra fue angustiosamente lenta, con siete años pasando antes del primer convertido; la enfermedad golpeó repetidamente y enterraron hijos; Adoniram fue encarcelado casi dos años en condiciones inmundas mientras Ann arriesgaba su vida a diario para llevarle comida hasta que su propia salud falló y murió joven. Desde afuera parecía un fracaso. Pero en su hora más oscura Adoniram escribió que el futuro es tan brillante como las promesas de Dios. No pudo ver la cosecha en su vida, pero confió en el Señor de la vista, y hoy más de cuatro millones de cristianos en Myanmar remontan su herencia espiritual a la fidelidad de los Judson, probando que andar por fe es dejar que las promesas de Dios decidan aun cuando la realidad parece imposible.",
-      },
-    { textEn: "29. Explain the choice of faith over feelings that runs through all three movements.",
-      textEs: "29. Explique la elección de la fe por encima de los sentimientos que recorre los tres movimientos.",
-      kw_en: ["feelings", "truth", "follow", "Gethsemane", "final word", "reliable", "perishing", "choose"],
-      kw_es: ["sentimientos", "verdad", "sígueme", "Getsemaní", "última palabra", "confiable", "perecen", "elegir"],
-      modelEn: "Across all three movements runs a single thread, the choice of faith over feelings. In the boat the disciples' feelings screamed that they were perishing, while the truth was that the Lord of the sea was with them. In the empty kitchen feelings say there is no way, while the truth is that the Father knows our needs. In the dark prison feelings say the mission has failed, while the truth is that God's promises are sure. Emotions are real but they are not reliable guides, for they report how things feel, not how things are. So radical trust learns to act on what is true rather than on what is felt, and when emotions say fear, faith says follow. This is not the denial of feeling, since Jesus Himself was honest about anguish in Gethsemane, but the refusal to let feeling have the final word; we acknowledge the fear and then choose to lean on the LORD with all our heart.",
-      modelEs: "A través de los tres movimientos corre un solo hilo, la elección de la fe por encima de los sentimientos. En la barca los sentimientos de los discípulos gritaban que perecían, mientras la verdad era que el Señor del mar estaba con ellos. En la cocina vacía los sentimientos dicen que no hay salida, mientras la verdad es que el Padre conoce nuestras necesidades. En la prisión oscura los sentimientos dicen que la misión ha fracasado, mientras la verdad es que las promesas de Dios son seguras. Las emociones son reales pero no son guías confiables, pues reportan cómo se sienten las cosas, no cómo son. Así que la confianza radical aprende a actuar sobre lo que es verdad en vez de sobre lo que se siente, y cuando las emociones dicen miedo, la fe dice sígueme. Esto no es la negación del sentimiento, ya que el mismo Jesús fue honesto sobre la angustia en Getsemaní, sino la negativa a dejar que el sentimiento tenga la última palabra; reconocemos el miedo y luego elegimos estribar en Jehová de todo nuestro corazón.",
-      },
-    { textEn: "30. Summarize the three lordships of radical trust and the question the unit presses.",
-      textEs: "30. Resuma los tres señoríos de la confianza radical y la pregunta que la unidad apremia.",
-      kw_en: ["storms", "worry", "sight", "wineskins", "self-reliance", "stretch", "promises", "today"],
-      kw_es: ["tormentas", "preocupación", "vista", "odres", "autosuficiencia", "estirar", "promesas", "hoy"],
-      modelEn: "Radical trust is the stretching of new wineskins. The old way of fear, anxiety, and self-reliance bursts under the pressure of life's storms, but the new life Christ gives stretches us to hold faith. He is Lord over storms, and the wind and waves obey Him. He is Lord over worry, and the Father knows what we need. He is Lord of sight, and our future rests securely on His promises rather than on what we can presently see. So the question comes to each of us personally: where do we need radical trust today, in some storm that will not calm, in worries that steal our sleep, or in a future we cannot make out? The Lord of the storm, of worry, and of sight is the same Lord, calling us to stretch, to lean less on our own understanding and trust Him more deeply, for the future before those who trust Him is as bright as the promises of God.",
-      modelEs: "La confianza radical es el estiramiento de los odres nuevos. La vieja manera del miedo, la ansiedad, y la autosuficiencia revienta bajo la presión de las tormentas de la vida, pero la vida nueva que Cristo da nos estira para contener la fe. Él es Señor sobre las tormentas, y el viento y las olas le obedecen. Él es Señor sobre la preocupación, y el Padre sabe lo que necesitamos. Él es Señor de la vista, y nuestro futuro descansa con seguridad en sus promesas y no en lo que podemos ver al presente. Así que la pregunta llega a cada uno personalmente: ¿dónde necesitamos confianza radical hoy, en alguna tormenta que no se calma, en preocupaciones que roban el sueño, o en un futuro que no logramos distinguir? El Señor de la tormenta, de la preocupación, y de la vista es el mismo Señor, que nos llama a estirarnos, a estribar menos en nuestra propia prudencia y confiar en Él más hondamente, pues el futuro ante quienes confían en Él es tan brillante como las promesas de Dios.",
-      }
-];
+/* CTSRadical — unit 9. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "radical",
+ "unit": 9,
+ "totalUnits": 13,
+ "filePrefix": "CTSRadical",
+ "prevHref": "CTSRadicalUnit8.html",
+ "nextHref": "CTSRadicalUnit10.html",
+ "unitTitles": {
+  "en": [
+   "Unit 1 - Foundation: Old Wineskins, New Wine",
+   "Unit 2 - What Jesus Did With the Law",
+   "Unit 3 - Love God",
+   "Unit 4 - Love Neighbor",
+   "Unit 5 - Be Holy",
+   "Unit 6 - Be Forgiving",
+   "Unit 7 - Be Humble",
+   "Unit 8 - Be Generous",
+   "Unit 9 - Trust God",
+   "Unit 10 - Be Prayerful",
+   "Unit 11 - Be Kind",
+   "Unit 12 - Be a Disciplemaker",
+   "Unit 13 - Capstone: Turning the World Upside Down"
+  ],
+  "es": [
+   "Unit 1 - Foundation: Old Wineskins, New Wine",
+   "Unit 2 - What Jesus Did With the Law",
+   "Unit 3 - Love God",
+   "Unit 4 - Love Neighbor",
+   "Unit 5 - Be Holy",
+   "Unit 6 - Be Forgiving",
+   "Unit 7 - Be Humble",
+   "Unit 8 - Be Generous",
+   "Unit 9 - Trust God",
+   "Unit 10 - Be Prayerful",
+   "Unit 11 - Be Kind",
+   "Unit 12 - Be a Disciplemaker",
+   "Unit 13 - Capstone: Turning the World Upside Down"
+  ]
+ },
+ "mc": [
+  {
+   "stem": {
+    "en": "According to Proverbs 3:5-6, what are we told NOT to lean on?",
+    "es": "Según Proverbios 3:5-6, ¿en qué se nos dice que NO estribemos?"
+   },
+   "options": {
+    "en": [
+     "The counsel of the wise",
+     "The promises of God",
+     "Our own understanding",
+     "The church"
+    ],
+    "es": [
+     "El consejo de los sabios",
+     "Las promesas de Dios",
+     "Nuestra propia prudencia",
+     "La iglesia"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "We are to trust the LORD with all our heart and lean not on our own understanding — letting go of the handrail of our own calculations to rest our weight on God.",
+    "es": "Hemos de confiar en Jehová de todo nuestro corazón y no estribar en nuestra propia prudencia — soltando el pasamanos de nuestros cálculos para descansar en Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "How does the lesson use the wineskins image for trust?",
+    "es": "¿Cómo usa la lección la imagen de los odres para la confianza?"
+   },
+   "options": {
+    "en": [
+     "Old skins stretch best",
+     "The wine should be kept small",
+     "Wineskins are about money only",
+     "New wine expands; only new wineskins stretch to hold a faith beyond what feels safe"
+    ],
+    "es": [
+     "Los odres viejos se estiran mejor",
+     "El vino debe mantenerse pequeño",
+     "Los odres son solo sobre dinero",
+     "El vino nuevo se expande; solo los odres nuevos se estiran para contener una fe más allá de lo seguro"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "New wine ferments and expands, bursting brittle old skins; new wineskins stretch. Jesus calls us to a faith that stretches beyond what feels safe — radical trust.",
+    "es": "El vino nuevo fermenta y se expande, reventando los odres viejos; los odres nuevos se estiran. Jesús nos llama a una fe que se estira más allá de lo seguro — confianza radical."
+   }
+  },
+  {
+   "stem": {
+    "en": "In Mark 4, where was Jesus during the violent storm, and what did He do?",
+    "es": "En Marcos 4, ¿dónde estaba Jesús durante la violenta tormenta, y qué hizo?"
+   },
+   "options": {
+    "en": [
+     "Asleep in the stern; He rose and stilled the wind and waves with a word",
+     "On the shore; He watched",
+     "Rowing the boat; He bailed water",
+     "He had not yet arrived"
+    ],
+    "es": [
+     "Dormido en la popa; se levantó y aquietó el viento y las olas con una palabra",
+     "En la orilla; observaba",
+     "Remando; achicaba agua",
+     "Aún no había llegado"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Jesus was asleep on a cushion in the stern; awakened, He rebuked the wind and said 'Peace, be still,' and the storm ceased — even wind and sea obey Him.",
+    "es": "Jesús dormía sobre un cabezal en la popa; despertado, reprendió al viento y dijo 'Calla, enmudece,' y la tormenta cesó — aun el viento y el mar le obedecen."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is the central lesson of the calming of the storm?",
+    "es": "¿Cuál es la lección central del aquietamiento de la tormenta?"
+   },
+   "options": {
+    "en": [
+     "Storms will never come to believers",
+     "The Lord of the storm is in the boat with you; His presence is greater than any wave",
+     "Faith guarantees calm seas",
+     "Experienced sailors never fear"
+    ],
+    "es": [
+     "Las tormentas nunca vendrán a los creyentes",
+     "El Señor de la tormenta está en la barca contigo; su presencia es mayor que cualquier ola",
+     "La fe garantiza mares calmados",
+     "Los marineros expertos nunca temen"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The lesson is not that storms never come, but that the Lord of the storm is in the boat with you; radical trust knows His presence is greater than any wave.",
+    "es": "La lección no es que las tormentas nunca vengan, sino que el Señor de la tormenta está en la barca contigo; la confianza radical sabe que su presencia es mayor que cualquier ola."
+   }
+  },
+  {
+   "stem": {
+    "en": "How did Elisabeth Elliot demonstrate radical trust?",
+    "es": "¿Cómo demostró Elisabeth Elliot la confianza radical?"
+   },
+   "options": {
+    "en": [
+     "She demanded justice",
+     "She abandoned the mission field",
+     "She went to live among the very tribe that killed her husband, and many came to faith",
+     "She returned to America permanently"
+    ],
+    "es": [
+     "Exigió justicia",
+     "Abandonó el campo misionero",
+     "Fue a vivir entre la misma tribu que mató a su esposo, y muchos vinieron a la fe",
+     "Regresó a América permanentemente"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Widowed at 29, Elisabeth trusted the Lord of the storm and went to live among the Huaorani who killed her husband; in time many — even some who held the spears — came to faith.",
+    "es": "Viuda a los 29, Elisabeth confió en el Señor de la tormenta y fue a vivir entre los huaorani que mataron a su esposo; con el tiempo muchos — aun algunos que empuñaron las lanzas — vinieron a la fe."
+   }
+  },
+  {
+   "stem": {
+    "en": "The lesson says faith rests on 'presence over outcome.' What does this mean?",
+    "es": "La lección dice que la fe descansa en 'la presencia por encima del resultado.' ¿Qué significa?"
+   },
+   "options": {
+    "en": [
+     "God always gives the calm we ask for",
+     "Faith does not always stop the storm, but always anchors us to the Savior who rules it",
+     "Outcomes don't matter at all",
+     "We should expect no help"
+    ],
+    "es": [
+     "Dios siempre da la calma que pedimos",
+     "La fe no siempre detiene la tormenta, pero siempre nos ancla al Salvador que la gobierna",
+     "Los resultados no importan en nada",
+     "No debemos esperar ayuda"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Elliot's storm was not calmed as she wished — her husband was not returned — yet Christ ruled over it; faith anchors us to the Savior even when the storm is not stopped.",
+    "es": "La tormenta de Elliot no fue calmada como deseaba — su esposo no le fue devuelto — pero Cristo reinó sobre ella; la fe nos ancla al Salvador aun cuando la tormenta no se detiene."
+   }
+  },
+  {
+   "stem": {
+    "en": "In Matthew 6, to what does Jesus point to teach us not to worry?",
+    "es": "En Mateo 6, ¿a qué señala Jesús para enseñarnos a no afanarnos?"
+   },
+   "options": {
+    "en": [
+     "The wealth of kings",
+     "The strength of armies",
+     "The wisdom of philosophers",
+     "The birds of the air and the lilies of the field, which the Father feeds and clothes"
+    ],
+    "es": [
+     "La riqueza de los reyes",
+     "La fuerza de los ejércitos",
+     "La sabiduría de los filósofos",
+     "Las aves del cielo y los lirios del campo, que el Padre alimenta y viste"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Jesus points to birds that neither sow nor reap yet are fed, and lilies that neither toil nor spin yet outshine Solomon; if God so cares for them, how much more for us.",
+    "es": "Jesús señala aves que ni siembran ni siegan y son alimentadas, y lirios que ni trabajan ni hilan y superan a Salomón; si Dios así los cuida, cuánto más a nosotros."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to Jesus, what does worry actually accomplish?",
+    "es": "Según Jesús, ¿qué logra en realidad la preocupación?"
+   },
+   "options": {
+    "en": [
+     "Nothing — it cannot add a single hour to our lives",
+     "It pleases God",
+     "It solves problems",
+     "It adds years to life"
+    ],
+    "es": [
+     "Nada — no puede añadir una sola hora a nuestra vida",
+     "Agrada a Dios",
+     "Resuelve problemas",
+     "Añade años a la vida"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Jesus asks who by worrying can add one cubit to his stature; worry accomplishes nothing and is a failure to reckon with the Father's care.",
+    "es": "Jesús pregunta quién, afanándose, puede añadir un codo a su estatura; la preocupación no logra nada y es una falta de contar con el cuidado del Padre."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is the antidote to worry that Jesus gives in Matthew 6:33?",
+    "es": "¿Cuál es el antídoto contra la preocupación que Jesús da en Mateo 6:33?"
+   },
+   "options": {
+    "en": [
+     "Save more money",
+     "Work harder for security",
+     "Seek first the kingdom of God and His righteousness, and all these things will be added",
+     "Ignore your needs"
+    ],
+    "es": [
+     "Ahorrar más dinero",
+     "Trabajar más por seguridad",
+     "Buscar primeramente el reino de Dios y su justicia, y todas estas cosas serán añadidas",
+     "Ignorar tus necesidades"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The antidote is to seek first God's kingdom and righteousness, trusting that the Father who knows our needs will add all these things; trust surrenders anxiety to Him.",
+    "es": "El antídoto es buscar primero el reino y la justicia de Dios, confiando en que el Padre que conoce nuestras necesidades añadirá todas estas cosas; la confianza le entrega la ansiedad."
+   }
+  },
+  {
+   "stem": {
+    "en": "The lesson contrasts 'what if?' with 'even if.' What is the point?",
+    "es": "La lección contrasta '¿qué tal si?' con 'aun si.' ¿Cuál es el punto?"
+   },
+   "options": {
+    "en": [
+     "Both are forms of fear",
+     "'What if' is the language of faith",
+     "'Even if' means giving up",
+     "Anxiety asks 'what if?'; faith answers 'even if' — God is still faithful no matter the circumstance"
+    ],
+    "es": [
+     "Ambos son formas de miedo",
+     "'¿Qué tal si?' es el idioma de la fe",
+     "'Aun si' significa rendirse",
+     "La ansiedad pregunta '¿qué tal si?'; la fe responde 'aun si' — Dios sigue siendo fiel pase lo que pase"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Anxiety multiplies 'what if?' fears that may never come; faith rests on 'even if' — even if the fridge is empty, God is faithful and knows what we need.",
+    "es": "La ansiedad multiplica temores de '¿qué tal si?' que quizá nunca lleguen; la fe descansa en el 'aun si' — aun si el refrigerador está vacío, Dios es fiel y sabe lo que necesitamos."
+   }
+  },
+  {
+   "stem": {
+    "en": "What daily disciplines of trust does the lesson recommend?",
+    "es": "¿Qué disciplinas diarias de confianza recomienda la lección?"
+   },
+   "options": {
+    "en": [
+     "Worry productively and plan for every outcome",
+     "Surrender worries, seek first the kingdom, and thank God for provision before seeing it",
+     "Avoid all risk",
+     "Keep your needs hidden"
+    ],
+    "es": [
+     "Preocuparse productivamente y planear cada resultado",
+     "Entregar las preocupaciones, buscar primero el reino, y agradecer a Dios por la provisión antes de verla",
+     "Evitar todo riesgo",
+     "Mantener ocultas tus necesidades"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Surrender each worry to the Lord, seek first the kingdom over anxiety, and thank God for provision even before seeing it, for gratitude is faith remembering He never fails.",
+    "es": "Entrega cada preocupación al Señor, busca primero el reino por encima de la ansiedad, y agradece a Dios por la provisión aun antes de verla, pues la gratitud es la fe que recuerda que Él nunca falla."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does Hebrews 11:8 say about Abraham's obedience?",
+    "es": "¿Qué dice Hebreos 11:8 sobre la obediencia de Abraham?"
+   },
+   "options": {
+    "en": [
+     "He went out, not knowing where he was going",
+     "He refused until he saw the land",
+     "He sent others ahead",
+     "He demanded a detailed plan first"
+    ],
+    "es": [
+     "Salió sin saber a dónde iba",
+     "Rehusó hasta ver la tierra",
+     "Envió a otros adelante",
+     "Exigió primero un plan detallado"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "By faith Abraham obeyed and went out, not knowing where he was going — radical trust obeys before the map is clear, staking all on God's promise rather than sight.",
+    "es": "Por la fe Abraham obedeció y salió sin saber a dónde iba — la confianza radical obedece antes de que el mapa esté claro, apostándolo todo a la promesa de Dios y no a la vista."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did Adoniram Judson endure, and what did he write in his darkest hour?",
+    "es": "¿Qué soportó Adoniram Judson, y qué escribió en su hora más oscura?"
+   },
+   "options": {
+    "en": [
+     "He gave up and went home",
+     "Quick success; 'God rewards fast'",
+     "Years of slowness, prison, and loss; yet 'the future is as bright as the promises of God'",
+     "He never faced hardship"
+    ],
+    "es": [
+     "Se rindió y volvió a casa",
+     "Éxito rápido; 'Dios recompensa pronto'",
+     "Años de lentitud, prisión y pérdida; pero 'el futuro es tan brillante como las promesas de Dios'",
+     "Nunca enfrentó dificultad"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Judson waited seven years for a convert, buried children, was imprisoned, and lost his wife; yet he wrote that the future is as bright as the promises of God.",
+    "es": "Judson esperó siete años por un convertido, enterró hijos, fue encarcelado, y perdió a su esposa; pero escribió que el futuro es tan brillante como las promesas de Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does 2 Corinthians 5:7 ('walk by faith, not by sight') mean in this lesson?",
+    "es": "¿Qué significa 2 Corintios 5:7 ('andamos por fe, no por vista') en esta lección?"
+   },
+   "options": {
+    "en": [
+     "Ignore reality entirely",
+     "Let God's promises decide what we believe and do, even when present reality looks impossible",
+     "Only act on what you can see",
+     "Faith and sight are the same"
+    ],
+    "es": [
+     "Ignorar la realidad por completo",
+     "Dejar que las promesas de Dios decidan qué creemos y hacemos, aun cuando la realidad parezca imposible",
+     "Actuar solo sobre lo que se ve",
+     "La fe y la vista son lo mismo"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "To walk by sight lets only visible evidence decide; to walk by faith lets God's promises decide, even when reality makes them look impossible — as Abraham and Judson did.",
+    "es": "Andar por vista deja que solo la evidencia visible decida; andar por fe deja que las promesas de Dios decidan, aun cuando la realidad las haga parecer imposibles — como Abraham y Judson."
+   }
+  },
+  {
+   "stem": {
+    "en": "How does the lesson describe the relationship between faith and feelings?",
+    "es": "¿Cómo describe la lección la relación entre la fe y los sentimientos?"
+   },
+   "options": {
+    "en": [
+     "Feelings are reliable guides to truth",
+     "Faith requires having no feelings",
+     "We should always obey our feelings",
+     "Emotions report how things feel, not how they are; when feelings say 'fear,' faith says 'follow'"
+    ],
+    "es": [
+     "Los sentimientos son guías confiables a la verdad",
+     "La fe exige no tener sentimientos",
+     "Siempre debemos obedecer los sentimientos",
+     "Las emociones reportan cómo se sienten las cosas, no cómo son; cuando dicen 'miedo,' la fe dice 'sígueme'"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Emotions are real but not reliable guides; they report how things feel, not how they are. Faith acts on truth — when feeling says 'fear,' faith says 'follow.'",
+    "es": "Las emociones son reales pero no guías confiables; reportan cómo se sienten las cosas, no cómo son. La fe actúa sobre la verdad — cuando el sentimiento dice 'miedo,' la fe dice 'sígueme.'"
+   }
+  },
+  {
+   "stem": {
+    "en": "Does walking by faith mean denying our emotions? How does the lesson answer?",
+    "es": "¿Andar por fe significa negar nuestras emociones? ¿Cómo responde la lección?"
+   },
+   "options": {
+    "en": [
+     "No — Jesus was honest about anguish in Gethsemane; faith refuses to let feeling have the final word",
+     "Yes, Christians never feel fear",
+     "Feelings should always rule",
+     "Yes, all feeling must be suppressed"
+    ],
+    "es": [
+     "No — Jesús fue honesto sobre la angustia en Getsemaní; la fe se niega a dejar que el sentimiento tenga la última palabra",
+     "Sí, los cristianos nunca sienten miedo",
+     "Los sentimientos siempre deben gobernar",
+     "Sí, todo sentimiento debe suprimirse"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "It is not the denial of feeling — Jesus was honest about anguish in Gethsemane — but the refusal to let feeling have the final word; we acknowledge fear, then choose to trust.",
+    "es": "No es la negación del sentimiento — Jesús fue honesto sobre la angustia en Getsemaní — sino la negativa a dejar que el sentimiento tenga la última palabra; reconocemos el miedo, luego elegimos confiar."
+   }
+  },
+  {
+   "stem": {
+    "en": "The lesson names three things Jesus is Lord over. What are they?",
+    "es": "La lección nombra tres cosas sobre las que Jesús es Señor. ¿Cuáles son?"
+   },
+   "options": {
+    "en": [
+     "Past, present, and angels",
+     "Money, time, and health",
+     "Storms, worry, and sight (the unseen future)",
+     "Law, temple, and nations"
+    ],
+    "es": [
+     "Pasado, presente y ángeles",
+     "Dinero, tiempo y salud",
+     "Las tormentas, la preocupación, y la vista (el futuro no visto)",
+     "La ley, el templo y las naciones"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "He is Lord over storms (wind and waves obey Him), over worry (the Father knows our needs), and of sight (our future rests on His promises).",
+    "es": "Él es Señor sobre las tormentas (el viento y las olas le obedecen), sobre la preocupación (el Padre conoce nuestras necesidades), y de la vista (nuestro futuro descansa en sus promesas)."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is the 'old way' that bursts under the pressure of life's storms?",
+    "es": "¿Cuál es la 'vieja manera' que revienta bajo la presión de las tormentas de la vida?"
+   },
+   "options": {
+    "en": [
+     "Fear, anxiety, and self-reliance",
+     "Prayer and worship",
+     "Generosity and humility",
+     "Faith and obedience"
+    ],
+    "es": [
+     "El miedo, la ansiedad, y la autosuficiencia",
+     "La oración y la adoración",
+     "La generosidad y la humildad",
+     "La fe y la obediencia"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The old way — fear, anxiety, and self-reliance — bursts like a brittle wineskin under life's pressure; the new life in Christ stretches us to hold faith.",
+    "es": "La vieja manera — el miedo, la ansiedad, y la autosuficiencia — revienta como un odre frágil bajo la presión de la vida; la vida nueva en Cristo nos estira para contener la fe."
+   }
+  },
+  {
+   "stem": {
+    "en": "When the storm rises, what is radical trust's first instinct?",
+    "es": "Cuando se levanta la tormenta, ¿cuál es el primer instinto de la confianza radical?"
+   },
+   "options": {
+    "en": [
+     "To panic and act fast",
+     "To pray first rather than panic first — turning to the One who commands the storm",
+     "To solve it alone",
+     "To wait passively"
+    ],
+    "es": [
+     "Entrar en pánico y actuar rápido",
+     "Orar primero en vez de entrar en pánico primero — volverse a Aquel que manda la tormenta",
+     "Resolverla solo",
+     "Esperar pasivamente"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The first instinct of radical trust is to pray first rather than panic first, turning immediately to the One asleep in the stern who is Lord of wind and waves.",
+    "es": "El primer instinto de la confianza radical es orar primero en vez de entrar en pánico primero, volviéndose de inmediato a Aquel dormido en la popa que es Señor del viento y las olas."
+   }
+  },
+  {
+   "stem": {
+    "en": "What closing question does the unit press on each believer?",
+    "es": "¿Qué pregunta final apremia la unidad sobre cada creyente?"
+   },
+   "options": {
+    "en": [
+     "How much can you give?",
+     "Which church should you join?",
+     "How long have you believed?",
+     "Where do you need radical trust today — in a storm, in worries, or in an unseen future?"
+    ],
+    "es": [
+     "¿Cuánto puedes dar?",
+     "¿A qué iglesia debes unirte?",
+     "¿Cuánto tiempo has creído?",
+     "¿Dónde necesitas confianza radical hoy — en una tormenta, en preocupaciones, o en un futuro no visto?"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The Lord of storms, worry, and sight is the same Lord, calling each of us to stretch — to lean less on our own understanding and trust Him more deeply.",
+    "es": "El Señor de las tormentas, la preocupación, y la vista es el mismo Señor, que nos llama a estirarnos — a estribar menos en nuestra prudencia y confiar en Él más hondamente."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Explain Proverbs 3:5-6 and how the wineskins image frames radical trust.",
+    "es": "Explique Proverbios 3:5-6 y cómo la imagen de los odres enmarca la confianza radical."
+   },
+   "keywords": {
+    "en": [
+     "trust",
+     "heart",
+     "understanding",
+     "wineskins",
+     "stretch",
+     "expand",
+     "safe",
+     "lean"
+    ],
+    "es": [
+     "confiar",
+     "corazón",
+     "prudencia",
+     "odres",
+     "estirar",
+     "expande",
+     "seguro",
+     "estribar"
+    ]
+   },
+   "model": {
+    "en": "Proverbs tells us to trust in the LORD with all our heart and lean not on our own understanding, and in all our ways to acknowledge Him. We are to trust with all our heart, not a cautious portion, and specifically to stop leaning on our own understanding, which is the hard part because our understanding is exactly what we reach for when life turns frightening. When Jesus said no one pours new wine into old wineskins, He described the radical new life He brings: new wine ferments and expands, bursting brittle old skins, while new wineskins stretch to hold it. In the same way Jesus calls His disciples into a faith that stretches us beyond what feels safe or comfortable, a radical trust that does not collapse under storms, worries, or uncertainty, resting our whole weight on God rather than on our own calculations.",
+    "es": "Proverbios nos dice que confiemos en Jehová de todo nuestro corazón y no estribemos en nuestra propia prudencia, y que en todos nuestros caminos lo reconozcamos. Hemos de confiar de todo el corazón, no con una porción cautelosa, y específicamente dejar de estribar en nuestra propia prudencia, que es la parte difícil porque nuestra prudencia es justo lo que buscamos cuando la vida se vuelve temible. Cuando Jesús dijo que nadie echa vino nuevo en odres viejos, describió la vida nueva y radical que trae: el vino nuevo fermenta y se expande, reventando los odres viejos y frágiles, mientras que los odres nuevos se estiran para contenerlo. De la misma manera Jesús llama a sus discípulos a una fe que nos estira más allá de lo que se siente seguro o cómodo, una confianza radical que no se derrumba bajo las tormentas, las preocupaciones, ni la incertidumbre, descansando todo nuestro peso en Dios y no en nuestros propios cálculos."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Recount the calming of the storm (Mark 4) and state its central lesson.",
+    "es": "Relate el aquietamiento de la tormenta (Marcos 4) y exponga su lección central."
+   },
+   "keywords": {
+    "en": [
+     "storm",
+     "asleep",
+     "stern",
+     "rebuked",
+     "Peace",
+     "boat",
+     "presence",
+     "wave"
+    ],
+    "es": [
+     "tormenta",
+     "dormido",
+     "popa",
+     "reprendió",
+     "Calla",
+     "barca",
+     "presencia",
+     "ola"
+    ]
+   },
+   "model": {
+    "en": "Jesus asked His disciples to cross the Sea of Galilee, and a violent storm broke out so fierce that the boat began filling with water. These were seasoned fishermen, yet the waves terrified them, and Jesus was asleep in the stern on a cushion. They woke Him crying, Teacher, do You not care that we are perishing? He rose, rebuked the wind, and said to the sea, Peace, be still, and there was a great calm, so that they whispered, Who can this be, that even the wind and the sea obey Him? The lesson is not that storms will never come, but that the Lord of the storm is in the boat with you, and His presence is greater than any wave. His question was not why the storm came but how is it you have no faith, for faith is simply remembering who is in the boat.",
+    "es": "Jesús pidió a sus discípulos cruzar el mar de Galilea, y estalló una violenta tormenta tan feroz que la barca empezó a llenarse de agua. Eran pescadores experimentados, pero las olas los aterrorizaron, y Jesús dormía en la popa sobre un cabezal. Lo despertaron clamando, Maestro, ¿no tienes cuidado que perecemos? Se levantó, reprendió al viento, y dijo al mar, Calla, enmudece, y fue hecha grande bonanza, de modo que susurraron, ¿Quién es éste, que aun el viento y el mar le obedecen? La lección no es que las tormentas nunca vendrán, sino que el Señor de la tormenta está en la barca contigo, y su presencia es mayor que cualquier ola. Su pregunta no fue por qué vino la tormenta sino cómo es que no tenéis fe, pues la fe es sencillamente recordar quién está en la barca."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How does Elisabeth Elliot's story illustrate trusting the Lord over storms?",
+    "es": "¿Cómo ilustra la historia de Elisabeth Elliot el confiar en el Señor sobre las tormentas?"
+   },
+   "keywords": {
+    "en": [
+     "missionaries",
+     "widow",
+     "tribe",
+     "husband",
+     "bitterness",
+     "Huaorani",
+     "faith",
+     "trusted"
+    ],
+    "es": [
+     "misioneros",
+     "viuda",
+     "tribu",
+     "esposo",
+     "amargura",
+     "huaorani",
+     "fe",
+     "confió"
+    ]
+   },
+   "model": {
+    "en": "In 1956 five young missionaries were speared to death in Ecuador while trying to reach the Huaorani tribe, and Jim Elliot's wife Elisabeth, just twenty-nine with a baby daughter, was left a widow. She could have surrendered to bitterness and fear, but instead she trusted the Lord of the storm. Two years later she went to live among the very tribe that had killed her husband, showing them the love of Christ, and in time many Huaorani came to faith, including some of the men who had held the spears. Her story shows that radical trust does not depend on the storm being calmed the way we wish, for her husband was not returned to her, yet the same Jesus who stilled the Sea of Galilee ruled over her deeper storm and brought a harvest she could never have engineered.",
+    "es": "En 1956 cinco jóvenes misioneros fueron asesinados a lanzazos en Ecuador al tratar de alcanzar a la tribu huaorani, y la esposa de Jim Elliot, Elisabeth, de apenas veintinueve años y con una hija bebé, quedó viuda. Pudo haberse entregado a la amargura y el miedo, pero en cambio confió en el Señor de la tormenta. Dos años después fue a vivir entre la misma tribu que había matado a su esposo, mostrándoles el amor de Cristo, y con el tiempo muchos huaorani vinieron a la fe, incluidos algunos de los hombres que habían empuñado las lanzas. Su historia muestra que la confianza radical no depende de que la tormenta sea calmada como deseamos, pues su esposo no le fue devuelto, y sin embargo el mismo Jesús que aquietó el mar de Galilea reinó sobre su tormenta más honda y trajo una cosecha que ella jamás habría podido producir."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain 'presence over outcome' and why it corrects a shallow idea of trust.",
+    "es": "Explique 'la presencia por encima del resultado' y por qué corrige una idea superficial de la confianza."
+   },
+   "keywords": {
+    "en": [
+     "calm",
+     "anchors",
+     "outcome",
+     "shallow",
+     "rescue",
+     "commands",
+     "pray first",
+     "presence"
+    ],
+    "es": [
+     "calma",
+     "ancla",
+     "resultado",
+     "superficial",
+     "rescate",
+     "manda",
+     "orar primero",
+     "presencia"
+    ]
+   },
+   "model": {
+    "en": "Elliot's story teaches what trust actually rests on, because her storm was never calmed in the way she might have wished and her husband was not given back. Yet the same Jesus who stilled the sea was unmistakably with her and ruled over the deeper storm. Faith does not always stop the storm; what it always does is anchor us to the Savior who rules over it. This corrects a shallow idea of trust, for we often assume that trusting God means He will give us the calm we ask for, the healing or rescue or restored situation. But the disciples' deepest need in the boat was not calmer water but to know who was with them. You may not be able to calm your storm, but you can rest in the One who commands it, so the first instinct of radical trust when the wind rises is to pray first rather than panic first.",
+    "es": "La historia de Elliot enseña en qué descansa de veras la confianza, porque su tormenta nunca fue calmada como ella habría deseado y su esposo no le fue devuelto. Y sin embargo el mismo Jesús que aquietó el mar estuvo inconfundiblemente con ella y reinó sobre la tormenta más honda. La fe no siempre detiene la tormenta; lo que siempre hace es anclarnos al Salvador que reina sobre ella. Esto corrige una idea superficial de la confianza, pues a menudo suponemos que confiar en Dios significa que nos dará la calma que pedimos, la sanidad o el rescate o la situación restaurada. Pero la necesidad más honda de los discípulos en la barca no era agua más calmada sino saber quién estaba con ellos. Quizá no puedas calmar tu tormenta, pero puedes descansar en Aquel que la manda, así que el primer instinto de la confianza radical cuando se levanta el viento es orar primero en vez de entrar en pánico primero."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain how Matthew 6:25-34 teaches us to trust the Lord over worry.",
+    "es": "Explique cómo Mateo 6:25-34 nos enseña a confiar en el Señor sobre la preocupación."
+   },
+   "keywords": {
+    "en": [
+     "worry",
+     "birds",
+     "lilies",
+     "Father feeds",
+     "single hour",
+     "kingdom",
+     "added",
+     "needs"
+    ],
+    "es": [
+     "afanéis",
+     "aves",
+     "lirios",
+     "Padre alimenta",
+     "una hora",
+     "reino",
+     "añadidas",
+     "necesidades"
+    ]
+   },
+   "model": {
+    "en": "From the dramatic storm Jesus turns to the quiet daily storm of anxiety over food, drink, and clothing. He says do not worry about your life and points to the birds of the air, which neither sow nor reap nor gather into barns, yet the heavenly Father feeds them, and to the lilies of the field, which neither toil nor spin, yet not even Solomon in all his glory was arrayed like one of them. If God so clothes the grass, will He not much more clothe us? Then He asks which of us by worrying can add a single hour or cubit to our lives, exposing worry as accomplishing nothing and failing to reckon with the Father's care. So He gives the antidote: seek first the kingdom of God and His righteousness, and all these things will be added. Radical trust surrenders anxiety to the Father who already knows exactly what we need before we ask.",
+    "es": "De la dramática tormenta Jesús se vuelve a la tormenta callada y diaria de la ansiedad por la comida, la bebida y el vestido. Dice no os afanéis por vuestra vida y señala las aves del cielo, que ni siembran ni siegan ni recogen en graneros, y sin embargo el Padre celestial las alimenta, y los lirios del campo, que ni trabajan ni hilan, y sin embargo ni aun Salomón con toda su gloria fue vestido así como uno de ellos. Si Dios así viste la hierba, ¿no nos vestirá mucho más a nosotros? Luego pregunta quién de nosotros, afanándose, puede añadir una sola hora o un codo a su vida, desenmascarando la preocupación como algo que no logra nada y que no cuenta con el cuidado del Padre. Así que da el antídoto: buscad primeramente el reino de Dios y su justicia, y todas estas cosas serán añadidas. La confianza radical entrega la ansiedad al Padre que ya sabe exactamente lo que necesitamos antes de pedir."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the move from 'what if?' to 'even if,' using the testimony of provision.",
+    "es": "Explique el paso de '¿qué tal si?' a 'aun si,' usando el testimonio de provisión."
+   },
+   "keywords": {
+    "en": [
+     "what if",
+     "even if",
+     "anxiety",
+     "faithful",
+     "fridge",
+     "groceries",
+     "fear",
+     "provision"
+    ],
+    "es": [
+     "qué tal si",
+     "aun si",
+     "ansiedad",
+     "fiel",
+     "refrigerador",
+     "comestibles",
+     "temor",
+     "provisión"
+    ]
+   },
+   "model": {
+    "en": "The practical shape of trusting God over worry is a change of vocabulary in the heart. Anxiety speaks the language of what if, asking what if the paycheck runs out, what if the diagnosis is bad, what if I cannot provide. Faith answers in the language of even if: even if the paycheck is small, even if the refrigerator is empty, even if the future is uncertain, God is still faithful and still knows what I need. Believers have testified to this in hard economic seasons. Picture a single mother in a deep recession, out of work, the fridge nearly empty, who breaks down one night and prays that though she does not know how they will eat, she trusts God; the next morning a friend from church arrives with bags of groceries, saying she felt God telling her of the need. Such testimonies make one point: God shows us we need not live in fear, because He knows what we need before we ask.",
+    "es": "La forma práctica de confiar en Dios sobre la preocupación es un cambio de vocabulario en el corazón. La ansiedad habla el idioma del qué tal si, preguntando qué tal si se acaba el sueldo, qué tal si el diagnóstico es malo, qué tal si no puedo proveer. La fe responde en el idioma del aun si: aun si el sueldo es pequeño, aun si el refrigerador está vacío, aun si el futuro es incierto, Dios sigue siendo fiel y sigue sabiendo lo que necesito. Los creyentes han dado testimonio de esto en temporadas económicas duras. Imagine a una madre soltera en una profunda recesión, sin trabajo, el refrigerador casi vacío, que se quiebra una noche y ora que aunque no sabe cómo comerán, confía en Dios; a la mañana siguiente una amiga de la iglesia llega con bolsas de comestibles, diciendo que sintió que Dios le avisó de la necesidad. Tales testimonios exponen un punto: Dios nos muestra que no tenemos que vivir en temor, porque Él sabe lo que necesitamos antes de pedir."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain how Hebrews 11:8 and Abraham show trusting the Lord of sight.",
+    "es": "Explique cómo Hebreos 11:8 y Abraham muestran el confiar en el Señor de la vista."
+   },
+   "keywords": {
+    "en": [
+     "Abraham",
+     "not knowing",
+     "inheritance",
+     "promise",
+     "dead",
+     "obey",
+     "future",
+     "unseen"
+    ],
+    "es": [
+     "Abraham",
+     "sin saber",
+     "herencia",
+     "promesa",
+     "muertos",
+     "obedecer",
+     "futuro",
+     "no visto"
+    ]
+   },
+   "model": {
+    "en": "The third stretching of trust concerns the future we cannot see. Hebrews 11:8 tells us that by faith Abraham obeyed when he was called to go out to a place he would receive as an inheritance, and he went out not knowing where he was going. Romans 4 adds that he believed God's promise of a son even when his body and Sarah's were as good as dead. This is radical trust at its furthest reach: to obey before the map is clear and to stake everything on the promise of God rather than on the evidence of our eyes. The unseen future does not frighten such faith, because it rests not on what can presently be seen but on the One who has promised. Abraham did not need to see the land to leave for it; he needed only to trust the God who called him, and so he became the pattern of all who walk by faith into a future they cannot yet make out.",
+    "es": "El tercer estiramiento de la confianza concierne al futuro que no podemos ver. Hebreos 11:8 nos dice que por la fe Abraham obedeció cuando fue llamado a salir al lugar que había de recibir por herencia, y salió sin saber a dónde iba. Romanos 4 añade que creyó la promesa de Dios de un hijo aun cuando su cuerpo y el de Sara estaban como muertos. Ésta es la confianza radical en su alcance más extremo: obedecer antes de que el mapa esté claro y apostarlo todo a la promesa de Dios en vez de a la evidencia de nuestros ojos. El futuro no visto no asusta a tal fe, porque descansa no en lo que se puede ver al presente sino en Aquel que ha prometido. Abraham no necesitó ver la tierra para salir hacia ella; solo necesitó confiar en el Dios que lo llamó, y así se volvió el patrón de todos los que andan por fe hacia un futuro que aún no logran distinguir."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How does Adoniram Judson illustrate walking by faith and not by sight?",
+    "es": "¿Cómo ilustra Adoniram Judson el andar por fe y no por vista?"
+   },
+   "keywords": {
+    "en": [
+     "Judson",
+     "Burma",
+     "convert",
+     "prison",
+     "failure",
+     "bright",
+     "promises",
+     "Myanmar"
+    ],
+    "es": [
+     "Judson",
+     "Birmania",
+     "convertido",
+     "prisión",
+     "fracaso",
+     "brillante",
+     "promesas",
+     "Myanmar"
+    ]
+   },
+   "model": {
+    "en": "In 1812 Adoniram and Ann Judson sailed from Boston to Burma as among the first American missionaries, leaving family and security for a dangerous unknown. The work was agonizingly slow, with seven years passing before the first convert; disease struck repeatedly and they buried children; Adoniram was imprisoned nearly two years in filthy conditions while Ann risked her life daily to bring him food until her own health failed and she died young. From the outside it looked like failure. Yet in his darkest hour Adoniram wrote that the future is as bright as the promises of God. He could not see the harvest in his lifetime, but he trusted the Lord of sight, and today more than four million Christians in Myanmar trace their spiritual heritage to the Judsons' faithfulness, proving that to walk by faith is to let God's promises decide even when reality looks impossible.",
+    "es": "En 1812 Adoniram y Ann Judson zarparon de Boston a Birmania como de los primeros misioneros estadounidenses, dejando familia y seguridad por un desconocido peligroso. La obra fue angustiosamente lenta, con siete años pasando antes del primer convertido; la enfermedad golpeó repetidamente y enterraron hijos; Adoniram fue encarcelado casi dos años en condiciones inmundas mientras Ann arriesgaba su vida a diario para llevarle comida hasta que su propia salud falló y murió joven. Desde afuera parecía un fracaso. Pero en su hora más oscura Adoniram escribió que el futuro es tan brillante como las promesas de Dios. No pudo ver la cosecha en su vida, pero confió en el Señor de la vista, y hoy más de cuatro millones de cristianos en Myanmar remontan su herencia espiritual a la fidelidad de los Judson, probando que andar por fe es dejar que las promesas de Dios decidan aun cuando la realidad parece imposible."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the choice of faith over feelings that runs through all three movements.",
+    "es": "Explique la elección de la fe por encima de los sentimientos que recorre los tres movimientos."
+   },
+   "keywords": {
+    "en": [
+     "feelings",
+     "truth",
+     "follow",
+     "Gethsemane",
+     "final word",
+     "reliable",
+     "perishing",
+     "choose"
+    ],
+    "es": [
+     "sentimientos",
+     "verdad",
+     "sígueme",
+     "Getsemaní",
+     "última palabra",
+     "confiable",
+     "perecen",
+     "elegir"
+    ]
+   },
+   "model": {
+    "en": "Across all three movements runs a single thread, the choice of faith over feelings. In the boat the disciples' feelings screamed that they were perishing, while the truth was that the Lord of the sea was with them. In the empty kitchen feelings say there is no way, while the truth is that the Father knows our needs. In the dark prison feelings say the mission has failed, while the truth is that God's promises are sure. Emotions are real but they are not reliable guides, for they report how things feel, not how things are. So radical trust learns to act on what is true rather than on what is felt, and when emotions say fear, faith says follow. This is not the denial of feeling, since Jesus Himself was honest about anguish in Gethsemane, but the refusal to let feeling have the final word; we acknowledge the fear and then choose to lean on the LORD with all our heart.",
+    "es": "A través de los tres movimientos corre un solo hilo, la elección de la fe por encima de los sentimientos. En la barca los sentimientos de los discípulos gritaban que perecían, mientras la verdad era que el Señor del mar estaba con ellos. En la cocina vacía los sentimientos dicen que no hay salida, mientras la verdad es que el Padre conoce nuestras necesidades. En la prisión oscura los sentimientos dicen que la misión ha fracasado, mientras la verdad es que las promesas de Dios son seguras. Las emociones son reales pero no son guías confiables, pues reportan cómo se sienten las cosas, no cómo son. Así que la confianza radical aprende a actuar sobre lo que es verdad en vez de sobre lo que se siente, y cuando las emociones dicen miedo, la fe dice sígueme. Esto no es la negación del sentimiento, ya que el mismo Jesús fue honesto sobre la angustia en Getsemaní, sino la negativa a dejar que el sentimiento tenga la última palabra; reconocemos el miedo y luego elegimos estribar en Jehová de todo nuestro corazón."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Summarize the three lordships of radical trust and the question the unit presses.",
+    "es": "Resuma los tres señoríos de la confianza radical y la pregunta que la unidad apremia."
+   },
+   "keywords": {
+    "en": [
+     "storms",
+     "worry",
+     "sight",
+     "wineskins",
+     "self-reliance",
+     "stretch",
+     "promises",
+     "today"
+    ],
+    "es": [
+     "tormentas",
+     "preocupación",
+     "vista",
+     "odres",
+     "autosuficiencia",
+     "estirar",
+     "promesas",
+     "hoy"
+    ]
+   },
+   "model": {
+    "en": "Radical trust is the stretching of new wineskins. The old way of fear, anxiety, and self-reliance bursts under the pressure of life's storms, but the new life Christ gives stretches us to hold faith. He is Lord over storms, and the wind and waves obey Him. He is Lord over worry, and the Father knows what we need. He is Lord of sight, and our future rests securely on His promises rather than on what we can presently see. So the question comes to each of us personally: where do we need radical trust today, in some storm that will not calm, in worries that steal our sleep, or in a future we cannot make out? The Lord of the storm, of worry, and of sight is the same Lord, calling us to stretch, to lean less on our own understanding and trust Him more deeply, for the future before those who trust Him is as bright as the promises of God.",
+    "es": "La confianza radical es el estiramiento de los odres nuevos. La vieja manera del miedo, la ansiedad, y la autosuficiencia revienta bajo la presión de las tormentas de la vida, pero la vida nueva que Cristo da nos estira para contener la fe. Él es Señor sobre las tormentas, y el viento y las olas le obedecen. Él es Señor sobre la preocupación, y el Padre sabe lo que necesitamos. Él es Señor de la vista, y nuestro futuro descansa con seguridad en sus promesas y no en lo que podemos ver al presente. Así que la pregunta llega a cada uno personalmente: ¿dónde necesitamos confianza radical hoy, en alguna tormenta que no se calma, en preocupaciones que roban el sueño, o en un futuro que no logramos distinguir? El Señor de la tormenta, de la preocupación, y de la vista es el mismo Señor, que nos llama a estirarnos, a estribar menos en nuestra propia prudencia y confiar en Él más hondamente, pues el futuro ante quienes confían en Él es tan brillante como las promesas de Dios."
+   }
+  }
+ ]
+};

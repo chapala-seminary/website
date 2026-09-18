@@ -1,187 +1,865 @@
-/* CTSRadical - unit 11: per-unit configuration and content. */
-
-const UNIT = 11;
-
-const COURSE = 'radical';
-
-const NEXT_UNIT_URL = 'CTSRadicalUnit12.html';
-
-const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
-
-const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
-
-const PROGRESS_KEY  = `cts_${COURSE}_progress`;
-
-let progress = {};
-
-const unitTitlesEn = [
-    "Unit 1 - Foundation: Old Wineskins, New Wine",
-    "Unit 2 - What Jesus Did With the Law",
-    "Unit 3 - Love God",
-    "Unit 4 - Love Neighbor",
-    "Unit 5 - Be Holy",
-    "Unit 6 - Be Forgiving",
-    "Unit 7 - Be Humble",
-    "Unit 8 - Be Generous",
-    "Unit 9 - Trust God",
-    "Unit 10 - Be Prayerful",
-    `Unit ${UNIT} - Be Kind`,
-    `Unit ${UNIT + 1} - Be a Disciplemaker`,
-    "Unit 13 - Capstone: Turning the World Upside Down"
-];
-
-const mcQuestions = [
-    { textEn: "1. In Matthew 9:36, how did Jesus see the multitudes?", textEs: "1. En Mateo 9:36, ¿cómo vio Jesús a las multitudes?",
-      optionsEn: ["As an interruption", "As a problem to be managed", "As weary and scattered, like sheep without a shepherd — and was moved with compassion", "As an audience to impress"],
-      optionsEs: ["Como una interrupción", "Como un problema que administrar", "Como cansadas y esparcidas, como ovejas sin pastor — y fue movido a compasión", "Como una audiencia que impresionar"],
-      explanationEn: "Jesus saw the crowds not as a faceless mass but as weary, scattered people like sheep without a shepherd, and something moved in Him — compassion.", explanationEs: "Jesús vio a las multitudes no como una masa sin rostro sino como personas cansadas y esparcidas como ovejas sin pastor, y algo se movió en Él — la compasión.", correct: 2 },
-    { textEn: "2. According to the lesson, how is biblical kindness different from mere politeness?", textEs: "2. Según la lección, ¿cómo difiere la bondad bíblica de la mera cortesía?",
-      optionsEn: ["It is compassion — a heart that truly sees people's need and is stirred to help", "It is the same thing", "It is only good manners", "It requires formal training"],
-      optionsEs: ["Es compasión — un corazón que de veras ve la necesidad y se conmueve para ayudar", "Es lo mismo", "Son solo buenos modales", "Requiere entrenamiento formal"],
-      explanationEn: "We often reduce kindness to politeness, but biblical kindness is weightier: compassion, a heart that truly sees people in their need and is stirred to help them.", explanationEs: "A menudo reducimos la bondad a la cortesía, pero la bondad bíblica es más pesada: compasión, un corazón que de veras ve la necesidad de las personas y se conmueve para ayudarlas.", correct: 0 },
-    { textEn: "3. What does the Gospel word for Jesus' 'compassion' actually mean?", textEs: "3. ¿Qué significa en realidad la palabra del Evangelio para la 'compasión' de Jesús?",
-      optionsEn: ["A mild, distant sympathy", "A passing pity", "Polite concern", "To be moved viscerally, from the very core of one's being"],
-      optionsEs: ["Una simpatía leve y distante", "Una lástima pasajera", "Una preocupación cortés", "Ser movido visceralmente, desde el centro mismo del propio ser"],
-      explanationEn: "The word does not mean mild sympathy but to be moved viscerally, from the core of one's being; Jesus felt the people's pain in His gut.", explanationEs: "La palabra no significa simpatía leve sino ser movido visceralmente, desde el centro del propio ser; Jesús sintió el dolor de la gente en sus entrañas.", correct: 3 },
-    { textEn: "4. How does the Spanish phrase 'lo siento' illustrate compassion in the lesson?", textEs: "4. ¿Cómo ilustra la frase 'lo siento' la compasión en la lección?",
-      optionsEn: ["It means 'goodbye'", "It literally means something like 'I feel it' — 'I feel it with you'", "It has no connection to compassion", "It means 'I forgive you'"],
-      optionsEs: ["Significa 'adiós'", "Significa literalmente algo como 'lo siento' en el sentido de sentirlo — 'lo siento contigo'", "No tiene conexión con la compasión", "Significa 'te perdono'"],
-      explanationEn: "'Lo siento,' we translate 'I am sorry,' literally means closer to 'I feel it'; to say it to someone in pain is to say 'I feel it with you' — like Jesus, who felt their pain.", explanationEs: "'Lo siento,' que traducimos 'estoy apenado,' significa más cerca de sentirlo; decirlo a alguien que sufre es decir 'lo siento contigo' — como Jesús, que sintió su dolor.", correct: 1 },
-    { textEn: "5. According to Ephesians 4:32, where does Christian kindness come from?", textEs: "5. Según Efesios 4:32, ¿de dónde viene la bondad cristiana?",
-      optionsEn: ["It overflows from the kindness God showed us — 'as God in Christ forgave you'", "From our natural temperament", "From trying very hard", "From following rules"],
-      optionsEs: ["Se desborda de la bondad que Dios nos mostró — 'como Dios os perdonó en Cristo'", "De nuestro temperamento natural", "De esforzarse mucho", "De seguir reglas"],
-      explanationEn: "Paul says be kind 'even as God in Christ forgave you'; our kindness is a reflection and overflow of the kindness God has already shown us.", explanationEs: "Pablo dice sed benignos 'como también Dios os perdonó en Cristo'; nuestra bondad es un reflejo y desbordamiento de la bondad que Dios ya nos ha mostrado.", correct: 0 },
-    { textEn: "6. The lesson says kindness is best understood as what?", textEs: "6. La lección dice que la bondad se entiende mejor como ¿qué?",
-      optionsEn: ["A debt to earn God's favor", "Gratitude in action — giving what we have received", "A strain we manufacture", "A reward for good people"],
-      optionsEs: ["Una deuda para ganar el favor de Dios", "La gratitud en acción — dar lo que hemos recibido", "Una tensión que fabricamos", "Una recompensa para los buenos"],
-      explanationEn: "Kindness is not a debt to earn favor or a strain we manufacture; it is gratitude in action, the natural response of a heart treated far more kindly than it deserved.", explanationEs: "La bondad no es una deuda para ganar favor ni una tensión que fabricamos; es la gratitud en acción, la respuesta natural de un corazón tratado mucho más bondadosamente de lo que merecía.", correct: 1 },
-    { textEn: "7. According to the lesson, what does true compassion always become?", textEs: "7. Según la lección, ¿en qué se vuelve siempre la compasión verdadera?",
-      optionsEn: ["A private feeling", "A topic for discussion", "A deed — it never stays a feeling but always acts", "An occasional gesture"],
-      optionsEs: ["Un sentimiento privado", "Un tema de discusión", "Una obra — nunca se queda en sentimiento sino que siempre actúa", "Un gesto ocasional"],
-      explanationEn: "True compassion never stays a feeling; it always becomes a deed. When Jesus was moved, He healed, fed, and forgave; sentiment that does nothing is not real kindness.", explanationEs: "La compasión verdadera nunca se queda en sentimiento; siempre se vuelve obra. Cuando Jesús fue movido, sanó, alimentó, y perdonó; el sentimiento que nada hace no es bondad real.", correct: 2 },
-    { textEn: "8. How does the example of Caleb illustrate compassion that acts?", textEs: "8. ¿Cómo ilustra el ejemplo de Caleb la compasión que actúa?",
-      optionsEn: ["He organized a large charity", "He gave a speech about kindness", "He prayed but did nothing", "He carried a plate of food to a man who couldn't walk, then bought him a Coke"],
-      optionsEs: ["Organizó una gran caridad", "Dio un discurso sobre la bondad", "Oró pero no hizo nada", "Llevó un plato de comida a un hombre que no podía caminar, luego le compró una Coca"],
-      explanationEn: "Caleb carried a plate of food to a man around the corner who couldn't walk, then bought him a Coke too — noticing a nearby need and meeting it, with thoughtfulness added.", explanationEs: "Caleb llevó un plato de comida a un hombre a la vuelta de la esquina que no podía caminar, luego le compró una Coca — notando una necesidad cercana y supliéndola, con consideración añadida.", correct: 3 },
-    { textEn: "9. What is the 'genius' of Christian kindness, according to the lesson?", textEs: "9. ¿Cuál es la 'genialidad' de la bondad cristiana, según la lección?",
-      optionsEn: ["It requires great resources", "It is available to everyone, all the time — take the small occasion and fill it with love", "It is only for the wealthy", "It needs a special calling"],
-      optionsEs: ["Requiere grandes recursos", "Está al alcance de todos, todo el tiempo — toma la pequeña ocasión y llénala de amor", "Es solo para los ricos", "Necesita un llamado especial"],
-      explanationEn: "We may not feed five thousand, but we can carry a plate to a neighbor; compassion that acts takes the small occasion at hand and fills it with love.", explanationEs: "Quizá no alimentemos a cinco mil, pero podemos llevar un plato a un vecino; la compasión que actúa toma la pequeña ocasión a la mano y la llena de amor.", correct: 1 },
-    { textEn: "10. How does James 1:27 define 'pure and undefiled religion'?", textEs: "10. ¿Cómo define Santiago 1:27 la 'religión pura y sin mácula'?",
-      optionsEn: ["By visiting orphans and widows in their trouble, and keeping unspotted from the world", "By correct ceremony", "By right opinions", "By regular attendance"],
-      optionsEs: ["Por visitar a huérfanos y viudas en su tribulación, y guardarse sin mancha del mundo", "Por la ceremonia correcta", "Por opiniones correctas", "Por la asistencia regular"],
-      explanationEn: "James defines pure religion not by ceremony or opinion but by looking after orphans and widows in distress — caring for those who can do nothing for us in return.", explanationEs: "Santiago define la religión pura no por ceremonia ni opinión sino por cuidar de huérfanos y viudas en aflicción — cuidar de quienes nada pueden hacer por nosotros a cambio.", correct: 0 },
-    { textEn: "11. According to the lesson, what is the truest test of our kindness?", textEs: "11. Según la lección, ¿cuál es la prueba más cierta de nuestra bondad?",
-      optionsEn: ["How kind we are to important people", "How kind we feel inside", "How we treat those who can do nothing for us in return", "How often we mention kindness"],
-      optionsEs: ["Cuán bondadosos somos con los importantes", "Cuán bondadosos nos sentimos por dentro", "Cómo tratamos a quienes nada pueden hacer por nosotros a cambio", "Cuán seguido mencionamos la bondad"],
-      explanationEn: "The truest test of kindness is how we treat those who can do nothing for us in return — the powerless, the forgotten, the down-and-out, where God's compassion flows.", explanationEs: "La prueba más cierta de la bondad es cómo tratamos a quienes nada pueden hacer por nosotros a cambio — los sin poder, los olvidados, los caídos, donde fluye la compasión de Dios.", correct: 2 },
-    { textEn: "12. In Matthew 25, what did Jesus teach about kindness to 'the least of these'?", textEs: "12. En Mateo 25, ¿qué enseñó Jesús sobre la bondad a 'uno de estos más pequeños'?",
-      optionsEn: ["It is optional", "It applies only to family", "It earns no reward", "Compassion shown or withheld to the least is shown or withheld to Him"],
-      optionsEs: ["Es opcional", "Aplica solo a la familia", "No gana recompensa", "La compasión mostrada o negada al más pequeño es mostrada o negada a Él"],
-      explanationEn: "Jesus warned 'I was a stranger... sick and in prison and you did not visit Me,' teaching that compassion shown or withheld to the least of these is shown or withheld to Him.", explanationEs: "Jesús advirtió 'fui extranjero... enfermo y en la cárcel y no me visitasteis,' enseñando que la compasión mostrada o negada al más pequeño es mostrada o negada a Él.", correct: 3 },
-    { textEn: "13. What does Colossians 3:12 ('put on kindness') teach about being kind?", textEs: "13. ¿Qué enseña Colosenses 3:12 ('vestíos de benignidad') sobre ser bondadoso?",
-      optionsEn: ["Kindness is a garment we deliberately put on, even before we feel it", "Kindness is a fixed personality trait", "Kindness cannot be chosen", "Kindness comes only naturally"],
-      optionsEs: ["La bondad es una prenda que deliberadamente nos ponemos, aun antes de sentirla", "La bondad es un rasgo fijo de personalidad", "La bondad no se puede elegir", "La bondad viene solo naturalmente"],
-      explanationEn: "Paul says 'put on' kindness like a garment; we don't wait until we feel kind but deliberately clothe ourselves with it, and the feeling often follows the choice.", explanationEs: "Pablo dice 'vestíos' de benignidad como una prenda; no esperamos a sentirnos bondadosos sino que deliberadamente nos revestimos de ella, y el sentimiento a menudo sigue a la decisión.", correct: 0 },
-    { textEn: "14. What common excuse does the 'put on kindness' command address?", textEs: "14. ¿Qué excusa común aborda el mandamiento de 'vestirse de bondad'?",
-      optionsEn: ["That kindness is too easy", "That kindness is unbiblical", "That we are simply 'not a naturally kind person'", "That only pastors must be kind"],
-      optionsEs: ["Que la bondad es demasiado fácil", "Que la bondad no es bíblica", "Que sencillamente 'no somos una persona naturalmente bondadosa'", "Que solo los pastores deben ser bondadosos"],
-      explanationEn: "We excuse ourselves as 'not naturally kind,' but Paul treats kindness as a decision available to every believer; even the grumpiest can choose to speak gently and help.", explanationEs: "Nos excusamos como 'no naturalmente bondadosos,' pero Pablo trata la bondad como una decisión al alcance de todo creyente; hasta el más gruñón puede elegir hablar con suavidad y ayudar.", correct: 2 },
-    { textEn: "15. According to Galatians 5:22, what keeps 'put on kindness' from being mere self-improvement?", textEs: "15. Según Gálatas 5:22, ¿qué impide que 'vestirse de bondad' sea mera superación personal?",
-      optionsEn: ["Nothing; it is just willpower", "It is impossible anyway", "It depends on talent", "Kindness is fruit of the Spirit — God grows it in a surrendered life"],
-      optionsEs: ["Nada; es solo fuerza de voluntad", "Es imposible de todos modos", "Depende del talento", "La bondad es fruto del Espíritu — Dios la cultiva en una vida rendida"],
-      explanationEn: "Kindness is listed among the fruit of the Spirit, not achievements of the flesh; lasting kindness is finally produced by God in us, not manufactured by willpower.", explanationEs: "La bondad se enumera entre el fruto del Espíritu, no los logros de la carne; la bondad duradera es al final producida por Dios en nosotros, no fabricada por fuerza de voluntad.", correct: 3 },
-    { textEn: "16. How does the lesson hold together 'put on kindness' and 'kindness is fruit'?", textEs: "16. ¿Cómo sostiene la lección juntos 'vestirse de bondad' y 'la bondad es fruto'?",
-      optionsEn: ["They contradict each other", "We deliberately choose kindness AND depend on the Spirit to grow it, like a branch abiding in the vine", "Neither matters", "Only one is true"],
-      optionsEs: ["Se contradicen", "Deliberadamente elegimos la bondad Y dependemos del Espíritu para cultivarla, como una rama que permanece en la vid", "Ninguna importa", "Solo una es verdad"],
-      explanationEn: "We keep choosing kindness before we feel it, and keep abiding in Christ; a branch doesn't strain to produce fruit but stays connected to the vine, and fruit comes.", explanationEs: "Seguimos eligiendo la bondad antes de sentirla, y seguimos permaneciendo en Cristo; una rama no se esfuerza por producir fruto sino que permanece en la vid, y el fruto viene.", correct: 1 },
-    { textEn: "17. How did the Christians in the Soviet prison (Kozlov's account) bear witness?", textEs: "17. ¿Cómo dieron testimonio los cristianos en la prisión soviética (relato de Kozlov)?",
-      optionsEn: ["Amid despair, their gentleness and faith became a shining example of real life for thousands", "By organizing escapes", "By despairing like the others", "By keeping to themselves"],
-      optionsEs: ["En medio de la desesperación, su gentileza y fe se volvieron un ejemplo brillante de vida real para miles", "Organizando fugas", "Desesperando como los demás", "Manteniéndose apartados"],
-      explanationEn: "Amid despair where men cursed and harmed themselves, the Christians did not despair; their gentleness became a shining example of real life — one could see Christ in their faces.", explanationEs: "En medio de la desesperación donde los hombres maldecían y se dañaban, los cristianos no desesperaban; su gentileza se volvió un ejemplo brillante de vida real — se veía a Cristo en sus rostros.", correct: 0 },
-    { textEn: "18. According to Luke 6:35, to whom is God kind, and whom should we be kind to?", textEs: "18. Según Lucas 6:35, ¿con quién es bondadoso Dios, y con quién debemos serlo?",
-      optionsEn: ["Only the deserving", "God is kind to the unthankful and evil; we are to be kind even to those who don't deserve it", "Only fellow believers", "Only our friends"],
-      optionsEs: ["Solo con los que lo merecen", "Dios es benigno con los ingratos y malos; debemos ser bondadosos aun con quienes no lo merecen", "Solo con los creyentes", "Solo con nuestros amigos"],
-      explanationEn: "God is kind to the unthankful and evil, and calls us to be kind even to the ungrateful, difficult, and enemy; kindness only to the deserving is mere ordinary fairness.", explanationEs: "Dios es benigno con los ingratos y malos, y nos llama a ser bondadosos aun con el ingrato, el difícil, y el enemigo; la bondad solo con los que la merecen es apenas justicia ordinaria.", correct: 1 },
-    { textEn: "19. What is the two-part pattern for a kind heart the lesson gives?", textEs: "19. ¿Cuál es el patrón de dos partes para un corazón bondadoso que da la lección?",
-      optionsEn: ["Feel deeply, but never act", "Act always, never feel", "Think about kindness often", "Be moved (feel it), and then move (let feeling become a deed)"],
-      optionsEs: ["Sentir hondamente, pero nunca actuar", "Actuar siempre, nunca sentir", "Pensar en la bondad a menudo", "Ser movido (sentirlo), y luego moverse (dejar que el sentimiento se vuelva obra)"],
-      explanationEn: "First be genuinely moved — feel the suffering, say 'I feel you' — then move, letting feeling become a deed; compassion only felt dies, compassion without feeling becomes cold duty.", explanationEs: "Primero ser genuinamente movido — sentir el sufrimiento, decir 'te siento' — luego moverse, dejando que el sentimiento se vuelva obra; la compasión solo sentida muere, la que no siente se vuelve deber frío.", correct: 3 },
-    { textEn: "20. According to the lesson, what is it ultimately to be kind?", textEs: "20. Según la lección, ¿qué es en última instancia ser bondadoso?",
-      optionsEn: ["To have a pleasant personality", "To follow social rules", "Nothing less than to share the heart of Christ", "To avoid conflict"],
-      optionsEs: ["Tener una personalidad agradable", "Seguir reglas sociales", "Nada menos que compartir el corazón de Cristo", "Evitar el conflicto"],
-      explanationEn: "To be kind is nothing less than to share the heart of Christ: moved with compassion at the multitudes, and then getting up to help; God makes us kind like Himself.", explanationEs: "Ser bondadoso no es nada menos que compartir el corazón de Cristo: movido a compasión ante las multitudes, y luego levantándose a ayudar; Dios nos hace bondadosos como Él.", correct: 2 }
-];
-
-const kwQuestions = [
-    { textEn: "21. Explain Matthew 9:36 and how Jesus' compassion reveals what kindness truly is.",
-      textEs: "21. Explique Mateo 9:36 y cómo la compasión de Jesús revela lo que es de veras la bondad.",
-      kw_en: ["compassion", "multitudes", "sheep", "shepherd", "moved", "politeness", "stirred", "need"],
-      kw_es: ["compasión", "multitudes", "ovejas", "pastor", "movido", "cortesía", "conmueve", "necesidad"],
-      modelEn: "Before Jesus ever commands us to be kind, the Gospels show His own kindness in action, for again and again we read that He had compassion on them. He saw the multitudes not as a faceless crowd or a problem to be managed but as weary, scattered people, like sheep having no shepherd, and something moved in Him. Kindness in its deepest Christian sense begins not with a duty we perform but with a heart genuinely moved by the condition of others. This matters because we often reduce kindness to mere politeness or good manners, but the kindness Jesus models and commands is far weightier: it is compassion, a heart that truly sees people in their need and is stirred to help them. The crowds were harassed and helpless, and Jesus did not look past them or grow annoyed; He was moved for them, and to be kind is to let our hearts be moved as His was and then to act.",
-      modelEs: "Antes de que Jesús nos mande siquiera ser bondadosos, los Evangelios muestran su propia bondad en acción, pues una y otra vez leemos que tuvo compasión de ellos. Vio las multitudes no como una masa sin rostro ni un problema que administrar sino como personas cansadas y esparcidas, como ovejas sin pastor, y algo se movió en Él. La bondad en su sentido cristiano más hondo comienza no con un deber que cumplimos sino con un corazón genuinamente movido por la condición de los demás. Esto importa porque a menudo reducimos la bondad a mera cortesía o buenos modales, pero la bondad que Jesús modela y manda es mucho más pesada: es compasión, un corazón que de veras ve a las personas en su necesidad y se conmueve para ayudarlas. Las multitudes estaban acosadas y desamparadas, y Jesús no las pasó por alto ni se irritó; se conmovió por ellas, y ser bondadoso es dejar que nuestro corazón sea movido como el suyo y luego actuar.",
-      },
-    { textEn: "22. Explain the meaning of biblical compassion using the 'lo siento / I feel you' insight.",
-      textEs: "22. Explique el significado de la compasión bíblica usando la idea de 'lo siento / te siento.'",
-      kw_en: ["viscerally", "core", "feel", "lo siento", "pain", "healed", "fed", "abstract"],
-      kw_es: ["visceralmente", "centro", "sentir", "lo siento", "dolor", "sanó", "alimentó", "abstracta"],
-      modelEn: "The word the Gospels use for Jesus' compassion is remarkably physical; it does not describe a mild sympathy or passing pity but means to be moved viscerally, from the very core of one's being, so that Jesus felt the people's pain in His gut. There is a beautiful picture of this in the Spanish phrase lo siento, which we translate I am sorry but which literally means something closer to I feel it. To say lo siento to someone in pain is to say I feel it with you, and in places of deep suffering people say much the same thing, I feel you. That is exactly what Jesus was like, for He felt their pain, and so His compassion was never abstract: when people were sick He healed them, when they were hungry He fed them, on one occasion more than five thousand, and when they were trapped in sin He forgave them. Compassion that truly feels will always move toward the one who hurts.",
-      modelEs: "La palabra que los Evangelios usan para la compasión de Jesús es notablemente física; no describe una simpatía leve ni una lástima pasajera sino que significa ser movido visceralmente, desde el centro mismo del propio ser, de modo que Jesús sintió el dolor de la gente en sus entrañas. Hay una hermosa imagen de esto en la frase lo siento, que traducimos estoy apenado pero que significa literalmente algo más cercano a sentirlo. Decir lo siento a alguien que sufre es decir lo siento contigo, y en lugares de hondo sufrimiento la gente dice algo muy parecido, te siento. Eso es exactamente como era Jesús, pues sintió su dolor, y por eso su compasión nunca fue abstracta: cuando las personas estaban enfermas las sanó, cuando tenían hambre las alimentó, en una ocasión a más de cinco mil, y cuando estaban atrapadas en el pecado las perdonó. La compasión que de veras siente siempre se moverá hacia el que sufre.",
-      },
-    { textEn: "23. Using Ephesians 4:32, explain where Christian kindness comes from and why that matters.",
-      textEs: "23. Usando Efesios 4:32, explique de dónde viene la bondad cristiana y por qué eso importa.",
-      kw_en: ["forgave", "overflow", "reflection", "repentance", "gratitude", "debt", "received", "grace"],
-      kw_es: ["perdonó", "desbordamiento", "reflejo", "arrepentimiento", "gratitud", "deuda", "recibido", "gracia"],
-      modelEn: "We cannot understand the command to be kind until we see where Christian kindness comes from. Paul does not simply say be kind; he says be kind to one another even as God in Christ forgave you, so our kindness is meant to be a reflection and overflow of the kindness God has already shown us. Scripture says it is the kindness of God that leads us to repentance, that we love because He first loved us and are kind because He was first kind to us. This changes how we approach the command, for kindness is not a debt we pay to earn God's favor nor a strain we manufacture by gritted teeth. It is gratitude in action, the natural response of a heart treated far more kindly than it deserved. When we remember how patient and merciful God has been with us in Christ, kindness toward others stops feeling like a burden and becomes the most reasonable thing in the world, for we give what we have received.",
-      modelEs: "No podemos entender el mandamiento de ser bondadosos hasta que veamos de dónde viene la bondad cristiana. Pablo no dice sencillamente sed bondadosos; dice sed benignos unos con otros como también Dios os perdonó en Cristo, así que nuestra bondad ha de ser un reflejo y desbordamiento de la bondad que Dios ya nos ha mostrado. La Escritura dice que es la bondad de Dios la que nos guía al arrepentimiento, que amamos porque Él nos amó primero y somos bondadosos porque Él fue bondadoso con nosotros primero. Esto cambia cómo abordamos el mandamiento, pues la bondad no es una deuda que pagamos para ganar el favor de Dios ni una tensión que fabricamos con los dientes apretados. Es la gratitud en acción, la respuesta natural de un corazón tratado mucho más bondadosamente de lo que merecía. Cuando recordamos cuán paciente y misericordioso ha sido Dios con nosotros en Cristo, la bondad hacia los demás deja de sentirse como carga y se vuelve lo más razonable del mundo, pues damos lo que hemos recibido.",
-      },
-    { textEn: "24. Explain why true compassion must act, using the example of Caleb.",
-      textEs: "24. Explique por qué la compasión verdadera debe actuar, usando el ejemplo de Caleb.",
-      kw_en: ["deed", "sentiment", "healed", "Caleb", "plate", "Coke", "small", "love"],
-      kw_es: ["obra", "sentimentalismo", "sanó", "Caleb", "plato", "Coca", "pequeña", "amor"],
-      modelEn: "True compassion never stays a feeling; it always becomes a deed, for when Jesus was moved with compassion He did something about it, healing, feeding, and forgiving. Feeling sorry for people while doing nothing is not the kindness Scripture commends but sentiment, and sentiment costs nothing and helps no one, while the kindness God calls for gets up off its chair. Kindness like this is usually unspectacular and close to home. A young man named Caleb knew of a man around the corner who could not walk, so he carried a plate of food down to him and then went back out and bought him a Coke as well, with no grand program and no fanfare, just a person who noticed a nearby need and met it with a little extra thoughtfulness. We may not be able to feed five thousand, but we can carry a plate to a neighbor; compassion that acts does not wait for a great occasion but takes the small occasion at hand and fills it with love.",
-      modelEs: "La compasión verdadera nunca se queda en sentimiento; siempre se vuelve obra, pues cuando Jesús fue movido a compasión hizo algo al respecto, sanando, alimentando, y perdonando. Sentir lástima por las personas sin hacer nada no es la bondad que la Escritura elogia sino sentimentalismo, y el sentimentalismo no cuesta nada y a nadie ayuda, mientras que la bondad que Dios pide se levanta de su silla. La bondad como ésta suele ser poco espectacular y cercana a casa. Un joven llamado Caleb sabía de un hombre a la vuelta de la esquina que no podía caminar, así que le llevó un plato de comida y luego salió y le compró también una Coca-Cola, sin ningún gran programa y sin fanfarria, solo una persona que notó una necesidad cercana y la suplió con un poco de consideración extra. Quizá no podamos alimentar a cinco mil, pero podemos llevar un plato a un vecino; la compasión que actúa no espera una gran ocasión sino que toma la pequeña ocasión a la mano y la llena de amor.",
-      },
-    { textEn: "25. How does James 1:27 and Matthew 25 show kindness toward the overlooked?",
-      textEs: "25. ¿Cómo muestran Santiago 1:27 y Mateo 25 la bondad hacia los olvidados?",
-      kw_en: ["orphans", "widows", "overlooked", "stranger", "prisoner", "least", "return", "test"],
-      kw_es: ["huérfanos", "viudas", "olvidados", "extranjero", "preso", "más pequeño", "cambio", "prueba"],
-      modelEn: "Scripture has a special concern for the people the world tends to overlook. From the days of Moses the widow and the orphan were placed under God's particular protection and commended to the tender care of the righteous, and James defines pure religion not by ceremony or correct opinion but by looking after orphans and widows in their distress. The truest test of our kindness is how we treat those who can do nothing for us in return, the people with no power, no status, and nothing to offer. Jesus extended the same concern to the stranger, the sick, and the prisoner, warning I was a stranger and you did not take Me in, I was sick and in prison and you did not visit Me, teaching that compassion shown or withheld to the least of these is shown or withheld to Him. Kindness is therefore not reserved for friends and equals who can repay us but flows especially toward the forgotten and the down-and-out, because that is where the compassion of God flows.",
-      modelEs: "La Escritura tiene una preocupación especial por las personas que el mundo tiende a pasar por alto. Desde los días de Moisés la viuda y el huérfano fueron puestos bajo la protección particular de Dios y encomendados al tierno cuidado de los justos, y Santiago define la religión pura no por ceremonia ni opinión correcta sino por cuidar de los huérfanos y las viudas en su aflicción. La prueba más cierta de nuestra bondad es cómo tratamos a quienes nada pueden hacer por nosotros a cambio, las personas sin poder, sin estatus, y sin nada que ofrecer. Jesús extendió la misma preocupación al extranjero, al enfermo, y al preso, advirtiendo fui extranjero y no me recogisteis, enfermo y en la cárcel y no me visitasteis, enseñando que la compasión mostrada o negada al más pequeño es mostrada o negada a Él. La bondad por tanto no se reserva para amigos e iguales que pueden recompensarnos sino que fluye especialmente hacia el olvidado y el caído, porque ahí es donde fluye la compasión de Dios.",
-      },
-    { textEn: "26. Explain Colossians 3:12 and how kindness can be a garment we choose to wear.",
-      textEs: "26. Explique Colosenses 3:12 y cómo la bondad puede ser una prenda que elegimos vestir.",
-      kw_en: ["put on", "garment", "choose", "wait", "feel", "excuse", "personality", "decision"],
-      kw_es: ["vestir", "prenda", "elegir", "esperar", "sentir", "excusa", "personalidad", "decisión"],
-      modelEn: "Paul tells us to put on kindness as one puts on a garment, and the image is deliberate, for kindness is something we choose to wear intentionally each day. This means we do not have to wait until we feel kind to act kindly; on the days when we are tired, irritable, or preoccupied, we can still deliberately clothe ourselves with kindness toward the people we meet, and very often the feeling follows the choice. This protects us from a common excuse, for we tell ourselves we are simply not a naturally kind person, as though kindness were a fixed personality trait we either possess or lack. But Paul addresses kindness as a decision, a garment available to every believer to put on, so even the grumpiest among us can choose in a given moment to speak gently, to be patient, and to do the helpful thing. Character is built precisely by choosing kindness before we feel it, until the wearing of it becomes second nature.",
-      modelEs: "Pablo nos dice que nos vistamos de benignidad como uno se pone una prenda, y la imagen es deliberada, pues la bondad es algo que elegimos vestir intencionalmente cada día. Esto significa que no tenemos que esperar a sentirnos bondadosos para actuar con bondad; en los días en que estamos cansados, irritables, o preocupados, todavía podemos deliberadamente revestirnos de bondad hacia las personas que encontramos, y muy a menudo el sentimiento sigue a la decisión. Esto nos protege de una excusa común, pues nos decimos que sencillamente no somos una persona naturalmente bondadosa, como si la bondad fuera un rasgo fijo de personalidad que poseemos o nos falta. Pero Pablo trata la bondad como una decisión, una prenda al alcance de todo creyente para ponérsela, así que hasta el más gruñón de nosotros puede elegir en un momento dado hablar con suavidad, ser paciente, y hacer la cosa útil. El carácter se forma precisamente al elegir la bondad antes de sentirla, hasta que el vestirla se vuelve segunda naturaleza.",
-      },
-    { textEn: "27. Explain Galatians 5:22 and how kindness as 'fruit' balances kindness as a choice.",
-      textEs: "27. Explique Gálatas 5:22 y cómo la bondad como 'fruto' equilibra la bondad como elección.",
-      kw_en: ["fruit", "Spirit", "willpower", "grows", "surrendered", "branch", "vine", "abiding"],
-      kw_es: ["fruto", "Espíritu", "fuerza de voluntad", "cultiva", "rendida", "rama", "vid", "permanecer"],
-      modelEn: "There is a deeper truth that keeps the put on kindness command from becoming mere self-improvement, for Paul lists kindness among the fruit of the Spirit, not the achievements of the flesh but the fruit the Holy Spirit grows in a surrendered life. This means genuine, lasting kindness is finally not something we manufacture by willpower at all but something God produces in us as we walk with Him. Holding the two truths together keeps us balanced: on the one hand we deliberately put on kindness, choosing it before we feel it, and on the other hand we depend on the Spirit to grow real kindness in us from the inside, knowing our own efforts will run dry. A branch does not strain to produce fruit but simply stays connected to the vine, and the fruit comes; so with kindness, we keep choosing it and keep abiding in Christ, and the Spirit makes our chosen kindness into something genuine and deep, the very kindness of God flowing through us.",
-      modelEs: "Hay una verdad más honda que impide que el mandamiento de vestirse de bondad se vuelva mera superación personal, pues Pablo enumera la bondad entre el fruto del Espíritu, no los logros de la carne sino el fruto que el Espíritu Santo cultiva en una vida rendida. Esto significa que la bondad genuina y duradera no es al final algo que fabricamos por fuerza de voluntad en absoluto sino algo que Dios produce en nosotros al caminar con Él. Sostener juntas las dos verdades nos mantiene equilibrados: por un lado deliberadamente nos vestimos de bondad, eligiéndola antes de sentirla, y por otro lado dependemos del Espíritu para cultivar bondad real en nosotros desde adentro, sabiendo que nuestros propios esfuerzos se secarán. Una rama no se esfuerza por producir fruto sino que sencillamente permanece conectada a la vid, y el fruto viene; así con la bondad, seguimos eligiéndola y seguimos permaneciendo en Cristo, y el Espíritu hace de nuestra bondad elegida algo genuino y hondo, la bondad misma de Dios fluyendo a través de nosotros.",
-      },
-    { textEn: "28. Using the Kozlov account, explain how kindness becomes a witness.",
-      textEs: "28. Usando el relato de Kozlov, explique cómo la bondad se vuelve un testimonio.",
-      kw_en: ["witness", "Soviet", "Kozlov", "despair", "gentleness", "shining", "Christ", "faces"],
-      kw_es: ["testimonio", "soviética", "Kozlov", "desesperación", "gentileza", "brillante", "Cristo", "rostros"],
-      modelEn: "A heart full of Christ's compassion becomes one of the most powerful testimonies in the world, especially in places of darkness, for kindness shines brightest against the blackest backgrounds and the watching world cannot easily explain it away. A man named Kozlov, once a criminal and later a church leader, wrote of life in a Soviet labor camp where prisoners often served sentences of twenty or twenty-five years. Amid the general despair, where men cursed their fate, harmed themselves, and even took their own lives, the Christians did not despair, and their pure and upright lives, deep faith, and above all their gentleness toward others became a shining example of real life for thousands, so that one could see Christ reflected in their faces. Their kindness in a place of cruelty preached more loudly than any sermon, showing the radical reach of a compassion that makes the invisible God strangely visible.",
-      modelEs: "Un corazón lleno de la compasión de Cristo se vuelve uno de los testimonios más poderosos del mundo, especialmente en lugares de oscuridad, pues la bondad brilla más intensamente contra los fondos más negros y el mundo que observa no puede fácilmente explicarla. Un hombre llamado Kozlov, una vez criminal y luego líder de iglesia, escribió de la vida en un campo de trabajo soviético donde los presos a menudo cumplían sentencias de veinte o veinticinco años. En medio de la desesperación general, donde los hombres maldecían su suerte, se hacían daño, y hasta se quitaban la vida, los cristianos no desesperaban, y sus vidas puras y rectas, su fe profunda, y sobre todo su gentileza hacia los demás se volvieron un ejemplo brillante de vida real para miles, de modo que se podía ver a Cristo reflejado en sus rostros. Su bondad en un lugar de crueldad predicó más fuerte que cualquier sermón, mostrando el alcance radical de una compasión que hace al Dios invisible extrañamente visible.",
-      },
-    { textEn: "29. According to Luke 6:35, how far does kingdom kindness reach, and why?",
-      textEs: "29. Según Lucas 6:35, ¿hasta dónde alcanza la bondad del reino, y por qué?",
-      kw_en: ["unthankful", "evil", "enemy", "deserving", "fairness", "merciful", "kingdom", "visible"],
-      kw_es: ["ingratos", "malos", "enemigo", "merecen", "justicia", "misericordiosos", "reino", "visible"],
-      modelEn: "Kindness in the kingdom of God reaches further than ordinary human kindness, for Jesus tells us that God Himself is kind to the unthankful and evil and calls us to be kind even to those who do not deserve it or return it. A kindness that extends only to the deserving is just ordinary fairness, the kind even pagans practice, but the kindness of the kingdom reaches the ungrateful, the difficult, and the enemy. Blessed are the merciful, Jesus said, for they shall obtain mercy, and in showing mercy to those who cannot repay it we reflect the very heart of God who showed mercy to us when we were His enemies. This is why such kindness makes the invisible God strangely visible: it cannot be explained by self-interest or by the ordinary calculations of the world, and so it points beyond itself to the God whose kindness has no limit and no condition.",
-      modelEs: "La bondad en el reino de Dios alcanza más lejos que la bondad humana ordinaria, pues Jesús nos dice que Dios mismo es benigno con los ingratos y malos y nos llama a ser bondadosos aun con quienes no lo merecen ni lo devuelven. Una bondad que se extiende solo a los que la merecen es apenas justicia ordinaria, la que hasta los paganos practican, pero la bondad del reino alcanza al ingrato, al difícil, y al enemigo. Bienaventurados los misericordiosos, dijo Jesús, porque ellos alcanzarán misericordia, y al mostrar misericordia a quienes no pueden recompensarla reflejamos el corazón mismo de Dios que nos mostró misericordia cuando éramos sus enemigos. Por esto tal bondad hace al Dios invisible extrañamente visible: no puede explicarse por el interés propio ni por los cálculos ordinarios del mundo, y así apunta más allá de sí misma al Dios cuya bondad no tiene límite ni condición.",
-      },
-    { textEn: "30. Summarize the two-part pattern of a kind heart and what it ultimately means to be kind.",
-      textEs: "30. Resuma el patrón de dos partes de un corazón bondadoso y qué significa en última instancia ser bondadoso.",
-      kw_en: ["moved", "move", "deed", "felt", "duty", "heart of Christ", "garment", "Spirit"],
-      kw_es: ["movido", "moverse", "obra", "sentida", "deber", "corazón de Cristo", "prenda", "Espíritu"],
-      modelEn: "We come back to where we began, to Jesus looking out over the weary crowds and being moved with compassion, for that is the pattern for every kind heart: first to be genuinely moved, to let the suffering of others register in us, to feel it, to say with Christ I feel you, and then to move, to let that feeling become a deed. Compassion that is only felt and never acted on dies in the heart, while compassion that acts without feeling becomes cold duty, so real kindness holds both together, a heart that is moved and hands that move. To be kind, then, is nothing less than to share the heart of Christ. We put on kindness deliberately as a garment, we depend on the Spirit to grow it as fruit, we aim it especially at the overlooked and the undeserving, and we let it become our witness to a watching world, as the God who was kind to us when we were unthankful makes us kind like Himself.",
-      modelEs: "Volvemos a donde comenzamos, a Jesús contemplando las multitudes cansadas y siendo movido a compasión, pues ése es el patrón para todo corazón bondadoso: primero ser genuinamente movido, dejar que el sufrimiento de los demás registre en nosotros, sentirlo, decir con Cristo te siento, y luego moverse, dejar que ese sentimiento se vuelva obra. La compasión que solo se siente y nunca se actúa muere en el corazón, mientras que la compasión que actúa sin sentir se vuelve deber frío, así que la bondad verdadera sostiene ambas juntas, un corazón que es movido y manos que se mueven. Ser bondadoso, entonces, no es nada menos que compartir el corazón de Cristo. Nos vestimos de bondad deliberadamente como una prenda, dependemos del Espíritu para cultivarla como fruto, la dirigimos especialmente al olvidado y al inmerecedor, y dejamos que se vuelva nuestro testimonio ante un mundo que observa, mientras el Dios que fue bondadoso con nosotros cuando éramos ingratos nos hace bondadosos como Él.",
-      }
-];
+/* CTSRadical — unit 11. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "radical",
+ "unit": 11,
+ "totalUnits": 13,
+ "filePrefix": "CTSRadical",
+ "prevHref": "CTSRadicalUnit10.html",
+ "nextHref": "CTSRadicalUnit12.html",
+ "unitTitles": {
+  "en": [
+   "Unit 1 - Foundation: Old Wineskins, New Wine",
+   "Unit 2 - What Jesus Did With the Law",
+   "Unit 3 - Love God",
+   "Unit 4 - Love Neighbor",
+   "Unit 5 - Be Holy",
+   "Unit 6 - Be Forgiving",
+   "Unit 7 - Be Humble",
+   "Unit 8 - Be Generous",
+   "Unit 9 - Trust God",
+   "Unit 10 - Be Prayerful",
+   "Unit 11 - Be Kind",
+   "Unit 12 - Be a Disciplemaker",
+   "Unit 13 - Capstone: Turning the World Upside Down"
+  ],
+  "es": [
+   "Unit 1 - Foundation: Old Wineskins, New Wine",
+   "Unit 2 - What Jesus Did With the Law",
+   "Unit 3 - Love God",
+   "Unit 4 - Love Neighbor",
+   "Unit 5 - Be Holy",
+   "Unit 6 - Be Forgiving",
+   "Unit 7 - Be Humble",
+   "Unit 8 - Be Generous",
+   "Unit 9 - Trust God",
+   "Unit 10 - Be Prayerful",
+   "Unit 11 - Be Kind",
+   "Unit 12 - Be a Disciplemaker",
+   "Unit 13 - Capstone: Turning the World Upside Down"
+  ]
+ },
+ "mc": [
+  {
+   "stem": {
+    "en": "In Matthew 9:36, how did Jesus see the multitudes?",
+    "es": "En Mateo 9:36, ¿cómo vio Jesús a las multitudes?"
+   },
+   "options": {
+    "en": [
+     "As an interruption",
+     "As a problem to be managed",
+     "As weary and scattered, like sheep without a shepherd — and was moved with compassion",
+     "As an audience to impress"
+    ],
+    "es": [
+     "Como una interrupción",
+     "Como un problema que administrar",
+     "Como cansadas y esparcidas, como ovejas sin pastor — y fue movido a compasión",
+     "Como una audiencia que impresionar"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Jesus saw the crowds not as a faceless mass but as weary, scattered people like sheep without a shepherd, and something moved in Him — compassion.",
+    "es": "Jesús vio a las multitudes no como una masa sin rostro sino como personas cansadas y esparcidas como ovejas sin pastor, y algo se movió en Él — la compasión."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to the lesson, how is biblical kindness different from mere politeness?",
+    "es": "Según la lección, ¿cómo difiere la bondad bíblica de la mera cortesía?"
+   },
+   "options": {
+    "en": [
+     "It is compassion — a heart that truly sees people's need and is stirred to help",
+     "It is the same thing",
+     "It is only good manners",
+     "It requires formal training"
+    ],
+    "es": [
+     "Es compasión — un corazón que de veras ve la necesidad y se conmueve para ayudar",
+     "Es lo mismo",
+     "Son solo buenos modales",
+     "Requiere entrenamiento formal"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "We often reduce kindness to politeness, but biblical kindness is weightier: compassion, a heart that truly sees people in their need and is stirred to help them.",
+    "es": "A menudo reducimos la bondad a la cortesía, pero la bondad bíblica es más pesada: compasión, un corazón que de veras ve la necesidad de las personas y se conmueve para ayudarlas."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does the Gospel word for Jesus' 'compassion' actually mean?",
+    "es": "¿Qué significa en realidad la palabra del Evangelio para la 'compasión' de Jesús?"
+   },
+   "options": {
+    "en": [
+     "A mild, distant sympathy",
+     "A passing pity",
+     "Polite concern",
+     "To be moved viscerally, from the very core of one's being"
+    ],
+    "es": [
+     "Una simpatía leve y distante",
+     "Una lástima pasajera",
+     "Una preocupación cortés",
+     "Ser movido visceralmente, desde el centro mismo del propio ser"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The word does not mean mild sympathy but to be moved viscerally, from the core of one's being; Jesus felt the people's pain in His gut.",
+    "es": "La palabra no significa simpatía leve sino ser movido visceralmente, desde el centro del propio ser; Jesús sintió el dolor de la gente en sus entrañas."
+   }
+  },
+  {
+   "stem": {
+    "en": "How does the Spanish phrase 'lo siento' illustrate compassion in the lesson?",
+    "es": "¿Cómo ilustra la frase 'lo siento' la compasión en la lección?"
+   },
+   "options": {
+    "en": [
+     "It means 'goodbye'",
+     "It literally means something like 'I feel it' — 'I feel it with you'",
+     "It has no connection to compassion",
+     "It means 'I forgive you'"
+    ],
+    "es": [
+     "Significa 'adiós'",
+     "Significa literalmente algo como 'lo siento' en el sentido de sentirlo — 'lo siento contigo'",
+     "No tiene conexión con la compasión",
+     "Significa 'te perdono'"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "'Lo siento,' we translate 'I am sorry,' literally means closer to 'I feel it'; to say it to someone in pain is to say 'I feel it with you' — like Jesus, who felt their pain.",
+    "es": "'Lo siento,' que traducimos 'estoy apenado,' significa más cerca de sentirlo; decirlo a alguien que sufre es decir 'lo siento contigo' — como Jesús, que sintió su dolor."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to Ephesians 4:32, where does Christian kindness come from?",
+    "es": "Según Efesios 4:32, ¿de dónde viene la bondad cristiana?"
+   },
+   "options": {
+    "en": [
+     "It overflows from the kindness God showed us — 'as God in Christ forgave you'",
+     "From our natural temperament",
+     "From trying very hard",
+     "From following rules"
+    ],
+    "es": [
+     "Se desborda de la bondad que Dios nos mostró — 'como Dios os perdonó en Cristo'",
+     "De nuestro temperamento natural",
+     "De esforzarse mucho",
+     "De seguir reglas"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Paul says be kind 'even as God in Christ forgave you'; our kindness is a reflection and overflow of the kindness God has already shown us.",
+    "es": "Pablo dice sed benignos 'como también Dios os perdonó en Cristo'; nuestra bondad es un reflejo y desbordamiento de la bondad que Dios ya nos ha mostrado."
+   }
+  },
+  {
+   "stem": {
+    "en": "The lesson says kindness is best understood as what?",
+    "es": "La lección dice que la bondad se entiende mejor como ¿qué?"
+   },
+   "options": {
+    "en": [
+     "A debt to earn God's favor",
+     "Gratitude in action — giving what we have received",
+     "A strain we manufacture",
+     "A reward for good people"
+    ],
+    "es": [
+     "Una deuda para ganar el favor de Dios",
+     "La gratitud en acción — dar lo que hemos recibido",
+     "Una tensión que fabricamos",
+     "Una recompensa para los buenos"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Kindness is not a debt to earn favor or a strain we manufacture; it is gratitude in action, the natural response of a heart treated far more kindly than it deserved.",
+    "es": "La bondad no es una deuda para ganar favor ni una tensión que fabricamos; es la gratitud en acción, la respuesta natural de un corazón tratado mucho más bondadosamente de lo que merecía."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to the lesson, what does true compassion always become?",
+    "es": "Según la lección, ¿en qué se vuelve siempre la compasión verdadera?"
+   },
+   "options": {
+    "en": [
+     "A private feeling",
+     "A topic for discussion",
+     "A deed — it never stays a feeling but always acts",
+     "An occasional gesture"
+    ],
+    "es": [
+     "Un sentimiento privado",
+     "Un tema de discusión",
+     "Una obra — nunca se queda en sentimiento sino que siempre actúa",
+     "Un gesto ocasional"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "True compassion never stays a feeling; it always becomes a deed. When Jesus was moved, He healed, fed, and forgave; sentiment that does nothing is not real kindness.",
+    "es": "La compasión verdadera nunca se queda en sentimiento; siempre se vuelve obra. Cuando Jesús fue movido, sanó, alimentó, y perdonó; el sentimiento que nada hace no es bondad real."
+   }
+  },
+  {
+   "stem": {
+    "en": "How does the example of Caleb illustrate compassion that acts?",
+    "es": "¿Cómo ilustra el ejemplo de Caleb la compasión que actúa?"
+   },
+   "options": {
+    "en": [
+     "He organized a large charity",
+     "He gave a speech about kindness",
+     "He prayed but did nothing",
+     "He carried a plate of food to a man who couldn't walk, then bought him a Coke"
+    ],
+    "es": [
+     "Organizó una gran caridad",
+     "Dio un discurso sobre la bondad",
+     "Oró pero no hizo nada",
+     "Llevó un plato de comida a un hombre que no podía caminar, luego le compró una Coca"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Caleb carried a plate of food to a man around the corner who couldn't walk, then bought him a Coke too — noticing a nearby need and meeting it, with thoughtfulness added.",
+    "es": "Caleb llevó un plato de comida a un hombre a la vuelta de la esquina que no podía caminar, luego le compró una Coca — notando una necesidad cercana y supliéndola, con consideración añadida."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is the 'genius' of Christian kindness, according to the lesson?",
+    "es": "¿Cuál es la 'genialidad' de la bondad cristiana, según la lección?"
+   },
+   "options": {
+    "en": [
+     "It requires great resources",
+     "It is available to everyone, all the time — take the small occasion and fill it with love",
+     "It is only for the wealthy",
+     "It needs a special calling"
+    ],
+    "es": [
+     "Requiere grandes recursos",
+     "Está al alcance de todos, todo el tiempo — toma la pequeña ocasión y llénala de amor",
+     "Es solo para los ricos",
+     "Necesita un llamado especial"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "We may not feed five thousand, but we can carry a plate to a neighbor; compassion that acts takes the small occasion at hand and fills it with love.",
+    "es": "Quizá no alimentemos a cinco mil, pero podemos llevar un plato a un vecino; la compasión que actúa toma la pequeña ocasión a la mano y la llena de amor."
+   }
+  },
+  {
+   "stem": {
+    "en": "How does James 1:27 define 'pure and undefiled religion'?",
+    "es": "¿Cómo define Santiago 1:27 la 'religión pura y sin mácula'?"
+   },
+   "options": {
+    "en": [
+     "By visiting orphans and widows in their trouble, and keeping unspotted from the world",
+     "By correct ceremony",
+     "By right opinions",
+     "By regular attendance"
+    ],
+    "es": [
+     "Por visitar a huérfanos y viudas en su tribulación, y guardarse sin mancha del mundo",
+     "Por la ceremonia correcta",
+     "Por opiniones correctas",
+     "Por la asistencia regular"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "James defines pure religion not by ceremony or opinion but by looking after orphans and widows in distress — caring for those who can do nothing for us in return.",
+    "es": "Santiago define la religión pura no por ceremonia ni opinión sino por cuidar de huérfanos y viudas en aflicción — cuidar de quienes nada pueden hacer por nosotros a cambio."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to the lesson, what is the truest test of our kindness?",
+    "es": "Según la lección, ¿cuál es la prueba más cierta de nuestra bondad?"
+   },
+   "options": {
+    "en": [
+     "How kind we are to important people",
+     "How kind we feel inside",
+     "How we treat those who can do nothing for us in return",
+     "How often we mention kindness"
+    ],
+    "es": [
+     "Cuán bondadosos somos con los importantes",
+     "Cuán bondadosos nos sentimos por dentro",
+     "Cómo tratamos a quienes nada pueden hacer por nosotros a cambio",
+     "Cuán seguido mencionamos la bondad"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The truest test of kindness is how we treat those who can do nothing for us in return — the powerless, the forgotten, the down-and-out, where God's compassion flows.",
+    "es": "La prueba más cierta de la bondad es cómo tratamos a quienes nada pueden hacer por nosotros a cambio — los sin poder, los olvidados, los caídos, donde fluye la compasión de Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "In Matthew 25, what did Jesus teach about kindness to 'the least of these'?",
+    "es": "En Mateo 25, ¿qué enseñó Jesús sobre la bondad a 'uno de estos más pequeños'?"
+   },
+   "options": {
+    "en": [
+     "It is optional",
+     "It applies only to family",
+     "It earns no reward",
+     "Compassion shown or withheld to the least is shown or withheld to Him"
+    ],
+    "es": [
+     "Es opcional",
+     "Aplica solo a la familia",
+     "No gana recompensa",
+     "La compasión mostrada o negada al más pequeño es mostrada o negada a Él"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Jesus warned 'I was a stranger... sick and in prison and you did not visit Me,' teaching that compassion shown or withheld to the least of these is shown or withheld to Him.",
+    "es": "Jesús advirtió 'fui extranjero... enfermo y en la cárcel y no me visitasteis,' enseñando que la compasión mostrada o negada al más pequeño es mostrada o negada a Él."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does Colossians 3:12 ('put on kindness') teach about being kind?",
+    "es": "¿Qué enseña Colosenses 3:12 ('vestíos de benignidad') sobre ser bondadoso?"
+   },
+   "options": {
+    "en": [
+     "Kindness is a garment we deliberately put on, even before we feel it",
+     "Kindness is a fixed personality trait",
+     "Kindness cannot be chosen",
+     "Kindness comes only naturally"
+    ],
+    "es": [
+     "La bondad es una prenda que deliberadamente nos ponemos, aun antes de sentirla",
+     "La bondad es un rasgo fijo de personalidad",
+     "La bondad no se puede elegir",
+     "La bondad viene solo naturalmente"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Paul says 'put on' kindness like a garment; we don't wait until we feel kind but deliberately clothe ourselves with it, and the feeling often follows the choice.",
+    "es": "Pablo dice 'vestíos' de benignidad como una prenda; no esperamos a sentirnos bondadosos sino que deliberadamente nos revestimos de ella, y el sentimiento a menudo sigue a la decisión."
+   }
+  },
+  {
+   "stem": {
+    "en": "What common excuse does the 'put on kindness' command address?",
+    "es": "¿Qué excusa común aborda el mandamiento de 'vestirse de bondad'?"
+   },
+   "options": {
+    "en": [
+     "That kindness is too easy",
+     "That kindness is unbiblical",
+     "That we are simply 'not a naturally kind person'",
+     "That only pastors must be kind"
+    ],
+    "es": [
+     "Que la bondad es demasiado fácil",
+     "Que la bondad no es bíblica",
+     "Que sencillamente 'no somos una persona naturalmente bondadosa'",
+     "Que solo los pastores deben ser bondadosos"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "We excuse ourselves as 'not naturally kind,' but Paul treats kindness as a decision available to every believer; even the grumpiest can choose to speak gently and help.",
+    "es": "Nos excusamos como 'no naturalmente bondadosos,' pero Pablo trata la bondad como una decisión al alcance de todo creyente; hasta el más gruñón puede elegir hablar con suavidad y ayudar."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to Galatians 5:22, what keeps 'put on kindness' from being mere self-improvement?",
+    "es": "Según Gálatas 5:22, ¿qué impide que 'vestirse de bondad' sea mera superación personal?"
+   },
+   "options": {
+    "en": [
+     "Nothing; it is just willpower",
+     "It is impossible anyway",
+     "It depends on talent",
+     "Kindness is fruit of the Spirit — God grows it in a surrendered life"
+    ],
+    "es": [
+     "Nada; es solo fuerza de voluntad",
+     "Es imposible de todos modos",
+     "Depende del talento",
+     "La bondad es fruto del Espíritu — Dios la cultiva en una vida rendida"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Kindness is listed among the fruit of the Spirit, not achievements of the flesh; lasting kindness is finally produced by God in us, not manufactured by willpower.",
+    "es": "La bondad se enumera entre el fruto del Espíritu, no los logros de la carne; la bondad duradera es al final producida por Dios en nosotros, no fabricada por fuerza de voluntad."
+   }
+  },
+  {
+   "stem": {
+    "en": "How does the lesson hold together 'put on kindness' and 'kindness is fruit'?",
+    "es": "¿Cómo sostiene la lección juntos 'vestirse de bondad' y 'la bondad es fruto'?"
+   },
+   "options": {
+    "en": [
+     "They contradict each other",
+     "We deliberately choose kindness AND depend on the Spirit to grow it, like a branch abiding in the vine",
+     "Neither matters",
+     "Only one is true"
+    ],
+    "es": [
+     "Se contradicen",
+     "Deliberadamente elegimos la bondad Y dependemos del Espíritu para cultivarla, como una rama que permanece en la vid",
+     "Ninguna importa",
+     "Solo una es verdad"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "We keep choosing kindness before we feel it, and keep abiding in Christ; a branch doesn't strain to produce fruit but stays connected to the vine, and fruit comes.",
+    "es": "Seguimos eligiendo la bondad antes de sentirla, y seguimos permaneciendo en Cristo; una rama no se esfuerza por producir fruto sino que permanece en la vid, y el fruto viene."
+   }
+  },
+  {
+   "stem": {
+    "en": "How did the Christians in the Soviet prison (Kozlov's account) bear witness?",
+    "es": "¿Cómo dieron testimonio los cristianos en la prisión soviética (relato de Kozlov)?"
+   },
+   "options": {
+    "en": [
+     "Amid despair, their gentleness and faith became a shining example of real life for thousands",
+     "By organizing escapes",
+     "By despairing like the others",
+     "By keeping to themselves"
+    ],
+    "es": [
+     "En medio de la desesperación, su gentileza y fe se volvieron un ejemplo brillante de vida real para miles",
+     "Organizando fugas",
+     "Desesperando como los demás",
+     "Manteniéndose apartados"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Amid despair where men cursed and harmed themselves, the Christians did not despair; their gentleness became a shining example of real life — one could see Christ in their faces.",
+    "es": "En medio de la desesperación donde los hombres maldecían y se dañaban, los cristianos no desesperaban; su gentileza se volvió un ejemplo brillante de vida real — se veía a Cristo en sus rostros."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to Luke 6:35, to whom is God kind, and whom should we be kind to?",
+    "es": "Según Lucas 6:35, ¿con quién es bondadoso Dios, y con quién debemos serlo?"
+   },
+   "options": {
+    "en": [
+     "Only the deserving",
+     "God is kind to the unthankful and evil; we are to be kind even to those who don't deserve it",
+     "Only fellow believers",
+     "Only our friends"
+    ],
+    "es": [
+     "Solo con los que lo merecen",
+     "Dios es benigno con los ingratos y malos; debemos ser bondadosos aun con quienes no lo merecen",
+     "Solo con los creyentes",
+     "Solo con nuestros amigos"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "God is kind to the unthankful and evil, and calls us to be kind even to the ungrateful, difficult, and enemy; kindness only to the deserving is mere ordinary fairness.",
+    "es": "Dios es benigno con los ingratos y malos, y nos llama a ser bondadosos aun con el ingrato, el difícil, y el enemigo; la bondad solo con los que la merecen es apenas justicia ordinaria."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is the two-part pattern for a kind heart the lesson gives?",
+    "es": "¿Cuál es el patrón de dos partes para un corazón bondadoso que da la lección?"
+   },
+   "options": {
+    "en": [
+     "Feel deeply, but never act",
+     "Act always, never feel",
+     "Think about kindness often",
+     "Be moved (feel it), and then move (let feeling become a deed)"
+    ],
+    "es": [
+     "Sentir hondamente, pero nunca actuar",
+     "Actuar siempre, nunca sentir",
+     "Pensar en la bondad a menudo",
+     "Ser movido (sentirlo), y luego moverse (dejar que el sentimiento se vuelva obra)"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "First be genuinely moved — feel the suffering, say 'I feel you' — then move, letting feeling become a deed; compassion only felt dies, compassion without feeling becomes cold duty.",
+    "es": "Primero ser genuinamente movido — sentir el sufrimiento, decir 'te siento' — luego moverse, dejando que el sentimiento se vuelva obra; la compasión solo sentida muere, la que no siente se vuelve deber frío."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to the lesson, what is it ultimately to be kind?",
+    "es": "Según la lección, ¿qué es en última instancia ser bondadoso?"
+   },
+   "options": {
+    "en": [
+     "To have a pleasant personality",
+     "To follow social rules",
+     "Nothing less than to share the heart of Christ",
+     "To avoid conflict"
+    ],
+    "es": [
+     "Tener una personalidad agradable",
+     "Seguir reglas sociales",
+     "Nada menos que compartir el corazón de Cristo",
+     "Evitar el conflicto"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "To be kind is nothing less than to share the heart of Christ: moved with compassion at the multitudes, and then getting up to help; God makes us kind like Himself.",
+    "es": "Ser bondadoso no es nada menos que compartir el corazón de Cristo: movido a compasión ante las multitudes, y luego levantándose a ayudar; Dios nos hace bondadosos como Él."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Explain Matthew 9:36 and how Jesus' compassion reveals what kindness truly is.",
+    "es": "Explique Mateo 9:36 y cómo la compasión de Jesús revela lo que es de veras la bondad."
+   },
+   "keywords": {
+    "en": [
+     "compassion",
+     "multitudes",
+     "sheep",
+     "shepherd",
+     "moved",
+     "politeness",
+     "stirred",
+     "need"
+    ],
+    "es": [
+     "compasión",
+     "multitudes",
+     "ovejas",
+     "pastor",
+     "movido",
+     "cortesía",
+     "conmueve",
+     "necesidad"
+    ]
+   },
+   "model": {
+    "en": "Before Jesus ever commands us to be kind, the Gospels show His own kindness in action, for again and again we read that He had compassion on them. He saw the multitudes not as a faceless crowd or a problem to be managed but as weary, scattered people, like sheep having no shepherd, and something moved in Him. Kindness in its deepest Christian sense begins not with a duty we perform but with a heart genuinely moved by the condition of others. This matters because we often reduce kindness to mere politeness or good manners, but the kindness Jesus models and commands is far weightier: it is compassion, a heart that truly sees people in their need and is stirred to help them. The crowds were harassed and helpless, and Jesus did not look past them or grow annoyed; He was moved for them, and to be kind is to let our hearts be moved as His was and then to act.",
+    "es": "Antes de que Jesús nos mande siquiera ser bondadosos, los Evangelios muestran su propia bondad en acción, pues una y otra vez leemos que tuvo compasión de ellos. Vio las multitudes no como una masa sin rostro ni un problema que administrar sino como personas cansadas y esparcidas, como ovejas sin pastor, y algo se movió en Él. La bondad en su sentido cristiano más hondo comienza no con un deber que cumplimos sino con un corazón genuinamente movido por la condición de los demás. Esto importa porque a menudo reducimos la bondad a mera cortesía o buenos modales, pero la bondad que Jesús modela y manda es mucho más pesada: es compasión, un corazón que de veras ve a las personas en su necesidad y se conmueve para ayudarlas. Las multitudes estaban acosadas y desamparadas, y Jesús no las pasó por alto ni se irritó; se conmovió por ellas, y ser bondadoso es dejar que nuestro corazón sea movido como el suyo y luego actuar."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the meaning of biblical compassion using the 'lo siento / I feel you' insight.",
+    "es": "Explique el significado de la compasión bíblica usando la idea de 'lo siento / te siento.'"
+   },
+   "keywords": {
+    "en": [
+     "viscerally",
+     "core",
+     "feel",
+     "lo siento",
+     "pain",
+     "healed",
+     "fed",
+     "abstract"
+    ],
+    "es": [
+     "visceralmente",
+     "centro",
+     "sentir",
+     "lo siento",
+     "dolor",
+     "sanó",
+     "alimentó",
+     "abstracta"
+    ]
+   },
+   "model": {
+    "en": "The word the Gospels use for Jesus' compassion is remarkably physical; it does not describe a mild sympathy or passing pity but means to be moved viscerally, from the very core of one's being, so that Jesus felt the people's pain in His gut. There is a beautiful picture of this in the Spanish phrase lo siento, which we translate I am sorry but which literally means something closer to I feel it. To say lo siento to someone in pain is to say I feel it with you, and in places of deep suffering people say much the same thing, I feel you. That is exactly what Jesus was like, for He felt their pain, and so His compassion was never abstract: when people were sick He healed them, when they were hungry He fed them, on one occasion more than five thousand, and when they were trapped in sin He forgave them. Compassion that truly feels will always move toward the one who hurts.",
+    "es": "La palabra que los Evangelios usan para la compasión de Jesús es notablemente física; no describe una simpatía leve ni una lástima pasajera sino que significa ser movido visceralmente, desde el centro mismo del propio ser, de modo que Jesús sintió el dolor de la gente en sus entrañas. Hay una hermosa imagen de esto en la frase lo siento, que traducimos estoy apenado pero que significa literalmente algo más cercano a sentirlo. Decir lo siento a alguien que sufre es decir lo siento contigo, y en lugares de hondo sufrimiento la gente dice algo muy parecido, te siento. Eso es exactamente como era Jesús, pues sintió su dolor, y por eso su compasión nunca fue abstracta: cuando las personas estaban enfermas las sanó, cuando tenían hambre las alimentó, en una ocasión a más de cinco mil, y cuando estaban atrapadas en el pecado las perdonó. La compasión que de veras siente siempre se moverá hacia el que sufre."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Using Ephesians 4:32, explain where Christian kindness comes from and why that matters.",
+    "es": "Usando Efesios 4:32, explique de dónde viene la bondad cristiana y por qué eso importa."
+   },
+   "keywords": {
+    "en": [
+     "forgave",
+     "overflow",
+     "reflection",
+     "repentance",
+     "gratitude",
+     "debt",
+     "received",
+     "grace"
+    ],
+    "es": [
+     "perdonó",
+     "desbordamiento",
+     "reflejo",
+     "arrepentimiento",
+     "gratitud",
+     "deuda",
+     "recibido",
+     "gracia"
+    ]
+   },
+   "model": {
+    "en": "We cannot understand the command to be kind until we see where Christian kindness comes from. Paul does not simply say be kind; he says be kind to one another even as God in Christ forgave you, so our kindness is meant to be a reflection and overflow of the kindness God has already shown us. Scripture says it is the kindness of God that leads us to repentance, that we love because He first loved us and are kind because He was first kind to us. This changes how we approach the command, for kindness is not a debt we pay to earn God's favor nor a strain we manufacture by gritted teeth. It is gratitude in action, the natural response of a heart treated far more kindly than it deserved. When we remember how patient and merciful God has been with us in Christ, kindness toward others stops feeling like a burden and becomes the most reasonable thing in the world, for we give what we have received.",
+    "es": "No podemos entender el mandamiento de ser bondadosos hasta que veamos de dónde viene la bondad cristiana. Pablo no dice sencillamente sed bondadosos; dice sed benignos unos con otros como también Dios os perdonó en Cristo, así que nuestra bondad ha de ser un reflejo y desbordamiento de la bondad que Dios ya nos ha mostrado. La Escritura dice que es la bondad de Dios la que nos guía al arrepentimiento, que amamos porque Él nos amó primero y somos bondadosos porque Él fue bondadoso con nosotros primero. Esto cambia cómo abordamos el mandamiento, pues la bondad no es una deuda que pagamos para ganar el favor de Dios ni una tensión que fabricamos con los dientes apretados. Es la gratitud en acción, la respuesta natural de un corazón tratado mucho más bondadosamente de lo que merecía. Cuando recordamos cuán paciente y misericordioso ha sido Dios con nosotros en Cristo, la bondad hacia los demás deja de sentirse como carga y se vuelve lo más razonable del mundo, pues damos lo que hemos recibido."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain why true compassion must act, using the example of Caleb.",
+    "es": "Explique por qué la compasión verdadera debe actuar, usando el ejemplo de Caleb."
+   },
+   "keywords": {
+    "en": [
+     "deed",
+     "sentiment",
+     "healed",
+     "Caleb",
+     "plate",
+     "Coke",
+     "small",
+     "love"
+    ],
+    "es": [
+     "obra",
+     "sentimentalismo",
+     "sanó",
+     "Caleb",
+     "plato",
+     "Coca",
+     "pequeña",
+     "amor"
+    ]
+   },
+   "model": {
+    "en": "True compassion never stays a feeling; it always becomes a deed, for when Jesus was moved with compassion He did something about it, healing, feeding, and forgiving. Feeling sorry for people while doing nothing is not the kindness Scripture commends but sentiment, and sentiment costs nothing and helps no one, while the kindness God calls for gets up off its chair. Kindness like this is usually unspectacular and close to home. A young man named Caleb knew of a man around the corner who could not walk, so he carried a plate of food down to him and then went back out and bought him a Coke as well, with no grand program and no fanfare, just a person who noticed a nearby need and met it with a little extra thoughtfulness. We may not be able to feed five thousand, but we can carry a plate to a neighbor; compassion that acts does not wait for a great occasion but takes the small occasion at hand and fills it with love.",
+    "es": "La compasión verdadera nunca se queda en sentimiento; siempre se vuelve obra, pues cuando Jesús fue movido a compasión hizo algo al respecto, sanando, alimentando, y perdonando. Sentir lástima por las personas sin hacer nada no es la bondad que la Escritura elogia sino sentimentalismo, y el sentimentalismo no cuesta nada y a nadie ayuda, mientras que la bondad que Dios pide se levanta de su silla. La bondad como ésta suele ser poco espectacular y cercana a casa. Un joven llamado Caleb sabía de un hombre a la vuelta de la esquina que no podía caminar, así que le llevó un plato de comida y luego salió y le compró también una Coca-Cola, sin ningún gran programa y sin fanfarria, solo una persona que notó una necesidad cercana y la suplió con un poco de consideración extra. Quizá no podamos alimentar a cinco mil, pero podemos llevar un plato a un vecino; la compasión que actúa no espera una gran ocasión sino que toma la pequeña ocasión a la mano y la llena de amor."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How does James 1:27 and Matthew 25 show kindness toward the overlooked?",
+    "es": "¿Cómo muestran Santiago 1:27 y Mateo 25 la bondad hacia los olvidados?"
+   },
+   "keywords": {
+    "en": [
+     "orphans",
+     "widows",
+     "overlooked",
+     "stranger",
+     "prisoner",
+     "least",
+     "return",
+     "test"
+    ],
+    "es": [
+     "huérfanos",
+     "viudas",
+     "olvidados",
+     "extranjero",
+     "preso",
+     "más pequeño",
+     "cambio",
+     "prueba"
+    ]
+   },
+   "model": {
+    "en": "Scripture has a special concern for the people the world tends to overlook. From the days of Moses the widow and the orphan were placed under God's particular protection and commended to the tender care of the righteous, and James defines pure religion not by ceremony or correct opinion but by looking after orphans and widows in their distress. The truest test of our kindness is how we treat those who can do nothing for us in return, the people with no power, no status, and nothing to offer. Jesus extended the same concern to the stranger, the sick, and the prisoner, warning I was a stranger and you did not take Me in, I was sick and in prison and you did not visit Me, teaching that compassion shown or withheld to the least of these is shown or withheld to Him. Kindness is therefore not reserved for friends and equals who can repay us but flows especially toward the forgotten and the down-and-out, because that is where the compassion of God flows.",
+    "es": "La Escritura tiene una preocupación especial por las personas que el mundo tiende a pasar por alto. Desde los días de Moisés la viuda y el huérfano fueron puestos bajo la protección particular de Dios y encomendados al tierno cuidado de los justos, y Santiago define la religión pura no por ceremonia ni opinión correcta sino por cuidar de los huérfanos y las viudas en su aflicción. La prueba más cierta de nuestra bondad es cómo tratamos a quienes nada pueden hacer por nosotros a cambio, las personas sin poder, sin estatus, y sin nada que ofrecer. Jesús extendió la misma preocupación al extranjero, al enfermo, y al preso, advirtiendo fui extranjero y no me recogisteis, enfermo y en la cárcel y no me visitasteis, enseñando que la compasión mostrada o negada al más pequeño es mostrada o negada a Él. La bondad por tanto no se reserva para amigos e iguales que pueden recompensarnos sino que fluye especialmente hacia el olvidado y el caído, porque ahí es donde fluye la compasión de Dios."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain Colossians 3:12 and how kindness can be a garment we choose to wear.",
+    "es": "Explique Colosenses 3:12 y cómo la bondad puede ser una prenda que elegimos vestir."
+   },
+   "keywords": {
+    "en": [
+     "put on",
+     "garment",
+     "choose",
+     "wait",
+     "feel",
+     "excuse",
+     "personality",
+     "decision"
+    ],
+    "es": [
+     "vestir",
+     "prenda",
+     "elegir",
+     "esperar",
+     "sentir",
+     "excusa",
+     "personalidad",
+     "decisión"
+    ]
+   },
+   "model": {
+    "en": "Paul tells us to put on kindness as one puts on a garment, and the image is deliberate, for kindness is something we choose to wear intentionally each day. This means we do not have to wait until we feel kind to act kindly; on the days when we are tired, irritable, or preoccupied, we can still deliberately clothe ourselves with kindness toward the people we meet, and very often the feeling follows the choice. This protects us from a common excuse, for we tell ourselves we are simply not a naturally kind person, as though kindness were a fixed personality trait we either possess or lack. But Paul addresses kindness as a decision, a garment available to every believer to put on, so even the grumpiest among us can choose in a given moment to speak gently, to be patient, and to do the helpful thing. Character is built precisely by choosing kindness before we feel it, until the wearing of it becomes second nature.",
+    "es": "Pablo nos dice que nos vistamos de benignidad como uno se pone una prenda, y la imagen es deliberada, pues la bondad es algo que elegimos vestir intencionalmente cada día. Esto significa que no tenemos que esperar a sentirnos bondadosos para actuar con bondad; en los días en que estamos cansados, irritables, o preocupados, todavía podemos deliberadamente revestirnos de bondad hacia las personas que encontramos, y muy a menudo el sentimiento sigue a la decisión. Esto nos protege de una excusa común, pues nos decimos que sencillamente no somos una persona naturalmente bondadosa, como si la bondad fuera un rasgo fijo de personalidad que poseemos o nos falta. Pero Pablo trata la bondad como una decisión, una prenda al alcance de todo creyente para ponérsela, así que hasta el más gruñón de nosotros puede elegir en un momento dado hablar con suavidad, ser paciente, y hacer la cosa útil. El carácter se forma precisamente al elegir la bondad antes de sentirla, hasta que el vestirla se vuelve segunda naturaleza."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain Galatians 5:22 and how kindness as 'fruit' balances kindness as a choice.",
+    "es": "Explique Gálatas 5:22 y cómo la bondad como 'fruto' equilibra la bondad como elección."
+   },
+   "keywords": {
+    "en": [
+     "fruit",
+     "Spirit",
+     "willpower",
+     "grows",
+     "surrendered",
+     "branch",
+     "vine",
+     "abiding"
+    ],
+    "es": [
+     "fruto",
+     "Espíritu",
+     "fuerza de voluntad",
+     "cultiva",
+     "rendida",
+     "rama",
+     "vid",
+     "permanecer"
+    ]
+   },
+   "model": {
+    "en": "There is a deeper truth that keeps the put on kindness command from becoming mere self-improvement, for Paul lists kindness among the fruit of the Spirit, not the achievements of the flesh but the fruit the Holy Spirit grows in a surrendered life. This means genuine, lasting kindness is finally not something we manufacture by willpower at all but something God produces in us as we walk with Him. Holding the two truths together keeps us balanced: on the one hand we deliberately put on kindness, choosing it before we feel it, and on the other hand we depend on the Spirit to grow real kindness in us from the inside, knowing our own efforts will run dry. A branch does not strain to produce fruit but simply stays connected to the vine, and the fruit comes; so with kindness, we keep choosing it and keep abiding in Christ, and the Spirit makes our chosen kindness into something genuine and deep, the very kindness of God flowing through us.",
+    "es": "Hay una verdad más honda que impide que el mandamiento de vestirse de bondad se vuelva mera superación personal, pues Pablo enumera la bondad entre el fruto del Espíritu, no los logros de la carne sino el fruto que el Espíritu Santo cultiva en una vida rendida. Esto significa que la bondad genuina y duradera no es al final algo que fabricamos por fuerza de voluntad en absoluto sino algo que Dios produce en nosotros al caminar con Él. Sostener juntas las dos verdades nos mantiene equilibrados: por un lado deliberadamente nos vestimos de bondad, eligiéndola antes de sentirla, y por otro lado dependemos del Espíritu para cultivar bondad real en nosotros desde adentro, sabiendo que nuestros propios esfuerzos se secarán. Una rama no se esfuerza por producir fruto sino que sencillamente permanece conectada a la vid, y el fruto viene; así con la bondad, seguimos eligiéndola y seguimos permaneciendo en Cristo, y el Espíritu hace de nuestra bondad elegida algo genuino y hondo, la bondad misma de Dios fluyendo a través de nosotros."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Using the Kozlov account, explain how kindness becomes a witness.",
+    "es": "Usando el relato de Kozlov, explique cómo la bondad se vuelve un testimonio."
+   },
+   "keywords": {
+    "en": [
+     "witness",
+     "Soviet",
+     "Kozlov",
+     "despair",
+     "gentleness",
+     "shining",
+     "Christ",
+     "faces"
+    ],
+    "es": [
+     "testimonio",
+     "soviética",
+     "Kozlov",
+     "desesperación",
+     "gentileza",
+     "brillante",
+     "Cristo",
+     "rostros"
+    ]
+   },
+   "model": {
+    "en": "A heart full of Christ's compassion becomes one of the most powerful testimonies in the world, especially in places of darkness, for kindness shines brightest against the blackest backgrounds and the watching world cannot easily explain it away. A man named Kozlov, once a criminal and later a church leader, wrote of life in a Soviet labor camp where prisoners often served sentences of twenty or twenty-five years. Amid the general despair, where men cursed their fate, harmed themselves, and even took their own lives, the Christians did not despair, and their pure and upright lives, deep faith, and above all their gentleness toward others became a shining example of real life for thousands, so that one could see Christ reflected in their faces. Their kindness in a place of cruelty preached more loudly than any sermon, showing the radical reach of a compassion that makes the invisible God strangely visible.",
+    "es": "Un corazón lleno de la compasión de Cristo se vuelve uno de los testimonios más poderosos del mundo, especialmente en lugares de oscuridad, pues la bondad brilla más intensamente contra los fondos más negros y el mundo que observa no puede fácilmente explicarla. Un hombre llamado Kozlov, una vez criminal y luego líder de iglesia, escribió de la vida en un campo de trabajo soviético donde los presos a menudo cumplían sentencias de veinte o veinticinco años. En medio de la desesperación general, donde los hombres maldecían su suerte, se hacían daño, y hasta se quitaban la vida, los cristianos no desesperaban, y sus vidas puras y rectas, su fe profunda, y sobre todo su gentileza hacia los demás se volvieron un ejemplo brillante de vida real para miles, de modo que se podía ver a Cristo reflejado en sus rostros. Su bondad en un lugar de crueldad predicó más fuerte que cualquier sermón, mostrando el alcance radical de una compasión que hace al Dios invisible extrañamente visible."
+   }
+  },
+  {
+   "prompt": {
+    "en": "According to Luke 6:35, how far does kingdom kindness reach, and why?",
+    "es": "Según Lucas 6:35, ¿hasta dónde alcanza la bondad del reino, y por qué?"
+   },
+   "keywords": {
+    "en": [
+     "unthankful",
+     "evil",
+     "enemy",
+     "deserving",
+     "fairness",
+     "merciful",
+     "kingdom",
+     "visible"
+    ],
+    "es": [
+     "ingratos",
+     "malos",
+     "enemigo",
+     "merecen",
+     "justicia",
+     "misericordiosos",
+     "reino",
+     "visible"
+    ]
+   },
+   "model": {
+    "en": "Kindness in the kingdom of God reaches further than ordinary human kindness, for Jesus tells us that God Himself is kind to the unthankful and evil and calls us to be kind even to those who do not deserve it or return it. A kindness that extends only to the deserving is just ordinary fairness, the kind even pagans practice, but the kindness of the kingdom reaches the ungrateful, the difficult, and the enemy. Blessed are the merciful, Jesus said, for they shall obtain mercy, and in showing mercy to those who cannot repay it we reflect the very heart of God who showed mercy to us when we were His enemies. This is why such kindness makes the invisible God strangely visible: it cannot be explained by self-interest or by the ordinary calculations of the world, and so it points beyond itself to the God whose kindness has no limit and no condition.",
+    "es": "La bondad en el reino de Dios alcanza más lejos que la bondad humana ordinaria, pues Jesús nos dice que Dios mismo es benigno con los ingratos y malos y nos llama a ser bondadosos aun con quienes no lo merecen ni lo devuelven. Una bondad que se extiende solo a los que la merecen es apenas justicia ordinaria, la que hasta los paganos practican, pero la bondad del reino alcanza al ingrato, al difícil, y al enemigo. Bienaventurados los misericordiosos, dijo Jesús, porque ellos alcanzarán misericordia, y al mostrar misericordia a quienes no pueden recompensarla reflejamos el corazón mismo de Dios que nos mostró misericordia cuando éramos sus enemigos. Por esto tal bondad hace al Dios invisible extrañamente visible: no puede explicarse por el interés propio ni por los cálculos ordinarios del mundo, y así apunta más allá de sí misma al Dios cuya bondad no tiene límite ni condición."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Summarize the two-part pattern of a kind heart and what it ultimately means to be kind.",
+    "es": "Resuma el patrón de dos partes de un corazón bondadoso y qué significa en última instancia ser bondadoso."
+   },
+   "keywords": {
+    "en": [
+     "moved",
+     "move",
+     "deed",
+     "felt",
+     "duty",
+     "heart of Christ",
+     "garment",
+     "Spirit"
+    ],
+    "es": [
+     "movido",
+     "moverse",
+     "obra",
+     "sentida",
+     "deber",
+     "corazón de Cristo",
+     "prenda",
+     "Espíritu"
+    ]
+   },
+   "model": {
+    "en": "We come back to where we began, to Jesus looking out over the weary crowds and being moved with compassion, for that is the pattern for every kind heart: first to be genuinely moved, to let the suffering of others register in us, to feel it, to say with Christ I feel you, and then to move, to let that feeling become a deed. Compassion that is only felt and never acted on dies in the heart, while compassion that acts without feeling becomes cold duty, so real kindness holds both together, a heart that is moved and hands that move. To be kind, then, is nothing less than to share the heart of Christ. We put on kindness deliberately as a garment, we depend on the Spirit to grow it as fruit, we aim it especially at the overlooked and the undeserving, and we let it become our witness to a watching world, as the God who was kind to us when we were unthankful makes us kind like Himself.",
+    "es": "Volvemos a donde comenzamos, a Jesús contemplando las multitudes cansadas y siendo movido a compasión, pues ése es el patrón para todo corazón bondadoso: primero ser genuinamente movido, dejar que el sufrimiento de los demás registre en nosotros, sentirlo, decir con Cristo te siento, y luego moverse, dejar que ese sentimiento se vuelva obra. La compasión que solo se siente y nunca se actúa muere en el corazón, mientras que la compasión que actúa sin sentir se vuelve deber frío, así que la bondad verdadera sostiene ambas juntas, un corazón que es movido y manos que se mueven. Ser bondadoso, entonces, no es nada menos que compartir el corazón de Cristo. Nos vestimos de bondad deliberadamente como una prenda, dependemos del Espíritu para cultivarla como fruto, la dirigimos especialmente al olvidado y al inmerecedor, y dejamos que se vuelva nuestro testimonio ante un mundo que observa, mientras el Dios que fue bondadoso con nosotros cuando éramos ingratos nos hace bondadosos como Él."
+   }
+  }
+ ]
+};

@@ -1,0 +1,833 @@
+/* CTSEvangelism — unit 6. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "evangelism",
+ "unit": 6,
+ "totalUnits": 13,
+ "filePrefix": "CTSEvangelism",
+ "prevHref": "CTSEvangelismUnit5.html",
+ "nextHref": "CTSEvangelismUnit7.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "Methods in evangelism are best understood as:",
+    "es": "Los métodos en el evangelismo se entienden mejor como:"
+   },
+   "options": {
+    "en": [
+     "The message itself",
+     "Tools that serve the message",
+     "Optional luxuries",
+     "Equal in authority to Scripture"
+    ],
+    "es": [
+     "El mensaje mismo",
+     "Herramientas que sirven al mensaje",
+     "Lujos opcionales",
+     "Iguales en autoridad a las Escrituras"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Methods serve the message; they are useful tools but never the message itself.",
+    "es": "Los métodos sirven al mensaje; son herramientas útiles pero nunca el mensaje mismo."
+   }
+  },
+  {
+   "stem": {
+    "en": "Paul's statement 'I have become all things to all men' (1 Cor 9:22) demonstrates:",
+    "es": "La declaración de Pablo 'A todos me he hecho de todo' (1 Cor 9:22) demuestra:"
+   },
+   "options": {
+    "en": [
+     "Flexibility in method while message stays fixed",
+     "Compromise of the gospel for culture",
+     "Rigid uniformity of approach",
+     "Loss of personal identity"
+    ],
+    "es": [
+     "Flexibilidad en el método mientras el mensaje permanece fijo",
+     "Compromiso del evangelio por la cultura",
+     "Uniformidad rígida del enfoque",
+     "Pérdida de identidad personal"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Paul flexed his approach to reach different audiences while never altering the gospel itself.",
+    "es": "Pablo flexibilizó su enfoque para alcanzar diferentes audiencias sin alterar el evangelio mismo."
+   }
+  },
+  {
+   "stem": {
+    "en": "The CWT presentation begins with:",
+    "es": "La presentación del CWT comienza con:"
+   },
+   "options": {
+    "en": [
+     "A long testimony",
+     "A scripture reading",
+     "Two diagnostic questions",
+     "A formal prayer"
+    ],
+    "es": [
+     "Un testimonio largo",
+     "Una lectura de Escritura",
+     "Dos preguntas de diagnóstico",
+     "Una oración formal"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "CWT opens with two questions: certainty of eternal life, and what one would say to God.",
+    "es": "El CWT abre con dos preguntas: certeza de vida eterna, y qué diría uno a Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to CWT, God's purpose for our lives is:",
+    "es": "Según el CWT, el propósito de Dios para nuestras vidas es:"
+   },
+   "options": {
+    "en": [
+     "Material prosperity",
+     "Eternal life with Him",
+     "Religious activity",
+     "Moral improvement"
+    ],
+    "es": [
+     "Prosperidad material",
+     "Vida eterna con Él",
+     "Actividad religiosa",
+     "Mejora moral"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "John 3:16 — God gave His Son so that we 'should not perish but have everlasting life.'",
+    "es": "Juan 3:16 — Dios dio a Su Hijo para que 'no se pierda, mas tenga vida eterna'."
+   }
+  },
+  {
+   "stem": {
+    "en": "Romans 3:23 teaches that:",
+    "es": "Romanos 3:23 enseña que:"
+   },
+   "options": {
+    "en": [
+     "Some have sinned",
+     "Mostly outsiders have sinned",
+     "Only unbelievers sin",
+     "All have sinned"
+    ],
+    "es": [
+     "Algunos han pecado",
+     "Principalmente los de afuera han pecado",
+     "Solo los incrédulos pecan",
+     "Todos han pecado"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "'For all have sinned and fall short of the glory of God.'",
+    "es": "'Por cuanto todos pecaron, y están destituidos de la gloria de Dios.'"
+   }
+  },
+  {
+   "stem": {
+    "en": "In CWT, God's provision for our sin is:",
+    "es": "En el CWT, la provisión de Dios para nuestro pecado es:"
+   },
+   "options": {
+    "en": [
+     "Religious rituals",
+     "Jesus Christ",
+     "Church membership",
+     "Sincere effort"
+    ],
+    "es": [
+     "Rituales religiosos",
+     "Jesucristo",
+     "Membresía de iglesia",
+     "Esfuerzo sincero"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Jesus is the way, the truth, and the life — God's only provision for sin.",
+    "es": "Jesús es el camino, la verdad y la vida — la única provisión de Dios para el pecado."
+   }
+  },
+  {
+   "stem": {
+    "en": "The biblical response required in CWT is:",
+    "es": "La respuesta bíblica requerida en el CWT es:"
+   },
+   "options": {
+    "en": [
+     "Church attendance",
+     "A signed card",
+     "Repentance, faith, and surrender",
+     "Baptism alone"
+    ],
+    "es": [
+     "Asistencia a la iglesia",
+     "Una tarjeta firmada",
+     "Arrepentimiento, fe y rendición",
+     "Solo el bautismo"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "CWT calls for repentance from sin, faith in Christ, and surrender to Him as Lord.",
+    "es": "El CWT llama al arrepentimiento del pecado, la fe en Cristo y la rendición a Él como Señor."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Harvesting Evangelist's primary gift is:",
+    "es": "El don principal del Evangelista de Cosecha es:"
+   },
+   "options": {
+    "en": [
+     "Counseling",
+     "Apologetic argument",
+     "Calling clearly for decision",
+     "Quiet hospitality"
+    ],
+    "es": [
+     "Consejería",
+     "Argumento apologético",
+     "Llamar claramente a la decisión",
+     "Hospitalidad tranquila"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The Harvesting Evangelist gifts the call for clear, public decision for Christ.",
+    "es": "El Evangelista de Cosecha tiene el don de llamar clara y públicamente a la decisión por Cristo."
+   }
+  },
+  {
+   "stem": {
+    "en": "Peter on the Day of Pentecost ('you have crucified and put to death') exemplifies which style?",
+    "es": "Pedro el día de Pentecostés ('habéis crucificado y matado') ejemplifica ¿qué estilo?"
+   },
+   "options": {
+    "en": [
+     "Relational",
+     "Testimonial",
+     "Confrontational",
+     "Serving"
+    ],
+    "es": [
+     "Relacional",
+     "Testimonial",
+     "Confrontacional",
+     "Servicio"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Peter's pointed indictment is the classic Confrontational style — truth spoken without softening.",
+    "es": "La acusación directa de Pedro es el estilo Confrontacional clásico — verdad dicha sin suavizar."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Apologist (Intellectual) style is exemplified by:",
+    "es": "El estilo del Apologista (Intelectual) es ejemplificado por:"
+   },
+   "options": {
+    "en": [
+     "Apollos in Acts 18:28",
+     "Peter at Pentecost",
+     "Dorcas in Acts 9",
+     "The Samaritan woman"
+    ],
+    "es": [
+     "Apolos en Hechos 18:28",
+     "Pedro en Pentecostés",
+     "Dorcas en Hechos 9",
+     "La mujer samaritana"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Apollos 'vigorously refuted the Jews… from the Scriptures.'",
+    "es": "Apolos 'con gran vehemencia refutaba públicamente a los judíos… por las Escrituras'."
+   }
+  },
+  {
+   "stem": {
+    "en": "The blind man of John 9 ('one thing I know') exemplifies which style?",
+    "es": "El ciego de Juan 9 ('una cosa sé') ejemplifica ¿qué estilo?"
+   },
+   "options": {
+    "en": [
+     "Serving",
+     "Apologist",
+     "Testimonial",
+     "Confrontational"
+    ],
+    "es": [
+     "Servicio",
+     "Apologista",
+     "Testimonial",
+     "Confrontacional"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "He could not debate; he could only tell his story — the Testimonial style.",
+    "es": "No podía debatir; solo podía contar su historia — el estilo Testimonial."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Gerasene demoniac, sent home to tell his friends, exemplifies which style?",
+    "es": "El endemoniado gadareno, enviado a casa para contar a sus amigos, ejemplifica ¿qué estilo?"
+   },
+   "options": {
+    "en": [
+     "Confrontational",
+     "Apologist",
+     "Invitational",
+     "Relational"
+    ],
+    "es": [
+     "Confrontacional",
+     "Apologista",
+     "Invitacional",
+     "Relacional"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Mark 5:19 — 'Go home to your friends, and tell them what great things the Lord has done.' Relational style.",
+    "es": "Marcos 5:19 — 'Vete a tu casa, a los tuyos, y cuéntales cuán grandes cosas el Señor ha hecho contigo.' Estilo Relacional."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Samaritan woman's 'come and see' exemplifies which style?",
+    "es": "El 'venid y ved' de la mujer samaritana ejemplifica ¿qué estilo?"
+   },
+   "options": {
+    "en": [
+     "Serving",
+     "Invitational",
+     "Harvesting",
+     "Apologist"
+    ],
+    "es": [
+     "Servicio",
+     "Invitacional",
+     "Cosecha",
+     "Apologista"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "She did not preach — she invited. 'Come, see a Man…' is the Invitational style.",
+    "es": "No predicó — invitó. 'Venid, ved a un hombre…' es el estilo Invitacional."
+   }
+  },
+  {
+   "stem": {
+    "en": "Dorcas (Acts 9) and Barnabas exemplify which style?",
+    "es": "Dorcas (Hechos 9) y Bernabé ejemplifican ¿qué estilo?"
+   },
+   "options": {
+    "en": [
+     "Confrontational",
+     "Testimonial",
+     "Apologist",
+     "Serving"
+    ],
+    "es": [
+     "Confrontacional",
+     "Testimonial",
+     "Apologista",
+     "Servicio"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Dorcas made garments for widows; Barnabas met needs. Service preached for them — the Serving style.",
+    "es": "Dorcas hacía vestidos para viudas; Bernabé atendía necesidades. El servicio predicó por ellos — el estilo de Servicio."
+   }
+  },
+  {
+   "stem": {
+    "en": "Mechanical evangelism is characterized by:",
+    "es": "El evangelismo mecánico se caracteriza por:"
+   },
+   "options": {
+    "en": [
+     "Careful listening",
+     "Rigid script that ignores the hearer",
+     "Adaptation to each person",
+     "Dependence on the Spirit"
+    ],
+    "es": [
+     "Escucha cuidadosa",
+     "Guion rígido que ignora al oyente",
+     "Adaptación a cada persona",
+     "Dependencia del Espíritu"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Mechanical evangelism follows a script so rigidly that it stops listening to the actual person.",
+    "es": "El evangelismo mecánico sigue un guion tan rígidamente que deja de escuchar a la persona real."
+   }
+  },
+  {
+   "stem": {
+    "en": "Matthew 7:21 warns that:",
+    "es": "Mateo 7:21 advierte que:"
+   },
+   "options": {
+    "en": [
+     "All who say 'Lord, Lord' are saved",
+     "Emotion is required for salvation",
+     "Works save",
+     "Profession alone may be false assurance"
+    ],
+    "es": [
+     "Todos los que dicen 'Señor, Señor' son salvos",
+     "La emoción es requerida para la salvación",
+     "Las obras salvan",
+     "La profesión sola puede ser falsa seguridad"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Not everyone who says 'Lord, Lord' enters the kingdom — profession without genuine surrender is empty.",
+    "es": "No todo el que dice 'Señor, Señor' entra en el reino — la profesión sin rendición genuina es vacía."
+   }
+  },
+  {
+   "stem": {
+    "en": "A tract is used faithfully when:",
+    "es": "Un tratado se usa fielmente cuando:"
+   },
+   "options": {
+    "en": [
+     "Read together and explained — the Philip/eunuch model",
+     "Dropped anonymously in mailboxes",
+     "Substituted for personal witness",
+     "Mass-mailed without follow-up"
+    ],
+    "es": [
+     "Leído juntos y explicado — el modelo de Felipe/eunuco",
+     "Dejado anónimamente en buzones",
+     "Sustituido por el testimonio personal",
+     "Enviado masivamente sin seguimiento"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Philip read Isaiah with the eunuch and 'preached Jesus to him' — the tract serves personal witness.",
+    "es": "Felipe leyó Isaías con el eunuco y 'le anunció el evangelio de Jesús' — el tratado sirve al testimonio personal."
+   }
+  },
+  {
+   "stem": {
+    "en": "The misunderstanding of results occurs when:",
+    "es": "El malentendido sobre los resultados ocurre cuando:"
+   },
+   "options": {
+    "en": [
+     "We count professions without examining fruit",
+     "We patiently follow up converts",
+     "We trust the Spirit for the harvest",
+     "We pray and plant faithfully"
+    ],
+    "es": [
+     "Contamos profesiones sin examinar el fruto",
+     "Damos seguimiento paciente a los conversos",
+     "Confiamos en el Espíritu para la cosecha",
+     "Oramos y plantamos fielmente"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Counting raised hands or signed cards without verifying conversion produces false assurance.",
+    "es": "Contar manos levantadas o tarjetas firmadas sin verificar la conversión produce falsa seguridad."
+   }
+  },
+  {
+   "stem": {
+    "en": "1 Corinthians 3:6 reminds the evangelist that:",
+    "es": "1 Corintios 3:6 recuerda al evangelista que:"
+   },
+   "options": {
+    "en": [
+     "Personality is decisive",
+     "Methods produce growth",
+     "Effort guarantees results",
+     "God gives the increase"
+    ],
+    "es": [
+     "La personalidad es decisiva",
+     "Los métodos producen crecimiento",
+     "El esfuerzo garantiza resultados",
+     "Dios da el crecimiento"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "'I planted, Apollos watered, but God gave the increase.' Faithfulness in planting; God provides the harvest.",
+    "es": "'Yo planté, Apolos regó; pero el crecimiento lo ha dado Dios.' Fidelidad al plantar; Dios provee la cosecha."
+   }
+  },
+  {
+   "stem": {
+    "en": "The carpenter-and-tools illustration teaches that methods are:",
+    "es": "La ilustración del carpintero y las herramientas enseña que los métodos son:"
+   },
+   "options": {
+    "en": [
+     "Useless",
+     "The source of skill",
+     "The object of confidence",
+     "Servants, not masters"
+    ],
+    "es": [
+     "Inútiles",
+     "La fuente de habilidad",
+     "El objeto de confianza",
+     "Siervos, no amos"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Like a carpenter's tools, methods serve the workman; they must never become the object of confidence.",
+    "es": "Como las herramientas del carpintero, los métodos sirven al trabajador; nunca deben convertirse en el objeto de confianza."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "List the two diagnostic questions used in CWT and explain their purpose in opening a gospel conversation.",
+    "es": "Enumere las dos preguntas de diagnóstico utilizadas en el CWT y explique su propósito para abrir una conversación del evangelio."
+   },
+   "keywords": {
+    "en": [
+     "diagnostic",
+     "question",
+     "open",
+     "conversation",
+     "heaven",
+     "certain",
+     "purpose",
+     "gospel"
+    ],
+    "es": [
+     "diagnóstic",
+     "diagnostic",
+     "pregunta",
+     "abrir",
+     "conversación",
+     "conversacion",
+     "cielo",
+     "certez"
+    ]
+   },
+   "model": {
+    "en": "CWT uses two diagnostic questions: first, whether the person has come to the place of certainty that he would go to heaven if he died, and second, if God asked why He should let him in, what he would say. Their purpose is to open a gospel conversation by revealing where the person is resting his hope — in himself or in Christ — so the witness knows where to begin.",
+    "es": "El CWT usa dos preguntas de diagnóstico: primero, si la persona ha llegado al punto de certeza de que iría al cielo si muriera, y segundo, si Dios le preguntara por qué debería dejarlo entrar, qué diría. Su propósito es abrir una conversación del evangelio revelando dónde descansa la persona su esperanza — en sí misma o en Cristo — para que el testigo sepa dónde empezar."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain CWT's four-point spine — God's Purpose, Our Need, God's Provision, Our Response — and identify the key Scripture for each.",
+    "es": "Explique la columna vertebral de cuatro puntos del CWT — El Propósito de Dios, Nuestra Necesidad, La Provisión de Dios, Nuestra Respuesta — e identifique la Escritura clave para cada uno."
+   },
+   "keywords": {
+    "en": [
+     "purpose",
+     "need",
+     "provision",
+     "response",
+     "scriptur",
+     "spine",
+     "four",
+     "point"
+    ],
+    "es": [
+     "propósit",
+     "proposit",
+     "necesidad",
+     "provisión",
+     "provision",
+     "respuesta",
+     "columna",
+     "cuatro"
+    ]
+   },
+   "model": {
+    "en": "CWT's four-point spine is God's Purpose, that He created us for relationship and offers eternal life; Our Need, that sin separates us and we cannot save ourselves (Romans 3:23, 6:23); God's Provision, that Christ died and rose to pay sin's penalty (Romans 5:8); and Our Response, that we must repent and receive Christ by faith (John 1:12). Each point carries its key Scripture, giving the gospel a clear, memorable structure.",
+    "es": "La columna vertebral de cuatro puntos del CWT es el Propósito de Dios, que nos creó para relación y ofrece vida eterna; Nuestra Necesidad, que el pecado nos separa y no podemos salvarnos (Romanos 3:23, 6:23); la Provisión de Dios, que Cristo murió y resucitó para pagar la pena del pecado (Romanos 5:8); y Nuestra Respuesta, que debemos arrepentirnos y recibir a Cristo por fe (Juan 1:12). Cada punto lleva su Escritura clave, dando al evangelio una estructura clara y memorable."
+   }
+  },
+  {
+   "prompt": {
+    "en": "According to CWT, what does true repentance mean? Distinguish it from merely feeling sorry, using Acts 3:19 and Acts 26:20.",
+    "es": "Según el CWT, ¿qué significa el verdadero arrepentimiento? Distíngalo de simplemente sentir tristeza, usando Hechos 3:19 y Hechos 26:20."
+   },
+   "keywords": {
+    "en": [
+     "repent",
+     "turn",
+     "sorry",
+     "deed",
+     "change",
+     "acts",
+     "mere",
+     "genuine"
+    ],
+    "es": [
+     "arrepent",
+     "girar",
+     "volv",
+     "tristeza",
+     "hechos",
+     "cambi",
+     "mer",
+     "genuin"
+    ]
+   },
+   "model": {
+    "en": "According to CWT, true repentance is a change of mind that turns from sin to God and shows itself in changed deeds (Acts 26:20), not merely feeling sorry. Acts 3:19 calls people to repent and turn so that sins may be blotted out. Mere sorrow may regret consequences yet never turn; genuine repentance actually forsakes sin and turns toward Christ, proving itself by a changed life.",
+    "es": "Según el CWT, el verdadero arrepentimiento es un cambio de mente que se aparta del pecado hacia Dios y se muestra en hechos cambiados (Hechos 26:20), no meramente sentir tristeza. Hechos 3:19 llama a las personas a arrepentirse y convertirse para que sus pecados sean borrados. La mera tristeza puede lamentar las consecuencias pero nunca girar; el arrepentimiento genuino realmente abandona el pecado y se vuelve a Cristo, probándose por una vida cambiada."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the danger of mechanical evangelism. How does it differ from Spirit-led witness?",
+    "es": "Describa el peligro del evangelismo mecánico. ¿En qué se diferencia del testimonio guiado por el Espíritu?"
+   },
+   "keywords": {
+    "en": [
+     "mechanic",
+     "rigid",
+     "script",
+     "spirit",
+     "adapt",
+     "led",
+     "danger",
+     "listen"
+    ],
+    "es": [
+     "mecánic",
+     "mecanic",
+     "rígid",
+     "rigid",
+     "guion",
+     "espíritu",
+     "espiritu",
+     "adapt"
+    ]
+   },
+   "model": {
+    "en": "Mechanical evangelism treats a method as a rigid script to be recited the same way to everyone, regardless of the person in front of you. Its danger is that it stops listening and stops depending on the Spirit, turning a living conversation into a sales pitch. Spirit-led witness uses a method as a servant — adapting to the hearer, responding to real questions, and following the Spirit's leading rather than a fixed formula.",
+    "es": "El evangelismo mecánico trata un método como un guion rígido que se recita de la misma manera a todos, sin importar la persona frente a ti. Su peligro es que deja de escuchar y deja de depender del Espíritu, convirtiendo una conversación viva en un discurso de ventas. El testimonio guiado por el Espíritu usa un método como siervo — adaptándose al oyente, respondiendo a preguntas reales y siguiendo la dirección del Espíritu en vez de una fórmula fija."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the Harvesting Evangelist style and its two possible distortions, and explain when this style is most appropriate.",
+    "es": "Describa el estilo del Evangelista de Cosecha y sus dos posibles distorsiones, y explique cuándo es más apropiado este estilo."
+   },
+   "keywords": {
+    "en": [
+     "harvest",
+     "decision",
+     "pressure",
+     "grim",
+     "distort",
+     "appropriate",
+     "ready",
+     "style"
+    ],
+    "es": [
+     "cosech",
+     "decisión",
+     "decision",
+     "presión",
+     "presion",
+     "sombrí",
+     "sombri",
+     "distorsi"
+    ]
+   },
+   "model": {
+    "en": "The Harvesting Evangelist style presses for a decision, calling the ready to commit now. Its two distortions are the high-pressure salesman, who manipulates a verbal decision, and the grim reaper, who pushes through fear rather than love. This style is most appropriate when the Spirit has already prepared the heart and the person is ripe — ready to respond — so that calling for commitment gathers fruit rather than forcing it.",
+    "es": "El estilo del Evangelista de Cosecha presiona por una decisión, llamando a los listos a comprometerse ahora. Sus dos distorsiones son el vendedor de alta presión, que manipula una decisión verbal, y el segador sombrío, que empuja mediante el miedo en vez del amor. Este estilo es más apropiado cuando el Espíritu ya ha preparado el corazón y la persona está madura — lista para responder — de modo que llamar al compromiso recoge fruto en vez de forzarlo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Name Wayne's seven styles of evangelism and identify one biblical example for each.",
+    "es": "Nombre los siete estilos de evangelismo de Wayne e identifique un ejemplo bíblico para cada uno."
+   },
+   "keywords": {
+    "en": [
+     "harvest",
+     "confront",
+     "apolog",
+     "testimon",
+     "relation",
+     "invit",
+     "serv",
+     "style"
+    ],
+    "es": [
+     "cosech",
+     "confront",
+     "apolog",
+     "testimon",
+     "relacion",
+     "invit",
+     "servir",
+     "sirv"
+    ]
+   },
+   "model": {
+    "en": "Wayne's seven styles, each with a biblical example, are: the Harvesting/confrontational style (Peter at Pentecost, Acts 2); the apologetic style, reasoning with skeptics (Paul at Athens, Acts 17); the testimonial style, telling one's story (the blind man, John 9); the relational style, witnessing through friendship (Matthew the tax collector inviting friends, Luke 5); the invitational style, bringing others to see (Andrew bringing Peter, John 1); and the serving style, witness through deeds of love (Dorcas, Acts 9). Each suits a different person and gifting.",
+    "es": "Los siete estilos de Wayne, cada uno con un ejemplo bíblico, son: el estilo de Cosecha/confrontacional (Pedro en Pentecostés, Hechos 2); el estilo apologético, razonando con escépticos (Pablo en Atenas, Hechos 17); el estilo testimonial, contando la propia historia (el ciego, Juan 9); el estilo relacional, testificando mediante la amistad (Mateo el publicano invitando a amigos, Lucas 5); el estilo de invitación, trayendo a otros a ver (Andrés trayendo a Pedro, Juan 1); y el estilo de servicio, testimonio mediante obras de amor (Dorcas, Hechos 9). Cada uno se adapta a una persona y un don diferentes."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why does Matthew 7:21 warn against superficial decisions? How should the evangelist guard against producing false assurance?",
+    "es": "¿Por qué Mateo 7:21 advierte contra las decisiones superficiales? ¿Cómo debe el evangelista protegerse contra la producción de falsa seguridad?"
+   },
+   "keywords": {
+    "en": [
+     "superficial",
+     "false",
+     "assur",
+     "fruit",
+     "matthew",
+     "decision",
+     "guard",
+     "profess"
+    ],
+    "es": [
+     "superficial",
+     "fals",
+     "segurid",
+     "fruto",
+     "mateo",
+     "decisión",
+     "decision",
+     "profesi"
+    ]
+   },
+   "model": {
+    "en": "Matthew 7:21 warns that not everyone who says 'Lord, Lord' will enter the kingdom, only those who do the Father's will — so a verbal profession is not proof of salvation. Superficial decisions can produce false assurance, leaving someone confident yet lost. The evangelist guards against this by not rushing for a quick prayer, by explaining the cost of following Christ, and by looking for fruit and genuine repentance rather than mere words.",
+    "es": "Mateo 7:21 advierte que no todo el que dice 'Señor, Señor' entrará en el reino, sino solo los que hacen la voluntad del Padre — así que una profesión verbal no es prueba de salvación. Las decisiones superficiales pueden producir falsa seguridad, dejando a alguien confiado pero perdido. El evangelista se protege de esto no apresurando una oración rápida, explicando el costo de seguir a Cristo y buscando fruto y arrepentimiento genuino en vez de meras palabras."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Discuss the proper use of tracts in evangelism. Why is Philip and the Ethiopian eunuch (Acts 8:35) the model, and what is the danger of substitution?",
+    "es": "Discuta el uso apropiado de los tratados en el evangelismo. ¿Por qué Felipe y el eunuco etíope (Hechos 8:35) son el modelo, y cuál es el peligro de la sustitución?"
+   },
+   "keywords": {
+    "en": [
+     "tract",
+     "philip",
+     "eunuch",
+     "explain",
+     "personal",
+     "substitut",
+     "model",
+     "danger"
+    ],
+    "es": [
+     "tratad",
+     "felipe",
+     "eunuc",
+     "explic",
+     "personal",
+     "sustitu",
+     "model",
+     "peligr"
+    ]
+   },
+   "model": {
+    "en": "Philip and the Ethiopian eunuch (Acts 8:35) is the model for tract use: Philip began where the man was reading and explained the Scripture personally. A tract rightly used opens or supports a personal conversation. The danger of substitution is handing someone a tract instead of engaging them — letting paper replace the personal witness. A tract should serve the conversation, never stand in for the witness's own explanation and care.",
+    "es": "Felipe y el eunuco etíope (Hechos 8:35) son el modelo para el uso de tratados: Felipe comenzó donde el hombre estaba leyendo y le explicó la Escritura personalmente. Un tratado bien usado abre o apoya una conversación personal. El peligro de la sustitución es darle a alguien un tratado en vez de involucrarse con él — dejar que el papel reemplace el testimonio personal. Un tratado debe servir a la conversación, nunca sustituir la explicación y el cuidado del testigo mismo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain Paul's statement 'I have become all things to all men' (1 Cor 9:22). What does it teach about flexibility in method while the message remains fixed?",
+    "es": "Explique la declaración de Pablo 'A todos me he hecho de todo' (1 Corintios 9:22). ¿Qué enseña sobre la flexibilidad en el método mientras el mensaje permanece fijo?"
+   },
+   "keywords": {
+    "en": [
+     "things",
+     "flexib",
+     "method",
+     "message",
+     "fixed",
+     "save",
+     "adapt",
+     "paul"
+    ],
+    "es": [
+     "todo",
+     "flexib",
+     "método",
+     "metodo",
+     "mensaj",
+     "fij",
+     "salv",
+     "adapt"
+    ]
+   },
+   "model": {
+    "en": "When Paul said 'I have become all things to all men' (1 Cor 9:22), he meant he adapted his manner and approach to reach different people — that some might be saved. It teaches flexibility in method while the message stays fixed: the gospel never changes, but how we present it should fit the hearer. Paul changed his methods, not his message; the goal of saving some governed how far he would adapt.",
+    "es": "Cuando Pablo dijo 'A todos me he hecho de todo' (1 Corintios 9:22), quiso decir que adaptó su manera y enfoque para alcanzar a diferentes personas — para que algunos fueran salvos. Enseña flexibilidad en el método mientras el mensaje permanece fijo: el evangelio nunca cambia, pero cómo lo presentamos debe ajustarse al oyente. Pablo cambió sus métodos, no su mensaje; la meta de salvar a algunos gobernaba cuánto adaptaría."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Synthesize the unit using the carpenter-and-tools illustration. How do methods, styles, and CWT all relate as servants rather than masters?",
+    "es": "Sintetice la unidad utilizando la ilustración del carpintero y las herramientas. ¿Cómo se relacionan los métodos, los estilos y el CWT como siervos más que como amos?"
+   },
+   "keywords": {
+    "en": [
+     "carpenter",
+     "tool",
+     "method",
+     "servant",
+     "master",
+     "spirit",
+     "style",
+     "serve"
+    ],
+    "es": [
+     "carpinter",
+     "herramient",
+     "método",
+     "metodo",
+     "siervo",
+     "sirv",
+     "amo",
+     "espíritu"
+    ]
+   },
+   "model": {
+    "en": "The carpenter-and-tools illustration ties the unit together: methods, styles, and CWT are tools in the carpenter's hand, not masters over him. A skilled carpenter chooses the right tool for the work and never lets a tool dictate the job. So methods serve the gospel and the Spirit's leading; they must never become rigid masters. The witness wields them under the Spirit, choosing what fits each person, so that the tools serve the message rather than rule it.",
+    "es": "La ilustración del carpintero y las herramientas une la unidad: los métodos, los estilos y el CWT son herramientas en la mano del carpintero, no amos sobre él. Un carpintero hábil escoge la herramienta correcta para el trabajo y nunca deja que una herramienta dicte la obra. Así los métodos sirven al evangelio y a la dirección del Espíritu; nunca deben volverse amos rígidos. El testigo los maneja bajo el Espíritu, escogiendo lo que se ajusta a cada persona, para que las herramientas sirvan al mensaje en vez de gobernarlo."
+   }
+  }
+ ]
+};

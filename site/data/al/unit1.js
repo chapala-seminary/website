@@ -1,7 +1,833 @@
-/* CTSAL - unit 1: per-unit configuration and content. */
-
-const COURSE = 'al';
-
-const UNIT = 1;
-
-const PROGRESS_KEY = 'cts_' + COURSE + '_progress';
+/* CTSAL — unit 1. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "al",
+ "unit": 1,
+ "totalUnits": 10,
+ "filePrefix": "CTSAL",
+ "prevHref": null,
+ "nextHref": "CTSALUnit2.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "Jethro, who counseled Moses, was his —",
+    "es": "Jetro, quien aconsej&oacute; a Mois&eacute;s, era su —"
+   },
+   "options": {
+    "en": [
+     "brother",
+     "father-in-law",
+     "servant",
+     "successor"
+    ],
+    "es": [
+     "hermano",
+     "suegro",
+     "siervo",
+     "sucesor"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Exodus 18 calls Jethro the priest of Midian, Moses' father-in-law.",
+    "es": "&Eacute;xodo 18 llama a Jetro sacerdote de Madi&aacute;n, suegro de Mois&eacute;s."
+   }
+  },
+  {
+   "stem": {
+    "en": "In Exodus 18, Moses judged the people —",
+    "es": "En &Eacute;xodo 18, Mois&eacute;s juzgaba al pueblo —"
+   },
+   "options": {
+    "en": [
+     "from morning until evening",
+     "only on the Sabbath",
+     "once a month",
+     "at night"
+    ],
+    "es": [
+     "desde la ma&ntilde;ana hasta la tarde",
+     "solo en el s&aacute;bado",
+     "una vez al mes",
+     "de noche"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The people stood about him from morning unto evening.",
+    "es": "El pueblo estaba junto a &eacute;l desde la ma&ntilde;ana hasta la tarde."
+   }
+  },
+  {
+   "stem": {
+    "en": "Jethro's verdict on Moses' practice was —",
+    "es": "El veredicto de Jetro sobre la pr&aacute;ctica de Mois&eacute;s fue —"
+   },
+   "options": {
+    "en": [
+     "“well done”",
+     "“be patient”",
+     "“the thing is not good”",
+     "“do it longer”"
+    ],
+    "es": [
+     "«bien hecho»",
+     "«ten paciencia»",
+     "«no est&aacute; bien lo que haces»",
+     "«hazlo m&aacute;s tiempo»"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "“The thing that thou doest is not good” (Ex 18:17).",
+    "es": "«No est&aacute; bien lo que haces» (&Eacute;x 18:17)."
+   }
+  },
+  {
+   "stem": {
+    "en": "Jethro warned that Moses would —",
+    "es": "Jetro advirti&oacute; que Mois&eacute;s —"
+   },
+   "options": {
+    "en": [
+     "lose his staff",
+     "anger Pharaoh",
+     "forget the law",
+     "wear himself out"
+    ],
+    "es": [
+     "perder&iacute;a su vara",
+     "enojar&iacute;a a Fara&oacute;n",
+     "olvidar&iacute;a la ley",
+     "se desgastar&iacute;a por completo"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "“Thou wilt surely wear away” — both Moses and the people.",
+    "es": "«Desfallecer&aacute;s del todo» — Mois&eacute;s y el pueblo."
+   }
+  },
+  {
+   "stem": {
+    "en": "The FIRST qualification Jethro named, in the order given, was that the men be —",
+    "es": "La PRIMERA cualidad que nombr&oacute; Jetro, en el orden dado, fue que los hombres fueran —"
+   },
+   "options": {
+    "en": [
+     "able",
+     "wealthy",
+     "elderly",
+     "Levites"
+    ],
+    "es": [
+     "capaces",
+     "ricos",
+     "ancianos",
+     "levitas"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "“Able men” is listed first; then fear God, truth, hating covetousness.",
+    "es": "«Varones capaces» se nombra primero; luego temor de Dios, verdad, aborrecer la avaricia."
+   }
+  },
+  {
+   "stem": {
+    "en": "Which was NOT one of Jethro's four qualifications?",
+    "es": "&iquest;Cu&aacute;l NO fue una de las cuatro cualidades de Jetro?"
+   },
+   "options": {
+    "en": [
+     "fear God",
+     "men of truth",
+     "hating covetousness",
+     "skilled in war"
+    ],
+    "es": [
+     "temer a Dios",
+     "hombres veraces",
+     "aborrecer la avaricia",
+     "diestros en la guerra"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The four were: able, fearing God, men of truth, hating covetousness.",
+    "es": "Las cuatro fueron: capaces, temerosos de Dios, veraces, que aborrecen la avaricia."
+   }
+  },
+  {
+   "stem": {
+    "en": "The leaders were to be set over groups of —",
+    "es": "Los jefes deb&iacute;an ponerse sobre grupos de —"
+   },
+   "options": {
+    "en": [
+     "twos and threes",
+     "tens, fifties, hundreds, and thousands",
+     "tribes only",
+     "cities"
+    ],
+    "es": [
+     "dos y tres",
+     "decenas, cincuentenas, centenas y millares",
+     "solo tribus",
+     "ciudades"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Rulers of thousands, hundreds, fifties, and tens (Ex 18:21).",
+    "es": "Jefes de millares, centenas, cincuentenas y decenas (&Eacute;x 18:21)."
+   }
+  },
+  {
+   "stem": {
+    "en": "Under Jethro's plan, the great or hard matters were brought to —",
+    "es": "Seg&uacute;n el plan de Jetro, los asuntos grandes o dif&iacute;ciles se llevaban a —"
+   },
+   "options": {
+    "en": [
+     "the elders",
+     "the priests",
+     "Moses",
+     "the people"
+    ],
+    "es": [
+     "los ancianos",
+     "los sacerdotes",
+     "Mois&eacute;s",
+     "el pueblo"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "“Every great matter they shall bring unto thee.”",
+    "es": "«Todo asunto grave lo traer&aacute;n a ti.»"
+   }
+  },
+  {
+   "stem": {
+    "en": "The small matters were to be judged —",
+    "es": "Los asuntos peque&ntilde;os deb&iacute;an ser juzgados —"
+   },
+   "options": {
+    "en": [
+     "by Moses alone",
+     "not at all",
+     "by the appointed rulers",
+     "by Pharaoh"
+    ],
+    "es": [
+     "solo por Mois&eacute;s",
+     "de ninguna manera",
+     "por los jefes nombrados",
+     "por Fara&oacute;n"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "“Every small matter they shall judge.”",
+    "es": "«Ellos juzgar&aacute;n todo asunto peque&ntilde;o.»"
+   }
+  },
+  {
+   "stem": {
+    "en": "That this wise counsel came through Jethro, a Gentile priest, shows —",
+    "es": "Que este sabio consejo viniera por Jetro, un sacerdote gentil, muestra —"
+   },
+   "options": {
+    "en": [
+     "Moses was unspiritual",
+     "the law was Gentile",
+     "Israel had no leaders",
+     "God can send wisdom for His house through unexpected people"
+    ],
+    "es": [
+     "que Mois&eacute;s no era espiritual",
+     "que la ley era gentil",
+     "que Israel no ten&iacute;a l&iacute;deres",
+     "que Dios puede enviar sabidur&iacute;a para su casa por personas inesperadas"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Moses humbly received God-given wisdom though it came through an outsider.",
+    "es": "Mois&eacute;s recibi&oacute; con humildad sabidur&iacute;a dada por Dios aunque vino por alguien de afuera."
+   }
+  },
+  {
+   "stem": {
+    "en": "Moses' response to Jethro's counsel was that he —",
+    "es": "La respuesta de Mois&eacute;s al consejo de Jetro fue que —"
+   },
+   "options": {
+    "en": [
+     "refused it",
+     "hearkened and did all he said",
+     "asked Pharaoh first",
+     "waited forty years"
+    ],
+    "es": [
+     "lo rechaz&oacute;",
+     "oy&oacute; e hizo todo lo que dijo",
+     "primero pregunt&oacute; a Fara&oacute;n",
+     "esper&oacute; cuarenta a&ntilde;os"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "“So Moses hearkened… and did all that he had said” (Ex 18:24).",
+    "es": "«Y oy&oacute; Mois&eacute;s… e hizo todo lo que dijo» (&Eacute;x 18:24)."
+   }
+  },
+  {
+   "stem": {
+    "en": "“Let all things be done decently and in order” is found in —",
+    "es": "«H&aacute;gase todo decentemente y con orden» se encuentra en —"
+   },
+   "options": {
+    "en": [
+     "Exodus 18",
+     "Genesis 1",
+     "1 Corinthians 14:40",
+     "Acts 6"
+    ],
+    "es": [
+     "&Eacute;xodo 18",
+     "G&eacute;nesis 1",
+     "1 Corintios 14:40",
+     "Hechos 6"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Paul's word to the disordered Corinthian church.",
+    "es": "Palabra de Pablo a la desordenada iglesia de Corinto."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to the unit, church administration is best described as —",
+    "es": "Seg&uacute;n la unidad, la administraci&oacute;n de la iglesia se describe mejor como —"
+   },
+   "options": {
+    "en": [
+     "worldly bureaucracy brought into the church",
+     "Spirit-led stewardship of God's house",
+     "optional for small churches",
+     "the pastor's hobby"
+    ],
+    "es": [
+     "burocracia mundana metida en la iglesia",
+     "mayordom&iacute;a de la casa de Dios dirigida por el Esp&iacute;ritu",
+     "opcional para iglesias peque&ntilde;as",
+     "el pasatiempo del pastor"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Administration is the God-ordained ordering of God's house, not borrowed bureaucracy.",
+    "es": "La administraci&oacute;n es el ordenamiento de la casa de Dios dado por Dios, no burocracia prestada."
+   }
+  },
+  {
+   "stem": {
+    "en": "The unit teaches that disorder in the church is —",
+    "es": "La unidad ense&ntilde;a que el desorden en la iglesia es —"
+   },
+   "options": {
+    "en": [
+     "a sign of deep spirituality",
+     "required for revival",
+     "the enemy, not order",
+     "commanded in Acts"
+    ],
+    "es": [
+     "se&ntilde;al de profunda espiritualidad",
+     "necesario para el avivamiento",
+     "el enemigo, no el orden",
+     "mandado en Hechos"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Order is not the enemy of the Spirit; disorder is.",
+    "es": "El orden no es enemigo del Esp&iacute;ritu; el desorden lo es."
+   }
+  },
+  {
+   "stem": {
+    "en": "In Acts 6 the apostles chose to give themselves continually to —",
+    "es": "En Hechos 6 los ap&oacute;stoles eligieron persistir en —"
+   },
+   "options": {
+    "en": [
+     "building projects",
+     "collecting money",
+     "serving tables",
+     "prayer and the ministry of the word"
+    ],
+    "es": [
+     "proyectos de construcci&oacute;n",
+     "recoger dinero",
+     "servir a las mesas",
+     "la oraci&oacute;n y el ministerio de la palabra"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "They delegated the tables and guarded the word and prayer.",
+    "es": "Delegaron las mesas y guardaron la palabra y la oraci&oacute;n."
+   }
+  },
+  {
+   "stem": {
+    "en": "The unit calls the lone, do-everything pastor —",
+    "es": "La unidad llama al pastor solitario que lo hace todo —"
+   },
+   "options": {
+    "en": [
+     "the ideal model",
+     "“Moses before Jethro came”",
+     "a hireling",
+     "an apostle"
+    ],
+    "es": [
+     "el modelo ideal",
+     "«Mois&eacute;s antes de que llegara Jetro»",
+     "un asalariado",
+     "un ap&oacute;stol"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "He is overburdened exactly as Moses was before delegating.",
+    "es": "Est&aacute; sobrecargado igual que Mois&eacute;s antes de delegar."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to the unit, the most spiritual response of an overburdened pastor may be to —",
+    "es": "Seg&uacute;n la unidad, la respuesta m&aacute;s espiritual de un pastor sobrecargado puede ser —"
+   },
+   "options": {
+    "en": [
+     "delegate real work to able, godly people",
+     "preach longer sermons",
+     "fast more often",
+     "resign"
+    ],
+    "es": [
+     "delegar trabajo real a personas capaces y piadosas",
+     "predicar sermones m&aacute;s largos",
+     "ayunar m&aacute;s seguido",
+     "renunciar"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Delegation is obedience to God's pattern, not a lack of devotion.",
+    "es": "Delegar es obediencia al patr&oacute;n de Dios, no falta de devoci&oacute;n."
+   }
+  },
+  {
+   "stem": {
+    "en": "The unit says a church leader is fundamentally a —",
+    "es": "La unidad dice que un l&iacute;der de la iglesia es fundamentalmente un —"
+   },
+   "options": {
+    "en": [
+     "steward, not an owner",
+     "owner of the church",
+     "celebrity",
+     "mere volunteer"
+    ],
+    "es": [
+     "mayordomo, no un due&ntilde;o",
+     "due&ntilde;o de la iglesia",
+     "celebridad",
+     "simple voluntario"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The church belongs to God; the leader is entrusted with its care.",
+    "es": "La iglesia pertenece a Dios; al l&iacute;der se le conf&iacute;a su cuidado."
+   }
+  },
+  {
+   "stem": {
+    "en": "When Moses obeyed Jethro, the people went to their place —",
+    "es": "Cuando Mois&eacute;s obedeci&oacute; a Jetro, el pueblo se fue a su lugar —"
+   },
+   "options": {
+    "en": [
+     "in peace",
+     "in fear",
+     "in anger",
+     "in haste"
+    ],
+    "es": [
+     "en paz",
+     "con temor",
+     "con ira",
+     "de prisa"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Good administration brought peace to the whole congregation, not only relief to Moses.",
+    "es": "La buena administraci&oacute;n trajo paz a toda la congregaci&oacute;n, no solo alivio a Mois&eacute;s."
+   }
+  },
+  {
+   "stem": {
+    "en": "“Character before competence” in this unit means —",
+    "es": "«El car&aacute;cter antes que la competencia» en esta unidad significa —"
+   },
+   "options": {
+    "en": [
+     "gifts do not matter",
+     "only ordained men may serve",
+     "choose the loudest people",
+     "godly character is weighed first, though ability still matters"
+    ],
+    "es": [
+     "los dones no importan",
+     "solo los ordenados pueden servir",
+     "escoger a los m&aacute;s ruidosos",
+     "el car&aacute;cter piadoso se pesa primero, aunque la capacidad tambi&eacute;n importa"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Both ability and character are needed, but the God-fearing heart is weighed first.",
+    "es": "Se necesitan capacidad y car&aacute;cter, pero el coraz&oacute;n que teme a Dios se pesa primero."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "What was wrong with the way Moses was leading before Jethro spoke?",
+    "es": "&iquest;Qu&eacute; estaba mal en la manera en que Mois&eacute;s lideraba antes de que hablara Jetro?"
+   },
+   "keywords": {
+    "en": [
+     "alone",
+     "own",
+     "himself",
+     "overwhelm",
+     "deleg",
+     "share",
+     "exhaust",
+     "burden"
+    ],
+    "es": [
+     "solo",
+     "cuenta",
+     "mismo",
+     "abrum",
+     "deleg",
+     "compart",
+     "agota",
+     "carga"
+    ]
+   },
+   "model": {
+    "en": "Moses was trying to do everything himself. He sat alone, judging every dispute from morning until evening, and the burden was too heavy for one man. He was being overwhelmed and exhausted because he had not learned to delegate or share the work.",
+    "es": "Mois&eacute;s intentaba hacerlo todo &eacute;l mismo. Se sentaba solo, juzgando cada disputa desde la ma&ntilde;ana hasta la tarde, y la carga era demasiado pesada para un solo hombre. Se estaba abrumando y agotando porque no hab&iacute;a aprendido a delegar ni a compartir el trabajo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What kind of men did Jethro tell Moses to choose as leaders?",
+    "es": "&iquest;Qu&eacute; clase de hombres le dijo Jetro a Mois&eacute;s que escogiera como l&iacute;deres?"
+   },
+   "keywords": {
+    "en": [
+     "able",
+     "capab",
+     "fear",
+     "truth",
+     "honest",
+     "covet",
+     "greed",
+     "God"
+    ],
+    "es": [
+     "capac",
+     "teme",
+     "dios",
+     "verdad",
+     "honest",
+     "codici",
+     "avari",
+     "ganan"
+    ]
+   },
+   "model": {
+    "en": "Jethro told Moses to choose able men who fear God, men of truth, hating covetousness. They were to be capable and honest, fearing God and refusing dishonest gain — character weighed before mere ability.",
+    "es": "Jetro le dijo a Mois&eacute;s que escogiera varones capaces que teman a Dios, hombres veraces, que aborrezcan la avaricia. Deb&iacute;an ser capaces y honestos, temerosos de Dios y libres de toda ganancia deshonesta — el car&aacute;cter pesado antes que la mera capacidad."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the structure Jethro proposed and how matters were handled within it.",
+    "es": "Describa la estructura que propuso Jetro y c&oacute;mo se manejaban los asuntos dentro de ella."
+   },
+   "keywords": {
+    "en": [
+     "fifty",
+     "hundred",
+     "thousand",
+     "ruler",
+     "small",
+     "great",
+     "matter",
+     "level"
+    ],
+    "es": [
+     "cincuent",
+     "centen",
+     "millar",
+     "jefe",
+     "pequen",
+     "grand",
+     "asunt",
+     "nivel"
+    ]
+   },
+   "model": {
+    "en": "Jethro proposed rulers over thousands, hundreds, fifties, and tens. The small matters were judged by these rulers at every level, and only the great or hard matters were brought up to Moses.",
+    "es": "Jetro propuso jefes sobre millares, centenas, cincuentenas y decenas. Los asuntos peque&ntilde;os eran juzgados por estos jefes en cada nivel, y solo los asuntos grandes o dif&iacute;ciles se llevaban a Mois&eacute;s."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why is it significant that this counsel came through Jethro, a Gentile priest from outside the covenant?",
+    "es": "&iquest;Por qu&eacute; es significativo que este consejo viniera por Jetro, un sacerdote gentil de fuera del pacto?"
+   },
+   "keywords": {
+    "en": [
+     "Gentile",
+     "unexpect",
+     "wisdom",
+     "outside",
+     "God",
+     "listen",
+     "through",
+     "humbl"
+    ],
+    "es": [
+     "gentil",
+     "inesper",
+     "sabidur",
+     "fuera",
+     "dios",
+     "escuch",
+     "traves",
+     "humild"
+    ]
+   },
+   "model": {
+    "en": "It shows that God can send wisdom for the ordering of His house through an unexpected person, even a Gentile from outside the covenant. Moses, though he spoke with God, humbly listened, because good counsel is God's gift wherever it comes from.",
+    "es": "Muestra que Dios puede enviar sabidur&iacute;a para ordenar su casa a trav&eacute;s de una persona inesperada, incluso un gentil de fuera del pacto. Mois&eacute;s, aunque hablaba con Dios, escuch&oacute; con humildad, porque el buen consejo es un don de Dios venga de donde venga."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How does “Let all things be done decently and in order” (1 Cor 14:40) relate to church administration?",
+    "es": "&iquest;C&oacute;mo se relaciona «H&aacute;gase todo decentemente y con orden» (1 Co 14:40) con la administraci&oacute;n de la iglesia?"
+   },
+   "keywords": {
+    "en": [
+     "order",
+     "decent",
+     "Spirit",
+     "chaos",
+     "disorder",
+     "enemy",
+     "serve",
+     "peace"
+    ],
+    "es": [
+     "orden",
+     "decen",
+     "espiritu",
+     "caos",
+     "desorden",
+     "enemig",
+     "sirve",
+     "paz"
+    ]
+   },
+   "model": {
+    "en": "Paul says all things should be done decently and in order. Order is not the enemy of the Spirit; disorder is. Good order serves the Spirit's work and brings peace to the church instead of chaos.",
+    "es": "Pablo dice que todo debe hacerse decentemente y con orden. El orden no es enemigo del Esp&iacute;ritu; el desorden lo es. El buen orden sirve a la obra del Esp&iacute;ritu y trae paz a la iglesia en lugar de caos."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does it mean that a church leader is a steward and not an owner?",
+    "es": "&iquest;Qu&eacute; significa que un l&iacute;der de la iglesia es un mayordomo y no un due&ntilde;o?"
+   },
+   "keywords": {
+    "en": [
+     "steward",
+     "own",
+     "belong",
+     "account",
+     "entrust",
+     "God",
+     "flock",
+     "care"
+    ],
+    "es": [
+     "mayordom",
+     "dueno",
+     "pertenec",
+     "dios",
+     "confi",
+     "rendi",
+     "cuida",
+     "responsab"
+    ]
+   },
+   "model": {
+    "en": "A leader is a steward, not an owner. The church belongs to God, not to the pastor. He is entrusted with its care and must one day give account to the One whose house it truly is.",
+    "es": "El l&iacute;der es un mayordomo, no un due&ntilde;o. La iglesia pertenece a Dios, no al pastor. Se le conf&iacute;a su cuidado y un d&iacute;a debe rendir cuentas a Aquel a quien de veras pertenece la casa."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why is delegation a spiritual act and not merely a management technique?",
+    "es": "&iquest;Por qu&eacute; delegar es un acto espiritual y no solo una t&eacute;cnica administrativa?"
+   },
+   "keywords": {
+    "en": [
+     "deleg",
+     "obedi",
+     "pattern",
+     "God",
+     "free",
+     "word",
+     "prayer",
+     "raise"
+    ],
+    "es": [
+     "deleg",
+     "obedi",
+     "patron",
+     "dios",
+     "liber",
+     "libre",
+     "palabra",
+     "oracion"
+    ]
+   },
+   "model": {
+    "en": "Delegation is obedience to a pattern God Himself gave, not just a management technique. It frees the leader for the word and prayer and raises up other people to use their gifts.",
+    "es": "Delegar es obediencia a un patr&oacute;n que Dios mismo dio, no solo una t&eacute;cnica administrativa. Libera al l&iacute;der para la palabra y la oraci&oacute;n y levanta a otras personas para que usen sus dones."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does the example in Acts 6 show about a leader's priorities?",
+    "es": "&iquest;Qu&eacute; muestra el ejemplo de Hechos 6 sobre las prioridades de un l&iacute;der?"
+   },
+   "keywords": {
+    "en": [
+     "apostle",
+     "table",
+     "word",
+     "prayer",
+     "seven",
+     "appoint",
+     "deleg",
+     "ministr"
+    ],
+    "es": [
+     "apostol",
+     "servir",
+     "palabra",
+     "oracion",
+     "siete",
+     "deleg",
+     "ministerio",
+     "encarg"
+    ]
+   },
+   "model": {
+    "en": "In Acts 6 the apostles refused to leave the word of God to serve tables. They appointed seven men to that service and gave themselves continually to prayer and the ministry of the word. It is Jethro's pattern of delegation in the church.",
+    "es": "En Hechos 6 los ap&oacute;stoles no quisieron dejar la palabra de Dios para servir a las mesas. Encargaron a siete hombres ese servicio y se dedicaron de continuo a la oraci&oacute;n y al ministerio de la palabra. Es el patr&oacute;n de delegaci&oacute;n de Jetro en la iglesia."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What is the danger to a leader who refuses to delegate?",
+    "es": "&iquest;Cu&aacute;l es el peligro para un l&iacute;der que se niega a delegar?"
+   },
+   "keywords": {
+    "en": [
+     "weari",
+     "exhaust",
+     "neglect",
+     "alone",
+     "famil",
+     "crush",
+     "burn",
+     "collaps"
+    ],
+    "es": [
+     "agota",
+     "cansa",
+     "desgast",
+     "abandon",
+     "solo",
+     "famil",
+     "aplast",
+     "colaps"
+    ]
+   },
+   "model": {
+    "en": "A leader who refuses to delegate will grow weary and burn out, just as Jethro warned. He becomes exhausted, neglects the people and even his own family, and is finally crushed or collapses under a load too heavy to carry alone.",
+    "es": "Un l&iacute;der que se niega a delegar se desgastar&aacute; y se agotar&aacute;, tal como advirti&oacute; Jetro. Queda cansado, abandona al pueblo y aun a su propia familia, y finalmente es aplastado o colapsa bajo una carga demasiado pesada para llevarla solo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "In one or two sentences, what is biblical administration according to this unit?",
+    "es": "En una o dos oraciones, &iquest;qu&eacute; es la administraci&oacute;n b&iacute;blica seg&uacute;n esta unidad?"
+   },
+   "keywords": {
+    "en": [
+     "steward",
+     "Spirit",
+     "God",
+     "house",
+     "order",
+     "mission",
+     "peopl",
+     "consum"
+    ],
+    "es": [
+     "mayordom",
+     "espiritu",
+     "dios",
+     "casa",
+     "orden",
+     "mision",
+     "puebl",
+     "consum"
+    ]
+   },
+   "model": {
+    "en": "Biblical administration is Spirit-led stewardship of God's house. It orders the work so the leader is not consumed and the people are not neglected, freeing the church to fulfill its mission decently and in order.",
+    "es": "La administraci&oacute;n b&iacute;blica es la mayordom&iacute;a de la casa de Dios dirigida por el Esp&iacute;ritu. Ordena la obra para que el l&iacute;der no sea consumido ni el pueblo descuidado, liberando a la iglesia para cumplir su misi&oacute;n decentemente y con orden."
+   }
+  }
+ ]
+};

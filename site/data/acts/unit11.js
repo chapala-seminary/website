@@ -1,43 +1,755 @@
-/* CTSActs - unit 11: per-unit configuration and content. */
-
-const UNIT = 11;
-
-const CURRENT_UNIT = 11;
-
-const NEXT_URL = 'CTSActsCertificate.html';
-
-const mcQuestions = [
-    { textEn: "1. The book of Acts ends:", textEs: "1. El libro de Hechos termina:", optionsEn: ["With Paul's martyrdom under Nero", "Mid-sentence with a participle (preaching, teaching, no one forbidding him)", "With a formal benediction", "With Christ's return"], optionsEs: ["Con el martirio de Pablo bajo Nerón", "A media frase con un participio (predicando, enseñando, sin impedimento)", "Con una bendición formal", "Con el regreso de Cristo"], correct: 1 },
-    { textEn: "2. Acts 1:8 — the launching commission of the book — sends the disciples to be witnesses:", textEs: "2. Hechos 1:8 — la comisión de lanzamiento del libro — envía a los discípulos a ser testigos:", optionsEn: ["Only in Jerusalem", "Only to Jews", "In Jerusalem, Judea, Samaria, and to the end of the earth", "Only to the Roman Empire"], optionsEs: ["Sólo en Jerusalén", "Sólo a judíos", "En Jerusalén, Judea, Samaria, y hasta lo último de la tierra", "Sólo al Imperio Romano"], correct: 2 },
-    { textEn: "3. The unique characteristic of Acts among Bible books is that:", textEs: "3. La característica única de Hechos entre los libros de la Biblia es que:", optionsEn: ["It is the longest book in the Bible", "It is the only book by Luke", "It alone has no doxology, amen, or formal closing — leaving the story open", "It quotes more Scripture than any other book"], optionsEs: ["Es el libro más largo de la Biblia", "Es el único libro de Lucas", "Es el único sin doxología, amén o cierre formal — dejando la historia abierta", "Cita más Escritura que cualquier otro libro"], correct: 2 },
-    { textEn: "4. Acts traces the gospel through ethnic and social categories. Which sequence captures Luke's deliberate progression?", textEs: "4. Hechos traza el evangelio a través de categorías étnicas y sociales. ¿Qué secuencia captura la progresión deliberada de Lucas?", optionsEn: ["Jews → Hellenists → Samaritans → Ethiopian → Pharisee → Gentile centurion → Greeks → end of the earth", "Roman, Greek, Jew", "Apostles only", "King and council"], optionsEs: ["Judíos → helenistas → samaritanos → etíope → fariseo → centurión gentil → griegos → fin de la tierra", "Romano, griego, judío", "Sólo apóstoles", "Rey y concilio"], correct: 0 },
-    { textEn: "5. Five lessons Acts insists on include all of the following EXCEPT:", textEs: "5. Cinco lecciones en que insiste Hechos incluyen todas las siguientes EXCEPTO:", optionsEn: ["The church was born of the Spirit", "The gospel is for everyone", "The gospel travels through ordinary believers", "The gospel cannot be stopped", "Christianity guarantees freedom from suffering"], optionsEs: ["La iglesia nació del Espíritu", "El evangelio es para todos", "El evangelio viaja a través de creyentes ordinarios", "El evangelio no puede ser detenido", "El cristianismo garantiza libertad del sufrimiento"], correct: 4 },
-    { textEn: "6. Acts 4:13 — the Sanhedrin's reluctant credential about Peter and John — was that they:", textEs: "6. Hechos 4:13 — la credencial a regañadientes del Sanedrín sobre Pedro y Juan — fue que:", optionsEn: ["Had been with Jesus", "Were learned scholars", "Spoke many languages", "Held official rabbinical degrees"], optionsEs: ["Habían estado con Jesús", "Eran eruditos letrados", "Hablaban muchos idiomas", "Tenían títulos rabínicos oficiales"], correct: 0 },
-    { textEn: "7. The two most disarming words in the New Testament, spoken by Ananias to a blind former persecutor, were:", textEs: "7. Las dos palabras más desarmantes del Nuevo Testamento, dichas por Ananías a un ex-perseguidor ciego, fueron:", optionsEn: ["Receive forgiveness", "Be baptized", "Believe immediately", "Brother Saul"], optionsEs: ["Recibe perdón", "Sé bautizado", "Cree de inmediato", "Hermano Saulo"], correct: 3 },
-    { textEn: "8. Felix's response to Paul's preaching ('convenient time') and Agrippa's response ('almost') both demonstrate:", textEs: "8. La respuesta de Félix a la predicación de Pablo ('en teniendo oportunidad') y la respuesta de Agripa ('por poco') demuestran:", optionsEn: ["The danger of postponing or stopping short of conversion", "Roman political wisdom", "The strength of pagan philosophy", "The legitimacy of partial belief"], optionsEs: ["El peligro de posponer o quedarse corto de la conversión", "La sabiduría política romana", "La fuerza de la filosofía pagana", "La legitimidad de la creencia parcial"], correct: 0 },
-    { textEn: "9. The 'Acts 29' framing of Christian life means that:", textEs: "9. El marco de 'Hechos 29' de la vida cristiana significa que:", optionsEn: ["A 29th chapter exists in some manuscripts", "Every Christian's life since AD 62 is a paragraph in the unfinished book Luke began", "Acts has 29 sermons", "There are 29 cities mentioned"], optionsEs: ["Existe un capítulo 29 en algunos manuscritos", "Cada vida cristiana desde el año 62 d.C. es un párrafo en el libro inconcluso que Lucas comenzó", "Hechos tiene 29 sermones", "Se mencionan 29 ciudades"], correct: 1 },
-    { textEn: "10. Aquila and Priscilla discipled Apollos at:", textEs: "10. Aquila y Priscila discipularon a Apolos en:", optionsEn: ["The temple", "The Jerusalem council", "Their kitchen table (in private)", "A theological school"], optionsEs: ["El templo", "El concilio de Jerusalén", "Su mesa de cocina (en privado)", "Una escuela teológica"], correct: 2 },
-    { textEn: "11. Lydia hosted the first European church in:", textEs: "11. Lidia hospedó la primera iglesia europea en:", optionsEn: ["The synagogue", "The Philippian jail", "Her living room", "A rented hall"], optionsEs: ["La sinagoga", "La cárcel filipense", "Su sala", "Un salón rentado"], correct: 2 },
-    { textEn: "12. The unnamed teenager in Acts 23 saved the apostle Paul's life by:", textEs: "12. El adolescente sin nombre en Hechos 23 salvó la vida del apóstol Pablo:", optionsEn: ["Distracting the assassins", "Reporting the forty-man oath plot to Lysias", "Bribing the Sanhedrin", "Smuggling Paul out of jail"], optionsEs: ["Distrayendo a los asesinos", "Reportando el complot del juramento de cuarenta hombres a Lisias", "Sobornando al Sanedrín", "Sacando a Pablo de la cárcel"], correct: 1 },
-    { textEn: "13. The chain on Paul's wrist in Rome eventually reached:", textEs: "13. La cadena en la muñeca de Pablo en Roma eventualmente alcanzó:", optionsEn: ["The Sanhedrin", "The Antioch church", "The Greek philosophers", "Caesar's own praetorian household (Philippians 4:22)"], optionsEs: ["El Sanedrín", "La iglesia de Antioquía", "Los filósofos griegos", "La propia casa pretoriana del César (Filipenses 4:22)"], correct: 3 },
-    { textEn: "14. Stephen, Philip, Aquila, Priscilla, and the unnamed Jerusalem refugees who started the Antioch mission demonstrate that:", textEs: "14. Esteban, Felipe, Aquila, Priscila y los refugiados anónimos de Jerusalén que iniciaron la misión de Antioquía demuestran que:", optionsEn: ["Only apostles spread the gospel", "Most missionaries were academics", "The gospel travels through ordinary believers, not just professional apostles", "The first Christians were all priests"], optionsEs: ["Sólo los apóstoles propagaron el evangelio", "La mayoría de los misioneros eran académicos", "El evangelio viaja a través de creyentes ordinarios, no sólo apóstoles profesionales", "Los primeros cristianos eran todos sacerdotes"], correct: 2 },
-    { textEn: "15. The opposing forces that tried to stop the gospel in Acts (Sanhedrin, Saul, Herod, Demetrius, the 40-man oath, the Euroclydon) all:", textEs: "15. Las fuerzas opositoras que intentaron detener el evangelio en Hechos (Sanedrín, Saulo, Herodes, Demetrio, el juramento de 40, el Euroclidón) todas:", optionsEn: ["Eventually succeeded", "Were ignored by Luke", "Required apostolic intervention", "Were turned by the Lord into part of the gospel's itinerary"], optionsEs: ["Eventualmente tuvieron éxito", "Fueron ignoradas por Lucas", "Requirieron intervención apostólica", "Fueron convertidas por el Señor en parte del itinerario del evangelio"], correct: 3 },
-    { textEn: "16. The cost of the gospel in Acts is repeatedly visible in:", textEs: "16. El costo del evangelio en Hechos es repetidamente visible en:", optionsEn: ["Free indulgences and protection", "Stoning, beheading, jailings, beatings, shipwrecks, and the Ephesian magic-book burning", "Comfortable Roman patronage", "Gentle persuasion alone"], optionsEs: ["Indulgencias y protección gratuitas", "Apedreamiento, decapitación, encarcelamientos, golpes, naufragios y la quema de libros mágicos efesios", "Patrocinio romano cómodo", "Persuasión gentil solamente"], correct: 1 },
-    { textEn: "17. Wayne's three closing sentences from Acts (the three he 'has come back to most often in forty years of preaching') are:", textEs: "17. Las tres frases finales de Wayne de Hechos (las tres a las que ha 'vuelto más a menudo en cuarenta años de predicación') son:", optionsEn: ["Acts 1:8 (you shall be witnesses), Acts 4:13 (they had been with Jesus), Acts 28:31 (preaching with all confidence)", "Acts 2:38, 16:31, 17:30", "Acts 5:29, 9:6, 26:18", "Acts 1:1, 14:22, 20:28"], optionsEs: ["Hechos 1:8 (me seréis testigos), Hechos 4:13 (habían estado con Jesús), Hechos 28:31 (predicando con toda confianza)", "Hechos 2:38, 16:31, 17:30", "Hechos 5:29, 9:6, 26:18", "Hechos 1:1, 14:22, 20:28"], correct: 0 },
-    { textEn: "18. Wayne's pastoral charge to those still in a storm is to:", textEs: "18. La encomienda pastoral de Wayne para los que todavía están en una tormenta es:", optionsEn: ["Pray for the storm to end immediately", "Stay on the boat until the Captain releases you, sing at midnight if needed, look up the mountain at the engines you cannot see", "Find a different church", "Stop all ministry until the storm passes"], optionsEs: ["Orar para que la tormenta termine de inmediato", "Quedarse en el barco hasta que el Capitán les suelte, cantar a la medianoche si es necesario, mirar cuesta arriba a las máquinas que no pueden ver", "Encontrar otra iglesia", "Detener todo ministerio hasta que pase la tormenta"], correct: 1 },
-    { textEn: "19. Knowledge of the book of Acts is not the same as a place in it because:", textEs: "19. El conocimiento del libro de Hechos no es lo mismo que un lugar en él porque:", optionsEn: ["The book is too long to memorize", "Greek and Hebrew are required", "Only seminary graduates qualify", "Felix and Agrippa heard Paul preach the book's content yet died lost — only personal trust in the Lord Jesus Christ saves"], optionsEs: ["El libro es demasiado largo para memorizar", "Se requieren griego y hebreo", "Sólo los graduados de seminario califican", "Félix y Agripa oyeron a Pablo predicar el contenido del libro y aun así murieron perdidos — sólo la confianza personal en el Señor Jesucristo salva"], correct: 3 },
-    { textEn: "20. The closing image of Wayne's final lecture is that the Lord will eventually:", textEs: "20. La imagen final de la última lección de Wayne es que el Señor eventualmente:", optionsEn: ["Lay down our pen, leaving our paragraph open at the bottom of the page so the next generation can keep writing", "Bring an end to all witness", "Restore Acts to a closed book", "Repeat history exactly"], optionsEs: ["Dejará nuestra pluma, dejando nuestro párrafo abierto al pie de la página para que la siguiente generación siga escribiendo", "Pondrá fin a todo testimonio", "Restaurará Hechos como libro cerrado", "Repetirá la historia exactamente"], correct: 0 }
-];
-
-const kwQuestions = [
-    { textEn: "21. Discuss why the Holy Spirit deliberately left the book of Acts without a formal ending and what theological weight this carries for the ongoing church.", textEs: "21. Discuta por qué el Espíritu Santo deliberadamente dejó el libro de Hechos sin un final formal y qué peso teológico tiene esto para la iglesia continua.", kwEn: ["open", "ending", "29", "ongoing", "miss", "spirit", "church", "contin"], kwEs: ["abiert", "final", "29", "continú", "misión", "espíritu", "iglesia", "siguien"], modelEn: "The Holy Spirit deliberately left Acts without a formal ending because the mission was never meant to conclude with Paul's imprisonment in Rome; the book ends mid-sentence with 'preaching... teaching... no one forbidding him,' an open, ongoing scene rather than a closed story. This carries real theological weight for the ongoing church: there is no chapter 29 because the Spirit intends every generation of the church to write the next installment, continuing the same mission Luke recorded, meaning the reader is not merely studying a completed history but is invited into the still-unfinished story.", modelEs: "El Esp\u00edritu Santo dej\u00f3 deliberadamente Hechos sin un final formal porque la misi\u00f3n nunca fue pensada para concluir con el encarcelamiento de Pablo en Roma; el libro termina a mitad de frase con 'predicando... ense\u00f1ando... sin impedimento,' una escena abierta y continua en lugar de una historia cerrada. Esto tiene un peso teol\u00f3gico real para la iglesia continua: no hay un cap\u00edtulo 29 porque el Esp\u00edritu quiere que cada generaci\u00f3n de la iglesia escriba el siguiente cap\u00edtulo, y la misi\u00f3n contin\u00faa siendo la misma que Lucas registr\u00f3, lo cual significa que el lector no solo estudia una historia terminada sino que es invitado a la historia todav\u00eda inconclusa." },
-    { textEn: "22. Trace the gospel's progression through ethnic and social categories in Acts (Jerusalem Jews → Hellenists → Samaritans → Ethiopian → Saul → Cornelius → Antioch Gentiles → philosophers → Caesar's household). What does this teach us?", textEs: "22. Trace la progresión del evangelio a través de categorías étnicas y sociales en Hechos (judíos de Jerusalén → helenistas → samaritanos → etíope → Saulo → Cornelio → gentiles de Antioquía → filósofos → casa del César). ¿Qué nos enseña?", kwEn: ["progres", "ethnic", "boundar", "univers", "gospel", "jew", "gentil", "all"], kwEs: ["progres", "étnic", "fronter", "univers", "evangelio", "judí", "gentil", "todos"], modelEn: "Acts traces the gospel's progression through every ethnic and social boundary imaginable: from Jerusalem Jews to Hellenists, Samaritans, an Ethiopian eunuch, a persecuting Jew named Saul, a Roman centurion named Cornelius, Antioch Gentiles, Athenian philosophers, and finally Caesar's own household. This teaches that the gospel is universal by design, never intended to stop at any ethnic, social, or geographic boundary; Luke deliberately structures Acts to show the message crossing every line that once separated Jew from Gentile, insider from outsider, until it reaches all people everywhere.", modelEs: "Hechos traza la progresi\u00f3n del evangelio a trav\u00e9s de cada frontera \u00e9tnica y social imaginable: desde los jud\u00edos de Jerusal\u00e9n hasta los helenistas, los samaritanos, un eunuco et\u00edope, un jud\u00edo perseguidor llamado Saulo, un centuri\u00f3n romano llamado Cornelio, los gentiles de Antioqu\u00eda, los fil\u00f3sofos atenienses, y finalmente la propia casa del C\u00e9sar. Esto ense\u00f1a que el evangelio es universal por dise\u00f1o, nunca destinado a detenerse en ninguna frontera \u00e9tnica, social o geogr\u00e1fica; Lucas estructura deliberadamente Hechos para mostrar el mensaje cruzando cada l\u00ednea que alguna vez separ\u00f3 al jud\u00edo del gentil, al de adentro del de afuera, hasta que alcanza a todos en todas partes." },
-    { textEn: "23. Discuss Acts 4:13 ('they had been with Jesus') as the only credential that ultimately matters in ministry. How does this challenge modern theological education?", textEs: "23. Discuta Hechos 4:13 ('habían estado con Jesús') como la única credencial que finalmente importa en el ministerio. ¿Cómo desafía esto a la educación teológica moderna?", kwEn: ["been", "jesus", "credent", "minis", "train", "presenc", "with", "educ"], kwEs: ["estado", "jesús", "credenc", "minis", "prepar", "presenc", "con", "educ"], modelEn: "Acts 4:13 records that the council marveled at Peter and John's boldness, noting they were uneducated and untrained men, yet took note that they had been with Jesus \u2014 the only credential Luke bothers to name. This challenges modern theological education because it suggests that formal training, while valuable, is not the ultimate qualification for ministry; a person can hold every academic credential and lack the transforming presence of having genuinely been with Jesus, while another with no formal schooling at all can carry undeniable spiritual authority simply because time with Christ marked them, meaning seminaries exist to serve that presence, never to replace it.", modelEs: "Hechos 4:13 registra que el concilio se maravill\u00f3 del denuedo de Pedro y Juan, notando que eran hombres sin letras y sin preparaci\u00f3n, pero tomaron nota de que hab\u00edan estado con Jes\u00fas \u2014 la \u00fanica credencial que Lucas se molesta en nombrar. Esto desaf\u00eda a la educaci\u00f3n teol\u00f3gica moderna porque sugiere que la preparaci\u00f3n formal, aunque valiosa, no es la calificaci\u00f3n \u00faltima para el ministerio; una persona puede tener toda credencial acad\u00e9mica y carecer de la presencia transformadora de haber estado genuinamente con Jes\u00fas, mientras que otra sin ninguna preparaci\u00f3n formal puede llevar una autoridad espiritual innegable simplemente porque el tiempo con Cristo la marc\u00f3, lo cual significa que los seminarios existen para servir a esa presencia, nunca para reemplazarla." },
-    { textEn: "24. Acts shows the gospel traveling through ordinary believers (Stephen, Philip, Aquila and Priscilla, unnamed refugees, the unnamed nephew). Discuss the implications for lay ministry today.", textEs: "24. Hechos muestra al evangelio viajando a través de creyentes ordinarios (Esteban, Felipe, Aquila y Priscila, refugiados sin nombre, el sobrino sin nombre). Discuta las implicaciones para el ministerio laico hoy.", kwEn: ["ordin", "lay", "unnam", "minis", "priest", "stephen", "philip", "everyday"], kwEs: ["ordina", "laic", "nombre", "minis", "sacerdoc", "esteban", "felipe", "cotidian"], modelEn: "Acts consistently shows the gospel advancing through ordinary, often unnamed believers rather than only through apostles: Stephen and Philip were deacons pressed into evangelism by persecution, unnamed refugees scattered by Saul's persecution planted the church at Antioch, and even an unnamed nephew saved Paul's life. This has huge implications for lay ministry today: the New Testament pattern of ministry was never meant to rest solely on a professional priesthood of paid clergy, but on the priesthood of all believers doing everyday, unglamorous gospel work, meaning every believer, not just the credentialed few, is called and equipped to carry the mission forward.", modelEs: "Hechos muestra consistentemente al evangelio avanzando a trav\u00e9s de creyentes ordinarios y a menudo sin nombre en lugar de solo a trav\u00e9s de ap\u00f3stoles: Esteban y Felipe eran di\u00e1conos empujados al evangelismo por la persecuci\u00f3n, refugiados sin nombre dispersados por la persecuci\u00f3n de Saulo plantaron la iglesia en Antioqu\u00eda, e incluso un sobrino sin nombre salv\u00f3 la vida de Pablo. Esto tiene enormes implicaciones para el ministerio laico hoy: el patr\u00f3n neotestamentario del ministerio nunca fue pensado para descansar solo en un sacerdocio profesional de clero pagado, sino en el sacerdocio de todos los creyentes haciendo obra cotidiana y sin gloria del evangelio, lo cual significa que cada creyente, no solo los pocos acreditados, est\u00e1 llamado y equipado para llevar la misi\u00f3n adelante." },
-    { textEn: "25. The gospel costs something throughout Acts. Discuss specific costs (martyrdoms, beatings, financial losses) and contrast with health-and-wealth theology.", textEs: "25. El evangelio cuesta algo en todo Hechos. Discuta costos específicos (martirios, golpes, pérdidas financieras) y contraste con la teología de la salud y riqueza.", kwEn: ["cost", "suffer", "stephen", "wealth", "stone", "health", "martyr", "loss"], kwEs: ["costo", "sufri", "esteban", "riquez", "piedra", "salud", "mártir", "pérdida"], modelEn: "The gospel costs something concretely throughout Acts: Stephen is stoned to death for his testimony, Paul and Silas are beaten and jailed, the Ephesian believers burn fifty thousand pieces of silver worth of magic books, and nearly every major character suffers real financial or physical loss for following Christ. This stands in sharp contrast to health-and-wealth theology, which promises that faith should reliably produce prosperity and physical wellbeing; Acts shows instead that faithfulness and suffering regularly travel together, that God does not exempt His most faithful servants from martyrdom, stoning, or loss, and that the New Testament pattern of costly discipleship should sober any theology that markets the gospel as a guarantee of health and riches.", modelEs: "El evangelio tiene un costo real y concreto a lo largo de Hechos: Esteban es apedreado con piedras hasta la muerte por su testimonio, Pablo y Silas son golpeados y encarcelados, los creyentes efesios queman libros de magia con un valor de cincuenta mil piezas de plata, y casi cada personaje principal sufre una p\u00e9rdida financiera o f\u00edsica real por seguir a Cristo. Esto contrasta marcadamente con la teolog\u00eda de la salud y la riqueza, que promete que la fe deber\u00eda producir de manera confiable prosperidad y bienestar f\u00edsico; Hechos muestra en cambio que la fidelidad y el sufrimiento viajan juntos con regularidad, que Dios no exime a sus siervos m\u00e1s fieles de ser m\u00e1rtir, del martirio, del apedreamiento ni de la p\u00e9rdida, y que el patr\u00f3n neotestamentario del discipulado costoso deber\u00eda sobriar cualquier teolog\u00eda que venda el evangelio como garant\u00eda de salud y riquezas." },
-    { textEn: "26. Discuss how the Lord turned every opposing force (Sanhedrin, Herod, Demetrius, the storm, the chain) into part of the gospel's itinerary. What does this teach about providence?", textEs: "26. Discuta cómo el Señor convirtió cada fuerza opositora (Sanedrín, Herodes, Demetrio, la tormenta, la cadena) en parte del itinerario del evangelio. ¿Qué enseña esto sobre la providencia?", kwEn: ["oppos", "provid", "chain", "itiner", "sover", "turn", "advanc", "every"], kwEs: ["oposic", "provid", "cadena", "itinera", "soberan", "convert", "avanz", "cada"], modelEn: "The Lord turned every opposing force in Acts \u2014 the Sanhedrin's threats, Herod's persecution and death, Demetrius's riot, the storm at sea, even the chain on Paul's wrist \u2014 into part of the gospel's itinerary rather than an obstacle to it; each hostile force intended to stop the mission instead became the very mechanism that advanced it further. This teaches a robust doctrine of providence: God's sovereignty does not operate despite opposition but often precisely through it, meaning every apparent setback in ministry may, in the Lord's hands, simply be the next turn in an itinerary He has already planned, and no opposing force is ever powerful enough to override His sovereign plan for the gospel's advance.", modelEs: "El Se\u00f1or convirti\u00f3 cada fuerza opositora en Hechos \u2014 las amenazas del Sanedr\u00edn, la persecuci\u00f3n y muerte de Herodes, el mot\u00edn de Demetrio, la tormenta en el mar, incluso la cadena en la mu\u00f1eca de Pablo \u2014 en parte del itinerario del evangelio en lugar de un obst\u00e1culo para \u00e9l; cada fuerza hostil que pretend\u00eda detener la misi\u00f3n termin\u00f3 por convertirse en el mismo mecanismo que la hizo avanzar m\u00e1s. Esto ense\u00f1a una doctrina robusta de la providencia: la soberan\u00eda de Dios no opera a pesar de la oposici\u00f3n sino a menudo precisamente a trav\u00e9s de ella, lo cual significa que cada aparente contratiempo en el ministerio puede ser, en las manos del Se\u00f1or, simplemente el siguiente giro de un itinerario que \u00c9l ya planific\u00f3, y ninguna fuerza opositora es jam\u00e1s lo bastante poderosa para anular su plan soberano para el avance del evangelio." },
-    { textEn: "27. Discuss the danger of being 'almost' a Christian (Agrippa) or postponing for a 'convenient time' (Felix). How should this shape gospel urgency?", textEs: "27. Discuta el peligro de ser 'por poco' cristiano (Agripa) o posponer para una 'oportunidad' (Félix). ¿Cómo debería esto moldear la urgencia del evangelio?", kwEn: ["almost", "conven", "urgen", "delay", "now", "agrippa", "felix", "today"], kwEs: ["casi", "oportun", "urgen", "demor", "ahora", "agripa", "félix", "hoy"], modelEn: "Agrippa got 'almost' to becoming a Christian and stopped there, while Felix kept postponing for a more 'convenient' time that never came \u2014 both men heard clear, compelling gospel presentations and both walked away unconverted, one through hesitation and one through delay. This should shape gospel urgency profoundly: neither man rejected the gospel outright, which is precisely what makes their stories so sobering, since 'almost' and 'later' can feel like open doors while functioning as permanent closed ones; the gospel must therefore be presented and received now, today, because there is no biblical guarantee of a more convenient tomorrow.", modelEs: "Agripa lleg\u00f3 'por poco' a hacerse cristiano y se detuvo ah\u00ed, mientras que F\u00e9lix segu\u00eda posponiendo para una 'oportunidad' m\u00e1s conveniente que nunca lleg\u00f3 \u2014 ambos hombres oyeron presentaciones claras y convincentes del evangelio y ambos se alejaron sin convertirse, uno por vacilaci\u00f3n y el otro por demora. Esto deber\u00eda moldear profundamente la urgencia del evangelio: ninguno de los dos rechaz\u00f3 el evangelio abiertamente, que es precisamente lo que hace sus historias tan sobrias, ya que 'casi' y 'luego' pueden sentirse como puertas abiertas mientras funcionan como puertas cerradas para siempre; el evangelio debe por tanto presentarse y recibirse ahora, hoy, porque no hay garant\u00eda b\u00edblica de un ma\u00f1ana m\u00e1s conveniente." },
-    { textEn: "28. Reflect personally on which character or scene in Acts has shaped you most this term, and why.", textEs: "28. Reflexione personalmente sobre cuál personaje o escena en Hechos lo ha moldeado más este período, y por qué.", kwEn: ["person", "charact", "shape", "reflect", "acts", "story", "lord", "learn"], kwEs: ["person", "person", "form", "reflex", "hechos", "histor", "señor", "aprend"], modelEn: "Reflecting personally on this term in Acts, the character who has shaped me most is Barnabas \u2014 not because his story is the most dramatic, but because his quiet pattern of investing in Paul, then in John Mark after failure, models the kind of behind-the-scenes ministry I sense the Lord calling me toward. His example has reshaped how I think about significance in ministry: I used to measure impact by visibility, but Barnabas's story taught me, and I learned firsthand, that some of the most Christ-shaping work in the church happens through people willing to be the encourager rather than the headline.", modelEs: "Reflexionando personalmente sobre este per\u00edodo en Hechos, el personaje que m\u00e1s me ha formado es Bernab\u00e9 \u2014 no porque su historia sea la m\u00e1s dram\u00e1tica, sino porque su patr\u00f3n callado de invertir en Pablo, y luego en Juan Marcos despu\u00e9s del fracaso, refleja el tipo de ministerio detr\u00e1s de bambalinas hacia el cual siento que el Se\u00f1or me est\u00e1 llamando. Su ejemplo ha reformado c\u00f3mo pienso sobre la importancia en el ministerio: yo sol\u00eda medir el impacto por la visibilidad, pero la historia de Bernab\u00e9 me ense\u00f1\u00f3, y aprend\u00ed de primera mano, que parte de la obra m\u00e1s formadora de Cristo en la iglesia ocurre a trav\u00e9s de personas dispuestas a ser el animador en lugar del titular." },
-    { textEn: "29. Wayne's three final charges (Acts 1:8 witness; Acts 4:13 with Jesus; Acts 28:31 with all confidence) form a closing triad. Apply each to your own ministry calling.", textEs: "29. Las tres encomiendas finales de Wayne (Hechos 1:8 testigo; Hechos 4:13 con Jesús; Hechos 28:31 con toda confianza) forman una tríada de cierre. Aplique cada una a su propio llamado ministerial.", kwEn: ["witness", "jesus", "confiden", "minis", "call", "with", "1:8", "28:31"], kwEs: ["testig", "jesús", "confianz", "minis", "llam", "con", "1:8", "28:31"], modelEn: "Wayne's three final charges land differently on my own calling: Acts 1:8 calls me to be a witness starting in my own Jerusalem, the people right around me I am most tempted to skip past for someone farther away; Acts 4:13 reminds me that having been with Jesus matters more than any credential I could add to my name; and Acts 28:31 challenges me to keep preaching and teaching with all confidence even when no one is forbidding me but plain apathy could. Taken together, these three charges call me to a ministry rooted in presence with Christ, faithful witness close to home, and confident perseverance in the ordinary work of ministry.", modelEs: "Las tres encomiendas finales de Wayne caen de manera distinta sobre mi propio llamado: Hechos 1:8 me llama a ser testigo comenzando en mi propia Jerusal\u00e9n, las personas justo a mi alrededor a quienes muchas veces tiendo a pasar por alto por alguien m\u00e1s lejano; Hechos 4:13 me recuerda que haber estado con Jes\u00fas importa m\u00e1s que cualquier credencial que pudiera a\u00f1adir a mi nombre; y Hechos 28:31 me reta a seguir predicando y ense\u00f1ando con toda confianza incluso cuando nadie me lo impide pero la simple apat\u00eda podr\u00eda hacerlo. Juntas, estas tres encomiendas me llaman a un ministerio arraigado en la presencia con Cristo, el testimonio fiel cerca de casa, y la perseverancia confiada en la obra ordinaria del ministerio." },
-    { textEn: "30. Write the opening paragraph of YOUR Acts 29 — the next chapter of the unfinished book. What do you sense the Lord asking you to write next?", textEs: "30. Escriba el párrafo de apertura de SU Hechos 29 — el siguiente capítulo del libro inconcluso. ¿Qué siente que el Señor le está pidiendo que escriba a continuación?", kwEn: ["29", "next", "chapt", "call", "person", "minis", "lord", "write"], kwEs: ["29", "próx", "capít", "llam", "person", "minis", "señor", "escrib"], modelEn: "Acts 29, my next chapter, begins the way I sense the Lord is calling me to begin: not with a dramatic vision on a Damascus road, but with a quiet decision to say yes to the ministry placed in front of me. If Luke were writing this chapter, it might open, 'And it came to pass that a servant, having read the whole story, took up his own calling with the same confidence Paul carried into Rome, teaching and serving those the Lord had already placed in his path, no obstacle forbidding him.' That is the person I am asking the Lord to help me become, and this term in Acts has been the training ground for the chapter I am now being asked to write.", modelEs: "Hechos 29, mi pr\u00f3ximo cap\u00edtulo, comienza de la manera en que siento que el Se\u00f1or me est\u00e1 llamando a comenzar: no con una visi\u00f3n dram\u00e1tica en un camino a Damasco, sino con una decisi\u00f3n callada de decir s\u00ed al ministerio puesto frente a m\u00ed. Si Lucas estuviera escribiendo este cap\u00edtulo, podr\u00eda comenzar as\u00ed: 'Y aconteci\u00f3 que un siervo, habiendo le\u00eddo toda la historia, tom\u00f3 su propio llamado con la misma confianza que Pablo llev\u00f3 a Roma, ense\u00f1ando y sirviendo a quienes el Se\u00f1or ya hab\u00eda puesto en su camino, sin ning\u00fan obst\u00e1culo que se lo impidiera.' Esa es la persona que le pido al Se\u00f1or que me ayude a llegar a ser, y este per\u00edodo en Hechos ha sido el campo de entrenamiento para el cap\u00edtulo que ahora se me pide escribir." }
-];
+/* CTSActs — unit 11. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "acts",
+ "unit": 11,
+ "totalUnits": 11,
+ "filePrefix": "CTSActs",
+ "prevHref": "CTSActsUnit10.html",
+ "nextHref": "CTSActsCertificate.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "The book of Acts ends:",
+    "es": "El libro de Hechos termina:"
+   },
+   "options": {
+    "en": [
+     "With Paul's martyrdom under Nero",
+     "Mid-sentence with a participle (preaching, teaching, no one forbidding him)",
+     "With a formal benediction",
+     "With Christ's return"
+    ],
+    "es": [
+     "Con el martirio de Pablo bajo Nerón",
+     "A media frase con un participio (predicando, enseñando, sin impedimento)",
+     "Con una bendición formal",
+     "Con el regreso de Cristo"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "Acts 1:8 — the launching commission of the book — sends the disciples to be witnesses:",
+    "es": "Hechos 1:8 — la comisión de lanzamiento del libro — envía a los discípulos a ser testigos:"
+   },
+   "options": {
+    "en": [
+     "Only in Jerusalem",
+     "Only to Jews",
+     "In Jerusalem, Judea, Samaria, and to the end of the earth",
+     "Only to the Roman Empire"
+    ],
+    "es": [
+     "Sólo en Jerusalén",
+     "Sólo a judíos",
+     "En Jerusalén, Judea, Samaria, y hasta lo último de la tierra",
+     "Sólo al Imperio Romano"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "The unique characteristic of Acts among Bible books is that:",
+    "es": "La característica única de Hechos entre los libros de la Biblia es que:"
+   },
+   "options": {
+    "en": [
+     "It is the longest book in the Bible",
+     "It is the only book by Luke",
+     "It alone has no doxology, amen, or formal closing — leaving the story open",
+     "It quotes more Scripture than any other book"
+    ],
+    "es": [
+     "Es el libro más largo de la Biblia",
+     "Es el único libro de Lucas",
+     "Es el único sin doxología, amén o cierre formal — dejando la historia abierta",
+     "Cita más Escritura que cualquier otro libro"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "Acts traces the gospel through ethnic and social categories. Which sequence captures Luke's deliberate progression?",
+    "es": "Hechos traza el evangelio a través de categorías étnicas y sociales. ¿Qué secuencia captura la progresión deliberada de Lucas?"
+   },
+   "options": {
+    "en": [
+     "Jews → Hellenists → Samaritans → Ethiopian → Pharisee → Gentile centurion → Greeks → end of the earth",
+     "Roman, Greek, Jew",
+     "Apostles only",
+     "King and council"
+    ],
+    "es": [
+     "Judíos → helenistas → samaritanos → etíope → fariseo → centurión gentil → griegos → fin de la tierra",
+     "Romano, griego, judío",
+     "Sólo apóstoles",
+     "Rey y concilio"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "Five lessons Acts insists on include all of the following EXCEPT:",
+    "es": "Cinco lecciones en que insiste Hechos incluyen todas las siguientes EXCEPTO:"
+   },
+   "options": {
+    "en": [
+     "The church was born of the Spirit",
+     "The gospel is for everyone",
+     "The gospel travels through ordinary believers",
+     "The gospel cannot be stopped",
+     "Christianity guarantees freedom from suffering"
+    ],
+    "es": [
+     "La iglesia nació del Espíritu",
+     "El evangelio es para todos",
+     "El evangelio viaja a través de creyentes ordinarios",
+     "El evangelio no puede ser detenido",
+     "El cristianismo garantiza libertad del sufrimiento"
+    ]
+   },
+   "answer": 4
+  },
+  {
+   "stem": {
+    "en": "Acts 4:13 — the Sanhedrin's reluctant credential about Peter and John — was that they:",
+    "es": "Hechos 4:13 — la credencial a regañadientes del Sanedrín sobre Pedro y Juan — fue que:"
+   },
+   "options": {
+    "en": [
+     "Had been with Jesus",
+     "Were learned scholars",
+     "Spoke many languages",
+     "Held official rabbinical degrees"
+    ],
+    "es": [
+     "Habían estado con Jesús",
+     "Eran eruditos letrados",
+     "Hablaban muchos idiomas",
+     "Tenían títulos rabínicos oficiales"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "The two most disarming words in the New Testament, spoken by Ananias to a blind former persecutor, were:",
+    "es": "Las dos palabras más desarmantes del Nuevo Testamento, dichas por Ananías a un ex-perseguidor ciego, fueron:"
+   },
+   "options": {
+    "en": [
+     "Receive forgiveness",
+     "Be baptized",
+     "Believe immediately",
+     "Brother Saul"
+    ],
+    "es": [
+     "Recibe perdón",
+     "Sé bautizado",
+     "Cree de inmediato",
+     "Hermano Saulo"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "Felix's response to Paul's preaching ('convenient time') and Agrippa's response ('almost') both demonstrate:",
+    "es": "La respuesta de Félix a la predicación de Pablo ('en teniendo oportunidad') y la respuesta de Agripa ('por poco') demuestran:"
+   },
+   "options": {
+    "en": [
+     "The danger of postponing or stopping short of conversion",
+     "Roman political wisdom",
+     "The strength of pagan philosophy",
+     "The legitimacy of partial belief"
+    ],
+    "es": [
+     "El peligro de posponer o quedarse corto de la conversión",
+     "La sabiduría política romana",
+     "La fuerza de la filosofía pagana",
+     "La legitimidad de la creencia parcial"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "The 'Acts 29' framing of Christian life means that:",
+    "es": "El marco de 'Hechos 29' de la vida cristiana significa que:"
+   },
+   "options": {
+    "en": [
+     "A 29th chapter exists in some manuscripts",
+     "Every Christian's life since AD 62 is a paragraph in the unfinished book Luke began",
+     "Acts has 29 sermons",
+     "There are 29 cities mentioned"
+    ],
+    "es": [
+     "Existe un capítulo 29 en algunos manuscritos",
+     "Cada vida cristiana desde el año 62 d.C. es un párrafo en el libro inconcluso que Lucas comenzó",
+     "Hechos tiene 29 sermones",
+     "Se mencionan 29 ciudades"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "Aquila and Priscilla discipled Apollos at:",
+    "es": "Aquila y Priscila discipularon a Apolos en:"
+   },
+   "options": {
+    "en": [
+     "The temple",
+     "The Jerusalem council",
+     "Their kitchen table (in private)",
+     "A theological school"
+    ],
+    "es": [
+     "El templo",
+     "El concilio de Jerusalén",
+     "Su mesa de cocina (en privado)",
+     "Una escuela teológica"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "Lydia hosted the first European church in:",
+    "es": "Lidia hospedó la primera iglesia europea en:"
+   },
+   "options": {
+    "en": [
+     "The synagogue",
+     "The Philippian jail",
+     "Her living room",
+     "A rented hall"
+    ],
+    "es": [
+     "La sinagoga",
+     "La cárcel filipense",
+     "Su sala",
+     "Un salón rentado"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "The unnamed teenager in Acts 23 saved the apostle Paul's life by:",
+    "es": "El adolescente sin nombre en Hechos 23 salvó la vida del apóstol Pablo:"
+   },
+   "options": {
+    "en": [
+     "Distracting the assassins",
+     "Reporting the forty-man oath plot to Lysias",
+     "Bribing the Sanhedrin",
+     "Smuggling Paul out of jail"
+    ],
+    "es": [
+     "Distrayendo a los asesinos",
+     "Reportando el complot del juramento de cuarenta hombres a Lisias",
+     "Sobornando al Sanedrín",
+     "Sacando a Pablo de la cárcel"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "The chain on Paul's wrist in Rome eventually reached:",
+    "es": "La cadena en la muñeca de Pablo en Roma eventualmente alcanzó:"
+   },
+   "options": {
+    "en": [
+     "The Sanhedrin",
+     "The Antioch church",
+     "The Greek philosophers",
+     "Caesar's own praetorian household (Philippians 4:22)"
+    ],
+    "es": [
+     "El Sanedrín",
+     "La iglesia de Antioquía",
+     "Los filósofos griegos",
+     "La propia casa pretoriana del César (Filipenses 4:22)"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "Stephen, Philip, Aquila, Priscilla, and the unnamed Jerusalem refugees who started the Antioch mission demonstrate that:",
+    "es": "Esteban, Felipe, Aquila, Priscila y los refugiados anónimos de Jerusalén que iniciaron la misión de Antioquía demuestran que:"
+   },
+   "options": {
+    "en": [
+     "Only apostles spread the gospel",
+     "Most missionaries were academics",
+     "The gospel travels through ordinary believers, not just professional apostles",
+     "The first Christians were all priests"
+    ],
+    "es": [
+     "Sólo los apóstoles propagaron el evangelio",
+     "La mayoría de los misioneros eran académicos",
+     "El evangelio viaja a través de creyentes ordinarios, no sólo apóstoles profesionales",
+     "Los primeros cristianos eran todos sacerdotes"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "The opposing forces that tried to stop the gospel in Acts (Sanhedrin, Saul, Herod, Demetrius, the 40-man oath, the Euroclydon) all:",
+    "es": "Las fuerzas opositoras que intentaron detener el evangelio en Hechos (Sanedrín, Saulo, Herodes, Demetrio, el juramento de 40, el Euroclidón) todas:"
+   },
+   "options": {
+    "en": [
+     "Eventually succeeded",
+     "Were ignored by Luke",
+     "Required apostolic intervention",
+     "Were turned by the Lord into part of the gospel's itinerary"
+    ],
+    "es": [
+     "Eventualmente tuvieron éxito",
+     "Fueron ignoradas por Lucas",
+     "Requirieron intervención apostólica",
+     "Fueron convertidas por el Señor en parte del itinerario del evangelio"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "The cost of the gospel in Acts is repeatedly visible in:",
+    "es": "El costo del evangelio en Hechos es repetidamente visible en:"
+   },
+   "options": {
+    "en": [
+     "Free indulgences and protection",
+     "Stoning, beheading, jailings, beatings, shipwrecks, and the Ephesian magic-book burning",
+     "Comfortable Roman patronage",
+     "Gentle persuasion alone"
+    ],
+    "es": [
+     "Indulgencias y protección gratuitas",
+     "Apedreamiento, decapitación, encarcelamientos, golpes, naufragios y la quema de libros mágicos efesios",
+     "Patrocinio romano cómodo",
+     "Persuasión gentil solamente"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "Wayne's three closing sentences from Acts (the three he 'has come back to most often in forty years of preaching') are:",
+    "es": "Las tres frases finales de Wayne de Hechos (las tres a las que ha 'vuelto más a menudo en cuarenta años de predicación') son:"
+   },
+   "options": {
+    "en": [
+     "Acts 1:8 (you shall be witnesses), Acts 4:13 (they had been with Jesus), Acts 28:31 (preaching with all confidence)",
+     "Acts 2:38, 16:31, 17:30",
+     "Acts 5:29, 9:6, 26:18",
+     "Acts 1:1, 14:22, 20:28"
+    ],
+    "es": [
+     "Hechos 1:8 (me seréis testigos), Hechos 4:13 (habían estado con Jesús), Hechos 28:31 (predicando con toda confianza)",
+     "Hechos 2:38, 16:31, 17:30",
+     "Hechos 5:29, 9:6, 26:18",
+     "Hechos 1:1, 14:22, 20:28"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "Wayne's pastoral charge to those still in a storm is to:",
+    "es": "La encomienda pastoral de Wayne para los que todavía están en una tormenta es:"
+   },
+   "options": {
+    "en": [
+     "Pray for the storm to end immediately",
+     "Stay on the boat until the Captain releases you, sing at midnight if needed, look up the mountain at the engines you cannot see",
+     "Find a different church",
+     "Stop all ministry until the storm passes"
+    ],
+    "es": [
+     "Orar para que la tormenta termine de inmediato",
+     "Quedarse en el barco hasta que el Capitán les suelte, cantar a la medianoche si es necesario, mirar cuesta arriba a las máquinas que no pueden ver",
+     "Encontrar otra iglesia",
+     "Detener todo ministerio hasta que pase la tormenta"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "Knowledge of the book of Acts is not the same as a place in it because:",
+    "es": "El conocimiento del libro de Hechos no es lo mismo que un lugar en él porque:"
+   },
+   "options": {
+    "en": [
+     "The book is too long to memorize",
+     "Greek and Hebrew are required",
+     "Only seminary graduates qualify",
+     "Felix and Agrippa heard Paul preach the book's content yet died lost — only personal trust in the Lord Jesus Christ saves"
+    ],
+    "es": [
+     "El libro es demasiado largo para memorizar",
+     "Se requieren griego y hebreo",
+     "Sólo los graduados de seminario califican",
+     "Félix y Agripa oyeron a Pablo predicar el contenido del libro y aun así murieron perdidos — sólo la confianza personal en el Señor Jesucristo salva"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "The closing image of Wayne's final lecture is that the Lord will eventually:",
+    "es": "La imagen final de la última lección de Wayne es que el Señor eventualmente:"
+   },
+   "options": {
+    "en": [
+     "Lay down our pen, leaving our paragraph open at the bottom of the page so the next generation can keep writing",
+     "Bring an end to all witness",
+     "Restore Acts to a closed book",
+     "Repeat history exactly"
+    ],
+    "es": [
+     "Dejará nuestra pluma, dejando nuestro párrafo abierto al pie de la página para que la siguiente generación siga escribiendo",
+     "Pondrá fin a todo testimonio",
+     "Restaurará Hechos como libro cerrado",
+     "Repetirá la historia exactamente"
+    ]
+   },
+   "answer": 0
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Discuss why the Holy Spirit deliberately left the book of Acts without a formal ending and what theological weight this carries for the ongoing church.",
+    "es": "Discuta por qué el Espíritu Santo deliberadamente dejó el libro de Hechos sin un final formal y qué peso teológico tiene esto para la iglesia continua."
+   },
+   "keywords": {
+    "en": [
+     "open",
+     "ending",
+     "29",
+     "ongoing",
+     "miss",
+     "spirit",
+     "church",
+     "contin"
+    ],
+    "es": [
+     "abiert",
+     "final",
+     "29",
+     "continú",
+     "misión",
+     "espíritu",
+     "iglesia",
+     "siguien"
+    ]
+   },
+   "model": {
+    "en": "The Holy Spirit deliberately left Acts without a formal ending because the mission was never meant to conclude with Paul's imprisonment in Rome; the book ends mid-sentence with 'preaching... teaching... no one forbidding him,' an open, ongoing scene rather than a closed story. This carries real theological weight for the ongoing church: there is no chapter 29 because the Spirit intends every generation of the church to write the next installment, continuing the same mission Luke recorded, meaning the reader is not merely studying a completed history but is invited into the still-unfinished story.",
+    "es": "El Espíritu Santo dejó deliberadamente Hechos sin un final formal porque la misión nunca fue pensada para concluir con el encarcelamiento de Pablo en Roma; el libro termina a mitad de frase con 'predicando... enseñando... sin impedimento,' una escena abierta y continua en lugar de una historia cerrada. Esto tiene un peso teológico real para la iglesia continua: no hay un capítulo 29 porque el Espíritu quiere que cada generación de la iglesia escriba el siguiente capítulo, y la misión continúa siendo la misma que Lucas registró, lo cual significa que el lector no solo estudia una historia terminada sino que es invitado a la historia todavía inconclusa."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Trace the gospel's progression through ethnic and social categories in Acts (Jerusalem Jews → Hellenists → Samaritans → Ethiopian → Saul → Cornelius → Antioch Gentiles → philosophers → Caesar's household). What does this teach us?",
+    "es": "Trace la progresión del evangelio a través de categorías étnicas y sociales en Hechos (judíos de Jerusalén → helenistas → samaritanos → etíope → Saulo → Cornelio → gentiles de Antioquía → filósofos → casa del César). ¿Qué nos enseña?"
+   },
+   "keywords": {
+    "en": [
+     "progres",
+     "ethnic",
+     "boundar",
+     "univers",
+     "gospel",
+     "jew",
+     "gentil",
+     "all"
+    ],
+    "es": [
+     "progres",
+     "étnic",
+     "fronter",
+     "univers",
+     "evangelio",
+     "judí",
+     "gentil",
+     "todos"
+    ]
+   },
+   "model": {
+    "en": "Acts traces the gospel's progression through every ethnic and social boundary imaginable: from Jerusalem Jews to Hellenists, Samaritans, an Ethiopian eunuch, a persecuting Jew named Saul, a Roman centurion named Cornelius, Antioch Gentiles, Athenian philosophers, and finally Caesar's own household. This teaches that the gospel is universal by design, never intended to stop at any ethnic, social, or geographic boundary; Luke deliberately structures Acts to show the message crossing every line that once separated Jew from Gentile, insider from outsider, until it reaches all people everywhere.",
+    "es": "Hechos traza la progresión del evangelio a través de cada frontera étnica y social imaginable: desde los judíos de Jerusalén hasta los helenistas, los samaritanos, un eunuco etíope, un judío perseguidor llamado Saulo, un centurión romano llamado Cornelio, los gentiles de Antioquía, los filósofos atenienses, y finalmente la propia casa del César. Esto enseña que el evangelio es universal por diseño, nunca destinado a detenerse en ninguna frontera étnica, social o geográfica; Lucas estructura deliberadamente Hechos para mostrar el mensaje cruzando cada línea que alguna vez separó al judío del gentil, al de adentro del de afuera, hasta que alcanza a todos en todas partes."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Discuss Acts 4:13 ('they had been with Jesus') as the only credential that ultimately matters in ministry. How does this challenge modern theological education?",
+    "es": "Discuta Hechos 4:13 ('habían estado con Jesús') como la única credencial que finalmente importa en el ministerio. ¿Cómo desafía esto a la educación teológica moderna?"
+   },
+   "keywords": {
+    "en": [
+     "been",
+     "jesus",
+     "credent",
+     "minis",
+     "train",
+     "presenc",
+     "with",
+     "educ"
+    ],
+    "es": [
+     "estado",
+     "jesús",
+     "credenc",
+     "minis",
+     "prepar",
+     "presenc",
+     "con",
+     "educ"
+    ]
+   },
+   "model": {
+    "en": "Acts 4:13 records that the council marveled at Peter and John's boldness, noting they were uneducated and untrained men, yet took note that they had been with Jesus — the only credential Luke bothers to name. This challenges modern theological education because it suggests that formal training, while valuable, is not the ultimate qualification for ministry; a person can hold every academic credential and lack the transforming presence of having genuinely been with Jesus, while another with no formal schooling at all can carry undeniable spiritual authority simply because time with Christ marked them, meaning seminaries exist to serve that presence, never to replace it.",
+    "es": "Hechos 4:13 registra que el concilio se maravilló del denuedo de Pedro y Juan, notando que eran hombres sin letras y sin preparación, pero tomaron nota de que habían estado con Jesús — la única credencial que Lucas se molesta en nombrar. Esto desafía a la educación teológica moderna porque sugiere que la preparación formal, aunque valiosa, no es la calificación última para el ministerio; una persona puede tener toda credencial académica y carecer de la presencia transformadora de haber estado genuinamente con Jesús, mientras que otra sin ninguna preparación formal puede llevar una autoridad espiritual innegable simplemente porque el tiempo con Cristo la marcó, lo cual significa que los seminarios existen para servir a esa presencia, nunca para reemplazarla."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Acts shows the gospel traveling through ordinary believers (Stephen, Philip, Aquila and Priscilla, unnamed refugees, the unnamed nephew). Discuss the implications for lay ministry today.",
+    "es": "Hechos muestra al evangelio viajando a través de creyentes ordinarios (Esteban, Felipe, Aquila y Priscila, refugiados sin nombre, el sobrino sin nombre). Discuta las implicaciones para el ministerio laico hoy."
+   },
+   "keywords": {
+    "en": [
+     "ordin",
+     "lay",
+     "unnam",
+     "minis",
+     "priest",
+     "stephen",
+     "philip",
+     "everyday"
+    ],
+    "es": [
+     "ordina",
+     "laic",
+     "nombre",
+     "minis",
+     "sacerdoc",
+     "esteban",
+     "felipe",
+     "cotidian"
+    ]
+   },
+   "model": {
+    "en": "Acts consistently shows the gospel advancing through ordinary, often unnamed believers rather than only through apostles: Stephen and Philip were deacons pressed into evangelism by persecution, unnamed refugees scattered by Saul's persecution planted the church at Antioch, and even an unnamed nephew saved Paul's life. This has huge implications for lay ministry today: the New Testament pattern of ministry was never meant to rest solely on a professional priesthood of paid clergy, but on the priesthood of all believers doing everyday, unglamorous gospel work, meaning every believer, not just the credentialed few, is called and equipped to carry the mission forward.",
+    "es": "Hechos muestra consistentemente al evangelio avanzando a través de creyentes ordinarios y a menudo sin nombre en lugar de solo a través de apóstoles: Esteban y Felipe eran diáconos empujados al evangelismo por la persecución, refugiados sin nombre dispersados por la persecución de Saulo plantaron la iglesia en Antioquía, e incluso un sobrino sin nombre salvó la vida de Pablo. Esto tiene enormes implicaciones para el ministerio laico hoy: el patrón neotestamentario del ministerio nunca fue pensado para descansar solo en un sacerdocio profesional de clero pagado, sino en el sacerdocio de todos los creyentes haciendo obra cotidiana y sin gloria del evangelio, lo cual significa que cada creyente, no solo los pocos acreditados, está llamado y equipado para llevar la misión adelante."
+   }
+  },
+  {
+   "prompt": {
+    "en": "The gospel costs something throughout Acts. Discuss specific costs (martyrdoms, beatings, financial losses) and contrast with health-and-wealth theology.",
+    "es": "El evangelio cuesta algo en todo Hechos. Discuta costos específicos (martirios, golpes, pérdidas financieras) y contraste con la teología de la salud y riqueza."
+   },
+   "keywords": {
+    "en": [
+     "cost",
+     "suffer",
+     "stephen",
+     "wealth",
+     "stone",
+     "health",
+     "martyr",
+     "loss"
+    ],
+    "es": [
+     "costo",
+     "sufri",
+     "esteban",
+     "riquez",
+     "piedra",
+     "salud",
+     "mártir",
+     "pérdida"
+    ]
+   },
+   "model": {
+    "en": "The gospel costs something concretely throughout Acts: Stephen is stoned to death for his testimony, Paul and Silas are beaten and jailed, the Ephesian believers burn fifty thousand pieces of silver worth of magic books, and nearly every major character suffers real financial or physical loss for following Christ. This stands in sharp contrast to health-and-wealth theology, which promises that faith should reliably produce prosperity and physical wellbeing; Acts shows instead that faithfulness and suffering regularly travel together, that God does not exempt His most faithful servants from martyrdom, stoning, or loss, and that the New Testament pattern of costly discipleship should sober any theology that markets the gospel as a guarantee of health and riches.",
+    "es": "El evangelio tiene un costo real y concreto a lo largo de Hechos: Esteban es apedreado con piedras hasta la muerte por su testimonio, Pablo y Silas son golpeados y encarcelados, los creyentes efesios queman libros de magia con un valor de cincuenta mil piezas de plata, y casi cada personaje principal sufre una pérdida financiera o física real por seguir a Cristo. Esto contrasta marcadamente con la teología de la salud y la riqueza, que promete que la fe debería producir de manera confiable prosperidad y bienestar físico; Hechos muestra en cambio que la fidelidad y el sufrimiento viajan juntos con regularidad, que Dios no exime a sus siervos más fieles de ser mártir, del martirio, del apedreamiento ni de la pérdida, y que el patrón neotestamentario del discipulado costoso debería sobriar cualquier teología que venda el evangelio como garantía de salud y riquezas."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Discuss how the Lord turned every opposing force (Sanhedrin, Herod, Demetrius, the storm, the chain) into part of the gospel's itinerary. What does this teach about providence?",
+    "es": "Discuta cómo el Señor convirtió cada fuerza opositora (Sanedrín, Herodes, Demetrio, la tormenta, la cadena) en parte del itinerario del evangelio. ¿Qué enseña esto sobre la providencia?"
+   },
+   "keywords": {
+    "en": [
+     "oppos",
+     "provid",
+     "chain",
+     "itiner",
+     "sover",
+     "turn",
+     "advanc",
+     "every"
+    ],
+    "es": [
+     "oposic",
+     "provid",
+     "cadena",
+     "itinera",
+     "soberan",
+     "convert",
+     "avanz",
+     "cada"
+    ]
+   },
+   "model": {
+    "en": "The Lord turned every opposing force in Acts — the Sanhedrin's threats, Herod's persecution and death, Demetrius's riot, the storm at sea, even the chain on Paul's wrist — into part of the gospel's itinerary rather than an obstacle to it; each hostile force intended to stop the mission instead became the very mechanism that advanced it further. This teaches a robust doctrine of providence: God's sovereignty does not operate despite opposition but often precisely through it, meaning every apparent setback in ministry may, in the Lord's hands, simply be the next turn in an itinerary He has already planned, and no opposing force is ever powerful enough to override His sovereign plan for the gospel's advance.",
+    "es": "El Señor convirtió cada fuerza opositora en Hechos — las amenazas del Sanedrín, la persecución y muerte de Herodes, el motín de Demetrio, la tormenta en el mar, incluso la cadena en la muñeca de Pablo — en parte del itinerario del evangelio en lugar de un obstáculo para él; cada fuerza hostil que pretendía detener la misión terminó por convertirse en el mismo mecanismo que la hizo avanzar más. Esto enseña una doctrina robusta de la providencia: la soberanía de Dios no opera a pesar de la oposición sino a menudo precisamente a través de ella, lo cual significa que cada aparente contratiempo en el ministerio puede ser, en las manos del Señor, simplemente el siguiente giro de un itinerario que Él ya planificó, y ninguna fuerza opositora es jamás lo bastante poderosa para anular su plan soberano para el avance del evangelio."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Discuss the danger of being 'almost' a Christian (Agrippa) or postponing for a 'convenient time' (Felix). How should this shape gospel urgency?",
+    "es": "Discuta el peligro de ser 'por poco' cristiano (Agripa) o posponer para una 'oportunidad' (Félix). ¿Cómo debería esto moldear la urgencia del evangelio?"
+   },
+   "keywords": {
+    "en": [
+     "almost",
+     "conven",
+     "urgen",
+     "delay",
+     "now",
+     "agrippa",
+     "felix",
+     "today"
+    ],
+    "es": [
+     "casi",
+     "oportun",
+     "urgen",
+     "demor",
+     "ahora",
+     "agripa",
+     "félix",
+     "hoy"
+    ]
+   },
+   "model": {
+    "en": "Agrippa got 'almost' to becoming a Christian and stopped there, while Felix kept postponing for a more 'convenient' time that never came — both men heard clear, compelling gospel presentations and both walked away unconverted, one through hesitation and one through delay. This should shape gospel urgency profoundly: neither man rejected the gospel outright, which is precisely what makes their stories so sobering, since 'almost' and 'later' can feel like open doors while functioning as permanent closed ones; the gospel must therefore be presented and received now, today, because there is no biblical guarantee of a more convenient tomorrow.",
+    "es": "Agripa llegó 'por poco' a hacerse cristiano y se detuvo ahí, mientras que Félix seguía posponiendo para una 'oportunidad' más conveniente que nunca llegó — ambos hombres oyeron presentaciones claras y convincentes del evangelio y ambos se alejaron sin convertirse, uno por vacilación y el otro por demora. Esto debería moldear profundamente la urgencia del evangelio: ninguno de los dos rechazó el evangelio abiertamente, que es precisamente lo que hace sus historias tan sobrias, ya que 'casi' y 'luego' pueden sentirse como puertas abiertas mientras funcionan como puertas cerradas para siempre; el evangelio debe por tanto presentarse y recibirse ahora, hoy, porque no hay garantía bíblica de un mañana más conveniente."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Reflect personally on which character or scene in Acts has shaped you most this term, and why.",
+    "es": "Reflexione personalmente sobre cuál personaje o escena en Hechos lo ha moldeado más este período, y por qué."
+   },
+   "keywords": {
+    "en": [
+     "person",
+     "charact",
+     "shape",
+     "reflect",
+     "acts",
+     "story",
+     "lord",
+     "learn"
+    ],
+    "es": [
+     "person",
+     "person",
+     "form",
+     "reflex",
+     "hechos",
+     "histor",
+     "señor",
+     "aprend"
+    ]
+   },
+   "model": {
+    "en": "Reflecting personally on this term in Acts, the character who has shaped me most is Barnabas — not because his story is the most dramatic, but because his quiet pattern of investing in Paul, then in John Mark after failure, models the kind of behind-the-scenes ministry I sense the Lord calling me toward. His example has reshaped how I think about significance in ministry: I used to measure impact by visibility, but Barnabas's story taught me, and I learned firsthand, that some of the most Christ-shaping work in the church happens through people willing to be the encourager rather than the headline.",
+    "es": "Reflexionando personalmente sobre este período en Hechos, el personaje que más me ha formado es Bernabé — no porque su historia sea la más dramática, sino porque su patrón callado de invertir en Pablo, y luego en Juan Marcos después del fracaso, refleja el tipo de ministerio detrás de bambalinas hacia el cual siento que el Señor me está llamando. Su ejemplo ha reformado cómo pienso sobre la importancia en el ministerio: yo solía medir el impacto por la visibilidad, pero la historia de Bernabé me enseñó, y aprendí de primera mano, que parte de la obra más formadora de Cristo en la iglesia ocurre a través de personas dispuestas a ser el animador en lugar del titular."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Wayne's three final charges (Acts 1:8 witness; Acts 4:13 with Jesus; Acts 28:31 with all confidence) form a closing triad. Apply each to your own ministry calling.",
+    "es": "Las tres encomiendas finales de Wayne (Hechos 1:8 testigo; Hechos 4:13 con Jesús; Hechos 28:31 con toda confianza) forman una tríada de cierre. Aplique cada una a su propio llamado ministerial."
+   },
+   "keywords": {
+    "en": [
+     "witness",
+     "jesus",
+     "confiden",
+     "minis",
+     "call",
+     "with",
+     "1:8",
+     "28:31"
+    ],
+    "es": [
+     "testig",
+     "jesús",
+     "confianz",
+     "minis",
+     "llam",
+     "con",
+     "1:8",
+     "28:31"
+    ]
+   },
+   "model": {
+    "en": "Wayne's three final charges land differently on my own calling: Acts 1:8 calls me to be a witness starting in my own Jerusalem, the people right around me I am most tempted to skip past for someone farther away; Acts 4:13 reminds me that having been with Jesus matters more than any credential I could add to my name; and Acts 28:31 challenges me to keep preaching and teaching with all confidence even when no one is forbidding me but plain apathy could. Taken together, these three charges call me to a ministry rooted in presence with Christ, faithful witness close to home, and confident perseverance in the ordinary work of ministry.",
+    "es": "Las tres encomiendas finales de Wayne caen de manera distinta sobre mi propio llamado: Hechos 1:8 me llama a ser testigo comenzando en mi propia Jerusalén, las personas justo a mi alrededor a quienes muchas veces tiendo a pasar por alto por alguien más lejano; Hechos 4:13 me recuerda que haber estado con Jesús importa más que cualquier credencial que pudiera añadir a mi nombre; y Hechos 28:31 me reta a seguir predicando y enseñando con toda confianza incluso cuando nadie me lo impide pero la simple apatía podría hacerlo. Juntas, estas tres encomiendas me llaman a un ministerio arraigado en la presencia con Cristo, el testimonio fiel cerca de casa, y la perseverancia confiada en la obra ordinaria del ministerio."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Write the opening paragraph of YOUR Acts 29 — the next chapter of the unfinished book. What do you sense the Lord asking you to write next?",
+    "es": "Escriba el párrafo de apertura de SU Hechos 29 — el siguiente capítulo del libro inconcluso. ¿Qué siente que el Señor le está pidiendo que escriba a continuación?"
+   },
+   "keywords": {
+    "en": [
+     "29",
+     "next",
+     "chapt",
+     "call",
+     "person",
+     "minis",
+     "lord",
+     "write"
+    ],
+    "es": [
+     "29",
+     "próx",
+     "capít",
+     "llam",
+     "person",
+     "minis",
+     "señor",
+     "escrib"
+    ]
+   },
+   "model": {
+    "en": "Acts 29, my next chapter, begins the way I sense the Lord is calling me to begin: not with a dramatic vision on a Damascus road, but with a quiet decision to say yes to the ministry placed in front of me. If Luke were writing this chapter, it might open, 'And it came to pass that a servant, having read the whole story, took up his own calling with the same confidence Paul carried into Rome, teaching and serving those the Lord had already placed in his path, no obstacle forbidding him.' That is the person I am asking the Lord to help me become, and this term in Acts has been the training ground for the chapter I am now being asked to write.",
+    "es": "Hechos 29, mi próximo capítulo, comienza de la manera en que siento que el Señor me está llamando a comenzar: no con una visión dramática en un camino a Damasco, sino con una decisión callada de decir sí al ministerio puesto frente a mí. Si Lucas estuviera escribiendo este capítulo, podría comenzar así: 'Y aconteció que un siervo, habiendo leído toda la historia, tomó su propio llamado con la misma confianza que Pablo llevó a Roma, enseñando y sirviendo a quienes el Señor ya había puesto en su camino, sin ningún obstáculo que se lo impidiera.' Esa es la persona que le pido al Señor que me ayude a llegar a ser, y este período en Hechos ha sido el campo de entrenamiento para el capítulo que ahora se me pide escribir."
+   }
+  }
+ ]
+};

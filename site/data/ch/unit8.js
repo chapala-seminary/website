@@ -1,0 +1,757 @@
+/* CTSCH — unit 8. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "ch",
+ "unit": 8,
+ "totalUnits": 10,
+ "filePrefix": "CTSCH",
+ "prevHref": "CTSCHUnit7.html",
+ "nextHref": "CTSCHUnit9.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "What was the Westminster Assembly (1643-1653) and what documents did it produce?",
+    "es": "¿Qué fue la Asamblea de Westminster (1643-1653) y qué documentos produjo?"
+   },
+   "options": {
+    "en": [
+     "A Puritan-led assembly that produced the Westminster Confession of Faith, the Larger and Shorter Catechisms, and the Directory for Public Worship",
+     "A monastic council that reformed religious orders",
+     "The council that condemned Arminius",
+     "A Catholic counter-council to Trent"
+    ],
+    "es": [
+     "Una asamblea liderada por puritanos que produjo la Confesión de Fe de Westminster, los Catecismos Mayor y Menor, y el Directorio para la Adoración Pública",
+     "Un concilio monástico que reformó las órdenes religiosas",
+     "El concilio que condenó a Arminio",
+     "Un contraconcilio católico a Trento"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "About 121 ministers and 30 lay members met at Westminster Abbey 1643-1653 and produced the four documents that became the doctrinal foundation of English-speaking Presbyterianism.",
+    "es": "Cerca de 121 ministros y 30 miembros laicos se reunieron en la Abadía de Westminster 1643-1653 y produjeron los cuatro documentos que se convirtieron en el fundamento doctrinal del presbiterianismo de habla inglesa."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is the famous first answer of the Westminster Shorter Catechism?",
+    "es": "¿Cuál es la famosa primera respuesta del Catecismo Menor de Westminster?"
+   },
+   "options": {
+    "en": [
+     "\"To know God and enjoy the sacraments\"",
+     "\"To do justly and walk humbly\"",
+     "\"To love the Lord with all your heart\"",
+     "\"Man's chief end is to glorify God, and to enjoy Him for ever\""
+    ],
+    "es": [
+     "«Conocer a Dios y disfrutar los sacramentos»",
+     "«Hacer justicia y caminar humildemente»",
+     "«Amar al Señor con todo tu corazón»",
+     "«El fin principal del hombre es glorificar a Dios y gozar de Él para siempre»"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The Shorter Catechism Q1 is the high water mark of catechetical writing in English: 'Man's chief end is to glorify God, and to enjoy Him for ever.'",
+    "es": "La P1 del Catecismo Menor es el punto más alto de la escritura catequética en inglés: «El fin principal del hombre es glorificar a Dios y gozar de Él para siempre»."
+   }
+  },
+  {
+   "stem": {
+    "en": "Who wrote The Pilgrim's Progress while imprisoned in Bedford jail for twelve years?",
+    "es": "¿Quién escribió El Progreso del Peregrino mientras estaba encarcelado en la cárcel de Bedford durante doce años?"
+   },
+   "options": {
+    "en": [
+     "John Owen",
+     "Richard Baxter",
+     "John Bunyan",
+     "Jonathan Edwards"
+    ],
+    "es": [
+     "Juan Owen",
+     "Ricardo Baxter",
+     "Juan Bunyan",
+     "Jonathan Edwards"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "John Bunyan (1628-1688), Baptist tinker, was imprisoned twelve years for preaching without a license. The Pilgrim's Progress (1678) became one of the most translated books in the world after the Bible.",
+    "es": "Juan Bunyan (1628-1688), calderero bautista, fue encarcelado doce años por predicar sin licencia. El Progreso del Peregrino (1678) se convirtió en uno de los libros más traducidos en el mundo después de la Biblia."
+   }
+  },
+  {
+   "stem": {
+    "en": "Which Puritan wrote 'Be killing sin, or it will be killing you' and the classic Reformed treatise on definite atonement?",
+    "es": "¿Qué puritano escribió «Mata el pecado, o él te matará a ti» y el tratado reformado clásico sobre la expiación definitiva?"
+   },
+   "options": {
+    "en": [
+     "John Owen",
+     "John Bunyan",
+     "Richard Baxter",
+     "William Tennent"
+    ],
+    "es": [
+     "Juan Owen",
+     "Juan Bunyan",
+     "Ricardo Baxter",
+     "William Tennent"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "John Owen (1616-1683), vice-chancellor of Oxford under Cromwell, wrote massive treatises on the Trinity, the Holy Spirit, and the atonement. The Death of Death in the Death of Christ is the classic Reformed exposition of definite atonement.",
+    "es": "Juan Owen (1616-1683), vicerrector de Oxford bajo Cromwell, escribió tratados masivos sobre la Trinidad, el Espíritu Santo, y la expiación. La Muerte de la Muerte en la Muerte de Cristo es la exposición reformada clásica de la expiación definitiva."
+   }
+  },
+  {
+   "stem": {
+    "en": "Which Puritan pastor wrote The Reformed Pastor (1656), insisting on personal catechizing of every family in the parish, and famously said 'I preached as never sure to preach again, and as a dying man to dying men'?",
+    "es": "¿Qué pastor puritano escribió El Pastor Reformado (1656), insistiendo en la catequesis personal de cada familia en la parroquia, y famosamente dijo «Prediqué como si nunca fuera a predicar de nuevo, y como un hombre moribundo a hombres moribundos»?"
+   },
+   "options": {
+    "en": [
+     "John Owen",
+     "John Bunyan",
+     "Richard Baxter",
+     "Charles Wesley"
+    ],
+    "es": [
+     "Juan Owen",
+     "Juan Bunyan",
+     "Ricardo Baxter",
+     "Carlos Wesley"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Richard Baxter (1615-1691), pastor at Kidderminster, wrote the most influential pastoral manual of the 17th century. He also wrote The Saints' Everlasting Rest.",
+    "es": "Ricardo Baxter (1615-1691), pastor en Kidderminster, escribió el manual pastoral más influyente del siglo 17. También escribió El Reposo Eterno de los Santos."
+   }
+  },
+  {
+   "stem": {
+    "en": "Who were the Scottish Covenanters and what were the Killing Times (1680-1688)?",
+    "es": "¿Quiénes fueron los Covenanters escoceses y qué fueron los Tiempos de la Matanza (1680-1688)?"
+   },
+   "options": {
+    "en": [
+     "Catholic militants who fought against Protestants",
+     "Scottish Presbyterians who signed the National Covenant of 1638; under Stuart kings 1680-1688 some 18,000 were killed for refusing royal interference with Reformed religion",
+     "Anabaptists in the Netherlands",
+     "German Pietists at Halle"
+    ],
+    "es": [
+     "Militantes católicos que lucharon contra los protestantes",
+     "Presbiterianos escoceses que firmaron el Pacto Nacional de 1638; bajo los reyes Estuardo 1680-1688 unos 18,000 fueron matados por rehusar la interferencia real con la religión reformada",
+     "Anabaptistas en los Países Bajos",
+     "Pietistas alemanes en Halle"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Tens of thousands of Scots signed the National Covenant in 1638. After the Restoration of Charles II in 1660 and through the Killing Times of 1680-88, government dragoons killed an estimated 18,000 Covenanters across the Lowlands.",
+    "es": "Decenas de miles de escoceses firmaron el Pacto Nacional en 1638. Después de la Restauración de Carlos II en 1660 y durante los Tiempos de la Matanza de 1680-88, los dragones del gobierno mataron unos 18,000 Covenanters estimados a través de las Tierras Bajas."
+   }
+  },
+  {
+   "stem": {
+    "en": "What happened to the French Huguenots in 1685?",
+    "es": "¿Qué pasó con los hugonotes franceses en 1685?"
+   },
+   "options": {
+    "en": [
+     "They were granted full religious freedom",
+     "They merged with the Catholic Church",
+     "They became the dominant church in France",
+     "Louis XIV revoked the Edict of Nantes; about 200,000 fled France, scattering across Protestant Europe and beyond"
+    ],
+    "es": [
+     "Se les concedió plena libertad religiosa",
+     "Se fusionaron con la Iglesia Católica",
+     "Se convirtieron en la iglesia dominante en Francia",
+     "Luis XIV revocó el Edicto de Nantes; cerca de 200,000 huyeron de Francia, esparciéndose por la Europa protestante y más allá"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Louis XIV revoked the Edict of Nantes in October 1685 after years of dragonnades (quartering soldiers in Huguenot homes to force conversion). About 200,000 Huguenots fled to Geneva, the Netherlands, England, the American colonies, and the Cape of Good Hope, enriching their host countries and beggaring France.",
+    "es": "Luis XIV revocó el Edicto de Nantes en octubre de 1685 después de años de dragonnades. Cerca de 200,000 hugonotes huyeron a Ginebra, los Países Bajos, Inglaterra, las colonias americanas, y el Cabo de Buena Esperanza, enriqueciendo a sus países anfitriones y empobreciendo a Francia."
+   }
+  },
+  {
+   "stem": {
+    "en": "Who founded German Pietism with the 1675 manifesto Pia Desideria, calling for small-group Bible study and conversion preaching?",
+    "es": "¿Quién fundó el pietismo alemán con el manifiesto de 1675 Pia Desideria, llamando a estudios bíblicos en grupos pequeños y predicación de conversión?"
+   },
+   "options": {
+    "en": [
+     "Philipp Jakob Spener",
+     "Martin Luther",
+     "August Hermann Francke",
+     "Count Zinzendorf"
+    ],
+    "es": [
+     "Felipe Jacobo Spener",
+     "Martín Lutero",
+     "Augusto Hermann Francke",
+     "El Conde Zinzendorf"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Spener (1635-1705), Lutheran pastor in Frankfurt, wrote Pia Desideria in 1675 and gathered believers in his home into 'collegia pietatis' — schools of piety. Six reforms: more Bible reading, priesthood of all believers, practice not just doctrine, charitable controversy, formative theological education, heart-and-conscience preaching.",
+    "es": "Spener (1635-1705), pastor luterano en Fráncfort, escribió Pia Desideria en 1675 y reunió creyentes en su hogar en «collegia pietatis» — escuelas de piedad. Seis reformas: más lectura bíblica, sacerdocio de todos los creyentes, práctica no solo doctrina, controversia caritativa, educación teológica formativa, predicación al corazón y conciencia."
+   }
+  },
+  {
+   "stem": {
+    "en": "Who built the Halle Foundations — orphanage, schools, printing press, free pharmacy, and Bible institute — beginning with seven thalers in 1695?",
+    "es": "¿Quién construyó las Fundaciones de Halle — orfanato, escuelas, imprenta, farmacia gratuita, e instituto bíblico — comenzando con siete táleros en 1695?"
+   },
+   "options": {
+    "en": [
+     "Philipp Jakob Spener",
+     "August Hermann Francke",
+     "John Wesley",
+     "Count Zinzendorf"
+    ],
+    "es": [
+     "Felipe Jacobo Spener",
+     "Augusto Hermann Francke",
+     "Juan Wesley",
+     "El Conde Zinzendorf"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Francke (1663-1727), Spener's protégé, built one of the most extraordinary institutional networks in Christian history. Halle became the center of Pietism and trained the first organized Protestant foreign missionaries (Ziegenbalg and Plütschau to Tranquebar in 1706).",
+    "es": "Francke (1663-1727), protegido de Spener, construyó una de las redes institucionales más extraordinarias en la historia cristiana. Halle se convirtió en el centro del pietismo y entrenó a los primeros misioneros protestantes extranjeros organizados (Ziegenbalg y Plütschau a Tranquebar en 1706)."
+   }
+  },
+  {
+   "stem": {
+    "en": "Where did the first organized Protestant foreign missionaries (Ziegenbalg and Plütschau) sail in 1706, and from where were they sent?",
+    "es": "¿Adónde navegaron los primeros misioneros protestantes extranjeros organizados (Ziegenbalg y Plütschau) en 1706, y desde dónde fueron enviados?"
+   },
+   "options": {
+    "en": [
+     "From London to Africa",
+     "From Wittenberg to Japan",
+     "From Geneva to Brazil",
+     "From Halle to Tranquebar in southern India"
+    ],
+    "es": [
+     "De Londres a África",
+     "De Wittenberg a Japón",
+     "De Ginebra a Brasil",
+     "De Halle a Tranquebar en el sur de India"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Bartholomäus Ziegenbalg and Heinrich Plütschau sailed from Halle to the Danish trading colony of Tranquebar in 1706, planted a Lutheran mission, and translated the New Testament into Tamil — the first organized Protestant foreign mission of the modern era.",
+    "es": "Bartolomé Ziegenbalg y Enrique Plütschau navegaron desde Halle a la colonia comercial danesa de Tranquebar en 1706, plantaron una misión luterana, y tradujeron el Nuevo Testamento al tamil — la primera misión protestante extranjera organizada de la era moderna."
+   }
+  },
+  {
+   "stem": {
+    "en": "Who gave shelter on his Saxon estate to refugee Bohemian and Moravian Brethren, founding the community called Herrnhut in 1722?",
+    "es": "¿Quién dio refugio en su finca sajona a los refugiados Hermanos Bohemios y Moravos, fundando la comunidad llamada Herrnhut en 1722?"
+   },
+   "options": {
+    "en": [
+     "Martin Luther",
+     "Philipp Jakob Spener",
+     "Count Nicholas Ludwig von Zinzendorf",
+     "John Wesley"
+    ],
+    "es": [
+     "Martín Lutero",
+     "Felipe Jacobo Spener",
+     "El Conde Nicolás Luis von Zinzendorf",
+     "Juan Wesley"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Zinzendorf (1700-1760), godson of Spener and educated at Francke's Halle, gave land to the Bohemian/Moravian refugees in 1722. They named the settlement Herrnhut — 'the Lord's watch.' From there came the modern Protestant missionary movement.",
+    "es": "Zinzendorf (1700-1760), ahijado de Spener y educado en el Halle de Francke, dio tierra a los refugiados bohemios/moravos en 1722. Llamaron al asentamiento Herrnhut — «la guardia del Señor». De allí vino el movimiento misionero protestante moderno."
+   }
+  },
+  {
+   "stem": {
+    "en": "What date is remembered as the great outpouring of the Holy Spirit on the Moravian community at Herrnhut?",
+    "es": "¿Qué fecha se recuerda como el gran derramamiento del Espíritu Santo sobre la comunidad morava en Herrnhut?"
+   },
+   "options": {
+    "en": [
+     "October 31, 1517",
+     "August 13, 1727",
+     "May 24, 1738",
+     "July 8, 1741"
+    ],
+    "es": [
+     "31 de octubre de 1517",
+     "13 de agosto de 1727",
+     "24 de mayo de 1738",
+     "8 de julio de 1741"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "On August 13, 1727, in a communion service at Herrnhut, the divided community experienced what they called 'the great outpouring of the Holy Ghost.' Five years later, the first Moravian missionaries sailed to the Caribbean. By 1760 the Moravians had sent more missionaries than all of European Protestantism combined.",
+    "es": "El 13 de agosto de 1727, en un servicio de comunión en Herrnhut, la comunidad dividida experimentó lo que llamaron «el gran derramamiento del Espíritu Santo». Cinco años después, los primeros misioneros moravos navegaron al Caribe. Para 1760 los moravos habían enviado más misioneros que todo el protestantismo europeo combinado."
+   }
+  },
+  {
+   "stem": {
+    "en": "Where and when did John Wesley experience his 'heart strangely warmed' conversion?",
+    "es": "¿Dónde y cuándo experimentó Juan Wesley su conversión «corazón extrañamente calentado»?"
+   },
+   "options": {
+    "en": [
+     "At a field meeting in Bristol, 1739",
+     "On a ship returning from Georgia, 1737",
+     "At a Moravian meeting on Aldersgate Street in London, May 24, 1738, while Luther's preface to Romans was read",
+     "At Oxford with the Holy Club, 1729"
+    ],
+    "es": [
+     "En una reunión al aire libre en Bristol, 1739",
+     "En un barco regresando de Georgia, 1737",
+     "En una reunión morava en Aldersgate Street en Londres, el 24 de mayo de 1738, mientras se leía el prefacio de Lutero a Romanos",
+     "En Oxford con el Club Santo, 1729"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "On May 24, 1738, Wesley reluctantly attended a Moravian meeting where Luther's preface to Romans was being read. He wrote: 'About a quarter before nine... I felt my heart strangely warmed. I felt I did trust in Christ, Christ alone, for salvation.'",
+    "es": "El 24 de mayo de 1738, Wesley asistió renuentemente a una reunión morava donde se leía el prefacio de Lutero a Romanos. Escribió: «Como un cuarto antes de las nueve... sentí mi corazón extrañamente calentado. Sentí que sí confiaba en Cristo, en Cristo solo, para la salvación»."
+   }
+  },
+  {
+   "stem": {
+    "en": "Who was the most powerful theological mind of the First Great Awakening, pastor at Northampton, Massachusetts?",
+    "es": "¿Quién fue la mente teológica más poderosa del Primer Gran Avivamiento, pastor en Northampton, Massachusetts?"
+   },
+   "options": {
+    "en": [
+     "Jonathan Edwards",
+     "George Whitefield",
+     "John Wesley",
+     "Charles Wesley"
+    ],
+    "es": [
+     "Jonathan Edwards",
+     "Jorge Whitefield",
+     "Juan Wesley",
+     "Carlos Wesley"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Jonathan Edwards (1703-1758), Yale graduate at sixteen and Reformed pastor of intense devotional life, presided over the Northampton revival of 1734-35 and preached the famous 'Sinners in the Hands of an Angry God' at Enfield in 1741.",
+    "es": "Jonathan Edwards (1703-1758), graduado de Yale a los dieciséis y pastor reformado de intensa vida devocional, presidió el avivamiento de Northampton de 1734-35 y predicó el famoso «Pecadores en las Manos de un Dios Airado» en Enfield en 1741."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was Edwards's most famous sermon, preached at Enfield, Connecticut, on July 8, 1741?",
+    "es": "¿Cuál fue el sermón más famoso de Edwards, predicado en Enfield, Connecticut, el 8 de julio de 1741?"
+   },
+   "options": {
+    "en": [
+     "\"Sinners in the Hands of an Angry God\"",
+     "\"A Faithful Narrative\"",
+     "\"The End for Which God Created the World\"",
+     "\"Religious Affections\""
+    ],
+    "es": [
+     "«Pecadores en las Manos de un Dios Airado»",
+     "«Una Narrativa Fiel»",
+     "«El Fin para el Cual Dios Creó el Mundo»",
+     "«Afectos Religiosos»"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Edwards read 'Sinners in the Hands of an Angry God' from a manuscript in a quiet voice. Listeners were said to clutch the pillars of the meetinghouse to keep from being swept away by terror at the prospect of judgment.",
+    "es": "Edwards leyó «Pecadores en las Manos de un Dios Airado» de un manuscrito en voz tranquila. Se dice que los oyentes se aferraban a los pilares de la casa de reunión para no ser arrastrados por el terror ante la perspectiva del juicio."
+   }
+  },
+  {
+   "stem": {
+    "en": "Who was the awakening's traveling voice, who made seven journeys from Britain to America between 1738 and 1770 and could be heard preaching to crowds of 30,000 without amplification?",
+    "es": "¿Quién fue la voz viajera del avivamiento, que hizo siete viajes de Gran Bretaña a América entre 1738 y 1770 y podía ser oído predicando a multitudes de 30,000 sin amplificación?"
+   },
+   "options": {
+    "en": [
+     "Jonathan Edwards",
+     "George Whitefield",
+     "John Wesley",
+     "Charles Wesley"
+    ],
+    "es": [
+     "Jonathan Edwards",
+     "Jorge Whitefield",
+     "Juan Wesley",
+     "Carlos Wesley"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Whitefield (1714-1770), Anglican priest converted under Wesley's Holy Club at Oxford, preached perhaps 18,000 sermons in 33 years. Benjamin Franklin paced off the distance and calculated Whitefield could be heard by 30,000. The colonies were welded into one religious public by his voice.",
+    "es": "Whitefield (1714-1770), sacerdote anglicano convertido bajo el Club Santo de Wesley en Oxford, predicó quizás 18,000 sermones en 33 años. Benjamin Franklin midió la distancia y calculó que Whitefield podía ser oído por 30,000. Las colonias fueron soldadas en un solo público religioso por su voz."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did John Wesley organize his converts into for accountability and growth?",
+    "es": "¿En qué organizó Juan Wesley a sus conversos para rendición de cuentas y crecimiento?"
+   },
+   "options": {
+    "en": [
+     "Cathedral parishes",
+     "University colleges",
+     "Monastic orders",
+     "Societies divided into classes of twelve people meeting weekly"
+    ],
+    "es": [
+     "Parroquias catedralicias",
+     "Colegios universitarios",
+     "Órdenes monásticas",
+     "Sociedades divididas en clases de doce personas reuniéndose semanalmente"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Wesley organized converts into societies divided into classes of twelve. Each class met weekly for accountability, mutual confession, and growth in holiness. The structure was modeled on Spener's collegia pietatis and the Moravian bands at Herrnhut. Methodist church polity was born from these small groups.",
+    "es": "Wesley organizó a los conversos en sociedades divididas en clases de doce. Cada clase se reunía semanalmente para rendición de cuentas, confesión mutua, y crecimiento en santidad. La estructura fue modelada sobre los collegia pietatis de Spener y las bandas moravas en Herrnhut. La política de la iglesia metodista nació de estos grupos pequeños."
+   }
+  },
+  {
+   "stem": {
+    "en": "Who wrote about 6,000 hymns including 'And Can It Be,' 'Hark! the Herald Angels Sing,' and 'O for a Thousand Tongues to Sing'?",
+    "es": "¿Quién escribió cerca de 6,000 himnos incluyendo «¿Y Puede Ser?», «¡Oíd un Son en Alta Esfera!», y «Mil Voces Para Celebrar»?"
+   },
+   "options": {
+    "en": [
+     "Isaac Watts",
+     "Charles Wesley",
+     "John Newton",
+     "William Cowper"
+    ],
+    "es": [
+     "Isaac Watts",
+     "Carlos Wesley",
+     "John Newton",
+     "William Cowper"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Charles Wesley (1707-1788), brother of John, wrote about 6,000 hymns putting Methodist theology on the lips of plain people forever after. His hymns are still sung in churches around the world.",
+    "es": "Carlos Wesley (1707-1788), hermano de Juan, escribió cerca de 6,000 himnos poniendo la teología metodista en los labios de la gente común para siempre. Sus himnos todavía se cantan en iglesias alrededor del mundo."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is the 'Calvinist revivalist paradox' that the First Great Awakening preachers held together?",
+    "es": "¿Cuál es la «paradoja calvinista revivalista» que los predicadores del Primer Gran Avivamiento sostenían juntos?"
+   },
+   "options": {
+    "en": [
+     "They taught that good works alone save",
+     "They denied the Trinity",
+     "They held divine sovereignty in salvation AND preached for immediate conversion of every hearer",
+     "They rejected the Bible's authority"
+    ],
+    "es": [
+     "Enseñaron que las buenas obras solas salvan",
+     "Negaban la Trinidad",
+     "Sostenían la soberanía divina en la salvación Y predicaban por la conversión inmediata de cada oyente",
+     "Rechazaban la autoridad de la Biblia"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Edwards, Whitefield, Tennent, and Frelinghuysen were Reformed in their theology of grace and yet preached for immediate conversion. Both halves are biblical: 'No one can come to Me unless the Father draws him' AND 'Come to Me, all you who labor and are heavy laden.'",
+    "es": "Edwards, Whitefield, Tennent, y Frelinghuysen eran reformados en su teología de la gracia y aun así predicaban por conversión inmediata. Ambas mitades son bíblicas: «Ninguno puede venir a mí, si el Padre... no le trajere» Y «Venid a mí todos los que estáis trabajados y cargados»."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does 2 Chronicles 7:14 — the unit's controlling Scripture — promise as the response to humbling, prayer, seeking, and turning?",
+    "es": "¿Qué promete 2 Crónicas 7:14 — la Escritura central de la unidad — como respuesta al humillarse, orar, buscar, y volverse?"
+   },
+   "options": {
+    "en": [
+     "Material prosperity",
+     "Political victory over enemies",
+     "Exemption from suffering",
+     "\"Then I will hear from heaven, and will forgive their sin and heal their land\""
+    ],
+    "es": [
+     "Prosperidad material",
+     "Victoria política sobre los enemigos",
+     "Exención del sufrimiento",
+     "«Entonces yo oiré desde los cielos, y perdonaré sus pecados, y sanaré su tierra»"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "2 Chronicles 7:14 promises that when God's people humble themselves, pray, seek His face, and turn from wicked ways, He hears, forgives, and heals. The Awakening preachers prayed and preached this passage; revival came.",
+    "es": "2 Crónicas 7:14 promete que cuando el pueblo de Dios se humilla, ora, busca Su rostro, y se vuelve de caminos malos, Él oye, perdona, y sana. Los predicadores del Avivamiento oraron y predicaron este pasaje; vino el avivamiento."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Describe the Westminster Assembly and the four documents it produced.",
+    "es": "Describe la Asamblea de Westminster y los cuatro documentos que produjo."
+   },
+   "keywords": {
+    "en": [
+     "westminster",
+     "confession",
+     "catechism",
+     "directory",
+     "presbyterian",
+     "reformed"
+    ],
+    "es": [
+     "westminster",
+     "confesión",
+     "catecismo",
+     "directorio",
+     "presbiteriano",
+     "reformado"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Identify the three great English Puritan giants and what each contributed.",
+    "es": "Identifica a los tres grandes gigantes puritanos ingleses y lo que cada uno contribuyó."
+   },
+   "keywords": {
+    "en": [
+     "bunyan",
+     "pilgrim",
+     "owen",
+     "sin",
+     "baxter",
+     "reformed pastor"
+    ],
+    "es": [
+     "bunyan",
+     "peregrino",
+     "owen",
+     "pecado",
+     "baxter",
+     "pastor reformado"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the suffering remnant of the 17th century — the Scottish Covenanters and the French Huguenots.",
+    "es": "Describe el remanente sufriente del siglo 17 — los Covenanters escoceses y los hugonotes franceses."
+   },
+   "keywords": {
+    "en": [
+     "covenanters",
+     "national covenant",
+     "killing times",
+     "huguenots",
+     "nantes",
+     "dragonnades"
+    ],
+    "es": [
+     "covenanters",
+     "pacto nacional",
+     "tiempos de la matanza",
+     "hugonotes",
+     "nantes",
+     "dragonnades"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe German Pietism: Spener, Francke, and Halle.",
+    "es": "Describe el pietismo alemán: Spener, Francke, y Halle."
+   },
+   "keywords": {
+    "en": [
+     "spener",
+     "pia desideria",
+     "collegia pietatis",
+     "francke",
+     "halle",
+     "orphanage",
+     "tranquebar"
+    ],
+    "es": [
+     "spener",
+     "pia desideria",
+     "collegia pietatis",
+     "francke",
+     "halle",
+     "orfanato",
+     "tranquebar"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Tell the Moravian story: Zinzendorf, Herrnhut, August 13 1727, and the missionary explosion.",
+    "es": "Cuenta la historia morava: Zinzendorf, Herrnhut, el 13 de agosto de 1727, y la explosión misionera."
+   },
+   "keywords": {
+    "en": [
+     "zinzendorf",
+     "herrnhut",
+     "outpouring",
+     "1727",
+     "moravian",
+     "missions",
+     "caribbean"
+    ],
+    "es": [
+     "zinzendorf",
+     "herrnhut",
+     "derramamiento",
+     "1727",
+     "moravo",
+     "misiones",
+     "caribe"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Tell the story of John Wesley's Aldersgate conversion and explain the Moravian connection.",
+    "es": "Cuenta la historia de la conversión de Aldersgate de Juan Wesley y explica la conexión morava."
+   },
+   "keywords": {
+    "en": [
+     "wesley",
+     "aldersgate",
+     "moravian",
+     "luther",
+     "romans",
+     "warmed"
+    ],
+    "es": [
+     "wesley",
+     "aldersgate",
+     "moravo",
+     "lutero",
+     "romanos",
+     "calentado"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe Jonathan Edwards and his role in the First Great Awakening.",
+    "es": "Describe a Jonathan Edwards y su papel en el Primer Gran Avivamiento."
+   },
+   "keywords": {
+    "en": [
+     "edwards",
+     "northampton",
+     "revival",
+     "sinners",
+     "enfield",
+     "justification"
+    ],
+    "es": [
+     "edwards",
+     "northampton",
+     "avivamiento",
+     "pecadores",
+     "enfield",
+     "justificación"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe George Whitefield and his impact on the colonial American religious public.",
+    "es": "Describe a Jorge Whitefield y su impacto en el público religioso colonial americano."
+   },
+   "keywords": {
+    "en": [
+     "whitefield",
+     "field",
+     "preaching",
+     "franklin",
+     "colonies",
+     "journeys"
+    ],
+    "es": [
+     "whitefield",
+     "aire libre",
+     "predicación",
+     "franklin",
+     "colonias",
+     "viajes"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe John and Charles Wesley's Methodist movement.",
+    "es": "Describe el movimiento metodista de Juan y Carlos Wesley."
+   },
+   "keywords": {
+    "en": [
+     "wesley",
+     "methodist",
+     "societies",
+     "classes",
+     "field preaching",
+     "hymns"
+    ],
+    "es": [
+     "wesley",
+     "metodista",
+     "sociedades",
+     "clases",
+     "predicación al aire libre",
+     "himnos"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Give five pastoral applications Wayne draws from this era for ministry today.",
+    "es": "Da cinco aplicaciones pastorales que Wayne saca de esta era para el ministerio hoy."
+   },
+   "keywords": {
+    "en": [
+     "doctrine",
+     "heart",
+     "small groups",
+     "missions",
+     "suffering",
+     "paradox"
+    ],
+    "es": [
+     "doctrina",
+     "corazón",
+     "grupos pequeños",
+     "misiones",
+     "sufrimiento",
+     "paradoja"
+    ]
+   }
+  }
+ ]
+};

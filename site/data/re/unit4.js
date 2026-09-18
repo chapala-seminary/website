@@ -1,3 +1,833 @@
-/* CTSRE - unit 4: per-unit configuration and content. */
-
-var UNIT=4, NEXT_URL="CTSREUnit5.html", MC=[{"stemEn": "Where does Boaz conduct the legal business of redemption?", "stemEs": "¿Dónde realiza Booz el asunto legal de la redención?", "optionsEn": ["his home", "the temple", "the threshing floor", "the main gate of the city"], "optionsEs": ["su casa", "el templo", "la era", "la puerta principal de la ciudad"], "answer": "D", "whyEn": "The city gate served as courthouse and marketplace.", "whyEs": "La puerta servía de tribunal y mercado."}, {"stemEn": "The nearer kinsman's name is not recorded, likely as:", "stemEs": "El nombre del pariente más cercano no se registra, probablemente como:", "optionsEn": ["a type of judgment on him for refusing his duty", "a scribe's error", "a sign of honor", "a royal secret"], "optionsEs": ["un tipo de juicio sobre él por rehusar su deber", "error del escriba", "señal de honor", "secreto real"], "answer": "A", "whyEn": "His namelessness reflects judgment for refusing.", "whyEs": "Su anonimato refleja juicio por rehusar."}, {"stemEn": "Boaz gathers how many witnesses?", "stemEs": "¿Cuántos testigos reúne Booz?", "optionsEn": ["three priests", "seven judges", "ten elders", "twelve scribes"], "optionsEs": ["tres sacerdotes", "siete jueces", "diez ancianos", "doce escribas"], "answer": "C", "whyEn": "Ten elders, to make the transaction legally binding.", "whyEs": "Diez ancianos, para hacerlo legalmente vinculante."}, {"stemEn": "Boaz's strategy is to offer the land first, then reveal:", "stemEs": "La estrategia de Booz es ofrecer la tierra primero, luego revelar:", "optionsEn": ["the price is doubled", "that the redeemer must also marry Ruth", "the land is cursed", "Naomi is wealthy"], "optionsEs": ["que el precio se duplica", "que el redentor también debe casarse con Rut", "que la tierra está maldita", "que Noemí es rica"], "answer": "B", "whyEn": "Land first, then the duty to marry Ruth — shrewd.", "whyEs": "Tierra primero, luego el deber de casarse — astuto."}, {"stemEn": "Why does the nearer kinsman refuse once Ruth is mentioned?", "stemEs": "¿Por qué rehusa el pariente cercano al mencionarse a Rut?", "optionsEn": ["it would jeopardize his own inheritance/estate", "he disliked Naomi", "he lived too far", "he was already redeemed"], "optionsEs": ["pondría en peligro su propia herencia", "le disgustaba Noemí", "vivía muy lejos", "ya estaba redimido"], "answer": "A", "whyEn": "He fears harming his own estate and heirs.", "whyEs": "Teme dañar su herencia y herederos."}, {"stemEn": "Removing the sandal symbolized:", "stemEs": "Quitarse la sandalia simbolizaba:", "optionsEn": ["a curse", "transferring the right to possess the land", "a marriage vow", "payment of a debt"], "optionsEs": ["una maldición", "transferir el derecho de poseer la tierra", "un voto matrimonial", "el pago de una deuda"], "answer": "B", "whyEn": "It transferred the right to walk on/possess the land.", "whyEs": "Transfería el derecho de poseer la tierra."}, {"stemEn": "The people bless Ruth to be like which matriarchs?", "stemEs": "El pueblo bendice a Rut para que sea como cuáles matriarcas?", "optionsEn": ["Sarah and Hagar", "Deborah and Jael", "Mary and Elizabeth", "Rachel and Leah"], "optionsEs": ["Sara y Agar", "Débora y Jael", "María y Elisabet", "Raquel y Lea"], "answer": "D", "whyEn": "Rachel and Leah built up the house of Israel.", "whyEs": "Raquel y Lea edificaron la casa de Israel."}, {"stemEn": "'Wealth' (Hebrew chayil) in the blessing means more than money; it means:", "stemEs": "'Riqueza' (heb. jayil) en la bendición significa más que dinero; significa:", "optionsEn": ["gold and silver", "many cattle", "strength, valor, excellence, and power", "large land"], "optionsEs": ["oro y plata", "mucho ganado", "fuerza, valor, excelencia y poder", "mucha tierra"], "answer": "C", "whyEn": "Chayil = strength/valor/excellence, used of Boaz and Ruth.", "whyEs": "Jayil = fuerza/valor/excelencia, dicho de ambos."}, {"stemEn": "The reference to 'Perez, whom Tamar bore to Judah' connects to:", "stemEs": "La mención de 'Férez, que Tamar dio a Judá' conecta con:", "optionsEn": ["Boaz's own ancestral line", "Moab's kings", "the Levite priests", "Naomi's father"], "optionsEs": ["la propia línea ancestral de Booz", "los reyes de Moab", "los sacerdotes levitas", "el padre de Noemí"], "answer": "A", "whyEn": "Perez is in Boaz's ancestry (1 Chron. 2).", "whyEs": "Férez está en la ascendencia de Booz."}, {"stemEn": "The child born to Ruth and Boaz is named Obed, which means:", "stemEs": "El niño de Rut y Booz se llama Obed, que significa:", "optionsEn": ["redeemer", "strength", "worshiper", "bitter"], "optionsEs": ["redentor", "fuerza", "adorador", "amargo"], "answer": "C", "whyEn": "Obed means 'worshiper.'", "whyEs": "Obed significa 'adorador.'"}, {"stemEn": "Obed becomes the father of Jesse, the father of:", "stemEs": "Obed llega a ser padre de Isaí, el padre de:", "optionsEn": ["King Saul", "King David", "King Solomon", "the prophet Samuel"], "optionsEs": ["el rey Saúl", "el rey David", "el rey Salomón", "el profeta Samuel"], "answer": "B", "whyEn": "Obed → Jesse → David — the royal line.", "whyEs": "Obed → Isaí → David — la línea real."}, {"stemEn": "Christ's royal right to the throne is traced through Joseph back to:", "stemEs": "El derecho real de Cristo al trono se traza por José hasta:", "optionsEn": ["Abraham only", "Moses", "Aaron", "King David (Matthew 1:2-16)"], "optionsEs": ["solo Abraham", "Moisés", "Aarón", "el rey David (Mateo 1:2-16)"], "answer": "D", "whyEn": "Matthew traces Christ's legal line to David.", "whyEs": "Mateo traza la línea legal de Cristo a David."}, {"stemEn": "It is the women of Bethlehem who:", "stemEs": "Son las mujeres de Belén quienes:", "optionsEn": ["arrange the marriage", "bless Boaz and name the child Obed", "redeem the land", "reject Ruth"], "optionsEs": ["arreglan la boda", "bendicen a Booz y nombran al niño Obed", "redimen la tierra", "rechazan a Rut"], "answer": "B", "whyEn": "The women bless and name the child — their role.", "whyEs": "Las mujeres bendicen y nombran al niño."}, {"stemEn": "Hubbard's note says the verse about Obed shows David's reign resulted from:", "stemEs": "La nota de Hubbard dice que el verso sobre Obed muestra que el reinado de David resultó de:", "optionsEn": ["God's divine preservation of a worthy family line", "David's clever politics", "military conquest", "popular vote"], "optionsEs": ["la preservación divina de una digna línea familiar", "la política astuta de David", "conquista militar", "voto popular"], "answer": "A", "whyEn": "Not shrewd politics but God's preserving providence.", "whyEs": "No política astuta sino la providencia preservadora."}, {"stemEn": "Glenda notes 'the Lord enabled her to conceive,' highlighting:", "stemEs": "Glenda nota que 'el Señor le concedió concebir,' resaltando:", "optionsEn": ["a medical miracle", "Ruth's youth", "God's providence shining at the climax", "Boaz's wealth"], "optionsEs": ["un milagro médico", "la juventud de Rut", "la providencia de Dios brillando en el clímax", "la riqueza de Booz"], "answer": "C", "whyEn": "Conception is credited to God — providence.", "whyEs": "La concepción se atribuye a Dios — providencia."}, {"stemEn": "Boaz being at the gate just as the kinsman passes by is interpreted as:", "stemEs": "Que Booz esté en la puerta justo cuando pasa el pariente se interpreta como:", "optionsEn": ["luck", "coincidence with no meaning", "Naomi's planning", "God's providence"], "optionsEs": ["suerte", "coincidencia sin sentido", "planeación de Noemí", "la providencia de Dios"], "answer": "D", "whyEn": "Glenda calls the timing God's providence.", "whyEs": "Glenda llama a esa oportunidad providencia de Dios."}, {"stemEn": "Boaz gathering witnesses teaches us to:", "stemEs": "Que Booz reúna testigos nos enseña a:", "optionsEn": ["avoid legal matters", "leave everything to fate", "do our homework and not assume we have no role in God's plan", "act in secret"], "optionsEs": ["evitar lo legal", "dejar todo al destino", "hacer la tarea y no suponer que no tenemos papel en el plan de Dios", "actuar en secreto"], "answer": "C", "whyEn": "We have a role to play as God leads — do the work.", "whyEs": "Tenemos un papel mientras Dios guía — hacer la obra."}, {"stemEn": "'Be wise as serpents yet gentle as doves' describes how Boaz:", "stemEs": "'Sed astutos como serpientes y sencillos como palomas' describe cómo Booz:", "optionsEn": ["shrewdly handled the nearer kinsman", "deceived the elders", "avoided Ruth", "hid the land"], "optionsEs": ["manejó con astucia al pariente cercano", "engañó a los ancianos", "evitó a Rut", "ocultó la tierra"], "answer": "A", "whyEn": "He was shrewd yet honorable in the negotiation.", "whyEs": "Fue astuto pero honorable en la negociación."}, {"stemEn": "Ruth, a Moabitess, being praised by Jewish women as 'better than seven sons' shows:", "stemEs": "Que las judías alaben a la moabita Rut como 'mejor que siete hijos' muestra:", "optionsEn": ["seven is a curse", "sons are unwanted", "Moab is superior", "God includes Gentiles and women in His plans"], "optionsEs": ["siete es maldición", "los hijos no se desean", "Moab es superior", "Dios incluye a gentiles y mujeres en sus planes"], "answer": "D", "whyEn": "God uses Gentiles and women — Ruth is exalted.", "whyEs": "Dios usa a gentiles y mujeres — Rut es exaltada."}, {"stemEn": "The Mr. Beaver quote ('he isn't safe, but he's good') is used to say God is:", "stemEs": "La cita del Sr. Castor ('no es seguro, pero es bueno') se usa para decir que Dios es:", "optionsEn": ["dangerous and cruel", "not tame/controllable, yet good and sovereign", "predictable", "distant and silent"], "optionsEs": ["peligroso y cruel", "no domesticable, pero bueno y soberano", "predecible", "distante y callado"], "answer": "B", "whyEn": "God is not 'safe'/tame but good and King.", "whyEs": "Dios no es 'seguro'/manso sino bueno y Rey."}], SA=[{"promptEn": "Describe how Boaz handles the redemption at the town gate.", "promptEs": "Describa cómo maneja Booz la redención en la puerta de la ciudad.", "modelEn": "At the city gate Boaz gathers ten elder witnesses, offers the nearer kinsman the land first — which he accepts — then reveals he must also marry Ruth to raise an heir, at which the man refuses to protect his own estate.", "modelEs": "En la puerta Booz reúne diez ancianos como testigos, ofrece al pariente cercano la tierra primero — que acepta — y luego revela que también debe casarse con Rut para levantar heredero, ante lo cual el hombre rehusa para proteger su herencia.", "keywords": {"en": ["gate", "ten", "witness", "land", "ruth", "marry", "heir", "refuse"], "es": ["puerta", "diez", "testigo", "tierra", "rut", "casar", "heredero", "rehusa"]}}, {"promptEn": "Why is the nearer kinsman left unnamed?", "promptEs": "¿Por qué queda sin nombre el pariente más cercano?", "modelEn": "Refusing his moral duty would, by custom, bring disgrace; the writer likely leaves him unnamed as a type of judgment, while Boaz's name becomes significant for his obedience and honor.", "modelEs": "Rehusar su deber moral traía, por costumbre, deshonra; el escritor probablemente lo deja sin nombre como tipo de juicio, mientras el nombre de Booz se vuelve significativo por su obediencia y honor.", "keywords": {"en": ["unnamed", "disgrace", "judgment", "duty", "refuse", "boaz", "honor", "custom"], "es": ["nombre", "deshonra", "juicio", "deber", "rehusa", "booz", "honor", "costumbre"]}}, {"promptEn": "Explain the significance of removing the sandal.", "promptEs": "Explique el significado de quitarse la sandalia.", "modelEn": "Removing the sandal symbolized giving another the right to walk on and possess the land — a legal confirmation of the transfer, not unlike Ruth uncovering Boaz's feet to ask him to take her in.", "modelEs": "Quitarse la sandalia simbolizaba dar a otro el derecho de andar sobre la tierra y poseerla — una confirmación legal de la transferencia, no muy distinta de Rut descubriendo los pies de Booz para pedirle amparo.", "keywords": {"en": ["sandal", "right", "possess", "land", "legal", "transfer", "walk", "confirm"], "es": ["sandalia", "derecho", "poseer", "tierra", "legal", "transfer", "andar", "confirm"]}}, {"promptEn": "What does the people's blessing (Rachel, Leah, Perez/Tamar, chayil) signify?", "promptEs": "¿Qué significa la bendición del pueblo (Raquel, Lea, Férez/Tamar, jayil)?", "modelEn": "They pray Ruth be fruitful like Rachel and Leah who built Israel, and like the house of Perez (Boaz's line through Tamar and Judah). 'Wealth' (chayil) means strength, valor, and excellence — the same word used of both Boaz and Ruth.", "modelEs": "Oran que Rut sea fecunda como Raquel y Lea que edificaron a Israel, y como la casa de Férez (la línea de Booz por Tamar y Judá). 'Riqueza' (jayil) significa fuerza, valor y excelencia — la misma palabra usada de Booz y de Rut.", "keywords": {"en": ["rachel", "leah", "perez", "tamar", "chayil", "strength", "valor", "fruitful"], "es": ["raquel", "lea", "férez", "tamar", "jayil", "fuerza", "valor", "fecund"]}}, {"promptEn": "Trace the genealogy from Obed and explain its importance.", "promptEs": "Trace la genealogía desde Obed y explique su importancia.", "modelEn": "Obed (meaning worshiper) becomes the father of Jesse, the father of King David; since Christ's royal line is traced through Joseph back to David, the Bethlehem blessings on Ruth and Boaz are richly answered — the book's purpose.", "modelEs": "Obed (que significa adorador) llega a ser padre de Isaí, el padre del rey David; y como la línea real de Cristo se traza por José hasta David, las bendiciones de Belén sobre Rut y Booz se cumplen ricamente — el propósito del libro.", "keywords": {"en": ["obed", "jesse", "david", "christ", "lineage", "joseph", "worship", "purpose"], "es": ["obed", "isaí", "david", "cristo", "linaje", "josé", "adorador", "propósito"]}}, {"promptEn": "According to Hubbard, what does the Obed verse reveal about David's reign?", "promptEs": "Según Hubbard, ¿qué revela el verso de Obed sobre el reinado de David?", "modelEn": "David's reign resulted not from shrewd politics or clever tactics but from God's divine preservation of a worthy family line; Israel was to accept David's kingship as the gift of divine guidance.", "modelEs": "El reinado de David no resultó de política astuta ni tácticas hábiles sino de la preservación divina de una digna línea familiar; Israel debía aceptar el reinado de David como don de la guía divina.", "keywords": {"en": ["david", "reign", "politics", "preserv", "divine", "family", "guidance", "gift"], "es": ["david", "reino", "política", "preserv", "divina", "familia", "guía", "don"]}}, {"promptEn": "How does chapter 4 display God's providence?", "promptEs": "¿Cómo muestra el capítulo 4 la providencia de Dios?", "modelEn": "Boaz 'happens' to be at the gate just as the nearer kinsman passes, the negotiation resolves in Ruth's favor, and the Lord enables Ruth to conceive — God's providence shines throughout and especially at the climax.", "modelEs": "Booz 'casualmente' está en la puerta justo cuando pasa el pariente, la negociación se resuelve a favor de Rut, y el Señor concede a Rut concebir — la providencia de Dios brilla en todo y sobre todo en el clímax.", "keywords": {"en": ["providence", "gate", "kinsman", "conceive", "lord", "resolve", "climax", "god"], "es": ["providencia", "puerta", "pariente", "concebir", "señor", "resuelve", "clímax", "dios"]}}, {"promptEn": "What does Boaz's example teach about diligence and our role in God's plan?", "promptEs": "¿Qué enseña el ejemplo de Booz sobre la diligencia y nuestro papel en el plan de Dios?", "modelEn": "Boaz gathered witnesses and did his homework, showing we should not assume we have no role to play; like Abraham and the twelve disciples, we have parts to play as God leads, acting wisely yet gently.", "modelEs": "Booz reúne testigos e hizo su tarea, mostrando que no debemos suponer que no tenemos papel; como Abraham y los doce discípulos, tenemos partes que cumplir mientras Dios guía, actuando con astucia pero con mansedumbre.", "keywords": {"en": ["witness", "homework", "role", "abraham", "disciple", "wise", "gentle", "lead"], "es": ["testigo", "tarea", "papel", "abraham", "discípulo", "astuto", "manso", "guía"]}}, {"promptEn": "How do Boaz and Ruth model sacrifice, and how did God reward them?", "promptEs": "¿Cómo modelan Booz y Rut el sacrificio, y cómo los recompensó Dios?", "modelEn": "Boaz paid dearly to raise a son in the dead man's name, and Ruth gave up country, people, and gods to follow the one true God and care for Naomi. God honored both, making them great-grandparents of King David.", "modelEs": "Booz pagó caro para levantar un hijo en nombre del difunto, y Rut renunció a su país, pueblo y dioses para seguir al único Dios y cuidar a Noemí. Dios honró a ambos, haciéndolos bisabuelos del rey David.", "keywords": {"en": ["sacrifice", "boaz", "ruth", "follow", "naomi", "reward", "david", "honor"], "es": ["sacrificio", "booz", "rut", "seguir", "noemí", "recompens", "david", "honra"]}}, {"promptEn": "What does Ruth's inclusion in David's (and Christ's) line teach about God?", "promptEs": "¿Qué enseña sobre Dios la inclusión de Rut en la línea de David (y de Cristo)?", "modelEn": "God uses whom He chooses — Gentiles like Ruth and Rahab, and women given crucial roles. We cannot put God in a box or expect Him to act as we would; we see dimly, but He sees fully, and He is good though not tame.", "modelEs": "Dios usa a quien escoge — gentiles como Rut y Rahab, y mujeres con papeles cruciales. No podemos encajonar a Dios ni esperar que actúe como nosotros; vemos en penumbra, pero Él ve plenamente, y es bueno aunque no domesticable.", "keywords": {"en": ["gentile", "ruth", "rahab", "women", "choose", "good", "box", "dimly"], "es": ["gentil", "rut", "rahab", "mujeres", "escoge", "bueno", "caja", "penumbra"]}}];
+/* CTSRE — unit 4. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "re",
+ "unit": 4,
+ "totalUnits": 9,
+ "filePrefix": "CTSRE",
+ "prevHref": "CTSREUnit3.html",
+ "nextHref": "CTSREUnit5.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "Where does Boaz conduct the legal business of redemption?",
+    "es": "¿Dónde realiza Booz el asunto legal de la redención?"
+   },
+   "options": {
+    "en": [
+     "his home",
+     "the temple",
+     "the threshing floor",
+     "the main gate of the city"
+    ],
+    "es": [
+     "su casa",
+     "el templo",
+     "la era",
+     "la puerta principal de la ciudad"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The city gate served as courthouse and marketplace.",
+    "es": "La puerta servía de tribunal y mercado."
+   }
+  },
+  {
+   "stem": {
+    "en": "The nearer kinsman's name is not recorded, likely as:",
+    "es": "El nombre del pariente más cercano no se registra, probablemente como:"
+   },
+   "options": {
+    "en": [
+     "a type of judgment on him for refusing his duty",
+     "a scribe's error",
+     "a sign of honor",
+     "a royal secret"
+    ],
+    "es": [
+     "un tipo de juicio sobre él por rehusar su deber",
+     "error del escriba",
+     "señal de honor",
+     "secreto real"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "His namelessness reflects judgment for refusing.",
+    "es": "Su anonimato refleja juicio por rehusar."
+   }
+  },
+  {
+   "stem": {
+    "en": "Boaz gathers how many witnesses?",
+    "es": "¿Cuántos testigos reúne Booz?"
+   },
+   "options": {
+    "en": [
+     "three priests",
+     "seven judges",
+     "ten elders",
+     "twelve scribes"
+    ],
+    "es": [
+     "tres sacerdotes",
+     "siete jueces",
+     "diez ancianos",
+     "doce escribas"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Ten elders, to make the transaction legally binding.",
+    "es": "Diez ancianos, para hacerlo legalmente vinculante."
+   }
+  },
+  {
+   "stem": {
+    "en": "Boaz's strategy is to offer the land first, then reveal:",
+    "es": "La estrategia de Booz es ofrecer la tierra primero, luego revelar:"
+   },
+   "options": {
+    "en": [
+     "the price is doubled",
+     "that the redeemer must also marry Ruth",
+     "the land is cursed",
+     "Naomi is wealthy"
+    ],
+    "es": [
+     "que el precio se duplica",
+     "que el redentor también debe casarse con Rut",
+     "que la tierra está maldita",
+     "que Noemí es rica"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Land first, then the duty to marry Ruth — shrewd.",
+    "es": "Tierra primero, luego el deber de casarse — astuto."
+   }
+  },
+  {
+   "stem": {
+    "en": "Why does the nearer kinsman refuse once Ruth is mentioned?",
+    "es": "¿Por qué rehusa el pariente cercano al mencionarse a Rut?"
+   },
+   "options": {
+    "en": [
+     "it would jeopardize his own inheritance/estate",
+     "he disliked Naomi",
+     "he lived too far",
+     "he was already redeemed"
+    ],
+    "es": [
+     "pondría en peligro su propia herencia",
+     "le disgustaba Noemí",
+     "vivía muy lejos",
+     "ya estaba redimido"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "He fears harming his own estate and heirs.",
+    "es": "Teme dañar su herencia y herederos."
+   }
+  },
+  {
+   "stem": {
+    "en": "Removing the sandal symbolized:",
+    "es": "Quitarse la sandalia simbolizaba:"
+   },
+   "options": {
+    "en": [
+     "a curse",
+     "transferring the right to possess the land",
+     "a marriage vow",
+     "payment of a debt"
+    ],
+    "es": [
+     "una maldición",
+     "transferir el derecho de poseer la tierra",
+     "un voto matrimonial",
+     "el pago de una deuda"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "It transferred the right to walk on/possess the land.",
+    "es": "Transfería el derecho de poseer la tierra."
+   }
+  },
+  {
+   "stem": {
+    "en": "The people bless Ruth to be like which matriarchs?",
+    "es": "El pueblo bendice a Rut para que sea como cuáles matriarcas?"
+   },
+   "options": {
+    "en": [
+     "Sarah and Hagar",
+     "Deborah and Jael",
+     "Mary and Elizabeth",
+     "Rachel and Leah"
+    ],
+    "es": [
+     "Sara y Agar",
+     "Débora y Jael",
+     "María y Elisabet",
+     "Raquel y Lea"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Rachel and Leah built up the house of Israel.",
+    "es": "Raquel y Lea edificaron la casa de Israel."
+   }
+  },
+  {
+   "stem": {
+    "en": "'Wealth' (Hebrew chayil) in the blessing means more than money; it means:",
+    "es": "'Riqueza' (heb. jayil) en la bendición significa más que dinero; significa:"
+   },
+   "options": {
+    "en": [
+     "gold and silver",
+     "many cattle",
+     "strength, valor, excellence, and power",
+     "large land"
+    ],
+    "es": [
+     "oro y plata",
+     "mucho ganado",
+     "fuerza, valor, excelencia y poder",
+     "mucha tierra"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Chayil = strength/valor/excellence, used of Boaz and Ruth.",
+    "es": "Jayil = fuerza/valor/excelencia, dicho de ambos."
+   }
+  },
+  {
+   "stem": {
+    "en": "The reference to 'Perez, whom Tamar bore to Judah' connects to:",
+    "es": "La mención de 'Férez, que Tamar dio a Judá' conecta con:"
+   },
+   "options": {
+    "en": [
+     "Boaz's own ancestral line",
+     "Moab's kings",
+     "the Levite priests",
+     "Naomi's father"
+    ],
+    "es": [
+     "la propia línea ancestral de Booz",
+     "los reyes de Moab",
+     "los sacerdotes levitas",
+     "el padre de Noemí"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Perez is in Boaz's ancestry (1 Chron. 2).",
+    "es": "Férez está en la ascendencia de Booz."
+   }
+  },
+  {
+   "stem": {
+    "en": "The child born to Ruth and Boaz is named Obed, which means:",
+    "es": "El niño de Rut y Booz se llama Obed, que significa:"
+   },
+   "options": {
+    "en": [
+     "redeemer",
+     "strength",
+     "worshiper",
+     "bitter"
+    ],
+    "es": [
+     "redentor",
+     "fuerza",
+     "adorador",
+     "amargo"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Obed means 'worshiper.'",
+    "es": "Obed significa 'adorador.'"
+   }
+  },
+  {
+   "stem": {
+    "en": "Obed becomes the father of Jesse, the father of:",
+    "es": "Obed llega a ser padre de Isaí, el padre de:"
+   },
+   "options": {
+    "en": [
+     "King Saul",
+     "King David",
+     "King Solomon",
+     "the prophet Samuel"
+    ],
+    "es": [
+     "el rey Saúl",
+     "el rey David",
+     "el rey Salomón",
+     "el profeta Samuel"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Obed → Jesse → David — the royal line.",
+    "es": "Obed → Isaí → David — la línea real."
+   }
+  },
+  {
+   "stem": {
+    "en": "Christ's royal right to the throne is traced through Joseph back to:",
+    "es": "El derecho real de Cristo al trono se traza por José hasta:"
+   },
+   "options": {
+    "en": [
+     "Abraham only",
+     "Moses",
+     "Aaron",
+     "King David (Matthew 1:2-16)"
+    ],
+    "es": [
+     "solo Abraham",
+     "Moisés",
+     "Aarón",
+     "el rey David (Mateo 1:2-16)"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Matthew traces Christ's legal line to David.",
+    "es": "Mateo traza la línea legal de Cristo a David."
+   }
+  },
+  {
+   "stem": {
+    "en": "It is the women of Bethlehem who:",
+    "es": "Son las mujeres de Belén quienes:"
+   },
+   "options": {
+    "en": [
+     "arrange the marriage",
+     "bless Boaz and name the child Obed",
+     "redeem the land",
+     "reject Ruth"
+    ],
+    "es": [
+     "arreglan la boda",
+     "bendicen a Booz y nombran al niño Obed",
+     "redimen la tierra",
+     "rechazan a Rut"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The women bless and name the child — their role.",
+    "es": "Las mujeres bendicen y nombran al niño."
+   }
+  },
+  {
+   "stem": {
+    "en": "Hubbard's note says the verse about Obed shows David's reign resulted from:",
+    "es": "La nota de Hubbard dice que el verso sobre Obed muestra que el reinado de David resultó de:"
+   },
+   "options": {
+    "en": [
+     "God's divine preservation of a worthy family line",
+     "David's clever politics",
+     "military conquest",
+     "popular vote"
+    ],
+    "es": [
+     "la preservación divina de una digna línea familiar",
+     "la política astuta de David",
+     "conquista militar",
+     "voto popular"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Not shrewd politics but God's preserving providence.",
+    "es": "No política astuta sino la providencia preservadora."
+   }
+  },
+  {
+   "stem": {
+    "en": "Glenda notes 'the Lord enabled her to conceive,' highlighting:",
+    "es": "Glenda nota que 'el Señor le concedió concebir,' resaltando:"
+   },
+   "options": {
+    "en": [
+     "a medical miracle",
+     "Ruth's youth",
+     "God's providence shining at the climax",
+     "Boaz's wealth"
+    ],
+    "es": [
+     "un milagro médico",
+     "la juventud de Rut",
+     "la providencia de Dios brillando en el clímax",
+     "la riqueza de Booz"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Conception is credited to God — providence.",
+    "es": "La concepción se atribuye a Dios — providencia."
+   }
+  },
+  {
+   "stem": {
+    "en": "Boaz being at the gate just as the kinsman passes by is interpreted as:",
+    "es": "Que Booz esté en la puerta justo cuando pasa el pariente se interpreta como:"
+   },
+   "options": {
+    "en": [
+     "luck",
+     "coincidence with no meaning",
+     "Naomi's planning",
+     "God's providence"
+    ],
+    "es": [
+     "suerte",
+     "coincidencia sin sentido",
+     "planeación de Noemí",
+     "la providencia de Dios"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Glenda calls the timing God's providence.",
+    "es": "Glenda llama a esa oportunidad providencia de Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "Boaz gathering witnesses teaches us to:",
+    "es": "Que Booz reúna testigos nos enseña a:"
+   },
+   "options": {
+    "en": [
+     "avoid legal matters",
+     "leave everything to fate",
+     "do our homework and not assume we have no role in God's plan",
+     "act in secret"
+    ],
+    "es": [
+     "evitar lo legal",
+     "dejar todo al destino",
+     "hacer la tarea y no suponer que no tenemos papel en el plan de Dios",
+     "actuar en secreto"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "We have a role to play as God leads — do the work.",
+    "es": "Tenemos un papel mientras Dios guía — hacer la obra."
+   }
+  },
+  {
+   "stem": {
+    "en": "'Be wise as serpents yet gentle as doves' describes how Boaz:",
+    "es": "'Sed astutos como serpientes y sencillos como palomas' describe cómo Booz:"
+   },
+   "options": {
+    "en": [
+     "shrewdly handled the nearer kinsman",
+     "deceived the elders",
+     "avoided Ruth",
+     "hid the land"
+    ],
+    "es": [
+     "manejó con astucia al pariente cercano",
+     "engañó a los ancianos",
+     "evitó a Rut",
+     "ocultó la tierra"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "He was shrewd yet honorable in the negotiation.",
+    "es": "Fue astuto pero honorable en la negociación."
+   }
+  },
+  {
+   "stem": {
+    "en": "Ruth, a Moabitess, being praised by Jewish women as 'better than seven sons' shows:",
+    "es": "Que las judías alaben a la moabita Rut como 'mejor que siete hijos' muestra:"
+   },
+   "options": {
+    "en": [
+     "seven is a curse",
+     "sons are unwanted",
+     "Moab is superior",
+     "God includes Gentiles and women in His plans"
+    ],
+    "es": [
+     "siete es maldición",
+     "los hijos no se desean",
+     "Moab es superior",
+     "Dios incluye a gentiles y mujeres en sus planes"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "God uses Gentiles and women — Ruth is exalted.",
+    "es": "Dios usa a gentiles y mujeres — Rut es exaltada."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Mr. Beaver quote ('he isn't safe, but he's good') is used to say God is:",
+    "es": "La cita del Sr. Castor ('no es seguro, pero es bueno') se usa para decir que Dios es:"
+   },
+   "options": {
+    "en": [
+     "dangerous and cruel",
+     "not tame/controllable, yet good and sovereign",
+     "predictable",
+     "distant and silent"
+    ],
+    "es": [
+     "peligroso y cruel",
+     "no domesticable, pero bueno y soberano",
+     "predecible",
+     "distante y callado"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "God is not 'safe'/tame but good and King.",
+    "es": "Dios no es 'seguro'/manso sino bueno y Rey."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Describe how Boaz handles the redemption at the town gate.",
+    "es": "Describa cómo maneja Booz la redención en la puerta de la ciudad."
+   },
+   "keywords": {
+    "en": [
+     "gate",
+     "ten",
+     "witness",
+     "land",
+     "ruth",
+     "marry",
+     "heir",
+     "refuse"
+    ],
+    "es": [
+     "puerta",
+     "diez",
+     "testigo",
+     "tierra",
+     "rut",
+     "casar",
+     "heredero",
+     "rehusa"
+    ]
+   },
+   "model": {
+    "en": "At the city gate Boaz gathers ten elder witnesses, offers the nearer kinsman the land first — which he accepts — then reveals he must also marry Ruth to raise an heir, at which the man refuses to protect his own estate.",
+    "es": "En la puerta Booz reúne diez ancianos como testigos, ofrece al pariente cercano la tierra primero — que acepta — y luego revela que también debe casarse con Rut para levantar heredero, ante lo cual el hombre rehusa para proteger su herencia."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why is the nearer kinsman left unnamed?",
+    "es": "¿Por qué queda sin nombre el pariente más cercano?"
+   },
+   "keywords": {
+    "en": [
+     "unnamed",
+     "disgrace",
+     "judgment",
+     "duty",
+     "refuse",
+     "boaz",
+     "honor",
+     "custom"
+    ],
+    "es": [
+     "nombre",
+     "deshonra",
+     "juicio",
+     "deber",
+     "rehusa",
+     "booz",
+     "honor",
+     "costumbre"
+    ]
+   },
+   "model": {
+    "en": "Refusing his moral duty would, by custom, bring disgrace; the writer likely leaves him unnamed as a type of judgment, while Boaz's name becomes significant for his obedience and honor.",
+    "es": "Rehusar su deber moral traía, por costumbre, deshonra; el escritor probablemente lo deja sin nombre como tipo de juicio, mientras el nombre de Booz se vuelve significativo por su obediencia y honor."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the significance of removing the sandal.",
+    "es": "Explique el significado de quitarse la sandalia."
+   },
+   "keywords": {
+    "en": [
+     "sandal",
+     "right",
+     "possess",
+     "land",
+     "legal",
+     "transfer",
+     "walk",
+     "confirm"
+    ],
+    "es": [
+     "sandalia",
+     "derecho",
+     "poseer",
+     "tierra",
+     "legal",
+     "transfer",
+     "andar",
+     "confirm"
+    ]
+   },
+   "model": {
+    "en": "Removing the sandal symbolized giving another the right to walk on and possess the land — a legal confirmation of the transfer, not unlike Ruth uncovering Boaz's feet to ask him to take her in.",
+    "es": "Quitarse la sandalia simbolizaba dar a otro el derecho de andar sobre la tierra y poseerla — una confirmación legal de la transferencia, no muy distinta de Rut descubriendo los pies de Booz para pedirle amparo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does the people's blessing (Rachel, Leah, Perez/Tamar, chayil) signify?",
+    "es": "¿Qué significa la bendición del pueblo (Raquel, Lea, Férez/Tamar, jayil)?"
+   },
+   "keywords": {
+    "en": [
+     "rachel",
+     "leah",
+     "perez",
+     "tamar",
+     "chayil",
+     "strength",
+     "valor",
+     "fruitful"
+    ],
+    "es": [
+     "raquel",
+     "lea",
+     "férez",
+     "tamar",
+     "jayil",
+     "fuerza",
+     "valor",
+     "fecund"
+    ]
+   },
+   "model": {
+    "en": "They pray Ruth be fruitful like Rachel and Leah who built Israel, and like the house of Perez (Boaz's line through Tamar and Judah). 'Wealth' (chayil) means strength, valor, and excellence — the same word used of both Boaz and Ruth.",
+    "es": "Oran que Rut sea fecunda como Raquel y Lea que edificaron a Israel, y como la casa de Férez (la línea de Booz por Tamar y Judá). 'Riqueza' (jayil) significa fuerza, valor y excelencia — la misma palabra usada de Booz y de Rut."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Trace the genealogy from Obed and explain its importance.",
+    "es": "Trace la genealogía desde Obed y explique su importancia."
+   },
+   "keywords": {
+    "en": [
+     "obed",
+     "jesse",
+     "david",
+     "christ",
+     "lineage",
+     "joseph",
+     "worship",
+     "purpose"
+    ],
+    "es": [
+     "obed",
+     "isaí",
+     "david",
+     "cristo",
+     "linaje",
+     "josé",
+     "adorador",
+     "propósito"
+    ]
+   },
+   "model": {
+    "en": "Obed (meaning worshiper) becomes the father of Jesse, the father of King David; since Christ's royal line is traced through Joseph back to David, the Bethlehem blessings on Ruth and Boaz are richly answered — the book's purpose.",
+    "es": "Obed (que significa adorador) llega a ser padre de Isaí, el padre del rey David; y como la línea real de Cristo se traza por José hasta David, las bendiciones de Belén sobre Rut y Booz se cumplen ricamente — el propósito del libro."
+   }
+  },
+  {
+   "prompt": {
+    "en": "According to Hubbard, what does the Obed verse reveal about David's reign?",
+    "es": "Según Hubbard, ¿qué revela el verso de Obed sobre el reinado de David?"
+   },
+   "keywords": {
+    "en": [
+     "david",
+     "reign",
+     "politics",
+     "preserv",
+     "divine",
+     "family",
+     "guidance",
+     "gift"
+    ],
+    "es": [
+     "david",
+     "reino",
+     "política",
+     "preserv",
+     "divina",
+     "familia",
+     "guía",
+     "don"
+    ]
+   },
+   "model": {
+    "en": "David's reign resulted not from shrewd politics or clever tactics but from God's divine preservation of a worthy family line; Israel was to accept David's kingship as the gift of divine guidance.",
+    "es": "El reinado de David no resultó de política astuta ni tácticas hábiles sino de la preservación divina de una digna línea familiar; Israel debía aceptar el reinado de David como don de la guía divina."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How does chapter 4 display God's providence?",
+    "es": "¿Cómo muestra el capítulo 4 la providencia de Dios?"
+   },
+   "keywords": {
+    "en": [
+     "providence",
+     "gate",
+     "kinsman",
+     "conceive",
+     "lord",
+     "resolve",
+     "climax",
+     "god"
+    ],
+    "es": [
+     "providencia",
+     "puerta",
+     "pariente",
+     "concebir",
+     "señor",
+     "resuelve",
+     "clímax",
+     "dios"
+    ]
+   },
+   "model": {
+    "en": "Boaz 'happens' to be at the gate just as the nearer kinsman passes, the negotiation resolves in Ruth's favor, and the Lord enables Ruth to conceive — God's providence shines throughout and especially at the climax.",
+    "es": "Booz 'casualmente' está en la puerta justo cuando pasa el pariente, la negociación se resuelve a favor de Rut, y el Señor concede a Rut concebir — la providencia de Dios brilla en todo y sobre todo en el clímax."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does Boaz's example teach about diligence and our role in God's plan?",
+    "es": "¿Qué enseña el ejemplo de Booz sobre la diligencia y nuestro papel en el plan de Dios?"
+   },
+   "keywords": {
+    "en": [
+     "witness",
+     "homework",
+     "role",
+     "abraham",
+     "disciple",
+     "wise",
+     "gentle",
+     "lead"
+    ],
+    "es": [
+     "testigo",
+     "tarea",
+     "papel",
+     "abraham",
+     "discípulo",
+     "astuto",
+     "manso",
+     "guía"
+    ]
+   },
+   "model": {
+    "en": "Boaz gathered witnesses and did his homework, showing we should not assume we have no role to play; like Abraham and the twelve disciples, we have parts to play as God leads, acting wisely yet gently.",
+    "es": "Booz reúne testigos e hizo su tarea, mostrando que no debemos suponer que no tenemos papel; como Abraham y los doce discípulos, tenemos partes que cumplir mientras Dios guía, actuando con astucia pero con mansedumbre."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How do Boaz and Ruth model sacrifice, and how did God reward them?",
+    "es": "¿Cómo modelan Booz y Rut el sacrificio, y cómo los recompensó Dios?"
+   },
+   "keywords": {
+    "en": [
+     "sacrifice",
+     "boaz",
+     "ruth",
+     "follow",
+     "naomi",
+     "reward",
+     "david",
+     "honor"
+    ],
+    "es": [
+     "sacrificio",
+     "booz",
+     "rut",
+     "seguir",
+     "noemí",
+     "recompens",
+     "david",
+     "honra"
+    ]
+   },
+   "model": {
+    "en": "Boaz paid dearly to raise a son in the dead man's name, and Ruth gave up country, people, and gods to follow the one true God and care for Naomi. God honored both, making them great-grandparents of King David.",
+    "es": "Booz pagó caro para levantar un hijo en nombre del difunto, y Rut renunció a su país, pueblo y dioses para seguir al único Dios y cuidar a Noemí. Dios honró a ambos, haciéndolos bisabuelos del rey David."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does Ruth's inclusion in David's (and Christ's) line teach about God?",
+    "es": "¿Qué enseña sobre Dios la inclusión de Rut en la línea de David (y de Cristo)?"
+   },
+   "keywords": {
+    "en": [
+     "gentile",
+     "ruth",
+     "rahab",
+     "women",
+     "choose",
+     "good",
+     "box",
+     "dimly"
+    ],
+    "es": [
+     "gentil",
+     "rut",
+     "rahab",
+     "mujeres",
+     "escoge",
+     "bueno",
+     "caja",
+     "penumbra"
+    ]
+   },
+   "model": {
+    "en": "God uses whom He chooses — Gentiles like Ruth and Rahab, and women given crucial roles. We cannot put God in a box or expect Him to act as we would; we see dimly, but He sees fully, and He is good though not tame.",
+    "es": "Dios usa a quien escoge — gentiles como Rut y Rahab, y mujeres con papeles cruciales. No podemos encajonar a Dios ni esperar que actúe como nosotros; vemos en penumbra, pero Él ve plenamente, y es bueno aunque no domesticable."
+   }
+  }
+ ]
+};

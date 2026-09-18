@@ -1,47 +1,833 @@
-/* CTSPent - unit 9: per-unit configuration and content. */
-
-const UNIT = 9;
-
-const NEXT_URL = "CTSPentUnit10.html";
-
-const PREV_URL = "CTSPentUnit8.html";
-
-const IS_LAST_UNIT = false;
-
-const SHOW_REGISTRATION_CARD = false;
-
-const mcQuestions = [
-    { textEn: "1. What is the Hebrew title for the book of Numbers, and what does it mean?", textEs: "1. ¿Cuál es el título hebreo del libro de Números, y qué significa?", optionsEn: ["A. 'Vayikra' — 'And He called'", "B. 'Bemidbar' — 'In the wilderness'", "C. 'Devarim' — 'Words'", "D. 'Shemot' — 'Names'"], optionsEs: ["A. 'Vayikra' — 'Y llamó'", "B. 'Bemidbar' — 'En el desierto'", "C. 'Devarim' — 'Palabras'", "D. 'Shemot' — 'Nombres'"], correct: 1, correctFeedbackEn: "Correct! 'Bemidbar' means 'in the wilderness' — a far more accurate description than 'Numbers.'", correctFeedbackEs: "¡Correcto! 'Bemidbar' significa 'en el desierto' — una descripción mucho más precisa que 'Números.'", incorrectFeedbackEn: "Bemidbar — 'in the wilderness' — captures the book's setting and theme.", incorrectFeedbackEs: "Bemidbar — 'en el desierto' — capta el escenario y el tema del libro." },
-    { textEn: "2. How long should the journey from Sinai to Canaan have taken?", textEs: "2. ¿Cuánto debía haber tomado el viaje de Sinaí a Canaán?", optionsEn: ["A. 11 days", "B. 40 days", "C. 1 year", "D. 40 years"], optionsEs: ["A. 11 días", "B. 40 días", "C. 1 año", "D. 40 años"], correct: 0, correctFeedbackEn: "Yes. Deuteronomy 1:2 says it was an 11-day journey — but unbelief made it 40 years.", correctFeedbackEs: "Sí. Deuteronomio 1:2 dice que era un viaje de 11 días — pero la incredulidad lo convirtió en 40 años.", incorrectFeedbackEn: "Deuteronomy 1:2 — eleven days from Horeb to Kadesh Barnea. Unbelief made it forty years.", incorrectFeedbackEs: "Deuteronomio 1:2 — once días desde Horeb hasta Cades-barnea. La incredulidad lo convirtió en cuarenta años." },
-    { textEn: "3. What was the total number of men able to go to war in the first census?", textEs: "3. ¿Cuál era el número total de hombres aptos para la guerra en el primer censo?", optionsEn: ["A. 603,550", "B. 601,730", "C. 144,000", "D. 2 million"], optionsEs: ["A. 603,550", "B. 601,730", "C. 144,000", "D. 2 millones"], correct: 0, correctFeedbackEn: "Correct. 603,550 men of war, plus women, children, and Levites — about 2 million people total.", correctFeedbackEs: "Correcto. 603,550 hombres de guerra, más mujeres, niños y levitas — unos 2 millones de personas en total.", incorrectFeedbackEn: "Numbers 1:46 — 603,550 men twenty years and older able to go to war.", incorrectFeedbackEs: "Números 1:46 — 603,550 hombres de veinte años arriba, aptos para la guerra." },
-    { textEn: "4. What was at the center of the Israelite camp?", textEs: "4. ¿Qué estaba en el centro del campamento israelita?", optionsEn: ["A. The tabernacle", "B. Moses' tent", "C. The ark of the covenant alone", "D. The bronze serpent"], optionsEs: ["A. El tabernáculo", "B. La tienda de Moisés", "C. Solo el arca del pacto", "D. La serpiente de bronce"], correct: 0, correctFeedbackEn: "Yes. The tabernacle — God's presence — was at the center of the camp.", correctFeedbackEs: "Sí. El tabernáculo — la presencia de Dios — estaba en el centro del campamento.", incorrectFeedbackEn: "The tabernacle was at the center, with the tribes arranged around it.", incorrectFeedbackEs: "El tabernáculo estaba en el centro, con las tribus dispuestas alrededor de él." },
-    { textEn: "5. At Kibroth Hattaavah, what did the people crave instead of manna?", textEs: "5. En Kibrot-hataava, ¿qué anhelaba la gente en lugar del maná?", optionsEn: ["A. Bread from Egypt", "B. Fruit from Canaan", "C. Meat — fish, cucumbers, melons, leeks, onions, garlic", "D. Water"], optionsEs: ["A. Pan de Egipto", "B. Fruta de Canaán", "C. Carne — pescado, pepinos, melones, puerros, cebollas, ajos", "D. Agua"], correct: 2, correctFeedbackEn: "Yes. They despised the manna and longed for the food of Egypt — even though they had been slaves there.", correctFeedbackEs: "Sí. Despreciaron el maná y anhelaron la comida de Egipto — aunque allí habían sido esclavos.", incorrectFeedbackEn: "Numbers 11:5 — 'We remember the fish... the cucumbers, the melons, the leeks, the onions, and the garlic.'", incorrectFeedbackEs: "Números 11:5 — 'Nos acordamos del pescado... los pepinos, los melones, los puerros, las cebollas y los ajos.'" },
-    { textEn: "6. How did God answer Moses when he said the burden of leadership was too heavy?", textEs: "6. ¿Cómo respondió Dios a Moisés cuando dijo que la carga del liderazgo era demasiado pesada?", optionsEn: ["A. He removed Moses", "B. He told Moses to work harder", "C. He sent Aaron to help", "D. He appointed seventy elders to share the burden"], optionsEs: ["A. Removió a Moisés", "B. Le dijo a Moisés que trabajara más duro", "C. Envió a Aarón para ayudar", "D. Designó setenta ancianos para compartir la carga"], correct: 3, correctFeedbackEn: "Correct. God appointed seventy elders and poured out His Spirit on them.", correctFeedbackEs: "Correcto. Dios designó setenta ancianos y derramó Su Espíritu sobre ellos.", incorrectFeedbackEn: "Numbers 11:16-17 — God appointed seventy elders to share the burden.", incorrectFeedbackEs: "Números 11:16-17 — Dios designó setenta ancianos para compartir la carga." },
-    { textEn: "7. What happened to Miriam when she and Aaron spoke against Moses?", textEs: "7. ¿Qué le sucedió a Miriam cuando ella y Aarón hablaron contra Moisés?", optionsEn: ["A. She was exiled", "B. She became leprous, white as snow", "C. Nothing", "D. She was stoned"], optionsEs: ["A. Fue exiliada", "B. Se volvió leprosa, blanca como la nieve", "C. Nada", "D. Fue apedreada"], correct: 1, correctFeedbackEn: "Yes. God struck Miriam with leprosy for challenging Moses' unique authority.", correctFeedbackEs: "Sí. Dios hirió a Miriam con lepra por desafiar la autoridad singular de Moisés.", incorrectFeedbackEn: "Numbers 12:10 — Miriam became leprous, white as snow.", incorrectFeedbackEs: "Números 12:10 — Miriam se volvió leprosa, blanca como la nieve." },
-    { textEn: "8. How many spies brought back a bad report about the land of Canaan?", textEs: "8. ¿Cuántos espías trajeron un mal informe acerca de la tierra de Canaán?", optionsEn: ["A. 10", "B. 2", "C. 12", "D. 5"], optionsEs: ["A. 10", "B. 2", "C. 12", "D. 5"], correct: 0, correctFeedbackEn: "Correct. Ten spies brought a bad report; only Joshua and Caleb trusted God.", correctFeedbackEs: "Correcto. Diez espías trajeron un mal informe; solo Josué y Caleb confiaron en Dios.", incorrectFeedbackEn: "Numbers 13 — ten spies gave a bad report; only Joshua and Caleb gave a good report.", incorrectFeedbackEs: "Números 13 — diez espías dieron un mal informe; solo Josué y Caleb dieron un buen informe." },
-    { textEn: "9. How did the congregation respond to Joshua and Caleb's plea to trust God and enter the land?", textEs: "9. ¿Cómo respondió la congregación al ruego de Josué y Caleb de confiar en Dios y entrar en la tierra?", optionsEn: ["A. They praised them", "B. They followed them", "C. They threatened to stone them", "D. They fasted"], optionsEs: ["A. Los alabaron", "B. Los siguieron", "C. Amenazaron con apedrearlos", "D. Ayunaron"], correct: 2, correctFeedbackEn: "Yes. The people wanted to kill the only two men who told them the truth.", correctFeedbackEs: "Sí. El pueblo quiso matar a los únicos dos hombres que les dijeron la verdad.", incorrectFeedbackEn: "Numbers 14:10 — the congregation threatened to stone Joshua and Caleb.", incorrectFeedbackEs: "Números 14:10 — la congregación amenazó con apedrear a Josué y Caleb." },
-    { textEn: "10. What was God's judgment on the generation that refused to enter Canaan?", textEs: "10. ¿Cuál fue el juicio de Dios sobre la generación que se negó a entrar en Canaán?", optionsEn: ["A. Immediate death", "B. Slavery again", "C. Loss of the tabernacle", "D. Forty years of wandering until that generation died"], optionsEs: ["A. Muerte inmediata", "B. Esclavitud de nuevo", "C. Pérdida del tabernáculo", "D. Cuarenta años de peregrinación hasta que esa generación muriera"], correct: 3, correctFeedbackEn: "Correct. One year for each day the spies were in the land — forty years of wandering.", correctFeedbackEs: "Correcto. Un año por cada día que los espías estuvieron en la tierra — cuarenta años de peregrinación.", incorrectFeedbackEn: "Numbers 14:34 — forty years, one year for each of the forty days the spies explored.", incorrectFeedbackEs: "Números 14:34 — cuarenta años, un año por cada uno de los cuarenta días que los espías exploraron." },
-    { textEn: "11. Which two men from the first generation were allowed to enter Canaan?", textEs: "11. ¿Cuáles dos hombres de la primera generación fueron autorizados a entrar en Canaán?", optionsEn: ["A. Moses and Aaron", "B. Phinehas and Eleazar", "C. Joshua and Caleb", "D. Korah and Dathan"], optionsEs: ["A. Moisés y Aarón", "B. Finees y Eleazar", "C. Josué y Caleb", "D. Coré y Datán"], correct: 2, correctFeedbackEn: "Yes. Joshua and Caleb alone, from that generation, entered the promised land.", correctFeedbackEs: "Sí. Solo Josué y Caleb, de aquella generación, entraron en la tierra prometida.", incorrectFeedbackEn: "Numbers 14:30 — 'Except Caleb and Joshua.'", incorrectFeedbackEs: "Números 14:30 — 'excepto Caleb y Josué.'" },
-    { textEn: "12. Who led the rebellion against Moses' leadership in Numbers 16?", textEs: "12. ¿Quién encabezó la rebelión contra el liderazgo de Moisés en Números 16?", optionsEn: ["A. Balaam", "B. Korah, Dathan, and Abiram", "C. The Amalekites", "D. The Moabites"], optionsEs: ["A. Balaam", "B. Coré, Datán y Abiram", "C. Los amalecitas", "D. Los moabitas"], correct: 1, correctFeedbackEn: "Correct. Korah (a Levite) and Dathan/Abiram (from Reuben) challenged Moses and Aaron.", correctFeedbackEs: "Correcto. Coré (un levita) y Datán/Abiram (de Rubén) desafiaron a Moisés y Aarón.", incorrectFeedbackEn: "Numbers 16 — Korah, Dathan, and Abiram led the rebellion.", incorrectFeedbackEs: "Números 16 — Coré, Datán y Abiram encabezaron la rebelión." },
-    { textEn: "13. How did God judge Korah and his rebellious followers?", textEs: "13. ¿Cómo juzgó Dios a Coré y a sus seguidores rebeldes?", optionsEn: ["A. Fire from heaven", "B. Plague", "C. The ground opened and swallowed them", "D. Exile"], optionsEs: ["A. Fuego del cielo", "B. Plaga", "C. La tierra se abrió y los tragó", "D. Exilio"], correct: 2, correctFeedbackEn: "Yes. The earth opened and swallowed them alive — a terrifying judgment.", correctFeedbackEs: "Sí. La tierra se abrió y los tragó vivos — un juicio aterrador.", incorrectFeedbackEn: "Numbers 16:31-33 — the ground split open and swallowed them.", incorrectFeedbackEs: "Números 16:31-33 — la tierra se abrió y los tragó." },
-    { textEn: "14. What happened the day after Korah's rebellion?", textEs: "14. ¿Qué sucedió el día después de la rebelión de Coré?", optionsEn: ["A. The people celebrated", "B. They built an altar", "C. They entered Canaan", "D. The people complained that Moses had killed the Lord's people, and 14,700 died in a plague"], optionsEs: ["A. El pueblo celebró", "B. Edificaron un altar", "C. Entraron en Canaán", "D. El pueblo se quejó de que Moisés había matado al pueblo de Jehová, y 14,700 murieron en una plaga"], correct: 3, correctFeedbackEn: "Yes. The very next day, the people blamed Moses and Aaron — and more died.", correctFeedbackEs: "Sí. Al día siguiente mismo, el pueblo culpó a Moisés y Aarón — y más murieron.", incorrectFeedbackEn: "Numbers 16:41-49 — the people grumbled, and 14,700 died in the plague.", incorrectFeedbackEs: "Números 16:41-49 — el pueblo murmuró, y 14,700 murieron en la plaga." },
-    { textEn: "15. What did God tell Moses to make when fiery serpents bit the people in Numbers 21?", textEs: "15. ¿Qué le dijo Dios a Moisés que hiciera cuando serpientes ardientes mordieron al pueblo en Números 21?", optionsEn: ["A. A golden calf", "B. A bronze serpent on a pole", "C. An ark of acacia wood", "D. A bronze altar"], optionsEs: ["A. Un becerro de oro", "B. Una serpiente de bronce sobre un asta", "C. Un arca de madera de acacia", "D. Un altar de bronce"], correct: 1, correctFeedbackEn: "Yes. The bronze serpent on a pole — anyone who looked at it lived.", correctFeedbackEs: "Sí. La serpiente de bronce sobre un asta — todo el que la miraba vivía.", incorrectFeedbackEn: "Numbers 21:8 — 'Make a fiery serpent, and set it on a pole.'", incorrectFeedbackEs: "Números 21:8 — 'Hazte una serpiente ardiente, y ponla sobre un asta.'" },
-    { textEn: "16. How did Jesus connect the bronze serpent to Himself in John 3?", textEs: "16. ¿Cómo conectó Jesús la serpiente de bronce consigo mismo en Juan 3?", optionsEn: ["A. 'As Moses lifted up the serpent, so must the Son of Man be lifted up'", "B. 'I am the bronze serpent'", "C. 'The serpent was Satan'", "D. 'Look to the serpent for healing'"], optionsEs: ["A. 'Como Moisés levantó la serpiente, así es necesario que el Hijo del Hombre sea levantado'", "B. 'Yo soy la serpiente de bronce'", "C. 'La serpiente era Satanás'", "D. 'Mirad a la serpiente para sanidad'"], correct: 0, correctFeedbackEn: "Yes! Jesus explicitly compared His crucifixion to the lifting up of the bronze serpent.", correctFeedbackEs: "¡Sí! Jesús comparó explícitamente Su crucifixión con el levantamiento de la serpiente de bronce.", incorrectFeedbackEn: "John 3:14-15 — 'As Moses lifted up the serpent... so must the Son of Man be lifted up.'", incorrectFeedbackEs: "Juan 3:14-15 — 'Como Moisés levantó la serpiente... así es necesario que el Hijo del Hombre sea levantado.'" },
-    { textEn: "17. Who was Balaam, and why is he famous?", textEs: "17. ¿Quién era Balaam, y por qué es famoso?", optionsEn: ["A. A king of Moab", "B. A judge of Israel", "C. A son of Aaron", "D. A prophet hired to curse Israel who ended up blessing them"], optionsEs: ["A. Un rey de Moab", "B. Un juez de Israel", "C. Un hijo de Aarón", "D. Un profeta contratado para maldecir a Israel que terminó bendiciéndolo"], correct: 3, correctFeedbackEn: "Correct. Balaam tried to curse Israel but could only bless them because God had blessed Israel.", correctFeedbackEs: "Correcto. Balaam intentó maldecir a Israel pero solo pudo bendecirlo porque Dios había bendecido a Israel.", incorrectFeedbackEn: "Balaam was a prophet hired by Balak to curse Israel — but God turned curses into blessings.", incorrectFeedbackEs: "Balaam era un profeta contratado por Balac para maldecir a Israel — pero Dios tornó las maldiciones en bendiciones." },
-    { textEn: "18. What was the messianic prophecy in Balaam's fourth oracle?", textEs: "18. ¿Cuál fue la profecía mesiánica en el cuarto oráculo de Balaam?", optionsEn: ["A. 'A virgin shall conceive'", "B. 'My servant will be exalted'", "C. 'A Star shall come out of Jacob; a Scepter shall rise out of Israel'", "D. 'The Lord will come to His temple'"], optionsEs: ["A. 'Una virgen concebirá'", "B. 'Mi siervo será exaltado'", "C. 'Saldrá Estrella de Jacob, y se levantará Cetro de Israel'", "D. 'El Señor vendrá a Su templo'"], correct: 2, correctFeedbackEn: "Yes. Numbers 24:17 is a clear messianic prophecy pointing to Christ.", correctFeedbackEs: "Sí. Números 24:17 es una clara profecía mesiánica que señala a Cristo.", incorrectFeedbackEn: "Numbers 24:17 — 'A Star shall come out of Jacob; a Scepter shall rise out of Israel.'", incorrectFeedbackEs: "Números 24:17 — 'Saldrá Estrella de Jacob, y se levantará Cetro de Israel.'" },
-    { textEn: "19. What was the number of fighting men in the second census?", textEs: "19. ¿Cuál fue el número de hombres de guerra en el segundo censo?", optionsEn: ["A. 603,550", "B. 601,730", "C. 600,000", "D. 2 million"], optionsEs: ["A. 603,550", "B. 601,730", "C. 600,000", "D. 2 millones"], correct: 1, correctFeedbackEn: "Correct. 601,730 — almost the same number, but a completely new generation.", correctFeedbackEs: "Correcto. 601,730 — casi el mismo número, pero una generación completamente nueva.", incorrectFeedbackEn: "Numbers 26:51 — 601,730, all of the first generation dead except Joshua and Caleb.", incorrectFeedbackEs: "Números 26:51 — 601,730, muertos todos los de la primera generación excepto Josué y Caleb." },
-    { textEn: "20. Why did Moses not enter the promised land?", textEs: "20. ¿Por qué no entró Moisés en la tierra prometida?", optionsEn: ["A. He was too old", "B. He committed adultery", "C. He refused to go", "D. He struck the rock twice at Meribah instead of speaking to it"], optionsEs: ["A. Era demasiado viejo", "B. Cometió adulterio", "C. Se negó a ir", "D. Golpeó la roca dos veces en Meriba en lugar de hablarle"], correct: 3, correctFeedbackEn: "Correct. Moses disobeyed by striking the rock twice — a failure to honor God's holiness.", correctFeedbackEs: "Correcto. Moisés desobedeció al golpear la roca dos veces — un fracaso en honrar la santidad de Dios.", incorrectFeedbackEn: "Numbers 20:7-13 — Moses struck the rock twice instead of speaking to it.", incorrectFeedbackEs: "Números 20:7-13 — Moisés golpeó la roca dos veces en lugar de hablarle." }
-];
-
-const saQuestions = [
-    { id: `sa_u${UNIT}_1`, textEn: "Why did the 11-day journey from Sinai to Canaan take 40 years?", textEs: "¿Por qué el viaje de 11 días desde Sinaí a Canaán tomó 40 años?", kw_en: ["unbelie", "spies", "bad", "report", "refused", "enter", "judgmen", "forty"], kw_es: ["pueblo", "espías", "mal", "informe", "negaron", "entrar", "juicio", "cuarent"], explanationEn: "The people believed the ten spies' bad report, refused to trust God, and were judged to wander until that generation died.", explanationEs: "El pueblo creyó el mal informe de los diez espías, se negó a confiar en Dios, y fue juzgado a vagar hasta que esa generación muriera." },
-    { id: `sa_u${UNIT}_2`, textEn: "What did the people crave instead of manna, and what does this teach about the human heart?", textEs: "¿Qué anhelaba el pueblo en lugar del maná, y qué enseña esto sobre el corazón humano?", kw_en: ["craved", "food", "egypt", "even", "leeks", "onions", "garlic", "despise"], kw_es: ["anhelab", "comida", "egipto", "aunque", "puerros", "cebolla", "ajos", "desprec"], explanationEn: "They craved the food of Egypt — even though they had been slaves there. The human heart often longs for the past, even when it was bondage.", explanationEs: "Anhelaban la comida de Egipto — aunque habían sido esclavos allí. El corazón humano a menudo anhela el pasado, incluso cuando era esclavitud." },
-    { id: `sa_u${UNIT}_3`, textEn: "What was the difference between the report of the ten spies and the report of Joshua and Caleb?", textEs: "¿Cuál fue la diferencia entre el informe de los diez espías y el informe de Josué y Caleb?", kw_en: ["ten", "strong", "cannot", "able", "saw", "faith", "obstacl", "fear"], kw_es: ["gigante", "fuertes", "podemos", "más", "está", "nosotro", "fe", "diez"], explanationEn: "The ten saw obstacles and said 'we cannot.' Caleb and Joshua saw the same obstacles but said 'God is with us, we are well able.'", explanationEs: "Los diez vieron obstáculos y dijeron 'no podemos'. Caleb y Josué vieron los mismos obstáculos pero dijeron 'Dios está con nosotros, podemos más'." },
-    { id: `sa_u${UNIT}_4`, textEn: "How did Moses respond when Korah challenged his leadership, and what can pastors learn from this?", textEs: "¿Cómo respondió Moisés cuando Coré desafió su liderazgo, y qué pueden aprender los pastores de esto?", kw_en: ["fell", "face", "prayed", "did", "defend", "himself", "left", "judgmen"], kw_es: ["postró", "moisés", "defendi", "dejó", "juicio", "humil", "confian", "sin"], explanationEn: "Moses fell on his face and left judgment to God. Pastors should not retaliate against critics but trust God to defend His own appointment.", explanationEs: "Moisés se postró y dejó el juicio a Dios. Los pastores no deben tomar venganza contra los críticos sino confiar en Dios para defender Su propio nombramiento." },
-    { id: `sa_u${UNIT}_5`, textEn: "Explain the typology of the bronze serpent — how does it point to Christ?", textEs: "Explique la tipología de la serpiente de bronce — ¿cómo apunta a Cristo?", kw_en: ["curse", "made", "cure", "lifted", "pole", "look", "live", "jesus"], kw_es: ["maldici", "hecha", "cura", "levanta", "asta", "mirar", "vivir", "jesús"], explanationEn: "The serpent represented the curse; being lifted up made it the cure. Jesus became a curse for us on the cross; whoever looks to Him in faith lives.", explanationEs: "La serpiente representaba la maldición; ser levantada la hizo la cura. Jesús se hizo maldición por nosotros en la cruz; quien lo mira con fe vive." },
-    { id: `sa_u${UNIT}_6`, textEn: "What happened at Meribah that prevented Moses from entering the promised land?", textEs: "¿Qué sucedió en Meriba que impidió que Moisés entrara en la tierra prometida?", kw_en: ["struck", "rock", "twice", "speak", "anger", "did", "honor", "consequ"], kw_es: ["golpeó", "roca", "dos", "veces", "hablar", "ira", "honró", "consecu"], explanationEn: "God told Moses to speak to the rock. In anger, Moses struck it twice — failing to honor God's holiness before the people.", explanationEs: "Dios dijo a Moisés que hablara a la roca. Con ira, Moisés la golpeó dos veces — no honrando la santidad de Dios delante del pueblo." },
-    { id: `sa_u${UNIT}_7`, textEn: "Describe Balaam's strange mixture of obedience and compromise. What is the warning?", textEs: "Describa la extraña mezcla de obediencia y compromiso de Balaam. ¿Cuál es la advertencia?", kw_en: ["balaam", "curse", "blessed", "israel", "advised", "seducti", "idolatr", "immoral"], kw_es: ["maldeci", "bendijo", "israel", "aconsej", "seducci", "idolatr", "inmoral", "comprom"], explanationEn: "Balaam could not curse Israel, but he advised Balak to seduce them into sin. Warning: you cannot be cursed from outside, but you can be destroyed by compromise from within.", explanationEs: "Balaam no pudo maldecir a Israel, pero aconsejó a Balac seducirlos al pecado. Advertencia: no puedes ser maldecido desde afuera, pero puedes ser destruido por el compromiso desde adentro." },
-    { id: `sa_u${UNIT}_8`, textEn: "What does the second census in Numbers 26 teach us about God's faithfulness and judgment?", textEs: "¿Qué nos enseña el segundo censo en Números 26 sobre la fidelidad y el juicio de Dios?", kw_en: ["new", "generat", "faithle", "died", "joshua", "caleb", "survive", "kept"], kw_es: ["nueva", "generac", "infiel", "murió", "josué", "caleb", "sobrevi", "cumplió"], explanationEn: "The faithless generation died, but God preserved a new generation to inherit the promise — showing both judgment and faithfulness.", explanationEs: "La generación infiel murió, pero Dios preservó una nueva generación para heredar la promesa — mostrando tanto juicio como fidelidad." },
-    { id: `sa_u${UNIT}_9`, textEn: "What was the sin of the people at Taberah, and how did God respond?", textEs: "¿Cuál fue el pecado del pueblo en Tabera, y cómo respondió Dios?", kw_en: ["complai", "hardshi", "fire", "moses", "prayed", "abated", "judgmen", "mercy"], kw_es: ["quejaro", "dificul", "fuego", "jehová", "moisés", "oró", "cesó", "juicio"], explanationEn: "They complained about their hardships. God sent fire, Moses prayed, and God stopped the fire — a pattern of judgment and mercy.", explanationEs: "Se quejaron de sus dificultades. Dios envió fuego, Moisés oró, y Dios detuvo el fuego — un patrón de juicio y misericordia." },
-    { id: `sa_u${UNIT}_10`, textEn: "Jesus compared Himself to the bronze serpent in John 3. Why is that comparison surprising, and what does it teach?", textEs: "Jesús se comparó con la serpiente de bronce en Juan 3. ¿Por qué es sorprendente esa comparación, y qué enseña?", kw_en: ["serpent", "curse", "symbol", "sin", "jesus", "became", "represe", "uplifte"], kw_es: ["serpien", "maldici", "símbolo", "pecado", "jesús", "hizo", "nosotro", "levanta"], explanationEn: "The serpent represents a curse, yet it became the cure. Jesus, who knew no sin, became sin for us — the cursed one hanging on a tree — so that we might live.", explanationEs: "La serpiente representa una maldición, pero se convirtió en la cura. Jesús, que no conoció pecado, se hizo pecado por nosotros — el maldito colgado en un madero — para que nosotros viviéramos." }
-];
+/* CTSPent — unit 9. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "pent",
+ "unit": 9,
+ "totalUnits": 12,
+ "filePrefix": "CTSPent",
+ "prevHref": "CTSPentUnit8.html",
+ "nextHref": "CTSPentUnit10.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "What is the Hebrew title for the book of Numbers, and what does it mean?",
+    "es": "¿Cuál es el título hebreo del libro de Números, y qué significa?"
+   },
+   "options": {
+    "en": [
+     "'Vayikra' — 'And He called'",
+     "'Bemidbar' — 'In the wilderness'",
+     "'Devarim' — 'Words'",
+     "'Shemot' — 'Names'"
+    ],
+    "es": [
+     "'Vayikra' — 'Y llamó'",
+     "'Bemidbar' — 'En el desierto'",
+     "'Devarim' — 'Palabras'",
+     "'Shemot' — 'Nombres'"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct! 'Bemidbar' means 'in the wilderness' — a far more accurate description than 'Numbers.'",
+    "es": "¡Correcto! 'Bemidbar' significa 'en el desierto' — una descripción mucho más precisa que 'Números.'"
+   }
+  },
+  {
+   "stem": {
+    "en": "How long should the journey from Sinai to Canaan have taken?",
+    "es": "¿Cuánto debía haber tomado el viaje de Sinaí a Canaán?"
+   },
+   "options": {
+    "en": [
+     "11 days",
+     "40 days",
+     "1 year",
+     "40 years"
+    ],
+    "es": [
+     "11 días",
+     "40 días",
+     "1 año",
+     "40 años"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Yes. Deuteronomy 1:2 says it was an 11-day journey — but unbelief made it 40 years.",
+    "es": "Sí. Deuteronomio 1:2 dice que era un viaje de 11 días — pero la incredulidad lo convirtió en 40 años."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was the total number of men able to go to war in the first census?",
+    "es": "¿Cuál era el número total de hombres aptos para la guerra en el primer censo?"
+   },
+   "options": {
+    "en": [
+     "603,550",
+     "601,730",
+     "144,000",
+     "2 million"
+    ],
+    "es": [
+     "603,550",
+     "601,730",
+     "144,000",
+     "2 millones"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. 603,550 men of war, plus women, children, and Levites — about 2 million people total.",
+    "es": "Correcto. 603,550 hombres de guerra, más mujeres, niños y levitas — unos 2 millones de personas en total."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was at the center of the Israelite camp?",
+    "es": "¿Qué estaba en el centro del campamento israelita?"
+   },
+   "options": {
+    "en": [
+     "The tabernacle",
+     "Moses' tent",
+     "The ark of the covenant alone",
+     "The bronze serpent"
+    ],
+    "es": [
+     "El tabernáculo",
+     "La tienda de Moisés",
+     "Solo el arca del pacto",
+     "La serpiente de bronce"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Yes. The tabernacle — God's presence — was at the center of the camp.",
+    "es": "Sí. El tabernáculo — la presencia de Dios — estaba en el centro del campamento."
+   }
+  },
+  {
+   "stem": {
+    "en": "At Kibroth Hattaavah, what did the people crave instead of manna?",
+    "es": "En Kibrot-hataava, ¿qué anhelaba la gente en lugar del maná?"
+   },
+   "options": {
+    "en": [
+     "Bread from Egypt",
+     "Fruit from Canaan",
+     "Meat — fish, cucumbers, melons, leeks, onions, garlic",
+     "Water"
+    ],
+    "es": [
+     "Pan de Egipto",
+     "Fruta de Canaán",
+     "Carne — pescado, pepinos, melones, puerros, cebollas, ajos",
+     "Agua"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Yes. They despised the manna and longed for the food of Egypt — even though they had been slaves there.",
+    "es": "Sí. Despreciaron el maná y anhelaron la comida de Egipto — aunque allí habían sido esclavos."
+   }
+  },
+  {
+   "stem": {
+    "en": "How did God answer Moses when he said the burden of leadership was too heavy?",
+    "es": "¿Cómo respondió Dios a Moisés cuando dijo que la carga del liderazgo era demasiado pesada?"
+   },
+   "options": {
+    "en": [
+     "He removed Moses",
+     "He told Moses to work harder",
+     "He sent Aaron to help",
+     "He appointed seventy elders to share the burden"
+    ],
+    "es": [
+     "Removió a Moisés",
+     "Le dijo a Moisés que trabajara más duro",
+     "Envió a Aarón para ayudar",
+     "Designó setenta ancianos para compartir la carga"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. God appointed seventy elders and poured out His Spirit on them.",
+    "es": "Correcto. Dios designó setenta ancianos y derramó Su Espíritu sobre ellos."
+   }
+  },
+  {
+   "stem": {
+    "en": "What happened to Miriam when she and Aaron spoke against Moses?",
+    "es": "¿Qué le sucedió a Miriam cuando ella y Aarón hablaron contra Moisés?"
+   },
+   "options": {
+    "en": [
+     "She was exiled",
+     "She became leprous, white as snow",
+     "Nothing",
+     "She was stoned"
+    ],
+    "es": [
+     "Fue exiliada",
+     "Se volvió leprosa, blanca como la nieve",
+     "Nada",
+     "Fue apedreada"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Yes. God struck Miriam with leprosy for challenging Moses' unique authority.",
+    "es": "Sí. Dios hirió a Miriam con lepra por desafiar la autoridad singular de Moisés."
+   }
+  },
+  {
+   "stem": {
+    "en": "How many spies brought back a bad report about the land of Canaan?",
+    "es": "¿Cuántos espías trajeron un mal informe acerca de la tierra de Canaán?"
+   },
+   "options": {
+    "en": [
+     "10",
+     "2",
+     "12",
+     "5"
+    ],
+    "es": [
+     "10",
+     "2",
+     "12",
+     "5"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. Ten spies brought a bad report; only Joshua and Caleb trusted God.",
+    "es": "Correcto. Diez espías trajeron un mal informe; solo Josué y Caleb confiaron en Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "How did the congregation respond to Joshua and Caleb's plea to trust God and enter the land?",
+    "es": "¿Cómo respondió la congregación al ruego de Josué y Caleb de confiar en Dios y entrar en la tierra?"
+   },
+   "options": {
+    "en": [
+     "They praised them",
+     "They followed them",
+     "They threatened to stone them",
+     "They fasted"
+    ],
+    "es": [
+     "Los alabaron",
+     "Los siguieron",
+     "Amenazaron con apedrearlos",
+     "Ayunaron"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Yes. The people wanted to kill the only two men who told them the truth.",
+    "es": "Sí. El pueblo quiso matar a los únicos dos hombres que les dijeron la verdad."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was God's judgment on the generation that refused to enter Canaan?",
+    "es": "¿Cuál fue el juicio de Dios sobre la generación que se negó a entrar en Canaán?"
+   },
+   "options": {
+    "en": [
+     "Immediate death",
+     "Slavery again",
+     "Loss of the tabernacle",
+     "Forty years of wandering until that generation died"
+    ],
+    "es": [
+     "Muerte inmediata",
+     "Esclavitud de nuevo",
+     "Pérdida del tabernáculo",
+     "Cuarenta años de peregrinación hasta que esa generación muriera"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. One year for each day the spies were in the land — forty years of wandering.",
+    "es": "Correcto. Un año por cada día que los espías estuvieron en la tierra — cuarenta años de peregrinación."
+   }
+  },
+  {
+   "stem": {
+    "en": "Which two men from the first generation were allowed to enter Canaan?",
+    "es": "¿Cuáles dos hombres de la primera generación fueron autorizados a entrar en Canaán?"
+   },
+   "options": {
+    "en": [
+     "Moses and Aaron",
+     "Phinehas and Eleazar",
+     "Joshua and Caleb",
+     "Korah and Dathan"
+    ],
+    "es": [
+     "Moisés y Aarón",
+     "Finees y Eleazar",
+     "Josué y Caleb",
+     "Coré y Datán"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Yes. Joshua and Caleb alone, from that generation, entered the promised land.",
+    "es": "Sí. Solo Josué y Caleb, de aquella generación, entraron en la tierra prometida."
+   }
+  },
+  {
+   "stem": {
+    "en": "Who led the rebellion against Moses' leadership in Numbers 16?",
+    "es": "¿Quién encabezó la rebelión contra el liderazgo de Moisés en Números 16?"
+   },
+   "options": {
+    "en": [
+     "Balaam",
+     "Korah, Dathan, and Abiram",
+     "The Amalekites",
+     "The Moabites"
+    ],
+    "es": [
+     "Balaam",
+     "Coré, Datán y Abiram",
+     "Los amalecitas",
+     "Los moabitas"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. Korah (a Levite) and Dathan/Abiram (from Reuben) challenged Moses and Aaron.",
+    "es": "Correcto. Coré (un levita) y Datán/Abiram (de Rubén) desafiaron a Moisés y Aarón."
+   }
+  },
+  {
+   "stem": {
+    "en": "How did God judge Korah and his rebellious followers?",
+    "es": "¿Cómo juzgó Dios a Coré y a sus seguidores rebeldes?"
+   },
+   "options": {
+    "en": [
+     "Fire from heaven",
+     "Plague",
+     "The ground opened and swallowed them",
+     "Exile"
+    ],
+    "es": [
+     "Fuego del cielo",
+     "Plaga",
+     "La tierra se abrió y los tragó",
+     "Exilio"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Yes. The earth opened and swallowed them alive — a terrifying judgment.",
+    "es": "Sí. La tierra se abrió y los tragó vivos — un juicio aterrador."
+   }
+  },
+  {
+   "stem": {
+    "en": "What happened the day after Korah's rebellion?",
+    "es": "¿Qué sucedió el día después de la rebelión de Coré?"
+   },
+   "options": {
+    "en": [
+     "The people celebrated",
+     "They built an altar",
+     "They entered Canaan",
+     "The people complained that Moses had killed the Lord's people, and 14,700 died in a plague"
+    ],
+    "es": [
+     "El pueblo celebró",
+     "Edificaron un altar",
+     "Entraron en Canaán",
+     "El pueblo se quejó de que Moisés había matado al pueblo de Jehová, y 14,700 murieron en una plaga"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Yes. The very next day, the people blamed Moses and Aaron — and more died.",
+    "es": "Sí. Al día siguiente mismo, el pueblo culpó a Moisés y Aarón — y más murieron."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did God tell Moses to make when fiery serpents bit the people in Numbers 21?",
+    "es": "¿Qué le dijo Dios a Moisés que hiciera cuando serpientes ardientes mordieron al pueblo en Números 21?"
+   },
+   "options": {
+    "en": [
+     "A golden calf",
+     "A bronze serpent on a pole",
+     "An ark of acacia wood",
+     "A bronze altar"
+    ],
+    "es": [
+     "Un becerro de oro",
+     "Una serpiente de bronce sobre un asta",
+     "Un arca de madera de acacia",
+     "Un altar de bronce"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Yes. The bronze serpent on a pole — anyone who looked at it lived.",
+    "es": "Sí. La serpiente de bronce sobre un asta — todo el que la miraba vivía."
+   }
+  },
+  {
+   "stem": {
+    "en": "How did Jesus connect the bronze serpent to Himself in John 3?",
+    "es": "¿Cómo conectó Jesús la serpiente de bronce consigo mismo en Juan 3?"
+   },
+   "options": {
+    "en": [
+     "'As Moses lifted up the serpent, so must the Son of Man be lifted up'",
+     "'I am the bronze serpent'",
+     "'The serpent was Satan'",
+     "'Look to the serpent for healing'"
+    ],
+    "es": [
+     "'Como Moisés levantó la serpiente, así es necesario que el Hijo del Hombre sea levantado'",
+     "'Yo soy la serpiente de bronce'",
+     "'La serpiente era Satanás'",
+     "'Mirad a la serpiente para sanidad'"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Yes! Jesus explicitly compared His crucifixion to the lifting up of the bronze serpent.",
+    "es": "¡Sí! Jesús comparó explícitamente Su crucifixión con el levantamiento de la serpiente de bronce."
+   }
+  },
+  {
+   "stem": {
+    "en": "Who was Balaam, and why is he famous?",
+    "es": "¿Quién era Balaam, y por qué es famoso?"
+   },
+   "options": {
+    "en": [
+     "A king of Moab",
+     "A judge of Israel",
+     "A son of Aaron",
+     "A prophet hired to curse Israel who ended up blessing them"
+    ],
+    "es": [
+     "Un rey de Moab",
+     "Un juez de Israel",
+     "Un hijo de Aarón",
+     "Un profeta contratado para maldecir a Israel que terminó bendiciéndolo"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. Balaam tried to curse Israel but could only bless them because God had blessed Israel.",
+    "es": "Correcto. Balaam intentó maldecir a Israel pero solo pudo bendecirlo porque Dios había bendecido a Israel."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was the messianic prophecy in Balaam's fourth oracle?",
+    "es": "¿Cuál fue la profecía mesiánica en el cuarto oráculo de Balaam?"
+   },
+   "options": {
+    "en": [
+     "'A virgin shall conceive'",
+     "'My servant will be exalted'",
+     "'A Star shall come out of Jacob; a Scepter shall rise out of Israel'",
+     "'The Lord will come to His temple'"
+    ],
+    "es": [
+     "'Una virgen concebirá'",
+     "'Mi siervo será exaltado'",
+     "'Saldrá Estrella de Jacob, y se levantará Cetro de Israel'",
+     "'El Señor vendrá a Su templo'"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Yes. Numbers 24:17 is a clear messianic prophecy pointing to Christ.",
+    "es": "Sí. Números 24:17 es una clara profecía mesiánica que señala a Cristo."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was the number of fighting men in the second census?",
+    "es": "¿Cuál fue el número de hombres de guerra en el segundo censo?"
+   },
+   "options": {
+    "en": [
+     "603,550",
+     "601,730",
+     "600,000",
+     "2 million"
+    ],
+    "es": [
+     "603,550",
+     "601,730",
+     "600,000",
+     "2 millones"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. 601,730 — almost the same number, but a completely new generation.",
+    "es": "Correcto. 601,730 — casi el mismo número, pero una generación completamente nueva."
+   }
+  },
+  {
+   "stem": {
+    "en": "Why did Moses not enter the promised land?",
+    "es": "¿Por qué no entró Moisés en la tierra prometida?"
+   },
+   "options": {
+    "en": [
+     "He was too old",
+     "He committed adultery",
+     "He refused to go",
+     "He struck the rock twice at Meribah instead of speaking to it"
+    ],
+    "es": [
+     "Era demasiado viejo",
+     "Cometió adulterio",
+     "Se negó a ir",
+     "Golpeó la roca dos veces en Meriba en lugar de hablarle"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. Moses disobeyed by striking the rock twice — a failure to honor God's holiness.",
+    "es": "Correcto. Moisés desobedeció al golpear la roca dos veces — un fracaso en honrar la santidad de Dios."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Why did the 11-day journey from Sinai to Canaan take 40 years?",
+    "es": "¿Por qué el viaje de 11 días desde Sinaí a Canaán tomó 40 años?"
+   },
+   "keywords": {
+    "en": [
+     "unbelie",
+     "spies",
+     "bad",
+     "report",
+     "refused",
+     "enter",
+     "judgmen",
+     "forty"
+    ],
+    "es": [
+     "pueblo",
+     "espías",
+     "mal",
+     "informe",
+     "negaron",
+     "entrar",
+     "juicio",
+     "cuarent"
+    ]
+   },
+   "model": {
+    "en": "The people believed the ten spies' bad report, refused to trust God, and were judged to wander until that generation died.",
+    "es": "El pueblo creyó el mal informe de los diez espías, se negó a confiar en Dios, y fue juzgado a vagar hasta que esa generación muriera."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What did the people crave instead of manna, and what does this teach about the human heart?",
+    "es": "¿Qué anhelaba el pueblo en lugar del maná, y qué enseña esto sobre el corazón humano?"
+   },
+   "keywords": {
+    "en": [
+     "craved",
+     "food",
+     "egypt",
+     "even",
+     "leeks",
+     "onions",
+     "garlic",
+     "despise"
+    ],
+    "es": [
+     "anhelab",
+     "comida",
+     "egipto",
+     "aunque",
+     "puerros",
+     "cebolla",
+     "ajos",
+     "desprec"
+    ]
+   },
+   "model": {
+    "en": "They craved the food of Egypt — even though they had been slaves there. The human heart often longs for the past, even when it was bondage.",
+    "es": "Anhelaban la comida de Egipto — aunque habían sido esclavos allí. El corazón humano a menudo anhela el pasado, incluso cuando era esclavitud."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What was the difference between the report of the ten spies and the report of Joshua and Caleb?",
+    "es": "¿Cuál fue la diferencia entre el informe de los diez espías y el informe de Josué y Caleb?"
+   },
+   "keywords": {
+    "en": [
+     "ten",
+     "strong",
+     "cannot",
+     "able",
+     "saw",
+     "faith",
+     "obstacl",
+     "fear"
+    ],
+    "es": [
+     "gigante",
+     "fuertes",
+     "podemos",
+     "más",
+     "está",
+     "nosotro",
+     "fe",
+     "diez"
+    ]
+   },
+   "model": {
+    "en": "The ten saw obstacles and said 'we cannot.' Caleb and Joshua saw the same obstacles but said 'God is with us, we are well able.'",
+    "es": "Los diez vieron obstáculos y dijeron 'no podemos'. Caleb y Josué vieron los mismos obstáculos pero dijeron 'Dios está con nosotros, podemos más'."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How did Moses respond when Korah challenged his leadership, and what can pastors learn from this?",
+    "es": "¿Cómo respondió Moisés cuando Coré desafió su liderazgo, y qué pueden aprender los pastores de esto?"
+   },
+   "keywords": {
+    "en": [
+     "fell",
+     "face",
+     "prayed",
+     "did",
+     "defend",
+     "himself",
+     "left",
+     "judgmen"
+    ],
+    "es": [
+     "postró",
+     "moisés",
+     "defendi",
+     "dejó",
+     "juicio",
+     "humil",
+     "confian",
+     "sin"
+    ]
+   },
+   "model": {
+    "en": "Moses fell on his face and left judgment to God. Pastors should not retaliate against critics but trust God to defend His own appointment.",
+    "es": "Moisés se postró y dejó el juicio a Dios. Los pastores no deben tomar venganza contra los críticos sino confiar en Dios para defender Su propio nombramiento."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the typology of the bronze serpent — how does it point to Christ?",
+    "es": "Explique la tipología de la serpiente de bronce — ¿cómo apunta a Cristo?"
+   },
+   "keywords": {
+    "en": [
+     "curse",
+     "made",
+     "cure",
+     "lifted",
+     "pole",
+     "look",
+     "live",
+     "jesus"
+    ],
+    "es": [
+     "maldici",
+     "hecha",
+     "cura",
+     "levanta",
+     "asta",
+     "mirar",
+     "vivir",
+     "jesús"
+    ]
+   },
+   "model": {
+    "en": "The serpent represented the curse; being lifted up made it the cure. Jesus became a curse for us on the cross; whoever looks to Him in faith lives.",
+    "es": "La serpiente representaba la maldición; ser levantada la hizo la cura. Jesús se hizo maldición por nosotros en la cruz; quien lo mira con fe vive."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What happened at Meribah that prevented Moses from entering the promised land?",
+    "es": "¿Qué sucedió en Meriba que impidió que Moisés entrara en la tierra prometida?"
+   },
+   "keywords": {
+    "en": [
+     "struck",
+     "rock",
+     "twice",
+     "speak",
+     "anger",
+     "did",
+     "honor",
+     "consequ"
+    ],
+    "es": [
+     "golpeó",
+     "roca",
+     "dos",
+     "veces",
+     "hablar",
+     "ira",
+     "honró",
+     "consecu"
+    ]
+   },
+   "model": {
+    "en": "God told Moses to speak to the rock. In anger, Moses struck it twice — failing to honor God's holiness before the people.",
+    "es": "Dios dijo a Moisés que hablara a la roca. Con ira, Moisés la golpeó dos veces — no honrando la santidad de Dios delante del pueblo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe Balaam's strange mixture of obedience and compromise. What is the warning?",
+    "es": "Describa la extraña mezcla de obediencia y compromiso de Balaam. ¿Cuál es la advertencia?"
+   },
+   "keywords": {
+    "en": [
+     "balaam",
+     "curse",
+     "blessed",
+     "israel",
+     "advised",
+     "seducti",
+     "idolatr",
+     "immoral"
+    ],
+    "es": [
+     "maldeci",
+     "bendijo",
+     "israel",
+     "aconsej",
+     "seducci",
+     "idolatr",
+     "inmoral",
+     "comprom"
+    ]
+   },
+   "model": {
+    "en": "Balaam could not curse Israel, but he advised Balak to seduce them into sin. Warning: you cannot be cursed from outside, but you can be destroyed by compromise from within.",
+    "es": "Balaam no pudo maldecir a Israel, pero aconsejó a Balac seducirlos al pecado. Advertencia: no puedes ser maldecido desde afuera, pero puedes ser destruido por el compromiso desde adentro."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does the second census in Numbers 26 teach us about God's faithfulness and judgment?",
+    "es": "¿Qué nos enseña el segundo censo en Números 26 sobre la fidelidad y el juicio de Dios?"
+   },
+   "keywords": {
+    "en": [
+     "new",
+     "generat",
+     "faithle",
+     "died",
+     "joshua",
+     "caleb",
+     "survive",
+     "kept"
+    ],
+    "es": [
+     "nueva",
+     "generac",
+     "infiel",
+     "murió",
+     "josué",
+     "caleb",
+     "sobrevi",
+     "cumplió"
+    ]
+   },
+   "model": {
+    "en": "The faithless generation died, but God preserved a new generation to inherit the promise — showing both judgment and faithfulness.",
+    "es": "La generación infiel murió, pero Dios preservó una nueva generación para heredar la promesa — mostrando tanto juicio como fidelidad."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What was the sin of the people at Taberah, and how did God respond?",
+    "es": "¿Cuál fue el pecado del pueblo en Tabera, y cómo respondió Dios?"
+   },
+   "keywords": {
+    "en": [
+     "complai",
+     "hardshi",
+     "fire",
+     "moses",
+     "prayed",
+     "abated",
+     "judgmen",
+     "mercy"
+    ],
+    "es": [
+     "quejaro",
+     "dificul",
+     "fuego",
+     "jehová",
+     "moisés",
+     "oró",
+     "cesó",
+     "juicio"
+    ]
+   },
+   "model": {
+    "en": "They complained about their hardships. God sent fire, Moses prayed, and God stopped the fire — a pattern of judgment and mercy.",
+    "es": "Se quejaron de sus dificultades. Dios envió fuego, Moisés oró, y Dios detuvo el fuego — un patrón de juicio y misericordia."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Jesus compared Himself to the bronze serpent in John 3. Why is that comparison surprising, and what does it teach?",
+    "es": "Jesús se comparó con la serpiente de bronce en Juan 3. ¿Por qué es sorprendente esa comparación, y qué enseña?"
+   },
+   "keywords": {
+    "en": [
+     "serpent",
+     "curse",
+     "symbol",
+     "sin",
+     "jesus",
+     "became",
+     "represe",
+     "uplifte"
+    ],
+    "es": [
+     "serpien",
+     "maldici",
+     "símbolo",
+     "pecado",
+     "jesús",
+     "hizo",
+     "nosotro",
+     "levanta"
+    ]
+   },
+   "model": {
+    "en": "The serpent represents a curse, yet it became the cure. Jesus, who knew no sin, became sin for us — the cursed one hanging on a tree — so that we might live.",
+    "es": "La serpiente representa una maldición, pero se convirtió en la cura. Jesús, que no conoció pecado, se hizo pecado por nosotros — el maldito colgado en un madero — para que nosotros viviéramos."
+   }
+  }
+ ]
+};

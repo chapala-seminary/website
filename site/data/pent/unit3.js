@@ -1,47 +1,833 @@
-/* CTSPent - unit 3: per-unit configuration and content. */
-
-const UNIT = 3;
-
-const NEXT_URL = "CTSPentUnit4.html";
-
-const PREV_URL = "CTSPentUnit2.html";
-
-const IS_LAST_UNIT = false;
-
-const SHOW_REGISTRATION_CARD = false;
-
-const mcQuestions = [
-    { textEn: "1. How many generations are recorded from Adam to Noah in Genesis 5?", textEs: "1. ¿Cuántas generaciones se registran desde Adán hasta Noé en Génesis 5?", optionsEn: ["A. Seven", "B. Ten", "C. Twelve", "D. Twenty"], optionsEs: ["A. Siete", "B. Diez", "C. Doce", "D. Veinte"], correct: 1, correctFeedbackEn: "Correct. Genesis 5 records ten generations from Adam to Noah — a deliberate genealogy showing God preserving a line through judgment.", correctFeedbackEs: "Correcto. Génesis 5 registra diez generaciones desde Adán hasta Noé — una genealogía deliberada que muestra a Dios preservando un linaje a través del juicio.", incorrectFeedbackEn: "Ten generations from Adam to Noah. The list is patterned and complete, not arbitrary.", incorrectFeedbackEs: "Diez generaciones desde Adán hasta Noé. La lista es ordenada y completa, no arbitraria." },
-    { textEn: "2. What was distinctive about Enoch in Genesis 5?", textEs: "2. ¿Qué tenía de distintivo Enoc en Génesis 5?", optionsEn: ["A. He walked with God and was taken without dying", "B. He lived the longest", "C. He invented agriculture", "D. He fought giants"], optionsEs: ["A. Caminó con Dios y fue llevado sin morir", "B. Vivió más que nadie", "C. Inventó la agricultura", "D. Luchó contra gigantes"], correct: 0, correctFeedbackEn: "Yes. Enoch did not die — God 'took him.' Centuries before any explicit doctrine of resurrection, God hinted at life beyond the grave.", correctFeedbackEs: "Sí. Enoc no murió — Dios 'lo llevó'. Siglos antes de cualquier doctrina explícita de resurrección, Dios insinuó la vida más allá de la tumba.", incorrectFeedbackEn: "Enoch walked with God and was translated — taken bodily into God's presence without dying (Hebrews 11:5).", incorrectFeedbackEs: "Enoc caminó con Dios y fue traspuesto — llevado corporalmente a la presencia de Dios sin morir (Hebreos 11:5)." },
-    { textEn: "3. The phrase 'sons of God' in Genesis 6 is most naturally understood as referring to what?", textEs: "3. La frase 'hijos de Dios' en Génesis 6 se entiende con mayor naturalidad como referida a qué?", optionsEn: ["A. Angelic beings (bene elohim)", "B. The wicked rulers of cities", "C. The line of Seth only", "D. Animals"], optionsEs: ["A. Seres angelicales (bene elohim)", "B. Los gobernantes malvados de las ciudades", "C. Solamente la línea de Set", "D. Animales"], correct: 0, correctFeedbackEn: "Correct. The phrase bene elohim is used elsewhere in the OT (Job 1:6) for angelic beings — and Jude and 2 Peter both seem to confirm this reading.", correctFeedbackEs: "Correcto. La frase bene elohim se usa en otros lugares del AT (Job 1:6) para seres angelicales — y tanto Judas como 2 Pedro parecen confirmar esta lectura.", incorrectFeedbackEn: "The most natural reading is angelic beings, supported by Jude 6 and 2 Peter 2:4-5.", incorrectFeedbackEs: "La lectura más natural es la de seres angelicales, apoyada por Judas 6 y 2 Pedro 2:4-5." },
-    { textEn: "4. What word first appears in the Bible in connection with Noah?", textEs: "4. ¿Qué palabra aparece por primera vez en la Biblia en relación con Noé?", optionsEn: ["A. Sin", "B. Grace (chen)", "C. Wisdom", "D. Faith"], optionsEs: ["A. Pecado", "B. Gracia (chen)", "C. Sabiduría", "D. Fe"], correct: 1, correctFeedbackEn: "Yes. 'Noah found grace in the eyes of the Lord' — the first occurrence of chen in Scripture.", correctFeedbackEs: "Sí. 'Noé halló gracia ante los ojos de Jehová' — la primera aparición de chen en la Escritura.", incorrectFeedbackEn: "Grace (Hebrew chen) first appears with Noah — God's unearned favor reaching down before any righteousness is described.", incorrectFeedbackEs: "La gracia (hebreo chen) aparece primero con Noé — el favor inmerecido de Dios que desciende antes de que se describa justicia alguna." },
-    { textEn: "5. What did Noah's father Lamech prophesy at his birth?", textEs: "5. ¿Qué profetizó Lamec, el padre de Noé, en su nacimiento?", optionsEn: ["A. 'He will rule the nations'", "B. 'He will be greater than I'", "C. 'This one will comfort us concerning the toil of our hands'", "D. 'He will build a great city'"], optionsEs: ["A. 'Gobernará las naciones'", "B. 'Será mayor que yo'", "C. 'Éste nos consolará acerca del trabajo de nuestras manos'", "D. 'Edificará una gran ciudad'"], correct: 2, correctFeedbackEn: "Correct. Lamech prophesied Noah would bring relief from the curse on the ground — and the flood reset that ground.", correctFeedbackEs: "Correcto. Lamec profetizó que Noé traería alivio de la maldición sobre la tierra — y el diluvio renovó esa tierra.", incorrectFeedbackEn: "Lamech said, 'This one will comfort us concerning our work and the toil of our hands, because of the ground which the Lord has cursed.'", incorrectFeedbackEs: "Lamec dijo: 'Éste nos consolará de nuestras obras y del trabajo de nuestras manos, a causa de la tierra que Jehová maldijo.'" },
-    { textEn: "6. How many doors did the ark have?", textEs: "6. ¿Cuántas puertas tenía el arca?", optionsEn: ["A. Twelve", "B. Four", "C. Two", "D. One"], optionsEs: ["A. Doce", "B. Cuatro", "C. Dos", "D. Una"], correct: 3, correctFeedbackEn: "Yes. One door — pointing forward to Christ, who said, 'I am the door; if anyone enters by Me, he will be saved.'", correctFeedbackEs: "Sí. Una sola puerta — que señala a Cristo, quien dijo: 'Yo soy la puerta; el que por mí entrare, será salvo.'", incorrectFeedbackEn: "One door. The ark's single door is a deliberate picture of Christ, the only way of salvation.", incorrectFeedbackEs: "Una puerta. La única puerta del arca es una imagen deliberada de Cristo, el único camino de salvación." },
-    { textEn: "7. Approximately how long did Noah preach while building the ark?", textEs: "7. ¿Aproximadamente cuánto tiempo predicó Noé mientras construía el arca?", optionsEn: ["A. 120 years", "B. 50 years", "C. 40 days", "D. 200 years"], optionsEs: ["A. 120 años", "B. 50 años", "C. 40 días", "D. 200 años"], correct: 0, correctFeedbackEn: "Correct. 2 Peter 2:5 calls Noah a 'preacher of righteousness' during the 120 years (Genesis 6:3) before the flood.", correctFeedbackEs: "Correcto. 2 Pedro 2:5 llama a Noé 'pregonero de justicia' durante los 120 años (Génesis 6:3) antes del diluvio.", incorrectFeedbackEn: "120 years. Noah preached while building, but only his own family believed.", incorrectFeedbackEs: "120 años. Noé predicó mientras construía, pero solo su propia familia creyó." },
-    { textEn: "8. How many of each clean animal did Noah take into the ark?", textEs: "8. ¿Cuántos de cada animal limpio llevó Noé al arca?", optionsEn: ["A. One pair", "B. Seven pairs", "C. Ten pairs", "D. Twelve pairs"], optionsEs: ["A. Una pareja", "B. Siete parejas", "C. Diez parejas", "D. Doce parejas"], correct: 1, correctFeedbackEn: "Yes. Seven pairs of each clean animal, one pair of each unclean — a clean/unclean distinction predating the Levitical code.", correctFeedbackEs: "Sí. Siete parejas de cada animal limpio, una pareja de cada inmundo — una distinción limpio/inmundo anterior al código levítico.", incorrectFeedbackEn: "Seven pairs of each clean animal. The categories of clean and unclean existed long before Sinai.", incorrectFeedbackEs: "Siete parejas de cada animal limpio. Las categorías de limpio e inmundo existían mucho antes de Sinaí." },
-    { textEn: "9. How long did the floodwaters prevail over the earth?", textEs: "9. ¿Cuánto tiempo prevalecieron las aguas del diluvio sobre la tierra?", optionsEn: ["A. 40 days", "B. 7 days", "C. 150 days", "D. One year exactly"], optionsEs: ["A. 40 días", "B. 7 días", "C. 150 días", "D. Exactamente un año"], correct: 2, correctFeedbackEn: "Correct. 150 days — though Noah and family were in the ark over a year total before stepping out.", correctFeedbackEs: "Correcto. 150 días — aunque Noé y su familia estuvieron en el arca más de un año en total antes de salir.", incorrectFeedbackEn: "150 days. The rain fell 40 days, but the waters prevailed (covered the earth) for 150 days.", incorrectFeedbackEs: "150 días. La lluvia cayó 40 días, pero las aguas prevalecieron (cubrieron la tierra) durante 150 días." },
-    { textEn: "10. What was Noah's first recorded act after leaving the ark?", textEs: "10. ¿Cuál fue el primer acto registrado de Noé después de salir del arca?", optionsEn: ["A. Built a house", "B. Planted a vineyard", "C. Built an altar and offered sacrifices", "D. Hunted for food"], optionsEs: ["A. Edificó una casa", "B. Plantó una viña", "C. Edificó un altar y ofreció sacrificios", "D. Cazó para comer"], correct: 2, correctFeedbackEn: "Yes. Worship before settlement. Noah's first act on cleansed ground was to build an altar.", correctFeedbackEs: "Sí. Adoración antes de asentarse. El primer acto de Noé sobre la tierra purificada fue edificar un altar.", incorrectFeedbackEn: "Noah built an altar and offered burnt offerings of every clean animal — worship before anything else.", incorrectFeedbackEs: "Noé edificó un altar y ofreció holocaustos de todo animal limpio — adoración antes que cualquier otra cosa." },
-    { textEn: "11. What change in diet did God permit Noah that Adam had not been given?", textEs: "11. ¿Qué cambio en la dieta permitió Dios a Noé que no se le había dado a Adán?", optionsEn: ["A. Permission to drink wine", "B. Permission to eat meat", "C. Permission to eat any fruit", "D. Permission to fast"], optionsEs: ["A. Permiso para beber vino", "B. Permiso para comer carne", "C. Permiso para comer cualquier fruto", "D. Permiso para ayunar"], correct: 1, correctFeedbackEn: "Correct. Adam was vegetarian (Genesis 1:29). Noah received permission to eat meat — a marker of the world's changed condition.", correctFeedbackEs: "Correcto. Adán era vegetariano (Génesis 1:29). Noé recibió permiso para comer carne — una señal de la condición cambiada del mundo.", incorrectFeedbackEn: "Meat-eating. Adam was given green plants; Noah received expanded provision for a harder world.", incorrectFeedbackEs: "Comer carne. A Adán se le dieron las plantas verdes; Noé recibió una provisión ampliada para un mundo más duro." },
-    { textEn: "12. The rainbow in Genesis 9 uses what Hebrew word?", textEs: "12. El arcoíris en Génesis 9 usa qué palabra hebrea?", optionsEn: ["A. The word for 'cloud'", "B. The word for 'sun ring'", "C. The word for 'bridge'", "D. The word for a warrior's bow"], optionsEs: ["A. La palabra para 'nube'", "B. La palabra para 'anillo solar'", "C. La palabra para 'puente'", "D. La palabra para el arco de un guerrero"], correct: 3, correctFeedbackEn: "Yes. God's weapon of judgment was now drawn back, pointing away from the earth — a stunning image of mercy.", correctFeedbackEs: "Sí. El arma de juicio de Dios quedaba ahora retirada, apuntando lejos de la tierra — una impresionante imagen de misericordia.", incorrectFeedbackEn: "The Hebrew word for rainbow is the word for a warrior's bow — pointed away from the earth toward heaven.", incorrectFeedbackEs: "La palabra hebrea para arcoíris es la palabra para el arco de un guerrero — apuntado lejos de la tierra, hacia el cielo." },
-    { textEn: "13. Why was Canaan, not Ham, cursed after the vineyard incident?", textEs: "13. ¿Por qué fue maldito Canaán, y no Cam, después del incidente de la viña?", optionsEn: ["A. The curse was particular to Ham's son Canaan and his line, not Ham himself", "B. Canaan was the actual sinner", "C. God made a mistake", "D. Ham died before the curse"], optionsEs: ["A. La maldición era particular para Canaán, hijo de Cam, y su descendencia, no para Cam mismo", "B. Canaán fue el verdadero pecador", "C. Dios se equivocó", "D. Cam murió antes de la maldición"], correct: 0, correctFeedbackEn: "Correct. The curse was specific to Canaan's line — later the Canaanites Israel would confront. It was never a racial curse.", correctFeedbackEs: "Correcto. La maldición fue específica para la descendencia de Canaán — más tarde los cananeos que Israel enfrentaría. Nunca fue una maldición racial.", incorrectFeedbackEn: "The curse was particular — on Canaan and his descendants. Later interpreters who used this text to justify race-based slavery distorted it.", incorrectFeedbackEs: "La maldición fue particular — sobre Canaán y sus descendientes. Los intérpretes posteriores que usaron este texto para justificar la esclavitud por raza lo distorsionaron." },
-    { textEn: "14. How many nations does Genesis 10 record as descended from Noah's sons?", textEs: "14. ¿Cuántas naciones registra Génesis 10 como descendientes de los hijos de Noé?", optionsEn: ["A. Twelve", "B. Forty", "C. Seventy", "D. Three hundred"], optionsEs: ["A. Doce", "B. Cuarenta", "C. Setenta", "D. Trescientas"], correct: 2, correctFeedbackEn: "Yes. Seventy nations from Shem, Ham, and Japheth — a number that recurs throughout Scripture as 'the nations.'", correctFeedbackEs: "Sí. Setenta naciones de Sem, Cam y Jafet — un número que reaparece por toda la Escritura como 'las naciones'.", incorrectFeedbackEn: "Seventy nations. The number reappears throughout Scripture as a marker of 'the nations of the earth.'", incorrectFeedbackEs: "Setenta naciones. El número reaparece por toda la Escritura como una señal de 'las naciones de la tierra'." },
-    { textEn: "15. What were the people at Babel trying to build?", textEs: "15. ¿Qué intentaba construir la gente en Babel?", optionsEn: ["A. A wall", "B. A city and a tower reaching to heaven", "C. A bridge", "D. A pyramid for burial"], optionsEs: ["A. Un muro", "B. Una ciudad y una torre que llegara al cielo", "C. Un puente", "D. Una pirámide para sepultura"], correct: 1, correctFeedbackEn: "Correct. A city and a tower — likely a ziggurat for worshipping the heavens. Organized religious rebellion.", correctFeedbackEs: "Correcto. Una ciudad y una torre — probablemente un zigurat para adorar los cielos. Rebelión religiosa organizada.", incorrectFeedbackEn: "A city and a tower whose top is in the heavens — a coordinated religious project against God.", incorrectFeedbackEs: "Una ciudad y una torre cuya cúspide llegue al cielo — un proyecto religioso coordinado contra Dios." },
-    { textEn: "16. What was the people's stated motivation at Babel?", textEs: "16. ¿Cuál fue la motivación declarada de la gente en Babel?", optionsEn: ["A. To worship the true God", "B. To prepare for another flood", "C. To honor Noah", "D. To make a name for themselves and avoid being scattered"], optionsEs: ["A. Adorar al Dios verdadero", "B. Prepararse para otro diluvio", "C. Honrar a Noé", "D. Hacerse un nombre y evitar ser esparcidos"], correct: 3, correctFeedbackEn: "Yes. Pride and disobedience — God said 'fill the earth,' they said 'lest we be scattered.'", correctFeedbackEs: "Sí. Orgullo y desobediencia — Dios dijo 'llenad la tierra', ellos dijeron 'para que no seamos esparcidos'.", incorrectFeedbackEn: "'Let us make a name for ourselves, lest we be scattered' — the opposite of God's command to fill the earth.", incorrectFeedbackEs: "'Hagámonos un nombre, por si fuéremos esparcidos' — lo opuesto al mandato de Dios de llenar la tierra." },
-    { textEn: "17. God's later promise to Abram inverts what Babel-builders said. What did God promise Abram?", textEs: "17. La promesa posterior de Dios a Abram invierte lo que dijeron los constructores de Babel. ¿Qué prometió Dios a Abram?", optionsEn: ["A. 'I will fill your storehouse'", "B. 'I will give you sons'", "C. 'I will protect your tower'", "D. 'I will make your name great'"], optionsEs: ["A. 'Llenaré tu granero'", "B. 'Te daré hijos'", "C. 'Protegeré tu torre'", "D. 'Engrandeceré tu nombre'"], correct: 3, correctFeedbackEn: "Correct. Babel said, 'Let us make a name'; God said to Abram, 'I will make your name great.' The contrast is deliberate.", correctFeedbackEs: "Correcto. Babel dijo: 'Hagámonos un nombre'; Dios dijo a Abram: 'Engrandeceré tu nombre'. El contraste es deliberado.", incorrectFeedbackEn: "'I will make your name great' — what humans tried to seize at Babel, God freely gives to those who walk by faith.", incorrectFeedbackEs: "'Engrandeceré tu nombre' — lo que los hombres intentaron arrebatar en Babel, Dios lo da gratuitamente a quienes andan por fe." },
-    { textEn: "18. How did God respond at Babel?", textEs: "18. ¿Cómo respondió Dios en Babel?", optionsEn: ["A. Confused their language and scattered them", "B. Destroyed the tower with fire", "C. Sent another flood", "D. Did nothing"], optionsEs: ["A. Confundió su lengua y los esparció", "B. Destruyó la torre con fuego", "C. Envió otro diluvio", "D. No hizo nada"], correct: 0, correctFeedbackEn: "Yes. God confused their language. Scattering was judgment but also mercy — it limits the damage united evil can do.", correctFeedbackEs: "Sí. Dios confundió su lengua. El esparcimiento fue juicio, pero también misericordia — limita el daño que el mal unido puede hacer.", incorrectFeedbackEn: "God confused their language and scattered them. The scattering was both judgment and mercy.", incorrectFeedbackEs: "Dios confundió su lengua y los esparció. El esparcimiento fue a la vez juicio y misericordia." },
-    { textEn: "19. What does 'Babel' mean in Hebrew?", textEs: "19. ¿Qué significa 'Babel' en hebreo?", optionsEn: ["A. 'Great city'", "B. 'Tower of victory'", "C. 'Confusion' (balal)", "D. 'House of god'"], optionsEs: ["A. 'Gran ciudad'", "B. 'Torre de victoria'", "C. 'Confusión' (balal)", "D. 'Casa de dios'"], correct: 2, correctFeedbackEn: "Correct. From balal, 'to confuse.' Babel becomes shorthand in Scripture for organized human pride opposing God.", correctFeedbackEs: "Correcto. De balal, 'confundir'. Babel se vuelve en la Escritura un símbolo del orgullo humano organizado que se opone a Dios.", incorrectFeedbackEn: "Babel comes from balal, 'to confuse.' Ironically the Akkadian etymology also reads 'gate of god' — a name they gave themselves.", incorrectFeedbackEs: "Babel viene de balal, 'confundir'. Irónicamente la etimología acadia también se lee 'puerta de dios' — un nombre que ellos mismos se dieron." },
-    { textEn: "20. Genesis 11 ends by tracing whose genealogy?", textEs: "20. Génesis 11 termina trazando la genealogía de quién?", optionsEn: ["A. Cain's line", "B. Ham's line", "C. Japheth's line", "D. Shem's line down to Abram"], optionsEs: ["A. La línea de Caín", "B. La línea de Cam", "C. La línea de Jafet", "D. La línea de Sem hasta Abram"], correct: 3, correctFeedbackEn: "Yes. Shem to Abram — setting up the next great chapter of redemption.", correctFeedbackEs: "Sí. De Sem a Abram — preparando el siguiente gran capítulo de redención.", incorrectFeedbackEn: "Shem to Abram. The narrative narrows from all humanity to one man through whom all families of the earth will be blessed.", incorrectFeedbackEs: "De Sem a Abram. La narración se estrecha de toda la humanidad a un solo hombre por medio del cual serán benditas todas las familias de la tierra." }
-];
-
-const saQuestions = [
-    { id: `sa_u${UNIT}_1`, textEn: "What does Enoch's translation in Genesis 5:24 teach about life beyond the grave?", textEs: "¿Qué enseña la traslación de Enoc en Génesis 5:24 sobre la vida más allá de la tumba?", kw_en: ["walked", "took", "did", "die", "transla", "resurrec", "faith", "fellows"], kw_es: ["caminó", "llevó", "murió", "traslad", "resurrec", "fe", "comunió", "enoc"], explanationEn: "Enoch did not die — God took him bodily. Centuries before explicit resurrection doctrine, God showed that fellowship with Him does not end at death.", explanationEs: "Enoc no murió — Dios lo llevó corporalmente. Siglos antes de la doctrina explícita de resurrección, Dios mostró que la comunión con Él no termina en la muerte." },
-    { id: `sa_u${UNIT}_2`, textEn: "Explain the significance of 'Noah found grace' being the first appearance of grace in the Bible.", textEs: "Explique el significado de que 'Noé halló gracia' sea la primera aparición de la gracia en la Biblia.", kw_en: ["grace", "chen", "unearne", "first", "found", "favor", "before", "righteo"], kw_es: ["gracia", "chen", "merecid", "primera", "halló", "favor", "antes", "justici"], explanationEn: "The Hebrew word chen first appears with Noah — unearned divine favor. Grace came first; Noah's righteousness followed as response, not cause.", explanationEs: "La palabra hebrea chen aparece primero con Noé — favor divino no merecido. La gracia vino primero; la justicia de Noé siguió como respuesta, no como causa." },
-    { id: `sa_u${UNIT}_3`, textEn: "How does the ark serve as a picture of Christ?", textEs: "¿Cómo sirve el arca como una imagen de Cristo?", kw_en: ["one", "door", "salvati", "inside", "safe", "outside", "lost", "christ"], kw_es: ["puerta", "salvaci", "dentro", "seguro", "fuera", "perdido", "cristo", "arca"], explanationEn: "The ark had one door. Christ said, 'I am the door.' Those inside the vessel were safe; those outside perished. The picture is unmistakable.", explanationEs: "El arca tenía una puerta. Cristo dijo: 'Yo soy la puerta'. Los que estaban dentro de la nave estaban seguros; los de afuera perecieron. La imagen es inconfundible." },
-    { id: `sa_u${UNIT}_4`, textEn: "What does the existence of clean and unclean animals before the Levitical law tell us?", textEs: "¿Qué nos dice la existencia de animales limpios e inmundos antes de la ley levítica?", kw_en: ["existed", "unclean", "before", "sinai", "predate", "categor", "sacrific", "design"], kw_es: ["existía", "inmundo", "antes", "sinaí", "anteced", "categor", "sacrific", "diseño"], explanationEn: "The categories existed centuries before Sinai, showing God's distinctions are not arbitrary code-making but reflect deeper truths about His order.", explanationEs: "Las categorías existían siglos antes de Sinaí, mostrando que las distinciones de Dios no son códigos arbitrarios sino reflejan verdades más profundas sobre Su orden." },
-    { id: `sa_u${UNIT}_5`, textEn: "Why did Noah build an altar as his first act after leaving the ark?", textEs: "¿Por qué Noé construyó un altar como su primer acto después de salir del arca?", kw_en: ["worship", "before", "settlem", "noah", "burnt", "offerin", "thanksg", "first"], kw_es: ["adoraci", "antes", "asentam", "altar", "holocau", "gratitu", "primer", "acto"], explanationEn: "Worship before settlement. Noah recognized that survival came from God, not from his own labor — gratitude and dependence preceded everything else.", explanationEs: "Adoración antes del asentamiento. Noé reconoció que la supervivencia vino de Dios, no de su propio esfuerzo — la gratitud y la dependencia precedieron todo lo demás." },
-    { id: `sa_u${UNIT}_6`, textEn: "Explain the significance of the rainbow using the Hebrew word for a warrior's bow.", textEs: "Explique el significado del arcoíris usando la palabra hebrea para el arco de un guerrero.", kw_en: ["weapon", "bow", "pointed", "away", "judgmen", "laid", "aside", "covenan"], kw_es: ["guerrer", "arco", "apunta", "lejos", "juicio", "depuest", "pacto", "miseric"], explanationEn: "God's weapon of judgment was now drawn back, pointing away from the earth toward heaven — a stunning picture of mercy and covenant.", explanationEs: "El arma de juicio de Dios estaba ahora tensada, apuntando lejos de la tierra hacia el cielo — una imagen impresionante de misericordia y pacto." },
-    { id: `sa_u${UNIT}_7`, textEn: "Why is it important to understand that the curse on Canaan was particular, not racial?", textEs: "¿Por qué es importante entender que la maldición sobre Canaán fue particular, no racial?", kw_en: ["canaan", "racial", "particu", "canaani", "peoples", "semitic", "misused", "specifi"], kw_es: ["canaán", "racial", "particu", "pueblos", "cananeo", "semític", "mal", "usado"], explanationEn: "The curse fell on Canaan's specific line, who became the Canaanites — Semitic peoples in Palestine. The text gives no warrant for race-based slavery.", explanationEs: "La maldición cayó sobre la línea específica de Canaán, quienes se convirtieron en los cananeos — pueblos semíticos en Palestina. El texto no justifica la esclavitud racial." },
-    { id: `sa_u${UNIT}_8`, textEn: "What does Genesis 10 teach about human unity and racism?", textEs: "¿Qué enseña Génesis 10 sobre la unidad humana y el racismo?", kw_en: ["one", "race", "noah", "descend", "adam", "surface", "variati", "racism"], kw_es: ["raza", "descend", "noé", "adán", "variaci", "superfi", "racismo", "niega"], explanationEn: "Every human descends from Noah and ultimately Adam. Differences are surface variations on a deeper unity. Racism contradicts the basic biblical anthropology.", explanationEs: "Todo humano desciende de Noé y en última instancia de Adán. Las diferencias son variaciones superficiales sobre una unidad más profunda. El racismo contradice la antropología bíblica básica." },
-    { id: `sa_u${UNIT}_9`, textEn: "Contrast the Babel-builders' words ('let us make a name for ourselves') with what God later said to Abram.", textEs: "Contraste las palabras de los constructores de Babel ('hagámonos un nombre') con lo que Dios después dijo a Abram.", kw_en: ["make", "name", "will", "great", "abram", "pride", "gift", "contras"], kw_es: ["babel", "nombre", "engrand", "grande", "abram", "orgullo", "regalo", "contras"], explanationEn: "Babel tried to seize a great name by pride; God freely gave Abram a great name by promise. What humanity grasps for, God gives to those who walk by faith.", explanationEs: "Babel intentó conseguir un gran nombre por orgullo; Dios libremente dio a Abram un gran nombre por promesa. Lo que la humanidad busca tomar, Dios lo da a los que caminan por fe." },
-    { id: `sa_u${UNIT}_10`, textEn: "Why was the scattering at Babel both judgment and mercy?", textEs: "¿Por qué la dispersión en Babel fue tanto juicio como misericordia?", kw_en: ["scatter", "judgmen", "mercy", "limits", "evil", "unified", "languag", "spread"], kw_es: ["dispers", "juicio", "miseric", "limita", "mal", "unifica", "lengua", "esparci"], explanationEn: "Judgment because it broke their rebellion; mercy because it limited how much evil a unified humanity could accomplish together.", explanationEs: "Juicio porque rompió su rebelión; misericordia porque limitó cuánto mal podía lograr unida una humanidad unificada." }
-];
+/* CTSPent — unit 3. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "pent",
+ "unit": 3,
+ "totalUnits": 12,
+ "filePrefix": "CTSPent",
+ "prevHref": "CTSPentUnit2.html",
+ "nextHref": "CTSPentUnit4.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "How many generations are recorded from Adam to Noah in Genesis 5?",
+    "es": "¿Cuántas generaciones se registran desde Adán hasta Noé en Génesis 5?"
+   },
+   "options": {
+    "en": [
+     "Seven",
+     "Ten",
+     "Twelve",
+     "Twenty"
+    ],
+    "es": [
+     "Siete",
+     "Diez",
+     "Doce",
+     "Veinte"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. Genesis 5 records ten generations from Adam to Noah — a deliberate genealogy showing God preserving a line through judgment.",
+    "es": "Correcto. Génesis 5 registra diez generaciones desde Adán hasta Noé — una genealogía deliberada que muestra a Dios preservando un linaje a través del juicio."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was distinctive about Enoch in Genesis 5?",
+    "es": "¿Qué tenía de distintivo Enoc en Génesis 5?"
+   },
+   "options": {
+    "en": [
+     "He walked with God and was taken without dying",
+     "He lived the longest",
+     "He invented agriculture",
+     "He fought giants"
+    ],
+    "es": [
+     "Caminó con Dios y fue llevado sin morir",
+     "Vivió más que nadie",
+     "Inventó la agricultura",
+     "Luchó contra gigantes"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Yes. Enoch did not die — God 'took him.' Centuries before any explicit doctrine of resurrection, God hinted at life beyond the grave.",
+    "es": "Sí. Enoc no murió — Dios 'lo llevó'. Siglos antes de cualquier doctrina explícita de resurrección, Dios insinuó la vida más allá de la tumba."
+   }
+  },
+  {
+   "stem": {
+    "en": "The phrase 'sons of God' in Genesis 6 is most naturally understood as referring to what?",
+    "es": "La frase 'hijos de Dios' en Génesis 6 se entiende con mayor naturalidad como referida a qué?"
+   },
+   "options": {
+    "en": [
+     "Angelic beings (bene elohim)",
+     "The wicked rulers of cities",
+     "The line of Seth only",
+     "Animals"
+    ],
+    "es": [
+     "Seres angelicales (bene elohim)",
+     "Los gobernantes malvados de las ciudades",
+     "Solamente la línea de Set",
+     "Animales"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. The phrase bene elohim is used elsewhere in the OT (Job 1:6) for angelic beings — and Jude and 2 Peter both seem to confirm this reading.",
+    "es": "Correcto. La frase bene elohim se usa en otros lugares del AT (Job 1:6) para seres angelicales — y tanto Judas como 2 Pedro parecen confirmar esta lectura."
+   }
+  },
+  {
+   "stem": {
+    "en": "What word first appears in the Bible in connection with Noah?",
+    "es": "¿Qué palabra aparece por primera vez en la Biblia en relación con Noé?"
+   },
+   "options": {
+    "en": [
+     "Sin",
+     "Grace (chen)",
+     "Wisdom",
+     "Faith"
+    ],
+    "es": [
+     "Pecado",
+     "Gracia (chen)",
+     "Sabiduría",
+     "Fe"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Yes. 'Noah found grace in the eyes of the Lord' — the first occurrence of chen in Scripture.",
+    "es": "Sí. 'Noé halló gracia ante los ojos de Jehová' — la primera aparición de chen en la Escritura."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did Noah's father Lamech prophesy at his birth?",
+    "es": "¿Qué profetizó Lamec, el padre de Noé, en su nacimiento?"
+   },
+   "options": {
+    "en": [
+     "'He will rule the nations'",
+     "'He will be greater than I'",
+     "'This one will comfort us concerning the toil of our hands'",
+     "'He will build a great city'"
+    ],
+    "es": [
+     "'Gobernará las naciones'",
+     "'Será mayor que yo'",
+     "'Éste nos consolará acerca del trabajo de nuestras manos'",
+     "'Edificará una gran ciudad'"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. Lamech prophesied Noah would bring relief from the curse on the ground — and the flood reset that ground.",
+    "es": "Correcto. Lamec profetizó que Noé traería alivio de la maldición sobre la tierra — y el diluvio renovó esa tierra."
+   }
+  },
+  {
+   "stem": {
+    "en": "How many doors did the ark have?",
+    "es": "¿Cuántas puertas tenía el arca?"
+   },
+   "options": {
+    "en": [
+     "Twelve",
+     "Four",
+     "Two",
+     "One"
+    ],
+    "es": [
+     "Doce",
+     "Cuatro",
+     "Dos",
+     "Una"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Yes. One door — pointing forward to Christ, who said, 'I am the door; if anyone enters by Me, he will be saved.'",
+    "es": "Sí. Una sola puerta — que señala a Cristo, quien dijo: 'Yo soy la puerta; el que por mí entrare, será salvo.'"
+   }
+  },
+  {
+   "stem": {
+    "en": "Approximately how long did Noah preach while building the ark?",
+    "es": "¿Aproximadamente cuánto tiempo predicó Noé mientras construía el arca?"
+   },
+   "options": {
+    "en": [
+     "120 years",
+     "50 years",
+     "40 days",
+     "200 years"
+    ],
+    "es": [
+     "120 años",
+     "50 años",
+     "40 días",
+     "200 años"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. 2 Peter 2:5 calls Noah a 'preacher of righteousness' during the 120 years (Genesis 6:3) before the flood.",
+    "es": "Correcto. 2 Pedro 2:5 llama a Noé 'pregonero de justicia' durante los 120 años (Génesis 6:3) antes del diluvio."
+   }
+  },
+  {
+   "stem": {
+    "en": "How many of each clean animal did Noah take into the ark?",
+    "es": "¿Cuántos de cada animal limpio llevó Noé al arca?"
+   },
+   "options": {
+    "en": [
+     "One pair",
+     "Seven pairs",
+     "Ten pairs",
+     "Twelve pairs"
+    ],
+    "es": [
+     "Una pareja",
+     "Siete parejas",
+     "Diez parejas",
+     "Doce parejas"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Yes. Seven pairs of each clean animal, one pair of each unclean — a clean/unclean distinction predating the Levitical code.",
+    "es": "Sí. Siete parejas de cada animal limpio, una pareja de cada inmundo — una distinción limpio/inmundo anterior al código levítico."
+   }
+  },
+  {
+   "stem": {
+    "en": "How long did the floodwaters prevail over the earth?",
+    "es": "¿Cuánto tiempo prevalecieron las aguas del diluvio sobre la tierra?"
+   },
+   "options": {
+    "en": [
+     "40 days",
+     "7 days",
+     "150 days",
+     "One year exactly"
+    ],
+    "es": [
+     "40 días",
+     "7 días",
+     "150 días",
+     "Exactamente un año"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. 150 days — though Noah and family were in the ark over a year total before stepping out.",
+    "es": "Correcto. 150 días — aunque Noé y su familia estuvieron en el arca más de un año en total antes de salir."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was Noah's first recorded act after leaving the ark?",
+    "es": "¿Cuál fue el primer acto registrado de Noé después de salir del arca?"
+   },
+   "options": {
+    "en": [
+     "Built a house",
+     "Planted a vineyard",
+     "Built an altar and offered sacrifices",
+     "Hunted for food"
+    ],
+    "es": [
+     "Edificó una casa",
+     "Plantó una viña",
+     "Edificó un altar y ofreció sacrificios",
+     "Cazó para comer"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Yes. Worship before settlement. Noah's first act on cleansed ground was to build an altar.",
+    "es": "Sí. Adoración antes de asentarse. El primer acto de Noé sobre la tierra purificada fue edificar un altar."
+   }
+  },
+  {
+   "stem": {
+    "en": "What change in diet did God permit Noah that Adam had not been given?",
+    "es": "¿Qué cambio en la dieta permitió Dios a Noé que no se le había dado a Adán?"
+   },
+   "options": {
+    "en": [
+     "Permission to drink wine",
+     "Permission to eat meat",
+     "Permission to eat any fruit",
+     "Permission to fast"
+    ],
+    "es": [
+     "Permiso para beber vino",
+     "Permiso para comer carne",
+     "Permiso para comer cualquier fruto",
+     "Permiso para ayunar"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. Adam was vegetarian (Genesis 1:29). Noah received permission to eat meat — a marker of the world's changed condition.",
+    "es": "Correcto. Adán era vegetariano (Génesis 1:29). Noé recibió permiso para comer carne — una señal de la condición cambiada del mundo."
+   }
+  },
+  {
+   "stem": {
+    "en": "The rainbow in Genesis 9 uses what Hebrew word?",
+    "es": "El arcoíris en Génesis 9 usa qué palabra hebrea?"
+   },
+   "options": {
+    "en": [
+     "The word for 'cloud'",
+     "The word for 'sun ring'",
+     "The word for 'bridge'",
+     "The word for a warrior's bow"
+    ],
+    "es": [
+     "La palabra para 'nube'",
+     "La palabra para 'anillo solar'",
+     "La palabra para 'puente'",
+     "La palabra para el arco de un guerrero"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Yes. God's weapon of judgment was now drawn back, pointing away from the earth — a stunning image of mercy.",
+    "es": "Sí. El arma de juicio de Dios quedaba ahora retirada, apuntando lejos de la tierra — una impresionante imagen de misericordia."
+   }
+  },
+  {
+   "stem": {
+    "en": "Why was Canaan, not Ham, cursed after the vineyard incident?",
+    "es": "¿Por qué fue maldito Canaán, y no Cam, después del incidente de la viña?"
+   },
+   "options": {
+    "en": [
+     "The curse was particular to Ham's son Canaan and his line, not Ham himself",
+     "Canaan was the actual sinner",
+     "God made a mistake",
+     "Ham died before the curse"
+    ],
+    "es": [
+     "La maldición era particular para Canaán, hijo de Cam, y su descendencia, no para Cam mismo",
+     "Canaán fue el verdadero pecador",
+     "Dios se equivocó",
+     "Cam murió antes de la maldición"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. The curse was specific to Canaan's line — later the Canaanites Israel would confront. It was never a racial curse.",
+    "es": "Correcto. La maldición fue específica para la descendencia de Canaán — más tarde los cananeos que Israel enfrentaría. Nunca fue una maldición racial."
+   }
+  },
+  {
+   "stem": {
+    "en": "How many nations does Genesis 10 record as descended from Noah's sons?",
+    "es": "¿Cuántas naciones registra Génesis 10 como descendientes de los hijos de Noé?"
+   },
+   "options": {
+    "en": [
+     "Twelve",
+     "Forty",
+     "Seventy",
+     "Three hundred"
+    ],
+    "es": [
+     "Doce",
+     "Cuarenta",
+     "Setenta",
+     "Trescientas"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Yes. Seventy nations from Shem, Ham, and Japheth — a number that recurs throughout Scripture as 'the nations.'",
+    "es": "Sí. Setenta naciones de Sem, Cam y Jafet — un número que reaparece por toda la Escritura como 'las naciones'."
+   }
+  },
+  {
+   "stem": {
+    "en": "What were the people at Babel trying to build?",
+    "es": "¿Qué intentaba construir la gente en Babel?"
+   },
+   "options": {
+    "en": [
+     "A wall",
+     "A city and a tower reaching to heaven",
+     "A bridge",
+     "A pyramid for burial"
+    ],
+    "es": [
+     "Un muro",
+     "Una ciudad y una torre que llegara al cielo",
+     "Un puente",
+     "Una pirámide para sepultura"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. A city and a tower — likely a ziggurat for worshipping the heavens. Organized religious rebellion.",
+    "es": "Correcto. Una ciudad y una torre — probablemente un zigurat para adorar los cielos. Rebelión religiosa organizada."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was the people's stated motivation at Babel?",
+    "es": "¿Cuál fue la motivación declarada de la gente en Babel?"
+   },
+   "options": {
+    "en": [
+     "To worship the true God",
+     "To prepare for another flood",
+     "To honor Noah",
+     "To make a name for themselves and avoid being scattered"
+    ],
+    "es": [
+     "Adorar al Dios verdadero",
+     "Prepararse para otro diluvio",
+     "Honrar a Noé",
+     "Hacerse un nombre y evitar ser esparcidos"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Yes. Pride and disobedience — God said 'fill the earth,' they said 'lest we be scattered.'",
+    "es": "Sí. Orgullo y desobediencia — Dios dijo 'llenad la tierra', ellos dijeron 'para que no seamos esparcidos'."
+   }
+  },
+  {
+   "stem": {
+    "en": "God's later promise to Abram inverts what Babel-builders said. What did God promise Abram?",
+    "es": "La promesa posterior de Dios a Abram invierte lo que dijeron los constructores de Babel. ¿Qué prometió Dios a Abram?"
+   },
+   "options": {
+    "en": [
+     "'I will fill your storehouse'",
+     "'I will give you sons'",
+     "'I will protect your tower'",
+     "'I will make your name great'"
+    ],
+    "es": [
+     "'Llenaré tu granero'",
+     "'Te daré hijos'",
+     "'Protegeré tu torre'",
+     "'Engrandeceré tu nombre'"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. Babel said, 'Let us make a name'; God said to Abram, 'I will make your name great.' The contrast is deliberate.",
+    "es": "Correcto. Babel dijo: 'Hagámonos un nombre'; Dios dijo a Abram: 'Engrandeceré tu nombre'. El contraste es deliberado."
+   }
+  },
+  {
+   "stem": {
+    "en": "How did God respond at Babel?",
+    "es": "¿Cómo respondió Dios en Babel?"
+   },
+   "options": {
+    "en": [
+     "Confused their language and scattered them",
+     "Destroyed the tower with fire",
+     "Sent another flood",
+     "Did nothing"
+    ],
+    "es": [
+     "Confundió su lengua y los esparció",
+     "Destruyó la torre con fuego",
+     "Envió otro diluvio",
+     "No hizo nada"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Yes. God confused their language. Scattering was judgment but also mercy — it limits the damage united evil can do.",
+    "es": "Sí. Dios confundió su lengua. El esparcimiento fue juicio, pero también misericordia — limita el daño que el mal unido puede hacer."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does 'Babel' mean in Hebrew?",
+    "es": "¿Qué significa 'Babel' en hebreo?"
+   },
+   "options": {
+    "en": [
+     "'Great city'",
+     "'Tower of victory'",
+     "'Confusion' (balal)",
+     "'House of god'"
+    ],
+    "es": [
+     "'Gran ciudad'",
+     "'Torre de victoria'",
+     "'Confusión' (balal)",
+     "'Casa de dios'"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. From balal, 'to confuse.' Babel becomes shorthand in Scripture for organized human pride opposing God.",
+    "es": "Correcto. De balal, 'confundir'. Babel se vuelve en la Escritura un símbolo del orgullo humano organizado que se opone a Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "Genesis 11 ends by tracing whose genealogy?",
+    "es": "Génesis 11 termina trazando la genealogía de quién?"
+   },
+   "options": {
+    "en": [
+     "Cain's line",
+     "Ham's line",
+     "Japheth's line",
+     "Shem's line down to Abram"
+    ],
+    "es": [
+     "La línea de Caín",
+     "La línea de Cam",
+     "La línea de Jafet",
+     "La línea de Sem hasta Abram"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Yes. Shem to Abram — setting up the next great chapter of redemption.",
+    "es": "Sí. De Sem a Abram — preparando el siguiente gran capítulo de redención."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "What does Enoch's translation in Genesis 5:24 teach about life beyond the grave?",
+    "es": "¿Qué enseña la traslación de Enoc en Génesis 5:24 sobre la vida más allá de la tumba?"
+   },
+   "keywords": {
+    "en": [
+     "walked",
+     "took",
+     "did",
+     "die",
+     "transla",
+     "resurrec",
+     "faith",
+     "fellows"
+    ],
+    "es": [
+     "caminó",
+     "llevó",
+     "murió",
+     "traslad",
+     "resurrec",
+     "fe",
+     "comunió",
+     "enoc"
+    ]
+   },
+   "model": {
+    "en": "Enoch did not die — God took him bodily. Centuries before explicit resurrection doctrine, God showed that fellowship with Him does not end at death.",
+    "es": "Enoc no murió — Dios lo llevó corporalmente. Siglos antes de la doctrina explícita de resurrección, Dios mostró que la comunión con Él no termina en la muerte."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the significance of 'Noah found grace' being the first appearance of grace in the Bible.",
+    "es": "Explique el significado de que 'Noé halló gracia' sea la primera aparición de la gracia en la Biblia."
+   },
+   "keywords": {
+    "en": [
+     "grace",
+     "chen",
+     "unearne",
+     "first",
+     "found",
+     "favor",
+     "before",
+     "righteo"
+    ],
+    "es": [
+     "gracia",
+     "chen",
+     "merecid",
+     "primera",
+     "halló",
+     "favor",
+     "antes",
+     "justici"
+    ]
+   },
+   "model": {
+    "en": "The Hebrew word chen first appears with Noah — unearned divine favor. Grace came first; Noah's righteousness followed as response, not cause.",
+    "es": "La palabra hebrea chen aparece primero con Noé — favor divino no merecido. La gracia vino primero; la justicia de Noé siguió como respuesta, no como causa."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How does the ark serve as a picture of Christ?",
+    "es": "¿Cómo sirve el arca como una imagen de Cristo?"
+   },
+   "keywords": {
+    "en": [
+     "one",
+     "door",
+     "salvati",
+     "inside",
+     "safe",
+     "outside",
+     "lost",
+     "christ"
+    ],
+    "es": [
+     "puerta",
+     "salvaci",
+     "dentro",
+     "seguro",
+     "fuera",
+     "perdido",
+     "cristo",
+     "arca"
+    ]
+   },
+   "model": {
+    "en": "The ark had one door. Christ said, 'I am the door.' Those inside the vessel were safe; those outside perished. The picture is unmistakable.",
+    "es": "El arca tenía una puerta. Cristo dijo: 'Yo soy la puerta'. Los que estaban dentro de la nave estaban seguros; los de afuera perecieron. La imagen es inconfundible."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does the existence of clean and unclean animals before the Levitical law tell us?",
+    "es": "¿Qué nos dice la existencia de animales limpios e inmundos antes de la ley levítica?"
+   },
+   "keywords": {
+    "en": [
+     "existed",
+     "unclean",
+     "before",
+     "sinai",
+     "predate",
+     "categor",
+     "sacrific",
+     "design"
+    ],
+    "es": [
+     "existía",
+     "inmundo",
+     "antes",
+     "sinaí",
+     "anteced",
+     "categor",
+     "sacrific",
+     "diseño"
+    ]
+   },
+   "model": {
+    "en": "The categories existed centuries before Sinai, showing God's distinctions are not arbitrary code-making but reflect deeper truths about His order.",
+    "es": "Las categorías existían siglos antes de Sinaí, mostrando que las distinciones de Dios no son códigos arbitrarios sino reflejan verdades más profundas sobre Su orden."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why did Noah build an altar as his first act after leaving the ark?",
+    "es": "¿Por qué Noé construyó un altar como su primer acto después de salir del arca?"
+   },
+   "keywords": {
+    "en": [
+     "worship",
+     "before",
+     "settlem",
+     "noah",
+     "burnt",
+     "offerin",
+     "thanksg",
+     "first"
+    ],
+    "es": [
+     "adoraci",
+     "antes",
+     "asentam",
+     "altar",
+     "holocau",
+     "gratitu",
+     "primer",
+     "acto"
+    ]
+   },
+   "model": {
+    "en": "Worship before settlement. Noah recognized that survival came from God, not from his own labor — gratitude and dependence preceded everything else.",
+    "es": "Adoración antes del asentamiento. Noé reconoció que la supervivencia vino de Dios, no de su propio esfuerzo — la gratitud y la dependencia precedieron todo lo demás."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the significance of the rainbow using the Hebrew word for a warrior's bow.",
+    "es": "Explique el significado del arcoíris usando la palabra hebrea para el arco de un guerrero."
+   },
+   "keywords": {
+    "en": [
+     "weapon",
+     "bow",
+     "pointed",
+     "away",
+     "judgmen",
+     "laid",
+     "aside",
+     "covenan"
+    ],
+    "es": [
+     "guerrer",
+     "arco",
+     "apunta",
+     "lejos",
+     "juicio",
+     "depuest",
+     "pacto",
+     "miseric"
+    ]
+   },
+   "model": {
+    "en": "God's weapon of judgment was now drawn back, pointing away from the earth toward heaven — a stunning picture of mercy and covenant.",
+    "es": "El arma de juicio de Dios estaba ahora tensada, apuntando lejos de la tierra hacia el cielo — una imagen impresionante de misericordia y pacto."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why is it important to understand that the curse on Canaan was particular, not racial?",
+    "es": "¿Por qué es importante entender que la maldición sobre Canaán fue particular, no racial?"
+   },
+   "keywords": {
+    "en": [
+     "canaan",
+     "racial",
+     "particu",
+     "canaani",
+     "peoples",
+     "semitic",
+     "misused",
+     "specifi"
+    ],
+    "es": [
+     "canaán",
+     "racial",
+     "particu",
+     "pueblos",
+     "cananeo",
+     "semític",
+     "mal",
+     "usado"
+    ]
+   },
+   "model": {
+    "en": "The curse fell on Canaan's specific line, who became the Canaanites — Semitic peoples in Palestine. The text gives no warrant for race-based slavery.",
+    "es": "La maldición cayó sobre la línea específica de Canaán, quienes se convirtieron en los cananeos — pueblos semíticos en Palestina. El texto no justifica la esclavitud racial."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does Genesis 10 teach about human unity and racism?",
+    "es": "¿Qué enseña Génesis 10 sobre la unidad humana y el racismo?"
+   },
+   "keywords": {
+    "en": [
+     "one",
+     "race",
+     "noah",
+     "descend",
+     "adam",
+     "surface",
+     "variati",
+     "racism"
+    ],
+    "es": [
+     "raza",
+     "descend",
+     "noé",
+     "adán",
+     "variaci",
+     "superfi",
+     "racismo",
+     "niega"
+    ]
+   },
+   "model": {
+    "en": "Every human descends from Noah and ultimately Adam. Differences are surface variations on a deeper unity. Racism contradicts the basic biblical anthropology.",
+    "es": "Todo humano desciende de Noé y en última instancia de Adán. Las diferencias son variaciones superficiales sobre una unidad más profunda. El racismo contradice la antropología bíblica básica."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Contrast the Babel-builders' words ('let us make a name for ourselves') with what God later said to Abram.",
+    "es": "Contraste las palabras de los constructores de Babel ('hagámonos un nombre') con lo que Dios después dijo a Abram."
+   },
+   "keywords": {
+    "en": [
+     "make",
+     "name",
+     "will",
+     "great",
+     "abram",
+     "pride",
+     "gift",
+     "contras"
+    ],
+    "es": [
+     "babel",
+     "nombre",
+     "engrand",
+     "grande",
+     "abram",
+     "orgullo",
+     "regalo",
+     "contras"
+    ]
+   },
+   "model": {
+    "en": "Babel tried to seize a great name by pride; God freely gave Abram a great name by promise. What humanity grasps for, God gives to those who walk by faith.",
+    "es": "Babel intentó conseguir un gran nombre por orgullo; Dios libremente dio a Abram un gran nombre por promesa. Lo que la humanidad busca tomar, Dios lo da a los que caminan por fe."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why was the scattering at Babel both judgment and mercy?",
+    "es": "¿Por qué la dispersión en Babel fue tanto juicio como misericordia?"
+   },
+   "keywords": {
+    "en": [
+     "scatter",
+     "judgmen",
+     "mercy",
+     "limits",
+     "evil",
+     "unified",
+     "languag",
+     "spread"
+    ],
+    "es": [
+     "dispers",
+     "juicio",
+     "miseric",
+     "limita",
+     "mal",
+     "unifica",
+     "lengua",
+     "esparci"
+    ]
+   },
+   "model": {
+    "en": "Judgment because it broke their rebellion; mercy because it limited how much evil a unified humanity could accomplish together.",
+    "es": "Juicio porque rompió su rebelión; misericordia porque limitó cuánto mal podía lograr unida una humanidad unificada."
+   }
+  }
+ ]
+};

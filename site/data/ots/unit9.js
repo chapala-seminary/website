@@ -1,0 +1,1352 @@
+/* CTS — unit 9. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "ots",
+ "unit": 9,
+ "totalUnits": 13,
+ "filePrefix": "CTS",
+ "prevHref": "CTSUnit8.html",
+ "nextHref": "CTSUnit10.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "Isaiah is called 'the Bible in miniature' because:",
+    "es": "Isaías es llamado 'la Biblia en miniatura' porque:"
+   },
+   "options": {
+    "en": [
+     "66 chapters mirror 66 books, with chapters 1–39 like the OT and 40–66 like the NT",
+     "It contains every doctrine ever taught",
+     "It quotes every other prophet",
+     "It is the shortest book of prophecy"
+    ],
+    "es": [
+     "66 capítulos reflejan 66 libros, con capítulos 1–39 como el AT y 40–66 como el NT",
+     "Contiene toda doctrina enseñada",
+     "Cita a todos los demás profetas",
+     "Es el libro de profecía más corto"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. The whole Bible is folded inside one prophet. That's why Isaiah is sometimes called the gospel according to Isaiah.",
+    "es": "Correcto. La Biblia entera está doblada dentro de un solo profeta. Por eso Isaías es llamado a veces el evangelio según Isaías."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Hebrew name <em>Yesha'yahu</em> (Isaiah) means:",
+    "es": "El nombre hebreo <em>Yesha'yahu</em> (Isaías) significa:"
+   },
+   "options": {
+    "en": [
+     "The Lord is wise",
+     "The Lord reigns",
+     "The Lord saves",
+     "The Lord remembers"
+    ],
+    "es": [
+     "Jehová es sabio",
+     "Jehová reina",
+     "Jehová salva",
+     "Jehová recuerda"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. The same root gives us <em>Yeshua</em> — Jesus. Author and Subject share one name.",
+    "es": "Correcto. La misma raíz nos da <em>Yeshua</em> — Jesús. Autor y Sujeto comparten un nombre."
+   }
+  },
+  {
+   "stem": {
+    "en": "Isaiah's vision of God came in the year:",
+    "es": "La visión de Dios que tuvo Isaías ocurrió en el año:"
+   },
+   "options": {
+    "en": [
+     "Hezekiah began to reign",
+     "Jerusalem fell",
+     "Manasseh was crowned",
+     "King Uzziah died"
+    ],
+    "es": [
+     "Que Ezequías comenzó a reinar",
+     "Que cayó Jerusalén",
+     "Que Manasés fue coronado",
+     "Que murió el rey Uzías"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. The earthly throne was empty; Isaiah found the heavenly throne occupied.",
+    "es": "Correcto. El trono terrenal estaba vacío; Isaías encontró el trono celestial ocupado."
+   }
+  },
+  {
+   "stem": {
+    "en": "The triple cry of the seraphim is unique because it:",
+    "es": "El triple clamor de los serafines es único porque:"
+   },
+   "options": {
+    "en": [
+     "Is sung only by angels",
+     "Raises a single attribute of God to the third power",
+     "Repeats the name of God",
+     "Echoes the Trinity by accident"
+    ],
+    "es": [
+     "Solo lo cantan los ángeles",
+     "Eleva un solo atributo de Dios al tercer grado",
+     "Repite el nombre de Dios",
+     "Refleja la Trinidad por casualidad"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. Holy. Holy. Holy. Hebrew makes superlatives by saying a word three times. God's holiness is the only attribute Scripture ever triples.",
+    "es": "Correcto. Santo. Santo. Santo. El hebreo hace superlativos diciendo una palabra tres veces. La santidad de Dios es el único atributo que la Escritura triplica."
+   }
+  },
+  {
+   "stem": {
+    "en": "Isaiah's response to his vision of God was first:",
+    "es": "La primera respuesta de Isaías a su visión de Dios fue:"
+   },
+   "options": {
+    "en": [
+     "To announce judgment on others",
+     "To leave the temple",
+     "To recognize his own sinfulness",
+     "To worship in silence"
+    ],
+    "es": [
+     "Anunciar juicio sobre otros",
+     "Salir del templo",
+     "Reconocer su propio pecado",
+     "Adorar en silencio"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. 'Woe is me, for I am undone' (Isaiah 6:5). Vision of holiness, recognition of sin, atonement, then calling — in that exact order.",
+    "es": "Correcto. '¡Ay de mí, soy muerto!' (Isaías 6:5). Visión de santidad, reconocimiento del pecado, expiación, luego llamado — en ese orden exacto."
+   }
+  },
+  {
+   "stem": {
+    "en": "The opening invitation of Isaiah 1:18 is:",
+    "es": "La invitación que abre Isaías 1:18 es:"
+   },
+   "options": {
+    "en": [
+     "'Come now, let us reason together: though your sins be as scarlet, they shall be as white as snow'",
+     "'Behold, the Lamb of God'",
+     "'Comfort, comfort my people'",
+     "'Holy, holy, holy is the LORD of hosts'"
+    ],
+    "es": [
+     "'Venid luego, estemos a cuenta: si vuestros pecados fueren como la grana, como la nieve serán emblanquecidos'",
+     "'He aquí el Cordero de Dios'",
+     "'Consolaos, consolaos, pueblo mío'",
+     "'Santo, santo, santo, Jehová de los ejércitos'"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. The colors of the verse become the very thread Isaiah's whole book runs on — scarlet sin, snow-white forgiveness, paid for by chapter 53.",
+    "es": "Correcto. Los colores del versículo se vuelven el hilo mismo en el que corre todo el libro de Isaías — pecado escarlata, perdón blanco como la nieve, pagado por el capítulo 53."
+   }
+  },
+  {
+   "stem": {
+    "en": "King Ahaz refused God's offer of a sign because:",
+    "es": "El rey Acaz rechazó la oferta de Dios de una señal porque:"
+   },
+   "options": {
+    "en": [
+     "He genuinely feared the Lord",
+     "He had already decided not to trust",
+     "He could not hear Isaiah",
+     "Isaiah was discredited"
+    ],
+    "es": [
+     "Realmente temía a Jehová",
+     "Ya había decidido no confiar",
+     "No podía oír a Isaías",
+     "Isaías estaba desacreditado"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. A sign would have forced a decision. Ahaz pretended piety to avoid the call to faith.",
+    "es": "Correcto. Una señal lo habría forzado a decidir. Acaz fingió piedad para evitar el llamado a la fe."
+   }
+  },
+  {
+   "stem": {
+    "en": "The sign of Isaiah 7:14 is:",
+    "es": "La señal de Isaías 7:14 es:"
+   },
+   "options": {
+    "en": [
+     "A fire shall fall on Carmel",
+     "A king shall come from the north",
+     "The mountains shall melt like wax",
+     "A virgin shall conceive and bear a Son, Immanuel"
+    ],
+    "es": [
+     "Caerá fuego sobre el Carmelo",
+     "Un rey vendrá del norte",
+     "Los montes se derretirán como cera",
+     "Una virgen concebirá y dará a luz un hijo, Emanuel"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. Matthew quotes this exact verse over the manger in Bethlehem (Matthew 1:22–23). Immanuel — God with us.",
+    "es": "Correcto. Mateo cita este mismo versículo sobre el pesebre en Belén (Mateo 1:22–23). Emanuel — Dios con nosotros."
+   }
+  },
+  {
+   "stem": {
+    "en": "The four titles of the coming Child in Isaiah 9:6 are:",
+    "es": "Los cuatro títulos del Niño venidero en Isaías 9:6 son:"
+   },
+   "options": {
+    "en": [
+     "Wonderful Counselor, Mighty God, Everlasting Father, Prince of Peace",
+     "King of kings, Lord of lords, Lamb of God, Son of David",
+     "Alpha, Omega, Beginning, End",
+     "Faithful, True, Holy, Just"
+    ],
+    "es": [
+     "Admirable Consejero, Dios Fuerte, Padre Eterno, Príncipe de Paz",
+     "Rey de reyes, Señor de señores, Cordero de Dios, Hijo de David",
+     "Alfa, Omega, Principio, Fin",
+     "Fiel, Verdadero, Santo, Justo"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. The virgin's Son of chapter 7 has become the Mighty God of chapter 9. Isaiah is staring at the cradle and seeing the throne.",
+    "es": "Correcto. El Hijo de la virgen del capítulo 7 se ha vuelto el Dios Fuerte del capítulo 9. Isaías mira la cuna y ve el trono."
+   }
+  },
+  {
+   "stem": {
+    "en": "In Isaiah, Assyria represents godlessness; Babylon represents:",
+    "es": "En Isaías, Asiria representa la impiedad; Babilonia representa:"
+   },
+   "options": {
+    "en": [
+     "Military weakness",
+     "Religious apostasy",
+     "Political reform",
+     "Economic prosperity"
+    ],
+    "es": [
+     "Debilidad militar",
+     "Apostasía religiosa",
+     "Reforma política",
+     "Prosperidad económica"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. Two world powers always come for God's people: godlessness ('there is no God') and apostasy ('there are many gods'). Both are alive today.",
+    "es": "Correcto. Dos poderes mundiales siempre vienen contra el pueblo de Dios: la impiedad ('no hay Dios') y la apostasía ('hay muchos dioses'). Ambos están vivos hoy."
+   }
+  },
+  {
+   "stem": {
+    "en": "Hezekiah's response to Sennacherib's threatening letter was to:",
+    "es": "La respuesta de Ezequías a la carta amenazadora de Senaquerib fue:"
+   },
+   "options": {
+    "en": [
+     "Surrender immediately",
+     "Send tribute to Babylon",
+     "Spread the letter before the Lord in the temple",
+     "Burn the letter"
+    ],
+    "es": [
+     "Rendirse de inmediato",
+     "Enviar tributo a Babilonia",
+     "Extender la carta delante de Jehová en el templo",
+     "Quemar la carta"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. That night the angel of the LORD killed 185,000 Assyrians in their tents. Faith spreads the threatening letter before the Lord.",
+    "es": "Correcto. Esa noche el ángel de Jehová mató a 185,000 asirios en sus tiendas. La fe extiende la carta amenazadora delante del Señor."
+   }
+  },
+  {
+   "stem": {
+    "en": "The voice in the wilderness preparing the way of the Lord (Isaiah 40:3) was fulfilled by:",
+    "es": "La voz en el desierto preparando el camino del Señor (Isaías 40:3) fue cumplida por:"
+   },
+   "options": {
+    "en": [
+     "Stephen the martyr",
+     "Elijah returning",
+     "The apostle Paul",
+     "John the Baptist"
+    ],
+    "es": [
+     "Esteban el mártir",
+     "Elías regresando",
+     "El apóstol Pablo",
+     "Juan el Bautista"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. Seven hundred years before he was born, John the Baptist had his job description in Isaiah 40.",
+    "es": "Correcto. Setecientos años antes de su nacimiento, Juan el Bautista tenía la descripción de su trabajo en Isaías 40."
+   }
+  },
+  {
+   "stem": {
+    "en": "Isaiah names the Persian king who would free the Jewish exiles 150 years before he was born:",
+    "es": "Isaías nombra al rey persa que liberaría a los exiliados judíos 150 años antes de su nacimiento:"
+   },
+   "options": {
+    "en": [
+     "Darius",
+     "Artaxerxes",
+     "Cyrus",
+     "Xerxes"
+    ],
+    "es": [
+     "Darío",
+     "Artajerjes",
+     "Ciro",
+     "Jerjes"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. Isaiah 44:28 — 'who says of Cyrus, He is My shepherd.' Some scholars propose a later 'Second Isaiah' based on literary differences, but the traditional reading of one Isaiah remains strong.",
+    "es": "Correcto. Isaías 44:28 — 'que dice de Ciro: Es mi pastor.' Algunos eruditos proponen un 'Segundo Isaías' posterior basado en diferencias literarias, pero la lectura tradicional de un solo Isaías sigue siendo fuerte."
+   }
+  },
+  {
+   "stem": {
+    "en": "The four Servant Songs are found in Isaiah:",
+    "es": "Los cuatro Cantos del Siervo se encuentran en Isaías:"
+   },
+   "options": {
+    "en": [
+     "42, 49, 50, and 52:13–53:12",
+     "60, 61, 62, and 65",
+     "36, 37, 38, and 39",
+     "6, 9, 11, and 14"
+    ],
+    "es": [
+     "42, 49, 50 y 52:13–53:12",
+     "60, 61, 62 y 65",
+     "36, 37, 38 y 39",
+     "6, 9, 11 y 14"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. The fourth Servant Song (52:13–53:12) is the heart of Isaiah and the heart of the Old Testament.",
+    "es": "Correcto. El cuarto Canto del Siervo (52:13–53:12) es el corazón de Isaías y el corazón del Antiguo Testamento."
+   }
+  },
+  {
+   "stem": {
+    "en": "Within the Scarlet Thread of redemption running through the whole Old Testament, Isaiah 53 is:",
+    "es": "Dentro del Hilo Escarlata de la redención que recorre todo el Antiguo Testamento, Isaías 53 es:"
+   },
+   "options": {
+    "en": [
+     "A peripheral chapter",
+     "The tenth and central station — where the Lamb finally has a face",
+     "An optional reading",
+     "Only a Jewish text, not Christian"
+    ],
+    "es": [
+     "Un capítulo periférico",
+     "La décima y central estación — donde el Cordero finalmente tiene rostro",
+     "Una lectura opcional",
+     "Solo un texto judío, no cristiano"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. The thread that began in Eden — Abel, Noah, Moriah, Passover, Yom Kippur, bronze serpent, Rahab's cord, Solomon's temple — reaches its central station in Isaiah 53.",
+    "es": "Correcto. El hilo que comenzó en el Edén — Abel, Noé, Moriah, Pascua, Yom Kippur, serpiente de bronce, cordón de Rahab, templo de Salomón — alcanza su estación central en Isaías 53."
+   }
+  },
+  {
+   "stem": {
+    "en": "The English Bible teacher's instruction for Isaiah 53:6 was to:",
+    "es": "La instrucción del maestro bíblico inglés para Isaías 53:6 fue:"
+   },
+   "options": {
+    "en": [
+     "Memorize the chapter",
+     "Translate it into Hebrew",
+     "Read it three times",
+     "Stoop down at the first 'all' and stand up at the last 'all'"
+    ],
+    "es": [
+     "Memorizar el capítulo",
+     "Traducirlo al hebreo",
+     "Leerlo tres veces",
+     "Agacharse en el primer 'todos' y levantarse en el último 'todos'"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. 'All we like sheep have gone astray' — stoop. 'The LORD has laid on Him the iniquity of us all' — stand. The gospel in one verse with two halves.",
+    "es": "Correcto. 'Todos nosotros nos descarriamos como ovejas' — agáchese. 'Jehová cargó en él el pecado de todos nosotros' — levántese. El evangelio en un versículo con dos mitades."
+   }
+  },
+  {
+   "stem": {
+    "en": "Isaiah's two foci are illustrated with:",
+    "es": "Los dos focos de Isaías se ilustran con:"
+   },
+   "options": {
+    "en": [
+     "A triangle",
+     "A circle",
+     "An ellipse with two foci (Kepler's planetary orbits)",
+     "A spiral"
+    ],
+    "es": [
+     "Un triángulo",
+     "Un círculo",
+     "Una elipse con dos focos (las órbitas planetarias de Kepler)",
+     "Una espiral"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. An ellipse has two foci. Christ on the cross and Christ on the throne. Try to make it a circle around one focus and the math will not work.",
+    "es": "Correcto. Una elipse tiene dos focos. Cristo en la cruz y Cristo en el trono. Trate de hacerlo un círculo alrededor de un solo foco y la matemática no funciona."
+   }
+  },
+  {
+   "stem": {
+    "en": "Philip preached Jesus to the Ethiopian eunuch beginning at which Scripture (Acts 8)?",
+    "es": "Felipe le predicó a Jesús al eunuco etíope comenzando en cuál Escritura (Hechos 8)?"
+   },
+   "options": {
+    "en": [
+     "Isaiah 53",
+     "Psalm 22",
+     "Daniel 7",
+     "Genesis 22"
+    ],
+    "es": [
+     "Isaías 53",
+     "Salmo 22",
+     "Daniel 7",
+     "Génesis 22"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. You can preach the whole gospel from any verse in Isaiah; just start at the cross.",
+    "es": "Correcto. Usted puede predicar todo el evangelio desde cualquier versículo de Isaías; solo comience en la cruz."
+   }
+  },
+  {
+   "stem": {
+    "en": "Jesus claimed Isaiah 61 as fulfilled in His own hearing in:",
+    "es": "Jesús reclamó Isaías 61 como cumplido en Su propia audiencia en:"
+   },
+   "options": {
+    "en": [
+     "The temple at His dedication",
+     "The synagogue at Nazareth (Luke 4)",
+     "On the road to Emmaus",
+     "At His baptism"
+    ],
+    "es": [
+     "El templo en Su dedicación",
+     "La sinagoga de Nazaret (Lucas 4)",
+     "En el camino a Emaús",
+     "En Su bautismo"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. 'Today this Scripture is fulfilled in your hearing.' He did not say 'this is about Me' — He said 'this IS Me.'",
+    "es": "Correcto. 'Hoy se ha cumplido esta Escritura delante de vosotros.' No dijo 'esto trata de Mí' — dijo 'esto SOY Yo.'"
+   }
+  },
+  {
+   "stem": {
+    "en": "Tradition reports that Isaiah was martyred by:",
+    "es": "La tradición reporta que Isaías fue martirizado:"
+   },
+   "options": {
+    "en": [
+     "Crucifixion",
+     "Stoning",
+     "Beheading",
+     "Being sawn in two"
+    ],
+    "es": [
+     "Crucifixión",
+     "Apedreamiento",
+     "Decapitación",
+     "Siendo aserrado en dos"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. Hiding in a hollow tree under wicked Manasseh, he was sawn in half when the soldiers cut the tree down. Hebrews 11:37 ('sawn in two') almost certainly refers to him.",
+    "es": "Correcto. Escondido en el hueco de un árbol bajo el malvado Manasés, fue aserrado en dos cuando los soldados cortaron el árbol. Hebreos 11:37 ('aserrados') casi seguramente se refiere a él."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Explain why Isaiah is called 'the Bible in miniature' and what it reveals about the book's structure.",
+    "es": "Explique por qué Isaías es llamado 'la Biblia en miniatura' y qué revela sobre la estructura del libro."
+   },
+   "keywords": {
+    "en": [
+     [
+      "66",
+      "sixty-six",
+      "66 chapters",
+      "66 books"
+     ],
+     [
+      "chapters",
+      "books",
+      "structure",
+      "parallel"
+     ],
+     [
+      "books",
+      "bible",
+      "whole bible",
+      "canon"
+     ],
+     [
+      "warning",
+      "judgment",
+      "first 39",
+      "old testament section"
+     ],
+     [
+      "comfort",
+      "consolation",
+      "last 27",
+      "new testament section"
+     ],
+     [
+      "gospel",
+      "gospel according to isaiah",
+      "christ",
+      "good news"
+     ]
+    ],
+    "es": [
+     [
+      "66",
+      "sesenta y seis",
+      "66 capítulos",
+      "66 libros"
+     ],
+     [
+      "capítulos",
+      "libros",
+      "estructura",
+      "paralelo"
+     ],
+     [
+      "libros",
+      "biblia",
+      "toda la biblia",
+      "canon"
+     ],
+     [
+      "advertencia",
+      "juicio",
+      "primeros 39",
+      "sección del antiguo testamento"
+     ],
+     [
+      "consuelo",
+      "consolación",
+      "últimos 27",
+      "sección del nuevo testamento"
+     ],
+     [
+      "evangelio",
+      "evangelio según isaías",
+      "cristo",
+      "buena nueva"
+     ]
+    ]
+   },
+   "model": {
+    "en": "Isaiah is called 'the Bible in miniature' because of a striking parallel: the Bible has 66 books and Isaiah has 66 chapters. The Old Testament has 39 books, and Isaiah's first 39 chapters form the warning section full of judgment. The New Testament has 27 books, and Isaiah's last 27 chapters form the comfort section, opening with a voice crying in the wilderness and closing with new heavens and a new earth. The whole Bible is folded inside one prophet, which is why Isaiah is sometimes called the gospel according to Isaiah — it moves from warning and judgment to comfort and gospel just as the whole canon does.",
+    "es": "A Isaías se le llama 'la Biblia en miniatura' por un paralelo asombroso: la Biblia tiene 66 libros e Isaías tiene 66 capítulos. El Antiguo Testamento tiene 39 libros, y los primeros 39 capítulos de Isaías forman la sección de advertencia llena de juicio. El Nuevo Testamento tiene 27 libros, y los últimos 27 capítulos de Isaías forman la sección de consuelo, que abre con una voz que clama en el desierto y cierra con cielos nuevos y tierra nueva. Toda la Biblia está plegada dentro de un solo profeta, por lo que a Isaías a veces se le llama el evangelio según Isaías — pasa de la advertencia y el juicio al consuelo y el evangelio tal como lo hace todo el canon."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the four-step pattern of Isaiah's call in chapter 6 (holiness, sin, atonement, calling) and what it teaches about ministry.",
+    "es": "Describa el patrón de cuatro pasos del llamado de Isaías en el capítulo 6 (santidad, pecado, expiación, llamado) y lo que enseña sobre el ministerio."
+   },
+   "keywords": {
+    "en": [
+     [
+      "holiness",
+      "holy holy holy",
+      "vision of holiness",
+      "the lord high"
+     ],
+     [
+      "sin",
+      "unclean lips",
+      "woe is me",
+      "sinfulness",
+      "undone"
+     ],
+     [
+      "atonement",
+      "coal",
+      "live coal",
+      "sin purged",
+      "iniquity taken away"
+     ],
+     [
+      "calling",
+      "call",
+      "send me",
+      "here am i",
+      "whom shall i send"
+     ],
+     [
+      "throne",
+      "high and lifted up",
+      "seated"
+     ],
+     [
+      "seraphim",
+      "seraph",
+      "angels"
+     ]
+    ],
+    "es": [
+     [
+      "santidad",
+      "santo santo santo",
+      "visión de santidad",
+      "el señor alto"
+     ],
+     [
+      "pecado",
+      "labios inmundos",
+      "ay de mí",
+      "pecaminosidad",
+      "muerto soy"
+     ],
+     [
+      "expiación",
+      "carbón",
+      "carbón encendido",
+      "pecado limpio",
+      "iniquidad quitada"
+     ],
+     [
+      "llamado",
+      "llamamiento",
+      "envíame",
+      "heme aquí",
+      "a quién enviaré"
+     ],
+     [
+      "trono",
+      "alto y sublime",
+      "sentado"
+     ],
+     [
+      "serafines",
+      "serafín",
+      "ángeles"
+     ]
+    ]
+   },
+   "model": {
+    "en": "Isaiah's call in chapter 6 follows a four-step pattern. First comes the vision of holiness: Isaiah sees the Lord high and lifted up, and the seraphim cry 'Holy, holy, holy.' Second comes recognition of sin: confronted with that holiness, Isaiah cries, 'Woe is me, for I am undone, a man of unclean lips.' Third comes atonement: a seraph flies with a live coal from the altar, touches his lips, and declares his iniquity taken away and his sin purged. Only then, fourth, comes the calling: the Lord asks, 'Whom shall I send?' and Isaiah answers, 'Here am I! Send me.' Every great ministry begins in that order — holiness, brokenness, atonement, then calling.",
+    "es": "El llamado de Isaías en el capítulo 6 sigue un patrón de cuatro pasos. Primero viene la visión de santidad: Isaías ve al Señor alto y sublime, y los serafines claman 'Santo, santo, santo.' Segundo viene el reconocimiento del pecado: confrontado con esa santidad, Isaías clama: '¡Ay de mí, que soy muerto, hombre inmundo de labios!' Tercero viene la expiación: un serafín vuela con un carbón encendido del altar, toca sus labios, y declara quitada su iniquidad y limpio su pecado. Solo entonces, cuarto, viene el llamado: el Señor pregunta, '¿A quién enviaré?' e Isaías responde, '¡Heme aquí, envíame a mí!' Todo gran ministerio comienza en ese orden — santidad, quebranto, expiación, luego llamado."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How do Isaiah 1:18 and Isaiah 53 relate to each other as bookends of the Scarlet Thread?",
+    "es": "¿Cómo se relacionan Isaías 1:18 e Isaías 53 como extremos del Hilo Escarlata?"
+   },
+   "keywords": {
+    "en": [
+     [
+      "scarlet",
+      "sins as scarlet",
+      "grana"
+     ],
+     [
+      "white",
+      "white as snow",
+      "snow",
+      "wool"
+     ],
+     [
+      "sin",
+      "sins",
+      "transgression",
+      "iniquity"
+     ],
+     [
+      "stripes",
+      "by his stripes",
+      "wounds",
+      "crimson stripes"
+     ],
+     [
+      "forgiveness",
+      "cleansed",
+      "made white",
+      "washed"
+     ],
+     [
+      "substitution",
+      "laid on him",
+      "bore our sin",
+      "servant bears"
+     ]
+    ],
+    "es": [
+     [
+      "escarlata",
+      "grana",
+      "pecados como la grana"
+     ],
+     [
+      "blanco",
+      "blanco como la nieve",
+      "nieve",
+      "lana"
+     ],
+     [
+      "pecado",
+      "pecados",
+      "rebelión",
+      "iniquidad"
+     ],
+     [
+      "llaga",
+      "por su llaga",
+      "heridas",
+      "azotes carmesí"
+     ],
+     [
+      "perdón",
+      "limpiado",
+      "emblanquecido",
+      "lavado"
+     ],
+     [
+      "sustitución",
+      "cargó en él",
+      "llevó nuestro pecado",
+      "el siervo lleva"
+     ]
+    ]
+   },
+   "model": {
+    "en": "Isaiah 1:18 and Isaiah 53 are the bookends of the Scarlet Thread. In Isaiah 1:18 God invites, 'Though your sins be as scarlet, they shall be as white as snow; though they are red like crimson, they shall be as wool.' Here scarlet becomes the very color of sin. But the verse does not explain how the reds become white — that answer waits until Isaiah 53, where 'by His stripes we are healed.' God turns the reds white by laying our iniquity on the Suffering Servant and striping Him until the color comes through. Scarlet sin, crimson stripes, snow-white forgiveness: the substitution of chapter 53 is how the promise of chapter 1 comes true.",
+    "es": "Isaías 1:18 e Isaías 53 son los extremos del Hilo Escarlata. En Isaías 1:18 Dios invita: 'Aunque vuestros pecados sean como la grana, como la nieve serán emblanquecidos; y aunque sean rojos como el carmesí, vendrán a ser como blanca lana.' Aquí la grana se vuelve el color mismo del pecado. Pero el versículo no explica cómo los rojos se vuelven blancos — esa respuesta espera hasta Isaías 53, donde 'por su llaga fuimos nosotros curados.' Dios vuelve blancos los rojos poniendo nuestra iniquidad sobre el Siervo Sufriente y azotándolo hasta que el color sale. Pecado escarlata, llagas carmesí, perdón blanco como la nieve: la sustitución del capítulo 53 es cómo se cumple la promesa del capítulo 1."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the Immanuel prophecy of Isaiah 7:14 and its near-term and ultimate fulfillment.",
+    "es": "Explique la profecía de Emanuel en Isaías 7:14 y su cumplimiento cercano y último."
+   },
+   "keywords": {
+    "en": [
+     [
+      "immanuel",
+      "emmanuel"
+     ],
+     [
+      "virgin",
+      "virgin shall conceive",
+      "virgin birth"
+     ],
+     [
+      "ahaz",
+      "king ahaz"
+     ],
+     [
+      "matthew",
+      "matthew 1",
+      "quoted by matthew",
+      "gospel"
+     ],
+     [
+      "sign",
+      "a sign",
+      "given a sign"
+     ],
+     [
+      "god with us",
+      "god came",
+      "god among us"
+     ]
+    ],
+    "es": [
+     [
+      "emanuel",
+      "immanuel"
+     ],
+     [
+      "virgen",
+      "la virgen concebirá",
+      "nacimiento virginal"
+     ],
+     [
+      "acaz",
+      "rey acaz"
+     ],
+     [
+      "mateo",
+      "mateo 1",
+      "citado por mateo",
+      "evangelio"
+     ],
+     [
+      "señal",
+      "una señal",
+      "dada una señal"
+     ],
+     [
+      "dios con nosotros",
+      "dios vino",
+      "dios entre nosotros"
+     ]
+    ]
+   },
+   "model": {
+    "en": "The Immanuel prophecy of Isaiah 7:14 was given to faithless King Ahaz: 'Behold, the virgin shall conceive and bear a Son, and shall call His name Immanuel.' It worked at two levels. There was a near-term confirmation in Ahaz's own day, a sign within his lifetime. But the ultimate fulfillment came seven hundred years later, when Matthew quoted this exact verse over the manger in Bethlehem, applying it to the virgin birth of Jesus (Matthew 1:22-23). Immanuel means 'God with us,' and that is the heart of the gospel: not that a good man or a great teacher came, but that God Himself came to be with us in our nature, sorrow, and salvation.",
+    "es": "La profecía de Emanuel de Isaías 7:14 fue dada al infiel rey Acaz: 'He aquí que la virgen concebirá, y dará a luz un hijo, y llamará su nombre Emanuel.' Operó en dos niveles. Hubo una confirmación cercana en los días de Acaz, una señal dentro de su vida. Pero el cumplimiento último vino setecientos años después, cuando Mateo citó este versículo exacto sobre el pesebre en Belén, aplicándolo al nacimiento virginal de Jesús (Mateo 1:22-23). Emanuel significa 'Dios con nosotros,' y ese es el corazón del evangelio: no que vino un buen hombre o un gran maestro, sino que Dios mismo vino a estar con nosotros en nuestra naturaleza, dolor y salvación."
+   }
+  },
+  {
+   "prompt": {
+    "en": "List and briefly explain the four titles given to the coming Child in Isaiah 9:6.",
+    "es": "Enumere y explique brevemente los cuatro títulos dados al Niño venidero en Isaías 9:6."
+   },
+   "keywords": {
+    "en": [
+     [
+      "wonderful",
+      "admirable"
+     ],
+     [
+      "counselor",
+      "counsellor",
+      "wisdom"
+     ],
+     [
+      "mighty god",
+      "el gibbor",
+      "divine title",
+      "god"
+     ],
+     [
+      "everlasting father",
+      "eternal father",
+      "father of eternity"
+     ],
+     [
+      "prince of peace",
+      "peace",
+      "prince"
+     ]
+    ],
+    "es": [
+     [
+      "admirable",
+      "maravilloso"
+     ],
+     [
+      "consejero",
+      "sabiduría"
+     ],
+     [
+      "dios fuerte",
+      "dios poderoso",
+      "título divino",
+      "dios"
+     ],
+     [
+      "padre eterno",
+      "padre de eternidad"
+     ],
+     [
+      "príncipe de paz",
+      "paz",
+      "príncipe"
+     ]
+    ]
+   },
+   "model": {
+    "en": "Isaiah 9:6 gives four titles to the coming Child that no mere human could bear: 'His name will be called Wonderful, Counselor, Mighty God, Everlasting Father, Prince of Peace.' Wonderful is the name God refused to give even to the angel in Judges 13. Counselor means the wisdom of the universe in one human voice. Mighty God is the divine title that ends every honest Christology, declaring the Child to be God. Everlasting Father is the eternal One wearing the affection of a father. Prince of Peace is the only one who can stop a human war by making peace inside a human heart. The virgin's Son of chapter 7 has become the Mighty God of chapter 9.",
+    "es": "Isaías 9:6 da cuatro títulos al Niño venidero que ningún simple humano podría llevar: 'se llamará su nombre Admirable, Consejero, Dios Fuerte, Padre Eterno, Príncipe de Paz.' Admirable es el nombre que Dios rehusó dar aun al ángel en Jueces 13. Consejero significa la sabiduría del universo en una voz humana. Dios Fuerte es el título divino que culmina toda cristología honesta, declarando al Niño como Dios. Padre Eterno es el Eterno revestido del afecto de un padre. Príncipe de Paz es el único que puede detener una guerra humana haciendo paz dentro del corazón humano. El Hijo de la virgen del capítulo 7 se ha vuelto el Dios Fuerte del capítulo 9."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How does the Scarlet Thread reach its tenth and central station in Isaiah 53? Trace it briefly from Eden to Calvary.",
+    "es": "¿Cómo alcanza el Hilo Escarlata su décima y central estación en Isaías 53? Trácelo brevemente desde el Edén hasta el Calvario."
+   },
+   "keywords": {
+    "en": [
+     [
+      "eden",
+      "garments of skin",
+      "clothe adam"
+     ],
+     [
+      "passover",
+      "doorposts",
+      "egyptian blood"
+     ],
+     [
+      "moriah",
+      "ram",
+      "abraham"
+     ],
+     [
+      "servant",
+      "suffering servant",
+      "the servant"
+     ],
+     [
+      "lamb",
+      "led to slaughter",
+      "lamb of god"
+     ],
+     [
+      "substitution",
+      "wounded for us",
+      "laid on him",
+      "bore our sin",
+      "by his stripes"
+     ],
+     [
+      "calvary",
+      "cross",
+      "central station",
+      "tenth station"
+     ]
+    ],
+    "es": [
+     [
+      "edén",
+      "eden",
+      "túnicas de pieles",
+      "vestir a adán"
+     ],
+     [
+      "pascua",
+      "postes",
+      "sangre egipcia"
+     ],
+     [
+      "moriah",
+      "carnero",
+      "abraham"
+     ],
+     [
+      "siervo",
+      "siervo sufriente",
+      "el siervo"
+     ],
+     [
+      "cordero",
+      "llevado al matadero",
+      "cordero de dios"
+     ],
+     [
+      "sustitución",
+      "herido por nosotros",
+      "cargó en él",
+      "llevó nuestro pecado",
+      "por su llaga"
+     ],
+     [
+      "calvario",
+      "cruz",
+      "estación central",
+      "décima estación"
+     ]
+    ]
+   },
+   "model": {
+    "en": "The Scarlet Thread reaches its tenth and central station in Isaiah 53. The thread began in Eden when God killed an animal to clothe Adam and Eve, then ran through Abel's lamb, Noah's altar, the ram on Moriah, the Passover blood on Egyptian doorposts, the goats of Yom Kippur, the bronze serpent, the scarlet cord in Rahab's window, and the rivers of blood in Solomon's temple — nine stations, every animal a promissory note. Isaiah 53 is where the Lamb the thread always pointed to finally has a face and a name: 'He was wounded for our transgressions... by His stripes we are healed... the Lord has laid on Him the iniquity of us all.' All these stations pointed forward to Calvary, the central substitutionary sacrifice.",
+    "es": "El Hilo Escarlata alcanza su décima y central estación en Isaías 53. El hilo comenzó en el Edén cuando Dios mató un animal para vestir a Adán y Eva, luego corrió por el cordero de Abel, el altar de Noé, el carnero en Moriah, la sangre de la Pascua en los postes egipcios, los machos cabríos del Yom Kipur, la serpiente de bronce, el cordón escarlata en la ventana de Rahab, y los ríos de sangre en el templo de Salomón — nueve estaciones, cada animal un pagaré. Isaías 53 es donde el Cordero al que el hilo siempre apuntó por fin tiene rostro y nombre: 'herido fue por nuestras rebeliones... por su llaga fuimos curados... cargó en él el pecado de todos nosotros.' Todas estas estaciones apuntaban al Calvario, el sacrificio sustitutivo central."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain how Isaiah names Cyrus 150 years early and why this prophecy is significant.",
+    "es": "Explique cómo Isaías nombra a Ciro 150 años antes y por qué esta profecía es significativa."
+   },
+   "keywords": {
+    "en": [
+     [
+      "cyrus"
+     ],
+     [
+      "persia",
+      "persian king",
+      "king of persia"
+     ],
+     [
+      "exile",
+      "babylon",
+      "before the exile",
+      "babylonian exile"
+     ],
+     [
+      "prophecy",
+      "prophesied",
+      "predicted",
+      "foretold"
+     ],
+     [
+      "supernatural",
+      "proves the supernatural",
+      "divine",
+      "miracle"
+     ],
+     [
+      "150 years",
+      "hundred and fifty",
+      "early",
+      "before he was born"
+     ]
+    ],
+    "es": [
+     [
+      "ciro"
+     ],
+     [
+      "persia",
+      "rey persa",
+      "rey de persia"
+     ],
+     [
+      "exilio",
+      "babilonia",
+      "antes del exilio",
+      "exilio babilónico"
+     ],
+     [
+      "profecía",
+      "profetizó",
+      "predijo",
+      "predicho"
+     ],
+     [
+      "sobrenatural",
+      "prueba lo sobrenatural",
+      "divino",
+      "milagro"
+     ],
+     [
+      "150 años",
+      "ciento cincuenta",
+      "temprano",
+      "antes de nacer"
+     ]
+    ]
+   },
+   "model": {
+    "en": "In Isaiah 44 and 45, written around 700 B.C., Isaiah names the Persian king Cyrus by name — about a hundred and fifty years before Cyrus was born and before the Babylonian exile had even happened. God says of Cyrus, 'He is My shepherd,' and addresses 'His anointed, Cyrus,' foretelling that he would crush Babylon and let the Jews go home, which happened exactly in 539 B.C. This prophecy is significant because it points to the supernatural reality of biblical prophecy. Some scholars propose a later 'Second Isaiah' based on real differences in vocabulary and style between the book's two halves, but the traditional case for one Isaiah remains strong, supported by the New Testament's own citation of both halves under the prophet's name. The God who named Cyrus early also named Jesus seven hundred years early.",
+    "es": "En Isaías 44 y 45, escritos alrededor del 700 a.C., Isaías nombra al rey persa Ciro por su nombre — unos ciento cincuenta años antes de que Ciro naciera y antes de que el exilio babilónico siquiera hubiera ocurrido. Dios dice de Ciro, 'es mi pastor,' y se dirige a 'su ungido, Ciro,' prediciendo que aplastaría a Babilonia y dejaría volver a los judíos, lo cual sucedió exactamente en el 539 a.C. Esta profecía es significativa porque apunta a la realidad sobrenatural de la profecía bíblica. Algunos eruditos proponen un 'Segundo Isaías' posterior basado en diferencias reales de vocabulario y estilo entre las dos mitades del libro, pero el caso tradicional de un solo Isaías sigue siendo fuerte, apoyado por la propia cita del Nuevo Testamento de ambas mitades bajo el nombre del profeta. El Dios que nombró a Ciro temprano también nombró a Jesús setecientos años antes."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the contrast between Ahaz and Hezekiah and what it teaches about faith.",
+    "es": "Describa el contraste entre Acaz y Ezequías y lo que enseña sobre la fe."
+   },
+   "keywords": {
+    "en": [
+     [
+      "ahaz"
+     ],
+     [
+      "hezekiah"
+     ],
+     [
+      "faith",
+      "believe",
+      "trust",
+      "stand firm"
+     ],
+     [
+      "letter",
+      "threatening letter",
+      "spread before the lord",
+      "sennacherib's letter"
+     ],
+     [
+      "temple",
+      "took it to the temple",
+      "before the lord"
+     ],
+     [
+      "sennacherib",
+      "assyria",
+      "185000",
+      "assyrian army"
+     ]
+    ],
+    "es": [
+     [
+      "acaz"
+     ],
+     [
+      "ezequías",
+      "ezequias"
+     ],
+     [
+      "fe",
+      "creer",
+      "confiar",
+      "permanecer firme"
+     ],
+     [
+      "carta",
+      "carta amenazante",
+      "extendió delante del señor",
+      "carta de senaquerib"
+     ],
+     [
+      "templo",
+      "la llevó al templo",
+      "delante del señor"
+     ],
+     [
+      "senaquerib",
+      "asiria",
+      "185000",
+      "ejército asirio"
+     ]
+    ]
+   },
+   "model": {
+    "en": "Ahaz and Hezekiah present a sharp contrast about faith. When two enemy kings allied against Ahaz, instead of trusting God he reached for help from Egypt and Assyria. Isaiah confronted him with the definition of faith, 'If you will not believe, surely you shall not be established,' and offered him any sign, but Ahaz refused with feigned piety because he had already decided not to trust; he died with the kingdom shaking. His son Hezekiah faced his own crisis when Sennacherib's Assyrian army threatened: Hezekiah took the threatening letter into the temple and spread it out before the Lord, and that night the angel of the Lord struck 185,000 Assyrians dead. The lesson is plain: stand firm in faith, or you will not stand at all.",
+    "es": "Acaz y Ezequías presentan un fuerte contraste sobre la fe. Cuando dos reyes enemigos se aliaron contra Acaz, en vez de confiar en Dios buscó ayuda de Egipto y Asiria. Isaías lo confrontó con la definición de la fe, 'Si no creyereis, de cierto no permaneceréis,' y le ofreció cualquier señal, pero Acaz rehusó con falsa piedad porque ya había decidido no confiar; murió con el reino tambaleándose. Su hijo Ezequías enfrentó su propia crisis cuando el ejército asirio de Senaquerib amenazó: Ezequías llevó la carta amenazante al templo y la extendió delante del Señor, y esa noche el ángel del Señor hirió de muerte a 185.000 asirios. La lección es clara: mantente firme en la fe, o no te mantendrás en absoluto."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the image of the two foci (Kepler's ellipse) as a way of reading Isaiah.",
+    "es": "Explique la imagen de los dos focos (la elipse de Kepler) como una manera de leer Isaías."
+   },
+   "keywords": {
+    "en": [
+     [
+      "ellipse",
+      "oval",
+      "kepler's ellipse"
+     ],
+     [
+      "two foci",
+      "two focuses",
+      "two centers",
+      "not one center"
+     ],
+     [
+      "cross",
+      "crucified",
+      "humiliation",
+      "suffering servant"
+     ],
+     [
+      "throne",
+      "reigning",
+      "power and glory",
+      "king"
+     ],
+     [
+      "christ",
+      "jesus",
+      "one christ",
+      "both"
+     ],
+     [
+      "suffering",
+      "humiliation",
+      "servant"
+     ],
+     [
+      "glory",
+      "exalted",
+      "reign"
+     ]
+    ],
+    "es": [
+     [
+      "elipse",
+      "óvalo",
+      "elipse de kepler"
+     ],
+     [
+      "dos focos",
+      "dos centros",
+      "no un solo centro"
+     ],
+     [
+      "cruz",
+      "crucificado",
+      "humillación",
+      "siervo sufriente"
+     ],
+     [
+      "trono",
+      "reina",
+      "poder y gloria",
+      "rey"
+     ],
+     [
+      "cristo",
+      "jesús",
+      "un solo cristo",
+      "ambos"
+     ],
+     [
+      "sufrimiento",
+      "humillación",
+      "siervo"
+     ],
+     [
+      "gloria",
+      "exaltado",
+      "reinar"
+     ]
+    ]
+   },
+   "model": {
+    "en": "Kepler's ellipse explains how to read Isaiah. When Kepler tried to map planetary orbits as circles, each with a single center, his math would not work; only when he discovered that orbits are ellipses with two foci did the calculations fit. Applied to Isaiah, the prophet's vision of Christ has two foci, not one — Christ on the cross and Christ on the throne, Christ in humiliation and Christ in power and glory. The book begins in chapter 6 with a throne high and lifted up and lands in chapter 53 on a Lamb led to slaughter. You must hold both at once; try to make it a circle around only one focus and the math will not work. Christ is both suffering Servant and reigning King.",
+    "es": "La elipse de Kepler explica cómo leer a Isaías. Cuando Kepler trató de trazar las órbitas planetarias como círculos, cada uno con un solo centro, sus cálculos no funcionaban; solo cuando descubrió que las órbitas son elipses con dos focos cuadraron las cuentas. Aplicado a Isaías, la visión del profeta de Cristo tiene dos focos, no uno — Cristo en la cruz y Cristo en el trono, Cristo en humillación y Cristo en poder y gloria. El libro comienza en el capítulo 6 con un trono alto y sublime y aterriza en el capítulo 53 en un Cordero llevado al matadero. Hay que sostener ambos a la vez; trata de hacerlo un círculo en torno a un solo foco y las cuentas no cuadrarán. Cristo es ambos, Siervo sufriente y Rey que reina."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Synthesize how Isaiah preaches Christ in three movements: the Prophet's Call, the Prophet's Warning, and the Prophet's Vision.",
+    "es": "Sintetice cómo Isaías predica a Cristo en tres movimientos: el llamado del profeta, la advertencia del profeta, y la visión del profeta."
+   },
+   "keywords": {
+    "en": [
+     [
+      "call",
+      "prophet's call",
+      "isaiah 6",
+      "throne vision"
+     ],
+     [
+      "warning",
+      "judgment",
+      "first half",
+      "prophet's warning"
+     ],
+     [
+      "vision",
+      "comfort",
+      "second half",
+      "prophet's vision",
+      "chapter 40"
+     ],
+     [
+      "christ",
+      "jesus"
+     ],
+     [
+      "immanuel",
+      "god with us",
+      "virgin's son"
+     ],
+     [
+      "servant",
+      "suffering servant",
+      "chapter 53",
+      "lamb"
+     ],
+     [
+      "throne",
+      "holy one",
+      "high and lifted up",
+      "king"
+     ]
+    ],
+    "es": [
+     [
+      "llamado",
+      "llamado del profeta",
+      "isaías 6",
+      "visión del trono"
+     ],
+     [
+      "advertencia",
+      "juicio",
+      "primera mitad",
+      "advertencia del profeta"
+     ],
+     [
+      "visión",
+      "consuelo",
+      "segunda mitad",
+      "visión del profeta",
+      "capítulo 40"
+     ],
+     [
+      "cristo",
+      "jesús"
+     ],
+     [
+      "emanuel",
+      "dios con nosotros",
+      "hijo de la virgen"
+     ],
+     [
+      "siervo",
+      "siervo sufriente",
+      "capítulo 53",
+      "cordero"
+     ],
+     [
+      "trono",
+      "santo de israel",
+      "alto y sublime",
+      "rey"
+     ]
+    ]
+   },
+   "model": {
+    "en": "Isaiah preaches Christ in three movements, three doors into one house. First, the Prophet's Call (Isaiah 6): the vision of the holy Lord on the throne that sets Isaiah's lifelong name for God, the Holy One of Israel, and shows the pattern of holiness, brokenness, atonement, and calling. Second, the Prophet's Warning (Isaiah 7 and the first half): judgment on a faithless people, yet with the Immanuel sign and the Child of four names pointing to the coming God-with-us. Third, the Prophet's Vision (Isaiah 40 onward, with chapter 53 at the heart): comfort, the voice in the wilderness, the Servant Songs, and the Suffering Servant who bears our sin. Together these movements show Christ as the Holy One, the promised Immanuel, and the suffering Servant on the throne.",
+    "es": "Isaías predica a Cristo en tres movimientos, tres puertas a una misma casa. Primero, el Llamado del Profeta (Isaías 6): la visión del Señor santo en el trono que fija el nombre de Dios que Isaías usará toda su vida, el Santo de Israel, y muestra el patrón de santidad, quebranto, expiación y llamado. Segundo, la Advertencia del Profeta (Isaías 7 y la primera mitad): juicio sobre un pueblo infiel, pero con la señal de Emanuel y el Niño de cuatro nombres que apunta al venidero Dios-con-nosotros. Tercero, la Visión del Profeta (Isaías 40 en adelante, con el capítulo 53 en el corazón): consuelo, la voz en el desierto, los Cantos del Siervo, y el Siervo Sufriente que lleva nuestro pecado. Juntos estos movimientos muestran a Cristo como el Santo, el Emanuel prometido, y el Siervo sufriente en el trono."
+   }
+  }
+ ]
+};

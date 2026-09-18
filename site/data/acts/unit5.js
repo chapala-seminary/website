@@ -1,43 +1,753 @@
-/* CTSActs - unit 5: per-unit configuration and content. */
-
-const UNIT = 5;
-
-const CURRENT_UNIT = 5;
-
-const NEXT_URL = 'CTSActsUnit6.html';
-
-const mcQuestions = [
-    { textEn: "1. The man Peter healed at Lydda was named:", textEs: "1. El hombre que Pedro sanó en Lida se llamaba:", optionsEn: ["Aeneas, paralyzed eight years", "Bartimaeus, blind from birth", "Lazarus of Bethany", "Malchus, ear severed"], optionsEs: ["Eneas, paralítico ocho años", "Bartimeo, ciego de nacimiento", "Lázaro de Betania", "Malco, oreja cortada"], correct: 0 },
-    { textEn: "2. The Greek name Dorcas (Aramaic Tabitha) means:", textEs: "2. El nombre griego Dorcas (en arameo Tabita) significa:", optionsEn: ["Dove", "Gazelle", "Lily", "Beloved"], optionsEs: ["Paloma", "Gacela", "Lirio", "Amada"], correct: 1 },
-    { textEn: "3. When Peter raised Tabitha he echoed his Master's words from Mark 5:41 — Talitha cumi. Peter said:", textEs: "3. Cuando Pedro levantó a Tabita repitió las palabras de su Maestro en Marcos 5:41 — Talita cumi. Pedro dijo:", optionsEn: ["Lazarus, come forth", "Maranatha", "Tabitha, arise", "Be still"], optionsEs: ["Lázaro, ven fuera", "Maranata", "Tabita, levántate", "Calla"], correct: 2 },
-    { textEn: "4. Cornelius lived in:", textEs: "4. Cornelio vivía en:", optionsEn: ["Caesarea, on the Mediterranean coast", "Joppa", "Capernaum", "Rome itself"], optionsEs: ["Cesarea, en la costa mediterránea", "Jope", "Capernaum", "Roma misma"], correct: 0 },
-    { textEn: "5. Cornelius was a centurion of the:", textEs: "5. Cornelio era centurión de la:", optionsEn: ["Praetorian Guard", "Tenth Legion", "Augustan Cohort", "Italian Regiment"], optionsEs: ["Guardia Pretoriana", "Décima Legión", "Cohorte Augusta", "Compañía Italiana"], correct: 3 },
-    { textEn: "6. Peter was lodging in Joppa with:", textEs: "6. Pedro se hospedaba en Jope con:", optionsEn: ["A Pharisee", "Simon a tanner (whose trade made him ceremonially unclean)", "His brother Andrew", "A wealthy widow"], optionsEs: ["Un fariseo", "Simón curtidor (cuyo oficio lo hacía ceremonialmente impuro)", "Su hermano Andrés", "Una viuda rica"], correct: 1 },
-    { textEn: "7. The vision Peter saw on the rooftop was a sheet let down containing:", textEs: "7. La visión que Pedro vio en la azotea era un lienzo que descendía con:", optionsEn: ["Bread and wine", "Olive branches", "Every kind of four-footed beast, reptile, and bird (including unclean animals)", "Roman coins"], optionsEs: ["Pan y vino", "Ramas de olivo", "Toda clase de cuadrúpedos, reptiles y aves (incluyendo animales impuros)", "Monedas romanas"], correct: 2 },
-    { textEn: "8. The vision came to Peter how many times before the men from Caesarea arrived?", textEs: "8. La visión vino a Pedro ¿cuántas veces antes de que llegaran los hombres de Cesarea?", optionsEn: ["Once", "Twice", "Seven times", "Three times"], optionsEs: ["Una vez", "Dos veces", "Siete veces", "Tres veces"], correct: 3 },
-    { textEn: "9. Peter understood the vision was not really about food but about:", textEs: "9. Pedro entendió que la visión no era realmente sobre comida sino sobre:", optionsEn: ["People — that no man should be called common or unclean", "Animal sacrifice", "The temple", "The Sabbath"], optionsEs: ["Personas — que a ningún hombre debía llamar común o inmundo", "El sacrificio de animales", "El templo", "El día de reposo"], correct: 0 },
-    { textEn: "10. Peter's opening line of his sermon to Cornelius's household was:", textEs: "10. La línea inicial del sermón de Pedro a la casa de Cornelio fue:", optionsEn: ["Repent and be baptized", "I am the resurrection and the life", "Behold the Lamb of God", "In truth I perceive that God shows no partiality"], optionsEs: ["Arrepentíos y bautizaos", "Yo soy la resurrección y la vida", "He aquí el Cordero de Dios", "Por verdad hallo que Dios no hace acepción de personas"], correct: 3 },
-    { textEn: "11. The Holy Spirit fell on Cornelius's household:", textEs: "11. El Espíritu Santo cayó sobre la casa de Cornelio:", optionsEn: ["After they were all baptized", "While Peter was still speaking these words", "After a forty-day fast", "Once a year had passed"], optionsEs: ["Después de que todos fueran bautizados", "Mientras Pedro aún hablaba estas palabras", "Después de un ayuno de cuarenta días", "Después de pasado un año"], correct: 1 },
-    { textEn: "12. Defending himself in Jerusalem, Peter concluded with the question:", textEs: "12. Defendiéndose en Jerusalén, Pedro concluyó con la pregunta:", optionsEn: ["Who is my neighbor?", "Who was I that I could withstand God?", "Why have you forsaken me?", "Are not all the apostles?"], optionsEs: ["¿Quién es mi prójimo?", "¿Quién era yo que pudiese estorbar a Dios?", "¿Por qué me has desamparado?", "¿No son todos apóstoles?"], correct: 1 },
-    { textEn: "13. The scattered believers from Acts 8 who founded the church at Antioch were originally from:", textEs: "13. Los creyentes esparcidos de Hechos 8 que fundaron la iglesia en Antioquía eran originalmente de:", optionsEn: ["Galilee and Judea only", "Rome and Alexandria", "Cyprus and Cyrene, who began speaking to the Greeks too", "Damascus and Tarsus"], optionsEs: ["Solo de Galilea y Judea", "Roma y Alejandría", "Chipre y Cirene, que comenzaron a hablar también a los griegos", "Damasco y Tarso"], correct: 2 },
-    { textEn: "14. Acts 11:21 says about Antioch:", textEs: "14. Hechos 11:21 dice acerca de Antioquía:", optionsEn: ["The hand of the Lord was with them, and a great number believed", "The temple was rebuilt", "The persecution was lifted", "The Sanhedrin sent emissaries"], optionsEs: ["La mano del Señor era con ellos, y un gran número creyó", "El templo fue reconstruido", "La persecución se levantó", "El Sanedrín envió emisarios"], correct: 0 },
-    { textEn: "15. The Jerusalem church sent which man to investigate Antioch?", textEs: "15. La iglesia de Jerusalén envió ¿a qué hombre a investigar Antioquía?", optionsEn: ["Peter", "James", "Barnabas (the Son of Encouragement)", "Philip the deacon"], optionsEs: ["Pedro", "Jacobo", "Bernabé (el Hijo de Consolación)", "Felipe el diácono"], correct: 2 },
-    { textEn: "16. When Barnabas saw the Antioch revival had outgrown one preacher, he went to fetch:", textEs: "16. Cuando Bernabé vio que el avivamiento de Antioquía había sobrepasado a un solo predicador, fue a buscar a:", optionsEn: ["Apollos", "Mark", "Saul, in Tarsus", "Silas"], optionsEs: ["Apolos", "Marcos", "Saulo, en Tarso", "Silas"], correct: 2 },
-    { textEn: "17. The disciples were first called 'Christians' (Greek Christianoi, 'Christ's people') in:", textEs: "17. Los discípulos fueron llamados 'cristianos' (griego Christianoi, 'los de Cristo') por primera vez en:", optionsEn: ["Antioch", "Jerusalem", "Caesarea", "Rome"], optionsEs: ["Antioquía", "Jerusalén", "Cesarea", "Roma"], correct: 0 },
-    { textEn: "18. The first apostle to be martyred was:", textEs: "18. El primer apóstol martirizado fue:", optionsEn: ["Peter", "Stephen the deacon (he was not an apostle)", "John the Beloved", "James the brother of John, killed by the sword by Herod Agrippa I"], optionsEs: ["Pedro", "Esteban el diácono (no era apóstol)", "Juan el Amado", "Jacobo el hermano de Juan, muerto a espada por Herodes Agripa I"], correct: 3 },
-    { textEn: "19. When Peter, freed from prison by an angel, knocked at Mary's gate, the servant girl Rhoda:", textEs: "19. Cuando Pedro, liberado de la prisión por un ángel, tocó a la puerta de María, la criada Rode:", optionsEn: ["Opened the gate immediately", "Was so overjoyed she forgot to open the gate and ran inside to announce him", "Did not recognize his voice", "Reported him to the authorities"], optionsEs: ["Abrió la puerta inmediatamente", "Se gozó tanto que se olvidó de abrir la puerta y corrió adentro a anunciarlo", "No reconoció su voz", "Lo denunció a las autoridades"], correct: 1 },
-    { textEn: "20. Herod Agrippa I's death is described in Acts 12:23 as:", textEs: "20. La muerte de Herodes Agripa I es descrita en Hechos 12:23 como:", optionsEn: ["A peaceful old age", "A military assassination", "Drowning at sea", "Struck by an angel of the Lord and eaten by worms because he did not give glory to God"], optionsEs: ["Una vejez pacífica", "Un asesinato militar", "Ahogamiento en el mar", "Herido por un ángel del Señor y comido por gusanos porque no dio la gloria a Dios"], correct: 3 }
-];
-
-const kwQuestions = [
-    { textEn: "21. Discuss the symbolic significance of Peter lodging at the home of Simon the tanner before his vision in Joppa. How does Luke set up the Cornelius episode through such small details?", textEs: "21. Discuta el significado simbólico de que Pedro se hospedara en casa de Simón el curtidor antes de su visión en Jope. ¿Cómo prepara Lucas el episodio de Cornelio a través de pequeños detalles?", kwEn: ["simon", "tanner", "unclean", "prepar", "corneli", "vision", "lodg", "joppa"], kwEs: ["simón", "curtidor", "inmund", "prepar", "cornelio", "visión", "hosped", "jope"] , modelEn: "Peter was lodging in Joppa at the house of Simon a tanner, whose trade kept him ceremonially unclean by traditional Jewish standards, one of Luke's quiet little setups. By placing Peter under the roof of a man the purity code marked as unclean, Luke is already loosening Peter's grip on those boundaries before the rooftop vision ever comes. Through such small details Luke prepares the Cornelius episode: the apostle who will be told 'do not call unclean what God has cleansed' is already, without realizing it, living with the unclean.", modelEs: "Pedro se hospedaba en Jope en casa de Simón el curtidor, cuyo oficio lo mantenía ceremonialmente inmundo según las normas judías tradicionales, uno de los pequeños arreglos silenciosos de Lucas. Al poner a Pedro bajo el techo de un hombre que el código de pureza marcaba como inmundo, Lucas ya está aflojando el apego de Pedro a esas fronteras antes de la visión en la azotea. Mediante tales detalles prepara el episodio de Cornelio: el apóstol a quien se le dirá 'no llames inmundo lo que Dios limpió' ya vive, sin darse cuenta, con lo inmundo." },
-    { textEn: "22. Explain Peter's rooftop vision (Acts 10:9-16). Why was the vision repeated three times, and why does Peter not realize at first that it is about people rather than food?", textEs: "22. Explique la visión de Pedro en la azotea (Hechos 10:9-16). ¿Por qué se repitió la visión tres veces, y por qué Pedro no se da cuenta al principio de que se trata de personas y no de comida?", kwEn: ["sheet", "three", "unclean", "people", "vision", "animal", "gentil", "repeat"], kwEs: ["lienzo", "tres", "inmund", "person", "visión", "animal", "gentil", "repet"] , modelEn: "On the rooftop Peter saw a sheet lowered from heaven full of animals the dietary law forbade, with the command 'kill and eat,' and the vision was repeated three times. The threefold repetition pressed the lesson past Peter's deep resistance — he had never eaten anything unclean — and underscored that God truly meant it. Peter did not realize at first that it was about people, not food, because the dietary code had been the very fence separating Jew from Gentile; only when the men from Caesarea arrived did he see the vision meant that no person is to be called common or unclean.", modelEs: "En la azotea Pedro vio un lienzo descender del cielo lleno de animales que la ley dietética prohíba, con la orden 'mata y come', y la visión se repitió tres veces. La repetición triple grabó la lección más allá de la profunda resistencia de Pedro — nunca había comido nada inmundo — y subrayó que Dios lo decía en serio. Pedro no se dio cuenta al principio de que se trataba de personas y no de comida, porque el código dietético había sido la cerca que separaba al judío del gentil; solo cuando llegaron los hombres de Cesarea vio que la visión significaba que a ninguna persona se le ha de llamar común o inmunda." },
-    { textEn: "23. The phrase 'God shows no partiality' (Acts 10:34) is foundational to Christian missions. How does this principle reshape how the church views ethnicity and nationality?", textEs: "23. La frase 'Dios no hace acepción de personas' (Hechos 10:34) es fundamental para las misiones cristianas. ¿Cómo reformula este principio la manera en que la iglesia ve la etnicidad y la nacionalidad?", kwEn: ["partial", "nation", "miss", "equal", "ethnic", "gentil", "show", "respect"], kwEs: ["acepc", "nación", "misión", "igual", "étnic", "gentil", "muestr", "respet"] , modelEn: "Peter's sermon opens with a foundational missions truth: God shows no partiality — literally, He is not a face-receiver — but in every nation whoever fears Him is accepted. This reshapes how the church views ethnicity and nationality: no people group has a genetic or cultural advantage at the foot of the cross, and the same gospel comes on the same terms to every nation. It demolishes any ranking by ethnic background or passport, demands equal respect for every person, and shows the missionary thrust toward the Gentiles.", modelEs: "El sermón de Pedro abre con una verdad fundamental para las misiones: Dios no hace acepción de personas — literalmente, no es un recibidor de rostros — sino que en toda nación el que le teme es aceptado. Esto reformula cómo la iglesia ve lo étnico y la nacionalidad: ningún pueblo tiene ventaja genética ni cultural al pie de la cruz, y el mismo evangelio llega en los mismos términos a toda nación. Derriba todo ranking por raza o pasaporte, exige igual respeto por cada persona, y muestra el impulso misionero hacia los gentiles." },
-    { textEn: "24. Discuss Peter's defense of his ministry to Cornelius before the Jerusalem church (Acts 11:1-18). What does the Jerusalem church's response teach about gospel humility?", textEs: "24. Discuta la defensa de Pedro de su ministerio a Cornelio ante la iglesia de Jerusalén (Hechos 11:1-18). ¿Qué enseña la respuesta de la iglesia de Jerusalén sobre la humildad evangélica?", kwEn: ["peter", "defen", "withstand", "jerusal", "humil", "gentil", "spirit", "fell"], kwEs: ["pedro", "defen", "resist", "jerusal", "humild", "gentil", "espíritu", "cay"] , modelEn: "Back in Jerusalem the circumcised believers confronted Peter for eating with Gentiles, and he defended his ministry to Cornelius by recounting the vision and how the Holy Spirit fell on the Gentiles just as on the Jews. He ended, 'who was I that I could withstand God?' The Jerusalem church's response teaches gospel humility: confronted with what God had plainly done, they fell silent and glorified God rather than defend their prejudice. True humility submits its theology to the evidence of the Spirit's work, even when it overturns long-held assumptions.", modelEs: "De vuelta en Jerusalén los creyentes circuncidados confrontaron a Pedro por comer con gentiles, y él defendió su ministerio a Cornelio relatando la visión y cómo el Espíritu Santo cayó sobre los gentiles igual que sobre los judíos. Terminó: '¿quién era yo para resistir a Dios?' La respuesta de la iglesia de Jerusalén enseña la humildad evangélica: ante lo que Dios había hecho claramente, callaron y glorificaron a Dios en vez de defender su prejuicio. La verdadera humildad somete su teología a la evidencia de la obra del Espíritu." },
-    { textEn: "25. Acts 11:21 says 'the hand of the Lord was with them.' Discuss the three-fold pattern that follows when the hand of the Lord moves: conversions, commissions, and celebrations.", textEs: "25. Hechos 11:21 dice 'la mano del Señor era con ellos.' Discuta el patrón triple que sigue cuando la mano del Señor se mueve: conversiones, comisiones y celebraciones.", kwEn: ["hand", "lord", "convers", "commis", "celeb", "antio", "spirit", "move"], kwEs: ["mano", "señor", "convers", "comis", "celeb", "antio", "espíritu", "mov"] , modelEn: "When the hand of the Lord was with them at Antioch, a three-fold pattern followed. First came conversions — a great number believed and turned to the Lord. Then came commissions — the church sent Barnabas, who fetched Saul, and the work was organized and extended. Then came celebrations — Barnabas, seeing the grace of God, was glad, for where the Spirit moves there is joy. Wherever the hand of the Lord truly moves, these three follow together; a sour, joyless church is not an awakened one.", modelEs: "Cuando la mano del Señor era con ellos en Antioquía, siguió un patrón triple. Primero vinieron conversiones — un gran número creyó y se volvió al Señor. Luego comisiones — la iglesia envió a Bernabé, quien trajo a Saulo, y la obra se organizó y extendió. Luego celebraciones — Bernabé, viendo la gracia de Dios, se alegró, porque donde hay movimiento del Espíritu hay gozo. Dondequiera que la mano del Señor verdaderamente se mueve, estas tres siguen juntas; una iglesia agria y sin gozo no es una iglesia avivada." },
-    { textEn: "26. The Welsh Revival of 1904-05 began with a timid girl, Flory Evans, saying 'I love the Lord Jesus with all my heart.' Discuss the parallel between this story and Antioch and what it teaches about how revival begins.", textEs: "26. El Avivamiento Galés de 1904-05 comenzó con una niña tímida, Flory Evans, diciendo 'Yo amo al Señor Jesús con todo mi corazón.' Discuta el paralelo entre esta historia y Antioquía y lo que enseña sobre cómo comienza un avivamiento.", kwEn: ["welsh", "flory", "evans", "jenkins", "antioch", "reviv", "girl", "love"], kwEs: ["galés", "flory", "evans", "jenkins", "antio", "avivam", "niña", "amo"] , modelEn: "In 1904 pastor Joseph Jenkins asked his young people what Jesus meant to them, and after embarrassed silence a timid girl named Flory Evans, three weeks converted, stood and said, 'I love the Lord Jesus with all my heart' — and within weeks the Welsh Revival swept the nation, a hundred thousand converted in five months. The parallel to Antioch is that revival begins not with a campaign but with the hand of the Lord stirring ordinary, sincere love for Christ. God lit Antioch and Wales the same way: through humble believers, even one timid girl whose love for Jesus overflowed.", modelEs: "En 1904 el pastor Joseph Jenkins preguntó a sus jóvenes qué significaba Jesús para ellos, y tras un silencio incómodo una niña tímida llamada Flory Evans, convertida hacía tres semanas, se puso de pie y dijo: 'Yo amo al Señor Jesús con todo mi corazón' — y en pocas semanas el Avivamiento Galés barrió la nación, cien mil convertidos en cinco meses. El paralelo con Antioquía es que el avivamiento comienza no con una campaña sino con la mano del Señor avivando un amor sincero y ordinario por Cristo. Dios encendió Antioquía y Gales de la misma manera: por medio de creyentes humildes, hasta una niña tímida." },
-    { textEn: "27. The disciples were first called 'Christians' at Antioch. Discuss the original derisive sense of the term and what it means for believers today to bear the label.", textEs: "27. Los discípulos fueron llamados 'cristianos' por primera vez en Antioquía. Discuta el sentido despectivo original del término y lo que significa para los creyentes hoy llevar la etiqueta.", kwEn: ["christ", "christian", "antio", "label", "name", "deris", "first", "called"], kwEs: ["cristo", "cristian", "antio", "apelat", "nombre", "burla", "primer", "llam"] , modelEn: "The disciples were first called Christians at Antioch, and the term Christianoi seems to have begun as a slightly derisive label — 'little Christs' or 'Christ's people' — pinned on them by pagans who noticed they constantly talked about, dressed like, and sounded like Christ. The believers wore the name forever. For Christians today it means bearing a label that should still fit: to be called by Christ's name is to live so saturated with Him that watching neighbors feel the need to name us after Him.", modelEs: "Los discípulos fueron llamados cristianos por primera vez en Antioquía, y el término Christianoi parece haber comenzado como un apelativo de burla algo despectivo — 'pequeños Cristos' o 'los de Cristo' — puesto por paganos que notaban que hablaban, vestían y sonaban como Cristo. Los creyentes llevaron el nombre para siempre. Para los cristianos de hoy significa llevar una etiqueta que aún debería ajustar: ser llamado por el nombre de Cristo es vivir tan saturado de Él que los vecinos que observan sientan la necesidad de nombrarnos por Él." },
-    { textEn: "28. The death of James (Acts 12:2) and the deliverance of Peter (Acts 12:7-11) happen in the same chapter. What does the contrast teach about the providence of God in suffering and rescue?", textEs: "28. La muerte de Jacobo (Hechos 12:2) y la liberación de Pedro (Hechos 12:7-11) ocurren en el mismo capítulo. ¿Qué enseña el contraste sobre la providencia de Dios en el sufrimiento y el rescate?", kwEn: ["james", "peter", "provid", "sover", "deliver", "kill", "rescu", "chapter"], kwEs: ["jacobo", "pedro", "provid", "sober", "libera", "matar", "rescat", "capít"] , modelEn: "In one chapter Herod kills James the apostle with the sword, yet an angel delivers Peter from the same prison the same season. The contrast teaches God's providence and sovereignty in both suffering and rescue: James is martyred and Peter is rescued, and Scripture does not explain why one died and one was spared. The Lord is equally sovereign over the apostle He delivers and the apostle He allows to be killed; faithfulness, not outcome, is the constant, and the church kept praying through both.", modelEs: "En un mismo capítulo Herodes mata a espada al apóstol Jacobo, y sin embargo un ángel libera a Pedro de la misma prisión en la misma temporada. El contraste enseña la providencia y soberanía de Dios tanto en el sufrimiento como en el rescate: Jacobo es martirizado y Pedro es rescatado, y la Escritura no explica por qué uno murió y otro fue librado. El Señor es igualmente soberano sobre el apóstol que libera y sobre el que permite matar; la fidelidad, no el resultado, es lo constante, y la iglesia siguió orando por ambos." },
-    { textEn: "29. The story of Rhoda forgetting to open the gate (Acts 12:13-16) is a humorous moment in Acts. What gentle pastoral lesson does Luke embed in the scene?", textEs: "29. La historia de Rode olvidándose de abrir la puerta (Hechos 12:13-16) es un momento humorístico de Hechos. ¿Qué lección pastoral suave incrusta Lucas en la escena?", kwEn: ["rhoda", "rode", "pray", "answer", "door", "faith", "gate", "joy"], kwEs: ["rode", "puerta", "ora", "respond", "fe", "alegr", "abrir", "gozo"] , modelEn: "When Peter knocked, the servant girl Rhoda recognized his voice and was so overjoyed she forgot to open the gate, running back to announce him while Peter kept knocking outside — and the praying believers told her she was crazy. Luke embeds a gentle pastoral lesson: the church was praying earnestly for Peter's release, yet would not believe it when God answered the very prayer. Honest believers admit we often pray for something and then refuse to open the door when the answer arrives; the joy of Rhoda rebukes our small faith.", modelEs: "Cuando Pedro llamó, la criada Rode reconoció su voz y de tanta alegría se olvidó de abrir la puerta, corriendo a anunciarlo mientras Pedro seguía llamando afuera — y los creyentes que oraban le dijeron que estaba loca. Lucas incrusta una suave lección pastoral: la iglesia oraba fervientemente por la liberación de Pedro, y sin embargo no creyó cuando Dios respondió esa misma oración. Los creyentes honestos admiten que a menudo oramos por algo y luego nos negamos a abrir la puerta cuando llega la respuesta; el gozo de Rode reprende nuestra poca fe." },
-    { textEn: "30. Acts 12:23-24 places Herod's death and the gospel's growth in immediate sequence. Discuss how this contrast functions as a theological summary of the entire chapter.", textEs: "30. Hechos 12:23-24 coloca la muerte de Herodes y el crecimiento del evangelio en secuencia inmediata. Discuta cómo este contraste funciona como un resumen teológico de todo el capítulo.", kwEn: ["herod", "worm", "word", "grew", "provid", "kingdom", "die", "spread"], kwEs: ["herod", "gusan", "palabra", "creci", "provid", "reino", "morir", "extend"] , modelEn: "Acts 12:23–24 sets Herod's death beside the gospel's growth in immediate sequence: the king who had killed an apostle was struck by an angel and eaten by worms, and the very next sentence says the word of God grew and multiplied. This contrast is the theological summary of the whole chapter and of history: the proud kings who oppose God's kingdom die, while the word of God always spreads. Herod is dead and the church is alive — God buries His undertakers, and His providence guarantees the word will grow no matter who tries to stop it.", modelEs: "Hechos 12:23–24 coloca la muerte de Herodes junto al crecimiento del evangelio en secuencia inmediata: el rey que había matado a un apóstol fue herido por un ángel y comido de gusanos, y la frase siguiente dice que la palabra de Dios crecía y se multiplicaba. Este contraste es el resumen teológico de todo el capítulo y de la historia: los reyes soberbios que se oponen al reino de Dios están condenados a morir, mientras la palabra de Dios siempre llega a extenderse. Herodes está muerto y la iglesia viva — Dios entierra a sus sepultureros, y Su providencia garantiza que la palabra crecerá sin importar quién intente detenerla." }
-];
+/* CTSActs — unit 5. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "acts",
+ "unit": 5,
+ "totalUnits": 11,
+ "filePrefix": "CTSActs",
+ "prevHref": "CTSActsUnit4.html",
+ "nextHref": "CTSActsUnit6.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "The man Peter healed at Lydda was named:",
+    "es": "El hombre que Pedro sanó en Lida se llamaba:"
+   },
+   "options": {
+    "en": [
+     "Aeneas, paralyzed eight years",
+     "Bartimaeus, blind from birth",
+     "Lazarus of Bethany",
+     "Malchus, ear severed"
+    ],
+    "es": [
+     "Eneas, paralítico ocho años",
+     "Bartimeo, ciego de nacimiento",
+     "Lázaro de Betania",
+     "Malco, oreja cortada"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "The Greek name Dorcas (Aramaic Tabitha) means:",
+    "es": "El nombre griego Dorcas (en arameo Tabita) significa:"
+   },
+   "options": {
+    "en": [
+     "Dove",
+     "Gazelle",
+     "Lily",
+     "Beloved"
+    ],
+    "es": [
+     "Paloma",
+     "Gacela",
+     "Lirio",
+     "Amada"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "When Peter raised Tabitha he echoed his Master's words from Mark 5:41 — Talitha cumi. Peter said:",
+    "es": "Cuando Pedro levantó a Tabita repitió las palabras de su Maestro en Marcos 5:41 — Talita cumi. Pedro dijo:"
+   },
+   "options": {
+    "en": [
+     "Lazarus, come forth",
+     "Maranatha",
+     "Tabitha, arise",
+     "Be still"
+    ],
+    "es": [
+     "Lázaro, ven fuera",
+     "Maranata",
+     "Tabita, levántate",
+     "Calla"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "Cornelius lived in:",
+    "es": "Cornelio vivía en:"
+   },
+   "options": {
+    "en": [
+     "Caesarea, on the Mediterranean coast",
+     "Joppa",
+     "Capernaum",
+     "Rome itself"
+    ],
+    "es": [
+     "Cesarea, en la costa mediterránea",
+     "Jope",
+     "Capernaum",
+     "Roma misma"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "Cornelius was a centurion of the:",
+    "es": "Cornelio era centurión de la:"
+   },
+   "options": {
+    "en": [
+     "Praetorian Guard",
+     "Tenth Legion",
+     "Augustan Cohort",
+     "Italian Regiment"
+    ],
+    "es": [
+     "Guardia Pretoriana",
+     "Décima Legión",
+     "Cohorte Augusta",
+     "Compañía Italiana"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "Peter was lodging in Joppa with:",
+    "es": "Pedro se hospedaba en Jope con:"
+   },
+   "options": {
+    "en": [
+     "A Pharisee",
+     "Simon a tanner (whose trade made him ceremonially unclean)",
+     "His brother Andrew",
+     "A wealthy widow"
+    ],
+    "es": [
+     "Un fariseo",
+     "Simón curtidor (cuyo oficio lo hacía ceremonialmente impuro)",
+     "Su hermano Andrés",
+     "Una viuda rica"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "The vision Peter saw on the rooftop was a sheet let down containing:",
+    "es": "La visión que Pedro vio en la azotea era un lienzo que descendía con:"
+   },
+   "options": {
+    "en": [
+     "Bread and wine",
+     "Olive branches",
+     "Every kind of four-footed beast, reptile, and bird (including unclean animals)",
+     "Roman coins"
+    ],
+    "es": [
+     "Pan y vino",
+     "Ramas de olivo",
+     "Toda clase de cuadrúpedos, reptiles y aves (incluyendo animales impuros)",
+     "Monedas romanas"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "The vision came to Peter how many times before the men from Caesarea arrived?",
+    "es": "La visión vino a Pedro ¿cuántas veces antes de que llegaran los hombres de Cesarea?"
+   },
+   "options": {
+    "en": [
+     "Once",
+     "Twice",
+     "Seven times",
+     "Three times"
+    ],
+    "es": [
+     "Una vez",
+     "Dos veces",
+     "Siete veces",
+     "Tres veces"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "Peter understood the vision was not really about food but about:",
+    "es": "Pedro entendió que la visión no era realmente sobre comida sino sobre:"
+   },
+   "options": {
+    "en": [
+     "People — that no man should be called common or unclean",
+     "Animal sacrifice",
+     "The temple",
+     "The Sabbath"
+    ],
+    "es": [
+     "Personas — que a ningún hombre debía llamar común o inmundo",
+     "El sacrificio de animales",
+     "El templo",
+     "El día de reposo"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "Peter's opening line of his sermon to Cornelius's household was:",
+    "es": "La línea inicial del sermón de Pedro a la casa de Cornelio fue:"
+   },
+   "options": {
+    "en": [
+     "Repent and be baptized",
+     "I am the resurrection and the life",
+     "Behold the Lamb of God",
+     "In truth I perceive that God shows no partiality"
+    ],
+    "es": [
+     "Arrepentíos y bautizaos",
+     "Yo soy la resurrección y la vida",
+     "He aquí el Cordero de Dios",
+     "Por verdad hallo que Dios no hace acepción de personas"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "The Holy Spirit fell on Cornelius's household:",
+    "es": "El Espíritu Santo cayó sobre la casa de Cornelio:"
+   },
+   "options": {
+    "en": [
+     "After they were all baptized",
+     "While Peter was still speaking these words",
+     "After a forty-day fast",
+     "Once a year had passed"
+    ],
+    "es": [
+     "Después de que todos fueran bautizados",
+     "Mientras Pedro aún hablaba estas palabras",
+     "Después de un ayuno de cuarenta días",
+     "Después de pasado un año"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "Defending himself in Jerusalem, Peter concluded with the question:",
+    "es": "Defendiéndose en Jerusalén, Pedro concluyó con la pregunta:"
+   },
+   "options": {
+    "en": [
+     "Who is my neighbor?",
+     "Who was I that I could withstand God?",
+     "Why have you forsaken me?",
+     "Are not all the apostles?"
+    ],
+    "es": [
+     "¿Quién es mi prójimo?",
+     "¿Quién era yo que pudiese estorbar a Dios?",
+     "¿Por qué me has desamparado?",
+     "¿No son todos apóstoles?"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "The scattered believers from Acts 8 who founded the church at Antioch were originally from:",
+    "es": "Los creyentes esparcidos de Hechos 8 que fundaron la iglesia en Antioquía eran originalmente de:"
+   },
+   "options": {
+    "en": [
+     "Galilee and Judea only",
+     "Rome and Alexandria",
+     "Cyprus and Cyrene, who began speaking to the Greeks too",
+     "Damascus and Tarsus"
+    ],
+    "es": [
+     "Solo de Galilea y Judea",
+     "Roma y Alejandría",
+     "Chipre y Cirene, que comenzaron a hablar también a los griegos",
+     "Damasco y Tarso"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "Acts 11:21 says about Antioch:",
+    "es": "Hechos 11:21 dice acerca de Antioquía:"
+   },
+   "options": {
+    "en": [
+     "The hand of the Lord was with them, and a great number believed",
+     "The temple was rebuilt",
+     "The persecution was lifted",
+     "The Sanhedrin sent emissaries"
+    ],
+    "es": [
+     "La mano del Señor era con ellos, y un gran número creyó",
+     "El templo fue reconstruido",
+     "La persecución se levantó",
+     "El Sanedrín envió emisarios"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "The Jerusalem church sent which man to investigate Antioch?",
+    "es": "La iglesia de Jerusalén envió ¿a qué hombre a investigar Antioquía?"
+   },
+   "options": {
+    "en": [
+     "Peter",
+     "James",
+     "Barnabas (the Son of Encouragement)",
+     "Philip the deacon"
+    ],
+    "es": [
+     "Pedro",
+     "Jacobo",
+     "Bernabé (el Hijo de Consolación)",
+     "Felipe el diácono"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "When Barnabas saw the Antioch revival had outgrown one preacher, he went to fetch:",
+    "es": "Cuando Bernabé vio que el avivamiento de Antioquía había sobrepasado a un solo predicador, fue a buscar a:"
+   },
+   "options": {
+    "en": [
+     "Apollos",
+     "Mark",
+     "Saul, in Tarsus",
+     "Silas"
+    ],
+    "es": [
+     "Apolos",
+     "Marcos",
+     "Saulo, en Tarso",
+     "Silas"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "The disciples were first called 'Christians' (Greek Christianoi, 'Christ's people') in:",
+    "es": "Los discípulos fueron llamados 'cristianos' (griego Christianoi, 'los de Cristo') por primera vez en:"
+   },
+   "options": {
+    "en": [
+     "Antioch",
+     "Jerusalem",
+     "Caesarea",
+     "Rome"
+    ],
+    "es": [
+     "Antioquía",
+     "Jerusalén",
+     "Cesarea",
+     "Roma"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "The first apostle to be martyred was:",
+    "es": "El primer apóstol martirizado fue:"
+   },
+   "options": {
+    "en": [
+     "Peter",
+     "Stephen the deacon (he was not an apostle)",
+     "John the Beloved",
+     "James the brother of John, killed by the sword by Herod Agrippa I"
+    ],
+    "es": [
+     "Pedro",
+     "Esteban el diácono (no era apóstol)",
+     "Juan el Amado",
+     "Jacobo el hermano de Juan, muerto a espada por Herodes Agripa I"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "When Peter, freed from prison by an angel, knocked at Mary's gate, the servant girl Rhoda:",
+    "es": "Cuando Pedro, liberado de la prisión por un ángel, tocó a la puerta de María, la criada Rode:"
+   },
+   "options": {
+    "en": [
+     "Opened the gate immediately",
+     "Was so overjoyed she forgot to open the gate and ran inside to announce him",
+     "Did not recognize his voice",
+     "Reported him to the authorities"
+    ],
+    "es": [
+     "Abrió la puerta inmediatamente",
+     "Se gozó tanto que se olvidó de abrir la puerta y corrió adentro a anunciarlo",
+     "No reconoció su voz",
+     "Lo denunció a las autoridades"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "Herod Agrippa I's death is described in Acts 12:23 as:",
+    "es": "La muerte de Herodes Agripa I es descrita en Hechos 12:23 como:"
+   },
+   "options": {
+    "en": [
+     "A peaceful old age",
+     "A military assassination",
+     "Drowning at sea",
+     "Struck by an angel of the Lord and eaten by worms because he did not give glory to God"
+    ],
+    "es": [
+     "Una vejez pacífica",
+     "Un asesinato militar",
+     "Ahogamiento en el mar",
+     "Herido por un ángel del Señor y comido por gusanos porque no dio la gloria a Dios"
+    ]
+   },
+   "answer": 3
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Discuss the symbolic significance of Peter lodging at the home of Simon the tanner before his vision in Joppa. How does Luke set up the Cornelius episode through such small details?",
+    "es": "Discuta el significado simbólico de que Pedro se hospedara en casa de Simón el curtidor antes de su visión en Jope. ¿Cómo prepara Lucas el episodio de Cornelio a través de pequeños detalles?"
+   },
+   "keywords": {
+    "en": [
+     "simon",
+     "tanner",
+     "unclean",
+     "prepar",
+     "corneli",
+     "vision",
+     "lodg",
+     "joppa"
+    ],
+    "es": [
+     "simón",
+     "curtidor",
+     "inmund",
+     "prepar",
+     "cornelio",
+     "visión",
+     "hosped",
+     "jope"
+    ]
+   },
+   "model": {
+    "en": "Peter was lodging in Joppa at the house of Simon a tanner, whose trade kept him ceremonially unclean by traditional Jewish standards, one of Luke's quiet little setups. By placing Peter under the roof of a man the purity code marked as unclean, Luke is already loosening Peter's grip on those boundaries before the rooftop vision ever comes. Through such small details Luke prepares the Cornelius episode: the apostle who will be told 'do not call unclean what God has cleansed' is already, without realizing it, living with the unclean.",
+    "es": "Pedro se hospedaba en Jope en casa de Simón el curtidor, cuyo oficio lo mantenía ceremonialmente inmundo según las normas judías tradicionales, uno de los pequeños arreglos silenciosos de Lucas. Al poner a Pedro bajo el techo de un hombre que el código de pureza marcaba como inmundo, Lucas ya está aflojando el apego de Pedro a esas fronteras antes de la visión en la azotea. Mediante tales detalles prepara el episodio de Cornelio: el apóstol a quien se le dirá 'no llames inmundo lo que Dios limpió' ya vive, sin darse cuenta, con lo inmundo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain Peter's rooftop vision (Acts 10:9-16). Why was the vision repeated three times, and why does Peter not realize at first that it is about people rather than food?",
+    "es": "Explique la visión de Pedro en la azotea (Hechos 10:9-16). ¿Por qué se repitió la visión tres veces, y por qué Pedro no se da cuenta al principio de que se trata de personas y no de comida?"
+   },
+   "keywords": {
+    "en": [
+     "sheet",
+     "three",
+     "unclean",
+     "people",
+     "vision",
+     "animal",
+     "gentil",
+     "repeat"
+    ],
+    "es": [
+     "lienzo",
+     "tres",
+     "inmund",
+     "person",
+     "visión",
+     "animal",
+     "gentil",
+     "repet"
+    ]
+   },
+   "model": {
+    "en": "On the rooftop Peter saw a sheet lowered from heaven full of animals the dietary law forbade, with the command 'kill and eat,' and the vision was repeated three times. The threefold repetition pressed the lesson past Peter's deep resistance — he had never eaten anything unclean — and underscored that God truly meant it. Peter did not realize at first that it was about people, not food, because the dietary code had been the very fence separating Jew from Gentile; only when the men from Caesarea arrived did he see the vision meant that no person is to be called common or unclean.",
+    "es": "En la azotea Pedro vio un lienzo descender del cielo lleno de animales que la ley dietética prohíba, con la orden 'mata y come', y la visión se repitió tres veces. La repetición triple grabó la lección más allá de la profunda resistencia de Pedro — nunca había comido nada inmundo — y subrayó que Dios lo decía en serio. Pedro no se dio cuenta al principio de que se trataba de personas y no de comida, porque el código dietético había sido la cerca que separaba al judío del gentil; solo cuando llegaron los hombres de Cesarea vio que la visión significaba que a ninguna persona se le ha de llamar común o inmunda."
+   }
+  },
+  {
+   "prompt": {
+    "en": "The phrase 'God shows no partiality' (Acts 10:34) is foundational to Christian missions. How does this principle reshape how the church views ethnicity and nationality?",
+    "es": "La frase 'Dios no hace acepción de personas' (Hechos 10:34) es fundamental para las misiones cristianas. ¿Cómo reformula este principio la manera en que la iglesia ve la etnicidad y la nacionalidad?"
+   },
+   "keywords": {
+    "en": [
+     "partial",
+     "nation",
+     "miss",
+     "equal",
+     "ethnic",
+     "gentil",
+     "show",
+     "respect"
+    ],
+    "es": [
+     "acepc",
+     "nación",
+     "misión",
+     "igual",
+     "étnic",
+     "gentil",
+     "muestr",
+     "respet"
+    ]
+   },
+   "model": {
+    "en": "Peter's sermon opens with a foundational missions truth: God shows no partiality — literally, He is not a face-receiver — but in every nation whoever fears Him is accepted. This reshapes how the church views ethnicity and nationality: no people group has a genetic or cultural advantage at the foot of the cross, and the same gospel comes on the same terms to every nation. It demolishes any ranking by ethnic background or passport, demands equal respect for every person, and shows the missionary thrust toward the Gentiles.",
+    "es": "El sermón de Pedro abre con una verdad fundamental para las misiones: Dios no hace acepción de personas — literalmente, no es un recibidor de rostros — sino que en toda nación el que le teme es aceptado. Esto reformula cómo la iglesia ve lo étnico y la nacionalidad: ningún pueblo tiene ventaja genética ni cultural al pie de la cruz, y el mismo evangelio llega en los mismos términos a toda nación. Derriba todo ranking por raza o pasaporte, exige igual respeto por cada persona, y muestra el impulso misionero hacia los gentiles."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Discuss Peter's defense of his ministry to Cornelius before the Jerusalem church (Acts 11:1-18). What does the Jerusalem church's response teach about gospel humility?",
+    "es": "Discuta la defensa de Pedro de su ministerio a Cornelio ante la iglesia de Jerusalén (Hechos 11:1-18). ¿Qué enseña la respuesta de la iglesia de Jerusalén sobre la humildad evangélica?"
+   },
+   "keywords": {
+    "en": [
+     "peter",
+     "defen",
+     "withstand",
+     "jerusal",
+     "humil",
+     "gentil",
+     "spirit",
+     "fell"
+    ],
+    "es": [
+     "pedro",
+     "defen",
+     "resist",
+     "jerusal",
+     "humild",
+     "gentil",
+     "espíritu",
+     "cay"
+    ]
+   },
+   "model": {
+    "en": "Back in Jerusalem the circumcised believers confronted Peter for eating with Gentiles, and he defended his ministry to Cornelius by recounting the vision and how the Holy Spirit fell on the Gentiles just as on the Jews. He ended, 'who was I that I could withstand God?' The Jerusalem church's response teaches gospel humility: confronted with what God had plainly done, they fell silent and glorified God rather than defend their prejudice. True humility submits its theology to the evidence of the Spirit's work, even when it overturns long-held assumptions.",
+    "es": "De vuelta en Jerusalén los creyentes circuncidados confrontaron a Pedro por comer con gentiles, y él defendió su ministerio a Cornelio relatando la visión y cómo el Espíritu Santo cayó sobre los gentiles igual que sobre los judíos. Terminó: '¿quién era yo para resistir a Dios?' La respuesta de la iglesia de Jerusalén enseña la humildad evangélica: ante lo que Dios había hecho claramente, callaron y glorificaron a Dios en vez de defender su prejuicio. La verdadera humildad somete su teología a la evidencia de la obra del Espíritu."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Acts 11:21 says 'the hand of the Lord was with them.' Discuss the three-fold pattern that follows when the hand of the Lord moves: conversions, commissions, and celebrations.",
+    "es": "Hechos 11:21 dice 'la mano del Señor era con ellos.' Discuta el patrón triple que sigue cuando la mano del Señor se mueve: conversiones, comisiones y celebraciones."
+   },
+   "keywords": {
+    "en": [
+     "hand",
+     "lord",
+     "convers",
+     "commis",
+     "celeb",
+     "antio",
+     "spirit",
+     "move"
+    ],
+    "es": [
+     "mano",
+     "señor",
+     "convers",
+     "comis",
+     "celeb",
+     "antio",
+     "espíritu",
+     "mov"
+    ]
+   },
+   "model": {
+    "en": "When the hand of the Lord was with them at Antioch, a three-fold pattern followed. First came conversions — a great number believed and turned to the Lord. Then came commissions — the church sent Barnabas, who fetched Saul, and the work was organized and extended. Then came celebrations — Barnabas, seeing the grace of God, was glad, for where the Spirit moves there is joy. Wherever the hand of the Lord truly moves, these three follow together; a sour, joyless church is not an awakened one.",
+    "es": "Cuando la mano del Señor era con ellos en Antioquía, siguió un patrón triple. Primero vinieron conversiones — un gran número creyó y se volvió al Señor. Luego comisiones — la iglesia envió a Bernabé, quien trajo a Saulo, y la obra se organizó y extendió. Luego celebraciones — Bernabé, viendo la gracia de Dios, se alegró, porque donde hay movimiento del Espíritu hay gozo. Dondequiera que la mano del Señor verdaderamente se mueve, estas tres siguen juntas; una iglesia agria y sin gozo no es una iglesia avivada."
+   }
+  },
+  {
+   "prompt": {
+    "en": "The Welsh Revival of 1904-05 began with a timid girl, Flory Evans, saying 'I love the Lord Jesus with all my heart.' Discuss the parallel between this story and Antioch and what it teaches about how revival begins.",
+    "es": "El Avivamiento Galés de 1904-05 comenzó con una niña tímida, Flory Evans, diciendo 'Yo amo al Señor Jesús con todo mi corazón.' Discuta el paralelo entre esta historia y Antioquía y lo que enseña sobre cómo comienza un avivamiento."
+   },
+   "keywords": {
+    "en": [
+     "welsh",
+     "flory",
+     "evans",
+     "jenkins",
+     "antioch",
+     "reviv",
+     "girl",
+     "love"
+    ],
+    "es": [
+     "galés",
+     "flory",
+     "evans",
+     "jenkins",
+     "antio",
+     "avivam",
+     "niña",
+     "amo"
+    ]
+   },
+   "model": {
+    "en": "In 1904 pastor Joseph Jenkins asked his young people what Jesus meant to them, and after embarrassed silence a timid girl named Flory Evans, three weeks converted, stood and said, 'I love the Lord Jesus with all my heart' — and within weeks the Welsh Revival swept the nation, a hundred thousand converted in five months. The parallel to Antioch is that revival begins not with a campaign but with the hand of the Lord stirring ordinary, sincere love for Christ. God lit Antioch and Wales the same way: through humble believers, even one timid girl whose love for Jesus overflowed.",
+    "es": "En 1904 el pastor Joseph Jenkins preguntó a sus jóvenes qué significaba Jesús para ellos, y tras un silencio incómodo una niña tímida llamada Flory Evans, convertida hacía tres semanas, se puso de pie y dijo: 'Yo amo al Señor Jesús con todo mi corazón' — y en pocas semanas el Avivamiento Galés barrió la nación, cien mil convertidos en cinco meses. El paralelo con Antioquía es que el avivamiento comienza no con una campaña sino con la mano del Señor avivando un amor sincero y ordinario por Cristo. Dios encendió Antioquía y Gales de la misma manera: por medio de creyentes humildes, hasta una niña tímida."
+   }
+  },
+  {
+   "prompt": {
+    "en": "The disciples were first called 'Christians' at Antioch. Discuss the original derisive sense of the term and what it means for believers today to bear the label.",
+    "es": "Los discípulos fueron llamados 'cristianos' por primera vez en Antioquía. Discuta el sentido despectivo original del término y lo que significa para los creyentes hoy llevar la etiqueta."
+   },
+   "keywords": {
+    "en": [
+     "christ",
+     "christian",
+     "antio",
+     "label",
+     "name",
+     "deris",
+     "first",
+     "called"
+    ],
+    "es": [
+     "cristo",
+     "cristian",
+     "antio",
+     "apelat",
+     "nombre",
+     "burla",
+     "primer",
+     "llam"
+    ]
+   },
+   "model": {
+    "en": "The disciples were first called Christians at Antioch, and the term Christianoi seems to have begun as a slightly derisive label — 'little Christs' or 'Christ's people' — pinned on them by pagans who noticed they constantly talked about, dressed like, and sounded like Christ. The believers wore the name forever. For Christians today it means bearing a label that should still fit: to be called by Christ's name is to live so saturated with Him that watching neighbors feel the need to name us after Him.",
+    "es": "Los discípulos fueron llamados cristianos por primera vez en Antioquía, y el término Christianoi parece haber comenzado como un apelativo de burla algo despectivo — 'pequeños Cristos' o 'los de Cristo' — puesto por paganos que notaban que hablaban, vestían y sonaban como Cristo. Los creyentes llevaron el nombre para siempre. Para los cristianos de hoy significa llevar una etiqueta que aún debería ajustar: ser llamado por el nombre de Cristo es vivir tan saturado de Él que los vecinos que observan sientan la necesidad de nombrarnos por Él."
+   }
+  },
+  {
+   "prompt": {
+    "en": "The death of James (Acts 12:2) and the deliverance of Peter (Acts 12:7-11) happen in the same chapter. What does the contrast teach about the providence of God in suffering and rescue?",
+    "es": "La muerte de Jacobo (Hechos 12:2) y la liberación de Pedro (Hechos 12:7-11) ocurren en el mismo capítulo. ¿Qué enseña el contraste sobre la providencia de Dios en el sufrimiento y el rescate?"
+   },
+   "keywords": {
+    "en": [
+     "james",
+     "peter",
+     "provid",
+     "sover",
+     "deliver",
+     "kill",
+     "rescu",
+     "chapter"
+    ],
+    "es": [
+     "jacobo",
+     "pedro",
+     "provid",
+     "sober",
+     "libera",
+     "matar",
+     "rescat",
+     "capít"
+    ]
+   },
+   "model": {
+    "en": "In one chapter Herod kills James the apostle with the sword, yet an angel delivers Peter from the same prison the same season. The contrast teaches God's providence and sovereignty in both suffering and rescue: James is martyred and Peter is rescued, and Scripture does not explain why one died and one was spared. The Lord is equally sovereign over the apostle He delivers and the apostle He allows to be killed; faithfulness, not outcome, is the constant, and the church kept praying through both.",
+    "es": "En un mismo capítulo Herodes mata a espada al apóstol Jacobo, y sin embargo un ángel libera a Pedro de la misma prisión en la misma temporada. El contraste enseña la providencia y soberanía de Dios tanto en el sufrimiento como en el rescate: Jacobo es martirizado y Pedro es rescatado, y la Escritura no explica por qué uno murió y otro fue librado. El Señor es igualmente soberano sobre el apóstol que libera y sobre el que permite matar; la fidelidad, no el resultado, es lo constante, y la iglesia siguió orando por ambos."
+   }
+  },
+  {
+   "prompt": {
+    "en": "The story of Rhoda forgetting to open the gate (Acts 12:13-16) is a humorous moment in Acts. What gentle pastoral lesson does Luke embed in the scene?",
+    "es": "La historia de Rode olvidándose de abrir la puerta (Hechos 12:13-16) es un momento humorístico de Hechos. ¿Qué lección pastoral suave incrusta Lucas en la escena?"
+   },
+   "keywords": {
+    "en": [
+     "rhoda",
+     "rode",
+     "pray",
+     "answer",
+     "door",
+     "faith",
+     "gate",
+     "joy"
+    ],
+    "es": [
+     "rode",
+     "puerta",
+     "ora",
+     "respond",
+     "fe",
+     "alegr",
+     "abrir",
+     "gozo"
+    ]
+   },
+   "model": {
+    "en": "When Peter knocked, the servant girl Rhoda recognized his voice and was so overjoyed she forgot to open the gate, running back to announce him while Peter kept knocking outside — and the praying believers told her she was crazy. Luke embeds a gentle pastoral lesson: the church was praying earnestly for Peter's release, yet would not believe it when God answered the very prayer. Honest believers admit we often pray for something and then refuse to open the door when the answer arrives; the joy of Rhoda rebukes our small faith.",
+    "es": "Cuando Pedro llamó, la criada Rode reconoció su voz y de tanta alegría se olvidó de abrir la puerta, corriendo a anunciarlo mientras Pedro seguía llamando afuera — y los creyentes que oraban le dijeron que estaba loca. Lucas incrusta una suave lección pastoral: la iglesia oraba fervientemente por la liberación de Pedro, y sin embargo no creyó cuando Dios respondió esa misma oración. Los creyentes honestos admiten que a menudo oramos por algo y luego nos negamos a abrir la puerta cuando llega la respuesta; el gozo de Rode reprende nuestra poca fe."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Acts 12:23-24 places Herod's death and the gospel's growth in immediate sequence. Discuss how this contrast functions as a theological summary of the entire chapter.",
+    "es": "Hechos 12:23-24 coloca la muerte de Herodes y el crecimiento del evangelio en secuencia inmediata. Discuta cómo este contraste funciona como un resumen teológico de todo el capítulo."
+   },
+   "keywords": {
+    "en": [
+     "herod",
+     "worm",
+     "word",
+     "grew",
+     "provid",
+     "kingdom",
+     "die",
+     "spread"
+    ],
+    "es": [
+     "herod",
+     "gusan",
+     "palabra",
+     "creci",
+     "provid",
+     "reino",
+     "morir",
+     "extend"
+    ]
+   },
+   "model": {
+    "en": "Acts 12:23–24 sets Herod's death beside the gospel's growth in immediate sequence: the king who had killed an apostle was struck by an angel and eaten by worms, and the very next sentence says the word of God grew and multiplied. This contrast is the theological summary of the whole chapter and of history: the proud kings who oppose God's kingdom die, while the word of God always spreads. Herod is dead and the church is alive — God buries His undertakers, and His providence guarantees the word will grow no matter who tries to stop it.",
+    "es": "Hechos 12:23–24 coloca la muerte de Herodes junto al crecimiento del evangelio en secuencia inmediata: el rey que había matado a un apóstol fue herido por un ángel y comido de gusanos, y la frase siguiente dice que la palabra de Dios crecía y se multiplicaba. Este contraste es el resumen teológico de todo el capítulo y de la historia: los reyes soberbios que se oponen al reino de Dios están condenados a morir, mientras la palabra de Dios siempre llega a extenderse. Herodes está muerto y la iglesia viva — Dios entierra a sus sepultureros, y Su providencia garantiza que la palabra crecerá sin importar quién intente detenerla."
+   }
+  }
+ ]
+};

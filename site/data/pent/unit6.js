@@ -1,47 +1,833 @@
-/* CTSPent - unit 6: per-unit configuration and content. */
-
-const UNIT = 6;
-
-const NEXT_URL = "CTSPentUnit7.html";
-
-const PREV_URL = "CTSPentUnit5.html";
-
-const IS_LAST_UNIT = false;
-
-const SHOW_REGISTRATION_CARD = false;
-
-const mcQuestions = [
-    { textEn: "1. Who did Jesus affirm as the author of Exodus?", textEs: "1. ¿A quién afirmó Jesús como autor de Éxodo?", optionsEn: ["A. Moses", "B. Joshua", "C. Ezra", "D. Samuel"], optionsEs: ["A. Moisés", "B. Josué", "C. Esdras", "D. Samuel"], correct: 0, correctFeedbackEn: "Correct! Jesus quoted Exodus as written by Moses in Mark 7:10.", correctFeedbackEs: "¡Correcto! Jesús citó Éxodo como escrito por Moisés en Marcos 7:10.", incorrectFeedbackEn: "Mark 7:10 — Jesus said, 'For Moses said, Honor your father and your mother.'", incorrectFeedbackEs: "Marcos 7:10 — Jesús dijo: 'Porque Moisés dijo: Honra a tu padre y a tu madre.'" },
-    { textEn: "2. What was the name of the store cities the Israelites built for Pharaoh?", textEs: "2. ¿Cuál era el nombre de las ciudades de almacenaje que los israelitas construyeron para Faraón?", optionsEn: ["A. Goshen and Memphis", "B. Pithom and Rameses", "C. Thebes and Luxor", "D. Cairo and Alexandria"], optionsEs: ["A. Gosén y Menfis", "B. Pitom y Ramesés", "C. Tebas y Luxor", "D. El Cairo y Alejandría"], correct: 1, correctFeedbackEn: "Yes. Pithom and Rameses were store cities built with forced Hebrew labor.", correctFeedbackEs: "Sí. Pitom y Ramesés eran ciudades de almacenaje construidas con trabajo hebreo forzado.", incorrectFeedbackEn: "Exodus 1:11 — they built Pithom and Rameses as store cities for Pharaoh.", incorrectFeedbackEs: "Éxodo 1:11 — construyeron Pitom y Ramesés como ciudades de almacenaje para Faraón." },
-    { textEn: "3. What were the names of the Hebrew midwives who feared God and disobeyed Pharaoh?", textEs: "3. ¿Cuáles eran los nombres de las parteras hebreas que temieron a Dios y desobedecieron a Faraón?", optionsEn: ["A. Shiphrah and Puah", "B. Miriam and Deborah", "C. Rachel and Leah", "D. Hannah and Peninnah"], optionsEs: ["A. Sifra y Fúa", "B. Miriam y Débora", "C. Raquel y Lea", "D. Ana y Penina"], correct: 0, correctFeedbackEn: "Correct. Shiphrah and Puah are honored for fearing God more than Pharaoh.", correctFeedbackEs: "Correcto. Sifra y Fúa son honradas por temer a Dios más que a Faraón.", incorrectFeedbackEn: "Exodus 1:15 — the midwives were Shiphrah and Puah.", incorrectFeedbackEs: "Éxodo 1:15 — las parteras eran Sifra y Fúa." },
-    { textEn: "4. What does the name 'Moses' mean?", textEs: "4. ¿Qué significa el nombre 'Moisés'?", optionsEn: ["A. 'Drawn out of the water'", "B. 'Deliverer'", "C. 'Son of Pharaoh'", "D. 'Hebrew prince'"], optionsEs: ["A. 'Sacado de las aguas'", "B. 'Libertador'", "C. 'Hijo de Faraón'", "D. 'Príncipe hebreo'"], correct: 0, correctFeedbackEn: "Yes. Pharaoh's daughter said, 'Because I drew him out of the water.'", correctFeedbackEs: "Sí. La hija de Faraón dijo: 'Porque de las aguas lo saqué.'", incorrectFeedbackEn: "Moses means 'drawn out' — a constant reminder of God's deliverance.", incorrectFeedbackEs: "Moisés significa 'sacado' — un recordatorio constante de la liberación de Dios." },
-    { textEn: "5. How long did Moses live in Midian as a shepherd before God called him?", textEs: "5. ¿Cuánto tiempo vivió Moisés en Madián como pastor antes de que Dios lo llamara?", optionsEn: ["A. 10 years", "B. 20 years", "C. 40 years", "D. 80 years"], optionsEs: ["A. 10 años", "B. 20 años", "C. 40 años", "D. 80 años"], correct: 2, correctFeedbackEn: "Correct. Moses was 40 when he fled Egypt and 80 when he returned — 40 years in Midian.", correctFeedbackEs: "Correcto. Moisés tenía 40 cuando huyó de Egipto y 80 cuando regresó — 40 años en Madián.", incorrectFeedbackEn: "Moses spent 40 years in Midian, from age 40 to 80.", incorrectFeedbackEs: "Moisés pasó 40 años en Madián, desde los 40 hasta los 80 años." },
-    { textEn: "6. What did God tell Moses to remove before approaching the burning bush?", textEs: "6. ¿Qué le dijo Dios a Moisés que se quitara antes de acercarse a la zarza ardiente?", optionsEn: ["A. His cloak", "B. His staff", "C. His sandals", "D. His head covering"], optionsEs: ["A. Su manto", "B. Su vara", "C. Sus sandalias", "D. Su cubierta de cabeza"], correct: 2, correctFeedbackEn: "Yes. 'Take your sandals off your feet, for the place where you stand is holy ground.'", correctFeedbackEs: "Sí. 'Quita las sandalias de tus pies, porque el lugar en que tú estás, tierra santa es.'", incorrectFeedbackEn: "God commanded Moses to remove his sandals — nothing separating him from God.", incorrectFeedbackEs: "Dios mandó a Moisés que se quitara las sandalias — nada que lo separara de Dios." },
-    { textEn: "7. What does the name 'I AM' (YHWH) signify about God?", textEs: "7. ¿Qué significa el nombre 'YO SOY' (YHWH) acerca de Dios?", optionsEn: ["A. God changes over time", "B. God is only a God of the past", "C. God is unknowable", "D. God's self-existence and eternal presence"], optionsEs: ["A. Dios cambia con el tiempo", "B. Dios es solo un Dios del pasado", "C. Dios es incognoscible", "D. La autoexistencia de Dios y Su presencia eterna"], correct: 3, correctFeedbackEn: "Correct. 'Ehyeh Asher Ehyeh' — 'I will be who I will be' — speaks to God's self-existence.", correctFeedbackEs: "Correcto. 'Ehyeh Asher Ehyeh' — 'Seré el que seré' — habla de la autoexistencia de Dios.", incorrectFeedbackEn: "YHWH (Yahweh) means 'I will be' — God's eternal, self-existent nature.", incorrectFeedbackEs: "YHWH (Jehová) significa 'Yo seré' — la naturaleza eterna y autoexistente de Dios." },
-    { textEn: "8. What was Moses' first objection when God called him?", textEs: "8. ¿Cuál fue la primera objeción de Moisés cuando Dios lo llamó?", optionsEn: ["A. 'I am too old'", "B. 'Who am I that I should go to Pharaoh?'", "C. 'The people won't listen'", "D. 'I don't know the way'"], optionsEs: ["A. 'Soy demasiado viejo'", "B. '¿Quién soy yo para que vaya a Faraón?'", "C. 'El pueblo no escuchará'", "D. 'No conozco el camino'"], correct: 1, correctFeedbackEn: "Yes. Moses asked, 'Who am I?' — focusing on his own inadequacy rather than God's power.", correctFeedbackEs: "Sí. Moisés preguntó: '¿Quién soy yo?' — enfocándose en su propia insuficiencia en vez del poder de Dios.", incorrectFeedbackEn: "Moses said, 'Who am I that I should go to Pharaoh?'", incorrectFeedbackEs: "Moisés dijo: '¿Quién soy yo para que vaya a Faraón?'" },
-    { textEn: "9. Which plague turned the Nile River into blood?", textEs: "9. ¿Qué plaga convirtió el río Nilo en sangre?", optionsEn: ["A. First plague", "B. Third plague", "C. Fifth plague", "D. Seventh plague"], optionsEs: ["A. Primera plaga", "B. Tercera plaga", "C. Quinta plaga", "D. Séptima plaga"], correct: 0, correctFeedbackEn: "Correct. The first plague was water turned to blood, mocking Hapi, the Nile god.", correctFeedbackEs: "Correcto. La primera plaga fue el agua convertida en sangre, burlándose de Hapi, el dios del Nilo.", incorrectFeedbackEn: "The first plague — water turned to blood (Exodus 7:14-25).", incorrectFeedbackEs: "La primera plaga — el agua convertida en sangre (Éxodo 7:14-25)." },
-    { textEn: "10. Which Egyptian goddess with a frog's head was mocked by the second plague?", textEs: "10. ¿Cuál diosa egipcia con cabeza de rana fue objeto de burla por la segunda plaga?", optionsEn: ["A. Isis", "B. Hathor", "C. Hequet", "D. Sekhmet"], optionsEs: ["A. Isis", "B. Hathor", "C. Hequet", "D. Sekhmet"], correct: 2, correctFeedbackEn: "Yes. Hequet, the frog-headed goddess of birth, was powerless against the Lord.", correctFeedbackEs: "Sí. Hequet, la diosa del nacimiento con cabeza de rana, fue impotente ante Jehová.", incorrectFeedbackEn: "Hequet had a frog's head — the plague of frogs mocked her.", incorrectFeedbackEs: "Hequet tenía cabeza de rana — la plaga de ranas se burló de ella." },
-    { textEn: "11. What was the ninth plague?", textEs: "11. ¿Cuál fue la novena plaga?", optionsEn: ["A. Hail", "B. Locusts", "C. Darkness", "D. Death of firstborn"], optionsEs: ["A. Granizo", "B. Langostas", "C. Tinieblas", "D. Muerte de los primogénitos"], correct: 2, correctFeedbackEn: "Correct. Darkness for three days — mocking Ra and Horus, the sun gods.", correctFeedbackEs: "Correcto. Tinieblas por tres días — burlándose de Ra y Horus, los dioses del sol.", incorrectFeedbackEn: "The ninth plague was thick darkness over all Egypt for three days.", incorrectFeedbackEs: "La novena plaga fueron densas tinieblas sobre todo Egipto por tres días." },
-    { textEn: "12. Each plague was designed to do what?", textEs: "12. ¿Para qué fue diseñada cada plaga?", optionsEn: ["A. Make Pharaoh angry", "B. Destroy Egypt completely", "C. Test the Israelites' faith", "D. Mock the gods of Egypt and show the Lord alone is God"], optionsEs: ["A. Para enojar a Faraón", "B. Para destruir Egipto por completo", "C. Para probar la fe de los israelitas", "D. Para burlarse de los dioses de Egipto y mostrar que solo Jehová es Dios"], correct: 3, correctFeedbackEn: "Yes. Every plague was an attack on specific Egyptian deities, proving their impotence.", correctFeedbackEs: "Sí. Cada plaga fue un ataque contra deidades egipcias específicas, probando su impotencia.", incorrectFeedbackEn: "The plagues showed that the gods of Egypt were nothing before the Lord.", incorrectFeedbackEs: "Las plagas mostraron que los dioses de Egipto no eran nada delante de Jehová." },
-    { textEn: "13. What was the final plague that broke Pharaoh's resistance?", textEs: "13. ¿Cuál fue la última plaga que quebrantó la resistencia de Faraón?", optionsEn: ["A. Darkness", "B. Locusts", "C. Death of the firstborn", "D. Boils"], optionsEs: ["A. Tinieblas", "B. Langostas", "C. Muerte de los primogénitos", "D. Úlceras"], correct: 2, correctFeedbackEn: "Correct. The death of every firstborn — from Pharaoh's son to the captive's son.", correctFeedbackEs: "Correcto. La muerte de todo primogénito — desde el hijo de Faraón hasta el hijo del cautivo.", incorrectFeedbackEn: "The tenth plague — death of the firstborn (Exodus 11-12).", incorrectFeedbackEs: "La décima plaga — la muerte de los primogénitos (Éxodo 11-12)." },
-    { textEn: "14. What did the Israelites put on their doorposts to be spared from the tenth plague?", textEs: "14. ¿Qué pusieron los israelitas en los postes de sus puertas para ser librados de la décima plaga?", optionsEn: ["A. Olive branches", "B. A sign with God's name", "C. Bitter herbs", "D. The blood of the Passover lamb"], optionsEs: ["A. Ramas de olivo", "B. Una señal con el nombre de Dios", "C. Hierbas amargas", "D. La sangre del cordero de la Pascua"], correct: 3, correctFeedbackEn: "Yes. 'When I see the blood, I will pass over you.' Not their goodness — the blood alone.", correctFeedbackEs: "Sí. 'Cuando yo vea la sangre, pasaré de vosotros.' No su bondad — solo la sangre.", incorrectFeedbackEn: "The blood of the lamb on the doorposts and lintel.", incorrectFeedbackEs: "La sangre del cordero en los postes y el dintel de la puerta." },
-    { textEn: "15. The Passover lamb had to be without what?", textEs: "15. El cordero de la Pascua tenía que ser sin qué?", optionsEn: ["A. Spots", "B. Blemish or defect", "C. Horns", "D. Wool"], optionsEs: ["A. Manchas", "B. Defecto o mancha", "C. Cuernos", "D. Lana"], correct: 1, correctFeedbackEn: "Correct. A male without blemish — foreshadowing Christ, the spotless Lamb.", correctFeedbackEs: "Correcto. Un macho sin defecto — prefigurando a Cristo, el Cordero sin mancha.", incorrectFeedbackEn: "The lamb had to be without blemish or defect (Exodus 12:5).", incorrectFeedbackEs: "El cordero tenía que ser sin defecto ni mancha (Éxodo 12:5)." },
-    { textEn: "16. How were the Israelites to eat the Passover meal?", textEs: "16. ¿Cómo debían comer los israelitas la comida de la Pascua?", optionsEn: ["A. Slowly and leisurely", "B. Sitting at a table", "C. Alone in their rooms", "D. With loins girded, sandals on, staff in hand — in haste"], optionsEs: ["A. Lenta y tranquilamente", "B. Sentados a la mesa", "C. Solos en sus habitaciones", "D. Con los lomos ceñidos, las sandalias puestas, el bordón en la mano — de prisa"], correct: 3, correctFeedbackEn: "Yes. They were ready to leave — dressed for a journey, eating in haste.", correctFeedbackEs: "Sí. Estaban listos para salir — vestidos para un viaje, comiendo de prisa.", incorrectFeedbackEn: "They ate with loins girded, sandals on, staff in hand — ready to leave Egypt.", incorrectFeedbackEs: "Comieron con los lomos ceñidos, las sandalias puestas y el bordón en la mano — listos para salir de Egipto." },
-    { textEn: "17. What did the Israelites ask from the Egyptians before they left?", textEs: "17. ¿Qué pidieron los israelitas a los egipcios antes de salir?", optionsEn: ["A. Food and water", "B. Articles of silver, gold, and clothing", "C. Weapons", "D. Maps of the wilderness"], optionsEs: ["A. Comida y agua", "B. Objetos de plata, oro y vestidos", "C. Armas", "D. Mapas del desierto"], correct: 1, correctFeedbackEn: "Correct. They plundered Egypt — back wages for 400 years of slavery.", correctFeedbackEs: "Correcto. Despojaron a Egipto — el salario atrasado de 400 años de esclavitud.", incorrectFeedbackEn: "They asked for articles of silver, gold, and clothing — and the Lord gave them favor.", incorrectFeedbackEs: "Pidieron objetos de plata, oro y vestidos — y Jehová les dio gracia." },
-    { textEn: "18. Approximately how many Israelite men (not counting women and children) left Egypt?", textEs: "18. ¿Aproximadamente cuántos hombres israelitas (sin contar mujeres y niños) salieron de Egipto?", optionsEn: ["A. 60,000", "B. 600,000", "C. 6,000", "D. 6 million"], optionsEs: ["A. 60,000", "B. 600,000", "C. 6,000", "D. 6 millones"], correct: 1, correctFeedbackEn: "Yes. About 600,000 men — a logistical miracle of organization and supply.", correctFeedbackEs: "Sí. Unos 600,000 hombres — un milagro logístico de organización y provisión.", incorrectFeedbackEn: "Exodus 12:37 — about six hundred thousand men on foot, besides children.", incorrectFeedbackEs: "Éxodo 12:37 — unos seiscientos mil hombres a pie, sin contar los niños." },
-    { textEn: "19. What did the gold and silver taken from Egypt later become?", textEs: "19. ¿En qué se convirtió después el oro y la plata tomados de Egipto?", optionsEn: ["A. Idols for the people", "B. Given to the poor", "C. Buried in the wilderness", "D. Used to build the tabernacle"], optionsEs: ["A. Ídolos para el pueblo", "B. Dados a los pobres", "C. Enterrados en el desierto", "D. Usados para construir el tabernáculo"], correct: 3, correctFeedbackEn: "Correct. The plunder of Egypt was later used to build the sanctuary for God.", correctFeedbackEs: "Correcto. El despojo de Egipto fue usado después para construir el santuario para Dios.", incorrectFeedbackEn: "The gold and silver were used to construct the tabernacle.", incorrectFeedbackEs: "El oro y la plata fueron usados para construir el tabernáculo." },
-    { textEn: "20. How does the New Testament describe Jesus in relation to the Passover?", textEs: "20. ¿Cómo describe el Nuevo Testamento a Jesús en relación con la Pascua?", optionsEn: ["A. 'Jesus is our Passover lamb'", "B. 'Jesus is the bread of life'", "C. 'Jesus is the light of the world'", "D. 'Jesus is the good shepherd'"], optionsEs: ["A. 'Jesús es nuestro cordero de la Pascua'", "B. 'Jesús es el pan de vida'", "C. 'Jesús es la luz del mundo'", "D. 'Jesús es el buen pastor'"], correct: 0, correctFeedbackEn: "Yes! 1 Corinthians 5:7 — 'Christ, our Passover, was sacrificed for us.'", correctFeedbackEs: "¡Sí! 1 Corintios 5:7 — 'Cristo, nuestra Pascua, fue sacrificado por nosotros.'", incorrectFeedbackEn: "1 Corinthians 5:7 — 'For indeed Christ, our Passover, was sacrificed for us.'", incorrectFeedbackEs: "1 Corintios 5:7 — 'Porque nuestra Pascua, que es Cristo, ya fue sacrificada por nosotros.'" }
-];
-
-const saQuestions = [
-    { id: `sa_u${UNIT}_1`, textEn: "Why did a 'new king who did not know Joseph' arise, and what did he do to oppress Israel?", textEs: "¿Por qué surgió un 'nuevo rey que no conocía a José', y qué hizo para oprimir a Israel?", kw_en: ["new", "dynasty", "arose", "know", "joseph", "threat", "slave", "masters"], kw_es: ["surgió", "nueva", "dinastí", "josé", "amenaza", "amos", "esclavo", "trabajo"], explanationEn: "A new dynasty arose that didn't honor Joseph's legacy. Pharaoh enslaved Israel, ordered male babies killed, but God's blessing continued.", explanationEs: "Surgió una nueva dinastía que no honraba el legado de José. Faraón esclavizó a Israel, ordenó matar a los varones recién nacidos, pero la bendición de Dios continuó." },
-    { id: `sa_u${UNIT}_2`, textEn: "How did God protect Moses as an infant, and what irony is present in the account?", textEs: "¿Cómo protegió Dios a Moisés de bebé, y qué ironía hay en el relato?", kw_en: ["basket", "nile", "pharaoh", "daughte", "compass", "mother", "paid", "irony"], kw_es: ["canasta", "nilo", "hija", "faraón", "compasi", "madre", "pagada", "ironía"], explanationEn: "Moses was hidden in a basket, found by Pharaoh's daughter, and his own mother was paid to nurse him — God's enemy funded His deliverer.", explanationEs: "Moisés fue escondido en una canasta, encontrado por la hija de Faraón, y su propia madre fue pagada para criarlo — el enemigo de Dios financió a su libertador." },
-    { id: `sa_u${UNIT}_3`, textEn: "What did Moses learn during his 40 years as a shepherd in Midian?", textEs: "¿Qué aprendió Moisés durante sus 40 años como pastor en Madián?", kw_en: ["humilit", "patienc", "waiting", "obedien", "shepher", "prepara", "prince", "transfo"], kw_es: ["humil", "pacienc", "espera", "obedien", "pastor", "prepara", "príncip", "transfo"], explanationEn: "God transformed Moses from an impulsive prince into a humble shepherd, teaching him to lead God's people with patience and reliance on God.", explanationEs: "Dios transformó a Moisés de un príncipe impulsivo en un humilde pastor, enseñándole a guiar al pueblo de Dios con paciencia y dependencia de Dios." },
-    { id: `sa_u${UNIT}_4`, textEn: "What is the significance of God telling Moses to remove his sandals at the burning bush?", textEs: "¿Cuál es el significado de que Dios le dijera a Moisés que se quitara las sandalias en la zarza ardiente?", kw_en: ["holy", "ground", "nothing", "separat", "reveren", "presenc", "surrend", "humilit"], kw_es: ["tierra", "santa", "nada", "separe", "reveren", "presenc", "rendici", "humil"], explanationEn: "Sandals represented separation from the holy ground. Removing them meant coming to God with nothing between — total surrender.", explanationEs: "Las sandalias representaban separación de la tierra santa. Quitarlas significaba venir a Dios sin nada de por medio — rendición total." },
-    { id: `sa_u${UNIT}_5`, textEn: "What does 'I AM WHO I AM' (YHWH) reveal about God's nature?", textEs: "¿Qué revela 'YO SOY EL QUE SOY' (YHWH) sobre la naturaleza de Dios?", kw_en: ["self", "existen", "eternal", "unchang", "present", "yahweh", "will", "faithfu"], kw_es: ["existe", "dios", "inmutab", "present", "yahvéh", "mismo", "seré", "fiel"], explanationEn: "God exists in Himself, depends on nothing, and is eternally present. He will be what He will be — faithful to His promises.", explanationEs: "Dios existe en Sí mismo, no depende de nada, y está eternamente presente. Será lo que será — fiel a Sus promesas." },
-    { id: `sa_u${UNIT}_6`, textEn: "List five objections Moses raised to God's call and how God answered each.", textEs: "Enumere cinco objeciones que Moisés planteó al llamado de Dios y cómo Dios respondió a cada una.", kw_en: ["will", "signs", "won", "believe", "eloquen", "send", "someone", "else"], kw_es: ["quién", "soy", "estaré", "creerán", "elocuen", "envía", "otro", "yhwh"], explanationEn: "1. 'Who am I?' → 'I will be with you.' 2. 'They won't believe' → Signs. 3. 'Not eloquent' → 'I made your mouth.' 4. 'Send another' → Aaron. 5. 'Your name?' → YHWH.", explanationEs: "1. '¿Quién soy yo?' → 'Yo estaré contigo.' 2. 'No creerán' → Señales. 3. 'No elocuente' → 'Yo hice tu boca.' 4. 'Envía a otro' → Aarón. 5. '¿Tu nombre?' → YHWH." },
-    { id: `sa_u${UNIT}_7`, textEn: "Explain how the plagues mocked specific Egyptian gods. Give three examples.", textEs: "Explique cómo las plagas se burlaron de dioses egipcios específicos. Dé tres ejemplos.", kw_en: ["nile", "hapi", "frogs", "hequet", "darknes", "water", "hail", "nut"], kw_es: ["nilo", "hapi", "ranas", "hequet", "tiniebl", "agua", "granizo", "nut"], explanationEn: "Water to blood mocked Hapi (Nile god). Frogs mocked Hequet (frog-headed birth goddess). Darkness mocked Ra (sun god).", explanationEs: "Agua en sangre se burló de Hapi (dios del Nilo). Ranas se burlaron de Hequet (diosa del parto con cabeza de rana). Tinieblas se burlaron de Ra (dios del sol)." },
-    { id: `sa_u${UNIT}_8`, textEn: "What were the instructions for the first Passover, and what did the blood signify?", textEs: "¿Cuáles fueron las instrucciones para la primera Pascua, y qué significaba la sangre?", kw_en: ["lamb", "take", "blemish", "blood", "doorpos", "roasted", "fire", "unleave"], kw_es: ["cordero", "sin", "defecto", "sangre", "postes", "asado", "fuego", "pan"], explanationEn: "Take a spotless lamb, kill it, put blood on doorposts. When God saw the blood, He passed over that house — salvation by substitute.", explanationEs: "Tomen un cordero sin mancha, mátenlo, pongan sangre en los postes. Cuando Dios veía la sangre, pasaba por alto esa casa — salvación por sustituto." },
-    { id: `sa_u${UNIT}_9`, textEn: "Why did the Israelites ask for silver, gold, and clothing from the Egyptians? Was this theft?", textEs: "¿Por qué pidieron los israelitas plata, oro y vestidos a los egipcios? ¿Fue esto robo?", kw_en: ["payment", "back", "wages", "400", "years", "slavery", "favor", "provisi"], kw_es: ["pago", "salario", "atrasad", "400", "años", "esclavi", "favor", "provisi"], explanationEn: "It was payment for 400 years of unpaid labor. God gave them favor, and they left with what was rightfully theirs — and later used for the tabernacle.", explanationEs: "Era pago por 400 años de trabajo no remunerado. Dios les dio favor, y salieron con lo que legítimamente les correspondía — y luego usado para el tabernáculo." },
-    { id: `sa_u${UNIT}_10`, textEn: "How does the Passover lamb point forward to Jesus Christ?", textEs: "¿Cómo apunta el cordero pascual hacia Jesucristo?", kw_en: ["lamb", "jesus", "blemish", "blood", "applied", "substit", "john", "1:29"], kw_es: ["cordero", "sin", "defecto", "sangre", "aplicad", "sustitu", "juan", "1:29"], explanationEn: "Jesus is the spotless Lamb whose blood, applied by faith, causes God's judgment to pass over us. Paul explicitly calls Christ 'our Passover lamb.'", explanationEs: "Jesús es el Cordero sin mancha cuya sangre, aplicada por fe, hace que el juicio de Dios pase sobre nosotros. Pablo llama explícitamente a Cristo 'nuestra pascua'." }
-];
+/* CTSPent — unit 6. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "pent",
+ "unit": 6,
+ "totalUnits": 12,
+ "filePrefix": "CTSPent",
+ "prevHref": "CTSPentUnit5.html",
+ "nextHref": "CTSPentUnit7.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "Who did Jesus affirm as the author of Exodus?",
+    "es": "¿A quién afirmó Jesús como autor de Éxodo?"
+   },
+   "options": {
+    "en": [
+     "Moses",
+     "Joshua",
+     "Ezra",
+     "Samuel"
+    ],
+    "es": [
+     "Moisés",
+     "Josué",
+     "Esdras",
+     "Samuel"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct! Jesus quoted Exodus as written by Moses in Mark 7:10.",
+    "es": "¡Correcto! Jesús citó Éxodo como escrito por Moisés en Marcos 7:10."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was the name of the store cities the Israelites built for Pharaoh?",
+    "es": "¿Cuál era el nombre de las ciudades de almacenaje que los israelitas construyeron para Faraón?"
+   },
+   "options": {
+    "en": [
+     "Goshen and Memphis",
+     "Pithom and Rameses",
+     "Thebes and Luxor",
+     "Cairo and Alexandria"
+    ],
+    "es": [
+     "Gosén y Menfis",
+     "Pitom y Ramesés",
+     "Tebas y Luxor",
+     "El Cairo y Alejandría"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Yes. Pithom and Rameses were store cities built with forced Hebrew labor.",
+    "es": "Sí. Pitom y Ramesés eran ciudades de almacenaje construidas con trabajo hebreo forzado."
+   }
+  },
+  {
+   "stem": {
+    "en": "What were the names of the Hebrew midwives who feared God and disobeyed Pharaoh?",
+    "es": "¿Cuáles eran los nombres de las parteras hebreas que temieron a Dios y desobedecieron a Faraón?"
+   },
+   "options": {
+    "en": [
+     "Shiphrah and Puah",
+     "Miriam and Deborah",
+     "Rachel and Leah",
+     "Hannah and Peninnah"
+    ],
+    "es": [
+     "Sifra y Fúa",
+     "Miriam y Débora",
+     "Raquel y Lea",
+     "Ana y Penina"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. Shiphrah and Puah are honored for fearing God more than Pharaoh.",
+    "es": "Correcto. Sifra y Fúa son honradas por temer a Dios más que a Faraón."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does the name 'Moses' mean?",
+    "es": "¿Qué significa el nombre 'Moisés'?"
+   },
+   "options": {
+    "en": [
+     "'Drawn out of the water'",
+     "'Deliverer'",
+     "'Son of Pharaoh'",
+     "'Hebrew prince'"
+    ],
+    "es": [
+     "'Sacado de las aguas'",
+     "'Libertador'",
+     "'Hijo de Faraón'",
+     "'Príncipe hebreo'"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Yes. Pharaoh's daughter said, 'Because I drew him out of the water.'",
+    "es": "Sí. La hija de Faraón dijo: 'Porque de las aguas lo saqué.'"
+   }
+  },
+  {
+   "stem": {
+    "en": "How long did Moses live in Midian as a shepherd before God called him?",
+    "es": "¿Cuánto tiempo vivió Moisés en Madián como pastor antes de que Dios lo llamara?"
+   },
+   "options": {
+    "en": [
+     "10 years",
+     "20 years",
+     "40 years",
+     "80 years"
+    ],
+    "es": [
+     "10 años",
+     "20 años",
+     "40 años",
+     "80 años"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. Moses was 40 when he fled Egypt and 80 when he returned — 40 years in Midian.",
+    "es": "Correcto. Moisés tenía 40 cuando huyó de Egipto y 80 cuando regresó — 40 años en Madián."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did God tell Moses to remove before approaching the burning bush?",
+    "es": "¿Qué le dijo Dios a Moisés que se quitara antes de acercarse a la zarza ardiente?"
+   },
+   "options": {
+    "en": [
+     "His cloak",
+     "His staff",
+     "His sandals",
+     "His head covering"
+    ],
+    "es": [
+     "Su manto",
+     "Su vara",
+     "Sus sandalias",
+     "Su cubierta de cabeza"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Yes. 'Take your sandals off your feet, for the place where you stand is holy ground.'",
+    "es": "Sí. 'Quita las sandalias de tus pies, porque el lugar en que tú estás, tierra santa es.'"
+   }
+  },
+  {
+   "stem": {
+    "en": "What does the name 'I AM' (YHWH) signify about God?",
+    "es": "¿Qué significa el nombre 'YO SOY' (YHWH) acerca de Dios?"
+   },
+   "options": {
+    "en": [
+     "God changes over time",
+     "God is only a God of the past",
+     "God is unknowable",
+     "God's self-existence and eternal presence"
+    ],
+    "es": [
+     "Dios cambia con el tiempo",
+     "Dios es solo un Dios del pasado",
+     "Dios es incognoscible",
+     "La autoexistencia de Dios y Su presencia eterna"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. 'Ehyeh Asher Ehyeh' — 'I will be who I will be' — speaks to God's self-existence.",
+    "es": "Correcto. 'Ehyeh Asher Ehyeh' — 'Seré el que seré' — habla de la autoexistencia de Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was Moses' first objection when God called him?",
+    "es": "¿Cuál fue la primera objeción de Moisés cuando Dios lo llamó?"
+   },
+   "options": {
+    "en": [
+     "'I am too old'",
+     "'Who am I that I should go to Pharaoh?'",
+     "'The people won't listen'",
+     "'I don't know the way'"
+    ],
+    "es": [
+     "'Soy demasiado viejo'",
+     "'¿Quién soy yo para que vaya a Faraón?'",
+     "'El pueblo no escuchará'",
+     "'No conozco el camino'"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Yes. Moses asked, 'Who am I?' — focusing on his own inadequacy rather than God's power.",
+    "es": "Sí. Moisés preguntó: '¿Quién soy yo?' — enfocándose en su propia insuficiencia en vez del poder de Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "Which plague turned the Nile River into blood?",
+    "es": "¿Qué plaga convirtió el río Nilo en sangre?"
+   },
+   "options": {
+    "en": [
+     "First plague",
+     "Third plague",
+     "Fifth plague",
+     "Seventh plague"
+    ],
+    "es": [
+     "Primera plaga",
+     "Tercera plaga",
+     "Quinta plaga",
+     "Séptima plaga"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. The first plague was water turned to blood, mocking Hapi, the Nile god.",
+    "es": "Correcto. La primera plaga fue el agua convertida en sangre, burlándose de Hapi, el dios del Nilo."
+   }
+  },
+  {
+   "stem": {
+    "en": "Which Egyptian goddess with a frog's head was mocked by the second plague?",
+    "es": "¿Cuál diosa egipcia con cabeza de rana fue objeto de burla por la segunda plaga?"
+   },
+   "options": {
+    "en": [
+     "Isis",
+     "Hathor",
+     "Hequet",
+     "Sekhmet"
+    ],
+    "es": [
+     "Isis",
+     "Hathor",
+     "Hequet",
+     "Sekhmet"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Yes. Hequet, the frog-headed goddess of birth, was powerless against the Lord.",
+    "es": "Sí. Hequet, la diosa del nacimiento con cabeza de rana, fue impotente ante Jehová."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was the ninth plague?",
+    "es": "¿Cuál fue la novena plaga?"
+   },
+   "options": {
+    "en": [
+     "Hail",
+     "Locusts",
+     "Darkness",
+     "Death of firstborn"
+    ],
+    "es": [
+     "Granizo",
+     "Langostas",
+     "Tinieblas",
+     "Muerte de los primogénitos"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. Darkness for three days — mocking Ra and Horus, the sun gods.",
+    "es": "Correcto. Tinieblas por tres días — burlándose de Ra y Horus, los dioses del sol."
+   }
+  },
+  {
+   "stem": {
+    "en": "Each plague was designed to do what?",
+    "es": "¿Para qué fue diseñada cada plaga?"
+   },
+   "options": {
+    "en": [
+     "Make Pharaoh angry",
+     "Destroy Egypt completely",
+     "Test the Israelites' faith",
+     "Mock the gods of Egypt and show the Lord alone is God"
+    ],
+    "es": [
+     "Para enojar a Faraón",
+     "Para destruir Egipto por completo",
+     "Para probar la fe de los israelitas",
+     "Para burlarse de los dioses de Egipto y mostrar que solo Jehová es Dios"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Yes. Every plague was an attack on specific Egyptian deities, proving their impotence.",
+    "es": "Sí. Cada plaga fue un ataque contra deidades egipcias específicas, probando su impotencia."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was the final plague that broke Pharaoh's resistance?",
+    "es": "¿Cuál fue la última plaga que quebrantó la resistencia de Faraón?"
+   },
+   "options": {
+    "en": [
+     "Darkness",
+     "Locusts",
+     "Death of the firstborn",
+     "Boils"
+    ],
+    "es": [
+     "Tinieblas",
+     "Langostas",
+     "Muerte de los primogénitos",
+     "Úlceras"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. The death of every firstborn — from Pharaoh's son to the captive's son.",
+    "es": "Correcto. La muerte de todo primogénito — desde el hijo de Faraón hasta el hijo del cautivo."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did the Israelites put on their doorposts to be spared from the tenth plague?",
+    "es": "¿Qué pusieron los israelitas en los postes de sus puertas para ser librados de la décima plaga?"
+   },
+   "options": {
+    "en": [
+     "Olive branches",
+     "A sign with God's name",
+     "Bitter herbs",
+     "The blood of the Passover lamb"
+    ],
+    "es": [
+     "Ramas de olivo",
+     "Una señal con el nombre de Dios",
+     "Hierbas amargas",
+     "La sangre del cordero de la Pascua"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Yes. 'When I see the blood, I will pass over you.' Not their goodness — the blood alone.",
+    "es": "Sí. 'Cuando yo vea la sangre, pasaré de vosotros.' No su bondad — solo la sangre."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Passover lamb had to be without what?",
+    "es": "El cordero de la Pascua tenía que ser sin qué?"
+   },
+   "options": {
+    "en": [
+     "Spots",
+     "Blemish or defect",
+     "Horns",
+     "Wool"
+    ],
+    "es": [
+     "Manchas",
+     "Defecto o mancha",
+     "Cuernos",
+     "Lana"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. A male without blemish — foreshadowing Christ, the spotless Lamb.",
+    "es": "Correcto. Un macho sin defecto — prefigurando a Cristo, el Cordero sin mancha."
+   }
+  },
+  {
+   "stem": {
+    "en": "How were the Israelites to eat the Passover meal?",
+    "es": "¿Cómo debían comer los israelitas la comida de la Pascua?"
+   },
+   "options": {
+    "en": [
+     "Slowly and leisurely",
+     "Sitting at a table",
+     "Alone in their rooms",
+     "With loins girded, sandals on, staff in hand — in haste"
+    ],
+    "es": [
+     "Lenta y tranquilamente",
+     "Sentados a la mesa",
+     "Solos en sus habitaciones",
+     "Con los lomos ceñidos, las sandalias puestas, el bordón en la mano — de prisa"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Yes. They were ready to leave — dressed for a journey, eating in haste.",
+    "es": "Sí. Estaban listos para salir — vestidos para un viaje, comiendo de prisa."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did the Israelites ask from the Egyptians before they left?",
+    "es": "¿Qué pidieron los israelitas a los egipcios antes de salir?"
+   },
+   "options": {
+    "en": [
+     "Food and water",
+     "Articles of silver, gold, and clothing",
+     "Weapons",
+     "Maps of the wilderness"
+    ],
+    "es": [
+     "Comida y agua",
+     "Objetos de plata, oro y vestidos",
+     "Armas",
+     "Mapas del desierto"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. They plundered Egypt — back wages for 400 years of slavery.",
+    "es": "Correcto. Despojaron a Egipto — el salario atrasado de 400 años de esclavitud."
+   }
+  },
+  {
+   "stem": {
+    "en": "Approximately how many Israelite men (not counting women and children) left Egypt?",
+    "es": "¿Aproximadamente cuántos hombres israelitas (sin contar mujeres y niños) salieron de Egipto?"
+   },
+   "options": {
+    "en": [
+     "60,000",
+     "600,000",
+     "6,000",
+     "6 million"
+    ],
+    "es": [
+     "60,000",
+     "600,000",
+     "6,000",
+     "6 millones"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Yes. About 600,000 men — a logistical miracle of organization and supply.",
+    "es": "Sí. Unos 600,000 hombres — un milagro logístico de organización y provisión."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did the gold and silver taken from Egypt later become?",
+    "es": "¿En qué se convirtió después el oro y la plata tomados de Egipto?"
+   },
+   "options": {
+    "en": [
+     "Idols for the people",
+     "Given to the poor",
+     "Buried in the wilderness",
+     "Used to build the tabernacle"
+    ],
+    "es": [
+     "Ídolos para el pueblo",
+     "Dados a los pobres",
+     "Enterrados en el desierto",
+     "Usados para construir el tabernáculo"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. The plunder of Egypt was later used to build the sanctuary for God.",
+    "es": "Correcto. El despojo de Egipto fue usado después para construir el santuario para Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "How does the New Testament describe Jesus in relation to the Passover?",
+    "es": "¿Cómo describe el Nuevo Testamento a Jesús en relación con la Pascua?"
+   },
+   "options": {
+    "en": [
+     "'Jesus is our Passover lamb'",
+     "'Jesus is the bread of life'",
+     "'Jesus is the light of the world'",
+     "'Jesus is the good shepherd'"
+    ],
+    "es": [
+     "'Jesús es nuestro cordero de la Pascua'",
+     "'Jesús es el pan de vida'",
+     "'Jesús es la luz del mundo'",
+     "'Jesús es el buen pastor'"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Yes! 1 Corinthians 5:7 — 'Christ, our Passover, was sacrificed for us.'",
+    "es": "¡Sí! 1 Corintios 5:7 — 'Cristo, nuestra Pascua, fue sacrificado por nosotros.'"
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Why did a 'new king who did not know Joseph' arise, and what did he do to oppress Israel?",
+    "es": "¿Por qué surgió un 'nuevo rey que no conocía a José', y qué hizo para oprimir a Israel?"
+   },
+   "keywords": {
+    "en": [
+     "new",
+     "dynasty",
+     "arose",
+     "know",
+     "joseph",
+     "threat",
+     "slave",
+     "masters"
+    ],
+    "es": [
+     "surgió",
+     "nueva",
+     "dinastí",
+     "josé",
+     "amenaza",
+     "amos",
+     "esclavo",
+     "trabajo"
+    ]
+   },
+   "model": {
+    "en": "A new dynasty arose that didn't honor Joseph's legacy. Pharaoh enslaved Israel, ordered male babies killed, but God's blessing continued.",
+    "es": "Surgió una nueva dinastía que no honraba el legado de José. Faraón esclavizó a Israel, ordenó matar a los varones recién nacidos, pero la bendición de Dios continuó."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How did God protect Moses as an infant, and what irony is present in the account?",
+    "es": "¿Cómo protegió Dios a Moisés de bebé, y qué ironía hay en el relato?"
+   },
+   "keywords": {
+    "en": [
+     "basket",
+     "nile",
+     "pharaoh",
+     "daughte",
+     "compass",
+     "mother",
+     "paid",
+     "irony"
+    ],
+    "es": [
+     "canasta",
+     "nilo",
+     "hija",
+     "faraón",
+     "compasi",
+     "madre",
+     "pagada",
+     "ironía"
+    ]
+   },
+   "model": {
+    "en": "Moses was hidden in a basket, found by Pharaoh's daughter, and his own mother was paid to nurse him — God's enemy funded His deliverer.",
+    "es": "Moisés fue escondido en una canasta, encontrado por la hija de Faraón, y su propia madre fue pagada para criarlo — el enemigo de Dios financió a su libertador."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What did Moses learn during his 40 years as a shepherd in Midian?",
+    "es": "¿Qué aprendió Moisés durante sus 40 años como pastor en Madián?"
+   },
+   "keywords": {
+    "en": [
+     "humilit",
+     "patienc",
+     "waiting",
+     "obedien",
+     "shepher",
+     "prepara",
+     "prince",
+     "transfo"
+    ],
+    "es": [
+     "humil",
+     "pacienc",
+     "espera",
+     "obedien",
+     "pastor",
+     "prepara",
+     "príncip",
+     "transfo"
+    ]
+   },
+   "model": {
+    "en": "God transformed Moses from an impulsive prince into a humble shepherd, teaching him to lead God's people with patience and reliance on God.",
+    "es": "Dios transformó a Moisés de un príncipe impulsivo en un humilde pastor, enseñándole a guiar al pueblo de Dios con paciencia y dependencia de Dios."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What is the significance of God telling Moses to remove his sandals at the burning bush?",
+    "es": "¿Cuál es el significado de que Dios le dijera a Moisés que se quitara las sandalias en la zarza ardiente?"
+   },
+   "keywords": {
+    "en": [
+     "holy",
+     "ground",
+     "nothing",
+     "separat",
+     "reveren",
+     "presenc",
+     "surrend",
+     "humilit"
+    ],
+    "es": [
+     "tierra",
+     "santa",
+     "nada",
+     "separe",
+     "reveren",
+     "presenc",
+     "rendici",
+     "humil"
+    ]
+   },
+   "model": {
+    "en": "Sandals represented separation from the holy ground. Removing them meant coming to God with nothing between — total surrender.",
+    "es": "Las sandalias representaban separación de la tierra santa. Quitarlas significaba venir a Dios sin nada de por medio — rendición total."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does 'I AM WHO I AM' (YHWH) reveal about God's nature?",
+    "es": "¿Qué revela 'YO SOY EL QUE SOY' (YHWH) sobre la naturaleza de Dios?"
+   },
+   "keywords": {
+    "en": [
+     "self",
+     "existen",
+     "eternal",
+     "unchang",
+     "present",
+     "yahweh",
+     "will",
+     "faithfu"
+    ],
+    "es": [
+     "existe",
+     "dios",
+     "inmutab",
+     "present",
+     "yahvéh",
+     "mismo",
+     "seré",
+     "fiel"
+    ]
+   },
+   "model": {
+    "en": "God exists in Himself, depends on nothing, and is eternally present. He will be what He will be — faithful to His promises.",
+    "es": "Dios existe en Sí mismo, no depende de nada, y está eternamente presente. Será lo que será — fiel a Sus promesas."
+   }
+  },
+  {
+   "prompt": {
+    "en": "List five objections Moses raised to God's call and how God answered each.",
+    "es": "Enumere cinco objeciones que Moisés planteó al llamado de Dios y cómo Dios respondió a cada una."
+   },
+   "keywords": {
+    "en": [
+     "will",
+     "signs",
+     "won",
+     "believe",
+     "eloquen",
+     "send",
+     "someone",
+     "else"
+    ],
+    "es": [
+     "quién",
+     "soy",
+     "estaré",
+     "creerán",
+     "elocuen",
+     "envía",
+     "otro",
+     "yhwh"
+    ]
+   },
+   "model": {
+    "en": "1. 'Who am I?' → 'I will be with you.' 2. 'They won't believe' → Signs. 3. 'Not eloquent' → 'I made your mouth.' 4. 'Send another' → Aaron. 5. 'Your name?' → YHWH.",
+    "es": "1. '¿Quién soy yo?' → 'Yo estaré contigo.' 2. 'No creerán' → Señales. 3. 'No elocuente' → 'Yo hice tu boca.' 4. 'Envía a otro' → Aarón. 5. '¿Tu nombre?' → YHWH."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain how the plagues mocked specific Egyptian gods. Give three examples.",
+    "es": "Explique cómo las plagas se burlaron de dioses egipcios específicos. Dé tres ejemplos."
+   },
+   "keywords": {
+    "en": [
+     "nile",
+     "hapi",
+     "frogs",
+     "hequet",
+     "darknes",
+     "water",
+     "hail",
+     "nut"
+    ],
+    "es": [
+     "nilo",
+     "hapi",
+     "ranas",
+     "hequet",
+     "tiniebl",
+     "agua",
+     "granizo",
+     "nut"
+    ]
+   },
+   "model": {
+    "en": "Water to blood mocked Hapi (Nile god). Frogs mocked Hequet (frog-headed birth goddess). Darkness mocked Ra (sun god).",
+    "es": "Agua en sangre se burló de Hapi (dios del Nilo). Ranas se burlaron de Hequet (diosa del parto con cabeza de rana). Tinieblas se burlaron de Ra (dios del sol)."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What were the instructions for the first Passover, and what did the blood signify?",
+    "es": "¿Cuáles fueron las instrucciones para la primera Pascua, y qué significaba la sangre?"
+   },
+   "keywords": {
+    "en": [
+     "lamb",
+     "take",
+     "blemish",
+     "blood",
+     "doorpos",
+     "roasted",
+     "fire",
+     "unleave"
+    ],
+    "es": [
+     "cordero",
+     "sin",
+     "defecto",
+     "sangre",
+     "postes",
+     "asado",
+     "fuego",
+     "pan"
+    ]
+   },
+   "model": {
+    "en": "Take a spotless lamb, kill it, put blood on doorposts. When God saw the blood, He passed over that house — salvation by substitute.",
+    "es": "Tomen un cordero sin mancha, mátenlo, pongan sangre en los postes. Cuando Dios veía la sangre, pasaba por alto esa casa — salvación por sustituto."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why did the Israelites ask for silver, gold, and clothing from the Egyptians? Was this theft?",
+    "es": "¿Por qué pidieron los israelitas plata, oro y vestidos a los egipcios? ¿Fue esto robo?"
+   },
+   "keywords": {
+    "en": [
+     "payment",
+     "back",
+     "wages",
+     "400",
+     "years",
+     "slavery",
+     "favor",
+     "provisi"
+    ],
+    "es": [
+     "pago",
+     "salario",
+     "atrasad",
+     "400",
+     "años",
+     "esclavi",
+     "favor",
+     "provisi"
+    ]
+   },
+   "model": {
+    "en": "It was payment for 400 years of unpaid labor. God gave them favor, and they left with what was rightfully theirs — and later used for the tabernacle.",
+    "es": "Era pago por 400 años de trabajo no remunerado. Dios les dio favor, y salieron con lo que legítimamente les correspondía — y luego usado para el tabernáculo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How does the Passover lamb point forward to Jesus Christ?",
+    "es": "¿Cómo apunta el cordero pascual hacia Jesucristo?"
+   },
+   "keywords": {
+    "en": [
+     "lamb",
+     "jesus",
+     "blemish",
+     "blood",
+     "applied",
+     "substit",
+     "john",
+     "1:29"
+    ],
+    "es": [
+     "cordero",
+     "sin",
+     "defecto",
+     "sangre",
+     "aplicad",
+     "sustitu",
+     "juan",
+     "1:29"
+    ]
+   },
+   "model": {
+    "en": "Jesus is the spotless Lamb whose blood, applied by faith, causes God's judgment to pass over us. Paul explicitly calls Christ 'our Passover lamb.'",
+    "es": "Jesús es el Cordero sin mancha cuya sangre, aplicada por fe, hace que el juicio de Dios pase sobre nosotros. Pablo llama explícitamente a Cristo 'nuestra pascua'."
+   }
+  }
+ ]
+};

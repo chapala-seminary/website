@@ -1,0 +1,755 @@
+/* CTSCH — unit 2. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "ch",
+ "unit": 2,
+ "totalUnits": 10,
+ "filePrefix": "CTSCH",
+ "prevHref": "CTSCHUnit1.html",
+ "nextHref": "CTSCHUnit3.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "Who were the Apostolic Fathers?",
+    "es": "¿Quiénes fueron los Padres Apostólicos?"
+   },
+   "options": {
+    "en": [
+     "Leaders of Christianity after the Apostles, who were reputed to have known the Apostles and who produced highly valued writings",
+     "2nd & 3rd Century Christian scholars who produced comprehensive theological explanations",
+     "Intellectual Christians who defended the Church against false charges",
+     "The Apostles whom Jesus had trained to lead the Church"
+    ],
+    "es": [
+     "Líderes del cristianismo después de los apóstoles, que se reputaban haber conocido a los apóstoles y que produjeron escritos muy valorados",
+     "Eruditos cristianos del 2do y 3er siglo que produjeron explicaciones teológicas comprensivas",
+     "Cristianos intelectuales que defendieron a la iglesia contra acusaciones falsas",
+     "Los apóstoles que Jesús había entrenado para liderar la iglesia"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The Apostolic Fathers were leaders of the late 1st and early 2nd centuries who had personally known or been directly influenced by the apostles. Their writings (like 1 Clement, the letters of Ignatius, the writings of Polycarp, the Didache) bridge the New Testament and later theology.",
+    "es": "Los Padres Apostólicos fueron líderes de finales del 1er y principios del 2do siglo que habían conocido personalmente o sido influenciados directamente por los apóstoles. Sus escritos (como 1 Clemente, las cartas de Ignacio, los escritos de Policarpo, la Didaché) hacen puente entre el Nuevo Testamento y la teología posterior."
+   }
+  },
+  {
+   "stem": {
+    "en": "Who were the Christian Apologists?",
+    "es": "¿Quiénes fueron los Apologistas cristianos?"
+   },
+   "options": {
+    "en": [
+     "2nd & 3rd Century Christian scholars who began to produce more comprehensive theological explanations and defended the Church before pagan culture",
+     "Leaders who had known the Apostles and produced highly valued writings",
+     "Christians who apologized for the persecutions",
+     "The Apostles whom Jesus had trained to lead the Church"
+    ],
+    "es": [
+     "Eruditos cristianos del 2do y 3er siglo que comenzaron a producir explicaciones teológicas más comprensivas y defendieron a la iglesia ante la cultura pagana",
+     "Líderes que habían conocido a los apóstoles y produjeron escritos muy valorados",
+     "Cristianos que se disculparon por las persecuciones",
+     "Los apóstoles que Jesús había entrenado para liderar la iglesia"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The Apologists were intellectually trained Christians who defended the faith before pagan emperors and elites. Justin Martyr, Tertullian, and Irenaeus are the major figures. They produced theological explanations that countered both pagan slander and emerging heresy.",
+    "es": "Los Apologistas fueron cristianos intelectualmente entrenados que defendieron la fe ante emperadores paganos y élites. Justino Mártir, Tertuliano, e Ireneo son las figuras principales. Produjeron explicaciones teológicas que contrarrestaron tanto la calumnia pagana como la herejía emergente."
+   }
+  },
+  {
+   "stem": {
+    "en": "Who started the first non-Jewish persecution of Christians, and why?",
+    "es": "¿Quién comenzó la primera persecución no judía de los cristianos, y por qué?"
+   },
+   "options": {
+    "en": [
+     "Pontius Pilate, to quell violence after Jesus was crucified",
+     "The Emperor Decius, because he wanted to suppress Christianity and revive the old gods",
+     "The idol-makers and pagan worshippers of Ephesus",
+     "The Emperor Nero, to deflect blame for the burning of Rome"
+    ],
+    "es": [
+     "Poncio Pilato, para sofocar violencia después de la crucifixión de Jesús",
+     "El Emperador Decio, porque quería suprimir el cristianismo y revivir a los antiguos dioses",
+     "Los fabricantes de ídolos y adoradores paganos de Éfeso",
+     "El Emperador Nerón, para desviar la culpa del incendio de Roma"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Nero blamed Christians for the AD 64 fire of Rome to deflect blame from himself. Tacitus records that he had Christians wrapped in animal skins and torn by dogs, crucified, or burned to light his garden parties. Peter and Paul almost certainly died in this Neronian persecution.",
+    "es": "Nerón culpó a los cristianos por el incendio de Roma del 64 d.C. para desviar la culpa de sí mismo. Tácito registra que hizo envolver a cristianos en pieles de animales y desgarrar por perros, crucificarlos, o quemarlos para iluminar sus fiestas de jardín. Pedro y Pablo casi con certeza murieron en esa persecución neroniana."
+   }
+  },
+  {
+   "stem": {
+    "en": "Why did Roman citizens generally dislike Christians and their religion? (Pick the most complete answer.)",
+    "es": "¿Por qué a los ciudadanos romanos generalmente les disgustaban los cristianos y su religión? (Escoja la respuesta más completa.)"
+   },
+   "options": {
+    "en": [
+     "Christians refused emperor worship, were rumored to commit incest at love feasts and cannibalism at the Eucharist, and were thought to anger the Roman gods",
+     "Christians had too much political power",
+     "Christians charged too much for baptism",
+     "Christians spoke only in Greek"
+    ],
+    "es": [
+     "Los cristianos rechazaban la adoración al emperador, se rumoreaba que cometían incesto en las ágapes y canibalismo en la Eucaristía, y se pensaba que enojaban a los dioses romanos",
+     "Los cristianos tenían demasiado poder político",
+     "Los cristianos cobraban demasiado por el bautismo",
+     "Los cristianos hablaban solo en griego"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Christians were called 'atheists' for refusing the gods, 'incestuous' because of misunderstood love feasts, 'cannibals' because of misunderstood Eucharist language, and were blamed when the gods seemed angry. All four reasons appear in the TH1 scope.",
+    "es": "A los cristianos se les llamaba «ateos» por rechazar a los dioses, «incestuosos» por las ágapes mal entendidas, «caníbales» por el lenguaje eucarístico mal entendido, y se les culpaba cuando los dioses parecían enojados. Las cuatro razones aparecen en el alcance de TH1."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is the definition of 'heresy'?",
+    "es": "¿Cuál es la definición de «herejía»?"
+   },
+   "options": {
+    "en": [
+     "A formal denial or doubt of a core doctrine of the Christian faith",
+     "Claiming to believe the Christian faith but not living according to Christ's instructions",
+     "Being unwilling to make a commitment to the Christian faith",
+     "Worshipping false gods or idols"
+    ],
+    "es": [
+     "Una negación o duda formal de una doctrina central de la fe cristiana",
+     "Afirmar creer en la fe cristiana pero no vivir según las instrucciones de Cristo",
+     "No estar dispuesto a hacer un compromiso con la fe cristiana",
+     "Adorar a falsos dioses o ídolos"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Heresy is the formal denial of a core doctrine of the faith — not honest disagreement on minor matters, but the rejection or fundamental distortion of something the church has always believed. The Greek root means 'choice' — the choice to pick a piece of truth and exalt it above the whole.",
+    "es": "La herejía es la negación formal de una doctrina central de la fe — no el desacuerdo honesto en asuntos menores, sino el rechazo o la distorsión fundamental de algo que la iglesia siempre ha creído. La raíz griega significa «elección» — la elección de tomar una pieza de la verdad y exaltarla por encima del todo."
+   }
+  },
+  {
+   "stem": {
+    "en": "Why did a number of Christian heresies arise in the 2nd Century?",
+    "es": "¿Por qué surgieron varias herejías cristianas en el 2do siglo?"
+   },
+   "options": {
+    "en": [
+     "Aggressive proselytizing by Roman pagans confused Christians",
+     "It was after the death of the apostles but before the New Testament canon was formed and theology had been clearly set",
+     "Persian invasions brought Eastern ideas",
+     "Conflicts between Roman Catholicism and Eastern Orthodoxy caused confusion"
+    ],
+    "es": [
+     "El prosélito agresivo de los paganos romanos confundió a los cristianos",
+     "Era después de la muerte de los apóstoles pero antes de que el canon del Nuevo Testamento se formara y la teología se estableciera claramente",
+     "Las invasiones persas trajeron ideas orientales",
+     "Los conflictos entre el catolicismo romano y la ortodoxia oriental causaron confusión"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The 2nd century was the perfect window for heresy: apostles dead so first-hand correction was impossible, NT canon not yet collected so disputes were harder to settle, theology not yet articulated so any clever new framework could find an audience.",
+    "es": "El 2do siglo fue la ventana perfecta para la herejía: apóstoles muertos por lo que la corrección de primera mano era imposible, el canon del NT aún no recopilado así que las disputas eran más difíciles de resolver, la teología aún no articulada así que cualquier marco nuevo y astuto podía encontrar audiencia."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was the heresy of Gnosticism?",
+    "es": "¿Cuál fue la herejía del gnosticismo?"
+   },
+   "options": {
+    "en": [
+     "The belief that Gentiles had to be circumcised to become Christians",
+     "The belief that the physical world was evil & the spiritual world good, and that secret mystical knowledge was the key to salvation",
+     "The belief that Jesus was a created being and not co-eternal with the Father",
+     "A prophetic movement claiming new ecstatic revelations from the Holy Spirit"
+    ],
+    "es": [
+     "La creencia de que los gentiles tenían que ser circuncidados para convertirse en cristianos",
+     "La creencia de que el mundo físico era malo y el mundo espiritual bueno, y que el conocimiento místico secreto era la clave de la salvación",
+     "La creencia de que Jesús era un ser creado y no co-eterno con el Padre",
+     "Un movimiento profético que afirmaba nuevas revelaciones extáticas del Espíritu Santo"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Gnosticism taught radical dualism: spirit good, matter evil. Salvation came through secret 'gnosis' — knowledge — that freed the divine spark from the material body. Most Gnostics were also Docetists who said Christ only seemed to have a body, undermining incarnation, creation, and bodily resurrection.",
+    "es": "El gnosticismo enseñaba dualismo radical: espíritu bueno, materia mala. La salvación venía mediante el «gnosis» secreto — conocimiento — que liberaba la chispa divina del cuerpo material. La mayoría de los gnósticos también eran docetistas que decían que Cristo solo parecía tener un cuerpo, socavando la encarnación, la creación, y la resurrección corporal."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was the heresy of Montanism?",
+    "es": "¿Cuál fue la herejía del montanismo?"
+   },
+   "options": {
+    "en": [
+     "The belief that Gentiles had to be circumcised to become Christians",
+     "The belief that the physical world was evil and salvation was through secret knowledge",
+     "The belief that Jesus was a created being and not co-eternal with the Father",
+     "A prophetic movement claiming new and ecstatic revelations from the Holy Spirit that superseded all else"
+    ],
+    "es": [
+     "La creencia de que los gentiles tenían que ser circuncidados para convertirse en cristianos",
+     "La creencia de que el mundo físico era malo y la salvación era mediante conocimiento secreto",
+     "La creencia de que Jesús era un ser creado y no co-eterno con el Padre",
+     "Un movimiento profético que afirmaba nuevas y extáticas revelaciones del Espíritu Santo que suplantaban todo lo demás"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Montanism (the 'New Prophecy') taught that the Spirit was speaking new revelations through Montanus and his prophetesses Priscilla and Maximilla, effectively superseding the apostolic deposit just as the New Testament canon was being collected.",
+    "es": "El montanismo (la «Nueva Profecía») enseñaba que el Espíritu hablaba nuevas revelaciones a través de Montano y sus profetisas Priscila y Maximila, suplantando efectivamente el depósito apostólico justo cuando el canon del Nuevo Testamento estaba siendo recopilado."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was the heresy of Marcionism?",
+    "es": "¿Cuál fue la herejía del marcionismo?"
+   },
+   "options": {
+    "en": [
+     "The belief that the physical world was evil and salvation was through secret knowledge",
+     "The rejection of the entire Old Testament and most of the New Testament, keeping only an edited Luke and ten Pauline letters",
+     "The belief that Jesus was a created being and not co-eternal with the Father",
+     "A prophetic movement claiming new ecstatic revelations"
+    ],
+    "es": [
+     "La creencia de que el mundo físico era malo y la salvación era mediante conocimiento secreto",
+     "El rechazo del Antiguo Testamento entero y la mayoría del Nuevo Testamento, conservando solo un Lucas editado y diez cartas paulinas",
+     "La creencia de que Jesús era un ser creado y no co-eterno con el Padre",
+     "Un movimiento profético que afirmaba nuevas revelaciones extáticas"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Marcion of Sinope (c. 140) rejected the OT entirely, claiming the OT God of judgment was different from Jesus's Father. He kept an edited Luke and ten edited Pauline letters as his canon. The church excommunicated him in 144, but his heretical canon forced the orthodox church to start defining its own canon.",
+    "es": "Marción de Sínope (c. 140) rechazó el AT entero, afirmando que el Dios del AT del juicio era diferente del Padre de Jesús. Conservó un Lucas editado y diez cartas paulinas editadas como su canon. La iglesia lo excomulgó en el 144, pero su canon herético obligó a la iglesia ortodoxa a comenzar a definir su propio canon."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is meant by the 'Biblical Canon'?",
+    "es": "¿Qué significa el «canon bíblico»?"
+   },
+   "options": {
+    "en": [
+     "The Christian legal system created by the Imperial Church after Constantine",
+     "The books Christians consider divinely inspired and rightly included as part of the Christian Bible",
+     "The yardstick by which Christians evaluate non-believers",
+     "The books of the Apocrypha accepted by Roman Catholics"
+    ],
+    "es": [
+     "El sistema legal cristiano creado por la iglesia imperial después de Constantino",
+     "Los libros que los cristianos consideran inspirados divinamente y correctamente incluidos como parte de la Biblia cristiana",
+     "El criterio por el cual los cristianos evalúan a los no creyentes",
+     "Los libros de los apócrifos aceptados por los católicos romanos"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The biblical canon is the collection of books recognized as divinely inspired Scripture. The principle is apostolic origin: a book was Scripture if written by an apostle or under direct apostolic authority, and if the church everywhere had received it. The church did not create the canon; she recognized it.",
+    "es": "El canon bíblico es la colección de libros reconocidos como Escritura divinamente inspirada. El principio es el origen apostólico: un libro era Escritura si fue escrito por un apóstol o bajo autoridad apostólica directa, y si la iglesia en todas partes lo había recibido. La iglesia no creó el canon; lo reconoció."
+   }
+  },
+  {
+   "stem": {
+    "en": "How did the heretic Marcion influence development of the New Testament canon?",
+    "es": "¿Cómo influyó el hereje Marción en el desarrollo del canon del Nuevo Testamento?"
+   },
+   "options": {
+    "en": [
+     "By insisting only on John's Gospel as authoritative",
+     "By rejecting all of Paul's letters",
+     "By proposing his own heretical canon, he forced the orthodox Church to start defining its own canon publicly",
+     "By insisting only the Old Testament was canonical"
+    ],
+    "es": [
+     "Al insistir solo en el Evangelio de Juan como autoritativo",
+     "Al rechazar todas las cartas de Pablo",
+     "Al proponer su propio canon herético, obligó a la iglesia ortodoxa a comenzar a definir públicamente su propio canon",
+     "Al insistir en que solo el Antiguo Testamento era canónico"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Marcion's heretical canon of 144 (edited Luke + ten edited Pauline letters, OT rejected) was the first published Christian canon. The orthodox church responded with its own list. The Muratorian Fragment of c. 170 lists most of the books we now have. Marcion's heresy accelerated the canonization process.",
+    "es": "El canon herético de Marción del 144 (Lucas editado + diez cartas paulinas editadas, AT rechazado) fue el primer canon cristiano publicado. La iglesia ortodoxa respondió con su propia lista. El Fragmento Muratoriano de c. 170 enumera la mayoría de los libros que ahora tenemos. La herejía de Marción aceleró el proceso de canonización."
+   }
+  },
+  {
+   "stem": {
+    "en": "Who were the 'confessors' and why were they important?",
+    "es": "¿Quiénes fueron los «confesores» y por qué fueron importantes?"
+   },
+   "options": {
+    "en": [
+     "Jews persecuted in Jerusalem who confessed Jesus as Messiah",
+     "Those willing to confess belief in old Roman gods to escape persecution",
+     "Authors of the Nicene Creed",
+     "Christians who withstood torture and persecution under Decius and Valerian without recanting, and so were revered as spiritual leaders"
+    ],
+    "es": [
+     "Judíos perseguidos en Jerusalén que confesaron a Jesús como Mesías",
+     "Aquellos dispuestos a confesar creencia en los antiguos dioses romanos para escapar de la persecución",
+     "Autores del Credo Niceno",
+     "Cristianos que soportaron tortura y persecución bajo Decio y Valeriano sin retractarse, y así fueron reverenciados como líderes espirituales"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The confessors refused the libellus, were tortured, but survived without recanting. They became living relics of the church's faithfulness, revered as spiritual authorities for the rest of their lives — distinct from the martyrs (who died) and the lapsi (who gave in).",
+    "es": "Los confesores rechazaron el libellus, fueron torturados, pero sobrevivieron sin retractarse. Se convirtieron en reliquias vivientes de la fidelidad de la iglesia, reverenciados como autoridades espirituales por el resto de sus vidas — distintos de los mártires (que murieron) y los lapsi (que cedieron)."
+   }
+  },
+  {
+   "stem": {
+    "en": "What unique problem did the Church have to face after the persecutions of Decius and Valerian?",
+    "es": "¿Qué problema único tuvo la iglesia que enfrentar después de las persecuciones de Decio y Valeriano?"
+   },
+   "options": {
+    "en": [
+     "A complicated mix of those who gave in, fled, falsified documents, and withstood torture forced the Church to figure out how to deal with these different groups",
+     "So many martyrs that providing decent burials was impossible",
+     "Persecution led to too many sympathy conversions",
+     "The Church in Asia Minor was completely destroyed"
+    ],
+    "es": [
+     "Una mezcla complicada de los que cedieron, huyeron, falsificaron documentos, y soportaron tortura obligó a la iglesia a averiguar cómo tratar con estos diferentes grupos",
+     "Tantos mártires que proporcionar entierros decentes era imposible",
+     "La persecución condujo a demasiadas conversiones por simpatía",
+     "La iglesia en Asia Menor fue completamente destruida"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "After Decius's libellus system, the church had four groups: martyrs (died), confessors (tortured but survived), fugitives (fled), and lapsi (gave in). The lapsi further split into sacrificati, thurificati, and libellatici. Cyprian of Carthage led the moderate path: readmit the lapsi after public penance.",
+    "es": "Después del sistema de libellus de Decio, la iglesia tenía cuatro grupos: mártires (muertos), confesores (torturados pero sobrevivientes), fugitivos (huyeron), y lapsi (cedieron). Los lapsi se dividían más en sacrificati, thurificati, y libellatici. Cipriano de Cartago lideró el camino moderado: readmitir a los lapsi después de penitencia pública."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is meant by Apostolic Succession?",
+    "es": "¿Qué significa la sucesión apostólica?"
+   },
+   "options": {
+    "en": [
+     "The process by which other leaders were appointed to replace the Apostles after the last (John) died around 100 AD",
+     "The policy whereby each Apostle chose his own successor in ministry",
+     "The idea of an unbroken ordination chain from the Apostles down to all Christian ministers, so every minister could trace ordination back to an Apostle",
+     "The fundamental theological changes implemented after the apostles died"
+    ],
+    "es": [
+     "El proceso por el cual otros líderes fueron nombrados para reemplazar a los apóstoles después de que el último (Juan) murió alrededor del 100 d.C.",
+     "La política por la cual cada apóstol escogía su propio sucesor en el ministerio",
+     "La idea de una cadena ininterrumpida de ordenación desde los apóstoles hasta todos los ministros cristianos, para que cada ministro pudiera rastrear su ordenación hasta un apóstol",
+     "Los cambios teológicos fundamentales implementados después de la muerte de los apóstoles"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Apostolic succession is the idea of an unbroken ordination chain from the apostles to current bishops. Irenaeus used this argument powerfully against the Gnostics: the orthodox church can trace its teachers back to the apostles in a verifiable chain (Polycarp → John, Irenaeus → Polycarp), while heretics cannot.",
+    "es": "La sucesión apostólica es la idea de una cadena ininterrumpida de ordenación desde los apóstoles hasta los obispos actuales. Ireneo usó este argumento poderosamente contra los gnósticos: la iglesia ortodoxa puede rastrear a sus maestros hasta los apóstoles en una cadena verificable (Policarpo → Juan, Ireneo → Policarpo), mientras que los herejes no."
+   }
+  },
+  {
+   "stem": {
+    "en": "Why was Apostolic Succession important to the Early Church?",
+    "es": "¿Por qué fue importante la sucesión apostólica para la iglesia primitiva?"
+   },
+   "options": {
+    "en": [
+     "It guaranteed the Church would have no heresy",
+     "It was thought that if Christian ordination went back unbroken to an Apostle, there was a greater likelihood of correct teaching and spiritual authority",
+     "It allowed bishops to control who served in ministry",
+     "It helped identify and root out false doctrine completely"
+    ],
+    "es": [
+     "Garantizaba que la iglesia no tendría herejía",
+     "Se pensaba que si la ordenación cristiana se remontaba ininterrumpidamente a un apóstol, había una mayor probabilidad de enseñanza correcta y autoridad espiritual",
+     "Permitía a los obispos controlar quién servía en el ministerio",
+     "Ayudaba a identificar y erradicar completamente la falsa doctrina"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Apostolic succession was a safeguard against heresy. The argument was that legitimate Christian teaching travels in a verifiable chain from Christ to the apostles to their disciples to the present. The Gnostics could not show such a chain; the orthodox church could. The chain mattered because the message mattered.",
+    "es": "La sucesión apostólica era un seto contra la herejía. El argumento era que la enseñanza cristiana legítima viaja en una cadena verificable desde Cristo a los apóstoles a sus discípulos hasta el presente. Los gnósticos no podían mostrar tal cadena; la iglesia ortodoxa sí. La cadena importaba porque el mensaje importaba."
+   }
+  },
+  {
+   "stem": {
+    "en": "Why did the Church around the end of the 2nd Century start having predominantly male leadership?",
+    "es": "¿Por qué la iglesia alrededor del final del 2do siglo comenzó a tener liderazgo predominantemente masculino?"
+   },
+   "options": {
+    "en": [
+     "Women proved unable to withstand the demands of ministry",
+     "Women decided they wanted nothing to do with the political shenanigans in the Church",
+     "Some pre-Christian pagan cults and 2nd-century heresies — notably Gnosticism and Montanism — had women in their leadership, and the orthodox church recoiled",
+     "It was finally realized that Jesus and the Twelve Apostles were all men"
+    ],
+    "es": [
+     "Las mujeres demostraron ser incapaces de soportar las demandas del ministerio",
+     "Las mujeres decidieron que no querían nada que ver con las maniobras políticas en la iglesia",
+     "Algunos cultos paganos pre-cristianos y herejías del 2do siglo — notablemente el gnosticismo y el montanismo — tenían mujeres en su liderazgo, y la iglesia ortodoxa retrocedió",
+     "Finalmente se reconoció que Jesús y los Doce Apóstoles eran todos hombres"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "As Priscilla and Maximilla rose to prominence as Montanist prophetesses (and similar patterns appeared in Gnostic groups), the orthodox church recoiled from women in similar visible roles. The first-century pattern of weaving women's gifts into the church's life freely became more cautious in the late 2nd century — a cost of heresy that often goes uncounted.",
+    "es": "Mientras Priscila y Maximila se elevaron a prominencia como profetisas montanistas (y patrones similares aparecieron en grupos gnósticos), la iglesia ortodoxa retrocedió de las mujeres en roles visibles similares. El patrón del primer siglo de entretejer libremente los dones de las mujeres en la vida de la iglesia se volvió más cauteloso a finales del 2do siglo — un costo de la herejía que a menudo no se cuenta."
+   }
+  },
+  {
+   "stem": {
+    "en": "Polycarp of Smyrna was a disciple of which apostle?",
+    "es": "Policarpo de Esmirna fue discípulo de ¿cuál apóstol?"
+   },
+   "options": {
+    "en": [
+     "Peter",
+     "Paul",
+     "John",
+     "James"
+    ],
+    "es": [
+     "Pedro",
+     "Pablo",
+     "Juan",
+     "Jacobo"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Polycarp was a disciple of the apostle John. This makes the chain remarkable: John walked with Jesus, taught Polycarp, who taught Irenaeus, who taught the next generation. Two handshakes from Christ.",
+    "es": "Policarpo fue discípulo del apóstol Juan. Esto hace notable la cadena: Juan caminó con Jesús, enseñó a Policarpo, quien enseñó a Ireneo, quien enseñó a la siguiente generación. Dos apretones de manos de Cristo."
+   }
+  },
+  {
+   "stem": {
+    "en": "What famous words did Polycarp say when ordered to deny Christ at age 86?",
+    "es": "¿Qué famosas palabras dijo Policarpo cuando se le ordenó negar a Cristo a los 86 años?"
+   },
+   "options": {
+    "en": [
+     "\"I am the resurrection and the life\"",
+     "\"Into Your hands I commit my spirit\"",
+     "\"Father, forgive them, for they know not what they do\"",
+     "\"Eighty and six years have I served Him, and He has done me no wrong. How can I blaspheme my King who saved me?\""
+    ],
+    "es": [
+     "«Yo soy la resurrección y la vida»",
+     "«En tus manos encomiendo mi espíritu»",
+     "«Padre, perdónalos porque no saben lo que hacen»",
+     "«Ochenta y seis años le he servido, y ningún mal me ha hecho. ¿Cómo puedo blasfemar a mi Rey que me salvó?»"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Polycarp's response to the proconsul, recorded in the Martyrdom of Polycarp around AD 155, became the model Christian martyr speech for centuries. Eighty-six years of service, no wrong from his King — therefore no possibility of blasphemy.",
+    "es": "La respuesta de Policarpo al procónsul, registrada en el Martirio de Policarpo alrededor del 155 d.C., se convirtió en el discurso modelo del mártir cristiano por siglos. Ochenta y seis años de servicio, ningún mal de su Rey — por lo tanto, ninguna posibilidad de blasfemia."
+   }
+  },
+  {
+   "stem": {
+    "en": "Which Apologist coined the Latin word 'Trinity' (trinitas) and famously said the blood of the martyrs is the seed of the church?",
+    "es": "¿Cuál Apologista acuñó la palabra latina «Trinidad» (trinitas) y dijo célebremente que la sangre de los mártires es la semilla de la iglesia?"
+   },
+   "options": {
+    "en": [
+     "Justin Martyr",
+     "Clement of Rome",
+     "Irenaeus",
+     "Tertullian"
+    ],
+    "es": [
+     "Justino Mártir",
+     "Clemente de Roma",
+     "Ireneo",
+     "Tertuliano"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Tertullian (c. 160–220) was a North African lawyer who gave Western theology its early Latin vocabulary. He coined 'trinitas' (Trinity), defended the faith against Marcion in five volumes, and wrote the famous line: 'The blood of the Christians is seed.'",
+    "es": "Tertuliano (c. 160–220) fue un abogado norteafricano que le dio a la teología occidental su vocabulario latino temprano. Acuñó «trinitas» (Trinidad), defendió la fe contra Marción en cinco volúmenes, y escribió la línea famosa: «La sangre de los cristianos es semilla»."
+   }
+  },
+  {
+   "stem": {
+    "en": "Which Roman emperor's persecution (250–251) was the first empire-wide demand that every citizen offer sacrifice and obtain a libellus certificate?",
+    "es": "¿La persecución de cuál emperador romano (250–251) fue la primera demanda a escala imperial de que cada ciudadano ofreciera sacrificio y obtuviera un certificado libellus?"
+   },
+   "options": {
+    "en": [
+     "Nero",
+     "Trajan",
+     "Decius",
+     "Diocletian"
+    ],
+    "es": [
+     "Nerón",
+     "Trajano",
+     "Decio",
+     "Diocleciano"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Decius issued the first empire-wide persecution in 250–251, demanding universal sacrifice with a libellus certificate proving compliance. The libellus system was administrative and devastating, leaving a paper trail that haunted the church and creating the lapsi crisis the church had to sort out afterward.",
+    "es": "Decio emitió la primera persecución a escala imperial en 250–251, demandando sacrificio universal con un certificado libellus que probara el cumplimiento. El sistema de libellus era administrativo y devastador, dejando un rastro de papel que atormentó a la iglesia y creando la crisis de los lapsi que la iglesia tuvo que resolver después."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Tell the story of Polycarp's martyrdom and explain what made it a model for Christian dying.",
+    "es": "Cuenta la historia del martirio de Policarpo y explica lo que lo hizo un modelo del morir cristiano."
+   },
+   "keywords": {
+    "en": [
+     "polycarp",
+     "smyrna",
+     "john",
+     "eighty",
+     "king",
+     "blaspheme"
+    ],
+    "es": [
+     "policarpo",
+     "esmirna",
+     "juan",
+     "ochenta",
+     "rey",
+     "blasfemar"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Name the four reasons Roman society generally hated and persecuted Christians.",
+    "es": "Nombra las cuatro razones por las cuales la sociedad romana generalmente odiaba y perseguía a los cristianos."
+   },
+   "keywords": {
+    "en": [
+     "emperor",
+     "sacrifice",
+     "incest",
+     "cannibalism",
+     "gods",
+     "atheism"
+    ],
+    "es": [
+     "emperador",
+     "sacrificio",
+     "incesto",
+     "canibalismo",
+     "dioses",
+     "ateísmo"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Identify and briefly describe the three great heresies of the second century.",
+    "es": "Identifica y describe brevemente las tres grandes herejías del segundo siglo."
+   },
+   "keywords": {
+    "en": [
+     "gnosticism",
+     "marcionism",
+     "montanism",
+     "knowledge",
+     "old testament",
+     "prophecy"
+    ],
+    "es": [
+     "gnosticismo",
+     "marcionismo",
+     "montanismo",
+     "conocimiento",
+     "antiguo testamento",
+     "profecía"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Identify the three major Christian Apologists of the 2nd century and one main contribution of each.",
+    "es": "Identifica los tres principales Apologistas cristianos del 2do siglo y una contribución principal de cada uno."
+   },
+   "keywords": {
+    "en": [
+     "justin",
+     "tertullian",
+     "irenaeus",
+     "apology",
+     "trinity",
+     "heresies"
+    ],
+    "es": [
+     "justino",
+     "tertuliano",
+     "ireneo",
+     "apología",
+     "trinidad",
+     "herejías"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain what the lapsi crisis was after the Decian persecution and how the church handled it.",
+    "es": "Explica qué fue la crisis de los lapsi después de la persecución de Decio y cómo la iglesia la manejó."
+   },
+   "keywords": {
+    "en": [
+     "libellus",
+     "sacrifice",
+     "sacrificati",
+     "libellatici",
+     "cyprian",
+     "penance"
+    ],
+    "es": [
+     "libellus",
+     "sacrificio",
+     "sacrificati",
+     "libellatici",
+     "cipriano",
+     "penitencia"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Name three or four Apostolic Fathers and briefly describe each.",
+    "es": "Nombra tres o cuatro Padres Apostólicos y describe brevemente cada uno."
+   },
+   "keywords": {
+    "en": [
+     "clement",
+     "ignatius",
+     "polycarp",
+     "didache",
+     "rome",
+     "antioch",
+     "smyrna"
+    ],
+    "es": [
+     "clemente",
+     "ignacio",
+     "policarpo",
+     "didaché",
+     "roma",
+     "antioquía",
+     "esmirna"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain Tertullian's saying that 'the blood of the martyrs is the seed of the church' and why persecution failed to destroy the early church.",
+    "es": "Explica el dicho de Tertuliano de que «la sangre de los mártires es la semilla de la iglesia» y por qué la persecución falló en destruir la iglesia primitiva."
+   },
+   "keywords": {
+    "en": [
+     "tertullian",
+     "christian",
+     "persecution",
+     "scatter",
+     "refine",
+     "grew"
+    ],
+    "es": [
+     "tertuliano",
+     "cristiano",
+     "persecución",
+     "dispers",
+     "refin",
+     "crec"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the doctrine of apostolic succession and how Irenaeus used it against the Gnostics.",
+    "es": "Explica la doctrina de la sucesión apostólica y cómo Ireneo la usó contra los gnósticos."
+   },
+   "keywords": {
+    "en": [
+     "chain",
+     "apostles",
+     "polycarp",
+     "john",
+     "public",
+     "tradition"
+    ],
+    "es": [
+     "cadena",
+     "apóstoles",
+     "policarpo",
+     "juan",
+     "pública",
+     "tradición"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Tell how Marcion's heretical canon accidentally helped the orthodox church define its own canon.",
+    "es": "Cuenta cómo el canon herético de Marción accidentalmente ayudó a la iglesia ortodoxa a definir su propio canon."
+   },
+   "keywords": {
+    "en": [
+     "marcion",
+     "old testament",
+     "luke",
+     "paul",
+     "muratorian",
+     "canon"
+    ],
+    "es": [
+     "marción",
+     "antiguo testamento",
+     "lucas",
+     "pablo",
+     "muratorian",
+     "canon"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Give three pastoral applications Wayne draws from the second-century church for ministry today.",
+    "es": "Da tres aplicaciones pastorales que Wayne saca de la iglesia del segundo siglo para el ministerio hoy."
+   },
+   "keywords": {
+    "en": [
+     "heresy",
+     "recycle",
+     "persecution",
+     "teacher",
+     "chain",
+     "prosperity"
+    ],
+    "es": [
+     "herejía",
+     "reciclar",
+     "persecución",
+     "maestra",
+     "cadena",
+     "prosperidad"
+    ]
+   }
+  }
+ ]
+};

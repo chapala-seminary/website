@@ -1,26 +1,833 @@
-/* CTSRomans - unit 9: per-unit configuration and content. */
-
-const UNIT = 9;
-
-const NEXT_URL = "CTSRomansUnit10.html";
-
-const PREV_URL = "CTSRomansUnit8.html";
-
-const IS_LAST_UNIT = false;
-
-const SHOW_REGISTRATION_CARD = false;
-
-const mcQuestions = [{"text": "1. The word 'therefore' at the start of Romans 12:1 connects the practical exhortation to:", "options": ["D. The Great Commission", "B. The Old Testament moral law", "C. Roman civic philosophy", "A. The mercies of God already unfolded in chapters 1-11"], "correct": 3, "correctFeedback": "Correct. The strongest motive for Christian living is mercy already received, not law.", "incorrectFeedback": "Romans 12:1 — 'I beseech you therefore... by the mercies of God.' The therefore points back to all eleven chapters of doctrine; mercy already received is the motive for Christian living.", "textEs": "1. La palabra 'por tanto' al inicio de Romanos 12:1 conecta la exhortación práctica con:", "optionsEs": ["D. La Gran Comisión", "B. La ley moral del Antiguo Testamento", "C. La filosofía cívica romana", "A. Las misericordias de Dios ya desplegadas en los capítulos 1-11"], "correctFeedbackEs": "Correcto. El motivo más fuerte para la vida cristiana es la misericordia ya recibida, no la ley.", "incorrectFeedbackEs": "Romanos 12:1 — 'Os ruego, pues... por las misericordias de Dios.' El 'por tanto' apunta de regreso a los once capítulos de doctrina; la misericordia ya recibida es el motivo para la vida cristiana."}, {"text": "2. In Romans 12:1, Paul asks believers to present their bodies as:", "options": ["A. A dead sacrifice for atonement", "B. A living sacrifice, holy and acceptable to God, as their reasonable service", "D. An optional spiritual gift", "C. A symbolic offering only"], "correct": 1, "correctFeedback": "Correct. Unlike the Old Testament dead animal, Paul asks for a living sacrifice — the whole life, surrendered daily.", "incorrectFeedback": "Romans 12:1 — a living sacrifice, holy and acceptable to God. The hardest thing about being a living sacrifice is that it can climb back off the altar; the cross is voluntary every morning.", "textEs": "2. En Romanos 12:1, Pablo pide a los creyentes presentar sus cuerpos como:", "optionsEs": ["A. Un sacrificio muerto para expiación", "B. Un sacrificio vivo, santo y agradable a Dios, que es su racional culto", "D. Un don espiritual opcional", "C. Solo una ofrenda simbólica"], "correctFeedbackEs": "Correcto. A diferencia del animal muerto del Antiguo Testamento, Pablo pide un sacrificio vivo — toda la vida, entregada a diario.", "incorrectFeedbackEs": "Romanos 12:1 — un sacrificio vivo, santo y agradable a Dios. Lo más difícil de ser un sacrificio vivo es que puede bajarse del altar; la cruz es voluntaria cada mañana."}, {"text": "3. The Greek word translated 'transformed' in Romans 12:2 is:", "options": ["A. Schematizō (to scheme)", "B. Plasso (to mold)", "D. Synergeō (to work with)", "C. Metamorphoō — from which we get 'metamorphosis'"], "correct": 3, "correctFeedback": "Correct. Metamorphosis — the caterpillar-to-butterfly word. Christian growth is internal change, not external molding.", "incorrectFeedback": "Romans 12:2 uses metamorphoō, the word from which we get metamorphosis. Christian growth happens by internal change, not by being squeezed into the world's mold.", "textEs": "3. La palabra griega traducida 'transformaos' en Romanos 12:2 es:", "optionsEs": ["A. Schematizō (tramar)", "B. Plasso (moldear)", "D. Synergeō (colaborar)", "C. Metamorphoō — de donde viene 'metamorfosis'"], "correctFeedbackEs": "Correcto. Metamorfosis — la palabra de oruga-a-mariposa. El crecimiento cristiano es cambio interno, no moldeo externo.", "incorrectFeedbackEs": "Romanos 12:2 usa metamorphoō, la palabra de donde viene metamorfosis. El crecimiento cristiano ocurre por cambio interno, no por ser exprimido en el molde del mundo."}, {"text": "4. The two opposite verbs of Christian life in Romans 12:2 are:", "options": ["A. Hope and despair", "D. Conformed (to this world) and transformed (by the renewing of the mind)", "B. Work and rest", "C. Believe and doubt"], "correct": 1, "correctFeedback": "Correct. Conformed = squeezed from outside; transformed = changed from inside. Both verbs are present tense — ongoing daily.", "incorrectFeedback": "Romans 12:2 — do not be conformed (outside pressure) but be transformed (inside renewal). Both verbs are in the present tense; the contest is daily.", "textEs": "4. Los dos verbos opuestos de la vida cristiana en Romanos 12:2 son:", "optionsEs": ["A. Esperar y desesperar", "D. Conformarse (a este mundo) y transformarse (por la renovación de la mente)", "B. Trabajar y descansar", "C. Creer y dudar"], "correctFeedbackEs": "Correcto. Conformarse = exprimido desde fuera; transformarse = cambiado desde dentro. Ambos verbos están en tiempo presente — continuo, a diario.", "incorrectFeedbackEs": "Romanos 12:2 — no os conforméis (presión externa) sino transformaos (renovación interna). Ambos verbos están en tiempo presente; la contienda es diaria."}, {"text": "5. In Romans 12:3-8, Paul's teaching on spiritual gifts establishes that:", "options": ["A. Spiritual gifts are tools to build with — given to serve the body, used in complementarity, not toys or weapons", "C. Gifts are for elevating the giver", "B. All Christians receive every gift", "D. Gifts are private and never for the church"], "correct": 0, "correctFeedback": "Correct. Tools to build with, not toys to play with or weapons to fight with. Used in complementarity within the one body.", "incorrectFeedback": "Romans 12:3-8 — spiritual gifts are tools to build with, not toys to play with or weapons to fight with. Given to serve the body; used in complementarity, not in competition.", "textEs": "5. En Romanos 12:3-8, la enseñanza de Pablo sobre los dones espirituales establece que:", "optionsEs": ["A. Los dones espirituales son herramientas para edificar — dados para servir al cuerpo, usados en complementariedad, no juguetes ni armas", "C. Los dones sirven para exaltar al que los tiene", "B. Todos los cristianos reciben todos los dones", "D. Los dones son privados y nunca para la iglesia"], "correctFeedbackEs": "Correcto. Herramientas para edificar, no juguetes para jugar ni armas para pelear. Usados en complementariedad dentro del único cuerpo.", "incorrectFeedbackEs": "Romanos 12:3-8 — los dones espirituales son herramientas para edificar, no juguetes para jugar ni armas para pelear. Dados para servir al cuerpo; usados en complementariedad, no en competencia."}, {"text": "6. The picture of the church in Romans 12:4-5 is:", "options": ["D. A franchise of independent congregations", "C. A pyramid of authority", "B. Many members of one body in Christ, each belonging to all the others", "A. A loose collection of individuals"], "correct": 2, "correctFeedback": "Correct. One body, many members, mutually belonging. The eye does not become an ear; it serves by being an eye while the ear is being an ear.", "incorrectFeedback": "Romans 12:4-5 — one body in Christ with many members, each belonging to all the others. The body is an organism, not a loose collection of individuals.", "textEs": "6. La imagen de la iglesia en Romanos 12:4-5 es:", "optionsEs": ["D. Una franquicia de congregaciones independientes", "C. Una pirámide de autoridad", "B. Muchos miembros de un cuerpo en Cristo, cada uno perteneciendo a todos los demás", "A. Una colección suelta de individuos"], "correctFeedbackEs": "Correcto. Un cuerpo, muchos miembros, perteneciéndose mutuamente. El ojo no se vuelve oído; sirve siendo ojo mientras el oído es oído.", "incorrectFeedbackEs": "Romanos 12:4-5 — un cuerpo en Cristo con muchos miembros, cada uno perteneciendo a todos los demás. El cuerpo es un organismo, no una colección suelta de individuos."}, {"text": "7. Paul's command 'rejoice with those who rejoice, weep with those who weep' (Rom 12:15) means Christian love:", "options": ["C. Adjusts its emotional register to the brother in front of it", "D. Prefers solitude", "B. Avoids emotional engagement", "A. Maintains constant cheerfulness"], "correct": 0, "correctFeedback": "Correct. Love joins the brother in his actual state — joy with joy, grief with grief.", "incorrectFeedback": "Romans 12:15 — Christian love adjusts to the brother in front of it. Joy in his joy, sorrow in his sorrow; presence in his actual emotional state.", "textEs": "7. El mandato de Pablo 'gozaos con los que se gozan; llorad con los que lloran' (Ro 12:15) significa que el amor cristiano:", "optionsEs": ["C. Ajusta su registro emocional al hermano que tiene enfrente", "D. Prefiere la soledad", "B. Evita la implicación emocional", "A. Mantiene una alegría constante"], "correctFeedbackEs": "Correcto. El amor se une al hermano en su estado real — gozo con gozo, dolor con dolor.", "incorrectFeedbackEs": "Romanos 12:15 — el amor cristiano se ajusta al hermano que tiene enfrente. Gozo en su gozo, tristeza en su tristeza; presencia en su estado emocional real."}, {"text": "8. The phrase 'as much as depends on you' (Rom 12:18) is honest because:", "options": ["C. Christians are exempt from conflict", "D. Some conflicts cannot be ended unilaterally — the believer's duty is what is on his side of the line", "B. Peace is always easy", "A. Christians can guarantee peace with everyone"], "correct": 1, "correctFeedback": "Correct. The believer cannot force peace if the other refuses; his obligation extends only to his own response.", "incorrectFeedback": "Romans 12:18 — 'as much as depends on you, live peaceably with all.' Some conflicts cannot be ended unilaterally; the believer's duty is to do what is on his side.", "textEs": "8. La frase 'en cuanto dependa de vosotros' (Ro 12:18) es honesta porque:", "optionsEs": ["C. Los cristianos están exentos del conflicto", "D. Algunos conflictos no pueden terminarse unilateralmente — el deber del creyente es lo que está de su lado de la línea", "B. La paz siempre es fácil", "A. Los cristianos pueden garantizar la paz con todos"], "correctFeedbackEs": "Correcto. El creyente no puede forzar la paz si el otro se niega; su obligación se extiende solo a su propia respuesta.", "incorrectFeedbackEs": "Romanos 12:18 — 'en cuanto dependa de vosotros, vivid en paz con todos.' Algunos conflictos no pueden terminarse unilateralmente; el deber del creyente es hacer lo que está de su lado."}, {"text": "9. The phrase 'heap coals of fire on his head' (Rom 12:20) is best understood as:", "options": ["C. Magical retribution", "D. A pagan curse formula", "A. The Old Testament figure of God's judgment — the believer can return good for evil with assurance God will see to the final reckoning", "B. Literal punishment by the believer"], "correct": 2, "correctFeedback": "Correct. Coals of fire = God's judgment in OT (2 Sam 22:9, Ps 11:6, Ps 18:13, Ps 140:9-10, Prov 25:21-22).", "incorrectFeedback": "Coals of fire in the OT consistently refer to God's judgment (2 Sam 22:9, Ps 11:6, Ps 18:13, Ps 140:9-10, Prov 25:21-22). The believer returns good knowing God Himself will judge the enemy who persists.", "textEs": "9. La frase 'ascuas de fuego amontonarás sobre su cabeza' (Ro 12:20) se entiende mejor como:", "optionsEs": ["C. Represalia mágica", "D. Una fórmula de maldición pagana", "A. La figura del Antiguo Testamento del juicio de Dios — el creyente puede devolver bien por mal con la seguridad de que Dios se encargará del ajuste final", "B. Castigo literal por parte del creyente"], "correctFeedbackEs": "Correcto. Ascuas de fuego = el juicio de Dios en el AT (2 Sa 22:9, Sal 11:6, Sal 18:13, Sal 140:9-10, Pr 25:21-22).", "incorrectFeedbackEs": "Las ascuas de fuego en el AT se refieren consistentemente al juicio de Dios (2 Sa 22:9, Sal 11:6, Sal 18:13, Sal 140:9-10, Pr 25:21-22). El creyente devuelve bien sabiendo que Dios mismo juzgará al enemigo que persiste."}, {"text": "10. Paul's eight-word philosophy of conflict in Rom 12:21 is:", "options": ["C. Pray without ceasing in all things", "A. Eye for eye and tooth for tooth", "D. Avoid all confrontation always", "B. Do not be overcome by evil, but overcome evil with good"], "correct": 3, "correctFeedback": "Correct. You cannot out-dark darkness; light extinguishes it. Love melts hatred like light extinguishes dark.", "incorrectFeedback": "Romans 12:21 — 'overcome evil with good.' You cannot out-dark darkness. Light extinguishes it. Love is the believer's only weapon against hatred.", "textEs": "10. La filosofía de ocho palabras de Pablo sobre el conflicto en Ro 12:21 es:", "optionsEs": ["C. Orad sin cesar en todo", "A. Ojo por ojo y diente por diente", "D. Evita toda confrontación siempre", "B. No seas vencido de lo malo, sino vence con el bien el mal"], "correctFeedbackEs": "Correcto. No puedes vencer la oscuridad con más oscuridad; la luz la extingue. El amor derrite el odio como la luz extingue la oscuridad.", "incorrectFeedbackEs": "Romanos 12:21 — 'vence con el bien el mal.' No puedes vencer la oscuridad con más oscuridad. La luz la extingue. El amor es la única arma del creyente contra el odio."}, {"text": "11. In Romans 13:1-2, Paul says the believer is to be subject to governing authorities because:", "options": ["B. Civil law is the same as moral law", "A. The state is divine", "C. There is no authority except from God, and the existing authorities have been instituted by Him", "D. Christians have no choice"], "correct": 2, "correctFeedback": "Correct. Authority is God's institution to restrain a fallen world. Paul wrote this under Nero.", "incorrectFeedback": "Romans 13:1 — there is no authority except from God; the authorities that exist are instituted by Him. The state is not sacred; the office is God's appointment to restrain evil.", "textEs": "11. En Romanos 13:1-2, Pablo dice que el creyente ha de estar sujeto a las autoridades superiores porque:", "optionsEs": ["B. La ley civil es lo mismo que la ley moral", "A. El estado es divino", "C. No hay autoridad sino de parte de Dios, y las autoridades existentes han sido ordenadas por Él", "D. Los cristianos no tienen opción"], "correctFeedbackEs": "Correcto. La autoridad es institución de Dios para refrenar un mundo caído. Pablo escribió esto bajo Nerón.", "incorrectFeedbackEs": "Romanos 13:1 — no hay autoridad sino de parte de Dios; las autoridades que existen han sido ordenadas por Él. El estado no es sagrado; el cargo es nombramiento de Dios para refrenar el mal."}, {"text": "12. The key distinction in Romans 13 between submission and obedience is:", "options": ["D. Submission includes obedience plus respect and willingness to bear consequences when conscience demands disobedience to authority that commands sin", "A. They are identical concepts", "C. Submission excludes obedience", "B. Submission means total agreement"], "correct": 0, "correctFeedback": "Correct. Acts 5:29 — obey God rather than men. But submission remains even in disobedience; the believer bears the cost.", "incorrectFeedback": "Submission is broader than obedience. When civil authority commands what God forbids, the believer disobeys (Acts 5:29) but remains under the authority's discipline — submission includes bearing the cost of conscientious refusal.", "textEs": "12. La distinción clave en Romanos 13 entre sujeción y obediencia es:", "optionsEs": ["D. La sujeción incluye la obediencia más el respeto y la disposición a llevar las consecuencias cuando la conciencia exige desobedecer a una autoridad que manda pecar", "A. Son conceptos idénticos", "C. La sujeción excluye la obediencia", "B. Sujeción significa acuerdo total"], "correctFeedbackEs": "Correcto. Hechos 5:29 — obedecer a Dios antes que a los hombres. Pero la sujeción permanece aun en la desobediencia; el creyente lleva el costo.", "incorrectFeedbackEs": "La sujeción es más amplia que la obediencia. Cuando la autoridad civil manda lo que Dios prohíbe, el creyente desobedece (Hechos 5:29) pero permanece bajo la disciplina de la autoridad — la sujeción incluye llevar el costo del rechazo por conciencia."}, {"text": "13. Romans 13 does NOT teach:", "options": ["B. Submission to governing authorities", "A. The fusion of church and state into a theocracy", "C. Paying taxes that are owed", "D. That the authority's sword is for justice"], "correct": 1, "correctFeedback": "Correct. Church and state are separate institutions; Paul never advocates merging them. History shows what happens when they are merged.", "incorrectFeedback": "Romans 13 does not teach the fusion of church and state. The civil authority has its sphere (restrain evil); the church has hers (proclaim the gospel). They were never meant to be merged.", "textEs": "13. Romanos 13 NO enseña:", "optionsEs": ["B. La sujeción a las autoridades superiores", "A. La fusión de la iglesia y el estado en una teocracia", "C. Pagar los impuestos que se deben", "D. Que la espada de la autoridad es para la justicia"], "correctFeedbackEs": "Correcto. La iglesia y el estado son instituciones separadas; Pablo nunca aboga por fusionarlas. La historia muestra lo que sucede cuando se fusionan.", "incorrectFeedbackEs": "Romanos 13 no enseña la fusión de la iglesia y el estado. La autoridad civil tiene su esfera (refrenar el mal); la iglesia tiene la suya (proclamar el evangelio). Nunca debieron fusionarse."}, {"text": "14. The 'debt of love' in Romans 13:8 means:", "options": ["A. Christians owe nothing to anyone", "B. The Christian pays all civic debts but the obligation to love is permanently outstanding — can never be marked paid in full", "D. Love is optional for advanced Christians", "C. Love can be quantified and discharged"], "correct": 1, "correctFeedback": "Correct. Bills get paid; the debt of love stays open. He who loves another has fulfilled the law.", "incorrectFeedback": "Romans 13:8 — 'Owe no one anything except to love one another.' Bills are paid in full; the debt of love is permanently outstanding. Love is the fulfillment of the law.", "textEs": "14. La 'deuda del amor' en Romanos 13:8 significa:", "optionsEs": ["A. Los cristianos no deben nada a nadie", "B. El cristiano paga todas las deudas civiles, pero la obligación de amar queda permanentemente pendiente — nunca puede marcarse como saldada", "D. El amor es opcional para los cristianos avanzados", "C. El amor puede cuantificarse y saldarse"], "correctFeedbackEs": "Correcto. Las cuentas se pagan; la deuda del amor queda abierta. El que ama al prójimo ha cumplido la ley.", "incorrectFeedbackEs": "Romanos 13:8 — 'No debáis a nadie nada, sino el amaros unos a otros.' Las cuentas se pagan por completo; la deuda del amor queda permanentemente pendiente. El amor es el cumplimiento de la ley."}, {"text": "15. In Romans 13:9, Paul says all commandments are summed up in:", "options": ["D. Pray and fast often", "A. Fear God and keep His commandments", "C. You shall love your neighbor as yourself", "B. Worship the Lord your God only"], "correct": 2, "correctFeedback": "Correct. Love does no wrong to a neighbor; love is therefore the fulfillment of the law.", "incorrectFeedback": "Romans 13:9 — 'You shall love your neighbor as yourself.' All the commandments protecting the neighbor are honored where love is real.", "textEs": "15. En Romanos 13:9, Pablo dice que todos los mandamientos se resumen en:", "optionsEs": ["D. Ora y ayuna a menudo", "A. Teme a Dios y guarda sus mandamientos", "C. Amarás a tu prójimo como a ti mismo", "B. Adora solo al Señor tu Dios"], "correctFeedbackEs": "Correcto. El amor no hace mal al prójimo; el amor es, por tanto, el cumplimiento de la ley.", "incorrectFeedbackEs": "Romanos 13:9 — 'Amarás a tu prójimo como a ti mismo.' Todos los mandamientos que protegen al prójimo se honran donde el amor es real."}, {"text": "16. Romans 13:14 closes the chapter with the command to:", "options": ["D. Put on the Lord Jesus Christ and make no provision for the flesh", "C. Practice asceticism", "B. Attend church regularly", "A. Memorize Scripture daily"], "correct": 0, "correctFeedback": "Correct. The Christian wakes up dressed in Christ. This is a restatement of 12:1-2 — body offered, mind renewed, Christ worn like clothing.", "incorrectFeedback": "Romans 13:14 — put on the Lord Jesus Christ, make no provision for the flesh. The Christian wakes up dressed in Christ; this echoes 12:1-2 — body, mind, and Lord daily.", "textEs": "16. Romanos 13:14 cierra el capítulo con el mandato de:", "optionsEs": ["D. Vestirse del Señor Jesucristo y no proveer para los deseos de la carne", "C. Practicar el ascetismo", "B. Asistir a la iglesia con regularidad", "A. Memorizar la Escritura a diario"], "correctFeedbackEs": "Correcto. El cristiano despierta vestido de Cristo. Esto reafirma 12:1-2 — el cuerpo ofrecido, la mente renovada, Cristo puesto como vestidura.", "incorrectFeedbackEs": "Romanos 13:14 — vestíos del Señor Jesucristo, no proveáis para los deseos de la carne. El cristiano despierta vestido de Cristo; esto hace eco de 12:1-2 — cuerpo, mente y Señor a diario."}, {"text": "17. In Romans 14, Paul calls those whose conscience demanded more restraint:", "options": ["C. The unrepentant", "D. The lost", "B. Hypocrites", "A. The weak in faith — not because faith is deficient but because their conscience has not yet rested in the full liberty Christ won"], "correct": 3, "correctFeedback": "Correct. Weakness is in the conscience's grasp of liberty, not in saving faith.", "incorrectFeedback": "Romans 14:1 — 'the weak in faith.' Their faith is genuine; their conscience has not yet rested in the full liberty Christ purchased. Both weak and strong are accepted by the Lord.", "textEs": "17. En Romanos 14, Pablo llama a aquellos cuya conciencia exigía más restricción:", "optionsEs": ["C. Los no arrepentidos", "D. Los perdidos", "B. Hipócritas", "A. Los débiles en la fe — no porque la fe sea deficiente, sino porque su conciencia aún no ha descansado en la plena libertad que Cristo ganó"], "correctFeedbackEs": "Correcto. La debilidad está en cómo la conciencia capta la libertad, no en la fe salvadora.", "incorrectFeedbackEs": "Romanos 14:1 — 'el débil en la fe.' Su fe es genuina; su conciencia aún no ha descansado en la plena libertad que Cristo compró. Tanto el débil como el fuerte son aceptados por el Señor."}, {"text": "18. The kingdom of God, according to Romans 14:17, is:", "options": ["C. Political power and territorial dominion", "A. Eating and drinking and ceremony", "B. Righteousness, peace, and joy in the Holy Spirit", "D. Strict observance of religious calendars"], "correct": 2, "correctFeedback": "Correct. Christianity is not finally about menu or calendar; it is righteousness, peace, joy in the Holy Spirit.", "incorrectFeedback": "Romans 14:17 — the kingdom of God is righteousness, peace, and joy in the Holy Spirit. Not eating and drinking; the kingdom is bigger than menu and calendar disputes.", "textEs": "18. El reino de Dios, según Romanos 14:17, es:", "optionsEs": ["C. Poder político y dominio territorial", "A. Comer y beber y ceremonia", "B. Justicia, paz y gozo en el Espíritu Santo", "D. La observancia estricta de calendarios religiosos"], "correctFeedbackEs": "Correcto. El cristianismo no es finalmente cuestión de menú ni de calendario; es justicia, paz, gozo en el Espíritu Santo.", "incorrectFeedbackEs": "Romanos 14:17 — el reino de Dios es justicia, paz y gozo en el Espíritu Santo. No comer y beber; el reino es más grande que las disputas de menú y calendario."}, {"text": "19. The principle 'whatever is not from faith is sin' (Rom 14:23) means:", "options": ["D. Doubt is always sin", "B. Christianity is impossible", "A. Unbelievers cannot do good", "C. A Christian who acts against his own conscience sins by violating conscience, even if the act itself was lawful"], "correct": 3, "correctFeedback": "Correct. Conscience violated is sin. The 'strong' must not push the 'weak' into actions their conscience cannot bear.", "incorrectFeedback": "Romans 14:23 — whatever is not of faith is sin. Acting against one's own conscience is sin even where the act itself is lawful; this cuts in both directions for the weak and the strong.", "textEs": "19. El principio 'todo lo que no proviene de fe es pecado' (Ro 14:23) significa:", "optionsEs": ["D. La duda siempre es pecado", "B. El cristianismo es imposible", "A. Los incrédulos no pueden hacer el bien", "C. Un cristiano que actúa contra su propia conciencia peca por violar la conciencia, aunque el acto mismo fuera lícito"], "correctFeedbackEs": "Correcto. La conciencia violada es pecado. Los 'fuertes' no deben empujar a los 'débiles' a acciones que su conciencia no puede soportar.", "incorrectFeedbackEs": "Romanos 14:23 — todo lo que no es de fe es pecado. Actuar contra la propia conciencia es pecado aun donde el acto mismo es lícito; esto corta en ambas direcciones, para el débil y el fuerte."}, {"text": "20. The pursuit principle of Romans 14:19 is:", "options": ["D. The things that make for peace and edify one another", "C. Vigorous public debate", "A. Identical opinions on disputable matters", "B. Maximum doctrinal precision"], "correct": 0, "correctFeedback": "Correct. The church is built up by pursuit of peace and mutual edification, not by uniform opinions on disputable matters.", "incorrectFeedback": "Romans 14:19 — pursue what makes for peace and edification. The strong defer where defending liberty would wound; the weak refuse to bind on others what is not biblically required. Both serve the same Lord.", "textEs": "20. El principio de búsqueda de Romanos 14:19 es:", "optionsEs": ["D. Las cosas que contribuyen a la paz y a la mutua edificación", "C. Vigoroso debate público", "A. Opiniones idénticas en los asuntos discutibles", "B. Máxima precisión doctrinal"], "correctFeedbackEs": "Correcto. La iglesia se edifica con la búsqueda de la paz y la edificación mutua, no con opiniones uniformes en asuntos discutibles.", "incorrectFeedbackEs": "Romanos 14:19 — sigue lo que contribuye a la paz y a la edificación. El fuerte cede donde defender la libertad heriría; el débil se niega a imponer a otros lo que la Biblia no requiere. Ambos sirven al mismo Señor."}];
-
-const saQuestions = [
-    { id: `sa_u${UNIT}_1`, textEn: "Explain Paul's appeal in Romans 12:1-2 to present the body as a living sacrifice.", textEs: "Explique la apelación de Pablo en Romanos 12:1-2 a presentar el cuerpo en sacrificio vivo.", kw_en: ["merc", "beseech", "living", "sacrifice", "body", "altar", "reason", "daily"], kw_es: ["misericord", "rueg", "vivo", "sacrifici", "cuerpo", "altar", "racion", "diari"], explanationEn: "Paul beseeches rather than commands, appealing by the mercies of God already named in chapters 1-11. The strongest motive for Christian living is mercy received, not law. He asks for a living sacrifice — the whole body, the whole life, surrendered daily on the altar. This is the reasonable (rational) service of those who understand what God has done in Christ. The hardest thing about being a living sacrifice is that it can climb back off the altar; the cross is voluntary every morning.", explanationEs: "Pablo ruega en lugar de mandar, apelando por las misericordias de Dios ya nombradas en los capítulos 1-11. El motivo más fuerte para la vida cristiana es la misericordia recibida, no la ley. Pide un sacrificio vivo — el cuerpo entero, la vida entera, entregada diariamente sobre el altar. Este es el culto racional de aquellos que entienden lo que Dios ha hecho en Cristo. Lo más difícil de ser un sacrificio vivo es que puede bajarse del altar; la cruz es voluntaria cada mañana." },
-    { id: `sa_u${UNIT}_2`, textEn: "Contrast 'conformed' and 'transformed' in Romans 12:2 using the metamorphosis image.", textEs: "Contraste 'conformados' y 'transformados' en Romanos 12:2 usando la imagen de la metamorfosis.", kw_en: ["conform", "transform", "metamorph", "caterpil", "intern", "extern", "present", "ongoing"], kw_es: ["conform", "transform", "metamorf", "oruga", "intern", "extern", "present", "continu"], explanationEn: "'Conformed' means squeezed from outside into a mold; 'transformed' means changed from inside out. The Greek metamorphoō is the word that gives us metamorphosis — caterpillar to butterfly. The caterpillar does not become a butterfly by being pressed into a butterfly-shaped form; it becomes a butterfly by internal change. Christian growth is metamorphosis, not molding. Both verbs are in the present tense — the world's pressure to conform is ongoing, and the Spirit's transforming work is ongoing. The Christian life is a daily contest.", explanationEs: "'Conformados' significa apretado desde afuera a un molde; 'transformados' significa cambiado desde adentro. El griego metamorphoō es la palabra que nos da metamorfosis — oruga a mariposa. La oruga no se convierte en mariposa siendo presionada en un molde con forma de mariposa; se convierte en mariposa por el cambio interior. El crecimiento cristiano es metamorfosis, no moldeado. Ambos verbos están en tiempo presente — la presión del mundo para conformar es continua, y la obra transformadora del Espíritu es continua. La vida cristiana es una contienda diaria." },
-    { id: `sa_u${UNIT}_3`, textEn: "Explain the body and gifts teaching of Romans 12:3-8, including the 'tools not toys or weapons' principle.", textEs: "Explique la enseñanza del cuerpo y los dones de Romanos 12:3-8, incluyendo el principio 'herramientas no juguetes ni armas'.", kw_en: ["sober", "body", "member", "gift", "grace", "tool", "weapon", "complement"], kw_es: ["cordur", "cuerpo", "miembr", "don", "gracia", "herramient", "arma", "complement"], explanationEn: "Paul warns first against thinking too highly of oneself, urging sober judgment. Every believer has a measure of faith but no believer has every gift. The body has many members with different functions, all belonging to one another in Christ. Seven representative gifts are listed (prophesy, serve, teach, exhort, give, lead, show mercy), each used with diligence. The governing principle: spiritual gifts are tools to build with, not toys to play with or weapons to fight with. Healthy church life is complementarity — the eye does not become an ear; it serves by being an eye while the ear is being an ear.", explanationEs: "Pablo advierte primero contra pensar de uno mismo más de lo conveniente, instando a la cordura. Cada creyente tiene una medida de fe pero ninguno tiene todos los dones. El cuerpo tiene muchos miembros con diferentes funciones, todos perteneciendo unos a otros en Cristo. Se enumeran siete dones representativos (profetizar, servir, enseñar, exhortar, dar, presidir, mostrar misericordia), cada uno usado con diligencia. El principio gobernante: los dones espirituales son herramientas para construir, no juguetes para jugar ni armas para pelear. La vida eclesiástica sana es complementariedad — el ojo no se convierte en oído; sirve siendo ojo mientras el oído está siendo oído." },
-    { id: `sa_u${UNIT}_4`, textEn: "Explain Paul's teaching on love for enemies in Romans 12:17-21, including the 'coals of fire' phrase.", textEs: "Explique la enseñanza de Pablo sobre el amor a los enemigos en Romanos 12:17-21, incluyendo la frase 'ascuas de fuego'.", kw_en: ["evil", "peace", "avenge", "wrath", "coal", "overcom", "good", "light"], kw_es: ["mal", "paz", "veng", "ira", "ascua", "venc", "bien", "luz"], explanationEn: "Paul commands: repay no one evil for evil; if possible, as much as depends on you, live peaceably with all. Some conflicts cannot be ended unilaterally; the believer's duty is what is on his side. Do not avenge yourselves; give place to God's wrath, for vengeance is His. The phrase 'heap coals of fire on his head' draws on consistent Old Testament imagery (2 Sam 22:9, Ps 11:6, Ps 18:13, Ps 140:9-10, Prov 25:21-22) where coals of fire = God's judgment. The believer can return good for evil with assurance that God will see to the final reckoning. Closing principle: overcome evil with good. You cannot out-dark darkness; light extinguishes it. Love acts like light in the soul of the other.", explanationEs: "Pablo manda: no paguen a nadie mal por mal; si es posible, en cuanto dependa de ustedes, tengan paz con todos. Algunos conflictos no pueden terminarse unilateralmente; el deber del creyente es lo que está de su lado. No se venguen; den lugar a la ira de Dios, porque la venganza es Suya. La frase 'ascuas de fuego sobre su cabeza' se basa en la imaginería consistente del Antiguo Testamento (2 Sam 22:9, Sal 11:6, Sal 18:13, Sal 140:9-10, Prov 25:21-22) donde las ascuas de fuego = el juicio de Dios. El creyente puede devolver bien por mal con la seguridad de que Dios verá el ajuste final. Principio final: venzan el mal con el bien. No pueden ganarle a la oscuridad con más oscuridad; la luz la extingue. El amor actúa como luz en el alma del otro." },
-    { id: `sa_u${UNIT}_5`, textEn: "Summarize Paul's teaching on civil authority in Romans 13:1-7, including the key distinctions.", textEs: "Resuma la enseñanza de Pablo sobre la autoridad civil en Romanos 13:1-7, incluyendo las distinciones clave.", kw_en: ["subject", "author", "Nero", "submiss", "obey", "conscien", "state", "tax"], kw_es: ["somet", "potestad", "Nerón", "sumis", "obedec", "concien", "estado", "impuest"], explanationEn: "Paul commands subjection to governing authorities because there is no authority except from God (written under Nero, no less). Two distinctions: (1) Submission is broader than obedience — when civil authority commands what God forbids, the believer disobeys (Acts 5:29: obey God rather than men) but remains under the authority's discipline, bearing the cost of conscientious refusal. (2) Paul does not advocate fusion of church and state. The civil authority's sphere is restraining evil and rewarding good; the church's sphere is proclaiming the gospel. The believer's concrete duty: pay taxes owed, give customs and revenue owed, render fear and honor where due.", explanationEs: "Pablo manda sometimiento a las autoridades gobernantes porque no hay autoridad sino de Dios (escrito bajo Nerón, nada menos). Dos distinciones: (1) La sumisión es más amplia que la obediencia — cuando la autoridad civil manda lo que Dios prohíbe, el creyente desobedece (Hechos 5:29: obedecer a Dios antes que a los hombres) pero permanece bajo la disciplina de la autoridad, soportando el costo del rechazo de conciencia. (2) Pablo no aboga por la fusión de iglesia y estado. La esfera de la autoridad civil es refrenar el mal y recompensar el bien; la esfera de la iglesia es proclamar el evangelio. El deber concreto del creyente: pagar los impuestos debidos, dar tributo y aduana debidos, rendir temor y honra donde se deben." },
-    { id: `sa_u${UNIT}_6`, textEn: "Explain Romans 13:8-10 — the debt of love and the fulfillment of the law.", textEs: "Explique Romanos 13:8-10 — la deuda del amor y el cumplimiento de la ley.", kw_en: ["owe", "love", "debt", "outstand", "command", "neighbor", "wrong", "fulfil"], kw_es: ["deb", "amar", "deuda", "pendient", "mandam", "prójim", "mal", "cumplim"], explanationEn: "After civic duties Paul turns to a higher debt that can never be finished. The Christian pays his bills and his taxes in full, but the obligation to love is permanently outstanding — it can never be marked paid in full. All commandments protecting the neighbor (adultery, murder, theft, false witness, covetousness) are summed up in one sentence: 'You shall love your neighbor as yourself.' Love does no wrong to a neighbor; love is the fulfillment of the law. Everything the law was protecting, love already honors.", explanationEs: "Después de los deberes cívicos Pablo se vuelve a una deuda mayor que nunca puede terminarse. El cristiano paga sus cuentas y sus impuestos completamente, pero la obligación de amar está permanentemente pendiente — nunca puede marcarse como pagada en su totalidad. Todos los mandamientos que protegen al prójimo (adulterio, homicidio, hurto, falso testimonio, codicia) se resumen en una frase: 'Amarás a tu prójimo como a ti mismo.' El amor no hace mal al prójimo; el amor es el cumplimiento de la ley. Todo lo que la ley protegía, el amor ya honra." },
-    { id: `sa_u${UNIT}_7`, textEn: "Explain Paul's eschatological urgency in Romans 13:11-14 and how it restates 12:1-2.", textEs: "Explique la urgencia escatológica de Pablo en Romanos 13:11-14 y cómo reformula 12:1-2.", kw_en: ["awake", "salv", "night", "darkness", "armor", "light", "provis", "flesh"], kw_es: ["levant", "salv", "noche", "tinieblas", "armas", "luz", "provis", "carne"], explanationEn: "Paul ends chapter 13 with urgency: it is high time to awake from sleep; salvation is nearer than when we first believed. The night is far spent; the day is at hand. So put off the deeds of darkness (revelry, drunkenness, immorality, indecency, strife, envy) and put on the armor of light. The climax: 'Put on the Lord Jesus Christ, and make no provision for the flesh.' The Christian wakes up dressed in Christ. This is a restatement of 12:1-2 — the body offered, the mind renewed, the Lord Jesus worn like clothing every morning. The bookends of these two chapters are the same.", explanationEs: "Pablo termina el capítulo 13 con urgencia: es hora de levantarse del sueño; la salvación está más cerca que cuando creímos. La noche está avanzada; el día se acerca. Así que desechen las obras de las tinieblas (disipación, embriaguez, lujurias, lascivias, contiendas, envidias) y vístanse de las armas de la luz. El clímax: 'Vístanse del Señor Jesucristo, y no hagan provisión para la carne.' El cristiano se levanta vestido de Cristo. Esto es una reformulación de 12:1-2 — el cuerpo ofrecido, la mente renovada, el Señor Jesús vestido como ropa cada mañana. Los extremos de estos dos capítulos son los mismos." },
-    { id: `sa_u${UNIT}_8`, textEn: "Define the 'weak in faith' and the 'strong' in Romans 14:1-12 and how Paul governs their relationship.", textEs: "Defina los 'débiles en la fe' y los 'fuertes' en Romanos 14:1-12 y cómo Pablo gobierna su relación.", kw_en: ["weak", "strong", "libert", "accept", "despis", "judg", "servant", "account"], kw_es: ["débil", "fuert", "libert", "acept", "despreci", "juzg", "siervo", "cuenta"], explanationEn: "The 'weak in faith' are those whose conscience has not yet rested in the full liberty Christ won — they observe food restrictions and special days. The 'strong' appreciate the full freedom Christ purchased. Both are accepted by the Lord. Paul governs the relationship by four foundations: (1) Each is the Lord's servant; to his own Master he stands or falls; the Lord is able to make him stand. (2) Each will give account to God for himself, not for his brother. (3) The strong must not despise; the weak must not judge. (4) Neither is to violate the other's conscience.", explanationEs: "Los 'débiles en la fe' son aquellos cuya conciencia aún no ha descansado en la plena libertad que Cristo ganó — observan restricciones alimentarias y días especiales. Los 'fuertes' aprecian la plena libertad que Cristo compró. Ambos son aceptados por el Señor. Pablo gobierna la relación por cuatro fundamentos: (1) Cada uno es siervo del Señor; para su propio Señor está en pie o cae; el Señor es poderoso para hacerlo estar firme. (2) Cada uno dará cuenta a Dios de sí mismo, no de su hermano. (3) Los fuertes no deben despreciar; los débiles no deben juzgar. (4) Ninguno debe violar la conciencia del otro." },
-    { id: `sa_u${UNIT}_9`, textEn: "What does Romans 14:17 teach about the kingdom of God, and why does this matter for disputable matters?", textEs: "¿Qué enseña Romanos 14:17 sobre el reino de Dios, y por qué importa esto para los asuntos disputables?", kw_en: ["eating", "righteous", "peace", "joy", "Spirit", "disputab", "destroy", "edif"], kw_es: ["comida", "justicia", "paz", "gozo", "Espíritu", "disputab", "destru", "edif"], explanationEn: "Romans 14:17 declares the kingdom of God is not eating and drinking but righteousness, peace, and joy in the Holy Spirit. This matters enormously for disputable matters: Christianity is not finally about menu, calendar, or any other contested non-essential. The kingdom is bigger than disputes that have divided churches throughout history. Paul therefore says: do not destroy the work of God for the sake of food. Pursue the things that make for peace and edify one another. The unity of the body is more important than winning the argument about disputable matters.", explanationEs: "Romanos 14:17 declara que el reino de Dios no es comida ni bebida sino justicia, paz y gozo en el Espíritu Santo. Esto importa enormemente para los asuntos disputables: el cristianismo no se trata finalmente de menú, calendario, o cualquier otro no-esencial disputado. El reino es más grande que las disputas que han dividido iglesias a lo largo de la historia. Pablo por tanto dice: no destruyan la obra de Dios por causa de comida. Sigan las cosas que hacen a la paz y edifican unos a otros. La unidad del cuerpo es más importante que ganar el argumento sobre asuntos disputables." },
-    { id: `sa_u${UNIT}_10`, textEn: "Explain the principle 'whatever is not from faith is sin' (Rom 14:23) and how it cuts in both directions.", textEs: "Explique el principio 'todo lo que no es de fe es pecado' (Rom 14:23) y cómo corta en ambas direcciones.", kw_en: ["conscien", "sin", "lawful", "both", "weak", "strong", "libert", "love"], kw_es: ["concien", "pecado", "lícit", "ambos", "débil", "fuert", "libert", "amor"], explanationEn: "Romans 14:23 — whatever is not of faith is sin. A Christian who acts against his own conscience sins by violating conscience, even if the act itself was lawful. This cuts in both directions: (1) The 'strong' must not push the 'weak' into actions their conscience cannot bear; doing so would lead the weak into the sin of violated conscience. (2) The 'weak' must not bind on others what is not biblically required, treating non-essentials as essentials. The governing principle is 1 Cor 6:12: 'All things are lawful for me, but not all things are helpful.' Christian liberty is real, but its use is governed by love.", explanationEs: "Romanos 14:23 — todo lo que no es de fe es pecado. Un cristiano que actúa contra su propia conciencia peca al violar la conciencia, aun cuando el acto en sí fuera lícito. Esto corta en ambas direcciones: (1) Los 'fuertes' no deben empujar a los 'débiles' a acciones que su conciencia no puede soportar; hacerlo llevaría a los débiles al pecado de la conciencia violada. (2) Los 'débiles' no deben imponer a otros lo que no es bíblicamente requerido, tratando los no-esenciales como esenciales. El principio gobernante es 1 Cor 6:12: 'Todas las cosas me son lícitas, mas no todas convienen.' La libertad cristiana es real, pero su uso es gobernado por el amor." }
-];
+/* CTSRomans — unit 9. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "romans",
+ "unit": 9,
+ "totalUnits": 10,
+ "filePrefix": "CTSRomans",
+ "prevHref": "CTSRomansUnit8.html",
+ "nextHref": "CTSRomansUnit10.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "The word 'therefore' at the start of Romans 12:1 connects the practical exhortation to:",
+    "es": "La palabra 'por tanto' al inicio de Romanos 12:1 conecta la exhortación práctica con:"
+   },
+   "options": {
+    "en": [
+     "The Great Commission",
+     "The Old Testament moral law",
+     "Roman civic philosophy",
+     "The mercies of God already unfolded in chapters 1-11"
+    ],
+    "es": [
+     "La Gran Comisión",
+     "La ley moral del Antiguo Testamento",
+     "La filosofía cívica romana",
+     "Las misericordias de Dios ya desplegadas en los capítulos 1-11"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. The strongest motive for Christian living is mercy already received, not law.",
+    "es": "Correcto. El motivo más fuerte para la vida cristiana es la misericordia ya recibida, no la ley."
+   }
+  },
+  {
+   "stem": {
+    "en": "In Romans 12:1, Paul asks believers to present their bodies as:",
+    "es": "En Romanos 12:1, Pablo pide a los creyentes presentar sus cuerpos como:"
+   },
+   "options": {
+    "en": [
+     "A dead sacrifice for atonement",
+     "A living sacrifice, holy and acceptable to God, as their reasonable service",
+     "An optional spiritual gift",
+     "A symbolic offering only"
+    ],
+    "es": [
+     "Un sacrificio muerto para expiación",
+     "Un sacrificio vivo, santo y agradable a Dios, que es su racional culto",
+     "Un don espiritual opcional",
+     "Solo una ofrenda simbólica"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. Unlike the Old Testament dead animal, Paul asks for a living sacrifice — the whole life, surrendered daily.",
+    "es": "Correcto. A diferencia del animal muerto del Antiguo Testamento, Pablo pide un sacrificio vivo — toda la vida, entregada a diario."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Greek word translated 'transformed' in Romans 12:2 is:",
+    "es": "La palabra griega traducida 'transformaos' en Romanos 12:2 es:"
+   },
+   "options": {
+    "en": [
+     "Schematizō (to scheme)",
+     "Plasso (to mold)",
+     "Synergeō (to work with)",
+     "Metamorphoō — from which we get 'metamorphosis'"
+    ],
+    "es": [
+     "Schematizō (tramar)",
+     "Plasso (moldear)",
+     "Synergeō (colaborar)",
+     "Metamorphoō — de donde viene 'metamorfosis'"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. Metamorphosis — the caterpillar-to-butterfly word. Christian growth is internal change, not external molding.",
+    "es": "Correcto. Metamorfosis — la palabra de oruga-a-mariposa. El crecimiento cristiano es cambio interno, no moldeo externo."
+   }
+  },
+  {
+   "stem": {
+    "en": "The two opposite verbs of Christian life in Romans 12:2 are:",
+    "es": "Los dos verbos opuestos de la vida cristiana en Romanos 12:2 son:"
+   },
+   "options": {
+    "en": [
+     "Hope and despair",
+     "Conformed (to this world) and transformed (by the renewing of the mind)",
+     "Work and rest",
+     "Believe and doubt"
+    ],
+    "es": [
+     "Esperar y desesperar",
+     "Conformarse (a este mundo) y transformarse (por la renovación de la mente)",
+     "Trabajar y descansar",
+     "Creer y dudar"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. Conformed = squeezed from outside; transformed = changed from inside. Both verbs are present tense — ongoing daily.",
+    "es": "Correcto. Conformarse = exprimido desde fuera; transformarse = cambiado desde dentro. Ambos verbos están en tiempo presente — continuo, a diario."
+   }
+  },
+  {
+   "stem": {
+    "en": "In Romans 12:3-8, Paul's teaching on spiritual gifts establishes that:",
+    "es": "En Romanos 12:3-8, la enseñanza de Pablo sobre los dones espirituales establece que:"
+   },
+   "options": {
+    "en": [
+     "Spiritual gifts are tools to build with — given to serve the body, used in complementarity, not toys or weapons",
+     "Gifts are for elevating the giver",
+     "All Christians receive every gift",
+     "Gifts are private and never for the church"
+    ],
+    "es": [
+     "Los dones espirituales son herramientas para edificar — dados para servir al cuerpo, usados en complementariedad, no juguetes ni armas",
+     "Los dones sirven para exaltar al que los tiene",
+     "Todos los cristianos reciben todos los dones",
+     "Los dones son privados y nunca para la iglesia"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. Tools to build with, not toys to play with or weapons to fight with. Used in complementarity within the one body.",
+    "es": "Correcto. Herramientas para edificar, no juguetes para jugar ni armas para pelear. Usados en complementariedad dentro del único cuerpo."
+   }
+  },
+  {
+   "stem": {
+    "en": "The picture of the church in Romans 12:4-5 is:",
+    "es": "La imagen de la iglesia en Romanos 12:4-5 es:"
+   },
+   "options": {
+    "en": [
+     "A franchise of independent congregations",
+     "A pyramid of authority",
+     "Many members of one body in Christ, each belonging to all the others",
+     "A loose collection of individuals"
+    ],
+    "es": [
+     "Una franquicia de congregaciones independientes",
+     "Una pirámide de autoridad",
+     "Muchos miembros de un cuerpo en Cristo, cada uno perteneciendo a todos los demás",
+     "Una colección suelta de individuos"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. One body, many members, mutually belonging. The eye does not become an ear; it serves by being an eye while the ear is being an ear.",
+    "es": "Correcto. Un cuerpo, muchos miembros, perteneciéndose mutuamente. El ojo no se vuelve oído; sirve siendo ojo mientras el oído es oído."
+   }
+  },
+  {
+   "stem": {
+    "en": "Paul's command 'rejoice with those who rejoice, weep with those who weep' (Rom 12:15) means Christian love:",
+    "es": "El mandato de Pablo 'gozaos con los que se gozan; llorad con los que lloran' (Ro 12:15) significa que el amor cristiano:"
+   },
+   "options": {
+    "en": [
+     "Adjusts its emotional register to the brother in front of it",
+     "Prefers solitude",
+     "Avoids emotional engagement",
+     "Maintains constant cheerfulness"
+    ],
+    "es": [
+     "Ajusta su registro emocional al hermano que tiene enfrente",
+     "Prefiere la soledad",
+     "Evita la implicación emocional",
+     "Mantiene una alegría constante"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. Love joins the brother in his actual state — joy with joy, grief with grief.",
+    "es": "Correcto. El amor se une al hermano en su estado real — gozo con gozo, dolor con dolor."
+   }
+  },
+  {
+   "stem": {
+    "en": "The phrase 'as much as depends on you' (Rom 12:18) is honest because:",
+    "es": "La frase 'en cuanto dependa de vosotros' (Ro 12:18) es honesta porque:"
+   },
+   "options": {
+    "en": [
+     "Christians are exempt from conflict",
+     "Some conflicts cannot be ended unilaterally — the believer's duty is what is on his side of the line",
+     "Peace is always easy",
+     "Christians can guarantee peace with everyone"
+    ],
+    "es": [
+     "Los cristianos están exentos del conflicto",
+     "Algunos conflictos no pueden terminarse unilateralmente — el deber del creyente es lo que está de su lado de la línea",
+     "La paz siempre es fácil",
+     "Los cristianos pueden garantizar la paz con todos"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. The believer cannot force peace if the other refuses; his obligation extends only to his own response.",
+    "es": "Correcto. El creyente no puede forzar la paz si el otro se niega; su obligación se extiende solo a su propia respuesta."
+   }
+  },
+  {
+   "stem": {
+    "en": "The phrase 'heap coals of fire on his head' (Rom 12:20) is best understood as:",
+    "es": "La frase 'ascuas de fuego amontonarás sobre su cabeza' (Ro 12:20) se entiende mejor como:"
+   },
+   "options": {
+    "en": [
+     "Magical retribution",
+     "A pagan curse formula",
+     "The Old Testament figure of God's judgment — the believer can return good for evil with assurance God will see to the final reckoning",
+     "Literal punishment by the believer"
+    ],
+    "es": [
+     "Represalia mágica",
+     "Una fórmula de maldición pagana",
+     "La figura del Antiguo Testamento del juicio de Dios — el creyente puede devolver bien por mal con la seguridad de que Dios se encargará del ajuste final",
+     "Castigo literal por parte del creyente"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. Coals of fire = God's judgment in OT (2 Sam 22:9, Ps 11:6, Ps 18:13, Ps 140:9-10, Prov 25:21-22).",
+    "es": "Correcto. Ascuas de fuego = el juicio de Dios en el AT (2 Sa 22:9, Sal 11:6, Sal 18:13, Sal 140:9-10, Pr 25:21-22)."
+   }
+  },
+  {
+   "stem": {
+    "en": "Paul's eight-word philosophy of conflict in Rom 12:21 is:",
+    "es": "La filosofía de ocho palabras de Pablo sobre el conflicto en Ro 12:21 es:"
+   },
+   "options": {
+    "en": [
+     "Pray without ceasing in all things",
+     "Eye for eye and tooth for tooth",
+     "Avoid all confrontation always",
+     "Do not be overcome by evil, but overcome evil with good"
+    ],
+    "es": [
+     "Orad sin cesar en todo",
+     "Ojo por ojo y diente por diente",
+     "Evita toda confrontación siempre",
+     "No seas vencido de lo malo, sino vence con el bien el mal"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. You cannot out-dark darkness; light extinguishes it. Love melts hatred like light extinguishes dark.",
+    "es": "Correcto. No puedes vencer la oscuridad con más oscuridad; la luz la extingue. El amor derrite el odio como la luz extingue la oscuridad."
+   }
+  },
+  {
+   "stem": {
+    "en": "In Romans 13:1-2, Paul says the believer is to be subject to governing authorities because:",
+    "es": "En Romanos 13:1-2, Pablo dice que el creyente ha de estar sujeto a las autoridades superiores porque:"
+   },
+   "options": {
+    "en": [
+     "Civil law is the same as moral law",
+     "The state is divine",
+     "There is no authority except from God, and the existing authorities have been instituted by Him",
+     "Christians have no choice"
+    ],
+    "es": [
+     "La ley civil es lo mismo que la ley moral",
+     "El estado es divino",
+     "No hay autoridad sino de parte de Dios, y las autoridades existentes han sido ordenadas por Él",
+     "Los cristianos no tienen opción"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. Authority is God's institution to restrain a fallen world. Paul wrote this under Nero.",
+    "es": "Correcto. La autoridad es institución de Dios para refrenar un mundo caído. Pablo escribió esto bajo Nerón."
+   }
+  },
+  {
+   "stem": {
+    "en": "The key distinction in Romans 13 between submission and obedience is:",
+    "es": "La distinción clave en Romanos 13 entre sujeción y obediencia es:"
+   },
+   "options": {
+    "en": [
+     "Submission includes obedience plus respect and willingness to bear consequences when conscience demands disobedience to authority that commands sin",
+     "They are identical concepts",
+     "Submission excludes obedience",
+     "Submission means total agreement"
+    ],
+    "es": [
+     "La sujeción incluye la obediencia más el respeto y la disposición a llevar las consecuencias cuando la conciencia exige desobedecer a una autoridad que manda pecar",
+     "Son conceptos idénticos",
+     "La sujeción excluye la obediencia",
+     "Sujeción significa acuerdo total"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. Acts 5:29 — obey God rather than men. But submission remains even in disobedience; the believer bears the cost.",
+    "es": "Correcto. Hechos 5:29 — obedecer a Dios antes que a los hombres. Pero la sujeción permanece aun en la desobediencia; el creyente lleva el costo."
+   }
+  },
+  {
+   "stem": {
+    "en": "Romans 13 does NOT teach:",
+    "es": "Romanos 13 NO enseña:"
+   },
+   "options": {
+    "en": [
+     "Submission to governing authorities",
+     "The fusion of church and state into a theocracy",
+     "Paying taxes that are owed",
+     "That the authority's sword is for justice"
+    ],
+    "es": [
+     "La sujeción a las autoridades superiores",
+     "La fusión de la iglesia y el estado en una teocracia",
+     "Pagar los impuestos que se deben",
+     "Que la espada de la autoridad es para la justicia"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. Church and state are separate institutions; Paul never advocates merging them. History shows what happens when they are merged.",
+    "es": "Correcto. La iglesia y el estado son instituciones separadas; Pablo nunca aboga por fusionarlas. La historia muestra lo que sucede cuando se fusionan."
+   }
+  },
+  {
+   "stem": {
+    "en": "The 'debt of love' in Romans 13:8 means:",
+    "es": "La 'deuda del amor' en Romanos 13:8 significa:"
+   },
+   "options": {
+    "en": [
+     "Christians owe nothing to anyone",
+     "The Christian pays all civic debts but the obligation to love is permanently outstanding — can never be marked paid in full",
+     "Love is optional for advanced Christians",
+     "Love can be quantified and discharged"
+    ],
+    "es": [
+     "Los cristianos no deben nada a nadie",
+     "El cristiano paga todas las deudas civiles, pero la obligación de amar queda permanentemente pendiente — nunca puede marcarse como saldada",
+     "El amor es opcional para los cristianos avanzados",
+     "El amor puede cuantificarse y saldarse"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. Bills get paid; the debt of love stays open. He who loves another has fulfilled the law.",
+    "es": "Correcto. Las cuentas se pagan; la deuda del amor queda abierta. El que ama al prójimo ha cumplido la ley."
+   }
+  },
+  {
+   "stem": {
+    "en": "In Romans 13:9, Paul says all commandments are summed up in:",
+    "es": "En Romanos 13:9, Pablo dice que todos los mandamientos se resumen en:"
+   },
+   "options": {
+    "en": [
+     "Pray and fast often",
+     "Fear God and keep His commandments",
+     "You shall love your neighbor as yourself",
+     "Worship the Lord your God only"
+    ],
+    "es": [
+     "Ora y ayuna a menudo",
+     "Teme a Dios y guarda sus mandamientos",
+     "Amarás a tu prójimo como a ti mismo",
+     "Adora solo al Señor tu Dios"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. Love does no wrong to a neighbor; love is therefore the fulfillment of the law.",
+    "es": "Correcto. El amor no hace mal al prójimo; el amor es, por tanto, el cumplimiento de la ley."
+   }
+  },
+  {
+   "stem": {
+    "en": "Romans 13:14 closes the chapter with the command to:",
+    "es": "Romanos 13:14 cierra el capítulo con el mandato de:"
+   },
+   "options": {
+    "en": [
+     "Put on the Lord Jesus Christ and make no provision for the flesh",
+     "Practice asceticism",
+     "Attend church regularly",
+     "Memorize Scripture daily"
+    ],
+    "es": [
+     "Vestirse del Señor Jesucristo y no proveer para los deseos de la carne",
+     "Practicar el ascetismo",
+     "Asistir a la iglesia con regularidad",
+     "Memorizar la Escritura a diario"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. The Christian wakes up dressed in Christ. This is a restatement of 12:1-2 — body offered, mind renewed, Christ worn like clothing.",
+    "es": "Correcto. El cristiano despierta vestido de Cristo. Esto reafirma 12:1-2 — el cuerpo ofrecido, la mente renovada, Cristo puesto como vestidura."
+   }
+  },
+  {
+   "stem": {
+    "en": "In Romans 14, Paul calls those whose conscience demanded more restraint:",
+    "es": "En Romanos 14, Pablo llama a aquellos cuya conciencia exigía más restricción:"
+   },
+   "options": {
+    "en": [
+     "The unrepentant",
+     "The lost",
+     "Hypocrites",
+     "The weak in faith — not because faith is deficient but because their conscience has not yet rested in the full liberty Christ won"
+    ],
+    "es": [
+     "Los no arrepentidos",
+     "Los perdidos",
+     "Hipócritas",
+     "Los débiles en la fe — no porque la fe sea deficiente, sino porque su conciencia aún no ha descansado en la plena libertad que Cristo ganó"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. Weakness is in the conscience's grasp of liberty, not in saving faith.",
+    "es": "Correcto. La debilidad está en cómo la conciencia capta la libertad, no en la fe salvadora."
+   }
+  },
+  {
+   "stem": {
+    "en": "The kingdom of God, according to Romans 14:17, is:",
+    "es": "El reino de Dios, según Romanos 14:17, es:"
+   },
+   "options": {
+    "en": [
+     "Political power and territorial dominion",
+     "Eating and drinking and ceremony",
+     "Righteousness, peace, and joy in the Holy Spirit",
+     "Strict observance of religious calendars"
+    ],
+    "es": [
+     "Poder político y dominio territorial",
+     "Comer y beber y ceremonia",
+     "Justicia, paz y gozo en el Espíritu Santo",
+     "La observancia estricta de calendarios religiosos"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. Christianity is not finally about menu or calendar; it is righteousness, peace, joy in the Holy Spirit.",
+    "es": "Correcto. El cristianismo no es finalmente cuestión de menú ni de calendario; es justicia, paz, gozo en el Espíritu Santo."
+   }
+  },
+  {
+   "stem": {
+    "en": "The principle 'whatever is not from faith is sin' (Rom 14:23) means:",
+    "es": "El principio 'todo lo que no proviene de fe es pecado' (Ro 14:23) significa:"
+   },
+   "options": {
+    "en": [
+     "Doubt is always sin",
+     "Christianity is impossible",
+     "Unbelievers cannot do good",
+     "A Christian who acts against his own conscience sins by violating conscience, even if the act itself was lawful"
+    ],
+    "es": [
+     "La duda siempre es pecado",
+     "El cristianismo es imposible",
+     "Los incrédulos no pueden hacer el bien",
+     "Un cristiano que actúa contra su propia conciencia peca por violar la conciencia, aunque el acto mismo fuera lícito"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. Conscience violated is sin. The 'strong' must not push the 'weak' into actions their conscience cannot bear.",
+    "es": "Correcto. La conciencia violada es pecado. Los 'fuertes' no deben empujar a los 'débiles' a acciones que su conciencia no puede soportar."
+   }
+  },
+  {
+   "stem": {
+    "en": "The pursuit principle of Romans 14:19 is:",
+    "es": "El principio de búsqueda de Romanos 14:19 es:"
+   },
+   "options": {
+    "en": [
+     "The things that make for peace and edify one another",
+     "Vigorous public debate",
+     "Identical opinions on disputable matters",
+     "Maximum doctrinal precision"
+    ],
+    "es": [
+     "Las cosas que contribuyen a la paz y a la mutua edificación",
+     "Vigoroso debate público",
+     "Opiniones idénticas en los asuntos discutibles",
+     "Máxima precisión doctrinal"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. The church is built up by pursuit of peace and mutual edification, not by uniform opinions on disputable matters.",
+    "es": "Correcto. La iglesia se edifica con la búsqueda de la paz y la edificación mutua, no con opiniones uniformes en asuntos discutibles."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Explain Paul's appeal in Romans 12:1-2 to present the body as a living sacrifice.",
+    "es": "Explique la apelación de Pablo en Romanos 12:1-2 a presentar el cuerpo en sacrificio vivo."
+   },
+   "keywords": {
+    "en": [
+     "merc",
+     "beseech",
+     "living",
+     "sacrifice",
+     "body",
+     "altar",
+     "reason",
+     "daily"
+    ],
+    "es": [
+     "misericord",
+     "rueg",
+     "vivo",
+     "sacrifici",
+     "cuerpo",
+     "altar",
+     "racion",
+     "diari"
+    ]
+   },
+   "model": {
+    "en": "Paul beseeches rather than commands, appealing by the mercies of God already named in chapters 1-11. The strongest motive for Christian living is mercy received, not law. He asks for a living sacrifice — the whole body, the whole life, surrendered daily on the altar. This is the reasonable (rational) service of those who understand what God has done in Christ. The hardest thing about being a living sacrifice is that it can climb back off the altar; the cross is voluntary every morning.",
+    "es": "Pablo ruega en lugar de mandar, apelando por las misericordias de Dios ya nombradas en los capítulos 1-11. El motivo más fuerte para la vida cristiana es la misericordia recibida, no la ley. Pide un sacrificio vivo — el cuerpo entero, la vida entera, entregada diariamente sobre el altar. Este es el culto racional de aquellos que entienden lo que Dios ha hecho en Cristo. Lo más difícil de ser un sacrificio vivo es que puede bajarse del altar; la cruz es voluntaria cada mañana."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Contrast 'conformed' and 'transformed' in Romans 12:2 using the metamorphosis image.",
+    "es": "Contraste 'conformados' y 'transformados' en Romanos 12:2 usando la imagen de la metamorfosis."
+   },
+   "keywords": {
+    "en": [
+     "conform",
+     "transform",
+     "metamorph",
+     "caterpil",
+     "intern",
+     "extern",
+     "present",
+     "ongoing"
+    ],
+    "es": [
+     "conform",
+     "transform",
+     "metamorf",
+     "oruga",
+     "intern",
+     "extern",
+     "present",
+     "continu"
+    ]
+   },
+   "model": {
+    "en": "'Conformed' means squeezed from outside into a mold; 'transformed' means changed from inside out. The Greek metamorphoō is the word that gives us metamorphosis — caterpillar to butterfly. The caterpillar does not become a butterfly by being pressed into a butterfly-shaped form; it becomes a butterfly by internal change. Christian growth is metamorphosis, not molding. Both verbs are in the present tense — the world's pressure to conform is ongoing, and the Spirit's transforming work is ongoing. The Christian life is a daily contest.",
+    "es": "'Conformados' significa apretado desde afuera a un molde; 'transformados' significa cambiado desde adentro. El griego metamorphoō es la palabra que nos da metamorfosis — oruga a mariposa. La oruga no se convierte en mariposa siendo presionada en un molde con forma de mariposa; se convierte en mariposa por el cambio interior. El crecimiento cristiano es metamorfosis, no moldeado. Ambos verbos están en tiempo presente — la presión del mundo para conformar es continua, y la obra transformadora del Espíritu es continua. La vida cristiana es una contienda diaria."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the body and gifts teaching of Romans 12:3-8, including the 'tools not toys or weapons' principle.",
+    "es": "Explique la enseñanza del cuerpo y los dones de Romanos 12:3-8, incluyendo el principio 'herramientas no juguetes ni armas'."
+   },
+   "keywords": {
+    "en": [
+     "sober",
+     "body",
+     "member",
+     "gift",
+     "grace",
+     "tool",
+     "weapon",
+     "complement"
+    ],
+    "es": [
+     "cordur",
+     "cuerpo",
+     "miembr",
+     "don",
+     "gracia",
+     "herramient",
+     "arma",
+     "complement"
+    ]
+   },
+   "model": {
+    "en": "Paul warns first against thinking too highly of oneself, urging sober judgment. Every believer has a measure of faith but no believer has every gift. The body has many members with different functions, all belonging to one another in Christ. Seven representative gifts are listed (prophesy, serve, teach, exhort, give, lead, show mercy), each used with diligence. The governing principle: spiritual gifts are tools to build with, not toys to play with or weapons to fight with. Healthy church life is complementarity — the eye does not become an ear; it serves by being an eye while the ear is being an ear.",
+    "es": "Pablo advierte primero contra pensar de uno mismo más de lo conveniente, instando a la cordura. Cada creyente tiene una medida de fe pero ninguno tiene todos los dones. El cuerpo tiene muchos miembros con diferentes funciones, todos perteneciendo unos a otros en Cristo. Se enumeran siete dones representativos (profetizar, servir, enseñar, exhortar, dar, presidir, mostrar misericordia), cada uno usado con diligencia. El principio gobernante: los dones espirituales son herramientas para construir, no juguetes para jugar ni armas para pelear. La vida eclesiástica sana es complementariedad — el ojo no se convierte en oído; sirve siendo ojo mientras el oído está siendo oído."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain Paul's teaching on love for enemies in Romans 12:17-21, including the 'coals of fire' phrase.",
+    "es": "Explique la enseñanza de Pablo sobre el amor a los enemigos en Romanos 12:17-21, incluyendo la frase 'ascuas de fuego'."
+   },
+   "keywords": {
+    "en": [
+     "evil",
+     "peace",
+     "avenge",
+     "wrath",
+     "coal",
+     "overcom",
+     "good",
+     "light"
+    ],
+    "es": [
+     "mal",
+     "paz",
+     "veng",
+     "ira",
+     "ascua",
+     "venc",
+     "bien",
+     "luz"
+    ]
+   },
+   "model": {
+    "en": "Paul commands: repay no one evil for evil; if possible, as much as depends on you, live peaceably with all. Some conflicts cannot be ended unilaterally; the believer's duty is what is on his side. Do not avenge yourselves; give place to God's wrath, for vengeance is His. The phrase 'heap coals of fire on his head' draws on consistent Old Testament imagery (2 Sam 22:9, Ps 11:6, Ps 18:13, Ps 140:9-10, Prov 25:21-22) where coals of fire = God's judgment. The believer can return good for evil with assurance that God will see to the final reckoning. Closing principle: overcome evil with good. You cannot out-dark darkness; light extinguishes it. Love acts like light in the soul of the other.",
+    "es": "Pablo manda: no paguen a nadie mal por mal; si es posible, en cuanto dependa de ustedes, tengan paz con todos. Algunos conflictos no pueden terminarse unilateralmente; el deber del creyente es lo que está de su lado. No se venguen; den lugar a la ira de Dios, porque la venganza es Suya. La frase 'ascuas de fuego sobre su cabeza' se basa en la imaginería consistente del Antiguo Testamento (2 Sam 22:9, Sal 11:6, Sal 18:13, Sal 140:9-10, Prov 25:21-22) donde las ascuas de fuego = el juicio de Dios. El creyente puede devolver bien por mal con la seguridad de que Dios verá el ajuste final. Principio final: venzan el mal con el bien. No pueden ganarle a la oscuridad con más oscuridad; la luz la extingue. El amor actúa como luz en el alma del otro."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Summarize Paul's teaching on civil authority in Romans 13:1-7, including the key distinctions.",
+    "es": "Resuma la enseñanza de Pablo sobre la autoridad civil en Romanos 13:1-7, incluyendo las distinciones clave."
+   },
+   "keywords": {
+    "en": [
+     "subject",
+     "author",
+     "Nero",
+     "submiss",
+     "obey",
+     "conscien",
+     "state",
+     "tax"
+    ],
+    "es": [
+     "somet",
+     "potestad",
+     "Nerón",
+     "sumis",
+     "obedec",
+     "concien",
+     "estado",
+     "impuest"
+    ]
+   },
+   "model": {
+    "en": "Paul commands subjection to governing authorities because there is no authority except from God (written under Nero, no less). Two distinctions: (1) Submission is broader than obedience — when civil authority commands what God forbids, the believer disobeys (Acts 5:29: obey God rather than men) but remains under the authority's discipline, bearing the cost of conscientious refusal. (2) Paul does not advocate fusion of church and state. The civil authority's sphere is restraining evil and rewarding good; the church's sphere is proclaiming the gospel. The believer's concrete duty: pay taxes owed, give customs and revenue owed, render fear and honor where due.",
+    "es": "Pablo manda sometimiento a las autoridades gobernantes porque no hay autoridad sino de Dios (escrito bajo Nerón, nada menos). Dos distinciones: (1) La sumisión es más amplia que la obediencia — cuando la autoridad civil manda lo que Dios prohíbe, el creyente desobedece (Hechos 5:29: obedecer a Dios antes que a los hombres) pero permanece bajo la disciplina de la autoridad, soportando el costo del rechazo de conciencia. (2) Pablo no aboga por la fusión de iglesia y estado. La esfera de la autoridad civil es refrenar el mal y recompensar el bien; la esfera de la iglesia es proclamar el evangelio. El deber concreto del creyente: pagar los impuestos debidos, dar tributo y aduana debidos, rendir temor y honra donde se deben."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain Romans 13:8-10 — the debt of love and the fulfillment of the law.",
+    "es": "Explique Romanos 13:8-10 — la deuda del amor y el cumplimiento de la ley."
+   },
+   "keywords": {
+    "en": [
+     "owe",
+     "love",
+     "debt",
+     "outstand",
+     "command",
+     "neighbor",
+     "wrong",
+     "fulfil"
+    ],
+    "es": [
+     "deb",
+     "amar",
+     "deuda",
+     "pendient",
+     "mandam",
+     "prójim",
+     "mal",
+     "cumplim"
+    ]
+   },
+   "model": {
+    "en": "After civic duties Paul turns to a higher debt that can never be finished. The Christian pays his bills and his taxes in full, but the obligation to love is permanently outstanding — it can never be marked paid in full. All commandments protecting the neighbor (adultery, murder, theft, false witness, covetousness) are summed up in one sentence: 'You shall love your neighbor as yourself.' Love does no wrong to a neighbor; love is the fulfillment of the law. Everything the law was protecting, love already honors.",
+    "es": "Después de los deberes cívicos Pablo se vuelve a una deuda mayor que nunca puede terminarse. El cristiano paga sus cuentas y sus impuestos completamente, pero la obligación de amar está permanentemente pendiente — nunca puede marcarse como pagada en su totalidad. Todos los mandamientos que protegen al prójimo (adulterio, homicidio, hurto, falso testimonio, codicia) se resumen en una frase: 'Amarás a tu prójimo como a ti mismo.' El amor no hace mal al prójimo; el amor es el cumplimiento de la ley. Todo lo que la ley protegía, el amor ya honra."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain Paul's eschatological urgency in Romans 13:11-14 and how it restates 12:1-2.",
+    "es": "Explique la urgencia escatológica de Pablo en Romanos 13:11-14 y cómo reformula 12:1-2."
+   },
+   "keywords": {
+    "en": [
+     "awake",
+     "salv",
+     "night",
+     "darkness",
+     "armor",
+     "light",
+     "provis",
+     "flesh"
+    ],
+    "es": [
+     "levant",
+     "salv",
+     "noche",
+     "tinieblas",
+     "armas",
+     "luz",
+     "provis",
+     "carne"
+    ]
+   },
+   "model": {
+    "en": "Paul ends chapter 13 with urgency: it is high time to awake from sleep; salvation is nearer than when we first believed. The night is far spent; the day is at hand. So put off the deeds of darkness (revelry, drunkenness, immorality, indecency, strife, envy) and put on the armor of light. The climax: 'Put on the Lord Jesus Christ, and make no provision for the flesh.' The Christian wakes up dressed in Christ. This is a restatement of 12:1-2 — the body offered, the mind renewed, the Lord Jesus worn like clothing every morning. The bookends of these two chapters are the same.",
+    "es": "Pablo termina el capítulo 13 con urgencia: es hora de levantarse del sueño; la salvación está más cerca que cuando creímos. La noche está avanzada; el día se acerca. Así que desechen las obras de las tinieblas (disipación, embriaguez, lujurias, lascivias, contiendas, envidias) y vístanse de las armas de la luz. El clímax: 'Vístanse del Señor Jesucristo, y no hagan provisión para la carne.' El cristiano se levanta vestido de Cristo. Esto es una reformulación de 12:1-2 — el cuerpo ofrecido, la mente renovada, el Señor Jesús vestido como ropa cada mañana. Los extremos de estos dos capítulos son los mismos."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Define the 'weak in faith' and the 'strong' in Romans 14:1-12 and how Paul governs their relationship.",
+    "es": "Defina los 'débiles en la fe' y los 'fuertes' en Romanos 14:1-12 y cómo Pablo gobierna su relación."
+   },
+   "keywords": {
+    "en": [
+     "weak",
+     "strong",
+     "libert",
+     "accept",
+     "despis",
+     "judg",
+     "servant",
+     "account"
+    ],
+    "es": [
+     "débil",
+     "fuert",
+     "libert",
+     "acept",
+     "despreci",
+     "juzg",
+     "siervo",
+     "cuenta"
+    ]
+   },
+   "model": {
+    "en": "The 'weak in faith' are those whose conscience has not yet rested in the full liberty Christ won — they observe food restrictions and special days. The 'strong' appreciate the full freedom Christ purchased. Both are accepted by the Lord. Paul governs the relationship by four foundations: (1) Each is the Lord's servant; to his own Master he stands or falls; the Lord is able to make him stand. (2) Each will give account to God for himself, not for his brother. (3) The strong must not despise; the weak must not judge. (4) Neither is to violate the other's conscience.",
+    "es": "Los 'débiles en la fe' son aquellos cuya conciencia aún no ha descansado en la plena libertad que Cristo ganó — observan restricciones alimentarias y días especiales. Los 'fuertes' aprecian la plena libertad que Cristo compró. Ambos son aceptados por el Señor. Pablo gobierna la relación por cuatro fundamentos: (1) Cada uno es siervo del Señor; para su propio Señor está en pie o cae; el Señor es poderoso para hacerlo estar firme. (2) Cada uno dará cuenta a Dios de sí mismo, no de su hermano. (3) Los fuertes no deben despreciar; los débiles no deben juzgar. (4) Ninguno debe violar la conciencia del otro."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does Romans 14:17 teach about the kingdom of God, and why does this matter for disputable matters?",
+    "es": "¿Qué enseña Romanos 14:17 sobre el reino de Dios, y por qué importa esto para los asuntos disputables?"
+   },
+   "keywords": {
+    "en": [
+     "eating",
+     "righteous",
+     "peace",
+     "joy",
+     "Spirit",
+     "disputab",
+     "destroy",
+     "edif"
+    ],
+    "es": [
+     "comida",
+     "justicia",
+     "paz",
+     "gozo",
+     "Espíritu",
+     "disputab",
+     "destru",
+     "edif"
+    ]
+   },
+   "model": {
+    "en": "Romans 14:17 declares the kingdom of God is not eating and drinking but righteousness, peace, and joy in the Holy Spirit. This matters enormously for disputable matters: Christianity is not finally about menu, calendar, or any other contested non-essential. The kingdom is bigger than disputes that have divided churches throughout history. Paul therefore says: do not destroy the work of God for the sake of food. Pursue the things that make for peace and edify one another. The unity of the body is more important than winning the argument about disputable matters.",
+    "es": "Romanos 14:17 declara que el reino de Dios no es comida ni bebida sino justicia, paz y gozo en el Espíritu Santo. Esto importa enormemente para los asuntos disputables: el cristianismo no se trata finalmente de menú, calendario, o cualquier otro no-esencial disputado. El reino es más grande que las disputas que han dividido iglesias a lo largo de la historia. Pablo por tanto dice: no destruyan la obra de Dios por causa de comida. Sigan las cosas que hacen a la paz y edifican unos a otros. La unidad del cuerpo es más importante que ganar el argumento sobre asuntos disputables."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the principle 'whatever is not from faith is sin' (Rom 14:23) and how it cuts in both directions.",
+    "es": "Explique el principio 'todo lo que no es de fe es pecado' (Rom 14:23) y cómo corta en ambas direcciones."
+   },
+   "keywords": {
+    "en": [
+     "conscien",
+     "sin",
+     "lawful",
+     "both",
+     "weak",
+     "strong",
+     "libert",
+     "love"
+    ],
+    "es": [
+     "concien",
+     "pecado",
+     "lícit",
+     "ambos",
+     "débil",
+     "fuert",
+     "libert",
+     "amor"
+    ]
+   },
+   "model": {
+    "en": "Romans 14:23 — whatever is not of faith is sin. A Christian who acts against his own conscience sins by violating conscience, even if the act itself was lawful. This cuts in both directions: (1) The 'strong' must not push the 'weak' into actions their conscience cannot bear; doing so would lead the weak into the sin of violated conscience. (2) The 'weak' must not bind on others what is not biblically required, treating non-essentials as essentials. The governing principle is 1 Cor 6:12: 'All things are lawful for me, but not all things are helpful.' Christian liberty is real, but its use is governed by love.",
+    "es": "Romanos 14:23 — todo lo que no es de fe es pecado. Un cristiano que actúa contra su propia conciencia peca al violar la conciencia, aun cuando el acto en sí fuera lícito. Esto corta en ambas direcciones: (1) Los 'fuertes' no deben empujar a los 'débiles' a acciones que su conciencia no puede soportar; hacerlo llevaría a los débiles al pecado de la conciencia violada. (2) Los 'débiles' no deben imponer a otros lo que no es bíblicamente requerido, tratando los no-esenciales como esenciales. El principio gobernante es 1 Cor 6:12: 'Todas las cosas me son lícitas, mas no todas convienen.' La libertad cristiana es real, pero su uso es gobernado por el amor."
+   }
+  }
+ ]
+};

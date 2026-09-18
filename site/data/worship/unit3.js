@@ -1,64 +1,753 @@
-/* CTSWorship - unit 3: per-unit configuration and content. */
-
-const UNIT = 3;
-
-const CURRENT_UNIT = 3;
-
-const NEXT_URL = 'CTSWorshipUnit4.html';
-
-const mcQuestions = [
-    { textEn: "1. According to Segler, the difference between pagan worship and biblical worship is:", textEs: "1. Según Segler, la diferencia entre la adoración pagana y la bíblica es:", optionsEn: ["the building used", "the fact of God's revelation", "the day of the week", "the language spoken"], optionsEs: ["el edificio usado", "el hecho de la revelación de Dios", "el día de la semana", "el idioma hablado"], correct: 1 },
-    { textEn: "2. Pagan worship typically directs itself toward an object found in:", textEs: "2. La adoración pagana típicamente se dirige hacia un objeto hallado en:", optionsEn: ["nature", "the Scriptures", "the temple", "heaven"], optionsEs: ["la naturaleza", "las Escrituras", "el templo", "el cielo"], correct: 0 },
-    { textEn: "3. Old Testament worship first centered on the tabernacle and later on:", textEs: "3. La adoración del Antiguo Testamento primero se centró en el tabernáculo y después en:", optionsEn: ["the synagogue", "the temple", "the home", "the marketplace"], optionsEs: ["la sinagoga", "el templo", "el hogar", "el mercado"], correct: 1 },
-    { textEn: "4. The most important feature of temple worship was:", textEs: "4. La característica más importante de la adoración en el templo era:", optionsEn: ["the singing", "the offering of sacrifices", "the reading", "the dancing"], optionsEs: ["el canto", "la ofrenda de sacrificios", "la lectura", "la danza"], correct: 1 },
-    { textEn: "5. The temple in which sacrifice was central was built by:", textEs: "5. El templo en el cual el sacrificio era central fue edificado por:", optionsEn: ["Moses", "David", "Solomon", "Abraham"], optionsEs: ["Moisés", "David", "Salomón", "Abraham"], correct: 2 },
-    { textEn: "6. Synagogue worship developed during the:", textEs: "6. La adoración en la sinagoga se desarrolló durante el:", optionsEn: ["time of Moses", "captivity, when the temple was unavailable", "reign of David", "time of Christ"], optionsEs: ["tiempo de Moisés", "cautiverio, cuando el templo no estaba disponible", "reinado de David", "tiempo de Cristo"], correct: 1 },
-    { textEn: "7. Synagogue worship served two purposes: worship and:", textEs: "7. La adoración en la sinagoga servía dos propósitos: la adoración y:", optionsEn: ["sacrifice", "teaching", "feasting", "trade"], optionsEs: ["el sacrificio", "la enseñanza", "el banquete", "el comercio"], correct: 1 },
-    { textEn: "8. Luke 4:16 shows that Jesus worshipped in the synagogue:", textEs: "8. Lucas 4:16 muestra que Jesús adoraba en la sinagoga:", optionsEn: ["only once", "secretly", "reluctantly", "as his custom"], optionsEs: ["solo una vez", "en secreto", "de mala gana", "como su costumbre"], correct: 3 },
-    { textEn: "9. Christians began to worship on Sunday, the first day of the week, to remember the:", textEs: "9. Los cristianos comenzaron a adorar el domingo, el primer día de la semana, para recordar la:", optionsEn: ["creation", "Pentecost", "exodus", "resurrection"], optionsEs: ["creación", "Pentecostés", "éxodo", "resurrección"], correct: 3 },
-    { textEn: "10. In Colossians 2 Paul tells believers to let no one judge them regarding:", textEs: "10. En Colosenses 2 Pablo dice a los creyentes que nadie los juzgue respecto a:", optionsEn: ["a Sabbath day", "their clothing", "their food only", "their language"], optionsEs: ["un día de sábado", "su vestimenta", "solo su comida", "su idioma"], correct: 0 },
-    { textEn: "11. Which of the following was NOT an element of New Testament worship?", textEs: "11. ¿Cuál de los siguientes NO era un elemento de la adoración del Nuevo Testamento?", optionsEn: ["Hymns", "The ordinances", "Animal sacrifice", "Preaching"], optionsEs: ["Himnos", "Las ordenanzas", "Sacrificio de animales", "Predicación"], correct: 2 },
-    { textEn: "12. An example of a New Testament hymn beyond the Psalms is found in:", textEs: "12. Un ejemplo de un himno del Nuevo Testamento más allá de los Salmos se halla en:", optionsEn: ["Genesis 1", "Exodus 20", "Philippians 2", "Revelation 22"], optionsEs: ["Génesis 1", "Éxodo 20", "Filipenses 2", "Apocalipsis 22"], correct: 2 },
-    { textEn: "13. The first broad outline of Christian worship is given around AD 140 by:", textEs: "13. El primer bosquejo amplio de la adoración cristiana se da alrededor del año 140 por:", optionsEn: ["Augustine", "Calvin", "Constantine", "Justin Martyr"], optionsEs: ["Agustín", "Calvino", "Constantino", "Justino Mártir"], correct: 3 },
-    { textEn: "14. In Justin Martyr's description, after the reading and discourse, the people:", textEs: "14. En la descripción de Justino Mártir, después de la lectura y el discurso, el pueblo:", optionsEn: ["went home", "sang in Latin", "rose together and prayed", "lit candles"], optionsEs: ["se iba a casa", "cantaba en latín", "se levantaba junto y oraba", "encendía velas"], correct: 2 },
-    { textEn: "15. Christianity became the legal religion in the fourth century under:", textEs: "15. El cristianismo se volvió la religión legal en el siglo cuarto bajo:", optionsEn: ["Nero", "Diocletian", "Trajan", "Constantine"], optionsEs: ["Nerón", "Diocleciano", "Trajano", "Constantino"], correct: 3 },
-    { textEn: "16. A negative effect of Constantine's legalization was that:", textEs: "16. Un efecto negativo de la legalización de Constantino fue que:", optionsEn: ["unregenerate pagans were baptized into the church", "worship was forbidden", "the Bible was destroyed", "preaching increased"], optionsEs: ["paganos inconversos fueron bautizados en la iglesia", "la adoración fue prohibida", "la Biblia fue destruida", "la predicación aumentó"], correct: 0 },
-    { textEn: "17. In the fourth and fifth centuries the Eucharist changed from joy to an atmosphere of:", textEs: "17. En los siglos cuarto y quinto la Eucaristía cambió de gozo a una atmósfera de:", optionsEn: ["fear and awe", "laughter", "silence", "confusion"], optionsEs: ["temor y asombro", "risa", "silencio", "confusión"], correct: 0 },
-    { textEn: "18. In the fifth century, as ritual increased, preaching:", textEs: "18. En el siglo quinto, a medida que el ritual aumentaba, la predicación:", optionsEn: ["increased dramatically", "stayed the same", "dropped dramatically", "was outlawed"], optionsEs: ["aumentó dramáticamente", "se mantuvo igual", "cayó dramáticamente", "fue prohibida"], correct: 2 },
-    { textEn: "19. The three corrupting developments were that the church was sacramentalized, clericalized, and:", textEs: "19. Los tres desarrollos corruptores fueron que la iglesia fue sacramentalizada, clericalizada, e:", optionsEn: ["institutionalized", "modernized", "democratized", "globalized"], optionsEs: ["institucionalizada", "modernizada", "democratizada", "globalizada"], correct: 0 },
-    { textEn: "20. Baptists belong to the free church tradition, meaning they have:", textEs: "20. Los bautistas pertenecen a la tradición de iglesia libre, lo que significa que tienen:", optionsEn: ["a fixed liturgy like the Book of Common Prayer", "worship only in Latin", "no worship at all", "no fixed liturgy or prescribed order"], optionsEs: ["una liturgia fija como el Libro de Oración Común", "adoración solo en latín", "ninguna adoración", "ninguna liturgia fija ni orden prescrito"], correct: 3 }
-];
-
-const kwQuestions = [
-    { textEn: "21. Worship is found in every culture. Explain the difference between pagan worship and biblical worship, using Segler.", textEs: "21. La adoración se halla en toda cultura. Explique la diferencia entre la adoración pagana y la bíblica, usando a Segler.", kwEn: ["revel", "pagan", "differ", "nature", "object", "segler", "biblic", "creat"], kwEs: ["revel", "pagan", "difer", "natural", "objeto", "segler", "bíblic", "cre"],
-      modelEn: 'Segler answers the difference between pagan and biblical worship in one word: revelation. Pagan worship reaches up and guesses, inventing a god out of nature and imagination, drawing its object from things like the sun, storm, river, or mountain. Biblical worship instead responds to a God who has stepped forward and revealed Himself, answering a God who has spoken first rather than a god humanity invented.',
-      modelEs: 'Segler responde a la diferencia entre la adoración pagana y la bíblica en una palabra: revelación. La adoración pagana se extiende hacia arriba y adivina, inventando un dios de la naturaleza y la imaginación, tomando su objeto de cosas como el sol, la tormenta, el río, o la montaña. La adoración bíblica en cambio responde a un Dios que se ha adelantado y se ha revelado, respondiendo a un Dios que habló primero en lugar de a un dios que la humanidad inventó.' },
-    { textEn: "22. Describe Old Testament worship centered on the tabernacle and temple. What was its most important feature, and what carries over into Christian worship?", textEs: "22. Describa la adoración del Antiguo Testamento centrada en el tabernáculo y el templo. ¿Cuál fue su característica más importante, y qué continúa en la adoración cristiana?", kwEn: ["tabernacle", "temple", "sacrifice", "psalm", "moses", "solomon", "priest", "offer"], kwEs: ["tabernácul", "templo", "sacrific", "salmo", "moisés", "salomón", "sacerdot", "ofren"],
-      modelEn: 'Old Testament worship centered first on the tabernacle under Moses, and later on Solomon\'s temple, where the offering of sacrifices became its most important feature — the blood of bulls and goats could never take away sin but pointed forward to the Lamb who would. The Psalms, sung and recited in the temple, carry directly over into Christian worship, since we still sing the Psalms today.',
-      modelEs: 'La adoración del Antiguo Testamento se centró primero en el tabernáculo bajo Moisés, y luego en el templo de Salomón, donde el ofrecimiento de sacrificios se convirtió en su característica más importante — la sangre de toros y machos cabríos nunca pudo quitar el pecado pero apuntaba hacia el Cordero que lo haría. Los Salmos, cantados y recitados en el templo, continúan directamente en la adoración cristiana, pues todavía cantamos los Salmos hoy.' },
-    { textEn: "23. Explain the origin and character of synagogue worship, and how Jesus related to it.", textEs: "23. Explique el origen y carácter de la adoración en la sinagoga, y cómo se relacionó Jesús con ella.", kwEn: ["synagogue", "captiv", "teach", "read", "scriptur", "shema", "jesus", "develop"], kwEs: ["sinagog", "cautiv", "enseñ", "leer", "escritur", "shema", "jesús", "desarroll"],
-      modelEn: 'The synagogue arose during the Babylonian captivity, when the temple lay in ruins and the people were far from Jerusalem, serving two purposes at once: teaching and worship. Its informal service included reading Scripture, prayer, exhortation, and the Shema, led by the ruler of the synagogue. Jesus knew this worship well; Luke 4:16 tells us He went into the synagogue \'as His custom was,\' and much of our modern Scripture-reading and exposition traces back to it.',
-      modelEs: 'La sinagoga surgió durante el cautiverio babilónico, cuando el templo yacía en ruinas y el pueblo estaba lejos de Jerusalén, sirviendo dos propósitos a la vez: enseñanza y adoración. Su servicio informal incluía la lectura de la Escritura, la oración, la exhortación, y el Shemá, dirigido por el principal de la sinagoga. Jesús conocía bien esta adoración; Lucas 4:16 nos dice que él entró en la sinagoga \'conforme a su costumbre,\' y gran parte de nuestra lectura y exposición moderna de la Escritura se remonta a ella.' },
-    { textEn: "24. Why did Christians move their worship from the Sabbath to Sunday, the first day of the week?", textEs: "24. ¿Por qué movieron los cristianos su adoración del sábado al domingo, el primer día de la semana?", kwEn: ["sunday", "first", "day", "resurrect", "sabbath", "week", "christ", "remember"], kwEs: ["domingo", "primer", "día", "resurrec", "sábado", "seman", "cristo", "record"],
-      modelEn: 'Christians moved their worship from the Sabbath to Sunday, the first day of the week, to remember the resurrection of Christ, which had occurred on that day. This became known as the Lord\'s Day. The change was already being questioned even in the apostolic period, since Paul in Colossians 2 had to tell believers to let no one judge them regarding a Sabbath day.',
-      modelEs: 'Los cristianos movieron su adoración del sábado al domingo, el primer día de la semana, para recordar la resurrección de Cristo, que había ocurrido ese día. Esto se conoció como el Día del Señor. El cambio ya estaba siendo cuestionado incluso en el período apostólico, pues Pablo en Colosenses 2 tuvo que decir a los creyentes que nadie los juzgara en cuanto a días de reposo.' },
-    { textEn: "25. List and explain the elements of New Testament worship.", textEs: "25. Enumere y explique los elementos de la adoración del Nuevo Testamento.", kwEn: ["element", "hymn", "ordinanc", "supper", "baptism", "preach", "offer", "amen"], kwEs: ["element", "himno", "ordenanz", "cena", "bautism", "predic", "ofren", "amén"],
-      modelEn: 'New Testament worship included several recognizable elements: hymns, both the Psalms and new compositions like the hymn in Philippians 2; the two ordinances of baptism and the Lord\'s Supper; congregational Amens; the preaching of the word; and the offering for the needy. The believers sang, broke bread often, baptized new converts promptly, and gave generously — the same basic shape visible in worship today.',
-      modelEs: 'La adoración del Nuevo Testamento incluía varios elementos reconocibles: himnos, tanto los Salmos como composiciones nuevas como el himno en Filipenses 2; las dos ordenanzas del bautismo y la Cena del Señor; los amenes congregacionales; la predicación de la palabra; y la ofrenda para los necesitados. Los creyentes cantaban, partían el pan a menudo, bautizaban a los nuevos convertidos prontamente, y daban generosamente — la misma forma básica visible en la adoración de hoy.' },
-    { textEn: "26. Describe the worship service Justin Martyr outlines in his Apology around AD 140.", textEs: "26. Describa el servicio de adoración que Justino Mártir bosqueja en su Apología alrededor del año 140.", kwEn: ["justin", "martyr", "apolog", "sunday", "outline", "broad", "140", "memoir"], kwEs: ["justin", "mártir", "apolog", "domingo", "bosquej", "amplia", "140", "memori"],
-      modelEn: 'Justin Martyr, writing around AD 140, describes the Sunday assembly: the memoirs of the apostles and the writings of the prophets are read, the president gives a discourse, all rise and pray, bread and wine are brought, the people say Amen, and the deacons carry a portion to the absent. It is one of the earliest broad outlines of a Christian worship service, simple and recognizable.',
-      modelEs: 'Justino Mártir, escribiendo alrededor del año 140, describe la asamblea dominical: se leen las memorias de los apóstoles y los escritos de los profetas, el presidente da un discurso, todos se levantan y oran, se traen pan y vino, el pueblo dice Amén, y los diáconos llevan una porción a los ausentes. Es uno de los primeros bosquejos amplios de un servicio de adoración cristiano, sencillo y reconocible.' },
-    { textEn: "27. Explain how Constantine's legalization of Christianity in the fourth century affected worship.", textEs: "27. Explique cómo la legalización del cristianismo por Constantino en el siglo cuarto afectó la adoración.", kwEn: ["constantine", "legal", "fourth", "pagan", "unregener", "elaborat", "building", "automat"], kwEs: ["constantin", "legal", "cuart", "pagan", "inconvers", "elabor", "edific", "automát"],
-      modelEn: 'Constantine\'s legalization of Christianity in the fourth century had a mixed effect on worship. Crowds entered the church automatically, including unregenerate pagans baptized without conversion, elaborate basilicas replaced humble homes, the clergy began to wear distinctive dress, and the surrounding culture began to shape the church instead of the church shaping the culture.',
-      modelEs: 'La legalización del cristianismo por Constantino en el siglo cuarto tuvo un efecto mixto en la adoración. Las multitudes entraban a la iglesia automáticamente, incluyendo paganos inconversos bautizados sin conversión, basílicas elaboradas reemplazaron a los hogares humildes, el clero comenzó a usar vestimenta distintiva, y la cultura circundante comenzó a moldear a la iglesia en lugar de que la iglesia moldeara a la cultura.' },
-    { textEn: "28. How did the Eucharist and preaching change in the fourth and fifth centuries?", textEs: "28. ¿Cómo cambiaron la Eucaristía y la predicación en los siglos cuarto y quinto?", kwEn: ["eucharist", "fear", "awe", "joy", "chang", "ritual", "preach", "ornament"], kwEs: ["eucarist", "temor", "asombro", "gozo", "cambi", "ritual", "predic", "ornament"],
-      modelEn: 'In the fourth and fifth centuries, the Eucharist shifted from joy to fear and awe, and ornamentation increased around it. Preaching, meanwhile, collapsed by the fifth century while tradition was elevated above Scripture, marking a significant departure from the simple, word-centered worship of the earlier church.',
-      modelEs: 'En los siglos cuarto y quinto, la Eucaristía cambió de gozo a temor y asombro, y aumentó la ornamentación a su alrededor. La predicación, mientras tanto, colapsó para el siglo quinto mientras la tradición se elevaba por encima de la Escritura, marcando una desviación significativa de la adoración sencilla y centrada en la palabra de la iglesia anterior.' },
-    { textEn: "29. Explain the three key developments that corrupted the church: sacramentalized, clericalized, and institutionalized.", textEs: "29. Explique los tres desarrollos clave que corrompieron a la iglesia: sacramentalizada, clericalizada, e institucionalizada.", kwEn: ["sacrament", "cleric", "institut", "priest", "salvat", "merit", "organiz", "lost"], kwEs: ["sacrament", "cleric", "instituc", "sacerdot", "salvac", "mérit", "organiz", "perd"],
-      modelEn: 'Three corruptions followed the church\'s rise to imperial favor: it was sacramentalized, teaching salvation through seven sacraments and a bank of merit rather than grace through faith alone; clericalized, losing the priesthood of all believers to a separate priestly class; and institutionalized, hardening a living body into a rigid organization rather than a living, Spirit-led community.',
-      modelEs: 'Tres corrupciones siguieron al ascenso de la iglesia al favor imperial: fue sacramentalizada, enseñando la salvación mediante siete sacramentos y un banco de mérito en lugar de la gracia mediante la sola fe; clericalizada, perdiendo el sacerdocio de todos los creyentes a favor de una clase sacerdotal separada; e institucionalizada, endureciendo un cuerpo vivo en una organización rígida en lugar de una comunidad viva y guiada por el Espíritu.' },
-    { textEn: "30. Explain the free church tradition and how it differs from a fixed liturgy.", textEs: "30. Explique la tradición de iglesia libre y cómo difiere de una liturgia fija.", kwEn: ["free", "church", "baptist", "fixed", "liturgy", "latitude", "no", "tradition"], kwEs: ["libre", "iglesia", "bautist", "fij", "liturgia", "latitud", "sin", "tradición"],
-      modelEn: 'The free church tradition holds no fixed liturgy like the Book of Common Prayer, but instead the latitude of the apostolic church, where no fixed order even appeared until around AD 215. This differs from a fixed liturgy, which prescribes set words and forms for every service; a free church tradition allows the local congregation and the Spirit\'s leading more room to shape the shape of worship.',
-      modelEs: 'La tradición de iglesia libre no sostiene una liturgia fija como el Libro de Oración Común, sino más bien la amplitud de la iglesia apostólica, donde ni siquiera apareció un orden fijo hasta alrededor del año 215. Esto difiere de una liturgia fija, que prescribe palabras y formas establecidas para cada servicio; una tradición de iglesia libre da más espacio a la congregación local y a la dirección del Espíritu para dar forma a la adoración.' }
-
-];
+/* CTSWorship — unit 3. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "worship",
+ "unit": 3,
+ "totalUnits": 11,
+ "filePrefix": "CTSWorship",
+ "prevHref": "CTSWorshipUnit2.html",
+ "nextHref": "CTSWorshipUnit4.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "According to Segler, the difference between pagan worship and biblical worship is:",
+    "es": "Según Segler, la diferencia entre la adoración pagana y la bíblica es:"
+   },
+   "options": {
+    "en": [
+     "the building used",
+     "the fact of God's revelation",
+     "the day of the week",
+     "the language spoken"
+    ],
+    "es": [
+     "el edificio usado",
+     "el hecho de la revelación de Dios",
+     "el día de la semana",
+     "el idioma hablado"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "Pagan worship typically directs itself toward an object found in:",
+    "es": "La adoración pagana típicamente se dirige hacia un objeto hallado en:"
+   },
+   "options": {
+    "en": [
+     "nature",
+     "the Scriptures",
+     "the temple",
+     "heaven"
+    ],
+    "es": [
+     "la naturaleza",
+     "las Escrituras",
+     "el templo",
+     "el cielo"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "Old Testament worship first centered on the tabernacle and later on:",
+    "es": "La adoración del Antiguo Testamento primero se centró en el tabernáculo y después en:"
+   },
+   "options": {
+    "en": [
+     "the synagogue",
+     "the temple",
+     "the home",
+     "the marketplace"
+    ],
+    "es": [
+     "la sinagoga",
+     "el templo",
+     "el hogar",
+     "el mercado"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "The most important feature of temple worship was:",
+    "es": "La característica más importante de la adoración en el templo era:"
+   },
+   "options": {
+    "en": [
+     "the singing",
+     "the offering of sacrifices",
+     "the reading",
+     "the dancing"
+    ],
+    "es": [
+     "el canto",
+     "la ofrenda de sacrificios",
+     "la lectura",
+     "la danza"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "The temple in which sacrifice was central was built by:",
+    "es": "El templo en el cual el sacrificio era central fue edificado por:"
+   },
+   "options": {
+    "en": [
+     "Moses",
+     "David",
+     "Solomon",
+     "Abraham"
+    ],
+    "es": [
+     "Moisés",
+     "David",
+     "Salomón",
+     "Abraham"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "Synagogue worship developed during the:",
+    "es": "La adoración en la sinagoga se desarrolló durante el:"
+   },
+   "options": {
+    "en": [
+     "time of Moses",
+     "captivity, when the temple was unavailable",
+     "reign of David",
+     "time of Christ"
+    ],
+    "es": [
+     "tiempo de Moisés",
+     "cautiverio, cuando el templo no estaba disponible",
+     "reinado de David",
+     "tiempo de Cristo"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "Synagogue worship served two purposes: worship and:",
+    "es": "La adoración en la sinagoga servía dos propósitos: la adoración y:"
+   },
+   "options": {
+    "en": [
+     "sacrifice",
+     "teaching",
+     "feasting",
+     "trade"
+    ],
+    "es": [
+     "el sacrificio",
+     "la enseñanza",
+     "el banquete",
+     "el comercio"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "Luke 4:16 shows that Jesus worshipped in the synagogue:",
+    "es": "Lucas 4:16 muestra que Jesús adoraba en la sinagoga:"
+   },
+   "options": {
+    "en": [
+     "only once",
+     "secretly",
+     "reluctantly",
+     "as his custom"
+    ],
+    "es": [
+     "solo una vez",
+     "en secreto",
+     "de mala gana",
+     "como su costumbre"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "Christians began to worship on Sunday, the first day of the week, to remember the:",
+    "es": "Los cristianos comenzaron a adorar el domingo, el primer día de la semana, para recordar la:"
+   },
+   "options": {
+    "en": [
+     "creation",
+     "Pentecost",
+     "exodus",
+     "resurrection"
+    ],
+    "es": [
+     "creación",
+     "Pentecostés",
+     "éxodo",
+     "resurrección"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "In Colossians 2 Paul tells believers to let no one judge them regarding:",
+    "es": "En Colosenses 2 Pablo dice a los creyentes que nadie los juzgue respecto a:"
+   },
+   "options": {
+    "en": [
+     "a Sabbath day",
+     "their clothing",
+     "their food only",
+     "their language"
+    ],
+    "es": [
+     "un día de sábado",
+     "su vestimenta",
+     "solo su comida",
+     "su idioma"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "Which of the following was NOT an element of New Testament worship?",
+    "es": "¿Cuál de los siguientes NO era un elemento de la adoración del Nuevo Testamento?"
+   },
+   "options": {
+    "en": [
+     "Hymns",
+     "The ordinances",
+     "Animal sacrifice",
+     "Preaching"
+    ],
+    "es": [
+     "Himnos",
+     "Las ordenanzas",
+     "Sacrificio de animales",
+     "Predicación"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "An example of a New Testament hymn beyond the Psalms is found in:",
+    "es": "Un ejemplo de un himno del Nuevo Testamento más allá de los Salmos se halla en:"
+   },
+   "options": {
+    "en": [
+     "Genesis 1",
+     "Exodus 20",
+     "Philippians 2",
+     "Revelation 22"
+    ],
+    "es": [
+     "Génesis 1",
+     "Éxodo 20",
+     "Filipenses 2",
+     "Apocalipsis 22"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "The first broad outline of Christian worship is given around AD 140 by:",
+    "es": "El primer bosquejo amplio de la adoración cristiana se da alrededor del año 140 por:"
+   },
+   "options": {
+    "en": [
+     "Augustine",
+     "Calvin",
+     "Constantine",
+     "Justin Martyr"
+    ],
+    "es": [
+     "Agustín",
+     "Calvino",
+     "Constantino",
+     "Justino Mártir"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "In Justin Martyr's description, after the reading and discourse, the people:",
+    "es": "En la descripción de Justino Mártir, después de la lectura y el discurso, el pueblo:"
+   },
+   "options": {
+    "en": [
+     "went home",
+     "sang in Latin",
+     "rose together and prayed",
+     "lit candles"
+    ],
+    "es": [
+     "se iba a casa",
+     "cantaba en latín",
+     "se levantaba junto y oraba",
+     "encendía velas"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "Christianity became the legal religion in the fourth century under:",
+    "es": "El cristianismo se volvió la religión legal en el siglo cuarto bajo:"
+   },
+   "options": {
+    "en": [
+     "Nero",
+     "Diocletian",
+     "Trajan",
+     "Constantine"
+    ],
+    "es": [
+     "Nerón",
+     "Diocleciano",
+     "Trajano",
+     "Constantino"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "A negative effect of Constantine's legalization was that:",
+    "es": "Un efecto negativo de la legalización de Constantino fue que:"
+   },
+   "options": {
+    "en": [
+     "unregenerate pagans were baptized into the church",
+     "worship was forbidden",
+     "the Bible was destroyed",
+     "preaching increased"
+    ],
+    "es": [
+     "paganos inconversos fueron bautizados en la iglesia",
+     "la adoración fue prohibida",
+     "la Biblia fue destruida",
+     "la predicación aumentó"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "In the fourth and fifth centuries the Eucharist changed from joy to an atmosphere of:",
+    "es": "En los siglos cuarto y quinto la Eucaristía cambió de gozo a una atmósfera de:"
+   },
+   "options": {
+    "en": [
+     "fear and awe",
+     "laughter",
+     "silence",
+     "confusion"
+    ],
+    "es": [
+     "temor y asombro",
+     "risa",
+     "silencio",
+     "confusión"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "In the fifth century, as ritual increased, preaching:",
+    "es": "En el siglo quinto, a medida que el ritual aumentaba, la predicación:"
+   },
+   "options": {
+    "en": [
+     "increased dramatically",
+     "stayed the same",
+     "dropped dramatically",
+     "was outlawed"
+    ],
+    "es": [
+     "aumentó dramáticamente",
+     "se mantuvo igual",
+     "cayó dramáticamente",
+     "fue prohibida"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "The three corrupting developments were that the church was sacramentalized, clericalized, and:",
+    "es": "Los tres desarrollos corruptores fueron que la iglesia fue sacramentalizada, clericalizada, e:"
+   },
+   "options": {
+    "en": [
+     "institutionalized",
+     "modernized",
+     "democratized",
+     "globalized"
+    ],
+    "es": [
+     "institucionalizada",
+     "modernizada",
+     "democratizada",
+     "globalizada"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "Baptists belong to the free church tradition, meaning they have:",
+    "es": "Los bautistas pertenecen a la tradición de iglesia libre, lo que significa que tienen:"
+   },
+   "options": {
+    "en": [
+     "a fixed liturgy like the Book of Common Prayer",
+     "worship only in Latin",
+     "no worship at all",
+     "no fixed liturgy or prescribed order"
+    ],
+    "es": [
+     "una liturgia fija como el Libro de Oración Común",
+     "adoración solo en latín",
+     "ninguna adoración",
+     "ninguna liturgia fija ni orden prescrito"
+    ]
+   },
+   "answer": 3
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Worship is found in every culture. Explain the difference between pagan worship and biblical worship, using Segler.",
+    "es": "La adoración se halla en toda cultura. Explique la diferencia entre la adoración pagana y la bíblica, usando a Segler."
+   },
+   "keywords": {
+    "en": [
+     "revel",
+     "pagan",
+     "differ",
+     "nature",
+     "object",
+     "segler",
+     "biblic",
+     "creat"
+    ],
+    "es": [
+     "revel",
+     "pagan",
+     "difer",
+     "natural",
+     "objeto",
+     "segler",
+     "bíblic",
+     "cre"
+    ]
+   },
+   "model": {
+    "en": "Segler answers the difference between pagan and biblical worship in one word: revelation. Pagan worship reaches up and guesses, inventing a god out of nature and imagination, drawing its object from things like the sun, storm, river, or mountain. Biblical worship instead responds to a God who has stepped forward and revealed Himself, answering a God who has spoken first rather than a god humanity invented.",
+    "es": "Segler responde a la diferencia entre la adoración pagana y la bíblica en una palabra: revelación. La adoración pagana se extiende hacia arriba y adivina, inventando un dios de la naturaleza y la imaginación, tomando su objeto de cosas como el sol, la tormenta, el río, o la montaña. La adoración bíblica en cambio responde a un Dios que se ha adelantado y se ha revelado, respondiendo a un Dios que habló primero en lugar de a un dios que la humanidad inventó."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe Old Testament worship centered on the tabernacle and temple. What was its most important feature, and what carries over into Christian worship?",
+    "es": "Describa la adoración del Antiguo Testamento centrada en el tabernáculo y el templo. ¿Cuál fue su característica más importante, y qué continúa en la adoración cristiana?"
+   },
+   "keywords": {
+    "en": [
+     "tabernacle",
+     "temple",
+     "sacrifice",
+     "psalm",
+     "moses",
+     "solomon",
+     "priest",
+     "offer"
+    ],
+    "es": [
+     "tabernácul",
+     "templo",
+     "sacrific",
+     "salmo",
+     "moisés",
+     "salomón",
+     "sacerdot",
+     "ofren"
+    ]
+   },
+   "model": {
+    "en": "Old Testament worship centered first on the tabernacle under Moses, and later on Solomon's temple, where the offering of sacrifices became its most important feature — the blood of bulls and goats could never take away sin but pointed forward to the Lamb who would. The Psalms, sung and recited in the temple, carry directly over into Christian worship, since we still sing the Psalms today.",
+    "es": "La adoración del Antiguo Testamento se centró primero en el tabernáculo bajo Moisés, y luego en el templo de Salomón, donde el ofrecimiento de sacrificios se convirtió en su característica más importante — la sangre de toros y machos cabríos nunca pudo quitar el pecado pero apuntaba hacia el Cordero que lo haría. Los Salmos, cantados y recitados en el templo, continúan directamente en la adoración cristiana, pues todavía cantamos los Salmos hoy."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the origin and character of synagogue worship, and how Jesus related to it.",
+    "es": "Explique el origen y carácter de la adoración en la sinagoga, y cómo se relacionó Jesús con ella."
+   },
+   "keywords": {
+    "en": [
+     "synagogue",
+     "captiv",
+     "teach",
+     "read",
+     "scriptur",
+     "shema",
+     "jesus",
+     "develop"
+    ],
+    "es": [
+     "sinagog",
+     "cautiv",
+     "enseñ",
+     "leer",
+     "escritur",
+     "shema",
+     "jesús",
+     "desarroll"
+    ]
+   },
+   "model": {
+    "en": "The synagogue arose during the Babylonian captivity, when the temple lay in ruins and the people were far from Jerusalem, serving two purposes at once: teaching and worship. Its informal service included reading Scripture, prayer, exhortation, and the Shema, led by the ruler of the synagogue. Jesus knew this worship well; Luke 4:16 tells us He went into the synagogue 'as His custom was,' and much of our modern Scripture-reading and exposition traces back to it.",
+    "es": "La sinagoga surgió durante el cautiverio babilónico, cuando el templo yacía en ruinas y el pueblo estaba lejos de Jerusalén, sirviendo dos propósitos a la vez: enseñanza y adoración. Su servicio informal incluía la lectura de la Escritura, la oración, la exhortación, y el Shemá, dirigido por el principal de la sinagoga. Jesús conocía bien esta adoración; Lucas 4:16 nos dice que él entró en la sinagoga 'conforme a su costumbre,' y gran parte de nuestra lectura y exposición moderna de la Escritura se remonta a ella."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why did Christians move their worship from the Sabbath to Sunday, the first day of the week?",
+    "es": "¿Por qué movieron los cristianos su adoración del sábado al domingo, el primer día de la semana?"
+   },
+   "keywords": {
+    "en": [
+     "sunday",
+     "first",
+     "day",
+     "resurrect",
+     "sabbath",
+     "week",
+     "christ",
+     "remember"
+    ],
+    "es": [
+     "domingo",
+     "primer",
+     "día",
+     "resurrec",
+     "sábado",
+     "seman",
+     "cristo",
+     "record"
+    ]
+   },
+   "model": {
+    "en": "Christians moved their worship from the Sabbath to Sunday, the first day of the week, to remember the resurrection of Christ, which had occurred on that day. This became known as the Lord's Day. The change was already being questioned even in the apostolic period, since Paul in Colossians 2 had to tell believers to let no one judge them regarding a Sabbath day.",
+    "es": "Los cristianos movieron su adoración del sábado al domingo, el primer día de la semana, para recordar la resurrección de Cristo, que había ocurrido ese día. Esto se conoció como el Día del Señor. El cambio ya estaba siendo cuestionado incluso en el período apostólico, pues Pablo en Colosenses 2 tuvo que decir a los creyentes que nadie los juzgara en cuanto a días de reposo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "List and explain the elements of New Testament worship.",
+    "es": "Enumere y explique los elementos de la adoración del Nuevo Testamento."
+   },
+   "keywords": {
+    "en": [
+     "element",
+     "hymn",
+     "ordinanc",
+     "supper",
+     "baptism",
+     "preach",
+     "offer",
+     "amen"
+    ],
+    "es": [
+     "element",
+     "himno",
+     "ordenanz",
+     "cena",
+     "bautism",
+     "predic",
+     "ofren",
+     "amén"
+    ]
+   },
+   "model": {
+    "en": "New Testament worship included several recognizable elements: hymns, both the Psalms and new compositions like the hymn in Philippians 2; the two ordinances of baptism and the Lord's Supper; congregational Amens; the preaching of the word; and the offering for the needy. The believers sang, broke bread often, baptized new converts promptly, and gave generously — the same basic shape visible in worship today.",
+    "es": "La adoración del Nuevo Testamento incluía varios elementos reconocibles: himnos, tanto los Salmos como composiciones nuevas como el himno en Filipenses 2; las dos ordenanzas del bautismo y la Cena del Señor; los amenes congregacionales; la predicación de la palabra; y la ofrenda para los necesitados. Los creyentes cantaban, partían el pan a menudo, bautizaban a los nuevos convertidos prontamente, y daban generosamente — la misma forma básica visible en la adoración de hoy."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the worship service Justin Martyr outlines in his Apology around AD 140.",
+    "es": "Describa el servicio de adoración que Justino Mártir bosqueja en su Apología alrededor del año 140."
+   },
+   "keywords": {
+    "en": [
+     "justin",
+     "martyr",
+     "apolog",
+     "sunday",
+     "outline",
+     "broad",
+     "140",
+     "memoir"
+    ],
+    "es": [
+     "justin",
+     "mártir",
+     "apolog",
+     "domingo",
+     "bosquej",
+     "amplia",
+     "140",
+     "memori"
+    ]
+   },
+   "model": {
+    "en": "Justin Martyr, writing around AD 140, describes the Sunday assembly: the memoirs of the apostles and the writings of the prophets are read, the president gives a discourse, all rise and pray, bread and wine are brought, the people say Amen, and the deacons carry a portion to the absent. It is one of the earliest broad outlines of a Christian worship service, simple and recognizable.",
+    "es": "Justino Mártir, escribiendo alrededor del año 140, describe la asamblea dominical: se leen las memorias de los apóstoles y los escritos de los profetas, el presidente da un discurso, todos se levantan y oran, se traen pan y vino, el pueblo dice Amén, y los diáconos llevan una porción a los ausentes. Es uno de los primeros bosquejos amplios de un servicio de adoración cristiano, sencillo y reconocible."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain how Constantine's legalization of Christianity in the fourth century affected worship.",
+    "es": "Explique cómo la legalización del cristianismo por Constantino en el siglo cuarto afectó la adoración."
+   },
+   "keywords": {
+    "en": [
+     "constantine",
+     "legal",
+     "fourth",
+     "pagan",
+     "unregener",
+     "elaborat",
+     "building",
+     "automat"
+    ],
+    "es": [
+     "constantin",
+     "legal",
+     "cuart",
+     "pagan",
+     "inconvers",
+     "elabor",
+     "edific",
+     "automát"
+    ]
+   },
+   "model": {
+    "en": "Constantine's legalization of Christianity in the fourth century had a mixed effect on worship. Crowds entered the church automatically, including unregenerate pagans baptized without conversion, elaborate basilicas replaced humble homes, the clergy began to wear distinctive dress, and the surrounding culture began to shape the church instead of the church shaping the culture.",
+    "es": "La legalización del cristianismo por Constantino en el siglo cuarto tuvo un efecto mixto en la adoración. Las multitudes entraban a la iglesia automáticamente, incluyendo paganos inconversos bautizados sin conversión, basílicas elaboradas reemplazaron a los hogares humildes, el clero comenzó a usar vestimenta distintiva, y la cultura circundante comenzó a moldear a la iglesia en lugar de que la iglesia moldeara a la cultura."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How did the Eucharist and preaching change in the fourth and fifth centuries?",
+    "es": "¿Cómo cambiaron la Eucaristía y la predicación en los siglos cuarto y quinto?"
+   },
+   "keywords": {
+    "en": [
+     "eucharist",
+     "fear",
+     "awe",
+     "joy",
+     "chang",
+     "ritual",
+     "preach",
+     "ornament"
+    ],
+    "es": [
+     "eucarist",
+     "temor",
+     "asombro",
+     "gozo",
+     "cambi",
+     "ritual",
+     "predic",
+     "ornament"
+    ]
+   },
+   "model": {
+    "en": "In the fourth and fifth centuries, the Eucharist shifted from joy to fear and awe, and ornamentation increased around it. Preaching, meanwhile, collapsed by the fifth century while tradition was elevated above Scripture, marking a significant departure from the simple, word-centered worship of the earlier church.",
+    "es": "En los siglos cuarto y quinto, la Eucaristía cambió de gozo a temor y asombro, y aumentó la ornamentación a su alrededor. La predicación, mientras tanto, colapsó para el siglo quinto mientras la tradición se elevaba por encima de la Escritura, marcando una desviación significativa de la adoración sencilla y centrada en la palabra de la iglesia anterior."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the three key developments that corrupted the church: sacramentalized, clericalized, and institutionalized.",
+    "es": "Explique los tres desarrollos clave que corrompieron a la iglesia: sacramentalizada, clericalizada, e institucionalizada."
+   },
+   "keywords": {
+    "en": [
+     "sacrament",
+     "cleric",
+     "institut",
+     "priest",
+     "salvat",
+     "merit",
+     "organiz",
+     "lost"
+    ],
+    "es": [
+     "sacrament",
+     "cleric",
+     "instituc",
+     "sacerdot",
+     "salvac",
+     "mérit",
+     "organiz",
+     "perd"
+    ]
+   },
+   "model": {
+    "en": "Three corruptions followed the church's rise to imperial favor: it was sacramentalized, teaching salvation through seven sacraments and a bank of merit rather than grace through faith alone; clericalized, losing the priesthood of all believers to a separate priestly class; and institutionalized, hardening a living body into a rigid organization rather than a living, Spirit-led community.",
+    "es": "Tres corrupciones siguieron al ascenso de la iglesia al favor imperial: fue sacramentalizada, enseñando la salvación mediante siete sacramentos y un banco de mérito en lugar de la gracia mediante la sola fe; clericalizada, perdiendo el sacerdocio de todos los creyentes a favor de una clase sacerdotal separada; e institucionalizada, endureciendo un cuerpo vivo en una organización rígida en lugar de una comunidad viva y guiada por el Espíritu."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the free church tradition and how it differs from a fixed liturgy.",
+    "es": "Explique la tradición de iglesia libre y cómo difiere de una liturgia fija."
+   },
+   "keywords": {
+    "en": [
+     "free",
+     "church",
+     "baptist",
+     "fixed",
+     "liturgy",
+     "latitude",
+     "no",
+     "tradition"
+    ],
+    "es": [
+     "libre",
+     "iglesia",
+     "bautist",
+     "fij",
+     "liturgia",
+     "latitud",
+     "sin",
+     "tradición"
+    ]
+   },
+   "model": {
+    "en": "The free church tradition holds no fixed liturgy like the Book of Common Prayer, but instead the latitude of the apostolic church, where no fixed order even appeared until around AD 215. This differs from a fixed liturgy, which prescribes set words and forms for every service; a free church tradition allows the local congregation and the Spirit's leading more room to shape the shape of worship.",
+    "es": "La tradición de iglesia libre no sostiene una liturgia fija como el Libro de Oración Común, sino más bien la amplitud de la iglesia apostólica, donde ni siquiera apareció un orden fijo hasta alrededor del año 215. Esto difiere de una liturgia fija, que prescribe palabras y formas establecidas para cada servicio; una tradición de iglesia libre da más espacio a la congregación local y a la dirección del Espíritu para dar forma a la adoración."
+   }
+  }
+ ]
+};

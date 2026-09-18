@@ -1,0 +1,1426 @@
+/* CTS — unit 11. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "ots",
+ "unit": 11,
+ "totalUnits": 13,
+ "filePrefix": "CTS",
+ "prevHref": "CTSUnit10.html",
+ "nextHref": "CTSUnit12.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "Ezekiel and Daniel ministered during which historical event?",
+    "es": "Ezequiel y Daniel ministraron durante qué evento histórico?"
+   },
+   "options": {
+    "en": [
+     "The Babylonian captivity",
+     "The wilderness wanderings",
+     "The reign of David",
+     "The Maccabean revolt"
+    ],
+    "es": [
+     "El cautiverio babilónico",
+     "Las peregrinaciones en el desierto",
+     "El reinado de David",
+     "La revuelta de los Macabeos"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. Two voices in one captivity — speaking on parallel tracks to the same heartbroken nation.",
+    "es": "Correcto. Dos voces en un mismo cautiverio — hablando en pistas paralelas a la misma nación quebrantada."
+   }
+  },
+  {
+   "stem": {
+    "en": "Ezekiel's audience was primarily:",
+    "es": "La audiencia de Ezequiel era principalmente:"
+   },
+   "options": {
+    "en": [
+     "The kings on the throne",
+     "The captives in the camps",
+     "The temple priests",
+     "Foreign nations"
+    ],
+    "es": [
+     "Los reyes en el trono",
+     "Los cautivos en los campamentos",
+     "Los sacerdotes del templo",
+     "Las naciones extranjeras"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. Daniel's audience was the kings. Ezekiel's was the camps. Same nation, different platforms.",
+    "es": "Correcto. La audiencia de Daniel eran los reyes. La de Ezequiel los campamentos. Misma nación, diferentes plataformas."
+   }
+  },
+  {
+   "stem": {
+    "en": "The title for Ezekiel is:",
+    "es": "El título dado a Ezequiel es:"
+   },
+   "options": {
+    "en": [
+     "The fire prophet",
+     "The weeping prophet",
+     "The prophet of God's glory",
+     "The prophet of judgment"
+    ],
+    "es": [
+     "El profeta del fuego",
+     "El profeta llorón",
+     "El profeta de la gloria de Dios",
+     "El profeta del juicio"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. From the chariot of glory in chapter 1 to the city of glory in chapter 48, Ezekiel cannot stop talking about glory.",
+    "es": "Correcto. Desde el carro de gloria en el capítulo 1 hasta la ciudad de gloria en el capítulo 48, Ezequiel no deja de hablar de gloria."
+   }
+  },
+  {
+   "stem": {
+    "en": "Ezekiel's opening vision (chapter 1) shows God as:",
+    "es": "La visión inicial de Ezequiel (capítulo 1) muestra a Dios como:"
+   },
+   "options": {
+    "en": [
+     "A still small voice",
+     "A consuming fire",
+     "A throne on wheels — the chariot of glory",
+     "A burning bush"
+    ],
+    "es": [
+     "Un silbo apacible",
+     "Un fuego consumidor",
+     "Un trono sobre ruedas — el carro de la gloria",
+     "Una zarza ardiente"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. The exiles thought God was left behind in Jerusalem. The throne has wheels. God has come to Babylon.",
+    "es": "Correcto. Los exiliados pensaban que Dios había quedado en Jerusalén. El trono tiene ruedas. Dios ha venido a Babilonia."
+   }
+  },
+  {
+   "stem": {
+    "en": "In Ezekiel chapters 8–11, the glory of the Lord:",
+    "es": "En Ezequiel capítulos 8–11, la gloria del Señor:"
+   },
+   "options": {
+    "en": [
+     "Departs from the temple over the Mount of Olives",
+     "Fills the temple permanently",
+     "Strikes the priests dead",
+     "Becomes a pillar of cloud"
+    ],
+    "es": [
+     "Se retira del templo sobre el Monte de los Olivos",
+     "Llena el templo permanentemente",
+     "Hiere a los sacerdotes de muerte",
+     "Se vuelve columna de nube"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. The temple was abandoned by its God before Nebuchadnezzar ever lays a hand on it. When God leaves, He leaves quietly — but He leaves.",
+    "es": "Correcto. El templo fue abandonado por su Dios antes de que Nabucodonosor le ponga una mano encima. Cuando Dios se va, se va en silencio — pero se va."
+   }
+  },
+  {
+   "stem": {
+    "en": "Ezekiel 36:26 promises that God will give His people:",
+    "es": "Ezequiel 36:26 promete que Dios dará a Su pueblo:"
+   },
+   "options": {
+    "en": [
+     "A new heart and a new spirit",
+     "A new temple",
+     "A new king",
+     "A new land"
+    ],
+    "es": [
+     "Un corazón nuevo y un espíritu nuevo",
+     "Un templo nuevo",
+     "Un rey nuevo",
+     "Una tierra nueva"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. Not reformed Israelites — regenerated Israelites. The New Covenant of Jeremiah 31 restated, fulfilled at Pentecost.",
+    "es": "Correcto. No israelitas reformados — israelitas regenerados. El Nuevo Pacto de Jeremías 31 repetido, cumplido en Pentecostés."
+   }
+  },
+  {
+   "stem": {
+    "en": "The valley of dry bones (Ezekiel 37) teaches that:",
+    "es": "El valle de los huesos secos (Ezequiel 37) enseña que:"
+   },
+   "options": {
+    "en": [
+     "Israel is permanently dead",
+     "Bones cannot live without water",
+     "The Word of God preached in the Spirit's power can raise the dead",
+     "Only the priests can revive the nation"
+    ],
+    "es": [
+     "Israel está muerta para siempre",
+     "Los huesos no pueden vivir sin agua",
+     "La Palabra de Dios predicada en el poder del Espíritu puede levantar a los muertos",
+     "Solo los sacerdotes pueden revivir la nación"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. Dead churches, dead nations, dead families, dead lives — the Word in the Spirit's power can still bring them up.",
+    "es": "Correcto. Iglesias muertas, naciones muertas, familias muertas, vidas muertas — la Palabra en el poder del Espíritu todavía puede levantarlas."
+   }
+  },
+  {
+   "stem": {
+    "en": "The closing name of Ezekiel's restored city is:",
+    "es": "El nombre final de la ciudad restaurada de Ezequiel es:"
+   },
+   "options": {
+    "en": [
+     "New Jerusalem",
+     "Yahweh Shammah — The Lord Is There",
+     "City of Peace",
+     "Mount Zion"
+    ],
+    "es": [
+     "Nueva Jerusalén",
+     "Yahveh Shammah — Jehová está allí",
+     "Ciudad de Paz",
+     "Monte Sión"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. The city of God will at last be defined not by its walls or location but by the simple, eternal fact that He is there.",
+    "es": "Correcto. La ciudad de Dios al fin será definida no por sus muros ni ubicación sino por el simple hecho eterno de que Él está allí."
+   }
+  },
+  {
+   "stem": {
+    "en": "Daniel's first test (Daniel 1) was a test of:",
+    "es": "La primera prueba de Daniel (Daniel 1) fue una prueba de:"
+   },
+   "options": {
+    "en": [
+     "Obedience at the king's table",
+     "Courage in battle",
+     "Patience in waiting",
+     "Skill in dreams"
+    ],
+    "es": [
+     "Obediencia en la mesa del rey",
+     "Valentía en la batalla",
+     "Paciencia en la espera",
+     "Habilidad en los sueños"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. Faithfulness almost always begins not on a battlefield but at a meal. A quiet decision in a teenage heart.",
+    "es": "Correcto. La fidelidad casi siempre comienza no en un campo de batalla sino en una comida. Una decisión callada en el corazón de un adolescente."
+   }
+  },
+  {
+   "stem": {
+    "en": "The four metals of Nebuchadnezzar's dream image (Daniel 2) represent:",
+    "es": "Los cuatro metales de la imagen del sueño de Nabucodonosor (Daniel 2) representan:"
+   },
+   "options": {
+    "en": [
+     "Four ages of mankind",
+     "Babylon, Medo-Persia, Greece, Rome",
+     "Four sons of David",
+     "The four corners of the earth"
+    ],
+    "es": [
+     "Cuatro edades de la humanidad",
+     "Babilonia, Medo-Persia, Grecia, Roma",
+     "Cuatro hijos de David",
+     "Los cuatro confines de la tierra"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. The stone cut without hands — Christ — broke the image, and the mountain He is building will not stop growing until it fills the earth.",
+    "es": "Correcto. La piedra cortada sin manos — Cristo — rompió la imagen, y el monte que Él edifica no dejará de crecer hasta llenar la tierra."
+   }
+  },
+  {
+   "stem": {
+    "en": "The 'if not' confession of Shadrach, Meshach, and Abednego (Daniel 3:17–18) teaches that:",
+    "es": "La confesión 'y si no' de Sadrac, Mesac y Abed-nego (Daniel 3:17–18) enseña que:"
+   },
+   "options": {
+    "en": [
+     "God always rescues His servants",
+     "Faith requires guarantees",
+     "Faith does not need rescue to remain faith",
+     "Boldness is its own reward"
+    ],
+    "es": [
+     "Dios siempre rescata a Sus siervos",
+     "La fe requiere garantías",
+     "La fe no necesita rescate para seguir siendo fe",
+     "La valentía es su propia recompensa"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. Faith does not need a guarantee of rescue in this life; it needs only the certainty of God in the next.",
+    "es": "Correcto. La fe no necesita garantía de rescate en esta vida; solo necesita la certeza de Dios en la próxima."
+   }
+  },
+  {
+   "stem": {
+    "en": "The fourth man in the fiery furnace (Daniel 3:25) was described as:",
+    "es": "El cuarto hombre en el horno de fuego (Daniel 3:25) fue descrito como:"
+   },
+   "options": {
+    "en": [
+     "An angel",
+     "Like the Son of God",
+     "A flame",
+     "A vision"
+    ],
+    "es": [
+     "Un ángel",
+     "Semejante a hijo de los dioses",
+     "Una llama",
+     "Una visión"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. The fourth man — a Christophany, a preincarnate appearance of the Lord with His suffering people.",
+    "es": "Correcto. El cuarto hombre — una cristofanía, una aparición pre-encarnada del Señor con Su pueblo sufriente."
+   }
+  },
+  {
+   "stem": {
+    "en": "Daniel 4 is unique in the Bible because:",
+    "es": "Daniel 4 es único en la Biblia porque:"
+   },
+   "options": {
+    "en": [
+     "It is the only chapter written by a Gentile king",
+     "It contains no prophecy",
+     "It is in Hebrew",
+     "It mentions no king's name"
+    ],
+    "es": [
+     "Es el único capítulo escrito por un rey gentil",
+     "No contiene profecía",
+     "Está en hebreo",
+     "No menciona ningún nombre de rey"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. Nebuchadnezzar gives his own testimony — and the lesson is that the Most High rules in the kingdoms of men.",
+    "es": "Correcto. Nabucodonosor da su propio testimonio — y la lección es que el Altísimo gobierna en los reinos de los hombres."
+   }
+  },
+  {
+   "stem": {
+    "en": "The writing on Belshazzar's wall (Daniel 5:27) read:",
+    "es": "La escritura en la pared de Belsasar (Daniel 5:27) decía:"
+   },
+   "options": {
+    "en": [
+     "You have repented",
+     "You have been forgiven",
+     "You have triumphed",
+     "You have been weighed in the balances and found wanting"
+    ],
+    "es": [
+     "Te has arrepentido",
+     "Has sido perdonado",
+     "Has triunfado",
+     "Pesado has sido en balanza, y fuiste hallado falto"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. Belshazzar was offered no second weighing. The cross of Christ is God's gracious provision of another set of scales.",
+    "es": "Correcto. A Belsasar no le ofrecieron una segunda pesada. La cruz de Cristo es la provisión graciosa de Dios de otra balanza."
+   }
+  },
+  {
+   "stem": {
+    "en": "Daniel's response to Darius's prayer-prohibiting decree (Daniel 6) was to:",
+    "es": "La respuesta de Daniel al decreto de Darío que prohibía la oración (Daniel 6) fue:"
+   },
+   "options": {
+    "en": [
+     "Flee from the city",
+     "Pray secretly in his cellar",
+     "Pray openly toward Jerusalem as he always had",
+     "Submit a written petition to the king"
+    ],
+    "es": [
+     "Huir de la ciudad",
+     "Orar en secreto en su sótano",
+     "Orar abiertamente hacia Jerusalén como siempre lo había hecho",
+     "Presentar una petición escrita al rey"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. He opened the window, knelt as always, three times a day. Worship is the one thing a faithful believer never modifies.",
+    "es": "Correcto. Abrió la ventana, se arrodilló como siempre, tres veces al día. La adoración es lo único que un creyente fiel nunca modifica."
+   }
+  },
+  {
+   "stem": {
+    "en": "In Daniel 7, the 'Son of Man' is given:",
+    "es": "En Daniel 7, al 'Hijo del Hombre' le es dado:"
+   },
+   "options": {
+    "en": [
+     "A temporary throne",
+     "A divided kingdom",
+     "A martyr's crown only",
+     "An everlasting Kingdom that will not pass away"
+    ],
+    "es": [
+     "Un trono temporal",
+     "Un reino dividido",
+     "Solo una corona de mártir",
+     "Un Reino eterno que no pasará"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. Daniel 7:13–14 — quoted by Jesus before the Sanhedrin. He claimed the eternal Kingdom in front of the men who tried to kill Him.",
+    "es": "Correcto. Daniel 7:13–14 — citado por Jesús ante el Sanedrín. Reclamó el Reino eterno ante los hombres que trataban de matarlo."
+   }
+  },
+  {
+   "stem": {
+    "en": "Jesus quoted Daniel 7 before the Sanhedrin to claim:",
+    "es": "Jesús citó Daniel 7 ante el Sanedrín para reclamar:"
+   },
+   "options": {
+    "en": [
+     "His role as a prophet",
+     "His Aaronic priesthood",
+     "His Davidic descent",
+     "His title as the Son of Man receiving the everlasting Kingdom"
+    ],
+    "es": [
+     "Su papel como profeta",
+     "Su sacerdocio aarónico",
+     "Su descendencia davídica",
+     "Su título como el Hijo del Hombre que recibe el Reino eterno"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. Mark 14:62 — 'You will see the Son of Man coming with the clouds of heaven.' The high priest understood and tore his robes.",
+    "es": "Correcto. Marcos 14:62 — 'Veréis al Hijo del Hombre viniendo en las nubes del cielo.' El sumo sacerdote entendió y rasgó sus ropas."
+   }
+  },
+  {
+   "stem": {
+    "en": "Daniel 9's prophecy of the 'seventy weeks' (9:25–26) lands at:",
+    "es": "La profecía de Daniel 9 sobre las 'setenta semanas' (9:25–26) cae en:"
+   },
+   "options": {
+    "en": [
+     "The fall of Jerusalem",
+     "The return from exile",
+     "The Maccabean revolt",
+     "The week of Christ's crucifixion"
+    ],
+    "es": [
+     "La caída de Jerusalén",
+     "El regreso del exilio",
+     "La revuelta de los Macabeos",
+     "La semana de la crucifixión de Cristo"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. Daniel was given the date of Calvary six centuries in advance. The God who walks His people through history walks the calendar of redemption.",
+    "es": "Correcto. A Daniel le fue dada la fecha del Calvario seis siglos antes. El Dios que conduce a Su pueblo por la historia conduce el calendario de la redención."
+   }
+  },
+  {
+   "stem": {
+    "en": "The 'bowling ball on the boxcar' illustration teaches that:",
+    "es": "La ilustración de 'la bola de boliche en el vagón' enseña que:"
+   },
+   "options": {
+    "en": [
+     "History is meaningless",
+     "Tribulation cancels purpose",
+     "Christians should withdraw from history",
+     "God's plan is moving forward at speeds our perspective can't measure"
+    ],
+    "es": [
+     "La historia carece de sentido",
+     "La tribulación cancela el propósito",
+     "Los cristianos deben retirarse de la historia",
+     "El plan de Dios se mueve hacia adelante a velocidades que nuestra perspectiva no puede medir"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. From inside the boxcar all you see is the ball rolling backward. Step out and you see God in charge of the train.",
+    "es": "Correcto. Desde dentro del vagón solo ve la bola rodando hacia atrás. Salga y verá a Dios manejando el tren."
+   }
+  },
+  {
+   "stem": {
+    "en": "The central message of both Ezekiel and Daniel is:",
+    "es": "El mensaje central tanto de Ezequiel como de Daniel es:"
+   },
+   "options": {
+    "en": [
+     "Exile is meaningless",
+     "God reigns even when His people are in chains",
+     "Babylon will be rebuilt",
+     "The temple is no longer needed"
+    ],
+    "es": [
+     "El exilio carece de sentido",
+     "Dios reina aun cuando Su pueblo está en cadenas",
+     "Babilonia será reconstruida",
+     "El templo ya no es necesario"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. Ezekiel sees the chariot. Daniel sees the throne. Both see the Son of Man. Both say: God reigns over our captivities.",
+    "es": "Correcto. Ezequiel ve el carro. Daniel ve el trono. Ambos ven al Hijo del Hombre. Ambos dicen: Dios reina sobre nuestros cautiverios."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Compare Ezekiel's audience and Daniel's audience, and explain how their two ministries complement each other.",
+    "es": "Compare la audiencia de Ezequiel y la de Daniel, y explique cómo se complementan sus dos ministerios."
+   },
+   "keywords": {
+    "en": [
+     [
+      "ezekiel"
+     ],
+     [
+      "captives",
+      "camps",
+      "exiles",
+      "by the chebar",
+      "second deportation"
+     ],
+     [
+      "camps",
+      "captives in the camps",
+      "exile community"
+     ],
+     [
+      "daniel"
+     ],
+     [
+      "kings",
+      "throne",
+      "palace",
+      "court",
+      "first deportation"
+     ],
+     [
+      "throne",
+      "kings on the throne",
+      "royal court"
+     ],
+     [
+      "captivity",
+      "exile",
+      "babylon",
+      "in chains"
+     ]
+    ],
+    "es": [
+     [
+      "ezequiel"
+     ],
+     [
+      "cautivos",
+      "campamentos",
+      "exiliados",
+      "junto al quebar",
+      "segunda deportación"
+     ],
+     [
+      "campamentos",
+      "cautivos en los campamentos",
+      "comunidad del exilio"
+     ],
+     [
+      "daniel"
+     ],
+     [
+      "reyes",
+      "trono",
+      "palacio",
+      "corte",
+      "primera deportación"
+     ],
+     [
+      "trono",
+      "reyes en el trono",
+      "corte real"
+     ],
+     [
+      "cautiverio",
+      "exilio",
+      "babilonia",
+      "en cadenas"
+     ]
+    ]
+   },
+   "model": {
+    "en": "Ezekiel and Daniel ministered on parallel tracks to the same heartbroken exiled nation, but to different audiences. Ezekiel was a priest taken in the second deportation in 597 B.C., settled with the exiles by the Chebar canal, and his audience was the captives in the camps. Daniel was a young nobleman taken in the first deportation in 605 B.C., conscripted into the palace school, and his audience was the kings on the throne. Ezekiel is the prophet of God's glory; Daniel is the prophet of the kingdoms that rise and fall. Together their books are bookends propping up one truth, answering the question every exile asks: God reigns, even when His people are in chains.",
+    "es": "Ezequiel y Daniel ministraron en vías paralelas a la misma nación exiliada y desconsolada, pero a audiencias distintas. Ezequiel era un sacerdote llevado en la segunda deportación en el 597 a.C., establecido con los exiliados junto al canal de Quebar, y su audiencia eran los cautivos en los campamentos. Daniel era un joven noble llevado en la primera deportación en el 605 a.C., reclutado en la escuela del palacio, y su audiencia eran los reyes en el trono. Ezequiel es el profeta de la gloria de Dios; Daniel es el profeta de los reinos que se levantan y caen. Juntos sus libros son sujetalibros que sostienen una verdad, respondiendo la pregunta que todo exiliado hace: Dios reina, aun cuando Su pueblo está en cadenas."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe Ezekiel's call vision (chapter 1) and explain what it taught the exiles about God.",
+    "es": "Describa la visión del llamado de Ezequiel (capítulo 1) y explique qué les enseñó a los exiliados acerca de Dios."
+   },
+   "keywords": {
+    "en": [
+     [
+      "chariot",
+      "divine chariot",
+      "throne with wheels"
+     ],
+     [
+      "wheels",
+      "wheels within wheels",
+      "wheels full of eyes"
+     ],
+     [
+      "cherubim",
+      "living creatures",
+      "four creatures",
+      "four faces"
+     ],
+     [
+      "throne",
+      "sapphire throne",
+      "likeness of a man"
+     ],
+     [
+      "glory",
+      "glory of god",
+      "divine glory"
+     ],
+     [
+      "mobile",
+      "god moves",
+      "throne has wheels",
+      "god is not tied"
+     ],
+     [
+      "babylon",
+      "came to babylon",
+      "with the exiles",
+      "still here"
+     ]
+    ],
+    "es": [
+     [
+      "carro",
+      "carro divino",
+      "trono con ruedas"
+     ],
+     [
+      "ruedas",
+      "ruedas dentro de ruedas",
+      "ruedas llenas de ojos"
+     ],
+     [
+      "querubines",
+      "seres vivientes",
+      "cuatro seres",
+      "cuatro caras"
+     ],
+     [
+      "trono",
+      "trono de zafiro",
+      "semejanza de hombre"
+     ],
+     [
+      "gloria",
+      "gloria de dios",
+      "gloria divina"
+     ],
+     [
+      "móvil",
+      "dios se mueve",
+      "el trono tiene ruedas",
+      "dios no está atado"
+     ],
+     [
+      "babilonia",
+      "vino a babilonia",
+      "con los exiliados",
+      "sigue aquí"
+     ]
+    ]
+   },
+   "model": {
+    "en": "Ezekiel's call vision in chapter 1 is one of the most extraordinary scenes in Scripture. By the river Chebar, far from the temple, the heavens opened and Ezekiel saw a great storm out of the north containing a chariot — four living creatures, later identified as cherubim, propelled by wheels within wheels whose rims were full of eyes, with a sapphire throne above and a likeness like a man upon it. The point for the exiles was decisive: they thought their God had been left behind in Jerusalem, tied to the temple, but this God moves — His throne has wheels. He had come all the way to Babylon to find Ezekiel. Wherever the people of God are scattered, the chariot of God is over them; He is still there.",
+    "es": "La visión del llamado de Ezequiel en el capítulo 1 es una de las escenas más extraordinarias de la Escritura. Junto al río Quebar, lejos del templo, los cielos se abrieron y Ezequiel vio una gran tormenta del norte que contenía un carro — cuatro seres vivientes, luego identificados como querubines, impulsados por ruedas dentro de ruedas cuyos aros estaban llenos de ojos, con un trono de zafiro arriba y una semejanza como de hombre sobre él. El punto para los exiliados fue decisivo: pensaban que su Dios había quedado atrás en Jerusalén, atado al templo, pero este Dios se mueve — Su trono tiene ruedas. Había venido hasta Babilonia para hallar a Ezequiel. Dondequiera que el pueblo de Dios esté esparcido, el carro de Dios está sobre ellos; Él sigue estando ahí."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Trace the departure and return of the glory in Ezekiel (chapters 8–11 and 40–48). Why does this pattern matter?",
+    "es": "Trace la partida y el regreso de la gloria en Ezequiel (capítulos 8–11 y 40–48). ¿Por qué importa este patrón?"
+   },
+   "keywords": {
+    "en": [
+     [
+      "glory",
+      "glory of the lord",
+      "divine glory"
+     ],
+     [
+      "departs",
+      "leaves",
+      "withdraws",
+      "rises up",
+      "abandoned"
+     ],
+     [
+      "temple",
+      "jerusalem temple",
+      "the house"
+     ],
+     [
+      "mount of olives",
+      "east gate",
+      "over the mountain"
+     ],
+     [
+      "returns",
+      "comes back",
+      "glory returns",
+      "fills the house"
+     ],
+     [
+      "yahweh shammah",
+      "the lord is there",
+      "new name"
+     ]
+    ],
+    "es": [
+     [
+      "gloria",
+      "gloria del señor",
+      "gloria divina"
+     ],
+     [
+      "parte",
+      "se va",
+      "se retira",
+      "se eleva",
+      "abandona"
+     ],
+     [
+      "templo",
+      "templo de jerusalén",
+      "la casa"
+     ],
+     [
+      "monte de los olivos",
+      "puerta oriental",
+      "sobre el monte"
+     ],
+     [
+      "regresa",
+      "vuelve",
+      "la gloria regresa",
+      "llena la casa"
+     ],
+     [
+      "yahweh shammah",
+      "el señor está allí",
+      "nuevo nombre"
+     ]
+    ]
+   },
+   "model": {
+    "en": "In chapters 8-11 Ezekiel is taken in vision back to the Jerusalem temple and shown the idolatry hidden in its courts — idols set up, women weeping for Tammuz, elders bowing to the sun. Because of this, the glory of the Lord departs step by step: it rises from above the cherubim, pauses at the threshold, lifts to the east gate, and finally departs over the Mount of Olives. The temple was abandoned by its God before Nebuchadnezzar ever touched it. But Ezekiel is not finally a prophet of departure: in chapters 40-48 the same glory returns from the east and fills a new house, and the city receives the name Yahweh Shammah, 'The Lord Is There.' The Lord who left will return, and His presence will define the city forever.",
+    "es": "En los capítulos 8-11 Ezequiel es llevado en visión de vuelta al templo de Jerusalén y se le muestra la idolatría escondida en sus atrios — ídolos colocados, mujeres llorando por Tamuz, ancianos inclinándose al sol. Por esto, la gloria del Señor parte paso a paso: se eleva de sobre los querubines, se detiene en el umbral, se alza a la puerta oriental, y finalmente parte por encima del Monte de los Olivos. El templo fue abandonado por su Dios antes de que Nabucodonosor lo tocara. Pero Ezequiel no es finalmente un profeta de partida: en los capítulos 40-48 la misma gloria regresa del oriente y llena una nueva casa, y la ciudad recibe el nombre Yahweh Shammah, 'El Señor está allí.' El Señor que se fue regresará, y Su presencia definirá la ciudad para siempre."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Unpack Ezekiel 36:26 (new heart) and Ezekiel 37 (dry bones) and explain how they are fulfilled in Christ and the gospel.",
+    "es": "Desarrolle Ezequiel 36:26 (corazón nuevo) y Ezequiel 37 (huesos secos) y explique cómo se cumplen en Cristo y el evangelio."
+   },
+   "keywords": {
+    "en": [
+     [
+      "new heart",
+      "heart of flesh",
+      "give you a new heart"
+     ],
+     [
+      "spirit",
+      "new spirit",
+      "put my spirit"
+     ],
+     [
+      "stone",
+      "heart of stone",
+      "take out the stone"
+     ],
+     [
+      "flesh",
+      "heart of flesh"
+     ],
+     [
+      "dry bones",
+      "valley of bones",
+      "skeletons",
+      "bones"
+     ],
+     [
+      "breath",
+      "wind",
+      "breath of god",
+      "life into bones"
+     ],
+     [
+      "regeneration",
+      "pentecost",
+      "new covenant",
+      "spirit came",
+      "new birth"
+     ]
+    ],
+    "es": [
+     [
+      "corazón nuevo",
+      "corazón de carne",
+      "os daré corazón nuevo"
+     ],
+     [
+      "espíritu",
+      "espíritu nuevo",
+      "pondré mi espíritu"
+     ],
+     [
+      "piedra",
+      "corazón de piedra",
+      "quitar la piedra"
+     ],
+     [
+      "carne",
+      "corazón de carne"
+     ],
+     [
+      "huesos secos",
+      "valle de huesos",
+      "esqueletos",
+      "huesos"
+     ],
+     [
+      "aliento",
+      "viento",
+      "aliento de dios",
+      "vida a los huesos"
+     ],
+     [
+      "regeneración",
+      "pentecostés",
+      "nuevo pacto",
+      "vino el espíritu",
+      "nuevo nacimiento"
+     ]
+    ]
+   },
+   "model": {
+    "en": "Ezekiel 36:26 promises, 'I will give you a new heart and put a new spirit within you; I will take the heart of stone out of your flesh and give you a heart of flesh.' The captivity would not produce merely reformed Israelites but regenerated ones — people whose hearts were replaced. Ezekiel 37 then shows the vision of the dry bones: a valley of scattered skeletons that, as Ezekiel prophesies, come together, gain flesh, and stand up as a great army when the breath of God blows over them. On its first level it means dead, scattered Israel will live again. Both are fulfilled in the New Covenant, realized at Pentecost when the Spirit came to live inside God's people, giving the new heart and breathing life into the dead.",
+    "es": "Ezequiel 36:26 promete: 'Os daré corazón nuevo, y pondré espíritu nuevo dentro de vosotros; quitaré de vuestra carne el corazón de piedra, y os daré un corazón de carne.' El cautiverio no produciría meramente israelitas reformados sino regenerados — personas cuyos corazones fueron reemplazados. Ezequiel 37 entonces muestra la visión de los huesos secos: un valle de esqueletos esparcidos que, mientras Ezequiel profetiza, se juntan, cobran carne, y se ponen en pie como un gran ejército cuando el aliento de Dios sopla sobre ellos. En su primer nivel significa que el Israel muerto y esparcido vivirá de nuevo. Ambos se cumplen en el Nuevo Pacto, realizado en Pentecostés cuando el Espíritu vino a morar dentro del pueblo de Dios, dando el corazón nuevo e insuflando vida en los muertos."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the six tests of Daniel 1–6 and explain what each teaches the modern believer.",
+    "es": "Describa las seis pruebas de Daniel 1–6 y explique lo que cada una enseña al creyente moderno."
+   },
+   "keywords": {
+    "en": [
+     [
+      "obedience",
+      "purposed in his heart",
+      "would not defile",
+      "test of obedience",
+      "diet"
+     ],
+     [
+      "trust",
+      "prayed",
+      "dream revealed",
+      "test of trust"
+     ],
+     [
+      "fear",
+      "furnace",
+      "if not",
+      "test of fear",
+      "fiery furnace"
+     ],
+     [
+      "pride",
+      "nebuchadnezzar humbled",
+      "grass like an ox",
+      "test of pride"
+     ],
+     [
+      "judgment",
+      "weighed",
+      "found wanting",
+      "belshazzar",
+      "test of judgment",
+      "handwriting"
+     ],
+     [
+      "worship",
+      "prayer",
+      "lions",
+      "daniel prayed",
+      "test of worship"
+     ]
+    ],
+    "es": [
+     [
+      "obediencia",
+      "propuso en su corazón",
+      "no contaminarse",
+      "prueba de obediencia",
+      "comida"
+     ],
+     [
+      "confianza",
+      "oraron",
+      "sueño revelado",
+      "prueba de confianza"
+     ],
+     [
+      "temor",
+      "horno",
+      "si no",
+      "prueba de temor",
+      "horno de fuego"
+     ],
+     [
+      "orgullo",
+      "nabucodonosor humillado",
+      "hierba como buey",
+      "prueba de orgullo"
+     ],
+     [
+      "juicio",
+      "pesado",
+      "hallado falto",
+      "belsasar",
+      "prueba de juicio",
+      "escritura en la pared"
+     ],
+     [
+      "adoración",
+      "oración",
+      "leones",
+      "daniel oró",
+      "prueba de adoración"
+     ]
+    ]
+   },
+   "model": {
+    "en": "The first six chapters of Daniel are six tests of faith inside a hostile culture. The test of obedience (chapter 1): Daniel purposed in his heart not to defile himself with the king's food, a quiet decision God honored. The test of trust (chapter 2): facing death, Daniel and his friends prayed and God revealed Nebuchadnezzar's dream. The test of fear (chapter 3): the three friends faced the furnace with 'if not' faith. The test of pride (chapter 4): Nebuchadnezzar was humbled until he acknowledged the Most High rules. The test of judgment (chapter 5): Belshazzar was weighed and found wanting. The test of worship (chapter 6): Daniel kept praying and was delivered from the lions. Each teaches the modern believer to remain faithful to God under cultural pressure.",
+    "es": "Los primeros seis capítulos de Daniel son seis pruebas de fe dentro de una cultura hostil. La prueba de obediencia (capítulo 1): Daniel propuso en su corazón no contaminarse con la comida del rey, una decisión callada que Dios honró. La prueba de confianza (capítulo 2): ante la muerte, Daniel y sus amigos oraron y Dios reveló el sueño de Nabucodonosor. La prueba de temor (capítulo 3): los tres amigos enfrentaron el horno con fe de 'si no.' La prueba de orgullo (capítulo 4): Nabucodonosor fue humillado hasta reconocer que el Altísimo gobierna. La prueba de juicio (capítulo 5): Belsasar fue pesado y hallado falto. La prueba de adoración (capítulo 6): Daniel siguió orando y fue librado de los leones. Cada una enseña al creyente moderno a permanecer fiel a Dios bajo la presión cultural."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the 'if not' confession of Daniel 3:17–18 and its significance for Christian faith.",
+    "es": "Explique la confesión 'y si no' de Daniel 3:17–18 y su importancia para la fe cristiana."
+   },
+   "keywords": {
+    "en": [
+     [
+      "if not",
+      "but if not"
+     ],
+     [
+      "deliver",
+      "able to deliver",
+      "rescue us"
+     ],
+     [
+      "faith",
+      "faithfulness",
+      "trust"
+     ],
+     [
+      "rescue",
+      "deliverance",
+      "save"
+     ],
+     [
+      "certainty",
+      "no guarantee",
+      "does not need guarantee",
+      "certainty of god"
+     ],
+     [
+      "god",
+      "our god",
+      "whom we serve"
+     ]
+    ],
+    "es": [
+     [
+      "si no",
+      "y si no"
+     ],
+     [
+      "librar",
+      "puede librarnos",
+      "rescatarnos"
+     ],
+     [
+      "fe",
+      "fidelidad",
+      "confianza"
+     ],
+     [
+      "rescate",
+      "liberación",
+      "salvar"
+     ],
+     [
+      "certeza",
+      "sin garantía",
+      "no necesita garantía",
+      "certeza de dios"
+     ],
+     [
+      "dios",
+      "nuestro dios",
+      "a quien servimos"
+     ]
+    ]
+   },
+   "model": {
+    "en": "The 'if not' confession comes in Daniel 3:17-18, when Shadrach, Meshach, and Abednego faced the fiery furnace. They said, 'Our God whom we serve is able to deliver us... and He will deliver us from your hand, O king. But if not, let it be known to you that we do not serve your gods, nor will we worship the gold image.' Those two small words — 'if not' — are among the strongest in the Bible. Their significance for Christian faith is that faith does not need a guarantee of rescue in this life; it needs only the certainty of God in the next. They trusted God's power to deliver but did not condition their obedience on it. When God is pleased to deliver, He delivers; when He is not, He gives grace to die well.",
+    "es": "La confesión de 'si no' viene en Daniel 3:17-18, cuando Sadrac, Mesac y Abed-nego enfrentaron el horno de fuego. Dijeron: 'Nuestro Dios a quien servimos puede librarnos... y de tu mano nos librará, oh rey. Y si no, sepas, oh rey, que no serviremos a tus dioses, ni tampoco adoraremos la imagen de oro.' Esas dos pequeñas palabras — 'si no' — están entre las más fuertes de la Biblia. Su significado para la fe cristiana es que la fe no necesita una garantía de rescate en esta vida; solo necesita la certeza de Dios en la próxima. Confiaron en el poder de Dios para librarlos pero no condicionaron su obediencia a ello. Cuando a Dios le place librar, libra; cuando no, da gracia para morir bien."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe Nebuchadnezzar's dream of the great image (Daniel 2) and the meaning of the stone cut without hands.",
+    "es": "Describa el sueño de Nabucodonosor de la gran imagen (Daniel 2) y el significado de la piedra cortada sin manos."
+   },
+   "keywords": {
+    "en": [
+     [
+      "gold",
+      "head of gold",
+      "golden head"
+     ],
+     [
+      "silver",
+      "chest of silver",
+      "breast of silver"
+     ],
+     [
+      "bronze",
+      "belly of bronze",
+      "brass"
+     ],
+     [
+      "iron",
+      "legs of iron",
+      "iron and clay"
+     ],
+     [
+      "babylon"
+     ],
+     [
+      "persia",
+      "medo-persia",
+      "medes"
+     ],
+     [
+      "greece"
+     ],
+     [
+      "rome",
+      "roman empire"
+     ],
+     [
+      "stone",
+      "cut without hands",
+      "stone struck"
+     ],
+     [
+      "kingdom",
+      "kingdom of god",
+      "mountain",
+      "everlasting kingdom",
+      "christ"
+     ]
+    ],
+    "es": [
+     [
+      "oro",
+      "cabeza de oro",
+      "cabeza dorada"
+     ],
+     [
+      "plata",
+      "pecho de plata"
+     ],
+     [
+      "bronce",
+      "vientre de bronce",
+      "latón"
+     ],
+     [
+      "hierro",
+      "piernas de hierro",
+      "hierro y barro"
+     ],
+     [
+      "babilonia"
+     ],
+     [
+      "persia",
+      "medo-persia",
+      "medos"
+     ],
+     [
+      "grecia"
+     ],
+     [
+      "roma",
+      "imperio romano"
+     ],
+     [
+      "piedra",
+      "cortada sin manos",
+      "la piedra golpeó"
+     ],
+     [
+      "reino",
+      "reino de dios",
+      "monte",
+      "reino eterno",
+      "cristo"
+     ]
+    ]
+   },
+   "model": {
+    "en": "Nebuchadnezzar's dream in Daniel 2 was a great image with a head of gold, chest of silver, belly of bronze, legs of iron, and feet of mingled iron and clay. Daniel revealed that the four metals were four successive world empires: Babylon (the gold head), Medo-Persia (silver), Greece (bronze), and Rome (iron). Then a stone cut without human hands struck the image, broke it to powder, and grew into a mountain that filled the whole earth. The stone is the Kingdom of God — Christ, cut without human hands. Many have tried to restore the Roman Empire and failed; but the stone has come, and the mountain Christ is building will not stop growing until it fills the earth, an everlasting kingdom that breaks all the others.",
+    "es": "El sueño de Nabucodonosor en Daniel 2 fue una gran imagen con cabeza de oro, pecho de plata, vientre de bronce, piernas de hierro, y pies de hierro y barro mezclados. Daniel reveló que los cuatro metales eran cuatro imperios mundiales sucesivos: Babilonia (la cabeza de oro), Medo-Persia (plata), Grecia (bronce), y Roma (hierro). Entonces una piedra cortada sin mano humana golpeó la imagen, la desmenuzó, y creció hasta ser un monte que llenó toda la tierra. La piedra es el Reino de Dios — Cristo, cortado sin mano humana. Muchos han intentado restaurar el Imperio Romano y han fracasado; pero la piedra ha venido, y el monte que Cristo edifica no dejará de crecer hasta llenar la tierra, un reino eterno que quebranta a todos los demás."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain how Daniel 7 ('Son of Man') is fulfilled in Jesus's claim before the Sanhedrin (Mark 14:62).",
+    "es": "Explique cómo Daniel 7 ('Hijo del Hombre') se cumple en la afirmación de Jesús ante el Sanedrín (Marcos 14:62)."
+   },
+   "keywords": {
+    "en": [
+     [
+      "son of man",
+      "one like the son of man"
+     ],
+     [
+      "ancient of days",
+      "god seated",
+      "white garment"
+     ],
+     [
+      "everlasting",
+      "never pass away",
+      "eternal dominion",
+      "forever"
+     ],
+     [
+      "kingdom",
+      "dominion",
+      "glory",
+      "everlasting kingdom"
+     ],
+     [
+      "sanhedrin",
+      "high priest",
+      "before the council",
+      "under oath"
+     ],
+     [
+      "jesus",
+      "christ",
+      "i am"
+     ],
+     [
+      "clouds",
+      "clouds of heaven",
+      "coming with clouds"
+     ]
+    ],
+    "es": [
+     [
+      "hijo del hombre",
+      "uno como el hijo del hombre"
+     ],
+     [
+      "anciano de días",
+      "dios sentado",
+      "vestido blanco"
+     ],
+     [
+      "eterno",
+      "jamás pasará",
+      "dominio eterno",
+      "para siempre"
+     ],
+     [
+      "reino",
+      "dominio",
+      "gloria",
+      "reino eterno"
+     ],
+     [
+      "sanedrín",
+      "sumo sacerdote",
+      "ante el concilio",
+      "bajo juramento"
+     ],
+     [
+      "jesús",
+      "cristo",
+      "yo soy"
+     ],
+     [
+      "nubes",
+      "nubes del cielo",
+      "viniendo en las nubes"
+     ]
+    ]
+   },
+   "model": {
+    "en": "In Daniel 7 the prophet sees thrones set in place and the Ancient of Days seated, His garment white as snow — God Himself in holiness and judgment. Then One like the Son of Man comes with the clouds of heaven to the Ancient of Days and is given dominion, glory, and an everlasting kingdom that shall never pass away. Six hundred years later, before the Sanhedrin on the night before His crucifixion, Jesus was put under oath and asked if He was the Christ. He answered, 'I am. And you will see the Son of Man sitting at the right hand of the Power, and coming with the clouds of heaven' — quoting Daniel 7 directly. The high priest tore his robes because he understood the claim: Jesus was declaring Himself the eternal King receiving the everlasting Kingdom.",
+    "es": "En Daniel 7 el profeta ve tronos puestos y al Anciano de Días sentado, Su vestido blanco como la nieve — Dios mismo en santidad y juicio. Entonces Uno como el Hijo del Hombre viene con las nubes del cielo al Anciano de Días y se le da dominio, gloria, y un reino eterno que jamás pasará. Seiscientos años después, ante el Sanedrín la noche antes de Su crucifixión, Jesús fue puesto bajo juramento y se le preguntó si era el Cristo. Respondió: 'Yo soy. Y veréis al Hijo del Hombre sentado a la diestra del poder de Dios, y viniendo en las nubes del cielo' — citando Daniel 7 directamente. El sumo sacerdote rasgó sus vestiduras porque entendió la afirmación: Jesús se declaraba el Rey eterno que recibe el Reino eterno."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain Daniel 9's prophecy of the seventy weeks and its arrival at the cross.",
+    "es": "Explique la profecía de las setenta semanas de Daniel 9 y su llegada a la cruz."
+   },
+   "keywords": {
+    "en": [
+     [
+      "seventy weeks",
+      "70 weeks",
+      "weeks of years"
+     ],
+     [
+      "decree",
+      "decree to rebuild",
+      "artaxerxes",
+      "445"
+     ],
+     [
+      "anointed",
+      "anointed one",
+      "messiah",
+      "christ"
+     ],
+     [
+      "cut off",
+      "cut off not for himself",
+      "killed"
+     ],
+     [
+      "calvary",
+      "cross",
+      "arrives at the cross",
+      "date of calvary"
+     ],
+     [
+      "sixty-nine",
+      "sixty-nine weeks",
+      "69 weeks"
+     ]
+    ],
+    "es": [
+     [
+      "setenta semanas",
+      "70 semanas",
+      "semanas de años"
+     ],
+     [
+      "decreto",
+      "decreto de reedificar",
+      "artajerjes",
+      "445"
+     ],
+     [
+      "ungido",
+      "el ungido",
+      "mesías",
+      "cristo"
+     ],
+     [
+      "cortado",
+      "cortado no por sí mismo",
+      "muerto"
+     ],
+     [
+      "calvario",
+      "cruz",
+      "llega a la cruz",
+      "fecha del calvario"
+     ],
+     [
+      "sesenta y nueve",
+      "sesenta y nueve semanas",
+      "69 semanas"
+     ]
+    ]
+   },
+   "model": {
+    "en": "Daniel 9's prophecy of the seventy weeks came as Daniel was reading Jeremiah, realizing the seventy years of exile were nearly up, and praying for his people. The angel Gabriel arrived with a longer timeline: from the decree to rebuild Jerusalem until the Anointed One is 'cut off' would be sixty-nine weeks of years. Starting from the decree of Artaxerxes in 445 B.C., the math lands at exactly the right week of the right year for the cross. So Daniel was given, six centuries in advance, the very timing of Calvary — the Anointed One cut off, not for Himself, but for many. The God who walks His people through history is also the God who keeps the calendar of redemption with perfect precision.",
+    "es": "La profecía de las setenta semanas de Daniel 9 vino mientras Daniel leía a Jeremías, dándose cuenta de que los setenta años de exilio estaban casi por cumplirse, y oraba por su pueblo. El ángel Gabriel llegó con una línea de tiempo más larga: desde el decreto de reedificar Jerusalén hasta que el Ungido sea 'cortado' habría sesenta y nueve semanas de años. Comenzando desde el decreto de Artajerjes en el 445 a.C., el cálculo cae exactamente en la semana correcta del año correcto para la cruz. Así que a Daniel se le dio, seis siglos por adelantado, el momento mismo del Calvario — el Ungido cortado, no por sí mismo, sino por muchos. El Dios que lleva a Su pueblo por la historia es también el Dios que guarda el calendario de la redención con perfecta precisión."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Synthesize the message of Ezekiel and Daniel using the bowling-ball-on-the-boxcar illustration. What do both books say about God's reign over captivity?",
+    "es": "Sintetice el mensaje de Ezequiel y Daniel usando la ilustración de la bola de boliche en el vagón. ¿Qué dicen ambos libros sobre el reinado de Dios en el cautiverio?"
+   },
+   "keywords": {
+    "en": [
+     [
+      "bowling ball",
+      "ball",
+      "ball on the boxcar"
+     ],
+     [
+      "boxcar",
+      "train",
+      "freight car"
+     ],
+     [
+      "perspective",
+      "point of view",
+      "step out",
+      "from orbit"
+     ],
+     [
+      "god",
+      "the lord",
+      "god in charge"
+     ],
+     [
+      "reigns",
+      "god reigns",
+      "in control",
+      "sovereign"
+     ],
+     [
+      "captivity",
+      "exile",
+      "loss carried forward",
+      "our captivities"
+     ],
+     [
+      "chariot",
+      "ezekiel's chariot",
+      "glory"
+     ],
+     [
+      "throne",
+      "daniel's throne",
+      "son of man",
+      "kingdom"
+     ]
+    ],
+    "es": [
+     [
+      "bola de boliche",
+      "bola",
+      "bola sobre el vagón"
+     ],
+     [
+      "vagón",
+      "tren",
+      "vagón de carga"
+     ],
+     [
+      "perspectiva",
+      "punto de vista",
+      "da un paso afuera",
+      "desde la órbita"
+     ],
+     [
+      "dios",
+      "el señor",
+      "dios al mando"
+     ],
+     [
+      "reina",
+      "dios reina",
+      "en control",
+      "soberano"
+     ],
+     [
+      "cautiverio",
+      "exilio",
+      "pérdida llevada adelante",
+      "nuestros cautiverios"
+     ],
+     [
+      "carro",
+      "carro de ezequiel",
+      "gloria"
+     ],
+     [
+      "trono",
+      "trono de daniel",
+      "hijo del hombre",
+      "reino"
+     ]
+    ]
+   },
+   "model": {
+    "en": "The bowling-ball-on-the-boxcar illustration synthesizes Ezekiel and Daniel. A man rolls a bowling ball from the front of a moving boxcar toward the back: from inside, it rolls backward; but to someone beside the tracks the train carries it forward, and from orbit it hurtles around a spinning earth. When we look at our own lives — exile, lions, furnaces, ruined nations — all we see is the ball rolling backward, loss. But step out and gain God's perspective and you discover that what looks like loss is being carried forward in a vast plan. That is the message of both books: God reigns over our captivities. Ezekiel sees the chariot of glory, Daniel sees the throne and kingdoms; both end with the Son of Man receiving an everlasting Kingdom and a city named 'The Lord Is There.'",
+    "es": "La ilustración de la bola de boliche sobre el vagón sintetiza a Ezequiel y Daniel. Un hombre rueda una bola de boliche del frente de un vagón en movimiento hacia atrás: desde adentro, rueda hacia atrás; pero para alguien junto a las vías el tren la lleva hacia adelante, y desde la órbita se precipita alrededor de una tierra que gira. Cuando miramos nuestras propias vidas — exilio, leones, hornos, naciones arruinadas — todo lo que vemos es la bola rodando hacia atrás, pérdida. Pero da un paso afuera y obtén la perspectiva de Dios y descubrirás que lo que parece pérdida está siendo llevado hacia adelante en un vasto plan. Ese es el mensaje de ambos libros: Dios reina sobre nuestros cautiverios. Ezequiel ve el carro de gloria, Daniel ve el trono y los reinos; ambos terminan con el Hijo del Hombre recibiendo un Reino eterno y una ciudad llamada 'El Señor está allí.'"
+   }
+  }
+ ]
+};

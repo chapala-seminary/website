@@ -1,0 +1,793 @@
+/* CTSCE — unit 3. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "ce",
+ "unit": 3,
+ "totalUnits": 10,
+ "filePrefix": "CTSCE",
+ "prevHref": "CTSCEUnit2.html",
+ "nextHref": "CTSCEUnit4.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "What is the anchor scripture for Unit 3?",
+    "es": "¿Cuál es la escritura ancla para la Unidad 3?"
+   },
+   "options": {
+    "en": [
+     "John 3:16",
+     "John 13:13-15",
+     "Matthew 28:19-20",
+     "Luke 10:39"
+    ],
+    "es": [
+     "Juan 3:16",
+     "Juan 13:13-15",
+     "Mateo 28:19-20",
+     "Lucas 10:39"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "John 13:13-15 anchors this unit because Jesus himself claims the title 'Teacher' and immediately defines it: 'I have given you an example, that you should do as I have done to you.' The Master Teacher teaches by being.",
+    "es": "Juan 13:13-15 ancla esta unidad porque Jesús mismo reclama el título de «Maestro» e inmediatamente lo define: «Ejemplo os he dado, para que como yo os he hecho, vosotros también hagáis». El Maestro de Maestros enseña siendo."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was Jesus doing at age twelve when his parents found him in the temple?",
+    "es": "¿Qué estaba haciendo Jesús a los doce años cuando sus padres lo encontraron en el templo?"
+   },
+   "options": {
+    "en": [
+     "Sleeping in a corner",
+     "Sitting among the doctors, hearing them and asking them questions",
+     "Selling carpentry tools",
+     "Reading prophecies aloud to the crowd"
+    ],
+    "es": [
+     "Durmiendo en una esquina",
+     "Sentado entre los doctores, oyéndoles y preguntándoles",
+     "Vendiendo herramientas de carpintería",
+     "Leyendo profecías en voz alta a la multitud"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Luke 2:46 describes Jesus 'sitting in the midst of the doctors, both hearing them, and asking them questions.' Even at twelve, he was already doing two of the master teacher's signature moves: listening and asking.",
+    "es": "Lucas 2:46 describe a Jesús «sentado en medio de los doctores, oyéndoles y preguntándoles». Incluso a los doce años, ya estaba haciendo dos de los movimientos característicos del maestro: escuchar y preguntar."
+   }
+  },
+  {
+   "stem": {
+    "en": "How did Jesus answer each of the Devil's three temptations in the wilderness?",
+    "es": "¿Cómo respondió Jesús a cada una de las tres tentaciones del Diablo en el desierto?"
+   },
+   "options": {
+    "en": [
+     "With original arguments",
+     "With silence",
+     "With 'It is written' followed by Scripture from Deuteronomy",
+     "With miracles"
+    ],
+    "es": [
+     "Con argumentos originales",
+     "Con silencio",
+     "Con «Escrito está» seguido de Escritura de Deuteronomio",
+     "Con milagros"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Each of Jesus's three answers in Matthew 4 began with 'It is written' and quoted Deuteronomy. The Master Teacher did not improvise; he drew from a deep well of memorized, internalized Scripture.",
+    "es": "Cada una de las tres respuestas de Jesús en Mateo 4 comenzó con «Escrito está» y citó Deuteronomio. El Maestro de Maestros no improvisó; sacó de un profundo pozo de Escritura memorizada e interiorizada."
+   }
+  },
+  {
+   "stem": {
+    "en": "Approximately how many times did Jesus quote the Old Testament in the four Gospels?",
+    "es": "¿Aproximadamente cuántas veces citó Jesús el Antiguo Testamento en los cuatro Evangelios?"
+   },
+   "options": {
+    "en": [
+     "Fewer than 10",
+     "About 25",
+     "About 50",
+     "More than 90"
+    ],
+    "es": [
+     "Menos de 10",
+     "Cerca de 25",
+     "Cerca de 50",
+     "Más de 90"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Jesus quoted the Old Testament more than 90 times across the four Gospels, drawing from the Law, the Prophets, and the Psalms. His teaching was saturated with the Word he himself had inspired.",
+    "es": "Jesús citó el Antiguo Testamento más de 90 veces a través de los cuatro Evangelios, sacando de la Ley, los Profetas, y los Salmos. Su enseñanza estaba saturada de la Palabra que él mismo había inspirado."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did Jesus do for the disciples in the upper room before the Last Supper?",
+    "es": "¿Qué hizo Jesús por los discípulos en el aposento alto antes de la Última Cena?"
+   },
+   "options": {
+    "en": [
+     "Washed their feet",
+     "Preached a long sermon",
+     "Distributed money to the poor",
+     "Read from the Torah"
+    ],
+    "es": [
+     "Les lavó los pies",
+     "Predicó un largo sermón",
+     "Distribuyó dinero a los pobres",
+     "Leyó de la Torá"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "In John 13:4-5, Jesus laid aside his garments, took a towel, poured water into a basin, and washed the disciples' feet. The Master became the slave to teach his students what greatness looks like in his kingdom.",
+    "es": "En Juan 13:4-5, Jesús se quitó su manto, tomó una toalla, echó agua en un lebrillo, y les lavó los pies a los discípulos. El Maestro se hizo siervo para enseñarles a sus estudiantes cómo se ve la grandeza en su reino."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did Jesus say after washing the disciples' feet (John 13:15)?",
+    "es": "¿Qué dijo Jesús después de lavar los pies de los discípulos (Juan 13:15)?"
+   },
+   "options": {
+    "en": [
+     "\"Verily, verily, I say unto you\"",
+     "\"I have given you an example, that you should do as I have done to you\"",
+     "\"It is finished\"",
+     "\"Peace I leave with you\""
+    ],
+    "es": [
+     "«De cierto, de cierto os digo»",
+     "«Ejemplo os he dado, para que como yo os he hecho, vosotros también hagáis»",
+     "«Consumado es»",
+     "«La paz os dejo»"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "This is the explicit definition of 'Master' that Jesus gives in the upper room. The Master Teacher does not float above his students; he gives them an example. He teaches by being.",
+    "es": "Esta es la definición explícita de «Maestro» que Jesús da en el aposento alto. El Maestro de Maestros no flota por encima de sus estudiantes; les da ejemplo. Enseña siendo."
+   }
+  },
+  {
+   "stem": {
+    "en": "What was Jesus's response when the disciples tried to send the children away?",
+    "es": "¿Cuál fue la respuesta de Jesús cuando los discípulos trataron de echar a los niños?"
+   },
+   "options": {
+    "en": [
+     "He agreed they were too young to learn",
+     "He sent them to John the Baptist instead",
+     "He was much displeased and said 'Suffer the little children to come unto me'",
+     "He told the parents to come back later"
+    ],
+    "es": [
+     "Estuvo de acuerdo en que eran demasiado pequeños para aprender",
+     "Los envió a Juan el Bautista en su lugar",
+     "Se indignó mucho y dijo «Dejad a los niños venir a mí»",
+     "Les dijo a los padres que volvieran más tarde"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "In Mark 10:14, Jesus was 'much displeased' and said, 'Suffer the little children to come unto me, and forbid them not: for of such is the kingdom of God.' The Master of the universe held a four-year-old in his lap. The Christian Education teacher who will not kneel at a child's eye level has not yet understood the kind of Master he serves.",
+    "es": "En Marcos 10:14, Jesús se «indignó mucho» y dijo: «Dejad a los niños venir a mí, y no se lo impidáis; porque de los tales es el reino de Dios». El Maestro del universo sostuvo a un niño de cuatro años en su regazo."
+   }
+  },
+  {
+   "stem": {
+    "en": "Where did Jesus meet the Samaritan woman, and at what time of day?",
+    "es": "¿Dónde se encontró Jesús con la mujer samaritana, y a qué hora del día?"
+   },
+   "options": {
+    "en": [
+     "At a well, at noon",
+     "At the temple, in the morning",
+     "At a marketplace, in the evening",
+     "At a synagogue, on the Sabbath"
+    ],
+    "es": [
+     "En un pozo, a mediodía",
+     "En el templo, en la mañana",
+     "En un mercado, al atardecer",
+     "En una sinagoga, el sábado"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "John 4 records that Jesus sat at Jacob's well at the sixth hour (noon). Everything about that picture &mdash; the hour, the woman alone, the foreign territory &mdash; tells the careful reader that Jesus had already studied his student before he opened his mouth.",
+    "es": "Juan 4 registra que Jesús se sentó en el pozo de Jacob a la hora sexta (mediodía). Todo en esa imagen &mdash; la hora, la mujer sola, el territorio extranjero &mdash; le dice al lector cuidadoso que Jesús ya había estudiado a su estudiante."
+   }
+  },
+  {
+   "stem": {
+    "en": "How did Jesus begin his conversation with the woman at the well?",
+    "es": "¿Cómo comenzó Jesús su conversación con la mujer en el pozo?"
+   },
+   "options": {
+    "en": [
+     "With a request: \"Give me to drink\"",
+     "With a command to repent",
+     "With a quotation from Isaiah",
+     "With a parable about a wedding"
+    ],
+    "es": [
+     "Con una petición: «Dame de beber»",
+     "Con un mandato a arrepentirse",
+     "Con una cita de Isaías",
+     "Con una parábola sobre una boda"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "In John 4:7, Jesus's first words were 'Give me to drink.' He did not begin with a sermon or a verse. He met her where she was, in the role she was already playing, with what she already had.",
+    "es": "En Juan 4:7, las primeras palabras de Jesús fueron «Dame de beber». No comenzó con un sermón ni un versículo. La encontró donde estaba, en el papel que ya estaba desempeñando, con lo que ya tenía."
+   }
+  },
+  {
+   "stem": {
+    "en": "Approximately how many parables did Jesus tell that are recorded in the Gospels?",
+    "es": "¿Aproximadamente cuántas parábolas que están registradas en los Evangelios contó Jesús?"
+   },
+   "options": {
+    "en": [
+     "Fewer than 10",
+     "About 20",
+     "More than 40",
+     "More than 100"
+    ],
+    "es": [
+     "Menos de 10",
+     "Cerca de 20",
+     "Más de 40",
+     "Más de 100"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "More than 40 parables are recorded in the Gospels, all drawn from the everyday life of Jesus's hearers: farming, fishing, weddings, lost coins, lost sons. The Master Teacher fitted his stories to his students.",
+    "es": "Más de 40 parábolas están registradas en los Evangelios, todas sacadas de la vida cotidiana de los oyentes de Jesús: la agricultura, la pesca, las bodas, las monedas perdidas, los hijos perdidos."
+   }
+  },
+  {
+   "stem": {
+    "en": "Approximately how many questions did Jesus ask that are recorded in the four Gospels?",
+    "es": "¿Aproximadamente cuántas preguntas que están registradas en los cuatro Evangelios hizo Jesús?"
+   },
+   "options": {
+    "en": [
+     "About 50",
+     "About 150",
+     "About 200",
+     "More than 300"
+    ],
+    "es": [
+     "Cerca de 50",
+     "Cerca de 150",
+     "Cerca de 200",
+     "Más de 300"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The Gospels record more than 300 questions from Jesus. He used questions to teach, to convict, to draw out faith, to expose hypocrisy, and to lead his students to discover truth for themselves.",
+    "es": "Los Evangelios registran más de 300 preguntas de Jesús. Usó preguntas para enseñar, para convencer, para sacar fe, para exponer hipocresía, y para guiar a sus estudiantes a descubrir la verdad por sí mismos."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does Mark 1:35 say Jesus did 'a great while before day' after a long night of healing?",
+    "es": "¿Qué dice Marcos 1:35 que hizo Jesús «mucho antes de amanecer» después de una larga noche de sanidades?"
+   },
+   "options": {
+    "en": [
+     "Slept until noon",
+     "Departed into a solitary place and prayed",
+     "Returned to Nazareth",
+     "Wrote letters to the disciples"
+    ],
+    "es": [
+     "Durmió hasta el mediodía",
+     "Se fue a un lugar desierto y oró",
+     "Regresó a Nazaret",
+     "Escribió cartas a los discípulos"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Mark 1:35: 'And in the morning, rising up a great while before day, he went out, and departed into a solitary place, and there prayed.' The night before had been long; the disciples were sleeping; the Master Teacher was praying. The busier he got, the more he prayed.",
+    "es": "Marcos 1:35: «Y levantándose muy de mañana, mucho antes de amanecer, salió y se fue a un lugar desierto, y allí oraba». La noche anterior había sido larga; los discípulos dormían; el Maestro de Maestros oraba."
+   }
+  },
+  {
+   "stem": {
+    "en": "How long did Jesus pray before choosing the Twelve (Luke 6:12)?",
+    "es": "¿Por cuánto tiempo oró Jesús antes de escoger a los Doce (Lucas 6:12)?"
+   },
+   "options": {
+    "en": [
+     "A few minutes",
+     "One hour",
+     "All night",
+     "Three days"
+    ],
+    "es": [
+     "Unos pocos minutos",
+     "Una hora",
+     "Toda la noche",
+     "Tres días"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Luke 6:12 says Jesus 'continued all night in prayer to God' before choosing the Twelve. The most consequential teaching decision of his ministry was preceded by an entire night in prayer.",
+    "es": "Lucas 6:12 dice que Jesús «pasó la noche orando a Dios» antes de escoger a los Doce. La decisión de enseñanza más consecuente de su ministerio fue precedida por toda una noche en oración."
+   }
+  },
+  {
+   "stem": {
+    "en": "Where did Jesus pray before the cross, until his sweat became as great drops of blood?",
+    "es": "¿Dónde oró Jesús antes de la cruz, hasta que su sudor se hizo como grandes gotas de sangre?"
+   },
+   "options": {
+    "en": [
+     "Bethany",
+     "The temple",
+     "Mount Tabor",
+     "Gethsemane"
+    ],
+    "es": [
+     "Betania",
+     "El templo",
+     "El monte Tabor",
+     "Getsemaní"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Luke 22:44 records Jesus praying in Gethsemane until his sweat 'was as it were great drops of blood falling down to the ground.' The Master Teacher's life was bathed in prayer at every critical moment, including the night before he died.",
+    "es": "Lucas 22:44 registra a Jesús orando en Getsemaní hasta que su sudor «era como grandes gotas de sangre que caían hasta la tierra». La vida del Maestro de Maestros estuvo bañada en oración en cada momento crítico."
+   }
+  },
+  {
+   "stem": {
+    "en": "Of whom does Luke 10:39 say she 'sat at Jesus' feet, and heard his word'?",
+    "es": "¿De quién dice Lucas 10:39 que «sentada a los pies de Jesús, oía su palabra»?"
+   },
+   "options": {
+    "en": [
+     "Martha",
+     "Mary Magdalene",
+     "Salome",
+     "Mary of Bethany"
+    ],
+    "es": [
+     "Marta",
+     "María Magdalena",
+     "Salomé",
+     "María de Betania"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Mary of Bethany (Lazarus's sister), in contrast to her busy sister Martha. Jesus said she had chosen 'that good part, which shall not be taken away.' The Christian Education teacher's first place is at the Master Teacher's feet.",
+    "es": "María de Betania (hermana de Lázaro), en contraste con su hermana ocupada Marta. Jesús dijo que ella había escogido «la buena parte, la cual no le será quitada». El primer lugar del maestro está a los pies del Maestro."
+   }
+  },
+  {
+   "stem": {
+    "en": "How are the six characteristics of Unit 2 related to Jesus, according to Andi?",
+    "es": "¿Cómo se relacionan las seis características de la Unidad 2 con Jesús, según Andi?"
+   },
+   "options": {
+    "en": [
+     "They are general principles that loosely apply",
+     "They are theory; Jesus is the perfect embodiment",
+     "They were derived from secular education",
+     "They apply to children but not to Jesus"
+    ],
+    "es": [
+     "Son principios generales que se aplican vagamente",
+     "Son teoría; Jesús es la encarnación perfecta",
+     "Fueron derivadas de la educación secular",
+     "Se aplican a niños pero no a Jesús"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The orientation states it explicitly: 'The six characteristics of Unit 2 are not theory. They are a portrait of Jesus.' Each characteristic finds its perfect example in him.",
+    "es": "La orientación lo dice explícitamente: «Las seis características de la Unidad 2 no son teoría. Son un retrato de Jesús». Cada característica encuentra su ejemplo perfecto en él."
+   }
+  },
+  {
+   "stem": {
+    "en": "How long did Jesus prepare in private before beginning his public ministry?",
+    "es": "¿Cuánto tiempo se preparó Jesús en privado antes de comenzar su ministerio público?"
+   },
+   "options": {
+    "en": [
+     "Approximately thirty years",
+     "Seven years",
+     "One year",
+     "He needed no preparation"
+    ],
+    "es": [
+     "Aproximadamente treinta años",
+     "Siete años",
+     "Un año",
+     "No necesitó preparación"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Jesus did not begin his public ministry until age thirty, after thirty years of private fellowship with the Father in the home, the carpenter shop, and the synagogue. The teacher who tries to skip the filling will find himself dry within a few months.",
+    "es": "Jesús no comenzó su ministerio público hasta los treinta años, después de treinta años de comunión privada con el Padre en el hogar, el taller de carpintero, y la sinagoga."
+   }
+  },
+  {
+   "stem": {
+    "en": "Which teaching method did Jesus NOT use, according to Section V?",
+    "es": "¿Qué método de enseñanza NO usó Jesús, según la Sección V?"
+   },
+   "options": {
+    "en": [
+     "Lecture (Sermon on the Mount)",
+     "Parables and object lessons",
+     "Questions and demonstration",
+     "He used every method known to good teaching"
+    ],
+    "es": [
+     "Conferencia (Sermón del Monte)",
+     "Parábolas y lecciones objetivas",
+     "Preguntas y demostración",
+     "Usó cada método conocido de la buena enseñanza"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The Master Teacher used every method &mdash; lecture, questions, parables, object lessons, demonstration, field trips, and varied group sizes. The teacher who limits himself to one method is limiting Jesus.",
+    "es": "El Maestro de Maestros usó cada método &mdash; conferencia, preguntas, parábolas, lecciones objetivas, demostración, viajes, y tamaños de grupo variados. El maestro que se limita a un solo método está limitando a Jesús."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did Jesus call himself in John 13:13?",
+    "es": "¿Cómo se llamó Jesús a sí mismo en Juan 13:13?"
+   },
+   "options": {
+    "en": [
+     "Master and Lord",
+     "Friend and brother",
+     "Prophet and priest",
+     "Servant and student"
+    ],
+    "es": [
+     "Maestro y Señor",
+     "Amigo y hermano",
+     "Profeta y sacerdote",
+     "Siervo y estudiante"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "In John 13:13, Jesus said, 'You call Me Teacher and Lord, and you say well, for so I am.' He claimed both titles. Then he immediately defined them by washing the disciples' feet &mdash; real authority paired with real service.",
+    "es": "En Juan 13:13, Jesús dijo: «Vosotros me llamáis Maestro, y Señor; y decís bien, porque lo soy». Reclamó ambos títulos. Luego los definió inmediatamente lavándoles los pies a los discípulos."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to the closing, where is the Christian Education teacher's first place?",
+    "es": "Según el cierre, ¿cuál es el primer lugar del maestro de Educación Cristiana?"
+   },
+   "options": {
+    "en": [
+     "Behind a lectern",
+     "In front of a class",
+     "At the feet of the Master Teacher, hearing his word",
+     "In the seminary library"
+    ],
+    "es": [
+     "Detrás de un atril",
+     "Delante de una clase",
+     "A los pies del Maestro de Maestros, oyendo su palabra",
+     "En la biblioteca del seminario"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Andi quotes Mary of Bethany at Jesus's feet (Luke 10:39) as the model. The teacher's first place is not behind a lectern but at the Master Teacher's feet, hearing his word, before ever attempting to pass that word on to anyone else.",
+    "es": "Andi cita a María de Betania a los pies de Jesús (Lucas 10:39) como el modelo. El primer lugar del maestro no es detrás de un atril sino a los pies del Maestro, oyendo su palabra, antes de jamás intentar pasar esa palabra a otra persona."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "List the six characteristics of Jesus presented in Unit 3 (parallel to the six in Unit 2).",
+    "es": "Enumera las seis características de Jesús presentadas en la Unidad 3 (paralelas a las seis de la Unidad 2)."
+   },
+   "keywords": {
+    "en": [
+     "god",
+     "word",
+     "servant",
+     "serve",
+     "student",
+     "studi",
+     "prayer",
+     "teach"
+    ],
+    "es": [
+     "dios",
+     "palabra",
+     "siervo",
+     "estudi",
+     "proceso",
+     "oración",
+     "enseñ",
+     "persona"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe Jesus at age twelve in the temple (Luke 2:46-49) and explain what it teaches about preparation for the teaching ministry.",
+    "es": "Describe a Jesús a los doce años en el templo (Lucas 2:46-49) y explica lo que enseña acerca de la preparación para el ministerio de enseñanza."
+   },
+   "keywords": {
+    "en": [
+     "twelve",
+     "temple",
+     "doctor",
+     "question",
+     "father",
+     "prepar",
+     "thirty",
+     "listen"
+    ],
+    "es": [
+     "doce",
+     "templo",
+     "doctor",
+     "pregunta",
+     "padre",
+     "prepar",
+     "treinta",
+     "negoci"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain how Jesus's response to the wilderness temptations models the teacher's relationship with Scripture.",
+    "es": "Explica cómo la respuesta de Jesús a las tentaciones del desierto modela la relación del maestro con la Escritura."
+   },
+   "keywords": {
+    "en": [
+     "written",
+     "deuteron",
+     "memoriz",
+     "quoted",
+     "quote",
+     "word",
+     "script",
+     "temptat"
+    ],
+    "es": [
+     "escrito",
+     "deuteron",
+     "memoriz",
+     "citó",
+     "citar",
+     "palabra",
+     "escritur",
+     "tentac"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe Jesus washing the disciples' feet and explain what it teaches the Christian Education teacher.",
+    "es": "Describe a Jesús lavando los pies de los discípulos y explica lo que enseña al maestro de Educación Cristiana."
+   },
+   "keywords": {
+    "en": [
+     "towel",
+     "basin",
+     "feet",
+     "example",
+     "servant",
+     "wash",
+     "water",
+     "master"
+    ],
+    "es": [
+     "toalla",
+     "lebrillo",
+     "pies",
+     "ejemplo",
+     "siervo",
+     "lavó",
+     "agua",
+     "maestr"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Tell the story of Jesus and the children (Mark 10:13-16) and explain what it shows about the Master Teacher.",
+    "es": "Cuenta la historia de Jesús y los niños (Marcos 10:13-16) y explica lo que muestra acerca del Maestro de Maestros."
+   },
+   "keywords": {
+    "en": [
+     "child",
+     "children",
+     "disciple",
+     "displeas",
+     "suffer",
+     "bless",
+     "arm",
+     "kingdom"
+    ],
+    "es": [
+     "niño",
+     "niños",
+     "discípul",
+     "indign",
+     "dejad",
+     "bendij",
+     "brazo",
+     "reino"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Tell the story of the woman at the well (John 4) and explain what it teaches about studying the student.",
+    "es": "Cuenta la historia de la mujer en el pozo (Juan 4) y explica lo que enseña acerca de estudiar al estudiante."
+   },
+   "keywords": {
+    "en": [
+     "samaritan",
+     "well",
+     "noon",
+     "drink",
+     "culture",
+     "water",
+     "step",
+     "meet"
+    ],
+    "es": [
+     "samaritan",
+     "pozo",
+     "mediodía",
+     "beber",
+     "cultura",
+     "agua",
+     "paso",
+     "encontr"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "List several teaching methods Jesus used and explain what this teaches the Christian Education teacher.",
+    "es": "Enumera varios métodos de enseñanza que usó Jesús y explica lo que esto enseña al maestro de Educación Cristiana."
+   },
+   "keywords": {
+    "en": [
+     "lecture",
+     "question",
+     "parable",
+     "object",
+     "demonstrat",
+     "method",
+     "variety",
+     "field"
+    ],
+    "es": [
+     "conferenci",
+     "pregunta",
+     "parábol",
+     "objet",
+     "demostrac",
+     "método",
+     "variedad",
+     "campo"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe Jesus's prayer life before key teaching moments and explain its lesson for the teacher.",
+    "es": "Describe la vida de oración de Jesús antes de momentos clave de enseñanza y explica su lección para el maestro."
+   },
+   "keywords": {
+    "en": [
+     "solitary",
+     "dawn",
+     "twelve",
+     "gethsemane",
+     "pray",
+     "night",
+     "before",
+     "busi"
+    ],
+    "es": [
+     "solitar",
+     "amanecer",
+     "doce",
+     "getsemaní",
+     "oró",
+     "orar",
+     "noche",
+     "antes"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain Mary of Bethany's posture in Luke 10:39 and what it teaches the Christian Education teacher.",
+    "es": "Explica la postura de María de Betania en Lucas 10:39 y lo que enseña al maestro de Educación Cristiana."
+   },
+   "keywords": {
+    "en": [
+     "feet",
+     "heard",
+     "hear",
+     "word",
+     "mary",
+     "martha",
+     "sat",
+     "part"
+    ],
+    "es": [
+     "pies",
+     "oía",
+     "escuch",
+     "palabra",
+     "maría",
+     "marta",
+     "sentó",
+     "parte"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain why Unit 3 follows Unit 2 in this course and how Jesus relates to the six characteristics.",
+    "es": "Explica por qué la Unidad 3 sigue a la Unidad 2 en este curso y cómo se relaciona Jesús con las seis características."
+   },
+   "keywords": {
+    "en": [
+     "six",
+     "example",
+     "perfect",
+     "model",
+     "characterist",
+     "embod",
+     "portrait",
+     "jesus"
+    ],
+    "es": [
+     "seis",
+     "ejemplo",
+     "perfect",
+     "modelo",
+     "característic",
+     "encarn",
+     "retrato",
+     "jesús"
+    ]
+   }
+  }
+ ]
+};

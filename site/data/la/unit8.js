@@ -1,0 +1,945 @@
+/* CTSLA — unit 8. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "la",
+ "unit": 8,
+ "totalUnits": 11,
+ "filePrefix": "CTSLA",
+ "prevHref": "CTSLAUnit7.html",
+ "nextHref": "CTSLAUnit9.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "In the KJV translation of 1 Corinthians 13, 'faith, hope, charity,' what Greek word stands behind the English 'charity'?",
+    "es": "En la traducci&oacute;n KJV de 1 Corintios 13, «fe, esperanza, charity», &iquest;qu&eacute; palabra griega est&aacute; detr&aacute;s del ingl&eacute;s «charity»?"
+   },
+   "options": {
+    "en": [
+     "Eros",
+     "Agap&ecirc;",
+     "Philia",
+     "Storg&ecirc;"
+    ],
+    "es": [
+     "Eros",
+     "Agap&ecirc;",
+     "Philia",
+     "Storg&ecirc;"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The Greek word is agap&ecirc;. Jerome rendered it into Latin as caritas around AD 400; caritas came into English as 'charity' and was used by the KJV translators in 1611. The English word has since narrowed to mean financial donation, but the Greek agap&ecirc; never narrowed. This is exactly why we learn the Greek word itself.",
+    "es": "La palabra griega es agap&ecirc;. Jer&oacute;nimo la tradujo al lat&iacute;n como caritas alrededor del a&ntilde;o 400 d.C.; caritas entr&oacute; al ingl&eacute;s como «charity» y fue usada por los traductores de la KJV en 1611. La palabra inglesa desde entonces se ha estrechado para significar donaci&oacute;n financiera, pero el griego agap&ecirc; nunca se estrech&oacute;. Por esto exactamente aprendemos la palabra griega misma."
+   }
+  },
+  {
+   "stem": {
+    "en": "How did pre-Christian Greek philosophers (like Heraclitus around 500 BC) use the word logos?",
+    "es": "&iquest;C&oacute;mo usaban los fil&oacute;sofos griegos precristianos (como Her&aacute;clito alrededor del 500 a.C.) la palabra logos?"
+   },
+   "options": {
+    "en": [
+     "As the personal name of a Greek god in the Olympian pantheon",
+     "To mean a written letter or a postal message",
+     "As a Hebrew loan-word meaning 'covenant'",
+     "To mean cosmic Reason, principle, or the rational structure holding the universe together"
+    ],
+    "es": [
+     "Como el nombre personal de un dios griego en el pante&oacute;n ol&iacute;mpico",
+     "Para significar una carta escrita o un mensaje postal",
+     "Como un pr&eacute;stamo hebreo que significa «pacto»",
+     "Para significar Raz&oacute;n c&oacute;smica, principio, o la estructura racional que sostiene unido al universo"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Heraclitus of Ephesus and later the Stoics used logos to mean the abstract cosmic Principle behind all reality &mdash; the deep impersonal Reason that ordered the universe. When John 1:1 says 'In the beginning was the Logos,' every educated Greek reader recognized the term immediately. John then turned their abstract principle into a Person: Jesus Christ, the eternal Logos who became flesh.",
+    "es": "Her&aacute;clito de &Eacute;feso y m&aacute;s tarde los estoicos usaban logos para significar el Principio c&oacute;smico abstracto detr&aacute;s de toda realidad &mdash; la Raz&oacute;n profunda e impersonal que ordenaba el universo. Cuando Juan 1:1 dice «En el principio era el Logos», todo lector griego educado reconoc&iacute;a el t&eacute;rmino inmediatamente. Juan luego convirti&oacute; su principio abstracto en una Persona: Jesucristo, el Logos eterno que se hizo carne."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is John doing with the Greek word logos when he opens his Gospel in John 1:1?",
+    "es": "&iquest;Qu&eacute; est&aacute; haciendo Juan con la palabra griega logos cuando abre su Evangelio en Juan 1:1?"
+   },
+   "options": {
+    "en": [
+     "Identifying the eternal Logos as a Person &mdash; Jesus Christ, who became flesh in John 1:14",
+     "Borrowing the term to argue for an abstract impersonal principle behind reality",
+     "Translating it directly from the Hebrew word dabar with no change in meaning",
+     "Inventing a brand-new Greek word never used before in the Greek-speaking world"
+    ],
+    "es": [
+     "Identificando al Logos eterno como una Persona &mdash; Jesucristo, que se hizo carne en Juan 1:14",
+     "Tomando prestado el t&eacute;rmino para argumentar a favor de un principio abstracto impersonal detr&aacute;s de la realidad",
+     "Traduci&eacute;ndolo directamente de la palabra hebrea dabar sin cambio de significado",
+     "Inventando una palabra griega completamente nueva nunca antes usada en el mundo de habla griega"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "John takes a familiar Greek philosophical term and detonates it. The educated Greek reader expected an abstract cosmic principle. John says: yes, the Logos exists; and the Logos was with God; and the Logos was God; and the Logos became flesh. The cosmic Principle is a Person, and His name is Jesus. The Greek word logos in John's hands carries the full doctrine of the Incarnation.",
+    "es": "Juan toma un t&eacute;rmino filos&oacute;fico griego familiar y lo detona. El lector griego educado esperaba un principio c&oacute;smico abstracto. Juan dice: s&iacute;, el Logos existe; y el Logos era con Dios; y el Logos era Dios; y el Logos se hizo carne. El Principio c&oacute;smico es una Persona, y Su nombre es Jes&uacute;s. La palabra griega logos en manos de Juan lleva la doctrina completa de la Encarnaci&oacute;n."
+   }
+  },
+  {
+   "stem": {
+    "en": "How many Greek words for 'love' are there, of the sort C.S. Lewis described in his book The Four Loves?",
+    "es": "&iquest;Cu&aacute;ntas palabras griegas para «amor» hay, del tipo que C.S. Lewis describi&oacute; en su libro Los Cuatro Amores?"
+   },
+   "options": {
+    "en": [
+     "Two &mdash; agap&ecirc; and eros only",
+     "Six, as listed in the Septuagint translation of the Old Testament",
+     "Four &mdash; eros, philia, storg&ecirc;, agap&ecirc;",
+     "One &mdash; agap&ecirc; is the only Greek word for love"
+    ],
+    "es": [
+     "Dos &mdash; agap&ecirc; y eros solamente",
+     "Seis, como se enumeran en la traducci&oacute;n Septuaginta del Antiguo Testamento",
+     "Cuatro &mdash; eros, philia, storg&ecirc;, agap&ecirc;",
+     "Una &mdash; agap&ecirc; es la &uacute;nica palabra griega para amor"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Greek has four words where English has one: eros (romantic desire), philia (friendship), storg&ecirc; (family affection), and agap&ecirc; (self-giving sacrificial love). C.S. Lewis's 1960 book The Four Loves explains each. The New Testament chose agap&ecirc; almost exclusively when it spoke of God's love, because the other three were already loaded with meanings that did not fit divine love.",
+    "es": "El griego tiene cuatro palabras donde el espa&ntilde;ol tiene una: eros (deseo rom&aacute;ntico), philia (amistad), storg&ecirc; (afecto familiar), y agap&ecirc; (amor sacrificial abnegado). El libro de C.S. Lewis de 1960 Los Cuatro Amores explica cada una. El Nuevo Testamento eligi&oacute; agap&ecirc; casi exclusivamente cuando habl&oacute; del amor de Dios, porque las otras tres ya estaban cargadas de significados que no encajaban con el amor divino."
+   }
+  },
+  {
+   "stem": {
+    "en": "In Greek, what kind of love does the word eros name?",
+    "es": "En griego, &iquest;qu&eacute; tipo de amor nombra la palabra eros?"
+   },
+   "options": {
+    "en": [
+     "Self-giving sacrificial love that seeks the other's good regardless of return",
+     "Romantic, passionate, desire-based love &mdash; the love of husband and wife in the Song of Solomon",
+     "Friendship love &mdash; the bond between equals such as David and Jonathan",
+     "Family affection &mdash; a parent's love for a child"
+    ],
+    "es": [
+     "Amor sacrificial abnegado que busca el bien del otro sin importar el retorno",
+     "Amor rom&aacute;ntico, apasionado, basado en el deseo &mdash; el amor del esposo y la esposa en el Cantar de los Cantares",
+     "Amor de amistad &mdash; el v&iacute;nculo entre iguales como David y Jonat&aacute;n",
+     "Afecto familiar &mdash; el amor de un padre por un hijo"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Eros is the Greek word for romantic, desire-based love &mdash; passionate, urgent, sometimes destructive. The English 'erotic' preserves the root. Eros is not bad in itself (Song of Solomon celebrates it within marriage), but the New Testament avoided eros for divine love because eros is desire-driven and conditional. God's love is not driven by desire for the worthiness of the beloved.",
+    "es": "Eros es la palabra griega para amor rom&aacute;ntico basado en el deseo &mdash; apasionado, urgente, a veces destructivo. La palabra «er&oacute;tico» preserva la ra&iacute;z. Eros no es malo en s&iacute; mismo (el Cantar de los Cantares lo celebra dentro del matrimonio), pero el Nuevo Testamento evit&oacute; eros para el amor divino porque eros est&aacute; impulsado por el deseo y es condicional. El amor de Dios no est&aacute; impulsado por el deseo de la dignidad del amado."
+   }
+  },
+  {
+   "stem": {
+    "en": "What kind of love is philia in Greek?",
+    "es": "&iquest;Qu&eacute; tipo de amor es philia en griego?"
+   },
+   "options": {
+    "en": [
+     "Friendship &mdash; companion-love between equals who share something in common",
+     "Romantic desire",
+     "Family blood-bond between parent and child",
+     "Sacrificial love for an enemy"
+    ],
+    "es": [
+     "Amistad &mdash; amor de compa&ntilde;eros entre iguales que comparten algo en com&uacute;n",
+     "Deseo rom&aacute;ntico",
+     "V&iacute;nculo de sangre familiar entre padre e hijo",
+     "Amor sacrificial por un enemigo"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Philia is friendship, the companion-love between people who share something &mdash; a craft, a campaign, a faith, a memory. Aristotle wrote whole books on philia. The English 'Philadelphia' means 'brotherly love' (philia + adelphos = brother). David and Jonathan in 1 Samuel 18 is the great biblical example. Philia requires mutual liking; it is conditional in that sense.",
+    "es": "Philia es amistad, el amor de compa&ntilde;eros entre personas que comparten algo &mdash; un oficio, una campa&ntilde;a, una fe, un recuerdo. Arist&oacute;teles escribi&oacute; libros enteros sobre philia. «Filadelfia» significa «amor fraternal» (philia + adelphos = hermano). David y Jonat&aacute;n en 1 Samuel 18 es el gran ejemplo b&iacute;blico. Philia requiere simpat&iacute;a mutua; es condicional en ese sentido."
+   }
+  },
+  {
+   "stem": {
+    "en": "What kind of love is storg&ecirc; in Greek?",
+    "es": "&iquest;Qu&eacute; tipo de amor es storg&ecirc; en griego?"
+   },
+   "options": {
+    "en": [
+     "A form of romantic eros restricted to married couples",
+     "The friendship love of co-workers in ministry",
+     "A philosophical love of wisdom (philo-sophia)",
+     "Family affection &mdash; the bond of parent and child, sibling and sibling"
+    ],
+    "es": [
+     "Una forma de eros rom&aacute;ntico restringido a parejas casadas",
+     "El amor de amistad de compa&ntilde;eros de trabajo en el ministerio",
+     "Un amor filos&oacute;fico de la sabidur&iacute;a (philo-sophia)",
+     "Afecto familiar &mdash; el v&iacute;nculo de padre e hijo, hermano y hermano"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Storg&ecirc; is family affection &mdash; the love of a mother for her newborn, of siblings raised in the same house, of a grandfather for his grandchild. It is built on blood-relation and shared upbringing. The New Testament uses storg&ecirc; rarely (Romans 12:10 commands brotherly affection); for divine love it reaches instead for agap&ecirc;, because God's love is not limited to the family of blood.",
+    "es": "Storg&ecirc; es afecto familiar &mdash; el amor de una madre por su reci&eacute;n nacido, de hermanos criados en la misma casa, de un abuelo por su nieto. Est&aacute; construido sobre la relaci&oacute;n de sangre y la crianza compartida. El Nuevo Testamento usa storg&ecirc; raramente (Romanos 12:10 manda afecto fraternal); para el amor divino busca en cambio agap&ecirc;, porque el amor de Dios no se limita a la familia de sangre."
+   }
+  },
+  {
+   "stem": {
+    "en": "Why did the New Testament writers prefer the word agap&ecirc; over the other three Greek words for love?",
+    "es": "&iquest;Por qu&eacute; los escritores del Nuevo Testamento prefirieron la palabra agap&ecirc; sobre las otras tres palabras griegas para amor?"
+   },
+   "options": {
+    "en": [
+     "Because agap&ecirc; was the most common everyday word for love in classical Greek",
+     "Because the Apostle Paul invented the word agap&ecirc; himself in the 50s AD",
+     "Because in classical Greek agap&ecirc; was a rare, pale, almost empty word &mdash; uncontaminated by sexual, friendship, or family meanings &mdash; so they could fill it with new theological content",
+     "Because agap&ecirc; was the only Greek word Jesus knew"
+    ],
+    "es": [
+     "Porque agap&ecirc; era la palabra cotidiana m&aacute;s com&uacute;n para amor en el griego cl&aacute;sico",
+     "Porque el ap&oacute;stol Pablo invent&oacute; la palabra agap&ecirc; &eacute;l mismo en los a&ntilde;os 50 d.C.",
+     "Porque en el griego cl&aacute;sico agap&ecirc; era una palabra rara, p&aacute;lida, casi vac&iacute;a &mdash; sin contaminar por significados sexuales, de amistad, o familiares &mdash; para que pudieran llenarla con nuevo contenido teol&oacute;gico",
+     "Porque agap&ecirc; era la &uacute;nica palabra griega que Jes&uacute;s sab&iacute;a"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Eros, philia, and storg&ecirc; were all strong words already &mdash; loaded with meanings of desire, mutual friendship, or blood-bond. None of those could carry a love that crosses every tribe, gives without return, and seeks the good of an enemy. Agap&ecirc; was the colorless near-empty cup of the four. The New Testament writers picked it up and filled it with the very nature of God. By the end of the New Testament, agap&ecirc; had become the highest word in the Greek language.",
+    "es": "Eros, philia, y storg&ecirc; eran ya palabras fuertes &mdash; cargadas de significados de deseo, amistad mutua, o v&iacute;nculo de sangre. Ninguna de ellas pod&iacute;a cargar un amor que cruza toda tribu, da sin retorno, y busca el bien de un enemigo. Agap&ecirc; era la copa incolora casi vac&iacute;a de las cuatro. Los escritores del Nuevo Testamento la tomaron y la llenaron con la naturaleza misma de Dios. Para el final del Nuevo Testamento, agap&ecirc; se hab&iacute;a convertido en la palabra m&aacute;s alta del idioma griego."
+   }
+  },
+  {
+   "stem": {
+    "en": "In 1 John 4:8 the Greek says 'ho theos agap&ecirc; estin' (literally 'God love is'). Which English translation captures this most exactly?",
+    "es": "En 1 Juan 4:8 el griego dice «ho theos agap&ecirc; estin» (literalmente «Dios amor es»). &iquest;Cu&aacute;l traducci&oacute;n captura esto m&aacute;s exactamente?"
+   },
+   "options": {
+    "en": [
+     "'God has love' &mdash; meaning love is something God possesses",
+     "'God is love' &mdash; meaning love is the eternal essence of God's being",
+     "'God feels love' &mdash; meaning love is one of God's emotions",
+     "'God commands love' &mdash; meaning love is something God orders us to do"
+    ],
+    "es": [
+     "«Dios tiene amor» &mdash; significando que el amor es algo que Dios posee",
+     "«Dios es amor» &mdash; significando que el amor es la esencia eterna del ser de Dios",
+     "«Dios siente amor» &mdash; significando que el amor es una de las emociones de Dios",
+     "«Dios manda el amor» &mdash; significando que el amor es algo que Dios nos ordena hacer"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The Greek verb 'estin' is the verb 'to be.' God does not merely have agap&ecirc;; God is agap&ecirc;. Agap&ecirc; is the eternal essence of His being &mdash; what He has been from before the foundation of the world, when the three Persons of the Trinity poured agap&ecirc; into one another in unbroken fellowship. He commands us to love because love is what He is.",
+    "es": "El verbo griego «estin» es el verbo «ser». Dios no meramente tiene agap&ecirc;; Dios es agap&ecirc;. Agap&ecirc; es la esencia eterna de Su ser &mdash; lo que ha sido desde antes de la fundaci&oacute;n del mundo, cuando las tres Personas de la Trinidad derramaban agap&ecirc; unas en otras en comuni&oacute;n ininterrumpida. &Eacute;l nos manda amar porque el amor es lo que &Eacute;l es."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Greek word charis (grace) gives English which family of related words?",
+    "es": "La palabra griega charis (gracia) da en espa&ntilde;ol y en ingl&eacute;s &iquest;qu&eacute; familia de palabras relacionadas?"
+   },
+   "options": {
+    "en": [
+     "Chord, chorus, choir &mdash; all from a musical root",
+     "Chart, charter, charm &mdash; all from a paper-document root",
+     "Charity, charisma, Eucharist (eu-charis-tia = 'good-grace' = thanksgiving)",
+     "Charge, character, charcoal &mdash; all from a fire-and-mark root"
+    ],
+    "es": [
+     "Acorde, coro &mdash; todas de una ra&iacute;z musical",
+     "Carta, carta-magna, encanto &mdash; todas de una ra&iacute;z de documento de papel",
+     "Caridad, carisma, Eucarist&iacute;a (eu-charis-tia = «buena-gracia» = acci&oacute;n de gracias)",
+     "Cargo, car&aacute;cter, carb&oacute;n &mdash; todas de una ra&iacute;z de fuego-y-marca"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The charis family in English is wide: charity (Latin caritas, from agap&ecirc; but related), charisma (a Spirit-gift), charismatic, Eucharist (literally 'good-grace,' our word for Communion and thanksgiving), and through Latin gratia we also get 'grateful' and 'gratis.' Whenever you hear an English word with 'char' or 'grat' in it that relates to gift or thanks, the Greek charis stands behind.",
+    "es": "La familia de charis en espa&ntilde;ol es amplia: caridad (lat&iacute;n caritas, de agap&ecirc; pero relacionada), carisma (un don del Esp&iacute;ritu), carism&aacute;tico, Eucarist&iacute;a (literalmente «buena-gracia», nuestra palabra para la Comuni&oacute;n y la acci&oacute;n de gracias), y a trav&eacute;s del lat&iacute;n gratia tambi&eacute;n obtenemos «grato», «gracias», «gratis». Cuando escuches una palabra con «car» o «grat» que se relacione con regalo o gratitud, el griego charis est&aacute; detr&aacute;s."
+   }
+  },
+  {
+   "stem": {
+    "en": "In classical pre-Christian Greek, what did charis (grace) originally mean?",
+    "es": "En el griego cl&aacute;sico precristiano, &iquest;qu&eacute; significaba originalmente charis (gracia)?"
+   },
+   "options": {
+    "en": [
+     "A favor done that placed the receiver under obligation to repay the giver",
+     "A completely free gift with no strings or repayment expected, exactly as Paul uses it",
+     "A legal contract signed between two parties of equal status",
+     "A religious tax paid to the temple of Apollo at Delphi"
+    ],
+    "es": [
+     "Un favor hecho que pon&iacute;a al receptor bajo obligaci&oacute;n de pagar al dador",
+     "Un regalo completamente gratuito sin condiciones ni expectativa de pago, exactamente como Pablo lo usa",
+     "Un contrato legal firmado entre dos partes de igual estatus",
+     "Un impuesto religioso pagado al templo de Apolo en Delfos"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "In classical Athens, charis was the favor of a patron that always created obligation. The receiver was bound to repay the giver for life. Paul's Ephesians 2:8&ndash;9 deliberately inverts this: God's charis is the kind of favor that creates NO obligation, the kind that excludes boasting precisely because it cannot be repaid. The pagan reader of Paul's letter would have stared at the page &mdash; this is not how charis is supposed to work. Exactly. That is the gospel.",
+    "es": "En la Atenas cl&aacute;sica, charis era el favor de un patr&oacute;n que siempre creaba obligaci&oacute;n. El receptor estaba obligado a pagar al dador de por vida. Efesios 2:8&ndash;9 de Pablo invierte esto deliberadamente: la charis de Dios es el tipo de favor que NO crea obligaci&oacute;n, el tipo que excluye la gloria propia precisamente porque no puede ser pagado. El lector pagano de la carta de Pablo se habr&iacute;a quedado mirando la p&aacute;gina &mdash; as&iacute; no funciona charis. Exacto. Ese es el evangelio."
+   }
+  },
+  {
+   "stem": {
+    "en": "How did the New Testament transform the Greek word charis (grace)?",
+    "es": "&iquest;C&oacute;mo transform&oacute; el Nuevo Testamento la palabra griega charis (gracia)?"
+   },
+   "options": {
+    "en": [
+     "By teaching that grace must be earned through good works and sacraments",
+     "By restricting grace only to ethnic Israel and excluding the Gentile nations",
+     "By replacing the need for faith with the need for ritual purity",
+     "By inverting it: grace becomes a FREE gift placing no obligation of repayment on the receiver &mdash; pure, unilateral favor from God"
+    ],
+    "es": [
+     "Ense&ntilde;ando que la gracia debe ganarse a trav&eacute;s de buenas obras y sacramentos",
+     "Restringiendo la gracia solo a Israel &eacute;tnico y excluyendo a las naciones gentiles",
+     "Reemplazando la necesidad de la fe con la necesidad de pureza ritual",
+     "Invirti&eacute;ndola: la gracia se vuelve un regalo GRATUITO que no pone obligaci&oacute;n de pago al receptor &mdash; favor puro y unilateral de Dios"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Paul takes the word that always meant 'favor with obligation' and uses it for the favor that has no obligation. 'By grace are ye saved through faith; and that not of yourselves: it is the gift of God: not of works, lest any man should boast.' Boasting is impossible in front of a gift this large. The Greek word charis carries the entire Reformation doctrine of salvation by grace alone.",
+    "es": "Pablo toma la palabra que siempre significaba «favor con obligaci&oacute;n» y la usa para el favor que no tiene obligaci&oacute;n. «Por gracia sois salvos por medio de la fe; y esto no de vosotros, pues es don de Dios; no por obras, para que nadie se glor&iacute;e». La gloria propia es imposible frente a un regalo tan grande. La palabra griega charis lleva toda la doctrina reformada de la salvaci&oacute;n por la sola gracia."
+   }
+  },
+  {
+   "stem": {
+    "en": "Who wrote the hymn 'Amazing Grace,' and what was his background?",
+    "es": "&iquest;Qui&eacute;n escribi&oacute; el himno «Sublime Gracia» («Amazing Grace»), y cu&aacute;l era su trasfondo?"
+   },
+   "options": {
+    "en": [
+     "Charles Wesley, a Methodist preacher who never went to sea",
+     "Isaac Watts, a London hymn-writer of the early 1700s",
+     "John Newton, a former slave-ship captain converted in a storm at sea in 1748, who later became an Anglican parson at Olney",
+     "Fanny Crosby, the blind American hymn-writer of the late 1800s"
+    ],
+    "es": [
+     "Charles Wesley, un predicador metodista que nunca fue al mar",
+     "Isaac Watts, un escritor de himnos de Londres de principios del 1700",
+     "John Newton, un antiguo capit&aacute;n de barco esclavista convertido en una tormenta en el mar en 1748, quien luego se hizo cl&eacute;rigo anglicano en Olney",
+     "Fanny Crosby, la escritora de himnos estadounidense ciega de finales del 1800"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "John Newton (1725&ndash;1807) was captain of a slave ship out of Liverpool in his twenties. On March 21, 1748, his ship hit a storm so violent off Ireland that he expected to drown; he cried out to the Christ he had been blaspheming. He survived. He left the slave trade, was ordained Anglican parson at Olney in 1764, and wrote 'Amazing Grace' for his New Year's Day sermon in 1772. His tombstone, written by his own hand, calls him 'once an infidel and libertine, a servant of slaves in Africa, was by the rich mercy of our Lord and Saviour Jesus Christ preserved, restored, pardoned, and appointed to preach the faith he had long laboured to destroy.'",
+    "es": "John Newton (1725&ndash;1807) era capit&aacute;n de un barco esclavista de Liverpool en sus veintitantos a&ntilde;os. El 21 de marzo de 1748, su barco enfrent&oacute; una tormenta tan violenta frente a Irlanda que esperaba ahogarse; clam&oacute; al Cristo al que hab&iacute;a estado blasfemando. Sobrevivi&oacute;. Dej&oacute; el comercio de esclavos, fue ordenado cl&eacute;rigo anglicano en Olney en 1764, y escribi&oacute; «Sublime Gracia» para su serm&oacute;n de A&ntilde;o Nuevo en 1772. Su l&aacute;pida, escrita por su propia mano, lo llama «una vez infiel y libertino, siervo de esclavos en &Aacute;frica, fue por la rica misericordia de nuestro Se&ntilde;or y Salvador Jesucristo preservado, restaurado, perdonado, y nombrado para predicar la fe que tanto se hab&iacute;a esforzado en destruir»."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does Ephesians 2:8&ndash;9 teach about how we are saved?",
+    "es": "&iquest;Qu&eacute; ense&ntilde;a Efesios 2:8&ndash;9 sobre c&oacute;mo somos salvos?"
+   },
+   "options": {
+    "en": [
+     "By keeping the Ten Commandments perfectly without failure",
+     "By grace (charis) through faith &mdash; not of works, so that no one may boast",
+     "By a combination of faith and the merit of good works added together",
+     "By baptism and faithful church membership"
+    ],
+    "es": [
+     "Guardando los Diez Mandamientos perfectamente sin falla",
+     "Por gracia (charis) por medio de la fe &mdash; no por obras, para que nadie se glor&iacute;e",
+     "Por una combinaci&oacute;n de fe y el m&eacute;rito de buenas obras sumadas",
+     "Por el bautismo y la membres&iacute;a fiel en la iglesia"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Ephesians 2:8&ndash;9: 'By grace are ye saved through faith; and that not of yourselves: it is the gift of God: not of works, lest any man should boast.' The Greek charis here is the unrepayable gift &mdash; the kind of favor that excludes boasting by definition. Salvation is from start to finish a gift, received by faith, given by God's grace alone. This verse summarized in one Greek word: charis.",
+    "es": "Efesios 2:8&ndash;9: «Por gracia sois salvos por medio de la fe; y esto no de vosotros, pues es don de Dios; no por obras, para que nadie se glor&iacute;e». El charis griego aqu&iacute; es el regalo impagable &mdash; el tipo de favor que excluye la gloria propia por definici&oacute;n. La salvaci&oacute;n es de principio a fin un regalo, recibido por fe, dado por la sola gracia de Dios. Este vers&iacute;culo resumido en una palabra griega: charis."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is the range of meanings carried by the single Greek word pneuma?",
+    "es": "&iquest;Cu&aacute;l es el rango de significados llevados por la sola palabra griega pneuma?"
+   },
+   "options": {
+    "en": [
+     "Spirit, wind, and breath &mdash; all three carried by one Greek word",
+     "Only 'spirit' &mdash; never 'wind' or 'breath'",
+     "Only 'wind' &mdash; 'spirit' is a Christian invention not in classical Greek",
+     "Only 'fire' and 'tongue' &mdash; from the Pentecost imagery"
+    ],
+    "es": [
+     "Esp&iacute;ritu, viento, y aliento &mdash; los tres llevados por una sola palabra griega",
+     "Solo «esp&iacute;ritu» &mdash; nunca «viento» o «aliento»",
+     "Solo «viento» &mdash; «esp&iacute;ritu» es una invenci&oacute;n cristiana que no est&aacute; en el griego cl&aacute;sico",
+     "Solo «fuego» y «lengua» &mdash; del imaginario de Pentecost&eacute;s"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Greek pneuma holds three meanings together: wind (what moves the branches), breath (what fills the lungs), and spirit (what indwells the soul). English splits them into three words; Greek keeps them as one Reality with three windows. Hebrew did the very same thing with ruach in the Old Testament. The biblical mind refuses to separate the moving invisible breath of the wind from the moving invisible breath of the Spirit of God.",
+    "es": "El griego pneuma mantiene tres significados juntos: viento (lo que mueve las ramas), aliento (lo que llena los pulmones), y esp&iacute;ritu (lo que mora en el alma). El espa&ntilde;ol los divide en tres palabras; el griego los mantiene como una Realidad con tres ventanas. El hebreo hizo exactamente lo mismo con ruach en el Antiguo Testamento. La mente b&iacute;blica se niega a separar el aliento invisible en movimiento del viento del aliento invisible en movimiento del Esp&iacute;ritu de Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "Which English medical word comes directly from the Greek pneuma?",
+    "es": "&iquest;Qu&eacute; palabra m&eacute;dica espa&ntilde;ola/inglesa viene directamente del griego pneuma?"
+   },
+   "options": {
+    "en": [
+     "Cardiology &mdash; the study of the heart",
+     "Dermatitis &mdash; inflammation of the skin",
+     "Hemoglobin &mdash; the iron-protein in red blood cells",
+     "Pneumonia &mdash; a disease of the lungs (the organ where breath happens)"
+    ],
+    "es": [
+     "Cardiolog&iacute;a &mdash; el estudio del coraz&oacute;n",
+     "Dermatitis &mdash; inflamaci&oacute;n de la piel",
+     "Hemoglobina &mdash; la proteina con hierro en los gl&oacute;bulos rojos",
+     "Pulmon&iacute;a / pneumonia &mdash; una enfermedad de los pulmones (el &oacute;rgano donde sucede la respiraci&oacute;n)"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Pneumonia, pneumatic, pneumatic tire, pneumatic drill &mdash; the 'pneum' family of English words preserves the Greek pneuma. The English word 'spirit' itself comes from Latin spiritus ('breath'), preserving the same idea at a second remove. Wherever you see 'pneum' in an English or Spanish word, the Greek pneuma stands behind it.",
+    "es": "Pneumonia (pulmon&iacute;a), neum&aacute;tico, llanta neum&aacute;tica, taladro neum&aacute;tico &mdash; la familia «neum» de palabras castellanas preserva el griego pneuma. La palabra «esp&iacute;ritu» misma viene del lat&iacute;n spiritus («aliento»), preservando la misma idea a una segunda distancia. Dondequiera que veas «neum» o «pneum» en una palabra, el griego pneuma est&aacute; detr&aacute;s."
+   }
+  },
+  {
+   "stem": {
+    "en": "In John 3:8 Jesus tells Nicodemus, 'The wind blows where it wishes &hellip; so is everyone born of the Spirit.' What is the Greek wordplay that the English translation cannot fully capture?",
+    "es": "En Juan 3:8 Jes&uacute;s le dice a Nicodemo: «El viento de donde quiere sopla &hellip; as&iacute; es todo aquel que es nacido del Esp&iacute;ritu». &iquest;Cu&aacute;l es el juego de palabras griego que la traducci&oacute;n castellana no puede capturar completamente?"
+   },
+   "options": {
+    "en": [
+     "Greek uses the same word (pneuma) for both 'wind' and 'Spirit' &mdash; Jesus is making a single pun the English splits into two words",
+     "There is no wordplay &mdash; wind and Spirit are completely unrelated words in Greek",
+     "The verse was added to John's Gospel by later scribes and is not original",
+     "Jesus is correcting Nicodemus's pronunciation of a Hebrew word"
+    ],
+    "es": [
+     "El griego usa la misma palabra (pneuma) tanto para «viento» como para «Esp&iacute;ritu» &mdash; Jes&uacute;s est&aacute; haciendo un solo juego de palabras que el espa&ntilde;ol parte en dos palabras",
+     "No hay juego de palabras &mdash; viento y Esp&iacute;ritu son palabras completamente no relacionadas en griego",
+     "El vers&iacute;culo fue a&ntilde;adido al Evangelio de Juan por escribas posteriores y no es original",
+     "Jes&uacute;s est&aacute; corrigiendo la pronunciaci&oacute;n de Nicodemo de una palabra hebrea"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Both 'wind' and 'Spirit' in John 3:8 are the same Greek word, pneuma. Jesus deliberately holds them together: 'the pneuma blows where it wills &hellip; so is everyone born of the pneuma.' You cannot see this thing, but you can see what it does. The leaves move &mdash; you know there is wind. The sinner is reborn &mdash; you know there is Spirit. Same invisible Reality, two domains. The English splits the word; the Greek hearer would catch the pun instantly.",
+    "es": "Tanto «viento» como «Esp&iacute;ritu» en Juan 3:8 son la misma palabra griega, pneuma. Jes&uacute;s deliberadamente los mantiene juntos: «el pneuma sopla donde quiere &hellip; as&iacute; es todo aquel nacido del pneuma». No puedes ver esto, pero puedes ver lo que hace. Las hojas se mueven &mdash; sabes que hay viento. El pecador renace &mdash; sabes que hay Esp&iacute;ritu. La misma Realidad invisible, dos dominios. El espa&ntilde;ol divide la palabra; el oyente griego captar&iacute;a el juego al instante."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does Acts 2:2 describe as the sound of Pentecost morning when the Holy Spirit fell upon the disciples?",
+    "es": "&iquest;Qu&eacute; describe Hechos 2:2 como el sonido de la ma&ntilde;ana de Pentecost&eacute;s cuando el Esp&iacute;ritu Santo cay&oacute; sobre los disc&iacute;pulos?"
+   },
+   "options": {
+    "en": [
+     "A sound from heaven like a rushing mighty wind that filled the whole house",
+     "A still small voice like the one Elijah heard at Horeb",
+     "Total silence for one full hour",
+     "A trumpet blast from Mount Zion announcing the new covenant"
+    ],
+    "es": [
+     "Un estruendo del cielo como de un viento recio que soplaba y llen&oacute; toda la casa",
+     "Una voz silbo apacible como la que Elias oy&oacute; en Horeb",
+     "Silencio total por una hora completa",
+     "Un sonido de trompeta desde el monte Si&oacute;n anunciando el nuevo pacto"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Acts 2:2 reports a sound from heaven 'as of a rushing mighty wind' filling the upper room. The Greek word for 'wind' here is pno&ecirc;, a close cousin of pneuma (same root). Two verses later the Holy Pneuma fills the disciples. Acts 2 deliberately runs the wind-and-Spirit wordplay across a single paragraph. The first sound of the church age was the sound of pneuma, and the first miracle of the church age was language. (You are studying the right course.)",
+    "es": "Hechos 2:2 reporta un estruendo del cielo «como de un viento recio que soplaba» llenando el aposento alto. La palabra griega para «viento» aqu&iacute; es pno&ecirc;, un primo cercano de pneuma (misma ra&iacute;z). Dos vers&iacute;culos m&aacute;s adelante el Pneuma Santo llena a los disc&iacute;pulos. Hechos 2 corre deliberadamente el juego de palabras viento-y-Esp&iacute;ritu a trav&eacute;s de un solo p&aacute;rrafo. El primer sonido de la era de la iglesia fue el sonido del pneuma, y el primer milagro de la era de la iglesia fue el idioma. (Est&aacute;s estudiando el curso correcto.)"
+   }
+  },
+  {
+   "stem": {
+    "en": "Our unit scripture, John 1:14 ('And the Word became flesh and dwelt among us &hellip; full of grace and truth'), contains TWO of our four key Greek words from this unit. Which two?",
+    "es": "Nuestra escritura, Juan 1:14 («Y aquel Verbo fue hecho carne, y habit&oacute; entre nosotros &hellip; lleno de gracia y de verdad»), contiene DOS de nuestras cuatro palabras griegas clave de esta unidad. &iquest;Cu&aacute;les dos?"
+   },
+   "options": {
+    "en": [
+     "Agap&ecirc; and pneuma",
+     "Eros and storg&ecirc;",
+     "Logos and charis (Word and grace)",
+     "Pneuma and agap&ecirc;"
+    ],
+    "es": [
+     "Agap&ecirc; y pneuma",
+     "Eros y storg&ecirc;",
+     "Logos y charis (Verbo y gracia)",
+     "Pneuma y agap&ecirc;"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "John 1:14 contains 'Logos' ('the Word became flesh') and 'charis' ('full of grace and truth'). John could not have introduced the doctrine of the Incarnation more economically: the eternal Logos taking on flesh, and the gift He brings is charis. Two words. The whole Christmas story.",
+    "es": "Juan 1:14 contiene «Logos» («el Verbo fue hecho carne») y «charis» («lleno de gracia y de verdad»). Juan no podr&iacute;a haber introducido la doctrina de la Encarnaci&oacute;n con mayor econom&iacute;a: el Logos eterno tomando carne, y el regalo que trae es charis. Dos palabras. Toda la historia de Navidad."
+   }
+  },
+  {
+   "stem": {
+    "en": "The four Greek words of Unit 8 unfold the gospel in this order. Fill in the blanks: Logos = the ____; Agap&ecirc; = the love that ____; Charis = the gift He ____; Pneuma = the breath He ____.",
+    "es": "Las cuatro palabras griegas de la Unidad 8 despliegan el evangelio en este orden. Completa los espacios: Logos = la ____; Agap&ecirc; = el amor que lo ____; Charis = el regalo que ____; Pneuma = el aliento que ____."
+   },
+   "options": {
+    "en": [
+     "Sermon revealed / saves Him / counts / takes back",
+     "Principle revealed / surrounds Him / earns / sells",
+     "Place revealed / loses Him / withholds / hides",
+     "Person revealed (Christ) / sent Him / brings / gives (new birth)"
+    ],
+    "es": [
+     "Serm&oacute;n revelado / lo salva / cuenta / quita",
+     "Principio revelado / lo rodea / gana / vende",
+     "Lugar revelado / lo pierde / retiene / esconde",
+     "Persona revelada (Cristo) / lo envi&oacute; / trae / da (nuevo nacimiento)"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Logos is what God did (the Person revealed). Agap&ecirc; is why He did it (the love that sent Him). Charis is what we receive (the gift He brings). Pneuma is how we live afterward (the breath He gives). Four Greek words, the whole story of redemption. The Bible is one Book, one Author, one Theme, one Hero. The four words of Unit 8 show that one Hero from four angles.",
+    "es": "Logos es lo que Dios hizo (la Persona revelada). Agap&ecirc; es por qu&eacute; lo hizo (el amor que lo envi&oacute;). Charis es lo que recibimos (el regalo que trae). Pneuma es c&oacute;mo vivimos despu&eacute;s (el aliento que da). Cuatro palabras griegas, toda la historia de la redenci&oacute;n. La Biblia es un Libro, un Autor, un Tema, un H&eacute;roe. Las cuatro palabras de la Unidad 8 muestran a ese &uacute;nico H&eacute;roe desde cuatro &aacute;ngulos."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Why did the KJV translators in 1611 render Greek agap&ecirc; in 1 Corinthians 13 as 'charity,' and what does this teach us about every English translation?",
+    "es": "&iquest;Por qu&eacute; los traductores de la KJV en 1611 tradujeron el griego agap&ecirc; en 1 Corintios 13 como «charity», y qu&eacute; nos ense&ntilde;a esto sobre cada traducci&oacute;n al espa&ntilde;ol?"
+   },
+   "keywords": {
+    "en": [
+     "agape",
+     "caritas",
+     "latin",
+     "translation",
+     "jerome",
+     "charity",
+     "english",
+     "narrowed",
+     "shrank",
+     "greek"
+    ],
+    "es": [
+     "agape",
+     "caritas",
+     "latin",
+     "translation",
+     "jerome",
+     "charity",
+     "english",
+     "narrowed",
+     "shrank",
+     "greek"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Define Logos as John uses it in his Gospel, and explain how John 1:14 fulfills the opening claim of John 1:1.",
+    "es": "Define Logos como Juan lo usa en su Evangelio, y explica c&oacute;mo Juan 1:14 cumple la afirmaci&oacute;n inicial de Juan 1:1."
+   },
+   "keywords": {
+    "en": [
+     "word",
+     "person",
+     "christ",
+     "flesh",
+     "incarnation",
+     "eternal",
+     "god",
+     "jesus",
+     "logos",
+     "heraclitus",
+     "verbo",
+     "persona",
+     "cristo",
+     "carne",
+     "encarnacion",
+     "eterno",
+     "dios",
+     "jesus",
+     "logos"
+    ],
+    "es": [
+     "word",
+     "person",
+     "christ",
+     "flesh",
+     "incarnation",
+     "eternal",
+     "god",
+     "jesus",
+     "logos",
+     "heraclitus",
+     "verbo",
+     "persona",
+     "cristo",
+     "carne",
+     "encarnacion",
+     "eterno",
+     "dios",
+     "jesus",
+     "logos"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Name the four Greek words for love and describe what each one means.",
+    "es": "Nombra las cuatro palabras griegas para amor y describe qu&eacute; significa cada una."
+   },
+   "keywords": {
+    "en": [
+     "eros",
+     "philia",
+     "storge",
+     "agape",
+     "romantic",
+     "friendship",
+     "family",
+     "sacrificial",
+     "amistad",
+     "familia",
+     "romantico",
+     "sacrificial"
+    ],
+    "es": [
+     "eros",
+     "philia",
+     "storge",
+     "agape",
+     "romantic",
+     "friendship",
+     "family",
+     "sacrificial",
+     "amistad",
+     "familia",
+     "romantico",
+     "sacrificial"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why did the New Testament authors choose agap&ecirc; for divine love instead of the other three Greek words?",
+    "es": "&iquest;Por qu&eacute; los autores del Nuevo Testamento eligieron agap&ecirc; para el amor divino en vez de las otras tres palabras griegas?"
+   },
+   "keywords": {
+    "en": [
+     "empty",
+     "weak",
+     "rare",
+     "colorless",
+     "contaminated",
+     "clean",
+     "filled",
+     "unconditional",
+     "enemy",
+     "return",
+     "vacia",
+     "debil",
+     "rara",
+     "contaminadas",
+     "limpia",
+     "llenaron",
+     "incondicional",
+     "enemigo"
+    ],
+    "es": [
+     "empty",
+     "weak",
+     "rare",
+     "colorless",
+     "contaminated",
+     "clean",
+     "filled",
+     "unconditional",
+     "enemy",
+     "return",
+     "vacia",
+     "debil",
+     "rara",
+     "contaminadas",
+     "limpia",
+     "llenaron",
+     "incondicional",
+     "enemigo"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "List three English (or Spanish) words derived from the Greek charis and briefly explain what each one means.",
+    "es": "Enumera tres palabras espa&ntilde;olas (o inglesas) derivadas del griego charis y explica brevemente lo que significa cada una."
+   },
+   "keywords": {
+    "en": [
+     "charity",
+     "charisma",
+     "eucharist",
+     "grace",
+     "gift",
+     "caridad",
+     "carisma",
+     "eucaristia",
+     "gracia",
+     "regalo",
+     "thanksgiving",
+     "accion"
+    ],
+    "es": [
+     "charity",
+     "charisma",
+     "eucharist",
+     "grace",
+     "gift",
+     "caridad",
+     "carisma",
+     "eucaristia",
+     "gracia",
+     "regalo",
+     "thanksgiving",
+     "accion"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Tell the John Newton 'Amazing Grace' story in your own words and explain why charis is the right Greek word for his testimony.",
+    "es": "Cuenta la historia de John Newton y «Sublime Gracia» en tus propias palabras y explica por qu&eacute; charis es la palabra griega correcta para su testimonio."
+   },
+   "keywords": {
+    "en": [
+     "newton",
+     "slave",
+     "ship",
+     "storm",
+     "1748",
+     "1772",
+     "olney",
+     "amazing",
+     "grace",
+     "conversion",
+     "captain",
+     "preserved",
+     "esclavo",
+     "barco",
+     "tormenta",
+     "olney",
+     "sublime",
+     "gracia",
+     "conversion",
+     "capitan",
+     "preservado"
+    ],
+    "es": [
+     "newton",
+     "slave",
+     "ship",
+     "storm",
+     "1748",
+     "1772",
+     "olney",
+     "amazing",
+     "grace",
+     "conversion",
+     "captain",
+     "preserved",
+     "esclavo",
+     "barco",
+     "tormenta",
+     "olney",
+     "sublime",
+     "gracia",
+     "conversion",
+     "capitan",
+     "preservado"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the pneuma wordplay in Jesus's conversation with Nicodemus in John 3:8, and what it teaches about the work of the Holy Spirit.",
+    "es": "Explica el juego de palabras de pneuma en la conversaci&oacute;n de Jes&uacute;s con Nicodemo en Juan 3:8, y qu&eacute; ense&ntilde;a sobre la obra del Esp&iacute;ritu Santo."
+   },
+   "keywords": {
+    "en": [
+     "pneuma",
+     "wind",
+     "spirit",
+     "same",
+     "word",
+     "invisible",
+     "effects",
+     "reborn",
+     "leaves",
+     "nicodemus",
+     "viento",
+     "espiritu",
+     "misma",
+     "palabra",
+     "invisible",
+     "efectos",
+     "renace",
+     "hojas",
+     "nicodemo"
+    ],
+    "es": [
+     "pneuma",
+     "wind",
+     "spirit",
+     "same",
+     "word",
+     "invisible",
+     "effects",
+     "reborn",
+     "leaves",
+     "nicodemus",
+     "viento",
+     "espiritu",
+     "misma",
+     "palabra",
+     "invisible",
+     "efectos",
+     "renace",
+     "hojas",
+     "nicodemo"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "What three meanings does the single Greek word pneuma carry, and give one English derivative for each.",
+    "es": "&iquest;Qu&eacute; tres significados lleva la sola palabra griega pneuma, y da un derivado en espa&ntilde;ol o ingl&eacute;s para cada uno?"
+   },
+   "keywords": {
+    "en": [
+     "wind",
+     "breath",
+     "spirit",
+     "pneumonia",
+     "pneumatic",
+     "spiritual",
+     "viento",
+     "aliento",
+     "espiritu",
+     "neumatico",
+     "pulmonia",
+     "espiritual"
+    ],
+    "es": [
+     "wind",
+     "breath",
+     "spirit",
+     "pneumonia",
+     "pneumatic",
+     "spiritual",
+     "viento",
+     "aliento",
+     "espiritu",
+     "neumatico",
+     "pulmonia",
+     "espiritual"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Which TWO of the four key Greek words of Unit 8 appear directly in our unit scripture, John 1:14? Quote the verse and identify both words.",
+    "es": "&iquest;Cu&aacute;les DOS de las cuatro palabras griegas clave de la Unidad 8 aparecen directamente en nuestra escritura de la unidad, Juan 1:14? Cita el vers&iacute;culo e identifica ambas palabras."
+   },
+   "keywords": {
+    "en": [
+     "logos",
+     "charis",
+     "word",
+     "grace",
+     "flesh",
+     "truth",
+     "john",
+     "1:14",
+     "verbo",
+     "gracia",
+     "carne",
+     "verdad",
+     "juan"
+    ],
+    "es": [
+     "logos",
+     "charis",
+     "word",
+     "grace",
+     "flesh",
+     "truth",
+     "john",
+     "1:14",
+     "verbo",
+     "gracia",
+     "carne",
+     "verdad",
+     "juan"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Notebook activity: Pick ONE of the four Greek words from Unit 8 (Logos, Agap&ecirc;, Charis, or Pneuma). Write a short paragraph describing how knowing this Greek word will change the way you read a specific Bible verse from now on.",
+    "es": "Actividad de cuaderno: Elige UNA de las cuatro palabras griegas de la Unidad 8 (Logos, Agap&ecirc;, Charis, o Pneuma). Escribe un p&aacute;rrafo corto describiendo c&oacute;mo el conocer esta palabra griega cambiar&aacute; la forma en que leas un vers&iacute;culo b&iacute;blico espec&iacute;fico de ahora en adelante."
+   },
+   "keywords": {
+    "en": [
+     "logos",
+     "agape",
+     "charis",
+     "pneuma",
+     "verse",
+     "reading",
+     "change",
+     "mean",
+     "gift",
+     "person",
+     "love",
+     "spirit",
+     "verso",
+     "lectura",
+     "cambio",
+     "significa",
+     "regalo",
+     "persona",
+     "amor",
+     "espiritu"
+    ],
+    "es": [
+     "logos",
+     "agape",
+     "charis",
+     "pneuma",
+     "verse",
+     "reading",
+     "change",
+     "mean",
+     "gift",
+     "person",
+     "love",
+     "spirit",
+     "verso",
+     "lectura",
+     "cambio",
+     "significa",
+     "regalo",
+     "persona",
+     "amor",
+     "espiritu"
+    ]
+   }
+  }
+ ]
+};

@@ -36,9 +36,8 @@
   if (!U) { console.error("[cts] no CTS_UNIT for this page"); return; }
 
   // ---- policy ------------------------------------------------------------
-  var PASS_RATIO      = 0.90;   // of multiple-choice questions
-  var SA_HIT_RATIO    = 0.50;   // of a question's keywords, to credit it
-  var SA_PASS_RATIO   = 0.70;   // of short-answer questions
+  var PASS_RATIO      = 0.90;   // of multiple-choice questions, and of short answer
+  var SA_HIT_MIN      = 3;      // keyword matches needed to credit one answer
   var LOCK_MASTERS_MIN = 15;
   var LOCK_CERT_MIN    = 2;
 
@@ -131,12 +130,72 @@
 
   // ---- rendering ---------------------------------------------------------
   function el(id) { return document.getElementById(id); }
-  function host() {
-    return el("questionsContainer") || el("mcqArea") || el("questions") || el("examArea");
+  function firstEl() {
+    for (var i = 0; i < arguments.length; i++) {
+      var e = el(arguments[i]);
+      if (e) return e;
+    }
+    return null;
+  }
+
+  /* Courses were built independently and name their exam elements differently.
+     Aliasing here is deliberate: it lets every page keep its own markup and
+     stylesheet instead of being rewritten, which is the lower-risk change. */
+  var U_ = function (base) { return base + "_" + U.unit; };   // mcq_1, result_3, ...
+
+  function mcHost() {
+    return firstEl("questionsContainer", "mcContainer", "mcWrap", "mcBlock", "mcqArea",
+                   "mcQuestions", "mcArea", "mc-questions", "mcq", "mcArea",
+                   U_("mcq"), U_("mc"), "mc");
+  }
+  function saHost() {
+    return firstEl("kwContainer", "saWrap", "saBlock", "saQuestions", "saArea",
+                   "kw-questions", "saContainer", U_("essay"), U_("sa"), "sa");
+  }
+  function resultEl() {
+    return firstEl("examResult", "examStatus", "statusMsg", "exam-status", "mcResult",
+                   "resultBox", "score", U_("result"), "result", "lockoutTimer",
+                   "lockout-timer");
+  }
+  function submitEl() {
+    var e = firstEl("submitExamBtn", "submitBtn", "completeBtn", "submit-btn", "btnSubmit");
+    if (e) return e;
+    /* Some pages give the submit control no id at all. Find it by its label
+       rather than editing the page, and never match a registration button. */
+    var found = null;
+    Array.prototype.forEach.call(document.querySelectorAll("button"), function (b) {
+      if (found) return;
+      var t = (b.textContent || "").trim();
+      if (/^(submit|enviar|grade|check my answers|submit unit)/i.test(t) &&
+          !b.closest("#regCard, #reg-modal, #registrationBar, #registration-card, .reg-form")) {
+        found = b;
+      }
+    });
+    return found;
+  }
+  function resetEl() { return firstEl("resetExamBtn", "resetBtn", "btnReset", "reset-btn"); }
+  function gridEl() { return firstEl("progressGrid", "unitnav", "progress-units", "progress-grid"); }
+  function greetEl() {
+    return firstEl("studentGreeting", "student-greeting", "greet", "t-greet", "greeting");
+  }
+
+  /* A page with nowhere to print the outcome gets one, created next to the
+     submit control. Adding an element at runtime is preferable to rewriting
+     twenty pages' markup. */
+  function ensureResult() {
+    var r = resultEl();
+    if (r) return r;
+    var host = submitEl(), d = document.createElement("div");
+    d.id = "examResult";
+    d.style.marginTop = "12px";
+    d.style.fontWeight = "600";
+    if (host && host.parentNode) host.parentNode.insertBefore(d, host.nextSibling);
+    else (mcHost() || document.body).appendChild(d);
+    return d;
   }
 
   function renderProgressGrid() {
-    var grid = el("progressGrid");
+    var grid = gridEl();
     if (!grid) return;
     var titles = (U.unitTitles && U.unitTitles.en) || U.unitTitlesEn || [];
     var prefix = U.filePrefix || (U.nextHref || "").replace(/Unit\d+\.html$/, "") ||
@@ -152,7 +211,7 @@
   }
 
   function renderGreeting() {
-    var g = el("studentGreeting") || el("student-greeting");
+    var g = greetEl();
     if (!g) return;
     var s = student();
     if (!s || !s.name) { g.textContent = ""; return; }
@@ -161,12 +220,14 @@
   }
 
   function renderQuestions() {
-    var h = host();
+    var hMc = mcHost(), hSa = saHost();
+    var split = hSa && hSa !== hMc;          // page has its own short-answer area
+    var h = hMc || hSa;
     if (!h) return;
-    var reveal = revealAnswers(), out = "";
+    var reveal = revealAnswers(), out = "", outSa = "";
 
     if (mc.length) {
-      out += "<h3>" + bi({ en: "Multiple Choice", es: "Opción Múltiple" }) + "</h3>";
+      if (!split) out += "<h3>" + bi({ en: "Multiple Choice", es: "Opción Múltiple" }) + "</h3>";
       mc.forEach(function (q, i) {
         out += '<div class="question" data-mc="' + i + '">';
         out += '<p style="font-weight:bold;">' + (i + 1) + ". " + bi(q.stem || q.text || q.prompt) + "</p>";
@@ -192,22 +253,28 @@
     }
 
     if (sa.length) {
-      out += "<h3>" + bi({ en: "Short Answer", es: "Respuesta Corta" }) + "</h3>";
+      var target = split ? "outSa" : "out";
+      var block = "";
+      if (!split) block += "<h3>" + bi({ en: "Short Answer", es: "Respuesta Corta" }) + "</h3>";
       sa.forEach(function (q, i) {
-        out += '<div class="question" data-sa="' + i + '">';
-        out += '<p style="font-weight:bold;">' + (i + 1) + ". " + bi(q.prompt || q.stem) + "</p>";
-        out += '<textarea data-sa="' + i + '" rows="4" style="width:100%;">' +
-               String(saAnswers[i] || "").replace(/</g, "&lt;") + "</textarea>";
+        block += '<div class="question" data-sa="' + i + '">';
+        block += '<p style="font-weight:bold;">' + (i + 1) + ". " + bi(q.prompt || q.stem) + "</p>";
+        block += '<textarea data-sa="' + i + '" rows="4" style="width:100%;">' +
+                 String(saAnswers[i] || "").replace(/</g, "&lt;") + "</textarea>";
         if (graded && reveal && q.model) {
-          out += '<div class="model-answer">' + bi(q.model) + "</div>";
+          block += '<div class="model-answer">' + bi(q.model) + "</div>";
         }
-        out += "</div>";
+        block += "</div>";
       });
+      if (target === "outSa") outSa = block; else out += block;
     }
 
     h.innerHTML = out;
+    if (split) hSa.innerHTML = outSa;
+    var scope = split ? [h, hSa] : [h];
 
-    h.querySelectorAll("button.option").forEach(function (b) {
+    scope.forEach(function (node) {
+    node.querySelectorAll("button.option").forEach(function (b) {
       b.addEventListener("click", function () {
         if (graded && unitPassed) return;
         if (mcPassed) return;                       // MC already banked
@@ -216,8 +283,9 @@
         renderQuestions();
       });
     });
-    h.querySelectorAll("textarea[data-sa]").forEach(function (t) {
+    node.querySelectorAll("textarea[data-sa]").forEach(function (t) {
       t.addEventListener("input", function () { saAnswers[+t.dataset.sa] = t.value; saveState(); });
+    });
     });
   }
 
@@ -240,15 +308,36 @@
       ks = Array.isArray(ks) ? ks : (ks ? (isEs() ? ks.es : ks.en) : []) || [];
       if (!ks.length) { c++; return; }
       var a = normalise(saAnswers[i]), hits = 0;
-      ks.forEach(function (k) { if (a.indexOf(String(k).toLowerCase()) !== -1) hits++; });
-      if (hits / ks.length >= SA_HIT_RATIO) c++;
+      /* Two things matter here, and both were wrong at first:
+
+         1. A keyword must be normalised the same way as the answer. Matching a
+            raw keyword against a stripped answer scored zero for every keyword
+            carrying an apostrophe or accent -- which is most of them.
+         2. An entry may be a STRING or an ARRAY OF SYNONYMS. Some courses
+            write one concept per entry with several wordings for it; treating
+            that array as a single string never matched anything, so those
+            courses could not pass short answer at all. */
+      ks.forEach(function (k) {
+        var forms = Array.isArray(k) ? k : [k];
+        for (var f = 0; f < forms.length; f++) {
+          var needle = normalise(forms[f]).trim();
+          if (needle && a.indexOf(needle) !== -1) { hits++; return; }
+        }
+      });
+      /* A fixed number of matches, not a proportion of the list. Courses write
+         keyword lists of very different lengths -- some are a handful of
+         distinct concepts, others two dozen synonyms for one idea -- so a
+         percentage rule would grade them on wildly different standards. Three
+         matches is what the original engines required. */
+      var need = Math.min(q.minHits || SA_HIT_MIN, ks.length);
+      if (hits >= need) c++;
     });
     return c;
   }
-  function needSA() { return Math.ceil(sa.length * SA_PASS_RATIO); }
+  function needSA() { return Math.ceil(sa.length * PASS_RATIO); }
 
   function say(msg, colour) {
-    var r = el("examResult") || el("examStatus");
+    var r = ensureResult();
     if (r) r.innerHTML = '<span style="color:' + colour + '">' + msg + "</span>";
   }
 
@@ -321,6 +410,7 @@
     renderProgressGrid();
     renderGreeting();
     wireNav();
+    ensureResult();
     renderQuestions();
 
     if (unitPassed) {
@@ -330,13 +420,13 @@
         : { en: "the Certificate", es: "el Certificado" };
       say(bi({ en: "&#10003; Unit already passed! Click " + where.en + " above.",
                es: "&#10003; Unidad ya aprobada. Haga clic en " + where.es + " arriba." }), "#1f6b3b");
-      var sb = el("submitExamBtn"); if (sb) sb.disabled = true;
-      var nb = el("nextUnitBtn"); if (nb) nb.disabled = false;
+      var sbp = submitEl(); if (sbp) sbp.disabled = true;
+      var nbp = el("nextUnitBtn"); if (nbp) nbp.disabled = false;
       renderQuestions();
     }
 
-    var sb = el("submitExamBtn"); if (sb) sb.addEventListener("click", submit);
-    var rb = el("resetExamBtn"); if (rb) rb.addEventListener("click", reset);
+    var sb = submitEl(); if (sb) sb.addEventListener("click", submit);
+    var rb = resetEl(); if (rb) rb.addEventListener("click", reset);
 
     // cts-lang.js toggles body classes; re-render so the active language shows
     document.addEventListener("cts:langchange", renderQuestions);
@@ -347,6 +437,81 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
 
-  window.CTS_ENGINE = { submit: submit, reset: reset, render: renderQuestions, policy: {
-    passRatio: PASS_RATIO, lockMasters: LOCK_MASTERS_MIN, lockCert: LOCK_CERT_MIN } };
+  window.CTS_ENGINE = {
+    submit: submit, reset: reset, render: renderQuestions,
+    // exposed so tests drive the same controls the student does, rather than
+    // assuming an element id that only some courses use
+    controls: { submit: submitEl, reset: resetEl, result: resultEl, mc: mcHost, sa: saHost },
+    policy: { passRatio: PASS_RATIO, lockMasters: LOCK_MASTERS_MIN, lockCert: LOCK_CERT_MIN }
+  };
+
+  /* ------------------------------------------------------------------ *
+   * Compatibility layer
+   *
+   * Five courses wire their controls with inline onclick attributes that
+   * call functions the old per-page engine defined: submitExam(), grade(),
+   * setTrack('mdiv') and so on. Publishing those names here keeps those
+   * pages working untouched. Editing twenty-odd attributes across their
+   * unit pages would risk the lesson content around them for no gain.
+   *
+   * Only names that are not already taken are defined, so a page that still
+   * has its own implementation keeps it.
+   * ------------------------------------------------------------------ */
+  function define(name, fn) { if (typeof window[name] !== "function") window[name] = fn; }
+
+  define("submitExam", submit);
+  define("submitUnit", submit);
+  define("grade", submit);
+  define("gradeSA", submit);
+  define("gradeExam", submit);
+  define("resetExam", reset);
+  define("resetUnit", reset);
+  define("resetMC", reset);
+  define("resetMcq", reset);
+
+  function applyLang(lang) {
+    var b = document.body;
+    b.classList.remove("lang-en", "lang-es");
+    b.classList.add(lang === "es" ? "lang-es" : "lang-en");
+    b.setAttribute("data-lang", lang);
+    try { lsSet("cts_lang", lang); } catch (e) {}
+    renderQuestions();
+  }
+  define("setLang", applyLang);
+  define("toggleLang", function () { applyLang(isEs() ? "en" : "es"); });
+
+  define("setTrack", function (t) {
+    var map = { masters: "mdiv", master: "mdiv", assoc: "ad", associate: "ad", mth: "thm" };
+    var v = map[t] || t;
+    lsSet("cts_track", v);
+    var st = student();
+    if (st) { st.track = v; lsSet("cts_student", JSON.stringify(st)); }
+    renderGreeting();
+    renderQuestions();
+  });
+
+  define("goNext", function () { if (U.nextHref) location.href = U.nextHref; });
+
+  /* Registration field ids differ per course; read whichever are present. */
+  function readReg() {
+    function val() {
+      for (var i = 0; i < arguments.length; i++) {
+        var e = el(arguments[i]);
+        if (e && typeof e.value === "string" && e.value.trim()) return e.value.trim();
+      }
+      return "";
+    }
+    var name = val("regName", "reg-name", "studentName", "m-name", "student-name");
+    if (!name) return false;
+    var st = student() || {};
+    st.name = name;
+    st.email = val("regEmail", "reg-email", "studentEmail", "student-email") || st.email || "";
+    st.country = val("regCountry", "reg-country", "studentCountry") || st.country || "";
+    st.track = st.track || track();
+    lsSet("cts_student", JSON.stringify(st));
+    renderGreeting();
+    return true;
+  }
+  define("saveRegistration", readReg);
+  define("saveReg", readReg);
 })();

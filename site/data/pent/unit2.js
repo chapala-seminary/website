@@ -1,47 +1,833 @@
-/* CTSPent - unit 2: per-unit configuration and content. */
-
-const UNIT = 2;
-
-const NEXT_URL = "CTSPentUnit3.html";
-
-const PREV_URL = "CTSPentUnit1.html";
-
-const IS_LAST_UNIT = false;
-
-const SHOW_REGISTRATION_CARD = false;
-
-const mcQuestions = [
-    { textEn: "1. What Hebrew pun explains the name 'Adam'?", textEs: "1. ¿Qué juego de palabras hebreo explica el nombre 'Adán'?", optionsEn: ["A. Adam comes from adamah (ground)", "B. Adam means 'life'", "C. Adam means 'first'", "D. Adam means 'red'"], optionsEs: ["A. Adán viene de adamah (tierra)", "B. Adán significa 'vida'", "C. Adán significa 'primero'", "D. Adán significa 'rojo'"], correct: 0, correctFeedbackEn: "Correct. Adam from adamah — humanity from the ground, a deliberate Hebrew wordplay binding us to the soil from which we were taken.", correctFeedbackEs: "Correcto. Adán viene de adamah — la humanidad de la tierra, un juego de palabras hebreo deliberado que nos une al suelo del cual fuimos tomados.", incorrectFeedbackEn: "Adam comes from adamah, the Hebrew word for ground or soil. The pun is deliberate.", incorrectFeedbackEs: "Adán viene de adamah, la palabra hebrea para tierra o suelo. El juego de palabras es deliberado." },
-    { textEn: "2. The word translated 'formed' in Genesis 2:7 pictures God as what?", textEs: "2. La palabra traducida 'formó' en Génesis 2:7 representa a Dios como qué?", optionsEn: ["A. A warrior", "B. A king", "C. A master potter", "D. A farmer"], optionsEs: ["A. Un guerrero", "B. Un rey", "C. Un maestro alfarero", "D. Un labrador"], correct: 2, correctFeedbackEn: "Yes. God is depicted as a master potter — careful, deliberate, crafting a masterpiece.", correctFeedbackEs: "Sí. Dios es representado como un maestro alfarero — cuidadoso, deliberado, formando una obra maestra.", incorrectFeedbackEn: "The Hebrew verb yatsar describes a potter shaping clay with care and skill.", incorrectFeedbackEs: "El verbo hebreo yatsar describe a un alfarero moldeando el barro con cuidado y destreza." },
-    { textEn: "3. What did God breathe into Adam's nostrils?", textEs: "3. ¿Qué sopló Dios en las narices de Adán?", optionsEn: ["A. Wisdom", "B. The breath of life / living soul", "C. Fire", "D. The Holy Spirit"], optionsEs: ["A. Sabiduría", "B. El aliento de vida / alma viviente", "C. Fuego", "D. El Espíritu Santo"], correct: 1, correctFeedbackEn: "Correct. The breath of life made Adam a living soul — equal parts dust and divinity.", correctFeedbackEs: "Correcto. El aliento de vida hizo de Adán un alma viviente — a partes iguales polvo y divinidad.", incorrectFeedbackEn: "God breathed the breath of life, making Adam a living soul (nephesh).", incorrectFeedbackEs: "Dios sopló el aliento de vida, haciendo de Adán un alma viviente (nephesh)." },
-    { textEn: "4. The Tree of the Knowledge of Good and Evil offered what kind of 'knowledge'?", textEs: "4. El Árbol de la Ciencia del Bien y del Mal ofrecía qué tipo de 'conocimiento'?", optionsEn: ["A. Academic knowledge", "B. Prophetic knowledge", "C. Hidden knowledge", "D. Experiential knowledge"], optionsEs: ["A. Conocimiento académico", "B. Conocimiento profético", "C. Conocimiento oculto", "D. Conocimiento por experiencia"], correct: 3, correctFeedbackEn: "Yes. The Hebrew word da'at implies knowing by experience, firsthand — not abstract learning.", correctFeedbackEs: "Sí. La palabra hebrea da'at implica conocer por experiencia, de primera mano — no un aprendizaje abstracto.", incorrectFeedbackEn: "The knowledge was experiential — knowing good and evil by firsthand experience, not by study.", incorrectFeedbackEs: "El conocimiento era experiencial — conocer el bien y el mal por experiencia directa, no por estudio." },
-    { textEn: "5. In Scripture, what does 'death' primarily mean?", textEs: "5. En la Escritura, ¿qué significa principalmente la 'muerte'?", optionsEn: ["A. Separation from God", "B. Cessation of existence", "C. Sleep", "D. Punishment only"], optionsEs: ["A. Separación de Dios", "B. Cese de la existencia", "C. Sueño", "D. Solo castigo"], correct: 0, correctFeedbackEn: "Correct. Death is separation from God, who is the source of life. Physical death follows but is not primary.", correctFeedbackEs: "Correcto. La muerte es separación de Dios, quien es la fuente de la vida. La muerte física sigue, pero no es lo principal.", incorrectFeedbackEn: "Biblically, death means separation from God — physical death is the consequence, not the essence.", incorrectFeedbackEs: "Bíblicamente, la muerte significa separación de Dios — la muerte física es la consecuencia, no la esencia." },
-    { textEn: "6. The word 'helper' (ezer) in Genesis 2:18 is used elsewhere in the OT to refer to whom?", textEs: "6. La palabra 'ayuda' (ezer) en Génesis 2:18 se usa en otros lugares del AT para referirse a quién?", optionsEn: ["A. Angels", "B. Animals", "C. God Himself", "D. Slaves"], optionsEs: ["A. Los ángeles", "B. Los animales", "C. Dios mismo", "D. Los esclavos"], correct: 2, correctFeedbackEn: "Excellent. Ezer is used of God (Psalm 33:20) — no subordination implied. God is our helper.", correctFeedbackEs: "Excelente. Ezer se usa de Dios (Salmo 33:20) — no implica subordinación. Dios es nuestra ayuda.", incorrectFeedbackEn: "Ezer is used of God — a 'helper' is not subordinate. The woman corresponds to the man as equal.", incorrectFeedbackEs: "Ezer se usa de Dios — una 'ayuda' no es subordinada. La mujer corresponde al hombre como igual." },
-    { textEn: "7. What does 'one flesh' in Genesis 2:24 strongly imply?", textEs: "7. ¿Qué implica fuertemente 'una sola carne' en Génesis 2:24?", optionsEn: ["A. Only spiritual union", "B. Legal contract", "C. Physical union in innocence", "D. Ownership"], optionsEs: ["A. Solo unión espiritual", "B. Contrato legal", "C. Unión física en inocencia", "D. Posesión"], correct: 2, correctFeedbackEn: "Yes. Physical union within marriage, in utter innocence and without shame — God's design from the start.", correctFeedbackEs: "Sí. Unión física dentro del matrimonio, en total inocencia y sin vergüenza — el diseño de Dios desde el principio.", incorrectFeedbackEn: "One flesh implies physical union — sexuality as God designed it, innocent and unashamed within covenant.", incorrectFeedbackEs: "'Una sola carne' implica unión física — la sexualidad como Dios la diseñó, inocente y sin vergüenza dentro del pacto." },
-    { textEn: "8. What three actions describe evil's power since it cannot create?", textEs: "8. ¿Qué tres acciones describen el poder del mal, ya que no puede crear?", optionsEn: ["A. Create, sustain, destroy", "B. Subvert, pervert, invert", "C. Lie, cheat, steal", "D. Accuse, condemn, kill"], optionsEs: ["A. Crear, sostener, destruir", "B. Subvertir, pervertir, invertir", "C. Mentir, engañar, robar", "D. Acusar, condenar, matar"], correct: 1, correctFeedbackEn: "Correct. Evil subverts (twists good), perverts (corrupts), and inverts (turns into the opposite).", correctFeedbackEs: "Correcto. El mal subvierte (tuerce lo bueno), pervierte (corrompe) e invierte (convierte en lo opuesto).", incorrectFeedbackEn: "Evil cannot create. So it subverts, perverts, and inverts what God made good.", incorrectFeedbackEs: "El mal no puede crear. Por eso subvierte, pervierte e invierte lo que Dios hizo bueno." },
-    { textEn: "9. What did Eve add to God's command when speaking to the serpent?", textEs: "9. ¿Qué añadió Eva al mandamiento de Dios al hablar con la serpiente?", optionsEn: ["A. 'Nor shall you touch it'", "B. 'You must also sacrifice'", "C. 'You must wash first'", "D. 'Only the priests may eat'"], optionsEs: ["A. 'Ni lo tocaréis'", "B. 'También debéis sacrificar'", "C. 'Primero debéis lavaros'", "D. 'Solo los sacerdotes pueden comer'"], correct: 0, correctFeedbackEn: "Yes. God never said anything about touching. Adding to God's word made His command seem arbitrary and harsh.", correctFeedbackEs: "Sí. Dios nunca dijo nada sobre tocarlo. Añadir a la palabra de Dios hizo que Su mandamiento pareciera arbitrario y severo.", incorrectFeedbackEn: "Eve added 'nor shall you touch it' — something God never commanded. Such additions always backfire.", incorrectFeedbackEs: "Eva añadió 'ni lo tocaréis' — algo que Dios nunca mandó. Tales añadiduras siempre resultan contraproducentes." },
-    { textEn: "10. After eating the fruit, what was the immediate result?", textEs: "10. Después de comer el fruto, ¿cuál fue el resultado inmediato?", optionsEn: ["A. They became gods", "B. They died instantly", "C. They saw angels", "D. They knew they were naked and felt shame"], optionsEs: ["A. Se convirtieron en dioses", "B. Murieron al instante", "C. Vieron ángeles", "D. Supieron que estaban desnudos y sintieron vergüenza"], correct: 3, correctFeedbackEn: "Correct. Innocence was replaced by shame — they hid from each other and from God.", correctFeedbackEs: "Correcto. La inocencia fue reemplazada por la vergüenza — se escondieron el uno del otro y de Dios.", incorrectFeedbackEn: "Their eyes were opened to their nakedness, and shame entered where innocence had been.", incorrectFeedbackEs: "Sus ojos fueron abiertos a su desnudez, y la vergüenza entró donde antes había inocencia." },
-    { textEn: "11. What is the protoevangelium (first gospel promise) in Genesis 3:15?", textEs: "11. ¿Cuál es el protoevangelio (primera promesa del evangelio) en Génesis 3:15?", optionsEn: ["A. The rainbow covenant", "B. The Seed of the woman will crush the serpent's head", "C. The law given to Moses", "D. The promise of land"], optionsEs: ["A. El pacto del arcoíris", "B. La Simiente de la mujer aplastará la cabeza de la serpiente", "C. La ley dada a Moisés", "D. La promesa de la tierra"], correct: 1, correctFeedbackEn: "Yes! The Seed (Christ) will crush the serpent's head — the first promise of redemption, hidden in the curse itself.", correctFeedbackEs: "¡Sí! La Simiente (Cristo) aplastará la cabeza de la serpiente — la primera promesa de redención, escondida en la maldición misma.", incorrectFeedbackEn: "Genesis 3:15 promises the Seed of the woman will crush the serpent's head — the first gospel preached in Eden.", incorrectFeedbackEs: "Génesis 3:15 promete que la Simiente de la mujer aplastará la cabeza de la serpiente — el primer evangelio predicado en el Edén." },
-    { textEn: "12. What did God make for Adam and Eve after the Fall?", textEs: "12. ¿Qué hizo Dios para Adán y Eva después de la Caída?", optionsEn: ["A. Fig leaf aprons", "B. Stone altars", "C. Nothing", "D. Garments of skin"], optionsEs: ["A. Delantales de hojas de higuera", "B. Altares de piedra", "C. Nada", "D. Túnicas de pieles"], correct: 3, correctFeedbackEn: "Correct. Garments of skin required an animal's death — the first sacrifice, foreshadowing Christ.", correctFeedbackEs: "Correcto. Las túnicas de pieles requirieron la muerte de un animal — el primer sacrificio, prefigurando a Cristo.", incorrectFeedbackEn: "God made garments of skin — the first sacrifice, covering shame through an innocent substitute.", incorrectFeedbackEs: "Dios hizo túnicas de pieles — el primer sacrificio, cubriendo la vergüenza mediante un sustituto inocente." },
-    { textEn: "13. Why did God drive humanity from the Garden and guard the Tree of Life?", textEs: "13. ¿Por qué expulsó Dios a la humanidad del Huerto y guardó el Árbol de la Vida?", optionsEn: ["A. To prevent eternal life in a fallen state", "B. God was angry", "C. To punish forever", "D. To test them again"], optionsEs: ["A. Para impedir la vida eterna en un estado caído", "B. Dios estaba enojado", "C. Para castigar para siempre", "D. Para probarlos de nuevo"], correct: 0, correctFeedbackEn: "Correct. Living forever broken and fallen would be a curse, not a blessing. The expulsion was mercy.", correctFeedbackEs: "Correcto. Vivir para siempre quebrantados y caídos sería una maldición, no una bendición. La expulsión fue misericordia.", incorrectFeedbackEn: "It was mercy. To live eternally as fallen beings would be horror, not blessing.", incorrectFeedbackEs: "Fue misericordia. Vivir eternamente como seres caídos sería un horror, no una bendición." },
-    { textEn: "14. What did Cain's name mean according to Eve's prideful statement?", textEs: "14. ¿Qué significaba el nombre de Caín según la declaración orgullosa de Eva?", optionsEn: ["A. 'Gift'", "B. 'Firstborn'", "C. 'Murderer'", "D. 'Like God I have made a man'"], optionsEs: ["A. 'Regalo'", "B. 'Primogénito'", "C. 'Asesino'", "D. 'Como Dios he hecho un varón'"], correct: 3, correctFeedbackEn: "Yes. 'Like God I have made a man' — revealing pride right from birth.", correctFeedbackEs: "Sí. 'Como Dios he hecho un varón' — revelando orgullo desde el nacimiento mismo.", incorrectFeedbackEn: "Eve's statement can be read 'Like God I have made a man' — a prideful claim from the very beginning.", incorrectFeedbackEs: "La declaración de Eva puede leerse 'Como Dios he hecho un varón' — una afirmación orgullosa desde el principio mismo." },
-    { textEn: "15. Why did God reject Cain's offering but accept Abel's?", textEs: "15. ¿Por qué rechazó Dios la ofrenda de Caín pero aceptó la de Abel?", optionsEn: ["A. Cain's was the wrong type", "B. The attitude of the heart", "C. Cain was younger", "D. Abel offered more"], optionsEs: ["A. La de Caín era del tipo equivocado", "B. La actitud del corazón", "C. Caín era más joven", "D. Abel ofreció más"], correct: 1, correctFeedbackEn: "Correct. The issue was not the offering type but Cain's heart attitude. God looks at the heart, not the gift.", correctFeedbackEs: "Correcto. El asunto no fue el tipo de ofrenda sino la actitud del corazón de Caín. Dios mira el corazón, no el regalo.", incorrectFeedbackEn: "The problem was Cain's attitude — not the offering itself but the heart behind it.", incorrectFeedbackEs: "El problema fue la actitud de Caín — no la ofrenda en sí, sino el corazón detrás de ella." },
-    { textEn: "16. What did God warn Cain about sin before he killed Abel?", textEs: "16. ¿Qué advirtió Dios a Caín acerca del pecado antes de que matara a Abel?", optionsEn: ["A. 'Sin will destroy you'", "B. 'Run from sin'", "C. 'Sin is unforgivable'", "D. 'Sin is crouching at the door; you must master it'"], optionsEs: ["A. 'El pecado te destruirá'", "B. 'Huye del pecado'", "C. 'El pecado es imperdonable'", "D. 'El pecado está a la puerta; tú debes enseñorearte de él'"], correct: 3, correctFeedbackEn: "Yes. God gave Cain a clear warning and an opportunity to repent. Sin must be mastered, not negotiated with.", correctFeedbackEs: "Sí. Dios le dio a Caín una advertencia clara y una oportunidad de arrepentirse. El pecado debe ser dominado, no negociado.", incorrectFeedbackEn: "God warned: 'Sin is crouching at the door; its desire is for you, but you must master it.'", incorrectFeedbackEs: "Dios advirtió: 'A la puerta está el pecado; y su deseo es para ti, mas tú debes enseñorearte de él.'" },
-    { textEn: "17. Where did Cain settle after being cursed?", textEs: "17. ¿Dónde se estableció Caín después de ser maldecido?", optionsEn: ["A. The land of Nod", "B. The land of Eden", "C. The land of Shinar", "D. The land of Egypt"], optionsEs: ["A. La tierra de Nod", "B. La tierra de Edén", "C. La tierra de Sinar", "D. La tierra de Egipto"], correct: 0, correctFeedbackEn: "Correct. Nod means 'wandering' — ironic for one who 'settled' there. Sin produces restlessness.", correctFeedbackEs: "Correcto. Nod significa 'errante' — irónico para quien 'se estableció' allí. El pecado produce inquietud.", incorrectFeedbackEn: "Cain settled in the land of Nod, which means 'wandering.' His geography matched his spiritual state.", incorrectFeedbackEs: "Caín se estableció en la tierra de Nod, que significa 'errante'. Su geografía correspondía a su estado espiritual." },
-    { textEn: "18. What does the name 'Seth' mean?", textEs: "18. ¿Qué significa el nombre 'Set'?", optionsEn: ["A. 'Killer'", "B. 'Appointed'", "C. 'Blessed'", "D. 'Rejected'"], optionsEs: ["A. 'Asesino'", "B. 'Designado'", "C. 'Bendecido'", "D. 'Rechazado'"], correct: 1, correctFeedbackEn: "Yes. Seth was appointed in place of Abel — a sign that God's purposes were not defeated.", correctFeedbackEs: "Sí. Set fue designado en lugar de Abel — una señal de que los propósitos de Dios no fueron derrotados.", incorrectFeedbackEn: "Seth means 'appointed' — given by God in place of Abel, carrying forward the godly line.", incorrectFeedbackEs: "Set significa 'designado' — dado por Dios en lugar de Abel, llevando adelante el linaje piadoso." },
-    { textEn: "19. What did people begin to do in the time of Enosh, Seth's son?", textEs: "19. ¿Qué comenzó a hacer la gente en el tiempo de Enós, hijo de Set?", optionsEn: ["A. Build cities", "B. Make idols", "C. Call upon / proclaim the name of the Lord", "D. Fight wars"], optionsEs: ["A. Edificar ciudades", "B. Hacer ídolos", "C. Invocar / proclamar el nombre de Jehová", "D. Hacer guerras"], correct: 2, correctFeedbackEn: "Correct. Even amid corruption, a faithful line began to publicly worship and proclaim the Lord's name.", correctFeedbackEs: "Correcto. Aun en medio de la corrupción, un linaje fiel comenzó a adorar públicamente y a proclamar el nombre de Jehová.", incorrectFeedbackEn: "People began to call upon — better, proclaim — the name of the Lord. Public worship started here.", incorrectFeedbackEs: "La gente comenzó a invocar — mejor, proclamar — el nombre de Jehová. Aquí comenzó la adoración pública." },
-    { textEn: "20. What did the garments of skin foreshadow?", textEs: "20. ¿Qué prefiguraban las túnicas de pieles?", optionsEn: ["A. The tabernacle", "B. The final judgment", "C. The sacrifice of Christ", "D. The giving of the law"], optionsEs: ["A. El tabernáculo", "B. El juicio final", "C. El sacrificio de Cristo", "D. La entrega de la ley"], correct: 2, correctFeedbackEn: "Yes. Every altar and every lamb pointed forward to the Lamb of God who takes away the sin of the world.", correctFeedbackEs: "Sí. Cada altar y cada cordero señalaban al Cordero de Dios que quita el pecado del mundo.", incorrectFeedbackEn: "The garments of skin foreshadowed Christ — the innocent substitute who covers our shame at His own cost.", incorrectFeedbackEs: "Las túnicas de pieles prefiguraban a Cristo — el sustituto inocente que cubre nuestra vergüenza a Su propio costo." }
-];
-
-const saQuestions = [
-    { id: `sa_u${UNIT}_1`, textEn: "Explain what it means that humanity is 'equal parts dust and divinity.'", textEs: "Explique qué significa que la humanidad es 'partes iguales de polvo y divinidad.'", kw_en: ["dust", "divin", "breath", "soul", "humbl", "image", "creat", "ground"], kw_es: ["polvo", "tierra", "divin", "aliento", "vida", "humil", "imagen", "alma"], explanationEn: "We are formed from the ground (dust to humble us) and breathed with God's own breath (divinity giving us access to Him).", explanationEs: "Somos formados del polvo (para humillarnos) y soplados con el aliento de Dios (divinidad dándonos acceso a Él)." },
-    { id: `sa_u${UNIT}_2`, textEn: "What does the word 'helper' (ezer) tell us about the woman's status and role?", textEs: "¿Qué nos dice la palabra 'ayuda' (ezer) sobre el estatus y el papel de la mujer?", kw_en: ["helper", "ezer", "strength", "support", "subordinat", "equal", "suitable", "correspond"], kw_es: ["ayuda", "ezer", "fuerza", "apoyo", "subordinac", "igual", "idónea", "correspond"], explanationEn: "Ezer is used of God Himself; it implies strength and support, not subordination. Woman is equal to man.", explanationEs: "Ezer se usa del mismo Dios; implica fuerza y apoyo, no subordinación. La mujer es igual al hombre." },
-    { id: `sa_u${UNIT}_3`, textEn: "Explain the three strategies of evil: subvert, pervert, invert.", textEs: "Explique las tres estrategias del mal: subvertir, pervertir, invertir.", kw_en: ["subvert", "pervert", "invert", "creat", "twist", "corrupt", "opposite", "evil"], kw_es: ["subvert", "pervert", "invert", "crear", "tuerce", "corromp", "opuesto", "mal"], explanationEn: "Evil cannot create, so it subverts (twists good), perverts (corrupts), and inverts (turns into its opposite).", explanationEs: "El mal no puede crear, por eso subvierte (tuerce lo bueno), pervierte (corrompe) e invierte (convierte en su opuesto)." },
-    { id: `sa_u${UNIT}_4`, textEn: "What did Eve add to God's command, and why was that dangerous?", textEs: "¿Qué añadió Eva al mandamiento de Dios, y por qué fue peligroso?", kw_en: ["touch", "add", "arbitrary", "doubt", "legalism", "harsh", "door", "command"], kw_es: ["tocar", "añad", "arbitrari", "duda", "legalism", "duro", "puerta", "mandamient"], explanationEn: "Eve added 'nor shall you touch it,' making God's command seem arbitrary and opening the doorway to doubt.", explanationEs: "Eva añadió 'ni lo tocaréis,' haciendo que el mandamiento de Dios pareciera arbitrario y abriendo la puerta a la duda." },
-    { id: `sa_u${UNIT}_5`, textEn: "What is the protoevangelium and why is it significant?", textEs: "¿Qué es el protoevangelio y por qué es significativo?", kw_en: ["protoevangel", "gospel", "seed", "crush", "serpent", "christ", "promise", "redempt"], kw_es: ["protoevangel", "evangelio", "simiente", "herir", "serpiente", "cristo", "promesa", "redenci"], explanationEn: "The first gospel promise — the Seed of the woman (Christ) will crush the serpent's head. Redemption announced in the very curse.", explanationEs: "La primera promesa del evangelio — la Simiente de la mujer (Cristo) herirá la cabeza de la serpiente. La redención anunciada en la misma maldición." },
-    { id: `sa_u${UNIT}_6`, textEn: "Why were the garments of skin an act of mercy, not just judgment?", textEs: "¿Por qué las vestiduras de piel fueron un acto de misericordia, no solo de juicio?", kw_en: ["mercy", "cover", "sacrifice", "innocent", "substitut", "foreshadow", "clothe", "shame"], kw_es: ["misericordia", "cobertura", "sacrificio", "inocente", "sustitut", "presagio", "vistió", "vergüenza"], explanationEn: "God provided a covering that required an innocent substitute's death — mercy and foreshadowing of Christ.", explanationEs: "Dios proveyó una cobertura que requirió la muerte de un sustituto inocente — misericordia y presagio de Cristo." },
-    { id: `sa_u${UNIT}_7`, textEn: "Why did God guard the Tree of Life after the Fall?", textEs: "¿Por qué Dios guardó el Árbol de la Vida después de la Caída?", kw_en: ["mercy", "eternal", "fallen", "curse", "restor", "broken", "die", "sinful"], kw_es: ["misericordia", "eterna", "caído", "maldición", "restaur", "quebrant", "morir", "pecamin"], explanationEn: "Living forever in a fallen, sinful state would be a curse. God showed mercy by preventing eternal brokenness.", explanationEs: "Vivir para siempre en un estado caído y pecaminoso sería una maldición. Dios mostró misericordia al prevenirlo." },
-    { id: `sa_u${UNIT}_8`, textEn: "What was the difference between Cain's and Abel's offerings, and why did God reject Cain's?", textEs: "¿Cuál fue la diferencia entre las ofrendas de Caín y Abel, y por qué Dios rechazó la de Caín?", kw_en: ["attitude", "heart", "best", "faith", "duty", "worship", "firstborn", "gift"], kw_es: ["actitud", "corazón", "mejor", "fe", "deber", "adoración", "primogénito", "ofrenda"], explanationEn: "Abel brought the best by faith; Cain merely discharged a duty. God looks at the heart, not just the gift.", explanationEs: "Abel trajo lo mejor por fe; Caín meramente cumplió un deber. Dios mira el corazón, no solo la ofrenda." },
-    { id: `sa_u${UNIT}_9`, textEn: "What does the land of Nod signify about Cain's spiritual state?", textEs: "¿Qué significa la tierra de Nod sobre el estado espiritual de Caín?", kw_en: ["nod", "wander", "presence", "alienat", "judgment", "restless", "repent", "unrepentant"], kw_es: ["nod", "vagabund", "presencia", "alienac", "juicio", "inquiet", "arrepent", "impenitente"], explanationEn: "Nod means 'wandering.' Cain left God's presence — alienation and restlessness without repentance.", explanationEs: "Nod significa 'vagabundeo.' Caín salió de la presencia de Dios — alienación e inquietud sin arrepentimiento." },
-    { id: `sa_u${UNIT}_10`, textEn: "What hope remained after the tragedy of Cain and Abel?", textEs: "¿Qué esperanza quedó después de la tragedia de Caín y Abel?", kw_en: ["seth", "appoint", "enosh", "call", "godly", "promise", "descend", "lord"], kw_es: ["set", "design", "enós", "invocar", "piadosa", "promesa", "descend", "señor"], explanationEn: "Seth was appointed in Abel's place, and his descendants began to call on the Lord — the promise lived on.", explanationEs: "Set fue designado en lugar de Abel, y sus descendientes comenzaron a invocar al Señor — la promesa continuó." }
-];
+/* CTSPent — unit 2. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "pent",
+ "unit": 2,
+ "totalUnits": 12,
+ "filePrefix": "CTSPent",
+ "prevHref": "CTSPentUnit1.html",
+ "nextHref": "CTSPentUnit3.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "What Hebrew pun explains the name 'Adam'?",
+    "es": "¿Qué juego de palabras hebreo explica el nombre 'Adán'?"
+   },
+   "options": {
+    "en": [
+     "Adam comes from adamah (ground)",
+     "Adam means 'life'",
+     "Adam means 'first'",
+     "Adam means 'red'"
+    ],
+    "es": [
+     "Adán viene de adamah (tierra)",
+     "Adán significa 'vida'",
+     "Adán significa 'primero'",
+     "Adán significa 'rojo'"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. Adam from adamah — humanity from the ground, a deliberate Hebrew wordplay binding us to the soil from which we were taken.",
+    "es": "Correcto. Adán viene de adamah — la humanidad de la tierra, un juego de palabras hebreo deliberado que nos une al suelo del cual fuimos tomados."
+   }
+  },
+  {
+   "stem": {
+    "en": "The word translated 'formed' in Genesis 2:7 pictures God as what?",
+    "es": "La palabra traducida 'formó' en Génesis 2:7 representa a Dios como qué?"
+   },
+   "options": {
+    "en": [
+     "A warrior",
+     "A king",
+     "A master potter",
+     "A farmer"
+    ],
+    "es": [
+     "Un guerrero",
+     "Un rey",
+     "Un maestro alfarero",
+     "Un labrador"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Yes. God is depicted as a master potter — careful, deliberate, crafting a masterpiece.",
+    "es": "Sí. Dios es representado como un maestro alfarero — cuidadoso, deliberado, formando una obra maestra."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did God breathe into Adam's nostrils?",
+    "es": "¿Qué sopló Dios en las narices de Adán?"
+   },
+   "options": {
+    "en": [
+     "Wisdom",
+     "The breath of life / living soul",
+     "Fire",
+     "The Holy Spirit"
+    ],
+    "es": [
+     "Sabiduría",
+     "El aliento de vida / alma viviente",
+     "Fuego",
+     "El Espíritu Santo"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. The breath of life made Adam a living soul — equal parts dust and divinity.",
+    "es": "Correcto. El aliento de vida hizo de Adán un alma viviente — a partes iguales polvo y divinidad."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Tree of the Knowledge of Good and Evil offered what kind of 'knowledge'?",
+    "es": "El Árbol de la Ciencia del Bien y del Mal ofrecía qué tipo de 'conocimiento'?"
+   },
+   "options": {
+    "en": [
+     "Academic knowledge",
+     "Prophetic knowledge",
+     "Hidden knowledge",
+     "Experiential knowledge"
+    ],
+    "es": [
+     "Conocimiento académico",
+     "Conocimiento profético",
+     "Conocimiento oculto",
+     "Conocimiento por experiencia"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Yes. The Hebrew word da'at implies knowing by experience, firsthand — not abstract learning.",
+    "es": "Sí. La palabra hebrea da'at implica conocer por experiencia, de primera mano — no un aprendizaje abstracto."
+   }
+  },
+  {
+   "stem": {
+    "en": "In Scripture, what does 'death' primarily mean?",
+    "es": "En la Escritura, ¿qué significa principalmente la 'muerte'?"
+   },
+   "options": {
+    "en": [
+     "Separation from God",
+     "Cessation of existence",
+     "Sleep",
+     "Punishment only"
+    ],
+    "es": [
+     "Separación de Dios",
+     "Cese de la existencia",
+     "Sueño",
+     "Solo castigo"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. Death is separation from God, who is the source of life. Physical death follows but is not primary.",
+    "es": "Correcto. La muerte es separación de Dios, quien es la fuente de la vida. La muerte física sigue, pero no es lo principal."
+   }
+  },
+  {
+   "stem": {
+    "en": "The word 'helper' (ezer) in Genesis 2:18 is used elsewhere in the OT to refer to whom?",
+    "es": "La palabra 'ayuda' (ezer) en Génesis 2:18 se usa en otros lugares del AT para referirse a quién?"
+   },
+   "options": {
+    "en": [
+     "Angels",
+     "Animals",
+     "God Himself",
+     "Slaves"
+    ],
+    "es": [
+     "Los ángeles",
+     "Los animales",
+     "Dios mismo",
+     "Los esclavos"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Excellent. Ezer is used of God (Psalm 33:20) — no subordination implied. God is our helper.",
+    "es": "Excelente. Ezer se usa de Dios (Salmo 33:20) — no implica subordinación. Dios es nuestra ayuda."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does 'one flesh' in Genesis 2:24 strongly imply?",
+    "es": "¿Qué implica fuertemente 'una sola carne' en Génesis 2:24?"
+   },
+   "options": {
+    "en": [
+     "Only spiritual union",
+     "Legal contract",
+     "Physical union in innocence",
+     "Ownership"
+    ],
+    "es": [
+     "Solo unión espiritual",
+     "Contrato legal",
+     "Unión física en inocencia",
+     "Posesión"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Yes. Physical union within marriage, in utter innocence and without shame — God's design from the start.",
+    "es": "Sí. Unión física dentro del matrimonio, en total inocencia y sin vergüenza — el diseño de Dios desde el principio."
+   }
+  },
+  {
+   "stem": {
+    "en": "What three actions describe evil's power since it cannot create?",
+    "es": "¿Qué tres acciones describen el poder del mal, ya que no puede crear?"
+   },
+   "options": {
+    "en": [
+     "Create, sustain, destroy",
+     "Subvert, pervert, invert",
+     "Lie, cheat, steal",
+     "Accuse, condemn, kill"
+    ],
+    "es": [
+     "Crear, sostener, destruir",
+     "Subvertir, pervertir, invertir",
+     "Mentir, engañar, robar",
+     "Acusar, condenar, matar"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. Evil subverts (twists good), perverts (corrupts), and inverts (turns into the opposite).",
+    "es": "Correcto. El mal subvierte (tuerce lo bueno), pervierte (corrompe) e invierte (convierte en lo opuesto)."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did Eve add to God's command when speaking to the serpent?",
+    "es": "¿Qué añadió Eva al mandamiento de Dios al hablar con la serpiente?"
+   },
+   "options": {
+    "en": [
+     "'Nor shall you touch it'",
+     "'You must also sacrifice'",
+     "'You must wash first'",
+     "'Only the priests may eat'"
+    ],
+    "es": [
+     "'Ni lo tocaréis'",
+     "'También debéis sacrificar'",
+     "'Primero debéis lavaros'",
+     "'Solo los sacerdotes pueden comer'"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Yes. God never said anything about touching. Adding to God's word made His command seem arbitrary and harsh.",
+    "es": "Sí. Dios nunca dijo nada sobre tocarlo. Añadir a la palabra de Dios hizo que Su mandamiento pareciera arbitrario y severo."
+   }
+  },
+  {
+   "stem": {
+    "en": "After eating the fruit, what was the immediate result?",
+    "es": "Después de comer el fruto, ¿cuál fue el resultado inmediato?"
+   },
+   "options": {
+    "en": [
+     "They became gods",
+     "They died instantly",
+     "They saw angels",
+     "They knew they were naked and felt shame"
+    ],
+    "es": [
+     "Se convirtieron en dioses",
+     "Murieron al instante",
+     "Vieron ángeles",
+     "Supieron que estaban desnudos y sintieron vergüenza"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. Innocence was replaced by shame — they hid from each other and from God.",
+    "es": "Correcto. La inocencia fue reemplazada por la vergüenza — se escondieron el uno del otro y de Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is the protoevangelium (first gospel promise) in Genesis 3:15?",
+    "es": "¿Cuál es el protoevangelio (primera promesa del evangelio) en Génesis 3:15?"
+   },
+   "options": {
+    "en": [
+     "The rainbow covenant",
+     "The Seed of the woman will crush the serpent's head",
+     "The law given to Moses",
+     "The promise of land"
+    ],
+    "es": [
+     "El pacto del arcoíris",
+     "La Simiente de la mujer aplastará la cabeza de la serpiente",
+     "La ley dada a Moisés",
+     "La promesa de la tierra"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Yes! The Seed (Christ) will crush the serpent's head — the first promise of redemption, hidden in the curse itself.",
+    "es": "¡Sí! La Simiente (Cristo) aplastará la cabeza de la serpiente — la primera promesa de redención, escondida en la maldición misma."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did God make for Adam and Eve after the Fall?",
+    "es": "¿Qué hizo Dios para Adán y Eva después de la Caída?"
+   },
+   "options": {
+    "en": [
+     "Fig leaf aprons",
+     "Stone altars",
+     "Nothing",
+     "Garments of skin"
+    ],
+    "es": [
+     "Delantales de hojas de higuera",
+     "Altares de piedra",
+     "Nada",
+     "Túnicas de pieles"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. Garments of skin required an animal's death — the first sacrifice, foreshadowing Christ.",
+    "es": "Correcto. Las túnicas de pieles requirieron la muerte de un animal — el primer sacrificio, prefigurando a Cristo."
+   }
+  },
+  {
+   "stem": {
+    "en": "Why did God drive humanity from the Garden and guard the Tree of Life?",
+    "es": "¿Por qué expulsó Dios a la humanidad del Huerto y guardó el Árbol de la Vida?"
+   },
+   "options": {
+    "en": [
+     "To prevent eternal life in a fallen state",
+     "God was angry",
+     "To punish forever",
+     "To test them again"
+    ],
+    "es": [
+     "Para impedir la vida eterna en un estado caído",
+     "Dios estaba enojado",
+     "Para castigar para siempre",
+     "Para probarlos de nuevo"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. Living forever broken and fallen would be a curse, not a blessing. The expulsion was mercy.",
+    "es": "Correcto. Vivir para siempre quebrantados y caídos sería una maldición, no una bendición. La expulsión fue misericordia."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did Cain's name mean according to Eve's prideful statement?",
+    "es": "¿Qué significaba el nombre de Caín según la declaración orgullosa de Eva?"
+   },
+   "options": {
+    "en": [
+     "'Gift'",
+     "'Firstborn'",
+     "'Murderer'",
+     "'Like God I have made a man'"
+    ],
+    "es": [
+     "'Regalo'",
+     "'Primogénito'",
+     "'Asesino'",
+     "'Como Dios he hecho un varón'"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Yes. 'Like God I have made a man' — revealing pride right from birth.",
+    "es": "Sí. 'Como Dios he hecho un varón' — revelando orgullo desde el nacimiento mismo."
+   }
+  },
+  {
+   "stem": {
+    "en": "Why did God reject Cain's offering but accept Abel's?",
+    "es": "¿Por qué rechazó Dios la ofrenda de Caín pero aceptó la de Abel?"
+   },
+   "options": {
+    "en": [
+     "Cain's was the wrong type",
+     "The attitude of the heart",
+     "Cain was younger",
+     "Abel offered more"
+    ],
+    "es": [
+     "La de Caín era del tipo equivocado",
+     "La actitud del corazón",
+     "Caín era más joven",
+     "Abel ofreció más"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. The issue was not the offering type but Cain's heart attitude. God looks at the heart, not the gift.",
+    "es": "Correcto. El asunto no fue el tipo de ofrenda sino la actitud del corazón de Caín. Dios mira el corazón, no el regalo."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did God warn Cain about sin before he killed Abel?",
+    "es": "¿Qué advirtió Dios a Caín acerca del pecado antes de que matara a Abel?"
+   },
+   "options": {
+    "en": [
+     "'Sin will destroy you'",
+     "'Run from sin'",
+     "'Sin is unforgivable'",
+     "'Sin is crouching at the door; you must master it'"
+    ],
+    "es": [
+     "'El pecado te destruirá'",
+     "'Huye del pecado'",
+     "'El pecado es imperdonable'",
+     "'El pecado está a la puerta; tú debes enseñorearte de él'"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Yes. God gave Cain a clear warning and an opportunity to repent. Sin must be mastered, not negotiated with.",
+    "es": "Sí. Dios le dio a Caín una advertencia clara y una oportunidad de arrepentirse. El pecado debe ser dominado, no negociado."
+   }
+  },
+  {
+   "stem": {
+    "en": "Where did Cain settle after being cursed?",
+    "es": "¿Dónde se estableció Caín después de ser maldecido?"
+   },
+   "options": {
+    "en": [
+     "The land of Nod",
+     "The land of Eden",
+     "The land of Shinar",
+     "The land of Egypt"
+    ],
+    "es": [
+     "La tierra de Nod",
+     "La tierra de Edén",
+     "La tierra de Sinar",
+     "La tierra de Egipto"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. Nod means 'wandering' — ironic for one who 'settled' there. Sin produces restlessness.",
+    "es": "Correcto. Nod significa 'errante' — irónico para quien 'se estableció' allí. El pecado produce inquietud."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does the name 'Seth' mean?",
+    "es": "¿Qué significa el nombre 'Set'?"
+   },
+   "options": {
+    "en": [
+     "'Killer'",
+     "'Appointed'",
+     "'Blessed'",
+     "'Rejected'"
+    ],
+    "es": [
+     "'Asesino'",
+     "'Designado'",
+     "'Bendecido'",
+     "'Rechazado'"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Yes. Seth was appointed in place of Abel — a sign that God's purposes were not defeated.",
+    "es": "Sí. Set fue designado en lugar de Abel — una señal de que los propósitos de Dios no fueron derrotados."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did people begin to do in the time of Enosh, Seth's son?",
+    "es": "¿Qué comenzó a hacer la gente en el tiempo de Enós, hijo de Set?"
+   },
+   "options": {
+    "en": [
+     "Build cities",
+     "Make idols",
+     "Call upon / proclaim the name of the Lord",
+     "Fight wars"
+    ],
+    "es": [
+     "Edificar ciudades",
+     "Hacer ídolos",
+     "Invocar / proclamar el nombre de Jehová",
+     "Hacer guerras"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. Even amid corruption, a faithful line began to publicly worship and proclaim the Lord's name.",
+    "es": "Correcto. Aun en medio de la corrupción, un linaje fiel comenzó a adorar públicamente y a proclamar el nombre de Jehová."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did the garments of skin foreshadow?",
+    "es": "¿Qué prefiguraban las túnicas de pieles?"
+   },
+   "options": {
+    "en": [
+     "The tabernacle",
+     "The final judgment",
+     "The sacrifice of Christ",
+     "The giving of the law"
+    ],
+    "es": [
+     "El tabernáculo",
+     "El juicio final",
+     "El sacrificio de Cristo",
+     "La entrega de la ley"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Yes. Every altar and every lamb pointed forward to the Lamb of God who takes away the sin of the world.",
+    "es": "Sí. Cada altar y cada cordero señalaban al Cordero de Dios que quita el pecado del mundo."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Explain what it means that humanity is 'equal parts dust and divinity.'",
+    "es": "Explique qué significa que la humanidad es 'partes iguales de polvo y divinidad.'"
+   },
+   "keywords": {
+    "en": [
+     "dust",
+     "divin",
+     "breath",
+     "soul",
+     "humbl",
+     "image",
+     "creat",
+     "ground"
+    ],
+    "es": [
+     "polvo",
+     "tierra",
+     "divin",
+     "aliento",
+     "vida",
+     "humil",
+     "imagen",
+     "alma"
+    ]
+   },
+   "model": {
+    "en": "We are formed from the ground (dust to humble us) and breathed with God's own breath (divinity giving us access to Him).",
+    "es": "Somos formados del polvo (para humillarnos) y soplados con el aliento de Dios (divinidad dándonos acceso a Él)."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does the word 'helper' (ezer) tell us about the woman's status and role?",
+    "es": "¿Qué nos dice la palabra 'ayuda' (ezer) sobre el estatus y el papel de la mujer?"
+   },
+   "keywords": {
+    "en": [
+     "helper",
+     "ezer",
+     "strength",
+     "support",
+     "subordinat",
+     "equal",
+     "suitable",
+     "correspond"
+    ],
+    "es": [
+     "ayuda",
+     "ezer",
+     "fuerza",
+     "apoyo",
+     "subordinac",
+     "igual",
+     "idónea",
+     "correspond"
+    ]
+   },
+   "model": {
+    "en": "Ezer is used of God Himself; it implies strength and support, not subordination. Woman is equal to man.",
+    "es": "Ezer se usa del mismo Dios; implica fuerza y apoyo, no subordinación. La mujer es igual al hombre."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the three strategies of evil: subvert, pervert, invert.",
+    "es": "Explique las tres estrategias del mal: subvertir, pervertir, invertir."
+   },
+   "keywords": {
+    "en": [
+     "subvert",
+     "pervert",
+     "invert",
+     "creat",
+     "twist",
+     "corrupt",
+     "opposite",
+     "evil"
+    ],
+    "es": [
+     "subvert",
+     "pervert",
+     "invert",
+     "crear",
+     "tuerce",
+     "corromp",
+     "opuesto",
+     "mal"
+    ]
+   },
+   "model": {
+    "en": "Evil cannot create, so it subverts (twists good), perverts (corrupts), and inverts (turns into its opposite).",
+    "es": "El mal no puede crear, por eso subvierte (tuerce lo bueno), pervierte (corrompe) e invierte (convierte en su opuesto)."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What did Eve add to God's command, and why was that dangerous?",
+    "es": "¿Qué añadió Eva al mandamiento de Dios, y por qué fue peligroso?"
+   },
+   "keywords": {
+    "en": [
+     "touch",
+     "add",
+     "arbitrary",
+     "doubt",
+     "legalism",
+     "harsh",
+     "door",
+     "command"
+    ],
+    "es": [
+     "tocar",
+     "añad",
+     "arbitrari",
+     "duda",
+     "legalism",
+     "duro",
+     "puerta",
+     "mandamient"
+    ]
+   },
+   "model": {
+    "en": "Eve added 'nor shall you touch it,' making God's command seem arbitrary and opening the doorway to doubt.",
+    "es": "Eva añadió 'ni lo tocaréis,' haciendo que el mandamiento de Dios pareciera arbitrario y abriendo la puerta a la duda."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What is the protoevangelium and why is it significant?",
+    "es": "¿Qué es el protoevangelio y por qué es significativo?"
+   },
+   "keywords": {
+    "en": [
+     "protoevangel",
+     "gospel",
+     "seed",
+     "crush",
+     "serpent",
+     "christ",
+     "promise",
+     "redempt"
+    ],
+    "es": [
+     "protoevangel",
+     "evangelio",
+     "simiente",
+     "herir",
+     "serpiente",
+     "cristo",
+     "promesa",
+     "redenci"
+    ]
+   },
+   "model": {
+    "en": "The first gospel promise — the Seed of the woman (Christ) will crush the serpent's head. Redemption announced in the very curse.",
+    "es": "La primera promesa del evangelio — la Simiente de la mujer (Cristo) herirá la cabeza de la serpiente. La redención anunciada en la misma maldición."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why were the garments of skin an act of mercy, not just judgment?",
+    "es": "¿Por qué las vestiduras de piel fueron un acto de misericordia, no solo de juicio?"
+   },
+   "keywords": {
+    "en": [
+     "mercy",
+     "cover",
+     "sacrifice",
+     "innocent",
+     "substitut",
+     "foreshadow",
+     "clothe",
+     "shame"
+    ],
+    "es": [
+     "misericordia",
+     "cobertura",
+     "sacrificio",
+     "inocente",
+     "sustitut",
+     "presagio",
+     "vistió",
+     "vergüenza"
+    ]
+   },
+   "model": {
+    "en": "God provided a covering that required an innocent substitute's death — mercy and foreshadowing of Christ.",
+    "es": "Dios proveyó una cobertura que requirió la muerte de un sustituto inocente — misericordia y presagio de Cristo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why did God guard the Tree of Life after the Fall?",
+    "es": "¿Por qué Dios guardó el Árbol de la Vida después de la Caída?"
+   },
+   "keywords": {
+    "en": [
+     "mercy",
+     "eternal",
+     "fallen",
+     "curse",
+     "restor",
+     "broken",
+     "die",
+     "sinful"
+    ],
+    "es": [
+     "misericordia",
+     "eterna",
+     "caído",
+     "maldición",
+     "restaur",
+     "quebrant",
+     "morir",
+     "pecamin"
+    ]
+   },
+   "model": {
+    "en": "Living forever in a fallen, sinful state would be a curse. God showed mercy by preventing eternal brokenness.",
+    "es": "Vivir para siempre en un estado caído y pecaminoso sería una maldición. Dios mostró misericordia al prevenirlo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What was the difference between Cain's and Abel's offerings, and why did God reject Cain's?",
+    "es": "¿Cuál fue la diferencia entre las ofrendas de Caín y Abel, y por qué Dios rechazó la de Caín?"
+   },
+   "keywords": {
+    "en": [
+     "attitude",
+     "heart",
+     "best",
+     "faith",
+     "duty",
+     "worship",
+     "firstborn",
+     "gift"
+    ],
+    "es": [
+     "actitud",
+     "corazón",
+     "mejor",
+     "fe",
+     "deber",
+     "adoración",
+     "primogénito",
+     "ofrenda"
+    ]
+   },
+   "model": {
+    "en": "Abel brought the best by faith; Cain merely discharged a duty. God looks at the heart, not just the gift.",
+    "es": "Abel trajo lo mejor por fe; Caín meramente cumplió un deber. Dios mira el corazón, no solo la ofrenda."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does the land of Nod signify about Cain's spiritual state?",
+    "es": "¿Qué significa la tierra de Nod sobre el estado espiritual de Caín?"
+   },
+   "keywords": {
+    "en": [
+     "nod",
+     "wander",
+     "presence",
+     "alienat",
+     "judgment",
+     "restless",
+     "repent",
+     "unrepentant"
+    ],
+    "es": [
+     "nod",
+     "vagabund",
+     "presencia",
+     "alienac",
+     "juicio",
+     "inquiet",
+     "arrepent",
+     "impenitente"
+    ]
+   },
+   "model": {
+    "en": "Nod means 'wandering.' Cain left God's presence — alienation and restlessness without repentance.",
+    "es": "Nod significa 'vagabundeo.' Caín salió de la presencia de Dios — alienación e inquietud sin arrepentimiento."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What hope remained after the tragedy of Cain and Abel?",
+    "es": "¿Qué esperanza quedó después de la tragedia de Caín y Abel?"
+   },
+   "keywords": {
+    "en": [
+     "seth",
+     "appoint",
+     "enosh",
+     "call",
+     "godly",
+     "promise",
+     "descend",
+     "lord"
+    ],
+    "es": [
+     "set",
+     "design",
+     "enós",
+     "invocar",
+     "piadosa",
+     "promesa",
+     "descend",
+     "señor"
+    ]
+   },
+   "model": {
+    "en": "Seth was appointed in Abel's place, and his descendants began to call on the Lord — the promise lived on.",
+    "es": "Set fue designado en lugar de Abel, y sus descendientes comenzaron a invocar al Señor — la promesa continuó."
+   }
+  }
+ ]
+};

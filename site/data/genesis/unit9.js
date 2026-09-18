@@ -1,0 +1,615 @@
+window.CTS_GENESIS_UNIT={"unit": 9, "title_en": "Isaac — Inheriting the Promise and Digging the Wells Again", "title_es": "Isaac — Heredando la Promesa y Cavando los Pozos Otra Vez", "key_html": "<div class=\"pull\"><span class=\"lang-en\">“Do not fear, for I am with you.” — Genesis 26:24 (NKJV)</span><span class=\"lang-es\">“No temas, porque yo estoy contigo.” — Génesis 26:24 (RVG)</span></div>", "teaching_html": "<div class=\"lang-en\"><h2>Isaac — The Quiet Patriarch</h2><p>Isaac occupies less narrative space than Abraham or Jacob, yet Genesis presents him as an essential link in the covenant story. He is the promised son whose birth demonstrated that God could accomplish what human strength could not. In Genesis 26 the LORD confirms to Isaac the promises given to Abraham: presence, descendants, land, and blessing to the nations. Isaac therefore does not invent a new covenant program. He receives a promise already given and must learn to live faithfully within it.</p><h2>A Famine and a Word From God</h2><p>Genesis 26 opens with famine, recalling an earlier famine in Abraham’s life. Isaac faces the practical pressure of survival and considers movement toward Egypt, but God directs him to remain in the land He will show him. The chapter joins providence and obedience: God promises His presence, yet Isaac must respond to His direction. Covenant promise does not remove difficult circumstances. Faithfulness is learned in famine as well as abundance.</p><h2>The Promise Reaffirmed</h2><p>God tells Isaac, “I will be with you and bless you,” and reiterates the Abrahamic promises. The foundation is God’s covenant faithfulness rather than Isaac’s exceptional ability. Isaac inherits blessing, but inherited faith cannot remain merely secondhand. Each generation must personally trust and obey the God whose truth it has received. This is especially important in ministry, where inherited institutions, doctrines, and practices are valuable only as they remain rooted in the living God.</p><h2>Isaac Repeats Abraham’s Failure</h2><p>When the men of Gerar ask about Rebekah, Isaac calls her his sister because he fears being killed. His behavior painfully resembles Abraham’s earlier deception concerning Sarah. Genesis is candid about the weaknesses of its central figures. A godly heritage can transmit truth and examples of faith, but family patterns of fear and sin can also repeat themselves. The covenant continues because God is faithful, not because the patriarchs are flawless.</p><h2>God’s Blessing and Human Opposition</h2><p>Isaac sows in the land and prospers greatly, and the Philistines envy him. Prosperity does not eliminate conflict; in this case it helps provoke it. Abimelech asks Isaac to leave because he has become powerful. Genesis does not present material increase as proof that every faithful believer will become wealthy. It records God’s particular covenant blessing upon Isaac while also showing that blessing can bring responsibility, tension, and opposition.</p><h2>The Wells of Abraham</h2><p>The Philistines had stopped up the wells Abraham’s servants had dug, filling them with earth. Isaac reopens them and gives them the names his father had given them. The wells are literal and necessary for life in a dry land before they become material for spiritual application. Reopening them expresses continuity with Abraham’s sojourn and household. Isaac receives an inheritance, but he must labor to make that inheritance usable in his own generation.</p><h2>Inherited Truth and Present Labor</h2><p>The recovered sermon rightly draws a memorable application from the old wells: some things received from previous generations must be dug again. Prayer, Scripture, witness, gathered worship, and godly living can be neglected even when a church still remembers their names. Yet the application should remain anchored in the narrative. Isaac did not create water by nostalgia; he reopened real sources that had been obstructed. Christian renewal similarly requires more than admiration for the past—it requires renewed practice of enduring biblical principles.</p><h2>Esek — Contention</h2><p>Isaac’s servants find running water, but the herdsmen of Gerar quarrel with them, so Isaac names the well Esek, associated with contention. The chapter does not portray every conflict as evidence that Isaac is outside God’s will. Sometimes obedience and blessing coexist with opposition. Isaac does not make possession of every disputed well the measure of faithfulness. His willingness to move on displays restraint rather than weakness.</p><h2>Sitnah — Hostility</h2><p>A second well produces another dispute and is named Sitnah, associated with hostility or opposition. Repeated conflict can tempt a person either to retaliate or to conclude that God has abandoned him. Isaac does neither. He keeps moving and digging. There are circumstances in which yielding a disputed advantage can serve peace without surrendering truth, conscience, or responsibility.</p><h2>Rehoboth — Room</h2><p>At the next well there is no quarrel, and Isaac names it Rehoboth, saying that the LORD has made room for them and they will be fruitful in the land. The recovered sermon emphasizes this turning point: after repeated claims by others, Isaac finally reaches a place where there is room. Rehoboth does not teach that perseverance always produces an easy life. It shows Isaac recognizing God’s providential room after a season of conflict.</p><h2>Peace and Boundaries</h2><p>Isaac’s movement away from contested wells should not be turned into a command that Christians must always surrender legitimate rights or remain passive in the face of abuse. Scripture elsewhere recognizes justice, protection of the vulnerable, lawful appeal, and appropriate boundaries. Genesis 26 highlights Isaac’s particular posture in a particular dispute. The transferable principle is a refusal to make unnecessary conflict the center of one’s identity or mission.</p><h2>Beersheba — Altar, Tent, and Well</h2><p>Isaac goes to Beersheba, where the LORD appears and again promises His presence and blessing. Isaac builds an altar, calls on the name of the LORD, pitches his tent, and his servants dig a well. These details provide a compact portrait of his life: worship, pilgrim dependence, and practical labor belong together. The altar without the well would neglect ordinary responsibility; the well without the altar would forget the God upon whom life depends.</p><h2>Worship Before Possession</h2><p>The sequence at Beersheba is spiritually instructive. Isaac responds to divine self-revelation by building an altar and calling on the LORD before the narrative reports success at the new well. Worship is not payment for blessing, nor is it a technique to guarantee success. It is the proper response of a covenant servant to the God who has promised His presence. The center of Isaac’s life is not water, land, or wealth but the LORD.</p><h2>Abimelech Returns</h2><p>The ruler who earlier asked Isaac to leave later comes seeking a treaty. He acknowledges that they have plainly seen that the LORD is with Isaac. Isaac does not use his strengthened position for revenge. He prepares a feast, and the parties make an oath of peace. The narrative illustrates how consistent conduct under pressure can become part of a believer’s public witness, although it never guarantees that every opponent will eventually become friendly.</p><h2>Forms and Principles</h2><p>The sermon’s call to dig again the wells of prayer, Bible study, witnessing, attendance, and godly living is useful when distinguished from the exact historical meaning of Genesis 26. Churches need not reproduce every cultural form of an earlier generation in order to recover biblical faithfulness. Methods, schedules, vocabulary, and ministry structures can change. The enduring principles—communion with God, submission to Scripture, gospel witness, fellowship and worship, and holy conduct—must not be filled with the debris of neglect.</p><h2>The Well of Prayer</h2><p>Prayer can become a remembered doctrine rather than a practiced dependence. The sermon observes that neglected prayer is rarely restored accidentally; time and attention must be given to it. Genesis 26 itself repeatedly emphasizes God speaking, Isaac responding, and Isaac calling upon the LORD. Christian prayer is not a mechanism for controlling providence. It is communion with the God whose presence is more important than any particular well.</p><h2>The Well of Scripture</h2><p>The sermon also calls believers back to Bible study because God’s people cannot faithfully practice truth they do not know. Scripture makes known the gospel and trains believers in righteous living. For seminary students, familiarity with religious vocabulary is not a substitute for sustained engagement with the biblical text. Recovering this well means reading Scripture in context, interpreting it responsibly, obeying it, and teaching it without making the text say what it does not say.</p><h2>Witness, Worship, and Godly Life</h2><p>The remaining sermon applications belong together. Gospel witness communicates Christ to those who do not know Him; gathered worship places believers within a community of teaching, prayer, encouragement, accountability, and service; godly living gives credibility to public confession. Attendance by itself cannot produce holiness, and evangelism cannot be reduced to pressure or statistics. The goal is an integrated Christian life in which lips and conduct agree.</p><h2>Ministry Application</h2><p>Ministry leaders inherit wells dug by others: biblical convictions, institutions, songs, habits, teaching methods, and stories of faithfulness. Wisdom requires distinguishing the water from the well’s historical shape. Some inherited forms deserve preservation, some require adaptation, and some may have become obstacles. The task is neither nostalgia nor novelty for its own sake. Leaders must recover enduring truth and practice it faithfully in the circumstances God has given their generation.</p><h2>Summary</h2><p>Isaac’s story in Genesis 26 is quieter than many patriarchal narratives, but it is theologically rich. God reaffirms the covenant, remains faithful despite Isaac’s fear, blesses him amid opposition, and gives room after repeated disputes. Isaac reopens Abraham’s wells, practices restraint, worships at Beersheba, and continues the covenant line. The old wells provide a fitting secondary application: inherited spiritual practices can become obstructed by neglect and must be recovered. Above every well stands the covenant God who says, “I will be with you.”</p></div><div class=\"lang-es\"><h2>Isaac — El Patriarca Tranquilo</h2><p>Isaac ocupa menos espacio narrativo que Abraham o Jacob, pero Génesis lo presenta como eslabón esencial en la historia del pacto. Es el hijo prometido cuyo nacimiento demostró que Dios podía realizar lo que fuerza humana no podía. En Génesis 26 Jehová confirma a Isaac las promesas dadas a Abraham: presencia, descendencia, tierra y bendición a las naciones. Isaac por tanto no inventa nuevo programa de pacto. Recibe una promesa ya dada y debe aprender a vivir fielmente dentro de ella.</p><h2>Hambre y Palabra de Dios</h2><p>Génesis 26 comienza con hambre, recordando hambre anterior en la vida de Abraham. Isaac enfrenta presión práctica de supervivencia y considera movimiento hacia Egipto, pero Dios le dirige permanecer en la tierra que le mostrará. El capítulo une providencia y obediencia: Dios promete su presencia, pero Isaac debe responder a su dirección. La promesa del pacto no elimina circunstancias difíciles. Fidelidad se aprende en hambre tanto como abundancia.</p><h2>La Promesa Reafirmada</h2><p>Dios dice a Isaac: «Yo estaré contigo, y te bendeciré», y reitera las promesas abrahámicas. El fundamento es fidelidad del pacto de Dios y no capacidad excepcional de Isaac. Isaac hereda bendición, pero fe heredada no puede permanecer meramente de segunda mano. Cada generación debe confiar personalmente y obedecer al Dios cuya verdad ha recibido. Esto importa especialmente en ministerio, donde instituciones, doctrinas y prácticas heredadas son valiosas solamente mientras permanezcan arraigadas en el Dios vivo.</p><h2>Isaac Repite el Fracaso de Abraham</h2><p>Cuando hombres de Gerar preguntan por Rebeca, Isaac la llama su hermana porque teme ser muerto. Su conducta se parece dolorosamente al engaño anterior de Abraham acerca de Sara. Génesis es franco acerca de debilidades de sus figuras centrales. Una herencia piadosa puede transmitir verdad y ejemplos de fe, pero patrones familiares de temor y pecado también pueden repetirse. El pacto continúa porque Dios es fiel, no porque los patriarcas sean impecables.</p><h2>Bendición de Dios y Oposición Humana</h2><p>Isaac siembra en la tierra y prospera grandemente, y los filisteos le tienen envidia. Prosperidad no elimina conflicto; aquí ayuda a provocarlo. Abimelec pide a Isaac que se vaya porque se ha hecho poderoso. Génesis no presenta aumento material como prueba de que cada creyente fiel llegará a ser rico. Registra bendición particular del pacto sobre Isaac mientras muestra que bendición también puede traer responsabilidad, tensión y oposición.</p><h2>Los Pozos de Abraham</h2><p>Los filisteos habían cegado los pozos que los siervos de Abraham habían cavado, llenándolos de tierra. Isaac los abre de nuevo y les da los nombres que su padre les había dado. Los pozos son literales y necesarios para vida en tierra seca antes de convertirse en material para aplicación espiritual. Reabrirlos expresa continuidad con la peregrinación y casa de Abraham. Isaac recibe herencia, pero debe trabajar para hacer esa herencia utilizable en su propia generación.</p><h2>Verdad Heredada y Trabajo Presente</h2><p>El sermón recuperado extrae una aplicación memorable de los pozos antiguos: algunas cosas recibidas de generaciones anteriores deben cavarse otra vez. Oración, Escritura, testimonio, adoración congregacional y vida piadosa pueden ser descuidados aun cuando una iglesia todavía recuerde sus nombres. Sin embargo, la aplicación debe permanecer anclada en el relato. Isaac no creó agua mediante nostalgia; reabrió fuentes reales que habían sido obstruidas. Renovación cristiana también requiere más que admiración del pasado: requiere práctica renovada de principios bíblicos duraderos.</p><h2>Esek — Contienda</h2><p>Los siervos de Isaac encuentran agua viva, pero los pastores de Gerar riñen con ellos, por lo que Isaac llama el pozo Esek, asociado con contienda. El capítulo no presenta cada conflicto como evidencia de que Isaac está fuera de la voluntad de Dios. A veces obediencia y bendición coexisten con oposición. Isaac no hace posesión de cada pozo disputado la medida de fidelidad. Su disposición a moverse muestra dominio propio y no debilidad.</p><h2>Sitnah — Hostilidad</h2><p>Un segundo pozo produce otra disputa y es llamado Sitnah, asociado con hostilidad u oposición. Conflicto repetido puede tentar a una persona a tomar represalia o concluir que Dios la abandonó. Isaac no hace ninguna de las dos cosas. Sigue moviéndose y cavando. Hay circunstancias donde ceder ventaja disputada puede servir a la paz sin abandonar verdad, conciencia o responsabilidad.</p><h2>Rehoboth — Espacio</h2><p>En el siguiente pozo no hay riña, e Isaac lo llama Rehoboth, diciendo que Jehová les ha hecho lugar y fructificarán en la tierra. El sermón recuperado enfatiza este punto de cambio: después de reclamos repetidos por otros, Isaac finalmente llega a un lugar donde hay espacio. Rehoboth no enseña que perseverancia siempre produce vida fácil. Muestra a Isaac reconociendo espacio providencial de Dios después de temporada de conflicto.</p><h2>Paz y Límites</h2><p>El movimiento de Isaac lejos de pozos disputados no debe convertirse en mandato de que cristianos siempre cedan derechos legítimos o permanezcan pasivos ante abuso. La Escritura en otros lugares reconoce justicia, protección del vulnerable, apelación legal y límites apropiados. Génesis 26 destaca la postura particular de Isaac en una disputa particular. El principio transferible es negarse a hacer conflicto innecesario el centro de identidad o misión.</p><h2>Beerseba — Altar, Tienda y Pozo</h2><p>Isaac va a Beerseba, donde Jehová aparece y otra vez promete su presencia y bendición. Isaac edifica altar, invoca el nombre de Jehová, planta su tienda y sus siervos cavan pozo. Estos detalles ofrecen retrato compacto de su vida: adoración, dependencia peregrina y trabajo práctico pertenecen juntos. El altar sin pozo descuidaría responsabilidad ordinaria; el pozo sin altar olvidaría al Dios de quien depende la vida.</p><h2>Adoración Antes de Posesión</h2><p>La secuencia en Beerseba es espiritualmente instructiva. Isaac responde a revelación divina edificando altar e invocando a Jehová antes de que el relato informe éxito en el nuevo pozo. Adoración no es pago por bendición ni técnica para garantizar éxito. Es respuesta apropiada de siervo del pacto al Dios que ha prometido su presencia. El centro de la vida de Isaac no es agua, tierra o riqueza sino Jehová.</p><h2>Abimelec Regresa</h2><p>El gobernante que antes pidió a Isaac irse regresa después buscando tratado. Reconoce que claramente han visto que Jehová está con Isaac. Isaac no usa su posición fortalecida para venganza. Prepara banquete y las partes hacen juramento de paz. El relato ilustra cómo conducta consistente bajo presión puede formar parte del testimonio público del creyente, aunque nunca garantiza que cada opositor finalmente será amistoso.</p><h2>Formas y Principios</h2><p>El llamado del sermón a cavar otra vez los pozos de oración, estudio bíblico, testimonio, asistencia y vida piadosa es útil cuando se distingue del significado histórico exacto de Génesis 26. Iglesias no necesitan reproducir cada forma cultural de generación anterior para recuperar fidelidad bíblica. Métodos, horarios, vocabulario y estructuras ministeriales pueden cambiar. Los principios duraderos—comunión con Dios, sumisión a Escritura, testimonio del evangelio, comunión y adoración, y conducta santa—no deben llenarse con escombros de negligencia.</p><h2>El Pozo de Oración</h2><p>La oración puede convertirse en doctrina recordada en vez de dependencia practicada. El sermón observa que oración descuidada rara vez se restaura accidentalmente; debe dársele tiempo y atención. Génesis 26 mismo enfatiza repetidamente a Dios hablando, Isaac respondiendo e Isaac invocando a Jehová. Oración cristiana no es mecanismo para controlar providencia. Es comunión con el Dios cuya presencia es más importante que cualquier pozo particular.</p><h2>El Pozo de la Escritura</h2><p>El sermón también llama a creyentes de regreso al estudio bíblico porque el pueblo de Dios no puede practicar fielmente verdad que no conoce. La Escritura da a conocer el evangelio y entrena creyentes en vida justa. Para estudiantes de seminario, familiaridad con vocabulario religioso no sustituye compromiso sostenido con texto bíblico. Recuperar este pozo significa leer Escritura en contexto, interpretarla responsablemente, obedecerla y enseñarla sin hacer que el texto diga lo que no dice.</p><h2>Testimonio, Adoración y Vida Piadosa</h2><p>Las aplicaciones restantes del sermón pertenecen juntas. Testimonio del evangelio comunica a Cristo a quienes no lo conocen; adoración congregacional coloca creyentes dentro de comunidad de enseñanza, oración, ánimo, responsabilidad y servicio; vida piadosa da credibilidad a confesión pública. Asistencia por sí sola no puede producir santidad, y evangelismo no puede reducirse a presión o estadísticas. La meta es vida cristiana integrada donde labios y conducta concuerdan.</p><h2>Aplicación Ministerial</h2><p>Líderes ministeriales heredan pozos cavados por otros: convicciones bíblicas, instituciones, cantos, hábitos, métodos de enseñanza e historias de fidelidad. Sabiduría requiere distinguir el agua de la forma histórica del pozo. Algunas formas heredadas merecen preservación, algunas requieren adaptación y algunas pueden haberse vuelto obstáculos. La tarea no es nostalgia ni novedad por sí misma. Líderes deben recuperar verdad duradera y practicarla fielmente en circunstancias dadas por Dios a su generación.</p><h2>Resumen</h2><p>La historia de Isaac en Génesis 26 es más tranquila que muchas narraciones patriarcales, pero es teológicamente rica. Dios reafirma el pacto, permanece fiel a pesar del temor de Isaac, lo bendice en medio de oposición y da espacio después de disputas repetidas. Isaac reabre pozos de Abraham, practica dominio propio, adora en Beerseba y continúa la línea del pacto. Los pozos antiguos ofrecen aplicación secundaria apropiada: prácticas espirituales heredadas pueden obstruirse por negligencia y deben recuperarse. Sobre cada pozo está el Dios del pacto que dice: «Yo estaré contigo».</p></div>", "mcq": [{"q_en": "What does God reaffirm to Isaac in Genesis 26?", "q_es": "¿Qué reafirma Dios a Isaac en Génesis 26?", "options_en": ["The Abrahamic covenant promises", "A prosperity formula", "A claim not made by the text", "Human self-sufficiency"], "options_es": ["Las promesas del pacto abrahámico", "Una fórmula de prosperidad", "Una afirmación no hecha por el texto", "Autosuficiencia humana"], "answer": 0, "feedback_en": "The Abrahamic covenant promises.", "feedback_es": "Las promesas del pacto abrahámico."}, {"q_en": "What difficult circumstance opens Genesis 26?", "q_es": "¿Qué circunstancia difícil abre Génesis 26?", "options_en": ["A famine", "A prosperity formula", "A claim not made by the text", "Human self-sufficiency"], "options_es": ["Un hambre", "Una fórmula de prosperidad", "Una afirmación no hecha por el texto", "Autosuficiencia humana"], "answer": 0, "feedback_en": "A famine.", "feedback_es": "Un hambre."}, {"q_en": "What failure does Isaac repeat?", "q_es": "¿Qué fracaso repite Isaac?", "options_en": ["Calling Rebekah his sister from fear", "A prosperity formula", "A claim not made by the text", "Human self-sufficiency"], "options_es": ["Llamar a Rebeca su hermana por temor", "Una fórmula de prosperidad", "Una afirmación no hecha por el texto", "Autosuficiencia humana"], "answer": 0, "feedback_en": "Calling Rebekah his sister from fear.", "feedback_es": "Llamar a Rebeca su hermana por temor."}, {"q_en": "Why do the Philistines oppose Isaac?", "q_es": "¿Por qué se oponen los filisteos a Isaac?", "options_en": ["They envy his prosperity", "A prosperity formula", "A claim not made by the text", "Human self-sufficiency"], "options_es": ["Envidian su prosperidad", "Una fórmula de prosperidad", "Una afirmación no hecha por el texto", "Autosuficiencia humana"], "answer": 0, "feedback_en": "They envy his prosperity.", "feedback_es": "Envidian su prosperidad."}, {"q_en": "What had happened to Abraham’s wells?", "q_es": "¿Qué había pasado con los pozos de Abraham?", "options_en": ["The Philistines had stopped them up", "A prosperity formula", "A claim not made by the text", "Human self-sufficiency"], "options_es": ["Los filisteos los habían cegado", "Una fórmula de prosperidad", "Una afirmación no hecha por el texto", "Autosuficiencia humana"], "answer": 0, "feedback_en": "The Philistines had stopped them up.", "feedback_es": "Los filisteos los habían cegado."}, {"q_en": "What does Isaac do with Abraham’s wells?", "q_es": "¿Qué hace Isaac con los pozos de Abraham?", "options_en": ["He reopens them", "A prosperity formula", "A claim not made by the text", "Human self-sufficiency"], "options_es": ["Los abre de nuevo", "Una fórmula de prosperidad", "Una afirmación no hecha por el texto", "Autosuficiencia humana"], "answer": 0, "feedback_en": "He reopens them.", "feedback_es": "Los abre de nuevo."}, {"q_en": "What is Esek associated with?", "q_es": "¿Con qué se asocia Esek?", "options_en": ["Contention", "A prosperity formula", "A claim not made by the text", "Human self-sufficiency"], "options_es": ["Contienda", "Una fórmula de prosperidad", "Una afirmación no hecha por el texto", "Autosuficiencia humana"], "answer": 0, "feedback_en": "Contention.", "feedback_es": "Contienda."}, {"q_en": "What is Sitnah associated with?", "q_es": "¿Con qué se asocia Sitnah?", "options_en": ["Hostility", "A prosperity formula", "A claim not made by the text", "Human self-sufficiency"], "options_es": ["Hostilidad", "Una fórmula de prosperidad", "Una afirmación no hecha por el texto", "Autosuficiencia humana"], "answer": 0, "feedback_en": "Hostility.", "feedback_es": "Hostilidad."}, {"q_en": "What does Rehoboth signify?", "q_es": "¿Qué significa Rehoboth?", "options_en": ["The LORD has made room", "A prosperity formula", "A claim not made by the text", "Human self-sufficiency"], "options_es": ["Jehová ha hecho lugar", "Una fórmula de prosperidad", "Una afirmación no hecha por el texto", "Autosuficiencia humana"], "answer": 0, "feedback_en": "The LORD has made room.", "feedback_es": "Jehová ha hecho lugar."}, {"q_en": "Does Isaac’s yielding mean believers must tolerate abuse?", "q_es": "¿Significa ceder que creyentes deben tolerar abuso?", "options_en": ["No", "A prosperity formula", "A claim not made by the text", "Human self-sufficiency"], "options_es": ["No", "Una fórmula de prosperidad", "Una afirmación no hecha por el texto", "Autosuficiencia humana"], "answer": 0, "feedback_en": "No.", "feedback_es": "No."}, {"q_en": "What three features appear at Beersheba?", "q_es": "¿Qué tres elementos aparecen en Beerseba?", "options_en": ["Altar, tent, and well", "A prosperity formula", "A claim not made by the text", "Human self-sufficiency"], "options_es": ["Altar, tienda y pozo", "Una fórmula de prosperidad", "Una afirmación no hecha por el texto", "Autosuficiencia humana"], "answer": 0, "feedback_en": "Altar, tent, and well.", "feedback_es": "Altar, tienda y pozo."}, {"q_en": "What is central to Isaac’s life?", "q_es": "¿Qué es central en la vida de Isaac?", "options_en": ["The LORD and His presence", "A prosperity formula", "A claim not made by the text", "Human self-sufficiency"], "options_es": ["Jehová y su presencia", "Una fórmula de prosperidad", "Una afirmación no hecha por el texto", "Autosuficiencia humana"], "answer": 0, "feedback_en": "The LORD and His presence.", "feedback_es": "Jehová y su presencia."}, {"q_en": "Why does Abimelech return?", "q_es": "¿Por qué regresa Abimelec?", "options_en": ["He sees that the LORD is with Isaac", "A prosperity formula", "A claim not made by the text", "Human self-sufficiency"], "options_es": ["Ve que Jehová está con Isaac", "Una fórmula de prosperidad", "Una afirmación no hecha por el texto", "Autosuficiencia humana"], "answer": 0, "feedback_en": "He sees that the LORD is with Isaac.", "feedback_es": "Ve que Jehová está con Isaac."}, {"q_en": "Are the wells literal before they are applied spiritually?", "q_es": "¿Son literales los pozos antes de aplicación espiritual?", "options_en": ["Yes", "A prosperity formula", "A claim not made by the text", "Human self-sufficiency"], "options_es": ["Sí", "Una fórmula de prosperidad", "Una afirmación no hecha por el texto", "Autosuficiencia humana"], "answer": 0, "feedback_en": "Yes.", "feedback_es": "Sí."}, {"q_en": "What enduring practice is represented by the prayer application?", "q_es": "¿Qué práctica duradera representa la aplicación de oración?", "options_en": ["Communion with God", "A prosperity formula", "A claim not made by the text", "Human self-sufficiency"], "options_es": ["Comunión con Dios", "Una fórmula de prosperidad", "Una afirmación no hecha por el texto", "Autosuficiencia humana"], "answer": 0, "feedback_en": "Communion with God.", "feedback_es": "Comunión con Dios."}, {"q_en": "What is essential to recovering the Scripture well?", "q_es": "¿Qué es esencial para recuperar el pozo de Escritura?", "options_en": ["Responsible engagement with Scripture", "A prosperity formula", "A claim not made by the text", "Human self-sufficiency"], "options_es": ["Compromiso responsable con Escritura", "Una fórmula de prosperidad", "Una afirmación no hecha por el texto", "Autosuficiencia humana"], "answer": 0, "feedback_en": "Responsible engagement with Scripture.", "feedback_es": "Compromiso responsable con Escritura."}, {"q_en": "Can church attendance alone produce holiness?", "q_es": "¿Puede asistencia a iglesia por sí sola producir santidad?", "options_en": ["No", "A prosperity formula", "A claim not made by the text", "Human self-sufficiency"], "options_es": ["No", "Una fórmula de prosperidad", "Una afirmación no hecha por el texto", "Autosuficiencia humana"], "answer": 0, "feedback_en": "No.", "feedback_es": "No."}, {"q_en": "Should inherited ministry forms all be preserved unchanged?", "q_es": "¿Deben preservarse sin cambio todas las formas ministeriales heredadas?", "options_en": ["No", "A prosperity formula", "A claim not made by the text", "Human self-sufficiency"], "options_es": ["No", "Una fórmula de prosperidad", "Una afirmación no hecha por el texto", "Autosuficiencia humana"], "answer": 0, "feedback_en": "No.", "feedback_es": "No."}, {"q_en": "What should leaders distinguish in inherited traditions?", "q_es": "¿Qué deben distinguir líderes en tradiciones heredadas?", "options_en": ["Enduring truth from changeable forms", "A prosperity formula", "A claim not made by the text", "Human self-sufficiency"], "options_es": ["Verdad duradera de formas cambiables", "Una fórmula de prosperidad", "Una afirmación no hecha por el texto", "Autosuficiencia humana"], "answer": 0, "feedback_en": "Enduring truth from changeable forms.", "feedback_es": "Verdad duradera de formas cambiables."}, {"q_en": "Who stands above every well in the chapter?", "q_es": "¿Quién está sobre cada pozo en el capítulo?", "options_en": ["The covenant God", "A prosperity formula", "A claim not made by the text", "Human self-sufficiency"], "options_es": ["El Dios del pacto", "Una fórmula de prosperidad", "Una afirmación no hecha por el texto", "Autosuficiencia humana"], "answer": 0, "feedback_en": "The covenant God.", "feedback_es": "El Dios del pacto."}], "sa": [{"q_en": "Explain how Isaac personally inherits the Abrahamic covenant.", "q_es": "Explique cómo Isaac hereda personalmente el pacto abrahámico.", "concepts": [["covenant", "pacto"], ["Isaac", "Isaac"], ["Abraham", "Abraham"], ["promise", "promesa"], ["presence", "presencia"], ["land", "tierra"], ["descendants", "descendencia"], ["nations", "naciones"]], "model_en": "A strong answer should integrate the unit’s biblical concepts, distinguish narrative meaning from application, and keep God’s covenant faithfulness central.", "model_es": "Una respuesta sólida debe integrar conceptos bíblicos de la unidad, distinguir significado narrativo de aplicación y mantener central la fidelidad del pacto de Dios."}, {"q_en": "Analyze Isaac’s repeated deception and the limits of a godly heritage.", "q_es": "Analice el engaño repetido de Isaac y límites de una herencia piadosa.", "concepts": [["fear", "temor"], ["Rebekah", "Rebeca"], ["sister", "hermana"], ["Abraham", "Abraham"], ["failure", "fracaso"], ["heritage", "herencia"], ["sin", "pecado"], ["faithfulness", "fidelidad"]], "model_en": "A strong answer should integrate the unit’s biblical concepts, distinguish narrative meaning from application, and keep God’s covenant faithfulness central.", "model_es": "Una respuesta sólida debe integrar conceptos bíblicos de la unidad, distinguir significado narrativo de aplicación y mantener central la fidelidad del pacto de Dios."}, {"q_en": "Explain the literal wells and the legitimacy of secondary spiritual application.", "q_es": "Explique pozos literales y legitimidad de aplicación espiritual secundaria.", "concepts": [["wells", "pozos"], ["literal", "literales"], ["inheritance", "herencia"], ["labor", "trabajo"], ["Abraham", "Abraham"], ["Isaac", "Isaac"], ["continuity", "continuidad"], ["application", "aplicación"]], "model_en": "A strong answer should integrate the unit’s biblical concepts, distinguish narrative meaning from application, and keep God’s covenant faithfulness central.", "model_es": "Una respuesta sólida debe integrar conceptos bíblicos de la unidad, distinguir significado narrativo de aplicación y mantener central la fidelidad del pacto de Dios."}, {"q_en": "Compare Esek and Sitnah with a biblical approach to conflict and boundaries.", "q_es": "Compare Esek y Sitnah con enfoque bíblico de conflicto y límites.", "concepts": [["Esek", "Esek"], ["Sitnah", "Sitnah"], ["conflict", "conflicto"], ["hostility", "hostilidad"], ["peace", "paz"], ["restraint", "dominio"], ["truth", "verdad"], ["boundaries", "límites"]], "model_en": "A strong answer should integrate the unit’s biblical concepts, distinguish narrative meaning from application, and keep God’s covenant faithfulness central.", "model_es": "Una respuesta sólida debe integrar conceptos bíblicos de la unidad, distinguir significado narrativo de aplicación y mantener central la fidelidad del pacto de Dios."}, {"q_en": "Explain the significance of Rehoboth without promising an easy life.", "q_es": "Explique significado de Rehoboth sin prometer vida fácil.", "concepts": [["Rehoboth", "Rehoboth"], ["room", "espacio"], ["providence", "providencia"], ["perseverance", "perseverancia"], ["God", "Dios"], ["conflict", "conflicto"], ["fruitful", "fructificar"], ["faithfulness", "fidelidad"]], "model_en": "A strong answer should integrate the unit’s biblical concepts, distinguish narrative meaning from application, and keep God’s covenant faithfulness central.", "model_es": "Una respuesta sólida debe integrar conceptos bíblicos de la unidad, distinguir significado narrativo de aplicación y mantener central la fidelidad del pacto de Dios."}, {"q_en": "Explain the altar, tent, and well pattern at Beersheba.", "q_es": "Explique patrón de altar, tienda y pozo en Beerseba.", "concepts": [["altar", "altar"], ["tent", "tienda"], ["well", "pozo"], ["worship", "adoración"], ["pilgrim", "peregrino"], ["labor", "trabajo"], ["presence", "presencia"], ["God", "Dios"]], "model_en": "A strong answer should integrate the unit’s biblical concepts, distinguish narrative meaning from application, and keep God’s covenant faithfulness central.", "model_es": "Una respuesta sólida debe integrar conceptos bíblicos de la unidad, distinguir significado narrativo de aplicación y mantener central la fidelidad del pacto de Dios."}, {"q_en": "Develop the sermon’s old-wells application without confusing it with the original meaning.", "q_es": "Desarrolle aplicación de pozos antiguos sin confundirla con significado original.", "concepts": [["prayer", "oración"], ["Scripture", "Escritura"], ["witness", "testimonio"], ["worship", "adoración"], ["godliness", "piedad"], ["neglect", "negligencia"], ["renewal", "renovación"], ["practice", "práctica"]], "model_en": "A strong answer should integrate the unit’s biblical concepts, distinguish narrative meaning from application, and keep God’s covenant faithfulness central.", "model_es": "Una respuesta sólida debe integrar conceptos bíblicos de la unidad, distinguir significado narrativo de aplicación y mantener central la fidelidad del pacto de Dios."}, {"q_en": "Distinguish enduring biblical principles from changeable ministry forms.", "q_es": "Distinga principios bíblicos duraderos de formas ministeriales cambiables.", "concepts": [["forms", "formas"], ["principles", "principios"], ["tradition", "tradición"], ["truth", "verdad"], ["adaptation", "adaptación"], ["Scripture", "Escritura"], ["generation", "generación"], ["wisdom", "sabiduría"]], "model_en": "A strong answer should integrate the unit’s biblical concepts, distinguish narrative meaning from application, and keep God’s covenant faithfulness central.", "model_es": "Una respuesta sólida debe integrar conceptos bíblicos de la unidad, distinguir significado narrativo de aplicación y mantener central la fidelidad del pacto de Dios."}, {"q_en": "Explain Abimelech’s return and Isaac’s public witness.", "q_es": "Explique regreso de Abimelec y testimonio público de Isaac.", "concepts": [["Abimelech", "Abimelec"], ["peace", "paz"], ["witness", "testimonio"], ["LORD", "Jehová"], ["Isaac", "Isaac"], ["conduct", "conducta"], ["oath", "juramento"], ["revenge", "venganza"]], "model_en": "A strong answer should integrate the unit’s biblical concepts, distinguish narrative meaning from application, and keep God’s covenant faithfulness central.", "model_es": "Una respuesta sólida debe integrar conceptos bíblicos de la unidad, distinguir significado narrativo de aplicación y mantener central la fidelidad del pacto de Dios."}, {"q_en": "Summarize Genesis 26 with God, rather than the wells, at the center.", "q_es": "Resuma Génesis 26 con Dios, y no pozos, en el centro.", "concepts": [["God", "Dios"], ["covenant", "pacto"], ["presence", "presencia"], ["faithfulness", "fidelidad"], ["Isaac", "Isaac"], ["wells", "pozos"], ["worship", "adoración"], ["inheritance", "herencia"]], "model_en": "A strong answer should integrate the unit’s biblical concepts, distinguish narrative meaning from application, and keep God’s covenant faithfulness central.", "model_es": "Una respuesta sólida debe integrar conceptos bíblicos de la unidad, distinguir significado narrativo de aplicación y mantener central la fidelidad del pacto de Dios."}]};
+
+/* CTSGenesis — unit 9. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "genesis",
+ "unit": 9,
+ "totalUnits": 12,
+ "filePrefix": "CTSGenesis",
+ "prevHref": "CTSGenesisUnit8.html",
+ "nextHref": "CTSGenesisUnit10.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "What does God reaffirm to Isaac in Genesis 26?",
+    "es": "¿Qué reafirma Dios a Isaac en Génesis 26?"
+   },
+   "options": {
+    "en": [
+     "The Abrahamic covenant promises",
+     "A prosperity formula",
+     "A claim not made by the text",
+     "Human self-sufficiency"
+    ],
+    "es": [
+     "Las promesas del pacto abrahámico",
+     "Una fórmula de prosperidad",
+     "Una afirmación no hecha por el texto",
+     "Autosuficiencia humana"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The Abrahamic covenant promises.",
+    "es": "Las promesas del pacto abrahámico."
+   }
+  },
+  {
+   "stem": {
+    "en": "What difficult circumstance opens Genesis 26?",
+    "es": "¿Qué circunstancia difícil abre Génesis 26?"
+   },
+   "options": {
+    "en": [
+     "A famine",
+     "A prosperity formula",
+     "A claim not made by the text",
+     "Human self-sufficiency"
+    ],
+    "es": [
+     "Un hambre",
+     "Una fórmula de prosperidad",
+     "Una afirmación no hecha por el texto",
+     "Autosuficiencia humana"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "A famine.",
+    "es": "Un hambre."
+   }
+  },
+  {
+   "stem": {
+    "en": "What failure does Isaac repeat?",
+    "es": "¿Qué fracaso repite Isaac?"
+   },
+   "options": {
+    "en": [
+     "Calling Rebekah his sister from fear",
+     "A prosperity formula",
+     "A claim not made by the text",
+     "Human self-sufficiency"
+    ],
+    "es": [
+     "Llamar a Rebeca su hermana por temor",
+     "Una fórmula de prosperidad",
+     "Una afirmación no hecha por el texto",
+     "Autosuficiencia humana"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Calling Rebekah his sister from fear.",
+    "es": "Llamar a Rebeca su hermana por temor."
+   }
+  },
+  {
+   "stem": {
+    "en": "Why do the Philistines oppose Isaac?",
+    "es": "¿Por qué se oponen los filisteos a Isaac?"
+   },
+   "options": {
+    "en": [
+     "They envy his prosperity",
+     "A prosperity formula",
+     "A claim not made by the text",
+     "Human self-sufficiency"
+    ],
+    "es": [
+     "Envidian su prosperidad",
+     "Una fórmula de prosperidad",
+     "Una afirmación no hecha por el texto",
+     "Autosuficiencia humana"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "They envy his prosperity.",
+    "es": "Envidian su prosperidad."
+   }
+  },
+  {
+   "stem": {
+    "en": "What had happened to Abraham’s wells?",
+    "es": "¿Qué había pasado con los pozos de Abraham?"
+   },
+   "options": {
+    "en": [
+     "The Philistines had stopped them up",
+     "A prosperity formula",
+     "A claim not made by the text",
+     "Human self-sufficiency"
+    ],
+    "es": [
+     "Los filisteos los habían cegado",
+     "Una fórmula de prosperidad",
+     "Una afirmación no hecha por el texto",
+     "Autosuficiencia humana"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The Philistines had stopped them up.",
+    "es": "Los filisteos los habían cegado."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does Isaac do with Abraham’s wells?",
+    "es": "¿Qué hace Isaac con los pozos de Abraham?"
+   },
+   "options": {
+    "en": [
+     "He reopens them",
+     "A prosperity formula",
+     "A claim not made by the text",
+     "Human self-sufficiency"
+    ],
+    "es": [
+     "Los abre de nuevo",
+     "Una fórmula de prosperidad",
+     "Una afirmación no hecha por el texto",
+     "Autosuficiencia humana"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "He reopens them.",
+    "es": "Los abre de nuevo."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is Esek associated with?",
+    "es": "¿Con qué se asocia Esek?"
+   },
+   "options": {
+    "en": [
+     "Contention",
+     "A prosperity formula",
+     "A claim not made by the text",
+     "Human self-sufficiency"
+    ],
+    "es": [
+     "Contienda",
+     "Una fórmula de prosperidad",
+     "Una afirmación no hecha por el texto",
+     "Autosuficiencia humana"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Contention.",
+    "es": "Contienda."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is Sitnah associated with?",
+    "es": "¿Con qué se asocia Sitnah?"
+   },
+   "options": {
+    "en": [
+     "Hostility",
+     "A prosperity formula",
+     "A claim not made by the text",
+     "Human self-sufficiency"
+    ],
+    "es": [
+     "Hostilidad",
+     "Una fórmula de prosperidad",
+     "Una afirmación no hecha por el texto",
+     "Autosuficiencia humana"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Hostility.",
+    "es": "Hostilidad."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does Rehoboth signify?",
+    "es": "¿Qué significa Rehoboth?"
+   },
+   "options": {
+    "en": [
+     "The LORD has made room",
+     "A prosperity formula",
+     "A claim not made by the text",
+     "Human self-sufficiency"
+    ],
+    "es": [
+     "Jehová ha hecho lugar",
+     "Una fórmula de prosperidad",
+     "Una afirmación no hecha por el texto",
+     "Autosuficiencia humana"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The LORD has made room.",
+    "es": "Jehová ha hecho lugar."
+   }
+  },
+  {
+   "stem": {
+    "en": "Does Isaac’s yielding mean believers must tolerate abuse?",
+    "es": "¿Significa ceder que creyentes deben tolerar abuso?"
+   },
+   "options": {
+    "en": [
+     "No",
+     "A prosperity formula",
+     "A claim not made by the text",
+     "Human self-sufficiency"
+    ],
+    "es": [
+     "No",
+     "Una fórmula de prosperidad",
+     "Una afirmación no hecha por el texto",
+     "Autosuficiencia humana"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "No.",
+    "es": "No."
+   }
+  },
+  {
+   "stem": {
+    "en": "What three features appear at Beersheba?",
+    "es": "¿Qué tres elementos aparecen en Beerseba?"
+   },
+   "options": {
+    "en": [
+     "Altar, tent, and well",
+     "A prosperity formula",
+     "A claim not made by the text",
+     "Human self-sufficiency"
+    ],
+    "es": [
+     "Altar, tienda y pozo",
+     "Una fórmula de prosperidad",
+     "Una afirmación no hecha por el texto",
+     "Autosuficiencia humana"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Altar, tent, and well.",
+    "es": "Altar, tienda y pozo."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is central to Isaac’s life?",
+    "es": "¿Qué es central en la vida de Isaac?"
+   },
+   "options": {
+    "en": [
+     "The LORD and His presence",
+     "A prosperity formula",
+     "A claim not made by the text",
+     "Human self-sufficiency"
+    ],
+    "es": [
+     "Jehová y su presencia",
+     "Una fórmula de prosperidad",
+     "Una afirmación no hecha por el texto",
+     "Autosuficiencia humana"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The LORD and His presence.",
+    "es": "Jehová y su presencia."
+   }
+  },
+  {
+   "stem": {
+    "en": "Why does Abimelech return?",
+    "es": "¿Por qué regresa Abimelec?"
+   },
+   "options": {
+    "en": [
+     "He sees that the LORD is with Isaac",
+     "A prosperity formula",
+     "A claim not made by the text",
+     "Human self-sufficiency"
+    ],
+    "es": [
+     "Ve que Jehová está con Isaac",
+     "Una fórmula de prosperidad",
+     "Una afirmación no hecha por el texto",
+     "Autosuficiencia humana"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "He sees that the LORD is with Isaac.",
+    "es": "Ve que Jehová está con Isaac."
+   }
+  },
+  {
+   "stem": {
+    "en": "Are the wells literal before they are applied spiritually?",
+    "es": "¿Son literales los pozos antes de aplicación espiritual?"
+   },
+   "options": {
+    "en": [
+     "Yes",
+     "A prosperity formula",
+     "A claim not made by the text",
+     "Human self-sufficiency"
+    ],
+    "es": [
+     "Sí",
+     "Una fórmula de prosperidad",
+     "Una afirmación no hecha por el texto",
+     "Autosuficiencia humana"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Yes.",
+    "es": "Sí."
+   }
+  },
+  {
+   "stem": {
+    "en": "What enduring practice is represented by the prayer application?",
+    "es": "¿Qué práctica duradera representa la aplicación de oración?"
+   },
+   "options": {
+    "en": [
+     "Communion with God",
+     "A prosperity formula",
+     "A claim not made by the text",
+     "Human self-sufficiency"
+    ],
+    "es": [
+     "Comunión con Dios",
+     "Una fórmula de prosperidad",
+     "Una afirmación no hecha por el texto",
+     "Autosuficiencia humana"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Communion with God.",
+    "es": "Comunión con Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is essential to recovering the Scripture well?",
+    "es": "¿Qué es esencial para recuperar el pozo de Escritura?"
+   },
+   "options": {
+    "en": [
+     "Responsible engagement with Scripture",
+     "A prosperity formula",
+     "A claim not made by the text",
+     "Human self-sufficiency"
+    ],
+    "es": [
+     "Compromiso responsable con Escritura",
+     "Una fórmula de prosperidad",
+     "Una afirmación no hecha por el texto",
+     "Autosuficiencia humana"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Responsible engagement with Scripture.",
+    "es": "Compromiso responsable con Escritura."
+   }
+  },
+  {
+   "stem": {
+    "en": "Can church attendance alone produce holiness?",
+    "es": "¿Puede asistencia a iglesia por sí sola producir santidad?"
+   },
+   "options": {
+    "en": [
+     "No",
+     "A prosperity formula",
+     "A claim not made by the text",
+     "Human self-sufficiency"
+    ],
+    "es": [
+     "No",
+     "Una fórmula de prosperidad",
+     "Una afirmación no hecha por el texto",
+     "Autosuficiencia humana"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "No.",
+    "es": "No."
+   }
+  },
+  {
+   "stem": {
+    "en": "Should inherited ministry forms all be preserved unchanged?",
+    "es": "¿Deben preservarse sin cambio todas las formas ministeriales heredadas?"
+   },
+   "options": {
+    "en": [
+     "No",
+     "A prosperity formula",
+     "A claim not made by the text",
+     "Human self-sufficiency"
+    ],
+    "es": [
+     "No",
+     "Una fórmula de prosperidad",
+     "Una afirmación no hecha por el texto",
+     "Autosuficiencia humana"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "No.",
+    "es": "No."
+   }
+  },
+  {
+   "stem": {
+    "en": "What should leaders distinguish in inherited traditions?",
+    "es": "¿Qué deben distinguir líderes en tradiciones heredadas?"
+   },
+   "options": {
+    "en": [
+     "Enduring truth from changeable forms",
+     "A prosperity formula",
+     "A claim not made by the text",
+     "Human self-sufficiency"
+    ],
+    "es": [
+     "Verdad duradera de formas cambiables",
+     "Una fórmula de prosperidad",
+     "Una afirmación no hecha por el texto",
+     "Autosuficiencia humana"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Enduring truth from changeable forms.",
+    "es": "Verdad duradera de formas cambiables."
+   }
+  },
+  {
+   "stem": {
+    "en": "Who stands above every well in the chapter?",
+    "es": "¿Quién está sobre cada pozo en el capítulo?"
+   },
+   "options": {
+    "en": [
+     "The covenant God",
+     "A prosperity formula",
+     "A claim not made by the text",
+     "Human self-sufficiency"
+    ],
+    "es": [
+     "El Dios del pacto",
+     "Una fórmula de prosperidad",
+     "Una afirmación no hecha por el texto",
+     "Autosuficiencia humana"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The covenant God.",
+    "es": "El Dios del pacto."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Explain how Isaac personally inherits the Abrahamic covenant.",
+    "es": "Explique cómo Isaac hereda personalmente el pacto abrahámico."
+   },
+   "model": {
+    "en": "A strong answer should integrate the unit’s biblical concepts, distinguish narrative meaning from application, and keep God’s covenant faithfulness central.",
+    "es": "Una respuesta sólida debe integrar conceptos bíblicos de la unidad, distinguir significado narrativo de aplicación y mantener central la fidelidad del pacto de Dios."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Analyze Isaac’s repeated deception and the limits of a godly heritage.",
+    "es": "Analice el engaño repetido de Isaac y límites de una herencia piadosa."
+   },
+   "model": {
+    "en": "A strong answer should integrate the unit’s biblical concepts, distinguish narrative meaning from application, and keep God’s covenant faithfulness central.",
+    "es": "Una respuesta sólida debe integrar conceptos bíblicos de la unidad, distinguir significado narrativo de aplicación y mantener central la fidelidad del pacto de Dios."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the literal wells and the legitimacy of secondary spiritual application.",
+    "es": "Explique pozos literales y legitimidad de aplicación espiritual secundaria."
+   },
+   "model": {
+    "en": "A strong answer should integrate the unit’s biblical concepts, distinguish narrative meaning from application, and keep God’s covenant faithfulness central.",
+    "es": "Una respuesta sólida debe integrar conceptos bíblicos de la unidad, distinguir significado narrativo de aplicación y mantener central la fidelidad del pacto de Dios."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Compare Esek and Sitnah with a biblical approach to conflict and boundaries.",
+    "es": "Compare Esek y Sitnah con enfoque bíblico de conflicto y límites."
+   },
+   "model": {
+    "en": "A strong answer should integrate the unit’s biblical concepts, distinguish narrative meaning from application, and keep God’s covenant faithfulness central.",
+    "es": "Una respuesta sólida debe integrar conceptos bíblicos de la unidad, distinguir significado narrativo de aplicación y mantener central la fidelidad del pacto de Dios."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the significance of Rehoboth without promising an easy life.",
+    "es": "Explique significado de Rehoboth sin prometer vida fácil."
+   },
+   "model": {
+    "en": "A strong answer should integrate the unit’s biblical concepts, distinguish narrative meaning from application, and keep God’s covenant faithfulness central.",
+    "es": "Una respuesta sólida debe integrar conceptos bíblicos de la unidad, distinguir significado narrativo de aplicación y mantener central la fidelidad del pacto de Dios."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the altar, tent, and well pattern at Beersheba.",
+    "es": "Explique patrón de altar, tienda y pozo en Beerseba."
+   },
+   "model": {
+    "en": "A strong answer should integrate the unit’s biblical concepts, distinguish narrative meaning from application, and keep God’s covenant faithfulness central.",
+    "es": "Una respuesta sólida debe integrar conceptos bíblicos de la unidad, distinguir significado narrativo de aplicación y mantener central la fidelidad del pacto de Dios."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Develop the sermon’s old-wells application without confusing it with the original meaning.",
+    "es": "Desarrolle aplicación de pozos antiguos sin confundirla con significado original."
+   },
+   "model": {
+    "en": "A strong answer should integrate the unit’s biblical concepts, distinguish narrative meaning from application, and keep God’s covenant faithfulness central.",
+    "es": "Una respuesta sólida debe integrar conceptos bíblicos de la unidad, distinguir significado narrativo de aplicación y mantener central la fidelidad del pacto de Dios."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Distinguish enduring biblical principles from changeable ministry forms.",
+    "es": "Distinga principios bíblicos duraderos de formas ministeriales cambiables."
+   },
+   "model": {
+    "en": "A strong answer should integrate the unit’s biblical concepts, distinguish narrative meaning from application, and keep God’s covenant faithfulness central.",
+    "es": "Una respuesta sólida debe integrar conceptos bíblicos de la unidad, distinguir significado narrativo de aplicación y mantener central la fidelidad del pacto de Dios."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain Abimelech’s return and Isaac’s public witness.",
+    "es": "Explique regreso de Abimelec y testimonio público de Isaac."
+   },
+   "model": {
+    "en": "A strong answer should integrate the unit’s biblical concepts, distinguish narrative meaning from application, and keep God’s covenant faithfulness central.",
+    "es": "Una respuesta sólida debe integrar conceptos bíblicos de la unidad, distinguir significado narrativo de aplicación y mantener central la fidelidad del pacto de Dios."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Summarize Genesis 26 with God, rather than the wells, at the center.",
+    "es": "Resuma Génesis 26 con Dios, y no pozos, en el centro."
+   },
+   "model": {
+    "en": "A strong answer should integrate the unit’s biblical concepts, distinguish narrative meaning from application, and keep God’s covenant faithfulness central.",
+    "es": "Una respuesta sólida debe integrar conceptos bíblicos de la unidad, distinguir significado narrativo de aplicación y mantener central la fidelidad del pacto de Dios."
+   }
+  }
+ ]
+};

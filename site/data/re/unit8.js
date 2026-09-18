@@ -1,3 +1,833 @@
-/* CTSRE - unit 8: per-unit configuration and content. */
-
-var UNIT=8, NEXT_URL="CTSREUnit9.html", MC=[{"stemEn": "When the chapter opens, Esther's situation in the palace is that she:", "stemEs": "Al abrir el capítulo, la situación de Ester en el palacio es que ella:", "optionsEn": ["knew nothing of the edict — isolated and cut off", "had already planned a rescue", "was in hiding", "had fled Susa"], "optionsEs": ["no sabía nada del edicto — aislada y apartada", "ya había planeado un rescate", "estaba escondida", "había huido de Susa"], "answer": "A", "whyEn": "She was isolated, unaware of the edict until told.", "whyEs": "Estaba aislada, sin saber del edicto hasta que le avisaron."}, {"stemEn": "When Esther learns why Mordecai mourns, she 'writhes in agony' — a Hebrew word for:", "stemEs": "Cuando Ester sabe por qué Mardoqueo se lamenta, 'se retuerce de angustia' — palabra hebrea para:", "optionsEn": ["physical illness", "royal anger", "the pain and labor of childbirth", "mourning a death"], "optionsEs": ["enfermedad física", "ira real", "el dolor y la labor del parto", "duelo por un muerto"], "answer": "C", "whyEn": "The word evokes childbirth — a woman of destiny being born.", "whyEs": "La palabra evoca el parto — nace la mujer de destino."}, {"stemEn": "How does Mordecai know the exact bribe Haman offered the king?", "stemEs": "¿Cómo sabe Mardoqueo el soborno exacto que Amán ofreció al rey?", "optionsEn": ["he overheard the banquet", "Esther told him", "Haman boasted to him", "he evidently had friends/contacts in high places"], "optionsEs": ["lo oyó en el banquete", "Ester se lo dijo", "Amán se lo jactó", "evidentemente tenía amigos/contactos en altos cargos"], "answer": "D", "whyEn": "His detailed knowledge implies high-level contacts.", "whyEs": "Su conocimiento detallado implica contactos de alto nivel."}, {"stemEn": "Esther is reluctant to approach the king because:", "stemEs": "Ester duda en acercarse al rey porque:", "optionsEn": ["she disliked him", "going unsummoned risked death, and he hadn't called her in 30 days", "Mordecai forbade it", "she feared Haman"], "optionsEs": ["le desagradaba", "ir sin ser llamada arriesgaba la muerte, y no la llamaba en 30 días", "Mardoqueo se lo prohibía", "temía a Amán"], "answer": "B", "whyEn": "Unsummoned approach meant death; 30 days uncalled.", "whyEs": "Acercarse sin llamado era muerte; 30 días sin ser llamada."}, {"stemEn": "Esther 4:13-14 are the key verses because Mordecai expresses faith that:", "stemEs": "Ester 4:13-14 son los versos clave porque Mardoqueo expresa la fe de que:", "optionsEn": ["God will not abandon His covenant people; deliverance will arise", "the king will relent", "Haman will repent", "the army will refuse"], "optionsEs": ["Dios no abandonará a su pueblo del pacto; vendrá la liberación", "el rey cederá", "Amán se arrepentirá", "el ejército se negará"], "answer": "A", "whyEn": "He trusts God's covenant promise of deliverance.", "whyEs": "Confía en la promesa del pacto de liberación."}, {"stemEn": "Mordecai's covenant confidence points back to God's promise to:", "stemEs": "La confianza de pacto de Mardoqueo remite a la promesa de Dios a:", "optionsEn": ["Moses and Aaron", "Abraham, Isaac, and Jacob", "David and Solomon", "Adam and Eve"], "optionsEs": ["Moisés y Aarón", "Abraham, Isaac y Jacob", "David y Salomón", "Adán y Eva"], "answer": "B", "whyEn": "'You shall be my people' — the patriarchal covenant.", "whyEs": "'Seréis mi pueblo' — el pacto patriarcal."}, {"stemEn": "Mordecai's warning that Esther's house would 'perish / be forgotten' echoes which earlier book?", "stemEs": "La advertencia de que la casa de Ester 'perecería / sería olvidada' hace eco de cuál libro anterior?", "optionsEn": ["Genesis", "Exodus", "Judges", "Ruth — the kinsman who refused was blotted from memory"], "optionsEs": ["Génesis", "Éxodo", "Jueces", "Rut — el pariente que rehusó fue borrado de la memoria"], "answer": "D", "whyEn": "Like Ruth's refusing kinsman, forgotten forever.", "whyEs": "Como el pariente que rehusó en Rut, olvidado para siempre."}, {"stemEn": "Glenda says Esther offers herself as a kind of kinsman-redeemer by:", "stemEs": "Glenda dice que Ester se ofrece como una especie de pariente redentor al:", "optionsEn": ["paying a ransom", "buying back land", "risking her life to save her people, answering God's call", "marrying a relative"], "optionsEs": ["pagar un rescate", "recomprar tierra", "arriesgar su vida para salvar a su pueblo, respondiendo al llamado de Dios", "casarse con un pariente"], "answer": "C", "whyEn": "She lays down her life for her people — redeemer-like.", "whyEs": "Entrega su vida por su pueblo — como redentora."}, {"stemEn": "Esther calls for a fast of:", "stemEs": "Ester convoca un ayuno de:", "optionsEn": ["forty days", "one day", "seven days", "three days"], "optionsEs": ["cuarenta días", "un día", "siete días", "tres días"], "answer": "D", "whyEn": "A three-day fast, she and her maids included.", "whyEs": "Un ayuno de tres días, ella y sus criadas incluidas."}, {"stemEn": "God commanded fasting for only one day a year, namely:", "stemEs": "Dios mandó ayunar solo un día al año, a saber:", "optionsEn": ["Passover", "Pentecost", "the Day of Atonement", "the Sabbath"], "optionsEs": ["la Pascua", "Pentecostés", "el Día de la Expiación", "el sábado"], "answer": "C", "whyEn": "Leviticus 16 — afflicting the soul on Atonement.", "whyEs": "Levítico 16 — afligir el alma en la Expiación."}, {"stemEn": "To 'afflict one's soul' (Leviticus 16) was understood by the Jews to mean:", "stemEs": "'Afligir el alma' (Levítico 16) era entendido por los judíos como:", "optionsEn": ["to fast", "to sacrifice", "to tithe", "to travel"], "optionsEs": ["ayunar", "sacrificar", "diezmar", "viajar"], "answer": "A", "whyEn": "Afflicting the soul meant fasting.", "whyEs": "Afligir el alma significaba ayunar."}, {"stemEn": "Glenda links the three-day fast and self-humbling to:", "stemEs": "Glenda relaciona el ayuno de tres días y la humillación con:", "optionsEn": ["the Exodus", "Christ's humiliation and death (Philippians 2:5-8)", "the fall of Babylon", "the flood"], "optionsEs": ["el Éxodo", "la humillación y muerte de Cristo (Filipenses 2:5-8)", "la caída de Babilonia", "el diluvio"], "answer": "B", "whyEn": "The three days point to Christ, our Kinsman-Redeemer.", "whyEs": "Los tres días apuntan a Cristo, nuestro Redentor."}, {"stemEn": "Esther's bravery is best described as:", "stemEs": "La valentía de Ester se describe mejor como:", "optionsEn": ["trusting the king", "never feeling afraid", "reckless boldness", "acting in spite of fear, not the absence of fear"], "optionsEs": ["confiar en el rey", "nunca sentir miedo", "audacia temeraria", "actuar a pesar del miedo, no la ausencia de miedo"], "answer": "D", "whyEn": "Bravery is acting despite real fear.", "whyEs": "La valentía es actuar a pesar del miedo real."}, {"stemEn": "Why does Esther invite the king and Haman to a SECOND banquet?", "stemEs": "¿Por qué invita Ester al rey y a Amán a un SEGUNDO banquete?", "optionsEn": ["she forgot her request", "Haman demanded it", "she patiently waits for God's timing before her request", "the king ordered it"], "optionsEs": ["olvidó su petición", "Amán lo exigió", "espera con paciencia el tiempo de Dios antes de su petición", "el rey lo ordenó"], "answer": "C", "whyEn": "She waits for the right, God-ordained moment.", "whyEs": "Espera el momento justo, ordenado por Dios."}, {"stemEn": "Which 'coincidence' sets up Haman's fall the night before the second banquet?", "stemEs": "¿Cuál 'coincidencia' prepara la caída de Amán la noche antes del segundo banquete?", "optionsEn": ["a prophet warns him", "the sleepless king has the Chronicles read — Mordecai's deed", "Esther confesses", "Haman gets sick"], "optionsEs": ["un profeta le avisa", "el rey insomne manda leer las Crónicas — el acto de Mardoqueo", "Ester confiesa", "Amán enferma"], "answer": "B", "whyEn": "Insomnia + the Chronicles surface Mordecai's unrewarded deed.", "whyEs": "Insomnio + las Crónicas sacan el acto sin recompensa."}, {"stemEn": "When asked how to honor 'a man,' Haman assumes it is himself because of his:", "stemEs": "Cuando se le pregunta cómo honrar a 'un hombre,' Amán asume que es él por su:", "optionsEn": ["pride / ego", "humility", "loyalty", "wisdom"], "optionsEs": ["orgullo / ego", "humildad", "lealtad", "sabiduría"], "answer": "A", "whyEn": "His ego assumes the honor is for him — his downfall.", "whyEs": "Su ego asume que la honra es para él — su ruína."}, {"stemEn": "Haman is forced to honor whom — a 'gut kick' to him?", "stemEs": "¿A quién se ve forzado Amán a honrar — un golpe al estómago para él?", "optionsEn": ["himself", "the king's brother", "a foreign prince", "Mordecai the Jew"], "optionsEs": ["sí mismo", "el hermano del rey", "un príncipe extranjero", "Mardoqueo el judío"], "answer": "D", "whyEn": "He must parade Mordecai in honor — humiliating.", "whyEs": "Debe pasear a Mardoqueo en honor — humillante."}, {"stemEn": "Who finally tell Haman he is doomed for opposing the Jews?", "stemEs": "¿Quiénes finalmente dicen a Amán que está perdido por oponerse a los judíos?", "optionsEn": ["his own pagan wife and friends", "the king", "Mordecai", "the eunuchs"], "optionsEs": ["su propia esposa pagana y sus amigos", "el rey", "Mardoqueo", "los eunucos"], "answer": "A", "whyEn": "His pagan circle says none stands against God's people.", "whyEs": "Su círculo pagano dice que nadie vence al pueblo de Dios."}, {"stemEn": "Haman seals his own fate when the returning king finds him:", "stemEs": "Amán sella su destino cuando el rey, al volver, lo encuentra:", "optionsEn": ["stealing gold", "fleeing the palace", "fallen on the couch at the queen's feet", "drawing a sword"], "optionsEs": ["robando oro", "huyendo del palacio", "caído en el diván a los pies de la reina", "sacando una espada"], "answer": "C", "whyEn": "Within a foot of the queen meant instant death.", "whyEs": "Estar a un pie de la reina era muerte instantánea."}, {"stemEn": "On whose suggestion, and on what, is Haman executed?", "stemEs": "¿Por sugerencia de quién, y en qué, es ejecutado Amán?", "optionsEn": ["the king's guard — by sword", "Harbonah the eunuch — on the gallows Haman built for Mordecai", "the army — in prison", "Esther — by poison"], "optionsEs": ["la guardia — por espada", "Harbona el eunuco — en la horca que Amán hizo para Mardoqueo", "el ejército — en prisión", "Ester — por veneno"], "answer": "B", "whyEn": "Harbonah names the gallows; Haman dies on his own device.", "whyEs": "Harbona nombra la horca; Amán muere en su propio invento."}], SA=[{"promptEn": "Describe Esther's transformation when she learns of the edict.", "promptEs": "Describa la transformación de Ester al enterarse del edicto.", "modelEn": "At first isolated and unaware, Esther 'writhes in agony' — the Hebrew word for childbirth — as the woman of action and destiny is born in her. She moves from reluctance to stepping out in faith, ready to risk death to save her people.", "modelEs": "Al principio aislada e ignorante, Ester 'se retuerce de angustia' — la palabra hebrea del parto — al nacer en ella la mujer de acción y destino. Pasa de la reticencia a actuar por fe, lista para arriesgar la muerte y salvar a su pueblo.", "keywords": {"en": ["isolat", "writhe", "childbirth", "destiny", "action", "faith", "risk", "born"], "es": ["aislad", "retuerce", "parto", "destino", "acción", "fe", "arriesg", "nace"]}}, {"promptEn": "Explain why Esther 4:13-14 are the key verses of the book.", "promptEs": "Explique por qué Ester 4:13-14 son los versos clave del libro.", "modelEn": "Mordecai expresses faith that God will not abandon His covenant people — deliverance will arise even if from elsewhere — and that Esther may have reached royalty 'for such a time as this.' Though God is unnamed, His covenant with Abraham, Isaac, and Jacob is implied.", "modelEs": "Mardoqueo expresa la fe de que Dios no abandonará a su pueblo del pacto — vendrá liberación aunque sea de otra parte — y que Ester quizá llegó a la realeza 'para un tiempo como este.' Aunque Dios no es nombrado, se implica su pacto con Abraham, Isaac y Jacob.", "keywords": {"en": ["mordecai", "covenant", "abandon", "deliver", "such", "time", "abraham", "faith"], "es": ["mardoqueo", "pacto", "abandon", "libera", "tiempo", "como", "abraham", "fe"]}}, {"promptEn": "How does Esther act as a kind of kinsman-redeemer, echoing the Book of Ruth?", "promptEs": "¿Cómo actúa Ester como una especie de pariente redentor, en eco del libro de Rut?", "modelEn": "Esther offers her own life to save her people, answering the call of God rather than her king. Mordecai's warning that her father's house would otherwise be forgotten echoes Ruth, where the kinsman who refused his duty was blotted from memory.", "modelEs": "Ester ofrece su propia vida para salvar a su pueblo, respondiendo al llamado de Dios más que a su rey. La advertencia de Mardoqueo de que su casa sería olvidada hace eco de Rut, donde el pariente que rehusó su deber fue borrado de la memoria.", "keywords": {"en": ["redeemer", "life", "save", "call", "ruth", "refuse", "forgot", "people"], "es": ["redentor", "vida", "salvar", "llamado", "rut", "rehus", "olvid", "pueblo"]}}, {"promptEn": "What does Glenda teach about fasting from the three-day fast?", "promptEs": "¿Qué enseña Glenda sobre el ayuno a partir del ayuno de tres días?", "modelEn": "God commanded fasting only once a year, on the Day of Atonement, where 'afflicting one's soul' meant fasting to reflect on sin and grasp one's place before God. Saints like Moses, David, and Daniel fasted while seeking God, so prayer would naturally accompany it.", "modelEs": "Dios mandó ayunar solo una vez al año, en el Día de la Expiación, donde 'afligir el alma' significaba ayunar para reflexionar sobre el pecado y entender el lugar de uno ante Dios. Santos como Moisés, David y Daniel ayunaron buscando a Dios, por lo que la oración acompañaría el ayuno.", "keywords": {"en": ["fast", "atonement", "afflict", "soul", "sin", "moses", "daniel", "pray"], "es": ["ayun", "expiación", "afligir", "alma", "pecado", "moisés", "daniel", "oración"]}}, {"promptEn": "How do the three days of fasting point to Christ?", "promptEs": "¿Cómo apuntan los tres días de ayuno a Cristo?", "modelEn": "Esther humbled herself and risked death over three days to save her people; Philippians 2:5-8 shows Christ humbling Himself to death for others. The three days of afflicting the soul foreshadow Christ, our great Kinsman-Redeemer — the Old pointing to the New.", "modelEs": "Ester se humilló y arriesgó la muerte durante tres días para salvar a su pueblo; Filipenses 2:5-8 muestra a Cristo humillándose hasta la muerte por otros. Los tres días de afligir el alma prefiguran a Cristo, nuestro gran Pariente Redentor — lo Antiguo apuntando a lo Nuevo.", "keywords": {"en": ["three", "humble", "death", "christ", "philippians", "redeemer", "foreshadow", "save"], "es": ["tres", "humill", "muerte", "cristo", "filipenses", "redentor", "prefigur", "salvar"]}}, {"promptEn": "Trace the chain of 'coincidences' that brings about Haman's downfall.", "promptEs": "Trace la cadena de 'coincidencias' que provoca la caída de Amán.", "modelEn": "Haman meets Mordecai and seethes; builds a gallows; that night the sleepless king has the Chronicles read; the servants read of Mordecai's unrewarded deed; the king resolves to honor him exactly as Haman arrives to ask to hang him. To God's people these are providence, not chance.", "modelEs": "Amán se topa con Mardoqueo y se enfurece; construye una horca; esa noche el rey insomne manda leer las Crónicas; los siervos leen del acto sin recompensa de Mardoqueo; el rey decide honrarlo justo cuando Amán llega a pedir colgarlo. Para el pueblo de Dios esto es providencia, no azar.", "keywords": {"en": ["seethe", "gallows", "sleepless", "chronicle", "honor", "arrive", "providence", "chance"], "es": ["enfurec", "horca", "insomne", "crónica", "honrar", "llega", "providencia", "azar"]}}, {"promptEn": "How does Haman's pride bring about his humiliation?", "promptEs": "¿Cómo provoca el orgullo de Amán su humillación?", "modelEn": "Asked how to honor a man, Haman's ego assumes it is himself and he describes royal treatment — only to be ordered to parade Mordecai the Jew in that honor. He goes home with his head covered in shame; pride goes before the fall.", "modelEs": "Preguntado cómo honrar a un hombre, el ego de Amán asume que es él y describe un trato real — solo para que le ordenen pasear a Mardoqueo el judío en esa honra. Vuelve a casa con la cabeza cubierta de vergüenza; el orgullo precede a la caída.", "keywords": {"en": ["pride", "ego", "honor", "mordecai", "parade", "shame", "cover", "fall"], "es": ["orgullo", "ego", "honra", "mardoqueo", "pasear", "vergüenza", "cubr", "caída"]}}, {"promptEn": "How does Haman seal his own fate at the second banquet?", "promptEs": "¿Cómo sella Amán su propio destino en el segundo banquete?", "modelEn": "Esther exposes him as the enemy who plotted her people's destruction; the enraged king storms out, and returns to find Haman fallen at the queen's feet pleading. Being within a foot of the king's harem meant instant death, and Haman is condemned.", "modelEs": "Ester lo expone como el enemigo que tramó la destrucción de su pueblo; el rey furioso sale, y regresa para hallar a Amán caído a los pies de la reina suplicando. Estar a un pie del harén del rey era muerte instantánea, y Amán es condenado.", "keywords": {"en": ["esther", "expose", "enemy", "enraged", "fallen", "queen", "harem", "death"], "es": ["ester", "expone", "enemigo", "furioso", "caído", "reina", "harén", "muerte"]}}, {"promptEn": "What is the significance of Haman dying on the gallows he built for Mordecai?", "promptEs": "¿Qué significa que Amán muera en la horca que construyó para Mardoqueo?", "modelEn": "Harbonah the eunuch points out the gallows, and the king orders Haman hanged on it. The evil he devised falls back on himself — a striking irony showing God's perfect justice and providence over the whole affair.", "modelEs": "Harbona el eunuco señala la horca, y el rey ordena colgar a Amán en ella. El mal que ideó recae sobre él mismo — una ironía notable que muestra la justicia perfecta y la providencia de Dios sobre todo el asunto.", "keywords": {"en": ["harbonah", "gallows", "hang", "evil", "irony", "justice", "providence", "mordecai"], "es": ["harbona", "horca", "colg", "mal", "ironía", "justicia", "providencia", "mardoqueo"]}}, {"promptEn": "What does Esther's approach to the king teach about coming before God (Hebrews 4:16)?", "promptEs": "¿Qué enseña el acercamiento de Ester al rey sobre venir ante Dios (Hebreos 4:16)?", "modelEn": "Esther approached trembling yet with a right sense of herself before God, humbled by fasting. We may draw near the throne of grace with even greater confidence, clothed in Christ's righteousness and helped by the interceding Spirit — patient for God's timing as she was.", "modelEs": "Ester se acercó temblando pero con un sentido correcto de sí misma ante Dios, humillada por el ayuno. Nosotros podemos acercarnos al trono de la gracia con aún mayor confianza, revestidos de la justicia de Cristo y ayudados por el Espíritu intercesor — pacientes ante el tiempo de Dios como ella.", "keywords": {"en": ["approach", "tremble", "humble", "throne", "grace", "confidence", "christ", "patient"], "es": ["acerc", "tembl", "humill", "trono", "gracia", "confianza", "cristo", "paciente"]}}];
+/* CTSRE — unit 8. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "re",
+ "unit": 8,
+ "totalUnits": 9,
+ "filePrefix": "CTSRE",
+ "prevHref": "CTSREUnit7.html",
+ "nextHref": "CTSREUnit9.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "When the chapter opens, Esther's situation in the palace is that she:",
+    "es": "Al abrir el capítulo, la situación de Ester en el palacio es que ella:"
+   },
+   "options": {
+    "en": [
+     "knew nothing of the edict — isolated and cut off",
+     "had already planned a rescue",
+     "was in hiding",
+     "had fled Susa"
+    ],
+    "es": [
+     "no sabía nada del edicto — aislada y apartada",
+     "ya había planeado un rescate",
+     "estaba escondida",
+     "había huido de Susa"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "She was isolated, unaware of the edict until told.",
+    "es": "Estaba aislada, sin saber del edicto hasta que le avisaron."
+   }
+  },
+  {
+   "stem": {
+    "en": "When Esther learns why Mordecai mourns, she 'writhes in agony' — a Hebrew word for:",
+    "es": "Cuando Ester sabe por qué Mardoqueo se lamenta, 'se retuerce de angustia' — palabra hebrea para:"
+   },
+   "options": {
+    "en": [
+     "physical illness",
+     "royal anger",
+     "the pain and labor of childbirth",
+     "mourning a death"
+    ],
+    "es": [
+     "enfermedad física",
+     "ira real",
+     "el dolor y la labor del parto",
+     "duelo por un muerto"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The word evokes childbirth — a woman of destiny being born.",
+    "es": "La palabra evoca el parto — nace la mujer de destino."
+   }
+  },
+  {
+   "stem": {
+    "en": "How does Mordecai know the exact bribe Haman offered the king?",
+    "es": "¿Cómo sabe Mardoqueo el soborno exacto que Amán ofreció al rey?"
+   },
+   "options": {
+    "en": [
+     "he overheard the banquet",
+     "Esther told him",
+     "Haman boasted to him",
+     "he evidently had friends/contacts in high places"
+    ],
+    "es": [
+     "lo oyó en el banquete",
+     "Ester se lo dijo",
+     "Amán se lo jactó",
+     "evidentemente tenía amigos/contactos en altos cargos"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "His detailed knowledge implies high-level contacts.",
+    "es": "Su conocimiento detallado implica contactos de alto nivel."
+   }
+  },
+  {
+   "stem": {
+    "en": "Esther is reluctant to approach the king because:",
+    "es": "Ester duda en acercarse al rey porque:"
+   },
+   "options": {
+    "en": [
+     "she disliked him",
+     "going unsummoned risked death, and he hadn't called her in 30 days",
+     "Mordecai forbade it",
+     "she feared Haman"
+    ],
+    "es": [
+     "le desagradaba",
+     "ir sin ser llamada arriesgaba la muerte, y no la llamaba en 30 días",
+     "Mardoqueo se lo prohibía",
+     "temía a Amán"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Unsummoned approach meant death; 30 days uncalled.",
+    "es": "Acercarse sin llamado era muerte; 30 días sin ser llamada."
+   }
+  },
+  {
+   "stem": {
+    "en": "Esther 4:13-14 are the key verses because Mordecai expresses faith that:",
+    "es": "Ester 4:13-14 son los versos clave porque Mardoqueo expresa la fe de que:"
+   },
+   "options": {
+    "en": [
+     "God will not abandon His covenant people; deliverance will arise",
+     "the king will relent",
+     "Haman will repent",
+     "the army will refuse"
+    ],
+    "es": [
+     "Dios no abandonará a su pueblo del pacto; vendrá la liberación",
+     "el rey cederá",
+     "Amán se arrepentirá",
+     "el ejército se negará"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "He trusts God's covenant promise of deliverance.",
+    "es": "Confía en la promesa del pacto de liberación."
+   }
+  },
+  {
+   "stem": {
+    "en": "Mordecai's covenant confidence points back to God's promise to:",
+    "es": "La confianza de pacto de Mardoqueo remite a la promesa de Dios a:"
+   },
+   "options": {
+    "en": [
+     "Moses and Aaron",
+     "Abraham, Isaac, and Jacob",
+     "David and Solomon",
+     "Adam and Eve"
+    ],
+    "es": [
+     "Moisés y Aarón",
+     "Abraham, Isaac y Jacob",
+     "David y Salomón",
+     "Adán y Eva"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "'You shall be my people' — the patriarchal covenant.",
+    "es": "'Seréis mi pueblo' — el pacto patriarcal."
+   }
+  },
+  {
+   "stem": {
+    "en": "Mordecai's warning that Esther's house would 'perish / be forgotten' echoes which earlier book?",
+    "es": "La advertencia de que la casa de Ester 'perecería / sería olvidada' hace eco de cuál libro anterior?"
+   },
+   "options": {
+    "en": [
+     "Genesis",
+     "Exodus",
+     "Judges",
+     "Ruth — the kinsman who refused was blotted from memory"
+    ],
+    "es": [
+     "Génesis",
+     "Éxodo",
+     "Jueces",
+     "Rut — el pariente que rehusó fue borrado de la memoria"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Like Ruth's refusing kinsman, forgotten forever.",
+    "es": "Como el pariente que rehusó en Rut, olvidado para siempre."
+   }
+  },
+  {
+   "stem": {
+    "en": "Glenda says Esther offers herself as a kind of kinsman-redeemer by:",
+    "es": "Glenda dice que Ester se ofrece como una especie de pariente redentor al:"
+   },
+   "options": {
+    "en": [
+     "paying a ransom",
+     "buying back land",
+     "risking her life to save her people, answering God's call",
+     "marrying a relative"
+    ],
+    "es": [
+     "pagar un rescate",
+     "recomprar tierra",
+     "arriesgar su vida para salvar a su pueblo, respondiendo al llamado de Dios",
+     "casarse con un pariente"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "She lays down her life for her people — redeemer-like.",
+    "es": "Entrega su vida por su pueblo — como redentora."
+   }
+  },
+  {
+   "stem": {
+    "en": "Esther calls for a fast of:",
+    "es": "Ester convoca un ayuno de:"
+   },
+   "options": {
+    "en": [
+     "forty days",
+     "one day",
+     "seven days",
+     "three days"
+    ],
+    "es": [
+     "cuarenta días",
+     "un día",
+     "siete días",
+     "tres días"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "A three-day fast, she and her maids included.",
+    "es": "Un ayuno de tres días, ella y sus criadas incluidas."
+   }
+  },
+  {
+   "stem": {
+    "en": "God commanded fasting for only one day a year, namely:",
+    "es": "Dios mandó ayunar solo un día al año, a saber:"
+   },
+   "options": {
+    "en": [
+     "Passover",
+     "Pentecost",
+     "the Day of Atonement",
+     "the Sabbath"
+    ],
+    "es": [
+     "la Pascua",
+     "Pentecostés",
+     "el Día de la Expiación",
+     "el sábado"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Leviticus 16 — afflicting the soul on Atonement.",
+    "es": "Levítico 16 — afligir el alma en la Expiación."
+   }
+  },
+  {
+   "stem": {
+    "en": "To 'afflict one's soul' (Leviticus 16) was understood by the Jews to mean:",
+    "es": "'Afligir el alma' (Levítico 16) era entendido por los judíos como:"
+   },
+   "options": {
+    "en": [
+     "to fast",
+     "to sacrifice",
+     "to tithe",
+     "to travel"
+    ],
+    "es": [
+     "ayunar",
+     "sacrificar",
+     "diezmar",
+     "viajar"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Afflicting the soul meant fasting.",
+    "es": "Afligir el alma significaba ayunar."
+   }
+  },
+  {
+   "stem": {
+    "en": "Glenda links the three-day fast and self-humbling to:",
+    "es": "Glenda relaciona el ayuno de tres días y la humillación con:"
+   },
+   "options": {
+    "en": [
+     "the Exodus",
+     "Christ's humiliation and death (Philippians 2:5-8)",
+     "the fall of Babylon",
+     "the flood"
+    ],
+    "es": [
+     "el Éxodo",
+     "la humillación y muerte de Cristo (Filipenses 2:5-8)",
+     "la caída de Babilonia",
+     "el diluvio"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The three days point to Christ, our Kinsman-Redeemer.",
+    "es": "Los tres días apuntan a Cristo, nuestro Redentor."
+   }
+  },
+  {
+   "stem": {
+    "en": "Esther's bravery is best described as:",
+    "es": "La valentía de Ester se describe mejor como:"
+   },
+   "options": {
+    "en": [
+     "trusting the king",
+     "never feeling afraid",
+     "reckless boldness",
+     "acting in spite of fear, not the absence of fear"
+    ],
+    "es": [
+     "confiar en el rey",
+     "nunca sentir miedo",
+     "audacia temeraria",
+     "actuar a pesar del miedo, no la ausencia de miedo"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Bravery is acting despite real fear.",
+    "es": "La valentía es actuar a pesar del miedo real."
+   }
+  },
+  {
+   "stem": {
+    "en": "Why does Esther invite the king and Haman to a SECOND banquet?",
+    "es": "¿Por qué invita Ester al rey y a Amán a un SEGUNDO banquete?"
+   },
+   "options": {
+    "en": [
+     "she forgot her request",
+     "Haman demanded it",
+     "she patiently waits for God's timing before her request",
+     "the king ordered it"
+    ],
+    "es": [
+     "olvidó su petición",
+     "Amán lo exigió",
+     "espera con paciencia el tiempo de Dios antes de su petición",
+     "el rey lo ordenó"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "She waits for the right, God-ordained moment.",
+    "es": "Espera el momento justo, ordenado por Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "Which 'coincidence' sets up Haman's fall the night before the second banquet?",
+    "es": "¿Cuál 'coincidencia' prepara la caída de Amán la noche antes del segundo banquete?"
+   },
+   "options": {
+    "en": [
+     "a prophet warns him",
+     "the sleepless king has the Chronicles read — Mordecai's deed",
+     "Esther confesses",
+     "Haman gets sick"
+    ],
+    "es": [
+     "un profeta le avisa",
+     "el rey insomne manda leer las Crónicas — el acto de Mardoqueo",
+     "Ester confiesa",
+     "Amán enferma"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Insomnia + the Chronicles surface Mordecai's unrewarded deed.",
+    "es": "Insomnio + las Crónicas sacan el acto sin recompensa."
+   }
+  },
+  {
+   "stem": {
+    "en": "When asked how to honor 'a man,' Haman assumes it is himself because of his:",
+    "es": "Cuando se le pregunta cómo honrar a 'un hombre,' Amán asume que es él por su:"
+   },
+   "options": {
+    "en": [
+     "pride / ego",
+     "humility",
+     "loyalty",
+     "wisdom"
+    ],
+    "es": [
+     "orgullo / ego",
+     "humildad",
+     "lealtad",
+     "sabiduría"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "His ego assumes the honor is for him — his downfall.",
+    "es": "Su ego asume que la honra es para él — su ruína."
+   }
+  },
+  {
+   "stem": {
+    "en": "Haman is forced to honor whom — a 'gut kick' to him?",
+    "es": "¿A quién se ve forzado Amán a honrar — un golpe al estómago para él?"
+   },
+   "options": {
+    "en": [
+     "himself",
+     "the king's brother",
+     "a foreign prince",
+     "Mordecai the Jew"
+    ],
+    "es": [
+     "sí mismo",
+     "el hermano del rey",
+     "un príncipe extranjero",
+     "Mardoqueo el judío"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "He must parade Mordecai in honor — humiliating.",
+    "es": "Debe pasear a Mardoqueo en honor — humillante."
+   }
+  },
+  {
+   "stem": {
+    "en": "Who finally tell Haman he is doomed for opposing the Jews?",
+    "es": "¿Quiénes finalmente dicen a Amán que está perdido por oponerse a los judíos?"
+   },
+   "options": {
+    "en": [
+     "his own pagan wife and friends",
+     "the king",
+     "Mordecai",
+     "the eunuchs"
+    ],
+    "es": [
+     "su propia esposa pagana y sus amigos",
+     "el rey",
+     "Mardoqueo",
+     "los eunucos"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "His pagan circle says none stands against God's people.",
+    "es": "Su círculo pagano dice que nadie vence al pueblo de Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "Haman seals his own fate when the returning king finds him:",
+    "es": "Amán sella su destino cuando el rey, al volver, lo encuentra:"
+   },
+   "options": {
+    "en": [
+     "stealing gold",
+     "fleeing the palace",
+     "fallen on the couch at the queen's feet",
+     "drawing a sword"
+    ],
+    "es": [
+     "robando oro",
+     "huyendo del palacio",
+     "caído en el diván a los pies de la reina",
+     "sacando una espada"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Within a foot of the queen meant instant death.",
+    "es": "Estar a un pie de la reina era muerte instantánea."
+   }
+  },
+  {
+   "stem": {
+    "en": "On whose suggestion, and on what, is Haman executed?",
+    "es": "¿Por sugerencia de quién, y en qué, es ejecutado Amán?"
+   },
+   "options": {
+    "en": [
+     "the king's guard — by sword",
+     "Harbonah the eunuch — on the gallows Haman built for Mordecai",
+     "the army — in prison",
+     "Esther — by poison"
+    ],
+    "es": [
+     "la guardia — por espada",
+     "Harbona el eunuco — en la horca que Amán hizo para Mardoqueo",
+     "el ejército — en prisión",
+     "Ester — por veneno"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Harbonah names the gallows; Haman dies on his own device.",
+    "es": "Harbona nombra la horca; Amán muere en su propio invento."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Describe Esther's transformation when she learns of the edict.",
+    "es": "Describa la transformación de Ester al enterarse del edicto."
+   },
+   "keywords": {
+    "en": [
+     "isolat",
+     "writhe",
+     "childbirth",
+     "destiny",
+     "action",
+     "faith",
+     "risk",
+     "born"
+    ],
+    "es": [
+     "aislad",
+     "retuerce",
+     "parto",
+     "destino",
+     "acción",
+     "fe",
+     "arriesg",
+     "nace"
+    ]
+   },
+   "model": {
+    "en": "At first isolated and unaware, Esther 'writhes in agony' — the Hebrew word for childbirth — as the woman of action and destiny is born in her. She moves from reluctance to stepping out in faith, ready to risk death to save her people.",
+    "es": "Al principio aislada e ignorante, Ester 'se retuerce de angustia' — la palabra hebrea del parto — al nacer en ella la mujer de acción y destino. Pasa de la reticencia a actuar por fe, lista para arriesgar la muerte y salvar a su pueblo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain why Esther 4:13-14 are the key verses of the book.",
+    "es": "Explique por qué Ester 4:13-14 son los versos clave del libro."
+   },
+   "keywords": {
+    "en": [
+     "mordecai",
+     "covenant",
+     "abandon",
+     "deliver",
+     "such",
+     "time",
+     "abraham",
+     "faith"
+    ],
+    "es": [
+     "mardoqueo",
+     "pacto",
+     "abandon",
+     "libera",
+     "tiempo",
+     "como",
+     "abraham",
+     "fe"
+    ]
+   },
+   "model": {
+    "en": "Mordecai expresses faith that God will not abandon His covenant people — deliverance will arise even if from elsewhere — and that Esther may have reached royalty 'for such a time as this.' Though God is unnamed, His covenant with Abraham, Isaac, and Jacob is implied.",
+    "es": "Mardoqueo expresa la fe de que Dios no abandonará a su pueblo del pacto — vendrá liberación aunque sea de otra parte — y que Ester quizá llegó a la realeza 'para un tiempo como este.' Aunque Dios no es nombrado, se implica su pacto con Abraham, Isaac y Jacob."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How does Esther act as a kind of kinsman-redeemer, echoing the Book of Ruth?",
+    "es": "¿Cómo actúa Ester como una especie de pariente redentor, en eco del libro de Rut?"
+   },
+   "keywords": {
+    "en": [
+     "redeemer",
+     "life",
+     "save",
+     "call",
+     "ruth",
+     "refuse",
+     "forgot",
+     "people"
+    ],
+    "es": [
+     "redentor",
+     "vida",
+     "salvar",
+     "llamado",
+     "rut",
+     "rehus",
+     "olvid",
+     "pueblo"
+    ]
+   },
+   "model": {
+    "en": "Esther offers her own life to save her people, answering the call of God rather than her king. Mordecai's warning that her father's house would otherwise be forgotten echoes Ruth, where the kinsman who refused his duty was blotted from memory.",
+    "es": "Ester ofrece su propia vida para salvar a su pueblo, respondiendo al llamado de Dios más que a su rey. La advertencia de Mardoqueo de que su casa sería olvidada hace eco de Rut, donde el pariente que rehusó su deber fue borrado de la memoria."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does Glenda teach about fasting from the three-day fast?",
+    "es": "¿Qué enseña Glenda sobre el ayuno a partir del ayuno de tres días?"
+   },
+   "keywords": {
+    "en": [
+     "fast",
+     "atonement",
+     "afflict",
+     "soul",
+     "sin",
+     "moses",
+     "daniel",
+     "pray"
+    ],
+    "es": [
+     "ayun",
+     "expiación",
+     "afligir",
+     "alma",
+     "pecado",
+     "moisés",
+     "daniel",
+     "oración"
+    ]
+   },
+   "model": {
+    "en": "God commanded fasting only once a year, on the Day of Atonement, where 'afflicting one's soul' meant fasting to reflect on sin and grasp one's place before God. Saints like Moses, David, and Daniel fasted while seeking God, so prayer would naturally accompany it.",
+    "es": "Dios mandó ayunar solo una vez al año, en el Día de la Expiación, donde 'afligir el alma' significaba ayunar para reflexionar sobre el pecado y entender el lugar de uno ante Dios. Santos como Moisés, David y Daniel ayunaron buscando a Dios, por lo que la oración acompañaría el ayuno."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How do the three days of fasting point to Christ?",
+    "es": "¿Cómo apuntan los tres días de ayuno a Cristo?"
+   },
+   "keywords": {
+    "en": [
+     "three",
+     "humble",
+     "death",
+     "christ",
+     "philippians",
+     "redeemer",
+     "foreshadow",
+     "save"
+    ],
+    "es": [
+     "tres",
+     "humill",
+     "muerte",
+     "cristo",
+     "filipenses",
+     "redentor",
+     "prefigur",
+     "salvar"
+    ]
+   },
+   "model": {
+    "en": "Esther humbled herself and risked death over three days to save her people; Philippians 2:5-8 shows Christ humbling Himself to death for others. The three days of afflicting the soul foreshadow Christ, our great Kinsman-Redeemer — the Old pointing to the New.",
+    "es": "Ester se humilló y arriesgó la muerte durante tres días para salvar a su pueblo; Filipenses 2:5-8 muestra a Cristo humillándose hasta la muerte por otros. Los tres días de afligir el alma prefiguran a Cristo, nuestro gran Pariente Redentor — lo Antiguo apuntando a lo Nuevo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Trace the chain of 'coincidences' that brings about Haman's downfall.",
+    "es": "Trace la cadena de 'coincidencias' que provoca la caída de Amán."
+   },
+   "keywords": {
+    "en": [
+     "seethe",
+     "gallows",
+     "sleepless",
+     "chronicle",
+     "honor",
+     "arrive",
+     "providence",
+     "chance"
+    ],
+    "es": [
+     "enfurec",
+     "horca",
+     "insomne",
+     "crónica",
+     "honrar",
+     "llega",
+     "providencia",
+     "azar"
+    ]
+   },
+   "model": {
+    "en": "Haman meets Mordecai and seethes; builds a gallows; that night the sleepless king has the Chronicles read; the servants read of Mordecai's unrewarded deed; the king resolves to honor him exactly as Haman arrives to ask to hang him. To God's people these are providence, not chance.",
+    "es": "Amán se topa con Mardoqueo y se enfurece; construye una horca; esa noche el rey insomne manda leer las Crónicas; los siervos leen del acto sin recompensa de Mardoqueo; el rey decide honrarlo justo cuando Amán llega a pedir colgarlo. Para el pueblo de Dios esto es providencia, no azar."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How does Haman's pride bring about his humiliation?",
+    "es": "¿Cómo provoca el orgullo de Amán su humillación?"
+   },
+   "keywords": {
+    "en": [
+     "pride",
+     "ego",
+     "honor",
+     "mordecai",
+     "parade",
+     "shame",
+     "cover",
+     "fall"
+    ],
+    "es": [
+     "orgullo",
+     "ego",
+     "honra",
+     "mardoqueo",
+     "pasear",
+     "vergüenza",
+     "cubr",
+     "caída"
+    ]
+   },
+   "model": {
+    "en": "Asked how to honor a man, Haman's ego assumes it is himself and he describes royal treatment — only to be ordered to parade Mordecai the Jew in that honor. He goes home with his head covered in shame; pride goes before the fall.",
+    "es": "Preguntado cómo honrar a un hombre, el ego de Amán asume que es él y describe un trato real — solo para que le ordenen pasear a Mardoqueo el judío en esa honra. Vuelve a casa con la cabeza cubierta de vergüenza; el orgullo precede a la caída."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How does Haman seal his own fate at the second banquet?",
+    "es": "¿Cómo sella Amán su propio destino en el segundo banquete?"
+   },
+   "keywords": {
+    "en": [
+     "esther",
+     "expose",
+     "enemy",
+     "enraged",
+     "fallen",
+     "queen",
+     "harem",
+     "death"
+    ],
+    "es": [
+     "ester",
+     "expone",
+     "enemigo",
+     "furioso",
+     "caído",
+     "reina",
+     "harén",
+     "muerte"
+    ]
+   },
+   "model": {
+    "en": "Esther exposes him as the enemy who plotted her people's destruction; the enraged king storms out, and returns to find Haman fallen at the queen's feet pleading. Being within a foot of the king's harem meant instant death, and Haman is condemned.",
+    "es": "Ester lo expone como el enemigo que tramó la destrucción de su pueblo; el rey furioso sale, y regresa para hallar a Amán caído a los pies de la reina suplicando. Estar a un pie del harén del rey era muerte instantánea, y Amán es condenado."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What is the significance of Haman dying on the gallows he built for Mordecai?",
+    "es": "¿Qué significa que Amán muera en la horca que construyó para Mardoqueo?"
+   },
+   "keywords": {
+    "en": [
+     "harbonah",
+     "gallows",
+     "hang",
+     "evil",
+     "irony",
+     "justice",
+     "providence",
+     "mordecai"
+    ],
+    "es": [
+     "harbona",
+     "horca",
+     "colg",
+     "mal",
+     "ironía",
+     "justicia",
+     "providencia",
+     "mardoqueo"
+    ]
+   },
+   "model": {
+    "en": "Harbonah the eunuch points out the gallows, and the king orders Haman hanged on it. The evil he devised falls back on himself — a striking irony showing God's perfect justice and providence over the whole affair.",
+    "es": "Harbona el eunuco señala la horca, y el rey ordena colgar a Amán en ella. El mal que ideó recae sobre él mismo — una ironía notable que muestra la justicia perfecta y la providencia de Dios sobre todo el asunto."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does Esther's approach to the king teach about coming before God (Hebrews 4:16)?",
+    "es": "¿Qué enseña el acercamiento de Ester al rey sobre venir ante Dios (Hebreos 4:16)?"
+   },
+   "keywords": {
+    "en": [
+     "approach",
+     "tremble",
+     "humble",
+     "throne",
+     "grace",
+     "confidence",
+     "christ",
+     "patient"
+    ],
+    "es": [
+     "acerc",
+     "tembl",
+     "humill",
+     "trono",
+     "gracia",
+     "confianza",
+     "cristo",
+     "paciente"
+    ]
+   },
+   "model": {
+    "en": "Esther approached trembling yet with a right sense of herself before God, humbled by fasting. We may draw near the throne of grace with even greater confidence, clothed in Christ's righteousness and helped by the interceding Spirit — patient for God's timing as she was.",
+    "es": "Ester se acercó temblando pero con un sentido correcto de sí misma ante Dios, humillada por el ayuno. Nosotros podemos acercarnos al trono de la gracia con aún mayor confianza, revestidos de la justicia de Cristo y ayudados por el Espíritu intercesor — pacientes ante el tiempo de Dios como ella."
+   }
+  }
+ ]
+};

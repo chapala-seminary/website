@@ -1,43 +1,833 @@
-/* CTSHS - unit 2: per-unit configuration and content. */
-
-const UNIT = 2;
-
-var CFG={course:'hs',unit:2,totalUnits:10,progressKey:'cts_hs_progress',
-  next:'CTSHSUnit3.html',cert:'CTSHSCertificate.html',lockKey:`cts_hs_u${UNIT}_lock`,showReg:false};
-
-var DATA={"mc": [{"en": "The most basic misunderstanding of the Holy Spirit is to treat Him as:", "es": "La mala comprensión más básica del Espíritu Santo es tratarlo como:", "oen": ["the only true God", "a thing or force rather than a Person", "a created angel", "the Father Himself"], "oes": ["el único Dios verdadero", "una cosa o fuerza y no una Persona", "un ángel creado", "el Padre mismo"], "c": 22, "xen": "He is a Person, not an impersonal something.", "xes": "Es una Persona, no un algo impersonal."}, {"en": "The Bible describes the Spirit not as an “it” but as:", "es": "La Biblia describe al Espíritu no como un “ello” sino como:", "oen": ["a holy emotion", "a written law", "a sacred place", "a “He” — a Person"], "oes": ["una emoción santa", "una ley escrita", "un lugar sagrado", "un “Él” — una Persona"], "c": 31, "xen": "Not an it, but a He.", "xes": "No un ello, sino un Él."}, {"en": "Older English usage that can mislead refers to the Spirit as:", "es": "El uso antiguo del idioma que puede confundir se refiere al Espíritu como:", "oen": ["the Comforter", "the Spirit of truth", "the “Holy Ghost” or “it”", "the Helper"], "oes": ["el Consolador", "el Espíritu de verdad", "el “Santo Fantasma” o “ello”", "el Ayudador"], "c": 37, "xen": "“Ghost” or “it” can suggest an impersonal something.", "xes": "“Fantasma” o “ello” puede sugerir un algo impersonal."}, {"en": "The four marks of the Spirit's personhood given in this unit are:", "es": "Las cuatro marcas de la personalidad del Espíritu que da esta unidad son:", "oen": ["a name, a mind, a heart, and a will", "power, signs, tongues, and healing", "past, present, future, and eternity", "wind, fire, water, and oil"], "oes": ["un nombre, una mente, un corazón, y una voluntad", "poder, señales, lenguas, y sanidad", "pasado, presente, futuro, y eternidad", "viento, fuego, agua, y aceite"], "c": 42, "xen": "Name, mind, heart, will.", "xes": "Nombre, mente, corazón, voluntad."}, {"en": "The Spirit's name is set beside the names of God and Christ in the command to baptize, found in:", "es": "El nombre del Espíritu se pone junto a los nombres de Dios y de Cristo en el mandato de bautizar, hallado en:", "oen": ["Romans 8:26", "Matthew 28:19", "Acts 13:2", "Isaiah 63:10"], "oes": ["Romanos 8:26", "Mateo 28:19", "Hechos 13:2", "Isaías 63:10"], "c": 50, "xen": "Matthew 28:19 — His name among the great names.", "xes": "Mateo 28:19 — su nombre entre los grandes nombres."}, {"en": "That Jesus said to baptize in the “name” (singular) of the three shows:", "es": "Que Jesús dijo bautizar en el “nombre” (singular) de los tres muestra:", "oen": ["the Spirit is only a title", "there are three separate gods", "one name is shared, and the Spirit is fully a Person within it", "the Spirit is the least of the three"], "oes": ["el Espíritu es solo un título", "hay tres dioses separados", "un solo nombre es compartido, y el Espíritu es plenamente Persona en él", "el Espíritu es el menor de los tres"], "c": 58, "xen": "One name, shared by three Persons.", "xes": "Un nombre, compartido por tres Personas."}, {"en": "“He will teach you all things, and bring to your remembrance all things that I said to you” is from:", "es": "“Él os enseñará todas las cosas, y os recordará todo lo que os he dicho” es de:", "oen": ["John 3:16", "Psalm 23:1", "1 Corinthians 13:1", "John 14:26"], "oes": ["Juan 3:16", "Salmo 23:1", "1 Corintios 13:1", "Juan 14:26"], "c": 66, "xen": "John 14:26 — He teaches and reminds.", "xes": "Juan 14:26 — enseña y recuerda."}, {"en": "“The Spirit searches all things, yes, the deep things of God” is from:", "es": "“El Espíritu todo lo escudriña, aun lo profundo de Dios” es de:", "oen": ["1 Corinthians 2:10", "Matthew 28:19", "Romans 12:6", "Genesis 1:2"], "oes": ["1 Corintios 2:10", "Mateo 28:19", "Romanos 12:6", "Génesis 1:2"], "c": 70, "xen": "1 Corinthians 2:10 — He searches the deep things of God.", "xes": "1 Corintios 2:10 — escudriña lo profundo de Dios."}, {"en": "That the Spirit teaches, guides, hears, and speaks proves He has:", "es": "Que el Espíritu enseña, guía, oye, y habla prueba que tiene:", "oen": ["a limited presence", "a physical body", "a beginning in time", "a mind — intelligence"], "oes": ["una presencia limitada", "un cuerpo físico", "un principio en el tiempo", "una mente — inteligencia"], "c": 80, "xen": "Teaching and searching are works of a mind.", "xes": "Enseñar y escudriñar son obras de una mente."}, {"en": "“Do not grieve the Holy Spirit of God, by whom you were sealed for the day of redemption” is from:", "es": "“No contristéis al Espíritu Santo de Dios, con el cual estáis sellados para el día de la redención” es de:", "oen": ["Acts 16:7", "John 16:13", "Ephesians 4:30", "1 Corinthians 12:11"], "oes": ["Hechos 16:7", "Juan 16:13", "Efesios 4:30", "1 Corintios 12:11"], "c": 86, "xen": "Ephesians 4:30 — He can be grieved.", "xes": "Efesios 4:30 — puede ser contristado."}, {"en": "That the Spirit can be “grieved” shows He has:", "es": "Que el Espíritu puede ser “contristado” muestra que tiene:", "oen": ["a temper to be feared", "a heart — the capacity to feel", "no concern for sin", "a changing nature"], "oes": ["un temperamento que temer", "un corazón — la capacidad de sentir", "ningún interés por el pecado", "una naturaleza cambiante"], "c": 92, "xen": "Grieve is a love word — only a person can be grieved.", "xes": "Contristar es palabra de amor — solo una persona puede ser contristada."}, {"en": "“The Spirit makes intercession for us with groanings which cannot be uttered” is from:", "es": "“El Espíritu intercede por nosotros con gemidos indecibles” es de:", "oen": ["Romans 8:26", "Acts 15:28", "John 14:16", "Matthew 3:16"], "oes": ["Romanos 8:26", "Hechos 15:28", "Juan 14:16", "Mateo 3:16"], "c": 98, "xen": "Romans 8:26 — He intercedes with groanings.", "xes": "Romanos 8:26 — intercede con gemidos."}, {"en": "The Old Testament also says that rebellious Israel “grieved His Holy Spirit” in:", "es": "El Antiguo Testamento también dice que el Israel rebelde “hizo enojar su santo Espíritu” en:", "oen": ["Psalm 23:1", "Genesis 1:2", "Deuteronomy 6:4", "Isaiah 63:10"], "oes": ["Salmo 23:1", "Génesis 1:2", "Deuteronomio 6:4", "Isaías 63:10"], "c": 108, "xen": "Isaiah 63:10 — the Spirit grieved even in the OT.", "xes": "Isaías 63:10 — el Espíritu contristado aun en el AT."}, {"en": "“Distributing to each one individually as He wills” (of spiritual gifts) is from:", "es": "“Repartiendo a cada uno en particular como Él quiere” (de los dones) es de:", "oen": ["1 Corinthians 12:11", "John 15:26", "Isaiah 63:10", "Ephesians 4:30"], "oes": ["1 Corintios 12:11", "Juan 15:26", "Isaías 63:10", "Efesios 4:30"], "c": 112, "xen": "1 Corinthians 12:11 — He gives gifts as He wills.", "xes": "1 Corintios 12:11 — da dones como Él quiere."}, {"en": "On Paul's journey the Spirit forbade preaching in Asia and did not permit them to enter:", "es": "En el viaje de Pablo, el Espíritu prohibió predicar en Asia y no les permitió entrar en:", "oen": ["Antioch", "Jerusalem", "Bithynia (Acts 16:6–7)", "Corinth"], "oes": ["Antioquía", "Jerusalén", "Bitinia (Hechos 16:6–7)", "Corinto"], "c": 121, "xen": "Acts 16:6–7 — the Spirit directs Paul's steps.", "xes": "Hechos 16:6–7 — el Espíritu dirige los pasos de Pablo."}, {"en": "“The Holy Spirit said, ‘Now separate to Me Barnabas and Saul for the work to which I have called them’” is from:", "es": "“El Espíritu Santo dijo: Apartadme a Bernabé y a Saulo para la obra a que los he llamado” es de:", "oen": ["Acts 5:4", "Acts 13:2", "Matthew 28:19", "Romans 8:14"], "oes": ["Hechos 5:4", "Hechos 13:2", "Mateo 28:19", "Romanos 8:14"], "c": 127, "xen": "Acts 13:2 — He speaks, claims, and calls.", "xes": "Hechos 13:2 — habla, reclama, y llama."}, {"en": "“It seemed good to the Holy Spirit, and to us” (the Jerusalem council) is from:", "es": "“Ha parecido bien al Espíritu Santo, y a nosotros” (el concilio de Jerusalén) es de:", "oen": ["1 Corinthians 2:10", "Acts 2:38", "John 16:13", "Acts 15:28"], "oes": ["1 Corintios 2:10", "Hechos 2:38", "Juan 16:13", "Hechos 15:28"], "c": 136, "xen": "Acts 15:28 — He deliberates and decides.", "xes": "Hechos 15:28 — delibera y decide."}, {"en": "That the Spirit forbids, permits, calls, and decides proves He has:", "es": "Que el Espíritu prohíbe, permite, llama, y decide prueba que tiene:", "oen": ["a body", "a limit", "a will", "a beginning"], "oes": ["un cuerpo", "un límite", "una voluntad", "un principio"], "c": 142, "xen": "Choosing and forbidding are acts of a will.", "xes": "Escoger y prohibir son actos de una voluntad."}, {"en": "The word “another” in “another Helper” shows the Spirit is:", "es": "La palabra “otro” en “otro Consolador” muestra que el Espíritu es:", "oen": ["another of the very same kind as Christ — a Person", "an impersonal power", "a lesser kind of being", "a temporary gift"], "oes": ["otro de la mismísima clase que Cristo — una Persona", "un poder impersonal", "un ser de clase inferior", "un don temporal"], "c": 147, "xen": "Same kind as the Son, who is a Person.", "xes": "De la misma clase que el Hijo, que es una Persona."}, {"en": "Because the Spirit is a Person, the Christian life with Him is:", "es": "Porque el Espíritu es una Persona, la vida cristiana con Él es:", "oen": ["a set of rules to keep", "a relationship, not a technique for using Him", "a feeling to chase", "a power to switch on and off"], "oes": ["un conjunto de reglas que guardar", "una relación, no una técnica para usarlo", "un sentimiento que perseguir", "un poder para encender y apagar"], "c": 155, "xen": "We yield to Him; we do not use Him.", "xes": "Nos entregamos a Él; no lo usamos."}], "sa": [{"en": "What basic misunderstanding about the Holy Spirit does this unit correct, and why does it matter?", "es": "¿Qué mala comprensión básica acerca del Espíritu Santo corrige esta unidad, y por qué importa?", "men": "It corrects the mistake of treating the Spirit as an impersonal force or influence, an “it,” rather than as a Person, a “He.” It matters because you cannot love, obey, grieve, or follow a force; only a Person can be known. The whole Christian life with the Spirit depends on this.", "mes": "Corrige el error de tratar al Espíritu como una fuerza o influencia impersonal, un “ello,” y no como una Persona, un “Él.” Importa porque no se puede amar, obedecer, contristar ni seguir a una fuerza; solo a una Persona se le puede conocer. Toda la vida cristiana con el Espíritu depende de esto.", "ken": ["person", "force", "influenc", "spirit", "matter", "know", "obey", "griev"], "kes": ["person", "fuerza", "influ", "espiritu", "import", "conoc", "obedec", "contrist"]}, {"en": "How does the Spirit's name show that He is a Person?", "es": "¿Cómo muestra el nombre del Espíritu que Él es una Persona?", "men": "In baptism His name is set beside the names of God and of Christ: in the name of the Father, the Son, and the Holy Spirit. We would never join a mere influence to those two great names. And the name is singular, one name shared by three, showing the Spirit is fully a Person within it.", "mes": "En el bautismo su nombre se pone junto a los nombres de Dios y de Cristo: en el nombre del Padre, del Hijo, y del Espíritu Santo. Jamás uniríamos una mera influencia a esos dos grandes nombres. Y el nombre es singular, un solo nombre compartido por tres, mostrando que el Espíritu es plenamente Persona en él.", "ken": ["name", "baptism", "father", "christ", "person", "spirit", "influenc", "singular"], "kes": ["nombre", "bautismo", "padre", "cristo", "person", "espiritu", "influ", "singular"]}, {"en": "How does the Spirit's intelligence show that He is a Person?", "es": "¿Cómo muestra la inteligencia del Espíritu que Él es una Persona?", "men": "The Spirit teaches and reminds, guides into truth, hears and speaks, and even searches the deep things of God. A force cannot teach or remember or search; these are the works of a mind. Because the Spirit thinks, knows, and makes known, He must be a Person.", "mes": "El Espíritu enseña y recuerda, guía a la verdad, oye y habla, y aun escudriña lo profundo de Dios. Una fuerza no puede enseñar ni recordar ni escudriñar; estas son obras de una mente. Porque el Espíritu piensa, conoce, y da a conocer, tiene que ser una Persona.", "ken": ["teach", "guid", "search", "mind", "spirit", "person", "know", "speak"], "kes": ["ensen", "guia", "escudri", "mente", "espiritu", "person", "conoc", "habla"]}, {"en": "How do the Spirit's emotions show that He is a Person?", "es": "¿Cómo muestran las emociones del Espíritu que Él es una Persona?", "men": "The Spirit can be grieved, for Scripture says, do not grieve the Holy Spirit; grieve is a love word, the wounding of a heart that cares. He also intercedes for us with groanings that cannot be uttered. A force cannot be sorrowful, so One who can be grieved and who intercedes must be a Person.", "mes": "El Espíritu puede ser contristado, pues la Escritura dice: no contristéis al Espíritu Santo; contristar es palabra de amor, la herida de un corazón que ama. También intercede por nosotros con gemidos indecibles. Una fuerza no puede entristecerse, así que Uno que puede ser contristado y que intercede tiene que ser una Persona.", "ken": ["griev", "heart", "interced", "groan", "spirit", "person", "feel", "love"], "kes": ["contrist", "corazon", "interced", "gemido", "espiritu", "person", "heri", "amor"]}, {"en": "How does the Spirit's will show that He is a Person?", "es": "¿Cómo muestra la voluntad del Espíritu que Él es una Persona?", "men": "The Spirit distributes spiritual gifts to each one as He wills, He forbade Paul to preach in Asia and did not permit him to enter Bithynia, and He said to set apart Barnabas and Saul for the work. A force cannot choose or forbid or call; only a Person with a will can direct His servants this way.", "mes": "El Espíritu reparte los dones a cada uno como Él quiere, prohibió a Pablo predicar en Asia y no le permitió entrar en Bitinia, y dijo que apartaran a Bernabé y a Saulo para la obra. Una fuerza no puede escoger ni prohibir ni llamar; solo una Persona con voluntad puede dirigir así a sus siervos.", "ken": ["will", "forbid", "permit", "call", "spirit", "person", "gift", "direct"], "kes": ["voluntad", "prohib", "permit", "llam", "espiritu", "person", "repart", "dirig"]}, {"en": "Explain how the word “another” (in “another Helper”) supports the Spirit's personhood.", "es": "Explique cómo la palabra “otro” (en “otro Consolador”) apoya la personalidad del Espíritu.", "men": "Jesus called the Spirit another Helper, choosing the word for another of the very same kind. The One the Spirit is said to be just like is Christ Himself, who is plainly a Person. So if the Helper is the same kind as the Son, the Helper is a Person too, the Spirit of Christ.", "mes": "Jesús llamó al Espíritu otro Consolador, escogiendo la palabra para otro de la mismísima clase. Aquel a quien se dice que el Espíritu es igual es Cristo mismo, que es claramente una Persona. Así que si el Consolador es de la misma clase que el Hijo, el Consolador es también una Persona, el Espíritu de Cristo.", "ken": ["another", "same", "kind", "helper", "christ", "person", "spirit", "son"], "kes": ["otro", "misma", "clase", "consolad", "cristo", "person", "espiritu", "hijo"]}, {"en": "Why does it matter in practice that the Spirit is a Person and not a force?", "es": "¿Por qué importa en la práctica que el Espíritu sea una Persona y no una fuerza?", "men": "Because how we think of Him shapes how we treat Him. If He were a force we would try to use Him, switching His power on and off like a machine. But a Person is known, not managed; so the Christian life is a relationship. We yield to Him, obey Him, and follow where He leads.", "mes": "Porque el modo en que pensamos de Él moldea el modo en que lo tratamos. Si fuera una fuerza trataríamos de usarlo, encendiendo y apagando su poder como una máquina. Pero a una Persona se le conoce, no se le maneja; así que la vida cristiana es una relación. Nos entregamos a Él, lo obedecemos, y seguimos a donde guía.", "ken": ["person", "force", "use", "machine", "relation", "yield", "obey", "follow"], "kes": ["person", "fuerza", "usa", "maquina", "relacion", "entreg", "obedec", "segui"]}, {"en": "What is wrong with thinking of the Holy Spirit as merely a power to be used?", "es": "¿Qué hay de malo en pensar en el Espíritu Santo como un mero poder para usar?", "men": "It denies that He has a name, a mind, a heart, and a will, reducing a Person to a thing. It turns a relationship into a technique, as if we could harness His power while ignoring His Person. That is unbiblical; the Spirit asks to be obeyed and loved, not operated like a machine.", "mes": "Niega que Él tenga nombre, mente, corazón, y voluntad, reduciendo a una Persona a una cosa. Convierte una relación en una técnica, como si pudiéramos aprovechar su poder mientras pasamos por alto su Persona. Eso es antibíblico; el Espíritu pide ser obedecido y amado, no operado como una máquina.", "ken": ["person", "power", "thing", "relation", "techni", "ignor", "spirit", "machine"], "kes": ["person", "poder", "cosa", "relacion", "tecnic", "pasa", "espiritu", "maquina"]}, {"en": "List the four marks of personhood this unit gives for the Holy Spirit.", "es": "Enumere las cuatro marcas de personalidad que da esta unidad para el Espíritu Santo.", "men": "The four marks are: a name, set beside the Father and the Son; a mind, since He teaches and searches; a heart, since He can be grieved and intercedes; and a will, since He forbids, calls, and gives gifts as He chooses.", "mes": "Las cuatro marcas son: un nombre, puesto junto al Padre y al Hijo; una mente, pues enseña y escudriña; un corazón, pues puede ser contristado e intercede; y una voluntad, pues prohíbe, llama, y da dones como escoge.", "ken": ["name", "mind", "heart", "will", "teach", "griev", "forbid", "person"], "kes": ["nombre", "mente", "corazon", "voluntad", "ensen", "contrist", "prohib", "person"]}, {"en": "Give two evidences that the Holy Spirit is a Person and not an impersonal influence.", "es": "Dé dos evidencias de que el Espíritu Santo es una Persona y no una influencia impersonal.", "men": "First, He has a mind: He teaches, guides, and searches the deep things of God. Second, He has a will: He distributes gifts as He wills and forbade Paul to go where he intended. A mere influence can neither teach nor choose; both are the acts of a Person.", "mes": "Primera, tiene mente: enseña, guía, y escudriña lo profundo de Dios. Segunda, tiene voluntad: reparte los dones como Él quiere y prohibió a Pablo ir a donde pretendía. Una mera influencia no puede enseñar ni escoger; ambas son actos de una Persona.", "ken": ["mind", "teach", "search", "will", "forbid", "person", "influenc", "spirit"], "kes": ["mente", "ensen", "escudri", "voluntad", "prohib", "person", "influ", "espiritu"]}]};
-
-var I18N={
- en:{title:'The Doctrine of the Holy Spirit',unit:`Unit ${UNIT} &middot; The Personality of the Spirit`,lang:'Espa\u00f1ol',
-   mc:'Multiple Choice',sa:'Short Answer',greet:function(n){return n?('Student: '+n):'';},
-   track:function(t){return t==='cert'?'Certificate track':t==='mdiv'?'M.Div. track':'Th.M. track';},
-   saNoteCert:'On the Certificate track the short answers are practice and do not count toward passing \u2014 but study each model answer.',
-   saNoteMast:'On the masters tracks you must pass at least 7 of 10 short answers (3 of 8 keywords each).',
-   check:'Check answer',already:'Answered',model:'Model answer \u2014 study this',
-   pass:'Pass \u2014 you engaged the material ('+''+')',blank:'Please write your answer first.',minLen:'Please write your own answer first (at least 100 characters), then check it against the model answer below.',
-   complete:`Mark Unit ${UNIT} complete`,
-   epigraph:'“The Helper, the Holy Spirit… He will teach you all things.” — John 14:26',
-   mGood:`Unit ${UNIT} complete. Well done — continue to Unit ${UNIT + 1}.`,
-   mShort:'Keep going \u2014 review the material and try again.',
-   nextTxt:`Continue to Unit ${UNIT + 1} →`,
-   mh:'Welcome to The Doctrine of the Holy Spirit',mp:'Please register once. Your name and track carry across every CTS course on this site.',
-   mnl:'Your name',mtl:'Track',mgo:'Begin',
-   hitFmt:function(h){return h+' of 8 keywords';},
-   passV:'Pass',softV:'Practice noted'},
- es:{title:'La Doctrina del Esp\u00edritu Santo',unit:`Unidad ${UNIT} &middot; La Personalidad del Espíritu`,lang:'English',
-   mc:'Opci\u00f3n m\u00faltiple',sa:'Respuesta breve',greet:function(n){return n?('Estudiante: '+n):'';},
-   track:function(t){return t==='cert'?'Pista de Certificado':t==='mdiv'?'Pista de M.Div.':'Pista de Th.M.';},
-   saNoteCert:'En la pista de Certificado las respuestas breves son pr\u00e1ctica y no cuentan para aprobar, pero estudie cada respuesta modelo.',
-   saNoteMast:'En las pistas de maestr\u00eda debe aprobar al menos 7 de 10 respuestas breves (3 de 8 palabras clave cada una).',
-   check:'Revisar respuesta',already:'Respondida',model:'Respuesta modelo \u2014 est\u00fadiela',
-   pass:'',blank:'Por favor escriba su respuesta primero.',minLen:'Escriba primero su propia respuesta (al menos 100 caracteres), luego compárela con la respuesta modelo abajo.',
-   complete:`Marcar la Unidad ${UNIT} como completa`,
-   epigraph:'“El Consolador, el Espíritu Santo… él os enseñará todas las cosas.” — Juan 14:26',
-   mGood:`Unidad ${UNIT} completa. Bien hecho — continúe a la Unidad ${UNIT + 1}.`,
-   mShort:'Siga adelante \u2014 repase el material e int\u00e9ntelo de nuevo.',
-   nextTxt:`Continuar a la Unidad ${UNIT + 1} →`,
-   mh:'Bienvenido a La Doctrina del Esp\u00edritu Santo',mp:'Reg\u00edstrese una sola vez. Su nombre y pista se conservan en todos los cursos CTS de este sitio.',
-   mnl:'Su nombre',mtl:'Pista',mgo:'Comenzar',
-   hitFmt:function(h){return h+' de 8 palabras clave';},
-   passV:'Aprobada',softV:'Pr\u00e1ctica registrada'}
+/* CTSHS — unit 2. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "hs",
+ "unit": 2,
+ "totalUnits": 10,
+ "filePrefix": "CTSHS",
+ "prevHref": "CTSHSUnit1.html",
+ "nextHref": "CTSHSUnit3.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "The most basic misunderstanding of the Holy Spirit is to treat Him as:",
+    "es": "La mala comprensión más básica del Espíritu Santo es tratarlo como:"
+   },
+   "options": {
+    "en": [
+     "the only true God",
+     "a thing or force rather than a Person",
+     "a created angel",
+     "the Father Himself"
+    ],
+    "es": [
+     "el único Dios verdadero",
+     "una cosa o fuerza y no una Persona",
+     "un ángel creado",
+     "el Padre mismo"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "He is a Person, not an impersonal something.",
+    "es": "Es una Persona, no un algo impersonal."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Bible describes the Spirit not as an “it” but as:",
+    "es": "La Biblia describe al Espíritu no como un “ello” sino como:"
+   },
+   "options": {
+    "en": [
+     "a holy emotion",
+     "a written law",
+     "a sacred place",
+     "a “He” — a Person"
+    ],
+    "es": [
+     "una emoción santa",
+     "una ley escrita",
+     "un lugar sagrado",
+     "un “Él” — una Persona"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Not an it, but a He.",
+    "es": "No un ello, sino un Él."
+   }
+  },
+  {
+   "stem": {
+    "en": "Older English usage that can mislead refers to the Spirit as:",
+    "es": "El uso antiguo del idioma que puede confundir se refiere al Espíritu como:"
+   },
+   "options": {
+    "en": [
+     "the Comforter",
+     "the Spirit of truth",
+     "the “Holy Ghost” or “it”",
+     "the Helper"
+    ],
+    "es": [
+     "el Consolador",
+     "el Espíritu de verdad",
+     "el “Santo Fantasma” o “ello”",
+     "el Ayudador"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "“Ghost” or “it” can suggest an impersonal something.",
+    "es": "“Fantasma” o “ello” puede sugerir un algo impersonal."
+   }
+  },
+  {
+   "stem": {
+    "en": "The four marks of the Spirit's personhood given in this unit are:",
+    "es": "Las cuatro marcas de la personalidad del Espíritu que da esta unidad son:"
+   },
+   "options": {
+    "en": [
+     "a name, a mind, a heart, and a will",
+     "power, signs, tongues, and healing",
+     "past, present, future, and eternity",
+     "wind, fire, water, and oil"
+    ],
+    "es": [
+     "un nombre, una mente, un corazón, y una voluntad",
+     "poder, señales, lenguas, y sanidad",
+     "pasado, presente, futuro, y eternidad",
+     "viento, fuego, agua, y aceite"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Name, mind, heart, will.",
+    "es": "Nombre, mente, corazón, voluntad."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Spirit's name is set beside the names of God and Christ in the command to baptize, found in:",
+    "es": "El nombre del Espíritu se pone junto a los nombres de Dios y de Cristo en el mandato de bautizar, hallado en:"
+   },
+   "options": {
+    "en": [
+     "Romans 8:26",
+     "Matthew 28:19",
+     "Acts 13:2",
+     "Isaiah 63:10"
+    ],
+    "es": [
+     "Romanos 8:26",
+     "Mateo 28:19",
+     "Hechos 13:2",
+     "Isaías 63:10"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Matthew 28:19 — His name among the great names.",
+    "es": "Mateo 28:19 — su nombre entre los grandes nombres."
+   }
+  },
+  {
+   "stem": {
+    "en": "That Jesus said to baptize in the “name” (singular) of the three shows:",
+    "es": "Que Jesús dijo bautizar en el “nombre” (singular) de los tres muestra:"
+   },
+   "options": {
+    "en": [
+     "the Spirit is only a title",
+     "there are three separate gods",
+     "one name is shared, and the Spirit is fully a Person within it",
+     "the Spirit is the least of the three"
+    ],
+    "es": [
+     "el Espíritu es solo un título",
+     "hay tres dioses separados",
+     "un solo nombre es compartido, y el Espíritu es plenamente Persona en él",
+     "el Espíritu es el menor de los tres"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "One name, shared by three Persons.",
+    "es": "Un nombre, compartido por tres Personas."
+   }
+  },
+  {
+   "stem": {
+    "en": "“He will teach you all things, and bring to your remembrance all things that I said to you” is from:",
+    "es": "“Él os enseñará todas las cosas, y os recordará todo lo que os he dicho” es de:"
+   },
+   "options": {
+    "en": [
+     "John 3:16",
+     "Psalm 23:1",
+     "1 Corinthians 13:1",
+     "John 14:26"
+    ],
+    "es": [
+     "Juan 3:16",
+     "Salmo 23:1",
+     "1 Corintios 13:1",
+     "Juan 14:26"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "John 14:26 — He teaches and reminds.",
+    "es": "Juan 14:26 — enseña y recuerda."
+   }
+  },
+  {
+   "stem": {
+    "en": "“The Spirit searches all things, yes, the deep things of God” is from:",
+    "es": "“El Espíritu todo lo escudriña, aun lo profundo de Dios” es de:"
+   },
+   "options": {
+    "en": [
+     "1 Corinthians 2:10",
+     "Matthew 28:19",
+     "Romans 12:6",
+     "Genesis 1:2"
+    ],
+    "es": [
+     "1 Corintios 2:10",
+     "Mateo 28:19",
+     "Romanos 12:6",
+     "Génesis 1:2"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "1 Corinthians 2:10 — He searches the deep things of God.",
+    "es": "1 Corintios 2:10 — escudriña lo profundo de Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "That the Spirit teaches, guides, hears, and speaks proves He has:",
+    "es": "Que el Espíritu enseña, guía, oye, y habla prueba que tiene:"
+   },
+   "options": {
+    "en": [
+     "a limited presence",
+     "a physical body",
+     "a beginning in time",
+     "a mind — intelligence"
+    ],
+    "es": [
+     "una presencia limitada",
+     "un cuerpo físico",
+     "un principio en el tiempo",
+     "una mente — inteligencia"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Teaching and searching are works of a mind.",
+    "es": "Enseñar y escudriñar son obras de una mente."
+   }
+  },
+  {
+   "stem": {
+    "en": "“Do not grieve the Holy Spirit of God, by whom you were sealed for the day of redemption” is from:",
+    "es": "“No contristéis al Espíritu Santo de Dios, con el cual estáis sellados para el día de la redención” es de:"
+   },
+   "options": {
+    "en": [
+     "Acts 16:7",
+     "John 16:13",
+     "Ephesians 4:30",
+     "1 Corinthians 12:11"
+    ],
+    "es": [
+     "Hechos 16:7",
+     "Juan 16:13",
+     "Efesios 4:30",
+     "1 Corintios 12:11"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Ephesians 4:30 — He can be grieved.",
+    "es": "Efesios 4:30 — puede ser contristado."
+   }
+  },
+  {
+   "stem": {
+    "en": "That the Spirit can be “grieved” shows He has:",
+    "es": "Que el Espíritu puede ser “contristado” muestra que tiene:"
+   },
+   "options": {
+    "en": [
+     "a temper to be feared",
+     "a heart — the capacity to feel",
+     "no concern for sin",
+     "a changing nature"
+    ],
+    "es": [
+     "un temperamento que temer",
+     "un corazón — la capacidad de sentir",
+     "ningún interés por el pecado",
+     "una naturaleza cambiante"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Grieve is a love word — only a person can be grieved.",
+    "es": "Contristar es palabra de amor — solo una persona puede ser contristada."
+   }
+  },
+  {
+   "stem": {
+    "en": "“The Spirit makes intercession for us with groanings which cannot be uttered” is from:",
+    "es": "“El Espíritu intercede por nosotros con gemidos indecibles” es de:"
+   },
+   "options": {
+    "en": [
+     "Romans 8:26",
+     "Acts 15:28",
+     "John 14:16",
+     "Matthew 3:16"
+    ],
+    "es": [
+     "Romanos 8:26",
+     "Hechos 15:28",
+     "Juan 14:16",
+     "Mateo 3:16"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Romans 8:26 — He intercedes with groanings.",
+    "es": "Romanos 8:26 — intercede con gemidos."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Old Testament also says that rebellious Israel “grieved His Holy Spirit” in:",
+    "es": "El Antiguo Testamento también dice que el Israel rebelde “hizo enojar su santo Espíritu” en:"
+   },
+   "options": {
+    "en": [
+     "Psalm 23:1",
+     "Genesis 1:2",
+     "Deuteronomy 6:4",
+     "Isaiah 63:10"
+    ],
+    "es": [
+     "Salmo 23:1",
+     "Génesis 1:2",
+     "Deuteronomio 6:4",
+     "Isaías 63:10"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Isaiah 63:10 — the Spirit grieved even in the OT.",
+    "es": "Isaías 63:10 — el Espíritu contristado aun en el AT."
+   }
+  },
+  {
+   "stem": {
+    "en": "“Distributing to each one individually as He wills” (of spiritual gifts) is from:",
+    "es": "“Repartiendo a cada uno en particular como Él quiere” (de los dones) es de:"
+   },
+   "options": {
+    "en": [
+     "1 Corinthians 12:11",
+     "John 15:26",
+     "Isaiah 63:10",
+     "Ephesians 4:30"
+    ],
+    "es": [
+     "1 Corintios 12:11",
+     "Juan 15:26",
+     "Isaías 63:10",
+     "Efesios 4:30"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "1 Corinthians 12:11 — He gives gifts as He wills.",
+    "es": "1 Corintios 12:11 — da dones como Él quiere."
+   }
+  },
+  {
+   "stem": {
+    "en": "On Paul's journey the Spirit forbade preaching in Asia and did not permit them to enter:",
+    "es": "En el viaje de Pablo, el Espíritu prohibió predicar en Asia y no les permitió entrar en:"
+   },
+   "options": {
+    "en": [
+     "Antioch",
+     "Jerusalem",
+     "Bithynia (Acts 16:6–7)",
+     "Corinth"
+    ],
+    "es": [
+     "Antioquía",
+     "Jerusalén",
+     "Bitinia (Hechos 16:6–7)",
+     "Corinto"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Acts 16:6–7 — the Spirit directs Paul's steps.",
+    "es": "Hechos 16:6–7 — el Espíritu dirige los pasos de Pablo."
+   }
+  },
+  {
+   "stem": {
+    "en": "“The Holy Spirit said, ‘Now separate to Me Barnabas and Saul for the work to which I have called them’” is from:",
+    "es": "“El Espíritu Santo dijo: Apartadme a Bernabé y a Saulo para la obra a que los he llamado” es de:"
+   },
+   "options": {
+    "en": [
+     "Acts 5:4",
+     "Acts 13:2",
+     "Matthew 28:19",
+     "Romans 8:14"
+    ],
+    "es": [
+     "Hechos 5:4",
+     "Hechos 13:2",
+     "Mateo 28:19",
+     "Romanos 8:14"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Acts 13:2 — He speaks, claims, and calls.",
+    "es": "Hechos 13:2 — habla, reclama, y llama."
+   }
+  },
+  {
+   "stem": {
+    "en": "“It seemed good to the Holy Spirit, and to us” (the Jerusalem council) is from:",
+    "es": "“Ha parecido bien al Espíritu Santo, y a nosotros” (el concilio de Jerusalén) es de:"
+   },
+   "options": {
+    "en": [
+     "1 Corinthians 2:10",
+     "Acts 2:38",
+     "John 16:13",
+     "Acts 15:28"
+    ],
+    "es": [
+     "1 Corintios 2:10",
+     "Hechos 2:38",
+     "Juan 16:13",
+     "Hechos 15:28"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Acts 15:28 — He deliberates and decides.",
+    "es": "Hechos 15:28 — delibera y decide."
+   }
+  },
+  {
+   "stem": {
+    "en": "That the Spirit forbids, permits, calls, and decides proves He has:",
+    "es": "Que el Espíritu prohíbe, permite, llama, y decide prueba que tiene:"
+   },
+   "options": {
+    "en": [
+     "a body",
+     "a limit",
+     "a will",
+     "a beginning"
+    ],
+    "es": [
+     "un cuerpo",
+     "un límite",
+     "una voluntad",
+     "un principio"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Choosing and forbidding are acts of a will.",
+    "es": "Escoger y prohibir son actos de una voluntad."
+   }
+  },
+  {
+   "stem": {
+    "en": "The word “another” in “another Helper” shows the Spirit is:",
+    "es": "La palabra “otro” en “otro Consolador” muestra que el Espíritu es:"
+   },
+   "options": {
+    "en": [
+     "another of the very same kind as Christ — a Person",
+     "an impersonal power",
+     "a lesser kind of being",
+     "a temporary gift"
+    ],
+    "es": [
+     "otro de la mismísima clase que Cristo — una Persona",
+     "un poder impersonal",
+     "un ser de clase inferior",
+     "un don temporal"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Same kind as the Son, who is a Person.",
+    "es": "De la misma clase que el Hijo, que es una Persona."
+   }
+  },
+  {
+   "stem": {
+    "en": "Because the Spirit is a Person, the Christian life with Him is:",
+    "es": "Porque el Espíritu es una Persona, la vida cristiana con Él es:"
+   },
+   "options": {
+    "en": [
+     "a set of rules to keep",
+     "a relationship, not a technique for using Him",
+     "a feeling to chase",
+     "a power to switch on and off"
+    ],
+    "es": [
+     "un conjunto de reglas que guardar",
+     "una relación, no una técnica para usarlo",
+     "un sentimiento que perseguir",
+     "un poder para encender y apagar"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "We yield to Him; we do not use Him.",
+    "es": "Nos entregamos a Él; no lo usamos."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "What basic misunderstanding about the Holy Spirit does this unit correct, and why does it matter?",
+    "es": "¿Qué mala comprensión básica acerca del Espíritu Santo corrige esta unidad, y por qué importa?"
+   },
+   "keywords": {
+    "en": [
+     "person",
+     "force",
+     "influenc",
+     "spirit",
+     "matter",
+     "know",
+     "obey",
+     "griev"
+    ],
+    "es": [
+     "person",
+     "fuerza",
+     "influ",
+     "espiritu",
+     "import",
+     "conoc",
+     "obedec",
+     "contrist"
+    ]
+   },
+   "model": {
+    "en": "It corrects the mistake of treating the Spirit as an impersonal force or influence, an “it,” rather than as a Person, a “He.” It matters because you cannot love, obey, grieve, or follow a force; only a Person can be known. The whole Christian life with the Spirit depends on this.",
+    "es": "Corrige el error de tratar al Espíritu como una fuerza o influencia impersonal, un “ello,” y no como una Persona, un “Él.” Importa porque no se puede amar, obedecer, contristar ni seguir a una fuerza; solo a una Persona se le puede conocer. Toda la vida cristiana con el Espíritu depende de esto."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How does the Spirit's name show that He is a Person?",
+    "es": "¿Cómo muestra el nombre del Espíritu que Él es una Persona?"
+   },
+   "keywords": {
+    "en": [
+     "name",
+     "baptism",
+     "father",
+     "christ",
+     "person",
+     "spirit",
+     "influenc",
+     "singular"
+    ],
+    "es": [
+     "nombre",
+     "bautismo",
+     "padre",
+     "cristo",
+     "person",
+     "espiritu",
+     "influ",
+     "singular"
+    ]
+   },
+   "model": {
+    "en": "In baptism His name is set beside the names of God and of Christ: in the name of the Father, the Son, and the Holy Spirit. We would never join a mere influence to those two great names. And the name is singular, one name shared by three, showing the Spirit is fully a Person within it.",
+    "es": "En el bautismo su nombre se pone junto a los nombres de Dios y de Cristo: en el nombre del Padre, del Hijo, y del Espíritu Santo. Jamás uniríamos una mera influencia a esos dos grandes nombres. Y el nombre es singular, un solo nombre compartido por tres, mostrando que el Espíritu es plenamente Persona en él."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How does the Spirit's intelligence show that He is a Person?",
+    "es": "¿Cómo muestra la inteligencia del Espíritu que Él es una Persona?"
+   },
+   "keywords": {
+    "en": [
+     "teach",
+     "guid",
+     "search",
+     "mind",
+     "spirit",
+     "person",
+     "know",
+     "speak"
+    ],
+    "es": [
+     "ensen",
+     "guia",
+     "escudri",
+     "mente",
+     "espiritu",
+     "person",
+     "conoc",
+     "habla"
+    ]
+   },
+   "model": {
+    "en": "The Spirit teaches and reminds, guides into truth, hears and speaks, and even searches the deep things of God. A force cannot teach or remember or search; these are the works of a mind. Because the Spirit thinks, knows, and makes known, He must be a Person.",
+    "es": "El Espíritu enseña y recuerda, guía a la verdad, oye y habla, y aun escudriña lo profundo de Dios. Una fuerza no puede enseñar ni recordar ni escudriñar; estas son obras de una mente. Porque el Espíritu piensa, conoce, y da a conocer, tiene que ser una Persona."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How do the Spirit's emotions show that He is a Person?",
+    "es": "¿Cómo muestran las emociones del Espíritu que Él es una Persona?"
+   },
+   "keywords": {
+    "en": [
+     "griev",
+     "heart",
+     "interced",
+     "groan",
+     "spirit",
+     "person",
+     "feel",
+     "love"
+    ],
+    "es": [
+     "contrist",
+     "corazon",
+     "interced",
+     "gemido",
+     "espiritu",
+     "person",
+     "heri",
+     "amor"
+    ]
+   },
+   "model": {
+    "en": "The Spirit can be grieved, for Scripture says, do not grieve the Holy Spirit; grieve is a love word, the wounding of a heart that cares. He also intercedes for us with groanings that cannot be uttered. A force cannot be sorrowful, so One who can be grieved and who intercedes must be a Person.",
+    "es": "El Espíritu puede ser contristado, pues la Escritura dice: no contristéis al Espíritu Santo; contristar es palabra de amor, la herida de un corazón que ama. También intercede por nosotros con gemidos indecibles. Una fuerza no puede entristecerse, así que Uno que puede ser contristado y que intercede tiene que ser una Persona."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How does the Spirit's will show that He is a Person?",
+    "es": "¿Cómo muestra la voluntad del Espíritu que Él es una Persona?"
+   },
+   "keywords": {
+    "en": [
+     "will",
+     "forbid",
+     "permit",
+     "call",
+     "spirit",
+     "person",
+     "gift",
+     "direct"
+    ],
+    "es": [
+     "voluntad",
+     "prohib",
+     "permit",
+     "llam",
+     "espiritu",
+     "person",
+     "repart",
+     "dirig"
+    ]
+   },
+   "model": {
+    "en": "The Spirit distributes spiritual gifts to each one as He wills, He forbade Paul to preach in Asia and did not permit him to enter Bithynia, and He said to set apart Barnabas and Saul for the work. A force cannot choose or forbid or call; only a Person with a will can direct His servants this way.",
+    "es": "El Espíritu reparte los dones a cada uno como Él quiere, prohibió a Pablo predicar en Asia y no le permitió entrar en Bitinia, y dijo que apartaran a Bernabé y a Saulo para la obra. Una fuerza no puede escoger ni prohibir ni llamar; solo una Persona con voluntad puede dirigir así a sus siervos."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain how the word “another” (in “another Helper”) supports the Spirit's personhood.",
+    "es": "Explique cómo la palabra “otro” (en “otro Consolador”) apoya la personalidad del Espíritu."
+   },
+   "keywords": {
+    "en": [
+     "another",
+     "same",
+     "kind",
+     "helper",
+     "christ",
+     "person",
+     "spirit",
+     "son"
+    ],
+    "es": [
+     "otro",
+     "misma",
+     "clase",
+     "consolad",
+     "cristo",
+     "person",
+     "espiritu",
+     "hijo"
+    ]
+   },
+   "model": {
+    "en": "Jesus called the Spirit another Helper, choosing the word for another of the very same kind. The One the Spirit is said to be just like is Christ Himself, who is plainly a Person. So if the Helper is the same kind as the Son, the Helper is a Person too, the Spirit of Christ.",
+    "es": "Jesús llamó al Espíritu otro Consolador, escogiendo la palabra para otro de la mismísima clase. Aquel a quien se dice que el Espíritu es igual es Cristo mismo, que es claramente una Persona. Así que si el Consolador es de la misma clase que el Hijo, el Consolador es también una Persona, el Espíritu de Cristo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why does it matter in practice that the Spirit is a Person and not a force?",
+    "es": "¿Por qué importa en la práctica que el Espíritu sea una Persona y no una fuerza?"
+   },
+   "keywords": {
+    "en": [
+     "person",
+     "force",
+     "use",
+     "machine",
+     "relation",
+     "yield",
+     "obey",
+     "follow"
+    ],
+    "es": [
+     "person",
+     "fuerza",
+     "usa",
+     "maquina",
+     "relacion",
+     "entreg",
+     "obedec",
+     "segui"
+    ]
+   },
+   "model": {
+    "en": "Because how we think of Him shapes how we treat Him. If He were a force we would try to use Him, switching His power on and off like a machine. But a Person is known, not managed; so the Christian life is a relationship. We yield to Him, obey Him, and follow where He leads.",
+    "es": "Porque el modo en que pensamos de Él moldea el modo en que lo tratamos. Si fuera una fuerza trataríamos de usarlo, encendiendo y apagando su poder como una máquina. Pero a una Persona se le conoce, no se le maneja; así que la vida cristiana es una relación. Nos entregamos a Él, lo obedecemos, y seguimos a donde guía."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What is wrong with thinking of the Holy Spirit as merely a power to be used?",
+    "es": "¿Qué hay de malo en pensar en el Espíritu Santo como un mero poder para usar?"
+   },
+   "keywords": {
+    "en": [
+     "person",
+     "power",
+     "thing",
+     "relation",
+     "techni",
+     "ignor",
+     "spirit",
+     "machine"
+    ],
+    "es": [
+     "person",
+     "poder",
+     "cosa",
+     "relacion",
+     "tecnic",
+     "pasa",
+     "espiritu",
+     "maquina"
+    ]
+   },
+   "model": {
+    "en": "It denies that He has a name, a mind, a heart, and a will, reducing a Person to a thing. It turns a relationship into a technique, as if we could harness His power while ignoring His Person. That is unbiblical; the Spirit asks to be obeyed and loved, not operated like a machine.",
+    "es": "Niega que Él tenga nombre, mente, corazón, y voluntad, reduciendo a una Persona a una cosa. Convierte una relación en una técnica, como si pudiéramos aprovechar su poder mientras pasamos por alto su Persona. Eso es antibíblico; el Espíritu pide ser obedecido y amado, no operado como una máquina."
+   }
+  },
+  {
+   "prompt": {
+    "en": "List the four marks of personhood this unit gives for the Holy Spirit.",
+    "es": "Enumere las cuatro marcas de personalidad que da esta unidad para el Espíritu Santo."
+   },
+   "keywords": {
+    "en": [
+     "name",
+     "mind",
+     "heart",
+     "will",
+     "teach",
+     "griev",
+     "forbid",
+     "person"
+    ],
+    "es": [
+     "nombre",
+     "mente",
+     "corazon",
+     "voluntad",
+     "ensen",
+     "contrist",
+     "prohib",
+     "person"
+    ]
+   },
+   "model": {
+    "en": "The four marks are: a name, set beside the Father and the Son; a mind, since He teaches and searches; a heart, since He can be grieved and intercedes; and a will, since He forbids, calls, and gives gifts as He chooses.",
+    "es": "Las cuatro marcas son: un nombre, puesto junto al Padre y al Hijo; una mente, pues enseña y escudriña; un corazón, pues puede ser contristado e intercede; y una voluntad, pues prohíbe, llama, y da dones como escoge."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Give two evidences that the Holy Spirit is a Person and not an impersonal influence.",
+    "es": "Dé dos evidencias de que el Espíritu Santo es una Persona y no una influencia impersonal."
+   },
+   "keywords": {
+    "en": [
+     "mind",
+     "teach",
+     "search",
+     "will",
+     "forbid",
+     "person",
+     "influenc",
+     "spirit"
+    ],
+    "es": [
+     "mente",
+     "ensen",
+     "escudri",
+     "voluntad",
+     "prohib",
+     "person",
+     "influ",
+     "espiritu"
+    ]
+   },
+   "model": {
+    "en": "First, He has a mind: He teaches, guides, and searches the deep things of God. Second, He has a will: He distributes gifts as He wills and forbade Paul to go where he intended. A mere influence can neither teach nor choose; both are the acts of a Person.",
+    "es": "Primera, tiene mente: enseña, guía, y escudriña lo profundo de Dios. Segunda, tiene voluntad: reparte los dones como Él quiere y prohibió a Pablo ir a donde pretendía. Una mera influencia no puede enseñar ni escoger; ambas son actos de una Persona."
+   }
+  }
+ ]
 };

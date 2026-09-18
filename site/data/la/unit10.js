@@ -1,0 +1,1027 @@
+/* CTSLA — unit 10. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "la",
+ "unit": 10,
+ "totalUnits": 11,
+ "filePrefix": "CTSLA",
+ "prevHref": "CTSLAUnit9.html",
+ "nextHref": "CTSLAUnit11.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "Who compiled Strong's Exhaustive Concordance of the Bible, and in what year was it first published?",
+    "es": "&iquest;Qui&eacute;n compil&oacute; la Concordancia Exhaustiva de Strong de la Biblia, y en qu&eacute; a&ntilde;o fue publicada por primera vez?"
+   },
+   "options": {
+    "en": [
+     "James Strong, professor at Drew Theological Seminary, published in 1890 after twenty-seven years of work",
+     "Alexander Cruden, a London printer, published in 1737",
+     "William Tyndale, the English martyr, published in 1525",
+     "Joseph Thayer, professor at Harvard, published in 1886"
+    ],
+    "es": [
+     "James Strong, profesor del Seminario Teol&oacute;gico Drew, publicada en 1890 tras veintisiete a&ntilde;os de trabajo",
+     "Alexander Cruden, un impresor de Londres, publicada en 1737",
+     "William Tyndale, el m&aacute;rtir ingl&eacute;s, publicada en 1525",
+     "Joseph Thayer, profesor en Harvard, publicada en 1886"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "James Strong (1822&ndash;1894) was professor of Hebrew and Greek at Drew Theological Seminary in New Jersey. He began compiling his concordance in 1863, recruited over 100 volunteer assistants, and saw it through twenty-seven years of work to publication in 1890. The resulting volume listed every English word of the KJV with the Hebrew or Greek word behind it, each numbered uniquely. The seminary went into the hand of the layman.",
+    "es": "James Strong (1822&ndash;1894) era profesor de hebreo y griego en el Seminario Teol&oacute;gico Drew en Nueva Jersey. Comenz&oacute; a compilar su concordancia en 1863, reclut&oacute; m&aacute;s de 100 asistentes voluntarios, y la sac&oacute; adelante a trav&eacute;s de veintisiete a&ntilde;os de trabajo hasta la publicaci&oacute;n en 1890. El volumen resultante listaba cada palabra inglesa de la KJV con la palabra hebrea o griega detr&aacute;s de ella, cada una numerada de manera &uacute;nica. El seminario pas&oacute; a la mano del laico."
+   }
+  },
+  {
+   "stem": {
+    "en": "What range of numbers does Strong's assign to Hebrew words, and what range to Greek words?",
+    "es": "&iquest;Qu&eacute; rango de n&uacute;meros asigna Strong a las palabras hebreas, y qu&eacute; rango a las palabras griegas?"
+   },
+   "options": {
+    "en": [
+     "Hebrew 1&ndash;1000, Greek 1&ndash;1000 &mdash; both capped at one thousand",
+     "Hebrew and Greek share one number sequence from 1 to 13000",
+     "Hebrew H1&ndash;H8674 and Greek G1&ndash;G5624",
+     "Hebrew H1&ndash;H10000 and Greek G1&ndash;G10000 &mdash; both rounded to ten thousand"
+    ],
+    "es": [
+     "Hebreo 1&ndash;1000, Griego 1&ndash;1000 &mdash; ambos limitados a mil",
+     "Hebreo y griego comparten una secuencia num&eacute;rica del 1 al 13000",
+     "Hebreo H1&ndash;H8674 y Griego G1&ndash;G5624",
+     "Hebreo H1&ndash;H10000 y Griego G1&ndash;G10000 &mdash; ambos redondeados a diez mil"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Strong's Hebrew dictionary runs from H1 (av, 'father') to H8674. The Greek dictionary runs from G1 (Alpha) to G5624. The H or G prefix tells you which language. So G3056 is logos, G4982 is s&ocirc;z&ocirc;, G2962 is kyrios, G1343 is dikaiosyn&ecirc;, G4102 is pistis. Every Hebrew and Greek word in the Bible has a unique number.",
+    "es": "El diccionario hebreo de Strong va de H1 (av, «padre») a H8674. El diccionario griego va de G1 (Alfa) a G5624. El prefijo H o G te dice qu&eacute; idioma. As&iacute; G3056 es logos, G4982 es s&ocirc;z&ocirc;, G2962 es kyrios, G1343 es dikaiosyn&ecirc;, G4102 es pistis. Cada palabra hebrea y griega en la Biblia tiene un n&uacute;mero &uacute;nico."
+   }
+  },
+  {
+   "stem": {
+    "en": "James Strong's work is part of a centuries-long line of efforts to give the Bible to the ordinary believer. Which of the following figures DOES NOT belong to that line?",
+    "es": "El trabajo de James Strong es parte de una l&iacute;nea de siglos de esfuerzos para dar la Biblia al creyente ordinario. &iquest;Cu&aacute;l de las siguientes figuras NO pertenece a esa l&iacute;nea?"
+   },
+   "options": {
+    "en": [
+     "John Wycliffe (1380s, first complete English Bible)",
+     "William Tyndale (1520s, first printed English NT; martyred 1536)",
+     "Alexander Cruden (1737, first major English concordance)",
+     "Genghis Khan (1200s, Mongol emperor)"
+    ],
+    "es": [
+     "Juan Wycliffe (1380s, primera Biblia completa en ingl&eacute;s)",
+     "William Tyndale (1520s, primer NT impreso en ingl&eacute;s; martirizado 1536)",
+     "Alexander Cruden (1737, primera concordancia inglesa importante)",
+     "Genghis Kan (1200s, emperador mongol)"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Wycliffe, Tyndale, and Cruden all worked to put Scripture or scriptural tools in the hand of the common believer. Strong's 1890 concordance stands in that same democratizing tradition. Genghis Khan, while historically remarkable, did not contribute to making Scripture accessible.",
+    "es": "Wycliffe, Tyndale, y Cruden todos trabajaron para poner la Escritura o las herramientas escriturales en la mano del creyente com&uacute;n. La concordancia de Strong de 1890 est&aacute; en esa misma tradici&oacute;n democratizadora. Genghis Kan, aunque hist&oacute;ricamente notable, no contribuy&oacute; a hacer la Escritura accesible."
+   }
+  },
+  {
+   "stem": {
+    "en": "In our unit scripture, 2 Timothy 2:15, what does the Greek word spoudaz&ocirc; (Strong's G4704, translated 'study' in the KJV) actually mean?",
+    "es": "En nuestra escritura, 2 Timoteo 2:15, &iquest;qu&eacute; significa realmente la palabra griega spoudaz&ocirc; (n&uacute;mero de Strong G4704, traducida «procura con diligencia»)?"
+   },
+   "options": {
+    "en": [
+     "To memorize verses by rote",
+     "To read silently in a library",
+     "To attend formal academic classes",
+     "To be diligent, to give earnest effort, to work hard at handling the Word"
+    ],
+    "es": [
+     "Memorizar vers&iacute;culos de memoria",
+     "Leer en silencio en una biblioteca",
+     "Asistir a clases acad&eacute;micas formales",
+     "Ser diligente, dar esfuerzo serio, trabajar duro en el manejo de la Palabra"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Spoudaz&ocirc; means 'be diligent, make every effort, hasten, work hard.' The English 'study' has narrowed in modern usage to 'reading at a desk,' but the Greek is more active &mdash; Paul is commanding Timothy to work hard at being a workman with the Word. Strong's numbers immediately put this nuance in your hand.",
+    "es": "Spoudaz&ocirc; significa «ser diligente, hacer todo esfuerzo, apresurarse, trabajar duro». El espa&ntilde;ol «procura con diligencia» captura mejor el sentido que el ingl&eacute;s «study». Pablo le est&aacute; mandando a Timoteo trabajar duro en ser un obrero con la Palabra. Los n&uacute;meros de Strong inmediatamente ponen este matiz en tu mano."
+   }
+  },
+  {
+   "stem": {
+    "en": "In 2 Timothy 2:15 the phrase 'rightly dividing' translates the Greek orthotome&ocirc; (Strong's G3718). What is the literal meaning of this Greek verb?",
+    "es": "En 2 Timoteo 2:15 la frase «trazar bien» traduce el griego orthotome&ocirc; (n&uacute;mero de Strong G3718). &iquest;Cu&aacute;l es el significado literal de este verbo griego?"
+   },
+   "options": {
+    "en": [
+     "To pray quietly",
+     "To cut straight, like a stonemason cutting a stone or a tailor cutting cloth",
+     "To memorize entire chapters",
+     "To debate publicly"
+    ],
+    "es": [
+     "Orar en silencio",
+     "Cortar derecho, como un albanil cortando una piedra o un sastre cortando tela",
+     "Memorizar cap&iacute;tulos enteros",
+     "Debatir p&uacute;blicamente"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Orthotome&ocirc; is built from orthos ('straight') + tom&ecirc; ('cut'). It means literally 'to cut straight,' a workman's image. Paul is telling Timothy to handle Scripture the way a craftsman cuts stone or fabric &mdash; with clean, intentional, accurate work. Strong's gives you this image instantly; the English 'rightly dividing' is good but loses the craftsman picture.",
+    "es": "Orthotome&ocirc; est&aacute; construido de orthos («derecho») + tom&ecirc; («corte»). Significa literalmente «cortar derecho», una imagen de obrero. Pablo le est&aacute; diciendo a Timoteo que maneje la Escritura como un artesano corta la piedra o la tela &mdash; con trabajo limpio, intencional, preciso. Strong te da esta imagen al instante; el espa&ntilde;ol «trazar bien» es bueno pero pierde la figura del artesano."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is the four-step lookup process for using a paper Strong's concordance?",
+    "es": "&iquest;Cu&aacute;l es el proceso de cuatro pasos para usar una concordancia Strong en papel?"
+   },
+   "options": {
+    "en": [
+     "Find your verse in the main concordance under a meaningful word; locate your verse in that word's list; note the Strong's number; flip to the Hebrew or Greek dictionary at the back to read the lexical entry",
+     "Recite the Apostles' Creed, then sing a hymn, then read your verse, then pray",
+     "Memorize the Hebrew alphabet, then the Greek alphabet, then translate the verse word-by-word",
+     "Email a seminary professor and wait for him to respond with the Greek meaning"
+    ],
+    "es": [
+     "Encuentra tu vers&iacute;culo en la concordancia principal bajo una palabra significativa; localiza tu vers&iacute;culo en la lista de esa palabra; nota el n&uacute;mero de Strong; voltea al diccionario hebreo o griego al final para leer la entrada l&eacute;xica",
+     "Recita el Credo de los Ap&oacute;stoles, luego canta un himno, luego lee tu vers&iacute;culo, luego ora",
+     "Memoriza el alfabeto hebreo, luego el griego, luego traduce el vers&iacute;culo palabra por palabra",
+     "Env&iacute;a un correo a un profesor de seminario y espera a que responda con el significado griego"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The four steps: (1) find your verse in the main alphabetical concordance under a meaningful word, (2) locate your specific verse in the list of occurrences, (3) note the Strong's number printed beside it, (4) flip to the Hebrew or Greek dictionary at the back and read the lexical entry. Once you know the rhythm, the whole process takes about ninety seconds on paper, ten seconds on a phone.",
+    "es": "Los cuatro pasos: (1) encuentra tu vers&iacute;culo en la concordancia alfab&eacute;tica principal bajo una palabra significativa, (2) localiza tu vers&iacute;culo espec&iacute;fico en la lista de ocurrencias, (3) nota el n&uacute;mero de Strong impreso junto a &eacute;l, (4) voltea al diccionario hebreo o griego al final y lee la entrada l&eacute;xica. Una vez que conoces el ritmo, todo el proceso toma unos noventa segundos en papel, diez segundos en un tel&eacute;fono."
+   }
+  },
+  {
+   "stem": {
+    "en": "In John 3:16 ('For God so loved the world'), the English word 'loved' has Strong's number G25. To which Greek word does this number point?",
+    "es": "En Juan 3:16 («Porque de tal manera am&oacute; Dios al mundo»), la palabra «am&oacute;» tiene el n&uacute;mero de Strong G25. &iquest;A qu&eacute; palabra griega apunta este n&uacute;mero?"
+   },
+   "options": {
+    "en": [
+     "phile&ocirc; &mdash; the love of friendship between equals",
+     "er&ocirc;s &mdash; romantic, passionate, desire-based love",
+     "agapa&ocirc; &mdash; the verb form of agap&ecirc;, self-giving sacrificial love",
+     "storg&ecirc; &mdash; family affection between parent and child"
+    ],
+    "es": [
+     "phile&ocirc; &mdash; el amor de amistad entre iguales",
+     "er&ocirc;s &mdash; amor rom&aacute;ntico, apasionado, basado en el deseo",
+     "agapa&ocirc; &mdash; la forma verbal de agap&ecirc;, amor sacrificial abnegado",
+     "storg&ecirc; &mdash; afecto familiar entre padre e hijo"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "G25 is agapa&ocirc;, the verb form of agap&ecirc; that you learned in Unit 8. The 'love' of John 3:16 is self-giving sacrificial agap&ecirc; &mdash; the love that crosses every tribe, gives without return, and seeks the good of an enemy. Without Strong's, an English-only reader has no way to know which of the four Greek words for love stands behind 'loved' in his English Bible. G25 is the bridge.",
+    "es": "G25 es agapa&ocirc;, la forma verbal de agap&ecirc; que aprendiste en la Unidad 8. El «amor» de Juan 3:16 es el agap&ecirc; sacrificial abnegado &mdash; el amor que cruza toda tribu, da sin retorno, y busca el bien de un enemigo. Sin Strong, un lector que solo lee castellano no tiene forma de saber cu&aacute;l de las cuatro palabras griegas para amor est&aacute; detr&aacute;s de «am&oacute;» en su Biblia. G25 es el puente."
+   }
+  },
+  {
+   "stem": {
+    "en": "Which free mobile app is the most universally recommended Strong's-keyed Bible tool for English- and Spanish-speaking students today?",
+    "es": "&iquest;Cu&aacute;l aplicaci&oacute;n m&oacute;vil gratuita es la herramienta b&iacute;blica numerada a Strong m&aacute;s universalmente recomendada para estudiantes de habla inglesa y espa&ntilde;ola hoy?"
+   },
+   "options": {
+    "en": [
+     "TikTok",
+     "Blue Letter Bible &mdash; free, Strong's built in, lexicon entries, audio pronunciation",
+     "WhatsApp",
+     "Google Translate"
+    ],
+    "es": [
+     "TikTok",
+     "Blue Letter Bible &mdash; gratis, Strong incorporado, entradas l&eacute;xicas, pronunciaci&oacute;n en audio",
+     "WhatsApp",
+     "Google Translate"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Blue Letter Bible is the universal recommendation: free, works on iOS, Android, and the web, every English (and many Spanish) word tappable for instant Strong's number and lexicon entry, with audio pronunciation. Tap a word and you are inside the Greek or Hebrew in seconds. If a student installs only one app from this unit, it should be Blue Letter Bible.",
+    "es": "Blue Letter Bible es la recomendaci&oacute;n universal: gratuita, funciona en iOS, Android, y la web, cada palabra inglesa (y muchas espa&ntilde;olas) puede tocarse para n&uacute;mero de Strong instant&aacute;neo y entrada l&eacute;xica, con pronunciaci&oacute;n en audio. Toca una palabra y est&aacute;s dentro del griego o hebreo en segundos. Si un estudiante instala solo una aplicaci&oacute;n de esta unidad, debe ser Blue Letter Bible."
+   }
+  },
+  {
+   "stem": {
+    "en": "Which free website provides the best verse-by-verse English-Greek interlinear with Strong's numbers, parsing, and parallel translations all on one screen?",
+    "es": "&iquest;Cu&aacute;l sitio web gratuito provee el mejor interlineal vers&iacute;culo por vers&iacute;culo ingl&eacute;s-griego con n&uacute;meros de Strong, an&aacute;lisis gramatical, y traducciones paralelas todo en una pantalla?"
+   },
+   "options": {
+    "en": [
+     "Wikipedia",
+     "Facebook",
+     "YouTube",
+     "Bible Hub (biblehub.com)"
+    ],
+    "es": [
+     "Wikipedia",
+     "Facebook",
+     "YouTube",
+     "Bible Hub (biblehub.com)"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Bible Hub (biblehub.com) is the single best free interlinear on the web. Every verse appears word-by-word with the original Greek or Hebrew, transliteration, Strong's number, full grammatical parsing, and several parallel English translations. Click any Strong's number and you jump directly to the Thayer's or BDB lexicon entry. Free, no registration, indispensable for any serious word study.",
+    "es": "Bible Hub (biblehub.com) es el mejor interlineal gratuito en la web. Cada vers&iacute;culo aparece palabra por palabra con el griego o hebreo original, transliteraci&oacute;n, n&uacute;mero de Strong, an&aacute;lisis gramatical completo, y varias traducciones inglesas paralelas. Haz clic en cualquier n&uacute;mero de Strong y saltas directamente a la entrada del lexic&oacute;n Thayer o BDB. Gratis, sin registro, indispensable para cualquier estudio serio de palabras."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does 'the root fallacy' mean in word-study work?",
+    "es": "&iquest;Qu&eacute; significa «la falacia de la ra&iacute;z» en el trabajo de estudio de palabras?"
+   },
+   "options": {
+    "en": [
+     "The mistake of using a tree-root metaphor in a sermon",
+     "The mistake of believing the Hebrew Bible is rootless",
+     "The mistake of assuming the original meaning of a word's root is what the word 'really' means in any later passage &mdash; for example, preaching that 'the church is dynamite' because dynamis ('power') gives us the English word dynamite (which wasn't invented until 1867)",
+     "The mistake of failing to memorize Hebrew word roots"
+    ],
+    "es": [
+     "El error de usar una met&aacute;fora de ra&iacute;z de &aacute;rbol en un serm&oacute;n",
+     "El error de creer que la Biblia hebrea es sin ra&iacute;ces",
+     "El error de asumir que el significado original de la ra&iacute;z de una palabra es lo que la palabra «realmente» significa en cualquier pasaje posterior &mdash; por ejemplo, predicar que «la iglesia es dinamita» porque dynamis («poder») nos da la palabra inglesa dynamite (que no fue inventada hasta 1867)",
+     "El error de no memorizar las ra&iacute;ces de palabras hebreas"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The root fallacy assumes the etymological root or English derivative reveals the 'true' meaning of the Greek or Hebrew word. The classic example: 'dynamis (Acts 1:8) means dynamite-power' &mdash; but dynamite was invented in 1867; the Greek word means 'power, ability' in its own first-century context, with no explosive connotation. Strong's number doesn't make this mistake; careless preachers do. Rule: a word's meaning is determined by how it is used in its own period and context, not by where it originally came from or what later English word derives from it.",
+    "es": "La falacia de la ra&iacute;z asume que la ra&iacute;z etimol&oacute;gica o derivado revela el significado «verdadero» de la palabra griega o hebrea. El ejemplo cl&aacute;sico: «dynamis (Hechos 1:8) significa dinamita-poder» &mdash; pero la dinamita fue inventada en 1867; la palabra griega significa «poder, habilidad» en su propio contexto del primer siglo, sin connotaci&oacute;n explosiva. El n&uacute;mero de Strong no comete este error; los predicadores descuidados s&iacute;. Regla: el significado de una palabra est&aacute; determinado por c&oacute;mo se usa en su propio per&iacute;odo y contexto, no por de d&oacute;nde vino originalmente."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is 'the illegitimate totality transfer' in word-study work?",
+    "es": "&iquest;Qu&eacute; es «la transferencia ileg&iacute;tima de totalidad» en el trabajo de estudio de palabras?"
+   },
+   "options": {
+    "en": [
+     "The assumption that a Greek or Hebrew word always means everything its lexicon entry lists, all at once, in every passage &mdash; even though context usually selects only one meaning at a time",
+     "The transfer of Greek words into Hebrew translation",
+     "The illegal copying of copyrighted Bible commentaries",
+     "The transfer of seminary students between schools"
+    ],
+    "es": [
+     "La suposici&oacute;n de que una palabra griega o hebrea siempre significa todo lo que enumera su entrada en el lexic&oacute;n, todo a la vez, en cada pasaje &mdash; aunque el contexto usualmente selecciona solo un significado a la vez",
+     "La transferencia de palabras griegas a la traducci&oacute;n hebrea",
+     "La copia ilegal de comentarios b&iacute;blicos con derechos de autor",
+     "La transferencia de estudiantes de seminario entre escuelas"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The illegitimate totality transfer is the assumption that every nuance the lexicon lists for a word is operative in every passage. S&ocirc;z&ocirc; can mean 'rescue from drowning, disease, death, shipwreck, or sin' &mdash; but in any single verse it usually means one of those, not all five at once. The lexicon gives you the RANGE; context tells you which meaning the author intended HERE. This is the mature workman's discipline.",
+    "es": "La transferencia ileg&iacute;tima de totalidad es la suposici&oacute;n de que cada matiz que el lexic&oacute;n enumera para una palabra opera en cada pasaje. S&ocirc;z&ocirc; puede significar «rescatar de ahogarse, enfermedad, muerte, naufragio, o pecado» &mdash; pero en cualquier vers&iacute;culo individual usualmente significa uno de esos, no los cinco a la vez. El lexic&oacute;n te da el RANGO; el contexto te dice qu&eacute; significado el autor intentaba AQU&Iacute;. Esta es la disciplina del obrero maduro."
+   }
+  },
+  {
+   "stem": {
+    "en": "Why is it incorrect to assume that learning the Greek behind an English verse will always reveal a 'hidden' or 'deeper' meaning the English missed?",
+    "es": "&iquest;Por qu&eacute; es incorrecto asumir que aprender el griego detr&aacute;s de un vers&iacute;culo siempre revelar&aacute; un significado «oculto» o «m&aacute;s profundo» que el espa&ntilde;ol perdi&oacute;?"
+   },
+   "options": {
+    "en": [
+     "Because the Greek text has been lost",
+     "Because most modern translations are made by careful scholars who know far more Greek and Hebrew than any of us &mdash; the English (or Spanish) already captures most of what the original says, so Strong's normally enriches and sharpens rather than overturning the translation",
+     "Because the Greek New Testament was rewritten in the Middle Ages",
+     "Because Hebrew and Greek are now extinct languages"
+    ],
+    "es": [
+     "Porque el texto griego ha sido perdido",
+     "Porque la mayor&iacute;a de las traducciones modernas son hechas por eruditos cuidadosos que saben m&aacute;s griego y hebreo que cualquiera de nosotros &mdash; el espa&ntilde;ol ya captura la mayor parte de lo que dice el original, as&iacute; que Strong normalmente enriquece y afila en vez de revertir la traducci&oacute;n",
+     "Porque el Nuevo Testamento griego fue reescrito en la Edad Media",
+     "Porque el hebreo y el griego son ahora idiomas extintos"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The 'deeper meaning' trap assumes Bible translators are hiding something. They almost never are. Modern translation committees include the most accomplished Hebrew and Greek scholars alive. The English Bible already says about 95% of what the original says. Strong's deepens the remaining 5%, sharpens edges, prevents misreadings, and supplies the cultural and lexical context an English word loses &mdash; but it normally does not overturn the meaning of the verse.",
+    "es": "La trampa del «significado m&aacute;s profundo» asume que los traductores de la Biblia esconden algo. Casi nunca lo hacen. Los comit&eacute;s de traducci&oacute;n modernos incluyen a los eruditos hebreos y griegos m&aacute;s logrados vivos. La Biblia castellana ya dice cerca del 95% de lo que dice el original. Strong profundiza el 5% restante, afila bordes, previene malas lecturas, y suministra el contexto cultural y l&eacute;xico que una palabra pierde &mdash; pero normalmente no revierte el significado del vers&iacute;culo."
+   }
+  },
+  {
+   "stem": {
+    "en": "In Acts 17:11 the Bereans are called more noble because they 'searched the Scriptures daily.' The Greek verb is anakrin&ocirc; (Strong's G350). What does this verb mean?",
+    "es": "En Hechos 17:11 los bereanos son llamados m&aacute;s nobles porque «escudri&ntilde;aban las Escrituras cada d&iacute;a». El verbo griego es anakrin&ocirc; (n&uacute;mero de Strong G350). &iquest;Qu&eacute; significa este verbo?"
+   },
+   "options": {
+    "en": [
+     "A courtroom verb meaning 'to examine carefully, to investigate, to cross-examine'",
+     "A military verb meaning 'to march in formation'",
+     "A musical verb meaning 'to sing in harmony'",
+     "An agricultural verb meaning 'to harvest grain'"
+    ],
+    "es": [
+     "Un verbo de tribunal que significa «examinar cuidadosamente, investigar, interrogar»",
+     "Un verbo militar que significa «marchar en formaci&oacute;n»",
+     "Un verbo musical que significa «cantar en armon&iacute;a»",
+     "Un verbo agr&iacute;cola que significa «cosechar grano»"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Anakrin&ocirc; (G350) is a legal verb meaning 'to examine carefully, to investigate, to cross-examine.' The Bereans loved Paul but did not take even his preaching at face value. They opened their Old Testament scrolls and cross-examined his claims against the inspired text. Strong's makes every modern Christian a Berean: a layperson with the cross-examination tool now in hand. A preacher who fears Strong's-equipped congregations has something to hide.",
+    "es": "Anakrin&ocirc; (G350) es un verbo legal que significa «examinar cuidadosamente, investigar, interrogar». Los bereanos amaban a Pablo pero no tomaban ni siquiera su predicaci&oacute;n al pie de la letra. Abrieron sus rollos del Antiguo Testamento e interrogaron sus afirmaciones contra el texto inspirado. Strong hace de cada cristiano moderno un bereano: un laico con la herramienta de interrogatorio ahora en mano. Un predicador que teme a congregaciones equipadas con Strong tiene algo que esconder."
+   }
+  },
+  {
+   "stem": {
+    "en": "What are the three forms in which a modern student can use Strong's numbers, as taught in Unit 10?",
+    "es": "&iquest;Cu&aacute;les son las tres formas en que un estudiante moderno puede usar los n&uacute;meros de Strong, como se ense&ntilde;a en la Unidad 10?"
+   },
+   "options": {
+    "en": [
+     "Whispered in Latin, chanted in Greek, sung in Hebrew",
+     "Memorized, recited, dramatized",
+     "Only the paper concordance is reliable; phones and websites are forbidden",
+     "On paper (the original 1890 concordance), on a phone (mobile apps like Blue Letter Bible), and on the full internet (websites like Bible Hub)"
+    ],
+    "es": [
+     "Susurrados en lat&iacute;n, cantados en griego, entonados en hebreo",
+     "Memorizados, recitados, dramatizados",
+     "Solo la concordancia en papel es confiable; tel&eacute;fonos y sitios web est&aacute;n prohibidos",
+     "En papel (la concordancia original de 1890), en un tel&eacute;fono (aplicaciones m&oacute;viles como Blue Letter Bible), y en internet completo (sitios web como Bible Hub)"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "All three forms contain the same essential content: every Hebrew and Greek word in the Bible keyed to a number, with a brief definition, and a list of every verse where the word appears. Paper for the historic foundation, phone for the daily workman, internet for the deep dive. The number is language-neutral &mdash; G25 is G25 in every tool.",
+    "es": "Las tres formas contienen el mismo contenido esencial: cada palabra hebrea y griega en la Biblia numerada, con una definici&oacute;n breve, y una lista de cada vers&iacute;culo donde aparece la palabra. Papel para el fundamento hist&oacute;rico, tel&eacute;fono para el obrero diario, internet para la inmersi&oacute;n profunda. El n&uacute;mero es neutro respecto al idioma &mdash; G25 es G25 en cada herramienta."
+   }
+  },
+  {
+   "stem": {
+    "en": "Once you know a word's Strong's number, what larger Greek and Hebrew lexicons can you then consult, since they are also keyed to Strong's numbers?",
+    "es": "Una vez que conoces el n&uacute;mero de Strong de una palabra, &iquest;qu&eacute; lexicones m&aacute;s grandes en griego y hebreo puedes consultar, ya que tambi&eacute;n est&aacute;n numerados a Strong?"
+   },
+   "options": {
+    "en": [
+     "Wikipedia and YouTube",
+     "The Strong's number unlocks no other resources beyond Strong's own dictionary",
+     "Thayer's Greek-English Lexicon (NT) and Brown-Driver-Briggs (OT Hebrew) &mdash; both keyed to Strong's, vastly more detailed than Strong's brief entries",
+     "Only the most expensive Logos Pro library, costing thousands of dollars"
+    ],
+    "es": [
+     "Wikipedia y YouTube",
+     "El n&uacute;mero de Strong no desbloquea otros recursos m&aacute;s all&aacute; del propio diccionario de Strong",
+     "Lexic&oacute;n Griego-Ingl&eacute;s de Thayer (NT) y Brown-Driver-Briggs (hebreo del AT) &mdash; ambos numerados a Strong, mucho m&aacute;s detallados que las entradas breves de Strong",
+     "Solo la biblioteca m&aacute;s cara de Logos Pro, costando miles de d&oacute;lares"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Strong's brief entries (usually one or two sentences) are a starting point, not the last word. Thayer's Greek-English Lexicon and Brown-Driver-Briggs (BDB) Hebrew-English Lexicon are vastly more detailed scholarly tools, both keyed to Strong's numbers. Find the Strong's number once, and a whole library of further lexicons opens up. Most are free on Blue Letter Bible and Bible Hub.",
+    "es": "Las entradas breves de Strong (usualmente una o dos oraciones) son un punto de partida, no la &uacute;ltima palabra. El Lexic&oacute;n Griego-Ingl&eacute;s de Thayer y el Lexic&oacute;n Hebreo-Ingl&eacute;s Brown-Driver-Briggs (BDB) son herramientas eruditas mucho m&aacute;s detalladas, ambas numeradas a Strong. Encuentra el n&uacute;mero de Strong una vez, y se abre toda una biblioteca de lexicones adicionales. La mayor&iacute;a son gratuitos en Blue Letter Bible y Bible Hub."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is the difference between a CONCORDANCE and a LEXICON?",
+    "es": "&iquest;Cu&aacute;l es la diferencia entre una CONCORDANCIA y un LEXIC&Oacute;N?"
+   },
+   "options": {
+    "en": [
+     "A concordance lists every verse where an English word appears (and points to the original-language word); a lexicon is a dictionary of the original-language words themselves",
+     "A concordance is for Hebrew and a lexicon is for Greek",
+     "A concordance is a small book and a lexicon is a large book &mdash; the only difference is size",
+     "A concordance is online and a lexicon is on paper"
+    ],
+    "es": [
+     "Una concordancia enumera cada vers&iacute;culo donde aparece una palabra (y apunta a la palabra en lengua original); un lexic&oacute;n es un diccionario de las palabras en lengua original",
+     "Una concordancia es para el hebreo y un lexic&oacute;n para el griego",
+     "Una concordancia es un libro peque&ntilde;o y un lexic&oacute;n es un libro grande &mdash; la &uacute;nica diferencia es el tama&ntilde;o",
+     "Una concordancia est&aacute; en l&iacute;nea y un lexic&oacute;n est&aacute; en papel"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "A concordance is an index from the English (or Spanish) Bible to the original-language word: 'Here is every verse where the word \"love\" appears in the KJV, and here is the Strong's number for each.' A lexicon is a dictionary of the original-language words themselves: 'Here is what agapa&ocirc; means, what its tenses are, what its synonyms are.' Strong's volume includes both: the concordance in front, the lexicons in back.",
+    "es": "Una concordancia es un &iacute;ndice de la Biblia castellana a la palabra en lengua original: «Aqu&iacute; est&aacute; cada vers&iacute;culo donde aparece la palabra \"amor\" en la RVG, y aqu&iacute; est&aacute; el n&uacute;mero de Strong para cada uno». Un lexic&oacute;n es un diccionario de las palabras en lengua original mismas: «Aqu&iacute; est&aacute; lo que significa agapa&ocirc;, cu&aacute;les son sus tiempos, cu&aacute;les son sus sin&oacute;nimos». El volumen de Strong incluye ambos: la concordancia adelante, los lexicones atr&aacute;s."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is the relationship between Wycliffe's English Bible (1380s), Tyndale's English New Testament (1525), and Strong's Concordance (1890)?",
+    "es": "&iquest;Cu&aacute;l es la relaci&oacute;n entre la Biblia inglesa de Wycliffe (1380s), el Nuevo Testamento ingl&eacute;s de Tyndale (1525), y la Concordancia de Strong (1890)?"
+   },
+   "options": {
+    "en": [
+     "All three are part of a long democratizing tradition: each chipped away at the wall between the ordinary Christian and the original Word, putting Scripture and its tools into the hand of the common believer",
+     "They are completely unrelated works",
+     "They are all Roman Catholic productions",
+     "Strong's was an attempt to undo what Wycliffe and Tyndale did"
+    ],
+    "es": [
+     "Las tres son parte de una larga tradici&oacute;n democratizadora: cada una cincel&oacute; la pared entre el cristiano ordinario y la Palabra original, poniendo la Escritura y sus herramientas en la mano del creyente com&uacute;n",
+     "Son obras completamente no relacionadas",
+     "Las tres son producciones cat&oacute;licas romanas",
+     "La de Strong fue un intento de deshacer lo que hicieron Wycliffe y Tyndale"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Wycliffe gave the English peasant the Bible in his own tongue (1380s). Tyndale printed the NT in the language of plowboys (1525) and was martyred for it in 1536. Cruden's concordance in 1737 indexed the English Bible. Strong's 1890 concordance gave the layperson access to the underlying Hebrew and Greek. Each step put more of the Word into more hands. Strong's is the modern hammer in a centuries-long demolition of the seminary wall.",
+    "es": "Wycliffe dio al campesino ingl&eacute;s la Biblia en su propia lengua (1380s). Tyndale imprimi&oacute; el NT en el idioma de los aradores (1525) y fue martirizado por ello en 1536. La concordancia de Cruden en 1737 index&oacute; la Biblia inglesa. La concordancia de Strong de 1890 dio al laico acceso al hebreo y griego subyacentes. Cada paso puso m&aacute;s de la Palabra en m&aacute;s manos. La de Strong es el martillo moderno en una demolici&oacute;n de siglos de la pared del seminario."
+   }
+  },
+  {
+   "stem": {
+    "en": "In Unit 9 you learned several Greek words with their Strong's numbers. What are the correct Strong's numbers for pistis, s&ocirc;z&ocirc;, dikaiosyn&ecirc;, and kyrios?",
+    "es": "En la Unidad 9 aprendiste varias palabras griegas con sus n&uacute;meros de Strong. &iquest;Cu&aacute;les son los n&uacute;meros de Strong correctos para pistis, s&ocirc;z&ocirc;, dikaiosyn&ecirc;, y kyrios?"
+   },
+   "options": {
+    "en": [
+     "All four Greek words share the same number G0001",
+     "H4102, H4982, H1343, H2962 (with Hebrew H prefixes)",
+     "Strong's numbers were never assigned to Greek words",
+     "G4102 (pistis), G4982 (s&ocirc;z&ocirc;), G1343 (dikaiosyn&ecirc;), G2962 (kyrios)"
+    ],
+    "es": [
+     "Las cuatro palabras griegas comparten el mismo n&uacute;mero G0001",
+     "H4102, H4982, H1343, H2962 (con prefijos hebreos H)",
+     "Los n&uacute;meros de Strong nunca fueron asignados a palabras griegas",
+     "G4102 (pistis), G4982 (s&ocirc;z&ocirc;), G1343 (dikaiosyn&ecirc;), G2962 (kyrios)"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Each Greek word has its own unique Strong's number: pistis G4102 (faith), s&ocirc;z&ocirc; G4982 (save), dikaiosyn&ecirc; G1343 (righteousness), kyrios G2962 (Lord). Add Unit 8: logos G3056 (Word), agap&ecirc; G26 (love), charis G5485 (grace), pneuma G4151 (Spirit). The eight numbers form the New Testament's salvation vocabulary. Memorize none of them; learn instead to look them up in seconds with Strong's tools.",
+    "es": "Cada palabra griega tiene su propio n&uacute;mero &uacute;nico de Strong: pistis G4102 (fe), s&ocirc;z&ocirc; G4982 (salvar), dikaiosyn&ecirc; G1343 (justicia), kyrios G2962 (Se&ntilde;or). Agrega de la Unidad 8: logos G3056 (Verbo), agap&ecirc; G26 (amor), charis G5485 (gracia), pneuma G4151 (Esp&iacute;ritu). Los ocho n&uacute;meros forman el vocabulario de salvaci&oacute;n del Nuevo Testamento. No memorices ninguno; aprende en cambio a buscarlos en segundos con las herramientas de Strong."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is the proper six-step workflow for a complete Strong's-based word study, as you will apply it in Unit 11?",
+    "es": "&iquest;Cu&aacute;l es el flujo de trabajo correcto de seis pasos para un estudio de palabras completo basado en Strong, tal como lo aplicar&aacute;s en la Unidad 11?"
+   },
+   "options": {
+    "en": [
+     "(1) Read your verse and pick a meaningful word; (2) look up the Strong's number; (3) read the lexicon entry; (4) look up every other occurrence of the same Strong's number; (5) read 5&ndash;10 of those verses noting how context shapes meaning; (6) return to your original verse and reread with the word's range in mind",
+     "Pray, sing a hymn, recite the creed, take communion, fast for 40 days, then guess at the meaning",
+     "Memorize the entire concordance from beginning to end",
+     "Email a Greek professor and wait three weeks for him to reply"
+    ],
+    "es": [
+     "(1) Lee tu vers&iacute;culo y elige una palabra significativa; (2) busca el n&uacute;mero de Strong; (3) lee la entrada del lexic&oacute;n; (4) busca cada otra ocurrencia del mismo n&uacute;mero de Strong; (5) lee 5&ndash;10 de esos vers&iacute;culos notando c&oacute;mo el contexto da forma al significado; (6) regresa a tu vers&iacute;culo original y rel&eacute;elo con el rango de la palabra en mente",
+     "Ora, canta un himno, recita el credo, toma la comuni&oacute;n, ayuna por 40 d&iacute;as, luego adivina el significado",
+     "Memoriza toda la concordancia de principio a fin",
+     "Env&iacute;a un correo a un profesor de griego y espera tres semanas a que responda"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The complete word-study workflow: (1) read your verse and pick a word, (2) find the Strong's number, (3) read the lexicon entry, (4) click 'every occurrence' of the same Strong's number, (5) read several of those verses to see the word in different contexts, (6) return to your original verse and reread with the word's full range now in your mind. The whole process takes about fifteen minutes in Blue Letter Bible. It used to take a seminary degree.",
+    "es": "El flujo de trabajo completo de estudio de palabras: (1) lee tu vers&iacute;culo y elige una palabra, (2) encuentra el n&uacute;mero de Strong, (3) lee la entrada del lexic&oacute;n, (4) haz clic en «cada ocurrencia» del mismo n&uacute;mero de Strong, (5) lee varios de esos vers&iacute;culos para ver la palabra en diferentes contextos, (6) regresa a tu vers&iacute;culo original y rel&eacute;elo con el rango completo de la palabra ahora en tu mente. Todo el proceso toma unos quince minutos en Blue Letter Bible. Sol&iacute;a tomar un grado del seminario."
+   }
+  },
+  {
+   "stem": {
+    "en": "Section III of this unit walked through a live example on biblehub.com using Romans 1:17 and the Greek word dikaiosyn&ecirc; (Strong's G1343). This was the same verse and same Greek word that Martin Luther read in Erasmus's 1516 Greek New Testament. What historic discovery did Luther make, which any modern believer with a phone can now replicate in thirty seconds?",
+    "es": "La Secci&oacute;n III de esta unidad recorri&oacute; un ejemplo en vivo en biblehub.com usando Romanos 1:17 y la palabra griega dikaiosyn&ecirc; (n&uacute;mero de Strong G1343). Este fue el mismo vers&iacute;culo y la misma palabra griega que Martin Lutero ley&oacute; en el Nuevo Testamento Griego de Erasmo de 1516. &iquest;Qu&eacute; descubrimiento hist&oacute;rico hizo Lutero, que cualquier creyente moderno con un tel&eacute;fono puede ahora replicar en treinta segundos?"
+   },
+   "options": {
+    "en": [
+     "That dikaiosyn&ecirc; theou ('the righteousness of God') in Romans 1:17 refers to the righteousness God GIVES to those who believe, not the standard God demands &mdash; the 'gates of paradise' insight that ignited the Reformation in 1517",
+     "That the apostle Paul never actually visited the city of Rome",
+     "That the Greek New Testament had been written by medieval monks",
+     "That Romans was originally written in Latin, not Greek"
+    ],
+    "es": [
+     "Que dikaiosyn&ecirc; theou («la justicia de Dios») en Romanos 1:17 se refiere a la justicia que Dios DA a los que creen, no al est&aacute;ndar que Dios exige &mdash; la intuici&oacute;n de «las puertas del para&iacute;so» que encendi&oacute; la Reforma en 1517",
+     "Que el ap&oacute;stol Pablo nunca visit&oacute; realmente la ciudad de Roma",
+     "Que el Nuevo Testamento Griego hab&iacute;a sido escrito por monjes medievales",
+     "Que Romanos fue originalmente escrito en lat&iacute;n, no en griego"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Luther's 1516 reading of Romans 1:17 in Erasmus's freshly printed Greek NT revealed that dikaiosyn&ecirc; theou is the righteousness God gives by grace through faith, not the impossible standard He demands. Luther later wrote that he 'felt as if reborn and had gone through open gates into paradise itself.' That single Greek-word insight ignited the Reformation a year later. Five centuries later any believer with biblehub.com or Blue Letter Bible can find G1343, read the same Thayer's entry, and reach the same conclusion in under a minute. The democratization Wycliffe-Tyndale-Cruden-Strong begun is now complete: the discovery that took the German monk twenty years to find takes the Mexican student thirty seconds. That is what Strong's numbers do.",
+    "es": "La lectura de Lutero de Romanos 1:17 en 1516 en el Nuevo Testamento Griego reci&eacute;n impreso de Erasmo revel&oacute; que dikaiosyn&ecirc; theou es la justicia que Dios da por gracia mediante la fe, no el est&aacute;ndar imposible que &Eacute;l exige. Lutero escribi&oacute; despu&eacute;s que «se sinti&oacute; como renacido y como si hubiera pasado por puertas abiertas al para&iacute;so mismo». Esa &uacute;nica intuici&oacute;n de una palabra griega encendi&oacute; la Reforma un a&ntilde;o despu&eacute;s. Cinco siglos despu&eacute;s cualquier creyente con biblehub.com o Blue Letter Bible puede encontrar G1343, leer la misma entrada de Thayer, y llegar a la misma conclusi&oacute;n en menos de un minuto. La democratizaci&oacute;n que Wycliffe-Tyndale-Cruden-Strong empezaron est&aacute; ahora completa: el descubrimiento que le tom&oacute; al monje alem&aacute;n veinte a&ntilde;os encontrar le toma al estudiante mexicano treinta segundos. Eso es lo que hacen los n&uacute;meros de Strong."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Tell the story of James Strong and his Exhaustive Concordance. How long did the project take, when was it published, and why does it matter?",
+    "es": "Cuenta la historia de James Strong y su Concordancia Exhaustiva. &iquest;Cu&aacute;nto tom&oacute; el proyecto, cu&aacute;ndo se public&oacute;, y por qu&eacute; importa?"
+   },
+   "keywords": {
+    "en": [
+     "strong",
+     "drew",
+     "seminary",
+     "1890",
+     "twenty",
+     "seven",
+     "years",
+     "concordance",
+     "english",
+     "greek",
+     "hebrew",
+     "number",
+     "layman",
+     "strong",
+     "drew",
+     "seminario",
+     "1890",
+     "veintisiete",
+     "anos",
+     "concordancia",
+     "griego",
+     "hebreo",
+     "numero",
+     "laico"
+    ],
+    "es": [
+     "strong",
+     "drew",
+     "seminary",
+     "1890",
+     "twenty",
+     "seven",
+     "years",
+     "concordance",
+     "english",
+     "greek",
+     "hebrew",
+     "number",
+     "layman",
+     "strong",
+     "drew",
+     "seminario",
+     "1890",
+     "veintisiete",
+     "anos",
+     "concordancia",
+     "griego",
+     "hebreo",
+     "numero",
+     "laico"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain Strong's numbering system. What does the H or G prefix mean, and what is the range of numbers for each language?",
+    "es": "Explica el sistema de numeraci&oacute;n de Strong. &iquest;Qu&eacute; significa el prefijo H o G, y cu&aacute;l es el rango de n&uacute;meros para cada idioma?"
+   },
+   "keywords": {
+    "en": [
+     "hebrew",
+     "greek",
+     "h",
+     "g",
+     "prefix",
+     "1",
+     "8674",
+     "5624",
+     "number",
+     "unique",
+     "language",
+     "hebreo",
+     "griego",
+     "prefijo",
+     "numero",
+     "unico",
+     "idioma"
+    ],
+    "es": [
+     "hebrew",
+     "greek",
+     "h",
+     "g",
+     "prefix",
+     "1",
+     "8674",
+     "5624",
+     "number",
+     "unique",
+     "language",
+     "hebreo",
+     "griego",
+     "prefijo",
+     "numero",
+     "unico",
+     "idioma"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Walk through a sample Strong's lookup: take John 3:16 ('For God so loved the world'), follow the four steps, and report what you discover about the Greek word for 'loved.'",
+    "es": "Recorre una b&uacute;squeda Strong de muestra: toma Juan 3:16 («Porque de tal manera am&oacute; Dios al mundo»), sigue los cuatro pasos, y reporta lo que descubres sobre la palabra griega para «am&oacute;»."
+   },
+   "keywords": {
+    "en": [
+     "john",
+     "3:16",
+     "loved",
+     "g25",
+     "agapao",
+     "agape",
+     "sacrificial",
+     "love",
+     "greek",
+     "number",
+     "lexicon",
+     "juan",
+     "amo",
+     "agape",
+     "sacrificial",
+     "amor",
+     "griego",
+     "numero",
+     "lexicon"
+    ],
+    "es": [
+     "john",
+     "3:16",
+     "loved",
+     "g25",
+     "agapao",
+     "agape",
+     "sacrificial",
+     "love",
+     "greek",
+     "number",
+     "lexicon",
+     "juan",
+     "amo",
+     "agape",
+     "sacrificial",
+     "amor",
+     "griego",
+     "numero",
+     "lexicon"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Name the three forms in which Strong's numbers can be used today, and give one specific tool or example for each form.",
+    "es": "Nombra las tres formas en que los n&uacute;meros de Strong pueden usarse hoy, y da una herramienta o ejemplo espec&iacute;fico para cada forma."
+   },
+   "keywords": {
+    "en": [
+     "paper",
+     "phone",
+     "internet",
+     "blue",
+     "letter",
+     "bible",
+     "hub",
+     "app",
+     "concordance",
+     "website",
+     "papel",
+     "telefono",
+     "internet",
+     "aplicacion",
+     "concordancia",
+     "sitio"
+    ],
+    "es": [
+     "paper",
+     "phone",
+     "internet",
+     "blue",
+     "letter",
+     "bible",
+     "hub",
+     "app",
+     "concordance",
+     "website",
+     "papel",
+     "telefono",
+     "internet",
+     "aplicacion",
+     "concordancia",
+     "sitio"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the root fallacy in your own words and give one example of how it can produce a wrong sermon.",
+    "es": "Explica la falacia de la ra&iacute;z en tus propias palabras y da un ejemplo de c&oacute;mo puede producir un serm&oacute;n equivocado."
+   },
+   "keywords": {
+    "en": [
+     "root",
+     "etymology",
+     "dynamis",
+     "dynamite",
+     "power",
+     "original",
+     "context",
+     "period",
+     "derivative",
+     "mistake",
+     "fallacy",
+     "raiz",
+     "etimologia",
+     "dinamita",
+     "poder",
+     "original",
+     "contexto",
+     "derivado",
+     "error",
+     "falacia"
+    ],
+    "es": [
+     "root",
+     "etymology",
+     "dynamis",
+     "dynamite",
+     "power",
+     "original",
+     "context",
+     "period",
+     "derivative",
+     "mistake",
+     "fallacy",
+     "raiz",
+     "etimologia",
+     "dinamita",
+     "poder",
+     "original",
+     "contexto",
+     "derivado",
+     "error",
+     "falacia"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why does context still trump word study? Explain why knowing the Greek word does not by itself solve the meaning of a verse.",
+    "es": "&iquest;Por qu&eacute; el contexto todav&iacute;a triunfa sobre el estudio de palabras? Explica por qu&eacute; conocer la palabra griega no resuelve por s&iacute; mismo el significado de un vers&iacute;culo."
+   },
+   "keywords": {
+    "en": [
+     "context",
+     "range",
+     "meaning",
+     "lexicon",
+     "totality",
+     "transfer",
+     "author",
+     "passage",
+     "verse",
+     "one",
+     "contexto",
+     "rango",
+     "significado",
+     "lexicon",
+     "totalidad",
+     "transferencia",
+     "autor",
+     "pasaje",
+     "verso",
+     "uno"
+    ],
+    "es": [
+     "context",
+     "range",
+     "meaning",
+     "lexicon",
+     "totality",
+     "transfer",
+     "author",
+     "passage",
+     "verse",
+     "one",
+     "contexto",
+     "rango",
+     "significado",
+     "lexicon",
+     "totalidad",
+     "transferencia",
+     "autor",
+     "pasaje",
+     "verso",
+     "uno"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Trace the long tradition of democratizing Scripture from Wycliffe through Tyndale to Cruden to Strong, and explain Strong's place in this line.",
+    "es": "Traza la larga tradici&oacute;n de democratizar la Escritura desde Wycliffe pasando por Tyndale, Cruden, hasta Strong, y explica el lugar de Strong en esta l&iacute;nea."
+   },
+   "keywords": {
+    "en": [
+     "wycliffe",
+     "tyndale",
+     "cruden",
+     "strong",
+     "english",
+     "bible",
+     "layman",
+     "seminary",
+     "wall",
+     "democratize",
+     "translation",
+     "concordance",
+     "wycliffe",
+     "tyndale",
+     "cruden",
+     "strong",
+     "biblia",
+     "laico",
+     "seminario",
+     "pared",
+     "democratizar",
+     "traduccion",
+     "concordancia"
+    ],
+    "es": [
+     "wycliffe",
+     "tyndale",
+     "cruden",
+     "strong",
+     "english",
+     "bible",
+     "layman",
+     "seminary",
+     "wall",
+     "democratize",
+     "translation",
+     "concordance",
+     "wycliffe",
+     "tyndale",
+     "cruden",
+     "strong",
+     "biblia",
+     "laico",
+     "seminario",
+     "pared",
+     "democratizar",
+     "traduccion",
+     "concordancia"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "List four free internet tools (websites) where a student can use Strong's numbers today, and say what each one is especially good at.",
+    "es": "Enumera cuatro herramientas gratuitas de internet (sitios web) donde un estudiante puede usar los n&uacute;meros de Strong hoy, y di en qu&eacute; es especialmente bueno cada uno."
+   },
+   "keywords": {
+    "en": [
+     "blue",
+     "letter",
+     "bible",
+     "hub",
+     "step",
+     "gateway",
+     "interlinear",
+     "strong",
+     "lexicon",
+     "parallel",
+     "blueletterbible",
+     "biblehub",
+     "stepbible",
+     "biblegateway",
+     "interlineal",
+     "lexicon",
+     "paralelo"
+    ],
+    "es": [
+     "blue",
+     "letter",
+     "bible",
+     "hub",
+     "step",
+     "gateway",
+     "interlinear",
+     "strong",
+     "lexicon",
+     "parallel",
+     "blueletterbible",
+     "biblehub",
+     "stepbible",
+     "biblegateway",
+     "interlineal",
+     "lexicon",
+     "paralelo"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the Berean attitude (Acts 17:11) and how Strong's numbers make every layperson a Berean.",
+    "es": "Explica la actitud bereana (Hechos 17:11) y c&oacute;mo los n&uacute;meros de Strong hacen de cada laico un bereano."
+   },
+   "keywords": {
+    "en": [
+     "berean",
+     "acts",
+     "17:11",
+     "anakrino",
+     "examine",
+     "investigate",
+     "cross",
+     "scripture",
+     "paul",
+     "check",
+     "verify",
+     "layman",
+     "laity",
+     "strong",
+     "bereano",
+     "hechos",
+     "examinar",
+     "investigar",
+     "escritura",
+     "pablo",
+     "verificar",
+     "laico"
+    ],
+    "es": [
+     "berean",
+     "acts",
+     "17:11",
+     "anakrino",
+     "examine",
+     "investigate",
+     "cross",
+     "scripture",
+     "paul",
+     "check",
+     "verify",
+     "layman",
+     "laity",
+     "strong",
+     "bereano",
+     "hechos",
+     "examinar",
+     "investigar",
+     "escritura",
+     "pablo",
+     "verificar",
+     "laico"
+    ]
+   }
+  },
+  {
+   "prompt": {
+    "en": "Notebook activity (Unit 10): Pick a verse from Romans 5 and walk through a brief Strong's word study in your notebook. Describe (a) which verse and which English word you chose, (b) the Strong's number, (c) the lexicon meaning, and (d) how seeing the other uses of the same word changed or deepened your reading of the verse.",
+    "es": "Actividad de cuaderno (Unidad 10): Elige un vers&iacute;culo de Romanos 5 y recorre un breve estudio de palabras de Strong en tu cuaderno. Describe (a) qu&eacute; vers&iacute;culo y qu&eacute; palabra elegiste, (b) el n&uacute;mero de Strong, (c) el significado del lexic&oacute;n, y (d) c&oacute;mo ver los otros usos de la misma palabra cambi&oacute; o profundiz&oacute; tu lectura del vers&iacute;culo."
+   },
+   "keywords": {
+    "en": [
+     "romans",
+     "verse",
+     "word",
+     "strong",
+     "number",
+     "lexicon",
+     "reading",
+     "change",
+     "deepen",
+     "occurrences",
+     "romanos",
+     "verso",
+     "palabra",
+     "numero",
+     "lexicon",
+     "lectura",
+     "cambio",
+     "profundizar",
+     "ocurrencias"
+    ],
+    "es": [
+     "romans",
+     "verse",
+     "word",
+     "strong",
+     "number",
+     "lexicon",
+     "reading",
+     "change",
+     "deepen",
+     "occurrences",
+     "romanos",
+     "verso",
+     "palabra",
+     "numero",
+     "lexicon",
+     "lectura",
+     "cambio",
+     "profundizar",
+     "ocurrencias"
+    ]
+   }
+  }
+ ]
+};

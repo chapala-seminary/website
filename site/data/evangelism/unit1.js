@@ -1,0 +1,833 @@
+/* CTSEvangelism — unit 1. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "evangelism",
+ "unit": 1,
+ "totalUnits": 13,
+ "filePrefix": "CTSEvangelism",
+ "prevHref": null,
+ "nextHref": "CTSEvangelismUnit2.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "Evangelism begins with:",
+    "es": "El evangelismo comienza con:"
+   },
+   "options": {
+    "en": [
+     "God's initiative",
+     "Human strategy",
+     "Cultural need",
+     "Church growth plans"
+    ],
+    "es": [
+     "La iniciativa de Dios",
+     "Estrategia humana",
+     "Necesidad cultural",
+     "Planes de crecimiento de la iglesia"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Evangelism begins with God's initiative, not human plans. Scripture consistently shows God as the One who acts first.",
+    "es": "El evangelismo comienza con la iniciativa de Dios, no con planes humanos. Las Escrituras muestran consistentemente a Dios como el que actúa primero."
+   }
+  },
+  {
+   "stem": {
+    "en": "Genesis 3:9 shows that after the fall:",
+    "es": "Génesis 3:9 muestra que después de la caída:"
+   },
+   "options": {
+    "en": [
+     "Adam sought God first",
+     "God called out to Adam",
+     "No one sought anyone",
+     "Eve led the search"
+    ],
+    "es": [
+     "Adán buscó a Dios primero",
+     "Dios llamó a Adán",
+     "Nadie buscó a nadie",
+     "Eva lideró la búsqueda"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "God called out to Adam, showing that He takes the initiative in seeking sinners.",
+    "es": "Dios llamó a Adán, mostrando que Él toma la iniciativa en buscar a los pecadores."
+   }
+  },
+  {
+   "stem": {
+    "en": "Luke 19:10 teaches that Jesus came to:",
+    "es": "Lucas 19:10 enseña que Jesús vino a:"
+   },
+   "options": {
+    "en": [
+     "Judge politics",
+     "Build institutions",
+     "Seek and save the lost",
+     "Teach morals only"
+    ],
+    "es": [
+     "Juzgar la política",
+     "Construir instituciones",
+     "Buscar y salvar lo perdido",
+     "Enseñar solo moral"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Jesus declared He came to seek and to save that which was lost.",
+    "es": "Jesús declaró que vino a buscar y salvar lo que se había perdido."
+   }
+  },
+  {
+   "stem": {
+    "en": "In the Old Testament, Israel was meant to be:",
+    "es": "En el Antiguo Testamento, Israel debía ser:"
+   },
+   "options": {
+    "en": [
+     "A hidden nation only",
+     "A light to the nations",
+     "A political empire",
+     "A private religion"
+    ],
+    "es": [
+     "Solo una nación escondida",
+     "Una luz para las naciones",
+     "Un imperio político",
+     "Una religión privada"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Israel was called to be a light to the nations (Isaiah 49:6) and a kingdom of priests (Exodus 19:6).",
+    "es": "Israel fue llamado a ser una luz para las naciones (Isaías 49:6) y un reino de sacerdotes (Éxodo 19:6)."
+   }
+  },
+  {
+   "stem": {
+    "en": "Psalm 96:3 calls believers to:",
+    "es": "Salmo 96:3 llama a los creyentes a:"
+   },
+   "options": {
+    "en": [
+     "Hide God's glory",
+     "Debate endlessly",
+     "Serve in silence only",
+     "Declare His glory among the nations"
+    ],
+    "es": [
+     "Esconder la gloria de Dios",
+     "Debatir sin fin",
+     "Servir solo en silencio",
+     "Declarar su gloria entre las naciones"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The psalm commands declaring God's glory among the heathen and His wonders among all people.",
+    "es": "El salmo ordena declarar la gloria de Dios entre los paganos y sus maravillas entre todos los pueblos."
+   }
+  },
+  {
+   "stem": {
+    "en": "Matthew 4:19 connects following Christ with:",
+    "es": "Mateo 4:19 conecta el seguir a Cristo con:"
+   },
+   "options": {
+    "en": [
+     "Avoiding people",
+     "Political activism",
+     "Religious isolation",
+     "Becoming fishers of men"
+    ],
+    "es": [
+     "Evitar a la gente",
+     "Activismo político",
+     "Aislamiento religioso",
+     "Llegar a ser pescadores de hombres"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Jesus said He would make them fishers of men—following Christ and reaching others are inseparable.",
+    "es": "Jesús dijo que los haría pescadores de hombres—seguir a Cristo y alcanzar a otros son inseparables."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Great Commission in Matthew 28 includes:",
+    "es": "La Gran Comisión en Mateo 28 incluye:"
+   },
+   "options": {
+    "en": [
+     "Going, making disciples, baptizing, and teaching",
+     "Only baptizing",
+     "Only preaching to believers",
+     "Only building churches"
+    ],
+    "es": [
+     "Ir, hacer discípulos, bautizar y enseñar",
+     "Solo bautizar",
+     "Solo predicar a creyentes",
+     "Solo construir iglesias"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The commission includes four actions: going, making disciples, baptizing, and teaching.",
+    "es": "La comisión incluye cuatro acciones: ir, hacer discípulos, bautizar y enseñar."
+   }
+  },
+  {
+   "stem": {
+    "en": "Acts 1:8 teaches that believers receive power from:",
+    "es": "Hechos 1:8 enseña que los creyentes reciben poder de:"
+   },
+   "options": {
+    "en": [
+     "Training alone",
+     "The Holy Spirit",
+     "Tradition",
+     "Natural personality"
+    ],
+    "es": [
+     "Solo el entrenamiento",
+     "El Espíritu Santo",
+     "Tradición",
+     "Personalidad natural"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Power for witness comes from the Holy Spirit, not human ability.",
+    "es": "El poder para el testimonio viene del Espíritu Santo, no de la habilidad humana."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to 1 Corinthians 3:6, the increase comes from:",
+    "es": "Según 1 Corintios 3:6, el crecimiento viene de:"
+   },
+   "options": {
+    "en": [
+     "The evangelist",
+     "The church program",
+     "God",
+     "Technique"
+    ],
+    "es": [
+     "El evangelista",
+     "El programa de la iglesia",
+     "Dios",
+     "Técnica"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Paul plants, Apollos waters, but God gives the increase. Results belong to God.",
+    "es": "Pablo planta, Apolos riega, pero Dios da el crecimiento. Los resultados pertenecen a Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "Biblical evangelism is best described as:",
+    "es": "El evangelismo bíblico se describe mejor como:"
+   },
+   "options": {
+    "en": [
+     "A human invention",
+     "An optional ministry for a few",
+     "A method for getting decisions",
+     "Participation in God's redemptive work"
+    ],
+    "es": [
+     "Invención humana",
+     "Un ministerio opcional para unos pocos",
+     "Un método para obtener decisiones",
+     "Participación en la obra redentora de Dios"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Evangelism is participation in what God is already doing, not a human program.",
+    "es": "El evangelismo es participación en lo que Dios ya está haciendo, no un programa humano."
+   }
+  },
+  {
+   "stem": {
+    "en": "Henry Goerner's Thus It Is Written describes God's original plan as:",
+    "es": "El libro 'Así está Escrito' de Henry Goerner describe el plan original de Dios como:"
+   },
+   "options": {
+    "en": [
+     "Winning the entire human family",
+     "Saving only the Jews",
+     "Building the temple",
+     "Ending all war"
+    ],
+    "es": [
+     "Ganar a toda la familia humana",
+     "Salvar solo a los judíos",
+     "Construir el templo",
+     "Terminar toda guerra"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Goerner traces God's purpose to win the entire human family from Genesis forward.",
+    "es": "Goerner traza el propósito de Dios de ganar a toda la familia humana desde Génesis."
+   }
+  },
+  {
+   "stem": {
+    "en": "In Genesis 12:3, God promised that in Abraham would be blessed:",
+    "es": "En Génesis 12:3, Dios prometió que en Abraham serían benditas:"
+   },
+   "options": {
+    "en": [
+     "Only his direct heirs",
+     "Only the Hebrew tribes",
+     "All families of the earth",
+     "The Egyptians alone"
+    ],
+    "es": [
+     "Solo sus herederos directos",
+     "Solo las tribus hebreas",
+     "Todas las familias de la tierra",
+     "Solo los egipcios"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "All families of the earth were to be blessed in Abraham—the global scope is clear.",
+    "es": "Todas las familias de la tierra serían benditas en Abraham—el alcance global es claro."
+   }
+  },
+  {
+   "stem": {
+    "en": "Exodus 19:6 calls Israel to be:",
+    "es": "Éxodo 19:6 llama a Israel a ser:"
+   },
+   "options": {
+    "en": [
+     "A kingdom of priests and a holy nation",
+     "A merchant nation",
+     "A military empire",
+     "A secret society"
+    ],
+    "es": [
+     "Un reino de sacerdotes y una nación santa",
+     "Una nación mercante",
+     "Un imperio militar",
+     "Una sociedad secreta"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Israel was called to be a kingdom of priests—chosen for service, not privilege.",
+    "es": "Israel fue llamado a ser un reino de sacerdotes—escogido para servicio, no privilegio."
+   }
+  },
+  {
+   "stem": {
+    "en": "In Matthew 21:43, Jesus said the kingdom of God would be:",
+    "es": "En Mateo 21:43, Jesús dijo que el reino de Dios sería:"
+   },
+   "options": {
+    "en": [
+     "Restored to Israel forever",
+     "Taken from Israel and given to a nation bearing its fruits",
+     "Withdrawn from the earth",
+     "Limited to the Pharisees"
+    ],
+    "es": [
+     "Restaurado a Israel para siempre",
+     "Quitado de Israel y dado a una nación que produce sus frutos",
+     "Retirado de la tierra",
+     "Limitado a los fariseos"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The kingdom was taken from Israel and given to a nation (the church) that produces its fruit.",
+    "es": "El reino fue quitado de Israel y dado a una nación (la iglesia) que produce su fruto."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to Coleman's Master Plan, Jesus' primary method was:",
+    "es": "Según el Plan Maestro de Coleman, el método principal de Jesús fue:"
+   },
+   "options": {
+    "en": [
+     "Building large crowds",
+     "Men—concentrating on the twelve",
+     "Writing books",
+     "Political alliance"
+    ],
+    "es": [
+     "Construir grandes multitudes",
+     "Hombres—concentrándose en los doce",
+     "Escribir libros",
+     "Alianza política"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Men were His method—Jesus poured His life into a small group who would carry the gospel.",
+    "es": "Los hombres fueron su método—Jesús invirtió su vida en un pequeño grupo que llevaría el evangelio."
+   }
+  },
+  {
+   "stem": {
+    "en": "In Joseph Aldrich's fictional Gabriel dialogue, Jesus says:",
+    "es": "En el diálogo ficticio de José Aldrich con Gabriel, Jesús dice:"
+   },
+   "options": {
+    "en": [
+     "I have a backup plan in the angels",
+     "The Father will send another",
+     "Only Peter matters",
+     "I'm counting on them"
+    ],
+    "es": [
+     "Tengo un plan de respaldo en los ángeles",
+     "El Padre enviará a otro",
+     "Solo Pedro importa",
+     "Cuento con ellos"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Jesus says, 'I haven't made any other plans. I'm counting on them.'",
+    "es": "Jesús dice: 'No he hecho otros planes. Cuento con ellos.'"
+   }
+  },
+  {
+   "stem": {
+    "en": "The New Testament shows three patterns of evangelism: personal, mass, and:",
+    "es": "El Nuevo Testamento muestra tres patrones de evangelismo: personal, masivo y:"
+   },
+   "options": {
+    "en": [
+     "Political",
+     "Liturgical",
+     "Academic",
+     "Lifestyle"
+    ],
+    "es": [
+     "Político",
+     "Litúrgico",
+     "Académico",
+     "Estilo de vida"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The third pattern is lifestyle evangelism—'go and live.'",
+    "es": "El tercer patrón es el evangelismo como estilo de vida—'ir y vivir'."
+   }
+  },
+  {
+   "stem": {
+    "en": "What illustration frames the believer's role in this unit?",
+    "es": "¿Qué ilustración enmarca el papel del creyente en esta unidad?"
+   },
+   "options": {
+    "en": [
+     "A fisherman",
+     "A shepherd",
+     "A builder",
+     "A soldier"
+    ],
+    "es": [
+     "Un pescador",
+     "Un pastor",
+     "Un constructor",
+     "Un soldado"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The fisherman illustration from Matthew 4:19 and Brad Johnson's fishing champion.",
+    "es": "La ilustración del pescador de Mateo 4:19 y el campeón de pesca de Brad Johnson."
+   }
+  },
+  {
+   "stem": {
+    "en": "Evangelism is described in the conclusion as participation in:",
+    "es": "El evangelismo se describe en la conclusión como participación en:"
+   },
+   "options": {
+    "en": [
+     "Church marketing",
+     "Religious debate",
+     "The redemptive work of God",
+     "Human innovation"
+    ],
+    "es": [
+     "Marketing de la iglesia",
+     "Debate religioso",
+     "La obra redentora de Dios",
+     "Innovación humana"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Evangelism is participation in God's redemptive work, not human marketing or debate.",
+    "es": "El evangelismo es participación en la obra redentora de Dios, no marketing o debate humano."
+   }
+  },
+  {
+   "stem": {
+    "en": "What must evangelism be grounded in to remain faithful and spiritually sound?",
+    "es": "¿En qué debe basarse el evangelismo para permanecer fiel y espiritualmente sólido?"
+   },
+   "options": {
+    "en": [
+     "Methods",
+     "Culture",
+     "The Word of God",
+     "Tradition"
+    ],
+    "es": [
+     "Métodos",
+     "Cultura",
+     "La Palabra de Dios",
+     "Tradición"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Only when evangelism is grounded in the Word of God will it remain faithful.",
+    "es": "Solo cuando el evangelismo se basa en la Palabra de Dios se mantendrá fiel."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "According to the unit, evangelism is rooted in the very nature and purpose of God. Explain why evangelism must therefore be understood as participation in God's work rather than as a human program.",
+    "es": "Según la unidad, el evangelismo está arraigado en la naturaleza y el propósito de Dios. Explique por qué el evangelismo debe entenderse como participación en la obra de Dios y no como un programa humano."
+   },
+   "keywords": {
+    "en": [
+     "god",
+     "particip",
+     "work",
+     "divine",
+     "redempt",
+     "join",
+     "initiat",
+     "purpos"
+    ],
+    "es": [
+     "dios",
+     "particip",
+     "obra",
+     "divin",
+     "redent",
+     "unir",
+     "iniciat",
+     "propósit"
+    ]
+   },
+   "model": {
+    "en": "Evangelism is rooted in the very nature and purpose of God. Because God himself takes the initiative to redeem, evangelism is not a human program but participation in His divine redemptive work; we join what He is already doing.",
+    "es": "El evangelismo está arraigado en la naturaleza y el propósito de Dios. Porque Dios mismo toma la iniciativa de redimir, el evangelismo no es un programa humano sino participación en su obra redentora divina; nos unimos a lo que Él ya está haciendo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Genesis 3:9 records that after the fall, God called out, 'Where are you?' Explain how this single verse establishes the divine pattern of seeking initiative that runs through all of Scripture.",
+    "es": "Génesis 3:9 registra que después de la caída, Dios llamó: '¿Dónde estás tú?' Explique cómo este solo versículo establece el patrón divino de iniciativa de búsqueda que recorre toda la Escritura."
+   },
+   "keywords": {
+    "en": [
+     "god",
+     "initiat",
+     "seek",
+     "call",
+     "first",
+     "fall",
+     "adam",
+     "sinner"
+    ],
+    "es": [
+     "dios",
+     "iniciat",
+     "busc",
+     "llam",
+     "primer",
+     "caíd",
+     "adán",
+     "pecador"
+    ]
+   },
+   "model": {
+    "en": "After the fall, God called out 'Where are you?' He sought Adam first. This shows the divine pattern of seeking initiative: throughout Scripture God takes the first step toward the sinner rather than waiting to be found.",
+    "es": "Después de la caída, Dios llamó: '¿Dónde estás tú?' Buscó a Adán primero. Esto muestra el patrón divino de iniciativa de búsqueda: a lo largo de la Escritura Dios da el primer paso hacia el pecador en lugar de esperar a ser hallado."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Summarize Henry Goerner's framework in Thus It Is Written. How does the sequence from the Flood, to Babel, to Abraham, to Israel, to the church show that God's redemptive purpose was global from the beginning?",
+    "es": "Resuma el marco de Henry Goerner en 'Así está Escrito'. ¿Cómo muestra la secuencia del Diluvio, Babel, Abraham, Israel y la iglesia que el propósito redentor de Dios era global desde el principio?"
+   },
+   "keywords": {
+    "en": [
+     "goerner",
+     "global",
+     "world",
+     "abraham",
+     "famil",
+     "nation",
+     "redempt",
+     "begin"
+    ],
+    "es": [
+     "goerner",
+     "global",
+     "mund",
+     "abraham",
+     "famil",
+     "nacion",
+     "redent",
+     "principi"
+    ]
+   },
+   "model": {
+    "en": "Goerner traces the sequence from the Flood to Babel to Abraham to Israel to the church, showing God's redemptive purpose was global from the beginning. In Abraham all families of the earth would be blessed; the scope was the whole world, every nation.",
+    "es": "Goerner traza la secuencia del Diluvio a Babel, a Abraham, a Israel y a la iglesia, mostrando que el propósito redentor de Dios fue global desde el principio. En Abraham serían benditas todas las familias de la tierra; el alcance era el mundo entero, cada nación."
+   }
+  },
+  {
+   "prompt": {
+    "en": "The Great Commission contains four actions. List them and explain why evangelism is not complete with only one.",
+    "es": "La Gran Comisión contiene cuatro acciones. Enumérelas y explique por qué el evangelismo no está completo con solo una."
+   },
+   "keywords": {
+    "en": [
+     "go",
+     "discipl",
+     "baptiz",
+     "teach",
+     "commission",
+     "four",
+     "complet",
+     "obey"
+    ],
+    "es": [
+     "ir",
+     "discípul",
+     "bautiz",
+     "enseñ",
+     "comisión",
+     "cuatro",
+     "complet",
+     "obed"
+    ]
+   },
+   "model": {
+    "en": "The Great Commission has four actions: go, make disciples, baptize, and teach them to obey. Evangelism is not complete with only one. Making a convert without baptizing and teaching leaves the commission unfinished.",
+    "es": "La Gran Comisión tiene cuatro acciones: ir, hacer discípulos, bautizar y enseñar a obedecer. El evangelismo no se completa con solo una. Hacer un converso sin bautizar y enseñar deja la comisión inconclusa."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Acts 1:8 connects the Holy Spirit with witness. Explain why evangelism without dependence upon the Holy Spirit becomes 'mere human effort,' and what posture replaces both manipulation and timidity.",
+    "es": "Hechos 1:8 conecta el Espíritu Santo con el testimonio. Explique por qué el evangelismo sin dependencia del Espíritu Santo se convierte en 'mero esfuerzo humano', y qué postura reemplaza tanto la manipulación como la timidez."
+   },
+   "keywords": {
+    "en": [
+     "spirit",
+     "power",
+     "witness",
+     "depend",
+     "human",
+     "wait",
+     "bold",
+     "enabl"
+    ],
+    "es": [
+     "espíritu",
+     "poder",
+     "testig",
+     "depend",
+     "human",
+     "esper",
+     "valien",
+     "capacit"
+    ]
+   },
+   "model": {
+    "en": "Acts 1:8 ties witness to the Holy Spirit's power. Without dependence on the Spirit, evangelism becomes mere human effort. The posture that replaces both manipulation and timidity is bold, Spirit-enabled witness: waiting on God's power rather than trusting our own.",
+    "es": "Hechos 1:8 une el testimonio al poder del Espíritu Santo. Sin dependencia del Espíritu, el evangelismo se vuelve mero esfuerzo humano. La postura que reemplaza tanto la manipulación como la timidez es un testimonio valiente y capacitado por el Espíritu: esperar en el poder de Dios en vez de confiar en el nuestro."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Paul wrote, 'I planted, Apollos watered, but God gave the increase.' How does this verse protect the evangelist from both pride and discouragement?",
+    "es": "Pablo escribió: 'Yo planté, Apolos regó; pero el crecimiento lo ha dado Dios.' ¿Cómo protege este versículo al evangelista tanto del orgullo como del desánimo?"
+   },
+   "keywords": {
+    "en": [
+     "plant",
+     "water",
+     "increase",
+     "god",
+     "result",
+     "pride",
+     "discourag",
+     "faith"
+    ],
+    "es": [
+     "plant",
+     "reg",
+     "crecimi",
+     "dios",
+     "result",
+     "orgull",
+     "desánim",
+     "fiel"
+    ]
+   },
+   "model": {
+    "en": "Paul planted, Apollos watered, but God gave the increase. This guards the evangelist from pride, because the results are God's, not ours; and from discouragement, because our task is faithful planting and watering, not producing the growth.",
+    "es": "Pablo plantó, Apolos regó, pero Dios dio el crecimiento. Esto guarda al evangelista del orgullo, porque los resultados son de Dios y no nuestros; y del desánimo, porque nuestra tarea es plantar y regar fielmente, no producir el crecimiento."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Robert Coleman drew principles from Jesus' approach to evangelism. Choose two of the five principles described in this unit and explain how they apply to evangelism today.",
+    "es": "Robert Coleman extrajo principios del enfoque de Jesús hacia el evangelismo. Elija dos de los cinco principios descritos en esta unidad y explique cómo se aplican al evangelismo hoy."
+   },
+   "keywords": {
+    "en": [
+     "coleman",
+     "method",
+     "obedien",
+     "men",
+     "discipl",
+     "time",
+     "associ",
+     "reproduc"
+    ],
+    "es": [
+     "coleman",
+     "método",
+     "obedien",
+     "hombr",
+     "discípul",
+     "tiemp",
+     "asocia",
+     "reproduc"
+    ]
+   },
+   "model": {
+    "en": "Coleman drew principles from Jesus' method. Two examples: selection and association, Jesus concentrated on a few men and gave them His time; and reproduction, He expected those disciples to reproduce by obedience, multiplying His work rather than gathering crowds.",
+    "es": "Coleman extrajo principios del método de Jesús. Dos ejemplos: selección y asociación, Jesús se concentró en unos pocos hombres y les dio su tiempo; y reproducción, esperaba que esos discípulos se reprodujeran por obediencia, multiplicando su obra en vez de juntar multitudes."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Jesus engaged personally with Nicodemus, the Samaritan woman, Zacchaeus, and the rich young ruler. What does this pattern teach us about the scope of evangelism beyond the pulpit?",
+    "es": "Jesús se relacionó personalmente con Nicodemo, la mujer samaritana, Zaqueo y el joven rico. ¿Qué nos enseña este patrón sobre el alcance del evangelismo más allá del púlpito?"
+   },
+   "keywords": {
+    "en": [
+     "personal",
+     "individ",
+     "convers",
+     "nicodem",
+     "samarit",
+     "zacch",
+     "scope",
+     "beyond"
+    ],
+    "es": [
+     "personal",
+     "individ",
+     "conversa",
+     "nicodem",
+     "samarit",
+     "zaqu",
+     "alcanc",
+     "allá"
+    ]
+   },
+   "model": {
+    "en": "Jesus dealt personally with Nicodemus, the Samaritan woman, Zacchaeus, and the rich young ruler. The pattern teaches that evangelism reaches beyond the pulpit to individual conversation. Its scope is personal, one soul at a time, not only public preaching.",
+    "es": "Jesús trató personalmente con Nicodemo, la mujer samaritana, Zaqueo y el joven rico. El patrón enseña que el evangelismo alcanza más allá del púlpito hasta la conversación individual. Su alcance es personal, un alma a la vez, no solo la predicación pública."
+   }
+  },
+  {
+   "prompt": {
+    "en": "The unit states that evangelism is 'not optional for the believer.' Defend this claim from both the Great Commission and Matthew 21:43.",
+    "es": "La unidad afirma que el evangelismo 'no es opcional para el creyente.' Defienda esta afirmación tanto desde la Gran Comisión como desde Mateo 21:43."
+   },
+   "keywords": {
+    "en": [
+     "command",
+     "obey",
+     "kingdom",
+     "option",
+     "commission",
+     "fruit",
+     "believ",
+     "matthew"
+    ],
+    "es": [
+     "mandami",
+     "obed",
+     "reino",
+     "opcion",
+     "comisión",
+     "frut",
+     "crey",
+     "mateo"
+    ]
+   },
+   "model": {
+    "en": "Evangelism is not optional. The Great Commission is a command every believer must obey. And Matthew 21:43 warns the kingdom is taken from those who fail to produce its fruit; faithfulness in evangelism is part of bearing that fruit.",
+    "es": "El evangelismo no es opcional. La Gran Comisión es un mandamiento que todo creyente debe obedecer. Y Mateo 21:43 advierte que el reino es quitado de quienes no producen su fruto; la fidelidad en el evangelismo es parte de llevar ese fruto."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Synthesize the seven sections of this unit into one paragraph showing how the biblical foundation of evangelism begins with God, is revealed in Scripture, modeled by Christ, commanded to believers, and empowered by the Holy Spirit.",
+    "es": "Sintetice las siete secciones de esta unidad en un párrafo que muestre cómo el fundamento bíblico del evangelismo comienza con Dios, se revela en las Escrituras, es modelado por Cristo, ordenado a los creyentes y potenciado por el Espíritu Santo."
+   },
+   "keywords": {
+    "en": [
+     "god",
+     "scriptur",
+     "christ",
+     "spirit",
+     "command",
+     "believ",
+     "reveal",
+     "foundat"
+    ],
+    "es": [
+     "dios",
+     "escritur",
+     "cristo",
+     "espíritu",
+     "mandami",
+     "crey",
+     "revel",
+     "fundament"
+    ]
+   },
+   "model": {
+    "en": "The biblical foundation of evangelism begins with God, who initiates redemption; is revealed throughout Scripture; is modeled by Christ in His seeking and His method; is commanded to every believer; and is empowered by the Holy Spirit. These rest on one foundation.",
+    "es": "El fundamento bíblico del evangelismo comienza con Dios, quien inicia la redención; se revela en toda la Escritura; es modelado por Cristo en su búsqueda y su método; es mandado a cada creyente; y es potenciado por el Espíritu Santo. Todo descansa sobre un fundamento."
+   }
+  }
+ ]
+};

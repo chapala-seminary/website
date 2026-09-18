@@ -1,0 +1,833 @@
+/* CTSEvangelism — unit 12. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "evangelism",
+ "unit": 12,
+ "totalUnits": 13,
+ "filePrefix": "CTSEvangelism",
+ "prevHref": "CTSEvangelismUnit11.html",
+ "nextHref": "CTSEvangelismUnit13.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "Evangelism is best understood as:",
+    "es": "El evangelismo se entiende mejor como:"
+   },
+   "options": {
+    "en": [
+     "A way of life",
+     "Occasional activity",
+     "Optional ministry",
+     "A program only"
+    ],
+    "es": [
+     "Un estilo de vida",
+     "Actividad ocasional",
+     "Ministerio opcional",
+     "Solo un programa"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Evangelism is a continual expression of the Christian life, not an occasional program.",
+    "es": "El evangelismo es una expresión continua de la vida cristiana, no un programa ocasional."
+   }
+  },
+  {
+   "stem": {
+    "en": "Matthew 4:19 teaches that:",
+    "es": "Mateo 4:19 enseña que:"
+   },
+   "options": {
+    "en": [
+     "Silence is best",
+     "Following Christ leads to fishing for men",
+     "Evangelism is to be avoided",
+     "Debate is central"
+    ],
+    "es": [
+     "El silencio es lo mejor",
+     "Seguir a Cristo conduce a pescar hombres",
+     "El evangelismo debe evitarse",
+     "El debate es central"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "'Follow Me, and I will make you fishers of men'—following leads to reaching others.",
+    "es": "'Seguidme, y yo os haré pescadores de hombres'—seguir conduce a alcanzar a otros."
+   }
+  },
+  {
+   "stem": {
+    "en": "In evangelism, the message must remain:",
+    "es": "En el evangelismo, el mensaje debe permanecer:"
+   },
+   "options": {
+    "en": [
+     "Flexible",
+     "Cultural",
+     "Clear and faithful to Scripture",
+     "Optional"
+    ],
+    "es": [
+     "Flexible",
+     "Cultural",
+     "Claro y fiel a las Escrituras",
+     "Opcional"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "The message must remain clear, complete, and faithful to Scripture.",
+    "es": "El mensaje debe permanecer claro, completo y fiel a las Escrituras."
+   }
+  },
+  {
+   "stem": {
+    "en": "In evangelism, methods should be:",
+    "es": "En el evangelismo, los métodos deben ser:"
+   },
+   "options": {
+    "en": [
+     "Fixed",
+     "Primary",
+     "Unnecessary",
+     "Flexible and secondary to the message"
+    ],
+    "es": [
+     "Fijos",
+     "Primarios",
+     "Innecesarios",
+     "Flexibles y secundarios al mensaje"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Methods are flexible and secondary; the message governs the method.",
+    "es": "Los métodos son flexibles y secundarios; el mensaje gobierna el método."
+   }
+  },
+  {
+   "stem": {
+    "en": "2 Timothy 1:13 instructs believers to:",
+    "es": "2 Timoteo 1:13 instruye a los creyentes a:"
+   },
+   "options": {
+    "en": [
+     "Hold fast sound words",
+     "Change the message",
+     "Stay silent",
+     "Avoid teaching"
+    ],
+    "es": [
+     "Retener las sanas palabras",
+     "Cambiar el mensaje",
+     "Permanecer en silencio",
+     "Evitar enseñar"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "'Hold fast the pattern of sound words'—the message is not to be altered.",
+    "es": "'Retén la forma de las sanas palabras'—el mensaje no debe ser alterado."
+   }
+  },
+  {
+   "stem": {
+    "en": "Dependence on God in evangelism involves:",
+    "es": "La dependencia de Dios en el evangelismo involucra:"
+   },
+   "options": {
+    "en": [
+     "Effort only",
+     "Prayer, sensitivity, and trust",
+     "Silence",
+     "Avoidance"
+    ],
+    "es": [
+     "Solo esfuerzo",
+     "Oración, sensibilidad y confianza",
+     "Silencio",
+     "Evitación"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Dependence includes prayer, sensitivity, and trust in God.",
+    "es": "La dependencia incluye oración, sensibilidad y confianza en Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "2 Corinthians 3:5 teaches that:",
+    "es": "2 Corintios 3:5 enseña que:"
+   },
+   "options": {
+    "en": [
+     "We are self-sufficient",
+     "Effort saves",
+     "Our sufficiency is from God",
+     "Silence is best"
+    ],
+    "es": [
+     "Somos autosuficientes",
+     "El esfuerzo salva",
+     "Nuestra suficiencia proviene de Dios",
+     "El silencio es lo mejor"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "'Our sufficiency is from God'—not from ourselves.",
+    "es": "'Nuestra suficiencia proviene de Dios'—no de nosotros mismos."
+   }
+  },
+  {
+   "stem": {
+    "en": "Opportunities for evangelism must be:",
+    "es": "Las oportunidades para el evangelismo deben ser:"
+   },
+   "options": {
+    "en": [
+     "Ignored",
+     "Avoided",
+     "Delayed",
+     "Recognized and seized"
+    ],
+    "es": [
+     "Ignoradas",
+     "Evitadas",
+     "Demoradas",
+     "Reconocidas y aprovechadas"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The believer must be aware, ready, and willing to seize opportunities.",
+    "es": "El creyente debe estar consciente, preparado y dispuesto a aprovechar las oportunidades."
+   }
+  },
+  {
+   "stem": {
+    "en": "Colossians 4:5 instructs believers to:",
+    "es": "Colosenses 4:5 instruye a los creyentes a:"
+   },
+   "options": {
+    "en": [
+     "Walk in wisdom, redeeming the time",
+     "Delay",
+     "Avoid outsiders",
+     "Wait passively"
+    ],
+    "es": [
+     "Andar sabiamente, redimiendo el tiempo",
+     "Demorar",
+     "Evitar a los de afuera",
+     "Esperar pasivamente"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "'Walk in wisdom toward those who are outside, redeeming the time.'",
+    "es": "'Andad sabiamente para con los de afuera, redimiendo el tiempo.'"
+   }
+  },
+  {
+   "stem": {
+    "en": "Boldness in evangelism must be balanced with:",
+    "es": "La valentía en el evangelismo debe equilibrarse con:"
+   },
+   "options": {
+    "en": [
+     "Fear",
+     "Wisdom",
+     "Silence",
+     "Delay"
+    ],
+    "es": [
+     "Temor",
+     "Sabiduría",
+     "Silencio",
+     "Demora"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Boldness without wisdom can be harsh; wisdom without boldness can be silent.",
+    "es": "La valentía sin sabiduría puede ser áspera; la sabiduría sin valentía puede ser silenciosa."
+   }
+  },
+  {
+   "stem": {
+    "en": "Ephesians 6:19 records Paul's request for:",
+    "es": "Efesios 6:19 registra la petición de Pablo de:"
+   },
+   "options": {
+    "en": [
+     "Silence",
+     "Fear",
+     "Avoidance",
+     "Bold speech to make known the gospel"
+    ],
+    "es": [
+     "Silencio",
+     "Temor",
+     "Evitación",
+     "Hablar con denuedo para dar a conocer el evangelio"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Paul asked for prayer 'that I may open my mouth boldly.'",
+    "es": "Pablo pidió oración 'para que al abrir mi boca me sea dada palabra... con denuedo.'"
+   }
+  },
+  {
+   "stem": {
+    "en": "Perseverance in evangelism is necessary because:",
+    "es": "La perseverancia en el evangelismo es necesaria porque:"
+   },
+   "options": {
+    "en": [
+     "Results are always immediate",
+     "Effort is unnecessary",
+     "Results often take time",
+     "Silence is better"
+    ],
+    "es": [
+     "Los resultados son siempre inmediatos",
+     "El esfuerzo es innecesario",
+     "Los resultados a menudo toman tiempo",
+     "El silencio es mejor"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Some seeds take time; faithfulness over time is essential.",
+    "es": "Algunas semillas toman tiempo; la fidelidad a lo largo del tiempo es esencial."
+   }
+  },
+  {
+   "stem": {
+    "en": "Galatians 6:9 encourages believers to:",
+    "es": "Gálatas 6:9 anima a los creyentes a:"
+   },
+   "options": {
+    "en": [
+     "Quit",
+     "Avoid the work",
+     "Delay",
+     "Not grow weary in doing good"
+    ],
+    "es": [
+     "Renunciar",
+     "Evitar la obra",
+     "Demorar",
+     "No cansarse de hacer el bien"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "'Let us not grow weary while doing good, for in due season we shall reap.'",
+    "es": "'No nos cansemos de hacer bien; porque a su tiempo segaremos.'"
+   }
+  },
+  {
+   "stem": {
+    "en": "The correct perspective in evangelism is that:",
+    "es": "La perspectiva correcta en el evangelismo es que:"
+   },
+   "options": {
+    "en": [
+     "God gives the increase",
+     "Man controls results",
+     "Methods save",
+     "Effort saves"
+    ],
+    "es": [
+     "Dios da el crecimiento",
+     "El hombre controla los resultados",
+     "Los métodos salvan",
+     "El esfuerzo salva"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Results belong to God, who gives the increase—guarding against pride and despair.",
+    "es": "Los resultados pertenecen a Dios, que da el crecimiento—protegiendo del orgullo y la desesperación."
+   }
+  },
+  {
+   "stem": {
+    "en": "1 Corinthians 3:7 teaches that:",
+    "es": "1 Corintios 3:7 enseña que:"
+   },
+   "options": {
+    "en": [
+     "Man saves",
+     "God gives the increase",
+     "Effort saves",
+     "Silence saves"
+    ],
+    "es": [
+     "El hombre salva",
+     "Dios da el crecimiento",
+     "El esfuerzo salva",
+     "El silencio salva"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Neither planter nor waterer is anything, 'but God who gives the increase.'",
+    "es": "Ni el que planta ni el que riega es algo, 'sino Dios, que da el crecimiento.'"
+   }
+  },
+  {
+   "stem": {
+    "en": "In evangelism, the church provides:",
+    "es": "En el evangelismo, la iglesia provee:"
+   },
+   "options": {
+    "en": [
+     "Isolation",
+     "Confusion",
+     "Teaching, support, and accountability",
+     "Delay"
+    ],
+    "es": [
+     "Aislamiento",
+     "Confusión",
+     "Enseñanza, apoyo y rendición de cuentas",
+     "Demora"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Evangelism is personal and corporate; the church supports and strengthens it.",
+    "es": "El evangelismo es personal y corporativo; la iglesia lo apoya y fortalece."
+   }
+  },
+  {
+   "stem": {
+    "en": "Acts 2:47 shows the early church:",
+    "es": "Hechos 2:47 muestra a la iglesia primitiva:"
+   },
+   "options": {
+    "en": [
+     "In decline",
+     "Silent",
+     "Avoiding others",
+     "Growing as the Lord added daily"
+    ],
+    "es": [
+     "En declive",
+     "Silenciosa",
+     "Evitando a otros",
+     "Creciendo mientras el Señor añadía cada día"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "'The Lord added to the church daily those who were being saved.'",
+    "es": "'El Señor añadía cada día a la iglesia los que habían de ser salvos.'"
+   }
+  },
+  {
+   "stem": {
+    "en": "Evangelism is not complete until it is:",
+    "es": "El evangelismo no está completo hasta que es:"
+   },
+   "options": {
+    "en": [
+     "Reproduced in others",
+     "Hidden",
+     "Avoided",
+     "Delayed"
+    ],
+    "es": [
+     "Reproducido en otros",
+     "Escondido",
+     "Evitado",
+     "Demorado"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Believers train and model so evangelism reproduces in faithful others.",
+    "es": "Los creyentes entrenan y modelan para que el evangelismo se reproduzca en otros fieles."
+   }
+  },
+  {
+   "stem": {
+    "en": "2 Timothy 2:2 instructs believers to:",
+    "es": "2 Timoteo 2:2 instruye a los creyentes a:"
+   },
+   "options": {
+    "en": [
+     "Hide truth",
+     "Pass truth on to faithful men",
+     "Avoid truth",
+     "Keep truth to themselves"
+    ],
+    "es": [
+     "Esconder la verdad",
+     "Pasar la verdad a hombres fieles",
+     "Evitar la verdad",
+     "Guardar la verdad para sí"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Commit what you have heard 'to faithful men who will be able to teach others also.'",
+    "es": "Encarga lo que has oído 'a hombres fieles que sean idóneos para enseñar también a otros.'"
+   }
+  },
+  {
+   "stem": {
+    "en": "When integrated and faithful, evangelism becomes:",
+    "es": "Cuando es integrado y fiel, el evangelismo se vuelve:"
+   },
+   "options": {
+    "en": [
+     "A burden",
+     "Confusion",
+     "A natural expression of the Christian life",
+     "Something to avoid"
+    ],
+    "es": [
+     "Una carga",
+     "Confusión",
+     "Una expresión natural de la vida cristiana",
+     "Algo que evitar"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Integrated faithfully, evangelism is not a burden but a natural part of the Christian life.",
+    "es": "Integrado fielmente, el evangelismo no es una carga sino una parte natural de la vida cristiana."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Explain what it means that evangelism is 'a way of life' rather than an occasional program (Matthew 4:19).",
+    "es": "Explique qué significa que el evangelismo es 'un estilo de vida' en lugar de un programa ocasional (Mateo 4:19)."
+   },
+   "keywords": {
+    "en": [
+     "life",
+     "way",
+     "follow",
+     "natural",
+     "matthew",
+     "program",
+     "occasion",
+     "ongoing"
+    ],
+    "es": [
+     "vida",
+     "estilo",
+     "segui",
+     "natural",
+     "mateo",
+     "programa",
+     "ocasion",
+     "continu"
+    ]
+   },
+   "model": {
+    "en": "Matthew 4:19 records Jesus' call to follow Him and become fishers of men — witness flows naturally from following Christ. Evangelism as a way of life rather than an occasional program means it is woven into ordinary, everyday living rather than confined to scheduled events. The believer is always a witness, alert to opportunities in normal relationships and routines. It is not a task to perform now and then but an ongoing identity: following Christ makes one a fisher of men continually.",
+    "es": "Mateo 4:19 registra el llamado de Jesús a seguirle y llegar a ser pescadores de hombres — el testimonio fluye naturalmente del seguir a Cristo. El evangelismo como estilo de vida en lugar de un programa ocasional significa que está entretejido en el vivir cotidiano y ordinario en vez de confinado a eventos programados. El creyente es siempre un testigo, atento a las oportunidades en las relaciones y rutinas normales. No es una tarea que se realiza de vez en cuando sino una identidad continua: seguir a Cristo lo hace a uno pescador de hombres de continuo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the relationship between message and method in evangelism. Why must the message govern the method (2 Timothy 1:13)?",
+    "es": "Explique la relación entre mensaje y método en el evangelismo. ¿Por qué debe el mensaje gobernar el método (2 Timoteo 1:13)?"
+   },
+   "keywords": {
+    "en": [
+     "message",
+     "method",
+     "govern",
+     "timothy",
+     "pattern",
+     "sound",
+     "fixed",
+     "serve"
+    ],
+    "es": [
+     "mensaj",
+     "método",
+     "metodo",
+     "gobern",
+     "timoteo",
+     "patrón",
+     "patron",
+     "fij"
+    ]
+   },
+   "model": {
+    "en": "2 Timothy 1:13 calls Timothy to hold fast the pattern of sound words. The message must govern the method because the gospel is fixed and authoritative while methods are merely tools to deliver it. When the method governs the message, the gospel gets bent to fit a technique or audience and is compromised. When the message governs the method, the unchanging truth decides which methods are acceptable, and any method that distorts the gospel is rejected. The method serves the message, never the reverse.",
+    "es": "2 Timoteo 1:13 llama a Timoteo a retener la forma de las sanas palabras. El mensaje debe gobernar el método porque el evangelio es fijo y autoritativo mientras los métodos son meras herramientas para entregarlo. Cuando el método gobierna el mensaje, el evangelio se dobla para ajustarse a una técnica o audiencia y queda comprometido. Cuando el mensaje gobierna el método, la verdad inmutable decide cuáles métodos son aceptables, y cualquier método que distorsione el evangelio se rechaza. El método sirve al mensaje, nunca al revés."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Using 2 Corinthians 3:5, explain why dependence on the Holy Spirit is essential and what that dependence includes.",
+    "es": "Usando 2 Corintios 3:5, explique por qué la dependencia del Espíritu Santo es esencial y qué incluye esa dependencia."
+   },
+   "keywords": {
+    "en": [
+     "depend",
+     "spirit",
+     "sufficien",
+     "corinth",
+     "prayer",
+     "own",
+     "include",
+     "trust"
+    ],
+    "es": [
+     "depend",
+     "espíritu",
+     "espiritu",
+     "suficien",
+     "corint",
+     "oración",
+     "oracion",
+     "confi"
+    ]
+   },
+   "model": {
+    "en": "2 Corinthians 3:5 says our sufficiency is from God, not from ourselves. Dependence on the Holy Spirit is essential because evangelism is a spiritual work beyond human ability — only God can convict and convert. That dependence includes prayer before, during, and after witnessing; trusting the Spirit rather than technique to produce results; relying on Him for boldness and the right words; and resting in His power instead of one's own sufficiency. The believer works, but leans wholly on God for what only God can do.",
+    "es": "2 Corintios 3:5 dice que nuestra suficiencia proviene de Dios, no de nosotros mismos. La dependencia del Espíritu Santo es esencial porque el evangelismo es una obra espiritual más allá de la capacidad humana — solo Dios puede convencer y convertir. Esa dependencia incluye la oración antes, durante y después de testificar; confiar en el Espíritu en vez de la técnica para producir resultados; apoyarse en Él para la valentía y las palabras correctas; y descansar en su poder en vez de la suficiencia propia. El creyente trabaja, pero se apoya totalmente en Dios para lo que solo Dios puede hacer."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain how the believer should recognize and respond to opportunities, using Colossians 4:5.",
+    "es": "Explique cómo el creyente debe reconocer y responder a las oportunidades, usando Colosenses 4:5."
+   },
+   "keywords": {
+    "en": [
+     "opportun",
+     "recogn",
+     "respond",
+     "coloss",
+     "wisdom",
+     "ready",
+     "alert",
+     "time"
+    ],
+    "es": [
+     "oportun",
+     "reconoc",
+     "respond",
+     "colosen",
+     "sabidur",
+     "list",
+     "alert",
+     "tiemp"
+    ]
+   },
+   "model": {
+    "en": "Colossians 4:5 says to walk in wisdom toward outsiders, redeeming the time. The believer should recognize opportunities by staying alert to the openings God provides — a question asked, a hardship shared, a natural turn in conversation — and respond by wisely seizing them rather than letting them pass. Recognizing means being spiritually attentive; responding means having the readiness and courage to speak when the moment comes. Walking in wisdom turns ordinary encounters into redeemed opportunities for the gospel.",
+    "es": "Colosenses 4:5 dice andar en sabiduría para con los de afuera, redimiendo el tiempo. El creyente debe reconocer las oportunidades manteniéndose alerta a las aperturas que Dios provee — una pregunta hecha, una dificultad compartida, un giro natural en la conversación — y responder aprovechándolas sabiamente en vez de dejarlas pasar. Reconocer significa estar espiritualmente atento; responder significa tener la disposición y el valor de hablar cuando llega el momento. Andar en sabiduría convierte los encuentros ordinarios en oportunidades redimidas para el evangelio."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why must boldness and wisdom be held together in evangelism (Ephesians 6:19; Colossians 4:5)? Describe the danger of each without the other.",
+    "es": "¿Por qué deben mantenerse juntas la valentía y la sabiduría en el evangelismo (Efesios 6:19; Colosenses 4:5)? Describa el peligro de cada una sin la otra."
+   },
+   "keywords": {
+    "en": [
+     "bold",
+     "wisdom",
+     "togeth",
+     "ephesian",
+     "danger",
+     "each",
+     "balance",
+     "without"
+    ],
+    "es": [
+     "valent",
+     "valien",
+     "sabidur",
+     "junt",
+     "efesios",
+     "peligr",
+     "cada",
+     "equilibri"
+    ]
+   },
+   "model": {
+    "en": "Ephesians 6:19 asks for boldness to make the gospel known, and Colossians 4:5 calls for wisdom toward outsiders; the two must be held together. Boldness without wisdom blurts the gospel insensitively, at the wrong time or in a harsh way, and drives people off. Wisdom without boldness grows so cautious it never actually speaks, always waiting for a perfect moment that never comes. Held together, wisdom guides when and how to speak while boldness ensures the believer actually does speak — courageous and discerning at once.",
+    "es": "Efesios 6:19 pide valentía para dar a conocer el evangelio, y Colosenses 4:5 llama a la sabiduría para con los de afuera; las dos deben mantenerse juntas. La valentía sin sabiduría suelta el evangelio insensiblemente, en el momento equivocado o de manera dura, y aleja a las personas. La sabiduría sin valentía se vuelve tan cautelosa que nunca habla de hecho, siempre esperando un momento perfecto que nunca llega. Juntas, la sabiduría guía cuándo y cómo hablar mientras la valentía asegura que el creyente realmente hable — valiente y discernidor a la vez."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain why perseverance is necessary in evangelism, using Galatians 6:9.",
+    "es": "Explique por qué la perseverancia es necesaria en el evangelismo, usando Gálatas 6:9."
+   },
+   "keywords": {
+    "en": [
+     "persever",
+     "weary",
+     "time",
+     "galat",
+     "season",
+     "reap",
+     "faint",
+     "continue"
+    ],
+    "es": [
+     "persever",
+     "cansad",
+     "tiemp",
+     "gálat",
+     "galat",
+     "temporada",
+     "seg",
+     "desmay"
+    ]
+   },
+   "model": {
+    "en": "Galatians 6:9 says let us not grow weary in well-doing, for in due season we shall reap if we do not faint. Perseverance is necessary in evangelism because fruit often comes slowly: people may hear many times before responding, and discouragement tempts the witness to give up. The harvest comes in God's season, not on our schedule. The believer is called to keep sowing faithfully over the long haul, trusting that persistent, unwearied witness will, in due time, reap a harvest.",
+    "es": "Gálatas 6:9 dice no nos cansemos de hacer el bien, porque a su tiempo segaremos si no desmayamos. La perseverancia es necesaria en el evangelismo porque el fruto a menudo llega despacio: las personas pueden oír muchas veces antes de responder, y el desánimo tienta al testigo a rendirse. La cosecha llega en la temporada de Dios, no en nuestro horario. El creyente es llamado a seguir sembrando fielmente a largo plazo, confiando en que el testimonio persistente y sin desmayo, a su debido tiempo, segará una cosecha."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Using 1 Corinthians 3:7, explain how the correct perspective on results guards against both pride and discouragement.",
+    "es": "Usando 1 Corintios 3:7, explique cómo la perspectiva correcta sobre los resultados protege tanto del orgullo como del desánimo."
+   },
+   "keywords": {
+    "en": [
+     "result",
+     "god",
+     "increase",
+     "pride",
+     "discourag",
+     "corinth",
+     "perspect",
+     "guard"
+    ],
+    "es": [
+     "result",
+     "dios",
+     "crecimi",
+     "orgull",
+     "desánim",
+     "desanim",
+     "corint",
+     "perspect"
+    ]
+   },
+   "model": {
+    "en": "1 Corinthians 3:7 says neither he who plants nor he who waters is anything, but God who gives the increase. The correct perspective on results guards against pride because if God gives the increase, no witness can boast in conversions as his own achievement. And it guards against discouragement because if results are God's to give, the witness is not a failure when none appear — he is only responsible to plant and water faithfully. Keeping results in God's hands frees the believer from both self-exaltation and despair.",
+    "es": "1 Corintios 3:7 dice que ni el que planta ni el que riega es algo, sino Dios que da el crecimiento. La perspectiva correcta sobre los resultados protege del orgullo porque si Dios da el crecimiento, ningún testigo puede jactarse de las conversiones como logro propio. Y protege del desánimo porque si los resultados son de Dios para darlos, el testigo no es un fracaso cuando ninguno aparece — solo es responsable de plantar y regar fielmente. Mantener los resultados en las manos de Dios libra al creyente tanto de la autoexaltación como de la desesperación."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the role of the church in evangelism (Acts 2:47). Why is evangelism both personal and corporate?",
+    "es": "Describa el papel de la iglesia en el evangelismo (Hechos 2:47). ¿Por qué es el evangelismo tanto personal como corporativo?"
+   },
+   "keywords": {
+    "en": [
+     "church",
+     "corporate",
+     "personal",
+     "acts",
+     "support",
+     "both",
+     "body",
+     "togeth"
+    ],
+    "es": [
+     "iglesia",
+     "corporativ",
+     "personal",
+     "hechos",
+     "apoy",
+     "ambos",
+     "cuerpo",
+     "junt"
+    ]
+   },
+   "model": {
+    "en": "Acts 2:47 shows the Lord adding to the church daily those being saved — evangelism happened in and through the church community. The church's role is to support, equip, and gather the fruit of evangelism, providing teaching, fellowship, and a home for new believers. Evangelism is both personal and corporate because individual believers witness one to one, yet they do so as part of a body that prays, sends, supports, and receives. Personal witness and the church's corporate life work together; neither replaces the other.",
+    "es": "Hechos 2:47 muestra al Señor añadiendo a la iglesia cada día a los que eran salvos — el evangelismo ocurría en y a través de la comunidad de la iglesia. El papel de la iglesia es apoyar, equipar y recoger el fruto del evangelismo, proveyendo enseñanza, comunión y un hogar para los nuevos creyentes. El evangelismo es tanto personal como corporativo porque los creyentes individuales testifican uno a uno, pero lo hacen como parte de un cuerpo que ora, envía, apoya y recibe. El testimonio personal y la vida corporativa de la iglesia obran juntos; ninguno reemplaza al otro."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain why evangelism is 'not complete until it is reproduced' (2 Timothy 2:2).",
+    "es": "Explique por qué el evangelismo 'no está completo hasta que se reproduce' (2 Timoteo 2:2)."
+   },
+   "keywords": {
+    "en": [
+     "reproduc",
+     "complet",
+     "timothy",
+     "multipl",
+     "disciple",
+     "teach",
+     "others",
+     "not"
+    ],
+    "es": [
+     "reproduc",
+     "complet",
+     "timoteo",
+     "multiplic",
+     "discípul",
+     "discipul",
+     "enseñ",
+     "otros"
+    ]
+   },
+   "model": {
+    "en": "2 Timothy 2:2 commits the truth to faithful men who will teach others also. Evangelism is not complete until it is reproduced because the goal is not merely to win individuals but to make disciples who in turn make disciples. A convert who never reproduces leaves the chain unbroken at one link; the work continues only when each believer passes the gospel on. Reproduction multiplies the witness across generations, so evangelism reaches its full purpose when those won become those who win and teach others.",
+    "es": "2 Timoteo 2:2 encarga la verdad a hombres fieles que enseñarán también a otros. El evangelismo no está completo hasta que se reproduce porque la meta no es meramente ganar individuos sino hacer discípulos que a su vez hagan discípulos. Un converso que nunca se reproduce deja la cadena detenida en un solo eslabón; la obra continúa solo cuando cada creyente transmite el evangelio. La reproducción multiplica el testimonio a través de las generaciones, así que el evangelismo alcanza su pleno propósito cuando los ganados llegan a ser quienes ganan y enseñan a otros."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Synthesize the unit: name the elements of integrated evangelism and explain how, together, they make evangelism a natural expression of the Christian life (1 Corinthians 15:58).",
+    "es": "Sintetice la unidad: nombre los elementos del evangelismo integrado y explique cómo, juntos, hacen del evangelismo una expresión natural de la vida cristiana (1 Corintios 15:58)."
+   },
+   "keywords": {
+    "en": [
+     "integrat",
+     "message",
+     "spirit",
+     "persever",
+     "reproduc",
+     "life",
+     "natural",
+     "togeth"
+    ],
+    "es": [
+     "integr",
+     "mensaj",
+     "espíritu",
+     "espiritu",
+     "persever",
+     "reproduc",
+     "vida",
+     "natural"
+    ]
+   },
+   "model": {
+    "en": "Integrated evangelism brings together several elements: a fixed gospel message governing the method, dependence on the Holy Spirit, recognizing and seizing opportunities, boldness joined with wisdom, perseverance through slow results, a right perspective that leaves results to God, the support of the church, and the goal of reproduction. 1 Corinthians 15:58 calls us to be steadfast, always abounding in the Lord's work, knowing it is not in vain. Together these make evangelism not an occasional task but a natural, ongoing expression of the whole Christian life.",
+    "es": "El evangelismo integrado reúne varios elementos: un mensaje del evangelio fijo que gobierna el método, dependencia del Espíritu Santo, reconocer y aprovechar las oportunidades, valentía unida a la sabiduría, perseverancia a través de resultados lentos, una perspectiva correcta que deja los resultados a Dios, el apoyo de la iglesia y la meta de la reproducción. 1 Corintios 15:58 nos llama a estar firmes, abundando siempre en la obra del Señor, sabiendo que no es en vano. Juntos hacen del evangelismo no una tarea ocasional sino una expresión natural y continua de toda la vida cristiana."
+   }
+  }
+ ]
+};

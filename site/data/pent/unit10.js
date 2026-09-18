@@ -1,47 +1,833 @@
-/* CTSPent - unit 10: per-unit configuration and content. */
-
-const UNIT = 10;
-
-const NEXT_URL = "CTSPentUnit11.html";
-
-const PREV_URL = "CTSPentUnit9.html";
-
-const IS_LAST_UNIT = false;
-
-const SHOW_REGISTRATION_CARD = false;
-
-const mcQuestions = [
-    { textEn: "1. What is the meaning of the Hebrew title 'Devarim'?", textEs: "1. ¿Cuál es el significado del título hebreo 'Devarim'?", optionsEn: ["A. 'Words'", "B. 'The Second Law'", "C. 'Wanderings'", "D. 'Covenant'"], optionsEs: ["A. 'Palabras'", "B. 'La Segunda Ley'", "C. 'Peregrinaciones'", "D. 'Pacto'"], correct: 0, correctFeedbackEn: "Correct! 'Devarim' means 'words' — the opening phrase is 'These are the words which Moses spoke.'", correctFeedbackEs: "¡Correcto! 'Devarim' significa 'palabras' — la frase inicial es 'Estas son las palabras que habló Moisés.'", incorrectFeedbackEn: "Devarim means 'words' — the book is Moses' farewell speeches.", incorrectFeedbackEs: "Devarim significa 'palabras' — el libro son los discursos de despedida de Moisés." },
-    { textEn: "2. Where was Israel camped when Moses delivered Deuteronomy?", textEs: "2. ¿Dónde estaba acampado Israel cuando Moisés pronunció Deuteronomio?", optionsEn: ["A. At Mount Sinai", "B. In the wilderness of Sin", "C. On the plains of Moab, across from Jericho", "D. At Kadesh Barnea"], optionsEs: ["A. En el monte Sinaí", "B. En el desierto de Sin", "C. En las llanuras de Moab, frente a Jericó", "D. En Cades-barnea"], correct: 2, correctFeedbackEn: "Yes. They were on the plains of Moab, ready to cross the Jordan into Canaan.", correctFeedbackEs: "Sí. Estaban en las llanuras de Moab, listos para cruzar el Jordán hacia Canaán.", incorrectFeedbackEn: "Deuteronomy 1:1 — 'on this side of the Jordan' — the plains of Moab.", incorrectFeedbackEs: "Deuteronomio 1:1 — 'a este lado del Jordán' — las llanuras de Moab." },
-    { textEn: "3. How old was Moses when he delivered his farewell addresses?", textEs: "3. ¿Qué edad tenía Moisés cuando pronunció sus discursos de despedida?", optionsEn: ["A. 80 years old", "B. 100 years old", "C. 120 years old", "D. 140 years old"], optionsEs: ["A. 80 años", "B. 100 años", "C. 120 años", "D. 140 años"], correct: 2, correctFeedbackEn: "Correct. Moses was 120 years old — his strength still undiminished.", correctFeedbackEs: "Correcto. Moisés tenía 120 años — su vigor aún no había disminuido.", incorrectFeedbackEn: "Deuteronomy 34:7 — Moses was 120 years old when he died.", incorrectFeedbackEs: "Deuteronomio 34:7 — Moisés tenía 120 años cuando murió." },
-    { textEn: "4. The Shema (Deuteronomy 6:4-5) commands Israel to do what?", textEs: "4. El Shemá (Deuteronomio 6:4-5) manda a Israel a hacer qué?", optionsEn: ["A. Love the Lord with all heart, soul, and strength", "B. Build a temple", "C. Offer sacrifices daily", "D. Keep the feasts"], optionsEs: ["A. Amar a Jehová con todo el corazón, el alma y las fuerzas", "B. Edificar un templo", "C. Ofrecer sacrificios diariamente", "D. Guardar las fiestas"], correct: 0, correctFeedbackEn: "Yes. The Shema is the great commandment to love God totally and exclusively.", correctFeedbackEs: "Sí. El Shemá es el gran mandamiento de amar a Dios total y exclusivamente.", incorrectFeedbackEn: "Deuteronomy 6:5 — 'You shall love the Lord your God with all your heart, soul, and strength.'", incorrectFeedbackEs: "Deuteronomio 6:5 — 'Amarás a Jehová tu Dios de todo tu corazón, y de toda tu alma, y con todas tus fuerzas.'" },
-    { textEn: "5. According to Deuteronomy 6, when should parents teach God's commandments to their children?", textEs: "5. Según Deuteronomio 6, ¿cuándo deben los padres enseñar los mandamientos de Dios a sus hijos?", optionsEn: ["A. Only on the Sabbath", "B. Only in school", "C. Constantly — at home, on the road, lying down, rising up", "D. Once a year at Passover"], optionsEs: ["A. Solo en el sábado", "B. Solo en la escuela", "C. Constantemente — en casa, en el camino, al acostarse, al levantarse", "D. Una vez al año en la Pascua"], correct: 2, correctFeedbackEn: "Correct. Faith is to be taught in the daily rhythms of life, not just in formal settings.", correctFeedbackEs: "Correcto. La fe se ha de enseñar en los ritmos diarios de la vida, no solo en contextos formales.", incorrectFeedbackEn: "Deuteronomy 6:7 — 'talk of them when you sit in your house, when you walk by the way...'", incorrectFeedbackEs: "Deuteronomio 6:7 — 'hablarás de ellas estando en tu casa, y andando por el camino...'" },
-    { textEn: "6. What danger did Moses warn about when Israel became prosperous in the land?", textEs: "6. ¿Contra qué peligro advirtió Moisés cuando Israel prosperara en la tierra?", optionsEn: ["A. They would forget God and become proud", "B. They would build too many cities", "C. They would fight too many wars", "D. They would neglect agriculture"], optionsEs: ["A. Olvidarían a Dios y se volverían orgullosos", "B. Edificarían demasiadas ciudades", "C. Pelearían demasiadas guerras", "D. Descuidarían la agricultura"], correct: 0, correctFeedbackEn: "Yes. Prosperity creates the illusion of self-sufficiency and leads to forgetting God.", correctFeedbackEs: "Sí. La prosperidad crea la ilusión de autosuficiencia y lleva a olvidar a Dios.", incorrectFeedbackEn: "Deuteronomy 8:11-14 — 'Beware that you do not forget the Lord... when your heart is lifted up.'", incorrectFeedbackEs: "Deuteronomio 8:11-14 — 'Guárdate de olvidar a Jehová... cuando tu corazón se enaltezca.'" },
-    { textEn: "7. On which mountains were the blessings and curses pronounced?", textEs: "7. ¿Sobre cuáles montes se pronunciaron las bendiciones y las maldiciones?", optionsEn: ["A. Gerizim (blessings) and Ebal (curses)", "B. Sinai and Horeb", "C. Zion and Olivet", "D. Nebo and Pisgah"], optionsEs: ["A. Gerizim (bendiciones) y Ebal (maldiciones)", "B. Sinaí y Horeb", "C. Sion y el Olivar", "D. Nebo y Pisga"], correct: 0, correctFeedbackEn: "Correct. Gerizim for blessings, Ebal for curses — a visual sermon for Israel.", correctFeedbackEs: "Correcto. Gerizim para las bendiciones, Ebal para las maldiciones — un sermón visual para Israel.", incorrectFeedbackEn: "Deuteronomy 27:12-13 — Gerizim for blessings, Ebal for curses.", incorrectFeedbackEs: "Deuteronomio 27:12-13 — Gerizim para las bendiciones, Ebal para las maldiciones." },
-    { textEn: "8. According to Deuteronomy 28, what would happen if Israel disobeyed the covenant?", textEs: "8. Según Deuteronomio 28, ¿qué sucedería si Israel desobedecía el pacto?", optionsEn: ["A. They would become the greatest nation", "B. They would be blessed with rain and harvest", "C. They would be cursed with disease, defeat, drought, and eventually exile", "D. Nothing would change"], optionsEs: ["A. Se convertirían en la nación más grande", "B. Serían bendecidos con lluvia y cosecha", "C. Serían malditos con enfermedad, derrota, sequía y finalmente exilio", "D. Nada cambiaría"], correct: 2, correctFeedbackEn: "Yes. The curses are detailed and severe — culminating in exile from the land.", correctFeedbackEs: "Sí. Las maldiciones son detalladas y severas — culminando en el exilio de la tierra.", incorrectFeedbackEn: "Deuteronomy 28:15-68 — detailed curses including disease, defeat, madness, and exile.", incorrectFeedbackEs: "Deuteronomio 28:15-68 — maldiciones detalladas que incluyen enfermedad, derrota, locura y exilio." },
-    { textEn: "9. What did God promise in Deuteronomy 18 about a future prophet?", textEs: "9. ¿Qué prometió Dios en Deuteronomio 18 acerca de un profeta futuro?", optionsEn: ["A. 'I will raise up a prophet like Moses'", "B. 'Elijah will return'", "C. 'Prophecy will cease'", "D. 'You will have no prophets'"], optionsEs: ["A. 'Levantaré un profeta como Moisés'", "B. 'Elías volverá'", "C. 'La profecía cesará'", "D. 'No tendrán profetas'"], correct: 0, correctFeedbackEn: "Yes. This prophecy is fulfilled in Jesus Christ (Acts 3:22-23).", correctFeedbackEs: "Sí. Esta profecía se cumple en Jesucristo (Hechos 3:22-23).", incorrectFeedbackEn: "Deuteronomy 18:18 — 'I will raise up for them a Prophet like you from among their brethren.'", incorrectFeedbackEs: "Deuteronomio 18:18 — 'Profeta les levantaré de en medio de sus hermanos, como tú.'" },
-    { textEn: "10. Who quoted Deuteronomy 18 in the New Testament to identify Jesus as that Prophet?", textEs: "10. ¿Quién citó Deuteronomio 18 en el Nuevo Testamento para identificar a Jesús como aquel Profeta?", optionsEn: ["A. Paul", "B. Peter (Acts 3)", "C. John the Baptist", "D. Stephen"], optionsEs: ["A. Pablo", "B. Pedro (Hechos 3)", "C. Juan el Bautista", "D. Esteban"], correct: 1, correctFeedbackEn: "Yes. Peter explicitly applied this prophecy to Jesus at Solomon's Porch.", correctFeedbackEs: "Sí. Pedro aplicó explícitamente esta profecía a Jesús en el Pórtico de Salomón.", incorrectFeedbackEn: "Acts 3:22-23 — Peter quotes Deuteronomy 18 about Jesus.", incorrectFeedbackEs: "Hechos 3:22-23 — Pedro cita Deuteronomio 18 acerca de Jesús." },
-    { textEn: "11. Why did God command Moses to write a song (Deuteronomy 32)?", textEs: "11. ¿Por qué mandó Dios a Moisés que escribiera un cántico (Deuteronomio 32)?", optionsEn: ["A. For entertainment", "B. As a witness against Israel — so when they rebelled, the song would testify", "C. To teach music", "D. To celebrate victory"], optionsEs: ["A. Para entretenimiento", "B. Como testigo contra Israel — para que cuando se rebelaran, el cántico testificara", "C. Para enseñar música", "D. Para celebrar una victoria"], correct: 1, correctFeedbackEn: "Correct. The song was a courtroom witness that God had warned them.", correctFeedbackEs: "Correcto. El cántico era un testigo judicial de que Dios les había advertido.", incorrectFeedbackEn: "Deuteronomy 31:19 — 'this song shall be a witness for Me against the children of Israel.'", incorrectFeedbackEs: "Deuteronomio 31:19 — 'este cántico me sea por testigo contra los hijos de Israel.'" },
-    { textEn: "12. What does Deuteronomy 8:18 say about wealth?", textEs: "12. ¿Qué dice Deuteronomio 8:18 acerca de la riqueza?", optionsEn: ["A. Wealth is a sign of sin", "B. Wealth should be given away", "C. Wealth is evil", "D. 'You shall remember the Lord your God, for it is He who gives you power to get wealth'"], optionsEs: ["A. La riqueza es señal de pecado", "B. La riqueza debe regalarse", "C. La riqueza es mala", "D. 'Acuérdate de Jehová tu Dios, porque él te da el poder para hacer riquezas'"], correct: 3, correctFeedbackEn: "Yes. God is the source of all wealth — never forget that.", correctFeedbackEs: "Sí. Dios es la fuente de toda riqueza — nunca lo olvides.", incorrectFeedbackEn: "Deuteronomy 8:18 — 'You shall remember the Lord your God, for it is He who gives you power to get wealth.'", incorrectFeedbackEs: "Deuteronomio 8:18 — 'Acuérdate de Jehová tu Dios, porque él te da el poder para hacer las riquezas.'" },
-    { textEn: "13. From where did Moses view the Promised Land before he died?", textEs: "13. ¿Desde dónde vio Moisés la Tierra Prometida antes de morir?", optionsEn: ["A. Mount Sinai", "B. Mount Nebo (Pisgah)", "C. Mount Gerizim", "D. Mount Ebal"], optionsEs: ["A. El monte Sinaí", "B. El monte Nebo (Pisga)", "C. El monte Gerizim", "D. El monte Ebal"], correct: 1, correctFeedbackEn: "Correct. Mount Nebo, across from Jericho. He saw the land but did not enter.", correctFeedbackEs: "Correcto. El monte Nebo, frente a Jericó. Vio la tierra pero no entró.", incorrectFeedbackEn: "Deuteronomy 34:1 — Mount Nebo, to the top of Pisgah.", incorrectFeedbackEs: "Deuteronomio 34:1 — el monte Nebo, a la cumbre del Pisga." },
-    { textEn: "14. Why was Moses not allowed to enter the Promised Land?", textEs: "14. ¿Por qué no se le permitió a Moisés entrar en la Tierra Prometida?", optionsEn: ["A. He was too old", "B. He committed adultery", "C. He refused to go", "D. He struck the rock twice at Meribah instead of speaking to it"], optionsEs: ["A. Era demasiado viejo", "B. Cometió adulterio", "C. Se negó a ir", "D. Golpeó la roca dos veces en Meriba en lugar de hablarle"], correct: 3, correctFeedbackEn: "Correct. Moses' disobedience at Meribah disqualified him from entering.", correctFeedbackEs: "Correcto. La desobediencia de Moisés en Meriba lo descalificó de entrar.", incorrectFeedbackEn: "Numbers 20:7-13 — Moses struck the rock twice, failing to honor God's holiness.", incorrectFeedbackEs: "Números 20:7-13 — Moisés golpeó la roca dos veces, sin honrar la santidad de Dios." },
-    { textEn: "15. Who succeeded Moses as leader of Israel?", textEs: "15. ¿Quién sucedió a Moisés como líder de Israel?", optionsEn: ["A. Caleb", "B. Joshua", "C. Aaron", "D. Phinehas"], optionsEs: ["A. Caleb", "B. Josué", "C. Aarón", "D. Finees"], correct: 1, correctFeedbackEn: "Yes. Joshua, the son of Nun, was filled with the spirit of wisdom and led Israel across the Jordan.", correctFeedbackEs: "Sí. Josué, hijo de Nun, fue lleno del espíritu de sabiduría y guió a Israel a cruzar el Jordán.", incorrectFeedbackEn: "Deuteronomy 34:9 — Joshua the son of Nun was full of the spirit of wisdom.", incorrectFeedbackEs: "Deuteronomio 34:9 — Josué hijo de Nun fue lleno del espíritu de sabiduría." },
-    { textEn: "16. How does the New Testament describe the law's purpose (Galatians 3:24)?", textEs: "16. ¿Cómo describe el Nuevo Testamento el propósito de la ley (Gálatas 3:24)?", optionsEn: ["A. A way to earn salvation", "B. An obsolete document", "C. A burden to be ignored", "D. A tutor to bring us to Christ"], optionsEs: ["A. Una manera de ganar la salvación", "B. Un documento obsoleto", "C. Una carga que ignorar", "D. Un ayo para llevarnos a Cristo"], correct: 3, correctFeedbackEn: "Yes. The law exposes sin and drives us to Christ, who kept it perfectly for us.", correctFeedbackEs: "Sí. La ley expone el pecado y nos lleva a Cristo, quien la guardó perfectamente por nosotros.", incorrectFeedbackEn: "Galatians 3:24 — 'the law was our tutor to bring us to Christ, that we might be justified by faith.'", incorrectFeedbackEs: "Gálatas 3:24 — 'la ley ha sido nuestro ayo para llevarnos a Cristo, a fin de que fuésemos justificados por la fe.'" },
-    { textEn: "17. Jesus summarized the entire law with two commandments. Which ones?", textEs: "17. Jesús resumió toda la ley con dos mandamientos. ¿Cuáles?", optionsEn: ["A. Keep the Sabbath and honor parents", "B. Love God with everything and love your neighbor as yourself", "C. Do not murder and do not steal", "D. Worship only God and do not make idols"], optionsEs: ["A. Guardar el sábado y honrar a los padres", "B. Amar a Dios con todo y amar a tu prójimo como a ti mismo", "C. No matar y no robar", "D. Adorar solo a Dios y no hacer ídolos"], correct: 1, correctFeedbackEn: "Yes. Jesus quoted Deuteronomy 6:5 and Leviticus 19:18 as the summary of the law.", correctFeedbackEs: "Sí. Jesús citó Deuteronomio 6:5 y Levítico 19:18 como el resumen de la ley.", incorrectFeedbackEn: "Matthew 22:37-40 — love God and love neighbor.", incorrectFeedbackEs: "Mateo 22:37-40 — amar a Dios y amar al prójimo." },
-    { textEn: "18. What happened to Moses' body after death?", textEs: "18. ¿Qué le sucedió al cuerpo de Moisés después de su muerte?", optionsEn: ["A. It was placed in a tomb in Egypt", "B. It was cremated", "C. It was taken to heaven", "D. The Lord buried him in a valley, but no one knows the location"], optionsEs: ["A. Fue puesto en una tumba en Egipto", "B. Fue cremado", "C. Fue llevado al cielo", "D. Jehová lo sepultó en un valle, pero nadie sabe el lugar"], correct: 3, correctFeedbackEn: "Correct. Deuteronomy 34:6 says God buried Moses, and no one knows the grave.", correctFeedbackEs: "Correcto. Deuteronomio 34:6 dice que Dios sepultó a Moisés, y nadie sabe dónde está su sepultura.", incorrectFeedbackEn: "Deuteronomy 34:6 — 'He buried him in a valley... but no one knows his grave to this day.'", incorrectFeedbackEs: "Deuteronomio 34:6 — 'lo enterró en el valle... y ninguno sabe su sepultura hasta hoy.'" },
-    { textEn: "19. What unique description is given of Moses in Deuteronomy 34:10?", textEs: "19. ¿Qué descripción única se da de Moisés en Deuteronomio 34:10?", optionsEn: ["A. 'A great warrior'", "B. 'A mighty king'", "C. 'Whom the Lord knew face to face'", "D. 'A builder of cities'"], optionsEs: ["A. 'Un gran guerrero'", "B. 'Un rey poderoso'", "C. 'A quien Jehová conoció cara a cara'", "D. 'Un edificador de ciudades'"], correct: 2, correctFeedbackEn: "Yes. No prophet in Israel arose like Moses, whom the Lord knew face to face.", correctFeedbackEs: "Sí. No se levantó en Israel profeta como Moisés, a quien Jehová conoció cara a cara.", incorrectFeedbackEn: "Deuteronomy 34:10 — 'there has not arisen in Israel a prophet like Moses, whom the Lord knew face to face.'", incorrectFeedbackEs: "Deuteronomio 34:10 — 'nunca más se levantó profeta en Israel como Moisés, a quien haya conocido Jehová cara a cara.'" },
-    { textEn: "20. According to the lesson, what is Deuteronomy's message for pastors about leadership transition?", textEs: "20. Según la lección, ¿cuál es el mensaje de Deuteronomio para los pastores sobre la transición del liderazgo?", optionsEn: ["A. Never retire", "B. Hold on to power as long as possible", "C. Leave nothing behind", "D. Faithful leadership passes the torch to the next generation"], optionsEs: ["A. Nunca jubilarse", "B. Aferrarse al poder el mayor tiempo posible", "C. No dejar nada atrás", "D. El liderazgo fiel pasa la antorcha a la siguiente generación"], correct: 3, correctFeedbackEn: "Yes. Moses could not finish the journey, but he handed the baton to Joshua. You will do the same.", correctFeedbackEs: "Sí. Moisés no pudo terminar el viaje, pero entregó el relevo a Josué. Tú harás lo mismo.", incorrectFeedbackEn: "Deuteronomy models how to prepare the next generation for leadership.", incorrectFeedbackEs: "Deuteronomio modela cómo preparar a la siguiente generación para el liderazgo." }
-];
-
-const saQuestions = [
-    { id: `sa_u${UNIT}_1`, textEn: "What does the Shema (Deuteronomy 6:4-5) require of God's people, and why is it central to the covenant?", textEs: "¿Qué requiere el Shemá (Deuteronomio 6:4-5) del pueblo de Dios, y por qué es central para el pacto?", kw_en: ["shema", "demands", "love", "heart", "soul", "strengt", "total", "loyalty"], kw_es: ["shemá", "exige", "amor", "corazón", "alma", "fuerzas", "lealtad", "total"], explanationEn: "The Shema demands exclusive, total, passionate love for Yahweh — the foundation of covenant faithfulness.", explanationEs: "El Shemá exige amor exclusivo, total y apasionado a Yahvéh — el fundamento de la fidelidad al pacto." },
-    { id: `sa_u${UNIT}_2`, textEn: "Why did Moses warn Israel about the dangers of prosperity (Deuteronomy 8)?", textEs: "¿Por qué advirtió Moisés a Israel sobre los peligros de la prosperidad (Deuteronomio 8)?", kw_en: ["prosper", "forget", "pride", "creates", "suffici", "heart", "lifted", "warning"], kw_es: ["prosper", "olvidar", "orgullo", "autosuf", "corazón", "elevado", "adverte", "prueba"], explanationEn: "Prosperity creates the illusion that we provided for ourselves, leading to forgetting God and pride. It is a test, not just a blessing.", explanationEs: "La prosperidad crea la ilusión de que nos proveemos a nosotros mismos, llevando a olvidar a Dios y al orgullo. Es una prueba, no solo una bendición." },
-    { id: `sa_u${UNIT}_3`, textEn: "Explain the purpose of the blessings and curses in Deuteronomy 27-28.", textEs: "Explique el propósito de las bendiciones y maldiciones en Deuteronomio 27-28.", kw_en: ["blessin", "brings", "life", "disobed", "curse", "nationa", "constit", "salvati"], kw_es: ["obedien", "trae", "vida", "desobed", "maldici", "constit", "naciona", "salvaci"], explanationEn: "The blessings and curses were the terms of the covenant: obey and thrive in the land, disobey and be expelled. They were not to earn salvation but to govern life in the land.", explanationEs: "Las bendiciones y maldiciones eran los términos del pacto: obedece y prospera en la tierra, desobedece y sé expulsado. No eran para ganar la salvación sino para gobernar la vida en la tierra." },
-    { id: `sa_u${UNIT}_4`, textEn: "How does the 'prophet like Moses' (Deuteronomy 18) point to Jesus?", textEs: "¿Cómo apunta el 'profeta como Moisés' (Deuteronomio 18) a Jesús?", kw_en: ["prophet", "like", "moses", "jesus", "acts", "peter", "mediato", "lawgive"], kw_es: ["profeta", "moisés", "jesús", "hechos", "pedro", "mediado", "legisla", "cumplim"], explanationEn: "Jesus is the ultimate Prophet like Moses — but greater. Moses spoke God's words; Jesus is the Word. Moses saw God's back; Jesus is God. Peter applied this prophecy to Jesus in Acts 3.", explanationEs: "Jesús es el Profeta supremo como Moisés — pero mayor. Moisés habló las palabras de Dios; Jesús es la Palabra. Moisés vio la espalda de Dios; Jesús es Dios. Pedro aplicó esta profecía a Jesús en Hechos 3." },
-    { id: `sa_u${UNIT}_5`, textEn: "What was the purpose of the Song of Moses (Deuteronomy 32)?", textEs: "¿Cuál fue el propósito del Cántico de Moisés (Deuteronomio 32)?", kw_en: ["witness", "song", "against", "faithfu", "rebelli", "judgmen", "hope", "reminde"], kw_es: ["testigo", "cántico", "repasar", "fidelid", "rebelió", "juicio", "esperan", "recorda"], explanationEn: "The song was a witness against Israel — when they rebelled, it would remind them of God's faithfulness and their own sin, calling them back.", explanationEs: "El cántico era un testigo contra Israel — cuando se rebelaran, les recordaría la fidelidad de Dios y su propio pecado, llamándolos de vuelta." },
-    { id: `sa_u${UNIT}_6`, textEn: "Why did Moses not enter the Promised Land, and what does this teach about leadership?", textEs: "¿Por qué no entró Moisés en la Tierra Prometida, y qué enseña esto sobre el liderazgo?", kw_en: ["meribah", "struck", "rock", "twice", "disobed", "consequ", "leaders", "held"], kw_es: ["moisés", "golpeó", "roca", "dos", "veces", "desobed", "consecu", "líderes"], explanationEn: "Moses struck the rock in anger instead of speaking to it, dishonoring God's holiness. Leaders are held to a higher standard, but God's work continues through others.", explanationEs: "Moisés golpeó la roca con ira en lugar de hablarle, deshonrando la santidad de Dios. Los líderes son juzgados con mayor responsabilidad, pero la obra de Dios continúa a través de otros." },
-    { id: `sa_u${UNIT}_7`, textEn: "What does Deuteronomy 8:18 teach about the source of wealth, and why is that important for pastors?", textEs: "¿Qué enseña Deuteronomio 8:18 sobre la fuente de la riqueza, y por qué es importante para los pastores?", kw_en: ["every", "dollar", "comes", "wealth", "self", "humilit", "depende", "warning"], kw_es: ["cada", "dólar", "viene", "riqueza", "uno", "humil", "depende", "adverte"], explanationEn: "Every dollar comes from God. Pastors must preach that wealth is not a sign of personal merit but a trust from God to be used for His glory.", explanationEs: "Cada dólar viene de Dios. Los pastores deben predicar que la riqueza no es una señal de mérito personal sino un fideicomiso de Dios para ser usado para Su gloria." },
-    { id: `sa_u${UNIT}_8`, textEn: "How is the law described in Galatians 3:24, and how does that relate to Deuteronomy?", textEs: "¿Cómo se describe la ley en Gálatas 3:24, y cómo se relaciona eso con Deuteronomio?", kw_en: ["tutor", "law", "lead", "christ", "expose", "sin", "impossi", "keep"], kw_es: ["ayo", "ley", "llevar", "cristo", "exponer", "pecado", "imposib", "guardar"], explanationEn: "The law is a tutor that shows us our sin and drives us to Christ. Deuteronomy gives the law, but its purpose is to make us desperate for grace.", explanationEs: "La ley es un ayo que nos muestra nuestro pecado y nos lleva a Cristo. Deuteronomio da la ley, pero su propósito es hacernos desesperados por la gracia." },
-    { id: `sa_u${UNIT}_9`, textEn: "What happened on Mount Gerizim and Mount Ebal, and what did it symbolize?", textEs: "¿Qué sucedió en el Monte Gerizim y el Monte Ebal, y qué simbolizaba?", kw_en: ["gerizim", "blessin", "ebal", "curses", "choice", "life", "death", "visual"], kw_es: ["gerizim", "bendici", "ebal", "maldici", "elecció", "vida", "muerte", "sermón"], explanationEn: "Half the tribes stood on Gerizim to pronounce blessings for obedience; half on Ebal for curses. It was a dramatic enactment of the choice set before Israel.", explanationEs: "La mitad de las tribus estaban en Gerizim para pronunciar bendiciones por la obediencia; la mitad en Ebal para maldiciones. Fue una representación dramática de la elección puesta delante de Israel." },
-    { id: `sa_u${UNIT}_10`, textEn: "What is the central message of Deuteronomy for pastors and church leaders today?", textEs: "¿Cuál es el mensaje central de Deuteronomio para pastores y líderes eclesiásticos hoy?", kw_en: ["remembe", "obey", "love", "teach", "next", "generat", "warning", "against"], kw_es: ["recorda", "obedece", "amar", "enseñar", "próxima", "generac", "adverte", "contra"], explanationEn: "Deuteronomy calls leaders to remember God's faithfulness, love Him totally, teach the next generation, guard against pride in prosperity, and faithfully pass the leadership baton.", explanationEs: "Deuteronomio llama a los líderes a recordar la fidelidad de Dios, amarlo totalmente, enseñar a la próxima generación, guardarse del orgullo en la prosperidad, y pasar fielmente el testigo del liderazgo." }
-];
+/* CTSPent — unit 10. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "pent",
+ "unit": 10,
+ "totalUnits": 12,
+ "filePrefix": "CTSPent",
+ "prevHref": "CTSPentUnit9.html",
+ "nextHref": "CTSPentUnit11.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "What is the meaning of the Hebrew title 'Devarim'?",
+    "es": "¿Cuál es el significado del título hebreo 'Devarim'?"
+   },
+   "options": {
+    "en": [
+     "'Words'",
+     "'The Second Law'",
+     "'Wanderings'",
+     "'Covenant'"
+    ],
+    "es": [
+     "'Palabras'",
+     "'La Segunda Ley'",
+     "'Peregrinaciones'",
+     "'Pacto'"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct! 'Devarim' means 'words' — the opening phrase is 'These are the words which Moses spoke.'",
+    "es": "¡Correcto! 'Devarim' significa 'palabras' — la frase inicial es 'Estas son las palabras que habló Moisés.'"
+   }
+  },
+  {
+   "stem": {
+    "en": "Where was Israel camped when Moses delivered Deuteronomy?",
+    "es": "¿Dónde estaba acampado Israel cuando Moisés pronunció Deuteronomio?"
+   },
+   "options": {
+    "en": [
+     "At Mount Sinai",
+     "In the wilderness of Sin",
+     "On the plains of Moab, across from Jericho",
+     "At Kadesh Barnea"
+    ],
+    "es": [
+     "En el monte Sinaí",
+     "En el desierto de Sin",
+     "En las llanuras de Moab, frente a Jericó",
+     "En Cades-barnea"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Yes. They were on the plains of Moab, ready to cross the Jordan into Canaan.",
+    "es": "Sí. Estaban en las llanuras de Moab, listos para cruzar el Jordán hacia Canaán."
+   }
+  },
+  {
+   "stem": {
+    "en": "How old was Moses when he delivered his farewell addresses?",
+    "es": "¿Qué edad tenía Moisés cuando pronunció sus discursos de despedida?"
+   },
+   "options": {
+    "en": [
+     "80 years old",
+     "100 years old",
+     "120 years old",
+     "140 years old"
+    ],
+    "es": [
+     "80 años",
+     "100 años",
+     "120 años",
+     "140 años"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. Moses was 120 years old — his strength still undiminished.",
+    "es": "Correcto. Moisés tenía 120 años — su vigor aún no había disminuido."
+   }
+  },
+  {
+   "stem": {
+    "en": "The Shema (Deuteronomy 6:4-5) commands Israel to do what?",
+    "es": "El Shemá (Deuteronomio 6:4-5) manda a Israel a hacer qué?"
+   },
+   "options": {
+    "en": [
+     "Love the Lord with all heart, soul, and strength",
+     "Build a temple",
+     "Offer sacrifices daily",
+     "Keep the feasts"
+    ],
+    "es": [
+     "Amar a Jehová con todo el corazón, el alma y las fuerzas",
+     "Edificar un templo",
+     "Ofrecer sacrificios diariamente",
+     "Guardar las fiestas"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Yes. The Shema is the great commandment to love God totally and exclusively.",
+    "es": "Sí. El Shemá es el gran mandamiento de amar a Dios total y exclusivamente."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to Deuteronomy 6, when should parents teach God's commandments to their children?",
+    "es": "Según Deuteronomio 6, ¿cuándo deben los padres enseñar los mandamientos de Dios a sus hijos?"
+   },
+   "options": {
+    "en": [
+     "Only on the Sabbath",
+     "Only in school",
+     "Constantly — at home, on the road, lying down, rising up",
+     "Once a year at Passover"
+    ],
+    "es": [
+     "Solo en el sábado",
+     "Solo en la escuela",
+     "Constantemente — en casa, en el camino, al acostarse, al levantarse",
+     "Una vez al año en la Pascua"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. Faith is to be taught in the daily rhythms of life, not just in formal settings.",
+    "es": "Correcto. La fe se ha de enseñar en los ritmos diarios de la vida, no solo en contextos formales."
+   }
+  },
+  {
+   "stem": {
+    "en": "What danger did Moses warn about when Israel became prosperous in the land?",
+    "es": "¿Contra qué peligro advirtió Moisés cuando Israel prosperara en la tierra?"
+   },
+   "options": {
+    "en": [
+     "They would forget God and become proud",
+     "They would build too many cities",
+     "They would fight too many wars",
+     "They would neglect agriculture"
+    ],
+    "es": [
+     "Olvidarían a Dios y se volverían orgullosos",
+     "Edificarían demasiadas ciudades",
+     "Pelearían demasiadas guerras",
+     "Descuidarían la agricultura"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Yes. Prosperity creates the illusion of self-sufficiency and leads to forgetting God.",
+    "es": "Sí. La prosperidad crea la ilusión de autosuficiencia y lleva a olvidar a Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "On which mountains were the blessings and curses pronounced?",
+    "es": "¿Sobre cuáles montes se pronunciaron las bendiciones y las maldiciones?"
+   },
+   "options": {
+    "en": [
+     "Gerizim (blessings) and Ebal (curses)",
+     "Sinai and Horeb",
+     "Zion and Olivet",
+     "Nebo and Pisgah"
+    ],
+    "es": [
+     "Gerizim (bendiciones) y Ebal (maldiciones)",
+     "Sinaí y Horeb",
+     "Sion y el Olivar",
+     "Nebo y Pisga"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. Gerizim for blessings, Ebal for curses — a visual sermon for Israel.",
+    "es": "Correcto. Gerizim para las bendiciones, Ebal para las maldiciones — un sermón visual para Israel."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to Deuteronomy 28, what would happen if Israel disobeyed the covenant?",
+    "es": "Según Deuteronomio 28, ¿qué sucedería si Israel desobedecía el pacto?"
+   },
+   "options": {
+    "en": [
+     "They would become the greatest nation",
+     "They would be blessed with rain and harvest",
+     "They would be cursed with disease, defeat, drought, and eventually exile",
+     "Nothing would change"
+    ],
+    "es": [
+     "Se convertirían en la nación más grande",
+     "Serían bendecidos con lluvia y cosecha",
+     "Serían malditos con enfermedad, derrota, sequía y finalmente exilio",
+     "Nada cambiaría"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Yes. The curses are detailed and severe — culminating in exile from the land.",
+    "es": "Sí. Las maldiciones son detalladas y severas — culminando en el exilio de la tierra."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did God promise in Deuteronomy 18 about a future prophet?",
+    "es": "¿Qué prometió Dios en Deuteronomio 18 acerca de un profeta futuro?"
+   },
+   "options": {
+    "en": [
+     "'I will raise up a prophet like Moses'",
+     "'Elijah will return'",
+     "'Prophecy will cease'",
+     "'You will have no prophets'"
+    ],
+    "es": [
+     "'Levantaré un profeta como Moisés'",
+     "'Elías volverá'",
+     "'La profecía cesará'",
+     "'No tendrán profetas'"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Yes. This prophecy is fulfilled in Jesus Christ (Acts 3:22-23).",
+    "es": "Sí. Esta profecía se cumple en Jesucristo (Hechos 3:22-23)."
+   }
+  },
+  {
+   "stem": {
+    "en": "Who quoted Deuteronomy 18 in the New Testament to identify Jesus as that Prophet?",
+    "es": "¿Quién citó Deuteronomio 18 en el Nuevo Testamento para identificar a Jesús como aquel Profeta?"
+   },
+   "options": {
+    "en": [
+     "Paul",
+     "Peter (Acts 3)",
+     "John the Baptist",
+     "Stephen"
+    ],
+    "es": [
+     "Pablo",
+     "Pedro (Hechos 3)",
+     "Juan el Bautista",
+     "Esteban"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Yes. Peter explicitly applied this prophecy to Jesus at Solomon's Porch.",
+    "es": "Sí. Pedro aplicó explícitamente esta profecía a Jesús en el Pórtico de Salomón."
+   }
+  },
+  {
+   "stem": {
+    "en": "Why did God command Moses to write a song (Deuteronomy 32)?",
+    "es": "¿Por qué mandó Dios a Moisés que escribiera un cántico (Deuteronomio 32)?"
+   },
+   "options": {
+    "en": [
+     "For entertainment",
+     "As a witness against Israel — so when they rebelled, the song would testify",
+     "To teach music",
+     "To celebrate victory"
+    ],
+    "es": [
+     "Para entretenimiento",
+     "Como testigo contra Israel — para que cuando se rebelaran, el cántico testificara",
+     "Para enseñar música",
+     "Para celebrar una victoria"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. The song was a courtroom witness that God had warned them.",
+    "es": "Correcto. El cántico era un testigo judicial de que Dios les había advertido."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does Deuteronomy 8:18 say about wealth?",
+    "es": "¿Qué dice Deuteronomio 8:18 acerca de la riqueza?"
+   },
+   "options": {
+    "en": [
+     "Wealth is a sign of sin",
+     "Wealth should be given away",
+     "Wealth is evil",
+     "'You shall remember the Lord your God, for it is He who gives you power to get wealth'"
+    ],
+    "es": [
+     "La riqueza es señal de pecado",
+     "La riqueza debe regalarse",
+     "La riqueza es mala",
+     "'Acuérdate de Jehová tu Dios, porque él te da el poder para hacer riquezas'"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Yes. God is the source of all wealth — never forget that.",
+    "es": "Sí. Dios es la fuente de toda riqueza — nunca lo olvides."
+   }
+  },
+  {
+   "stem": {
+    "en": "From where did Moses view the Promised Land before he died?",
+    "es": "¿Desde dónde vio Moisés la Tierra Prometida antes de morir?"
+   },
+   "options": {
+    "en": [
+     "Mount Sinai",
+     "Mount Nebo (Pisgah)",
+     "Mount Gerizim",
+     "Mount Ebal"
+    ],
+    "es": [
+     "El monte Sinaí",
+     "El monte Nebo (Pisga)",
+     "El monte Gerizim",
+     "El monte Ebal"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. Mount Nebo, across from Jericho. He saw the land but did not enter.",
+    "es": "Correcto. El monte Nebo, frente a Jericó. Vio la tierra pero no entró."
+   }
+  },
+  {
+   "stem": {
+    "en": "Why was Moses not allowed to enter the Promised Land?",
+    "es": "¿Por qué no se le permitió a Moisés entrar en la Tierra Prometida?"
+   },
+   "options": {
+    "en": [
+     "He was too old",
+     "He committed adultery",
+     "He refused to go",
+     "He struck the rock twice at Meribah instead of speaking to it"
+    ],
+    "es": [
+     "Era demasiado viejo",
+     "Cometió adulterio",
+     "Se negó a ir",
+     "Golpeó la roca dos veces en Meriba en lugar de hablarle"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. Moses' disobedience at Meribah disqualified him from entering.",
+    "es": "Correcto. La desobediencia de Moisés en Meriba lo descalificó de entrar."
+   }
+  },
+  {
+   "stem": {
+    "en": "Who succeeded Moses as leader of Israel?",
+    "es": "¿Quién sucedió a Moisés como líder de Israel?"
+   },
+   "options": {
+    "en": [
+     "Caleb",
+     "Joshua",
+     "Aaron",
+     "Phinehas"
+    ],
+    "es": [
+     "Caleb",
+     "Josué",
+     "Aarón",
+     "Finees"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Yes. Joshua, the son of Nun, was filled with the spirit of wisdom and led Israel across the Jordan.",
+    "es": "Sí. Josué, hijo de Nun, fue lleno del espíritu de sabiduría y guió a Israel a cruzar el Jordán."
+   }
+  },
+  {
+   "stem": {
+    "en": "How does the New Testament describe the law's purpose (Galatians 3:24)?",
+    "es": "¿Cómo describe el Nuevo Testamento el propósito de la ley (Gálatas 3:24)?"
+   },
+   "options": {
+    "en": [
+     "A way to earn salvation",
+     "An obsolete document",
+     "A burden to be ignored",
+     "A tutor to bring us to Christ"
+    ],
+    "es": [
+     "Una manera de ganar la salvación",
+     "Un documento obsoleto",
+     "Una carga que ignorar",
+     "Un ayo para llevarnos a Cristo"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Yes. The law exposes sin and drives us to Christ, who kept it perfectly for us.",
+    "es": "Sí. La ley expone el pecado y nos lleva a Cristo, quien la guardó perfectamente por nosotros."
+   }
+  },
+  {
+   "stem": {
+    "en": "Jesus summarized the entire law with two commandments. Which ones?",
+    "es": "Jesús resumió toda la ley con dos mandamientos. ¿Cuáles?"
+   },
+   "options": {
+    "en": [
+     "Keep the Sabbath and honor parents",
+     "Love God with everything and love your neighbor as yourself",
+     "Do not murder and do not steal",
+     "Worship only God and do not make idols"
+    ],
+    "es": [
+     "Guardar el sábado y honrar a los padres",
+     "Amar a Dios con todo y amar a tu prójimo como a ti mismo",
+     "No matar y no robar",
+     "Adorar solo a Dios y no hacer ídolos"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Yes. Jesus quoted Deuteronomy 6:5 and Leviticus 19:18 as the summary of the law.",
+    "es": "Sí. Jesús citó Deuteronomio 6:5 y Levítico 19:18 como el resumen de la ley."
+   }
+  },
+  {
+   "stem": {
+    "en": "What happened to Moses' body after death?",
+    "es": "¿Qué le sucedió al cuerpo de Moisés después de su muerte?"
+   },
+   "options": {
+    "en": [
+     "It was placed in a tomb in Egypt",
+     "It was cremated",
+     "It was taken to heaven",
+     "The Lord buried him in a valley, but no one knows the location"
+    ],
+    "es": [
+     "Fue puesto en una tumba en Egipto",
+     "Fue cremado",
+     "Fue llevado al cielo",
+     "Jehová lo sepultó en un valle, pero nadie sabe el lugar"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. Deuteronomy 34:6 says God buried Moses, and no one knows the grave.",
+    "es": "Correcto. Deuteronomio 34:6 dice que Dios sepultó a Moisés, y nadie sabe dónde está su sepultura."
+   }
+  },
+  {
+   "stem": {
+    "en": "What unique description is given of Moses in Deuteronomy 34:10?",
+    "es": "¿Qué descripción única se da de Moisés en Deuteronomio 34:10?"
+   },
+   "options": {
+    "en": [
+     "'A great warrior'",
+     "'A mighty king'",
+     "'Whom the Lord knew face to face'",
+     "'A builder of cities'"
+    ],
+    "es": [
+     "'Un gran guerrero'",
+     "'Un rey poderoso'",
+     "'A quien Jehová conoció cara a cara'",
+     "'Un edificador de ciudades'"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Yes. No prophet in Israel arose like Moses, whom the Lord knew face to face.",
+    "es": "Sí. No se levantó en Israel profeta como Moisés, a quien Jehová conoció cara a cara."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to the lesson, what is Deuteronomy's message for pastors about leadership transition?",
+    "es": "Según la lección, ¿cuál es el mensaje de Deuteronomio para los pastores sobre la transición del liderazgo?"
+   },
+   "options": {
+    "en": [
+     "Never retire",
+     "Hold on to power as long as possible",
+     "Leave nothing behind",
+     "Faithful leadership passes the torch to the next generation"
+    ],
+    "es": [
+     "Nunca jubilarse",
+     "Aferrarse al poder el mayor tiempo posible",
+     "No dejar nada atrás",
+     "El liderazgo fiel pasa la antorcha a la siguiente generación"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Yes. Moses could not finish the journey, but he handed the baton to Joshua. You will do the same.",
+    "es": "Sí. Moisés no pudo terminar el viaje, pero entregó el relevo a Josué. Tú harás lo mismo."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "What does the Shema (Deuteronomy 6:4-5) require of God's people, and why is it central to the covenant?",
+    "es": "¿Qué requiere el Shemá (Deuteronomio 6:4-5) del pueblo de Dios, y por qué es central para el pacto?"
+   },
+   "keywords": {
+    "en": [
+     "shema",
+     "demands",
+     "love",
+     "heart",
+     "soul",
+     "strengt",
+     "total",
+     "loyalty"
+    ],
+    "es": [
+     "shemá",
+     "exige",
+     "amor",
+     "corazón",
+     "alma",
+     "fuerzas",
+     "lealtad",
+     "total"
+    ]
+   },
+   "model": {
+    "en": "The Shema demands exclusive, total, passionate love for Yahweh — the foundation of covenant faithfulness.",
+    "es": "El Shemá exige amor exclusivo, total y apasionado a Yahvéh — el fundamento de la fidelidad al pacto."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why did Moses warn Israel about the dangers of prosperity (Deuteronomy 8)?",
+    "es": "¿Por qué advirtió Moisés a Israel sobre los peligros de la prosperidad (Deuteronomio 8)?"
+   },
+   "keywords": {
+    "en": [
+     "prosper",
+     "forget",
+     "pride",
+     "creates",
+     "suffici",
+     "heart",
+     "lifted",
+     "warning"
+    ],
+    "es": [
+     "prosper",
+     "olvidar",
+     "orgullo",
+     "autosuf",
+     "corazón",
+     "elevado",
+     "adverte",
+     "prueba"
+    ]
+   },
+   "model": {
+    "en": "Prosperity creates the illusion that we provided for ourselves, leading to forgetting God and pride. It is a test, not just a blessing.",
+    "es": "La prosperidad crea la ilusión de que nos proveemos a nosotros mismos, llevando a olvidar a Dios y al orgullo. Es una prueba, no solo una bendición."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the purpose of the blessings and curses in Deuteronomy 27-28.",
+    "es": "Explique el propósito de las bendiciones y maldiciones en Deuteronomio 27-28."
+   },
+   "keywords": {
+    "en": [
+     "blessin",
+     "brings",
+     "life",
+     "disobed",
+     "curse",
+     "nationa",
+     "constit",
+     "salvati"
+    ],
+    "es": [
+     "obedien",
+     "trae",
+     "vida",
+     "desobed",
+     "maldici",
+     "constit",
+     "naciona",
+     "salvaci"
+    ]
+   },
+   "model": {
+    "en": "The blessings and curses were the terms of the covenant: obey and thrive in the land, disobey and be expelled. They were not to earn salvation but to govern life in the land.",
+    "es": "Las bendiciones y maldiciones eran los términos del pacto: obedece y prospera en la tierra, desobedece y sé expulsado. No eran para ganar la salvación sino para gobernar la vida en la tierra."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How does the 'prophet like Moses' (Deuteronomy 18) point to Jesus?",
+    "es": "¿Cómo apunta el 'profeta como Moisés' (Deuteronomio 18) a Jesús?"
+   },
+   "keywords": {
+    "en": [
+     "prophet",
+     "like",
+     "moses",
+     "jesus",
+     "acts",
+     "peter",
+     "mediato",
+     "lawgive"
+    ],
+    "es": [
+     "profeta",
+     "moisés",
+     "jesús",
+     "hechos",
+     "pedro",
+     "mediado",
+     "legisla",
+     "cumplim"
+    ]
+   },
+   "model": {
+    "en": "Jesus is the ultimate Prophet like Moses — but greater. Moses spoke God's words; Jesus is the Word. Moses saw God's back; Jesus is God. Peter applied this prophecy to Jesus in Acts 3.",
+    "es": "Jesús es el Profeta supremo como Moisés — pero mayor. Moisés habló las palabras de Dios; Jesús es la Palabra. Moisés vio la espalda de Dios; Jesús es Dios. Pedro aplicó esta profecía a Jesús en Hechos 3."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What was the purpose of the Song of Moses (Deuteronomy 32)?",
+    "es": "¿Cuál fue el propósito del Cántico de Moisés (Deuteronomio 32)?"
+   },
+   "keywords": {
+    "en": [
+     "witness",
+     "song",
+     "against",
+     "faithfu",
+     "rebelli",
+     "judgmen",
+     "hope",
+     "reminde"
+    ],
+    "es": [
+     "testigo",
+     "cántico",
+     "repasar",
+     "fidelid",
+     "rebelió",
+     "juicio",
+     "esperan",
+     "recorda"
+    ]
+   },
+   "model": {
+    "en": "The song was a witness against Israel — when they rebelled, it would remind them of God's faithfulness and their own sin, calling them back.",
+    "es": "El cántico era un testigo contra Israel — cuando se rebelaran, les recordaría la fidelidad de Dios y su propio pecado, llamándolos de vuelta."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why did Moses not enter the Promised Land, and what does this teach about leadership?",
+    "es": "¿Por qué no entró Moisés en la Tierra Prometida, y qué enseña esto sobre el liderazgo?"
+   },
+   "keywords": {
+    "en": [
+     "meribah",
+     "struck",
+     "rock",
+     "twice",
+     "disobed",
+     "consequ",
+     "leaders",
+     "held"
+    ],
+    "es": [
+     "moisés",
+     "golpeó",
+     "roca",
+     "dos",
+     "veces",
+     "desobed",
+     "consecu",
+     "líderes"
+    ]
+   },
+   "model": {
+    "en": "Moses struck the rock in anger instead of speaking to it, dishonoring God's holiness. Leaders are held to a higher standard, but God's work continues through others.",
+    "es": "Moisés golpeó la roca con ira en lugar de hablarle, deshonrando la santidad de Dios. Los líderes son juzgados con mayor responsabilidad, pero la obra de Dios continúa a través de otros."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does Deuteronomy 8:18 teach about the source of wealth, and why is that important for pastors?",
+    "es": "¿Qué enseña Deuteronomio 8:18 sobre la fuente de la riqueza, y por qué es importante para los pastores?"
+   },
+   "keywords": {
+    "en": [
+     "every",
+     "dollar",
+     "comes",
+     "wealth",
+     "self",
+     "humilit",
+     "depende",
+     "warning"
+    ],
+    "es": [
+     "cada",
+     "dólar",
+     "viene",
+     "riqueza",
+     "uno",
+     "humil",
+     "depende",
+     "adverte"
+    ]
+   },
+   "model": {
+    "en": "Every dollar comes from God. Pastors must preach that wealth is not a sign of personal merit but a trust from God to be used for His glory.",
+    "es": "Cada dólar viene de Dios. Los pastores deben predicar que la riqueza no es una señal de mérito personal sino un fideicomiso de Dios para ser usado para Su gloria."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How is the law described in Galatians 3:24, and how does that relate to Deuteronomy?",
+    "es": "¿Cómo se describe la ley en Gálatas 3:24, y cómo se relaciona eso con Deuteronomio?"
+   },
+   "keywords": {
+    "en": [
+     "tutor",
+     "law",
+     "lead",
+     "christ",
+     "expose",
+     "sin",
+     "impossi",
+     "keep"
+    ],
+    "es": [
+     "ayo",
+     "ley",
+     "llevar",
+     "cristo",
+     "exponer",
+     "pecado",
+     "imposib",
+     "guardar"
+    ]
+   },
+   "model": {
+    "en": "The law is a tutor that shows us our sin and drives us to Christ. Deuteronomy gives the law, but its purpose is to make us desperate for grace.",
+    "es": "La ley es un ayo que nos muestra nuestro pecado y nos lleva a Cristo. Deuteronomio da la ley, pero su propósito es hacernos desesperados por la gracia."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What happened on Mount Gerizim and Mount Ebal, and what did it symbolize?",
+    "es": "¿Qué sucedió en el Monte Gerizim y el Monte Ebal, y qué simbolizaba?"
+   },
+   "keywords": {
+    "en": [
+     "gerizim",
+     "blessin",
+     "ebal",
+     "curses",
+     "choice",
+     "life",
+     "death",
+     "visual"
+    ],
+    "es": [
+     "gerizim",
+     "bendici",
+     "ebal",
+     "maldici",
+     "elecció",
+     "vida",
+     "muerte",
+     "sermón"
+    ]
+   },
+   "model": {
+    "en": "Half the tribes stood on Gerizim to pronounce blessings for obedience; half on Ebal for curses. It was a dramatic enactment of the choice set before Israel.",
+    "es": "La mitad de las tribus estaban en Gerizim para pronunciar bendiciones por la obediencia; la mitad en Ebal para maldiciones. Fue una representación dramática de la elección puesta delante de Israel."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What is the central message of Deuteronomy for pastors and church leaders today?",
+    "es": "¿Cuál es el mensaje central de Deuteronomio para pastores y líderes eclesiásticos hoy?"
+   },
+   "keywords": {
+    "en": [
+     "remembe",
+     "obey",
+     "love",
+     "teach",
+     "next",
+     "generat",
+     "warning",
+     "against"
+    ],
+    "es": [
+     "recorda",
+     "obedece",
+     "amar",
+     "enseñar",
+     "próxima",
+     "generac",
+     "adverte",
+     "contra"
+    ]
+   },
+   "model": {
+    "en": "Deuteronomy calls leaders to remember God's faithfulness, love Him totally, teach the next generation, guard against pride in prosperity, and faithfully pass the leadership baton.",
+    "es": "Deuteronomio llama a los líderes a recordar la fidelidad de Dios, amarlo totalmente, enseñar a la próxima generación, guardarse del orgullo en la prosperidad, y pasar fielmente el testigo del liderazgo."
+   }
+  }
+ ]
+};

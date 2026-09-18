@@ -1,177 +1,865 @@
-/* CTSRadical - unit 3: per-unit configuration and content. */
-
-const UNIT = 3;
-
-const COURSE = 'radical';
-
-const NEXT_UNIT_URL = 'CTSRadicalUnit4.html';
-
-const MC_PASS_KEY   = `cts_${COURSE}_u${UNIT}_mc_passed`;
-
-const SA_LOCK_KEY   = `cts_${COURSE}_u${UNIT}_sa_lockout`;
-
-const PROGRESS_KEY  = `cts_${COURSE}_progress`;
-
-let progress = {};
-
-const unitTitlesEn = [
-    "Unit 1 - Foundation: Old Wineskins, New Wine",
-    "Unit 2 - What Jesus Did With the Law",
-    `Unit ${UNIT} - Love God`,
-    `Unit ${UNIT + 1} - Love Neighbor`,
-    "Unit 5 - Be Holy",
-    "Unit 6 - Be Forgiving",
-    "Unit 7 - Be Humble",
-    "Unit 8 - Be Generous",
-    "Unit 9 - Trust God",
-    "Unit 10 - Be Prayerful",
-    "Unit 11 - Be Kind",
-    "Unit 12 - Be a Disciplemaker",
-    "Unit 13 - Capstone: Turning the World Upside Down"
-];
-
-const mcQuestions = [
-    { textEn: "1. In Matthew 22, why did the lawyer ask Jesus which was the greatest commandment?", textEs: "1. En Mateo 22, ¿por qué preguntó el intérprete de la ley cuál era el mandamiento más grande?",
-      optionsEn: ["He was testing Jesus, hoping to trap Him", "He genuinely wanted to learn from Jesus", "He had forgotten the commandments", "He was sent by the Sadducees"],
-      optionsEs: ["Estaba tentando a Jesús, esperando atraparlo", "De veras quería aprender de Jesús", "Había olvidado los mandamientos", "Fue enviado por los saduceos"],
-      explanationEn: "The text says he asked 'testing Him' — the rabbis loved to trap a teacher in a careless ranking of the 613 commands.", explanationEs: "El texto dice que preguntó 'por tentarle' — a los rabinos les gustaba atrapar a un maestro en una clasificación descuidada de los 613 mandamientos.", correct: 0 },
-    { textEn: "2. What did Jesus name as the first and greatest commandment?", textEs: "2. ¿Qué nombró Jesús como el primero y más grande mandamiento?",
-      optionsEn: ["Do not murder", "Keep the Sabbath holy", "Love your neighbor as yourself", "Love the Lord your God with all your heart, soul, and mind"],
-      optionsEs: ["No matarás", "Guarda santo el sábado", "Ama a tu prójimo como a ti mismo", "Ama al Señor tu Dios con todo tu corazón, alma y mente"],
-      explanationEn: "Jesus reached back to the Shema (Deut 6) and named love for God with all the heart, soul, and mind as the first and greatest.", explanationEs: "Jesús se remontó al Shemá (Dt 6) y nombró el amor a Dios con todo el corazón, el alma y la mente como el primero y más grande.", correct: 3 },
-    { textEn: "3. According to the lesson, what does it mean that this love must be 'total'?", textEs: "3. Según la lección, ¿qué significa que este amor deba ser 'total'?",
-      optionsEn: ["It means loving God only on Sundays", "It means feeling intense emotion", "It means the whole person — every faculty — is bent toward God", "It means giving God ten percent"],
-      optionsEs: ["Significa amar a Dios solo los domingos", "Significa sentir una emoción intensa", "Significa que toda la persona — cada facultad — está inclinada hacia Dios", "Significa darle a Dios el diez por ciento"],
-      explanationEn: "Christianity is a religion of the whole person; heart, soul, and mind are three angles on one undivided self, leaving no part exempt.", explanationEs: "El cristianismo es una religión del hombre entero; corazón, alma y mente son tres ángulos de un solo ser indiviso, sin dejar exenta ninguna parte.", correct: 2 },
-    { textEn: "4. What image does the lesson use for how the whole Christian should be shaped by God's will?", textEs: "4. ¿Qué imagen usa la lección para cómo todo el cristiano debe ser formado por la voluntad de Dios?",
-      optionsEn: ["A river carving a canyon", "A seashore tree bent by the prevailing wind", "A lamp on a stand", "A house built on rock"],
-      optionsEs: ["Un río que talla un cañón", "Un árbol de la orilla doblado por el viento que predomina", "Una lámpara sobre un candelero", "Una casa edificada sobre la roca"],
-      explanationEn: "As a seashore tree is bent over the years by the prevailing wind, the whole Christian is meant to be bent by the will of God.", explanationEs: "Como un árbol de la orilla es doblado con los años por el viento que predomina, todo el cristiano ha de ser doblado por la voluntad de Dios.", correct: 1 },
-    { textEn: "5. The lesson says this love is also a love of 'degree.' What danger does that guard against?", textEs: "5. La lección dice que este amor es también un amor de 'grado.' ¿Contra qué peligro protege eso?",
-      optionsEn: ["Letting a good gift become as important to us as God Himself", "Loving God too intensely", "Spending too much time in prayer", "Giving away too much money"],
-      optionsEs: ["Dejar que un buen regalo llegue a ser tan importante como Dios mismo", "Amar a Dios con demasiada intensidad", "Pasar demasiado tiempo en oración", "Regalar demasiado dinero"],
-      explanationEn: "God gives many good gifts, but we must guard the order of our loves so no gift ever becomes as important to us as the Giver.", explanationEs: "Dios da muchos buenos regalos, pero debemos guardar el orden de nuestros amores para que ninguno llegue a ser tan importante como el Dador.", correct: 0 },
-    { textEn: "6. The lesson challenges a common church motto. Which one, and what correction is given?", textEs: "6. La lección desafía un lema común de la iglesia. ¿Cuál, y qué corrección se da?",
-      optionsEn: ["'God is love' — we should fear Him instead", "'Jesus saves' — we must save ourselves", "'Called to serve' — we are first called to love, not merely to serve", "'Give generously' — we should keep what we earn"],
-      optionsEs: ["'Dios es amor' — más bien debemos temerle", "'Jesús salva' — debemos salvarnos a nosotros mismos", "'Llamados a servir' — somos llamados primero a amar, no solo a servir", "'Den generosamente' — debemos guardar lo que ganamos"],
-      explanationEn: "We inscribe 'Called to serve' over our doors, but service must grow out of love; we are first called to love, not merely to serve.", explanationEs: "Inscribimos 'Llamados a servir' sobre las puertas, pero el servicio debe brotar del amor; somos llamados primero a amar, no solo a servir.", correct: 2 },
-    { textEn: "7. What is nearly the entire biblical record of Enoch's life, and why does it matter?", textEs: "7. ¿Cuál es casi todo el registro bíblico de la vida de Enoc, y por qué importa?",
-      optionsEn: ["He built an ark; it shows obedience", "He led Israel; it shows leadership", "He wrote many psalms; it shows worship", "He walked with God, and God took him; it shows we are made for fellowship with God"],
-      optionsEs: ["Construyó un arca; muestra obediencia", "Guió a Israel; muestra liderazgo", "Escribió muchos salmos; muestra adoración", "Caminó con Dios, y Dios lo llevó; muestra que somos hechos para la comunión con Dios"],
-      explanationEn: "Almost all Scripture says of Enoch is that he walked with God and God took him — a model of the fellowship we were created for.", explanationEs: "Casi todo lo que la Escritura dice de Enoc es que caminó con Dios y Dios lo llevó — un modelo de la comunión para la cual fuimos creados.", correct: 3 },
-    { textEn: "8. According to the lesson (citing Peter Lord), what is most likely the greatest sin?", textEs: "8. Según la lección (citando a Peter Lord), ¿cuál es muy probablemente el pecado más grande?",
-      optionsEn: ["Murder", "Failing to love God — breaking the greatest commandment", "Blasphemy", "Theft"],
-      optionsEs: ["El homicidio", "No amar a Dios — quebrantar el mandamiento más grande", "La blasfemia", "El robo"],
-      explanationEn: "Since to commit the greatest sin is to break the greatest commandment, failing to love God is the first and greatest sin — the one we never list.", explanationEs: "Como cometer el pecado más grande es quebrantar el mandamiento más grande, no amar a Dios es el primero y más grande pecado — el que nunca anotamos.", correct: 1 },
-    { textEn: "9. The lesson says God is not most interested in our work or our money. Why not?", textEs: "9. La lección dice que a Dios no le interesan más nuestro trabajo ni nuestro dinero. ¿Por qué no?",
-      optionsEn: ["Because He has all power and already owns everything; He wants our fellowship and love", "Because work and money are sinful", "Because He cannot use them", "Because only prayer matters to Him"],
-      optionsEs: ["Porque Él tiene todo el poder y ya posee todo; quiere nuestra comunión y amor", "Porque el trabajo y el dinero son pecaminosos", "Porque no puede usarlos", "Porque solo la oración le importa"],
-      explanationEn: "God has all power and owns everything, so He needs neither our work nor money; what He desires is our fellowship and love.", explanationEs: "Dios tiene todo el poder y posee todo, así que no necesita nuestro trabajo ni dinero; lo que desea es nuestra comunión y amor.", correct: 0 },
-    { textEn: "10. Which command did Jesus give about loving God versus family (Matthew 10:37)?", textEs: "10. ¿Qué mandamiento dio Jesús sobre amar a Dios frente a la familia (Mateo 10:37)?",
-      optionsEn: ["Honor your father and mother above all", "Anyone who loves father, mother, son, or daughter more than Me is not worthy of Me", "Leave your family forever", "Family always comes first"],
-      optionsEs: ["Honra a tu padre y madre por encima de todo", "El que ama a padre, madre, hijo o hija más que a mí no es digno de mí", "Deja a tu familia para siempre", "La familia siempre va primero"],
-      explanationEn: "Jesus said anyone loving father, mother, son, or daughter more than Him is not worthy of Him — God must hold first place even over family.", explanationEs: "Jesús dijo que quien ama a padre, madre, hijo o hija más que a Él no es digno de Él — Dios debe tener el primer lugar aun sobre la familia.", correct: 1 },
-    { textEn: "11. In the lesson, what was the real point of God asking Abraham to offer Isaac?", textEs: "11. En la lección, ¿cuál fue el verdadero punto de que Dios pidiera a Abraham ofrecer a Isaac?",
-      optionsEn: ["God wanted Isaac to die", "To punish Abraham", "To discover where Abraham's first love lay; God never meant the knife to fall", "To test Isaac's obedience"],
-      optionsEs: ["Dios quería que Isaac muriera", "Para castigar a Abraham", "Descubrir dónde estaba el primer amor de Abraham; Dios nunca quiso que el cuchillo cayera", "Para probar la obediencia de Isaac"],
-      explanationEn: "God stayed Abraham's hand; the point was never Isaac's death but revealing that Abraham loved God even more than his son.", explanationEs: "Dios detuvo la mano de Abraham; el punto nunca fue la muerte de Isaac sino revelar que Abraham amaba a Dios aun más que a su hijo.", correct: 2 },
-    { textEn: "12. How did Mary Welch answer the king's offer to free her imprisoned husband?", textEs: "12. ¿Cómo respondió Mary Welch a la oferta del rey de liberar a su esposo preso?",
-      optionsEn: ["She promised he would never preach again", "She offered the king money", "She agreed to leave Scotland", "She held up her apron and said she'd rather have her husband's head in it than make such a promise"],
-      optionsEs: ["Prometió que él nunca volvería a predicar", "Le ofreció dinero al rey", "Aceptó salir de Escocia", "Levantó su delantal y dijo que prefería tener en él la cabeza de su esposo antes que hacer tal promesa"],
-      explanationEn: "The king would free Welch if Mary promised he'd never preach again; she refused — she loved her husband, but she loved God more.", explanationEs: "El rey liberaría a Welch si Mary prometía que nunca predicaría; ella se negó — amaba a su esposo, pero amaba más a Dios.", correct: 3 },
-    { textEn: "13. What did Jesus tell the rich young ruler, and why could he not do it?", textEs: "13. ¿Qué le dijo Jesús al joven rico, y por qué no pudo hacerlo?",
-      optionsEn: ["To sell what he had and give to the poor; money had become his god", "To pray more; he was too busy", "To join the disciples; he feared travel", "To keep the law; he had broken it"],
-      optionsEs: ["Que vendiera lo que tenía y lo diera a los pobres; el dinero se había vuelto su dios", "Que orara más; estaba muy ocupado", "Que se uniera a los discípulos; temía viajar", "Que guardara la ley; la había quebrantado"],
-      explanationEn: "Jesus told him to sell all and give to the poor; he could not, because wealth had become his god, claiming his time and heart.", explanationEs: "Jesús le dijo que vendiera todo y lo diera a los pobres; no pudo, porque la riqueza se había vuelto su dios, reclamando su tiempo y corazón.", correct: 0 },
-    { textEn: "14. According to the lesson, what is the basic question about our money?", textEs: "14. Según la lección, ¿cuál es la pregunta básica sobre nuestro dinero?",
-      optionsEn: ["How can we earn more?", "Who really owns what we have — is it mine, or God's?", "How little can we give?", "How do we avoid taxes?"],
-      optionsEs: ["¿Cómo ganar más?", "¿Quién posee de veras lo que tenemos — es mío, o de Dios?", "¿Cuán poco podemos dar?", "¿Cómo evitar impuestos?"],
-      explanationEn: "The basic question is ownership: if it is mine I use it one way, if it is God's another. Scripture says all belongs to God, and the tithe is His.", explanationEs: "La pregunta básica es de propiedad: si es mío lo uso de un modo, si es de Dios de otro. La Escritura dice que todo es de Dios, y el diezmo es suyo.", correct: 1 },
-    { textEn: "15. What did the Brazilian family's tithed cattle demonstrate?", textEs: "15. ¿Qué demostró el ganado diezmado de la familia brasileña?",
-      optionsEn: ["That they wanted to start a business", "That cattle are valuable in Brazil", "That they loved God more than money, though they had never seen a church", "That they distrusted the missionaries"],
-      optionsEs: ["Que querían iniciar un negocio", "Que el ganado es valioso en Brasil", "Que amaban a Dios más que al dinero, aunque nunca habían visto una iglesia", "Que desconfiaban de los misioneros"],
-      explanationEn: "Having only a Bible and no church, the family still set aside a tenth for years — proving they loved God more than money.", explanationEs: "Con solo una Biblia y sin iglesia, la familia apartó la décima parte por años — probando que amaban a Dios más que al dinero.", correct: 2 },
-    { textEn: "16. What three-word instruction from Hebrews 12:2 sums up the Christian life in the lesson?", textEs: "16. ¿Qué instrucción de tres palabras de Hebreos 12:2 resume la vida cristiana en la lección?",
-      optionsEn: ["Work for Jesus", "Fear the Lord", "Give to God", "Looking unto Jesus"],
-      optionsEs: ["Trabajar para Jesús", "Temer al Señor", "Dar a Dios", "Puestos los ojos en Jesús"],
-      explanationEn: "Hebrews 12:2 — 'looking unto Jesus, the author and finisher of our faith' — sums up the whole Christian life: keep looking to Him.", explanationEs: "Hebreos 12:2 — 'puestos los ojos en Jesús, el autor y consumador de la fe' — resume toda la vida cristiana: seguir mirando a Él.", correct: 3 },
-    { textEn: "17. The lesson compares losing sight of God to which children's game?", textEs: "17. La lección compara perder de vista a Dios con ¿cuál juego de niños?",
-      optionsEn: ["A staring game where the first to blink loses", "Hide and seek", "Tag", "Leapfrog"],
-      optionsEs: ["Un juego de miradas donde el primero en parpadear pierde", "Las escondidas", "La traes (el pillado)", "El salto de rana"],
-      explanationEn: "Like a staring game, we 'blink' in our spiritual life — losing sight of the Lord and looking somewhere else.", explanationEs: "Como un juego de miradas, 'parpadeamos' en la vida espiritual — perdiendo de vista al Señor y mirando a otra parte.", correct: 0 },
-    { textEn: "18. How is David used as 'a man that blinked'?", textEs: "18. ¿Cómo se usa a David como 'un hombre que parpadeó'?",
-      optionsEn: ["He doubted God before Goliath", "He looked away from God amid power and praise, leading to his fall with Bathsheba", "He refused to become king", "He never sinned"],
-      optionsEs: ["Dudó de Dios ante Goliat", "Apartó la mirada de Dios entre el poder y la alabanza, lo que llevó a su caída con Betsabé", "Se negó a ser rey", "Nunca pecó"],
-      explanationEn: "David trusted God against Goliath, but as king he looked away amid power and praise; that drifting gaze led to his fall with Bathsheba.", explanationEs: "David confió en Dios contra Goliat, pero como rey apartó la mirada entre el poder y la alabanza; esa mirada desviada llevó a su caída con Betsabé.", correct: 1 },
-    { textEn: "19. What does the Charles Spurgeon story illustrate about looking to Jesus?", textEs: "19. ¿Qué ilustra la historia de Charles Spurgeon sobre mirar a Jesús?",
-      optionsEn: ["That only adults can be saved", "That preaching must be eloquent", "That it is never too early to begin looking to Jesus", "That bad weather hinders conversion"],
-      optionsEs: ["Que solo los adultos pueden ser salvos", "Que la predicación debe ser elocuente", "Que nunca es demasiado temprano para empezar a mirar a Jesús", "Que el mal tiempo impide la conversión"],
-      explanationEn: "A lay preacher pressed 'Look unto Me' on a miserable 15-year-old — the boy was Spurgeon. It is never too early to look to Jesus.", explanationEs: "Un predicador laico insistió 'Mirad a mí' a un muchacho miserable de quince años — era Spurgeon. Nunca es demasiado temprano para mirar a Jesús.", correct: 2 },
-    { textEn: "20. What does the B. H. Carroll story add to the Spurgeon story?", textEs: "20. ¿Qué añade la historia de B. H. Carroll a la de Spurgeon?",
-      optionsEn: ["That conversion requires good weather", "That bitter men cannot be saved", "That only the young respond", "That it is never too late to trust in Jesus, regardless of how one has lived"],
-      optionsEs: ["Que la conversión requiere buen tiempo", "Que los amargados no pueden ser salvos", "Que solo los jóvenes responden", "Que nunca es demasiado tarde para confiar en Jesús, sin importar cómo se haya vivido"],
-      explanationEn: "Carroll, godless and embittered, looked up once and forever and became a great man of God — it is never too late to trust Jesus.", explanationEs: "Carroll, impío y amargado, miró hacia arriba de una vez y para siempre y llegó a ser un gran hombre de Dios — nunca es demasiado tarde para confiar en Jesús.", correct: 3 }
-];
-
-const kwQuestions = [
-    { textEn: "21. Explain the setting of Matthew 22:34-38 and why Jesus' answer moves the question to the heart.",
-      textEs: "21. Explique el contexto de Mateo 22:34-38 y por qué la respuesta de Jesús lleva la pregunta al corazón.",
-      kw_en: ["lawyer", "testing", "greatest", "Shema", "heart", "love", "outward", "foundation"],
-      kw_es: ["intérprete", "tentar", "grande", "Shemá", "corazón", "amor", "externo", "fundamento"],
-      modelEn: "An expert in the law asked Jesus which was the greatest commandment, and the text says he asked to test Him, not to learn, since the rabbis loved to trap a teacher over the ranking of the commands. Jesus did not hesitate but reached back to the Shema of Deuteronomy 6 and named love for God with all the heart, soul, and mind as the first and greatest. That answer moves the whole question off the surface of outward rule-keeping and drives it down to the heart: the greatest thing God requires is not a performance He can audit but an affection given with the whole self. Love is the foundation of the Christian life, and every other command grows from it.",
-      modelEs: "Un intérprete de la ley preguntó a Jesús cuál era el mandamiento más grande, y el texto dice que preguntó para tentarlo, no para aprender, pues a los rabinos les gustaba atrapar a un maestro en la clasificación de los mandamientos. Jesús no vaciló sino que se remontó al Shemá de Deuteronomio 6 y nombró el amor a Dios con todo el corazón, el alma y la mente como el primero y más grande. Esa respuesta aparta toda la cuestión de la superficie del cumplimiento externo y la lleva al corazón: lo más grande que Dios requiere no es una actuación que pueda auditar sino un afecto dado con todo el ser. El amor es el fundamento de la vida cristiana, y todo otro mandamiento crece de él." },
-    { textEn: "22. What does it mean that love for God must be 'total,' and how is the basis of obedience?",
-      textEs: "22. ¿Qué significa que el amor a Dios deba ser 'total,' y cómo es la base de la obediencia?",
-      kw_en: ["total", "whole", "heart", "soul", "mind", "obedience", "tree", "wind"],
-      kw_es: ["total", "entero", "corazón", "alma", "mente", "obediencia", "árbol", "viento"],
-      modelEn: "Jesus means a total love, for Christianity is a religion of the whole person: we are to love God with all our heart, all our soul, and all our mind, every faculty bent toward Him. The three are not separate compartments but three angles on one undivided self, leaving no part exempt. This total love is the very basis of obedience, because when we love God with everything we strive with everything within us to do what He wants, and obedience becomes the natural leaning of a life rather than a demand from outside. The lesson pictures it as a tree by the seashore: just as it is bent over the years by the prevailing wind, the whole Christian is meant to be bent by the will of God.",
-      modelEs: "Jesús quiere decir un amor total, pues el cristianismo es una religión del hombre entero: hemos de amar a Dios con todo el corazón, toda el alma y toda la mente, cada facultad inclinada hacia Él. Los tres no son compartimentos separados sino tres ángulos de un solo ser indiviso, sin dejar exenta ninguna parte. Este amor total es la base misma de la obediencia, porque cuando amamos a Dios con todo nos esforzamos con todo lo que hay en nosotros por hacer lo que Él quiere, y la obediencia se vuelve la inclinación natural de una vida y no una exigencia de afuera. La lección lo representa como un árbol junto a la orilla: así como es doblado con los años por el viento que predomina, todo el cristiano ha de ser doblado por la voluntad de Dios." },
-    { textEn: "23. Explain what it means that this is a love of 'degree' and the danger it warns against.",
-      textEs: "23. Explique qué significa que éste sea un amor de 'grado' y el peligro contra el que advierte.",
-      kw_en: ["degree", "gift", "Giver", "order", "important", "between", "good", "first"],
-      kw_es: ["grado", "regalo", "Dador", "orden", "importante", "entre", "bueno", "primero"],
-      modelEn: "Besides being total, the love Jesus commands is a love of degree, meaning it concerns how much we love God compared with everything else. God has given us many good things to enjoy in this world, and they are genuine gifts, not evils. But we must always guard the order of our loves so that no gift, however good, ever becomes as important to us as the Giver. The danger is that a worthy thing can quietly take first place in the heart. If we love God with all our heart, soul, and mind, then nothing is allowed to come between us and Him, and every other love is kept in its proper, lesser place.",
-      modelEs: "Además de ser total, el amor que Jesús manda es un amor de grado, es decir, tiene que ver con cuánto amamos a Dios comparado con todo lo demás. Dios nos ha dado muchas cosas buenas para disfrutar en este mundo, y son verdaderos regalos, no males. Pero siempre debemos guardar el orden de nuestros amores para que ningún regalo, por bueno que sea, llegue a ser tan importante para nosotros como el Dador. El peligro es que algo digno tome calladamente el primer lugar en el corazón. Si amamos a Dios con todo el corazón, el alma y la mente, entonces nada se permite que se interponga entre nosotros y Él, y todo otro amor se mantiene en su lugar propio y menor." },
-    { textEn: "24. Explain the lesson's correction of 'Called to serve' and how Enoch models the better way.",
-      textEs: "24. Explique la corrección de la lección al lema 'Llamados a servir' y cómo Enoc modela el mejor camino.",
-      kw_en: ["serve", "love", "guilt", "miserable", "Enoch", "walked", "fellowship", "first"],
-      kw_es: ["servir", "amar", "culpa", "miserable", "Enoc", "caminó", "comunión", "primero"],
-      modelEn: "We often pick up the idea that all God wants is for us to work ourselves to death, so we become guilt-ridden and miserable, and we even hang 'Called to serve' over our doors. The lesson corrects this: we are not first called to serve at all, but to love; service is good but must grow out of love rather than replace it, or religion becomes joyless duty. Enoch models the better way. Almost all Scripture records of him is that he walked with God and God took him — a life whose whole commentary is fellowship with God. He fulfilled the purpose we were all made for, since God created us for fellowship with Himself, and so the searching question is whether our own life would read, 'He walked with God.'",
-      modelEs: "A menudo adoptamos la idea de que todo lo que Dios quiere es que nos matemos trabajando, así que nos volvemos cargados de culpa y miserables, y hasta colgamos 'Llamados a servir' sobre las puertas. La lección lo corrige: no somos llamados primero a servir, sino a amar; el servicio es bueno pero debe brotar del amor y no reemplazarlo, o la religión se vuelve un deber sin gozo. Enoc modela el mejor camino. Casi todo lo que la Escritura registra de él es que caminó con Dios y Dios lo llevó — una vida cuyo comentario entero es la comunión con Dios. Cumplió el propósito para el cual todos fuimos hechos, pues Dios nos creó para la comunión consigo mismo, y por eso la pregunta que escudriña es si nuestra propia vida diría: 'Caminó con Dios.'" },
-    { textEn: "25. According to the lesson, what is most likely the greatest sin, and why is it the one we overlook?",
-      textEs: "25. Según la lección, ¿cuál es muy probablemente el pecado más grande, y por qué es el que pasamos por alto?",
-      kw_en: ["greatest", "commandment", "love", "list", "murder", "overlook", "Peter Lord", "fellowship"],
-      kw_es: ["más grande", "mandamiento", "amor", "lista", "homicidio", "pasar por alto", "Peter Lord", "comunión"],
-      modelEn: "We all keep a private list of sins, with murder, adultery, theft, and blasphemy near the top, because we feel their weight instinctively. But as Peter Lord points out, the greatest sin is most likely tied to the greatest commandment, for to commit the greatest sin is to break the greatest commandment. Since loving God with everything is the first and greatest command, failing to love Him is the first and greatest sin. It is the one we overlook precisely because it never makes our list; we measure sin by dramatic outward acts and miss the quiet failure to give God the fellowship and love He most desires. God is not chiefly after our work or money but our love.",
-      modelEs: "Todos guardamos una lista privada de pecados, con el homicidio, el adulterio, el robo y la blasfemia cerca de la cima, porque sentimos su peso por instinto. Pero como señala Peter Lord, el pecado más grande está muy probablemente ligado al mandamiento más grande, pues cometer el pecado más grande es quebrantar el mandamiento más grande. Como amar a Dios con todo es el primero y más grande mandamiento, no amarlo es el primero y más grande pecado. Es el que pasamos por alto precisamente porque nunca aparece en nuestra lista; medimos el pecado por actos externos dramáticos y se nos escapa la falla callada de no darle a Dios la comunión y el amor que más desea. Dios no busca ante todo nuestro trabajo ni dinero sino nuestro amor." },
-    { textEn: "26. How does the Abraham-and-Isaac account teach loving God more than family?",
-      textEs: "26. ¿Cómo enseña el relato de Abraham e Isaac a amar a Dios más que a la familia?",
-      kw_en: ["Abraham", "Isaac", "family", "test", "first love", "knife", "stayed", "worthy"],
-      kw_es: ["Abraham", "Isaac", "familia", "prueba", "primer amor", "cuchillo", "detuvo", "digno"],
-      modelEn: "Jesus said anyone who loves father, mother, son, or daughter more than Him is not worthy of Him, because even a good love like family can take first place in the heart. Abraham faced this in its sharpest form when God asked him to offer Isaac, the son he had waited a lifetime for. He loved the boy more than his own life, yet he loved God more, and in heart and intent he gave his son to the Lord. God never meant the knife to fall and stayed Abraham's hand; the point was never Isaac's death but the discovery of where Abraham's first love lay. The same test comes to us in quieter forms, when family attachments would hold us back from full obedience to God.",
-      modelEs: "Jesús dijo que quien ama a padre, madre, hijo o hija más que a Él no es digno de Él, porque aun un amor bueno como la familia puede tomar el primer lugar en el corazón. Abraham lo enfrentó en su forma más aguda cuando Dios le pidió ofrecer a Isaac, el hijo que había esperado toda una vida. Amaba al muchacho más que a su propia vida, y sin embargo amaba más a Dios, y de corazón e intención entregó a su hijo al Señor. Dios nunca quiso que el cuchillo cayera y detuvo la mano de Abraham; el punto nunca fue la muerte de Isaac sino descubrir dónde estaba el primer amor de Abraham. La misma prueba nos llega en formas más calladas, cuando los apegos familiares nos frenarían de la plena obediencia a Dios." },
-    { textEn: "27. Use the rich young ruler to explain loving God more than money, and the question of ownership.",
-      textEs: "27. Use al joven rico para explicar amar a Dios más que al dinero, y la cuestión de la propiedad.",
-      kw_en: ["money", "ruler", "god", "sell", "ownership", "tithe", "rob", "Giver"],
-      kw_es: ["dinero", "joven rico", "dios", "vender", "propiedad", "diezmo", "robar", "Dador"],
-      modelEn: "Jesus said we cannot serve God and money, and He proved it with the rich young ruler, who sensed something was missing yet could not obey when told to sell what he had and give to the poor. Money had quietly become his god, claiming his time, thought, and energy. The story presses the question of ownership on us: who really owns what we hold? If it is mine I use it one way; if it is God's, another. Scripture says the earth, the cattle, even the birds belong to God, who owns all we have, and He says the tithe is the Lord's, so to withhold it is to rob God. How we hold our money quietly reveals whether we love the gift or the Giver.",
-      modelEs: "Jesús dijo que no podemos servir a Dios y a las riquezas, y lo probó con el joven rico, que presentía que algo le faltaba y sin embargo no pudo obedecer cuando se le dijo que vendiera lo que tenía y lo diera a los pobres. El dinero se había vuelto calladamente su dios, reclamando su tiempo, pensamiento y energía. La historia nos plantea la cuestión de la propiedad: ¿quién posee de veras lo que tenemos? Si es mío lo uso de un modo; si es de Dios, de otro. La Escritura dice que la tierra, el ganado, hasta las aves pertenecen a Dios, que posee todo lo nuestro, y dice que el diezmo es del Señor, así que retenerlo es robar a Dios. Cómo manejamos el dinero revela calladamente si amamos el regalo o al Dador." },
-    { textEn: "28. What does the Brazilian family illustrate about loving God more than money?",
-      textEs: "28. ¿Qué ilustra la familia brasileña sobre amar a Dios más que al dinero?",
-      kw_en: ["Brazil", "blacksmith", "Bible", "tithe", "cattle", "church", "proved", "God"],
-      kw_es: ["Brasil", "herrero", "Biblia", "diezmo", "ganado", "iglesia", "probaron", "Dios"],
-      modelEn: "A blacksmith in the interior of Brazil was converted by an open-air evangelist, given a Bible, and went home and taught his family from it for years. When Baptist workers finally found them, they discovered the family had been setting aside a tenth of their cattle earnings the whole time, simply because the Scriptures said the tithe belonged to God. They had never even seen a church, so they were not imitating other believers or seeking approval; they obeyed because they took God's Word at face value. With their herd they proved that they loved God more than money, illustrating that real love for God shows itself in how we hold our possessions, even when no one is watching.",
-      modelEs: "Un herrero en el interior de Brasil fue convertido por un evangelista al aire libre, recibió una Biblia, y volvió a casa y enseñó a su familia de ella por años. Cuando unos obreros bautistas por fin los hallaron, descubrieron que la familia había estado apartando todo ese tiempo la décima parte de sus ganancias del ganado, sencillamente porque las Escrituras decían que el diezmo pertenecía a Dios. Nunca habían visto siquiera una iglesia, así que no imitaban a otros creyentes ni buscaban aprobación; obedecían porque tomaron la Palabra de Dios al pie de la letra. Con su rebaño probaron que amaban a Dios más que al dinero, ilustrando que el amor verdadero a Dios se muestra en cómo manejamos nuestras posesiones, aun cuando nadie observa." },
-    { textEn: "29. Explain Hebrews 12:2 and how David shows the danger of 'blinking.'",
-      textEs: "29. Explique Hebreos 12:2 y cómo David muestra el peligro de 'parpadear.'",
-      kw_en: ["looking", "Jesus", "blink", "David", "Goliath", "power", "Bathsheba", "temptation"],
-      kw_es: ["mirar", "Jesús", "parpadear", "David", "Goliat", "poder", "Betsabé", "tentación"],
-      modelEn: "Hebrews 12:2 sums up the Christian life in three words, 'looking unto Jesus, the author and finisher of our faith.' The instruction is simple but hard to keep, and the lesson compares losing sight of God to a staring game in which we 'blink' and look somewhere else, usually toward the world's glitter and desires. David is the great example. As a shepherd boy his eyes were so fixed on God that, with a sling and his faith, he felled the giant Goliath. But as king, amid power and praise, he looked away from God, and one evening his gaze drifted to his neighbor's wife and he fell. Had his eyes stayed on the Lord, he could have escaped the temptation, and so the Christian struggle is largely about where we are looking.",
-      modelEs: "Hebreos 12:2 resume la vida cristiana en tres palabras: 'puestos los ojos en Jesús, el autor y consumador de la fe.' La instrucción es sencilla pero difícil de mantener, y la lección compara perder de vista a Dios con un juego de miradas en que 'parpadeamos' y miramos a otra parte, por lo general hacia el brillo y los deseos del mundo. David es el gran ejemplo. De muchacho pastor sus ojos estaban tan fijos en Dios que, con una honda y su fe, derribó al gigante Goliat. Pero como rey, entre el poder y la alabanza, apartó la mirada de Dios, y una tarde su mirada se desvió a la mujer de su prójimo y cayó. Si sus ojos hubieran seguido en el Señor, habría escapado de la tentación, y por eso la lucha cristiana trata en gran medida de hacia dónde miramos." },
-    { textEn: "30. Using Spurgeon and B. H. Carroll, explain why it is never too early or too late to look to Jesus.",
-      textEs: "30. Usando a Spurgeon y B. H. Carroll, explique por qué nunca es demasiado temprano ni demasiado tarde para mirar a Jesús.",
-      kw_en: ["early", "late", "Spurgeon", "young", "Carroll", "bitter", "looked", "Jesus"],
-      kw_es: ["temprano", "tarde", "Spurgeon", "joven", "Carroll", "amargado", "miró", "Jesús"],
-      modelEn: "If the whole of the Christian life is learning to look to Jesus, two encouragements follow. First, it is never too early: a lay preacher in a snowbound English chapel could only repeat 'Look unto Me, and be saved,' and pressed it on a miserable fifteen-year-old who became Charles Spurgeon, so a young heart that learns to look has the best of beginnings. Second, it is never too late: B. H. Carroll, godless and embittered and crippled by war, was dragged unwillingly to church, and though the sermon left him empty, at its end Christ seemed to stand before him calling, and he looked up once and forever to become a great man of God. Whether early or late, the command and the door are the same — love God and keep looking to Him.",
-      modelEs: "Si toda la vida cristiana es aprender a mirar a Jesús, se siguen dos alientos. Primero, nunca es demasiado temprano: un predicador laico en una capilla inglesa cubierta de nieve solo podía repetir 'Mirad a mí, y sed salvos,' y se lo insistió a un muchacho miserable de quince años que llegó a ser Charles Spurgeon, así que un corazón joven que aprende a mirar tiene el mejor comienzo. Segundo, nunca es demasiado tarde: B. H. Carroll, impío y amargado y lisiado por la guerra, fue llevado a la iglesia contra su voluntad, y aunque el sermón lo dejó vacío, al final Cristo pareció ponerse delante de él llamándolo, y miró hacia arriba de una vez y para siempre para llegar a ser un gran hombre de Dios. Sea temprano o tarde, el mandamiento y la puerta son los mismos — ama a Dios y sigue mirando a Él." }
-];
+/* CTSRadical — unit 3. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "radical",
+ "unit": 3,
+ "totalUnits": 13,
+ "filePrefix": "CTSRadical",
+ "prevHref": "CTSRadicalUnit2.html",
+ "nextHref": "CTSRadicalUnit4.html",
+ "unitTitles": {
+  "en": [
+   "Unit 1 - Foundation: Old Wineskins, New Wine",
+   "Unit 2 - What Jesus Did With the Law",
+   "Unit 3 - Love God",
+   "Unit 4 - Love Neighbor",
+   "Unit 5 - Be Holy",
+   "Unit 6 - Be Forgiving",
+   "Unit 7 - Be Humble",
+   "Unit 8 - Be Generous",
+   "Unit 9 - Trust God",
+   "Unit 10 - Be Prayerful",
+   "Unit 11 - Be Kind",
+   "Unit 12 - Be a Disciplemaker",
+   "Unit 13 - Capstone: Turning the World Upside Down"
+  ],
+  "es": [
+   "Unit 1 - Foundation: Old Wineskins, New Wine",
+   "Unit 2 - What Jesus Did With the Law",
+   "Unit 3 - Love God",
+   "Unit 4 - Love Neighbor",
+   "Unit 5 - Be Holy",
+   "Unit 6 - Be Forgiving",
+   "Unit 7 - Be Humble",
+   "Unit 8 - Be Generous",
+   "Unit 9 - Trust God",
+   "Unit 10 - Be Prayerful",
+   "Unit 11 - Be Kind",
+   "Unit 12 - Be a Disciplemaker",
+   "Unit 13 - Capstone: Turning the World Upside Down"
+  ]
+ },
+ "mc": [
+  {
+   "stem": {
+    "en": "In Matthew 22, why did the lawyer ask Jesus which was the greatest commandment?",
+    "es": "En Mateo 22, ¿por qué preguntó el intérprete de la ley cuál era el mandamiento más grande?"
+   },
+   "options": {
+    "en": [
+     "He was testing Jesus, hoping to trap Him",
+     "He genuinely wanted to learn from Jesus",
+     "He had forgotten the commandments",
+     "He was sent by the Sadducees"
+    ],
+    "es": [
+     "Estaba tentando a Jesús, esperando atraparlo",
+     "De veras quería aprender de Jesús",
+     "Había olvidado los mandamientos",
+     "Fue enviado por los saduceos"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The text says he asked 'testing Him' — the rabbis loved to trap a teacher in a careless ranking of the 613 commands.",
+    "es": "El texto dice que preguntó 'por tentarle' — a los rabinos les gustaba atrapar a un maestro en una clasificación descuidada de los 613 mandamientos."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did Jesus name as the first and greatest commandment?",
+    "es": "¿Qué nombró Jesús como el primero y más grande mandamiento?"
+   },
+   "options": {
+    "en": [
+     "Do not murder",
+     "Keep the Sabbath holy",
+     "Love your neighbor as yourself",
+     "Love the Lord your God with all your heart, soul, and mind"
+    ],
+    "es": [
+     "No matarás",
+     "Guarda santo el sábado",
+     "Ama a tu prójimo como a ti mismo",
+     "Ama al Señor tu Dios con todo tu corazón, alma y mente"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Jesus reached back to the Shema (Deut 6) and named love for God with all the heart, soul, and mind as the first and greatest.",
+    "es": "Jesús se remontó al Shemá (Dt 6) y nombró el amor a Dios con todo el corazón, el alma y la mente como el primero y más grande."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to the lesson, what does it mean that this love must be 'total'?",
+    "es": "Según la lección, ¿qué significa que este amor deba ser 'total'?"
+   },
+   "options": {
+    "en": [
+     "It means loving God only on Sundays",
+     "It means feeling intense emotion",
+     "It means the whole person — every faculty — is bent toward God",
+     "It means giving God ten percent"
+    ],
+    "es": [
+     "Significa amar a Dios solo los domingos",
+     "Significa sentir una emoción intensa",
+     "Significa que toda la persona — cada facultad — está inclinada hacia Dios",
+     "Significa darle a Dios el diez por ciento"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Christianity is a religion of the whole person; heart, soul, and mind are three angles on one undivided self, leaving no part exempt.",
+    "es": "El cristianismo es una religión del hombre entero; corazón, alma y mente son tres ángulos de un solo ser indiviso, sin dejar exenta ninguna parte."
+   }
+  },
+  {
+   "stem": {
+    "en": "What image does the lesson use for how the whole Christian should be shaped by God's will?",
+    "es": "¿Qué imagen usa la lección para cómo todo el cristiano debe ser formado por la voluntad de Dios?"
+   },
+   "options": {
+    "en": [
+     "A river carving a canyon",
+     "A seashore tree bent by the prevailing wind",
+     "A lamp on a stand",
+     "A house built on rock"
+    ],
+    "es": [
+     "Un río que talla un cañón",
+     "Un árbol de la orilla doblado por el viento que predomina",
+     "Una lámpara sobre un candelero",
+     "Una casa edificada sobre la roca"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "As a seashore tree is bent over the years by the prevailing wind, the whole Christian is meant to be bent by the will of God.",
+    "es": "Como un árbol de la orilla es doblado con los años por el viento que predomina, todo el cristiano ha de ser doblado por la voluntad de Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "The lesson says this love is also a love of 'degree.' What danger does that guard against?",
+    "es": "La lección dice que este amor es también un amor de 'grado.' ¿Contra qué peligro protege eso?"
+   },
+   "options": {
+    "en": [
+     "Letting a good gift become as important to us as God Himself",
+     "Loving God too intensely",
+     "Spending too much time in prayer",
+     "Giving away too much money"
+    ],
+    "es": [
+     "Dejar que un buen regalo llegue a ser tan importante como Dios mismo",
+     "Amar a Dios con demasiada intensidad",
+     "Pasar demasiado tiempo en oración",
+     "Regalar demasiado dinero"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "God gives many good gifts, but we must guard the order of our loves so no gift ever becomes as important to us as the Giver.",
+    "es": "Dios da muchos buenos regalos, pero debemos guardar el orden de nuestros amores para que ninguno llegue a ser tan importante como el Dador."
+   }
+  },
+  {
+   "stem": {
+    "en": "The lesson challenges a common church motto. Which one, and what correction is given?",
+    "es": "La lección desafía un lema común de la iglesia. ¿Cuál, y qué corrección se da?"
+   },
+   "options": {
+    "en": [
+     "'God is love' — we should fear Him instead",
+     "'Jesus saves' — we must save ourselves",
+     "'Called to serve' — we are first called to love, not merely to serve",
+     "'Give generously' — we should keep what we earn"
+    ],
+    "es": [
+     "'Dios es amor' — más bien debemos temerle",
+     "'Jesús salva' — debemos salvarnos a nosotros mismos",
+     "'Llamados a servir' — somos llamados primero a amar, no solo a servir",
+     "'Den generosamente' — debemos guardar lo que ganamos"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "We inscribe 'Called to serve' over our doors, but service must grow out of love; we are first called to love, not merely to serve.",
+    "es": "Inscribimos 'Llamados a servir' sobre las puertas, pero el servicio debe brotar del amor; somos llamados primero a amar, no solo a servir."
+   }
+  },
+  {
+   "stem": {
+    "en": "What is nearly the entire biblical record of Enoch's life, and why does it matter?",
+    "es": "¿Cuál es casi todo el registro bíblico de la vida de Enoc, y por qué importa?"
+   },
+   "options": {
+    "en": [
+     "He built an ark; it shows obedience",
+     "He led Israel; it shows leadership",
+     "He wrote many psalms; it shows worship",
+     "He walked with God, and God took him; it shows we are made for fellowship with God"
+    ],
+    "es": [
+     "Construyó un arca; muestra obediencia",
+     "Guió a Israel; muestra liderazgo",
+     "Escribió muchos salmos; muestra adoración",
+     "Caminó con Dios, y Dios lo llevó; muestra que somos hechos para la comunión con Dios"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Almost all Scripture says of Enoch is that he walked with God and God took him — a model of the fellowship we were created for.",
+    "es": "Casi todo lo que la Escritura dice de Enoc es que caminó con Dios y Dios lo llevó — un modelo de la comunión para la cual fuimos creados."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to the lesson (citing Peter Lord), what is most likely the greatest sin?",
+    "es": "Según la lección (citando a Peter Lord), ¿cuál es muy probablemente el pecado más grande?"
+   },
+   "options": {
+    "en": [
+     "Murder",
+     "Failing to love God — breaking the greatest commandment",
+     "Blasphemy",
+     "Theft"
+    ],
+    "es": [
+     "El homicidio",
+     "No amar a Dios — quebrantar el mandamiento más grande",
+     "La blasfemia",
+     "El robo"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Since to commit the greatest sin is to break the greatest commandment, failing to love God is the first and greatest sin — the one we never list.",
+    "es": "Como cometer el pecado más grande es quebrantar el mandamiento más grande, no amar a Dios es el primero y más grande pecado — el que nunca anotamos."
+   }
+  },
+  {
+   "stem": {
+    "en": "The lesson says God is not most interested in our work or our money. Why not?",
+    "es": "La lección dice que a Dios no le interesan más nuestro trabajo ni nuestro dinero. ¿Por qué no?"
+   },
+   "options": {
+    "en": [
+     "Because He has all power and already owns everything; He wants our fellowship and love",
+     "Because work and money are sinful",
+     "Because He cannot use them",
+     "Because only prayer matters to Him"
+    ],
+    "es": [
+     "Porque Él tiene todo el poder y ya posee todo; quiere nuestra comunión y amor",
+     "Porque el trabajo y el dinero son pecaminosos",
+     "Porque no puede usarlos",
+     "Porque solo la oración le importa"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "God has all power and owns everything, so He needs neither our work nor money; what He desires is our fellowship and love.",
+    "es": "Dios tiene todo el poder y posee todo, así que no necesita nuestro trabajo ni dinero; lo que desea es nuestra comunión y amor."
+   }
+  },
+  {
+   "stem": {
+    "en": "Which command did Jesus give about loving God versus family (Matthew 10:37)?",
+    "es": "¿Qué mandamiento dio Jesús sobre amar a Dios frente a la familia (Mateo 10:37)?"
+   },
+   "options": {
+    "en": [
+     "Honor your father and mother above all",
+     "Anyone who loves father, mother, son, or daughter more than Me is not worthy of Me",
+     "Leave your family forever",
+     "Family always comes first"
+    ],
+    "es": [
+     "Honra a tu padre y madre por encima de todo",
+     "El que ama a padre, madre, hijo o hija más que a mí no es digno de mí",
+     "Deja a tu familia para siempre",
+     "La familia siempre va primero"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Jesus said anyone loving father, mother, son, or daughter more than Him is not worthy of Him — God must hold first place even over family.",
+    "es": "Jesús dijo que quien ama a padre, madre, hijo o hija más que a Él no es digno de Él — Dios debe tener el primer lugar aun sobre la familia."
+   }
+  },
+  {
+   "stem": {
+    "en": "In the lesson, what was the real point of God asking Abraham to offer Isaac?",
+    "es": "En la lección, ¿cuál fue el verdadero punto de que Dios pidiera a Abraham ofrecer a Isaac?"
+   },
+   "options": {
+    "en": [
+     "God wanted Isaac to die",
+     "To punish Abraham",
+     "To discover where Abraham's first love lay; God never meant the knife to fall",
+     "To test Isaac's obedience"
+    ],
+    "es": [
+     "Dios quería que Isaac muriera",
+     "Para castigar a Abraham",
+     "Descubrir dónde estaba el primer amor de Abraham; Dios nunca quiso que el cuchillo cayera",
+     "Para probar la obediencia de Isaac"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "God stayed Abraham's hand; the point was never Isaac's death but revealing that Abraham loved God even more than his son.",
+    "es": "Dios detuvo la mano de Abraham; el punto nunca fue la muerte de Isaac sino revelar que Abraham amaba a Dios aun más que a su hijo."
+   }
+  },
+  {
+   "stem": {
+    "en": "How did Mary Welch answer the king's offer to free her imprisoned husband?",
+    "es": "¿Cómo respondió Mary Welch a la oferta del rey de liberar a su esposo preso?"
+   },
+   "options": {
+    "en": [
+     "She promised he would never preach again",
+     "She offered the king money",
+     "She agreed to leave Scotland",
+     "She held up her apron and said she'd rather have her husband's head in it than make such a promise"
+    ],
+    "es": [
+     "Prometió que él nunca volvería a predicar",
+     "Le ofreció dinero al rey",
+     "Aceptó salir de Escocia",
+     "Levantó su delantal y dijo que prefería tener en él la cabeza de su esposo antes que hacer tal promesa"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "The king would free Welch if Mary promised he'd never preach again; she refused — she loved her husband, but she loved God more.",
+    "es": "El rey liberaría a Welch si Mary prometía que nunca predicaría; ella se negó — amaba a su esposo, pero amaba más a Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did Jesus tell the rich young ruler, and why could he not do it?",
+    "es": "¿Qué le dijo Jesús al joven rico, y por qué no pudo hacerlo?"
+   },
+   "options": {
+    "en": [
+     "To sell what he had and give to the poor; money had become his god",
+     "To pray more; he was too busy",
+     "To join the disciples; he feared travel",
+     "To keep the law; he had broken it"
+    ],
+    "es": [
+     "Que vendiera lo que tenía y lo diera a los pobres; el dinero se había vuelto su dios",
+     "Que orara más; estaba muy ocupado",
+     "Que se uniera a los discípulos; temía viajar",
+     "Que guardara la ley; la había quebrantado"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Jesus told him to sell all and give to the poor; he could not, because wealth had become his god, claiming his time and heart.",
+    "es": "Jesús le dijo que vendiera todo y lo diera a los pobres; no pudo, porque la riqueza se había vuelto su dios, reclamando su tiempo y corazón."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to the lesson, what is the basic question about our money?",
+    "es": "Según la lección, ¿cuál es la pregunta básica sobre nuestro dinero?"
+   },
+   "options": {
+    "en": [
+     "How can we earn more?",
+     "Who really owns what we have — is it mine, or God's?",
+     "How little can we give?",
+     "How do we avoid taxes?"
+    ],
+    "es": [
+     "¿Cómo ganar más?",
+     "¿Quién posee de veras lo que tenemos — es mío, o de Dios?",
+     "¿Cuán poco podemos dar?",
+     "¿Cómo evitar impuestos?"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "The basic question is ownership: if it is mine I use it one way, if it is God's another. Scripture says all belongs to God, and the tithe is His.",
+    "es": "La pregunta básica es de propiedad: si es mío lo uso de un modo, si es de Dios de otro. La Escritura dice que todo es de Dios, y el diezmo es suyo."
+   }
+  },
+  {
+   "stem": {
+    "en": "What did the Brazilian family's tithed cattle demonstrate?",
+    "es": "¿Qué demostró el ganado diezmado de la familia brasileña?"
+   },
+   "options": {
+    "en": [
+     "That they wanted to start a business",
+     "That cattle are valuable in Brazil",
+     "That they loved God more than money, though they had never seen a church",
+     "That they distrusted the missionaries"
+    ],
+    "es": [
+     "Que querían iniciar un negocio",
+     "Que el ganado es valioso en Brasil",
+     "Que amaban a Dios más que al dinero, aunque nunca habían visto una iglesia",
+     "Que desconfiaban de los misioneros"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Having only a Bible and no church, the family still set aside a tenth for years — proving they loved God more than money.",
+    "es": "Con solo una Biblia y sin iglesia, la familia apartó la décima parte por años — probando que amaban a Dios más que al dinero."
+   }
+  },
+  {
+   "stem": {
+    "en": "What three-word instruction from Hebrews 12:2 sums up the Christian life in the lesson?",
+    "es": "¿Qué instrucción de tres palabras de Hebreos 12:2 resume la vida cristiana en la lección?"
+   },
+   "options": {
+    "en": [
+     "Work for Jesus",
+     "Fear the Lord",
+     "Give to God",
+     "Looking unto Jesus"
+    ],
+    "es": [
+     "Trabajar para Jesús",
+     "Temer al Señor",
+     "Dar a Dios",
+     "Puestos los ojos en Jesús"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Hebrews 12:2 — 'looking unto Jesus, the author and finisher of our faith' — sums up the whole Christian life: keep looking to Him.",
+    "es": "Hebreos 12:2 — 'puestos los ojos en Jesús, el autor y consumador de la fe' — resume toda la vida cristiana: seguir mirando a Él."
+   }
+  },
+  {
+   "stem": {
+    "en": "The lesson compares losing sight of God to which children's game?",
+    "es": "La lección compara perder de vista a Dios con ¿cuál juego de niños?"
+   },
+   "options": {
+    "en": [
+     "A staring game where the first to blink loses",
+     "Hide and seek",
+     "Tag",
+     "Leapfrog"
+    ],
+    "es": [
+     "Un juego de miradas donde el primero en parpadear pierde",
+     "Las escondidas",
+     "La traes (el pillado)",
+     "El salto de rana"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Like a staring game, we 'blink' in our spiritual life — losing sight of the Lord and looking somewhere else.",
+    "es": "Como un juego de miradas, 'parpadeamos' en la vida espiritual — perdiendo de vista al Señor y mirando a otra parte."
+   }
+  },
+  {
+   "stem": {
+    "en": "How is David used as 'a man that blinked'?",
+    "es": "¿Cómo se usa a David como 'un hombre que parpadeó'?"
+   },
+   "options": {
+    "en": [
+     "He doubted God before Goliath",
+     "He looked away from God amid power and praise, leading to his fall with Bathsheba",
+     "He refused to become king",
+     "He never sinned"
+    ],
+    "es": [
+     "Dudó de Dios ante Goliat",
+     "Apartó la mirada de Dios entre el poder y la alabanza, lo que llevó a su caída con Betsabé",
+     "Se negó a ser rey",
+     "Nunca pecó"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "David trusted God against Goliath, but as king he looked away amid power and praise; that drifting gaze led to his fall with Bathsheba.",
+    "es": "David confió en Dios contra Goliat, pero como rey apartó la mirada entre el poder y la alabanza; esa mirada desviada llevó a su caída con Betsabé."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does the Charles Spurgeon story illustrate about looking to Jesus?",
+    "es": "¿Qué ilustra la historia de Charles Spurgeon sobre mirar a Jesús?"
+   },
+   "options": {
+    "en": [
+     "That only adults can be saved",
+     "That preaching must be eloquent",
+     "That it is never too early to begin looking to Jesus",
+     "That bad weather hinders conversion"
+    ],
+    "es": [
+     "Que solo los adultos pueden ser salvos",
+     "Que la predicación debe ser elocuente",
+     "Que nunca es demasiado temprano para empezar a mirar a Jesús",
+     "Que el mal tiempo impide la conversión"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "A lay preacher pressed 'Look unto Me' on a miserable 15-year-old — the boy was Spurgeon. It is never too early to look to Jesus.",
+    "es": "Un predicador laico insistió 'Mirad a mí' a un muchacho miserable de quince años — era Spurgeon. Nunca es demasiado temprano para mirar a Jesús."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does the B. H. Carroll story add to the Spurgeon story?",
+    "es": "¿Qué añade la historia de B. H. Carroll a la de Spurgeon?"
+   },
+   "options": {
+    "en": [
+     "That conversion requires good weather",
+     "That bitter men cannot be saved",
+     "That only the young respond",
+     "That it is never too late to trust in Jesus, regardless of how one has lived"
+    ],
+    "es": [
+     "Que la conversión requiere buen tiempo",
+     "Que los amargados no pueden ser salvos",
+     "Que solo los jóvenes responden",
+     "Que nunca es demasiado tarde para confiar en Jesús, sin importar cómo se haya vivido"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Carroll, godless and embittered, looked up once and forever and became a great man of God — it is never too late to trust Jesus.",
+    "es": "Carroll, impío y amargado, miró hacia arriba de una vez y para siempre y llegó a ser un gran hombre de Dios — nunca es demasiado tarde para confiar en Jesús."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Explain the setting of Matthew 22:34-38 and why Jesus' answer moves the question to the heart.",
+    "es": "Explique el contexto de Mateo 22:34-38 y por qué la respuesta de Jesús lleva la pregunta al corazón."
+   },
+   "keywords": {
+    "en": [
+     "lawyer",
+     "testing",
+     "greatest",
+     "Shema",
+     "heart",
+     "love",
+     "outward",
+     "foundation"
+    ],
+    "es": [
+     "intérprete",
+     "tentar",
+     "grande",
+     "Shemá",
+     "corazón",
+     "amor",
+     "externo",
+     "fundamento"
+    ]
+   },
+   "model": {
+    "en": "An expert in the law asked Jesus which was the greatest commandment, and the text says he asked to test Him, not to learn, since the rabbis loved to trap a teacher over the ranking of the commands. Jesus did not hesitate but reached back to the Shema of Deuteronomy 6 and named love for God with all the heart, soul, and mind as the first and greatest. That answer moves the whole question off the surface of outward rule-keeping and drives it down to the heart: the greatest thing God requires is not a performance He can audit but an affection given with the whole self. Love is the foundation of the Christian life, and every other command grows from it.",
+    "es": "Un intérprete de la ley preguntó a Jesús cuál era el mandamiento más grande, y el texto dice que preguntó para tentarlo, no para aprender, pues a los rabinos les gustaba atrapar a un maestro en la clasificación de los mandamientos. Jesús no vaciló sino que se remontó al Shemá de Deuteronomio 6 y nombró el amor a Dios con todo el corazón, el alma y la mente como el primero y más grande. Esa respuesta aparta toda la cuestión de la superficie del cumplimiento externo y la lleva al corazón: lo más grande que Dios requiere no es una actuación que pueda auditar sino un afecto dado con todo el ser. El amor es el fundamento de la vida cristiana, y todo otro mandamiento crece de él."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does it mean that love for God must be 'total,' and how is the basis of obedience?",
+    "es": "¿Qué significa que el amor a Dios deba ser 'total,' y cómo es la base de la obediencia?"
+   },
+   "keywords": {
+    "en": [
+     "total",
+     "whole",
+     "heart",
+     "soul",
+     "mind",
+     "obedience",
+     "tree",
+     "wind"
+    ],
+    "es": [
+     "total",
+     "entero",
+     "corazón",
+     "alma",
+     "mente",
+     "obediencia",
+     "árbol",
+     "viento"
+    ]
+   },
+   "model": {
+    "en": "Jesus means a total love, for Christianity is a religion of the whole person: we are to love God with all our heart, all our soul, and all our mind, every faculty bent toward Him. The three are not separate compartments but three angles on one undivided self, leaving no part exempt. This total love is the very basis of obedience, because when we love God with everything we strive with everything within us to do what He wants, and obedience becomes the natural leaning of a life rather than a demand from outside. The lesson pictures it as a tree by the seashore: just as it is bent over the years by the prevailing wind, the whole Christian is meant to be bent by the will of God.",
+    "es": "Jesús quiere decir un amor total, pues el cristianismo es una religión del hombre entero: hemos de amar a Dios con todo el corazón, toda el alma y toda la mente, cada facultad inclinada hacia Él. Los tres no son compartimentos separados sino tres ángulos de un solo ser indiviso, sin dejar exenta ninguna parte. Este amor total es la base misma de la obediencia, porque cuando amamos a Dios con todo nos esforzamos con todo lo que hay en nosotros por hacer lo que Él quiere, y la obediencia se vuelve la inclinación natural de una vida y no una exigencia de afuera. La lección lo representa como un árbol junto a la orilla: así como es doblado con los años por el viento que predomina, todo el cristiano ha de ser doblado por la voluntad de Dios."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain what it means that this is a love of 'degree' and the danger it warns against.",
+    "es": "Explique qué significa que éste sea un amor de 'grado' y el peligro contra el que advierte."
+   },
+   "keywords": {
+    "en": [
+     "degree",
+     "gift",
+     "Giver",
+     "order",
+     "important",
+     "between",
+     "good",
+     "first"
+    ],
+    "es": [
+     "grado",
+     "regalo",
+     "Dador",
+     "orden",
+     "importante",
+     "entre",
+     "bueno",
+     "primero"
+    ]
+   },
+   "model": {
+    "en": "Besides being total, the love Jesus commands is a love of degree, meaning it concerns how much we love God compared with everything else. God has given us many good things to enjoy in this world, and they are genuine gifts, not evils. But we must always guard the order of our loves so that no gift, however good, ever becomes as important to us as the Giver. The danger is that a worthy thing can quietly take first place in the heart. If we love God with all our heart, soul, and mind, then nothing is allowed to come between us and Him, and every other love is kept in its proper, lesser place.",
+    "es": "Además de ser total, el amor que Jesús manda es un amor de grado, es decir, tiene que ver con cuánto amamos a Dios comparado con todo lo demás. Dios nos ha dado muchas cosas buenas para disfrutar en este mundo, y son verdaderos regalos, no males. Pero siempre debemos guardar el orden de nuestros amores para que ningún regalo, por bueno que sea, llegue a ser tan importante para nosotros como el Dador. El peligro es que algo digno tome calladamente el primer lugar en el corazón. Si amamos a Dios con todo el corazón, el alma y la mente, entonces nada se permite que se interponga entre nosotros y Él, y todo otro amor se mantiene en su lugar propio y menor."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the lesson's correction of 'Called to serve' and how Enoch models the better way.",
+    "es": "Explique la corrección de la lección al lema 'Llamados a servir' y cómo Enoc modela el mejor camino."
+   },
+   "keywords": {
+    "en": [
+     "serve",
+     "love",
+     "guilt",
+     "miserable",
+     "Enoch",
+     "walked",
+     "fellowship",
+     "first"
+    ],
+    "es": [
+     "servir",
+     "amar",
+     "culpa",
+     "miserable",
+     "Enoc",
+     "caminó",
+     "comunión",
+     "primero"
+    ]
+   },
+   "model": {
+    "en": "We often pick up the idea that all God wants is for us to work ourselves to death, so we become guilt-ridden and miserable, and we even hang 'Called to serve' over our doors. The lesson corrects this: we are not first called to serve at all, but to love; service is good but must grow out of love rather than replace it, or religion becomes joyless duty. Enoch models the better way. Almost all Scripture records of him is that he walked with God and God took him — a life whose whole commentary is fellowship with God. He fulfilled the purpose we were all made for, since God created us for fellowship with Himself, and so the searching question is whether our own life would read, 'He walked with God.'",
+    "es": "A menudo adoptamos la idea de que todo lo que Dios quiere es que nos matemos trabajando, así que nos volvemos cargados de culpa y miserables, y hasta colgamos 'Llamados a servir' sobre las puertas. La lección lo corrige: no somos llamados primero a servir, sino a amar; el servicio es bueno pero debe brotar del amor y no reemplazarlo, o la religión se vuelve un deber sin gozo. Enoc modela el mejor camino. Casi todo lo que la Escritura registra de él es que caminó con Dios y Dios lo llevó — una vida cuyo comentario entero es la comunión con Dios. Cumplió el propósito para el cual todos fuimos hechos, pues Dios nos creó para la comunión consigo mismo, y por eso la pregunta que escudriña es si nuestra propia vida diría: 'Caminó con Dios.'"
+   }
+  },
+  {
+   "prompt": {
+    "en": "According to the lesson, what is most likely the greatest sin, and why is it the one we overlook?",
+    "es": "Según la lección, ¿cuál es muy probablemente el pecado más grande, y por qué es el que pasamos por alto?"
+   },
+   "keywords": {
+    "en": [
+     "greatest",
+     "commandment",
+     "love",
+     "list",
+     "murder",
+     "overlook",
+     "Peter Lord",
+     "fellowship"
+    ],
+    "es": [
+     "más grande",
+     "mandamiento",
+     "amor",
+     "lista",
+     "homicidio",
+     "pasar por alto",
+     "Peter Lord",
+     "comunión"
+    ]
+   },
+   "model": {
+    "en": "We all keep a private list of sins, with murder, adultery, theft, and blasphemy near the top, because we feel their weight instinctively. But as Peter Lord points out, the greatest sin is most likely tied to the greatest commandment, for to commit the greatest sin is to break the greatest commandment. Since loving God with everything is the first and greatest command, failing to love Him is the first and greatest sin. It is the one we overlook precisely because it never makes our list; we measure sin by dramatic outward acts and miss the quiet failure to give God the fellowship and love He most desires. God is not chiefly after our work or money but our love.",
+    "es": "Todos guardamos una lista privada de pecados, con el homicidio, el adulterio, el robo y la blasfemia cerca de la cima, porque sentimos su peso por instinto. Pero como señala Peter Lord, el pecado más grande está muy probablemente ligado al mandamiento más grande, pues cometer el pecado más grande es quebrantar el mandamiento más grande. Como amar a Dios con todo es el primero y más grande mandamiento, no amarlo es el primero y más grande pecado. Es el que pasamos por alto precisamente porque nunca aparece en nuestra lista; medimos el pecado por actos externos dramáticos y se nos escapa la falla callada de no darle a Dios la comunión y el amor que más desea. Dios no busca ante todo nuestro trabajo ni dinero sino nuestro amor."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How does the Abraham-and-Isaac account teach loving God more than family?",
+    "es": "¿Cómo enseña el relato de Abraham e Isaac a amar a Dios más que a la familia?"
+   },
+   "keywords": {
+    "en": [
+     "Abraham",
+     "Isaac",
+     "family",
+     "test",
+     "first love",
+     "knife",
+     "stayed",
+     "worthy"
+    ],
+    "es": [
+     "Abraham",
+     "Isaac",
+     "familia",
+     "prueba",
+     "primer amor",
+     "cuchillo",
+     "detuvo",
+     "digno"
+    ]
+   },
+   "model": {
+    "en": "Jesus said anyone who loves father, mother, son, or daughter more than Him is not worthy of Him, because even a good love like family can take first place in the heart. Abraham faced this in its sharpest form when God asked him to offer Isaac, the son he had waited a lifetime for. He loved the boy more than his own life, yet he loved God more, and in heart and intent he gave his son to the Lord. God never meant the knife to fall and stayed Abraham's hand; the point was never Isaac's death but the discovery of where Abraham's first love lay. The same test comes to us in quieter forms, when family attachments would hold us back from full obedience to God.",
+    "es": "Jesús dijo que quien ama a padre, madre, hijo o hija más que a Él no es digno de Él, porque aun un amor bueno como la familia puede tomar el primer lugar en el corazón. Abraham lo enfrentó en su forma más aguda cuando Dios le pidió ofrecer a Isaac, el hijo que había esperado toda una vida. Amaba al muchacho más que a su propia vida, y sin embargo amaba más a Dios, y de corazón e intención entregó a su hijo al Señor. Dios nunca quiso que el cuchillo cayera y detuvo la mano de Abraham; el punto nunca fue la muerte de Isaac sino descubrir dónde estaba el primer amor de Abraham. La misma prueba nos llega en formas más calladas, cuando los apegos familiares nos frenarían de la plena obediencia a Dios."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Use the rich young ruler to explain loving God more than money, and the question of ownership.",
+    "es": "Use al joven rico para explicar amar a Dios más que al dinero, y la cuestión de la propiedad."
+   },
+   "keywords": {
+    "en": [
+     "money",
+     "ruler",
+     "god",
+     "sell",
+     "ownership",
+     "tithe",
+     "rob",
+     "Giver"
+    ],
+    "es": [
+     "dinero",
+     "joven rico",
+     "dios",
+     "vender",
+     "propiedad",
+     "diezmo",
+     "robar",
+     "Dador"
+    ]
+   },
+   "model": {
+    "en": "Jesus said we cannot serve God and money, and He proved it with the rich young ruler, who sensed something was missing yet could not obey when told to sell what he had and give to the poor. Money had quietly become his god, claiming his time, thought, and energy. The story presses the question of ownership on us: who really owns what we hold? If it is mine I use it one way; if it is God's, another. Scripture says the earth, the cattle, even the birds belong to God, who owns all we have, and He says the tithe is the Lord's, so to withhold it is to rob God. How we hold our money quietly reveals whether we love the gift or the Giver.",
+    "es": "Jesús dijo que no podemos servir a Dios y a las riquezas, y lo probó con el joven rico, que presentía que algo le faltaba y sin embargo no pudo obedecer cuando se le dijo que vendiera lo que tenía y lo diera a los pobres. El dinero se había vuelto calladamente su dios, reclamando su tiempo, pensamiento y energía. La historia nos plantea la cuestión de la propiedad: ¿quién posee de veras lo que tenemos? Si es mío lo uso de un modo; si es de Dios, de otro. La Escritura dice que la tierra, el ganado, hasta las aves pertenecen a Dios, que posee todo lo nuestro, y dice que el diezmo es del Señor, así que retenerlo es robar a Dios. Cómo manejamos el dinero revela calladamente si amamos el regalo o al Dador."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does the Brazilian family illustrate about loving God more than money?",
+    "es": "¿Qué ilustra la familia brasileña sobre amar a Dios más que al dinero?"
+   },
+   "keywords": {
+    "en": [
+     "Brazil",
+     "blacksmith",
+     "Bible",
+     "tithe",
+     "cattle",
+     "church",
+     "proved",
+     "God"
+    ],
+    "es": [
+     "Brasil",
+     "herrero",
+     "Biblia",
+     "diezmo",
+     "ganado",
+     "iglesia",
+     "probaron",
+     "Dios"
+    ]
+   },
+   "model": {
+    "en": "A blacksmith in the interior of Brazil was converted by an open-air evangelist, given a Bible, and went home and taught his family from it for years. When Baptist workers finally found them, they discovered the family had been setting aside a tenth of their cattle earnings the whole time, simply because the Scriptures said the tithe belonged to God. They had never even seen a church, so they were not imitating other believers or seeking approval; they obeyed because they took God's Word at face value. With their herd they proved that they loved God more than money, illustrating that real love for God shows itself in how we hold our possessions, even when no one is watching.",
+    "es": "Un herrero en el interior de Brasil fue convertido por un evangelista al aire libre, recibió una Biblia, y volvió a casa y enseñó a su familia de ella por años. Cuando unos obreros bautistas por fin los hallaron, descubrieron que la familia había estado apartando todo ese tiempo la décima parte de sus ganancias del ganado, sencillamente porque las Escrituras decían que el diezmo pertenecía a Dios. Nunca habían visto siquiera una iglesia, así que no imitaban a otros creyentes ni buscaban aprobación; obedecían porque tomaron la Palabra de Dios al pie de la letra. Con su rebaño probaron que amaban a Dios más que al dinero, ilustrando que el amor verdadero a Dios se muestra en cómo manejamos nuestras posesiones, aun cuando nadie observa."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain Hebrews 12:2 and how David shows the danger of 'blinking.'",
+    "es": "Explique Hebreos 12:2 y cómo David muestra el peligro de 'parpadear.'"
+   },
+   "keywords": {
+    "en": [
+     "looking",
+     "Jesus",
+     "blink",
+     "David",
+     "Goliath",
+     "power",
+     "Bathsheba",
+     "temptation"
+    ],
+    "es": [
+     "mirar",
+     "Jesús",
+     "parpadear",
+     "David",
+     "Goliat",
+     "poder",
+     "Betsabé",
+     "tentación"
+    ]
+   },
+   "model": {
+    "en": "Hebrews 12:2 sums up the Christian life in three words, 'looking unto Jesus, the author and finisher of our faith.' The instruction is simple but hard to keep, and the lesson compares losing sight of God to a staring game in which we 'blink' and look somewhere else, usually toward the world's glitter and desires. David is the great example. As a shepherd boy his eyes were so fixed on God that, with a sling and his faith, he felled the giant Goliath. But as king, amid power and praise, he looked away from God, and one evening his gaze drifted to his neighbor's wife and he fell. Had his eyes stayed on the Lord, he could have escaped the temptation, and so the Christian struggle is largely about where we are looking.",
+    "es": "Hebreos 12:2 resume la vida cristiana en tres palabras: 'puestos los ojos en Jesús, el autor y consumador de la fe.' La instrucción es sencilla pero difícil de mantener, y la lección compara perder de vista a Dios con un juego de miradas en que 'parpadeamos' y miramos a otra parte, por lo general hacia el brillo y los deseos del mundo. David es el gran ejemplo. De muchacho pastor sus ojos estaban tan fijos en Dios que, con una honda y su fe, derribó al gigante Goliat. Pero como rey, entre el poder y la alabanza, apartó la mirada de Dios, y una tarde su mirada se desvió a la mujer de su prójimo y cayó. Si sus ojos hubieran seguido en el Señor, habría escapado de la tentación, y por eso la lucha cristiana trata en gran medida de hacia dónde miramos."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Using Spurgeon and B. H. Carroll, explain why it is never too early or too late to look to Jesus.",
+    "es": "Usando a Spurgeon y B. H. Carroll, explique por qué nunca es demasiado temprano ni demasiado tarde para mirar a Jesús."
+   },
+   "keywords": {
+    "en": [
+     "early",
+     "late",
+     "Spurgeon",
+     "young",
+     "Carroll",
+     "bitter",
+     "looked",
+     "Jesus"
+    ],
+    "es": [
+     "temprano",
+     "tarde",
+     "Spurgeon",
+     "joven",
+     "Carroll",
+     "amargado",
+     "miró",
+     "Jesús"
+    ]
+   },
+   "model": {
+    "en": "If the whole of the Christian life is learning to look to Jesus, two encouragements follow. First, it is never too early: a lay preacher in a snowbound English chapel could only repeat 'Look unto Me, and be saved,' and pressed it on a miserable fifteen-year-old who became Charles Spurgeon, so a young heart that learns to look has the best of beginnings. Second, it is never too late: B. H. Carroll, godless and embittered and crippled by war, was dragged unwillingly to church, and though the sermon left him empty, at its end Christ seemed to stand before him calling, and he looked up once and forever to become a great man of God. Whether early or late, the command and the door are the same — love God and keep looking to Him.",
+    "es": "Si toda la vida cristiana es aprender a mirar a Jesús, se siguen dos alientos. Primero, nunca es demasiado temprano: un predicador laico en una capilla inglesa cubierta de nieve solo podía repetir 'Mirad a mí, y sed salvos,' y se lo insistió a un muchacho miserable de quince años que llegó a ser Charles Spurgeon, así que un corazón joven que aprende a mirar tiene el mejor comienzo. Segundo, nunca es demasiado tarde: B. H. Carroll, impío y amargado y lisiado por la guerra, fue llevado a la iglesia contra su voluntad, y aunque el sermón lo dejó vacío, al final Cristo pareció ponerse delante de él llamándolo, y miró hacia arriba de una vez y para siempre para llegar a ser un gran hombre de Dios. Sea temprano o tarde, el mandamiento y la puerta son los mismos — ama a Dios y sigue mirando a Él."
+   }
+  }
+ ]
+};

@@ -1,17 +1,383 @@
-/* CTSCS - unit 1: per-unit configuration and content. */
-
-const UNIT = 1;
-
-const THIS_UNIT = 1;
-
-const UNIT_LABELS = [
- {en:"Foundation",es:"Fundamento"},{en:"The Dying",es:"El Moribundo"},{en:"Surgery",es:"Cirugía"},
- {en:"Sexual Abuse",es:"Abuso Sexual"},{en:"Forced Termination",es:"Terminación Forzada"},
- {en:"Marital Conflict",es:"Conflicto Marital"},{en:"Depression",es:"Depresión"},{en:"Grief",es:"Duelo"},
- {en:"Anxiety & Fear",es:"Ansiedad y Temor"},{en:"Anger",es:"Ira"},{en:"Addiction",es:"Adicción"},
- {en:"Distress",es:"Angustia"},{en:"When to Refer",es:"Cuándo Referir"}
-];
-
-const UNITS = {"1":{"mcq":[{"textEn":"At a deathbed, Step One (\"Determine the Time and the Place\") is best understood as:","textEs":"Junto al lecho de muerte, el Paso Uno (\"Determinar el Tiempo y el Lugar\") se entiende mejor como:","options":[{"en":"Irrelevant, since the hospital fixes the setting","es":"Irrelevante, ya que el hospital fija el entorno"},{"en":"A reminder to schedule a follow-up appointment","es":"Un recordatorio de agendar una cita de seguimiento"},{"en":"Already begun long before, in the relationship built ahead of the crisis","es":"Ya comenzado mucho antes, en la relación edificada antes de la crisis"},{"en":"The counselor's right to choose a quieter room","es":"El derecho del consejero a elegir una sala más tranquila"}],"correct":2,"explainEn":"The step does not vanish when the room is fixed; it shifts. The 'place' prepared in months of relationship is what makes bedside presence possible.","explainEs":"El paso no desaparece cuando la sala está fijada; se transforma. El 'lugar' preparado en meses de relación es lo que hace posible la presencia junto al lecho."},{"textEn":"The two battles a dying person fights are:","textEs":"Las dos batallas que libra una persona moribunda son:","options":[{"en":"The physical battle of the body and the spiritual battle of the soul","es":"La batalla física del cuerpo y la batalla espiritual del alma"},{"en":"The family and the doctors","es":"La familia y los médicos"},{"en":"The disease and the medical bills","es":"La enfermedad y las cuentas médicas"},{"en":"Fear and anger","es":"El miedo y la ira"}],"correct":0,"explainEn":"The counselor cannot win the physical battle but can stand within it, while the central work is the spiritual one — assurance and peace.","explainEs":"El consejero no puede ganar la batalla física pero puede acompañarla, mientras la obra central es la espiritual — seguridad y paz."},{"textEn":"In listening to a dying person (Step Two), the counselor should:","textEs":"Al escuchar a una persona moribunda (Paso Dos), el consejero debe:","options":[{"en":"Fill silences quickly with reassurance","es":"Llenar los silencios rápidamente con consuelo"},{"en":"Change the subject to lighter matters","es":"Cambiar el tema a asuntos más ligeros"},{"en":"Press for the medical details first","es":"Insistir primero en los detalles médicos"},{"en":"Let the person tell his story at his own pace, even when time is short","es":"Dejar que la persona cuente su historia a su propio ritmo, aun cuando el tiempo es corto"}],"correct":3,"explainEn":"The real fear surfaces only when the person senses the counselor is unhurried and willing simply to hear him.","explainEs":"El verdadero temor aflora solo cuando la persona percibe que el consejero no tiene prisa y está dispuesto a escucharle."},{"textEn":"Why does Step Four (Investigate Previous Counseling) matter at a deathbed?","textEs":"¿Por qué importa el Paso Cuatro (Investigar la Consejería Previa) junto al lecho de muerte?","options":[{"en":"To find someone else to blame","es":"Para hallar a alguien más a quien culpar"},{"en":"To learn whether the person has already settled spiritual matters","es":"Para saber si la persona ya ha resuelto los asuntos espirituales"},{"en":"To fill the available time","es":"Para llenar el tiempo disponible"},{"en":"To impress the family","es":"Para impresionar a la familia"}],"correct":1,"explainEn":"Knowing where the person stands keeps the counselor from re-fighting a battle already won, or assuming one that isn't.","explainEs":"Saber dónde está la persona evita que el consejero vuelva a librar una batalla ya ganada, o que asuma una que no existe."},{"textEn":"For a dying person, Step Five (\"Responsibility — Where Have You Failed?\") should be:","textEs":"Para una persona moribunda, el Paso Cinco (\"Responsabilidad — ¿Dónde Has Fallado?\") debe ser:","options":[{"en":"A blunt accounting of the person's sins","es":"Un recuento contundente de los pecados de la persona"},{"en":"Skipped entirely; it has no place","es":"Omitido por completo; no tiene lugar"},{"en":"A gentle invitation to confess, forgive, and be reconciled while there is time","es":"Una invitación suave a confesar, perdonar y reconciliarse mientras hay tiempo"},{"en":"Replaced with cheerful distraction","es":"Reemplazado con distracción alegre"}],"correct":2,"explainEn":"Here the step is handled most gently of anywhere — never accusation, but the chance to set down what can still be set down.","explainEs":"Aquí el paso se maneja con la mayor suavidad — nunca acusación, sino la oportunidad de soltar lo que aún puede soltarse."},{"textEn":"\"Model the Role\" (Step Six) at a bedside primarily means the counselor:","textEs":"\"Modelar el Papel\" (Paso Seis) junto al lecho significa principalmente que el consejero:","options":[{"en":"Demonstrates how to pray aloud correctly","es":"Demuestra cómo orar en voz alta correctamente"},{"en":"Explains the medical prognosis","es":"Explica el pronóstico médico"},{"en":"Takes over decisions for the family","es":"Toma las decisiones por la familia"},{"en":"Models a calm faith the dying person can borrow","es":"Modela una fe serena que la persona moribunda puede tomar prestada"}],"correct":3,"explainEn":"You cannot give peace you are not showing; steadiness at the bedside is itself ministry.","explainEs":"No se puede dar una paz que no se muestra; la serenidad junto al lecho es en sí misma un ministerio."},{"textEn":"\"Supply Information\" (Step Nine) for the dying includes:","textEs":"\"Proveer Información\" (Paso Nueve) para los moribundos incluye:","options":[{"en":"Scripture such as the Twenty-Third Psalm and assurance of salvation","es":"Escritura como el Salmo Veintitrés y la seguridad de la salvación"},{"en":"Detailed legal advice on the estate","es":"Asesoría legal detallada sobre la herencia"},{"en":"A list of better hospitals","es":"Una lista de mejores hospitales"},{"en":"The counselor's own medical opinions","es":"Las opiniones médicas propias del consejero"}],"correct":0,"explainEn":"The counselor supplies Scripture, assurance, and honest answers — and supplies the family too.","explainEs":"El consejero provee Escritura, seguridad y respuestas honestas — y provee también a la familia."},{"textEn":"\"Provide Closure\" (Step Ten) in this situation means primarily:","textEs":"\"Proveer Cierre\" (Paso Diez) en esta situación significa principalmente:","options":[{"en":"Ending the visit promptly so the family can rest","es":"Terminar la visita pronto para que la familia descanse"},{"en":"Prayer and presence with the dying, continuing as ministry to the family after","es":"Oración y presencia con el moribundo, que continúa como ministerio a la familia después"},{"en":"Filing a report of the pastoral visit","es":"Presentar un informe de la visita pastoral"},{"en":"Making sure spiritual matters were settled back in Step Four","es":"Asegurar que los asuntos espirituales se resolvieron en el Paso Cuatro"}],"correct":1,"explainEn":"Closure is not a clean stop; it is prayer and a held hand, extending past the death into care for the grieving family.","explainEs":"El cierre no es un alto limpio; es oración y una mano sostenida, que se extiende más allá de la muerte al cuidado de la familia en duelo."},{"textEn":"Throughout the encounter with a dying person, the counselor also ministers to:","textEs":"A lo largo del encuentro con una persona moribunda, el consejero también ministra a:","options":[{"en":"The family, who fight their own battle of grief","es":"La familia, que libra su propia batalla de duelo"},{"en":"The hospital administration","es":"La administración del hospital"},{"en":"Only the patient; the family comes later","es":"Solo al paciente; la familia viene después"},{"en":"The other patients in the ward","es":"Los demás pacientes de la sala"}],"correct":0,"explainEn":"The family is watching how the counselor carries himself and is fighting grief of its own; they are part of the ministry from the start.","explainEs":"La familia observa cómo se conduce el consejero y libra su propio duelo; son parte del ministerio desde el inicio."},{"textEn":"What does this situation teach about Drakeford's ten steps generally?","textEs":"¿Qué enseña esta situación sobre los diez pasos de Drakeford en general?","options":[{"en":"The steps must be performed rigidly in order, or they fail","es":"Los pasos deben ejecutarse rígidamente en orden, o fallan"},{"en":"The steps are optional once a relationship exists","es":"Los pasos son opcionales una vez que existe una relación"},{"en":"The steps only work in an office setting","es":"Los pasos solo funcionan en una oficina"},{"en":"The steps bend to the situation without losing their shape","es":"Los pasos se adaptan a la situación sin perder su forma"}],"correct":3,"explainEn":"Step One bent from 'choose the place' to 'the place was prepared beforehand' — the model survives a real situation by bending, not breaking.","explainEs":"El Paso Uno pasó de 'elegir el lugar' a 'el lugar fue preparado de antemano' — el modelo sobrevive una situación real adaptándose, no quebrándose."}],"shortAnswer":[{"textEn":"The text says a dying person may be fighting two battles. Name them, and explain how the counselor addresses each.","textEs":"El texto dice que una persona moribunda puede estar librando dos batallas. Nómbrelas y explique cómo el consejero atiende cada una.","kw_en":["soul","spirit","physic","listen","peace","assur","famil","comfort"],"kw_es":["alma","espiritu","físic","escuch","paz","segur","famili","consuel"],"modelEn":"A dying person fights two battles at once — a physical battle against the disease and a spiritual battle of the soul. The counselor cannot win the physical one, but he stands within it by listening and praying. The deeper work is spiritual: giving assurance of salvation so the man can meet death in peace rather than agony, while comforting the family who fight their own grief.","modelEs":"Una persona moribunda libra dos batallas a la vez: una batalla física contra la enfermedad y una batalla espiritual del alma. El consejero no puede ganar la física, pero la acompaña escuchando y orando. La obra más profunda es espiritual: dar seguridad de la salvación para que el hombre enfrente la muerte en paz y no en agonía, mientras consuela a la familia que libra su propio duelo."},{"textEn":"Step One is \"Determine the Time and the Place.\" Explain how this step still applies at a hospital deathbed, where the counselor controls neither.","textEs":"El Paso Uno es \"Determinar el Tiempo y el Lugar.\" Explique cómo este paso aún se aplica junto al lecho de muerte en un hospital, donde el consejero no controla ninguno de los dos.","kw_en":["relations","trust","befor","presen","prepar","friend","bedside","visit"],"kw_es":["relaci","confian","antes","presenc","prepar","amist","lecho","visit"],"modelEn":"At a deathbed the counselor rarely chooses the time or the place — the hospital decides. Yet Step One has not vanished; it has changed. The place was prepared long before the hospital room, in the relationship and trust built ahead of the crisis — the weekly breakfasts and visits, the friendship. Presence at the bedside is possible only because presence and care came beforehand.","modelEs":"Junto al lecho de muerte el consejero rara vez elige el tiempo ni el lugar — el hospital decide. Sin embargo, el Paso Uno no ha desaparecido; ha cambiado. El lugar fue preparado mucho antes de la habitación del hospital, en la relación y la confianza edificadas antes de la crisis — los desayunos y visitas semanales, la amistad. La presencia junto al lecho es posible solo porque la presencia y el cuidado vinieron antes."},{"textEn":"For a dying person, how should the counselor handle Step Five (\"Responsibility\")? Why must it be handled with care?","textEs":"Para una persona moribunda, ¿cómo debe manejar el consejero el Paso Cinco (\"Responsabilidad\")? ¿Por qué debe manejarse con cuidado?","kw_en":["gentl","confess","forgiv","reconcil","peace","account","accus","press"],"kw_es":["suav","confes","perdon","reconcil","paz","cuenta","acus","presion"],"modelEn":"For the dying, Step Five is handled with great gentleness. It is not an accusation but an invitation — a chance to confess, to forgive, to be reconciled, and to settle accounts with God while there is still time. The counselor never presses; he gently opens a door the dying person may walk through in peace.","modelEs":"Para los moribundos, el Paso Cinco se maneja con gran suavidad. No es una acusación sino una invitación — la oportunidad de confesar, perdonar, reconciliarse y arreglar cuentas con Dios mientras aún hay tiempo. El consejero nunca presiona; con suavidad abre una puerta por la que el moribundo puede pasar en paz."},{"textEn":"Explain what \"Provide Closure\" (Step Ten) looks like with a dying person and his family.","textEs":"Explique cómo se ve \"Proveer Cierre\" (Paso Diez) con una persona moribunda y su familia.","kw_en":["closur","psalm","minist","hand","famil","grief","support","scriptur"],"kw_es":["cierr","salmo","ministr","mano","famili","duelo","apoy","escritur"],"modelEn":"Closure does not end when the patient dies. The counselor reads Scripture such as the Twenty-Third Psalm and holds the dying person's hand — and that same ministry continues to the grieving family afterward. Throughout, he supports the family, who fight their own battle of grief.","modelEs":"El cierre no termina cuando el paciente muere. El consejero lee Escritura como el Salmo Veintitrés y sostiene la mano del moribundo — y ese mismo ministerio continúa con la familia en duelo después. En todo momento apoya a la familia, que libra su propia batalla de duelo."},{"textEn":"What does faithful listening (Step Two) look like with someone who is dying?","textEs":"¿Cómo se ve la escucha fiel (Paso Dos) con alguien que está muriendo?","kw_en":["listen","rush","fear","hear","talk","comfort","patien","time"],"kw_es":["escuch","prisa","temor","oír","hablar","consol","pacien","tiempo"],"modelEn":"With the dying, listening means letting the man tell his own story at his own pace, even when time is short. The temptation is to rush in with comfort; but the real fear often surfaces only when he senses the counselor is patient, unhurried, and willing simply to hear him.","modelEs":"Con los moribundos, escuchar significa dejar que el hombre cuente su propia historia a su propio ritmo, aun cuando el tiempo es corto. La tentación es apresurarse a consolar; pero el verdadero temor a menudo aflora solo cuando él percibe que el consejero es paciente, sin prisa y dispuesto simplemente a oírle."}]}};
-
-const SA_MIN_HITS=3;
+/* CTSCS — unit 1. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "cs",
+ "unit": 1,
+ "totalUnits": 13,
+ "filePrefix": "CTSCS",
+ "prevHref": null,
+ "nextHref": "CTSCSUnit2.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "At a deathbed, Step One (\"Determine the Time and the Place\") is best understood as:",
+    "es": "Junto al lecho de muerte, el Paso Uno (\"Determinar el Tiempo y el Lugar\") se entiende mejor como:"
+   },
+   "options": {
+    "en": [
+     "Irrelevant, since the hospital fixes the setting",
+     "A reminder to schedule a follow-up appointment",
+     "Already begun long before, in the relationship built ahead of the crisis",
+     "The counselor's right to choose a quieter room"
+    ],
+    "es": [
+     "Irrelevante, ya que el hospital fija el entorno",
+     "Un recordatorio de agendar una cita de seguimiento",
+     "Ya comenzado mucho antes, en la relación edificada antes de la crisis",
+     "El derecho del consejero a elegir una sala más tranquila"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "The two battles a dying person fights are:",
+    "es": "Las dos batallas que libra una persona moribunda son:"
+   },
+   "options": {
+    "en": [
+     "The physical battle of the body and the spiritual battle of the soul",
+     "The family and the doctors",
+     "The disease and the medical bills",
+     "Fear and anger"
+    ],
+    "es": [
+     "La batalla física del cuerpo y la batalla espiritual del alma",
+     "La familia y los médicos",
+     "La enfermedad y las cuentas médicas",
+     "El miedo y la ira"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "In listening to a dying person (Step Two), the counselor should:",
+    "es": "Al escuchar a una persona moribunda (Paso Dos), el consejero debe:"
+   },
+   "options": {
+    "en": [
+     "Fill silences quickly with reassurance",
+     "Change the subject to lighter matters",
+     "Press for the medical details first",
+     "Let the person tell his story at his own pace, even when time is short"
+    ],
+    "es": [
+     "Llenar los silencios rápidamente con consuelo",
+     "Cambiar el tema a asuntos más ligeros",
+     "Insistir primero en los detalles médicos",
+     "Dejar que la persona cuente su historia a su propio ritmo, aun cuando el tiempo es corto"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "Why does Step Four (Investigate Previous Counseling) matter at a deathbed?",
+    "es": "¿Por qué importa el Paso Cuatro (Investigar la Consejería Previa) junto al lecho de muerte?"
+   },
+   "options": {
+    "en": [
+     "To find someone else to blame",
+     "To learn whether the person has already settled spiritual matters",
+     "To fill the available time",
+     "To impress the family"
+    ],
+    "es": [
+     "Para hallar a alguien más a quien culpar",
+     "Para saber si la persona ya ha resuelto los asuntos espirituales",
+     "Para llenar el tiempo disponible",
+     "Para impresionar a la familia"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "For a dying person, Step Five (\"Responsibility — Where Have You Failed?\") should be:",
+    "es": "Para una persona moribunda, el Paso Cinco (\"Responsabilidad — ¿Dónde Has Fallado?\") debe ser:"
+   },
+   "options": {
+    "en": [
+     "A blunt accounting of the person's sins",
+     "Skipped entirely; it has no place",
+     "A gentle invitation to confess, forgive, and be reconciled while there is time",
+     "Replaced with cheerful distraction"
+    ],
+    "es": [
+     "Un recuento contundente de los pecados de la persona",
+     "Omitido por completo; no tiene lugar",
+     "Una invitación suave a confesar, perdonar y reconciliarse mientras hay tiempo",
+     "Reemplazado con distracción alegre"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "\"Model the Role\" (Step Six) at a bedside primarily means the counselor:",
+    "es": "\"Modelar el Papel\" (Paso Seis) junto al lecho significa principalmente que el consejero:"
+   },
+   "options": {
+    "en": [
+     "Demonstrates how to pray aloud correctly",
+     "Explains the medical prognosis",
+     "Takes over decisions for the family",
+     "Models a calm faith the dying person can borrow"
+    ],
+    "es": [
+     "Demuestra cómo orar en voz alta correctamente",
+     "Explica el pronóstico médico",
+     "Toma las decisiones por la familia",
+     "Modela una fe serena que la persona moribunda puede tomar prestada"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "\"Supply Information\" (Step Nine) for the dying includes:",
+    "es": "\"Proveer Información\" (Paso Nueve) para los moribundos incluye:"
+   },
+   "options": {
+    "en": [
+     "Scripture such as the Twenty-Third Psalm and assurance of salvation",
+     "Detailed legal advice on the estate",
+     "A list of better hospitals",
+     "The counselor's own medical opinions"
+    ],
+    "es": [
+     "Escritura como el Salmo Veintitrés y la seguridad de la salvación",
+     "Asesoría legal detallada sobre la herencia",
+     "Una lista de mejores hospitales",
+     "Las opiniones médicas propias del consejero"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "\"Provide Closure\" (Step Ten) in this situation means primarily:",
+    "es": "\"Proveer Cierre\" (Paso Diez) en esta situación significa principalmente:"
+   },
+   "options": {
+    "en": [
+     "Ending the visit promptly so the family can rest",
+     "Prayer and presence with the dying, continuing as ministry to the family after",
+     "Filing a report of the pastoral visit",
+     "Making sure spiritual matters were settled back in Step Four"
+    ],
+    "es": [
+     "Terminar la visita pronto para que la familia descanse",
+     "Oración y presencia con el moribundo, que continúa como ministerio a la familia después",
+     "Presentar un informe de la visita pastoral",
+     "Asegurar que los asuntos espirituales se resolvieron en el Paso Cuatro"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "Throughout the encounter with a dying person, the counselor also ministers to:",
+    "es": "A lo largo del encuentro con una persona moribunda, el consejero también ministra a:"
+   },
+   "options": {
+    "en": [
+     "The family, who fight their own battle of grief",
+     "The hospital administration",
+     "Only the patient; the family comes later",
+     "The other patients in the ward"
+    ],
+    "es": [
+     "La familia, que libra su propia batalla de duelo",
+     "La administración del hospital",
+     "Solo al paciente; la familia viene después",
+     "Los demás pacientes de la sala"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "What does this situation teach about Drakeford's ten steps generally?",
+    "es": "¿Qué enseña esta situación sobre los diez pasos de Drakeford en general?"
+   },
+   "options": {
+    "en": [
+     "The steps must be performed rigidly in order, or they fail",
+     "The steps are optional once a relationship exists",
+     "The steps only work in an office setting",
+     "The steps bend to the situation without losing their shape"
+    ],
+    "es": [
+     "Los pasos deben ejecutarse rígidamente en orden, o fallan",
+     "Los pasos son opcionales una vez que existe una relación",
+     "Los pasos solo funcionan en una oficina",
+     "Los pasos se adaptan a la situación sin perder su forma"
+    ]
+   },
+   "answer": 3
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "The text says a dying person may be fighting two battles. Name them, and explain how the counselor addresses each.",
+    "es": "El texto dice que una persona moribunda puede estar librando dos batallas. Nómbrelas y explique cómo el consejero atiende cada una."
+   },
+   "keywords": {
+    "en": [
+     "soul",
+     "spirit",
+     "physic",
+     "listen",
+     "peace",
+     "assur",
+     "famil",
+     "comfort"
+    ],
+    "es": [
+     "alma",
+     "espiritu",
+     "físic",
+     "escuch",
+     "paz",
+     "segur",
+     "famili",
+     "consuel"
+    ]
+   },
+   "model": {
+    "en": "A dying person fights two battles at once — a physical battle against the disease and a spiritual battle of the soul. The counselor cannot win the physical one, but he stands within it by listening and praying. The deeper work is spiritual: giving assurance of salvation so the man can meet death in peace rather than agony, while comforting the family who fight their own grief.",
+    "es": "Una persona moribunda libra dos batallas a la vez: una batalla física contra la enfermedad y una batalla espiritual del alma. El consejero no puede ganar la física, pero la acompaña escuchando y orando. La obra más profunda es espiritual: dar seguridad de la salvación para que el hombre enfrente la muerte en paz y no en agonía, mientras consuela a la familia que libra su propio duelo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Step One is \"Determine the Time and the Place.\" Explain how this step still applies at a hospital deathbed, where the counselor controls neither.",
+    "es": "El Paso Uno es \"Determinar el Tiempo y el Lugar.\" Explique cómo este paso aún se aplica junto al lecho de muerte en un hospital, donde el consejero no controla ninguno de los dos."
+   },
+   "keywords": {
+    "en": [
+     "relations",
+     "trust",
+     "befor",
+     "presen",
+     "prepar",
+     "friend",
+     "bedside",
+     "visit"
+    ],
+    "es": [
+     "relaci",
+     "confian",
+     "antes",
+     "presenc",
+     "prepar",
+     "amist",
+     "lecho",
+     "visit"
+    ]
+   },
+   "model": {
+    "en": "At a deathbed the counselor rarely chooses the time or the place — the hospital decides. Yet Step One has not vanished; it has changed. The place was prepared long before the hospital room, in the relationship and trust built ahead of the crisis — the weekly breakfasts and visits, the friendship. Presence at the bedside is possible only because presence and care came beforehand.",
+    "es": "Junto al lecho de muerte el consejero rara vez elige el tiempo ni el lugar — el hospital decide. Sin embargo, el Paso Uno no ha desaparecido; ha cambiado. El lugar fue preparado mucho antes de la habitación del hospital, en la relación y la confianza edificadas antes de la crisis — los desayunos y visitas semanales, la amistad. La presencia junto al lecho es posible solo porque la presencia y el cuidado vinieron antes."
+   }
+  },
+  {
+   "prompt": {
+    "en": "For a dying person, how should the counselor handle Step Five (\"Responsibility\")? Why must it be handled with care?",
+    "es": "Para una persona moribunda, ¿cómo debe manejar el consejero el Paso Cinco (\"Responsabilidad\")? ¿Por qué debe manejarse con cuidado?"
+   },
+   "keywords": {
+    "en": [
+     "gentl",
+     "confess",
+     "forgiv",
+     "reconcil",
+     "peace",
+     "account",
+     "accus",
+     "press"
+    ],
+    "es": [
+     "suav",
+     "confes",
+     "perdon",
+     "reconcil",
+     "paz",
+     "cuenta",
+     "acus",
+     "presion"
+    ]
+   },
+   "model": {
+    "en": "For the dying, Step Five is handled with great gentleness. It is not an accusation but an invitation — a chance to confess, to forgive, to be reconciled, and to settle accounts with God while there is still time. The counselor never presses; he gently opens a door the dying person may walk through in peace.",
+    "es": "Para los moribundos, el Paso Cinco se maneja con gran suavidad. No es una acusación sino una invitación — la oportunidad de confesar, perdonar, reconciliarse y arreglar cuentas con Dios mientras aún hay tiempo. El consejero nunca presiona; con suavidad abre una puerta por la que el moribundo puede pasar en paz."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain what \"Provide Closure\" (Step Ten) looks like with a dying person and his family.",
+    "es": "Explique cómo se ve \"Proveer Cierre\" (Paso Diez) con una persona moribunda y su familia."
+   },
+   "keywords": {
+    "en": [
+     "closur",
+     "psalm",
+     "minist",
+     "hand",
+     "famil",
+     "grief",
+     "support",
+     "scriptur"
+    ],
+    "es": [
+     "cierr",
+     "salmo",
+     "ministr",
+     "mano",
+     "famili",
+     "duelo",
+     "apoy",
+     "escritur"
+    ]
+   },
+   "model": {
+    "en": "Closure does not end when the patient dies. The counselor reads Scripture such as the Twenty-Third Psalm and holds the dying person's hand — and that same ministry continues to the grieving family afterward. Throughout, he supports the family, who fight their own battle of grief.",
+    "es": "El cierre no termina cuando el paciente muere. El consejero lee Escritura como el Salmo Veintitrés y sostiene la mano del moribundo — y ese mismo ministerio continúa con la familia en duelo después. En todo momento apoya a la familia, que libra su propia batalla de duelo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does faithful listening (Step Two) look like with someone who is dying?",
+    "es": "¿Cómo se ve la escucha fiel (Paso Dos) con alguien que está muriendo?"
+   },
+   "keywords": {
+    "en": [
+     "listen",
+     "rush",
+     "fear",
+     "hear",
+     "talk",
+     "comfort",
+     "patien",
+     "time"
+    ],
+    "es": [
+     "escuch",
+     "prisa",
+     "temor",
+     "oír",
+     "hablar",
+     "consol",
+     "pacien",
+     "tiempo"
+    ]
+   },
+   "model": {
+    "en": "With the dying, listening means letting the man tell his own story at his own pace, even when time is short. The temptation is to rush in with comfort; but the real fear often surfaces only when he senses the counselor is patient, unhurried, and willing simply to hear him.",
+    "es": "Con los moribundos, escuchar significa dejar que el hombre cuente su propia historia a su propio ritmo, aun cuando el tiempo es corto. La tentación es apresurarse a consolar; pero el verdadero temor a menudo aflora solo cuando él percibe que el consejero es paciente, sin prisa y dispuesto simplemente a oírle."
+   }
+  }
+ ]
+};

@@ -1,0 +1,670 @@
+window.CTS_GENESIS_UNIT={
+ unit:1,
+ title_en:'The Book of Beginnings', title_es:'El Libro de los Comienzos',
+ key_html:'<div class="pull"><span class="lang-en">“In the beginning God created the heavens and the earth.” — Genesis 1:1 (NKJV)</span><span class="lang-es">“En el principio creó Dios los cielos y la tierra.” — Génesis 1:1 (RVG)</span></div>',
+ teaching_html:`
+ <div class="lang-en">
+ <h2>Genesis — The Book of Beginnings</h2>
+ <p>Genesis opens with God. Before the book tells us about Adam, Noah, Abraham, Jacob, or Joseph, it directs our attention to the One who stands behind the whole story. “In the beginning God created the heavens and the earth” (Genesis 1:1, NKJV). The Bible does not begin by arguing God into existence; it begins with God as the eternal reality from whom creation receives its existence. Human beings naturally ask where they came from, much as a family traces its ancestry in search of its roots. Genesis takes that question deeper. Behind our family tree, behind the human race, and behind the created order stands God Himself.</p>
+ <p>The English title <em>Genesis</em> comes through Greek and carries the idea of origin or beginning; the Hebrew book opens with <em>bereshit</em>, “in the beginning.” The book deserves its familiar description as the book of beginnings because it introduces the beginnings of the created world, humanity, marriage, work, sin, judgment, nations, covenant promise, and the family through which God will advance His redemptive purpose. These subjects are not isolated curiosities. They become categories that the rest of Scripture repeatedly develops, so Genesis functions as a foundation for understanding the biblical story.</p>
+ <h2>God Before All Beginnings</h2>
+ <p>Genesis 1:1 begins with the beginning of the created order, not the beginning of God. God is not presented as one more object inside the universe needing an explanation from something before Him. He is the Creator. The distinction matters because biblical faith does not place God and creation on the same level. The heavens and the earth depend upon Him; He does not depend upon them. Genesis therefore establishes from its first sentence a Creator-creature distinction that will govern everything that follows, including human dignity, responsibility, worship, and sin.</p>
+ <p>The creation account also differs sharply from stories in which the world emerges from conflicts among competing deities. Genesis presents one sovereign God whose word brings order. The text repeatedly says that God speaks and what He commands comes to be. The emphasis is theological: the world is neither divine nor accidental within the biblical account; it belongs to God. Its order and goodness reflect His purpose, and human beings enter a world that already bears the mark of their Creator.</p>
+ <h2>The Two Great Movements of Genesis</h2>
+ <p>Genesis can be read in two broad movements. Chapters 1–11 look across humanity as a whole and introduce creation, the Fall, Cain and Abel, the generations, the Flood, the nations, and Babel. Chapters 12–50 narrow the narrative to Abraham and the family of promise, following the story through Isaac, Jacob, and Joseph. That narrowing does not mean that God has lost interest in the nations. The call of Abraham immediately after Babel shows the opposite: God begins with one family a work intended to bring blessing to “all the families of the earth” (Genesis 12:3).</p>
+ <p>This structure gives the book a powerful theological movement. Sin spreads, judgment is real, yet grace repeatedly appears. Adam and Eve hide, but God seeks them. Cain murders Abel, but God still restrains vengeance. The world becomes corrupt and violent, but Noah finds grace. Humanity gathers at Babel to make a name for itself, but God calls Abraham and promises to make his name great so that blessing may reach the nations. Genesis therefore introduces a pattern that will continue through Scripture: human rebellion is serious, divine holiness is real, and God’s gracious purpose continues.</p>
+ <h2>Reading Genesis 1–11 Faithfully</h2>
+ <p>Christians who affirm the inspiration and authority of Scripture have differed over some questions surrounding the opening chapters of Genesis. Some read the early chapters as straightforward chronological history; others understand portions of the material as using highly theological, literary, or archetypal forms. This course does not require students to settle those debates in order to hear the principal theological claims of the text. It will not treat a literal reader as unsophisticated, nor will it make a particular scientific reconstruction the measure of faithfulness to Scripture.</p>
+ <p>The central affirmations are substantial. God is Creator. Humanity is made in His image and therefore possesses God-given dignity. Sin is rebellion against God rather than merely social maladjustment. Judgment expresses God’s holiness, while grace demonstrates that judgment is not the end of the story. Death, shame, violence, alienation, and the scattering of humanity reveal a world damaged by sin, but the divine purpose moves toward promise and redemption. Those truths are indispensable whether students differ over secondary questions of chronology or scientific description.</p>
+ <h2>From Babel to Abraham and the Nations</h2>
+ <p>Babel provides an important turning point. Humanity gathers in pride, seeks to make a name, and resists being scattered. God confuses their language and disperses them. The very next major movement is the call of Abraham, where God promises, “I will make your name great,” and declares that in him all the families of the earth will be blessed. Human beings seek significance apart from God at Babel; God graciously gives a name and a mission to Abraham. The contrast prepares the reader for the covenant story.</p>
+ <p>The trajectory ultimately extends beyond Genesis. The promise to bless the nations advances through the biblical story toward Christ and the gospel. Pentecost can appropriately be described as a reversal of Babel if the expression is used carefully. Pentecost does not abolish languages or erase nations; people from many nations hear the mighty works of God in their own languages. What Babel made a barrier becomes, through the Spirit, no barrier to gospel proclamation, and the movement continues toward the Great Commission and the gathering of people from every nation.</p>
+ <h2>Imperfect People and a Faithful God</h2>
+ <p>The second half of Genesis does not replace the story of God with a collection of heroic biographies. Abraham believes God, yet he also fears and fails. Isaac inherits the promise but repeats patterns of deception. Jacob values the covenant blessing but repeatedly attempts to secure by manipulation what must finally come from God. Joseph demonstrates remarkable integrity, yet even his story is ultimately about divine providence rather than human greatness. Genesis refuses to make its patriarchs flawless because the covenant rests finally upon God’s faithfulness.</p>
+ <p>This makes Genesis particularly valuable for ministry. It gives pastors categories for speaking about creation, human dignity, work, marriage, temptation, guilt, shame, judgment, grace, covenant, faith, providence, forgiveness, and mission. It also prevents simplistic preaching. Human beings are influenced by families, cultures, and circumstances, but they remain morally responsible; God judges sin, yet He also acts graciously toward sinners. The book allows those truths to stand together instead of reducing the human condition to a single explanation.</p>
+ <h2>Ministry Application</h2>
+ <p>Genesis teaches ministers to begin where Scripture begins: with God. Preaching can easily become centered on human personalities, techniques, success, or failure, but Genesis continually redirects attention to the Creator who speaks, judges, calls, promises, accompanies, and preserves. The people in Genesis matter, and their choices have consequences, yet none of them carries the redemptive story by personal greatness. Ministry that follows Genesis should therefore take human responsibility seriously while placing confidence in God’s character rather than in human ability.</p>
+ <h2>Summary</h2>
+ <p>Genesis is the book of beginnings because it supplies the foundational categories of the biblical story. Its movement is creation to Fall, judgment to grace, nations to promise, and promise toward providence and redemption. The book begins with God creating and ends with the family of promise preserved in Egypt, still waiting for what God will do next. Above Adam, Noah, Abraham, Isaac, Jacob, and Joseph stands the almighty and holy God. He is the central figure of Genesis, and if the course leaves students more impressed with its human characters than with Him, it has missed the point.</p>
+ </div>
+ <div class="lang-es">
+ <h2>Génesis — El Libro de los Comienzos</h2>
+ <p>Génesis comienza con Dios. Antes de hablarnos de Adán, Noé, Abraham, Jacob o José, dirige nuestra atención al que está detrás de toda la historia. “En el principio creó Dios los cielos y la tierra” (Génesis 1:1, RVG). La Biblia no comienza intentando demostrar la existencia de Dios; comienza con Dios como la realidad eterna de quien la creación recibe su existencia. Los seres humanos naturalmente preguntan de dónde vienen, así como una familia investiga su ascendencia buscando sus raíces. Génesis lleva esa pregunta más profundamente. Detrás de nuestro árbol familiar, detrás de la raza humana y detrás del orden creado está Dios mismo.</p>
+ <p>El título <em>Génesis</em> nos llega por medio del griego y comunica la idea de origen o comienzo; el libro hebreo abre con <em>bereshit</em>, “en el principio”. El libro merece su conocida descripción como el libro de los comienzos porque introduce los comienzos del mundo creado, la humanidad, el matrimonio, el trabajo, el pecado, el juicio, las naciones, la promesa del pacto y la familia por medio de la cual Dios avanzará su propósito redentor. Estos temas no son curiosidades aisladas. Se convierten en categorías que el resto de la Escritura desarrolla repetidamente, de modo que Génesis funciona como fundamento para comprender la historia bíblica.</p>
+ <h2>Dios Antes de Todos los Comienzos</h2>
+ <p>Génesis 1:1 comienza con el principio del orden creado, no con el principio de Dios. Dios no es presentado como otro objeto dentro del universo que necesita una explicación procedente de algo anterior a Él. Él es el Creador. Esta distinción importa porque la fe bíblica no coloca a Dios y a la creación en el mismo nivel. Los cielos y la tierra dependen de Él; Él no depende de ellos. Por eso Génesis establece desde su primera oración una distinción entre Creador y criatura que gobernará todo lo que sigue, incluyendo la dignidad humana, la responsabilidad, la adoración y el pecado.</p>
+ <p>El relato de la creación también difiere marcadamente de historias en las que el mundo surge de conflictos entre deidades rivales. Génesis presenta a un solo Dios soberano cuya palabra trae orden. El texto repite que Dios habla y lo que manda llega a existir. El énfasis es teológico: dentro del relato bíblico el mundo no es divino ni accidental; pertenece a Dios. Su orden y bondad reflejan su propósito, y los seres humanos entran en un mundo que ya lleva la marca de su Creador.</p>
+ <h2>Los Dos Grandes Movimientos de Génesis</h2>
+ <p>Génesis puede leerse en dos grandes movimientos. Los capítulos 1–11 contemplan a la humanidad en conjunto e introducen la creación, la Caída, Caín y Abel, las generaciones, el Diluvio, las naciones y Babel. Los capítulos 12–50 concentran la narración en Abraham y la familia de la promesa, siguiendo la historia por Isaac, Jacob y José. Ese enfoque no significa que Dios haya perdido interés en las naciones. El llamado de Abraham inmediatamente después de Babel demuestra lo contrario: Dios comienza con una familia una obra destinada a traer bendición a “todas las familias de la tierra” (Génesis 12:3).</p>
+ <p>Esta estructura da al libro un poderoso movimiento teológico. El pecado se extiende, el juicio es real, y sin embargo la gracia aparece repetidamente. Adán y Eva se esconden, pero Dios los busca. Caín mata a Abel, pero Dios todavía restringe la venganza. El mundo se corrompe y se llena de violencia, pero Noé halla gracia. La humanidad se reúne en Babel para hacerse un nombre, pero Dios llama a Abraham y promete engrandecer su nombre para que la bendición alcance a las naciones. Génesis introduce así un patrón que continuará por toda la Escritura: la rebelión humana es seria, la santidad divina es real y el propósito de gracia de Dios continúa.</p>
+ <h2>Leer Fielmente Génesis 1–11</h2>
+ <p>Los cristianos que afirman la inspiración y autoridad de la Escritura han diferido sobre algunas preguntas relacionadas con los primeros capítulos de Génesis. Algunos leen estos capítulos como historia cronológica directa; otros entienden partes del material como formas altamente teológicas, literarias o arquetípicas. Este curso no exige que los estudiantes resuelvan esos debates para escuchar las principales afirmaciones teológicas del texto. No tratará al lector literal como poco sofisticado, ni convertirá una reconstrucción científica particular en medida de fidelidad a la Escritura.</p>
+ <p>Las afirmaciones centrales son sustanciales. Dios es Creador. La humanidad fue hecha a su imagen y por eso posee dignidad dada por Dios. El pecado es rebelión contra Dios y no meramente inadaptación social. El juicio expresa la santidad de Dios, mientras la gracia demuestra que el juicio no es el final de la historia. La muerte, la vergüenza, la violencia, la alienación y la dispersión de la humanidad revelan un mundo dañado por el pecado, pero el propósito divino avanza hacia la promesa y la redención. Estas verdades son indispensables aunque los estudiantes difieran sobre preguntas secundarias de cronología o descripción científica.</p>
+ <h2>De Babel a Abraham y las Naciones</h2>
+ <p>Babel constituye un importante punto de transición. La humanidad se reúne con orgullo, procura hacerse un nombre y resiste la dispersión. Dios confunde su idioma y la esparce. El siguiente gran movimiento es el llamado de Abraham, donde Dios promete engrandecer su nombre y declara que en él serán benditas todas las familias de la tierra. En Babel los seres humanos buscan significado aparte de Dios; Dios da por gracia un nombre y una misión a Abraham. El contraste prepara al lector para la historia del pacto.</p>
+ <p>La trayectoria finalmente se extiende más allá de Génesis. La promesa de bendecir a las naciones avanza por la historia bíblica hacia Cristo y el evangelio. Pentecostés puede describirse apropiadamente como una reversión de Babel si la expresión se usa con cuidado. Pentecostés no elimina los idiomas ni borra las naciones; personas de muchas naciones oyen las maravillas de Dios en sus propios idiomas. Lo que Babel convirtió en barrera deja de ser, por medio del Espíritu, una barrera para la proclamación del evangelio, y el movimiento continúa hacia la Gran Comisión y la reunión de personas de toda nación.</p>
+ <h2>Personas Imperfectas y un Dios Fiel</h2>
+ <p>La segunda mitad de Génesis no reemplaza la historia de Dios con una colección de biografías heroicas. Abraham cree a Dios, pero también teme y falla. Isaac hereda la promesa, pero repite patrones de engaño. Jacob valora la bendición del pacto, pero repetidamente intenta obtener mediante manipulación lo que finalmente debe venir de Dios. José demuestra notable integridad, pero aun su historia trata finalmente de la providencia divina y no de la grandeza humana. Génesis rehúsa presentar a sus patriarcas como hombres sin defecto porque el pacto descansa finalmente sobre la fidelidad de Dios.</p>
+ <p>Esto hace que Génesis sea especialmente valioso para el ministerio. Da a los pastores categorías para hablar de creación, dignidad humana, trabajo, matrimonio, tentación, culpa, vergüenza, juicio, gracia, pacto, fe, providencia, perdón y misión. También impide una predicación simplista. Los seres humanos reciben influencia de familias, culturas y circunstancias, pero permanecen moralmente responsables; Dios juzga el pecado, pero también actúa con gracia hacia los pecadores. El libro permite que estas verdades permanezcan juntas en vez de reducir la condición humana a una sola explicación.</p>
+ <h2>Aplicación Ministerial</h2>
+ <p>Génesis enseña a los ministros a comenzar donde comienza la Escritura: con Dios. La predicación puede fácilmente centrarse en personalidades humanas, técnicas, éxito o fracaso, pero Génesis dirige repetidamente la atención al Creador que habla, juzga, llama, promete, acompaña y preserva. Las personas de Génesis importan, y sus decisiones tienen consecuencias, pero ninguna sostiene la historia redentora por su propia grandeza. Por eso un ministerio que sigue Génesis debe tomar seriamente la responsabilidad humana mientras coloca su confianza en el carácter de Dios y no en la capacidad humana.</p>
+ <h2>Resumen</h2>
+ <p>Génesis es el libro de los comienzos porque proporciona las categorías fundamentales de la historia bíblica. Su movimiento va de creación a Caída, de juicio a gracia, de naciones a promesa, y de promesa hacia providencia y redención. El libro comienza con Dios creando y termina con la familia de la promesa preservada en Egipto, todavía esperando lo que Dios hará después. Por encima de Adán, Noé, Abraham, Isaac, Jacob y José está el Dios todopoderoso y santo. Él es la figura central de Génesis, y si el curso deja a los estudiantes más impresionados con sus personajes humanos que con Él, habrá perdido el punto.</p>
+ </div>`,
+ mcq:[{"q_en": "What is the first subject Genesis presents?", "q_es": "¿Cuál es el primer tema que presenta Génesis?", "options_en": ["God", "Human achievement", "A claim the text does not make", "Scientific certainty"], "options_es": ["Dios", "Logro humano", "Una afirmación que texto no hace", "Certeza científica"], "answer": 0, "feedback_en": "God.", "feedback_es": "Dios."}, {"q_en": "What does Genesis 1:1 distinguish?", "q_es": "¿Qué distingue Génesis 1:1?", "options_en": ["The Creator from creation", "Human achievement", "A claim the text does not make", "Scientific certainty"], "options_es": ["El Creador de la creación", "Logro humano", "Una afirmación que texto no hace", "Certeza científica"], "answer": 0, "feedback_en": "The Creator from creation.", "feedback_es": "El Creador de la creación."}, {"q_en": "What does the title Genesis communicate?", "q_es": "¿Qué comunica el título Génesis?", "options_en": ["Origin or beginning", "Human achievement", "A claim the text does not make", "Scientific certainty"], "options_es": ["Origen o comienzo", "Logro humano", "Una afirmación que texto no hace", "Certeza científica"], "answer": 0, "feedback_en": "Origin or beginning.", "feedback_es": "Origen o comienzo."}, {"q_en": "Which chapters primarily address humanity as a whole?", "q_es": "¿Qué capítulos tratan principalmente a la humanidad en conjunto?", "options_en": ["Genesis 1–11", "Human achievement", "A claim the text does not make", "Scientific certainty"], "options_es": ["Génesis 1–11", "Logro humano", "Una afirmación que texto no hace", "Certeza científica"], "answer": 0, "feedback_en": "Genesis 1–11.", "feedback_es": "Génesis 1–11."}, {"q_en": "Which chapters focus on Abraham and the family of promise?", "q_es": "¿Qué capítulos se concentran en Abraham y la familia de la promesa?", "options_en": ["Genesis 12–50", "Human achievement", "A claim the text does not make", "Scientific certainty"], "options_es": ["Génesis 12–50", "Logro humano", "Una afirmación que texto no hace", "Certeza científica"], "answer": 0, "feedback_en": "Genesis 12–50.", "feedback_es": "Génesis 12–50."}, {"q_en": "What immediately follows Babel in the Genesis storyline?", "q_es": "¿Qué sigue inmediatamente a Babel en la historia de Génesis?", "options_en": ["The call of Abraham", "Human achievement", "A claim the text does not make", "Scientific certainty"], "options_es": ["El llamado de Abraham", "Logro humano", "Una afirmación que texto no hace", "Certeza científica"], "answer": 0, "feedback_en": "The call of Abraham.", "feedback_es": "El llamado de Abraham."}, {"q_en": "What does Genesis 12:3 promise?", "q_es": "¿Qué promete Génesis 12:3?", "options_en": ["Blessing to all families of the earth", "Human achievement", "A claim the text does not make", "Scientific certainty"], "options_es": ["Bendición a todas las familias de la tierra", "Logro humano", "Una afirmación que texto no hace", "Certeza científica"], "answer": 0, "feedback_en": "Blessing to all families of the earth.", "feedback_es": "Bendición a todas las familias de la tierra."}, {"q_en": "Does this course require one chronology of Genesis 1–11?", "q_es": "¿Exige este curso una sola cronología de Génesis 1–11?", "options_en": ["No", "Human achievement", "A claim the text does not make", "Scientific certainty"], "options_es": ["No", "Logro humano", "Una afirmación que texto no hace", "Certeza científica"], "answer": 0, "feedback_en": "No.", "feedback_es": "No."}, {"q_en": "How should literal readers be treated?", "q_es": "¿Cómo deben tratarse lectores literales?", "options_en": ["With respect as Christians affirming Scripture", "Human achievement", "A claim the text does not make", "Scientific certainty"], "options_es": ["Con respeto como cristianos que afirman Escritura", "Logro humano", "Una afirmación que texto no hace", "Certeza científica"], "answer": 0, "feedback_en": "With respect as Christians affirming Scripture.", "feedback_es": "Con respeto como cristianos que afirman Escritura."}, {"q_en": "What does the image of God establish?", "q_es": "¿Qué establece la imagen de Dios?", "options_en": ["God-given human dignity", "Human achievement", "A claim the text does not make", "Scientific certainty"], "options_es": ["Dignidad humana dada por Dios", "Logro humano", "Una afirmación que texto no hace", "Certeza científica"], "answer": 0, "feedback_en": "God-given human dignity.", "feedback_es": "Dignidad humana dada por Dios."}, {"q_en": "How does Genesis describe sin?", "q_es": "¿Cómo describe Génesis el pecado?", "options_en": ["Rebellion against God", "Human achievement", "A claim the text does not make", "Scientific certainty"], "options_es": ["Rebelión contra Dios", "Logro humano", "Una afirmación que texto no hace", "Certeza científica"], "answer": 0, "feedback_en": "Rebellion against God.", "feedback_es": "Rebelión contra Dios."}, {"q_en": "What repeatedly appears alongside judgment?", "q_es": "¿Qué aparece repetidamente junto al juicio?", "options_en": ["Grace", "Human achievement", "A claim the text does not make", "Scientific certainty"], "options_es": ["Gracia", "Logro humano", "Una afirmación que texto no hace", "Certeza científica"], "answer": 0, "feedback_en": "Grace.", "feedback_es": "Gracia."}, {"q_en": "What does Babel reveal about human pride?", "q_es": "¿Qué revela Babel acerca del orgullo humano?", "options_en": ["Humanity seeking a name apart from God", "Human achievement", "A claim the text does not make", "Scientific certainty"], "options_es": ["Humanidad buscando un nombre aparte de Dios", "Logro humano", "Una afirmación que texto no hace", "Certeza científica"], "answer": 0, "feedback_en": "Humanity seeking a name apart from God.", "feedback_es": "Humanidad buscando un nombre aparte de Dios."}, {"q_en": "What contrast appears between Babel and Abraham?", "q_es": "¿Qué contraste aparece entre Babel y Abraham?", "options_en": ["People make a name at Babel; God promises to make Abraham’s name great", "Human achievement", "A claim the text does not make", "Scientific certainty"], "options_es": ["La gente se hace un nombre en Babel; Dios promete engrandecer nombre de Abraham", "Logro humano", "Una afirmación que texto no hace", "Certeza científica"], "answer": 0, "feedback_en": "People make a name at Babel; God promises to make Abraham’s name great.", "feedback_es": "La gente se hace un nombre en Babel; Dios promete engrandecer nombre de Abraham."}, {"q_en": "Does Pentecost erase languages and nations?", "q_es": "¿Borra Pentecostés idiomas y naciones?", "options_en": ["No", "Human achievement", "A claim the text does not make", "Scientific certainty"], "options_es": ["No", "Logro humano", "Una afirmación que texto no hace", "Certeza científica"], "answer": 0, "feedback_en": "No.", "feedback_es": "No."}, {"q_en": "How does Pentecost relate to Babel?", "q_es": "¿Cómo se relaciona Pentecostés con Babel?", "options_en": ["The Spirit overcomes the linguistic barrier for gospel proclamation", "Human achievement", "A claim the text does not make", "Scientific certainty"], "options_es": ["El Espíritu vence la barrera lingüística para proclamación del evangelio", "Logro humano", "Una afirmación que texto no hace", "Certeza científica"], "answer": 0, "feedback_en": "The Spirit overcomes the linguistic barrier for gospel proclamation.", "feedback_es": "El Espíritu vence la barrera lingüística para proclamación del evangelio."}, {"q_en": "Are the patriarchs presented as flawless heroes?", "q_es": "¿Se presentan patriarcas como héroes impecables?", "options_en": ["No", "Human achievement", "A claim the text does not make", "Scientific certainty"], "options_es": ["No", "Logro humano", "Una afirmación que texto no hace", "Certeza científica"], "answer": 0, "feedback_en": "No.", "feedback_es": "No."}, {"q_en": "What finally supports the covenant?", "q_es": "¿Qué sostiene finalmente el pacto?", "options_en": ["God’s faithfulness", "Human achievement", "A claim the text does not make", "Scientific certainty"], "options_es": ["La fidelidad de Dios", "Logro humano", "Una afirmación que texto no hace", "Certeza científica"], "answer": 0, "feedback_en": "God’s faithfulness.", "feedback_es": "La fidelidad de Dios."}, {"q_en": "What ministry categories does Genesis establish?", "q_es": "¿Qué categorías ministeriales establece Génesis?", "options_en": ["Creation, dignity, sin, grace, covenant, faith, providence, forgiveness, and mission", "Human achievement", "A claim the text does not make", "Scientific certainty"], "options_es": ["Creación, dignidad, pecado, gracia, pacto, fe, providencia, perdón y misión", "Logro humano", "Una afirmación que texto no hace", "Certeza científica"], "answer": 0, "feedback_en": "Creation, dignity, sin, grace, covenant, faith, providence, forgiveness, and mission.", "feedback_es": "Creación, dignidad, pecado, gracia, pacto, fe, providencia, perdón y misión."}, {"q_en": "Who is the central figure of Genesis?", "q_es": "¿Quién es la figura central de Génesis?", "options_en": ["The almighty and holy God", "Human achievement", "A claim the text does not make", "Scientific certainty"], "options_es": ["El Dios todopoderoso y santo", "Logro humano", "Una afirmación que texto no hace", "Certeza científica"], "answer": 0, "feedback_en": "The almighty and holy God.", "feedback_es": "El Dios todopoderoso y santo."}], sa:[{"q_en": "Explain why Genesis begins with God rather than with humanity.", "q_es": "Explique por qué Génesis comienza con Dios y no con humanidad.", "concepts": [["God", "Dios"], ["beginning", "principio"], ["Creator", "Creador"], ["creation", "creación"], ["Genesis", "Génesis"], ["eternal", "eterno"], ["dependence", "dependencia"], ["worship", "adoración"]], "model_en": "A strong answer integrates the unit’s biblical concepts and keeps the almighty and holy God at the center of Genesis.", "model_es": "Una respuesta sólida integra conceptos bíblicos de la unidad y mantiene al Dios todopoderoso y santo en el centro de Génesis."}, {"q_en": "Describe the theological function of Genesis 1–11.", "q_es": "Describa función teológica de Génesis 1–11.", "concepts": [["Genesis 1–11", "Génesis 1–11"], ["humanity", "humanidad"], ["creation", "creación"], ["Fall", "Caída"], ["Flood", "Diluvio"], ["nations", "naciones"], ["Babel", "Babel"], ["judgment", "juicio"]], "model_en": "A strong answer integrates the unit’s biblical concepts and keeps the almighty and holy God at the center of Genesis.", "model_es": "Una respuesta sólida integra conceptos bíblicos de la unidad y mantiene al Dios todopoderoso y santo en el centro de Génesis."}, {"q_en": "Describe the theological function of Genesis 12–50.", "q_es": "Describa función teológica de Génesis 12–50.", "concepts": [["Genesis 12–50", "Génesis 12–50"], ["Abraham", "Abraham"], ["Isaac", "Isaac"], ["Jacob", "Jacob"], ["Joseph", "José"], ["promise", "promesa"], ["covenant", "pacto"], ["family", "familia"]], "model_en": "A strong answer integrates the unit’s biblical concepts and keeps the almighty and holy God at the center of Genesis.", "model_es": "Una respuesta sólida integra conceptos bíblicos de la unidad y mantiene al Dios todopoderoso y santo en el centro de Génesis."}, {"q_en": "Explain the Babel-to-Abraham transition.", "q_es": "Explique transición de Babel a Abraham.", "concepts": [["Babel", "Babel"], ["Abraham", "Abraham"], ["name", "nombre"], ["pride", "orgullo"], ["grace", "gracia"], ["families", "familias"], ["blessing", "bendición"], ["nations", "naciones"]], "model_en": "A strong answer integrates the unit’s biblical concepts and keeps the almighty and holy God at the center of Genesis.", "model_es": "Una respuesta sólida integra conceptos bíblicos de la unidad y mantiene al Dios todopoderoso y santo en el centro de Génesis."}, {"q_en": "Explain how the course handles differing Christian readings of Genesis 1–11.", "q_es": "Explique cómo curso maneja diferentes lecturas cristianas de Génesis 1–11.", "concepts": [["literal", "literal"], ["literary", "literario"], ["authority", "autoridad"], ["inspiration", "inspiración"], ["chronology", "cronología"], ["science", "ciencia"], ["respect", "respeto"], ["theology", "teología"]], "model_en": "A strong answer integrates the unit’s biblical concepts and keeps the almighty and holy God at the center of Genesis.", "model_es": "Una respuesta sólida integra conceptos bíblicos de la unidad y mantiene al Dios todopoderoso y santo en el centro de Génesis."}, {"q_en": "Explain the importance of the image of God for human dignity and responsibility.", "q_es": "Explique importancia de imagen de Dios para dignidad y responsabilidad humanas.", "concepts": [["image", "imagen"], ["dignity", "dignidad"], ["humanity", "humanidad"], ["Creator", "Creador"], ["responsibility", "responsabilidad"], ["worship", "adoración"], ["sin", "pecado"], ["God", "Dios"]], "model_en": "A strong answer integrates the unit’s biblical concepts and keeps the almighty and holy God at the center of Genesis.", "model_es": "Una respuesta sólida integra conceptos bíblicos de la unidad y mantiene al Dios todopoderoso y santo en el centro de Génesis."}, {"q_en": "Explain the recurring movement from sin and judgment toward grace and promise.", "q_es": "Explique movimiento recurrente de pecado y juicio hacia gracia y promesa.", "concepts": [["sin", "pecado"], ["judgment", "juicio"], ["grace", "gracia"], ["rebellion", "rebelión"], ["holiness", "santidad"], ["redemption", "redención"], ["death", "muerte"], ["promise", "promesa"]], "model_en": "A strong answer integrates the unit’s biblical concepts and keeps the almighty and holy God at the center of Genesis.", "model_es": "Una respuesta sólida integra conceptos bíblicos de la unidad y mantiene al Dios todopoderoso y santo en el centro de Génesis."}, {"q_en": "Explain the qualified Babel-to-Pentecost connection.", "q_es": "Explique conexión calificada de Babel a Pentecostés.", "concepts": [["Pentecost", "Pentecostés"], ["Babel", "Babel"], ["languages", "idiomas"], ["nations", "naciones"], ["Spirit", "Espíritu"], ["gospel", "evangelio"], ["barrier", "barrera"], ["Commission", "Comisión"]], "model_en": "A strong answer integrates the unit’s biblical concepts and keeps the almighty and holy God at the center of Genesis.", "model_es": "Una respuesta sólida integra conceptos bíblicos de la unidad y mantiene al Dios todopoderoso y santo en el centro de Génesis."}, {"q_en": "Explain why Genesis does not present the patriarchs as flawless heroes.", "q_es": "Explique por qué Génesis no presenta patriarcas como héroes impecables.", "concepts": [["patriarchs", "patriarcas"], ["flawed", "imperfectos"], ["faithfulness", "fidelidad"], ["covenant", "pacto"], ["Abraham", "Abraham"], ["Jacob", "Jacob"], ["Joseph", "José"], ["God", "Dios"]], "model_en": "A strong answer integrates the unit’s biblical concepts and keeps the almighty and holy God at the center of Genesis.", "model_es": "Una respuesta sólida integra conceptos bíblicos de la unidad y mantiene al Dios todopoderoso y santo en el centro de Génesis."}, {"q_en": "Summarize why God must remain the central figure in teaching Genesis.", "q_es": "Resuma por qué Dios debe permanecer figura central al enseñar Génesis.", "concepts": [["Genesis", "Génesis"], ["ministry", "ministerio"], ["creation", "creación"], ["covenant", "pacto"], ["providence", "providencia"], ["forgiveness", "perdón"], ["mission", "misión"], ["God", "Dios"]], "model_en": "A strong answer integrates the unit’s biblical concepts and keeps the almighty and holy God at the center of Genesis.", "model_es": "Una respuesta sólida integra conceptos bíblicos de la unidad y mantiene al Dios todopoderoso y santo en el centro de Génesis."}]
+};
+
+
+/* CTSGenesis — unit 1. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "genesis",
+ "unit": 1,
+ "totalUnits": 12,
+ "filePrefix": "CTSGenesis",
+ "prevHref": null,
+ "nextHref": "CTSGenesisUnit2.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "What is the first subject Genesis presents?",
+    "es": "¿Cuál es el primer tema que presenta Génesis?"
+   },
+   "options": {
+    "en": [
+     "God",
+     "Human achievement",
+     "A claim the text does not make",
+     "Scientific certainty"
+    ],
+    "es": [
+     "Dios",
+     "Logro humano",
+     "Una afirmación que texto no hace",
+     "Certeza científica"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "God.",
+    "es": "Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does Genesis 1:1 distinguish?",
+    "es": "¿Qué distingue Génesis 1:1?"
+   },
+   "options": {
+    "en": [
+     "The Creator from creation",
+     "Human achievement",
+     "A claim the text does not make",
+     "Scientific certainty"
+    ],
+    "es": [
+     "El Creador de la creación",
+     "Logro humano",
+     "Una afirmación que texto no hace",
+     "Certeza científica"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The Creator from creation.",
+    "es": "El Creador de la creación."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does the title Genesis communicate?",
+    "es": "¿Qué comunica el título Génesis?"
+   },
+   "options": {
+    "en": [
+     "Origin or beginning",
+     "Human achievement",
+     "A claim the text does not make",
+     "Scientific certainty"
+    ],
+    "es": [
+     "Origen o comienzo",
+     "Logro humano",
+     "Una afirmación que texto no hace",
+     "Certeza científica"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Origin or beginning.",
+    "es": "Origen o comienzo."
+   }
+  },
+  {
+   "stem": {
+    "en": "Which chapters primarily address humanity as a whole?",
+    "es": "¿Qué capítulos tratan principalmente a la humanidad en conjunto?"
+   },
+   "options": {
+    "en": [
+     "Genesis 1–11",
+     "Human achievement",
+     "A claim the text does not make",
+     "Scientific certainty"
+    ],
+    "es": [
+     "Génesis 1–11",
+     "Logro humano",
+     "Una afirmación que texto no hace",
+     "Certeza científica"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Genesis 1–11.",
+    "es": "Génesis 1–11."
+   }
+  },
+  {
+   "stem": {
+    "en": "Which chapters focus on Abraham and the family of promise?",
+    "es": "¿Qué capítulos se concentran en Abraham y la familia de la promesa?"
+   },
+   "options": {
+    "en": [
+     "Genesis 12–50",
+     "Human achievement",
+     "A claim the text does not make",
+     "Scientific certainty"
+    ],
+    "es": [
+     "Génesis 12–50",
+     "Logro humano",
+     "Una afirmación que texto no hace",
+     "Certeza científica"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Genesis 12–50.",
+    "es": "Génesis 12–50."
+   }
+  },
+  {
+   "stem": {
+    "en": "What immediately follows Babel in the Genesis storyline?",
+    "es": "¿Qué sigue inmediatamente a Babel en la historia de Génesis?"
+   },
+   "options": {
+    "en": [
+     "The call of Abraham",
+     "Human achievement",
+     "A claim the text does not make",
+     "Scientific certainty"
+    ],
+    "es": [
+     "El llamado de Abraham",
+     "Logro humano",
+     "Una afirmación que texto no hace",
+     "Certeza científica"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The call of Abraham.",
+    "es": "El llamado de Abraham."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does Genesis 12:3 promise?",
+    "es": "¿Qué promete Génesis 12:3?"
+   },
+   "options": {
+    "en": [
+     "Blessing to all families of the earth",
+     "Human achievement",
+     "A claim the text does not make",
+     "Scientific certainty"
+    ],
+    "es": [
+     "Bendición a todas las familias de la tierra",
+     "Logro humano",
+     "Una afirmación que texto no hace",
+     "Certeza científica"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Blessing to all families of the earth.",
+    "es": "Bendición a todas las familias de la tierra."
+   }
+  },
+  {
+   "stem": {
+    "en": "Does this course require one chronology of Genesis 1–11?",
+    "es": "¿Exige este curso una sola cronología de Génesis 1–11?"
+   },
+   "options": {
+    "en": [
+     "No",
+     "Human achievement",
+     "A claim the text does not make",
+     "Scientific certainty"
+    ],
+    "es": [
+     "No",
+     "Logro humano",
+     "Una afirmación que texto no hace",
+     "Certeza científica"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "No.",
+    "es": "No."
+   }
+  },
+  {
+   "stem": {
+    "en": "How should literal readers be treated?",
+    "es": "¿Cómo deben tratarse lectores literales?"
+   },
+   "options": {
+    "en": [
+     "With respect as Christians affirming Scripture",
+     "Human achievement",
+     "A claim the text does not make",
+     "Scientific certainty"
+    ],
+    "es": [
+     "Con respeto como cristianos que afirman Escritura",
+     "Logro humano",
+     "Una afirmación que texto no hace",
+     "Certeza científica"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "With respect as Christians affirming Scripture.",
+    "es": "Con respeto como cristianos que afirman Escritura."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does the image of God establish?",
+    "es": "¿Qué establece la imagen de Dios?"
+   },
+   "options": {
+    "en": [
+     "God-given human dignity",
+     "Human achievement",
+     "A claim the text does not make",
+     "Scientific certainty"
+    ],
+    "es": [
+     "Dignidad humana dada por Dios",
+     "Logro humano",
+     "Una afirmación que texto no hace",
+     "Certeza científica"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "God-given human dignity.",
+    "es": "Dignidad humana dada por Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "How does Genesis describe sin?",
+    "es": "¿Cómo describe Génesis el pecado?"
+   },
+   "options": {
+    "en": [
+     "Rebellion against God",
+     "Human achievement",
+     "A claim the text does not make",
+     "Scientific certainty"
+    ],
+    "es": [
+     "Rebelión contra Dios",
+     "Logro humano",
+     "Una afirmación que texto no hace",
+     "Certeza científica"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Rebellion against God.",
+    "es": "Rebelión contra Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "What repeatedly appears alongside judgment?",
+    "es": "¿Qué aparece repetidamente junto al juicio?"
+   },
+   "options": {
+    "en": [
+     "Grace",
+     "Human achievement",
+     "A claim the text does not make",
+     "Scientific certainty"
+    ],
+    "es": [
+     "Gracia",
+     "Logro humano",
+     "Una afirmación que texto no hace",
+     "Certeza científica"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Grace.",
+    "es": "Gracia."
+   }
+  },
+  {
+   "stem": {
+    "en": "What does Babel reveal about human pride?",
+    "es": "¿Qué revela Babel acerca del orgullo humano?"
+   },
+   "options": {
+    "en": [
+     "Humanity seeking a name apart from God",
+     "Human achievement",
+     "A claim the text does not make",
+     "Scientific certainty"
+    ],
+    "es": [
+     "Humanidad buscando un nombre aparte de Dios",
+     "Logro humano",
+     "Una afirmación que texto no hace",
+     "Certeza científica"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Humanity seeking a name apart from God.",
+    "es": "Humanidad buscando un nombre aparte de Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "What contrast appears between Babel and Abraham?",
+    "es": "¿Qué contraste aparece entre Babel y Abraham?"
+   },
+   "options": {
+    "en": [
+     "People make a name at Babel; God promises to make Abraham’s name great",
+     "Human achievement",
+     "A claim the text does not make",
+     "Scientific certainty"
+    ],
+    "es": [
+     "La gente se hace un nombre en Babel; Dios promete engrandecer nombre de Abraham",
+     "Logro humano",
+     "Una afirmación que texto no hace",
+     "Certeza científica"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "People make a name at Babel; God promises to make Abraham’s name great.",
+    "es": "La gente se hace un nombre en Babel; Dios promete engrandecer nombre de Abraham."
+   }
+  },
+  {
+   "stem": {
+    "en": "Does Pentecost erase languages and nations?",
+    "es": "¿Borra Pentecostés idiomas y naciones?"
+   },
+   "options": {
+    "en": [
+     "No",
+     "Human achievement",
+     "A claim the text does not make",
+     "Scientific certainty"
+    ],
+    "es": [
+     "No",
+     "Logro humano",
+     "Una afirmación que texto no hace",
+     "Certeza científica"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "No.",
+    "es": "No."
+   }
+  },
+  {
+   "stem": {
+    "en": "How does Pentecost relate to Babel?",
+    "es": "¿Cómo se relaciona Pentecostés con Babel?"
+   },
+   "options": {
+    "en": [
+     "The Spirit overcomes the linguistic barrier for gospel proclamation",
+     "Human achievement",
+     "A claim the text does not make",
+     "Scientific certainty"
+    ],
+    "es": [
+     "El Espíritu vence la barrera lingüística para proclamación del evangelio",
+     "Logro humano",
+     "Una afirmación que texto no hace",
+     "Certeza científica"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The Spirit overcomes the linguistic barrier for gospel proclamation.",
+    "es": "El Espíritu vence la barrera lingüística para proclamación del evangelio."
+   }
+  },
+  {
+   "stem": {
+    "en": "Are the patriarchs presented as flawless heroes?",
+    "es": "¿Se presentan patriarcas como héroes impecables?"
+   },
+   "options": {
+    "en": [
+     "No",
+     "Human achievement",
+     "A claim the text does not make",
+     "Scientific certainty"
+    ],
+    "es": [
+     "No",
+     "Logro humano",
+     "Una afirmación que texto no hace",
+     "Certeza científica"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "No.",
+    "es": "No."
+   }
+  },
+  {
+   "stem": {
+    "en": "What finally supports the covenant?",
+    "es": "¿Qué sostiene finalmente el pacto?"
+   },
+   "options": {
+    "en": [
+     "God’s faithfulness",
+     "Human achievement",
+     "A claim the text does not make",
+     "Scientific certainty"
+    ],
+    "es": [
+     "La fidelidad de Dios",
+     "Logro humano",
+     "Una afirmación que texto no hace",
+     "Certeza científica"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "God’s faithfulness.",
+    "es": "La fidelidad de Dios."
+   }
+  },
+  {
+   "stem": {
+    "en": "What ministry categories does Genesis establish?",
+    "es": "¿Qué categorías ministeriales establece Génesis?"
+   },
+   "options": {
+    "en": [
+     "Creation, dignity, sin, grace, covenant, faith, providence, forgiveness, and mission",
+     "Human achievement",
+     "A claim the text does not make",
+     "Scientific certainty"
+    ],
+    "es": [
+     "Creación, dignidad, pecado, gracia, pacto, fe, providencia, perdón y misión",
+     "Logro humano",
+     "Una afirmación que texto no hace",
+     "Certeza científica"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Creation, dignity, sin, grace, covenant, faith, providence, forgiveness, and mission.",
+    "es": "Creación, dignidad, pecado, gracia, pacto, fe, providencia, perdón y misión."
+   }
+  },
+  {
+   "stem": {
+    "en": "Who is the central figure of Genesis?",
+    "es": "¿Quién es la figura central de Génesis?"
+   },
+   "options": {
+    "en": [
+     "The almighty and holy God",
+     "Human achievement",
+     "A claim the text does not make",
+     "Scientific certainty"
+    ],
+    "es": [
+     "El Dios todopoderoso y santo",
+     "Logro humano",
+     "Una afirmación que texto no hace",
+     "Certeza científica"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "The almighty and holy God.",
+    "es": "El Dios todopoderoso y santo."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Explain why Genesis begins with God rather than with humanity.",
+    "es": "Explique por qué Génesis comienza con Dios y no con humanidad."
+   },
+   "model": {
+    "en": "A strong answer integrates the unit’s biblical concepts and keeps the almighty and holy God at the center of Genesis.",
+    "es": "Una respuesta sólida integra conceptos bíblicos de la unidad y mantiene al Dios todopoderoso y santo en el centro de Génesis."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the theological function of Genesis 1–11.",
+    "es": "Describa función teológica de Génesis 1–11."
+   },
+   "model": {
+    "en": "A strong answer integrates the unit’s biblical concepts and keeps the almighty and holy God at the center of Genesis.",
+    "es": "Una respuesta sólida integra conceptos bíblicos de la unidad y mantiene al Dios todopoderoso y santo en el centro de Génesis."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the theological function of Genesis 12–50.",
+    "es": "Describa función teológica de Génesis 12–50."
+   },
+   "model": {
+    "en": "A strong answer integrates the unit’s biblical concepts and keeps the almighty and holy God at the center of Genesis.",
+    "es": "Una respuesta sólida integra conceptos bíblicos de la unidad y mantiene al Dios todopoderoso y santo en el centro de Génesis."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the Babel-to-Abraham transition.",
+    "es": "Explique transición de Babel a Abraham."
+   },
+   "model": {
+    "en": "A strong answer integrates the unit’s biblical concepts and keeps the almighty and holy God at the center of Genesis.",
+    "es": "Una respuesta sólida integra conceptos bíblicos de la unidad y mantiene al Dios todopoderoso y santo en el centro de Génesis."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain how the course handles differing Christian readings of Genesis 1–11.",
+    "es": "Explique cómo curso maneja diferentes lecturas cristianas de Génesis 1–11."
+   },
+   "model": {
+    "en": "A strong answer integrates the unit’s biblical concepts and keeps the almighty and holy God at the center of Genesis.",
+    "es": "Una respuesta sólida integra conceptos bíblicos de la unidad y mantiene al Dios todopoderoso y santo en el centro de Génesis."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the importance of the image of God for human dignity and responsibility.",
+    "es": "Explique importancia de imagen de Dios para dignidad y responsabilidad humanas."
+   },
+   "model": {
+    "en": "A strong answer integrates the unit’s biblical concepts and keeps the almighty and holy God at the center of Genesis.",
+    "es": "Una respuesta sólida integra conceptos bíblicos de la unidad y mantiene al Dios todopoderoso y santo en el centro de Génesis."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the recurring movement from sin and judgment toward grace and promise.",
+    "es": "Explique movimiento recurrente de pecado y juicio hacia gracia y promesa."
+   },
+   "model": {
+    "en": "A strong answer integrates the unit’s biblical concepts and keeps the almighty and holy God at the center of Genesis.",
+    "es": "Una respuesta sólida integra conceptos bíblicos de la unidad y mantiene al Dios todopoderoso y santo en el centro de Génesis."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the qualified Babel-to-Pentecost connection.",
+    "es": "Explique conexión calificada de Babel a Pentecostés."
+   },
+   "model": {
+    "en": "A strong answer integrates the unit’s biblical concepts and keeps the almighty and holy God at the center of Genesis.",
+    "es": "Una respuesta sólida integra conceptos bíblicos de la unidad y mantiene al Dios todopoderoso y santo en el centro de Génesis."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain why Genesis does not present the patriarchs as flawless heroes.",
+    "es": "Explique por qué Génesis no presenta patriarcas como héroes impecables."
+   },
+   "model": {
+    "en": "A strong answer integrates the unit’s biblical concepts and keeps the almighty and holy God at the center of Genesis.",
+    "es": "Una respuesta sólida integra conceptos bíblicos de la unidad y mantiene al Dios todopoderoso y santo en el centro de Génesis."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Summarize why God must remain the central figure in teaching Genesis.",
+    "es": "Resuma por qué Dios debe permanecer figura central al enseñar Génesis."
+   },
+   "model": {
+    "en": "A strong answer integrates the unit’s biblical concepts and keeps the almighty and holy God at the center of Genesis.",
+    "es": "Una respuesta sólida integra conceptos bíblicos de la unidad y mantiene al Dios todopoderoso y santo en el centro de Génesis."
+   }
+  }
+ ]
+};

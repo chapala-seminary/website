@@ -1,17 +1,383 @@
-/* CTSCS - unit 0: per-unit configuration and content. */
-
-const UNIT = 0;
-
-const THIS_UNIT = 0;
-
-const UNIT_LABELS = [
- {en:"Foundation",es:"Fundamento"},{en:"The Dying",es:"El Moribundo"},{en:"Surgery",es:"Cirugía"},
- {en:"Sexual Abuse",es:"Abuso Sexual"},{en:"Forced Termination",es:"Terminación Forzada"},
- {en:"Marital Conflict",es:"Conflicto Marital"},{en:"Depression",es:"Depresión"},{en:"Grief",es:"Duelo"},
- {en:"Anxiety & Fear",es:"Ansiedad y Temor"},{en:"Anger",es:"Ira"},{en:"Addiction",es:"Adicción"},
- {en:"Distress",es:"Angustia"},{en:"When to Refer",es:"Cuándo Referir"}
-];
-
-const UNITS = {"0":{"mcq":[{"textEn":"In this course, the relationship between the ten steps and the situation is best described as:","textEs":"En este curso, la relación entre los diez pasos y la situación se describe mejor como:","options":[{"en":"The steps are the spine; the situation is the flesh on it","es":"Los pasos son la columna; la situación es la carne sobre ella"},{"en":"The situation replaces the steps","es":"La situación reemplaza los pasos"},{"en":"The steps and situation are unrelated","es":"Los pasos y la situación no se relacionan"},{"en":"The situation matters only for masters students","es":"La situación importa solo para estudiantes de maestría"}],"correct":0,"explainEn":"The ten steps give every unit its structure; the situation is what they are applied to.","explainEs":"Los diez pasos dan a cada unidad su estructura; la situación es a lo que se aplican."},{"textEn":"Drakeford's model divides the ten steps into two stages:","textEs":"El modelo de Drakeford divide los diez pasos en dos etapas:","options":[{"en":"Talking and praying","es":"Hablar y orar"},{"en":"Diagnosis and medication","es":"Diagnóstico y medicación"},{"en":"Listening and lecturing","es":"Escuchar y dar cátedra"},{"en":"Identify the Problem, then Determine an Action Plan","es":"Identificar el Problema, luego Determinar un Plan de Acción"}],"correct":3,"explainEn":"Steps 1–4 identify the problem; Steps 5–10 determine and carry out an action plan.","explainEs":"Los pasos 1–4 identifican el problema; los pasos 5–10 determinan y ejecutan un plan de acción."},{"textEn":"When a step 'bends but does not break,' it means:","textEs":"Cuando un paso 'se dobla pero no se quiebra', significa:","options":[{"en":"The step is skipped","es":"El paso se omite"},{"en":"The step is performed louder","es":"El paso se ejecuta más fuerte"},{"en":"The step changes form to fit the situation while keeping its purpose","es":"El paso cambia de forma para ajustarse a la situación conservando su propósito"},{"en":"The step is replaced by a new one","es":"El paso se reemplaza por uno nuevo"}],"correct":2,"explainEn":"At the deathbed, 'choose the place' became 'the place was prepared beforehand' — the step bent, not broke.","explainEs":"Junto al lecho, 'elegir el lugar' se volvió 'el lugar fue preparado de antemano' — el paso se dobló, no se quebró."},{"textEn":"The course's standing safeguard for counseling someone of the opposite gender is:","textEs":"La salvaguarda permanente del curso para aconsejar a alguien del sexo opuesto es:","options":[{"en":"Always meet privately so they feel safe","es":"Reunirse siempre en privado para que se sientan seguros"},{"en":"Never in a closed office or a private home; keep the door open or another person present","es":"Nunca en una oficina cerrada o casa privada; dejar la puerta abierta o con otra persona presente"},{"en":"Counsel only by telephone","es":"Aconsejar solo por teléfono"},{"en":"Refuse to counsel them","es":"Negarse a aconsejarles"}],"correct":1,"explainEn":"An open setting protects the counselee, guards the pastor from temptation, and guards him from false accusation.","explainEs":"Un entorno abierto protege al aconsejado, guarda al pastor de la tentación y lo guarda de una acusación falsa."},{"textEn":"The Rogerian (person-centered) lens contributes most directly to which step?","textEs":"La perspectiva rogeriana (centrada en la persona) contribuye más directamente a qué paso?","options":[{"en":"Step Nine (Supply Information)","es":"Paso Nueve (Proveer Información)"},{"en":"Step Ten (Provide Closure)","es":"Paso Diez (Proveer Cierre)"},{"en":"Step Two (Listen)","es":"Paso Dos (Escuchar)"},{"en":"Step Five (Responsibility)","es":"Paso Cinco (Responsabilidad)"}],"correct":2,"explainEn":"Rogers' empathy, reflection, and regard most strengthen the listening of Step Two (and clarifying in Step Three).","explainEs":"La empatía, el reflejo y el aprecio de Rogers fortalecen sobre todo la escucha del Paso Dos (y la aclaración del Paso Tres)."},{"textEn":"The biblical caution attached to the Rogerian lens is that:","textEs":"La advertencia bíblica unida a la perspectiva rogeriana es que:","options":[{"en":"Empathy is unbiblical","es":"La empatía es antibíblica"},{"en":"A purely non-directive stance can withhold the concrete guidance Scripture gives","es":"Una postura puramente no directiva puede negar la guía concreta que da la Escritura"},{"en":"Listening wastes time","es":"Escuchar pierde el tiempo"},{"en":"Feelings should be ignored","es":"Los sentimientos deben ignorarse"}],"correct":1,"explainEn":"The pastor listens like Rogers but does not stop there; he balances empathy with the direction of God's word.","explainEs":"El pastor escucha como Rogers pero no se detiene ahí; equilibra la empatía con la dirección de la palabra de Dios."},{"textEn":"Why does the model place Listening (Step Two) before Supplying Information (Step Nine)?","textEs":"¿Por qué el modelo coloca Escuchar (Paso Dos) antes de Proveer Información (Paso Nueve)?","options":[{"en":"Advice given before understanding usually misses the real problem","es":"El consejo dado antes de entender suele errar el problema real"},{"en":"Information is unimportant","es":"La información no es importante"},{"en":"Listening is only polite","es":"Escuchar es solo cortesía"},{"en":"The order does not matter","es":"El orden no importa"}],"correct":0,"explainEn":"A premature solution, offered before the counselor understands the situation, breaks trust and answers an unasked question.","explainEs":"Una solución prematura, ofrecida antes de que el consejero entienda la situación, rompe la confianza y responde una pregunta no hecha."},{"textEn":"Step Seven (Review the Alternatives) teaches the counselor to:","textEs":"El Paso Siete (Repasar las Alternativas) enseña al consejero a:","options":[{"en":"Dictate the one correct choice","es":"Dictar la única decisión correcta"},{"en":"Let the person decide without any input","es":"Dejar que la persona decida sin aporte alguno"},{"en":"Avoid all decisions","es":"Evitar toda decisión"},{"en":"Lay out real options so the person can own his decision","es":"Exponer opciones reales para que la persona asuma su decisión"}],"correct":3,"explainEn":"Choices a counselee reaches himself are owned more deeply than those imposed; the counselor presents, he does not impose.","explainEs":"Las decisiones que un aconsejado alcanza por sí mismo se asumen más que las impuestas; el consejero presenta, no impone."},{"textEn":"In this course, 'Provide Closure' (Step Ten) usually means:","textEs":"En este curso, 'Proveer Cierre' (Paso Diez) suele significar:","options":[{"en":"A clean, final end to all contact","es":"Un fin limpio y definitivo de todo contacto"},{"en":"Prayer, a plan, and an open door — often the start of ongoing care","es":"Oración, un plan y una puerta abierta — a menudo el inicio de un cuidado continuo"},{"en":"Filing paperwork","es":"Llenar papeleo"},{"en":"Referring everyone to a professional","es":"Referir a todos a un profesional"}],"correct":1,"explainEn":"Closure is rarely a single clean stop; in most situations it begins ongoing care.","explainEs":"El cierre rara vez es un solo alto limpio; en la mayoría de las situaciones inicia un cuidado continuo."},{"textEn":"The overall aim of walking each situation through all ten steps is to show that:","textEs":"El objetivo general de recorrer cada situación por los diez pasos es mostrar que:","options":[{"en":"The steps must be applied identically every time","es":"Los pasos deben aplicarse idénticamente cada vez"},{"en":"Counseling cannot be taught","es":"La consejería no se puede enseñar"},{"en":"Each situation needs an entirely new method","es":"Cada situación necesita un método totalmente nuevo"},{"en":"One sound model adapts to many different situations without losing its shape","es":"Un modelo sólido se adapta a muchas situaciones distintas sin perder su forma"}],"correct":3,"explainEn":"The point of the course is that the model bends to fit the deathbed, the marriage, the depression — and holds.","explainEs":"El punto del curso es que el modelo se dobla para ajustarse al lecho, al matrimonio, a la depresión — y se sostiene."}],"shortAnswer":[{"textEn":"Describe the relationship between the ten steps and the situation in this course.","textEs":"Describa la relación entre los diez pasos y la situación en este curso.","kw_en":["spine","situat","bend","apply","frame","master","shape","flesh"],"kw_es":["columna","situaci","doble","aplica","marco","carne","forma","estructur"],"modelEn":"The ten steps are the spine of every unit, and the situation is the flesh on it. The steps are the master frame that stays the same; the situation is where they are applied. A good counselor lets the steps bend to fit the shape of the real situation without losing them.","modelEs":"Los diez pasos son la columna vertebral de cada unidad, y la situación es la carne sobre ella. Los pasos son el marco maestro que permanece igual; la situación es donde se aplican. Un buen consejero deja que los pasos se doblen para ajustarse a la forma de la situación real sin perderlos, dentro de una estructura firme."},{"textEn":"Explain what it means that a step 'bends but does not break,' with an example.","textEs":"Explique qué significa que un paso 'se dobla pero no se quiebra', con un ejemplo.","kw_en":["bend","break","adapt","place","prepar","situat","rigid","purpos"],"kw_es":["doble","quiebr","adapt","lugar","prepar","situaci","rígid","propósit"],"modelEn":"A step bends when it changes form to fit the situation but keeps its purpose. In the dying unit, Step One ('the time and place') could not be chosen, so it bent: the place had been prepared beforehand in the relationship. The step adapted to the situation rather than breaking; the steps are never applied rigidly.","modelEs":"Un paso se dobla cuando cambia de forma para ajustarse a la situación pero conserva su propósito. En la unidad del moribundo, el Paso Uno ('el tiempo y el lugar') no podía elegirse, así que se dobló: el lugar había sido preparado de antemano en la relación. El paso se adaptó a la situación en lugar de quebrarse; los pasos nunca se aplican de forma rígida."},{"textEn":"Why must a pastor never counsel someone of the opposite gender in a closed office or private home? Name the protection it gives.","textEs":"¿Por qué un pastor nunca debe aconsejar a alguien del sexo opuesto en una oficina cerrada o casa privada? Nombre la protección que ofrece.","kw_en":["open","alone","protect","temptat","accus","anoth","presen","witness"],"kw_es":["abiert","solas","proteg","tentaci","acusaci","otra","presen","testimonio"],"modelEn":"A pastor should never meet alone with someone of the opposite gender behind a closed office door or in a private home. The setting should be open — a door left open, a window, or another person present nearby. This protects everyone: it guards the counselee, it guards the pastor from temptation, and it guards him from any false accusation that could destroy his witness.","modelEs":"Un pastor nunca debe reunirse a solas con alguien del sexo opuesto tras una puerta de oficina cerrada o en una casa privada. El entorno debe ser abierto — una puerta abierta, una ventana, u otra persona presente cerca. Esto protege a todos: guarda al aconsejado, guarda al pastor de la tentación, y lo guarda de cualquier acusación falsa que pueda destruir su testimonio."},{"textEn":"What does the Rogerian lens give the pastor, and what is its biblical caution?","textEs":"¿Qué le da al pastor la perspectiva rogeriana, y cuál es su advertencia bíblica?","kw_en":["listen","empath","reflect","regard","direct","guidanc","balanc","scriptur"],"kw_es":["escuch","empat","reflej","aprecio","directiv","guía","equilibr","escritur"],"modelEn":"Rogerian counseling teaches the pastor to listen with real empathy, to reflect back what the person feels, and to show genuine regard — gifts that strengthen Step Two. Its caution is that being purely non-directive can shortchange a person who needs concrete biblical guidance; the pastor listens like Rogers but does not stop there. He balances empathy with the direction of Scripture.","modelEs":"La consejería rogeriana enseña al pastor a escuchar con verdadera empatía, a reflejar lo que la persona siente, y a mostrar un aprecio genuino — dones que fortalecen el Paso Dos. Su advertencia es que ser puramente no directivo puede defraudar a quien necesita guía bíblica concreta; el pastor escucha como Rogers pero no se queda ahí. Equilibra la empatía con la dirección de la Escritura."},{"textEn":"Why does the model place listening before giving advice?","textEs":"¿Por qué el modelo coloca el escuchar antes de dar consejo?","kw_en":["listen","advis","problem","unders","prematu","soluti","trust","situat"],"kw_es":["escuch","consej","problema","entend","prematur","soluci","confian","situaci"],"modelEn":"The counselor listens before he advises because advice given too soon usually misses the real problem. A premature solution, offered before he truly understands the person's situation, breaks trust and often answers a question never asked. Listening first lets his help fit the problem as it actually is.","modelEs":"El consejero escucha antes de aconsejar porque el consejo dado demasiado pronto suele errar el problema real. Una solución prematura, ofrecida antes de entender de veras la situación de la persona, rompe la confianza y a menudo responde una pregunta nunca hecha. Escuchar primero permite que su ayuda se ajuste al problema tal como es."}]}};
-
-const SA_MIN_HITS=3;
+/* CTSCS — unit 0. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "cs",
+ "unit": 0,
+ "totalUnits": 13,
+ "filePrefix": "CTSCS",
+ "prevHref": null,
+ "nextHref": "CTSCSUnit1.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "In this course, the relationship between the ten steps and the situation is best described as:",
+    "es": "En este curso, la relación entre los diez pasos y la situación se describe mejor como:"
+   },
+   "options": {
+    "en": [
+     "The steps are the spine; the situation is the flesh on it",
+     "The situation replaces the steps",
+     "The steps and situation are unrelated",
+     "The situation matters only for masters students"
+    ],
+    "es": [
+     "Los pasos son la columna; la situación es la carne sobre ella",
+     "La situación reemplaza los pasos",
+     "Los pasos y la situación no se relacionan",
+     "La situación importa solo para estudiantes de maestría"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "Drakeford's model divides the ten steps into two stages:",
+    "es": "El modelo de Drakeford divide los diez pasos en dos etapas:"
+   },
+   "options": {
+    "en": [
+     "Talking and praying",
+     "Diagnosis and medication",
+     "Listening and lecturing",
+     "Identify the Problem, then Determine an Action Plan"
+    ],
+    "es": [
+     "Hablar y orar",
+     "Diagnóstico y medicación",
+     "Escuchar y dar cátedra",
+     "Identificar el Problema, luego Determinar un Plan de Acción"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "When a step 'bends but does not break,' it means:",
+    "es": "Cuando un paso 'se dobla pero no se quiebra', significa:"
+   },
+   "options": {
+    "en": [
+     "The step is skipped",
+     "The step is performed louder",
+     "The step changes form to fit the situation while keeping its purpose",
+     "The step is replaced by a new one"
+    ],
+    "es": [
+     "El paso se omite",
+     "El paso se ejecuta más fuerte",
+     "El paso cambia de forma para ajustarse a la situación conservando su propósito",
+     "El paso se reemplaza por uno nuevo"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "The course's standing safeguard for counseling someone of the opposite gender is:",
+    "es": "La salvaguarda permanente del curso para aconsejar a alguien del sexo opuesto es:"
+   },
+   "options": {
+    "en": [
+     "Always meet privately so they feel safe",
+     "Never in a closed office or a private home; keep the door open or another person present",
+     "Counsel only by telephone",
+     "Refuse to counsel them"
+    ],
+    "es": [
+     "Reunirse siempre en privado para que se sientan seguros",
+     "Nunca en una oficina cerrada o casa privada; dejar la puerta abierta o con otra persona presente",
+     "Aconsejar solo por teléfono",
+     "Negarse a aconsejarles"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "The Rogerian (person-centered) lens contributes most directly to which step?",
+    "es": "La perspectiva rogeriana (centrada en la persona) contribuye más directamente a qué paso?"
+   },
+   "options": {
+    "en": [
+     "Step Nine (Supply Information)",
+     "Step Ten (Provide Closure)",
+     "Step Two (Listen)",
+     "Step Five (Responsibility)"
+    ],
+    "es": [
+     "Paso Nueve (Proveer Información)",
+     "Paso Diez (Proveer Cierre)",
+     "Paso Dos (Escuchar)",
+     "Paso Cinco (Responsabilidad)"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "The biblical caution attached to the Rogerian lens is that:",
+    "es": "La advertencia bíblica unida a la perspectiva rogeriana es que:"
+   },
+   "options": {
+    "en": [
+     "Empathy is unbiblical",
+     "A purely non-directive stance can withhold the concrete guidance Scripture gives",
+     "Listening wastes time",
+     "Feelings should be ignored"
+    ],
+    "es": [
+     "La empatía es antibíblica",
+     "Una postura puramente no directiva puede negar la guía concreta que da la Escritura",
+     "Escuchar pierde el tiempo",
+     "Los sentimientos deben ignorarse"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "Why does the model place Listening (Step Two) before Supplying Information (Step Nine)?",
+    "es": "¿Por qué el modelo coloca Escuchar (Paso Dos) antes de Proveer Información (Paso Nueve)?"
+   },
+   "options": {
+    "en": [
+     "Advice given before understanding usually misses the real problem",
+     "Information is unimportant",
+     "Listening is only polite",
+     "The order does not matter"
+    ],
+    "es": [
+     "El consejo dado antes de entender suele errar el problema real",
+     "La información no es importante",
+     "Escuchar es solo cortesía",
+     "El orden no importa"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "Step Seven (Review the Alternatives) teaches the counselor to:",
+    "es": "El Paso Siete (Repasar las Alternativas) enseña al consejero a:"
+   },
+   "options": {
+    "en": [
+     "Dictate the one correct choice",
+     "Let the person decide without any input",
+     "Avoid all decisions",
+     "Lay out real options so the person can own his decision"
+    ],
+    "es": [
+     "Dictar la única decisión correcta",
+     "Dejar que la persona decida sin aporte alguno",
+     "Evitar toda decisión",
+     "Exponer opciones reales para que la persona asuma su decisión"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "In this course, 'Provide Closure' (Step Ten) usually means:",
+    "es": "En este curso, 'Proveer Cierre' (Paso Diez) suele significar:"
+   },
+   "options": {
+    "en": [
+     "A clean, final end to all contact",
+     "Prayer, a plan, and an open door — often the start of ongoing care",
+     "Filing paperwork",
+     "Referring everyone to a professional"
+    ],
+    "es": [
+     "Un fin limpio y definitivo de todo contacto",
+     "Oración, un plan y una puerta abierta — a menudo el inicio de un cuidado continuo",
+     "Llenar papeleo",
+     "Referir a todos a un profesional"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "The overall aim of walking each situation through all ten steps is to show that:",
+    "es": "El objetivo general de recorrer cada situación por los diez pasos es mostrar que:"
+   },
+   "options": {
+    "en": [
+     "The steps must be applied identically every time",
+     "Counseling cannot be taught",
+     "Each situation needs an entirely new method",
+     "One sound model adapts to many different situations without losing its shape"
+    ],
+    "es": [
+     "Los pasos deben aplicarse idénticamente cada vez",
+     "La consejería no se puede enseñar",
+     "Cada situación necesita un método totalmente nuevo",
+     "Un modelo sólido se adapta a muchas situaciones distintas sin perder su forma"
+    ]
+   },
+   "answer": 3
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Describe the relationship between the ten steps and the situation in this course.",
+    "es": "Describa la relación entre los diez pasos y la situación en este curso."
+   },
+   "keywords": {
+    "en": [
+     "spine",
+     "situat",
+     "bend",
+     "apply",
+     "frame",
+     "master",
+     "shape",
+     "flesh"
+    ],
+    "es": [
+     "columna",
+     "situaci",
+     "doble",
+     "aplica",
+     "marco",
+     "carne",
+     "forma",
+     "estructur"
+    ]
+   },
+   "model": {
+    "en": "The ten steps are the spine of every unit, and the situation is the flesh on it. The steps are the master frame that stays the same; the situation is where they are applied. A good counselor lets the steps bend to fit the shape of the real situation without losing them.",
+    "es": "Los diez pasos son la columna vertebral de cada unidad, y la situación es la carne sobre ella. Los pasos son el marco maestro que permanece igual; la situación es donde se aplican. Un buen consejero deja que los pasos se doblen para ajustarse a la forma de la situación real sin perderlos, dentro de una estructura firme."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain what it means that a step 'bends but does not break,' with an example.",
+    "es": "Explique qué significa que un paso 'se dobla pero no se quiebra', con un ejemplo."
+   },
+   "keywords": {
+    "en": [
+     "bend",
+     "break",
+     "adapt",
+     "place",
+     "prepar",
+     "situat",
+     "rigid",
+     "purpos"
+    ],
+    "es": [
+     "doble",
+     "quiebr",
+     "adapt",
+     "lugar",
+     "prepar",
+     "situaci",
+     "rígid",
+     "propósit"
+    ]
+   },
+   "model": {
+    "en": "A step bends when it changes form to fit the situation but keeps its purpose. In the dying unit, Step One ('the time and place') could not be chosen, so it bent: the place had been prepared beforehand in the relationship. The step adapted to the situation rather than breaking; the steps are never applied rigidly.",
+    "es": "Un paso se dobla cuando cambia de forma para ajustarse a la situación pero conserva su propósito. En la unidad del moribundo, el Paso Uno ('el tiempo y el lugar') no podía elegirse, así que se dobló: el lugar había sido preparado de antemano en la relación. El paso se adaptó a la situación en lugar de quebrarse; los pasos nunca se aplican de forma rígida."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why must a pastor never counsel someone of the opposite gender in a closed office or private home? Name the protection it gives.",
+    "es": "¿Por qué un pastor nunca debe aconsejar a alguien del sexo opuesto en una oficina cerrada o casa privada? Nombre la protección que ofrece."
+   },
+   "keywords": {
+    "en": [
+     "open",
+     "alone",
+     "protect",
+     "temptat",
+     "accus",
+     "anoth",
+     "presen",
+     "witness"
+    ],
+    "es": [
+     "abiert",
+     "solas",
+     "proteg",
+     "tentaci",
+     "acusaci",
+     "otra",
+     "presen",
+     "testimonio"
+    ]
+   },
+   "model": {
+    "en": "A pastor should never meet alone with someone of the opposite gender behind a closed office door or in a private home. The setting should be open — a door left open, a window, or another person present nearby. This protects everyone: it guards the counselee, it guards the pastor from temptation, and it guards him from any false accusation that could destroy his witness.",
+    "es": "Un pastor nunca debe reunirse a solas con alguien del sexo opuesto tras una puerta de oficina cerrada o en una casa privada. El entorno debe ser abierto — una puerta abierta, una ventana, u otra persona presente cerca. Esto protege a todos: guarda al aconsejado, guarda al pastor de la tentación, y lo guarda de cualquier acusación falsa que pueda destruir su testimonio."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does the Rogerian lens give the pastor, and what is its biblical caution?",
+    "es": "¿Qué le da al pastor la perspectiva rogeriana, y cuál es su advertencia bíblica?"
+   },
+   "keywords": {
+    "en": [
+     "listen",
+     "empath",
+     "reflect",
+     "regard",
+     "direct",
+     "guidanc",
+     "balanc",
+     "scriptur"
+    ],
+    "es": [
+     "escuch",
+     "empat",
+     "reflej",
+     "aprecio",
+     "directiv",
+     "guía",
+     "equilibr",
+     "escritur"
+    ]
+   },
+   "model": {
+    "en": "Rogerian counseling teaches the pastor to listen with real empathy, to reflect back what the person feels, and to show genuine regard — gifts that strengthen Step Two. Its caution is that being purely non-directive can shortchange a person who needs concrete biblical guidance; the pastor listens like Rogers but does not stop there. He balances empathy with the direction of Scripture.",
+    "es": "La consejería rogeriana enseña al pastor a escuchar con verdadera empatía, a reflejar lo que la persona siente, y a mostrar un aprecio genuino — dones que fortalecen el Paso Dos. Su advertencia es que ser puramente no directivo puede defraudar a quien necesita guía bíblica concreta; el pastor escucha como Rogers pero no se queda ahí. Equilibra la empatía con la dirección de la Escritura."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why does the model place listening before giving advice?",
+    "es": "¿Por qué el modelo coloca el escuchar antes de dar consejo?"
+   },
+   "keywords": {
+    "en": [
+     "listen",
+     "advis",
+     "problem",
+     "unders",
+     "prematu",
+     "soluti",
+     "trust",
+     "situat"
+    ],
+    "es": [
+     "escuch",
+     "consej",
+     "problema",
+     "entend",
+     "prematur",
+     "soluci",
+     "confian",
+     "situaci"
+    ]
+   },
+   "model": {
+    "en": "The counselor listens before he advises because advice given too soon usually misses the real problem. A premature solution, offered before he truly understands the person's situation, breaks trust and often answers a question never asked. Listening first lets his help fit the problem as it actually is.",
+    "es": "El consejero escucha antes de aconsejar porque el consejo dado demasiado pronto suele errar el problema real. Una solución prematura, ofrecida antes de entender de veras la situación de la persona, rompe la confianza y a menudo responde una pregunta nunca hecha. Escuchar primero permite que su ayuda se ajuste al problema tal como es."
+   }
+  }
+ ]
+};

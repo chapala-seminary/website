@@ -1,26 +1,833 @@
-/* CTSRomans - unit 3: per-unit configuration and content. */
-
-const UNIT = 3;
-
-const NEXT_URL = "CTSRomansUnit4.html";
-
-const PREV_URL = "CTSRomansUnit2.html";
-
-const IS_LAST_UNIT = false;
-
-const SHOW_REGISTRATION_CARD = false;
-
-const mcQuestions = [{"text": "1. The phrase 'But now' in Romans 3:21 marks what?", "options": ["C. The end of the letter", "B. A change in audience from Jews to Gentiles", "D. A request for prayer", "A. The great pivot from indictment to gospel — God's righteousness revealed apart from the law"], "correct": 3, "correctFeedback": "Correct. 'But now' is the great pivot of Romans — after three chapters of indictment, the gospel breaks through.", "incorrectFeedback": "Romans 3:21 is the great pivot. After every mouth is stopped and the world declared guilty, Paul announces a righteousness from God revealed apart from the law.", "textEs": "1. La frase 'Pero ahora' en Romanos 3:21 marca ¿qué?", "optionsEs": ["C. El final de la carta", "B. Un cambio de audiencia, de judíos a gentiles", "D. Una petición de oración", "A. El gran giro de la acusación al evangelio — la justicia de Dios revelada aparte de la ley"], "correctFeedbackEs": "Correcto. 'Pero ahora' es el gran giro de Romanos — tras tres capítulos de acusación, el evangelio irrumpe.", "incorrectFeedbackEs": "Romanos 3:21 es el gran giro. Después de que toda boca se cierra y el mundo es declarado culpable, Pablo anuncia una justicia de Dios revelada aparte de la ley."}, {"text": "2. According to Romans 3:21-22, the righteousness of God comes how?", "options": ["B. Through faith in Jesus Christ, to all who believe", "C. Through circumcision", "D. Through synagogue attendance", "A. Through keeping the law of Moses"], "correct": 0, "correctFeedback": "Correct. 'Through faith in Jesus Christ, to all and on all who believe.' Apart from law, on the same terms for everyone.", "incorrectFeedback": "Romans 3:22 — the righteousness of God is through faith in Jesus Christ, to all who believe. The same gospel reaches Jew and Gentile alike.", "textEs": "2. Según Romanos 3:21-22, ¿cómo viene la justicia de Dios?", "optionsEs": ["B. Por la fe en Jesucristo, para todos los que creen", "C. Por la circuncisión", "D. Por asistir a la sinagoga", "A. Por guardar la ley de Moisés"], "correctFeedbackEs": "Correcto. 'Por la fe en Jesucristo, para todos y sobre todos los que creen.' Aparte de la ley, en los mismos términos para todos.", "incorrectFeedbackEs": "Romanos 3:22 — la justicia de Dios es por la fe en Jesucristo, para todos los que creen. El mismo evangelio alcanza por igual al judío y al gentil."}, {"text": "3. Which verse declares, 'For all have sinned and fall short of the glory of God'?", "options": ["B. Romans 2:6", "C. Romans 3:23", "A. Romans 1:18", "D. Romans 4:25"], "correct": 1, "correctFeedback": "Correct. Romans 3:23 — the summary verdict of the courtroom, immediately followed by the rescue in 3:24.", "incorrectFeedback": "Romans 3:23 — 'For all have sinned and fall short of the glory of God.' This is the verdict; verses 24-26 announce the rescue.", "textEs": "3. ¿Cuál versículo declara: 'Por cuanto todos pecaron, y están destituidos de la gloria de Dios'?", "optionsEs": ["B. Romanos 2:6", "C. Romanos 3:23", "A. Romanos 1:18", "D. Romanos 4:25"], "correctFeedbackEs": "Correcto. Romanos 3:23 — el veredicto resumido del tribunal, seguido de inmediato por el rescate en 3:24.", "incorrectFeedbackEs": "Romanos 3:23 — 'Por cuanto todos pecaron, y están destituidos de la gloria de Dios.' Este es el veredicto; los versículos 24-26 anuncian el rescate."}, {"text": "4. 'Justified' (dikaioō) is primarily what kind of term?", "options": ["C. Agricultural", "B. Liturgical", "D. Legal / forensic — a courtroom verdict", "A. Emotional"], "correct": 2, "correctFeedback": "Correct. Justification is a legal verdict. God declares the believer righteous; it is not a moral process of improvement.", "incorrectFeedback": "Justification is legal/forensic. God 'declares righteous' — a verdict, not a process. The believing sinner stands acquitted in God's courtroom.", "textEs": "4. 'Justificado' (dikaioō) es principalmente ¿qué tipo de término?", "optionsEs": ["C. Agrícola", "B. Litúrgico", "D. Legal / forense — un veredicto del tribunal", "A. Emocional"], "correctFeedbackEs": "Correcto. La justificación es un veredicto legal. Dios declara justo al creyente; no es un proceso moral de mejoramiento.", "incorrectFeedbackEs": "La justificación es legal/forense. Dios 'declara justo' — un veredicto, no un proceso. El pecador que cree queda absuelto en el tribunal de Dios."}, {"text": "5. In Romans 3:25, 'propitiation' (Greek hilasterion) refers to:", "options": ["A. The mercy seat — the place where God's wrath is satisfied by atoning blood", "C. The bronze laver", "B. The altar of incense", "D. The lampstand"], "correct": 0, "correctFeedback": "Correct. Hilasterion = the mercy seat. Christ Himself is the place where God's wrath against sin is satisfied.", "incorrectFeedback": "Hilasterion refers to the mercy seat of the Ark, where atoning blood was sprinkled. Paul says God set Christ forth as the place where wrath is satisfied.", "textEs": "5. En Romanos 3:25, 'propiciación' (en griego hilasterion) se refiere a:", "optionsEs": ["A. El propiciatorio — el lugar donde la ira de Dios es satisfecha por la sangre expiatoria", "C. La fuente de bronce", "B. El altar del incienso", "D. El candelero"], "correctFeedbackEs": "Correcto. Hilasterion = el propiciatorio. Cristo mismo es el lugar donde la ira de Dios contra el pecado es satisfecha.", "incorrectFeedbackEs": "Hilasterion se refiere al propiciatorio del Arca, donde se rociaba la sangre expiatoria. Pablo dice que Dios puso a Cristo como el lugar donde la ira es satisfecha."}, {"text": "6. Justification means:", "options": ["D. To be ordained to ministry", "A. To be morally improved over time", "C. To be physically healed", "B. To be declared righteous — pronounced not guilty in God's courtroom"], "correct": 3, "correctFeedback": "Correct. Justification is the verdict of acquittal, not the process of moral improvement (which is sanctification).", "incorrectFeedback": "Justification = declared righteous, a courtroom verdict. It is distinct from sanctification, which is the ongoing process of moral transformation that follows.", "textEs": "6. Justificación significa:", "optionsEs": ["D. Ser ordenado al ministerio", "A. Ser mejorado moralmente con el tiempo", "C. Ser sanado físicamente", "B. Ser declarado justo — pronunciado no culpable en el tribunal de Dios"], "correctFeedbackEs": "Correcto. La justificación es el veredicto de absolución, no el proceso de mejoramiento moral (que es la santificación).", "incorrectFeedbackEs": "Justificación = declarado justo, un veredicto del tribunal. Se distingue de la santificación, que es el proceso continuo de transformación moral que sigue."}, {"text": "7. According to Romans 3:24, justification is by what?", "options": ["B. The works of the law", "C. Grace — through the redemption that is in Christ Jesus", "A. Personal effort", "D. Inherited covenant status"], "correct": 1, "correctFeedback": "Correct. 'Justified freely by His grace through the redemption that is in Christ Jesus.' Unearned, by gift, through Christ's purchase.", "incorrectFeedback": "Romans 3:24 — justified freely by His grace through the redemption that is in Christ Jesus. Grace is the source; redemption is the means.", "textEs": "7. Según Romanos 3:24, la justificación es ¿por qué?", "optionsEs": ["B. Las obras de la ley", "C. La gracia — mediante la redención que es en Cristo Jesús", "A. El esfuerzo personal", "D. El estatus de pacto heredado"], "correctFeedbackEs": "Correcto. 'Siendo justificados gratuitamente por su gracia, mediante la redención que es en Cristo Jesús.' No ganada, por don, mediante la compra de Cristo.", "incorrectFeedbackEs": "Romanos 3:24 — justificados gratuitamente por su gracia, mediante la redención que es en Cristo Jesús. La gracia es la fuente; la redención es el medio."}, {"text": "8. Through what does God demonstrate His righteousness while justifying sinners (Rom 3:25-26)?", "options": ["C. Through human conscience", "A. Through Israel's history", "B. Through giving more law", "D. Through the cross of Christ, who absorbs God's wrath as substitute"], "correct": 3, "correctFeedback": "Correct. The cross demonstrates God's righteousness — He remains just (justice satisfied) and the justifier (declaring the believer righteous).", "incorrectFeedback": "The cross is where God's righteousness is demonstrated. He is 'just and the justifier' — His justice fully satisfied in Christ, His mercy fully extended to the believer.", "textEs": "8. ¿Mediante qué demuestra Dios su justicia al justificar a los pecadores (Ro 3:25-26)?", "optionsEs": ["C. Mediante la conciencia humana", "A. Mediante la historia de Israel", "B. Mediante dar más ley", "D. Mediante la cruz de Cristo, quien absorbe la ira de Dios como sustituto"], "correctFeedbackEs": "Correcto. La cruz demuestra la justicia de Dios — Él permanece justo (la justicia satisfecha) y el que justifica (declarando justo al creyente).", "incorrectFeedbackEs": "La cruz es donde se demuestra la justicia de Dios. Él es 'el justo, y el que justifica' — su justicia plenamente satisfecha en Cristo, su misericordia plenamente extendida al creyente."}, {"text": "9. According to Romans 3:28, a person is justified by what?", "options": ["D. Sincerity in any religion", "B. Faith plus the deeds of the law", "A. Faith apart from the deeds of the law", "C. The deeds of the law alone"], "correct": 2, "correctFeedback": "Correct. 'A man is justified by faith apart from the deeds of the law.' This is the verse that anchored the Reformation.", "incorrectFeedback": "Romans 3:28 — justified by faith apart from the deeds of the law. Luther added 'alone' in his German translation to make the meaning unmistakable.", "textEs": "9. Según Romanos 3:28, una persona es justificada ¿por qué?", "optionsEs": ["D. Por la sinceridad en cualquier religión", "B. Por la fe más las obras de la ley", "A. Por la fe, aparte de las obras de la ley", "C. Por las obras de la ley solamente"], "correctFeedbackEs": "Correcto. 'El hombre es justificado por fe sin las obras de la ley.' Este es el versículo que ancló la Reforma.", "incorrectFeedbackEs": "Romanos 3:28 — justificado por fe sin las obras de la ley. Lutero añadió 'sola' en su traducción alemana para hacer el sentido inconfundible."}, {"text": "10. In Romans 4:3, what Old Testament verse does Paul cite as proof?", "options": ["B. Genesis 15:6 — Abraham believed God, and it was accounted to him for righteousness", "A. Deuteronomy 6:5", "C. Exodus 20:1", "D. Leviticus 19:18"], "correct": 0, "correctFeedback": "Correct. Genesis 15:6 is the bedrock of Paul's argument: Abraham was justified by faith long before circumcision or the law.", "incorrectFeedback": "Genesis 15:6 — 'Abraham believed God, and it was accounted to him for righteousness.' Paul builds his entire chapter 4 argument on this verse.", "textEs": "10. En Romanos 4:3, ¿qué versículo del Antiguo Testamento cita Pablo como prueba?", "optionsEs": ["B. Génesis 15:6 — Abraham creyó a Dios, y le fue contado por justicia", "A. Deuteronomio 6:5", "C. Éxodo 20:1", "D. Levítico 19:18"], "correctFeedbackEs": "Correcto. Génesis 15:6 es la base del argumento de Pablo: Abraham fue justificado por fe mucho antes de la circuncisión o de la ley.", "incorrectFeedbackEs": "Génesis 15:6 — 'Abraham creyó a Dios, y le fue contado por justicia.' Pablo construye todo su argumento del capítulo 4 sobre este versículo."}, {"text": "11. When in Abraham's life was righteousness credited to him?", "options": ["B. After he was circumcised", "C. While he was still uncircumcised — before any covenant sign", "A. After he offered Isaac", "D. After Moses received the law"], "correct": 1, "correctFeedback": "Correct. Genesis 15 (faith credited) came years before Genesis 17 (circumcision). Justification by faith preceded the sign.", "incorrectFeedback": "Abraham was justified by faith in Genesis 15 while still uncircumcised. Genesis 17 — the covenant sign — came years later as confirmation, not condition.", "textEs": "11. ¿En qué momento de la vida de Abraham le fue acreditada la justicia?", "optionsEs": ["B. Después de ser circuncidado", "C. Cuando aún estaba incircunciso — antes de cualquier señal del pacto", "A. Después de ofrecer a Isaac", "D. Después de que Moisés recibió la ley"], "correctFeedbackEs": "Correcto. Génesis 15 (la fe acreditada) ocurrió años antes de Génesis 17 (la circuncisión). La justificación por fe precedió a la señal.", "incorrectFeedbackEs": "Abraham fue justificado por fe en Génesis 15 cuando aún estaba incircunciso. Génesis 17 — la señal del pacto — vino años después como confirmación, no como condición."}, {"text": "12. Paul says Abraham is the father of whom?", "options": ["A. Only ethnic Jews", "C. Only those who keep the law of Moses", "D. All who believe — both Jewish and Gentile descendants by faith", "B. Only those circumcised in the flesh"], "correct": 2, "correctFeedback": "Correct. Abraham is the father of all who walk in the steps of his faith — Jew or Gentile, circumcised or not.", "incorrectFeedback": "Romans 4:11-12 — Abraham is the father of all who believe, both circumcised and uncircumcised. The covenant always included faith-children from every nation.", "textEs": "12. Pablo dice que Abraham es padre ¿de quiénes?", "optionsEs": ["A. Solo de los judíos étnicos", "C. Solo de los que guardan la ley de Moisés", "D. De todos los que creen — descendientes judíos y gentiles por la fe", "B. Solo de los circuncidados en la carne"], "correctFeedbackEs": "Correcto. Abraham es padre de todos los que andan en los pasos de su fe — judío o gentil, circuncidado o no.", "incorrectFeedbackEs": "Romanos 4:11-12 — Abraham es padre de todos los que creen, circuncidados e incircuncisos. El pacto siempre incluyó hijos de fe de toda nación."}, {"text": "13. Faith was credited (logizomai) to Abraham as what?", "options": ["A. Righteousness", "C. A debt", "D. A token offering", "B. Wages owed"], "correct": 0, "correctFeedback": "Correct. Genesis 15:6 — 'it was accounted to him for righteousness.' Faith credited as righteousness.", "incorrectFeedback": "Faith was credited as righteousness. The bookkeeping verb logizomai means 'to credit to an account' — God credits righteousness to the believer's account.", "textEs": "13. La fe le fue contada (logizomai) a Abraham como ¿qué?", "optionsEs": ["A. Justicia", "C. Una deuda", "D. Una ofrenda simbólica", "B. Salario debido"], "correctFeedbackEs": "Correcto. Génesis 15:6 — 'le fue contado por justicia.' La fe contada como justicia.", "incorrectFeedbackEs": "La fe fue contada como justicia. El verbo contable logizomai significa 'acreditar a una cuenta' — Dios acredita justicia a la cuenta del creyente."}, {"text": "14. According to Romans 4:5, God justifies whom?", "options": ["D. Only law-keeping Jews", "A. The morally upright who try their best", "C. Those who first prove themselves worthy", "B. The ungodly who believes in Him"], "correct": 3, "correctFeedback": "Correct. 'Him who justifies the ungodly.' God declares righteous those who deserve the opposite — through faith.", "incorrectFeedback": "Romans 4:5 — God 'justifies the ungodly.' This is the most scandalous and beautiful claim in the chapter. He saves those who deserve the opposite.", "textEs": "14. Según Romanos 4:5, ¿a quién justifica Dios?", "optionsEs": ["D. Solo a los judíos que guardan la ley", "A. Al moralmente recto que hace su mejor esfuerzo", "C. A los que primero se demuestran dignos", "B. Al impío que cree en Él"], "correctFeedbackEs": "Correcto. 'Al que justifica al impío.' Dios declara justos a los que merecen lo contrario — por medio de la fe.", "incorrectFeedbackEs": "Romanos 4:5 — Dios 'justifica al impío.' Esta es la afirmación más escandalosa y hermosa del capítulo. Él salva a los que merecen lo contrario."}, {"text": "15. Does faith establish or nullify the law (Rom 3:31)?", "options": ["D. It makes the law optional", "C. It establishes the law — Christ fulfilled it perfectly and bore its curse", "A. It nullifies the law completely", "B. It replaces the law with feelings"], "correct": 1, "correctFeedback": "Correct. Faith establishes the law. Christ fulfilled it on our behalf and bore its full curse on the cross.", "incorrectFeedback": "Romans 3:31 — 'we establish the law.' Christ perfectly kept the law for us and bore its curse. The law has been more fully honored in the gospel than by our incomplete obedience.", "textEs": "15. ¿La fe confirma o anula la ley (Ro 3:31)?", "optionsEs": ["D. La hace opcional", "C. La confirma — Cristo la cumplió perfectamente y llevó su maldición", "A. La anula por completo", "B. La reemplaza con sentimientos"], "correctFeedbackEs": "Correcto. La fe confirma la ley. Cristo la cumplió en nuestro lugar y llevó toda su maldición en la cruz.", "incorrectFeedbackEs": "Romanos 3:31 — 'confirmamos la ley.' Cristo guardó perfectamente la ley por nosotros y llevó su maldición. La ley ha sido más plenamente honrada en el evangelio que por nuestra obediencia incompleta."}, {"text": "16. According to Romans 4:25, why was Jesus raised from the dead?", "options": ["D. For our justification — vindicating that the penalty for our sins was paid in full", "A. To prove He was a prophet", "B. To inspire imitation", "C. To complete His earthly teaching"], "correct": 0, "correctFeedback": "Correct. 'Raised because of our justification.' The empty tomb is God's 'amen' to the cross.", "incorrectFeedback": "Romans 4:25 — He was 'delivered up because of our offenses, and was raised because of our justification.' The resurrection is the Father's vindication of the payment.", "textEs": "16. Según Romanos 4:25, ¿por qué fue resucitado Jesús de los muertos?", "optionsEs": ["D. Para nuestra justificación — confirmando que la pena por nuestros pecados fue pagada por completo", "A. Para probar que era profeta", "B. Para inspirar imitación", "C. Para completar su enseñanza terrenal"], "correctFeedbackEs": "Correcto. 'Resucitado para nuestra justificación.' La tumba vacía es el 'amén' de Dios a la cruz.", "incorrectFeedbackEs": "Romanos 4:25 — fue 'entregado por nuestras transgresiones, y resucitado para nuestra justificación.' La resurrección es la confirmación del pago por parte del Padre."}, {"text": "17. Abraham believed God 'against hope' in what specific situation?", "options": ["C. He had no flocks or herds", "B. He was being persecuted by Pharaoh", "A. He was near a hundred years old and Sarah's womb had long been barren", "D. He had no land"], "correct": 2, "correctFeedback": "Correct. Romans 4:18-19 — nearly a hundred years old, Sarah's body 'dead,' yet Abraham did not waver in believing God could perform what He had promised.", "incorrectFeedback": "Abraham believed against hope when his body and Sarah's were physically incapable of producing a child. He was strengthened in faith, fully convinced God could do what He promised.", "textEs": "17. Abraham creyó a Dios 'contra esperanza' ¿en qué situación específica?", "optionsEs": ["C. No tenía rebaños ni ganados", "B. Era perseguido por Faraón", "A. Tenía casi cien años y el vientre de Sara hacía mucho que era estéril", "D. No tenía tierra"], "correctFeedbackEs": "Correcto. Romanos 4:18-19 — con casi cien años, el cuerpo de Sara 'muerto,' y sin embargo Abraham no vaciló en creer que Dios podía cumplir lo que había prometido.", "incorrectFeedbackEs": "Abraham creyó contra esperanza cuando su cuerpo y el de Sara eran físicamente incapaces de tener un hijo. Fue fortalecido en la fe, plenamente convencido de que Dios podía hacer lo que prometió."}, {"text": "18. Imputation in Paul's argument means:", "options": ["A. Becoming ritually pure", "C. Earning a wage by work", "D. Being morally perfect", "B. Crediting something to a person's account that was not originally theirs"], "correct": 3, "correctFeedback": "Correct. Imputation = credited to account. Righteousness is reckoned to the believer's account even though it originated in Christ.", "incorrectFeedback": "Imputation is a bookkeeping image — God credits Christ's righteousness to the believer's account, even though it did not originate there. Faith receives what works could never produce.", "textEs": "18. La imputación, en el argumento de Pablo, significa:", "optionsEs": ["A. Llegar a ser ritualmente puro", "C. Ganar un salario por el trabajo", "D. Ser moralmente perfecto", "B. Acreditar a la cuenta de una persona algo que no era originalmente suyo"], "correctFeedbackEs": "Correcto. Imputación = acreditado a una cuenta. La justicia se cuenta a la cuenta del creyente aunque se originó en Cristo.", "incorrectFeedbackEs": "La imputación es una imagen contable — Dios acredita la justicia de Cristo a la cuenta del creyente, aunque no se originó allí. La fe recibe lo que las obras nunca podrían producir."}, {"text": "19. Why is boasting excluded from salvation (Rom 3:27)?", "options": ["D. Because boasting is a cultural taboo", "B. Because boasting offends God's pride", "C. Because justification is by the law of faith, not works — the rescued have nothing to boast about", "A. Because no one is ever saved"], "correct": 2, "correctFeedback": "Correct. Faith looks outside itself for rescue. The person pulled from the ocean does not boast in his swimming.", "incorrectFeedback": "Boasting is excluded by the law of faith. Faith excludes boasting by definition — it looks outside itself to Christ for rescue, so no one can claim credit.", "textEs": "19. ¿Por qué queda excluida la jactancia de la salvación (Ro 3:27)?", "optionsEs": ["D. Porque la jactancia es un tabú cultural", "B. Porque la jactancia ofende el orgullo de Dios", "C. Porque la justificación es por la ley de la fe, no por las obras — los rescatados no tienen de qué jactarse", "A. Porque nadie es salvo jamás"], "correctFeedbackEs": "Correcto. La fe mira fuera de sí misma en busca del rescate. El que es sacado del océano no se jacta de su nado.", "incorrectFeedbackEs": "La jactancia queda excluida por la ley de la fe. La fe excluye la jactancia por definición — mira fuera de sí misma, a Cristo, en busca del rescate, de modo que nadie puede atribuirse el mérito."}, {"text": "20. The great pivot of Romans is found at which verse?", "options": ["B. Romans 5:1", "D. Romans 3:21 — 'But now…'", "A. Romans 1:1", "C. Romans 8:1"], "correct": 1, "correctFeedback": "Correct. Romans 3:21 is the great hinge — the moment indictment turns to gospel.", "incorrectFeedback": "Romans 3:21 — 'But now apart from the law the righteousness of God has been revealed.' This is the hinge on which the entire letter turns.", "textEs": "20. ¿En cuál versículo se encuentra el gran giro de Romanos?", "optionsEs": ["B. Romanos 5:1", "D. Romanos 3:21 — 'Pero ahora…'", "A. Romanos 1:1", "C. Romanos 8:1"], "correctFeedbackEs": "Correcto. Romanos 3:21 es la gran bisagra — el momento en que la acusación se convierte en evangelio.", "incorrectFeedbackEs": "Romanos 3:21 — 'Pero ahora, aparte de la ley, se ha manifestado la justicia de Dios.' Esta es la bisagra sobre la que gira toda la carta."}];
-
-const saQuestions = [
-    { id: `sa_u${UNIT}_1`, textEn: "Why is Romans 3:21 considered the great pivot of the entire book?", textEs: "¿Por qué se considera Romanos 3:21 el gran giro de todo el libro?", kw_en: ["now", "righteous", "reveal", "apart", "law", "gospel", "faith", "mouth"], kw_es: ["ahora", "justicia", "revel", "aparte", "ley", "evangel", "fe", "boca"], explanationEn: "After three chapters of indictment where every mouth was stopped, Romans 3:21 announces 'But now…' — God has revealed a righteousness apart from the law, through faith in Jesus Christ. This is the hinge on which the entire letter turns from bad news to good news.", explanationEs: "Después de tres capítulos de acusación donde toda boca fue tapada, Romanos 3:21 anuncia 'Pero ahora…' — Dios ha revelado una justicia aparte de la ley, por medio de la fe en Jesucristo. Esta es la bisagra sobre la cual toda la carta gira de malas noticias a buenas noticias." },
-    { id: `sa_u${UNIT}_2`, textEn: "Explain the meaning of justification (dikaioō) as Paul uses it in Romans 3-4.", textEs: "Explique el significado de justificación (dikaioō) como Pablo lo usa en Romanos 3-4.", kw_en: ["declar", "righteous", "verdict", "guilt", "court", "process", "imput", "forens"], kw_es: ["declar", "justo", "veredic", "culpab", "tribunal", "proceso", "imput", "forens"], explanationEn: "Justification is a legal/forensic term meaning 'declared righteous.' It is a verdict pronounced in God's courtroom, not a process of moral improvement. When God justifies a believing sinner, He declares the verdict 'not guilty' and credits Christ's righteousness to the believer's account.", explanationEs: "Justificación es un término legal/forense que significa 'declarado justo.' Es un veredicto pronunciado en el tribunal de Dios, no un proceso de mejora moral. Cuando Dios justifica a un pecador creyente, declara el veredicto 'no culpable' y acredita la justicia de Cristo a la cuenta del creyente." },
-    { id: `sa_u${UNIT}_3`, textEn: "Explain propitiation (hilasterion) in Romans 3:25 and its connection to the Old Testament.", textEs: "Explique la propiciación (hilasterion) en Romanos 3:25 y su conexión con el Antiguo Testamento.", kw_en: ["mercy", "seat", "ark", "atone", "blood", "wrath", "substit", "propit"], kw_es: ["propici", "arca", "expiaci", "sangre", "ira", "sustit", "aplac", "trono"], explanationEn: "Hilasterion refers to the mercy seat — the gold cover of the Ark of the Covenant where atoning blood was sprinkled on the Day of Atonement. Paul says God set Christ forth as the mercy seat: Christ is the place where God's wrath against sin is satisfied by His own blood. The cross is where justice and mercy meet.", explanationEs: "Hilasterion se refiere al propiciatorio — la cubierta de oro del Arca del Pacto donde la sangre expiatoria era rociada en el Día de la Expiación. Pablo dice que Dios puso a Cristo como el propiciatorio: Cristo es el lugar donde la ira de Dios contra el pecado es satisfecha por Su propia sangre. La cruz es donde la justicia y la misericordia se encuentran." },
-    { id: `sa_u${UNIT}_4`, textEn: "How do grace, redemption, and faith work together in Romans 3:24-25?", textEs: "¿Cómo trabajan juntas la gracia, la redención y la fe en Romanos 3:24-25?", kw_en: ["grace", "redempt", "faith", "free", "unearn", "purchas", "gift", "instrum"], kw_es: ["gracia", "redenci", "fe", "gratu", "gan", "compr", "don", "instrum"], explanationEn: "Grace is the source — God's unearned favor. Redemption is the means — Christ purchased us out of slavery to sin by His blood. Faith is the instrument by which the believer receives the gift. Justification is freely (dorean) given — no merit, no contribution from us; it is a one-directional transaction from God.", explanationEs: "La gracia es la fuente — el favor inmerecido de Dios. La redención es el medio — Cristo nos compró de la esclavitud al pecado por Su sangre. La fe es el instrumento por el cual el creyente recibe el regalo. La justificación se da gratuitamente (dorean) — sin mérito, sin contribución de nuestra parte; es una transacción unidireccional de Dios." },
-    { id: `sa_u${UNIT}_5`, textEn: "Why does Paul use Abraham as the proof case for justification by faith in Romans 4?", textEs: "¿Por qué usa Pablo a Abraham como el caso de prueba para la justificación por fe en Romanos 4?", kw_en: ["father", "Jewish", "law", "circumcis", "Genesis", "covenant", "faith", "Abraham"], kw_es: ["padre", "judí", "ley", "circuncis", "Génesis", "pacto", "fe", "Abraham"], explanationEn: "Abraham was the most authoritative figure in Jewish identity — recipient of the covenant, father of the nation, Exhibit A of righteousness. By proving Abraham himself was justified by faith long before circumcision or the law of Moses, Paul shows that justification has always been by faith and that no Jew can object to the same terms for Gentiles.", explanationEs: "Abraham era la figura más autoritativa de la identidad judía — receptor del pacto, padre de la nación, prueba A de la justicia. Al demostrar que el mismo Abraham fue justificado por fe mucho antes de la circuncisión o la ley de Moisés, Pablo muestra que la justificación siempre ha sido por fe y que ningún judío puede objetar a los mismos términos para los gentiles." },
-    { id: `sa_u${UNIT}_6`, textEn: "What is the significance of Genesis 15:6 in Paul's argument?", textEs: "¿Cuál es la significancia de Génesis 15:6 en el argumento de Pablo?", kw_en: ["believ", "count", "righteous", "logizo", "credit", "circumcis", "law", "faith"], kw_es: ["crey", "cont", "justicia", "logizo", "acredit", "circuncis", "ley", "fe"], explanationEn: "Genesis 15:6 — 'Abraham believed God, and it was accounted to him for righteousness' — is the foundation Paul builds on. The Greek logizomai means 'to credit to an account.' God did not find righteousness in Abraham; He credited righteousness to a man who had none. This proves justification has always been by faith, not by works of the law.", explanationEs: "Génesis 15:6 — 'Y creyó Abraham a Dios, y le fue contado por justicia' — es el fundamento sobre el cual Pablo construye. El griego logizomai significa 'acreditar a una cuenta.' Dios no encontró justicia en Abraham; acreditó justicia a un hombre que no tenía ninguna. Esto demuestra que la justificación siempre ha sido por fe, no por obras de la ley." },
-    { id: `sa_u${UNIT}_7`, textEn: "How does Paul use the timing of Abraham's circumcision to argue against works-righteousness?", textEs: "¿Cómo usa Pablo la cronología de la circuncisión de Abraham para argumentar contra la justicia por obras?", kw_en: ["Genesis", "faith", "sign", "circumcis", "confirm", "condit", "father", "believ"], kw_es: ["Génesis", "fe", "señal", "circuncis", "confirm", "condici", "padre", "cree"], explanationEn: "Genesis 15 records Abraham being credited with righteousness by faith. Genesis 17 records the institution of circumcision — years later. Abraham was therefore justified while still uncircumcised. The covenant sign came afterward as confirmation of an existing righteousness, not as the condition for receiving it. This makes Abraham the father of all who believe — Jew or Gentile, circumcised or not.", explanationEs: "Génesis 15 registra a Abraham siendo acreditado con justicia por fe. Génesis 17 registra la institución de la circuncisión — años después. Por lo tanto, Abraham fue justificado mientras aún estaba incircunciso. La señal del pacto vino después como confirmación de una justicia existente, no como condición para recibirla. Esto hace a Abraham el padre de todos los que creen — judío o gentil, circunciso o no." },
-    { id: `sa_u${UNIT}_8`, textEn: "What does it mean that righteousness is 'credited' or 'imputed' to the believer?", textEs: "¿Qué significa que la justicia es 'acreditada' o 'imputada' al creyente?", kw_en: ["imput", "logizo", "credit", "account", "Christ", "alien", "faith", "righteous"], kw_es: ["imput", "logizo", "acredit", "cuenta", "Cristo", "ajena", "fe", "justicia"], explanationEn: "Imputation is a bookkeeping image — God credits something to a person's account that was not originally theirs. The righteousness credited to the believer is not produced by the believer; it comes from Christ. Luther called it 'alien righteousness' because it originates outside us. Faith is the receiving instrument, not the productive source.", explanationEs: "Imputación es una imagen de contabilidad — Dios acredita a la cuenta de una persona algo que no era originalmente suyo. La justicia acreditada al creyente no es producida por el creyente; viene de Cristo. Lutero la llamó 'justicia ajena' porque se origina fuera de nosotros. La fe es el instrumento receptor, no la fuente productora." },
-    { id: `sa_u${UNIT}_9`, textEn: "How does Romans 4:25 summarize the gospel in a single verse?", textEs: "¿Cómo resume Romanos 4:25 el evangelio en un solo versículo?", kw_en: ["deliver", "offens", "raised", "justif", "death", "resurrect", "tomb", "gospel"], kw_es: ["entreg", "delito", "resucit", "justif", "muerte", "resurrecci", "tumba", "evangel"], explanationEn: "Jesus was 'delivered up because of our offenses' — His death paid the penalty for our sins. He was 'raised because of our justification' — the resurrection is the Father's vindication that the payment was accepted. The cross and the empty tomb form one indivisible gospel. The Father's 'amen' to the cross was the empty tomb.", explanationEs: "Jesús fue 'entregado por causa de nuestras transgresiones' — Su muerte pagó la pena por nuestros pecados. Fue 'resucitado para nuestra justificación' — la resurrección es la vindicación del Padre de que el pago fue aceptado. La cruz y la tumba vacía forman un evangelio indivisible. El 'amén' del Padre a la cruz fue la tumba vacía." },
-    { id: `sa_u${UNIT}_10`, textEn: "Why is justification by faith alone the foundation of Christian assurance?", textEs: "¿Por qué es la justificación por fe sola el fundamento de la seguridad cristiana?", kw_en: ["rest", "Christ", "perform", "complete", "boast", "earn", "verdict", "secure"], kw_es: ["descans", "Cristo", "desempeñ", "complet", "jact", "gan", "veredic", "segur"], explanationEn: "If justification depended on our performance, assurance would rise and fall with our daily faithfulness. But because justification is by faith in Christ's completed work, the believer's standing rests on something already finished and unchangeable. The verdict has been declared. The payment has been accepted. Assurance comes not from looking inward at our performance but outward to Christ.", explanationEs: "Si la justificación dependiera de nuestro desempeño, la seguridad subiría y bajaría con nuestra fidelidad diaria. Pero porque la justificación es por fe en la obra completada de Cristo, la posición del creyente descansa sobre algo ya terminado e inmutable. El veredicto ha sido declarado. El pago ha sido aceptado. La seguridad viene no de mirar hacia adentro a nuestro desempeño sino hacia afuera a Cristo." }
-];
+/* CTSRomans — unit 3. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "romans",
+ "unit": 3,
+ "totalUnits": 10,
+ "filePrefix": "CTSRomans",
+ "prevHref": "CTSRomansUnit2.html",
+ "nextHref": "CTSRomansUnit4.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "The phrase 'But now' in Romans 3:21 marks what?",
+    "es": "La frase 'Pero ahora' en Romanos 3:21 marca ¿qué?"
+   },
+   "options": {
+    "en": [
+     "The end of the letter",
+     "A change in audience from Jews to Gentiles",
+     "A request for prayer",
+     "The great pivot from indictment to gospel — God's righteousness revealed apart from the law"
+    ],
+    "es": [
+     "El final de la carta",
+     "Un cambio de audiencia, de judíos a gentiles",
+     "Una petición de oración",
+     "El gran giro de la acusación al evangelio — la justicia de Dios revelada aparte de la ley"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. 'But now' is the great pivot of Romans — after three chapters of indictment, the gospel breaks through.",
+    "es": "Correcto. 'Pero ahora' es el gran giro de Romanos — tras tres capítulos de acusación, el evangelio irrumpe."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to Romans 3:21-22, the righteousness of God comes how?",
+    "es": "Según Romanos 3:21-22, ¿cómo viene la justicia de Dios?"
+   },
+   "options": {
+    "en": [
+     "Through faith in Jesus Christ, to all who believe",
+     "Through circumcision",
+     "Through synagogue attendance",
+     "Through keeping the law of Moses"
+    ],
+    "es": [
+     "Por la fe en Jesucristo, para todos los que creen",
+     "Por la circuncisión",
+     "Por asistir a la sinagoga",
+     "Por guardar la ley de Moisés"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. 'Through faith in Jesus Christ, to all and on all who believe.' Apart from law, on the same terms for everyone.",
+    "es": "Correcto. 'Por la fe en Jesucristo, para todos y sobre todos los que creen.' Aparte de la ley, en los mismos términos para todos."
+   }
+  },
+  {
+   "stem": {
+    "en": "Which verse declares, 'For all have sinned and fall short of the glory of God'?",
+    "es": "¿Cuál versículo declara: 'Por cuanto todos pecaron, y están destituidos de la gloria de Dios'?"
+   },
+   "options": {
+    "en": [
+     "Romans 2:6",
+     "Romans 3:23",
+     "Romans 1:18",
+     "Romans 4:25"
+    ],
+    "es": [
+     "Romanos 2:6",
+     "Romanos 3:23",
+     "Romanos 1:18",
+     "Romanos 4:25"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. Romans 3:23 — the summary verdict of the courtroom, immediately followed by the rescue in 3:24.",
+    "es": "Correcto. Romanos 3:23 — el veredicto resumido del tribunal, seguido de inmediato por el rescate en 3:24."
+   }
+  },
+  {
+   "stem": {
+    "en": "'Justified' (dikaioō) is primarily what kind of term?",
+    "es": "'Justificado' (dikaioō) es principalmente ¿qué tipo de término?"
+   },
+   "options": {
+    "en": [
+     "Agricultural",
+     "Liturgical",
+     "Legal / forensic — a courtroom verdict",
+     "Emotional"
+    ],
+    "es": [
+     "Agrícola",
+     "Litúrgico",
+     "Legal / forense — un veredicto del tribunal",
+     "Emocional"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. Justification is a legal verdict. God declares the believer righteous; it is not a moral process of improvement.",
+    "es": "Correcto. La justificación es un veredicto legal. Dios declara justo al creyente; no es un proceso moral de mejoramiento."
+   }
+  },
+  {
+   "stem": {
+    "en": "In Romans 3:25, 'propitiation' (Greek hilasterion) refers to:",
+    "es": "En Romanos 3:25, 'propiciación' (en griego hilasterion) se refiere a:"
+   },
+   "options": {
+    "en": [
+     "The mercy seat — the place where God's wrath is satisfied by atoning blood",
+     "The bronze laver",
+     "The altar of incense",
+     "The lampstand"
+    ],
+    "es": [
+     "El propiciatorio — el lugar donde la ira de Dios es satisfecha por la sangre expiatoria",
+     "La fuente de bronce",
+     "El altar del incienso",
+     "El candelero"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. Hilasterion = the mercy seat. Christ Himself is the place where God's wrath against sin is satisfied.",
+    "es": "Correcto. Hilasterion = el propiciatorio. Cristo mismo es el lugar donde la ira de Dios contra el pecado es satisfecha."
+   }
+  },
+  {
+   "stem": {
+    "en": "Justification means:",
+    "es": "Justificación significa:"
+   },
+   "options": {
+    "en": [
+     "To be ordained to ministry",
+     "To be morally improved over time",
+     "To be physically healed",
+     "To be declared righteous — pronounced not guilty in God's courtroom"
+    ],
+    "es": [
+     "Ser ordenado al ministerio",
+     "Ser mejorado moralmente con el tiempo",
+     "Ser sanado físicamente",
+     "Ser declarado justo — pronunciado no culpable en el tribunal de Dios"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. Justification is the verdict of acquittal, not the process of moral improvement (which is sanctification).",
+    "es": "Correcto. La justificación es el veredicto de absolución, no el proceso de mejoramiento moral (que es la santificación)."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to Romans 3:24, justification is by what?",
+    "es": "Según Romanos 3:24, la justificación es ¿por qué?"
+   },
+   "options": {
+    "en": [
+     "The works of the law",
+     "Grace — through the redemption that is in Christ Jesus",
+     "Personal effort",
+     "Inherited covenant status"
+    ],
+    "es": [
+     "Las obras de la ley",
+     "La gracia — mediante la redención que es en Cristo Jesús",
+     "El esfuerzo personal",
+     "El estatus de pacto heredado"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. 'Justified freely by His grace through the redemption that is in Christ Jesus.' Unearned, by gift, through Christ's purchase.",
+    "es": "Correcto. 'Siendo justificados gratuitamente por su gracia, mediante la redención que es en Cristo Jesús.' No ganada, por don, mediante la compra de Cristo."
+   }
+  },
+  {
+   "stem": {
+    "en": "Through what does God demonstrate His righteousness while justifying sinners (Rom 3:25-26)?",
+    "es": "¿Mediante qué demuestra Dios su justicia al justificar a los pecadores (Ro 3:25-26)?"
+   },
+   "options": {
+    "en": [
+     "Through human conscience",
+     "Through Israel's history",
+     "Through giving more law",
+     "Through the cross of Christ, who absorbs God's wrath as substitute"
+    ],
+    "es": [
+     "Mediante la conciencia humana",
+     "Mediante la historia de Israel",
+     "Mediante dar más ley",
+     "Mediante la cruz de Cristo, quien absorbe la ira de Dios como sustituto"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. The cross demonstrates God's righteousness — He remains just (justice satisfied) and the justifier (declaring the believer righteous).",
+    "es": "Correcto. La cruz demuestra la justicia de Dios — Él permanece justo (la justicia satisfecha) y el que justifica (declarando justo al creyente)."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to Romans 3:28, a person is justified by what?",
+    "es": "Según Romanos 3:28, una persona es justificada ¿por qué?"
+   },
+   "options": {
+    "en": [
+     "Sincerity in any religion",
+     "Faith plus the deeds of the law",
+     "Faith apart from the deeds of the law",
+     "The deeds of the law alone"
+    ],
+    "es": [
+     "Por la sinceridad en cualquier religión",
+     "Por la fe más las obras de la ley",
+     "Por la fe, aparte de las obras de la ley",
+     "Por las obras de la ley solamente"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. 'A man is justified by faith apart from the deeds of the law.' This is the verse that anchored the Reformation.",
+    "es": "Correcto. 'El hombre es justificado por fe sin las obras de la ley.' Este es el versículo que ancló la Reforma."
+   }
+  },
+  {
+   "stem": {
+    "en": "In Romans 4:3, what Old Testament verse does Paul cite as proof?",
+    "es": "En Romanos 4:3, ¿qué versículo del Antiguo Testamento cita Pablo como prueba?"
+   },
+   "options": {
+    "en": [
+     "Genesis 15:6 — Abraham believed God, and it was accounted to him for righteousness",
+     "Deuteronomy 6:5",
+     "Exodus 20:1",
+     "Leviticus 19:18"
+    ],
+    "es": [
+     "Génesis 15:6 — Abraham creyó a Dios, y le fue contado por justicia",
+     "Deuteronomio 6:5",
+     "Éxodo 20:1",
+     "Levítico 19:18"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. Genesis 15:6 is the bedrock of Paul's argument: Abraham was justified by faith long before circumcision or the law.",
+    "es": "Correcto. Génesis 15:6 es la base del argumento de Pablo: Abraham fue justificado por fe mucho antes de la circuncisión o de la ley."
+   }
+  },
+  {
+   "stem": {
+    "en": "When in Abraham's life was righteousness credited to him?",
+    "es": "¿En qué momento de la vida de Abraham le fue acreditada la justicia?"
+   },
+   "options": {
+    "en": [
+     "After he was circumcised",
+     "While he was still uncircumcised — before any covenant sign",
+     "After he offered Isaac",
+     "After Moses received the law"
+    ],
+    "es": [
+     "Después de ser circuncidado",
+     "Cuando aún estaba incircunciso — antes de cualquier señal del pacto",
+     "Después de ofrecer a Isaac",
+     "Después de que Moisés recibió la ley"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. Genesis 15 (faith credited) came years before Genesis 17 (circumcision). Justification by faith preceded the sign.",
+    "es": "Correcto. Génesis 15 (la fe acreditada) ocurrió años antes de Génesis 17 (la circuncisión). La justificación por fe precedió a la señal."
+   }
+  },
+  {
+   "stem": {
+    "en": "Paul says Abraham is the father of whom?",
+    "es": "Pablo dice que Abraham es padre ¿de quiénes?"
+   },
+   "options": {
+    "en": [
+     "Only ethnic Jews",
+     "Only those who keep the law of Moses",
+     "All who believe — both Jewish and Gentile descendants by faith",
+     "Only those circumcised in the flesh"
+    ],
+    "es": [
+     "Solo de los judíos étnicos",
+     "Solo de los que guardan la ley de Moisés",
+     "De todos los que creen — descendientes judíos y gentiles por la fe",
+     "Solo de los circuncidados en la carne"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. Abraham is the father of all who walk in the steps of his faith — Jew or Gentile, circumcised or not.",
+    "es": "Correcto. Abraham es padre de todos los que andan en los pasos de su fe — judío o gentil, circuncidado o no."
+   }
+  },
+  {
+   "stem": {
+    "en": "Faith was credited (logizomai) to Abraham as what?",
+    "es": "La fe le fue contada (logizomai) a Abraham como ¿qué?"
+   },
+   "options": {
+    "en": [
+     "Righteousness",
+     "A debt",
+     "A token offering",
+     "Wages owed"
+    ],
+    "es": [
+     "Justicia",
+     "Una deuda",
+     "Una ofrenda simbólica",
+     "Salario debido"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. Genesis 15:6 — 'it was accounted to him for righteousness.' Faith credited as righteousness.",
+    "es": "Correcto. Génesis 15:6 — 'le fue contado por justicia.' La fe contada como justicia."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to Romans 4:5, God justifies whom?",
+    "es": "Según Romanos 4:5, ¿a quién justifica Dios?"
+   },
+   "options": {
+    "en": [
+     "Only law-keeping Jews",
+     "The morally upright who try their best",
+     "Those who first prove themselves worthy",
+     "The ungodly who believes in Him"
+    ],
+    "es": [
+     "Solo a los judíos que guardan la ley",
+     "Al moralmente recto que hace su mejor esfuerzo",
+     "A los que primero se demuestran dignos",
+     "Al impío que cree en Él"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. 'Him who justifies the ungodly.' God declares righteous those who deserve the opposite — through faith.",
+    "es": "Correcto. 'Al que justifica al impío.' Dios declara justos a los que merecen lo contrario — por medio de la fe."
+   }
+  },
+  {
+   "stem": {
+    "en": "Does faith establish or nullify the law (Rom 3:31)?",
+    "es": "¿La fe confirma o anula la ley (Ro 3:31)?"
+   },
+   "options": {
+    "en": [
+     "It makes the law optional",
+     "It establishes the law — Christ fulfilled it perfectly and bore its curse",
+     "It nullifies the law completely",
+     "It replaces the law with feelings"
+    ],
+    "es": [
+     "La hace opcional",
+     "La confirma — Cristo la cumplió perfectamente y llevó su maldición",
+     "La anula por completo",
+     "La reemplaza con sentimientos"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. Faith establishes the law. Christ fulfilled it on our behalf and bore its full curse on the cross.",
+    "es": "Correcto. La fe confirma la ley. Cristo la cumplió en nuestro lugar y llevó toda su maldición en la cruz."
+   }
+  },
+  {
+   "stem": {
+    "en": "According to Romans 4:25, why was Jesus raised from the dead?",
+    "es": "Según Romanos 4:25, ¿por qué fue resucitado Jesús de los muertos?"
+   },
+   "options": {
+    "en": [
+     "For our justification — vindicating that the penalty for our sins was paid in full",
+     "To prove He was a prophet",
+     "To inspire imitation",
+     "To complete His earthly teaching"
+    ],
+    "es": [
+     "Para nuestra justificación — confirmando que la pena por nuestros pecados fue pagada por completo",
+     "Para probar que era profeta",
+     "Para inspirar imitación",
+     "Para completar su enseñanza terrenal"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Correct. 'Raised because of our justification.' The empty tomb is God's 'amen' to the cross.",
+    "es": "Correcto. 'Resucitado para nuestra justificación.' La tumba vacía es el 'amén' de Dios a la cruz."
+   }
+  },
+  {
+   "stem": {
+    "en": "Abraham believed God 'against hope' in what specific situation?",
+    "es": "Abraham creyó a Dios 'contra esperanza' ¿en qué situación específica?"
+   },
+   "options": {
+    "en": [
+     "He had no flocks or herds",
+     "He was being persecuted by Pharaoh",
+     "He was near a hundred years old and Sarah's womb had long been barren",
+     "He had no land"
+    ],
+    "es": [
+     "No tenía rebaños ni ganados",
+     "Era perseguido por Faraón",
+     "Tenía casi cien años y el vientre de Sara hacía mucho que era estéril",
+     "No tenía tierra"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. Romans 4:18-19 — nearly a hundred years old, Sarah's body 'dead,' yet Abraham did not waver in believing God could perform what He had promised.",
+    "es": "Correcto. Romanos 4:18-19 — con casi cien años, el cuerpo de Sara 'muerto,' y sin embargo Abraham no vaciló en creer que Dios podía cumplir lo que había prometido."
+   }
+  },
+  {
+   "stem": {
+    "en": "Imputation in Paul's argument means:",
+    "es": "La imputación, en el argumento de Pablo, significa:"
+   },
+   "options": {
+    "en": [
+     "Becoming ritually pure",
+     "Earning a wage by work",
+     "Being morally perfect",
+     "Crediting something to a person's account that was not originally theirs"
+    ],
+    "es": [
+     "Llegar a ser ritualmente puro",
+     "Ganar un salario por el trabajo",
+     "Ser moralmente perfecto",
+     "Acreditar a la cuenta de una persona algo que no era originalmente suyo"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Correct. Imputation = credited to account. Righteousness is reckoned to the believer's account even though it originated in Christ.",
+    "es": "Correcto. Imputación = acreditado a una cuenta. La justicia se cuenta a la cuenta del creyente aunque se originó en Cristo."
+   }
+  },
+  {
+   "stem": {
+    "en": "Why is boasting excluded from salvation (Rom 3:27)?",
+    "es": "¿Por qué queda excluida la jactancia de la salvación (Ro 3:27)?"
+   },
+   "options": {
+    "en": [
+     "Because boasting is a cultural taboo",
+     "Because boasting offends God's pride",
+     "Because justification is by the law of faith, not works — the rescued have nothing to boast about",
+     "Because no one is ever saved"
+    ],
+    "es": [
+     "Porque la jactancia es un tabú cultural",
+     "Porque la jactancia ofende el orgullo de Dios",
+     "Porque la justificación es por la ley de la fe, no por las obras — los rescatados no tienen de qué jactarse",
+     "Porque nadie es salvo jamás"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Correct. Faith looks outside itself for rescue. The person pulled from the ocean does not boast in his swimming.",
+    "es": "Correcto. La fe mira fuera de sí misma en busca del rescate. El que es sacado del océano no se jacta de su nado."
+   }
+  },
+  {
+   "stem": {
+    "en": "The great pivot of Romans is found at which verse?",
+    "es": "¿En cuál versículo se encuentra el gran giro de Romanos?"
+   },
+   "options": {
+    "en": [
+     "Romans 5:1",
+     "Romans 3:21 — 'But now…'",
+     "Romans 1:1",
+     "Romans 8:1"
+    ],
+    "es": [
+     "Romanos 5:1",
+     "Romanos 3:21 — 'Pero ahora…'",
+     "Romanos 1:1",
+     "Romanos 8:1"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Correct. Romans 3:21 is the great hinge — the moment indictment turns to gospel.",
+    "es": "Correcto. Romanos 3:21 es la gran bisagra — el momento en que la acusación se convierte en evangelio."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Why is Romans 3:21 considered the great pivot of the entire book?",
+    "es": "¿Por qué se considera Romanos 3:21 el gran giro de todo el libro?"
+   },
+   "keywords": {
+    "en": [
+     "now",
+     "righteous",
+     "reveal",
+     "apart",
+     "law",
+     "gospel",
+     "faith",
+     "mouth"
+    ],
+    "es": [
+     "ahora",
+     "justicia",
+     "revel",
+     "aparte",
+     "ley",
+     "evangel",
+     "fe",
+     "boca"
+    ]
+   },
+   "model": {
+    "en": "After three chapters of indictment where every mouth was stopped, Romans 3:21 announces 'But now…' — God has revealed a righteousness apart from the law, through faith in Jesus Christ. This is the hinge on which the entire letter turns from bad news to good news.",
+    "es": "Después de tres capítulos de acusación donde toda boca fue tapada, Romanos 3:21 anuncia 'Pero ahora…' — Dios ha revelado una justicia aparte de la ley, por medio de la fe en Jesucristo. Esta es la bisagra sobre la cual toda la carta gira de malas noticias a buenas noticias."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the meaning of justification (dikaioō) as Paul uses it in Romans 3-4.",
+    "es": "Explique el significado de justificación (dikaioō) como Pablo lo usa en Romanos 3-4."
+   },
+   "keywords": {
+    "en": [
+     "declar",
+     "righteous",
+     "verdict",
+     "guilt",
+     "court",
+     "process",
+     "imput",
+     "forens"
+    ],
+    "es": [
+     "declar",
+     "justo",
+     "veredic",
+     "culpab",
+     "tribunal",
+     "proceso",
+     "imput",
+     "forens"
+    ]
+   },
+   "model": {
+    "en": "Justification is a legal/forensic term meaning 'declared righteous.' It is a verdict pronounced in God's courtroom, not a process of moral improvement. When God justifies a believing sinner, He declares the verdict 'not guilty' and credits Christ's righteousness to the believer's account.",
+    "es": "Justificación es un término legal/forense que significa 'declarado justo.' Es un veredicto pronunciado en el tribunal de Dios, no un proceso de mejora moral. Cuando Dios justifica a un pecador creyente, declara el veredicto 'no culpable' y acredita la justicia de Cristo a la cuenta del creyente."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain propitiation (hilasterion) in Romans 3:25 and its connection to the Old Testament.",
+    "es": "Explique la propiciación (hilasterion) en Romanos 3:25 y su conexión con el Antiguo Testamento."
+   },
+   "keywords": {
+    "en": [
+     "mercy",
+     "seat",
+     "ark",
+     "atone",
+     "blood",
+     "wrath",
+     "substit",
+     "propit"
+    ],
+    "es": [
+     "propici",
+     "arca",
+     "expiaci",
+     "sangre",
+     "ira",
+     "sustit",
+     "aplac",
+     "trono"
+    ]
+   },
+   "model": {
+    "en": "Hilasterion refers to the mercy seat — the gold cover of the Ark of the Covenant where atoning blood was sprinkled on the Day of Atonement. Paul says God set Christ forth as the mercy seat: Christ is the place where God's wrath against sin is satisfied by His own blood. The cross is where justice and mercy meet.",
+    "es": "Hilasterion se refiere al propiciatorio — la cubierta de oro del Arca del Pacto donde la sangre expiatoria era rociada en el Día de la Expiación. Pablo dice que Dios puso a Cristo como el propiciatorio: Cristo es el lugar donde la ira de Dios contra el pecado es satisfecha por Su propia sangre. La cruz es donde la justicia y la misericordia se encuentran."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How do grace, redemption, and faith work together in Romans 3:24-25?",
+    "es": "¿Cómo trabajan juntas la gracia, la redención y la fe en Romanos 3:24-25?"
+   },
+   "keywords": {
+    "en": [
+     "grace",
+     "redempt",
+     "faith",
+     "free",
+     "unearn",
+     "purchas",
+     "gift",
+     "instrum"
+    ],
+    "es": [
+     "gracia",
+     "redenci",
+     "fe",
+     "gratu",
+     "gan",
+     "compr",
+     "don",
+     "instrum"
+    ]
+   },
+   "model": {
+    "en": "Grace is the source — God's unearned favor. Redemption is the means — Christ purchased us out of slavery to sin by His blood. Faith is the instrument by which the believer receives the gift. Justification is freely (dorean) given — no merit, no contribution from us; it is a one-directional transaction from God.",
+    "es": "La gracia es la fuente — el favor inmerecido de Dios. La redención es el medio — Cristo nos compró de la esclavitud al pecado por Su sangre. La fe es el instrumento por el cual el creyente recibe el regalo. La justificación se da gratuitamente (dorean) — sin mérito, sin contribución de nuestra parte; es una transacción unidireccional de Dios."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why does Paul use Abraham as the proof case for justification by faith in Romans 4?",
+    "es": "¿Por qué usa Pablo a Abraham como el caso de prueba para la justificación por fe en Romanos 4?"
+   },
+   "keywords": {
+    "en": [
+     "father",
+     "Jewish",
+     "law",
+     "circumcis",
+     "Genesis",
+     "covenant",
+     "faith",
+     "Abraham"
+    ],
+    "es": [
+     "padre",
+     "judí",
+     "ley",
+     "circuncis",
+     "Génesis",
+     "pacto",
+     "fe",
+     "Abraham"
+    ]
+   },
+   "model": {
+    "en": "Abraham was the most authoritative figure in Jewish identity — recipient of the covenant, father of the nation, Exhibit A of righteousness. By proving Abraham himself was justified by faith long before circumcision or the law of Moses, Paul shows that justification has always been by faith and that no Jew can object to the same terms for Gentiles.",
+    "es": "Abraham era la figura más autoritativa de la identidad judía — receptor del pacto, padre de la nación, prueba A de la justicia. Al demostrar que el mismo Abraham fue justificado por fe mucho antes de la circuncisión o la ley de Moisés, Pablo muestra que la justificación siempre ha sido por fe y que ningún judío puede objetar a los mismos términos para los gentiles."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What is the significance of Genesis 15:6 in Paul's argument?",
+    "es": "¿Cuál es la significancia de Génesis 15:6 en el argumento de Pablo?"
+   },
+   "keywords": {
+    "en": [
+     "believ",
+     "count",
+     "righteous",
+     "logizo",
+     "credit",
+     "circumcis",
+     "law",
+     "faith"
+    ],
+    "es": [
+     "crey",
+     "cont",
+     "justicia",
+     "logizo",
+     "acredit",
+     "circuncis",
+     "ley",
+     "fe"
+    ]
+   },
+   "model": {
+    "en": "Genesis 15:6 — 'Abraham believed God, and it was accounted to him for righteousness' — is the foundation Paul builds on. The Greek logizomai means 'to credit to an account.' God did not find righteousness in Abraham; He credited righteousness to a man who had none. This proves justification has always been by faith, not by works of the law.",
+    "es": "Génesis 15:6 — 'Y creyó Abraham a Dios, y le fue contado por justicia' — es el fundamento sobre el cual Pablo construye. El griego logizomai significa 'acreditar a una cuenta.' Dios no encontró justicia en Abraham; acreditó justicia a un hombre que no tenía ninguna. Esto demuestra que la justificación siempre ha sido por fe, no por obras de la ley."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How does Paul use the timing of Abraham's circumcision to argue against works-righteousness?",
+    "es": "¿Cómo usa Pablo la cronología de la circuncisión de Abraham para argumentar contra la justicia por obras?"
+   },
+   "keywords": {
+    "en": [
+     "Genesis",
+     "faith",
+     "sign",
+     "circumcis",
+     "confirm",
+     "condit",
+     "father",
+     "believ"
+    ],
+    "es": [
+     "Génesis",
+     "fe",
+     "señal",
+     "circuncis",
+     "confirm",
+     "condici",
+     "padre",
+     "cree"
+    ]
+   },
+   "model": {
+    "en": "Genesis 15 records Abraham being credited with righteousness by faith. Genesis 17 records the institution of circumcision — years later. Abraham was therefore justified while still uncircumcised. The covenant sign came afterward as confirmation of an existing righteousness, not as the condition for receiving it. This makes Abraham the father of all who believe — Jew or Gentile, circumcised or not.",
+    "es": "Génesis 15 registra a Abraham siendo acreditado con justicia por fe. Génesis 17 registra la institución de la circuncisión — años después. Por lo tanto, Abraham fue justificado mientras aún estaba incircunciso. La señal del pacto vino después como confirmación de una justicia existente, no como condición para recibirla. Esto hace a Abraham el padre de todos los que creen — judío o gentil, circunciso o no."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does it mean that righteousness is 'credited' or 'imputed' to the believer?",
+    "es": "¿Qué significa que la justicia es 'acreditada' o 'imputada' al creyente?"
+   },
+   "keywords": {
+    "en": [
+     "imput",
+     "logizo",
+     "credit",
+     "account",
+     "Christ",
+     "alien",
+     "faith",
+     "righteous"
+    ],
+    "es": [
+     "imput",
+     "logizo",
+     "acredit",
+     "cuenta",
+     "Cristo",
+     "ajena",
+     "fe",
+     "justicia"
+    ]
+   },
+   "model": {
+    "en": "Imputation is a bookkeeping image — God credits something to a person's account that was not originally theirs. The righteousness credited to the believer is not produced by the believer; it comes from Christ. Luther called it 'alien righteousness' because it originates outside us. Faith is the receiving instrument, not the productive source.",
+    "es": "Imputación es una imagen de contabilidad — Dios acredita a la cuenta de una persona algo que no era originalmente suyo. La justicia acreditada al creyente no es producida por el creyente; viene de Cristo. Lutero la llamó 'justicia ajena' porque se origina fuera de nosotros. La fe es el instrumento receptor, no la fuente productora."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How does Romans 4:25 summarize the gospel in a single verse?",
+    "es": "¿Cómo resume Romanos 4:25 el evangelio en un solo versículo?"
+   },
+   "keywords": {
+    "en": [
+     "deliver",
+     "offens",
+     "raised",
+     "justif",
+     "death",
+     "resurrect",
+     "tomb",
+     "gospel"
+    ],
+    "es": [
+     "entreg",
+     "delito",
+     "resucit",
+     "justif",
+     "muerte",
+     "resurrecci",
+     "tumba",
+     "evangel"
+    ]
+   },
+   "model": {
+    "en": "Jesus was 'delivered up because of our offenses' — His death paid the penalty for our sins. He was 'raised because of our justification' — the resurrection is the Father's vindication that the payment was accepted. The cross and the empty tomb form one indivisible gospel. The Father's 'amen' to the cross was the empty tomb.",
+    "es": "Jesús fue 'entregado por causa de nuestras transgresiones' — Su muerte pagó la pena por nuestros pecados. Fue 'resucitado para nuestra justificación' — la resurrección es la vindicación del Padre de que el pago fue aceptado. La cruz y la tumba vacía forman un evangelio indivisible. El 'amén' del Padre a la cruz fue la tumba vacía."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why is justification by faith alone the foundation of Christian assurance?",
+    "es": "¿Por qué es la justificación por fe sola el fundamento de la seguridad cristiana?"
+   },
+   "keywords": {
+    "en": [
+     "rest",
+     "Christ",
+     "perform",
+     "complete",
+     "boast",
+     "earn",
+     "verdict",
+     "secure"
+    ],
+    "es": [
+     "descans",
+     "Cristo",
+     "desempeñ",
+     "complet",
+     "jact",
+     "gan",
+     "veredic",
+     "segur"
+    ]
+   },
+   "model": {
+    "en": "If justification depended on our performance, assurance would rise and fall with our daily faithfulness. But because justification is by faith in Christ's completed work, the believer's standing rests on something already finished and unchangeable. The verdict has been declared. The payment has been accepted. Assurance comes not from looking inward at our performance but outward to Christ.",
+    "es": "Si la justificación dependiera de nuestro desempeño, la seguridad subiría y bajaría con nuestra fidelidad diaria. Pero porque la justificación es por fe en la obra completada de Cristo, la posición del creyente descansa sobre algo ya terminado e inmutable. El veredicto ha sido declarado. El pago ha sido aceptado. La seguridad viene no de mirar hacia adentro a nuestro desempeño sino hacia afuera a Cristo."
+   }
+  }
+ ]
+};

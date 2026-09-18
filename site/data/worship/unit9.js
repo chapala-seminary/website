@@ -1,64 +1,753 @@
-/* CTSWorship - unit 9: per-unit configuration and content. */
-
-const UNIT = 9;
-
-const CURRENT_UNIT = 9;
-
-const NEXT_URL = 'CTSWorshipUnit10.html';
-
-const mcQuestions = [
-    { textEn: "1. Baptism is best understood as:", textEs: "1. El bautismo se entiende mejor como:", optionsEn: ["a means of salvation", "a public confession of faith", "a private ritual", "an entry tax"], optionsEs: ["un medio de salvación", "una confesión pública de fe", "un ritual privado", "un impuesto de entrada"], correct: 1 },
-    { textEn: "2. Baptism symbolizes being buried with Christ in his death and:", textEs: "2. El bautismo simboliza ser sepultado con Cristo en su muerte y:", optionsEn: ["raised to walk in his likeness", "leaving the church", "paying a debt", "joining a club"], optionsEs: ["resucitado para andar en su semejanza", "dejar la iglesia", "pagar una deuda", "unirse a un club"], correct: 0 },
-    { textEn: "3. In the believer's-baptism tradition, baptism:", textEs: "3. En la tradición del bautismo del creyente, el bautismo:", optionsEn: ["saves the believer", "does not save but confesses a salvation already received", "removes original sin", "is for infants only"], optionsEs: ["salva al creyente", "no salva sino confiesa una salvación ya recibida", "quita el pecado original", "es solo para infantes"], correct: 1 },
-    { textEn: "4. In a believer's-baptism church the baptistry is usually located:", textEs: "4. En una iglesia que practica el bautismo del creyente, el baptisterio usualmente se ubica:", optionsEn: ["near the entrance, off to one side", "behind the pulpit, often elevated and visible", "in a private room", "outdoors"], optionsEs: ["cerca de la entrada, a un lado", "detrás del púlpito, a menudo elevado y visible", "en un cuarto privado", "al aire libre"], correct: 1 },
-    { textEn: "5. The prominent, central placement of the baptistry reflects that baptism is:", textEs: "5. La colocación prominente y central del baptisterio refleja que el bautismo es:", optionsEn: ["a private matter", "a public confession before the gathered church", "unimportant", "only symbolic of cleansing"], optionsEs: ["un asunto privado", "una confesión pública ante la iglesia reunida", "sin importancia", "solo simbólico de limpieza"], correct: 1 },
-    { textEn: "6. At a baptism the pastor says, 'And all the people say,' and the congregation answers:", textEs: "6. En un bautismo el pastor dice, 'Y todo el pueblo diga,' y la congregación responde:", optionsEn: ["Hallelujah", "Amen", "Glory", "Peace"], optionsEs: ["Aleluya", "Amén", "Gloria", "Paz"], correct: 1 },
-    { textEn: "7. The congregational 'Amen' at a baptism is the church:", textEs: "7. El 'Amén' congregacional en un bautismo es la iglesia:", optionsEn: ["ending the service", "dismissing the people", "singing a hymn", "confessing and ratifying what has happened"], optionsEs: ["terminando el servicio", "despidiendo al pueblo", "cantando un himno", "confesando y ratificando lo que ha sucedido"], correct: 3 },
-    { textEn: "8. The Catholic baptismal font is usually:", textEs: "8. La pila bautismal católica usualmente es:", optionsEn: ["small and off to one side near the entrance", "large and central", "behind the altar", "absent"], optionsEs: ["pequeña y a un lado cerca de la entrada", "grande y central", "detrás del altar", "ausente"], correct: 0 },
-    { textEn: "9. The Catholic placement of the font near the entrance reflects baptism as:", textEs: "9. La colocación católica de la pila cerca de la entrada refleja el bautismo como:", optionsEn: ["a public testimony", "an afterthought", "the rite of entry into the church", "a memorial"], optionsEs: ["un testimonio público", "una ocurrencia tardía", "el rito de entrada a la iglesia", "un memorial"], correct: 2 },
-    { textEn: "10. The Lord's Supper is best described as a memorial and a:", textEs: "10. La Cena del Señor se describe mejor como un memorial y una:", optionsEn: ["sacrifice", "entry rite", "payment", "proclamation"], optionsEs: ["sacrificio", "rito de entrada", "pago", "proclamación"], correct: 3 },
-    { textEn: "11. According to Paul, as often as we eat the bread and drink the cup, we:", textEs: "11. Según Pablo, todas las veces que comemos el pan y bebemos la copa:", optionsEn: ["proclaim the Lord's death until he comes", "earn merit", "forgive sins", "renew our membership"], optionsEs: ["proclamamos la muerte del Señor hasta que venga", "ganamos mérito", "perdonamos pecados", "renovamos nuestra membresía"], correct: 0 },
-    { textEn: "12. In a Protestant sanctuary the communion table usually sits:", textEs: "12. En un santuario protestante la mesa de comunión usualmente se sitúa:", optionsEn: ["front and center as the focus", "hidden from view", "centered but below the pulpit", "at the entrance"], optionsEs: ["al frente y al centro como el foco", "escondida de la vista", "centrada pero debajo del púlpito", "en la entrada"], correct: 2 },
-    { textEn: "13. The table placed below the pulpit declares that:", textEs: "13. La mesa colocada debajo del púlpito declara que:", optionsEn: ["the sacrament saves", "the offering is most important", "music is central", "the Word is elevated above the sacrament"], optionsEs: ["el sacramento salva", "la ofrenda es lo más importante", "la música es central", "la Palabra está elevada sobre el sacramento"], correct: 3 },
-    { textEn: "14. Believer's-baptism evangelicals call baptism and the Lord's Supper 'ordinances' rather than 'sacraments' because they are:", textEs: "14. Los evangélicos que practican el bautismo del creyente llaman al bautismo y la Cena del Señor 'ordenanzas' en lugar de 'sacramentos' porque son:", optionsEn: ["commanded acts of obedience and symbols, not means of grace", "channels of saving grace", "optional traditions", "medieval inventions"], optionsEs: ["actos mandados de obediencia y símbolos, no medios de gracia", "canales de gracia salvadora", "tradiciones opcionales", "invenciones medievales"], correct: 0 },
-    { textEn: "15. The proper mode of baptism in the believer's-baptism tradition is:", textEs: "15. El modo apropiado del bautismo en la tradición del bautismo del creyente es:", optionsEn: ["sprinkling", "pouring", "immersion", "anointing"], optionsEs: ["rociar", "derramar", "inmersión", "ungir"], correct: 2 },
-    { textEn: "16. The Greek word baptizo means:", textEs: "16. La palabra griega baptizo significa:", optionsEn: ["to sprinkle", "to anoint", "to dip or immerse", "to wash hands"], optionsEs: ["rociar", "ungir", "sumergir o zambullir", "lavar las manos"], correct: 2 },
-    { textEn: "17. Immersion best symbolizes:", textEs: "17. La inmersión simboliza mejor:", optionsEn: ["cleansing only", "forgiveness of others", "membership", "being buried with Christ and raised again"], optionsEs: ["solo la limpieza", "el perdón de otros", "la membresía", "ser sepultado con Cristo y resucitado"], correct: 3 },
-    { textEn: "18. The ordinances should be administered so that they remain:", textEs: "18. Las ordenanzas deben administrarse para que permanezcan:", optionsEn: ["meaningful acts of worship", "brief and forgettable", "private", "unexplained"], optionsEs: ["actos significativos de adoración", "breves y olvidables", "privadas", "sin explicación"], correct: 0 },
-    { textEn: "19. The pastor keeps the ordinances meaningful by:", textEs: "19. El pastor mantiene las ordenanzas significativas:", optionsEn: ["rushing through them", "doing them in Latin", "explaining their meaning so the people understand", "performing them in private"], optionsEs: ["apresurándose por ellas", "haciéndolas en latín", "explicando su significado para que el pueblo entienda", "realizándolas en privado"], correct: 2 },
-    { textEn: "20. Both ordinances together:", textEs: "20. Ambas ordenanzas juntas:", optionsEn: ["replace preaching", "grant church membership only", "raise funds", "make the gospel visible in worship"], optionsEs: ["reemplazan la predicación", "otorgan solo membresía de iglesia", "recaudan fondos", "hacen visible el evangelio en la adoración"], correct: 3 }
-];
-
-const kwQuestions = [
-    { textEn: "21. Explain the meaning of baptism as a public confession of faith, including its symbolism of death and resurrection.", textEs: "21. Explique el significado del bautismo como una confesión pública de fe, incluyendo su simbolismo de muerte y resurrección.", kwEn: ["baptism", "public", "confess", "buried", "raised", "christ", "death", "symbol"], kwEs: ["bautism", "públic", "confes", "sepult", "resucit", "cristo", "muerte", "símbol"],
-      modelEn: 'Baptism is a public confession of faith, symbolizing being buried with Christ in His death and raised to walk in the newness of His likeness. The believer goes down into the water and is raised again, picturing death and resurrection. Baptism does not save; it confesses a salvation already received, identifying the believer publicly with Christ\'s death and resurrection before the gathered church.',
-      modelEs: 'El bautismo es una confesión pública de fe, simbolizando ser sepultado con Cristo en su muerte y resucitado para andar en la novedad de su semejanza. El creyente baja al agua y es levantado de nuevo, representando la muerte y la resurrección. El bautismo no salva; confiesa una salvación ya recibida, identificando al creyente públicamente con la muerte y resurrección de Cristo delante de la iglesia reunida.' },
-    { textEn: "22. Describe how the architecture of the baptistry in a believer's-baptism church reflects its theology of baptism.", textEs: "22. Describa cómo la arquitectura del baptisterio en una iglesia que practica el bautismo del creyente refleja su teología del bautismo.", kwEn: ["baptistry", "behind", "pulpit", "elevat", "visible", "public", "prominent", "architect"], kwEs: ["baptisteri", "detrás", "púlpit", "elevad", "visible", "públic", "prominent", "arquitect"],
-      modelEn: 'The baptistry is placed prominently and centrally, usually behind the pulpit and often elevated, so the whole congregation can see the baptism. This placement is not accidental but theology in wood and water: because baptism is a public confession before the gathered church, the room is deliberately built to make it visible to everyone rather than tucked away out of sight.',
-      modelEs: 'El baptisterio se coloca de manera prominente y central, usualmente detrás del púlpito y a menudo elevado, para que toda la congregación pueda ver el bautismo. Esta ubicación no es accidental sino teología en madera y agua: porque el bautismo es una confesión pública delante de la iglesia reunida, la sala se construye deliberadamente para hacerlo visible a todos en lugar de esconderlo fuera de la vista.' },
-    { textEn: "23. Describe the baptism scene and the congregational 'Amen,' and explain what it confesses.", textEs: "23. Describa la escena del bautismo y el 'Amén' congregacional, y explique lo que confiesa.", kwEn: ["amen", "congregat", "people", "ratif", "buried", "witness", "church", "say"], kwEs: ["amén", "congregac", "pueblo", "ratific", "sepult", "testig", "iglesia", "decir"],
-      modelEn: 'At the moment of baptism, the pastor speaks the words \'buried with Christ in His death and raised to walk in His likeness,\' then turns to the congregation and says, \'And all the people say,\' and the church answers, \'Amen.\' That congregational Amen confesses that the family of God has witnessed and ratified together what has happened — baptism is never a private affair, since the whole body affirms it.',
-      modelEs: 'En el momento del bautismo, el pastor dice las palabras \'sepultado con Cristo en su muerte y resucitado para andar en su semejanza,\' luego se vuelve a la congregación y dice: \'Y todo el pueblo dice,\' y la iglesia responde: \'Amén.\' Ese Amén congregacional confiesa que la familia de Dios ha sido testigo y ha ratificado juntos lo que ha sucedido — el bautismo nunca es un asunto privado, ya que todo el cuerpo lo afirma.' },
-    { textEn: "24. Contrast believer's-baptism practice with the Catholic font and infant baptism, and explain the different theology each reflects.", textEs: "24. Contraste la práctica del bautismo del creyente con la pila católica y el bautismo infantil, y explique la diferente teología que cada uno refleja.", kwEn: ["catholic", "font", "infant", "entry", "grace", "side", "baptist", "differ"], kwEs: ["católic", "pila", "infant", "entrada", "gracia", "lado", "bautist", "difer"],
-      modelEn: 'The Catholic font is usually small and set off to one side near the entrance, reflecting a theology where baptism is the rite of entry into the church, typically administered to an infant, believed to convey saving grace and wash away original sin. The central, visible believer\'s-baptism baptistry instead preaches that baptism is the public confession of a believer who already has faith — the same ordinance, but opposite theologies, readable simply in where the water sits in the room.',
-      modelEs: 'La pila católica usualmente es pequeña y colocada a un lado cerca de la entrada, reflejando una teología donde el bautismo es el rito de entrada a la iglesia, típicamente administrado a un infante, creído para conferir gracia salvadora y lavar el pecado original. El baptisterio central y visible en cambio predica que el bautismo es la confesión pública de un creyente que ya tiene fe — la misma ordenanza, pero teologías opuestas, legibles simplemente en dónde se sitúa el agua en la sala.' },
-    { textEn: "25. Explain the meaning of the Lord's Supper as a memorial and proclamation.", textEs: "25. Explique el significado de la Cena del Señor como memorial y proclamación.", kwEn: ["supper", "memorial", "rememb", "proclaim", "death", "bread", "cup", "christ"], kwEs: ["cena", "memorial", "record", "proclam", "muerte", "pan", "copa", "cristo"],
-      modelEn: 'The Lord\'s Supper is a memorial and a proclamation. We observe it in remembrance of Christ, as He commanded, with the bread representing His body and the cup His blood, given for us. Paul tells us that as often as we eat the bread and drink the cup, we proclaim the Lord\'s death until He comes, so the Supper looks in two directions at once: back to the cross and forward to His return.',
-      modelEs: 'La Cena del Señor es un memorial y una proclamación. La observamos en memoria de Cristo, como Él mandó, con el pan representando su cuerpo y la copa su sangre, dada por nosotros. Pablo nos dice que todas las veces que comemos el pan y bebemos la copa, anunciamos la muerte del Señor hasta que Él venga, así que la Cena mira en dos direcciones a la vez: hacia atrás a la cruz y hacia adelante a su regreso.' },
-    { textEn: "26. How does the placement of the Lord's Supper table in a sanctuary reflect a theology?", textEs: "26. ¿Cómo refleja una teología la colocación de la mesa de la Cena del Señor en un santuario?", kwEn: ["table", "placement", "pulpit", "below", "altar", "word", "theolog", "room"], kwEs: ["mesa", "colocación", "púlpit", "debajo", "altar", "palabra", "teolog", "sala"],
-      modelEn: 'In a Protestant sanctuary the communion table sits centered but below the pulpit, declaring that the Word is elevated above the sacrament. In a Catholic church the altar stands front and center, declaring that the saving sacrament is central. The table below the pulpit and the altar front and center preach two different gospels through nothing but furniture placement.',
-      modelEs: 'En un santuario protestante la mesa de comunión se sitúa centrada pero debajo del púlpito, declarando que la Palabra está elevada por encima del sacramento. En una iglesia católica el altar está al frente y al centro, declarando que el sacramento salvador es central. La mesa debajo del púlpito y el altar al frente y al centro predican dos evangelios diferentes mediante nada más que la colocación del mobiliario.' },
-    { textEn: "27. Why are baptism and the Lord's Supper called ordinances rather than sacraments in the believer's-baptism tradition?", textEs: "27. ¿Por qué se llaman ordenanzas en lugar de sacramentos el bautismo y la Cena del Señor en la tradición del bautismo del creyente?", kwEn: ["ordinanc", "sacrament", "command", "symbol", "grace", "obey", "memorial", "save"], kwEs: ["ordenanz", "sacrament", "mand", "símbol", "gracia", "obed", "memorial", "salv"],
-      modelEn: 'These two acts are called ordinances rather than sacraments because a sacrament, in Catholic theology, is a channel that conveys saving grace, while an ordinance is something Christ ordained and commanded for us to obey. The ordinances symbolize and memorialize; they do not save — the word \'ordinance\' confesses that baptism and the Lord\'s Supper are commanded symbols of obedience, not means of grace.',
-      modelEs: 'Estos dos actos se llaman ordenanzas en lugar de sacramentos porque un sacramento, en la teología católica, es un canal que confiere gracia salvadora, mientras que una ordenanza es algo que Cristo ordenó y mandó que obedeciéramos. Las ordenanzas simbolizan y conmemoran; no salvan — la palabra \'ordenanza\' confiesa que el bautismo y la Cena del Señor son símbolos mandados de obediencia, no medios de gracia.' },
-    { textEn: "28. What is the proper mode of baptism in the believer's-baptism tradition, and why?", textEs: "28. ¿Cuál es el modo apropiado del bautismo en la tradición del bautismo del creyente, y por qué?", kwEn: ["immers", "mode", "buried", "symbol", "greek", "baptizo", "dip", "resurrect"], kwEs: ["inmersión", "modo", "sepult", "símbol", "griego", "baptizo", "sumerg", "resurrec"],
-      modelEn: 'The proper mode of baptism is immersion, since the Greek word baptizo means to dip or to immerse, and immersion alone pictures the burial and the rising with Christ. Pouring or sprinkling cannot show what immersion shows; when the believer is lowered beneath the water and lifted up again, the whole congregation sees the gospel of death to sin and new life in Christ acted out visually.',
-      modelEs: 'El modo apropiado del bautismo es la inmersión, ya que la palabra griega baptizo significa sumergir o inmergir, y solo la inmersión representa la sepultura y el levantamiento con Cristo. El derramamiento o la aspersión no pueden mostrar lo que muestra la inmersión; cuando el creyente es bajado bajo el agua y levantado de nuevo, toda la congregación ve el evangelio de la muerte al pecado y la nueva vida en Cristo representado visualmente.' },
-    { textEn: "29. How should the ordinances be administered so they remain meaningful acts of worship?", textEs: "29. ¿Cómo deben administrarse las ordenanzas para que permanezcan como actos significativos de adoración?", kwEn: ["administ", "meaning", "worship", "explain", "reverent", "prepar", "rush", "ordinanc"], kwEs: ["administ", "significad", "ador", "explic", "reverent", "prepar", "apresur", "ordenanz"],
-      modelEn: 'Both ordinances must be administered reverently, with preparation and clear explanation, so that they remain meaningful acts of worship rather than empty ritual. When the pastor explains their meaning ahead of time, the people grasp the gospel they picture, rather than watching a rite performed hastily or without context.',
-      modelEs: 'Ambas ordenanzas deben administrarse con reverencia, con preparación y explicación clara, para que permanezcan como actos significativos de adoración en lugar de ritual vacío. Cuando el pastor explica su significado de antemano, el pueblo capta el evangelio que representan, en lugar de solo observar un rito realizado apresuradamente o sin contexto.' },
-    { textEn: "30. Summarize how both ordinances make the gospel visible in worship.", textEs: "30. Resuma cómo ambas ordenanzas hacen visible el evangelio en la adoración.", kwEn: ["gospel", "visible", "ordinanc", "baptism", "supper", "death", "picture", "preach"], kwEs: ["evangelio", "visible", "ordenanz", "bautism", "cena", "muerte", "represent", "predic"],
-      modelEn: 'Both ordinances make the gospel visible in worship: baptism shows the believer\'s death, burial, and resurrection with Christ, while the Lord\'s Supper shows Christ\'s body broken and blood shed for sin. Together they preach the gospel without words, so that in worship the people do not only hear the gospel, they see it acted out before them.',
-      modelEs: 'Ambas ordenanzas hacen visible el evangelio en la adoración: el bautismo muestra la muerte, sepultura, y resurrección del creyente con Cristo, mientras que la Cena del Señor muestra el cuerpo de Cristo partido y su sangre derramada por el pecado. Juntas predican el evangelio sin palabras, de modo que en la adoración el pueblo no solo oye el evangelio, lo ve representado delante de ellos.' }
-
-];
+/* CTSWorship — unit 9. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "worship",
+ "unit": 9,
+ "totalUnits": 11,
+ "filePrefix": "CTSWorship",
+ "prevHref": "CTSWorshipUnit8.html",
+ "nextHref": "CTSWorshipUnit10.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "Baptism is best understood as:",
+    "es": "El bautismo se entiende mejor como:"
+   },
+   "options": {
+    "en": [
+     "a means of salvation",
+     "a public confession of faith",
+     "a private ritual",
+     "an entry tax"
+    ],
+    "es": [
+     "un medio de salvación",
+     "una confesión pública de fe",
+     "un ritual privado",
+     "un impuesto de entrada"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "Baptism symbolizes being buried with Christ in his death and:",
+    "es": "El bautismo simboliza ser sepultado con Cristo en su muerte y:"
+   },
+   "options": {
+    "en": [
+     "raised to walk in his likeness",
+     "leaving the church",
+     "paying a debt",
+     "joining a club"
+    ],
+    "es": [
+     "resucitado para andar en su semejanza",
+     "dejar la iglesia",
+     "pagar una deuda",
+     "unirse a un club"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "In the believer's-baptism tradition, baptism:",
+    "es": "En la tradición del bautismo del creyente, el bautismo:"
+   },
+   "options": {
+    "en": [
+     "saves the believer",
+     "does not save but confesses a salvation already received",
+     "removes original sin",
+     "is for infants only"
+    ],
+    "es": [
+     "salva al creyente",
+     "no salva sino confiesa una salvación ya recibida",
+     "quita el pecado original",
+     "es solo para infantes"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "In a believer's-baptism church the baptistry is usually located:",
+    "es": "En una iglesia que practica el bautismo del creyente, el baptisterio usualmente se ubica:"
+   },
+   "options": {
+    "en": [
+     "near the entrance, off to one side",
+     "behind the pulpit, often elevated and visible",
+     "in a private room",
+     "outdoors"
+    ],
+    "es": [
+     "cerca de la entrada, a un lado",
+     "detrás del púlpito, a menudo elevado y visible",
+     "en un cuarto privado",
+     "al aire libre"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "The prominent, central placement of the baptistry reflects that baptism is:",
+    "es": "La colocación prominente y central del baptisterio refleja que el bautismo es:"
+   },
+   "options": {
+    "en": [
+     "a private matter",
+     "a public confession before the gathered church",
+     "unimportant",
+     "only symbolic of cleansing"
+    ],
+    "es": [
+     "un asunto privado",
+     "una confesión pública ante la iglesia reunida",
+     "sin importancia",
+     "solo simbólico de limpieza"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "At a baptism the pastor says, 'And all the people say,' and the congregation answers:",
+    "es": "En un bautismo el pastor dice, 'Y todo el pueblo diga,' y la congregación responde:"
+   },
+   "options": {
+    "en": [
+     "Hallelujah",
+     "Amen",
+     "Glory",
+     "Peace"
+    ],
+    "es": [
+     "Aleluya",
+     "Amén",
+     "Gloria",
+     "Paz"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "The congregational 'Amen' at a baptism is the church:",
+    "es": "El 'Amén' congregacional en un bautismo es la iglesia:"
+   },
+   "options": {
+    "en": [
+     "ending the service",
+     "dismissing the people",
+     "singing a hymn",
+     "confessing and ratifying what has happened"
+    ],
+    "es": [
+     "terminando el servicio",
+     "despidiendo al pueblo",
+     "cantando un himno",
+     "confesando y ratificando lo que ha sucedido"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "The Catholic baptismal font is usually:",
+    "es": "La pila bautismal católica usualmente es:"
+   },
+   "options": {
+    "en": [
+     "small and off to one side near the entrance",
+     "large and central",
+     "behind the altar",
+     "absent"
+    ],
+    "es": [
+     "pequeña y a un lado cerca de la entrada",
+     "grande y central",
+     "detrás del altar",
+     "ausente"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "The Catholic placement of the font near the entrance reflects baptism as:",
+    "es": "La colocación católica de la pila cerca de la entrada refleja el bautismo como:"
+   },
+   "options": {
+    "en": [
+     "a public testimony",
+     "an afterthought",
+     "the rite of entry into the church",
+     "a memorial"
+    ],
+    "es": [
+     "un testimonio público",
+     "una ocurrencia tardía",
+     "el rito de entrada a la iglesia",
+     "un memorial"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "The Lord's Supper is best described as a memorial and a:",
+    "es": "La Cena del Señor se describe mejor como un memorial y una:"
+   },
+   "options": {
+    "en": [
+     "sacrifice",
+     "entry rite",
+     "payment",
+     "proclamation"
+    ],
+    "es": [
+     "sacrificio",
+     "rito de entrada",
+     "pago",
+     "proclamación"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "According to Paul, as often as we eat the bread and drink the cup, we:",
+    "es": "Según Pablo, todas las veces que comemos el pan y bebemos la copa:"
+   },
+   "options": {
+    "en": [
+     "proclaim the Lord's death until he comes",
+     "earn merit",
+     "forgive sins",
+     "renew our membership"
+    ],
+    "es": [
+     "proclamamos la muerte del Señor hasta que venga",
+     "ganamos mérito",
+     "perdonamos pecados",
+     "renovamos nuestra membresía"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "In a Protestant sanctuary the communion table usually sits:",
+    "es": "En un santuario protestante la mesa de comunión usualmente se sitúa:"
+   },
+   "options": {
+    "en": [
+     "front and center as the focus",
+     "hidden from view",
+     "centered but below the pulpit",
+     "at the entrance"
+    ],
+    "es": [
+     "al frente y al centro como el foco",
+     "escondida de la vista",
+     "centrada pero debajo del púlpito",
+     "en la entrada"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "The table placed below the pulpit declares that:",
+    "es": "La mesa colocada debajo del púlpito declara que:"
+   },
+   "options": {
+    "en": [
+     "the sacrament saves",
+     "the offering is most important",
+     "music is central",
+     "the Word is elevated above the sacrament"
+    ],
+    "es": [
+     "el sacramento salva",
+     "la ofrenda es lo más importante",
+     "la música es central",
+     "la Palabra está elevada sobre el sacramento"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "Believer's-baptism evangelicals call baptism and the Lord's Supper 'ordinances' rather than 'sacraments' because they are:",
+    "es": "Los evangélicos que practican el bautismo del creyente llaman al bautismo y la Cena del Señor 'ordenanzas' en lugar de 'sacramentos' porque son:"
+   },
+   "options": {
+    "en": [
+     "commanded acts of obedience and symbols, not means of grace",
+     "channels of saving grace",
+     "optional traditions",
+     "medieval inventions"
+    ],
+    "es": [
+     "actos mandados de obediencia y símbolos, no medios de gracia",
+     "canales de gracia salvadora",
+     "tradiciones opcionales",
+     "invenciones medievales"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "The proper mode of baptism in the believer's-baptism tradition is:",
+    "es": "El modo apropiado del bautismo en la tradición del bautismo del creyente es:"
+   },
+   "options": {
+    "en": [
+     "sprinkling",
+     "pouring",
+     "immersion",
+     "anointing"
+    ],
+    "es": [
+     "rociar",
+     "derramar",
+     "inmersión",
+     "ungir"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "The Greek word baptizo means:",
+    "es": "La palabra griega baptizo significa:"
+   },
+   "options": {
+    "en": [
+     "to sprinkle",
+     "to anoint",
+     "to dip or immerse",
+     "to wash hands"
+    ],
+    "es": [
+     "rociar",
+     "ungir",
+     "sumergir o zambullir",
+     "lavar las manos"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "Immersion best symbolizes:",
+    "es": "La inmersión simboliza mejor:"
+   },
+   "options": {
+    "en": [
+     "cleansing only",
+     "forgiveness of others",
+     "membership",
+     "being buried with Christ and raised again"
+    ],
+    "es": [
+     "solo la limpieza",
+     "el perdón de otros",
+     "la membresía",
+     "ser sepultado con Cristo y resucitado"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "The ordinances should be administered so that they remain:",
+    "es": "Las ordenanzas deben administrarse para que permanezcan:"
+   },
+   "options": {
+    "en": [
+     "meaningful acts of worship",
+     "brief and forgettable",
+     "private",
+     "unexplained"
+    ],
+    "es": [
+     "actos significativos de adoración",
+     "breves y olvidables",
+     "privadas",
+     "sin explicación"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "The pastor keeps the ordinances meaningful by:",
+    "es": "El pastor mantiene las ordenanzas significativas:"
+   },
+   "options": {
+    "en": [
+     "rushing through them",
+     "doing them in Latin",
+     "explaining their meaning so the people understand",
+     "performing them in private"
+    ],
+    "es": [
+     "apresurándose por ellas",
+     "haciéndolas en latín",
+     "explicando su significado para que el pueblo entienda",
+     "realizándolas en privado"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "Both ordinances together:",
+    "es": "Ambas ordenanzas juntas:"
+   },
+   "options": {
+    "en": [
+     "replace preaching",
+     "grant church membership only",
+     "raise funds",
+     "make the gospel visible in worship"
+    ],
+    "es": [
+     "reemplazan la predicación",
+     "otorgan solo membresía de iglesia",
+     "recaudan fondos",
+     "hacen visible el evangelio en la adoración"
+    ]
+   },
+   "answer": 3
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Explain the meaning of baptism as a public confession of faith, including its symbolism of death and resurrection.",
+    "es": "Explique el significado del bautismo como una confesión pública de fe, incluyendo su simbolismo de muerte y resurrección."
+   },
+   "keywords": {
+    "en": [
+     "baptism",
+     "public",
+     "confess",
+     "buried",
+     "raised",
+     "christ",
+     "death",
+     "symbol"
+    ],
+    "es": [
+     "bautism",
+     "públic",
+     "confes",
+     "sepult",
+     "resucit",
+     "cristo",
+     "muerte",
+     "símbol"
+    ]
+   },
+   "model": {
+    "en": "Baptism is a public confession of faith, symbolizing being buried with Christ in His death and raised to walk in the newness of His likeness. The believer goes down into the water and is raised again, picturing death and resurrection. Baptism does not save; it confesses a salvation already received, identifying the believer publicly with Christ's death and resurrection before the gathered church.",
+    "es": "El bautismo es una confesión pública de fe, simbolizando ser sepultado con Cristo en su muerte y resucitado para andar en la novedad de su semejanza. El creyente baja al agua y es levantado de nuevo, representando la muerte y la resurrección. El bautismo no salva; confiesa una salvación ya recibida, identificando al creyente públicamente con la muerte y resurrección de Cristo delante de la iglesia reunida."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe how the architecture of the baptistry in a believer's-baptism church reflects its theology of baptism.",
+    "es": "Describa cómo la arquitectura del baptisterio en una iglesia que practica el bautismo del creyente refleja su teología del bautismo."
+   },
+   "keywords": {
+    "en": [
+     "baptistry",
+     "behind",
+     "pulpit",
+     "elevat",
+     "visible",
+     "public",
+     "prominent",
+     "architect"
+    ],
+    "es": [
+     "baptisteri",
+     "detrás",
+     "púlpit",
+     "elevad",
+     "visible",
+     "públic",
+     "prominent",
+     "arquitect"
+    ]
+   },
+   "model": {
+    "en": "The baptistry is placed prominently and centrally, usually behind the pulpit and often elevated, so the whole congregation can see the baptism. This placement is not accidental but theology in wood and water: because baptism is a public confession before the gathered church, the room is deliberately built to make it visible to everyone rather than tucked away out of sight.",
+    "es": "El baptisterio se coloca de manera prominente y central, usualmente detrás del púlpito y a menudo elevado, para que toda la congregación pueda ver el bautismo. Esta ubicación no es accidental sino teología en madera y agua: porque el bautismo es una confesión pública delante de la iglesia reunida, la sala se construye deliberadamente para hacerlo visible a todos en lugar de esconderlo fuera de la vista."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe the baptism scene and the congregational 'Amen,' and explain what it confesses.",
+    "es": "Describa la escena del bautismo y el 'Amén' congregacional, y explique lo que confiesa."
+   },
+   "keywords": {
+    "en": [
+     "amen",
+     "congregat",
+     "people",
+     "ratif",
+     "buried",
+     "witness",
+     "church",
+     "say"
+    ],
+    "es": [
+     "amén",
+     "congregac",
+     "pueblo",
+     "ratific",
+     "sepult",
+     "testig",
+     "iglesia",
+     "decir"
+    ]
+   },
+   "model": {
+    "en": "At the moment of baptism, the pastor speaks the words 'buried with Christ in His death and raised to walk in His likeness,' then turns to the congregation and says, 'And all the people say,' and the church answers, 'Amen.' That congregational Amen confesses that the family of God has witnessed and ratified together what has happened — baptism is never a private affair, since the whole body affirms it.",
+    "es": "En el momento del bautismo, el pastor dice las palabras 'sepultado con Cristo en su muerte y resucitado para andar en su semejanza,' luego se vuelve a la congregación y dice: 'Y todo el pueblo dice,' y la iglesia responde: 'Amén.' Ese Amén congregacional confiesa que la familia de Dios ha sido testigo y ha ratificado juntos lo que ha sucedido — el bautismo nunca es un asunto privado, ya que todo el cuerpo lo afirma."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Contrast believer's-baptism practice with the Catholic font and infant baptism, and explain the different theology each reflects.",
+    "es": "Contraste la práctica del bautismo del creyente con la pila católica y el bautismo infantil, y explique la diferente teología que cada uno refleja."
+   },
+   "keywords": {
+    "en": [
+     "catholic",
+     "font",
+     "infant",
+     "entry",
+     "grace",
+     "side",
+     "baptist",
+     "differ"
+    ],
+    "es": [
+     "católic",
+     "pila",
+     "infant",
+     "entrada",
+     "gracia",
+     "lado",
+     "bautist",
+     "difer"
+    ]
+   },
+   "model": {
+    "en": "The Catholic font is usually small and set off to one side near the entrance, reflecting a theology where baptism is the rite of entry into the church, typically administered to an infant, believed to convey saving grace and wash away original sin. The central, visible believer's-baptism baptistry instead preaches that baptism is the public confession of a believer who already has faith — the same ordinance, but opposite theologies, readable simply in where the water sits in the room.",
+    "es": "La pila católica usualmente es pequeña y colocada a un lado cerca de la entrada, reflejando una teología donde el bautismo es el rito de entrada a la iglesia, típicamente administrado a un infante, creído para conferir gracia salvadora y lavar el pecado original. El baptisterio central y visible en cambio predica que el bautismo es la confesión pública de un creyente que ya tiene fe — la misma ordenanza, pero teologías opuestas, legibles simplemente en dónde se sitúa el agua en la sala."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain the meaning of the Lord's Supper as a memorial and proclamation.",
+    "es": "Explique el significado de la Cena del Señor como memorial y proclamación."
+   },
+   "keywords": {
+    "en": [
+     "supper",
+     "memorial",
+     "rememb",
+     "proclaim",
+     "death",
+     "bread",
+     "cup",
+     "christ"
+    ],
+    "es": [
+     "cena",
+     "memorial",
+     "record",
+     "proclam",
+     "muerte",
+     "pan",
+     "copa",
+     "cristo"
+    ]
+   },
+   "model": {
+    "en": "The Lord's Supper is a memorial and a proclamation. We observe it in remembrance of Christ, as He commanded, with the bread representing His body and the cup His blood, given for us. Paul tells us that as often as we eat the bread and drink the cup, we proclaim the Lord's death until He comes, so the Supper looks in two directions at once: back to the cross and forward to His return.",
+    "es": "La Cena del Señor es un memorial y una proclamación. La observamos en memoria de Cristo, como Él mandó, con el pan representando su cuerpo y la copa su sangre, dada por nosotros. Pablo nos dice que todas las veces que comemos el pan y bebemos la copa, anunciamos la muerte del Señor hasta que Él venga, así que la Cena mira en dos direcciones a la vez: hacia atrás a la cruz y hacia adelante a su regreso."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How does the placement of the Lord's Supper table in a sanctuary reflect a theology?",
+    "es": "¿Cómo refleja una teología la colocación de la mesa de la Cena del Señor en un santuario?"
+   },
+   "keywords": {
+    "en": [
+     "table",
+     "placement",
+     "pulpit",
+     "below",
+     "altar",
+     "word",
+     "theolog",
+     "room"
+    ],
+    "es": [
+     "mesa",
+     "colocación",
+     "púlpit",
+     "debajo",
+     "altar",
+     "palabra",
+     "teolog",
+     "sala"
+    ]
+   },
+   "model": {
+    "en": "In a Protestant sanctuary the communion table sits centered but below the pulpit, declaring that the Word is elevated above the sacrament. In a Catholic church the altar stands front and center, declaring that the saving sacrament is central. The table below the pulpit and the altar front and center preach two different gospels through nothing but furniture placement.",
+    "es": "En un santuario protestante la mesa de comunión se sitúa centrada pero debajo del púlpito, declarando que la Palabra está elevada por encima del sacramento. En una iglesia católica el altar está al frente y al centro, declarando que el sacramento salvador es central. La mesa debajo del púlpito y el altar al frente y al centro predican dos evangelios diferentes mediante nada más que la colocación del mobiliario."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why are baptism and the Lord's Supper called ordinances rather than sacraments in the believer's-baptism tradition?",
+    "es": "¿Por qué se llaman ordenanzas en lugar de sacramentos el bautismo y la Cena del Señor en la tradición del bautismo del creyente?"
+   },
+   "keywords": {
+    "en": [
+     "ordinanc",
+     "sacrament",
+     "command",
+     "symbol",
+     "grace",
+     "obey",
+     "memorial",
+     "save"
+    ],
+    "es": [
+     "ordenanz",
+     "sacrament",
+     "mand",
+     "símbol",
+     "gracia",
+     "obed",
+     "memorial",
+     "salv"
+    ]
+   },
+   "model": {
+    "en": "These two acts are called ordinances rather than sacraments because a sacrament, in Catholic theology, is a channel that conveys saving grace, while an ordinance is something Christ ordained and commanded for us to obey. The ordinances symbolize and memorialize; they do not save — the word 'ordinance' confesses that baptism and the Lord's Supper are commanded symbols of obedience, not means of grace.",
+    "es": "Estos dos actos se llaman ordenanzas en lugar de sacramentos porque un sacramento, en la teología católica, es un canal que confiere gracia salvadora, mientras que una ordenanza es algo que Cristo ordenó y mandó que obedeciéramos. Las ordenanzas simbolizan y conmemoran; no salvan — la palabra 'ordenanza' confiesa que el bautismo y la Cena del Señor son símbolos mandados de obediencia, no medios de gracia."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What is the proper mode of baptism in the believer's-baptism tradition, and why?",
+    "es": "¿Cuál es el modo apropiado del bautismo en la tradición del bautismo del creyente, y por qué?"
+   },
+   "keywords": {
+    "en": [
+     "immers",
+     "mode",
+     "buried",
+     "symbol",
+     "greek",
+     "baptizo",
+     "dip",
+     "resurrect"
+    ],
+    "es": [
+     "inmersión",
+     "modo",
+     "sepult",
+     "símbol",
+     "griego",
+     "baptizo",
+     "sumerg",
+     "resurrec"
+    ]
+   },
+   "model": {
+    "en": "The proper mode of baptism is immersion, since the Greek word baptizo means to dip or to immerse, and immersion alone pictures the burial and the rising with Christ. Pouring or sprinkling cannot show what immersion shows; when the believer is lowered beneath the water and lifted up again, the whole congregation sees the gospel of death to sin and new life in Christ acted out visually.",
+    "es": "El modo apropiado del bautismo es la inmersión, ya que la palabra griega baptizo significa sumergir o inmergir, y solo la inmersión representa la sepultura y el levantamiento con Cristo. El derramamiento o la aspersión no pueden mostrar lo que muestra la inmersión; cuando el creyente es bajado bajo el agua y levantado de nuevo, toda la congregación ve el evangelio de la muerte al pecado y la nueva vida en Cristo representado visualmente."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How should the ordinances be administered so they remain meaningful acts of worship?",
+    "es": "¿Cómo deben administrarse las ordenanzas para que permanezcan como actos significativos de adoración?"
+   },
+   "keywords": {
+    "en": [
+     "administ",
+     "meaning",
+     "worship",
+     "explain",
+     "reverent",
+     "prepar",
+     "rush",
+     "ordinanc"
+    ],
+    "es": [
+     "administ",
+     "significad",
+     "ador",
+     "explic",
+     "reverent",
+     "prepar",
+     "apresur",
+     "ordenanz"
+    ]
+   },
+   "model": {
+    "en": "Both ordinances must be administered reverently, with preparation and clear explanation, so that they remain meaningful acts of worship rather than empty ritual. When the pastor explains their meaning ahead of time, the people grasp the gospel they picture, rather than watching a rite performed hastily or without context.",
+    "es": "Ambas ordenanzas deben administrarse con reverencia, con preparación y explicación clara, para que permanezcan como actos significativos de adoración en lugar de ritual vacío. Cuando el pastor explica su significado de antemano, el pueblo capta el evangelio que representan, en lugar de solo observar un rito realizado apresuradamente o sin contexto."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Summarize how both ordinances make the gospel visible in worship.",
+    "es": "Resuma cómo ambas ordenanzas hacen visible el evangelio en la adoración."
+   },
+   "keywords": {
+    "en": [
+     "gospel",
+     "visible",
+     "ordinanc",
+     "baptism",
+     "supper",
+     "death",
+     "picture",
+     "preach"
+    ],
+    "es": [
+     "evangelio",
+     "visible",
+     "ordenanz",
+     "bautism",
+     "cena",
+     "muerte",
+     "represent",
+     "predic"
+    ]
+   },
+   "model": {
+    "en": "Both ordinances make the gospel visible in worship: baptism shows the believer's death, burial, and resurrection with Christ, while the Lord's Supper shows Christ's body broken and blood shed for sin. Together they preach the gospel without words, so that in worship the people do not only hear the gospel, they see it acted out before them.",
+    "es": "Ambas ordenanzas hacen visible el evangelio en la adoración: el bautismo muestra la muerte, sepultura, y resurrección del creyente con Cristo, mientras que la Cena del Señor muestra el cuerpo de Cristo partido y su sangre derramada por el pecado. Juntas predican el evangelio sin palabras, de modo que en la adoración el pueblo no solo oye el evangelio, lo ve representado delante de ellos."
+   }
+  }
+ ]
+};

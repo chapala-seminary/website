@@ -1,43 +1,833 @@
-/* CTSHS - unit 5: per-unit configuration and content. */
-
-const UNIT = 5;
-
-var CFG={course:'hs',unit:5,totalUnits:10,progressKey:'cts_hs_progress',
-  next:'CTSHSUnit6.html',cert:'CTSHSCertificate.html',lockKey:`cts_hs_u${UNIT}_lock`,showReg:false};
-
-var DATA={"mc": [{"en": "The angel told Mary the Holy Spirit would come upon her, so the One born would be:", "es": "El ángel dijo a María que el Espíritu Santo vendría sobre ella, de modo que Aquel que naciera sería:", "oen": ["a great prophet", "the Son of God, that Holy One", "an angel in flesh", "a son of Joseph"], "oes": ["un gran profeta", "el Hijo de Dios, aquel Santo", "un ángel en carne", "un hijo de José"], "c": 22, "xen": "Luke 1:35 — conceived by the Spirit, the Holy One.", "xes": "Lucas 1:35 — concebido por el Espíritu, el Santo."}, {"en": "Joseph was told that what was conceived in Mary was:", "es": "A José se le dijo que lo concebido en María era:", "oen": ["of the Holy Spirit", "of his own line", "of an angel", "of the law"], "oes": ["del Espíritu Santo", "de su propia descendencia", "de un ángel", "de la ley"], "c": 28, "xen": "Matthew 1:20 — conceived of the Holy Spirit.", "xes": "Mateo 1:20 — concebido del Espíritu Santo."}, {"en": "At His baptism, the Spirit of God descended on Jesus like a:", "es": "En su bautismo, el Espíritu de Dios descendió sobre Jesús como:", "oen": ["flame", "cloud", "wind", "dove"], "oes": ["llama", "nube", "viento", "paloma"], "c": 38, "xen": "Matthew 3:16 — the Spirit as a dove at the Jordan.", "xes": "Mateo 3:16 — el Espíritu como paloma en el Jordán."}, {"en": "“God anointed Jesus of Nazareth with the Holy Spirit and with power” is from:", "es": "“Dios ungió con el Espíritu Santo y con poder a Jesús de Nazaret” es de:", "oen": ["Luke 1:35", "John 16:7", "Acts 10:38", "Acts 2:4"], "oes": ["Lucas 1:35", "Juan 16:7", "Hechos 10:38", "Hechos 2:4"], "c": 44, "xen": "Acts 10:38 — Jesus anointed with the Spirit.", "xes": "Hechos 10:38 — Jesús ungido con el Espíritu."}, {"en": "The very name “Christ” means:", "es": "El nombre mismo “Cristo” significa:", "oen": ["the Firstborn", "the Teacher", "the Servant", "the Anointed One"], "oes": ["el Primogénito", "el Maestro", "el Siervo", "el Ungido"], "c": 52, "xen": "Christ = the Anointed One, anointed with the Spirit.", "xes": "Cristo = el Ungido, ungido con el Espíritu."}, {"en": "In the synagogue Jesus read “The Spirit of the LORD is upon Me” from the prophet:", "es": "En la sinagoga Jesús leyó “El Espíritu del Señor está sobre mí” del profeta:", "oen": ["Joel", "Ezekiel", "Isaiah (Luke 4:18)", "Micah"], "oes": ["Joel", "Ezequiel", "Isaías (Lucas 4:18)", "Miqueas"], "c": 58, "xen": "Luke 4:18 — Jesus reads Isaiah's anointing prophecy.", "xes": "Lucas 4:18 — Jesús lee la profecía de la unción de Isaías."}, {"en": "After His baptism, Jesus was led by the Spirit into the:", "es": "Tras su bautismo, Jesús fue llevado por el Espíritu al:", "oen": ["wilderness, to be tempted", "sea, to calm it", "temple, to teach", "mountain, to pray alone"], "oes": ["desierto, para ser tentado", "mar, para calmarlo", "templo, para enseñar", "monte, para orar solo"], "c": 63, "xen": "Luke 4:1 — led by the Spirit into the wilderness.", "xes": "Lucas 4:1 — llevado por el Espíritu al desierto."}, {"en": "“If I cast out demons by the Spirit of God, surely the kingdom of God has come upon you” is from:", "es": "“Si yo por el Espíritu de Dios echo fuera los demonios, ciertamente ha llegado a vosotros el reino de Dios” es de:", "oen": ["Luke 4:1", "Matthew 12:28", "John 14:16", "Acts 1:8"], "oes": ["Lucas 4:1", "Mateo 12:28", "Juan 14:16", "Hechos 1:8"], "c": 71, "xen": "Matthew 12:28 — He cast out demons by the Spirit.", "xes": "Mateo 12:28 — echó fuera demonios por el Espíritu."}, {"en": "As the true Man, the last Adam, Jesus carried out His ministry:", "es": "Como el verdadero Hombre, el postrer Adán, Jesús llevó a cabo su ministerio:", "oen": ["only after Pentecost", "by laying aside His deity", "without any need of the Spirit", "in dependence on the Spirit, as our example"], "oes": ["solo después de Pentecostés", "dejando a un lado su deidad", "sin ninguna necesidad del Espíritu", "en dependencia del Espíritu, como nuestro ejemplo"], "c": 80, "xen": "He depended on the Spirit as the true Man, our example.", "xes": "Dependía del Espíritu como verdadero Hombre, nuestro ejemplo."}, {"en": "“I will pray the Father, and He will give you another Helper” is from:", "es": "“Yo rogaré al Padre, y os dará otro Consolador” es de:", "oen": ["Acts 2:4", "John 14:16", "Luke 24:49", "Matthew 3:16"], "oes": ["Hechos 2:4", "Juan 14:16", "Lucas 24:49", "Mateo 3:16"], "c": 85, "xen": "John 14:16 — the promise of another Helper.", "xes": "Juan 14:16 — la promesa de otro Consolador."}, {"en": "Jesus said it was to the disciples' advantage that He:", "es": "Jesús dijo que convenía a los discípulos que Él:", "oen": ["go away, so that the Helper would come", "call down fire", "remain with them always", "set up an earthly throne"], "oes": ["se fuera, para que viniera el Consolador", "hiciera descender fuego", "permaneciera con ellos siempre", "estableciera un trono terrenal"], "c": 91, "xen": "John 16:7 — His departure opened the Spirit's coming.", "xes": "Juan 16:7 — su partida abrió la venida del Espíritu."}, {"en": "“He will convict the world of sin, and of righteousness, and of judgment” is from:", "es": "“Redargüirá al mundo de pecado, y de justicia, y de juicio” es de:", "oen": ["Acts 1:8", "John 20:22", "John 16:8", "Luke 4:18"], "oes": ["Hechos 1:8", "Juan 20:22", "Juan 16:8", "Lucas 4:18"], "c": 100, "xen": "John 16:8 — the Spirit convicts the world.", "xes": "Juan 16:8 — el Espíritu redarguye al mundo."}, {"en": "Before they began their work, Jesus told the disciples to:", "es": "Antes de comenzar su obra, Jesús dijo a los discípulos que:", "oen": ["wait in Jerusalem for the Promise of the Father", "go at once to Rome", "choose a new king", "rebuild the temple"], "oes": ["esperaran en Jerusalén la promesa del Padre", "fueran de inmediato a Roma", "escogieran un nuevo rey", "reedificaran el templo"], "c": 105, "xen": "Luke 24:49 — wait for power from on high.", "xes": "Lucas 24:49 — esperar el poder de lo alto."}, {"en": "“You shall receive power when the Holy Spirit has come upon you” is from:", "es": "“Recibiréis poder cuando haya venido sobre vosotros el Espíritu Santo” es de:", "oen": ["John 16:7", "Luke 1:35", "Acts 2:39", "Acts 1:8"], "oes": ["Juan 16:7", "Lucas 1:35", "Hechos 2:39", "Hechos 1:8"], "c": 115, "xen": "Acts 1:8 — power for witness by the Spirit.", "xes": "Hechos 1:8 — poder para testificar por el Espíritu."}, {"en": "On the evening of His resurrection, Jesus breathed on the disciples and said:", "es": "En la tarde de su resurrección, Jesús sopló sobre los discípulos y dijo:", "oen": ["“Peace I leave with you”", "“Follow Me”", "“Receive the Holy Spirit”", "“It is finished”"], "oes": ["“La paz os dejo”", "“Sígueme”", "“Recibid el Espíritu Santo”", "“Consumado es”"], "c": 121, "xen": "John 20:22 — a foretaste before Pentecost.", "xes": "Juan 20:22 — un anticipo antes de Pentecostés."}, {"en": "On the day of Pentecost there came a sound from heaven like:", "es": "En el día de Pentecostés vino un estruendo del cielo como de:", "oen": ["a still small voice", "a rushing mighty wind", "rolling thunder", "a trumpet blast"], "oes": ["un silbo apacible", "un viento recio que soplaba", "trueno que retumba", "un toque de trompeta"], "c": 127, "xen": "Acts 2:2 — the sound of a rushing wind.", "xes": "Hechos 2:2 — el estruendo de un viento recio."}, {"en": "At Pentecost the believers were filled with the Spirit and began to:", "es": "En Pentecostés los creyentes fueron llenos del Espíritu y comenzaron a:", "oen": ["speak with other tongues", "fall asleep", "flee the city", "build an altar"], "oes": ["hablar en otras lenguas", "quedarse dormidos", "huir de la ciudad", "edificar un altar"], "c": 133, "xen": "Acts 2:4 — they spoke as the Spirit gave utterance.", "xes": "Hechos 2:4 — hablaron según el Espíritu les daba."}, {"en": "The crowd gathered from many nations was amazed because they:", "es": "La multitud reunida de muchas naciones estaba atónita porque:", "oen": ["saw the temple shake", "watched fire fall from heaven", "heard the wonderful works of God in their own languages", "found the tomb empty"], "oes": ["veían temblar el templo", "veían caer fuego del cielo", "oían las maravillas de Dios en sus propias lenguas", "hallaban la tumba vacía"], "c": 142, "xen": "Acts 2:11 — each heard in his own tongue.", "xes": "Hechos 2:11 — cada uno oía en su propia lengua."}, {"en": "When some mocked, “they are full of new wine,” Peter said this was spoken by the prophet:", "es": "Cuando algunos se burlaron, “están llenos de mosto,” Pedro dijo que esto fue dicho por el profeta:", "oen": ["Isaiah", "Joel", "Moses", "David"], "oes": ["Isaías", "Joel", "Moisés", "David"], "c": 148, "xen": "Acts 2:16 — “this is what was spoken by Joel.”", "xes": "Hechos 2:16 — “esto es lo dicho por Joel.”"}, {"en": "When Peter preached at Pentecost, the number saved that day was about:", "es": "Cuando Pedro predicó en Pentecostés, el número de salvos aquel día fue como:", "oen": ["twelve", "five hundred", "seventy", "three thousand"], "oes": ["doce", "quinientos", "setenta", "tres mil"], "c": 157, "xen": "Acts 2:41 — about three thousand were added.", "xes": "Hechos 2:41 — como tres mil fueron añadidos."}], "sa": [{"en": "How was the Holy Spirit involved in the conception and birth of Christ?", "es": "¿Cómo estuvo el Espíritu Santo involucrado en la concepción y el nacimiento de Cristo?", "men": "The angel told Mary the Holy Spirit would come upon her and the power of the Highest overshadow her, so the One born would be the holy Son of God; and Joseph was told that what was conceived in her was of the Holy Spirit. The eternal Son took our flesh by the working of the Spirit.", "mes": "El ángel dijo a María que el Espíritu Santo vendría sobre ella y el poder del Altísimo la cubriría, de modo que Aquel que naciera sería el santo Hijo de Dios; y a José se le dijo que lo concebido en ella era del Espíritu Santo. El Hijo eterno tomó nuestra carne por la obra del Espíritu.", "ken": ["spirit", "mary", "conceiv", "born", "son", "holy", "power", "flesh"], "kes": ["espiritu", "maria", "concebid", "naci", "hijo", "santo", "poder", "carne"]}, {"en": "What happened at Jesus' baptism, and what did it signify?", "es": "¿Qué sucedió en el bautismo de Jesús, y qué significó?", "men": "At His baptism the Spirit of God descended on Jesus like a dove. This was His anointing for public ministry, for God anointed Jesus with the Holy Spirit and with power. The name Christ means the Anointed One, and the Spirit foretold in the Old Testament now rested on Him in fullness.", "mes": "En su bautismo el Espíritu de Dios descendió sobre Jesús como paloma. Esta fue su unción para el ministerio público, pues Dios ungió a Jesús con el Espíritu Santo y con poder. El nombre Cristo significa el Ungido, y el Espíritu anunciado en el Antiguo Testamento ahora reposaba sobre Él en plenitud.", "ken": ["baptism", "spirit", "dove", "anoint", "ministr", "christ", "power", "rest"], "kes": ["bautismo", "espiritu", "paloma", "ungi", "ministeri", "cristo", "poder", "repos"]}, {"en": "How did Jesus live and minister in relation to the Spirit, and how should we understand it?", "es": "¿Cómo vivió y ministró Jesús en relación con el Espíritu, y cómo debemos entenderlo?", "men": "Jesus was filled with the Spirit, led by the Spirit into the wilderness, and returned in the power of the Spirit; He cast out demons by the Spirit. He did not cease to be God, but as the true Man, the last Adam, He depended on the Spirit to be our example, so that we too must depend on Him.", "mes": "Jesús fue lleno del Espíritu, llevado por el Espíritu al desierto, y volvió en el poder del Espíritu; echó fuera demonios por el Espíritu. No dejó de ser Dios, pero como el verdadero Hombre, el postrer Adán, dependía del Espíritu para ser nuestro ejemplo, de modo que nosotros también debemos depender de Él.", "ken": ["spirit", "fill", "led", "power", "demon", "man", "exampl", "depend"], "kes": ["espiritu", "llen", "llev", "poder", "demoni", "adan", "ejempl", "depend"]}, {"en": "What did Jesus promise about the Spirit in the upper room?", "es": "¿Qué prometió Jesús acerca del Espíritu en el aposento alto?", "men": "He promised another Helper, the Spirit of truth, to abide with them forever; the Spirit would teach them and bring His words to remembrance, and would testify of Christ. And whereas the Spirit had been with them, He would now be in them, dwelling in their hearts.", "mes": "Prometió otro Consolador, el Espíritu de verdad, para estar con ellos para siempre; el Espíritu les enseñaría y les recordaría sus palabras, y daría testimonio de Cristo. Y mientras el Espíritu había estado con ellos, ahora estaría en ellos, morando en sus corazones.", "ken": ["helper", "spirit", "truth", "teach", "testif", "dwell", "forever", "heart"], "kes": ["consolad", "espiritu", "verdad", "ensen", "testi", "mora", "siempre", "corazon"]}, {"en": "Why did Jesus say it was to the disciples' advantage that He go away?", "es": "¿Por qué dijo Jesús que convenía a los discípulos que Él se fuera?", "men": "Because if He did not go away the Helper would not come, but if He departed He would send the Spirit. The Christ who walked beside them could be in only one place, but the Spirit could dwell within every believer everywhere at once and carry on the work of Christ.", "mes": "Porque si no se iba el Consolador no vendría, pero si se iba enviaría al Espíritu. El Cristo que andaba a su lado podía estar en un solo lugar, pero el Espíritu podía morar dentro de cada creyente en todas partes a la vez y llevar adelante la obra de Cristo.", "ken": ["advantag", "away", "helper", "spirit", "send", "place", "within", "christ"], "kes": ["convien", "vaya", "consolad", "espiritu", "envi", "lugar", "dentro", "cristo"]}, {"en": "What did Jesus tell the disciples to do before beginning their work, and why?", "es": "¿Qué dijo Jesús a los discípulos que hicieran antes de comenzar su obra, y por qué?", "men": "He told them to wait in Jerusalem for the Promise of the Father until they were endued with power from on high, for they would receive power when the Holy Spirit came upon them. They were not to attempt God's work in human strength but to wait for the Spirit.", "mes": "Les dijo que esperaran en Jerusalén la promesa del Padre hasta ser investidos de poder de lo alto, pues recibirían poder cuando el Espíritu Santo viniera sobre ellos. No habían de intentar la obra de Dios en fuerza humana sino esperar al Espíritu.", "ken": ["wait", "jerusalem", "promis", "power", "spirit", "receiv", "work", "strength"], "kes": ["esper", "jerusalen", "promes", "poder", "espiritu", "recib", "obra", "fuerza"]}, {"en": "Describe what happened on the day of Pentecost.", "es": "Describa lo que sucedió en el día de Pentecostés.", "men": "There came a sound like a rushing mighty wind, and tongues as of fire appeared, and they were all filled with the Holy Spirit and began to speak in other tongues. Pilgrims from many nations heard the wonderful works of God each in his own language, and the Spirit was poured out on God's people.", "mes": "Vino un estruendo como de un viento recio, y aparecieron lenguas como de fuego, y fueron todos llenos del Espíritu Santo y comenzaron a hablar en otras lenguas. Peregrinos de muchas naciones oían las maravillas de Dios cada uno en su propia lengua, y el Espíritu fue derramado sobre el pueblo de Dios.", "ken": ["wind", "fire", "fill", "spirit", "tongu", "nation", "languag", "pour"], "kes": ["viento", "fuego", "llen", "espiritu", "lengua", "nacion", "derram", "maravilla"]}, {"en": "How did Peter answer the charge that the believers were drunk?", "es": "¿Cómo respondió Pedro a la acusación de que los creyentes estaban borrachos?", "men": "When some mocked that they were full of new wine, Peter stood up and said they were not drunk, but that this was what God had promised through the prophet Joel: that He would pour out His Spirit on all flesh. Then he preached Christ crucified and risen.", "mes": "Cuando algunos se burlaron de que estaban llenos de mosto, Pedro se puso de pie y dijo que no estaban borrachos, sino que esto era lo que Dios había prometido por el profeta Joel: que derramaría su Espíritu sobre toda carne. Luego predicó a Cristo crucificado y resucitado.", "ken": ["peter", "drunk", "wine", "joel", "pour", "spirit", "flesh", "christ"], "kes": ["pedro", "borrach", "mosto", "joel", "derram", "espiritu", "carne", "cristo"]}, {"en": "How was the day of Pentecost the fulfillment of Joel's promise?", "es": "¿Cómo fue el día de Pentecostés el cumplimiento de la promesa de Joel?", "men": "Joel had promised that God would pour out His Spirit on all flesh, on sons and daughters, menservants and maidservants. At Pentecost Peter declared this is what was spoken by Joel, for the Spirit was no longer given to a chosen few but poured out on all God's people.", "mes": "Joel había prometido que Dios derramaría su Espíritu sobre toda carne, sobre hijos e hijas, siervos y siervas. En Pentecostés Pedro declaró que esto es lo dicho por Joel, pues el Espíritu ya no se daba a unos pocos escogidos sino que era derramado sobre todo el pueblo de Dios.", "ken": ["joel", "pour", "spirit", "flesh", "pentecost", "peter", "all", "fulfil"], "kes": ["joel", "derram", "espiritu", "carne", "pentecost", "pedro", "todos", "cumpli"]}, {"en": "To whom is the promise of the Spirit given, and what does that mean for us?", "es": "¿A quién se da la promesa del Espíritu, y qué significa para nosotros?", "men": "Peter said the promise is to you and to your children and to all who are afar off, as many as the Lord our God will call. Those afar off include us, for the same gift of the Spirit is given to everyone the Lord calls to Himself in Christ, in every land and age.", "mes": "Pedro dijo que la promesa es para vosotros y para vuestros hijos y para todos los que están lejos, para cuantos el Señor nuestro Dios llamare. Los que están lejos nos incluyen, pues el mismo don del Espíritu se da a todo aquel que el Señor llama a sí mismo en Cristo, en toda tierra y edad.", "ken": ["promis", "children", "afar", "call", "spirit", "everyone", "christ", "give"], "kes": ["promes", "hijo", "lejos", "llam", "espiritu", "todo", "cristo", "don"]}]};
-
-var I18N={
- en:{title:'The Doctrine of the Holy Spirit',unit:`Unit ${UNIT} &middot; Christ and Pentecost`,lang:'Espa\u00f1ol',
-   mc:'Multiple Choice',sa:'Short Answer',greet:function(n){return n?('Student: '+n):'';},
-   track:function(t){return t==='cert'?'Certificate track':t==='mdiv'?'M.Div. track':'Th.M. track';},
-   saNoteCert:'On the Certificate track the short answers are practice and do not count toward passing \u2014 but study each model answer.',
-   saNoteMast:'On the masters tracks you must pass at least 7 of 10 short answers (3 of 8 keywords each).',
-   check:'Check answer',already:'Answered',model:'Model answer \u2014 study this',
-   pass:'Pass \u2014 you engaged the material ('+''+')',blank:'Please write your answer first.',minLen:'Please write your own answer first (at least 100 characters), then check it against the model answer below.',
-   complete:`Mark Unit ${UNIT} complete`,
-   epigraph:'“You shall receive power when the Holy Spirit has come upon you.” — Acts 1:8',
-   mGood:`Unit ${UNIT} complete. Well done — continue to Unit ${UNIT + 1}.`,
-   mShort:'Keep going \u2014 review the material and try again.',
-   nextTxt:`Continue to Unit ${UNIT + 1} →`,
-   mh:'Welcome to The Doctrine of the Holy Spirit',mp:'Please register once. Your name and track carry across every CTS course on this site.',
-   mnl:'Your name',mtl:'Track',mgo:'Begin',
-   hitFmt:function(h){return h+' of 8 keywords';},
-   passV:'Pass',softV:'Practice noted'},
- es:{title:'La Doctrina del Esp\u00edritu Santo',unit:`Unidad ${UNIT} &middot; Cristo y Pentecostés`,lang:'English',
-   mc:'Opci\u00f3n m\u00faltiple',sa:'Respuesta breve',greet:function(n){return n?('Estudiante: '+n):'';},
-   track:function(t){return t==='cert'?'Pista de Certificado':t==='mdiv'?'Pista de M.Div.':'Pista de Th.M.';},
-   saNoteCert:'En la pista de Certificado las respuestas breves son pr\u00e1ctica y no cuentan para aprobar, pero estudie cada respuesta modelo.',
-   saNoteMast:'En las pistas de maestr\u00eda debe aprobar al menos 7 de 10 respuestas breves (3 de 8 palabras clave cada una).',
-   check:'Revisar respuesta',already:'Respondida',model:'Respuesta modelo \u2014 est\u00fadiela',
-   pass:'',blank:'Por favor escriba su respuesta primero.',minLen:'Escriba primero su propia respuesta (al menos 100 caracteres), luego compárela con la respuesta modelo abajo.',
-   complete:`Marcar la Unidad ${UNIT} como completa`,
-   epigraph:'“Recibiréis poder cuando haya venido sobre vosotros el Espíritu Santo.” — Hechos 1:8',
-   mGood:`Unidad ${UNIT} completa. Bien hecho — continúe a la Unidad ${UNIT + 1}.`,
-   mShort:'Siga adelante \u2014 repase el material e int\u00e9ntelo de nuevo.',
-   nextTxt:`Continuar a la Unidad ${UNIT + 1} →`,
-   mh:'Bienvenido a La Doctrina del Esp\u00edritu Santo',mp:'Reg\u00edstrese una sola vez. Su nombre y pista se conservan en todos los cursos CTS de este sitio.',
-   mnl:'Su nombre',mtl:'Pista',mgo:'Comenzar',
-   hitFmt:function(h){return h+' de 8 palabras clave';},
-   passV:'Aprobada',softV:'Pr\u00e1ctica registrada'}
+/* CTSHS — unit 5. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "hs",
+ "unit": 5,
+ "totalUnits": 10,
+ "filePrefix": "CTSHS",
+ "prevHref": "CTSHSUnit4.html",
+ "nextHref": "CTSHSUnit6.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "The angel told Mary the Holy Spirit would come upon her, so the One born would be:",
+    "es": "El ángel dijo a María que el Espíritu Santo vendría sobre ella, de modo que Aquel que naciera sería:"
+   },
+   "options": {
+    "en": [
+     "a great prophet",
+     "the Son of God, that Holy One",
+     "an angel in flesh",
+     "a son of Joseph"
+    ],
+    "es": [
+     "un gran profeta",
+     "el Hijo de Dios, aquel Santo",
+     "un ángel en carne",
+     "un hijo de José"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Luke 1:35 — conceived by the Spirit, the Holy One.",
+    "es": "Lucas 1:35 — concebido por el Espíritu, el Santo."
+   }
+  },
+  {
+   "stem": {
+    "en": "Joseph was told that what was conceived in Mary was:",
+    "es": "A José se le dijo que lo concebido en María era:"
+   },
+   "options": {
+    "en": [
+     "of the Holy Spirit",
+     "of his own line",
+     "of an angel",
+     "of the law"
+    ],
+    "es": [
+     "del Espíritu Santo",
+     "de su propia descendencia",
+     "de un ángel",
+     "de la ley"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Matthew 1:20 — conceived of the Holy Spirit.",
+    "es": "Mateo 1:20 — concebido del Espíritu Santo."
+   }
+  },
+  {
+   "stem": {
+    "en": "At His baptism, the Spirit of God descended on Jesus like a:",
+    "es": "En su bautismo, el Espíritu de Dios descendió sobre Jesús como:"
+   },
+   "options": {
+    "en": [
+     "flame",
+     "cloud",
+     "wind",
+     "dove"
+    ],
+    "es": [
+     "llama",
+     "nube",
+     "viento",
+     "paloma"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Matthew 3:16 — the Spirit as a dove at the Jordan.",
+    "es": "Mateo 3:16 — el Espíritu como paloma en el Jordán."
+   }
+  },
+  {
+   "stem": {
+    "en": "“God anointed Jesus of Nazareth with the Holy Spirit and with power” is from:",
+    "es": "“Dios ungió con el Espíritu Santo y con poder a Jesús de Nazaret” es de:"
+   },
+   "options": {
+    "en": [
+     "Luke 1:35",
+     "John 16:7",
+     "Acts 10:38",
+     "Acts 2:4"
+    ],
+    "es": [
+     "Lucas 1:35",
+     "Juan 16:7",
+     "Hechos 10:38",
+     "Hechos 2:4"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Acts 10:38 — Jesus anointed with the Spirit.",
+    "es": "Hechos 10:38 — Jesús ungido con el Espíritu."
+   }
+  },
+  {
+   "stem": {
+    "en": "The very name “Christ” means:",
+    "es": "El nombre mismo “Cristo” significa:"
+   },
+   "options": {
+    "en": [
+     "the Firstborn",
+     "the Teacher",
+     "the Servant",
+     "the Anointed One"
+    ],
+    "es": [
+     "el Primogénito",
+     "el Maestro",
+     "el Siervo",
+     "el Ungido"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Christ = the Anointed One, anointed with the Spirit.",
+    "es": "Cristo = el Ungido, ungido con el Espíritu."
+   }
+  },
+  {
+   "stem": {
+    "en": "In the synagogue Jesus read “The Spirit of the LORD is upon Me” from the prophet:",
+    "es": "En la sinagoga Jesús leyó “El Espíritu del Señor está sobre mí” del profeta:"
+   },
+   "options": {
+    "en": [
+     "Joel",
+     "Ezekiel",
+     "Isaiah (Luke 4:18)",
+     "Micah"
+    ],
+    "es": [
+     "Joel",
+     "Ezequiel",
+     "Isaías (Lucas 4:18)",
+     "Miqueas"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Luke 4:18 — Jesus reads Isaiah's anointing prophecy.",
+    "es": "Lucas 4:18 — Jesús lee la profecía de la unción de Isaías."
+   }
+  },
+  {
+   "stem": {
+    "en": "After His baptism, Jesus was led by the Spirit into the:",
+    "es": "Tras su bautismo, Jesús fue llevado por el Espíritu al:"
+   },
+   "options": {
+    "en": [
+     "wilderness, to be tempted",
+     "sea, to calm it",
+     "temple, to teach",
+     "mountain, to pray alone"
+    ],
+    "es": [
+     "desierto, para ser tentado",
+     "mar, para calmarlo",
+     "templo, para enseñar",
+     "monte, para orar solo"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Luke 4:1 — led by the Spirit into the wilderness.",
+    "es": "Lucas 4:1 — llevado por el Espíritu al desierto."
+   }
+  },
+  {
+   "stem": {
+    "en": "“If I cast out demons by the Spirit of God, surely the kingdom of God has come upon you” is from:",
+    "es": "“Si yo por el Espíritu de Dios echo fuera los demonios, ciertamente ha llegado a vosotros el reino de Dios” es de:"
+   },
+   "options": {
+    "en": [
+     "Luke 4:1",
+     "Matthew 12:28",
+     "John 14:16",
+     "Acts 1:8"
+    ],
+    "es": [
+     "Lucas 4:1",
+     "Mateo 12:28",
+     "Juan 14:16",
+     "Hechos 1:8"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Matthew 12:28 — He cast out demons by the Spirit.",
+    "es": "Mateo 12:28 — echó fuera demonios por el Espíritu."
+   }
+  },
+  {
+   "stem": {
+    "en": "As the true Man, the last Adam, Jesus carried out His ministry:",
+    "es": "Como el verdadero Hombre, el postrer Adán, Jesús llevó a cabo su ministerio:"
+   },
+   "options": {
+    "en": [
+     "only after Pentecost",
+     "by laying aside His deity",
+     "without any need of the Spirit",
+     "in dependence on the Spirit, as our example"
+    ],
+    "es": [
+     "solo después de Pentecostés",
+     "dejando a un lado su deidad",
+     "sin ninguna necesidad del Espíritu",
+     "en dependencia del Espíritu, como nuestro ejemplo"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "He depended on the Spirit as the true Man, our example.",
+    "es": "Dependía del Espíritu como verdadero Hombre, nuestro ejemplo."
+   }
+  },
+  {
+   "stem": {
+    "en": "“I will pray the Father, and He will give you another Helper” is from:",
+    "es": "“Yo rogaré al Padre, y os dará otro Consolador” es de:"
+   },
+   "options": {
+    "en": [
+     "Acts 2:4",
+     "John 14:16",
+     "Luke 24:49",
+     "Matthew 3:16"
+    ],
+    "es": [
+     "Hechos 2:4",
+     "Juan 14:16",
+     "Lucas 24:49",
+     "Mateo 3:16"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "John 14:16 — the promise of another Helper.",
+    "es": "Juan 14:16 — la promesa de otro Consolador."
+   }
+  },
+  {
+   "stem": {
+    "en": "Jesus said it was to the disciples' advantage that He:",
+    "es": "Jesús dijo que convenía a los discípulos que Él:"
+   },
+   "options": {
+    "en": [
+     "go away, so that the Helper would come",
+     "call down fire",
+     "remain with them always",
+     "set up an earthly throne"
+    ],
+    "es": [
+     "se fuera, para que viniera el Consolador",
+     "hiciera descender fuego",
+     "permaneciera con ellos siempre",
+     "estableciera un trono terrenal"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "John 16:7 — His departure opened the Spirit's coming.",
+    "es": "Juan 16:7 — su partida abrió la venida del Espíritu."
+   }
+  },
+  {
+   "stem": {
+    "en": "“He will convict the world of sin, and of righteousness, and of judgment” is from:",
+    "es": "“Redargüirá al mundo de pecado, y de justicia, y de juicio” es de:"
+   },
+   "options": {
+    "en": [
+     "Acts 1:8",
+     "John 20:22",
+     "John 16:8",
+     "Luke 4:18"
+    ],
+    "es": [
+     "Hechos 1:8",
+     "Juan 20:22",
+     "Juan 16:8",
+     "Lucas 4:18"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "John 16:8 — the Spirit convicts the world.",
+    "es": "Juan 16:8 — el Espíritu redarguye al mundo."
+   }
+  },
+  {
+   "stem": {
+    "en": "Before they began their work, Jesus told the disciples to:",
+    "es": "Antes de comenzar su obra, Jesús dijo a los discípulos que:"
+   },
+   "options": {
+    "en": [
+     "wait in Jerusalem for the Promise of the Father",
+     "go at once to Rome",
+     "choose a new king",
+     "rebuild the temple"
+    ],
+    "es": [
+     "esperaran en Jerusalén la promesa del Padre",
+     "fueran de inmediato a Roma",
+     "escogieran un nuevo rey",
+     "reedificaran el templo"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Luke 24:49 — wait for power from on high.",
+    "es": "Lucas 24:49 — esperar el poder de lo alto."
+   }
+  },
+  {
+   "stem": {
+    "en": "“You shall receive power when the Holy Spirit has come upon you” is from:",
+    "es": "“Recibiréis poder cuando haya venido sobre vosotros el Espíritu Santo” es de:"
+   },
+   "options": {
+    "en": [
+     "John 16:7",
+     "Luke 1:35",
+     "Acts 2:39",
+     "Acts 1:8"
+    ],
+    "es": [
+     "Juan 16:7",
+     "Lucas 1:35",
+     "Hechos 2:39",
+     "Hechos 1:8"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Acts 1:8 — power for witness by the Spirit.",
+    "es": "Hechos 1:8 — poder para testificar por el Espíritu."
+   }
+  },
+  {
+   "stem": {
+    "en": "On the evening of His resurrection, Jesus breathed on the disciples and said:",
+    "es": "En la tarde de su resurrección, Jesús sopló sobre los discípulos y dijo:"
+   },
+   "options": {
+    "en": [
+     "“Peace I leave with you”",
+     "“Follow Me”",
+     "“Receive the Holy Spirit”",
+     "“It is finished”"
+    ],
+    "es": [
+     "“La paz os dejo”",
+     "“Sígueme”",
+     "“Recibid el Espíritu Santo”",
+     "“Consumado es”"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "John 20:22 — a foretaste before Pentecost.",
+    "es": "Juan 20:22 — un anticipo antes de Pentecostés."
+   }
+  },
+  {
+   "stem": {
+    "en": "On the day of Pentecost there came a sound from heaven like:",
+    "es": "En el día de Pentecostés vino un estruendo del cielo como de:"
+   },
+   "options": {
+    "en": [
+     "a still small voice",
+     "a rushing mighty wind",
+     "rolling thunder",
+     "a trumpet blast"
+    ],
+    "es": [
+     "un silbo apacible",
+     "un viento recio que soplaba",
+     "trueno que retumba",
+     "un toque de trompeta"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Acts 2:2 — the sound of a rushing wind.",
+    "es": "Hechos 2:2 — el estruendo de un viento recio."
+   }
+  },
+  {
+   "stem": {
+    "en": "At Pentecost the believers were filled with the Spirit and began to:",
+    "es": "En Pentecostés los creyentes fueron llenos del Espíritu y comenzaron a:"
+   },
+   "options": {
+    "en": [
+     "speak with other tongues",
+     "fall asleep",
+     "flee the city",
+     "build an altar"
+    ],
+    "es": [
+     "hablar en otras lenguas",
+     "quedarse dormidos",
+     "huir de la ciudad",
+     "edificar un altar"
+    ]
+   },
+   "answer": 0,
+   "why": {
+    "en": "Acts 2:4 — they spoke as the Spirit gave utterance.",
+    "es": "Hechos 2:4 — hablaron según el Espíritu les daba."
+   }
+  },
+  {
+   "stem": {
+    "en": "The crowd gathered from many nations was amazed because they:",
+    "es": "La multitud reunida de muchas naciones estaba atónita porque:"
+   },
+   "options": {
+    "en": [
+     "saw the temple shake",
+     "watched fire fall from heaven",
+     "heard the wonderful works of God in their own languages",
+     "found the tomb empty"
+    ],
+    "es": [
+     "veían temblar el templo",
+     "veían caer fuego del cielo",
+     "oían las maravillas de Dios en sus propias lenguas",
+     "hallaban la tumba vacía"
+    ]
+   },
+   "answer": 2,
+   "why": {
+    "en": "Acts 2:11 — each heard in his own tongue.",
+    "es": "Hechos 2:11 — cada uno oía en su propia lengua."
+   }
+  },
+  {
+   "stem": {
+    "en": "When some mocked, “they are full of new wine,” Peter said this was spoken by the prophet:",
+    "es": "Cuando algunos se burlaron, “están llenos de mosto,” Pedro dijo que esto fue dicho por el profeta:"
+   },
+   "options": {
+    "en": [
+     "Isaiah",
+     "Joel",
+     "Moses",
+     "David"
+    ],
+    "es": [
+     "Isaías",
+     "Joel",
+     "Moisés",
+     "David"
+    ]
+   },
+   "answer": 1,
+   "why": {
+    "en": "Acts 2:16 — “this is what was spoken by Joel.”",
+    "es": "Hechos 2:16 — “esto es lo dicho por Joel.”"
+   }
+  },
+  {
+   "stem": {
+    "en": "When Peter preached at Pentecost, the number saved that day was about:",
+    "es": "Cuando Pedro predicó en Pentecostés, el número de salvos aquel día fue como:"
+   },
+   "options": {
+    "en": [
+     "twelve",
+     "five hundred",
+     "seventy",
+     "three thousand"
+    ],
+    "es": [
+     "doce",
+     "quinientos",
+     "setenta",
+     "tres mil"
+    ]
+   },
+   "answer": 3,
+   "why": {
+    "en": "Acts 2:41 — about three thousand were added.",
+    "es": "Hechos 2:41 — como tres mil fueron añadidos."
+   }
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "How was the Holy Spirit involved in the conception and birth of Christ?",
+    "es": "¿Cómo estuvo el Espíritu Santo involucrado en la concepción y el nacimiento de Cristo?"
+   },
+   "keywords": {
+    "en": [
+     "spirit",
+     "mary",
+     "conceiv",
+     "born",
+     "son",
+     "holy",
+     "power",
+     "flesh"
+    ],
+    "es": [
+     "espiritu",
+     "maria",
+     "concebid",
+     "naci",
+     "hijo",
+     "santo",
+     "poder",
+     "carne"
+    ]
+   },
+   "model": {
+    "en": "The angel told Mary the Holy Spirit would come upon her and the power of the Highest overshadow her, so the One born would be the holy Son of God; and Joseph was told that what was conceived in her was of the Holy Spirit. The eternal Son took our flesh by the working of the Spirit.",
+    "es": "El ángel dijo a María que el Espíritu Santo vendría sobre ella y el poder del Altísimo la cubriría, de modo que Aquel que naciera sería el santo Hijo de Dios; y a José se le dijo que lo concebido en ella era del Espíritu Santo. El Hijo eterno tomó nuestra carne por la obra del Espíritu."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What happened at Jesus' baptism, and what did it signify?",
+    "es": "¿Qué sucedió en el bautismo de Jesús, y qué significó?"
+   },
+   "keywords": {
+    "en": [
+     "baptism",
+     "spirit",
+     "dove",
+     "anoint",
+     "ministr",
+     "christ",
+     "power",
+     "rest"
+    ],
+    "es": [
+     "bautismo",
+     "espiritu",
+     "paloma",
+     "ungi",
+     "ministeri",
+     "cristo",
+     "poder",
+     "repos"
+    ]
+   },
+   "model": {
+    "en": "At His baptism the Spirit of God descended on Jesus like a dove. This was His anointing for public ministry, for God anointed Jesus with the Holy Spirit and with power. The name Christ means the Anointed One, and the Spirit foretold in the Old Testament now rested on Him in fullness.",
+    "es": "En su bautismo el Espíritu de Dios descendió sobre Jesús como paloma. Esta fue su unción para el ministerio público, pues Dios ungió a Jesús con el Espíritu Santo y con poder. El nombre Cristo significa el Ungido, y el Espíritu anunciado en el Antiguo Testamento ahora reposaba sobre Él en plenitud."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How did Jesus live and minister in relation to the Spirit, and how should we understand it?",
+    "es": "¿Cómo vivió y ministró Jesús en relación con el Espíritu, y cómo debemos entenderlo?"
+   },
+   "keywords": {
+    "en": [
+     "spirit",
+     "fill",
+     "led",
+     "power",
+     "demon",
+     "man",
+     "exampl",
+     "depend"
+    ],
+    "es": [
+     "espiritu",
+     "llen",
+     "llev",
+     "poder",
+     "demoni",
+     "adan",
+     "ejempl",
+     "depend"
+    ]
+   },
+   "model": {
+    "en": "Jesus was filled with the Spirit, led by the Spirit into the wilderness, and returned in the power of the Spirit; He cast out demons by the Spirit. He did not cease to be God, but as the true Man, the last Adam, He depended on the Spirit to be our example, so that we too must depend on Him.",
+    "es": "Jesús fue lleno del Espíritu, llevado por el Espíritu al desierto, y volvió en el poder del Espíritu; echó fuera demonios por el Espíritu. No dejó de ser Dios, pero como el verdadero Hombre, el postrer Adán, dependía del Espíritu para ser nuestro ejemplo, de modo que nosotros también debemos depender de Él."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What did Jesus promise about the Spirit in the upper room?",
+    "es": "¿Qué prometió Jesús acerca del Espíritu en el aposento alto?"
+   },
+   "keywords": {
+    "en": [
+     "helper",
+     "spirit",
+     "truth",
+     "teach",
+     "testif",
+     "dwell",
+     "forever",
+     "heart"
+    ],
+    "es": [
+     "consolad",
+     "espiritu",
+     "verdad",
+     "ensen",
+     "testi",
+     "mora",
+     "siempre",
+     "corazon"
+    ]
+   },
+   "model": {
+    "en": "He promised another Helper, the Spirit of truth, to abide with them forever; the Spirit would teach them and bring His words to remembrance, and would testify of Christ. And whereas the Spirit had been with them, He would now be in them, dwelling in their hearts.",
+    "es": "Prometió otro Consolador, el Espíritu de verdad, para estar con ellos para siempre; el Espíritu les enseñaría y les recordaría sus palabras, y daría testimonio de Cristo. Y mientras el Espíritu había estado con ellos, ahora estaría en ellos, morando en sus corazones."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why did Jesus say it was to the disciples' advantage that He go away?",
+    "es": "¿Por qué dijo Jesús que convenía a los discípulos que Él se fuera?"
+   },
+   "keywords": {
+    "en": [
+     "advantag",
+     "away",
+     "helper",
+     "spirit",
+     "send",
+     "place",
+     "within",
+     "christ"
+    ],
+    "es": [
+     "convien",
+     "vaya",
+     "consolad",
+     "espiritu",
+     "envi",
+     "lugar",
+     "dentro",
+     "cristo"
+    ]
+   },
+   "model": {
+    "en": "Because if He did not go away the Helper would not come, but if He departed He would send the Spirit. The Christ who walked beside them could be in only one place, but the Spirit could dwell within every believer everywhere at once and carry on the work of Christ.",
+    "es": "Porque si no se iba el Consolador no vendría, pero si se iba enviaría al Espíritu. El Cristo que andaba a su lado podía estar en un solo lugar, pero el Espíritu podía morar dentro de cada creyente en todas partes a la vez y llevar adelante la obra de Cristo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What did Jesus tell the disciples to do before beginning their work, and why?",
+    "es": "¿Qué dijo Jesús a los discípulos que hicieran antes de comenzar su obra, y por qué?"
+   },
+   "keywords": {
+    "en": [
+     "wait",
+     "jerusalem",
+     "promis",
+     "power",
+     "spirit",
+     "receiv",
+     "work",
+     "strength"
+    ],
+    "es": [
+     "esper",
+     "jerusalen",
+     "promes",
+     "poder",
+     "espiritu",
+     "recib",
+     "obra",
+     "fuerza"
+    ]
+   },
+   "model": {
+    "en": "He told them to wait in Jerusalem for the Promise of the Father until they were endued with power from on high, for they would receive power when the Holy Spirit came upon them. They were not to attempt God's work in human strength but to wait for the Spirit.",
+    "es": "Les dijo que esperaran en Jerusalén la promesa del Padre hasta ser investidos de poder de lo alto, pues recibirían poder cuando el Espíritu Santo viniera sobre ellos. No habían de intentar la obra de Dios en fuerza humana sino esperar al Espíritu."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Describe what happened on the day of Pentecost.",
+    "es": "Describa lo que sucedió en el día de Pentecostés."
+   },
+   "keywords": {
+    "en": [
+     "wind",
+     "fire",
+     "fill",
+     "spirit",
+     "tongu",
+     "nation",
+     "languag",
+     "pour"
+    ],
+    "es": [
+     "viento",
+     "fuego",
+     "llen",
+     "espiritu",
+     "lengua",
+     "nacion",
+     "derram",
+     "maravilla"
+    ]
+   },
+   "model": {
+    "en": "There came a sound like a rushing mighty wind, and tongues as of fire appeared, and they were all filled with the Holy Spirit and began to speak in other tongues. Pilgrims from many nations heard the wonderful works of God each in his own language, and the Spirit was poured out on God's people.",
+    "es": "Vino un estruendo como de un viento recio, y aparecieron lenguas como de fuego, y fueron todos llenos del Espíritu Santo y comenzaron a hablar en otras lenguas. Peregrinos de muchas naciones oían las maravillas de Dios cada uno en su propia lengua, y el Espíritu fue derramado sobre el pueblo de Dios."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How did Peter answer the charge that the believers were drunk?",
+    "es": "¿Cómo respondió Pedro a la acusación de que los creyentes estaban borrachos?"
+   },
+   "keywords": {
+    "en": [
+     "peter",
+     "drunk",
+     "wine",
+     "joel",
+     "pour",
+     "spirit",
+     "flesh",
+     "christ"
+    ],
+    "es": [
+     "pedro",
+     "borrach",
+     "mosto",
+     "joel",
+     "derram",
+     "espiritu",
+     "carne",
+     "cristo"
+    ]
+   },
+   "model": {
+    "en": "When some mocked that they were full of new wine, Peter stood up and said they were not drunk, but that this was what God had promised through the prophet Joel: that He would pour out His Spirit on all flesh. Then he preached Christ crucified and risen.",
+    "es": "Cuando algunos se burlaron de que estaban llenos de mosto, Pedro se puso de pie y dijo que no estaban borrachos, sino que esto era lo que Dios había prometido por el profeta Joel: que derramaría su Espíritu sobre toda carne. Luego predicó a Cristo crucificado y resucitado."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How was the day of Pentecost the fulfillment of Joel's promise?",
+    "es": "¿Cómo fue el día de Pentecostés el cumplimiento de la promesa de Joel?"
+   },
+   "keywords": {
+    "en": [
+     "joel",
+     "pour",
+     "spirit",
+     "flesh",
+     "pentecost",
+     "peter",
+     "all",
+     "fulfil"
+    ],
+    "es": [
+     "joel",
+     "derram",
+     "espiritu",
+     "carne",
+     "pentecost",
+     "pedro",
+     "todos",
+     "cumpli"
+    ]
+   },
+   "model": {
+    "en": "Joel had promised that God would pour out His Spirit on all flesh, on sons and daughters, menservants and maidservants. At Pentecost Peter declared this is what was spoken by Joel, for the Spirit was no longer given to a chosen few but poured out on all God's people.",
+    "es": "Joel había prometido que Dios derramaría su Espíritu sobre toda carne, sobre hijos e hijas, siervos y siervas. En Pentecostés Pedro declaró que esto es lo dicho por Joel, pues el Espíritu ya no se daba a unos pocos escogidos sino que era derramado sobre todo el pueblo de Dios."
+   }
+  },
+  {
+   "prompt": {
+    "en": "To whom is the promise of the Spirit given, and what does that mean for us?",
+    "es": "¿A quién se da la promesa del Espíritu, y qué significa para nosotros?"
+   },
+   "keywords": {
+    "en": [
+     "promis",
+     "children",
+     "afar",
+     "call",
+     "spirit",
+     "everyone",
+     "christ",
+     "give"
+    ],
+    "es": [
+     "promes",
+     "hijo",
+     "lejos",
+     "llam",
+     "espiritu",
+     "todo",
+     "cristo",
+     "don"
+    ]
+   },
+   "model": {
+    "en": "Peter said the promise is to you and to your children and to all who are afar off, as many as the Lord our God will call. Those afar off include us, for the same gift of the Spirit is given to everyone the Lord calls to Himself in Christ, in every land and age.",
+    "es": "Pedro dijo que la promesa es para vosotros y para vuestros hijos y para todos los que están lejos, para cuantos el Señor nuestro Dios llamare. Los que están lejos nos incluyen, pues el mismo don del Espíritu se da a todo aquel que el Señor llama a sí mismo en Cristo, en toda tierra y edad."
+   }
+  }
+ ]
 };

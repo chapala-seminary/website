@@ -1,41 +1,332 @@
-/* CTSMissions - unit 1: per-unit configuration and content. */
-
-const UNIT = 1;
-
-const CURRENT_UNIT = 1;
-
-const NEXT_URL = 'CTSMissionsUnit2.html';
-
-const kwQuestions = [
-    { textEn: "21. Explain what is meant by the missio Dei, and why it matters that missions begins in the heart of God rather than with the church.", textEs: "21. Explique qué se entiende por la missio Dei, y por qué importa que las misiones comiencen en el corazón de Dios y no con la iglesia.", kwEn: ["god", "send", "father", "son", "spirit", "heart", "church", "mission"], kwEs: ["dios", "envi", "padre", "hijo", "espíritu", "corazón", "iglesia", "misión"],
-      modelEn: 'The missio Dei is the theological term for \'the mission of God\' — the truth that missions began not with a great missionary or even the Great Commission, but in eternity in the heart of God Himself: the Father sent the Son, the Father and Son sent the Spirit, and the risen Son now sends His church. It matters that missions begins with God rather than the church because if missions were merely our idea we could set it aside when costly; but since it flows from the character of the sending God, when we go, we are not starting something new, we are joining what God Himself is already doing.',
-      modelEs: 'La missio Dei es el término teológico para \'la misión de Dios\' — la verdad de que las misiones no comenzaron con un gran misionero ni siquiera con la Gran Comisión, sino en la eternidad en el corazón de Dios mismo: el Padre envió al Hijo, el Padre y el Hijo enviaron al Espíritu, y el Hijo resucitado ahora envía a su iglesia. Importa que las misiones comiencen con Dios y no con la iglesia porque si las misiones fueran meramente nuestra idea podríamos dejarlas de lado cuando resultan costosas; pero como fluyen del carácter del Dios que envía, cuando vamos, no estamos comenzando algo nuevo, nos estamos uniendo a lo que Dios mismo ya está haciendo.' },
-    { textEn: "22. According to the lesson, what is the ultimate goal of missions, and how is it greater than the rescue of the lost? Support your answer from Scripture.", textEs: "22. Según la lección, ¿cuál es la meta suprema de las misiones, y cómo es mayor que el rescate de los perdidos? Apoye su respuesta con la Escritura.", kwEn: ["glory", "nation", "worship", "lamb", "name", "rescue", "praise", "throne"], kwEs: ["gloria", "nacion", "adora", "cordero", "nombre", "rescat", "alab", "trono"],
-      modelEn: 'The ultimate goal of missions is not first the rescue of the lost but the glory of God among all peoples — worship rising to Him from every nation. Revelation 5:9 pictures the redeemed from every tribe, tongue, people, and nation falling before the Lamb in worship; the rescue of the lost is gloriously precious, but it serves the higher end of worship, and when the last of the redeemed is gathered in, missions will end and only worship will remain.',
-      modelEs: 'La meta suprema de las misiones no es primeramente el rescate de los perdidos sino la gloria de Dios entre todos los pueblos — la adoración que se eleva a Él desde toda nación. Apocalipsis 5:9 presenta a los redimidos de toda tribu, lengua, pueblo y nación postrándose delante del Cordero en adoración; el rescate de los perdidos es gloriosamente precioso, pero sirve al fin superior de la adoración, y cuando se reúna al último de los redimidos, las misiones terminarán y solo quedará la adoración.' },
-    { textEn: "23. Trace Paul's chain of missions in Romans 10:13–15. What does each link teach, and what is the conclusion for the unreached?", textEs: "23. Trace la cadena de las misiones de Pablo en Romanos 10:13–15. ¿Qué enseña cada eslabón, y cuál es la conclusión para los no alcanzados?", kwEn: ["call", "believ", "hear", "preach", "sent", "saved", "unreach", "gospel"], kwEs: ["invoc", "creer", "oír", "predic", "envia", "salv", "alcanz", "evangelio"],
-      modelEn: 'Paul\'s chain in Romans 10:13-15 works backward from salvation: whoever calls on the Lord shall be saved; but no one calls on One he has not believed in; no one believes in Christ he has never heard of; no one hears without a preacher; and no preacher goes unless he is sent. Each link is necessary for the one before it, and the conclusion for the unreached is that they cannot believe what they have never heard — which is why the church must go and must send.',
-      modelEs: 'La cadena de Pablo en Romanos 10:13-15 funciona hacia atrás desde la salvación: todo aquel que invocare el nombre del Señor será salvo; pero nadie invoca a aquel en quien no ha creído; nadie cree en Cristo de quien no ha oído; nadie oye sin haber un predicador; y no hay predicador si no es enviado. Cada eslabón es necesario para el anterior, y la conclusión para los no alcanzados es que no pueden creer lo que nunca han oído — por eso la iglesia debe ir y debe enviar.' },
-    { textEn: "24. Why is Jesus Christ the only Savior, and what passages establish this? (Acts 4:12; John 14:6; 1 Timothy 2:5)", textEs: "24. ¿Por qué es Jesucristo el único Salvador, y qué pasajes lo establecen? (Hechos 4:12; Juan 14:6; 1 Timoteo 2:5)", kwEn: ["christ", "only", "way", "name", "mediator", "salvation", "jesus", "truth"], kwEs: ["cristo", "único", "camino", "nombre", "mediador", "salva", "jesús", "verdad"],
-      modelEn: 'Jesus Christ is the only Savior because Scripture establishes it without exception: Peter declared there is salvation in no other name under heaven given among men (Acts 4:12); Jesus said He is the way, the truth, and the life, and no one comes to the Father except through Him (John 14:6); and Paul wrote there is one God and one Mediator between God and men, the Man Christ Jesus (1 Timothy 2:5). These three passages together establish that salvation is found exclusively in Christ, not as one option among many.',
-      modelEs: 'Jesucristo es el único Salvador porque la Escritura lo establece sin excepción: Pedro declaró que no hay salvación en ningún otro nombre dado entre los hombres bajo el cielo (Hechos 4:12); Jesús dijo que Él es el camino, la verdad y la vida, y que nadie viene al Padre sino por Él (Juan 14:6); y Pablo escribió que hay un Dios y un Mediador entre Dios y los hombres, el hombre Cristo Jesús (1 Timoteo 2:5). Estos tres pasajes juntos establecen que la salvación se halla exclusivamente en Cristo, no como una opción entre muchas.' },
-    { textEn: "25. Explain why the truth that there is only one Way to God makes missions loving rather than cruel.", textEs: "25. Explique por qué la verdad de que hay un solo Camino a Dios hace que las misiones sean amorosas en lugar de crueles.", kwEn: ["one", "way", "loving", "cruel", "savior", "lost", "carry", "gospel"], kwEs: ["solo", "camino", "amor", "cruel", "salvador", "perdid", "llevar", "evangelio"],
-      modelEn: 'If there were many roads to God, missions would be a cruel waste, sending people across oceans to peddle one option among many equally valid paths. But precisely because there is only one Way and one Mediator, missions becomes the most loving thing the church can do — we carry the only bread to people who are starving and the only cure to people who are dying, so withholding it would not be tolerance but the worst kind of cruelty.',
-      modelEs: 'Si hubiera muchos caminos a Dios, las misiones serían un desperdicio cruel, enviando gente al otro lado del océano para ofrecer una opción entre muchas igualmente válidas. Pero precisamente porque hay un solo Camino y un solo Mediador, las misiones se convierten en lo más amoroso que la iglesia puede hacer — llevamos el único pan a personas que se mueren de hambre y la única cura a personas que se están muriendo, así que negarlo no sería tolerancia sino la peor clase de crueldad.' },
-    { textEn: "26. From Scripture, describe God's saving desire for the world. How wide is His heart and the work of the cross? (1 Timothy 2:4; 2 Peter 3:9; 1 John 2:2)", textEs: "26. Desde la Escritura, describa el deseo salvador de Dios para el mundo. ¿Cuán ancho es su corazón y la obra de la cruz? (1 Timoteo 2:4; 2 Pedro 3:9; 1 Juan 2:2)", kwEn: ["all", "saved", "desire", "perish", "repent", "world", "died", "whole"], kwEs: ["todos", "salv", "desea", "perez", "arrepent", "mundo", "murió", "entero"],
-      modelEn: 'Scripture describes God\'s saving desire as reaching to all without exception: He desires all men to be saved and to come to the knowledge of the truth (1 Timothy 2:4); He is not willing that any should perish but that all should come to repentance (2 Peter 3:9); and Christ is the propitiation for our sins, and not for ours only but also for the whole world (1 John 2:2). God\'s heart and the reach of the cross are as wide as the whole human race, with no nation or people excluded.',
-      modelEs: 'La Escritura describe el deseo salvador de Dios como algo que alcanza a todos sin excepción: Él desea que todos los hombres sean salvos y vengan al conocimiento de la verdad (1 Timoteo 2:4); no quiere que ninguno perezca, sino que todos procedan al arrepentimiento (2 Pedro 3:9); y Cristo es la propiciación por nuestros pecados, y no solamente por los nuestros, sino también por los de todo el mundo (1 Juan 2:2). El corazón de Dios y el alcance de la cruz son tan anchos como toda la raza humana, sin ninguna nación o pueblo excluido.' },
-    { textEn: "27. What is the lostness of humanity apart from Christ, and why does it make missions urgent? (Romans 3:23; Ephesians 2:12)", textEs: "27. ¿Cuál es la perdición de la humanidad aparte de Cristo, y por qué hace urgentes las misiones? (Romanos 3:23; Efesios 2:12)", kwEn: ["sin", "lost", "hope", "christ", "death", "short", "glory", "world"], kwEs: ["pecad", "perdid", "esperanza", "cristo", "muerte", "destitu", "gloria", "mundo"],
-      modelEn: 'Apart from Christ, humanity is not merely unfortunate but lost — all have sinned and fall short of the glory of God (Romans 3:23), and those outside of Christ are described as having no hope and without God in the world (Ephesians 2:12). This lostness makes missions urgent because it is not a matter of helping people improve their circumstances but of rescuing people from an eternal, desperate condition they cannot escape without the gospel.',
-      modelEs: 'Aparte de Cristo, la humanidad no está meramente desafortunada sino perdida — todos pecaron, y están destituidos de la gloria de Dios (Romanos 3:23), y los que están fuera de Cristo se describen como sin esperanza y sin Dios en el mundo (Efesios 2:12). Esta perdición hace urgentes las misiones porque no se trata de ayudar a la gente a mejorar sus circunstancias sino de rescatar a personas de una condición eterna y desesperada de la cual no pueden escapar sin el evangelio.' },
-    { textEn: "28. Explain why faith is the appointed door of salvation, using Hebrews 11:6. Why must the call to believe reach every person?", textEs: "28. Explique por qué la fe es la puerta señalada de la salvación, usando Hebreos 11:6. ¿Por qué debe el llamado a creer alcanzar a toda persona?", kwEn: ["faith", "believ", "door", "please", "hebrews", "offer", "receiv", "every"], kwEs: ["fe", "creer", "puerta", "agrad", "hebreos", "ofrec", "recib", "toda"],
-      modelEn: 'Hebrews 11:6 says without faith it is impossible to please God, establishing faith as the appointed door through which salvation must be received. Because faith is the necessary response, and faith comes by hearing, the call to believe must reach every person without exception — no one can walk through a door they have never been shown, so the gospel offer must be pressed on every ear.',
-      modelEs: 'Hebreos 11:6 dice que sin fe es imposible agradar a Dios, estableciendo la fe como la puerta señalada por la cual debe recibirse la salvación. Porque la fe es la respuesta necesaria, y la fe viene por el oír, el llamado a creer debe alcanzar a toda persona sin excepción — nadie puede atravesar una puerta que nunca le han mostrado, así que la oferta del evangelio debe presionarse sobre todo oído.' },
-    { textEn: "29. What does John 20:21 teach about who is sent on mission? In what sense is every believer sent?", textEs: "29. ¿Qué enseña Juan 20:21 acerca de quién es enviado a la misión? ¿En qué sentido es enviado todo creyente?", kwEn: ["sent", "father", "church", "send", "believer", "go", "commission", "mission"], kwEs: ["envi", "padre", "iglesia", "enviar", "creyente", "ir", "comisión", "misión"],
-      modelEn: 'John 20:21 records Jesus saying, \'As the Father has sent Me, I also send you.\' This teaches that the sent-ness of the church flows directly from the sent-ness of Christ Himself — and that word was spoken not to professional missionaries only but to the church as a whole, meaning every believer shares in being sent, whether by going, sending, or praying.',
-      modelEs: 'Juan 20:21 registra a Jesús diciendo: \'Como me envió el Padre, así también yo os envió a vosotros.\' Esto enseña que el ser enviados de la iglesia fluye directamente del ser enviado de Cristo mismo — y esa palabra no fue dicha solo a misioneros profesionales sino a la iglesia entera, lo cual significa que todo creyente comparte el ser enviado, ya sea yendo, enviando, u orando.' },
-    { textEn: "30. The God who sends is sending still. What is your own response — will you go, send, or pray? Be specific.", textEs: "30. El Dios que envía sigue enviando. ¿Cuál es su propia respuesta — irá, enviará u orará? Sea específico.", kwEn: ["go", "send", "pray", "nation", "part", "sending", "still", "mission"], kwEs: ["ir", "enviar", "orar", "nacion", "parte", "envia", "sigue", "misión"],
-      modelEn: 'This is a personal response question inviting the student to name a specific, concrete way they will participate in God\'s ongoing mission — whether by going themselves, financially or practically sending others, or committing to consistent prayer for the unreached. A thoughtful answer names a specific nation, person, or step rather than a vague general intention.',
-      modelEs: 'Esta es una pregunta de respuesta personal que invita al estudiante a nombrar una manera específica y concreta en que participará en la misión continua de Dios — ya sea yendo él mismo, enviando a otros financiera o prácticamente, o comprometiéndose a orar con constancia por los no alcanzados. Una respuesta reflexiva nombra una nación, persona o paso específico en lugar de una intención general vaga.' }
-
-];
+/* CTSMissions — unit 1. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "missions",
+ "unit": 1,
+ "totalUnits": 10,
+ "filePrefix": "CTSMissions",
+ "prevHref": null,
+ "nextHref": "CTSMissionsUnit2.html",
+ "mc": [],
+ "sa": [
+  {
+   "prompt": {
+    "en": "Explain what is meant by the missio Dei, and why it matters that missions begins in the heart of God rather than with the church.",
+    "es": "Explique qué se entiende por la missio Dei, y por qué importa que las misiones comiencen en el corazón de Dios y no con la iglesia."
+   },
+   "keywords": {
+    "en": [
+     "god",
+     "send",
+     "father",
+     "son",
+     "spirit",
+     "heart",
+     "church",
+     "mission"
+    ],
+    "es": [
+     "dios",
+     "envi",
+     "padre",
+     "hijo",
+     "espíritu",
+     "corazón",
+     "iglesia",
+     "misión"
+    ]
+   },
+   "model": {
+    "en": "The missio Dei is the theological term for 'the mission of God' — the truth that missions began not with a great missionary or even the Great Commission, but in eternity in the heart of God Himself: the Father sent the Son, the Father and Son sent the Spirit, and the risen Son now sends His church. It matters that missions begins with God rather than the church because if missions were merely our idea we could set it aside when costly; but since it flows from the character of the sending God, when we go, we are not starting something new, we are joining what God Himself is already doing.",
+    "es": "La missio Dei es el término teológico para 'la misión de Dios' — la verdad de que las misiones no comenzaron con un gran misionero ni siquiera con la Gran Comisión, sino en la eternidad en el corazón de Dios mismo: el Padre envió al Hijo, el Padre y el Hijo enviaron al Espíritu, y el Hijo resucitado ahora envía a su iglesia. Importa que las misiones comiencen con Dios y no con la iglesia porque si las misiones fueran meramente nuestra idea podríamos dejarlas de lado cuando resultan costosas; pero como fluyen del carácter del Dios que envía, cuando vamos, no estamos comenzando algo nuevo, nos estamos uniendo a lo que Dios mismo ya está haciendo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "According to the lesson, what is the ultimate goal of missions, and how is it greater than the rescue of the lost? Support your answer from Scripture.",
+    "es": "Según la lección, ¿cuál es la meta suprema de las misiones, y cómo es mayor que el rescate de los perdidos? Apoye su respuesta con la Escritura."
+   },
+   "keywords": {
+    "en": [
+     "glory",
+     "nation",
+     "worship",
+     "lamb",
+     "name",
+     "rescue",
+     "praise",
+     "throne"
+    ],
+    "es": [
+     "gloria",
+     "nacion",
+     "adora",
+     "cordero",
+     "nombre",
+     "rescat",
+     "alab",
+     "trono"
+    ]
+   },
+   "model": {
+    "en": "The ultimate goal of missions is not first the rescue of the lost but the glory of God among all peoples — worship rising to Him from every nation. Revelation 5:9 pictures the redeemed from every tribe, tongue, people, and nation falling before the Lamb in worship; the rescue of the lost is gloriously precious, but it serves the higher end of worship, and when the last of the redeemed is gathered in, missions will end and only worship will remain.",
+    "es": "La meta suprema de las misiones no es primeramente el rescate de los perdidos sino la gloria de Dios entre todos los pueblos — la adoración que se eleva a Él desde toda nación. Apocalipsis 5:9 presenta a los redimidos de toda tribu, lengua, pueblo y nación postrándose delante del Cordero en adoración; el rescate de los perdidos es gloriosamente precioso, pero sirve al fin superior de la adoración, y cuando se reúna al último de los redimidos, las misiones terminarán y solo quedará la adoración."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Trace Paul's chain of missions in Romans 10:13–15. What does each link teach, and what is the conclusion for the unreached?",
+    "es": "Trace la cadena de las misiones de Pablo en Romanos 10:13–15. ¿Qué enseña cada eslabón, y cuál es la conclusión para los no alcanzados?"
+   },
+   "keywords": {
+    "en": [
+     "call",
+     "believ",
+     "hear",
+     "preach",
+     "sent",
+     "saved",
+     "unreach",
+     "gospel"
+    ],
+    "es": [
+     "invoc",
+     "creer",
+     "oír",
+     "predic",
+     "envia",
+     "salv",
+     "alcanz",
+     "evangelio"
+    ]
+   },
+   "model": {
+    "en": "Paul's chain in Romans 10:13-15 works backward from salvation: whoever calls on the Lord shall be saved; but no one calls on One he has not believed in; no one believes in Christ he has never heard of; no one hears without a preacher; and no preacher goes unless he is sent. Each link is necessary for the one before it, and the conclusion for the unreached is that they cannot believe what they have never heard — which is why the church must go and must send.",
+    "es": "La cadena de Pablo en Romanos 10:13-15 funciona hacia atrás desde la salvación: todo aquel que invocare el nombre del Señor será salvo; pero nadie invoca a aquel en quien no ha creído; nadie cree en Cristo de quien no ha oído; nadie oye sin haber un predicador; y no hay predicador si no es enviado. Cada eslabón es necesario para el anterior, y la conclusión para los no alcanzados es que no pueden creer lo que nunca han oído — por eso la iglesia debe ir y debe enviar."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why is Jesus Christ the only Savior, and what passages establish this? (Acts 4:12; John 14:6; 1 Timothy 2:5)",
+    "es": "¿Por qué es Jesucristo el único Salvador, y qué pasajes lo establecen? (Hechos 4:12; Juan 14:6; 1 Timoteo 2:5)"
+   },
+   "keywords": {
+    "en": [
+     "christ",
+     "only",
+     "way",
+     "name",
+     "mediator",
+     "salvation",
+     "jesus",
+     "truth"
+    ],
+    "es": [
+     "cristo",
+     "único",
+     "camino",
+     "nombre",
+     "mediador",
+     "salva",
+     "jesús",
+     "verdad"
+    ]
+   },
+   "model": {
+    "en": "Jesus Christ is the only Savior because Scripture establishes it without exception: Peter declared there is salvation in no other name under heaven given among men (Acts 4:12); Jesus said He is the way, the truth, and the life, and no one comes to the Father except through Him (John 14:6); and Paul wrote there is one God and one Mediator between God and men, the Man Christ Jesus (1 Timothy 2:5). These three passages together establish that salvation is found exclusively in Christ, not as one option among many.",
+    "es": "Jesucristo es el único Salvador porque la Escritura lo establece sin excepción: Pedro declaró que no hay salvación en ningún otro nombre dado entre los hombres bajo el cielo (Hechos 4:12); Jesús dijo que Él es el camino, la verdad y la vida, y que nadie viene al Padre sino por Él (Juan 14:6); y Pablo escribió que hay un Dios y un Mediador entre Dios y los hombres, el hombre Cristo Jesús (1 Timoteo 2:5). Estos tres pasajes juntos establecen que la salvación se halla exclusivamente en Cristo, no como una opción entre muchas."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain why the truth that there is only one Way to God makes missions loving rather than cruel.",
+    "es": "Explique por qué la verdad de que hay un solo Camino a Dios hace que las misiones sean amorosas en lugar de crueles."
+   },
+   "keywords": {
+    "en": [
+     "one",
+     "way",
+     "loving",
+     "cruel",
+     "savior",
+     "lost",
+     "carry",
+     "gospel"
+    ],
+    "es": [
+     "solo",
+     "camino",
+     "amor",
+     "cruel",
+     "salvador",
+     "perdid",
+     "llevar",
+     "evangelio"
+    ]
+   },
+   "model": {
+    "en": "If there were many roads to God, missions would be a cruel waste, sending people across oceans to peddle one option among many equally valid paths. But precisely because there is only one Way and one Mediator, missions becomes the most loving thing the church can do — we carry the only bread to people who are starving and the only cure to people who are dying, so withholding it would not be tolerance but the worst kind of cruelty.",
+    "es": "Si hubiera muchos caminos a Dios, las misiones serían un desperdicio cruel, enviando gente al otro lado del océano para ofrecer una opción entre muchas igualmente válidas. Pero precisamente porque hay un solo Camino y un solo Mediador, las misiones se convierten en lo más amoroso que la iglesia puede hacer — llevamos el único pan a personas que se mueren de hambre y la única cura a personas que se están muriendo, así que negarlo no sería tolerancia sino la peor clase de crueldad."
+   }
+  },
+  {
+   "prompt": {
+    "en": "From Scripture, describe God's saving desire for the world. How wide is His heart and the work of the cross? (1 Timothy 2:4; 2 Peter 3:9; 1 John 2:2)",
+    "es": "Desde la Escritura, describa el deseo salvador de Dios para el mundo. ¿Cuán ancho es su corazón y la obra de la cruz? (1 Timoteo 2:4; 2 Pedro 3:9; 1 Juan 2:2)"
+   },
+   "keywords": {
+    "en": [
+     "all",
+     "saved",
+     "desire",
+     "perish",
+     "repent",
+     "world",
+     "died",
+     "whole"
+    ],
+    "es": [
+     "todos",
+     "salv",
+     "desea",
+     "perez",
+     "arrepent",
+     "mundo",
+     "murió",
+     "entero"
+    ]
+   },
+   "model": {
+    "en": "Scripture describes God's saving desire as reaching to all without exception: He desires all men to be saved and to come to the knowledge of the truth (1 Timothy 2:4); He is not willing that any should perish but that all should come to repentance (2 Peter 3:9); and Christ is the propitiation for our sins, and not for ours only but also for the whole world (1 John 2:2). God's heart and the reach of the cross are as wide as the whole human race, with no nation or people excluded.",
+    "es": "La Escritura describe el deseo salvador de Dios como algo que alcanza a todos sin excepción: Él desea que todos los hombres sean salvos y vengan al conocimiento de la verdad (1 Timoteo 2:4); no quiere que ninguno perezca, sino que todos procedan al arrepentimiento (2 Pedro 3:9); y Cristo es la propiciación por nuestros pecados, y no solamente por los nuestros, sino también por los de todo el mundo (1 Juan 2:2). El corazón de Dios y el alcance de la cruz son tan anchos como toda la raza humana, sin ninguna nación o pueblo excluido."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What is the lostness of humanity apart from Christ, and why does it make missions urgent? (Romans 3:23; Ephesians 2:12)",
+    "es": "¿Cuál es la perdición de la humanidad aparte de Cristo, y por qué hace urgentes las misiones? (Romanos 3:23; Efesios 2:12)"
+   },
+   "keywords": {
+    "en": [
+     "sin",
+     "lost",
+     "hope",
+     "christ",
+     "death",
+     "short",
+     "glory",
+     "world"
+    ],
+    "es": [
+     "pecad",
+     "perdid",
+     "esperanza",
+     "cristo",
+     "muerte",
+     "destitu",
+     "gloria",
+     "mundo"
+    ]
+   },
+   "model": {
+    "en": "Apart from Christ, humanity is not merely unfortunate but lost — all have sinned and fall short of the glory of God (Romans 3:23), and those outside of Christ are described as having no hope and without God in the world (Ephesians 2:12). This lostness makes missions urgent because it is not a matter of helping people improve their circumstances but of rescuing people from an eternal, desperate condition they cannot escape without the gospel.",
+    "es": "Aparte de Cristo, la humanidad no está meramente desafortunada sino perdida — todos pecaron, y están destituidos de la gloria de Dios (Romanos 3:23), y los que están fuera de Cristo se describen como sin esperanza y sin Dios en el mundo (Efesios 2:12). Esta perdición hace urgentes las misiones porque no se trata de ayudar a la gente a mejorar sus circunstancias sino de rescatar a personas de una condición eterna y desesperada de la cual no pueden escapar sin el evangelio."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain why faith is the appointed door of salvation, using Hebrews 11:6. Why must the call to believe reach every person?",
+    "es": "Explique por qué la fe es la puerta señalada de la salvación, usando Hebreos 11:6. ¿Por qué debe el llamado a creer alcanzar a toda persona?"
+   },
+   "keywords": {
+    "en": [
+     "faith",
+     "believ",
+     "door",
+     "please",
+     "hebrews",
+     "offer",
+     "receiv",
+     "every"
+    ],
+    "es": [
+     "fe",
+     "creer",
+     "puerta",
+     "agrad",
+     "hebreos",
+     "ofrec",
+     "recib",
+     "toda"
+    ]
+   },
+   "model": {
+    "en": "Hebrews 11:6 says without faith it is impossible to please God, establishing faith as the appointed door through which salvation must be received. Because faith is the necessary response, and faith comes by hearing, the call to believe must reach every person without exception — no one can walk through a door they have never been shown, so the gospel offer must be pressed on every ear.",
+    "es": "Hebreos 11:6 dice que sin fe es imposible agradar a Dios, estableciendo la fe como la puerta señalada por la cual debe recibirse la salvación. Porque la fe es la respuesta necesaria, y la fe viene por el oír, el llamado a creer debe alcanzar a toda persona sin excepción — nadie puede atravesar una puerta que nunca le han mostrado, así que la oferta del evangelio debe presionarse sobre todo oído."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does John 20:21 teach about who is sent on mission? In what sense is every believer sent?",
+    "es": "¿Qué enseña Juan 20:21 acerca de quién es enviado a la misión? ¿En qué sentido es enviado todo creyente?"
+   },
+   "keywords": {
+    "en": [
+     "sent",
+     "father",
+     "church",
+     "send",
+     "believer",
+     "go",
+     "commission",
+     "mission"
+    ],
+    "es": [
+     "envi",
+     "padre",
+     "iglesia",
+     "enviar",
+     "creyente",
+     "ir",
+     "comisión",
+     "misión"
+    ]
+   },
+   "model": {
+    "en": "John 20:21 records Jesus saying, 'As the Father has sent Me, I also send you.' This teaches that the sent-ness of the church flows directly from the sent-ness of Christ Himself — and that word was spoken not to professional missionaries only but to the church as a whole, meaning every believer shares in being sent, whether by going, sending, or praying.",
+    "es": "Juan 20:21 registra a Jesús diciendo: 'Como me envió el Padre, así también yo os envió a vosotros.' Esto enseña que el ser enviados de la iglesia fluye directamente del ser enviado de Cristo mismo — y esa palabra no fue dicha solo a misioneros profesionales sino a la iglesia entera, lo cual significa que todo creyente comparte el ser enviado, ya sea yendo, enviando, u orando."
+   }
+  },
+  {
+   "prompt": {
+    "en": "The God who sends is sending still. What is your own response — will you go, send, or pray? Be specific.",
+    "es": "El Dios que envía sigue enviando. ¿Cuál es su propia respuesta — irá, enviará u orará? Sea específico."
+   },
+   "keywords": {
+    "en": [
+     "go",
+     "send",
+     "pray",
+     "nation",
+     "part",
+     "sending",
+     "still",
+     "mission"
+    ],
+    "es": [
+     "ir",
+     "enviar",
+     "orar",
+     "nacion",
+     "parte",
+     "envia",
+     "sigue",
+     "misión"
+    ]
+   },
+   "model": {
+    "en": "This is a personal response question inviting the student to name a specific, concrete way they will participate in God's ongoing mission — whether by going themselves, financially or practically sending others, or committing to consistent prayer for the unreached. A thoughtful answer names a specific nation, person, or step rather than a vague general intention.",
+    "es": "Esta es una pregunta de respuesta personal que invita al estudiante a nombrar una manera específica y concreta en que participará en la misión continua de Dios — ya sea yendo él mismo, enviando a otros financiera o prácticamente, o comprometiéndose a orar con constancia por los no alcanzados. Una respuesta reflexiva nombra una nación, persona o paso específico en lugar de una intención general vaga."
+   }
+  }
+ ]
+};

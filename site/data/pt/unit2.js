@@ -1,66 +1,753 @@
-/* CTSPT - unit 2: per-unit configuration and content. */
-
-const UNIT = 2;
-
-const CURRENT_UNIT = 2;
-
-const NEXT_URL = 'CTSPTUnit3.html';
-
-const PREV_URL = 'CTSPTUnit1.html';
-
-const mcQuestions = [
-    { textEn: "1. The Bible's oldest description of a godly life is that a man:", textEs: "1. La descripción más antigua de una vida piadosa en la Biblia es que un hombre:", optionsEn: ["built a temple", "walked with God", "led an army", "wrote a book"], optionsEs: ["edificó un templo", "caminó con Dios", "dirigió un ejército", "escribió un libro"], correct: 1 },
-    { textEn: "2. Enoch's walk with God ended with:", textEs: "2. El caminar de Enoc con Dios terminó con:", optionsEn: ["his defeat", "his wandering away", "a long illness", "God taking him home without death"], optionsEs: ["su derrota", "su alejamiento", "una larga enfermedad", "Dios llevándolo a casa sin pasar por la muerte"], correct: 3 },
-    { textEn: "3. Noah is described as a man who, in a corrupt generation:", textEs: "3. Noé es descrito como un hombre que, en una generación corrupta:", optionsEn: ["gave up", "blended in", "walked with God and was preserved", "built cities"], optionsEs: ["se rindió", "se mezcló", "caminó con Dios y fue preservado", "edificó ciudades"], correct: 2 },
-    { textEn: "4. God said to Abraham in Genesis 17:1:", textEs: "4. Dios dijo a Abraham en Génesis 17:1:", optionsEn: ["'Walk before Me and be blameless'", "'Hide from Me'", "'Argue with Me'", "'Rest from Me'"], optionsEs: ["'Anda delante de mí, y sé perfecto'", "'Escóndete de mí'", "'Discute conmigo'", "'Descansa de mí'"], correct: 0 },
-    { textEn: "5. Amos 3:3 teaches that to walk together, two must:", textEs: "5. Amós 3:3 enseña que para andar juntos, dos deben:", optionsEn: ["be silent", "be agreed", "be wealthy", "be related"], optionsEs: ["estar callados", "estar de acuerdo", "ser ricos", "ser parientes"], correct: 1 },
-    { textEn: "6. To walk with God therefore means to:", textEs: "6. Andar con Dios significa, por tanto:", optionsEn: ["keep our own way", "walk only on Sundays", "walk alone", "come into agreement with Him — to want what He wants"], optionsEs: ["seguir nuestro propio camino", "andar solo los domingos", "andar solos", "ponerse de acuerdo con Él — querer lo que Él quiere"], correct: 3 },
-    { textEn: "7. Walking with God means continual fellowship, which is:", textEs: "7. Andar con Dios significa comunión continua, que es:", optionsEn: ["a steady companionship through the ordinary day", "a yearly retreat", "one hour on Sunday", "an occasional crisis prayer"], optionsEs: ["una compañía constante a través del día ordinario", "un retiro anual", "una hora el domingo", "una oración ocasional en crisis"], correct: 0 },
-    { textEn: "8. 1 John 1:7 ties walking with God to:", textEs: "8. 1 Juan 1:7 relaciona andar con Dios con:", optionsEn: ["wealth", "knowledge", "walking in the light, not in sin", "comfort"], optionsEs: ["la riqueza", "el conocimiento", "andar en luz, no en pecado", "la comodidad"], correct: 2 },
-    { textEn: "9. In John 15 the Lord Jesus gave this walk a deeper name:", textEs: "9. En Juan 15 el Señor Jesús dio a este caminar un nombre más profundo:", optionsEn: ["climbing", "building", "running", "abiding"], optionsEs: ["escalar", "edificar", "correr", "permanecer"], correct: 3 },
-    { textEn: "10. Jesus said the branch cannot bear fruit unless it:", textEs: "10. Jesús dijo que el pámpano no puede llevar fruto a menos que:", optionsEn: ["abides in the vine", "is large", "is cut off", "bears leaves"], optionsEs: ["permanezca en la vid", "sea grande", "sea cortado", "lleve hojas"], correct: 0 },
-    { textEn: "11. Apart from Christ, Jesus says, we can:", textEs: "11. Aparte de Cristo, dice Jesús, podemos:", optionsEn: ["do everything", "do most things", "do nothing", "do enough"], optionsEs: ["hacer todo", "hacer la mayoría de las cosas", "no hacer nada", "hacer lo suficiente"], correct: 2 },
-    { textEn: "12. To abide in Christ is to:", textEs: "12. Permanecer en Cristo es:", optionsEn: ["work harder in our own strength", "draw our life from Him moment by moment, like a branch from the vine", "admire Him from afar", "visit Him yearly"], optionsEs: ["esforzarnos más en nuestra propia fuerza", "sacar nuestra vida de Él momento a momento, como el pámpano de la vid", "admirarlo desde lejos", "visitarlo cada año"], correct: 1 },
-    { textEn: "13. The lesson says a walk is made of:", textEs: "13. La lección dice que un caminar está hecho de:", optionsEn: ["steps — one after another, day after day", "a single great stride", "feelings only", "one decision"], optionsEs: ["pasos — uno tras otro, día tras día", "una sola gran zancada", "solo sentimientos", "una sola decisión"], correct: 0 },
-    { textEn: "14. We walk with God, the lesson says, not by one great experience but by:", textEs: "14. Andamos con Dios, dice la lección, no por una sola gran experiencia sino por:", optionsEn: ["avoiding people", "long sermons", "much money", "a thousand small, faithful steps"], optionsEs: ["evitar a la gente", "sermones largos", "mucho dinero", "mil pasos pequeños y fieles"], correct: 3 },
-    { textEn: "15. When we stumble in our walk, the lesson says we should:", textEs: "15. Cuando tropezamos en nuestro caminar, la lección dice que debemos:", optionsEn: ["give up", "return to God quickly", "hide", "pretend nothing happened"], optionsEs: ["rendirnos", "volver a Dios pronto", "escondernos", "fingir que nada pasó"], correct: 1 },
-    { textEn: "16. Micah 6:8 says the Lord requires us to do justly, love mercy, and:", textEs: "16. Miqueas 6:8 dice que el Señor requiere hacer justicia, amar misericordia, y:", optionsEn: ["gain wealth", "seek fame", "walk humbly with your God", "live alone"], optionsEs: ["ganar riqueza", "buscar fama", "humillarse ante su Dios", "vivir solo"], correct: 2 },
-    { textEn: "17. Walking with God, the lesson says, is the soil out of which:", textEs: "17. Andar con Dios, dice la lección, es la tierra de la cual:", optionsEn: ["doubt grows", "nothing grows", "only prayer grows", "every other discipline grows"], optionsEs: ["crece la duda", "nada crece", "solo crece la oración", "crece toda otra disciplina"], correct: 3 },
-    { textEn: "18. To walk with God is best described as:", textEs: "18. Andar con Dios se describe mejor como:", optionsEn: ["striving in our own strength", "staying close to the Source of strength", "a one-time event", "a reward for the strong"], optionsEs: ["esforzarse en nuestra propia fuerza", "mantenerse cerca de la Fuente de la fuerza", "un evento de una sola vez", "un premio para los fuertes"], correct: 1 },
-    { textEn: "19. The phrase 'walked with God' in Scripture describes men who:", textEs: "19. La frase 'caminó con Dios' en la Escritura describe a hombres que:", optionsEn: ["lived their whole lives in God's company", "were famous", "were sinless", "lived alone"], optionsEs: ["vivieron toda su vida en la compañía de Dios", "eran famosos", "eran sin pecado", "vivían solos"], correct: 0 },
-    { textEn: "20. Every discipline in this course exists to serve one thing:", textEs: "20. Toda disciplina de este curso existe para servir a una sola cosa:", optionsEn: ["church attendance records", "head knowledge", "that we might walk with God", "personal comfort"], optionsEs: ["los registros de asistencia", "el conocimiento de la cabeza", "que andemos con Dios", "la comodidad personal"], correct: 2 }
-];
-
-const kwQuestions = [
-    { textEn: "21. What does it mean that Enoch and Noah 'walked with God'? Use their examples.", textEs: "21. ¿Qué significa que Enoc y Noé 'caminaron con Dios'? Use sus ejemplos.", kwEn: ["enoch", "noah", "walk", "god", "fellowship", "generation", "preserved", "took"], kwEs: ["enoc", "noé", "camin", "dios", "comunión", "generación", "preserv", "llevó"],
-      modelEn: 'Enoch and Noah both “walked with God” — meaning their whole lives were lived in close, ongoing fellowship with Him. Enoch\'s walk was so close that God simply took him home without death; Noah\'s walk with God preserved him and his household through a corrupt generation and the flood. Both show that walking with God is not an occasional visit but a life lived continually in His company.',
-      modelEs: 'Enoc y Noé ambos “caminaron con Dios” — es decir, toda su vida fue vivida en comunión cercana y continua con Él. El caminar de Enoc fue tan cercano que Dios sencillamente lo llevó a casa sin pasar por la muerte; el caminar de Noé con Dios lo preservó a él y a su casa en medio de una generación corrupta y el diluvio. Ambos muestran que andar con Dios no es una visita ocasional sino una vida vivida continuamente en su compañía.' },
-    { textEn: "22. Using Amos 3:3, explain what agreement has to do with walking with God.", textEs: "22. Usando Amós 3:3, explique qué tiene que ver el acuerdo con andar con Dios.", kwEn: ["agree", "walk", "together", "god", "want", "will", "obey", "way"], kwEs: ["acuerdo", "camin", "juntos", "dios", "querer", "voluntad", "obedec", "camino"],
-      modelEn: 'Amos 3:3 asks, “Can two walk together, unless they are agreed?” Two people cannot walk the same road in step unless they\'ve agreed to go the same way at the same pace. So to walk with God means coming into agreement with Him — wanting what He wants and going where He goes, rather than asking Him to follow our own way.',
-      modelEs: 'Amós 3:3 pregunta: “¿Andarán dos juntos, si no estuvieren de acuerdo?” Dos personas no pueden caminar el mismo camino al mismo paso si no han acordado ir por la misma vía. Así que andar con Dios significa ponerse de acuerdo con Él — querer lo que Él quiere e ir adonde Él va, en lugar de pedirle que siga nuestro propio camino.' },
-    { textEn: "23. Explain what it means that walking with God is continual fellowship, not just Sunday.", textEs: "23. Explique qué significa que andar con Dios es comunión continua, no solo el domingo.", kwEn: ["continual", "daily", "fellowship", "friend", "companion", "ordinary", "sunday", "steady"], kwEs: ["continua", "diaria", "comunión", "amigo", "compañ", "ordinario", "domingo", "constante"],
-      modelEn: 'Walking with God is not one hour on Sunday or a prayer offered only in a crisis; it is a steady companionship through the ordinary day, the way two friends talk as they walk the same road together. This continual fellowship means God is present in the small, daily moments, not just in formal or occasional religious acts.',
-      modelEs: 'Andar con Dios no es una hora el domingo ni una oración ofrecida solo en una crisis; es una compañía constante a través del día ordinario, como dos amigos que conversan mientras caminan juntos el mismo camino. Esta comunión continua significa que Dios está presente en los momentos pequeños y diarios, no solo en actos religiosos formales u ocasionales.' },
-    { textEn: "24. How does 1 John 1:7 connect walking with God and walking in the light?", textEs: "24. ¿Cómo conecta 1 Juan 1:7 el andar con Dios y el andar en luz?", kwEn: ["light", "walk", "darkness", "sin", "obey", "turn", "holy", "fellowship"], kwEs: ["luz", "camin", "tinieblas", "pecado", "obedec", "volver", "santo", "comunión"],
-      modelEn: 'John writes that if we walk in the light as He is in the light, we have fellowship with one another (1 John 1:7). Walking with God and walking in sin cannot happen at the same time — the walk requires that we keep turning from darkness to light, so walking with God is inseparable from obedience and turning from sin.',
-      modelEs: 'Juan escribe que si andamos en luz, como él está en luz, tenemos comunión unos con otros (1 Juan 1:7). Andar con Dios y andar en pecado no pueden suceder al mismo tiempo — el caminar requiere que sigamos volviéndonos de las tinieblas a la luz, así que andar con Dios es inseparable de la obediencia y de apartarse del pecado.' },
-    { textEn: "25. Explain Jesus' picture of the vine and branches (John 15:4-5).", textEs: "25. Explique el cuadro de Jesús de la vid y los pámpanos (Juan 15:4-5).", kwEn: ["abide", "vine", "branch", "fruit", "christ", "nothing", "life", "remain"], kwEs: ["permanec", "vid", "pámpano", "fruto", "cristo", "nada", "vida", "rama"],
-      modelEn: 'Jesus said, “Abide in Me, and I in you. As the branch cannot bear fruit of itself, unless it abides in the vine, neither can you, unless you abide in Me… for without Me you can do nothing” (John 15:4-5). Just as a branch draws its life from the vine, we draw our very life from Christ moment by moment; cut off from Him we wither, but joined to Him we bear much fruit.',
-      modelEs: 'Jesús dijo: “Permaneced en mí, y yo en vosotros. Como el pámpano no puede llevar fruto de sí mismo, si no permaneciere en la vid, así ni vosotros, si no permaneciereis en mí… porque sin mí nada podéis hacer” (Juan 15:4-5). Tal como el pámpano saca su vida de la vid, nosotros sacamos nuestra vida misma de Cristo momento a momento; cortados de Él nos secamos, pero unidos a Él llevamos mucho fruto.' },
-    { textEn: "26. What does it mean to abide in Christ, and why can we do nothing without Him?", textEs: "26. ¿Qué significa permanecer en Cristo, y por qué nada podemos hacer sin Él?", kwEn: ["abide", "christ", "draw", "life", "strength", "nothing", "depend", "fruit"], kwEs: ["permanec", "cristo", "vida", "fuerza", "nada", "depend", "fruto", "fuente"],
-      modelEn: 'To abide in Christ is to draw our very life from Him moment by moment, the way a branch draws its sap from the vine — not striving harder in our own strength, but staying close to the Source of all strength. We can do nothing apart from Him because, like a cut branch, we have no life of our own to produce fruit; all fruitfulness depends on our continued connection to Him.',
-      modelEs: 'Permanecer en Cristo es sacar nuestra vida misma de Él momento a momento, como el pámpano saca su savia de la vid — no esforzarse más en nuestra propia fuerza, sino mantenerse cerca de la Fuente de toda fuerza. Nada podemos hacer aparte de Él porque, como una rama cortada, no tenemos vida propia para producir fruto; toda fructificación depende de nuestra conexión continua con Él.' },
-    { textEn: "27. Why does the lesson say walking with God is a daily walk made of small steps?", textEs: "27. ¿Por qué dice la lección que andar con Dios es un caminar diario hecho de pasos pequeños?", kwEn: ["step", "daily", "small", "faithful", "stride", "return", "obey", "habit"], kwEs: ["paso", "diario", "pequeñ", "fiel", "volver", "obedec", "hábito", "cada"],
-      modelEn: 'A walk is made of steps, one after another, day after day — no one walks a long journey in a single stride, and no one walks with God by one great experience. We walk with Him through a thousand small, faithful steps: meeting Him in the morning, hearing Him in His Word, speaking to Him in prayer, obeying in small daily decisions, and returning to Him quickly whenever we stumble.',
-      modelEs: 'Un caminar está hecho de pasos, uno tras otro, día tras día — nadie camina un largo viaje en una sola zancada, y nadie anda con Dios por una sola gran experiencia. Andamos con Él por mil pasos pequeños y fieles: encontrándonos con Él en la mañana, oyéndolo en su Palabra, hablándole en oración, obedeciendo en las pequeñas decisiones diarias, y volviendo a Él pronto cada vez que tropezamos.' },
-    { textEn: "28. Explain Micah 6:8 and what it says about how we are to walk.", textEs: "28. Explique Miqueas 6:8 y lo que dice sobre cómo debemos andar.", kwEn: ["justly", "mercy", "humbly", "walk", "god", "require", "humble", "love"], kwEs: ["justicia", "misericordia", "humild", "camin", "dios", "requiere", "amar", "humillar"],
-      modelEn: 'Micah 6:8 says the Lord requires us “to do justly, to love mercy, and to walk humbly with your God.” This gathers the whole walk into one sentence: it is humble, not proud; it is steady, made of mercy and justice lived out; and it is daily, an ongoing walk rather than a single event.',
-      modelEs: 'Miqueas 6:8 dice que el Señor requiere de nosotros “hacer justicia, y amar misericordia, y humillarte ante tu Dios.” Esto reúne todo el caminar en una sola frase: es humilde, no orgulloso; es constante, hecho de misericordia y justicia vividas; y es diario, un caminar continuo en vez de un solo evento.' },
-    { textEn: "29. Why does the lesson say walking with God is the soil for every other discipline?", textEs: "29. ¿Por qué dice la lección que andar con Dios es la tierra para toda otra disciplina?", kwEn: ["walk", "god", "discipline", "grow", "prayer", "word", "fellowship", "serve"], kwEs: ["camin", "dios", "disciplina", "crece", "oración", "palabra", "comunión", "servir"],
-      modelEn: 'Every discipline studied in this course — daily devotion, prayer, the Word, fellowship and accountability — exists to serve this one thing: that we might walk with God. Walking with God is the soil because none of these disciplines has value in itself; they only bear fruit as expressions of an ongoing relationship with Him, the way roots draw up what a plant needs to grow.',
-      modelEs: 'Toda disciplina estudiada en este curso — la devoción diaria, la oración, la Palabra, la comunión y la rendición de cuentas — existe para servir a esta sola cosa: que andemos con Dios. Andar con Dios es la tierra porque ninguna de estas disciplinas tiene valor en sí misma; solo dan fruto como expresiones de una relación continua con Él, tal como las raíces sacan lo que una planta necesita para crecer.' },
-    { textEn: "30. Are you walking with God day by day? What is one step you can take to walk more closely with Him?", textEs: "30. ¿Está usted andando con Dios día tras día? ¿Cuál es un paso que puede dar para andar más cerca de Él?", kwEn: ["walk", "god", "daily", "step", "closer", "abide", "obey", "pray"], kwEs: ["camin", "dios", "diario", "paso", "cerca", "permanec", "obedec", "orar"],
-      modelEn: 'This is a personal reflection question inviting honest self-examination: am I walking with God day by day, in continual fellowship, obedience, and small faithful steps, or has my walk grown distant? Whatever the honest answer, Scripture teaches that one step back toward Him, taken today, is always available — the way back to a close walk with God is never closed.',
-      modelEs: 'Esta es una pregunta de reflexión personal que invita a un examen honesto: ¿estoy andando con Dios día tras día, en comunión continua, obediencia y pequeños pasos fieles, o mi caminar se ha alejado? Cualquiera que sea la respuesta honesta, la Escritura enseña que un paso de regreso hacia Él, dado hoy, siempre está disponible — el camino de vuelta a un caminar cercano con Dios nunca está cerrado.' }
-
-];
+/* CTSPT — unit 2. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "pt",
+ "unit": 2,
+ "totalUnits": 10,
+ "filePrefix": "CTSPT",
+ "prevHref": "CTSPTUnit1.html",
+ "nextHref": "CTSPTUnit3.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "The Bible's oldest description of a godly life is that a man:",
+    "es": "La descripción más antigua de una vida piadosa en la Biblia es que un hombre:"
+   },
+   "options": {
+    "en": [
+     "built a temple",
+     "walked with God",
+     "led an army",
+     "wrote a book"
+    ],
+    "es": [
+     "edificó un templo",
+     "caminó con Dios",
+     "dirigió un ejército",
+     "escribió un libro"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "Enoch's walk with God ended with:",
+    "es": "El caminar de Enoc con Dios terminó con:"
+   },
+   "options": {
+    "en": [
+     "his defeat",
+     "his wandering away",
+     "a long illness",
+     "God taking him home without death"
+    ],
+    "es": [
+     "su derrota",
+     "su alejamiento",
+     "una larga enfermedad",
+     "Dios llevándolo a casa sin pasar por la muerte"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "Noah is described as a man who, in a corrupt generation:",
+    "es": "Noé es descrito como un hombre que, en una generación corrupta:"
+   },
+   "options": {
+    "en": [
+     "gave up",
+     "blended in",
+     "walked with God and was preserved",
+     "built cities"
+    ],
+    "es": [
+     "se rindió",
+     "se mezcló",
+     "caminó con Dios y fue preservado",
+     "edificó ciudades"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "God said to Abraham in Genesis 17:1:",
+    "es": "Dios dijo a Abraham en Génesis 17:1:"
+   },
+   "options": {
+    "en": [
+     "'Walk before Me and be blameless'",
+     "'Hide from Me'",
+     "'Argue with Me'",
+     "'Rest from Me'"
+    ],
+    "es": [
+     "'Anda delante de mí, y sé perfecto'",
+     "'Escóndete de mí'",
+     "'Discute conmigo'",
+     "'Descansa de mí'"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "Amos 3:3 teaches that to walk together, two must:",
+    "es": "Amós 3:3 enseña que para andar juntos, dos deben:"
+   },
+   "options": {
+    "en": [
+     "be silent",
+     "be agreed",
+     "be wealthy",
+     "be related"
+    ],
+    "es": [
+     "estar callados",
+     "estar de acuerdo",
+     "ser ricos",
+     "ser parientes"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "To walk with God therefore means to:",
+    "es": "Andar con Dios significa, por tanto:"
+   },
+   "options": {
+    "en": [
+     "keep our own way",
+     "walk only on Sundays",
+     "walk alone",
+     "come into agreement with Him — to want what He wants"
+    ],
+    "es": [
+     "seguir nuestro propio camino",
+     "andar solo los domingos",
+     "andar solos",
+     "ponerse de acuerdo con Él — querer lo que Él quiere"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "Walking with God means continual fellowship, which is:",
+    "es": "Andar con Dios significa comunión continua, que es:"
+   },
+   "options": {
+    "en": [
+     "a steady companionship through the ordinary day",
+     "a yearly retreat",
+     "one hour on Sunday",
+     "an occasional crisis prayer"
+    ],
+    "es": [
+     "una compañía constante a través del día ordinario",
+     "un retiro anual",
+     "una hora el domingo",
+     "una oración ocasional en crisis"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "1 John 1:7 ties walking with God to:",
+    "es": "1 Juan 1:7 relaciona andar con Dios con:"
+   },
+   "options": {
+    "en": [
+     "wealth",
+     "knowledge",
+     "walking in the light, not in sin",
+     "comfort"
+    ],
+    "es": [
+     "la riqueza",
+     "el conocimiento",
+     "andar en luz, no en pecado",
+     "la comodidad"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "In John 15 the Lord Jesus gave this walk a deeper name:",
+    "es": "En Juan 15 el Señor Jesús dio a este caminar un nombre más profundo:"
+   },
+   "options": {
+    "en": [
+     "climbing",
+     "building",
+     "running",
+     "abiding"
+    ],
+    "es": [
+     "escalar",
+     "edificar",
+     "correr",
+     "permanecer"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "Jesus said the branch cannot bear fruit unless it:",
+    "es": "Jesús dijo que el pámpano no puede llevar fruto a menos que:"
+   },
+   "options": {
+    "en": [
+     "abides in the vine",
+     "is large",
+     "is cut off",
+     "bears leaves"
+    ],
+    "es": [
+     "permanezca en la vid",
+     "sea grande",
+     "sea cortado",
+     "lleve hojas"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "Apart from Christ, Jesus says, we can:",
+    "es": "Aparte de Cristo, dice Jesús, podemos:"
+   },
+   "options": {
+    "en": [
+     "do everything",
+     "do most things",
+     "do nothing",
+     "do enough"
+    ],
+    "es": [
+     "hacer todo",
+     "hacer la mayoría de las cosas",
+     "no hacer nada",
+     "hacer lo suficiente"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "To abide in Christ is to:",
+    "es": "Permanecer en Cristo es:"
+   },
+   "options": {
+    "en": [
+     "work harder in our own strength",
+     "draw our life from Him moment by moment, like a branch from the vine",
+     "admire Him from afar",
+     "visit Him yearly"
+    ],
+    "es": [
+     "esforzarnos más en nuestra propia fuerza",
+     "sacar nuestra vida de Él momento a momento, como el pámpano de la vid",
+     "admirarlo desde lejos",
+     "visitarlo cada año"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "The lesson says a walk is made of:",
+    "es": "La lección dice que un caminar está hecho de:"
+   },
+   "options": {
+    "en": [
+     "steps — one after another, day after day",
+     "a single great stride",
+     "feelings only",
+     "one decision"
+    ],
+    "es": [
+     "pasos — uno tras otro, día tras día",
+     "una sola gran zancada",
+     "solo sentimientos",
+     "una sola decisión"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "We walk with God, the lesson says, not by one great experience but by:",
+    "es": "Andamos con Dios, dice la lección, no por una sola gran experiencia sino por:"
+   },
+   "options": {
+    "en": [
+     "avoiding people",
+     "long sermons",
+     "much money",
+     "a thousand small, faithful steps"
+    ],
+    "es": [
+     "evitar a la gente",
+     "sermones largos",
+     "mucho dinero",
+     "mil pasos pequeños y fieles"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "When we stumble in our walk, the lesson says we should:",
+    "es": "Cuando tropezamos en nuestro caminar, la lección dice que debemos:"
+   },
+   "options": {
+    "en": [
+     "give up",
+     "return to God quickly",
+     "hide",
+     "pretend nothing happened"
+    ],
+    "es": [
+     "rendirnos",
+     "volver a Dios pronto",
+     "escondernos",
+     "fingir que nada pasó"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "Micah 6:8 says the Lord requires us to do justly, love mercy, and:",
+    "es": "Miqueas 6:8 dice que el Señor requiere hacer justicia, amar misericordia, y:"
+   },
+   "options": {
+    "en": [
+     "gain wealth",
+     "seek fame",
+     "walk humbly with your God",
+     "live alone"
+    ],
+    "es": [
+     "ganar riqueza",
+     "buscar fama",
+     "humillarse ante su Dios",
+     "vivir solo"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "Walking with God, the lesson says, is the soil out of which:",
+    "es": "Andar con Dios, dice la lección, es la tierra de la cual:"
+   },
+   "options": {
+    "en": [
+     "doubt grows",
+     "nothing grows",
+     "only prayer grows",
+     "every other discipline grows"
+    ],
+    "es": [
+     "crece la duda",
+     "nada crece",
+     "solo crece la oración",
+     "crece toda otra disciplina"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "To walk with God is best described as:",
+    "es": "Andar con Dios se describe mejor como:"
+   },
+   "options": {
+    "en": [
+     "striving in our own strength",
+     "staying close to the Source of strength",
+     "a one-time event",
+     "a reward for the strong"
+    ],
+    "es": [
+     "esforzarse en nuestra propia fuerza",
+     "mantenerse cerca de la Fuente de la fuerza",
+     "un evento de una sola vez",
+     "un premio para los fuertes"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "The phrase 'walked with God' in Scripture describes men who:",
+    "es": "La frase 'caminó con Dios' en la Escritura describe a hombres que:"
+   },
+   "options": {
+    "en": [
+     "lived their whole lives in God's company",
+     "were famous",
+     "were sinless",
+     "lived alone"
+    ],
+    "es": [
+     "vivieron toda su vida en la compañía de Dios",
+     "eran famosos",
+     "eran sin pecado",
+     "vivían solos"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "Every discipline in this course exists to serve one thing:",
+    "es": "Toda disciplina de este curso existe para servir a una sola cosa:"
+   },
+   "options": {
+    "en": [
+     "church attendance records",
+     "head knowledge",
+     "that we might walk with God",
+     "personal comfort"
+    ],
+    "es": [
+     "los registros de asistencia",
+     "el conocimiento de la cabeza",
+     "que andemos con Dios",
+     "la comodidad personal"
+    ]
+   },
+   "answer": 2
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "What does it mean that Enoch and Noah 'walked with God'? Use their examples.",
+    "es": "¿Qué significa que Enoc y Noé 'caminaron con Dios'? Use sus ejemplos."
+   },
+   "keywords": {
+    "en": [
+     "enoch",
+     "noah",
+     "walk",
+     "god",
+     "fellowship",
+     "generation",
+     "preserved",
+     "took"
+    ],
+    "es": [
+     "enoc",
+     "noé",
+     "camin",
+     "dios",
+     "comunión",
+     "generación",
+     "preserv",
+     "llevó"
+    ]
+   },
+   "model": {
+    "en": "Enoch and Noah both “walked with God” — meaning their whole lives were lived in close, ongoing fellowship with Him. Enoch's walk was so close that God simply took him home without death; Noah's walk with God preserved him and his household through a corrupt generation and the flood. Both show that walking with God is not an occasional visit but a life lived continually in His company.",
+    "es": "Enoc y Noé ambos “caminaron con Dios” — es decir, toda su vida fue vivida en comunión cercana y continua con Él. El caminar de Enoc fue tan cercano que Dios sencillamente lo llevó a casa sin pasar por la muerte; el caminar de Noé con Dios lo preservó a él y a su casa en medio de una generación corrupta y el diluvio. Ambos muestran que andar con Dios no es una visita ocasional sino una vida vivida continuamente en su compañía."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Using Amos 3:3, explain what agreement has to do with walking with God.",
+    "es": "Usando Amós 3:3, explique qué tiene que ver el acuerdo con andar con Dios."
+   },
+   "keywords": {
+    "en": [
+     "agree",
+     "walk",
+     "together",
+     "god",
+     "want",
+     "will",
+     "obey",
+     "way"
+    ],
+    "es": [
+     "acuerdo",
+     "camin",
+     "juntos",
+     "dios",
+     "querer",
+     "voluntad",
+     "obedec",
+     "camino"
+    ]
+   },
+   "model": {
+    "en": "Amos 3:3 asks, “Can two walk together, unless they are agreed?” Two people cannot walk the same road in step unless they've agreed to go the same way at the same pace. So to walk with God means coming into agreement with Him — wanting what He wants and going where He goes, rather than asking Him to follow our own way.",
+    "es": "Amós 3:3 pregunta: “¿Andarán dos juntos, si no estuvieren de acuerdo?” Dos personas no pueden caminar el mismo camino al mismo paso si no han acordado ir por la misma vía. Así que andar con Dios significa ponerse de acuerdo con Él — querer lo que Él quiere e ir adonde Él va, en lugar de pedirle que siga nuestro propio camino."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain what it means that walking with God is continual fellowship, not just Sunday.",
+    "es": "Explique qué significa que andar con Dios es comunión continua, no solo el domingo."
+   },
+   "keywords": {
+    "en": [
+     "continual",
+     "daily",
+     "fellowship",
+     "friend",
+     "companion",
+     "ordinary",
+     "sunday",
+     "steady"
+    ],
+    "es": [
+     "continua",
+     "diaria",
+     "comunión",
+     "amigo",
+     "compañ",
+     "ordinario",
+     "domingo",
+     "constante"
+    ]
+   },
+   "model": {
+    "en": "Walking with God is not one hour on Sunday or a prayer offered only in a crisis; it is a steady companionship through the ordinary day, the way two friends talk as they walk the same road together. This continual fellowship means God is present in the small, daily moments, not just in formal or occasional religious acts.",
+    "es": "Andar con Dios no es una hora el domingo ni una oración ofrecida solo en una crisis; es una compañía constante a través del día ordinario, como dos amigos que conversan mientras caminan juntos el mismo camino. Esta comunión continua significa que Dios está presente en los momentos pequeños y diarios, no solo en actos religiosos formales u ocasionales."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How does 1 John 1:7 connect walking with God and walking in the light?",
+    "es": "¿Cómo conecta 1 Juan 1:7 el andar con Dios y el andar en luz?"
+   },
+   "keywords": {
+    "en": [
+     "light",
+     "walk",
+     "darkness",
+     "sin",
+     "obey",
+     "turn",
+     "holy",
+     "fellowship"
+    ],
+    "es": [
+     "luz",
+     "camin",
+     "tinieblas",
+     "pecado",
+     "obedec",
+     "volver",
+     "santo",
+     "comunión"
+    ]
+   },
+   "model": {
+    "en": "John writes that if we walk in the light as He is in the light, we have fellowship with one another (1 John 1:7). Walking with God and walking in sin cannot happen at the same time — the walk requires that we keep turning from darkness to light, so walking with God is inseparable from obedience and turning from sin.",
+    "es": "Juan escribe que si andamos en luz, como él está en luz, tenemos comunión unos con otros (1 Juan 1:7). Andar con Dios y andar en pecado no pueden suceder al mismo tiempo — el caminar requiere que sigamos volviéndonos de las tinieblas a la luz, así que andar con Dios es inseparable de la obediencia y de apartarse del pecado."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain Jesus' picture of the vine and branches (John 15:4-5).",
+    "es": "Explique el cuadro de Jesús de la vid y los pámpanos (Juan 15:4-5)."
+   },
+   "keywords": {
+    "en": [
+     "abide",
+     "vine",
+     "branch",
+     "fruit",
+     "christ",
+     "nothing",
+     "life",
+     "remain"
+    ],
+    "es": [
+     "permanec",
+     "vid",
+     "pámpano",
+     "fruto",
+     "cristo",
+     "nada",
+     "vida",
+     "rama"
+    ]
+   },
+   "model": {
+    "en": "Jesus said, “Abide in Me, and I in you. As the branch cannot bear fruit of itself, unless it abides in the vine, neither can you, unless you abide in Me… for without Me you can do nothing” (John 15:4-5). Just as a branch draws its life from the vine, we draw our very life from Christ moment by moment; cut off from Him we wither, but joined to Him we bear much fruit.",
+    "es": "Jesús dijo: “Permaneced en mí, y yo en vosotros. Como el pámpano no puede llevar fruto de sí mismo, si no permaneciere en la vid, así ni vosotros, si no permaneciereis en mí… porque sin mí nada podéis hacer” (Juan 15:4-5). Tal como el pámpano saca su vida de la vid, nosotros sacamos nuestra vida misma de Cristo momento a momento; cortados de Él nos secamos, pero unidos a Él llevamos mucho fruto."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What does it mean to abide in Christ, and why can we do nothing without Him?",
+    "es": "¿Qué significa permanecer en Cristo, y por qué nada podemos hacer sin Él?"
+   },
+   "keywords": {
+    "en": [
+     "abide",
+     "christ",
+     "draw",
+     "life",
+     "strength",
+     "nothing",
+     "depend",
+     "fruit"
+    ],
+    "es": [
+     "permanec",
+     "cristo",
+     "vida",
+     "fuerza",
+     "nada",
+     "depend",
+     "fruto",
+     "fuente"
+    ]
+   },
+   "model": {
+    "en": "To abide in Christ is to draw our very life from Him moment by moment, the way a branch draws its sap from the vine — not striving harder in our own strength, but staying close to the Source of all strength. We can do nothing apart from Him because, like a cut branch, we have no life of our own to produce fruit; all fruitfulness depends on our continued connection to Him.",
+    "es": "Permanecer en Cristo es sacar nuestra vida misma de Él momento a momento, como el pámpano saca su savia de la vid — no esforzarse más en nuestra propia fuerza, sino mantenerse cerca de la Fuente de toda fuerza. Nada podemos hacer aparte de Él porque, como una rama cortada, no tenemos vida propia para producir fruto; toda fructificación depende de nuestra conexión continua con Él."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why does the lesson say walking with God is a daily walk made of small steps?",
+    "es": "¿Por qué dice la lección que andar con Dios es un caminar diario hecho de pasos pequeños?"
+   },
+   "keywords": {
+    "en": [
+     "step",
+     "daily",
+     "small",
+     "faithful",
+     "stride",
+     "return",
+     "obey",
+     "habit"
+    ],
+    "es": [
+     "paso",
+     "diario",
+     "pequeñ",
+     "fiel",
+     "volver",
+     "obedec",
+     "hábito",
+     "cada"
+    ]
+   },
+   "model": {
+    "en": "A walk is made of steps, one after another, day after day — no one walks a long journey in a single stride, and no one walks with God by one great experience. We walk with Him through a thousand small, faithful steps: meeting Him in the morning, hearing Him in His Word, speaking to Him in prayer, obeying in small daily decisions, and returning to Him quickly whenever we stumble.",
+    "es": "Un caminar está hecho de pasos, uno tras otro, día tras día — nadie camina un largo viaje en una sola zancada, y nadie anda con Dios por una sola gran experiencia. Andamos con Él por mil pasos pequeños y fieles: encontrándonos con Él en la mañana, oyéndolo en su Palabra, hablándole en oración, obedeciendo en las pequeñas decisiones diarias, y volviendo a Él pronto cada vez que tropezamos."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain Micah 6:8 and what it says about how we are to walk.",
+    "es": "Explique Miqueas 6:8 y lo que dice sobre cómo debemos andar."
+   },
+   "keywords": {
+    "en": [
+     "justly",
+     "mercy",
+     "humbly",
+     "walk",
+     "god",
+     "require",
+     "humble",
+     "love"
+    ],
+    "es": [
+     "justicia",
+     "misericordia",
+     "humild",
+     "camin",
+     "dios",
+     "requiere",
+     "amar",
+     "humillar"
+    ]
+   },
+   "model": {
+    "en": "Micah 6:8 says the Lord requires us “to do justly, to love mercy, and to walk humbly with your God.” This gathers the whole walk into one sentence: it is humble, not proud; it is steady, made of mercy and justice lived out; and it is daily, an ongoing walk rather than a single event.",
+    "es": "Miqueas 6:8 dice que el Señor requiere de nosotros “hacer justicia, y amar misericordia, y humillarte ante tu Dios.” Esto reúne todo el caminar en una sola frase: es humilde, no orgulloso; es constante, hecho de misericordia y justicia vividas; y es diario, un caminar continuo en vez de un solo evento."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why does the lesson say walking with God is the soil for every other discipline?",
+    "es": "¿Por qué dice la lección que andar con Dios es la tierra para toda otra disciplina?"
+   },
+   "keywords": {
+    "en": [
+     "walk",
+     "god",
+     "discipline",
+     "grow",
+     "prayer",
+     "word",
+     "fellowship",
+     "serve"
+    ],
+    "es": [
+     "camin",
+     "dios",
+     "disciplina",
+     "crece",
+     "oración",
+     "palabra",
+     "comunión",
+     "servir"
+    ]
+   },
+   "model": {
+    "en": "Every discipline studied in this course — daily devotion, prayer, the Word, fellowship and accountability — exists to serve this one thing: that we might walk with God. Walking with God is the soil because none of these disciplines has value in itself; they only bear fruit as expressions of an ongoing relationship with Him, the way roots draw up what a plant needs to grow.",
+    "es": "Toda disciplina estudiada en este curso — la devoción diaria, la oración, la Palabra, la comunión y la rendición de cuentas — existe para servir a esta sola cosa: que andemos con Dios. Andar con Dios es la tierra porque ninguna de estas disciplinas tiene valor en sí misma; solo dan fruto como expresiones de una relación continua con Él, tal como las raíces sacan lo que una planta necesita para crecer."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Are you walking with God day by day? What is one step you can take to walk more closely with Him?",
+    "es": "¿Está usted andando con Dios día tras día? ¿Cuál es un paso que puede dar para andar más cerca de Él?"
+   },
+   "keywords": {
+    "en": [
+     "walk",
+     "god",
+     "daily",
+     "step",
+     "closer",
+     "abide",
+     "obey",
+     "pray"
+    ],
+    "es": [
+     "camin",
+     "dios",
+     "diario",
+     "paso",
+     "cerca",
+     "permanec",
+     "obedec",
+     "orar"
+    ]
+   },
+   "model": {
+    "en": "This is a personal reflection question inviting honest self-examination: am I walking with God day by day, in continual fellowship, obedience, and small faithful steps, or has my walk grown distant? Whatever the honest answer, Scripture teaches that one step back toward Him, taken today, is always available — the way back to a close walk with God is never closed.",
+    "es": "Esta es una pregunta de reflexión personal que invita a un examen honesto: ¿estoy andando con Dios día tras día, en comunión continua, obediencia y pequeños pasos fieles, o mi caminar se ha alejado? Cualquiera que sea la respuesta honesta, la Escritura enseña que un paso de regreso hacia Él, dado hoy, siempre está disponible — el camino de vuelta a un caminar cercano con Dios nunca está cerrado."
+   }
+  }
+ ]
+};

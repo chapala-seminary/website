@@ -1,66 +1,753 @@
-/* CTSPT - unit 3: per-unit configuration and content. */
-
-const UNIT = 3;
-
-const CURRENT_UNIT = 3;
-
-const NEXT_URL = 'CTSPTUnit4.html';
-
-const PREV_URL = 'CTSPTUnit2.html';
-
-const mcQuestions = [
-    { textEn: "1. The daily quiet time (personal devotion) is:", textEs: "1. El tiempo diario a solas con Dios (la devoción personal) es:", optionsEn: ["a yearly event", "a church service", "a set time each day to meet with God in His Word and prayer", "only for pastors"], optionsEs: ["un evento anual", "un culto de la iglesia", "un tiempo apartado cada día para encontrarse con Dios en su Palabra y oración", "solo para pastores"], correct: 2 },
-    { textEn: "2. Mark 1:35 shows that Jesus:", textEs: "2. Marcos 1:35 muestra que Jesús:", optionsEn: ["rose early and went to a solitary place to pray", "never prayed alone", "prayed only at night", "prayed only in the temple"], optionsEs: ["se levantó temprano y fue a un lugar desierto a orar", "nunca oraba a solas", "oraba solo de noche", "oraba solo en el templo"], correct: 0 },
-    { textEn: "3. In Psalm 5:3 David said he would direct his prayer to God:", textEs: "3. En Salmos 5:3 David dijo que dirigiría su oración a Dios:", optionsEn: ["at midnight", "in the morning", "once a week", "only in trouble"], optionsEs: ["a medianoche", "de mañana", "una vez por semana", "solo en problemas"], correct: 1 },
-    { textEn: "4. Daniel prayed:", textEs: "4. Daniel oraba:", optionsEn: ["once a year", "only when afraid", "never", "three times a day"], optionsEs: ["una vez al año", "solo cuando temía", "nunca", "tres veces al día"], correct: 3 },
-    { textEn: "5. The lesson says the point of a set time is:", textEs: "5. La lección dice que el punto de un tiempo apartado es:", optionsEn: ["to impress others", "to earn merit", "not a rule about the hour, but giving God a regular, unhurried time", "to keep a perfect record"], optionsEs: ["impresionar a otros", "ganar mérito", "no una regla sobre la hora, sino darle a Dios un tiempo regular y sin prisa", "mantener un registro perfecto"], correct: 2 },
-    { textEn: "6. We should choose a place where we can meet God:", textEs: "6. Debemos escoger un lugar donde podamos encontrarnos con Dios:", optionsEn: ["in a crowd", "without distraction", "only on Sunday", "with the television on"], optionsEs: ["en una multitud", "sin distracción", "solo el domingo", "con la televisión encendida"], correct: 1 },
-    { textEn: "7. According to 1 Peter 2:2, we desire the pure milk of the word so that:", textEs: "7. Según 1 Pedro 2:2, deseamos la leche no adulterada de la palabra para que:", optionsEn: ["we may grow", "we may argue", "we may teach", "we may rest"], optionsEs: ["crezcamos", "discutamos", "enseñemos", "descansemos"], correct: 0 },
-    { textEn: "8. The lesson says we should read the Bible:", textEs: "8. La lección dice que debemos leer la Biblia:", optionsEn: ["only to gain facts", "to win debates", "rarely", "not merely to know it but to be changed by it"], optionsEs: ["solo para obtener datos", "para ganar debates", "rara vez", "no meramente para conocerla sino para ser cambiados por ella"], correct: 3 },
-    { textEn: "9. Psalm 1:2 says the blessed man meditates on God's law:", textEs: "9. Salmos 1:2 dice que el varón bienaventurado medita en la ley de Dios:", optionsEn: ["day and night", "once a year", "never", "only when convenient"], optionsEs: ["de día y de noche", "una vez al año", "nunca", "solo cuando es conveniente"], correct: 0 },
-    { textEn: "10. In personal devotion, prayer is described here as:", textEs: "10. En la devoción personal, la oración se describe aquí como:", optionsEn: ["unnecessary", "only for emergencies", "bringing your whole day to God daily", "reciting set words"], optionsEs: ["innecesaria", "solo para emergencias", "llevar todo tu día a Dios a diario", "recitar palabras fijas"], correct: 2 },
-    { textEn: "11. Dr. Ted Rogers asks his prayer students to keep:", textEs: "11. El Dr. Ted Rogers pide a sus alumnos de oración que lleven:", optionsEn: ["a budget", "a prayer journal", "a calendar only", "a diary of others' faults"], optionsEs: ["un presupuesto", "un diario de oración", "solo un calendario", "un registro de las faltas de otros"], correct: 1 },
-    { textEn: "12. A prayer journal helps us:", textEs: "12. Un diario de oración nos ayuda a:", optionsEn: ["forget our prayers", "impress God", "avoid prayer", "see God's faithfulness over time and pray more purposefully"], optionsEs: ["olvidar nuestras oraciones", "impresionar a Dios", "evitar la oración", "ver la fidelidad de Dios con el tiempo y orar con más propósito"], correct: 3 },
-    { textEn: "13. Devotion, the lesson says, is not only talking but also:", textEs: "13. La devoción, dice la lección, no es solo hablar sino también:", optionsEn: ["sleeping", "listening", "singing only", "writing only"], optionsEs: ["dormir", "escuchar", "solo cantar", "solo escribir"], correct: 1 },
-    { textEn: "14. Psalm 46:10 says:", textEs: "14. Salmos 46:10 dice:", optionsEn: ["'Work, and know that I am God'", "'Speak much, and know that I am God'", "'Be still, and know that I am God'", "'Hurry, and know that I am God'"], optionsEs: ["'Trabajad, y conoced que yo soy Dios'", "'Hablad mucho, y conoced que yo soy Dios'", "'Estad quietos, y conoced que yo soy Dios'", "'Apresuraos, y conoced que yo soy Dios'"], correct: 2 },
-    { textEn: "15. The lesson says we are often afraid of:", textEs: "15. La lección dice que muchas veces tememos:", optionsEn: ["silence in our time with God", "prayer", "the Bible", "singing"], optionsEs: ["el silencio en nuestro tiempo con Dios", "la oración", "la Biblia", "el canto"], correct: 0 },
-    { textEn: "16. When no one is speaking in our quiet time, the lesson says we should:", textEs: "16. Cuando nadie habla en nuestro tiempo a solas, la lección dice que debemos:", optionsEn: ["panic", "leave", "talk louder", "not become anxious — God may be speaking to us"], optionsEs: ["entrar en pánico", "irnos", "hablar más fuerte", "no angustiarnos — Dios puede estar hablándonos"], correct: 3 },
-    { textEn: "17. Missing a day of devotion, the lesson says, is best seen as:", textEs: "17. Perder un día de devoción, dice la lección, se ve mejor como:", optionsEn: ["proof we are lost", "an unforgivable sin", "a meal missed — come back to the table", "a reason to quit"], optionsEs: ["prueba de que estamos perdidos", "un pecado imperdonable", "una comida perdida — vuelva a la mesa", "una razón para rendirse"], correct: 2 },
-    { textEn: "18. The quiet time is described as:", textEs: "18. El tiempo a solas se describe como:", optionsEn: ["the daily appointment that keeps the whole Christian life alive", "optional busywork", "a burden", "a replacement for church"], optionsEs: ["la cita diaria que mantiene viva toda la vida cristiana", "trabajo opcional sin sentido", "una carga", "un reemplazo de la iglesia"], correct: 0 },
-    { textEn: "19. The lesson urges us to give God:", textEs: "19. La lección nos exhorta a darle a Dios:", optionsEn: ["the leftovers of our day", "the first and best part of our day", "nothing", "only our money"], optionsEs: ["las sobras de nuestro día", "la primera y mejor parte de nuestro día", "nada", "solo nuestro dinero"], correct: 1 },
-    { textEn: "20. Personal devotion exists to deepen:", textEs: "20. La devoción personal existe para profundizar:", optionsEn: ["our reputation", "our schedule", "our wealth", "our walk with God"], optionsEs: ["nuestra reputación", "nuestro horario", "nuestra riqueza", "nuestro caminar con Dios"], correct: 3 }
-];
-
-const kwQuestions = [
-    { textEn: "21. What is the daily quiet time, and why does the lesson say it matters?", textEs: "21. ¿Qué es el tiempo diario a solas con Dios, y por qué dice la lección que importa?", kwEn: ["devotion", "daily", "time", "word", "prayer", "god", "meet", "walk"], kwEs: ["devoción", "diario", "tiempo", "palabra", "oración", "dios", "encontr", "camin"],
-      modelEn: 'The daily quiet time is a set time each day to meet with God in His Word and prayer. It matters because no one walks with a friend he never meets — it is the daily appointment out of which the whole walk with God grows.',
-      modelEs: 'El tiempo diario a solas con Dios es un tiempo apartado cada día para encontrarse con Dios en su Palabra y en oración. Importa porque nadie anda con un amigo a quien nunca se encuentra — es la cita diaria de la cual crece todo el caminar con Dios.' },
-    { textEn: "22. What do Mark 1:35, Psalm 5:3, and Daniel 6:10 show about a regular time with God?", textEs: "22. ¿Qué muestran Marcos 1:35, Salmos 5:3 y Daniel 6:10 sobre un tiempo regular con Dios?", kwEn: ["morning", "jesus", "david", "daniel", "regular", "pray", "time", "daily"], kwEs: ["mañana", "jesús", "david", "daniel", "regular", "orar", "tiempo", "diario"],
-      modelEn: 'Jesus rose a long while before daylight to pray in a solitary place (Mark 1:35); David directed his voice to the Lord in the morning (Psalm 5:3); and Daniel knelt three times a day to pray and give thanks (Daniel 6:10). Together they show that those who walked closely with God gave Him a regular, unhurried time — not a rule about the exact hour, but the pattern of a consistent daily meeting with Him.',
-      modelEs: 'Jesús se levantó mucho antes del amanecer para orar en un lugar desierto (Marcos 1:35); David dirigió su voz al Señor en la mañana (Salmos 5:3); y Daniel se arrodillaba tres veces al día para orar y dar gracias (Daniel 6:10). Juntos muestran que quienes anduvieron cerca de Dios le dieron un tiempo regular y sin prisa — no una regla sobre la hora exacta, sino el patrón de un encuentro diario constante con Él.' },
-    { textEn: "23. Why does the lesson say to choose a place without distraction?", textEs: "23. ¿Por qué dice la lección que escojamos un lugar sin distracción?", kwEn: ["place", "quiet", "distraction", "focus", "alone", "meet", "time", "solitary"], kwEs: ["lugar", "quiet", "distracc", "enfoc", "solo", "encontr", "tiempo", "desierto"],
-      modelEn: 'The lesson says to find a quiet place where we can meet God without distraction, because devotion requires our attention and focus. Just as Jesus withdrew to a solitary place to pray, we need a place set apart from the noise of the world so our time with God is not crowded out.',
-      modelEs: 'La lección dice que hallemos un lugar tranquilo donde podamos encontrarnos con Dios sin distracción, porque la devoción requiere nuestra atención y enfoque. Tal como Jesús se retiró a un lugar desierto para orar, necesitamos un lugar apartado del ruido del mundo para que nuestro tiempo con Dios no sea desplazado.' },
-    { textEn: "24. How should we read the Bible in our devotion (1 Peter 2:2 and the lesson's point)?", textEs: "24. ¿Cómo debemos leer la Biblia en nuestra devoción (1 Pedro 2:2 y el punto de la lección)?", kwEn: ["read", "word", "grow", "change", "milk", "meditate", "obey", "do"], kwEs: ["leer", "palabra", "crece", "cambi", "leche", "medit", "obedec", "hacer"],
-      modelEn: '1 Peter 2:2 says we should desire the pure milk of the word as newborn babes, that we may grow by it. The lesson\'s point is that we read Scripture not merely to know it, but to be changed by it — reading slowly, meditating, and asking what it shows us about God and what we must do in response.',
-      modelEs: '1 Pedro 2:2 dice que debemos desear la leche no adulterada de la palabra, como niños recién nacidos, para que por ella crezcamos. El punto de la lección es que leemos la Escritura no meramente para conocerla, sino para ser cambiados por ella — leyendo despacio, meditando, y preguntando qué nos muestra acerca de Dios y qué debemos hacer en respuesta.' },
-    { textEn: "25. What is a prayer journal, and why does Dr. Ted Rogers have his students keep one?", textEs: "25. ¿Qué es un diario de oración, y por qué el Dr. Ted Rogers pide a sus alumnos que lleven uno?", kwEn: ["journal", "write", "ted", "record", "faithful", "purposeful", "pray", "answer"], kwEs: ["diario", "escrib", "ted", "registr", "fiel", "propósito", "orar", "respond"],
-      modelEn: 'A prayer journal is a notebook where a believer writes daily notations about how their time with God is changing them, what they are asking of Him, and how He answers. Dr. Ted Rogers has his students keep one because it lets them look back and see God\'s faithfulness over time, keeps them honest, and turns vague, drifting prayer into purposeful prayer.',
-      modelEs: 'Un diario de oración es un cuaderno donde un creyente escribe anotaciones diarias sobre cómo su tiempo con Dios lo está cambiando, qué le está pidiendo, y cómo Él responde. El Dr. Ted Rogers pide a sus alumnos que lleven uno porque les permite mirar atrás y ver la fidelidad de Dios a través del tiempo, los mantiene honestos, y convierte la oración vaga y errante en oración con propósito.' },
-    { textEn: "26. Explain Psalm 46:10 and what it teaches about listening in prayer.", textEs: "26. Explique Salmos 46:10 y lo que enseña sobre escuchar en la oración.", kwEn: ["still", "know", "god", "listen", "silence", "quiet", "speak", "wait"], kwEs: ["quiet", "conoc", "dios", "escuch", "silencio", "callar", "habla", "esperar"],
-      modelEn: 'Psalm 46:10 says, “Be still, and know that I am God.” It teaches that devotion is not only talking to God but also listening — laying down our busyness, being still before Him, and trusting that in the quiet He may be speaking to our hearts even when we hear no audible words.',
-      modelEs: 'Salmos 46:10 dice: “Estad quietos, y conoced que yo soy Dios.” Enseña que la devoción no es solo hablar a Dios sino también escuchar — dejando a un lado nuestro ajetreo, estando quietos delante de Él, y confiando en que en la quietud Él podría estar hablándole a nuestro corazón aunque no oigamos palabras audibles.' },
-    { textEn: "27. Why does the lesson say we need not be anxious in silence during our time with God?", textEs: "27. ¿Por qué dice la lección que no debemos angustiarnos en el silencio durante nuestro tiempo con Dios?", kwEn: ["silence", "anxious", "god", "speak", "listen", "still", "wait", "fear"], kwEs: ["silencio", "ansios", "dios", "habla", "escuch", "quiet", "esperar", "temor"],
-      modelEn: 'The lesson says we need not be anxious in silence because we often wrongly feel that if no words are being spoken, nothing is happening. But God Himself might, at that very moment, be speaking to us in the quiet — so silence before Him is not empty or wasted time but an opportunity to listen.',
-      modelEs: 'La lección dice que no debemos angustiarnos en el silencio porque a menudo sentimos erróneamente que si no se pronuncian palabras, nada está sucediendo. Pero Dios mismo podría, en ese mismo momento, estar hablándonos en la quietud — así que el silencio delante de Él no es tiempo vacío o perdido sino una oportunidad para escuchar.' },
-    { textEn: "28. Why does the lesson compare missing a day of devotion to a missed meal?", textEs: "28. ¿Por qué compara la lección perder un día de devoción con una comida perdida?", kwEn: ["meal", "miss", "return", "grace", "despair", "table", "daily", "back"], kwEs: ["comida", "perder", "volver", "gracia", "mesa", "diario", "desesper", "regres"],
-      modelEn: 'The lesson compares missing a day of devotion to a missed meal because it is not cause for despair as though all were lost — you have only missed one meal, and the table is still open. The point is grace, not guilt: simply return to the table the next day rather than giving up the habit altogether.',
-      modelEs: 'La lección compara perder un día de devoción con una comida perdida porque no es motivo de desesperación como si todo estuviera perdido — solo se ha perdido una comida, y la mesa sigue abierta. El punto es la gracia, no la culpa: sencillamente volver a la mesa al día siguiente en vez de abandonar el hábito por completo.' },
-    { textEn: "29. Why does the lesson urge us to give God the first and best part of our day?", textEs: "29. ¿Por qué nos exhorta la lección a darle a Dios la primera y mejor parte de nuestro día?", kwEn: ["first", "best", "day", "morning", "priority", "god", "walk", "deepen"], kwEs: ["primer", "mejor", "día", "mañana", "priorid", "dios", "camin", "profund"],
-      modelEn: 'The lesson urges us to give God the first and best part of our day because our devotion is a priority, not leftovers — giving Him our freshest attention before the noise and demands of the day crowd Him out. Doing so, the lesson promises, deepens and strengthens our walk with Him week by week.',
-      modelEs: 'La lección nos exhorta a darle a Dios la primera y mejor parte de nuestro día porque nuestra devoción es una prioridad, no sobras — dándole nuestra atención más fresca antes de que el ruido y las demandas del día lo desplacen. Hacerlo, promete la lección, profundiza y afirma nuestro caminar con Él semana tras semana.' },
-    { textEn: "30. Do you have a daily time with God? What is one change you could make to build or strengthen that habit?", textEs: "30. ¿Tiene usted un tiempo diario con Dios? ¿Cuál es un cambio que podría hacer para formar o fortalecer ese hábito?", kwEn: ["time", "daily", "god", "habit", "quiet", "word", "pray", "change"], kwEs: ["tiempo", "diario", "dios", "hábito", "devoción", "palabra", "orar", "cambi"],
-      modelEn: 'This is a personal reflection question inviting honest self-examination about one\'s own daily habit of meeting with God in Word and prayer. Whether the answer is yes, no, or somewhere in between, the lesson invites a concrete, specific change — a set time, a quiet place, or a journal — to build or strengthen that habit going forward.',
-      modelEs: 'Esta es una pregunta de reflexión personal que invita a un examen honesto sobre el propio hábito diario de encontrarse con Dios en la Palabra y la oración. Sea la respuesta sí, no, o algo intermedio, la lección invita a un cambio concreto y específico — un tiempo apartado, un lugar tranquilo, o un diario — para formar o fortalecer ese hábito de ahora en adelante.' }
-
-];
+/* CTSPT — unit 3. Content only; all policy lives in cts-engine.js. */
+window.CTS_UNIT = {
+ "course": "pt",
+ "unit": 3,
+ "totalUnits": 10,
+ "filePrefix": "CTSPT",
+ "prevHref": "CTSPTUnit2.html",
+ "nextHref": "CTSPTUnit4.html",
+ "mc": [
+  {
+   "stem": {
+    "en": "The daily quiet time (personal devotion) is:",
+    "es": "El tiempo diario a solas con Dios (la devoción personal) es:"
+   },
+   "options": {
+    "en": [
+     "a yearly event",
+     "a church service",
+     "a set time each day to meet with God in His Word and prayer",
+     "only for pastors"
+    ],
+    "es": [
+     "un evento anual",
+     "un culto de la iglesia",
+     "un tiempo apartado cada día para encontrarse con Dios en su Palabra y oración",
+     "solo para pastores"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "Mark 1:35 shows that Jesus:",
+    "es": "Marcos 1:35 muestra que Jesús:"
+   },
+   "options": {
+    "en": [
+     "rose early and went to a solitary place to pray",
+     "never prayed alone",
+     "prayed only at night",
+     "prayed only in the temple"
+    ],
+    "es": [
+     "se levantó temprano y fue a un lugar desierto a orar",
+     "nunca oraba a solas",
+     "oraba solo de noche",
+     "oraba solo en el templo"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "In Psalm 5:3 David said he would direct his prayer to God:",
+    "es": "En Salmos 5:3 David dijo que dirigiría su oración a Dios:"
+   },
+   "options": {
+    "en": [
+     "at midnight",
+     "in the morning",
+     "once a week",
+     "only in trouble"
+    ],
+    "es": [
+     "a medianoche",
+     "de mañana",
+     "una vez por semana",
+     "solo en problemas"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "Daniel prayed:",
+    "es": "Daniel oraba:"
+   },
+   "options": {
+    "en": [
+     "once a year",
+     "only when afraid",
+     "never",
+     "three times a day"
+    ],
+    "es": [
+     "una vez al año",
+     "solo cuando temía",
+     "nunca",
+     "tres veces al día"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "The lesson says the point of a set time is:",
+    "es": "La lección dice que el punto de un tiempo apartado es:"
+   },
+   "options": {
+    "en": [
+     "to impress others",
+     "to earn merit",
+     "not a rule about the hour, but giving God a regular, unhurried time",
+     "to keep a perfect record"
+    ],
+    "es": [
+     "impresionar a otros",
+     "ganar mérito",
+     "no una regla sobre la hora, sino darle a Dios un tiempo regular y sin prisa",
+     "mantener un registro perfecto"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "We should choose a place where we can meet God:",
+    "es": "Debemos escoger un lugar donde podamos encontrarnos con Dios:"
+   },
+   "options": {
+    "en": [
+     "in a crowd",
+     "without distraction",
+     "only on Sunday",
+     "with the television on"
+    ],
+    "es": [
+     "en una multitud",
+     "sin distracción",
+     "solo el domingo",
+     "con la televisión encendida"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "According to 1 Peter 2:2, we desire the pure milk of the word so that:",
+    "es": "Según 1 Pedro 2:2, deseamos la leche no adulterada de la palabra para que:"
+   },
+   "options": {
+    "en": [
+     "we may grow",
+     "we may argue",
+     "we may teach",
+     "we may rest"
+    ],
+    "es": [
+     "crezcamos",
+     "discutamos",
+     "enseñemos",
+     "descansemos"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "The lesson says we should read the Bible:",
+    "es": "La lección dice que debemos leer la Biblia:"
+   },
+   "options": {
+    "en": [
+     "only to gain facts",
+     "to win debates",
+     "rarely",
+     "not merely to know it but to be changed by it"
+    ],
+    "es": [
+     "solo para obtener datos",
+     "para ganar debates",
+     "rara vez",
+     "no meramente para conocerla sino para ser cambiados por ella"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "Psalm 1:2 says the blessed man meditates on God's law:",
+    "es": "Salmos 1:2 dice que el varón bienaventurado medita en la ley de Dios:"
+   },
+   "options": {
+    "en": [
+     "day and night",
+     "once a year",
+     "never",
+     "only when convenient"
+    ],
+    "es": [
+     "de día y de noche",
+     "una vez al año",
+     "nunca",
+     "solo cuando es conveniente"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "In personal devotion, prayer is described here as:",
+    "es": "En la devoción personal, la oración se describe aquí como:"
+   },
+   "options": {
+    "en": [
+     "unnecessary",
+     "only for emergencies",
+     "bringing your whole day to God daily",
+     "reciting set words"
+    ],
+    "es": [
+     "innecesaria",
+     "solo para emergencias",
+     "llevar todo tu día a Dios a diario",
+     "recitar palabras fijas"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "Dr. Ted Rogers asks his prayer students to keep:",
+    "es": "El Dr. Ted Rogers pide a sus alumnos de oración que lleven:"
+   },
+   "options": {
+    "en": [
+     "a budget",
+     "a prayer journal",
+     "a calendar only",
+     "a diary of others' faults"
+    ],
+    "es": [
+     "un presupuesto",
+     "un diario de oración",
+     "solo un calendario",
+     "un registro de las faltas de otros"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "A prayer journal helps us:",
+    "es": "Un diario de oración nos ayuda a:"
+   },
+   "options": {
+    "en": [
+     "forget our prayers",
+     "impress God",
+     "avoid prayer",
+     "see God's faithfulness over time and pray more purposefully"
+    ],
+    "es": [
+     "olvidar nuestras oraciones",
+     "impresionar a Dios",
+     "evitar la oración",
+     "ver la fidelidad de Dios con el tiempo y orar con más propósito"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "Devotion, the lesson says, is not only talking but also:",
+    "es": "La devoción, dice la lección, no es solo hablar sino también:"
+   },
+   "options": {
+    "en": [
+     "sleeping",
+     "listening",
+     "singing only",
+     "writing only"
+    ],
+    "es": [
+     "dormir",
+     "escuchar",
+     "solo cantar",
+     "solo escribir"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "Psalm 46:10 says:",
+    "es": "Salmos 46:10 dice:"
+   },
+   "options": {
+    "en": [
+     "'Work, and know that I am God'",
+     "'Speak much, and know that I am God'",
+     "'Be still, and know that I am God'",
+     "'Hurry, and know that I am God'"
+    ],
+    "es": [
+     "'Trabajad, y conoced que yo soy Dios'",
+     "'Hablad mucho, y conoced que yo soy Dios'",
+     "'Estad quietos, y conoced que yo soy Dios'",
+     "'Apresuraos, y conoced que yo soy Dios'"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "The lesson says we are often afraid of:",
+    "es": "La lección dice que muchas veces tememos:"
+   },
+   "options": {
+    "en": [
+     "silence in our time with God",
+     "prayer",
+     "the Bible",
+     "singing"
+    ],
+    "es": [
+     "el silencio en nuestro tiempo con Dios",
+     "la oración",
+     "la Biblia",
+     "el canto"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "When no one is speaking in our quiet time, the lesson says we should:",
+    "es": "Cuando nadie habla en nuestro tiempo a solas, la lección dice que debemos:"
+   },
+   "options": {
+    "en": [
+     "panic",
+     "leave",
+     "talk louder",
+     "not become anxious — God may be speaking to us"
+    ],
+    "es": [
+     "entrar en pánico",
+     "irnos",
+     "hablar más fuerte",
+     "no angustiarnos — Dios puede estar hablándonos"
+    ]
+   },
+   "answer": 3
+  },
+  {
+   "stem": {
+    "en": "Missing a day of devotion, the lesson says, is best seen as:",
+    "es": "Perder un día de devoción, dice la lección, se ve mejor como:"
+   },
+   "options": {
+    "en": [
+     "proof we are lost",
+     "an unforgivable sin",
+     "a meal missed — come back to the table",
+     "a reason to quit"
+    ],
+    "es": [
+     "prueba de que estamos perdidos",
+     "un pecado imperdonable",
+     "una comida perdida — vuelva a la mesa",
+     "una razón para rendirse"
+    ]
+   },
+   "answer": 2
+  },
+  {
+   "stem": {
+    "en": "The quiet time is described as:",
+    "es": "El tiempo a solas se describe como:"
+   },
+   "options": {
+    "en": [
+     "the daily appointment that keeps the whole Christian life alive",
+     "optional busywork",
+     "a burden",
+     "a replacement for church"
+    ],
+    "es": [
+     "la cita diaria que mantiene viva toda la vida cristiana",
+     "trabajo opcional sin sentido",
+     "una carga",
+     "un reemplazo de la iglesia"
+    ]
+   },
+   "answer": 0
+  },
+  {
+   "stem": {
+    "en": "The lesson urges us to give God:",
+    "es": "La lección nos exhorta a darle a Dios:"
+   },
+   "options": {
+    "en": [
+     "the leftovers of our day",
+     "the first and best part of our day",
+     "nothing",
+     "only our money"
+    ],
+    "es": [
+     "las sobras de nuestro día",
+     "la primera y mejor parte de nuestro día",
+     "nada",
+     "solo nuestro dinero"
+    ]
+   },
+   "answer": 1
+  },
+  {
+   "stem": {
+    "en": "Personal devotion exists to deepen:",
+    "es": "La devoción personal existe para profundizar:"
+   },
+   "options": {
+    "en": [
+     "our reputation",
+     "our schedule",
+     "our wealth",
+     "our walk with God"
+    ],
+    "es": [
+     "nuestra reputación",
+     "nuestro horario",
+     "nuestra riqueza",
+     "nuestro caminar con Dios"
+    ]
+   },
+   "answer": 3
+  }
+ ],
+ "sa": [
+  {
+   "prompt": {
+    "en": "What is the daily quiet time, and why does the lesson say it matters?",
+    "es": "¿Qué es el tiempo diario a solas con Dios, y por qué dice la lección que importa?"
+   },
+   "keywords": {
+    "en": [
+     "devotion",
+     "daily",
+     "time",
+     "word",
+     "prayer",
+     "god",
+     "meet",
+     "walk"
+    ],
+    "es": [
+     "devoción",
+     "diario",
+     "tiempo",
+     "palabra",
+     "oración",
+     "dios",
+     "encontr",
+     "camin"
+    ]
+   },
+   "model": {
+    "en": "The daily quiet time is a set time each day to meet with God in His Word and prayer. It matters because no one walks with a friend he never meets — it is the daily appointment out of which the whole walk with God grows.",
+    "es": "El tiempo diario a solas con Dios es un tiempo apartado cada día para encontrarse con Dios en su Palabra y en oración. Importa porque nadie anda con un amigo a quien nunca se encuentra — es la cita diaria de la cual crece todo el caminar con Dios."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What do Mark 1:35, Psalm 5:3, and Daniel 6:10 show about a regular time with God?",
+    "es": "¿Qué muestran Marcos 1:35, Salmos 5:3 y Daniel 6:10 sobre un tiempo regular con Dios?"
+   },
+   "keywords": {
+    "en": [
+     "morning",
+     "jesus",
+     "david",
+     "daniel",
+     "regular",
+     "pray",
+     "time",
+     "daily"
+    ],
+    "es": [
+     "mañana",
+     "jesús",
+     "david",
+     "daniel",
+     "regular",
+     "orar",
+     "tiempo",
+     "diario"
+    ]
+   },
+   "model": {
+    "en": "Jesus rose a long while before daylight to pray in a solitary place (Mark 1:35); David directed his voice to the Lord in the morning (Psalm 5:3); and Daniel knelt three times a day to pray and give thanks (Daniel 6:10). Together they show that those who walked closely with God gave Him a regular, unhurried time — not a rule about the exact hour, but the pattern of a consistent daily meeting with Him.",
+    "es": "Jesús se levantó mucho antes del amanecer para orar en un lugar desierto (Marcos 1:35); David dirigió su voz al Señor en la mañana (Salmos 5:3); y Daniel se arrodillaba tres veces al día para orar y dar gracias (Daniel 6:10). Juntos muestran que quienes anduvieron cerca de Dios le dieron un tiempo regular y sin prisa — no una regla sobre la hora exacta, sino el patrón de un encuentro diario constante con Él."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why does the lesson say to choose a place without distraction?",
+    "es": "¿Por qué dice la lección que escojamos un lugar sin distracción?"
+   },
+   "keywords": {
+    "en": [
+     "place",
+     "quiet",
+     "distraction",
+     "focus",
+     "alone",
+     "meet",
+     "time",
+     "solitary"
+    ],
+    "es": [
+     "lugar",
+     "quiet",
+     "distracc",
+     "enfoc",
+     "solo",
+     "encontr",
+     "tiempo",
+     "desierto"
+    ]
+   },
+   "model": {
+    "en": "The lesson says to find a quiet place where we can meet God without distraction, because devotion requires our attention and focus. Just as Jesus withdrew to a solitary place to pray, we need a place set apart from the noise of the world so our time with God is not crowded out.",
+    "es": "La lección dice que hallemos un lugar tranquilo donde podamos encontrarnos con Dios sin distracción, porque la devoción requiere nuestra atención y enfoque. Tal como Jesús se retiró a un lugar desierto para orar, necesitamos un lugar apartado del ruido del mundo para que nuestro tiempo con Dios no sea desplazado."
+   }
+  },
+  {
+   "prompt": {
+    "en": "How should we read the Bible in our devotion (1 Peter 2:2 and the lesson's point)?",
+    "es": "¿Cómo debemos leer la Biblia en nuestra devoción (1 Pedro 2:2 y el punto de la lección)?"
+   },
+   "keywords": {
+    "en": [
+     "read",
+     "word",
+     "grow",
+     "change",
+     "milk",
+     "meditate",
+     "obey",
+     "do"
+    ],
+    "es": [
+     "leer",
+     "palabra",
+     "crece",
+     "cambi",
+     "leche",
+     "medit",
+     "obedec",
+     "hacer"
+    ]
+   },
+   "model": {
+    "en": "1 Peter 2:2 says we should desire the pure milk of the word as newborn babes, that we may grow by it. The lesson's point is that we read Scripture not merely to know it, but to be changed by it — reading slowly, meditating, and asking what it shows us about God and what we must do in response.",
+    "es": "1 Pedro 2:2 dice que debemos desear la leche no adulterada de la palabra, como niños recién nacidos, para que por ella crezcamos. El punto de la lección es que leemos la Escritura no meramente para conocerla, sino para ser cambiados por ella — leyendo despacio, meditando, y preguntando qué nos muestra acerca de Dios y qué debemos hacer en respuesta."
+   }
+  },
+  {
+   "prompt": {
+    "en": "What is a prayer journal, and why does Dr. Ted Rogers have his students keep one?",
+    "es": "¿Qué es un diario de oración, y por qué el Dr. Ted Rogers pide a sus alumnos que lleven uno?"
+   },
+   "keywords": {
+    "en": [
+     "journal",
+     "write",
+     "ted",
+     "record",
+     "faithful",
+     "purposeful",
+     "pray",
+     "answer"
+    ],
+    "es": [
+     "diario",
+     "escrib",
+     "ted",
+     "registr",
+     "fiel",
+     "propósito",
+     "orar",
+     "respond"
+    ]
+   },
+   "model": {
+    "en": "A prayer journal is a notebook where a believer writes daily notations about how their time with God is changing them, what they are asking of Him, and how He answers. Dr. Ted Rogers has his students keep one because it lets them look back and see God's faithfulness over time, keeps them honest, and turns vague, drifting prayer into purposeful prayer.",
+    "es": "Un diario de oración es un cuaderno donde un creyente escribe anotaciones diarias sobre cómo su tiempo con Dios lo está cambiando, qué le está pidiendo, y cómo Él responde. El Dr. Ted Rogers pide a sus alumnos que lleven uno porque les permite mirar atrás y ver la fidelidad de Dios a través del tiempo, los mantiene honestos, y convierte la oración vaga y errante en oración con propósito."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Explain Psalm 46:10 and what it teaches about listening in prayer.",
+    "es": "Explique Salmos 46:10 y lo que enseña sobre escuchar en la oración."
+   },
+   "keywords": {
+    "en": [
+     "still",
+     "know",
+     "god",
+     "listen",
+     "silence",
+     "quiet",
+     "speak",
+     "wait"
+    ],
+    "es": [
+     "quiet",
+     "conoc",
+     "dios",
+     "escuch",
+     "silencio",
+     "callar",
+     "habla",
+     "esperar"
+    ]
+   },
+   "model": {
+    "en": "Psalm 46:10 says, “Be still, and know that I am God.” It teaches that devotion is not only talking to God but also listening — laying down our busyness, being still before Him, and trusting that in the quiet He may be speaking to our hearts even when we hear no audible words.",
+    "es": "Salmos 46:10 dice: “Estad quietos, y conoced que yo soy Dios.” Enseña que la devoción no es solo hablar a Dios sino también escuchar — dejando a un lado nuestro ajetreo, estando quietos delante de Él, y confiando en que en la quietud Él podría estar hablándole a nuestro corazón aunque no oigamos palabras audibles."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why does the lesson say we need not be anxious in silence during our time with God?",
+    "es": "¿Por qué dice la lección que no debemos angustiarnos en el silencio durante nuestro tiempo con Dios?"
+   },
+   "keywords": {
+    "en": [
+     "silence",
+     "anxious",
+     "god",
+     "speak",
+     "listen",
+     "still",
+     "wait",
+     "fear"
+    ],
+    "es": [
+     "silencio",
+     "ansios",
+     "dios",
+     "habla",
+     "escuch",
+     "quiet",
+     "esperar",
+     "temor"
+    ]
+   },
+   "model": {
+    "en": "The lesson says we need not be anxious in silence because we often wrongly feel that if no words are being spoken, nothing is happening. But God Himself might, at that very moment, be speaking to us in the quiet — so silence before Him is not empty or wasted time but an opportunity to listen.",
+    "es": "La lección dice que no debemos angustiarnos en el silencio porque a menudo sentimos erróneamente que si no se pronuncian palabras, nada está sucediendo. Pero Dios mismo podría, en ese mismo momento, estar hablándonos en la quietud — así que el silencio delante de Él no es tiempo vacío o perdido sino una oportunidad para escuchar."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why does the lesson compare missing a day of devotion to a missed meal?",
+    "es": "¿Por qué compara la lección perder un día de devoción con una comida perdida?"
+   },
+   "keywords": {
+    "en": [
+     "meal",
+     "miss",
+     "return",
+     "grace",
+     "despair",
+     "table",
+     "daily",
+     "back"
+    ],
+    "es": [
+     "comida",
+     "perder",
+     "volver",
+     "gracia",
+     "mesa",
+     "diario",
+     "desesper",
+     "regres"
+    ]
+   },
+   "model": {
+    "en": "The lesson compares missing a day of devotion to a missed meal because it is not cause for despair as though all were lost — you have only missed one meal, and the table is still open. The point is grace, not guilt: simply return to the table the next day rather than giving up the habit altogether.",
+    "es": "La lección compara perder un día de devoción con una comida perdida porque no es motivo de desesperación como si todo estuviera perdido — solo se ha perdido una comida, y la mesa sigue abierta. El punto es la gracia, no la culpa: sencillamente volver a la mesa al día siguiente en vez de abandonar el hábito por completo."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Why does the lesson urge us to give God the first and best part of our day?",
+    "es": "¿Por qué nos exhorta la lección a darle a Dios la primera y mejor parte de nuestro día?"
+   },
+   "keywords": {
+    "en": [
+     "first",
+     "best",
+     "day",
+     "morning",
+     "priority",
+     "god",
+     "walk",
+     "deepen"
+    ],
+    "es": [
+     "primer",
+     "mejor",
+     "día",
+     "mañana",
+     "priorid",
+     "dios",
+     "camin",
+     "profund"
+    ]
+   },
+   "model": {
+    "en": "The lesson urges us to give God the first and best part of our day because our devotion is a priority, not leftovers — giving Him our freshest attention before the noise and demands of the day crowd Him out. Doing so, the lesson promises, deepens and strengthens our walk with Him week by week.",
+    "es": "La lección nos exhorta a darle a Dios la primera y mejor parte de nuestro día porque nuestra devoción es una prioridad, no sobras — dándole nuestra atención más fresca antes de que el ruido y las demandas del día lo desplacen. Hacerlo, promete la lección, profundiza y afirma nuestro caminar con Él semana tras semana."
+   }
+  },
+  {
+   "prompt": {
+    "en": "Do you have a daily time with God? What is one change you could make to build or strengthen that habit?",
+    "es": "¿Tiene usted un tiempo diario con Dios? ¿Cuál es un cambio que podría hacer para formar o fortalecer ese hábito?"
+   },
+   "keywords": {
+    "en": [
+     "time",
+     "daily",
+     "god",
+     "habit",
+     "quiet",
+     "word",
+     "pray",
+     "change"
+    ],
+    "es": [
+     "tiempo",
+     "diario",
+     "dios",
+     "hábito",
+     "devoción",
+     "palabra",
+     "orar",
+     "cambi"
+    ]
+   },
+   "model": {
+    "en": "This is a personal reflection question inviting honest self-examination about one's own daily habit of meeting with God in Word and prayer. Whether the answer is yes, no, or somewhere in between, the lesson invites a concrete, specific change — a set time, a quiet place, or a journal — to build or strengthen that habit going forward.",
+    "es": "Esta es una pregunta de reflexión personal que invita a un examen honesto sobre el propio hábito diario de encontrarse con Dios en la Palabra y la oración. Sea la respuesta sí, no, o algo intermedio, la lección invita a un cambio concreto y específico — un tiempo apartado, un lugar tranquilo, o un diario — para formar o fortalecer ese hábito de ahora en adelante."
+   }
+  }
+ ]
+};
