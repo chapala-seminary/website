@@ -1,6 +1,6 @@
-/* Shared exam engine for CTS1Peter.
-   Extracted from the inline <script> of the 12 unit pages; per-unit
-   config and question data live in data/1peter/unitN.js. */
+/* Exam engine for CTS1Peter (shared by 11 unit pages).
+   Extracted from those pages' inline <script>; per-unit config and
+   question banks live in data/1peter/unitN.js. */
 // =====================================================================
 // CTS 1 Peter Intensive — Unit 1 (The Exile Salutation, 1 Peter 1:1-2)
 // Built on Cook's validated masters engine (from ST11) with two upgrades:
@@ -14,9 +14,9 @@
 // =====================================================================
 
 
+const COURSE = '1pet';
 
-
-
+const totalUnits = 12;
 let currentUnit = UNIT;
 
 // ---------- Storage hardening (Android content:// fallback) ----------
@@ -131,8 +131,8 @@ function checkLockouts() {
     if (unitPassed) {
         submitBtn.disabled = true;
         result.innerHTML = isEs
-            ? `<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en ${UNIT < totalUnits ? 'Unidad ' + (UNIT + 1) : 'el Certificado'} arriba.</span>`
-            : `<span style='color:green'>✓ Unit already passed! Click ${UNIT < totalUnits ? 'Unit ' + (UNIT + 1) : 'the Certificate'} above.</span>`;
+            ? `<span style='color:#1f6b3b'>✓ Unidad ya aprobada. Haga clic en Unidad ${UNIT + 1} arriba.</span>`
+            : `<span style='color:green'>✓ Unit already passed! Click Unit ${UNIT + 1} above.</span>`;
         notice.style.display = 'none';
         return true;
     }

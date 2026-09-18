@@ -159,6 +159,9 @@ def template_unit_numbers(src, unit):
     return src
 
 
+RISKY = False   # set by --risky; see main()
+
+
 def normalise(src, unit):
     synth = []
     hrefs = {}
@@ -180,6 +183,14 @@ def normalise(src, unit):
     src = re.sub(r"(['\"])([A-Za-z0-9_]*_u)%d(_[A-Za-z0-9_]+)\1" % unit,
                  lambda m: "`%s${UNIT}%s`" % (m.group(2), m.group(3)), src)
     src = re.sub(r"progress\.unit%d\b" % unit, "progress[`unit${UNIT}`]", src)
+    if RISKY:
+        # These two rewrite bare occurrences of this page's unit number, which
+        # helps courses that build progress keys by concatenation but can also
+        # fire on an unrelated constant that happens to equal the unit number.
+        # The driver tries with and without and keeps whichever groups better;
+        # verify.mjs is the backstop either way.
+        src = re.sub(r"(['\"]unit['\"]\s*\+\s*)%d\b" % unit, r"\1UNIT", src)
+        src = re.sub(r"\b([niu])(\s*===?\s*)%d\b" % unit, r"\1\2UNIT", src)
     src = template_unit_numbers(src, unit)
 
     src, n_msg = PASSED_MSG.subn(PASSED_REPL, src)
@@ -190,9 +201,47 @@ def normalise(src, unit):
 
 
 def canon(text):
-    t = re.sub(r"/\*.*?\*/", "", text, flags=re.S)
-    t = re.sub(r"^\s*//[^\n]*$", "", t, flags=re.M)
-    return re.sub(r"\s+", " ", t).strip()
+    """Fingerprint for comparing engines.
+
+    Walks the source rather than using regexes: comments are dropped and runs of
+    whitespace collapsed, but STRING AND TEMPLATE LITERALS ARE KEPT BYTE-EXACT.
+    That matters — engines build markup inside template literals, so whitespace
+    there is rendered output, and a naive regex that strips "//" to end of line
+    can delete real code inside a literal and make two different engines look
+    identical. That happened, and verify.mjs caught it on CTSRadical.
+    """
+    out = []
+    i, n = 0, len(text)
+    while i < n:
+        two = text[i:i + 2]
+        if two == "//":
+            j = text.find("\n", i)
+            i = n if j < 0 else j
+            continue
+        if two == "/*":
+            j = text.find("*/", i)
+            i = n if j < 0 else j + 2
+            continue
+        ch = text[i]
+        if ch in "\"'`":
+            q = ch; j = i + 1; esc = False
+            while j < n:
+                c = text[j]
+                if esc: esc = False
+                elif c == "\\": esc = True
+                elif c == q: break
+                j += 1
+            out.append(text[i:j + 1])
+            i = j + 1
+            continue
+        if ch.isspace():
+            out.append(" ")
+            while i < n and text[i].isspace():
+                i += 1
+            continue
+        out.append(ch)
+        i += 1
+    return "".join(out).strip()
 
 
 def unit_files(course):
@@ -214,8 +263,12 @@ def main():
     ap.add_argument("--slug", required=True)
     ap.add_argument("--apply", action="store_true")
     ap.add_argument("--diff", action="store_true")
+    ap.add_argument("--risky", action="store_true",
+                    help="also rewrite bare unit numbers (n===N, 'unit'+N)")
     ap.add_argument("--quiet", action="store_true")
     args = ap.parse_args()
+    global RISKY
+    RISKY = args.risky
 
     units = unit_files(args.course)
     if not units: sys.exit("no unit files for %s" % args.course)
@@ -262,22 +315,73 @@ def main():
     # so a lifted declaration must not reference something left behind)
     for f, p in stage.items():
         pos = {name: (s, e) for name, s, e in p["spans"]}
-        funcs = set(re.findall(r"^\s*function\s+([A-Za-z_$][\w$]*)", p["norm"], re.M))
+        # every function the engine defines, however it is written -- a
+        # declaration anywhere on a line, or assigned to a name. Missing one
+        # means a load-time call slips into the data file, where the engine
+        # has not run yet.
+        funcs = set(re.findall(r"\bfunction\s+([A-Za-z_$][\w$]*)\s*\(", p["norm"]))
+        funcs |= set(re.findall(r"(?:const|let|var)\s+([A-Za-z_$][\w$]*)\s*=\s*"
+                                r"(?:async\s+)?(?:function\b|\([^)]*\)\s*=>|[A-Za-z_$][\w$]*\s*=>)",
+                                p["norm"]))
         want = {nm for nm in varying if nm in pos}
-        changed = True
-        while changed:
-            changed = False
-            for nm in list(want):
+        IDENT = r"[A-Za-z_$][\w$]*"
+
+        def deps_closure():
+            """Add any earlier declaration a lifted one references: the data
+            file loads first, so its dependencies must travel with it."""
+            moved = True
+            while moved:
+                moved = False
+                for nm in list(want):
+                    s0, e0 = pos[nm]
+                    text = p["norm"][s0:e0]
+                    for ident in set(re.findall(IDENT, text)):
+                        if ident != nm and ident in pos and ident not in want and pos[ident][0] < s0:
+                            want.add(ident); moved = True
+
+        # Fixpoint. A declaration that CALLS an engine function at load time
+        # cannot move to the data file (the engine has not run yet), and neither
+        # can anything that depends on it. Dropping one can pull another in via
+        # the closure, so alternate until stable. Whatever stays behind simply
+        # makes those units a separate engine variant, which is still correct.
+        # Names reassigned at top level (not re-declared) somewhere in the
+        # script. A declaration that READS such a name must not be lifted: the
+        # data file runs first, so it would see the value before the engine's
+        # assignment instead of after, silently changing behaviour. That is
+        # exactly how CTSRadical unit 3 lost its "already passed" state.
+        # Names assigned at top level WITHOUT a declaration keyword, i.e. the
+        # engine mutates them after their declaration. A declaration that reads
+        # such a name must not be lifted: the data file runs first, so it would
+        # see the value before the engine's assignment instead of after. That is
+        # exactly how CTSRadical unit 3 lost its "already passed" state.
+        reassigned = set(re.findall(
+            r"(?:^|[;{}\n])\s*(?!(?:const|let|var|return|case)\b)([A-Za-z_$][\w$]*)\s*=(?!=)",
+            p["norm"], re.M))
+
+        while True:
+            deps_closure()
+            bad = set()
+            for nm in want:
                 s0, e0 = pos[nm]
                 text = p["norm"][s0:e0]
-                for ident in set(re.findall(r"[A-Za-z_$][\w$]*", text)):
-                    if ident == nm:
-                        continue
-                    if ident in funcs and re.search(r"\b%s\s*\(" % re.escape(ident), text):
-                        sys.exit("%s: per-unit declaration %s calls function %s() at load "
-                                 "time; this course needs manual handling" % (f, nm, ident))
-                    if ident in pos and ident not in want and pos[ident][0] < s0:
-                        want.add(ident); changed = True
+                init = text[text.find("=") + 1:]
+                for ident in set(re.findall(IDENT, init)):
+                    if ident != nm and ident in funcs and re.search(r"\b%s\s*\(" % re.escape(ident), init):
+                        bad.add(nm); break
+                    if ident != nm and ident in reassigned and ident in pos:
+                        bad.add(nm); break
+            if not bad:
+                break
+            want -= bad
+            moved = True
+            while moved:
+                moved = False
+                for nm in list(want):
+                    s0, e0 = pos[nm]
+                    text = p["norm"][s0:e0]
+                    if any(re.search(r"\b%s\b" % re.escape(x), text) for x in bad):
+                        want.discard(nm); bad.add(nm); moved = True
+
         lifted, keep = [], []
         for name, s, e in sorted(p["spans"], key=lambda x: x[1]):
             (lifted if name in want else keep).append((name, s, e))

@@ -1,8 +1,8 @@
-/* Exam engine for CTSPent (shared by 1 unit page).
+/* Exam engine for CTSPent (shared by 2 unit pages).
    Extracted from those pages' inline <script>; per-unit config and
    question banks live in data/pent/unitN.js. */
 // ============================================================
-// PER-UNIT CONSTANTS (change per unit)
+// PER-UNIT CONSTANTS
 // ============================================================
 
 const COURSE_PREFIX = "pent";
@@ -167,6 +167,9 @@ function restoreAnswers() {
 }
 
 // ============================================================
+// GRADE EXAM
+// ============================================================
+// ============================================================
 // SMART KEYWORD MATCHER (word-boundary; Q24 fairness standard)
 //   keywords <=4 chars  -> whole-word match
 //   keywords  >4 chars  -> left-anchored prefix (catches inflections)
@@ -176,7 +179,7 @@ function kwHit(answer, kw) {
     const a = (answer || "").toLowerCase();
     const k = (kw || "").toLowerCase().trim();
     if (!k) return false;
-    const L = "a-záéíóúüñ";
+    const L = "a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00fc\u00f1";
     const esc = k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const pat = k.length <= 4
         ? new RegExp(`(^|[^${L}])${esc}([^${L}]|$)`, "i")
@@ -184,9 +187,6 @@ function kwHit(answer, kw) {
     return pat.test(a);
 }
 
-// ============================================================
-// GRADE EXAM
-// ============================================================
 function gradeExam() {
     if (lockoutEnd && lockoutEnd > Date.now()) {
         const min = Math.ceil((lockoutEnd - Date.now()) / 60000);
@@ -286,22 +286,6 @@ function resetExam() {
 }
 
 // ============================================================
-// REGISTER STUDENT
-// ============================================================
-function registerStudent() {
-    const name = document.getElementById("studentName").value.trim();
-    const track = document.getElementById("trackSelect").value;
-    if (!name) { alert("Please enter your name. / Por favor ingrese su nombre."); return; }
-    studentName = name;
-    studentTrack = track;
-    localStorage.setItem("cts_student", JSON.stringify({ name, track }));
-    localStorage.setItem("cts_track", track);
-    document.getElementById("registrationCard").style.display = "none";
-    updateTrackDisplay();
-    renderQuestions();
-}
-
-// ============================================================
 // INIT
 // ============================================================
 document.querySelectorAll(".lang-btn").forEach(btn => {
@@ -309,18 +293,7 @@ document.querySelectorAll(".lang-btn").forEach(btn => {
 });
 document.getElementById("submitBtn").addEventListener("click", gradeExam);
 document.getElementById("resetBtn").addEventListener("click", resetExam);
-if (SHOW_REGISTRATION_CARD) {
-    document.getElementById("registerBtn").addEventListener("click", registerStudent);
-} else {
-    document.getElementById("registrationCard").style.display = "none";
-}
 
 loadState();
-      renderQuestions();
-if (!localStorage.getItem("cts_student") && SHOW_REGISTRATION_CARD) {
-    // wait for register
-} else {
-    document.getElementById("registrationCard").style.display = "none";
-    renderQuestions();
-}
+renderQuestions();
 if (lockoutEnd) showLockoutTimer();

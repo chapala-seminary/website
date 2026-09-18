@@ -1,4 +1,4 @@
-/* Exam engine for CTSPent (shared by 10 unit pages).
+/* Exam engine for CTSPent (shared by 7 unit pages).
    Extracted from those pages' inline <script>; per-unit config and
    question banks live in data/pent/unitN.js. */
 // ============================================================
@@ -34,9 +34,6 @@ const PASS_SA = 9;
 
 function getStorageKey(key) { return `cts_${COURSE_PREFIX}_${key}`; }
 
-// ============================================================
-// STATE LOAD/SAVE
-// ============================================================
 function loadState() {
     const student = localStorage.getItem("cts_student");
     if (student) {
@@ -73,9 +70,6 @@ function saveLanguage(lang) {
     document.body.className = `lang-${lang}`;
 }
 
-// ============================================================
-// RENDER QUESTIONS
-// ============================================================
 function renderQuestions() {
     const mcContainer = document.getElementById("mcQuestions");
     mcContainer.innerHTML = "";
@@ -111,9 +105,6 @@ function renderQuestions() {
     restoreAnswers();
 }
 
-// ============================================================
-// AUTO-SCORE ON MC CHANGE + SA AUTO-SAVE
-// ============================================================
 function attachAutoScore() {
     mcQuestions.forEach((q, idx) => {
         const radios = document.querySelectorAll(`input[name="mc${idx}"]`);
@@ -184,9 +175,6 @@ function kwHit(answer, kw) {
     return pat.test(a);
 }
 
-// ============================================================
-// GRADE EXAM
-// ============================================================
 function gradeExam() {
     if (lockoutEnd && lockoutEnd > Date.now()) {
         const min = Math.ceil((lockoutEnd - Date.now()) / 60000);
@@ -270,9 +258,6 @@ function showLockoutTimer() {
     update();
 }
 
-// ============================================================
-// RESET (bilingual confirm + clear saved answers)
-// ============================================================
 function resetExam() {
     const isEs = document.body.className.includes("lang-es");
     const msg = isEs ? "¿Reiniciar todas las respuestas? Esto no se puede deshacer." : "Reset all answers? This cannot be undone.";
@@ -285,9 +270,6 @@ function resetExam() {
     }
 }
 
-// ============================================================
-// INIT
-// ============================================================
 document.querySelectorAll(".lang-btn").forEach(btn => {
     btn.addEventListener("click", () => saveLanguage(btn.dataset.lang));
 });

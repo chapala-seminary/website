@@ -1,4 +1,4 @@
-/* Exam engine for CTSHermeneutics (shared by 11 unit pages).
+/* Exam engine for CTSHermeneutics (shared by 10 unit pages).
    Extracted from those pages' inline <script>; per-unit config and
    question banks live in data/hermeneutics/unitN.js. */
 // ============================================================
@@ -10,7 +10,7 @@
   const TOTAL_UNITS = 11;
   
   const FINAL_REDIRECT_URL = "CTSHermeneuticsCertificate.html";
-  // U1 only
+  
 
   // ============================================================
   // ENGINE CONSTANTS (carried unchanged across units)
@@ -109,9 +109,7 @@
     document.getElementById("track-cert-btn").classList.toggle("selected", t==="cert");
     document.getElementById("track-mdiv-btn").classList.toggle("selected", t==="mdiv");
     document.getElementById("track-thm-btn").classList.toggle("selected", t==="thm");
-    // Short answer is available to ALL students. It is only scored for
-    // masters tracks (see isMastersLevel/submitExam); Certificate students
-    // may take it for practice with no effect on their result.
+    // Short answer is available to ALL students; only scored for masters (see submitExam).
     document.getElementById("sa-container").classList.remove("hidden");
     updateSANote();
     updateTrackNote();
@@ -318,8 +316,6 @@
   }
 
   function checkSA(i){
-    // Available to every track: show keyword/length feedback and reveal the
-    // model answer for this one question. Does not submit or score the exam.
     renderSAFeedback(i);
     const el = document.getElementById("sa-"+i);
     const text = (el ? el.value : "").toLowerCase();
@@ -329,6 +325,7 @@
   function revealModels(){
     kwQuestions.forEach((q,i)=>{ revealModel(i); });
   }
+
   function renderSAFeedback(i){
     const fb = document.getElementById("sa-fb-"+i);
     if (!fb) return;

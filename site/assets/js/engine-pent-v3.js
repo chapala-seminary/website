@@ -2,7 +2,7 @@
    Extracted from those pages' inline <script>; per-unit config and
    question banks live in data/pent/unitN.js. */
 // ============================================================
-// PER-UNIT CONSTANTS — THIS IS THE LAST UNIT
+// PER-UNIT CONSTANTS (change per unit)
 // ============================================================
 
 const COURSE_PREFIX = "pent";
@@ -34,6 +34,9 @@ const PASS_SA = 9;
 
 function getStorageKey(key) { return `cts_${COURSE_PREFIX}_${key}`; }
 
+// ============================================================
+// STATE LOAD/SAVE
+// ============================================================
 function loadState() {
     const student = localStorage.getItem("cts_student");
     if (student) {
@@ -56,7 +59,8 @@ function loadState() {
     document.body.className = `lang-${lang}`;
 
     updateTrackDisplay();
-    if (examPassed && IS_LAST_UNIT) window.location.href = CERT_URL;
+    if (examPassed && !IS_LAST_UNIT) { var nl = document.getElementById("nextLink"); nl.href = NEXT_URL; nl.style.display = "block"; }
+    else if (examPassed && IS_LAST_UNIT) window.location.href = CERT_URL;
 }
 
 function updateTrackDisplay() {
@@ -69,6 +73,9 @@ function saveLanguage(lang) {
     document.body.className = `lang-${lang}`;
 }
 
+// ============================================================
+// RENDER QUESTIONS
+// ============================================================
 function renderQuestions() {
     const mcContainer = document.getElementById("mcQuestions");
     mcContainer.innerHTML = "";
@@ -104,6 +111,9 @@ function renderQuestions() {
     restoreAnswers();
 }
 
+// ============================================================
+// AUTO-SCORE ON MC CHANGE + SA AUTO-SAVE
+// ============================================================
 function attachAutoScore() {
     mcQuestions.forEach((q, idx) => {
         const radios = document.querySelectorAll(`input[name="mc${idx}"]`);
@@ -166,7 +176,7 @@ function kwHit(answer, kw) {
     const a = (answer || "").toLowerCase();
     const k = (kw || "").toLowerCase().trim();
     if (!k) return false;
-    const L = "a-z\u00e1\u00e9\u00ed\u00f3\u00fa\u00fc\u00f1";
+    const L = "a-záéíóúüñ";
     const esc = k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const pat = k.length <= 4
         ? new RegExp(`(^|[^${L}])${esc}([^${L}]|$)`, "i")
@@ -174,6 +184,9 @@ function kwHit(answer, kw) {
     return pat.test(a);
 }
 
+// ============================================================
+// GRADE EXAM
+// ============================================================
 function gradeExam() {
     if (lockoutEnd && lockoutEnd > Date.now()) {
         const min = Math.ceil((lockoutEnd - Date.now()) / 60000);
@@ -226,9 +239,10 @@ function gradeExam() {
     if (overallPass) {
         localStorage.setItem(getStorageKey(`unit${UNIT}_passed`), "true");
         examPassed = true;
-        const msg = document.body.className.includes("lang-es") ? `¡Aprobado! Sus respuestas están marcadas abajo. Repáselas, luego haga clic en el enlace del certificado.` : `Passed! Your answers are marked below. Review them, then click the certificate link.`;
+        const msg = document.body.className.includes("lang-es") ? `¡Aprobado! Sus respuestas están marcadas abajo. Repáselas, luego use el enlace para continuar.` : `Passed! Your answers are marked below. Review them, then use the link to continue.`;
         alert(msg);
-        var cl = document.getElementById("certLink"); if (cl) { cl.style.display = "inline"; }
+        if (IS_LAST_UNIT) window.location.href = CERT_URL;
+        else { var nl = document.getElementById("nextLink"); nl.href = NEXT_URL; nl.style.display = "block"; }
     } else {
         const lockMinutes = (studentTrack === "cert") ? 2 : 15;
         const lockoutTime = Date.now() + lockMinutes * 60 * 1000;
@@ -256,6 +270,9 @@ function showLockoutTimer() {
     update();
 }
 
+// ============================================================
+// RESET (bilingual confirm + clear saved answers)
+// ============================================================
 function resetExam() {
     const isEs = document.body.className.includes("lang-es");
     const msg = isEs ? "¿Reiniciar todas las respuestas? Esto no se puede deshacer." : "Reset all answers? This cannot be undone.";
@@ -268,12 +285,42 @@ function resetExam() {
     }
 }
 
+// ============================================================
+// REGISTER STUDENT
+// ============================================================
+function registerStudent() {
+    const name = document.getElementById("studentName").value.trim();
+    const track = document.getElementById("trackSelect").value;
+    if (!name) { alert("Please enter your name. / Por favor ingrese su nombre."); return; }
+    studentName = name;
+    studentTrack = track;
+    localStorage.setItem("cts_student", JSON.stringify({ name, track }));
+    localStorage.setItem("cts_track", track);
+    document.getElementById("registrationCard").style.display = "none";
+    updateTrackDisplay();
+    renderQuestions();
+}
+
+// ============================================================
+// INIT
+// ============================================================
 document.querySelectorAll(".lang-btn").forEach(btn => {
     btn.addEventListener("click", () => saveLanguage(btn.dataset.lang));
 });
 document.getElementById("submitBtn").addEventListener("click", gradeExam);
 document.getElementById("resetBtn").addEventListener("click", resetExam);
+if (SHOW_REGISTRATION_CARD) {
+    document.getElementById("registerBtn").addEventListener("click", registerStudent);
+} else {
+    document.getElementById("registrationCard").style.display = "none";
+}
 
 loadState();
-renderQuestions();
+      renderQuestions();
+if (!localStorage.getItem("cts_student") && SHOW_REGISTRATION_CARD) {
+    // wait for register
+} else {
+    document.getElementById("registrationCard").style.display = "none";
+    renderQuestions();
+}
 if (lockoutEnd) showLockoutTimer();

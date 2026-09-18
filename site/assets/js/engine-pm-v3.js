@@ -15,22 +15,58 @@ function updateProgressGrid() {
         if (i === currentUnit) cls += ' active';
         grid.innerHTML += `<a href="CTSPMUnit${i}.html" class="${cls}">${i}</a>`;
     }
+    if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
 }
-if (PREV_HREF) document.getElementById('prevUnitBtn').onclick = () => { location.href = PREV_HREF; }; else document.getElementById('prevUnitBtn').disabled = true;
-if (NEXT_HREF) document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_HREF; };
+if (PREV_HREF) document.getElementById('prevUnitBtn').onclick = () => { location.href = PREV_HREF; }; else document.getElementById('prevUnitBtn').disabled = true; if (NEXT_HREF) document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_HREF; };
 updateProgressGrid();
 
 function displayStudentGreeting() {
     const student = JSON.parse(localStorage.getItem('cts_student'));
     if (student && student.name) {
-        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
+        const trackLabel = student.track === 'mdiv' ? 'M.Div.' : (student.track === 'thm' ? 'Th.M.' : 'Certificate');
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name} <span style="font-weight:normal;font-size:0.85rem;">(${trackLabel})</span> &nbsp;<a href="#" id="changeTrackLink" style="font-size:0.8rem;color:#5b3a1f;">Change track</a>`;
+        document.getElementById('registrationCard').style.display = 'none';
+        const link = document.getElementById('changeTrackLink');
+        if (link) link.onclick = function(e) {
+            e.preventDefault();
+            const card = document.getElementById('registrationCard');
+            card.style.display = 'block';
+            if (student.name) document.getElementById('regName').value = student.name;
+            if (student.email) document.getElementById('regEmail').value = student.email;
+            if (student.country) document.getElementById('regCountry').value = student.country;
+            if (student.track && typeof setTrack === 'function') setTrack(student.track);
+            card.scrollIntoView({ behavior: 'smooth' });
+        };
     } else {
-        document.getElementById('studentGreeting').innerHTML = `<a href="CTSPMUnit1.html" style="color:#5b3a1f;">⚠️ Please register first</a>`;
-        document.getElementById('regWarning').style.display = 'block';
+        document.getElementById('studentGreeting').innerHTML = `<span style="color:#5b3a1f;">⚠️ Please register</span>`;
     }
 }
 displayStudentGreeting();
 
+
+function setTrack(t) {
+    document.getElementById('regTrack').value = t;
+    document.querySelectorAll('.track-opt').forEach(b => { b.classList.toggle('selected', b.getAttribute('data-track') === t); });
+}
+document.querySelectorAll('.track-opt').forEach(b => { b.onclick = function() { setTrack(this.getAttribute('data-track')); }; });
+setTrack('certificate');
+document.getElementById('saveRegBtn').onclick = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const country = document.getElementById('regCountry').value.trim();
+    const track = document.getElementById('regTrack').value;
+    if (!name || !email) {
+        document.getElementById('regStatus').innerHTML = `<span style="color:red;">⚠️ Name and email are required.</span>`;
+        return;
+    }
+    localStorage.setItem('cts_student', JSON.stringify({ name, email, country, track }));
+    localStorage.setItem('cts_track', track);
+    document.getElementById('regStatus').innerHTML = `<span style="color:green;">✓ Saved! Welcome, ${name}.</span>`;
+    setTimeout(() => { displayStudentGreeting(); }, 1000);
+    renderQuestions();
+};
+
+// Q3 reshuffled (Psalm 23 author) to move David from C to B for 5/5/5/5 balance.
 
 
 
@@ -76,6 +112,7 @@ function renderQuestions() {
     const container = document.getElementById('questionsContainer');
     if (!container) return;
     container.innerHTML = '';
+    currentLang = document.body.classList.contains('lang-es') ? 'es' : 'en';
     const mcTitle = document.createElement('h3');
     mcTitle.innerHTML = currentLang === 'en' ? 'Multiple Choice (Questions 1–20)' : 'Opción Múltiple (Preguntas 1–20)';
     container.appendChild(mcTitle);
@@ -157,149 +194,195 @@ function renderQuestions() {
         qText.style.fontWeight = 'bold';
         qText.innerHTML = currentLang === 'en' ? q.textEn : q.textEs;
         div.appendChild(qText);
-        const textarea = document.createElement('textarea');
-        textarea.className = 'kw-answer';
-        textarea.rows = 3;
-        textarea.placeholder = currentLang === 'en' ? 'Type your answer here...' : 'Escriba su respuesta aquí...';
-        textarea.value = kwAnswers[idx];
-        div.appendChild(textarea);
+        const ta = document.createElement('textarea');
+        ta.className = 'kw-answer';
+        ta.rows = 3;
+        ta.placeholder = currentLang === 'en' ? 'Type your answer...' : 'Escriba su respuesta...';
+        ta.value = kwAnswers[idx];
+        div.appendChild(ta);
         const checkBtn = document.createElement('button');
         checkBtn.className = 'small';
-        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar Respuesta';
-        const feedbackDiv = document.createElement('div');
-        feedbackDiv.className = 'feedback-text';
-        feedbackDiv.style.marginTop = '8px';
+        checkBtn.textContent = currentLang === 'en' ? 'Check Answer' : 'Verificar';
+        const fb = document.createElement('div');
+        fb.style.marginTop = '8px';
         checkBtn.onclick = function() {
-            const answer = textarea.value.trim().toLowerCase();
+            const ans = ta.value.trim().toLowerCase();
+            // Read the student's active language for SA grading; in 'both' mode, accept whichever language scores higher
             const bodyCls = document.body.classList;
             const isEs = bodyCls.contains('lang-es');
             const isBoth = bodyCls.contains('lang-both');
-            const enHits = q.kw_en.filter(kw => kwHit(normalize(answer), kw)).length;
-            const esHits = q.kw_es.filter(kw => kwHit(normalize(answer), kw)).length;
+            const enHits = q.kw_en.filter(kw => kwHit(normalize(ans), kw)).length;
+            const esHits = q.kw_es.filter(kw => kwHit(normalize(ans), kw)).length;
             const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
             const activeKws = isBoth ? (esHits > enHits ? q.kw_es : q.kw_en) : (isEs ? q.kw_es : q.kw_en);
-            const missing = activeKws.filter(kw => !kwHit(normalize(answer), kw));
-            if (answer.length < 100) {
-                feedbackDiv.innerHTML = currentLang === 'en' ? 'Please write a more complete answer (at least a sentence).' : 'Escriba una respuesta más completa (al menos una oración).';
-                feedbackDiv.className = 'feedback-text incorrect';
+            const missing = activeKws.filter(kw => !kwHit(normalize(ans), kw));
+            if (ans.length < 100) {
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? 'Please write a more complete answer.' : 'Escriba una respuesta más completa.';
             } else if (hits >= 3) {
-                feedbackDiv.innerHTML = currentLang === 'en' ? '✓ Correct! Your answer includes the key concepts.' : '✓ ¡Correcto! Su respuesta incluye los conceptos clave.';
-                feedbackDiv.className = 'feedback-text correct';
-                kwAnswers[idx] = answer;
+                fb.className = 'feedback-text correct';
+                fb.innerHTML = currentLang === 'en' ? '✓ Correct! Your answer includes the key concepts.' : '✓ ¡Correcto!';
+                kwAnswers[idx] = ans;
             } else {
-                feedbackDiv.innerHTML = currentLang === 'en' ? `✗ Needs at least 3 key concepts. Try including: ${missing.slice(0,3).join(', ')}.` : `✗ Necesita al menos 3 conceptos clave. Intente incluir: ${missing.slice(0,3).join(', ')}.`;
-                feedbackDiv.className = 'feedback-text incorrect';
+                fb.className = 'feedback-text incorrect';
+                fb.innerHTML = currentLang === 'en' ? `✗ Needs at least 3 key concepts. Try including: ${missing.slice(0,3).join(', ')}.` : `✗ Necesita al menos 3 conceptos clave. Intente incluir: ${missing.slice(0,3).join(', ')}.`;
             }
         };
+        const modelBox = document.createElement('div');
+
+        modelBox.className = 'model-answer';
+
+        modelBox.style.display = 'none';
+
+        modelBox.innerHTML = '<strong>' + (currentLang === 'en' ? 'Model answer — study this:' : 'Respuesta modelo — estudie esto:') + '</strong><br>' + (currentLang === 'en' ? q.modelEn : q.modelEs);
+
+        const origOnclick = checkBtn.onclick;
+
+        checkBtn.onclick = function() { origOnclick.call(this); modelBox.style.display = 'block'; };
+
         div.appendChild(checkBtn);
-        div.appendChild(feedbackDiv);
+
+        div.appendChild(fb);
+
+        div.appendChild(modelBox);
         container.appendChild(div);
-        textarea.addEventListener('input', (e) => { kwAnswers[idx] = e.target.value; });
+        ta.addEventListener('input', e => kwAnswers[idx] = e.target.value);
     });
     }
 }
 
 function submitExam() {
-    if (unitPassed) { document.getElementById('examResult').innerHTML = "<span style='color:green'>Unit already passed!</span>"; document.getElementById('nextUnitBtn').disabled = false; return; }
-    lockUntil = activeLockUntil();
-    if (Date.now() < lockUntil) { let wait = Math.ceil((lockUntil - Date.now()) / 60000); document.getElementById('examResult').innerHTML = `<span style='color:red'>⏰ Locked for ${wait} more minutes.</span>`; return; }
-    const student = JSON.parse(localStorage.getItem('cts_student'));
-    if (!student || !student.name) { alert(currentLang === 'en' ? "Please register first on Unit 1." : "Por favor regístrese primero en la Unidad 1."); return; }
-    let correctMC = 0;
-    mcRevealed = true; renderQuestions();
-    for (let i = 0; i < 20; i++) if (mcAnswers[i] === String.fromCharCode(65 + answerIndex(i))) correctMC++;
-    const bodyClsSA = document.body.classList;
-    const isEsSA = bodyClsSA.contains('lang-es');
-    const isBothSA = bodyClsSA.contains('lang-both');
-    let advCorrect = 0;
-    for (let i = 0; i < 10; i++) {
-        let ans = kwAnswers[i].toLowerCase();
-        if (ans.length < 100) continue;
-        const enHits = kwQuestions[i].kw_en.filter(kw => kwHit(normalize(ans), kw)).length;
-        const esHits = kwQuestions[i].kw_es.filter(kw => kwHit(normalize(ans), kw)).length;
-        const hits = isBothSA ? Math.max(enHits, esHits) : (isEsSA ? esHits : enHits);
-        if (hits >= 3) advCorrect++;
-    }
-    let mcPercent = correctMC / 20;
-    let advPercent = advCorrect / 10;
-    const studentTrack = student.track || 'cert';
-    const isGrad = isMastersLevel(studentTrack);
-    const mcGatePass = correctMC >= 18;
-    const saGatePass = isGrad ? (advCorrect >= 9) : true;
-    let total = isGrad ? (mcPercent * 0.5 + advPercent * 0.5) : mcPercent;
-
-    if (isGrad && mcPreviouslyPassed) {
-        if (saGatePass) {
-            unitPassed = true;
-            progress[`unit${UNIT}`] = true;
-            localStorage.setItem('cts_pm_progress', JSON.stringify(progress));
-            localStorage.removeItem(`cts_pm_u${UNIT}_lockout`);
-            localStorage.removeItem(SA_LOCK_KEY);
-            document.getElementById('examResult').innerHTML = `<span style='color:green'>✅ PASSED. MC: ✓ already banked · SA: ${advCorrect}/10. Unit 10 completed! Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
-            document.getElementById('nextUnitBtn').disabled = false;
-            updateProgressGrid();
-        } else {
-            lockUntil = Date.now() + 15 * 60 * 1000;
-            localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
-            document.getElementById('examResult').innerHTML = `<span style='color:red'>❌ MC: ✓ already banked · SA: ${advCorrect}/10 (need 9). Your multiple-choice pass is safe. Short-answer section locked for 15 minutes.</span>`;
-            startTimer();
-        }
+    if (unitPassed) {
+        document.getElementById('examResult').innerHTML = `<span style='color:green'>✓ Unit already passed! Click Unit ${UNIT + 1} above.</span>`;
+        document.getElementById('nextUnitBtn').disabled = false;
         return;
     }
+    lockUntil = activeLockUntil();
+    if (Date.now() < lockUntil) {
+        const wait = Math.ceil((lockUntil - Date.now())/60000);
+        document.getElementById('examResult').innerHTML = `<span style='color:red'>⏰ Locked for ${wait} more minutes.</span>`;
+        return;
+    }
+    const student = JSON.parse(localStorage.getItem('cts_student'));
+    if (!student || !student.name) {
+        alert(currentLang === 'en' ? "Please register first." : "Por favor regístrese primero.");
+        return;
+    }
+    let correctMC = 0;
+    mcRevealed = true; renderQuestions();
+    for (let i = 0; i < 20; i++) {
+        if (mcAnswers[i] === String.fromCharCode(65 + answerIndex(i))) correctMC++;
+    }
+    const track = student.track || 'cert';
+    let total, score, required, mcGatePass, saGatePass;
+    if (isMastersLevel(track)) {
+        const bodyCls = document.body.classList;
+        const isEs = bodyCls.contains('lang-es');
+        const isBoth = bodyCls.contains('lang-both');
+        let correctKW = 0;
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || "").toLowerCase();
+            if (ans.length < 100) continue;
+            const enHits = kwQuestions[i].kw_en.filter(kw => kwHit(normalize(ans), kw)).length;
+            const esHits = kwQuestions[i].kw_es.filter(kw => kwHit(normalize(ans), kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            if (hits >= 3) correctKW++;
+        }
+        total = 30; score = correctMC + correctKW;
+        mcGatePass = correctMC >= 18; saGatePass = correctKW >= 9;
+        required = null;
 
+        if (mcPreviouslyPassed) {
+            const result = document.getElementById('examResult');
+            if (saGatePass) {
+                progress[`unit${UNIT}`] = true;
+                localStorage.setItem('cts_pm_progress', JSON.stringify(progress));
+                localStorage.removeItem(`cts_pm_u${UNIT}_lockout`);
+                localStorage.removeItem(SA_LOCK_KEY);
+                unitPassed = true;
+                result.innerHTML = `<span style='color:green'>✓ PASSED! MC: ✓ already banked · SA: ${correctKW}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+                document.getElementById('nextUnitBtn').disabled = false;
+                updateProgressGrid();
+            } else {
+                lockUntil = Date.now() + lockMinutes(track)*60*1000;
+                localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
+                result.innerHTML = `<span style='color:red'>✗ MC: ✓ already banked · SA: ${correctKW}/10 (need 9). Your multiple-choice pass is safe. Short-answer section locked for ${lockMinutes(track)} minutes.</span>`;
+            }
+            return;
+        }
+    } else {
+        total = 20; score = correctMC; required = 18;
+        mcGatePass = correctMC >= required; saGatePass = true;
+    }
+    let saNote = '';
+    if (!isMastersLevel(track)) {
+        const bodyCls = document.body.classList;
+        const isEs = bodyCls.contains('lang-es');
+        const isBoth = bodyCls.contains('lang-both');
+        let practiceKW = 0, attempted = 0;
+        for (let i = 0; i < 10; i++) {
+            const ans = (kwAnswers[i] || "").toLowerCase();
+            if (ans.length < 100) continue;
+            attempted++;
+            const enHits = kwQuestions[i].kw_en.filter(kw => kwHit(normalize(ans), kw)).length;
+            const esHits = kwQuestions[i].kw_es.filter(kw => kwHit(normalize(ans), kw)).length;
+            const hits = isBoth ? Math.max(enHits, esHits) : (isEs ? esHits : enHits);
+            if (hits >= 3) practiceKW++;
+        }
+        if (attempted > 0) {
+            saNote = currentLang === 'en'
+                ? `<br><span style="color:#5b3a1f;font-weight:normal;">Short-answer practice: ${practiceKW}/10 (not counted toward your Certificate).</span>`
+                : `<br><span style="color:#5b3a1f;font-weight:normal;">Práctica de respuesta corta: ${practiceKW}/10 (no cuenta para su Certificado).</span>`;
+        }
+    }
+    const pct = Math.round((score/total)*100);
+    const result = document.getElementById('examResult');
     if (mcGatePass && saGatePass) {
-        unitPassed = true;
         progress[`unit${UNIT}`] = true;
         localStorage.setItem('cts_pm_progress', JSON.stringify(progress));
         localStorage.removeItem(`cts_pm_u${UNIT}_lockout`);
         localStorage.removeItem(SA_LOCK_KEY);
-        document.getElementById('examResult').innerHTML = `<span style='color:green'>✅ PASSED (${Math.round(total * 100)}%). Unit 10 completed! Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+        unitPassed = true;
+        result.innerHTML = `<span style='color:green'>✓ PASSED! Score: ${score}/${total} (${pct}%). Your answers are marked below. Review them, then use the button at the top to continue.</span>` + saNote;
         document.getElementById('nextUnitBtn').disabled = false;
         updateProgressGrid();
-    } else if (isGrad && mcGatePass && !saGatePass) {
+    } else if (isMastersLevel(track) && mcGatePass && !saGatePass) {
+        // MC passed — bank it so it never has to be redone. Only SA is locked.
         localStorage.setItem(MC_PASS_KEY, 'true');
         mcPreviouslyPassed = true;
-        lockUntil = Date.now() + 15 * 60 * 1000;
+        lockUntil = Date.now() + lockMinutes(track)*60*1000;
         localStorage.setItem(SA_LOCK_KEY, String(lockUntil));
-        document.getElementById('examResult').innerHTML = `<span style='color:red'>❌ MC: ${correctMC}/20 ✓ passed and banked. SA ${advCorrect}/10 (need 9). When you retry in 15 minutes, you'll only need the short-answer section — MC stays passed.</span>`;
-        startTimer();
+        result.innerHTML = `<span style='color:red'>✗ MC: ${correctMC}/20 ✓ passed and banked · SA gate not met. 90% required on each section. When you retry in ${lockMinutes(track)} minutes, you'll only need the short-answer section — MC stays passed.</span>` + saNote;
     } else {
-        lockUntil = Date.now() + 15 * 60 * 1000;
+        lockUntil = Date.now() + lockMinutes(track)*60*1000;
         localStorage.setItem(`cts_pm_u${UNIT}_lockout`, String(lockUntil));
-        document.getElementById('examResult').innerHTML = `<span style='color:red'>❌ FAILED (${Math.round(total * 100)}% < 90%). Locked for 15 minutes.</span>`;
-        startTimer();
+        result.innerHTML = `<span style='color:red'>✗ Score: ${score}/${total} (${pct}%). 90% required. Locked for ${lockMinutes(track)} minutes.</span>` + saNote;
     }
 }
 
-function startTimer() {
-    let timerEl = document.createElement('div');
-    timerEl.id = 'unitTimer';
-    timerEl.style.marginTop = '10px';
-    let existing = document.getElementById('unitTimer');
-    if (!existing) document.getElementById('examResult').after(timerEl);
-    let interval = setInterval(() => {
-        let remaining = lockUntil - Date.now();
-        if (remaining <= 0 || unitPassed) { clearInterval(interval); if (document.getElementById('unitTimer')) document.getElementById('unitTimer').remove(); return; }
-        let mins = Math.floor(remaining / 60000);
-        let secs = Math.floor((remaining % 60000) / 1000);
-        let timerDiv = document.getElementById('unitTimer');
-        if (timerDiv) timerDiv.innerText = `⏱️ Locked: ${mins}:${secs.toString().padStart(2, '0')}`;
-    }, 1000);
+function resetExam() {
+    const msg = currentLang === 'en'
+        ? "Reset all answers? This cannot be undone."
+        : "¿Reiniciar todas las respuestas? Esto no se puede deshacer.";
+    if (!confirm(msg)) return;
+    mcAnswers = new Array(20).fill(null);
+    kwAnswers = new Array(10).fill("");
+    document.getElementById('examResult').innerHTML = '';
+    renderQuestions();
 }
 
-document.getElementById('submitExamBtn').addEventListener('click', submitExam);
+document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('resetExamBtn').onclick = resetExam;
 document.querySelectorAll('.lang-toggle-group .toggle-btn').forEach(btn => {
     btn.onclick = function() {
         const lang = this.getAttribute('data-lang');
         document.body.classList.remove('lang-en','lang-es','lang-both');
         document.body.classList.add('lang-' + lang);
-        currentLang = (lang === 'es') ? 'es' : 'en';
         renderQuestions();
     };
 });
-
 renderQuestions();
 if (unitPassed) {
-    document.getElementById('examResult').innerHTML = `<span style='color:green'>✅ Unit ${UNIT} already passed.</span>`;
+    document.getElementById('examResult').innerHTML = `<span style='color:green'>✓ Unit ${UNIT} already passed.</span>`;
     document.getElementById('nextUnitBtn').disabled = false;
 }

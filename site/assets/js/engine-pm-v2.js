@@ -1,4 +1,4 @@
-/* Exam engine for CTSPM (shared by 1 unit page).
+/* Exam engine for CTSPM (shared by 2 unit pages).
    Extracted from those pages' inline <script>; per-unit config and
    question banks live in data/pm/unitN.js. */
 const totalUnits = 12;
@@ -17,56 +17,25 @@ function updateProgressGrid() {
     }
     if (progress[`unit${UNIT}`]) document.getElementById('nextUnitBtn').disabled = false;
 }
-if (PREV_HREF) document.getElementById('prevUnitBtn').onclick = () => { location.href = PREV_HREF; }; else document.getElementById('prevUnitBtn').disabled = true; if (NEXT_HREF) document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_HREF; };
+if (PREV_HREF) document.getElementById('prevUnitBtn').onclick = () => { location.href = PREV_HREF; }; else document.getElementById('prevUnitBtn').disabled = true;
+if (NEXT_HREF) document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_HREF; };
 updateProgressGrid();
 
 function displayStudentGreeting() {
     const student = JSON.parse(localStorage.getItem('cts_student'));
     if (student && student.name) {
-        const trackLabel = student.track === 'mdiv' ? 'M.Div.' : (student.track === 'thm' ? 'Th.M.' : 'Certificate');
-        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name} <span style="font-weight:normal;font-size:0.85rem;">(${trackLabel})</span> &nbsp;<a href="#" id="changeTrackLink" style="font-size:0.8rem;color:#5b3a1f;">Change track</a>`;
-        document.getElementById('registrationCard').style.display = 'none';
-        const link = document.getElementById('changeTrackLink');
-        if (link) link.onclick = function(e) {
-            e.preventDefault();
-            const card = document.getElementById('registrationCard');
-            card.style.display = 'block';
-            if (student.name) document.getElementById('regName').value = student.name;
-            if (student.email) document.getElementById('regEmail').value = student.email;
-            if (student.country) document.getElementById('regCountry').value = student.country;
-            if (student.track && typeof setTrack === 'function') setTrack(student.track);
-            card.scrollIntoView({ behavior: 'smooth' });
-        };
+        document.getElementById('studentGreeting').innerHTML = `👋 ${student.name}`;
     } else {
-        document.getElementById('studentGreeting').innerHTML = `<span style="color:#5b3a1f;">⚠️ Please register</span>`;
+        document.getElementById('studentGreeting').innerHTML = `<a href="CTSPMUnit1.html" style="color:#5b3a1f;">⚠️ Please register first</a>`;
+        document.getElementById('regWarning').style.display = 'block';
     }
 }
 displayStudentGreeting();
 
-
-function setTrack(t) {
-    document.getElementById('regTrack').value = t;
-    document.querySelectorAll('.track-opt').forEach(b => { b.classList.toggle('selected', b.getAttribute('data-track') === t); });
-}
-document.querySelectorAll('.track-opt').forEach(b => { b.onclick = function() { setTrack(this.getAttribute('data-track')); }; });
-setTrack('certificate');
-document.getElementById('saveRegBtn').onclick = function() {
-    const name = document.getElementById('regName').value.trim();
-    const email = document.getElementById('regEmail').value.trim();
-    const country = document.getElementById('regCountry').value.trim();
-    const track = document.getElementById('regTrack').value;
-    if (!name || !email) {
-        document.getElementById('regStatus').innerHTML = `<span style="color:red;">⚠️ Name and email are required.</span>`;
-        return;
-    }
-    localStorage.setItem('cts_student', JSON.stringify({ name, email, country, track }));
-    localStorage.setItem('cts_track', track);
-    document.getElementById('regStatus').innerHTML = `<span style="color:green;">✓ Saved! Welcome, ${name}.</span>`;
-    setTimeout(() => { displayStudentGreeting(); }, 1000);
-    renderQuestions();
-};
-
-// Q3 reshuffled (Psalm 23 author) to move David from C to B for 5/5/5/5 balance.
+// Q2 reshuffled (A↔B swap: "internal sense of seasons" moved B→A)
+// Rebalanced from A=4/B=6/C=5/D=5 to 5/5/5/5
+// NOTE: pre-existing ABCD pattern at Q4-Q7 (A,B,C,D) is intrinsic to prose ordering;
+// unable to break without unbalancing distribution or violating semantic correctness
 
 
 
@@ -207,7 +176,7 @@ function renderQuestions() {
         fb.style.marginTop = '8px';
         checkBtn.onclick = function() {
             const ans = ta.value.trim().toLowerCase();
-            // Read the student's active language for SA grading; in 'both' mode, accept whichever language scores higher
+            // Read student's active language for SA grading; in 'both' mode, accept whichever language scores higher
             const bodyCls = document.body.classList;
             const isEs = bodyCls.contains('lang-es');
             const isBoth = bodyCls.contains('lang-both');
@@ -265,7 +234,7 @@ function submitExam() {
     }
     const student = JSON.parse(localStorage.getItem('cts_student'));
     if (!student || !student.name) {
-        alert(currentLang === 'en' ? "Please register first." : "Por favor regístrese primero.");
+        alert(currentLang === 'en' ? "Please register first on Unit 1." : "Por favor regístrese primero en la Unidad 1.");
         return;
     }
     let correctMC = 0;
@@ -347,7 +316,6 @@ function submitExam() {
         document.getElementById('nextUnitBtn').disabled = false;
         updateProgressGrid();
     } else if (isMastersLevel(track) && mcGatePass && !saGatePass) {
-        // MC passed — bank it so it never has to be redone. Only SA is locked.
         localStorage.setItem(MC_PASS_KEY, 'true');
         mcPreviouslyPassed = true;
         lockUntil = Date.now() + lockMinutes(track)*60*1000;

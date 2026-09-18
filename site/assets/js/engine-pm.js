@@ -1,4 +1,4 @@
-/* Exam engine for CTSPM (shared by 6 unit pages).
+/* Exam engine for CTSPM (shared by 3 unit pages).
    Extracted from those pages' inline <script>; per-unit config and
    question banks live in data/pm/unitN.js. */
 const totalUnits = 12;
