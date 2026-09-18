@@ -145,15 +145,15 @@
 
   function mcHost() {
     return firstEl("questionsContainer", "mcContainer", "mcWrap", "mcBlock", "mcqArea",
-                   "mcQuestions", "mcArea", "mc-questions", "mcq", "mcArea",
+                   "mcQuestions", "mcArea", "mc-questions", "mc-container", "mcq",
                    U_("mcq"), U_("mc"), "mc");
   }
   function saHost() {
     return firstEl("kwContainer", "saWrap", "saBlock", "saQuestions", "saArea",
-                   "kw-questions", "saContainer", U_("essay"), U_("sa"), "sa");
+                   "kw-questions", "saContainer", "sa-container", U_("essay"), U_("sa"), "sa");
   }
   function resultEl() {
-    return firstEl("examResult", "examStatus", "statusMsg", "exam-status", "mcResult",
+    return firstEl("examResult", "examStatus", "exam-result", "statusMsg", "exam-status", "mcResult",
                    "resultBox", "score", U_("result"), "result", "lockoutTimer",
                    "lockout-timer");
   }
