@@ -54,14 +54,32 @@ async function worker() {
         return (es.textContent || '').trim().slice(0, 30);
       });
       await page.waitForTimeout(400);
-      const after = await page.evaluate(() => ({
-        text: document.body.innerText,
-        cls: document.body.className,
-      }));
+      const after = await page.evaluate(() => {
+        // Every fragment the site marks as English, in all five of its
+        // spellings. In Spanish none of them should be on screen.
+        const sel = '.lang-en, .en-only, .block-en, .teach-en, .pane.en, #teach-en';
+        const visible = [...document.querySelectorAll(sel)].filter((e) => {
+          if (e.closest('.cts-seg')) return false;   // the control's own label
+          const r = e.getBoundingClientRect();
+          return r.width > 0 && r.height > 0 && (e.textContent || '').trim().length > 0;
+        });
+        return {
+          text: document.body.innerText,
+          cls: document.body.className,
+          english: visible.length,
+        };
+      });
 
       if (!pressed) fails.push(`${f}: no Español control on the page`);
       else if (before === after.text)
         fails.push(`${f}: pressed "${pressed}" and nothing changed (body class "${after.cls}")`);
+      // Text changing is not the same as the page being in Spanish. 55 pages
+      // carried no language class and, once their own stylesheet was gone,
+      // showed both languages stacked -- which this check called a pass,
+      // because Spanish had indeed appeared. It now asks the question the
+      // student would: is the English gone?
+      else if (after.english > 0)
+        fails.push(`${f}: still showing ${after.english} English block(s) after pressing "${pressed}" (body class "${after.cls}")`);
       if (errs.length) fails.push(`${f}: page error — ${errs[0].slice(0, 90)}`);
     } catch (e) {
       fails.push(`${f}: ${String(e).slice(0, 90)}`);

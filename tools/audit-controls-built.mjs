@@ -3,9 +3,12 @@
 // found, which hid pages where no control exists at all.
 import { chromium } from 'playwright';
 import fs from 'fs';
-const CHROME='/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
+// CHROME_PATH when the environment pins a browser; otherwise let Playwright
+// find its own, which is what a developer's machine will do.
+const CHROME = process.env.CHROME_PATH;
+const BASE = process.argv[2] || 'http://127.0.0.1:8823';
 const pages = fs.readdirSync('dist').filter(f=>/^CTS.*Unit\d+\.html$/.test(f)).sort();
-const b = await chromium.launch({executablePath:CHROME});
+const b = await chromium.launch(CHROME ? { executablePath: CHROME } : {});
 const bad = [];
 let done=0;
 const queue = pages.slice();
@@ -15,7 +18,7 @@ async function work(){
     const c = await b.newContext(); const p = await c.newPage();
     const errs=[]; p.on('pageerror',e=>errs.push(e.message));
     try{
-      await p.goto(`http://127.0.0.1:8823/${f}`,{waitUntil:'load',timeout:15000});
+      await p.goto(`${BASE}/${f}`,{waitUntil:'load',timeout:15000});
       await p.waitForTimeout(150);
       const r = await p.evaluate(()=>{
         const C = window.CTS_ENGINE?.controls;

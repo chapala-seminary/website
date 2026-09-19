@@ -1,39 +1,190 @@
 ---
 /* One layout for every unit page.
  *
- * The body arrives verbatim from src/body/ — see tools/to-astro.mjs for why it
- * is carried whole rather than reassembled. What the layout owns is the shell:
- * the head, the stylesheet links the page already used, the unit data, and the
- * shared scripts in the order the pages loaded them.
+ * Until now this carried the body verbatim, furniture and all, which is why
+ * the site had 102 stylesheets and no two courses looked alike. The body is
+ * still never edited -- src/lib/shell.ts lifts the title block out and drops
+ * the navigation the layout now renders itself, and passes the lesson through
+ * untouched. tools/prose-baseline.mjs is what makes that safe to assert.
  */
+import { shell } from '../lib/shell';
+
+interface Unit {
+  course: string;
+  unit: number;
+  totalUnits: number;
+  prevHref: string | null;
+  nextHref: string | null;
+  filePrefix?: string;
+  [k: string]: unknown;
+}
 interface Props {
   title: string;
   bodyClass: string;
   styles: string[];
   scripts: string[];
-  unit: unknown;
+  unit: Unit;
   body: string;
+  pagePrefix: string;
 }
-const { title, bodyClass, styles, scripts, unit, body } = Astro.props;
+const { title, bodyClass, styles, scripts, unit, body, pagePrefix } = Astro.props;
 
-// Inlining the unit means one fewer request and no separate data file to fall
-// out of step with the page. "<" is escaped so a question containing markup
-// cannot end the script element early.
+const { masthead, content } = shell(body);
+
+/* 55 of the 451 pages carried no language class on <body>: they hid the other
+   language from their own inline script, and their own stylesheet set the
+   default. With one stylesheet for the site there is one convention, and a
+   page that names no language opens in English like every other. Without this
+   those pages show both languages stacked, and a check that only asks whether
+   Spanish appeared would call that a pass. */
+const cls = bodyClass && /\blang-(en|es|both)\b/.test(bodyClass) ? bodyClass
+          : `${bodyClass} lang-en`.trim();
+
+// The unit pills. A course of 13 units gets 13 circles; which are finished is
+// the engine's business at runtime, because it is the only thing that knows
+// what this browser has completed.
+const pills = Array.from({ length: unit.totalUnits + 1 }, (_, i) => i)
+  .filter((n) => n > 0 || unit.unit === 0)
+  .map((n) => ({ n, href: `${pagePrefix}Unit${n}.html`, here: n === unit.unit }));
+
 const unitJson = JSON.stringify(unit).replace(/</g, '\\u003c');
+
+// The language classes come from the body class the page already had; a page
+// that opened in Spanish still does.
+const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
 ---
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
-    {styles.map((href) => <link rel="stylesheet" href={href} />)}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap"
+    />
+    <link rel="stylesheet" href="/assets/css/cts.css" />
+    {/* The 102 per-page stylesheets are gone; `styles` is kept in the schema
+        only so a course with a genuinely special need can opt back in, and
+        today none do. Loading them here was what made the unified design
+        invisible: they came after cts.css and simply won. */}
   </head>
-  <body class={bodyClass}>
-    <Fragment set:html={body} />
+  <body class={cls} data-course={unit.course}>
+    <a class="btn skip" href="#lesson" style="position:absolute;left:-9999px">
+      <span class="lang-en">Skip to the lesson</span><span class="lang-es">Saltar a la lección</span>
+    </a>
+
+    <header class="cts-masthead">
+      <div class="wrap" set:html={masthead || `<h1>${title}</h1>`} />
+    </header>
+
+    <nav class="cts-nav" aria-label="Course units">
+      <div class="wrap">
+        <div class="cts-navmain">
+          <ul class="cts-units" id="cts-units">
+            {pills.map((p) => (
+              <li>
+                <a
+                  href={p.href}
+                  class={p.here ? 'here' : ''}
+                  data-unit={p.n}
+                  aria-current={p.here ? 'page' : undefined}
+                >{p.n}</a>
+              </li>
+            ))}
+          </ul>
+          <div class="cts-steps">
+            {unit.prevHref ? (
+              <a class="btn" href={unit.prevHref}>← <span class="lang-en">Previous</span><span class="lang-es">Anterior</span></a>
+            ) : (
+              <span class="btn" aria-disabled="true" style="opacity:.4">← <span class="lang-en">Previous</span><span class="lang-es">Anterior</span></span>
+            )}
+            {unit.nextHref ? (
+              <a class="btn solid" href={unit.nextHref}><span class="lang-en">Next</span><span class="lang-es">Siguiente</span> →</a>
+            ) : (
+              <span class="btn solid" aria-disabled="true" style="opacity:.4"><span class="lang-en">Next</span><span class="lang-es">Siguiente</span> →</span>
+            )}
+          </div>
+        </div>
+        <div class="cts-seg" role="group" aria-label="Language / Idioma">
+          <button type="button" data-lang="en">English</button>
+          <button type="button" data-lang="es">Español</button>
+          <button type="button" data-lang="both"><span class="lang-en">Both</span><span class="lang-es">Ambos</span></button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="wrap" id="lesson">
+      {/* One registration card for the whole seminary. Every course used to
+          carry its own -- forty-four of them, with forty-four wordings and
+          forty-four sets of field names -- which is why cts-engine.js still
+          reads five spellings of "name". The engine hides this once a student
+          is registered; a student registers once, in any course, for all. */}
+      <section class="reg-form" id="cts-register" hidden>
+        <h2>
+          <span class="lang-en">Register once, for every course</span>
+          <span class="lang-es">Regístrese una vez, para todos los cursos</span>
+        </h2>
+        <p>
+          <span class="lang-en">Your name and track are saved in this browser and carry into every class. Nothing is sent anywhere until you ask for a backup code.</span>
+          <span class="lang-es">Su nombre y trayecto se guardan en este navegador y se aplican a todas las clases. No se envía nada hasta que solicite un código de respaldo.</span>
+        </p>
+        <div class="registration-fields">
+          <div class="full">
+            <label for="regName">
+              <span class="lang-en">Full name — as it should appear on your certificate</span>
+              <span class="lang-es">Nombre completo — como debe aparecer en su certificado</span>
+            </label>
+            <input id="regName" type="text" autocomplete="name" />
+          </div>
+          <div>
+            <label for="regCountry"><span class="lang-en">Country</span><span class="lang-es">País</span></label>
+            <input id="regCountry" type="text" autocomplete="country-name" />
+          </div>
+          <div>
+            <label for="regTrack"><span class="lang-en">Study track</span><span class="lang-es">Trayecto de estudio</span></label>
+            <select id="regTrack">
+              <option value="cert">Certificate of Ministry</option>
+              <option value="ad">Associate of Divinity</option>
+              <option value="mdiv">Master of Divinity</option>
+              <option value="thm">Master of Theology (Th.M.)</option>
+            </select>
+          </div>
+          <div class="full">
+            <button class="btn solid" type="button" id="regSave">
+              <span class="lang-en">Save registration</span><span class="lang-es">Guardar registro</span>
+            </button>
+          </div>
+        </div>
+        <p class="small" style="margin-bottom:0">
+          <span class="lang-en">Certificate track answers the multiple choice only. M.Div. and Th.M. answer the short-answer questions as well. 90% is required to pass either way.</span>
+          <span class="lang-es">El trayecto de Certificado responde solo la opción múltiple. M.Div. y Th.M. responden también las preguntas de desarrollo. Se requiere 90% para aprobar en ambos casos.</span>
+        </p>
+      </section>
+      <p id="greeting" class="muted" style="margin-top:0"></p>
+
+      <Fragment set:html={content} />
+    </main>
+
+    <footer class="cts-foot">
+      <div class="wrap">
+        <span>
+          <span class="lang-en">Chapala Theological Seminary · Free, bilingual theological training.</span>
+          <span class="lang-es">Seminario Teológico de Chapala · Formación teológica gratuita y bilingüe.</span>
+        </span>
+        <span>
+          <a href="/index.html"><span class="lang-en">All courses</span><span class="lang-es">Todos los cursos</span></a>
+          &nbsp;·&nbsp;
+          <a href="/cts-backup.html"><span class="lang-en">Save my progress</span><span class="lang-es">Guardar mi progreso</span></a>
+        </span>
+      </div>
+    </footer>
+
     <script is:inline set:html={`window.CTS_UNIT = ${unitJson};`} />
     <script is:inline src="/assets/js/cts-engine.js"></script>
-    {scripts.map((src) => <script is:inline src={src}></script>)}
+    {scripts.map((src) => <script is:inline src={`/${src.replace(/^\//, '')}`}></script>)}
     {/* Mirrors this browser's progress to the seminary's database so a cleared
         browser or a new phone is no longer the end of someone's degree. It is
         dormant until the API exists: one probe per tab, then silence. See

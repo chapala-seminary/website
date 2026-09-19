@@ -194,6 +194,46 @@
     return d;
   }
 
+  /* The shared registration card the layout renders. Every course used to
+     carry its own copy; the engine's readReg() still reads five spellings of
+     "name" because of that history. This is the one card now, and it is shown
+     only to a student who has not registered -- which is nearly always Unit 1
+     of their first course, once, ever. */
+  function renderRegister() {
+    var card = el("cts-register");
+    if (!card) return;
+    var s = student();
+    var done = !!(s && s.name);
+    card.hidden = done;
+    if (done) return;
+    var t = el("regTrack");
+    if (t) t.value = track() || "cert";
+  }
+
+  function wireRegister() {
+    var card = el("cts-register");
+    if (!card) return;
+    var save = el("regSave");
+    if (save) save.addEventListener("click", function () {
+      if (!readReg()) {
+        var n = el("regName");
+        if (n) { n.focus(); n.setAttribute("aria-invalid", "true"); }
+        return;
+      }
+      var t = el("regTrack");
+      if (t && t.value) {
+        lsSet("cts_track", t.value);
+        var st = student();
+        if (st) { st.track = t.value; lsSet("cts_student", JSON.stringify(st)); }
+      }
+      renderRegister();
+      renderGreeting();
+      renderQuestions();
+    });
+    var name = el("regName");
+    if (name) name.addEventListener("input", function () { name.removeAttribute("aria-invalid"); });
+  }
+
   function renderProgressGrid() {
     var grid = gridEl();
     if (!grid) return;
@@ -208,6 +248,19 @@
       html += '<a href="' + prefix + "Unit" + i + '.html" class="' + cls.trim() + '"' + t + ">" + i + "</a>";
     }
     grid.innerHTML = html;
+  }
+
+  /* The pills in the sticky nav are rendered at build time so the page is
+     readable before any script runs; which of them are finished is the only
+     thing this browser knows and the server does not. */
+  function renderUnitPills() {
+    var list = el("cts-units");
+    if (!list) return;
+    var links = list.querySelectorAll("a[data-unit]");
+    for (var i = 0; i < links.length; i++) {
+      var n = parseInt(links[i].getAttribute("data-unit"), 10);
+      if (n !== U.unit && progress["unit" + n]) links[i].classList.add("done");
+    }
   }
 
   function renderGreeting() {
@@ -408,6 +461,9 @@
   // ---- boot --------------------------------------------------------------
   function boot() {
     renderProgressGrid();
+    renderUnitPills();
+    renderRegister();
+    wireRegister();
     renderGreeting();
     wireNav();
     ensureResult();

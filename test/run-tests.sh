@@ -55,6 +55,13 @@ done
 
 node tools/verify-sitemap.mjs dist
 
+# The lesson prose. content-baseline.mjs checks the questions -- 34,778
+# comparisons -- and says nothing about the teaching itself, which is most of
+# what the seminary actually wrote. This compares every recorded text block
+# against the built page, so a change to the layout or the shell transform
+# cannot drop a paragraph without naming it.
+node tools/prose-baseline.mjs check dist
+
 API_BASE="http://127.0.0.1:$PORT" node test/api.test.mjs
 
 # Some environments (the sandboxed Linux VM the desktop app runs commands in,
@@ -72,6 +79,7 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   fi
   node tools/verify-mobile.mjs "http://127.0.0.1:$PORT" dist 390
   node tools/verify-language.mjs "http://127.0.0.1:$PORT" dist
+  node tools/audit-controls-built.mjs "http://127.0.0.1:$PORT"
   SYNC_BASE="http://127.0.0.1:$PORT" node test/code-ui.test.mjs
 else
   echo

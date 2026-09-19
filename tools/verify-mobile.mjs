@@ -37,7 +37,10 @@ const family = (f) => {
 };
 
 const seen = new Map();
-for (const f of fs.readdirSync(DIST).filter((f) => f.endsWith('.html')).sort()) {
+// Files beginning with "_" are fixtures the test run drops into dist/ -- the
+// pre-migration front page the gating check compares against, above all. They
+// are not pages of the site and are not held to its layout.
+for (const f of fs.readdirSync(DIST).filter((f) => f.endsWith('.html') && !f.startsWith('_')).sort()) {
   const k = family(f);
   const cap = k === 'digest' ? 5 : 1;
   const got = seen.get(k) || [];
