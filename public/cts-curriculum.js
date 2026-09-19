@@ -248,12 +248,8 @@
     var st = document.createElement("style");
     st.textContent =
       "a.course.cts-locked{opacity:.55;filter:grayscale(.65)}" +
-      "a.course.cts-locked .cts-lk-wrap{position:absolute;top:8px;right:8px;display:flex;flex-direction:column;align-items:flex-end;gap:7px;z-index:2}" +
+      "a.course.cts-locked .cts-lk-wrap{position:absolute;top:8px;right:8px;z-index:2}" +
       "a.course.cts-locked .cts-lk{background:#4A1E3A;color:#fff;font:600 11px/1 Georgia,serif;letter-spacing:.04em;padding:4px 8px;border-radius:20px;display:inline-flex;align-items:center;gap:4px}" +
-      "a.course.cts-locked .cts-lk-key{width:22px;height:22px;padding:0;background:transparent;border:1.5px solid #9b8f97;border-radius:3px;position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent}" +
-      "a.course.cts-locked .cts-lk-key::after{content:'';position:absolute;top:50%;left:50%;width:4px;height:4px;border-radius:50%;background:#9b8f97;transform:translate(-50%,-50%)}" +
-      "a.course.cts-locked .cts-lk-key:active{border-color:#4A1E3A}" +
-      "a.course.cts-locked .cts-lk-key:active::after{background:#4A1E3A}" +
       ".cts-lock-legend{max-width:760px;margin:0 auto 18px;padding:10px 14px;background:#faf6f9;border:1px solid #e7d8e4;border-radius:8px;color:#5a3550;font-size:.92rem;text-align:center}";
     document.head.appendChild(st);
 
@@ -268,13 +264,12 @@
       b.className = "cts-lk";
       b.innerHTML = "\uD83D\uDD12 <span>" + t(T.badge) + "</span>";
       wrap.appendChild(b);
-      var key = document.createElement("button");        // discreet, unlabeled tester unlock
-      key.type = "button";
-      key.className = "cts-lk-key";
-      key.setAttribute("aria-label", "");
-      key.setAttribute("tabindex", "-1");
-      key.addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); enableTest(); });
-      wrap.appendChild(key);
+      // A second, unlabeled control used to sit under the badge here: a tester
+      // unlock for CTS staff. Two controls on a locked card read as a choice a
+      // student is meant to make, and one of them was unexplained. Staff turn
+      // tester mode on with ?ctstest=on on any page, or from the unlock box on
+      // a locked course page, both of which are deliberate rather than a tap
+      // away on every card in the catalog.
       a.appendChild(wrap);
       a.setAttribute("href", "CTSBeforeYouBegin.html");   // a click explains the path
       a.setAttribute("title", t(T.lockBody));
