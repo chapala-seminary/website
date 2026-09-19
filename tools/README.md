@@ -214,3 +214,28 @@ unverified** rather than skipping quietly.
 
 `docs/student-records.md` covers the design, the trade-offs, what a certificate
 does and does not prove, and what is still to decide before it goes live.
+
+## verify-gating.mjs
+
+    node tools/verify-gating.mjs <base-url> <reference-page>   # run by npm test
+
+Loads the generated front page and the hand-written one from the same server
+with the same empty localStorage, and compares which courses are locked and
+where every card actually sends a student — twice: for someone who has
+finished nothing, and for someone who has finished the seven foundation
+courses.
+
+This exists because of a real scare. The catalog cards are generated from a
+collection now, but the lock state is painted on at runtime by
+`cts-curriculum.js`, which matches on each card's href. Nothing in the build
+checked that the two still agreed, and a dropped script tag or a renamed entry
+page would quietly open the whole catalog to a student who had finished
+nothing — with the page still looking perfectly fine.
+
+Locked courses are reported by title, not href, because gating rewrites a
+locked card's href to the explainer page: keyed by href, a failure reports the
+same destination thirty-five times and names no course.
+
+Confirmed to **fail** with the gating script removed (35 courses unlocked that
+should not be), and to pass again once restored. It also fails if no cards
+render at all, so it cannot pass vacuously.

@@ -20,9 +20,12 @@ CONFIG=test/wrangler.local.toml
 mkdir -p "$STATE"
 [ -d dist ] || { echo "run 'npm run build' first"; exit 2; }
 # Copied in for the run and removed again on the way out: a fixture page left
-# behind in dist/ would be uploaded with the next deploy.
+# behind in dist/ would be uploaded with the next deploy. The reference index
+# is the hand-written front page as it stood before the catalog was generated,
+# taken straight from git so the check works in a fresh clone.
 cp test/fixtures/synctest.html test/fixtures/syncdown.html dist/
-trap 'rm -f dist/synctest.html dist/syncdown.html' EXIT
+git show c257ea2:public/index.html > dist/_reference-index.html
+trap 'rm -f dist/synctest.html dist/syncdown.html dist/_reference-index.html' EXIT
 
 # The local database is keyed by the database_id in $CONFIG, which is also what
 # `pages dev --d1 DB=local-dev` binds -- that is the only way the schema applied
@@ -33,7 +36,7 @@ npx wrangler d1 execute chapala-students --local --persist-to "$STATE" \
 npx wrangler pages dev dist --port "$PORT" --persist-to "$STATE" \
   --d1 DB=local-dev --compatibility-date 2026-09-01 > "$STATE/dev.log" 2>&1 &
 DEV=$!
-trap 'kill $DEV 2>/dev/null || true; rm -f dist/synctest.html dist/syncdown.html' EXIT
+trap 'kill $DEV 2>/dev/null || true; rm -f dist/synctest.html dist/syncdown.html dist/_reference-index.html' EXIT
 
 for i in $(seq 1 60); do
   sleep 1
@@ -49,12 +52,14 @@ API_BASE="http://127.0.0.1:$PORT" node test/api.test.mjs
 # a suite ends up proving nothing.
 if node -e "require('playwright').chromium.launch().then(b=>b.close()).catch(()=>process.exit(1))" 2>/dev/null; then
   SYNC_BASE="http://127.0.0.1:$PORT" node test/sync.test.mjs
+  node tools/verify-gating.mjs "http://127.0.0.1:$PORT" _reference-index.html
 else
   echo
   echo "  ####################################################################"
   echo "  #  SKIPPED: test/sync.test.mjs - Chromium will not start here.     #"
   echo "  #                                                                  #"
-  echo "  #  NOT VERIFIED by this run: that cts-sync.js carries a student's  #"
+  echo "  #  NOT VERIFIED by this run: that the catalog still locks the      #"
+  echo "  #  courses it used to, that cts-sync.js carries a student's        #"
   echo "  #  progress to another browser, that restoring never removes what  #"
   echo "  #  a device already had, and that the script stays dormant with    #"
   echo "  #  no API deployed. Run this suite where Chromium works before     #"
