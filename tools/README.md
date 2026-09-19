@@ -277,3 +277,30 @@ spaces instead of dashes, as a person would.
 
 Confirmed to fail, with readable assertions rather than a click timeout, when
 the sync client is forced to report no API.
+
+## verify-language.mjs
+
+    node tools/verify-language.mjs <base-url> [dist]   # run by npm test
+
+Presses whatever Spanish control a student would press, on all 451 unit pages,
+and fails if the page text does not change.
+
+This exists because of a regression that reached every design. The unified
+engine replaced per-page inline scripts that each wired their own language
+control; it published `setLang()` and `toggleLang()` as globals for the handful
+of pages carrying an inline `onclick`, and bound nothing on the rest. **The
+Spanish toggle did nothing on 409 of the 451 pages** — on a site whose whole
+premise is being bilingual.
+
+Nothing caught it because the Stage 1 harness compared pages in their default
+state and never pressed the button. Comparing rendered output is not the same
+as using the page.
+
+The site has at least six shapes of language control — a single toggle that
+renames itself between "Español" and "English", three-button
+English/Español/Both groups with an `active` state, several id-named button
+pairs, and inline `onclick` handlers — so the check finds the control by what
+it says rather than by how it is built.
+
+Confirmed to fail on 409 pages with the engine's wiring removed, and to pass
+with it in place.

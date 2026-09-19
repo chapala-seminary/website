@@ -428,10 +428,22 @@
     var sb = submitEl(); if (sb) sb.addEventListener("click", submit);
     var rb = resetEl(); if (rb) rb.addEventListener("click", reset);
 
-    // cts-lang.js toggles body classes; re-render so the active language shows
+    // cts-lang.js seeds the language at load; it does not handle clicks
     document.addEventListener("cts:langchange", renderQuestions);
-    var lt = el("langToggleBtn");
-    if (lt) lt.addEventListener("click", function () { setTimeout(renderQuestions, 0); });
+    var g = document.querySelectorAll("button[data-lang], a[data-lang]");
+    for (var gi = 0; gi < g.length; gi++) wireLang(g[gi], g[gi].getAttribute("data-lang"));
+    for (var ti = 0; ti < LANG_TOGGLE_IDS.length; ti++) {
+      var t = el(LANG_TOGGLE_IDS[ti]);
+      if (t && !t.getAttribute("data-lang")) wireLang(t, null);      // null: flip
+    }
+    var byId = { en: ["langBtnEn", "btnEn", "btn-en"], es: ["langBtnEs", "btnEs", "btn-es"],
+                 both: ["langBtnBoth", "btnBoth", "btn-both"] };
+    for (var k in byId) if (byId.hasOwnProperty(k))
+      for (var bi2 = 0; bi2 < byId[k].length; bi2++) {
+        var n = el(byId[k][bi2]);
+        if (n && !n.getAttribute("data-lang")) wireLang(n, k);
+      }
+    syncLangControls(langNow());
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
@@ -469,13 +481,60 @@
   define("resetMC", reset);
   define("resetMcq", reset);
 
+  /* The page's own language controls come in two shapes, and both used to be
+     wired by the per-page inline script that this engine replaced:
+
+       a single toggle  -- #langToggleBtn on 246 pages -- which flips English and
+                           Spanish AND swaps its own label between "Español" and
+                           "English", so it always names the language it goes to
+       a button group   -- [data-lang] on 129 pages -- English / Español / Both,
+                           where the chosen button takes an .active class
+
+     The engine published setLang() and toggleLang() as globals for the handful
+     of pages carrying an inline onclick, and bound nothing on the rest: pressing
+     Español did nothing at all on roughly 440 of the 451 unit pages. It also
+     never implemented "both", which those three-button groups depend on. */
+  var LANG_TOGGLE_IDS = ["langToggleBtn", "langToggle", "langBtn", "btnLang", "lang-toggle"];
+
+  function langNow() {
+    if (document.body.classList.contains("lang-both")) return "both";
+    return isEs() ? "es" : "en";
+  }
+
   function applyLang(lang) {
+    lang = (lang === "es" || lang === "both") ? lang : "en";
     var b = document.body;
-    b.classList.remove("lang-en", "lang-es");
-    b.classList.add(lang === "es" ? "lang-es" : "lang-en");
+    b.classList.remove("lang-en", "lang-es", "lang-both");
+    b.classList.add("lang-" + lang);
     b.setAttribute("data-lang", lang);
-    try { lsSet("cts_lang", lang); } catch (e) {}
+    // "both" is a display mode rather than a language, so it must not overwrite
+    // the student's remembered choice that cts-lang.js seeds every page from
+    if (lang !== "both") { try { lsSet("cts_lang", lang); } catch (e) {} }
+    syncLangControls(lang);
     renderQuestions();
+  }
+
+  function syncLangControls(lang) {
+    var g = document.querySelectorAll("button[data-lang], a[data-lang]");
+    for (var i = 0; i < g.length; i++) {
+      var want = g[i].getAttribute("data-lang");
+      if (g[i].classList) g[i].classList.toggle("active", want === lang);
+      if (g[i].hasAttribute("aria-pressed")) g[i].setAttribute("aria-pressed", String(want === lang));
+    }
+    for (var j = 0; j < LANG_TOGGLE_IDS.length; j++) {
+      var t = el(LANG_TOGGLE_IDS[j]);
+      if (t && !t.getAttribute("data-lang")) t.textContent = lang === "es" ? "English" : "Espa\u00f1ol";
+    }
+  }
+
+  function wireLang(node, lang) {
+    // A page that already carries an inline onclick keeps it: binding a second
+    // handler would switch twice and look exactly like nothing happening.
+    if (!node || node.getAttribute("onclick")) return;
+    node.addEventListener("click", function (e) {
+      if (node.tagName === "A") e.preventDefault();
+      applyLang(lang || (isEs() ? "en" : "es"));
+    });
   }
   define("setLang", applyLang);
   define("toggleLang", function () { applyLang(isEs() ? "en" : "es"); });
