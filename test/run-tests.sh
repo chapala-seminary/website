@@ -80,6 +80,7 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   node tools/verify-mobile.mjs "http://127.0.0.1:$PORT" dist 390
   node tools/verify-language.mjs "http://127.0.0.1:$PORT" dist
   node tools/audit-controls-built.mjs "http://127.0.0.1:$PORT"
+  node tools/verify-devmode.mjs "http://127.0.0.1:$PORT"
   SYNC_BASE="http://127.0.0.1:$PORT" node test/code-ui.test.mjs
 else
   echo
@@ -89,11 +90,13 @@ else
   echo "  # NOT VERIFIED by this run: that the Spanish control works on every   #"
   echo "  # page, that a student can see their code and restore from it, that   #"
   echo "  # no page scrolls sideways on a phone, that the catalog still locks   #"
-  echo "  # the courses it used to, that cts-sync.js carries a student's        #"
-  echo "  # progress to another browser, that restoring never removes what a    #"
-  echo "  # device already had, and that the script stays dormant with no API   #"
-  echo "  # deployed. Run this suite where Chromium works before trusting any   #"
-  echo "  # of those.                                                           #"
+  echo "  # the courses it used to, that course-tester mode still opens every   #"
+  echo "  # course and still leaves a registered student's progress alone,      #"
+  echo "  # that every page has a working submit control, that cts-sync.js      #"
+  echo "  # carries a student's progress to another browser, that restoring     #"
+  echo "  # never removes what a device already had, and that the script stays  #"
+  echo "  # dormant with no API deployed. Run this suite where Chromium works   #"
+  echo "  # before trusting any of those.                                       #"
   echo "  #                                                                     #"
   echo "  # Usually: npx playwright install --with-deps chromium                #"
   echo "  #######################################################################"

@@ -94,8 +94,17 @@
     if (!m) return;
     var v = m[1].toLowerCase();
     try {
-      if (v === "on" || v === "1") localStorage.setItem(TEST_KEY, "1");
-      else localStorage.removeItem(TEST_KEY);
+      if (v === "on" || v === "1") { localStorage.setItem(TEST_KEY, "1"); return; }
+      localStorage.removeItem(TEST_KEY);
+      // ?ctstest=off used to clear only the flag, leaving the placeholder
+      // "Course Tester" account behind: the catalog locked itself again, but
+      // the browser was still signed in as a tester on the M.Div. track, so
+      // the registration card stayed hidden and anything studied afterwards
+      // was recorded under a name that is not a person. Tapping the tester bar
+      // always cleaned this up; the query parameter did not. Both routes out
+      // now do the same thing.
+      var s = JSON.parse(localStorage.getItem("cts_student") || "null");
+      if (s && s._tester) localStorage.removeItem("cts_student");
     } catch (e) {}
   }
   applyTestParam();
