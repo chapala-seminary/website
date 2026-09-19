@@ -93,6 +93,32 @@ test/run-tests.sh               npm test
 `worker/api.js` is a plain fetch handler with no Pages-specific anything, so
 moving to a Worker with static assets later is a deploy change, not a rewrite.
 
+## How a student gets their code
+
+Registration issues a code silently. Until something showed it to them, nobody
+could restore anything, which made the whole mechanism useless in practice. It
+now appears in two places, both hidden until the API is live so that neither
+offers a recovery that cannot work yet:
+
+* **The registration card on the front page**, the moment registration saves
+  and again on every return visit — the code, a Copy button, and one line
+  saying to write it down.
+* **The Save & Restore page** (`cts-backup.html`), which already existed to
+  protect a student's work with a backup file. It gains a card showing this
+  device's code and a box to restore from one typed off another device. The
+  card carries no step number, so when it is hidden the page's numbered steps
+  still read 1 and 2.
+
+Copying falls back from `navigator.clipboard` to `execCommand`, and finally to
+selecting the text, because a secure context is not a given on the webviews
+some of these students use.
+
+Restoring only ever adds: a device keeps everything it already had, and the
+two sets are merged. `test/code-ui.test.mjs` drives both pages in a browser
+against a real API — registering, copying, reloading, and restoring onto a
+second device with the code typed in lower case with spaces instead of dashes,
+as a person would.
+
 ## The client is dormant until the API exists
 
 `cts-sync.js` is already on every unit page, and currently does nothing: it asks
@@ -131,17 +157,14 @@ nothing.
 
 ## Still to decide before this goes live
 
-1. **How a student learns their code.** The mechanism issues one silently. Until
-   something shows it to them, nobody can restore anything. This is student-
-   facing copy in two languages and belongs to Robert, not to the tool.
-2. **The certificate pages** write `cts_done_codes` and do not yet load the sync
+1. **The certificate pages** write `cts_done_codes` and do not yet load the sync
    script. A student who finishes a course and then opens any unit page still
    gets it synced, so nothing is lost — but the delay is avoidable.
-3. **A privacy statement and a delete path in the UI.** `CTS_SYNC.forget()`
+2. **A privacy statement and a delete path in the UI.** `CTS_SYNC.forget()`
    exists; a page that calls it does not. Storing names, emails and countries
    server-side turns a `localStorage` app into a system holding personal data on
    identifiable people across jurisdictions. Small work now, unpleasant later.
-4. **Rate limiting.** 60 bits makes guessing a code infeasible, but a
+3. **Rate limiting.** 60 bits makes guessing a code infeasible, but a
    Cloudflare rate-limiting rule on `/api/*` costs nothing and should exist.
 
 ## Deploying

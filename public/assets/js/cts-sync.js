@@ -241,6 +241,10 @@
   else schedule();
 
   window.CTS_SYNC = {
+    /* Is there an API at all? The pages that show a student their code use
+       this to stay hidden until the database is live, rather than offering a
+       recovery that cannot work yet. Resolves to a boolean, never rejects. */
+    available: apiPresent,
     code: function () { return get(CODE_KEY); },
     snapshot: snapshot,
     sync: function () { return syncOnce(true); },

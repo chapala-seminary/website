@@ -48,6 +48,7 @@ footer a{color:var(--blue-dark);font-weight:600}
 </style>
 </head>
 <body class="lang-en">
+<script src="assets/js/cts-sync.js" defer></script>
 <script src="cts-lang.js"></script>
 <header class="site">
   <div class="crest">Chapala Theological Seminary &middot; Seminario Teol&oacute;gico de Chapala</div>
@@ -76,6 +77,37 @@ footer a{color:var(--blue-dark);font-weight:600}
       <li><span class="en-only">Keep your latest backup where you can find it — email it to yourself, or save it to Google Drive.</span><span class="es-only">Guarde su respaldo m&aacute;s reciente donde pueda encontrarlo: env&iacute;elo a su propio correo, o gu&aacute;rdelo en Google Drive.</span></li>
       <li><span class="en-only">If your progress ever disappears, come back to this page and restore it.</span><span class="es-only">Si su progreso alguna vez desaparece, regrese a esta p&aacute;gina y restáurelo.</span></li>
     </ul>
+  </div>
+
+  <!-- STUDENT CODE -->
+  <!-- The seminary can now hold a student's progress, keyed to a code issued
+       at registration. The code is useless unless the student can see it, so
+       this card shows it and takes one back. It stays hidden until the API is
+       live, rather than offering a recovery that cannot work yet -- no step
+       number for the same reason, so hiding it leaves 1 and 2 reading right. -->
+  <div class="card" id="code-card" style="display:none">
+    <h2><span class="en-only">Your student code</span><span class="es-only">Su c&oacute;digo de estudiante</span></h2>
+    <p class="sub"><span class="en-only">A backup file protects one device. This code brings your work back on any device, from the seminary&rsquo;s own records.</span><span class="es-only">Un archivo de respaldo protege un solo dispositivo. Este c&oacute;digo recupera su trabajo en cualquier dispositivo, desde los registros del seminario.</span></p>
+
+    <div id="code-have" style="display:none">
+      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 10px">
+        <code id="code-value" style="font:700 17px ui-monospace,Menlo,Consolas,monospace;letter-spacing:.09em;background:#f4f6fb;border:1px solid #c9d3e6;border-radius:6px;padding:10px 14px">&mdash;</code>
+        <button id="code-copy" type="button" style="border:2px solid var(--blue-dark);background:#fff;color:var(--blue-dark);border-radius:6px;padding:9px 18px;font-family:inherit;font-size:1rem;font-weight:700;cursor:pointer"><span class="en-only">Copy</span><span class="es-only">Copiar</span></button>
+      </div>
+      <p class="sub" style="margin:0"><span class="en-only">Write it down somewhere you will still have if this phone is lost.</span><span class="es-only">An&oacute;telo en un lugar que conserve si pierde este tel&eacute;fono.</span></p>
+    </div>
+
+    <div id="code-none" style="display:none">
+      <p class="sub" style="margin:0"><span class="en-only">No code yet on this device. Register on the home page and one is issued to you.</span><span class="es-only">A&uacute;n no hay c&oacute;digo en este dispositivo. Reg&iacute;strese en la p&aacute;gina principal y se le emitir&aacute; uno.</span></p>
+    </div>
+
+    <h2 style="margin-top:22px;font-size:1.1rem"><span class="en-only">Restore from a code</span><span class="es-only">Restaurar desde un c&oacute;digo</span></h2>
+    <p class="sub"><span class="en-only">Enter the code from another device. Nothing already saved here is removed &mdash; the two are added together.</span><span class="es-only">Escriba el c&oacute;digo de otro dispositivo. No se elimina nada de lo ya guardado aqu&iacute;: se suman los dos.</span></p>
+    <div style="display:flex;flex-wrap:wrap;gap:10px">
+      <input id="code-input" type="text" inputmode="latin" autocapitalize="characters" autocomplete="off" spellcheck="false" placeholder="CTS-XXXX-XXXX-XXXX" style="flex:1 1 220px;min-width:0;padding:12px;border:1px solid #c9d3e6;border-radius:6px;font:600 16px ui-monospace,Menlo,Consolas,monospace;letter-spacing:.06em">
+      <button class="action" id="code-restore" type="button" style="width:auto;flex:0 0 auto"><span class="en-only">Restore</span><span class="es-only">Restaurar</span></button>
+    </div>
+    <p class="note" id="code-note"></p>
   </div>
 
   <!-- BACKUP -->
@@ -210,6 +242,87 @@ document.getElementById('restore-file').addEventListener('change', function(){
     r.readAsText(this.files[0]);
   }
 });
+</script>
+
+<!-- Student code: show the one this device holds, and take one back. -->
+<script>
+(function(){
+  // cts-sync.js is deferred, so it has run by DOMContentLoaded but not while
+  // this inline script is being parsed.
+  function ready(fn){
+    if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',fn,{once:true});
+    else fn();
+  }
+  function $(id){ return document.getElementById(id); }
+  function note(kind,en,es){
+    var n=$('code-note');
+    n.className='note '+kind;
+    n.innerHTML='<span class="en-only">'+en+'</span><span class="es-only">'+es+'</span>';
+  }
+  function paint(){
+    var code=window.CTS_SYNC.code();
+    $('code-have').style.display = code ? 'block' : 'none';
+    $('code-none').style.display = code ? 'none' : 'block';
+    if(code) $('code-value').textContent=code;
+  }
+  ready(function(){
+    if(!window.CTS_SYNC) return;               // no sync client: card stays hidden
+    window.CTS_SYNC.available().then(function(up){
+      if(!up) return;                          // no API yet: promise nothing
+      $('code-card').style.display='block';
+      paint();
+      // a registered student with no code yet gets one on this visit
+      if(!window.CTS_SYNC.code()) window.CTS_SYNC.sync().then(paint, function(){});
+    }).catch(function(){});
+
+    $('code-copy').addEventListener('click', function(){
+      var btn=this, code=$('code-value').textContent;
+      var done=function(){
+        btn.innerHTML='<span class="en-only">Copied \u2713</span><span class="es-only">Copiado \u2713</span>';
+        setTimeout(function(){ btn.innerHTML='<span class="en-only">Copy</span><span class="es-only">Copiar</span>'; },2500);
+      };
+      // navigator.clipboard needs a secure context; some students are on http webviews
+      function fallback(){
+        try{
+          var t=document.createElement('textarea');
+          t.value=code; t.setAttribute('readonly','');
+          t.style.cssText='position:absolute;left:-9999px';
+          document.body.appendChild(t); t.select();
+          document.execCommand('copy'); document.body.removeChild(t); done();
+        }catch(e){
+          try{ var r=document.createRange(); r.selectNodeContents($('code-value'));
+               var sel=window.getSelection(); sel.removeAllRanges(); sel.addRange(r); }catch(e2){}
+        }
+      }
+      if(navigator.clipboard && navigator.clipboard.writeText)
+        navigator.clipboard.writeText(code).then(done,fallback);
+      else fallback();
+    });
+
+    $('code-restore').addEventListener('click', function(){
+      var btn=this, typed=($('code-input').value||'').trim();
+      if(!typed){ note('warn','Enter your code first.','Escriba primero su c\u00f3digo.'); return; }
+      btn.disabled=true;
+      note('ok','Checking\u2026','Comprobando\u2026');
+      window.CTS_SYNC.restore(typed).then(function(r){
+        btn.disabled=false;
+        if(!r || !r.ok){
+          note('warn','No record found for that code. Check it and try again.',
+                      'No se encontr\u00f3 ning\u00fan registro con ese c\u00f3digo. Rev\u00edselo e int\u00e9ntelo de nuevo.');
+          return;
+        }
+        paint();
+        var name=(r.student&&r.student.name)||'';
+        note('ok','Restored \u2014 '+name+', '+r.units+' units. Nothing already on this device was removed.',
+                  'Restaurado \u2014 '+name+', '+r.units+' unidades. No se elimin\u00f3 nada de lo que ya hab\u00eda en este dispositivo.');
+      }, function(){
+        btn.disabled=false;
+        note('warn','Could not reach the seminary. Try again later.',
+                    'No se pudo conectar con el seminario. Int\u00e9ntelo m\u00e1s tarde.');
+      });
+    });
+  });
+})();
 </script>
 </body>
 </html>

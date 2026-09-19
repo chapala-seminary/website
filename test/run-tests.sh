@@ -24,7 +24,16 @@ mkdir -p "$STATE"
 # is the hand-written front page as it stood before the catalog was generated,
 # taken straight from git so the check works in a fresh clone.
 cp test/fixtures/synctest.html test/fixtures/syncdown.html dist/
-git show c257ea2:public/index.html > dist/_reference-index.html
+# The gating check compares against the hand-written front page as it stood
+# before the catalog was generated. It lives in git rather than in the tree, so
+# a tarball export or a shallow clone without that commit has no reference --
+# in which case that one check is skipped, loudly, instead of aborting the run.
+if git show c257ea2:public/index.html > dist/_reference-index.html 2>/dev/null; then
+  HAVE_REFERENCE=1
+else
+  HAVE_REFERENCE=
+  rm -f dist/_reference-index.html
+fi
 trap 'rm -f dist/synctest.html dist/syncdown.html dist/_reference-index.html' EXIT
 
 # The local database is keyed by the database_id in $CONFIG, which is also what
@@ -44,30 +53,39 @@ for i in $(seq 1 60); do
   [ "$i" = 60 ] && { echo "the dev server never came up:"; tail -20 "$STATE/dev.log"; exit 1; }
 done
 
+node tools/verify-sitemap.mjs dist
+
 API_BASE="http://127.0.0.1:$PORT" node test/api.test.mjs
 
 # Some environments (the sandboxed Linux VM the desktop app runs commands in,
 # for one) have node and wrangler but not the shared libraries Chromium needs.
 # A skip is reported loudly and names what went unverified: a quiet skip is how
 # a suite ends up proving nothing.
-if node -e "require('playwright').chromium.launch().then(b=>b.close()).catch(()=>process.exit(1))" 2>/dev/null; then
+if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{};p.chromium.launch(o).then(b=>b.close()).catch(()=>process.exit(1))" 2>/dev/null; then
   SYNC_BASE="http://127.0.0.1:$PORT" node test/sync.test.mjs
-  node tools/verify-gating.mjs "http://127.0.0.1:$PORT" _reference-index.html
+  if [ -n "$HAVE_REFERENCE" ]; then
+    node tools/verify-gating.mjs "http://127.0.0.1:$PORT" _reference-index.html
+  else
+    echo "  SKIPPED: tools/verify-gating.mjs — commit c257ea2 is not in this"
+    echo "           checkout, so there is no reference front page to compare"
+    echo "           the course locking against."
+  fi
   node tools/verify-mobile.mjs "http://127.0.0.1:$PORT" dist 390
+  SYNC_BASE="http://127.0.0.1:$PORT" node test/code-ui.test.mjs
 else
   echo
-  echo "  ##################################################################"
-  echo "  # SKIPPED: the browser checks - Chromium will not start here.    #"
-  echo "  #                                                                #"
-  echo "  # NOT VERIFIED by this run: that no page scrolls sideways on a   #"
-  echo "  # phone, that the catalog still locks the courses it used to,    #"
-  echo "  # that cts-sync.js carries a student's progress to another       #"
-  echo "  # browser, that restoring never removes what a device already    #"
-  echo "  # had, and that the script stays dormant with no API deployed.   #"
-  echo "  # Run this suite where Chromium works before trusting any of     #"
-  echo "  # those.                                                         #"
-  echo "  #                                                                #"
-  echo "  # Usually: npx playwright install --with-deps chromium           #"
-  echo "  ##################################################################"
+  echo "  ######################################################################"
+  echo "  # SKIPPED: the browser checks - Chromium will not start here.        #"
+  echo "  #                                                                    #"
+  echo "  # NOT VERIFIED by this run: that a student can see their code and    #"
+  echo "  # restore from it, that no page scrolls sideways on a phone, that    #"
+  echo "  # the catalog still locks the courses it used to, that cts-sync.js   #"
+  echo "  # carries a student's progress to another browser, that restoring    #"
+  echo "  # never removes what a device already had, and that the script       #"
+  echo "  # stays dormant with no API deployed. Run this suite where           #"
+  echo "  # Chromium works before trusting any of those.                       #"
+  echo "  #                                                                    #"
+  echo "  # Usually: npx playwright install --with-deps chromium               #"
+  echo "  ######################################################################"
   echo
 fi

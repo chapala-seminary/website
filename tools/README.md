@@ -182,14 +182,19 @@ out of step with the catalog unnoticed.
 
     node tools/verify-sitemap.mjs [dist]
 
-Fails on a sitemap URL the build does not produce. **Reports, without failing,**
-the built pages the sitemap omits — which pages belong in a sitemap is a
-decision about the site, not something a tool should infer from the current file
-and then quietly enforce.
+The sitemap is generated now (`src/pages/sitemap.xml.ts`), so this holds it to
+the policy written there, in both directions: every course unit, certificate and
+reading room in the build must be listed; no reading digest and no excluded
+utility page may be; and every listed URL must be a page the build produces.
 
-It currently reports that **CTSPentecostal, a complete twelve-unit course, is
-absent from the sitemap** although it is linked from the front page, along with
-13 certificate pages, all 44 reading rooms and the 210 digests.
+It also fails if the sitemap has fewer than 500 URLs, because every "must not be
+listed" rule above is satisfied by an empty file.
+
+Earlier it only reported, because the inclusion policy was unwritten and a tool
+guessing at one would have quietly enforced a guess. What it reported was worth
+reporting: **CTSPentecostal, a complete twelve-unit course linked from the front
+page, was absent from the hand-maintained sitemap entirely**, along with twelve
+certificate pages and every reading room.
 
 ---
 
@@ -260,3 +265,15 @@ nothing the first did not.
 
 Confirmed to fail on the front page as it stood before the fix, and to pass
 after it.
+
+
+## The student-code interface
+
+`test/code-ui.test.mjs` (run by `npm test`) drives the two places a student sees
+their code — the registration card on the front page and the Save & Restore
+page — in a real browser against a real API: registering, copying, reloading,
+and restoring onto a second device with the code typed in lower case with
+spaces instead of dashes, as a person would.
+
+Confirmed to fail, with readable assertions rather than a click timeout, when
+the sync client is forced to report no API.

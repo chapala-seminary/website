@@ -598,6 +598,25 @@
           <button id="reg-save" type="button" onclick="ctsRegister()" style="padding:13px;border:0;border-radius:26px;background:#b08324;color:#3a1a1a;font:700 16px Georgia,serif;cursor:pointer;"><span class="en">Save Registration</span><span class="es">Guardar Registro</span></button>
         </div>
         <div id="reg-confirm" style="display:none;font-size:16px;line-height:1.5;background:#3a1a1a;padding:14px 16px;border-radius:8px;"></div>
+        <!-- The student code. Registration issues one silently; until something
+             shows it to the student, nobody can restore anything, which is the
+             whole point of keeping records at all. Hidden until the API is
+             live, so it never promises a recovery that cannot work yet. -->
+        <div id="reg-code" style="display:none;margin-top:12px;background:#fbf6ea;color:#2a241d;border-radius:8px;padding:14px 16px;">
+          <div style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#6d2233;margin-bottom:8px;font-weight:700;">
+            <span class="en">Your student code</span><span class="es">Su c&oacute;digo de estudiante</span>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+            <code id="reg-code-value" style="font:700 17px ui-monospace,Menlo,Consolas,monospace;letter-spacing:.09em;background:#fff;border:1px solid #d8c8a8;border-radius:6px;padding:9px 13px;">&mdash;</code>
+            <button id="reg-code-copy" type="button" style="border:1.5px solid #6d2233;background:#fff;color:#6d2233;border-radius:20px;padding:8px 18px;font:600 14px Georgia,serif;cursor:pointer;">
+              <span class="en">Copy</span><span class="es">Copiar</span>
+            </button>
+          </div>
+          <p style="margin:10px 0 0;font-size:14px;line-height:1.5;">
+            <span class="en">Write this down. It is the only way to bring your progress back if you clear this browser or change phone. You can find it again on the <a href="cts-backup.html" style="color:#6d2233;font-weight:700;">Save &amp; Restore</a> page.</span>
+            <span class="es">An&oacute;telo. Es la &uacute;nica manera de recuperar su progreso si borra este navegador o cambia de tel&eacute;fono. Puede volver a encontrarlo en la p&aacute;gina <a href="cts-backup.html" style="color:#6d2233;font-weight:700;">Guardar y Restaurar</a>.</span>
+          </p>
+        </div>
         <script>
         function ctsRegister(){
           var name=(document.getElementById('reg-name').value||'').trim();
@@ -617,8 +636,67 @@
           document.getElementById('cts-reg-form').style.display='none';
           var c=document.getElementById('reg-confirm'); c.style.display='block';
           c.innerHTML='<b>\u2713 '+name+'</b> \u2014 '+m.p+'.<br><span class="en">You are registered. Open any course to begin.</span><span class="es">Est&aacute; registrado. Abra cualquier curso para comenzar.</span>';
+          ctsShowCode();
         }
-        (function(){ try{ var s=JSON.parse(localStorage.getItem('cts_student')||'null'); if(s&&s.name&&!s._tester){ document.getElementById('cts-reg-form').style.display='none'; var c=document.getElementById('reg-confirm'); c.style.display='block'; c.innerHTML='<b>\u2713 '+s.name+'</b> \u2014 '+(s.program||'')+'.<br><span class="en">Already registered on this device.</span><span class="es">Ya est&aacute; registrado en este dispositivo.</span>'; } }catch(e){} })();
+
+        /* cts-sync.js issues the student code, asynchronously, and only once it
+           has found an API to issue it from. So this asks rather than assumes:
+           no API, no code, nothing shown. Every failure path is silent -- a
+           student who cannot reach the database is no worse off than today. */
+        function ctsShowCode(){
+          // cts-sync.js is deferred and loads at the end of the page, so on a
+          // return visit this runs first and CTS_SYNC is not there yet. Wait
+          // for it once rather than giving up silently.
+          if(!window.CTS_SYNC){
+            if(document.readyState==='loading')
+              document.addEventListener('DOMContentLoaded', ctsShowCode, {once:true});
+            return;
+          }
+          try{
+            window.CTS_SYNC.available().then(function(up){
+              if(!up) return null;
+              return window.CTS_SYNC.sync();
+            }).then(function(){
+              var code=window.CTS_SYNC.code();
+              if(!code) return;
+              document.getElementById('reg-code-value').textContent=code;
+              document.getElementById('reg-code').style.display='block';
+            }).catch(function(){});
+          }catch(e){}
+        }
+
+        (function(){
+          var btn=document.getElementById('reg-code-copy');
+          if(!btn) return;
+          btn.addEventListener('click', function(){
+            var code=document.getElementById('reg-code-value').textContent;
+            var done=function(){
+              btn.innerHTML='<span class="en">Copied \u2713</span><span class="es">Copiado \u2713</span>';
+              setTimeout(function(){ btn.innerHTML='<span class="en">Copy</span><span class="es">Copiar</span>'; }, 2500);
+            };
+            // execCommand is the fallback because navigator.clipboard needs a
+            // secure context, and some of these students are on http webviews.
+            if(navigator.clipboard && navigator.clipboard.writeText){
+              navigator.clipboard.writeText(code).then(done, fallback);
+            } else { fallback(); }
+            function fallback(){
+              try{
+                var t=document.createElement('textarea');
+                t.value=code; t.setAttribute('readonly','');
+                t.style.cssText='position:absolute;left:-9999px';
+                document.body.appendChild(t); t.select();
+                document.execCommand('copy'); document.body.removeChild(t); done();
+              }catch(e){
+                // last resort: select it so they can copy by hand
+                try{
+                  var r=document.createRange(); r.selectNodeContents(document.getElementById('reg-code-value'));
+                  var sel=window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+                }catch(e2){}
+              }
+            }
+          });
+        })();
+        (function(){ try{ var s=JSON.parse(localStorage.getItem('cts_student')||'null'); if(s&&s.name&&!s._tester){ document.getElementById('cts-reg-form').style.display='none'; var c=document.getElementById('reg-confirm'); c.style.display='block'; c.innerHTML='<b>\u2713 '+s.name+'</b> \u2014 '+(s.program||'')+'.<br><span class="en">Already registered on this device.</span><span class="es">Ya est&aacute; registrado en este dispositivo.</span>'; ctsShowCode(); } }catch(e){} })();
         </script>
       </section>
 
