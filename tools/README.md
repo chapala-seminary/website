@@ -239,3 +239,24 @@ same destination thirty-five times and names no course.
 Confirmed to **fail** with the gating script removed (35 courses unlocked that
 should not be), and to pass again once restored. It also fails if no cards
 render at all, so it cannot pass vacuously.
+
+## verify-mobile.mjs
+
+    node tools/verify-mobile.mjs <base-url> [dist-dir] [width]   # run by npm test
+
+Loads one page of every template family at 390px and fails if any of them
+scrolls sideways, naming the elements that stick out.
+
+A horizontal scrollbar is a real defect on a site built for people studying on
+their phones, and it is invisible on a laptop, which is where it always gets
+missed. Three pages had one and nobody had noticed: the front page (the
+registration fields), CTSBeforeYouBegin (the recognitions table) and
+CTS_ARCHIVE_INDEX (two columns of long page names).
+
+It samples rather than loading all 800 pages — one unit, one certificate and
+one reading room per course, five digests, and every standalone page — because
+pages of the same family share a template, so a fourth Genesis unit tells you
+nothing the first did not.
+
+Confirmed to fail on the front page as it stood before the fix, and to pass
+after it.

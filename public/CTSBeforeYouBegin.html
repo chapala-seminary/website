@@ -49,6 +49,20 @@
     padding:13px 30px;border-radius:30px;font-weight:600;letter-spacing:.3px;margin:5px}
   .btn.alt{background:#fff;color:var(--oxblood);border:1.5px solid var(--oxblood)}
   .em{color:var(--oxblood);font-style:italic}
+
+  /* Phones. The recognition names in the table's first column are
+     white-space:nowrap, which held the table at 373px inside a 346px column
+     and scrolled the whole page sideways on anything narrower than about
+     420px. Letting them wrap fixes it; the smaller type and tighter cells keep
+     three columns readable once they do.
+
+     This block has to come after .ct above: a media query adds no specificity,
+     so an override placed earlier in the sheet loses to the plain rule. */
+  @media(max-width:560px){
+    .ct{white-space:normal}
+    table{font-size:.92rem}
+    th,td{padding:8px 9px}
+  }
 </style>
 </head>
 <body class="lang-en">

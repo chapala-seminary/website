@@ -208,6 +208,20 @@
     body{font-size:18px}
     .people,.tracks{grid-template-columns:1fr}
   }
+
+  /* The registration fields used to push the whole page sideways on a phone.
+     The form is a one-column grid, and an auto-sized grid column cannot be
+     narrower than its widest item's min-content width -- which here comes from
+     the longest <option> in the country list, about 522px. Every field
+     stretched to that column, so the page scrolled horizontally on anything
+     narrower.
+
+     minmax(0,1fr) lets the column be as narrow as the container, and
+     min-width:0 drops each field's own automatic minimum so it cannot push the
+     column back out. border-box keeps the 11px padding inside the width rather
+     than adding to it. */
+  #cts-reg-form{grid-template-columns:minmax(0,1fr)}
+  #cts-reg-form>*{min-width:0;max-width:100%;box-sizing:border-box}
 </style>
 </head>
 <body class="lang-en">

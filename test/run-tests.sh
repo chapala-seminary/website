@@ -53,19 +53,21 @@ API_BASE="http://127.0.0.1:$PORT" node test/api.test.mjs
 if node -e "require('playwright').chromium.launch().then(b=>b.close()).catch(()=>process.exit(1))" 2>/dev/null; then
   SYNC_BASE="http://127.0.0.1:$PORT" node test/sync.test.mjs
   node tools/verify-gating.mjs "http://127.0.0.1:$PORT" _reference-index.html
+  node tools/verify-mobile.mjs "http://127.0.0.1:$PORT" dist 390
 else
   echo
-  echo "  ####################################################################"
-  echo "  #  SKIPPED: test/sync.test.mjs - Chromium will not start here.     #"
-  echo "  #                                                                  #"
-  echo "  #  NOT VERIFIED by this run: that the catalog still locks the      #"
-  echo "  #  courses it used to, that cts-sync.js carries a student's        #"
-  echo "  #  progress to another browser, that restoring never removes what  #"
-  echo "  #  a device already had, and that the script stays dormant with    #"
-  echo "  #  no API deployed. Run this suite where Chromium works before     #"
-  echo "  #  trusting any of those.                                          #"
-  echo "  #                                                                  #"
-  echo "  #  Usually: npx playwright install --with-deps chromium            #"
-  echo "  ####################################################################"
+  echo "  ##################################################################"
+  echo "  # SKIPPED: the browser checks - Chromium will not start here.    #"
+  echo "  #                                                                #"
+  echo "  # NOT VERIFIED by this run: that no page scrolls sideways on a   #"
+  echo "  # phone, that the catalog still locks the courses it used to,    #"
+  echo "  # that cts-sync.js carries a student's progress to another       #"
+  echo "  # browser, that restoring never removes what a device already    #"
+  echo "  # had, and that the script stays dormant with no API deployed.   #"
+  echo "  # Run this suite where Chromium works before trusting any of     #"
+  echo "  # those.                                                         #"
+  echo "  #                                                                #"
+  echo "  # Usually: npx playwright install --with-deps chromium           #"
+  echo "  ##################################################################"
   echo
 fi
