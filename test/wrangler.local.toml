@@ -1,0 +1,11 @@
+# Config used only by the test runner. Production bindings for a Pages project
+# are set on the project itself; wrangler.toml at the repo root documents the
+# shape, and this file gives the local harness a database id it can share
+# between `wrangler pages dev --d1 DB=local-dev` and `wrangler d1 execute`.
+name = "chapala-student-records-local"
+compatibility_date = "2026-09-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "chapala-students"
+database_id = "local-dev"

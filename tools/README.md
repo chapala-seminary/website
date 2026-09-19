@@ -190,3 +190,27 @@ and then quietly enforce.
 It currently reports that **CTSPentecostal, a complete twelve-unit course, is
 absent from the sitemap** although it is linked from the front page, along with
 13 certificate pages, all 44 reading rooms and the 210 digests.
+
+---
+
+# Stage 2: student records
+
+The API, the schema, the browser client and their tests live outside `tools/`
+because they ship with the site rather than migrating it:
+
+    migrations/0001_init.sql        the D1 schema
+    worker/api.js                   the API — a plain fetch handler, no deps
+    functions/                      Pages Functions adapters
+    public/assets/js/cts-sync.js    the browser half
+    test/run-tests.sh               npm test
+
+    npm run build && npm test
+
+Both suites run against a real Worker and a real D1 — never a stub, because the
+question being asked (does a student's progress survive moving to another
+device?) cannot be answered by a mock. The browser half needs Chromium; where
+it will not start, the runner **says so in a banner naming what went
+unverified** rather than skipping quietly.
+
+`docs/student-records.md` covers the design, the trade-offs, what a certificate
+does and does not prove, and what is still to decide before it goes live.

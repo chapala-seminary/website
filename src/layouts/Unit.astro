@@ -34,5 +34,10 @@ const unitJson = JSON.stringify(unit).replace(/</g, '\\u003c');
     <script is:inline set:html={`window.CTS_UNIT = ${unitJson};`} />
     <script is:inline src="/assets/js/cts-engine.js"></script>
     {scripts.map((src) => <script is:inline src={src}></script>)}
+    {/* Mirrors this browser's progress to the seminary's database so a cleared
+        browser or a new phone is no longer the end of someone's degree. It is
+        dormant until the API exists: one probe per tab, then silence. See
+        docs/student-records.md. */}
+    <script is:inline src="/assets/js/cts-sync.js" defer></script>
   </body>
 </html>
