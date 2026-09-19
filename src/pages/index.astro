@@ -1,0 +1,55 @@
+---
+/* The front page, with its course catalog generated from the collection.
+ *
+ * Everything outside <section id="catalog"> is the original page, carried
+ * verbatim in two halves (src/body/index/head.html and tail.html). That page
+ * is half a megabyte of hand-written markup, inline styles and base64 images;
+ * rewriting it was not the job. Replacing the 44 hand-maintained course cards
+ * with generated ones was.
+ */
+import { getCollection } from 'astro:content';
+import groups from '../data/catalog-groups.json';
+import intro from '../data/catalog-intro.json';
+
+const head = (await import('../body/index/head.html?raw')).default;
+const tail = (await import('../body/index/tail.html?raw')).default;
+
+const courses = (await getCollection('courses'))
+  .map((e) => e.data)
+  .sort((a, b) => a.order - b.order);
+
+// Invariants the hand-written catalog had no way to enforce.
+if (courses.length !== intro.statedCount)
+  throw new Error(
+    `the catalog lead says ${intro.statedCount} courses but the collection has ` +
+    `${courses.length}. Update src/data/catalog-intro.json -- the count is spelled ` +
+    `out in words in both languages, so it cannot be derived.`);
+
+const known = new Set(groups.map((g) => g.id));
+for (const c of courses)
+  if (!known.has(c.group))
+    throw new Error(`${c.code} is in group "${c.group}", which has no heading in catalog-groups.json`);
+
+const byGroup = groups.map((g) => ({ ...g, courses: courses.filter((c) => c.group === g.id) }));
+const empty = byGroup.filter((g) => !g.courses.length);
+if (empty.length)
+  throw new Error(`group(s) with a heading but no courses: ${empty.map((g) => g.id).join(', ')}`);
+---
+<Fragment set:html={head} />
+<section id="catalog">
+    <div class="kicker"><span class="en">{intro.kicker.en}</span><span class="es">{intro.kicker.es}</span></div>
+    <h2 class="section"><span class="en">{intro.heading.en}</span><span class="es">{intro.heading.es}</span></h2>
+    <p><span class="en">{intro.lead.en}</span>
+    <span class="es">{intro.lead.es}</span></p>
+{byGroup.map((g) => (
+    <div class="catgroup">
+      <h3><span class="en">{g.title.en}</span><span class="es">{g.title.es}</span></h3>
+      <div class="grid">
+        {g.courses.map((c) => (
+        <a class="course" href={c.entry}><div class="c-title"><span class="en">{c.title.en}</span><span class="es">{c.title.es}</span></div><div class="c-desc"><span class="en">{c.description.en}</span><span class="es">{c.description.es}</span></div><span class="c-go"><span class="en">Begin →</span><span class="es">Comenzar →</span></span></a>
+        ))}
+      </div>
+    </div>
+))}
+  </section>
+<Fragment set:html={tail} />

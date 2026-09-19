@@ -57,4 +57,25 @@ const units = defineCollection({
   }),
 });
 
-export const collections = { units };
+/* The 44 course cards on the front page were hand-written HTML. They are now
+   a collection, which is what Stage 3's CMS will edit. The schema is what stops
+   a card linking somewhere that does not exist, or landing in a group with no
+   heading -- both of which a hand-edited catalog invites. */
+const courses = defineCollection({
+  loader: glob({
+    pattern: '*.json',
+    base: './src/content/courses',
+    generateId: ({ entry }) => entry.replace(/\.json$/, ''),
+  }),
+  schema: z.object({
+    code: z.string().min(1),
+    entry: z.string().regex(/^[A-Za-z0-9_]+\.html$/, 'entry must be a page in the site root'),
+    engine: z.boolean(),          // false for the four standalone course pages
+    group: z.string().min(1),
+    order: z.number().int().positive(),
+    title: bilingual,
+    description: bilingual,
+  }),
+});
+
+export const collections = { units, courses };

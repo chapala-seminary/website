@@ -138,3 +138,55 @@ checks both trees.
 
 Record a new baseline only when the content is *meant* to change, and say why in
 the commit.
+
+## extract-catalog.mjs
+
+One-time extraction. The front page carried 44 hand-written course cards; this
+turns them into `src/content/courses/*.json` plus `src/data/catalog-groups.json`
+and `catalog-intro.json`, and splits `index.html` into the two halves that sit
+either side of the catalog (`src/body/index/head.html` and `tail.html`).
+
+It refuses to guess. An unknown HTML entity, a card that is not a plain en/es
+pair, a card containing markup, a duplicate course code, a link to a page
+nothing in the site provides, or a parsed card count that disagrees with the
+number of `<a class="course">` in the section all abort the run. Four of the 44
+courses (ethics, the two preaching workshops, counseling) are single standalone
+pages rather than unit-page courses; they are catalogued the same way and
+carry `engine: false`.
+
+Text is stored decoded — literal `ó`, not `&oacute;` — because a CMS cannot
+sensibly edit entities. That is why the catalog check compares rendered text
+rather than bytes.
+
+## verify-catalog.mjs
+
+    node tools/verify-catalog.mjs                        # git reference vs dist/
+    node tools/verify-catalog.mjs <original> <built>
+
+Normalises both catalogs the same way (entities resolved, inter-tag whitespace
+collapsed) and compares them character for character: same tags, same
+attributes, same order, same text. The reference is `index.html` as it stood in
+the last commit where the catalog was hand-written, read out of git so the check
+works in a fresh clone.
+
+Confirmed to **fail** on a one-letter change to a course description, then pass
+again once reverted.
+
+Three further invariants live in `src/pages/index.astro` and fail the build: the
+course count stated in the lead must match the collection, every course's group
+must have a heading, and every heading must have courses. The lead spells the
+count out in words in two languages, so it stays authored — but it cannot drift
+out of step with the catalog unnoticed.
+
+## verify-sitemap.mjs
+
+    node tools/verify-sitemap.mjs [dist]
+
+Fails on a sitemap URL the build does not produce. **Reports, without failing,**
+the built pages the sitemap omits — which pages belong in a sitemap is a
+decision about the site, not something a tool should infer from the current file
+and then quietly enforce.
+
+It currently reports that **CTSPentecostal, a complete twelve-unit course, is
+absent from the sitemap** although it is linked from the front page, along with
+13 certificate pages, all 44 reading rooms and the 210 digests.
