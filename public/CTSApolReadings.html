@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CTS Apologetics — Supplemental Reading Room</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root{
+    --primary:#1f3352;
+    --primary-deep:#152442;
+    --gold:#c9a227;
+    --gold-deep:#98771d;
+    --paper:#eef1f4;
+    --card:#fffefb;
+    --border:#cdd6e2;
+    --ink:#1c2530;
+    --ink-soft:#4e5b6b;
+  }
+
+  body{
+    font-family: Georgia, 'Times New Roman', serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 17px;
+    padding: 20px;
+  }
+  .container{ max-width: 900px; margin: 0 auto; }
+
+  /* ---------- language toggle mechanics (house pattern) ---------- */
+  body.lang-en .lang-es{ display:none; }
+  body.lang-en .lang-en{ display:inline; }
+  body.lang-es .lang-en{ display:none; }
+  body.lang-es .lang-es{ display:inline; }
+  .lang-en.block, .lang-es.block{ display:none; }
+  body.lang-en .lang-en.block{ display:block; }
+  body.lang-es .lang-es.block{ display:block; }
+  body.lang-both .lang-es.block{ display:block; }
+  body.lang-both .lang-en.block{ display:block; }
+  body.lang-both .lang-es:not(.block){ display:inline; }
+  body.lang-both .lang-en:not(.block){ display:inline; }
+  body.lang-both .lang-es.block{ opacity:.9; border-top:1px dashed var(--border); margin-top:8px; padding-top:8px; }
+
+  /* ---------- toggle bar ---------- */
+  .bar{
+    background:#d6dee9; border-radius:40px; padding:10px 14px;
+    display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center; margin-bottom:26px;
+  }
+  .bar span.bar-label{ color:var(--ink-soft); font-size:.85rem; margin-right:4px; }
+  .toggle-btn{
+    background:var(--card); color:var(--primary); border:1px solid var(--border);
+    border-radius:30px; padding:7px 18px; cursor:pointer; font-family:inherit; font-size:.92rem;
+  }
+  .toggle-btn.active{ background:var(--primary); color:#fff; border-color:var(--primary); }
+
+  /* ---------- masthead ---------- */
+  .mast{ text-align:center; padding:14px 0 6px; }
+  .mast .eyebrow{
+    letter-spacing:.3em; text-transform:uppercase; font-size:.72rem; color:var(--gold-deep); margin-bottom:12px;
+  }
+  .mast h1{ color:var(--primary); font-size:2.05rem; line-height:1.2; font-weight:normal; }
+  .mast .rule{ width:88px; height:2px; background:var(--gold); margin:18px auto 14px; }
+  .mast .sub{ color:var(--ink-soft); font-style:italic; font-size:1.02rem; }
+
+  /* ---------- cards ---------- */
+  .card{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    padding:22px 24px; margin:22px 0; box-shadow:0 4px 12px rgba(0,0,0,.05);
+  }
+  .card h2{
+    color:var(--primary); font-size:1.18rem; font-weight:normal;
+    border-left:4px solid var(--gold); padding-left:14px; margin-bottom:12px;
+  }
+  .card p{ margin:9px 0; }
+  .card p.lead{ margin-top:2px; }
+
+  .honors{ border-left:none; border-top:4px solid var(--gold); }
+  .honors h2{ border-left:none; padding-left:0; }
+  .pill-note{ display:inline-block; background:#e5ebf2; border:1px solid var(--border); border-radius:20px; padding:3px 12px; font-size:.82rem; color:var(--primary); margin-top:4px; }
+
+  /* ---------- reading entries ---------- */
+  .shelf-head{ margin:34px 0 6px; text-align:center; }
+  .shelf-head h2{
+    color:var(--primary); font-weight:normal; font-size:1.4rem; border:none; padding:0; display:inline-block;
+  }
+  .shelf-head .rule{ width:60px; height:2px; background:var(--gold); margin:12px auto 0; }
+  .counter{
+    position:sticky; top:8px; z-index:5;
+    background:var(--primary); color:#fff; border-radius:30px;
+    padding:8px 18px; text-align:center; font-size:.95rem; margin:16px auto 6px; max-width:280px;
+    box-shadow:0 3px 10px rgba(0,0,0,.14);
+  }
+  .counter b{ color:var(--gold); }
+
+  .entry{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    padding:20px 22px; margin:16px 0; box-shadow:0 4px 12px rgba(0,0,0,.05);
+    transition:box-shadow .18s ease, border-color .18s ease;
+  }
+  .entry:hover{ box-shadow:0 7px 20px rgba(31,51,82,.14); }
+  .entry.chosen{ border-color:var(--primary); box-shadow:0 0 0 2px var(--primary) inset, 0 7px 20px rgba(31,51,82,.16); }
+  .entry .locus{
+    letter-spacing:.16em; text-transform:uppercase; font-size:.68rem; color:var(--gold-deep); margin-bottom:8px;
+  }
+  .entry .title{ font-size:1.14rem; color:var(--primary); margin-bottom:2px; }
+  .entry .title .num{
+    display:inline-block; min-width:1.7em; color:var(--gold-deep); font-style:italic;
+  }
+  .entry .byline{ color:var(--ink-soft); font-style:italic; font-size:.92rem; margin-bottom:10px; padding-left:1.7em; }
+  .entry .caption{ font-size:.98rem; }
+  .entry .foot{
+    display:flex; flex-wrap:wrap; gap:12px 20px; align-items:center; justify-content:space-between;
+    margin-top:14px; padding-top:12px; border-top:1px solid var(--border);
+  }
+  .read-link{
+    color:var(--primary); text-decoration:none; font-size:.95rem; border-bottom:1.5px solid var(--gold); padding-bottom:1px;
+  }
+  .read-link:hover{ color:var(--gold-deep); }
+  .read-links{ display:flex; flex-wrap:wrap; gap:6px 16px; align-items:center; }
+  .read-link.mod{ border-bottom-color:var(--primary); }
+  .pick{ display:inline-flex; align-items:center; gap:9px; cursor:pointer; font-size:.92rem; color:var(--ink); user-select:none; }
+  .pick input{ width:19px; height:19px; accent-color:var(--primary); cursor:pointer; }
+  .pick.disabled{ opacity:.4; cursor:not-allowed; }
+
+  /* ---------- millennial views panel (unused in this course; retained for template parity) ---------- */
+  .millennial{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    padding:22px 24px; margin:22px 0; box-shadow:0 4px 12px rgba(0,0,0,.05);
+  }
+  .millennial > h2{
+    color:var(--primary); font-size:1.18rem; font-weight:normal;
+    border-left:4px solid var(--gold); padding-left:14px; margin-bottom:10px;
+  }
+  .millennial .intro{ margin:8px 0 6px; }
+  .mv-grid{ margin-top:14px; }
+  .entry.mv{ box-shadow:none; border:none; border-top:1px solid var(--border); border-radius:0; margin:0; padding:18px 0; }
+  .entry.mv:first-of-type{ border-top:none; padding-top:4px; }
+  .entry.mv:hover{ box-shadow:none; }
+  .entry.mv.chosen{ box-shadow:none; border-top:1px solid var(--border); background:#e5ebf2; border-radius:8px; padding:14px 12px; }
+  .entry.mv:first-of-type.chosen{ border-top:none; }
+  .view-badge{
+    display:inline-block; background:var(--gold); color:var(--primary-deep);
+    font-size:.72rem; font-weight:bold; letter-spacing:.11em; text-transform:uppercase;
+    padding:5px 14px; border-radius:20px; margin-bottom:10px;
+  }
+
+  .limit-note{ text-align:center; color:var(--gold-deep); font-size:.9rem; min-height:1.2em; margin:4px 0 0; }
+
+  /* ---------- attestation ---------- */
+  .attest label.field{ display:block; margin:14px 0 6px; font-size:.9rem; color:var(--ink-soft); }
+  .attest input[type=text]{
+    width:100%; font-family:inherit; font-size:1rem; padding:11px 14px;
+    border:1px solid var(--border); border-radius:10px; background:#fffef9; color:var(--ink);
+  }
+  .attest .oath{
+    display:flex; gap:11px; align-items:flex-start; margin:16px 0; font-size:.96rem; background:#e5ebf2;
+    border:1px solid var(--border); border-radius:10px; padding:12px 14px;
+  }
+  .attest .oath input{ width:20px; height:20px; margin-top:2px; accent-color:var(--primary); flex-shrink:0; }
+  .btn{
+    background:var(--primary); color:#fff; border:none; border-radius:30px;
+    padding:11px 26px; cursor:pointer; font-family:inherit; font-size:1rem; margin-top:6px;
+  }
+  .btn:hover{ background:var(--primary-deep); }
+  .btn.ghost{ background:transparent; color:var(--primary); border:1px solid var(--primary); }
+  .msg{ color:var(--gold-deep); font-size:.92rem; margin-top:12px; min-height:1.2em; }
+
+  .record{ display:none; }
+  .record.show{ display:block; }
+  .record .seal-line{ width:70px; height:2px; background:var(--gold); margin:6px 0 16px; }
+  .record h3{ color:var(--primary); font-weight:normal; font-size:1.3rem; margin-bottom:4px; }
+  .record .named{ font-size:1.5rem; color:var(--primary); border-bottom:1px solid var(--gold-deep); display:inline-block; padding:0 10px 4px; margin:6px 0 12px; }
+  .record ul{ margin:12px 0 12px 20px; } .record li{ margin:5px 0; }
+  .record .stamp{ font-style:italic; color:var(--ink-soft); font-size:.92rem; }
+
+  .footnote{ text-align:center; color:var(--ink-soft); font-size:.82rem; margin:30px 0 6px; }
+
+  a:focus-visible, input:focus-visible, button:focus-visible, label:focus-within{
+    outline:3px solid var(--gold); outline-offset:2px;
+  }
+
+  @media (max-width:520px){
+    body{ font-size:16px; padding:14px; }
+    .mast h1{ font-size:1.7rem; }
+    .entry .foot{ flex-direction:column; align-items:flex-start; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; animation:none !important; }
+  }
+
+  /* ---------- print: show only the record ---------- */
+  @media print{
+    body{ background:#fff; }
+    .builder, .bar, .no-print, .entry, .counter, .attest .oath, .attest input, .attest label.field, .attest .btn, .msg, .limit-note{ display:none !important; }
+    .card.attest{ border:none; box-shadow:none; }
+    .record{ display:block !important; }
+  }
+
+.assignment{margin:14px 0 4px;padding:12px 14px;border-left:4px solid #8f6c2f;background:rgba(143,108,47,.08);border-radius:4px}.assignment p{margin:0;line-height:1.55}.assignment .length{white-space:nowrap;font-style:italic}.source-note{font-size:.82rem;opacity:.82;margin-top:6px}.source-note strong{font-weight:700}
+</style>
+<style>
+.digest-inline{margin:12px 0 6px;border:1px solid var(--border,#e2d6c9);border-radius:9px;background:#fff;overflow:hidden}
+.digest-inline>summary{cursor:pointer;list-style:none;padding:11px 13px;font-family:Arial,Helvetica,sans-serif;font-weight:700;color:var(--primary,#33608f);display:flex;align-items:center;gap:9px}
+.digest-inline>summary::-webkit-details-marker{display:none}
+.digest-inline>summary::after{content:"\25B8";margin-left:auto;color:var(--gold-deep,#8a5a3c)}
+.digest-inline[open]>summary::after{content:"\25BE"}
+.dg-badge{flex:none;background:var(--primary,#33608f);color:#fff;font:800 .6rem/1 Arial,sans-serif;letter-spacing:.11em;padding:5px 8px;border-radius:5px}
+.dg-note-line{font-family:Arial,sans-serif;font-size:.82rem;color:var(--ink-soft,#6b5b4d);padding:0 15px 8px}
+.dg-scroll{padding:2px 15px 16px;border-top:1px solid var(--border,#eee)}
+.dg-block{max-width:none;margin:0}
+.dg-block .dg-doc{border-bottom:1.5px solid var(--border,#e2d6c9);padding-bottom:10px;margin:10px 0 12px}
+.dg-block h1{font-size:1.25rem;line-height:1.25;margin:.1rem 0 .4rem;color:var(--primary,#33608f)}
+.dg-block .dg-sub{color:var(--ink-soft,#6b5b4d);font-style:italic;margin:0 0 .5rem;font-size:.95rem}
+.dg-block .dg-src{font-size:.8rem;color:var(--ink-soft,#6b5b4d);margin:.2rem 0}
+.dg-block .dg-chips{margin:.5rem 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:.35rem}
+.dg-block .dg-chips li{font:700 .66rem/1 Arial,sans-serif;background:var(--card,#eef2f6);color:var(--primary,#33608f);border:1px solid var(--border,#d5d5d5);border-radius:999px;padding:3px 8px}
+.dg-block .dg-note{background:var(--card,#eef2f6);border-left:3px solid var(--gold-deep,#8a5a3c);padding:.7rem .9rem;margin:1rem 0;font-size:.92rem;line-height:1.5}
+.dg-block h2{font-size:1.05rem;margin:1.3rem 0 .4rem;padding-top:.35rem;border-top:1px solid var(--border,#ece2d6);color:var(--primary,#33608f)}
+.dg-block h2 .dg-n{color:var(--gold-deep,#8a5a3c);font-weight:400;margin-right:.35rem}
+.dg-block p{margin:0 0 .8rem;font-size:.97rem;line-height:1.6}
+.dg-block blockquote{margin:1rem 0;padding:.2rem 0 .2rem 1rem;border-left:3px solid var(--border,#e2d6c9);font-style:italic;color:#444}
+.dg-block .dg-reflect{background:var(--card,#eef2f6);padding:.7rem .9rem;border-radius:6px;margin:1rem 0}
+.dg-block footer{margin-top:1.4rem;padding-top:.8rem;border-top:1.5px solid var(--border,#e2d6c9);font-size:.8rem;color:var(--ink-soft,#6b5b4d);line-height:1.5}
+</style></head>
+<body class="lang-en">
+<div class="container">
+<!-- ============ LANGUAGE TOGGLE ============ -->
+<div class="bar no-print">
+<span class="bar-label lang-en">Language:</span>
+<span class="bar-label lang-es">Idioma:</span>
+<button class="toggle-btn active" data-lang="en" onclick="setLang('en')">English</button>
+<button class="toggle-btn" data-lang="es" onclick="setLang('es')">Español</button>
+<button class="toggle-btn" data-lang="both" onclick="setLang('both')">Both / Ambos</button>
+</div>
+<!-- ===== HONORS PROMPT (added by retrofit) ===== -->
+<div class="bar no-print" style="background:#f6f0e2;border:1px solid #e3d6bd;">
+<span class="lang-en">✦ Pursuing a degree <b>With Honors</b>? Complete this class's reading below, then track your progress:</span>
+<span class="lang-es">✦ ¿Cursando un título <b>Con Honores</b>? Complete la lectura de esta clase abajo, luego siga su progreso:</span>
+<a class="toggle-btn" href="cts-honors.html" style="text-decoration:none;"><span class="lang-en">Honors page ↗</span><span class="lang-es">Página de Honores ↗</span></a>
+</div>
+<!-- ============ MASTHEAD ============ -->
+<div class="mast">
+<div class="eyebrow">Chapala Theological Seminary · Apologetics</div>
+<h1>
+<span class="lang-en">Supplemental Reading Room</span>
+<span class="lang-es">Sala de Lecturas Complementarias</span>
+</h1>
+<div class="rule"></div>
+<div class="sub">
+<span class="lang-en">A reason for the hope that is in you — choose any three</span>
+<span class="lang-es">Razón de la esperanza que hay en ti — elija tres cualesquiera</span>
+</div>
+</div>
+<!-- ============ FRAMING ============ -->
+<div class="card">
+<h2>
+<span class="lang-en">How to read this shelf</span>
+<span class="lang-es">Cómo leer este estante</span>
+</h2>
+<p class="lead lang-en block">This course teaches the defense of the Christian faith — giving a reasoned answer, with gentleness and respect, for the hope that is in us (1 Peter 3:15). These seven readings are bilingual Chapala Theological Seminary digests, walking through the great questions of apologetics — what apologetics is and its spirit, whether God exists, the evidence for Christ and the resurrection, the problem of suffering and doubt, and the reasonableness of faith — and drawing on its classic public-domain defenders, from Greenleaf and Paley to Pascal, Augustine, Athanasius, and Chesterton. Each is written to be read on its own, in English or Spanish, entirely offline. Choose any three, read them in full, and record your reading below.</p>
+<p class="lang-en block">These seven readings draw on the great public-domain defenders of the faith — Simon Greenleaf weighing the Gospels as a court weighs testimony, William Paley and Joseph Butler on the witness of creation, Athanasius on the incarnation, Pascal and Augustine on the reasons of the heart, and G. K. Chesterton on how Christianity fits the world. Read these digests to see that faith is not a blind leap, but rests on real ground — and learn to give a reason for your hope, with meekness and respect.</p>
+<p class="lead lang-es block">Este curso enseña la defensa de la fe cristiana — dar razón, con afabilidad y respeto, de la esperanza que hay en nosotros (1 Pedro 3:15). Estas siete lecturas son resúmenes bilingües del Seminario Teológico de Chapala, que recorren las grandes preguntas de la apologética — qué es la apologética y su espíritu, si Dios existe, la evidencia de Cristo y la resurrección, el problema del sufrimiento y la duda, y la razonabilidad de la fe — y se apoyan en sus defensores clásicos de dominio público, desde Greenleaf y Paley hasta Pascal, Agustín, Atanasio, y Chesterton. Cada una está escrita para leerse por sí sola, en inglés o español, enteramente sin conexión. Elija tres cualesquiera, léalas por completo, y registre su lectura abajo.</p>
+<p class="lang-es block">Estas siete lecturas se apoyan en los grandes defensores de la fe de dominio público — Simon Greenleaf sopesando los Evangelios como un tribunal sopesa el testimonio, William Paley y Joseph Butler sobre el testimonio de la creación, Atanasio sobre la encarnación, Pascal y Agustín sobre las razones del corazón, y G. K. Chesterton sobre cómo el cristianismo encaja con el mundo. Lea estos resúmenes para ver que la fe no es un salto ciego, sino que descansa sobre terreno real — y aprenda a dar razón de su esperanza, con mansedumbre y respeto.</p>
+</div>
+<!-- ============ HONORS ============ -->
+<div class="card honors">
+<h2>
+<span class="lang-en">With Honors — an invitation, not a requirement</span>
+<span class="lang-es">Con Honores — una invitación, no un requisito</span>
+</h2>
+<p class="lang-en block">Your degree is complete without these readings. Every CTS degree — the Certificate, the Associate of Divinity, the Th.M., and the M.Div. — is earned in full through the course units themselves, and no student is ever penalized for being unable to reach this material.</p>
+<p class="lang-en block">These supplemental readings are the path to one added distinction — your degree awarded <em>with honors</em>. Each class whose reading you complete counts toward it: twelve classes for the Certificate or the Th.M., twenty-five for the Associate, and thirty for the M.Div. Choose any three of the readings below, read them in full, and record your reading on your honor — then track your progress on the Honors page.</p>
+<p class="lang-es block">Su título está completo sin estas lecturas. Todo título de CTS — el Certificado, el Asociado en Divinidad, la Maestría en Teología, y la Maestría en Divinidad — se obtiene por completo mediante las unidades del curso mismo, y ningún estudiante es penalizado por no poder acceder a este material.</p>
+<p class="lang-es block">Estas lecturas complementarias son el camino hacia una distinción adicional — su título otorgado <em>con honores</em>. Cada clase cuya lectura complete cuenta para ella: doce clases para el Certificado o la Maestría en Teología, veinticinco para el Asociado o la Maestría en Divinidad. Elija tres cualesquiera de las lecturas de abajo, léalas por completo, y registre su lectura bajo su honor — luego siga su progreso en la página de Honores.</p>
+<span class="pill-note lang-en">No constant internet required — see below</span>
+<span class="pill-note lang-es">No se requiere internet constante — vea abajo</span>
+</div>
+<!-- ============ ACCESS / OFFLINE ============ -->
+<div class="card">
+<h2>
+<span class="lang-en">Reading offline</span>
+<span class="lang-es">Leer sin conexión</span>
+</h2>
+<p class="lang-en block">Every one of these seven readings is a Chapala Theological Seminary bilingual digest, written by CTS and included in your course download — so all of them open directly on your device, in English or Spanish, with no internet connection at all. Each digest takes up one of the great questions of apologetics and rests on the classic public-domain defenders of the faith, but the digests themselves are CTS-authored teaching, not reproductions, and those classic works are freely available online for any who wish to read them in full.</p>
+<p class="lang-es block">Cada una de estas siete lecturas es un resumen bilingüe del Seminario Teológico de Chapala, escrito por el STC e incluido en la descarga de su curso — de modo que todas se abren directamente en su dispositivo, en inglés o español, sin conexión alguna. Cada resumen toma una de las grandes preguntas de la apologética y se apoya en los defensores clásicos de dominio público de la fe, pero los resúmenes mismos son enseñanza de autoría del STC, no reproducciones, y esas obras clásicas están disponibles gratuitamente en línea para quien desee leerlas por completo.</p>
+</div>
+<!-- ============ TRANSLATE ============ -->
+<div class="card">
+<h2>
+<span class="lang-en">Reading in another language</span>
+<span class="lang-es">Leer en otro idioma</span>
+</h2>
+<p class="lang-en block">Most of these works are in English. If you would rather read in Spanish or another language, the Chrome browser can translate a whole page for you. On a computer, right-click anywhere on the opened reading and choose “Translate to…”. On an Android phone or tablet, tap the three-dot menu and choose “Translate”. On an iPhone or iPad, tap the translate icon in the address bar — or open the page in the Chrome app if you don't see it. Machine translation is not perfect, but it is enough to follow the argument.</p>
+<p class="lang-es block">La mayoría de estas obras están en inglés. Si prefiere leer en español u otro idioma, el navegador Chrome puede traducir una página entera por usted. En una computadora, haga clic derecho en cualquier parte de la lectura abierta y elija “Traducir a…”. En un teléfono o tableta Android, toque el menú de tres puntos y elija “Traducir”. En un iPhone o iPad, toque el ícono de traducción en la barra de direcciones — o abra la página en la aplicación Chrome si no lo ve. La traducción automática no es perfecta, pero basta para seguir el argumento.</p>
+</div>
+<!-- ============ THE SHELF ============ -->
+<div class="shelf-head">
+<h2>
+<span class="lang-en">The Seven Readings</span>
+<span class="lang-es">Las Siete Lecturas</span>
+</h2>
+<div class="rule"></div>
+</div>
+<div class="counter no-print">
+<span class="lang-en">Chosen: <b id="cnt-en">0</b> of 3</span>
+<span class="lang-es">Elegidas: <b id="cnt-es">0</b> de 3</span>
+</div>
+<p class="limit-note no-print" id="limitNote"></p>
+<!-- 1 -->
+<article class="entry" data-id="1" data-title-en="Always Ready to Give an Answer &mdash; CTS digest" data-title-es="Siempre Listos para Dar Razón &mdash; resumen STC">
+<div class="locus"><span class="lang-en">Introduction: the nature and spirit of apologetics &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">Introducción: la naturaleza y el espíritu de la apologética &middot; un resumen biling&uuml;e del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">1.</span><span class="lang-en">Always Ready to Give an Answer</span><span class="lang-es">Siempre Listos para Dar Razón</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">What apologetics is (a reasoned <em>apologia</em>, from 1 Peter 3:15); the gracious spirit — “with meekness and fear,” never to win but to commend Christ; the great questions it addresses; that biblical faith is not blind but trust on solid ground (“come and see”); and the honest limits — apologetics removes obstacles, but faith is God’s gift and the Spirit opens the heart.</p>
+<p class="caption lang-es block">Qué es la apologética (una <em>apologia</em> razonada, de 1 Pedro 3:15); el espíritu afable — “con mansedumbre y reverencia,” nunca para ganar sino para recomendar a Cristo; las grandes preguntas que aborda; que la fe bíblica no es ciega sino confianza sobre terreno sólido (“ven y ve”); y los honestos límites — la apologética quita obstáculos, pero la fe es el don de Dios y el Espíritu abre el corazón.</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>Always Ready to Give an Answer</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — an introduction to apologetics: what it is, the questions it answers, and the spirit in which it is done</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain works of apologetics (Pascal, Chesterton, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Course: Apologetics</li>
+<li>A Reasoned Defense</li>
+<li>With Meekness</li>
+<li>Anchored in classics</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> Apologetics is the giving of a reasoned defense of the Christian faith. This first reading introduces what apologetics is, the great questions it addresses, and — just as important — the gentle, respectful spirit in which it is to be done, following 1 Peter 3:15.
+    </div>
+<h2><span class="dg-n">1.</span>What Is Apologetics?</h2>
+<p>The word "apologetics" can be misleading, because it has nothing to do with saying you are sorry. It comes from an old Greek word, <em>apologia</em>, which simply means a reasoned defense — the kind of case a person might make to explain and support a position. And the word comes to us straight out of Scripture. The apostle Peter tells every believer to be "always ready to give a defense to everyone who asks you a reason for the hope that is in you." That readiness to give a reason for our hope is what apologetics is. It is nothing new in the church; the apostles themselves reasoned with people, argued from the Scriptures, and sought to persuade, and Christians have been giving an honest account of their faith ever since. In short, apologetics seeks to show that the Christian faith is true and reasonable, to answer the objections people raise against it, and to clear away the obstacles that stand between a person and Christ. And it is not the special task of scholars and experts only. It is for every ordinary believer — simply to be ready, when someone asks, to give a reason for the hope that is within us.</p>
+<h2><span class="dg-n">2.</span>The Spirit of Apologetics</h2>
+<p>Now here is something of the very greatest importance, and it is easy to miss. The same short verse that commands us to give a defense also commands us, in the very same breath, exactly <em>how</em> we are to give it: "with meekness and fear" — that is, with gentleness and deep respect. This must never be forgotten. Apologetics is not about winning arguments, or scoring clever points, or humiliating the person who disagrees with us, or proving how much smarter we are. It is about bearing honest witness to the truth, and commending Christ to another human soul. The aim is never to browbeat or corner someone into grudging agreement; it is to remove the obstacles in their way and to point them to Christ, and then to trust God to do His own work in their heart. This matters enormously, because apologetics done in the wrong spirit — arrogantly, aggressively, with a sneer — drives people away from the gospel, however clever the arguments may be. But apologetics done in the right spirit — humbly, lovingly, patiently, and honestly — adorns the gospel and commends it. This is the spirit our seminary seeks in all its defense of the faith: genuinely confident in the truth, and genuinely gentle in the manner.</p>
+<h2><span class="dg-n">3.</span>The Great Questions</h2>
+<p>What sorts of questions, then, does apologetics take up? They are the real questions that thoughtful and honest people actually ask. Does God exist at all — and if so, how could we know? Is Christianity actually <em>true</em> — is there real evidence that Jesus lived, and died, and rose again? If God is good and all-powerful, then why is there so much suffering and evil in the world? Is religious faith reasonable, or is it just blind believing against the evidence? And why Christ in particular — why not some other religion, or none at all? These are not foolish or hostile questions to be brushed aside; they are serious questions that deserve serious answers. And the great encouragement is this: the Christian faith actually has answers to them — answers that are not always tidy or mathematically airtight, but that are substantial, thoughtful, and deeply satisfying. We do not need to be afraid of these questions, or to hide from them. In the readings that follow, we will take several of them up in turn.</p>
+<h2><span class="dg-n">4.</span>Faith Is Not Blind</h2>
+<p>One very common misconception has to be cleared away at the start: the idea that faith means believing something without any reasons at all, or even believing it against all the evidence, by a kind of sheer willpower. That is not what the Bible means by faith. Biblical faith is not blind. It is not a leap into the dark; it is trust that rests upon good and solid ground — upon what God has made plain in His creation, upon what He has done in history, and, above everything else, upon the person of Christ Himself. An old and beautiful phrase describes the Christian mind at work: "faith seeking understanding." Now it is true and important to say that the evidence does not <em>compel</em> belief in the way a mathematical proof forces a conclusion; God, in His wisdom, leaves genuine room for the human heart either to seek Him or to resist Him. But that is a very different thing from saying there is no ground for faith at all. There is real and ample ground. And so Christianity has never been afraid to invite honest examination. Its oldest invitation to the doubter is simply this: "Come and see."</p>
+<h2><span class="dg-n">5.</span>The Limits of Apologetics</h2>
+<p>And now a word of real honesty, which will keep all our apologetics humble. Apologetics can do a great deal, but it cannot do everything, and it is important to be clear about what it cannot do. It can remove intellectual obstacles; it can answer objections and clear away confusions; it can point clearly and compellingly to the truth. But apologetics cannot, of itself, create faith in anyone's heart. In the end, saving faith is the gift of God, and it is the Holy Spirit who opens a person's heart to believe. This means that we give our reasoned defense as faithfully and as well as we can — but we do not, finally, put our trust in the sharpness of our own arguments. We give our defense, and then we pray, and we trust God to do what only God can do. This keeps the whole enterprise in its proper, humble place. We are witnesses; we are not saviors. We hold up the truth as clearly as we can — and the outcome we leave, with quiet confidence, in the hands of God.</p>
+<h2><span class="dg-n">6.</span>Be Ready</h2>
+<p>So this, at bottom, is what apologetics is: simply being ready to give a reason for the hope that is in us, and giving it with gentleness and respect. We live and work among people who ask real and searching questions — about God, about Christ, about suffering, about whether faith makes any sense — and we do not need to be afraid of a single one of those questions. For the Christian faith is true, and what is true can bear the full weight of honest examination without fear. So take the time to know <em>why</em> you believe what you believe. Be ready to give an answer when someone asks. And when you do, give it humbly, lovingly, and honestly — never in order to win, but always in order to commend Christ. And then leave the outcome with God, remembering that faith is His gift to give. In the readings that follow we will take up the great questions one by one — the existence of God, the evidence for Christ, the hard problem of suffering, and the reasonableness of faith — but it all begins right here: be ready, and be gentle. Point people to the God who is really there and to the Christ who really rose — and leave the rest, trustingly, to Him.</p>
+<h2><span class="dg-n">7.</span>Taking It to Heart</h2>
+<div class="dg-reflect">
+<b>For reflection.</b> Could you give a reason for the hope that is in you, if someone asked you today — and would you give it "with meekness and fear"? Have you thought of faith as blind, or as trust resting on real ground? And can you hold together both a genuine confidence in the truth and a genuine gentleness toward those who do not yet see it?
+    </div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary introduction to apologetics, anchored in the classic public-domain works of Christian apologetics (Blaise Pascal's <em>Pensées</em>, G. K. Chesterton's <em>Orthodoxy</em>, and others), and in Scripture (1 Peter 3:15). This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This course draws on a rich company of public-domain classics of apologetics — among them Simon Greenleaf, William Paley, Joseph Butler, Blaise Pascal, Athanasius, James Orr, and G. K. Chesterton — all in the public domain.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>Siempre Listos para Dar Razón</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — una introducción a la apologética: qué es, las preguntas que responde, y el espíritu en que se hace</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en las obras clásicas de dominio público de la apologética (Pascal, Chesterton, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Curso: Apologética</li>
+<li>Una defensa razonada</li>
+<li>Con mansedumbre</li>
+<li>Anclado en clásicos</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> La apologética es dar una defensa razonada de la fe cristiana. Esta primera lectura introduce qué es la apologética, las grandes preguntas que aborda, y — tan importante como eso — el espíritu afable y respetuoso en que ha de hacerse, siguiendo 1 Pedro 3:15.
+    </div>
+<h2><span class="dg-n">1.</span>¿Qué es la apologética?</h2>
+<p>La palabra "apologética" puede confundir, porque no tiene nada que ver con pedir perdón. Viene de una antigua palabra griega, <em>apologia</em>, que sencillamente significa una defensa razonada — la clase de argumento que una persona podría presentar para explicar y sostener una posición. Y la palabra nos llega directamente de la Escritura. El apóstol Pedro dice a cada creyente que esté "siempre preparado para presentar defensa ante todo el que os demande razón de la esperanza que hay en vosotros." Esa disposición a dar razón de nuestra esperanza es lo que la apologética es. No es nada nuevo en la iglesia; los apóstoles mismos razonaron con la gente, argumentaron desde las Escrituras, y buscaron persuadir, y los cristianos han estado dando un honesto relato de su fe desde entonces. En resumen, la apologética busca mostrar que la fe cristiana es verdadera y razonable, responder las objeciones que la gente levanta contra ella, y quitar los obstáculos que están entre una persona y Cristo. Y no es la tarea especial solo de eruditos y expertos. Es para cada creyente ordinario — sencillamente estar listo, cuando alguien pregunte, para dar razón de la esperanza que hay dentro de nosotros.</p>
+<h2><span class="dg-n">2.</span>El espíritu de la apologética</h2>
+<p>Ahora bien, aquí hay algo de la mayor importancia, y es fácil pasarlo por alto. El mismo breve versículo que nos manda dar una defensa también nos manda, en el mismísimo aliento, exactamente <em>cómo</em> hemos de darla: "con mansedumbre y reverencia" — es decir, con afabilidad y hondo respeto. Esto nunca debe olvidarse. La apologética no se trata de ganar argumentos, ni de marcar puntos ingeniosos, ni de humillar a la persona que discrepa de nosotros, ni de probar cuánto más inteligentes somos. Se trata de dar honesto testimonio de la verdad, y de recomendar a Cristo a otra alma humana. La meta nunca es acorralar ni forzar a alguien a un renuente acuerdo; es quitar los obstáculos de su camino y señalarle a Cristo, y luego confiar en que Dios haga su propia obra en su corazón. Esto importa enormemente, porque la apologética hecha en el espíritu equivocado — arrogante, agresivamente, con desdén — aleja a la gente del evangelio, por ingeniosos que sean los argumentos. Pero la apologética hecha en el espíritu correcto — humilde, amorosa, paciente, y honestamente — adorna el evangelio y lo recomienda. Este es el espíritu que nuestro seminario busca en toda su defensa de la fe: genuinamente confiado en la verdad, y genuinamente afable en la manera.</p>
+<h2><span class="dg-n">3.</span>Las grandes preguntas</h2>
+<p>¿Qué clase de preguntas, entonces, toma la apologética? Son las preguntas reales que la gente reflexiva y honesta en realidad hace. ¿Existe Dios en absoluto — y si es así, cómo podríamos saberlo? ¿Es el cristianismo en realidad <em>verdadero</em> — hay evidencia real de que Jesús vivió, y murió, y resucitó? Si Dios es bueno y todopoderoso, entonces ¿por qué hay tanto sufrimiento y mal en el mundo? ¿Es razonable la fe religiosa, o es solo creer a ciegas contra la evidencia? Y ¿por qué Cristo en particular — por qué no alguna otra religión, o ninguna en absoluto? Estas no son preguntas necias u hostiles que hacer a un lado; son preguntas serias que merecen respuestas serias. Y el gran ánimo es este: la fe cristiana en realidad tiene respuestas a ellas — respuestas que no siempre son pulcras ni matemáticamente herméticas, pero que son sustanciales, reflexivas, y hondamente satisfactorias. No necesitamos tener miedo de estas preguntas, ni escondernos de ellas. En las lecturas que siguen, tomaremos varias de ellas por turno.</p>
+<h2><span class="dg-n">4.</span>La fe no es ciega</h2>
+<p>Una muy común idea equivocada debe ser quitada desde el comienzo: la idea de que la fe significa creer algo sin ningún motivo en absoluto, o aun creerlo contra toda la evidencia, por una especie de pura fuerza de voluntad. Eso no es lo que la Biblia entiende por fe. La fe bíblica no es ciega. No es un salto a la oscuridad; es confianza que descansa sobre terreno bueno y sólido — sobre lo que Dios ha hecho claro en su creación, sobre lo que ha hecho en la historia, y, por encima de todo lo demás, sobre la persona de Cristo mismo. Una antigua y hermosa frase describe la mente cristiana en acción: "la fe que busca entender." Ahora bien, es verdad e importante decir que la evidencia no <em>obliga</em> a creer de la manera en que una prueba matemática fuerza una conclusión; Dios, en su sabiduría, deja genuino lugar para que el corazón humano lo busque o lo resista. Pero eso es una cosa muy diferente de decir que no hay ningún terreno para la fe en absoluto. Hay terreno real y amplio. Y así el cristianismo nunca ha tenido miedo de invitar al examen honesto. Su más antigua invitación al que duda es sencillamente esta: "Ven y ve."</p>
+<h2><span class="dg-n">5.</span>Los límites de la apologética</h2>
+<p>Y ahora una palabra de verdadera honestidad, que mantendrá humilde toda nuestra apologética. La apologética puede hacer muchísimo, pero no puede hacer todo, y es importante ser claros sobre lo que no puede hacer. Puede quitar obstáculos intelectuales; puede responder objeciones y despejar confusiones; puede señalar clara y convincentemente a la verdad. Pero la apologética no puede, por sí misma, crear fe en el corazón de nadie. Al final, la fe salvadora es el don de Dios, y es el Espíritu Santo quien abre el corazón de una persona para creer. Esto significa que damos nuestra defensa razonada tan fiel y tan bien como podemos — pero no, finalmente, ponemos nuestra confianza en la agudeza de nuestros propios argumentos. Damos nuestra defensa, y luego oramos, y confiamos en que Dios haga lo que solo Dios puede hacer. Esto mantiene toda la empresa en su propio y humilde lugar. Somos testigos; no somos salvadores. Sostenemos la verdad tan claramente como podemos — y el resultado lo dejamos, con callada confianza, en las manos de Dios.</p>
+<h2><span class="dg-n">6.</span>Esté listo</h2>
+<p>Así que esto, en el fondo, es lo que la apologética es: sencillamente estar listo para dar razón de la esperanza que hay en nosotros, y darla con afabilidad y respeto. Vivimos y trabajamos entre gente que hace preguntas reales y escrutadoras — sobre Dios, sobre Cristo, sobre el sufrimiento, sobre si la fe tiene algún sentido — y no necesitamos tener miedo de una sola de esas preguntas. Porque la fe cristiana es verdadera, y lo que es verdadero puede soportar todo el peso del examen honesto sin temor. Así que tome el tiempo de saber <em>por qué</em> cree lo que cree. Esté listo para dar una respuesta cuando alguien pregunte. Y cuando lo haga, désela humilde, amorosa, y honestamente — nunca a fin de ganar, sino siempre a fin de recomendar a Cristo. Y luego deje el resultado con Dios, recordando que la fe es su don para dar. En las lecturas que siguen tomaremos las grandes preguntas una por una — la existencia de Dios, la evidencia de Cristo, el difícil problema del sufrimiento, y la razonabilidad de la fe — pero todo comienza justo aquí: esté listo, y sea afable. Señale a la gente al Dios que de veras está ahí y al Cristo que de veras resucitó — y deje el resto, confiadamente, a Él.</p>
+<h2><span class="dg-n">7.</span>Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<b>Para reflexionar.</b> ¿Podría dar razón de la esperanza que hay en usted, si alguien se lo preguntara hoy — y la daría "con mansedumbre y reverencia"? ¿Ha pensado en la fe como ciega, o como confianza que descansa sobre terreno real? Y ¿puede sostener juntas tanto una genuina confianza en la verdad como una genuina afabilidad hacia los que aún no la ven?
+    </div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Una introducción del Seminario Teológico de Chapala a la apologética, anclada en las obras clásicas de dominio público de la apologética cristiana (<em>Pensées</em> de Blaise Pascal, <em>Orthodoxy</em> de G. K. Chesterton, y otros), y en la Escritura (1 Pedro 3:15). Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Este curso se apoya en una rica compañía de clásicos de dominio público de la apologética — entre ellos Simon Greenleaf, William Paley, Joseph Butler, Blaise Pascal, Atanasio, James Orr, y G. K. Chesterton — todos en el dominio público.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="1" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- 2 -->
+<article class="entry" data-id="2" data-title-en="Does God Exist? The Witness of Creation and Conscience &mdash; CTS digest" data-title-es="¿Existe Dios? El Testimonio de la Creación y la Conciencia &mdash; resumen STC">
+<div class="locus"><span class="lang-en">The arguments for God &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">Los argumentos a favor de Dios &middot; un resumen biling&uuml;e del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">2.</span><span class="lang-en">Does God Exist? The Witness of Creation and Conscience</span><span class="lang-es">¿Existe Dios? El Testimonio de la Creación y la Conciencia</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">The classic pointers to God: the design argument (Paley’s watch — order and purpose point to a Designer); the cosmological (everything that begins has a cause; the universe points to a first cause); the moral argument (right and wrong point to a Lawgiver — conscience, Romans 2:15); and the biblical witness that “the heavens declare the glory of God” (Psalm 19; Romans 1:20). A strong cumulative case, not coercive proof.</p>
+<p class="caption lang-es block">Los clásicos indicios de Dios: el argumento del diseño (el reloj de Paley — el orden y el propósito señalan a un Diseñador); el cosmológico (todo lo que comienza tiene una causa; el universo señala a una primera causa); el argumento moral (lo bueno y lo malo señalan a un Legislador — la conciencia, Romanos 2:15); y el testimonio bíblico de que “los cielos cuentan la gloria de Dios” (Salmo 19; Romanos 1:20). Un fuerte caso acumulativo, no prueba que obliga.</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>Does God Exist? The Witness of Creation and Conscience</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — the classic pointers to God: design, existence, and the moral law within</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain works of apologetics (Paley, Butler, Orr, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Course: Apologetics</li>
+<li>The Case for God</li>
+<li>Design and Conscience</li>
+<li>Anchored in classics</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> Before we can speak of Christ, there is a prior question: does God exist at all? This reading gathers the classic pointers to God — the design of the world, the fact that anything exists, and the moral law written on the heart — and the witness of Scripture that creation declares its Maker.
+    </div>
+<h2><span class="dg-n">1.</span>The Question Behind Every Question</h2>
+<p>Before we can say anything at all about Christ, or the Bible, or salvation, there is a prior and more basic question that has to be faced: does God exist at all? It is the great question that stands behind every other question of faith. Now, as we have already seen, no argument can simply force a person to believe against their will. But that does not mean there is nothing to be said. In fact, there are strong and very ancient pointers — clues woven right into the fabric of the world around us, and into the conscience within us — which suggest, powerfully, that the universe is not able to explain itself, and that behind it there stands a God. In this reading we will gather up several of the classic ones: the order and design we find in the world, the sheer fact that anything exists at all, and the moral law written upon the human heart. Not one of these is a mathematical proof that settles the matter beyond all argument. But taken together, they build a genuinely powerful case that belief in God is reasonable — indeed, that it is a good deal more reasonable than unbelief.</p>
+<h2><span class="dg-n">2.</span>The Witness of Design</h2>
+<p>The first pointer is the astonishing order, purpose, and intricacy that fill the world — running all the way from the vast and clockwork regularity of the heavens down to the delicate, exquisite structure of the human eye, or of a single living cell. The classic form of this argument was given by William Paley. Suppose, he said, that you were crossing a field and found a watch lying on the ground. On examining it, you would see its many small parts fitted and working together for an evident purpose — to keep time. You would never for a moment conclude that such a thing had simply assembled itself by chance; you would rightly conclude that it had a maker. But if that is so for a watch, Paley pressed, how much more must it be so for the living world, whose intricacy and purpose so far surpass any watch? Design of this kind points beyond itself to a Designer. The deep order of the universe, and the unmistakable appearance of purpose everywhere we look in nature, strongly suggest that there is a Mind behind it all.</p>
+<h2><span class="dg-n">3.</span>The Witness of Existence Itself</h2>
+<p>A second pointer is even more basic than the first: it is the sheer, staggering fact that anything exists at all. Everything we observe in the world around us began to exist at some point; and everything that begins to exist has a cause — things do not simply pop into being out of nothing, for no reason. And the universe itself, as far as we can now tell, had a beginning; it has not simply always been there. So the question presses in: what caused it? And the chain of causes cannot stretch back forever into an infinite past; at some point there must be a first cause — something that did not itself begin, that exists in and of itself, and that gives existence to everything else. And that uncaused, self-existent First Cause of all things is exactly what we mean when we say the word "God." The oldest and deepest question of all — why is there something rather than nothing? — has a reasonable answer, and it is this: because there exists a God who is the very ground and source of all being.</p>
+<h2><span class="dg-n">4.</span>The Witness of Conscience</h2>
+<p>The third pointer is not found outside of us in the world at all, but deep within us: it is the moral law written upon the human heart. Everywhere on earth, in every age and every culture, human beings have carried a sense of right and wrong — a deep conviction that certain things genuinely <em>ought</em> to be done and certain things genuinely ought <em>not</em> to be done. And notice that this is more than merely disliking a thing; it is the sense that some things are truly, really wrong, and not just distasteful to us. But where could such a thing possibly come from? If there is no God, it becomes very hard to see how right and wrong could be anything more solid than human preference, or the leftover instincts of our evolutionary past. And yet we know, in our deepest heart, that this is not the whole truth — that cruelty is not merely inconvenient but really wrong, and that justice is not merely useful but really good. A real and binding moral law points beyond itself to a real Moral Lawgiver. And Scripture says exactly this of those who never had the written law of Moses: they nonetheless "show the work of the law written in their hearts, their conscience also bearing witness." The conscience itself is a standing witness to God.</p>
+<h2><span class="dg-n">5.</span>What Creation Declares</h2>
+<p>It is worth noticing that Scripture fully agrees that God has never left Himself without a witness in His world. "The heavens declare the glory of God," sings the psalmist, "and the firmament shows His handiwork." And the apostle Paul writes that ever since the creation of the world, God's "invisible attributes are clearly seen, being understood by the things that are made, even His eternal power and Godhead, so that they are without excuse." It is striking that the Bible itself does not generally set out to prove God's existence by long and laborious argument, as though it were a doubtful matter. Instead it treats the whole of creation as a constant and eloquent testimony to its Maker — a testimony so plain and so clear that, Paul says, no one is finally left without excuse. And so the pointers of human reason and the plain testimony of Scripture turn out to say the very same thing: the world itself speaks, everywhere and always, of God.</p>
+<h2><span class="dg-n">6.</span>Reasonable to Believe</h2>
+<p>Now put all of these witnesses together — the deep design and order of the world, the sheer fact that anything exists at all, and the moral law written within the human heart — and a strong cumulative case rises up before us: it is reasonable, deeply and genuinely reasonable, to believe in God. Not one of these is a proof that compels belief against a person's will; God, as we have said, leaves real room for the heart either to seek Him or to resist Him. But taken all together, they show plainly that faith in God is not some blind leap made against the evidence. It is, on the contrary, the most reasonable way to read the world we actually find ourselves living in. It is the person who denies God, in the end, who is left with the harder task — who must somehow explain away the design, and explain away the beginning, and explain away the moral law. The believer simply takes all three at face value, as honest pointers back to their source. So when someone asks you whether it is really reasonable to believe in God, you can answer with quiet confidence: only look at the world — its order, its very existence, and the justice written upon your own heart — and see how all of these point beyond themselves to God. The heavens are still declaring His glory. And these pointers, which show us <em>that</em> God is, now press us on toward the next question — <em>which</em> God? — and so toward Christ, in whom the God we have been dimly sensing has made Himself fully and personally known.</p>
+<h2><span class="dg-n">7.</span>Taking It to Heart</h2>
+<div class="dg-reflect">
+<b>For reflection.</b> When you look at the order and beauty of the world, do you see it as a happy accident, or as the handiwork of God? Where does your own sense of right and wrong come from — and what does it point to? And do you see that to believe in God is not a blind leap, but the most reasonable reading of the world we live in?
+    </div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary survey of the classic arguments for the existence of God, anchored in the classic public-domain works of apologetics (William Paley's <em>Natural Theology</em>, Joseph Butler's <em>The Analogy of Religion</em>, James Orr's <em>The Christian View of God and the World</em>, and others), and in Scripture (Psalm 19; Romans 1–2). This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This reading draws especially on William Paley's <em>Natural Theology</em>, Joseph Butler's <em>The Analogy of Religion</em>, and James Orr's <em>The Christian View of God and the World</em>, all in the public domain.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>¿Existe Dios? El Testimonio de la Creación y la Conciencia</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — los clásicos indicios de Dios: el diseño, la existencia, y la ley moral interior</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en las obras clásicas de dominio público de la apologética (Paley, Butler, Orr, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Curso: Apologética</li>
+<li>El caso a favor de Dios</li>
+<li>Diseño y conciencia</li>
+<li>Anclado en clásicos</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> Antes de que podamos hablar de Cristo, hay una pregunta previa: ¿existe Dios en absoluto? Esta lectura reúne los clásicos indicios de Dios — el diseño del mundo, el hecho de que algo existe, y la ley moral escrita en el corazón — y el testimonio de la Escritura de que la creación declara a su Hacedor.
+    </div>
+<h2><span class="dg-n">1.</span>La pregunta detrás de cada pregunta</h2>
+<p>Antes de que podamos decir nada en absoluto acerca de Cristo, o de la Biblia, o de la salvación, hay una pregunta previa y más básica que debe enfrentarse: ¿existe Dios en absoluto? Es la gran pregunta que está detrás de cada otra pregunta de fe. Ahora bien, como ya hemos visto, ningún argumento puede sencillamente forzar a una persona a creer contra su voluntad. Pero eso no significa que no haya nada que decir. De hecho, hay fuertes y muy antiguos indicios — pistas entretejidas justo en el tejido del mundo a nuestro alrededor, y en la conciencia dentro de nosotros — que sugieren, poderosamente, que el universo no es capaz de explicarse a sí mismo, y que detrás de él está un Dios. En esta lectura reuniremos varios de los clásicos: el orden y el diseño que hallamos en el mundo, el mero hecho de que algo existe en absoluto, y la ley moral escrita sobre el corazón humano. Ni uno solo de estos es una prueba matemática que zanje el asunto más allá de todo argumento. Pero tomados juntos, construyen un caso genuinamente poderoso de que creer en Dios es razonable — en efecto, que es bastante más razonable que la incredulidad.</p>
+<h2><span class="dg-n">2.</span>El testimonio del diseño</h2>
+<p>El primer indicio es el asombroso orden, propósito, e intrincamiento que llenan el mundo — corriendo todo el camino desde la vasta y precisa regularidad de los cielos hasta la delicada y exquisita estructura del ojo humano, o de una sola célula viviente. La forma clásica de este argumento la dio William Paley. Suponga, dijo, que estuviera cruzando un campo y hallara un reloj tirado en el suelo. Al examinarlo, vería sus muchas pequeñas partes ajustadas y trabajando juntas para un evidente propósito — marcar el tiempo. Nunca por un momento concluiría que tal cosa sencillamente se había ensamblado por casualidad; correctamente concluiría que tenía un hacedor. Pero si eso es así para un reloj, presionó Paley, ¿cuánto más debe serlo para el mundo viviente, cuyo intrincamiento y propósito sobrepasan tanto cualquier reloj? El diseño de esta clase señala más allá de sí mismo a un Diseñador. El hondo orden del universo, y la inconfundible apariencia de propósito por dondequiera que miremos en la naturaleza, sugieren fuertemente que hay una Mente detrás de todo ello.</p>
+<h2><span class="dg-n">3.</span>El testimonio de la existencia misma</h2>
+<p>Un segundo indicio es aún más básico que el primero: es el mero y asombroso hecho de que algo existe en absoluto. Todo lo que observamos en el mundo a nuestro alrededor comenzó a existir en algún punto; y todo lo que comienza a existir tiene una causa — las cosas no sencillamente aparecen de la nada, sin razón. Y el universo mismo, hasta donde ahora podemos decir, tuvo un comienzo; no sencillamente ha estado siempre ahí. Así que la pregunta apremia: ¿qué lo causó? Y la cadena de causas no puede extenderse hacia atrás para siempre en un pasado infinito; en algún punto debe haber una primera causa — algo que no comenzó él mismo, que existe en y de sí mismo, y que da existencia a todo lo demás. Y esa Primera Causa sin causa y existente por sí misma de todas las cosas es exactamente lo que queremos decir cuando decimos la palabra "Dios." La más antigua y honda pregunta de todas — ¿por qué hay algo en lugar de nada? — tiene una respuesta razonable, y es esta: porque existe un Dios que es el mismísimo fundamento y fuente de todo ser.</p>
+<h2><span class="dg-n">4.</span>El testimonio de la conciencia</h2>
+<p>El tercer indicio no se halla fuera de nosotros en el mundo en absoluto, sino hondo dentro de nosotros: es la ley moral escrita sobre el corazón humano. Por dondequiera en la tierra, en cada edad y cada cultura, los seres humanos han llevado un sentido de lo bueno y lo malo — una honda convicción de que ciertas cosas genuinamente <em>deben</em> hacerse y ciertas cosas genuinamente <em>no</em> deben hacerse. Y note que esto es más que meramente que algo nos disguste; es el sentido de que algunas cosas son verdadera, realmente malas, y no solo desagradables para nosotros. Pero ¿de dónde podría posiblemente venir tal cosa? Si no hay Dios, se vuelve muy difícil ver cómo lo bueno y lo malo podrían ser algo más sólido que la preferencia humana, o los instintos sobrantes de nuestro pasado evolutivo. Y sin embargo sabemos, en nuestro más hondo corazón, que esta no es toda la verdad — que la crueldad no es meramente inconveniente sino realmente mala, y que la justicia no es meramente útil sino realmente buena. Una ley moral real y obligatoria señala más allá de sí misma a un Legislador Moral real. Y la Escritura dice exactamente esto de los que nunca tuvieron la ley escrita de Moisés: no obstante "muestran la obra de la ley escrita en sus corazones, dando testimonio su conciencia." La conciencia misma es un testigo permanente de Dios.</p>
+<h2><span class="dg-n">5.</span>Lo que la creación declara</h2>
+<p>Vale la pena notar que la Escritura concuerda plenamente en que Dios nunca se ha dejado a sí mismo sin testigo en su mundo. "Los cielos cuentan la gloria de Dios," canta el salmista, "y el firmamento anuncia la obra de sus manos." Y el apóstol Pablo escribe que desde la creación del mundo, "las cosas invisibles de él, su eterno poder y deidad, se hacen claramente visibles, siendo entendidas por medio de las cosas hechas, de modo que no tienen excusa." Es notable que la Biblia misma generalmente no se propone probar la existencia de Dios por largo y laborioso argumento, como si fuera un asunto dudoso. En cambio trata toda la creación como un constante y elocuente testimonio a su Hacedor — un testimonio tan claro y tan patente que, dice Pablo, nadie queda finalmente sin excusa. Y así los indicios de la razón humana y el claro testimonio de la Escritura resultan decir exactamente lo mismo: el mundo mismo habla, por dondequiera y siempre, de Dios.</p>
+<h2><span class="dg-n">6.</span>Razonable creer</h2>
+<p>Ahora ponga todos estos testimonios juntos — el hondo diseño y orden del mundo, el mero hecho de que algo existe en absoluto, y la ley moral escrita dentro del corazón humano — y un fuerte caso acumulativo se levanta ante nosotros: es razonable, honda y genuinamente razonable, creer en Dios. Ni uno solo de estos es una prueba que obligue a creer contra la voluntad de una persona; Dios, como hemos dicho, deja lugar real para que el corazón lo busque o lo resista. Pero tomados todos juntos, muestran claramente que la fe en Dios no es algún salto ciego dado contra la evidencia. Es, al contrario, la manera más razonable de leer el mundo en el cual en realidad nos hallamos viviendo. Es la persona que niega a Dios, al final, la que queda con la tarea más difícil — que debe de algún modo explicar el diseño, y explicar el comienzo, y explicar la ley moral. El creyente sencillamente toma los tres tal como son, como honestos indicios de vuelta a su fuente. Así que cuando alguien le pregunte si de veras es razonable creer en Dios, puede responder con callada confianza: solo mire el mundo — su orden, su mismísima existencia, y la justicia escrita sobre su propio corazón — y vea cómo todos estos señalan más allá de sí mismos a Dios. Los cielos aún cuentan su gloria. Y estos indicios, que nos muestran <em>que</em> Dios es, ahora nos apremian hacia la siguiente pregunta — ¿<em>cuál</em> Dios? — y así hacia Cristo, en quien el Dios que hemos estado tenuemente percibiendo se ha dado a conocer plena y personalmente.</p>
+<h2><span class="dg-n">7.</span>Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<b>Para reflexionar.</b> Cuando mira el orden y la belleza del mundo, ¿lo ve como un feliz accidente, o como la obra de Dios? ¿De dónde viene su propio sentido de lo bueno y lo malo — y a qué señala? Y ¿ve que creer en Dios no es un salto ciego, sino la lectura más razonable del mundo en que vivimos?
+    </div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Un estudio del Seminario Teológico de Chapala sobre los argumentos clásicos a favor de la existencia de Dios, anclado en las obras clásicas de dominio público de la apologética (<em>Natural Theology</em> de William Paley, <em>The Analogy of Religion</em> de Joseph Butler, <em>The Christian View of God and the World</em> de James Orr, y otros), y en la Escritura (Salmo 19; Romanos 1–2). Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Esta lectura se apoya especialmente en <em>Natural Theology</em> de William Paley, <em>The Analogy of Religion</em> de Joseph Butler, y <em>The Christian View of God and the World</em> de James Orr, todos en el dominio público.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="2" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- 3 -->
+<article class="entry" data-id="3" data-title-en="Is It True? The Evidence for Christ and the Resurrection &mdash; CTS digest" data-title-es="¿Es Verdad? La Evidencia de Cristo y la Resurrección &mdash; resumen STC">
+<div class="locus"><span class="lang-en">The historical evidence &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">La evidencia histórica &middot; un resumen biling&uuml;e del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">3.</span><span class="lang-en">Is It True? The Evidence for Christ and the Resurrection</span><span class="lang-es">¿Es Verdad? La Evidencia de Cristo y la Resurrección</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">Christianity rests on examinable events; the reliability of the Gospels (Greenleaf’s legal analysis, the marks of honest testimony); the empty tomb and the many appearances; the transformed disciples who died for what they alone could verify, the conversions of Paul and James, and the birth of the church; and the incarnation (Athanasius). The resurrection as the best explanation — “if Christ is not risen… you are still in your sins.”</p>
+<p class="caption lang-es block">El cristianismo descansa sobre eventos examinables; la fiabilidad de los Evangelios (el análisis legal de Greenleaf, las marcas del testimonio honesto); la tumba vacía y las muchas apariciones; los discípulos transformados que murieron por lo que solo ellos podían verificar, las conversiones de Pablo y Jacobo, y el nacimiento de la iglesia; y la encarnación (Atanasio). La resurrección como la mejor explicación — “si Cristo no resucitó… aún estáis en vuestros pecados.”</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>Is It True? The Evidence for Christ and the Resurrection</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — the historical case: the reliability of the Gospels, the empty tomb, and the risen Lord</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain works of apologetics (Greenleaf, Rawlinson, Athanasius, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Course: Apologetics</li>
+<li>The Evidence for Christ</li>
+<li>He Is Risen</li>
+<li>Anchored in classics</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> Christianity rests not on abstract ideas but on events — that Jesus lived, died, and rose. This reading gathers the historical evidence: the reliability of the Gospels, the empty tomb and the appearances, the transformed disciples, and the incarnation — the case that Christ is risen indeed.
+    </div>
+<h2><span class="dg-n">1.</span>Christianity Rests on History</h2>
+<p>The Christian faith is unusual among the religions of the world in one striking respect: it does not rest upon abstract ideas or timeless philosophy alone, but upon <em>events</em> — upon things that actually happened, in a particular place, at a particular time in history. At the very center of it stands a claim of plain fact: that Jesus of Nazareth truly lived, was truly crucified, and truly rose again bodily from the dead. To the church, this has never been merely a beautiful symbol or an inspiring story; it is a matter of what did or did not actually occur. And precisely because it is a claim of fact, it can be examined and tested. The apostle Paul, far from hiding this, staked the entire faith upon it, and said so plainly: "if Christ is not risen, then our preaching is empty and your faith is also empty... and you are still in your sins." He knew that if the resurrection did not happen, the whole of Christianity collapses. So the great question is simply this: is it true? And the encouraging answer is that there is real, solid, and substantial evidence that it is.</p>
+<h2><span class="dg-n">2.</span>The Reliability of the Gospels</h2>
+<p>Consider first the records themselves. The four Gospels are our primary historical sources for the life of Jesus — so the first question is whether they can be trusted. And several things strongly commend them. They were written down within the lifetime of the eyewitnesses, at a time when many people who had known Jesus, including hostile enemies, were still alive and could easily have stood up to contradict them if they were false. They contain, moreover, exactly the kind of concrete detail, sober restraint, and even awkwardness that marks genuine, honest testimony rather than invented legend — they freely record the embarrassing failures of the very apostles who led the church, and they report that it was women who first found the empty tomb, in a time and culture where a made-up story would never have been built on the testimony of women. Simon Greenleaf, one of the greatest authorities on the law of legal evidence, once set out to examine the Gospels by the strict standards that a court of law applies to the testimony of witnesses — and he concluded that the Gospel witnesses withstand examination under the very evidentiary principles he applies. The Gospels, in the end, read like testimony, not like legend.</p>
+<h2><span class="dg-n">3.</span>The Empty Tomb and the Appearances</h2>
+<p>Now to the resurrection itself. The historical case for it rests on a handful of facts that are accepted as historical even by a great many skeptical scholars. First, that Jesus was really crucified, died, and was buried. Second, that His tomb was found empty on the third day. Third, that very many people afterward claimed to have seen Him alive again — and not just once, or in one way, but repeatedly, over a period of time, sometimes alone and sometimes in whole groups, including on one occasion, Paul reports, "by more than five hundred brethren at once," most of whom were still living and could be questioned. And fourth, that these witnesses were utterly and permanently transformed by what they had seen. Each of these facts cries out for an explanation. The empty tomb has to be explained somehow. The many appearances have to be explained somehow. And it is important to notice that the disciples were not primed to imagine a resurrection — they were not expecting one at all, and at first they flatly refused to believe it — yet they became unshakably convinced of it, entirely against their own prior expectations.</p>
+<h2><span class="dg-n">4.</span>The Transformed Disciples and the Birth of the Church</h2>
+<p>Perhaps the single most powerful piece of evidence is what happened to the disciples themselves. In the days right after the crucifixion, they were frightened, scattered, and thoroughly defeated men; their leader was dead, their hopes were in ruins, and they hid behind locked doors. And yet, within a matter of weeks, these same broken men were standing up and boldly proclaiming the resurrection of Jesus in the very city where He had just been publicly executed — and they never once wavered from that message for the rest of their lives, even when it cost most of them their lives. And here is the force of it: men and women do not knowingly die for what they know to be a lie. The disciples were not reporting some belief they had received secondhand; they were in the one position where they could actually <em>know</em>, for certain, whether or not they had truly seen the risen Christ — and they went to their deaths insisting that they had. And out of this small and unlikely band of witnesses, the Christian church exploded outward across the whole known world. The complete transformation of the disciples, the conversion of committed skeptics like Paul the persecutor and James the brother of Jesus, and the sheer birth and unstoppable growth of the church — all of it demands some adequate explanation, and the resurrection supplies it.</p>
+<h2><span class="dg-n">5.</span>The Incarnation: God Among Us</h2>
+<p>And standing behind all of this evidence is the great claim that the evidence points to: that in Jesus of Nazareth, God Himself became man. The early church father Athanasius, in his magnificent little book <em>On the Incarnation</em>, showed why this is not only believable but fitting and glorious — how the Creator stepped down into His own creation and took our full human nature upon Himself, precisely in order to conquer death from the inside and to restore us to God. And the resurrection is the great proof and public vindication of who this Jesus truly is. It shows that He was not merely a wise and good teacher, one voice among many, but God the Son, the Lord of life, who holds power even over death itself. So the evidence for the resurrection turns out to be, at the deepest level, evidence for the incarnation — evidence that the One who walked out of that tomb is exactly who He had claimed all along to be. And if that is true, then it changes absolutely everything.</p>
+<h2><span class="dg-n">6.</span>He Is Risen</h2>
+<p>So gather all the evidence together into one view — the reliability of the Gospel records, the empty tomb, the many and varied appearances, the utterly transformed disciples who cheerfully died for their testimony, the conversion of hardened enemies, and the explosive birth of the worldwide church — and one single explanation is found to account for the whole of it: Jesus of Nazareth really did rise from the dead. Every proposed alternative — that the disciples deliberately lied, or that they all hallucinated the same thing, or that everyone somehow went to the wrong tomb, or that the whole story slowly grew up as a legend over time — strains and struggles even to explain a single part of the evidence, and not one of them can account for all of it together. The resurrection, far from being a blind leap in the dark, is simply the best explanation of the historical facts as we actually have them. And that means that Christianity is not merely beautiful, or comforting, or helpful for living — it is <em>true</em>. Christ is risen; and therefore He is exactly who He said He was, His death accomplished exactly what He said it would, and every one of His promises is sure and certain. So when someone asks you whether there is any real reason to believe in Christ, you can point them to the solid evidence of history itself, and say with the very first witnesses at the tomb: He is not here, for He is risen. Examine the evidence honestly, without fear, and you will find that the tomb stands empty still. And remember always that the risen Christ is not a mere historical fact to be admired from a safe distance — He is a living Lord, to be trusted, and loved, and followed.</p>
+<h2><span class="dg-n">7.</span>Taking It to Heart</h2>
+<div class="dg-reflect">
+<b>For reflection.</b> Have you ever really weighed the evidence for the resurrection — or only assumed it could not be examined? What explanation, other than a real resurrection, could account for men dying gladly for what they alone were able to verify? And do you know the risen Christ not merely as a fact of history, but as a living Lord to follow?
+    </div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary survey of the historical evidence for Christ and the resurrection, anchored in the classic public-domain works of apologetics (Simon Greenleaf's <em>The Testimony of the Evangelists</em>, George Rawlinson's <em>Historical Evidences</em>, Athanasius's <em>On the Incarnation</em>, and others), and in Scripture (1 Corinthians 15). This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This reading draws especially on Simon Greenleaf's <em>The Testimony of the Evangelists</em>, George Rawlinson's <em>Historical Evidences of the Truth of the Scripture Records</em>, and Athanasius's <em>On the Incarnation</em>, all in the public domain.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>¿Es Verdad? La Evidencia de Cristo y la Resurrección</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — el caso histórico: la fiabilidad de los Evangelios, la tumba vacía, y el Señor resucitado</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en las obras clásicas de dominio público de la apologética (Greenleaf, Rawlinson, Atanasio, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Curso: Apologética</li>
+<li>La evidencia de Cristo</li>
+<li>Ha resucitado</li>
+<li>Anclado en clásicos</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> El cristianismo descansa no sobre ideas abstractas sino sobre eventos — que Jesús vivió, murió, y resucitó. Esta lectura reúne la evidencia histórica: la fiabilidad de los Evangelios, la tumba vacía y las apariciones, los discípulos transformados, y la encarnación — el caso de que Cristo ha resucitado en verdad.
+    </div>
+<h2><span class="dg-n">1.</span>El cristianismo descansa sobre la historia</h2>
+<p>La fe cristiana es inusual entre las religiones del mundo en un aspecto impresionante: no descansa sobre ideas abstractas ni filosofía intemporal solamente, sino sobre <em>eventos</em> — sobre cosas que en realidad sucedieron, en un lugar particular, en un tiempo particular de la historia. En el mismísimo centro de ella está una afirmación de puro hecho: que Jesús de Nazaret de veras vivió, de veras fue crucificado, y de veras resucitó corporalmente de los muertos. Para la iglesia, esto nunca ha sido meramente un hermoso símbolo o un relato inspirador; es un asunto de lo que en realidad ocurrió o no. Y precisamente porque es una afirmación de hecho, puede ser examinada y probada. El apóstol Pablo, lejos de esconder esto, apostó toda la fe sobre ello, y lo dijo claramente: "y si Cristo no resucitó, vana es entonces nuestra predicación, vana es también vuestra fe... aún estáis en vuestros pecados." Sabía que si la resurrección no sucedió, todo el cristianismo se derrumba. Así que la gran pregunta es sencillamente esta: ¿es verdad? Y la alentadora respuesta es que hay evidencia real, sólida, y sustancial de que lo es.</p>
+<h2><span class="dg-n">2.</span>La fiabilidad de los Evangelios</h2>
+<p>Considere primero los registros mismos. Los cuatro Evangelios son nuestras fuentes históricas primarias para la vida de Jesús — así que la primera pregunta es si se puede confiar en ellos. Y varias cosas los recomiendan fuertemente. Fueron escritos dentro de la vida de los testigos oculares, en un tiempo cuando mucha gente que había conocido a Jesús, incluyendo enemigos hostiles, aún vivía y fácilmente pudo haberse levantado a contradecirlos si eran falsos. Contienen, además, exactamente la clase de detalle concreto, sobria moderación, y aun torpeza que marca el testimonio genuino y honesto en lugar de la leyenda inventada — registran libremente los vergonzosos fracasos de los mismísimos apóstoles que dirigieron la iglesia, y reportan que fueron mujeres las que primero hallaron la tumba vacía, en un tiempo y cultura donde una historia inventada nunca se habría edificado sobre el testimonio de mujeres. Simon Greenleaf, una de las mayores autoridades sobre la ley de la evidencia legal, una vez se propuso examinar los Evangelios por las estrictas normas que un tribunal de justicia aplica al testimonio de los testigos — y concluyó que el testimonio de los Evangelios resiste el examen bajo los mismos principios evidenciarios que él aplica. Los Evangelios, al final, se leen como testimonio, no como leyenda.</p>
+<h2><span class="dg-n">3.</span>La tumba vacía y las apariciones</h2>
+<p>Ahora a la resurrección misma. El caso histórico a favor de ella descansa sobre un puñado de hechos que son aceptados como históricos aun por muchísimos eruditos escépticos. Primero, que Jesús de veras fue crucificado, murió, y fue sepultado. Segundo, que su tumba fue hallada vacía al tercer día. Tercero, que muchísima gente después afirmó haberle visto vivo de nuevo — y no solo una vez, ni de una manera, sino repetidamente, durante un período de tiempo, a veces a solas y a veces en grupos enteros, incluyendo en una ocasión, reporta Pablo, "por más de quinientos hermanos a la vez," la mayoría de los cuales aún vivían y podían ser interrogados. Y cuarto, que estos testigos fueron total y permanentemente transformados por lo que habían visto. Cada uno de estos hechos clama por una explicación. La tumba vacía tiene que ser explicada de algún modo. Las muchas apariciones tienen que ser explicadas de algún modo. Y es importante notar que los discípulos no estaban predispuestos a imaginar una resurrección — no la esperaban en absoluto, y al principio rotundamente rehusaron creerla — sin embargo llegaron a estar inquebrantablemente convencidos de ella, enteramente contra sus propias expectativas previas.</p>
+<h2><span class="dg-n">4.</span>Los discípulos transformados y el nacimiento de la iglesia</h2>
+<p>Quizás la sola pieza de evidencia más poderosa es lo que les sucedió a los discípulos mismos. En los días justo después de la crucifixión, eran hombres asustados, dispersos, y totalmente derrotados; su líder estaba muerto, sus esperanzas estaban en ruinas, y se escondían tras puertas cerradas. Y sin embargo, en cuestión de semanas, estos mismos hombres quebrantados estaban levantándose y proclamando audazmente la resurrección de Jesús en la mismísima ciudad donde acababa de ser públicamente ejecutado — y nunca una sola vez flaquearon de ese mensaje por el resto de sus vidas, aun cuando le costó a la mayoría de ellos sus vidas. Y aquí está la fuerza de ello: los hombres y las mujeres no mueren a sabiendas por lo que saben que es una mentira. Los discípulos no estaban reportando alguna creencia que habían recibido de segunda mano; estaban en la única posición donde podían en realidad <em>saber</em>, con certeza, si habían o no de veras visto al Cristo resucitado — y fueron a sus muertes insistiendo en que sí. Y de esta pequeña e improbable banda de testigos, la iglesia cristiana explotó hacia afuera por todo el mundo conocido. La completa transformación de los discípulos, la conversión de escépticos comprometidos como Pablo el perseguidor y Jacobo el hermano de Jesús, y el mismísimo nacimiento y crecimiento imparable de la iglesia — todo ello exige alguna explicación adecuada, y la resurrección la suministra.</p>
+<h2><span class="dg-n">5.</span>La encarnación: Dios entre nosotros</h2>
+<p>Y de pie detrás de toda esta evidencia está la gran afirmación a la cual la evidencia señala: que en Jesús de Nazaret, Dios mismo se hizo hombre. El padre de la iglesia primitiva Atanasio, en su magnífico pequeño libro <em>Sobre la Encarnación</em>, mostró por qué esto es no solo creíble sino apropiado y glorioso — cómo el Creador descendió a su propia creación y tomó nuestra plena naturaleza humana sobre sí mismo, precisamente a fin de conquistar la muerte desde adentro y de restaurarnos a Dios. Y la resurrección es la gran prueba y vindicación pública de quién es este Jesús en verdad. Muestra que Él no era meramente un sabio y buen maestro, una voz entre muchas, sino Dios el Hijo, el Señor de la vida, que tiene poder aun sobre la muerte misma. Así que la evidencia de la resurrección resulta ser, al nivel más hondo, evidencia de la encarnación — evidencia de que Aquel que salió de esa tumba es exactamente quien había afirmado todo el tiempo ser. Y si eso es verdad, entonces cambia absolutamente todo.</p>
+<h2><span class="dg-n">6.</span>Ha resucitado</h2>
+<p>Así que reúna toda la evidencia en una sola vista — la fiabilidad de los registros del Evangelio, la tumba vacía, las muchas y variadas apariciones, los discípulos totalmente transformados que alegremente murieron por su testimonio, la conversión de enemigos endurecidos, y el explosivo nacimiento de la iglesia mundial — y se halla que una sola explicación da cuenta de todo ello: Jesús de Nazaret de veras resucitó de los muertos. Cada alternativa propuesta — que los discípulos deliberadamente mintieron, o que todos alucinaron lo mismo, o que todos de algún modo fueron a la tumba equivocada, o que toda la historia lentamente creció como una leyenda con el tiempo — se esfuerza y lucha aun por explicar una sola parte de la evidencia, y ni una sola de ellas puede dar cuenta de toda ella junta. La resurrección, lejos de ser un salto ciego en la oscuridad, es sencillamente la mejor explicación de los hechos históricos tal como en realidad los tenemos. Y eso significa que el cristianismo no es meramente hermoso, o consolador, o útil para vivir — es <em>verdad</em>. Cristo ha resucitado; y por tanto Él es exactamente quien dijo que era, su muerte cumplió exactamente lo que dijo que cumpliría, y cada una de sus promesas es segura y cierta. Así que cuando alguien le pregunte si hay alguna razón real para creer en Cristo, puede señalarle a la sólida evidencia de la historia misma, y decir con los mismísimos primeros testigos en la tumba: No está aquí, porque ha resucitado. Examine la evidencia honestamente, sin temor, y hallará que la tumba permanece vacía aún. Y recuerde siempre que el Cristo resucitado no es un mero hecho histórico para ser admirado desde una distancia segura — es un Señor viviente, para ser confiado, y amado, y seguido.</p>
+<h2><span class="dg-n">7.</span>Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<b>Para reflexionar.</b> ¿Ha sopesado alguna vez de veras la evidencia de la resurrección — o solo ha asumido que no podía ser examinada? ¿Qué explicación, aparte de una resurrección real, podría dar cuenta de hombres muriendo con gusto por lo que solo ellos podían verificar? Y ¿conoce al Cristo resucitado no meramente como un hecho de la historia, sino como un Señor viviente a quien seguir?
+    </div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Un estudio del Seminario Teológico de Chapala sobre la evidencia histórica de Cristo y la resurrección, anclado en las obras clásicas de dominio público de la apologética (<em>The Testimony of the Evangelists</em> de Simon Greenleaf, <em>Historical Evidences</em> de George Rawlinson, <em>On the Incarnation</em> de Atanasio, y otros), y en la Escritura (1 Corintios 15). Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Esta lectura se apoya especialmente en <em>The Testimony of the Evangelists</em> de Simon Greenleaf, <em>Historical Evidences of the Truth of the Scripture Records</em> de George Rawlinson, y <em>On the Incarnation</em> de Atanasio, todos en el dominio público.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="3" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- 4 -->
+<article class="entry" data-id="4" data-title-en="What About Suffering and Doubt? &mdash; CTS digest" data-title-es="¿Y el Sufrimiento y la Duda? &mdash; resumen STC">
+<div class="locus"><span class="lang-en">The hardest objection &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">La objeción más difícil &middot; un resumen biling&uuml;e del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">4.</span><span class="lang-en">What About Suffering and Doubt?</span><span class="lang-es">¿Y el Sufrimiento y la Duda?</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">The hardest objection, handled honestly: the problem of evil taken seriously; no tidy theoretical answer (Job got God Himself); the heart of the response — God entered our suffering in Christ, bearing it on the cross (“not an explanation, but a presence: God with us”); evil will be judged and the resurrection means suffering isn’t the last word; and doubt handled gently — doubt is not unbelief; bring it to God, not bury it in shame.</p>
+<p class="caption lang-es block">La objeción más difícil, tratada honestamente: el problema del mal tomado en serio; ninguna pulcra respuesta teórica (Job recibió a Dios mismo); el corazón de la respuesta — Dios entró en nuestro sufrimiento en Cristo, llevándolo en la cruz (“no una explicación, sino una presencia: Dios con nosotros”); el mal será juzgado y la resurrección significa que el sufrimiento no es la última palabra; y la duda tratada con afabilidad — la duda no es incredulidad; tráigala a Dios, no la entierre en vergüenza.</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>What About Suffering and Doubt?</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — the hardest objection, the problem of evil, and the honest struggle of doubt</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain works of apologetics (Boethius, Augustine, Pascal, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Course: Apologetics</li>
+<li>The Problem of Evil</li>
+<li>Honest Doubt</li>
+<li>Anchored in classics</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> The hardest objection to faith is the problem of suffering and evil, and alongside it the honest struggle of doubt. This reading faces both without pretending to a tidy answer — and points to the God who does not stand distant from our pain, but entered it Himself in Christ.
+    </div>
+<h2><span class="dg-n">1.</span>The Hardest Question</h2>
+<p>Of all the objections that are raised against the Christian faith, one stands out above the rest as the hardest, and the most deeply and personally felt: the problem of suffering and evil. This is not merely a clever point for debate; it rises up out of real and terrible pain — the loss of a child, the slow ravages of disease, the cruelty of oppression, the daily ache of living in a broken world. And the objection has a real sharpness to it. If God is truly good, the argument runs, then surely He would <em>want</em> to put an end to evil. And if He is truly all-powerful, then surely He <em>could</em> put an end to evil. And yet evil plainly remains. So (the objector concludes) either God is not really good, or He is not really all-powerful, or perhaps He is not really there at all. This is a serious question, and it deserves a serious and honest answer, never a glib or dismissive wave of the hand. And here is what must be said: Christianity does not offer a tidy solution that neatly answers every "why." But it offers something better — real resources for facing suffering, and, at the very center, a God who has entered into that suffering Himself.</p>
+<h2><span class="dg-n">2.</span>No Tidy Answer — But Real Resources</h2>
+<p>Let us be honest right at the start, for anything less would be cruel: the Bible does not give us a complete, theoretical explanation of exactly why God permits each particular evil that comes into a human life. This is important. When the man Job, in the depths of his agony, demanded answers of God, God did not sit down and give him a tidy explanation of the reasons behind his suffering. What God gave Job, instead, was Himself — His presence, His majesty, His nearness. So we should be very humble here, and we should never pretend to explain what God has chosen not to explain. To hand a suffering person a neat formula is usually to wound them further. But here is the crucial thing: the absence of a complete <em>theoretical</em> answer is by no means the absence of hope, or of help. Christianity does not offer the sufferer a clever formula; it offers something far stronger and far more real — solid resources for facing evil that go immeasurably beyond anything the alternatives can provide.</p>
+<h2><span class="dg-n">3.</span>God Is Not Indifferent — He Entered Our Suffering</h2>
+<p>And now we come to the very heart of the Christian answer, and it is something utterly unlike anything found in any other faith or philosophy in all the world. Our God has not remained far off and distant from our suffering, gazing down upon it from some safe and comfortable height. In Jesus Christ, God Himself came down and entered into our world, and took our suffering upon His own shoulders. He was, as the prophet foretold, "despised and rejected of men; a man of sorrows, and acquainted with grief." He wept real tears at the grave of a friend. He was betrayed by those closest to Him, and then arrested, mocked, tortured, and executed. On the cross, God-in-Christ truly suffered — not as a distant spectator watching human pain from afar, but as a full participant plunged into it, bearing in His own body the very worst that all the evil in the world could do. And so, whatever else we may not know or understand, we know this one thing for certain: God is not indifferent to our suffering, for He has suffered alongside us, and He has suffered for us. The cross is God's deepest answer to the problem of our pain — and that answer is not, in the end, an explanation, but a presence: God with us, right down in the darkness with us.</p>
+<h2><span class="dg-n">4.</span>Evil Is Real, and It Is Not the Last Word</h2>
+<p>Christianity also takes evil seriously in two further ways that bring real comfort. First, it insists, flatly, that evil is <em>really evil</em> — it is not an illusion, and it is not merely some lesser good that we fail to understand; it is a genuine outrage against the good world that God made. And God is by no means indifferent to it: He will judge it, and He will one day set every crooked thing perfectly straight. Notice that the deep human cry for justice in the face of evil is not answered by pretending that evil does not really matter; it is answered, and fully answered, by the sure promise that God Himself will one day right every single wrong. And second, Christianity insists, with all its strength, that suffering is not the last word. The resurrection of Christ from the dead is God's own guarantee that death and evil will never have the final say — that the day is surely coming when God "will wipe away every tear from their eyes," and there shall be no more death, nor sorrow, nor crying, nor pain, for He will make all things new. And so we, of all people in the world, do not grieve as those who have no hope. Evil is real — but it is a defeated enemy. Suffering is real — but it is only for a while.</p>
+<h2><span class="dg-n">5.</span>Handling Honest Doubt</h2>
+<p>There is a closely related struggle that is not suffering itself but doubt — the experience of the believer who finds questions and uncertainties rising up within the mind, and who then begins to fear that the doubt itself must be a sin, or a sure sign that their faith has failed. So let a gentle and honest word be said here, for it is badly needed. Doubt is not the same thing as unbelief, and honest questions are not a betrayal of God. Some of the greatest saints who ever lived wrestled hard and long with their doubts. Faith was never meant to be the complete absence of every question; faith is trust that keeps holding on to God even while some questions still remain unanswered. And the right thing to do with your doubts is emphatically <em>not</em> to bury them in shame, or to pretend them away, or to feel that you must hide them from God. The right thing is to bring them honestly out into the open — to carry them straight to God in prayer, to search for honest answers in His Word, and to talk them through with wise and trusted fellow believers. God is not the least bit threatened by your questions; in fact He invites them. Bring your doubts into the light, and again and again you will find that what had seemed to be a solid wall turns out to be a door.</p>
+<h2><span class="dg-n">6.</span>A God Who Suffers With Us</h2>
+<p>So when someone raises the hard problem of suffering with us — or when we ourselves are walking through the dark — we do not pretend that we hold some tidy answer to every anguished "why." We are honest: there are things we simply do not know, things that God has not chosen to explain to us. But we take our firm stand on the things we <em>do</em> know, and they turn out to be far more than enough to hold us up. We know that evil is real, and that God will judge it and right every wrong at the last. We know that suffering is not the final word, for Christ is risen, and He will one day make all things new. And, above everything else, we know that God is not distant, and not indifferent — for in Christ He came down into our suffering, wept our tears with us, and bore our pain upon the cross. Ours is not a God who stands far off, aloof from the world's agony; He is a God who has willingly plunged down into its very deepest depths, and all of it for love of us. So if you are suffering as you read this, hear it and hold on to it: you do not suffer alone, and you do not suffer unseen. The God who made you has suffered with you; He is with you even now; and He will surely bring you through to the other side. And if you are doubting, do not be afraid of it. Carry your questions honestly to the God who is not threatened by a single one of them, and keep holding on. The same Christ who suffered and rose again is more than able to hold <em>you</em> fast through every darkness — and He will.</p>
+<h2><span class="dg-n">7.</span>Taking It to Heart</h2>
+<div class="dg-reflect">
+<b>For reflection.</b> When you face suffering, do you look for a tidy explanation — or for the God who entered it with you on the cross? Have you been carrying doubts in shame and secrecy, rather than bringing them honestly to God? If you are walking through a heavy season of suffering or doubt, let this be a gentle encouragement not to carry it entirely alone — reach out to a trusted pastor or fellow believer who can pray with you and walk beside you.
+    </div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary reading on the problem of suffering and the struggle of doubt, anchored in the classic public-domain works of apologetics (Boethius's <em>The Consolation of Philosophy</em>, Augustine's <em>Confessions</em>, Blaise Pascal's <em>Pensées</em>, and others), and in Scripture. This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This reading draws especially on Boethius's <em>The Consolation of Philosophy</em> (written in prison, on suffering and providence), Augustine's <em>Confessions</em>, and Blaise Pascal's <em>Pensées</em>, all in the public domain.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>¿Y el Sufrimiento y la Duda?</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — la objeción más difícil, el problema del mal, y la honesta lucha de la duda</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en las obras clásicas de dominio público de la apologética (Boecio, Agustín, Pascal, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Curso: Apologética</li>
+<li>El problema del mal</li>
+<li>La duda honesta</li>
+<li>Anclado en clásicos</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> La objeción más difícil a la fe es el problema del sufrimiento y el mal, y junto a ella la honesta lucha de la duda. Esta lectura enfrenta ambas sin pretender una respuesta pulcra — y señala al Dios que no está distante de nuestro dolor, sino que entró en él Él mismo en Cristo.
+    </div>
+<h2><span class="dg-n">1.</span>La pregunta más difícil</h2>
+<p>De todas las objeciones que se levantan contra la fe cristiana, una sobresale por encima de las demás como la más difícil, y la más honda y personalmente sentida: el problema del sufrimiento y el mal. Esto no es meramente un punto ingenioso para el debate; se levanta del dolor real y terrible — la pérdida de un hijo, los lentos estragos de la enfermedad, la crueldad de la opresión, el dolor diario de vivir en un mundo quebrantado. Y la objeción tiene una verdadera agudeza. Si Dios es de veras bueno, corre el argumento, entonces seguramente <em>querría</em> poner fin al mal. Y si es de veras todopoderoso, entonces seguramente <em>podría</em> poner fin al mal. Y sin embargo el mal claramente permanece. Así que (concluye el que objeta) o Dios no es de veras bueno, o no es de veras todopoderoso, o quizás no está de veras ahí en absoluto. Esta es una pregunta seria, y merece una respuesta seria y honesta, nunca un ademán superficial o desdeñoso de la mano. Y he aquí lo que debe decirse: el cristianismo no ofrece una solución pulcra que responda ordenadamente a cada "por qué." Pero ofrece algo mejor — recursos reales para enfrentar el sufrimiento, y, en el mismísimo centro, un Dios que ha entrado en ese sufrimiento Él mismo.</p>
+<h2><span class="dg-n">2.</span>Ninguna respuesta pulcra — pero recursos reales</h2>
+<p>Seamos honestos justo al comienzo, porque cualquier cosa menos sería cruel: la Biblia no nos da una explicación completa y teórica de exactamente por qué Dios permite cada mal particular que viene a una vida humana. Esto es importante. Cuando el hombre Job, en las profundidades de su agonía, demandó respuestas de Dios, Dios no se sentó a darle una pulcra explicación de las razones detrás de su sufrimiento. Lo que Dios le dio a Job, en cambio, fue a sí mismo — su presencia, su majestad, su cercanía. Así que debemos ser muy humildes aquí, y nunca debemos pretender explicar lo que Dios ha escogido no explicar. Entregar a una persona que sufre una pulcra fórmula es usualmente herirla más. Pero aquí está lo crucial: la ausencia de una respuesta <em>teórica</em> completa de ningún modo es la ausencia de esperanza, o de ayuda. El cristianismo no ofrece al que sufre una fórmula ingeniosa; ofrece algo mucho más fuerte y mucho más real — recursos sólidos para enfrentar el mal que van inconmensurablemente más allá de cualquier cosa que las alternativas puedan proveer.</p>
+<h2><span class="dg-n">3.</span>Dios no es indiferente — entró en nuestro sufrimiento</h2>
+<p>Y ahora venimos al mismísimo corazón de la respuesta cristiana, y es algo totalmente distinto de cualquier cosa hallada en cualquier otra fe o filosofía en todo el mundo. Nuestro Dios no ha permanecido lejano y distante de nuestro sufrimiento, contemplándolo desde alguna altura segura y cómoda. En Jesucristo, Dios mismo descendió y entró en nuestro mundo, y tomó nuestro sufrimiento sobre sus propios hombros. Fue, como el profeta predijo, "despreciado y desechado entre los hombres, varón de dolores, experimentado en quebranto." Lloró lágrimas reales ante la tumba de un amigo. Fue traicionado por los más cercanos a Él, y luego arrestado, escarnecido, torturado, y ejecutado. En la cruz, Dios-en-Cristo de veras sufrió — no como un espectador distante observando el dolor humano desde lejos, sino como un pleno participante hundido en él, llevando en su propio cuerpo lo mismísimo peor que todo el mal del mundo pudo hacer. Y así, cualquier otra cosa que no sepamos o entendamos, sabemos esta única cosa con certeza: Dios no es indiferente a nuestro sufrimiento, porque ha sufrido junto a nosotros, y ha sufrido por nosotros. La cruz es la más honda respuesta de Dios al problema de nuestro dolor — y esa respuesta no es, al final, una explicación, sino una presencia: Dios con nosotros, justo abajo en la oscuridad con nosotros.</p>
+<h2><span class="dg-n">4.</span>El mal es real, y no es la última palabra</h2>
+<p>El cristianismo también toma el mal en serio de dos maneras adicionales que traen verdadero consuelo. Primero, insiste, rotundamente, que el mal es <em>realmente mal</em> — no es una ilusión, y no es meramente algún bien menor que dejamos de entender; es un genuino ultraje contra el buen mundo que Dios hizo. Y Dios de ningún modo es indiferente a él: lo juzgará, y un día enderezará perfectamente cada cosa torcida. Note que el hondo clamor humano por justicia frente al mal no se responde pretendiendo que el mal no importa de veras; se responde, y plenamente se responde, por la segura promesa de que Dios mismo un día enderezará cada solo mal. Y segundo, el cristianismo insiste, con toda su fuerza, que el sufrimiento no es la última palabra. La resurrección de Cristo de los muertos es la propia garantía de Dios de que la muerte y el mal nunca tendrán la palabra final — que el día viene seguramente cuando Dios "limpiará toda lágrima de los ojos de ellos," y ya no habrá más muerte, ni tristeza, ni llanto, ni dolor, porque Él hará nuevas todas las cosas. Y así nosotros, de toda la gente del mundo, no nos entristecemos como los que no tienen esperanza. El mal es real — pero es un enemigo derrotado. El sufrimiento es real — pero es solo por un tiempo.</p>
+<h2><span class="dg-n">5.</span>Cómo manejar la duda honesta</h2>
+<p>Hay una lucha estrechamente relacionada que no es el sufrimiento mismo sino la duda — la experiencia del creyente que halla preguntas e incertidumbres levantándose dentro de la mente, y que luego comienza a temer que la duda misma deba ser un pecado, o una segura señal de que su fe ha fallado. Así que dígase aquí una palabra afable y honesta, porque hace mucha falta. La duda no es lo mismo que la incredulidad, y las preguntas honestas no son una traición a Dios. Algunos de los más grandes santos que jamás vivieron lucharon dura y largamente con sus dudas. La fe nunca fue pensada para ser la completa ausencia de cada pregunta; la fe es la confianza que sigue aferrándose a Dios aun mientras algunas preguntas todavía permanecen sin responder. Y lo correcto que hacer con sus dudas enfáticamente <em>no</em> es enterrarlas en vergüenza, ni pretender que desaparezcan, ni sentir que debe esconderlas de Dios. Lo correcto es sacarlas honestamente a la luz — llevarlas directamente a Dios en oración, buscar respuestas honestas en su Palabra, y hablarlas con sabios y confiables compañeros creyentes. Dios no está ni lo más mínimo amenazado por sus preguntas; de hecho las invita. Traiga sus dudas a la luz, y una y otra vez hallará que lo que había parecido ser un sólido muro resulta ser una puerta.</p>
+<h2><span class="dg-n">6.</span>Un Dios que sufre con nosotros</h2>
+<p>Así que cuando alguien levanta con nosotros el difícil problema del sufrimiento — o cuando nosotros mismos vamos caminando por la oscuridad — no pretendemos sostener alguna pulcra respuesta a cada angustiado "por qué." Somos honestos: hay cosas que sencillamente no sabemos, cosas que Dios no ha escogido explicarnos. Pero tomamos nuestra firme posición sobre las cosas que <em>sí</em> sabemos, y resultan ser más que suficientes para sostenernos. Sabemos que el mal es real, y que Dios lo juzgará y enderezará cada mal al final. Sabemos que el sufrimiento no es la palabra final, porque Cristo ha resucitado, y un día hará nuevas todas las cosas. Y, por encima de todo lo demás, sabemos que Dios no está distante, y no es indiferente — porque en Cristo descendió a nuestro sufrimiento, lloró nuestras lágrimas con nosotros, y llevó nuestro dolor sobre la cruz. Nuestro Dios no es un Dios que está lejos, ajeno a la agonía del mundo; es un Dios que voluntariamente se ha hundido hasta sus mismísimas profundidades más hondas, y todo ello por amor a nosotros. Así que si usted sufre mientras lee esto, óigalo y aférrese a ello: no sufre solo, y no sufre sin ser visto. El Dios que le hizo ha sufrido con usted; está con usted aun ahora; y seguramente le llevará hasta el otro lado. Y si usted duda, no le tema. Lleve sus preguntas honestamente al Dios que no está amenazado por una sola de ellas, y siga aferrándose. El mismo Cristo que sufrió y resucitó es más que capaz de sostenerle <em>a usted</em> firme a través de cada oscuridad — y lo hará.</p>
+<h2><span class="dg-n">7.</span>Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<b>Para reflexionar.</b> Cuando enfrenta el sufrimiento, ¿busca una pulcra explicación — o al Dios que entró en él con usted en la cruz? ¿Ha estado cargando dudas en vergüenza y secreto, en lugar de traerlas honestamente a Dios? Si usted va caminando por una pesada temporada de sufrimiento o duda, sea esto un afable ánimo a no cargarla enteramente solo — acuda a un pastor de confianza o a un compañero creyente que pueda orar con usted y caminar a su lado.
+    </div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Una lectura del Seminario Teológico de Chapala sobre el problema del sufrimiento y la lucha de la duda, anclada en las obras clásicas de dominio público de la apologética (<em>The Consolation of Philosophy</em> de Boecio, <em>Confessions</em> de Agustín, <em>Pensées</em> de Blaise Pascal, y otros), y en la Escritura. Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Esta lectura se apoya especialmente en <em>The Consolation of Philosophy</em> de Boecio (escrito en prisión, sobre el sufrimiento y la providencia), <em>Confessions</em> de Agustín, y <em>Pensées</em> de Blaise Pascal, todos en el dominio público.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="4" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- 5 -->
+<article class="entry" data-id="5" data-title-en="The Reasonableness of Faith, and the Heart &mdash; CTS digest" data-title-es="La Razonabilidad de la Fe, y el Corazón &mdash; resumen STC">
+<div class="locus"><span class="lang-en">Faith, reason, and the whole person &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">La fe, la razón, y la persona entera &middot; un resumen biling&uuml;e del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">5.</span><span class="lang-en">The Reasonableness of Faith, and the Heart</span><span class="lang-es">La Razonabilidad de la Fe, y el Corazón</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">The capstone: faith and reason are not enemies (“faith seeking understanding” — Anselm, Augustine); Pascal’s “the heart has its reasons”; the changed life as evidence and the restless heart (Augustine’s “our heart is restless until it rests in You”); Chesterton — Christianity uniquely fits the world and the heart; apologetics commends Christ to the whole person but cannot create faith, which is God’s gift. Returns to 1 Peter 3:15.</p>
+<p class="caption lang-es block">La culminación: la fe y la razón no son enemigas (“la fe que busca entender” — Anselmo, Agustín); el “el corazón tiene razones” de Pascal; la vida cambiada como evidencia y el corazón inquieto (el “nuestro corazón está inquieto hasta que descanse en ti” de Agustín); Chesterton — el cristianismo encaja de modo único con el mundo y el corazón; la apologética recomienda a Cristo a la persona entera pero no puede crear fe, que es el don de Dios. Regresa a 1 Pedro 3:15.</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>The Reasonableness of Faith, and the Heart</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — faith and reason, the heart's own reasons, and the Christ who satisfies the whole person</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain works of apologetics (Pascal, Augustine, Chesterton, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Course: Apologetics</li>
+<li>Faith and Reason</li>
+<li>The Restless Heart</li>
+<li>Capstone</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> Christianity is not merely a conclusion at the end of an argument; faith engages the whole person — mind and heart. This closing reading gathers up the course: the place of reason and of the heart in faith, and the Christ who is to be commended to the whole person — and with it our study of apologetics comes to rest.
+    </div>
+<h2><span class="dg-n">1.</span>More Than an Argument</h2>
+<p>Across these readings we have surveyed the solid reasons for faith — the pointers to God written into creation and conscience, the historical evidence for Christ and His resurrection, and honest resources for facing the hard problems of suffering and doubt. But we must be careful, at the end, not to leave the wrong impression: that Christianity is merely a conclusion arrived at at the end of an argument, something you come to believe in the same cool way you come to accept a mathematical theorem. It is not like that. Faith engages the whole person — the mind and the heart, the reason and the longing, the will and the love, all together. So this final reading gathers up the whole course, and asks two questions that belong together: what is the proper place of reason in faith, and what is the proper place of the heart? And in the end it points us beyond every argument to Christ Himself, who is to be commended not to one part of us only, but to the whole person.</p>
+<h2><span class="dg-n">2.</span>Faith Seeking Understanding</h2>
+<p>Consider first that faith and reason are not enemies, though they are so often imagined to be. Some people suppose that in order to have faith you must simply switch off your mind, and that reason is the natural foe of belief. But the great tradition of the Christian church has never believed any such thing; it has always held the two firmly together. "Faith seeking understanding" was the great motto of Anselm, and long before him it had been the very spirit of Augustine: believe, he said, in order that you may understand. In this way of seeing things, faith is not the abandonment of reason at all, but rather its fulfillment. The believer is never asked to stop thinking; he is asked to think rightly, and to think under God. God Himself gave us our minds, and He honors their honest and diligent use. And so we have no need whatever to be afraid of reason, or to set it in opposition to faith. Rightly understood, the two are friends and allies; and reason, when it honestly follows the evidence wherever it leads, is found to lead toward God, and not away from Him.</p>
+<h2><span class="dg-n">3.</span>The Heart Has Its Reasons</h2>
+<p>And yet reason, for all its dignity, is not the whole of the matter. Pascal wrote the famous words: "the heart has its reasons, which reason does not know." What he meant is that there is a real knowledge of God that is not merely a matter of argument and proof, but a matter of the heart — a knowing that comes to us when God is actually encountered, and loved, and trusted. The very greatest truths of all — that we are truly loved, that Christ is truly good, that God is truly real — are grasped not by the head alone but by the heart as well. And this is not irrationality; it is simply the recognition that a human being is far more than a cold reasoning machine. There are some things that we come to know most deeply and most surely by love. And faith, at its very fullest, is never merely the mind's assent to a list of true statements; it is the trust and the love of the whole heart, reaching out toward God Himself. The mind is engaged, yes — but so is everything else that we are.</p>
+<h2><span class="dg-n">4.</span>The Changed Life and the Restless Heart</h2>
+<p>Two further pointers speak directly to the heart. The first is the changed life. The sheer transforming power of the gospel, worked out visibly in real human lives, is itself a kind of evidence that cannot be waved away. Wherever Christ is genuinely received, He changes people, often past all recognition — the one bound by addiction is set free, the bitter and hard-hearted are made gentle, and those sunk in despair are given a living hope. As the Lord Himself said, "by their fruits you shall know them." And the second pointer is the deep and restless longing of the human heart itself. Augustine gave it its immortal expression, speaking to God at the opening of his <em>Confessions</em>: "You have made us for Yourself, and our heart is restless until it rests in You." That deep restlessness in the human heart — its hunger for meaning, its ache for love, its reaching after something beyond this whole passing world — is itself a pointer straight back to the God who made us for Himself. Our very deepest desires, it turns out, are not mocked by the gospel, nor left to starve; they are met by it, and satisfied.</p>
+<h2><span class="dg-n">5.</span>Christianity Fits the World and the Heart</h2>
+<p>G. K. Chesterton, in his book <em>Orthodoxy</em>, described his own long and winding journey to faith. And what he found, to his surprise, was that Christianity, far from being at war with the real world, actually <em>fit</em> it — fit both its dazzling beauty and its aching brokenness, both its wild joys and its deep sorrows, more truly and completely than any other explanation he had ever tried. It alone accounted for why the world can be at once so glorious and yet so plainly wrong; why we go on longing all our lives for a joy we can never quite lay hold of here. Christianity, in other words, is not only true in its facts; it is also deeply <em>fitting</em> to the whole of human life — it makes sense of the world as we actually find it, and at the same time it satisfies the restless heart. The gospel comes to meet us not at some single narrow point, but at every point of our nature at once — mind and heart, reason and longing, thought and love. It is true; and it fits; and it satisfies.</p>
+<h2><span class="dg-n">6.</span>Commend Christ to the Whole Person</h2>
+<p>And so this brings to its close our whole study of apologetics. We have seen, along the way, that the Christian faith is no blind leap in the dark, but rests upon real and solid ground — the witness of creation and conscience to God, the historical evidence for Christ and the resurrection, and honest resources for facing even suffering and doubt. And we have seen, too, that faith is always more than mere argument — that reason and the heart together lead us home to God, that the changed life and the restless heart each bear their own quiet witness, and that Christianity fits the world and satisfies the soul as nothing else can. But at the very end, we must hold on to what we said at the very beginning, about what apologetics can and cannot do. It can point clearly to the truth; it can remove the obstacles in a person's way; it can commend Christ to the whole person. But it cannot, of itself, create faith in anyone. Faith is finally the gift of God, and it is the Holy Spirit who opens the human heart to believe. So we give our defense — reasoned, honest, and always gentle — and then we pray, and we leave the outcome trustingly in the hands of God. Do not be anxious, then, to win arguments; be eager only to commend Christ, and leave all the rest to Him. Point people steadily to the God who is really there, to the Christ who really rose, and to the faith that really does satisfy the restless heart. Be always ready to give a reason for the hope that is in you — and give it with meekness, and with love, and with prayer. For in the end, apologetics was never about our own cleverness at all; it is about pointing away from ourselves altogether, to Him who <em>is</em> the Truth. And the very same Christ whom we commend to others is the one who satisfies our own hearts, and who holds us, and them, forever fast.</p>
+<h2><span class="dg-n">7.</span>Taking It to Heart</h2>
+<div class="dg-reflect">
+<b>For reflection.</b> Have you thought of faith and reason as enemies — or can you see them, at last, as friends? Where has your own heart proved "restless" until it found its rest in God? And in commending Christ to others, are you trusting in the sharpness of your arguments, or in the God who alone gives faith?
+    </div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary reading on faith, reason, and the heart, anchored in the classic public-domain works of apologetics (Blaise Pascal's <em>Pensées</em>, Augustine's <em>Confessions</em>, G. K. Chesterton's <em>Orthodoxy</em>, James Orr's <em>The Christian View of God and the World</em>, and others), and in Scripture (1 Peter 3:15). This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This reading draws especially on Blaise Pascal's <em>Pensées</em>, Augustine's <em>Confessions</em>, and G. K. Chesterton's <em>Orthodoxy</em>, all in the public domain.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>La Razonabilidad de la Fe, y el Corazón</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — la fe y la razón, las razones propias del corazón, y el Cristo que satisface a la persona entera</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en las obras clásicas de dominio público de la apologética (Pascal, Agustín, Chesterton, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Curso: Apologética</li>
+<li>Fe y razón</li>
+<li>El corazón inquieto</li>
+<li>Culminación</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> El cristianismo no es meramente una conclusión al final de un argumento; la fe involucra a la persona entera — mente y corazón. Esta lectura final reúne el curso: el lugar de la razón y del corazón en la fe, y el Cristo que ha de ser recomendado a la persona entera — y con ella nuestro estudio de la apologética llega a reposar.
+    </div>
+<h2><span class="dg-n">1.</span>Más que un argumento</h2>
+<p>A través de estas lecturas hemos examinado las sólidas razones para la fe — los indicios de Dios escritos en la creación y la conciencia, la evidencia histórica de Cristo y su resurrección, y recursos honestos para enfrentar los difíciles problemas del sufrimiento y la duda. Pero debemos tener cuidado, al final, de no dejar la impresión equivocada: que el cristianismo es meramente una conclusión a la que se llega al final de un argumento, algo que uno llega a creer de la misma fría manera en que llega a aceptar un teorema matemático. No es así. La fe involucra a la persona entera — la mente y el corazón, la razón y el anhelo, la voluntad y el amor, todo junto. Así que esta lectura final reúne todo el curso, y hace dos preguntas que van juntas: ¿cuál es el debido lugar de la razón en la fe, y cuál es el debido lugar del corazón? Y al final nos señala más allá de cada argumento a Cristo mismo, que ha de ser recomendado no a una sola parte de nosotros, sino a la persona entera.</p>
+<h2><span class="dg-n">2.</span>La fe que busca entender</h2>
+<p>Considere primero que la fe y la razón no son enemigas, aunque tan a menudo se imaginen serlo. Algunos suponen que a fin de tener fe uno debe sencillamente apagar su mente, y que la razón es el enemigo natural de la creencia. Pero la gran tradición de la iglesia cristiana nunca ha creído tal cosa; siempre las ha sostenido firmemente juntas. "La fe que busca entender" fue el gran lema de Anselmo, y mucho antes de él había sido el mismísimo espíritu de Agustín: cree, dijo, a fin de que puedas entender. En esta manera de ver las cosas, la fe no es en absoluto el abandono de la razón, sino más bien su cumplimiento. Al creyente nunca se le pide que deje de pensar; se le pide que piense correctamente, y que piense bajo Dios. Dios mismo nos dio nuestras mentes, y honra su honesto y diligente uso. Y así no tenemos ninguna necesidad de tener miedo de la razón, ni de ponerla en oposición a la fe. Rectamente entendidas, las dos son amigas y aliadas; y la razón, cuando honestamente sigue la evidencia adondequiera que lleve, se halla que lleva hacia Dios, y no lejos de Él.</p>
+<h2><span class="dg-n">3.</span>El corazón tiene sus razones</h2>
+<p>Y sin embargo la razón, con toda su dignidad, no es todo el asunto. Pascal escribió las famosas palabras: "el corazón tiene razones que la razón no conoce." Lo que quiso decir es que hay un verdadero conocimiento de Dios que no es meramente un asunto de argumento y prueba, sino un asunto del corazón — un conocer que nos viene cuando Dios es en realidad encontrado, y amado, y confiado. Las mismísimas más grandes verdades de todas — que somos verdaderamente amados, que Cristo es verdaderamente bueno, que Dios es verdaderamente real — son captadas no por la cabeza sola sino por el corazón también. Y esto no es irracionalidad; es sencillamente el reconocimiento de que un ser humano es mucho más que una fría máquina de razonar. Hay algunas cosas que llegamos a conocer más honda y más ciertamente por el amor. Y la fe, en su mismísima plenitud, nunca es meramente el asentimiento de la mente a una lista de declaraciones verdaderas; es la confianza y el amor del corazón entero, extendiéndose hacia Dios mismo. La mente está involucrada, sí — pero también lo está todo lo demás que somos.</p>
+<h2><span class="dg-n">4.</span>La vida cambiada y el corazón inquieto</h2>
+<p>Dos indicios adicionales hablan directamente al corazón. El primero es la vida cambiada. El mero poder transformador del evangelio, obrado visiblemente en vidas humanas reales, es en sí mismo una clase de evidencia que no puede desecharse. Dondequiera que Cristo es genuinamente recibido, cambia a la gente, a menudo más allá de todo reconocimiento — el atado por la adicción es librado, el amargado y de duro corazón es hecho manso, y los hundidos en la desesperación reciben una esperanza viva. Como el Señor mismo dijo, "por sus frutos los conoceréis." Y el segundo indicio es el hondo e inquieto anhelo del corazón humano mismo. Agustín le dio su inmortal expresión, hablando a Dios en la apertura de sus <em>Confesiones</em>: "nos hiciste para ti, y nuestro corazón está inquieto hasta que descanse en ti." Esa honda inquietud en el corazón humano — su hambre de significado, su dolor por amor, su búsqueda de algo más allá de todo este mundo pasajero — es en sí misma un indicio directo de vuelta al Dios que nos hizo para sí. Nuestros mismísimos más hondos deseos, resulta, no son burlados por el evangelio, ni dejados a morir de hambre; son satisfechos por él.</p>
+<h2><span class="dg-n">5.</span>El cristianismo encaja con el mundo y el corazón</h2>
+<p>G. K. Chesterton, en su libro <em>Orthodoxy</em>, describió su propio largo y sinuoso viaje a la fe. Y lo que halló, para su sorpresa, fue que el cristianismo, lejos de estar en guerra con el mundo real, en realidad <em>encajaba</em> con él — encajaba tanto con su deslumbrante belleza como con su doliente quebrantadura, tanto con sus salvajes alegrías como con sus hondas tristezas, más verdadera y completamente que cualquier otra explicación que jamás había probado. Solo él daba cuenta de por qué el mundo puede ser a la vez tan glorioso y sin embargo tan claramente errado; de por qué seguimos anhelando toda nuestra vida una alegría que nunca podemos del todo asir aquí. El cristianismo, en otras palabras, no es solo verdadero en sus hechos; es también hondamente <em>apropiado</em> a toda la vida humana — da sentido al mundo tal como en realidad lo hallamos, y al mismo tiempo satisface el corazón inquieto. El evangelio viene a encontrarnos no en algún solo estrecho punto, sino en cada punto de nuestra naturaleza a la vez — mente y corazón, razón y anhelo, pensamiento y amor. Es verdadero; y encaja; y satisface.</p>
+<h2><span class="dg-n">6.</span>Recomiende a Cristo a la persona entera</h2>
+<p>Y así esto lleva a su cierre todo nuestro estudio de la apologética. Hemos visto, por el camino, que la fe cristiana no es ningún salto ciego en la oscuridad, sino que descansa sobre terreno real y sólido — el testimonio de la creación y la conciencia a Dios, la evidencia histórica de Cristo y la resurrección, y recursos honestos para enfrentar aun el sufrimiento y la duda. Y hemos visto, también, que la fe es siempre más que mero argumento — que la razón y el corazón juntos nos llevan a casa a Dios, que la vida cambiada y el corazón inquieto cada uno lleva su propio callado testimonio, y que el cristianismo encaja con el mundo y satisface el alma como ninguna otra cosa puede. Pero al mismísimo final, debemos aferrarnos a lo que dijimos al mismísimo comienzo, sobre lo que la apologética puede y no puede hacer. Puede señalar claramente a la verdad; puede quitar los obstáculos en el camino de una persona; puede recomendar a Cristo a la persona entera. Pero no puede, por sí misma, crear fe en nadie. La fe es finalmente el don de Dios, y es el Espíritu Santo quien abre el corazón humano para creer. Así que damos nuestra defensa — razonada, honesta, y siempre afable — y luego oramos, y dejamos el resultado confiadamente en las manos de Dios. No esté ansioso, pues, de ganar argumentos; esté ansioso solo de recomendar a Cristo, y deje todo el resto a Él. Señale a la gente firmemente al Dios que de veras está ahí, al Cristo que de veras resucitó, y a la fe que de veras satisface el corazón inquieto. Esté siempre listo para dar razón de la esperanza que hay en usted — y désela con mansedumbre, y con amor, y con oración. Porque al final, la apologética nunca se trató de nuestra propia astucia en absoluto; se trata de señalar lejos de nosotros mismos por completo, a Aquel que <em>es</em> la Verdad. Y el mismísimo Cristo a quien recomendamos a otros es el que satisface nuestros propios corazones, y que nos sostiene, a ellos y a nosotros, firmes para siempre.</p>
+<h2><span class="dg-n">7.</span>Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<b>Para reflexionar.</b> ¿Ha pensado en la fe y la razón como enemigas — o puede verlas, al fin, como amigas? ¿Dónde ha probado su propio corazón estar "inquieto" hasta que halló su reposo en Dios? Y al recomendar a Cristo a otros, ¿confía en la agudeza de sus argumentos, o en el Dios que solo Él da la fe?
+    </div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Una lectura del Seminario Teológico de Chapala sobre la fe, la razón, y el corazón, anclada en las obras clásicas de dominio público de la apologética (<em>Pensées</em> de Blaise Pascal, <em>Confessions</em> de Agustín, <em>Orthodoxy</em> de G. K. Chesterton, <em>The Christian View of God and the World</em> de James Orr, y otros), y en la Escritura (1 Pedro 3:15). Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Esta lectura se apoya especialmente en <em>Pensées</em> de Blaise Pascal, <em>Confessions</em> de Agustín, y <em>Orthodoxy</em> de G. K. Chesterton, todos en el dominio público.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="5" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+
+<!-- APOL_HONORS_ENRICHMENT_START R6 -->
+<article class="entry" data-id="6" data-title-en="The Historical Case for Jesus and the Resurrection &mdash; CTS Honors reading" data-title-es="El Caso Histórico de Jesús y la Resurrección &mdash; lectura con Honores STC">
+<div class="locus"><span class="lang-en">Historical evidence and the cumulative case &middot; a CTS bilingual Honors reading</span><span class="lang-es">Evidencia histórica y el caso acumulativo &middot; una lectura bilingüe con Honores del STC</span></div>
+<div class="title"><span class="num">6.</span><span class="lang-en">The Historical Case for Jesus and the Resurrection</span><span class="lang-es">El Caso Histórico de Jesús y la Resurrección</span></div>
+<div class="byline">A CTS bilingual Honors reading</div>
+<p class="caption lang-en block">A deeper but accessible look at Gospel historical setting, eyewitness testimony, the early resurrection tradition in 1 Corinthians 15, Gospel differences, and the cumulative historical case.</p>
+<p class="caption lang-es block">Una mirada más profunda pero accesible al ambiente histórico de los Evangelios, el testimonio ocular, la tradición temprana de la resurrección en 1 Corintios 15, las diferencias entre los Evangelios y el caso histórico acumulativo.</p>
+<div class="foot"><details class="digest-inline"><summary><span class="dg-badge">CTS HONORS</span><span class="lang-en">Read the full Honors reading &mdash; opens right here</span><span class="lang-es">Leer la lectura completa con Honores &mdash; se abre aquí mismo</span></summary>
+<div class="dg-note-line"><span class="lang-en">Original CTS teaching summarizing and interacting with modern scholarship; no copyrighted chapter is reproduced.</span><span class="lang-es">Enseñanza original del STC que resume e interactúa con estudios modernos; no se reproduce ningún capítulo protegido.</span></div>
+<div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc"><h1>The Historical Case for Jesus and the Resurrection</h1>
+<p class="dg-sub">A Chapala Theological Seminary Honors reading — how several lines of historical evidence work together</p>
+<p class="dg-src">CTS-authored teaching drawing on the accessible apologetic method of Lee Strobel and the historical work of scholars such as Craig Blomberg, Richard Bauckham, Peter J. Williams, and Michael Licona.</p></header>
+<h2><span class="dg-n">1.</span>Begin with history</h2>
+<p>Christianity makes claims about events. Jesus lived in a particular place and time, was crucified under Roman authority, and His followers very soon proclaimed that He had risen from the dead. That means Christian faith is not protected from historical questions. The New Testament itself invites them. Luke says that he investigated the events carefully; Paul names witnesses; John speaks of testimony. Apologetics should therefore neither fear historical study nor pretend that every historical question is easy. The proper question is whether the evidence, taken together, makes Christian belief historically responsible.</p>
+<h2><span class="dg-n">2.</span>Documents close to the world they describe</h2>
+<p>The Gospels repeatedly display knowledge of first-century Jewish life and the geography of Palestine. They know towns, rulers, customs, disputes, travel patterns, and ordinary personal names appropriate to the period. Peter J. Williams has emphasized that such details matter cumulatively. A novelist can get some facts right, but a sustained pattern of ordinary accuracy is what we expect from testimony rooted close to the people and places described. Archaeology cannot prove a miracle, but it can test whether a writer seems at home in the historical world he claims to report.</p>
+<h2><span class="dg-n">3.</span>Eyewitness memory</h2>
+<p>Richard Bauckham has called renewed attention to the role of eyewitnesses in the Gospel tradition. Named people may sometimes be more than decorative details: they can point to remembered persons connected with the events. The Gospels also preserve embarrassing material about the disciples — misunderstanding Jesus, arguing over status, fleeing, and Peter denying Him. Such features do not prove every detail, but they sit awkwardly with the idea that the accounts were simply invented to glorify the first Christian leaders. The evidence is better approached as testimony to be weighed than as legend to be dismissed in advance.</p>
+<h2><span class="dg-n">4.</span>The resurrection message is early</h2>
+<p>First Corinthians 15 is especially important. Paul reminds the Corinthians of a message he had already received and delivered: Christ died for sins, was buried, was raised, and appeared to witnesses including Peter, the Twelve, James, the apostles, and more than five hundred. Scholars debate the precise date and wording of this tradition, but it plainly predates the letter itself. Therefore the resurrection proclamation was not a belief first created centuries later. It belonged to the earliest Christian message we can reach historically.</p>
+<h2><span class="dg-n">5.</span>Differences are not automatically contradictions</h2>
+<p>The Gospels are not four photocopies. They select, arrange, compress, and emphasize material differently. Michael Licona has compared such differences with the normal practices of ancient biography. This is useful because Christians need not force every account into an artificial word-for-word harmony, while skeptics need not treat every difference as proof of fabrication. Historical witnesses commonly tell the same event with different selections and emphases. The right task is to ask whether the central events remain stable and whether the differences are reasonable within the literary practices of their time.</p>
+<h2><span class="dg-n">6.</span>What must be explained?</h2>
+<p>At minimum, the historical picture includes Jesus' crucifixion, the very early proclamation that He had risen, reported appearances to individuals and groups, and dramatic changes in people such as Paul and James. Christians add the empty-tomb tradition and the transformed disciples to the case. Alternative explanations deserve to be heard rather than mocked: fraud, hallucination, legendary development, mistaken identification, or some combination. Yet each explanation must account for the whole cluster rather than one convenient piece. The Christian claim is that resurrection explains the evidence more naturally than the alternatives.</p>
+<h2><span class="dg-n">7.</span>A case, not a trick</h2>
+<p>Lee Strobel popularized a helpful courtroom image: do not depend on one spectacular exhibit; hear several witnesses. That is also a safeguard against weak apologetics. If one archaeological claim is overturned or one argument is disputed, Christianity does not collapse. The historical case rests on many converging considerations. None forces a person to believe. History cannot put the risen Christ in a laboratory. But it can ask whether the earliest witnesses were proclaiming something they sincerely believed had happened and whether resurrection is a serious explanation of the evidence. The Christian need not claim more. We can present the case fairly, acknowledge where scholars disagree, and then ask the question the evidence itself presses upon us: what best explains the rise of the resurrection faith at the very beginning of Christianity?</p>
+<div class="dg-reflect"><b>For reflection.</b> Which part of the historical case seems strongest to you? Which alternative explanation deserves the most serious consideration? Can you explain why the resurrection proclamation is early without claiming that early belief alone proves the resurrection?</div>
+<footer class="dg-doc"><p><b>Source note.</b> This is original CTS teaching, not a reproduction of any modern book. It summarizes and interacts with commonly discussed arguments associated with Lee Strobel, Craig Blomberg, Richard Bauckham, Peter J. Williams, Michael Licona, and New Testament scholarship more broadly.</p></footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc"><h1>El Caso Histórico de Jesús y la Resurrección</h1>
+<p class="dg-sub">Una lectura con Honores del Seminario Teológico de Chapala — cómo varias líneas de evidencia histórica trabajan juntas</p>
+<p class="dg-src">Enseñanza de autoría del STC que se apoya en el método apologético accesible de Lee Strobel y en el trabajo histórico de estudiosos como Craig Blomberg, Richard Bauckham, Peter J. Williams y Michael Licona.</p></header>
+<h2><span class="dg-n">1.</span>Comience con la historia</h2>
+<p>El cristianismo hace afirmaciones acerca de acontecimientos. Jesús vivió en un lugar y tiempo determinados, fue crucificado bajo autoridad romana, y Sus seguidores muy pronto proclamaron que había resucitado de entre los muertos. Eso significa que la fe cristiana no está protegida de las preguntas históricas. El mismo Nuevo Testamento las invita. Lucas dice que investigó cuidadosamente los acontecimientos; Pablo nombra testigos; Juan habla de testimonio. Por eso la apologética no debe temer el estudio histórico ni fingir que toda pregunta histórica es fácil. La pregunta correcta es si la evidencia, tomada en conjunto, hace históricamente responsable la fe cristiana.</p>
+<h2><span class="dg-n">2.</span>Documentos cercanos al mundo que describen</h2>
+<p>Los Evangelios muestran repetidamente conocimiento de la vida judía del primer siglo y de la geografía de Palestina. Conocen pueblos, gobernantes, costumbres, controversias, rutas de viaje y nombres personales comunes apropiados para la época. Peter J. Williams ha destacado que estos detalles importan de manera acumulativa. Un novelista puede acertar algunos datos, pero un patrón sostenido de exactitud ordinaria es lo que esperaríamos de un testimonio arraigado cerca de las personas y lugares descritos. La arqueología no puede demostrar un milagro, pero puede probar si un escritor parece conocer bien el mundo histórico que afirma relatar.</p>
+<h2><span class="dg-n">3.</span>Memoria de testigos oculares</h2>
+<p>Richard Bauckham ha llamado nuevamente la atención al papel de los testigos oculares en la tradición de los Evangelios. Las personas nombradas pueden ser a veces más que detalles decorativos: pueden señalar a personas recordadas relacionadas con los acontecimientos. Los Evangelios también conservan material vergonzoso acerca de los discípulos — no comprender a Jesús, discutir por posiciones, huir y la negación de Pedro. Tales rasgos no demuestran cada detalle, pero encajan mal con la idea de que los relatos fueron simplemente inventados para glorificar a los primeros líderes cristianos. Es mejor acercarse a la evidencia como testimonio que debe sopesarse que como leyenda que debe descartarse de antemano.</p>
+<h2><span class="dg-n">4.</span>El mensaje de la resurrección es temprano</h2>
+<p>Primera de Corintios 15 es especialmente importante. Pablo recuerda a los corintios un mensaje que él ya había recibido y entregado: Cristo murió por los pecados, fue sepultado, resucitó y apareció a testigos, incluyendo a Pedro, los Doce, Jacobo, los apóstoles y más de quinientos. Los estudiosos debaten la fecha y redacción precisas de esta tradición, pero claramente es anterior a la carta misma. Por lo tanto, la proclamación de la resurrección no fue una creencia creada por primera vez siglos después. Pertenecía al mensaje cristiano más temprano al que podemos llegar históricamente.</p>
+<h2><span class="dg-n">5.</span>Las diferencias no son automáticamente contradicciones</h2>
+<p>Los Evangelios no son cuatro fotocopias. Seleccionan, ordenan, resumen y enfatizan el material de maneras diferentes. Michael Licona ha comparado tales diferencias con las prácticas normales de la biografía antigua. Esto es útil porque los cristianos no necesitan forzar cada relato a una armonía artificial palabra por palabra, mientras que los escépticos tampoco necesitan tratar cada diferencia como prueba de invención. Los testigos históricos suelen contar el mismo acontecimiento con selecciones y énfasis diferentes. La tarea correcta es preguntar si los acontecimientos centrales permanecen estables y si las diferencias son razonables dentro de las prácticas literarias de su tiempo.</p>
+<h2><span class="dg-n">6.</span>¿Qué debe explicarse?</h2>
+<p>Como mínimo, el cuadro histórico incluye la crucifixión de Jesús, la proclamación muy temprana de que había resucitado, apariciones reportadas a individuos y grupos, y cambios dramáticos en personas como Pablo y Jacobo. Los cristianos añaden al caso la tradición de la tumba vacía y los discípulos transformados. Las explicaciones alternativas merecen ser escuchadas y no ridiculizadas: fraude, alucinación, desarrollo legendario, identificación equivocada o alguna combinación. Sin embargo, cada explicación debe dar cuenta del conjunto entero y no solamente de una pieza conveniente. La afirmación cristiana es que la resurrección explica la evidencia más naturalmente que las alternativas.</p>
+<h2><span class="dg-n">7.</span>Un caso, no un truco</h2>
+<p>Lee Strobel popularizó una imagen útil del tribunal: no dependa de una sola prueba espectacular; escuche a varios testigos. Eso también nos protege de una apologética débil. Si una afirmación arqueológica es refutada o un argumento es discutido, el cristianismo no se derrumba. El caso histórico descansa sobre muchas consideraciones convergentes. Ninguna obliga a una persona a creer. La historia no puede colocar al Cristo resucitado en un laboratorio. Pero puede preguntar si los primeros testigos proclamaban algo que sinceramente creían que había ocurrido y si la resurrección es una explicación seria de la evidencia. El cristiano no necesita afirmar más. Podemos presentar el caso justamente, reconocer dónde discrepan los estudiosos, y luego hacer la pregunta que la evidencia misma nos plantea: ¿qué explica mejor el surgimiento de la fe en la resurrección desde el principio mismo del cristianismo?</p>
+<div class="dg-reflect"><b>Para reflexionar.</b> ¿Qué parte del caso histórico le parece más fuerte? ¿Qué explicación alternativa merece la consideración más seria? ¿Puede explicar por qué la proclamación de la resurrección es temprana sin afirmar que la creencia temprana por sí sola demuestra la resurrección?</div>
+<footer class="dg-doc"><p><b>Nota de fuente.</b> Esta es enseñanza original del STC, no una reproducción de ningún libro moderno. Resume e interactúa con argumentos comúnmente asociados con Lee Strobel, Craig Blomberg, Richard Bauckham, Peter J. Williams, Michael Licona y la erudición del Nuevo Testamento en general.</p></footer>
+</div></div></details>
+<label class="pick"><input data-pick="6" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label></div>
+</article>
+<!-- APOL_HONORS_ENRICHMENT_END R6 -->
+
+
+<!-- APOL_HONORS_ENRICHMENT_START R7 -->
+<article class="entry" data-id="7" data-title-en="Mind, Consciousness, God, and Life Beyond Death &mdash; CTS Honors reading" data-title-es="Mente, Conciencia, Dios y Vida Más Allá de la Muerte &mdash; lectura con Honores STC">
+<div class="locus"><span class="lang-en">Consciousness, brain, terminal lucidity, and Christian hope &middot; a CTS bilingual Honors reading</span><span class="lang-es">Conciencia, cerebro, lucidez terminal y esperanza cristiana &middot; una lectura bilingüe con Honores del STC</span></div>
+<div class="title"><span class="num">7.</span><span class="lang-en">Mind, Consciousness, God, and Life Beyond Death</span><span class="lang-es">Mente, Conciencia, Dios y Vida Más Allá de la Muerte</span></div>
+<div class="byline">A CTS bilingual Honors reading</div>
+<p class="caption lang-en block">A careful treatment of Murray's mind/brain question, consciousness, reason, paradoxical lucidity, and why these matters keep materialism from being treated as scientifically proved.</p>
+<p class="caption lang-es block">Un tratamiento cuidadoso de la pregunta mente/cerebro de Murray, la conciencia, la razón, la lucidez paradójica y por qué estas cuestiones impiden tratar el materialismo como científicamente demostrado.</p>
+<div class="foot"><details class="digest-inline"><summary><span class="dg-badge">CTS HONORS</span><span class="lang-en">Read the full Honors reading &mdash; opens right here</span><span class="lang-es">Leer la lectura completa con Honores &mdash; se abre aquí mismo</span></summary>
+<div class="dg-note-line"><span class="lang-en">Original CTS teaching. Terminal lucidity is presented as an unresolved phenomenon, not proof of an afterlife.</span><span class="lang-es">Enseñanza original del STC. La lucidez terminal se presenta como un fenómeno no resuelto, no como prueba de una vida después de la muerte.</span></div>
+<div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc"><h1>Mind, Consciousness, God, and Life Beyond Death</h1>
+<p class="dg-sub">A Chapala Theological Seminary Honors reading — what the mystery of consciousness can and cannot establish</p>
+<p class="dg-src">CTS-authored teaching interacting especially with Charles Murray's cumulative approach, while distinguishing philosophical argument from medical proof.</p></header>
+<h2><span class="dg-n">1.</span>The question behind the brain</h2>
+<p>Every thought we have in this life is connected in some way with a functioning brain. Injury, drugs, sleep, disease, and aging can change memory, emotion, judgment, and personality. Christians should not deny this evidence. The harder question is what follows from it. Does dependence on the brain prove that the mind is identical with the brain? Or could the brain be the physical means through which a conscious person ordinarily thinks and acts? Neuroscience maps correlations with increasing precision, but correlation and identity are not exactly the same claim.</p>
+<h2><span class="dg-n">2.</span>The mystery of consciousness</h2>
+<p>Science can describe electrical and chemical events in the brain, yet our first-person experience remains remarkable. We do not merely process signals; we know that we are processing them. We experience color, pain, love, guilt, beauty, purpose, and the awareness of being a continuing self. A complete description of neurons firing does not obviously tell us why there should be an inner experience at all. Philosophers disagree sharply about what this means. Some expect a fully physical explanation; others believe consciousness points to something about persons that cannot be reduced to matter. Apologetics should state the issue without pretending that philosophy has settled it.</p>
+<h2><span class="dg-n">3.</span>Reason itself</h2>
+<p>There is also a question about rational thought. If every belief is ultimately nothing more than a physical event produced by blind causes, why should we trust reasoning because it is true rather than merely because a brain was caused to produce it? Naturalists have answers to this challenge, and the Christian should hear them fairly. Still, the existence of minds capable of mathematics, logic, moral judgment, and discovering the structure of the universe fits naturally within a worldview in which Mind is fundamental — in which human beings were created by a rational God and are capable, however imperfectly, of knowing truth.</p>
+<h2><span class="dg-n">4.</span>Terminal and paradoxical lucidity</h2>
+<p>Charles Murray has drawn attention to reports of people with severe dementia who unexpectedly become lucid, sometimes shortly before death. Medicine uses terms such as terminal lucidity and paradoxical lucidity for episodes in which coherent conversation, recognition, memory, or personality seems to return despite serious neurological disease. Such episodes have been reported often enough to receive serious medical study. But caution is essential. We do not yet know their mechanism. A damaged brain may retain capacities that are temporarily inaccessible and then become briefly coordinated again. Therefore terminal lucidity is not scientific proof that a soul has separated from the brain.</p>
+<h2><span class="dg-n">5.</span>What the phenomenon does show</h2>
+<p>Its apologetic value is narrower. If a person whose cognitive abilities seemed lost can sometimes display surprising coherence without the underlying dementia having been cured, then our understanding of the relationship between damaged brain tissue, stored memory, and conscious access is incomplete. That should make both believer and unbeliever humble. It is reasonable to investigate physical explanations. It is also premature to announce that science has demonstrated that consciousness is nothing but the brain. Terminal lucidity keeps the question open; it does not settle it.</p>
+<h2><span class="dg-n">6.</span>From possibility to Christian hope</h2>
+<p>Even if philosophical dualism were established, Christianity would not automatically follow. Showing that mind may be more than matter is not the same as proving resurrection, heaven, or the gospel. The Christian case must remain cumulative. Theism gives a home to consciousness because a conscious God is prior to the material universe. Scripture gives a theological account of persons as more than disposable matter. The historical case for Jesus then makes the specifically Christian claim that death is not the end and that resurrection has entered history in Christ. These arguments support one another, but they should not be confused.</p>
+<h2><span class="dg-n">7.</span>A modest but important conclusion</h2>
+<p>The responsible conclusion is not, “Science has proved the soul.” It is this: science has shown a profound dependence of our present mental life upon the brain, but it has not solved the nature of consciousness or demonstrated that a human person is only a brain. Consciousness, reason, moral awareness, personal identity, and unusual phenomena such as paradoxical lucidity leave serious philosophical questions open. For the Christian, this does not replace faith or resurrection evidence. It simply removes an unnecessary obstacle. Belief that human beings are more than matter, and that personal existence can continue by the power of God, is not ruled out by what neuroscience presently knows.</p>
+<div class="dg-reflect"><b>For reflection.</b> What is the difference between saying that the mind depends on the brain and saying that the mind is identical with the brain? Why would it be an overstatement to call terminal lucidity proof of the soul? How does a modest conclusion make the apologetic argument stronger rather than weaker?</div>
+<footer class="dg-doc"><p><b>Source note.</b> This is original CTS teaching. It develops themes raised by Charles Murray and contemporary discussion of consciousness and paradoxical or terminal lucidity. It deliberately presents terminal lucidity as an unresolved phenomenon rather than proof of an afterlife.</p></footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc"><h1>Mente, Conciencia, Dios y Vida Más Allá de la Muerte</h1>
+<p class="dg-sub">Una lectura con Honores del Seminario Teológico de Chapala — lo que el misterio de la conciencia puede y no puede establecer</p>
+<p class="dg-src">Enseñanza de autoría del STC que interactúa especialmente con el enfoque acumulativo de Charles Murray, distinguiendo el argumento filosófico de la prueba médica.</p></header>
+<h2><span class="dg-n">1.</span>La pregunta detrás del cerebro</h2>
+<p>Cada pensamiento que tenemos en esta vida está relacionado de alguna manera con un cerebro que funciona. Las lesiones, las drogas, el sueño, la enfermedad y el envejecimiento pueden cambiar la memoria, las emociones, el juicio y la personalidad. Los cristianos no deben negar esta evidencia. La pregunta más difícil es qué se sigue de ella. ¿La dependencia del cerebro demuestra que la mente es idéntica al cerebro? ¿O podría el cerebro ser el medio físico mediante el cual una persona consciente normalmente piensa y actúa? La neurociencia traza correlaciones con creciente precisión, pero correlación e identidad no son exactamente la misma afirmación.</p>
+<h2><span class="dg-n">2.</span>El misterio de la conciencia</h2>
+<p>La ciencia puede describir acontecimientos eléctricos y químicos en el cerebro, pero nuestra experiencia en primera persona sigue siendo extraordinaria. No solamente procesamos señales; sabemos que las estamos procesando. Experimentamos color, dolor, amor, culpa, belleza, propósito y la conciencia de ser un yo continuo. Una descripción completa de neuronas disparándose no nos dice obviamente por qué debería existir una experiencia interior. Los filósofos discrepan profundamente sobre lo que esto significa. Algunos esperan una explicación completamente física; otros creen que la conciencia señala algo acerca de las personas que no puede reducirse a la materia. La apologética debe exponer la cuestión sin fingir que la filosofía ya la ha resuelto.</p>
+<h2><span class="dg-n">3.</span>La razón misma</h2>
+<p>También existe una pregunta acerca del pensamiento racional. Si cada creencia es finalmente nada más que un acontecimiento físico producido por causas ciegas, ¿por qué debemos confiar en nuestro razonamiento porque es verdadero y no simplemente porque un cerebro fue causado a producirlo? Los naturalistas tienen respuestas a este desafío, y el cristiano debe escucharlas justamente. Aun así, la existencia de mentes capaces de matemáticas, lógica, juicio moral y de descubrir la estructura del universo encaja naturalmente dentro de una cosmovisión en la cual la Mente es fundamental — en la cual los seres humanos fueron creados por un Dios racional y son capaces, aunque imperfectamente, de conocer la verdad.</p>
+<h2><span class="dg-n">4.</span>Lucidez terminal y paradójica</h2>
+<p>Charles Murray ha llamado la atención a informes de personas con demencia severa que inesperadamente se vuelven lúcidas, a veces poco antes de morir. La medicina usa términos como lucidez terminal y lucidez paradójica para episodios en los que la conversación coherente, el reconocimiento, la memoria o la personalidad parecen regresar a pesar de una enfermedad neurológica grave. Tales episodios han sido reportados con suficiente frecuencia para recibir estudio médico serio. Pero la cautela es esencial. Todavía no conocemos su mecanismo. Un cerebro dañado puede conservar capacidades temporalmente inaccesibles y luego coordinarlas brevemente otra vez. Por eso la lucidez terminal no es una prueba científica de que un alma se haya separado del cerebro.</p>
+<h2><span class="dg-n">5.</span>Lo que sí muestra el fenómeno</h2>
+<p>Su valor apologético es más limitado. Si una persona cuyas capacidades cognitivas parecían perdidas puede mostrar a veces una coherencia sorprendente sin que la demencia subyacente haya sido curada, entonces nuestra comprensión de la relación entre tejido cerebral dañado, memoria almacenada y acceso consciente es incompleta. Eso debe hacer humildes tanto al creyente como al incrédulo. Es razonable investigar explicaciones físicas. También es prematuro anunciar que la ciencia ha demostrado que la conciencia no es nada más que el cerebro. La lucidez terminal mantiene abierta la pregunta; no la resuelve.</p>
+<h2><span class="dg-n">6.</span>De la posibilidad a la esperanza cristiana</h2>
+<p>Aun si el dualismo filosófico quedara establecido, el cristianismo no se seguiría automáticamente. Mostrar que la mente puede ser más que materia no es lo mismo que demostrar la resurrección, el cielo o el evangelio. El caso cristiano debe seguir siendo acumulativo. El teísmo da un hogar a la conciencia porque un Dios consciente es anterior al universo material. La Escritura ofrece una explicación teológica de las personas como algo más que materia desechable. El caso histórico de Jesús hace entonces la afirmación específicamente cristiana de que la muerte no es el fin y que la resurrección entró en la historia en Cristo. Estos argumentos se apoyan mutuamente, pero no deben confundirse.</p>
+<h2><span class="dg-n">7.</span>Una conclusión modesta pero importante</h2>
+<p>La conclusión responsable no es: “La ciencia ha demostrado el alma.” Es esta: la ciencia ha mostrado una profunda dependencia de nuestra vida mental presente respecto al cerebro, pero no ha resuelto la naturaleza de la conciencia ni demostrado que una persona humana sea solamente un cerebro. La conciencia, la razón, la percepción moral, la identidad personal y fenómenos inusuales como la lucidez paradójica dejan abiertas preguntas filosóficas serias. Para el cristiano, esto no reemplaza la fe ni la evidencia de la resurrección. Sencillamente elimina un obstáculo innecesario. Creer que los seres humanos son más que materia y que la existencia personal puede continuar por el poder de Dios no queda descartado por lo que la neurociencia conoce actualmente.</p>
+<div class="dg-reflect"><b>Para reflexionar.</b> ¿Cuál es la diferencia entre decir que la mente depende del cerebro y decir que la mente es idéntica al cerebro? ¿Por qué sería una exageración llamar a la lucidez terminal una prueba del alma? ¿Cómo hace una conclusión modesta que el argumento apologético sea más fuerte y no más débil?</div>
+<footer class="dg-doc"><p><b>Nota de fuente.</b> Esta es enseñanza original del STC. Desarrolla temas planteados por Charles Murray y la discusión contemporánea de la conciencia y la lucidez paradójica o terminal. Deliberadamente presenta la lucidez terminal como un fenómeno no resuelto y no como prueba de una vida después de la muerte.</p></footer>
+</div></div></details>
+<label class="pick"><input data-pick="7" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label></div>
+</article>
+<!-- APOL_HONORS_ENRICHMENT_END R7 -->
+
+<!-- ============ ATTESTATION ============ -->
+<div class="card attest">
+<h2>
+<span class="lang-en">Record your reading</span>
+<span class="lang-es">Registre su lectura</span>
+</h2>
+<p class="lang-en block">When you have read your three chosen readings in full, enter your name and affirm it below. This record is kept on your honor.</p>
+<p class="lang-es block">Cuando haya leído por completo sus tres lecturas elegidas, escriba su nombre y confírmelo abajo. Este registro se guarda bajo su honor.</p>
+<label class="field" for="stName"><span class="lang-en">Your name</span><span class="lang-es">Su nombre</span></label>
+<input autocomplete="name" id="stName" type="text"/>
+<div class="oath">
+<input id="oath" type="checkbox"/>
+<label for="oath"><span class="lang-en">On my honor, I have read in full the three excerpts or adaptations I selected above.</span><span class="lang-es">Bajo mi honor, he leído por completo los tres extractos o adaptaciones que seleccioné arriba.</span></label>
+</div>
+<button class="btn" onclick="recordReading()"><span class="lang-en">Record my reading</span><span class="lang-es">Registrar mi lectura</span></button>
+<p class="msg" id="attMsg"></p>
+<p class="msg no-print" id="honorsDone" style="display:none;color:#2f6b3a;"><span class="lang-en">✓ Recorded — this class counts toward your With Honors progress. <a href="cts-honors.html" style="color:#2f6b3a;">View progress ↗</a></span><span class="lang-es">✓ Registrado — esta clase cuenta para su progreso Con Honores. <a href="cts-honors.html" style="color:#2f6b3a;">Ver progreso ↗</a></span></p>
+<!-- confirmation record -->
+<div class="record" id="record">
+<div class="seal-line"></div>
+<h3><span class="lang-en">Honors Reading — recorded</span><span class="lang-es">Lectura con Honores — registrada</span></h3>
+<div class="named" id="recName"></div>
+<p class="lang-en block">affirmed on <span id="recDateEn"></span> to have read, in full:</p>
+<p class="lang-es block">afirmó el <span id="recDateEs"></span> haber leído, por completo:</p>
+<ul id="recList"></ul>
+<p class="stamp"><span class="lang-en">Chapala Theological Seminary · Apologetics · present or print this page as your honors reading record.</span><span class="lang-es">Seminario Teológico de Chapala · Apologética · presente o imprima esta página como su registro de lectura con honores.</span></p>
+<p style="margin-top:14px;">
+<button class="btn ghost no-print" onclick="window.print()"><span class="lang-en">Print this record</span><span class="lang-es">Imprimir este registro</span></button>
+<button class="btn ghost no-print" onclick="resetReading()"><span class="lang-en">Start over</span><span class="lang-es">Empezar de nuevo</span></button>
+</p>
+</div>
+</div>
+<p class="footnote">
+<span class="lang-en">Chapala Theological Seminary · Seminario Teológico de Chapala · free bilingual self-study</span>
+<span class="lang-es">Seminario Teológico de Chapala · Chapala Theological Seminary · estudio propio bilingüe gratuito</span>
+</p>
+</div>
+<script>
+  var MAX = 3;
+  var HONORS_CODE="Apol"; var HONORS_COURSE="Apologetics";
+
+  function setLang(l){
+    document.body.className = 'lang-' + l;
+    document.querySelectorAll('.toggle-btn').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang') === l);
+    });
+  }
+
+  function chosenBoxes(){
+    return Array.prototype.slice.call(document.querySelectorAll('input[data-pick]:checked'));
+  }
+
+  function refresh(){
+    var boxes = document.querySelectorAll('input[data-pick]');
+    var chosen = chosenBoxes();
+    var n = chosen.length;
+    document.getElementById('cnt-en').textContent = n;
+    document.getElementById('cnt-es').textContent = n;
+
+    var full = (n >= MAX);
+    boxes.forEach(function(b){
+      var lab = b.closest('.pick');
+      var art = b.closest('.entry');
+      if(!b.checked && full){
+        b.disabled = true; lab.classList.add('disabled');
+      } else {
+        b.disabled = false; lab.classList.remove('disabled');
+      }
+      if(art) art.classList.toggle('chosen', b.checked);
+    });
+
+    var note = document.getElementById('limitNote');
+    if(full){
+      note.innerHTML = "<span class='lang-en'>Three chosen. Uncheck one to change your selection.</span>" +
+                       "<span class='lang-es'>Tres elegidas. Desmarque una para cambiar su selección.</span>";
+    } else {
+      note.textContent = "";
+    }
+  }
+
+  document.querySelectorAll('input[data-pick]').forEach(function(b){
+    b.addEventListener('change', refresh);
+  });
+
+  function recordReading(){
+    var chosen = chosenBoxes();
+    var name = document.getElementById('stName').value.trim();
+    var oath = document.getElementById('oath').checked;
+    var msg = document.getElementById('attMsg');
+
+    if(chosen.length !== MAX){
+      msg.innerHTML = "<span class='lang-en'>Choose exactly three readings above to record them.</span>" +
+                      "<span class='lang-es'>Elija exactamente tres lecturas arriba para registrarlas.</span>";
+      return;
+    }
+    if(!name){
+      msg.innerHTML = "<span class='lang-en'>Enter your name to record your reading.</span>" +
+                      "<span class='lang-es'>Escriba su nombre para registrar su lectura.</span>";
+      return;
+    }
+    if(!oath){
+      msg.innerHTML = "<span class='lang-en'>Check the box to affirm you have read all three.</span>" +
+                      "<span class='lang-es'>Marque la casilla para afirmar que ha leído las tres.</span>";
+      return;
+    }
+    msg.textContent = "";
+
+    var now = new Date();
+    var en = now.toLocaleDateString('en-US', {year:'numeric', month:'long', day:'numeric'});
+    var es = now.toLocaleDateString('es-MX', {year:'numeric', month:'long', day:'numeric'});
+    document.getElementById('recName').textContent = name;
+    document.getElementById('recDateEn').textContent = en;
+    document.getElementById('recDateEs').textContent = es;
+
+    var ul = document.getElementById('recList');
+    ul.innerHTML = "";
+    chosen.forEach(function(b){
+      var art = b.closest('.entry');
+      var li = document.createElement('li');
+      li.innerHTML = "<span class='lang-en'>" + art.getAttribute('data-title-en') + "</span>" +
+                     "<span class='lang-es'>" + art.getAttribute('data-title-es') + "</span>";
+      ul.appendChild(li);
+    });
+
+    try {
+      var _works=[];
+      chosen.forEach(function(b){ var a=b.closest('.entry'); if(a) _works.push(a.getAttribute('data-title-en')); });
+      localStorage.setItem('cts_honors_name_v1', name);
+      localStorage.setItem('cts_honors_v1:'+HONORS_CODE, JSON.stringify({name:name,date:en,course:HONORS_COURSE,works:_works}));
+      var _hd=document.getElementById('honorsDone'); if(_hd) _hd.style.display='block';
+    } catch(e){}
+    document.getElementById('record').classList.add('show');
+    document.getElementById('record').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  function resetReading(){
+    document.querySelectorAll('input[data-pick]').forEach(function(b){ b.checked = false; });
+    document.getElementById('stName').value = "";
+    document.getElementById('oath').checked = false;
+    document.getElementById('record').classList.remove('show');
+    document.getElementById('attMsg').textContent = "";
+    refresh();
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  refresh();
+  try {
+    if(localStorage.getItem('cts_honors_v1:'+HONORS_CODE)){ var _hd=document.getElementById('honorsDone'); if(_hd) _hd.style.display='block'; }
+    var _nm=localStorage.getItem('cts_honors_name_v1'); var _f=document.getElementById('stName'); if(_nm && _f && !_f.value){ _f.value=_nm; }
+  } catch(e){}
+</script>
+
+<!-- CTS-FURTHER-STUDY -->
+<style>
+.fs-wrap{max-width:900px;margin:38px auto 10px;padding:0 18px;font-family:Georgia,serif;color:#1f2a37;line-height:1.55;box-sizing:border-box}
+.fs-wrap *{box-sizing:border-box}
+.fs-head{border-top:6px solid #33608f;background:#eaf1f8;border:1px solid #dbe6f0;border-radius:12px;padding:18px 20px}
+.fs-eyebrow{font:700 .72rem/1 Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#33608f}
+.fs-head h2{font-size:1.5rem;margin:.3rem 0 .1rem}
+.fs-es{color:#48586a;font-style:italic}
+.fs-tag{margin:.5rem 0 0;font-family:Arial,sans-serif;font-size:.9rem;color:#5b6b7b}
+.fs-online{display:flex;gap:11px;align-items:flex-start;background:#fff;border:1px solid #33608f;border-left:6px solid #33608f;border-radius:10px;padding:11px 14px;margin:13px 0 18px}
+.fs-online .fs-badge{flex:none;font:800 .66rem/1 Arial,sans-serif;letter-spacing:.1em;color:#fff;background:#33608f;padding:6px 9px;border-radius:6px;margin-top:2px}
+.fs-online p{margin:0;font-size:.9rem}
+.fs-grid{display:grid;gap:14px}
+.fs-card{background:#fff;border:1px solid #dbe6f0;border-radius:11px;padding:16px 17px;box-shadow:0 2px 8px #0b214a0a}
+.fs-kind{font:700 .7rem/1 Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#264a6e}
+.fs-card h3{margin:.3rem 0 .15rem;font-size:1.12rem}
+.fs-meta{font-family:Arial,sans-serif;font-size:.8rem;color:#5b6b7b;margin:0 0 .5rem}
+.fs-langs span{font:700 .64rem/1 Arial,sans-serif;background:#eaf1f8;color:#264a6e;border:1px solid #cadcee;border-radius:999px;padding:3px 7px;margin-left:5px}
+.fs-card p{margin:.35rem 0 .5rem}
+.fs-note{background:#fbf3e6;border-left:4px solid #8a5a1c;border-radius:0 6px 6px 0;padding:9px 12px;margin:.5rem 0;font-size:.85rem}
+.fs-note b{color:#8a5a1c}
+.fs-links{display:flex;gap:9px;flex-wrap:wrap;margin-top:9px}
+.fs-btn{display:inline-block;text-decoration:none;background:#33608f;color:#fff;font:700 .85rem Arial,sans-serif;padding:8px 12px;border-radius:7px}
+.fs-btn.fs-alt{background:#fff;color:#264a6e;border:1.5px solid #33608f}
+.fs-pick{border:2px dashed #b7c7d8;background:#fbfdff;color:#5b6b7b}
+.fs-pick h3{color:#5b6b7b}
+.fs-foot{margin-top:16px;font-family:Arial,sans-serif;font-size:.8rem;color:#5b6b7b}
+@media(max-width:600px){.fs-head h2{font-size:1.3rem}}
+</style>
+<section class="fs-wrap" id="further-study">
+<div class="fs-head">
+  <div class="fs-eyebrow">Chapala Theological Seminary &middot; Further Study</div>
+  <h2>Further Study &mdash; Online</h2>
+  <div class="fs-es" style="font-size:1.05rem">Estudio Adicional &mdash; En Línea</div>
+  <p class="fs-tag">Optional resources for students with internet access &mdash; Apologetics<br>
+  <span class="fs-es">Recursos opcionales para estudiantes con acceso a internet &mdash; Apologética</span></p>
+</div>
+<div class="fs-online"><span class="fs-badge">ONLINE</span>
+  <p><strong>Requires an internet connection.</strong> These resources are hosted on the web and do not open offline. They supplement the course; they do not replace its units or exams.<br>
+  <span class="fs-es"><strong>Requiere una conexión a internet.</strong> Estos recursos están alojados en la web y no se abren sin conexión. Complementan el curso; no sustituyen sus unidades ni exámenes.</span></p>
+</div>
+<div class="fs-grid">
+<article class="fs-card">
+  <div class="fs-kind">Free animated Bible videos / Videos bíblicos animados gratuitos</div>
+  <h3>BibleProject &mdash; Proyecto Biblia</h3>
+  <p class="fs-meta">Video <span class="fs-langs"><span>English</span><span>Español</span></span></p>
+  <p>Short, well-crafted animated videos. In the video library, explore the videos on <strong>the overarching story and message of the Bible</strong>. Non-partisan and freely available.<br>
+  <span class="fs-es">Videos animados breves y bien hechos. En la biblioteca de videos, explore los videos sobre <strong>la historia y el mensaje central de la Biblia</strong>. No partidista y de acceso gratuito.</span></p>
+  <div class="fs-links">
+    <a class="fs-btn" target="_blank" rel="noopener" href="https://bibleproject.com">Open (English) &#8599;</a>
+    <a class="fs-btn fs-alt" target="_blank" rel="noopener" href="https://proyectobiblia.com">Abrir (Español) &#8599;</a>
+  </div>
+</article>
+<article class="fs-card fs-pick">
+  <div class="fs-kind">Instructor's vetted pick / Selección aprobada por el instructor</div>
+  <h3>[ Your chosen video goes here ]</h3>
+  <p>A place for a specific video the instructor has watched and approved for this course.<br>
+  <span class="fs-es">Un espacio para un video específico que el instructor haya visto y aprobado para este curso.</span></p>
+</article>
+</div>
+<div class="fs-foot">These optional supplements link to third-party websites that Chapala Theological Seminary does not control; weigh their content against Scripture and this course.<br>
+<span class="fs-es">Estos complementos opcionales enlazan a sitios web de terceros que el Seminario Teológico de Chapala no controla; pese su contenido a la luz de la Escritura y de este curso.</span></div>
+</section>
+<!-- /CTS-FURTHER-STUDY -->
+
+</body>
+</html>

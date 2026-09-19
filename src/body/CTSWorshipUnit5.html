@@ -1,0 +1,108 @@
+
+
+
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<div class="container">
+<div class="nav-bar">
+    <div class="progress-grid" id="progressGrid"></div>
+    <div>
+        <span id="studentGreeting" style="margin-right: 15px; font-weight: bold;"></span>
+        <button class="nav-btn" id="prevUnitBtn" disabled>← Previous</button>
+        <button class="nav-btn" id="nextUnitBtn">Next →</button>
+    </div>
+</div>
+<div class="lang-toggle-group" role="group" aria-label="Language">
+  <button data-lang="en" class="active">English</button>
+  <button data-lang="es">Español</button>
+  <button data-lang="both">Both / Ambos</button>
+</div>
+<span id="trackBadgeSlot"></span>
+
+<div id="regWarn" class="reg-warn hidden">
+  <span class="lang-en">⚠ Please register your name to receive credit for this unit. <button class="small" id="openRegBtn" type="button">Register</button></span>
+  <span class="lang-es">⚠ Por favor registre su nombre para recibir crédito por esta unidad. <button class="small" id="openRegBtn2" type="button">Registrar</button></span>
+</div>
+<div id="regModal" class="reg-modal hidden" role="dialog" aria-labelledby="regModalTitle">
+  <div class="reg-modal-inner">
+    <h2 id="regModalTitle"><span class="lang-en">Welcome to the Worship</span><span class="lang-es">Bienvenido al Adoración</span></h2>
+    <p><span class="lang-en">Before you begin Unit 1, please enter your name and select your track. This information is stored only in your browser and is shared across all CTS courses.</span><span class="lang-es">Antes de comenzar la Unidad 1, por favor ingrese su nombre y seleccione su vía. Esta información se guarda solo en su navegador y es compartida entre todos los cursos del CTS.</span></p>
+    <label><span class="lang-en">Full name</span><span class="lang-es">Nombre completo</span></label>
+    <input type="text" id="regName" placeholder="" autocomplete="name" aria-label="regName">
+    <label><span class="lang-en">Email (optional)</span><span class="lang-es">Correo electrónico (opcional)</span></label>
+    <input type="email" id="regEmail" placeholder="" autocomplete="email" aria-label="regEmail">
+    <label><span class="lang-en">Track</span><span class="lang-es">Vía</span></label>
+    <div class="track-options">
+      <label><input type="radio" name="regTrack" value="cert" checked> <span class="lang-en">Certificate</span><span class="lang-es">Certificado</span></label>
+      <label><input type="radio" name="regTrack" value="mdiv"> <span class="lang-en">M.Div</span><span class="lang-es">M.Div</span></label>
+      <label><input type="radio" name="regTrack" value="thm"> <span class="lang-en">Th.M.</span><span class="lang-es">Th.M.</span></label>
+    </div>
+    <p style="font-size:0.82rem; color:#6b5236; font-style:italic; margin-top:8px;">
+      <span class="lang-en"><strong>Certificate:</strong> Multiple-choice only, 90% to pass each unit. <strong>M.Div / Th.M.:</strong> Multiple-choice + short-answer, both at 90%.</span>
+      <span class="lang-es"><strong>Certificado:</strong> Solo opción múltiple, 90% para aprobar cada unidad. <strong>M.Div / Th.M.:</strong> Opción múltiple + respuesta corta, ambas al 90%.</span>
+    </p>
+    <button id="regSaveBtn" type="button"><span class="lang-en">Save and Continue</span><span class="lang-es">Guardar y Continuar</span></button>
+  </div>
+</div>
+<div class="card">
+    <h1><span class="lang-en">📋 Worship — Unit 5: Planning the Worship Service</span><span class="lang-es">📋 Adoración — Unidad 5: Planeando el Servicio de Adoración</span></h1>
+    <p><span class="lang-en"><strong>Chapala Theological Seminary</strong>, a ministry of Common Ground Fellowship | <strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span><span class="lang-es"><strong>Seminario Teológico de Chapala</strong>, un ministerio de Common Ground Fellowship | <strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers</span></p>
+    <p style="font-size:0.82rem; color:#6b5236; font-style:italic; margin-top:10px; border-top:1px solid #e3d9c8; padding-top:10px;"><span class="lang-en">This course is drawn from the worship curriculum of Dr. Wayne Cook, who served eleven years as Professor of Pastoral Ministries and Preaching, together with the teaching of Andi Cook, who taught alongside him at the seminary. It reflects not only academic study but decades of pastoral and seminary experience.</span><span class="lang-es">Este curso proviene del currículo de adoración del Dr. Wayne Cook, quien sirvió once años como Profesor de Ministerios Pastorales y Predicación, junto con la enseñanza de Andi Cook, quien enseñó a su lado en el seminario. Refleja no solo el estudio académico sino décadas de experiencia pastoral y de seminario.</span></p>
+</div>
+
+<div class="card" id="teachingContent">
+    <div class="lang-en">
+        <h2>I. Planning Around the Moods</h2>
+        <p>A worship service is not a random pile of songs, prayers, and announcements thrown together at the last minute. It is planned, and it is planned around moods or motifs. There are five such moods, and they give the service its shape and its movement. The worship leader's task is to examine these moods and decide how and where to use each one, so that the service builds rather than wanders. A service planned around the moods has unity and progression; a service thrown together has neither.</p>
+        <h2>II. Recognition, Praise, and Confession</h2>
+        <p>The first mood is <strong>recognition</strong>, sometimes called adoration or vision. It is first of all God's recognition of us. Read Isaiah 6, where the prophet sees the Lord high and lifted up. We enter recognition through silence and meditation, through a call to worship, and through an invocation. This is where the service properly begins, with the awe of standing before the holy God.</p>
+        <p>The second mood is <strong>praise or thanksgiving</strong>. Through hymns, prayers, and Scriptures we glorify God. Genuine gratitude rises from the soul as God satisfies our hunger; we thank Him for His love, for life itself, and for the necessities of life. The third mood is <strong>confession</strong>. In confession we see ourselves as God sees us and we agree with Him about our sin, as 1 John 1:9 teaches, longing for cleansing. Notice that Isaiah confessed only after he had seen God's holiness, recognition leads naturally to confession. And confession should be specific, not general. David understood that any sin is finally a sin against God.</p>
+        <h2>III. Illumination and Dedication</h2>
+        <p>The fourth mood is <strong>illumination or proclamation</strong>. This is the moment when God moves us, and it is accomplished above all through the reading of Scripture and through preaching, though drama, the children's sermon, and testimony may serve it too. Here we must remember a key distinction: teaching touches the mind, but preaching touches the mind, the heart, and the will. Illumination is meant to move the whole person.</p>
+        <p>The fifth mood is <strong>dedication or consecration</strong>. Here we give back to God, and it normally comes in two places. In the offering we dedicate our resources; in the invitation we offer ourselves. Both are acts of returning to God what we first received from Him. Notice how the moods carry the worshipper on a journey: we recognize God, we praise Him, we confess our sin, we are moved by His word, and we dedicate ourselves back to Him. That is the architecture of a service.</p>
+        <h2>IV. Extremes, Counsels, and Principles</h2>
+        <p>There are two extremes to avoid in planning. One is rigid formalism, a burdensome structure that quenches the Spirit. The other is pure spontaneity with no order at all. As the old saying goes, if I am your leader, which way do we go? Worship needs both dignity and planning; wisdom lies in the balance. A few counsels help: involve your people in the music, the message, and the planning; make use of seasonal events without being a slave to the calendar; provide variety, but change gradually, for people need the familiar; and make sure all the facilities and people are ready before the service begins.</p>
+        <p>Five principles guide good planning. <strong>Unity</strong> means the whole service is one and every element fits together. <strong>Order</strong> means real structure, accomplished with an order of service. <strong>Proportion</strong> means giving each part the right amount of time. <strong>Movement</strong> means the service moves forward, building toward something. And <strong>climax</strong> means the service reaches a high point, ideally the invitation. Finally, the one who leads must prepare himself spiritually and emotionally, pray ahead of time, come enthusiastic and joyful so the people catch that spirit, dress appropriately, and let the congregation see him genuinely worshipping. People will not follow a leader who is merely managing a program.</p>
+    </div>
+    <div class="lang-es">
+        <h2>I. Planear alrededor de los ánimos</h2>
+        <p>Un servicio de adoración no es un montón aleatorio de cánticos, oraciones, y anuncios juntados a último minuto. Es planeado, y se planea alrededor de ánimos o motivos. Hay cinco de estos ánimos, y dan al servicio su forma y su movimiento. La tarea del líder de adoración es examinar estos ánimos y decidir cómo y dónde usar cada uno, para que el servicio se construya en lugar de divagar. Un servicio planeado alrededor de los ánimos tiene unidad y progresión; un servicio juntado al azar no tiene ninguna.</p>
+        <h2>II. Reconocimiento, alabanza, y confesión</h2>
+        <p>El primer ánimo es el <strong>reconocimiento</strong>, a veces llamado adoración o visión. Es ante todo el reconocimiento de Dios hacia nosotros. Lea Isaías 6, donde el profeta ve al Señor alto y sublime. Entramos en el reconocimiento por medio del silencio y la meditación, por medio de un llamado a la adoración, y por medio de una invocación. Aquí es donde el servicio propiamente comienza, con el asombro de estar ante el Dios santo.</p>
+        <p>El segundo ánimo es la <strong>alabanza o acción de gracias</strong>. Por medio de himnos, oraciones, y Escrituras glorificamos a Dios. La gratitud genuina surge del alma a medida que Dios satisface nuestra hambre; le agradecemos por Su amor, por la vida misma, y por las necesidades de la vida. El tercer ánimo es la <strong>confesión</strong>. En la confesión nos vemos como Dios nos ve y concordamos con Él sobre nuestro pecado, como enseña 1 Juan 1:9, anhelando limpieza. Note que Isaías confesó solo después de haber visto la santidad de Dios; el reconocimiento lleva naturalmente a la confesión. Y la confesión debe ser específica, no general. David entendió que todo pecado es finalmente un pecado contra Dios.</p>
+        <h2>III. Iluminación y dedicación</h2>
+        <p>El cuarto ánimo es la <strong>iluminación o proclamación</strong>. Este es el momento cuando Dios nos mueve, y se logra sobre todo por medio de la lectura de la Escritura y por medio de la predicación, aunque el drama, el sermón para niños, y el testimonio pueden servirlo también. Aquí debemos recordar una distinción clave: la enseñanza toca la mente, pero la predicación toca la mente, el corazón, y la voluntad. La iluminación está destinada a mover a toda la persona.</p>
+        <p>El quinto ánimo es la <strong>dedicación o consagración</strong>. Aquí devolvemos a Dios, y normalmente viene en dos lugares. En la ofrenda dedicamos nuestros recursos; en la invitación nos ofrecemos a nosotros mismos. Ambos son actos de devolver a Dios lo que primero recibimos de Él. Note cómo los ánimos llevan al adorador en un viaje: reconocemos a Dios, lo alabamos, confesamos nuestro pecado, somos movidos por Su palabra, y nos dedicamos de vuelta a Él. Esa es la arquitectura de un servicio.</p>
+        <h2>IV. Extremos, consejos, y principios</h2>
+        <p>Hay dos extremos que evitar en la planeación. Uno es el formalismo rígido, una estructura pesada que apaga al Espíritu. El otro es la pura espontaneidad sin ningún orden. Como dice el viejo dicho, si yo soy su líder, ¿por dónde vamos? La adoración necesita tanto dignidad como planeación; la sabiduría está en el balance. Algunos consejos ayudan: involucre a su pueblo en la música, el mensaje, y la planeación; haga uso de los eventos de temporada sin ser esclavo del calendario; provea variedad, pero cambie gradualmente, porque la gente necesita lo familiar; y asegúrese de que todas las instalaciones y personas estén listas antes de que comience el servicio.</p>
+        <p>Cinco principios guían la buena planeación. La <strong>unidad</strong> significa que todo el servicio es uno y cada elemento encaja. El <strong>orden</strong> significa estructura real, lograda con un orden de servicio. La <strong>proporción</strong> significa dar a cada parte la cantidad correcta de tiempo. El <strong>movimiento</strong> significa que el servicio avanza, construyendo hacia algo. Y el <strong>clímax</strong> significa que el servicio alcanza un punto culminante, idealmente la invitación. Finalmente, el que dirige debe prepararse espiritual y emocionalmente, orar de antemano, venir entusiasta y gozoso para que la gente capte ese espíritu, vestir apropiadamente, y dejar que la congregación lo vea adorando genuinamente. La gente no seguirá a un líder que meramente está administrando un programa.</p>
+    </div>
+</div>
+
+<div class="card">
+    <h2><span class="lang-en">Unit 5 Final Exam — 30 Questions</span><span class="lang-es">Examen Final de la Unidad 5 — 30 Preguntas</span></h2>
+    <p><span class="lang-en"><em><strong>Certificate track:</strong> 20 multiple-choice questions, 90% (18 of 20) to pass. <strong>M.Div track:</strong> 20 MC + 10 short-answer, both at 90% independently. Each MC scores immediately when you click. MC must be passed before SA scores count. A failure locks the relevant section for 15 minutes; if you have already passed MC, only SA locks after an SA fail.</em></span><span class="lang-es"><em><strong>Vía Certificado:</strong> 20 preguntas de opción múltiple, 90% (18 de 20) para aprobar. <strong>Vía M.Div:</strong> 20 OM + 10 respuesta corta, ambas al 90% independientemente. Cada OM califica inmediatamente al hacer clic. Debe aprobar OM antes de que cuente la sección RC. Una reprobación bloquea la sección por 15 minutos; si ya aprobó OM, solo se bloquea RC tras un fallo de RC.</em></span></p>
+    <div class="exam-status hidden" id="examStatus"></div>
+<div class="mc-section" id="mcSection">
+  <h3><span class="lang-en">Multiple Choice &mdash; 20 Questions</span><span class="lang-es">Opción Múltiple &mdash; 20 Preguntas</span></h3>
+  <div id="mcContainer"></div>
+</div>
+<div class="sa-section" id="saSection">
+  <h3><span class="lang-en">Short Answer &mdash; 10 Questions <span class="sa-badge" id="saBadgeEn"></span></span><span class="lang-es">Respuesta Corta &mdash; 10 Preguntas <span class="sa-badge" id="saBadgeEs"></span></span></h3>
+  <p class="sa-note"><span class="lang-en" id="saNoteEn"></span><span class="lang-es" id="saNoteEs"></span></p>
+  <div id="kwContainer"></div>
+</div>
+<div style="margin-top: 20px;">
+  <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
+  <button id="resetExamBtn" class="btn-reset" type="button"><span class="lang-en">Reset Unit</span><span class="lang-es">Reiniciar Unidad</span></button>
+  <div id="examResult" style="margin-top: 15px; font-weight: bold;"></div>
+</div>
+</div>
+</div>
+
+
+
+  
+  
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSWorshipReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>

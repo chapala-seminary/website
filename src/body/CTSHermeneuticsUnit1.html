@@ -1,0 +1,443 @@
+
+
+
+<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+
+<header>
+  <div class="hwrap">
+    <h1>
+      <span class="lang-en">CTS Hermeneutics &middot; Unit 1</span>
+      <span class="lang-es">Hermenéutica CTS &middot; Unidad 1</span>
+    </h1>
+    <button class="toggle" onclick="toggleLang()">
+      <span class="lang-en">Español</span>
+      <span class="lang-es">English</span>
+    </button>
+  </div>
+  <div class="progress-grid" id="progress-grid"></div>
+</header>
+
+<div class="container">
+
+  <h1 class="unit-title">
+    <span class="lang-en">Unit 1: Why Hermeneutics Matters for Pastors</span>
+    <span class="lang-es">Unidad 1: Por qué la hermenéutica importa para los pastores</span>
+  </h1>
+  <h2 class="unit-sub">
+    <span class="lang-en">Dr. Wayne Cook &middot; Chapala Theological Seminary</span>
+    <span class="lang-es">Dr. Wayne Cook &middot; Seminario Teológico de Chapala</span>
+  </h2>
+
+  <!-- ============================================================ -->
+  <!-- REGISTRATION CARD (Unit 1 only)                              -->
+  <!-- ============================================================ -->
+  <section class="card" id="registration-card">
+    <h3>
+      <span class="lang-en">Student Registration</span>
+      <span class="lang-es">Registro del estudiante</span>
+    </h3>
+    <p>
+      <span class="lang-en">Before you begin, please register so your work and certificate can be issued in your name. You will only do this once for the whole course.</span>
+      <span class="lang-es">Antes de comenzar, por favor regístrese para que su trabajo y certificado puedan ser emitidos a su nombre. Solo lo hará una vez para todo el curso.</span>
+    </p>
+    <label for="reg-name">
+      <span class="lang-en">Full name</span>
+      <span class="lang-es">Nombre completo</span>
+    </label>
+    <input type="text" id="reg-name" placeholder="">
+    <label for="reg-email">
+      <span class="lang-en">Email (optional)</span>
+      <span class="lang-es">Correo electrónico (opcional)</span>
+    </label>
+    <input type="email" id="reg-email" placeholder="">
+    <label for="reg-church">
+      <span class="lang-en">Church or ministry (optional)</span>
+      <span class="lang-es">Iglesia o ministerio (opcional)</span>
+    </label>
+    <input type="text" id="reg-church" placeholder="">
+    <button class="btn primary" onclick="saveRegistration()">
+      <span class="lang-en">Save and continue</span>
+      <span class="lang-es">Guardar y continuar</span>
+    </button>
+    <p id="reg-status" style="margin-top:.5rem;color:#3a5a25;font-weight:600"></p>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- TRACK SELECTION                                              -->
+  <!-- ============================================================ -->
+  <section class="card" id="track-card">
+    <h3>
+      <span class="lang-en">Choose your track</span>
+      <span class="lang-es">Escoja su modalidad</span>
+    </h3>
+    <p>
+      <span class="lang-en"><strong>Certificate of Ministry:</strong> Twenty multiple-choice questions per unit. Pass at 18 of 20 (90&percnt;).</span>
+      <span class="lang-es"><strong>Certificado de Ministerio:</strong> Veinte preguntas de opción múltiple por unidad. Aprobación con 18 de 20 (90&percnt;).</span>
+    </p>
+    <p>
+      <span class="lang-en"><strong>Master of Divinity:</strong> Same twenty multiple-choice questions, plus ten short-answer questions. Pass at 18 of 20 multiple-choice <em>and</em> 9 of 10 short-answer, scored independently.</span>
+      <span class="lang-es"><strong>Maestría en Divinidad:</strong> Las mismas veinte preguntas de opción múltiple, más diez preguntas de respuesta breve. Aprobación con 18 de 20 de opción múltiple <em>y</em> 9 de 10 de respuesta breve, evaluadas de forma independiente.</span>
+    </p>
+    <p>
+      <span class="lang-en"><strong>Master of Theology:</strong> Graded exactly like the Master of Divinity — the same twenty multiple-choice questions plus ten short-answer questions, passing at 18 of 20 multiple-choice <em>and</em> 9 of 10 short-answer, scored independently.</span>
+      <span class="lang-es"><strong>Maestría en Teología:</strong> Evaluada exactamente como la Maestría en Divinidad: las mismas veinte preguntas de opción múltiple más diez preguntas de respuesta breve, aprobando con 18 de 20 de opción múltiple <em>y</em> 9 de 10 de respuesta breve, evaluadas de forma independiente.</span>
+    </p>
+    <div class="track-buttons">
+      <button class="btn" id="track-cert-btn" onclick="setTrack('cert')">
+        <span class="lang-en">Certificate</span>
+        <span class="lang-es">Certificado</span>
+      </button>
+      <button class="btn" id="track-mdiv-btn" onclick="setTrack('mdiv')">
+        <span class="lang-en">M.Div</span>
+        <span class="lang-es">Maestría</span>
+      </button>
+      <button class="btn" id="track-thm-btn" onclick="setTrack('thm')">
+        <span class="lang-en">Th.M</span>
+        <span class="lang-es">Maestría en Teología</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- TEACHING CONTENT                                             -->
+  <!-- ============================================================ -->
+  <article class="teaching">
+
+    <h3>
+      <span class="lang-en">1. When the Question Comes</span>
+      <span class="lang-es">1. Cuando llega la pregunta</span>
+    </h3>
+    <p>
+      <span class="lang-en">A pastor in a small church in Mexico stands before thirty-five people on a Sunday morning. He has worked two jobs all week and slept four hours the night before. A woman raises her hand. Her son is sick. &ldquo;Pastor,&rdquo; she asks, &ldquo;does the Bible say that if I have enough faith, God will heal him right now?&rdquo;</span>
+      <span class="lang-es">Un pastor en una iglesia pequeña de México se para ante treinta y cinco personas un domingo por la mañana. Ha trabajado dos empleos toda la semana y ha dormido cuatro horas la noche anterior. Una mujer levanta la mano. Su hijo está enfermo. &mdash;Pastor &mdash;pregunta&mdash;, &iquest;dice la Biblia que si tengo suficiente fe, Dios lo sanará ahora mismo?</span>
+    </p>
+    <p>
+      <span class="lang-en">That question may sound simple. It is not. Behind it stand a thousand sermons the woman has heard on television. Behind it stand the cults that have visited her door. Behind it stand the prosperity teachers who told her that faith is a switch &mdash; flip it and God must obey. And in front of that pastor stand thirty-five souls who will believe whatever he says next.</span>
+      <span class="lang-es">Esa pregunta puede sonar sencilla. No lo es. Detrás de ella están mil sermones que la mujer ha escuchado en televisión. Detrás de ella están las sectas que han tocado a su puerta. Detrás de ella están los maestros de prosperidad que le dijeron que la fe es un interruptor &mdash; actívelo y Dios tiene que obedecer. Y delante de ese pastor están treinta y cinco almas que creerán lo que él diga a continuación.</span>
+    </p>
+    <p>
+      <span class="lang-en">This is why we study hermeneutics. Not to become professors. Not to impress anyone with long Greek words. We study it because a real woman has a real son and she needs a real answer from a real Word of God &mdash; and we, the pastors, must be ready to give it.</span>
+      <span class="lang-es">Por eso estudiamos hermenéutica. No para volvernos profesores. No para impresionar a nadie con palabras griegas largas. La estudiamos porque una mujer real tiene un hijo real y necesita una respuesta real de una Palabra real de Dios &mdash; y nosotros, los pastores, debemos estar listos para dársela.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">2. The Word in My Own Heart</span>
+      <span class="lang-es">2. La Palabra en mi propio corazón</span>
+    </h3>
+    <p>
+      <span class="lang-en">A boy was reading his Bible when his father caught him. The father snatched the book and threw it into the fire. The boy was still smiling. &ldquo;Why are you smiling?&rdquo; the father asked. The boy pointed to his chest and answered, &ldquo;Because you cannot burn the Bible in here.&rdquo;</span>
+      <span class="lang-es">Un niño leía su Biblia cuando su padre lo descubrió. El padre le arrebató el libro y lo arrojó al fuego. El niño seguía sonriendo. &mdash;&iquest;Por qué sonríes? &mdash;preguntó el padre. El niño señaló su pecho y respondió: &mdash;Porque no puedes quemar la Biblia que está aquí adentro.</span>
+    </p>
+    <p>
+      <span class="lang-en">I was raised in a home like Timothy&rsquo;s. The Bible was loved and believed. When I was a child I accepted it as the Word of God because that is what my parents taught me. As I grew older my confidence was shaken from time to time &mdash; that happens to every honest believer. But I know now that a simple, childlike confidence in the Bible is the goal of every Christian, and especially of every pastor. The Word of God is the well from which we draw water for thirsty people. If the well is poisoned, our people will die.</span>
+      <span class="lang-es">Yo fui criado en un hogar como el de Timoteo. La Biblia era amada y creída. Cuando era niño la acepté como Palabra de Dios porque eso era lo que mis padres me enseñaban. Al crecer mi confianza fue sacudida de vez en cuando &mdash; eso le pasa a todo creyente honesto. Pero ahora sé que una confianza sencilla, como la de un niño, en la Biblia es la meta de todo cristiano, y especialmente de todo pastor. La Palabra de Dios es el pozo del cual sacamos agua para gente sedienta. Si el pozo está envenenado, nuestro pueblo morirá.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">3. Paul&rsquo;s Charge to Timothy</span>
+      <span class="lang-es">3. El encargo de Pablo a Timoteo</span>
+    </h3>
+    <p>
+      <span class="lang-en">In a cold Roman cell, an old apostle wrote to a young pastor. The letter is Second Timothy. The civilization around him was rotting. Paul knew his head was about to roll. And the line he wrote to his son in the faith was this:</span>
+      <span class="lang-es">En una celda romana fría, un viejo apóstol escribía a un pastor joven. La carta es Segunda de Timoteo. La civilización a su alrededor se estaba pudriendo. Pablo sabía que pronto le cortarían la cabeza. Y la línea que escribió a su hijo en la fe fue ésta:</span>
+    </p>
+    <div class="scripture">
+      <span class="lang-en">&ldquo;Be diligent to present yourself approved to God, a worker who does not need to be ashamed, rightly dividing the word of truth.&rdquo; (2 Timothy 2:15, NKJV)</span>
+      <span class="lang-es">&laquo;Procura con diligencia presentarte a Dios aprobado, como obrero que no tiene de qué avergonzarse, que trace bien la palabra de verdad.&raquo; (2 Timoteo 2:15, RVG)</span>
+    </div>
+    <p>
+      <span class="lang-en">Two words sit at the center of that verse: <em>rightly dividing</em>. The Greek word means to cut a straight line &mdash; what a carpenter does, what a road-builder does, what a farmer does in plowing a furrow. Paul does not tell Timothy to add to the Word. He does not tell him to subtract from it. He tells him to <em>handle it straight</em>. This is the calling of every pastor. The Word is not ours to remodel. It is ours to deliver.</span>
+      <span class="lang-es">Dos palabras están en el centro de ese versículo: <em>trazar bien</em>. La palabra griega significa cortar una línea recta &mdash; lo que hace un carpintero, lo que hace un constructor de caminos, lo que hace un labrador al arar un surco. Pablo no le dice a Timoteo que añada a la Palabra. No le dice que reste. Le dice que la <em>maneje recta</em>. Éste es el llamado de todo pastor. La Palabra no es nuestra para remodelar. Es nuestra para entregar.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">4. Ezra&rsquo;s Heart &mdash; Study, Do, Teach</span>
+      <span class="lang-es">4. El corazón de Esdras: estudiar, hacer, enseñar</span>
+    </h3>
+    <p>
+      <span class="lang-en">Six hundred years before Timothy received his letter, a priest named Ezra came back from Babylon to a ruined Jerusalem. The temple was rebuilt but the people had forgotten the Law. Ezra walked into that mess carrying a scroll. And in chapter seven verse ten the Scripture tells us how he did it:</span>
+      <span class="lang-es">Seiscientos años antes de que Timoteo recibiera su carta, un sacerdote llamado Esdras regresaba de Babilonia a una Jerusalén en ruinas. El templo había sido reconstruido, pero el pueblo había olvidado la Ley. Esdras entró en ese desorden cargando un rollo. Y en el capítulo siete versículo diez la Escritura nos dice cómo lo hizo:</span>
+    </p>
+    <div class="scripture">
+      <span class="lang-en">&ldquo;Ezra had prepared his heart to seek the Law of the LORD, and to do it, and to teach statutes and ordinances in Israel.&rdquo; (Ezra 7:10, NKJV)</span>
+      <span class="lang-es">&laquo;Porque Esdras había preparado su corazón para inquirir la ley de Jehová, y para cumplirla, y para enseñar en Israel sus estatutos y juicios.&raquo; (Esdras 7:10, RVG)</span>
+    </div>
+    <p>
+      <span class="lang-en">Mark those three things. Study. Do. Teach. Ezra did not prepare his facts, his logic, or his intellect. He prepared his heart. And the order matters. He studied before he taught. He obeyed before he taught. He did not climb into a pulpit to instruct others in commandments he himself had not obeyed.</span>
+      <span class="lang-es">Marque esas tres cosas. Estudiar. Hacer. Enseñar. Esdras no preparó sus datos, su lógica, ni su intelecto. Preparó su corazón. Y el orden importa. Estudió antes de enseñar. Obedeció antes de enseñar. No subió a un púlpito a instruir a otros en mandamientos que él mismo no había obedecido.</span>
+    </p>
+    <p>
+      <span class="lang-en">This is the pastor&rsquo;s threefold posture, and it is the trellis on which our whole course hangs. We may be Bible students. But are we Bible doers? And are we teaching what we ourselves have first studied and obeyed? A pastor who studies and does not do becomes a hypocrite. A pastor who does and does not teach becomes a hoarder. A pastor who teaches and has not first studied becomes a danger. All three &mdash; study, do, teach &mdash; together.</span>
+      <span class="lang-es">Ésta es la postura triple del pastor, y es el enrejado sobre el cual cuelga todo nuestro curso. Podemos ser estudiantes de la Biblia. Pero &iquest;somos hacedores de la Biblia? &iquest;Y estamos enseñando lo que nosotros mismos primero hemos estudiado y obedecido? Un pastor que estudia y no hace se vuelve un hipócrita. Un pastor que hace y no enseña se vuelve un acaparador. Un pastor que enseña y no ha estudiado primero se vuelve un peligro. Los tres &mdash; estudiar, hacer, enseñar &mdash; juntos.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">5. What the Scriptures Are</span>
+      <span class="lang-es">5. Lo que son las Escrituras</span>
+    </h3>
+    <p>
+      <span class="lang-en">Before we learn how to interpret the Bible, we must know what we are holding. Paul tells Timothy in 2 Timothy 3:15&ndash;17 five things about the Scriptures. Each one shapes how a pastor approaches the text.</span>
+      <span class="lang-es">Antes de aprender cómo interpretar la Biblia, debemos saber qué tenemos en la mano. Pablo le dice a Timoteo en 2 Timoteo 3:15&ndash;17 cinco cosas acerca de las Escrituras. Cada una moldea cómo el pastor se acerca al texto.</span>
+    </p>
+    <p>
+      <span class="lang-en"><strong>The Scriptures are teachable.</strong> &ldquo;From childhood you have known the Holy Scriptures.&rdquo; Timothy learned the Bible at his mother&rsquo;s knee. The Jews said it was better for a child to forget his own name than to forget the Law of God. Parents and pastors are both teachers. A pastor who cannot make the Bible understandable to a child has not yet understood it himself.</span>
+      <span class="lang-es"><strong>Las Escrituras son enseñables.</strong> &laquo;Desde la niñez has sabido las Sagradas Escrituras.&raquo; Timoteo aprendió la Biblia sobre las rodillas de su madre. Los judíos decían que era mejor para un niño olvidar su propio nombre que olvidar la Ley de Dios. Padres y pastores son ambos maestros. Un pastor que no puede hacer la Biblia comprensible para un niño no la ha comprendido él mismo todavía.</span>
+    </p>
+    <p>
+      <span class="lang-en"><strong>The Scriptures are holy.</strong> &ldquo;Sacred letters,&rdquo; the Greek says. The word <em>holy</em> means <em>set apart, different</em>. Voltaire said, &ldquo;One hundred years from now the Bible and Christ will be forgotten.&rdquo; The very room in which he spoke those words is now used as a Bible storehouse. Henry V of England made Bible-reading a capital crime. His decrees could not shorten its life by one minute or lighten its weight by one ounce. This is not an ordinary book.</span>
+      <span class="lang-es"><strong>Las Escrituras son santas.</strong> &laquo;Letras sagradas&raquo;, dice el griego. La palabra <em>santo</em> significa <em>apartado, diferente</em>. Voltaire dijo: &laquo;Dentro de cien años la Biblia y Cristo serán olvidados.&raquo; La misma habitación donde pronunció esas palabras se usa hoy como almacén de Biblias. Enrique V de Inglaterra hizo de la lectura de la Biblia un crimen capital. Sus decretos no pudieron acortar su vida ni un minuto ni aligerar su peso ni una onza. Este no es un libro ordinario.</span>
+    </p>
+    <p>
+      <span class="lang-en"><strong>The Scriptures lead to salvation.</strong> They are &ldquo;able to make you wise for salvation through faith in Jesus Christ.&rdquo; Notice &mdash; we are not saved <em>by</em> the Bible. The Bible is not a magic charm. Satan knows the Bible and is not saved. We are saved by trusting Christ who is revealed in the Bible. The Word points us to the Person.</span>
+      <span class="lang-es"><strong>Las Escrituras llevan a la salvación.</strong> Son &laquo;capaces de hacerte sabio para la salvación por la fe que es en Cristo Jesús&raquo;. Note &mdash; no somos salvos <em>por</em> la Biblia. La Biblia no es un amuleto mágico. Satanás conoce la Biblia y no es salvo. Somos salvos al confiar en Cristo, quien es revelado en la Biblia. La Palabra nos señala a la Persona.</span>
+    </p>
+    <p>
+      <span class="lang-en"><strong>The Scriptures are inspired by God.</strong> &ldquo;All Scripture is God-breathed.&rdquo; In Athens, the Parthenon has not one straight line in its whole structure &mdash; the Greeks built it crooked because they knew the human eye sees crookedly. We cannot trust our own eyes. We can rest on the Word of God.</span>
+      <span class="lang-es"><strong>Las Escrituras son inspiradas por Dios.</strong> &laquo;Toda Escritura es inspirada por Dios.&raquo; En Atenas, el Partenón no tiene ni una sola línea recta en toda su estructura &mdash; los griegos lo construyeron torcido porque sabían que el ojo humano ve torcido. No podemos confiar en nuestros propios ojos. Podemos descansar en la Palabra de Dios.</span>
+    </p>
+    <p>
+      <span class="lang-en"><strong>The Scriptures are valuable</strong> &mdash; for teaching, rebuking, correcting, and training in righteousness. William Bieder-Wolf asked, &ldquo;Did you ever hear a man say, I was a beast as a husband, and then I studied a little geology &mdash; and now my brutality is changed to kindness? Did you ever hear that?&rdquo; No. But the Word of God has transformed millions.</span>
+      <span class="lang-es"><strong>Las Escrituras son valiosas</strong> &mdash; para enseñar, redargüir, corregir, e instruir en justicia. William Bieder-Wolf preguntó: &laquo;&iquest;Ha oído alguna vez a un hombre decir, era una bestia como esposo, y entonces estudié un poco de geología, y ahora mi brutalidad ha cambiado en bondad? &iquest;Lo ha oído?&raquo; No. Pero la Palabra de Dios ha transformado a millones.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">6. How People Respond &mdash; The Five C&rsquo;s</span>
+      <span class="lang-es">6. Cómo responde la gente: las cinco C</span>
+    </h3>
+    <p>
+      <span class="lang-en">A second sermon, on 2 Peter 1:21, taught me five reactions people have when the Word of God comes among them. Watch for all five in your own church.</span>
+      <span class="lang-es">Un segundo sermón, sobre 2 Pedro 1:21, me enseñó cinco reacciones que tiene la gente cuando la Palabra de Dios viene entre ellos. Esté atento a las cinco en su propia iglesia.</span>
+    </p>
+    <p>
+      <span class="lang-en">Some <em>contend</em> with it. They argue. They divide. Charles Spurgeon said, &ldquo;Defend the Bible? I would as soon defend a lion.&rdquo; The Word does not need our protection. Set it loose; it defends itself.</span>
+      <span class="lang-es">Algunos <em>contienden</em> con ella. Discuten. Dividen. Charles Spurgeon dijo: &laquo;&iquest;Defender la Biblia? Sería como defender a un león.&raquo; La Palabra no necesita nuestra protección. Suéltela; ella se defiende sola.</span>
+    </p>
+    <p>
+      <span class="lang-en">Some <em>confuse</em> it. They twist it. The United States alone has more than three hundred fifty sects and cults, most of them claiming to base their teaching on the Bible. Many use the same words, the same verses, the same services &mdash; but preach another gospel. The serpent in Eden was the first to do this: &ldquo;Has God really said?&rdquo;</span>
+      <span class="lang-es">Algunos la <em>confunden</em>. La tuercen. Solo Estados Unidos tiene más de trescientas cincuenta sectas, la mayoría afirmando basar su enseñanza en la Biblia. Muchas usan las mismas palabras, los mismos versículos, los mismos servicios &mdash; pero predican otro evangelio. La serpiente en el Edén fue la primera en hacer esto: &laquo;&iquest;Conque Dios os ha dicho?&raquo;</span>
+    </p>
+    <p>
+      <span class="lang-en">Some <em>condemn</em> it. B.&thinsp;H. Carroll, who later founded Southwestern Baptist Theological Seminary, was once a bitter young man who rejected the Bible openly. In 1865 his mother begged him to attend one camp meeting. The preacher asked, &ldquo;You who stand aloof from Christianity &mdash; have you found anything worth having where you are?&rdquo; Carroll&rsquo;s heart answered, &ldquo;Nothing under the whole heaven; absolutely nothing.&rdquo; That night the bitter scholar was broken.</span>
+      <span class="lang-es">Algunos la <em>condenan</em>. B.&thinsp;H. Carroll, quien más tarde fundó el Seminario Teológico Bautista Suroccidental, fue una vez un joven amargado que rechazaba la Biblia abiertamente. En 1865 su madre le rogó que asistiera a una reunión campestre. El predicador preguntó: &laquo;Ustedes que se mantienen alejados del cristianismo, &iquest;han encontrado algo digno de tener donde están?&raquo; El corazón de Carroll respondió: &laquo;Nada bajo todo el cielo; absolutamente nada.&raquo; Esa noche el erudito amargado fue quebrantado.</span>
+    </p>
+    <p>
+      <span class="lang-en">Some <em>conceal</em> it. King Jehoiakim burned Jeremiah&rsquo;s scroll. God told Jeremiah to write another. In our day Satan no longer burns Bibles. He lets us own them and leave them on shelves.</span>
+      <span class="lang-es">Algunos la <em>ocultan</em>. El rey Joacim quemó el rollo de Jeremías. Dios le dijo a Jeremías que escribiera otro. En nuestros días Satanás ya no quema Biblias. Nos las deja tener y dejarlas en estantes.</span>
+    </p>
+    <p>
+      <span class="lang-en">Some <em>confirm</em> it. Billy Graham, in a crisis of doubt, climbed the Sierra Nevada mountains with his Bible. He knelt and prayed, &ldquo;Father, I cannot understand many things in this book. I cannot come intellectually all the way, but I accept it by faith to be the authoritative, inspired Word of the living God.&rdquo; From that hour his ministry was unstoppable.</span>
+      <span class="lang-es">Algunos la <em>confirman</em>. Billy Graham, en una crisis de duda, subió a las montañas de la Sierra Nevada con su Biblia. Se arrodilló y oró: &laquo;Padre, no entiendo muchas cosas en este libro. No puedo llegar intelectualmente todo el camino, pero la acepto por fe como la Palabra autoritativa e inspirada del Dios viviente.&raquo; Desde esa hora su ministerio fue imparable.</span>
+    </p>
+    <p>
+      <span class="lang-en">Five reactions &mdash; contend, confuse, condemn, conceal, confirm. Your people will show you all five.</span>
+      <span class="lang-es">Cinco reacciones: contender, confundir, condenar, ocultar, confirmar. Su pueblo le mostrará las cinco.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">7. The Dangers in Our Day</span>
+      <span class="lang-es">7. Los peligros de nuestros días</span>
+    </h3>
+    <p>
+      <span class="lang-en">Three dangers press on the small-church pastor today, and a pastor who cannot interpret his Bible will fall into them.</span>
+      <span class="lang-es">Tres peligros presionan al pastor de iglesia pequeña hoy, y un pastor que no sepa interpretar su Biblia caerá en ellos.</span>
+    </p>
+    <p>
+      <span class="lang-en"><strong>The prosperity twist.</strong> I have known pastors who used Jeremiah 29:11 &mdash; &ldquo;I know the thoughts I think toward you, thoughts of peace and not of evil&rdquo; &mdash; at every funeral and every financial crisis. The verse was written to Jews in Babylonian exile facing seventy more years of captivity. When the pastor learned the context, his ministry deepened. His people stopped expecting magic and started trusting God in suffering.</span>
+      <span class="lang-es"><strong>El giro de la prosperidad.</strong> He conocido pastores que usaban Jeremías 29:11 &mdash; &laquo;Yo sé los pensamientos que tengo acerca de vosotros, pensamientos de paz, y no de mal&raquo; &mdash; en cada funeral y en cada crisis financiera. El versículo fue escrito a judíos en el exilio babilónico que enfrentaban setenta años más de cautiverio. Cuando el pastor aprendió el contexto, su ministerio se profundizó. Su pueblo dejó de esperar magia y comenzó a confiar en Dios en el sufrimiento.</span>
+    </p>
+    <p>
+      <span class="lang-en"><strong>The cult twist.</strong> Mormons, Jehovah&rsquo;s Witnesses, Moonies, and others knock on doors with the same Bible in their hands. They speak the same words but mean different things. Without good interpretation, your people will mistake error for truth &mdash; because error speaks fluent Bible.</span>
+      <span class="lang-es"><strong>El giro de las sectas.</strong> Mormones, Testigos de Jehová, Moonies, y otros tocan puertas con la misma Biblia en sus manos. Hablan las mismas palabras pero quieren decir cosas diferentes. Sin buena interpretación, su pueblo confundirá el error con la verdad &mdash; porque el error habla Biblia con fluidez.</span>
+    </p>
+    <p>
+      <span class="lang-en"><strong>The modernist twist.</strong> Other teachers claim the name of Christian but deny the inspiration of the Word, the virgin birth, the resurrection, the miracles. The greatest decline of churches in the last generation has been in those that lost the Bible&rsquo;s authority. People will not come to hear the ideas of men. They will come to hear a word from God.</span>
+      <span class="lang-es"><strong>El giro modernista.</strong> Otros maestros reclaman el nombre de cristiano pero niegan la inspiración de la Palabra, el nacimiento virginal, la resurrección, los milagros. La mayor declinación de iglesias en la última generación ha sido en aquellas que perdieron la autoridad de la Biblia. La gente no vendrá a oír las ideas de los hombres. Vendrá a oír una palabra de Dios.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">8. Guard the Truth &mdash; Soldier, Athlete, Farmer</span>
+      <span class="lang-es">8. Guarde la verdad: soldado, atleta, labrador</span>
+    </h3>
+    <p>
+      <span class="lang-en">Paul gave Timothy three pictures of the pastor who handles the Word rightly.</span>
+      <span class="lang-es">Pablo dio a Timoteo tres figuras del pastor que maneja la Palabra rectamente.</span>
+    </p>
+    <p>
+      <span class="lang-en"><strong>Be a soldier</strong> &mdash; that is dedication. No sideline. One mission. You cannot follow Christ while pursuing five other aims.</span>
+      <span class="lang-es"><strong>Sea un soldado</strong> &mdash; eso es dedicación. Sin distracciones. Una sola misión. No se puede seguir a Cristo mientras se persiguen otros cinco objetivos.</span>
+    </p>
+    <p>
+      <span class="lang-en"><strong>Be an athlete</strong> &mdash; that is discipline. No shortcuts, no cutting corners, no breaking the rules. An athlete is not crowned unless he competes according to the rules.</span>
+      <span class="lang-es"><strong>Sea un atleta</strong> &mdash; eso es disciplina. Sin atajos, sin recortes, sin romper las reglas. Un atleta no es coronado a menos que compita conforme a las reglas.</span>
+    </p>
+    <p>
+      <span class="lang-en"><strong>Be a farmer</strong> &mdash; that is diligence. The farmer who expects a harvest in October must work the soil in April. Bible study is field labor. The Word does not yield to the lazy.</span>
+      <span class="lang-es"><strong>Sea un labrador</strong> &mdash; eso es diligencia. El labrador que espera una cosecha en octubre debe trabajar el suelo en abril. El estudio de la Biblia es labor del campo. La Palabra no da fruto al perezoso.</span>
+    </p>
+    <p>
+      <span class="lang-en">Dedication, discipline, and diligence. Three pictures, one calling. Combine them with Ezra&rsquo;s three actions &mdash; study, do, teach &mdash; and you have the working life of a faithful pastor.</span>
+      <span class="lang-es">Dedicación, disciplina, y diligencia. Tres figuras, un solo llamado. Combínelas con las tres acciones de Esdras &mdash; estudiar, hacer, enseñar &mdash; y tiene la vida laboral de un pastor fiel.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">9. The Road Ahead &mdash; Seven Principles</span>
+      <span class="lang-es">9. El camino por delante: siete principios</span>
+    </h3>
+    <p>
+      <span class="lang-en">In the units to come we will learn seven principles that govern how a pastor reads his Bible faithfully. I introduce them here so you know where we are going.</span>
+      <span class="lang-es">En las unidades que vienen aprenderemos siete principios que gobiernan cómo un pastor lee fielmente su Biblia. Los presento aquí para que sepa adónde vamos.</span>
+    </p>
+    <p>
+      <span class="lang-en">First, <em>exegesis before application</em> &mdash; draw the meaning out of the text before you carry it into the pulpit. Second, <em>Scripture interprets Scripture</em> &mdash; let clear passages explain difficult ones. Third, <em>parables are not allegories</em> &mdash; most of Christ&rsquo;s parables make one principal point, not a dozen hidden ones. Fourth, <em>many miracles are also enacted signs</em> &mdash; they can preach as well as demonstrate power and compassion. Fifth, <em>genre determines interpretation</em> &mdash; read poetry as poetry, narrative as narrative, prophecy as prophecy. Sixth, <em>literal does not always mean literalistic</em> &mdash; Jesus called Himself a door without becoming wood. And seventh, <em>the goal of interpretation is transformation</em> &mdash; we are not aiming at information but at changed lives.</span>
+      <span class="lang-es">Primero, <em>la exégesis antes de la aplicación</em> &mdash; saque el significado del texto antes de llevarlo al púlpito. Segundo, <em>la Escritura interpreta la Escritura</em> &mdash; deje que los pasajes claros expliquen los difíciles. Tercero, <em>las parábolas no son alegorías</em> &mdash; la mayoría de las parábolas de Cristo hacen un punto principal, no una docena de puntos ocultos. Cuarto, <em>muchos milagros también son señales representadas</em> &mdash; pueden predicar tanto como demuestran poder y compasión. Quinto, <em>el género determina la interpretación</em> &mdash; lea la poesía como poesía, la narrativa como narrativa, la profecía como profecía. Sexto, <em>literal no siempre significa literalista</em> &mdash; Jesús se llamó a Sí mismo una puerta sin volverse madera. Y séptimo, <em>la meta de la interpretación es la transformación</em> &mdash; no apuntamos a la información sino a vidas cambiadas.</span>
+    </p>
+    <p>
+      <span class="lang-en">Each principle will get a unit of its own. Each will rest on the Bible itself, not on a textbook.</span>
+      <span class="lang-es">Cada principio tendrá su propia unidad. Cada uno descansará sobre la Biblia misma, no sobre un libro de texto.</span>
+    </p>
+
+    <h3>
+      <span class="lang-en">10. A Closing Charge</span>
+      <span class="lang-es">10. Encargo de cierre</span>
+    </h3>
+    <p>
+      <span class="lang-en">The last words Paul ever wrote to Timothy were four: <em>Preach the Word.</em> Be ready in season and out of season. Convince the doubting. Rebuke the sinning. Encourage the fearful. Do it in the presence of God.</span>
+      <span class="lang-es">Las últimas palabras que Pablo escribió a Timoteo fueron cuatro: <em>Predica la Palabra.</em> Está preparado a tiempo y fuera de tiempo. Convence al que duda. Reprende al que peca. Anima al temeroso. Hazlo en la presencia de Dios.</span>
+    </p>
+    <p>
+      <span class="lang-en">You are not studying this course to earn a credential. You are studying it so the woman in your church with a sick son will hear a Word from God when she asks her question. That is enough reason to study every page that follows.</span>
+      <span class="lang-es">Usted no está estudiando este curso para ganar una credencial. Lo está estudiando para que la mujer en su iglesia con un hijo enfermo oiga una Palabra de Dios cuando haga su pregunta. Esa es razón suficiente para estudiar cada página que sigue.</span>
+    </p>
+
+  </article>
+
+  <!-- ============================================================ -->
+  <!-- EXAM                                                         -->
+  <!-- ============================================================ -->
+  
+<figure class="cts-figure" style="margin:30px auto;max-width:820px;text-align:center;">
+<svg style="width:100%;height:auto;display:block;margin:0 auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 836" role="img" aria-label="Interpreting the Scriptures">
+<defs><radialGradient id="vig" cx="50%" cy="42%" r="78%"><stop offset="0%" stop-color="#f3ead0"/><stop offset="100%" stop-color="#efe4c4"/></radialGradient></defs>
+<rect width="980" height="836" fill="#f3ead0"/><rect width="980" height="836" fill="url(#vig)"/><rect x="14" y="14" width="952" height="808" fill="none" stroke="#b08a2e" stroke-width="6"/><rect x="26" y="26" width="928" height="784" fill="none" stroke="#7c2a2f" stroke-width="1.6"/>
+<text x="490.0" y="74" font-size="29" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" letter-spacing="0.3">Interpreting the Scriptures  /  Interpretando las Escrituras</text>
+<text x="490.0" y="104" font-size="14" fill="#8a661c" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">The path from the text to a transformed life  ·  El camino del texto a una vida transformada</text>
+<rect x="305.0" y="132" width="370" height="30" rx="8" ry="8" fill="#7c2a2f" stroke="#561c20" stroke-width="1.2"/>
+<text x="490.0" y="152" font-size="12" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">BEGIN WITH THE TEXT  /  COMIENZA CON EL TEXTO</text>
+<path d="M480.0,165 L490.0,174 L500.0,165" fill="none" stroke="#8a661c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="70" y="176" width="840" height="78" rx="11" ry="11" fill="#fbf6e9" stroke="#7c2a2f" stroke-width="1.6"/>
+<circle cx="104" cy="215.0" r="18" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.6"/><text x="104" y="220.0" font-size="16" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">1</text>
+<text x="138" y="200" font-size="15" fill="#561c20" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Prepare the heart  ·  Prepara el corazón</text>
+<text x="138" y="220" font-size="12" fill="#3b2f23" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Pray for wisdom; the Spirit is the Author and your Teacher.</text>
+<text x="138" y="236" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Ora por sabiduría; el Espíritu es el Autor y tu Maestro.</text>
+<text x="894" y="242" font-size="10.5" fill="#7c2a2f" font-weight="bold" text-anchor="end" font-family="Georgia, 'Times New Roman', Times, serif">James 1:5 · 1 Cor 2:12–14</text>
+<path d="M480.0,255 L490.0,264 L500.0,255" fill="none" stroke="#8a661c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="70" y="266" width="840" height="78" rx="11" ry="11" fill="#fbf6e9" stroke="#7c2a2f" stroke-width="1.6"/>
+<circle cx="104" cy="305.0" r="18" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.6"/><text x="104" y="310.0" font-size="16" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">2</text>
+<text x="138" y="290" font-size="15" fill="#561c20" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Exegesis, not eisegesis  ·  Exégesis, no eiségesis</text>
+<text x="138" y="310" font-size="12" fill="#3b2f23" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Draw out the author's intended sense; never read your own in.</text>
+<text x="138" y="326" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Saca el sentido que el autor quiso; nunca leas el tuyo.</text>
+<text x="894" y="332" font-size="10.5" fill="#7c2a2f" font-weight="bold" text-anchor="end" font-family="Georgia, 'Times New Roman', Times, serif">Nehemiah 8:8 — “they gave the sense”</text>
+<path d="M480.0,345 L490.0,354 L500.0,345" fill="none" stroke="#8a661c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="70" y="356" width="840" height="78" rx="11" ry="11" fill="#fbf6e9" stroke="#7c2a2f" stroke-width="1.6"/>
+<circle cx="104" cy="395.0" r="18" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.6"/><text x="104" y="400.0" font-size="16" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">3</text>
+<text x="138" y="380" font-size="15" fill="#561c20" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Context is the heart  ·  El contexto es el corazón</text>
+<text x="138" y="400" font-size="12" fill="#3b2f23" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Read every verse in its setting — immediate, book, historical.</text>
+<text x="138" y="416" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Lee cada versículo en su entorno — inmediato, del libro, histórico.</text>
+<text x="894" y="422" font-size="10.5" fill="#7c2a2f" font-weight="bold" text-anchor="end" font-family="Georgia, 'Times New Roman', Times, serif">immediate · book · historical</text>
+<path d="M480.0,435 L490.0,444 L500.0,435" fill="none" stroke="#8a661c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="70" y="446" width="840" height="78" rx="11" ry="11" fill="#fbf6e9" stroke="#7c2a2f" stroke-width="1.6"/>
+<circle cx="104" cy="485.0" r="18" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.6"/><text x="104" y="490.0" font-size="16" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">4</text>
+<text x="138" y="470" font-size="15" fill="#561c20" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Scripture interprets Scripture  ·  La Escritura interpreta la Escritura</text>
+<text x="138" y="490" font-size="12" fill="#3b2f23" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">The Bible is one book; let the clear explain the unclear.</text>
+<text x="138" y="506" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">La Biblia es un solo libro; lo claro explica lo oscuro.</text>
+<text x="894" y="512" font-size="10.5" fill="#7c2a2f" font-weight="bold" text-anchor="end" font-family="Georgia, 'Times New Roman', Times, serif">Luke 24:27 — the road to Emmaus</text>
+<path d="M480.0,525 L490.0,534 L500.0,525" fill="none" stroke="#8a661c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="70" y="536" width="840" height="78" rx="11" ry="11" fill="#fbf6e9" stroke="#7c2a2f" stroke-width="1.6"/>
+<circle cx="104" cy="575.0" r="18" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.6"/><text x="104" y="580.0" font-size="16" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">5</text>
+<text x="138" y="560" font-size="15" fill="#561c20" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Genre determines meaning  ·  El género determina el sentido</text>
+<text x="138" y="580" font-size="12" fill="#3b2f23" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Read each kind as itself — a parable has one point; literal is not literalistic.</text>
+<text x="138" y="596" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">Lee cada tipo como lo que es — la parábola tiene un punto; lo literal no es literalista.</text>
+<text x="894" y="602" font-size="10.5" fill="#7c2a2f" font-weight="bold" text-anchor="end" font-family="Georgia, 'Times New Roman', Times, serif">narrative · law · poetry · prophecy · parable · letter</text>
+<path d="M480.0,615 L490.0,624 L500.0,615" fill="none" stroke="#8a661c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="70" y="626" width="840" height="78" rx="11" ry="11" fill="#fbf6e9" stroke="#7c2a2f" stroke-width="1.6"/>
+<circle cx="104" cy="665.0" r="18" fill="#b08a2e" stroke="#7c2a2f" stroke-width="1.6"/><text x="104" y="670.0" font-size="16" fill="#fff" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">6</text>
+<text x="138" y="650" font-size="15" fill="#561c20" font-weight="bold" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">The goal is transformation  ·  La meta es la transformación</text>
+<text x="138" y="670" font-size="12" fill="#3b2f23" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif">Not information but a changed life: study it, do it, teach it.</text>
+<text x="138" y="686" font-size="11" fill="#8a661c" font-weight="normal" text-anchor="start" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">No información sino una vida cambiada: estúdiala, hazla, enséñala.</text>
+<text x="894" y="692" font-size="10.5" fill="#7c2a2f" font-weight="bold" text-anchor="end" font-family="Georgia, 'Times New Roman', Times, serif">Ezra 7:10</text>
+<path d="M480.0,705 L490.0,714 L500.0,705" fill="none" stroke="#8a661c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="252.0" y="716" width="476" height="56" rx="12" ry="12" fill="#ecd9a0" stroke="#8a661c" stroke-width="1.8"/>
+<text x="490.0" y="740" font-size="13" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">CHRIST IN ALL THE SCRIPTURES  /  CRISTO EN TODA LA ESCRITURA</text>
+<text x="490.0" y="759" font-size="11.5" fill="#7c2a2f" font-weight="normal" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif" font-style="italic">The whole Bible is His story (Luke 24:27, 44; John 5:39).  ·  Toda la Biblia es Su historia.</text>
+<text x="490.0" y="802" font-size="12" fill="#561c20" font-weight="bold" text-anchor="middle" font-family="Georgia, 'Times New Roman', Times, serif">Chapala Theological Seminary  ·  Seminario Teológico de Chapala</text>
+</svg>
+<figcaption style="font-family:Georgia,serif;font-size:0.9em;line-height:1.5;margin-top:10px;color:#561c20;"><span style="font-weight:bold;">The path of faithful interpretation — from the text to a transformed life.</span><br><span style="font-style:italic;color:#8a661c;">El camino de la interpretación fiel — del texto a una vida transformada.</span></figcaption>
+</figure>
+<section id="lockout-block" class="lockout hidden">
+    <h2>
+      <span class="lang-en">Exam Locked</span>
+      <span class="lang-es">Examen bloqueado</span>
+    </h2>
+    <p>
+      <span class="lang-en">You did not reach the passing score. Please review the unit and try again after the lockout period.</span>
+      <span class="lang-es">No alcanzó la nota mínima. Repase la unidad y vuelva a intentarlo después del período de bloqueo.</span>
+    </p>
+    <div class="timer" id="lockout-timer"></div>
+    <p id="lockout-scope" style="font-style:italic"></p>
+  </section>
+
+  <section id="exam-section" class="card">
+    <h2 id="exam-title">
+      <span class="lang-en">Examination &mdash; Unit 1</span>
+      <span class="lang-es">Examen &mdash; Unidad 1</span>
+    </h2>
+    <p id="exam-track-note" style="font-style:italic;color:#7a5a3a"></p>
+
+    <div id="mc-container">
+      <h3>
+        <span class="lang-en">Multiple-Choice (20 questions, 18 to pass)</span>
+        <span class="lang-es">Opción múltiple (20 preguntas, 18 para aprobar)</span>
+      </h3>
+      <div id="mc-questions"></div>
+    </div>
+
+    <div id="sa-container">
+      <h3>
+        <span class="lang-en">Short-Answer (10 questions)</span>
+        <span class="lang-es">Respuesta breve (10 preguntas)</span>
+      </h3>
+      <p id="sa-note" style="font-weight:600"></p>
+      <p style="font-style:italic;color:#7a5a3a">
+        <span class="lang-en">Type your answer in the language you are studying in. Each answer must be at least a few sentences (about 100 characters) and contain the key concepts from the lesson.</span>
+        <span class="lang-es">Escriba su respuesta en el idioma en que está estudiando. Cada respuesta debe tener al menos unas cuantas oraciones (unos 100 caracteres) y contener los conceptos clave de la lección.</span>
+      </p>
+      <div id="sa-questions"></div>
+    </div>
+
+    <button class="btn primary" onclick="submitExam()" id="submit-btn">
+      <span class="lang-en">Submit Exam</span>
+      <span class="lang-es">Enviar examen</span>
+    </button>
+    <button class="btn danger" onclick="resetExam()">
+      <span class="lang-en">Reset</span>
+      <span class="lang-es">Reiniciar</span>
+    </button>
+  </section>
+
+  <section id="results-block" class="hidden"></section>
+
+</div>
+
+<footer>
+  <span class="lang-en">Chapala Theological Seminary &middot; CTS Hermeneutics &middot; &copy; Dr. Wayne Cook</span>
+  <span class="lang-es">Seminario Teológico de Chapala &middot; Hermenéutica CTS &middot; &copy; Dr. Wayne Cook</span>
+</footer>
+
+
+
+
+  
+  
+
+
+<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSHermeneuticsReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>

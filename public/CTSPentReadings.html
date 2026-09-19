@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTS The Pentateuch — Supplemental Reading Room</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root{
+    --primary:#5e4a2e;
+    --primary-deep:#46381f;
+    --gold:#c9a227;
+    --gold-deep:#98771d;
+    --paper:#f2ede3;
+    --card:#fffdf8;
+    --border:#e4d8c4;
+    --ink:#221a10;
+    --ink-soft:#6b5a44;
+  }
+
+  body{
+    font-family: Georgia, 'Times New Roman', serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 17px;
+    padding: 20px;
+  }
+  .container{ max-width: 900px; margin: 0 auto; }
+
+  /* ---------- language toggle mechanics (house pattern) ---------- */
+  body.lang-en .lang-es{ display:none; }
+  body.lang-en .lang-en{ display:inline; }
+  body.lang-es .lang-en{ display:none; }
+  body.lang-es .lang-es{ display:inline; }
+  .lang-en.block, .lang-es.block{ display:none; }
+  body.lang-en .lang-en.block{ display:block; }
+  body.lang-es .lang-es.block{ display:block; }
+  body.lang-both .lang-es.block{ display:block; }
+  body.lang-both .lang-en.block{ display:block; }
+  body.lang-both .lang-es:not(.block){ display:inline; }
+  body.lang-both .lang-en:not(.block){ display:inline; }
+  body.lang-both .lang-es.block{ opacity:.9; border-top:1px dashed var(--border); margin-top:8px; padding-top:8px; }
+
+  /* ---------- builder note (delete before publishing) ---------- */
+  .builder{
+    border:2px dashed #b23a3a; background:#fdf4f4; color:#5a2020;
+    border-radius:12px; padding:16px 18px; margin-bottom:26px; font-size:.92rem; line-height:1.5;
+  }
+  .builder strong{ display:block; margin-bottom:6px; color:#8f2a2a; letter-spacing:.02em; text-transform:uppercase; font-size:.78rem; }
+  .builder ol{ margin:6px 0 0 18px; } .builder li{ margin:4px 0; }
+
+  /* ---------- toggle bar ---------- */
+  .bar{
+    background:#eaddc8; border-radius:40px; padding:10px 14px;
+    display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center; margin-bottom:26px;
+  }
+  .bar span.bar-label{ color:var(--ink-soft); font-size:.85rem; margin-right:4px; }
+  .toggle-btn{
+    background:var(--card); color:var(--primary); border:1px solid var(--border);
+    border-radius:30px; padding:7px 18px; cursor:pointer; font-family:inherit; font-size:.92rem;
+  }
+  .toggle-btn.active{ background:var(--primary); color:#fff; border-color:var(--primary); }
+
+  /* ---------- masthead ---------- */
+  .mast{ text-align:center; padding:14px 0 6px; }
+  .mast .eyebrow{
+    letter-spacing:.3em; text-transform:uppercase; font-size:.72rem; color:var(--gold-deep); margin-bottom:12px;
+  }
+  .mast h1{ color:var(--primary); font-size:2.05rem; line-height:1.2; font-weight:normal; }
+  .mast .rule{ width:88px; height:2px; background:var(--gold); margin:18px auto 14px; }
+  .mast .sub{ color:var(--ink-soft); font-style:italic; font-size:1.02rem; }
+
+  /* ---------- cards ---------- */
+  .card{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    padding:22px 24px; margin:22px 0; box-shadow:0 4px 12px rgba(0,0,0,.05);
+  }
+  .card h2{
+    color:var(--primary); font-size:1.18rem; font-weight:normal;
+    border-left:4px solid var(--gold); padding-left:14px; margin-bottom:12px;
+  }
+  .card p{ margin:9px 0; }
+  .card p.lead{ margin-top:2px; }
+
+  .honors{ border-left:none; border-top:4px solid var(--gold); }
+  .honors h2{ border-left:none; padding-left:0; }
+  .pill-note{ display:inline-block; background:#f0e6d4; border:1px solid var(--border); border-radius:20px; padding:3px 12px; font-size:.82rem; color:var(--primary); margin-top:4px; }
+
+  /* ---------- reading entries ---------- */
+  .shelf-head{ margin:34px 0 6px; text-align:center; }
+  .shelf-head h2{
+    color:var(--primary); font-weight:normal; font-size:1.4rem; border:none; padding:0; display:inline-block;
+  }
+  .shelf-head .rule{ width:60px; height:2px; background:var(--gold); margin:12px auto 0; }
+  .counter{
+    position:sticky; top:8px; z-index:5;
+    background:var(--primary); color:#fff; border-radius:30px;
+    padding:8px 18px; text-align:center; font-size:.95rem; margin:16px auto 6px; max-width:280px;
+    box-shadow:0 3px 10px rgba(0,0,0,.14);
+  }
+  .counter b{ color:var(--gold); }
+
+  .entry{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    padding:20px 22px; margin:16px 0; box-shadow:0 4px 12px rgba(0,0,0,.05);
+    transition:box-shadow .18s ease, border-color .18s ease;
+  }
+  .entry:hover{ box-shadow:0 7px 20px rgba(94,74,46,.15); }
+  .entry.chosen{ border-color:var(--primary); box-shadow:0 0 0 2px var(--primary) inset, 0 7px 20px rgba(94,74,46,.17); }
+  .entry .locus{
+    letter-spacing:.16em; text-transform:uppercase; font-size:.68rem; color:var(--gold-deep); margin-bottom:8px;
+  }
+  .entry .title{ font-size:1.14rem; color:var(--primary); margin-bottom:2px; }
+  .entry .title .num{
+    display:inline-block; min-width:1.7em; color:var(--gold-deep); font-style:italic;
+  }
+  .entry .byline{ color:var(--ink-soft); font-style:italic; font-size:.92rem; margin-bottom:10px; padding-left:1.7em; }
+  .entry .caption{ font-size:.98rem; }
+  .entry .foot{
+    display:flex; flex-wrap:wrap; gap:12px 20px; align-items:center; justify-content:space-between;
+    margin-top:14px; padding-top:12px; border-top:1px solid var(--border);
+  }
+  .read-link{
+    color:var(--primary); text-decoration:none; font-size:.95rem; border-bottom:1.5px solid var(--gold); padding-bottom:1px;
+  }
+  .read-link:hover{ color:var(--gold-deep); }
+  .read-links{ display:flex; flex-wrap:wrap; gap:6px 16px; align-items:center; }
+  .read-link.mod{ border-bottom-color:var(--primary); }
+  .pick{ display:inline-flex; align-items:center; gap:9px; cursor:pointer; font-size:.92rem; color:var(--ink); user-select:none; }
+  .pick input{ width:19px; height:19px; accent-color:var(--primary); cursor:pointer; }
+  .pick.disabled{ opacity:.4; cursor:not-allowed; }
+
+  /* ---------- millennial views panel (unused in this course; retained for template parity) ---------- */
+  .millennial{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    padding:22px 24px; margin:22px 0; box-shadow:0 4px 12px rgba(0,0,0,.05);
+  }
+  .millennial > h2{
+    color:var(--primary); font-size:1.18rem; font-weight:normal;
+    border-left:4px solid var(--gold); padding-left:14px; margin-bottom:10px;
+  }
+  .millennial .intro{ margin:8px 0 6px; }
+  .mv-grid{ margin-top:14px; }
+  .entry.mv{ box-shadow:none; border:none; border-top:1px solid var(--border); border-radius:0; margin:0; padding:18px 0; }
+  .entry.mv:first-of-type{ border-top:none; padding-top:4px; }
+  .entry.mv:hover{ box-shadow:none; }
+  .entry.mv.chosen{ box-shadow:none; border-top:1px solid var(--border); background:#f0e6d4; border-radius:8px; padding:14px 12px; }
+  .entry.mv:first-of-type.chosen{ border-top:none; }
+  .view-badge{
+    display:inline-block; background:var(--gold); color:var(--primary-deep);
+    font-size:.72rem; font-weight:bold; letter-spacing:.11em; text-transform:uppercase;
+    padding:5px 14px; border-radius:20px; margin-bottom:10px;
+  }
+
+  .limit-note{ text-align:center; color:var(--gold-deep); font-size:.9rem; min-height:1.2em; margin:4px 0 0; }
+
+  /* ---------- attestation ---------- */
+  .attest label.field{ display:block; margin:14px 0 6px; font-size:.9rem; color:var(--ink-soft); }
+  .attest input[type=text]{
+    width:100%; font-family:inherit; font-size:1rem; padding:11px 14px;
+    border:1px solid var(--border); border-radius:10px; background:#fffef9; color:var(--ink);
+  }
+  .attest .oath{
+    display:flex; gap:11px; align-items:flex-start; margin:16px 0; font-size:.96rem; background:#f2ede3;
+    border:1px solid var(--border); border-radius:10px; padding:12px 14px;
+  }
+  .attest .oath input{ width:20px; height:20px; margin-top:2px; accent-color:var(--primary); flex-shrink:0; }
+  .btn{
+    background:var(--primary); color:#fff; border:none; border-radius:30px;
+    padding:11px 26px; cursor:pointer; font-family:inherit; font-size:1rem; margin-top:6px;
+  }
+  .btn:hover{ background:var(--primary-deep); }
+  .btn.ghost{ background:transparent; color:var(--primary); border:1px solid var(--primary); }
+  .msg{ color:var(--gold-deep); font-size:.92rem; margin-top:12px; min-height:1.2em; }
+
+  .record{ display:none; }
+  .record.show{ display:block; }
+  .record .seal-line{ width:70px; height:2px; background:var(--gold); margin:6px 0 16px; }
+  .record h3{ color:var(--primary); font-weight:normal; font-size:1.3rem; margin-bottom:4px; }
+  .record .named{ font-size:1.5rem; color:var(--primary); border-bottom:1px solid var(--gold-deep); display:inline-block; padding:0 10px 4px; margin:6px 0 12px; }
+  .record ul{ margin:12px 0 12px 20px; } .record li{ margin:5px 0; }
+  .record .stamp{ font-style:italic; color:var(--ink-soft); font-size:.92rem; }
+
+  .footnote{ text-align:center; color:var(--ink-soft); font-size:.82rem; margin:30px 0 6px; }
+
+  a:focus-visible, input:focus-visible, button:focus-visible, label:focus-within{
+    outline:3px solid var(--gold); outline-offset:2px;
+  }
+
+  @media (max-width:520px){
+    body{ font-size:16px; padding:14px; }
+    .mast h1{ font-size:1.7rem; }
+    .entry .foot{ flex-direction:column; align-items:flex-start; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; animation:none !important; }
+  }
+
+  /* ---------- print: show only the record ---------- */
+  @media print{
+    body{ background:#fff; }
+    .builder, .bar, .no-print, .entry, .counter, .attest .oath, .attest input, .attest label.field, .attest .btn, .msg, .limit-note{ display:none !important; }
+    .card.attest{ border:none; box-shadow:none; }
+    .record{ display:block !important; }
+  }
+
+    .len{font-size:.82rem;color:#6b6b6b;margin:.15rem 0 .5rem;font-style:italic}
+    .kind,.tag{display:inline-block;margin-left:.5rem;padding:.08rem .5rem;border-radius:999px;font-size:.68rem;letter-spacing:.04em;text-transform:uppercase;vertical-align:middle}
+    .kind.modern{background:#e8f0e4;color:#41521c;border:1px solid #c3d4b8}
+    .kind.classic{background:#efe9dd;color:#6b5836;border:1px solid #d9cdb4}
+    .tag{background:#f2eee6;color:#5a4a2e;border:1px dashed #cbbfa4;text-transform:none;font-style:italic}
+    .read-links{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+    .read-link.mod{background:transparent;color:#6b6b6b;border:1px solid #cfcfcf;font-size:.8rem}
+  </style>
+<style>
+.digest-inline{margin:12px 0 6px;border:1px solid var(--border,#e2d6c9);border-radius:9px;background:#fff;overflow:hidden}
+.digest-inline>summary{cursor:pointer;list-style:none;padding:11px 13px;font-family:Arial,Helvetica,sans-serif;font-weight:700;color:var(--primary,#33608f);display:flex;align-items:center;gap:9px}
+.digest-inline>summary::-webkit-details-marker{display:none}
+.digest-inline>summary::after{content:"\25B8";margin-left:auto;color:var(--gold-deep,#8a5a3c)}
+.digest-inline[open]>summary::after{content:"\25BE"}
+.dg-badge{flex:none;background:var(--primary,#33608f);color:#fff;font:800 .6rem/1 Arial,sans-serif;letter-spacing:.11em;padding:5px 8px;border-radius:5px}
+.dg-note-line{font-family:Arial,sans-serif;font-size:.82rem;color:var(--ink-soft,#6b5b4d);padding:0 15px 8px}
+.dg-scroll{padding:2px 15px 16px;border-top:1px solid var(--border,#eee)}
+.dg-block{max-width:none;margin:0}
+.dg-block .dg-doc{border-bottom:1.5px solid var(--border,#e2d6c9);padding-bottom:10px;margin:10px 0 12px}
+.dg-block h1{font-size:1.25rem;line-height:1.25;margin:.1rem 0 .4rem;color:var(--primary,#33608f)}
+.dg-block .dg-sub{color:var(--ink-soft,#6b5b4d);font-style:italic;margin:0 0 .5rem;font-size:.95rem}
+.dg-block .dg-src{font-size:.8rem;color:var(--ink-soft,#6b5b4d);margin:.2rem 0}
+.dg-block .dg-chips{margin:.5rem 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:.35rem}
+.dg-block .dg-chips li{font:700 .66rem/1 Arial,sans-serif;background:var(--card,#eef2f6);color:var(--primary,#33608f);border:1px solid var(--border,#d5d5d5);border-radius:999px;padding:3px 8px}
+.dg-block .dg-note{background:var(--card,#eef2f6);border-left:3px solid var(--gold-deep,#8a5a3c);padding:.7rem .9rem;margin:1rem 0;font-size:.92rem;line-height:1.5}
+.dg-block h2{font-size:1.05rem;margin:1.3rem 0 .4rem;padding-top:.35rem;border-top:1px solid var(--border,#ece2d6);color:var(--primary,#33608f)}
+.dg-block h2 .dg-n{color:var(--gold-deep,#8a5a3c);font-weight:400;margin-right:.35rem}
+.dg-block p{margin:0 0 .8rem;font-size:.97rem;line-height:1.6}
+.dg-block blockquote{margin:1rem 0;padding:.2rem 0 .2rem 1rem;border-left:3px solid var(--border,#e2d6c9);font-style:italic;color:#444}
+.dg-block .dg-reflect{background:var(--card,#eef2f6);padding:.7rem .9rem;border-radius:6px;margin:1rem 0}
+.dg-block footer{margin-top:1.4rem;padding-top:.8rem;border-top:1.5px solid var(--border,#e2d6c9);font-size:.8rem;color:var(--ink-soft,#6b5b4d);line-height:1.5}
+</style></head>
+<body class="lang-en">
+<div class="container">
+
+  <!-- ===== HONORS PROMPT ===== -->
+  <div class="bar no-print" style="background:#f6f0e2;border:1px solid #e4d8c4;">
+    <span class="lang-en">&#10022; Pursuing a degree <b>With Honors</b>? Complete this class's reading below, then track your progress:</span>
+    <span class="lang-es">&#10022; &iquest;Cursando un t&iacute;tulo <b>Con Honores</b>? Complete la lectura de esta clase abajo, luego siga su progreso:</span>
+    <a class="toggle-btn" href="cts-honors.html" style="text-decoration:none;"><span class="lang-en">Honors page &#8599;</span><span class="lang-es">P&aacute;gina de Honores &#8599;</span></a>
+  </div>
+
+  <!-- ============ LANGUAGE TOGGLE ============ -->
+  <div class="bar no-print">
+    <span class="bar-label lang-en">Language:</span>
+    <span class="bar-label lang-es">Idioma:</span>
+    <button class="toggle-btn active" data-lang="en" onclick="setLang('en')">English</button>
+    <button class="toggle-btn" data-lang="es" onclick="setLang('es')">Español</button>
+    <button class="toggle-btn" data-lang="both" onclick="setLang('both')">Both / Ambos</button>
+  </div>
+
+  <!-- ============ MASTHEAD ============ -->
+  <div class="mast">
+    <div class="eyebrow">Chapala Theological Seminary &middot; The Pentateuch</div>
+    <h1>
+      <span class="lang-en">Supplemental Reading Room</span>
+      <span class="lang-es">Sala de Lecturas Complementarias</span>
+    </h1>
+    <div class="rule"></div>
+    <div class="sub">
+      <span class="lang-en">The five books of Moses &mdash; choose any three</span>
+      <span class="lang-es">Los cinco libros de Moisés &mdash; elija tres cualesquiera</span>
+    </div>
+  </div>
+
+  <!-- ============ FRAMING ============ -->
+  <div class="card">
+    <h2>
+      <span class="lang-en">How to read this shelf</span>
+      <span class="lang-es">Cómo leer este estante</span>
+    </h2>
+    <p class="lead lang-en block">This course walks through the five books of Moses — Genesis, Exodus, Leviticus, Numbers, and Deuteronomy — the foundation of all Scripture, which tells the story from creation to the edge of the Promised Land and points throughout to Christ. These five readings are bilingual Chapala Theological Seminary digests, moving through the Pentateuch by its great movements — creation and the fall, the patriarchs, the Exodus and the Law, holiness and the wilderness, and Moses’ final word — and drawing on its classic public-domain expositors, from Keil &amp; Delitzsch and A. W. Pink to Patrick Fairbairn and the great commentators on the Tabernacle and the offerings. Each is written to be read on its own, in English or Spanish, entirely offline. Choose any three, read them in full, and record your reading below.</p>
+    <p class="lang-en block">These five readings draw on the great public-domain classics of the Pentateuch — Keil &amp; Delitzsch’s commentary on the Old Testament, A. W. Pink’s <em>Gleanings in Genesis</em>, Patrick Fairbairn’s <em>Typology of Scripture</em>, and the classic expositions of Exodus, Leviticus, Numbers, and the Tabernacle. Read these digests to see the foundation on which the whole Bible is built — God the Creator and Redeemer, the covenant of grace, the way of approach to a holy God — and, on every page, the shadow of the Christ who was to come.</p>
+
+    <p class="lead lang-es block">Este curso recorre los cinco libros de Moisés — Génesis, Éxodo, Levítico, Números, y Deuteronomio — el fundamento de toda la Escritura, que cuenta la historia desde la creación hasta el borde de la Tierra Prometida y señala por todas partes a Cristo. Estas cinco lecturas son resúmenes bilingües del Seminario Teológico de Chapala, que se mueven por el Pentateuco por sus grandes movimientos — la creación y la caída, los patriarcas, el Éxodo y la Ley, la santidad y el desierto, y la palabra final de Moisés — y se apoyan en sus expositores clásicos de dominio público, desde Keil y Delitzsch y A. W. Pink hasta Patrick Fairbairn y los grandes comentaristas del Tabernáculo y las ofrendas. Cada una está escrita para leerse por sí sola, en inglés o español, enteramente sin conexión. Elija tres cualesquiera, léalas por completo, y registre su lectura abajo.</p>
+    <p class="lang-es block">Estas cinco lecturas se apoyan en los grandes clásicos de dominio público del Pentateuco — el comentario de Keil y Delitzsch sobre el Antiguo Testamento, <em>Gleanings in Genesis</em> de A. W. Pink, <em>The Typology of Scripture</em> de Patrick Fairbairn, y las exposiciones clásicas de Éxodo, Levítico, Números, y el Tabernáculo. Lea estos resúmenes para ver el fundamento sobre el cual se edifica toda la Biblia — Dios el Creador y Redentor, el pacto de gracia, el camino de acercamiento a un Dios santo — y, en cada página, la sombra del Cristo que había de venir.</p>
+  </div>
+
+  <!-- ============ HONORS ============ -->
+  <div class="card honors">
+    <h2>
+      <span class="lang-en">With Honors &mdash; an invitation, not a requirement</span>
+      <span class="lang-es">Con Honores &mdash; una invitación, no un requisito</span>
+    </h2>
+    <p class="lang-en block">Your degree is complete without these readings. Every CTS degree &mdash; the Certificate, the Associate of Divinity, the Th.M., and the M.Div. &mdash; is earned in full through the course units themselves, and no student is ever penalized for being unable to reach this material.</p>
+    <p class="lang-en block">These supplemental readings are the path to one added distinction &mdash; your degree awarded <em>with honors</em>. Each class whose reading you complete counts toward it: twelve classes for the Certificate or the Th.M., twenty-five for the Associate, and thirty for the M.Div. Choose any three of the readings below, read them in full, and record your reading on your honor &mdash; then track your progress on the Honors page.</p>
+
+    <p class="lang-es block">Su título está completo sin estas lecturas. Todo título de CTS &mdash; el Certificado, el Asociado en Divinidad, la Maestría en Teología, y la Maestría en Divinidad &mdash; se obtiene por completo mediante las unidades del curso mismo, y ningún estudiante es penalizado por no poder acceder a este material.</p>
+    <p class="lang-es block">Estas lecturas complementarias son el camino hacia una distinción adicional &mdash; su título otorgado <em>con honores</em>. Cada clase cuya lectura complete cuenta para ella: doce clases para el Certificado o la Maestría en Teología, veinticinco para el Asociado o la Maestría en Divinidad. Elija tres cualesquiera de las lecturas de abajo, léalas por completo, y registre su lectura bajo su honor &mdash; luego siga su progreso en la página de Honores.</p>
+
+    <span class="pill-note lang-en">No constant internet required &mdash; see below</span>
+    <span class="pill-note lang-es">No se requiere internet constante &mdash; vea abajo</span>
+  </div>
+
+  <!-- ============ ACCESS / OFFLINE ============ -->
+  <div class="card">
+    <h2>
+      <span class="lang-en">Reading offline</span>
+      <span class="lang-es">Leer sin conexión</span>
+    </h2>
+    <p class="lang-en block">Every one of these five readings is a Chapala Theological Seminary bilingual digest, written by CTS and included in your course download — so all of them open directly on your device, in English or Spanish, with no internet connection at all. Each digest walks through one book or movement of the Pentateuch and rests on the classic public-domain expositions, but the digests themselves are CTS-authored teaching, not reproductions, and those classic works are freely available online for any who wish to read them in full.</p>
+    <p class="lang-es block">Cada una de estas cinco lecturas es un resumen bilingüe del Seminario Teológico de Chapala, escrito por el STC e incluido en la descarga de su curso — de modo que todas se abren directamente en su dispositivo, en inglés o español, sin conexión alguna. Cada resumen recorre un libro o movimiento del Pentateuco y se apoya en las exposiciones clásicas de dominio público, pero los resúmenes mismos son enseñanza de autoría del STC, no reproducciones, y esas obras clásicas están disponibles gratuitamente en línea para quien desee leerlas por completo.</p>
+  </div>
+
+  <!-- ============ TRANSLATE ============ -->
+  <div class="card">
+    <h2>
+      <span class="lang-en">Reading in another language</span>
+      <span class="lang-es">Leer en otro idioma</span>
+    </h2>
+    <p class="lang-en block">Most of these works are in English. If you would rather read in Spanish or another language, the Chrome browser can translate a whole page for you. On a computer, right-click anywhere on the opened reading and choose &ldquo;Translate to&hellip;&rdquo;. On an Android phone or tablet, tap the three-dot menu and choose &ldquo;Translate&rdquo;. On an iPhone or iPad, tap the translate icon in the address bar &mdash; or open the page in the Chrome app if you don't see it. Machine translation is not perfect, but it is enough to follow the argument.</p>
+    <p class="lang-es block">La mayoría de estas obras están en inglés. Si prefiere leer en español u otro idioma, el navegador Chrome puede traducir una página entera por usted. En una computadora, haga clic derecho en cualquier parte de la lectura abierta y elija &ldquo;Traducir a&hellip;&rdquo;. En un teléfono o tableta Android, toque el menú de tres puntos y elija &ldquo;Traducir&rdquo;. En un iPhone o iPad, toque el ícono de traducción en la barra de direcciones &mdash; o abra la página en la aplicación Chrome si no lo ve. La traducción automática no es perfecta, pero basta para seguir el argumento.</p>
+  </div>
+
+  <!-- ============ THE SHELF ============ -->
+  <div class="shelf-head">
+    <h2>
+      <span class="lang-en">The Five Readings</span>
+      <span class="lang-es">Las Cinco Lecturas</span>
+    </h2>
+    <div class="rule"></div>
+  </div>
+
+  <div class="counter no-print">
+    <span class="lang-en">Chosen: <b id="cnt-en">0</b> of 3</span>
+    <span class="lang-es">Elegidas: <b id="cnt-es">0</b> de 3</span>
+  </div>
+  <p class="limit-note no-print" id="limitNote"></p>
+
+  <!-- 1 -->
+<article class="entry" data-id="1" data-title-en="In the Beginning: Creation, Fall, and Flood &mdash; CTS digest" data-title-es="En el Principio: Creación, Caída, y Diluvio &mdash; resumen STC">
+<div class="locus"><span class="lang-en">Genesis 1&ndash;11 &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">Génesis 1&ndash;11 &middot; un resumen biling&uuml;e del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">1.</span><span class="lang-en">In the Beginning: Creation, Fall, and Flood</span><span class="lang-es">En el Principio: Creación, Caída, y Diluvio</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">The foundation of Scripture: creation and humanity made in God’s image; the fall, and the first gleam of the gospel in Genesis 3:15 (the seed of the woman who crushes the serpent); the flood as judgment and mercy, with the ark as an early picture of salvation; and Babel’s scattered nations, setting the stage for God to call Abraham and bless the world — all pointing to Christ.</p>
+<p class="caption lang-es block">El fundamento de la Escritura: la creación y el hombre hecho a imagen de Dios; la caída, y el primer destello del evangelio en Génesis 3:15 (la simiente de la mujer que hiere a la serpiente); el diluvio como juicio y misericordia, con el arca como un temprano cuadro de la salvación; y las naciones dispersas de Babel, preparando el escenario para que Dios llame a Abraham y bendiga al mundo — todo señalando a Cristo.</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>In the Beginning: Creation, Fall, and Flood</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — Genesis 1–11: the foundations — God the Creator, humanity's dignity and fall, and the first promise of grace</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain expositions of the Pentateuch (Keil &amp; Delitzsch, Pink, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Book Study: Pentateuch</li>
+<li>Creation and Fall</li>
+<li>The First Promise</li>
+<li>Anchored in classics</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> The Pentateuch — the five books of Moses — is the foundation of all Scripture. This first reading walks through Genesis 1–11, the primeval history: creation, the fall, the flood, and the nations — and the first gleam of the grace that will run through the whole Bible.
+    </div>
+<h2><span class="dg-n">1.</span>The Foundation of Scripture</h2>
+<p>The Pentateuch — the five books of Moses: Genesis, Exodus, Leviticus, Numbers, and Deuteronomy — is the great foundation on which all the rest of the Bible is built. It carries the story from the creation of the world all the way to the edge of the Promised Land, and along the way it lays down the truths that everything else will rest upon: that there is one God, the Maker of all things; that humanity was made in His image and has fallen into sin; that sin brings judgment; and that God has set in motion a plan of redemption through a people of His own choosing. Here, at the very start, is where the whole story of the Bible begins. And this first reading takes up Genesis 1 through 11, the primeval history — the foundation of the foundation, the account of the world's beginnings before the story narrows down to one family and one nation.</p>
+<h2><span class="dg-n">2.</span>Creation: God Made It Good</h2>
+<p>Genesis opens with the majestic account of creation: "In the beginning God created the heavens and the earth." Step by step, God simply speaks, and it is so — light and darkness, sky and sea, dry land, sun and moon and stars, plants and living creatures — and again and again He pronounces what He has made "good." And then, as the very crown and summit of it all, God makes humanity: "So God created man in His own image; in the image of God He created him; male and female He created them." To the human creature alone is given the dignity of bearing God's image, and a calling to have dominion over the earth as God's stewards. And on the seventh day God rests. Whatever questions we may bring about the manner and the timing of it, the great truths this account was written to teach stand out clearly and unshakably: that there is one God, the Creator of everything that exists; that the world is His good and purposeful creation, and not some cosmic accident; and that humanity, male and female alike, bears the very image of God, and so possesses a unique dignity and a calling to reflect its Maker.</p>
+<h2><span class="dg-n">3.</span>The Fall: Sin Enters the World</h2>
+<p>Genesis 3 tells the tragic account of the fall. God had placed the man and the woman in the garden of Eden, in open fellowship with Himself, with everything they needed and a single prohibition to mark out their trust and obedience. But the serpent came with his temptation, casting doubt on the goodness and the word of God — "Has God indeed said?" — and the man and the woman believed the lie and disobeyed. And in that moment sin entered the world, and with it came shame, and fear, and the breaking of their fellowship with God, and death. Yet here is the wonder of it: even in the very act of pronouncing judgment, God speaks the first promise of grace. To the serpent He says that the seed of the woman shall crush his head, even as his heel is struck. This is the first faint gleam of the gospel in all of Scripture — the promise, spoken at humanity's darkest hour, of a coming Redeemer who will one day undo the whole work of the enemy. The fall accounts for the brokenness we see all around us and within us; and that first promise plants the seed of the hope that will grow through the entire Bible.</p>
+<h2><span class="dg-n">4.</span>From Cain to the Flood</h2>
+<p>Genesis 4 through 9 traces the spread of sin, and God's response to it. Cain rises up and murders his brother Abel, and from there violence and corruption spread until they fill the whole earth, and the account tells us, in sober and startling words, that it grieved God to His heart. And yet, in the midst of that darkness, we read one of the sweetest sentences in early Scripture: "But Noah found grace in the eyes of the LORD." God sends the great flood as a judgment upon a world given over to violence — and at the very same time He saves Noah and his family alive in the ark. Judgment and mercy stand here side by side. The ark itself becomes one of Scripture's earliest pictures of salvation: God carrying His own people safely through the very waters of judgment. And when the waters recede, God makes a covenant with Noah and with every living thing, hanging the rainbow in the clouds as its sign, and promising never again to destroy the earth with a flood. Even in the act of judgment, God preserves a people, and keeps His larger purpose alive.</p>
+<h2><span class="dg-n">5.</span>Babel and the Nations</h2>
+<p>Genesis 10 and 11 tell of the spreading of the nations across the earth, and of the tower of Babel. United now in a common pride, humanity gathers to build a great city and a tower "whose top is in the heavens," in order to make a name for itself and to resist God's command to spread out and fill the earth. And God responds by confusing their single language into many, so that they can no longer understand one another, and He scatters them abroad over the face of all the earth. The nations are divided and dispersed. And this is precisely the world into which, in the very next chapter, God will step and call one man, Abraham — and will promise that through him and his seed, blessing will one day come to all the scattered nations of the earth. So the primeval history ends with humanity divided and scattered by its own sin, and in doing so it sets the stage perfectly for the great plan God is about to begin: to gather to Himself a people, and through them to bless the whole world.</p>
+<h2><span class="dg-n">6.</span>The Foundation Laid</h2>
+<p>Genesis 1 through 11 lays the foundation for everything that will follow in the Bible. From it we learn that God is the Creator, and that the world around us is His good and purposeful work. We learn that humanity, made in His own image, has fallen into sin, and has brought upon itself death and division. And we learn that God, even in the midst of His judgments, is a God of grace — who promises a Redeemer at the very moment of the fall, who preserves His people safely through the flood, and who is even now preparing to bless the nations. These chapters explain the world exactly as we find it: its stubborn beauty, which is the mark of God's good creation; its deep brokenness, which is the fruit of the fall; and its hope, which is that first shining promise of grace. And they point us forward. The seed of the woman who will one day crush the serpent's head is Christ; He is the true and better ark, in whom God carries His people safely through judgment; and it is in Him that the scattered nations of Babel will at last be gathered and blessed. So read these foundational chapters, and see in them both the greatness of God the Creator and the real depth of our need — and, shining through it all, the first light of the grace that will fill the whole story. For the God who created you, and whose image you bear, has not abandoned His fallen world; from the very beginning He set in motion His great plan to redeem it in Christ.</p>
+<h2><span class="dg-n">7.</span>Taking It to Heart</h2>
+<div class="dg-reflect">
+<b>For reflection.</b> Do you live as one who bears the image of God — and do you see that same dignity in every person around you? Does the account of the fall help you understand the brokenness you see in the world and in yourself? And can you catch, even in Genesis 3, the first gleam of the gospel — the promised seed who would one day crush the serpent, and who is Christ?
+    </div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary survey of Genesis 1–11, anchored in the classic public-domain expositions of the Pentateuch (Keil &amp; Delitzsch's <em>Biblical Commentary on the Old Testament</em>, A. W. Pink's <em>Gleanings in Genesis</em>, and others), and in Scripture. This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This book study draws on a rich company of public-domain expositors of the Pentateuch — among them Keil &amp; Delitzsch on the Old Testament, A. W. Pink's <em>Gleanings in Genesis</em>, and Patrick Fairbairn's <em>The Typology of Scripture</em> — all in the public domain.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>En el Principio: Creación, Caída, y Diluvio</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — Génesis 1–11: los fundamentos — Dios el Creador, la dignidad y la caída del hombre, y la primera promesa de gracia</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en las exposiciones clásicas de dominio público del Pentateuco (Keil y Delitzsch, Pink, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Estudio del Libro: Pentateuco</li>
+<li>Creación y caída</li>
+<li>La primera promesa</li>
+<li>Anclado en clásicos</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> El Pentateuco — los cinco libros de Moisés — es el fundamento de toda la Escritura. Esta primera lectura recorre Génesis 1–11, la historia primigenia: la creación, la caída, el diluvio, y las naciones — y el primer destello de la gracia que recorrerá toda la Biblia.
+    </div>
+<h2><span class="dg-n">1.</span>El fundamento de la Escritura</h2>
+<p>El Pentateuco — los cinco libros de Moisés: Génesis, Éxodo, Levítico, Números, y Deuteronomio — es el gran fundamento sobre el cual se edifica todo el resto de la Biblia. Lleva la historia desde la creación del mundo todo el camino hasta el borde de la Tierra Prometida, y por el camino asienta las verdades sobre las cuales todo lo demás descansará: que hay un solo Dios, el Hacedor de todas las cosas; que el hombre fue hecho a su imagen y ha caído en pecado; que el pecado trae juicio; y que Dios ha puesto en marcha un plan de redención por medio de un pueblo de su propia elección. Aquí, en el mismísimo comienzo, es donde comienza toda la historia de la Biblia. Y esta primera lectura toma Génesis 1 al 11, la historia primigenia — el fundamento del fundamento, el relato de los comienzos del mundo antes de que la historia se estreche a una familia y una nación.</p>
+<h2><span class="dg-n">2.</span>La creación: Dios la hizo buena</h2>
+<p>Génesis abre con el majestuoso relato de la creación: "En el principio creó Dios los cielos y la tierra." Paso a paso, Dios sencillamente habla, y es así — la luz y las tinieblas, el cielo y el mar, la tierra seca, el sol y la luna y las estrellas, las plantas y los seres vivientes — y una y otra vez pronuncia bueno lo que ha hecho. Y luego, como la mismísima corona y cumbre de todo ello, Dios hace al hombre: "Y creó Dios al hombre a su imagen, a imagen de Dios lo creó; varón y hembra los creó." Solo a la criatura humana se da la dignidad de llevar la imagen de Dios, y un llamado a señorear sobre la tierra como mayordomos de Dios. Y en el séptimo día Dios reposa. Cualesquiera que sean las preguntas que traigamos sobre la manera y el momento de ello, las grandes verdades que este relato fue escrito para enseñar sobresalen clara e inconmoviblemente: que hay un solo Dios, el Creador de todo lo que existe; que el mundo es su creación buena y con propósito, y no algún accidente cósmico; y que el hombre, varón y hembra por igual, lleva la mismísima imagen de Dios, y así posee una dignidad única y un llamado a reflejar a su Hacedor.</p>
+<h2><span class="dg-n">3.</span>La caída: el pecado entra en el mundo</h2>
+<p>Génesis 3 cuenta el trágico relato de la caída. Dios había puesto al hombre y a la mujer en el huerto del Edén, en abierta comunión consigo mismo, con todo lo que necesitaban y una sola prohibición para marcar su confianza y obediencia. Pero la serpiente vino con su tentación, echando duda sobre la bondad y la palabra de Dios — "¿Conque Dios os ha dicho?" — y el hombre y la mujer creyeron la mentira y desobedecieron. Y en ese momento el pecado entró en el mundo, y con él vinieron la vergüenza, y el temor, y la ruptura de su comunión con Dios, y la muerte. Sin embargo, he aquí la maravilla de ello: aun en el mismísimo acto de pronunciar juicio, Dios habla la primera promesa de gracia. A la serpiente le dice que la simiente de la mujer le herirá en la cabeza, aun cuando su calcañar sea herido. Este es el primer tenue destello del evangelio en toda la Escritura — la promesa, hablada en la hora más oscura del hombre, de un Redentor venidero que un día deshará toda la obra del enemigo. La caída explica la quebrantadura que vemos a nuestro alrededor y dentro de nosotros; y esa primera promesa planta la semilla de la esperanza que crecerá a través de toda la Biblia.</p>
+<h2><span class="dg-n">4.</span>De Caín al diluvio</h2>
+<p>Génesis 4 al 9 traza la propagación del pecado, y la respuesta de Dios a él. Caín se levanta y asesina a su hermano Abel, y de ahí la violencia y la corrupción se propagan hasta que llenan toda la tierra, y el relato nos dice, en palabras sobrias y asombrosas, que le dolió a Dios en su corazón. Y sin embargo, en medio de esa oscuridad, leemos una de las oraciones más dulces de la Escritura temprana: "Mas Noé halló gracia ante los ojos de Jehová." Dios envía el gran diluvio como un juicio sobre un mundo entregado a la violencia — y al mismísimo tiempo salva con vida a Noé y a su familia en el arca. El juicio y la misericordia están aquí lado a lado. El arca misma llega a ser uno de los primeros cuadros de la salvación en la Escritura: Dios llevando a su propio pueblo sano y salvo a través de las mismísimas aguas del juicio. Y cuando las aguas se retiran, Dios hace un pacto con Noé y con todo ser viviente, colgando el arco iris en las nubes como su señal, y prometiendo nunca más destruir la tierra con un diluvio. Aun en el acto del juicio, Dios preserva un pueblo, y mantiene vivo su propósito mayor.</p>
+<h2><span class="dg-n">5.</span>Babel y las naciones</h2>
+<p>Génesis 10 y 11 cuentan de la propagación de las naciones por la tierra, y de la torre de Babel. Unido ahora en una común soberbia, el hombre se reúne para edificar una gran ciudad y una torre "cuya cúspide llegue al cielo," a fin de hacerse un nombre y resistir el mandamiento de Dios de esparcirse y llenar la tierra. Y Dios responde confundiendo su único lenguaje en muchos, de modo que ya no puedan entenderse unos a otros, y los esparce por la faz de toda la tierra. Las naciones son divididas y dispersadas. Y este es precisamente el mundo en el cual, en el mismísimo capítulo siguiente, Dios entrará y llamará a un hombre, Abraham — y prometerá que por medio de él y de su simiente, la bendición un día vendrá a todas las naciones dispersas de la tierra. Así que la historia primigenia termina con el hombre dividido y esparcido por su propio pecado, y al hacerlo prepara perfectamente el escenario para el gran plan que Dios está a punto de comenzar: reunir para sí un pueblo, y por medio de ellos bendecir al mundo entero.</p>
+<h2><span class="dg-n">6.</span>El fundamento puesto</h2>
+<p>Génesis 1 al 11 pone el fundamento para todo lo que seguirá en la Biblia. De él aprendemos que Dios es el Creador, y que el mundo a nuestro alrededor es su obra buena y con propósito. Aprendemos que el hombre, hecho a su propia imagen, ha caído en pecado, y ha traído sobre sí mismo la muerte y la división. Y aprendemos que Dios, aun en medio de sus juicios, es un Dios de gracia — que promete un Redentor en el mismísimo momento de la caída, que preserva a su pueblo sano y salvo a través del diluvio, y que aun ahora está preparando bendecir a las naciones. Estos capítulos explican el mundo exactamente como lo hallamos: su terca belleza, que es la marca de la buena creación de Dios; su honda quebrantadura, que es el fruto de la caída; y su esperanza, que es esa primera reluciente promesa de gracia. Y nos señalan hacia adelante. La simiente de la mujer que un día herirá la cabeza de la serpiente es Cristo; Él es la verdadera y mejor arca, en quien Dios lleva a su pueblo sano y salvo a través del juicio; y es en Él que las naciones dispersas de Babel serán al fin reunidas y bendecidas. Así que lea estos capítulos fundamentales, y vea en ellos tanto la grandeza de Dios el Creador como la verdadera hondura de nuestra necesidad — y, brillando a través de todo ello, la primera luz de la gracia que llenará toda la historia. Porque el Dios que le creó, y cuya imagen usted lleva, no ha abandonado su mundo caído; desde el mismísimo comienzo puso en marcha su gran plan para redimirlo en Cristo.</p>
+<h2><span class="dg-n">7.</span>Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<b>Para reflexionar.</b> ¿Vive usted como quien lleva la imagen de Dios — y ve esa misma dignidad en cada persona a su alrededor? ¿Le ayuda el relato de la caída a entender la quebrantadura que ve en el mundo y en sí mismo? Y ¿puede captar, aun en Génesis 3, el primer destello del evangelio — la simiente prometida que un día heriría a la serpiente, y que es Cristo?
+    </div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Un estudio del Seminario Teológico de Chapala sobre Génesis 1–11, anclado en las exposiciones clásicas de dominio público del Pentateuco (<em>Biblical Commentary on the Old Testament</em> de Keil y Delitzsch, <em>Gleanings in Genesis</em> de A. W. Pink, y otros), y en la Escritura. Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Este estudio del libro se apoya en una rica compañía de expositores de dominio público del Pentateuco — entre ellos Keil y Delitzsch sobre el Antiguo Testamento, <em>Gleanings in Genesis</em> de A. W. Pink, y <em>The Typology of Scripture</em> de Patrick Fairbairn — todos en el dominio público.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="1" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- 2 -->
+<article class="entry" data-id="2" data-title-en="The God of the Fathers: Abraham to Joseph &mdash; CTS digest" data-title-es="El Dios de los Padres: De Abraham a José &mdash; resumen STC">
+<div class="locus"><span class="lang-en">Genesis 12&ndash;50 &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">Génesis 12&ndash;50 &middot; un resumen biling&uuml;e del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">2.</span><span class="lang-en">The God of the Fathers: Abraham to Joseph</span><span class="lang-es">El Dios de los Padres: De Abraham a José</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">God’s call and covenant with Abraham (“in you all the families of the earth shall be blessed”), with “Abram believed the LORD, and He accounted it to him for righteousness” — justification by faith; Isaac and the test where God provides the substitute; grace to Jacob the struggler, made Israel; and Joseph — “you meant it for evil, but God meant it for good.” The covenant of grace carried through weakness, God’s providence over suffering.</p>
+<p class="caption lang-es block">El llamado y el pacto de Dios con Abraham (“serán benditas en ti todas las familias de la tierra”), con “creyó a Jehová, y le fue contado por justicia” — la justificación por la fe; Isaac y la prueba donde Dios provee el sustituto; gracia a Jacob el luchador, hecho Israel; y José — “vosotros pensasteis mal, mas Dios lo encaminó a bien.” El pacto de gracia llevado a través de la debilidad, la providencia de Dios sobre el sufrimiento.</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>The God of the Fathers: Abraham to Joseph</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — Genesis 12–50: the covenant with Abraham, and the promise carried by grace through the generations</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain expositions of the Pentateuch (Pink, Keil &amp; Delitzsch, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Book Study: Pentateuch</li>
+<li>The Covenant of Grace</li>
+<li>Justified by Faith</li>
+<li>Anchored in classics</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> After Babel, Genesis narrows from the whole human race to one man, one family, through whom God will bless the world. This reading walks through Genesis 12–50, the patriarchal history — Abraham, Isaac, Jacob, and Joseph — and the covenant of grace that God keeps across the generations.
+    </div>
+<h2><span class="dg-n">1.</span>From the Nations to One Family</h2>
+<p>After the scattering of the nations at Babel, the book of Genesis suddenly narrows its focus in a dramatic way — from the whole sweep of the human race down to a single man, and a single family, through whom God has determined to bless the entire world. Genesis 12 through 50, the patriarchal history, tells the story of the fathers of the faith: Abraham, then his son Isaac, then Isaac's son Jacob, and finally Jacob's son Joseph. Here God makes His great covenant, plants the promise of redemption deep in a chosen family, and then carries that promise forward — through famine and exile, through betrayal and long delay, and through no end of human weakness and failure — by nothing but His own faithful providence. This is the second great movement of the Pentateuch: the God of the fathers, faithfully keeping His covenant of grace.</p>
+<h2><span class="dg-n">2.</span>The Call and Covenant of Abraham</h2>
+<p>It all begins when God calls Abram out of the city of Ur, and lays upon him a staggering promise: "Get out of your country... to a land that I will show you. I will make you a great nation; I will bless you and make your name great... and in you all the families of the earth shall be blessed." Wrapped up in that call are three enormous promises: a people (a great nation), a land, and, widest of all, blessing that will overflow to every family on earth. And Abram simply believes God, and goes. Later God formally cuts a covenant with him, and there we read one of the most important sentences in the whole Bible: "And he believed in the LORD, and He accounted it to him for righteousness." This is the very verse the apostle Paul would one day build upon to show that Abraham was justified — reckoned righteous before God — not by his works, but by his faith. God confirms the covenant again, changes his name to Abraham, "father of many nations," and promises him a son through his wife Sarah. This covenant with Abraham is the foundation stone of God's entire plan of redemption: grace received simply by faith, and blessing destined to flow out to all the nations.</p>
+<h2><span class="dg-n">3.</span>Isaac, and the Test of Faith</h2>
+<p>In time the promised son, Isaac, is born to Abraham and Sarah in their old age — a true child of promise, brought into the world by the power of God at a point when it had seemed utterly impossible. And then comes the great test. God commands Abraham to take this beloved son, the son of the promise, and to offer him up. Abraham obeys, trusting that the God who gave Isaac could be trusted still; and at the very last moment, God stops his hand and provides a ram, caught in a thicket, to be offered in Isaac's place. Abraham names that place "The LORD Will Provide." It is a profound and moving picture: a father and his only beloved son, a mountain of sacrifice, and a substitute provided by God at the last — all of it pointing forward, across the centuries, to the day when God would provide His own beloved Son as the true sacrifice. God renews to Isaac all the covenant promises He had made to his father. Here faith is tested to the very limit, and proved genuine — and God provides.</p>
+<h2><span class="dg-n">4.</span>Jacob: Grace to a Struggler</h2>
+<p>Isaac's son Jacob is a far more tangled figure. He is a schemer and a grasper, who reaches for the birthright and the blessing by cunning and outright deceit. And yet — and this is the wonder of it — God chooses him, and sets Himself to pursue him by grace. God meets the fleeing Jacob at Bethel, giving him the vision of the ladder set up between heaven and earth, and there renews to him the covenant made with Abraham and Isaac. And years later, in a strange and unforgettable night, Jacob wrestles with God until the breaking of day, and is changed by the encounter — given a new name, Israel, and left with a limp on his hip to remember it by ever after. From Jacob's twelve sons will come the twelve tribes of the nation of Israel. Jacob's whole story is a portrait of the grace of God poured out on an undeserving struggler — choosing him, pursuing him, wrestling with him, and at last transforming him.</p>
+<h2><span class="dg-n">5.</span>Joseph: God Meant It for Good</h2>
+<p>The book of Genesis closes with the long and beautiful account of Joseph, one of the richest stories in all of Scripture. Joseph, the favored son of Jacob, is hated by his jealous brothers and sold by them into slavery down in Egypt. And yet, the narrative keeps quietly insisting, "the LORD was with Joseph." Through betrayal by his own family, through false accusation, and through long years in an Egyptian prison, God is at work; and in the end He lifts Joseph up to become the ruler of all Egypt, second in power only to Pharaoh himself, so that through Joseph's wisdom many nations — and, in time, his own guilty family — are saved alive through a devastating famine. And when at last his brothers stand trembling before him, fearing his revenge, Joseph speaks one of the greatest statements of the providence of God in the entire Bible: "You meant evil against me; but God meant it for good, in order to bring it about as it is this day, to save many people alive." Joseph's story teaches us, with unforgettable force, that God is able to work even through human evil and human suffering to accomplish His own good purposes of salvation. And it draws the whole family of Israel down into Egypt — setting the stage for the great drama of the Exodus that is to come.</p>
+<h2><span class="dg-n">6.</span>The God Who Keeps His Promise</h2>
+<p>The patriarchal history sets before us the God of the fathers, faithfully keeping His covenant of grace across four generations. He called Abraham and made him the great promise — a promise received by faith and never earned by works. He gave the promised son Isaac, tested and proved a father's faith, and provided a substitute in the son's place. He pursued and wrestled with and transformed the struggler Jacob by sheer, undeserved grace. And through Joseph He worked, even by way of betrayal and slavery and prison, to save many alive and to preserve His covenant people. Through the whole of it, God carried His one great promise of redemption steadily forward — never failing it, never abandoning it, working it out through weak and sinful people by the power of His faithful providence. So take heart from the God of the fathers, for He has not changed. He still justifies not by our works but by our faith, exactly as He justified Abraham. He still provides the substitute, as He provided for Isaac — and He has now provided His own beloved Son in our place. He still shows grace to strugglers and schemers, as He showed it to Jacob — and shows it to us. And He still works even through evil and suffering for good, as He did through Joseph — so that whatever may be meant against you, God is able to mean it for good. The God who kept His covenant faithfully through all these generations is the very same God who keeps you today; and it was through this very family that He brought, at long last, the promised Seed, Jesus Christ, to bless all the nations of the earth.</p>
+<h2><span class="dg-n">7.</span>Taking It to Heart</h2>
+<div class="dg-reflect">
+<b>For reflection.</b> Do you rest, like Abraham, on being accounted righteous by faith — not by your own works? Can you trust the God who "will provide," even when He asks something hard of you? And when others mean evil against you, can you believe, with Joseph, that God is able to mean it for good?
+    </div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary survey of Genesis 12–50, anchored in the classic public-domain expositions of the Pentateuch (A. W. Pink's <em>Gleanings in Genesis</em>, Keil &amp; Delitzsch on the Pentateuch, and others), and in Scripture. This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This reading draws especially on A. W. Pink's <em>Gleanings in Genesis</em> (including his study of the call of Abraham) and Keil &amp; Delitzsch on the Pentateuch, all in the public domain.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>El Dios de los Padres: De Abraham a José</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — Génesis 12–50: el pacto con Abraham, y la promesa llevada por gracia a través de las generaciones</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en las exposiciones clásicas de dominio público del Pentateuco (Pink, Keil y Delitzsch, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Estudio del Libro: Pentateuco</li>
+<li>El pacto de gracia</li>
+<li>Justificado por la fe</li>
+<li>Anclado en clásicos</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> Después de Babel, Génesis se estrecha de toda la raza humana a un hombre, una familia, por medio de quien Dios bendecirá al mundo. Esta lectura recorre Génesis 12–50, la historia patriarcal — Abraham, Isaac, Jacob, y José — y el pacto de gracia que Dios guarda a través de las generaciones.
+    </div>
+<h2><span class="dg-n">1.</span>De las naciones a una familia</h2>
+<p>Después de la dispersión de las naciones en Babel, el libro de Génesis de repente estrecha su enfoque de manera dramática — de todo el barrido de la raza humana a un solo hombre, y una sola familia, por medio de quien Dios ha determinado bendecir al mundo entero. Génesis 12 al 50, la historia patriarcal, cuenta la historia de los padres de la fe: Abraham, luego su hijo Isaac, luego el hijo de Isaac, Jacob, y finalmente el hijo de Jacob, José. Aquí Dios hace su gran pacto, planta la promesa de redención en lo hondo de una familia escogida, y luego lleva esa promesa hacia adelante — a través del hambre y el exilio, a través de la traición y la larga demora, y a través de un sinfín de debilidad y fracaso humanos — por nada sino su propia fiel providencia. Este es el segundo gran movimiento del Pentateuco: el Dios de los padres, guardando fielmente su pacto de gracia.</p>
+<h2><span class="dg-n">2.</span>El llamado y el pacto de Abraham</h2>
+<p>Todo comienza cuando Dios llama a Abram fuera de la ciudad de Ur, y pone sobre él una asombrosa promesa: "Vete de tu tierra... a la tierra que te mostraré. Y haré de ti una nación grande, y te bendeciré, y engrandeceré tu nombre... y serán benditas en ti todas las familias de la tierra." Envueltas en ese llamado hay tres enormes promesas: un pueblo (una nación grande), una tierra, y, la más amplia de todas, bendición que se desbordará a cada familia de la tierra. Y Abram sencillamente cree a Dios, y va. Más tarde Dios formalmente corta un pacto con él, y allí leemos una de las oraciones más importantes de toda la Biblia: "Y creyó a Jehová, y le fue contado por justicia." Este es el mismísimo versículo sobre el cual el apóstol Pablo un día edificaría para mostrar que Abraham fue justificado — contado justo delante de Dios — no por sus obras, sino por su fe. Dios confirma el pacto de nuevo, cambia su nombre a Abraham, "padre de muchedumbre de gentes," y le promete un hijo por medio de su esposa Sara. Este pacto con Abraham es la piedra fundamental de todo el plan de redención de Dios: gracia recibida sencillamente por la fe, y bendición destinada a fluir a todas las naciones.</p>
+<h2><span class="dg-n">3.</span>Isaac, y la prueba de la fe</h2>
+<p>A su tiempo el hijo prometido, Isaac, nace a Abraham y Sara en su vejez — un verdadero hijo de promesa, traído al mundo por el poder de Dios en un punto en que había parecido totalmente imposible. Y luego viene la gran prueba. Dios ordena a Abraham tomar a este amado hijo, el hijo de la promesa, y ofrecerlo. Abraham obedece, confiando en que el Dios que dio a Isaac podía seguir siendo confiado; y en el mismísimo último momento, Dios detiene su mano y provee un carnero, trabado en un zarzal, para ser ofrecido en lugar de Isaac. Abraham nombra ese lugar "Jehová proveerá." Es un cuadro profundo y conmovedor: un padre y su único amado hijo, un monte de sacrificio, y un sustituto provisto por Dios al fin — todo ello señalando hacia adelante, a través de los siglos, al día en que Dios proveería a su propio amado Hijo como el verdadero sacrificio. Dios renueva a Isaac todas las promesas del pacto que había hecho a su padre. Aquí la fe es probada hasta el mismísimo límite, y probada genuina — y Dios provee.</p>
+<h2><span class="dg-n">4.</span>Jacob: gracia a un luchador</h2>
+<p>El hijo de Isaac, Jacob, es una figura mucho más enredada. Es un maquinador y un aferrador, que alcanza la primogenitura y la bendición por astucia y franco engaño. Y sin embargo — y esta es la maravilla de ello — Dios lo escoge, y se dispone a perseguirlo por gracia. Dios sale al encuentro del Jacob que huye en Betel, dándole la visión de la escalera puesta entre el cielo y la tierra, y allí le renueva el pacto hecho con Abraham e Isaac. Y años después, en una extraña e inolvidable noche, Jacob lucha con Dios hasta el rayar del alba, y es cambiado por el encuentro — recibiendo un nuevo nombre, Israel, y quedando con una cojera en su cadera para recordarlo desde entonces. De los doce hijos de Jacob vendrán las doce tribus de la nación de Israel. Toda la historia de Jacob es un retrato de la gracia de Dios derramada sobre un luchador indigno — escogiéndolo, persiguiéndolo, luchando con él, y al fin transformándolo.</p>
+<h2><span class="dg-n">5.</span>José: Dios lo encaminó a bien</h2>
+<p>El libro de Génesis cierra con el largo y hermoso relato de José, una de las historias más ricas de toda la Escritura. José, el hijo favorito de Jacob, es aborrecido por sus celosos hermanos y vendido por ellos como esclavo a Egipto. Y sin embargo, el relato sigue insistiendo calladamente, "Jehová estaba con José." A través de la traición de su propia familia, a través de la falsa acusación, y a través de largos años en una prisión egipcia, Dios está obrando; y al final lo levanta para llegar a ser el gobernador de todo Egipto, segundo en poder solo a Faraón mismo, de modo que por la sabiduría de José muchas naciones — y, a su tiempo, su propia culpable familia — son salvadas con vida a través de un devastador hambre. Y cuando al fin sus hermanos están temblando delante de él, temiendo su venganza, José habla una de las más grandes declaraciones de la providencia de Dios de toda la Biblia: "Vosotros pensasteis mal contra mí, mas Dios lo encaminó a bien, para hacer lo que vemos hoy, para mantener en vida a mucho pueblo." La historia de José nos enseña, con fuerza inolvidable, que Dios es capaz de obrar aun a través del mal humano y el sufrimiento humano para cumplir sus propios buenos propósitos de salvación. Y lleva a toda la familia de Israel a Egipto — preparando el escenario para el gran drama del Éxodo que ha de venir.</p>
+<h2><span class="dg-n">6.</span>El Dios que guarda su promesa</h2>
+<p>La historia patriarcal pone delante de nosotros al Dios de los padres, guardando fielmente su pacto de gracia a través de cuatro generaciones. Llamó a Abraham y le hizo la gran promesa — una promesa recibida por la fe y nunca ganada por obras. Dio al hijo prometido Isaac, probó y demostró la fe de un padre, y proveyó un sustituto en lugar del hijo. Persiguió y luchó con y transformó al luchador Jacob por pura gracia inmerecida. Y a través de José obró, aun por medio de la traición y la esclavitud y la prisión, para salvar a muchos con vida y para preservar a su pueblo del pacto. A través de todo ello, Dios llevó su única gran promesa de redención firmemente hacia adelante — sin fallarle nunca, sin abandonarla nunca, obrándola a través de gente débil y pecaminosa por el poder de su fiel providencia. Así que cobre ánimo del Dios de los padres, porque no ha cambiado. Todavía justifica no por nuestras obras sino por nuestra fe, exactamente como justificó a Abraham. Todavía provee el sustituto, como proveyó para Isaac — y ahora ha provisto a su propio amado Hijo en nuestro lugar. Todavía muestra gracia a luchadores y maquinadores, como se la mostró a Jacob — y nos la muestra a nosotros. Y todavía obra aun a través del mal y el sufrimiento para bien, como lo hizo a través de José — de modo que sea lo que sea que se pretenda contra usted, Dios es capaz de encaminarlo a bien. El Dios que guardó fielmente su pacto a través de todas estas generaciones es el mismísimo Dios que le guarda a usted hoy; y fue por medio de esta mismísima familia que Él trajo, al fin, la Simiente prometida, Jesucristo, para bendecir a todas las naciones de la tierra.</p>
+<h2><span class="dg-n">7.</span>Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<b>Para reflexionar.</b> ¿Descansa usted, como Abraham, en ser contado justo por la fe — no por sus propias obras? ¿Puede confiar en el Dios que "proveerá," aun cuando le pide algo difícil? Y cuando otros piensan mal contra usted, ¿puede creer, con José, que Dios es capaz de encaminarlo a bien?
+    </div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Un estudio del Seminario Teológico de Chapala sobre Génesis 12–50, anclado en las exposiciones clásicas de dominio público del Pentateuco (<em>Gleanings in Genesis</em> de A. W. Pink, Keil y Delitzsch sobre el Pentateuco, y otros), y en la Escritura. Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Esta lectura se apoya especialmente en <em>Gleanings in Genesis</em> de A. W. Pink (incluyendo su estudio del llamado de Abraham) y Keil y Delitzsch sobre el Pentateuco, todos en el dominio público.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="2" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- 3 -->
+<article class="entry" data-id="3" data-title-en="Redemption and the Exodus &mdash; CTS digest" data-title-es="Redención y el Éxodo &mdash; resumen STC">
+<div class="locus"><span class="lang-en">The book of Exodus &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">El libro de Éxodo &middot; un resumen biling&uuml;e del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">3.</span><span class="lang-en">Redemption and the Exodus</span><span class="lang-es">Redención y el Éxodo</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">God hearing His people’s groaning; Moses and the “I AM” at the burning bush; the plagues and God’s triumph over Egypt’s gods; the Passover lamb whose blood shelters from death (Christ “our Passover”); the Red Sea deliverance; the Law given to a people already redeemed — grace first, then law; and the tabernacle, God’s glory come to dwell among His people (Immanuel).</p>
+<p class="caption lang-es block">Dios oyendo el gemido de su pueblo; Moisés y el “YO SOY” en la zarza ardiente; las plagas y el triunfo de Dios sobre los dioses de Egipto; el cordero pascual cuya sangre abriga de la muerte (Cristo “nuestra pascua”); la liberación del Mar Rojo; la Ley dada a un pueblo ya redimido — la gracia primero, luego la ley; y el tabernáculo, la gloria de Dios venida a morar entre su pueblo (Emanuel).</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>Redemption and the Exodus</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — Exodus: God rescues His people by blood and power, gives His law, and comes to dwell among them</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain expositions of the Pentateuch (the Exodus and Tabernacle expositors, Keil &amp; Delitzsch, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Book Study: Pentateuch</li>
+<li>Redemption by Blood</li>
+<li>Christ Our Passover</li>
+<li>Anchored in classics</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> If Genesis is the book of beginnings, Exodus is the book of redemption. This reading walks through Exodus — the bondage and the call of Moses, the plagues, the Passover, the Red Sea, Sinai and the law, and the tabernacle — the great Old Testament picture of salvation, echoing forward to Christ.
+    </div>
+<h2><span class="dg-n">1.</span>The Great Act of Redemption</h2>
+<p>If the book of Genesis is the book of beginnings, then the book of Exodus is, above all, the book of redemption. It tells the story of how God rescued His covenant people out of their slavery in Egypt — and He did it both by blood and by mighty power — how He then brought them to Himself at the mountain of Sinai, gave them His law, and finally came down to dwell in the very midst of them. The Exodus is the single greatest picture of salvation in all of the Old Testament, and, as we shall see, nearly every part of it echoes forward and finds its true fulfillment in the redemption that Christ would one day accomplish. This is the third great movement of the Pentateuch: God revealed as the Redeemer of His people.</p>
+<h2><span class="dg-n">2.</span>The Bondage and the Call of Moses</h2>
+<p>By the opening of Exodus, the family of Israel has grown, just as God promised, into a great multitude within Egypt. But a new Pharaoh arises who does not remember Joseph, and he enslaves and cruelly oppresses them, and at last even orders their baby sons to be killed. And in the depths of their misery, they cry out. And here the narrative tells us something wonderful about God: "God heard their groaning, and God remembered His covenant with Abraham, with Isaac, and with Jacob." He raises up a deliverer — Moses, rescued as an infant from the river, raised strangely in Pharaoh's own household, and then exiled for long years into the wilderness. There, at a bush that burns without being consumed, God reveals to Moses His holy name: "I AM WHO I AM" — the eternal, self-existent God who simply <em>is</em>, dependent on nothing and no one — and He commissions Moses to go and bring His people out. Moses is full of reluctance and excuses, but to every one of them God gives the same great answer: "I will certainly be with you." Here is the God who hears the cry of the afflicted, who remembers His covenant, and who moves to save.</p>
+<h2><span class="dg-n">3.</span>The Plagues and Pharaoh's Hard Heart</h2>
+<p>Moses goes to Pharaoh with God's demand: "Let My people go." But Pharaoh refuses, and hardens his heart against God. And so God sends the plagues, one after another, falling upon Egypt — the Nile turned to blood, the frogs, the flies, the boils, the hail, the locusts, the darkness. Each plague is at once a judgment upon Egypt and a blow struck against the false gods of Egypt, demonstrating that the LORD, and He alone, is the true and living God. Again and again Pharaoh promises under pressure to let the people go, and then, when the pressure lifts, hardens his heart once more and breaks his word. And so the plagues build, with a terrible momentum, toward the final and most dreadful of them all: the death of the firstborn throughout the land. For the real contest here is not simply between Moses and Pharaoh, or between Israel and Egypt; it is between the living God and all the pride and idolatry of the mightiest empire on earth — and God will be shown, in the end, to be Lord over all.</p>
+<h2><span class="dg-n">4.</span>The Passover: Redemption by Blood</h2>
+<p>Before that final and most terrible plague falls, God graciously gives to Israel the Passover. Every household is to take a lamb without blemish, to kill it, and to smear its blood upon the two doorposts and the lintel of the house. And God gives the promise that hangs on that blood: when the LORD passes through the land that night to strike down the firstborn, "when I see the blood, I will pass over you, and the plague shall not be on you to destroy you." The blood of the lamb, and nothing else, shelters them from the coming death. That night Israel eats the Passover meal, ready to travel, and God brings them out; and Pharaoh, his own firstborn dead, at last lets them go. The Passover is one of the most important and far-reaching pictures in the whole of Scripture: rescue from death by means of the shed blood of a spotless lamb, applied to the door. And the New Testament takes it up and names its fulfillment without hesitation: "Christ, our Passover, was sacrificed for us." He is the true Lamb of God, and it is His blood that shelters us from the judgment we deserve.</p>
+<h2><span class="dg-n">5.</span>The Red Sea, Sinai, and the Tabernacle</h2>
+<p>God leads His people out of Egypt, but Pharaoh has a change of heart and pursues them with his army, until Israel is trapped with their backs to the Red Sea. And there God works one of the mightiest deliverances in all of Scripture: He divides the waters, and His people pass through the sea on dry ground, while the pursuing army is drowned behind them. On the far shore, Israel bursts into the great song of redemption. Then God leads them on to Mount Sinai, and there He enters into covenant with the newly redeemed nation and gives them His law — the Ten Commandments and much besides. And here we must notice something of the greatest importance: the law is given to a people whom God has <em>already redeemed</em>. He did not give them His commandments in Egypt, as a set of conditions they had to meet in order to earn their rescue. He first rescued them by grace, entirely; and only then did He give them His law — not as a ladder to climb up to salvation, but as the grateful shape and pattern of the life they were now to live with the God who had already saved them. Grace comes first; the law follows. Finally, God gives Moses the detailed pattern for the tabernacle, a tent where He will dwell among them; and when it is built, the glory of the LORD comes down and fills it. For this, in the end, is the true goal of the whole redemption: not merely to bring Israel out of Egypt, but to bring God Himself down to dwell in the very midst of His people.</p>
+<h2><span class="dg-n">6.</span>God With Us</h2>
+<p>Exodus is the book of redemption, and in telling its story it shows us exactly who our God is. He is the God who hears the cry of the oppressed and remembers His covenant. He is the God who saves — by the blood of the lamb, and by His mighty outstretched arm at the sea. He is the God who binds His redeemed people to Himself in covenant and gives them His law as their way of life — but always, always, grace first and then the law. And He is the God who comes down to dwell in the very midst of His people. And every single part of it points us onward to Christ. He is our Passover Lamb, whose blood shelters us from the judgment of God. He is our great Deliverer, who leads us out of our bondage to sin and into freedom. He is the one who now writes God's law not on tablets of stone but on the hearts of His people. And He is Immanuel — God with us, God come down to dwell among us and, at the last, within us. So if you find yourself in any kind of bondage or oppression, know this: the God of the Exodus hears you, and He is mighty to save. Take shelter under the blood of the Lamb, Christ our Passover, and you are safe forever from the judgment. Follow your Deliverer out of slavery and into freedom. And remember always that the goal of your redemption is not merely to be rescued <em>from</em> something, but to be brought home <em>to</em> God, that He might dwell with you forever. The God who redeemed Israel out of Egypt has redeemed you, at a far greater cost, in Christ.</p>
+<h2><span class="dg-n">7.</span>Taking It to Heart</h2>
+<div class="dg-reflect">
+<b>For reflection.</b> Have you taken shelter under the blood of the true Passover Lamb, Christ — the only thing that shelters us from judgment? Do you see that God rescued Israel <em>first</em>, by grace, and only then gave His law — and does that reshape how you understand obedience? And do you know that redemption's goal is God Himself, come to dwell with you?
+    </div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary survey of the book of Exodus, anchored in the classic public-domain expositions of the Pentateuch (the classic commentaries on Exodus and on the Tabernacle, Keil &amp; Delitzsch, and others), and in Scripture. This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This reading draws especially on the classic public-domain expositions of the book of Exodus and of the Tabernacle, the priesthood, and the offerings, together with Keil &amp; Delitzsch on the Pentateuch, all in the public domain.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>Redención y el Éxodo</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — Éxodo: Dios rescata a su pueblo por sangre y poder, da su ley, y viene a morar entre ellos</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en las exposiciones clásicas de dominio público del Pentateuco (los expositores del Éxodo y del Tabernáculo, Keil y Delitzsch, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Estudio del Libro: Pentateuco</li>
+<li>Redención por sangre</li>
+<li>Cristo nuestra pascua</li>
+<li>Anclado en clásicos</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> Si Génesis es el libro de los comienzos, Éxodo es el libro de la redención. Esta lectura recorre Éxodo — la esclavitud y el llamado de Moisés, las plagas, la Pascua, el Mar Rojo, Sinaí y la ley, y el tabernáculo — el gran cuadro del Antiguo Testamento de la salvación, que resuena hacia adelante a Cristo.
+    </div>
+<h2><span class="dg-n">1.</span>El gran acto de redención</h2>
+<p>Si el libro de Génesis es el libro de los comienzos, entonces el libro de Éxodo es, sobre todo, el libro de la redención. Cuenta la historia de cómo Dios rescató a su pueblo del pacto de su esclavitud en Egipto — y lo hizo tanto por sangre como por poderosa fuerza — cómo luego los trajo a sí mismo en el monte de Sinaí, les dio su ley, y finalmente descendió a morar en el mismísimo medio de ellos. El Éxodo es el más grande cuadro de la salvación de todo el Antiguo Testamento, y, como veremos, casi cada parte de él resuena hacia adelante y halla su verdadero cumplimiento en la redención que Cristo un día cumpliría. Este es el tercer gran movimiento del Pentateuco: Dios revelado como el Redentor de su pueblo.</p>
+<h2><span class="dg-n">2.</span>La esclavitud y el llamado de Moisés</h2>
+<p>Para la apertura de Éxodo, la familia de Israel ha crecido, tal como Dios prometió, hasta ser una gran multitud dentro de Egipto. Pero se levanta un nuevo Faraón que no se acuerda de José, y los esclaviza y oprime cruelmente, y al fin aun ordena que sus hijos varones sean matados. Y en las profundidades de su miseria, claman. Y aquí el relato nos dice algo maravilloso acerca de Dios: "Y oyó Dios el gemido de ellos, y se acordó de su pacto con Abraham, Isaac y Jacob." Levanta un libertador — Moisés, rescatado de infante del río, criado extrañamente en la propia casa de Faraón, y luego desterrado por largos años al desierto. Allí, en una zarza que arde sin consumirse, Dios revela a Moisés su santo nombre: "YO SOY EL QUE SOY" — el eterno Dios existente por sí mismo que sencillamente <em>es</em>, dependiente de nada ni de nadie — y le comisiona a ir y sacar a su pueblo. Moisés está lleno de renuencia y excusas, pero a cada una de ellas Dios da la misma gran respuesta: "Ve, porque yo estaré contigo." He aquí el Dios que oye el clamor del afligido, que se acuerda de su pacto, y que se mueve a salvar.</p>
+<h2><span class="dg-n">3.</span>Las plagas y el corazón endurecido de Faraón</h2>
+<p>Moisés va a Faraón con la demanda de Dios: "Deja ir a mi pueblo." Pero Faraón rehúsa, y endurece su corazón contra Dios. Y así Dios envía las plagas, una tras otra, cayendo sobre Egipto — el Nilo vuelto sangre, las ranas, las moscas, las llagas, el granizo, la langosta, las tinieblas. Cada plaga es a la vez un juicio sobre Egipto y un golpe asestado contra los falsos dioses de Egipto, demostrando que Jehová, y solo Él, es el Dios verdadero y viviente. Una y otra vez Faraón promete bajo presión dejar ir al pueblo, y luego, cuando la presión se levanta, endurece su corazón una vez más y quebranta su palabra. Y así las plagas se acumulan, con un terrible impulso, hacia la final y más espantosa de todas: la muerte de los primogénitos por toda la tierra. Porque la verdadera contienda aquí no es sencillamente entre Moisés y Faraón, ni entre Israel y Egipto; es entre el Dios viviente y toda la soberbia y la idolatría del imperio más poderoso de la tierra — y Dios será mostrado, al final, ser Señor sobre todo.</p>
+<h2><span class="dg-n">4.</span>La Pascua: redención por sangre</h2>
+<p>Antes de que caiga esa final y más terrible plaga, Dios graciosamente da a Israel la Pascua. Cada casa ha de tomar un cordero sin defecto, matarlo, y untar su sangre sobre los dos postes y el dintel de la casa. Y Dios da la promesa que pende de esa sangre: cuando el SEÑOR pase por la tierra esa noche para herir a los primogénitos, "y veré la sangre y pasaré de vosotros, y no habrá en vosotros plaga de mortandad." La sangre del cordero, y nada más, los abriga de la muerte venidera. Esa noche Israel come la comida de la Pascua, listo para viajar, y Dios los saca; y Faraón, muerto su propio primogénito, al fin los deja ir. La Pascua es uno de los cuadros más importantes y de mayor alcance de toda la Escritura: rescate de la muerte por medio de la sangre derramada de un cordero sin mancha, aplicada a la puerta. Y el Nuevo Testamento lo toma y nombra su cumplimiento sin vacilar: "Cristo, nuestra pascua, ya fue sacrificado por nosotros." Él es el verdadero Cordero de Dios, y es su sangre la que nos abriga del juicio que merecemos.</p>
+<h2><span class="dg-n">5.</span>El Mar Rojo, Sinaí, y el tabernáculo</h2>
+<p>Dios saca a su pueblo de Egipto, pero Faraón cambia de parecer y los persigue con su ejército, hasta que Israel queda atrapado con sus espaldas al Mar Rojo. Y allí Dios obra una de las más poderosas liberaciones de toda la Escritura: divide las aguas, y su pueblo pasa por el mar en seco, mientras el ejército perseguidor se ahoga detrás de ellos. En la orilla lejana, Israel prorrumpe en el gran canto de la redención. Luego Dios los lleva al monte de Sinaí, y allí entra en pacto con la nación recién redimida y les da su ley — los Diez Mandamientos y mucho más. Y aquí debemos notar algo de la mayor importancia: la ley es dada a un pueblo que Dios <em>ya ha redimido</em>. No les dio sus mandamientos en Egipto, como un conjunto de condiciones que tenían que cumplir a fin de ganar su rescate. Primero los rescató por gracia, enteramente; y solo entonces les dio su ley — no como una escalera que subir hacia la salvación, sino como la agradecida forma y patrón de la vida que ahora habían de vivir con el Dios que ya los había salvado. La gracia viene primero; la ley sigue. Finalmente, Dios da a Moisés el detallado patrón para el tabernáculo, una tienda donde morará entre ellos; y cuando es edificado, la gloria de Jehová desciende y lo llena. Porque esta, al final, es la verdadera meta de toda la redención: no meramente sacar a Israel de Egipto, sino traer a Dios mismo abajo a morar en el mismísimo medio de su pueblo.</p>
+<h2><span class="dg-n">6.</span>Dios con nosotros</h2>
+<p>Éxodo es el libro de la redención, y al contar su historia nos muestra exactamente quién es nuestro Dios. Es el Dios que oye el clamor del oprimido y se acuerda de su pacto. Es el Dios que salva — por la sangre del cordero, y por su poderoso brazo extendido en el mar. Es el Dios que ata a su pueblo redimido a sí mismo en pacto y les da su ley como su manera de vivir — pero siempre, siempre, la gracia primero y luego la ley. Y es el Dios que desciende a morar en el mismísimo medio de su pueblo. Y cada sola parte de ello nos señala hacia adelante a Cristo. Él es nuestro Cordero pascual, cuya sangre nos abriga del juicio de Dios. Él es nuestro gran Libertador, que nos saca de nuestra esclavitud al pecado y a la libertad. Él es el que ahora escribe la ley de Dios no en tablas de piedra sino en los corazones de su pueblo. Y Él es Emanuel — Dios con nosotros, Dios descendido a morar entre nosotros y, al fin, dentro de nosotros. Así que si se halla en cualquier clase de esclavitud u opresión, sepa esto: el Dios del Éxodo le oye, y es poderoso para salvar. Tome abrigo bajo la sangre del Cordero, Cristo nuestra pascua, y está seguro para siempre del juicio. Siga a su Libertador fuera de la esclavitud y a la libertad. Y recuerde siempre que la meta de su redención no es meramente ser rescatado <em>de</em> algo, sino ser traído a casa <em>a</em> Dios, para que Él more con usted para siempre. El Dios que redimió a Israel de Egipto le ha redimido a usted, a un costo mucho mayor, en Cristo.</p>
+<h2><span class="dg-n">7.</span>Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<b>Para reflexionar.</b> ¿Ha tomado abrigo bajo la sangre del verdadero Cordero pascual, Cristo — lo único que nos abriga del juicio? ¿Ve que Dios rescató a Israel <em>primero</em>, por gracia, y solo entonces dio su ley — y reforma eso cómo entiende la obediencia? Y ¿sabe que la meta de la redención es Dios mismo, venido a morar con usted?
+    </div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Un estudio del Seminario Teológico de Chapala sobre el libro de Éxodo, anclado en las exposiciones clásicas de dominio público del Pentateuco (los comentarios clásicos sobre Éxodo y sobre el Tabernáculo, Keil y Delitzsch, y otros), y en la Escritura. Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Esta lectura se apoya especialmente en las exposiciones clásicas de dominio público del libro de Éxodo y del Tabernáculo, el sacerdocio, y las ofrendas, junto con Keil y Delitzsch sobre el Pentateuco, todos en el dominio público.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="3" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- 4 -->
+<article class="entry" data-id="4" data-title-en="Holiness and the Way to God &mdash; CTS digest" data-title-es="Santidad y el Camino a Dios &mdash; resumen STC">
+<div class="locus"><span class="lang-en">Leviticus &amp; Numbers &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">Levítico y Números &middot; un resumen biling&uuml;e del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">4.</span><span class="lang-en">Holiness and the Way to God</span><span class="lang-es">Santidad y el Camino a Dios</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">How sinners may draw near a holy God: the offerings and atonement (“it is the blood that makes atonement”); the priesthood and the Day of Atonement, the scapegoat bearing sin away — Christ our great High Priest; “be holy, for I am holy,” grace-framed, with “love your neighbor as yourself”; and Numbers’ wilderness — the danger of unbelief balanced with God’s provision and the bronze serpent Jesus applied to Himself.</p>
+<p class="caption lang-es block">Cómo los pecadores pueden acercarse a un Dios santo: las ofrendas y la expiación (“la sangre hará expiación”); el sacerdocio y el Día de la Expiación, el chivo expiatorio llevando el pecado lejos — Cristo nuestro gran Sumo Sacerdote; “santos seréis, porque santo soy yo,” enmarcado en gracia, con “amarás a tu prójimo como a ti mismo”; y el desierto de Números — el peligro de la incredulidad equilibrado con la provisión de Dios y la serpiente de bronce que Jesús aplicó a sí mismo.</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>Holiness and the Way to God</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — Leviticus &amp; Numbers: how a sinful people may draw near a holy God, and the danger of drawing back</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain expositions of the Pentateuch (the Leviticus and Numbers expositors, Fairbairn, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Book Study: Pentateuch</li>
+<li>Atonement and Priesthood</li>
+<li>The Call to Holiness</li>
+<li>Anchored in classics</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> Now that God has redeemed His people and come to dwell among them, a great question presses: how can a sinful people live near a holy God? This reading walks through Leviticus (sacrifice, priesthood, holiness) and Numbers (the wilderness, unbelief, and God's faithfulness) — and the answer they point to: Christ.
+    </div>
+<h2><span class="dg-n">1.</span>How May Sinners Draw Near a Holy God?</h2>
+<p>Now that God has redeemed His people out of Egypt and has come down to dwell in their very midst in the tabernacle, a great and pressing question rises up: how can a sinful people possibly live in the near presence of a holy God without being consumed? The books of Leviticus and Numbers are given to answer exactly that question. Leviticus sets out the way of approach — how a sinful people may draw near to God, through sacrifice, through priesthood, and in holiness. Numbers then tells the story of the journey itself, the long march through the wilderness toward the Promised Land, with all of its testing, its unbelief, and the patient, unwearied faithfulness of God. Taken together, these two books teach us both how we may truly draw near to God, and how real is the danger of drawing back from Him in unbelief. This is the fourth great movement of the Pentateuch: holiness, and the way to God.</p>
+<h2><span class="dg-n">2.</span>Leviticus: The Offerings and the Altar</h2>
+<p>Leviticus opens, fittingly, with the sacrifices — the burnt offering, the grain offering, the peace offering, the sin offering, and the trespass offering. They differ in their details, but running through them all is one great thread: atonement. As the book itself declares, "it is the blood that makes atonement for the soul." A sinful worshiper simply could not come strolling into the presence of the holy God as he was; a substitute had to be brought, and had to die in his place, and its blood had to be offered upon the altar. Over and over again, week after week and year after year, the sacrifices were teaching Israel two things at once that they must never forget: the deadly seriousness of sin, which costs nothing less than a life, and the astonishing mercy of God, who Himself provides a way for that sin to be atoned. And the whole vast system of them points beyond itself to Christ, "who offered Himself" once for all — the one true and final sacrifice to which every lamb slain on every altar had always been pointing.</p>
+<h2><span class="dg-n">3.</span>The Priesthood and the Day of Atonement</h2>
+<p>God also set apart Aaron and his sons to be priests, to stand as mediators between Himself and the people — to offer the sacrifices on the people's behalf and to represent the people before God. And once every year came the most solemn day of all, the Day of Atonement. On that day the high priest, and he alone, entered the Most Holy Place, into the very presence of God, carrying blood, to make atonement for all the sins of all the people. And there was the striking ritual of the two goats: one was sacrificed, and over the other, the "scapegoat," the high priest confessed all the sins of the people, and it was then led away and released into the wilderness, carrying those sins far away, never to return. This is the deepest and most complete picture of atonement in all of the Old Testament: sin covered by the blood of a substitute, and sin carried right away and gone. And it finds its fulfillment in Christ, who is our great High Priest — who did not enter an earthly tent but heaven itself, and not with the blood of goats but with His own blood — and who is at the same time the Lamb of God that takes away the sin of the world.</p>
+<h2><span class="dg-n">4.</span>The Call to Holiness</h2>
+<p>Woven all through the middle and latter parts of Leviticus is a single, recurring refrain, sounding again and again like a bell: "Be holy, for I the LORD your God am holy." Because God is holy, and because He has graciously come to dwell in the midst of His people, that people must themselves be holy — set apart, clean, and reflecting His own character in every corner of their lives. Leviticus 19 fills this out in wonderfully practical terms: honesty in business, justice in the courts, generous care for the poor and for the foreign stranger in the land, and — right in the heart of the chapter — the command that the Lord Jesus Himself would one day name as the second greatest of all: "You shall love your neighbor as yourself." And it is vital to grasp that this holiness was never meant as a way to <em>earn</em> God's favor. Israel was already God's redeemed and rescued people before a single one of these laws was given. Their holiness was not a ladder up to God; it was the natural and grateful overflow of belonging to a holy God who had already made them His own.</p>
+<h2><span class="dg-n">5.</span>Numbers: The Wilderness and Unbelief</h2>
+<p>The book of Numbers then takes up the story of Israel's journey from Mount Sinai onward toward the land of promise. And all along the way, God provides for them without ceasing — manna every morning, water from the rock, the pillar of cloud and fire to guide them, and good order for the whole camp. Yet the people grumble, and complain, and rebel against Him, again and again. And it comes to a head at the very border of the Promised Land: the twelve spies return, and ten of them bring back a fearful, faithless report about the giants in the land, and the whole people refuse to trust God and go in. And because of that unbelief — that refusal to trust the God who had split the sea for them — that entire generation is sentenced to wander in the wilderness for forty years, until they have all died there. And yet, even so, God does not abandon them. He goes on providing for them year after year; and when in one dark episode they are struck by venomous serpents, God in mercy gives Moses a strange remedy: a bronze serpent, lifted up on a pole, so that "everyone who is bitten, when he looks at it, shall live." And Jesus Himself would later reach back and take hold of this very moment: "As Moses lifted up the serpent in the wilderness, even so must the Son of Man be lifted up, that whoever believes in Him should not perish but have eternal life." Numbers stands, then, as a sober warning about the real danger of unbelief — and, at the very same time, as a moving display of God's faithful provision and His mercy, even out in the barren wilderness.</p>
+<h2><span class="dg-n">6.</span>Draw Near Through Christ</h2>
+<p>Leviticus and Numbers together set before us that great question — how may sinful people draw near to a holy God? — and the full answer to it, when it finally comes, is Christ. Leviticus shows us the way of approach: through sacrifice, through a priest who mediates, and in holiness of life. Numbers shows us the journey home: God's faithful provision at every step, the deadly danger of unbelief, and His mercy toward us even when we fail Him. And every part of it points forward to Christ. He is the true sacrifice, whose blood atones for our sin once and for all. He is our great High Priest, who has already entered the very presence of God on our behalf. He is the one who makes us holy, and in whom we are set apart for God. And He is the bronze serpent lifted up, to whom we have only to look, and live. So draw near to God through Christ — your sacrifice, your priest, your sin-bearer — and draw near with confidence, for the way in has been thrown wide open by His own blood. Pursue holiness, not in order to earn what is already fully yours by grace, but simply because you now belong to a holy God. And do not draw back in unbelief, as that wilderness generation did; trust the God who has proved faithful to you at every single step, and keep your eyes fixed on Christ, lifted up, in whom you have life. The holy God has Himself opened a way for you to come near — and that way is His own Son.</p>
+<h2><span class="dg-n">7.</span>Taking It to Heart</h2>
+<div class="dg-reflect">
+<b>For reflection.</b> Do you see, in all the blood of Leviticus, both the true seriousness of your sin and the depth of God's mercy in providing atonement? Is your pursuit of holiness an attempt to earn God's favor, or the grateful overflow of already belonging to Him? And where are you tempted, like Israel at the border, to draw back in unbelief rather than to trust the God who has never once failed you?
+    </div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary survey of Leviticus and Numbers, anchored in the classic public-domain expositions of the Pentateuch (the classic commentaries on Leviticus and Numbers, Patrick Fairbairn's <em>The Typology of Scripture</em>, and others), and in Scripture. This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This reading draws especially on the classic public-domain commentaries on Leviticus and Numbers and on Patrick Fairbairn's <em>The Typology of Scripture</em>, all in the public domain.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>Santidad y el Camino a Dios</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — Levítico y Números: cómo un pueblo pecaminoso puede acercarse a un Dios santo, y el peligro de retroceder</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en las exposiciones clásicas de dominio público del Pentateuco (los expositores de Levítico y Números, Fairbairn, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Estudio del Libro: Pentateuco</li>
+<li>Expiación y sacerdocio</li>
+<li>El llamado a la santidad</li>
+<li>Anclado en clásicos</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> Ahora que Dios ha redimido a su pueblo y ha venido a morar entre ellos, una gran pregunta apremia: ¿cómo puede un pueblo pecaminoso vivir cerca de un Dios santo? Esta lectura recorre Levítico (sacrificio, sacerdocio, santidad) y Números (el desierto, la incredulidad, y la fidelidad de Dios) — y la respuesta que señalan: Cristo.
+    </div>
+<h2><span class="dg-n">1.</span>¿Cómo pueden los pecadores acercarse a un Dios santo?</h2>
+<p>Ahora que Dios ha redimido a su pueblo de Egipto y ha descendido a morar en el mismísimo medio de ellos en el tabernáculo, se levanta una gran y apremiante pregunta: ¿cómo puede un pueblo pecaminoso posiblemente vivir en la cercana presencia de un Dios santo sin ser consumido? Los libros de Levítico y Números son dados para responder exactamente esa pregunta. Levítico expone el camino de acercamiento — cómo un pueblo pecaminoso puede acercarse a Dios, por sacrificio, por sacerdocio, y en santidad. Números luego cuenta la historia del viaje mismo, la larga marcha por el desierto hacia la Tierra Prometida, con toda su prueba, su incredulidad, y la paciente e incansable fidelidad de Dios. Tomados juntos, estos dos libros nos enseñan tanto cómo podemos de veras acercarnos a Dios, como cuán real es el peligro de retroceder de Él en incredulidad. Este es el cuarto gran movimiento del Pentateuco: la santidad, y el camino a Dios.</p>
+<h2><span class="dg-n">2.</span>Levítico: las ofrendas y el altar</h2>
+<p>Levítico abre, apropiadamente, con los sacrificios — el holocausto, la ofrenda de flor de harina, la ofrenda de paz, la ofrenda por el pecado, y la ofrenda por la culpa. Difieren en sus detalles, pero recorriendo todos ellos hay un gran hilo: la expiación. Como el libro mismo declara, "porque la sangre hará expiación de la persona." Un adorador pecaminoso sencillamente no podía venir paseando a la presencia del Dios santo tal como estaba; un sustituto tenía que ser traído, y tenía que morir en su lugar, y su sangre tenía que ser ofrecida sobre el altar. Una y otra vez, semana tras semana y año tras año, los sacrificios estaban enseñando a Israel dos cosas a la vez que nunca debían olvidar: la mortal seriedad del pecado, que cuesta nada menos que una vida, y la asombrosa misericordia de Dios, que Él mismo provee un camino para que ese pecado sea expiado. Y todo el vasto sistema de ellos señala más allá de sí mismo a Cristo, "quien se ofreció a sí mismo" una vez para siempre — el único y verdadero y final sacrificio al cual cada cordero degollado sobre cada altar siempre había estado señalando.</p>
+<h2><span class="dg-n">3.</span>El sacerdocio y el Día de la Expiación</h2>
+<p>Dios también apartó a Aarón y a sus hijos para ser sacerdotes, para estar como mediadores entre Él mismo y el pueblo — para ofrecer los sacrificios a favor del pueblo y para representar al pueblo delante de Dios. Y una vez cada año venía el día más solemne de todos, el Día de la Expiación. En ese día el sumo sacerdote, y solo él, entraba en el Lugar Santísimo, a la mismísima presencia de Dios, llevando sangre, para hacer expiación por todos los pecados de todo el pueblo. Y estaba el impresionante rito de los dos machos cabríos: uno era sacrificado, y sobre el otro, el "chivo expiatorio," el sumo sacerdote confesaba todos los pecados del pueblo, y luego era llevado y soltado en el desierto, llevando esos pecados lejos, para nunca volver. Este es el más hondo y más completo cuadro de la expiación de todo el Antiguo Testamento: el pecado cubierto por la sangre de un sustituto, y el pecado llevado lejos y desaparecido. Y halla su cumplimiento en Cristo, que es nuestro gran Sumo Sacerdote — que no entró en una tienda terrenal sino en el cielo mismo, y no con sangre de machos cabríos sino con su propia sangre — y que es al mismo tiempo el Cordero de Dios que quita el pecado del mundo.</p>
+<h2><span class="dg-n">4.</span>El llamado a la santidad</h2>
+<p>Entretejido por todas las partes medias y finales de Levítico hay un solo estribillo recurrente, sonando una y otra vez como una campana: "Santos seréis, porque santo soy yo Jehová vuestro Dios." Porque Dios es santo, y porque graciosamente ha venido a morar en medio de su pueblo, ese pueblo debe él mismo ser santo — apartado, limpio, y reflejando su propio carácter en cada rincón de sus vidas. Levítico 19 lo detalla en términos maravillosamente prácticos: honestidad en los negocios, justicia en los tribunales, generoso cuidado por el pobre y por el extranjero forastero en la tierra, y — justo en el corazón del capítulo — el mandamiento que el Señor Jesús mismo un día nombraría como el segundo más grande de todos: "Amarás a tu prójimo como a ti mismo." Y es vital captar que esta santidad nunca fue pensada como una manera de <em>ganar</em> el favor de Dios. Israel ya era el pueblo redimido y rescatado de Dios antes de que una sola de estas leyes fuera dada. Su santidad no era una escalera hacia Dios; era el natural y agradecido desbordamiento de pertenecer a un Dios santo que ya los había hecho suyos.</p>
+<h2><span class="dg-n">5.</span>Números: el desierto y la incredulidad</h2>
+<p>El libro de Números luego toma la historia del viaje de Israel desde el monte de Sinaí en adelante hacia la tierra de promesa. Y por todo el camino, Dios provee para ellos sin cesar — maná cada mañana, agua de la roca, la columna de nube y fuego para guiarlos, y buen orden para todo el campamento. Sin embargo el pueblo murmura, y se queja, y se rebela contra Él, una y otra vez. Y llega a un punto crítico en la mismísima frontera de la Tierra Prometida: los doce espías regresan, y diez de ellos traen un temeroso e incrédulo informe acerca de los gigantes en la tierra, y todo el pueblo rehúsa confiar en Dios y entrar. Y a causa de esa incredulidad — esa negativa a confiar en el Dios que había partido el mar por ellos — toda esa generación es sentenciada a vagar en el desierto por cuarenta años, hasta que todos hayan muerto allí. Y sin embargo, aun así, Dios no los abandona. Sigue proveyendo para ellos año tras año; y cuando en un oscuro episodio son heridos por serpientes venenosas, Dios en misericordia da a Moisés un extraño remedio: una serpiente de bronce, levantada sobre un asta, de modo que "cualquiera que fuere mordido y mirare a ella, vivirá." Y Jesús mismo más tarde se remontaría y tomaría este mismísimo momento: "Y como Moisés levantó la serpiente en el desierto, así es necesario que el Hijo del Hombre sea levantado; para que todo aquel que en él cree, no se pierda, mas tenga vida eterna." Números está, entonces, como una sobria advertencia sobre el peligro real de la incredulidad — y, al mismísimo tiempo, como una conmovedora demostración de la fiel provisión de Dios y su misericordia, aun allá en el árido desierto.</p>
+<h2><span class="dg-n">6.</span>Acérquese por medio de Cristo</h2>
+<p>Levítico y Números juntos ponen delante de nosotros esa gran pregunta — ¿cómo puede la gente pecaminosa acercarse a un Dios santo? — y la plena respuesta a ella, cuando al fin viene, es Cristo. Levítico nos muestra el camino de acercamiento: por sacrificio, por un sacerdote que media, y en santidad de vida. Números nos muestra el viaje a casa: la fiel provisión de Dios en cada paso, el mortal peligro de la incredulidad, y su misericordia hacia nosotros aun cuando le fallamos. Y cada parte de ello señala hacia adelante a Cristo. Él es el verdadero sacrificio, cuya sangre expía nuestro pecado una vez y para siempre. Él es nuestro gran Sumo Sacerdote, que ya ha entrado en la mismísima presencia de Dios a favor nuestro. Él es el que nos hace santos, y en quien somos apartados para Dios. Y Él es la serpiente de bronce levantada, a quien solo tenemos que mirar, y vivir. Así que acérquese a Dios por medio de Cristo — su sacrificio, su sacerdote, su portador del pecado — y acérquese con confianza, porque el camino de entrada ha sido abierto de par en par por su propia sangre. Persiga la santidad, no a fin de ganar lo que ya es plenamente suyo por gracia, sino sencillamente porque ahora pertenece a un Dios santo. Y no retroceda en incredulidad, como lo hizo aquella generación del desierto; confíe en el Dios que le ha probado ser fiel en cada solo paso, y mantenga sus ojos fijos en Cristo, levantado, en quien usted tiene vida. El Dios santo ha abierto Él mismo un camino para que usted se acerque — y ese camino es su propio Hijo.</p>
+<h2><span class="dg-n">7.</span>Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<b>Para reflexionar.</b> ¿Ve, en toda la sangre de Levítico, tanto la verdadera seriedad de su pecado como la hondura de la misericordia de Dios al proveer expiación? ¿Es su búsqueda de santidad un intento de ganar el favor de Dios, o el agradecido desbordamiento de pertenecerle ya? Y ¿dónde es tentado, como Israel en la frontera, a retroceder en incredulidad en lugar de confiar en el Dios que nunca una vez le ha fallado?
+    </div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Un estudio del Seminario Teológico de Chapala sobre Levítico y Números, anclado en las exposiciones clásicas de dominio público del Pentateuco (los comentarios clásicos sobre Levítico y Números, <em>The Typology of Scripture</em> de Patrick Fairbairn, y otros), y en la Escritura. Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Esta lectura se apoya especialmente en los comentarios clásicos de dominio público sobre Levítico y Números y en <em>The Typology of Scripture</em> de Patrick Fairbairn, todos en el dominio público.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="4" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- 5 -->
+<article class="entry" data-id="5" data-title-en="The Word from Moab: Deuteronomy &mdash; CTS digest" data-title-es="La Palabra desde Moab: Deuteronomio &mdash; resumen STC">
+<div class="locus"><span class="lang-en">The book of Deuteronomy &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">El libro de Deuteronomio &middot; un resumen biling&uuml;e del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">5.</span><span class="lang-en">The Word from Moab: Deuteronomy</span><span class="lang-es">La Palabra desde Moab: Deuteronomio</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">The capstone: Moses’ final sermons on the plains of Moab; the call to remember God’s grace; the Shema, “Hear, O Israel… you shall love the LORD your God with all your heart” (the greatest commandment); “choose life,” with the promise of the circumcised heart (the new covenant); the Prophet like Moses who points to Christ; and Moses’ death in sight of the land. The whole Pentateuch — the law through Moses, grace and truth through Christ.</p>
+<p class="caption lang-es block">La culminación: los sermones finales de Moisés en los campos de Moab; el llamado a recordar la gracia de Dios; la Shemá, “Oye, Israel… amarás a Jehová tu Dios de todo tu corazón” (el más grande mandamiento); “escoge la vida,” con la promesa del corazón circuncidado (el nuevo pacto); el Profeta como Moisés que señala a Cristo; y la muerte de Moisés a la vista de la tierra. Todo el Pentateuco — la ley por Moisés, la gracia y la verdad por Cristo.</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>The Word from Moab: Deuteronomy</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — Deuteronomy: Moses' last words, the call to love God, and the Prophet who is to come</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain expositions of the Pentateuch (Fairbairn, Keil &amp; Delitzsch, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Book Study: Pentateuch</li>
+<li>Love the LORD</li>
+<li>Choose Life</li>
+<li>Capstone</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> The Pentateuch closes with Deuteronomy — Moses' last words to Israel on the plains of Moab, before they enter the Promised Land. This closing reading walks through Deuteronomy — remember God's grace, the Shema, choose life, and the Prophet who is to come — and gathers up the whole Pentateuch, which points to Christ.
+    </div>
+<h2><span class="dg-n">1.</span>Moses' Last Words</h2>
+<p>The Pentateuch comes to its end with the book of Deuteronomy — the last words of Moses to the people of Israel, spoken out on the plains of Moab, just across the river Jordan from the Promised Land itself. A whole new generation has now grown up; the long years of wilderness wandering are finally over; and before the people cross over into the land, and before Moses himself must die, he gathers them all together to renew the covenant with them, and to press home upon their hearts the one great lesson of everything they have seen: love and obey the LORD your God with all your heart. Deuteronomy is not so much a book of new laws as it is a series of great sermons — Moses the preacher, at the very end of his life, pleading with a redeemed people to give themselves to wholehearted faithfulness. It gathers up the whole Pentateuch into itself, and it points forward, beyond Moses, to Christ. This is the fifth and final movement: the word from Moab.</p>
+<h2><span class="dg-n">2.</span>Remember, and Do Not Forget</h2>
+<p>Moses begins by retelling the whole story — God's faithfulness to them all the way from Egypt, through the sea, and across the long wilderness — so that this new generation, most of whom had not seen it with their own eyes, will remember it. And over and over again, throughout the book, he presses the same urgent charge upon them: remember what God has done for you, and do not, whatever you do, forget Him once you are safely settled and grown comfortable and prosperous in the good land. He warns them plainly against the two great dangers that lie ahead: the danger of quietly forgetting God in the days of plenty, and the danger of turning aside to worship the idols of the nations around them. "Take heed to yourself," he says, "lest you forget the LORD who brought you out of the land of Egypt, from the house of bondage." For this is the heart of the matter: remembering God's grace is the living root of all faithfulness, and forgetting that grace is the hidden root of every falling away.</p>
+<h2><span class="dg-n">3.</span>The Shema: Love the LORD Your God</h2>
+<p>And right at the very heart of Deuteronomy stands the Shema, the great confession that would become the daily prayer of Israel: "Hear, O Israel: The LORD our God, the LORD is one! You shall love the LORD your God with all your heart, with all your soul, and with all your strength." Here, in a single sentence, is the beating heart of the whole Law. What God asks of His people, at the deepest level, is not a cold and mechanical keeping of rules; it is love — wholehearted, undivided love for the one true and living God. And Israel is to let these words saturate their whole life: to bind them upon themselves, to teach them diligently to their children, to talk of them when they sit at home and when they walk along the road, when they lie down and when they rise up. When the Lord Jesus was later asked which was the greatest commandment of all, it was these very words that He reached for and named as the first and greatest. The deepest demand of the entire Law, it turns out, is love — and love of a particular kind: love that wells up and flows out of a heart that God has already redeemed.</p>
+<h2><span class="dg-n">4.</span>Choose Life: Covenant Blessing and a Promise</h2>
+<p>As the book moves toward its close, Moses solemnly sets the whole covenant before the people, with its blessings promised for faithfulness and its curses warned for turning away — and he lays upon them the weight of a real and momentous choice. And he brings it all to a stirring climax with words that ring down through the ages: "I have set before you life and death, blessing and cursing; therefore choose life, that both you and your descendants may live." The choice, he tells them, is simply this: to love the LORD, to obey His voice, and to hold fast to Him, "for He is your life." And yet Moses, with clear eyes, also foresees that Israel will in fact fail — that they will not keep this covenant as they ought. And so, remarkably, he points them beyond their own failure to a coming day when God Himself will act: a day when "the LORD your God will circumcise your heart... to love the LORD your God with all your heart." Here is the promise of an inward transformation that no amount of law-keeping could ever produce, and that God alone can give — a promise that would find its fulfillment in the new covenant, when God writes His law not on tablets of stone but on the living heart. So Deuteronomy holds out both the urgent call to choose life, and the deeper promise of a new heart with which to choose it.</p>
+<h2><span class="dg-n">5.</span>The Prophet Like Moses, and the Death of Moses</h2>
+<p>Moses also gives the people a great promise to carry with them into the future: that God will one day raise up another prophet like himself, and that to this Prophet they must listen. "The LORD your God will raise up for you a Prophet like me from your midst, from your brethren," he says; "Him you shall hear." And the New Testament sees this promise gloriously fulfilled in Christ — the true and final Prophet, greater by far than Moses, who is God's own last and complete Word to us. And then the Pentateuch draws to its close with the death of Moses himself. He climbs Mount Nebo, and from its height the LORD lets him look out across the whole of the Promised Land — but he is not permitted to enter it. There Moses dies, and God Himself buries him in a place no one has ever known. And the book ends by saying that there has never since arisen a prophet in Israel like Moses, whom the LORD knew face to face. And yet the great story is plainly not finished. For Moses himself points beyond himself to the greater Prophet who is still to come; and the people stand poised, on the edge of the land, ready to go in under Joshua.</p>
+<h2><span class="dg-n">6.</span>The Law Was Pointing to Him</h2>
+<p>And so this brings to its close our whole walk through the Pentateuch, the five books of Moses and the very foundation of all Scripture. We began at the creation of the world, and the fall, and the first faint promise of a Redeemer. We followed God's covenant of grace as it was carried down through Abraham, Isaac, Jacob, and Joseph. We stood in wonder at the great redemption of the Exodus — the blood of the Passover lamb, the mighty deliverance at the sea, the law given to a people God had already rescued, and God Himself coming down to dwell among them. We learned, in Leviticus and Numbers, how sinful people may draw near to a holy God — through sacrifice, through priesthood, and in holiness — and how deadly is the danger of drawing back in unbelief. And now, from the plains of Moab, we have heard Moses' last and greatest call: remember God's grace, love the LORD with all your heart, choose life, and watch for the Prophet who is yet to come. And through the whole of it, from the first page to the last, the Pentateuch has been quietly pointing forward to Christ. He is the seed of the woman who crushes the serpent, the promised offspring of Abraham, the Passover Lamb, the one true sacrifice and our great High Priest, the bronze serpent lifted up for our healing, and the Prophet greater than Moses. As the Gospel of John would put it so simply: the law was given through Moses, but grace and truth came through Jesus Christ. So read these foundational books, and see in them the God who creates, and redeems, and comes down to dwell with His people — and see, on every single page, the shadow of the Christ who was to come. Love the LORD your God with all your heart; choose life; and hear the Prophet, God's final Word to us, His own beloved Son. The whole Law was pointing all along to Him — and in Him, every last one of its promises is Yes.</p>
+<h2><span class="dg-n">7.</span>Taking It to Heart</h2>
+<div class="dg-reflect">
+<b>For reflection.</b> Do you love the LORD your God with all your heart — or has love cooled into mere rule-keeping? Have you, in the comfortable days, quietly begun to forget the grace that saved you? And do you hear, in Deuteronomy's promise of a Prophet like Moses and a circumcised heart, the Christ to whom the whole Law was pointing?
+    </div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary survey of the book of Deuteronomy, anchored in the classic public-domain expositions of the Pentateuch (Patrick Fairbairn's <em>The Typology of Scripture</em>, Keil &amp; Delitzsch on the Pentateuch, and others), and in Scripture. This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This reading draws especially on Patrick Fairbairn's <em>The Typology of Scripture</em> and Keil &amp; Delitzsch on the Pentateuch, all in the public domain.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>La Palabra desde Moab: Deuteronomio</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — Deuteronomio: las últimas palabras de Moisés, el llamado a amar a Dios, y el Profeta que ha de venir</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en las exposiciones clásicas de dominio público del Pentateuco (Fairbairn, Keil y Delitzsch, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Estudio del Libro: Pentateuco</li>
+<li>Ama a Jehová</li>
+<li>Escoge la vida</li>
+<li>Culminación</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> El Pentateuco cierra con Deuteronomio — las últimas palabras de Moisés a Israel en los campos de Moab, antes de que entren en la Tierra Prometida. Esta lectura final recorre Deuteronomio — recordar la gracia de Dios, la Shemá, escoger la vida, y el Profeta que ha de venir — y recoge todo el Pentateuco, que señala a Cristo.
+    </div>
+<h2><span class="dg-n">1.</span>Las últimas palabras de Moisés</h2>
+<p>El Pentateuco llega a su fin con el libro de Deuteronomio — las últimas palabras de Moisés al pueblo de Israel, habladas allá en los campos de Moab, justo al otro lado del río Jordán de la Tierra Prometida misma. Toda una nueva generación ha crecido ahora; los largos años de andar por el desierto han terminado por fin; y antes de que el pueblo cruce a la tierra, y antes de que el propio Moisés deba morir, los reúne a todos para renovar el pacto con ellos, y para grabar en sus corazones la única gran lección de todo lo que han visto: ama y obedece a Jehová tu Dios con todo tu corazón. Deuteronomio no es tanto un libro de leyes nuevas como una serie de grandes sermones — Moisés el predicador, al mismísimo final de su vida, rogando a un pueblo redimido que se entregue a una fidelidad de todo corazón. Recoge todo el Pentateuco en sí mismo, y señala hacia adelante, más allá de Moisés, a Cristo. Este es el quinto y final movimiento: la palabra desde Moab.</p>
+<h2><span class="dg-n">2.</span>Recuerda, y no olvides</h2>
+<p>Moisés comienza volviendo a contar toda la historia — la fidelidad de Dios hacia ellos todo el camino desde Egipto, a través del mar, y por el largo desierto — para que esta nueva generación, la mayoría de los cuales no lo habían visto con sus propios ojos, la recuerde. Y una y otra vez, por todo el libro, presiona el mismo urgente encargo sobre ellos: recuerda lo que Dios ha hecho por ti, y no, hagas lo que hagas, le olvides una vez que estés sano y salvo establecido y crecido cómodo y próspero en la buena tierra. Les advierte claramente contra los dos grandes peligros que están por delante: el peligro de olvidar calladamente a Dios en los días de abundancia, y el peligro de desviarse a adorar los ídolos de las naciones a su alrededor. "Guárdate," dice, "no te olvides de Jehová, que te sacó de la tierra de Egipto, de casa de servidumbre." Porque este es el corazón del asunto: recordar la gracia de Dios es la raíz viva de toda fidelidad, y olvidar esa gracia es la raíz escondida de todo apartamiento.</p>
+<h2><span class="dg-n">3.</span>La Shemá: Ama a Jehová tu Dios</h2>
+<p>Y justo en el mismísimo corazón de Deuteronomio está la Shemá, la gran confesión que llegaría a ser la oración diaria de Israel: "Oye, Israel: Jehová nuestro Dios, Jehová uno es. Y amarás a Jehová tu Dios de todo tu corazón, y de toda tu alma, y con todas tus fuerzas." Aquí, en una sola oración, está el latiente corazón de toda la Ley. Lo que Dios pide de su pueblo, al nivel más hondo, no es un frío y mecánico guardar de reglas; es amor — amor de todo corazón, sin dividir, por el único Dios verdadero y viviente. E Israel ha de dejar que estas palabras saturen toda su vida: atarlas sobre sí mismos, enseñarlas diligentemente a sus hijos, hablar de ellas cuando se sienten en casa y cuando anden por el camino, cuando se acuesten y cuando se levanten. Cuando al Señor Jesús le preguntaron más tarde cuál era el más grande mandamiento de todos, fueron estas mismísimas palabras las que tomó y nombró como el primero y más grande. La más honda demanda de toda la Ley, resulta, es el amor — y amor de una clase particular: amor que brota y fluye de un corazón que Dios ya ha redimido.</p>
+<h2><span class="dg-n">4.</span>Escoge la vida: bendición del pacto y una promesa</h2>
+<p>Al moverse el libro hacia su cierre, Moisés solemnemente pone todo el pacto delante del pueblo, con sus bendiciones prometidas por la fidelidad y sus maldiciones advertidas por el apartarse — y pone sobre ellos el peso de una elección real y trascendental. Y lo lleva todo a un conmovedor clímax con palabras que resuenan a través de las edades: "a la vida y a la muerte te he puesto delante, la bendición y la maldición; escoge, pues, la vida, para que vivas tú y tu simiente." La elección, les dice, es sencillamente esta: amar a Jehová, obedecer su voz, y aferrarse a Él, "porque él es vida para ti." Y sin embargo Moisés, con ojos claros, también prevé que Israel en efecto fallará — que no guardarán este pacto como debieran. Y así, notablemente, los señala más allá de su propio fracaso a un día venidero cuando Dios mismo actuará: un día cuando "circuncidará Jehová tu Dios tu corazón... para que ames a Jehová tu Dios con todo tu corazón." Aquí está la promesa de una transformación interior que ninguna cantidad de guardar la ley podría jamás producir, y que Dios solo puede dar — una promesa que hallaría su cumplimiento en el nuevo pacto, cuando Dios escribe su ley no en tablas de piedra sino en el corazón viviente. Así que Deuteronomio extiende tanto el urgente llamado a escoger la vida, como la más honda promesa de un corazón nuevo con el cual escogerla.</p>
+<h2><span class="dg-n">5.</span>El Profeta como Moisés, y la muerte de Moisés</h2>
+<p>Moisés también da al pueblo una gran promesa para llevar consigo al futuro: que Dios un día levantará otro profeta como él mismo, y que a este Profeta deben escuchar. "Profeta de en medio de ti, de tus hermanos, como yo, te levantará Jehová tu Dios," dice; "a él oiréis." Y el Nuevo Testamento ve esta promesa gloriosamente cumplida en Cristo — el verdadero y final Profeta, mucho mayor que Moisés, que es la propia última y completa Palabra de Dios para nosotros. Y luego el Pentateuco llega a su cierre con la muerte del propio Moisés. Sube al monte Nebo, y desde su altura Jehová le deja mirar a través de toda la Tierra Prometida — pero no le es permitido entrar en ella. Allí Moisés muere, y Dios mismo lo sepulta en un lugar que nadie ha sabido jamás. Y el libro termina diciendo que nunca desde entonces se ha levantado en Israel un profeta como Moisés, a quien Jehová conoció cara a cara. Y sin embargo la gran historia claramente no ha terminado. Porque Moisés mismo señala más allá de sí mismo al mayor Profeta que todavía ha de venir; y el pueblo está listo, al borde de la tierra, para entrar bajo Josué.</p>
+<h2><span class="dg-n">6.</span>La Ley señalaba a Él</h2>
+<p>Y así esto lleva a su cierre todo nuestro recorrido por el Pentateuco, los cinco libros de Moisés y el mismísimo fundamento de toda la Escritura. Comenzamos en la creación del mundo, y la caída, y la primera tenue promesa de un Redentor. Seguimos el pacto de gracia de Dios al ser llevado a través de Abraham, Isaac, Jacob, y José. Nos quedamos maravillados ante la gran redención del Éxodo — la sangre del cordero pascual, la poderosa liberación en el mar, la ley dada a un pueblo que Dios ya había rescatado, y Dios mismo descendiendo a morar entre ellos. Aprendimos, en Levítico y Números, cómo la gente pecaminosa puede acercarse a un Dios santo — por sacrificio, por sacerdocio, y en santidad — y cuán mortal es el peligro de retroceder en incredulidad. Y ahora, desde los campos de Moab, hemos oído el último y más grande llamado de Moisés: recuerda la gracia de Dios, ama a Jehová con todo tu corazón, escoge la vida, y vela por el Profeta que todavía ha de venir. Y a través de todo ello, de la primera página a la última, el Pentateuco ha estado calladamente señalando hacia adelante a Cristo. Él es la simiente de la mujer que hiere a la serpiente, la simiente prometida de Abraham, el Cordero pascual, el único verdadero sacrificio y nuestro gran Sumo Sacerdote, la serpiente de bronce levantada para nuestra sanidad, y el Profeta mayor que Moisés. Como lo diría el Evangelio de Juan tan sencillamente: la ley fue dada por medio de Moisés, mas la gracia y la verdad vinieron por medio de Jesucristo. Así que lea estos libros fundamentales, y vea en ellos al Dios que crea, y redime, y desciende a morar con su pueblo — y vea, en cada sola página, la sombra del Cristo que había de venir. Ama a Jehová tu Dios con todo tu corazón; escoge la vida; y oye al Profeta, la Palabra final de Dios para nosotros, su propio amado Hijo. Toda la Ley señalaba desde el principio a Él — y en Él, cada última de sus promesas es Sí.</p>
+<h2><span class="dg-n">7.</span>Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<b>Para reflexionar.</b> ¿Ama a Jehová su Dios con todo su corazón — o se ha enfriado el amor en mero guardar de reglas? ¿Ha comenzado, en los días cómodos, a olvidar calladamente la gracia que le salvó? Y ¿oye, en la promesa de Deuteronomio de un Profeta como Moisés y un corazón circuncidado, al Cristo a quien toda la Ley señalaba?
+    </div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Un estudio del Seminario Teológico de Chapala sobre el libro de Deuteronomio, anclado en las exposiciones clásicas de dominio público del Pentateuco (<em>The Typology of Scripture</em> de Patrick Fairbairn, Keil y Delitzsch sobre el Pentateuco, y otros), y en la Escritura. Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Esta lectura se apoya especialmente en <em>The Typology of Scripture</em> de Patrick Fairbairn y Keil y Delitzsch sobre el Pentateuco, todos en el dominio público.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="5" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+
+  <!-- ============ ATTESTATION ============ -->
+  <div class="card attest">
+    <h2>
+      <span class="lang-en">Record your reading</span>
+      <span class="lang-es">Registre su lectura</span>
+    </h2>
+    <p class="lang-en block">When you have read your three chosen readings in full, enter your name and affirm it below. This record is kept on your honor.</p>
+    <p class="lang-es block">Cuando haya leído por completo sus tres lecturas elegidas, escriba su nombre y confírmelo abajo. Este registro se guarda bajo su honor.</p>
+
+    <label class="field" for="stName"><span class="lang-en">Your name</span><span class="lang-es">Su nombre</span></label>
+    <input type="text" id="stName" autocomplete="name">
+
+    <div class="oath">
+      <input type="checkbox" id="oath">
+      <label for="oath"><span class="lang-en">On my honor, I have read in full the three excerpts or adaptations I selected above.</span><span class="lang-es">Bajo mi honor, he leído por completo los tres extractos o adaptaciones que seleccioné arriba.</span></label>
+    </div>
+
+    <button class="btn" onclick="recordReading()"><span class="lang-en">Record my reading</span><span class="lang-es">Registrar mi lectura</span></button>
+    <p class="msg" id="attMsg"></p>
+    <p class="msg no-print" id="honorsDone" style="display:none;color:#2f6b3a;"><span class="lang-en">&#10003; Recorded &mdash; this class counts toward your With Honors progress. <a href="cts-honors.html" style="color:#2f6b3a;">View progress &#8599;</a></span><span class="lang-es">&#10003; Registrado &mdash; esta clase cuenta para su progreso Con Honores. <a href="cts-honors.html" style="color:#2f6b3a;">Ver progreso &#8599;</a></span></p>
+
+    <!-- confirmation record -->
+    <div class="record" id="record">
+      <div class="seal-line"></div>
+      <h3><span class="lang-en">Honors Reading — recorded</span><span class="lang-es">Lectura con Honores — registrada</span></h3>
+      <div class="named" id="recName"></div>
+      <p class="lang-en block">affirmed on <span id="recDateEn"></span> to have read, in full:</p>
+      <p class="lang-es block">afirmó el <span id="recDateEs"></span> haber leído, por completo:</p>
+      <ul id="recList"></ul>
+      <p class="stamp"><span class="lang-en">Chapala Theological Seminary &middot; The Pentateuch &middot; present or print this page as your honors reading record.</span><span class="lang-es">Seminario Teológico de Chapala &middot; El Pentateuco &middot; presente o imprima esta página como su registro de lectura con honores.</span></p>
+      <p style="margin-top:14px;">
+        <button class="btn ghost no-print" onclick="window.print()"><span class="lang-en">Print this record</span><span class="lang-es">Imprimir este registro</span></button>
+        <button class="btn ghost no-print" onclick="resetReading()"><span class="lang-en">Start over</span><span class="lang-es">Empezar de nuevo</span></button>
+      </p>
+    </div>
+  </div>
+
+  <p class="footnote">
+    <span class="lang-en">Chapala Theological Seminary &middot; Seminario Teológico de Chapala &middot; free bilingual self-study</span>
+    <span class="lang-es">Seminario Teológico de Chapala &middot; Chapala Theological Seminary &middot; estudio propio bilingüe gratuito</span>
+  </p>
+
+</div>
+
+<script>
+  var MAX = 3;
+  var HONORS_CODE="Pent"; var HONORS_COURSE="The Pentateuch";
+
+  function setLang(l){
+    document.body.className = 'lang-' + l;
+    document.querySelectorAll('.toggle-btn').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang') === l);
+    });
+  }
+
+  function chosenBoxes(){
+    return Array.prototype.slice.call(document.querySelectorAll('input[data-pick]:checked'));
+  }
+
+  function refresh(){
+    var boxes = document.querySelectorAll('input[data-pick]');
+    var chosen = chosenBoxes();
+    var n = chosen.length;
+    document.getElementById('cnt-en').textContent = n;
+    document.getElementById('cnt-es').textContent = n;
+
+    var full = (n >= MAX);
+    boxes.forEach(function(b){
+      var lab = b.closest('.pick');
+      var art = b.closest('.entry');
+      if(!b.checked && full){
+        b.disabled = true; lab.classList.add('disabled');
+      } else {
+        b.disabled = false; lab.classList.remove('disabled');
+      }
+      if(art) art.classList.toggle('chosen', b.checked);
+    });
+
+    var note = document.getElementById('limitNote');
+    if(full){
+      note.innerHTML = "<span class='lang-en'>Three chosen. Uncheck one to change your selection.</span>" +
+                       "<span class='lang-es'>Tres elegidas. Desmarque una para cambiar su selección.</span>";
+    } else {
+      note.textContent = "";
+    }
+  }
+
+  document.querySelectorAll('input[data-pick]').forEach(function(b){
+    b.addEventListener('change', refresh);
+  });
+
+  function recordReading(){
+    var chosen = chosenBoxes();
+    var name = document.getElementById('stName').value.trim();
+    var oath = document.getElementById('oath').checked;
+    var msg = document.getElementById('attMsg');
+
+    if(chosen.length !== MAX){
+      msg.innerHTML = "<span class='lang-en'>Choose exactly three readings above to record them.</span>" +
+                      "<span class='lang-es'>Elija exactamente tres lecturas arriba para registrarlas.</span>";
+      return;
+    }
+    if(!name){
+      msg.innerHTML = "<span class='lang-en'>Enter your name to record your reading.</span>" +
+                      "<span class='lang-es'>Escriba su nombre para registrar su lectura.</span>";
+      return;
+    }
+    if(!oath){
+      msg.innerHTML = "<span class='lang-en'>Check the box to affirm you have read all three.</span>" +
+                      "<span class='lang-es'>Marque la casilla para afirmar que ha leído las tres.</span>";
+      return;
+    }
+    msg.textContent = "";
+
+    var now = new Date();
+    var en = now.toLocaleDateString('en-US', {year:'numeric', month:'long', day:'numeric'});
+    var es = now.toLocaleDateString('es-MX', {year:'numeric', month:'long', day:'numeric'});
+    document.getElementById('recName').textContent = name;
+    document.getElementById('recDateEn').textContent = en;
+    document.getElementById('recDateEs').textContent = es;
+
+    var ul = document.getElementById('recList');
+    ul.innerHTML = "";
+    chosen.forEach(function(b){
+      var art = b.closest('.entry');
+      var li = document.createElement('li');
+      li.innerHTML = "<span class='lang-en'>" + art.getAttribute('data-title-en') + "</span>" +
+                     "<span class='lang-es'>" + art.getAttribute('data-title-es') + "</span>";
+      ul.appendChild(li);
+    });
+
+    try {
+      var _works=[];
+      chosen.forEach(function(b){ var a=b.closest('.entry'); if(a) _works.push(a.getAttribute('data-title-en')); });
+      localStorage.setItem('cts_honors_name_v1', name);
+      localStorage.setItem('cts_honors_v1:'+HONORS_CODE, JSON.stringify({name:name,date:en,course:HONORS_COURSE,works:_works}));
+      var _hd=document.getElementById('honorsDone'); if(_hd) _hd.style.display='block';
+    } catch(e){}
+
+    document.getElementById('record').classList.add('show');
+    document.getElementById('record').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  function resetReading(){
+    document.querySelectorAll('input[data-pick]').forEach(function(b){ b.checked = false; });
+    document.getElementById('stName').value = "";
+    document.getElementById('oath').checked = false;
+    document.getElementById('record').classList.remove('show');
+    document.getElementById('attMsg').textContent = "";
+    refresh();
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  refresh();
+  try {
+    if(localStorage.getItem('cts_honors_v1:'+HONORS_CODE)){ var _hd=document.getElementById('honorsDone'); if(_hd) _hd.style.display='block'; }
+    var _nm=localStorage.getItem('cts_honors_name_v1'); var _f=document.getElementById('stName'); if(_nm && _f && !_f.value){ _f.value=_nm; }
+  } catch(e){}
+</script>
+
+<!-- CTS-FURTHER-STUDY -->
+<style>
+.fs-wrap{max-width:900px;margin:38px auto 10px;padding:0 18px;font-family:Georgia,serif;color:#1f2a37;line-height:1.55;box-sizing:border-box}
+.fs-wrap *{box-sizing:border-box}
+.fs-head{border-top:6px solid #33608f;background:#eaf1f8;border:1px solid #dbe6f0;border-radius:12px;padding:18px 20px}
+.fs-eyebrow{font:700 .72rem/1 Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#33608f}
+.fs-head h2{font-size:1.5rem;margin:.3rem 0 .1rem}
+.fs-es{color:#48586a;font-style:italic}
+.fs-tag{margin:.5rem 0 0;font-family:Arial,sans-serif;font-size:.9rem;color:#5b6b7b}
+.fs-online{display:flex;gap:11px;align-items:flex-start;background:#fff;border:1px solid #33608f;border-left:6px solid #33608f;border-radius:10px;padding:11px 14px;margin:13px 0 18px}
+.fs-online .fs-badge{flex:none;font:800 .66rem/1 Arial,sans-serif;letter-spacing:.1em;color:#fff;background:#33608f;padding:6px 9px;border-radius:6px;margin-top:2px}
+.fs-online p{margin:0;font-size:.9rem}
+.fs-grid{display:grid;gap:14px}
+.fs-card{background:#fff;border:1px solid #dbe6f0;border-radius:11px;padding:16px 17px;box-shadow:0 2px 8px #0b214a0a}
+.fs-kind{font:700 .7rem/1 Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#264a6e}
+.fs-card h3{margin:.3rem 0 .15rem;font-size:1.12rem}
+.fs-meta{font-family:Arial,sans-serif;font-size:.8rem;color:#5b6b7b;margin:0 0 .5rem}
+.fs-langs span{font:700 .64rem/1 Arial,sans-serif;background:#eaf1f8;color:#264a6e;border:1px solid #cadcee;border-radius:999px;padding:3px 7px;margin-left:5px}
+.fs-card p{margin:.35rem 0 .5rem}
+.fs-note{background:#fbf3e6;border-left:4px solid #8a5a1c;border-radius:0 6px 6px 0;padding:9px 12px;margin:.5rem 0;font-size:.85rem}
+.fs-note b{color:#8a5a1c}
+.fs-links{display:flex;gap:9px;flex-wrap:wrap;margin-top:9px}
+.fs-btn{display:inline-block;text-decoration:none;background:#33608f;color:#fff;font:700 .85rem Arial,sans-serif;padding:8px 12px;border-radius:7px}
+.fs-btn.fs-alt{background:#fff;color:#264a6e;border:1.5px solid #33608f}
+.fs-pick{border:2px dashed #b7c7d8;background:#fbfdff;color:#5b6b7b}
+.fs-pick h3{color:#5b6b7b}
+.fs-foot{margin-top:16px;font-family:Arial,sans-serif;font-size:.8rem;color:#5b6b7b}
+@media(max-width:600px){.fs-head h2{font-size:1.3rem}}
+</style>
+<section class="fs-wrap" id="further-study">
+<div class="fs-head">
+  <div class="fs-eyebrow">Chapala Theological Seminary &middot; Further Study</div>
+  <h2>Further Study &mdash; Online</h2>
+  <div class="fs-es" style="font-size:1.05rem">Estudio Adicional &mdash; En Línea</div>
+  <p class="fs-tag">Optional resources for students with internet access &mdash; Pentateuch<br>
+  <span class="fs-es">Recursos opcionales para estudiantes con acceso a internet &mdash; Pentateuco</span></p>
+</div>
+<div class="fs-online"><span class="fs-badge">ONLINE</span>
+  <p><strong>Requires an internet connection.</strong> These resources are hosted on the web and do not open offline. They supplement the course; they do not replace its units or exams.<br>
+  <span class="fs-es"><strong>Requiere una conexión a internet.</strong> Estos recursos están alojados en la web y no se abren sin conexión. Complementan el curso; no sustituyen sus unidades ni exámenes.</span></p>
+</div>
+<div class="fs-grid">
+<article class="fs-card">
+  <div class="fs-kind">Free animated Bible videos / Videos bíblicos animados gratuitos</div>
+  <h3>BibleProject &mdash; Proyecto Biblia</h3>
+  <p class="fs-meta">Video <span class="fs-langs"><span>English</span><span>Español</span></span></p>
+  <p>Short, well-crafted animated videos. In the video library, explore the videos on <strong>the Torah, the first five books</strong>. Non-partisan and freely available.<br>
+  <span class="fs-es">Videos animados breves y bien hechos. En la biblioteca de videos, explore los videos sobre <strong>la Torá, los primeros cinco libros</strong>. No partidista y de acceso gratuito.</span></p>
+  <div class="fs-links">
+    <a class="fs-btn" target="_blank" rel="noopener" href="https://bibleproject.com">Open (English) &#8599;</a>
+    <a class="fs-btn fs-alt" target="_blank" rel="noopener" href="https://proyectobiblia.com">Abrir (Español) &#8599;</a>
+  </div>
+</article>
+<article class="fs-card fs-pick">
+  <div class="fs-kind">Instructor's vetted pick / Selección aprobada por el instructor</div>
+  <h3>[ Your chosen video goes here ]</h3>
+  <p>A place for a specific video the instructor has watched and approved for this course.<br>
+  <span class="fs-es">Un espacio para un video específico que el instructor haya visto y aprobado para este curso.</span></p>
+</article>
+</div>
+<div class="fs-foot">These optional supplements link to third-party websites that Chapala Theological Seminary does not control; weigh their content against Scripture and this course.<br>
+<span class="fs-es">Estos complementos opcionales enlazan a sitios web de terceros que el Seminario Teológico de Chapala no controla; pese su contenido a la luz de la Escritura y de este curso.</span></div>
+</section>
+<!-- /CTS-FURTHER-STUDY -->
+
+</body>
+</html>

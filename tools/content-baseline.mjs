@@ -56,10 +56,28 @@ function unitFingerprint(U) {
   };
 }
 
+/* Reads whichever form the content currently lives in. The whole point of a
+   format-neutral baseline is that the gate survives the migration that changes
+   the format, so it prefers the Astro collection and falls back to the older
+   per-unit scripts. */
 function loadAll() {
+  const COLL = path.join(ROOT, 'src', 'content', 'units');
+  const out = {};
+
+  if (fs.existsSync(COLL)) {
+    for (const course of fs.readdirSync(COLL)) {
+      const dir = path.join(COLL, course);
+      if (!fs.statSync(dir).isDirectory()) continue;
+      for (const file of fs.readdirSync(dir).filter((f) => f.endsWith('.json'))) {
+        const U = JSON.parse(fs.readFileSync(path.join(dir, file), 'utf8'));
+        out[`${course}/${U.unit}`] = unitFingerprint(U);
+      }
+    }
+    return out;
+  }
+
   const rows = fs.readFileSync(path.join(ROOT, 'tools', 'unified-courses.txt'), 'utf8')
     .trim().split('\n').map(l => l.trim().split(/\s+/));
-  const out = {};
   for (const [course, slug, n] of rows) {
     for (let u = 0; u <= +n; u++) {
       const f = path.join(SITE, 'data', slug, `unit${u}.js`);

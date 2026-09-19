@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CTS The Acts of the Apostles — Supplemental Reading Room</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root{
+    --primary:#5b3a1f;
+    --primary-deep:#452c17;
+    --gold:#c9a227;
+    --gold-deep:#98771d;
+    --paper:#f1ece5;
+    --card:#fffdf8;
+    --border:#e5d8c8;
+    --ink:#251708;
+    --ink-soft:#6b5844;
+  }
+
+  body{
+    font-family: Georgia, 'Times New Roman', serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 17px;
+    padding: 20px;
+  }
+  .container{ max-width: 900px; margin: 0 auto; }
+
+  /* ---------- language toggle mechanics (house pattern) ---------- */
+  body.lang-en .lang-es{ display:none; }
+  body.lang-en .lang-en{ display:inline; }
+  body.lang-es .lang-en{ display:none; }
+  body.lang-es .lang-es{ display:inline; }
+  .lang-en.block, .lang-es.block{ display:none; }
+  body.lang-en .lang-en.block{ display:block; }
+  body.lang-es .lang-es.block{ display:block; }
+  body.lang-both .lang-es.block{ display:block; }
+  body.lang-both .lang-en.block{ display:block; }
+  body.lang-both .lang-es:not(.block){ display:inline; }
+  body.lang-both .lang-en:not(.block){ display:inline; }
+  body.lang-both .lang-es.block{ opacity:.9; border-top:1px dashed var(--border); margin-top:8px; padding-top:8px; }
+
+  /* ---------- builder note (delete before publishing) ---------- */
+  .builder{
+    border:2px dashed #b23a3a; background:#fdf4f4; color:#5a2020;
+    border-radius:12px; padding:16px 18px; margin-bottom:26px; font-size:.92rem; line-height:1.5;
+  }
+  .builder strong{ display:block; margin-bottom:6px; color:#8f2a2a; letter-spacing:.02em; text-transform:uppercase; font-size:.78rem; }
+  .builder ol{ margin:6px 0 0 18px; } .builder li{ margin:4px 0; }
+
+  /* ---------- toggle bar ---------- */
+  .bar{
+    background:#ebe0d0; border-radius:40px; padding:10px 14px;
+    display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center; margin-bottom:26px;
+  }
+  .bar span.bar-label{ color:var(--ink-soft); font-size:.85rem; margin-right:4px; }
+  .toggle-btn{
+    background:var(--card); color:var(--primary); border:1px solid var(--border);
+    border-radius:30px; padding:7px 18px; cursor:pointer; font-family:inherit; font-size:.92rem;
+  }
+  .toggle-btn.active{ background:var(--primary); color:#fff; border-color:var(--primary); }
+
+  /* ---------- masthead ---------- */
+  .mast{ text-align:center; padding:14px 0 6px; }
+  .mast .eyebrow{
+    letter-spacing:.3em; text-transform:uppercase; font-size:.72rem; color:var(--gold-deep); margin-bottom:12px;
+  }
+  .mast h1{ color:var(--primary); font-size:2.05rem; line-height:1.2; font-weight:normal; }
+  .mast .rule{ width:88px; height:2px; background:var(--gold); margin:18px auto 14px; }
+  .mast .sub{ color:var(--ink-soft); font-style:italic; font-size:1.02rem; }
+
+  /* ---------- cards ---------- */
+  .card{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    padding:22px 24px; margin:22px 0; box-shadow:0 4px 12px rgba(0,0,0,.05);
+  }
+  .card h2{
+    color:var(--primary); font-size:1.18rem; font-weight:normal;
+    border-left:4px solid var(--gold); padding-left:14px; margin-bottom:12px;
+  }
+  .card p{ margin:9px 0; }
+  .card p.lead{ margin-top:2px; }
+
+  .honors{ border-left:none; border-top:4px solid var(--gold); }
+  .honors h2{ border-left:none; padding-left:0; }
+  .pill-note{ display:inline-block; background:#f0e6d6; border:1px solid var(--border); border-radius:20px; padding:3px 12px; font-size:.82rem; color:var(--primary); margin-top:4px; }
+
+  /* ---------- reading entries ---------- */
+  .shelf-head{ margin:34px 0 6px; text-align:center; }
+  .shelf-head h2{
+    color:var(--primary); font-weight:normal; font-size:1.4rem; border:none; padding:0; display:inline-block;
+  }
+  .shelf-head .rule{ width:60px; height:2px; background:var(--gold); margin:12px auto 0; }
+  .counter{
+    position:sticky; top:8px; z-index:5;
+    background:var(--primary); color:#fff; border-radius:30px;
+    padding:8px 18px; text-align:center; font-size:.95rem; margin:16px auto 6px; max-width:280px;
+    box-shadow:0 3px 10px rgba(0,0,0,.14);
+  }
+  .counter b{ color:var(--gold); }
+
+  .entry{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    padding:20px 22px; margin:16px 0; box-shadow:0 4px 12px rgba(0,0,0,.05);
+    transition:box-shadow .18s ease, border-color .18s ease;
+  }
+  .entry:hover{ box-shadow:0 7px 20px rgba(91,58,31,.15); }
+  .entry.chosen{ border-color:var(--primary); box-shadow:0 0 0 2px var(--primary) inset, 0 7px 20px rgba(91,58,31,.17); }
+  .entry .locus{
+    letter-spacing:.16em; text-transform:uppercase; font-size:.68rem; color:var(--gold-deep); margin-bottom:8px;
+  }
+  .entry .title{ font-size:1.14rem; color:var(--primary); margin-bottom:2px; }
+  .entry .title .num{
+    display:inline-block; min-width:1.7em; color:var(--gold-deep); font-style:italic;
+  }
+  .entry .byline{ color:var(--ink-soft); font-style:italic; font-size:.92rem; margin-bottom:10px; padding-left:1.7em; }
+  .entry .caption{ font-size:.98rem; }
+  .entry .foot{
+    display:flex; flex-wrap:wrap; gap:12px 20px; align-items:center; justify-content:space-between;
+    margin-top:14px; padding-top:12px; border-top:1px solid var(--border);
+  }
+  .read-link{
+    color:var(--primary); text-decoration:none; font-size:.95rem; border-bottom:1.5px solid var(--gold); padding-bottom:1px;
+  }
+  .read-link:hover{ color:var(--gold-deep); }
+  .read-links{ display:flex; flex-wrap:wrap; gap:6px 16px; align-items:center; }
+  .read-link.mod{ border-bottom-color:var(--primary); }
+  .pick{ display:inline-flex; align-items:center; gap:9px; cursor:pointer; font-size:.92rem; color:var(--ink); user-select:none; }
+  .pick input{ width:19px; height:19px; accent-color:var(--primary); cursor:pointer; }
+  .pick.disabled{ opacity:.4; cursor:not-allowed; }
+
+  /* ---------- millennial views panel (unused in this course; retained for template parity) ---------- */
+  .millennial{
+    background:var(--card); border:1px solid var(--border); border-radius:16px;
+    padding:22px 24px; margin:22px 0; box-shadow:0 4px 12px rgba(0,0,0,.05);
+  }
+  .millennial > h2{
+    color:var(--primary); font-size:1.18rem; font-weight:normal;
+    border-left:4px solid var(--gold); padding-left:14px; margin-bottom:10px;
+  }
+  .millennial .intro{ margin:8px 0 6px; }
+  .mv-grid{ margin-top:14px; }
+  .entry.mv{ box-shadow:none; border:none; border-top:1px solid var(--border); border-radius:0; margin:0; padding:18px 0; }
+  .entry.mv:first-of-type{ border-top:none; padding-top:4px; }
+  .entry.mv:hover{ box-shadow:none; }
+  .entry.mv.chosen{ box-shadow:none; border-top:1px solid var(--border); background:#f0e6d6; border-radius:8px; padding:14px 12px; }
+  .entry.mv:first-of-type.chosen{ border-top:none; }
+  .view-badge{
+    display:inline-block; background:var(--gold); color:var(--primary-deep);
+    font-size:.72rem; font-weight:bold; letter-spacing:.11em; text-transform:uppercase;
+    padding:5px 14px; border-radius:20px; margin-bottom:10px;
+  }
+
+  .limit-note{ text-align:center; color:var(--gold-deep); font-size:.9rem; min-height:1.2em; margin:4px 0 0; }
+
+  /* ---------- attestation ---------- */
+  .attest label.field{ display:block; margin:14px 0 6px; font-size:.9rem; color:var(--ink-soft); }
+  .attest input[type=text]{
+    width:100%; font-family:inherit; font-size:1rem; padding:11px 14px;
+    border:1px solid var(--border); border-radius:10px; background:#fffef9; color:var(--ink);
+  }
+  .attest .oath{
+    display:flex; gap:11px; align-items:flex-start; margin:16px 0; font-size:.96rem; background:#f1ece5;
+    border:1px solid var(--border); border-radius:10px; padding:12px 14px;
+  }
+  .attest .oath input{ width:20px; height:20px; margin-top:2px; accent-color:var(--primary); flex-shrink:0; }
+  .btn{
+    background:var(--primary); color:#fff; border:none; border-radius:30px;
+    padding:11px 26px; cursor:pointer; font-family:inherit; font-size:1rem; margin-top:6px;
+  }
+  .btn:hover{ background:var(--primary-deep); }
+  .btn.ghost{ background:transparent; color:var(--primary); border:1px solid var(--primary); }
+  .msg{ color:var(--gold-deep); font-size:.92rem; margin-top:12px; min-height:1.2em; }
+
+  .record{ display:none; }
+  .record.show{ display:block; }
+  .record .seal-line{ width:70px; height:2px; background:var(--gold); margin:6px 0 16px; }
+  .record h3{ color:var(--primary); font-weight:normal; font-size:1.3rem; margin-bottom:4px; }
+  .record .named{ font-size:1.5rem; color:var(--primary); border-bottom:1px solid var(--gold-deep); display:inline-block; padding:0 10px 4px; margin:6px 0 12px; }
+  .record ul{ margin:12px 0 12px 20px; } .record li{ margin:5px 0; }
+  .record .stamp{ font-style:italic; color:var(--ink-soft); font-size:.92rem; }
+
+  .footnote{ text-align:center; color:var(--ink-soft); font-size:.82rem; margin:30px 0 6px; }
+
+  a:focus-visible, input:focus-visible, button:focus-visible, label:focus-within{
+    outline:3px solid var(--gold); outline-offset:2px;
+  }
+
+  @media (max-width:520px){
+    body{ font-size:16px; padding:14px; }
+    .mast h1{ font-size:1.7rem; }
+    .entry .foot{ flex-direction:column; align-items:flex-start; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; animation:none !important; }
+  }
+
+  /* ---------- print: show only the record ---------- */
+  @media print{
+    body{ background:#fff; }
+    .builder, .bar, .no-print, .entry, .counter, .attest .oath, .attest input, .attest label.field, .attest .btn, .msg, .limit-note{ display:none !important; }
+    .card.attest{ border:none; box-shadow:none; }
+    .record{ display:block !important; }
+  }
+
+.assignment-note{background:#f7f3e7;border-left:4px solid var(--gold);padding:9px 11px;margin:10px 0;font-size:.95rem}
+</style>
+<style>
+.digest-inline{margin:12px 0 6px;border:1px solid var(--border,#e2d6c9);border-radius:9px;background:#fff;overflow:hidden}
+.digest-inline>summary{cursor:pointer;list-style:none;padding:11px 13px;font-family:Arial,Helvetica,sans-serif;font-weight:700;color:var(--primary,#33608f);display:flex;align-items:center;gap:9px}
+.digest-inline>summary::-webkit-details-marker{display:none}
+.digest-inline>summary::after{content:"\25B8";margin-left:auto;color:var(--gold-deep,#8a5a3c)}
+.digest-inline[open]>summary::after{content:"\25BE"}
+.dg-badge{flex:none;background:var(--primary,#33608f);color:#fff;font:800 .6rem/1 Arial,sans-serif;letter-spacing:.11em;padding:5px 8px;border-radius:5px}
+.dg-note-line{font-family:Arial,sans-serif;font-size:.82rem;color:var(--ink-soft,#6b5b4d);padding:0 15px 8px}
+.dg-scroll{padding:2px 15px 16px;border-top:1px solid var(--border,#eee)}
+.dg-block{max-width:none;margin:0}
+.dg-block .dg-doc{border-bottom:1.5px solid var(--border,#e2d6c9);padding-bottom:10px;margin:10px 0 12px}
+.dg-block h1{font-size:1.25rem;line-height:1.25;margin:.1rem 0 .4rem;color:var(--primary,#33608f)}
+.dg-block .dg-sub{color:var(--ink-soft,#6b5b4d);font-style:italic;margin:0 0 .5rem;font-size:.95rem}
+.dg-block .dg-src{font-size:.8rem;color:var(--ink-soft,#6b5b4d);margin:.2rem 0}
+.dg-block .dg-chips{margin:.5rem 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:.35rem}
+.dg-block .dg-chips li{font:700 .66rem/1 Arial,sans-serif;background:var(--card,#eef2f6);color:var(--primary,#33608f);border:1px solid var(--border,#d5d5d5);border-radius:999px;padding:3px 8px}
+.dg-block .dg-note{background:var(--card,#eef2f6);border-left:3px solid var(--gold-deep,#8a5a3c);padding:.7rem .9rem;margin:1rem 0;font-size:.92rem;line-height:1.5}
+.dg-block h2{font-size:1.05rem;margin:1.3rem 0 .4rem;padding-top:.35rem;border-top:1px solid var(--border,#ece2d6);color:var(--primary,#33608f)}
+.dg-block h2 .dg-n{color:var(--gold-deep,#8a5a3c);font-weight:400;margin-right:.35rem}
+.dg-block p{margin:0 0 .8rem;font-size:.97rem;line-height:1.6}
+.dg-block blockquote{margin:1rem 0;padding:.2rem 0 .2rem 1rem;border-left:3px solid var(--border,#e2d6c9);font-style:italic;color:#444}
+.dg-block .dg-reflect{background:var(--card,#eef2f6);padding:.7rem .9rem;border-radius:6px;margin:1rem 0}
+.dg-block footer{margin-top:1.4rem;padding-top:.8rem;border-top:1.5px solid var(--border,#e2d6c9);font-size:.8rem;color:var(--ink-soft,#6b5b4d);line-height:1.5}
+</style></head>
+<body class="lang-en">
+<div class="container">
+<!-- ===== HONORS PROMPT ===== -->
+<div class="bar no-print" style="background:#f6f0e2;border:1px solid #e5d8c8;">
+<span class="lang-en">✦ Pursuing a degree <b>With Honors</b>? Complete this class's reading below, then track your progress:</span>
+<span class="lang-es">✦ ¿Cursando un título <b>Con Honores</b>? Complete la lectura de esta clase abajo, luego siga su progreso:</span>
+<a class="toggle-btn" href="cts-honors.html" style="text-decoration:none;"><span class="lang-en">Honors page ↗</span><span class="lang-es">Página de Honores ↗</span></a>
+</div>
+<!-- ============ LANGUAGE TOGGLE ============ -->
+<div class="bar no-print">
+<span class="bar-label lang-en">Language:</span>
+<span class="bar-label lang-es">Idioma:</span>
+<button class="toggle-btn active" data-lang="en" onclick="setLang('en')">English</button>
+<button class="toggle-btn" data-lang="es" onclick="setLang('es')">Español</button>
+<button class="toggle-btn" data-lang="both" onclick="setLang('both')">Both / Ambos</button>
+</div>
+<!-- ============ MASTHEAD ============ -->
+<div class="mast">
+<div class="eyebrow">Chapala Theological Seminary · The Acts of the Apostles</div>
+<h1>
+<span class="lang-en">Supplemental Reading Room</span>
+<span class="lang-es">Sala de Lecturas Complementarias</span>
+</h1>
+<div class="rule"></div>
+<div class="sub">
+<span class="lang-en">The unfinished story of the church — choose any three</span>
+<span class="lang-es">La historia inconclusa de la iglesia — elija tres cualesquiera</span>
+</div>
+</div>
+<!-- ============ FRAMING ============ -->
+<div class="card">
+<h2>
+<span class="lang-en">How to read this shelf</span>
+<span class="lang-es">Cómo leer este estante</span>
+</h2>
+<p class="lead lang-en block">This intensive follows the Book of Acts — Luke’s sequel to his Gospel, the thrilling story of how the risen Christ carried His gospel, by the Holy Spirit, from a Jerusalem upper room to the heart of the Roman Empire. These five readings are bilingual Chapala Theological Seminary digests, walking in turn through the great movements of the book — Pentecost and the birth of the church, witness and opposition in Jerusalem, the gospel breaking out to the Gentiles, Paul’s missionary journeys, and the road to Rome — and drawing on its classic public-domain expositors, from Campbell Morgan and Pierson to Conybeare &amp; Howson, Ramsay, and Roland Allen. Each is written to be read on its own, in English or Spanish, entirely offline. Choose any three, read them in full, and record your reading below.</p>
+<p class="lang-en block">These five readings draw on the great public-domain classics of Acts — scholarly and popular commentaries on the whole book, the monumental works on the life, letters, and journeys of Paul, the study confirming from history and archaeology the accuracy of Luke’s account, and the classics on the Holy Spirit and on the missionary methods by which the gospel spread across the Roman world. Acts is a book that has never really ended: the same Lord, the same Spirit, and the same gospel are at work today. Read these digests to be carried into that story — and to take your own place in it.</p>
+<p class="lead lang-es block">Este curso intensivo sigue el Libro de los Hechos — la continuación de Lucas a su Evangelio, la emocionante historia de cómo el Cristo resucitado llevó su evangelio, por el Espíritu Santo, desde un aposento alto en Jerusalén hasta el corazón del Imperio Romano. Estas cinco lecturas son resúmenes bilingües del Seminario Teológico de Chapala, que recorren por turno los grandes movimientos del libro — Pentecostés y el nacimiento de la iglesia, testimonio y oposición en Jerusalén, el evangelio irrumpiendo hacia los gentiles, los viajes misioneros de Pablo, y el camino a Roma — y se apoyan en sus expositores clásicos de dominio público, desde Campbell Morgan y Pierson hasta Conybeare y Howson, Ramsay, y Roland Allen. Cada una está escrita para leerse por sí sola, en inglés o español, enteramente sin conexión. Elija tres cualesquiera, léalas por completo, y registre su lectura abajo.</p>
+<p class="lang-es block">Estas cinco lecturas se apoyan en los grandes clásicos de dominio público de Hechos — comentarios eruditos y populares sobre todo el libro, las obras monumentales sobre la vida, las cartas, y los viajes de Pablo, el estudio que confirma desde la historia y la arqueología la exactitud del relato de Lucas, y los clásicos sobre el Espíritu Santo y sobre los métodos misioneros por los cuales el evangelio se extendió por el mundo romano. Hechos es un libro que en realidad nunca ha terminado: el mismo Señor, el mismo Espíritu, y el mismo evangelio obran hoy. Lea estos resúmenes para ser llevado a esa historia — y para tomar su propio lugar en ella.</p>
+</div>
+<!-- ============ HONORS ============ -->
+<div class="card honors">
+<h2>
+<span class="lang-en">With Honors — an invitation, not a requirement</span>
+<span class="lang-es">Con Honores — una invitación, no un requisito</span>
+</h2>
+<p class="lang-en block">Your degree is complete without these readings. Every CTS degree — the Certificate, the Associate of Divinity, the Th.M., and the M.Div. — is earned in full through the course units themselves, and no student is ever penalized for being unable to reach this material.</p>
+<p class="lang-en block">These supplemental readings are the path to one added distinction — your degree awarded <em>with honors</em>. Each class whose reading you complete counts toward it: twelve classes for the Certificate or the Th.M., twenty-five for the Associate, and thirty for the M.Div. Choose any three of the readings below, read them in full, and record your reading on your honor — then track your progress on the Honors page.</p>
+<p class="lang-es block">Su título está completo sin estas lecturas. Todo título de CTS — el Certificado, el Asociado en Divinidad, la Maestría en Teología, y la Maestría en Divinidad — se obtiene por completo mediante las unidades del curso mismo, y ningún estudiante es penalizado por no poder acceder a este material.</p>
+<p class="lang-es block">Estas lecturas complementarias son el camino hacia una distinción adicional — su título otorgado <em>con honores</em>. Cada clase cuya lectura complete cuenta para ella: doce clases para el Certificado o la Maestría en Teología, veinticinco para el Asociado o la Maestría en Divinidad. Elija tres cualesquiera de las lecturas de abajo, léalas por completo, y registre su lectura bajo su honor — luego siga su progreso en la página de Honores.</p>
+<span class="pill-note lang-en">No constant internet required — see below</span>
+<span class="pill-note lang-es">No se requiere internet constante — vea abajo</span>
+</div>
+<!-- ============ ACCESS / OFFLINE ============ -->
+<div class="card">
+<h2>
+<span class="lang-en">Reading offline</span>
+<span class="lang-es">Leer sin conexión</span>
+</h2>
+<p class="lang-en block">Every one of these five readings is a Chapala Theological Seminary bilingual digest, written by CTS and included in your course download — so all of them open directly on your device, in English or Spanish, with no internet connection at all. Each digest walks through a portion of Acts and rests on the classic public-domain expositions, but the digests themselves are CTS-authored teaching, not reproductions, and those classic works are freely available online for any who wish to read them in full.</p>
+<p class="lang-es block">Cada una de estas cinco lecturas es un resumen bilingüe del Seminario Teológico de Chapala, escrito por el STC e incluido en la descarga de su curso — de modo que todas se abren directamente en su dispositivo, en inglés o español, sin conexión alguna. Cada resumen recorre una porción de Hechos y se apoya en las exposiciones clásicas de dominio público, pero los resúmenes mismos son enseñanza de autoría del STC, no reproducciones, y esas obras clásicas están disponibles gratuitamente en línea para quien desee leerlas por completo.</p>
+</div>
+<!-- ============ TRANSLATE ============ -->
+<div class="card">
+<h2>
+<span class="lang-en">Reading in another language</span>
+<span class="lang-es">Leer en otro idioma</span>
+</h2>
+<p class="lang-en block">Most of these works are in English. If you would rather read in Spanish or another language, the Chrome browser can translate a whole page for you. On a computer, right-click anywhere on the opened reading and choose “Translate to…”. On an Android phone or tablet, tap the three-dot menu and choose “Translate”. On an iPhone or iPad, tap the translate icon in the address bar — or open the page in the Chrome app if you don't see it. Machine translation is not perfect, but it is enough to follow the argument.</p>
+<p class="lang-es block">La mayoría de estas obras están en inglés. Si prefiere leer en español u otro idioma, el navegador Chrome puede traducir una página entera por usted. En una computadora, haga clic derecho en cualquier parte de la lectura abierta y elija “Traducir a…”. En un teléfono o tableta Android, toque el menú de tres puntos y elija “Traducir”. En un iPhone o iPad, toque el ícono de traducción en la barra de direcciones — o abra la página en la aplicación Chrome si no lo ve. La traducción automática no es perfecta, pero basta para seguir el argumento.</p>
+</div>
+<!-- ============ THE SHELF ============ -->
+<div class="shelf-head">
+<h2>
+<span class="lang-en">The Five Readings</span>
+<span class="lang-es">Las Cinco Lecturas</span>
+</h2>
+<div class="rule"></div>
+</div>
+<div class="counter no-print">
+<span class="lang-en">Chosen: <b id="cnt-en">0</b> of 3</span>
+<span class="lang-es">Elegidas: <b id="cnt-es">0</b> de 3</span>
+</div>
+<p class="limit-note no-print" id="limitNote"></p>
+<!-- 1 -->
+<article class="entry" data-id="1" data-title-en="The Promise of the Spirit and the Birth of the Church &mdash; CTS digest" data-title-es="La Promesa del Espíritu y el Nacimiento de la Iglesia &mdash; resumen STC">
+<div class="locus"><span class="lang-en">Acts 1&ndash;2 &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">Hechos 1&ndash;2 &middot; un resumen biling&uuml;e del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">1.</span><span class="lang-en">The Promise of the Spirit and the Birth of the Church</span><span class="lang-es">La Promesa del Espíritu y el Nacimiento de la Iglesia</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">Acts as Luke’s sequel (what Jesus continued to do, by the Spirit): the ascension and the promise (Acts 1:8 mapping the whole book), the church beginning in prayer, Pentecost — the Spirit poured out, empowering witness across every language — Peter’s first sermon (the crucified and risen Lord, “repent and be baptized”), and the church born, devoted to the word, fellowship, and prayer.</p>
+<p class="caption lang-es block">Hechos como la continuación de Lucas (lo que Jesús siguió haciendo, por el Espíritu): la ascensión y la promesa (Hechos 1:8 trazando todo el libro), la iglesia comenzando en oración, Pentecostés — el Espíritu derramado, dando poder al testimonio en toda lengua — el primer sermón de Pedro (el Señor crucificado y resucitado, “arrepentíos y bautizaos”), y la iglesia nacida, entregada a la palabra, la comunión, y la oración.</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>The Promise of the Spirit and the Birth of the Church</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — Acts 1–2: the ascension, Pentecost, and the church born of the Spirit</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain expositions of Acts (Pierson, Campbell Morgan, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Book Study: Acts</li>
+<li>The Coming of the Spirit</li>
+<li>Pentecost</li>
+<li>Anchored in classics</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> The book of Acts, Luke's sequel to his Gospel, tells how the risen Christ went on working through His church by the Holy Spirit. This first reading walks through Acts 1–2 — the ascension and the promise, the outpouring of the Spirit at Pentecost, and the birth of the church.
+    </div>
+<h2><span class="dg-n">1.</span>The Sequel: the Acts of the Spirit</h2>
+<p>The book of Acts was written by Luke as the second volume of a two-part work; his Gospel was the first. And he ties the two together in his opening line, when he speaks of "the former account I made... of all that Jesus <em>began</em> both to do and teach." The word is quietly significant: if the Gospel told what Jesus <em>began</em> to do, then Acts tells what He <em>continued</em> to do — now from heaven, through His church, by His Spirit. The book is often called "The Acts of the Apostles," and the apostles are certainly in it; but many have felt that a truer title would be "The Acts of the Holy Spirit," for it is the Spirit who is the great actor from first to last. A. T. Pierson gave his study of the book exactly that name. And so we begin where the church itself began — not with a strategy or an organization, but with the promise and the coming of the Spirit of God.</p>
+<h2><span class="dg-n">2.</span>The Ascension and the Promise</h2>
+<p>For forty days after His resurrection the risen Jesus showed Himself alive to His disciples and taught them about the kingdom of God. Then, before returning to His Father, He gave them both a command and a promise. The command was to wait — to stay in Jerusalem until they received "the Promise of the Father," the baptism with the Holy Spirit. And the promise came in a single sentence that maps out the entire book: "You shall receive power when the Holy Spirit has come upon you; and you shall be witnesses to Me in Jerusalem, and in all Judea and Samaria, and to the end of the earth." Then, as they watched, He was taken up into heaven, and two angels promised that this same Jesus would one day return in the same way He had gone. The disciples came back to the city and gave themselves to prayer, waiting for what He had promised.</p>
+<h2><span class="dg-n">3.</span>Waiting and Prayer</h2>
+<p>It is worth noticing how the church began: not in a burst of busy activity, but in waiting and united prayer. About a hundred and twenty believers gathered together and "continued with one accord in prayer and supplication." During those days, led by Peter, they also chose Matthias to take the place among the twelve left empty by Judas. But mostly they simply waited, and prayed, and made themselves ready for the power that had been promised. There is a lesson here that the church has needed in every age: the work of God does not begin in human bustle and self-confidence, but in humble dependence upon Him. Before there was preaching, there was prayer; before there was power, there was waiting.</p>
+<h2><span class="dg-n">4.</span>Pentecost: the Spirit Poured Out</h2>
+<p>Then the day came. On the feast of Pentecost, as the believers were all together, the promise was suddenly fulfilled. There came a sound from heaven like a rushing mighty wind that filled the house; what looked like tongues of fire appeared and rested on each of them; "and they were all filled with the Holy Spirit and began to speak with other tongues, as the Spirit gave them utterance." Jerusalem at that feast was crowded with devout Jews from every nation under heaven, and they were astonished to hear these Galileans declaring the wonderful works of God — each visitor hearing it in his own native language. The Spirit had come; and the very first thing He did was to empower witness that leaped straight across the barriers of language. At Babel, long before, human pride had been scattered and languages confused; here, at Pentecost, the gospel begins to gather the nations back — a first bright foretaste of good news for every tongue and people on earth.</p>
+<h2><span class="dg-n">5.</span>Peter's Sermon: the First Gospel Proclamation</h2>
+<p>Then Peter stood up — Peter, who not long before had denied with oaths that he even knew Jesus — and now, filled with the Spirit, he preached the first Christian sermon. He explained that what the crowd was witnessing was the fulfillment of what the prophet Joel had foretold, the pouring out of God's Spirit. And then he preached Christ: Jesus of Nazareth, crucified by wicked hands, but raised by God from the dead, of which they were all witnesses. "God has made this Jesus, whom you crucified, both Lord and Christ." The word cut the hearers to the heart, and they cried out, "What shall we do?" Peter's answer is the gospel's own answer: "Repent, and let every one of you be baptized in the name of Jesus Christ for the remission of sins; and you shall receive the gift of the Holy Spirit." Turn from your sin, trust the crucified and risen Lord, be baptized in His name, and receive forgiveness and the Spirit — here, in Peter's very first sermon, is the message the church has carried ever since.</p>
+<h2><span class="dg-n">6.</span>The Birth of the Church</h2>
+<p>The response was astonishing. "Those who gladly received his word were baptized; and that day about three thousand souls were added to them." In a single day the tiny company of believers had become a great multitude: the church was born. And Luke leaves us a lovely portrait of its earliest life together. "They continued steadfastly in the apostles' doctrine and fellowship, in the breaking of bread, and in prayers." They shared what they had with any who were in need, they worshiped together with glad and sincere hearts, and they enjoyed the goodwill of the people around them — "and the Lord added to the church daily those who were being saved." Here is the Spirit-filled church in miniature, and a pattern for every age: a people devoted to the teaching of God's word, to real fellowship, to worship, to prayer, and to open-handed love, among whom the Lord Himself keeps adding the saved. And that is the great comfort of these opening chapters. Jesus ascended into heaven, but He did not leave His people powerless or alone. He sent the promised Holy Spirit, who filled ordinary disciples, gave them boldness to bear witness, and brought thousands to faith through the simple preaching of the gospel. That same Spirit, and that same gospel, are at work still. So take heart: the church is not built by our strength or cleverness, but by the Spirit of God. Our part is to wait on Him in prayer, and then to bear faithful witness to the risen Christ — and to trust the Spirit both to give the power and to save the souls.</p>
+<h2><span class="dg-n">7.</span>Taking It to Heart</h2>
+<div class="dg-reflect">
+<b>For reflection.</b> Do you begin the work of God as the first disciples did — in waiting and prayer — or do you rush ahead in your own strength? Does Peter's gospel — the crucified and risen Christ, repentance, forgiveness, the Spirit — still grip you? And is your own church life marked by the four things Luke names: the word, fellowship, the breaking of bread, and prayer?
+    </div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary survey of Acts 1–2, anchored in the classic public-domain expositions of Acts (A. T. Pierson's <em>The Acts of the Holy Spirit</em>, G. Campbell Morgan, and others), and in Scripture. This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This book study draws on a rich company of public-domain expositors of Acts — among them A. T. Pierson's <em>The Acts of the Holy Spirit</em>, and the expositions of G. Campbell Morgan, Charles Erdman, Joseph Parker, and others.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>La Promesa del Espíritu y el Nacimiento de la Iglesia</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — Hechos 1–2: la ascensión, Pentecostés, y la iglesia nacida del Espíritu</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en las exposiciones clásicas de dominio público de Hechos (Pierson, Campbell Morgan, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Estudio del Libro: Hechos</li>
+<li>La venida del Espíritu</li>
+<li>Pentecostés</li>
+<li>Anclado en clásicos</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> El libro de Hechos, la continuación de Lucas a su Evangelio, cuenta cómo el Cristo resucitado siguió obrando por medio de su iglesia por el Espíritu Santo. Esta primera lectura recorre Hechos 1–2 — la ascensión y la promesa, el derramamiento del Espíritu en Pentecostés, y el nacimiento de la iglesia.
+    </div>
+<h2><span class="dg-n">1.</span>La continuación: los Hechos del Espíritu</h2>
+<p>El libro de Hechos fue escrito por Lucas como el segundo tomo de una obra en dos partes; su Evangelio fue el primero. Y une los dos en su línea inicial, cuando habla de "el primer tratado... de todas las cosas que Jesús <em>comenzó</em> a hacer y a enseñar." La palabra es calladamente significativa: si el Evangelio contó lo que Jesús <em>comenzó</em> a hacer, entonces Hechos cuenta lo que <em>continuó</em> haciendo — ahora desde el cielo, por medio de su iglesia, por su Espíritu. El libro a menudo se llama "Los Hechos de los Apóstoles," y los apóstoles ciertamente están en él; pero muchos han sentido que un título más verdadero sería "Los Hechos del Espíritu Santo," porque es el Espíritu quien es el gran actor de principio a fin. A. T. Pierson dio a su estudio del libro exactamente ese nombre. Y así comenzamos donde la iglesia misma comenzó — no con una estrategia ni una organización, sino con la promesa y la venida del Espíritu de Dios.</p>
+<h2><span class="dg-n">2.</span>La ascensión y la promesa</h2>
+<p>Por cuarenta días después de su resurrección el Jesús resucitado se mostró vivo a sus discípulos y les enseñó acerca del reino de Dios. Luego, antes de volver a su Padre, les dio a la vez un mandato y una promesa. El mandato fue esperar — quedarse en Jerusalén hasta recibir "la promesa del Padre," el bautismo con el Espíritu Santo. Y la promesa vino en una sola oración que traza todo el libro: "Pero recibiréis poder, cuando haya venido sobre vosotros el Espíritu Santo, y me seréis testigos en Jerusalén, en toda Judea, en Samaria, y hasta lo último de la tierra." Luego, mientras miraban, fue alzado al cielo, y dos ángeles prometieron que este mismo Jesús algún día volvería de la misma manera que se había ido. Los discípulos volvieron a la ciudad y se entregaron a la oración, esperando lo que Él había prometido.</p>
+<h2><span class="dg-n">3.</span>La espera y la oración</h2>
+<p>Vale la pena notar cómo comenzó la iglesia: no en un estallido de actividad afanosa, sino en la espera y la oración unida. Unos ciento veinte creyentes se reunieron y "todos con unánime consentimiento perseveraban en oración y ruego." Durante aquellos días, guiados por Pedro, también escogieron a Matías para tomar el lugar entre los doce dejado vacío por Judas. Pero mayormente sencillamente esperaron, y oraron, y se prepararon para el poder que había sido prometido. Hay aquí una lección que la iglesia ha necesitado en toda época: la obra de Dios no comienza en el bullicio humano y la autoconfianza, sino en la humilde dependencia de Él. Antes de que hubiera predicación, hubo oración; antes de que hubiera poder, hubo espera.</p>
+<h2><span class="dg-n">4.</span>Pentecostés: el Espíritu derramado</h2>
+<p>Entonces llegó el día. En la fiesta de Pentecostés, mientras los creyentes estaban todos juntos, la promesa se cumplió de repente. Vino un estruendo del cielo como de un viento recio que soplaba, que llenó la casa; lo que parecían lenguas de fuego aparecieron y se asentaron sobre cada uno de ellos; "y fueron todos llenos del Espíritu Santo, y comenzaron a hablar en otras lenguas, según el Espíritu les daba que hablasen." Jerusalén en aquella fiesta estaba atestada de judíos piadosos de toda nación bajo el cielo, y quedaron atónitos al oír a estos galileos declarando las maravillas de Dios — cada visitante oyéndolo en su propia lengua materna. El Espíritu había venido; y lo primerísimo que hizo fue dar poder a un testimonio que saltó directamente por encima de las barreras del idioma. En Babel, mucho antes, el orgullo humano había sido esparcido y las lenguas confundidas; aquí, en Pentecostés, el evangelio comienza a reunir de nuevo a las naciones — una primera y brillante muestra de la buena nueva para toda lengua y pueblo de la tierra.</p>
+<h2><span class="dg-n">5.</span>El sermón de Pedro: la primera proclamación del evangelio</h2>
+<p>Entonces Pedro se puso de pie — Pedro, que no mucho antes había negado con juramentos que siquiera conocía a Jesús — y ahora, lleno del Espíritu, predicó el primer sermón cristiano. Explicó que lo que la multitud presenciaba era el cumplimiento de lo que el profeta Joel había predicho, el derramamiento del Espíritu de Dios. Y luego predicó a Cristo: Jesús de Nazaret, crucificado por manos inicuas, pero levantado por Dios de los muertos, de lo cual todos ellos eran testigos. "Dios ha hecho Señor y Cristo a este Jesús a quien vosotros crucificasteis." La palabra traspasó el corazón de los oyentes, y clamaron: "¿Qué haremos?" La respuesta de Pedro es la propia respuesta del evangelio: "Arrepentíos, y bautícese cada uno de vosotros en el nombre de Jesucristo para perdón de los pecados; y recibiréis el don del Espíritu Santo." Apartaos de vuestro pecado, confiad en el Señor crucificado y resucitado, sed bautizados en su nombre, y recibid el perdón y el Espíritu — aquí, en el primerísimo sermón de Pedro, está el mensaje que la iglesia ha llevado desde entonces.</p>
+<h2><span class="dg-n">6.</span>El nacimiento de la iglesia</h2>
+<p>La respuesta fue asombrosa. "Así que, los que recibieron su palabra fueron bautizados; y se añadieron aquel día como tres mil personas." En un solo día la diminuta compañía de creyentes se había vuelto una gran multitud: la iglesia había nacido. Y Lucas nos deja un hermoso retrato de su primerísima vida en común. "Y perseveraban en la doctrina de los apóstoles, y en la comunión, y en el partimiento del pan, y en las oraciones." Compartían lo que tenían con cualquiera que estuviera necesitado, adoraban juntos con corazones alegres y sinceros, y gozaban de la buena voluntad de la gente en torno a ellos — "y el Señor añadía cada día a la iglesia los que habían de ser salvos." He aquí la iglesia llena del Espíritu en miniatura, y un patrón para toda época: un pueblo entregado a la enseñanza de la palabra de Dios, a la verdadera comunión, a la adoración, a la oración, y al amor de mano abierta, entre el cual el Señor mismo sigue añadiendo a los salvos. Y ese es el gran consuelo de estos capítulos iniciales. Jesús ascendió al cielo, pero no dejó a su pueblo sin poder ni solo. Envió al prometido Espíritu Santo, que llenó a discípulos ordinarios, les dio denuedo para dar testimonio, y trajo a miles a la fe por la sencilla predicación del evangelio. Ese mismo Espíritu, y ese mismo evangelio, obran aún. Así que cobre ánimo: la iglesia no se edifica por nuestra fuerza ni astucia, sino por el Espíritu de Dios. Nuestra parte es esperar en Él en oración, y luego dar fiel testimonio del Cristo resucitado — y confiar en que el Espíritu dé tanto el poder como la salvación de las almas.</p>
+<h2><span class="dg-n">7.</span>Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<b>Para reflexionar.</b> ¿Comienza usted la obra de Dios como lo hicieron los primeros discípulos — en espera y oración — o se adelanta corriendo en su propia fuerza? ¿Le sigue asiendo el evangelio de Pedro — el Cristo crucificado y resucitado, el arrepentimiento, el perdón, el Espíritu? Y ¿está la vida de su propia iglesia marcada por las cuatro cosas que Lucas nombra: la palabra, la comunión, el partimiento del pan, y la oración?
+    </div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Un estudio del Seminario Teológico de Chapala sobre Hechos 1–2, anclado en las exposiciones clásicas de dominio público de Hechos (<em>The Acts of the Holy Spirit</em> de A. T. Pierson, G. Campbell Morgan, y otros), y en la Escritura. Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Este estudio del libro se apoya en una rica compañía de expositores de dominio público de Hechos — entre ellos <em>The Acts of the Holy Spirit</em> de A. T. Pierson, y las exposiciones de G. Campbell Morgan, Charles Erdman, Joseph Parker, y otros.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="1" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- 2 -->
+<article class="entry" data-id="2" data-title-en="Witness and Opposition in Jerusalem &mdash; CTS digest" data-title-es="Testimonio y Oposición en Jerusalén &mdash; resumen STC">
+<div class="locus"><span class="lang-en">Acts 3&ndash;7 &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">Hechos 3&ndash;7 &middot; un resumen biling&uuml;e del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">2.</span><span class="lang-en">Witness and Opposition in Jerusalem</span><span class="lang-es">Testimonio y Oposición en Jerusalén</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">The lame man healed and Peter’s bold witness before the Sanhedrin (“no other name,” “we cannot but speak”); the community of one heart and the solemn warning of Ananias and Sapphira; “we ought to obey God rather than men” and joy in suffering; the seven chosen for word and deed; and Stephen’s martyrdom — the first martyr dying like his Master, forgiving, his eyes on Jesus.</p>
+<p class="caption lang-es block">El cojo sanado y el audaz testimonio de Pedro ante el Sanedrín (“ningún otro nombre,” “no podemos dejar de decir”); la comunidad de un corazón y la solemne advertencia de Ananías y Safira; “es necesario obedecer a Dios antes que a los hombres” y el gozo en el sufrimiento; los siete escogidos para la palabra y la obra; y el martirio de Esteban — el primer mártir muriendo como su Maestro, perdonando, sus ojos en Jesús.</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>Witness and Opposition in Jerusalem</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — Acts 3–7: the church's bold witness, its growth, and its first martyr</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain expositions of Acts (Campbell Morgan, Erdman, Taylor, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Book Study: Acts</li>
+<li>Bold Witness</li>
+<li>The First Martyr</li>
+<li>Anchored in classics</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> After Pentecost, the young church begins its witness in Jerusalem — the first sphere named in Acts 1:8. This reading walks through Acts 3–7: the apostles' bold preaching, the church's growth, its first collisions with the authorities, and the martyrdom of Stephen.
+    </div>
+<h2><span class="dg-n">1.</span>The Church in Jerusalem: Witness Begins</h2>
+<p>With the Spirit poured out and the church born, the believers now begin to bear witness in Jerusalem, the very first sphere the risen Christ had named: "in Jerusalem, and in all Judea and Samaria, and to the end of the earth." Chapters 3 through 7 tell the story of that witness — the apostles preaching boldly, the church growing swiftly, and, before long, the first hard collision with the religious authorities, a collision that ends in the death of the church's first martyr. Through all of it one thing holds steady: the Spirit-filled apostles keep preaching Christ crucified and risen, the church keeps growing, and the opposition, however fierce, cannot stop the work. These chapters show us the church learning to stand, and even to grow, under pressure.</p>
+<h2><span class="dg-n">2.</span>The Lame Man Healed, and Boldness Before the Council</h2>
+<p>It begins with a miracle. Peter and John, going up to the temple to pray, meet a man lame from birth begging at the gate, and Peter says to him, "In the name of Jesus Christ of Nazareth, rise up and walk." The man leaps up healed, and a crowd gathers in amazement — whereupon Peter preaches again, careful to give all the glory to Jesus and none to himself, and calls the people to repent so that their sins may be blotted out. The healing and the preaching alarm the authorities, who arrest the two apostles; and yet, Luke notes, the church keeps growing, until the number of the men had reached about five thousand. Brought before the Sanhedrin — the very council that had condemned Jesus — Peter, filled with the Spirit, proclaims without flinching that salvation is found in Jesus alone: "Nor is there salvation in any other, for there is no other name under heaven given among men by which we must be saved." When they command the apostles to stop speaking in that name, Peter and John answer with words that ring down the centuries: "We cannot but speak the things which we have seen and heard." The believers gather and pray, not for safety but for boldness — and they are filled afresh with the Spirit. This church will not be silenced.</p>
+<h2><span class="dg-n">3.</span>The Community of Believers, and a Solemn Warning</h2>
+<p>Luke pauses to show us the inner life of this Spirit-filled community, and it is beautiful: "the multitude of those who believed were of one heart and one soul," and they shared their possessions so freely and gladly that no one among them was in need. But he sets right beside that picture a sobering account, lest we imagine the early church was flawless. A couple named Ananias and Sapphira sold a piece of property and brought part of the money, but pretended to be giving all of it — lying, Peter says, not merely to men but to the Holy Spirit — and they fell down dead, one after the other. Great fear came upon the whole church. It is a hard story, but its lesson is plain and important: hypocrisy before God is a deadly serious thing. The God who dwells in His church is holy, and He is not mocked. The generosity of the many was real and glad; but so was the danger of pretending, before God, to a devotion one does not have.</p>
+<h2><span class="dg-n">4.</span>“We Ought to Obey God Rather Than Men”</h2>
+<p>The apostles keep on healing and preaching, and more and more people are added to the Lord. The authorities, now filled with jealousy, arrest them again and throw them in prison — but an angel opens the doors by night, and by morning they are back in the temple, preaching as before. Hauled once more before the council and reminded of the order to be silent, Peter gives the great governing principle of all Christian obedience: "We ought to obey God rather than men." When some on the council are enraged enough to want them killed, a respected Pharisee named Gamaliel counsels caution: leave these men alone, he says, for if their work is merely human it will collapse on its own, but if it is of God, you will not be able to stop it — you might even find yourselves fighting against God. So the apostles are beaten and released; and they depart not licking their wounds but "rejoicing that they were counted worthy to suffer shame for His name," and they never stop preaching. Here is the church's answer to persecution: joy in suffering for Christ, and a witness that simply cannot be shut down.</p>
+<h2><span class="dg-n">5.</span>The Seven Chosen, and Stephen</h2>
+<p>As the church grows, a very practical difficulty arises: the Greek-speaking widows are being overlooked in the daily distribution of food. The apostles' response is wise. Rather than abandon prayer and preaching to manage the tables themselves, they have the church choose seven trustworthy men, "full of the Holy Spirit and wisdom," to take charge of this service, so that the apostles can give themselves to "prayer and to the ministry of the word." It is the church organizing itself to care for both word and deed, both souls and bodies. Among the seven is a man named Stephen, "full of faith and power," who does great wonders among the people and preaches with a wisdom his opponents cannot withstand. Unable to defeat him in argument, his enemies stir up false witnesses against him and drag him before the same council.</p>
+<h2><span class="dg-n">6.</span>Stephen's Witness and Martyrdom</h2>
+<p>Standing before the Sanhedrin, Stephen preaches a long and masterful sermon, tracing the whole history of Israel to show that God's people had again and again resisted God and rejected the messengers He sent — and that now, in their own day, they had betrayed and murdered the Righteous One Himself, Jesus. It is the boldness of the old prophets, and it enrages his hearers. But Stephen, full of the Holy Spirit, lifts his eyes and gazes into heaven, and sees the glory of God, and Jesus standing at God's right hand. They rush upon him, drag him out of the city, and stone him — and so Stephen becomes the church's first martyr. And he dies exactly as his Master had died: praying, "Lord Jesus, receive my spirit," and then, on his knees, "Lord, do not charge them with this sin." At his death, Luke quietly notes, the witnesses laid their coats at the feet of a young man named Saul — a name we will hear much more of. Stephen's death was not the end of him, and not a defeat for the church; it showed, once and for all, how a Christian dies: full of the Spirit, his eyes on Jesus, forgiving those who kill him. And this is the great encouragement of these chapters. Under mounting pressure the apostles healed and preached in Jesus's name, proclaimed salvation in Him alone, refused to be silenced, and counted it joy to suffer for Him; and Stephen showed the church how to die for its Lord. The persecution did not crush the church — it grew. For the same Spirit who filled those first believers is with Christ's people still. So take heart, especially where witness is costly: the gospel cannot be silenced, God stands with those who suffer for His name, and even a martyr's blood is never wasted.</p>
+<h2><span class="dg-n">7.</span>Taking It to Heart</h2>
+<div class="dg-reflect">
+<b>For reflection.</b> When you are pressured to be quiet about Christ, do you pray for safety, or, like the first believers, for boldness? Is there any hypocrisy in your walk — some pretense before God of a devotion you do not truly have? And could you say, with Stephen, that your eyes are so fixed on Jesus that you could even forgive those who wrong you?
+    </div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary survey of Acts 3–7, anchored in the classic public-domain expositions of Acts (G. Campbell Morgan, Charles Erdman, William Taylor's <em>Peter the Apostle</em>, and others), and in Scripture. This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This reading draws especially on the expositions of Acts by G. Campbell Morgan and Charles Erdman, and on William Taylor's <em>Peter the Apostle</em>, all in the public domain.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>Testimonio y Oposición en Jerusalén</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — Hechos 3–7: el testimonio audaz de la iglesia, su crecimiento, y su primer mártir</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en las exposiciones clásicas de dominio público de Hechos (Campbell Morgan, Erdman, Taylor, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Estudio del Libro: Hechos</li>
+<li>Testimonio audaz</li>
+<li>El primer mártir</li>
+<li>Anclado en clásicos</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> Tras Pentecostés, la joven iglesia comienza su testimonio en Jerusalén — la primera esfera nombrada en Hechos 1:8. Esta lectura recorre Hechos 3–7: la predicación audaz de los apóstoles, el crecimiento de la iglesia, sus primeros choques con las autoridades, y el martirio de Esteban.
+    </div>
+<h2><span class="dg-n">1.</span>La iglesia en Jerusalén: comienza el testimonio</h2>
+<p>Con el Espíritu derramado y la iglesia nacida, los creyentes ahora comienzan a dar testimonio en Jerusalén, la primerísima esfera que el Cristo resucitado había nombrado: "en Jerusalén, en toda Judea, en Samaria, y hasta lo último de la tierra." Los capítulos 3 al 7 cuentan la historia de ese testimonio — los apóstoles predicando audazmente, la iglesia creciendo velozmente, y, en poco tiempo, el primer duro choque con las autoridades religiosas, un choque que termina en la muerte del primer mártir de la iglesia. A través de todo ello una cosa se mantiene firme: los apóstoles llenos del Espíritu siguen predicando a Cristo crucificado y resucitado, la iglesia sigue creciendo, y la oposición, por feroz que sea, no puede detener la obra. Estos capítulos nos muestran a la iglesia aprendiendo a mantenerse en pie, y aun a crecer, bajo presión.</p>
+<h2><span class="dg-n">2.</span>El cojo sanado, y el denuedo ante el concilio</h2>
+<p>Comienza con un milagro. Pedro y Juan, subiendo al templo a orar, encuentran a un hombre cojo de nacimiento mendigando a la puerta, y Pedro le dice: "En el nombre de Jesucristo de Nazaret, levántate y anda." El hombre salta sanado, y una multitud se reúne asombrada — ante lo cual Pedro predica otra vez, con cuidado de dar toda la gloria a Jesús y nada a sí mismo, y llama al pueblo a arrepentirse para que sus pecados sean borrados. La sanidad y la predicación alarman a las autoridades, que arrestan a los dos apóstoles; y sin embargo, nota Lucas, la iglesia sigue creciendo, hasta que el número de los varones había llegado a unos cinco mil. Llevado ante el Sanedrín — el mismísimo concilio que había condenado a Jesús — Pedro, lleno del Espíritu, proclama sin vacilar que la salvación se halla solo en Jesús: "Y en ningún otro hay salvación; porque no hay otro nombre bajo el cielo, dado a los hombres, en que podamos ser salvos." Cuando les mandan a los apóstoles dejar de hablar en ese nombre, Pedro y Juan responden con palabras que resuenan por los siglos: "Porque no podemos dejar de decir lo que hemos visto y oído." Los creyentes se reúnen y oran, no por seguridad sino por denuedo — y son llenos de nuevo del Espíritu. Esta iglesia no será silenciada.</p>
+<h2><span class="dg-n">3.</span>La comunidad de creyentes, y una solemne advertencia</h2>
+<p>Lucas se detiene a mostrarnos la vida interior de esta comunidad llena del Espíritu, y es hermosa: "la multitud de los que habían creído era de un corazón y un alma," y compartían sus posesiones tan libre y alegremente que nadie entre ellos padecía necesidad. Pero pone justo al lado de ese cuadro un relato sobrio, no sea que imaginemos que la iglesia primitiva era sin falta. Un matrimonio llamado Ananías y Safira vendió una propiedad y trajo parte del dinero, pero fingió estar dando todo — mintiendo, dice Pedro, no meramente a los hombres sino al Espíritu Santo — y cayeron muertos, uno tras otro. Gran temor vino sobre toda la iglesia. Es una historia dura, pero su lección es clara e importante: la hipocresía delante de Dios es cosa mortalmente seria. El Dios que mora en su iglesia es santo, y no se deja burlar. La generosidad de los muchos era real y alegre; pero también lo era el peligro de fingir, delante de Dios, una devoción que uno no tiene.</p>
+<h2><span class="dg-n">4.</span>“Es necesario obedecer a Dios antes que a los hombres”</h2>
+<p>Los apóstoles siguen sanando y predicando, y más y más personas son añadidas al Señor. Las autoridades, ahora llenas de celos, los arrestan otra vez y los echan en la cárcel — pero un ángel abre las puertas de noche, y por la mañana están de vuelta en el templo, predicando como antes. Llevados una vez más ante el concilio y recordados de la orden de callar, Pedro da el gran principio rector de toda obediencia cristiana: "Es necesario obedecer a Dios antes que a los hombres." Cuando algunos del concilio se enfurecen lo bastante para querer matarlos, un respetado fariseo llamado Gamaliel aconseja cautela: dejad a estos hombres, dice, porque si su obra es meramente humana se derrumbará por sí sola, pero si es de Dios, no la podréis destruir — podríais aun hallaros luchando contra Dios. Así que los apóstoles son azotados y soltados; y se van no lamiendo sus heridas sino "gozosos de haber sido tenidos por dignos de padecer afrenta por causa del Nombre," y nunca dejan de predicar. He aquí la respuesta de la iglesia a la persecución: gozo en el sufrimiento por Cristo, y un testimonio que sencillamente no puede ser acallado.</p>
+<h2><span class="dg-n">5.</span>Los siete escogidos, y Esteban</h2>
+<p>Al crecer la iglesia surge una dificultad muy práctica: las viudas de habla griega están siendo desatendidas en la distribución diaria de alimentos. La respuesta de los apóstoles es sabia. En lugar de abandonar la oración y la predicación para atender las mesas ellos mismos, hacen que la iglesia escoja a siete hombres dignos de confianza, "llenos del Espíritu Santo y de sabiduría," para encargarse de este servicio, a fin de que los apóstoles puedan darse "a la oración y al ministerio de la palabra." Es la iglesia organizándose para atender tanto la palabra como la obra, tanto las almas como los cuerpos. Entre los siete hay un hombre llamado Esteban, "lleno de fe y de poder," que hace grandes prodigios entre el pueblo y predica con una sabiduría que sus oponentes no pueden resistir. Incapaces de vencerle en la discusión, sus enemigos levantan falsos testigos contra él y le arrastran ante el mismo concilio.</p>
+<h2><span class="dg-n">6.</span>El testimonio y el martirio de Esteban</h2>
+<p>De pie ante el Sanedrín, Esteban predica un sermón largo y magistral, trazando toda la historia de Israel para mostrar que el pueblo de Dios una y otra vez había resistido a Dios y rechazado a los mensajeros que Él envió — y que ahora, en sus propios días, habían traicionado y asesinado al Justo mismo, Jesús. Es el denuedo de los antiguos profetas, y enfurece a sus oyentes. Pero Esteban, lleno del Espíritu Santo, alza los ojos y mira al cielo, y ve la gloria de Dios, y a Jesús de pie a la diestra de Dios. Se lanzan sobre él, le arrastran fuera de la ciudad, y le apedrean — y así Esteban llega a ser el primer mártir de la iglesia. Y muere exactamente como su Maestro había muerto: orando, "Señor Jesús, recibe mi espíritu," y luego, de rodillas, "Señor, no les tomes en cuenta este pecado." A su muerte, nota calladamente Lucas, los testigos pusieron sus ropas a los pies de un joven llamado Saulo — un nombre del cual oiremos mucho más. La muerte de Esteban no fue su fin, ni una derrota para la iglesia; mostró, de una vez por todas, cómo muere un cristiano: lleno del Espíritu, sus ojos en Jesús, perdonando a los que le matan. Y este es el gran ánimo de estos capítulos. Bajo presión creciente los apóstoles sanaron y predicaron en el nombre de Jesús, proclamaron la salvación solo en Él, rehusaron ser silenciados, y tuvieron por gozo sufrir por Él; y Esteban mostró a la iglesia cómo morir por su Señor. La persecución no aplastó a la iglesia — creció. Porque el mismo Espíritu que llenó a aquellos primeros creyentes está con el pueblo de Cristo aún. Así que cobre ánimo, especialmente donde el testimonio es costoso: el evangelio no puede ser silenciado, Dios está con los que sufren por su nombre, y ni aun la sangre de un mártir se desperdicia jamás.</p>
+<h2><span class="dg-n">7.</span>Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<b>Para reflexionar.</b> Cuando se le presiona a callar acerca de Cristo, ¿ora por seguridad, o, como los primeros creyentes, por denuedo? ¿Hay alguna hipocresía en su andar — algún fingimiento delante de Dios de una devoción que en verdad no tiene? Y ¿podría decir, con Esteban, que sus ojos están tan fijos en Jesús que podría aun perdonar a los que le hacen mal?
+    </div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Un estudio del Seminario Teológico de Chapala sobre Hechos 3–7, anclado en las exposiciones clásicas de dominio público de Hechos (G. Campbell Morgan, Charles Erdman, <em>Peter the Apostle</em> de William Taylor, y otros), y en la Escritura. Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Esta lectura se apoya especialmente en las exposiciones de Hechos de G. Campbell Morgan y Charles Erdman, y en <em>Peter the Apostle</em> de William Taylor, todas en el dominio público.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="2" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- 3 -->
+<article class="entry" data-id="3" data-title-en="The Gospel Breaks Out: Samaria, Saul, and the Gentiles &mdash; CTS digest" data-title-es="El Evangelio Irrumpe: Samaria, Saulo, y los Gentiles &mdash; resumen STC">
+<div class="locus"><span class="lang-en">Acts 8&ndash;12 &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">Hechos 8&ndash;12 &middot; un resumen biling&uuml;e del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">3.</span><span class="lang-en">The Gospel Breaks Out: Samaria, Saul, and the Gentiles</span><span class="lang-es">El Evangelio Irrumpe: Samaria, Saulo, y los Gentiles</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">Persecution scattering the church and spreading the word; Philip in Samaria and with the Ethiopian (Isaiah 53 opened to Jesus); the conversion of Saul (grace conquering Christ’s fiercest enemy — no one beyond grace); Peter and Cornelius as the door opens to the Gentiles (“God shows no partiality”); and Antioch, Peter’s rescue, and the word that “grew and multiplied.”</p>
+<p class="caption lang-es block">La persecución esparciendo la iglesia y extendiendo la palabra; Felipe en Samaria y con el etíope (Isaías 53 abierto a Jesús); la conversión de Saulo (la gracia conquistando al enemigo más feroz de Cristo — nadie más allá de la gracia); Pedro y Cornelio al abrirse la puerta a los gentiles (“Dios no hace acepción de personas”); y Antioquía, el rescate de Pedro, y la palabra que “crecía y se multiplicaba.”</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>The Gospel Breaks Out: Samaria, Saul, and the Gentiles</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — Acts 8–12: the word spreads beyond Jerusalem, and the door of faith opens to all</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain expositions of Acts (Campbell Morgan, Taylor, Conybeare &amp; Howson, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Book Study: Acts</li>
+<li>The Gospel Crosses Barriers</li>
+<li>Grace for the Worst</li>
+<li>Anchored in classics</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> Stephen's death sets off a persecution that scatters the church — and the scattering only spreads the gospel further. This reading walks through Acts 8–12: the word reaching Samaria and an Ethiopian, the dramatic conversion of Saul, and the opening of the door of faith to the Gentiles.
+    </div>
+<h2><span class="dg-n">1.</span>The Gospel Spreads Beyond Jerusalem</h2>
+<p>Stephen's martyrdom touched off a great wave of persecution, and the believers were scattered from Jerusalem throughout the surrounding regions. It looked like a disaster; it proved to be a mission. For "those who were scattered went everywhere preaching the word." What the enemies of the church meant to stamp out the gospel, God used to carry it further than it had yet gone. Chapters 8 through 12 show the good news breaking out of Jerusalem and moving into the next spheres the Lord had named — into Judea and Samaria, and then, astonishingly, toward the Gentiles and the ends of the earth. And in these chapters we watch the gospel cross one barrier after another: to the despised Samaritans, to an African official, to the church's fiercest enemy, and at last to the Gentile world.</p>
+<h2><span class="dg-n">2.</span>Philip in Samaria and the Ethiopian</h2>
+<p>Philip — one of the seven — went down to a city of Samaria and preached Christ there. The Samaritans were a people the Jews had despised for centuries; yet the gospel leaped that ancient wall, many believed, and there was great joy in the city. Then the Spirit sent Philip out along a desert road to meet a single traveler: an Ethiopian, a court official on his way home, sitting in his chariot and puzzling over the words of Isaiah about a lamb led to the slaughter. Philip ran up, and "beginning at this Scripture, preached Jesus to him" — showing him that the suffering servant of Isaiah 53 was Christ. The Ethiopian believed, was baptized on the spot, and "went on his way rejoicing," carrying the gospel home to Africa. In one short chapter, the good news has reached both Samaria and a far continent.</p>
+<h2><span class="dg-n">3.</span>The Conversion of Saul</h2>
+<p>Now comes the most dramatic turn in the whole book. Saul of Tarsus was the church's most dangerous enemy — a man who had approved of Stephen's death and was, in Luke's chilling phrase, "breathing threats and murder against the disciples of the Lord." He was on the road to Damascus, armed with authority to arrest believers and drag them back to prison, when suddenly a light from heaven blazed around him, and he fell to the ground, and a voice said: "Saul, Saul, why are you persecuting Me?" It was the risen Jesus, who counts an attack on His people as an attack on Himself. Struck blind, Saul was led by the hand into Damascus; and there God sent to him a frightened disciple named Ananias, who laid his hands on the very man who had come to arrest him. Saul was filled with the Spirit, his sight returned, he was baptized — and at once he began to preach in the synagogues that Jesus is the Son of God. The persecutor had become the preacher. It is grace at its most breathtaking: God reached down and saved His worst enemy, and then made that enemy His chief messenger to the nations.</p>
+<h2><span class="dg-n">4.</span>Grace for the Worst</h2>
+<div class="dg-note">
+<b>Do not hurry past this.</b> If God could save <em>Saul</em> — a man who consented to murder, a violent and determined enemy of Christ — then there is no one, anywhere, who is beyond the reach of His grace. Saul himself, who became the apostle Paul, never got over it; he would later call himself the very chief of sinners, and say that he had been shown mercy precisely as a pattern, so that no one after him should ever despair of being saved. The conversion of Saul stands forever as the great proof that grace can reach and conquer the hardest heart alive. And it carries a plain charge for us: never write anyone off, and never stop praying for your enemies and persecutors — for the God who turned Saul the murderer into Paul the apostle can turn them, too, into brothers.
+    </div>
+<h2><span class="dg-n">5.</span>Peter and Cornelius: the Gospel to the Gentiles</h2>
+<p>Then the last and greatest barrier of all comes down. Up to now the gospel had gone to Jews, and to Samaritans who were half-Jewish, and to a God-fearing foreigner — but the full inclusion of the Gentiles, the non-Jewish nations, was a wall no one had yet dared to cross. So God moved Peter Himself. In a vision, God overturned Peter's lifelong assumption that Gentiles were unclean, and then sent him to the house of Cornelius, a Roman centurion — a devout Gentile who feared God. Peter went, and said to the gathered household, "God has shown me that I should not call any man common or unclean," and then, wonderingly, "In truth I perceive that God shows no partiality." And as Peter preached the gospel of Jesus, the Holy Spirit fell upon these Gentiles exactly as He had fallen on the Jewish believers at Pentecost, and they were baptized. The door of faith had been thrown open to the Gentiles. When some believers back in Jerusalem objected, Peter simply told them the story, and they fell silent and then glorified God, saying, "Then God has also granted to the Gentiles repentance to life." The gospel, it was now beyond doubt, is for all peoples.</p>
+<h2><span class="dg-n">6.</span>Antioch, Peter's Deliverance, and the Unstoppable Word</h2>
+<p>Meanwhile, some of the scattered believers had gone as far as Antioch, a great Gentile city, and begun preaching to Greeks there; and a large number believed. Barnabas and Saul spent a whole year teaching this new congregation — and it was there, Luke tells us, that "the disciples were first called Christians." Antioch became a second great center of the faith, a largely Gentile church that would soon be sending missionaries of its own to the ends of the earth. But the opposition had not vanished. King Herod laid violent hands on the church, killed James the brother of John with the sword, and threw Peter into prison, meaning to kill him too. The church, however, gathered and prayed earnestly for him — and God sent an angel who led Peter out of the prison in the night, past the guards and through the iron gate. Herod, who soon after let a crowd hail him as a god and took the glory for himself, was struck down by the Lord. And Luke sums up the whole chapter, and the whole section, in one triumphant line: "But the word of God grew and multiplied." And that is the great encouragement of these chapters. Under persecution the church was scattered — and the gospel only spread. It reached the Samaritans, an African, the arch-persecutor Saul, and the Gentile world, for "God shows no partiality." No barrier of race, or region, or hatred could stop it; and the conversion of Saul declared for all time that no single soul is beyond the reach of grace. So take heart: the gospel is for every people on earth, God can save even His fiercest enemies, and His word can never be chained — it grows and multiplies still. Pray boldly, even for those who oppose you, and carry the good news across every barrier you meet.</p>
+<h2><span class="dg-n">7.</span>Taking It to Heart</h2>
+<div class="dg-reflect">
+<b>For reflection.</b> Is there anyone you have secretly written off as beyond saving — and does the conversion of Saul rebuke that? Do you truly believe, and live as if, "God shows no partiality" — that the gospel is for every kind of person? And when opposition comes against the work of God, do you expect it to end the work, or to spread it?
+    </div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary survey of Acts 8–12, anchored in the classic public-domain expositions of Acts (G. Campbell Morgan, William Taylor's <em>Peter the Apostle</em>, Conybeare &amp; Howson's <em>Life and Epistles of St. Paul</em>, and others), and in Scripture. This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This reading draws especially on G. Campbell Morgan and William Taylor on Acts, and on Conybeare &amp; Howson's classic <em>Life and Epistles of St. Paul</em> for the conversion of Saul, all in the public domain.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>El Evangelio Irrumpe: Samaria, Saulo, y los Gentiles</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — Hechos 8–12: la palabra se extiende más allá de Jerusalén, y la puerta de la fe se abre a todos</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en las exposiciones clásicas de dominio público de Hechos (Campbell Morgan, Taylor, Conybeare y Howson, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Estudio del Libro: Hechos</li>
+<li>El evangelio cruza barreras</li>
+<li>Gracia para el peor</li>
+<li>Anclado en clásicos</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> La muerte de Esteban desata una persecución que esparce a la iglesia — y el esparcimiento solo extiende más el evangelio. Esta lectura recorre Hechos 8–12: la palabra llegando a Samaria y a un etíope, la dramática conversión de Saulo, y la apertura de la puerta de la fe a los gentiles.
+    </div>
+<h2><span class="dg-n">1.</span>El evangelio se extiende más allá de Jerusalén</h2>
+<p>El martirio de Esteban desató una gran ola de persecución, y los creyentes fueron esparcidos de Jerusalén por las regiones circundantes. Parecía un desastre; resultó ser una misión. Porque "los que fueron esparcidos iban por todas partes anunciando el evangelio." Lo que los enemigos de la iglesia quisieron usar para apagar el evangelio, Dios lo usó para llevarlo más lejos de lo que había ido aún. Los capítulos 8 al 12 muestran la buena nueva irrumpiendo fuera de Jerusalén y moviéndose a las siguientes esferas que el Señor había nombrado — a Judea y Samaria, y luego, asombrosamente, hacia los gentiles y lo último de la tierra. Y en estos capítulos vemos al evangelio cruzar una barrera tras otra: a los despreciados samaritanos, a un oficial africano, al enemigo más feroz de la iglesia, y al fin al mundo gentil.</p>
+<h2><span class="dg-n">2.</span>Felipe en Samaria y el etíope</h2>
+<p>Felipe — uno de los siete — descendió a una ciudad de Samaria y predicó allí a Cristo. Los samaritanos eran un pueblo que los judíos habían despreciado por siglos; sin embargo, el evangelio saltó ese antiguo muro, muchos creyeron, y hubo gran gozo en la ciudad. Luego el Espíritu envió a Felipe por un camino desierto a encontrar a un solo viajero: un etíope, un oficial de la corte de camino a casa, sentado en su carro y desconcertado ante las palabras de Isaías sobre un cordero llevado al matadero. Felipe corrió, y "comenzando desde esta escritura, le anunció el evangelio de Jesús" — mostrándole que el siervo sufriente de Isaías 53 era Cristo. El etíope creyó, fue bautizado allí mismo, y "siguió gozoso su camino," llevando el evangelio a casa a África. En un solo capítulo corto, la buena nueva ha llegado tanto a Samaria como a un lejano continente.</p>
+<h2><span class="dg-n">3.</span>La conversión de Saulo</h2>
+<p>Ahora viene el giro más dramático de todo el libro. Saulo de Tarso era el enemigo más peligroso de la iglesia — un hombre que había consentido en la muerte de Esteban y estaba, en la escalofriante frase de Lucas, "respirando aún amenazas y muerte contra los discípulos del Señor." Iba de camino a Damasco, armado con autoridad para arrestar a los creyentes y arrastrarlos de vuelta a la cárcel, cuando de repente una luz del cielo resplandeció a su alrededor, y cayó a tierra, y una voz dijo: "Saulo, Saulo, ¿por qué me persigues?" Era el Jesús resucitado, que cuenta un ataque a su pueblo como un ataque a sí mismo. Herido de ceguera, Saulo fue llevado de la mano a Damasco; y allí Dios le envió a un asustado discípulo llamado Ananías, que puso sus manos sobre el mismísimo hombre que había venido a arrestarle. Saulo fue lleno del Espíritu, su vista volvió, fue bautizado — y en seguida comenzó a predicar en las sinagogas que Jesús es el Hijo de Dios. El perseguidor se había vuelto el predicador. Es la gracia en su forma más impresionante: Dios extendió su mano y salvó a su peor enemigo, y luego hizo de ese enemigo su principal mensajero a las naciones.</p>
+<h2><span class="dg-n">4.</span>Gracia para el peor</h2>
+<div class="dg-note">
+<b>No pase de largo por esto.</b> Si Dios pudo salvar a <em>Saulo</em> — un hombre que consintió en el asesinato, un enemigo violento y decidido de Cristo — entonces no hay nadie, en ninguna parte, que esté más allá del alcance de su gracia. El propio Saulo, que llegó a ser el apóstol Pablo, nunca lo superó; más tarde se llamaría a sí mismo el primero de los pecadores, y diría que se le había mostrado misericordia precisamente como ejemplo, para que nadie después de él desesperara jamás de ser salvo. La conversión de Saulo permanece para siempre como la gran prueba de que la gracia puede alcanzar y conquistar al corazón más duro que exista. Y lleva un claro encargo para nosotros: nunca dé a nadie por perdido, y nunca deje de orar por sus enemigos y perseguidores — porque el Dios que convirtió a Saulo el asesino en Pablo el apóstol puede convertirlos a ellos, también, en hermanos.
+    </div>
+<h2><span class="dg-n">5.</span>Pedro y Cornelio: el evangelio a los gentiles</h2>
+<p>Entonces cae la última y mayor barrera de todas. Hasta ahora el evangelio había ido a los judíos, y a los samaritanos que eran medio judíos, y a un extranjero temeroso de Dios — pero la plena inclusión de los gentiles, las naciones no judías, era un muro que nadie se había atrevido aún a cruzar. Así que Dios movió al mismísimo Pedro. En una visión, Dios volcó la suposición de toda la vida de Pedro de que los gentiles eran inmundos, y luego le envió a la casa de Cornelio, un centurión romano — un gentil devoto que temía a Dios. Pedro fue, y dijo a la casa reunida: "Dios me ha mostrado que a ningún hombre llame común o inmundo," y luego, maravillado: "En verdad comprendo que Dios no hace acepción de personas." Y mientras Pedro predicaba el evangelio de Jesús, el Espíritu Santo cayó sobre estos gentiles exactamente como había caído sobre los creyentes judíos en Pentecostés, y fueron bautizados. La puerta de la fe había sido abierta de par en par a los gentiles. Cuando algunos creyentes en Jerusalén objetaron, Pedro sencillamente les contó la historia, y callaron y luego glorificaron a Dios, diciendo: "De manera que también a los gentiles ha dado Dios arrepentimiento para vida." El evangelio, ahora estaba fuera de duda, es para todos los pueblos.</p>
+<h2><span class="dg-n">6.</span>Antioquía, la liberación de Pedro, y la palabra imparable</h2>
+<p>Mientras tanto, algunos de los creyentes esparcidos habían llegado hasta Antioquía, una gran ciudad gentil, y comenzado a predicar allí a los griegos; y un gran número creyó. Bernabé y Saulo pasaron todo un año enseñando a esta nueva congregación — y fue allí, nos dice Lucas, que "a los discípulos se les llamó cristianos por primera vez." Antioquía llegó a ser un segundo gran centro de la fe, una iglesia mayormente gentil que pronto estaría enviando sus propios misioneros a lo último de la tierra. Pero la oposición no había desaparecido. El rey Herodes echó mano violenta sobre la iglesia, mató a espada a Jacobo el hermano de Juan, y echó a Pedro en la cárcel, con intención de matarle también. La iglesia, sin embargo, se reunió y oró fervientemente por él — y Dios envió un ángel que sacó a Pedro de la cárcel en la noche, pasando a los guardias y a través de la puerta de hierro. Herodes, que poco después dejó que una multitud le aclamara como un dios y tomó la gloria para sí, fue herido por el Señor. Y Lucas resume todo el capítulo, y toda la sección, en una línea triunfante: "Pero la palabra del Señor crecía y se multiplicaba." Y ese es el gran ánimo de estos capítulos. Bajo persecución la iglesia fue esparcida — y el evangelio solo se extendió. Llegó a los samaritanos, a un africano, al archiperseguidor Saulo, y al mundo gentil, porque "Dios no hace acepción de personas." Ninguna barrera de raza, ni de región, ni de odio pudo detenerlo; y la conversión de Saulo declaró para siempre que ni una sola alma está más allá del alcance de la gracia. Así que cobre ánimo: el evangelio es para todo pueblo de la tierra, Dios puede salvar aun a sus enemigos más feroces, y su palabra nunca puede ser encadenada — crece y se multiplica aún. Ore con denuedo, aun por los que se le oponen, y lleve la buena nueva a través de toda barrera que encuentre.</p>
+<h2><span class="dg-n">7.</span>Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<b>Para reflexionar.</b> ¿Hay alguien a quien haya dado secretamente por imposible de salvar — y le reprende eso la conversión de Saulo? ¿Cree de veras, y vive como si, "Dios no hace acepción de personas" — que el evangelio es para toda clase de persona? Y cuando la oposición viene contra la obra de Dios, ¿espera usted que termine la obra, o que la extienda?
+    </div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Un estudio del Seminario Teológico de Chapala sobre Hechos 8–12, anclado en las exposiciones clásicas de dominio público de Hechos (G. Campbell Morgan, <em>Peter the Apostle</em> de William Taylor, <em>Life and Epistles of St. Paul</em> de Conybeare y Howson, y otros), y en la Escritura. Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Esta lectura se apoya especialmente en G. Campbell Morgan y William Taylor sobre Hechos, y en el clásico <em>Life and Epistles of St. Paul</em> de Conybeare y Howson para la conversión de Saulo, todos en el dominio público.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="3" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- 4 -->
+<article class="entry" data-id="4" data-title-en="To the Ends of the Earth: Paul’s Missionary Journeys &mdash; CTS digest" data-title-es="Hasta lo Último de la Tierra: Los Viajes Misioneros de Pablo &mdash; resumen STC">
+<div class="locus"><span class="lang-en">Acts 13&ndash;20 &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">Hechos 13&ndash;20 &middot; un resumen biling&uuml;e del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">4.</span><span class="lang-en">To the Ends of the Earth: Paul’s Missionary Journeys</span><span class="lang-es">Hasta lo Último de la Tierra: Los Viajes Misioneros de Pablo</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">The Spirit sending Barnabas and Saul from Antioch; one gospel preached to Jew and Gentile with an adapted approach; the Jerusalem Council settling salvation as grace-not-law for all; the journeys across the Roman world (Philippi’s jailer, Athens’ unknown God, Ephesus); and Paul’s pastor-heart to the Ephesian elders — tears, the whole counsel of God, the flock purchased with His own blood.</p>
+<p class="caption lang-es block">El Espíritu enviando a Bernabé y a Saulo desde Antioquía; un evangelio predicado a judío y gentil con un enfoque adaptado; el Concilio de Jerusalén estableciendo la salvación como gracia y no ley para todos; los viajes por el mundo romano (el carcelero de Filipos, el Dios no conocido de Atenas, Éfeso); y el corazón de pastor de Pablo a los ancianos de Éfeso — lágrimas, todo el consejo de Dios, la iglesia ganada por su propia sangre.</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>To the Ends of the Earth: Paul's Missionary Journeys</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — Acts 13–20: the gospel carried across the Roman world, and salvation settled as grace for all</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain expositions of Acts and Paul (Conybeare &amp; Howson, Ramsay, Roland Allen, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Book Study: Acts</li>
+<li>The Missionary Journeys</li>
+<li>Grace, Not Law</li>
+<li>Anchored in classics</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> With the gospel now open to the Gentiles and a strong church at Antioch, the third and greatest sphere of Acts 1:8 — "to the end of the earth" — opens at last. This reading walks through Acts 13–20: Paul's missionary journeys, the Jerusalem Council settling salvation as grace and not law, and churches planted across the Roman world.
+    </div>
+<h2><span class="dg-n">1.</span>The Mission to the Nations Begins</h2>
+<p>The door to the Gentiles has been opened, and a vigorous, largely Gentile church is thriving at Antioch. Now the last and largest sphere the risen Christ had named — "to the end of the earth" — swings open. Chapters 13 through 20 tell the story of Paul's missionary journeys: three great campaigns that carried the good news out from Antioch, across Asia Minor, over into Greece and Europe, and back again. The whole center of gravity of the book shifts here — from Peter to Paul, and from Jerusalem to the wide Gentile world. What we are watching is nothing less than the birth of Christian missions, the pattern that Roland Allen and countless missionaries after him would study for centuries to come.</p>
+<h2><span class="dg-n">2.</span>Sent by the Spirit from Antioch</h2>
+<p>It is worth marking how the whole enterprise begins — not with a committee's strategy or one man's ambition, but with the direct call of the Spirit. As the church at Antioch worshiped the Lord and fasted, the Holy Spirit said, "Separate to Me Barnabas and Saul for the work to which I have called them." The church laid its hands on them, and sent them off. (From this point on, Luke calls Saul by his Roman name, Paul.) The first journey took them to Cyprus and up into the cities of Asia Minor, and everywhere Paul followed a settled pattern. He went first to the Jewish synagogue and preached Christ from the Scriptures to his own people; and then, when many of them rejected the message, he turned to the Gentiles, who received it gladly. "We turn to the Gentiles," he announced — and turn he did, all the way to the ends of the earth.</p>
+<h2><span class="dg-n">3.</span>Preaching Christ to Jew and Gentile</h2>
+<p>Paul was a wise preacher, and he suited his approach to his hearers. In the synagogues, speaking to people who knew the Scriptures, he preached Jesus as the promised Messiah, tracing the line of prophecy to show that this Son of David had been crucified and raised, and that through Him forgiveness of sins was now offered to all who believe. But when he stood before pagans who had no Bible at all — as at Lystra, and later at Athens — he began somewhere else entirely: with the living God who made heaven and earth, and who had never left Himself without witness, giving rain and fruitful seasons and filling hearts with gladness. The starting point shifted with the audience; but the destination never did. Always he came, in the end, to the same place: Jesus, crucified and risen, and the call to turn from idols and dead works to the living God. The gospel is one; only the road in varies.</p>
+<h2><span class="dg-n">4.</span>The Jerusalem Council: Saved by Grace, Not Law</h2>
+<p>As Gentiles poured into the church, a question arose that could have split the whole movement in two: did these Gentile believers have to be circumcised and keep the law of Moses in order to be saved? Some men insisted that they must. And so the matter was brought to the Jerusalem Council — the single most important church meeting in the book of Acts. There Peter stood and reminded them how God had given the Gentiles the very same Holy Spirit, and "made no distinction between us and them, purifying their hearts by faith." Then he said it plainly: "We believe that through the grace of the Lord Jesus Christ we shall be saved in the same manner as they." James agreed, and the council ruled: the Gentiles are saved by grace, through faith, and are not to be burdened with the law. It is a landmark decision, and the very heartbeat of the gospel: salvation is by grace, for Jew and Gentile alike, apart from the works of the law. What Paul would write at length to the Romans and the Galatians, the church here declared with one voice.</p>
+<h2><span class="dg-n">5.</span>Across the Roman World</h2>
+<p>The second and third journeys carried Paul deeper still, across the sea and into Europe itself, and Luke fills the account with unforgettable scenes. At Philippi, a businesswoman named Lydia believed, a tormented slave girl was set free, and Paul and Silas, beaten and chained in the inner prison, sang hymns to God at midnight until an earthquake shook the doors open — and the jailer, trembling, cried out, "What must I do to be saved?" and heard the simplest of answers: "Believe on the Lord Jesus Christ, and you will be saved, you and your household." At Athens, Paul stood among the philosophers and, pointing to their altar inscribed "TO THE UNKNOWN GOD," told them of the true God who made the world, who now commands all men everywhere to repent, and who has appointed a Man, Jesus, to judge the world — giving proof of it by raising Him from the dead. At Corinth and at Ephesus he stayed for long stretches, teaching, until "the word of the Lord grew mightily and prevailed," so that even the idol-makers of Ephesus felt their trade shaking. City by city, congregation by congregation, the churches were planted across the empire.</p>
+<h2><span class="dg-n">6.</span>Paul's Heart, and the Call That Remains</h2>
+<p>As the third journey drew toward its close, Paul called the elders of the Ephesian church to meet him, and poured out his pastor's heart in a way that has moved every faithful minister since. He reminded them how he had served the Lord among them "with all humility, with many tears," never shrinking from declaring to them "the whole counsel of God," teaching publicly and from house to house, and warning every one of them night and day, with tears. He charged them solemnly to shepherd the flock of God, "which He purchased with His own blood," and warned them that fierce dangers would come. Then he knelt and prayed with them, commended them "to God and to the word of His grace," and left them with a saying of the Lord Jesus they must never forget: "It is more blessed to give than to receive." Here, laid bare, is the true missionary heart: tireless labor, honest tears, faithful teaching of the whole counsel of God, and a deep love for the churches. And this is the great encouragement of these chapters. Sent out by the Spirit, Paul preached Christ to Jew and Gentile, planted churches across the known world, and saw the church settle forever that salvation is by grace, not law, for every people on earth. The work was costly beyond telling — opposition, beatings, prison, and tears — and yet the word of the Lord grew mightily and prevailed. And the very same call still rests upon the church of Christ: to carry this gospel of grace across every border, in the power of the same Spirit, whatever it may cost. So take heart, and take up the work. The God who sent out Paul is sending His church still, and His word will prevail.</p>
+<h2><span class="dg-n">7.</span>Taking It to Heart</h2>
+<div class="dg-reflect">
+<b>For reflection.</b> Do you begin your work for God, as Antioch did, by listening for the Spirit's call and sending in prayer? Have you truly grasped what the Jerusalem Council settled — that you are saved by grace, and not by any law-keeping of your own? And does anything of Paul's heart — the labor, the tears, the whole counsel of God — mark your own care for the people around you?
+    </div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary survey of Acts 13–20, anchored in the classic public-domain expositions of Acts and of Paul (Conybeare &amp; Howson's <em>Life and Epistles of St. Paul</em>, W. M. Ramsay's <em>St. Paul the Traveller</em>, Roland Allen's <em>Missionary Methods</em>, and others), and in Scripture. This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This reading draws especially on Conybeare &amp; Howson and W. M. Ramsay for Paul's travels, and on Roland Allen's <em>Missionary Methods: St. Paul's or Ours?</em> for the pattern of his mission, all in the public domain.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>Hasta lo Último de la Tierra: Los Viajes Misioneros de Pablo</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — Hechos 13–20: el evangelio llevado por el mundo romano, y la salvación establecida como gracia para todos</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en las exposiciones clásicas de dominio público de Hechos y de Pablo (Conybeare y Howson, Ramsay, Roland Allen, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Estudio del Libro: Hechos</li>
+<li>Los viajes misioneros</li>
+<li>Gracia, no ley</li>
+<li>Anclado en clásicos</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> Con el evangelio ahora abierto a los gentiles y una iglesia fuerte en Antioquía, la tercera y mayor esfera de Hechos 1:8 — "hasta lo último de la tierra" — se abre al fin. Esta lectura recorre Hechos 13–20: los viajes misioneros de Pablo, el Concilio de Jerusalén estableciendo la salvación como gracia y no ley, e iglesias plantadas por todo el mundo romano.
+    </div>
+<h2><span class="dg-n">1.</span>Comienza la misión a las naciones</h2>
+<p>La puerta a los gentiles ha sido abierta, y una iglesia vigorosa y mayormente gentil prospera en Antioquía. Ahora la última y mayor esfera que el Cristo resucitado había nombrado — "hasta lo último de la tierra" — se abre de par en par. Los capítulos 13 al 20 cuentan la historia de los viajes misioneros de Pablo: tres grandes campañas que llevaron la buena nueva desde Antioquía, por Asia Menor, cruzando a Grecia y Europa, y de vuelta. Todo el centro de gravedad del libro se desplaza aquí — de Pedro a Pablo, y de Jerusalén al ancho mundo gentil. Lo que presenciamos no es nada menos que el nacimiento de las misiones cristianas, el patrón que Roland Allen e incontables misioneros después de él estudiarían por siglos venideros.</p>
+<h2><span class="dg-n">2.</span>Enviados por el Espíritu desde Antioquía</h2>
+<p>Vale la pena marcar cómo comienza toda la empresa — no con la estrategia de un comité ni la ambición de un hombre, sino con el llamado directo del Espíritu. Mientras la iglesia en Antioquía adoraba al Señor y ayunaba, el Espíritu Santo dijo: "Apartadme a Bernabé y a Saulo para la obra a que los he llamado." La iglesia les impuso las manos, y los envió. (De este punto en adelante, Lucas llama a Saulo por su nombre romano, Pablo.) El primer viaje los llevó a Chipre y a las ciudades de Asia Menor, y en todas partes Pablo siguió un patrón establecido. Iba primero a la sinagoga judía y predicaba a Cristo desde las Escrituras a su propio pueblo; y luego, cuando muchos de ellos rechazaban el mensaje, se volvía a los gentiles, que lo recibían con gozo. "Nos volvemos a los gentiles," anunció — y volverse hizo, hasta lo último de la tierra.</p>
+<h2><span class="dg-n">3.</span>Predicando a Cristo a judío y gentil</h2>
+<p>Pablo era un predicador sabio, y adecuaba su enfoque a sus oyentes. En las sinagogas, hablando a gente que conocía las Escrituras, predicaba a Jesús como el Mesías prometido, trazando la línea de la profecía para mostrar que este Hijo de David había sido crucificado y levantado, y que por medio de Él se ofrecía ahora el perdón de los pecados a todo el que crea. Pero cuando estaba de pie ante paganos que no tenían Biblia alguna — como en Listra, y más tarde en Atenas — comenzaba en un lugar enteramente distinto: con el Dios vivo que hizo el cielo y la tierra, y que nunca se había dejado a sí mismo sin testimonio, dando lluvia y estaciones fructíferas y llenando de alegría los corazones. El punto de partida cambiaba con el auditorio; pero el destino nunca. Siempre llegaba, al fin, al mismo lugar: Jesús, crucificado y resucitado, y el llamado a volverse de los ídolos y las obras muertas al Dios vivo. El evangelio es uno; solo varía el camino de entrada.</p>
+<h2><span class="dg-n">4.</span>El Concilio de Jerusalén: salvos por gracia, no por ley</h2>
+<p>Al entrar los gentiles en tropel en la iglesia, surgió una pregunta que pudo haber partido en dos todo el movimiento: ¿tenían estos creyentes gentiles que ser circuncidados y guardar la ley de Moisés para ser salvos? Algunos hombres insistían en que debían hacerlo. Y así el asunto fue llevado al Concilio de Jerusalén — la más importante reunión de la iglesia en el libro de Hechos. Allí Pedro se puso de pie y les recordó cómo Dios había dado a los gentiles el mismísimo Espíritu Santo, y "ninguna diferencia hizo entre nosotros y ellos, purificando por la fe sus corazones." Luego lo dijo claramente: "Antes creemos que por la gracia del Señor Jesús seremos salvos, de igual modo que ellos." Jacobo estuvo de acuerdo, y el concilio dictaminó: los gentiles son salvos por gracia, mediante la fe, y no han de ser cargados con la ley. Es una decisión histórica, y el mismísimo latido del evangelio: la salvación es por gracia, para judío y gentil por igual, aparte de las obras de la ley. Lo que Pablo escribiría extensamente a los Romanos y a los Gálatas, la iglesia aquí lo declaró a una voz.</p>
+<h2><span class="dg-n">5.</span>Por el mundo romano</h2>
+<p>El segundo y tercer viaje llevaron a Pablo aún más hondo, cruzando el mar y entrando en la misma Europa, y Lucas llena el relato de escenas inolvidables. En Filipos, una mujer de negocios llamada Lidia creyó, una esclava atormentada fue librada, y Pablo y Silas, azotados y encadenados en el calabozo interior, cantaban himnos a Dios a medianoche hasta que un terremoto sacudió las puertas y las abrió — y el carcelero, temblando, clamó: "¿Qué debo hacer para ser salvo?" y oyó la más sencilla de las respuestas: "Cree en el Señor Jesucristo, y serás salvo, tú y tu casa." En Atenas, Pablo se puso de pie entre los filósofos y, señalando su altar con la inscripción "AL DIOS NO CONOCIDO," les habló del Dios verdadero que hizo el mundo, que ahora manda a todos los hombres en todo lugar que se arrepientan, y que ha designado a un Varón, Jesús, para juzgar al mundo — dando prueba de ello al levantarle de los muertos. En Corinto y en Éfeso se quedó por largas temporadas, enseñando, hasta que "crecía y prevalecía poderosamente la palabra del Señor," de modo que aun los fabricantes de ídolos de Éfeso sintieron temblar su oficio. Ciudad por ciudad, congregación por congregación, las iglesias fueron plantadas por todo el imperio.</p>
+<h2><span class="dg-n">6.</span>El corazón de Pablo, y el llamado que permanece</h2>
+<p>Al acercarse el tercer viaje a su cierre, Pablo llamó a los ancianos de la iglesia de Éfeso a encontrarse con él, y derramó su corazón de pastor de una manera que ha conmovido a todo ministro fiel desde entonces. Les recordó cómo había servido al Señor entre ellos "con toda humildad, y con muchas lágrimas," sin rehuir jamás anunciarles "todo el consejo de Dios," enseñando públicamente y por las casas, y amonestando a cada uno de ellos de noche y de día, con lágrimas. Les encargó solemnemente apacentar la iglesia de Dios, "la cual él ganó por su propia sangre," y les advirtió que vendrían feroces peligros. Luego se arrodilló y oró con ellos, los encomendó "a Dios, y a la palabra de su gracia," y los dejó con un dicho del Señor Jesús que nunca debían olvidar: "Más bienaventurada cosa es dar que recibir." He aquí, al descubierto, el verdadero corazón misionero: labor incansable, lágrimas honestas, enseñanza fiel de todo el consejo de Dios, y un hondo amor por las iglesias. Y este es el gran ánimo de estos capítulos. Enviado por el Espíritu, Pablo predicó a Cristo a judío y gentil, plantó iglesias por el mundo conocido, y vio a la iglesia establecer para siempre que la salvación es por gracia, no por ley, para todo pueblo de la tierra. La obra fue costosa más allá de lo que se puede contar — oposición, azotes, cárcel, y lágrimas — y sin embargo la palabra del Señor crecía y prevalecía poderosamente. Y el mismísimo llamado aún descansa sobre la iglesia de Cristo: llevar este evangelio de gracia a través de toda frontera, en el poder del mismo Espíritu, cueste lo que cueste. Así que cobre ánimo, y tome la obra. El Dios que envió a Pablo sigue enviando a su iglesia, y su palabra prevalecerá.</p>
+<h2><span class="dg-n">7.</span>Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<b>Para reflexionar.</b> ¿Comienza usted su obra para Dios, como lo hizo Antioquía, escuchando el llamado del Espíritu y enviando en oración? ¿Ha captado de veras lo que el Concilio de Jerusalén estableció — que usted es salvo por gracia, y no por ningún guardar de la ley de su parte? Y ¿marca algo del corazón de Pablo — la labor, las lágrimas, todo el consejo de Dios — su propio cuidado por las personas en torno a usted?
+    </div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Un estudio del Seminario Teológico de Chapala sobre Hechos 13–20, anclado en las exposiciones clásicas de dominio público de Hechos y de Pablo (<em>Life and Epistles of St. Paul</em> de Conybeare y Howson, <em>St. Paul the Traveller</em> de W. M. Ramsay, <em>Missionary Methods</em> de Roland Allen, y otros), y en la Escritura. Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Esta lectura se apoya especialmente en Conybeare y Howson y W. M. Ramsay para los viajes de Pablo, y en <em>Missionary Methods: St. Paul's or Ours?</em> de Roland Allen para el patrón de su misión, todos en el dominio público.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="4" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+<!-- 5 -->
+<article class="entry" data-id="5" data-title-en="To Rome: Paul’s Trials and the Unstoppable Gospel &mdash; CTS digest" data-title-es="Hacia Roma: Los Juicios de Pablo y el Evangelio Imparable &mdash; resumen STC">
+<div class="locus"><span class="lang-en">Acts 21&ndash;28 &middot; a CTS bilingual digest, ~2,000 words per language</span><span class="lang-es">Hechos 21&ndash;28 &middot; un resumen biling&uuml;e del STC, ~2,000 palabras por idioma</span></div>
+<div class="title"><span class="num">5.</span><span class="lang-en">To Rome: Paul’s Trials and the Unstoppable Gospel</span><span class="lang-es">Hacia Roma: Los Juicios de Pablo y el Evangelio Imparable</span></div>
+<div class="byline">A CTS bilingual digest</div>
+<p class="caption lang-en block">The capstone: the arrest in Jerusalem and the Lord’s promise (“you must bear witness at Rome”); the trials that become testimonies (Felix trembling, Agrippa “almost persuaded”); the appeal to Caesar, the storm, and Paul’s steady faith; the shipwreck where every soul is saved; and Rome at last — the gospel preached openly, “no one forbidding him.” The word is not bound, and the church is the next chapter.</p>
+<p class="caption lang-es block">La culminación: el arresto en Jerusalén y la promesa del Señor (“es menester testifiques también en Roma”); los juicios que se vuelven testimonios (Félix temblando, Agripa “por poco persuadido”); la apelación a César, la tormenta, y la fe firme de Pablo; el naufragio donde toda alma se salva; y Roma al fin — el evangelio predicado abiertamente, “sin impedimento.” La palabra no está atada, y la iglesia es el siguiente capítulo.</p>
+<div class="foot">
+<details class="digest-inline"><summary><span class="dg-badge">CTS DIGEST</span><span class="lang-en">Read the full digest &mdash; opens right here</span><span class="lang-es">Leer el resumen completo &mdash; se abre aquí mismo</span></summary><div class="dg-note-line"><span class="lang-en">The Chapala Theological Seminary digest &mdash; an original bilingual summary, readable offline. This is the CTS digest, not the full original source text.</span><span class="lang-es">El resumen del Seminario Teológico de Chapala &mdash; un compendio bilingüe original, legible sin conexión. Este es el resumen del STC, no el texto original completo.</span></div><div class="dg-scroll"><div class="lang-en block dg-block">
+<header class="dg-doc">
+<h1>To Rome: Paul's Trials and the Unstoppable Gospel</h1>
+<p class="dg-sub">A Chapala Theological Seminary reading — Acts 21–28: through arrest, trial, and shipwreck, the gospel reaches the heart of the empire</p>
+<p class="dg-src">A CTS-authored survey, anchored in the classic public-domain expositions of Acts and Paul (Ramsay, Conybeare &amp; Howson, Matheson, and others), and in Scripture.</p>
+<ul class="dg-chips">
+<li>Book Study: Acts</li>
+<li>To Rome</li>
+<li>The Word Not Bound</li>
+<li>Capstone</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>A word before you read.</b> The last section of Acts follows Paul from his arrest in Jerusalem, through a long chain of trials and a shipwreck, to Rome itself. This closing reading walks through Acts 21–28 — how God carried His prisoner-apostle to preach the gospel openly in the capital of the world, "no one forbidding him."
+    </div>
+<h2><span class="dg-n">1.</span>The Final Journey: To Rome</h2>
+<p>The closing section of Acts follows Paul from his arrest in Jerusalem, through a long series of trials, and at last across the sea to Rome. Long before, the risen Jesus had said that His witnesses would carry the gospel "to the end of the earth," and Rome — the capital and the very heart of the empire — stood for that far goal. And so Luke gives these final chapters to a single, remarkable story: how Paul, now a prisoner in chains, was carried by the hidden hand of God's providence — through hostile courtrooms and a killer storm — to preach the good news in Rome itself. It is a story with a quiet and profound point: even Paul's chains could not stop the gospel; they only became one more means of its advance.</p>
+<h2><span class="dg-n">2.</span>Arrest in Jerusalem</h2>
+<p>Paul had returned to Jerusalem knowing danger awaited him, resolved to finish the course God had given him. In the temple a mob, whipped up by false rumors, seized him and set about to kill him, and only a detachment of Roman soldiers saved his life. Given leave to speak, Paul told the shouting crowd his own story — how he, once their zealous champion and the church's persecutor, had met the risen Christ on the Damascus road and been sent to the Gentiles. Brought before the Sanhedrin, and then the target of a murderous plot, he was taken under heavy guard to Caesarea. And in the darkest of those Jerusalem nights, the Lord Himself stood by him and said: "Be of good cheer, Paul; for as you have testified for Me in Jerusalem, so you must also bear witness at Rome." Whatever came, Paul now knew his destination was certain: God would bring him to Rome.</p>
+<h2><span class="dg-n">3.</span>On Trial: Witnessing to Governors and a King</h2>
+<p>At Caesarea, Paul stood trial before two Roman governors in turn, Felix and Festus, and then before King Agrippa. And in every hearing, Paul did a striking thing: he turned his own defense into a testimony to Christ. Reasoning before Felix "about righteousness, self-control, and the judgment to come," he pressed the truth so closely that the governor grew afraid and sent him away. Standing before Agrippa, he told the story of his conversion yet again, and then turned and urged the king himself to believe — so earnestly that Agrippa said, half in wonder and half in retreat, "You almost persuade me to become a Christian." Paul's reply lays bare his whole heart: he answered that he would to God that not only the king but everyone listening to him might become such as he was — "except for these chains." There it is: Paul the prisoner is in truth the only free man in the room, and it is his judges who are in bondage. They could find no real crime in him, and agreed among themselves that he might have been set free — but he had appealed to Caesar, and to Caesar he would go.</p>
+<h2><span class="dg-n">4.</span>The Appeal to Caesar, and the Storm</h2>
+<p>As a Roman citizen, Paul had exercised his right to have his case heard by Caesar himself; and so he was put aboard ship, under guard, for the long voyage to Rome. What follows is one of the most vivid sea-narratives to survive from the ancient world. A savage storm arose and battered the ship for many days, until, Luke says, all hope that they should be saved was finally given up. But in the heart of the tempest, one man was calm. Paul gathered the exhausted, terrified crew and told them that an angel of God had stood by him in the night and promised that not a single life would be lost — only the ship itself — and then he added the reason for his calm: "I believe God that it will be just as it was told me." His steady faith held the whole ship's company together. In the end the vessel ran aground and broke apart on the island of Malta — but every last soul aboard reached the shore alive, exactly as God had said. Even in the storm, God kept His word to the letter, and even in the storm, Paul bore his witness.</p>
+<h2><span class="dg-n">5.</span>Malta, and Arrival at Rome</h2>
+<p>On Malta, a deadly viper fastened on Paul's hand and yet did him no harm, and he healed the sick of the island, so that the gospel touched that place too. And then, at long last, the journey reached its end: Paul came to Rome. Even as a prisoner awaiting trial, he was permitted to live in a house he rented for himself, with a single soldier to guard him, and to receive freely all who came to visit him. And so the book of Acts closes on a scene of quiet, unmistakable triumph. Paul "received all who came to him, preaching the kingdom of God and teaching the things which concern the Lord Jesus Christ with all confidence, no one forbidding him." The gospel had reached Rome. And the very last words of the book — "no one forbidding him" — are nothing less than a shout of victory. The apostle is bound, but the word of God is not.</p>
+<h2><span class="dg-n">6.</span>The Unstoppable Gospel, and the Next Chapter</h2>
+<p>Why does Luke end here, with Paul still under guard and the story apparently left hanging in mid-air? Because, in truth, his point has been fully made. The book that opened with a mere handful of frightened disciples praying in an upper room in Jerusalem now ends with the gospel being preached openly, boldly, and unhindered in the capital of the entire world. From Jerusalem to Rome; from a hundred and twenty to an uncountable multitude; from a few Galileans to people of every nation under heaven — the Holy Spirit has carried the word, and nothing whatever has been able to halt it: not the fury of mobs, not the councils of the powerful, not prison bars, not the killing storm, not even the vast might of Rome. Acts is left unfinished quite on purpose, for its true story does not stop at chapter 28; it goes on being written in every generation, wherever the people of Christ bear their witness in the power of that same Spirit. We ourselves are the next chapter. And so our walk through Acts comes to its close. We began at Pentecost, with the Spirit poured out and the church born; we watched that church bear bold witness and give up its first martyr in Jerusalem; we saw the gospel shatter every barrier — to Samaria, to Saul the persecutor, to the Gentiles; we followed Paul's journeys to the ends of the earth, and heard the church declare that salvation is by grace and not by law; and now we have come with Paul, through trial and shipwreck, all the way to Rome, where the gospel is preached with all confidence and no one can forbid it. The book of Acts is, from first to last, the story of an unstoppable gospel, carried by an unstoppable Spirit, through ordinary and faithful witnesses. And that story is not finished. The same Spirit fills the people of Christ still; the same gospel of grace is still waiting to be carried across every barrier and out to the ends of the earth. So take up the story where it was left. Be filled with the Spirit; bear witness to the risen Christ; and trust that His word — the word that traveled from an upper room in Jerusalem all the way to the throne-city of Rome — will surely reach wherever He sends you. For nothing in all the world can bind the word of God.</p>
+<h2><span class="dg-n">7.</span>Taking It to Heart</h2>
+<div class="dg-reflect">
+<b>For reflection.</b> Like Paul, can you turn even your hardest circumstances into an occasion to witness for Christ? When your own storms rage, can you say with him, "I believe God that it will be just as it was told me"? And do you see yourself as part of the story Acts leaves unfinished — a living next chapter in the advance of the unstoppable gospel?
+    </div>
+<footer class="dg-doc">
+<p><b>Source.</b> A Chapala Theological Seminary survey of Acts 21–28, anchored in the classic public-domain expositions of Acts and of Paul (W. M. Ramsay's <em>St. Paul the Traveller and the Roman Citizen</em>, Conybeare &amp; Howson, George Matheson's <em>The Spiritual Development of St. Paul</em>, and others), and in Scripture. This is CTS-authored teaching, not a reproduction; the classic works are freely available.</p>
+<p><b>About the guides.</b> This reading draws especially on W. M. Ramsay's <em>St. Paul the Traveller and the Roman Citizen</em> for the voyage and the trials, together with Conybeare &amp; Howson and George Matheson, all in the public domain.</p>
+</footer>
+</div><div class="lang-es block dg-block">
+<header class="dg-doc">
+<h1>Hacia Roma: Los Juicios de Pablo y el Evangelio Imparable</h1>
+<p class="dg-sub">Una lectura del Seminario Teológico de Chapala — Hechos 21–28: a través del arresto, el juicio, y el naufragio, el evangelio llega al corazón del imperio</p>
+<p class="dg-src">Un estudio de autoría del STC, anclado en las exposiciones clásicas de dominio público de Hechos y de Pablo (Ramsay, Conybeare y Howson, Matheson, y otros), y en la Escritura.</p>
+<ul class="dg-chips">
+<li>Estudio del Libro: Hechos</li>
+<li>Hacia Roma</li>
+<li>La palabra no atada</li>
+<li>Culminación</li>
+</ul>
+</header>
+<div class="dg-note">
+<b>Una palabra antes de leer.</b> La última sección de Hechos sigue a Pablo desde su arresto en Jerusalén, a través de una larga cadena de juicios y un naufragio, hasta la misma Roma. Esta lectura final recorre Hechos 21–28 — cómo Dios llevó a su apóstol prisionero a predicar el evangelio abiertamente en la capital del mundo, "sin impedimento."
+    </div>
+<h2><span class="dg-n">1.</span>El viaje final: hacia Roma</h2>
+<p>La sección de cierre de Hechos sigue a Pablo desde su arresto en Jerusalén, a través de una larga serie de juicios, y al fin cruzando el mar hacia Roma. Mucho antes, el Jesús resucitado había dicho que sus testigos llevarían el evangelio "hasta lo último de la tierra," y Roma — la capital y el mismísimo corazón del imperio — representaba esa meta lejana. Y así Lucas da estos capítulos finales a una sola historia notable: cómo Pablo, ahora un prisionero encadenado, fue llevado por la mano oculta de la providencia de Dios — a través de tribunales hostiles y una tormenta mortal — a predicar la buena nueva en la misma Roma. Es una historia con un punto callado y profundo: ni aun las cadenas de Pablo pudieron detener el evangelio; solo se volvieron un medio más de su avance.</p>
+<h2><span class="dg-n">2.</span>Arresto en Jerusalén</h2>
+<p>Pablo había vuelto a Jerusalén sabiendo que el peligro le aguardaba, resuelto a terminar la carrera que Dios le había dado. En el templo una turba, azuzada por falsos rumores, le prendió y se dispuso a matarle, y solo un destacamento de soldados romanos salvó su vida. Habiéndosele dado permiso para hablar, Pablo contó a la multitud vociferante su propia historia — cómo él, antes su celoso campeón y el perseguidor de la iglesia, había encontrado al Cristo resucitado en el camino de Damasco y había sido enviado a los gentiles. Llevado ante el Sanedrín, y luego blanco de un complot asesino, fue llevado bajo fuerte guardia a Cesarea. Y en la más oscura de aquellas noches de Jerusalén, el Señor mismo se puso a su lado y dijo: "Ten ánimo, Pablo; pues como has testificado de mí en Jerusalén, así es menester testifiques también en Roma." Viniera lo que viniera, Pablo ahora sabía que su destino era seguro: Dios le llevaría a Roma.</p>
+<h2><span class="dg-n">3.</span>En juicio: dando testimonio a gobernadores y a un rey</h2>
+<p>En Cesarea, Pablo estuvo en juicio ante dos gobernadores romanos por turno, Félix y Festo, y luego ante el rey Agripa. Y en cada audiencia, Pablo hizo algo asombroso: convirtió su propia defensa en un testimonio de Cristo. Razonando ante Félix "acerca de la justicia, del dominio propio y del juicio venidero," apretó la verdad tan de cerca que el gobernador se atemorizó y le despidió. De pie ante Agripa, contó la historia de su conversión una vez más, y luego se volvió e instó al rey mismo a creer — tan encarecidamente que Agripa dijo, medio maravillado y medio en retirada: "Por poco me persuades a ser cristiano." La respuesta de Pablo deja al descubierto todo su corazón: respondió que quisiera a Dios que no solo el rey sino todos los que le oían llegaran a ser tales como él era — "excepto estas cadenas." Ahí está: Pablo el prisionero es en verdad el único hombre libre en la sala, y son sus jueces los que están en esclavitud. No pudieron hallar crimen real en él, y acordaron entre sí que podría haber sido puesto en libertad — pero había apelado a César, y a César iría.</p>
+<h2><span class="dg-n">4.</span>La apelación a César, y la tormenta</h2>
+<p>Como ciudadano romano, Pablo había ejercido su derecho de que su caso fuera oído por el mismo César; y así fue puesto a bordo de una nave, bajo guardia, para el largo viaje a Roma. Lo que sigue es una de las narrativas marítimas más vívidas que sobreviven del mundo antiguo. Una tormenta salvaje se levantó y azotó la nave por muchos días, hasta que, dice Lucas, se perdió al fin toda esperanza de que se salvaran. Pero en el corazón de la tempestad, un hombre estaba en calma. Pablo reunió a la tripulación agotada y aterrada y les dijo que un ángel de Dios se había puesto a su lado en la noche y prometido que ni una sola vida se perdería — solo la nave misma — y luego añadió la razón de su calma: "yo confío en Dios que será así como se me ha dicho." Su firme fe mantuvo unida a toda la compañía de la nave. Al final la embarcación encalló y se hizo pedazos en la isla de Malta — pero cada última alma a bordo llegó viva a la orilla, exactamente como Dios había dicho. Aun en la tormenta, Dios cumplió su palabra al pie de la letra, y aun en la tormenta, Pablo dio su testimonio.</p>
+<h2><span class="dg-n">5.</span>Malta, y la llegada a Roma</h2>
+<p>En Malta, una víbora mortal se prendió de la mano de Pablo y sin embargo no le hizo daño, y sanó a los enfermos de la isla, de modo que el evangelio tocó también aquel lugar. Y entonces, por fin, el viaje llegó a su fin: Pablo llegó a Roma. Aun como prisionero en espera de juicio, se le permitió vivir en una casa que alquiló para sí, con un solo soldado que le guardaba, y recibir libremente a todos los que venían a visitarle. Y así el libro de Hechos cierra en una escena de callado e inconfundible triunfo. Pablo "predicaba el reino de Dios y enseñaba acerca del Señor Jesucristo, abiertamente y sin impedimento." El evangelio había llegado a Roma. Y las mismísimas últimas palabras del libro — "sin impedimento" — no son nada menos que un grito de victoria. El apóstol está atado, pero la palabra de Dios no lo está.</p>
+<h2><span class="dg-n">6.</span>El evangelio imparable, y el siguiente capítulo</h2>
+<p>¿Por qué termina Lucas aquí, con Pablo aún bajo guardia y la historia aparentemente dejada colgando en el aire? Porque, en verdad, su punto ha sido plenamente hecho. El libro que abrió con un mero puñado de discípulos asustados orando en un aposento alto en Jerusalén ahora termina con el evangelio siendo predicado abierta, audaz, y libremente en la capital del mundo entero. De Jerusalén a Roma; de ciento veinte a una multitud incontable; de unos pocos galileos a gente de toda nación bajo el cielo — el Espíritu Santo ha llevado la palabra, y absolutamente nada ha podido detenerla: ni la furia de las turbas, ni los concilios de los poderosos, ni las rejas de la cárcel, ni la tormenta mortal, ni aun el vasto poderío de Roma. Hechos es dejado sin terminar muy a propósito, porque su verdadera historia no se detiene en el capítulo 28; sigue siendo escrita en cada generación, dondequiera que el pueblo de Cristo da su testimonio en el poder de ese mismo Espíritu. Nosotros mismos somos el siguiente capítulo. Y así nuestro recorrido por Hechos llega a su cierre. Comenzamos en Pentecostés, con el Espíritu derramado y la iglesia nacida; vimos a esa iglesia dar audaz testimonio y entregar a su primer mártir en Jerusalén; vimos al evangelio hacer añicos toda barrera — a Samaria, a Saulo el perseguidor, a los gentiles; seguimos los viajes de Pablo hasta lo último de la tierra, y oímos a la iglesia declarar que la salvación es por gracia y no por ley; y ahora hemos venido con Pablo, a través del juicio y el naufragio, todo el camino hasta Roma, donde el evangelio se predica con toda confianza y nadie puede impedirlo. El libro de Hechos es, de principio a fin, la historia de un evangelio imparable, llevado por un Espíritu imparable, a través de testigos ordinarios y fieles. Y esa historia no está terminada. El mismo Espíritu llena al pueblo de Cristo aún; el mismo evangelio de gracia aún espera ser llevado a través de toda barrera y hasta lo último de la tierra. Así que tome la historia donde fue dejada. Sea lleno del Espíritu; dé testimonio del Cristo resucitado; y confíe en que su palabra — la palabra que viajó de un aposento alto en Jerusalén todo el camino hasta la ciudad-trono de Roma — seguramente llegará dondequiera que Él le envíe. Porque nada en todo el mundo puede atar la palabra de Dios.</p>
+<h2><span class="dg-n">7.</span>Llevarlo al corazón</h2>
+<div class="dg-reflect">
+<b>Para reflexionar.</b> Como Pablo, ¿puede convertir aun sus circunstancias más difíciles en una ocasión para dar testimonio de Cristo? Cuando sus propias tormentas rugen, ¿puede decir con él: "yo confío en Dios que será así como se me ha dicho"? Y ¿se ve a sí mismo como parte de la historia que Hechos deja sin terminar — un capítulo siguiente vivo en el avance del evangelio imparable?
+    </div>
+<footer class="dg-doc">
+<p><b>Fuente.</b> Un estudio del Seminario Teológico de Chapala sobre Hechos 21–28, anclado en las exposiciones clásicas de dominio público de Hechos y de Pablo (<em>St. Paul the Traveller and the Roman Citizen</em> de W. M. Ramsay, Conybeare y Howson, <em>The Spiritual Development of St. Paul</em> de George Matheson, y otros), y en la Escritura. Esta es enseñanza de autoría del STC, no una reproducción; las obras clásicas están disponibles gratuitamente.</p>
+<p><b>Sobre los guías.</b> Esta lectura se apoya especialmente en <em>St. Paul the Traveller and the Roman Citizen</em> de W. M. Ramsay para el viaje y los juicios, junto con Conybeare y Howson y George Matheson, todos en el dominio público.</p>
+</footer>
+</div></div></details>
+<label class="pick"><input data-pick="5" type="checkbox"/><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
+</div>
+</article>
+
+<!-- ============ ATTESTATION ============ -->
+<div class="card attest">
+<h2>
+<span class="lang-en">Record your reading</span>
+<span class="lang-es">Registre su lectura</span>
+</h2>
+<p class="lang-en block">When you have read your three chosen readings in full, enter your name and affirm it below. This record is kept on your honor.</p>
+<p class="lang-es block">Cuando haya leído por completo sus tres lecturas elegidas, escriba su nombre y confírmelo abajo. Este registro se guarda bajo su honor.</p>
+<label class="field" for="stName"><span class="lang-en">Your name</span><span class="lang-es">Su nombre</span></label>
+<input autocomplete="name" id="stName" type="text"/>
+<div class="oath">
+<input id="oath" type="checkbox"/>
+<label for="oath"><span class="lang-en">On my honor, I have read in full the three excerpts or adaptations I selected above.</span><span class="lang-es">Bajo mi honor, he leído por completo los tres extractos o adaptaciones que seleccioné arriba.</span></label>
+</div>
+<button class="btn" onclick="recordReading()"><span class="lang-en">Record my reading</span><span class="lang-es">Registrar mi lectura</span></button>
+<p class="msg" id="attMsg"></p>
+<p class="msg no-print" id="honorsDone" style="display:none;color:#2f6b3a;"><span class="lang-en">✓ Recorded — this class counts toward your With Honors progress. <a href="cts-honors.html" style="color:#2f6b3a;">View progress ↗</a></span><span class="lang-es">✓ Registrado — esta clase cuenta para su progreso Con Honores. <a href="cts-honors.html" style="color:#2f6b3a;">Ver progreso ↗</a></span></p>
+<!-- confirmation record -->
+<div class="record" id="record">
+<div class="seal-line"></div>
+<h3><span class="lang-en">Honors Reading — recorded</span><span class="lang-es">Lectura con Honores — registrada</span></h3>
+<div class="named" id="recName"></div>
+<p class="lang-en block">affirmed on <span id="recDateEn"></span> to have read, in full:</p>
+<p class="lang-es block">afirmó el <span id="recDateEs"></span> haber leído, por completo:</p>
+<ul id="recList"></ul>
+<p class="stamp"><span class="lang-en">Chapala Theological Seminary · Acts Intensive · present or print this page as your honors reading record.</span><span class="lang-es">Seminario Teológico de Chapala · Intensivo de Hechos · presente o imprima esta página como su registro de lectura con honores.</span></p>
+<p style="margin-top:14px;">
+<button class="btn ghost no-print" onclick="window.print()"><span class="lang-en">Print this record</span><span class="lang-es">Imprimir este registro</span></button>
+<button class="btn ghost no-print" onclick="resetReading()"><span class="lang-en">Start over</span><span class="lang-es">Empezar de nuevo</span></button>
+</p>
+</div>
+</div>
+<p class="footnote">
+<span class="lang-en">Chapala Theological Seminary · Seminario Teológico de Chapala · free bilingual self-study</span>
+<span class="lang-es">Seminario Teológico de Chapala · Chapala Theological Seminary · estudio propio bilingüe gratuito</span>
+</p>
+</div>
+<script>
+  var MAX = 3;
+  var HONORS_CODE="Acts"; var HONORS_COURSE="Acts Intensive";
+
+  function setLang(l){
+    document.body.className = 'lang-' + l;
+    document.querySelectorAll('.toggle-btn').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang') === l);
+    });
+  }
+
+  function chosenBoxes(){
+    return Array.prototype.slice.call(document.querySelectorAll('input[data-pick]:checked'));
+  }
+
+  function refresh(){
+    var boxes = document.querySelectorAll('input[data-pick]');
+    var chosen = chosenBoxes();
+    var n = chosen.length;
+    document.getElementById('cnt-en').textContent = n;
+    document.getElementById('cnt-es').textContent = n;
+
+    var full = (n >= MAX);
+    boxes.forEach(function(b){
+      var lab = b.closest('.pick');
+      var art = b.closest('.entry');
+      if(!b.checked && full){
+        b.disabled = true; lab.classList.add('disabled');
+      } else {
+        b.disabled = false; lab.classList.remove('disabled');
+      }
+      if(art) art.classList.toggle('chosen', b.checked);
+    });
+
+    var note = document.getElementById('limitNote');
+    if(full){
+      note.innerHTML = "<span class='lang-en'>Three chosen. Uncheck one to change your selection.</span>" +
+                       "<span class='lang-es'>Tres elegidas. Desmarque una para cambiar su selección.</span>";
+    } else {
+      note.textContent = "";
+    }
+  }
+
+  document.querySelectorAll('input[data-pick]').forEach(function(b){
+    b.addEventListener('change', refresh);
+  });
+
+  function recordReading(){
+    var chosen = chosenBoxes();
+    var name = document.getElementById('stName').value.trim();
+    var oath = document.getElementById('oath').checked;
+    var msg = document.getElementById('attMsg');
+
+    if(chosen.length !== MAX){
+      msg.innerHTML = "<span class='lang-en'>Choose exactly three readings above to record them.</span>" +
+                      "<span class='lang-es'>Elija exactamente tres lecturas arriba para registrarlas.</span>";
+      return;
+    }
+    if(!name){
+      msg.innerHTML = "<span class='lang-en'>Enter your name to record your reading.</span>" +
+                      "<span class='lang-es'>Escriba su nombre para registrar su lectura.</span>";
+      return;
+    }
+    if(!oath){
+      msg.innerHTML = "<span class='lang-en'>Check the box to affirm you have read all three.</span>" +
+                      "<span class='lang-es'>Marque la casilla para afirmar que ha leído las tres.</span>";
+      return;
+    }
+    msg.textContent = "";
+
+    var now = new Date();
+    var en = now.toLocaleDateString('en-US', {year:'numeric', month:'long', day:'numeric'});
+    var es = now.toLocaleDateString('es-MX', {year:'numeric', month:'long', day:'numeric'});
+    document.getElementById('recName').textContent = name;
+    document.getElementById('recDateEn').textContent = en;
+    document.getElementById('recDateEs').textContent = es;
+
+    var ul = document.getElementById('recList');
+    ul.innerHTML = "";
+    chosen.forEach(function(b){
+      var art = b.closest('.entry');
+      var li = document.createElement('li');
+      li.innerHTML = "<span class='lang-en'>" + art.getAttribute('data-title-en') + "</span>" +
+                     "<span class='lang-es'>" + art.getAttribute('data-title-es') + "</span>";
+      ul.appendChild(li);
+    });
+
+    try {
+      var _works=[];
+      chosen.forEach(function(b){ var a=b.closest('.entry'); if(a) _works.push(a.getAttribute('data-title-en')); });
+      localStorage.setItem('cts_honors_name_v1', name);
+      localStorage.setItem('cts_honors_v1:'+HONORS_CODE, JSON.stringify({name:name,date:en,course:HONORS_COURSE,works:_works}));
+      var _hd=document.getElementById('honorsDone'); if(_hd) _hd.style.display='block';
+    } catch(e){}
+
+    document.getElementById('record').classList.add('show');
+    document.getElementById('record').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  function resetReading(){
+    document.querySelectorAll('input[data-pick]').forEach(function(b){ b.checked = false; });
+    document.getElementById('stName').value = "";
+    document.getElementById('oath').checked = false;
+    document.getElementById('record').classList.remove('show');
+    document.getElementById('attMsg').textContent = "";
+    refresh();
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  refresh();
+  try {
+    if(localStorage.getItem('cts_honors_v1:'+HONORS_CODE)){ var _hd=document.getElementById('honorsDone'); if(_hd) _hd.style.display='block'; }
+    var _nm=localStorage.getItem('cts_honors_name_v1'); var _f=document.getElementById('stName'); if(_nm && _f && !_f.value){ _f.value=_nm; }
+  } catch(e){}
+</script>
+
+<!-- CTS-FURTHER-STUDY -->
+<style>
+.fs-wrap{max-width:900px;margin:38px auto 10px;padding:0 18px;font-family:Georgia,serif;color:#1f2a37;line-height:1.55;box-sizing:border-box}
+.fs-wrap *{box-sizing:border-box}
+.fs-head{border-top:6px solid #33608f;background:#eaf1f8;border:1px solid #dbe6f0;border-radius:12px;padding:18px 20px}
+.fs-eyebrow{font:700 .72rem/1 Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#33608f}
+.fs-head h2{font-size:1.5rem;margin:.3rem 0 .1rem}
+.fs-es{color:#48586a;font-style:italic}
+.fs-tag{margin:.5rem 0 0;font-family:Arial,sans-serif;font-size:.9rem;color:#5b6b7b}
+.fs-online{display:flex;gap:11px;align-items:flex-start;background:#fff;border:1px solid #33608f;border-left:6px solid #33608f;border-radius:10px;padding:11px 14px;margin:13px 0 18px}
+.fs-online .fs-badge{flex:none;font:800 .66rem/1 Arial,sans-serif;letter-spacing:.1em;color:#fff;background:#33608f;padding:6px 9px;border-radius:6px;margin-top:2px}
+.fs-online p{margin:0;font-size:.9rem}
+.fs-grid{display:grid;gap:14px}
+.fs-card{background:#fff;border:1px solid #dbe6f0;border-radius:11px;padding:16px 17px;box-shadow:0 2px 8px #0b214a0a}
+.fs-kind{font:700 .7rem/1 Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#264a6e}
+.fs-card h3{margin:.3rem 0 .15rem;font-size:1.12rem}
+.fs-meta{font-family:Arial,sans-serif;font-size:.8rem;color:#5b6b7b;margin:0 0 .5rem}
+.fs-langs span{font:700 .64rem/1 Arial,sans-serif;background:#eaf1f8;color:#264a6e;border:1px solid #cadcee;border-radius:999px;padding:3px 7px;margin-left:5px}
+.fs-card p{margin:.35rem 0 .5rem}
+.fs-note{background:#fbf3e6;border-left:4px solid #8a5a1c;border-radius:0 6px 6px 0;padding:9px 12px;margin:.5rem 0;font-size:.85rem}
+.fs-note b{color:#8a5a1c}
+.fs-links{display:flex;gap:9px;flex-wrap:wrap;margin-top:9px}
+.fs-btn{display:inline-block;text-decoration:none;background:#33608f;color:#fff;font:700 .85rem Arial,sans-serif;padding:8px 12px;border-radius:7px}
+.fs-btn.fs-alt{background:#fff;color:#264a6e;border:1.5px solid #33608f}
+.fs-pick{border:2px dashed #b7c7d8;background:#fbfdff;color:#5b6b7b}
+.fs-pick h3{color:#5b6b7b}
+.fs-foot{margin-top:16px;font-family:Arial,sans-serif;font-size:.8rem;color:#5b6b7b}
+@media(max-width:600px){.fs-head h2{font-size:1.3rem}}
+</style>
+<section class="fs-wrap" id="further-study">
+<div class="fs-head">
+  <div class="fs-eyebrow">Chapala Theological Seminary &middot; Further Study</div>
+  <h2>Further Study &mdash; Online</h2>
+  <div class="fs-es" style="font-size:1.05rem">Estudio Adicional &mdash; En Línea</div>
+  <p class="fs-tag">Optional resources for students with internet access &mdash; Acts<br>
+  <span class="fs-es">Recursos opcionales para estudiantes con acceso a internet &mdash; Hechos</span></p>
+</div>
+<div class="fs-online"><span class="fs-badge">ONLINE</span>
+  <p><strong>Requires an internet connection.</strong> These resources are hosted on the web and do not open offline. They supplement the course; they do not replace its units or exams.<br>
+  <span class="fs-es"><strong>Requiere una conexión a internet.</strong> Estos recursos están alojados en la web y no se abren sin conexión. Complementan el curso; no sustituyen sus unidades ni exámenes.</span></p>
+</div>
+<div class="fs-grid">
+<article class="fs-card">
+  <div class="fs-kind">Free animated Bible videos / Videos bíblicos animados gratuitos</div>
+  <h3>BibleProject &mdash; Proyecto Biblia</h3>
+  <p class="fs-meta">Video <span class="fs-langs"><span>English</span><span>Español</span></span></p>
+  <p>Short, well-crafted animated videos that walk through the whole of Scripture. In the video library, open the overview of <strong>Acts</strong> to see its structure and message. Non-partisan and freely available.<br>
+  <span class="fs-es">Videos animados breves y bien hechos que recorren toda la Escritura. En la biblioteca de videos, abra el resumen de <strong>Hechos</strong> para ver su estructura y mensaje. No partidista y de acceso gratuito.</span></p>
+  <div class="fs-links">
+    <a class="fs-btn" target="_blank" rel="noopener" href="https://bibleproject.com">Open (English) &#8599;</a>
+    <a class="fs-btn fs-alt" target="_blank" rel="noopener" href="https://proyectobiblia.com">Abrir (Español) &#8599;</a>
+  </div>
+</article>
+<article class="fs-card fs-pick">
+  <div class="fs-kind">Instructor's vetted pick / Selección aprobada por el instructor</div>
+  <h3>[ Your chosen video goes here ]</h3>
+  <p>A place for a specific video the instructor has watched and approved for this course.<br>
+  <span class="fs-es">Un espacio para un video específico que el instructor haya visto y aprobado para este curso.</span></p>
+</article>
+</div>
+<div class="fs-foot">These optional supplements link to third-party websites that Chapala Theological Seminary does not control; weigh their content against Scripture and this course.<br>
+<span class="fs-es">Estos complementos opcionales enlazan a sitios web de terceros que el Seminario Teológico de Chapala no controla; pese su contenido a la luz de la Escritura y de este curso.</span></div>
+</section>
+<!-- /CTS-FURTHER-STUDY -->
+
+</body>
+</html>

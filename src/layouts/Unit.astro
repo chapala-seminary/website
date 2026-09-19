@@ -1,0 +1,38 @@
+---
+/* One layout for every unit page.
+ *
+ * The body arrives verbatim from src/body/ — see tools/to-astro.mjs for why it
+ * is carried whole rather than reassembled. What the layout owns is the shell:
+ * the head, the stylesheet links the page already used, the unit data, and the
+ * shared scripts in the order the pages loaded them.
+ */
+interface Props {
+  title: string;
+  bodyClass: string;
+  styles: string[];
+  scripts: string[];
+  unit: unknown;
+  body: string;
+}
+const { title, bodyClass, styles, scripts, unit, body } = Astro.props;
+
+// Inlining the unit means one fewer request and no separate data file to fall
+// out of step with the page. "<" is escaped so a question containing markup
+// cannot end the script element early.
+const unitJson = JSON.stringify(unit).replace(/</g, '\\u003c');
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {styles.map((href) => <link rel="stylesheet" href={href} />)}
+  </head>
+  <body class={bodyClass}>
+    <Fragment set:html={body} />
+    <script is:inline set:html={`window.CTS_UNIT = ${unitJson};`} />
+    <script is:inline src="/assets/js/cts-engine.js"></script>
+    {scripts.map((src) => <script is:inline src={src}></script>)}
+  </body>
+</html>
