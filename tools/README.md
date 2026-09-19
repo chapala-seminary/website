@@ -84,3 +84,57 @@ re-captured until two consecutive frames match, and the pixel comparison is
 skipped (and counted) if a page never settles, rather than passing silently.
 
 Baseline for Stage 1 is commit 24dbaa8 ("Import live site verbatim").
+
+---
+
+# Stage 2: verifying the built site
+
+Stage 2 generates the unit pages with Astro from `src/content/units/*.json` and
+`src/body/*.html`. The Stage 1 tools read `site/data/<slug>/unitN.js`, which the
+build no longer produces, so there are build-facing versions of the two browser
+suites. They take the unit's questions and answers from `window.CTS_UNIT` on the
+loaded page — what the student's browser actually has — rather than from the
+source tree. A checker that reads the same source the generator reads can only
+confirm the generator agrees with itself.
+
+    npm run build
+    python3 -m http.server 8823 -d dist &
+    CHROME_PATH=... node tools/audit-controls-built.mjs   # 451 pages
+    CHROME_PATH=... node tools/engine-test-built.mjs      # 948 assertions
+
+`CHROME_PATH` is optional; without it Playwright uses its own download.
+
+## audit-controls-built.mjs
+
+Loads every generated unit page and asserts three things a student needs and a
+policy test cannot supply for them: a **visible** submit control, a result area,
+and a rendered question count matching the unit data. This exists because the
+policy suite once fell back to calling the engine directly when it found no
+button, which hid an entire course whose pages had no submit control at all.
+
+## engine-test-built.mjs
+
+Two units per course, six browser sessions each, asserting the agreed policy:
+
+    pass mark     90% of the multiple-choice questions, as a ratio
+    lockout       master's 15 minutes, certificate 2 minutes
+    reveal        certificate sees the answers on submit; master's does not
+    persistence   a passed MC section stays passed; a failure records a lock
+
+It answers exactly the pass mark and exactly one below it, so a drift in either
+direction fails. It clicks the student's own submit button and never falls back
+to the engine API.
+
+## content-baseline.mjs
+
+The regression gate across the whole migration: a format-neutral fingerprint of
+every unit — question counts, every answer index, and a digest of the normalised
+question and option text in both languages, with HTML tags and entities
+resolved, accents folded and whitespace collapsed. It reads the Astro collection
+when present and falls back to `site/data/*.js`, so the same recorded baseline
+checks both trees.
+
+    node tools/content-baseline.mjs --check     # 451 units, 34,778 comparisons
+
+Record a new baseline only when the content is *meant* to change, and say why in
+the commit.
