@@ -16,7 +16,10 @@
 import { chromium } from 'playwright';
 import fs from 'fs';
 
-const BASE = 'http://127.0.0.1:8823';
+// Takes the server as an argument like every other check here; the hardcoded
+// port meant a run against a different server silently tested nothing but
+// connection errors.
+const BASE = process.argv[2] || 'http://127.0.0.1:8823';
 const ROOT = './dist';
 const CHROME = '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
 
