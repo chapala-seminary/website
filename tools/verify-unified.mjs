@@ -242,5 +242,21 @@ for (const [course, slug, nUnits] of rows) {
 }
 
 console.log(`${units} units, ${checks} content comparisons`);
+/* This tool compares the migrated questions against site/data/*.js, the
+   pre-migration copy in the working tree. When site/ is deleted at cutover
+   every unit is skipped by the existsSync guard above, and a run that checked
+   nothing at all would otherwise print PASS. Say so instead, and fail: a gate
+   that cannot see its reference is not a gate that passed.
+
+   The comparison itself is not lost with site/ -- tools/content-baseline.mjs
+   carries the same content forward as a format-neutral fingerprint, which is
+   why it was written. This tool is the one that needs the old files. */
+if (!units) {
+  console.log('FAIL — no reference data found. site/data/*.js is not in the ' +
+              'working tree, so nothing was compared.\n' +
+              '       After cutover this tool has no reference and should be ' +
+              'retired; tools/content-baseline.mjs is the gate that survives it.');
+  process.exit(1);
+}
 if (!problems.length) console.log('PASS — every question, option, answer key and keyword list preserved.');
 else { console.log(`FAIL — ${problems.length} problems:`); problems.slice(0, 40).forEach(p => console.log('  ' + p)); process.exitCode = 1; }
