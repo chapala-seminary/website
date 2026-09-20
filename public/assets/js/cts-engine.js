@@ -481,8 +481,16 @@
       renderQuestions();
     }
 
-    var sb = submitEl(); if (sb) sb.addEventListener("click", submit);
-    var rb = resetEl(); if (rb) rb.addEventListener("click", reset);
+    /* A control that already calls the engine from an inline onclick must not
+       also get a listener. 32 pages (CTSBible, CTSCS, CTSRE) carry
+       onclick="grade()" / "submitUnit(n)" / "gradeSA()" -- all of which are
+       this same submit() -- so binding here ran it twice per click. The second
+       run saw the lockout the first had just applied and replaced the score
+       with "Locked. Try again in N minutes", so a student who failed never
+       learned how they did. wireLang() already skips inline-onclick controls
+       for the same reason. */
+    var sb = submitEl(); if (sb && !sb.getAttribute("onclick")) sb.addEventListener("click", submit);
+    var rb = resetEl(); if (rb && !rb.getAttribute("onclick")) rb.addEventListener("click", reset);
 
     // cts-lang.js seeds the language at load; it does not handle clicks
     document.addEventListener("cts:langchange", renderQuestions);
