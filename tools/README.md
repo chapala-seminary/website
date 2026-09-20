@@ -1,6 +1,15 @@
 # Migration tooling
 
-Stage 1 turns each course's unit pages from self-contained HTML (inline CSS +
+> **`site/` is gone.** It held the pre-migration tree described below and was
+> deleted at cutover, once `public/` and the generated `dist/` covered
+> everything in it. The last commit that carried it is `f5125a1`, so
+> `git show f5125a1:site/<path>` still reads any of its 1,416 files.
+>
+> Stage 1 documentation is kept because it explains how the current shapes came
+> about, and because `git show <sha>:site/...` still works. Tools that needed
+> `site/` in the *working tree* are retired — see **Retired** at the end.
+
+Stage 1 turned each course's unit pages from self-contained HTML (inline CSS +
 inline exam engine + inline question data) into:
 
     site/assets/css/course-<slug>[-vN].css   stylesheet(s) per course
@@ -8,8 +17,10 @@ inline exam engine + inline question data) into:
     site/data/<slug>/unitN.js                per-unit config + question bank
     site/CTS<Course>UnitN.html               thin page shell
 
-URLs never change. Only each page's own `<style>` blocks and its largest inline
-`<script>` move out.
+URLs never changed. Only each page's own `<style>` blocks and its largest inline
+`<script>` moved out.
+
+Those 102 per-course stylesheets are now one: `public/assets/css/cts.css`.
 
 ## consolidate.py
 
@@ -130,9 +141,13 @@ to the engine API.
 The regression gate across the whole migration: a format-neutral fingerprint of
 every unit — question counts, every answer index, and a digest of the normalised
 question and option text in both languages, with HTML tags and entities
-resolved, accents folded and whitespace collapsed. It reads the Astro collection
-when present and falls back to `site/data/*.js`, so the same recorded baseline
-checks both trees.
+resolved, accents folded and whitespace collapsed. It reads the Astro
+collection, falling back to `site/data/*.js` only when the collection is
+absent — which is why the same recorded baseline survived the migration that
+changed the format, and why it still runs now that `site/` is deleted.
+
+This is the gate that outlived the old tree. Anything that needed `site/` on
+disk could not.
 
     node tools/content-baseline.mjs --check     # 451 units, 34,778 comparisons
 
@@ -304,3 +319,38 @@ it says rather than by how it is built.
 
 Confirmed to fail on 409 pages with the engine's wiring removed, and to pass
 with it in place.
+
+---
+
+# Retired
+
+## verify-unified.mjs *(deleted at cutover)*
+
+Compared every migrated question, option, answer key and keyword list against
+the Stage 1 `site/data/<slug>/unitN.js` files, and proved the conversion of all
+450 units — 35,638 comparisons — at the time it mattered.
+
+It read `site/` from the working tree and skipped any unit whose file was
+missing, so with `site/` deleted it checked nothing and said `PASS`. It was
+taught to fail instead (`139eb2a`), then removed here: a gate that can never
+find its reference again is not a gate, and keeping it invites someone to run
+it and believe the result.
+
+Its job is done and covered. `content-baseline.mjs` carries the same content
+forward as a format-neutral fingerprint that does not need the old files.
+To run the original comparison against history: `git show 139eb2a:tools/verify-unified.mjs`.
+
+## unify.mjs and to-astro.mjs *(kept, but they can no longer run)*
+
+The two one-shot generators that produced this tree: `unify.mjs` made the Stage
+1 split, `to-astro.mjs` turned it into `src/content/units/*.json` and
+`src/body/*.html`. Both read `site/` and now exit non-zero on a missing
+directory rather than reporting success, which is why they were left in place
+while `verify-unified.mjs` was not — a generator that cannot run fails in your
+face, a gate that cannot run congratulates you.
+
+They are kept for what they record. `to-astro.mjs` in particular documents why
+the 451 bodies are carried whole instead of being rebuilt: 255 of them mark no
+boundary between lesson and furniture, so any rule for splitting them is a
+guess, and a wrong guess drops lesson text silently. That constraint still
+governs `src/lib/shell.ts`.
