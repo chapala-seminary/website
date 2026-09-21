@@ -170,10 +170,9 @@
      the audit says so by name, and the suite fails. */
   function submitEl() { return el("submitExamBtn"); }
   function resetEl() { return el("resetExamBtn"); }
-  function gridEl() { return firstEl("progressGrid", "unitnav", "progress-units", "progress-grid"); }
-  function greetEl() {
-    return firstEl("studentGreeting", "student-greeting", "greet", "t-greet", "greeting");
-  }
+  /* One name. The layout renders #greeting on every page; src/lib/shell.ts
+     strips the empty per-page placeholders that used to compete with it. */
+  function greetEl() { return el("greeting"); }
 
   /* A page with nowhere to print the outcome gets one, created next to the
      submit control. Adding an element at runtime is preferable to rewriting
@@ -230,25 +229,12 @@
     if (name) name.addEventListener("input", function () { name.removeAttribute("aria-invalid"); });
   }
 
-  function renderProgressGrid() {
-    var grid = gridEl();
-    if (!grid) return;
-    var titles = (U.unitTitles && U.unitTitles.en) || U.unitTitlesEn || [];
-    var prefix = U.filePrefix || (U.nextHref || "").replace(/Unit\d+\.html$/, "") ||
-                 location.pathname.split("/").pop().replace(/Unit\d+\.html$/, "");
-    var html = "";
-    for (var i = 1; i <= U.totalUnits; i++) {
-      var cls = progress["unit" + i] ? "completed" : "";
-      if (i === U.unit) cls += " active";
-      var t = titles[i - 1] ? ' title="' + String(titles[i - 1]).replace(/"/g, "&quot;") + '"' : "";
-      html += '<a href="' + prefix + "Unit" + i + '.html" class="' + cls.trim() + '"' + t + ">" + i + "</a>";
-    }
-    grid.innerHTML = html;
-  }
-
-  /* The pills in the sticky nav are rendered at build time so the page is
-     readable before any script runs; which of them are finished is the only
-     thing this browser knows and the server does not. */
+  /* renderProgressGrid() lived here. It painted a row of unit circles into
+     whichever of four ids a course used. The sticky nav the layout now renders
+     shows the same units with the same completed state, so the in-page grids
+     were removed as furniture -- which left this function resolving nothing on
+     all 451 pages. Dead code that still runs is worse than none: it reads as a
+     feature. renderUnitPills() below is what marks the nav now. */
   function renderUnitPills() {
     var list = el("cts-units");
     if (!list) return;
@@ -416,7 +402,6 @@
       say(bi({ en: "&#10003; Passed. Continue to " + where.en + " above.",
                es: "&#10003; Aprobado. Continúe a " + where.es + " arriba." }), "#1f6b3b");
       var nb = el("nextUnitBtn"); if (nb) nb.disabled = false;
-      renderProgressGrid();
     } else {
       // MC banked but short answer failed: lock only short answer
       applyLock(mcOK ? KEY.saLock : KEY.fullLock);
@@ -456,7 +441,6 @@
 
   // ---- boot --------------------------------------------------------------
   function boot() {
-    renderProgressGrid();
     renderUnitPills();
     renderRegister();
     wireRegister();

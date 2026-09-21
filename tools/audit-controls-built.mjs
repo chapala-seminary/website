@@ -35,6 +35,22 @@ if (unrenamed.length) {
   process.exit(1);
 }
 
+/* The greeting, same static reasoning as the result area: the layout always
+   renders #greeting, so the live DOM always finds one. What it cannot show is
+   a page that ALSO kept its own placeholder -- which used to win, leaving the
+   layout's blank and the student greeted in a different place on 29 pages. */
+const GREET_ALIASES = ['studentGreeting', 'student-greeting', 'greet', 't-greet'];
+const staleGreet = pages.filter((f) => {
+  const html = fs.readFileSync(`dist/${f}`, 'utf8');
+  return GREET_ALIASES.some((a) => html.includes(`id="${a}"`));
+});
+if (staleGreet.length) {
+  console.log(`FAIL — ${staleGreet.length} page(s) kept a duplicate greeting placeholder:`);
+  staleGreet.slice(0, 8).forEach((x) => console.log('  ' + x));
+  if (staleGreet.length > 8) console.log(`  … and ${staleGreet.length - 8} more`);
+  process.exit(1);
+}
+
 const queue = pages.slice();
 async function work(){
   while(queue.length){

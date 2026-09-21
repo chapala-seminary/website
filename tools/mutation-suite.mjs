@@ -205,6 +205,16 @@ const M = [
     apply: (f) => sub(f[0], "  examResult: ['examStatus'", "  examResultDISABLED: ['examStatus'"),
   },
   {
+    id: 'greeting-duplicate',
+    gate: `node tools/audit-controls-built.mjs ${BASE}`,
+    files: ['src/lib/shell.ts'],
+    needsBuild: true,
+    slow: true,
+    why: 'leave the per-page greeting placeholders in — they win, the layout\'s stays blank',
+    expect: /duplicate greeting placeholder|FAIL/,
+    apply: (f) => sub(f[0], "  '#studentGreeting', '#student-greeting', '#greet', '#t-greet',", ""),
+  },
+  {
     id: 'control-normalise-off',
     gate: `node tools/audit-controls-built.mjs ${BASE}`,
     files: ['src/lib/shell.ts'],

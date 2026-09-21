@@ -40,6 +40,12 @@ const CHROME = [
      navigators on every page. .progress-section is not this: it carries a
      percentage bar and a count, which the nav does not show. */
   '.progress-grid', '#progress-grid', '#progressGrid', '#progress-units',
+  /* Empty greeting placeholders. The layout renders one #greeting on every
+     page; these are the slots the old per-page engines wrote into, and they
+     are empty <div>s and <span>s. Left in place they win over the layout's --
+     the engine tried them first -- so 29 pages put the greeting in their own
+     element while the layout's sat blank. */
+  '#studentGreeting', '#student-greeting', '#greet', '#t-greet',
   // language controls
   '.langbar', '.lang-toggle-group', '.lang-toggle', '.lang-buttons',
   '#langToggleBtn', '.langbtn', 'button.lang-btn',
