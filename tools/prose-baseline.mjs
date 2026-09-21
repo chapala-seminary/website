@@ -42,8 +42,13 @@ const hash = (s) => crypto.createHash('sha1').update(s).digest('base64url').slic
 /* Blocks, not paragraphs: some courses put the lesson in <li>, <blockquote> or
  * a bare <div>. Taking only the innermost element that holds text avoids
  * counting the same words once per ancestor. */
+/* `div` is here deliberately. Forty-four courses put 1,170 Scripture
+ * quotations in <div class="scripture"> and several hundred more paragraphs in
+ * bare <div>s, and a list without it left all of that unguarded -- the quoted
+ * Scripture, of all things. The wrapper rule below keeps a container <div>
+ * from counting its children's words a second time. */
 const BLOCK = ['p','li','blockquote','h1','h2','h3','h4','h5','h6',
-               'td','th','dt','dd','figcaption','summary','pre'];
+               'td','th','dt','dd','figcaption','summary','pre','div'];
 const SEL = BLOCK.join(',');
 
 function blocks(html) {
