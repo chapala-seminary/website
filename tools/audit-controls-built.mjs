@@ -95,9 +95,16 @@ async function work(){
            one -- a page still resolving to #statusMsg would mean shell.ts had
            stopped renaming it. */
         const resultOk = !res || res.id === 'examResult';
+        /* The containers need no static pass: nothing creates them at runtime,
+           so a page that kept an old spelling resolves to nothing and fails on
+           `mc` and on the rendered-question counts below. Naming the id is
+           what keeps the aliases from creeping back. */
+        const hostOk = (!mc || mc.id === 'questionsContainer') &&
+                       (!C?.sa?.() || C.sa().id === 'kwContainer');
         const doubleBound = !!(s && s.getAttribute('onclick') && window.__ctsBound?.has(s));
         return { engine: !!window.CTS_ENGINE, submit: !!s, submitVisible: vis(s),
-                 result: !!res, mc: !!mc, byId, doubleBound, resetOk, resultOk,
+                 result: !!res, mc: !!mc, byId, doubleBound, resetOk, resultOk, hostOk,
+                 mcId: mc ? (mc.id || '(none)') : '(none)',
                  resultId: res ? (res.id || '(none)') : '(none)',
                  submitId: s ? (s.id || '(none)') : '(none)',
                  rendered: document.querySelectorAll('.question[data-mc]').length,
@@ -108,7 +115,7 @@ async function work(){
       // the data actually holds rather than assuming every unit has MC
       const short = r.rendered !== r.wantMc || r.renderedSa !== r.wantSa;
       if(!r.engine || !r.submit || !r.submitVisible || !r.mc || short ||
-         !r.byId || !r.resetOk || !r.resultOk || r.doubleBound || errs.length)
+         !r.byId || !r.resetOk || !r.resultOk || !r.hostOk || r.doubleBound || errs.length)
         bad.push({f, ...r, err: errs[0]?.slice(0,60)});
     }catch(e){ bad.push({f, fatal:String(e).slice(0,60)}); }
     await c.close();
@@ -129,6 +136,7 @@ else{
     if (s.byId === false) why.push(`submit control is #${s.submitId}, not #submitExamBtn — the engine no longer accepts aliases`);
     if (s.resetOk === false) why.push('reset control is not #resetExamBtn');
     if (s.resultOk === false) why.push(`result area is #${s.resultId}, not #examResult`);
+    if (s.hostOk === false) why.push(`question container is #${s.mcId}, not #questionsContainer / #kwContainer`);
     if (s.doubleBound) why.push('submit is bound twice (inline onclick + listener) — the score is replaced by "Locked"');
     console.log(`  ${c}: ${list.length} pages — engine:${s.engine} submit:${s.submit} visible:${s.submitVisible} byId:${s.byId} doubleBound:${s.doubleBound} mcHost:${s.mc} mc:${s.rendered}/${s.wantMc} sa:${s.renderedSa}/${s.wantSa}${s.err?' err:'+s.err:''}${s.fatal?' '+s.fatal:''}`);
     why.forEach(w => console.log(`      ${w}`));

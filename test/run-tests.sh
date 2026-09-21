@@ -64,6 +64,11 @@ node tools/verify-sitemap.mjs dist
 # suite did not run it, so "every step" meant "every step someone remembered".
 node tools/content-baseline.mjs --check
 
+# Source check, no browser needed: every control resolver in cts-engine.js
+# takes exactly one id. Alias lists grow back one convenient addition at a
+# time, and each addition looks reasonable on its own.
+node tools/verify-one-name.mjs
+
 # The lesson prose. content-baseline.mjs checks the questions -- 34,778
 # comparisons -- and says nothing about the teaching itself, which is most of
 # what the seminary actually wrote. This compares every recorded text block

@@ -130,28 +130,29 @@
 
   // ---- rendering ---------------------------------------------------------
   function el(id) { return document.getElementById(id); }
-  function firstEl() {
-    for (var i = 0; i < arguments.length; i++) {
-      var e = el(arguments[i]);
-      if (e) return e;
-    }
-    return null;
-  }
+  /* firstEl() and U_() lived here.
+   *
+   * firstEl() took a list of ids and returned whichever existed, so a control
+   * could be called any of five or eleven things. U_() built the per-unit
+   * variants one course used (mcq_1, result_3). Together they let 451
+   * independently-built pages keep their own markup, which was the right trade
+   * while the pages were being consolidated.
+   *
+   * It stopped being right once one layout rendered all of them. A new page
+   * could pick any accepted name -- or a sixth nobody had taught the engine --
+   * and half-work, silently, until a student found it. src/lib/shell.ts now
+   * renames every control at build time and each resolver below takes exactly
+   * one id. A page that arrives with anything else has no control, and
+   * tools/audit-controls-built.mjs says which page and which id.
+   */
 
-  /* Courses were built independently and name their exam elements differently.
-     Aliasing here is deliberate: it lets every page keep its own markup and
-     stylesheet instead of being rewritten, which is the lower-risk change. */
-  var U_ = function (base) { return base + "_" + U.unit; };   // mcq_1, result_3, ...
-
-  function mcHost() {
-    return firstEl("questionsContainer", "mcContainer", "mcWrap", "mcBlock", "mcqArea",
-                   "mcQuestions", "mcArea", "mc-questions", "mc-container", "mcq",
-                   U_("mcq"), U_("mc"), "mc");
-  }
-  function saHost() {
-    return firstEl("kwContainer", "saWrap", "saBlock", "saQuestions", "saArea",
-                   "kw-questions", "saContainer", "sa-container", U_("essay"), U_("sa"), "sa");
-  }
+  /* One name each. src/lib/shell.ts renames the eleven and nine historical
+     spellings at build time, in this same order, so the element that wins is
+     the one these functions were already choosing. A unit with no short-answer
+     section has no kwContainer, and that is not a defect -- 248 units are
+     multiple-choice only. */
+  function mcHost() { return el("questionsContainer"); }
+  function saHost() { return el("kwContainer"); }
   /* One name. src/lib/shell.ts renames whichever of the eleven historical
      spellings a page used -- in this same order, so the element that wins is
      the one this function was already choosing. A page with no result area at

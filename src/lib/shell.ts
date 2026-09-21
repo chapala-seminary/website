@@ -104,6 +104,16 @@ const CONTROL_IDS: Record<string, (string | RegExp)[]> = {
      place a per-unit id lookup is still needed. */
   examResult: ['examStatus', 'exam-result', 'statusMsg', 'exam-status', 'mcResult',
                'resultBox', 'score', /^result_\d+$/, 'result', 'lockoutTimer', 'lockout-timer'],
+  /* The question containers. Same rule and same order as the result area.
+     The short names -- mc, mcq, sa -- were checked before being treated as
+     aliases: on every page that has one it is a <div> holding that section's
+     questions, nothing else uses those ids, and no body contains a duplicate
+     id. mcq_<n> / essay_<n> are CTSCS again. */
+  questionsContainer: ['mcContainer', 'mcWrap', 'mcBlock', 'mcqArea', 'mcQuestions',
+                       'mcArea', 'mc-questions', 'mc-container', 'mcq',
+                       /^mcq_\d+$/, /^mc_\d+$/, 'mc'],
+  kwContainer: ['saWrap', 'saBlock', 'saQuestions', 'saArea', 'kw-questions',
+                'saContainer', 'sa-container', /^essay_\d+$/, /^sa_\d+$/, 'sa'],
 };
 
 /* Controls the engine binds a listener to. An inline onclick on one of these
