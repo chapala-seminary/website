@@ -28,13 +28,16 @@ cp test/fixtures/synctest.html test/fixtures/syncdown.html dist/
 # before the catalog was generated. It lives in git rather than in the tree, so
 # a tarball export or a shallow clone without that commit has no reference --
 # in which case that one check is skipped, loudly, instead of aborting the run.
+# verify-gating.mjs loads it over HTTP, so it has to be in dist/;
+# verify-catalog.mjs reads it from the working directory. Both, or neither.
 if git show c257ea2:public/index.html > dist/_reference-index.html 2>/dev/null; then
+  cp dist/_reference-index.html ./_reference-index.html
   HAVE_REFERENCE=1
 else
   HAVE_REFERENCE=
   rm -f dist/_reference-index.html
 fi
-trap 'rm -f dist/synctest.html dist/syncdown.html dist/_reference-index.html' EXIT
+trap 'rm -f dist/synctest.html dist/syncdown.html dist/_reference-index.html ./_reference-index.html' EXIT
 
 # The local database is keyed by the database_id in $CONFIG, which is also what
 # `pages dev --d1 DB=local-dev` binds -- that is the only way the schema applied
@@ -45,7 +48,7 @@ npx wrangler d1 execute chapala-students --local --persist-to "$STATE" \
 npx wrangler pages dev dist --port "$PORT" --persist-to "$STATE" \
   --d1 DB=local-dev --compatibility-date 2026-09-01 > "$STATE/dev.log" 2>&1 &
 DEV=$!
-trap 'kill $DEV 2>/dev/null || true; rm -f dist/synctest.html dist/syncdown.html dist/_reference-index.html' EXIT
+trap 'kill $DEV 2>/dev/null || true; rm -f dist/synctest.html dist/syncdown.html dist/_reference-index.html ./_reference-index.html' EXIT
 
 for i in $(seq 1 60); do
   sleep 1
@@ -54,6 +57,12 @@ for i in $(seq 1 60); do
 done
 
 node tools/verify-sitemap.mjs dist
+
+# The question bank: 451 units, 34,778 comparisons of stems, options and answer
+# keys, in a form that does not care what file format the content lives in.
+# The migration plan calls this "the gate for every step" -- and until now the
+# suite did not run it, so "every step" meant "every step someone remembered".
+node tools/content-baseline.mjs --check
 
 # The lesson prose. content-baseline.mjs checks the questions -- 34,778
 # comparisons -- and says nothing about the teaching itself, which is most of
@@ -82,6 +91,15 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   node tools/audit-controls-built.mjs "http://127.0.0.1:$PORT"
   node tools/verify-devmode.mjs "http://127.0.0.1:$PORT"
   node tools/verify-certificates.mjs "http://127.0.0.1:$PORT"
+  # 948 assertions that the built site implements the agreed assessment policy
+  # -- pass mark, lockouts, track rules. Also never run by this suite before.
+  node tools/engine-test-built.mjs "http://127.0.0.1:$PORT"
+  if [ -n "$HAVE_REFERENCE" ]; then
+    node tools/verify-catalog.mjs ./_reference-index.html
+  else
+    echo "  SKIPPED: tools/verify-catalog.mjs — no reference front page in this"
+    echo "           checkout to compare the generated catalog against."
+  fi
   SYNC_BASE="http://127.0.0.1:$PORT" node test/code-ui.test.mjs
 else
   echo

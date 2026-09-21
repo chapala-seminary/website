@@ -14,12 +14,27 @@
 //   node tools/verify-gating.mjs http://127.0.0.1:8798 _reference-index.html
 
 import { chromium } from 'playwright';
+import fs from 'node:fs';
 
 const BASE = process.argv[2] || 'http://127.0.0.1:8798';
 const REFERENCE = process.argv[3] || '_reference-index.html';
 const CHROME = process.env.CHROME_PATH;
 
 const CORE = ['CTSOTS', 'CTSNT', 'CTSST', 'CTSEVANGELISM', 'CTSPM', 'CTSCH', 'WISESPEAK'];
+
+/* Comparing the built page against the reference page is necessary and not
+   sufficient. Both are served from the same directory and both load the same
+   cts-curriculum.js, so a change to the gating RULES moves both sides together
+   and the comparison sees nothing. Removing a course from the foundation list
+   -- which opens courses a student has not earned -- passed this check.
+   That is the mistake that let 480 wrong answer keys through: a checker
+   sharing a dependency with the thing it checks proves nothing.
+   So the locked set is also compared against a recorded expectation that does
+   not come from the page. Record it deliberately, the way the content
+   baselines are recorded:
+       node tools/verify-gating.mjs <base> <reference> --record          */
+const BASELINE = 'test/fixtures/gating-baseline.json';
+const RECORD = process.argv.includes('--record');
 
 const browser = await chromium.launch(CHROME ? { executablePath: CHROME } : {});
 const fails = [];
@@ -56,6 +71,7 @@ async function state(page_, done) {
   return { ...out, errs };
 }
 
+const recorded = {};
 for (const [label, done] of [['a student who has finished nothing', []], ['a student who has finished the foundation', CORE]]) {
   const ref = await state(REFERENCE, done);
   const built = await state('index.html', done);
@@ -74,10 +90,78 @@ for (const [label, done] of [['a student who has finished nothing', []], ['a stu
   ok(JSON.stringify(ref.destinations) === JSON.stringify(built.destinations),
     `${label}: a card leads somewhere different`);
 
+  recorded[label] = { cards: built.cards, locked: built.locked };
   console.log(`  ${label}: ${built.locked.length}/${built.cards} locked (reference ${ref.locked.length}/${ref.cards})`);
 }
 
+/* The rule itself, not only its consequences.
+   Comparing locked sets cannot see a shortened foundation list: a student with
+   nothing is locked out either way, and a student with all seven is let in
+   either way. Testing "a student one course short" only catches it if that
+   happens to be the course removed. So ask the page directly -- for each
+   foundation course in turn, a student holding the other six must NOT have
+   completed the foundation. That pins the requirement at all seven, whatever
+   order the list is in. */
+{
+  const ctx = await browser.newContext();
+  const p = await ctx.newPage();
+  await p.goto(`${BASE}/index.html`, { waitUntil: 'load' });
+  const r = await p.evaluate((core) => {
+    const set = (codes) => {
+      localStorage.setItem('cts_student', JSON.stringify({ name: 'T', track: 'cert' }));
+      localStorage.setItem('cts_done_codes', JSON.stringify(codes));
+    };
+    if (!window.CTSCurriculum || typeof window.CTSCurriculum.coreComplete !== 'function')
+      return { missing: true };
+    const out = { all: null, short: {} };
+    set(core); out.all = window.CTSCurriculum.coreComplete();
+    for (const c of core) { set(core.filter((x) => x !== c)); out.short[c] = window.CTSCurriculum.coreComplete(); }
+    return out;
+  }, CORE);
+  await ctx.close();
+
+  ok(!r.missing, 'the page does not expose CTSCurriculum.coreComplete — the foundation rule was not checked');
+  if (!r.missing) {
+    ok(r.all === true, `a student with all ${CORE.length} foundation courses is not credited with the foundation`);
+    for (const c of CORE)
+      ok(r.short[c] === false,
+        `the foundation no longer requires ${c}`,
+        `a student holding the other ${CORE.length - 1} was credited with the whole foundation`);
+  }
+}
+
 await browser.close();
+
+if (RECORD) {
+  fs.mkdirSync('test/fixtures', { recursive: true });
+  fs.writeFileSync(BASELINE, JSON.stringify(recorded, null, 1));
+  const n = Object.values(recorded).reduce((a, r) => a + r.locked.length, 0);
+  console.log(`recorded ${n} locked-course entries across ${Object.keys(recorded).length} student states -> ${BASELINE}`);
+  process.exit(0);
+}
+
+/* The absolute check: which courses are locked, independent of the reference
+   page and of cts-curriculum.js. */
+if (!fs.existsSync(BASELINE)) {
+  console.log(`FAIL — no gating baseline at ${BASELINE}. Run with --record once, ` +
+              'having checked the locked list below is what the seminary intends.');
+  for (const [label, r] of Object.entries(recorded))
+    console.log(`  ${label}: ${r.locked.length}/${r.cards} locked`);
+  process.exit(1);
+}
+const base = JSON.parse(fs.readFileSync(BASELINE, 'utf8'));
+for (const [label, want] of Object.entries(base)) {
+  const got = recorded[label];
+  const only = (a, b) => a.filter((x) => !b.includes(x));
+  ok(!!got, `${label}: this student state was not checked at all`);
+  if (!got) continue;
+  ok(got.cards === want.cards, `${label}: ${got.cards} cards, baseline recorded ${want.cards}`);
+  ok(JSON.stringify(got.locked) === JSON.stringify(want.locked),
+    `${label}: the locked set no longer matches the recorded one`,
+    `newly OPEN to this student: ${only(want.locked, got.locked).join(' ') || '(none)'}\n` +
+    `        newly LOCKED             : ${only(got.locked, want.locked).join(' ') || '(none)'}`);
+}
+
 console.log(`${checks} gating assertions`);
-if (!fails.length) console.log('PASS — the generated catalog gates exactly as the hand-written one did.');
+if (!fails.length) console.log('PASS — the catalog gates as the hand-written one did, and as recorded.');
 else { console.log(`FAIL — ${fails.length}:`); fails.forEach((f) => console.log('  ' + f)); process.exitCode = 1; }

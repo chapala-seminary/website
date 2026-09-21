@@ -63,6 +63,54 @@ const CHROME = [
 const KEEP = new Set(['steps-list', 'word-header',
   'progress-section', 'progress-bar', 'exam-header', 'quiz-header']);
 
+/* One name per control.
+ *
+ * The 451 courses were built independently and named their exam controls
+ * however they liked, so cts-engine.js carried alias lists: five spellings of
+ * the submit button, five of reset, twenty-four of the result area. Aliasing
+ * let every page keep its own markup, which was the right trade while the
+ * pages were being consolidated. It stopped being right once one layout
+ * rendered all of them: a new page can pick any of the five names, or a sixth
+ * that silently resolves to nothing, and the engine's fallback -- matching the
+ * button by its English or Spanish label -- meant a translator could move a
+ * control by rewording it.
+ *
+ * The rename happens here rather than in src/body/, for the same reason the
+ * masthead is lifted here: those files stay byte-for-byte what the seminary
+ * wrote. Only the built page is uniform.
+ *
+ * The inline onclick goes with it. Every one of them calls an engine global
+ * (grade(), gradeSA(), submitUnit(n)) which is the same submit() the engine
+ * binds, so it was never a fallback -- without the engine it is a
+ * ReferenceError, not a working button -- and having both is what made 43
+ * pages run submit() twice and replace a student's score with "Locked".
+ */
+const CONTROL_IDS: Record<string, string[]> = {
+  submitExamBtn: ['submitBtn', 'completeBtn', 'submit-btn', 'btnSubmit'],
+  resetExamBtn: ['resetBtn', 'btnReset', 'reset-btn'],
+};
+
+function normaliseControls(root: HTMLElement, removed: string[]): void {
+  for (const [canonical, aliases] of Object.entries(CONTROL_IDS)) {
+    // A page that already uses the canonical name is left alone; one that uses
+    // both would be ambiguous, and none do (checked across all 451).
+    const already = root.querySelector('#' + canonical);
+    for (const alias of aliases) {
+      const el = root.querySelector('#' + alias);
+      if (!el) continue;
+      if (already) { removed.push(`#${alias} (kept: #${canonical} already present)`); continue; }
+      el.setAttribute('id', canonical);
+      removed.push(`#${alias} -> #${canonical}`);
+      break;
+    }
+    const el = root.querySelector('#' + canonical);
+    if (el && el.getAttribute('onclick')) {
+      removed.push(`#${canonical}[onclick] (the engine binds this control)`);
+      el.removeAttribute('onclick');
+    }
+  }
+}
+
 export interface Shell {
   masthead: string;   // html for the coloured header band
   content: string;    // everything else, restyled but not rewritten
@@ -145,6 +193,8 @@ export function shell(bodyHtml: string): Shell {
       link.remove();
     }
   }
+
+  normaliseControls(root, removed);
 
   const title = titleBlock(root);
   let masthead = '';

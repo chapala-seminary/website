@@ -157,23 +157,19 @@
                    "resultBox", "score", U_("result"), "result", "lockoutTimer",
                    "lockout-timer");
   }
-  function submitEl() {
-    var e = firstEl("submitExamBtn", "submitBtn", "completeBtn", "submit-btn", "btnSubmit");
-    if (e) return e;
-    /* Some pages give the submit control no id at all. Find it by its label
-       rather than editing the page, and never match a registration button. */
-    var found = null;
-    Array.prototype.forEach.call(document.querySelectorAll("button"), function (b) {
-      if (found) return;
-      var t = (b.textContent || "").trim();
-      if (/^(submit|enviar|grade|check my answers|submit unit)/i.test(t) &&
-          !b.closest("#regCard, #reg-modal, #registrationBar, #registration-card, .reg-form")) {
-        found = b;
-      }
-    });
-    return found;
-  }
-  function resetEl() { return firstEl("resetExamBtn", "resetBtn", "btnReset", "reset-btn"); }
+  /* One name, no fallback. src/lib/shell.ts renames every page's submit and
+     reset control at build time, so the five spellings this used to accept are
+     gone from the built site and tools/audit-controls-built.mjs holds all 451
+     pages to it.
+
+     The label fallback is gone too, and deliberately. It found the button by
+     matching "Submit" or "Enviar" in its text, which meant a translator could
+     move a control by rewording it, and it quietly papered over a page that
+     had no usable id -- the sort of help that hides the problem it solves.
+     A page that reaches here without #submitExamBtn now has no submit control,
+     the audit says so by name, and the suite fails. */
+  function submitEl() { return el("submitExamBtn"); }
+  function resetEl() { return el("resetExamBtn"); }
   function gridEl() { return firstEl("progressGrid", "unitnav", "progress-units", "progress-grid"); }
   function greetEl() {
     return firstEl("studentGreeting", "student-greeting", "greet", "t-greet", "greeting");
