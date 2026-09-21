@@ -152,11 +152,11 @@
     return firstEl("kwContainer", "saWrap", "saBlock", "saQuestions", "saArea",
                    "kw-questions", "saContainer", "sa-container", U_("essay"), U_("sa"), "sa");
   }
-  function resultEl() {
-    return firstEl("examResult", "examStatus", "exam-result", "statusMsg", "exam-status", "mcResult",
-                   "resultBox", "score", U_("result"), "result", "lockoutTimer",
-                   "lockout-timer");
-  }
+  /* One name. src/lib/shell.ts renames whichever of the eleven historical
+     spellings a page used -- in this same order, so the element that wins is
+     the one this function was already choosing. A page with no result area at
+     all still gets one from ensureResult() below. */
+  function resultEl() { return el("examResult"); }
   /* One name, no fallback. src/lib/shell.ts renames every page's submit and
      reset control at build time, so the five spellings this used to accept are
      gone from the built site and tools/audit-controls-built.mjs holds all 451

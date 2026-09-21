@@ -195,6 +195,16 @@ const M = [
     apply: (f) => sub(f[0], '<button id="submitExamBtn" onclick="grade()">', '<button id="submitExamButton" onclick="grade()">'),
   },
   {
+    id: 'result-alias',
+    gate: `node tools/audit-controls-built.mjs ${BASE}`,
+    files: ['src/lib/shell.ts'],
+    needsBuild: true,
+    slow: true,
+    why: 'stop renaming the result area — the engine writes the score nowhere the page shows',
+    expect: /not #examResult|FAIL/,
+    apply: (f) => sub(f[0], "  examResult: ['examStatus'", "  examResultDISABLED: ['examStatus'"),
+  },
+  {
     id: 'control-normalise-off',
     gate: `node tools/audit-controls-built.mjs ${BASE}`,
     files: ['src/lib/shell.ts'],

@@ -85,24 +85,43 @@ const KEEP = new Set(['steps-list', 'word-header',
  * ReferenceError, not a working button -- and having both is what made 43
  * pages run submit() twice and replace a student's score with "Locked".
  */
-const CONTROL_IDS: Record<string, string[]> = {
+const CONTROL_IDS: Record<string, (string | RegExp)[]> = {
   submitExamBtn: ['submitBtn', 'completeBtn', 'submit-btn', 'btnSubmit'],
   resetExamBtn: ['resetBtn', 'btnReset', 'reset-btn'],
+  /* The result area. Aliases are listed in the order cts-engine.js used to try
+     them, so the element that wins here is the one the engine was already
+     writing into -- the rename changes the name, never which element.
+     lockout-timer is included deliberately: on CTSHermeneutics it is an empty
+     <div class="timer"> and the only result-ish element on the page, and the
+     engine has always used it as the result area. result_<n> is CTSCS, which
+     suffixes its ids per unit; folding them in stops that course being the one
+     place a per-unit id lookup is still needed. */
+  examResult: ['examStatus', 'exam-result', 'statusMsg', 'exam-status', 'mcResult',
+               'resultBox', 'score', /^result_\d+$/, 'result', 'lockoutTimer', 'lockout-timer'],
 };
+
+/* Controls the engine binds a listener to. An inline onclick on one of these
+   calls the same engine function the listener does, so keeping both runs it
+   twice; see the note above. Containers are not in this set -- nothing is
+   bound to them and an onclick there would be the page's own business. */
+const ENGINE_BOUND = new Set(['submitExamBtn', 'resetExamBtn']);
 
 function normaliseControls(root: HTMLElement, removed: string[]): void {
   for (const [canonical, aliases] of Object.entries(CONTROL_IDS)) {
-    // A page that already uses the canonical name is left alone; one that uses
-    // both would be ambiguous, and none do (checked across all 451).
-    const already = root.querySelector('#' + canonical);
-    for (const alias of aliases) {
-      const el = root.querySelector('#' + alias);
-      if (!el) continue;
-      if (already) { removed.push(`#${alias} (kept: #${canonical} already present)`); continue; }
-      el.setAttribute('id', canonical);
-      removed.push(`#${alias} -> #${canonical}`);
-      break;
+    // A page already using the canonical name is left alone. None uses both:
+    // checked across all 451, and no body contains a duplicate id at all.
+    if (!root.querySelector('#' + canonical)) {
+      for (const alias of aliases) {
+        const el = typeof alias === 'string'
+          ? root.querySelector('#' + alias)
+          : root.querySelectorAll('[id]').find((n) => alias.test(n.getAttribute('id') || ''));
+        if (!el) continue;
+        removed.push(`#${el.getAttribute('id')} -> #${canonical}`);
+        el.setAttribute('id', canonical);
+        break;                      // first match wins, in the engine's order
+      }
     }
+    if (!ENGINE_BOUND.has(canonical)) continue;
     const el = root.querySelector('#' + canonical);
     if (el && el.getAttribute('onclick')) {
       removed.push(`#${canonical}[onclick] (the engine binds this control)`);
