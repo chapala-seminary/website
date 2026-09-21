@@ -336,8 +336,29 @@ export function shell(bodyHtml: string): Shell {
 
   // The remaining container is now redundant: the layout supplies the column.
   for (const el of root.querySelectorAll('.container')) {
-    el.setAttribute('class',
-      (el.getAttribute('class') || '').split(/\s+/).filter((c) => c !== 'container').join(' '));
+    const rest = (el.getAttribute('class') || '').split(/\s+/).filter((c) => c && c !== 'container');
+    // Removing the only class left `class` behind with no value, which is
+    // valid HTML and still wrong: `<div class>` reads as an oversight to
+    // anyone opening the page, and it would land in the CMS extract.
+    if (rest.length) el.setAttribute('class', rest.join(' '));
+    else el.removeAttribute('class');
+  }
+
+  /* Furniture the CHROME list could not reach because it is nested rather than
+     top-level. A body that wraps itself in <main> produces a <main> inside the
+     layout's <main> -- invalid, on 60 pages -- and empty <header>/<footer>
+     shells are left behind once their contents were removed as chrome. Both
+     would otherwise be indistinguishable from lesson structure to anything
+     reading the built page. */
+  for (const el of root.querySelectorAll('main')) {
+    removed.push(selectorOf(el) + ' (unwrapped: nested inside the layout\'s main)');
+    el.replaceWith(...el.childNodes);
+  }
+  for (const el of root.querySelectorAll('header, footer')) {
+    if (el.text.trim() === '' && !el.querySelector('img,svg,input,button')) {
+      removed.push(selectorOf(el) + ' (empty)');
+      el.remove();
+    }
   }
 
   return { masthead, content: root.toString(), removed };
