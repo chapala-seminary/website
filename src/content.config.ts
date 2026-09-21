@@ -78,4 +78,65 @@ const courses = defineCollection({
   }),
 });
 
-export const collections = { units, courses };
+/* The lesson itself, as data. Until now it was 451 files of hand-written HTML
+   and a teacher who wanted to change one sentence had to find it among the
+   <span>s. src/lib/lesson.ts explains the model; this is the part that makes
+   the build refuse a malformed lesson.
+
+   `translated` is the check worth having: every language a lesson claims must
+   actually be present in every block that has the source language, or a page
+   ships half in English to a Spanish reader. The hand-written files could
+   drop a <span class="lang-es"> and nothing noticed. */
+const text = z.record(z.string(), z.string());
+
+const tr = z.record(z.string(), z.object({
+  status: z.enum(['human', 'machine', 'machine-edited']),
+  from: z.string().length(12),        // hash of the source text it was made from
+}));
+
+const block = z.object({
+  id: z.string().min(1),
+  type: z.enum(['masthead', 'title', 'subtitle', 'heading', 'prose', 'scripture', 'figure']),
+  text: text.optional(),
+  tr: tr.optional(),
+  anchor: z.string().optional(),
+  svg: z.string().optional(),
+  attrs: z.string().optional(),
+  caption: z.object({ text, tr: tr.optional() }).optional(),
+}).refine((b) => b.type === 'figure' ? b.svg != null : b.text != null, {
+  message: 'a figure needs an svg; every other block needs text',
+});
+
+const lessons = defineCollection({
+  loader: glob({
+    pattern: '**/[0-9]*.json',        // _chrome.json is furniture, not a lesson
+    base: './src/content/lessons',
+    generateId: ({ entry }) => entry.replace(/\.json$/, ''),
+  }),
+  schema: z.object({
+    course: z.string().min(1),
+    unit: z.number().int().positive(),
+    sourceLang: z.string().min(2),
+    langs: z.array(z.string().min(2)).min(1),
+    blocks: z.array(block).min(1),
+  })
+    .refine((l) => l.langs.includes(l.sourceLang), {
+      message: 'the source language is not in the lesson\'s language list',
+    })
+    .refine((l) => new Set(l.blocks.map((b) => b.id)).size === l.blocks.length, {
+      message: 'two blocks share an id, so an edit to one would land on the other',
+    })
+    .superRefine((l, ctx) => {
+      for (const b of l.blocks) {
+        const t = b.type === 'figure' ? b.caption?.text : b.text;
+        if (!t || t[l.sourceLang] == null) continue;
+        for (const lang of l.langs) {
+          if (lang === l.sourceLang) continue;
+          if (t[lang] == null) ctx.addIssue({ code: 'custom',
+            message: `block ${b.id} has no ${lang} text, so that reader gets the page half in ${l.sourceLang}` });
+        }
+      }
+    }),
+});
+
+export const collections = { units, courses, lessons };

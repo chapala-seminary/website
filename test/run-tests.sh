@@ -81,6 +81,13 @@ node tools/verify-one-class.mjs dist
 # cannot drop a paragraph without naming it.
 node tools/prose-baseline.mjs check dist
 
+# The converted courses. Their lessons are data now, so two things need saying
+# that the prose baseline cannot say on its own: that the data still renders
+# the page it replaced, element for element, and that automatic translation
+# will not overwrite work a person did.
+node tools/verify-lesson-render.mjs
+node test/lesson-translation.mjs
+
 API_BASE="http://127.0.0.1:$PORT" node test/api.test.mjs
 
 # Some environments (the sandboxed Linux VM the desktop app runs commands in,

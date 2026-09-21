@@ -24,6 +24,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { parse } from 'node-html-parser';
+import { renderLesson } from '../src/lib/lesson.ts';
 
 const BODY_DIR = 'src/body';
 const OUT = 'test/fixtures/prose-baseline.json';
@@ -63,8 +64,30 @@ function blocks(html) {
   return out;
 }
 
+/* A converted course has no file in src/body any more -- its lesson is data.
+ * The baseline still has to be able to read it, or converting a course would
+ * quietly retire the guard on exactly the pages that just changed. So the
+ * lesson is rendered back to markup and read from that. */
+const LESSONS = 'src/content/lessons';
+function fromLesson(file) {
+  const m = file.match(/^(.+)Unit(\d+)\.html$/);
+  if (!m) return null;
+  const dir = path.join(LESSONS, m[1]);
+  const lesson = path.join(dir, `${m[2]}.json`);
+  const shared = path.join(dir, '_shared.json');
+  if (!fs.existsSync(lesson) || !fs.existsSync(shared)) return null;
+  return renderLesson(JSON.parse(fs.readFileSync(lesson, 'utf8')),
+                      JSON.parse(fs.readFileSync(shared, 'utf8')));
+}
+
 function read(dir, file, isDist) {
-  let html = fs.readFileSync(path.join(dir, file), 'utf8');
+  let html;
+  if (!isDist && !fs.existsSync(path.join(dir, file))) {
+    html = fromLesson(file);
+    if (html == null) throw new Error(`no body and no lesson for ${file}`);
+  } else {
+    html = fs.readFileSync(path.join(dir, file), 'utf8');
+  }
   if (isDist) {
     const m = html.match(/<body[^>]*>([\s\S]*)<\/body>/i);
     if (m) html = m[1];

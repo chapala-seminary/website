@@ -127,6 +127,92 @@ const M = [
       write(f[0], s.replace(m[0], ''));
     },
   },
+  /* The lesson pipeline. A converted course is data now, and data is exactly
+     as easy to lose as markup was -- these are the ways it would go. */
+  {
+    id: 'lesson-drop-block',
+    gate: 'node tools/prose-baseline.mjs check dist',
+    files: ['src/content/lessons/CTSHermeneutics/4.json'],
+    needsBuild: true,
+    why: 'delete a paragraph from a converted lesson — the same loss, now in data',
+    expect: /block\(s\) lost/,
+    apply: (f) => {
+      const j = JSON.parse(read(f[0]));
+      const i = j.blocks.findIndex((b) => b.type === 'prose' && (b.text?.en || '').length > 300);
+      if (i < 0) throw new Error('no long paragraph to remove');
+      j.blocks.splice(i, 1);
+      write(f[0], JSON.stringify(j, null, 1));
+    },
+  },
+  {
+    id: 'lesson-drop-spanish',
+    gate: 'npx astro build',
+    files: ['src/content/lessons/CTSHermeneutics/6.json'],
+    why: 'drop one block\'s Spanish — the page half in a language the reader did not choose',
+    expect: /no es text|half in en/,
+    apply: (f) => {
+      const j = JSON.parse(read(f[0]));
+      const b = j.blocks.find((b) => b.type === 'prose');
+      delete b.text.es;
+      write(f[0], JSON.stringify(j, null, 1));
+    },
+  },
+  {
+    id: 'lesson-duplicate-id',
+    gate: 'npx astro build',
+    files: ['src/content/lessons/CTSHermeneutics/7.json'],
+    why: 'give two blocks the same id — an edit to one would land on the other',
+    expect: /share an id/,
+    apply: (f) => {
+      const j = JSON.parse(read(f[0]));
+      j.blocks[3].id = j.blocks[2].id;
+      write(f[0], JSON.stringify(j, null, 1));
+    },
+  },
+  {
+    id: 'lesson-stale-ignored',
+    gate: 'node test/lesson-translation.mjs',
+    files: ['src/lib/lesson.ts'],
+    why: 'call every translation current — automatic translation would then never refresh anything',
+    expect: /FAIL/,
+    apply: (f) => {
+      write(f[0], read(f[0]).replace('return tr.from !== hash(src);', 'return false;'));
+    },
+  },
+  {
+    id: 'lesson-clobbers-human',
+    gate: 'node test/lesson-translation.mjs',
+    files: ['tools/translate-lesson.mjs'],
+    why: 'translate every block, not only the stale ones — a person\'s corrections overwritten on every run',
+    expect: /FAIL/,
+    apply: (f) => {
+      write(f[0], read(f[0]).replace(
+        'if (has && !isStale(b, LANG, l.sourceLang)) continue;', ''));
+    },
+  },
+  {
+    id: 'lesson-wrong-stamp',
+    gate: 'node test/lesson-translation.mjs',
+    files: ['tools/translate-lesson.mjs'],
+    why: 'stamp a translation with the wrong source — every later edit looks already translated',
+    expect: /FAIL/,
+    apply: (f) => {
+      write(f[0], read(f[0]).replace(
+        "p.tr = { ...(p.tr ?? {}), [LANG]: { status: 'machine', from: hash(src) } };",
+        "p.tr = { ...(p.tr ?? {}), [LANG]: { status: 'machine', from: hash('') } };"));
+    },
+  },
+  {
+    id: 'lesson-render-drift',
+    gate: 'node tools/verify-lesson-render.mjs',
+    files: ['src/lib/lesson.ts'],
+    needsBuild: true,
+    why: 'render a Scripture quotation as an ordinary paragraph — the quotation stops looking like one',
+    expect: /differ|FAIL/,
+    apply: (f) => {
+      write(f[0], read(f[0]).replace("scripture: ['div', 'scripture'],", "scripture: ['p', ''],"));
+    },
+  },
   {
     id: 'catalog-title',
     gate: 'node tools/verify-catalog.mjs _reference-index.html',

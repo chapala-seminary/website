@@ -1,23 +1,43 @@
 ---
 import { getCollection } from 'astro:content';
 import Unit from '../layouts/Unit.astro';
+import { renderLesson, type Shared, type Lesson } from '../lib/lesson.ts';
 
 // raw bodies, imported at build time so nothing is fetched at runtime
 const bodies = import.meta.glob('../body/*.html', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
 
+/* What a converted course's units all have in common -- one copy per course
+   rather than one per page. */
+const shareds = import.meta.glob('../content/lessons/*/_shared.json', { import: 'default', eager: true }) as Record<string, Shared>;
+
 export async function getStaticPaths() {
   const units = await getCollection('units');
+  const lessons = await getCollection('lessons');
+  // a course is converted when its lessons are in the collection
+  const byUnit = new Map(lessons.map((l) => [`${l.data.course}/${l.data.unit}`, l.data as Lesson]));
   return units.map((entry) => ({
     // the page name is the URL the site already uses, e.g. CTS1PeterUnit1
     params: { unit: `${entry.data.pagePrefix}Unit${entry.data.unit}` },
-    props: { data: entry.data },
+    props: { data: entry.data, lesson: byUnit.get(`${entry.data.pagePrefix}/${entry.data.unit}`) ?? null },
   }));
 }
 
-const { data } = Astro.props;
-const key = `../body/${data.pagePrefix}Unit${data.unit}.html`;
-const body = bodies[key];
-if (body === undefined) throw new Error(`no body file for ${key}`);
+const { data, lesson } = Astro.props;
+
+/* Two sources, one page. A course that has been converted renders from its
+   lesson data; the rest still render from the HTML file they were written as,
+   and will until they are converted too. Both go through the same layout and
+   the same transform, so a converted course is not a second kind of page. */
+let body: string;
+if (lesson) {
+  const shared = shareds[`../content/lessons/${lesson.course}/_shared.json`];
+  if (shared === undefined) throw new Error(`no shared page parts for ${lesson.course}`);
+  body = renderLesson(lesson, shared);
+} else {
+  const key = `../body/${data.pagePrefix}Unit${data.unit}.html`;
+  body = bodies[key];
+  if (body === undefined) throw new Error(`no body file for ${key}`);
+}
 
 // pagePrefix is build-time routing, not something the engine reads
 const { title, bodyClass, styles, scripts, pagePrefix, ...unit } = data;
