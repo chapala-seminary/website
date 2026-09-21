@@ -234,6 +234,23 @@ const M = [
                             'function submitEl() { return el("submitExamBtn") || el("submitBtn"); }'),
   },
   {
+    id: 'class-alias-css',
+    gate: 'node tools/verify-one-class.mjs dist',
+    files: ['public/assets/css/cts.css'],
+    why: 'the stylesheet re-admits a retired class name',
+    expect: /still styles \.cts-figure|FAIL/,
+    apply: (f) => sub(f[0], '.illustration,figure{', '.illustration,.cts-figure,figure{'),
+  },
+  {
+    id: 'class-normalise-off',
+    gate: 'node tools/verify-one-class.mjs dist',
+    files: ['src/lib/shell.ts'],
+    needsBuild: true,
+    why: 'stop renaming classes at build time — six names for one surface return',
+    expect: /survives on \d+ built page|FAIL/,
+    apply: (f) => sub(f[0], '  normaliseClasses(root);', '  // normaliseClasses(root);'),
+  },
+  {
     id: 'control-normalise-off',
     gate: `node tools/audit-controls-built.mjs ${BASE}`,
     files: ['src/lib/shell.ts'],

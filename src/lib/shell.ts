@@ -116,6 +116,69 @@ const CONTROL_IDS: Record<string, (string | RegExp)[]> = {
                 'saContainer', 'sa-container', /^essay_\d+$/, /^sa_\d+$/, 'sa'],
 };
 
+/* One class per concept.
+ *
+ * cts.css was written to accept whatever the 451 courses already called
+ * things, so its selectors read as alias lists: `.card,.box,.sec,
+ * .lesson-section,.teaching,.teaching-block` is one surface under six names.
+ * That was the right trade when the stylesheet had to land on pages nobody was
+ * editing. It has the same cost the id aliases had: a new page can pick any of
+ * the six, or a seventh that is styled by nothing, and the page looks almost
+ * right.
+ *
+ * Renamed here, at build time, for the same reason as the ids -- src/body/
+ * stays what the seminary wrote.
+ *
+ * What is NOT in here matters as much as what is:
+ *
+ *   lang-en, lang-es, lang-both, en-only, es-only, block-en/es, en-lbl/es-lbl,
+ *   pane.en/es, teach-en/es   -- the bilingual convention. cts-engine.js,
+ *                                cts-lang.js and cts-genesis-engine.js all
+ *                                read these. Renaming one breaks the site in
+ *                                Spanish.
+ *   option, active, done       -- written by the engine onto elements it
+ *                                renders; they never appear in a body.
+ *   cts-locked, course         -- the catalog's, read by cts-curriculum.js.
+ *   cert-seal, seal, cts-emblem-- certificates, read by cts-emblem.js.
+ *   menu, tg, cur              -- the track widget builds its own.
+ *   hidden, hide               -- behaviour, not appearance.
+ *
+ * Every one of those was checked against the scripts that read it, because the
+ * last time I assumed the coupling rather than measuring it I was wrong.
+ */
+const CLASS_ALIASES: Record<string, string[]> = {
+  card: ['box', 'sec', 'lesson-section', 'teaching', 'teaching-block'],
+  btn: ['nav-btn', 'toggle-btn', 'submit-exam', 'clear-btn', 'reset-btn', 'btn-reset'],
+  actions: ['action-buttons', 'exam-controls', 'controls-bar'],
+  scripture: ['pull-quote', 'epigraph', 'verse', 'passage'],
+  note: ['translation-note', 'nl', 'sa-note'],
+  illustration: ['cts-figure'],
+  exam: ['exam-section', 'mc-section', 'sa-section'],
+  'exam-status': ['status', 'lockout-timer'],
+  /* .ref and .passage-label are NOT the same thing and are not merged: a ref
+     is the citation under a quotation, a passage-label the small uppercase
+     heading above a passage. Merging them would have put 14 citations in
+     uppercase. */
+};
+
+/* alias -> canonical, flattened once. */
+const CLASS_CANON = new Map<string, string>();
+for (const [canonical, aliases] of Object.entries(CLASS_ALIASES))
+  for (const a of aliases) CLASS_CANON.set(a, canonical);
+
+function normaliseClasses(root: HTMLElement): void {
+  for (const el of root.querySelectorAll('[class]')) {
+    const had = (el.getAttribute('class') || '').trim().split(/\s+/).filter(Boolean);
+    if (!had.some((c) => CLASS_CANON.has(c))) continue;
+    const out: string[] = [];
+    for (const c of had) {
+      const to = CLASS_CANON.get(c) || c;
+      if (!out.includes(to)) out.push(to);      // `class="card sec"` is one card
+    }
+    el.setAttribute('class', out.join(' '));
+  }
+}
+
 /* Controls the engine binds a listener to. An inline onclick on one of these
    calls the same engine function the listener does, so keeping both runs it
    twice; see the note above. Containers are not in this set -- nothing is
@@ -230,6 +293,20 @@ export function shell(bodyHtml: string): Shell {
   }
 
   normaliseControls(root, removed);
+  normaliseClasses(root);
+
+  /* A language toggle the CHROME list missed, because it is identified by
+     neither id nor a class anyone else uses: <button class="toggle"
+     onclick="toggleLang()">. Eleven pages carry one inside their title block,
+     so it rode into the masthead and sat there as a second language control
+     under the h1, duplicating the nav's English/Español/Both. Matched on what
+     it does rather than what it is called. */
+  for (const b of root.querySelectorAll('button')) {
+    if (/\b(toggleLang|setLang)\s*\(/.test(b.getAttribute('onclick') || '')) {
+      removed.push(selectorOf(b) + ' (duplicate language control)');
+      b.remove();
+    }
+  }
 
   const title = titleBlock(root);
   let masthead = '';

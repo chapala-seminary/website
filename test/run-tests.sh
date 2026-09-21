@@ -69,6 +69,11 @@ node tools/content-baseline.mjs --check
 # time, and each addition looks reasonable on its own.
 node tools/verify-one-name.mjs
 
+# The other half of the same idea, for the stylesheet: one class per concept,
+# checked in the built markup and in cts.css. An alias in either is a rule
+# waiting to disagree with the pages it styles.
+node tools/verify-one-class.mjs dist
+
 # The lesson prose. content-baseline.mjs checks the questions -- 34,778
 # comparisons -- and says nothing about the teaching itself, which is most of
 # what the seminary actually wrote. This compares every recorded text block
