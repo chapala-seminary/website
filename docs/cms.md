@@ -16,12 +16,53 @@ npx http-server dist -p 8123     # or any static server
 ```
 
 Open <http://127.0.0.1:8123/admin/> in **Chrome or Edge**, press **Work with
-Local Repository**, and pick this repository's folder. Sveltia reads and writes
-the files directly. Edits land in your working tree as ordinary file changes —
-`git diff` shows them, `git checkout .` throws them away.
+Local Repository**, and pick this repository's folder — the one holding
+`package.json` and `src/`. Sveltia reads and writes the files directly. Edits
+land in your working tree as ordinary file changes: `git diff` shows them,
+`git checkout .` throws them away.
 
-Safari and Firefox do not have the File System Access API this uses, so the
-button will not work there. Everything else in the CMS does.
+You are looking at the last build, so rebuild to see an edit on the site.
+
+`npm run dev` works too, but the address is
+<http://localhost:4321/admin/index.html> — the dev server does not serve
+`/admin/` as a directory, because `build.format: 'file'` turns off directory
+indexes.
+
+**It must be `localhost` or `127.0.0.1`.** A LAN address (`192.168.…`) or a
+`.local` name is not a secure context, and the browser API this depends on does
+not exist there at all.
+
+**Chrome or Edge only.** Safari and Firefox have no File System Access API.
+Brave ships it but disables it by default, so it looks supported and then
+fails.
+
+### When "Work with Local Repository" does not work
+
+Open **`/admin/check.html`**. It calls the same browser API Sveltia calls and
+prints what actually came back, which the CMS itself does not.
+
+The reason it exists: Sveltia shows one sentence for several unrelated causes
+and puts the real error only in the console. Reading its bundle, the two
+messages mean precise and different things:
+
+| What it says | What actually happened |
+|---|---|
+| *"A repository root directory could not be **selected**"* | `showDirectoryPicker()` threw `AbortError`. **No folder was ever returned** — the dialog was cancelled or dismissed, or Chrome refused the location. The folder you picked is not the problem. |
+| *"The selected folder **is not** a repository root directory"* | A folder came back, but it has no `.git` in it. Wrong folder — pick the one with `package.json` in it. |
+
+So for the first message, in order of likelihood:
+
+1. **The dialog was dismissed.** Escape, Cancel, or clicking away. On macOS it
+   can also open *behind* the browser window — check there before pressing the
+   button again.
+2. **Chrome refused the folder.** It blocks its own profile directory and a
+   short list of system locations: your home folder itself, `/Applications`,
+   `/Library`, `/System`, `/Volumes`. Pick the repository folder, not a parent
+   of it.
+3. **A remembered folder went stale.** Sveltia keeps the handle in IndexedDB;
+   if the folder moved or permission was revoked it silently sends you back to
+   the picker. `/admin/check.html` has a **Forget the remembered folder**
+   button for this.
 
 ---
 
@@ -150,7 +191,7 @@ and it is `noindex` and disallowed in `robots.txt`.
 | Check | What it holds |
 |---|---|
 | `tools/verify-cms-config.mjs` | every field in the content is declared, so nothing is dropped on save; the YAML parses; every converted course has a collection |
-| `tools/verify-cms-loads.mjs` | `/admin` returns 200, the pinned bundle loads, the config is fetched and accepted, local-repository editing is offered, no console errors |
+| `tools/verify-cms-loads.mjs` | `/admin` returns 200, the pinned bundle loads, the config is fetched and accepted, local-repository editing is offered, no console errors, and `/admin/check.html` still reports what it is for |
 
 Both run in `npm test`. Four mutations cover them: an undeclared field, a
 converted course with no collection, malformed YAML, and an admin page that

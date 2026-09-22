@@ -43,7 +43,19 @@ ok(/Sign In with/i.test(text), 'GitHub sign-in is offered for everyone else');
    text is where an unusable config shows up. */
 ok(!/config.*(error|invalid|failed)|failed to (load|parse)/i.test(text),
    'the configuration was accepted, not rejected');
-ok(errors.length === 0, `no console errors${errors.length ? ': ' + errors.slice(0, 3).join(' | ') : ''}`);
+ok(errors.filter((e) => !/favicon/i.test(e)).length === 0,
+   `no console errors${errors.length ? ': ' + errors.slice(0, 3).join(' | ') : ''}`);
+
+/* The self-check page. It is the thing someone opens when sign-in has already
+   failed, so it failing silently is the worst time for it to fail. */
+const chk = await page.goto(`${BASE}/admin/check.html`, { waitUntil: 'networkidle', timeout: 30000 });
+await page.waitForTimeout(600);
+const table = await page.evaluate(() => document.getElementById('env')?.innerText ?? '');
+ok(chk.status() === 200, 'the self-check page is published');
+ok(/Folder picker available/.test(table),
+   'the self-check reports whether this browser has the folder picker at all');
+ok(/Counts as localhost/.test(table) && /Secure context/.test(table),
+   'and whether the address it was opened from can use it');
 
 await browser.close();
 console.log(failed

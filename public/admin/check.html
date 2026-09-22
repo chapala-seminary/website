@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Chapala Seminary — editing self-check</title>
+<!--
+  Why this page exists.
+
+  When "Work with Local Repository" fails, Sveltia shows one sentence -- "A
+  repository root directory could not be selected" -- for several unrelated
+  causes, and puts the real error only in the browser console. Reading its
+  bundle, that sentence means exactly one thing: window.showDirectoryPicker()
+  threw an AbortError. A folder that is not a repository root gives a DIFFERENT
+  message, so the folder choice is not what failed; the picker never returned
+  one.
+
+  This page calls the same browser API Sveltia calls, by itself, and prints
+  what actually came back. It is the difference between "try again" and a
+  named cause.
+-->
+<style>
+  :root { color-scheme: light dark; }
+  body { font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+         max-width: 40rem; margin: 3rem auto; padding: 0 1.25rem; }
+  h1 { font-size: 1.4rem; margin-bottom: .25rem; }
+  .sub { opacity: .7; margin-top: 0; }
+  table { border-collapse: collapse; width: 100%; margin: 1.5rem 0; }
+  td { padding: .45rem .6rem; border-bottom: 1px solid rgba(128,128,128,.28); vertical-align: top; }
+  td:first-child { white-space: nowrap; opacity: .75; width: 12rem; }
+  .yes { color: #1a7f37; font-weight: 600; }
+  .no  { color: #c0392b; font-weight: 600; }
+  button { font: inherit; padding: .6rem 1.1rem; border-radius: 6px; cursor: pointer;
+           border: 1px solid rgba(128,128,128,.5); background: rgba(128,128,128,.12); }
+  button.primary { background: #2563eb; border-color: #2563eb; color: #fff; }
+  #out { margin-top: 1.25rem; padding: 1rem; border-radius: 6px;
+         background: rgba(128,128,128,.12); white-space: pre-wrap; font-family: ui-monospace, monospace;
+         font-size: .875rem; display: none; }
+  #out.show { display: block; }
+  .hint { border-left: 3px solid #2563eb; padding-left: .9rem; margin-top: 1rem; }
+</style>
+</head>
+<body>
+<h1>Editing self-check</h1>
+<p class="sub">What this browser can and cannot do, and what the folder picker actually says.</p>
+
+<table id="env"></table>
+
+<p>
+  <button class="primary" id="pick">Pick a folder, and report what happens</button>
+  <button id="forget">Forget the remembered folder</button>
+</p>
+
+<div id="out"></div>
+
+<script>
+const env = document.getElementById('env');
+const out = document.getElementById('out');
+const say = (t) => { out.textContent = t; out.classList.add('show'); };
+const row = (k, v, ok) => {
+  const cls = ok === undefined ? '' : ok ? 'yes' : 'no';
+  env.insertAdjacentHTML('beforeend',
+    `<tr><td>${k}</td><td class="${cls}">${v}</td></tr>`);
+};
+
+const host = location.hostname;
+const isLocalHost = host === '127.0.0.1' || /^(.+\.)?localhost$/.test(host);
+const hasApi = 'showDirectoryPicker' in window;
+const brands = navigator.userAgentData?.brands?.map((b) => b.brand) ?? [];
+const isBrave = brands.includes('Brave') || !!navigator.brave;
+
+row('Address', location.origin);
+/* Sveltia only offers local editing on 127.0.0.1 or localhost. A LAN address
+   such as 192.168.x.x or a .local name is not a secure context, and the API
+   is simply absent there. */
+row('Counts as localhost', isLocalHost ? 'yes' : 'no — use http://localhost or http://127.0.0.1', isLocalHost);
+row('Secure context', window.isSecureContext ? 'yes' : 'no', window.isSecureContext);
+row('Browser', brands.length ? brands.map((b) => b).join(', ') : navigator.userAgent.slice(0, 90));
+/* Brave ships the API but blocks it behind a flag, so it looks supported and
+   then fails. */
+row('Brave', isBrave ? 'yes — File System Access is off by default in Brave' : 'no', !isBrave);
+row('Folder picker available', hasApi ? 'yes' : 'no — this browser cannot edit locally (Safari and Firefox cannot)', hasApi);
+
+document.getElementById('pick').addEventListener('click', async () => {
+  if (!hasApi) return say('This browser has no folder picker. Use Chrome or Edge.');
+  say('Waiting for the folder dialog…\n\nIf you do not see it, check behind this window.');
+  let dir;
+  try {
+    dir = await window.showDirectoryPicker();
+  } catch (e) {
+    return say(
+      `The picker did not return a folder.\n\n` +
+      `  error: ${e.name}\n` +
+      `  says:  ${e.message}\n\n` +
+      (e.name === 'AbortError'
+        ? 'AbortError means one of two things:\n\n' +
+          '  1. The dialog was cancelled or dismissed (Escape, Cancel, or\n' +
+          '     clicking away). This is by far the most common.\n\n' +
+          '  2. Chrome refused the folder you chose. It blocks its own\n' +
+          '     profile directory and a handful of system locations —\n' +
+          '     your home folder itself, /Applications, /Library, /System,\n' +
+          '     /Volumes. Pick the repository folder itself, not a parent.\n\n' +
+          '  It is NOT a wrong folder. Choosing a folder that is not a\n' +
+          '  repository gives a different error (NotFoundError), which this\n' +
+          '  page reports separately.'
+        : 'This is the error to quote when asking for help.'));
+  }
+
+  /* The same check Sveltia makes: a repository root is a folder with .git in
+     it. Reported here rather than left to fail later with one sentence. */
+  let git = 'missing';
+  try { await dir.getDirectoryHandle('.git'); git = 'yes, a directory'; }
+  catch (e) {
+    if (e.name === 'TypeMismatchError') git = 'yes, a file (a worktree or submodule — fine)';
+    else git = `no (${e.name})`;
+  }
+
+  let perm = 'not requested';
+  try { perm = await dir.requestPermission({ mode: 'readwrite' }); } catch (e) { perm = e.name; }
+
+  const ok = git.startsWith('yes') && perm === 'granted';
+  say(
+    `The picker returned a folder.\n\n` +
+    `  folder:      ${dir.name}\n` +
+    `  has .git:    ${git}\n` +
+    `  can write:   ${perm}\n\n` +
+    (ok
+      ? 'This folder will work. Go back to /admin/ and press\n' +
+        '"Work with Local Repository", then choose this same folder.'
+      : git.startsWith('yes')
+        ? 'Write permission was not granted, so edits could not be saved.\n' +
+          'Choose Allow when the browser asks.'
+        : 'This is not a repository root — there is no .git in it.\n' +
+          'Pick the folder that contains package.json and src/, not a\n' +
+          'parent of it and not a folder inside it.'));
+});
+
+/* Sveltia remembers the folder in IndexedDB. A remembered handle that has gone
+   stale -- the folder moved, or permission was revoked -- sends you back to the
+   picker with no explanation, so there is a way to clear it. */
+document.getElementById('forget').addEventListener('click', async () => {
+  const names = (await indexedDB.databases?.() ?? []).map((d) => d.name).filter(Boolean);
+  const mine = names.filter((n) => /sveltia/i.test(n));
+  await Promise.all(mine.map((n) => new Promise((res) => {
+    const r = indexedDB.deleteDatabase(n); r.onsuccess = r.onerror = r.onblocked = () => res();
+  })));
+  say(mine.length
+    ? `Forgot the remembered folder (${mine.join(', ')}).\nGo back to /admin/ and sign in again.`
+    : 'There was nothing remembered to forget.');
+});
+</script>
+</body>
+</html>
