@@ -32,9 +32,11 @@ indexes.
 `.local` name is not a secure context, and the browser API this depends on does
 not exist there at all.
 
-**Chrome or Edge only.** Safari and Firefox have no File System Access API.
-Brave ships it but disables it by default, so it looks supported and then
-fails.
+**A real Chrome or Edge only** — not merely something Chromium-based. Safari
+and Firefox have no File System Access API at all. Brave ships it but disables
+it by default. A bare Chromium, or a Chromium embedded in another app, reports
+the API as present and then refuses every call. `/admin/check.html` tells you
+which of these you are in.
 
 ### When "Work with Local Repository" does not work
 
@@ -52,14 +54,24 @@ messages mean precise and different things:
 
 So for the first message, in order of likelihood:
 
-1. **The dialog was dismissed.** Escape, Cancel, or clicking away. On macOS it
+1. **It is not a real Chrome or Edge.** This is the one that catches people,
+   because the API *is* present and the button *is* offered. Every Chromium
+   build reports the placeholder brands `Not/A)Brand` and `Chromium`; only a
+   real browser adds `Google Chrome` or `Microsoft Edge` on top. A bare
+   Chromium, or a Chromium embedded in another app's window, has the
+   folder-picker API without the host having granted it, so the call rejects
+   **immediately** — no dialog ever appears — and that is reported exactly the
+   same way as pressing Cancel. The self-check now names this outright, and
+   prints the user agent so there is no guessing. **The tell is that no folder
+   dialog appeared at all.**
+2. **The dialog was dismissed.** Escape, Cancel, or clicking away. On macOS it
    can also open *behind* the browser window — check there before pressing the
    button again.
-2. **Chrome refused the folder.** It blocks its own profile directory and a
+3. **Chrome refused the folder.** It blocks its own profile directory and a
    short list of system locations: your home folder itself, `/Applications`,
    `/Library`, `/System`, `/Volumes`. Pick the repository folder, not a parent
    of it.
-3. **A remembered folder went stale.** Sveltia keeps the handle in IndexedDB;
+4. **A remembered folder went stale.** Sveltia keeps the handle in IndexedDB;
    if the folder moved or permission was revoked it silently sends you back to
    the picker. `/admin/check.html` has a **Forget the remembered folder**
    button for this.

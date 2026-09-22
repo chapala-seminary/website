@@ -68,7 +68,17 @@ const host = location.hostname;
 const isLocalHost = host === '127.0.0.1' || /^(.+\.)?localhost$/.test(host);
 const hasApi = 'showDirectoryPicker' in window;
 const brands = navigator.userAgentData?.brands?.map((b) => b.brand) ?? [];
+const ua = navigator.userAgent;
 const isBrave = brands.includes('Brave') || !!navigator.brave;
+// Every Chromium build reports the placeholder "Not/A)Brand" and "Chromium".
+// Only a real browser adds its own name on top. If neither Google Chrome nor
+// Microsoft Edge is in that list, this is a bare Chromium or one embedded in
+// another app -- and an embedded Chromium has the folder-picker API present
+// without the host app having granted it, so the call rejects with AbortError
+// and looks exactly like a cancelled dialog.
+const REAL = ['Google Chrome', 'Microsoft Edge'];
+const realBrowser = brands.find((b) => REAL.includes(b));
+const isEmbedded = /Electron|wv\)/i.test(ua) || !!window.process?.versions?.electron;
 
 row('Address', location.origin);
 /* Sveltia only offers local editing on 127.0.0.1 or localhost. A LAN address
@@ -76,7 +86,18 @@ row('Address', location.origin);
    is simply absent there. */
 row('Counts as localhost', isLocalHost ? 'yes' : 'no — use http://localhost or http://127.0.0.1', isLocalHost);
 row('Secure context', window.isSecureContext ? 'yes' : 'no', window.isSecureContext);
-row('Browser', brands.length ? brands.map((b) => b).join(', ') : navigator.userAgent.slice(0, 90));
+row('Browser', brands.length ? brands.join(', ') : '(does not report brands)');
+row('A real Chrome or Edge',
+    realBrowser
+      ? `yes \u2014 ${realBrowser}`
+      : 'no \u2014 only the placeholder Chromium brands are reported. This is a '
+        + 'bare Chromium, or one embedded in another app. The folder picker '
+        + 'exists here but the host has not granted it, so it rejects the same '
+        + 'way a cancelled dialog does. Open this page in Google Chrome or '
+        + 'Microsoft Edge.',
+    !!realBrowser);
+if (isEmbedded) row('Embedded browser', 'yes \u2014 an app window, not a browser tab', false);
+row('User agent', ua);
 /* Brave ships the API but blocks it behind a flag, so it looks supported and
    then fails. */
 row('Brave', isBrave ? 'yes — File System Access is off by default in Brave' : 'no', !isBrave);
@@ -93,18 +114,26 @@ document.getElementById('pick').addEventListener('click', async () => {
       `The picker did not return a folder.\n\n` +
       `  error: ${e.name}\n` +
       `  says:  ${e.message}\n\n` +
-      (e.name === 'AbortError'
-        ? 'AbortError means one of two things:\n\n' +
-          '  1. The dialog was cancelled or dismissed (Escape, Cancel, or\n' +
-          '     clicking away). This is by far the most common.\n\n' +
-          '  2. Chrome refused the folder you chose. It blocks its own\n' +
-          '     profile directory and a handful of system locations —\n' +
-          '     your home folder itself, /Applications, /Library, /System,\n' +
-          '     /Volumes. Pick the repository folder itself, not a parent.\n\n' +
-          '  It is NOT a wrong folder. Choosing a folder that is not a\n' +
-          '  repository gives a different error (NotFoundError), which this\n' +
-          '  page reports separately.'
-        : 'This is the error to quote when asking for help.'));
+      (e.name !== 'AbortError'
+        ? 'This is the error to quote when asking for help.'
+        : !realBrowser
+          ? 'The browser row above is almost certainly the reason.\n\n' +
+            'This is not a real Chrome or Edge \u2014 it reports only the\n' +
+            'placeholder Chromium brands. A bare or embedded Chromium has\n' +
+            'this API present but not granted, so the call rejects at once\n' +
+            'and is indistinguishable from pressing Cancel.\n\n' +
+            'Did a folder dialog actually appear? If it did not, that is\n' +
+            'this. Open this page in Google Chrome or Microsoft Edge.'
+          : 'AbortError means one of two things:\n\n' +
+            '  1. The dialog was cancelled or dismissed (Escape, Cancel, or\n' +
+            '     clicking away). This is by far the most common.\n\n' +
+            '  2. Chrome refused the folder you chose. It blocks its own\n' +
+            '     profile directory and a handful of system locations \u2014\n' +
+            '     your home folder itself, /Applications, /Library, /System,\n' +
+            '     /Volumes. Pick the repository folder itself, not a parent.\n\n' +
+            '  It is NOT a wrong folder. Choosing a folder that is not a\n' +
+            '  repository gives a different error (NotFoundError), which this\n' +
+            '  page reports separately.'));
   }
 
   /* The same check Sveltia makes: a repository root is a folder with .git in
