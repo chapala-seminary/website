@@ -101,12 +101,79 @@ lesson text is ever left in a template again.
 
 ---
 
+## 5. Furniture text taken out of the lesson data — **nothing on the site changed**
+
+Not a content change: **every one of the 800 built pages is byte-for-byte
+identical before and after.** It is recorded here because 1,925 blocks of text
+left the lesson files, and a number that large deserves an explanation rather
+than a diff.
+
+`src/lib/shell.ts` deletes a list of page furniture from every lesson body at
+build time — unit navigation, the registration card, language toggles, page
+headers and footers — because the layout renders each of those once, correctly,
+for all 451 pages. That markup had therefore been sitting in the data and *not*
+on the site ever since. Some of it held text, and the extractor had dutifully
+turned that text into editable blocks, so the CMS was offering a teacher fields
+like "📝 Course Registration", "📚 Catalog", "Next Unit →" and "Clear Saved
+Data" — fields they could change with no effect on anything. That is worse than
+useless; it is misleading.
+
+`tools/strip-chrome.mjs` removed it, taking its selector list from `shell.ts`
+itself rather than a copy, so the two cannot drift.
+
+| | before | after |
+|---|---|---|
+| template markup | 4.37 MB | 3.33 MB |
+| editable blocks | 20,864 | 18,939 |
+| text frozen in templates | 73,208 chars | 7,323 chars |
+
+1,925 blocks and 131,852 characters of furniture text were removed, from 40
+courses. The largest groups:
+
+| Selector | Blocks |
+|---|---|
+| `#regCard` | 531 |
+| `#regModal` | 422 |
+| `#catalogLink` | 189 |
+| `#registrationCard` | 143 |
+| `#registrationSection` | 80 |
+| `nav.unitnav` | 70 |
+| `.nav-bar` | 58 |
+
+**Every word of it is kept**, verbatim and in both languages, in
+`docs/removed-chrome-text.json`, keyed by course, unit and selector. Nothing
+has to be recovered from the history to read it or put it back.
+
+The proof is `tools/verify-unchanged.mjs`, which compares a build made before
+the change against the build made after, element by element and in document
+order — 800 pages, 196,105 elements, no difference. `diff -rq` on the two
+`dist/` directories is also empty.
+
+---
+
+## 6. The honours-readings box now has one definition
+
+Also not a content change, and also byte-identical on every page.
+
+The box — *"📖 Honors Readings · Lecturas con Honores"* — was written out in
+434 of the 451 templates, 406 KB of markup. All 434 copies were the same
+character for character except the link to that course's reading room, which
+`tools/lift-honours-partial.mjs` proved before it changed anything. Rewording
+it used to mean editing 434 files.
+
+It now lives once, in `src/lib/partials.ts`, and the templates say
+`<!--cts-part:honours-->`. See `docs/templating.md`.
+
+---
+
 ## How to check any of this yourself
 
 ```
 node tools/lesson-status.mjs             # every block's translation state
 node tools/verify-lesson-render.mjs      # all 451 pages against the reference
 node tools/prose-baseline.mjs check dist # 25,773 recorded text blocks
+node tools/verify-editable.mjs           # is every word reachable from the CMS
+node tools/verify-partials.mjs           # partials and templates still agree
 ```
 
 The reference in `test/fixtures/lesson-render.json` was re-recorded after each

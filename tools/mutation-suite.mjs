@@ -20,6 +20,7 @@
  */
 import { execFileSync, execSync } from 'node:child_process';
 import fs from 'node:fs';
+import { createHash } from 'node:crypto';
 import { parse as parseYaml, stringify as toYaml } from 'yaml';
 
 const BASE = process.env.BASE || 'http://127.0.0.1:8791';
@@ -117,15 +118,22 @@ const M = [
   {
     id: 'prose-drop',
     gate: 'node tools/prose-baseline.mjs check dist',
-    files: ['src/body/CTSActsUnit3.html'],
+    /* This used to point at src/body/CTSActsUnit3.html. That file stopped
+       existing when the last course was converted, and because the harness
+       reads every mutation's files up front, ONE stale path made the whole
+       suite crash on startup -- so the suite that exists to prove the gates
+       can fail was itself unable to run. Which is the joke this project keeps
+       telling. It now edits the same lesson through the data. */
+    files: ['src/content/lessons/CTSActs/3.json'],
     needsBuild: true,
-    why: 'delete a paragraph of the lesson — what a body transform does wrong',
+    why: 'lose a paragraph of the lesson — what a body transform does wrong',
     expect: /block\(s\) lost/,
     apply: (f) => {
-      const s = read(f[0]);
-      const m = s.match(/<p[^>]*>[^<]{300,}<\/p>/);
-      if (!m) throw new Error('no long paragraph to remove');
-      write(f[0], s.replace(m[0], ''));
+      const j = JSON.parse(read(f[0]));
+      const b = j.blocks.find((x) => (x.text?.en || '').length > 300);
+      if (!b) throw new Error('no long paragraph to lose');
+      b.text.en = b.text.en.slice(0, 40) + ' MUTATED';
+      write(f[0], JSON.stringify(j, null, 1) + '\n');
     },
   },
   /* The lesson pipeline. A converted course is data now, and data is exactly
@@ -312,7 +320,15 @@ const M = [
   {
     id: 'baseline-records-nothing',
     gate: 'node tools/prose-baseline.mjs record',
-    files: ['tools/prose-baseline.mjs'],
+    /* The fixture is listed even though the mutation does not edit it, because
+       the GATE writes it: `record` rewrites the baseline, and the harness only
+       restores what a mutation declares. Left off this list, the green run
+       before the mutation quietly re-recorded the baseline from the current
+       tree -- so any content the working tree had just lost was written into
+       the standard it is measured against, and the next check passed. That
+       happened. It cost 781 blocks of coverage and was caught by comparing
+       against the committed copy, not by anything here. */
+    files: ['tools/prose-baseline.mjs', 'test/fixtures/prose-baseline.json'],
     why: 'the prose baseline records nothing and every check then passes against nothing',
     expect: /REFUSING to record/,
     apply: (f) => {
@@ -398,7 +414,9 @@ const M = [
   {
     id: 'submit-id',
     gate: `node tools/audit-controls-built.mjs ${BASE}`,
-    files: ['src/body/CTSREUnit1.html'],
+    /* Was src/body/CTSREUnit1.html until CTSRE was converted; the button now
+       lives in that unit's template. Same button, same page, same defect. */
+    files: ['src/content/lessons/CTSRE/1.json'],
     needsBuild: true,
     slow: true,
     /* A SIXTH spelling, not one of the five shell.ts knows. Renaming to a known
@@ -407,7 +425,7 @@ const M = [
        has taught the transform about. */
     why: 'a page invents a control id nothing knows — the alias problem, returning',
     expect: /not #submitExamBtn|FAIL/,
-    apply: (f) => sub(f[0], '<button id="submitExamBtn" onclick="grade()">', '<button id="submitExamButton" onclick="grade()">'),
+    apply: (f) => sub(f[0], '<button id=\\"submitExamBtn\\" onclick=\\"grade()\\">', '<button id=\\"submitExamButton\\" onclick=\\"grade()\\">'),
   },
   {
     id: 'result-alias',
@@ -422,12 +440,27 @@ const M = [
   {
     id: 'greeting-duplicate',
     gate: `node tools/audit-controls-built.mjs ${BASE}`,
-    files: ['src/lib/shell.ts'],
+    /* This used to be a one-file mutation: take the greeting placeholders out
+       of shell.ts's CHROME list and watch 29 pages go blank. It stopped
+       reproducing anything when strip-chrome.mjs removed those placeholders
+       from the templates -- there was nothing left for shell.ts to fail to
+       remove, so the gate passed and the mutation was MISSED. That is the
+       defence moving, not disappearing, but a mutation that cannot fail is
+       worth nothing, so it now reintroduces the hazard as well as disabling
+       the defence: put a placeholder back into a lesson AND stop shell.ts
+       taking it out. Both, because either alone is harmless. */
+    files: ['src/lib/shell.ts', 'src/content/lessons/CTSActs/3.json'],
     needsBuild: true,
     slow: true,
-    why: 'leave the per-page greeting placeholders in — they win, the layout\'s stays blank',
+    why: 'a page carries its own greeting placeholder and shell.ts stops removing it — '
+       + 'it wins, and the layout\'s greeting stays blank',
     expect: /duplicate greeting placeholder|FAIL/,
-    apply: (f) => sub(f[0], "  '#studentGreeting', '#student-greeting', '#greet', '#t-greet',", ""),
+    apply: (f) => {
+      sub(f[0], "  '#studentGreeting', '#student-greeting', '#greet', '#t-greet',", '');
+      const j = JSON.parse(read(f[1]));
+      j.template = '<div id=\"studentGreeting\"></div>' + j.template;
+      write(f[1], JSON.stringify(j, null, 1) + '\n');
+    },
   },
   {
     id: 'container-alias',
@@ -534,6 +567,44 @@ const M = [
     expect: /do not load cts-sync|never probed|FAIL/,
     apply: (f) => sub(f[0], '<script src="assets/js/cts-sync.js" defer></script>', ''),
   },
+
+  /* ---- the partials -------------------------------------------------- */
+  /* Markup that is the same on every page now lives in one place, which is
+     the point and also the risk: one wrong character is wrong on 434 pages
+     at once. These are the three ways it can go wrong quietly. */
+  {
+    id: 'partial-unknown-name',
+    gate: 'node tools/verify-partials.mjs',
+    files: ['src/content/lessons/CTSActs/3.json'],
+    why: 'misspell a partial\'s name in a template — a page renders with a gap in it',
+    expect: /does not define/,
+    apply: (f) => sub(f[0], '<!--cts-part:honours-->', '<!--cts-part:honors-->'),
+  },
+  {
+    id: 'partial-no-reading-room',
+    gate: 'node tools/verify-partials.mjs',
+    files: ['src/lib/partials.ts'],
+    why: 'a course loses its reading room — the honours box would point nowhere',
+    expect: /no reading room/,
+    apply: (f) => sub(f[0], '  CTSActs: "CTSActsReadings.html",\n', ''),
+  },
+  {
+    id: 'partial-unused',
+    gate: 'node tools/verify-partials.mjs',
+    files: ['src/lib/partials.ts'],
+    why: 'define a partial nothing names — markup that is maintained and never seen',
+    expect: /which no template names/,
+    apply: (f) => sub(f[0], '  honours: honoursBox,', '  honours: honoursBox,\n  ghost: () => \'<i>x</i>\','),
+  },
+  {
+    id: 'partial-build-stops',
+    gate: 'npm run build',
+    files: ['src/content/lessons/CTSActs/3.json'],
+    why: 'the same misspelling, against the build itself — renderLesson must refuse, '
+       + 'not render a page with a hole in it',
+    expect: /asks for a partial named/,
+    apply: (f) => sub(f[0], '<!--cts-part:honours-->', '<!--cts-part:honors-->'),
+  },
 ];
 
 /* ---- runner ------------------------------------------------------------ */
@@ -604,8 +675,28 @@ const emergency = () => { if (live) { live(); live = null; } clearBackup(); };
 for (const sig of ['SIGINT', 'SIGTERM', 'SIGHUP'])
   process.on(sig, () => { emergency(); process.exit(130); });
 
+/* A gate is meant to READ the tree, not write to it. One of them wrote to a
+   fixture, and because the harness restores only what a mutation declares,
+   the damage outlived the run and weakened the very baseline the suite
+   exists to protect. So: hash everything a gate could plausibly write to,
+   before and after, and say so if any of it moved. */
+const WATCHED = ['test/fixtures', 'tools/content-baseline.json', 'public/admin/config.yml'];
+const watchFiles = () => {
+  const out = [];
+  const walk = (p) => {
+    if (!fs.existsSync(p)) return;
+    if (fs.statSync(p).isDirectory()) { for (const c of fs.readdirSync(p)) walk(`${p}/${c}`); return; }
+    out.push(p);
+  };
+  for (const w of WATCHED) walk(w);
+  /* The content, not just a hash: detecting the damage after the fact is not
+     much use if the only copy of what was there is now gone. */
+  return new Map(out.map((f) => [f, read(f)]));
+};
+
 const results = [];
 for (const m of chosen) {
+  const watchedBefore = watchFiles();
   const backup = new Map(m.files.map((f) => [f, read(f)]));
   const restore = () => { for (const [f, s] of backup) write(f, s); };
   saveBackup(backup);
@@ -643,6 +734,22 @@ for (const m of chosen) {
         console.error(`\nCOULD NOT RESTORE ${f} — stop and check it before doing anything else.`);
         process.exit(3);
       }
+    /* And that nothing the mutation did NOT declare was changed underneath
+       it. A gate that writes to a fixture corrupts the standard silently and
+       for good; better to stop the run and say which file. */
+    const watchedAfter = watchFiles();
+    const strayed = [];
+    for (const [f, want] of watchedBefore)
+      if (watchedAfter.get(f) !== want) { write(f, want); strayed.push(f); }
+    for (const f of watchedAfter.keys())
+      if (!watchedBefore.has(f)) strayed.push(`${f} (created)`);
+    if (strayed.length) {
+      console.error(`\n${m.id} changed ${strayed.join(', ')} without declaring `
+        + 'it. Its gate writes there. Put the file(s) in its files list.');
+      console.error('They have been put back, so nothing is lost — but stop and fix the list, '
+        + 'because a run that records this tree as its own standard passes against anything.');
+      process.exit(3);
+    }
   }
   results.push(row);
 }

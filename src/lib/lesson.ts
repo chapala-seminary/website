@@ -67,8 +67,28 @@
  * never silently overwritten by the next automatic pass. Without this, a
  * re-translation either clobbers a person's work or leaves the wrong text in
  * place, and nothing can tell you which happened.
+ *
+ * PARTIALS -- MARKUP THAT IS THE SAME ON EVERY PAGE
+ *
+ * Some markup is not lesson text at all. The honours-readings box sat in 434
+ * templates, 406 KB of it, and every copy was the same but for the link it
+ * points at. Nobody could reword it: you would have had to edit 434 files, or
+ * re-run extraction against source HTML that no longer matches the site.
+ *
+ * So a template may also contain a named partial:
+ *
+ *   <!--cts-part:honours-->
+ *
+ * which is resolved at render time from one definition in `partials.ts`. The
+ * spelling is deliberately not `<!--cts:...-->`: a partial is not a block, it
+ * has no language and no translation state, and a reader should not have to
+ * squint to tell them apart.
+ *
+ * An unknown name throws, for the same reason an orphan hole does -- a typo
+ * that renders a page with a gap in it is worse than a build that stops.
  */
 import crypto from 'node:crypto';
+import { PARTIALS, type PartialContext } from './partials.ts';
 
 export type Lang = string;
 export type Text = Record<Lang, string>;
@@ -116,6 +136,11 @@ export const isStale = (b: Block, lang: Lang, sourceLang: Lang) => {
 export const HOLE = (id: string, lang: Lang) => `<!--cts:${id}:${lang}-->`;
 const HOLE_RE = /<!--cts:([A-Za-z0-9_-]+):([A-Za-z-]+)-->/g;
 
+/* The hole a named partial fills. Not spelled like a block's hole because it
+   is not one: no language, no translation state, no editor field. */
+export const PART = (name: string) => `<!--cts-part:${name}-->`;
+const PART_RE = /<!--cts-part:([a-z0-9-]+)-->/g;
+
 /* Data back to the page. Every hole must be filled and every block must be
    used: a template and a block list that disagree mean the conversion lost
    something, and it is better to say so than to render a page with a gap in
@@ -132,9 +157,15 @@ export function renderLesson(lesson: Lesson, langs: Lang[] = lesson.langs): stri
     if (t == null) throw new Error(`${lesson.course} unit ${lesson.unit}: block ${id} has a hole for ${lang} and no ${lang} text`);
     return t;
   });
+  const withParts = out.replace(PART_RE, (_m, name: string) => {
+    const part = PARTIALS[name];
+    if (!part) throw new Error(`${lesson.course} unit ${lesson.unit}: the template asks for a partial named "${name}", which is not defined in partials.ts`);
+    const ctx: PartialContext = { course: lesson.course, unit: lesson.unit, langs };
+    return part(ctx);
+  });
   if (used.size !== byId.size) {
     const orphans = [...byId.keys()].filter((id) => !used.has(id));
     throw new Error(`${lesson.course} unit ${lesson.unit}: ${orphans.length} block(s) have no hole in the template: ${orphans.slice(0, 5).join(', ')}`);
   }
-  return out;
+  return withParts;
 }

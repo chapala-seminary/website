@@ -98,6 +98,12 @@ node tools/verify-cms-config.mjs
 # perfectly and cannot be edited, so nothing else would notice it.
 node tools/verify-editable.mjs
 
+# The partials -- markup that is the same on every page and now lives in one
+# place. A template naming a partial that does not exist stops the build; this
+# also catches the other two ways it rots quietly: a partial nothing names, and
+# a course using the honours box with no reading room recorded for it.
+node tools/verify-partials.mjs
+
 API_BASE="http://127.0.0.1:$PORT" node test/api.test.mjs
 
 # Some environments (the sandboxed Linux VM the desktop app runs commands in,

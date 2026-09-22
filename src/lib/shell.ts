@@ -29,7 +29,7 @@ import { parse, type HTMLElement } from 'node-html-parser';
  * never on position -- so a page that happens to order things differently is
  * still handled. Each entry was read before it was added; see the inventory in
  * the commit that introduced this file. */
-const CHROME = [
+export const CHROME = [
   // unit navigation, in its five spellings
   '.nav-bar', 'nav.unitnav', '#unitnav', 'nav.cts-unitnav', '.cts-unitnav',
   '#unitNav', '.unit-nav', '.nav-links', '.navrow', '.nav-next', '.foot-nav',
@@ -66,7 +66,7 @@ const CHROME = [
  * reading them, not by guessing: .steps-list is Drakeford's ten steps,
  * .word-header is the Hebrew word under study, .progress-* is the student's
  * own progress and stays on the page. */
-const KEEP = new Set(['steps-list', 'word-header',
+export const KEEP = new Set(['steps-list', 'word-header',
   'progress-section', 'progress-bar', 'exam-header', 'quiz-header']);
 
 /* One name per control.
