@@ -1,0 +1,502 @@
+{
+ "course": "CTSCults",
+ "unit": 6,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #2f4f2f;\"><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\">\n    <h2><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></p>\n    <input type=\"text\" id=\"regName\" placeholder=\"Full name / Nombre completo\" aria-label=\"Full name / Nombre completo\">\n    <input type=\"email\" id=\"regEmail\" placeholder=\"Email\" aria-label=\"Email\">\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate Track</option>\n        <option value=\"mdiv\">Master of Divinity (M.Div.) Track</option>\n        <option value=\"thm\">Master of Theology (Th.M.) Track</option>\n    </select>\n    <button class=\"nav-btn\" id=\"regBtn\"><span class=\"lang-en\"><!--cts:b008:en--></span><span class=\"lang-es\"><!--cts:b008:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\">\n<p class=\"passage-label\"><!--cts:b009:en--></p>\n<div class=\"scripture\"><!--cts:b010:en--></div>\n\n<h3><!--cts:b011:en--></h3>\n<p><!--cts:b012:en--></p>\n\n<h3><!--cts:b013:en--></h3>\n<p><!--cts:b014:en--></p>\n\n<h3><!--cts:b015:en--></h3>\n<p><!--cts:b016:en--></p>\n\n<h3><!--cts:b017:en--></h3>\n<p><!--cts:b018:en--></p>\n\n<h3><!--cts:b019:en--></h3>\n<p><!--cts:b020:en--></p>\n\n<h3><!--cts:b021:en--></h3>\n<p><!--cts:b022:en--></p>\n\n<h3><!--cts:b023:en--></h3>\n<p><!--cts:b024:en--></p>\n\n<h3><!--cts:b025:en--></h3>\n<p><!--cts:b026:en--></p>\n\n<h3><!--cts:b027:en--></h3>\n<p><!--cts:b028:en--></p>\n\n<h3><!--cts:b029:en--></h3>\n<p><!--cts:b030:en--></p>\n<div class=\"scripture\"><!--cts:b031:en--></div>\n</div>\n\n<div class=\"lang-es\">\n<p class=\"passage-label\"><!--cts:b009:es--></p>\n<div class=\"scripture\"><!--cts:b010:es--></div>\n\n<h3><!--cts:b011:es--></h3>\n<p><!--cts:b012:es--></p>\n\n<h3><!--cts:b013:es--></h3>\n<p><!--cts:b014:es--></p>\n\n<h3><!--cts:b015:es--></h3>\n<p><!--cts:b016:es--></p>\n\n<h3><!--cts:b017:es--></h3>\n<p><!--cts:b018:es--></p>\n\n<h3><!--cts:b019:es--></h3>\n<p><!--cts:b020:es--></p>\n\n<h3><!--cts:b021:es--></h3>\n<p><!--cts:b022:es--></p>\n\n<h3><!--cts:b023:es--></h3>\n<p><!--cts:b024:es--></p>\n\n<h3><!--cts:b025:es--></h3>\n<p><!--cts:b026:es--></p>\n\n<h3><!--cts:b027:es--></h3>\n<p><!--cts:b028:es--></p>\n\n<h3><!--cts:b029:es--></h3>\n<p><!--cts:b030:es--></p>\n<div class=\"scripture\"><!--cts:b031:es--></div>\n</div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b032:en--></span><span class=\"lang-es\"><!--cts:b032:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b033:en--></span>\n       <span class=\"lang-es\"><!--cts:b033:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b034:en--></span><span class=\"lang-es\"><!--cts:b034:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b035:en--></span><span class=\"lang-es\"><!--cts:b035:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n  \n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSCultsReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "Unit 7 →",
+    "es": "Unidad 7 →"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0c9938797e8b"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "📖 Cults &amp; World Religions — Unit 6: Progressive Revelation — Islam and Bahá'í",
+    "es": "📖 Las Sectas y las Religiones del Mundo — Unidad 6: Revelación Progresiva — El Islam y la Fe Bahá'í"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "30cc3e822fed"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "\"But even if we, or an angel from heaven, preach any other gospel to you than what we have preached to you, let him be accursed.\" — Galatians 1:8 (NKJV)",
+    "es": "\"Mas si aun nosotros, o un ángel del cielo os predicare otro evangelio diferente del que os hemos predicado, sea anatema.\" — Gálatas 1:8 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2e39e35f057a"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "📝 Course Registration",
+    "es": "📝 Registro del Curso"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fde900fe006b"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Welcome to Cults &amp; World Religions. Please register before beginning Unit 6.",
+    "es": "Bienvenido a Las Sectas y las Religiones del Mundo. Por favor regístrese antes de comenzar la Unidad 6."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1f08ccf78cb5"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "scripture",
+   "text": {
+    "en": "<strong>Anchor: Hebrews 1:1-3; Jude 3; John 14:6; Galatians 1:8 (NKJV)</strong>",
+    "es": "<strong>Texto base: Hebreos 1:1-3; Judas 3; Juan 14:6; Gálatas 1:8 (RVG)</strong>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "327c09bf779e"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "scripture",
+   "text": {
+    "en": "\"God, who at various times and in various ways spoke in time past to the fathers by the prophets, has in these last days spoken to us by His Son.\" — Hebrews 1:1-2 (NKJV)",
+    "es": "\"Dios, habiendo hablado muchas veces y de muchas maneras en otro tiempo a los padres por los profetas, en estos postreros días nos ha hablado por su Hijo.\" — Hebreos 1:1-2 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "17f0e5fc8ebf"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "heading",
+   "text": {
+    "en": "A Word Before We Begin",
+    "es": "Una Palabra Antes de Comenzar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2b8247766b29"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "Islam and the Bahá'í Faith both claim to honor Jesus — and both are built on a claim the Bible flatly denies: that God kept sending prophets after Christ, so that Muhammad, and then Bahá'u'lláh, supersede Him. That single claim is the hinge of this unit, and it cannot bear the weight. Islam gives the world a Qur'an that overrides the Gospel, a Jesus who is only a prophet and did not die on the cross, and a salvation earned by submission and works. The Bahá'í Faith folds Jesus into a chain of \"Manifestations\" and then hands the present age to a newer one. Both honor Christ with the lips and then set Him aside for a later voice. We will state each faith fairly, in its own terms, and then test it by the Word of God — for the very fact that they revere Jesus is the door through which we walk to show them who He truly is.",
+    "es": "El islam y la fe bahá'í ambos dicen honrar a Jesús — y ambos están edificados sobre una afirmación que la Biblia niega rotundamente: que Dios siguió enviando profetas después de Cristo, de modo que Mahoma, y luego Bahá'u'lláh, lo superan. Esa sola afirmación es el eje de esta unidad, y no puede sostener el peso. El islam da al mundo un Corán que anula el Evangelio, un Jesús que es solo un profeta y no murió en la cruz, y una salvación ganada por sumisión y obras. La fe bahá'í pliega a Jesús en una cadena de \"Manifestaciones\" y luego entrega la edad presente a una más nueva. Ambos honran a Cristo con los labios y luego lo apartan por una voz posterior. Expondremos cada fe justamente, en sus propios términos, y luego la probaremos por la Palabra de Dios — pues el hecho mismo de que reverencian a Jesús es la puerta por la cual caminamos para mostrarles quién es Él en verdad."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "698a00e9e1d5"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "heading",
+   "text": {
+    "en": "The Claim They Share: A Newer Prophet",
+    "es": "La Afirmación Que Comparten: Un Profeta Más Nuevo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d38fc1ebae5f"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "prose",
+   "text": {
+    "en": "Islam and the Bahá'í Faith differ in many ways, but at the root they share one striking idea, and it is the idea we must test: that God keeps sending a newer messenger, and that the latest one supersedes those before him. For Islam, God sent a line of prophets — among them Abraham, Moses, and Jesus — and last of all Muhammad, the \"Seal of the Prophets,\" whose revelation is final and corrects what came before. For the Bahá'í Faith, God has sent a succession of \"Manifestations\" — Abraham, Moses, Krishna, Buddha, Zoroaster, Jesus, Muhammad, and finally Bahá'u'lláh — each for his own age, each advancing religion, with Bahá'u'lláh the newest and the one for today. In both, Jesus is honored — and then left behind, surpassed by a later voice. Everything, then, turns on a single question: is Christ one prophet in a continuing series, or is He God's final and complete Word?",
+    "es": "El islam y la fe bahá'í difieren de muchas maneras, pero en la raíz comparten una idea llamativa, y es la idea que debemos probar: que Dios sigue enviando un mensajero más nuevo, y que el más reciente supera a los que vinieron antes. Para el islam, Dios envió una línea de profetas — entre ellos Abraham, Moisés y Jesús — y por último a Mahoma, el \"Sello de los Profetas\", cuya revelación es final y corrige lo que vino antes. Para la fe bahá'í, Dios ha enviado una sucesión de \"Manifestaciones\" — Abraham, Moisés, Krishna, Buda, Zoroastro, Jesús, Mahoma, y finalmente Bahá'u'lláh — cada uno para su propia edad, cada uno haciendo avanzar la religión, siendo Bahá'u'lláh el más nuevo y el que es para hoy. En ambas, Jesús es honrado — y luego dejado atrás, superado por una voz posterior. Todo, entonces, gira en torno a una sola pregunta: ¿es Cristo un profeta en una serie continua, o es la Palabra final y completa de Dios?"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "acc870afd907"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "heading",
+   "text": {
+    "en": "Islam: What Muslims Teach, in Their Own Terms",
+    "es": "El Islam: Lo Que Enseñan los Musulmanes, en Sus Propios Términos"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7a6407b94c25"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "Muslims confess one God, Allah, and hold His oneness (tawhid) so strictly that to associate any partner with God is, for them, the gravest of sins. On this ground they reject the Trinity and the deity of Christ, and their scripture says of God that \"He begets not, nor is He begotten.\" They honor Jesus — Isa — highly: born of the virgin Mary, a great prophet, the Messiah, a worker of miracles, a word from God. But He is, to them, only a created human prophet, not the Son of God and not to be worshiped. They believe the Qur'an is the final, perfect word of God, given to Muhammad through the angel Gabriel, and that it supersedes the earlier Scriptures — the Law and the Gospel — which they hold to have been corrupted over time. Strikingly, they deny that Jesus was crucified, teaching instead that it only appeared so and that God took Him up to Himself. Salvation is by submission to God and by the works of faith — the confession, prayer, almsgiving, fasting, and pilgrimage known as the Five Pillars — with one's deeds weighed at the Day of Judgment, and no certainty of the outcome.",
+    "es": "Los musulmanes confiesan un solo Dios, Alá, y sostienen su unicidad (tawhid) tan estrictamente que asociar cualquier socio con Dios es, para ellos, el más grave de los pecados. Sobre esta base rechazan la Trinidad y la deidad de Cristo, y su escritura dice de Dios que \"no engendra, ni es engendrado\". Honran mucho a Jesús — Isa —: nacido de la virgen María, un gran profeta, el Mesías, un obrador de milagros, una palabra de Dios. Pero Él es, para ellos, solo un profeta humano creado, no el Hijo de Dios y no para ser adorado. Creen que el Corán es la palabra final y perfecta de Dios, dada a Mahoma por medio del ángel Gabriel, y que supera a las Escrituras anteriores — la Ley y el Evangelio — que sostienen haber sido corrompidas con el tiempo. Sorprendentemente, niegan que Jesús fuera crucificado, enseñando en cambio que solo lo pareció y que Dios lo tomó consigo. La salvación es por sumisión a Dios y por las obras de la fe — la confesión, la oración, la limosna, el ayuno, y la peregrinación conocidas como los Cinco Pilares — con las obras de cada uno pesadas en el Día del Juicio, y sin certeza del resultado."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "156a102c805b"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "heading",
+   "text": {
+    "en": "Bahá'í: What Bahá'ís Teach, in Their Own Terms",
+    "es": "La Fe Bahá'í: Lo Que Enseñan los Bahá'ís, en Sus Propios Términos"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "df12b567110f"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "The Bahá'í Faith arose in nineteenth-century Persia through Bahá'u'lláh, following his forerunner the Báb. It teaches three great unities: the oneness of God, the oneness of religion, and the oneness of humanity. Its central idea is \"progressive revelation\": God, unknowable in Himself, sends a line of Manifestations who each bring truth suited to their age, so that the world's religions are, at heart, one unfolding faith. Jesus, in this scheme, is one Manifestation among many — genuinely from God, but for His time — now fulfilled and superseded by Bahá'u'lláh, the Manifestation for the present age, whose writings stand as the newest scripture. Much in the Bahá'í message is winsome: world peace, the harmony of science and religion, the equality of men and women, and the end of prejudice. Salvation, for the Bahá'í, is to know and love God, to recognize His Manifestation for today, and to live by His teachings. Here again Jesus is honored — and then set aside for a newer voice.",
+    "es": "La fe bahá'í surgió en la Persia del siglo diecinueve por medio de Bahá'u'lláh, siguiendo a su precursor el Báb. Enseña tres grandes unidades: la unidad de Dios, la unidad de la religión, y la unidad de la humanidad. Su idea central es la \"revelación progresiva\": Dios, incognoscible en sí mismo, envía una línea de Manifestaciones que cada una trae verdad adecuada a su edad, de modo que las religiones del mundo son, en el fondo, una sola fe que se despliega. Jesús, en este esquema, es una Manifestación entre muchas — genuinamente de Dios, pero para su tiempo — ahora cumplida y superada por Bahá'u'lláh, la Manifestación para la edad presente, cuyos escritos son la escritura más nueva. Mucho en el mensaje bahá'í es atractivo: la paz mundial, la armonía de la ciencia y la religión, la igualdad de hombres y mujeres, y el fin del prejuicio. La salvación, para el bahá'í, es conocer y amar a Dios, reconocer a su Manifestación para hoy, y vivir según sus enseñanzas. Aquí de nuevo Jesús es honrado — y luego apartado por una voz más nueva."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9a0bbd36af8a"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "heading",
+   "text": {
+    "en": "Testing the Root (1): A Different Christ",
+    "es": "Probando la Raíz (1): Un Cristo Diferente"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "39ece4fc7591"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "We test both faiths at the point we have learned to test first: the person of Christ. Islam says plainly that Jesus is not the Son of God; the Bahá'í Faith says He is one Manifestation now surpassed by another. Both, in the end, deny that Jesus is the eternal God the Son — and Scripture will not allow that denial. \"In the beginning was the Word... and the Word was God\" (John 1:1); \"in Him dwells all the fullness of the Godhead bodily\" (Colossians 2:9); and Jesus Himself said, \"I am the way, the truth, and the life. No one comes to the Father except through Me\" (John 14:6) — not one way among many, but the only way. To the claim that God has no son, John answers, \"Whoever denies the Son does not have the Father either\" (1 John 2:23). And there is a second failure, sharpest in Islam: the denial of the cross. But the death of Christ is not an embarrassment to be explained away; it is the heart of the gospel. \"Christ died for our sins according to the Scriptures, and... He rose again the third day\" (1 Corinthians 15:3-4), and \"without shedding of blood there is no remission\" (Hebrews 9:22). A Christ who did not die for sinners is a Christ who cannot save them.",
+    "es": "Probamos ambas fes en el punto que hemos aprendido a probar primero: la persona de Cristo. El islam dice claramente que Jesús no es el Hijo de Dios; la fe bahá'í dice que es una Manifestación ahora superada por otra. Ambas, al final, niegan que Jesús sea el eterno Dios el Hijo — y la Escritura no permite esa negación. \"En el principio era el Verbo... y el Verbo era Dios\" (Juan 1:1); \"en él habita corporalmente toda la plenitud de la Deidad\" (Colosenses 2:9); y Jesús mismo dijo: \"Yo soy el camino, la verdad, y la vida; nadie viene al Padre, sino por mí\" (Juan 14:6) — no un camino entre muchos, sino el único camino. A la afirmación de que Dios no tiene hijo, Juan responde: \"Cualquiera que niega al Hijo, tampoco tiene al Padre\" (1 Juan 2:23). Y hay un segundo fallo, más agudo en el islam: la negación de la cruz. Pero la muerte de Cristo no es una vergüenza que explicar, sino el corazón del evangelio. \"Cristo murió por nuestros pecados, conforme a las Escrituras; y... resucitó al tercer día\" (1 Corintios 15:3-4), y \"sin derramamiento de sangre no hay remisión\" (Hebreos 9:22). Un Cristo que no murió por los pecadores es un Cristo que no puede salvarlos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8ab0ad555f25"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "heading",
+   "text": {
+    "en": "Testing the Root (2): The Finality of the Son",
+    "es": "Probando la Raíz (2): La Finalidad del Hijo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "54c4966450d8"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "Now we come to the claim they share, and to the Scripture that answers it. Both faiths say that God kept sending prophets and that a later one — Muhammad, or Bahá'u'lláh — supersedes Jesus. But the letter to the Hebrews declares the very opposite: \"God, who at various times and in various ways spoke in time past to the fathers by the prophets, has in these last days spoken to us by His Son... who being the brightness of His glory and the express image of His person\" (Hebrews 1:1-3). The prophets came first and in many pieces; but the final word is not another prophet — it is the Son, who is God Himself. After God has spoken by His own Son, there is no greater messenger to come, for none is greater than God. This is why Jude commands us to \"contend earnestly for the faith which was once for all delivered to the saints\" (Jude 3): the gospel is given once for all, not revised by each new age. A later voice that changes it, even one claiming an angel's authority — and Muhammad claimed just that — falls under Paul's warning: \"even if... an angel from heaven, preach any other gospel to you... let him be accursed\" (Galatians 1:8). Christ is not a link in a chain of prophets. He is the last Word, because He is the eternal Son.",
+    "es": "Ahora llegamos a la afirmación que comparten, y a la Escritura que la responde. Ambas fes dicen que Dios siguió enviando profetas y que uno posterior — Mahoma, o Bahá'u'lláh — supera a Jesús. Pero la carta a los Hebreos declara justamente lo contrario: \"Dios, habiendo hablado muchas veces y de muchas maneras en otro tiempo a los padres por los profetas, en estos postreros días nos ha hablado por su Hijo... el cual, siendo el resplandor de su gloria, y la imagen misma de su sustancia\" (Hebreos 1:1-3). Los profetas vinieron primero y en muchas partes; pero la palabra final no es otro profeta — es el Hijo, que es Dios mismo. Después que Dios ha hablado por su propio Hijo, no hay mensajero mayor por venir, pues ninguno es mayor que Dios. Por eso Judas nos manda \"contender ardientemente por la fe que ha sido una vez dada a los santos\" (Judas 3): el evangelio se da una vez para siempre, no se revisa con cada nueva edad. Una voz posterior que lo cambia, aun una que reclama la autoridad de un ángel — y Mahoma reclamó justamente eso — cae bajo la advertencia de Pablo: \"si... un ángel del cielo os predicare otro evangelio... sea anatema\" (Gálatas 1:8). Cristo no es un eslabón en una cadena de profetas. Es la última Palabra, porque es el eterno Hijo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "779e25eda822"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "heading",
+   "text": {
+    "en": "Why This Is \"Another Gospel\"",
+    "es": "Por Qué Esto Es \"Otro Evangelio\""
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e02dabfb06f1"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "Put the pieces together and the verdict is the same for both. Each gives us another Jesus — a prophet or a manifestation rather than the incarnate Son. Each sets a later book above the Scriptures — the Qur'an, or the writings of Bahá'u'lláh. And each offers a salvation of submission and good works rather than the free grace of God in the crucified and risen Christ. The reverence of the one and the gentleness of the other are real, and we honor what is good in them; but neither reverence nor gentleness can change the root. A message that surpasses the Son, denies His cross, and adds a newer prophet is, in the words of Paul, \"a different gospel, which is not another\" (Galatians 1:6-7). We say this not with harshness, but with sorrow and with hope.",
+    "es": "Juntemos las piezas y el veredicto es el mismo para ambas. Cada una nos da otro Jesús — un profeta o una manifestación en lugar del Hijo encarnado. Cada una coloca un libro posterior por encima de las Escrituras — el Corán, o los escritos de Bahá'u'lláh. Y cada una ofrece una salvación de sumisión y buenas obras en lugar de la gracia gratuita de Dios en el Cristo crucificado y resucitado. La reverencia de la una y la mansedumbre de la otra son reales, y honramos lo que es bueno en ellas; pero ni la reverencia ni la mansedumbre pueden cambiar la raíz. Un mensaje que supera al Hijo, niega su cruz, y añade un profeta más nuevo es, en palabras de Pablo, \"otro evangelio; no que haya otro\" (Gálatas 1:6-7). Decimos esto no con dureza, sino con tristeza y con esperanza."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "60ab056a7a9c"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "heading",
+   "text": {
+    "en": "The Sword and the Cross",
+    "es": "La Espada y la Cruz"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0dd1f3bfd7cc"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "There is one contrast we dare not pass over, for it reaches to the character of the men at the head of these faiths. Muhammad was not only a preacher but a general and a statesman; he led armies, fought battles, and by the sword as well as by the word his religion was established and spread. Muslims regard this as just and can recount his acts of mercy, and we need not paint him a monster to make the point — for the point is simply the contrast. When men came to arrest Jesus and Peter drew a sword to defend Him, Jesus said, \"Put your sword in its place, for all who take the sword will perish by the sword\" (Matthew 26:52), and He healed the very ear His disciple had cut off. He told Pilate, \"My kingdom is not of this world. If My kingdom were of this world, My servants would fight\" (John 18:36). Christ conquered no city and struck down no enemy; He conquered by being struck down. He did not take life to spread His kingdom — He laid down His own. Many a movement has been advanced by the sword; only one Founder in all the earth defeated evil by dying for His enemies, and then rose from the dead.",
+    "es": "Hay un contraste que no nos atrevemos a pasar por alto, pues alcanza el carácter de los hombres a la cabeza de estas fes. Mahoma no fue solo un predicador sino un general y un estadista; dirigió ejércitos, peleó batallas, y por la espada tanto como por la palabra su religión fue establecida y difundida. Los musulmanes consideran esto justo y pueden relatar sus actos de misericordia, y no necesitamos pintarlo como un monstruo para hacer el punto — pues el punto es simplemente el contraste. Cuando vinieron hombres a arrestar a Jesús y Pedro sacó una espada para defenderlo, Jesús dijo: \"Vuelve tu espada a su lugar; porque todos los que tomaren espada, a espada perecerán\" (Mateo 26:52), y sanó la oreja misma que su discípulo había cortado. Dijo a Pilato: \"Mi reino no es de este mundo; si mi reino fuera de este mundo, mis servidores pelearían\" (Juan 18:36). Cristo no conquistó ninguna ciudad ni derribó a ningún enemigo; conquistó siendo derribado. No quitó la vida para difundir su reino — entregó la suya. Muchos movimientos han sido avanzados por la espada; solo un Fundador en toda la tierra venció el mal muriendo por sus enemigos, y luego resucitó de los muertos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b90fab990bd4"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "heading",
+   "text": {
+    "en": "A Man Who Made the Crossing",
+    "es": "Un Hombre Que Hizo el Cruce"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "82cf12d48322"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "Such crossings really happen, and they cost dearly. Nabeel Qureshi was a devout Ahmadi Muslim who loved his faith and his family, until a friendship with a Christian named David Wood drew him into a long and painful examination of the evidence. He did not leave Islam in a rush of feeling; he spent years weighing the historical case for the resurrection of Jesus, and wrestling with the deepest difference between the two faiths — that Islam leaves the weight of a man's sin upon his own deeds and repentance, while the gospel declares that God did not lower the standard of His justice to excuse us, but satisfied it Himself in the death of His Son. When at last he was persuaded that the resurrection was a fact of history and the cross the only answer to his guilt, he followed the truth where it led, and it cost him the nearness of the family he loved. He often said that no one endures such a loss for a mere path or philosophy, but only for something as real and necessary as life itself. His life is a picture of what we are asking of others, and of the One who is worth the asking.",
+    "es": "Tales cruces de veras suceden, y cuestan caro. Nabeel Qureshi era un musulmán ahmadí devoto que amaba su fe y su familia, hasta que una amistad con un cristiano llamado David Wood lo llevó a un largo y doloroso examen de la evidencia. No dejó el islam en un arrebato de emoción; pasó años sopesando el caso histórico de la resurrección de Jesús, y luchando con la diferencia más profunda entre las dos fes — que el islam deja el peso del pecado de un hombre sobre sus propias obras y arrepentimiento, mientras que el evangelio declara que Dios no bajó el estándar de su justicia para excusarnos, sino que la satisfizo Él mismo en la muerte de su Hijo. Cuando al fin quedó persuadido de que la resurrección era un hecho de la historia y la cruz la única respuesta a su culpa, siguió la verdad adonde lo llevó, y le costó la cercanía de la familia que amaba. A menudo decía que nadie soporta tal pérdida por un mero camino o filosofía, sino solo por algo tan real y necesario como la vida misma. Su vida es un cuadro de lo que pedimos a otros, y de Aquel que vale la pena pedirlo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "dfce31129a99"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "heading",
+   "text": {
+    "en": "A Redemptive Aim",
+    "es": "Un Fin Redentor"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f8991d07d794"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "And here is our hope. Both the Muslim and the Bahá'í already hold Jesus in honor — and that is a beginning we can build upon. Our message to them is not that they must think less of Jesus, but far more: the One they revere as a prophet is greater than they have been told. He is not a voice awaiting a successor, but the eternal Son, God's final and complete Word; He did not merely appear to die, but truly gave His life for sinners and rose again; and He is not one way among many, but the only way to the Father. We do not come to win an argument, but to introduce a Person — the real Christ — to those who already admire His shadow. We treat each Muslim and each Bahá'í with the honor due a neighbor, with patience, with prayer, and with an open Bible, longing for them to meet the Lord who is Himself the last and greatest word from God.",
+    "es": "Y aquí está nuestra esperanza. Tanto el musulmán como el bahá'í ya tienen a Jesús en honor — y ese es un comienzo sobre el cual podemos edificar. Nuestro mensaje para ellos no es que deban pensar menos de Jesús, sino mucho más: Aquel a quien reverencian como profeta es mayor de lo que se les ha dicho. No es una voz que espera un sucesor, sino el eterno Hijo, la Palabra final y completa de Dios; no solo pareció morir, sino que verdaderamente dio su vida por los pecadores y resucitó; y no es un camino entre muchos, sino el único camino al Padre. No venimos a ganar una discusión, sino a presentar a una Persona — el Cristo real — a quienes ya admiran su sombra. Tratamos a cada musulmán y a cada bahá'í con el honor debido a un prójimo, con paciencia, con oración, y con la Biblia abierta, anhelando que conozcan al Señor que es Él mismo la última y más grande palabra de Dios."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0ee212a38ad4"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "scripture",
+   "text": {
+    "en": "\"Jesus said to him, 'I am the way, the truth, and the life. No one comes to the Father except through Me.'\" — John 14:6 (NKJV)",
+    "es": "\"Jesús le dijo: Yo soy el camino, la verdad, y la vida; nadie viene al Padre, sino por mí.\" — Juan 14:6 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "386bd315c861"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "prose",
+   "text": {
+    "en": "Unit 6 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 6 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ef80e4f0d9dd"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33593c268178"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,446 @@
+{
+ "course": "CTSGalatians",
+ "unit": 4,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Unit 5 →</button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #2f4f2f;\"><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\">\n    <h2><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></p>\n    <input type=\"text\" id=\"regName\" placeholder=\"Full name / Nombre completo\" aria-label=\"Full name / Nombre completo\">\n    <input type=\"email\" id=\"regEmail\" placeholder=\"Email\" aria-label=\"Email\">\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"cert\">Certificate Track</option>\n        <option value=\"mdiv\">Master of Divinity (M.Div.) Track</option>\n        <option value=\"thm\">Master of Theology (Th.M.) Track</option>\n    </select>\n    <button class=\"nav-btn\" id=\"regBtn\"><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\">\n<p class=\"passage-label\"><!--cts:b008:en--></p>\n<div class=\"scripture\"><!--cts:b009:en--></div>\n\n<h3><!--cts:b010:en--></h3>\n<p><!--cts:b011:en--></p>\n\n<h3><!--cts:b012:en--></h3>\n<p><!--cts:b013:en--></p>\n\n<h3><!--cts:b014:en--></h3>\n<p><!--cts:b015:en--></p>\n\n<h3><!--cts:b016:en--></h3>\n<p><!--cts:b017:en--></p>\n<p class=\"pull-quote\"><!--cts:b018:en--></p>\n\n<h3><!--cts:b019:en--></h3>\n<p><!--cts:b020:en--></p>\n\n<h3><!--cts:b021:en--></h3>\n<p><!--cts:b022:en--></p>\n\n<h3><!--cts:b023:en--></h3>\n<p><!--cts:b024:en--></p>\n\n<h3><!--cts:b025:en--></h3>\n<p><!--cts:b026:en--></p>\n<div class=\"scripture\"><!--cts:b027:en--></div>\n</div>\n\n<div class=\"lang-es\">\n<p class=\"passage-label\"><!--cts:b008:es--></p>\n<div class=\"scripture\"><!--cts:b009:es--></div>\n\n<h3><!--cts:b010:es--></h3>\n<p><!--cts:b011:es--></p>\n\n<h3><!--cts:b012:es--></h3>\n<p><!--cts:b013:es--></p>\n\n<h3><!--cts:b014:es--></h3>\n<p><!--cts:b015:es--></p>\n\n<h3><!--cts:b016:es--></h3>\n<p><!--cts:b017:es--></p>\n<p class=\"pull-quote\"><!--cts:b018:es--></p>\n\n<h3><!--cts:b019:es--></h3>\n<p><!--cts:b020:es--></p>\n\n<h3><!--cts:b021:es--></h3>\n<p><!--cts:b022:es--></p>\n\n<h3><!--cts:b023:es--></h3>\n<p><!--cts:b024:es--></p>\n\n<h3><!--cts:b025:es--></h3>\n<p><!--cts:b026:es--></p>\n<div class=\"scripture\"><!--cts:b027:es--></div>\n</div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b028:en--></span><span class=\"lang-es\"><!--cts:b028:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b029:en--></span>\n       <span class=\"lang-es\"><!--cts:b029:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b030:en--></span><span class=\"lang-es\"><!--cts:b030:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b031:en--></span><span class=\"lang-es\"><!--cts:b031:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n  \n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSGalatiansReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📖 Galatians Intensive — Unit 4: Faith, Not Works of the Law",
+    "es": "📖 Gálatas Intensivo — Unidad 4: La Fe, No las Obras de la Ley"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "72eeaed77ae1"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "\"...The just shall live by faith.\" — Galatians 3:11 (NKJV)",
+    "es": "\"...El justo por la fe vivirá.\" — Gálatas 3:11 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9b6bc600ef98"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "📝 Course Registration",
+    "es": "📝 Registro del Curso"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fde900fe006b"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Welcome to the Galatians Intensive. Please register before beginning Unit 4.",
+    "es": "Bienvenido al Intensivo de Gálatas. Por favor regístrese antes de comenzar la Unidad 4."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "06328aba7b05"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "scripture",
+   "text": {
+    "en": "<strong>Text: Galatians 3:1-29 (NKJV)</strong>",
+    "es": "<strong>Texto: Gálatas 3:1-29 (RVG)</strong>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0084944854cb"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "scripture",
+   "text": {
+    "en": "\"O foolish Galatians! Who has bewitched you that you should not obey the truth, before whose eyes Jesus Christ was clearly portrayed among you as crucified? This only I want to learn from you: Did you receive the Spirit by the works of the law, or by the hearing of faith?\" — Galatians 3:1-2 (NKJV)",
+    "es": "\"¡Oh gálatas insensatos! ¿quién os fascinó para no obedecer a la verdad, ante cuyos ojos Jesucristo fue ya descrito entre vosotros como crucificado? Esto solo quiero saber de vosotros: ¿Recibisteis el Espíritu por las obras de la ley, o por el oír con fe?\" — Gálatas 3:1-2 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2426a9b02cbc"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "heading",
+   "text": {
+    "en": "Who Has Bewitched You?",
+    "es": "¿Quién os Fascinó?"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ca550a0aee57"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Having defended the gospel in the first two chapters, Paul now turns and reasons with the Galatians directly, and his words are sharp because the danger is great. <strong>\"O foolish Galatians! Who has bewitched you...?\"</strong> They had seen Christ crucified set plainly before them in the preaching of the gospel, and now they were drifting back toward the law as if the cross were not enough. Paul puts to them a single, settling question: <em>\"Did you receive the Spirit by the works of the law, or by the hearing of faith?\"</em> They knew the answer. The Spirit had come to them, and miracles had been worked among them, when they believed the message — not when they kept the law. And so Paul presses the point home: <strong>\"Having begun in the Spirit, are you now being made perfect by the flesh?\"</strong> To begin with grace and then seek to finish by law-keeping is to move backward, from the Spirit to the flesh.",
+    "es": "Habiendo defendido el evangelio en los dos primeros capítulos, Pablo ahora se vuelve y razona con los gálatas directamente, y sus palabras son agudas porque el peligro es grande. <strong>\"¡Oh gálatas insensatos! ¿quién os fascinó...?\"</strong> Habían visto a Cristo crucificado puesto claramente ante ellos en la predicación del evangelio, y ahora estaban derivando de vuelta hacia la ley como si la cruz no fuera suficiente. Pablo les pone una sola pregunta decisiva: <em>\"¿Recibisteis el Espíritu por las obras de la ley, o por el oír con fe?\"</em> Sabían la respuesta. El Espíritu había venido a ellos, y se habían obrado milagros entre ellos, cuando creyeron el mensaje — no cuando guardaron la ley. Y así Pablo recalca el punto: <strong>\"¿Habiendo comenzado por el Espíritu, ahora os perfeccionáis por la carne?\"</strong> Comenzar con la gracia y luego buscar terminar por el guardar la ley es retroceder, del Espíritu a la carne."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8e58b90dc5cb"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "heading",
+   "text": {
+    "en": "Abraham Believed God",
+    "es": "Abraham Creyó a Dios"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fd425c706562"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "Paul now reaches back to the great father of the faithful. <strong>\"Abraham believed God, and it was accounted to him for righteousness.\"</strong> Long before the law was given, Abraham was justified not by works but by faith; God credited righteousness to him because he believed the promise. From this Paul draws a sweeping conclusion: <em>\"those who are of faith are sons of Abraham.\"</em> The true children of Abraham are not those who carry the marks of the law, but those who believe as he believed. And Paul says the Scripture, foreseeing that God would justify the nations by faith, <strong>\"preached the gospel to Abraham beforehand,\"</strong> saying, \"In you all the nations shall be blessed.\" So those who are of faith are blessed together with believing Abraham — the gospel of justification by faith is no novelty, but the ancient plan of God.",
+    "es": "Pablo se remonta ahora al gran padre de los fieles. <strong>\"Abraham creyó a Dios, y le fue contado por justicia.\"</strong> Mucho antes de que la ley fuera dada, Abraham fue justificado no por obras sino por la fe; Dios le acreditó justicia porque creyó la promesa. De esto Pablo saca una conclusión amplia: <em>\"los que son de fe, los tales son hijos de Abraham.\"</em> Los verdaderos hijos de Abraham no son los que llevan las marcas de la ley, sino los que creen como él creyó. Y Pablo dice que la Escritura, previendo que Dios justificaría a las naciones por la fe, <strong>\"anunció de antemano el evangelio a Abraham,\"</strong> diciendo: \"En ti serán benditas todas las naciones.\" Así que los que son de fe son benditos juntamente con el creyente Abraham — el evangelio de la justificación por la fe no es novedad, sino el antiguo plan de Dios."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b518f2dcfb84"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "heading",
+   "text": {
+    "en": "The Curse of the Law",
+    "es": "La Maldición de la Ley"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "08d85a51dfea"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "If faith is the way of blessing, the law by itself is the way of curse. <strong>\"For as many as are of the works of the law are under the curse; for it is written, 'Cursed is everyone who does not continue in all things which are written in the book of the law, to do them.'\"</strong> Here is the trap of seeking righteousness by law: the law demands not most things, but <em>all</em> things, perfectly and continually, and no sinner can render that. To stake one's hope on law-keeping is therefore to place oneself under its curse. By contrast, Paul quotes the prophet: <strong>\"The just shall live by faith.\"</strong> And he adds that \"the law is not of faith\"; the principle of the law is \"do and live,\" while the principle of faith is \"believe and live.\" The two cannot be mixed as a way of salvation.",
+    "es": "Si la fe es el camino de la bendición, la ley por sí sola es el camino de la maldición. <strong>\"Porque todos los que son de las obras de la ley están bajo maldición; pues escrito está: Maldito todo aquel que no permaneciere en todas las cosas que están escritas en el libro de la ley, para hacerlas.\"</strong> Aquí está la trampa de buscar la justicia por la ley: la ley exige no la mayoría de las cosas, sino <em>todas</em> las cosas, perfecta y continuamente, y ningún pecador puede rendir eso. Apostar la esperanza en el guardar la ley es por tanto ponerse bajo su maldición. En contraste, Pablo cita al profeta: <strong>\"El justo por la fe vivirá.\"</strong> Y añade que \"la ley no es de fe\"; el principio de la ley es \"haz y vive\", mientras que el principio de la fe es \"cree y vive\". Los dos no pueden mezclarse como camino de salvación."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "68741a6ce301"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "heading",
+   "text": {
+    "en": "Christ Became a Curse for Us",
+    "es": "Cristo Hecho Maldición por Nosotros"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f35d7b0dc2bd"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "How then can any sinner escape the curse? Only because Another bore it. <strong>\"Christ has redeemed us from the curse of the law, having become a curse for us (for it is written, 'Cursed is everyone who hangs on a tree').\"</strong> On the cross Jesus took upon Himself the very curse the law pronounces against lawbreakers; He stood in our place and absorbed what we deserved. And this He did with a glorious purpose: <em>\"that the blessing of Abraham might come upon the Gentiles in Christ Jesus, that we might receive the promise of the Spirit through faith.\"</em> The curse fell on Him so that the blessing might fall on us; He was treated as guilty so that we might receive the Spirit by faith. This is the heart of the gospel Paul will not let the Galatians abandon.",
+    "es": "¿Cómo puede entonces cualquier pecador escapar de la maldición? Solo porque Otro la llevó. <strong>\"Cristo nos redimió de la maldición de la ley, hecho por nosotros maldición (porque está escrito: Maldito todo aquel que es colgado en un madero).\"</strong> En la cruz Jesús tomó sobre sí la maldición misma que la ley pronuncia contra los transgresores; se puso en nuestro lugar y absorbió lo que merecíamos. Y esto lo hizo con un propósito glorioso: <em>\"para que la bendición de Abraham viniese sobre los gentiles en Cristo Jesús, para que recibiésemos la promesa del Espíritu por la fe.\"</em> La maldición cayó sobre Él para que la bendición cayera sobre nosotros; fue tratado como culpable para que recibiésemos el Espíritu por la fe. Este es el corazón del evangelio que Pablo no permitirá que los gálatas abandonen."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "aa8cded6a320"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "The curse fell on Christ so that the blessing of Abraham might fall on us, and the promise of the Spirit be received by faith.",
+    "es": "La maldición cayó sobre Cristo para que la bendición de Abraham cayera sobre nosotros, y la promesa del Espíritu fuese recibida por la fe."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "93e7f86e8059"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "heading",
+   "text": {
+    "en": "The Promise Came Before the Law",
+    "es": "La Promesa Vino Antes de la Ley"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6b60c8af04a9"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "Paul now answers those who would make the law the basis of God's dealings. He argues from a plain human example: once a covenant is confirmed, no one annuls it or adds to it. <strong>\"Now to Abraham and his Seed were the promises made. He does not say, 'And to seeds,' as of many, but as of one, 'And to your Seed,' who is Christ.\"</strong> The promise pointed forward to Christ all along. And the law, which came <em>four hundred and thirty years</em> afterward, cannot annul a covenant that God had already confirmed, so as to make the promise of no effect. <strong>\"For if the inheritance is of the law, it is no longer of promise; but God gave it to Abraham by promise.\"</strong> The inheritance was never earned by law; it was given by promise and received by faith.",
+    "es": "Pablo responde ahora a los que harían de la ley la base del trato de Dios. Argumenta desde un ejemplo humano sencillo: una vez que un pacto es confirmado, nadie lo anula ni le añade. <strong>\"Ahora bien, a Abraham fueron hechas las promesas, y a su simiente. No dice: Y a las simientes, como de muchos; sino como de uno: Y a tu simiente, la cual es Cristo.\"</strong> La promesa señalaba hacia Cristo desde el principio. Y la ley, que vino <em>cuatrocientos treinta años</em> después, no puede anular un pacto que Dios ya había confirmado, para invalidar la promesa. <strong>\"Porque si la herencia es por la ley, ya no es por la promesa; pero Dios la dio a Abraham por la promesa.\"</strong> La herencia nunca se ganó por la ley; fue dada por promesa y recibida por la fe."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8da2f8231c4f"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "heading",
+   "text": {
+    "en": "Why the Law, Then?",
+    "es": "¿Para Qué, Pues, la Ley?"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d0ca8bc499db"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "If the law cannot justify, what is it for? Paul does not despise the law; he explains its place. <strong>\"It was added because of transgressions, till the Seed should come to whom the promise was made.\"</strong> The law was given to expose sin and to hold God's people until Christ came; it was a temporary steward, not the source of life. <strong>\"For if there had been a law given which could have given life, truly righteousness would have been by the law.\"</strong> But no law can give life to the dead in sin. Instead, <em>\"the Scripture has confined all under sin, that the promise by faith in Jesus Christ might be given to those who believe.\"</em> The law shuts every mouth and locks every sinner up under guilt, so that the only door left open is the door of faith in Christ.",
+    "es": "Si la ley no puede justificar, ¿para qué es? Pablo no desprecia la ley; explica su lugar. <strong>\"Fue añadida a causa de las transgresiones, hasta que viniese la simiente a quien fue hecha la promesa.\"</strong> La ley fue dada para exponer el pecado y para guardar al pueblo de Dios hasta que Cristo viniera; fue un mayordomo temporal, no la fuente de la vida. <strong>\"Porque si la ley dada pudiera vivificar, la justicia fuera verdaderamente por la ley.\"</strong> Pero ninguna ley puede dar vida a los muertos en pecado. Más bien, <em>\"la Escritura encerró todo bajo pecado, para que la promesa por la fe de Jesucristo fuese dada a los creyentes.\"</em> La ley cierra toda boca y encierra a todo pecador bajo culpa, para que la única puerta que quede abierta sea la puerta de la fe en Cristo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "79a5df0899a8"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "heading",
+   "text": {
+    "en": "The Law as Our Tutor",
+    "es": "La Ley como Nuestro Ayo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7b6d192f9b38"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "Paul gives a memorable picture of the law's role. <strong>\"Therefore the law was our tutor to bring us to Christ, that we might be justified by faith.\"</strong> The word pictures a guardian who watched over and disciplined a child until he came of age. The law guarded God's people and, by its commands and its curse, drove them to look for a Savior. But a guardian's authority ends when the child grows up: <strong>\"But after faith has come, we are no longer under a tutor.\"</strong> Now that Christ has come and faith has come, the believer is not kept under the law as a child under a guardian, but stands as a grown son in Christ.",
+    "es": "Pablo da una imagen memorable del papel de la ley. <strong>\"De manera que la ley fue nuestro ayo para llevarnos a Cristo, para que fuésemos justificados por la fe.\"</strong> La palabra pinta a un guardián que vigilaba y disciplinaba a un niño hasta que llegaba a la mayoría de edad. La ley guardó al pueblo de Dios y, por sus mandamientos y su maldición, los llevó a buscar un Salvador. Pero la autoridad de un guardián termina cuando el niño crece: <strong>\"Mas venida la fe, ya no estamos bajo ayo.\"</strong> Ahora que Cristo ha venido y la fe ha venido, el creyente no es mantenido bajo la ley como un niño bajo un guardián, sino que está como un hijo crecido en Cristo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ff6ac18c368f"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "heading",
+   "text": {
+    "en": "Sons and Heirs, All One in Christ",
+    "es": "Hijos y Herederos, Todos Uno en Cristo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cce84d7ceeb4"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "Paul closes the chapter on the heights. <strong>\"For you are all sons of God through faith in Christ Jesus.\"</strong> Every believer, having been baptized into Christ, has \"put on Christ\" and is clothed in Him. And in Him the old divisions lose their power to separate: <strong>\"There is neither Jew nor Greek, there is neither slave nor free, there is neither male nor female; for you are all one in Christ Jesus.\"</strong> All such believers stand on equal ground at the foot of the cross. And the chapter ends with the inheritance secured: <strong>\"And if you are Christ's, then you are Abraham's seed, and heirs according to the promise.\"</strong> To belong to Christ is to be Abraham's true offspring and an heir of everything God promised — not by the works of the law, but by faith.",
+    "es": "Pablo cierra el capítulo en las alturas. <strong>\"Porque todos sois hijos de Dios por la fe en Cristo Jesús.\"</strong> Todo creyente, habiendo sido bautizado en Cristo, se ha \"revestido de Cristo\" y está vestido de Él. Y en Él las viejas divisiones pierden su poder de separar: <strong>\"Ya no hay judío ni griego; no hay esclavo ni libre; no hay varón ni mujer; porque todos vosotros sois uno en Cristo Jesús.\"</strong> Todos esos creyentes están sobre terreno igual al pie de la cruz. Y el capítulo termina con la herencia asegurada: <strong>\"Y si vosotros sois de Cristo, ciertamente simiente de Abraham sois, y herederos según la promesa.\"</strong> Pertenecer a Cristo es ser la verdadera simiente de Abraham y heredero de todo lo que Dios prometió — no por las obras de la ley, sino por la fe."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ad67aa914552"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "scripture",
+   "text": {
+    "en": "\"And if you are Christ's, then you are Abraham's seed, and heirs according to the promise.\" — Galatians 3:29 (NKJV)",
+    "es": "\"Y si vosotros sois de Cristo, ciertamente simiente de Abraham sois, y herederos según la promesa.\" — Gálatas 3:29 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ae769d358155"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "Unit 4 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 4 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "07d9dcb66810"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33593c268178"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

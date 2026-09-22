@@ -70,14 +70,11 @@ function blocks(html) {
  * lesson is rendered back to markup and read from that. */
 const LESSONS = 'src/content/lessons';
 function fromLesson(file) {
-  const m = file.match(/^(.+)Unit(\d+)\.html$/);
+  const m = file.match(/^(.+?)Unit(\d+)\.html$/);
   if (!m) return null;
-  const dir = path.join(LESSONS, m[1]);
-  const lesson = path.join(dir, `${m[2]}.json`);
-  const shared = path.join(dir, '_shared.json');
-  if (!fs.existsSync(lesson) || !fs.existsSync(shared)) return null;
-  return renderLesson(JSON.parse(fs.readFileSync(lesson, 'utf8')),
-                      JSON.parse(fs.readFileSync(shared, 'utf8')));
+  const p = path.join(LESSONS, m[1], `${m[2]}.json`);
+  if (!fs.existsSync(p)) return null;
+  return renderLesson(JSON.parse(fs.readFileSync(p, 'utf8')));
 }
 
 function read(dir, file, isDist) {

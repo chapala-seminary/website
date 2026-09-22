@@ -1,0 +1,432 @@
+{
+ "course": "CTSMatt",
+ "unit": 4,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Unit 5 →</button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #2f4f2f;\"><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\">\n    <h2><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></p>\n    <input type=\"text\" id=\"regName\" placeholder=\"Full name / Nombre completo\" aria-label=\"Full name / Nombre completo\">\n    <input type=\"email\" id=\"regEmail\" placeholder=\"Email\" aria-label=\"Email\">\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate Track</option>\n        <option value=\"mdiv\">Master of Divinity (M.Div.) Track</option>\n        <option value=\"thm\">Master of Theology (Th.M.) Track</option>\n    </select>\n    <button class=\"nav-btn\" id=\"regBtn\"><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\">\n<p class=\"passage-label\"><!--cts:b008:en--></p>\n<div class=\"scripture\"><!--cts:b009:en--></div>\n\n<h3><!--cts:b010:en--></h3>\n<p><!--cts:b011:en--></p>\n\n<h3><!--cts:b012:en--></h3>\n<p><!--cts:b013:en--></p>\n\n<h3><!--cts:b014:en--></h3>\n<p><!--cts:b015:en--></p>\n\n<h3><!--cts:b016:en--></h3>\n<p><!--cts:b017:en--></p>\n\n<h3><!--cts:b018:en--></h3>\n<p><!--cts:b019:en--></p>\n\n<h3><!--cts:b020:en--></h3>\n<p><!--cts:b021:en--></p>\n\n<h3><!--cts:b022:en--></h3>\n<p><!--cts:b023:en--></p>\n\n<h3><!--cts:b024:en--></h3>\n<p><!--cts:b025:en--></p>\n<div class=\"scripture\"><!--cts:b026:en--></div>\n</div>\n\n<div class=\"lang-es\">\n<p class=\"passage-label\"><!--cts:b008:es--></p>\n<div class=\"scripture\"><!--cts:b009:es--></div>\n\n<h3><!--cts:b010:es--></h3>\n<p><!--cts:b011:es--></p>\n\n<h3><!--cts:b012:es--></h3>\n<p><!--cts:b013:es--></p>\n\n<h3><!--cts:b014:es--></h3>\n<p><!--cts:b015:es--></p>\n\n<h3><!--cts:b016:es--></h3>\n<p><!--cts:b017:es--></p>\n\n<h3><!--cts:b018:es--></h3>\n<p><!--cts:b019:es--></p>\n\n<h3><!--cts:b020:es--></h3>\n<p><!--cts:b021:es--></p>\n\n<h3><!--cts:b022:es--></h3>\n<p><!--cts:b023:es--></p>\n\n<h3><!--cts:b024:es--></h3>\n<p><!--cts:b025:es--></p>\n<div class=\"scripture\"><!--cts:b026:es--></div>\n</div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b027:en--></span><span class=\"lang-es\"><!--cts:b027:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b028:en--></span>\n       <span class=\"lang-es\"><!--cts:b028:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b029:en--></span><span class=\"lang-es\"><!--cts:b029:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b030:en--></span><span class=\"lang-es\"><!--cts:b030:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSMattReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📖 Matthew Intensive — Unit 4: Sermon on the Mount II",
+    "es": "📖 Mateo Intensivo — Unidad 4: El Sermón del Monte II"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e191da6d2a58"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "\"But seek first the kingdom of God and His righteousness...\" — Matthew 6:33",
+    "es": "\"Mas buscad primeramente el reino de Dios y su justicia...\" — Mateo 6:33"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2852c4227abe"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "📝 Course Registration",
+    "es": "📝 Registro del Curso"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fde900fe006b"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Welcome to the Matthew Intensive. Please register before beginning Unit 4.",
+    "es": "Bienvenido al Intensivo de Mateo. Por favor regístrese antes de comenzar la Unidad 4."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6e72ddd6d3a3"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "scripture",
+   "text": {
+    "en": "<strong>Text: Matthew 6:33</strong>",
+    "es": "<strong>Texto: Mateo 6:33 (RVG)</strong>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "629cb229d9d2"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "scripture",
+   "text": {
+    "en": "\"But seek first the kingdom of God and His righteousness, and all these things shall be added to you.\" — Matthew 6:33 (NKJV)",
+    "es": "\"Mas buscad primeramente el reino de Dios y su justicia, y todas estas cosas os serán añadidas.\" — Mateo 6:33"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "562b3cdc5610"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "heading",
+   "text": {
+    "en": "From Character to Practice",
+    "es": "Del Carácter a la Práctica"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a035dc5cfb22"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "In the first part of the Sermon on the Mount the King described the character of His people, the Beatitudes that mark the citizens of the kingdom, and called them the salt of the earth and the light of the world. Now He turns from who they are to how they live. Chapters 6 and 7 are the practice of that righteousness, worked out before God in giving and prayer and fasting, in the use of money, in freedom from anxiety, in the way we treat others, and finally in a decision that determines a whole life. The sermon does not let us admire the Beatitudes from a distance; it presses them into the ordinary daily places where faith is either real or only spoken. The King is not seeking admirers who keep their faith on display, but a people whose obedience runs deepest precisely where no one is watching but God Himself.",
+    "es": "En la primera parte del Sermón del Monte el Rey describió el carácter de su pueblo, las Bienaventuranzas que marcan a los ciudadanos del reino, y los llamó la sal de la tierra y la luz del mundo. Ahora pasa de quiénes son a cómo viven. Los capítulos 6 y 7 son la práctica de esa justicia, vivida delante de Dios en el dar y el orar y el ayunar, en el uso del dinero, en la libertad de la ansiedad, en la manera en que tratamos a otros, y por fin en una decisión que determina toda una vida. El sermón no nos deja admirar las Bienaventuranzas desde lejos; las presiona en los lugares ordinarios y diarios donde la fe es real o solamente hablada. El Rey no busca admiradores que mantengan su fe en exhibición, sino un pueblo cuya obediencia corre más profunda precisamente donde nadie observa sino Dios mismo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7108334ce17f"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "heading",
+   "text": {
+    "en": "Righteousness Not for Show",
+    "es": "La Justicia No para Exhibición"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "646c0d5a70af"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "Jesus warns, \"Take heed that you do not do your charitable deeds before men, to be seen by them\" (Matthew 6:1). He takes the three great acts of Jewish devotion — giving to the needy, praying, and fasting — and in each He draws the same contrast. The hypocrites do them to be seen, and the applause they receive is the only reward they will ever get. But the disciple gives, prays, and fasts before the Father who sees in secret, and the Father who sees in secret will reward him. So Jesus says, when you give, do not sound a trumpet; when you pray, go into your room and shut the door; when you fast, do not look gloomy to be admired. The question He presses is the question of the audience: are we living before men, for their eyes and their praise, or before God, content that He alone should see? (His teaching on prayer here opens into the Lord's Prayer, which we take up in its own lesson.)",
+    "es": "Jesús advierte: \"Mirad que no hagáis vuestras limosnas delante de los hombres, para ser vistos de ellos\" (Mateo 6:1). Toma los tres grandes actos de la devoción judía — dar al necesitado, orar, y ayunar — y en cada uno traza el mismo contraste. Los hipócritas los hacen para ser vistos, y el aplauso que reciben es la única recompensa que jamás tendrán. Pero el discípulo da, ora, y ayuna delante del Padre que ve en lo secreto, y el Padre que ve en lo secreto le recompensará. Así que Jesús dice: cuando des, no toques trompeta; cuando ores, entra en tu aposento y cierra la puerta; cuando ayunes, no pongas cara triste para ser admirado. La pregunta que presiona es la pregunta de la audiencia: ¿vivimos delante de los hombres, para sus ojos y su alabanza, o delante de Dios, contentos de que solo Él vea? (Su enseñanza sobre la oración aquí abre hacia el Padre Nuestro, que tomamos en su propia lección.)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d63ec0c2e720"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "heading",
+   "text": {
+    "en": "Treasure and the Heart",
+    "es": "El Tesoro y el Corazón"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "da32d15cba96"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "From the audience of our righteousness Jesus turns to the treasure of our hearts. \"Do not lay up for yourselves treasures on earth, where moth and rust destroy and where thieves break in and steal; but lay up for yourselves treasures in heaven\" (Matthew 6:19-20). Then He gives the reason that searches us: \"For where your treasure is, there your heart will be also.\" Our hearts follow our treasure, not the reverse, so what we truly value will quietly capture what we truly love. He speaks of the eye as the lamp of the body, so that a good and single eye fills the whole life with light while a bad eye fills it with darkness. And He states it plainly: \"No one can serve two masters... You cannot serve God and mammon\" (Matthew 6:24). Money is a useful servant but a ruinous lord, and the heart that tries to enthrone both God and wealth will end by despising one of them. So Jesus is not condemning possessions but exposing a rival lordship, and He calls the disciple to hold earthly things loosely and to fix his heart on what cannot be lost.",
+    "es": "De la audiencia de nuestra justicia Jesús pasa al tesoro de nuestros corazones. \"No os hagáis tesoros en la tierra, donde la polilla y el orín corrompen, y donde ladrones minan y hurtan; mas haceos tesoros en el cielo\" (Mateo 6:19-20). Luego da la razón que nos escudriña: \"Porque donde esté vuestro tesoro, allí estará también vuestro corazón.\" Nuestros corazones siguen a nuestro tesoro, no al revés, así que lo que verdaderamente valoramos capturará calladamente lo que verdaderamente amamos. Habla del ojo como la lámpara del cuerpo, de modo que un ojo bueno y sencillo llena toda la vida de luz mientras un ojo malo la llena de tinieblas. Y lo dice claramente: \"Ninguno puede servir a dos señores... No podéis servir a Dios y a las riquezas\" (Mateo 6:24). El dinero es un siervo útil pero un señor ruinoso, y el corazón que intenta entronar a la vez a Dios y a la riqueza terminará por menospreciar a uno de ellos. Así que Jesús no condena las posesiones sino que expone un señorío rival, y llama al discípulo a sostener las cosas terrenales con mano suelta y a fijar su corazón en lo que no puede perderse."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "aa10e76e519c"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "heading",
+   "text": {
+    "en": "Do Not Worry — Seek First the Kingdom",
+    "es": "No os Afanéis — Buscad Primero el Reino"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "aa716e43f2fe"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "Because the disciple's treasure is in heaven and his Master is God, he is freed from the anxiety that drives the world. \"Do not worry about your life,\" Jesus says, and He points to the birds of the air that neither sow nor reap, yet the heavenly Father feeds them, and to the lilies of the field that do not labor, yet Solomon in all his glory was not arrayed like one of them. If God so clothes the grass, will He not much more clothe His own children? Worry adds not a single hour to our lives; it only robs the present of trust. The Gentiles run after food and clothing as if there were no Father in heaven, but Jesus says, \"your heavenly Father knows that you need all these things.\" Therefore He gives the great command of the chapter: \"Seek first the kingdom of God and His righteousness, and all these things shall be added to you\" (Matthew 6:33). Anxiety is answered not by getting more but by putting first things first and trusting the Father with the rest, taking each day as it comes.",
+    "es": "Porque el tesoro del discípulo está en el cielo y su Señor es Dios, queda libre de la ansiedad que impulsa al mundo. \"No os afanéis por vuestra vida,\" dice Jesús, y señala a las aves del cielo que no siembran ni siegan, y sin embargo el Padre celestial las alimenta, y a los lirios del campo que no trabajan, y sin embargo ni Salomón con toda su gloria fue vestido como uno de ellos. Si Dios viste así la hierba, ¿no vestirá mucho más a sus propios hijos? El afán no añade ni una sola hora a nuestra vida; solo roba al presente la confianza. Los gentiles corren tras la comida y el vestido como si no hubiera Padre en el cielo, pero Jesús dice: \"vuestro Padre celestial sabe que tenéis necesidad de todas estas cosas.\" Por tanto da el gran mandato del capítulo: \"Buscad primeramente el reino de Dios y su justicia, y todas estas cosas os serán añadidas\" (Mateo 6:33). La ansiedad no se responde consiguiendo más sino poniendo lo primero en primer lugar y confiando al Padre lo demás, tomando cada día como viene."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "12aed62296d5"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "heading",
+   "text": {
+    "en": "Judging and Discernment",
+    "es": "El Juzgar y el Discernimiento"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "89da91892387"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "Turning to how the disciple treats others, Jesus says, \"Judge not, that you be not judged. For with what judgment you judge, you will be judged\" (Matthew 7:1-2). He paints the picture of a man with a plank in his own eye trying to remove a speck from his brother's eye, and tells him to take the plank out of his own eye first; then he will see clearly to help his brother. This is not a ban on all discernment, for in the very next breath He says not to give what is holy to dogs or to cast pearls before swine, which requires us to tell the difference. What He forbids is the hypocritical, condemning spirit that is harsh toward others and blind toward itself. The disciple judges himself first and most severely, and comes to his brother not as a judge over him but as one beggar showing another where bread is found.",
+    "es": "Pasando a cómo el discípulo trata a otros, Jesús dice: \"No juzguéis, para que no seáis juzgados. Porque con el juicio con que juzgáis, seréis juzgados\" (Mateo 7:1-2). Pinta el cuadro de un hombre con una viga en su propio ojo tratando de sacar una paja del ojo de su hermano, y le dice que saque primero la viga de su propio ojo; entonces verá bien para ayudar a su hermano. Esto no es una prohibición de todo discernimiento, porque en el mismo aliento dice que no demos lo santo a los perros ni echemos perlas a los cerdos, lo cual requiere que distingamos la diferencia. Lo que prohíbe es el espíritu hipócrita y condenador que es duro con otros y ciego consigo mismo. El discípulo se juzga a sí mismo primero y más severamente, y viene a su hermano no como juez sobre él sino como un mendigo mostrando a otro dónde se halla el pan."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "28a82d5df933"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "heading",
+   "text": {
+    "en": "Ask, Seek, Knock",
+    "es": "Pedid, Buscad, Llamad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "168ae54bdd07"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "How can anyone live this way? Only by a Father who gives. \"Ask, and it will be given to you; seek, and you will find; knock, and it will be opened to you\" (Matthew 7:7). Jesus reasons from the lesser to the greater: if a son asks for bread, no decent father gives him a stone, and if you who are evil know how to give good gifts to your children, how much more will your Father who is in heaven give good things to those who ask Him. Prayer is not prying open the hand of a reluctant God but coming to a Father who delights to give. And out of that confidence flows the rule that sums up the whole law of love toward others: \"Whatever you want men to do to you, do also to them, for this is the Law and the Prophets\" (Matthew 7:12). The Golden Rule is not a clever maxim but the Law and the Prophets pressed into a single sentence we can carry into every encounter.",
+    "es": "¿Cómo puede alguien vivir así? Solo por un Padre que da. \"Pedid, y se os dará; buscad, y hallaréis; llamad, y se os abrirá\" (Mateo 7:7). Jesús razona de lo menor a lo mayor: si un hijo pide pan, ningún padre decente le da una piedra, y si vosotros siendo malos sabéis dar buenas dádivas a vuestros hijos, cuánto más vuestro Padre que está en el cielo dará buenas cosas a los que le pidan. La oración no es forzar la mano de un Dios renuente sino venir a un Padre que se deleita en dar. Y de esa confianza fluye la regla que resume toda la ley del amor hacia otros: \"Así que, todas las cosas que queráis que los hombres hagan con vosotros, así también haced vosotros con ellos; porque esto es la ley y los profetas\" (Mateo 7:12). La Regla de Oro no es una máxima ingeniosa sino la ley y los profetas comprimidos en una sola frase que podemos llevar a cada encuentro."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "38f59e2d8b3f"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "heading",
+   "text": {
+    "en": "The Two Ways and the Two Claims",
+    "es": "Los Dos Caminos y las Dos Pretensiones"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4b7dc8e9fb4b"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "As the sermon draws toward its end, Jesus sets before His hearers a series of sharp choices. There are two gates and two roads: \"Enter by the narrow gate... narrow is the gate and difficult is the way which leads to life, and there are few who find it\" (Matthew 7:13-14), while the wide gate and broad way lead to destruction with a crowd going through them. There are two kinds of teachers: He warns to beware of false prophets who come in sheep's clothing but inwardly are ravenous wolves, and gives the test, \"You will know them by their fruits.\" And there are two kinds of claim upon Him: \"Not everyone who says to Me, 'Lord, Lord,' shall enter the kingdom of heaven, but he who does the will of My Father in heaven\" (Matthew 7:21). Some will point to mighty works done in His name, and He will say, \"I never knew you; depart from Me.\" Words about Christ, even religious words and works, are not the same as knowing Him and doing the Father's will.",
+    "es": "Mientras el sermón se acerca a su fin, Jesús pone delante de sus oyentes una serie de decisiones agudas. Hay dos puertas y dos caminos: \"Entrad por la puerta estrecha... estrecha es la puerta, y angosto el camino que lleva a la vida, y pocos son los que la hallan\" (Mateo 7:13-14), mientras la puerta ancha y el camino espacioso llevan a la perdición con una multitud que pasa por ellos. Hay dos clases de maestros: advierte que nos guardemos de los falsos profetas que vienen con vestidos de ovejas pero por dentro son lobos rapaces, y da la prueba: \"Por sus frutos los conoceréis.\" Y hay dos clases de pretensión sobre Él: \"No todo el que me dice: Señor, Señor, entrará en el reino de los cielos, sino el que hace la voluntad de mi Padre que está en los cielos\" (Mateo 7:21). Algunos señalarán obras poderosas hechas en su nombre, y Él dirá: \"Nunca os conocí; apartaos de mí.\" Las palabras acerca de Cristo, aun palabras y obras religiosas, no son lo mismo que conocerle y hacer la voluntad del Padre."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e43c772a84"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "heading",
+   "text": {
+    "en": "The Two Builders",
+    "es": "Los Dos Edificadores"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1eba22db6664"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "The whole sermon comes to rest on a single image of two builders. \"Whoever hears these sayings of Mine, and does them, I will liken him to a wise man who built his house on the rock\" (Matthew 7:24); but the one who hears and does not do is like a foolish man who built on the sand. Both men built houses, and from the outside the houses may have looked the same; the difference was hidden in the foundation until the storm came. When the rain fell, the floods rose, and the winds beat against both houses, the house on the rock stood and the house on the sand fell with a great crash. The dividing line is not hearing but doing: it is not enough to admire the sermon, attend the preaching, or even applaud the truth; the wise build their lives on obedience to the King's words. When Jesus finished, the people were astonished, \"for He taught them as one having authority, and not as the scribes\" (Matthew 7:28-29). Their amazement was right, for no mere teacher had ever spoken this way; here was the King Himself laying down the law of His kingdom. The Sermon on the Mount is not advice to consider but the word of the King to obey, and the only safe place to stand when the storm comes is on the rock of doing what He says.",
+    "es": "Todo el sermón viene a reposar en una sola imagen de dos edificadores. \"Cualquiera que me oye estas palabras, y las hace, le compararé a un hombre prudente, que edificó su casa sobre la roca\" (Mateo 7:24); pero el que las oye y no las hace es como un hombre insensato que edificó sobre la arena. Ambos hombres edificaron casas, y por fuera las casas pudieron parecer iguales; la diferencia estaba escondida en el fundamento hasta que vino la tormenta. Cuando descendió la lluvia, subieron los ríos, y soplaron los vientos contra ambas casas, la casa sobre la roca permaneció y la casa sobre la arena cayó con gran ruina. La línea divisoria no es el oír sino el hacer: no basta admirar el sermón, asistir a la predicación, o aun aplaudir la verdad; los prudentes edifican su vida sobre la obediencia a las palabras del Rey. Cuando Jesús terminó, la gente se admiraba, \"porque les enseñaba como quien tiene autoridad, y no como los escribas\" (Mateo 7:28-29). Su asombro era justo, porque ningún simple maestro había hablado jamás de esta manera; aquí estaba el Rey mismo estableciendo la ley de su reino. El Sermón del Monte no es un consejo que considerar sino la palabra del Rey que obedecer, y el único lugar seguro donde estar de pie cuando venga la tormenta es sobre la roca de hacer lo que Él dice."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0e589ac8d3e5"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "scripture",
+   "text": {
+    "en": "\"Whoever hears these sayings of Mine, and does them, I will liken him to a wise man who built his house on the rock.\" — Matthew 7:24 (NKJV)",
+    "es": "\"Cualquiera que me oye estas palabras, y las hace, le compararé a un hombre prudente, que edificó su casa sobre la roca.\" — Mateo 7:24 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "dadbe4ed8ff0"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "Unit 4 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 4 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "07d9dcb66810"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33593c268178"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

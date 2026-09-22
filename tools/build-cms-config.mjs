@@ -53,23 +53,30 @@ const yaml = (v, indent = 0) => {
 /* Every block type the lesson model has, as the editor sees it. The `name` of
    each type matches the block's own `type`, which is how a variable-type list
    knows which form to show. */
+const TYPE_LABEL = {
+  masthead: 'Page heading', title: 'Unit title', subtitle: 'Unit subtitle',
+  heading: 'Section heading', prose: 'Paragraph', scripture: 'Scripture quotation',
+  'list-item': 'List item', caption: 'Caption', label: 'Label', other: 'Text',
+};
+
 const blockTypes = (langs) => {
-  const text = (label) => ({
-    label, name: 'text', widget: 'object',
+  const text = {
+    label: 'Text', name: 'text', widget: 'object',
     fields: langs.map((l) => ({
-      label: langLabel(l), name: l, widget: 'text', required: l === langs[0],
+      label: langLabel(l), name: l, widget: 'text', required: false,
     })),
-  });
+  };
 
   /* Provenance. `from` is a hash and no person should ever type one, so it is
      hidden and carried through untouched. `status` is a small dropdown,
      because the one thing a person can usefully say about a translation is who
      wrote it -- and marking a fixed machine translation as corrected is what
      stops the next automatic pass from treating it as disposable. */
-  const tr = (hint) => ({
+  const tr = {
     label: 'Translation status', name: 'tr', widget: 'object', required: false,
-    collapsed: true, hint,
-    fields: langs.slice(1).flatMap((l) => [{
+    collapsed: true,
+    hint: 'Edit the English and every translation of this block is marked out of date automatically.',
+    fields: langs.slice(1).map((l) => ({
       label: langLabel(l), name: l, widget: 'object', required: false,
       fields: [
         { label: 'Written by', name: 'status', widget: 'select', required: false,
@@ -80,50 +87,21 @@ const blockTypes = (langs) => {
           ] },
         { label: 'Source hash', name: 'from', widget: 'hidden' },
       ],
-    }]),
-  });
+    })),
+  };
 
-  const common = (label, hint) => [
-    { label: 'Block id', name: 'id', widget: 'hidden' },
-    text(label),
-    tr(hint),
-  ];
-
-  const HINT = 'Edit the English and every translation of this block is marked out of date automatically.';
-
-  return [
-    { name: 'masthead', label: 'Page heading', widget: 'object',
-      fields: common('Heading', HINT) },
-    { name: 'title', label: 'Unit title', widget: 'object',
-      fields: common('Title', HINT) },
-    { name: 'subtitle', label: 'Unit subtitle', widget: 'object',
-      fields: common('Subtitle', HINT) },
-    { name: 'heading', label: 'Section heading', widget: 'object',
-      fields: [...common('Heading', HINT),
-               { label: 'Link anchor', name: 'anchor', widget: 'string', required: false }] },
-    { name: 'prose', label: 'Paragraph', widget: 'object',
-      fields: [...common('Paragraph', HINT),
-               { label: 'Link anchor', name: 'anchor', widget: 'string', required: false }] },
-    { name: 'scripture', label: 'Scripture quotation', widget: 'object',
-      fields: [...common('Quotation', HINT),
-               { label: 'Link anchor', name: 'anchor', widget: 'string', required: false }] },
-    { name: 'figure', label: 'Illustration', widget: 'object',
-      fields: [
-        { label: 'Block id', name: 'id', widget: 'hidden' },
-        { label: 'Drawing (SVG)', name: 'svg', widget: 'hidden' },
-        { label: 'Figure attributes', name: 'attrs', widget: 'hidden' },
-        { label: 'Caption', name: 'caption', widget: 'object', required: false,
-          fields: [text('Caption'), tr(HINT)] },
-      ] },
-  ];
+  return Object.entries(TYPE_LABEL).map(([name, label]) => ({
+    name, label, widget: 'object',
+    fields: [{ label: 'Block id', name: 'id', widget: 'hidden' }, text, tr],
+  }));
 };
 
-/* The lesson itself. `create: false` and `delete: false` are deliberate: a unit
-   comes into existence when a course is converted, and a teacher who can delete
-   one from a web form will eventually delete one. */
+/* The lesson itself. `create: false` and `delete: false` are deliberate: a
+   unit comes into existence when a course is converted, and a teacher who can
+   delete one from a web form will eventually delete one. */
 const lessonCollection = (course, langs) => ({
   name: `lessons_${course}`,
-  label: course.replace(/^CTS/, ''),
+  label: course.replace(/^CTS/, '') || course,
   label_singular: 'Unit',
   folder: `${LESSONS}/${course}`,
   extension: 'json',
@@ -139,6 +117,10 @@ const lessonCollection = (course, langs) => ({
     { label: 'Unit number', name: 'unit', widget: 'number', value_type: 'int' },
     { label: 'Written in', name: 'sourceLang', widget: 'hidden' },
     { label: 'Languages', name: 'langs', widget: 'hidden' },
+    /* The page's markup with a hole where each block's text was. Generated,
+       never edited, never shown -- but it must be declared, or Sveltia drops
+       it on save and the lesson has no page left to render into. */
+    { label: 'Page template', name: 'template', widget: 'hidden' },
     { label: 'Lesson', name: 'blocks', widget: 'list',
       label_singular: 'Block',
       summary: '{{fields.text.' + langs[0] + '}}',

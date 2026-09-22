@@ -1,0 +1,446 @@
+{
+ "course": "CTSBibleCharacters",
+ "unit": 11,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Unit 12 →</button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #2f4f2f;\"><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\">\n    <h2><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n    <input type=\"text\" id=\"regName\" placeholder=\"Full name / Nombre completo\" aria-label=\"Full name / Nombre completo\">\n    <input type=\"email\" id=\"regEmail\" placeholder=\"Email\" aria-label=\"Email\">\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate Track</option>\n        <option value=\"mdiv\">Master of Divinity (M.Div.) Track</option>\n        <option value=\"thm\">Master of Theology (Th.M.) Track</option>\n    </select>\n    <button class=\"nav-btn\" id=\"regBtn\"><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\"><p><!--cts:b007:en--></p><p><!--cts:b008:en--></p><p><!--cts:b009:en--></p><p><!--cts:b010:en--></p><h2><!--cts:b011:en--></h2><p><!--cts:b012:en--></p><div class=\"scripture\"><!--cts:b013:en--></div><p><!--cts:b014:en--></p><p><!--cts:b015:en--></p><h2><!--cts:b016:en--></h2><p><!--cts:b017:en--></p><p><!--cts:b018:en--></p><div class=\"scripture\"><!--cts:b019:en--></div><p><!--cts:b020:en--></p><p><!--cts:b021:en--></p><h2><!--cts:b022:en--></h2><p><!--cts:b023:en--></p><p><!--cts:b024:en--></p><p><!--cts:b025:en--></p><h2><!--cts:b026:en--></h2><p><!--cts:b027:en--></p></div>\n<div class=\"lang-es\"><p><!--cts:b007:es--></p><p><!--cts:b008:es--></p><p><!--cts:b009:es--></p><p><!--cts:b010:es--></p><h2><!--cts:b011:es--></h2><p><!--cts:b012:es--></p><div class=\"scripture\"><!--cts:b013:es--></div><p><!--cts:b014:es--></p><p><!--cts:b015:es--></p><h2><!--cts:b016:es--></h2><p><!--cts:b017:es--></p><p><!--cts:b018:es--></p><div class=\"scripture\"><!--cts:b019:es--></div><p><!--cts:b020:es--></p><p><!--cts:b021:es--></p><h2><!--cts:b022:es--></h2><p><!--cts:b023:es--></p><p><!--cts:b024:es--></p><p><!--cts:b025:es--></p><h2><!--cts:b026:es--></h2><p><!--cts:b027:es--></p></div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b028:en--></span><span class=\"lang-es\"><!--cts:b028:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b029:en--></span>\n       <span class=\"lang-es\"><!--cts:b029:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b030:en--></span><span class=\"lang-es\"><!--cts:b030:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b031:en--></span><span class=\"lang-es\"><!--cts:b031:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSBibleCharactersReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "📖 Bible Characters — Unit 11: David — A Man After God's Own Heart",
+    "es": "📖 Personajes de la Biblia — Unidad 11: David — Un Hombre Conforme al Corazón de Dios"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d96672561a91"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "\"I have found David the son of Jesse, a man after My own heart, who will do all My will.\" — Acts 13:22 (NKJV)",
+    "es": "«He hallado a David, hijo de Isaí, varón conforme a mi corazón, el cual hará todo lo que yo quiero.» — Hechos 13:22 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c41b44a1acd2"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "📝 Course Registration",
+    "es": "📝 Registro del Curso"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fde900fe006b"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "Please register before beginning this unit.",
+    "es": "Por favor regístrese antes de comenzar esta unidad."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6c8b91fbfb6f"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "No life in the Old Testament is drawn in more colors than David's. He was a shepherd boy, a giant-killer, a fugitive, a king, a poet, a sinner, and a penitent — and through it all God called him \"a man after My own heart\" (Acts 13:22). The thread that holds his whole story together is the Shepherd: the boy who kept sheep came to know the LORD as his own Shepherd, and the God who shepherded David fought his battles, supplied his needs, and forgave his sin. The same Shepherd cares for us in exactly the same way.",
+    "es": "Ninguna vida en el Antiguo Testamento está dibujada con más colores que la de David. Fue pastor, vencedor de gigantes, fugitivo, rey, poeta, pecador y penitente —y a través de todo ello Dios lo llamó «varón conforme a mi corazón» (Hechos 13:22)—. El hilo que sostiene toda su historia es el Pastor: el muchacho que cuidaba ovejas llegó a conocer a Jehová como su propio Pastor, y el Dios que pastoreó a David peleó sus batallas, suplió sus necesidades y perdonó su pecado. El mismo Pastor nos cuida a nosotros exactamente de la misma manera."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "da51951d3977"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Subject:</strong> David — the shepherd-king after God's own heart.",
+    "es": "<strong>Tema:</strong> David — el pastor-rey conforme al corazón de Dios."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5a92516b773c"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Proposition:</strong> The Lord shepherds His servant through faith, trust, and repentance — fighting his battles, providing his needs, and forgiving his sin — and shepherds us the same way.",
+    "es": "<strong>Proposición:</strong> El Señor pastorea a su siervo por medio de la fe, la confianza y el arrepentimiento —peleando sus batallas, proveyendo sus necesidades y perdonando su pecado— y nos pastorea a nosotros de la misma manera."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e95b98bc6319"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "We will trace three movements in the life of David.",
+    "es": "Trazaremos tres movimientos en la vida de David."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "adae356d471b"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "heading",
+   "text": {
+    "en": "I. The Shepherd Boy's Faith",
+    "es": "I. La Fe del Muchacho Pastor"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "968c2132c54c"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "Saul's whole army stood paralyzed before Goliath, a Philistine giant — the traditional Hebrew text puts him at roughly nine feet tall, though the ancient Greek translation and the Dead Sea Scrolls give a shorter reading — who blasphemed the living God and dared any Israelite to fight him. Forty days he taunted them, and not one soldier would go. Then a shepherd boy arrived with bread for his brothers, heard the giant's blasphemy, and was the only one unafraid. David went out with a sling and five smooth stones — and he needed only one. Goliath laughed at a boy with a sling, but David answered him with words that ring down the centuries:",
+    "es": "Todo el ejército de Saúl estaba paralizado delante de Goliat, un gigante filisteo —el texto hebreo tradicional lo sitúa en unos tres metros de altura, aunque la antigua traducción griega y los Rollos del Mar Muerto dan una lectura más baja— que blasfemaba al Dios vivo y desafiaba a cualquier israelita a pelear con él. Cuarenta días los provocó, y ni un solo soldado salió. Entonces llegó un muchacho pastor con pan para sus hermanos, oyó la blasfemia del gigante, y fue el único que no tuvo miedo. David salió con una honda y cinco piedras lisas —y solo necesitó una—. Goliat se rió de un muchacho con una honda, pero David le respondió con palabras que resuenan por los siglos:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3d7e9e6cddc2"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "scripture",
+   "text": {
+    "en": "You come to me with a sword, with a spear, and with a javelin. But I come to you in the name of the LORD of hosts... This day the LORD will deliver you into my hand... that all this assembly may know that the LORD does not save with sword and spear; for the battle is the LORD's, and He will give you into our hands. (1 Samuel 17:45-47, NKJV)",
+    "es": "Tú vienes a mí con espada y lanza y escudo; mas yo vengo a ti en el nombre de Jehová de los ejércitos... Jehová te entregará hoy en mi mano... y sabrá toda esta congregación que Jehová no salva con espada y lanza; porque de Jehová es la batalla, y él os entregará en nuestras manos. (1 Samuel 17:45-47, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "40dc7e124765"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "prose",
+   "text": {
+    "en": "Here is the lesson: do not size up your problems by your own strength; measure them against God's might. The whole army saw a giant too big to beat; David saw a giant too big to miss, because he was looking at God. It is the same trust he would later put into a psalm — \"Yea, though I walk through the valley of the shadow of death, I will fear no evil; for You are with me.\"",
+    "es": "Aquí está la lección: no midas tus problemas por tu propia fuerza; mídelos contra el poder de Dios. Todo el ejército veía un gigante demasiado grande para vencer; David veía un gigante demasiado grande para fallar, porque miraba a Dios. Es la misma confianza que después pondría en un salmo: «Aunque ande en valle de sombra de muerte, no temeré mal alguno; porque tú estarás conmigo»."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bb59238604be"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "I think of a llama I heard of, set among a flock of sheep in Montana. A coyote can scatter and kill defenseless sheep, but the llama is afraid of nothing; when it sees the coyote, it lifts its head and walks straight at it, and the predator loses its nerve and its opportunity. God's people need not cower before the enemy either. I think too of a grandmother whose husband was hostile to the gospel, honking the horn and shouting for her in front of the church. She did not win him by argument; she answered him with a quiet, humble spirit, just as Peter counsels a believing wife to win her husband \"by the conduct\" of her life (1 Peter 3:1) — and in time she won him to Christ. She let God do the battle. For the truth is that no man ever won a fight against the devil in his own strength — not Adam, not Peter, not Thomas — no one but Christ. When you face a giant, the battle belongs to the Lord.",
+    "es": "Pienso en una llama que supe que pusieron entre un rebaño de ovejas en Montana. Un coyote puede dispersar y matar a las ovejas indefensas, pero la llama no le teme a nada; cuando ve al coyote, levanta la cabeza y camina derecho hacia él, y el depredador pierde el valor y la oportunidad. Tampoco el pueblo de Dios necesita acobardarse delante del enemigo. Pienso también en una abuela cuyo esposo era hostil al evangelio, tocando la bocina y gritándole frente a la iglesia. No lo ganó con discusiones; le respondió con un espíritu callado y humilde, tal como Pedro aconseja a la esposa creyente a ganar a su esposo «por la conducta» de su vida (1 Pedro 3:1) —y con el tiempo lo ganó para Cristo—. Ella dejó que Dios peleara la batalla. Porque la verdad es que ningún hombre ganó jamás una pelea contra el diablo con su propia fuerza —ni Adán, ni Pedro, ni Tomás— nadie sino Cristo. Cuando enfrentas a un gigante, la batalla es del Señor."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7bcf0476c981"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "heading",
+   "text": {
+    "en": "II. The Lord My Shepherd",
+    "es": "II. Jehová es mi Pastor"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c4f5169a0f21"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "Of all David wrote, none is loved like the twenty-third Psalm — and no one was better qualified to write it, for he had kept sheep himself and knew how helpless they are without a shepherd. The psalm falls into three movements of a shepherd's care.",
+    "es": "De todo lo que David escribió, nada se ama como el Salmo veintitrés —y nadie estaba mejor capacitado para escribirlo, pues él mismo había cuidado ovejas y sabía cuán indefensas son sin un pastor—. El salmo se divide en tres movimientos del cuidado de un pastor."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "eb4ae524e104"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "First, the Shepherd's <strong>provision</strong>. \"The LORD is my shepherd; I shall not want.\" He gives rest — \"He makes me to lie down in green pastures\" — for a sheep will not lie down while it is anxious or hungry, and sometimes God has to lay a driven man on his back before he will rest. He gives refreshment beside the still waters, and He gives restoration: \"He restores my soul.\" A sheep can become \"cast down,\" rolled over on its back and unable to right itself, where it will perish unless the shepherd lifts it up — and that is what God does for the soul that has fallen.",
+    "es": "Primero, la <strong>provisión</strong> del Pastor. «Jehová es mi pastor; nada me faltará». Él da descanso —«En lugares de delicados pastos me hará descansar»— porque una oveja no se echa mientras está ansiosa o hambrienta, y a veces Dios tiene que poner de espaldas a un hombre afanado antes de que descanse. Da refrigerio junto a aguas de reposo, y da restauración: «Confortará mi alma». Una oveja puede quedar «derribada», volcada de espaldas e incapaz de levantarse, donde perecería a menos que el pastor la levante —y eso es lo que Dios hace por el alma que ha caído—."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "43bbc7324509"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "scripture",
+   "text": {
+    "en": "The LORD is my shepherd; I shall not want. He makes me to lie down in green pastures; He leads me beside the still waters. He restores my soul. (Psalm 23:1-3, NKJV)",
+    "es": "Jehová es mi pastor; nada me faltará. En lugares de delicados pastos me hará descansar; junto a aguas de reposo me pastoreará. Confortará mi alma. (Salmo 23:1-3, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "383d91876a3e"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "Second, the Shepherd's <strong>protection</strong>. He leads \"in the paths of righteousness for His name's sake\" — His plan for us is good. And when the path goes down into the dark, His presence goes with us: \"Yea, though I walk through the valley of the shadow of death, I will fear no evil; for You are with me.\" The comfort is not the absence of the valley but the presence of the Shepherd. \"Your rod and Your staff, they comfort me\" — the rod to drive off the wolf, the staff to draw the sheep back; His power is enough.",
+    "es": "Segundo, la <strong>protección</strong> del Pastor. Él guía «por sendas de justicia por amor de su nombre» —su plan para nosotros es bueno—. Y cuando el camino baja a la oscuridad, su presencia va con nosotros: «Aunque ande en valle de sombra de muerte, no temeré mal alguno; porque tú estarás conmigo». El consuelo no es la ausencia del valle, sino la presencia del Pastor. «Tu vara y tu cayado me infundirán aliento» —la vara para ahuyentar al lobo, el cayado para hacer volver a la oveja—; su poder es suficiente."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "da41a605342e"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "Third, the Shepherd's <strong>preparation</strong>. \"You prepare a table before me in the presence of my enemies; You anoint my head with oil; my cup runs over.\" The shepherd goes ahead to ready the pasture, and pours healing oil on the wounded sheep. Then comes the shepherd's mark: \"Surely goodness and mercy shall follow me all the days of my life\" — goodness and mercy following us like two faithful sheepdogs, the brand that shows we belong to Him. And the psalm ends at home: \"and I will dwell in the house of the LORD forever.\" A dying boy was once taught to count the psalm on his fingers and to hold the fourth finger — \"the LORD is <em>my</em> shepherd\" — for everything turns on that little word <em>my</em>. This Shepherd is no distant figure; the Lord Jesus said, \"I am the good shepherd. The good shepherd gives His life for the sheep\" (John 10:11). He is the Shepherd of the twenty-third Psalm in the flesh.",
+    "es": "Tercero, la <strong>preparación</strong> del Pastor. «Aderezarás mesa delante de mí en presencia de mis angustiadores; ungiste mi cabeza con aceite; mi copa está rebosando». El pastor va delante a preparar el pasto, y derrama aceite sanador sobre la oveja herida. Luego viene la marca del pastor: «Ciertamente el bien y la misericordia me seguirán todos los días de mi vida» —el bien y la misericordia siguiéndonos como dos perros pastores fieles, la marca que muestra que le pertenecemos—. Y el salmo termina en casa: «y en la casa de Jehová moraré por largos días». A un niño moribundo le enseñaron una vez a contar el salmo en los dedos y a sostener el cuarto dedo —«Jehová es <em>mi</em> pastor»— porque todo gira sobre esa pequeña palabra <em>mi</em>. Este Pastor no es una figura distante; el Señor Jesús dijo: «Yo soy el buen pastor; el buen pastor su vida da por las ovejas» (Juan 10:11). Él es el Pastor del Salmo veintitrés en carne."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b8eeca0ceea8"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "heading",
+   "text": {
+    "en": "III. The Shepherd's Forgiveness",
+    "es": "III. El Perdón del Pastor"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "59c5a36a1aad"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "But David was no marble saint. He fell, and he fell hard. He took Bathsheba, another man's wife, and then had her husband Uriah killed to cover it. For about a year he carried the guilt unconfessed, and the joy drained out of him — until God sent the prophet Nathan, who told him of a rich man who stole a poor man's only ewe lamb. When David burned with anger at the man, Nathan turned and said, \"You are the man!\" (2 Samuel 12:7). Out of that confrontation came Psalm 51, and in it we can trace the path back to God.",
+    "es": "Pero David no era un santo de mármol. Cayó, y cayó duro. Tomó a Betsabé, la esposa de otro hombre, y luego hizo matar a su esposo Urías para encubrirlo. Por cerca de un año cargó la culpa sin confesar, y el gozo se le escurrió —hasta que Dios envió al profeta Natán, quien le habló de un rico que robó la única corderita de un pobre—. Cuando David ardió de ira contra aquel hombre, Natán se volvió y dijo: «Tú eres aquel hombre» (2 Samuel 12:7). De aquella confrontación salió el Salmo 51, y en él podemos trazar el camino de vuelta a Dios."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c4be82ff0d77"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "He was <strong>confronted</strong> — Nathan's parable cut through every excuse and named the sin. He <strong>admitted</strong> it: \"Against You, You only, have I sinned.\" He made no excuses, blamed no one, and killed no prophet for telling him the truth — he simply owned it. He was truly <strong>sorry</strong>: a year of guilt had taught him that unconfessed sin blocks the channel of prayer, and he knew the promise that \"if we confess our sins, He is faithful and just to forgive us our sins\" (1 John 1:9). And he <strong>turned</strong> — back to God, with a new heart: \"Create in me a clean heart, O God, and renew a steadfast spirit within me.\" His sin was forgiven, though some consequences remained, for forgiveness does not always erase the wreckage we have made — and the pain of our sin, every bit of it, was finally borne by Christ on the cross.",
+    "es": "Fue <strong>confrontado</strong> —la parábola de Natán cortó toda excusa y nombró el pecado—. Lo <strong>admitió</strong>: «Contra ti, contra ti solo he pecado». No puso excusas, no culpó a nadie, y no mató a ningún profeta por decirle la verdad —simplemente lo reconoció—. Estuvo verdaderamente <strong>arrepentido</strong>: un año de culpa le había enseñado que el pecado no confesado bloquea el canal de la oración, y conocía la promesa de que «si confesamos nuestros pecados, él es fiel y justo para perdonar nuestros pecados» (1 Juan 1:9). Y se <strong>volvió</strong> —de regreso a Dios, con un corazón nuevo—: «Crea en mí, oh Dios, un corazón limpio; y renueva un espíritu recto dentro de mí». Su pecado fue perdonado, aunque algunas consecuencias permanecieron, porque el perdón no siempre borra el desastre que hemos hecho —y el dolor de nuestro pecado, todo entero, fue al fin llevado por Cristo en la cruz—."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "718f62c7f514"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "In the trenches of the First World War, the story is told of a man who found a wounded comrade and gave him his own identity disc, in effect saying, \"I will carry your name and your crimes away in my death.\" That is what Christ has done; He takes our guilt and carries it away, and \"He doesn't remember\" it against us anymore. There is an old tale of a wandering dog named Lassie called home across the moors with the words, \"Lassie, come home — for the dear Lord's sake.\" That is the Shepherd's voice to every wanderer: come home, for the dear Lord's sake.",
+    "es": "En las trincheras de la Primera Guerra Mundial se cuenta de un hombre que halló a un compañero herido y le dio su propia placa de identidad, diciendo en efecto: «Llevaré tu nombre y tus crímenes lejos en mi muerte». Eso es lo que Cristo ha hecho; toma nuestra culpa y la lleva lejos, y «ya no la recuerda» contra nosotros. Hay un viejo relato de una perra errante llamada Lassie a quien llamaron a casa a través de los páramos con las palabras: «Lassie, vuelve a casa —por amor del querido Señor—». Esa es la voz del Pastor a todo errante: vuelve a casa, por amor del querido Señor."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f3c9bcb84e07"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "heading",
+   "text": {
+    "en": "The One Grace Through It All",
+    "es": "La Única Gracia a través de Todo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4f34094021a2"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "Three movements, but one grace runs through them: the Shepherd who fights our battles, provides our needs, and forgives our sin. David did not earn any of it; he received it all by faith — the same faith that walked out to meet a giant, that rested in green pastures, and that crept home after a fall. The boy who once measured a giant against the might of God learned across a lifetime that every battle, every need, and every sin must be brought to the same place: to the Shepherd, to whom the battle belongs. And that is the hope this psalm-singing king leaves with us — the Shepherd who was faithful to David, through triumph and through failure alike, is the very same Shepherd who keeps us, and He will not lose one of His sheep.",
+    "es": "Tres movimientos, pero una sola gracia corre por todos: el Pastor que pelea nuestras batallas, provee nuestras necesidades y perdona nuestro pecado. David no mereció nada de ello; lo recibió todo por fe —la misma fe que salió al encuentro de un gigante, que reposó en delicados pastos, y que volvió a casa después de una caída—. El muchacho que una vez midió a un gigante contra el poder de Dios aprendió a lo largo de una vida que cada batalla, cada necesidad y cada pecado deben llevarse al mismo lugar: al Pastor, a quien pertenece la batalla. Y esa es la esperanza que este rey y salmista nos deja: el Pastor que fue fiel a David, tanto en el triunfo como en el fracaso, es el mismo Pastor que nos guarda, y no perderá ni una sola de sus ovejas. A Él podemos correr en toda batalla, en toda necesidad y en todo pecado, sabiendo que su gracia siempre es mayor que nuestra mayor falta."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6ef4a249164a"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "Unit 11 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 11 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "308fac13cf5e"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33593c268178"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

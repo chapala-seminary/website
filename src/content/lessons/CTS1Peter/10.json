@@ -1,0 +1,404 @@
+{
+ "course": "CTS1Peter",
+ "unit": 10,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Unit 11 →</button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #2f4f2f;\"><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\">\n    <h2><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></p>\n    <input type=\"text\" id=\"regName\" placeholder=\"Full name / Nombre completo\" aria-label=\"Full name / Nombre completo\">\n    <input type=\"email\" id=\"regEmail\" placeholder=\"Email\" aria-label=\"Email\">\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate Track</option>\n        <option value=\"mdiv\">Master of Divinity (M.Div.) Track</option>\n        <option value=\"thm\">Master of Theology (Th.M.) Track</option>\n    </select>\n    <button class=\"nav-btn\" id=\"regBtn\"><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\">\n<p class=\"passage-label\"><!--cts:b008:en--></p>\n<div class=\"scripture\"><!--cts:b009:en--></div>\n\n<h3><!--cts:b010:en--></h3>\n<p><!--cts:b011:en--></p>\n\n<h3><!--cts:b012:en--></h3>\n<p><!--cts:b013:en--></p>\n\n<h3><!--cts:b014:en--></h3>\n<div class=\"scripture\"><!--cts:b015:en--></div>\n<p><!--cts:b016:en--></p>\n\n<h3><!--cts:b017:en--></h3>\n<p><!--cts:b018:en--></p>\n\n<h3><!--cts:b019:en--></h3>\n<p><!--cts:b020:en--></p>\n<p><!--cts:b021:en--></p>\n<p><!--cts:b022:en--></p>\n<p><!--cts:b023:en--></p>\n<div class=\"scripture\"><!--cts:b024:en--></div>\n</div>\n\n<div class=\"lang-es\">\n<p class=\"passage-label\"><!--cts:b008:es--></p>\n<div class=\"scripture\"><!--cts:b009:es--></div>\n\n<h3><!--cts:b010:es--></h3>\n<p><!--cts:b011:es--></p>\n\n<h3><!--cts:b012:es--></h3>\n<p><!--cts:b013:es--></p>\n\n<h3><!--cts:b014:es--></h3>\n<div class=\"scripture\"><!--cts:b015:es--></div>\n<p><!--cts:b016:es--></p>\n\n<h3><!--cts:b017:es--></h3>\n<p><!--cts:b018:es--></p>\n\n<h3><!--cts:b019:es--></h3>\n<p><!--cts:b020:es--></p>\n<p><!--cts:b021:es--></p>\n<p><!--cts:b022:es--></p>\n<p><!--cts:b023:es--></p>\n<div class=\"scripture\"><!--cts:b024:es--></div>\n</div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b025:en--></span><span class=\"lang-es\"><!--cts:b025:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b026:en--></span>\n       <span class=\"lang-es\"><!--cts:b026:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b027:en--></span><span class=\"lang-es\"><!--cts:b027:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b028:en--></span><span class=\"lang-es\"><!--cts:b028:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTS1PeterReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📖 1 Peter Intensive — Unit 10: Stewards of Grace",
+    "es": "📖 1 Pedro Intensivo — Unidad 10: Administradores de la Gracia"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e0fc2098ab4b"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "\"As each one has received a gift, minister it to one another, as good stewards of the manifold grace of God.\" — 1 Peter 4:10 (NKJV)",
+    "es": "\"Cada uno según el don que ha recibido, minístrelo a los otros, como buenos administradores de la multiforme gracia de Dios.\" — 1 Pedro 4:10 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cee3fabd099a"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "📝 Course Registration",
+    "es": "📝 Registro del Curso"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fde900fe006b"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Welcome to the 1 Peter Intensive. Please register before beginning Unit 10.",
+    "es": "Bienvenido al Intensivo de 1 Pedro. Por favor regístrese antes de comenzar la Unidad 10."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "de7853b4a322"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "scripture",
+   "text": {
+    "en": "<strong>Text: 1 Peter 4:1-11</strong>",
+    "es": "<strong>Texto: 1 Pedro 4:1-11 (RVG)</strong>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e4c99f171c92"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "scripture",
+   "text": {
+    "en": "\"As each one has received a gift, minister it to one another, as good stewards of the manifold grace of God.\" — 1 Peter 4:10 (NKJV)",
+    "es": "\"Cada uno según el don que ha recibido, minístrelo a los otros, como buenos administradores de la multiforme gracia de Dios.\" — 1 Pedro 4:10 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cee3fabd099a"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "heading",
+   "text": {
+    "en": "Arm Yourself with the Mind of Christ",
+    "es": "Armaos del Mismo Pensamiento de Cristo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "de8d217e12a5"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Peter has just set Christ before us as the One who suffered, died, and now reigns. Now he draws the practical lesson. \"Therefore, since Christ suffered for us in the flesh, arm yourselves also with the same mind, for he who has suffered in the flesh has ceased from sin, that he no longer should live the rest of his time in the flesh for the lusts of men, but for the will of God\" (1 Peter 4:1-2). The word <em>arm</em> is a soldier's word; the believer is to take up the same attitude Christ had as a weapon for the battle ahead. Christ was willing to suffer in the flesh rather than turn aside from the will of God, and the believer is to share that resolve. The one who has so suffered — who has died with Christ to the old way of living — has made a decisive break with sin. As a result, he will no longer spend the rest of his life chasing the lusts of men; he will spend it doing the will of God. The whole direction of life is turned around: from the appetites of the flesh to the will of the Father.",
+    "es": "Pedro acaba de poner a Cristo delante de nosotros como Aquel que padeció, murió y ahora reina. Ahora saca la lección práctica. \"Pues que Cristo ha padecido por nosotros en la carne, vosotros también armaos del mismo pensamiento; que el que ha padecido en la carne, cesó de pecado; para que ya el tiempo que queda en la carne, viva, no a las concupiscencias de los hombres, sino a la voluntad de Dios\" (1 Pedro 4:1-2). La palabra <em>armaos</em> es palabra de soldado; el creyente ha de tomar la misma actitud que tuvo Cristo como un arma para la batalla que viene. Cristo estuvo dispuesto a padecer en la carne antes que apartarse de la voluntad de Dios, y el creyente ha de compartir esa resolución. El que así ha padecido — el que ha muerto con Cristo al viejo modo de vivir — ha hecho una ruptura decisiva con el pecado. Por tanto, ya no gastará el resto de su vida persiguiendo las concupiscencias de los hombres; la gastará haciendo la voluntad de Dios. Toda la dirección de la vida queda vuelta del revés: de los apetitos de la carne a la voluntad del Padre."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a067466d02e0"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "heading",
+   "text": {
+    "en": "Done with the Old Life",
+    "es": "Terminado con la Vida Vieja"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "faa24b8b8f26"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "Peter speaks plainly about the past these believers had left behind. \"For we have spent enough of our past lifetime in doing the will of the Gentiles — when we walked in lewdness, lusts, drunkenness, revelries, drinking parties, and abominable idolatries\" (1 Peter 4:3). The point is simple and bracing: <em>enough</em>. Whatever time was wasted in the old pagan ways, it was more than enough; there is no reason to give it another hour. But such a clean break does not go unnoticed. \"In regard to these, they think it strange that you do not run with them in the same flood of dissipation, speaking evil of you\" (1 Peter 4:4). The old companions are baffled and even offended that the believer no longer plunges with them into the same rushing stream of excess, and they repay his changed life with slander. Yet they are not the final judges. \"They will give an account to Him who is ready to judge the living and the dead\" (1 Peter 4:5). Everyone, slanderer and saint alike, must answer to God, who is ready to judge all. It is in this connection that Peter says the gospel was preached even to those who are now dead (1 Peter 4:6) — that is, to believers who heard the good news while they lived and have since died; though they were judged as all men are, dying in the flesh, they live according to God in the spirit. Death is not the end for those who have heard and believed.",
+    "es": "Pedro habla claramente del pasado que estos creyentes habían dejado atrás. \"Porque nos debe bastar que el tiempo pasado de nuestra vida hayamos hecho la voluntad de los gentiles, andando en lascivias, concupiscencias, embriagueces, glotonerías, orgías de beber, y abominables idolatrías\" (1 Pedro 4:3). El punto es sencillo y firme: <em>basta</em>. Cualquier tiempo que se desperdició en las viejas costumbres paganas, fue más que suficiente; no hay razón para darle otra hora. Pero una ruptura tan limpia no pasa inadvertida. \"Y esto parece extraño a los que os vituperan, que vosotros no corráis con ellos en el mismo desenfreno de disolución\" (1 Pedro 4:4). Los viejos compañeros quedan perplejos y aun ofendidos de que el creyente ya no se lance con ellos al mismo torrente desbordado de exceso, y pagan su vida cambiada con calumnia. Mas ellos no son los jueces finales. \"Los cuales darán cuenta al que está preparado para juzgar a los vivos y a los muertos\" (1 Pedro 4:5). Todos, calumniador y santo por igual, han de responder a Dios, que está preparado para juzgar a todos. Es en este sentido que Pedro dice que el evangelio fue predicado aun a los que ahora están muertos (1 Pedro 4:6) — es decir, a los creyentes que oyeron las buenas nuevas mientras vivían y han muerto desde entonces; aunque fueron juzgados como todos los hombres, muriendo en la carne, viven según Dios en el espíritu. La muerte no es el fin para los que han oído y creído."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "58a2c2edc78c"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "heading",
+   "text": {
+    "en": "The End Is Near: Sober and Watchful",
+    "es": "El Fin Está Cerca: Templados y Velando"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2fc2f2161b2f"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "scripture",
+   "text": {
+    "en": "\"But the end of all things is at hand; therefore be serious and watchful in your prayers.\" — 1 Peter 4:7 (NKJV)",
+    "es": "\"Mas el fin de todas las cosas se acerca; sed pues templados, y velad en oración.\" — 1 Pedro 4:7 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bfcfd1abb4fb"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "\"But the end of all things is at hand; therefore be serious and watchful in your prayers\" (1 Peter 4:7). A fair question arises here, for Peter, Paul, and John all spoke of the end as near, and that was many centuries ago. Were they mistaken? They were not, and two things must be remembered. First, nearness must be measured from God's perspective, not ours. Scripture reminds us that with the Lord a thousand years are as a day, and a day as a thousand years; so from God's vantage point only a short while has passed since Peter wrote. Second, there is a nearness that touches every person directly. Given the uncertainties of life, and knowing that on average we live only some seventy years, the end is truly near for every one of us — our own end may come at any moment. So the warning is not an error to be explained away but a truth to be felt. And the response Peter calls for is practical: be serious, sober-minded, and watchful in prayer. The shortness of the time should sharpen our prayers and steady our minds, not throw us into panic or idleness.",
+    "es": "\"Mas el fin de todas las cosas se acerca; sed pues templados, y velad en oración\" (1 Pedro 4:7). Surge aquí una pregunta justa, pues Pedro, Pablo y Juan hablaron todos del fin como cercano, y eso fue hace muchos siglos. ¿Se equivocaron? No se equivocaron, y dos cosas deben recordarse. Primero, la cercanía debe medirse desde la perspectiva de Dios, no la nuestra. La Escritura nos recuerda que para el Señor mil años son como un día, y un día como mil años; así que desde el punto de vista de Dios solo ha pasado un breve tiempo desde que Pedro escribió. Segundo, hay una cercanía que toca a cada persona directamente. Dadas las incertidumbres de la vida, y sabiendo que en promedio vivimos solo unos setenta años, el fin está verdaderamente cerca para cada uno de nosotros — nuestro propio fin puede llegar en cualquier momento. Así que la advertencia no es un error que explicar sino una verdad que sentir. Y la respuesta que Pedro pide es práctica: sed serios, de mente sobria, y velad en oración. La brevedad del tiempo debe agudizar nuestras oraciones y serenar nuestras mentes, no arrojarnos al pánico ni a la pereza."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "16cbbce4fe0e"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "heading",
+   "text": {
+    "en": "Above All, Fervent Love",
+    "es": "Sobre Todo, Ferviente Amor"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b227655cac62"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "From the call to prayer Peter moves to the supreme Christian duty. \"And above all things have fervent love for one another, for 'love will cover a multitude of sins'\" (1 Peter 4:8). Notice the priority: <em>above all things</em>. Of all the graces a believer may pursue, love for one another stands first. The word <em>fervent</em> pictures love stretched out to its full reach, love that keeps going when it would be easier to give up. And such love, Peter says, will cover a multitude of sins. This does not mean love ignores wrongdoing or calls evil good; it means that love readily forgives, overlooks small offenses, and refuses to broadcast or brood over the faults of others. In a suffering church, where believers are pressed close together and nerves can wear thin, this fervent, forgiving love is the very bond that holds the family of God together. Where love is fervent, a thousand small grievances are quietly covered and never allowed to divide.",
+    "es": "Del llamado a la oración Pedro pasa al deber cristiano supremo. \"Y sobre todo, tened entre vosotros ferviente amor; porque el amor cubrirá multitud de pecados\" (1 Pedro 4:8). Note la prioridad: <em>sobre todo</em>. De todas las gracias que un creyente pueda buscar, el amor de unos por otros está primero. La palabra <em>ferviente</em> retrata un amor extendido hasta su pleno alcance, un amor que sigue adelante cuando sería más fácil rendirse. Y tal amor, dice Pedro, cubrirá multitud de pecados. Esto no significa que el amor pase por alto el mal hacer ni llame bueno al mal; significa que el amor perdona prontamente, pasa por alto las pequeñas ofensas, y rehúsa pregonar o rumiar las faltas de los demás. En una iglesia que sufre, donde los creyentes están apretados unos contra otros y los nervios pueden gastarse, este amor ferviente y perdonador es el vínculo mismo que mantiene unida a la familia de Dios. Donde el amor es ferviente, mil pequeños agravios quedan calladamente cubiertos y nunca se les permite dividir."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5e9e074dcc68"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "heading",
+   "text": {
+    "en": "Stewards of the Manifold Grace of God",
+    "es": "Administradores de la Multiforme Gracia de Dios"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "494a15dcbd1c"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "Now Peter comes to the theme that gives this unit its name. \"Be hospitable to one another without grumbling. As each one has received a gift, minister it to one another, as good stewards of the manifold grace of God\" (1 Peter 4:9-10). First comes hospitality — an open home and an open heart — offered cheerfully, without grumbling about the cost or the trouble. Then comes the great principle: every believer has received a gift, and the important word is <strong>steward</strong>. A steward is a manager. The clearest picture is Joseph, who managed all of Potiphar's household; he owned nothing there, yet everything was entrusted to his care. That is precisely the Christian's position. Everything we are and everything we have is not our own to spend as we please but is entrusted to us to be used in the service of God. It has been observed that nearly half of the parables Jesus told touch on stewardship; again and again He taught that our talents, our time, and our treasures belong to God, and that we are only managers who must one day give account.",
+    "es": "Ahora Pedro llega al tema que da nombre a esta unidad. \"Hospedaos los unos a los otros sin murmuraciones. Cada uno según el don que ha recibido, minístrelo a los otros, como buenos administradores de la multiforme gracia de Dios\" (1 Pedro 4:9-10). Primero viene la hospitalidad — una casa abierta y un corazón abierto — ofrecida con alegría, sin murmurar por el costo o la molestia. Luego viene el gran principio: cada creyente ha recibido un don, y la palabra importante es <strong>administrador</strong>. Un administrador es un gerente. El retrato más claro es José, que administraba toda la casa de Potifar; nada le pertenecía allí, y sin embargo todo estaba confiado a su cuidado. Esa es precisamente la posición del cristiano. Todo lo que somos y todo lo que tenemos no es nuestro para gastarlo a nuestro gusto, sino que nos está confiado para usarlo en el servicio de Dios. Se ha observado que casi la mitad de las parábolas que Jesús contó tocan la administración; una y otra vez enseñó que nuestros talentos, nuestro tiempo y nuestros tesoros pertenecen a Dios, y que solo somos gerentes que un día darán cuenta."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ec0dfec5fe1e"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "A striking example is C. T. Studd, once the finest cricket player in all of England. When he became a Christian he gave himself to the mission field, and when a large inheritance came to him from his father, he gave it all away to the work of the gospel. Near the end of his life he was dismayed to discover that some money still remained in his hands, and he quickly passed it on to General Booth of the Salvation Army; he was determined not to leave this world holding any monetary wealth of his own. Few are called to do exactly as he did, but his spirit is the spirit of a true steward, who holds even great wealth with an open hand, counting it God's and not his own.",
+    "es": "Un ejemplo notable es C. T. Studd, en otro tiempo el mejor jugador de críquet de toda Inglaterra. Cuando llegó a ser cristiano se entregó al campo misionero, y cuando le vino una gran herencia de su padre, la regáló toda a la obra del evangelio. Cerca del fin de su vida quedó consternado al descubrir que aún le quedaba algo de dinero en las manos, y rápidamente se lo pasó al general Booth del Ejército de Salvación; estaba resuelto a no dejar este mundo reteniendo riqueza monetaria propia. Pocos son llamados a hacer exactamente lo que él hizo, pero su espíritu es el espíritu de un verdadero administrador, que sostiene aun la gran riqueza con mano abierta, contándola de Dios y no suya."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d937eebf0091"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "It is worth pausing on the word <em>each</em>. Peter says that <em>each one</em> has received a gift; not a few gifted leaders only, but every single believer. There is no such thing as a Christian with nothing to contribute, and no such thing as a Christian who may sit idle while others serve. The grace of God is called <em>manifold</em>, that is, many-colored and varied, because God distributes a wonderful variety of gifts throughout His people, and each gift is needed. The quiet servant and the gifted teacher, the one who shows mercy and the one who gives, the encourager and the helper — all are stewards entrusted with a portion of God’s grace for the good of the whole body. To bury one’s gift, or to despise it as too small, is to fail as a steward; the Master gave it to be used.",
+    "es": "Vale la pena detenerse en la palabra <em>cada</em>. Pedro dice que <em>cada uno</em> ha recibido un don; no unos pocos líderes dotados solamente, sino cada creyente. No existe tal cosa como un cristiano que no tenga nada que aportar, ni tal cosa como un cristiano que pueda quedarse ocioso mientras otros sirven. La gracia de Dios se llama <em>multiforme</em>, es decir, de muchos colores y variada, porque Dios reparte una maravillosa variedad de dones por todo su pueblo, y cada don es necesario. El siervo callado y el maestro dotado, el que muestra misericordia y el que da, el que anima y el que ayuda — todos son administradores a quienes se ha confiado una porción de la gracia de Dios para el bien de todo el cuerpo. Enterrar el propio don, o despreciarlo por pequeño, es fallar como administrador; el Señor lo dio para que se usara."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a668f6426c8f"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "Peter then shows how this stewardship works in the body of Christ. \"If anyone speaks, let him speak as the oracles of God. If anyone ministers, let him do it as with the ability which God supplies, that in all things God may be glorified through Jesus Christ, to whom belong the glory and the dominion forever and ever. Amen\" (1 Peter 4:11). The believer who teaches or speaks is to handle his words as the very words of God, with reverence and care. The believer who serves in any practical way is to do it by the strength God supplies, not in his own power. And the goal of it all is not the servant's reputation but this: that in all things God may be glorified through Jesus Christ. Our gifts are entrusted grace, to be spent for others and for the glory of God.",
+    "es": "Pedro muestra entonces cómo obra esta administración en el cuerpo de Cristo. \"Si alguno habla, hable conforme a los oráculos de Dios; si alguno ministra, ministre conforme al poder que Dios da; para que en todo sea Dios glorificado por Jesucristo, a quien es gloria e imperio por los siglos de los siglos. Amén\" (1 Pedro 4:11). El creyente que enseña o habla ha de tratar sus palabras como las palabras mismas de Dios, con reverencia y cuidado. El creyente que sirve de cualquier manera práctica ha de hacerlo por la fuerza que Dios da, no en su propio poder. Y la meta de todo ello no es la reputación del siervo sino esta: que en todo sea Dios glorificado por Jesucristo. Nuestros dones son gracia confiada, para gastarse por los demás y para la gloria de Dios."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1c49fb90af46"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "scripture",
+   "text": {
+    "en": "\"...that in all things God may be glorified through Jesus Christ, to whom belong the glory and the dominion forever and ever. Amen.\" — 1 Peter 4:11 (NKJV)",
+    "es": "\"...para que en todo sea Dios glorificado por Jesucristo, a quien es gloria e imperio por los siglos de los siglos. Amén.\" — 1 Pedro 4:11 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6e2ea0634e27"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "Unit 10 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 10 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c3864158a03c"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33593c268178"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

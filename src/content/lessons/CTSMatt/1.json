@@ -1,0 +1,516 @@
+{
+ "course": "CTSMatt",
+ "unit": 1,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Unit 2 →</button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #2f4f2f;\"><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\">\n    <h2><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></p>\n    <input type=\"text\" id=\"regName\" placeholder=\"Full name / Nombre completo\" aria-label=\"Full name / Nombre completo\">\n    <input type=\"email\" id=\"regEmail\" placeholder=\"Email\" aria-label=\"Email\">\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate Track</option>\n        <option value=\"mdiv\">Master of Divinity (M.Div.) Track</option>\n        <option value=\"thm\">Master of Theology (Th.M.) Track</option>\n    </select>\n    <button class=\"nav-btn\" id=\"regBtn\"><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\">\n<p class=\"passage-label\"><!--cts:b008:en--></p>\n<div class=\"scripture\"><!--cts:b009:en--></div>\n\n<h3><!--cts:b010:en--></h3>\n<p><!--cts:b011:en--></p>\n\n<h3><!--cts:b012:en--></h3>\n<p><!--cts:b013:en--></p>\n<p><!--cts:b014:en--></p>\n\n<h3><!--cts:b015:en--></h3>\n<p><!--cts:b016:en--></p>\n\n<h3><!--cts:b017:en--></h3>\n<p><!--cts:b018:en--></p>\n\n<h3><!--cts:b019:en--></h3>\n<p><!--cts:b020:en--></p>\n\n<h3><!--cts:b021:en--></h3>\n<p><!--cts:b022:en--></p>\n<p><!--cts:b023:en--></p>\n<p><!--cts:b024:en--></p>\n\n<h3><!--cts:b025:en--></h3>\n<p><!--cts:b026:en--></p>\n<p><!--cts:b027:en--></p>\n\n<h3><!--cts:b028:en--></h3>\n<p><!--cts:b029:en--></p>\n\n<h3><!--cts:b030:en--></h3>\n<p><!--cts:b031:en--></p>\n<div class=\"scripture\"><!--cts:b032:en--></div>\n</div>\n\n<div class=\"lang-es\">\n<p class=\"passage-label\"><!--cts:b008:es--></p>\n<div class=\"scripture\"><!--cts:b009:es--></div>\n\n<h3><!--cts:b010:es--></h3>\n<p><!--cts:b011:es--></p>\n\n<h3><!--cts:b012:es--></h3>\n<p><!--cts:b013:es--></p>\n<p><!--cts:b014:es--></p>\n\n<h3><!--cts:b015:es--></h3>\n<p><!--cts:b016:es--></p>\n\n<h3><!--cts:b017:es--></h3>\n<p><!--cts:b018:es--></p>\n\n<h3><!--cts:b019:es--></h3>\n<p><!--cts:b020:es--></p>\n\n<h3><!--cts:b021:es--></h3>\n<p><!--cts:b022:es--></p>\n<p><!--cts:b023:es--></p>\n<p><!--cts:b024:es--></p>\n\n<h3><!--cts:b025:es--></h3>\n<p><!--cts:b026:es--></p>\n<p><!--cts:b027:es--></p>\n\n<h3><!--cts:b028:es--></h3>\n<p><!--cts:b029:es--></p>\n\n<h3><!--cts:b030:es--></h3>\n<p><!--cts:b031:es--></p>\n<div class=\"scripture\"><!--cts:b032:es--></div>\n</div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b033:en--></span><span class=\"lang-es\"><!--cts:b033:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b034:en--></span>\n       <span class=\"lang-es\"><!--cts:b034:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b035:en--></span><span class=\"lang-es\"><!--cts:b035:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b036:en--></span><span class=\"lang-es\"><!--cts:b036:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSMattReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📖 Matthew Intensive — Unit 1: The King's Origins",
+    "es": "📖 Mateo Intensivo — Unidad 1: Los Orígenes del Rey"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "30292ee28335"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "\"...they shall call His name Immanuel,\" which is translated, \"God with us.\" — Matthew 1:23",
+    "es": "\"...llamarás su nombre Emanuel, que interpretado es: Dios con nosotros.\" — Mateo 1:23"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cc497ce5f877"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "📝 Course Registration",
+    "es": "📝 Registro del Curso"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fde900fe006b"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Welcome to the Matthew Intensive. Please register before beginning Unit 1.",
+    "es": "Bienvenido al Intensivo de Mateo. Por favor regístrese antes de comenzar la Unidad 1."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8f152364c129"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "scripture",
+   "text": {
+    "en": "<strong>Text: Matthew 1:23</strong>",
+    "es": "<strong>Texto: Mateo 1:23 (RVG)</strong>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c93b886e421e"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "scripture",
+   "text": {
+    "en": "\"Behold, the virgin shall be with child, and bear a Son, and they shall call His name Immanuel,\" which is translated, \"God with us.\" — Matthew 1:23 (NKJV)",
+    "es": "\"He aquí, una virgen concebirá y dará a luz un hijo, y llamarás su nombre Emanuel, que interpretado es: Dios con nosotros.\" — Mateo 1:23"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9ca1c1d6ee7c"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "heading",
+   "text": {
+    "en": "The Gospel of the King",
+    "es": "El Evangelio del Rey"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5f9169accb6c"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Matthew sat down to write the first book of the New Testament with one great aim: to prove to his own people that Jesus of Nazareth is the King they had waited for — the Messiah promised in the Law and the Prophets. From first verse to last he keeps sounding one note: <em>this was done that it might be fulfilled</em>. He is the Gospel of fulfillment. Again and again he reaches back into the Old Testament and shows that the story which began with Abraham and ran through David has come to its appointed end in a child born in Bethlehem. So before we ever reach the Sermon on the Mount or a single parable, Matthew spends two chapters telling us <em>who this child is</em> and <em>where He came from</em>. He answers the question of identity first, because everything else in the book depends on the answer.",
+    "es": "Mateo se sentó a escribir el primer libro del Nuevo Testamento con un gran propósito: probar a su propio pueblo que Jesús de Nazaret es el Rey que habían esperado — el Mesías prometido en la Ley y los Profetas. Del primer versículo al último repite una sola nota: <em>esto fue hecho para que se cumpliese</em>. Es el Evangelio del cumplimiento. Una y otra vez se remonta al Antiguo Testamento y muestra que la historia que comenzó con Abraham y corrió por medio de David ha llegado a su fin señalado en un niño nacido en Belén. Así que antes de llegar al Sermón del Monte o a una sola parábola, Mateo dedica dos capítulos a decirnos <em>quién es este niño</em> y <em>de dónde vino</em>. Responde primero la pregunta de la identidad, porque todo lo demás en el libro depende de la respuesta."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7fc209de3dcf"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "heading",
+   "text": {
+    "en": "A Gospel That Begins with a Genealogy",
+    "es": "Un Evangelio Que Comienza con una Genealogía"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b942d7d7d8e2"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "It strikes the modern reader as a strange way to open a book — forty-some names, most of them hard to pronounce, \"Abraham begot Isaac, Isaac begot Jacob,\" and on it goes. We are tempted to skip it and get to the story. But Matthew is not wasting our time; he is laying a foundation. The very first line tells us what the list is for: \"The book of the genealogy of Jesus Christ, the Son of David, the Son of Abraham\" (Matthew 1:1). Two names tower over the rest. <strong>Son of David</strong> means Jesus is the rightful King, the heir of David's throne, the One of whom the prophets said His kingdom would have no end. <strong>Son of Abraham</strong> means He is the One in whom, as God promised Abraham, all the families of the earth would be blessed — not the Jews only, but the nations. The genealogy is Matthew's way of saying: this is no accident of history. God has been working toward this child for two thousand years.",
+    "es": "Al lector moderno le parece una manera extraña de abrir un libro — unos cuarenta nombres, la mayoría difíciles de pronunciar, \"Abraham engendró a Isaac, Isaac engendró a Jacob,\" y así sigue. Sentimos la tentación de saltarlo y llegar a la historia. Pero Mateo no nos hace perder el tiempo; está poniendo un fundamento. La primera línea nos dice para qué es la lista: \"Libro de la genealogía de Jesucristo, hijo de David, hijo de Abraham\" (Mateo 1:1). Dos nombres se elevan sobre los demás. <strong>Hijo de David</strong> significa que Jesús es el Rey legítimo, el heredero del trono de David, Aquel de quien los profetas dijeron que su reino no tendría fin. <strong>Hijo de Abraham</strong> significa que Él es Aquel en quien, como Dios prometió a Abraham, todas las familias de la tierra serían bendecidas — no los judíos solamente, sino las naciones. La genealogía es la manera de Mateo de decir: esto no es un accidente de la historia. Dios ha estado obrando hacia este niño por dos mil años."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bb8b8f125933"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "prose",
+   "text": {
+    "en": "Matthew arranges the list in three sets of fourteen — from Abraham to David, from David to the exile, from the exile to Christ. He is showing a deliberate pattern, a history moving on purpose toward a goal. The reader is meant to feel the long ache of waiting, and then the relief of arrival.",
+    "es": "Mateo ordena la lista en tres grupos de catorce — de Abraham a David, de David al destierro, del destierro a Cristo. Muestra un patrón deliberado, una historia que avanza con propósito hacia una meta. El lector ha de sentir la larga espera, y luego el alivio de la llegada."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fa029b85e34d"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "heading",
+   "text": {
+    "en": "Grace in the Family Tree",
+    "es": "Gracia en el Árbol Genealógico"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "44f74e8d2c4a"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "Then comes a surprise a careful reader of the ancient world would never expect. Jewish genealogies traced the fathers; women were rarely named. Yet Matthew names four — and not the great matriarchs Sarah, Rebekah, and Rachel, but four whose stories carry the mark of the outsider or the memory of scandal. There is <strong>Tamar</strong>, who deceived Judah; <strong>Rahab</strong>, the harlot of Jericho, a Gentile; <strong>Ruth</strong>, the virtuous Moabite whose own people had a fraught history with Israel (Deuteronomy 23:3), yet who is praised in her own book as a woman of noble character; and the wife of Uriah, <strong>Bathsheba</strong>, named in a way that recalls David's great sin. Why hang these names on the family tree of the King? Because the gospel is already in the genealogy. Grace runs in this bloodline. The Savior who came to save His people from their sins was not ashamed to be born into a line of sinners and strangers. If you have ever felt your past disqualifies you, look at the list. There is room in His family for the outsider and the failure. There is room for you.",
+    "es": "Entonces viene una sorpresa que un lector cuidadoso del mundo antiguo jamás esperaría. Las genealogías judías trazaban a los padres; rara vez se nombraba a las mujeres. Sin embargo, Mateo nombra a cuatro — y no a las grandes matriarcas Sara, Rebeca y Raquel, sino a cuatro cuyas historias llevan la marca del extranjero o el recuerdo del escándalo. Está <strong>Tamar</strong>, que engañó a Judá; <strong>Rahab</strong>, la ramera de Jericó, una gentil; <strong>Rut</strong>, la virtuosa moabita cuyo propio pueblo tuvo una historia tensa con Israel (Deuteronomio 23:3), pero que es alabada en su propio libro como una mujer de carácter noble; y la mujer de Urías, <strong>Betsabé</strong>, nombrada de un modo que recuerda el gran pecado de David. ¿Por qué colgar estos nombres en el árbol genealógico del Rey? Porque el evangelio ya está en la genealogía. La gracia corre por esta sangre. El Salvador que vino a salvar a su pueblo de sus pecados no se avergonzó de nacer en una línea de pecadores y extranjeros. Si alguna vez ha sentido que su pasado lo descalifica, mire la lista. Hay lugar en su familia para el de afuera y para el que falló. Hay lugar para usted."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b3caa7c8bf92"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "heading",
+   "text": {
+    "en": "You Shall Call His Name Jesus",
+    "es": "Llamarás Su Nombre Jesús"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a1fd1217bce5"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "When Joseph learns Mary is with child, he is a righteous man caught in an agonizing choice, and he resolves to put her away quietly rather than expose her. But an angel comes to him in a dream: \"Joseph, son of David, do not be afraid to take to you Mary your wife, for that which is conceived in her is of the Holy Spirit. And she will bring forth a Son, and you shall call His name JESUS, for He will save His people from their sins\" (Matthew 1:20-21). The name <em>Jesus</em> means \"the LORD saves.\" It tells us in a single word why He came — not merely to be admired, not merely to teach, but to <em>save</em>, and to save not from Rome or from poverty but from the deepest bondage of all, the bondage of sin. And mark Joseph: told to do a hard thing, he simply obeys. We will see him obey again and again in these two chapters, asking no questions, moving when God says move. He is the quiet model of the faith Matthew commends.",
+    "es": "Cuando José se entera de que María está encinta, es un hombre justo atrapado en una decisión angustiosa, y resuelve dejarla en secreto en vez de exponerla. Pero un ángel viene a él en sueños: \"José, hijo de David, no temas recibir a María tu esposa, porque lo que en ella es engendrado, del Espíritu Santo es. Y dará a luz un hijo, y llamarás su nombre JESÚS, porque él salvará a su pueblo de sus pecados\" (Mateo 1:20-21). El nombre <em>Jesús</em> significa \"el SEÑOR salva.\" Nos dice en una sola palabra por qué vino — no meramente a ser admirado, no meramente a enseñar, sino a <em>salvar</em>, y a salvar no de Roma ni de la pobreza sino de la más profunda esclavitud de todas, la esclavitud del pecado. Y note a José: mandado a hacer algo difícil, sencillamente obedece. Lo veremos obedecer una y otra vez en estos dos capítulos, sin preguntar, moviéndose cuando Dios dice muévete. Es el modelo callado de la fe que Mateo elogia."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9649a3098c20"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "heading",
+   "text": {
+    "en": "Immanuel — God With Us",
+    "es": "Emanuel — Dios con Nosotros"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4dd0fed1ea7e"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "Matthew then lifts our eyes from the name <em>Jesus</em> to the name <em>Immanuel</em>, citing the prophet Isaiah: \"Behold, the virgin shall be with child, and bear a Son, and they shall call His name Immanuel,\" which means \"God with us\" (Matthew 1:23, quoting Isaiah 7:14). Here is Matthew's boldest claim. This child is not only the King in David's line; He is God come down to dwell with us. There are those who will grant that Jesus was a good man, a great teacher, even a prophet, and stop there, denying His deity. But this single name will not let us stop there. Immanuel. God with us. The whole of the Christian faith stands or falls on it: in this child the Maker of the heavens has entered His own creation. What an assurance it is to know that God is not far off and watching, but near — with us. He is with us; He is for us; and by His Spirit He comes to be in us.",
+    "es": "Mateo entonces levanta nuestros ojos del nombre <em>Jesús</em> al nombre <em>Emanuel</em>, citando al profeta Isaías: \"He aquí, una virgen concebirá y dará a luz un hijo, y llamarás su nombre Emanuel,\" que significa \"Dios con nosotros\" (Mateo 1:23, citando Isaías 7:14). Aquí está la afirmación más audaz de Mateo. Este niño no es solo el Rey en la línea de David; es Dios que ha descendido a morar con nosotros. Hay quienes conceden que Jesús fue un buen hombre, un gran maestro, hasta un profeta, y se detienen allí, negando su deidad. Pero este solo nombre no nos deja detenernos allí. Emanuel. Dios con nosotros. Toda la fe cristiana se sostiene o cae en ello: en este niño el Hacedor de los cielos ha entrado en su propia creación. ¡Qué seguridad es saber que Dios no está lejos observando, sino cerca — con nosotros! Él está con nosotros; Él es por nosotros; y por su Espíritu viene a estar en nosotros."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a98698df9765"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "heading",
+   "text": {
+    "en": "A Note on Fulfillment: Double-Fulfillment and Typology",
+    "es": "Una Nota sobre el Cumplimiento: Doble Cumplimiento y Tipología"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ecfad69cbcb1"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "Matthew's word \"fulfilled\" raises a question thoughtful students rightly ask. When Isaiah spoke of Immanuel, he was speaking to a real king in a real crisis seven hundred years before Bethlehem. How then is it \"fulfilled\" in Jesus? Here we meet what is, among evangelicals, a common interpretation: many of these prophecies have a <em>double fulfillment</em>. What God did once in history through the nation of Israel or through an individual, He brought to its true and final completion in Jesus. The Old Testament event is real in its own day, and it is also a pattern — a type — that points beyond itself to Christ. This typological reading has long been defended by careful scholars such as Albert Barnes and Walter Kaiser.",
+    "es": "La palabra \"cumplido\" de Mateo plantea una pregunta que los estudiantes reflexivos hacen con razón. Cuando Isaías habló de Emanuel, hablaba a un rey real en una crisis real setecientos años antes de Belén. ¿Cómo, entonces, se \"cumple\" en Jesús? Aquí encontramos lo que es, entre los evangélicos, una interpretación común: muchas de estas profecías tienen un <em>doble cumplimiento</em>. Lo que Dios hizo una vez en la historia por medio de la nación de Israel o de un individuo, lo llevó a su verdadera y final consumación en Jesús. El evento del Antiguo Testamento es real en su propio día, y es también un patrón — un tipo — que apunta más allá de sí mismo a Cristo. Esta lectura tipológica ha sido defendida por mucho tiempo por eruditos cuidadosos como Albert Barnes y Walter Kaiser."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0950dbb8f14d"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "Take Isaiah 7:14 itself. The sign of Immanuel was given to King <strong>Ahaz</strong>, who, threatened by an alliance of enemies, was tempted to trust a scheming alliance with Assyria rather than the LORD. Isaiah told him to ask God for a sign; Ahaz hypocritically refused, and Isaiah declared God would give a sign anyway — a child called Immanuel. It would have meant little to Ahaz if the sign lay seven hundred years in his future; there was a fulfillment in his own day, likely in the birth of a child whose growing-up marked God's deliverance. And yet the words reach past Ahaz to a greater Son, conceived not by man but by the Holy Spirit, who alone could be the true and full Immanuel, God with us.",
+    "es": "Tómese Isaías 7:14 mismo. La señal de Emanuel fue dada al rey <strong>Acaz</strong>, quien, amenazado por una alianza de enemigos, fue tentado a confiar en una alianza tramposa con Asiria en vez de en el SEÑOR. Isaías le dijo que pidiera a Dios una señal; Acaz hipócritamente se negó, e Isaías declaró que Dios daría una señal de todos modos — un niño llamado Emanuel. Poco habría significado para Acaz si la señal estuviera setecientos años en su futuro; hubo un cumplimiento en su propio día, probablemente en el nacimiento de un niño cuyo crecer marcó la liberación de Dios. Y sin embargo las palabras alcanzan más allá de Acaz a un Hijo mayor, concebido no por varón sino por el Espíritu Santo, quien solo podía ser el verdadero y pleno Emanuel, Dios con nosotros."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d4381b57d14f"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "The same pattern runs through Scripture. <strong>Hosea 11:1</strong> — \"Out of Egypt I called My son\" — looks back to the nation of Israel coming out of Egypt in the Exodus; Matthew sees it fulfilled again when the child Jesus is brought up out of Egypt. <strong>Isaiah 53</strong>, the suffering servant, speaks of a people who suffer and are restored, and finds its deepest fulfillment in the rejection and atoning death of Christ. <strong>Psalm 22</strong> sings of David's own anguish — the pierced hands, the mockery, the divided garments — and is taken up almost word for word at the cross. And the <strong>forty years</strong> Israel wandered in the wilderness reappear in the <strong>forty days</strong> of Jesus' temptation, where He, the true Israel, succeeds in resisting the tempter exactly where the nation failed. This is what scholars call recapitulation: Jesus relives Israel's story and gets it right. God often works things in parallel. The first event is true; the second is truer still.",
+    "es": "El mismo patrón corre por la Escritura. <strong>Oseas 11:1</strong> — \"De Egipto llamé a mi hijo\" — mira atrás a la nación de Israel saliendo de Egipto en el Éxodo; Mateo lo ve cumplirse de nuevo cuando el niño Jesús es sacado de Egipto. <strong>Isaías 53</strong>, el siervo sufriente, habla de un pueblo que sufre y es restaurado, y halla su cumplimiento más profundo en el rechazo y la muerte expiatoria de Cristo. <strong>El Salmo 22</strong> canta la propia angustia de David — las manos horadadas, la burla, los vestidos repartidos — y es tomado casi palabra por palabra en la cruz. Y los <strong>cuarenta años</strong> que Israel vagó en el desierto reaparecen en los <strong>cuarenta días</strong> de la tentación de Jesús, donde Él, el verdadero Israel, logra resistir al tentador exactamente donde la nación falló. Esto es lo que los eruditos llaman recapitulación: Jesús revive la historia de Israel y la hace bien. Dios a menudo obra las cosas en paralelo. El primer evento es verdadero; el segundo es aún más verdadero."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0603b807673e"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "heading",
+   "text": {
+    "en": "Wise Men and a Frightened King",
+    "es": "Magos y un Rey Atemorizado"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "45e9e22e047a"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "In the second chapter the scene shifts. Wise men — Magi — come from the East following a star, asking, \"Where is He who has been born King of the Jews? For we have seen His star... and have come to worship Him\" (Matthew 2:2). Here is a wonder Matthew wants us to feel: the first worshipers to seek out the newborn King are <em>Gentiles</em>, foreigners from a distant land, while Jerusalem, the city of God, sleeps. The Son of Abraham has come, and already the nations are being drawn in. The Magi bring gifts that preach their own small sermon: <strong>gold</strong>, the tribute fit for a king; <strong>frankincense</strong>, the incense of worship offered to God; and <strong>myrrh</strong>, a spice used to anoint the dead — a shadow, even at the cradle, of the cross to come.",
+    "es": "En el segundo capítulo la escena cambia. Unos magos vienen del oriente siguiendo una estrella, preguntando: \"¿Dónde está el rey de los judíos, que ha nacido? Porque su estrella hemos visto... y venimos a adorarle\" (Mateo 2:2). He aquí una maravilla que Mateo quiere que sintamos: los primeros adoradores en buscar al Rey recién nacido son <em>gentiles</em>, extranjeros de una tierra lejana, mientras Jerusalén, la ciudad de Dios, duerme. El Hijo de Abraham ha venido, y ya las naciones están siendo atraídas. Los magos traen regalos que predican su propio pequeño sermón: <strong>oro</strong>, el tributo digno de un rey; <strong>incienso</strong>, la adoración ofrecida a Dios; y <strong>mirra</strong>, una especia usada para ungir a los muertos — una sombra, aun en la cuna, de la cruz por venir."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c6dca3c7b689"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "But there is another king in the story. When Herod hears of a newborn King of the Jews he does not rejoice; he is troubled, and all Jerusalem with him. Matthew sets two kings side by side, and the contrast could not be sharper. One is a King who comes to save His people; the other is a king who, to guard his own throne, will murder a village of children. Herod, outwitted in his plot to use the Magi as informants, flies into a rage and orders the slaughter of the baby boys of Bethlehem. Matthew hears in it the cry of the prophet Jeremiah: \"A voice was heard in Ramah, lamentation, weeping, and great mourning, Rachel weeping for her children, refusing to be comforted, because they are no more\" (Matthew 2:18). From the very beginning, the coming of the King is met by the violence of a world that loves its own power.",
+    "es": "Pero hay otro rey en la historia. Cuando Herodes oye de un Rey de los judíos recién nacido, no se regocija; se turba, y toda Jerusalén con él. Mateo pone dos reyes lado a lado, y el contraste no podría ser más agudo. Uno es un Rey que viene a salvar a su pueblo; el otro es un rey que, para guardar su propio trono, asesinará a una aldea de niños. Herodes, burlado en su plan de usar a los magos como informantes, monta en cólera y ordena la matanza de los niños varones de Belén. Mateo oye en ello el clamor del profeta Jeremías: \"Voz fue oída en Ramá, lamentación, lloro y gemido grande; Raquel que llora a sus hijos, y no quiso ser consolada, porque perecieron\" (Mateo 2:18). Desde el mismísimo comienzo, la venida del Rey es recibida por la violencia de un mundo que ama su propio poder."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "78518da8f41a"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "heading",
+   "text": {
+    "en": "Out of Egypt",
+    "es": "De Egipto"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6168a16109f8"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "Warned in a dream, Joseph takes the child and His mother by night and flees to Egypt, and there they remain until Herod is dead. Matthew tells us this happened \"that it might be fulfilled which was spoken by the Lord through the prophet, saying, 'Out of Egypt I called My Son'\" (Matthew 2:15). Israel of old went down into Egypt and was brought up out of it; now the true Son of God retraces that path. When at last they return, they settle in Nazareth, and even that lowly, despised town fulfills what the prophets foreshadowed: \"He shall be called a Nazarene\" (Matthew 2:23).",
+    "es": "Avisado en sueños, José toma al niño y a su madre de noche y huye a Egipto, y allí permanecen hasta la muerte de Herodes. Mateo nos dice que esto sucedió \"para que se cumpliese lo que dijo el Señor por medio del profeta, diciendo: De Egipto llamé a mi Hijo\" (Mateo 2:15). El Israel de antaño descendió a Egipto y fue sacado de allí; ahora el verdadero Hijo de Dios vuelve a recorrer ese camino. Cuando al fin regresan, se establecen en Nazaret, y aun ese pueblo humilde y despreciado cumple lo que los profetas habían anunciado: \"Será llamado nazareno\" (Mateo 2:23)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4ad19476759e"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "heading",
+   "text": {
+    "en": "The Whole Gospel in Two Chapters",
+    "es": "Todo el Evangelio en Dos Capítulos"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2d851721ee22"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "Before a word of His preaching, before a single miracle, Matthew has told us all we most need to know. This child is the Son of David, the rightful King. He is the Son of Abraham, in whom the nations will be blessed. He is Jesus, who will save His people from their sins. He is Immanuel, God with us. He is the true Israel, fulfilling in Himself the whole long story of His people. And already the world is divided over Him — Gentiles on their knees, a king with a sword, a mother weeping, a father quietly obeying. The King has come. The only question Unit 1 leaves with you is the question the Magi answered with their gifts and Herod answered with his sword: what will you do with Him?",
+    "es": "Antes de una palabra de su predicación, antes de un solo milagro, Mateo nos ha dicho todo lo que más necesitamos saber. Este niño es el Hijo de David, el Rey legítimo. Es el Hijo de Abraham, en quien las naciones serán bendecidas. Es Jesús, quien salvará a su pueblo de sus pecados. Es Emanuel, Dios con nosotros. Es el verdadero Israel, cumpliendo en sí mismo toda la larga historia de su pueblo. Y ya el mundo está dividido por causa de Él — gentiles de rodillas, un rey con espada, una madre que llora, un padre que calladamente obedece. El Rey ha venido. La única pregunta que la Unidad 1 le deja es la pregunta que los magos respondieron con sus regalos y Herodes respondió con su espada: ¿qué hará usted con Él?"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6952062727ba"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "scripture",
+   "text": {
+    "en": "\"And you shall call His name JESUS, for He will save His people from their sins.\" — Matthew 1:21 (NKJV)",
+    "es": "\"Y dará a luz un hijo, y llamarás su nombre JESÚS; porque él salvará a su pueblo de sus pecados.\" — Mateo 1:21 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "83dc67c609c1"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "Unit 1 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 1 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "eeba1211d031"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33593c268178"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

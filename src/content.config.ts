@@ -114,28 +114,26 @@ const tr = z.record(z.string(), z.object({
 
 const block = z.object({
   id: z.string().min(1),
-  type: z.enum(['masthead', 'title', 'subtitle', 'heading', 'prose', 'scripture', 'figure']),
-  text: text.optional(),
+  type: z.enum(['masthead', 'title', 'subtitle', 'heading', 'prose', 'scripture',
+                'list-item', 'caption', 'label', 'other']),
+  text,
   tr: tr.optional(),
-  anchor: z.string().optional(),
-  svg: z.string().optional(),
-  attrs: z.string().optional(),
-  caption: z.object({ text, tr: tr.optional() }).optional(),
-}).refine((b) => b.type === 'figure' ? b.svg != null : b.text != null, {
-  message: 'a figure needs an svg; every other block needs text',
 });
 
 const lessons = defineCollection({
   loader: glob({
-    pattern: '**/[0-9]*.json',        // _chrome.json is furniture, not a lesson
+    pattern: '**/[0-9]*.json',
     base: './src/content/lessons',
     generateId: ({ entry }) => entry.replace(/\.json$/, ''),
   }),
   schema: z.object({
     course: z.string().min(1),
-    unit: z.number().int().positive(),
+    unit: z.number().int().nonnegative(),
     sourceLang: z.string().min(2),
     langs: z.array(z.string().min(2)).min(1),
+    /* The page's markup with a hole where each translated fragment was.
+       Generated, never hand-edited, never shown to anyone. */
+    template: z.string().min(1),
     blocks: z.array(block).min(1),
   })
     .refine((l) => l.langs.includes(l.sourceLang), {
@@ -145,14 +143,39 @@ const lessons = defineCollection({
       message: 'two blocks share an id, so an edit to one would land on the other',
     })
     .superRefine((l, ctx) => {
+      /* A block must say something in some language. Which languages it has
+         is not fixed: a few paragraphs exist in English with no Spanish, and
+         a few the other way round. That asymmetry is in the pages as written
+         -- the reader has always seen nothing there in the other language --
+         and inventing the missing half here would be worse than recording the
+         gap. tools/lesson-status.mjs counts both kinds. */
+      for (const b of l.blocks)
+        if (!Object.values(b.text).some((t) => t != null && t !== '')) ctx.addIssue({ code: 'custom',
+          message: `block ${b.id} has no text in any language` });
+
+      /* Every hole must have text and every text a hole -- PER LANGUAGE.
+         Checking only that a block has some hole somewhere passes a lesson
+         whose English hole has gone while its Spanish one remains, and that
+         page loses its English with nothing to say so. */
+      const holes = new Map();
+      for (const m of l.template.matchAll(/<!--cts:([A-Za-z0-9_-]+):([A-Za-z-]+)-->/g)) {
+        if (!holes.has(m[1])) holes.set(m[1], new Set());
+        holes.get(m[1]).add(m[2]);
+      }
+      const byId = new Map(l.blocks.map((b) => [b.id, b]));
+      for (const [h, langs] of holes) {
+        const b = byId.get(h);
+        if (!b) { ctx.addIssue({ code: 'custom',
+          message: `the template has a hole for block ${h}, which does not exist` }); continue; }
+        for (const lang of langs) if (b.text[lang] == null) ctx.addIssue({ code: 'custom',
+          message: `block ${h} has a hole for ${lang} and no ${lang} text` });
+      }
       for (const b of l.blocks) {
-        const t = b.type === 'figure' ? b.caption?.text : b.text;
-        if (!t || t[l.sourceLang] == null) continue;
-        for (const lang of l.langs) {
-          if (lang === l.sourceLang) continue;
-          if (t[lang] == null) ctx.addIssue({ code: 'custom',
-            message: `block ${b.id} has no ${lang} text, so that reader gets the page half in ${l.sourceLang}` });
-        }
+        const langs = holes.get(b.id);
+        if (!langs) { ctx.addIssue({ code: 'custom',
+          message: `block ${b.id} has no hole in the template, so its text would never reach the page` }); continue; }
+        for (const lang of Object.keys(b.text)) if (!langs.has(lang)) ctx.addIssue({ code: 'custom',
+          message: `block ${b.id} has ${lang} text and no ${lang} hole, so that language would vanish from the page` });
       }
     }),
 });

@@ -1,0 +1,768 @@
+{
+ "course": "CTS",
+ "unit": 12,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"prevUnitBtn\">← Previous</button>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\">Next →</button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n</div>\n\n<div class=\"registration-panel\" id=\"regPanel\">\n    <h3><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></h3>\n    <div id=\"regReadout\" class=\"reg-readout\"></div>\n    <!-- Hidden fields preserve the IDs used by grading/loadReg; registration is edited on Unit 1. -->\n    <input type=\"hidden\" id=\"studentName\">\n    <input type=\"hidden\" id=\"studentEmail\">\n    <input type=\"hidden\" id=\"studentCountry\">\n    <input type=\"hidden\" id=\"studentProgram\">\n</div>\n\n<div class=\"card\" id=\"teachingContent\">\n    <div class=\"block-en\">\n        <h2><!--cts:b005:en--></h2>\n        <p><!--cts:b006:en--></p>\n\n        <p><!--cts:b007:en--></p>\n\n        <p><!--cts:b008:en--></p>\n\n        <h2><!--cts:b009:en--></h2>\n\n        <h3><!--cts:b010:en--></h3>\n        <p><!--cts:b011:en--></p>\n\n        <p><!--cts:b012:en--></p>\n\n        <p><!--cts:b013:en--></p>\n\n        <p><!--cts:b014:en--></p>\n\n        <h3><!--cts:b015:en--></h3>\n        <p><!--cts:b016:en--></p>\n\n        <h3><!--cts:b017:en--></h3>\n        <p><!--cts:b018:en--></p>\n\n        <h2><!--cts:b019:en--></h2>\n\n        <h3><!--cts:b020:en--></h3>\n        <p><!--cts:b021:en--></p>\n\n        <h3><!--cts:b022:en--></h3>\n        <p><!--cts:b023:en--></p>\n\n        <h3><!--cts:b024:en--></h3>\n        <p><!--cts:b025:en--></p>\n\n        <h3><!--cts:b026:en--></h3>\n        <p><!--cts:b027:en--></p>\n\n        <h3><!--cts:b028:en--></h3>\n        <p><!--cts:b029:en--></p>\n\n        <p><!--cts:b030:en--></p>\n\n        <h3><!--cts:b031:en--></h3>\n        <p><!--cts:b032:en--></p>\n\n        <h2><!--cts:b033:en--></h2>\n\n        <h3><!--cts:b034:en--></h3>\n        <p><!--cts:b035:en--></p>\n\n        <h3><!--cts:b036:en--></h3>\n        <p><!--cts:b037:en--></p>\n\n        <h4 style=\"color:#5b3a1f;margin:15px 0 8px;\"><!--cts:b038:en--></h4>\n        <p><!--cts:b039:en--></p>\n\n        <p><!--cts:b040:en--></p>\n\n        <h3><!--cts:b041:en--></h3>\n        <p><!--cts:b042:en--></p>\n\n        <p><!--cts:b043:en--></p>\n\n        <p><!--cts:b044:en--></p>\n\n        <p><!--cts:b045:en--></p>\n\n        <p><!--cts:b046:en--></p>\n\n        <p><!--cts:b047:en--></p>\n\n        <h2><!--cts:b048:en--></h2>\n        <p><!--cts:b049:en--></p>\n\n        <p><!--cts:b050:en--></p>\n\n        <p><!--cts:b051:en--></p>\n    </div>\n\n    <div class=\"block-es\">\n        <h2><!--cts:b005:es--></h2>\n        <p><!--cts:b006:es--></p>\n\n        <p><!--cts:b007:es--></p>\n\n        <p><!--cts:b008:es--></p>\n\n        <h2><!--cts:b009:es--></h2>\n\n        <h3><!--cts:b010:es--></h3>\n        <p><!--cts:b011:es--></p>\n\n        <p><!--cts:b012:es--></p>\n\n        <p><!--cts:b013:es--></p>\n\n        <p><!--cts:b014:es--></p>\n\n        <h3><!--cts:b015:es--></h3>\n        <p><!--cts:b016:es--></p>\n\n        <h3><!--cts:b017:es--></h3>\n        <p><!--cts:b018:es--></p>\n\n        <h2><!--cts:b019:es--></h2>\n\n        <h3><!--cts:b020:es--></h3>\n        <p><!--cts:b021:es--></p>\n\n        <h3><!--cts:b022:es--></h3>\n        <p><!--cts:b023:es--></p>\n\n        <h3><!--cts:b024:es--></h3>\n        <p><!--cts:b025:es--></p>\n\n        <h3><!--cts:b026:es--></h3>\n        <p><!--cts:b027:es--></p>\n\n        <h3><!--cts:b028:es--></h3>\n        <p><!--cts:b029:es--></p>\n\n        <p><!--cts:b030:es--></p>\n\n        <h3><!--cts:b031:es--></h3>\n        <p><!--cts:b032:es--></p>\n\n        <h2><!--cts:b033:es--></h2>\n\n        <h3><!--cts:b034:es--></h3>\n        <p><!--cts:b035:es--></p>\n\n        <h3><!--cts:b036:es--></h3>\n        <p><!--cts:b037:es--></p>\n\n        <h4 style=\"color:#5b3a1f;margin:15px 0 8px;\"><!--cts:b038:es--></h4>\n        <p><!--cts:b039:es--></p>\n\n        <p><!--cts:b040:es--></p>\n\n        <h3><!--cts:b041:es--></h3>\n        <p><!--cts:b042:es--></p>\n\n        <p><!--cts:b043:es--></p>\n\n        <p><!--cts:b044:es--></p>\n\n        <p><!--cts:b045:es--></p>\n\n        <p><!--cts:b046:es--></p>\n\n        <p><!--cts:b047:es--></p>\n\n        <h2><!--cts:b048:es--></h2>\n        <p><!--cts:b049:es--></p>\n\n        <p><!--cts:b050:es--></p>\n\n        <p><!--cts:b051:es--></p>\n    </div>\n</div>\n\n<!-- TRACK BANNER + EXAM -->\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b052:en--></span><span class=\"lang-es\"><!--cts:b052:es--></span></h2>\n    <div class=\"track-banner\" id=\"trackBanner\"></div>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button class=\"action-btn\" id=\"submitExamBtn\"><span class=\"lang-en\"><!--cts:b053:en--></span><span class=\"lang-es\"><!--cts:b053:es--></span></button>\n        <button class=\"action-btn reset\" id=\"resetExamBtn\"><span class=\"lang-en\"><!--cts:b054:en--></span><span class=\"lang-es\"><!--cts:b054:es--></span></button>\n    </div>\n    <div id=\"examResult\" class=\"exam-result\" style=\"display:none;\"></div>\n</div>\n\n</div>\n\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSOTSReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📖 Old Testament Survey — Unit 12: The Minor Prophets",
+    "es": "📖 Estudio del Antiguo Testamento — Unidad 12: Los Profetas Menores"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "65ba0d895724"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "Student Registration",
+    "es": "Registro del Estudiante"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f94d495eed0d"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "heading",
+   "text": {
+    "en": "I. Twelve Men, Twelve Hilltops, One Sunrise",
+    "es": "I. Doce hombres, doce colinas, un amanecer"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5c5517568d28"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "The last twelve books of the Old Testament are bound together in our Bibles by something more than convenience. They are sometimes called <em>The Twelve</em>, sometimes <em>The Minor Prophets</em>, but never because they are minor in importance. The word \"minor\" describes only the length of their writings compared to the giants Isaiah, Jeremiah, and Ezekiel. In fact, what these twelve men say in their few short chapters has set the agenda for prophets and reformers ever since.",
+    "es": "Los últimos doce libros del Antiguo Testamento están unidos en nuestras Biblias por algo más que la conveniencia. A veces se les llama <em>Los Doce</em>, a veces <em>los Profetas Menores</em>, pero nunca porque sean menores en importancia. La palabra \"menor\" describe únicamente la extensión de sus escritos en comparación con los gigantes Isaías, Jeremías y Ezequiel. De hecho, lo que estos doce hombres dicen en sus pocos capítulos cortos ha marcado la agenda de profetas y reformadores desde entonces."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b799950ec528"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "The Minor Prophets are like twelve men standing on twelve different hilltops over four hundred years, each one watching for the sunrise. Some of them faced north toward the apostate northern kingdom; others faced south toward Judah; some looked across the Jordan at the foreign nations; one looked east into Nineveh; one looked over a smoking pile of stones that used to be the temple; one looked into the future and saw a baby in Bethlehem. Their hilltops are different. Their accents are different. Their tempers are different. But they are all watching for the same sunrise — the coming of the Messiah, the Sun of Righteousness who will rise with healing in His wings (Malachi 4:2). When you read these twelve books in a row, you can almost see the eastern sky beginning to glow.",
+    "es": "Los Profetas Menores son como doce hombres parados en doce colinas distintas a lo largo de cuatrocientos años, cada uno esperando el amanecer. Algunos miran al norte, hacia el reino apóstata; otros al sur, hacia Judá; algunos al otro lado del Jordán, hacia las naciones extranjeras; uno mira al oriente, hacia Nínive; uno mira sobre un montón de piedras humeantes que solían ser el templo; uno mira al futuro y ve a un niño en Belén. Sus colinas son distintas. Sus acentos son distintos. Sus temperamentos son distintos. Pero todos esperan el mismo amanecer: la venida del Mesías, el Sol de Justicia que se levantará trayendo salvación en sus alas (Malaquías 4:2). Cuando se leen estos doce libros uno tras otro, casi se ve el cielo oriental empezando a iluminarse."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5a44cbb70a0d"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "Their central message is the message of the covenant: <em>Return.</em> God's people had repeatedly broken faith — with idolatry, with social injustice, with empty worship, with intermarriage. The prophets call them back, warn them of judgment if they will not come, and promise that on the other side of the discipline a glorious restoration is coming. Christ is the answer to every problem the Twelve raise.",
+    "es": "Su mensaje central es el del pacto: <em>Vuelvan.</em> El pueblo de Dios había roto el pacto repetidamente — con idolatría, injusticia social, culto vacío, matrimonios mixtos. Los profetas los llaman de regreso, advierten del juicio si no vuelven y prometen que al otro lado de la disciplina viene una gloriosa restauración. Cristo es la respuesta a cada problema que plantean Los Doce."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "62fd2660c8dc"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "heading",
+   "text": {
+    "en": "II. The Pre-Exilic Voices to the Northern Kingdom",
+    "es": "II. Las voces preexílicas al Reino del Norte"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c0e4f9ff01a2"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "heading",
+   "text": {
+    "en": "A. Hosea — The Bridegroom Who Will Not Let Go (c. 755–715 BC)",
+    "es": "A. Oseas — El Esposo que no soltará (c. 755–715 a.C.)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3a4b35b62717"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Hosea is the saddest love story in the Bible. God commands the prophet to marry a woman named Gomer. Whether the Hebrew text means she was already unfaithful when they married, or became unfaithful only afterward, is genuinely debated among Hebrew scholars — but faithless she was, throughout their life together. She bears three children, the second two probably not Hosea's, and the names God gives them are unbearable: <em>Jezreel</em> (God will scatter), <em>Lo-Ruhamah</em> (Not Pitied), <em>Lo-Ammi</em> (Not My People). Eventually Gomer leaves the home altogether and goes back to her old life, sliding from prostitution into slavery. And then God tells Hosea to do the unthinkable: <em>\"Then the LORD said to me, 'Go again, love a woman who is loved by a lover and is committing adultery, just like the love of the LORD for the children of Israel'\"</em> (Hosea 3:1). Hosea finds her on a slave block, naked, broken, and cheap — fifteen shekels of silver and a homer and a half of barley, less than half the going price of a slave. He pays it. He brings her home. And the whole book of Hosea is the running commentary on what that act means: <em>this is exactly what God is doing for an unfaithful Israel, and this is exactly what Christ would one day do for His unfaithful Bride at the Cross.</em>",
+    "es": "Oseas es la historia de amor más triste de la Biblia. Dios manda al profeta a casarse con una mujer llamada Gomer. Si el texto hebreo significa que ella ya era infiel al casarse, o que se volvió infiel después, es genuinamente debatido entre los hebraístas — pero infiel fue, a lo largo de toda su vida juntos. Ella tiene tres hijos, los dos últimos probablemente no de Oseas, y los nombres que Dios les pone son insoportables: <em>Jezreel</em> (Dios esparcirá), <em>Lo-Ruhama</em> (No compadecida), <em>Lo-Ammi</em> (No mi pueblo). Eventualmente Gomer abandona el hogar y vuelve a su antigua vida, deslizándose de la prostitución a la esclavitud. Y entonces Dios le ordena a Oseas algo impensable: <em>\"Vé y ama a una mujer amada de su compañero, aunque adúltera, como el amor de Jehová para con los hijos de Israel\"</em> (Oseas 3:1). Oseas la halla en un mercado de esclavos, desnuda, quebrantada y barata: quince siclos de plata y un homer y medio de cebada, menos de la mitad del precio normal de un esclavo. La paga. La trae a casa. Y todo el libro de Oseas es el comentario corrido de lo que ese acto significa: <em>esto es exactamente lo que Dios está haciendo con un Israel infiel, y exactamente lo que Cristo haría un día con Su Esposa infiel en la Cruz.</em>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "50ca8f4419fc"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "The longing of God's heart trembles in Hosea's pages. <em>\"How can I give you up, Ephraim? How can I hand you over, Israel?… My heart churns within Me; My sympathy is stirred\"</em> (Hosea 11:8). And the climactic promise comes in chapter 14: <em>\"I will heal their backsliding, I will love them freely\"</em> (Hosea 14:4). No conditions. No bargaining. Just love that will not let go.",
+    "es": "El anhelo del corazón de Dios tiembla en las páginas de Oseas. <em>\"¿Cómo te dejaré, oh Efraín? ¿Cómo te entregaré, oh Israel?… Mi corazón se conmueve dentro de mí, se inflama toda mi compasión\"</em> (Oseas 11:8). Y la promesa culminante llega en el capítulo 14: <em>\"Yo sanaré su rebelión, los amaré de pura gracia\"</em> (Oseas 14:4). Sin condiciones. Sin negociación. Solo amor que no suelta."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "70ee55cca483"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "When the Berlin Wall fell in 1989, Erich Honecker, the Communist premier of East Germany, was suddenly thrown out of his palace, stripped of office, and abandoned by every former friend. His wife Margot, who had headed the Ministry of Education, had eight times denied admission to the eight children of Pastor Uwe Holmer because their father preached Christ. Now the Honeckers were homeless. No one would take them in. Then a letter came from Pastor Holmer: <em>\"Come and live with us in the parsonage.\"</em> The man who had been refused on behalf of his children opened his own front door to the woman who had refused them. He fed them. He prayed at his table while they bowed their heads. That was Hosea bringing Gomer home from the slave block. That was Christ paying for the church. That was the gospel before the gospel was written down.",
+    "es": "Cuando cayó el Muro de Berlín en 1989, Erich Honecker, el premier comunista de Alemania Oriental, fue de pronto echado de su palacio, despojado del cargo y abandonado por todos sus antiguos amigos. Su esposa Margot, que había encabezado el Ministerio de Educación, había rechazado ocho veces la admisión universitaria de los ocho hijos del pastor Uwe Holmer porque su padre predicaba a Cristo. Ahora los Honecker estaban sin techo. Nadie quería recibirlos. Entonces llegó una carta del pastor Holmer: <em>\"Vengan a vivir con nosotros en la casa pastoral.\"</em> El hombre al que le habían negado por sus hijos abrió su propia puerta a la mujer que se los había negado. Los alimentó. Oró en su mesa mientras ellos inclinaban la cabeza. Eso fue Oseas trayendo a Gomer del mercado de esclavos. Eso fue Cristo pagando por la iglesia. Eso fue el evangelio antes de que el evangelio se escribiera."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9bf0617badb5"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "prose",
+   "text": {
+    "en": "And in the middle of all this, Hosea drops one of the most piercing single verses in the Old Testament: <em>\"For I desire mercy and not sacrifice, and the knowledge of God more than burnt offerings\"</em> (Hosea 6:6). Jesus quotes that verse twice in Matthew (9:13; 12:7). It is what God always wanted. It is what we have always failed to give. A four-year-old little girl was once heard talking to her two dolls. She had one tucked under each arm and was hugging them tightly. With a wistful look she said up to her mother, \"Mama, I love them and love them and love them — but they never love me back.\" That is Hosea 6:6. That is the heartbreak of the Old Testament. And Christ on the Cross is finally, fully, the love that loves us back.",
+    "es": "Y en medio de todo esto, Oseas suelta uno de los versículos más penetrantes del Antiguo Testamento: <em>\"Misericordia quiero, y no sacrificio, y conocimiento de Dios más que holocaustos\"</em> (Oseas 6:6). Jesús cita ese versículo dos veces en Mateo (9:13; 12:7). Es lo que Dios siempre quiso. Es lo que siempre fallamos en darle. Una niñita de cuatro años fue oída una vez hablando con sus dos muñecas. Tenía una bajo cada brazo y las apretaba con fuerza. Con mirada nostálgica miró hacia su madre y le dijo: \"Mami, yo las amo y las amo y las amo, pero ellas nunca me aman a mí\". Eso es Oseas 6:6. Esa es la angustia del Antiguo Testamento. Y Cristo en la Cruz es por fin, plenamente, el amor que sí nos ama de regreso."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b777dd9c601c"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "heading",
+   "text": {
+    "en": "B. Amos — Let Justice Roll Down (c. 760–750 BC)",
+    "es": "B. Amós — Corra el juicio como las aguas (c. 760–750 a.C.)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c8aa84e7dc63"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "Amos was not a professional prophet. He was a shepherd from the southern village of Tekoa and a tender of sycomore figs, conscripted by God and sent north to preach to the wealthy elite of Israel during a time of unprecedented prosperity under Jeroboam II. His great burden was social justice. The rich were trampling the poor in the dust of the earth, the courts were corrupt, and the temples were busy with offerings while widows starved at the gates. Amos thunders, <em>\"But let justice run down like water, and righteousness like a mighty stream\"</em> (Amos 5:24). Empty religion that does not produce justice in the streets is, to God, a stink in His nostrils. The book ends with a brief but radiant promise of restoration: in that day God will raise up the fallen tabernacle of David — the line that will produce the Messiah — and the nations will be called by His name.",
+    "es": "Amós no era profeta de profesión. Era un pastor del pueblo sureño de Tecoa y cuidador de higos silvestres, reclutado por Dios y enviado al norte a predicar a la élite acomodada de Israel durante una época de prosperidad sin precedentes bajo Jeroboam II. Su gran carga era la justicia social. Los ricos pisoteaban a los pobres en el polvo de la tierra, los tribunales eran corruptos y los templos estaban llenos de ofrendas mientras las viudas pasaban hambre a las puertas. Amós truena: <em>\"Corra el juicio como las aguas, y la justicia como impetuoso arroyo\"</em> (Amós 5:24). La religión vacía que no produce justicia en la calle es, para Dios, hedor en Sus narices. El libro termina con una breve pero radiante promesa de restauración: en aquel día Dios levantará el tabernáculo caído de David — la línea que producirá al Mesías — y las naciones serán llamadas por Su nombre."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9e8d275dd397"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "heading",
+   "text": {
+    "en": "C. Jonah — God's Heart for the Nations (c. 8th century BC)",
+    "es": "C. Jonás — El corazón de Dios por las naciones (c. siglo VIII a.C.)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7a0a0e4e108b"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "Jonah is the only prophet who tries to outrun his calling. Sent east to preach to the cruel Assyrian capital of Nineveh, he bolts west to Tarshish, and the great fish God prepares to bring him back is one of the most famous lessons in providence ever recorded. But Jonah's real problem is not the storm or the fish. It is his heart. He does not want to preach to Nineveh because he is afraid that God will forgive them, and he is right to be afraid. They repent at his eight-word sermon — <em>\"Yet forty days, and Nineveh shall be overthrown!\"</em> (Jonah 3:4) — and God spares the city. Jonah sulks under a withering vine while God explains, in the last sentence of the book, that He pities even the people Jonah does not want pitied. Jonah is a missionary book, a warning against tribal religion, and one of the clearest pictures in the Old Testament of the Father's heart for every nation under heaven. Jesus Himself made Jonah a sign of His own resurrection: as Jonah was three days in the belly of the fish, so the Son of Man would be three days in the heart of the earth (Matthew 12:40).",
+    "es": "Jonás es el único profeta que intenta huir de su llamado. Enviado al oriente a predicar a la cruel capital asiria de Nínive, escapa al occidente hacia Tarsis, y el gran pez que Dios prepara para devolverlo es una de las lecciones más célebres de providencia jamás registradas. Pero el verdadero problema de Jonás no es la tormenta ni el pez. Es su corazón. No quiere predicar a Nínive porque tiene miedo de que Dios los perdone, y tiene razón en temerlo. Ellos se arrepienten ante su sermón de ocho palabras — <em>\"de aquí a cuarenta días Nínive será destruida\"</em> (Jonás 3:4) — y Dios perdona la ciudad. Jonás se enfurruña bajo una calabacera marchita mientras Dios le explica, en la última frase del libro, que Él se compadece incluso de las personas que Jonás no quiere ver compadecidas. Jonás es un libro misionero, una advertencia contra la religión tribal, y uno de los retratos más claros del Antiguo Testamento del corazón del Padre por toda nación bajo el cielo. El propio Jesús hizo de Jonás señal de Su resurrección: como Jonás estuvo tres días en el vientre del pez, así el Hijo del Hombre estaría tres días en el corazón de la tierra (Mateo 12:40)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a65d563f179d"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "heading",
+   "text": {
+    "en": "III. The Pre-Exilic Voices to Judah",
+    "es": "III. Las voces preexílicas a Judá"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a3c340b539dd"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "heading",
+   "text": {
+    "en": "A. Joel — The Day of the Lord and the Spirit Poured Out",
+    "es": "A. Joel — El Día del Señor y el Espíritu derramado"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "af628b982d38"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "Joel takes a horrifying locust plague that has stripped the fields of Judah and uses it as a picture of the great and terrible Day of the Lord. He calls the nation to fast, to weep, to rend their hearts and not their garments. And then he lifts the curtain on a future hope so sweeping that we still live inside its fulfillment: <em>\"And it shall come to pass afterward that I will pour out My Spirit on all flesh; your sons and your daughters shall prophesy, your old men shall dream dreams, your young men shall see visions\"</em> (Joel 2:28). When the rushing wind filled the upper room on the Day of Pentecost, Peter stood up and said, <em>\"But this is what was spoken by the prophet Joel\"</em> (Acts 2:16). The pouring out of the Spirit on every kind of believer — male and female, young and old, slave and free — is the ongoing fulfillment of Joel's word.",
+    "es": "Joel toma una espantosa plaga de langostas que ha desnudado los campos de Judá y la usa como cuadro del grande y terrible Día del Señor. Llama a la nación a ayunar, a llorar, a rasgar sus corazones y no sus vestidos. Y luego levanta el telón sobre una esperanza tan vasta que aún vivimos dentro de su cumplimiento: <em>\"Y será que después de esto, derramaré mi Espíritu sobre toda carne, y profetizarán vuestros hijos y vuestras hijas; vuestros viejos soñarán sueños, y vuestros jóvenes verán visiones\"</em> (Joel 2:28). Cuando el viento recio llenó el aposento alto el Día de Pentecostés, Pedro se puso en pie y dijo: <em>\"Mas esto es lo dicho por el profeta Joel\"</em> (Hechos 2:16). El derramamiento del Espíritu sobre toda clase de creyente — varón y mujer, joven y anciano, esclavo y libre — es el cumplimiento continuo de la palabra de Joel."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a5e6ba8cf934"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "heading",
+   "text": {
+    "en": "B. Obadiah — The Brother Who Refused to Be a Brother",
+    "es": "B. Abdías — El hermano que rehusó ser hermano"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "702aef61437a"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "The shortest book in the Old Testament, twenty-one verses, is a denunciation of Edom. Edom is descended from Esau; Israel from Jacob. They were brothers. But when Babylon ransacked Jerusalem, the Edomites stood on the hilltops and cheered, then ran down to loot the corpses. Obadiah pronounces judgment on brothers who chose contempt over kinship. The book ends with seven of the most stirring words in the Old Testament: <em>\"Then the kingdom shall be the LORD's\"</em> (Obadiah 21).",
+    "es": "El libro más corto del Antiguo Testamento, veintiún versículos, es una denuncia contra Edom. Edom desciende de Esaú; Israel de Jacob. Eran hermanos. Pero cuando Babilonia saqueó Jerusalén, los edomitas se pararon en las colinas y aplaudieron, luego bajaron corriendo a saquear los cadáveres. Abdías pronuncia juicio sobre hermanos que prefirieron el desprecio al parentesco. El libro termina con siete de las palabras más conmovedoras del Antiguo Testamento: <em>\"Y el reino será de Jehová\"</em> (Abdías 21)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7cb554e44f55"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "heading",
+   "text": {
+    "en": "C. Micah — Justice, Mercy, and a Ruler from Bethlehem (c. 735–700 BC)",
+    "es": "C. Miqueas — Justicia, misericordia y un Gobernante de Belén (c. 735–700 a.C.)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3560e7b96d01"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "Micah preached at the same time as Isaiah, in the southern kingdom, and the two of them are sometimes called the urban and rural voices of one great message. Micah's two unforgettable verses bracket the whole Old Testament's ethical and messianic teaching. The first is the great summary of personal religion: <em>\"He has shown you, O man, what is good; and what does the LORD require of you but to do justly, to love mercy, and to walk humbly with your God?\"</em> (Micah 6:8). Three things — and all of them in the heart, not the hands. The second is one of the most precise messianic prophecies in the Bible: <em>\"But you, Bethlehem Ephrathah, though you are little among the thousands of Judah, yet out of you shall come forth to Me the One to be Ruler in Israel, whose goings forth are from of old, from everlasting\"</em> (Micah 5:2). Seven hundred years before Christmas, Micah named the village. When the Magi came to Herod's court asking where the king of the Jews was to be born, the chief priests opened their scrolls and read them this verse. Bethlehem.",
+    "es": "Miqueas predicó al mismo tiempo que Isaías, en el reino del sur, y a los dos a veces se les llama las voces urbana y rural de un mismo gran mensaje. Los dos versículos inolvidables de Miqueas enmarcan toda la enseñanza ética y mesiánica del Antiguo Testamento. El primero es el gran resumen de la religión personal: <em>\"Oh hombre, él te ha declarado lo que sea bueno, y qué pida Jehová de ti: solamente hacer juicio, y amar misericordia, y humillarte para andar con tu Dios\"</em> (Miqueas 6:8). Tres cosas — y todas ellas en el corazón, no en las manos. El segundo es una de las profecías mesiánicas más precisas de la Biblia: <em>\"Mas tú, Belén Efrata, pequeña para ser en los millares de Judá, de ti me saldrá el que será Señor en Israel; y sus salidas son desde el principio, desde los días del siglo\"</em> (Miqueas 5:2). Setecientos años antes de la Navidad, Miqueas nombró la aldea. Cuando los magos llegaron a la corte de Herodes preguntando dónde había de nacer el rey de los judíos, los principales sacerdotes abrieron sus rollos y les leyeron este versículo. Belén."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "dc4109ffbb6c"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "heading",
+   "text": {
+    "en": "D. Nahum — The Other Side of Jonah (c. 663–612 BC)",
+    "es": "D. Nahúm — El otro lado de Jonás (c. 663–612 a.C.)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6c669019bbe2"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "About a hundred and fifty years after Jonah's mission, the great-grandchildren of the Ninevites who repented had returned to wickedness on a scale that staggered the ancient world. Nahum announces the fall of Nineveh. It is a book of comfort for Judah and a book of judgment against Assyria. The two short books — Jonah and Nahum — are designed to be read together: God's mercy reaches every nation that will repent, and God's judgment reaches every nation that will not. In 612 BC the city of Nineveh was so thoroughly destroyed that for over two thousand years scholars debated whether it had ever existed. Then in the nineteenth century the ruins were uncovered, and Nahum's prophecy was vindicated stone by stone.",
+    "es": "Unos ciento cincuenta años después de la misión de Jonás, los biznietos de los ninivitas que se arrepintieron habían vuelto a la maldad a una escala que asombraba al mundo antiguo. Nahúm anuncia la caída de Nínive. Es libro de consuelo para Judá y libro de juicio contra Asiria. Los dos libros breves — Jonás y Nahúm — están diseñados para leerse juntos: la misericordia de Dios alcanza a toda nación que se arrepienta, y el juicio de Dios alcanza a toda nación que no lo haga. En 612 a.C. la ciudad de Nínive fue tan completamente destruida que durante más de dos mil años los eruditos debatieron si alguna vez había existido. Luego, en el siglo XIX, las ruinas fueron descubiertas, y la profecía de Nahúm fue confirmada piedra por piedra."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f39ed151c05c"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "heading",
+   "text": {
+    "en": "E. Habakkuk — The Just Shall Live by Faith (c. 605–597 BC)",
+    "es": "E. Habacuc — El justo por su fe vivirá (c. 605–597 a.C.)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d400e3ba877e"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "Habakkuk is the most personal of the Twelve. He does not begin by preaching to the people; he begins by complaining to God. <em>\"O LORD, how long shall I cry, and You will not hear?\"</em> (Habakkuk 1:2). The wickedness of Judah is unbearable, and God seems silent. Then God answers — and the answer almost makes Habakkuk wish he had never asked. God is going to discipline Judah by means of the Babylonians, a crueler nation than Judah herself. How can a holy God use an unholy instrument? Habakkuk climbs into his watchtower in chapter 2 and waits. And the answer comes in two clauses that together became the keystone of the Reformation: <em>\"Behold the proud, his soul is not upright in him; but the just shall live by his faith\"</em> (Habakkuk 2:4).",
+    "es": "Habacuc es el más personal de Los Doce. No empieza predicando al pueblo; empieza quejándose con Dios. <em>\"¿Hasta cuándo, oh Jehová, clamaré, y no oirás?\"</em> (Habacuc 1:2). La maldad de Judá es insoportable, y Dios parece callado. Entonces Dios responde — y la respuesta casi le hace desear no haber preguntado. Dios va a disciplinar a Judá por medio de los babilonios, una nación más cruel que la propia Judá. ¿Cómo puede un Dios santo usar instrumento impuro? Habacuc sube a su atalaya en el capítulo 2 y espera. Y la respuesta llega en dos cláusulas que juntas se volvieron clave de la Reforma: <em>\"He aquí, aquel cuya alma no es derecha en él, se enorgullece; mas el justo por su fe vivirá\"</em> (Habacuc 2:4)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e97e6f8ae43f"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "Three times in the New Testament that single line is quoted — Romans 1:17, Galatians 3:11, and Hebrews 10:38 — and on it Paul builds the doctrine of justification by faith alone. Sixteen centuries later the same verse, lifted out of Paul's argument, would ignite the Protestant Reformation. The whole Reformation, in one sense, was the recovery of one sentence by one prophet: <em>the just shall live by his faith.</em> Habakkuk closes his short book with one of the most beautiful affirmations of trust in all of Scripture: <em>\"Though the fig tree may not blossom, nor fruit be on the vines… yet I will rejoice in the LORD, I will joy in the God of my salvation\"</em> (Habakkuk 3:17–18). Faith does not require the harvest in order to praise the Harvester.",
+    "es": "Tres veces se cita en el Nuevo Testamento esa única línea — Romanos 1:17, Gálatas 3:11 y Hebreos 10:38 — y sobre ella construye Pablo la doctrina de la justificación solo por la fe. Dieciséis siglos después el mismo versículo, sacado del argumento de Pablo, encendería la Reforma Protestante. Toda la Reforma, en cierto sentido, fue la recuperación de una sola oración de un solo profeta: <em>el justo por su fe vivirá.</em> Habacuc cierra su breve libro con una de las afirmaciones de confianza más bellas de toda la Escritura: <em>\"Aunque la higuera no florezca, ni en las vides haya frutos… con todo, yo me alegraré en Jehová, y me gozaré en el Dios de mi salvación\"</em> (Habacuc 3:17–18). La fe no necesita la cosecha para alabar al Dueño de la cosecha."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f1517920f034"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "heading",
+   "text": {
+    "en": "F. Zephaniah — The Day of the Lord and the Singing God (c. 640–609 BC)",
+    "es": "F. Sofonías — El Día del Señor y el Dios que canta (c. 640–609 a.C.)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c0bb11a405d8"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "prose",
+   "text": {
+    "en": "Zephaniah, a great-great-grandson of King Hezekiah, preached during the reign of Josiah and announced the imminent Day of the Lord — a day of wrath, darkness, and trumpet blast. But the book turns at the end to one of the tenderest pictures of God anywhere in the Old Testament: <em>\"The LORD your God in your midst, the Mighty One, will save; He will rejoice over you with gladness, He will quiet you with His love, He will rejoice over you with singing\"</em> (Zephaniah 3:17). The God who comes in judgment is the God who sings over His people. He is not a stoic; He is a Father. The same lips that pronounce woe over the wicked break into song over the redeemed.",
+    "es": "Sofonías, tataranieto del rey Ezequías, predicó durante el reinado de Josías y anunció el inminente Día del Señor — día de ira, oscuridad y trompeta. Pero el libro gira al final hacia uno de los retratos más tiernos de Dios en todo el Antiguo Testamento: <em>\"Jehová en medio de ti, poderoso, él salvará; gozaráse sobre ti con alegría, callará de amor, se regocijará sobre ti con cantar\"</em> (Sofonías 3:17). El Dios que viene en juicio es el Dios que canta sobre Su pueblo. No es estoico; es Padre. Los mismos labios que pronuncian ay sobre los impíos rompen en canción sobre los redimidos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9f4b940c2db4"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "heading",
+   "text": {
+    "en": "IV. The Post-Exilic Voices",
+    "es": "IV. Las voces post-exílicas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fc0334a4d281"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "heading",
+   "text": {
+    "en": "A. Haggai — Build the House (c. 520 BC)",
+    "es": "A. Hageo — Edifica la casa (c. 520 a.C.)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2b75285dbd15"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "prose",
+   "text": {
+    "en": "Sixteen years after the first wave of exiles returned from Babylon, the foundations of the second temple were still sitting where they had been laid, half-finished, weeds growing through the cracks. The people were busy paneling their own houses. Haggai's whole ministry takes place in four months of one year, and his message is one short, blistering question: <em>\"Is it time for you yourselves to dwell in your paneled houses, and this temple to lie in ruins?\"</em> (Haggai 1:4). Then comes the great promise that lifts the whole second-temple period: <em>\"The glory of this latter temple shall be greater than the former\"</em> (Haggai 2:9). The second temple was architecturally inferior to Solomon's. Yet five centuries later, a young carpenter from Nazareth would walk through its courts as a child and teach in its porches as a man. The greater glory was not gold leaf or cedar paneling. It was Christ.",
+    "es": "Dieciséis años después de la primera oleada de exiliados que regresaron de Babilonia, los cimientos del segundo templo todavía estaban donde habían sido puestos, a medio terminar, con malezas creciendo entre las grietas. La gente estaba ocupada artesonando sus propias casas. Todo el ministerio de Hageo ocurre en cuatro meses de un año, y su mensaje es una pregunta corta y abrasadora: <em>\"¿Es para vosotros tiempo, para vosotros, de morar en vuestras casas artesonadas, y esta casa está desierta?\"</em> (Hageo 1:4). Luego viene la gran promesa que sostiene todo el período del segundo templo: <em>\"La gloria de aquesta casa postrera será mayor que la de la primera\"</em> (Hageo 2:9). El segundo templo era arquitectónicamente inferior al de Salomón. Sin embargo, cinco siglos después, un joven carpintero de Nazaret caminaría por sus atrios cuando niño y enseñaría en sus pórticos cuando hombre. La gloria mayor no era el oro ni el cedro. Era Cristo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "80568697fd57"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "heading",
+   "text": {
+    "en": "B. Zechariah — The King on the Donkey, the Pierced One, the Branch",
+    "es": "B. Zacarías — El Rey en el asno, el Traspasado, el Renuevo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d896679010aa"
+    }
+   }
+  },
+  {
+   "id": "b037",
+   "type": "prose",
+   "text": {
+    "en": "Zechariah is Haggai's contemporary, but where Haggai is a builder Zechariah is a seer. The first six chapters contain eight night visions — horsemen, horns, a measuring line, a lampstand, a flying scroll, a woman in a basket, four chariots — all designed to encourage the rebuilders. Then the second half of the book becomes one of the most messianic in the Old Testament. The Branch is coming (3:8; 6:12). The King is coming on a donkey: <em>\"Rejoice greatly, O daughter of Zion! Shout, O daughter of Jerusalem! Behold, your King is coming to you; He is just and having salvation, lowly and riding on a donkey, a colt, the foal of a donkey\"</em> (Zechariah 9:9). This is the verse Matthew quotes on Palm Sunday. The good Shepherd is coming, and He will be valued at thirty pieces of silver thrown to the potter (Zechariah 11:12–13). The pierced One is coming: <em>\"Then they will look on Me whom they pierced\"</em> (Zechariah 12:10), the verse John applies to the spear-thrust on Calvary (John 19:37). Five centuries before the cross, Zechariah saw the price, the wound, and the crown.",
+    "es": "Zacarías es contemporáneo de Hageo, pero donde Hageo es constructor Zacarías es vidente. Los primeros seis capítulos contienen ocho visiones nocturnas — jinetes, cuernos, un cordel de medir, un candelero, un rollo volante, una mujer en una efa, cuatro carros — todas diseñadas para alentar a los que reconstruyen. Luego la segunda mitad del libro se vuelve una de las más mesiánicas del Antiguo Testamento. El Renuevo viene (3:8; 6:12). El Rey viene en un asno: <em>\"Alégrate mucho, hija de Sion… he aquí, tu Rey vendrá a ti, justo y salvador, humilde, y cabalgando sobre un asno\"</em> (Zacarías 9:9). Ese es el versículo que Mateo cita en el Domingo de Ramos. El buen Pastor viene, y será valuado en treinta piezas de plata arrojadas al alfarero (Zacarías 11:12–13). El Traspasado viene: <em>\"Mirarán a mí, a quien traspasaron\"</em> (Zacarías 12:10), versículo que Juan aplica a la lanzada del Calvario (Juan 19:37). Cinco siglos antes de la cruz, Zacarías vio el precio, la herida y la corona."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "49cc3c4ca75e"
+    }
+   }
+  },
+  {
+   "id": "b038",
+   "type": "heading",
+   "text": {
+    "en": "The Scarlet Thread Reaches Stations Eleven and Twelve",
+    "es": "El Hilo Escarlata llega a las estaciones once y doce"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "89c7a7dd11da"
+    }
+   }
+  },
+  {
+   "id": "b039",
+   "type": "prose",
+   "text": {
+    "en": "Now mark where we are in the long story this whole course has been telling. The Scarlet Thread began in Eden with God killing an animal to clothe Adam and Eve. It ran through Abel's lamb, Noah's altar, the ram on Moriah, the Passover blood, the goats of Yom Kippur, the bronze serpent in the wilderness, Rahab's scarlet cord, the rivers of blood in Solomon's temple, and the Suffering Servant of Isaiah 53. <strong>Zechariah 12:10 is the eleventh station of the thread — the place where the Servant of Isaiah is finally given a wound and a watching people.</strong> Look at the verb: <em>they shall look on Me whom they pierced.</em> The pronoun is <em>Me.</em> The speaker is the Lord Himself. The Lord pierced. The God of Israel hanging on a Roman cross. John saw it and quoted it. So did the angel on Patmos: <em>\"Behold, He is coming with clouds, and every eye will see Him, even they who pierced Him\"</em> (Revelation 1:7).",
+    "es": "Ahora marque dónde estamos en la larga historia que todo este curso ha estado contando. El Hilo Escarlata comenzó en el Edén cuando Dios mató un animal para vestir a Adán y Eva. Corrió por el cordero de Abel, el altar de Noé, el carnero en Moriah, la sangre de la Pascua, los chivos del Yom Kippur, la serpiente de bronce en el desierto, el cordón de grana de Rahab, los ríos de sangre del templo de Salomón, y el Siervo Sufriente de Isaías 53. <strong>Zacarías 12:10 es la undécima estación del hilo — el lugar donde al Siervo de Isaías al fin le es dada una herida y un pueblo que la contempla.</strong> Mire el verbo: <em>mirarán a mí, a quien traspasaron.</em> El pronombre es <em>Mí.</em> Quien habla es el Señor mismo. El Señor traspasado. El Dios de Israel colgado en una cruz romana. Juan lo vio y lo citó. También el ángel en Patmos: <em>\"He aquí que viene con las nubes, y todo ojo le verá, y los que le traspasaron\"</em> (Apocalipsis 1:7)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "71e90d5bf2b9"
+    }
+   }
+  },
+  {
+   "id": "b040",
+   "type": "prose",
+   "text": {
+    "en": "And then, one verse later, Zechariah opens the <strong>twelfth station</strong>. The piercing was not for nothing. Out of the wound a river is going to start: <em>\"In that day a fountain shall be opened for the house of David and for the inhabitants of Jerusalem, for sin and for uncleanness\"</em> (Zechariah 13:1). The scarlet color of Isaiah 1:18 will not stay scarlet. The wound of Zechariah 12 will become the cleansing of Zechariah 13. The blood of the Lamb is a fountain, and the fountain is open. Whoever will may come and wash. The hymn writer caught it exactly four hundred years ago: <em>\"There is a fountain filled with blood drawn from Immanuel's veins; and sinners plunged beneath that flood lose all their guilty stains.\"</em> Two stations in two verses. The thread is one verse away from its final tying-off in the New Testament. Watch for it in Unit 13. There the Lamb will appear at last on the bank of the Jordan, and a man named John will lift his hand and point.",
+    "es": "Y entonces, un versículo después, Zacarías abre la <strong>duodécima estación</strong>. El traspasamiento no fue en vano. De la herida va a brotar un río: <em>\"En aquel tiempo habrá manantial abierto para la casa de David y para los moradores de Jerusalén, para el pecado y la inmundicia\"</em> (Zacarías 13:1). El color escarlata de Isaías 1:18 no se quedará escarlata. La herida de Zacarías 12 se volverá la limpieza de Zacarías 13. La sangre del Cordero es un manantial, y el manantial está abierto. Cualquiera que quiera puede venir y lavarse. Un himnista lo captó exactamente hace cuatrocientos años: <em>\"Hay una fuente llena de sangre tomada de las venas de Emanuel; y los pecadores sumergidos en ese flujo pierden toda culpable mancha.\"</em> Dos estaciones en dos versículos. Al hilo le queda un solo versículo para atarse en el Nuevo Testamento. Estén pendientes en la Unidad 13. Allí el Cordero aparecerá por fin en la orilla del Jordán, y un hombre llamado Juan alzará la mano y señalará."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "703465c38c92"
+    }
+   }
+  },
+  {
+   "id": "b041",
+   "type": "heading",
+   "text": {
+    "en": "C. Malachi — Think Upon His Name (c. 450–430 BC)",
+    "es": "C. Malaquías — Pensad en su nombre (c. 450–430 a.C.)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "22ed427cff0c"
+    }
+   }
+  },
+  {
+   "id": "b042",
+   "type": "prose",
+   "text": {
+    "en": "Malachi is the last word. His name means <em>my messenger</em>. He preaches roughly a hundred years after the first return, in Nehemiah's later years, to a community that has rebuilt the temple, rebuilt the walls, and lost the plot. Their priests are corrupt. Their offerings are leftovers. Their tithes are missing. Their marriages are broken. Their worship is bored. And eight times in the book, when God lays a charge against them, they answer Him with the same flippant little syllable: <em>\"How? In what way? When?\"</em>",
+    "es": "Malaquías es la última palabra. Su nombre significa <em>mi mensajero</em>. Predica unos cien años después del primer regreso, en los años tardíos de Nehemías, a una comunidad que ha reedificado el templo, reedificado los muros, y perdido el rumbo. Sus sacerdotes son corruptos. Sus ofrendas son sobras. Sus diezmos faltan. Sus matrimonios están rotos. Su culto está aburrido. Y ocho veces en el libro, cuando Dios les hace un cargo, le contestan con la misma sílaba frívola: <em>\"¿Cómo? ¿En qué? ¿Cuándo?\"</em>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "91f3b210dab5"
+    }
+   }
+  },
+  {
+   "id": "b043",
+   "type": "prose",
+   "text": {
+    "en": "Listen to the opening exchange. <em>\"I have loved you, says the LORD. Yet you say, 'In what way have You loved us?'\"</em> (Malachi 1:2). The miracle is never that God passes over the unfaithful. The miracle is that God ever loves the faithful — that He loves you and me at all. Read your own life in the light of that exchange and the wonder doubles.",
+    "es": "Escuche el intercambio de apertura. <em>\"Yo os he amado, dice Jehová. Y dijisteis: ¿En qué nos has amado?\"</em> (Malaquías 1:2). El milagro nunca es que Dios pase por alto al infiel. El milagro es que Dios alguna vez ame al fiel — que lo ame a usted y a mí en absoluto. Lea su propia vida a la luz de ese intercambio y el asombro se duplica."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7ba028805360"
+    }
+   }
+  },
+  {
+   "id": "b044",
+   "type": "prose",
+   "text": {
+    "en": "Then comes their bored worship. <em>\"Oh, what a weariness!\"</em> they say of God's services, sniffing at His altar (Malachi 1:13). One morning a long-time Bible teacher was driving in heavy Los Angeles rush-hour traffic and looked over at the faces of the commuters in the cars beside him — every face dull, dreading the day, going through the motions. He turned to his daughter and said, \"Look at them. They are bored to death. The worst thing in the world is to spend your life doing what you hate to do.\" Then he added, \"And going to church is exactly that boring to a great many people.\" Whenever the heart is gone, the form becomes a weariness — as true today as in 450 BC.",
+    "es": "Luego viene el culto aburrido. <em>\"¡Oh qué trabajo!\"</em>, dicen del servicio de Dios, oliendo Su altar con desdén (Malaquías 1:13). Una mañana un veterano maestro de Biblia conducía en el tráfico pesado de Los Ángeles y miró las caras de los conductores en los autos vecinos — cada rostro apagado, temiendo el día, cumpliendo los gestos. Se volvió a su hija y le dijo: \"Mira a esa gente. Están aburridos hasta el alma. Lo peor del mundo es pasar la vida haciendo lo que detestas.\" Luego añadió: \"E ir a la iglesia es exactamente así de aburrido para mucha gente.\" Cuando el corazón se va, la forma se vuelve fastidio. Malaquías dijo que era así en 450 a.C. No es distinto en 2026."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "57f8fe039774"
+    }
+   }
+  },
+  {
+   "id": "b045",
+   "type": "prose",
+   "text": {
+    "en": "Then comes the famous tithe passage. <em>\"Will a man rob God? Yet you have robbed Me! But you say, 'In what way have we robbed You?' In tithes and offerings\"</em> (Malachi 3:8). A small church in a missionary country once had its books in such disarray that the deacons, in desperation, asked a Chinese grocer with a head for figures to take over the accounts. He agreed, on one condition: no one would ask for a report until the next Annual General Meeting. The next year the report came in. The five-thousand-dollar building loan was paid off. Two thousand dollars had gone to missions. A balance of $1,253 sat in the bank. The congregation was stunned. <em>\"How did you do it?\"</em> someone asked. The grocer answered, <em>\"You all buy groceries from me, yes? And you all want credit, yes? And I give you credit, yes? And I send you a bill at the end of every month, yes? And you can't read my handwriting, yes? And I add ten percent to every bill, yes? And you've all paid every bill, yes? Well — all of you have been tithing for a year. Praise the Lord, yes!\"</em> God's principle is older than Malachi: <em>\"Bring all the tithes into the storehouse… and try Me now in this… if I will not open for you the windows of heaven and pour out for you such blessing that there will not be room enough to receive it\"</em> (Malachi 3:10).",
+    "es": "Luego viene el famoso pasaje del diezmo. <em>\"¿Robará el hombre a Dios? Pues vosotros me habéis robado. Y dijisteis: ¿En qué te hemos robado? Los diezmos y las primicias\"</em> (Malaquías 3:8). Una pequeña iglesia en un país misionero tenía sus libros tan desordenados que los diáconos, desesperados, le pidieron a un tendero chino con cabeza para los números que se hiciera cargo de las cuentas. Aceptó, con una condición: nadie pediría informe hasta la próxima Asamblea Anual. Al año siguiente llegó el informe. La hipoteca de cinco mil dólares estaba pagada. Dos mil habían ido a misiones. Un saldo de $1,253 reposaba en el banco. La congregación quedó atónita. <em>\"¿Cómo lo logró?\"</em>, preguntó alguien. El tendero respondió: <em>\"Todos ustedes compran abarrotes en mi tienda, ¿sí? Y todos quieren crédito, ¿sí? Y yo les doy crédito, ¿sí? Y a fin de mes les mando la cuenta, ¿sí? Y no pueden leer mi letra, ¿sí? Y yo agrego diez por ciento a cada cuenta, ¿sí? Y todos han pagado cada cuenta, ¿sí? Bueno, todos ustedes han estado diezmando por un año. ¡Alabado sea el Señor, sí!\"</em> El principio de Dios es más antiguo que Malaquías: <em>\"Traed todos los diezmos al alfolí… y probadme ahora en esto… si no os abriré las ventanas de los cielos, y derramaré sobre vosotros bendición hasta que sobreabunde\"</em> (Malaquías 3:10)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0cf8bf7d6a91"
+    }
+   }
+  },
+  {
+   "id": "b046",
+   "type": "prose",
+   "text": {
+    "en": "And then comes one of the great anchors of the Bible. <em>\"For I am the LORD, I do not change\"</em> (Malachi 3:6). Voltaire said the name of Christ would be forgotten within a hundred years; Voltaire is dead, and the very house in which he wrote that line was for many years a Bible warehouse. Tom Paine wrote <em>The Age of Reason</em> against Christ; Paine died a drunkard, and Christ marches on. Charles Bradlaugh of England spent a fortune to destroy faith; he was buried without a song or prayer, and Christ marches on. Robert Ingersoll thundered against the gospel from American platforms; the world has nearly forgotten his name, and Christ marches on. <em>I do not change.</em> Empires fall, philosophies fade, Bible-burners burn out. He stands.",
+    "es": "Y entonces viene una de las grandes anclas de la Biblia. <em>\"Porque yo Jehová, no me mudo\"</em> (Malaquías 3:6). Voltaire dijo que el nombre de Cristo sería olvidado en cien años; Voltaire está muerto, y la mismísima casa donde escribió esa línea fue durante años un depósito de Biblias. Tom Paine escribió <em>La Edad de la Razón</em> contra Cristo; Paine murió ebrio, y Cristo sigue marchando. Charles Bradlaugh de Inglaterra gastó una fortuna en destruir la fe; fue enterrado sin canto ni oración, y Cristo sigue marchando. Robert Ingersoll truenó contra el evangelio en plataformas norteamericanas; el mundo casi ha olvidado su nombre, y Cristo sigue marchando. <em>Yo no me mudo.</em> Caen los imperios, se desvanecen las filosofías, los quemadores de Biblias se queman ellos mismos. Él permanece."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0e8e388ed48e"
+    }
+   }
+  },
+  {
+   "id": "b047",
+   "type": "prose",
+   "text": {
+    "en": "The book closes around the figure of three messengers. The first is Levi, the faithful priest who teaches the law (Malachi 2:7). The second is the forerunner: <em>\"Behold, I send My messenger, and he will prepare the way before Me\"</em> (Malachi 3:1a) — fulfilled four hundred years later in John the Baptist. The third is the Lord Himself: <em>\"and the Lord, whom you seek, will suddenly come to His temple, even the Messenger of the covenant\"</em> (Malachi 3:1b) — the New Covenant which Jesus would inaugurate over a cup of wine at a Passover table. The very last word of the Old Testament is the word <em>curse</em> (Malachi 4:6). The very last words of the New Testament are <em>\"the grace of our Lord Jesus Christ be with you all. Amen\"</em> (Revelation 22:21). What comes between those two words is the entire gospel.",
+    "es": "El libro cierra alrededor de la figura de tres mensajeros. El primero es Leví, el sacerdote fiel que enseña la ley (Malaquías 2:7). El segundo es el precursor: <em>\"He aquí, yo envío mi mensajero, el cual preparará el camino delante de mí\"</em> (Malaquías 3:1a) — cumplido cuatrocientos años después en Juan el Bautista. El tercero es el Señor mismo: <em>\"y vendrá súbitamente a su templo el Señor a quien vosotros buscáis, y el ángel del pacto\"</em> (Malaquías 3:1b) — el Nuevo Pacto que Jesús inauguraría sobre una copa de vino en una mesa de Pascua. La última palabra del Antiguo Testamento es la palabra <em>maldición</em> (Malaquías 4:6). Las últimas palabras del Nuevo Testamento son <em>\"la gracia de nuestro Señor Jesucristo sea con todos vosotros. Amén\"</em> (Apocalipsis 22:21). Lo que está entre esas dos palabras es el evangelio entero."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a39938a9bc80"
+    }
+   }
+  },
+  {
+   "id": "b048",
+   "type": "heading",
+   "text": {
+    "en": "V. Twelve Lanterns, One Star",
+    "es": "V. Doce linternas, una estrella"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1d26aa412604"
+    }
+   }
+  },
+  {
+   "id": "b049",
+   "type": "prose",
+   "text": {
+    "en": "Look at the Twelve as a single picture: twelve men with twelve lanterns, walking down twelve different roads, all converging on one star over Bethlehem. Hosea brings the love. Joel brings the Spirit. Amos brings the justice. Obadiah brings the kingdom. Jonah brings the nations. Micah brings the village. Nahum brings the warning. Habakkuk brings the faith. Zephaniah brings the song. Haggai brings the temple. Zechariah brings the King on the donkey. And Malachi, the last lantern of the night, brings the sunrise. <em>\"But to you who fear My name the Sun of Righteousness shall arise with healing in His wings\"</em> (Malachi 4:2).",
+    "es": "Vea a Los Doce como una sola pintura: doce hombres con doce linternas, caminando por doce caminos distintos, todos convergiendo en una estrella sobre Belén. Oseas trae el amor. Joel trae el Espíritu. Amós trae la justicia. Abdías trae el reino. Jonás trae las naciones. Miqueas trae la aldea. Nahúm trae la advertencia. Habacuc trae la fe. Sofonías trae la canción. Hageo trae el templo. Zacarías trae al Rey en el asno. Y Malaquías, la última linterna de la noche, trae el amanecer. <em>\"Mas a vosotros los que teméis mi nombre, nacerá el Sol de justicia, y en sus alas traerá salud\"</em> (Malaquías 4:2)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cae1898b7c80"
+    }
+   }
+  },
+  {
+   "id": "b050",
+   "type": "prose",
+   "text": {
+    "en": "Then the lights of the Old Testament go out and the heavens are silent for four hundred years. Generations are born and die. Empires rise and fall. The lamps in the temple flicker but no prophet speaks. And then, on a hillside outside a small village in Judah, an old priest named Zechariah is told he is going to have a son who will go before the Lord <em>\"in the spirit and power of Elijah\"</em> (Luke 1:17). Malachi's last paragraph has come true. The Sun is rising. The Twelve have all been right. And the Lord whom His people sought has come, suddenly, to His temple, with healing in His wings — for you, and for me, and for the whole tired world.",
+    "es": "Entonces se apagan las luces del Antiguo Testamento y los cielos quedan en silencio durante cuatrocientos años. Generaciones nacen y mueren. Imperios se levantan y caen. Las lámparas en el templo titilan pero no habla profeta. Y entonces, en una colina a las afueras de una pequeña aldea de Judea, a un viejo sacerdote llamado Zacarías se le dice que va a tener un hijo que irá delante del Señor <em>\"con el espíritu y virtud de Elías\"</em> (Lucas 1:17). El último párrafo de Malaquías se ha cumplido. El Sol está saliendo. Los Doce siempre tuvieron razón. Y el Señor a quien Su pueblo buscaba ha venido, súbitamente, a Su templo, con salud en Sus alas — para usted, y para mí, y para todo el mundo cansado."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ee04432087ad"
+    }
+   }
+  },
+  {
+   "id": "b051",
+   "type": "prose",
+   "text": {
+    "en": "And the Scarlet Thread, after twelve long stations from Eden to a Persian-era fountain, is one verse away from its final tying-off. Twelve stations. Twelve lanterns. One Lamb still to be named. The thirteenth and last station of the thread is waiting on the bank of a river called Jordan — and the next unit will take us there.",
+    "es": "Y el Hilo Escarlata, después de doce largas estaciones desde el Edén hasta una fuente de la era persa, está a un solo versículo de su atadura final. Doce estaciones. Doce linternas. Un Cordero aún por nombrar. La estación decimotercera y última del hilo espera en la orilla de un río llamado Jordán — y la próxima unidad nos llevará allí."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b8e1ea6af4a9"
+    }
+   }
+  },
+  {
+   "id": "b052",
+   "type": "prose",
+   "text": {
+    "en": "Unit 12 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 12 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7c3d3c326fb3"
+    }
+   }
+  },
+  {
+   "id": "b053",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam",
+    "es": "Enviar Examen"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a94dbccf3cf6"
+    }
+   }
+  },
+  {
+   "id": "b054",
+   "type": "prose",
+   "text": {
+    "en": "Reset",
+    "es": "Reiniciar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "44c57abd888a"
+    }
+   }
+  }
+ ]
+}

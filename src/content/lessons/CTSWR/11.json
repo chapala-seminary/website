@@ -1,0 +1,537 @@
+{
+ "course": "CTSWR",
+ "unit": 11,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<a href=\"index.html\" style=\"display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif\">📚 Catalog / Catálogo</a>\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"prevUnitBtn\">← Previous</button>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Unit 12 →</button>\n    </div>\n</div>\n<div class=\"lang-toggle-group\" style=\"display:inline-block;margin-bottom:15px;\">\n<button class=\"toggle-btn\" data-lang=\"en\" id=\"langBtnEn\">English</button>\n<button class=\"toggle-btn\" data-lang=\"es\" id=\"langBtnEs\">Español</button>\n<button class=\"toggle-btn\" data-lang=\"both\" id=\"langBtnBoth\">Both / Ambos</button>\n</div>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #5b3a1f;\"><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"registrationCard\">\n    <h2><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n    <label><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></label>\n    <input type=\"text\" id=\"regName\" placeholder=\"\" >\n    <label><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></label>\n    <input type=\"email\" id=\"regEmail\" placeholder=\"\" >\n    <label><span class=\"lang-en\"><!--cts:b008:en--></span><span class=\"lang-es\"><!--cts:b008:es--></span></label>\n    <input type=\"text\" id=\"regCountry\" placeholder=\"\" >\n    <label><span class=\"lang-en\"><!--cts:b009:en--></span><span class=\"lang-es\"><!--cts:b009:es--></span></label>\n    <input type=\"hidden\" id=\"regTrack\" value=\"certificate\" >\n    <div id=\"trackButtons\" style=\"display:flex;flex-direction:column;gap:8px;margin:6px 0 12px;\">\n        <button type=\"button\" class=\"track-opt\" data-track=\"certificate\"><span class=\"lang-en\"><!--cts:b010:en--></span><span class=\"lang-es\"><!--cts:b010:es--></span></button>\n        <button type=\"button\" class=\"track-opt\" data-track=\"mdiv\"><span class=\"lang-en\"><!--cts:b011:en--></span><span class=\"lang-es\"><!--cts:b011:es--></span></button>\n        <button type=\"button\" class=\"track-opt\" data-track=\"thm\"><span class=\"lang-en\"><!--cts:b012:en--></span><span class=\"lang-es\"><!--cts:b012:es--></span></button>\n    </div>\n    <button class=\"small\" id=\"saveRegBtn\" style=\"margin-top: 10px;\"><span class=\"lang-en\"><!--cts:b013:en--></span><span class=\"lang-es\"><!--cts:b013:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\" id=\"teachingContent\">\n    <div class=\"lang-en\">\n        <h2><!--cts:b014:en--></h2>\n        <p><!--cts:b015:en--></p>\n\n        <p><!--cts:b016:en--></p>\n\n        <h2><!--cts:b017:en--></h2>\n        <p><!--cts:b018:en--></p>\n\n        <p><!--cts:b019:en--></p>\n\n        <p><!--cts:b020:en--></p>\n\n        <h2><!--cts:b021:en--></h2>\n        <p><!--cts:b022:en--></p>\n\n        <p><!--cts:b023:en--></p>\n\n        <h2><!--cts:b024:en--></h2>\n        <p><!--cts:b025:en--></p>\n\n        <p><!--cts:b026:en--></p>\n\n        <p><!--cts:b027:en-->\n        </p><p><!--cts:b029:en--></p>\n\n        <p><!--cts:b030:en--></p>\n\n        <h2><!--cts:b031:en--></h2>\n        <p><!--cts:b032:en--></p>\n\n        <p><!--cts:b033:en--></p>\n\n        <p style=\"text-align: center; margin-top: 30px; font-weight: bold;\"><!--cts:b034:en--></p>\n\n    </div>\n\n    <div class=\"lang-es\">\n        <h2><!--cts:b014:es--></h2>\n        <p><!--cts:b015:es--></p>\n\n        <p><!--cts:b016:es--></p>\n\n        <h2><!--cts:b017:es--></h2>\n        <p><!--cts:b018:es--></p>\n\n        <p><!--cts:b019:es--></p>\n\n        <p><!--cts:b020:es--></p>\n\n        <h2><!--cts:b021:es--></h2>\n        <p><!--cts:b022:es--></p>\n\n        <p><!--cts:b023:es--></p>\n\n        <h2><!--cts:b024:es--></h2>\n        <p><!--cts:b025:es--></p>\n\n        <p><!--cts:b026:es--></p>\n\n        <p><!--cts:b027:es--></p>\n\n        <h2><!--cts:b028:es--></h2>\n        <p><!--cts:b029:es--></p>\n\n        <p><!--cts:b030:es--></p>\n\n        <h2><!--cts:b031:es--></h2>\n        <p><!--cts:b032:es--></p>\n\n        <p><!--cts:b033:es--></p>\n\n        <p style=\"text-align: center; margin-top: 30px; font-weight: bold;\"><!--cts:b034:es--></p>\n\n    </div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b035:en--></span><span class=\"lang-es\"><!--cts:b035:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b036:en--></span>\n       <span class=\"lang-es\"><!--cts:b036:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b037:en--></span><span class=\"lang-es\"><!--cts:b037:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small reset\"><span class=\"lang-en\"><!--cts:b038:en--></span><span class=\"lang-es\"><!--cts:b038:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n  \n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSWRReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "🌍 World Religions — Unit 11: Folk Religion in Cuba and Mexico",
+    "es": "🌍 Religiones del Mundo — Unidad 11: La Religiosidad Popular en Cuba y México"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f5c6d66d823b"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "\"The things which the Gentiles sacrifice they sacrifice to demons and not to God, and I do not want you to have fellowship with demons.\" — 1 Corinthians 10:20 (NKJV)",
+    "es": "\"Antes digo que lo que los gentiles sacrifican, a los demonios lo sacrifican, y no a Dios; y no quiero que vosotros os hagáis partícipes con los demonios.\" — 1 Corintios 10:20 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "602d0ec0b246"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "Student Registration",
+    "es": "Registro del Estudiante"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f94d495eed0d"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "Please register before beginning this unit. Your registration is saved on this device and used across all CTS courses.",
+    "es": "Por favor regístrese antes de comenzar esta unidad. Su registro se guarda en este dispositivo y se usa en todos los cursos del CTS."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2330ea9c37a9"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Full Name",
+    "es": "Nombre Completo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "64346b483c0a"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Email",
+    "es": "Correo Electrónico"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "84add5b29527"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "Country",
+    "es": "País"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d523ebbd1014"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "Program Track",
+    "es": "Programa"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ec4b83520350"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "Certificate of Ministry",
+    "es": "Certificado de Ministerio"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4df6d896eb72"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Master of Divinity (M.Div.)",
+    "es": "Maestría en Divinidad (M.Div.)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8400c8c4d874"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "Master of Theology (Th.M.)",
+    "es": "Maestría en Teología (Th.M.)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a31c66296633"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "Save Registration",
+    "es": "Guardar Registro"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "019798420daf"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "heading",
+   "text": {
+    "en": "Orientation",
+    "es": "Orientación"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "86e4e3875420"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "This unit returns to a promise this course made in its very first unit: that the traditions your own ministry context is most likely to actually encounter would receive core, sustained attention rather than a brief footnote. Every religion studied in Units 2 through 8 matters, and a pastor equipped to engage a Muslim or Hindu neighbor well is a better pastor for it. But for most pastors serving in Cuba and Mexico, the beliefs and practices examined in this unit are not occasional encounters with a distant visitor — they are present, in some form, in the extended family, the neighborhood, and sometimes the congregation itself, often layered quietly beneath a nominal Catholic or even evangelical identity that has never fully confronted these older loyalties.",
+    "es": "Esta unidad regresa a una promesa que este curso hizo en su primera unidad: que las tradiciones que el propio contexto de ministerio de usted tiene más probabilidad de encontrar realmente recibirían atención central y sostenida en lugar de una breve nota al pie. Toda religión estudiada en las Unidades 2 a 8 importa, y un pastor equipado para relacionarse bien con un vecino musulmán o hindú es un mejor pastor por ello. Pero para la mayoría de los pastores que sirven en Cuba y México, las creencias y prácticas examinadas en esta unidad no son encuentros ocasionales con un visitante distante — están presentes, en alguna forma, en la familia extendida, el vecindario, y a veces la congregación misma, a menudo superpuestas en silencio bajo una identidad católica nominal o incluso evangélica que nunca ha confrontado del todo estas lealtades más antiguas."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "462f02a2ff70"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "This unit examines three related but distinct streams: Santería, an Afro-Cuban tradition blending West African Yoruba religion with Catholic devotion; Espiritismo, a spiritist movement with European philosophical roots that took deep hold across Cuba and much of Latin America; and the folk Catholicism of Mexico, where indigenous Mesoamerican religious practice survived for five centuries beneath a Catholic surface. As with every tradition this course has studied, our aim is neither contempt for those who practice these things, often with real devotion and often, in Santería's case, understanding themselves to be sincere Catholics, nor a soft tolerance that refuses to name what Scripture calls these practices. Our aim, as always, is Paul's own combination at the Areopagus: careful understanding joined to clear, loving proclamation of Christ.",
+    "es": "Esta unidad examina tres corrientes relacionadas pero distintas: la Santería, una tradición afrocubana que mezcla la religión yoruba de África Occidental con la devoción católica; el Espiritismo, un movimiento espiritista con raíces filosóficas europeas que se arraigó profundamente en Cuba y gran parte de América Latina; y el catolicismo popular de México, donde la práctica religiosa mesoamericana indígena sobrevivió durante cinco siglos bajo una superficie católica. Como con cada tradición que este curso ha estudiado, nuestro objetivo no es ni el desprecio hacia quienes practican estas cosas, a menudo con devoción real y a menudo, en el caso de la Santería, entendiéndose a sí mismos como católicos sinceros, ni una tolerancia blanda que se niegue a nombrar lo que la Escritura llama a estas prácticas. Nuestro objetivo, como siempre, es la propia combinación de Pablo en el Areópago: comprensión cuidadosa unida a una proclamación clara y amorosa de Cristo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "026ba611754e"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "heading",
+   "text": {
+    "en": "I. Santería and the Orisha System",
+    "es": "I. La Santería y el sistema de orishas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1f8f25c4c130"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "Santería, meaning \"the way of the saints,\" developed among enslaved Yoruba people brought forcibly from West Africa to Cuba beginning in the sixteenth century. Spanish colonial law required enslaved Africans to be baptized as Catholics, and Yoruba religious practice, forbidden from open expression, survived by concealing itself behind the veneer of Catholic saint veneration — the origin of the tradition's other common name, La Regla de Ocha, and of its central practice of identifying each Yoruba deity, called an <em>orisha</em>, with a corresponding Catholic saint whose iconography and feast day provided cover for continued devotion to the orisha beneath. Elegua, the orisha of crossroads and communication, became associated with the Holy Child of Atocha or Saint Anthony; Yemayá, orisha of the sea and motherhood, became associated with Our Lady of Regla; Changó, orisha of thunder, fire, and virile power, became associated with Saint Barbara; Ochún, orisha of love, beauty, and fresh water, became associated with Our Lady of Charity, Cuba's own national patroness — a fusion so deep that many Cubans venerating Our Lady of Charity today are, whether they articulate it this way or not, honoring Ochún as well.",
+    "es": "La Santería, que significa \"el camino de los santos,\" se desarrolló entre el pueblo yoruba esclavizado traído a la fuerza desde África Occidental a Cuba comenzando en el siglo dieciséis. La ley colonial española requería que los africanos esclavizados fueran bautizados como católicos, y la práctica religiosa yoruba, prohibida de expresión abierta, sobrevivió ocultándose detrás de la fachada de la veneración de santos católicos — el origen del otro nombre común de la tradición, La Regla de Ocha, y de su práctica central de identificar a cada deidad yoruba, llamada un <em>orisha</em>, con un santo católico correspondiente cuya iconografía y día de fiesta proporcionaban cobertura para la devoción continua al orisha por debajo. Elegua, el orisha de las encrucijadas y la comunicación, se asoció con el Santo Niño de Atocha o San Antonio; Yemayá, orisha del mar y la maternidad, se asoció con Nuestra Señora de Regla; Changó, orisha del trueno, el fuego, y el poder viril, se asoció con Santa Bárbara; Ochún, orisha del amor, la belleza, y el agua dulce, se asoció con Nuestra Señora de la Caridad, la propia patrona nacional de Cuba — una fusión tan profunda que muchos cubanos que veneran a Nuestra Señora de la Caridad hoy están, lo articulen así o no, honrando también a Ochún."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "010779990984"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "Santería teaches a single supreme creator God, called Olodumare or Olorun, understood as distant and largely inaccessible to direct human petition; practical religious life centers instead on the orishas, intermediary spirits each governing specific domains of nature and human experience, approached through divination, ritual offering, and, for initiated practitioners, ecstatic possession in which an orisha is believed to temporarily inhabit and speak through a human medium during ceremonial drumming and dance. Initiation into the priesthood, becoming a <em>babalawo</em> (for men, specifically initiated into the Ifá divination system) or <em>santero/santera</em>, involves an elaborate, often lengthy and expensive process of ritual preparation, culminating in ceremonies establishing a lasting bond between the initiate and their governing orisha. Divination — determining which orisha governs a person's life path, diagnosing the spiritual cause of misfortune, or seeking guidance for major decisions — occupies a central place in ongoing practice, performed through cast cowrie shells (diloggun) or, among fully initiated babalawos, the more complex Ifá system, alongside animal sacrifice offered to the orishas, particularly at initiation and in response to divined instruction.",
+    "es": "La Santería enseña un único Dios creador supremo, llamado Olodumare u Olorun, entendido como distante y en gran medida inaccesible a la petición humana directa; la vida religiosa práctica se centra en cambio en los orishas, espíritus intermediarios cada uno gobernando dominios específicos de la naturaleza y la experiencia humana, abordados a través de la adivinación, la ofrenda ritual, y, para los practicantes iniciados, la posesión extática en la cual se cree que un orisha habita temporalmente y habla a través de un médium humano durante el tambor y la danza ceremoniales. La iniciación al sacerdocio, convirtiéndose en <em>babalawo</em> (para hombres, específicamente iniciado en el sistema de adivinación Ifá) o <em>santero/santera</em>, involucra un proceso elaborado, a menudo largo y costoso, de preparación ritual, culminando en ceremonias que establecen un vínculo duradero entre el iniciado y su orisha gobernante. La adivinación — determinar qué orisha gobierna el camino de vida de una persona, diagnosticar la causa espiritual de la desgracia, o buscar orientación para decisiones importantes — ocupa un lugar central en la práctica continua, realizada a través de caracoles lanzados (diloggun) o, entre babalawos plenamente iniciados, el sistema Ifá más complejo, junto con el sacrificio animal ofrecido a los orishas, particularmente en la iniciación y en respuesta a instrucción adivinada."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "66913b686c7b"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "A pastor should understand that many practitioners of Santería sincerely consider themselves faithful Catholics, attending Mass regularly and understanding their orisha devotion as simply an intensified, culturally specific form of the same saint veneration ordinary Catholic piety already includes, rather than as a separate or competing religion. This self-understanding, whatever its sincerity, does not resolve the underlying theological question this unit's fourth section will address directly, but a pastor should recognize it as the genuine framework within which most practitioners understand their own devotion, rather than assuming Santería presents itself, or is experienced by its adherents, as an alternative to Christianity in the way Islam or Buddhism might.",
+    "es": "Un pastor debe entender que muchos practicantes de la Santería sinceramente se consideran a sí mismos católicos fieles, asistiendo a misa regularmente y entendiendo su devoción a los orishas como simplemente una forma intensificada y culturalmente específica de la misma veneración de santos que la piedad católica ordinaria ya incluye, en lugar de como una religión separada o en competencia. Este autoentendimiento, cualquiera que sea su sinceridad, no resuelve la cuestión teológica subyacente que la cuarta sección de esta unidad abordará directamente, pero un pastor debe reconocerlo como el marco genuino dentro del cual la mayoría de los practicantes entienden su propia devoción, en lugar de asumir que la Santería se presenta, o es experimentada por sus adherentes, como una alternativa al cristianismo de la manera en que podrían serlo el islam o el budismo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "534a1c76763d"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "heading",
+   "text": {
+    "en": "II. Espiritismo: Origins and Cuban Practice",
+    "es": "II. El Espiritismo: Orígenes y práctica cubana"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ac8e65cda545"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "Espiritismo traces its origin not to Africa but to nineteenth-century France, to a movement founded by Allan Kardec, the pen name of Hippolyte Léon Denizard Rivail, who codified spiritist doctrine in books including <em>The Spirits' Book</em> (1857), teaching that human spirits survive bodily death, continue to progress through successive reincarnations toward moral perfection, and can communicate with the living through gifted individuals called mediums. Kardec's teaching, distinct from the somewhat similar Spiritualist movement that developed independently in the United States around the same period, spread rapidly through Latin America in the late nineteenth century, taking particularly deep root in Cuba, Puerto Rico, Brazil, and the Dominican Republic, where it encountered, and in many cases blended with, existing Afro-Caribbean traditions like Santería — a fusion practitioners themselves often call <em>espiritismo cruzado</em>, \"crossed spiritism.\"",
+    "es": "El Espiritismo rastrea su origen no a África sino a la Francia del siglo diecinueve, a un movimiento fundado por Allan Kardec, el seudónimo de Hippolyte Léon Denizard Rivail, quien codificó la doctrina espiritista en libros incluyendo <em>El Libro de los Espíritus</em> (1857), enseñando que los espíritus humanos sobreviven a la muerte corporal, continúan progresando a través de reencarnaciones sucesivas hacia la perfección moral, y pueden comunicarse con los vivos a través de individuos dotados llamados médiums. La enseñanza de Kardec, distinta del movimiento espiritualista algo similar que se desarrolló independientemente en Estados Unidos alrededor del mismo período, se extendió rápidamente por América Latina a fines del siglo diecinueve, arraigándose particularmente profundo en Cuba, Puerto Rico, Brasil, y la República Dominicana, donde se encontró con, y en muchos casos se mezcló con, tradiciones afrocaribeñas existentes como la Santería — una fusión que los propios practicantes a menudo llaman <em>espiritismo cruzado</em>."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "22db6fa32ff3"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "Practically, Cuban Espiritismo centers on the <em>misa espiritual</em>, a devotional gathering, often held around a table draped in white cloth called a <em>mesa blanca</em>, at which mediums, believed to possess a natural gift for spiritual sensitivity, enter trance states to receive communication from the spirits of the deceased — frequently including a practitioner's own ancestors, alongside recurring spirit guides such as African slave spirits, Native American spirits, and Catholic saints, each believed to offer specific forms of protection or guidance to the living. Espiritismo shares with Santería the conviction that unresolved spiritual influences, whether ancestral spirits or negative energies attached to a person, can cause illness, misfortune, or emotional disturbance, and that ritual cleansing — often called a <em>despojo</em> or <em>limpia</em>, using herbs, smoke, water, or other materials — can remove these influences. Many practitioners move fluidly between Catholic Mass, a Santería initiation ceremony, and an Espiritismo misa without any sense that these represent competing or contradictory religious commitments, precisely the kind of integrated religious complex this course noted regarding Chinese folk religion in Unit 6 — not a set of separate choices but a single, coherent lived religious world.",
+    "es": "Prácticamente, el Espiritismo cubano se centra en la <em>misa espiritual</em>, una reunión devocional, a menudo celebrada alrededor de una mesa cubierta con tela blanca llamada <em>mesa blanca</em>, en la cual médiums, que se cree poseen un don natural para la sensibilidad espiritual, entran en estados de trance para recibir comunicación de los espíritus de los fallecidos — frecuentemente incluyendo a los propios ancestros de un practicante, junto con guías espirituales recurrentes como espíritus de esclavos africanos, espíritus nativos americanos, y santos católicos, cada uno se cree que ofrece formas específicas de protección u orientación a los vivos. El Espiritismo comparte con la Santería la convicción de que influencias espirituales sin resolver, ya sean espíritus ancestrales o energías negativas adheridas a una persona, pueden causar enfermedad, desgracia, o perturbación emocional, y que la limpieza ritual — a menudo llamada un <em>despojo</em> o <em>limpia</em>, usando hierbas, humo, agua, u otros materiales — puede remover estas influencias. Muchos practicantes se mueven fluidamente entre la Misa católica, una ceremonia de iniciación a la Santería, y una misa de Espiritismo sin ningún sentido de que estas representen compromisos religiosos en competencia o contradictorios, precisamente el tipo de complejo religioso integrado que este curso notó respecto a la religión popular china en la Unidad 6 — no un conjunto de elecciones separadas sino un solo mundo religioso vivido y coherente."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6fe230a3c66e"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "heading",
+   "text": {
+    "en": "III. Indigenous Mesoamerican Traditions and Mexican Folk Catholicism",
+    "es": "III. Tradiciones mesoamericanas indígenas y el catolicismo popular mexicano"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6e8a7832f8ba"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "Where Santería and Espiritismo reached Cuba primarily through the transatlantic slave trade and later European philosophical currents, Mexico's folk religious landscape grew from centuries of collision and slow fusion between Spanish Catholicism and the sophisticated indigenous religious systems of the Aztec, Maya, and other Mesoamerican peoples the conquistadors encountered beginning in 1519. Rather than being simply eradicated, indigenous religious concepts and practices persisted, often reshaped to fit beneath an acceptable Catholic surface, in a pattern scholars call religious syncretism — most visibly today in Día de los Muertos, the Day of the Dead, which layers pre-Columbian beliefs about ongoing connection between the living and the dead onto the Catholic liturgical calendar's All Saints' and All Souls' Days, complete with home altars called <em>ofrendas</em> bearing food, drink, and photographs believed to welcome deceased family members back for a yearly visit.",
+    "es": "Donde la Santería y el Espiritismo llegaron a Cuba principalmente a través del comercio transatlántico de esclavos y corrientes filosóficas europeas posteriores, el panorama religioso popular de México creció de siglos de colisión y fusión lenta entre el catolicismo español y los sofisticados sistemas religiosos indígenas de los pueblos azteca, maya, y otros mesoamericanos que los conquistadores encontraron comenzando en 1519. En lugar de ser simplemente erradicados, los conceptos y prácticas religiosos indígenas persistieron, a menudo reformados para caber bajo una superficie católica aceptable, en un patrón que los eruditos llaman sincretismo religioso — más visiblemente hoy en el Día de los Muertos, que superpone creencias precolombinas acerca de la conexión continua entre los vivos y los muertos sobre el calendario litúrgico católico del Día de Todos los Santos y el Día de los Fieles Difuntos, completo con altares domésticos llamados <em>ofrendas</em> que llevan comida, bebida, y fotografías que se cree dan la bienvenida a los familiares fallecidos de regreso para una visita anual."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6cf5ff331b8f"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "Contemporary Mexican folk religion also centers significantly on the figure of the curandero or curandera, a traditional healer combining herbal medicine, prayer (often genuinely Catholic in form, invoking saints and the Virgin), and ritual cleansing techniques closely resembling the limpia practices found in Cuban Espiritismo, addressing both physical illness and conditions understood in folk terms such as susto (a spiritual fright believed to displace part of the soul) or mal de ojo (the evil eye, harm caused by an envious or admiring gaze). In recent decades, the veneration of Santa Muerte, a skeletal folk saint personifying death itself, has grown dramatically, particularly though not exclusively among Mexicans living at society's margins, drawing on centuries-old indigenous and colonial-era Catholic imagery of death while existing entirely outside any recognition or approval from the institutional Catholic Church, which has explicitly condemned the practice as incompatible with Christian faith. A pastor should understand that Mexican folk Catholicism spans an enormous range, from mainstream Marian devotion — the veneration of Our Lady of Guadalupe carries genuinely central importance to Mexican Catholic and national identity alike — through curanderismo practiced by families who consider themselves fully faithful Catholics, to the more clearly occult territory of Santa Muerte veneration and folk magic, each raising somewhat different pastoral questions.",
+    "es": "La religión popular mexicana contemporánea también se centra significativamente en la figura del curandero o la curandera, un sanador tradicional que combina medicina herbal, oración (a menudo genuinamente católica en forma, invocando santos y a la Virgen), y técnicas de limpieza ritual estrechamente parecidas a las prácticas de limpia encontradas en el Espiritismo cubano, abordando tanto la enfermedad física como condiciones entendidas en términos populares como el susto (un miedo espiritual que se cree desplaza parte del alma) o el mal de ojo (daño causado por una mirada envidiosa o admiradora). En décadas recientes, la veneración de la Santa Muerte, un santo popular esquelético que personifica la muerte misma, ha crecido dramáticamente, particularmente aunque no exclusivamente entre mexicanos que viven en los márgenes de la sociedad, basándose en imaginería indígena y católica de la época colonial de siglos de antigüedad acerca de la muerte mientras existe enteramente fuera de cualquier reconocimiento o aprobación de la Iglesia Católica institucional, que ha condenado explícitamente la práctica como incompatible con la fe cristiana. Un pastor debe entender que el catolicismo popular mexicano abarca un rango enorme, desde la devoción mariana convencional — la veneración de Nuestra Señora de Guadalupe lleva una importancia genuinamente central tanto para la identidad católica como nacional mexicana — a través del curanderismo practicado por familias que se consideran plenamente católicas fieles, hasta el territorio más claramente oculto de la veneración de la Santa Muerte y la magia popular, cada uno planteando preguntas pastorales algo diferentes."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "37010d977a0b"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "Guadalupan devotion deserves a pastor's particular attention because of its scale and centrality: the Basilica of Our Lady of Guadalupe in Mexico City receives more annual pilgrims than any other Catholic shrine in the world, and the image itself, according to tradition appearing to the indigenous convert Juan Diego in 1531, deliberately incorporated visual elements meaningful within the Aztec religious symbolism it was replacing. This missiological strategy succeeded remarkably in drawing indigenous converts toward Catholic practice, but it also embedded Marian devotion so deeply into Mexican national and religious identity that many Mexican evangelicals report guadalupan devotion as one of the most emotionally difficult attachments to address pastorally, more difficult in practice than explaining doctrinal disagreement over more clearly occult practices like Santa Muerte veneration.\n\n        <h2>IV. A Pastoral and Theological Framework for Discernment</h2>",
+    "es": "La devoción guadalupana merece la atención particular de un pastor debido a su escala y centralidad: la Basílica de Nuestra Señora de Guadalupe en la Ciudad de México recibe más peregrinos anuales que cualquier otro santuario católico en el mundo, y la imagen misma, según la tradición apareciendo al converso indígena Juan Diego en 1531, deliberadamente incorporó elementos visuales significativos dentro del simbolismo religioso azteca que estaba reemplazando. Esta estrategia misiológica tuvo éxito notablemente en atraer a conversos indígenas hacia la práctica católica, pero también incrustó la devoción mariana tan profundamente en la identidad nacional y religiosa mexicana que muchos evangélicos mexicanos reportan la devoción guadalupana como uno de los apegos más emocionalmente difíciles de abordar pastoralmente, más difícil en la práctica que explicar el desacuerdo doctrinal sobre prácticas más claramente ocultas como la veneración de la Santa Muerte."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "66f54dc454d9"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "heading",
+   "text": {
+    "es": "IV. Un marco pastoral y teológico para el discernimiento"
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "Scripture speaks directly to the reality underlying much of what this unit has surveyed. Paul writes plainly that \"the things which the Gentiles sacrifice they sacrifice to demons and not to God, and I do not want you to have fellowship with demons\" (1 Corinthians 10:20) — a warning that takes seriously, rather than dismissing as mere superstition, the spiritual reality behind pagan ritual, including practices like orisha veneration and spirit mediumship this unit has examined. Deuteronomy 18:10-12 similarly forbids specific practices with direct parallels in this unit's survey: divination, sorcery, interpreting omens, and consulting the spirits of the dead, \"for all who do these things are an abomination to the LORD.\" A pastor should not soften this biblical seriousness into vague cultural relativism, treating orisha initiation or spirit mediumship as merely quaint folk custom rather than what Scripture identifies as genuine spiritual danger.",
+    "es": "La Escritura habla directamente a la realidad subyacente a gran parte de lo que esta unidad ha estudiado. Pablo escribe claramente que \"lo que los gentiles sacrifican, a los demonios lo sacrifican, y no a Dios; y no quiero que vosotros os hagáis partícipes con los demonios\" (1 Corintios 10:20) — una advertencia que toma en serio, en lugar de descartar como mera superstición, la realidad espiritual detrás del ritual pagano, incluyendo prácticas como la veneración de orishas y la mediumnidad espiritual que esta unidad ha examinado. Deuteronomio 18:10-12 de manera similar prohíbe prácticas específicas con paralelos directos en el estudio de esta unidad: la adivinación, la hechicería, la interpretación de agüeros, y la consulta a los espíritus de los muertos, \"porque es abominación para con el SEÑOR cualquiera que hace estas cosas.\" Un pastor no debe suavizar esta seriedad bíblica en un vago relativismo cultural, tratando la iniciación a los orishas o la mediumnidad espiritual como meramente una pintoresca costumbre popular en lugar de lo que la Escritura identifica como peligro espiritual genuino."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "671354b79204"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "At the same time, wisdom requires distinguishing carefully between categories a less discerning pastor might collapse together. Cultural heritage — the food, music, and family stories connected to Afro-Cuban or indigenous Mexican identity — is not itself sin, and a pastor who demands new converts erase their cultural inheritance wholesale repeats the same missionary failure this course examined regarding the Chinese Rites controversy in Unit 6. Genuine active spiritual practice — ongoing orisha initiation status, participation in misas espirituales, active consultation of a curandero for spiritual rather than purely herbal remedies, veneration of Santa Muerte — is a different matter entirely, requiring the same clear, loving confrontation with idolatry Scripture models throughout, from Elijah at Mount Carmel to Paul at Ephesus, where new believers publicly burned their occult books precisely because half-measures with genuine spiritual bondage rarely succeed (Acts 19:18-19). A pastor caring for a new believer emerging from active practice in any of these traditions should expect this to be a process requiring patience, ongoing discipleship, and often deliverance ministry rather than a single decisive break, since these practices frequently involve real spiritual attachment formed over years, sometimes generations, of family involvement — pastoral work this unit's final section addresses directly.",
+    "es": "Al mismo tiempo, la sabiduría requiere distinguir con cuidado entre categorías que un pastor menos discernidor podría colapsar juntas. La herencia cultural — la comida, la música, y las historias familiares conectadas a la identidad afrocubana o indígena mexicana — no es en sí misma pecado, y un pastor que exige que los nuevos conversos borren su herencia cultural por completo repite el mismo fracaso misionero que este curso examinó respecto a la controversia de los Ritos Chinos en la Unidad 6. La práctica espiritual activa genuina — el estatus continuo de iniciación a los orishas, la participación en misas espirituales, la consulta activa a un curandero para remedios espirituales en lugar de puramente herbales, la veneración de la Santa Muerte — es un asunto completamente diferente, que requiere la misma confrontación clara y amorosa con la idolatría que la Escritura modela a lo largo de toda ella, desde Elías en el Monte Carmelo hasta Pablo en Éfeso, donde nuevos creyentes quemaron públicamente sus libros ocultos precisamente porque las medias medidas con la atadura espiritual genuina rara vez tienen éxito (Hechos 19:18-19). Un pastor que cuida a un nuevo creyente que emerge de la práctica activa en cualquiera de estas tradiciones debe esperar que esto sea un proceso que requiere paciencia, discipulado continuo, y a menudo ministerio de liberación en lugar de una sola ruptura decisiva, ya que estas prácticas frecuentemente involucran apego espiritual real formado a lo largo de años, a veces generaciones, de participación familiar — obra pastoral que la sección final de esta unidad aborda directamente."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ef10f7bfdfe8"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "heading",
+   "text": {
+    "en": "V. Practical Pastoral Care",
+    "es": "V. Cuidado pastoral práctico"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fa81e48adcd6"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "prose",
+   "text": {
+    "en": "A pastor ministering in a Cuban or Mexican context should expect to encounter these practices in three distinct pastoral situations, each requiring a somewhat different response. First, a congregation member who has never actively practiced but carries inherited cultural association — a family altar to a deceased grandmother that includes both a rosary and a small offering to an orisha, attendance at Day of the Dead observances that are, for that particular family, primarily a way of honoring memory rather than an act of active spiritual invocation — calls for patient teaching and gentle discernment rather than blanket condemnation, since not every cultural artifact carries the same active spiritual weight; here the pastor's task is helping the believer examine his own heart and practice honestly, distinguishing memory from invocation, much as Unit 6 taught regarding Chinese ancestor veneration.",
+    "es": "Un pastor que ministra en un contexto cubano o mexicano debe esperar encontrar estas prácticas en tres situaciones pastorales distintas, cada una requiriendo una respuesta algo diferente. Primero, un miembro de la congregación que nunca ha practicado activamente pero lleva asociación cultural heredada — un altar familiar a una abuela fallecida que incluye tanto un rosario como una pequeña ofrenda a un orisha, la asistencia a observancias del Día de los Muertos que son, para esa familia en particular, principalmente una forma de honrar la memoria en lugar de un acto de invocación espiritual activa — requiere enseñanza paciente y discernimiento gentil en lugar de condenación general, ya que no todo artefacto cultural lleva el mismo peso espiritual activo; aquí la tarea del pastor es ayudar al creyente a examinar honestamente su propio corazón y práctica, distinguiendo la memoria de la invocación, tal como enseñó la Unidad 6 respecto a la veneración de ancestros china."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a50f2cc49acc"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "Second, a new believer coming out of active practice — a former santera, an Espiritismo medium, a family that has actively sought Santa Muerte's protection — requires the full pastoral care this unit has described: patient, loving confrontation of the specific spiritual bondage involved, prayer for deliverance where genuine spiritual oppression is present, ongoing discipleship that fills the vacuum left by abandoned practices with genuine biblical teaching about God's provision, protection, and guidance, and a supportive community prepared for a process rather than an instant, effortless transformation. Third, and perhaps most delicately, a pastor will meet church members who blend Christian profession with ongoing practice, attending services faithfully while maintaining a santero relationship or regularly consulting a curandero for spiritual remedies — situations requiring the same patient, truthful confrontation Paul modeled with the church at Corinth, itself surrounded by pagan religious practice, refusing to pretend the blend is spiritually neutral while remaining genuinely pastoral rather than merely condemning. In every case, the goal this entire course has held from its first unit remains unchanged: not contempt, not compromise, but the same combination Paul modeled at the Areopagus — patient understanding joined to clear, loving proclamation that in Christ alone, and not in any orisha, spirit guide, or folk saint, sinners find the forgiveness, protection, and eternal life every one of these traditions is, in its own way, still searching for.",
+    "es": "Segundo, un nuevo creyente que sale de la práctica activa — una ex santera, un médium de Espiritismo, una familia que activamente ha buscado la protección de la Santa Muerte — requiere el cuidado pastoral completo que esta unidad ha descrito: confrontación paciente y amorosa de la atadura espiritual específica involucrada, oración por liberación donde esté presente opresión espiritual genuina, discipulado continuo que llene el vacío dejado por las prácticas abandonadas con enseñanza bíblica genuina acerca de la provisión, protección, y guía de Dios, y una comunidad de apoyo preparada para un proceso en lugar de una transformación instantánea y sin esfuerzo. Tercero, y quizás más delicadamente, un pastor encontrará miembros de la iglesia que mezclan la profesión cristiana con la práctica continua, asistiendo fielmente a los servicios mientras mantienen una relación con un santero o consultan regularmente a un curandero para remedios espirituales — situaciones que requieren la misma confrontación paciente y veraz que Pablo modeló con la iglesia en Corinto, ella misma rodeada de práctica religiosa pagana, negándose a fingir que la mezcla es espiritualmente neutral mientras permanece genuinamente pastoral en lugar de meramente condenatoria. En cada caso, la meta que todo este curso ha sostenido desde su primera unidad permanece sin cambios: no desprecio, no compromiso, sino la misma combinación que Pablo modeló en el Areópago — comprensión paciente unida a una proclamación clara y amorosa de que solo en Cristo, y no en ningún orisha, guía espiritual, o santo popular, los pecadores encuentran el perdón, la protección, y la vida eterna que cada una de estas tradiciones está, a su propia manera, todavía buscando."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f93876be8256"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "prose",
+   "text": {
+    "en": "— Dr. Wayne Cook<br>Chapala Theological Seminary",
+    "es": "— Dr. Wayne Cook<br>Seminario Teológico de Chapala"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7778fcb9bb8c"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "prose",
+   "text": {
+    "en": "Unit 11 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 11 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "308fac13cf5e"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. <strong>If you fail, the unit locks for 15 minutes.</strong>",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. <strong>Si reprueba, se bloquea por 15 minutos.</strong>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d3b8e78884d7"
+    }
+   }
+  },
+  {
+   "id": "b037",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar &amp; Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b038",
+   "type": "prose",
+   "text": {
+    "en": "Reset",
+    "es": "Reiniciar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "44c57abd888a"
+    }
+   }
+  }
+ ]
+}

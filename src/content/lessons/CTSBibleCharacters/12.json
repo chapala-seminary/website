@@ -1,0 +1,558 @@
+{
+ "course": "CTSBibleCharacters",
+ "unit": 12,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Certificate →</button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #2f4f2f;\"><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\">\n    <h2><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n    <input type=\"text\" id=\"regName\" placeholder=\"Full name / Nombre completo\" aria-label=\"Full name / Nombre completo\">\n    <input type=\"email\" id=\"regEmail\" placeholder=\"Email\" aria-label=\"Email\">\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate Track</option>\n        <option value=\"mdiv\">Master of Divinity (M.Div.) Track</option>\n        <option value=\"thm\">Master of Theology (Th.M.) Track</option>\n    </select>\n    <button class=\"nav-btn\" id=\"regBtn\"><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\"><p><!--cts:b007:en--></p>\n<p><!--cts:b008:en--></p>\n<p><!--cts:b009:en--></p>\n<p><!--cts:b010:en--></p>\n<p><!--cts:b011:en--></p>\n<h2><!--cts:b012:en--></h2>\n<p><!--cts:b013:en--></p>\n<div class=\"scripture\"><!--cts:b014:en--></div>\n<p><!--cts:b015:en--></p>\n<p><!--cts:b016:en--></p>\n<h2><!--cts:b017:en--></h2>\n<p><!--cts:b018:en--></p>\n<div class=\"scripture\"><!--cts:b019:en--></div>\n<p><!--cts:b020:en--></p>\n<p><!--cts:b021:en--></p>\n<h2><!--cts:b022:en--></h2>\n<p><!--cts:b023:en--></p>\n<div class=\"scripture\"><!--cts:b024:en--></div>\n<p><!--cts:b025:en--></p>\n<p><!--cts:b026:en--></p>\n<h2><!--cts:b027:en--></h2>\n<p><!--cts:b028:en--></p>\n<div class=\"scripture\"><!--cts:b029:en--></div>\n<p><!--cts:b030:en--></p>\n<p><!--cts:b031:en--></p>\n<h2><!--cts:b032:en--></h2>\n<p><!--cts:b033:en--></p>\n<div class=\"scripture\"><!--cts:b034:en--></div>\n<p><!--cts:b035:en--></p></div>\n<div class=\"lang-es\"><p><!--cts:b007:es--></p>\n<p><!--cts:b008:es--></p>\n<p><!--cts:b009:es--></p>\n<p><!--cts:b010:es--></p>\n<p><!--cts:b011:es--></p>\n<h2><!--cts:b012:es--></h2>\n<p><!--cts:b013:es--></p>\n<div class=\"scripture\"><!--cts:b014:es--></div>\n<p><!--cts:b015:es--></p>\n<p><!--cts:b016:es--></p>\n<h2><!--cts:b017:es--></h2>\n<p><!--cts:b018:es--></p>\n<div class=\"scripture\"><!--cts:b019:es--></div>\n<p><!--cts:b020:es--></p>\n<p><!--cts:b021:es--></p>\n<h2><!--cts:b022:es--></h2>\n<p><!--cts:b023:es--></p>\n<div class=\"scripture\"><!--cts:b024:es--></div>\n<p><!--cts:b025:es--></p>\n<p><!--cts:b026:es--></p>\n<h2><!--cts:b027:es--></h2>\n<p><!--cts:b028:es--></p>\n<div class=\"scripture\"><!--cts:b029:es--></div>\n<p><!--cts:b030:es--></p>\n<p><!--cts:b031:es--></p>\n<h2><!--cts:b032:es--></h2>\n<p><!--cts:b033:es--></p>\n<div class=\"scripture\"><!--cts:b034:es--></div>\n<p><!--cts:b035:es--></p></div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b036:en--></span><span class=\"lang-es\"><!--cts:b036:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b037:en--></span>\n       <span class=\"lang-es\"><!--cts:b037:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b038:en--></span><span class=\"lang-es\"><!--cts:b038:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b039:en--></span><span class=\"lang-es\"><!--cts:b039:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSBibleCharactersReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "📖 Bible Characters — Unit 12: Elijah — The Prophet of Fire and the Still Small Voice",
+    "es": "📖 Personajes de la Biblia — Unidad 12: Elías — El Profeta de Fuego y el Silbo Apacible"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d0e2db3a0c5a"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "\"How long will you falter between two opinions? If the LORD is God, follow Him.\" — 1 Kings 18:21 (NKJV)",
+    "es": "«¿Hasta cuándo claudicaréis vosotros entre dos pensamientos? Si Jehová es Dios, seguidle.» — 1 Reyes 18:21 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fe9c84eee99a"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "📝 Course Registration",
+    "es": "📝 Registro del Curso"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fde900fe006b"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "Please register before beginning this unit.",
+    "es": "Por favor regístrese antes de comenzar esta unidad."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6c8b91fbfb6f"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "He bursts onto the page without introduction, a rough man from the hills of Gilead, and for the next several chapters he dominates the story of Israel like a thunderstorm. Elijah is the prophet of fire — fire from heaven on Mount Carmel, a chariot of fire at the end — and yet the deepest lesson of his life is not about fire at all, but about a still, small voice. Here is a man of mountaintop faith and valley despair, who called down the power of God and then begged to die, who teaches us both the boldness of standing alone for God and the tenderness of the God who restores His weary servants. Elijah shows us that the same God who answers by fire also whispers to the broken, and that the prayers of an ordinary man can shake a nation.",
+    "es": "Irrumpe en la página sin introducción, un hombre rudo de las montañas de Galaad, y por los siguientes capítulos domina la historia de Israel como una tormenta. Elías es el profeta de fuego —fuego del cielo en el monte Carmelo, un carro de fuego al final— y sin embargo la lección más profunda de su vida no es acerca del fuego en absoluto, sino acerca de un silbo apacible y delicado. Aquí hay un hombre de fe en la cumbre y desesperación en el valle, que hizo descender el poder de Dios y luego rogó morir, que nos enseña tanto la valentía de estar solo por Dios como la ternura del Dios que restaura a sus siervos cansados. Elías nos muestra que el mismo Dios que responde por fuego también susurra al quebrantado, y que las oraciones de un hombre común pueden sacudir a una nación."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "67fcaa7131e8"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Subject:</strong> Elijah — the prophet of fire and the still small voice.",
+    "es": "<strong>Tema:</strong> Elías — el profeta de fuego y el silbo apacible."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8d8702356370"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Proposition:</strong> Elijah stood alone for God in a wicked age, was provided for by ravens and a widow, was vindicated by fire on Carmel, and then, collapsing in fear and despair, was restored not by wind or fire but by a gentle whisper — a man of like passions whose praying moved heaven, and who points us to Christ, the greater Prophet.",
+    "es": "<strong>Proposición:</strong> Elías estuvo solo por Dios en una época malvada, fue sustentado por cuervos y una viuda, fue vindicado por fuego en el Carmelo, y luego, derrumbándose en miedo y desesperación, fue restaurado no por viento ni fuego sino por un susurro apacible —un hombre de pasiones iguales a las nuestras cuya oración movió el cielo, y que nos señala a Cristo, el Profeta mayor—."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "81c8ec350392"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "We will trace five movements in the life of Elijah.",
+    "es": "Trazaremos cinco movimientos en la vida de Elías."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "89250b02e142"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "It helps to remember just how dark Elijah's times were. Under Ahab and Jezebel the worship of the true God had been driven nearly underground; altars to the Lord were torn down, His prophets killed or hiding in caves, and the whole nation was sliding into the cruelty and idolatry that came with Baal. It was not a popular moment to speak for God. Yet that is exactly when God raised up one man to stand in the gap. Often the darkest hours of a family, a church, or a nation are the very settings in which God loves to act, and He frequently begins not with a crowd but with a single person willing to be faithful when everyone else has bowed the knee.",
+    "es": "Ayuda recordar cuán oscuros eran los tiempos de Elías. Bajo Acab y Jezabel la adoración del Dios verdadero había sido casi llevada a la clandestinidad; los altares a Jehová eran derribados, sus profetas muertos o escondidos en cuevas, y toda la nación se deslizaba hacia la crueldad y la idolatría que venían con Baal. No era un momento popular para hablar por Dios. Sin embargo, es exactamente cuando Dios levantó a un hombre para ponerse en la brecha. A menudo las horas más oscuras de una familia, una iglesia o una nación son los escenarios mismos en que a Dios le encanta actuar, y con frecuencia comienza no con una multitud sino con una sola persona dispuesta a ser fiel cuando todos los demás han doblado la rodilla."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e5a87d4272de"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "heading",
+   "text": {
+    "en": "I. The Prophet Who Stood Alone",
+    "es": "I. El Profeta que Estuvo Solo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a4f24c677193"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "Israel had sunk to its lowest point. King Ahab had married Jezebel, a foreign princess who imported the worship of Baal and hunted down the prophets of the Lord. Into that darkness, with no fanfare, stepped Elijah.",
+    "es": "Israel había caído a su punto más bajo. El rey Acab se había casado con Jezabel, una princesa extranjera que importó la adoración de Baal y persiguió a los profetas de Jehová. A aquella oscuridad, sin fanfarria, entró Elías."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f06b2c4b95cc"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "scripture",
+   "text": {
+    "en": "As the LORD God of Israel lives, before whom I stand, there shall not be dew nor rain these years, except at my word. (1 Kings 17:1, NKJV)",
+    "es": "Vive Jehová Dios de Israel, en cuya presencia estoy, que no habrá lluvia ni rocío en estos años, sino por mi palabra. (1 Reyes 17:1, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a0ee48e3c940"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "Notice the secret of his courage in those few words: \"the LORD God of Israel lives, before whom I stand.\" Elijah could stand fearlessly before a wicked king because he first stood before the living God. He announced a drought — a direct challenge to Baal, who was worshiped as the god of storm and rain — and then he turned and walked out. A man who lives in the presence of God is not easily intimidated by the powers of this world. That is where all true boldness begins: not in a strong personality, but in a settled sense that we serve a God who lives and before whom we stand.",
+    "es": "Note el secreto de su valor en esas pocas palabras: \"Vive Jehová Dios de Israel, en cuya presencia estoy.\" Elías podía estar sin temor delante de un rey malvado porque primero estaba delante del Dios vivo. Anunció una sequía —un desafío directo a Baal, que era adorado como el dios de la tormenta y la lluvia— y luego se volvió y salió. Un hombre que vive en la presencia de Dios no es fácilmente intimidado por los poderes de este mundo. Ahí es donde comienza toda verdadera valentía: no en una personalidad fuerte, sino en un sentido firme de que servimos a un Dios que vive y en cuya presencia estamos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c0fd703ec4d4"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "There is a quiet discipline in this second movement that we should not overlook. Before God ever used Elijah on the public stage of Carmel, He hid him away by a brook and at a widow's table, where the prophet learned to trust God for his daily bread. The man who would later pray down fire was first taught to depend on God for breakfast. God often prepares His servants in obscurity before He uses them in power, and the hidden seasons, when we are simply learning to trust Him day by day, are never wasted. They are the training ground where a faith large enough for the mountaintop is quietly built.",
+    "es": "Hay una disciplina callada en este segundo movimiento que no debemos pasar por alto. Antes de que Dios usara a Elías en el escenario público del Carmelo, lo escondió junto a un arroyo y en la mesa de una viuda, donde el profeta aprendió a confiar en Dios para su pan diario. El hombre que después haría descender fuego fue primero enseñado a depender de Dios para el desayuno. Dios a menudo prepara a sus siervos en la oscuridad antes de usarlos en poder, y las temporadas ocultas, cuando simplemente aprendemos a confiar en Él día a día, nunca son desperdiciadas. Son el campo de entrenamiento donde se edifica calladamente una fe lo bastante grande para la cumbre."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9e0f17e42ceb"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "heading",
+   "text": {
+    "en": "II. The God Who Provides",
+    "es": "II. El Dios que Provee"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "950ec2357b9b"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "Having defied a king, Elijah was sent to hide by a lonely brook called Cherith, and there God provided for him in a startling way: ravens — unclean, scavenging birds — brought him bread and meat morning and evening. When the brook dried up, God sent him to a poverty-stricken widow in Zarephath, in Gentile territory, who was down to her last handful of flour and a little oil, preparing a final meal for herself and her son before they starved.",
+    "es": "Habiendo desafiado a un rey, Elías fue enviado a esconderse junto a un arroyo solitario llamado Querit, y allí Dios proveyó para él de una manera asombrosa: los cuervos —aves inmundas y carroñeras— le traían pan y carne por la mañana y por la tarde. Cuando el arroyo se secó, Dios lo envió a una viuda pobrísima en Sarepta, en territorio gentil, que estaba en su último puñado de harina y un poco de aceite, preparando una última comida para ella y su hijo antes de morir de hambre."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "877f6dfe3dcf"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "scripture",
+   "text": {
+    "en": "The bin of flour was not used up, nor did the jar of oil run dry, according to the word of the LORD which He spoke by Elijah. (1 Kings 17:16, NKJV)",
+    "es": "La harina de la tinaja no escaseó, ni el aceite de la vasija menguó, conforme a la palabra de Jehová que había dicho por medio de Elías. (1 Reyes 17:16, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b7a20f31d4fb"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "She fed the prophet first, on his word that God would provide, and her flour and oil did not run out through the whole drought. Then, when her son fell sick and died, Elijah stretched himself over the boy and prayed, and God raised him to life. See how God provides both for His servant and through His servant. He used ravens and a destitute widow — the most unlikely of means — to keep Elijah alive, teaching him to depend on God one day at a time. The God who fed Elijah by the brook and at the widow's table is the same God who has promised to supply all our need, and He is never limited by the smallness of our supply.",
+    "es": "Ella alimentó al profeta primero, sobre su palabra de que Dios proveería, y su harina y aceite no se acabaron durante toda la sequía. Luego, cuando su hijo enfermó y murió, Elías se tendió sobre el niño y oró, y Dios lo resucitó. Vea cómo Dios provee tanto para su siervo como por medio de su siervo. Usó cuervos y una viuda indigente —los medios más improbables— para mantener vivo a Elías, enseñándole a depender de Dios un día a la vez. El Dios que alimentó a Elías junto al arroyo y en la mesa de la viuda es el mismo Dios que ha prometido suplir toda nuestra necesidad, y nunca está limitado por la pequeñez de nuestra provisión."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5c4f9b899640"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "One detail of Carmel deserves special notice: the water. Elijah did not merely build the altar and pray; he ordered it drenched again and again until the trench was full, deliberately making the miracle harder, humanly speaking impossible. He wanted no one to suspect a hidden spark or a natural explanation. When the fire fell and licked up even the water, it was unmistakably the act of God. There is a lesson here about faith that leaves God room to be God. We are often tempted to hedge our bets and keep an escape route, but Elijah staked everything on the Lord, and the Lord did not disappoint him.",
+    "es": "Un detalle del Carmelo merece especial atención: el agua. Elías no solo edificó el altar y oró; ordenó empaparlo una y otra vez hasta que la zanja se llenó, haciendo deliberadamente el milagro más difícil, humanamente hablando imposible. No quería que nadie sospechara una chispa escondida o una explicación natural. Cuando el fuego descendió y lamió aun el agua, fue inconfundiblemente el acto de Dios. Hay una lección aquí sobre una fe que deja a Dios espacio para ser Dios. A menudo somos tentados a cubrirnos y guardar una ruta de escape, pero Elías lo apostó todo al Señor, y el Señor no lo defraudó."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d88d75662cf6"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "heading",
+   "text": {
+    "en": "III. Fire on Mount Carmel",
+    "es": "III. Fuego en el Monte Carmelo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b61a9a921bd2"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "After three years of drought, Elijah called the nation to Mount Carmel for a decisive test. The people were limping along, trying to worship both the Lord and Baal, and Elijah confronted their divided hearts head-on.",
+    "es": "Después de tres años de sequía, Elías llamó a la nación al monte Carmelo para una prueba decisiva. El pueblo andaba cojeando, tratando de adorar tanto a Jehová como a Baal, y Elías confrontó sus corazones divididos de frente."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "14fc0820cd9b"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "scripture",
+   "text": {
+    "en": "How long will you falter between two opinions? If the LORD is God, follow Him; but if Baal, follow him. (1 Kings 18:21, NKJV)",
+    "es": "¿Hasta cuándo claudicaréis vosotros entre dos pensamientos? Si Jehová es Dios, seguidle; y si Baal, id en pos de él. (1 Reyes 18:21, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7ef56fbe3a0f"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "The terms were simple: two altars, two sacrifices, and the God who answered by fire would be shown to be the true God. The prophets of Baal cried out, danced, and cut themselves from morning to evening, and nothing happened — Elijah even mocked them, suggesting their god was asleep or away. Then Elijah repaired the broken altar of the Lord, laid on the sacrifice, and, to remove all doubt, drenched it three times with water until it filled the trench. He prayed a short, calm prayer — and the fire of the Lord fell, consuming the sacrifice, the wood, the stones, and the water. The people fell on their faces crying, \"The LORD, He is God!\" Then Elijah climbed the mountain to pray for rain, sending his servant to look seven times, until a cloud the size of a man's hand appeared, and the heavens poured. Carmel calls every generation to the same decision: stop wavering, and follow wholeheartedly the God who answers prayer.",
+    "es": "Los términos eran simples: dos altares, dos sacrificios, y el Dios que respondiera por fuego sería mostrado como el Dios verdadero. Los profetas de Baal clamaron, danzaron y se sajaron desde la mañana hasta la tarde, y nada sucedió —Elías incluso se burló de ellos, sugiriendo que su dios estaba dormido o de viaje—. Entonces Elías reparó el altar derribado de Jehová, puso el sacrificio, y, para quitar toda duda, lo empapó tres veces con agua hasta que llenó la zanja. Oró una oración corta y serena —y el fuego de Jehová descendió, consumiendo el sacrificio, la leña, las piedras y el agua—. El pueblo cayó sobre su rostro clamando: \"¡Jehová es el Dios!\" Luego Elías subió al monte a orar por lluvia, enviando a su criado a mirar siete veces, hasta que apareció una nube del tamaño de la mano de un hombre, y los cielos se derramaron. El Carmelo llama a cada generación a la misma decisión: dejad de vacilar, y seguid de todo corazón al Dios que responde la oración."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ecd5c75a2260"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "It is strangely comforting that the Bible records Elijah's collapse so honestly. Here was a giant of faith, and yet within hours of his greatest triumph he was overwhelmed with fear and exhaustion. Spiritual highs are often followed by deep valleys, and the very intensity that makes a person mighty in God's service can leave him drained and vulnerable afterward. Scripture does not hide this from us, nor does it shame Elijah for it. Instead it shows us a God who understands how we are made, who knows our weakness and our limits, and who meets us in our lowest moments not with a lecture but with bread, rest, and a gentle word.",
+    "es": "Es extrañamente consolador que la Biblia registre el derrumbe de Elías tan honestamente. Aquí había un gigante de la fe, y sin embargo a horas de su mayor triunfo estaba abrumado de miedo y agotamiento. Las cumbres espirituales a menudo son seguidas de valles profundos, y la intensidad misma que hace a una persona poderosa en el servicio de Dios puede dejarla exhausta y vulnerable después. La Escritura no nos esconde esto, ni avergüenza a Elías por ello. En cambio nos muestra a un Dios que entiende cómo somos hechos, que conoce nuestra debilidad y nuestros límites, y que nos encuentra en nuestros momentos más bajos no con un sermón sino con pan, descanso y una palabra apacible."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ffc2ad3b9e36"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "heading",
+   "text": {
+    "en": "IV. The Still Small Voice",
+    "es": "IV. El Silbo Apacible"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4c9572a6f421"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "And then comes one of the most surprising turns in all Scripture. After the greatest victory of his life, Elijah collapsed. Queen Jezebel sent word that she would kill him within a day, and the prophet who had faced down 450 false prophets ran for his life, sat down under a broom tree in the wilderness, and prayed to die.",
+    "es": "Y entonces viene uno de los giros más sorprendentes de toda la Escritura. Después de la mayor victoria de su vida, Elías se derrumbó. La reina Jezabel envió aviso de que lo mataría dentro de un día, y el profeta que había enfrentado a 450 falsos profetas huyó por su vida, se sentó bajo un enebro en el desierto, y oró por morir."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f9f1fcb82f33"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "scripture",
+   "text": {
+    "en": "And after the earthquake a fire, but the LORD was not in the fire; and after the fire a still small voice. (1 Kings 19:12, NKJV)",
+    "es": "Y tras el terremoto un fuego; pero Jehová no estaba en el fuego. Y tras el fuego un silbo apacible y delicado. (1 Reyes 19:12, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2197c6b8cf7c"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "Notice how gently God dealt with His exhausted servant. He did not scold him; He let him sleep, and sent an angel to feed him, twice, until his strength returned. Then He brought him to Mount Horeb and passed by — but the Lord was not in the great wind, nor the earthquake, nor the fire. He came in a still small voice, a gentle whisper. The same God who had thundered on Carmel now spoke softly to a broken man, gently correcting Elijah's despairing cry that he alone was left: in fact, God had kept seven thousand who had never bowed to Baal. Then He gave Elijah fresh work to do. Here is comfort for every discouraged believer. There are times God works in fire and power, but often He comes quietly, tenderly, to the weary and afraid — feeding us, correcting our distorted thinking, reminding us we are not as alone as we feel, and setting us back on our feet.",
+    "es": "Note cuán tiernamente Dios trató a su siervo agotado. No lo regañó; lo dejó dormir, y envió un ángel a alimentarlo, dos veces, hasta que sus fuerzas volvieron. Luego lo llevó al monte Horeb y pasó —pero Jehová no estaba en el gran viento, ni en el terremoto, ni en el fuego—. Vino en un silbo apacible y delicado, un susurro suave. El mismo Dios que había tronado en el Carmelo ahora hablaba suavemente a un hombre quebrantado, corrigiendo con ternura el clamor desesperado de Elías de que él solo había quedado: en realidad, Dios había guardado siete mil que nunca se habían inclinado a Baal. Luego le dio a Elías nueva obra que hacer. Aquí hay consuelo para todo creyente desanimado. Hay tiempos en que Dios obra en fuego y poder, pero a menudo viene calladamente, tiernamente, al cansado y temeroso —alimentándonos, corrigiendo nuestro pensamiento distorsionado, recordándonos que no estamos tan solos como nos sentimos, y poniéndonos de nuevo en pie—."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9b37858081c6"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "Before we follow Elijah into the whirlwind, consider what his recommissioning teaches. God did not leave him under the broom tree; He gave him fresh assignments and a successor to train. The cure for Elijah's despair was not only rest and correction but renewed purpose; God put him back to work. Often the path out of discouragement runs the same way for us. When we feel finished, God still has tasks for us to do and people for us to pour into, and taking up that next God-given duty is itself part of how He heals us. No servant of God is ever truly used up while the Lord still has work to give.",
+    "es": "Antes de seguir a Elías al torbellino, considere lo que enseña su recomisión. Dios no lo dejó bajo el enebro; le dio nuevas tareas y un sucesor que entrenar. La cura para la desesperación de Elías no fue solo descanso y corrección sino propósito renovado; Dios lo puso de nuevo a trabajar. A menudo el camino de salida del desánimo corre de la misma manera para nosotros. Cuando nos sentimos terminados, Dios todavía tiene tareas que hacer y personas en quienes derramarnos, y tomar ese próximo deber dado por Dios es en sí mismo parte de cómo Él nos sana. Ningún siervo de Dios está jamás verdaderamente agotado mientras el Señor todavía tiene obra que dar."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ebb6c2b1a96c"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "heading",
+   "text": {
+    "en": "V. Taken Up, and the Greater Prophet",
+    "es": "V. Arrebatado, y el Profeta Mayor"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f58ab160b992"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "Elijah's departure from this world was as dramatic as his life. As he walked with his successor Elisha, a chariot of fire and horses of fire appeared, and Elijah was carried up into heaven in a whirlwind — one of only two men in Scripture who never tasted death. His mantle fell to Elisha, who had asked for a double portion of his spirit.",
+    "es": "La partida de Elías de este mundo fue tan dramática como su vida. Mientras caminaba con su sucesor Eliseo, apareció un carro de fuego y caballos de fuego, y Elías fue llevado al cielo en un torbellino —uno de solo dos hombres en la Escritura que nunca probaron la muerte—. Su manto cayó a Eliseo, que había pedido una doble porción de su espíritu."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a7a745190bfd"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "scripture",
+   "text": {
+    "en": "Elijah was a man with a nature like ours, and he prayed earnestly that it would not rain; and it did not rain on the land for three years and six months. (James 5:17, NKJV)",
+    "es": "Elías era hombre sujeto a pasiones semejantes a las nuestras, y oró fervientemente que no lloviese, y no llovió sobre la tierra por tres años y seis meses. (Santiago 5:17, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f214e319fdbc"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "prose",
+   "text": {
+    "en": "And the New Testament will not let us put Elijah on a pedestal too high to reach: James says he \"was a man with a nature like ours\" who simply prayed — an encouragement that the same God hears our prayers too. But Elijah's story finally points beyond himself to Christ. John the Baptist came \"in the spirit and power of Elijah\" to prepare the Lord's way. And on the Mount of Transfiguration, Elijah himself appeared with Moses, the Law and the Prophets standing beside Jesus and speaking of His coming death — for everything Elijah represented finds its fulfillment in the Son. Elijah called down fire upon a sacrifice; but Christ, the greater Prophet, bore the fire of God's judgment upon Himself as the sacrifice in our place. Elijah was taken up to heaven; Christ ascended, and will come again. So hear the whole of Elijah's life. Stand before the living God, and you can stand before anyone. Trust Him to provide one day at a time. Stop wavering, and follow Him with your whole heart. And when you are weary and afraid and certain you are finished, listen for the still small voice of the God who is not done with you — the God who feeds the exhausted, lifts the fallen, and points every fire of judgment back to the cross, where His own Son paid it all.",
+    "es": "Y el Nuevo Testamento no nos deja poner a Elías en un pedestal demasiado alto para alcanzarlo: Santiago dice que \"era hombre sujeto a pasiones semejantes a las nuestras\" que simplemente oró —un ánimo de que el mismo Dios oye también nuestras oraciones—. Pero la historia de Elías finalmente señala más allá de sí mismo a Cristo. Juan el Bautista vino \"con el espíritu y el poder de Elías\" para preparar el camino del Señor. Y en el monte de la Transfiguración, Elías mismo apareció con Moisés, la Ley y los Profetas de pie junto a Jesús y hablando de su muerte venidera —porque todo lo que Elías representaba halla su cumplimiento en el Hijo—. Elías hizo descender fuego sobre un sacrificio; pero Cristo, el Profeta mayor, llevó el fuego del juicio de Dios sobre sí mismo como el sacrificio en nuestro lugar. Elías fue arrebatado al cielo; Cristo ascendió, y vendrá otra vez. Así que oye toda la vida de Elías. Está delante del Dios vivo, y podrás estar delante de cualquiera. Confía en que Él provea un día a la vez. Deja de vacilar, y síguele con todo tu corazón. Y cuando estés cansado y temeroso y seguro de que has terminado, escucha el silbo apacible del Dios que no ha terminado contigo —el Dios que alimenta al agotado, levanta al caído, y señala cada fuego de juicio de vuelta a la cruz, donde su propio Hijo lo pagó todo—."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a2fb4524b377"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "prose",
+   "text": {
+    "en": "Unit 12 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 12 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7c3d3c326fb3"
+    }
+   }
+  },
+  {
+   "id": "b037",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33593c268178"
+    }
+   }
+  },
+  {
+   "id": "b038",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b039",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

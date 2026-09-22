@@ -1,0 +1,446 @@
+{
+ "course": "CTSWorship",
+ "unit": 11,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<a href=\"index.html\" style=\"display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif\">📚 Catalog / Catálogo</a>\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"prevUnitBtn\" disabled>← Previous</button>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\">Next →</button>\n    </div>\n</div>\n<div class=\"lang-toggle-group\" role=\"group\" aria-label=\"Language\">\n  <button data-lang=\"en\" class=\"active\">English</button>\n  <button data-lang=\"es\">Español</button>\n  <button data-lang=\"both\">Both / Ambos</button>\n</div>\n<span id=\"trackBadgeSlot\"></span>\n\n<div id=\"regWarn\" class=\"reg-warn hidden\">\n  <span class=\"lang-en\"><!--cts:b001:en--></span>\n  <span class=\"lang-es\"><!--cts:b001:es--></span>\n</div>\n<div id=\"regModal\" class=\"reg-modal hidden\" role=\"dialog\" aria-labelledby=\"regModalTitle\">\n  <div class=\"reg-modal-inner\">\n    <h2 id=\"regModalTitle\"><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n    <label><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></label>\n    <input type=\"text\" id=\"regName\" placeholder=\"\" autocomplete=\"name\" aria-label=\"regName\">\n    <label><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></label>\n    <input type=\"email\" id=\"regEmail\" placeholder=\"\" autocomplete=\"email\" aria-label=\"regEmail\">\n    <label><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></label>\n    <div class=\"track-options\">\n      <label><input type=\"radio\" name=\"regTrack\" value=\"cert\" checked> <span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></label>\n      <label><input type=\"radio\" name=\"regTrack\" value=\"mdiv\"> <span class=\"lang-en\"><!--cts:b008:en--></span><span class=\"lang-es\"><!--cts:b008:es--></span></label>\n      <label><input type=\"radio\" name=\"regTrack\" value=\"thm\"> <span class=\"lang-en\"><!--cts:b009:en--></span><span class=\"lang-es\"><!--cts:b009:es--></span></label>\n    </div>\n    <p style=\"font-size:0.82rem; color:#6b5236; font-style:italic; margin-top:8px;\">\n      <span class=\"lang-en\"><!--cts:b010:en--></span>\n      <span class=\"lang-es\"><!--cts:b010:es--></span>\n    </p>\n    <button id=\"regSaveBtn\" type=\"button\"><span class=\"lang-en\"><!--cts:b011:en--></span><span class=\"lang-es\"><!--cts:b011:es--></span></button>\n  </div>\n</div>\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b012:en--></span><span class=\"lang-es\"><!--cts:b012:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b013:en--></span><span class=\"lang-es\"><!--cts:b013:es--></span></p>\n    <p style=\"font-size:0.82rem; color:#6b5236; font-style:italic; margin-top:10px; border-top:1px solid #e3d9c8; padding-top:10px;\"><span class=\"lang-en\"><!--cts:b014:en--></span><span class=\"lang-es\"><!--cts:b014:es--></span></p>\n</div>\n\n<div class=\"card\" id=\"teachingContent\">\n    <div class=\"lang-en\">\n        <h2><!--cts:b015:en--></h2>\n        <p><!--cts:b016:en--></p>\n        <h2><!--cts:b017:en--></h2>\n        <p><!--cts:b018:en--></p>\n        <p><!--cts:b019:en--></p>\n        <h2><!--cts:b020:en--></h2>\n        <p><!--cts:b021:en--></p>\n        <p><!--cts:b022:en--></p>\n        <h2><!--cts:b023:en--></h2>\n        <p><!--cts:b024:en--></p>\n        <p><!--cts:b025:en--></p>\n    </div>\n    <div class=\"lang-es\">\n        <h2><!--cts:b015:es--></h2>\n        <p><!--cts:b016:es--></p>\n        <h2><!--cts:b017:es--></h2>\n        <p><!--cts:b018:es--></p>\n        <p><!--cts:b019:es--></p>\n        <h2><!--cts:b020:es--></h2>\n        <p><!--cts:b021:es--></p>\n        <p><!--cts:b022:es--></p>\n        <h2><!--cts:b023:es--></h2>\n        <p><!--cts:b024:es--></p>\n        <p><!--cts:b025:es--></p>\n    </div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b026:en--></span><span class=\"lang-es\"><!--cts:b026:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b027:en--></span><span class=\"lang-es\"><!--cts:b027:es--></span></p>\n    <div class=\"exam-status hidden\" id=\"examStatus\"></div>\n<div class=\"mc-section\" id=\"mcSection\">\n  <h3><span class=\"lang-en\"><!--cts:b028:en--></span><span class=\"lang-es\"><!--cts:b028:es--></span></h3>\n  <div id=\"mcContainer\"></div>\n</div>\n<div class=\"sa-section\" id=\"saSection\">\n  <h3><span class=\"lang-en\"><!--cts:b029:en--></span><span class=\"lang-es\"><!--cts:b029:es--></span></h3>\n  <p class=\"sa-note\"><span class=\"lang-en\" id=\"saNoteEn\"></span><span class=\"lang-es\" id=\"saNoteEs\"></span></p>\n  <div id=\"kwContainer\"></div>\n</div>\n<div style=\"margin-top: 20px;\">\n  <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b030:en--></span><span class=\"lang-es\"><!--cts:b030:es--></span></button>\n  <button id=\"resetExamBtn\" class=\"btn-reset\" type=\"button\"><span class=\"lang-en\"><!--cts:b031:en--></span><span class=\"lang-es\"><!--cts:b031:es--></span></button>\n  <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n</div>\n</div>\n</div>\n\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSWorshipReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "⚠ Please register your name to receive credit for this unit. <button class=\"small\" id=\"openRegBtn\" type=\"button\">Register</button>",
+    "es": "⚠ Por favor registre su nombre para recibir crédito por esta unidad. <button class=\"small\" id=\"openRegBtn2\" type=\"button\">Registrar</button>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "300bfc92ba6e"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "Welcome to the Worship",
+    "es": "Bienvenido al Adoración"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7c06bf421f89"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "Before you begin Unit 1, please enter your name and select your track. This information is stored only in your browser and is shared across all CTS courses.",
+    "es": "Antes de comenzar la Unidad 1, por favor ingrese su nombre y seleccione su vía. Esta información se guarda solo en su navegador y es compartida entre todos los cursos del CTS."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ee1211cde05f"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "Full name",
+    "es": "Nombre completo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "eeb692087d62"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "Email (optional)",
+    "es": "Correo electrónico (opcional)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5c10b588a954"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Track",
+    "es": "Vía"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b1c5a7af06ba"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Certificate",
+    "es": "Certificado"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "10de46b3b341"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "M.Div",
+    "es": "M.Div"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "621c580e3436"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "Th.M.",
+    "es": "Th.M."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c7ffb710c525"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate:</strong> Multiple-choice only, 90% to pass each unit. <strong>M.Div / Th.M.:</strong> Multiple-choice + short-answer, both at 90%.",
+    "es": "<strong>Certificado:</strong> Solo opción múltiple, 90% para aprobar cada unidad. <strong>M.Div / Th.M.:</strong> Opción múltiple + respuesta corta, ambas al 90%."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "431989696561"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Save and Continue",
+    "es": "Guardar y Continuar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "49a2b0fecc60"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "👑 Worship — Unit 11: Capstone: Spirit and Truth",
+    "es": "👑 Adoración — Unidad 11: Culminación: Espíritu y Verdad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8f8cbeca25fb"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Chapala Theological Seminary</strong>, a ministry of Common Ground Fellowship | <strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Seminario Teológico de Chapala</strong>, un ministerio de Common Ground Fellowship | <strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5e08313941c5"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "prose",
+   "text": {
+    "en": "This course is drawn from the worship curriculum of Dr. Wayne Cook, who served eleven years as Professor of Pastoral Ministries and Preaching, together with the teaching of Andi Cook, who taught alongside him at the seminary. It reflects not only academic study but decades of pastoral and seminary experience.",
+    "es": "Este curso proviene del currículo de adoración del Dr. Wayne Cook, quien sirvió once años como Profesor de Ministerios Pastorales y Predicación, junto con la enseñanza de Andi Cook, quien enseñó a su lado en el seminario. Refleja no solo el estudio académico sino décadas de experiencia pastoral y de seminario."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cc31a62a5153"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "heading",
+   "text": {
+    "en": "I. Spirit and Truth: The Verse That Holds It All",
+    "es": "I. Espíritu y verdad: el versículo que lo sostiene todo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e358daa905f4"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "We have come to the end of the course, and everything we have studied gathers into a single verse: \"God is a Spirit, and they that worship Him must worship Him in spirit and in truth\" (John 4:24). This is the thread that runs through all eleven units. To worship in spirit and in truth is to worship with both heart and mind, both affection and doctrine. Spirit without truth drifts into sincere error; truth without spirit dries into a cold lecture. We humans are not one-dimensional. We give God our minds AND our praise. The whole of who we are responds to the whole of who God is. That is the heart of worship, and it is where every controversy in worship is finally resolved, by refusing to split what God has joined.",
+    "es": "Hemos llegado al final del curso, y todo lo que hemos estudiado se reúne en un solo versículo: \"Dios es Espíritu; y los que le adoran, en espíritu y en verdad es necesario que adoren\" (Juan 4:24). Este es el hilo que corre por las once unidades. Adorar en espíritu y en verdad es adorar con el corazón y la mente, con afecto y doctrina. El espíritu sin la verdad se desvía en error sincero; la verdad sin el espíritu se seca en una conferencia fría. Los seres humanos no somos unidimensionales. Damos a Dios nuestra mente Y nuestra alabanza. Todo lo que somos responde a todo lo que Dios es. Ese es el corazón de la adoración, y es donde toda controversia en la adoración finalmente se resuelve, al rehusar separar lo que Dios ha unido."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "df862cf3c7d4"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "heading",
+   "text": {
+    "en": "II. Gathering the Traditions",
+    "es": "II. Reuniendo las tradiciones"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "29b5147e05c0"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "In Unit 10 we saw that each great tradition cultivates a true feeling that worship should include. Catholic worship cultivates awe; Orthodox worship cultivates mystery; Coptic worship cultivates endurance; the Reformed cultivate the mind; the charismatic and Pentecostal cultivate joy; the Black church cultivates participation; evangelicals cultivate focus on the preached Word. Every one of these is biblical somewhere in the Scriptures.",
+    "es": "En la Unidad 10 vimos que cada gran tradición cultiva un sentimiento verdadero que la adoración debe incluir. La adoración católica cultiva el asombro; la adoración ortodoxa cultiva el misterio; la adoración copta cultiva la perseverancia; los reformados cultivan la mente; los carismáticos y pentecostales cultivan el gozo; la iglesia negra cultiva la participación; los evangélicos cultivan el enfoque en la Palabra predicada. Cada uno de estos es bíblico en alguna parte de las Escrituras."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0ed01988c6c7"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "And we saw the danger: to mistake the part we know for the whole. Awe without joy makes God distant; joy without awe makes Him casual; mystery without truth becomes superstition; endurance without grace becomes legalism; the Word without affection becomes mere lecture. Each tradition is tempted to take its own true feeling and treat it as the whole of worship. The mature pastor refuses that error. He learns from Isaiah and David, from Calvin and the Coptic liturgies, from the spirituals sung in chains, and he hears through them all one voice, the worshipping church. He honors what Scripture honors in each, with humility.",
+    "es": "Y vimos el peligro: confundir la parte que conocemos con el todo. El asombro sin gozo hace a Dios distante; el gozo sin asombro lo hace casual; el misterio sin verdad se vuelve superstición; la perseverancia sin gracia se vuelve legalismo; la Palabra sin afecto se vuelve mera conferencia. Cada tradición es tentada a tomar su propio sentimiento verdadero y tratarlo como el todo de la adoración. El pastor maduro rehúsa ese error. Aprende de Isaías y David, de Calvino y las liturgias coptas, de los espirituales cantados en cadenas, y oye a través de todos ellos una voz, la iglesia adoradora. Honra lo que la Escritura honra en cada uno, con humildad."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f8575db40967"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "heading",
+   "text": {
+    "en": "III. The Threads Drawn Together",
+    "es": "III. Los hilos reunidos"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a304f5c34518"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "Several threads have run through this whole course, and now we tie them. <strong>The room preaches:</strong> architecture is theology made visible, and the placement of pulpit, table, and baptistry teaches Word and sacrament without a word. <strong>The moods and the prayer elements run parallel:</strong> the five moods shape the whole service and the six elements shape a single prayer, both moving God-ward through adoration, thanksgiving, confession, and dedication, so that the service is a large prayer and a prayer is a small service. <strong>Worship holds together the pairs we are always tempted to split:</strong> Word and sacrament, reverence and joy, the individual and the congregation, tradition and freshness. To worship well is to keep these joined.",
+    "es": "Varios hilos han corrido por todo este curso, y ahora los atamos. <strong>La sala predica:</strong> la arquitectura es teología hecha visible, y la colocación del púlpito, la mesa, y el baptisterio enseña la Palabra y el sacramento sin una palabra. <strong>Los ánimos y los elementos de la oración corren paralelos:</strong> los cinco ánimos moldean todo el servicio y los seis elementos moldean una sola oración, ambos moviéndose hacia Dios por medio de adoración, acción de gracias, confesión, y dedicación, de modo que el servicio es una oración grande y una oración es un servicio pequeño. <strong>La adoración sostiene juntos los pares que siempre somos tentados a separar:</strong> Palabra y sacramento, reverencia y gozo, el individuo y la congregación, tradición y frescura. Adorar bien es mantener estos unidos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4049f456cf0e"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "What, then, is worship? In a word, worship is the response of the whole person to the God who has revealed Himself. God takes the initiative, He reveals Himself, and we respond, in spirit and in truth, with mind and heart together. And why does it matter? Because God commands it, because He is worthy of it, and because He made us for it. The soul was made for worship and is restless until it worships its Maker.",
+    "es": "¿Qué es, entonces, la adoración? En una palabra, la adoración es la respuesta de toda la persona al Dios que se ha revelado. Dios toma la iniciativa, se revela, y nosotros respondemos, en espíritu y en verdad, con mente y corazón juntos. ¿Y por qué importa? Porque Dios la manda, porque es digno de ella, y porque nos hizo para ella. El alma fue hecha para la adoración y está inquieta hasta que adora a su Hacedor."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e81b020812de"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "heading",
+   "text": {
+    "en": "IV. The Charge",
+    "es": "IV. El encargo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0200ad525f54"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "So we close where a course on worship must close, not with information, but with a charge. You have studied the definitions, the history, the planning, the music, the spoken elements, the preaching and the invitation, the ordinances, and the room itself. But all of it is meant to be carried into the leading of a congregation. The pastor is both a worshipper and a teacher of worship. He must first give God his own mind and his own praise, and then he must lead his people into true worship in spirit and in truth.",
+    "es": "Así que cerramos donde un curso sobre la adoración debe cerrar, no con información, sino con un encargo. Usted ha estudiado las definiciones, la historia, la planeación, la música, los elementos hablados, la predicación y la invitación, las ordenanzas, y la sala misma. Pero todo ello está destinado a ser llevado al dirigir una congregación. El pastor es tanto un adorador como un maestro de la adoración. Debe primero dar a Dios su propia mente y su propia alabanza, y luego debe dirigir a su pueblo a la verdadera adoración en espíritu y en verdad."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bd4928286c58"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "Take everything this course has taught and carry it home to your people. Build a room that says what you mean. Plan a service that moves through the moods toward its climax. Guard the spoken elements. Sing with both depth and joy. Make the gospel visible in the ordinances. And above all, worship God yourself, with your whole heart and your whole mind, so that your people learn what worship is by watching you do it. Go and worship Him. And teach your people to do the same.",
+    "es": "Tome todo lo que este curso ha enseñado y llévelo a casa a su pueblo. Construya una sala que diga lo que usted quiere. Planee un servicio que se mueva a través de los ánimos hacia su clímax. Guarde los elementos hablados. Cante con profundidad y gozo. Haga visible el evangelio en las ordenanzas. Y sobre todo, adore usted mismo a Dios, con todo su corazón y toda su mente, para que su pueblo aprenda lo que es la adoración viéndolo a usted hacerlo. Ve y adórale. Y enseña a tu pueblo a hacer lo mismo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b94ef808a656"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "Unit 11 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 11 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "308fac13cf5e"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "<em><strong>Certificate track:</strong> 20 multiple-choice questions, 90% (18 of 20) to pass. <strong>M.Div track:</strong> 20 MC + 10 short-answer, both at 90% independently. Each MC scores immediately when you click. MC must be passed before SA scores count. A failure locks the relevant section for 15 minutes; if you have already passed MC, only SA locks after an SA fail.</em>",
+    "es": "<em><strong>Vía Certificado:</strong> 20 preguntas de opción múltiple, 90% (18 de 20) para aprobar. <strong>Vía M.Div:</strong> 20 OM + 10 respuesta corta, ambas al 90% independientemente. Cada OM califica inmediatamente al hacer clic. Debe aprobar OM antes de que cuente la sección RC. Una reprobación bloquea la sección por 15 minutos; si ya aprobó OM, solo se bloquea RC tras un fallo de RC.</em>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d196052e364e"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "Multiple Choice — 20 Questions",
+    "es": "Opción Múltiple — 20 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9906bf28c27c"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "Short Answer — 10 Questions <span class=\"sa-badge\" id=\"saBadgeEn\"></span>",
+    "es": "Respuesta Corta — 10 Preguntas <span class=\"sa-badge\" id=\"saBadgeEs\"></span>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b1d858341328"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

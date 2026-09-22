@@ -2,25 +2,53 @@
  *
  * WHY THIS EXISTS
  *
- * Until now a lesson was a file of hand-written HTML -- 451 of them -- and a
+ * A lesson used to be a file of hand-written HTML -- 451 of them -- and a
  * teacher who wanted to fix one sentence had to find it among the <span>s.
  * A CMS cannot offer "edit this paragraph" when the paragraph is not a thing
- * the site knows about. This module makes it one.
+ * the site knows about. This makes it one.
  *
- * THE MODEL
+ * THE MODEL: A TEMPLATE WITH HOLES, AND THE TEXT THAT FILLS THEM
  *
- * A lesson is an ordered list of blocks. Each block has a TYPE describing what
- * it is for -- a heading, a paragraph, a Scripture quotation -- rather than the
- * tag it happens to be rendered as. An editor picks "Scripture quotation"; the
- * renderer knows that means <div class="scripture">. Change the markup once
- * here and 451 pages follow, which is the whole point of holding content as
- * data.
+ * A lesson is the page's markup with every translated fragment replaced by a
+ * hole, plus an ordered list of blocks that fill those holes:
+ *
+ *   template: '<div class="container"><h1 class="unit-title"><!--cts:b01--></h1>…'
+ *   blocks:   [{ id: 'b01', type: 'title', text: { en: '…', es: '…' } }, …]
+ *
+ * The template is generated, never hand-edited, and is not shown to anyone.
+ * It exists so that conversion is LOSSLESS BY CONSTRUCTION: whatever shape a
+ * course's markup is in -- and there are twenty-six of them across the forty
+ * courses -- everything that is not translated text survives untouched, and
+ * rendering puts the text back where it came from. There is no rule about
+ * where a lesson starts and ends to get wrong, which is what made every
+ * earlier attempt at this unsafe.
+ *
+ * `type` is metadata, not structure. It says what a block is FOR -- a heading,
+ * a paragraph, a Scripture quotation -- so the CMS can label the field and an
+ * editor knows what they are looking at. Rendering does not consult it.
  *
  * LANGUAGES
  *
  * `text` is a map keyed by language code, not an {en, es} pair. French is
  * planned and a pair does not become a triple without rewriting everything
- * that touches it; adding a language is adding a key.
+ * that touches it. Adding a language is adding a key.
+ *
+ * Each language gets its OWN hole, where its text already sat:
+ *
+ *   <p class="lang-en"><!--cts:b07:en--></p><p class="lang-es"><!--cts:b07:es--></p>
+ *   <p><span class="lang-en"><!--cts:b07:en--></span><span class="lang-es">…</span></p>
+ *
+ * The site marks language six ways and they are all left exactly as they are.
+ * Normalising them to one spelling was the obvious thing and is the wrong
+ * thing: it rewrites the markup of four hundred pages, and every check that
+ * says no content was lost compares the built page element by element against
+ * the page before. Keeping the holes where the text was means those checks
+ * still mean what they say.
+ *
+ * The cost is that a language which has no hole cannot be rendered into a
+ * page -- adding French to a course that wraps each language in its own
+ * container needs that container cloned. That is a render-time problem to
+ * solve when French is real, and solving it does not need the data reshaped.
  *
  * TRANSLATION STATE -- `tr`
  *
@@ -48,15 +76,15 @@ export type Text = Record<Lang, string>;
 export type TrStatus = 'human' | 'machine' | 'machine-edited';
 export interface Tr { status: TrStatus; from: string }
 
+export type BlockType =
+  'masthead' | 'title' | 'subtitle' | 'heading' | 'prose' | 'scripture'
+  | 'list-item' | 'caption' | 'label' | 'other';
+
 export interface Block {
   id: string;
-  type: 'masthead' | 'title' | 'subtitle' | 'heading' | 'prose' | 'scripture' | 'figure';
-  text?: Text;
+  type: BlockType;
+  text: Text;
   tr?: Record<Lang, Tr>;
-  anchor?: string;
-  svg?: string;                       // figure only: the illustration, verbatim
-  attrs?: string;                     // figure only: its own attributes, verbatim
-  caption?: { text: Text; tr?: Record<Lang, Tr> };
 }
 
 export interface Lesson {
@@ -64,6 +92,7 @@ export interface Lesson {
   unit: number;
   sourceLang: Lang;
   langs: Lang[];
+  template: string;
   blocks: Block[];
 }
 
@@ -75,81 +104,37 @@ export const hash = (s: string) =>
    stored at all. */
 export const isStale = (b: Block, lang: Lang, sourceLang: Lang) => {
   if (lang === sourceLang) return false;
-  /* An illustration's words are its caption, and the caption carries its own
-     provenance. Reading b.text here instead would call every caption
-     untracked -- which is what it did until a status report said so. */
-  const { text, tr: prov } = b.type === 'figure' ? (b.caption ?? {} as never) : b;
-  const src = text?.[sourceLang];
+  const src = b.text?.[sourceLang];
   if (src == null) return false;
-  const tr = prov?.[lang];
-  if (!tr) return text?.[lang] != null;   // a translation with no provenance
+  const tr = b.tr?.[lang];
+  if (!tr) return b.text?.[lang] != null;   // a translation with no provenance
   return tr.from !== hash(src);
 };
 
-/* One place that knows a block type's markup. */
-const WRAP: Record<string, [string, string]> = {
-  masthead:  ['h1', ''],
-  title:     ['h1', 'unit-title'],
-  subtitle:  ['h2', 'unit-sub'],
-  heading:   ['h3', ''],
-  prose:     ['p', ''],
-  scripture: ['div', 'scripture'],
-};
+/* The hole one language of one block fills. An HTML comment, because it is
+   legal wherever text is and survives being parsed and re-serialised. */
+export const HOLE = (id: string, lang: Lang) => `<!--cts:${id}:${lang}-->`;
+const HOLE_RE = /<!--cts:([A-Za-z0-9_-]+):([A-Za-z-]+)-->/g;
 
-const spans = (text: Text, langs: Lang[]) =>
-  langs.filter((l) => text[l] != null)
-       .map((l) => `<span class="lang-${l}">${text[l]}</span>`)
-       .join('\n      ');
-
-export function renderBlock(b: Block, langs: Lang[]): string {
-  if (b.type === 'figure') {
-    const cap = b.caption ? `\n  <figcaption>\n      ${spans(b.caption.text, langs)}\n  </figcaption>` : '';
-    return `<figure ${b.attrs ?? 'class="cts-figure"'}>\n${b.svg ?? ''}${cap}\n</figure>`;
+/* Data back to the page. Every hole must be filled and every block must be
+   used: a template and a block list that disagree mean the conversion lost
+   something, and it is better to say so than to render a page with a gap in
+   it. */
+export function renderLesson(lesson: Lesson, langs: Lang[] = lesson.langs): string {
+  const byId = new Map(lesson.blocks.map((b) => [b.id, b]));
+  const used = new Set<string>();
+  const out = lesson.template.replace(HOLE_RE, (_m, id: string, lang: string) => {
+    const b = byId.get(id);
+    if (!b) throw new Error(`${lesson.course} unit ${lesson.unit}: the template has a hole for block ${id}, which does not exist`);
+    used.add(id);
+    if (!langs.includes(lang)) return '';
+    const t = b.text[lang];
+    if (t == null) throw new Error(`${lesson.course} unit ${lesson.unit}: block ${id} has a hole for ${lang} and no ${lang} text`);
+    return t;
+  });
+  if (used.size !== byId.size) {
+    const orphans = [...byId.keys()].filter((id) => !used.has(id));
+    throw new Error(`${lesson.course} unit ${lesson.unit}: ${orphans.length} block(s) have no hole in the template: ${orphans.slice(0, 5).join(', ')}`);
   }
-  const [tag, cls] = WRAP[b.type] ?? ['p', ''];
-  const attrs = (cls ? ` class="${cls}"` : '') + (b.anchor ? ` id="${b.anchor}"` : '');
-  return `<${tag}${attrs}>\n      ${spans(b.text ?? {}, langs)}\n    </${tag}>`;
-}
-
-const LESSON_BODY = new Set(['heading', 'prose', 'scripture']);
-
-/* The parts of a unit page that are the same in every unit of the course: the
-   engine furniture (track picker, lockout notice, exam section) and the
-   course's own footer and honours-readings notice. Byte-identical across the
-   course's units, so stored once rather than copied into all eleven. Three
-   pieces, because the lesson sits among them. */
-export interface Shared { before: string; after: string; tail: string }
-
-/* The inverse of extraction: data back to the body the page had. */
-export function renderLesson(lesson: Lesson, shared: Shared): string {
-  const { blocks, langs } = lesson;
-  const one = (t: string) => blocks.find((b) => b.type === t);
-  const masthead = one('masthead'), title = one('title'), subtitle = one('subtitle');
-  const body = blocks.filter((b) => LESSON_BODY.has(b.type));
-  const after = blocks.filter((b) => b.type === 'figure');
-
-  return [
-    '<header>',
-    '  <div class="hwrap">',
-    '    ' + (masthead ? renderBlock(masthead, langs) : ''),
-    '    <button class="toggle" onclick="toggleLang()">',
-    '      <span class="lang-en">Español</span>',
-    '      <span class="lang-es">English</span>',
-    '    </button>',
-    '  </div>',
-    '  <div class="progress-grid" id="progress-grid"></div>',
-    '</header>',
-    '',
-    '<div class="container">',
-    '  ' + (title ? renderBlock(title, langs) : ''),
-    '  ' + (subtitle ? renderBlock(subtitle, langs) : ''),
-    shared.before.trim(),
-    '  <article class="teaching">',
-    ...body.map((b) => '    ' + renderBlock(b, langs)),
-    '  </article>',
-    ...after.map((b) => renderBlock(b, langs)),
-    shared.after.trim(),
-    '</div>',
-    shared.tail.trim(),
-  ].join('\n');
+  return out;
 }

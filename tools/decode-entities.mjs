@@ -31,9 +31,11 @@ import path from 'node:path';
 import { parse } from 'node-html-parser';
 import { hash } from '../src/lib/lesson.ts';
 
-const COURSE = process.argv[2];
-const CHECK = process.argv.includes('--check');
-if (!COURSE) { console.error('usage: node tools/decode-entities.mjs <Course> [--check]'); process.exit(2); }
+const args = process.argv.slice(2);
+const CHECK = args.includes('--check');
+const ALL = args.includes('--all');
+const COURSE = args.find((a) => !a.startsWith('-'));
+if (!COURSE && !ALL) { console.error('usage: node tools/decode-entities.mjs <Course>|--all [--check]'); process.exit(2); }
 
 /* The three that must stay spelled out, because in HTML they are syntax. */
 const KEEP = /^&(amp|lt|gt|AMP|LT|GT);$/;
@@ -58,7 +60,12 @@ const decode = (html) => html.split(/(<[^>]*>)/)
   .map((part, i) => (i % 2 ? part : part.replace(ENTITY, decodeOne)))
   .join('');
 
-const dir = path.join('src', 'content', 'lessons', COURSE);
+const ROOT = path.join('src', 'content', 'lessons');
+const courses = ALL ? fs.readdirSync(ROOT).sort() : [COURSE];
+for (const course of courses) run(course);
+
+function run(COURSE) {
+const dir = path.join(ROOT, COURSE);
 if (!fs.existsSync(dir)) { console.error(`${COURSE} has not been converted`); process.exit(1); }
 
 let changed = 0, blocks = 0, refreshed = 0, leftStale = 0, files = 0;
@@ -72,7 +79,7 @@ for (const f of fs.readdirSync(dir).filter((f) => /^\d+\.json$/.test(f))
   let touched = false;
 
   for (const b of lesson.blocks) {
-    const words = b.type === 'figure' ? b.caption : b;
+    const words = b;
     if (!words?.text) continue;
 
     const before = words.text[src];
@@ -104,9 +111,11 @@ for (const f of fs.readdirSync(dir).filter((f) => /^\d+\.json$/.test(f))
 }
 
 const total = [...kinds.values()].reduce((a, b) => a + b, 0);
-console.log(`${COURSE}: ${total} entities of ${kinds.size} kinds in ${blocks} block(s) across ${files} unit(s)`);
-[...kinds.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8)
-  .forEach(([k, n]) => console.log(`   ${k.padEnd(12)} ${n}`));
-if (kinds.size > 8) console.log(`   … and ${kinds.size - 8} more kinds`);
-console.log(`${refreshed} translation stamp(s) carried across; ${leftStale} left stale, as they already were`);
-console.log(CHECK ? 'nothing was written (--check)' : `rewrote ${files} file(s)`);
+console.log(`${COURSE.padEnd(26)} ${String(total).padStart(6)} entities, ${String(kinds.size).padStart(2)} kinds, ${String(blocks).padStart(5)} blocks, ${String(files).padStart(2)} units   `
+  + `${refreshed} stamp(s) carried, ${leftStale} left stale`);
+if (!ALL) {
+  [...kinds.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8)
+    .forEach(([k, n]) => console.log(`   ${k.padEnd(12)} ${n}`));
+  if (kinds.size > 8) console.log(`   … and ${kinds.size - 8} more kinds`);
+}
+}

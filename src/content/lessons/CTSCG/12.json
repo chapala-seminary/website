@@ -1,0 +1,404 @@
+{
+ "course": "CTSCG",
+ "unit": 12,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Certificate →</button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #2f4f2f;\"><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\">\n    <h2><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></p>\n    <input type=\"text\" id=\"regName\" placeholder=\"Full name / Nombre completo\" aria-label=\"Full name / Nombre completo\">\n    <input type=\"email\" id=\"regEmail\" placeholder=\"Email\" aria-label=\"Email\">\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate Track</option>\n        <option value=\"mdiv\">Master of Divinity (M.Div.) Track</option>\n        <option value=\"thm\">Master of Theology (Th.M.) Track</option>\n    </select>\n    <button class=\"nav-btn\" id=\"regBtn\"><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\">\n\n<p><!--cts:b008:en--></p>\n<p><!--cts:b009:en--></p>\n<ol type=\"1\">\n<li><!--cts:b010:en--></li>\n<li><!--cts:b011:en--></li>\n<li><!--cts:b012:en--></li>\n<li><!--cts:b013:en--></li>\n</ol>\n<p><!--cts:b014:en--></p>\n<p><!--cts:b015:en--></p>\n<ul>\n<li><!--cts:b016:en--></li>\n<li><!--cts:b017:en--></li>\n<li><!--cts:b018:en--></li>\n</ul>\n<p><!--cts:b019:en--></p>\n<h2 id=\"where-we-are-now-2026\"><!--cts:b020:en--></h2>\n<p><!--cts:b021:en--></p>\n<p><!--cts:b022:en--></p>\n<p><!--cts:b023:en--></p>\n<p><!--cts:b024:en--></p>\n\n</div>\n<div class=\"lang-es\">\n\n<p><!--cts:b008:es--></p>\n\n<p><!--cts:b009:es--></p>\n<ol>\n<li><!--cts:b010:es--></li>\n<li><!--cts:b011:es--></li>\n<li><!--cts:b012:es--></li>\n<li><!--cts:b013:es--></li>\n</ol>\n\n<p><!--cts:b014:es--></p>\n\n<p><!--cts:b015:es--></p>\n<ul>\n<li><!--cts:b016:es--></li>\n<li><!--cts:b017:es--></li>\n<li><!--cts:b018:es--></li>\n</ul>\n\n<p><!--cts:b019:es--></p>\n\n<h2><!--cts:b020:es--></h2>\n\n<p><!--cts:b021:es--></p>\n\n<p><!--cts:b022:es--></p>\n\n<p><!--cts:b023:es--></p>\n\n<p><!--cts:b024:es--></p>\n\n</div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b025:en--></span><span class=\"lang-es\"><!--cts:b025:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b026:en--></span>\n       <span class=\"lang-es\"><!--cts:b026:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b027:en--></span><span class=\"lang-es\"><!--cts:b027:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b028:en--></span><span class=\"lang-es\"><!--cts:b028:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSCGReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📈 Church Growth — Unit 12: Retention: Closing the Back Door",
+    "es": "📈 Crecimiento de la Iglesia — Unidad 12: Retención: Cerrando la Puerta de Atrás"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b7b3b439cdea"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "\"Of those whom You gave Me I have lost none.\" — John 18:9 (NKJV)",
+    "es": "\"De los que me diste, no perdi ninguno.\" — Juan 18:9 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9f40ceae6178"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "📝 Course Registration",
+    "es": "📝 Registro del Curso"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fde900fe006b"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Welcome to the Church Growth course. Please register before beginning Unit 12.",
+    "es": "Bienvenido al curso Crecimiento de la Iglesia. Por favor registrese antes de comenzar la Unidad 12."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1fd25b4d2ecb"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "By and large I have found it easier to <em>retain</em> members than\nto win new ones. I once knew a church that poured enormous effort into\ngrowth; over the years they recorded a long string of baptisms — and\ntheir attendance stayed about the same. Year after year they filled the\nfront door and never noticed the open one in the back. That is the\npicture to keep before you in this final unit: it does no good to pour\nwater into a bucket that leaks. The work of growth is only half done at\nthe front door. The other half is closing the back.",
+    "es": "En general he hallado más fácil <em>retener</em> miembros que ganar nuevos. Una vez conocí una iglesia que volcó un esfuerzo enorme en el crecimiento; con los años registró una larga serie de bautismos — y su asistencia se mantuvo más o menos igual. Año tras año llenaban la puerta de entrada y nunca notaban la abierta en la parte de atrás. Esa es la imagen que hay que tener delante en esta unidad final: de nada sirve verter agua en un balde que gotea. La obra del crecimiento está solo a medio hacer en la puerta de entrada. La otra mitad es cerrar la de atrás."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c95c03bf01e7"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "<strong>When people drop out.</strong> People are most likely to slip\naway at four predictable seasons, and a wise church watches for\nthem:",
+    "es": "<strong>Cuando la gente deserta.</strong> La gente tiende más a deslizarse en cuatro temporadas predecibles, y una iglesia sabia las vigila:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c07d641114f6"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "list-item",
+   "text": {
+    "en": "In the <em>teen years,</em> roughly fifteen to twenty-three — by far\nthe highest dropout window. Most teenage dropouts do return later in\nlife, especially in their late twenties and thirties, and the return is\nhighest among those for whom faith was real in childhood. But the leak\nis real, and it is large.",
+    "es": "En los <em>años de la adolescencia,</em> más o menos de quince a veintitrés — por mucho la ventana de deserción más alta. La mayoría de los desertores adolescentes sí regresan más tarde en la vida, especialmente al final de sus veinte y en sus treinta, y el regreso es más alto entre aquellos para quienes la fe fue real en la niñez. Pero la fuga es real, y es grande."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "05b9f763ef6d"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "list-item",
+   "text": {
+    "en": "In the <em>first two years in a new community</em> — when the old\nties are cut and the new ones not yet formed.",
+    "es": "En los <em>primeros dos años en una nueva comunidad</em> — cuando los viejos lazos se cortan y los nuevos aún no se forman."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9f4bee79ee4b"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "list-item",
+   "text": {
+    "en": "In the <em>first years after the youngest child leaves home</em> —\nwhen the family reason for attending walks out the door.",
+    "es": "En los <em>primeros años después de que el hijo menor deja el hogar</em> — cuando la razón familiar para asistir sale por la puerta."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c1d7f1e83974"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "list-item",
+   "text": {
+    "en": "<em>Just after a divorce</em> — when life fractures and the church\ntoo often feels like one more place of judgment.",
+    "es": "<em>Justo después de un divorcio</em> — cuando la vida se quiebra y la iglesia con demasiada frecuencia se siente como un lugar más de juicio."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ad81e72bd195"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Why people leave.</strong> Pastors like to believe the only\nreason for attending is devotion to Christ — but the truth is more human\nthan that, and the repair of broken relationships must become a high\npriority for any church serious about retention. People leave when they\n<em>move;</em> when <em>health</em> fails in later years; when the\nchurch comes to feel <em>irrelevant;</em> when there is\n<em>conflict</em> with the pastor or other members; when <em>work\nschedules</em> or <em>transportation</em> or sheer <em>busyness</em>\ncrowd the church out; when the <em>preaching and teaching</em> go dull —\nfor if the sheep are not fed, they stop coming to the trough; and when\n<em>marriages</em> are strained, since the lower the marital\nsatisfaction, the lower the church commitment tends to run. Mark\nespecially the matter of conflict: in one study of dropouts, nearly a\nquarter had suffered some anxiety-provoking event, and <em>not one of\nthem</em> was visited after they fell away. People give a church only a\nfew weeks — six to eight — to notice they are gone. If no one reaches\nout in that window, they quietly reinvest their lives elsewhere.",
+    "es": "<strong>Por qué la gente se va.</strong> A los pastores les gusta creer que la única razón para asistir es la devoción a Cristo — pero la verdad es más humana que eso, y la reparación de relaciones rotas debe volverse una alta prioridad para toda iglesia seria en cuanto a la retención. La gente se va cuando se <em>muda;</em> cuando la <em>salud</em> falla en los años posteriores; cuando la iglesia llega a sentirse <em>irrelevante;</em> cuando hay <em>conflicto</em> con el pastor u otros miembros; cuando los <em>horarios de trabajo</em> o el <em>transporte</em> o el puro <em>ajetreo</em> desplazan a la iglesia; cuando la <em>predicación y la enseñanza</em> se vuelven aburridas — pues si las ovejas no son alimentadas, dejan de venir al comedero; y cuando los <em>matrimonios</em> están tensos, ya que cuanto más baja la satisfacción marital, más bajo tiende a correr el compromiso con la iglesia. Note especialmente el asunto del conflicto: en un estudio de desertores, casi una cuarta parte había sufrido algún evento que provoca ansiedad, y <em>ni uno solo de ellos</em> fue visitado después de apartarse. La gente da a una iglesia solo unas pocas semanas — seis a ocho — para notar que se han ido. Si nadie los alcanza en esa ventana, calladamente reinvierten su vida en otra parte."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e29f6cd87745"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Why people stay — and three ratios to build on.</strong>\nPeople remain where they are <em>known</em> and <em>needed.</em> Family\nand long membership ties hold them; so does genuine assimilation, which\nin close-knit settings happens naturally but in our mobile world must be\n<em>planned.</em> Three measurable ratios tell you whether the planning\nis working:",
+    "es": "<strong>Por qué la gente se queda — y tres proporciones sobre las cuales edificar.</strong> La gente permanece donde es <em>conocida</em> y <em>necesitada.</em> Los lazos de familia y de larga membresía la sostienen; también lo hace la asimilación genuina, que en entornos muy unidos ocurre con naturalidad pero en nuestro mundo móvil debe ser <em>planeada.</em> Tres proporciones medibles le dicen si la planeación está funcionando:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a9ffb6cb023e"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "list-item",
+   "text": {
+    "en": "<strong>The friendship ratio, 7 to 1.</strong> A new member needs to\nmake at least <em>seven</em> new friends in the church within his first\nsix months. More is better; seven is the floor. Make fewer, and he will\ndrift back to his old friends and his old life. People do not leave\nchurches; they leave when they have no one in them.",
+    "es": "<strong>La proporción de amistad, 7 a 1.</strong> Un nuevo miembro necesita hacer al menos <em>siete</em> nuevos amigos en la iglesia dentro de sus primeros seis meses. Más es mejor; siete es el piso. Si hace menos, se alejará de vuelta a sus viejos amigos y su vieja vida. La gente no deja iglesias; se va cuando no tiene a nadie en ellas."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7108a8e9687c"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "list-item",
+   "text": {
+    "en": "<strong>The role-and-task ratio, 60 to 100.</strong> For every\nhundred members there should be at least <em>sixty</em> meaningful roles\nand tasks — teacher, officer, committee member, singer, servant. New\nmembers especially need a real job, not busywork, so they can see where\nthey fit and matter. A member with a task is a member with a reason to\nstay.",
+    "es": "<strong>La proporción de papeles y tareas, 60 por 100.</strong> Por cada cien miembros debería haber al menos <em>sesenta</em> papeles y tareas significativos — maestro, oficial, miembro de comité, cantante, servidor. Los nuevos miembros especialmente necesitan un trabajo real, no ocupaciones vacías, para que puedan ver donde encajan e importan. Un miembro con una tarea es un miembro con una razón para quedarse."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2432f24e326a"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "list-item",
+   "text": {
+    "en": "<strong>The group ratio, 7 to 100.</strong> For every hundred\nmembers there should be at least <em>seven</em> groups. Groups create\nbelonging, and they quietly drive the other two ratios — for it is in\nthe group that friendships form and tasks are found.",
+    "es": "<strong>La proporción de grupos, 7 por 100.</strong> Por cada cien miembros debería haber al menos <em>siete</em> grupos. Los grupos crean pertenencia, y calladamente impulsan las otras dos proporciones — pues es en el grupo donde se forman las amistades y se hallan las tareas."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "67afee8da8bf"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "Get those three right and you have not merely retained members; you\nhave woven them so thoroughly into the body that there is no loose\nthread to pull.",
+    "es": "Acierte en esas tres y no habrá meramente retenido miembros; los habrá entretejido tan a fondo en el cuerpo que no queda hilo suelto que jalar."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9c8bf764894a"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "heading",
+   "text": {
+    "en": "Where We Are Now (2026)",
+    "es": "Dónde Estamos Ahora (2026)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ce032d8b1f1b"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "Read this chapter today and it reads like prophecy. You wrote about\nthe open back door of a single congregation; in the decades since, that\nback door has become the largest religious migration in the history of\nthis country. The Great Dechurching we surveyed at the very beginning of\nthis course — some forty million who once attended and no longer do — is\nnothing other than this unit’s problem written across a continent. And\nthe cause the research now names is exactly the cause named here: most\ndid not leave in a doctrinal crisis or a loss of faith. They\n<em>drifted</em> — they moved, life changed, a season ended — and no one\nreached for them in the six-to-eight-week window before they were gone.\nThe four dropout seasons and the “nobody visited them” finding turn out\nto be the anatomy of the whole national exodus.",
+    "es": "Lea este capítulo hoy y se lee como profecía. Usted escribió sobre la puerta de atrás abierta de una sola congregación; en las décadas desde entonces, esa puerta de atrás se ha vuelto la migración religiosa más grande en la historia de este país. El Gran Abandono que examinamos al mismo principio de este curso — unos cuarenta millones que antes asistían y ya no — no es otra cosa que el problema de esta unidad escrito a lo ancho de un continente. Y la causa que la investigación ahora nombra es exactamente la causa nombrada aquí: la mayoría no se fue en una crisis doctrinal ni en una pérdida de fe. Se <em>alejaron</em> — se mudaron, la vida cambió, una temporada terminó — y nadie los alcanzó en la ventana de seis a ocho semanas antes de que se fueran. Las cuatro temporadas de deserción y el hallazgo de \"nadie los visito\" resultan ser la anatomía de todo el éxodo nacional."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "16e54b23606a"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "The years have added one trigger that could not have been foreseen in\nfull, and it must be named. Beyond moving and busyness and dull\npreaching, a great many have been driven out by <em>wounding</em> — by\nconflict, yes, but also by the failures and scandals of leaders and by\nchurches that proved unsafe. Some have walked through the long\nreexamination of faith now called deconstruction. The pastoral task this\nunit identified — <em>the repair of broken relationships</em> — is\ntherefore larger and more urgent than ever, and it now includes humility\nabout the church’s own sins and a door held genuinely open to those the\nchurch itself has hurt.",
+    "es": "Los años han añadido un detonante que no pudo preverse del todo, y debe nombrarse. Más allá de la mudanza y el ajetreo y la predicación aburrida, una gran cantidad ha sido expulsada por <em>heridas</em> — por conflicto, sí, pero también por las fallas y los escándalos de líderes y por iglesias que probaron ser inseguras. Algunos han pasado por el largo reexamen de la fe ahora llamado deconstrucción. La tarea pastoral que esta unidad identificó — <em>la reparación de relaciones rotas</em> — es por tanto más grande y más urgente que nunca, y ahora incluye humildad acerca de los propios pecados de la iglesia y una puerta sostenida genuinamente abierta a aquellos que la iglesia misma ha herido."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "038459e3b740"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "But here is the hope, and it is the right note to end the whole\ncourse on. That same back door swings <em>both ways.</em> The great\ncompany who left did not, for the most part, slam the door behind them —\nabout half of them say they would consider coming back, and they are\nwaiting, very often, for nothing more than an honest invitation and a\nreal friend. Which means the three ratios are not merely a way to\n<em>keep</em> the people you have; they are now the strategy to <em>win\nback</em> the people you lost. The friend a returning believer needs is\nthe seven-to-one friendship ratio. The place to belong is the\nseven-groups-per-hundred. The reason to stay is the role that says\n<em>you are needed here.</em> And the relentless contact we learned in\nthe Sunday School unit — keep the name on the roll, reach for every soul\n— is simply the open back door watched from the inside.",
+    "es": "Pero aquí está la esperanza, y es la nota correcta para terminar todo el curso. Esa misma puerta de atrás se abre en <em>ambos sentidos.</em> La gran compañía que se fue no, en su mayor parte, dio un portazo al salir — cerca de la mitad de ellos dice que consideraría volver, y esperan, muy a menudo, nada más que una invitación honesta y un amigo real. Lo cual significa que las tres proporciones no son meramente una manera de <em>conservar</em> a la gente que tiene; son ahora la estrategia para <em>recuperar</em> a la gente que perdió. El amigo que un creyente que regresa necesita es la proporción de amistad de siete a uno. El lugar para pertenecer es el de siete grupos por cien. La razón para quedarse es el papel que dice <em>se te necesita aquí.</em> Y el contacto incansable que aprendimos en la unidad de la Escuela Dominical — conserve el nombre en la lista, alcance a cada alma — es sencillamente la puerta de atrás vigilada desde adentro."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6966d185cc6b"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "So we end where the whole course has pointed. We have spoken of\ngathering, of forming, of keeping — front door, formation, back door.\nBut all of it comes down to people, known and reached and loved into a\nbody, and held there not by programs but by belonging. <em>I will build\nmy church,</em> the Lord said, and the gates of hell shall not prevail\nagainst it. Our part is small and our part is glorious: to swing wide\nthe front door, to form disciples within, and to stand at the back door\nwith a hand outstretched — so that of all the Father gives us, by His\ngrace, we lose none. The harvest is His. The growth is His. We are only,\nand gladly, the laborers in His field.",
+    "es": "Así que terminamos donde todo el curso ha apuntado. Hemos hablado de reunir, de formar, de conservar — puerta de entrada, formación, puerta de atrás. Pero todo se reduce a personas, conocidas y alcanzadas y amadas hasta entrar en un cuerpo, y sostenidas allí no por programas sino por la pertenencia. <em>Edificaré mi iglesia,</em> dijo el Señor, y las puertas del infierno no prevalecerán contra ella. Nuestra parte es pequeña y nuestra parte es gloriosa: abrir de par en par la puerta de entrada, formar discípulos dentro, y pararnos en la puerta de atrás con la mano extendida — para que de todo lo que el Padre nos da, por Su gracia, no perdamos a ninguno. La mies es Suya. El crecimiento es Suyo. Somos solo, y con gozo, los obreros en Su campo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cfc9b20458db"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "Unit 12 Final Exam — 30 Questions",
+    "es": "Examen Final — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7c3d3c326fb3"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. <strong>Fail the multiple-choice (1–20) and it locks for 2 minutes; fail the master's-level short answer (21–30) and it locks for 15 minutes.</strong>",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. <strong>Si reprueba la opción múltiple (1–20), se bloquea por 2 minutos; si reprueba la respuesta corta de nivel de maestría (21–30), se bloquea por 15 minutos.</strong>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ae2e1c03d51e"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

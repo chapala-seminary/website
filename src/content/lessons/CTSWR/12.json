@@ -1,0 +1,530 @@
+{
+ "course": "CTSWR",
+ "unit": 12,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<a href=\"index.html\" style=\"display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif\">📚 Catalog / Catálogo</a>\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"prevUnitBtn\">← Previous</button>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>View Certificate →</button>\n    </div>\n</div>\n<div class=\"lang-toggle-group\" style=\"display:inline-block;margin-bottom:15px;\">\n<button class=\"toggle-btn\" data-lang=\"en\" id=\"langBtnEn\">English</button>\n<button class=\"toggle-btn\" data-lang=\"es\" id=\"langBtnEs\">Español</button>\n<button class=\"toggle-btn\" data-lang=\"both\" id=\"langBtnBoth\">Both / Ambos</button>\n</div>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #5b3a1f;\"><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"registrationCard\">\n    <h2><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n    <label><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></label>\n    <input type=\"text\" id=\"regName\" placeholder=\"\" >\n    <label><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></label>\n    <input type=\"email\" id=\"regEmail\" placeholder=\"\" >\n    <label><span class=\"lang-en\"><!--cts:b008:en--></span><span class=\"lang-es\"><!--cts:b008:es--></span></label>\n    <input type=\"text\" id=\"regCountry\" placeholder=\"\" >\n    <label><span class=\"lang-en\"><!--cts:b009:en--></span><span class=\"lang-es\"><!--cts:b009:es--></span></label>\n    <input type=\"hidden\" id=\"regTrack\" value=\"certificate\" >\n    <div id=\"trackButtons\" style=\"display:flex;flex-direction:column;gap:8px;margin:6px 0 12px;\">\n        <button type=\"button\" class=\"track-opt\" data-track=\"certificate\"><span class=\"lang-en\"><!--cts:b010:en--></span><span class=\"lang-es\"><!--cts:b010:es--></span></button>\n        <button type=\"button\" class=\"track-opt\" data-track=\"mdiv\"><span class=\"lang-en\"><!--cts:b011:en--></span><span class=\"lang-es\"><!--cts:b011:es--></span></button>\n        <button type=\"button\" class=\"track-opt\" data-track=\"thm\"><span class=\"lang-en\"><!--cts:b012:en--></span><span class=\"lang-es\"><!--cts:b012:es--></span></button>\n    </div>\n    <button class=\"small\" id=\"saveRegBtn\" style=\"margin-top: 10px;\"><span class=\"lang-en\"><!--cts:b013:en--></span><span class=\"lang-es\"><!--cts:b013:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\" id=\"teachingContent\">\n    <div class=\"lang-en\">\n        <h2><!--cts:b014:en--></h2>\n        <p><!--cts:b015:en--></p>\n\n        <p><!--cts:b016:en--></p>\n\n        <p><!--cts:b017:en--></p>\n\n        <h2><!--cts:b018:en--></h2>\n        <p><!--cts:b019:en--></p>\n\n        <p><!--cts:b020:en--></p>\n\n        <p><!--cts:b021:en--></p>\n\n        <h2><!--cts:b022:en--></h2>\n        <p><!--cts:b023:en--></p>\n\n        <p><!--cts:b024:en--></p>\n\n        <p><!--cts:b025:en--></p>\n\n        <h2><!--cts:b026:en--></h2>\n        <p><!--cts:b027:en--></p>\n\n        <p><!--cts:b028:en--></p>\n\n        <p><!--cts:b029:en--></p>\n\n        <h2><!--cts:b030:en--></h2>\n        <p><!--cts:b031:en--></p>\n\n        <p><!--cts:b032:en--></p>\n\n        <p style=\"text-align: center; margin-top: 30px; font-weight: bold;\"><!--cts:b033:en--></p>\n\n    </div>\n\n    <div class=\"lang-es\">\n        <h2><!--cts:b014:es--></h2>\n        <p><!--cts:b015:es--></p>\n\n        <p><!--cts:b016:es--></p>\n\n        <p><!--cts:b017:es--></p>\n\n        <h2><!--cts:b018:es--></h2>\n        <p><!--cts:b019:es--></p>\n\n        <p><!--cts:b020:es--></p>\n\n        <p><!--cts:b021:es--></p>\n\n        <h2><!--cts:b022:es--></h2>\n        <p><!--cts:b023:es--></p>\n\n        <p><!--cts:b024:es--></p>\n\n        <p><!--cts:b025:es--></p>\n\n        <h2><!--cts:b026:es--></h2>\n        <p><!--cts:b027:es--></p>\n\n        <p><!--cts:b028:es--></p>\n\n        <p><!--cts:b029:es--></p>\n\n        <h2><!--cts:b030:es--></h2>\n        <p><!--cts:b031:es--></p>\n\n        <p><!--cts:b032:es--></p>\n\n        <p style=\"text-align: center; margin-top: 30px; font-weight: bold;\"><!--cts:b033:es--></p>\n\n    </div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b034:en--></span><span class=\"lang-es\"><!--cts:b034:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b035:en--></span>\n       <span class=\"lang-es\"><!--cts:b035:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b036:en--></span><span class=\"lang-es\"><!--cts:b036:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small reset\"><span class=\"lang-en\"><!--cts:b037:en--></span><span class=\"lang-es\"><!--cts:b037:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n  \n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSWRReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "🌍 World Religions — Unit 12: A Theology of Religions (Capstone)",
+    "es": "🌍 Religiones del Mundo — Unidad 12: Una Teología de las Religiones (Unidad Culminante)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b3bc3b913833"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "\"Go therefore and make disciples of all the nations... teaching them to observe all things that I have commanded you; and lo, I am with you always, even to the end of the age.\" — Matthew 28:19–20 (NKJV)",
+    "es": "\"Por tanto, id, y haced discípulos a todas las naciones... enseñándoles que guarden todas las cosas que os he mandado; y he aquí yo estoy con vosotros todos los días, hasta el fin del mundo.\" — Mateo 28:19–20 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "72bef568191b"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "Student Registration",
+    "es": "Registro del Estudiante"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f94d495eed0d"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "Please register before beginning this unit. Your registration is saved on this device and used across all CTS courses.",
+    "es": "Por favor regístrese antes de comenzar esta unidad. Su registro se guarda en este dispositivo y se usa en todos los cursos del CTS."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2330ea9c37a9"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Full Name",
+    "es": "Nombre Completo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "64346b483c0a"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Email",
+    "es": "Correo Electrónico"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "84add5b29527"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "Country",
+    "es": "País"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d523ebbd1014"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "Program Track",
+    "es": "Programa"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ec4b83520350"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "Certificate of Ministry",
+    "es": "Certificado de Ministerio"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4df6d896eb72"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Master of Divinity (M.Div.)",
+    "es": "Maestría en Divinidad (M.Div.)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8400c8c4d874"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "Master of Theology (Th.M.)",
+    "es": "Maestría en Teología (Th.M.)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a31c66296633"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "Save Registration",
+    "es": "Guardar Registro"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "019798420daf"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "heading",
+   "text": {
+    "en": "Orientation",
+    "es": "Orientación"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "86e4e3875420"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "Eleven units ago, this course opened with Paul standing among the altars of Athens, provoked in spirit yet patient in method, building a bridge from what the Athenians already believed toward the God they did not yet know. This final unit closes the same way it began, because everything in between has been an extended exercise in learning to do what Paul did: understand a religious world honestly, name clearly where it echoes truth and where it departs from it, and proclaim Christ without contempt and without compromise. This capstone unit does not introduce new content so much as it gathers the whole course into a single, coherent theology of religions — an answer to the question every unit has been circling: given everything we now know about how the nations have sought God, what should the church actually believe, and do, about the religious world around it?",
+    "es": "Hace once unidades, este curso se abrió con Pablo de pie entre los altares de Atenas, provocado en espíritu pero paciente en método, construyendo un puente desde lo que los atenienses ya creían hacia el Dios que todavía no conocían. Esta unidad final cierra de la misma manera en que comenzó, porque todo lo que hay en medio ha sido un ejercicio extendido de aprender a hacer lo que Pablo hizo: entender un mundo religioso con honestidad, nombrar con claridad dónde hace eco de la verdad y dónde se aparta de ella, y proclamar a Cristo sin desprecio y sin compromiso. Esta unidad culminante no introduce contenido nuevo tanto como reúne todo el curso en una sola teología coherente de las religiones — una respuesta a la pregunta que cada unidad ha estado rodeando: dado todo lo que ahora sabemos acerca de cómo las naciones han buscado a Dios, ¿qué debería realmente creer, y hacer, la iglesia acerca del mundo religioso que la rodea?"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "57f1ba8a4273"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "Before drawing the threads together, it is worth remembering the full distance this course has traveled. From the universal religious impulse in Unit 1, through Judaism and Islam's shared Abrahamic roots, through Hinduism, Buddhism, Chinese religion, and Sikhism's very different pictures of ultimate reality, through the modern movements of Unit 8, the comparative synthesis of Unit 9, the apologetic method of Unit 10, and the folk traditions of Cuba and Mexico in Unit 11 — you have surveyed, in twelve units, a genuine cross-section of how humanity has sought, worshiped, and misunderstood the God who made it. This unit asks what all of that adds up to.",
+    "es": "Antes de reunir los hilos, vale la pena recordar toda la distancia que este curso ha recorrido. Desde el impulso religioso universal en la Unidad 1, a través de las raíces abrahámicas compartidas del judaísmo y el islam, a través de los cuadros muy diferentes de la realidad última del hinduismo, el budismo, la religión china, y el sijismo, a través de los movimientos modernos de la Unidad 8, la síntesis comparativa de la Unidad 9, el método apologético de la Unidad 10, y las tradiciones populares de Cuba y México en la Unidad 11 — usted ha estudiado, en doce unidades, un corte transversal genuino de cómo la humanidad ha buscado, adorado, y malentendido al Dios que la hizo. Esta unidad pregunta a qué se suma todo eso."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "21814a2fed02"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "It is worth being honest about what this final unit cannot do. It cannot condense eleven units of careful, tradition-by-tradition study into a shortcut that replaces the specific knowledge each prior unit built. A pastor tempted to skip ahead to this capstone without having done the work of Units 2 through 11 will find here a framework with nothing to hang it on — the four-question comparison, the apologetic method, and the charge this unit issues all depend on the specific content those earlier units supplied. What this unit offers instead is the connective tissue: the theological account of why the course was organized the way it was, and what the whole of it demands of a working pastor once the course itself has ended.",
+    "es": "Vale la pena ser honesto acerca de lo que esta unidad final no puede hacer. No puede condensar once unidades de estudio cuidadoso, tradición por tradición, en un atajo que reemplace el conocimiento específico que cada unidad anterior construyó. Un pastor tentado a saltar directamente a esta unidad culminante sin haber hecho el trabajo de las Unidades 2 a 11 encontrará aquí un marco sin nada de qué colgarlo — la comparación de cuatro preguntas, el método apologético, y el encargo que emite esta unidad todos dependen del contenido específico que suministraron esas unidades anteriores. Lo que esta unidad ofrece en cambio es el tejido conectivo: el relato teológico de por qué el curso se organizó de la manera en que se organizó, y qué exige el conjunto del curso de un pastor en funciones una vez que el curso mismo ha terminado."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d14b87aeba33"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "heading",
+   "text": {
+    "en": "I. Three Positions, Revisited",
+    "es": "I. Tres posturas, revisitadas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "752476461423"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "Unit 1 introduced, but deliberately did not resolve, the debate between exclusivism, inclusivism, and pluralism, promising this capstone unit would treat it more fully. That promise is kept here. <em>Exclusivism</em> holds that explicit, conscious faith in Jesus Christ is necessary for salvation; general revelation leaves all people without excuse (Romans 1:20) but does not itself save. Exclusivists appeal to texts like John 14:6 and Acts 4:12, and to the New Testament's consistent missionary urgency — if the unevangelized could be saved through general revelation alone, Paul's willingness to be shipwrecked, beaten, and imprisoned to bring them the gospel becomes difficult to explain. <em>Inclusivism</em>, associated historically with theologians like Karl Rahner and, among evangelicals, cautiously explored by figures like John Sanders and Clark Pinnock, holds that Christ's atoning work remains the sole ground of salvation for anyone ever saved, but allows that God may apply its benefits to some who respond in genuine faith to the light they have received, even without explicit gospel knowledge — appealing to figures like Melchizedek and Job, who appear to know and worship the true God without belonging to Israel's covenant community, and to Cornelius in Acts 10, whose prayers and alms \"came up as a memorial before God\" prior to hearing the gospel from Peter, though Cornelius still required Peter's preaching to be saved (Acts 11:14).",
+    "es": "La Unidad 1 introdujo, pero deliberadamente no resolvió, el debate entre el exclusivismo, el inclusivismo, y el pluralismo, prometiendo que esta unidad culminante lo trataría más plenamente. Esa promesa se cumple aquí. El <em>exclusivismo</em> sostiene que la fe explícita y consciente en Jesucristo es necesaria para la salvación; la revelación general deja a todas las personas sin excusa (Romanos 1:20) pero no salva por sí misma. Los exclusivistas apelan a textos como Juan 14:6 y Hechos 4:12, y a la constante urgencia misionera del Nuevo Testamento — si los no evangelizados pudieran salvarse solo a través de la revelación general, la disposición de Pablo a naufragar, ser golpeado, y encarcelado para llevarles el evangelio se vuelve difícil de explicar. El <em>inclusivismo</em>, asociado históricamente con teólogos como Karl Rahner y, entre evangélicos, explorado con cautela por figuras como John Sanders y Clark Pinnock, sostiene que la obra expiatoria de Cristo sigue siendo el único fundamento de la salvación para cualquiera que alguna vez sea salvo, pero permite que Dios pueda aplicar sus beneficios a algunos que responden con fe genuina a la luz que han recibido, incluso sin conocimiento explícito del evangelio — apelando a figuras como Melquisedec y Job, que parecen conocer y adorar al Dios verdadero sin pertenecer a la comunidad del pacto de Israel, y a Cornelio en Hechos 10, cuyas oraciones y limosnas \"subieron para memoria delante de Dios\" antes de escuchar el evangelio de Pedro, aunque Cornelio todavía requirió la predicación de Pedro para ser salvo (Hechos 11:14)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "acc1b8bd5f28"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "<em>Pluralism</em>, associated with philosophers like John Hick, holds that multiple religious paths lead equally to God or ultimate reality, treating claims of Christ's uniqueness as one culturally conditioned perspective among others equally valid. This course has consistently declined to treat pluralism as a live option for a Christian minister, and Unit 9's comparative work explained why: the traditions surveyed do not merely differ in surface ritual but contradict one another on the most basic questions of what is real, making the claim that they all lead to the same destination a claim none of the traditions themselves would recognize as an honest description of what they teach. Between exclusivism and inclusivism, however, this course has maintained throughout that faithful, Bible-believing pastors have genuinely disagreed for generations, and this unit does not resolve that disagreement for you. What this unit does insist on is that both positions agree on far more than they disagree: both affirm salvation is through Christ's atoning work alone, both affirm the necessity and urgency of world missions, and neither position offers grounds for the pastoral complacency pluralism invites.",
+    "es": "El <em>pluralismo</em>, asociado con filósofos como John Hick, sostiene que múltiples caminos religiosos llevan por igual a Dios o a la realidad última, tratando las afirmaciones de la singularidad de Cristo como una perspectiva culturalmente condicionada entre otras igualmente válidas. Este curso ha declinado consistentemente tratar el pluralismo como una opción viable para un ministro cristiano, y el trabajo comparativo de la Unidad 9 explicó por qué: las tradiciones estudiadas no meramente difieren en ritual superficial sino que se contradicen entre sí en las preguntas más básicas de qué es real, haciendo que la afirmación de que todas llevan al mismo destino sea una afirmación que ninguna de las tradiciones mismas reconocería como una descripción honesta de lo que enseñan. Entre el exclusivismo y el inclusivismo, sin embargo, este curso ha mantenido a lo largo que pastores fieles y creyentes en la Biblia han discrepado genuinamente durante generaciones, y esta unidad no resuelve ese desacuerdo por usted. Lo que esta unidad sí insiste es que ambas posturas concuerdan en mucho más de lo que discrepan: ambas afirman que la salvación es solo a través de la obra expiatoria de Cristo, ambas afirman la necesidad y urgencia de las misiones mundiales, y ninguna de las dos posturas ofrece fundamento para la complacencia pastoral que invita el pluralismo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "275d9481f988"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "It is worth naming plainly what is at stake in getting this distinction right. A pastor who quietly slides from inclusivism into functional pluralism — treating the possibility that God may save some through the light of general revelation as a reason missions is merely helpful rather than urgent — has abandoned a position this unit has actually described. Genuine inclusivism, as held by its careful evangelical proponents, has never treated the possibility of salvation apart from gospel proclamation as grounds for withholding that proclamation; if anything, Romans 10:14-15, examined below, presses every position studied in this unit toward the same missionary urgency, since even the inclusivist's own account of how \"the light they have received\" operates leaves the ordinary, commanded means of salvation as hearing and believing the preached word.",
+    "es": "Vale la pena nombrar claramente lo que está en juego al obtener esta distinción correctamente. Un pastor que silenciosamente se desliza del inclusivismo hacia el pluralismo funcional — tratando la posibilidad de que Dios pueda salvar a algunos a través de la luz de la revelación general como una razón por la cual las misiones son meramente útiles en lugar de urgentes — ha abandonado una postura que esta unidad realmente ha descrito. El inclusivismo genuino, tal como lo sostienen sus cuidadosos proponentes evangélicos, nunca ha tratado la posibilidad de salvación aparte de la proclamación del evangelio como fundamento para retener esa proclamación; si acaso, Romanos 10:14-15, examinado más abajo, presiona a cada postura estudiada en esta unidad hacia la misma urgencia misionera, ya que incluso el propio relato del inclusivista de cómo opera \"la luz que han recibido\" deja el medio ordinario y ordenado de salvación como oír y creer la palabra predicada."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6a505e66d8a1"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "heading",
+   "text": {
+    "en": "II. What Romans Actually Teaches About the Unevangelized",
+    "es": "II. Lo que Romanos realmente enseña acerca de los no evangelizados"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ebfeab863428"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "The sharpest form of this question — what becomes of a person who never hears the gospel through no fault of his own — deserves direct engagement with the text most commonly cited on both sides. Romans 1:18-20 teaches that general revelation through creation is sufficient to render all people \"without excuse,\" but explicitly for the purpose of establishing universal guilt, not universal salvation: \"although they knew God, they did not glorify Him as God\" (Romans 1:21). Romans 2:14-16 extends this to the moral law written on the heart, \"their conscience also bearing witness,\" again in a passage whose surrounding argument (Romans 3:9-20, 23) concludes that \"all have sinned and fall short of the glory of God\" — general revelation establishes accountability, and Paul's argument moves from it directly to universal condemnation, not to an alternate path of salvation running alongside the gospel.",
+    "es": "La forma más aguda de esta pregunta — qué sucede con una persona que nunca escucha el evangelio sin culpa propia — merece un compromiso directo con el texto más comúnmente citado en ambos lados. Romanos 1:18-20 enseña que la revelación general a través de la creación es suficiente para hacer a todas las personas \"inexcusables,\" pero explícitamente con el propósito de establecer la culpa universal, no la salvación universal: \"habiendo conocido a Dios, no le glorificaron como a Dios\" (Romanos 1:21). Romanos 2:14-16 extiende esto a la ley moral escrita en el corazón, \"dando testimonio su conciencia,\" de nuevo en un pasaje cuyo argumento circundante (Romanos 3:9-20, 23) concluye que \"todos pecaron, y están destituidos de la gloria de Dios\" — la revelación general establece la rendición de cuentas, y el argumento de Pablo se mueve desde ella directamente hacia la condenación universal, no hacia un camino alternativo de salvación que corra junto al evangelio."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "20899494a408"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "Romans 10:13-15 then asks the question most directly relevant to missions: \"how then shall they call on Him in whom they have not believed? And how shall they believe in Him of whom they have not heard? And how shall they hear without a preacher? And how shall they preach unless they are sent?\" The rhetorical structure of this passage assumes hearing and believing the preached gospel as the ordinary means of salvation, which is precisely why Paul immediately pivots to the urgency of sending: \"how beautiful are the feet of those who preach the gospel of peace.\" Whatever room a pastor believes Scripture leaves for God's mercy toward those who have never heard — and this unit leaves that question, as Unit 1 promised, for the pastor's own careful study rather than resolving it by fiat — Romans itself treats the sending of preachers, not confidence in an alternate path, as the church's actual responsibility and this passage's own emphasis.",
+    "es": "Romanos 10:13-15 luego hace la pregunta más directamente relevante para las misiones: \"¿cómo, pues, invocarán a aquel en el cual no han creído? ¿Y cómo creerán en aquel de quien no han oído? ¿Y cómo oirán sin haber quien les predique? ¿Y cómo predicarán si no fueren enviados?\" La estructura retórica de este pasaje asume el oír y creer el evangelio predicado como el medio ordinario de salvación, que es precisamente por qué Pablo inmediatamente gira hacia la urgencia del envío: \"¡Cuán hermosos son los pies de los que anuncian la paz!\" Cualquier espacio que un pastor crea que la Escritura deja para la misericordia de Dios hacia quienes nunca han oído — y esta unidad deja esa pregunta, como prometió la Unidad 1, para el propio estudio cuidadoso del pastor en lugar de resolverla por decreto — Romanos mismo trata el envío de predicadores, no la confianza en un camino alternativo, como la responsabilidad real de la iglesia y el propio énfasis de este pasaje."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2c1c07948610"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "Notice, too, what Paul does not do in this passage. He does not pause to speculate confidently about the eternal fate of those the church has not yet reached, weighing exclusivist against inclusivist possibilities before deciding whether sending is worth the cost. He treats the question as settled in the only direction that actually matters for the church's practice: people need to hear, therefore preachers must be sent, therefore the church must send them. A pastor who has spent eleven units learning to understand other religious systems with genuine care should let that same care sharpen, rather than dull, this missionary urgency — the better a pastor understands what a Muslim, a Buddhist, or a santera actually believes, the more clearly he should see exactly what the gospel offers that their own system cannot supply, and the more urgent, not less, the task of bringing it to them becomes.",
+    "es": "Note, también, lo que Pablo no hace en este pasaje. No se detiene a especular confiadamente acerca del destino eterno de aquellos a quienes la iglesia todavía no ha alcanzado, sopesando posibilidades exclusivistas contra inclusivistas antes de decidir si el envío vale el costo. Trata la pregunta como resuelta en la única dirección que realmente importa para la práctica de la iglesia: la gente necesita oír, por lo tanto los predicadores deben ser enviados, por lo tanto la iglesia debe enviarlos. Un pastor que ha pasado once unidades aprendiendo a entender otros sistemas religiosos con cuidado genuino debe dejar que ese mismo cuidado agudice, en lugar de embotar, esta urgencia misionera — mientras mejor entienda un pastor lo que realmente cree un musulmán, un budista, o una santera, más claramente debería ver exactamente qué ofrece el evangelio que su propio sistema no puede suministrar, y más urgente, no menos, se vuelve la tarea de llevárselo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "24df4c110fb6"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "heading",
+   "text": {
+    "en": "III. The Great Commission as the Church's Answer",
+    "es": "III. La Gran Comisión como la respuesta de la iglesia"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9e0094421682"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "Whatever position a pastor holds on the fate of the unevangelized, Scripture leaves no ambiguity about what the church is commanded to do about it. Matthew 28:18-20, the Great Commission, follows directly from Christ's claim to \"all authority in heaven and on earth\" — the missionary mandate is not a suggestion offered alongside competing priorities but a command issued by the risen, universally authoritative Christ, extending to \"all the nations,\" a phrase that would have included, for its first hearers, every tradition this course has surveyed. This is the practical payoff of eleven units of comparative study: not academic curiosity about other religions, but equipping for exactly the task Christ commanded, carried out with exactly the posture Paul modeled at the Areopagus — patient understanding joined to clear proclamation, aimed not at winning arguments but making disciples, \"teaching them to observe all things\" Christ commanded, a lifelong process of discipleship rather than a single decisive conversation.",
+    "es": "Cualquiera que sea la postura que un pastor sostenga acerca del destino de los no evangelizados, la Escritura no deja ambigüedad acerca de lo que la iglesia está mandada a hacer al respecto. Mateo 28:18-20, la Gran Comisión, sigue directamente de la afirmación de Cristo de \"toda potestad... en el cielo y en la tierra\" — el mandato misionero no es una sugerencia ofrecida junto a prioridades en competencia sino un mandato emitido por el Cristo resucitado y universalmente autoritativo, que se extiende a \"todas las naciones,\" una frase que habría incluido, para sus primeros oyentes, cada tradición que este curso ha estudiado. Esta es la recompensa práctica de once unidades de estudio comparativo: no curiosidad académica acerca de otras religiones, sino equipamiento para exactamente la tarea que Cristo mandó, llevada a cabo con exactamente la postura que Pablo modeló en el Areópago — comprensión paciente unida a proclamación clara, dirigida no a ganar argumentos sino a hacer discípulos, \"enseñándoles que guarden todas las cosas\" que Cristo mandó, un proceso de discipulado de toda la vida en lugar de una sola conversación decisiva."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5dd8b3e629b1"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "The scope of this course itself has been a small enactment of the Commission's scope. Judaism and Islam, the traditions closest to the church's own Abrahamic roots; Hinduism, Buddhism, Sikhism, and Chinese religion, traditions that developed entirely independently across Asia; the modern movements examined in Unit 8; and the folk traditions woven into the daily life of Cuba and Mexico in Unit 11 — together represent a genuine cross-section of \"all the nations\" Christ commanded His church to reach. A pastor who has completed this course carries knowledge few pastors anywhere possess: an accurate, respectful, and theologically clear understanding of how the great majority of the world's population actually understands God, salvation, and the human condition, together with a tested method for engaging every one of them with the gospel.",
+    "es": "El alcance de este curso mismo ha sido una pequeña puesta en práctica del alcance de la Comisión. El judaísmo y el islam, las tradiciones más cercanas a las propias raíces abrahámicas de la iglesia; el hinduismo, el budismo, el sijismo, y la religión china, tradiciones que se desarrollaron enteramente independientes a través de Asia; los movimientos modernos examinados en la Unidad 8; y las tradiciones populares entretejidas en la vida diaria de Cuba y México en la Unidad 11 — juntas representan un corte transversal genuino de \"todas las naciones\" que Cristo mandó a Su iglesia alcanzar. Un pastor que ha completado este curso lleva un conocimiento que pocos pastores en cualquier lugar poseen: un entendimiento preciso, respetuoso, y teológicamente claro de cómo la gran mayoría de la población mundial realmente entiende a Dios, la salvación, y la condición humana, junto con un método probado para relacionarse con cada uno de ellos con el evangelio."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3ea493f205fa"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "None of this knowledge, it is worth stressing one final time, is an end in itself. Every unit in this course has warned against the temptation to treat comparative religious knowledge as an academic trophy rather than a pastoral tool, and this final unit repeats that warning with the full weight of everything the course has covered behind it. Knowledge of Islam's Five Pillars that never leads to an actual conversation with an actual Muslim neighbor has failed its purpose. Understanding of Buddhism's diagnosis of suffering that never comforts an actual grieving parishioner drawn to meditation has failed its purpose. The entire value of this course is realized only in the ordinary, unglamorous work of pastoral ministry — a conversation on a doorstep, a question answered honestly in a hospital room, a new believer patiently discipled out of years of Santería practice — not in the possession of facts for their own sake.",
+    "es": "Nada de este conocimiento, vale la pena subrayarlo una última vez, es un fin en sí mismo. Cada unidad de este curso ha advertido contra la tentación de tratar el conocimiento religioso comparativo como un trofeo académico en lugar de una herramienta pastoral, y esta unidad final repite esa advertencia con todo el peso de todo lo que el curso ha cubierto detrás de ella. El conocimiento de los Cinco Pilares del islam que nunca lleva a una conversación real con un vecino musulmán real ha fallado su propósito. El entendimiento del diagnóstico budista del sufrimiento que nunca consuela a un feligrés real que sufre y se siente atraído a la meditación ha fallado su propósito. El valor entero de este curso se realiza solo en el trabajo ordinario y poco glamoroso del ministerio pastoral — una conversación en un umbral, una pregunta respondida honestamente en una habitación de hospital, un nuevo creyente pacientemente discipulado fuera de años de práctica de Santería — no en la posesión de hechos por sí mismos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "38e5383c70f6"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "heading",
+   "text": {
+    "en": "IV. A Charge to the Graduate",
+    "es": "IV. Un encargo para el graduado"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "10274293ec72"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "You began this course with Paul at the Areopagus, and you end it there as well, because that posture — careful observation before confrontation, genuine respect joined to unflinching proclamation, patience toward the person combined with clarity about the truth — is not a technique this course taught you to deploy once and set aside, but a lifelong pastoral disposition. The knowledge you now carry, of Judaism's covenant, Islam's submission, Hinduism's karma, Buddhism's craving, Chinese filial piety, Sikhism's equality, the modern movements' borrowed vocabulary, and the folk traditions of your own Cuban and Mexican context, is not trivia to display but understanding to deploy in service of actual people God has placed in your path — a neighbor, a family member, a stranger at your door, each one, in Paul's words, \"not far from\" the God who made them, groping toward a truth this course has equipped you to proclaim with both accuracy and love.",
+    "es": "Usted comenzó este curso con Pablo en el Areópago, y también lo termina allí, porque esa postura — observación cuidadosa antes de la confrontación, respeto genuino unido a proclamación inquebrantable, paciencia hacia la persona combinada con claridad acerca de la verdad — no es una técnica que este curso le enseñó para desplegar una vez y dejar de lado, sino una disposición pastoral de toda la vida. El conocimiento que ahora lleva, del pacto judío, la sumisión islámica, el karma hindú, el anhelo budista, la piedad filial china, la igualdad sij, el vocabulario prestado de los movimientos modernos, y las tradiciones populares de su propio contexto cubano y mexicano, no es trivia para exhibir sino entendimiento para desplegar al servicio de personas reales que Dios ha puesto en su camino — un vecino, un familiar, un extraño en su puerta, cada uno, en palabras de Pablo, \"no lejos de\" el Dios que lo hizo, buscando a tientas una verdad que este curso lo ha equipado para proclamar con precisión y amor a la vez."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f0f2a497f101"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "prose",
+   "text": {
+    "en": "Scripture closes the New Testament with a vision of every nation, tribe, people, and tongue gathered before the throne (Revelation 7:9) — the ultimate answer to every religious system this course has studied, each of which, in its own way, has been reaching toward a unity and a peace only the Lamb who was slain can actually provide. You are commissioned, as every pastor is commissioned, to labor toward that vision in the small, particular corner of it God has assigned you: the specific neighbors, the specific families, the specific congregation He has placed under your care. Go, therefore, and make disciples — not of an abstraction called \"the nations,\" but of the actual Muslim, Buddhist, Santero, and secular neighbor this course has prepared you to meet with the same patient love and unyielding truth Paul carried onto Mars Hill nearly two thousand years ago. The course is finished. The work it prepared you for is only beginning.",
+    "es": "La Escritura cierra el Nuevo Testamento con una visión de toda nación, tribu, pueblo, y lengua reunidos delante del trono (Apocalipsis 7:9) — la respuesta última a cada sistema religioso que este curso ha estudiado, cada uno de los cuales, a su propia manera, ha estado alcanzando hacia una unidad y una paz que solo el Cordero que fue inmolado puede realmente proveer. Usted está comisionado, como todo pastor está comisionado, a trabajar hacia esa visión en el pequeño rincón particular de ella que Dios le ha asignado: los vecinos específicos, las familias específicas, la congregación específica que Él ha puesto bajo su cuidado. Vaya, por lo tanto, y haga discípulos — no de una abstracción llamada \"las naciones,\" sino del musulmán real, el budista real, el santero real, y el vecino secular real que este curso lo ha preparado para encontrar con el mismo amor paciente y verdad inquebrantable que Pablo llevó al Areópago hace casi dos mil años. El curso ha terminado. La obra para la cual lo preparó apenas comienza."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "55a48f343e87"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "— Dr. Wayne Cook<br>Chapala Theological Seminary",
+    "es": "— Dr. Wayne Cook<br>Seminario Teológico de Chapala"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7778fcb9bb8c"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "prose",
+   "text": {
+    "en": "Unit 12 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 12 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7c3d3c326fb3"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. <strong>If you fail, the unit locks for 15 minutes.</strong>",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. <strong>Si reprueba, se bloquea por 15 minutos.</strong>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d3b8e78884d7"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar &amp; Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b037",
+   "type": "prose",
+   "text": {
+    "en": "Reset",
+    "es": "Reiniciar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "44c57abd888a"
+    }
+   }
+  }
+ ]
+}

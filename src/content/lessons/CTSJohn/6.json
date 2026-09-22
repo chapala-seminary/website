@@ -1,0 +1,544 @@
+{
+ "course": "CTSJohn",
+ "unit": 6,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right:15px; font-weight:bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Espa&ntilde;ol</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></p>\n    <p style=\"margin-top:10px; font-style:italic; color:#2f4f2f;\"><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\" style=\"display:none;\">\n    <h3><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></h3>\n    <p style=\"font-size:0.9rem;\"><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></p>\n    <label class=\"lang-en\"><!--cts:b008:en--></label><label class=\"lang-es\"><!--cts:b008:es--></label>\n    <input type=\"text\" id=\"regName\" placeholder=\"...\" aria-label=\"...\">\n    <label class=\"lang-en\"><!--cts:b009:en--></label><label class=\"lang-es\"><!--cts:b009:es--></label>\n    <input type=\"email\" id=\"regEmail\" placeholder=\"...\" aria-label=\"...\">\n    <label class=\"lang-en\"><!--cts:b010:en--></label><label class=\"lang-es\"><!--cts:b010:es--></label>\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate / Certificado</option>\n        <option value=\"mdiv\">M.Div.</option>\n        <option value=\"thm\">Th.M.</option>\n    </select>\n    <button id=\"regBtn\" class=\"nav-btn\"><span class=\"lang-en\"><!--cts:b011:en--></span><span class=\"lang-es\"><!--cts:b011:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top:8px;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\">\n\n<h3><!--cts:b012:en--></h3>\n<p><!--cts:b013:en--></p>\n\n<h3><!--cts:b014:en--></h3>\n<p><!--cts:b015:en--></p>\n\n<h3><!--cts:b016:en--></h3>\n<p><!--cts:b017:en--></p>\n<p><!--cts:b018:en--></p>\n<p><!--cts:b019:en--></p>\n<p><!--cts:b020:en--></p>\n<p><!--cts:b021:en--></p>\n<p><!--cts:b022:en--></p>\n<div class=\"illustration\"><!--cts:b023:en--></div>\n\n<h3><!--cts:b024:en--></h3>\n<p><!--cts:b025:en--></p>\n\n<h3><!--cts:b026:en--></h3>\n<p><!--cts:b027:en--></p>\n<p><!--cts:b028:en--></p>\n<p><!--cts:b029:en--></p>\n<div class=\"pull-quote\"><!--cts:b030:en--></div>\n<p><!--cts:b031:en--></p>\n\n<h3><!--cts:b032:en--></h3>\n<p><!--cts:b033:en--></p>\n<p><!--cts:b034:en--></p>\n\n</div>\n<div class=\"lang-es\">\n\n<h3><!--cts:b012:es--></h3>\n<p><!--cts:b013:es--></p>\n\n<h3><!--cts:b014:es--></h3>\n<p><!--cts:b015:es--></p>\n\n<h3><!--cts:b016:es--></h3>\n<p><!--cts:b017:es--></p>\n<p><!--cts:b018:es--></p>\n<p><!--cts:b019:es--></p>\n<p><!--cts:b020:es--></p>\n<p><!--cts:b021:es--></p>\n<p><!--cts:b022:es--></p>\n<div class=\"illustration\"><!--cts:b023:es--></div>\n\n<h3><!--cts:b024:es--></h3>\n<p><!--cts:b025:es--></p>\n\n<h3><!--cts:b026:es--></h3>\n<p><!--cts:b027:es--></p>\n<p><!--cts:b028:es--></p>\n<p><!--cts:b029:es--></p>\n<div class=\"pull-quote\"><!--cts:b030:es--></div>\n<p><!--cts:b031:es--></p>\n\n<h3><!--cts:b032:es--></h3>\n<p><!--cts:b033:es--></p>\n<p><!--cts:b034:es--></p>\n\n</div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b035:en--></span><span class=\"lang-es\"><!--cts:b035:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b036:en--></span>\n       <span class=\"lang-es\"><!--cts:b036:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top:20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b037:en--></span><span class=\"lang-es\"><!--cts:b037:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b038:en--></span><span class=\"lang-es\"><!--cts:b038:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top:15px; font-weight:bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top:10px; font-size:0.9rem; color:#1f6b3b; display:none;\"></div>\n    </div>\n</div>\n</div>\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSJohnReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "Unit 7 →",
+    "es": "Unidad 7 →"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0c9938797e8b"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "📖 The Gospel of John — Unit 6: The Witnesses to Christ",
+    "es": "📖 El Evangelio de Juan — Unidad 6: Los Testigos de Cristo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cf08a1530d2a"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "\"You search the Scriptures, for in them you think you have eternal life; and these are they which testify of Me.\" — John 5:39 (NKJV)",
+    "es": "⚡ \"Escudriñad las Escrituras, porque a vosotros os parece que en ellas tenéis la vida eterna; y ellas son las que dan testimonio de mí.\" — Juan 5:39 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f9876bb34847"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Register to Begin",
+    "es": "Regístrese para comenzar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "007cff4200ca"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Your name and track are saved on this device and carry across every unit and every CTS course.",
+    "es": "Su nombre y trayecto se guardan en este dispositivo y se conservan en cada unidad y curso de CTS."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c3782de1c2f1"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "label",
+   "text": {
+    "en": "Full name",
+    "es": "Nombre completo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "eeb692087d62"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "label",
+   "text": {
+    "en": "Email",
+    "es": "Correo electrónico"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "84add5b29527"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "label",
+   "text": {
+    "en": "Track",
+    "es": "Trayecto"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b1c5a7af06ba"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "heading",
+   "text": {
+    "en": "Introduction — The Court Is in Session",
+    "es": "Introducción — El tribunal está en sesión"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e7258f3fde71"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "John tells us exactly why he wrote his Gospel: <em>\"these are written that you may believe that Jesus is the Christ, the Son of God, and that believing you may have life in His name\"</em> (John 20:31). The whole book is built like a trial. A great claim is on the table — that this Man is God in the flesh — and John summons witness after witness to the stand so that the reader, like a juror, may weigh the evidence and render a verdict. In a Jewish court no charge could stand on one voice alone; \"by the mouth of two or three witnesses the matter shall be established\" (Deuteronomy 19:15). That law is wiser than we sometimes think. Modern studies have found that human eyewitness memory is mistaken far more often than we would ever expect, which is precisely why a single witness was never enough. But Jesus does not offer the bare minimum of two. He calls a whole chorus of witnesses, and they do not contradict one another; they agree. A juror who hears a single mistaken witness may rightly hesitate. But a juror who hears the Baptist, the works, the Father, the Scriptures, Moses, the Spirit, and a long line of changed lives all saying the same thing is left without excuse. That is exactly where John means to leave us.",
+    "es": "Juan nos dice exactamente por qué escribió su Evangelio: ⚡ <em>\"Pero éstas se han escrito para que creáis que Jesús es el Cristo, el Hijo de Dios; y para que creyendo, tengáis vida en su nombre\"</em> (Juan 20:31). Todo el libro está construido como un juicio. Hay una gran afirmación sobre la mesa — que este Hombre es Dios en carne — y Juan llama testigo tras testigo al estrado para que el lector, como un jurado, pese la evidencia y dicte un veredicto. En un tribunal judío ninguna acusación podía sostenerse sobre una sola voz; \"por boca de dos o de tres testigos se mantendrá la causa\" (Deuteronomio 19:15). Esa ley es más sabia de lo que a veces pensamos. Estudios modernos han hallado que la memoria de los testigos oculares se equivoca mucho más a menudo de lo que esperaríamos, y por eso un solo testigo nunca bastaba. Pero Jesús no ofrece el mínimo de dos. Llama a todo un coro de testigos, y no se contradicen; concuerdan. Un jurado que oye a un solo testigo equivocado puede con razón vacilar. Pero un jurado que oye al Bautista, las obras, el Padre, las Escrituras, Moisés, el Espíritu, y una larga fila de vidas cambiadas diciendo todos lo mismo queda sin excusa. Ahí es exactamente donde Juan quiere dejarnos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1e033e1a026f"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "heading",
+   "text": {
+    "en": "I. The Charge: Equal with God",
+    "es": "I. La acusación: igual a Dios"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "34d302225934"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "The trial comes to a head at the pool of Bethesda. There a man had been an invalid for thirty-eight years, and Jesus healed him with a word — on the Sabbath. Instead of rejoicing, the leaders were enraged, and John tells us why their anger turned murderous: <em>\"the Jews sought all the more to kill Him, because He not only broke the Sabbath, but also said that God was His Father, making Himself equal with God\"</em> (John 5:18). There is the charge. Jesus never denied it; He answered it — not by softening the claim, but by calling His witnesses.",
+    "es": "El juicio llega a su punto crítico en el estanque de Betesda. Allí un hombre había estado enfermo treinta y ocho años, y Jesús lo sanó con una palabra — en sábado. En vez de alegrarse, los líderes se enfurecieron, y Juan nos dice por qué su ira se volvió asesina: ⚡ <em>\"por esto los judíos aún más procuraban matarle, porque no sólo quebrantaba el sábado, sino que también decía que Dios era su Padre, haciéndose igual a Dios\"</em> (Juan 5:18). Ahí está la acusación. Jesús nunca la negó; la respondió — no suavizando la afirmación, sino llamando a sus testigos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4767954ea407"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "heading",
+   "text": {
+    "en": "II. The Witnesses Jesus Named",
+    "es": "II. Los testigos que Jesús nombró"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "adce58ba62b2"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "Standing before His accusers in John 5, Jesus called the roll of those who testify to who He is.",
+    "es": "De pie ante sus acusadores en Juan 5, Jesús pasó lista de los que dan testimonio de quién es."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "32026fe902f7"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "<strong>The witness of John the Baptist.</strong> He was, Jesus said, \"a burning and shining lamp\" (5:35), and that lamp had pointed away from itself: \"Behold! The Lamb of God who takes away the sin of the world\" (1:29). The Baptist's whole life was a finger pointing to Christ.",
+    "es": "<strong>El testimonio de Juan el Bautista.</strong> Era, dijo Jesús, \"antorcha que ardía y alumbraba\" (5:35), y esa lámpara había señalado lejos de sí misma: ⚡ \"He aquí el Cordero de Dios, que quita el pecado del mundo\" (1:29). Toda la vida del Bautista fue un dedo que apuntaba a Cristo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5e28e1d9da0a"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "<strong>The witness of His works.</strong> \"I have a greater witness than John's,\" Jesus said, \"for the works which the Father has given Me to finish — the very works that I do — bear witness of Me, that the Father has sent Me\" (5:36). The signs were not mere wonders; they were testimony, sworn evidence of His identity.",
+    "es": "<strong>El testimonio de sus obras.</strong> \"Mas yo tengo mayor testimonio que el de Juan\", dijo Jesús, \"porque las obras que el Padre me dio que cumpliese, las mismas obras que yo hago, dan testimonio de mí, que el Padre me ha enviado\" (5:36). Las señales no eran meras maravillas; eran testimonio, evidencia jurada de su identidad."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "95033d141ae8"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "<strong>The witness of the Father.</strong> \"The Father Himself, who sent Me, has testified of Me\" (5:37). This is the second witness the Law demanded, and it is the highest of all. As Jesus said elsewhere, \"I am One who bears witness of Myself, and the Father who sent Me bears witness of Me\" (8:18).",
+    "es": "<strong>El testimonio del Padre.</strong> \"Y el Padre que me envió, él ha dado testimonio de mí\" (5:37). Este es el segundo testigo que la Ley exigía, y es el más alto de todos. Como dijo Jesús en otro lugar, \"Yo soy el que doy testimonio de mí mismo; y el Padre que me envió da testimonio de mí\" (8:18)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "87437cf69504"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "<strong>The witness of the Scriptures.</strong> \"You search the Scriptures, for in them you think you have eternal life; and these are they which testify of Me\" (5:39). They had the witness in their hands and would not hear it.",
+    "es": "<strong>El testimonio de las Escrituras.</strong> \"Escudriñad las Escrituras... y ellas son las que dan testimonio de mí\" (5:39). Tenían el testimonio en sus manos y no quisieron oírlo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "994b14523f25"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "<strong>The witness of Moses.</strong> \"Do not think that I shall accuse you to the Father; there is one who accuses you — Moses... for he wrote about Me\" (5:45–46). The very lawgiver they trusted was a witness against their unbelief.",
+    "es": "<strong>El testimonio de Moisés.</strong> \"No penséis que yo voy a acusaros delante del Padre; hay quien os acusa, Moisés... porque de mí escribió él\" (5:45–46). El mismo legislador en quien confiaban era un testigo contra su incredulidad."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "be8d8dba0c9a"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "<strong>A third witness for our day.</strong> The Law required two witnesses; Jesus pointed to Himself and the Father. We may speak of a third, for the Lord promised, \"When the Helper comes... the Spirit of truth who proceeds from the Father, He will testify of Me\" (15:26). The Holy Spirit has never once stopped testifying of Christ — in the Scriptures He inspired, and in the heart of every believer He has made alive. The same Spirit who convinced you that Jesus is Lord is a living witness on the stand today.",
+    "es": "<strong>Un tercer testigo para nuestros días.</strong> La Ley exigía dos testigos; Jesús señaló a sí mismo y al Padre. Podemos hablar de un tercero, pues el Señor prometió: \"cuando venga el Consolador... el Espíritu de verdad, el cual procede del Padre, él dará testimonio de mí\" (15:26). El Espíritu Santo nunca ha dejado de dar testimonio de Cristo — en las Escrituras que inspiró, y en el corazón de cada creyente que ha vivificado. El mismo Espíritu que le convenció a usted de que Jesús es el Señor es hoy un testigo vivo en el estrado."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7c5a67369443"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "heading",
+   "text": {
+    "en": "III. Why His Own Testimony Stands",
+    "es": "III. Por qué su propio testimonio se sostiene"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "867b15e58ba3"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "When the Pharisees objected, \"You bear witness of Yourself; Your witness is not true,\" Jesus did not flinch. \"Even if I bear witness of Myself, My witness is true, for I know where I came from and where I am going; but you do not know\" (8:14). A liar can be tripped up because he is inventing; the Son speaks from firsthand knowledge of heaven, of the Father, of His own eternal origin. And He added that He did not stand alone: He and the Father together were the two witnesses the Law required. The verdict, then, does not rest on one disputed voice but on a Son who cannot be mistaken about Himself and a Father who seconds every word.",
+    "es": "Cuando los fariseos objetaron: \"Tú das testimonio de ti mismo; tu testimonio no es verdadero\", Jesús no vaciló. \"Aunque yo doy testimonio de mí mismo, mi testimonio es verdadero, porque sé de dónde he venido y a dónde voy; mas vosotros no sabéis\" (8:14). A un mentiroso se le puede atrapar porque inventa; el Hijo habla desde el conocimiento de primera mano del cielo, del Padre, de su propio origen eterno. Y añadió que no estaba solo: él y el Padre juntos eran los dos testigos que la Ley exigía. El veredicto, pues, no descansa en una sola voz disputada sino en un Hijo que no puede equivocarse acerca de sí mismo y un Padre que secunda cada palabra."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "494fc076451f"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "heading",
+   "text": {
+    "en": "IV. The Witnesses John Parades Before Us",
+    "es": "IV. Los testigos que Juan desfila ante nosotros"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8acf4469dd15"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "Beyond the witnesses Jesus named in court, John fills his Gospel with living witnesses — ordinary people whose changed lives testify louder than argument.",
+    "es": "Más allá de los testigos que Jesús nombró en el tribunal, Juan llena su Evangelio de testigos vivos — gente común cuyas vidas cambiadas testifican más fuerte que un argumento."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b82332b90ade"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "<strong>John the Baptist</strong> stands first, the herald who cried, \"Behold the Lamb of God,\" and sent his own followers after Jesus. <strong>The Samaritan woman</strong> ran into her town crying, \"Come, see a Man who told me all that I ever did. Could this be the Christ?\" — and many believed because of her word. <strong>The nobleman</strong> whose dying son Jesus healed at a distance did not keep the mercy to himself: \"he himself believed, and his whole household\" (4:53). <strong>The man born blind</strong>, hauled before the council and pressed to deny his Healer, gave one of the bravest testimonies in all Scripture: \"Whether He is a sinner or not I do not know. One thing I know: that though I was blind, now I see\" (9:25). And <strong>Mary Magdalene</strong>, weeping at an empty tomb, became the first witness of the resurrection, running to the disciples with the cry that has echoed ever since: \"I have seen the Lord!\" (20:18).",
+    "es": "<strong>Juan el Bautista</strong> está primero, el heraldo que clamó: \"He aquí el Cordero de Dios\", y envió a sus propios seguidores tras Jesús. <strong>La mujer samaritana</strong> corrió a su pueblo gritando: \"Venid, ved un hombre que me ha dicho todo cuanto he hecho. ¿No es éste el Cristo?\" — y muchos creyeron por su palabra. <strong>El noble</strong> cuyo hijo moribundo Jesús sanó a distancia no se guardó la misericordia: \"creyó él con toda su casa\" (4:53). <strong>El hombre que nació ciego</strong>, llevado ante el concilio y presionado a negar a su Sanador, dio uno de los testimonios más valientes de toda la Escritura: \"Si es pecador, no lo sé; una cosa sé: que habiendo yo sido ciego, ahora veo\" (9:25). Y <strong>María Magdalena</strong>, llorando ante una tumba vacía, llegó a ser la primera testigo de la resurrección, corriendo a los discípulos con el grito que ha resonado desde entonces: \"He visto al Señor\" (20:18)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9510a2866b94"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "Notice how unlikely a jury these make: a desert preacher, an immoral foreigner, a grieving father, a begging blind man, a woman out of whom seven demons had gone. Not one of them was a trained theologian. Yet each had met Jesus, and each could say what they had seen and heard.",
+    "es": "Note qué jurado tan improbable forman: un predicador del desierto, una extranjera inmoral, un padre afligido, un ciego mendigo, una mujer de quien habían salido siete demonios. Ninguno de ellos era un teólogo entrenado. Sin embargo, cada uno se había encontrado con Jesús, y cada uno podía decir lo que había visto y oído."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b0ae416812f1"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "That is the heart of a witness — not cleverness, but firsthand sight of Christ.",
+    "es": "Ese es el corazón de un testigo — no la astucia, sino haber visto a Cristo de primera mano."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "182b1aa5a514"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "And mark the cost some of them paid. The man born blind did not give his testimony in safety; he gave it under interrogation, knowing the price. His own parents, afraid of the authorities, dodged the question and threw it back on him: \"He is of age; ask him.\" The council warned him, then threatened him, and at last \"cast him out\" — put him out of the synagogue, cut off from the only religious community he had ever known. He bore witness anyway. A true witness does not wait until it is safe; he tells what he has seen because it is true and leaves the cost to God. So it has been ever since. The witnesses who built the church were not, for the most part, the powerful or the protected, but ordinary believers who had seen enough of Christ that no threat could make them unsay it. When the Spirit has opened a man's eyes, his quiet \"now I see\" will outlast every clever objection raised against it.",
+    "es": "Y note el precio que algunos pagaron. El hombre que nació ciego no dio su testimonio en seguridad; lo dio bajo interrogatorio, conociendo el costo. Sus propios padres, temerosos de las autoridades, esquivaron la pregunta y se la devolvieron a él: \"Edad tiene, preguntadle a él.\" El concilio lo amonestó, luego lo amenazó, y al fin \"le expulsaron\" — lo echaron de la sinagoga, cortado de la única comunidad religiosa que había conocido. Aun así dio testimonio. Un verdadero testigo no espera hasta que sea seguro; dice lo que ha visto porque es verdad y deja el costo a Dios. Así ha sido desde entonces. Los testigos que edificaron la iglesia no fueron, en su mayoría, los poderosos ni los protegidos, sino creyentes comunes que habían visto lo suficiente de Cristo como para que ninguna amenaza les hiciera retractarse. Cuando el Espíritu ha abierto los ojos de un hombre, su callado \"ahora veo\" sobrevivirá a toda objeción ingeniosa que se levante contra él."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "66e0ce2be449"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "heading",
+   "text": {
+    "en": "V. The Tragedy and the Verdict",
+    "es": "V. La tragedia y el veredicto"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9dc2b64575cd"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "With witnesses this many and this sure, you would think the case was closed. But Jesus laid bare the secret of unbelief in one piercing sentence: <em>\"You are not willing to come to Me that you may have life\"</em> (John 5:40). The problem was never a shortage of evidence; it was an unwillingness of the will. They would not come. And here John hands the case to us. He has set the witnesses before our eyes — the Baptist, the works, the Father, the Scriptures, Moses, the Spirit, and the long line of changed lives — and now he asks for our verdict. Will we, like the leaders, refuse to come? Or will we render the only honest verdict the evidence allows: that Jesus is the Christ, the Son of God, and in believing find life in His name?",
+    "es": "Con testigos tan numerosos y tan seguros, uno pensaría que el caso estaba cerrado. Pero Jesús desnudó el secreto de la incredulidad en una frase penetrante: ⚡ <em>\"Y no queréis venir a mí, para que tengáis vida\"</em> (Juan 5:40). El problema nunca fue falta de evidencia; fue una falta de voluntad. No quisieron venir. Y aquí Juan nos entrega el caso a nosotros. Ha puesto los testigos ante nuestros ojos — el Bautista, las obras, el Padre, las Escrituras, Moisés, el Espíritu, y la larga fila de vidas cambiadas — y ahora pide nuestro veredicto. ¿Rehusaremos, como los líderes, venir? ¿O dictaremos el único veredicto honesto que la evidencia permite: que Jesús es el Cristo, el Hijo de Dios, y al creer hallaremos vida en su nombre?"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "86ed0766e468"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "prose",
+   "text": {
+    "en": "The earliest believers, who had weighed the witnesses and come down on the side of faith, did not at first call themselves Christians. They called themselves followers of \"the Way,\" because they had single-mindedly given their lives to the One the witnesses pointed to. And every believer since has been called to take the stand in turn. \"You shall be witnesses to Me,\" Jesus said (Acts 1:8). The Samaritan woman could not preach a sermon, but she could say, \"Come and see.\" The blind man could not win a debate, but he could say, \"Once I was blind, now I see.\" Neither can the world silence such testimony, for it rests not on argument but on Christ Himself, seen and known. Take your place, then, among the witnesses.",
+    "es": "Los primeros creyentes, que habían pesado a los testigos y se habían puesto del lado de la fe, no se llamaron al principio cristianos. Se llamaban seguidores del \"Camino\", porque habían entregado de todo corazón su vida a Aquel a quien los testigos señalaban. Y todo creyente desde entonces ha sido llamado a subir al estrado a su vez. \"Me seréis testigos\", dijo Jesús (Hechos 1:8). La mujer samaritana no podía predicar un sermón, pero podía decir: \"Ven y ve.\" El ciego no podía ganar un debate, pero podía decir: \"Antes era ciego, ahora veo.\" Ni el mundo puede acallar tal testimonio, porque no descansa en argumentos sino en Cristo mismo, visto y conocido. Tome, pues, su lugar entre los testigos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2cd288666bf0"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "prose",
+   "text": {
+    "en": "Unit 6 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 6 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ef80e4f0d9dd"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. The short-answer section is practice for Certificate students and does not count against you.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. La sección de respuesta corta es práctica para el Certificado y no cuenta en su contra."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9168d4aa12d6"
+    }
+   }
+  },
+  {
+   "id": "b037",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b038",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

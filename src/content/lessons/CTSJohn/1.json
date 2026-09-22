@@ -1,0 +1,502 @@
+{
+ "course": "CTSJohn",
+ "unit": 1,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right:15px; font-weight:bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Espa&ntilde;ol</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></p>\n    <p style=\"margin-top:10px; font-style:italic; color:#2f4f2f;\"><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\">\n    <h3><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></h3>\n    <p style=\"font-size:0.9rem;\"><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></p>\n    <label class=\"lang-en\"><!--cts:b008:en--></label><label class=\"lang-es\"><!--cts:b008:es--></label>\n    <input type=\"text\" id=\"regName\" placeholder=\"...\" aria-label=\"...\">\n    <label class=\"lang-en\"><!--cts:b009:en--></label><label class=\"lang-es\"><!--cts:b009:es--></label>\n    <input type=\"email\" id=\"regEmail\" placeholder=\"...\" aria-label=\"...\">\n    <label class=\"lang-en\"><!--cts:b010:en--></label><label class=\"lang-es\"><!--cts:b010:es--></label>\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate / Certificado</option>\n        <option value=\"mdiv\">M.Div.</option>\n        <option value=\"thm\">Th.M.</option>\n    </select>\n    <button id=\"regBtn\" class=\"nav-btn\"><span class=\"lang-en\"><!--cts:b011:en--></span><span class=\"lang-es\"><!--cts:b011:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top:8px;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\">\n\n<h3><!--cts:b012:en--></h3>\n<p><!--cts:b013:en--></p>\n\n<h3><!--cts:b014:en--></h3>\n<p><!--cts:b015:en--></p>\n<p><!--cts:b016:en--></p>\n<div class=\"scripture\"><!--cts:b017:en--></div>\n\n<h3><!--cts:b018:en--></h3>\n<p><!--cts:b019:en--></p>\n\n<h3><!--cts:b020:en--></h3>\n<p><!--cts:b021:en--></p>\n<p><!--cts:b022:en--></p>\n<div class=\"pull-quote\"><!--cts:b023:en--></div>\n\n<h3><!--cts:b024:en--></h3>\n<p><!--cts:b025:en--></p>\n<p><!--cts:b026:en--></p>\n\n<h3><!--cts:b027:en--></h3>\n<p><!--cts:b028:en--></p>\n\n<h3><!--cts:b029:en--></h3>\n<p><!--cts:b030:en--></p>\n<p><!--cts:b031:en--></p>\n\n</div>\n<div class=\"lang-es\">\n\n<h3><!--cts:b012:es--></h3>\n<p><!--cts:b013:es--></p>\n\n<h3><!--cts:b014:es--></h3>\n<p><!--cts:b015:es--></p>\n<p><!--cts:b016:es--></p>\n<div class=\"scripture\"><!--cts:b017:es--></div>\n\n<h3><!--cts:b018:es--></h3>\n<p><!--cts:b019:es--></p>\n\n<h3><!--cts:b020:es--></h3>\n<p><!--cts:b021:es--></p>\n<p><!--cts:b022:es--></p>\n<div class=\"pull-quote\"><!--cts:b023:es--></div>\n\n<h3><!--cts:b024:es--></h3>\n<p><!--cts:b025:es--></p>\n<p><!--cts:b026:es--></p>\n\n<h3><!--cts:b027:es--></h3>\n<p><!--cts:b028:es--></p>\n\n<h3><!--cts:b029:es--></h3>\n<p><!--cts:b030:es--></p>\n<p><!--cts:b031:es--></p>\n\n</div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b032:en--></span><span class=\"lang-es\"><!--cts:b032:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b033:en--></span>\n       <span class=\"lang-es\"><!--cts:b033:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top:20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b034:en--></span><span class=\"lang-es\"><!--cts:b034:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b035:en--></span><span class=\"lang-es\"><!--cts:b035:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top:15px; font-weight:bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top:10px; font-size:0.9rem; color:#1f6b3b; display:none;\"></div>\n    </div>\n</div>\n</div>\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSJohnReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "Unit 2 →",
+    "es": "Unidad 2 →"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e7e7b95ad069"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "📖 The Gospel of John — Unit 1: The Word Made Flesh",
+    "es": "📖 El Evangelio de Juan — Unidad 1: El Verbo hecho carne"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5f9cfc3b71dd"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "\"These are written that you may believe that Jesus is the Christ, the Son of God, and that believing you may have life in His name.\" — John 20:31 (NKJV)",
+    "es": "⚡ \"Estas se han escrito para que creáis que Jesús es el Cristo, el Hijo de Dios, y para que creyendo, tengáis vida en su nombre.\" — Juan 20:31 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7957e354a76e"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Register to Begin",
+    "es": "Regístrese para comenzar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "007cff4200ca"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Your name and track are saved on this device and carry across every unit and every CTS course. Register once, here.",
+    "es": "Su nombre y trayecto se guardan en este dispositivo y se conservan en cada unidad y en cada curso de CTS. Regístrese una vez, aquí."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bcc27f3cfc2a"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "label",
+   "text": {
+    "en": "Full name",
+    "es": "Nombre completo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "eeb692087d62"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "label",
+   "text": {
+    "en": "Email",
+    "es": "Correo electrónico"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "84add5b29527"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "label",
+   "text": {
+    "en": "Track",
+    "es": "Trayecto"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b1c5a7af06ba"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "heading",
+   "text": {
+    "en": "Introduction — In the Beginning Was the Word",
+    "es": "Introducción — En el principio era el Verbo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a82e3d0f6bad"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "Every other Gospel begins with a manger or a genealogy. John begins before the world began. While Matthew traces Jesus back to Abraham and Luke back to Adam, John reaches past creation itself and opens his Gospel in eternity: <em>\"In the beginning was the Word\"</em> (John 1:1). He is deliberately echoing the first words of Genesis — \"In the beginning God\" — and he is telling you, before he tells you anything else, who this Jesus really is. This course will walk through John's seven signs, his seven great \"I AM\" sayings, and the parade of witnesses he calls to the stand to prove one thing: that Jesus is the Christ, the Son of God, and that believing, you may have life. But it all rests on this first claim. Get the Prologue wrong and you will get the whole Gospel wrong. Get it right, and everything else opens.",
+    "es": "Todos los demás Evangelios comienzan con un pesebre o una genealogía. Juan comienza antes de que el mundo comenzara. Mientras Mateo rastrea a Jesús hasta Abraham y Lucas hasta Adán, Juan se remonta más allá de la creación misma y abre su Evangelio en la eternidad: ⚡ <em>\"En el principio era el Verbo\"</em> (Juan 1:1). Hace eco deliberado de las primeras palabras de Génesis — \"En el principio creó Dios\" — y le dice, antes de decirle cualquier otra cosa, quién es realmente este Jesús. Este curso recorrerá las siete señales de Juan, sus siete grandes declaraciones \"YO SOY,\" y el desfile de testigos que llama al estrado para probar una sola cosa: que Jesús es el Cristo, el Hijo de Dios, y que creyendo, usted tenga vida. Pero todo descansa sobre esta primera afirmación. Si se equivoca en el Prólogo, se equivocará en todo el Evangelio. Acíertelo, y todo lo demás se abre."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9855400ef4ec"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "heading",
+   "text": {
+    "en": "I. The Word Was God",
+    "es": "I. El Verbo era Dios"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2fc753a2becf"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "Read the verse slowly, because John packs three eternities into one sentence. <em>\"In the beginning was the Word, and the Word was with God, and the Word was God\"</em> (John 1:1). The Word already <em>was</em> when the beginning began — He did not come into being; He simply was. The Word was <em>with</em> God — face to face, a distinct Person, not merely an idea in God's mind. And the Word <em>was</em> God — not a god, not a junior deity, not the first and finest of God's creatures, but God Himself. Some have tried to soften that last clause into \"the Word was a god.\" But John will not allow it. The same Word who was <em>with</em> God <em>was</em> God; full deity and distinct Person, both held in a single breath. This is the seed of the doctrine of the Trinity, planted in the first verse of the book.",
+    "es": "Lea el versículo despacio, porque Juan encierra tres eternidades en una sola frase. ⚡ <em>\"En el principio era el Verbo, y el Verbo era con Dios, y el Verbo era Dios\"</em> (Juan 1:1). El Verbo ya <em>era</em> cuando el principio comenzó — no llegó a existir; simplemente era. El Verbo era <em>con</em> Dios — cara a cara, una Persona distinta, no meramente una idea en la mente de Dios. Y el Verbo <em>era</em> Dios — no un dios, no una deidad menor, no la primera y mejor de las criaturas de Dios, sino Dios mismo. Algunos han intentado suavizar esa última frase a \"el Verbo era un dios.\" Pero Juan no lo permite. El mismo Verbo que era <em>con</em> Dios <em>era</em> Dios; plena deidad y Persona distinta, ambas sostenidas en un solo aliento. Esta es la semilla de la doctrina de la Trinidad, plantada en el primer versículo del libro."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a70787387ab2"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "Why does John, who knew Jesus, who leaned on His chest at supper, who watched Him weep and bleed, begin so high? Because he had come to know that the carpenter from Nazareth was the eternal God. He is not building up to that conclusion at the end of his Gospel; he announces it in the first line and spends twenty-one chapters showing it to be true.",
+    "es": "¿Por qué Juan, que conoció a Jesús, que se recostó sobre su pecho en la cena, que lo vio llorar y sangrar, comienza tan alto? Porque había llegado a saber que el carpintero de Nazaret era el Dios eterno. No está construyendo hacia esa conclusión al final de su Evangelio; la anuncia en la primera línea y pasa veintiún capítulos mostrando que es verdad."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3ad6a176aeb9"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "scripture",
+   "text": {
+    "en": "\"In the beginning was the Word, and the Word was with God, and the Word was God.\" — John 1:1 (NKJV)",
+    "es": "⚡ \"En el principio era el Verbo, y el Verbo era con Dios, y el Verbo era Dios.\" — Juan 1:1 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "571bad92c54d"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "heading",
+   "text": {
+    "en": "II. All Things Were Made Through Him",
+    "es": "II. Todas las cosas fueron hechas por Él"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "31c4abd5a4f2"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "If the Word is God, then look what follows: <em>\"All things were made through Him, and without Him nothing was made that was made\"</em> (John 1:3). The One who would later be too tired to stay awake in a boat is the One who made the sea He slept upon. The hands that would be pierced with nails are the hands that flung the stars into the dark. There is not a single created thing — not an atom, not an angel, not a galaxy the telescopes are only now beginning to find — that He did not make. We will meet this divine-and-human pattern again and again in this Gospel, for it runs through the whole of who Christ is. As a man He grew weary, but as God He upholds all things by the word of His power. As a man He asked for a drink at a well, but as God He is the spring from which every river was poured. As a man He died, but as God He could not be held by death. The Maker entered His own making.",
+    "es": "Si el Verbo es Dios, entonces vea lo que sigue: ⚡ <em>\"Todas las cosas por él fueron hechas, y sin él nada de lo que ha sido hecho, fue hecho\"</em> (Juan 1:3). Aquel que más tarde estaría demasiado cansado para permanecer despierto en una barca es Aquel que hizo el mar sobre el que durmió. Las manos que serían traspasadas con clavos son las manos que lanzaron las estrellas a la oscuridad. No hay una sola cosa creada — ni un átomo, ni un ángel, ni una galaxia que los telescopios apenas ahora empiezan a hallar — que Él no haya hecho. Encontraremos este patrón divino-y-humano una y otra vez en este Evangelio, pues recorre todo lo que Cristo es. Como hombre se cansó, pero como Dios sostiene todas las cosas con la palabra de su poder. Como hombre pidió de beber junto a un pozo, pero como Dios es el manantial del que se vertía cada río. Como hombre murió, pero como Dios la muerte no pudo retenerlo. El Hacedor entró en lo que había hecho."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "61f4f4146f2c"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "heading",
+   "text": {
+    "en": "III. And the Word Became Flesh",
+    "es": "III. Y el Verbo fue hecho carne"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e2e2da6b2ef3"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "Now comes the verse that should stop your heart. <em>\"And the Word became flesh and dwelt among us\"</em> (John 1:14). The eternal God, who made all things, did not merely visit His world or send a message into it. He <em>became flesh</em>. The word John uses for \"dwelt\" means He pitched His tent, He tabernacled among us — the same God whose glory once filled a tent in the wilderness now wrapped that glory in skin and bone and lived on the same dust He had made. Think of what that means. The infinite became an infant. The One who holds the oceans in His hand was once too small to lift His own head. The Word who spoke creation into being learned, as a boy, to speak His first words at His mother's knee.",
+    "es": "Ahora viene el versículo que debería detenerle el corazón. ⚡ <em>\"Y el Verbo fue hecho carne, y habitó entre nosotros\"</em> (Juan 1:14). El Dios eterno, que hizo todas las cosas, no meramente visitó su mundo ni envió un mensaje a él. Él <em>fue hecho carne</em>. La palabra que Juan usa para \"habitó\" significa que plantó su tienda, que tabernaculó entre nosotros — el mismo Dios cuya gloria una vez llenó una tienda en el desierto ahora envolvió esa gloria en piel y hueso y vivió sobre el mismo polvo que había hecho. Piense en lo que eso significa. El infinito se hizo infante. Aquel que sostiene los océanos en su mano fue una vez demasiado pequeño para levantar su propia cabeza. El Verbo que habló la creación a la existencia aprendió, de niño, a decir sus primeras palabras en el regazo de su madre."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f875e7213519"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "Let me put it to you the way it has always struck me, brother. As a man He hungered in the wilderness, but as God He is the bread of life. As a man He slept in the storm, but as God He walked out upon the waves. As a man He wept at a grave, but as God He is the resurrection and the life. As a man He bled and died, but as God He came forth on the third day with the keys of death in His hand. Fully God and fully man — not half of each, not God in a costume of flesh nor a man promoted to God, but the whole of God and the whole of a man, joined forever in one Person. This is the mystery the whole Gospel of John circles around, and we will never get to the bottom of it. We are not meant to. We are meant to worship.",
+    "es": "Permítame planteárselo como siempre me ha impactado, hermano. Como hombre tuvo hambre en el desierto, pero como Dios es el pan de vida. Como hombre durmió en la tormenta, pero como Dios caminó sobre las olas. Como hombre lloró ante una tumba, pero como Dios es la resurrección y la vida. Como hombre sangró y murió, pero como Dios salió al tercer día con las llaves de la muerte en su mano. Plenamente Dios y plenamente hombre — no mitad de cada uno, no Dios en un disfraz de carne ni un hombre ascendido a Dios, sino todo Dios y todo un hombre, unidos para siempre en una sola Persona. Este es el misterio en torno al cual gira todo el Evangelio de Juan, y nunca llegaremos a su fondo. No estamos hechos para ello. Estamos hechos para adorar."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d9e760a4323a"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "The infinite became an infant. The One who holds the oceans in His hand was once too small to lift His own head.",
+    "es": "El infinito se hizo infante. Aquel que sostiene los océanos en su mano fue una vez demasiado pequeño para levantar su propia cabeza."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "acd81e2f3bb9"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "heading",
+   "text": {
+    "en": "IV. There Was a Man Sent From God: The First Witness",
+    "es": "IV. Hubo un hombre enviado de Dios: el primer testigo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5f87a45807d4"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "Into the middle of this soaring hymn about the eternal Word, John drops a single human name. <em>\"There was a man sent from God, whose name was John. This man came for a witness, to bear witness of the Light... He was not that Light, but was sent to bear witness of that Light\"</em> (John 1:6–8). Here is the first witness in a Gospel full of witnesses, and notice how carefully the writer guards him. John the Baptist was great — the greatest born of women, Jesus said — and crowds streamed into the wilderness to hear him. It would have been the easiest thing in the world for him to keep them. Instead he kept pointing past himself: <em>\"He who comes after me is preferred before me, for He was before me\"</em> (John 1:15). Think of that — <em>before</em> me, though He came <em>after</em> me, because He was from the beginning.",
+    "es": "En medio de este himno sublime sobre el Verbo eterno, Juan deja caer un solo nombre humano. ⚡ <em>\"Hubo un hombre enviado de Dios, el cual se llamaba Juan. Éste vino por testimonio, para que diese testimonio de la Luz... No era él la Luz, sino para que diese testimonio de la Luz\"</em> (Juan 1:6–8). Aquí está el primer testigo en un Evangelio lleno de testigos, y observe con cuánto cuidado el escritor lo guarda. Juan el Bautista era grande — el mayor nacido de mujer, dijo Jesús — y las multitudes fluyeron al desierto para oírlo. Le habría sido lo más fácil del mundo conservarlas. En cambio, siguió señalando más allá de sí mismo: ⚡ <em>\"El que viene después de mí, es antes de mí; porque era primero que yo\"</em> (Juan 1:15). Piense en eso — <em>antes</em> de mí, aunque vino <em>después</em> de mí, porque era desde el principio."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "18dba965355f"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "That is what a true witness does. He does not draw the eye to himself; he draws it to the Light. A finger that points at the moon is a poor finger if people study the finger and never look up. John the Baptist understood this so deeply that when his own followers fretted that the crowds were leaving him for Jesus, he answered with the freest words a leader ever spoke: \"He must increase, but I must decrease.\" Every witness this Gospel calls — and there are many — serves that one purpose: to point you away from themselves and up to the Light.",
+    "es": "Eso es lo que hace un verdadero testigo. No atrae la mirada hacia sí mismo; la atrae hacia la Luz. Un dedo que señala la luna es un pobre dedo si la gente estudia el dedo y nunca mira hacia arriba. Juan el Bautista entendió esto tan profundamente que cuando sus propios seguidores se inquietaron de que las multitudes lo dejaban por Jesús, respondió con las palabras más libres que un líder haya pronunciado jamás: \"A él conviene crecer, mas a mí menguar.\" Cada testigo que este Evangelio llama — y son muchos — sirve a ese único propósito: señalarle lejos de ellos mismos y arriba a la Luz."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b0c3b3efa68b"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "heading",
+   "text": {
+    "en": "V. He Came to His Own — But As Many as Received Him",
+    "es": "V. A lo suyo vino — mas a todos los que le recibieron"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c6317c337cbe"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "Then comes the heartbreak of the Prologue, in one short line: <em>\"He came to His own, and His own did not receive Him\"</em> (John 1:11). The Light came into the world He had made, and the world He had made did not know Him. The Maker walked among His creatures and they turned away. There is no sadder sentence in the New Testament. But it does not end there, and the next verse is the hinge on which your whole life turns: <em>\"But as many as received Him, to them He gave the right to become children of God, to those who believe in His name\"</em> (John 1:12). Did you hear the door swing open? As many as received Him. Not as many as deserved Him, not as many as earned it, not the worthy or the religious or the clean — as many as <em>received</em> Him. And these, John says, were born \"not of blood, nor of the will of the flesh, nor of the will of man, but of God\" (John 1:13). A second birth, a birth from above — which is exactly where Jesus will take Nicodemus in the very next chapter, and where we will go in Unit 2.",
+    "es": "Luego viene el quebranto del Prólogo, en una sola línea corta: ⚡ <em>\"A lo suyo vino, y los suyos no le recibieron\"</em> (Juan 1:11). La Luz vino al mundo que había hecho, y el mundo que había hecho no la conoció. El Hacedor caminó entre sus criaturas y ellas le volvieron la espalda. No hay frase más triste en el Nuevo Testamento. Pero no termina ahí, y el siguiente versículo es el gozne sobre el que gira toda su vida: ⚡ <em>\"Mas a todos los que le recibieron, a los que creen en su nombre, les dio potestad de ser hechos hijos de Dios\"</em> (Juan 1:12). ¿Oyó abrirse la puerta? A todos los que le recibieron. No a los que lo merecían, no a los que lo ganaron, no a los dignos ni a los religiosos ni a los limpios — a todos los que le <em>recibieron</em>. Y éstos, dice Juan, fueron engendrados \"no de sangre, ni de voluntad de carne, ni de voluntad de varón, sino de Dios\" (Juan 1:13). Un segundo nacimiento, un nacimiento de lo alto — que es exactamente adonde Jesús llevará a Nicodemo en el capítulo siguiente, y adonde iremos en la Unidad 2."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b6a0e92127bf"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "heading",
+   "text": {
+    "en": "VI. And We Beheld His Glory: Full of Grace and Truth",
+    "es": "VI. Y vimos su gloria: lleno de gracia y de verdad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "699e4ea69200"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "John ends the Prologue as a man who saw it with his own eyes: <em>\"And we beheld His glory, the glory as of the only begotten of the Father, full of grace and truth\"</em> (John 1:14). We beheld it. This is not theory to John; he was there. He watched the glory of God walk through Galilee in a man's body, full of grace and full of truth at once — never grace at the expense of truth, never truth without grace. And then the final word: <em>\"No one has seen God at any time. The only begotten Son, who is in the bosom of the Father, He has declared Him\"</em> (John 1:18). The word \"declared\" is the word from which we get \"exegesis\" — Jesus is the explanation of God. If you want to know what God is like, do not guess, and do not only look at the sky. Look at Jesus. He has explained the Father to us.",
+    "es": "Juan termina el Prólogo como un hombre que lo vio con sus propios ojos: ⚡ <em>\"Y vimos su gloria, gloria como del unigénito del Padre, lleno de gracia y de verdad\"</em> (Juan 1:14). Vimos su gloria. Esto no es teoría para Juan; él estuvo allí. Vio la gloria de Dios caminar por Galilea en el cuerpo de un hombre, lleno de gracia y lleno de verdad a la vez — nunca gracia a costa de la verdad, nunca verdad sin gracia. Y luego la palabra final: ⚡ <em>\"A Dios nadie le vio jamás; el unigénito Hijo, que está en el seno del Padre, él le ha dado a conocer\"</em> (Juan 1:18). La palabra \"dar a conocer\" es la palabra de la que obtenemos \"exegesis\" — Jesús es la explicación de Dios. Si quiere saber cómo es Dios, no adivine, y no mire solamente al cielo. Mire a Jesús. Él nos ha explicado al Padre."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f24df34f28dd"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "So we begin where John begins, brother — not at a manger but in eternity, with the Word who was God, who made all things, who became flesh and tabernacled among us, full of grace and truth. Hold that, and every sign and every \"I AM\" and every witness still to come will land with its full weight. He is the Christ, the Son of God. Believe, and have life in His name.",
+    "es": "Así que comenzamos donde Juan comienza, hermano — no en un pesebre sino en la eternidad, con el Verbo que era Dios, que hizo todas las cosas, que fue hecho carne y tabernaculó entre nosotros, lleno de gracia y de verdad. Sostenga eso, y cada señal y cada \"YO SOY\" y cada testigo aún por venir caerá con todo su peso. Él es el Cristo, el Hijo de Dios. Crea, y tenga vida en su nombre."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e08efc38f564"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "prose",
+   "text": {
+    "en": "Unit 1 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 1 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "eeba1211d031"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. The short-answer section is practice for Certificate students and does not count against you.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. La sección de respuesta corta es práctica para el Certificado y no cuenta en su contra."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9168d4aa12d6"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

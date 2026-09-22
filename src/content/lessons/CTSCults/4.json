@@ -1,0 +1,530 @@
+{
+ "course": "CTSCults",
+ "unit": 4,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #2f4f2f;\"><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\">\n    <h2><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></p>\n    <input type=\"text\" id=\"regName\" placeholder=\"Full name / Nombre completo\" aria-label=\"Full name / Nombre completo\">\n    <input type=\"email\" id=\"regEmail\" placeholder=\"Email\" aria-label=\"Email\">\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate Track</option>\n        <option value=\"mdiv\">Master of Divinity (M.Div.) Track</option>\n        <option value=\"thm\">Master of Theology (Th.M.) Track</option>\n    </select>\n    <button class=\"nav-btn\" id=\"regBtn\"><span class=\"lang-en\"><!--cts:b008:en--></span><span class=\"lang-es\"><!--cts:b008:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\">\n<p class=\"passage-label\"><!--cts:b009:en--></p>\n<div class=\"scripture\"><!--cts:b010:en--></div>\n\n<h3><!--cts:b011:en--></h3>\n<p><!--cts:b012:en--></p>\n\n<h3><!--cts:b013:en--></h3>\n<p><!--cts:b014:en--></p>\n\n<h3><!--cts:b015:en--></h3>\n<p><!--cts:b016:en--></p>\n<p><!--cts:b017:en--></p>\n<p><!--cts:b018:en--></p>\n<p><!--cts:b019:en--></p>\n<p><!--cts:b020:en--></p>\n\n<h3><!--cts:b021:en--></h3>\n<p><!--cts:b022:en--></p>\n\n<h3><!--cts:b023:en--></h3>\n<p><!--cts:b024:en--></p>\n\n<h3><!--cts:b025:en--></h3>\n<p><!--cts:b026:en--></p>\n\n<h3><!--cts:b027:en--></h3>\n<p><!--cts:b028:en--></p>\n\n<h3><!--cts:b029:en--></h3>\n<p><!--cts:b030:en--></p>\n\n<h3><!--cts:b031:en--></h3>\n<p><!--cts:b032:en--></p>\n<div class=\"scripture\"><!--cts:b033:en--></div>\n</div>\n\n<div class=\"lang-es\">\n<p class=\"passage-label\"><!--cts:b009:es--></p>\n<div class=\"scripture\"><!--cts:b010:es--></div>\n\n<h3><!--cts:b011:es--></h3>\n<p><!--cts:b012:es--></p>\n\n<h3><!--cts:b013:es--></h3>\n<p><!--cts:b014:es--></p>\n\n<h3><!--cts:b015:es--></h3>\n<p><!--cts:b016:es--></p>\n<p><!--cts:b017:es--></p>\n<p><!--cts:b018:es--></p>\n<p><!--cts:b019:es--></p>\n<p><!--cts:b020:es--></p>\n\n<h3><!--cts:b021:es--></h3>\n<p><!--cts:b022:es--></p>\n\n<h3><!--cts:b023:es--></h3>\n<p><!--cts:b024:es--></p>\n\n<h3><!--cts:b025:es--></h3>\n<p><!--cts:b026:es--></p>\n\n<h3><!--cts:b027:es--></h3>\n<p><!--cts:b028:es--></p>\n\n<h3><!--cts:b029:es--></h3>\n<p><!--cts:b030:es--></p>\n\n<h3><!--cts:b031:es--></h3>\n<p><!--cts:b032:es--></p>\n<div class=\"scripture\"><!--cts:b033:es--></div>\n</div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b034:en--></span><span class=\"lang-es\"><!--cts:b034:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b035:en--></span>\n       <span class=\"lang-es\"><!--cts:b035:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b036:en--></span><span class=\"lang-es\"><!--cts:b036:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b037:en--></span><span class=\"lang-es\"><!--cts:b037:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n  \n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSCultsReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "Unit 5 →",
+    "es": "Unidad 5 →"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "14d803cbaad7"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "📖 Cults &amp; World Religions — Unit 4: The Latter-day Saints",
+    "es": "📖 Las Sectas y las Religiones del Mundo — Unidad 4: Los Santos de los Últimos Días"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7880e6b1cc58"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "\"But even if we, or an angel from heaven, preach any other gospel to you than what we have preached to you, let him be accursed.\" — Galatians 1:8 (NKJV)",
+    "es": "\"Mas si aun nosotros, o un ángel del cielo os predicare otro evangelio diferente del que os hemos predicado, sea anatema.\" — Gálatas 1:8 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2e39e35f057a"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "📝 Course Registration",
+    "es": "📝 Registro del Curso"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fde900fe006b"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Welcome to Cults &amp; World Religions. Please register before beginning Unit 4.",
+    "es": "Bienvenido a Las Sectas y las Religiones del Mundo. Por favor regístrese antes de comenzar la Unidad 4."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5839dccc76e1"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "scripture",
+   "text": {
+    "en": "<strong>Anchor: Galatians 1:6-9 — with Galatians 1:8, 11-12; 2:16, 21 (NKJV)</strong>",
+    "es": "<strong>Texto base: Gálatas 1:6-9 — con Gálatas 1:8, 11-12; 2:16, 21 (RVG)</strong>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "87cf84af51ab"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "scripture",
+   "text": {
+    "en": "\"But even if we, or an angel from heaven, preach any other gospel to you than what we have preached to you, let him be accursed.\" — Galatians 1:8 (NKJV)",
+    "es": "\"Mas si aun nosotros, o un ángel del cielo os predicare otro evangelio diferente del que os hemos predicado, sea anatema.\" — Gálatas 1:8 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2e39e35f057a"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "heading",
+   "text": {
+    "en": "A Word Before We Begin",
+    "es": "Una Palabra Antes de Comenzar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2b8247766b29"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "The Latter-day Saints present Mormonism as another branch of Christianity, and their missionaries carry the name of Jesus around the world. But the Jesus they carry is not the Jesus of the Bible, and their gospel is not the gospel of grace. Mormonism teaches a God who was once a man and a man who may become a god, a plurality of gods, and a salvation completed by our own works and temple rites. That is not a variation within the faith; it is another faith in Christian dress. And where the Bible gives us the eternal Son, Mormonism rests finally on the word of Joseph Smith, a man — for a later prophet, however sincere, cannot overturn the finished revelation of God. We weigh it by the Word of God and, where it departs from the gospel, say so plainly and in love (Ephesians 4:15).",
+    "es": "Los Santos de los Últimos Días presentan el mormonismo como otra rama del cristianismo, y sus misioneros llevan el nombre de Jesús por todo el mundo. Pero el Jesús que llevan no es el Jesús de la Biblia, y su evangelio no es el evangelio de la gracia. El mormonismo enseña un Dios que una vez fue hombre y un hombre que puede llegar a ser dios, una pluralidad de dioses, y una salvación completada por nuestras propias obras y ritos del templo. Eso no es una variación dentro de la fe; es otra fe vestida de cristiana. Y donde la Biblia nos da al Hijo eterno, el mormonismo descansa finalmente en la palabra de José Smith, un hombre — pues un profeta posterior, por sincero que sea, no puede derribar la revelación consumada de Dios. La pesamos por la Palabra de Dios y, donde se aparte del evangelio, lo decimos con claridad y con amor (Efesios 4:15)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "16dda8d8c00e"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "heading",
+   "text": {
+    "en": "Who Are the Latter-day Saints?",
+    "es": "¿Quiénes Son los Santos de los Últimos Días?"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b663b5d05aed"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "prose",
+   "text": {
+    "en": "The Latter-day Saints, members of the Church of Jesus Christ of Latter-day Saints, trace their beginning to Joseph Smith in the United States in the 1820s and 1830s. They teach that true Christianity fell into a \"Great Apostasy\" after the apostles and was restored through Joseph Smith. They are directed by a living prophet and apostles, use their own additional scriptures, build temples for sacred ordinances, and are widely known for their young missionaries. Much in their conduct is admirable. Our concern is not their diligence but what they teach about God, about Christ, and about salvation.",
+    "es": "Los Santos de los Últimos Días, miembros de La Iglesia de Jesucristo de los Santos de los Últimos Días, sitúan su comienzo en Joseph Smith, en los Estados Unidos, en las décadas de 1820 y 1830. Enseñan que el cristianismo verdadero cayó en una \"Gran Apostasía\" después de los apóstoles y fue restaurado por medio de Joseph Smith. Son dirigidos por un profeta viviente y apóstoles, usan sus propias escrituras adicionales, edifican templos para ordenanzas sagradas, y son ampliamente conocidos por sus jóvenes misioneros. Mucho en su conducta es admirable. Nuestra preocupación no es su diligencia sino lo que enseñan acerca de Dios, de Cristo y de la salvación."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5ebdfd52234c"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "heading",
+   "text": {
+    "en": "What They Teach, in Their Own Terms",
+    "es": "Lo Que Enseñan, en Sus Propios Términos"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "97c3510b672b"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "Concerning God, the Latter-day Saints reject the Trinity. They teach that the Godhead is three separate beings, each a god, united in purpose; that the Father has a body of flesh and bones; and, most strikingly, that God the Father was once a man who, over long ages, progressed to godhood. Their fifth president summarized it: \"As man now is, God once was; as God now is, man may become.\" They teach, therefore, that many gods exist, and that faithful Latter-day Saints may themselves one day become gods.",
+    "es": "En cuanto a Dios, los Santos de los Últimos Días rechazan la Trinidad. Enseñan que la Divinidad son tres seres separados, cada uno un dios, unidos en propósito; que el Padre tiene un cuerpo de carne y huesos; y, lo más sorprendente, que Dios el Padre fue una vez un hombre que, a lo largo de largas edades, progresó hasta la divinidad. Su quinto presidente lo resumió: \"Como el hombre es ahora, Dios fue una vez; como Dios es ahora, el hombre puede llegar a ser.\" Enseñan, por tanto, que existen muchos dioses, y que los Santos fieles pueden ellos mismos un día llegar a ser dioses."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e8c8a0abbeb4"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "Concerning our origin, they teach that all people lived first as spirit children of Heavenly Father (and a Heavenly Mother). Jesus, they say, was the firstborn of these spirit children, and so the elder spirit brother of all humanity — and of Lucifer as well, since Satan too is held to be a spirit son of God who rebelled. Jesus then became a god before His mortal birth.",
+    "es": "En cuanto a nuestro origen, enseñan que todas las personas vivieron primero como hijos espirituales del Padre Celestial (y de una Madre Celestial). Jesús, dicen, fue el primogénito de estos hijos espirituales, y por tanto el hermano espiritual mayor de toda la humanidad — y también de Lucifer, pues se sostiene que Satanás también es un hijo espiritual de Dios que se rebeló. Jesús entonces llegó a ser un dios antes de su nacimiento mortal."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ea77ce7a04e4"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "Concerning Jesus, they honor Him as Savior, affirm His atoning death and His bodily resurrection, and call Him the Son of God. Yet within their system He is one of several gods, a being who Himself progressed to godhood, the eldest of the Father's spirit children — not the one eternal God the Son.",
+    "es": "En cuanto a Jesús, lo honran como Salvador, afirman su muerte expiatoria y su resurrección corporal, y lo llaman el Hijo de Dios. Sin embargo, dentro de su sistema Él es uno de varios dioses, un ser que Él mismo progresó hasta la divinidad, el mayor de los hijos espirituales del Padre — no el único Dios el Hijo eterno."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6b71f177e75e"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "Concerning authority, they accept the Bible \"as far as it is translated correctly,\" and add to it the Book of Mormon, the Doctrine and Covenants, and the Pearl of Great Price, along with continuing revelation through a living prophet.",
+    "es": "En cuanto a la autoridad, aceptan la Biblia \"hasta donde esté traducida correctamente\", y le añaden el Libro de Mormón, Doctrina y Convenios, y la Perla de Gran Precio, junto con la revelación continua por medio de un profeta viviente."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9500027b509e"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "Concerning salvation, they teach that nearly all people are \"saved\" by grace into one of three kingdoms of glory through the universal resurrection. But the highest, called exaltation or eternal life — godhood in the celestial kingdom — must be obtained by accepting the restored gospel, repentance, baptism by their priesthood, temple ordinances, tithing, and obedience to the commandments. Their own scripture says we are saved by grace \"after all we can do.\" We have stated these things as fairly as we can. Now we must test them by Scripture.",
+    "es": "En cuanto a la salvación, enseñan que casi todas las personas son \"salvas\" por gracia a uno de tres reinos de gloria mediante la resurrección universal. Pero el más alto, llamado exaltación o vida eterna — la divinidad en el reino celestial — debe obtenerse aceptando el evangelio restaurado, el arrepentimiento, el bautismo por su sacerdocio, las ordenanzas del templo, el diezmo, y la obediencia a los mandamientos. Su propia escritura dice que somos salvos por gracia \"después de todo lo que podamos hacer.\" Hemos expuesto estas cosas tan justamente como podemos. Ahora debemos probarlas por la Escritura."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6f2a394af4a5"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "heading",
+   "text": {
+    "en": "Testing the Root (1): A Different God and a Different Christ",
+    "es": "Probando la Raíz (1): Un Dios Diferente y un Cristo Diferente"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "04b972f97e4f"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "Once again everything turns on the root. Scripture knows nothing of many gods or of a God who was once a man. The LORD declares, \"Before Me there was no God formed, nor shall there be after Me\" (Isaiah 43:10); \"I am the First and I am the Last; besides Me there is no God\" (Isaiah 44:6); \"Is there a God besides Me? Indeed there is no other Rock; I know not one\" (Isaiah 44:8). He is \"from everlasting to everlasting\" God (Psalm 90:2), and He says, \"I am the LORD, I do not change\" (Malachi 3:6). A God who was once a man and progressed to godhood, and creatures who become gods, are not in the Bible; there is one eternal, unchanging God, and the line between the Creator and the creature can never be crossed. And the true Christ is not a created spirit brother of Lucifer but the eternal Word, \"the Word was God\" (John 1:1), through whom \"all things were made\" (John 1:3) — \"all things... whether thrones or dominions or principalities or powers\" (Colossians 1:16), which means the angelic powers, Lucifer among them, are His creatures, not His brothers. The angels worship Him (Hebrews 1:6). The God and the Christ of the Latter-day Saints are not the God and the Christ of the Scriptures.",
+    "es": "Una vez más todo gira en torno a la raíz. La Escritura no sabe nada de muchos dioses ni de un Dios que fue una vez un hombre. Jehová declara: \"Antes de mí no fue formado dios, ni lo será después de mí\" (Isaías 43:10); \"Yo soy el primero, y yo soy el postrero, y fuera de mí no hay Dios\" (Isaías 44:6); \"¿Hay Dios fuera de mí? No hay Roca; no conozco ninguna\" (Isaías 44:8). Él es Dios \"desde el siglo y hasta el siglo\" (Salmo 90:2), y dice: \"yo Jehová no cambio\" (Malaquías 3:6). Un Dios que fue una vez hombre y progresó hasta la divinidad, y criaturas que llegan a ser dioses, no están en la Biblia; hay un solo Dios eterno e inmutable, y la línea entre el Creador y la criatura nunca puede cruzarse. Y el verdadero Cristo no es un hermano espiritual creado de Lucifer sino el Verbo eterno, \"el Verbo era Dios\" (Juan 1:1), por quien \"todas las cosas fueron hechas\" (Juan 1:3) — \"todas las cosas... sean tronos, sean dominios, sean principados, sean potestades\" (Colosenses 1:16), lo que significa que las potestades angélicas, Lucifer entre ellas, son sus criaturas, no sus hermanos. Los ángeles le adoran (Hebreos 1:6). El Dios y el Cristo de los Santos de los Últimos Días no son el Dios y el Cristo de las Escrituras."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a234c13a9800"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "heading",
+   "text": {
+    "en": "Testing the Root (2): A Different Gospel of Salvation",
+    "es": "Probando la Raíz (2): Un Evangelio de Salvación Diferente"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "638ff57df412"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "The second failure is the one Galatians was written to answer. To gain exaltation the Latter-day Saint must add to Christ a long list of works — baptism by their priesthood, temple ordinances, tithing, and lifelong obedience — and even their grace is \"grace after all we can do.\" But Paul says, \"a man is not justified by the works of the law but by faith in Jesus Christ\" (Galatians 2:16); \"I do not set aside the grace of God; for if righteousness comes through the law, then Christ died in vain\" (Galatians 2:21). Salvation is \"by grace... through faith... not of works, lest anyone should boast\" (Ephesians 2:8-9); it is \"not by works of righteousness which we have done, but according to His mercy\" (Titus 3:5); and \"if by grace, then it is no longer of works\" (Romans 11:6). Eternal life is not a prize earned by ordinances but \"the gift of God... in Christ Jesus our Lord\" (Romans 6:23), and it is a present and certain possession: the believer \"has passed from death into life\" (John 5:24) and may \"know that you have eternal life\" (1 John 5:13). Nor is salvation channeled through one church's priesthood, \"for there is one God and one Mediator between God and men, the Man Christ Jesus\" (1 Timothy 2:5). To make exaltation rest on works and ordinances is to change the root.",
+    "es": "El segundo fallo es aquel que Gálatas fue escrita para responder. Para alcanzar la exaltación el Santo de los Últimos Días debe añadir a Cristo una larga lista de obras — el bautismo por su sacerdocio, las ordenanzas del templo, el diezmo, y la obediencia de toda la vida — y aun su gracia es \"gracia después de todo lo que podamos hacer.\" Pero Pablo dice: \"el hombre no es justificado por las obras de la ley, sino por la fe de Jesucristo\" (Gálatas 2:16); \"No desecho la gracia de Dios; pues si por la ley fuese la justicia, entonces por demás murió Cristo\" (Gálatas 2:21). La salvación es \"por gracia... por medio de la fe... no por obras, para que nadie se gloríe\" (Efesios 2:8-9); es \"no por obras de justicia que nosotros hubiéramos hecho, sino por su misericordia\" (Tito 3:5); y \"si por gracia, ya no es por obras\" (Romanos 11:6). La vida eterna no es un premio ganado por ordenanzas sino \"la dádiva de Dios... en Cristo Jesús Señor nuestro\" (Romanos 6:23), y es una posesión presente y segura: el creyente \"ha pasado de muerte a vida\" (Juan 5:24) y puede \"saber que tiene vida eterna\" (1 Juan 5:13). Ni se canaliza la salvación por el sacerdocio de una iglesia, \"porque hay un solo Dios, y un solo mediador entre Dios y los hombres, Jesucristo hombre\" (1 Timoteo 2:5). Hacer que la exaltación descanse sobre obras y ordenanzas es cambiar la raíz."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1ebd377729ba"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "heading",
+   "text": {
+    "en": "Why This Is \"Another Gospel\"",
+    "es": "Por Qué Esto Es \"Otro Evangelio\""
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e02dabfb06f1"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "A message that gives us many gods, a Christ who is a created spirit brother of Lucifer, and an exaltation earned by ordinances is not the same gospel with extra features; it is \"a different gospel, which is not another\" (Galatians 1:6-7). Paul's warning is solemn, and it touches the very origin of this movement: \"even if we, or an angel from heaven, preach any other gospel to you than what we have preached to you, let him be accursed\" (Galatians 1:8). Latter-day Saints trace their gospel to the visit of an angel; but Paul says that no angel, and no human prophet, however sincere, may bring a gospel other than the one already given. For the true gospel is \"the faith which was once for all delivered to the saints\" (Jude 3); it did not need to be re-revealed in the nineteenth century. The issue is not the morality or sincerity of the Latter-day Saints, in which they are exemplary. The issue is whether there is one eternal God, whether Jesus is that God the Son, and whether sinners are saved by grace. On all three, this is another gospel.",
+    "es": "Un mensaje que nos da muchos dioses, un Cristo que es un hermano espiritual creado de Lucifer, y una exaltación ganada por ordenanzas no es el mismo evangelio con rasgos adicionales; es \"otro evangelio; no que haya otro\" (Gálatas 1:6-7). La advertencia de Pablo es solemne, y toca el origen mismo de este movimiento: \"si aun nosotros, o un ángel del cielo os predicare otro evangelio diferente del que os hemos predicado, sea anatema\" (Gálatas 1:8). Los Santos de los Últimos Días sitúan su evangelio en la visita de un ángel; pero Pablo dice que ningún ángel, y ningún profeta humano, por sincero que sea, puede traer un evangelio distinto del ya dado. Pues el verdadero evangelio es \"la fe que ha sido una vez dada a los santos\" (Judas 3); no necesitaba ser revelado de nuevo en el siglo diecinueve. La cuestión no es la moralidad ni la sinceridad de los Santos de los Últimos Días, en lo cual son ejemplares. La cuestión es si hay un solo Dios eterno, si Jesús es ese Dios el Hijo, y si los pecadores son salvos por gracia. En las tres, este es otro evangelio."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c06e48eaba9f"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "heading",
+   "text": {
+    "en": "The Book of Mormon and DNA",
+    "es": "El Libro de Mormón y el ADN"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e2e7eab0e291"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "The Latter-day Saint faith rests not only on distinctive doctrines but on a book that presents itself as real history. The <em>Book of Mormon</em> tells of ancient peoples in the Americas, chiefly a family led by the prophet Lehi said to have sailed from Jerusalem about 600 B.C.; their descendants, the Nephites and Lamanites, are portrayed as principal ancestors of the American Indians — indeed the book's own introduction long described the Lamanites as \"the principal ancestors of the American Indians\" (softened in 2006 to \"among the ancestors\"). This is a testable historical claim, and modern population genetics has tested it. Extensive study of the DNA of native peoples across North, Central, and South America — both the mitochondrial line and the Y-chromosome — consistently traces their ancestry to eastern Asia and Siberia by way of migration across the Bering region, and finds no distinctive Near-Eastern or Israelite genetic signature among pre-Columbian populations. In fairness, the Church has answered this in an official essay, <em>Book of Mormon and DNA Studies</em>. It argues that the record never claims Lehi's family were the only people in the Americas; that on a \"limited geography\" reading the events may have occupied a small region, so that a tiny founding group's DNA could have been absorbed and rendered undetectable within far larger surrounding populations; and that genetics therefore cannot finally prove or disprove the account. Others reply that for more than a century the book and its teachers presented these peoples as the principal ancestors of the American Indians, and that the limited-geography defense is itself a significant retreat from that long-held claim; writers within the Latter-day Saint intellectual tradition, in journals such as <em>Dialogue: A Journal of Mormon Thought</em>, have argued that the genetic evidence is fundamentally inconsistent with the traditional narrative. The believer need not settle every technical dispute to see the point: the historical foundation on which this second scripture rests is, at the least, gravely in question — and behind the question of the book stands the deeper question of the gospel it teaches.",
+    "es": "La fe de los Santos de los Últimos Días descansa no solo en doctrinas distintivas sino en un libro que se presenta como historia real. El <em>Libro de Mormón</em> narra pueblos antiguos en las Américas, principalmente una familia guiada por el profeta Lehi que, se dice, navegó desde Jerusalén alrededor del año 600 a.C.; sus descendientes, los nefitas y los lamanitas, son presentados como principales antepasados de los indios americanos — de hecho la propia introducción del libro describió por mucho tiempo a los lamanitas como \"los principales antepasados de los indios americanos\" (suavizado en 2006 a \"entre los antepasados\"). Esta es una afirmación histórica comprobable, y la genética de poblaciones moderna la ha comprobado. El estudio extenso del ADN de los pueblos nativos de América del Norte, Central y del Sur — tanto la línea mitocondrial como el cromosoma Y — traza consistentemente su ascendencia al este de Asia y a Siberia por medio de la migración a través de la región de Bering, y no halla ninguna firma genética distintiva del Cercano Oriente ni de Israel entre las poblaciones precolombinas. En justicia, la Iglesia ha respondido a esto en un ensayo oficial, <em>El Libro de Mormón y los Estudios de ADN</em>. Argumenta que el registro nunca afirma que la familia de Lehi fuera el único pueblo en las Américas; que en una lectura de \"geografía limitada\" los sucesos pudieron ocupar una región pequeña, de modo que el ADN de un grupo fundador diminuto pudo haber sido absorbido y quedar indetectable dentro de poblaciones circundantes mucho mayores; y que la genética, por tanto, no puede finalmente probar ni refutar el relato. Otros responden que por más de un siglo el libro y sus maestros presentaron a estos pueblos como los principales antepasados de los indios americanos, y que la defensa de la geografía limitada es en sí misma un retroceso significativo de esa afirmación sostenida por tanto tiempo; escritores dentro de la tradición intelectual de los Santos de los Últimos Días, en revistas como <em>Dialogue: A Journal of Mormon Thought</em>, han argumentado que la evidencia genética es fundamentalmente incompatible con la narrativa tradicional. El creyente no necesita resolver cada disputa técnica para ver el punto: el fundamento histórico sobre el cual descansa esta segunda escritura está, por lo menos, gravemente en cuestión — y detrás de la cuestión del libro está la cuestión más profunda del evangelio que enseña."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "12a7ca32607e"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "heading",
+   "text": {
+    "en": "The Question of Fellowship",
+    "es": "La Cuestión de la Comunión"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ea7eaaa1d996"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "This leads to the same hard but necessary conclusion. Because the Latter-day Saints confess a different God, a different Christ, and a different gospel, we cannot recognize their teaching as the Christian faith, nor join with it in the fellowship and work of the gospel. This is not personal hostility and never a license for unkindness. We honor them as neighbors, treat them with courtesy and warmth, and gladly do them good. But love does not pretend. Scripture will not let us call a different God and a different gospel merely another Christian tradition: \"Whoever transgresses and does not abide in the doctrine of Christ does not have God... If anyone comes to you and does not bring this doctrine, do not receive him into your house nor greet him\" (2 John 9-10) — that is, do not welcome him as a fellow worker or endorse his message. We are not to be \"unequally yoked together with unbelievers\" (2 Corinthians 6:14). So we do not share in their worship or their mission, for it rests upon another foundation; yet we gladly reason with them from the Scriptures.",
+    "es": "Esto lleva a la misma conclusión difícil pero necesaria. Porque los Santos de los Últimos Días confiesan un Dios diferente, un Cristo diferente, y un evangelio diferente, no podemos reconocer su enseñanza como la fe cristiana, ni unirnos con ella en la comunión y la obra del evangelio. Esto no es hostilidad personal y nunca licencia para la descortesía. Los honramos como prójimos, los tratamos con cortesía y calidez, y con gusto les hacemos bien. Pero el amor no finge. La Escritura no nos deja llamar a un Dios diferente y un evangelio diferente meramente otra tradición cristiana: \"Cualquiera que se rebela, y no persevera en la doctrina de Cristo, no tiene a Dios... Si alguno viene a vosotros, y no trae esta doctrina, no lo recibáis en casa, ni le digáis: ¡Bienvenido!\" (2 Juan 9-10) — es decir, no lo recibáis como colaborador ni aprobéis su mensaje. No hemos de unirnos \"en yugo desigual con los incrédulos\" (2 Corintios 6:14). Así que no participamos de su culto ni de su misión, pues descansa sobre otro fundamento; pero con gusto razonamos con ellos desde las Escrituras."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ff2ed26f3a23"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "heading",
+   "text": {
+    "en": "A Redemptive Aim",
+    "es": "Un Fin Redentor"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f8991d07d794"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "prose",
+   "text": {
+    "en": "And all of this is for a redemptive end. We draw these lines not to shut people out but because we long for the Latter-day Saints to come in — to the true God and the true Christ. The good news we bring them is greater than the gospel they have received: there are not many gods but one, eternal and unchanging, who was never a man and who shares His glory with no other; and Jesus is not a god who progressed but the eternal Son, the Creator come in the flesh, who gives full, free, and certain salvation to all who trust Him — with no ordinance to complete it and no doubt to cloud it. Many Latter-day Saints sincerely seek God and live upright lives; we pray that God will lead them to rest in the finished work of the one Lord Jesus Christ. We treat each one as a person Christ died to save — with patience, prayer, and an open Bible.",
+    "es": "Y todo esto es para un fin redentor. Trazamos estas líneas no para dejar a la gente afuera sino porque anhelamos que los Santos de los Últimos Días entren — al verdadero Dios y al verdadero Cristo. Las buenas nuevas que les traemos son mayores que el evangelio que han recibido: no hay muchos dioses sino uno, eterno e inmutable, que nunca fue un hombre y que no comparte su gloria con ningún otro; y Jesús no es un dios que progresó sino el Hijo eterno, el Creador venido en carne, que da salvación plena, gratuita y segura a todo el que confía en Él — sin ordenanza que la complete y sin duda que la nuble. Muchos Santos de los Últimos Días buscan sinceramente a Dios y viven vidas rectas; oramos que Dios los lleve a descansar en la obra consumada del único Señor Jesucristo. Tratamos a cada uno como una persona por quien Cristo murió para salvar — con paciencia, oración, y la Biblia abierta."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "aa3058702a9e"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "scripture",
+   "text": {
+    "en": "\"Thus says the LORD... 'I am the First and I am the Last; besides Me there is no God.'\" — Isaiah 44:6 (NKJV)",
+    "es": "\"Así dice Jehová... Yo soy el primero, y yo soy el postrero, y fuera de mí no hay Dios.\" — Isaías 44:6 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "995f9c4544f6"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "prose",
+   "text": {
+    "en": "Unit 4 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 4 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "07d9dcb66810"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33593c268178"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b037",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

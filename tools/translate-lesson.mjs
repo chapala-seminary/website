@@ -61,8 +61,6 @@ if (!provider) { console.error(`no such provider: ${opt('provider')}`); process.
 const dir = path.join('src', 'content', 'lessons', COURSE);
 if (!fs.existsSync(dir)) { console.error(`${COURSE} has not been converted`); process.exit(1); }
 
-const parts = (b) => (b.type === 'figure' ? b.caption : b);   // where a block's words live
-
 let translated = 0, overwritten = [], files = 0;
 for (const f of fs.readdirSync(dir).filter((f) => /^\d+\.json$/.test(f))
                  .sort((a, b) => parseInt(a) - parseInt(b))) {
@@ -73,7 +71,7 @@ for (const f of fs.readdirSync(dir).filter((f) => /^\d+\.json$/.test(f))
 
   const todo = [];
   for (const b of l.blocks) {
-    const p = parts(b);
+    const p = b;
     const src = p?.text?.[l.sourceLang];
     if (src == null) continue;
     const has = p.text[LANG] != null;

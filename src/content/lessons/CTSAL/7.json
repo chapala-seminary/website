@@ -1,0 +1,544 @@
+{
+ "course": "CTSAL",
+ "unit": 7,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right:15px; font-weight:bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Espa&ntilde;ol</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></p>\n    <p style=\"margin-top:10px; font-style:italic; color:#2f4f2f;\"><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n</div>\n\n<div id=\"regCard\" style=\"display:none;\">\n    <input type=\"text\" id=\"regName\" aria-label=\"regName\"><input type=\"email\" id=\"regEmail\" aria-label=\"regEmail\">\n    <select id=\"regTrack\" aria-label=\"regTrack\"><option value=\"certificate\"></option></select>\n    <button id=\"regBtn\"></button><div id=\"regStatus\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\">\n\n<h3><!--cts:b006:en--></h3>\n<p><!--cts:b007:en--></p>\n\n<h3><!--cts:b008:en--></h3>\n<p><!--cts:b009:en--></p>\n<div class=\"illustration\"><!--cts:b010:en--></div>\n<p><!--cts:b011:en--></p>\n<div class=\"pull-quote\"><!--cts:b012:en--></div>\n\n<h3><!--cts:b013:en--></h3>\n<p><!--cts:b014:en--></p>\n<p><!--cts:b015:en--></p>\n<p><!--cts:b016:en--></p>\n<div class=\"scripture\"><!--cts:b017:en--></div>\n\n<h3><!--cts:b018:en--></h3>\n<p><!--cts:b019:en--></p>\n<p><!--cts:b020:en--></p>\n\n<h3><!--cts:b021:en--></h3>\n<p><!--cts:b022:en--></p>\n<p><!--cts:b023:en--></p>\n<div class=\"scripture\"><!--cts:b024:en--></div>\n\n<h3><!--cts:b025:en--></h3>\n<p><!--cts:b026:en--></p>\n<p><!--cts:b027:en--></p>\n\n<h3><!--cts:b028:en--></h3>\n<p><!--cts:b029:en--></p>\n<p><!--cts:b030:en--></p>\n<div class=\"scripture\"><!--cts:b031:en--></div>\n\n<h3><!--cts:b032:en--></h3>\n<p><!--cts:b033:en--></p>\n<p><!--cts:b034:en--></p>\n\n</div>\n<div class=\"lang-es\">\n\n<h3><!--cts:b006:es--></h3>\n<p><!--cts:b007:es--></p>\n\n<h3><!--cts:b008:es--></h3>\n<p><!--cts:b009:es--></p>\n<div class=\"illustration\"><!--cts:b010:es--></div>\n<p><!--cts:b011:es--></p>\n<div class=\"pull-quote\"><!--cts:b012:es--></div>\n\n<h3><!--cts:b013:es--></h3>\n<p><!--cts:b014:es--></p>\n<p><!--cts:b015:es--></p>\n<p><!--cts:b016:es--></p>\n<div class=\"scripture\"><!--cts:b017:es--></div>\n\n<h3><!--cts:b018:es--></h3>\n<p><!--cts:b019:es--></p>\n<p><!--cts:b020:es--></p>\n\n<h3><!--cts:b021:es--></h3>\n<p><!--cts:b022:es--></p>\n<p><!--cts:b023:es--></p>\n<div class=\"scripture\"><!--cts:b024:es--></div>\n\n<h3><!--cts:b025:es--></h3>\n<p><!--cts:b026:es--></p>\n<p><!--cts:b027:es--></p>\n\n<h3><!--cts:b028:es--></h3>\n<p><!--cts:b029:es--></p>\n<p><!--cts:b030:es--></p>\n<div class=\"scripture\"><!--cts:b031:es--></div>\n\n<h3><!--cts:b032:es--></h3>\n<p><!--cts:b033:es--></p>\n<p><!--cts:b034:es--></p>\n\n</div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b035:en--></span><span class=\"lang-es\"><!--cts:b035:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b036:en--></span>\n       <span class=\"lang-es\"><!--cts:b036:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top:20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b037:en--></span><span class=\"lang-es\"><!--cts:b037:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b038:en--></span><span class=\"lang-es\"><!--cts:b038:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top:15px; font-weight:bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top:10px; font-size:0.9rem; color:#1f6b3b; display:none;\"></div>\n    </div>\n</div>\n</div>\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSALReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "Unit 8 →",
+    "es": "Unidad 8 →"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a616a4927a56"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "📖 Administration &amp; Leadership — Unit 7: Conflict Resolution and Church Discipline",
+    "es": "📖 Administración y Liderazgo — Unidad 7: Resolución de conflictos y disciplina en la iglesia"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3b2d914e9a7f"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "\"If he hears you, you have gained your brother.\" — Matthew 18:15 (NKJV)",
+    "es": "⚑ \"Si te oyere, has ganado a tu hermano.\" — Mateo 18:15 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "dd7ed3e97535"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "heading",
+   "text": {
+    "en": "Introduction — Where Two or Three Are Gathered",
+    "es": "Introducción — Donde dos o tres se reúnen"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "299621241b56"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "A church is people, and wherever people are gathered, there will be conflict. Anyone who promises you a church without friction is selling you a fellowship that does not exist this side of heaven. The question is never whether conflict will come; it is whether the leader will know what to do when it does. And here we must be careful, because the world has taught us two equally wrong reflexes. The first is to avoid all conflict, to keep the peace at any price, to let the wound fester under a smile. The second is to fight, to win, to treat the brother across the table as an enemy to be defeated. Scripture gives us a third way — neither the cowardice that ignores sin nor the cruelty that crushes the sinner, but a patient, loving, restorative process aimed at one goal: to gain your brother. That goal will govern this entire unit. We do not discipline to punish. We discipline to restore.",
+    "es": "Una iglesia son personas, y dondequiera que se reúnen personas, habrá conflicto. Cualquiera que le prometa una iglesia sin fricción le está vendiendo una comunión que no existe de este lado del cielo. La pregunta nunca es si vendrá el conflicto; es si el líder sabrá qué hacer cuando venga. Y aquí debemos tener cuidado, porque el mundo nos ha enseñado dos reflejos igualmente errados. El primero es evitar todo conflicto, guardar la paz a cualquier precio, dejar que la herida supure bajo una sonrisa. El segundo es pelear, ganar, tratar al hermano del otro lado de la mesa como a un enemigo que hay que derrotar. La Escritura nos da un tercer camino — ni la cobardía que ignora el pecado ni la crueldad que aplasta al pecador, sino un proceso paciente, amoroso y restaurador dirigido a una sola meta: ganar a tu hermano. Esa meta gobernará toda esta unidad. No disciplinamos para castigar. Disciplinamos para restaurar."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0cd109164130"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "heading",
+   "text": {
+    "en": "I. Two Kinds of Conflict",
+    "es": "I. Dos clases de conflicto"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8d8059d56b14"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "Before we reach for any process, we must learn to tell two very different things apart, because treating one like the other does enormous damage. There is conflict that is merely a difference, and there is conflict that involves sin. Much of what troubles a church is the first kind — two godly people who simply disagree about the color of the carpet, the style of the music, the direction of a ministry. No one has sinned. These are matters of preference and wisdom, and they call for patience, listening, and a willingness to prefer one another.",
+    "es": "Antes de echar mano de cualquier proceso, debemos aprender a distinguir dos cosas muy diferentes, porque tratar a una como la otra hace un daño enorme. Hay conflicto que es meramente una diferencia, y hay conflicto que involucra pecado. Mucho de lo que perturba a una iglesia es de la primera clase — dos personas piadosas que simplemente difieren sobre el color de la alfombra, el estilo de la música, el rumbo de un ministerio. Nadie ha pecado. Estos son asuntos de preferencia y sabiduría, y piden paciencia, escucha y disposición a preferirse unos a otros."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1b12398d072a"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Not every disagreement is a problem to be solved.</strong> For years I served on a seminary faculty — a president and several professors, and every one of us a different personality. When a weighty matter came up to decide, you could count on at least six opinions in the room. I never learned to dread that. Those many viewpoints let us turn a question over and see every side of it before we chose, and the work we served was the better for it. Conflict like that is not a sickness in the body; it is a sign of life in it. A wise leader does not rush to silence it.",
+    "es": "<strong>No todo desacuerdo es un problema que resolver.</strong> Durante años serví en una facultad de seminario — un presidente y varios profesores, y cada uno de una personalidad distinta. Cuando surgía un asunto de peso que decidir, se podía contar con al menos seis opiniones en la sala. Nunca aprendí a temerlo. Aquellos muchos puntos de vista nos permitían examinar la cuestión por todos sus lados antes de decidir, y la obra que servíamos salía mejor por ello. Un conflicto así no es una enfermedad en el cuerpo; es señal de que hay vida en él. El líder sabio no se apresura a acallarlo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "daf9e14e3cd2"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "But some conflict involves actual sin — a brother has done real wrong, and the matter cannot be settled by compromise because righteousness is at stake. The leader who treats a sin problem as a mere personality clash will fail to confront what God commands him to confront. And the leader who treats a simple difference of opinion as if it were sin will turn a disagreement into a heresy trial and wound the innocent. So the first act of wisdom in any conflict is discernment: is this a difference, or is this sin? The answer determines everything that follows. For honest differences, seek peace and mutual deference. For sin, there is a process the Lord Himself laid down.",
+    "es": "Pero algunos conflictos involucran pecado verdadero — un hermano ha hecho un mal real, y el asunto no puede resolverse por concesión porque la justicia está en juego. El líder que trata un problema de pecado como un mero choque de personalidades fallará en confrontar lo que Dios le manda confrontar. Y el líder que trata una simple diferencia de opinión como si fuera pecado convertirá un desacuerdo en un juicio de herejía y herirá al inocente. Así que el primer acto de sabiduría en todo conflicto es el discernimiento: ¿es esto una diferencia, o es pecado? La respuesta determina todo lo que sigue. Para las diferencias honestas, busque la paz y la deferencia mutua. Para el pecado, hay un proceso que el Señor mismo estableció."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5a18a2aba874"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "We do not discipline to punish. We discipline to restore.",
+    "es": "No disciplinamos para castigar. Disciplinamos para restaurar."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6c4a72c2e9a0"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "heading",
+   "text": {
+    "en": "II. The Lord's Own Process: Matthew 18",
+    "es": "II. El proceso del Señor mismo: Mateo 18"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "183332433be4"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "prose",
+   "text": {
+    "en": "When sin is involved, we are not left to improvise. The Lord Jesus gave the church a precise, escalating process, and its genius is that it begins as small and private as possible and grows only as large as it must. <em>\"Moreover if your brother sins against you, go and tell him his fault between you and him alone. If he hears you, you have gained your brother\"</em> (Matthew 18:15).",
+    "es": "Cuando hay pecado de por medio, no quedamos librados a improvisar. El Señor Jesús dio a la iglesia un proceso preciso y escalonado, y su genio está en que comienza tan pequeño y privado como sea posible y crece solo cuanto deba. <em>\"Por tanto, si tu hermano peca contra ti, ve y repréndele entre ti y él solo; si te oyere, has ganado a tu hermano\"</em> (⚑ Mateo 18:15)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f7d7c0b4120e"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "Notice four things in that one verse. First, you <em>go</em> — the offended one takes the initiative; he does not wait, nor broadcast the offense to others. Second, it is <em>private</em> — \"between you and him alone,\" the smallest possible circle. Third, the aim is stated plainly — \"you have gained your brother,\" not won the argument, not exposed the wrongdoer, but gained him back. And fourth, most matters end right here, at step one, in private, and no one else ever needs to know. If every believer obeyed only this first verse, the vast majority of church conflicts would die quietly in a private conversation and never metastasize into the public bitterness that splits congregations.",
+    "es": "Note cuatro cosas en ese solo versículo. Primero, usted <em>va</em> — el ofendido toma la iniciativa; no espera, ni divulga la ofensa a otros. Segundo, es <em>privado</em> — \"entre ti y él solo,\" el círculo más pequeño posible. Tercero, la meta se declara con claridad — \"has ganado a tu hermano,\" no ganaste la discusión, no expusiste al que hizo el mal, sino que lo recuperaste. Y cuarto, la mayoría de los asuntos terminan aquí mismo, en el primer paso, en privado, y nadie más necesita saberlo jamás. Si cada creyente obedeciera solo este primer versículo, la inmensa mayoría de los conflictos de la iglesia morirían calladamente en una conversación privada y nunca se convertirían en la amargura pública que divide congregaciones."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1246236e373d"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "Only if that private appeal fails does the circle widen, and even then by the smallest increment: <em>\"But if he will not hear, take with you one or two more, that by the mouth of two or three witnesses every word may be established\"</em> (Matthew 18:16). Not a crowd — one or two, for confirmation and help, another careful, loving appeal. And only if that also fails does it become the church's matter: <em>\"And if he refuses to hear them, tell it to the church\"</em> (Matthew 18:17). The progression is always from the smallest circle outward, never the reverse. The sin that could have been healed in private is brought before the body only as a last resort, when a brother has hardened himself against repeated, loving appeals.",
+    "es": "Solo si esa apelación privada falla se ensancha el círculo, y aun entonces por el incremento más pequeño: <em>\"Mas si no te oyere, toma aún contigo uno o dos, para que en boca de dos o tres testigos conste toda palabra\"</em> (⚑ Mateo 18:16). No una multitud — uno o dos, para confirmación y ayuda, otra apelación cuidadosa y amorosa. Y solo si eso también falla se vuelve asunto de la iglesia: <em>\"Y si no los oyere a ellos, dilo a la iglesia\"</em> (⚑ Mateo 18:17). La progresión es siempre del círculo más pequeño hacia afuera, nunca al revés. El pecado que pudo haberse sanado en privado se lleva ante el cuerpo solo como último recurso, cuando un hermano se ha endurecido contra repetidas apelaciones amorosas."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "da05c3b6b68d"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "scripture",
+   "text": {
+    "en": "\"If your brother sins against you, go and tell him his fault between you and him alone. If he hears you, you have gained your brother.\" — Matthew 18:15 (NKJV)",
+    "es": "⚑ \"Si tu hermano peca contra ti, ve y repréndele entre ti y él solo; si te oyere, has ganado a tu hermano.\" — Mateo 18:15 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ea262b01d48e"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "heading",
+   "text": {
+    "en": "III. The Goal Is Always Restoration",
+    "es": "III. La meta es siempre la restauración"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a65b7b34e661"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "Hold on to the purpose, because everything in Matthew 18 is bent toward it: to <em>gain your brother</em>. Even the final, painful step — <em>\"let him be to you like a heathen and a tax collector\"</em> (Matthew 18:17) — is not the church taking vengeance. It is the sorrowful recognition that a man has chosen his sin over his Savior and his fellowship, a removal designed to wake him up, not to throw him away. And remember who said it: this is the same Jesus who ate with tax collectors and sinners, who went looking for them. Even being \"like a tax collector\" is, in His mouth, not the end of pursuit but a different form of it.",
+    "es": "Aférrese al propósito, porque todo en Mateo 18 se inclina hacia él: <em>ganar a tu hermano</em>. Aun el paso final y doloroso — <em>\"tenle por gentil y publicano\"</em> (⚑ Mateo 18:17) — no es la iglesia tomando venganza. Es el reconocimiento triste de que un hombre ha escogido su pecado por encima de su Salvador y su comunión, una remoción diseñada para despertarlo, no para desecharlo. Y recuerde quién lo dijo: este es el mismo Jesús que comió con publicanos y pecadores, que salió a buscarlos. Aun ser \"como un publicano\" es, en su boca, no el fin de la búsqueda sino otra forma de ella."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8baa839c6389"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "Paul shows us the restoration completed. In Corinth a man under discipline had repented, and Paul writes: <em>\"you ought rather to forgive and comfort him, lest perhaps such a one be swallowed up with too much sorrow... reaffirm your love to him\"</em> (2 Corinthians 2:7-8). There is the whole point in one line. Discipline that has done its work ends not in permanent exile but in forgiveness, comfort, and the public reaffirming of love. The leader who disciplines without yearning for that reunion has missed the heart of God, who <em>\"does not afflict willingly\"</em> (Lamentations 3:33) and who disciplines those He loves precisely so He may restore them.",
+    "es": "Pablo nos muestra la restauración consumada. En Corinto un hombre bajo disciplina se había arrepentido, y Pablo escribe: <em>\"más bien debierais perdonarle y consolarle, para que no sea consumido de demasiada tristeza... que confirméis el amor para con él\"</em> (⚑ 2 Corintios 2:7-8). Ahí está todo el punto en una línea. La disciplina que ha hecho su obra termina no en exilio permanente sino en perdón, consuelo y la reafirmación pública del amor. El líder que disciplina sin anhelar esa reunión ha perdido el corazón de Dios, que <em>\"no aflige ni entristece de su corazón\"</em> (⚑ Lamentaciones 3:33) y que disciplina a los que ama precisamente para poder restaurarlos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1d2b7f7902f9"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "heading",
+   "text": {
+    "en": "IV. The Hard Case: When Removal Is Required",
+    "es": "IV. El caso difícil: cuando se requiere la remoción"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8143015d55fc"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "There is a sterner word that must be spoken, because love is not the same as the refusal to act. Sometimes a sin is so serious, so public, and so unrepented that the church must, for a season, remove the person from its fellowship — not in cruelty, but in faithfulness. In Corinth there was open, unrepented immorality of a kind that even the pagans did not condone, and the church was proud of its tolerance. Paul was horrified, and his command was unflinching: <em>\"deliver such a one to Satan for the destruction of the flesh, that his spirit may be saved in the day of the Lord Jesus\"</em> (1 Corinthians 5:5).",
+    "es": "Hay una palabra más severa que debe decirse, porque el amor no es lo mismo que la negativa a actuar. A veces un pecado es tan grave, tan público y tan impenitente que la iglesia debe, por una temporada, remover a la persona de su comunión — no por crueldad, sino por fidelidad. En Corinto había inmoralidad abierta e impenitente de una clase que ni los paganos consentían, y la iglesia estaba orgullosa de su tolerancia. Pablo quedó horrorizado, y su mandato fue inflexible: <em>\"el tal sea entregado a Satanás para destrucción de la carne, a fin de que el espíritu sea salvo en el día del Señor Jesús\"</em> (⚑ 1 Corintios 5:5)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5ebb4b0215b4"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "Read even that severe sentence to its end: <em>that his spirit may be saved</em>. The most extreme act of church discipline in all of Scripture still has a redemptive aim — it is surgery, not execution. Paul's concern is twofold: the man himself, who must be shocked out of a sin that is destroying him, and the whole body, for <em>\"a little leaven leavens the whole lump\"</em> (1 Corinthians 5:6). A church that tolerates flagrant, unrepented sin among its members is not being gracious; it is allowing infection to spread through the body. So there are times to act decisively. But even then the goal is never to be rid of a person — it is to save the body from corruption and to bring the sinner, painfully, back to his senses and back to Christ.",
+    "es": "Lea aun esa sentencia severa hasta el final: <em>a fin de que el espíritu sea salvo</em>. El acto más extremo de disciplina eclesiástica en toda la Escritura todavía tiene un fin redentor — es cirugía, no ejecución. La preocupación de Pablo es doble: el hombre mismo, que debe ser sacudido fuera de un pecado que lo destruye, y todo el cuerpo, porque <em>\"un poco de levadura leuda toda la masa\"</em> (⚑ 1 Corintios 5:6). Una iglesia que tolera el pecado flagrante e impenitente entre sus miembros no está siendo bondadosa; está permitiendo que la infección se extienda por el cuerpo. Así que hay momentos de actuar decididamente. Pero aun entonces la meta nunca es deshacerse de una persona — es salvar al cuerpo de la corrupción y traer al pecador, dolorosamente, de vuelta a su sano juicio y de vuelta a Cristo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "054f4d067761"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "scripture",
+   "text": {
+    "en": "\"...deliver such a one to Satan for the destruction of the flesh, that his spirit may be saved in the day of the Lord Jesus.\" — 1 Corinthians 5:5 (NKJV)",
+    "es": "⚑ \"...el tal sea entregado a Satanás para destrucción de la carne, a fin de que el espíritu sea salvo en el día del Señor Jesús.\" — 1 Corintios 5:5 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ada027aae194"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "heading",
+   "text": {
+    "en": "V. Reconciliation Cannot Wait",
+    "es": "V. La reconciliación no puede esperar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e4381a385f3f"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "Now turn the lens around, because conflict is rarely one-sided, and the Lord puts startling urgency on the offender's responsibility too. Most of us, when we have wronged someone, prefer to let time do the work and hope the matter quietly fades. Jesus forbids it. <em>\"If you bring your gift to the altar, and there remember that your brother has something against you, leave your gift there before the altar, and go your way. First be reconciled to your brother, and then come and offer your gift\"</em> (Matthew 5:23-24).",
+    "es": "Ahora gire la lente, porque el conflicto rara vez es de un solo lado, y el Señor pone una urgencia asombrosa también sobre la responsabilidad del ofensor. La mayoría de nosotros, cuando hemos agraviado a alguien, preferimos dejar que el tiempo haga la obra y esperar que el asunto se desvanezca calladamente. Jesús lo prohíbe. <em>\"Si trajeres tu ofrenda al altar, y allí te acordares que tu hermano tiene algo contra ti, deja allí tu ofrenda delante del altar, y vete, reconcíliate primero con tu hermano, y entonces ven y ofrece tu ofrenda\"</em> (⚑ Mateo 5:23-24)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "07e18866d472"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "Sit with how radical that is. You are at the very moment of worship, your offering in your hands, and you remember that someone has a grievance against <em>you</em>. Christ says: stop. Leave the gift. Go put it right first. He will not accept the worship of a man who is content to stay at odds with his brother. The vertical relationship with God and the horizontal relationship with people are tied together, and you cannot be right with the One while you refuse to make peace with the other. The lesson for every member, and first of all for the leader, is plain: do not let conflict sit. The longer a grievance ages, the harder it sets, like mortar. Go quickly. Go first. Reconciliation cannot wait for a convenient season.",
+    "es": "Deténgase en lo radical que es esto. Usted está en el momento mismo de la adoración, su ofrenda en las manos, y recuerda que alguien tiene una queja contra <em>usted</em>. Cristo dice: alto. Deje la ofrenda. Vaya y arregle el asunto primero. Él no aceptará la adoración de un hombre que se contenta con seguir enemistado con su hermano. La relación vertical con Dios y la relación horizontal con las personas están atadas juntas, y usted no puede estar bien con el Uno mientras se niega a hacer las paces con el otro. La lección para todo miembro, y ante todo para el líder, es clara: no deje que el conflicto se asiente. Cuanto más envejece un agravio, más se endurece, como la argamasa. Vaya pronto. Vaya primero. La reconciliación no puede esperar una temporada conveniente."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "45c2e29073f5"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "heading",
+   "text": {
+    "en": "VI. A Soft Answer and a Council",
+    "es": "VI. Una blanda respuesta y un concilio"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "82883e2aa659"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "Scripture also fills our hands with practical wisdom for the heat of the moment. <em>\"A soft answer turns away wrath, but a harsh word stirs up anger\"</em> (Proverbs 15:1). How much conflict in the church is created not by the issue itself but by the tone in which it is handled? The same hard truth, spoken gently, heals; spoken harshly, wounds. A leader must learn the discipline of the soft answer, especially when he is provoked — for the wrath he turns away is often his own.",
+    "es": "La Escritura también nos llena las manos de sabiduría práctica para el calor del momento. <em>\"La blanda respuesta quita la ira; mas la palabra áspera hace subir el furor\"</em> (⚑ Proverbios 15:1). ¿Cuánto conflicto en la iglesia se crea no por el asunto mismo sino por el tono con que se maneja? La misma verdad dura, dicha con suavidad, sana; dicha con aspereza, hiere. Un líder debe aprender la disciplina de la blanda respuesta, especialmente cuando es provocado — porque la ira que aplaca a menudo es la suya propia."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5c2c2666dc79"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "And when a genuine dispute threatens to divide the whole body, Scripture even gives us a model for corporate conflict resolution. In Acts 15 the early church faced a furious controversy that could have split it in two. They did not paper it over, and they did not let the loudest voices win. They gathered the leaders, they let both sides speak fully, they searched the Scriptures, they sought the mind of the Spirit, and they reached a decision the whole body could own: <em>\"it seemed good to the Holy Spirit, and to us\"</em> (Acts 15:28). There is a pattern for handling the serious disputes that will come: not avoidance, not domination, but open, prayerful, Scripture-governed deliberation that seeks a resolution the body can carry together.",
+    "es": "Y cuando una disputa genuina amenaza con dividir a todo el cuerpo, la Escritura hasta nos da un modelo para la resolución corporativa de conflictos. En Hechos 15 la iglesia primitiva enfrentó una controversia furiosa que pudo haberla partido en dos. No la encubrieron, ni dejaron que las voces más fuertes ganaran. Reunieron a los líderes, dejaron que ambos lados hablaran plenamente, escudriñaron las Escrituras, buscaron la mente del Espíritu, y alcanzaron una decisión que todo el cuerpo podía hacer suya: <em>\"ha parecido bien al Espíritu Santo, y a nosotros\"</em> (⚑ Hechos 15:28). Ahí hay un patrón para manejar las disputas serias que vendrán: ni evasión ni dominación, sino deliberación abierta, en oración y gobernada por la Escritura, que busca una resolución que el cuerpo pueda llevar junto."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6534d23559a9"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "scripture",
+   "text": {
+    "en": "\"A soft answer turns away wrath, but a harsh word stirs up anger.\" — Proverbs 15:1 (NKJV)",
+    "es": "⚑ \"La blanda respuesta quita la ira; mas la palabra áspera hace subir el furor.\" — Proverbios 15:1 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6fe6c3597472"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "heading",
+   "text": {
+    "en": "VII. The Spirit in Which We Do It All",
+    "es": "VII. El espíritu con que lo hacemos todo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "44e10830ec81"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "Finally, the manner matters as much as the method, because the same process carried out in a hard spirit becomes its own sin. Hear the tone Scripture requires even of correction: <em>\"restore such a one in a spirit of gentleness, considering yourself lest you also be tempted\"</em> (Galatians 6:1). The one who confronts must do so trembling at his own capacity to fall — \"lest you also.\" Correction offered by a proud man is a weapon; correction offered by a humble one is medicine.",
+    "es": "Finalmente, la manera importa tanto como el método, porque el mismo proceso llevado a cabo con un espíritu duro se vuelve su propio pecado. Oiga el tono que la Escritura exige aun de la corrección: <em>\"restauradle... con espíritu de mansedumbre, considerándote a ti mismo, no sea que tú también seas tentado\"</em> (⚑ Gálatas 6:1). El que confronta debe hacerlo temblando ante su propia capacidad de caer — \"no sea que tú también.\" La corrección ofrecida por un hombre orgulloso es un arma; la corrección ofrecida por uno humilde es medicina."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c4b8ee75e5f6"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "prose",
+   "text": {
+    "en": "And over the whole of it stands the law of forgiveness, which the leader must both practice and teach. When Peter asked whether forgiving seven times was enough, Jesus answered, <em>\"up to seventy times seven\"</em> (Matthew 18:21-22) — and He told the parable of the servant forgiven a vast debt who then seized a fellow servant by the throat over a trifling one. The point lands on every one of us: we who have been forgiven an unpayable debt by God have no standing to hold a small one against a brother. So resolve conflict and exercise discipline, yes — confront clearly, act faithfully, do not let sin fester in the body. But do it all as a forgiven sinner among forgiven sinners, with a soft answer, in a spirit of gentleness, watching your own heart, and aiming every step at the goal the Lord set: not to win, not to punish, but to gain your brother and to keep the body whole.",
+    "es": "Y sobre todo ello se levanta la ley del perdón, que el líder debe a la vez practicar y enseñar. Cuando Pedro preguntó si perdonar siete veces era suficiente, Jesús respondió: <em>\"hasta setenta veces siete\"</em> (⚑ Mateo 18:21-22) — y contó la parábola del siervo perdonado de una deuda enorme que luego agarró por el cuello a un consiervo por una insignificante. El punto cae sobre cada uno de nosotros: los que hemos sido perdonados de una deuda impagable por Dios no tenemos derecho a retener una pequeña contra un hermano. Así que resuelva el conflicto y ejerza la disciplina, sí — confronte con claridad, actúe con fidelidad, no deje que el pecado supure en el cuerpo. Pero hágalo todo como un pecador perdonado entre pecadores perdonados, con una blanda respuesta, con espíritu de mansedumbre, vigilando su propio corazón, y apuntando cada paso a la meta que el Señor fijó: no ganar, no castigar, sino ganar a tu hermano y mantener el cuerpo entero."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d2d186ffea10"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "prose",
+   "text": {
+    "en": "Unit 7 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 7 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "39593a6cb288"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33593c268178"
+    }
+   }
+  },
+  {
+   "id": "b037",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b038",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

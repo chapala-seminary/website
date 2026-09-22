@@ -1,0 +1,558 @@
+{
+ "course": "CTSBibleCharacters2",
+ "unit": 5,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Unit 6 →</button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #2f4f2f;\"><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\">\n    <h2><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n    <input type=\"text\" id=\"regName\" placeholder=\"Full name / Nombre completo\" aria-label=\"Full name / Nombre completo\">\n    <input type=\"email\" id=\"regEmail\" placeholder=\"Email\" aria-label=\"Email\">\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate Track</option>\n        <option value=\"mdiv\">Master of Divinity (M.Div.) Track</option>\n        <option value=\"thm\">Master of Theology (Th.M.) Track</option>\n    </select>\n    <button class=\"nav-btn\" id=\"regBtn\"><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\"><p><!--cts:b007:en--></p>\n<p><!--cts:b008:en--></p>\n<p><!--cts:b009:en--></p>\n<p><!--cts:b010:en--></p>\n<p><!--cts:b011:en--></p>\n<h2><!--cts:b012:en--></h2>\n<p><!--cts:b013:en--></p>\n<div class=\"scripture\"><!--cts:b014:en--></div>\n<p><!--cts:b015:en--></p>\n<p><!--cts:b016:en--></p>\n<h2><!--cts:b017:en--></h2>\n<p><!--cts:b018:en--></p>\n<div class=\"scripture\"><!--cts:b019:en--></div>\n<p><!--cts:b020:en--></p>\n<p><!--cts:b021:en--></p>\n<h2><!--cts:b022:en--></h2>\n<p><!--cts:b023:en--></p>\n<div class=\"scripture\"><!--cts:b024:en--></div>\n<p><!--cts:b025:en--></p>\n<p><!--cts:b026:en--></p>\n<h2><!--cts:b027:en--></h2>\n<p><!--cts:b028:en--></p>\n<div class=\"scripture\"><!--cts:b029:en--></div>\n<p><!--cts:b030:en--></p>\n<p><!--cts:b031:en--></p>\n<h2><!--cts:b032:en--></h2>\n<p><!--cts:b033:en--></p>\n<div class=\"scripture\"><!--cts:b034:en--></div>\n<p><!--cts:b035:en--></p></div>\n<div class=\"lang-es\"><p><!--cts:b007:es--></p>\n<p><!--cts:b008:es--></p>\n<p><!--cts:b009:es--></p>\n<p><!--cts:b010:es--></p>\n<p><!--cts:b011:es--></p>\n<h2><!--cts:b012:es--></h2>\n<p><!--cts:b013:es--></p>\n<div class=\"scripture\"><!--cts:b014:es--></div>\n<p><!--cts:b015:es--></p>\n<p><!--cts:b016:es--></p>\n<h2><!--cts:b017:es--></h2>\n<p><!--cts:b018:es--></p>\n<div class=\"scripture\"><!--cts:b019:es--></div>\n<p><!--cts:b020:es--></p>\n<p><!--cts:b021:es--></p>\n<h2><!--cts:b022:es--></h2>\n<p><!--cts:b023:es--></p>\n<div class=\"scripture\"><!--cts:b024:es--></div>\n<p><!--cts:b025:es--></p>\n<p><!--cts:b026:es--></p>\n<h2><!--cts:b027:es--></h2>\n<p><!--cts:b028:es--></p>\n<div class=\"scripture\"><!--cts:b029:es--></div>\n<p><!--cts:b030:es--></p>\n<p><!--cts:b031:es--></p>\n<h2><!--cts:b032:es--></h2>\n<p><!--cts:b033:es--></p>\n<div class=\"scripture\"><!--cts:b034:es--></div>\n<p><!--cts:b035:es--></p></div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b036:en--></span><span class=\"lang-es\"><!--cts:b036:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b037:en--></span>\n       <span class=\"lang-es\"><!--cts:b037:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b038:en--></span><span class=\"lang-es\"><!--cts:b038:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b039:en--></span><span class=\"lang-es\"><!--cts:b039:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSBibleCharacters2Readings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "📖 Bible Characters II — Unit 5: Ezra — A Fresh New Start, the Scribe Who Restored God’s Word",
+    "es": "📖 Personajes de la Biblia II — Unidad 5: Esdras — Un Nuevo Comienzo, el Escriba que Restauró la Palabra de Dios"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a7ce0b836399"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "\"For Ezra had prepared his heart to seek the Law of the LORD, and to do it, and to teach statutes and ordinances in Israel.\" — Ezra 7:10 (NKJV)",
+    "es": "«Porque Esdras había preparado su corazón para inquirir la ley de Jehová, y para cumplirla, y para enseñar en Israel sus estatutos y derechos.» — Esdras 7:10 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d12011a19986"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "📝 Course Registration",
+    "es": "📝 Registro del Curso"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fde900fe006b"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "Please register before beginning this unit.",
+    "es": "Por favor regístrese antes de comenzar esta unidad."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6c8b91fbfb6f"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "All of us who came to live in a new country started over when we arrived. We may have left behind cars and houses, a familiar lifestyle, and old friends, and faced new challenges of culture, language, and daily life. But there was a gift hidden in it: a fresh start, a chance to become something better than we had been. The book of Ezra is the great Bible story of a fresh new start. After seventy years of captivity in Babylon, a remnant of the Jews came home to a ruined Jerusalem — the temple destroyed, the walls broken down — to begin again. And the keyword that holds the whole book together is one beautiful word: <em>Restoration</em>. Ezra shows us how God restores what sin has wrecked, whether in a nation, a church, or a single human heart.",
+    "es": "Todos los que vinimos a vivir a un país nuevo comenzamos de nuevo al llegar. Quizá dejamos atrás autos y casas, un estilo de vida familiar y viejos amigos, y enfrentamos nuevos desafíos de cultura, idioma y vida diaria. Pero había un regalo escondido en ello: un nuevo comienzo, una oportunidad de llegar a ser algo mejor de lo que habíamos sido. El libro de Esdras es la gran historia bíblica de un nuevo comienzo. Después de setenta años de cautiverio en Babilonia, un remanente de los judíos volvió a casa a una Jerusalén en ruinas —el templo destruido, los muros derribados— para comenzar otra vez. Y la palabra clave que sostiene todo el libro es una hermosa palabra: <em>Restauración</em>. Esdras nos muestra cómo Dios restaura lo que el pecado ha arruinado, sea en una nación, una iglesia, o un solo corazón humano."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6c222b7e3f2e"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Subject:</strong> Ezra — a fresh new start, and the God who restores.",
+    "es": "<strong>Tema:</strong> Esdras — un nuevo comienzo, y el Dios que restaura."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "97ee6fe9d229"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Keyword:</strong> Restoration. <strong>Text:</strong> Ezra 1:1-4.",
+    "es": "<strong>Palabra clave:</strong> Restauración. <strong>Texto:</strong> Esdras 1:1-4."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c92ac2d10552"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Proposition:</strong> After the exile God stirred a king and a people to come home and rebuild; under Zerubbabel the temple was restored, and under Ezra the scribe the Word was restored and the people brought to repentance — and it all pictures how God, by His grace, restores the fallen and points us at last to the greater restoration we have in Christ.",
+    "es": "<strong>Proposición:</strong> Después del exilio Dios movió a un rey y a un pueblo a volver a casa y reconstruir; bajo Zorobabel el templo fue restaurado, y bajo Esdras el escriba la Palabra fue restaurada y el pueblo llevado al arrepentimiento —y todo ello retrata cómo Dios, por su gracia, restaura al caído y nos señala al fin a la mayor restauración que tenemos en Cristo—."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c5210e6685e3"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "We will trace five movements in the message of Ezra.",
+    "es": "Trazaremos cinco movimientos en el mensaje de Esdras."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8b77d80c96b4"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "heading",
+   "text": {
+    "en": "I. A Fresh New Start",
+    "es": "I. Un Nuevo Comienzo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "935656450256"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "The book opens after Judah's seventy years in Babylon. Those born in exile had never seen the homeland; those old enough to remember knew that everything they had loved was gone. Yet the very first verse shows where any restoration begins — not with human resolve, but with God.",
+    "es": "El libro abre después de los setenta años de Judá en Babilonia. Los nacidos en el exilio nunca habían visto la tierra natal; los bastante mayores para recordar sabían que todo lo que habían amado se había perdido. Sin embargo, el primer versículo mismo muestra dónde comienza toda restauración —no con la resolución humana, sino con Dios—."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "08727b1b5408"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "scripture",
+   "text": {
+    "en": "In the first year of Cyrus king of Persia... the LORD stirred up the spirit of Cyrus king of Persia, so that he made a proclamation throughout all his kingdom. (Ezra 1:1, NKJV)",
+    "es": "En el primer año de Ciro rey de Persia... despertó Jehová el espíritu de Ciro rey de Persia, el cual hizo pregonar de palabra y también por escrito, por todo su reino. (Esdras 1:1, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1e5a36c81c1b"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "The Lord stirred up the spirit of a pagan emperor to send His people home, and then, verse five tells us, He stirred the spirits of the people themselves so that they rose up to go. Here is the first lesson of restoration: it is the work of God's grace from start to finish. We do not climb back to God on our own; He moves first, He stirs the heart, He opens the door — and those whose hearts He stirs respond and go. About fifty thousand made the long journey home. The God who began the work of bringing them back is the same God who still takes the initiative with every wandering soul, awakening in us a holy discontent with the far country and a longing to come home.",
+    "es": "Jehová despertó el espíritu de un emperador pagano para enviar a su pueblo a casa, y luego, el versículo cinco nos dice, despertó los espíritus del pueblo mismo de modo que se levantaron para ir. Aquí está la primera lección de la restauración: es la obra de la gracia de Dios de principio a fin. No subimos de vuelta a Dios por nuestra cuenta; Él se mueve primero, Él despierta el corazón, Él abre la puerta —y aquellos cuyo corazón Él despierta responden y van—. Unos cincuenta mil hicieron el largo viaje a casa. El Dios que comenzó la obra de traerlos de vuelta es el mismo Dios que todavía toma la iniciativa con cada alma errante, despertando en nosotros un santo descontento con la tierra lejana y un anhelo de volver a casa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a706dca8f15a"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "There is great comfort in beginning the book this way. The exiles were not summoned home because they had earned their way back, nor because seventy years had somehow paid their debt; they came home because God remembered His promise and moved. So it is with every spiritual comeback. The first stirring of desire you feel to return to God, the first discomfort with the life you have been living, is not something you manufactured — it is God already at work, calling you home. Do not despise that small beginning. It is the sign that the great Restorer has set His hand to your restoration.",
+    "es": "Hay gran consuelo en comenzar el libro de esta manera. Los exiliados no fueron llamados a casa porque se hubieran ganado el regreso, ni porque setenta años de algún modo hubieran pagado su deuda; volvieron a casa porque Dios recordó su promesa y se movió. Así es con todo regreso espiritual. El primer despertar del deseo que sientes de volver a Dios, la primera incomodidad con la vida que has estado viviendo, no es algo que tú fabricaste —es Dios ya obrando, llamándote a casa—. No desprecies ese pequeño comienzo. Es la señal de que el gran Restaurador ha puesto su mano a tu restauración."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ae2f8b9e24bc"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "heading",
+   "text": {
+    "en": "II. The King's Work: Rebuilding the Temple",
+    "es": "II. La Obra del Rey: Reconstruir el Templo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6746c934142c"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "The book divides naturally between two men. The first is Zerubbabel, the governor, a descendant of David of the kingly line, and his work was to rebuild the temple, told in chapters one through six. The work of a king is to build. Notice the order of what they did. Their very first act, out under the open sky among the ruins, was to build an altar and renew the worship and sacrifice God had commanded. Before they raised a single wall, they restored worship, for restoration always begins at the altar. Then they laid the foundation of the temple, and the sound that went up was strange and mixed.",
+    "es": "El libro se divide naturalmente entre dos hombres. El primero es Zorobabel, el gobernador, descendiente de David de la línea real, y su obra era reconstruir el templo, narrada en los capítulos uno al seis. La obra de un rey es construir. Note el orden de lo que hicieron. Su primer acto, al aire libre entre las ruinas, fue edificar un altar y renovar la adoración y el sacrificio que Dios había mandado. Antes de levantar un solo muro, restauraron la adoración, porque la restauración siempre comienza en el altar. Luego pusieron el fundamento del templo, y el sonido que se elevó fue extraño y mezclado."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f2806a1b49a7"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "scripture",
+   "text": {
+    "en": "...many of the priests and Levites and heads of the fathers' houses, old men who had seen the first temple, wept with a loud voice when the foundation of this temple was laid before their eyes... so the people could not discern the noise of the shout of joy from the noise of the weeping. (Ezra 3:12-13, NKJV)",
+    "es": "...muchos de los sacerdotes y de los levitas y de los jefes de las casas paternas, ancianos que habían visto el primer templo, viendo echar los cimientos de este templo, lloraban en alta voz... y no podía distinguir el pueblo el clamor de los gritos de alegría, de la voz del lloro. (Esdras 3:12-13, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b377ebcf4682"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "The young shouted for joy at a beginning; the old wept, remembering Solomon's glorious temple now lost. And then came opposition, as it always does. The adversaries of the land offered to \"help\" build — but their worship was mixed with idolatry, and to join with them would have corrupted the work, so they were refused. The veil of friendship quickly turned to hostility; the enemies discouraged the people, made them afraid, and even used legal means to stop the work for years. But God sent two prophets, Haggai and Zechariah, to stir the people's hearts again; the work resumed, the decree of Darius confirmed it, and at last the temple was finished and the people kept the Passover with joy. The pattern is unmistakable: God's work meets opposition, but God's word, through His prophets, revives His people to finish what He began.",
+    "es": "Los jóvenes gritaban de alegría ante un comienzo; los ancianos lloraban, recordando el glorioso templo de Salomón ahora perdido. Y entonces vino la oposición, como siempre sucede. Los adversarios de la tierra se ofrecieron a \"ayudar\" a construir —pero su adoración estaba mezclada con idolatría, y unirse a ellos habría corrompido la obra, así que fueron rechazados—. El velo de amistad pronto se volvió hostilidad; los enemigos desanimaron al pueblo, lo atemorizaron, y aun usaron medios legales para detener la obra por años. Pero Dios envió dos profetas, Hageo y Zacarías, para despertar de nuevo los corazones del pueblo; la obra se reanudó, el decreto de Darío la confirmó, y al fin el templo fue terminado y el pueblo celebró la Pascua con gozo. El patrón es inconfundible: la obra de Dios encuentra oposición, pero la palabra de Dios, por medio de sus profetas, reaviva a su pueblo para terminar lo que Él comenzó."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9dd601a8e12e"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "We should not pass quickly over those mixed voices at the foundation. The same event drew shouts of joy from some and tears from others, and both were sincere. Restoration often feels exactly like that. When God begins to rebuild a broken life, there is real joy at the fresh beginning, and yet there can be honest grief over the wasted years and the ruined glory that sin destroyed. Both belong. We may weep over what was lost even as we rejoice over what God is now doing, and the Lord receives both the shout and the tear as worship from a heart coming home.",
+    "es": "No debemos pasar rápido sobre aquellas voces mezcladas en el fundamento. El mismo suceso sacó gritos de gozo de algunos y lágrimas de otros, y ambos eran sinceros. La restauración a menudo se siente exactamente así. Cuando Dios comienza a reconstruir una vida quebrantada, hay gozo verdadero ante el nuevo comienzo, y sin embargo puede haber dolor honesto por los años perdidos y la gloria arruinada que el pecado destruyó. Ambos pertenecen. Podemos llorar por lo que se perdió aun mientras nos regocijamos por lo que Dios ahora hace, y el Señor recibe tanto el grito como la lágrima como adoración de un corazón que vuelve a casa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e62cabc09da0"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "heading",
+   "text": {
+    "en": "III. The Priest's Work: Restoring the Word",
+    "es": "III. La Obra del Sacerdote: Restaurar la Palabra"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cbc7b496056a"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "The second man is Ezra himself, and he appears more than sixty years later, in chapters seven through ten. If Zerubbabel was of the kingly line and came to rebuild, Ezra was of the priestly line, descended from Aaron, and the work of a priest is to cleanse. He came to restore not stones but souls — to bring the people back to the Word of God.",
+    "es": "El segundo hombre es Esdras mismo, y aparece más de sesenta años después, en los capítulos siete al diez. Si Zorobabel era de la línea real y vino a reconstruir, Esdras era de la línea sacerdotal, descendiente de Aarón, y la obra de un sacerdote es limpiar. Vino a restaurar no piedras sino almas —a traer al pueblo de vuelta a la Palabra de Dios—."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "47823560494b"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "scripture",
+   "text": {
+    "en": "...this Ezra came up from Babylon; and he was a skilled scribe in the Law of Moses... And the king granted him all his request, according to the hand of the LORD his God upon him. (Ezra 7:6, NKJV)",
+    "es": "...este Esdras subió de Babilonia; y era escriba diligente en la ley de Moisés... y le concedió el rey todo lo que pidió, porque la mano de Jehová su Dios estaba sobre él. (Esdras 7:6, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6316d655f9b2"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "Would you not like to have it said of you, \"the king granted him all that he asked\"? What kind of man is this, that a pagan emperor holds him in such regard? The secret is given in the next verses, in the great epigraph of his life: Ezra had set his heart to study the Law of the Lord, and to do it, and to teach His statutes in Israel. Notice the order — study, do, teach. He did not merely prepare his arguments or sharpen his intellect; he prepared his heart. He first learned the Word, then obeyed the Word, and only then taught the Word, and because he lived it before he preached it, his teaching had power. That is what the Word of God does in a life given to it: it strengthens and beautifies the place of our fellowship with God, the way a restored temple is made glorious again.",
+    "es": "¿No le gustaría que se dijera de usted: \"le concedió el rey todo lo que pidió\"? ¿Qué clase de hombre es éste, que un emperador pagano lo tiene en tal estima? El secreto se da en los versículos siguientes, en el gran epígrafe de su vida: Esdras había preparado su corazón para inquirir la ley de Jehová, y para cumplirla, y para enseñar en Israel sus estatutos. Note el orden —estudiar, cumplir, enseñar—. No solo preparó sus argumentos ni afiló su intelecto; preparó su corazón. Primero aprendió la Palabra, luego obedeció la Palabra, y solo entonces enseñó la Palabra, y porque la vivió antes de predicarla, su enseñanza tuvo poder. Eso es lo que la Palabra de Dios hace en una vida entregada a ella: fortalece y embellece el lugar de nuestra comunión con Dios, como un templo restaurado es hecho glorioso de nuevo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "890910c913fa"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "It is worth weighing how rare such a man is. Many know the Scriptures well enough to argue about them, yet have never let the Word govern their conduct. Ezra closed that gap. The book he opened was not first a book to debate but a book to obey, and only a man who has bowed to the Word himself can teach it with authority to others. This is the order God still honors in those who would handle His Word. Learn it on your knees, live it in your home and your work, and then your teaching will carry a weight that mere cleverness can never give.",
+    "es": "Vale la pena sopesar cuán raro es tal hombre. Muchos conocen las Escrituras lo bastante bien para discutir sobre ellas, y sin embargo nunca han dejado que la Palabra gobierne su conducta. Esdras cerró esa brecha. El libro que abrió no era primero un libro para debatir sino un libro para obedecer, y solo un hombre que se ha inclinado a la Palabra él mismo puede enseñarla con autoridad a otros. Este es el orden que Dios todavía honra en los que manejarían su Palabra. Apréndela de rodillas, vívela en tu hogar y tu trabajo, y entonces tu enseñanza llevará un peso que la mera astucia nunca puede dar."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "67e1c91edf03"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "heading",
+   "text": {
+    "en": "IV. Restoration Means Repentance",
+    "es": "IV. La Restauración Significa Arrepentimiento"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2dca793c3548"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "When Ezra arrived in Jerusalem, he found a heartbreaking condition. The people, the priests, even the leaders had intermarried with the surrounding pagan nations, mixing the holy people of God with the idolatry of the land. It was the very sin that had broken the nation before the exile — and after seventy years of discipline, they had drifted right back into it. The flesh never changes; no matter how long we have walked with God, we are never beyond the reach of our old sins if we leave off depending on Him. Ezra's reaction was not a shrug but anguish.",
+    "es": "Cuando Esdras llegó a Jerusalén, halló una condición desgarradora. El pueblo, los sacerdotes, aun los líderes se habían casado con las naciones paganas vecinas, mezclando al pueblo santo de Dios con la idolatría de la tierra. Era el pecado mismo que había quebrantado a la nación antes del exilio —y después de setenta años de disciplina, habían vuelto justo a él—. La carne nunca cambia; no importa cuánto hayamos andado con Dios, nunca estamos fuera del alcance de nuestros viejos pecados si dejamos de depender de Él. La reacción de Esdras no fue un encogimiento de hombros sino angustia."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dc9fb4a0130"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "scripture",
+   "text": {
+    "en": "So when I heard this thing, I tore my garment and my robe, and plucked out some of the hair of my head and beard, and sat down astonished. (Ezra 9:3, NKJV)",
+    "es": "Cuando oí esto, rasgué mi vestido y mi manto, y arranqué pelo de mi cabeza y de mi barba, y me senté angustiado en extremo. (Esdras 9:3, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "09d524713856"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "Ezra tore his clothes, sat appalled, and then poured out a prayer of confession, identifying himself with his people's guilt. And God moved in their hearts. The leaders came in broken-hearted contrition; a proclamation went out; and the people assembled — thousands of them, standing in the pouring rain in front of the temple — to confess their guilt and to put away the compromise they had embraced outside the will of God. It was radical, costly repentance. Real restoration is never cheap; it means naming the sin honestly, turning from it decisively, and making a clean break with whatever has pulled us away from God. The Lord Jesus taught the same severity: if your hand causes you to sin, cut it off. Be ruthless with the thing that is destroying you.",
+    "es": "Esdras rasgó su ropa, se sentó consternado, y luego derramó una oración de confesión, identificándose con la culpa de su pueblo. Y Dios se movió en sus corazones. Los líderes vinieron con contrición quebrantada; salió una proclamación; y el pueblo se reunió —miles de ellos, de pie bajo la lluvia torrencial frente al templo— para confesar su culpa y poner aparte la transigencia que habían abrazado fuera de la voluntad de Dios. Fue un arrepentimiento radical y costoso. La restauración verdadera nunca es barata; significa nombrar el pecado honestamente, apartarse de él decididamente, y hacer un rompimiento limpio con todo lo que nos ha alejado de Dios. El Señor Jesús enseñó la misma severidad: si tu mano te hace pecar, córtala. Sé despiadado con la cosa que te está destruyendo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2a14da9ad5f0"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "One sobering truth runs beneath this whole scene. These were God's own people, freshly returned from the discipline of exile, and still they drifted back into the very sin that had ruined them. It is a warning to every believer that no amount of past blessing makes us safe in the present. The flesh does not improve with age; the moment we stop leaning on the Spirit of God, we are capable of returning to the worst we ever were. That is why the work of restoration is never finished in a single ceremony. It is a daily returning, a daily dependence, a daily keeping of the heart near to God.",
+    "es": "Una verdad aleccionadora corre por debajo de toda esta escena. Estos eran el pueblo mismo de Dios, recién vueltos de la disciplina del exilio, y aun así volvieron a deslizarse al pecado mismo que los había arruinado. Es una advertencia a todo creyente de que ninguna cantidad de bendición pasada nos hace seguros en el presente. La carne no mejora con la edad; en el momento en que dejamos de apoyarnos en el Espíritu de Dios, somos capaces de volver a lo peor que jamás fuimos. Por eso la obra de restauración nunca se termina en una sola ceremonia. Es un volver diario, una dependencia diaria, un guardar diario del corazón cerca de Dios."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1a273dfa96be"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "heading",
+   "text": {
+    "en": "V. The Greater Restoration in Christ",
+    "es": "V. La Mayor Restauración en Cristo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d124720499c4"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "Stand back now and see the whole picture, for the book of Ezra is a portrait of how God restores a fallen heart, and it points beyond itself to Christ. First, the temple. Under the new covenant, God no longer dwells in a building of stone. There were no church buildings at all for the first centuries; the early believers met in homes, because the church has never been a building — it is the people of God when they gather.",
+    "es": "Demos un paso atrás ahora y veamos toda la imagen, porque el libro de Esdras es un retrato de cómo Dios restaura un corazón caído, y señala más allá de sí mismo a Cristo. Primero, el templo. Bajo el nuevo pacto, Dios ya no mora en un edificio de piedra. No hubo edificios de iglesia en absoluto durante los primeros siglos; los primeros creyentes se reunían en hogares, porque la iglesia nunca ha sido un edificio —es el pueblo de Dios cuando se reúne—."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "434ef1cbe396"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "scripture",
+   "text": {
+    "en": "Do you not know that you are the temple of God and that the Spirit of God dwells in you? (1 Corinthians 3:16, NKJV)",
+    "es": "¿No sabéis que sois templo de Dios, y que el Espíritu de Dios mora en vosotros? (1 Corintios 3:16, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "11c5e74f4c1c"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "prose",
+   "text": {
+    "en": "You yourself, believer, are now the temple where God's Spirit lives; and Jesus told the woman at the well that true worshipers worship not on this mountain or that, but in spirit and in truth, for the temple is no longer a place but a Presence. And see how the two men of Ezra meet in one Person. Christ is our King of David's line, who rebuilds what sin tore down; and Christ is our great High Priest, who cleanses what sin defiled. He does both works of restoration that Zerubbabel and Ezra only pictured. Remember, too, that no one fallen into sin ever comes back unless God first brings him back; the same grace that stirred Cyrus and stirred the exiles is the grace that stirs the heart of every prodigal, making us restless with the husks of the far country until we rise and go home to the Father. So hear the message of Ezra. If you have fallen, God has already taken the first step toward you. Come back to the altar; let His Word search and restore you; make a clean break with the sin; and be restored. For our God is the God of the fresh new start, and in Christ the ruined temple of the human heart is raised up and made glorious again.",
+    "es": "Tú mismo, creyente, eres ahora el templo donde vive el Espíritu de Dios; y Jesús le dijo a la mujer junto al pozo que los verdaderos adoradores adoran no en este monte ni en aquel, sino en espíritu y en verdad, porque el templo ya no es un lugar sino una Presencia. Y vea cómo los dos hombres de Esdras se encuentran en una sola Persona. Cristo es nuestro Rey de la línea de David, que reconstruye lo que el pecado derribó; y Cristo es nuestro gran Sumo Sacerdote, que limpia lo que el pecado contaminó. Él hace ambas obras de restauración que Zorobabel y Esdras solo retrataron. Recuerde, también, que nadie caído en pecado vuelve jamás a menos que Dios lo traiga de vuelta primero; la misma gracia que despertó a Ciro y despertó a los exiliados es la gracia que despierta el corazón de todo pródigo, haciéndonos inquietos con las algarrobas de la tierra lejana hasta que nos levantamos y vamos a casa al Padre. Así que oye el mensaje de Esdras. Si has caído, Dios ya ha dado el primer paso hacia ti. Vuelve al altar; deja que su Palabra te escudriñe y te restaure; haz un rompimiento limpio con el pecado; y sé restaurado. Porque nuestro Dios es el Dios del nuevo comienzo, y en Cristo el templo en ruinas del corazón humano es levantado y hecho glorioso de nuevo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3bd928c07b87"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "prose",
+   "text": {
+    "en": "Unit 5 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 5 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "68bacc2afdf3"
+    }
+   }
+  },
+  {
+   "id": "b037",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33593c268178"
+    }
+   }
+  },
+  {
+   "id": "b038",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b039",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

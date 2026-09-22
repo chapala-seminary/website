@@ -1,0 +1,964 @@
+{
+ "course": "CTSEvangelism",
+ "unit": 6,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <button class=\"nav-btn\" id=\"prevUnitBtn\">← <span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></button>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\"><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span> →</button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></a>\n<button class=\"clear-btn\" id=\"clearDataBtn\">🗑 <span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></button>\n\n<div class=\"card\">\n    <h1>\n        <span class=\"lang-en\"><!--cts:b005:en--></span>\n        <span class=\"lang-es\"><!--cts:b005:es--></span>\n    </h1>\n    <p class=\"attribution\">\n        <span class=\"lang-en\"><!--cts:b006:en--></span>\n        <span class=\"lang-es\"><!--cts:b006:es--></span>\n    </p>\n    <div id=\"trackBanner\" class=\"track-banner\" style=\"display:none;\"></div>\n</div>\n\n<!-- CTS audit 2026-05-23: registration panel removed. Registration happens once on Unit 1.\n     Later units read the saved student/track from localStorage (cts_student / cts_track).\n     If none is saved, the student silently defaults to the Certificate track (per Wayne). -->\n\n<div class=\"card\" id=\"teachingContent\">\n    <div class=\"lang-en\">\n        <h2><!--cts:b007:en--></h2>\n        <p><!--cts:b008:en--></p>\n\n        <h3><!--cts:b009:en--></h3>\n        <p><!--cts:b010:en--></p>\n\n        <h3><!--cts:b011:en--></h3>\n        <p><!--cts:b012:en--></p>\n\n        <div class=\"cwt-box\">\n        <h3><!--cts:b013:en--></h3>\n\n        <h4><!--cts:b014:en--></h4>\n        <p><!--cts:b015:en--></p>\n        <p><!--cts:b016:en--></p>\n\n        <h4><!--cts:b017:en--></h4>\n        <p><!--cts:b018:en--></p>\n        <ul>\n        <li><!--cts:b019:en--></li>\n        <li><!--cts:b020:en--></li>\n        <li><!--cts:b021:en--></li>\n        </ul>\n\n        <h4><!--cts:b022:en--></h4>\n        <p><!--cts:b023:en--></p>\n        <ul>\n        <li><!--cts:b024:en--></li>\n        <li><!--cts:b025:en--></li>\n        <li><!--cts:b026:en--></li>\n        </ul>\n\n        <h4><!--cts:b027:en--></h4>\n        <p><!--cts:b028:en--></p>\n        <ul>\n        <li><!--cts:b029:en--></li>\n        <li><!--cts:b030:en--></li>\n        <li><!--cts:b031:en--></li>\n        <li><!--cts:b032:en--></li>\n        </ul>\n\n        <h4><!--cts:b033:en--></h4>\n        <p><!--cts:b034:en--></p>\n        <ul>\n        <li><!--cts:b035:en--></li>\n        <li><!--cts:b036:en--></li>\n        <li><!--cts:b037:en--></li>\n        </ul>\n\n        <h4><!--cts:b038:en--></h4>\n        <p><!--cts:b039:en--></p>\n        <ul>\n        <li><!--cts:b040:en--></li>\n        <li><!--cts:b041:en--></li>\n        <li><!--cts:b042:en--></li>\n        </ul>\n        <p><!--cts:b043:en--></p>\n        <div class=\"prayer\">\n        <!--cts:b044:en-->\n        </div>\n        </div>\n\n        <h3><!--cts:b045:en--></h3>\n        <p><!--cts:b046:en--></p>\n\n        <div class=\"style-box\"><!--cts:b047:en--></div>\n\n        <div class=\"style-box\"><!--cts:b048:en--></div>\n\n        <div class=\"style-box\"><!--cts:b049:en--></div>\n\n        <div class=\"style-box\"><!--cts:b050:en--></div>\n\n        <div class=\"style-box\"><!--cts:b051:en--></div>\n\n        <div class=\"style-box\"><!--cts:b052:en--></div>\n\n        <div class=\"style-box\"><!--cts:b053:en--></div>\n\n        <p><!--cts:b054:en--></p>\n\n        <h3><!--cts:b055:en--></h3>\n        <p><!--cts:b056:en--></p>\n\n        <h3><!--cts:b057:en--></h3>\n        <p><!--cts:b058:en--></p>\n\n        <h3><!--cts:b059:en--></h3>\n        <p><!--cts:b060:en--></p>\n\n        <h3><!--cts:b061:en--></h3>\n        <p><!--cts:b062:en--></p>\n\n        <p><!--cts:b063:en--></p>\n    </div>\n\n    <div class=\"lang-es\">\n        <h2><!--cts:b007:es--></h2>\n        <p><!--cts:b008:es--></p>\n\n        <h3><!--cts:b009:es--></h3>\n        <p><!--cts:b010:es--></p>\n\n        <h3><!--cts:b011:es--></h3>\n        <p><!--cts:b012:es--></p>\n\n        <div class=\"cwt-box\">\n        <h3><!--cts:b013:es--></h3>\n\n        <h4><!--cts:b014:es--></h4>\n        <p><!--cts:b015:es--></p>\n        <p><!--cts:b016:es--></p>\n\n        <h4><!--cts:b017:es--></h4>\n        <p><!--cts:b018:es--></p>\n        <ul>\n        <li><!--cts:b019:es--></li>\n        <li><!--cts:b020:es--></li>\n        <li><!--cts:b021:es--></li>\n        </ul>\n\n        <h4><!--cts:b022:es--></h4>\n        <p><!--cts:b023:es--></p>\n        <ul>\n        <li><!--cts:b024:es--></li>\n        <li><!--cts:b025:es--></li>\n        <li><!--cts:b026:es--></li>\n        </ul>\n\n        <h4><!--cts:b027:es--></h4>\n        <p><!--cts:b028:es--></p>\n        <ul>\n        <li><!--cts:b029:es--></li>\n        <li><!--cts:b030:es--></li>\n        <li><!--cts:b031:es--></li>\n        <li><!--cts:b032:es--></li>\n        </ul>\n\n        <h4><!--cts:b033:es--></h4>\n        <p><!--cts:b034:es--></p>\n        <ul>\n        <li><!--cts:b035:es--></li>\n        <li><!--cts:b036:es--></li>\n        <li><!--cts:b037:es--></li>\n        </ul>\n\n        <h4><!--cts:b038:es--></h4>\n        <p><!--cts:b039:es--></p>\n        <ul>\n        <li><!--cts:b040:es--></li>\n        <li><!--cts:b041:es--></li>\n        <li><!--cts:b042:es--></li>\n        </ul>\n        <p><!--cts:b043:es--></p>\n        <div class=\"prayer\">\n        <!--cts:b044:es-->\n        </div>\n        </div>\n\n        <h3><!--cts:b045:es--></h3>\n        <p><!--cts:b046:es--></p>\n\n        <div class=\"style-box\"><!--cts:b047:es--></div>\n\n        <div class=\"style-box\"><!--cts:b048:es--></div>\n\n        <div class=\"style-box\"><!--cts:b049:es--></div>\n\n        <div class=\"style-box\"><!--cts:b050:es--></div>\n\n        <div class=\"style-box\"><!--cts:b051:es--></div>\n\n        <div class=\"style-box\"><!--cts:b052:es--></div>\n\n        <div class=\"style-box\"><!--cts:b053:es--></div>\n\n        <p><!--cts:b054:es--></p>\n\n        <h3><!--cts:b055:es--></h3>\n        <p><!--cts:b056:es--></p>\n\n        <h3><!--cts:b057:es--></h3>\n        <p><!--cts:b058:es--></p>\n\n        <h3><!--cts:b059:es--></h3>\n        <p><!--cts:b060:es--></p>\n\n        <h3><!--cts:b061:es--></h3>\n        <p><!--cts:b062:es--></p>\n\n        <p><!--cts:b063:es--></p>\n    </div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b064:en--></span><span class=\"lang-es\"><!--cts:b064:es--></span></h2>\n    <p>\n        <span class=\"lang-en\"><!--cts:b065:en--></span>\n        <span class=\"lang-es\"><!--cts:b065:es--></span>\n    </p>\n    <p>\n        <span class=\"lang-en\"><!--cts:b066:en--></span>\n        <span class=\"lang-es\"><!--cts:b066:es--></span>\n    </p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b067:en--></span><span class=\"lang-es\"><!--cts:b067:es--></span></button>\n        <button id=\"clearExamDataBtn\" class=\"small\" style=\"background:#a0512a;\">🗑 <span class=\"lang-en\"><!--cts:b068:en--></span><span class=\"lang-es\"><!--cts:b068:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\" aria-live=\"polite\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSEvangelismReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "Previous",
+    "es": "Anterior"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "50f94286ba30"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "Next",
+    "es": "Siguiente"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bc981983e7f5"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "Clear Saved Data",
+    "es": "Borrar Datos Guardados"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1f211da49ca3"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "📖 Evangelism — Unit 6: Methods, Styles, and Misunderstandings in Evangelism",
+    "es": "📖 Evangelismo — Unidad 6: Métodos, Estilos y Malentendidos en el Evangelismo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "860b50084448"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Chapala Theological Seminary · Dr. Wayne Cook, Author and Professor · Dr. Ted Rogers, Seminary Director",
+    "es": "Seminario Teológico de Chapala · Dr. Wayne Cook, Autor y Profesor · Dr. Ted Rogers, Director del Seminario"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "09f5030da034"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "heading",
+   "text": {
+    "en": "Orientation: Tools, Not the Message",
+    "es": "Orientación: Herramientas, No el Mensaje"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1dc10a358032"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "Throughout church history, believers have developed many methods to communicate the gospel. Some have proven helpful; others have produced confusion or superficial response. Methods are tools — not the message. The gospel does not change, but the way it is presented may vary with the situation, the individual, and the leading of the Spirit. This unit examines a primary structured method (CWT), the seven styles by which different believers naturally witness, and the common misunderstandings that turn methods into masters.",
+    "es": "A lo largo de la historia de la iglesia, los creyentes han desarrollado muchos métodos para comunicar el evangelio. Algunos han resultado útiles; otros han producido confusión o respuestas superficiales. Los métodos son herramientas — no el mensaje. El evangelio no cambia, pero la manera de presentarlo puede variar según la situación, el individuo y la dirección del Espíritu. Esta unidad examina un método estructurado principal (CWT), los siete estilos por los cuales diferentes creyentes testifican naturalmente, y los malentendidos comunes que convierten los métodos en amos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "820b127d1f0c"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "heading",
+   "text": {
+    "en": "I. The Proper Place of Methods",
+    "es": "I. El Lugar Propio de los Métodos"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0367a2e84aa8"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "Paul demonstrated flexibility in approach while maintaining consistency in message: \"I have become all things to all men, that I might by all means save some\" (1 Corinthians 9:22, NKJV). The message is fixed; the method may vary. Reliance must always be on God: \"our sufficiency is from God\" (2 Corinthians 3:5, NKJV). Methods serve the message; they do not replace it. A well-crafted presentation can help a new believer share his faith clearly. A structured approach can prevent awkwardness or omission. But when the method becomes the focus, the evangelist trusts the tool rather than the Spirit.",
+    "es": "Pablo demostró flexibilidad en su enfoque manteniendo consistencia en el mensaje: \"A todos me he hecho de todo, para que de todos modos salve a algunos\" (1 Corintios 9:22, RVG). El mensaje es fijo; el método puede variar. La confianza debe estar siempre en Dios: \"Nuestra suficiencia es de Dios\" (2 Corintios 3:5, RVG). Los métodos sirven al mensaje; no lo reemplazan. Una presentación bien elaborada puede ayudar a un nuevo creyente a compartir su fe con claridad. Un enfoque estructurado puede prevenir la torpeza o la omisión. Pero cuando el método se convierte en el centro, el evangelista confía en la herramienta en vez del Espíritu."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e463a7c1f7ec"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "heading",
+   "text": {
+    "en": "II. Structured Evangelism: An Introduction to CWT",
+    "es": "II. Evangelismo Estructurado: Una Introducción al CWT"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7e4e8d4e17e7"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "Structure does not replace the Spirit; it gives the believer a reliable path from ordinary conversation to a clear presentation. The most complete and time-tested structure in our tradition is Continuous Witness Training (CWT). The outline below has been used effectively by thousands of believers around the world.",
+    "es": "La estructura no reemplaza al Espíritu; le da al creyente un camino confiable desde la conversación ordinaria hasta una presentación clara. La estructura más completa y probada por el tiempo en nuestra tradición es el Entrenamiento de Testimonio Continuo (CWT). El siguiente bosquejo ha sido usado eficazmente por miles de creyentes alrededor del mundo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "df1bb395d67a"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "heading",
+   "text": {
+    "en": "III. Continuous Witness Training (CWT) — A Complete Gospel Presentation",
+    "es": "III. Entrenamiento de Testimonio Continuo (CWT) — Una Presentación Completa del Evangelio"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8ccdb909b9b1"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "heading",
+   "text": {
+    "en": "Two Questions",
+    "es": "Dos Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c2c27ce0ff36"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "<strong>➤ Have you come to a place in your life that you know for certain you have eternal life and will go to heaven when you die?</strong>",
+    "es": "<strong>➤ ¿Ha llegado usted a un punto en su vida en que sabe con certeza que tiene vida eterna e irá al cielo cuando muera?</strong>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c323d3e49951"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "<strong>➤ Suppose you were standing before God right now and He asked you, \"Why should I let you into my heaven?\" What would you say?</strong>",
+    "es": "<strong>➤ Suponga que estuviera de pie ante Dios ahora mismo y Él le preguntara: \"¿Por qué debería dejarte entrar en mi cielo?\" ¿Qué le respondería?</strong>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2f0859a33f99"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "heading",
+   "text": {
+    "en": "God's Purpose",
+    "es": "El Propósito de Dios"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9aa55b7df7a6"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "God loves us and has a purpose for our lives. The Bible states it this way: \"For God so loved the world that He gave His only begotten Son, that whoever believes in Him should not perish but have everlasting life\" (John 3:16, NKJV). God's purpose is that we have eternal life.",
+    "es": "Dios nos ama y tiene un propósito para nuestras vidas. La Biblia lo expresa así: \"Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna\" (Juan 3:16, RVG). El propósito de Dios es que tengamos vida eterna."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1467a4b3de32"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "list-item",
+   "text": {
+    "en": "God gives eternal life as a gift. \"…the gift of God is eternal life in Christ Jesus our Lord.\" (Rom. 6:23, NKJV)",
+    "es": "Dios da la vida eterna como regalo. \"…la dádiva de Dios es vida eterna en Cristo Jesús Señor nuestro\" (Rom. 6:23, RVG)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d04c19251b84"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "list-item",
+   "text": {
+    "en": "We can live a full and meaningful life right now. \"I have come that they may have life, and that they may have it more abundantly.\" (John 10:10, NKJV)",
+    "es": "Podemos vivir una vida plena y significativa ahora mismo. \"Yo he venido para que tengan vida, y para que la tengan en abundancia\" (Juan 10:10, RVG)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "52e19346b948"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "list-item",
+   "text": {
+    "en": "We will spend eternity with Jesus in heaven. \"…I go to prepare a place for you… I will come again and receive you to Myself; that where I am, there you may be also.\" (John 14:3, NKJV)",
+    "es": "Pasaremos la eternidad con Jesús en el cielo. \"Voy, pues, a preparar lugar para vosotros… vendré otra vez, y os tomaré a mí mismo, para que donde yo estoy, vosotros también estéis\" (Juan 14:3, RVG)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3fb267275f87"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "heading",
+   "text": {
+    "en": "Our Need",
+    "es": "Nuestra Necesidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "648eabb3fede"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "As we search for meaning in life, we discover that our sinful nature keeps us from fulfilling God's purpose for our lives.",
+    "es": "Al buscar sentido en la vida, descubrimos que nuestra naturaleza pecaminosa nos impide cumplir el propósito de Dios para nuestras vidas."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "55742217ff2a"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "list-item",
+   "text": {
+    "en": "We are all sinners by nature and by choice. \"for all have sinned and fall short of the glory of God\" (Rom. 3:23, NKJV).",
+    "es": "Todos somos pecadores por naturaleza y por elección. \"Por cuanto todos pecaron, y están destituidos de la gloria de Dios\" (Rom. 3:23, RVG)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "11d9b01b3fbd"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "list-item",
+   "text": {
+    "en": "We cannot save ourselves. \"For by grace you have been saved through faith, and that not of yourselves; it is the gift of God, not of works, lest anyone should boast\" (Eph. 2:8–9, NKJV).",
+    "es": "No podemos salvarnos a nosotros mismos. \"Porque por gracia sois salvos por medio de la fe; y esto no de vosotros, pues es don de Dios; no por obras, para que nadie se gloríe\" (Ef. 2:8–9, RVG)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "802ed486d0ac"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "list-item",
+   "text": {
+    "en": "We deserve death and hell. \"For the wages of sin is death, but the gift of God is eternal life in Christ Jesus our Lord.\" (Rom. 6:23, NKJV)",
+    "es": "Merecemos la muerte y el infierno. \"La paga del pecado es muerte, mas la dádiva de Dios es vida eterna en Cristo Jesús Señor nuestro\" (Rom. 6:23, RVG)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cc00da6a9462"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "heading",
+   "text": {
+    "en": "God's Provision",
+    "es": "La Provisión de Dios"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c309bb55e88b"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "God is holy and just and must punish sin. Yet He loves us and provides forgiveness for our sin. Jesus said, \"I am the way, the truth, and the life. No one comes to the Father except through Me\" (John 14:6, NKJV).",
+    "es": "Dios es santo y justo y debe castigar el pecado. Sin embargo, nos ama y provee perdón por nuestro pecado. Jesús dijo: \"Yo soy el camino, la verdad, y la vida; nadie viene al Padre, sino por mí\" (Juan 14:6, RVG)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "52dd3d20cf66"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "list-item",
+   "text": {
+    "en": "Jesus is God and became man. \"In the beginning was the Word, and the Word was with God, and the Word was God\" (John 1:1, NKJV). \"And the Word became flesh and dwelt among us\" (John 1:14, NKJV).",
+    "es": "Jesús es Dios y se hizo hombre. \"En el principio era el Verbo, y el Verbo era con Dios, y el Verbo era Dios\" (Juan 1:1, RVG). \"Y aquel Verbo fue hecho carne, y habitó entre nosotros\" (Juan 1:14, RVG)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bdf145b05432"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "list-item",
+   "text": {
+    "en": "Jesus died for us on the cross. \"For Christ also suffered once for sins, the just for the unjust, that He might bring us to God\" (1 Pet. 3:18, NKJV).",
+    "es": "Jesús murió por nosotros en la cruz. \"Porque también Cristo padeció una sola vez por los pecados, el justo por los injustos, para llevarnos a Dios\" (1 Ped. 3:18, RVG)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0129780a0516"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "list-item",
+   "text": {
+    "en": "Jesus was resurrected (arose) from the dead and is alive today. \"who was delivered up because of our offenses, and was raised because of our justification\" (Romans 4:25, NKJV). \"For the death that He died, He died to sin once for all; but the life that He lives, He lives to God\" (Romans 6:10, NKJV).",
+    "es": "Jesús resucitó de los muertos y vive hoy. \"El cual fue entregado por nuestras transgresiones, y resucitado para nuestra justificación\" (Romanos 4:25, RVG). \"Porque en cuanto murió, al pecado murió una vez por todas; mas en cuanto vive, para Dios vive\" (Romanos 6:10, RVG)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b8f18bd3e1de"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "list-item",
+   "text": {
+    "en": "God, through His Holy Spirit, calls us to Himself. \"No one can come to Me unless the Father who sent Me draws him; and I will raise him up at the last day\" (John 6:44, NKJV).",
+    "es": "Dios, mediante Su Espíritu Santo, nos llama a Sí mismo. \"Ninguno puede venir a mí, si el Padre que me envió no le trajere; y yo le resucitaré en el día postrero\" (Juan 6:44, RVG)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9679ef6e76ee"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "heading",
+   "text": {
+    "en": "Our Response",
+    "es": "Nuestra Respuesta"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "96b9a995adab"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "prose",
+   "text": {
+    "en": "The only way Jesus can affect our lives is for us to receive Him. The Bible says, \"But as many as received Him, to them He gave the right to become children of God, to those who believe in His name\" (John 1:12, NKJV).",
+    "es": "La única manera en que Jesús puede afectar nuestras vidas es que lo recibamos. La Biblia dice: \"Mas a todos los que le recibieron, a los que creen en su nombre, les dio potestad de ser hechos hijos de Dios\" (Juan 1:12, RVG)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9b066957e3d6"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "list-item",
+   "text": {
+    "en": "We must repent of our sin. \"Repent therefore and be converted, that your sins may be blotted out\" (Acts 3:19, NKJV).<br>\n        ‣ Repentance is not just feeling sorry for our sin. Paul said, \"…that they should repent, turn to God, and do works befitting repentance\" (Acts 26:20, NKJV).<br>\n        ‣ Repentance is turning away from our sin and turning to God through Jesus.",
+    "es": "Debemos arrepentirnos de nuestro pecado. \"Así que, arrepentíos y convertíos, para que sean borrados vuestros pecados\" (Hechos 3:19, RVG).<br>\n        ‣ El arrepentimiento no es solo sentir tristeza por nuestro pecado. Pablo dijo: \"…anunciando primeramente… que se arrepintiesen y se convirtiesen a Dios, haciendo obras dignas de arrepentimiento\" (Hechos 26:20, RVG).<br>\n        ‣ El arrepentimiento es apartarse del pecado y volverse a Dios por medio de Jesús."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8fc9c88e3159"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "list-item",
+   "text": {
+    "en": "We must place our faith in Jesus. \"For by grace you have been saved through faith, and that not of yourselves; it is the gift of God\" (Eph. 2:8, NKJV).<br>\n        ‣ Faith is not just believing facts about Jesus. \"You believe that there is one God. You do well. Even the demons believe—and tremble!\" (Jas. 2:19, NKJV).<br>\n        ‣ Faith is trusting in Jesus. \"For the Scripture says, 'Whoever believes on Him will not be put to shame'\" (Rom. 10:11, NKJV).",
+    "es": "Debemos poner nuestra fe en Jesús. \"Porque por gracia sois salvos por medio de la fe; y esto no de vosotros, pues es don de Dios\" (Ef. 2:8, RVG).<br>\n        ‣ La fe no es solo creer datos acerca de Jesús. \"Tú crees que Dios es uno; bien haces. También los demonios creen, y tiemblan\" (Stg. 2:19, RVG).<br>\n        ‣ La fe es confiar en Jesús. \"Pues la Escritura dice: Todo aquel que en él creyere, no será avergonzado\" (Rom. 10:11, RVG)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "971ba64ddafa"
+    }
+   }
+  },
+  {
+   "id": "b037",
+   "type": "list-item",
+   "text": {
+    "en": "We must surrender to Jesus as Lord. \"that if you confess with your mouth the Lord Jesus and believe in your heart that God has raised Him from the dead, you will be saved. For with the heart one believes unto righteousness, and with the mouth confession is made unto salvation\" (Rom. 10:9–10, NKJV).<br>\n        ‣ Surrendering to Jesus as Lord is not just saying we give our lives to Jesus (Matt. 7:21, NKJV).<br>\n        ‣ Surrendering to Jesus as Lord is giving Jesus control of our lives.",
+    "es": "Debemos rendirnos a Jesús como Señor. \"Que si confesares con tu boca que Jesús es el Señor, y creyeres en tu corazón que Dios le levantó de los muertos, serás salvo. Porque con el corazón se cree para justicia, pero con la boca se confiesa para salvación\" (Rom. 10:9–10, RVG).<br>\n        ‣ Rendirse a Jesús como Señor no es solo decir que le entregamos nuestras vidas (Mateo 7:21, RVG).<br>\n        ‣ Rendirse a Jesús como Señor es darle a Jesús el control de nuestras vidas."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1fff8f997122"
+    }
+   }
+  },
+  {
+   "id": "b038",
+   "type": "heading",
+   "text": {
+    "en": "My Commitment",
+    "es": "Mi Compromiso"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b6c3bb593560"
+    }
+   }
+  },
+  {
+   "id": "b039",
+   "type": "prose",
+   "text": {
+    "en": "Giving Jesus control is something each person must do for himself or herself. No one else can make this decision for you. Jesus says, \"Behold, I stand at the door and knock. If anyone hears My voice and opens the door, I will come in to him and dine with him, and he with Me\" (Rev. 3:20, NKJV).",
+    "es": "Dar a Jesús el control es algo que cada persona debe hacer por sí misma. Nadie más puede tomar esta decisión por usted. Jesús dice: \"He aquí, yo estoy a la puerta y llamo; si alguno oye mi voz y abre la puerta, entraré a él, y cenaré con él, y él conmigo\" (Apoc. 3:20, RVG)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bca917b9c96d"
+    }
+   }
+  },
+  {
+   "id": "b040",
+   "type": "list-item",
+   "text": {
+    "en": "Does what we have been discussing make sense to you?",
+    "es": "¿Tiene sentido para usted lo que hemos estado discutiendo?"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "51cf21745fad"
+    }
+   }
+  },
+  {
+   "id": "b041",
+   "type": "list-item",
+   "text": {
+    "en": "Is there any reason you would not be willing to receive God's gift of eternal life?",
+    "es": "¿Hay alguna razón por la cual usted no estaría dispuesto a recibir el regalo de Dios de la vida eterna?"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5f00ebc6332b"
+    }
+   }
+  },
+  {
+   "id": "b042",
+   "type": "list-item",
+   "text": {
+    "en": "Are you willing to turn from your sin, place your faith in Jesus, and give Him control of your life right now?",
+    "es": "¿Está dispuesto a apartarse del pecado, poner su fe en Jesús, y darle a Él el control de su vida ahora mismo?"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "862ab70e31b3"
+    }
+   }
+  },
+  {
+   "id": "b043",
+   "type": "prose",
+   "text": {
+    "en": "If you are willing to receive Jesus into your life now, you can invite Him in by prayer. You may use the following prayer or a similar one using your own words:",
+    "es": "Si está dispuesto a recibir a Jesús en su vida ahora, puede invitarlo por medio de la oración. Puede usar la siguiente oración o una similar con sus propias palabras:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "67af26e83795"
+    }
+   }
+  },
+  {
+   "id": "b044",
+   "type": "prose",
+   "text": {
+    "en": "\"Dear Lord Jesus, I believe You are the Son of God and died to forgive me of my sins. I know I have sinned. I ask You to forgive me. I turn from my sins, and I receive You as my Lord and Savior. Thank You for saving me. I want to live for You the rest of my life. Amen.\"",
+    "es": "\"Querido Señor Jesús, creo que Tú eres el Hijo de Dios y moriste para perdonar mis pecados. Sé que he pecado. Te pido que me perdones. Me aparto de mis pecados y Te recibo como mi Señor y Salvador. Gracias por salvarme. Quiero vivir para Ti el resto de mi vida. Amén.\""
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e50e8b1c5f8e"
+    }
+   }
+  },
+  {
+   "id": "b045",
+   "type": "heading",
+   "text": {
+    "en": "IV. The Seven Styles of Evangelism",
+    "es": "IV. Los Siete Estilos de Evangelismo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e9aefae4b76d"
+    }
+   }
+  },
+  {
+   "id": "b046",
+   "type": "prose",
+   "text": {
+    "en": "While CWT gives a structure, the New Testament shows that the Spirit equips different believers in different ways. Not every Christian will witness the same way. Seven recognizable styles emerge from Scripture, each with its own biblical model and its own gift. The wise believer identifies the style that fits the temperament God gave him while learning from the others.",
+    "es": "Aunque el CWT da una estructura, el Nuevo Testamento muestra que el Espíritu Santo capacita a diferentes creyentes de diferentes maneras. No todo cristiano testificará de la misma forma. De la Escritura emergen siete estilos reconocibles, cada uno con su modelo bíblico y su don. El creyente sabio identifica el estilo que se ajusta al temperamento que Dios le dio mientras aprende de los demás."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "daf94c00b1b4"
+    }
+   }
+  },
+  {
+   "id": "b047",
+   "type": "prose",
+   "text": {
+    "en": "<strong class=\"style-name\">1. The Harvesting Evangelist.</strong> The Spirit-gifted preacher who calls clearly and directly for decision. Most pastors and itinerant evangelists serve here. The danger is two distortions: the \"Salesman\" who pressures, and the \"Grim Reaper\" who threatens. Done rightly, harvesting is the bold, clear public invitation to receive Christ.",
+    "es": "<strong class=\"style-name\">1. El Evangelista de Cosecha.</strong> El predicador con el don del Espíritu Santo que llama clara y directamente a la decisión. La mayoría de los pastores y evangelistas itinerantes sirven aquí. El peligro es de dos distorsiones: el \"Vendedor\" que presiona, y el \"Segador Sombrío\" que amenaza. Hecho correctamente, la cosecha es la invitación pública audaz y clara a recibir a Cristo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "af57efcc3c5e"
+    }
+   }
+  },
+  {
+   "id": "b048",
+   "type": "prose",
+   "text": {
+    "en": "<strong class=\"style-name\">2. The Confrontational Style.</strong> Peter at Pentecost: \"Men of Israel, hear these words… Him, being delivered by the determined purpose and foreknowledge of God, you have taken by lawless hands, have crucified, and put to death\" (Acts 2:22–23, NKJV). Three thousand were cut to the heart. Chuck Colson later said it was \"high time some of you faced the music.\" This style speaks the hard truth in love and refuses to soften the offense of the cross. Its danger is harshness; its strength is candor.",
+    "es": "<strong class=\"style-name\">2. El Estilo Confrontacional.</strong> Pedro en Pentecostés: \"Varones israelitas, oíd estas palabras… a éste, entregado por el determinado consejo y anticipado conocimiento de Dios, prendisteis y matasteis por manos de inicuos, crucificándole\" (Hechos 2:22–23, RVG). Tres mil fueron compungidos de corazón. Chuck Colson dijo después que era \"hora de que algunos de ustedes enfrenten la música\". Este estilo dice la verdad dura con amor y se niega a suavizar la ofensa de la cruz. Su peligro es la dureza; su fuerza es la franqueza."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d748c35731d4"
+    }
+   }
+  },
+  {
+   "id": "b049",
+   "type": "prose",
+   "text": {
+    "en": "<strong class=\"style-name\">3. The Apologist (Intellectual) Style.</strong> Apollos \"vigorously refuted the Jews publicly, showing from the Scriptures that Jesus is the Christ\" (Acts 18:28, NKJV). Paul reasoned on Mars Hill (Acts 17). Josh McDowell, an atheist who set out to disprove Christianity, became a believer and wrote <em>Evidence That Demands a Verdict</em>. The Apologist meets the skeptic with answers. Its strength is reasoned defense; its danger is winning the argument and losing the soul.",
+    "es": "<strong class=\"style-name\">3. El Estilo del Apologista (Intelectual).</strong> Apolos \"con gran vehemencia refutaba públicamente a los judíos, demostrando por las Escrituras que Jesús era el Cristo\" (Hechos 18:28, RVG). Pablo razonó en el Areópago (Hechos 17). Josh McDowell, un ateo que se propuso desmentir el cristianismo, se convirtió y escribió <em>Evidencia que Exige un Veredicto</em>. El Apologista enfrenta al escéptico con respuestas. Su fuerza es la defensa razonada; su peligro es ganar el argumento y perder el alma."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8a6f9951427f"
+    }
+   }
+  },
+  {
+   "id": "b050",
+   "type": "prose",
+   "text": {
+    "en": "<strong class=\"style-name\">4. The Testimonial Style.</strong> The blind man in John 9, examined by hostile theologians, said, \"One thing I know: that though I was blind, now I see\" (John 9:25, NKJV). He could not debate; he could only testify. Personal story is its own evidence. Every believer has a testimony; this style simply tells it.",
+    "es": "<strong class=\"style-name\">4. El Estilo Testimonial.</strong> El ciego de Juan 9, examinado por teólogos hostiles, dijo: \"Una cosa sé, que habiendo yo sido ciego, ahora veo\" (Juan 9:25, RVG). No podía debatir; solo podía testificar. La historia personal es su propia evidencia. Cada creyente tiene un testimonio; este estilo simplemente lo cuenta."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7b47d72bff0c"
+    }
+   }
+  },
+  {
+   "id": "b051",
+   "type": "prose",
+   "text": {
+    "en": "<strong class=\"style-name\">5. The Relational Style.</strong> The Gerasene demoniac, after deliverance, was sent home: \"Go home to your friends, and tell them what great things the Lord has done for you, and how He has had compassion on you\" (Mark 5:19, NKJV). Most evangelism still happens this way — across the dinner table, the cubicle wall, the family room. Trust precedes truth; relationship opens the door for the gospel.",
+    "es": "<strong class=\"style-name\">5. El Estilo Relacional.</strong> El endemoniado gadareno, después de su liberación, fue enviado a casa: \"Vete a tu casa, a los tuyos, y cuéntales cuán grandes cosas el Señor ha hecho contigo, y cómo ha tenido misericordia de ti\" (Marcos 5:19, RVG). La mayoría del evangelismo aún sucede así — en la mesa, en la oficina, en la sala familiar. La confianza precede a la verdad; la relación abre la puerta al evangelio."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "22ac0d0cc9a8"
+    }
+   }
+  },
+  {
+   "id": "b052",
+   "type": "prose",
+   "text": {
+    "en": "<strong class=\"style-name\">6. The Invitational Style.</strong> The Samaritan woman left her waterpot, ran to the city, and said, \"Come, see a Man who told me all things that I ever did. Could this be the Christ?\" (John 4:29, NKJV). She did not preach; she invited. \"Come and see.\" Many believers who feel unequipped to explain can still invite — to a service, a Bible study, a meal with a pastor, a moment of investigation.",
+    "es": "<strong class=\"style-name\">6. El Estilo Invitacional.</strong> La mujer samaritana dejó su cántaro, corrió a la ciudad y dijo: \"Venid, ved a un hombre que me ha dicho todo cuanto he hecho. ¿No será éste el Cristo?\" (Juan 4:29, RVG). No predicó; invitó. \"Venid y ved.\" Muchos creyentes que no se sienten capacitados para explicar pueden invitar — a un culto, a un estudio bíblico, a una comida con el pastor, a un momento de investigación."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0fd52b8a7202"
+    }
+   }
+  },
+  {
+   "id": "b053",
+   "type": "prose",
+   "text": {
+    "en": "<strong class=\"style-name\">7. The Serving Style.</strong> Dorcas \"was full of good works and charitable deeds\" (Acts 9:36, NKJV), making garments for widows. Barnabas — the Son of Encouragement — went looking for needs and met them. Service preaches when words cannot. Its question is, \"How can I help?\" — and the help becomes the platform from which the gospel is finally heard.",
+    "es": "<strong class=\"style-name\">7. El Estilo de Servicio.</strong> Dorcas \"abundaba en buenas obras y en limosnas que hacía\" (Hechos 9:36, RVG), haciendo vestidos para las viudas. Bernabé — el Hijo de Consolación — buscaba necesidades y las atendía. El servicio predica cuando las palabras no pueden. Su pregunta es: \"¿Cómo puedo ayudar?\" — y la ayuda se convierte en la plataforma desde la cual finalmente se escucha el evangelio."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8ade2f6322da"
+    }
+   }
+  },
+  {
+   "id": "b054",
+   "type": "prose",
+   "text": {
+    "en": "These seven are not rivals. They are complementary. A church needs all seven, and most believers find themselves naturally drawn to two or three. The Spirit gifts differently; the gospel is one.",
+    "es": "Estos siete no son rivales. Son complementarios. Una iglesia necesita los siete, y la mayoría de los creyentes se sienten naturalmente atraídos por dos o tres. El Espíritu da dones diferentes; el evangelio es uno."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6813ede5d4fb"
+    }
+   }
+  },
+  {
+   "id": "b055",
+   "type": "heading",
+   "text": {
+    "en": "V. The Danger of Mechanical Evangelism",
+    "es": "V. El Peligro del Evangelismo Mecánico"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a941b81b7ab8"
+    }
+   }
+  },
+  {
+   "id": "b056",
+   "type": "prose",
+   "text": {
+    "en": "When method becomes rigid, evangelism loses sensitivity. A believer may follow a script so closely that he fails to listen to the person in front of him. Jesus did not follow a fixed script; He adapted to each individual. Mechanical evangelism treats people as projects rather than image-bearers. The solution is not to abandon structure but to hold it loosely, allowing the Spirit to guide the conversation.",
+    "es": "Cuando el método se vuelve rígido, el evangelismo pierde sensibilidad. Un creyente puede seguir un guion tan de cerca que no escucha a la persona frente a él. Jesús no siguió un guion fijo; se adaptó a cada individuo. El evangelismo mecánico trata a las personas como proyectos en lugar de portadores de la imagen de Dios. La solución no es abandonar la estructura sino sostenerla con flexibilidad, permitiendo que el Espíritu Santo guíe la conversación."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7d491b7fa5cd"
+    }
+   }
+  },
+  {
+   "id": "b057",
+   "type": "heading",
+   "text": {
+    "en": "VI. Tract Evangelism — The Philip Model",
+    "es": "VI. Evangelismo con Tratados — El Modelo de Felipe"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2326690a88d1"
+    }
+   }
+  },
+  {
+   "id": "b058",
+   "type": "prose",
+   "text": {
+    "en": "A tract can be a helpful tool when used properly. Philip and the Ethiopian eunuch provide the model: Philip ran to him, heard him reading Isaiah, and then \"preached Jesus to him\" (Acts 8:35, NKJV). The eunuch had Scripture but needed a teacher. A tract should be used in conversation, not merely dropped like an anonymous leaflet. The believer should offer to read it together, explain the verses, and answer questions. Used this way, a tract becomes an extension of personal witness, not a substitute for it.",
+    "es": "Un tratado puede ser una herramienta útil cuando se usa correctamente. Felipe y el eunuco etíope proveen el modelo: Felipe corrió a él, lo oyó leyendo a Isaías, y entonces \"le anunció el evangelio de Jesús\" (Hechos 8:35, RVG). El eunuco tenía la Escritura, pero necesitaba un maestro. Un tratado debe usarse en conversación, no simplemente dejarse como un folleto anónimo. El creyente debe ofrecerse a leerlo juntos, explicar los versículos y responder preguntas. Usado así, un tratado se convierte en una extensión del testimonio personal, no en un sustituto."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6ca535c2f87a"
+    }
+   }
+  },
+  {
+   "id": "b059",
+   "type": "heading",
+   "text": {
+    "en": "VII. The Misunderstanding of Results",
+    "es": "VII. El Malentendido sobre los Resultados"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ad07a570dc1a"
+    }
+   }
+  },
+  {
+   "id": "b060",
+   "type": "prose",
+   "text": {
+    "en": "Pressure leads to superficial response. Jesus warned, \"Not everyone who says to Me, 'Lord, Lord,' shall enter the kingdom of heaven\" (Matthew 7:21, NKJV). A decision made under emotional pressure may not be a genuine conversion. Methods that count professions without examining fruit mislead. Faithful evangelism aims for conversion, not merely profession. The evangelist must be willing to let a person walk away rather than press him into a false assurance.",
+    "es": "La presión produce respuestas superficiales. Jesús advirtió: \"No todo el que me dice: Señor, Señor, entrará en el reino de los cielos\" (Mateo 7:21, RVG). Una decisión tomada bajo presión emocional puede no ser una conversión genuina. Los métodos que cuentan profesiones sin examinar el fruto engañan. El evangelismo fiel busca conversión, no meramente profesión. El evangelista debe estar dispuesto a dejar que una persona se aleje en vez de presionarla a una falsa seguridad."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "45a58bf41895"
+    }
+   }
+  },
+  {
+   "id": "b061",
+   "type": "heading",
+   "text": {
+    "en": "VIII. Conclusion: Methods as Servants — The Carpenter and His Tools",
+    "es": "VIII. Conclusión: Los Métodos como Siervos — El Carpintero y Sus Herramientas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f48a73540a2c"
+    }
+   }
+  },
+  {
+   "id": "b062",
+   "type": "prose",
+   "text": {
+    "en": "A carpenter has many tools — hammers, saws, levels, squares. Each tool serves a purpose. But the carpenter does not praise the tools; he uses them. If he becomes enamored with his hammer and forgets the design of the house, the house will be poorly built. The tools are servants, not masters. So it is with evangelistic methods and styles. They are useful servants, but they must never become the object of confidence. The skill belongs to the Spirit; the design belongs to God. The evangelist simply takes up the tools and works, trusting the Master Builder for the result. As Paul concluded, \"I planted, Apollos watered, but God gave the increase\" (1 Corinthians 3:6, NKJV).",
+    "es": "Un carpintero tiene muchas herramientas — martillos, sierras, niveles, escuadras. Cada herramienta sirve a un propósito. Pero el carpintero no alaba las herramientas; las usa. Si se enamora de su martillo y olvida el diseño de la casa, la casa quedará mal construida. Las herramientas son siervas, no amas. Así sucede con los métodos y estilos evangelísticos. Son siervos útiles, pero nunca deben convertirse en el objeto de confianza. La destreza pertenece al Espíritu Santo; el diseño pertenece a Dios. El evangelista simplemente toma las herramientas y trabaja, confiando en el Maestro Constructor por el resultado. Como concluyó Pablo: \"Yo planté, Apolos regó; pero el crecimiento lo ha dado Dios\" (1 Corintios 3:6, RVG)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1052d7b6fd7d"
+    }
+   }
+  },
+  {
+   "id": "b063",
+   "type": "prose",
+   "text": {
+    "en": "<em>Prayer: Lord, teach us to use methods as tools, not idols, and styles as gifts, not boundaries. Give us wisdom to know when to speak and when to listen, when to confront and when to serve, when to reason and when to testify. Free us from manipulation and superficiality. May the gospel itself remain Your power unto salvation. In Jesus' name, Amen.</em>",
+    "es": "<em>Oración: Señor, enséñanos a usar los métodos como herramientas, no como ídolos, y los estilos como dones, no como límites. Danos sabiduría para saber cuándo hablar y cuándo escuchar, cuándo confrontar y cuándo servir, cuándo razonar y cuándo testificar. Líbranos de la manipulación y la superficialidad. Que el evangelio mismo siga siendo Tu poder para salvación. En el nombre de Jesús, Amén.</em>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "686812c0da17"
+    }
+   }
+  },
+  {
+   "id": "b064",
+   "type": "prose",
+   "text": {
+    "en": "Unit 6 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 6 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ef80e4f0d9dd"
+    }
+   }
+  },
+  {
+   "id": "b065",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate track:</strong> Section A (multiple choice) required at 90%. Section B (short answer) optional.",
+    "es": "<strong>Pista de Certificado:</strong> Sección A (opción múltiple) obligatoria al 90%. Sección B (respuesta corta) opcional."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90b12df3fedf"
+    }
+   }
+  },
+  {
+   "id": "b066",
+   "type": "prose",
+   "text": {
+    "en": "<strong>M.Div./Th.M. track:</strong> Both sections required at 90% each, independently.",
+    "es": "<strong>Pista de M.Div./Th.M.:</strong> Ambas secciones obligatorias al 90% cada una, independientemente."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3c8a5fe1f97b"
+    }
+   }
+  },
+  {
+   "id": "b067",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b068",
+   "type": "prose",
+   "text": {
+    "en": "Clear My Answers",
+    "es": "Borrar Mis Respuestas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0068b9eef93e"
+    }
+   }
+  }
+ ]
+}

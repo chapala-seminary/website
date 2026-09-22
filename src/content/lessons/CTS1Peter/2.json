@@ -1,0 +1,474 @@
+{
+ "course": "CTS1Peter",
+ "unit": 2,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Unit 3 →</button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #2f4f2f;\"><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\">\n    <h2><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></p>\n    <input type=\"text\" id=\"regName\" placeholder=\"Full name / Nombre completo\" aria-label=\"Full name / Nombre completo\">\n    <input type=\"email\" id=\"regEmail\" placeholder=\"Email\" aria-label=\"Email\">\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate Track</option>\n        <option value=\"mdiv\">Master of Divinity (M.Div.) Track</option>\n        <option value=\"thm\">Master of Theology (Th.M.) Track</option>\n    </select>\n    <button class=\"nav-btn\" id=\"regBtn\"><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\">\n<p class=\"passage-label\"><!--cts:b008:en--></p>\n<div class=\"scripture\"><!--cts:b009:en--></div>\n\n<h3><!--cts:b010:en--></h3>\n<p><!--cts:b011:en--></p>\n<p><!--cts:b012:en--></p>\n\n<h3><!--cts:b013:en--></h3>\n<p><!--cts:b014:en--></p>\n<p><!--cts:b015:en--></p>\n\n<h3><!--cts:b016:en--></h3>\n<p><!--cts:b017:en--></p>\n\n<h3><!--cts:b018:en--></h3>\n<div class=\"scripture\"><!--cts:b019:en--></div>\n<p><!--cts:b020:en--></p>\n\n<h3><!--cts:b021:en--></h3>\n<p><!--cts:b022:en--></p>\n\n<h3><!--cts:b023:en--></h3>\n<p><!--cts:b024:en--></p>\n\n<h3><!--cts:b025:en--></h3>\n<p><!--cts:b026:en--></p>\n\n<h3><!--cts:b027:en--></h3>\n<p><!--cts:b028:en--></p>\n<div class=\"scripture\"><!--cts:b029:en--></div>\n</div>\n\n<div class=\"lang-es\">\n<p class=\"passage-label\"><!--cts:b008:es--></p>\n<div class=\"scripture\"><!--cts:b009:es--></div>\n\n<h3><!--cts:b010:es--></h3>\n<p><!--cts:b011:es--></p>\n<p><!--cts:b012:es--></p>\n\n<h3><!--cts:b013:es--></h3>\n<p><!--cts:b014:es--></p>\n<p><!--cts:b015:es--></p>\n\n<h3><!--cts:b016:es--></h3>\n<p><!--cts:b017:es--></p>\n\n<h3><!--cts:b018:es--></h3>\n<div class=\"scripture\"><!--cts:b019:es--></div>\n<p><!--cts:b020:es--></p>\n\n<h3><!--cts:b021:es--></h3>\n<p><!--cts:b022:es--></p>\n\n<h3><!--cts:b023:es--></h3>\n<p><!--cts:b024:es--></p>\n\n<h3><!--cts:b025:es--></h3>\n<p><!--cts:b026:es--></p>\n\n<h3><!--cts:b027:es--></h3>\n<p><!--cts:b028:es--></p>\n<div class=\"scripture\"><!--cts:b029:es--></div>\n</div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b030:en--></span><span class=\"lang-es\"><!--cts:b030:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b031:en--></span>\n       <span class=\"lang-es\"><!--cts:b031:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b032:en--></span><span class=\"lang-es\"><!--cts:b032:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b033:en--></span><span class=\"lang-es\"><!--cts:b033:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTS1PeterReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📖 1 Peter Intensive — Unit 2: Living Hope and Refined Faith",
+    "es": "📖 1 Pedro Intensivo — Unidad 2: Esperanza Viva y Fe Acrisolada"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cb84e01bb58f"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "\"Blessed be the God and Father of our Lord Jesus Christ, who according to His abundant mercy has begotten us again to a living hope through the resurrection of Jesus Christ from the dead.\" — 1 Peter 1:3 (NKJV)",
+    "es": "\"Bendito el Dios y Padre de nuestro Señor Jesucristo, que según su grande misericordia nos hizo renacer para una esperanza viva, por la resurrección de Jesucristo de los muertos.\" — 1 Pedro 1:3 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1d331e3dc79f"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "📝 Course Registration",
+    "es": "📝 Registro del Curso"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fde900fe006b"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Welcome to the 1 Peter Intensive. Please register before beginning Unit 2.",
+    "es": "Bienvenido al Intensivo de 1 Pedro. Por favor regístrese antes de comenzar la Unidad 2."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a1b7d1229861"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "scripture",
+   "text": {
+    "en": "<strong>Text: 1 Peter 1:3-12</strong>",
+    "es": "<strong>Texto: 1 Pedro 1:3-12 (RVG)</strong>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5c62c49e7183"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "scripture",
+   "text": {
+    "en": "\"Blessed be the God and Father of our Lord Jesus Christ, who according to His abundant mercy has begotten us again to a living hope through the resurrection of Jesus Christ from the dead, to an inheritance incorruptible and undefiled and that does not fade away, reserved in heaven for you, who are kept by the power of God through faith for salvation ready to be revealed in the last time.\" — 1 Peter 1:3-5 (NKJV)",
+    "es": "\"Bendito el Dios y Padre de nuestro Señor Jesucristo, que según su grande misericordia nos hizo renacer para una esperanza viva, por la resurrección de Jesucristo de los muertos, para una herencia incorruptible, incontaminada e inmarcesible, reservada en el cielo para vosotros, que sois guardados por el poder de Dios mediante la fe, para la salvación que está preparada para ser manifestada en el tiempo postrero.\" — 1 Pedro 1:3-5 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c607ee835e7b"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "heading",
+   "text": {
+    "en": "Born Again to a Living Hope",
+    "es": "Renacidos a una Esperanza Viva"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "aec4c9c2140b"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Having told the scattered church who they are, Peter now bursts into praise: \"Blessed be the God and Father of our Lord Jesus Christ.\" Why such praise? Because of what God has done for them. According to His abundant mercy, He has <em>begotten us again</em> — given us a second birth — into a living hope. The setting of the new birth is a maternity room. As the Lord told Nicodemus, \"unless one is born again, he cannot see the kingdom of God\" (John 3:3). The first birth is of the flesh; the second is of the Spirit. And the hope this new birth produces is not a wish or a guess. It is a <em>living</em> hope, because it stands on a living fact: the resurrection of Jesus Christ from the dead. Christ is risen, and so the believer's hope can never finally die.",
+    "es": "Habiendo dicho a la iglesia esparcida quiénes son, Pedro prorrumpe ahora en alabanza: \"Bendito el Dios y Padre de nuestro Señor Jesucristo.\" ¿Por qué tal alabanza? Por lo que Dios ha hecho por ellos. Según su grande misericordia, los ha hecho <em>renacer</em> — les ha dado un segundo nacimiento — a una esperanza viva. El escenario del nuevo nacimiento es la sala de maternidad. Como el Señor dijo a Nicodemo: \"el que no naciere de nuevo, no puede ver el reino de Dios\" (Juan 3:3). El primer nacimiento es de la carne; el segundo es del Espíritu. Y la esperanza que este nuevo nacimiento produce no es un deseo ni una conjetura. Es una esperanza <em>viva</em>, porque se apoya en un hecho vivo: la resurrección de Jesucristo de los muertos. Cristo ha resucitado, y por eso la esperanza del creyente nunca podrá morir del todo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c3eb42d0accc"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "It helps to see that the Bible speaks of salvation in three tenses. In the past, <strong>I have been saved</strong> — the moment I first came to Christ. In the present, <strong>I am being saved</strong> — God is now making me holy. And in the future, <strong>I will be saved</strong> — one day I shall be made like Christ Himself. This whole passage moves through those three tenses, and the lesson will follow them: the new birth, the growth, and the glory yet to come.",
+    "es": "Ayuda ver que la Biblia habla de la salvación en tres tiempos. En el pasado, <strong>he sido salvo</strong> — el momento en que primero vine a Cristo. En el presente, <strong>estoy siendo salvo</strong> — Dios ahora me está haciendo santo. Y en el futuro, <strong>seré salvo</strong> — un día seré hecho semejante a Cristo mismo. Todo este pasaje recorre esos tres tiempos, y la lección los seguirá: el nuevo nacimiento, el crecimiento, y la gloria por venir."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "771ee694b670"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "heading",
+   "text": {
+    "en": "Five Pictures of the New Birth",
+    "es": "Cinco Cuadros del Nuevo Nacimiento"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e3d7b3aab39e"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "prose",
+   "text": {
+    "en": "Scripture is so rich that it gives us more than one picture for what happened when we were born again. Each comes from a different corner of life, and each shows another side of the same great rescue.",
+    "es": "La Escritura es tan rica que nos da más de un cuadro de lo que sucedió cuando nacimos de nuevo. Cada uno viene de un rincón distinto de la vida, y cada uno muestra otro lado del mismo gran rescate."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "293dade7a0c5"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "<strong>New birth</strong> — the setting is the maternity room. We are born a second time, of the Spirit (John 3:3). <strong>Reconciliation</strong> — the setting is a marriage, or more exactly a broken one being healed. \"God was in Christ reconciling the world to Himself\" (2 Corinthians 5:19). God is never out of alignment with us; we are out of alignment with Him, and we need to be brought back. <strong>Redemption</strong> — the setting is the slave market. We are slaves to sin, and Christ steps in and pays the price; we are \"justified freely by His grace through the redemption that is in Christ Jesus\" (Romans 3:24). <strong>Justification</strong> — the setting is the courtroom. We have committed an offense; God is the Judge, and in Christ He declares the guilty \"not guilty\" (Romans 4:5). <strong>Conversion</strong> — the setting is a highway. We are traveling in one direction; we stop, see that we are going the wrong way, turn, and go another. It is Saul on the road to Damascus: \"Repent therefore and be converted, that your sins may be blotted out\" (Acts 3:19). Five pictures, one new birth.",
+    "es": "<strong>Nuevo nacimiento</strong> — el escenario es la sala de maternidad. Nacemos por segunda vez, del Espíritu (Juan 3:3). <strong>Reconciliación</strong> — el escenario es un matrimonio, o más exactamente uno roto que es sanado. \"Dios estaba en Cristo reconciliando consigo al mundo\" (2 Corintios 5:19). Dios nunca está desalineado con nosotros; nosotros estamos desalineados con Él, y necesitamos ser traídos de vuelta. <strong>Redención</strong> — el escenario es el mercado de esclavos. Somos esclavos del pecado, y Cristo interviene y paga el precio; somos \"justificados gratuitamente por su gracia, mediante la redención que es en Cristo Jesús\" (Romanos 3:24). <strong>Justificación</strong> — el escenario es la sala del tribunal. Hemos cometido un delito; Dios es el Juez, y en Cristo declara \"no culpable\" al culpable (Romanos 4:5). <strong>Conversión</strong> — el escenario es una autopista. Vamos en una dirección; nos detenemos, vemos que vamos por el camino equivocado, damos la vuelta, y vamos por otro. Es Saulo en el camino a Damasco: \"Arrepentíos, pues, y convertíos, para que sean borrados vuestros pecados\" (Hechos 3:19). Cinco cuadros, un solo nuevo nacimiento."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "05dedcc17bc2"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "heading",
+   "text": {
+    "en": "An Inheritance Reserved in Heaven",
+    "es": "Una Herencia Reservada en el Cielo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c4a14faf753e"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "The new birth brings an inheritance, and Peter piles up words to describe it (vv. 4-5). It is <em>incorruptible</em> — it cannot rot or decay. It is <em>undefiled</em> — nothing can stain or spoil it. It does <em>not fade away</em> — unlike the flowers of this world, it never loses its glory. And it is <em>reserved in heaven</em> for the believer, kept safe far beyond the reach of moth, rust, or thief. To a church facing loss and persecution, this is wonderful news: whatever the world strips from them here, their true inheritance is untouchable, laid up where no enemy can come. And not only is the inheritance kept for them; <em>they</em> are kept for it. They \"are kept by the power of God through faith for salvation ready to be revealed in the last time.\" The same God who guards the inheritance in heaven guards the heirs on earth. Their security does not rest on their own strength, but on His power.",
+    "es": "El nuevo nacimiento trae una herencia, y Pedro amontona palabras para describirla (vv. 4-5). Es <em>incorruptible</em> — no puede pudrirse ni decaer. Es <em>incontaminada</em> — nada puede mancharla ni echarla a perder. Es <em>inmarcesible</em> — a diferencia de las flores de este mundo, nunca pierde su gloria. Y está <em>reservada en el cielo</em> para el creyente, guardada a salvo más allá del alcance de la polilla, el orín o el ladrón. Para una iglesia que enfrenta pérdida y persecución, esta es maravillosa noticia: lo que sea que el mundo les arranque aquí, su verdadera herencia es intocable, atesorada donde ningún enemigo puede llegar. Y no solo la herencia es guardada para ellos; <em>ellos</em> son guardados para ella. Son \"guardados por el poder de Dios mediante la fe, para la salvación que está preparada para ser manifestada en el tiempo postrero.\" El mismo Dios que guarda la herencia en el cielo guarda a los herederos en la tierra. Su seguridad no descansa en su propia fuerza, sino en el poder de Él."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "06ef1dff971e"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "heading",
+   "text": {
+    "en": "Faith Refined Like Gold",
+    "es": "La Fe Acrisolada como el Oro"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0bf5e40d0de0"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "scripture",
+   "text": {
+    "en": "\"...you have been grieved by various trials, that the genuineness of your faith, being much more precious than gold that perishes, though it is tested by fire, may be found to praise, honor, and glory at the revelation of Jesus Christ.\" — 1 Peter 1:6-7 (NKJV)",
+    "es": "\"...sois afligidos en diversas pruebas, para que la prueba de vuestra fe, mucho más preciosa que el oro que perece, aunque sea probado con fuego, sea hallada en alabanza, gloria y honra cuando Jesucristo sea manifestado.\" — 1 Pedro 1:6-7 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8c105dae9be3"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "Peter does not pretend the road is easy. For a little while, he says, the believers have been grieved by various trials. But he sets those trials in a surprising light. Fire is poured over gold not to destroy it but to purify it — to burn away what is false and leave the pure metal behind. So it is with faith. The trials are the furnace, and they prove the believers' faith to be genuine, real gold and not counterfeit. And Peter says this tested faith is worth far more than gold, for gold perishes and faith does not. When Christ is revealed at the last day, a faith that has come through the fire will be found \"to praise, honor, and glory.\" This is the heart of the whole letter in seed: suffering is not the enemy of faith but the furnace that refines it.",
+    "es": "Pedro no finge que el camino sea fácil. Por un poco de tiempo, dice, los creyentes han sido afligidos en diversas pruebas. Pero pone esas pruebas bajo una luz sorprendente. El fuego se derrama sobre el oro no para destruirlo sino para purificarlo — para quemar lo falso y dejar el metal puro. Así es con la fe. Las pruebas son el horno, y prueban que la fe de los creyentes es genuina, oro verdadero y no falsificado. Y Pedro dice que esta fe probada vale mucho más que el oro, pues el oro perece y la fe no. Cuando Cristo sea manifestado en el día postrero, una fe que ha pasado por el fuego será hallada \"en alabanza, gloria y honra.\" Este es el corazón de toda la carta en semilla: el sufrimiento no es el enemigo de la fe sino el horno que la acrisola."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a6e54d5c46b5"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "heading",
+   "text": {
+    "en": "Loving the Christ You Have Not Seen",
+    "es": "Amando al Cristo que No Habéis Visto"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fc5c52bd89fb"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "Then Peter says a tender thing about these believers (vv. 8-9). They had never laid eyes on Jesus, as Peter had. \"Whom having not seen you love. Though now you do not see Him, yet believing, you rejoice with joy inexpressible and full of glory.\" Here is the wonder of true faith: it loves a Christ it has never seen, and it overflows with a joy too deep for words. And this faith is going somewhere. It is \"receiving the end of your faith — the salvation of your souls.\" The word <em>end</em> means the goal, the outcome. All this believing and loving is not in vain; it arrives at the saving of the soul, the very thing God intended from the start.",
+    "es": "Entonces Pedro dice algo tierno acerca de estos creyentes (vv. 8-9). Nunca habían visto a Jesús con sus ojos, como Pedro sí. \"A quien amáis sin haberle visto; en quien creyendo, aunque al presente no lo veáis, os alegráis con gozo inefable y glorioso.\" He aquí la maravilla de la fe verdadera: ama a un Cristo que nunca ha visto, y rebosa de un gozo demasiado hondo para las palabras. Y esta fe va a alguna parte. Está \"obteniendo el fin de vuestra fe, que es la salvación de vuestras almas.\" La palabra <em>fin</em> significa la meta, el resultado. Todo este creer y amar no es en vano; llega a la salvación del alma, justamente lo que Dios se propuso desde el principio."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6ae9136c0e98"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "heading",
+   "text": {
+    "en": "Being Made Holy",
+    "es": "Siendo Hechos Santos"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e6b050737bbd"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "Here we meet the present tense of salvation: <strong>I am being saved</strong>. Sanctification is the process of being made holy, of becoming more and more like Christ. Peter will say it plainly a few verses on: \"Be holy, for I am holy\" (1 Peter 1:16). Now there is a balance to keep here. Paul writes, \"Work out your own salvation with fear and trembling\" (Philippians 2:12). We obviously cannot work out our conversion — that is God's gift, \"by grace you have been saved, through faith, and that not of yourselves... not of works, lest anyone should boast\" (Ephesians 2:8-9). No one is born again by trying hard. But once we are His, we can and must <em>work out</em> the holiness He has put within, growing day by day into the likeness of our Lord. The new birth is God's doing; the growing is the believer's glad labor under grace.",
+    "es": "Aquí encontramos el tiempo presente de la salvación: <strong>estoy siendo salvo</strong>. La santificación es el proceso de ser hecho santo, de llegar a ser cada vez más semejante a Cristo. Pedro lo dirá sin rodeos unos versos más adelante: \"Sed santos, porque yo soy santo\" (1 Pedro 1:16). Ahora bien, hay un equilibrio que guardar aquí. Pablo escribe: \"Ocupaos en vuestra salvación con temor y temblor\" (Filipenses 2:12). Obviamente no podemos ocuparnos de nuestra conversión — esa es el don de Dios, \"por gracia sois salvos por medio de la fe... no de vosotros... no por obras, para que nadie se gloríe\" (Efesios 2:8-9). Nadie nace de nuevo por esforzarse mucho. Pero una vez que somos suyos, podemos y debemos <em>ocuparnos</em> de la santidad que Él ha puesto dentro, creciendo día a día a la semejanza de nuestro Señor. El nuevo nacimiento es obra de Dios; el crecer es la gozosa labor del creyente bajo la gracia."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ebfc0ff73ae0"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "heading",
+   "text": {
+    "en": "What Prophets Sought and Angels Long to See",
+    "es": "Lo que Buscaron los Profetas y Anhelan Ver los Ángeles"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3833db24f179"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "Peter ends this great paragraph by lifting our eyes to the sheer grandeur of the salvation we have been given (vv. 10-12). The prophets of old, he says, searched and inquired carefully about this salvation. The Spirit of Christ was in them, testifying beforehand \"the sufferings of Christ and the glories that would follow.\" They strained to understand what they were writing, and it was revealed to them that they were serving not themselves but <em>us</em> — they were laying up treasure for a generation they would never see. And then Peter adds the most striking line of all: these are \"things which angels desire to look into.\" The salvation the scattered, suffering church holds in its hands is so great that the prophets longed to grasp it and the very angels of heaven lean over to gaze at it in wonder. What the believers may be tempted to take for granted, heaven counts a marvel.",
+    "es": "Pedro termina este gran párrafo levantando nuestros ojos a la pura grandeza de la salvación que se nos ha dado (vv. 10-12). Los profetas de antaño, dice, escudriñaron e inquirieron cuidadosamente acerca de esta salvación. El Espíritu de Cristo estaba en ellos, anunciando de antemano \"los padecimientos de Cristo, y las glorias que vendrían tras ellos.\" Se esforzaban por entender lo que escribían, y les fue revelado que no se servían a sí mismos sino a <em>nosotros</em> — atesoraban para una generación que jamás verían. Y luego Pedro añade la línea más impactante de todas: estas son \"cosas en las cuales anhelan mirar los ángeles.\" La salvación que la iglesia esparcida y sufriente tiene en sus manos es tan grande que los profetas anhelaron asirla y los mismos ángeles del cielo se inclinan para contemplarla con asombro. Lo que los creyentes podrían tener la tentación de dar por sentado, el cielo lo tiene por maravilla."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "622ef755297b"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "heading",
+   "text": {
+    "en": "Glory Yet to Come",
+    "es": "La Gloria que Aún Vendrá"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "85c7054a7540"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "Finally the future tense: <strong>I will be saved</strong>. This is glorification, the last stage, when the work God began is finished and the believer is made like Christ. Paul traces the unbroken chain: \"Whom He predestined, these He also called; whom He called, these He also justified; and whom He justified, these He also glorified\" (Romans 8:30). And John gives us the hope itself: \"Beloved, now we are children of God; and it has not yet been revealed what we shall be, but we know that when He is revealed, we shall be like Him, for we shall see Him as He is\" (1 John 3:2). This is the \"salvation ready to be revealed in the last time\" that Peter named back in verse 5. The living hope born in us at the new birth will not disappoint; it ends in glory. So a church surrounded by trial is anchored at every point — born again in the past, kept and made holy in the present, and bound for glory in the time to come.",
+    "es": "Finalmente el tiempo futuro: <strong>seré salvo</strong>. Esta es la glorificación, la última etapa, cuando la obra que Dios comenzó queda terminada y el creyente es hecho semejante a Cristo. Pablo traza la cadena ininterrumpida: \"A los que predestinó, a éstos también llamó; y a los que llamó, a éstos también justificó; y a los que justificó, a éstos también glorificó\" (Romanos 8:30). Y Juan nos da la esperanza misma: \"Amados, ahora somos hijos de Dios, y aún no se ha manifestado lo que hemos de ser; pero sabemos que cuando él apareciere, seremos semejantes a él, porque le veremos tal como él es\" (1 Juan 3:2). Esta es la \"salvación que está preparada para ser manifestada en el tiempo postrero\" que Pedro nombró allá en el verso 5. La esperanza viva nacida en nosotros en el nuevo nacimiento no defraudará; termina en gloria. Así que una iglesia rodeada de prueba está anclada en cada punto — renacida en el pasado, guardada y hecha santa en el presente, y destinada a la gloria en el tiempo por venir."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0d035cc12190"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "scripture",
+   "text": {
+    "en": "\"...receiving the end of your faith — the salvation of your souls.\" — 1 Peter 1:9 (NKJV)",
+    "es": "\"...obteniendo el fin de vuestra fe, que es la salvación de vuestras almas.\" — 1 Pedro 1:9 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "38369bdaeca0"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "Unit 2 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 2 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "345cc83595a9"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33593c268178"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

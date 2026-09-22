@@ -1,0 +1,572 @@
+{
+ "course": "CTSBibleCharacters",
+ "unit": 6,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Unit 7 →</button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #2f4f2f;\"><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\">\n    <h2><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n    <input type=\"text\" id=\"regName\" placeholder=\"Full name / Nombre completo\" aria-label=\"Full name / Nombre completo\">\n    <input type=\"email\" id=\"regEmail\" placeholder=\"Email\" aria-label=\"Email\">\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate Track</option>\n        <option value=\"mdiv\">Master of Divinity (M.Div.) Track</option>\n        <option value=\"thm\">Master of Theology (Th.M.) Track</option>\n    </select>\n    <button class=\"nav-btn\" id=\"regBtn\"><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\"><p><!--cts:b007:en--></p><p><!--cts:b008:en--></p><p><!--cts:b009:en--></p><p><!--cts:b010:en--></p><h2><!--cts:b011:en--></h2><p><!--cts:b012:en--></p><p><!--cts:b013:en--></p><div class=\"scripture\"><!--cts:b014:en--></div><p><!--cts:b015:en--></p><div class=\"scripture\"><!--cts:b016:en--></div><p><!--cts:b017:en--></p><p><!--cts:b018:en--></p><h2><!--cts:b019:en--></h2><p><!--cts:b020:en--></p><div class=\"scripture\"><!--cts:b021:en--></div><p><!--cts:b022:en--></p><h2><!--cts:b023:en--></h2><p><!--cts:b024:en--></p><div class=\"scripture\"><!--cts:b025:en--></div><p><!--cts:b026:en--></p><div class=\"scripture\"><!--cts:b027:en--></div><p><!--cts:b028:en--></p><p><!--cts:b029:en--></p><div class=\"scripture\"><!--cts:b030:en--></div><div class=\"scripture\"><!--cts:b031:en--></div><h2><!--cts:b032:en--></h2><p><!--cts:b033:en--></p><p><!--cts:b034:en--></p><div class=\"scripture\"><!--cts:b035:en--></div><p><!--cts:b036:en--></p></div>\n<div class=\"lang-es\"><p><!--cts:b007:es--></p><p><!--cts:b008:es--></p><p><!--cts:b009:es--></p><p><!--cts:b010:es--></p><h2><!--cts:b011:es--></h2><p><!--cts:b012:es--></p><p><!--cts:b013:es--></p><div class=\"scripture\"><!--cts:b014:es--></div><p><!--cts:b015:es--></p><div class=\"scripture\"><!--cts:b016:es--></div><p><!--cts:b017:es--></p><p><!--cts:b018:es--></p><h2><!--cts:b019:es--></h2><p><!--cts:b020:es--></p><div class=\"scripture\"><!--cts:b021:es--></div><p><!--cts:b022:es--></p><h2><!--cts:b023:es--></h2><p><!--cts:b024:es--></p><div class=\"scripture\"><!--cts:b025:es--></div><p><!--cts:b026:es--></p><div class=\"scripture\"><!--cts:b027:es--></div><p><!--cts:b028:es--></p><p><!--cts:b029:es--></p><div class=\"scripture\"><!--cts:b030:es--></div><div class=\"scripture\"><!--cts:b031:es--></div><h2><!--cts:b032:es--></h2><p><!--cts:b033:es--></p><p><!--cts:b034:es--></p><div class=\"scripture\"><!--cts:b035:es--></div><p><!--cts:b036:es--></p></div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b037:en--></span><span class=\"lang-es\"><!--cts:b037:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b038:en--></span>\n       <span class=\"lang-es\"><!--cts:b038:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b039:en--></span><span class=\"lang-es\"><!--cts:b039:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b040:en--></span><span class=\"lang-es\"><!--cts:b040:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSBibleCharactersReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "📖 Bible Characters — Unit 6: Moses — The Man Who Asked to See God’s Glory",
+    "es": "📖 Personajes de la Biblia — Unidad 6: Moisés — El Hombre que Pidió Ver la Gloria de Dios"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ea221c7352c2"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "\"Please, show me Your glory.\" — Exodus 33:18 (NKJV)",
+    "es": "«Te ruego que me muestres tu gloria.» — Éxodo 33:18 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9b2af43c3b54"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "📝 Course Registration",
+    "es": "📝 Registro del Curso"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fde900fe006b"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "Please register before beginning this unit.",
+    "es": "Por favor regístrese antes de comenzar esta unidad."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6c8b91fbfb6f"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Of all the figures in the Old Testament, none stands taller than Moses. He was the deliverer who led Israel out of Egypt, the mediator who received the law at Sinai, and the friend with whom the LORD spoke \"face to face.\" Yet the man God used so greatly began with a list of excuses, and the height of his story is not a miracle of power but a glimpse of God's goodness. His life carries us from a burning bush in the desert to the cleft of a rock where the glory of God passed by.",
+    "es": "De todas las figuras del Antiguo Testamento, ninguna se levanta más alta que Moisés. Fue el libertador que sacó a Israel de Egipto, el mediador que recibió la ley en Sinaí, y el amigo con quien Jehová hablaba «cara a cara». Sin embargo, el hombre que Dios usó tan grandemente comenzó con una lista de excusas, y la cumbre de su historia no es un milagro de poder, sino un vistazo de la bondad de Dios. Su vida nos lleva desde una zarza ardiente en el desierto hasta la hendidura de una peña donde pasó la gloria de Dios."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "22548e837f47"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Subject:</strong> Moses — the deliverer who saw the glory of God.",
+    "es": "<strong>Tema:</strong> Moisés — el libertador que vio la gloria de Dios."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "79ab55139804"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Proposition:</strong> The God who calls the inadequate and gives His law also reveals His goodness as His glory.",
+    "es": "<strong>Proposición:</strong> El Dios que llama a los inadecuados y da su ley, también revela su bondad como su gloria."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d2a5347ff464"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "We will trace four movements in the life of Moses.",
+    "es": "Trazaremos cuatro movimientos en la vida de Moisés."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f35fd95c1baa"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "heading",
+   "text": {
+    "en": "I. The Burning Bush",
+    "es": "I. La Zarza Ardiente"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "03536604df73"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "Moses had once been a prince in Egypt, but after killing an Egyptian he fled into the desert of Midian, where he spent forty quiet years tending his father-in-law's sheep. He was eighty years old, his dreams long behind him, when he saw a bush that burned and was not consumed. As he turned aside to look, God called to him from the fire: \"Take your sandals off your feet, for the place where you stand is holy ground.\"",
+    "es": "Moisés había sido una vez príncipe en Egipto, pero después de matar a un egipcio huyó al desierto de Madián, donde pasó cuarenta años apacentando en silencio las ovejas de su suegro. Tenía ochenta años, sus sueños mucho atrás, cuando vio una zarza que ardía y no se consumía. Al apartarse para mirar, Dios lo llamó desde el fuego: «Quita tus zapatos de tus pies, porque el lugar en que tú estás, tierra santa es»."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "375e4f43f1f7"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "There God commissioned him to deliver Israel — and Moses did not run to obey; he ran through a list of reasons he could not. <em>Who am I that I should go?</em> God answered, \"I will certainly be with you.\" <em>What is Your name?</em> And God gave the name above every name:",
+    "es": "Allí Dios lo comisionó para librar a Israel —y Moisés no corrió a obedecer; recorrió una lista de razones por las que no podía—. <em>¿Quién soy yo para que vaya?</em> Dios respondió: «Yo ciertamente estaré contigo». <em>¿Cuál es tu nombre?</em> Y Dios dio el nombre sobre todo nombre:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "841050e1be73"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "scripture",
+   "text": {
+    "en": "I AM WHO I AM... Thus you shall say to the children of Israel, \"I AM has sent me to you.\" (Exodus 3:14, NKJV)",
+    "es": "YO SOY EL QUE SOY... Así dirás a los hijos de Israel: «YO SOY me ha enviado a vosotros». (Éxodo 3:14, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e771a17228e0"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "<em>They will not believe me.</em> So God gave him signs — a rod that became a serpent, a hand that turned leprous and was healed. And at last the real objection:",
+    "es": "<em>No me creerán.</em> Así que Dios le dio señales —una vara que se volvió serpiente, una mano que se volvió leprosa y fue sanada—. Y al fin, la verdadera objeción:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9f3e3aa6c6a0"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "scripture",
+   "text": {
+    "en": "O my Lord, I am not eloquent, neither before nor since You have spoken to Your servant; but I am slow of speech and slow of tongue. (Exodus 4:10, NKJV)",
+    "es": "¡Ay, Señor! nunca he sido hombre de fácil palabra, ni antes, ni desde que tú hablas a tu siervo; porque soy tardo en el habla y torpe de lengua. (Éxodo 4:10, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9bf4d0d1bf20"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "God did not argue about Moses' ability. He simply asked, \"Who has made man's mouth?\" (Exodus 4:11). The God who made the mouth could surely use it. When Moses still begged, \"Send someone else,\" God gave him Aaron to speak alongside him. Here is a lesson for every believer who feels unqualified: God is not looking for ability, but for availability. He delights to use the inadequate so that the power may plainly be His.",
+    "es": "Dios no discutió sobre la capacidad de Moisés. Simplemente preguntó: «¿Quién dio la boca al hombre?» (Éxodo 4:11). El Dios que hizo la boca bien podía usarla. Cuando Moisés todavía rogó: «Envía a otro», Dios le dio a Aarón para hablar a su lado. Aquí hay una lección para todo creyente que se siente incapaz: Dios no busca capacidad, sino disponibilidad. Se deleita en usar a los inadecuados para que el poder sea claramente suyo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "55eb3a736bbc"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "So Moses returned to Egypt and stood before Pharaoh with the word, \"Let My people go.\" Pharaoh refused, and God sent plague upon plague — until the final and terrible night. On that night every household of Israel was to kill a lamb and put its blood on the doorposts, and where the blood was seen, the angel of death passed over. The Passover lamb, slain so that the firstborn might live, points forward to Christ, \"our Passover,\" whose blood shelters all who trust Him. Pharaoh let Israel go, then pursued them to the edge of the Red Sea. There Moses told a terrified people, \"Stand still, and see the salvation of the LORD,\" and God opened the sea, brought Israel through on dry ground, and closed the waters over Egypt's army. The deliverer had led his people out.",
+    "es": "Así que Moisés volvió a Egipto y se puso delante de Faraón con la palabra: «Deja ir a mi pueblo». Faraón se negó, y Dios envió plaga tras plaga —hasta aquella última y terrible noche—. En esa noche cada casa de Israel debía matar un cordero y poner su sangre en los postes de la puerta, y donde se veía la sangre, el ángel de la muerte pasaba de largo. El cordero de la Pascua, inmolado para que el primogénito viviera, señala hacia Cristo, «nuestra Pascua», cuya sangre ampara a todos los que confían en Él. Faraón dejó ir a Israel, y luego los persiguió hasta la orilla del Mar Rojo. Allí Moisés le dijo a un pueblo aterrado: «Estad firmes, y ved la salvación de Jehová», y Dios abrió el mar, hizo pasar a Israel por tierra seca, y cerró las aguas sobre el ejército de Egipto. El libertador había sacado a su pueblo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "62ac0d542d33"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "heading",
+   "text": {
+    "en": "II. The Stone Tablets",
+    "es": "II. Las Tablas de Piedra"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8a6863995844"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "At Mount Sinai, God came down in fire and cloud, and the mountain trembled. There He gave His law to Israel through Moses — the Ten Commandments, written by the finger of God on tablets of stone. The law is holy, righteous, and good, but it could not save; it could only reveal the standard and expose our sin. Even as Moses received it, the people below grew impatient and made a golden calf, and when Moses came down and saw their idolatry, he broke the tablets at the foot of the mountain — a picture of a law already shattered by sin. Centuries later John would draw the great contrast:",
+    "es": "En el monte Sinaí, Dios descendió en fuego y nube, y el monte tembló. Allí dio su ley a Israel por medio de Moisés —los Diez Mandamientos, escritos por el dedo de Dios en tablas de piedra—. La ley es santa, justa y buena, pero no podía salvar; solo podía revelar la norma y exponer nuestro pecado. Aun mientras Moisés la recibía, el pueblo abajo se impacientó e hizo un becerro de oro, y cuando Moisés descendió y vio su idolatría, quebró las tablas al pie del monte —una figura de una ley ya hecha pedazos por el pecado—. Siglos después, Juan trazaría el gran contraste:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fed707d3e725"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "scripture",
+   "text": {
+    "en": "For the law was given through Moses, but grace and truth came through Jesus Christ. (John 1:17, NKJV)",
+    "es": "Pues la ley por medio de Moisés fue dada, mas la gracia y la verdad vinieron por medio de Jesucristo. (Juan 1:17, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "08d48a206443"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "Moses stands as the mediator of the law; Christ comes as the giver of grace. Paul calls the law a schoolmaster, or tutor, sent to bring us to Christ. The law was never God's last word, but a guide pointing forward to the One who alone could keep it and fulfill it. At Sinai God also gave the pattern of the tabernacle, for the same God who gave the law desired to dwell among His people — and that longing would find its fullness when the Word became flesh and dwelt among us.",
+    "es": "Moisés está como el mediador de la ley; Cristo viene como el dador de la gracia. Pablo llama a la ley un ayo, o tutor, enviado para llevarnos a Cristo. La ley nunca fue la última palabra de Dios, sino un guía que señalaba hacia Aquel que solo podía guardarla y cumplirla. En Sinaí Dios dio también el modelo del tabernáculo, porque el mismo Dios que dio la ley deseaba morar en medio de su pueblo —y ese anhelo hallaría su plenitud cuando el Verbo fue hecho carne y habitó entre nosotros."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fef3e9de3599"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "heading",
+   "text": {
+    "en": "III. Show Me Your Glory",
+    "es": "III. Muéstrame Tu Gloria"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "076068ff6c0c"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "Moses, who had once spent forty quiet years tending sheep in the desert, was now given a privilege granted to no one else: he spoke with God face to face, as a man speaks with his friend. And yet he wanted more. He made the boldest request in all of Scripture:",
+    "es": "Moisés, que una vez había pasado cuarenta años apacentando ovejas en el desierto, recibió ahora un privilegio concedido a ningún otro: hablaba con Dios cara a cara, como un hombre habla con su amigo. Y sin embargo quería más. Hizo la petición más audaz de toda la Escritura:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e8d15c09b4bf"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "scripture",
+   "text": {
+    "en": "Please, show me Your glory. (Exodus 33:18, NKJV)",
+    "es": "Te ruego que me muestres tu gloria. (Éxodo 33:18, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "694c531075f7"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "God's answer is full of wonder. \"You cannot see My face; for no man shall see Me, and live\" (Exodus 33:20). So the LORD hid Moses in the cleft of a rock, covered him with His own hand, and let only His back be seen as His glory passed by. But notice carefully what God said He would show. Not His wrath. Not His raw power.",
+    "es": "La respuesta de Dios está llena de asombro. «No podrás ver mi rostro; porque no me verá hombre, y vivirá» (Éxodo 33:20). Así que Jehová escondió a Moisés en la hendidura de una peña, lo cubrió con su propia mano, y dejó ver solo sus espaldas mientras pasaba su gloria. Pero note con cuidado lo que Dios dijo que mostraría. No su ira. No su poder desnudo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cb2861e0f94e"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "scripture",
+   "text": {
+    "en": "I will make all My goodness pass before you. (Exodus 33:19, NKJV)",
+    "es": "Yo haré pasar todo mi bien delante de tu rostro. (Éxodo 33:19, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "80fa875dd4f8"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "God's glory is His goodness. And as His glory passed, He proclaimed His own name: \"The LORD, the LORD God, merciful and gracious, longsuffering, and abounding in goodness and truth.\" The brightest revelation of who God is comes not in thunder but in mercy. As Bengel put it, \"Holiness is hidden glory, and glory is holiness shining forth\" — glory is simply God's holy goodness unveiled.",
+    "es": "La gloria de Dios es su bondad. Y mientras pasaba su gloria, proclamó su propio nombre: «Jehová, Jehová, fuerte, misericordioso, y piadoso; tardo para la ira, y grande en misericordia y verdad». La revelación más brillante de quién es Dios viene no en el trueno, sino en la misericordia. Como dijo Bengel: «La santidad es gloria escondida, y la gloria es santidad que resplandece» —la gloria es simplemente la santa bondad de Dios revelada—."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5bb0e1b5aaf8"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "We see that goodness now only in part, the way a blind man waits for sight. There is a widely told story of an Englishman named William Montague Dyke, who lost his sight at the age of ten. As a young man he fell in love, and before his wedding he underwent surgery that might restore his eyes. As the story goes, he insisted that the bandages remain in place until the ceremony, so that the very first face he would ever see would be the face of his bride. At the altar the surgeon cut away the bandages, his sight held, and looking at her he said, \"You are more beautiful than I ever imagined.\" True or embellished in its details, it pictures something wonderfully true: one day the bandages over our own eyes will come off, and we will see the face of Christ.",
+    "es": "Vemos ahora esa bondad solo en parte, como un ciego espera la vista. Hay una historia ampliamente contada de un inglés llamado William Montague Dyke, que perdió la vista a los diez años. De joven se enamoró, y antes de su boda se sometió a una cirugía que podría restaurar sus ojos. Según se cuenta, insistió en que las vendas permanecieran en su lugar hasta la ceremonia, para que el primer rostro que viera fuera el de su novia. En el altar el cirujano cortó las vendas, su vista resistió, y mirándola dijo: «Eres más hermosa de lo que jamás imaginé». Verdadera o adornada en sus detalles, la historia ilustra algo maravillosamente cierto: un día las vendas sobre nuestros propios ojos caerán, y veremos el rostro de Cristo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0e8aa03ce241"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "scripture",
+   "text": {
+    "en": "Beloved, now we are children of God; and it has not yet been revealed what we shall be, but we know that when He is revealed, we shall be like Him, for we shall see Him as He is. (1 John 3:2, NKJV)",
+    "es": "Amados, ahora somos hijos de Dios, y aún no se ha manifestado lo que hemos de ser; pero sabemos que cuando él apareciere, seremos semejantes a él, porque le veremos como él es. (1 Juan 3:2, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "06a305e15684"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "scripture",
+   "text": {
+    "en": "For now we see in a mirror, dimly, but then face to face. (1 Corinthians 13:12, NKJV)",
+    "es": "Ahora vemos por espejo, oscuramente; mas entonces veremos cara a cara. (1 Corintios 13:12, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "175ae7792d11"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "heading",
+   "text": {
+    "en": "IV. The Promised Land",
+    "es": "IV. La Tierra Prometida"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f356a7e487e3"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "For forty years Moses led a stubborn people through the wilderness, bearing their complaints and interceding for them again and again. God fed them with manna from heaven and brought water out of the rock, providing for every need along the way. When the people were bitten by serpents, God told Moses to lift up a bronze serpent on a pole, that everyone who looked to it might live — a picture the Lord Jesus would later claim as His own: \"As Moses lifted up the serpent in the wilderness, even so must the Son of Man be lifted up.\" Even so, Moses himself was not a perfect man. At the waters of Meribah, when the people demanded water, God told him to speak to the rock; instead, in anger, Moses struck it twice. The water came, but because he had not honored God before the people, he was told he would not lead them into the land. So Moses spent his last years leading them toward a land he himself would never enter.",
+    "es": "Por cuarenta años Moisés guió a un pueblo terco por el desierto, soportando sus quejas e intercediendo por ellos una y otra vez. Dios los alimentó con maná del cielo y sacó agua de la peña, proveyendo para cada necesidad en el camino. Cuando el pueblo fue mordido por serpientes, Dios le dijo a Moisés que levantara una serpiente de bronce sobre un asta, para que todo el que la mirara viviera —una figura que el Señor Jesús después reclamaría como suya: «Como Moisés levantó la serpiente en el desierto, así es necesario que el Hijo del Hombre sea levantado»—. Aun así, Moisés mismo no era un hombre perfecto. En las aguas de Meriba, cuando el pueblo exigió agua, Dios le dijo que hablara a la peña; en cambio, con ira, Moisés la golpeó dos veces. El agua salió, pero porque no había honrado a Dios delante del pueblo, se le dijo que no los llevaría a la tierra. Así que Moisés pasó sus últimos años guiándolos hacia una tierra que él mismo nunca entraría."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ba13ccc5d2da"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "prose",
+   "text": {
+    "en": "From the top of Mount Nebo he was permitted to see it stretched out before him, but he died there, in the land of Moab, with the promise in view rather than in hand, and God Himself buried him. And yet his story did not end on that mountain; centuries later he stood with Christ on the Mount of Transfiguration, inside the land at last, in glory. The earthly Canaan was only a shadow of the true and lasting home:",
+    "es": "Desde la cima del monte Nebo se le permitió verla extendida delante de él, pero murió allí, en la tierra de Moab, con la promesa a la vista más que en la mano, y Dios mismo lo sepultó. Y sin embargo su historia no terminó en aquel monte; siglos después estuvo con Cristo en el monte de la Transfiguración, dentro de la tierra al fin, en gloria. La Canaán terrenal era solo una sombra del hogar verdadero y duradero:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5a759e72dba6"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "scripture",
+   "text": {
+    "en": "In My Father's house are many mansions... I go to prepare a place for you. (John 14:2, NKJV)",
+    "es": "En la casa de mi Padre muchas moradas hay... voy, pues, a preparar lugar para vosotros. (Juan 14:2, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1d5a250d1b51"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "prose",
+   "text": {
+    "en": "From the burning bush to the cleft of the rock, the life of Moses tells one story: God meets the inadequate, gives them His word, and unveils His goodness. What we now see only in part, we shall one day see face to face. The God who showed Moses His back will show us His face in the person of His Son.",
+    "es": "Desde la zarza ardiente hasta la hendidura de la peña, la vida de Moisés cuenta una sola historia: Dios encuentra a los inadecuados, les da su palabra, y revela su bondad. Lo que ahora vemos solo en parte, un día lo veremos cara a cara. El Dios que mostró a Moisés sus espaldas nos mostrará su rostro en la persona de su Hijo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1232f89e7c8f"
+    }
+   }
+  },
+  {
+   "id": "b037",
+   "type": "prose",
+   "text": {
+    "en": "Unit 6 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 6 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ef80e4f0d9dd"
+    }
+   }
+  },
+  {
+   "id": "b038",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33593c268178"
+    }
+   }
+  },
+  {
+   "id": "b039",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b040",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

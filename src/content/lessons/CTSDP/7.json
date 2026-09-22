@@ -1,0 +1,565 @@
+{
+ "course": "CTSDP",
+ "unit": 7,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right:15px; font-weight:bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Unit 8 →</button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n    <p style=\"margin-top:10px; font-style:italic; color:#2f4f2f;\"><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\" style=\"display:none;\">\n    <p><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n    <input type=\"text\" id=\"regName\" style=\"display:none;\" aria-label=\"regName\"><input type=\"email\" id=\"regEmail\" style=\"display:none;\" aria-label=\"regEmail\">\n    <select id=\"regTrack\" style=\"display:none;\" aria-label=\"regTrack\"><option value=\"certificate\">c</option></select>\n    <button id=\"regBtn\" style=\"display:none;\"></button><div id=\"regStatus\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\">\n<h3><!--cts:b006:en--></h3>\n<p><!--cts:b007:en--></p>\n<div class=\"scripture\"><!--cts:b008:en--></div>\n<p><!--cts:b009:en--></p>\n\n<h3><!--cts:b010:en--></h3>\n<p><!--cts:b011:en--></p>\n\n<h3><!--cts:b012:en--></h3>\n<p><!--cts:b013:en--></p>\n<table class=\"method\">\n<tr><!--cts:b014:en--></tr>\n<tr><!--cts:b015:en--></tr>\n<tr><!--cts:b016:en--></tr>\n<tr><!--cts:b017:en--></tr>\n<tr><!--cts:b018:en--></tr>\n</table>\n<p><!--cts:b019:en--></p>\n<p><!--cts:b020:en--></p>\n<p><!--cts:b021:en--></p>\n<p><!--cts:b022:en--></p>\n<p><!--cts:b023:en--></p>\n<p><!--cts:b024:en--></p>\n\n<h3><!--cts:b026:en--></h3>\n<p><!--cts:b027:en--></p>\n<div class=\"eai\"><!--cts:b028:en--></div>\n<div class=\"eai\"><!--cts:b029:en--></div>\n<div class=\"eai\"><!--cts:b030:en--></div>\n<div class=\"illustration\"><!--cts:b031:en--></div>\n<div class=\"illustration\"><!--cts:b032:en--></div>\n\n<h3><!--cts:b033:en--></h3>\n<p><!--cts:b034:en--></p>\n<p><!--cts:b035:en--></p>\n<div class=\"scripture\"><!--cts:b036:en--></div>\n</div>\n<div class=\"lang-es\">\n<h3><!--cts:b006:es--></h3>\n<p><!--cts:b007:es--></p>\n<div class=\"scripture\"><!--cts:b008:es--></div>\n<p><!--cts:b009:es--></p>\n\n<h3><!--cts:b010:es--></h3>\n<p><!--cts:b011:es--></p>\n\n<h3><!--cts:b012:es--></h3>\n<p><!--cts:b013:es--></p>\n<table class=\"method\">\n<tr><!--cts:b014:es--></tr>\n<tr><!--cts:b015:es--></tr>\n<tr><!--cts:b016:es--></tr>\n<tr><!--cts:b017:es--></tr>\n<tr><!--cts:b018:es--></tr>\n</table>\n<p><!--cts:b019:es--></p>\n<p><!--cts:b020:es--></p>\n<p><!--cts:b021:es--></p>\n<p><!--cts:b022:es--></p>\n<p><!--cts:b023:es--></p>\n<p><!--cts:b024:es--></p>\n<p><!--cts:b025:es--></p>\n\n<h3><!--cts:b026:es--></h3>\n<p><!--cts:b027:es--></p>\n<div class=\"eai\"><!--cts:b028:es--></div>\n<div class=\"eai\"><!--cts:b029:es--></div>\n<div class=\"eai\"><!--cts:b030:es--></div>\n<div class=\"illustration\"><!--cts:b031:es--></div>\n<div class=\"illustration\"><!--cts:b032:es--></div>\n\n<h3><!--cts:b033:es--></h3>\n<p><!--cts:b034:es--></p>\n<p><!--cts:b035:es--></p>\n<div class=\"scripture\"><!--cts:b036:es--></div>\n</div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b037:en--></span><span class=\"lang-es\"><!--cts:b037:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b038:en--></span>\n       <span class=\"lang-es\"><!--cts:b038:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top:20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b039:en--></span><span class=\"lang-es\"><!--cts:b039:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b040:en--></span><span class=\"lang-es\"><!--cts:b040:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top:15px; font-weight:bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top:10px; font-size:0.9rem; color:#1f6b3b; display:none;\"></div>\n    </div>\n</div>\n</div>\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSDPReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📖 Doctrinal Preaching — Unit 7: Preaching the Holy Spirit",
+    "es": "📖 Predicación Doctrinal — Unidad 7: Predicando al Espíritu Santo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "329126298a99"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "\"When He, the Spirit of truth, has come, He will guide you into all truth.\" — John 16:13 (NKJV)",
+    "es": "\"Pero cuando viniere el Espíritu de verdad, él os guiará a toda verdad.\" — Juan 16:13 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0a274a52ad58"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "Registration carries over from Unit 1.",
+    "es": "El registro se mantiene desde la Unidad 1."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "854db7e4c920"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "heading",
+   "text": {
+    "en": "Day 1 — Who the Holy Spirit Is",
+    "es": "Día 1 — Quién es el Espíritu Santo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7af21c372439"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Of all the doctrines, the Holy Spirit is the one most often felt and least often defined. So the preacher must begin where confusion begins: the Spirit is not an <em>it</em>, not a vague force or influence, but a divine <strong>Person</strong> — the third Person of the Trinity, fully God along with the Father and the Son. He is personal: He speaks, He teaches, He can be grieved, He has a will. Settle this first, because a hearer who thinks of the Spirit as electricity will try to <em>use</em> Him; a hearer who knows the Spirit is a Person will <em>walk with</em> Him.",
+    "es": "De todas las doctrinas, el Espíritu Santo es la que más a menudo se siente y menos a menudo se define. Así que el predicador debe comenzar donde comienza la confusión: el Espíritu no es un <em>algo</em>, ni una fuerza o influencia vaga, sino una <strong>Persona</strong> divina — la tercera Persona de la Trinidad, plenamente Dios junto con el Padre y el Hijo. Es personal: habla, enseña, puede ser contristado, tiene voluntad. Resuelva esto primero, porque un oyente que piensa en el Espíritu como electricidad tratará de <em>usarlo</em>; un oyente que sabe que el Espíritu es una Persona <em>caminará con</em> Él."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1aac16a29fe1"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "scripture",
+   "text": {
+    "en": "\"When He, the Spirit of truth, has come, He will guide you into all truth.\" — John 16:13 (NKJV)",
+    "es": "\"Pero cuando viniere el Espíritu de verdad, él os guiará a toda verdad.\" — Juan 16:13 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0a274a52ad58"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "(Doctrinal backbone for this unit — the person and work of the Spirit — corresponds to Systematic Theology Unit 4; point students there for the fuller treatment.)",
+    "es": "(El fundamento doctrinal de esta unidad — la persona y obra del Espíritu — corresponde a la Unidad 4 de Teología Sistemática; remita allí a los alumnos para el tratamiento más amplio.)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "257d5f1ee955"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "heading",
+   "text": {
+    "en": "Day 2 — What the Holy Spirit Does",
+    "es": "Día 2 — Qué hace el Espíritu Santo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "341691e665b8"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "The doctrine of the Spirit answers two questions, as the course’s own framework puts it: <em>who is the Holy Spirit?</em> and <em>what is the work of the Holy Spirit?</em> Day 1 answered the first. The work is best preached as a series of definite acts in the life of the believer, each one resting on its own text. That is the homiletical move: a doctrine that feels misty becomes preachable the moment it is broken into specific, texted works.",
+    "es": "La doctrina del Espíritu responde a dos preguntas, como lo plantea el propio marco del curso: <em>¿quién es el Espíritu Santo?</em> y <em>¿cuál es la obra del Espíritu Santo?</em> El Día 1 respondió la primera. La obra se predica mejor como una serie de actos definidos en la vida del creyente, cada uno descansando en su propio texto. Ese es el movimiento homilético: una doctrina que se siente neblinosa se vuelve predicable en el momento en que se divide en obras específicas y con texto."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "301ab7d84cc0"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "heading",
+   "text": {
+    "en": "Day 3 — The Homiletical Move",
+    "es": "Día 3 — El movimiento homilético"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2e55531e1c8e"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Subject:</strong> the work of the Holy Spirit. <strong>Interrogative:</strong> “What does the Holy Spirit do in the believer?” <strong>Keyword:</strong> <em>works</em>. The keyword yields four points, each anchored to its own text:",
+    "es": "<strong>Tema:</strong> la obra del Espíritu Santo. <strong>Interrogativo:</strong> “¿Qué hace el Espíritu Santo en el creyente?” <strong>Palabra clave:</strong> <em>obras</em>. La palabra clave produce cuatro puntos, cada uno anclado a su propio texto:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8bb9614ef113"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "other",
+   "text": {
+    "en": "<th>Point (keyword: <em>works</em>)</th><th>Anchor text</th>",
+    "es": "<th>Punto (palabra clave: <em>obras</em>)</th><th>Texto base</th>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8954ce809da4"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "other",
+   "text": {
+    "en": "<td><strong>1. He regenerates</strong> — gives new birth</td><td>Titus 3:5; John 3:5–6</td>",
+    "es": "<td><strong>1. Él regenera</strong> — da nuevo nacimiento</td><td>Tito 3:5; Juan 3:5–6</td>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "155b1cad3539"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "other",
+   "text": {
+    "en": "<td><strong>2. He indwells</strong> — lives in the believer</td><td>1 Corinthians 6:19; Romans 8:9</td>",
+    "es": "<td><strong>2. Él mora</strong> — vive en el creyente</td><td>1 Corintios 6:19; Romanos 8:9</td>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cf9341c790ea"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "other",
+   "text": {
+    "en": "<td><strong>3. He fills and empowers</strong> — for holiness and witness</td><td>Ephesians 5:18; Acts 1:8</td>",
+    "es": "<td><strong>3. Él llena y faculta</strong> — para santidad y testimonio</td><td>Efesios 5:18; Hechos 1:8</td>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "76b865f8502a"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "other",
+   "text": {
+    "en": "<td><strong>4. He seals</strong> — guarantees our inheritance</td><td>Ephesians 1:13–14</td>",
+    "es": "<td><strong>4. Él sella</strong> — garantiza nuestra herencia</td><td>Efesios 1:13–14</td>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2eb596212a15"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "Let each work be understood for what it is — four definite things the Spirit does, not four moods He puts us in.",
+    "es": "Entienda cada obra por lo que es — cuatro cosas definidas que el Espíritu hace, no cuatro estados de ánimo que nos provoca."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "adac5620a0e3"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "<strong>1. He regenerates — He gives new birth (Titus 3:5; John 3:5–6).</strong> The first work is the one that makes a Christian a Christian. We are not born again by trying harder, nor by religion, nor by good blood; we are born of the Spirit. As a man is helpless to arrange his own first birth, so he is helpless to arrange his second; the wind blows where it wishes, and the new life is the Spirit’s gift, not the sinner’s achievement. Regeneration is not turning over a new leaf — it is receiving a new heart.",
+    "es": "<strong>1. Él regenera — da nuevo nacimiento (Tito 3:5; Juan 3:5–6).</strong> La primera obra es la que hace cristiano a un cristiano. No nacemos de nuevo esforzándonos más, ni por la religión, ni por buena sangre; nacemos del Espíritu. Así como un hombre es incapaz de arreglar su primer nacimiento, también es incapaz de arreglar el segundo; el viento sopla de donde quiere, y la vida nueva es el don del Espíritu, no el logro del pecador. La regeneración no es voltear una hoja nueva — es recibir un corazón nuevo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c5e2f724e893"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "<strong>2. He indwells — He lives in the believer (1 Corinthians 6:19; Romans 8:9).</strong> Having given new life, the Spirit moves in to stay. This work is developed in full below, for it is the one we will preach as our example — God no longer dwelling in a temple of stone, but in the believer himself.",
+    "es": "<strong>2. Él mora — vive en el creyente (1 Corintios 6:19; Romanos 8:9).</strong> Habiendo dado vida nueva, el Espíritu entra a morar para quedarse. Esta obra se desarrolla por completo abajo, pues es la que predicaremos como ejemplo — Dios ya no habitando en un templo de piedra, sino en el creyente mismo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "84bbf0432670"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "<strong>3. He fills and empowers — for holiness and witness (Ephesians 5:18; Acts 1:8).</strong> Regeneration happens once; filling is meant to happen again and again. “Be filled with the Spirit” is a command in the present tense — keep on being filled. The same disciples who fled at the cross stood up at Pentecost and could not be silenced, not because they had grown braver but because they had been filled. The believer is a vessel: emptied of self, he is filled for holiness within and for witness without. A Spirit-filled life is not a louder life; it is a life through which Christ is unmistakable. And when the Spirit fills a man, it can look from the outside like drunkenness — and Scripture knows it. When Hannah prayed in the temple, her lips moving without a sound, Eli took her for a drunken woman: “How long will you be drunk? Put away your wine” (1 Samuel 1:14). When the Spirit fell at Pentecost, the crowd mocked, “They are full of new wine,” and Peter had to answer that it was only the third hour of the day, far too early for that (Acts 2:13–15). And it is no accident that Paul sets the two side by side: “do not be drunk with wine, in which is dissipation, but be filled with the Spirit” (Ephesians 5:18). The resemblance is real — an overflow, a gladness that spills past ordinary reserve — but the origin is opposite. The one filling is poured in from a bottle and leaves a man less than himself; the other is poured in from God and makes him more than himself. Paul does not deny that a man longs to be filled; he only tells him what to be filled with.",
+    "es": "<strong>3. Él llena y faculta — para santidad y testimonio (Efesios 5:18; Hechos 1:8).</strong> La regeneración sucede una vez; la llenura ha de suceder una y otra vez. “Sed llenos del Espíritu” es un mandato en tiempo presente — seguid siendo llenos. Los mismos discípulos que huyeron en la cruz se levantaron en Pentecostés y no pudieron ser callados, no porque se hubieran vuelto más valientes sino porque habían sido llenos. El creyente es un vaso: vaciado de sí mismo, es llenado para santidad por dentro y para testimonio por fuera. Una vida llena del Espíritu no es una vida más ruidosa; es una vida a través de la cual Cristo es inconfundible. Y cuando el Espíritu llena a un hombre, puede parecer por fuera como embriaguez — y la Escritura lo sabe. Cuando Ana oraba en el templo, moviendo los labios sin sonido, Elí la tomó por una mujer ebria: “¿Hasta cuándo estarás embriagada? Echa de ti tu vino” (1 Samuel 1:14). Cuando el Espíritu cayó en Pentecostés, la multitud se burló: “Están llenos de mosto,” y Pedro tuvo que responder que apenas era la hora tercera del día, demasiado temprano para eso (Hechos 2:13–15). Y no es por azar que Pablo pone los dos lado a lado: “no os embriaguéis con vino, en lo cual hay disolución; antes bien sed llenos del Espíritu” (Efesios 5:18). El parecido es real — un desbordamiento, una alegría que rebasa la reserva ordinaria — pero el origen es opuesto. Una llenura se vierte de una botella y deja a un hombre menos que sí mismo; la otra se vierte de Dios y lo hace más que sí mismo. Pablo no niega que un hombre anhele ser llenado; solo le dice de qué ha de llenarse."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5556368e1917"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "<strong>4. He seals — He guarantees our inheritance (Ephesians 1:13–14).</strong> In the ancient world a king would write a letter, fold it, pour hot wax across the fold, and press his signet down into the wax. The letter was verified by the seal — the king’s own mark, proof it was truly his. When you trusted Christ, “you were sealed with the Holy Spirit of promise, who is the guarantee of our inheritance.” So what is the seal that proves you belong to God? Not a feeling. Not your performance. It is the Holy Spirit Himself, pressed down into a human life — and as wax takes the shape of the signet, the sealed believer slowly takes the shape of the One who sealed him.",
+    "es": "<strong>4. Él sella — garantiza nuestra herencia (Efesios 1:13–14).</strong> En el mundo antiguo un rey escribía una carta, la doblaba, vertía cera caliente sobre el doblez, y hundía su sello en la cera. La carta se verificaba por el sello — la marca propia del rey, prueba de que era verdaderamente suya. Cuando confiaste en Cristo, “fuisteis sellados con el Espíritu Santo de la promesa, que es las arras de nuestra herencia.” Entonces, ¿cuál es el sello que prueba que perteneces a Dios? No un sentimiento. No tu desempeño. Es el Espíritu Santo mismo, hundido en una vida humana — y como la cera toma la forma del sello, el creyente sellado poco a poco toma la forma de Aquel que lo selló."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "19103842b3be"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "Let me tell you when I learned what that seal looks like. Years ago I was standing in line at a hamburger place, thinking of nothing in particular, when the man next to me — a stranger, and we had traded only a word or two — turned and looked at me and said, “You’re a Christian, aren’t you?” I said yes. I asked him how he knew. He said, “I could see it in your face.” I have turned that moment over for years. I had said nothing. I had only been standing there. Was Christ in me that moment, so truly that I bore the mark of Him on my face — even for an instant — where a stranger could read it? Could that be the seal of the Spirit, surfacing for a moment in an ordinary face in an ordinary line? I believe it was. The wax had borne the signet all along; that day the light caught it, and another man saw whose I was before I ever said a word. That is what a seal is for. A seal no one can read seals nothing — but the Spirit’s seal is meant to show, until others can see Christ in us, sometimes even in our faces.",
+    "es": "Permítame contarle cuándo aprendí qué aspecto tiene ese sello. Hace años estaba haciendo fila en una hamburguesería, pensando en nada en particular, cuando el hombre junto a mí — un desconocido, y habíamos cruzado apenas una palabra o dos — se volvió, me miró y dijo: “Usted es cristiano, ¿verdad?” Le dije que sí. Le pregunté cómo lo sabía. Dijo: “Lo pude ver en su rostro.” He dado vueltas a ese momento por años. Yo no había dicho nada. Solo había estado allí de pie. ¿Estaba Cristo en mí en aquel momento, tan de veras que llevé la marca de Él en mi rostro — aunque fuera por un instante — donde un desconocido pudo leerla? ¿Podría ser eso el sello del Espíritu, aflorando por un momento en un rostro común en una fila común? Creo que lo fue. La cera había llevado el sello todo el tiempo; aquel día la luz lo alcanzó, y otro hombre vio de quién era yo antes de que yo dijera una palabra. Para eso sirve un sello. Un sello que nadie puede leer no sella nada — pero el sello del Espíritu está destinado a mostrarse, hasta que otros puedan ver a Cristo en nosotros, a veces aun en nuestros rostros."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "974c2240f64a"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "es": "<em>(Nota del autor para revisión: el <strong>bosquejo</strong> de las cuatro obras se armó de textos estándar para su aprobación en la Puerta 2; la enseñanza y las ilustraciones ahora reflejan su propio ministerio.)</em>"
+   }
+  },
+  {
+   "id": "b026",
+   "type": "heading",
+   "text": {
+    "en": "Day 4 — Developing a Point (E-A-I) and Illustrations",
+    "es": "Día 4 — Desarrollando un punto (E-A-I) e ilustraciones"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "94e78052b8f6"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "Point 2, “He indwells” (1 Corinthians 6:19), developed in full:",
+    "es": "El Punto 2, “Él mora” (1 Corintios 6:19), desarrollado por completo:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9b7c0eb1296b"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "<strong class=\"lbl\">Explanation</strong> of the text. <em>“Your body is the temple of the Holy Spirit who is in you.”</em> Under the old covenant God dwelt in a temple of stone; now, by the Spirit, the believer himself is the temple. God has not moved to a distance — He has moved in.",
+    "es": "<strong class=\"lbl\">Explicación</strong> del texto. <em>“Vuestro cuerpo es templo del Espíritu Santo que está en vosotros.”</em> Bajo el antiguo pacto Dios moraba en un templo de piedra; ahora, por el Espíritu, el creyente mismo es el templo. Dios no se ha alejado — ha entrado a morar."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f090ba284297"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "<strong class=\"lbl\">Application</strong> of the text. So the Christian is never alone and never merely on his own strength. The same Spirit who raised Jesus lives in you. That dignifies the body, it comforts the lonely, and it sobers us — we do not carry God’s presence into anything we would be ashamed to bring before Him.",
+    "es": "<strong class=\"lbl\">Aplicación</strong> del texto. Así que el cristiano nunca está solo ni depende meramente de su propia fuerza. El mismo Espíritu que resucitó a Jesús vive en ti. Eso dignifica el cuerpo, consuela al solitario y nos hace sobrios — no llevamos la presencia de Dios a nada que nos avergonzaría presentarle."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4cb33e028109"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "<strong class=\"lbl\">Illustration.</strong> Wind is invisible, yet you see the sail fill and the boat move. You never see the Spirit; you see the life that was dead begin to move toward God. That is how you know He is there.",
+    "es": "<strong class=\"lbl\">Ilustración.</strong> El viento es invisible, y sin embargo ves llenarse la vela y moverse la barca. Nunca ves al Espíritu; ves la vida que estaba muerta comenzar a moverse hacia Dios. Así sabes que Él está allí."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1ff5e797c9b7"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "<strong>💡 Wind and breath:</strong> the same word in Scripture means wind, breath, and Spirit (<em>ruach</em>, <em>pneuma</em>). Unseen, but its effect is unmistakable — good for preaching the Spirit’s hidden, real work.",
+    "es": "<strong>💡 Viento y aliento:</strong> la misma palabra en la Escritura significa viento, aliento y Espíritu (<em>ruaj</em>, <em>pneuma</em>). Invisible, pero su efecto es inconfundible — bueno para predicar la obra escondida y real del Espíritu."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5e693fea3677"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "prose",
+   "text": {
+    "en": "<strong>💡 The Spirit Goes Ahead of You:</strong> Early in my ministry I once pressed and pressed to win a man to Christ when the Holy Spirit was not at work in him. I may have gotten a convert that day — but God did not. What I learned has shaped every conversation since: the Holy Spirit is already working in a person long before I ever open my mouth. By the time I speak, that person has either already been moved by the Spirit, or has already decided to tune Him out. So now, when I meet someone, I will often say early and plainly, “I’m a pastor.” That one sentence tells me a great deal. If the person brushes it aside, changes the subject, or drifts away, I have learned not to take it personally — they have not rejected me; they have, for now, turned from the Spirit. But if a flicker of interest shows, I can invite them to church, where there is room to say more; and if the interest is real, I can ask about their walk with the Lord. Being a pastor gives me an easy way to say it, but you do not need the title — you can mention your church, or simply tell what knowing Christ has done in your life, and then watch. You are not testing the person. You are listening for the Spirit, to see where He has already been.",
+    "es": "<strong>💡 El Espíritu va delante de ti:</strong> Al principio de mi ministerio una vez insistí e insistí en ganar a un hombre para Cristo cuando el Espíritu Santo no estaba obrando en él. Puede que aquel día consiguiera un converso — pero Dios no. Lo que aprendí ha moldeado cada conversación desde entonces: el Espíritu Santo ya está obrando en una persona mucho antes de que yo abra la boca. Para cuando hablo, esa persona o ya ha sido movida por el Espíritu, o ya ha decidido ignorarlo. Así que ahora, cuando conozco a alguien, a menudo digo pronto y con sencillez: “Soy pastor.” Esa sola frase me dice mucho. Si la persona la descarta, cambia de tema, o se aleja, he aprendido a no tomarlo como algo personal — no me han rechazado a mí; han, por ahora, apartado del Espíritu. Pero si asoma una chispa de interés, puedo invitarla a la iglesia, donde hay lugar para decir más; y si el interés es real, puedo preguntar por su andar con el Señor. Ser pastor me da una manera fácil de decirlo, pero no necesitas el título — puedes mencionar tu iglesia, o simplemente contar lo que conocer a Cristo ha hecho en tu vida, y luego observar. No estás probando a la persona. Estás escuchando al Espíritu, para ver dónde ya ha estado."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cfeeead6ebc0"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "heading",
+   "text": {
+    "en": "Day 5 — Craft Notes and Summary",
+    "es": "Día 5 — Notas de oficio y resumen"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c68b311b98c4"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "prose",
+   "text": {
+    "en": "Two cautions. <strong>Preach the Spirit toward Christ, not toward the self.</strong> Jesus said the Spirit “will testify of Me”; a sermon on the Spirit that ends in the hearer’s experience rather than in Christ has lost its compass. <strong>Guard both ditches.</strong> One ditch ignores the Spirit entirely; the other makes Him a spectacle. Preach Him as the Person who applies all of Christ’s work to the believer. Then arc to response: the indwelling Spirit is offered to everyone who trusts Christ, and the call is to walk in step with Him.",
+    "es": "Dos advertencias. <strong>Predica al Espíritu hacia Cristo, no hacia el yo.</strong> Jesús dijo que el Espíritu “dará testimonio de Mí”; un sermón sobre el Espíritu que termina en la experiencia del oyente en lugar de en Cristo ha perdido su brújula. <strong>Guarda ambas cunetas.</strong> Una cuneta ignora al Espíritu por completo; la otra lo hace un espectáculo. Predícalo como la Persona que aplica toda la obra de Cristo al creyente. Luego haz el arco a la respuesta: el Espíritu que mora se ofrece a todo el que confía en Cristo, y el llamado es a andar a su paso."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "01f0099c0200"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "prose",
+   "text": {
+    "en": "So Unit 7 ran the template again: who the Spirit is, the lean backbone (ST Unit 4), subject and interrogative and keyword, four texted works, one developed by E-A-I, and an arc to response. Unit 8 takes up salvation — the whole golden chain the Spirit applies.",
+    "es": "Así que la Unidad 7 corrió la plantilla de nuevo: quién es el Espíritu, el fundamento breve (Unidad 4 de TS), tema e interrogativo y palabra clave, cuatro obras con texto, una desarrollada por E-A-I, y un arco a la respuesta. La Unidad 8 toma la salvación — toda la cadena dorada que el Espíritu aplica."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a46721d775d6"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "scripture",
+   "text": {
+    "en": "\"If we live in the Spirit, let us also walk in the Spirit.\" — Galatians 5:25 (NKJV)",
+    "es": "\"Si vivimos en el Espíritu, andemos también en el Espíritu.\" — Gálatas 5:25 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ccfe628dbaed"
+    }
+   }
+  },
+  {
+   "id": "b037",
+   "type": "prose",
+   "text": {
+    "en": "Unit 7 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 7 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "39593a6cb288"
+    }
+   }
+  },
+  {
+   "id": "b038",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33593c268178"
+    }
+   }
+  },
+  {
+   "id": "b039",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b040",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

@@ -25,12 +25,13 @@ if (!fs.existsSync(LESSONS)) { console.log('no course has been converted yet'); 
 const courses = COURSE ? [COURSE] : fs.readdirSync(LESSONS);
 
 const label = (b, lang, src) => {
-  const t = b.type === 'figure' ? b.caption?.text : b.text;
-  if (!t || t[src] == null) return null;
-  if (t[lang] == null) return 'missing';
+  /* A block with no source text is not untranslated -- it is a fragment that
+     exists only in the other language. Counted separately, because "missing"
+     is something to fix and this is something to know. */
+  if (b.text?.[src] == null) return b.text?.[lang] != null ? 'source-only-other' : null;
+  if (b.text[lang] == null) return 'missing';
   if (isStale(b, lang, src)) return 'stale';
-  const prov = b.type === 'figure' ? b.caption?.tr : b.tr;
-  return prov?.[lang]?.status ?? 'untracked';
+  return b.tr?.[lang]?.status ?? 'untracked';
 };
 
 let anyStale = 0;
@@ -63,8 +64,7 @@ for (const course of courses) {
     if (!UNIT) continue;
     for (const b of l.blocks) {
       const states = others.map((lang) => `${lang}=${label(b, lang, l.sourceLang) ?? '—'}`).join(' ');
-      const t = b.type === 'figure' ? b.caption?.text : b.text;
-      const preview = (t?.[l.sourceLang] ?? '(illustration)').replace(/<[^>]+>/g, '').slice(0, 58);
+      const preview = (b.text?.[l.sourceLang] ?? '').replace(/<[^>]+>/g, '').slice(0, 58);
       console.log(`   ${b.id.padEnd(9)} ${b.type.padEnd(9)} ${states.padEnd(14)} ${preview}`);
     }
   }

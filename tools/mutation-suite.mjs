@@ -135,13 +135,16 @@ const M = [
     gate: 'node tools/prose-baseline.mjs check dist',
     files: ['src/content/lessons/CTSHermeneutics/4.json'],
     needsBuild: true,
-    why: 'delete a paragraph from a converted lesson — the same loss, now in data',
+    why: 'empty a paragraph of a converted lesson — the same loss, now in data',
     expect: /block\(s\) lost/,
     apply: (f) => {
+      /* Emptied rather than removed. Removing it outright is caught earlier,
+         by the template still holding its hole; this is the quieter version,
+         where the shape is intact and the words are gone. */
       const j = JSON.parse(read(f[0]));
-      const i = j.blocks.findIndex((b) => b.type === 'prose' && (b.text?.en || '').length > 300);
-      if (i < 0) throw new Error('no long paragraph to remove');
-      j.blocks.splice(i, 1);
+      const b = j.blocks.find((b) => b.type === 'prose' && (b.text?.en || '').length > 300);
+      if (!b) throw new Error('no long paragraph to empty');
+      for (const k of Object.keys(b.text)) b.text[k] = ' ';
       write(f[0], JSON.stringify(j, null, 1));
     },
   },
@@ -150,7 +153,7 @@ const M = [
     gate: 'npx astro build',
     files: ['src/content/lessons/CTSHermeneutics/6.json'],
     why: 'drop one block\'s Spanish — the page half in a language the reader did not choose',
-    expect: /no es text|half in en/,
+    expect: /hole for es and no es text/,
     apply: (f) => {
       const j = JSON.parse(read(f[0]));
       const b = j.blocks.find((b) => b.type === 'prose');
@@ -208,10 +211,24 @@ const M = [
     gate: 'node tools/verify-lesson-render.mjs',
     files: ['src/lib/lesson.ts'],
     needsBuild: true,
-    why: 'render a Scripture quotation as an ordinary paragraph — the quotation stops looking like one',
-    expect: /differ|FAIL/,
+    why: 'render only the first language into the page — every page loses its Spanish',
+    expect: /differs|FAIL/,
     apply: (f) => {
-      write(f[0], read(f[0]).replace("scripture: ['div', 'scripture'],", "scripture: ['p', ''],"));
+      write(f[0], read(f[0]).replace('if (!langs.includes(lang)) return \'\';',
+                                     'if (lang !== langs[0]) return \'\';'));
+    },
+  },
+  {
+    id: 'lesson-template-hole-lost',
+    gate: 'npx astro build',
+    files: ['src/content/lessons/CTSActs/4.json'],
+    why: 'a block loses its hole in the template — its text never reaches the page again',
+    expect: /hole|vanish from the page/,
+    apply: (f) => {
+      const j = JSON.parse(read(f[0]));
+      const id = j.blocks[5].id;
+      j.template = j.template.split(`<!--cts:${id}:en-->`).join('');
+      write(f[0], JSON.stringify(j, null, 1));
     },
   },
   /* The CMS config. Sveltia drops fields its config does not declare, so the

@@ -1,0 +1,460 @@
+{
+ "course": "CTSJohn",
+ "unit": 12,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right:15px; font-weight:bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Espa&ntilde;ol</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></p>\n    <p style=\"margin-top:10px; font-style:italic; color:#2f4f2f;\"><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\" style=\"display:none;\">\n    <h3><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></h3>\n    <p style=\"font-size:0.9rem;\"><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></p>\n    <label class=\"lang-en\"><!--cts:b008:en--></label><label class=\"lang-es\"><!--cts:b008:es--></label>\n    <input type=\"text\" id=\"regName\" placeholder=\"...\" aria-label=\"...\">\n    <label class=\"lang-en\"><!--cts:b009:en--></label><label class=\"lang-es\"><!--cts:b009:es--></label>\n    <input type=\"email\" id=\"regEmail\" placeholder=\"...\" aria-label=\"...\">\n    <label class=\"lang-en\"><!--cts:b010:en--></label><label class=\"lang-es\"><!--cts:b010:es--></label>\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate / Certificado</option>\n        <option value=\"mdiv\">M.Div.</option>\n        <option value=\"thm\">Th.M.</option>\n    </select>\n    <button id=\"regBtn\" class=\"nav-btn\"><span class=\"lang-en\"><!--cts:b011:en--></span><span class=\"lang-es\"><!--cts:b011:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top:8px;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\">\n\n<h3><!--cts:b012:en--></h3>\n<p><!--cts:b013:en--></p>\n\n<h3><!--cts:b014:en--></h3>\n<p><!--cts:b015:en--></p>\n\n<h3><!--cts:b016:en--></h3>\n<p><!--cts:b017:en--></p>\n<div class=\"pull-quote\"><!--cts:b018:en--></div>\n<div class=\"illustration\"><!--cts:b019:en--></div>\n\n<h3><!--cts:b020:en--></h3>\n<p><!--cts:b021:en--></p>\n<div class=\"illustration\"><!--cts:b022:en--></div>\n\n<h3><!--cts:b023:en--></h3>\n<p><!--cts:b024:en--></p>\n<p><!--cts:b025:en--></p>\n\n<h3><!--cts:b026:en--></h3>\n<p><!--cts:b027:en--></p>\n<p><!--cts:b028:en--></p>\n\n</div>\n<div class=\"lang-es\">\n\n<h3><!--cts:b012:es--></h3>\n<p><!--cts:b013:es--></p>\n\n<h3><!--cts:b014:es--></h3>\n<p><!--cts:b015:es--></p>\n\n<h3><!--cts:b016:es--></h3>\n<p><!--cts:b017:es--></p>\n<div class=\"pull-quote\"><!--cts:b018:es--></div>\n<div class=\"illustration\"><!--cts:b019:es--></div>\n\n<h3><!--cts:b020:es--></h3>\n<p><!--cts:b021:es--></p>\n<div class=\"illustration\"><!--cts:b022:es--></div>\n\n<h3><!--cts:b023:es--></h3>\n<p><!--cts:b024:es--></p>\n<p><!--cts:b025:es--></p>\n\n<h3><!--cts:b026:es--></h3>\n<p><!--cts:b027:es--></p>\n<p><!--cts:b028:es--></p>\n\n</div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b029:en--></span><span class=\"lang-es\"><!--cts:b029:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b030:en--></span>\n       <span class=\"lang-es\"><!--cts:b030:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top:20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b031:en--></span><span class=\"lang-es\"><!--cts:b031:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b032:en--></span><span class=\"lang-es\"><!--cts:b032:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top:15px; font-weight:bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top:10px; font-size:0.9rem; color:#1f6b3b; display:none;\"></div>\n    </div>\n</div>\n</div>\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSJohnReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "Certificate →",
+    "es": "Certificado →"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cd69a52507d2"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "📖 The Gospel of John — Unit 12: It Is Finished",
+    "es": "📖 El Evangelio de Juan — Unidad 12: Consumado Es"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "68094cc1de50"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "\"So when Jesus had received the sour wine, He said, 'It is finished!' And bowing His head, He gave up His spirit.\" — John 19:30 (NKJV)",
+    "es": "⚡ \"Cuando Jesús hubo tomado el vinagre, dijo: Consumado es. Y habiendo inclinado la cabeza, entregó el espíritu.\" — Juan 19:30 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "68f0c6164dfc"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Register to Begin",
+    "es": "Regístrese para comenzar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "007cff4200ca"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Your name and track are saved on this device and carry across every unit and every CTS course.",
+    "es": "Su nombre y trayecto se guardan en este dispositivo y se conservan en cada unidad y curso de CTS."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c3782de1c2f1"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "label",
+   "text": {
+    "en": "Full name",
+    "es": "Nombre completo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "eeb692087d62"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "label",
+   "text": {
+    "en": "Email",
+    "es": "Correo electrónico"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "84add5b29527"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "label",
+   "text": {
+    "en": "Track",
+    "es": "Trayecto"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b1c5a7af06ba"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "heading",
+   "text": {
+    "en": "Introduction — The Hour Has Come",
+    "es": "Introducción — La hora ha llegado"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ee359b7e0f2e"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "Everything in this Gospel has been moving toward this hour. The signs, the seven \"I AM\" sayings, the gathering witnesses, the deepening conflict — all of it has led here, to a garden in the dark, a hill called Golgotha, and an empty tomb at dawn. In these last chapters the King goes to His throne, finishes the work He came to do, and rises in triumph over death. And when it is all told, John lays down his pen and tells us plainly why he wrote every word: \"that you may believe that Jesus is the Christ, the Son of God, and that believing you may have life in His name\" (John 20:31). This final unit follows the King from betrayal to victory, and then asks each of us for a verdict.",
+    "es": "Todo en este Evangelio ha venido moviéndose hacia esta hora. Las señales, las siete declaraciones \"YO SOY\", los testigos que se han ido reuniendo, el conflicto que se ha ahondado — todo ha llevado aquí, a un huerto en la oscuridad, a un monte llamado Gólgota, y a una tumba vacía al amanecer. En estos últimos capítulos el Rey va a su trono, consuma la obra que vino a hacer, y se levanta en triunfo sobre la muerte. Y cuando todo está contado, Juan deja la pluma y nos dice llanamente por qué escribió cada palabra: \"para que creáis que Jesús es el Cristo, el Hijo de Dios; y para que creyendo, tengáis vida en su nombre\" (Juan 20:31). Esta unidad final sigue al Rey desde la traición hasta la victoria, y luego nos pide a cada uno un veredicto."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e70c1c3f6f55"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "heading",
+   "text": {
+    "en": "I. The Garden and the Betrayal",
+    "es": "I. El huerto y la traición"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1e2b2207ea02"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "It began in a garden. After the supper Jesus went with His disciples to Gethsemane, where in deep agony He prayed and yielded Himself to the Father's will. Then Judas came, one of His own, guiding a detachment of soldiers with torches and weapons to arrest the Light of the world in the dark. Betrayal by a trusted friend is among the deepest of human wounds — the very name of Benedict Arnold has become a synonym for it — and Jesus drank that cup too. Yet notice that He was no helpless victim. When the soldiers said they sought Jesus of Nazareth, He answered, \"I am He,\" and at that word the whole company drew back and fell to the ground. He went to the cross not because He was overpowered but because He chose to go. When Peter drew a sword to fight, Jesus told him to put it away: <em>\"Shall I not drink the cup which My Father has given Me?\"</em> (John 18:11). The Lamb walked willingly to the altar.",
+    "es": "Comenzó en un huerto. Tras la cena Jesús fue con sus discípulos a Getsemaní, donde en honda agonía oró y se entregó a la voluntad del Padre. Entonces vino Judas, uno de los suyos, guiando una compañía de soldados con antorchas y armas para arrestar a la Luz del mundo en la oscuridad. La traición de un amigo de confianza está entre las heridas humanas más hondas — el mismo nombre de Benedict Arnold se ha vuelto sinónimo de ella — y Jesús bebió también esa copa. Pero note que no fue una víctima indefensa. Cuando los soldados dijeron que buscaban a Jesús de Nazaret, él respondió: \"Yo soy,\" y ante esa palabra toda la compañía retrocedió y cayó a tierra. Fue a la cruz no porque fuera vencido sino porque escogió ir. Cuando Pedro sacó una espada para pelear, Jesús le dijo que la guardara: ⚡ <em>\"La copa que el Padre me ha dado, ¿no la he de beber?\"</em> (Juan 18:11). El Cordero caminó voluntariamente al altar."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ef1d8002a41d"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "heading",
+   "text": {
+    "en": "II. The King's Coronation and His Throne",
+    "es": "II. La coronación del Rey y su trono"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "827c4f80006c"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "What followed looked like the humiliation of a criminal, but John means us to see a coronation. The soldiers, mocking the idea that this beaten man could be a king, gave Him the trappings of royalty turned cruel: a crown — but woven of thorns; a robe — but a faded purple thrown over a flogged back; a scepter — but a common reed. Then Pilate led Him out and said, <em>\"Behold the Man!\"</em> (John 19:5). The crowd screamed for crucifixion, and when Pilate asked, \"Shall I crucify your King?\" the chief priests gave their tragic answer: \"We have no king but Caesar\" (19:15). So the King was led to Golgotha, and there the deepest irony of all became the deepest truth: the cross was His throne. Over it Pilate fastened a sign in three languages — \"Jesus of Nazareth, the King of the Jews\" — and when they protested, he answered, \"What I have written, I have written\" (19:22). The mockery told the truth without knowing it.",
+    "es": "Lo que siguió parecía la humillación de un criminal, pero Juan quiere que veamos una coronación. Los soldados, burlándose de la idea de que este hombre golpeado pudiera ser rey, le dieron las insignias de la realeza vueltas crueles: una corona — pero tejida de espinas; un manto — pero un púrpura descolorido echado sobre una espalda azotada; un cetro — pero una caña común. Entonces Pilato lo sacó y dijo: ⚡ <em>\"¡He aquí el hombre!\"</em> (Juan 19:5). La multitud gritó pidiendo crucifixión, y cuando Pilato preguntó: \"¿A vuestro Rey he de crucificar?\" los principales sacerdotes dieron su trágica respuesta: \"No tenemos más rey que César\" (19:15). Así que el Rey fue llevado al Gólgota, y allí la ironía más honda de todas se volvió la verdad más honda: la cruz era su trono. Sobre ella Pilato fijó un letrero en tres lenguas — \"Jesús Nazareno, Rey de los Judíos\" — y cuando protestaron, respondió: \"Lo que he escrito, he escrito\" (19:22). La burla dijo la verdad sin saberlo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7c422b651263"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "\"He saved others; let Him save Himself,\" they jeered. But it is precisely in <em>not</em> saving Himself that He saves us.",
+    "es": "\"A otros salvó; sálvese a sí mismo,\" se mofaban. Pero es precisamente al <em>no</em> salvarse a sí mismo que él nos salva."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4b7ec46deac8"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "<strong>The figure in the shadows.</strong> In Rembrandt's painting of the three crosses, the eye is drawn first to Christ at the center, then to the faces of the crowd caught in the act of crucifying the Son of God. But at the edge of the canvas, half-hidden in the shadows, stands one more figure — and art critics say it is Rembrandt himself, who understood that his own sins helped nail Jesus to that tree. We belong in that picture too. And it is for us, the ones in the shadows, that the King reigned from the cross.",
+    "es": "<strong>La figura en las sombras.</strong> En la pintura de Rembrandt de las tres cruces, el ojo se dirige primero a Cristo en el centro, luego a los rostros de la multitud sorprendida en el acto de crucificar al Hijo de Dios. Pero al borde del lienzo, medio oculta en las sombras, hay una figura más — y los críticos de arte dicen que es el mismo Rembrandt, quien entendió que sus propios pecados ayudaron a clavar a Jesús en aquel madero. Nosotros también pertenecemos a ese cuadro. Y es por nosotros, los que estamos en las sombras, que el Rey reinó desde la cruz."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5974cac0a219"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "heading",
+   "text": {
+    "en": "III. \"It Is Finished\"",
+    "es": "III. \"Consumado es\""
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7cc738551cad"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "Then came the word that gives this unit its name. Having received a drink, Jesus cried out, <em>\"It is finished!\"</em> and bowing His head, gave up His spirit (John 19:30). He did not say, \"I am finished.\" It was not the gasp of a defeated man but the shout of a victor. In the language Jesus spoke, the word was one syllable — <em>tetelestai</em> — the very word a merchant would stamp across a bill that had been settled: <strong>Paid in Full.</strong> The whole work of redemption that He came to do was now complete; there was nothing to add, nothing left owing. And mark how He died: He <em>gave up</em> His spirit. No one took His life from Him; as the Good Shepherd had said, He laid it down of Himself. The King finished His work, and from His finished work flows every forgiveness we will ever know.",
+    "es": "Entonces vino la palabra que da nombre a esta unidad. Habiendo recibido un trago, Jesús clamó: ⚡ <em>\"Consumado es,\"</em> y habiendo inclinado la cabeza, entregó el espíritu (Juan 19:30). No dijo: \"Estoy acabado.\" No fue el jadeo de un hombre vencido sino el grito de un vencedor. En la lengua que Jesús hablaba, la palabra era una sola — <em>tetelestai</em> — la misma palabra que un comerciante estampaba sobre una cuenta que había sido saldada: <strong>Pagado por completo.</strong> Toda la obra de redención que vino a hacer estaba ahora completa; no había nada que añadir, nada que quedara debiendo. Y note cómo murió: <em>entregó</em> su espíritu. Nadie le quitó la vida; como el Buen Pastor había dicho, la puso de sí mismo. El Rey consumó su obra, y de su obra consumada fluye cada perdón que jamás conoceremos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9e2878d3ec8b"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "<strong>A praying mother's God.</strong> R. A. Torrey strayed far from the faith of his childhood at university, fell into skepticism and despair, and one night came to the point of ending his life. But he remembered his mother's parting words: \"Son, when you come to the darkest hour of all, if you will honestly call on your mother's God, you will get help.\" In desperation he cried out, \"O God of my mother, if there be such a Being, I need help — if You will give it to me, I will follow You.\" Light and peace flooded his heart, and he rose to become one of the great evangelists of his age. The finished work of the cross was as sufficient for Torrey in his darkest hour as it is for the worst sinner who calls on Christ today.",
+    "es": "<strong>El Dios de una madre que oraba.</strong> R. A. Torrey se apartó mucho de la fe de su niñez en la universidad, cayó en el escepticismo y la desesperación, y una noche llegó al punto de querer acabar con su vida. Pero recordó las palabras de despedida de su madre: \"Hijo, cuando llegues a la hora más oscura de todas, si honestamente invocas al Dios de tu madre, recibirás ayuda.\" En desesperación clamó: \"Oh Dios de mi madre, si tal Ser existe, necesito ayuda — si me la das, te seguiré.\" La luz y la paz inundaron su corazón, y se levantó para llegar a ser uno de los grandes evangelistas de su tiempo. La obra consumada de la cruz fue tan suficiente para Torrey en su hora más oscura como lo es para el peor pecador que invoca a Cristo hoy."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5be18c83a040"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "heading",
+   "text": {
+    "en": "IV. The Empty Tomb and the Witnesses",
+    "es": "IV. La tumba vacía y los testigos"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "079153aaa3dd"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "But the story did not end at a grave. Early on the first day of the week, while it was still dark, Mary Magdalene came to the tomb and found the stone rolled away. Weeping, supposing the body stolen, she did not know the risen Lord even when He stood before her — until He spoke her name, \"Mary,\" and she knew Him. The first witness of the resurrection was a woman whose life He had rescued, sent to carry the news to the apostles themselves. Peter and John ran to the empty tomb and saw the grave-clothes lying there. And then there was Thomas, who would not believe the others' word: \"Unless I see... I will not believe.\" Eight days later the risen Christ stood among them and offered Thomas His wounded hands, and Thomas fell before Him with the great confession of the whole Gospel: <em>\"My Lord and my God!\"</em> (John 20:28). To him Jesus said, \"Because you have seen Me you have believed. Blessed are those who have not seen and yet have believed\" (20:29) — a blessing spoken across the centuries to us.",
+    "es": "Pero la historia no terminó en un sepulcro. Temprano el primer día de la semana, siendo aún oscuro, María Magdalena vino a la tumba y halló la piedra quitada. Llorando, suponiendo robado el cuerpo, no reconoció al Señor resucitado aun cuando él estuvo ante ella — hasta que dijo su nombre, \"María,\" y lo conoció. La primera testigo de la resurrección fue una mujer cuya vida él había rescatado, enviada a llevar la nueva a los apóstoles mismos. Pedro y Juan corrieron a la tumba vacía y vieron los lienzos allí puestos. Y luego estaba Tomás, que no quiso creer la palabra de los otros: \"Si no viere... no creeré.\" Ocho días después el Cristo resucitado se puso en medio de ellos y ofreció a Tomás sus manos heridas, y Tomás cayó ante él con la gran confesión de todo el Evangelio: ⚡ <em>\"¡Señor mío, y Dios mío!\"</em> (Juan 20:28). A él Jesús dijo: \"Porque me has visto, Tomás, creíste; bienaventurados los que no vieron, y creyeron\" (20:29) — una bienaventuranza dicha a través de los siglos a nosotros."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1626ae0e1668"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "This is no tale of wishful thinking. Jesus appeared again and again over forty days, once to more than five hundred at a time. The timid disciples who had scattered became bold witnesses who would die rather than deny what they had seen — and men do not die for what they know to be a lie. The ancient question of Job, \"If a man dies, shall he live again?\" is answered at last with a resounding yes.",
+    "es": "Esto no es un cuento de ilusiones. Jesús apareció una y otra vez durante cuarenta días, una vez a más de quinientos a la vez. Los discípulos tímidos que se habían dispersado se volvieron testigos valientes que morirían antes que negar lo que habían visto — y los hombres no mueren por lo que saben que es mentira. La antigua pregunta de Job, \"Si el hombre muere, ¿volverá a vivir?\" se responde por fin con un rotundo sí."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "34d670d23743"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "heading",
+   "text": {
+    "en": "V. Restored to Serve — and the Verdict",
+    "es": "V. Restaurado para servir — y el veredicto"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "66df932b4103"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "One scene remained, by the Sea of Galilee. Peter, who had denied his Lord three times around a fire, met Him again beside another fire. Three times Jesus asked him, <em>\"Do you love Me?\"</em> and three times, grieved and humbled, Peter answered yes — and three times Jesus gave him back his calling: \"Feed My sheep\" (John 21:17). The public failure was met with a public restoration. For in Christ, failure is not fatal, life is not futile, and death is not final. The history of the church is full of such grace: a Moravian missionary named George Smith labored in Africa, won but one poor woman to Christ, was driven from the country, and died on his knees praying — counted a failure; yet a century later more than thirteen thousand believers traced their faith to his brief ministry. The risen Lord still takes those who have failed Him and makes them pillars of His church.",
+    "es": "Quedaba una escena, junto al mar de Galilea. Pedro, que había negado a su Señor tres veces junto a un fuego, lo encontró de nuevo junto a otro fuego. Tres veces Jesús le preguntó: ⚡ <em>\"¿Me amas?\"</em> y tres veces, dolido y humillado, Pedro respondió que sí — y tres veces Jesús le devolvió su llamado: \"Apacienta mis ovejas\" (Juan 21:17). El fracaso público fue respondido con una restauración pública. Porque en Cristo, el fracaso no es fatal, la vida no es vana, y la muerte no es final. La historia de la iglesia está llena de tal gracia: un misionero moravo llamado George Smith trabajó en África, ganó a una sola mujer pobre para Cristo, fue expulsado del país, y murió de rodillas orando — tenido por un fracaso; sin embargo un siglo después más de trece mil creyentes trazaban su fe a su breve ministerio. El Señor resucitado aún toma a los que le han fallado y los hace columnas de su iglesia."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e4d15922dabe"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "And so the Gospel reaches its verdict. John has called witness after witness — John the Baptist, the signs, the Father, the Scriptures, the Spirit, the empty tomb — and now he rests his case and tells us why: <em>\"these are written that you may believe that Jesus is the Christ, the Son of God, and that believing you may have life in His name\"</em> (John 20:31). The whole book has been a courtroom, and the evidence points to one conclusion. The verdict is not left to a jury far away; it is placed in your hands. Having seen the King crowned, crucified, finished, and risen — do you believe? For to all who receive Him and believe on His name, He gives the right to become children of God, and life everlasting in His name. The cross was His throne, the empty tomb His vindication, and the open Gospel His summons to the world. It is finished. Now come, and live.",
+    "es": "Y así el Evangelio llega a su veredicto. Juan ha llamado testigo tras testigo — Juan el Bautista, las señales, el Padre, las Escrituras, el Espíritu, la tumba vacía — y ahora descansa su caso y nos dice por qué: ⚡ <em>\"estas se han escrito para que creáis que Jesús es el Cristo, el Hijo de Dios; y para que creyendo, tengáis vida en su nombre\"</em> (Juan 20:31). Todo el libro ha sido una sala de tribunal, y la evidencia apunta a una sola conclusión. El veredicto no se deja a un jurado lejano; se pone en sus manos. Habiendo visto al Rey coronado, crucificado, consumado, y resucitado — ¿cree usted? Porque a todos los que le reciben y creen en su nombre, él les da el derecho de ser hechos hijos de Dios, y vida eterna en su nombre. Consumado es. Ahora venga, y viva."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "45c7f7df2648"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "Unit 12 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 12 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7c3d3c326fb3"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. The short-answer section is practice for Certificate students and does not count against you.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. La sección de respuesta corta es práctica para el Certificado y no cuenta en su contra."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9168d4aa12d6"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

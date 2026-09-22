@@ -1,0 +1,460 @@
+{
+ "course": "CTS1Peter",
+ "unit": 7,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Unit 8 →</button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #2f4f2f;\"><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\">\n    <h2><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></p>\n    <input type=\"text\" id=\"regName\" placeholder=\"Full name / Nombre completo\" aria-label=\"Full name / Nombre completo\">\n    <input type=\"email\" id=\"regEmail\" placeholder=\"Email\" aria-label=\"Email\">\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate Track</option>\n        <option value=\"mdiv\">Master of Divinity (M.Div.) Track</option>\n        <option value=\"thm\">Master of Theology (Th.M.) Track</option>\n    </select>\n    <button class=\"nav-btn\" id=\"regBtn\"><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\">\n<p class=\"passage-label\"><!--cts:b008:en--></p>\n<div class=\"scripture\"><!--cts:b009:en--></div>\n\n<h3><!--cts:b010:en--></h3>\n<p><!--cts:b011:en--></p>\n<p><!--cts:b012:en--></p>\n<p><!--cts:b013:en--></p>\n<p><!--cts:b014:en--></p>\n\n<h3><!--cts:b015:en--></h3>\n<p><!--cts:b016:en--></p>\n<p><!--cts:b017:en--></p>\n\n<h3><!--cts:b018:en--></h3>\n<div class=\"scripture\"><!--cts:b019:en--></div>\n<p><!--cts:b020:en--></p>\n\n<p><!--cts:b021:en--></p>\n<h3><!--cts:b022:en--></h3>\n<p><!--cts:b023:en--></p>\n\n<h3><!--cts:b024:en--></h3>\n<div class=\"scripture\"><!--cts:b025:en--></div>\n<p><!--cts:b026:en--></p>\n<p><!--cts:b027:en--></p>\n<div class=\"scripture\"><!--cts:b028:en--></div>\n</div>\n\n<div class=\"lang-es\">\n<p class=\"passage-label\"><!--cts:b008:es--></p>\n<div class=\"scripture\"><!--cts:b009:es--></div>\n\n<h3><!--cts:b010:es--></h3>\n<p><!--cts:b011:es--></p>\n<p><!--cts:b012:es--></p>\n<p><!--cts:b013:es--></p>\n<p><!--cts:b014:es--></p>\n\n<h3><!--cts:b015:es--></h3>\n<p><!--cts:b016:es--></p>\n<p><!--cts:b017:es--></p>\n\n<h3><!--cts:b018:es--></h3>\n<div class=\"scripture\"><!--cts:b019:es--></div>\n<p><!--cts:b020:es--></p>\n\n<p><!--cts:b021:es--></p>\n<h3><!--cts:b022:es--></h3>\n<p><!--cts:b023:es--></p>\n\n<h3><!--cts:b024:es--></h3>\n<div class=\"scripture\"><!--cts:b025:es--></div>\n<p><!--cts:b026:es--></p>\n<p><!--cts:b027:es--></p>\n<div class=\"scripture\"><!--cts:b028:es--></div>\n</div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b029:en--></span><span class=\"lang-es\"><!--cts:b029:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b030:en--></span>\n       <span class=\"lang-es\"><!--cts:b030:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b031:en--></span><span class=\"lang-es\"><!--cts:b031:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b032:en--></span><span class=\"lang-es\"><!--cts:b032:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTS1PeterReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📖 1 Peter Intensive — Unit 7: Wives and Husbands",
+    "es": "📖 1 Pedro Intensivo — Unidad 7: Esposas y Maridos"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1aff87ef01b7"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "\"...let it be the hidden person of the heart, with the incorruptible beauty of a gentle and quiet spirit, which is very precious in the sight of God.\" — 1 Peter 3:4 (NKJV)",
+    "es": "\"...sino el hombre interior del corazón, en el incorruptible ornato de un espíritu manso y apacible, que es de grande estima delante de Dios.\" — 1 Pedro 3:4 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a503d092bbad"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "📝 Course Registration",
+    "es": "📝 Registro del Curso"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fde900fe006b"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Welcome to the 1 Peter Intensive. Please register before beginning Unit 7.",
+    "es": "Bienvenido al Intensivo de 1 Pedro. Por favor regístrese antes de comenzar la Unidad 7."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b57508f72804"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "scripture",
+   "text": {
+    "en": "<strong>Text: 1 Peter 3:1-7</strong>",
+    "es": "<strong>Texto: 1 Pedro 3:1-7 (RVG)</strong>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b1c7080d4500"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "scripture",
+   "text": {
+    "en": "\"Wives, likewise, be submissive to your own husbands, that even if some do not obey the word, they, without a word, may be won by the conduct of their wives, when they observe your chaste conduct accompanied by fear.\" — 1 Peter 3:1-2 (NKJV)",
+    "es": "\"Asimismo vosotras, esposas, estad sujetas a vuestros propios maridos; para que también los que no creen a la palabra, sean ganados sin palabra por la conducta de sus esposas, considerando vuestra casta conversación que es en temor.\" — 1 Pedro 3:1-2 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4f6e89799c2a"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "heading",
+   "text": {
+    "en": "Wives, Won Without a Word",
+    "es": "Esposas, Ganados sin Palabra"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0337090bdad0"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Peter has been teaching the whole church how to live under those in authority — citizens under government, servants under masters — and now he turns to the home, beginning with wives. \"Wives, likewise, be submissive to your own husbands, that even if some do not obey the word, they, without a word, may be won by the conduct of their wives, when they observe your chaste conduct accompanied by fear\" (1 Peter 3:1-2). It is worth noticing how much space Peter gives here. He says about six times as much to wives as he will say to husbands, and the reason is the special situation many of these women were in. Often a wife had come to faith after marriage, so that now a believing woman was living with an unbelieving husband. To her especially Peter gives a strategy of quiet power: she is to win her husband not by argument but by her life.",
+    "es": "Pedro ha estado enseñando a toda la iglesia cómo vivir bajo los que tienen autoridad — ciudadanos bajo el gobierno, siervos bajo los amos — y ahora se vuelve al hogar, comenzando con las esposas. \"Asimismo vosotras, esposas, estad sujetas a vuestros propios maridos; para que también los que no creen a la palabra, sean ganados sin palabra por la conducta de sus esposas, considerando vuestra casta conversación que es en temor\" (1 Pedro 3:1-2). Vale la pena notar cuánto espacio le da Pedro aquí. Dice unas seis veces más a las esposas que lo que dirá a los maridos, y la razón es la situación especial en que muchas de estas mujeres se hallaban. A menudo una esposa había venido a la fe después de casarse, de modo que ahora una mujer creyente vivía con un marido incrédulo. A ella en especial Pedro da una estrategia de poder callado: ha de ganar a su marido no con argumentos sino con su vida."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "19f2ad55d46b"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "Here the lesson must speak honestly, because to the modern ear the very word \"submission\" sounds unfair, and anything that suggests a wife yielding to her husband is quickly branded as backward. Yet Peter says it, and Paul says almost exactly the same thing, so we must ask what they actually mean. They do not mean that a woman is worth less than a man, nor that she is a servant without a voice; as we shall see, Peter calls husband and wife equal heirs of the same grace. The submission he commands is <em>voluntary</em>, freely given, and it is aimed at a goal — the winning of the husband. Rightly understood and carefully explained, biblical submission turns out to be something very different from the harsh subservience its critics imagine.",
+    "es": "Aquí la lección debe hablar con honradez, porque al oído moderno la palabra misma \"sujeción\" suena injusta, y todo lo que sugiera que una esposa ceda a su marido es prontamente tildado de atrasado. Sin embargo Pedro lo dice, y Pablo dice casi exactamente lo mismo, así que debemos preguntar qué quieren decir en realidad. No quieren decir que una mujer valga menos que un hombre, ni que sea una sierva sin voz; como veremos, Pedro llama al marido y a la esposa coherederos de la misma gracia. La sujeción que manda es <em>voluntaria</em>, dada libremente, y apunta a una meta — ganar al marido. Rectamente entendida y cuidadosamente explicada, la sujeción bíblica resulta ser algo muy distinto de la dura servidumbre que sus críticos imaginan."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "640b75cd0ba7"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "A remembered remark from this seminary’s own history makes the point with a smile. Andi Cook — the late wife of the seminary’s founder, and herself a much-loved teacher here — used to say that she believed a wife should be subservient to her husband. Yet by the time she had finished explaining what she actually meant by the word, there was so little of the harsh subservience left in it that scarcely anything of the caricature remained. That is just how it is with this command: what sounds severe at first softens, under careful and honest explanation, into something a believing woman can embrace with joy.",
+    "es": "Un dicho recordado de la propia historia de este seminario expone el punto con una sonrisa. Andi Cook — la difunta esposa del fundador del seminario, y ella misma una muy querida maestra aquí — solía decir que creía que una esposa debía ser servil a su marido. Sin embargo, para cuando terminaba de explicar lo que en realidad quería decir con la palabra, quedaba tan poco de la dura servidumbre en ella que apenas restaba algo de la caricatura. Así es justamente con este mandamiento: lo que al principio suena severo se ablanda, bajo cuidadosa y honesta explicación, en algo que una mujer creyente puede abrazar con gozo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1128f9fd52db"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "prose",
+   "text": {
+    "en": "This is especially clear in the case of the believing wife and the unbelieving husband. Her submission is to be voluntary, never forced. And Peter's counsel is striking: she is <em>not</em> to become a sort of preacher in the home, lecturing her husband and arguing the gospel at him day after day. You cannot nag or argue an unbelieving spouse into the kingdom of God. It can be done only by humility and a godly life. The husband who will not listen to a sermon will, over months and years, be unable to ignore a transformed wife living quietly and beautifully before his eyes.",
+    "es": "Esto es especialmente claro en el caso de la esposa creyente y el marido incrédulo. Su sujeción ha de ser voluntaria, nunca forzada. Y el consejo de Pedro es notable: ella <em>no</em> ha de volverse una especie de predicadora en el hogar, sermoneando a su marido y argumentándole el evangelio día tras día. No se puede regañar ni discutir con un cónyuge incrédulo hasta meterlo en el reino de Dios. Solo puede hacerse con humildad y una vida piadosa. El marido que no escucha un sermón será, con los meses y los años, incapaz de ignorar a una esposa transformada que vive callada y hermosamente ante sus ojos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8e7e8076d649"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "heading",
+   "text": {
+    "en": "Won by a Godly Life",
+    "es": "Ganados por una Vida Piadosa"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "efa99fe13d4a"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "Church history offers a shining example. Monica, the mother of the famous Augustine, lived with an unbelieving and difficult husband, yet by her witness and her prayers God in time won both her son and her husband to Christ, though her husband was not converted until shortly before his death. Augustine remembered that his mother served his father and sought to win him to God not by words but by her conduct, and that this very behavior made her lovely in her husband's eyes. Her patient, prayerful, godly life did what no argument could have done.",
+    "es": "La historia de la iglesia ofrece un ejemplo resplandeciente. Mónica, la madre del famoso Agustín, vivía con un marido incrédulo y difícil, y sin embargo por su testimonio y sus oraciones Dios con el tiempo ganó para Cristo tanto a su hijo como a su marido, aunque su marido no se convirtió sino poco antes de su muerte. Agustín recordó que su madre servía a su padre y procuraba ganarlo para Dios no con palabras sino con su conducta, y que ese mismo comportamiento la hacía amable a los ojos de su marido. Su vida paciente, orante y piadosa hizo lo que ningún argumento habría podido hacer."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7d94eb44866a"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "The same thing still happens. There was once a godly woman in one congregation whose husband was not a believer and was, by every account, a hard and difficult man. She did not drive, and so before the service had even ended he would pull up outside and lean on the horn, impatient for her to come. Without a word of complaint she would quietly rise and walk out to the car. Year after year her steady, gracious character pressed against his hardened heart — and in the end that hard man became a believer, won by the godly behavior of his wife. This is exactly the power Peter is describing: a life so plainly changed that it preaches without speaking.",
+    "es": "Lo mismo sucede todavía. Hubo una vez una mujer piadosa en cierta congregación cuyo marido no era creyente y era, según todos, un hombre duro y difícil. Ella no manejaba, y así, antes de que el culto siquiera terminara, él se estacionaba afuera y apretaba la bocina, impaciente por que ella saliera. Sin una palabra de queja, ella se levantaba calladamente y caminaba al auto. Año tras año su carácter firme y bondadoso presionó contra su corazón endurecido — y al final aquel hombre duro llegó a ser creyente, ganado por la conducta piadosa de su esposa. Este es exactamente el poder que Pedro describe: una vida tan claramente cambiada que predica sin hablar."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "26117bad69a7"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "heading",
+   "text": {
+    "en": "The Hidden Person of the Heart",
+    "es": "El Hombre Interior del Corazón"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c7816a6a0f54"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "scripture",
+   "text": {
+    "en": "\"Do not let your adornment be merely outward...rather let it be the hidden person of the heart, with the incorruptible beauty of a gentle and quiet spirit, which is very precious in the sight of God.\" — 1 Peter 3:3-4 (NKJV)",
+    "es": "\"Vuestro atavío no sea exterior...sino el hombre interior del corazón, en el incorruptible ornato de un espíritu manso y apacible, que es de grande estima delante de Dios.\" — 1 Pedro 3:3-4 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0a4c03c338ca"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "Peter now describes the kind of beauty that wins. \"Do not let your adornment be merely outward — arranging the hair, wearing gold, or putting on fine apparel — rather let it be the hidden person of the heart, with the incorruptible beauty of a gentle and quiet spirit, which is very precious in the sight of God\" (1 Peter 3:3-4). Peter is not forbidding a wife to fix her hair or wear a ring; he is teaching her where real beauty lies. Outward adornment fades, and the most carefully arranged appearance cannot win a husband's soul. But the hidden person of the heart — the inner character clothed with a gentle and quiet spirit — does not fade; it is incorruptible, and it is precious in the sight of God Himself. A gentle and quiet spirit is not weakness or a timid personality; it is the deep, settled calm of a heart at rest in God, and it is far more attractive and far more powerful than any ornament money can buy.",
+    "es": "Pedro describe ahora la clase de belleza que gana. \"Vuestro atavío no sea exterior, con encrespamiento del cabello, y atavío de oro, ni en compostura de ropa; sino el hombre interior del corazón, en el incorruptible ornato de un espíritu manso y apacible, que es de grande estima delante de Dios\" (1 Pedro 3:3-4). Pedro no prohíbe a una esposa arreglarse el cabello o llevar un anillo; le enseña dónde está la belleza verdadera. El atavío exterior se marchita, y la apariencia más cuidadosamente compuesta no puede ganar el alma de un marido. Pero el hombre interior del corazón — el carácter interno revestido de un espíritu manso y apacible — no se marchita; es incorruptible, y es de grande estima delante de Dios mismo. Un espíritu manso y apacible no es debilidad ni una personalidad tímida; es la calma honda y asentada de un corazón que reposa en Dios, y es mucho más atractivo y mucho más poderoso que cualquier adorno que el dinero pueda comprar."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2e34e19b9592"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "It is striking that this is the very beauty God Himself prizes. The world spends fortunes on the adornment that fades and scarcely notices the beauty that lasts, but heaven’s estimate is the reverse. A gentle and quiet spirit is the same spirit Christ Himself displayed, and it cannot be bought, painted on, or worn for an evening; it is grown slowly in a heart that walks with God. Such beauty does not fade with the years but deepens, and it carries a quiet authority all its own. A wife adorned in this way commends her faith more powerfully than any argument could, and makes the gospel she believes look as lovely as it truly is, so that her very character becomes a sermon her household cannot help but hear.",
+    "es": "Es notable que esta es la belleza misma que Dios aprecia. El mundo gasta fortunas en el atavío que se marchita y apenas nota la belleza que perdura, pero la estimación del cielo es la contraria. Un espíritu manso y apacible es el mismo espíritu que Cristo mismo mostró, y no puede comprarse, pintarse, ni llevarse por una noche; se cultiva lentamente en un corazón que anda con Dios. Tal belleza no se marchita con los años sino que se ahonda, y lleva una callada autoridad toda suya. Una esposa ataviada de este modo recomienda su fe más poderosamente que cualquier argumento, y hace que el evangelio que cree se vea tan hermoso como verdaderamente es, de modo que su carácter mismo llega a ser un sermón que su hogar no puede menos que oír."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a2da691c8168"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "heading",
+   "text": {
+    "en": "Daughters of Sarah",
+    "es": "Hijas de Sara"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "820760245ff0"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "To show that this is no new or strange teaching, Peter points back to the godly women of long ago. \"For in this manner, in former times, the holy women who trusted in God also adorned themselves, being submissive to their own husbands, as Sarah obeyed Abraham, calling him lord, whose daughters you are if you do good and are not afraid with any terror\" (1 Peter 3:5-6). The holy women of the Old Testament were beautiful in exactly this way: they trusted God, and out of that trust they honored their husbands. Sarah is the great example, the mother of the faithful, who treated Abraham with such respect that she called him lord. Peter then says something wonderful to the believing women reading his letter: they are Sarah's daughters — her true spiritual children — if they do good and refuse to be ruled by fear. A woman who trusts God can do right without being terrified of what may come, because her confidence rests not in her circumstances but in the Lord.",
+    "es": "Para mostrar que esta no es enseñanza nueva ni extraña, Pedro señala atrás a las mujeres piadosas de hace mucho tiempo. \"Porque así también se atavíaban en el tiempo antiguo aquellas santas mujeres que esperaban en Dios, estando sujetas a sus propios maridos; como Sara obedecía a Abraham, llamándole señor; de la cual vosotras sois hechas hijas, haciendo el bien, y no sois espantadas de ningún pavor\" (1 Pedro 3:5-6). Las santas mujeres del Antiguo Testamento eran hermosas precisamente de este modo: confiaban en Dios, y de esa confianza honraban a sus maridos. Sara es el gran ejemplo, la madre de los fieles, que trataba a Abraham con tal respeto que le llamaba señor. Pedro entonces dice algo maravilloso a las mujeres creyentes que leen su carta: son hijas de Sara — sus verdaderas hijas espirituales — si hacen el bien y rehúsan ser gobernadas por el temor. Una mujer que confía en Dios puede hacer lo recto sin estar aterrada de lo que pueda venir, porque su confianza descansa no en sus circunstancias sino en el Señor."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "249cd90c2438"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "heading",
+   "text": {
+    "en": "Husbands: Strength and Tenderness",
+    "es": "Maridos: Fuerza y Ternura"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0f01452341a7"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "scripture",
+   "text": {
+    "en": "\"Husbands, likewise, dwell with them with understanding, giving honor to the wife, as to the weaker vessel, and as being heirs together of the grace of life, that your prayers may not be hindered.\" — 1 Peter 3:7 (NKJV)",
+    "es": "\"Vosotros, maridos, igualmente, habitad con ellas sabiamente, dando honor a la esposa como a vaso más frágil, y como a coherederas de la gracia de la vida; para que vuestras oraciones no sean estorbadas.\" — 1 Pedro 3:7 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7f487dae99bf"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "Peter says less to husbands, but what he says is weighty. \"Husbands, likewise, dwell with them with understanding, giving honor to the wife, as to the weaker vessel, and as being heirs together of the grace of life, that your prayers may not be hindered\" (1 Peter 3:7). The husband is to live with his wife thoughtfully, taking the trouble to understand her, and he is to give her honor. The phrase \"the weaker vessel\" does not mean she is worth less or is less able; it pictures something precious and finely made, to be handled with care, and it calls the husband to protect and cherish rather than to dominate. And then Peter levels the ground entirely: husband and wife are \"heirs together of the grace of life.\" Whatever difference of role the home may have, before God they inherit the same salvation in equal measure; she is his equal in worth and in grace. To this Peter attaches a sobering warning: a husband who treats his wife harshly will find that his prayers are hindered. A man cannot be right with God while he is wrong with his wife.",
+    "es": "Pedro dice menos a los maridos, pero lo que dice es de peso. \"Vosotros, maridos, igualmente, habitad con ellas sabiamente, dando honor a la esposa como a vaso más frágil, y como a coherederas de la gracia de la vida; para que vuestras oraciones no sean estorbadas\" (1 Pedro 3:7). El marido ha de vivir con su esposa con sabiduría, tomándose el trabajo de entenderla, y ha de darle honor. La frase \"vaso más frágil\" no significa que ella valga menos o sea menos capaz; pinta algo precioso y finamente hecho, que ha de manejarse con cuidado, y llama al marido a proteger y apreciar en vez de dominar. Y entonces Pedro nivela el terreno por completo: el marido y la esposa son \"coherederas de la gracia de la vida.\" Cualquiera que sea la diferencia de función que el hogar tenga, delante de Dios heredan la misma salvación en igual medida; ella es su igual en valor y en gracia. A esto Pedro añade una advertencia solemne: el marido que trata a su esposa con dureza hallará que sus oraciones son estorbadas. Un hombre no puede estar bien con Dios mientras está mal con su esposa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f80264526f37"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "How then is a husband to do all this? The best counsel is simply that a Christian husband should pattern himself after Jesus Christ. In Christ we see a beautiful blending of strength and tenderness, and that combination is exactly what it takes to be a good husband — strength without harshness, tenderness without weakness. But no man can copy Christ from a distance. A husband cannot follow Christ's example unless he first knows Christ as his Savior and submits to Him as Lord, spending time each day in the Word and in prayer. And here Peter's instructions to wives and to husbands meet: a Christian husband and wife are to pray together and to encourage one another in the faith, so that the home becomes not a place of struggle for power but a partnership of two heirs walking together toward the same grace.",
+    "es": "¿Cómo, pues, ha de hacer el marido todo esto? El mejor consejo es sencillamente que un marido cristiano se modele según Jesucristo. En Cristo vemos una hermosa combinación de fuerza y ternura, y esa combinación es exactamente lo que se necesita para ser un buen marido — fuerza sin dureza, ternura sin debilidad. Pero ningún hombre puede copiar a Cristo desde lejos. Un marido no puede seguir el ejemplo de Cristo a menos que primero conozca a Cristo como su Salvador y se someta a Él como Señor, pasando tiempo cada día en la Palabra y en oración. Y aquí se encuentran las instrucciones de Pedro a las esposas y a los maridos: un marido y una esposa cristianos han de orar juntos y animarse uno a otro en la fe, para que el hogar llegue a ser no un lugar de lucha por el poder sino una sociedad de dos herederos que caminan juntos hacia la misma gracia."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "420ffea67d50"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "scripture",
+   "text": {
+    "en": "\"...giving honor to the wife...as being heirs together of the grace of life, that your prayers may not be hindered.\" — 1 Peter 3:7 (NKJV)",
+    "es": "\"...dando honor a la esposa...como a coherederas de la gracia de la vida; para que vuestras oraciones no sean estorbadas.\" — 1 Pedro 3:7 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6d926aaa5e88"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "Unit 7 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 7 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "39593a6cb288"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33593c268178"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

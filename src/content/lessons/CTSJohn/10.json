@@ -1,0 +1,432 @@
+{
+ "course": "CTSJohn",
+ "unit": 10,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right:15px; font-weight:bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Espa&ntilde;ol</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></p>\n    <p style=\"margin-top:10px; font-style:italic; color:#2f4f2f;\"><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\" style=\"display:none;\">\n    <h3><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></h3>\n    <p style=\"font-size:0.9rem;\"><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></p>\n    <label class=\"lang-en\"><!--cts:b008:en--></label><label class=\"lang-es\"><!--cts:b008:es--></label>\n    <input type=\"text\" id=\"regName\" placeholder=\"...\" aria-label=\"...\">\n    <label class=\"lang-en\"><!--cts:b009:en--></label><label class=\"lang-es\"><!--cts:b009:es--></label>\n    <input type=\"email\" id=\"regEmail\" placeholder=\"...\" aria-label=\"...\">\n    <label class=\"lang-en\"><!--cts:b010:en--></label><label class=\"lang-es\"><!--cts:b010:es--></label>\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate / Certificado</option>\n        <option value=\"mdiv\">M.Div.</option>\n        <option value=\"thm\">Th.M.</option>\n    </select>\n    <button id=\"regBtn\" class=\"nav-btn\"><span class=\"lang-en\"><!--cts:b011:en--></span><span class=\"lang-es\"><!--cts:b011:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top:8px;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\">\n\n<h3><!--cts:b012:en--></h3>\n<p><!--cts:b013:en--></p>\n\n<h3><!--cts:b014:en--></h3>\n<p><!--cts:b015:en--></p>\n<div class=\"illustration\"><!--cts:b016:en--></div>\n\n<h3><!--cts:b017:en--></h3>\n<p><!--cts:b018:en--></p>\n<div class=\"illustration\"><!--cts:b019:en--></div>\n\n<h3><!--cts:b020:en--></h3>\n<p><!--cts:b021:en--></p>\n\n<h3><!--cts:b022:en--></h3>\n<p><!--cts:b023:en--></p>\n<div class=\"illustration\"><!--cts:b024:en--></div>\n\n<h3><!--cts:b025:en--></h3>\n<p><!--cts:b026:en--></p>\n\n</div>\n<div class=\"lang-es\">\n\n<h3><!--cts:b012:es--></h3>\n<p><!--cts:b013:es--></p>\n\n<h3><!--cts:b014:es--></h3>\n<p><!--cts:b015:es--></p>\n<div class=\"illustration\"><!--cts:b016:es--></div>\n\n<h3><!--cts:b017:es--></h3>\n<p><!--cts:b018:es--></p>\n<div class=\"illustration\"><!--cts:b019:es--></div>\n\n<h3><!--cts:b020:es--></h3>\n<p><!--cts:b021:es--></p>\n\n<h3><!--cts:b022:es--></h3>\n<p><!--cts:b023:es--></p>\n<div class=\"illustration\"><!--cts:b024:es--></div>\n\n<h3><!--cts:b025:es--></h3>\n<p><!--cts:b026:es--></p>\n\n</div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b027:en--></span><span class=\"lang-es\"><!--cts:b027:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b028:en--></span>\n       <span class=\"lang-es\"><!--cts:b028:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top:20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b029:en--></span><span class=\"lang-es\"><!--cts:b029:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b030:en--></span><span class=\"lang-es\"><!--cts:b030:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top:15px; font-weight:bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top:10px; font-size:0.9rem; color:#1f6b3b; display:none;\"></div>\n    </div>\n</div>\n</div>\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSJohnReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "Unit 11 →",
+    "es": "Unidad 11 →"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1121a09274e7"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "📖 The Gospel of John — Unit 10: The Way, the Truth, and the Life / The True Vine",
+    "es": "📖 El Evangelio de Juan — Unidad 10: El Camino, la Verdad y la Vida / La Vid Verdadera"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6a82560138c0"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "\"I am the way, the truth, and the life. No one comes to the Father except through Me.\" — John 14:6 (NKJV)",
+    "es": "⚡ \"Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino por mí.\" — Juan 14:6 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c25ec2a272d2"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Register to Begin",
+    "es": "Regístrese para comenzar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "007cff4200ca"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Your name and track are saved on this device and carry across every unit and every CTS course.",
+    "es": "Su nombre y trayecto se guardan en este dispositivo y se conservan en cada unidad y curso de CTS."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c3782de1c2f1"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "label",
+   "text": {
+    "en": "Full name",
+    "es": "Nombre completo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "eeb692087d62"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "label",
+   "text": {
+    "en": "Email",
+    "es": "Correo electrónico"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "84add5b29527"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "label",
+   "text": {
+    "en": "Track",
+    "es": "Trayecto"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b1c5a7af06ba"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "heading",
+   "text": {
+    "en": "Introduction — In the Upper Room",
+    "es": "Introducción — En el aposento alto"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "048affa6de2c"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "On the night before the cross, Jesus gathered His disciples in the upper room and gave them His final, most intimate teaching. It was, in a sense, their graduation from His seminary, with the Master Himself as the keynote speaker: summarizing what they must never forget, warning them of the trials to come, and pointing them to the truths they would live and die by. In these chapters two more of His great \"I AM\" sayings appear, and with them the seven are complete: the bread, the light, the door, the good shepherd, the resurrection and the life — and now the way, and the true vine. The first tells us how to come to the Father; the second tells us how to stay alive once we have come. Together they answer the two deepest questions of the soul: How do I get home to God? And how do I live until I get there?",
+    "es": "La noche antes de la cruz, Jesús reunió a sus discípulos en el aposento alto y les dio su enseñanza final y más íntima. Fue, en cierto sentido, su graduación del seminario de él, con el Maestro mismo como orador principal: resumiendo lo que nunca deben olvidar, advirtiéndoles de las pruebas por venir, y señalándoles las verdades por las cuales vivirían y morirían. En estos capítulos aparecen dos más de sus grandes declaraciones \"YO SOY\", y con ellas las siete quedan completas: el pan, la luz, la puerta, el buen pastor, la resurrección y la vida — y ahora el camino, y la vid verdadera. La primera nos dice cómo venir al Padre; la segunda nos dice cómo permanecer vivos una vez que hemos venido. Juntas responden las dos preguntas más hondas del alma: ¿Cómo llego a casa, a Dios? Y ¿cómo vivo hasta llegar?"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7d87930377d8"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "heading",
+   "text": {
+    "en": "I. \"Let Not Your Heart Be Troubled\"",
+    "es": "I. \"No se turbe vuestro corazón\""
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2a6576b8cd80"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "He begins with comfort, for their hearts were breaking: <em>\"Let not your heart be troubled; you believe in God, believe also in Me. In My Father's house are many mansions... I go to prepare a place for you. And if I go and prepare a place for you, I will come again and receive you to Myself; that where I am, there you may be also\"</em> (John 14:1–3). Heaven is not wishful thinking or \"pie in the sky.\" It is a real place — the Father's house, the believer's true home. The word translated \"mansions\" simply means rooms, abiding places; we are not promised marble palaces but a place prepared by Christ Himself, and every prepared place will be beautiful.",
+    "es": "Comienza con consuelo, pues sus corazones se rompían: ⚡ <em>\"No se turbe vuestro corazón; creéis en Dios, creed también en mí. En la casa de mi Padre muchas moradas hay... voy, pues, a preparar lugar para vosotros. Y si me fuere y os preparare lugar, vendré otra vez, y os tomaré a mí mismo, para que donde yo estoy, vosotros también estéis\"</em> (Juan 14:1–3). El cielo no es una ilusión ni \"pastel en el cielo.\" Es un lugar real — la casa del Padre, el verdadero hogar del creyente. La palabra traducida \"moradas\" significa simplemente habitaciones, lugares para morar; no se nos prometen palacios de mármol sino un lugar preparado por Cristo mismo, y cada lugar preparado será hermoso."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9f6b8d67d769"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "<strong>\"Come home.\"</strong> A widow once lived with her small son in a bare attic, far from the homeland she had left, against her family's wishes, to marry a man who had since died and left them nothing. The happiest hours of the boy's life were when his mother gathered him up and told him of her father's house in the old country — the green lawns, the great trees, the wonderful meals. He had never seen it, yet it became the most beautiful place in the world to him, and he longed to go. Then one day a letter came. Inside was money for the journey and a slip of paper with two words in his grandfather's hand: \"Come home.\" That is the heart of what Jesus says. He has gone ahead to the Father's house, and one day the word will come for us too.",
+    "es": "<strong>\"Vuelve a casa.\"</strong> Una viuda vivía una vez con su pequeño hijo en un ático desnudo, lejos de la tierra natal que había dejado, contra los deseos de su familia, para casarse con un hombre que desde entonces había muerto y los había dejado sin nada. Las horas más felices del niño eran cuando su madre lo tomaba en brazos y le contaba de la casa de su abuelo en el viejo país — los prados verdes, los grandes árboles, las comidas maravillosas. Nunca la había visto, y sin embargo llegó a ser el lugar más hermoso del mundo para él, y anhelaba ir. Entonces un día llegó una carta. Dentro había dinero para el viaje y un papel con dos palabras de puño y letra del abuelo: \"Vuelve a casa.\" Ese es el corazón de lo que dice Jesús. Ha ido delante a la casa del Padre, y un día la palabra vendrá también para nosotros."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4f65ddf6fd57"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "heading",
+   "text": {
+    "en": "II. \"I Am the Way, the Truth, and the Life\"",
+    "es": "II. \"Yo soy el camino, y la verdad, y la vida\""
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8ebc088113e7"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "Thomas, ever the honest doubter, broke in: \"Lord, we do not know where You are going, and how can we know the way?\" Jesus did not hand him a map or a set of directions. He gave him a Person: <em>\"I am the way, the truth, and the life. No one comes to the Father except through Me\"</em> (John 14:6). Each word answers a need. <strong>He is the Way</strong> — and the opposite of the way is being lost. Not every road reaches the destination, however sincerely it is traveled; Jesus said there are finally only two roads, the broad way that many take and that ends in destruction, and the narrow way of humility and obedience that few find. And He says plainly that He Himself is the one Way to the Father; every other road that promises to reach God while going around Him falls short. <strong>He is the Truth</strong> — not merely a teacher of true things but the Truth in person, so that to know Him is to know what is real. <strong>He is the Life</strong> — and the person without Him is not merely uneducated or unlucky but spiritually dead, alive to the world yet dead to God. Only Christ can make such a one truly alive, giving both an abundant life now and eternal life forever.",
+    "es": "Tomás, siempre el dudador honesto, interrumpió: \"Señor, no sabemos a dónde vas; ¿cómo, pues, podemos saber el camino?\" Jesús no le entregó un mapa ni un juego de indicaciones. Le dio una Persona: ⚡ <em>\"Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino por mí\"</em> (Juan 14:6). Cada palabra responde a una necesidad. <strong>Él es el Camino</strong> — y lo opuesto del camino es estar perdido. No todo camino llega al destino, por sincero que sea el que lo recorre; Jesús dijo que al fin hay solo dos caminos, el ancho que muchos toman y que termina en destrucción, y el angosto de humildad y obediencia que pocos hallan. Y dice llanamente que él mismo es el único Camino al Padre; todo otro camino que promete llegar a Dios rodeándole se queda corto. <strong>Él es la Verdad</strong> — no meramente un maestro de cosas verdaderas sino la Verdad en persona, de modo que conocerle a él es conocer lo que es real. <strong>Él es la Vida</strong> — y la persona sin él no es meramente ignorante ni desafortunada sino espiritualmente muerta, viva al mundo pero muerta a Dios. Solo Cristo puede hacer vivo de veras a tal persona, dando tanto una vida abundante ahora como vida eterna para siempre."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ed9ea4b76e94"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "<strong>\"I didn't say religion.\"</strong> As a restless young man, Josh McDowell tried church, prestige, and parties, and found his life empty — \"a living hell,\" he said. Drawn in spite of himself to a group of Christians whose joy he could not explain, he leaned back in his chair and demanded, \"Tell me — what changed your lives?\" A young woman looked him straight in the eye and said two words: \"Jesus Christ.\" He snapped back that he was fed up with religion. She answered, \"Mister, I didn't say religion. I said Jesus Christ.\" That distinction undid him, and after long study of the evidence he came to confess that Jesus is exactly who He claimed to be — the only way to the Father.",
+    "es": "<strong>\"No dije religión.\"</strong> De joven inquieto, Josh McDowell probó la iglesia, el prestigio y las fiestas, y halló su vida vacía — \"un infierno en vida,\" dijo. Atraído a pesar de sí mismo por un grupo de cristianos cuyo gozo no podía explicar, se recostó en su silla y exigió: \"Díganme — ¿qué cambió sus vidas?\" Una joven lo miró directo a los ojos y dijo dos palabras: \"Jesucristo.\" Él replicó que estaba harto de la religión. Ella respondió: \"Señor, no dije religión. Dije Jesucristo.\" Esa distinción lo deshizo, y tras largo estudio de la evidencia llegó a confesar que Jesús es exactamente quien afirmó ser — el único camino al Padre."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "da044a7d5990"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "heading",
+   "text": {
+    "en": "III. \"I Am the True Vine\"",
+    "es": "III. \"Yo soy la vid verdadera\""
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ee2317da4884"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "Still in that room, Jesus reached for a picture every one of them knew, and gave the last of the seven sayings: <em>\"I am the true vine, and My Father is the vinedresser\"</em> (John 15:1). Near London there grows a grapevine called the Great Vine, planted over two hundred and fifty years ago, with a root two feet thick and branches stretching two hundred feet, still bearing hundreds of pounds of grapes each year. But Jesus is the <em>true</em> vine, the real source of life, and the Father is the gardener. A good vinedresser is far more than a farmer: he knows each vine intimately, how it fares from year to year, what it needs and when, even the exact place and angle to cut. And cut he does. <em>\"Every branch that bears fruit He prunes, that it may bear more fruit\"</em> (John 15:2). Pruning is not punishment; it is love with a knife. Sometimes the Father cuts away what is plainly dead, but often He cuts away even the good and the better, so that we may have the best. It hurts, but it helps. Paul begged three times for his thorn to be taken away, and instead was told, \"My grace is sufficient for you\"; the very thing he wanted removed was the Gardener's tool to make him more fruitful.",
+    "es": "Aún en aquel aposento, Jesús tomó una imagen que todos ellos conocían, y dio la última de las siete declaraciones: ⚡ <em>\"Yo soy la vid verdadera, y mi Padre es el labrador\"</em> (Juan 15:1). Cerca de Londres crece una vid llamada la Gran Vid, plantada hace más de doscientos cincuenta años, con una raíz de dos pies de grueso y ramas que se extienden doscientos pies, que aún da cientos de libras de uvas cada año. Pero Jesús es la vid <em>verdadera</em>, la fuente real de vida, y el Padre es el labrador. Un buen viñador es mucho más que un granjero: conoce cada vid íntimamente, cómo le va de año en año, qué necesita y cuándo, aun el lugar y el ángulo exactos donde cortar. Y corta. ⚡ <em>\"Todo aquel que lleva fruto, lo limpia, para que lleve más fruto\"</em> (Juan 15:2). La poda no es castigo; es amor con un cuchillo. A veces el Padre corta lo que está claramente muerto, pero a menudo corta aun lo bueno y lo mejor, para que tengamos lo mejor de todo. Duele, pero ayuda. Pablo rogó tres veces que le fuese quitado su aguijón, y en cambio se le dijo: \"Bástate mi gracia\"; lo mismo que quería quitar era la herramienta del Labrador para hacerlo más fructífero."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b00e78952257"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "heading",
+   "text": {
+    "en": "IV. \"Abide in Me\"",
+    "es": "IV. \"Permaneced en mí\""
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "95ddc485c9c2"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "At the center of the picture is one repeated command: <em>\"Abide in Me, and I in you. As the branch cannot bear fruit of itself, unless it abides in the vine, neither can you, unless you abide in Me\"</em> (John 15:4). The word \"abide\" is the verb behind the word \"abode\" — a dwelling place. To abide in Christ is not merely to know facts about Him, nor even only to pray, but to live with Him in a close, family relationship, aware of Him beside us every moment of every day. And mark this carefully: fruit is not automatic. Many imagine that a real Christian will simply produce fruit on his own; but Jesus says fruit comes only by abiding — and abiding is not automatic either, or He would not have had to command it. That very night every one of them would fail to abide, Peter most of all.",
+    "es": "En el centro de la imagen hay un mandato repetido: ⚡ <em>\"Permaneced en mí, y yo en vosotros. Como el pámpano no puede llevar fruto por sí mismo, si no permanece en la vid, así tampoco vosotros, si no permanéis en mí\"</em> (Juan 15:4). La palabra \"permanecer\" (morar) es el verbo detrás de la palabra \"morada\" — un lugar donde se habita. Permanecer en Cristo no es meramente saber datos acerca de él, ni siquiera solo orar, sino vivir con él en una relación estrecha, de familia, conscientes de él a nuestro lado cada momento de cada día. Y note esto con cuidado: el fruto no es automático. Muchos imaginan que un verdadero cristiano producirá fruto por sí solo; pero Jesús dice que el fruto viene solo por permanecer — y permanecer tampoco es automático, o no habría tenido que mandarlo. Esa misma noche cada uno de ellos fallaría en permanecer, Pedro más que todos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0aa4b98f64e7"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Staying plugged in.</strong> It is like charging a phone. The battery runs low through the day, so we plug it into the power; but if we grow impatient and unplug it to use it before it has charged, it dies again. So with us: the life and power we need flow only while we stay connected to the Vine. Stuart Briscoe once preached on abiding in Christ to a hundred young believers crammed into a building in Cold-War Poland. Ten minutes in, the lights went out and the room went black, and he preached on in the dark. When the lights blinked back, he was startled to see every person on their knees — and they stayed on their knees long after he finished. \"Your teaching was new to us,\" one told him. \"We wanted to make sure we were abiding in Christ.\"",
+    "es": "<strong>Permanecer conectado.</strong> Es como cargar un teléfono. La batería se agota durante el día, así que lo conectamos a la corriente; pero si nos impacientamos y lo desconectamos para usarlo antes de que se cargue, se apaga otra vez. Así con nosotros: la vida y el poder que necesitamos fluyen solo mientras permanecemos conectados a la Vid. Stuart Briscoe predicó una vez sobre permanecer en Cristo a cien jóvenes creyentes apretujados en un edificio en la Polonia de la Guerra Fría. A los diez minutos las luces se apagaron y el cuarto quedó a oscuras, y él siguió predicando en la oscuridad. Cuando las luces volvieron, se sorprendió al ver a cada persona de rodillas — y siguieron de rodillas mucho después de que él terminó. \"Su enseñanza era nueva para nosotros,\" le dijo uno. \"Queríamos asegurarnos de estar permaneciendo en Cristo.\""
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a7fa2a5cfd37"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "heading",
+   "text": {
+    "en": "V. Bearing Much Fruit",
+    "es": "V. Llevar mucho fruto"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cb789288f78b"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "<em>\"I am the vine, you are the branches. He who abides in Me, and I in him, bears much fruit; for without Me you can do nothing\"</em> (John 15:5). Apart from Christ we can do exactly nothing of eternal worth, but abiding in Him the life flows and the fruit comes. And fruit is more than evangelism alone, though it surely includes the winning of souls. Every believer bears fruit by exercising the gifts God has given — teaching, hospitality, mercy, prayer — and above all the fruit of the Spirit: \"love, joy, peace\" and the rest (Galatians 5:22–23). When the watching world sees a people marked by that fruit, it sees something it cannot explain and cannot produce. And when there is no fruit, the trouble is an attachment problem — something blocking the flow of life from the Vine — and the cure is not to give up but to clear away the sin and abide afresh. All of this, Jesus says, is \"to My Father's glory, that you bear much fruit.\" So the two sayings come together: the Way brings us home to the Father, and the Vine keeps us alive and fruitful all the way there. Have you come to the Father by the one Way? Then stay close to the Vine, and let His life bear its fruit through you.",
+    "es": "⚡ <em>\"Yo soy la vid, vosotros los pámpanos; el que permanece en mí, y yo en él, éste lleva mucho fruto; porque sin mí nada podéis hacer\"</em> (Juan 15:5). Aparte de Cristo no podemos hacer nada de valor eterno, pero permaneciendo en é la vida fluye y el fruto viene. Y el fruto es más que la evangelización sola, aunque ciertamente la incluye. Todo creyente lleva fruto al ejercer los dones que Dios le ha dado — enseñar, hospedar, tener misericordia, orar — y sobre todo el fruto del Espíritu: \"amor, gozo, paz\" y lo demás (Gálatas 5:22–23). Cuando el mundo que observa ve a un pueblo marcado por ese fruto, ve algo que no puede explicar ni producir. Y cuando no hay fruto, el problema es de conexión — algo que bloquea el flujo de vida de la Vid — y el remedio no es rendirse sino quitar el pecado y permanecer de nuevo. Todo esto, dice Jesús, es \"para la gloria de mi Padre, que llevéis mucho fruto.\" Así que las dos declaraciones se unen: el Camino nos lleva a casa, al Padre, y la Vid nos mantiene vivos y fructíferos todo el trayecto. ¿Ha venido usted al Padre por el único Camino? Entonces permanezca cerca de la Vid, y deje que su vida lleve su fruto a través de usted."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "71e34ff18440"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "Unit 10 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 10 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c3864158a03c"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. The short-answer section is practice for Certificate students and does not count against you.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. La sección de respuesta corta es práctica para el Certificado y no cuenta en su contra."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9168d4aa12d6"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,768 @@
+{
+ "course": "CTSActs",
+ "unit": 8,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<a href=\"index.html\" style=\"display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif\">📚 Catalog / Catálogo</a>\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"prevUnitBtn\">← Previous</button>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\">Next →</button>\n    </div>\n</div>\n<div class=\"lang-toggle-group\" role=\"group\" aria-label=\"Language\">\n  <button data-lang=\"en\" class=\"active\">English</button>\n  <button data-lang=\"es\">Español</button>\n  <button data-lang=\"both\">Both / Ambos</button>\n</div>\n<span id=\"trackBadgeSlot\"></span>\n\n<div id=\"regWarn\" class=\"reg-warn hidden\">\n  <span class=\"lang-en\"><!--cts:b001:en--></span>\n  <span class=\"lang-es\"><!--cts:b001:es--></span>\n</div>\n<div id=\"regModal\" class=\"reg-modal hidden\" role=\"dialog\" aria-labelledby=\"regModalTitle\">\n  <div class=\"reg-modal-inner\">\n    <h2 id=\"regModalTitle\"><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n    <label><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></label>\n    <input type=\"text\" id=\"regName\" placeholder=\"\" autocomplete=\"name\" aria-label=\"regName\">\n    <label><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></label>\n    <input type=\"email\" id=\"regEmail\" placeholder=\"\" autocomplete=\"email\" aria-label=\"regEmail\">\n    <label><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></label>\n    <div class=\"track-options\">\n      <label><input type=\"radio\" name=\"regTrack\" value=\"cert\" checked> <span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></label>\n      <label><input type=\"radio\" name=\"regTrack\" value=\"mdiv\"> <span class=\"lang-en\"><!--cts:b008:en--></span><span class=\"lang-es\"><!--cts:b008:es--></span></label>\n      <label><input type=\"radio\" name=\"regTrack\" value=\"thm\"> <span class=\"lang-en\"><!--cts:b009:en--></span><span class=\"lang-es\"><!--cts:b009:es--></span></label>\n    </div>\n    <p style=\"font-size:0.82rem; color:#6b5236; font-style:italic; margin-top:8px;\">\n      <span class=\"lang-en\"><!--cts:b010:en--></span>\n      <span class=\"lang-es\"><!--cts:b010:es--></span>\n    </p>\n    <button id=\"regSaveBtn\" type=\"button\"><span class=\"lang-en\"><!--cts:b011:en--></span><span class=\"lang-es\"><!--cts:b011:es--></span></button>\n  </div>\n</div>\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b012:en--></span><span class=\"lang-es\"><!--cts:b012:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b013:en--></span><span class=\"lang-es\"><!--cts:b013:es--></span></p>\n</div>\n\n<div class=\"card\" id=\"teachingContent\">\n    <div class=\"lang-en\">\n        <h2><!--cts:b014:en--></h2>\n        <p><!--cts:b015:en--></p>\n\n        <p><!--cts:b016:en--></p>\n\n        <p><!--cts:b017:en--></p>\n\n        <h2><!--cts:b018:en--></h2>\n        <p><!--cts:b019:en--></p>\n\n        <p><!--cts:b020:en--></p>\n\n        <p><!--cts:b021:en--></p>\n\n        <p><!--cts:b022:en--></p>\n\n        <h2><!--cts:b023:en--></h2>\n        <p><!--cts:b024:en--></p>\n\n        <p><!--cts:b025:en--></p>\n\n        <h2><!--cts:b026:en--></h2>\n        <p><!--cts:b027:en--></p>\n\n        <p><!--cts:b028:en--></p>\n\n        <p><!--cts:b029:en--></p>\n\n        <h2><!--cts:b030:en--></h2>\n        <p><!--cts:b031:en--></p>\n\n        <p><!--cts:b032:en--></p>\n\n        <p><!--cts:b033:en--></p>\n\n        <h2><!--cts:b034:en--></h2>\n        <p><!--cts:b035:en--></p>\n\n        <p><!--cts:b036:en--></p>\n\n        <h2><!--cts:b037:en--></h2>\n        <p><!--cts:b038:en--></p>\n\n        <p><!--cts:b039:en--></p>\n\n        <p><!--cts:b040:en--></p>\n\n        <p><!--cts:b041:en--></p>\n\n        <h2><!--cts:b042:en--></h2>\n        <p><!--cts:b043:en--></p>\n\n        <p><!--cts:b044:en--></p>\n\n        <h2><!--cts:b045:en--></h2>\n        <p><!--cts:b046:en--></p>\n\n        <p><!--cts:b047:en--></p>\n\n        <p><!--cts:b048:en--></p>\n    </div>\n\n    <div class=\"lang-es\">\n        <h2><!--cts:b014:es--></h2>\n        <p><!--cts:b015:es--></p>\n\n        <p><!--cts:b016:es--></p>\n\n        <p><!--cts:b017:es--></p>\n\n        <h2><!--cts:b018:es--></h2>\n        <p><!--cts:b019:es--></p>\n\n        <p><!--cts:b020:es--></p>\n\n        <p><!--cts:b021:es--></p>\n\n        <p><!--cts:b022:es--></p>\n\n        <h2><!--cts:b023:es--></h2>\n        <p><!--cts:b024:es--></p>\n\n        <p><!--cts:b025:es--></p>\n\n        <h2><!--cts:b026:es--></h2>\n        <p><!--cts:b027:es--></p>\n\n        <p><!--cts:b028:es--></p>\n\n        <p><!--cts:b029:es--></p>\n\n        <h2><!--cts:b030:es--></h2>\n        <p><!--cts:b031:es--></p>\n\n        <p><!--cts:b032:es--></p>\n\n        <p><!--cts:b033:es--></p>\n\n        <h2><!--cts:b034:es--></h2>\n        <p><!--cts:b035:es--></p>\n\n        <p><!--cts:b036:es--></p>\n\n        <h2><!--cts:b037:es--></h2>\n        <p><!--cts:b038:es--></p>\n\n        <p><!--cts:b039:es--></p>\n\n        <p><!--cts:b040:es--></p>\n\n        <p><!--cts:b041:es--></p>\n\n        <h2><!--cts:b042:es--></h2>\n        <p><!--cts:b043:es--></p>\n\n        <p><!--cts:b044:es--></p>\n\n        <h2><!--cts:b045:es--></h2>\n        <p><!--cts:b046:es--></p>\n\n        <p><!--cts:b047:es--></p>\n\n        <p><!--cts:b048:es--></p>\n    </div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b049:en--></span><span class=\"lang-es\"><!--cts:b049:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b050:en--></span><span class=\"lang-es\"><!--cts:b050:es--></span></p>\n    <div class=\"exam-status hidden\" id=\"examStatus\"></div>\n<div class=\"mc-section\" id=\"mcSection\">\n  <h3><span class=\"lang-en\"><!--cts:b051:en--></span><span class=\"lang-es\"><!--cts:b051:es--></span></h3>\n  <div id=\"mcContainer\"></div>\n</div>\n<div class=\"sa-section\" id=\"saSection\">\n  <h3><span class=\"lang-en\"><!--cts:b052:en--></span><span class=\"lang-es\"><!--cts:b052:es--></span></h3>\n  <p class=\"sa-note\"><span class=\"lang-en\" id=\"saNoteEn\"></span><span class=\"lang-es\" id=\"saNoteEs\"></span></p>\n  <div id=\"kwContainer\"></div>\n</div>\n<div style=\"margin-top: 20px;\">\n  <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b053:en--></span><span class=\"lang-es\"><!--cts:b053:es--></span></button>\n  <button id=\"resetExamBtn\" class=\"btn-reset\" type=\"button\"><span class=\"lang-en\"><!--cts:b054:en--></span><span class=\"lang-es\"><!--cts:b054:es--></span></button>\n  <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n</div>\n</div>\n</div>\n\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSActsReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "⚠ Please register your name to receive credit for this unit. <button class=\"small\" id=\"openRegBtn\" type=\"button\">Register</button>",
+    "es": "⚠ Por favor registre su nombre para recibir crédito por esta unidad. <button class=\"small\" id=\"openRegBtn2\" type=\"button\">Registrar</button>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "300bfc92ba6e"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "Welcome to the Acts Intensive",
+    "es": "Bienvenido al Intensivo de Hechos"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3d244b1a85d3"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "Before you begin Unit 1, please enter your name and select your track. This information is stored only in your browser and is shared across all CTS courses.",
+    "es": "Antes de comenzar la Unidad 1, por favor ingrese su nombre y seleccione su vía. Esta información se guarda solo en su navegador y es compartida entre todos los cursos del CTS."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ee1211cde05f"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "Full name",
+    "es": "Nombre completo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "eeb692087d62"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "Email (optional)",
+    "es": "Correo electrónico (opcional)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5c10b588a954"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Track",
+    "es": "Vía"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b1c5a7af06ba"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Certificate",
+    "es": "Certificado"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "10de46b3b341"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "M.Div",
+    "es": "M.Div"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "621c580e3436"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "Th.M.",
+    "es": "Th.M."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c7ffb710c525"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate:</strong> Multiple-choice only, 90% to pass each unit. <strong>M.Div / Th.M.:</strong> Multiple-choice + short-answer, both at 90%.",
+    "es": "<strong>Certificado:</strong> Solo opción múltiple, 90% para aprobar cada unidad. <strong>M.Div / Th.M.:</strong> Opción múltiple + respuesta corta, ambas al 90%."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "431989696561"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Save and Continue",
+    "es": "Guardar y Continuar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "49a2b0fecc60"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "📖 Acts Intensive — Unit 8: Ephesus and the Long Goodbye (Acts 18:23–21:16)",
+    "es": "📖 Intensivo de Hechos — Unidad 8: Éfeso y la larga despedida (Hechos 18:23–21:16)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2bf98972b24a"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "heading",
+   "text": {
+    "en": "I. Apollos at the Pier",
+    "es": "I. Apolos en el muelle"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "14d17dfdc53f"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "The third missionary journey opens quietly. Paul left Antioch and went over the inland route through Galatia and Phrygia, strengthening the disciples in every city he passed through. While Paul was still on the road, Luke turns the camera to Ephesus and introduces a man whose ministry will run alongside Paul's for the rest of the New Testament. <em>\"Now a certain Jew named Apollos, born at Alexandria, an eloquent man and mighty in the Scriptures, came to Ephesus. This man had been instructed in the way of the Lord; and being fervent in spirit, he spoke and taught accurately the things of the Lord, though he knew only the baptism of John\"</em> (Acts 18:24–25, NKJV).",
+    "es": "El tercer viaje misionero abre tranquilamente. Pablo dejó Antioquía y siguió la ruta interior por Galacia y Frigia, fortaleciendo a los discípulos en cada ciudad por la que pasaba. Mientras Pablo todavía iba en camino, Lucas gira la cámara hacia Éfeso y presenta a un hombre cuyo ministerio correrá paralelo al de Pablo por el resto del Nuevo Testamento. <em>\"Llegó entonces a Éfeso un judío llamado Apolos, natural de Alejandría, varón elocuente, poderoso en las Escrituras. Éste había sido instruido en el camino del Señor; y siendo de espíritu fervoroso, hablaba y enseñaba diligentemente las cosas que son del Señor, conociendo solamente el bautismo de Juan\"</em> (Hechos 18:24–25, RVG)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7ac3f613632a"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "Apollos is one of the most fascinating figures in the New Testament. He was Egyptian-born, in a city famous for its great library and its intellectual climate. He was educated, articulate, fervent. His Bible was a good one — he knew the Old Testament Scriptures cold. But he was a generation behind. The latest news he had received from Jerusalem was about John the Baptist's ministry of repentance, and he had not yet heard about the cross, the resurrection, Pentecost, or the gift of the Holy Spirit. He preached what he knew, and what he knew was insufficient.",
+    "es": "Apolos es una de las figuras más fascinantes del Nuevo Testamento. Era nacido en Egipto, en una ciudad famosa por su gran biblioteca y su clima intelectual. Era educado, articulado, fervoroso. Su Biblia era buena — conocía las Escrituras del Antiguo Testamento al pie de la letra. Pero estaba una generación atrás. Las últimas noticias que había recibido de Jerusalén eran sobre el ministerio de arrepentimiento de Juan el Bautista, y todavía no había oído sobre la cruz, la resurrección, Pentecostés o el don del Espíritu Santo. Predicaba lo que sabía, y lo que sabía era insuficiente."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b5551a024d48"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "Aquila and Priscilla — the tentmaking couple Paul had left behind in Ephesus when he sailed for Syria — heard Apollos preach in the synagogue. They did not stand up and rebuke him in front of his audience. They did not write a tract titled <em>The Errors of Apollos the Alexandrian</em>. <em>\"They took him aside and explained to him the way of God more accurately\"</em> (Acts 18:26, NKJV). Read those eight words. The most learned preacher in Ephesus that day was discipled in private by a tentmaker and his wife. Apollos went on to become one of the most useful preachers in the early church — the Corinthians later compared him favorably with Paul, and Paul himself considered him a close colleague. None of that would have happened if a quiet couple in the back of the synagogue had not been willing to do the awkward work of correcting a famous teacher in private. The kingdom of God runs on Aquilas and Priscillas.",
+    "es": "Aquila y Priscila — el matrimonio de fabricantes de tiendas que Pablo había dejado en Éfeso cuando navegó a Siria — oyeron a Apolos predicar en la sinagoga. No se levantaron a reprenderlo frente a su público. No escribieron un tratado titulado <em>Los errores de Apolos el alejandrino</em>. <em>\"Le tomaron aparte y le expusieron más particularmente el camino de Dios\"</em> (Hechos 18:26, RVG). Lea esas palabras. El predicador más erudito de Éfeso aquel día fue discipulado en privado por un fabricante de tiendas y su esposa. Apolos llegó a ser uno de los predicadores más útiles de la iglesia primitiva — los corintios después lo compararon favorablemente con Pablo, y el mismo Pablo lo consideró un colega cercano. Nada de eso habría pasado si una pareja tranquila al fondo de la sinagoga no hubiera estado dispuesta a hacer el incómodo trabajo de corregir en privado a un maestro famoso. El reino de Dios corre sobre los Aquilas y las Priscilas."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ce40a8fce688"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "heading",
+   "text": {
+    "en": "II. Twelve Men in Ephesus and Two Ways",
+    "es": "II. Doce hombres en Éfeso y dos caminos"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "35aa389357ba"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "Paul finally arrived at Ephesus. He found another piece of unfinished business. Twelve men, disciples of the same incomplete movement Apollos had been preaching, were living in the city. Paul asked them, <em>\"Did you receive the Holy Spirit when you believed?\"</em> They said, <em>\"We have not so much as heard whether there is a Holy Spirit\"</em> (Acts 19:2, NKJV). Paul probed further: <em>\"Into what then were you baptized?\"</em> They said, <em>\"Into John's baptism.\"</em> Paul explained that John's baptism was a baptism of repentance preparing for the One who came after — Jesus Himself. The twelve men listened, were baptized into the name of the Lord Jesus, and when Paul laid hands on them the Holy Spirit came upon them and they spoke with tongues and prophesied.",
+    "es": "Pablo finalmente llegó a Éfeso. Encontró otro asunto inconcluso. Doce hombres, discípulos del mismo movimiento incompleto que Apolos había estado predicando, vivían en la ciudad. Pablo les preguntó: <em>\"¿Habéis recibido el Espíritu Santo desde que creísteis?\"</em> Le contestaron: <em>\"Antes ni aun hemos oído si hay Espíritu Santo\"</em> (Hechos 19:2, RVG). Pablo preguntó más: <em>\"¿En qué, pues, fuisteis bautizados?\"</em> Dijeron: <em>\"En el bautismo de Juan.\"</em> Pablo explicó que el bautismo de Juan era de arrepentimiento que preparaba para el que venía después — Jesús mismo. Los doce hombres escucharon, fueron bautizados en el nombre del Señor Jesús, y cuando Pablo les impuso las manos el Espíritu Santo vino sobre ellos y hablaron en lenguas y profetizaron."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c93b3d62eab5"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "I want to stop and turn this scene into a sermon, because the lesson is one we keep needing. Thomas Edison once said that he had to fail one thousand one hundred times to discover the light bulb. He used to put it this way: he had not failed; he had simply discovered eleven hundred ways not to make an incandescent bulb. There are many ways not to be saved. The Acts 19 disciples at Ephesus had found one of them. They had repented. They had been baptized. They had separated themselves from a sinful world. They were earnest, sincere, trying to live a godly life. And they had not yet heard the gospel. There was a road that ran very close to the gospel road, and they were walking on it. The Didache, the earliest Christian teaching manual we have, opens with these words: <em>There are two ways: there is the way of life and there is the way of death.</em> The way of John the Baptist had been a real road, and a necessary road, and a holy road, but it was not a road that ended where the way of Jesus ended. John pointed to Christ. John was not Christ.",
+    "es": "Quiero detenerme y convertir esta escena en un sermón, porque la lección es una que seguimos necesitando. Thomas Edison decía que tuvo que fracasar mil ciento una veces para descubrir el bombillo. Solía decirlo así: no había fracasado; simplemente había descubierto mil cien maneras de no hacer un bombillo incandescente. Hay muchas maneras de no ser salvo. Los discípulos de Hechos 19 en Éfeso habían encontrado una de ellas. Se habían arrepentido. Habían sido bautizados. Se habían separado de un mundo pecaminoso. Eran sinceros, fervorosos, intentando vivir una vida piadosa. Y aún no habían oído el evangelio. Había un camino que corría muy cerca del camino del evangelio, y ellos andaban por él. La Didaché, el manual de enseñanza cristiana más antiguo que tenemos, abre con estas palabras: <em>Hay dos caminos: el camino de la vida y el camino de la muerte.</em> El camino de Juan el Bautista había sido un camino real, un camino necesario y un camino santo, pero no era un camino que terminara donde termina el camino de Jesús. Juan apuntó a Cristo. Juan no era Cristo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "931928c4e046"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "Friends, take this lesson home. Not everyone who has had an emotional experience has been saved. Not everyone who has repented of obvious sins has been saved. Not everyone who has been baptized has been saved. Hitler was baptized. Stalin was baptized. Simon the sorcerer was baptized, and Peter looked at him afterward and said his heart was not right before God. There are many roads that look like the gospel road from a distance and turn out to be different roads when you get close enough to read the sign. The mark of the gospel road is the same in every century — Jesus Christ is the only way, the truth, and the life. No man comes to the Father but through Him. The twelve Ephesian disciples could have spent another thirty years in that synagogue learning the Old Testament more thoroughly. None of it would have saved them. They needed to hear and receive Christ. So do we, and so does everyone we know.",
+    "es": "Amigos, llévense esta lección a casa. No todos los que han tenido una experiencia emocional han sido salvos. No todos los que se han arrepentido de pecados obvios han sido salvos. No todos los que han sido bautizados han sido salvos. Hitler fue bautizado. Stalin fue bautizado. Simón el hechicero fue bautizado, y Pedro lo miró después y dijo que su corazón no era recto delante de Dios. Hay muchos caminos que parecen el camino del evangelio desde lejos y resultan ser caminos distintos cuando uno se acerca lo suficiente para leer la señal. La marca del camino del evangelio es la misma en cada siglo — Jesucristo es el único camino, la verdad y la vida. Nadie viene al Padre sino por Él. Los doce discípulos efesios podrían haber pasado otros treinta años en aquella sinagoga aprendiendo el Antiguo Testamento más a fondo. Nada de eso los habría salvado. Necesitaban oír y recibir a Cristo. Nosotros también, y todos los que conocemos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "049ffda1f7d7"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "You may be surprised to know that even today there is a small religious community of about two thousand people, mostly in Iraq and Iran, who still call themselves disciples of John the Baptist. They are called Mandaeans. They have a sacred book they say is the gospel of John the Baptist. They have not yet heard. The Acts 19 mission is not over.",
+    "es": "Quizás les sorprenda saber que aún hoy hay una pequeña comunidad religiosa de unas dos mil personas, mayormente en Irak e Irán, que todavía se llaman discípulos de Juan el Bautista. Se llaman mandeos. Tienen un libro sagrado que dicen ser el evangelio de Juan el Bautista. Aún no han oído. La misión de Hechos 19 no ha terminado."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6aa6e8ee4508"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "heading",
+   "text": {
+    "en": "III. Two Years in the Hall of Tyrannus",
+    "es": "III. Dos años en la escuela de Tiranno"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "63775c023677"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "Paul's pattern was the same in Ephesus as it had been everywhere else. He went into the synagogue first. He reasoned and preached for three months. When some of the synagogue Jews hardened and began to slander the Way, Paul withdrew his disciples and moved to a lecture hall belonging to a man named Tyrannus. The Western text of Acts adds the detail that Paul taught in the hall daily from eleven in the morning to four in the afternoon — the hottest part of the Mediterranean day, when even the most diligent professor would be napping. Paul rented Tyrannus's empty afternoon hours, taught for five hours a day, and went on for two solid years. Luke summarizes the result with one of the most extraordinary lines in Acts. <em>\"And this continued for two years, so that all who dwelt in Asia heard the word of the Lord Jesus, both Jews and Greeks\"</em> (Acts 19:10, NKJV). All of Asia. Probably a hundred thousand souls. From one rented lecture hall in one Mediterranean city. Brothers, do not despise the small daily work. Two years in a borrowed classroom evangelized a province.",
+    "es": "El patrón de Pablo fue el mismo en Éfeso que había sido en todas partes. Entró primero a la sinagoga. Razonó y predicó por tres meses. Cuando algunos de los judíos de la sinagoga se endurecieron y comenzaron a calumniar el Camino, Pablo retiró a sus discípulos y se mudó a un salón de conferencias que pertenecía a un hombre llamado Tiranno. El texto occidental de Hechos añade el detalle de que Pablo enseñaba en el salón diariamente desde las once de la mañana hasta las cuatro de la tarde — la parte más caliente del día mediterráneo, cuando hasta el más diligente profesor estaría durmiendo la siesta. Pablo rentó las horas vacías de la tarde de Tiranno, enseñó cinco horas al día, y siguió por dos años seguidos. Lucas resume el resultado con una de las líneas más extraordinarias de Hechos. <em>\"Y esto fue por espacio de dos años; de manera que todos los que habitaban en Asia, así judíos como griegos, oyeron la palabra del Señor Jesús\"</em> (Hechos 19:10, RVG). Toda Asia. Probablemente cien mil almas. Desde un salón rentado en una ciudad mediterránea. Hermanos, no desprecien la pequeña labor diaria. Dos años en un salón prestado evangelizaron una provincia."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "be4e328737ff"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "God worked unusual miracles by the hands of Paul during those years — handkerchiefs and aprons taken from his body to the sick brought healing, and demons left those who had been demonized. The miracles were not magic, and Paul never charged for them, but they confirmed the new gospel in a city famous for sorcery. (Ephesus was the magic capital of the ancient world; the term <em>Ephesian writings</em> meant magical formulas in the Roman empire.) The Lord met the city's pagan strength on its own ground.",
+    "es": "Dios obró milagros extraordinarios por las manos de Pablo durante esos años — pañuelos y delantales tomados de su cuerpo se llevaban a los enfermos y traían sanidad, y los demonios salían de los endemoniados. Los milagros no eran magia, y Pablo nunca cobró por ellos, pero confirmaron el nuevo evangelio en una ciudad famosa por su hechicería. (Éfeso era la capital mágica del mundo antiguo; el término <em>escritos efesios</em> significaba fórmulas mágicas en el Imperio Romano.) El Señor enfrentó la fuerza pagana de la ciudad en su propio terreno."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3d90afd1cf00"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "heading",
+   "text": {
+    "en": "IV. The Seven Sons of Sceva",
+    "es": "IV. Los siete hijos de Esceva"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "574867b83762"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "Some traveling Jewish exorcists, watching all this, decided they would try Paul's method without Paul's Christ. They started invoking Jesus's name as a magic word. Among them were the seven sons of a Jewish chief priest named Sceva. They walked into the house of a demonized man and tried the formula. <em>\"We exorcise you by the Jesus whom Paul preaches\"</em> (Acts 19:13, NKJV). The demon's reply is the most chilling sentence in the book of Acts. <em>\"Jesus I know, and Paul I know; but who are you?\"</em> (Acts 19:15, NKJV). And then the man with the evil spirit jumped on all seven of them, overpowered them, and drove them out of the house naked and bleeding.",
+    "es": "Algunos exorcistas judíos ambulantes, viendo todo esto, decidieron probar el método de Pablo sin el Cristo de Pablo. Comenzaron a invocar el nombre de Jesús como una palabra mágica. Entre ellos estaban los siete hijos de un sumo sacerdote judío llamado Esceva. Entraron a la casa de un endemoniado y probaron la fórmula. <em>\"Os conjuramos por Jesús, el que predica Pablo\"</em> (Hechos 19:13, RVG). La respuesta del demonio es la frase más escalofriante del libro de Hechos. <em>\"A Jesús conozco, y sé quién es Pablo; pero vosotros, ¿quiénes sois?\"</em> (Hechos 19:15, RVG). Y entonces el hombre con el espíritu malo saltó sobre los siete, los dominó, y los echó de la casa desnudos y heridos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d03c44b22389"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "Take that scene very seriously. The demonic world recognizes two categories of human beings: those who genuinely belong to Christ, and those who do not. There is no third category called <em>casual user of Jesus's name</em>. Religious people who borrow Christian vocabulary for cultural purposes, who quote Bible verses on Mother's Day cards, who say <em>God bless America</em> at football games — none of that registers in the spirit world. The demons are not impressed by our vocabulary. They want to know whose blood-bought property we are. <em>Jesus I know. Paul I know. But who are you?</em>",
+    "es": "Tomen esa escena muy en serio. El mundo demoníaco reconoce dos categorías de seres humanos: los que pertenecen genuinamente a Cristo, y los que no. No hay una tercera categoría llamada <em>usuario casual del nombre de Jesús</em>. La gente religiosa que pide prestado vocabulario cristiano por motivos culturales, que cita versículos bíblicos en tarjetas del Día de la Madre, que dice <em>Dios bendiga a México</em> en juegos de fútbol — nada de eso registra en el mundo espiritual. Los demonios no se impresionan por nuestro vocabulario. Quieren saber de quién somos propiedad comprada con sangre. <em>A Jesús conozco. A Pablo sé quién es. ¿Pero vosotros, quiénes sois?</em>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d4e3137b4fb5"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "The fear of the Lord that fell on Ephesus when the news got out was the most consequential revival movement in the city's pagan history. Many believers came forward and openly confessed the magical practices they had been dabbling in. Then they brought their grimoires and their occult scrolls — Luke calls them their books of curious arts, the most expensive magical texts in the ancient world — into the city square and burned them in a public bonfire. Luke counted the receipts. <em>\"They counted up the value of them, and it totaled fifty thousand pieces of silver\"</em> (Acts 19:19, NKJV). Fifty thousand denarii. About a hundred and fifty years of an average laborer's wages. The wealth of half a generation went up in smoke in one afternoon because the Ephesian Christians decided that the price of an honest fellowship with Christ was higher than the price of any book they owned. <em>\"So the word of the Lord grew mightily and prevailed\"</em> (Acts 19:20, NKJV).",
+    "es": "El temor del Señor que cayó sobre Éfeso cuando se supo la noticia fue el movimiento de avivamiento más trascendente en la historia pagana de la ciudad. Muchos creyentes vinieron y confesaron abiertamente las prácticas mágicas en las que habían estado coqueteando. Luego trajeron sus libros de hechicería y sus rollos ocultos — Lucas los llama sus libros de artes curiosas, los textos mágicos más caros del mundo antiguo — a la plaza de la ciudad y los quemaron en una hoguera pública. Lucas contó los recibos. <em>\"Y contado el precio de ellos, hallaron que era cincuenta mil piezas de plata\"</em> (Hechos 19:19, RVG). Cincuenta mil denarios. Cerca de ciento cincuenta años de salario de un obrero promedio. La riqueza de media generación se quemó en humo en una tarde porque los cristianos efesios decidieron que el precio de una comunión honrada con Cristo era mayor que el precio de cualquier libro que poseían. <em>\"Así crecía poderosamente la palabra del Señor, y prevalecía\"</em> (Hechos 19:20, RVG)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5388e0f3b0e8"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "heading",
+   "text": {
+    "en": "V. Demetrius the Silversmith",
+    "es": "V. Demetrio el platero"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b1324a16c405"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "The next opposition came not from the synagogue but from the chamber of commerce. Ephesus's economy ran on its temple of Artemis — the goddess Romans called Diana — one of the seven wonders of the ancient world, with a flourishing tourist industry of pilgrims, sacrifices, and silver shrines. A silversmith named Demetrius, who made his living crafting miniature shrines of the goddess for pilgrims to take home, called a meeting of the trade guild. He gave the most candid speech in Acts. <em>\"Men, you know that we have our prosperity by this trade. Moreover you see and hear that not only at Ephesus, but throughout almost all Asia, this Paul has persuaded and turned away many people, saying that they are not gods which are made with hands. So not only is this trade of ours in danger of falling into disrepute, but also the temple of the great goddess Diana may be despised\"</em> (Acts 19:25–27, NKJV). Notice the order. Our trade first. The goddess second.",
+    "es": "La siguiente oposición vino no de la sinagoga sino de la cámara de comercio. La economía de Éfeso corría sobre su templo de Artemisa — la diosa que los romanos llamaban Diana — una de las siete maravillas del mundo antiguo, con una próspera industria turística de peregrinos, sacrificios y santuarios de plata. Un platero llamado Demetrio, que se ganaba la vida fabricando santuarios miniaturizados de la diosa para que los peregrinos se los llevaran a casa, convocó una reunión del gremio. Dio el discurso más franco de Hechos. <em>\"Varones, sabéis que de este oficio tenemos nuestra riqueza; y veis y oís que este Pablo, no solamente en Éfeso, sino en muchas provincias de Asia, ha apartado a mucha gente con persuasión, diciendo que no son dioses los que se hacen con las manos. Y no solamente hay peligro de que este nuestro oficio caiga en descrédito, sino también el templo de la gran diosa Diana sea estimado en nada\"</em> (Hechos 19:25–27, RVG). Note el orden. Nuestro oficio primero. La diosa segundo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "16efee3d9e87"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "prose",
+   "text": {
+    "en": "Whenever the gospel threatens an income stream, men start arguing for the goddess. The silversmiths whipped the city into a frenzy, and a mob filled the great Ephesian theater, twenty-five thousand seats, screaming for two hours, <em>\"Great is Diana of the Ephesians!\"</em> Most of them, Luke notes drily, did not even know why they had come together. The town clerk eventually quieted the riot by pointing out that legal grievances had to be brought through the courts, not through mob violence, and the assembly dispersed. Paul was never even brought before the mob. The one missionary the city wanted to silence stayed silent that afternoon and prayed in his lodgings.",
+    "es": "Cuando el evangelio amenaza una corriente de ingresos, los hombres comienzan a argumentar a favor de la diosa. Los plateros encendieron a la ciudad en frenesí, y una multitud llenó el gran teatro efesio, veinticinco mil asientos, gritando por dos horas: <em>\"¡Grande es Diana de los efesios!\"</em> La mayoría de ellos, anota Lucas secamente, ni siquiera sabía por qué se habían reunido. El escribano de la ciudad finalmente acalló el alboroto señalando que las quejas legales debían presentarse en los tribunales, no por violencia de turba, y la asamblea se dispersó. Pablo nunca fue siquiera llevado ante la multitud. El único misionero a quien la ciudad quería silenciar permaneció en silencio aquella tarde y oraba en su alojamiento."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d78d406dc54b"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "Three lessons from the Demetrius riot. First, the gospel really does cost the marketplace something. If our preaching does not threaten any income stream anywhere, we may not be preaching the same gospel Paul preached. Second, mobs are usually paid for. There is almost always a financial interest behind organized opposition to Christianity, even when it is dressed up in religious language. Look for the silversmiths behind the riot. Third, Christ is sovereign over His servants' platforms. He gave Paul the platform of Mars Hill in Athens. He kept Paul off the platform of the Ephesian theater. The Lord knows when we are to preach and when we are to stay home and pray. Both are equally His will.",
+    "es": "Tres lecciones del alboroto de Demetrio. Primera, el evangelio realmente le cuesta algo al mercado. Si nuestra predicación no amenaza ninguna corriente de ingresos en ningún lugar, quizás no estemos predicando el mismo evangelio que predicó Pablo. Segunda, las turbas usualmente están pagadas. Casi siempre hay un interés financiero detrás de la oposición organizada al cristianismo, aun cuando se viste de lenguaje religioso. Busque a los plateros detrás del alboroto. Tercera, Cristo es soberano sobre las plataformas de Sus siervos. Le dio a Pablo la plataforma del monte de Marte en Atenas. Mantuvo a Pablo fuera de la plataforma del teatro efesio. El Señor sabe cuándo debemos predicar y cuándo debemos quedarnos en casa orando. Las dos cosas son igualmente Su voluntad."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b687087ab49d"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "heading",
+   "text": {
+    "en": "VI. Eutychus and a Long Sunday Sermon",
+    "es": "VI. Eutico y un sermón largo de domingo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "609ad0b1b5c0"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "prose",
+   "text": {
+    "en": "Paul finally left Ephesus, traveled through Macedonia and Achaia, and after several months of ministry there, headed back east toward Jerusalem with the offering he had been collecting from the Gentile churches for the relief of the Judean poor. The team stopped at Troas for a week. On the first day of the week — Luke's quiet little parenthesis that marks the early Christian transition from Sabbath to Sunday — the believers gathered in an upper room to break bread and hear Paul, who would be leaving in the morning. Paul preached until midnight. A young man named Eutychus — his name means <em>fortunate</em>, which is the most ironic name in the New Testament — was sitting on the windowsill, three stories up. The room was hot. There were many lamps burning. Paul preached on. Eutychus drifted off to sleep. He fell out the window, three floors down, and was picked up dead.",
+    "es": "Pablo finalmente dejó Éfeso, viajó por Macedonia y Acaya, y después de varios meses de ministerio allí, partió de regreso al este hacia Jerusalén con la ofrenda que había estado recogiendo de las iglesias gentiles para el alivio de los pobres de Judea. El equipo se detuvo en Troas por una semana. El primer día de la semana — el paréntesis tranquilo de Lucas que marca la temprana transición cristiana del día de reposo al domingo — los creyentes se reunieron en un aposento alto a partir el pan y oír a Pablo, que partiría en la mañana. Pablo predicó hasta la medianoche. Un joven llamado Eutico — su nombre significa <em>afortunado</em>, lo cual es el nombre más irónico del Nuevo Testamento — estaba sentado en la ventana, tres pisos arriba. El cuarto estaba caliente. Había muchas lámparas encendidas. Pablo siguió predicando. Eutico se durmió. Cayó por la ventana, tres pisos abajo, y lo recogieron muerto."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "722796dc4eac"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "prose",
+   "text": {
+    "en": "Paul came down, embraced the body the way Elijah had embraced the widow's son in 1 Kings 17, and announced to the church, <em>\"Do not trouble yourselves, for his life is in him\"</em> (Acts 20:10, NKJV). The boy was alive. They carried him home alive. And Paul, having lost no time, went back upstairs, broke bread, talked until daybreak, and walked out to his ship at sunrise. Luke, the careful physician, includes the quiet last sentence: <em>\"And they brought the young man in alive, and they were not a little comforted\"</em> (Acts 20:12, NKJV). I have not personally preached anyone to death yet, brethren, but I have preached some to sleep. The Lord still raises the dead. The longer the sermon, the greater the sign.",
+    "es": "Pablo bajó, se echó sobre el cuerpo como Elías se había echado sobre el hijo de la viuda en 1 Reyes 17, y anunció a la iglesia: <em>\"No os turbéis, que su alma está en él\"</em> (Hechos 20:10, RVG). El joven estaba vivo. Lo llevaron a casa vivo. Y Pablo, sin perder tiempo, subió otra vez, partió el pan, habló hasta el amanecer, y caminó a su barco al alba. Lucas, el médico cuidadoso, incluye la última frase tranquila: <em>\"Y llevaron al joven vivo, y fueron consolados no poco\"</em> (Hechos 20:12, RVG). No he predicado personalmente a nadie hasta la muerte todavía, hermanos, pero he predicado a algunos hasta el sueño. El Señor todavía resucita a los muertos. Mientras más largo el sermón, mayor la señal."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8878ed9dc188"
+    }
+   }
+  },
+  {
+   "id": "b037",
+   "type": "heading",
+   "text": {
+    "en": "VII. The Miletus Farewell",
+    "es": "VII. La despedida en Mileto"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4f36d64f2775"
+    }
+   }
+  },
+  {
+   "id": "b038",
+   "type": "prose",
+   "text": {
+    "en": "From Troas the team sailed south down the Aegean coast. Paul was determined to bypass Ephesus rather than be detained — he was racing to be in Jerusalem by Pentecost — but he stopped at the port of Miletus and sent for the Ephesian elders. They came down the road to him. And Paul preached one of the most personally tender sermons in the New Testament.",
+    "es": "Desde Troas el equipo navegó al sur por la costa egea. Pablo estaba decidido a evitar Éfeso para no ser detenido — corría para estar en Jerusalén para Pentecostés — pero se detuvo en el puerto de Mileto y mandó llamar a los ancianos efesios. Vinieron por el camino hasta él. Y Pablo predicó uno de los sermones más personalmente tiernos del Nuevo Testamento."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a865a4f6cd07"
+    }
+   }
+  },
+  {
+   "id": "b039",
+   "type": "prose",
+   "text": {
+    "en": "He reminded them of his three-year ministry among them — how he had served the Lord with all humility, with many tears, in trials. How he had not shunned to declare to them <em>the whole counsel of God</em>. How he had taught publicly and from house to house. How he was now bound for Jerusalem under compulsion of the Spirit, not knowing what awaited him there except that the Spirit testified in every city that chains and tribulations awaited him. Then he turned to the practical charge. <em>\"Therefore take heed to yourselves and to all the flock, among which the Holy Spirit has made you overseers, to shepherd the church of God which He purchased with His own blood. For I know this, that after my departure savage wolves will come in among you, not sparing the flock\"</em> (Acts 20:28–29, NKJV). The wolves would come, and some of them — Paul was honest about this — would arise from among the elders themselves, speaking perverse things to draw away disciples. The pastoral charge ends with a sentence I have read at the funeral of more than one good preacher. <em>\"Therefore watch, and remember that for three years I did not cease to warn everyone night and day with tears\"</em> (Acts 20:31, NKJV).",
+    "es": "Les recordó su ministerio de tres años entre ellos — cómo había servido al Señor con toda humildad, con muchas lágrimas, en pruebas. Cómo no había rehuido declararles <em>todo el consejo de Dios</em>. Cómo había enseñado públicamente y por las casas. Cómo iba ahora a Jerusalén bajo la compulsión del Espíritu, sin saber qué le esperaba allí salvo que el Espíritu testificaba en cada ciudad que cadenas y tribulaciones le aguardaban. Luego se volvió a la encomienda práctica. <em>\"Por tanto, mirad por vosotros, y por todo el rebaño en que el Espíritu Santo os ha puesto por obispos, para apacentar la iglesia de Dios, la cual Él compró con su propia sangre. Porque yo sé esto, que después de mi partida entrarán en vosotros lobos rapaces, que no perdonarán al rebaño\"</em> (Hechos 20:28–29, RVG). Los lobos vendrían, y algunos de ellos — Pablo fue honrado al respecto — surgirían de los mismos ancianos, hablando cosas perversas para apartar discípulos. La encomienda pastoral termina con una frase que he leído en el funeral de más de un buen predicador. <em>\"Por tanto, velad, acordándoos que por tres años, de noche y de día, no he cesado de amonestar con lágrimas a cada uno\"</em> (Hechos 20:31, RVG)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "19f3d7680df7"
+    }
+   }
+  },
+  {
+   "id": "b040",
+   "type": "prose",
+   "text": {
+    "en": "Three years of preaching with tears. Friends, that is the heart of pastoral ministry, and almost every century has lost it. D. L. Moody — the great American evangelist — once preached on a Sunday night in Chicago and closed his sermon by saying, <em>\"I want you to take home the question 'What shall I do with Jesus?' and come back next week with your answer.\"</em> Even as the service closed there was a commotion outside. Fire engines were rolling. The Great Chicago Fire of 1871 was beginning. Many of the people in that congregation lost their lives that night. Moody never preached again without an immediate gospel invitation. He told the story for the rest of his life with tears. The closing thought of Paul's farewell was the same: I have warned everyone night and day with tears. The pastor's pulpit, friends, is wet with tears or it is empty.",
+    "es": "Tres años predicando con lágrimas. Amigos, ese es el corazón del ministerio pastoral, y casi cada siglo lo ha perdido. D. L. Moody — el gran evangelista norteamericano — predicó una noche de domingo en Chicago y cerró su sermón diciendo: <em>\"Quiero que se lleven a casa la pregunta '¿Qué haré con Jesús?' y que vuelvan la próxima semana con la respuesta.\"</em> Aun cuando el servicio cerraba había una conmoción afuera. Los carros de bomberos rodaban. El Gran Incendio de Chicago de 1871 estaba comenzando. Muchas de las personas en aquella congregación perdieron la vida esa noche. Moody nunca volvió a predicar sin una invitación inmediata al evangelio. Contó la historia el resto de su vida con lágrimas. El pensamiento final de la despedida de Pablo fue el mismo: he amonestado a cada uno de noche y de día con lágrimas. El púlpito del pastor, amigos, está mojado de lágrimas, o está vacío."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b5b260a98e38"
+    }
+   }
+  },
+  {
+   "id": "b041",
+   "type": "prose",
+   "text": {
+    "en": "Paul knelt down with all of them and prayed. Luke gives us the most heartbreaking sentence in his book. <em>\"Then they all wept freely, and fell on Paul's neck and kissed him, sorrowing most of all for the words which he spoke, that they would see his face no more\"</em> (Acts 20:37–38, NKJV). The men who walked him to the ship were the men he had loved and labored among for three years. They never saw him again. The pastor who knew the names of their children walked up the gangplank and sailed for Jerusalem. The wolves were already gathering.",
+    "es": "Pablo se arrodilló con todos ellos y oró. Lucas nos da la frase más desgarradora de su libro. <em>\"Entonces hubo gran llanto de todos; y echándose al cuello de Pablo, le besaban, doliéndose en gran manera por la palabra que dijo, de que no habían de ver más su rostro\"</em> (Hechos 20:37–38, RVG). Los hombres que lo acompañaron al barco eran los hombres a quienes había amado y entre quienes había trabajado durante tres años. Nunca lo volvieron a ver. El pastor que sabía los nombres de sus hijos subió la pasarela y navegó hacia Jerusalén. Los lobos ya se reunían."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b71023b95dc6"
+    }
+   }
+  },
+  {
+   "id": "b042",
+   "type": "heading",
+   "text": {
+    "en": "VIII. The Long Road to Jerusalem",
+    "es": "VIII. El largo camino a Jerusalén"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "93200190f180"
+    }
+   }
+  },
+  {
+   "id": "b043",
+   "type": "prose",
+   "text": {
+    "en": "Paul sailed south to Cos, then Rhodes, then Patara, where the team caught a ship for the Phoenician coast. They put in at Tyre and unloaded cargo for seven days. Tyre had a small church. The believers there prophesied to Paul through the Spirit that he should not go up to Jerusalem. Read this carefully. <em>\"They told Paul through the Spirit not to go up to Jerusalem\"</em> (Acts 21:4, NKJV). And yet Paul went on. The Spirit warned him through them but had given him personal compulsion to keep going. Sometimes the Lord lets His servants know in advance what awaits them and still requires them to walk into it. The whole company knelt on the beach with their wives and children, prayed together, and Paul boarded the ship.",
+    "es": "Pablo navegó al sur a Cos, luego Rodas, luego Pátara, donde el equipo tomó un barco para la costa fenicia. Atracaron en Tiro y descargaron mercancía por siete días. Tiro tenía una pequeña iglesia. Los creyentes allí profetizaron a Pablo por el Espíritu que no subiera a Jerusalén. Lea esto con cuidado. <em>\"Decían a Pablo por el Espíritu, que no subiese a Jerusalén\"</em> (Hechos 21:4, RVG). Y sin embargo Pablo siguió. El Espíritu le advirtió por medio de ellos pero le había dado compulsión personal de seguir adelante. A veces el Señor permite que Sus siervos sepan de antemano lo que les espera y aun así les exige caminar hacia ello. Toda la compañía se arrodilló en la playa con sus esposas e hijos, oraron juntos, y Pablo abordó el barco."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "98b279a0c7e5"
+    }
+   }
+  },
+  {
+   "id": "b044",
+   "type": "prose",
+   "text": {
+    "en": "At Caesarea the team stayed several days at the home of Philip the evangelist — yes, the same Philip from Acts 8, the one who had baptized the Ethiopian eunuch on the desert road. Philip had four virgin daughters who prophesied. While they were there, a prophet named Agabus came down from Judea — the same Agabus who had prophesied the famine back in Acts 11 — took Paul's belt, tied his own hands and feet with it, and said, <em>\"Thus says the Holy Spirit, 'So shall the Jews at Jerusalem bind the man who owns this belt, and deliver him into the hands of the Gentiles'\"</em> (Acts 21:11, NKJV). The whole company begged Paul not to go up. Paul answered them with one of the bravest sentences a Christian man ever spoke. <em>\"What do you mean by weeping and breaking my heart? For I am ready not only to be bound, but also to die at Jerusalem for the name of the Lord Jesus\"</em> (Acts 21:13, NKJV). When they could not persuade him, Luke says simply, <em>\"We ceased, saying, 'The will of the Lord be done'\"</em> (Acts 21:14, NKJV). Paul packed his luggage and went up to Jerusalem.",
+    "es": "En Cesarea el equipo se quedó varios días en la casa de Felipe el evangelista — sí, el mismo Felipe de Hechos 8, el que había bautizado al eunuco etíope en el camino del desierto. Felipe tenía cuatro hijas vírgenes que profetizaban. Mientras estaban allí, un profeta llamado Agabo bajó de Judea — el mismo Agabo que había profetizado el hambre en Hechos 11 — tomó el cinto de Pablo, ató sus propias manos y pies con él, y dijo: <em>\"Esto dice el Espíritu Santo: Así atarán los judíos en Jerusalén al varón cuyo es este cinto, y le entregarán en manos de los gentiles\"</em> (Hechos 21:11, RVG). Toda la compañía rogó a Pablo que no subiera. Pablo les respondió con una de las frases más valientes que un hombre cristiano haya jamás dicho. <em>\"¿Qué hacéis llorando y afligiéndome el corazón? Porque yo no sólo estoy listo a ser atado, mas aun a morir en Jerusalén por el nombre del Señor Jesús\"</em> (Hechos 21:13, RVG). Cuando no pudieron persuadirlo, Lucas dice simplemente: <em>\"Desistimos, diciendo: Hágase la voluntad del Señor\"</em> (Hechos 21:14, RVG). Pablo empacó su equipaje y subió a Jerusalén."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a082837856f6"
+    }
+   }
+  },
+  {
+   "id": "b045",
+   "type": "heading",
+   "text": {
+    "en": "IX. Three Lessons Home",
+    "es": "IX. Tres lecciones a casa"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "24a3dc2da2de"
+    }
+   }
+  },
+  {
+   "id": "b046",
+   "type": "prose",
+   "text": {
+    "en": "First, <strong>the way of John is not the way of Jesus</strong>. Repentance without faith is not the gospel. Baptism without Christ is not salvation. Religion that stops at moral seriousness has not yet arrived at the cross. The twelve Ephesian disciples had been earnest for years. They were still lost. So is everyone we know who is religious without being saved.",
+    "es": "Primero, <strong>el camino de Juan no es el camino de Jesús</strong>. El arrepentimiento sin fe no es el evangelio. El bautismo sin Cristo no es la salvación. La religión que se detiene en la seriedad moral todavía no ha llegado a la cruz. Los doce discípulos efesios habían sido fervorosos por años. Aún estaban perdidos. Lo mismo todos los que conocemos que son religiosos sin ser salvos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5d3dcc71e06f"
+    }
+   }
+  },
+  {
+   "id": "b047",
+   "type": "prose",
+   "text": {
+    "en": "Second, <strong>private discipleship matters more than public correction</strong>. Aquila and Priscilla took Apollos aside. They did not embarrass him from the back of the synagogue. They explained the way of God more accurately in private. The kingdom needs more disciplers and fewer critics. The next great preacher in your church may be three coffees away from being trained, if someone is willing to do the awkward, generous work of taking him aside.",
+    "es": "Segundo, <strong>el discipulado privado importa más que la corrección pública</strong>. Aquila y Priscila tomaron a Apolos aparte. No lo avergonzaron desde el fondo de la sinagoga. Le explicaron el camino de Dios más exactamente en privado. El reino necesita más discipuladores y menos críticos. El próximo gran predicador de su iglesia puede estar a tres cafés de ser entrenado, si alguien está dispuesto a hacer el trabajo incómodo y generoso de tomarlo aparte."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6b9bc0588f8a"
+    }
+   }
+  },
+  {
+   "id": "b048",
+   "type": "prose",
+   "text": {
+    "en": "Third, <strong>warn everyone night and day with tears</strong>. Paul's three-year Ephesian ministry was watered with tears. Moody preached the rest of his life with tears after the night he delayed an invitation. May the Lord put tears back into the modern pulpit. There is no scarcer commodity in our preaching than weeping for the lost. May we recover it before the Day comes.",
+    "es": "Tercero, <strong>amonesten a cada uno de noche y de día con lágrimas</strong>. El ministerio efesio de tres años de Pablo fue regado con lágrimas. Moody predicó el resto de su vida con lágrimas después de la noche que demoró una invitación. Que el Señor regrese las lágrimas al púlpito moderno. No hay mercancía más escasa en nuestra predicación que el llanto por los perdidos. Que la recobremos antes de que venga el Día."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f05c6e0ab6e1"
+    }
+   }
+  },
+  {
+   "id": "b049",
+   "type": "prose",
+   "text": {
+    "en": "Unit 8 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 8 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "74ffc7368383"
+    }
+   }
+  },
+  {
+   "id": "b050",
+   "type": "prose",
+   "text": {
+    "en": "<em><strong>Certificate track:</strong> 20 multiple-choice questions, 90% (18 of 20) to pass. <strong>M.Div track:</strong> 20 MC + 10 short-answer, both at 90% independently. Each MC scores immediately when you click. MC must be passed before SA scores count. A failure locks the relevant section for 15 minutes; if you have already passed MC, only SA locks after an SA fail.</em>",
+    "es": "<em><strong>Vía Certificado:</strong> 20 preguntas de opción múltiple, 90% (18 de 20) para aprobar. <strong>Vía M.Div:</strong> 20 OM + 10 respuesta corta, ambas al 90% independientemente. Cada OM califica inmediatamente al hacer clic. Debe aprobar OM antes de que cuente la sección RC. Una reprobación bloquea la sección por 15 minutos; si ya aprobó OM, solo se bloquea RC tras un fallo de RC.</em>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d196052e364e"
+    }
+   }
+  },
+  {
+   "id": "b051",
+   "type": "prose",
+   "text": {
+    "en": "Multiple Choice — 20 Questions",
+    "es": "Opción Múltiple — 20 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9906bf28c27c"
+    }
+   }
+  },
+  {
+   "id": "b052",
+   "type": "prose",
+   "text": {
+    "en": "Short Answer — 10 Questions <span class=\"sa-badge\" id=\"saBadgeEn\"></span>",
+    "es": "Respuesta Corta — 10 Preguntas <span class=\"sa-badge\" id=\"saBadgeEs\"></span>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b1d858341328"
+    }
+   }
+  },
+  {
+   "id": "b053",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b054",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

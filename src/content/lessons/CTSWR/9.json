@@ -1,0 +1,572 @@
+{
+ "course": "CTSWR",
+ "unit": 9,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<a href=\"index.html\" style=\"display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif\">📚 Catalog / Catálogo</a>\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"prevUnitBtn\">← Previous</button>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Unit 10 →</button>\n    </div>\n</div>\n<div class=\"lang-toggle-group\" style=\"display:inline-block;margin-bottom:15px;\">\n<button class=\"toggle-btn\" data-lang=\"en\" id=\"langBtnEn\">English</button>\n<button class=\"toggle-btn\" data-lang=\"es\" id=\"langBtnEs\">Español</button>\n<button class=\"toggle-btn\" data-lang=\"both\" id=\"langBtnBoth\">Both / Ambos</button>\n</div>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #5b3a1f;\"><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"registrationCard\">\n    <h2><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n    <label><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></label>\n    <input type=\"text\" id=\"regName\" placeholder=\"\" >\n    <label><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></label>\n    <input type=\"email\" id=\"regEmail\" placeholder=\"\" >\n    <label><span class=\"lang-en\"><!--cts:b008:en--></span><span class=\"lang-es\"><!--cts:b008:es--></span></label>\n    <input type=\"text\" id=\"regCountry\" placeholder=\"\" >\n    <label><span class=\"lang-en\"><!--cts:b009:en--></span><span class=\"lang-es\"><!--cts:b009:es--></span></label>\n    <input type=\"hidden\" id=\"regTrack\" value=\"certificate\" >\n    <div id=\"trackButtons\" style=\"display:flex;flex-direction:column;gap:8px;margin:6px 0 12px;\">\n        <button type=\"button\" class=\"track-opt\" data-track=\"certificate\"><span class=\"lang-en\"><!--cts:b010:en--></span><span class=\"lang-es\"><!--cts:b010:es--></span></button>\n        <button type=\"button\" class=\"track-opt\" data-track=\"mdiv\"><span class=\"lang-en\"><!--cts:b011:en--></span><span class=\"lang-es\"><!--cts:b011:es--></span></button>\n        <button type=\"button\" class=\"track-opt\" data-track=\"thm\"><span class=\"lang-en\"><!--cts:b012:en--></span><span class=\"lang-es\"><!--cts:b012:es--></span></button>\n    </div>\n    <button class=\"small\" id=\"saveRegBtn\" style=\"margin-top: 10px;\"><span class=\"lang-en\"><!--cts:b013:en--></span><span class=\"lang-es\"><!--cts:b013:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\" id=\"teachingContent\">\n    <div class=\"lang-en\">\n        <h2><!--cts:b014:en--></h2>\n        <p><!--cts:b015:en--></p>\n\n        <p><!--cts:b016:en--></p>\n\n        <p><!--cts:b017:en--></p>\n\n        <h2><!--cts:b018:en--></h2>\n        <p><!--cts:b019:en--></p>\n\n        <p><!--cts:b020:en--></p>\n\n        <p><!--cts:b021:en--></p>\n\n        <h2><!--cts:b022:en--></h2>\n        <p><!--cts:b023:en--></p>\n\n        <p><!--cts:b024:en--></p>\n\n        <p><!--cts:b025:en--></p>\n\n        <h2><!--cts:b026:en--></h2>\n        <p><!--cts:b027:en--></p>\n\n        <p><!--cts:b028:en--></p>\n\n        <h2><!--cts:b029:en--></h2>\n        <p><!--cts:b030:en--></p>\n\n        <p><!--cts:b031:en--></p>\n\n        <h2><!--cts:b032:en--></h2>\n        <p><!--cts:b033:en--></p>\n\n        <p><!--cts:b034:en--></p>\n\n        <p><!--cts:b035:en--></p>\n\n        <p style=\"text-align: center; margin-top: 30px; font-weight: bold;\"><!--cts:b036:en--></p>\n\n    </div>\n\n    <div class=\"lang-es\">\n        <h2><!--cts:b014:es--></h2>\n        <p><!--cts:b015:es--></p>\n\n        <p><!--cts:b016:es--></p>\n\n        <p><!--cts:b017:es--></p>\n\n        <h2><!--cts:b018:es--></h2>\n        <p><!--cts:b019:es--></p>\n\n        <p><!--cts:b020:es--></p>\n\n        <p><!--cts:b021:es--></p>\n\n        <h2><!--cts:b022:es--></h2>\n        <p><!--cts:b023:es--></p>\n\n        <p><!--cts:b024:es--></p>\n\n        <p><!--cts:b025:es--></p>\n\n        <h2><!--cts:b026:es--></h2>\n        <p><!--cts:b027:es--></p>\n\n        <p><!--cts:b028:es--></p>\n\n        <h2><!--cts:b029:es--></h2>\n        <p><!--cts:b030:es--></p>\n\n        <p><!--cts:b031:es--></p>\n\n        <h2><!--cts:b032:es--></h2>\n        <p><!--cts:b033:es--></p>\n\n        <p><!--cts:b034:es--></p>\n\n        <p><!--cts:b035:es--></p>\n\n        <p style=\"text-align: center; margin-top: 30px; font-weight: bold;\"><!--cts:b036:es--></p>\n\n    </div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b037:en--></span><span class=\"lang-es\"><!--cts:b037:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b038:en--></span>\n       <span class=\"lang-es\"><!--cts:b038:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b039:en--></span><span class=\"lang-es\"><!--cts:b039:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small reset\"><span class=\"lang-en\"><!--cts:b040:en--></span><span class=\"lang-es\"><!--cts:b040:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n  \n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSWRReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "🌍 World Religions — Unit 9: Comparative Theology",
+    "es": "🌍 Religiones del Mundo — Unidad 9: Teología Comparada"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "19382824036d"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "\"Nor is there salvation in any other, for there is no other name under heaven given among men by which we must be saved.\" — Acts 4:12 (NKJV)",
+    "es": "\"Y en ningún otro hay salvación; porque no hay otro nombre bajo el cielo, dado a los hombres, en que podamos ser salvos.\" — Hechos 4:12 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7a328b3e9736"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "Student Registration",
+    "es": "Registro del Estudiante"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f94d495eed0d"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "Please register before beginning this unit. Your registration is saved on this device and used across all CTS courses.",
+    "es": "Por favor regístrese antes de comenzar esta unidad. Su registro se guarda en este dispositivo y se usa en todos los cursos del CTS."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2330ea9c37a9"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Full Name",
+    "es": "Nombre Completo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "64346b483c0a"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Email",
+    "es": "Correo Electrónico"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "84add5b29527"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "Country",
+    "es": "País"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d523ebbd1014"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "Program Track",
+    "es": "Programa"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ec4b83520350"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "Certificate of Ministry",
+    "es": "Certificado de Ministerio"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4df6d896eb72"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Master of Divinity (M.Div.)",
+    "es": "Maestría en Divinidad (M.Div.)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8400c8c4d874"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "Master of Theology (Th.M.)",
+    "es": "Maestría en Teología (Th.M.)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a31c66296633"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "Save Registration",
+    "es": "Guardar Registro"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "019798420daf"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "heading",
+   "text": {
+    "en": "Orientation",
+    "es": "Orientación"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "86e4e3875420"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "This unit pauses the sequence of individual traditions to draw together everything Units 2 through 8 have examined, using the four-question framework introduced in Unit 1: What is ultimate reality? What is the fundamental human problem? What is the path out of that problem? And what is the ultimate destiny of a human life? Asking these same four questions of every tradition studied so far will let you see, side by side, exactly where each system echoes something Scripture itself affirms, where it borrows a true instinct but bends it, and where it departs from the biblical picture altogether — the comparative clarity this course promised you in its opening unit.",
+    "es": "Esta unidad pausa la secuencia de tradiciones individuales para reunir todo lo que las Unidades 2 a 8 han examinado, usando el marco de cuatro preguntas introducido en la Unidad 1: ¿Qué es la realidad última? ¿Cuál es el problema humano fundamental? ¿Cuál es el camino para salir de ese problema? ¿Y cuál es el destino último de una vida humana? Hacer estas mismas cuatro preguntas a cada tradición estudiada hasta ahora le permitirá ver, lado a lado, exactamente dónde cada sistema hace eco de algo que la Escritura misma afirma, dónde toma prestado un instinto verdadero pero lo dobla, y dónde se aparta por completo del cuadro bíblico — la claridad comparativa que este curso le prometió en su unidad inicial."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3ce041a69ad6"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "This unit is not a neutral survey that treats every answer as equally plausible. Scripture is not shy about declaring itself uniquely true: \"nor is there salvation in any other, for there is no other name under heaven given among men by which we must be saved\" (Acts 4:12). But making that claim responsibly, rather than merely repeating it as a slogan, requires that a pastor first understand clearly and fairly what the alternatives actually teach — which is exactly the work this unit sets out to do.",
+    "es": "Esta unidad no es un estudio neutral que trata cada respuesta como igualmente plausible. La Escritura no es tímida al declararse a sí misma únicamente verdadera: \"y en ningún otro hay salvación; porque no hay otro nombre bajo el cielo, dado a los hombres, en que podamos ser salvos\" (Hechos 4:12). Pero hacer esa afirmación responsablemente, en lugar de meramente repetirla como un eslogan, requiere que un pastor primero entienda con claridad y justicia lo que las alternativas realmente enseñan — que es exactamente el trabajo que esta unidad se propone hacer."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "712874b53e90"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "It is worth pausing to recall why this course insisted, from its very first unit, that comparison is not the same thing as relativism. Asking the same four questions of every tradition does not presuppose that all four sets of answers carry equal weight; it simply ensures that when Scripture's answers are eventually set alongside the others, they are being fairly compared against what each tradition actually teaches rather than against a caricature convenient for quick dismissal. A pastor who has done this comparative work honestly earns the right to proclaim Christ's uniqueness with both conviction and credibility, because he can explain precisely what he is saying no to, and precisely why.",
+    "es": "Vale la pena detenerse a recordar por qué este curso insistió, desde su primera unidad, en que la comparación no es lo mismo que el relativismo. Hacer las mismas cuatro preguntas a cada tradición no presupone que los cuatro conjuntos de respuestas lleven el mismo peso; simplemente asegura que cuando las respuestas de la Escritura eventualmente se coloquen junto a las demás, se estén comparando con justicia contra lo que cada tradición realmente enseña en lugar de contra una caricatura conveniente para un descarte rápido. Un pastor que ha hecho este trabajo comparativo con honestidad se gana el derecho de proclamar la singularidad de Cristo con convicción y credibilidad a la vez, porque puede explicar precisamente a qué está diciendo no, y precisamente por qué."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b14fe4b07348"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "heading",
+   "text": {
+    "en": "I. Ultimate Reality: Personal, Impersonal, Plural, and Undetermined",
+    "es": "I. Realidad última: Personal, impersonal, plural, e indeterminada"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "58aaeb3d3219"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "Every tradition this course has studied gives some answer, explicit or implicit, to what stands behind and beyond the visible world. Judaism, Islam, Sikhism, and, largely, the Baha'i Faith affirm a personal, single, transcendent God who speaks, wills, and acts in history — a category into which biblical Christianity also falls, though with the distinctive Trinitarian shape no other tradition studied shares. Hinduism, in its most philosophically developed strand, points instead to Brahman, an impersonal ultimate reality underlying all things, with popular devotional Hinduism simultaneously worshiping millions of personal deities understood, at the philosophical level, as manifestations of that single impersonal ground. Classical Buddhism, distinctively among every tradition this course has studied, largely declines to settle the question at all, treating it as a distraction from the practical work of ending suffering. Chinese religious tradition holds the impersonal Tao alongside a populated world of ancestors, folk deities, and, in Confucianism's case, comparatively little interest in metaphysical questions at all. Mormonism and, to varying degrees, some New Age applications of Hindu and Buddhist concepts studied in Unit 8, actually blur this category further by describing deity in terms that are personal yet radically unlike the eternal, uncreated God of classical theism.",
+    "es": "Toda tradición que este curso ha estudiado da alguna respuesta, explícita o implícita, a lo que está detrás y más allá del mundo visible. El judaísmo, el islam, el sijismo, y, en gran medida, la Fe Baha'i afirman un Dios personal, único, y trascendente que habla, quiere, y actúa en la historia — una categoría en la cual también cae el cristianismo bíblico, aunque con la forma trinitaria distintiva que ninguna otra tradición estudiada comparte. El hinduismo, en su corriente más desarrollada filosóficamente, señala en cambio a Brahman, una realidad última impersonal que subyace a todas las cosas, con el hinduismo devocional popular adorando simultáneamente a millones de deidades personales entendidas, a nivel filosófico, como manifestaciones de ese único fundamento impersonal. El budismo clásico, distintivamente entre cada tradición que este curso ha estudiado, en gran medida declina resolver la pregunta en absoluto, tratándola como una distracción del trabajo práctico de terminar el sufrimiento. La tradición religiosa china sostiene el Tao impersonal junto a un mundo poblado de ancestros, deidades populares, y, en el caso del confucianismo, comparativamente poco interés en cuestiones metafísicas en absoluto. El mormonismo y, en grados variables, algunas aplicaciones de la Nueva Era de conceptos hindúes y budistas estudiados en la Unidad 8, en realidad difuminan más esta categoría al describir a la deidad en términos personales pero radicalmente diferentes al Dios eterno e increado del teísmo clásico."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c2431c2ce2c9"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "A pastor should notice what this comparison reveals: the traditions closest to the biblical picture of a personal God who can be known, addressed, and trusted are precisely the traditions historically in closest geographic and theological proximity to the biblical revelation itself — Judaism, Islam, and Sikhism, each arising in direct relationship to, or conscious response to, the earlier Abrahamic tradition. The traditions describing ultimate reality as impersonal or leaving the question open arose independently of that revelation, in South and East Asia. This is not proof of anything by itself, but it is a pattern worth noticing: proximity to God's self-revelation in Scripture correlates, across this entire survey, with a picture of ultimate reality closer to what Scripture itself teaches.",
+    "es": "Un pastor debe notar lo que revela esta comparación: las tradiciones más cercanas al cuadro bíblico de un Dios personal que puede ser conocido, dirigido, y confiado son precisamente las tradiciones históricamente en más cercana proximidad geográfica y teológica a la revelación bíblica misma — el judaísmo, el islam, y el sijismo, cada uno surgiendo en relación directa con, o respuesta consciente a, la tradición abrahámica anterior. Las tradiciones que describen la realidad última como impersonal o dejan la pregunta abierta surgieron independientemente de esa revelación, en el sur y este de Asia. Esto no es prueba de nada por sí mismo, pero es un patrón que vale la pena notar: la proximidad a la autorrevelación de Dios en la Escritura se correlaciona, a través de todo este estudio, con un cuadro de la realidad última más cercano a lo que la Escritura misma enseña."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b7e65eb6ebf2"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "Romans 1:19-21, examined already in Unit 1, offers a theological explanation for why even the traditions farthest from biblical revelation retain some trace of a personal ultimate reality: what can be known of God is evident within every person, because God has shown it to them through creation itself. Even Buddhism's studied silence on the question, and Confucianism's redirection of attention away from metaphysics toward ethics, can be read not as the absence of this universal awareness but as a particular culture's chosen response to it — a decision to set the question aside rather than evidence the awareness was never there to begin with.",
+    "es": "Romanos 1:19-21, examinado ya en la Unidad 1, ofrece una explicación teológica de por qué incluso las tradiciones más alejadas de la revelación bíblica conservan algún rastro de una realidad última personal: lo que se puede conocer de Dios se manifiesta en cada persona, porque Dios se lo ha manifestado a través de la creación misma. Incluso el silencio estudiado del budismo sobre la pregunta, y la redirección de la atención del confucianismo lejos de la metafísica hacia la ética, pueden leerse no como la ausencia de esta conciencia universal sino como la respuesta elegida de una cultura particular a ella — una decisión de dejar de lado la pregunta en lugar de evidencia de que la conciencia nunca estuvo allí para empezar."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3e8689d1b08f"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "heading",
+   "text": {
+    "en": "II. The Human Problem and Its Solution",
+    "es": "II. El problema humano y su solución"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c65ba51a062e"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "Scripture's diagnosis is sin: rebellion against a holy, personal God, inherited from Adam and compounded by every individual's own choices, incurring real guilt that only God Himself can remove (Romans 3:23; 5:12). Judaism and Islam share substantial agreement with this diagnosis in broad outline, though each, having lost or never received the doctrine of a substitutionary atonement sufficient for that guilt, developed alternative means of addressing it — rabbinic Judaism through prayer, repentance, and charity following the Temple's destruction, as Unit 2 examined, and Islam through submission, good deeds, and Allah's uncertain mercy, as Unit 3 examined.",
+    "es": "El diagnóstico de la Escritura es el pecado: rebelión contra un Dios santo y personal, heredada de Adán y agravada por las propias decisiones de cada individuo, incurriendo culpa real que solo Dios mismo puede quitar (Romanos 3:23; 5:12). El judaísmo y el islam comparten un acuerdo sustancial con este diagnóstico en líneas generales, aunque cada uno, habiendo perdido o nunca recibido la doctrina de una expiación sustitutoria suficiente para esa culpa, desarrolló medios alternativos para abordarla — el judaísmo rabínico a través de la oración, el arrepentimiento, y la caridad tras la destrucción del Templo, como examinó la Unidad 2, y el islam a través de la sumisión, las buenas obras, y la incierta misericordia de Alá, como examinó la Unidad 3."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "03a916c1c020"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "Hinduism and Buddhism, by contrast, relocate the fundamental problem away from guilt before a personal God altogether. Hindu thought identifies the problem as ignorance of one's true identity with Brahman, or, more broadly, the accumulated karma binding the soul to samsara; Buddhism identifies it as tanha, craving, the grasping attachment that produces suffering. Neither system, in its classical form, understands the human problem primarily as an offense requiring forgiveness from a personal God; both understand it as a condition requiring correct insight and disciplined practice to overcome. Sikhism occupies a middle position, sharing Hindu vocabulary of karma while locating the solution in devoted remembrance of a personal God rather than philosophical insight alone. Chinese tradition, particularly Confucianism, locates the human problem chiefly in disordered relationships and neglected virtue, addressed through moral cultivation and right ritual rather than any doctrine of sin against a transcendent God at all.",
+    "es": "El hinduismo y el budismo, por el contrario, reubican el problema fundamental lejos de la culpa delante de un Dios personal por completo. El pensamiento hindú identifica el problema como ignorancia de la propia identidad verdadera con Brahman, o, más ampliamente, el karma acumulado que ata al alma al samsara; el budismo lo identifica como tanha, el anhelo, el apego aferrado que produce sufrimiento. Ninguno de los dos sistemas, en su forma clásica, entiende el problema humano principalmente como una ofensa que requiere perdón de un Dios personal; ambos lo entienden como una condición que requiere intuición correcta y práctica disciplinada para superar. El sijismo ocupa una posición intermedia, compartiendo el vocabulario hindú del karma mientras ubica la solución en el recuerdo devoto de un Dios personal en lugar de la intuición filosófica sola. La tradición china, particularmente el confucianismo, ubica el problema humano principalmente en las relaciones desordenadas y la virtud descuidada, abordado a través del cultivo moral y el ritual correcto en lugar de cualquier doctrina de pecado contra un Dios trascendente en absoluto."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bda2de73d5fc"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "This comparison exposes something Scripture alone supplies: every other tradition studied in this course locates the ultimate solution, in the end, within the practitioner's own effort — insight to be attained, karma to be worked off, virtue to be cultivated, submission to be rendered, deeds to be weighed favorably. Even where grace or mercy appears, as it does within Islam, Sikhism, Pure Land Buddhism's reliance on Amida's vow, and the bhakti devotional traditions of Hinduism, it remains uncertain, never guaranteed in advance to any specific individual the way the gospel guarantees it. Scripture alone offers a solution accomplished entirely outside the sinner, finished and guaranteed: \"while we were still sinners, Christ died for us\" (Romans 5:8), received by faith rather than achieved by effort (Ephesians 2:8-9).",
+    "es": "Esta comparación expone algo que solo la Escritura suministra: cada otra tradición estudiada en este curso ubica la solución última, al final, dentro del propio esfuerzo del practicante — intuición por alcanzar, karma por saldar, virtud por cultivar, sumisión por rendir, obras por ser pesadas favorablemente. Incluso donde aparece la gracia o la misericordia, como ocurre dentro del islam, el sijismo, la confianza del budismo de la Tierra Pura en el voto de Amida, y las tradiciones devocionales bhakti del hinduismo, permanece incierta, nunca garantizada de antemano a ningún individuo específico como lo garantiza el evangelio. Solo la Escritura ofrece una solución lograda enteramente fuera del pecador, terminada y garantizada: \"mas Dios muestra su amor para con nosotros, en que siendo aún pecadores, Cristo murió por nosotros\" (Romanos 5:8), recibida por fe en lugar de lograda por esfuerzo (Efesios 2:8-9)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "dc1bbb12d0df"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "heading",
+   "text": {
+    "en": "III. The Path: Effort, Ritual, Grace, and the Question of Certainty",
+    "es": "III. El camino: Esfuerzo, ritual, gracia, y la cuestión de la certeza"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "84309f0dae28"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "Closely tied to how each tradition diagnoses the human problem is how each tradition answers the third framework question: what is the path out of it? Surveying the paths this course has studied reveals a further pattern worth a pastor's attention. Islam's Five Pillars, Sikhism's Five Ks and simran, Confucian ritual propriety, and Hindu bhakti devotion all supply concrete, disciplined practices a sincere adherent can perform, measure, and repeat — a structure with genuine appeal, since it gives the anxious heart something definite to do. Buddhism's Eightfold Path and Hindu jnana yoga instead emphasize inward transformation of perception itself, a path requiring not merely effort but a fundamentally altered way of seeing reality. What every one of these paths shares, however different their outward form, is that none offers the practitioner settled certainty of a favorable outcome this side of death; karma may yet be unresolved, deeds may yet be found wanting, insight may yet be incomplete.",
+    "es": "Estrechamente ligado a cómo cada tradición diagnostica el problema humano está cómo cada tradición responde la tercera pregunta del marco: ¿cuál es el camino para salir de él? Estudiar los caminos que este curso ha examinado revela un patrón adicional que merece la atención de un pastor. Los Cinco Pilares del islam, las Cinco Kas y el simran del sijismo, la propiedad ritual confuciana, y la devoción bhakti hindú suministran todos prácticas concretas y disciplinadas que un adherente sincero puede realizar, medir, y repetir — una estructura con atractivo genuino, ya que le da al corazón ansioso algo definido que hacer. El Óctuple Sendero budista y el jnana yoga hindú en cambio enfatizan la transformación interior de la percepción misma, un camino que requiere no meramente esfuerzo sino una forma fundamentalmente alterada de ver la realidad. Lo que cada uno de estos caminos comparte, por diferente que sea su forma exterior, es que ninguno le ofrece al practicante certeza establecida de un resultado favorable de este lado de la muerte; el karma puede seguir sin resolver, las obras pueden resultar deficientes, la intuición puede quedar incompleta."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8bec3a6d1408"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "The gospel's path stands apart precisely at this point of certainty. First John 5:13 states plainly that Scripture was written \"that you may know that you have eternal life\" — not hope tentatively, not calculate probabilistically, but know, in the present tense, before death, on the basis of a finished work rather than an ongoing performance. This is not a minor pastoral footnote; it is one of the sharpest practical differences a pastor can draw out in conversation with an adherent of nearly any tradition studied in this course, since the anxious uncertainty built into karma, weighed deeds, or unfinished spiritual attainment is something Scripture names directly and resolves directly, rather than leaving unaddressed.",
+    "es": "El camino del evangelio se distingue precisamente en este punto de certeza. Primera de Juan 5:13 declara claramente que la Escritura fue escrita \"para que sepáis que tenéis vida eterna\" — no esperar tentativamente, no calcular probabilísticamente, sino saber, en tiempo presente, antes de la muerte, sobre la base de una obra terminada en lugar de un desempeño continuo. Esta no es una nota pastoral menor; es una de las diferencias prácticas más agudas que un pastor puede señalar en conversación con un adherente de casi cualquier tradición estudiada en este curso, ya que la incertidumbre ansiosa incorporada en el karma, las obras pesadas, o la intuición espiritual inconclusa es algo que la Escritura nombra directamente y resuelve directamente, en lugar de dejarlo sin abordar."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f02a82f155d7"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "heading",
+   "text": {
+    "en": "IV. Ultimate Destiny: Resurrection, Absorption, Rebirth, and Extinction",
+    "es": "IV. Destino último: Resurrección, absorción, renacimiento, y extinción"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "80fd54d39836"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "Scripture teaches bodily resurrection and everlasting, conscious fellowship with God for believers, following a single, decisive, unrepeatable judgment (Hebrews 9:27; 1 Corinthians 15:20-23). This picture of history moving in a straight line toward one decisive conclusion stands in sharp contrast to nearly every other tradition studied in this course. Hinduism and Sikhism envision samsara, a cycle of rebirth extending across countless lifetimes, with liberation understood variously as absorption into Brahman or union with a personal deity, but in either case an escape from, rather than a resurrection into, embodied personal existence as we now know it. Buddhism, more radically still, denies any permanent self persists at all, so that its goal, nirvana, cannot even be described as the self reaching any destination — Unit 5 examined at length why this makes nirvana genuinely difficult to translate into terms a Christian congregation will readily grasp.",
+    "es": "La Escritura enseña la resurrección corporal y la comunión eterna y consciente con Dios para los creyentes, siguiendo un juicio único, decisivo, e irrepetible (Hebreos 9:27; 1 Corintios 15:20-23). Este cuadro de la historia moviéndose en línea recta hacia una conclusión decisiva contrasta agudamente con casi cualquier otra tradición estudiada en este curso. El hinduismo y el sijismo visualizan el samsara, un ciclo de renacimiento que se extiende a través de innumerables vidas, con la liberación entendida de diversas maneras como absorción en Brahman o unión con una deidad personal, pero en cualquier caso un escape de, en lugar de una resurrección hacia, la existencia personal encarnada tal como ahora la conocemos. El budismo, más radicalmente todavía, niega que persista ningún yo permanente en absoluto, de modo que su meta, el nirvana, ni siquiera puede describirse como el yo alcanzando algún destino — la Unidad 5 examinó extensamente por qué esto hace que el nirvana sea genuinamente difícil de traducir a términos que una congregación cristiana captará fácilmente."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cf448fe6fffe"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "Jehovah's Witnesses, examined in Unit 8, offer a modified picture: most believers hope for resurrection to a restored paradise earth, a picture that echoes the biblical hope of bodily existence more closely than Hindu or Buddhist categories do, while denying the full deity of the One who secures that hope and reserving genuine heavenly fellowship with God for a small, fixed number. Chinese folk religion, examined in Unit 6, envisions the dead continuing in some diminished form dependent on the ongoing devotion of living descendants — a picture with genuine pathos but no promise of final, glorious resurrection. Across this entire comparison, the biblical hope stands out as uniquely definite: one death, one resurrection, one eternal destiny secured not by the believer's own spiritual attainment but by the historical fact of Christ's own bodily resurrection, \"the firstfruits of those who have fallen asleep\" (1 Corinthians 15:20).",
+    "es": "Los Testigos de Jehová, examinados en la Unidad 8, ofrecen un cuadro modificado: la mayoría de los creyentes esperan la resurrección a una tierra paraíso restaurada, un cuadro que hace eco de la esperanza bíblica de la existencia corporal más de cerca que las categorías hindúes o budistas, mientras niegan la plena deidad de Aquel que asegura esa esperanza y reservan la comunión celestial genuina con Dios para un número pequeño y fijo. La religión popular china, examinada en la Unidad 6, visualiza a los muertos continuando en alguna forma disminuida dependiente de la devoción continua de los descendientes vivos — un cuadro con patetismo genuino pero sin promesa de resurrección final y gloriosa. A través de toda esta comparación, la esperanza bíblica se destaca como singularmente definida: una muerte, una resurrección, un destino eterno asegurado no por el propio logro espiritual del creyente sino por el hecho histórico de la propia resurrección corporal de Cristo, \"primicias de los que durmieron\" (1 Corintios 15:20)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "79cf3718ab2c"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "heading",
+   "text": {
+    "en": "V. Why the Biblical Picture Is Not Simply One Option Among Equals",
+    "es": "V. Por qué el cuadro bíblico no es simplemente una opción entre iguales"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9e9bcf57e4f3"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "Having traced these comparisons honestly, a pastor is now equipped to explain, rather than merely assert, why Scripture's claim to uniqueness in Acts 4:12 is not the arrogant sectarianism a skeptic might assume it to be. Three features of the biblical picture, taken together, appear nowhere else across this entire survey. First, only Scripture presents ultimate reality as both fully personal and fully transcendent — not Brahman's impersonal ground, not the Tao's impersonal pattern, not Buddhism's studied silence, but a God who speaks, who names Himself, who enters covenant with particular people at particular moments in real history. Second, only the biblical gospel offers a solution to the human problem accomplished entirely outside the sinner's own effort, finished at a single point in verifiable history rather than accumulated across philosophical insight, ritual performance, or countless further lifetimes. Third, only Scripture promises a destiny that is neither absorption into an impersonal whole nor an endless cycle of further striving, but the restoration and glorification of the very personal identity God created in the beginning — you, resurrected, known, and knowing, forever (1 Corinthians 13:12).",
+    "es": "Habiendo rastreado estas comparaciones con honestidad, un pastor ahora está equipado para explicar, en lugar de meramente afirmar, por qué la afirmación de singularidad de la Escritura en Hechos 4:12 no es el sectarismo arrogante que un escéptico podría suponer que es. Tres características del cuadro bíblico, tomadas juntas, no aparecen en ningún otro lugar a través de todo este estudio. Primero, solo la Escritura presenta la realidad última como plenamente personal y plenamente trascendente a la vez — no el fundamento impersonal de Brahman, no el patrón impersonal del Tao, no el silencio estudiado del budismo, sino un Dios que habla, que se nombra a sí mismo, que entra en pacto con personas particulares en momentos particulares de la historia real. Segundo, solo el evangelio bíblico ofrece una solución al problema humano lograda enteramente fuera del propio esfuerzo del pecador, terminada en un solo punto de la historia verificable en lugar de acumulada a través de intuición filosófica, desempeño ritual, o innumerables vidas futuras. Tercero, solo la Escritura promete un destino que no es ni la absorción en un todo impersonal ni un ciclo interminable de esfuerzo adicional, sino la restauración y glorificación de la misma identidad personal que Dios creó en el principio — usted, resucitado, conocido, y conociendo, para siempre (1 Corintios 13:12)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c354571f01da"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "prose",
+   "text": {
+    "en": "This is why the comparative work of this unit, rightly done, does not flatten Christianity into one spiritual option among many equally valid paths up the same mountain, the picture pluralism proposes and that Unit 1 already identified as incompatible with what Jesus and the apostles actually taught. It instead does what Paul modeled at the Areopagus from the very first unit of this course: takes seriously every genuine insight and honest instinct present across humanity's long search for God, while proclaiming clearly that the search has, in fact, been answered — not by a technique, a philosophy, or a superior teacher, but by God Himself, entering history, dying, and rising, so that \"whoever calls on the name of the LORD shall be saved\" (Romans 10:13).",
+    "es": "Esto es por qué el trabajo comparativo de esta unidad, hecho correctamente, no aplana al cristianismo en una opción espiritual más entre muchos caminos igualmente válidos hacia la misma montaña, el cuadro que propone el pluralismo y que la Unidad 1 ya identificó como incompatible con lo que Jesús y los apóstoles realmente enseñaron. En cambio, hace lo que Pablo modeló en el Areópago desde la primera unidad de este curso: toma en serio cada intuición genuina e instinto honesto presente a través de la larga búsqueda de Dios por parte de la humanidad, mientras proclama claramente que la búsqueda ha sido, de hecho, respondida — no por una técnica, una filosofía, o un maestro superior, sino por Dios mismo, entrando en la historia, muriendo, y resucitando, para que \"todo aquel que invocare el nombre del Señor, será salvo\" (Romanos 10:13)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1000ef161e09"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "prose",
+   "text": {
+    "en": "The pastoral value of this comparative unit, finally, is practical rather than merely academic. A pastor who can name precisely where Sikhism's monotheism echoes Scripture, where Buddhism's diagnosis of suffering rings true even as its cure falls short, where Confucian filial piety fulfills rather than contradicts the fifth commandment, and where every system studied ultimately asks the sinner to secure his own destiny through effort Scripture says he cannot supply, is a pastor equipped to do exactly what this entire course was designed to prepare him for: to walk into any conversation, with any neighbor, holding any belief, and do what Paul did on Mars Hill — listen first, honor what is true, and then proclaim, without apology, the one name given under heaven by which we must be saved.",
+    "es": "El valor pastoral de esta unidad comparativa, finalmente, es práctico más que meramente académico. Un pastor que puede nombrar precisamente dónde el monoteísmo del sijismo hace eco de la Escritura, dónde el diagnóstico budista del sufrimiento suena verdadero aunque su cura se quede corta, dónde la piedad filial confuciana cumple en lugar de contradecir el quinto mandamiento, y dónde cada sistema estudiado en última instancia le pide al pecador que asegure su propio destino a través de un esfuerzo que la Escritura dice que no puede suministrar, es un pastor equipado para hacer exactamente aquello para lo cual este curso entero fue diseñado a prepararlo: entrar en cualquier conversación, con cualquier vecino, que sostenga cualquier creencia, y hacer lo que Pablo hizo en el Areópago — escuchar primero, honrar lo que es verdadero, y luego proclamar, sin disculpa, el único nombre dado bajo el cielo por el cual debemos ser salvos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8cf5cef0f409"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "prose",
+   "text": {
+    "en": "— Dr. Wayne Cook<br>Chapala Theological Seminary",
+    "es": "— Dr. Wayne Cook<br>Seminario Teológico de Chapala"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7778fcb9bb8c"
+    }
+   }
+  },
+  {
+   "id": "b037",
+   "type": "prose",
+   "text": {
+    "en": "Unit 9 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 9 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c78e1ede3819"
+    }
+   }
+  },
+  {
+   "id": "b038",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. <strong>If you fail, the unit locks for 15 minutes.</strong>",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. <strong>Si reprueba, se bloquea por 15 minutos.</strong>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d3b8e78884d7"
+    }
+   }
+  },
+  {
+   "id": "b039",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar &amp; Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b040",
+   "type": "prose",
+   "text": {
+    "en": "Reset",
+    "es": "Reiniciar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "44c57abd888a"
+    }
+   }
+  }
+ ]
+}

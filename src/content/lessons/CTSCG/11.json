@@ -1,0 +1,404 @@
+{
+ "course": "CTSCG",
+ "unit": 11,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Unit 12 →</button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #2f4f2f;\"><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\">\n    <h2><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></p>\n    <input type=\"text\" id=\"regName\" placeholder=\"Full name / Nombre completo\" aria-label=\"Full name / Nombre completo\">\n    <input type=\"email\" id=\"regEmail\" placeholder=\"Email\" aria-label=\"Email\">\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate Track</option>\n        <option value=\"mdiv\">Master of Divinity (M.Div.) Track</option>\n        <option value=\"thm\">Master of Theology (Th.M.) Track</option>\n    </select>\n    <button class=\"nav-btn\" id=\"regBtn\"><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\">\n\n<p><!--cts:b008:en--></p>\n<p><!--cts:b009:en--></p>\n<p><!--cts:b010:en--></p>\n<p><!--cts:b011:en--></p>\n<p><!--cts:b012:en--></p>\n<p><!--cts:b013:en--></p>\n<p><!--cts:b014:en--></p>\n<p><!--cts:b015:en--></p>\n<p><!--cts:b016:en--></p>\n<p><!--cts:b017:en--></p>\n<p><!--cts:b018:en--></p>\n<p><!--cts:b019:en--></p>\n<p><!--cts:b020:en--></p>\n<h2 id=\"where-we-are-now-2026\"><!--cts:b021:en--></h2>\n<p><!--cts:b022:en--></p>\n<p><!--cts:b023:en--></p>\n<p><!--cts:b024:en--></p>\n\n</div>\n<div class=\"lang-es\">\n\n<p><!--cts:b008:es--></p>\n\n<p><!--cts:b009:es--></p>\n\n<p><!--cts:b010:es--></p>\n\n<p><!--cts:b011:es--></p>\n\n<p><!--cts:b012:es--></p>\n\n<p><!--cts:b013:es--></p>\n\n<p><!--cts:b014:es--></p>\n\n<p><!--cts:b015:es--></p>\n\n<p><!--cts:b016:es--></p>\n\n<p><!--cts:b017:es--></p>\n\n<p><!--cts:b018:es--></p>\n\n<p><!--cts:b019:es--></p>\n\n<p><!--cts:b020:es--></p>\n\n<h2><!--cts:b021:es--></h2>\n\n<p><!--cts:b022:es--></p>\n\n<p><!--cts:b023:es--></p>\n\n<p><!--cts:b024:es--></p>\n\n</div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b025:en--></span><span class=\"lang-es\"><!--cts:b025:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b026:en--></span>\n       <span class=\"lang-es\"><!--cts:b026:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b027:en--></span><span class=\"lang-es\"><!--cts:b027:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b028:en--></span><span class=\"lang-es\"><!--cts:b028:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSCGReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📈 Church Growth — Unit 11: Discipleship",
+    "es": "📈 Crecimiento de la Iglesia — Unidad 11: El Discipulado"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "41308c30bcd6"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "\"Go therefore and make disciples of all the nations.\" — Matthew 28:19 (NKJV)",
+    "es": "\"Por tanto, id, y haced discípulos a todas las naciones.\" — Mateo 28:19 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7fc711cf2ae5"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "📝 Course Registration",
+    "es": "📝 Registro del Curso"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fde900fe006b"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Welcome to the Church Growth course. Please register before beginning Unit 11.",
+    "es": "Bienvenido al curso Crecimiento de la Iglesia. Por favor registrese antes de comenzar la Unidad 11."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "67763fd2e119"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "We come now to the unit the whole course has been leaning toward. We\nhave spoken of gathering people — through worship, through the screen,\nthrough the small group — but gathering was never the goal. The Lord did\nnot commission us to make decisions, to fill rooms, or to produce casual\nbelievers and church attenders. He commissioned us to <em>make\ndisciples</em> (Matthew 28:19). That one word governs everything. A\nchurch may gather a great crowd and still fail its commission utterly,\nif the crowd never becomes disciples. And here, in truth, is the root of\nthe dechurching we have traced: we became expert at gathering attenders\nand never made them disciples, and an attender, untaught and unrooted,\ndrifts away at the first change of weather. The cure for the open back\ndoor is not a better front door. It is discipleship.",
+    "es": "Llegamos ahora a la unidad hacia la cual todo el curso se ha estado inclinando. Hemos hablado de reunir a la gente — por la adoración, por la pantalla, por el grupo pequeño — pero reunir nunca fue la meta. El Señor no nos comisionó a hacer decisiones, a llenar salones, ni a producir creyentes casuales y asistentes. Nos comisionó a <em>hacer discípulos</em> (Mateo 28:19). Esa sola palabra gobierna todo. Una iglesia puede reunir una gran multitud y aun fallar su comisión por completo, si la multitud nunca se vuelve discípulos. Y aquí, en verdad, está la raíz del abandono que hemos trazado: nos volvimos expertos en reunir asistentes y nunca los hicimos discípulos, y un asistente, sin enseñanza y sin raíces, se aleja al primer cambio de clima. La cura para la puerta de atrás abierta no es una mejor puerta de entrada. Es el discipulado."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a311e86836a1"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "So we must learn from the Master Discipler Himself.",
+    "es": "Así que debemos aprender del Maestro Discipulador mismo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7525c68bcd2d"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "<strong>How Jesus made disciples.</strong> The first thing to see is\nthe most easily missed: He called the Twelve, Mark says, <em>that they\nmight be with Him</em> (Mark 3:14). Before they were sent, before they\npreached or healed, they were simply <em>with</em> Him. Discipleship\nbegan not with a curriculum but with a Presence — three years of shared\nroad and shared table, of watching how He prayed and how He treated a\nleper and how He answered a trap. We have too often reduced discipleship\nto a class and a workbook; He made it a life lived alongside a life.",
+    "es": "<strong>Como Jesús hizo discípulos.</strong> Lo primero que hay que ver es lo que más fácil se pasa por alto: llamó a los Doce, dice Marcos, <em>para que estuviesen con Él</em> (Marcos 3:14). Antes de ser enviados, antes de predicar o sanar, sencillamente estaban <em>con</em> El. El discipulado comenzó no con un currículo sino con una Presencia — tres años de camino compartido y mesa compartida, de observar como oraba y como trataba a un leproso y como respondía a una trampa. Con demasiada frecuencia hemos reducido el discipulado a una clase y un cuaderno; El lo hizo una vida vivida junto a una vida."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "68b6f5377251"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "See, too, that He went <em>deep</em> rather than wide. He preached to\nthousands, but He poured Himself into twelve, and within the twelve into\nthree. He was building not an audience but a nucleus, knowing that a few\nthoroughly formed would outlast a multitude lightly touched. He taught\nin the teachable moment — a coin, a fig tree, a child set in the midst —\nand He taught by <em>question</em> as much as by lecture: “Who do you\nsay that I am?” He did not hand them conclusions; He drew the truth up\nout of them. And He taught by <em>sending:</em> He showed them, then\nsent them out two by two to do it themselves, then gathered them back to\nreckon with what had happened. Show, send, debrief — that is how a skill\nbecomes a life.",
+    "es": "Vea, también, que fue a lo <em>hondo</em> en vez de a lo ancho. Predicó a miles, pero se vertió en doce, y dentro de los doce en tres. Estaba construyendo no un público sino un núcleo, sabiendo que unos pocos formados a fondo durarían más que una multitud tocada a la ligera. Enseñó en el momento enseñable — una moneda, una higuera, un niño puesto en medio — y enseñó por <em>pregunta</em> tanto como por conferencia: \"¿Quién decís que soy yo?\" No les entregó conclusiones; sacó la verdad de dentro de ellos. Y enseñó <em>enviando:</em> les mostró, luego los envió de dos en dos a hacerlo ellos mismos, luego los reunió de vuelta para dar cuenta de lo que había pasado. Mostrar, enviar, evaluar — así es como una destreza se vuelve una vida."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "39d9426b8786"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "And He never hid the <em>cost.</em> “If anyone would come after me,\nlet him deny himself and take up his cross and follow me” (Luke 9:23).\nThere was nothing casual in His call; He spoke of a yoke, a cross, a\nnarrow gate, and He let the crowds thin when the saying grew hard. The\naim of it all was <em>transformation</em> — “a disciple is not above his\nteacher, but everyone when he is fully trained will be like his teacher”\n(Luke 6:40) — Christ formed in a person until the life begins to\nresemble the One who made it. And then, the last move and the whole\npoint: He made disciples who would <em>make disciples.</em> “Go and make\ndisciples,” He said, and the chain has run unbroken ever since — what He\npoured into twelve, they poured into others, who taught others still (2\nTimothy 2:2). Discipleship that does not reproduce is not yet finished\ndiscipleship.",
+    "es": "Y nunca escondió el <em>costo.</em> \"Si alguno quiere venir en pos de mí, niéguese a sí mismo, y tome su cruz, y sígame\" (Lucas 9:23). No había nada casual en Su llamado; habló de un yugo, una cruz, una puerta estrecha, y dejó menguar a las multitudes cuando el dicho se hizo duro. La meta de todo era la <em>transformación</em> — \"el discípulo no es superior a su maestro; más todo el que fuere perfeccionado, será como su maestro\" (Lucas 6:40) — Cristo formado en una persona hasta que la vida comienza a parecerse a Aquel que la hizo. Y luego, el último movimiento y el punto entero: hizo discípulos que <em>harían discípulos.</em> \"Id y haced discípulos,\" dijo, y la cadena ha corrido sin romperse desde entonces — lo que vertió en doce, ellos lo vertieron en otros, que enseñaron a otros aun (2 Timoteo 2:2). El discipulado que no se reproduce no es aun discipulado terminado."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf843164a027"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "<strong>The most effective way to do it.</strong> A student may grant\nall of this and still ask the honest question: <em>so what do I actually\ndo Monday morning?</em> The answer, by both the example of the Master\nand the witness of our own day, is simpler than our programs have led us\nto believe. The most effective discipleship is <em>relational, and it\nreproduces.</em> It is not first a class, a curriculum, or a screen; it\nis one maturing believer walking life beside a few others, with the open\nintention that those few will soon go and do the same. A life beside a\nlife — that is the method that outperforms all the rest.",
+    "es": "<strong>La manera más eficaz de hacerlo.</strong> Un estudiante puede conceder todo esto y aún hacer la pregunta honesta: <em>¿entonces qué hago de veras el lunes por la mañana?</em> La respuesta, por el ejemplo del Maestro y el testimonio de nuestros propios días, es más simple de lo que nuestros programas nos han hecho creer. El discipulado más eficaz es <em>relacional, y se reproduce.</em> No es primero una clase, un currículo o una pantalla; es un creyente que madura caminando la vida junto a unos pocos otros, con la intención abierta de que esos pocos pronto vayan y hagan lo mismo. Una vida junto a una vida — ese es el método que supera a todos los demás."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "349692b56eaa"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "prose",
+   "text": {
+    "en": "The proven shape is a <em>small, reproducing group</em> — not merely\none-on-one, but three or four together. Larger than a pair, so it does\nnot collapse when one person is away and so it already feels like a\nlittle body; small enough that no one can hide. Such a group runs on\nfour plain engines. The <em>Word,</em> read and obeyed together.\n<em>Accountability</em> honest enough to ask, “How is it really with\nyour soul?” <em>Prayer,</em> for and with one another. And\n<em>multiplication</em> — the settled expectation that within a year or\ntwo each person will start a group of his own. That fourth engine is the\none we always omit and the one that changes everything; without it a\ngroup becomes a cozy huddle that warms a few and reaches no one. With\nit, the chain runs on as the Lord designed: He poured into the Twelve,\nwho poured into others, who taught others still. “What you have heard\nfrom me… entrust to faithful men who will be able to teach others also”\n(2 Timothy 2:2) — four generations of disciples in a single verse.",
+    "es": "La forma probada es un <em>grupo pequeño y reproductor</em> — no meramente uno a uno, sino tres o cuatro juntos. Mayor que una pareja, para que no colapse cuando una persona falta y para que ya se sienta como un pequeño cuerpo; lo bastante pequeño para que nadie pueda esconderse. Tal grupo corre sobre cuatro motores llanos. La <em>Palabra,</em> leída y obedecida juntos. La <em>rendición de cuentas</em> lo bastante honesta para preguntar: \"¿Cómo está de veras tu alma?\" La <em>oración,</em> por y con unos y otros. Y la <em>multiplicación</em> — la expectativa asentada de que dentro de un año o dos cada persona iniciará un grupo propio. Ese cuarto motor es el que siempre omitimos y el que lo cambia todo; sin él un grupo se vuelve un corro acogedor que calienta a unos pocos y no alcanza a nadie. Con el, la cadena sigue corriendo como el Señor la diseñó: vertió en los Doce, que vertieron en otros, que enseñaron a otros aun. \"Lo que has oído de mí... esto encarga a hombres fieles que sean idóneos para enseñar también a otros\" (2 Timoteo 2:2) — cuatro generaciones de discípulos en un solo versículo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bdc1ac189254"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "Hear clearly what this does and does not say. The classes, the\nfoundations course, the online teaching, the Sunday sermon — these are\ngood and useful, but they are <em>scaffolding,</em> not the building.\nThey feed the relationship; they cannot replace it. The great mistake of\nthe last generation was to mistake the scaffolding for the house — to\nrun the classes and fill the rooms and assume that disciples were being\nmade. They were not. Disciples are made the way they have always been\nmade, the way the Lord first made them: <em>find a few, walk with them,\nand send them to find a few of their own.</em>",
+    "es": "Oiga con claridad lo que esto dice y no dice. Las clases, el curso de fundamentos, la enseñanza en línea, el sermón dominical — son buenos y útiles, pero son <em>andamio,</em> no el edificio. Alimentan la relación; no pueden reemplazarla. El gran error de la última generación fue confundir el andamio con la casa — correr las clases y llenar los salones y suponer que se estaban haciendo discípulos. No se estaban haciendo. Los discípulos se hacen como siempre se han hecho, como el Señor primero los hizo: <em>halle a unos pocos, camine con ellos, y envíelos a hallar a unos pocos propios.</em>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "99f2137d46a9"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Grounding a believer in the faith and into a church.</strong>\nBring that down to the new believer in your own congregation, the one\nwho has just trusted Christ — and who will, statistically, drift away\nwithin a year or two unless something holds him. Our task is to\n<em>ground</em> him, and the word has two directions. He must be rooted\n<em>in the faith</em> — the vertical — and rooted <em>into the\nchurch</em> — the horizontal. Neglect either and he will not stand.",
+    "es": "<strong>Cimentar a un creyente en la fe y en una iglesia.</strong> Lleve eso al nuevo creyente en su propia congregación, el que acaba de confiar en Cristo — y que, estadísticamente, se alejara en un año o dos a menos que algo lo sostenga. Nuestra tarea es <em>cimentarlo,</em> y la palabra tiene dos direcciones. Debe ser arraigado <em>en la fe</em> — lo vertical — y arraigado <em>en la iglesia</em> — lo horizontal. Descuide cualquiera y no se sostendrá."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "dac92e915d1b"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "Rooted <em>in the faith</em> means he is no longer left to fend for\nhimself the moment he believes. He is given the next step, and then the\nnext: the Scriptures, until a man who may never have owned a Bible\nlearns to find his way through it and feed himself; prayer, taught and\nmodeled until it becomes his own; the basic doctrines, so his faith has\nbones and not only feelings; and the long, patient disciplines that, as\nthe old word has it, <em>form</em> a soul into the likeness of Christ\nrather than merely informing a mind about Him. Best of all, and most\nlike the Master, this happens not chiefly in a classroom but in a\nrelationship — one older believer walking life beside one younger, the\nwith-Him principle carried on in us.",
+    "es": "Arraigado <em>en la fe</em> significa que ya no se le deja valerse por sí mismo en el momento en que cree. Se le da el siguiente paso, y luego el siguiente: las Escrituras, hasta que un hombre que quizá nunca tuvo una Biblia aprende a hallar su camino por ella y alimentarse; la oración, enseñada y modelada hasta que se vuelve suya; las doctrinas básicas, para que su fe tenga huesos y no solo sentimientos; y las disciplinas largas y pacientes que, como dice la vieja palabra, <em>forman</em> un alma a la semejanza de Cristo en vez de meramente informar una mente acerca de Él. Lo mejor de todo, y lo más parecido al Maestro, esto ocurre no principalmente en un aula sino en una relación — un creyente mayor caminando la vida junto a uno más joven, el principio del estar-con-Él continuado en nosotros."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "45878539f9f1"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "Rooted <em>into the church</em> means he is brought into the body\nuntil he genuinely <em>belongs</em> — and here, by God’s design, the\nvery machinery of this course becomes the machinery of discipleship. He\nneeds <em>friends,</em> and not a few; he needs to be <em>missed</em>\nwhen he is absent and reached when he slips; he needs a <em>small\ncircle</em> where life is actually shared; he needs a <em>task,</em> a\nplace to use his gift so that he knows he is not a spectator but a\nmember with work to do. We will say in the next unit that a new member\nwho does not quickly make friends and find a role will leave — and that\nis simply discipleship described from the back door. Membership, rightly\nunderstood, is not consumer access to religious goods; it is covenant, a\njoining of oneself to a people. The same enrolling, missing, contacting,\ngift-deploying labor that grows a church is exactly what roots a\ndisciple — which is why discipleship is not one program among the\nchurch’s many, but the thread running through them all.",
+    "es": "Arraigado <em>en la iglesia</em> significa que es traído al cuerpo hasta que genuinamente <em>pertenece</em> — y aquí, por diseño de Dios, la maquinaria misma de este curso se vuelve la maquinaria del discipulado. Necesita <em>amigos,</em> y no pocos; necesita ser <em>extrañado</em> cuando falta y alcanzado cuando se desliza; necesita un <em>círculo pequeño</em> donde la vida de veras se comparta; necesita una <em>tarea,</em> un lugar para usar su don de modo que sepa que no es un espectador sino un miembro con trabajo que hacer. Diremos en la siguiente unidad que un nuevo miembro que no hace pronto amigos ni halla un papel se irá — y eso es sencillamente el discipulado descrito desde la puerta de atrás. La membresía, bien entendida, no es acceso de consumidor a bienes religiosos; es pacto, un unirse a un pueblo. El mismo trabajo de inscribir, extranar, contactar y desplegar dones que hace crecer una iglesia es exactamente lo que arraiga a un discípulo — por lo cual el discipulado no es un programa entre los muchos de la iglesia, sino el hilo que corre por todos ellos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e15f2c982923"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "So weigh the two side by side, the casual believer and the disciple,\nfor the difference is the difference between a church that leaks and a\nchurch that holds. The casual believer <em>consumes</em> — he attends\nwhen convenient, watches the screen, takes what he likes, and drifts\nwhen life shifts, and no one is the wiser. The disciple is <em>formed,\nbelongs, serves, and reproduces</em> — he is known and knows others, he\nhas a place and a task, he is being slowly changed into the image of\nChrist, and in time he becomes the one walking beside the next new\nbeliever. The first is the open back door we keep trying to close with\nbetter programs. The second <em>is</em> the door closed, from the\ninside, by love.",
+    "es": "Así que pese a ambos lado a lado, el creyente casual y el discípulo, pues la diferencia es la diferencia entre una iglesia que gotea y una iglesia que sostiene. El creyente casual <em>consume</em> — asiste cuando es conveniente, observa la pantalla, toma lo que le gusta, y se aleja cuando la vida cambia, y nadie se entera. El discípulo es <em>formado, pertenece, sirve y se reproduce</em> — es conocido y conoce a otros, tiene un lugar y una tarea, está siendo lentamente cambiado a la imagen de Cristo, y con el tiempo se vuelve el que camina junto al siguiente nuevo creyente. El primero es la puerta de atrás abierta que seguimos tratando de cerrar con mejores programas. El segundo <em>es</em> la puerta cerrada, desde adentro, por el amor."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "aaf206565b92"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "This is the unit toward which the whole course has been moving, and\nit can be said in a single line. The goal of church growth was never the\ncrowd. It was the disciple. <em>Make disciples</em> — not casual\nbelievers, not mere attenders — and the crowd, the health, and the\nstaying power will follow; aim at the crowd alone, and you will lose\neven that.",
+    "es": "Esta es la unidad hacia la cual todo el curso se ha estado moviendo, y puede decirse en una sola línea. La meta del crecimiento de la iglesia nunca fue la multitud. Fue el discípulo. <em>Haga discípulos</em> — no creyentes casuales, no meros asistentes — y la multitud, la salud y el poder de permanecer seguirán; apunte a la multitud sola, y perderá aun eso."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7cce1d603448"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "heading",
+   "text": {
+    "en": "Where We Are Now (2026)",
+    "es": "Dónde Estamos Ahora (2026)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ce032d8b1f1b"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "If there is one word the whole movement has circled back to in these\nlast years, it is this one. After a long season of counting decisions\nand attendance, the church has been driven — by the dechurching, by its\nown hard self-examination — to remember that the Commission said\n<em>make disciples,</em> and that we had been making something else. The\nrecovery of discipleship and spiritual formation is the most hopeful\nturn of our moment, and it is, at bottom, a return to the very thing the\nMaster did at the beginning.",
+    "es": "Si hay una palabra a la que todo el movimiento ha regresado en estos últimos años, es esta. Tras una larga temporada de contar decisiones y asistencia, la iglesia ha sido llevada — por el abandono, por su propio duro autoexamen — a recordar que la Comisión dijo <em>haced discípulos,</em> y que habíamos estado haciendo otra cosa. La recuperación del discipulado y la formación espiritual es el giro más esperanzador de nuestro momento, y es, en el fondo, un regreso a lo mismo que el Maestro hizo al principio."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d819fb71f5de"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "The tools have multiplied, and rightly used they are a gift: a church\ncan now track every new believer’s next step so that no one quietly\nfalls through; it can carry teaching to a phone in a pocket; it can\nconnect a mentor and a young believer across any distance. But here the\nwarning of the digital unit returns with full force. Information is not\nformation. A library of online teaching can fill a head while leaving a\nlife untouched and a soul un-companioned, and a disciple has never yet\nbeen mass-produced through a screen. The screen can deliver the\n<em>content;</em> it cannot be the <em>community,</em> and it was always\nin the community — with Him, and with one another — that disciples were\nmade. Use every new tool to serve the ancient pattern; never imagine the\ntool can replace it.",
+    "es": "Las herramientas se han multiplicado, y bien usadas son un don: una iglesia ahora puede rastrear el siguiente paso de cada nuevo creyente para que nadie caiga calladamente; puede llevar la enseñanza a un teléfono en un bolsillo; puede conectar a un mentor y a un joven creyente a cualquier distancia. Pero aquí la advertencia de la unidad digital vuelve con toda su fuerza. La información no es la formación. Una biblioteca de enseñanza en línea puede llenar una cabeza dejando una vida intacta y un alma sin compañía, y un discípulo jamás se ha producido en masa por una pantalla. La pantalla puede entregar el <em>contenido;</em> no puede ser la <em>comunidad,</em> y siempre fue en la comunidad — con Él, y unos con otros — donde se hacían los discípulos. Use cada herramienta nueva para servir al patrón antiguo; nunca imagine que la herramienta puede reemplazarlo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "58483c9680fe"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "For the pattern itself has not aged a day. A new generation, weary of\nspectacle and hungry for what is real, is quietly asking for exactly\nwhat Jesus offered the Twelve: not a better production, but a Presence;\nnot more content, but a life to walk beside. The church that will grow\nand <em>hold</em> in this dechurching age is not the one with the\nbrightest stage or the largest screen. It is the one that does the slow,\nunglamorous, deeply personal work the Master did on the roads of Galilee\n— being with people, and forming them, one life beside another, into\ndisciples who will go and do the same.",
+    "es": "Pues el patrón mismo no ha envejecido un día. Una nueva generación, cansada del espectáculo y hambrienta de lo que es real, pide calladamente exactamente lo que Jesús ofreció a los Doce: no una mejor producción, sino una Presencia; no más contenido, sino una vida junto a la cual caminar. La iglesia que crecerá y <em>sostendrá</em> en esta era de abandono no es la del escenario más brillante o la pantalla más grande. Es la que hace la obra lenta, sin gloria, profundamente personal que el Maestro hizo en los caminos de Galilea — estar con la gente, y formarla, una vida junto a otra, en discípulos que irán y harán lo mismo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "06b4993e2be6"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "Unit 11 Final Exam — 30 Questions",
+    "es": "Examen Final — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "308fac13cf5e"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. <strong>Fail the multiple-choice (1–20) and it locks for 2 minutes; fail the master's-level short answer (21–30) and it locks for 15 minutes.</strong>",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. <strong>Si reprueba la opción múltiple (1–20), se bloquea por 2 minutos; si reprueba la respuesta corta de nivel de maestría (21–30), se bloquea por 15 minutos.</strong>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ae2e1c03d51e"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

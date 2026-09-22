@@ -1,0 +1,404 @@
+{
+ "course": "CTSRev",
+ "unit": 14,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Unit 15 →</button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #2f4f2f;\"><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\">\n    <h2><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></p>\n    <input type=\"text\" id=\"regName\" placeholder=\"Full name / Nombre completo\" aria-label=\"Full name / Nombre completo\">\n    <input type=\"email\" id=\"regEmail\" placeholder=\"Email\" aria-label=\"Email\">\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate Track</option>\n        <option value=\"mdiv\">Master of Divinity (M.Div.) Track</option>\n        <option value=\"thm\">Master of Theology (Th.M.) Track</option>\n    </select>\n    <button class=\"nav-btn\" id=\"regBtn\"><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\">\n<p class=\"passage-label\"><!--cts:b008:en--></p>\n<div class=\"scripture\"><!--cts:b009:en--></div>\n\n<h3><!--cts:b010:en--></h3>\n<p><!--cts:b011:en--></p>\n\n<h3><!--cts:b012:en--></h3>\n<p><!--cts:b013:en--></p>\n\n<h3><!--cts:b014:en--></h3>\n<p><!--cts:b015:en--></p>\n\n<h3><!--cts:b016:en--></h3>\n<p><!--cts:b017:en--></p>\n\n<h3><!--cts:b018:en--></h3>\n<p><!--cts:b019:en--></p>\n\n<h3><!--cts:b020:en--></h3>\n<p><!--cts:b021:en--></p>\n\n<h3><!--cts:b022:en--></h3>\n<p><!--cts:b023:en--></p>\n<div class=\"scripture\"><!--cts:b024:en--></div>\n</div>\n\n<div class=\"lang-es\">\n<p class=\"passage-label\"><!--cts:b008:es--></p>\n<div class=\"scripture\"><!--cts:b009:es--></div>\n\n<h3><!--cts:b010:es--></h3>\n<p><!--cts:b011:es--></p>\n\n<h3><!--cts:b012:es--></h3>\n<p><!--cts:b013:es--></p>\n\n<h3><!--cts:b014:es--></h3>\n<p><!--cts:b015:es--></p>\n\n<h3><!--cts:b016:es--></h3>\n<p><!--cts:b017:es--></p>\n\n<h3><!--cts:b018:es--></h3>\n<p><!--cts:b019:es--></p>\n\n<h3><!--cts:b020:es--></h3>\n<p><!--cts:b021:es--></p>\n\n<h3><!--cts:b022:es--></h3>\n<p><!--cts:b023:es--></p>\n<div class=\"scripture\"><!--cts:b024:es--></div>\n</div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b025:en--></span><span class=\"lang-es\"><!--cts:b025:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b026:en--></span>\n       <span class=\"lang-es\"><!--cts:b026:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b027:en--></span><span class=\"lang-es\"><!--cts:b027:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b028:en--></span><span class=\"lang-es\"><!--cts:b028:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n  \n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSRevReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📖 Revelation Intensive — Unit 14: The Millennial Views — Amillennialism",
+    "es": "📖 Apocalipsis Intensivo — Unidad 14: Las Vistas Mileniales — Amilenialismo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "435b98115b7e"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "\"And I saw thrones, and they sat on them, and judgment was committed to them.\" — Revelation 20:4 (NKJV)",
+    "es": "\"Y vi tronos, y se sentaron sobre ellos, y les fue dado juicio.\" — Apocalipsis 20:4 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a1ecf449e7f3"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "📝 Course Registration",
+    "es": "📝 Registro del Curso"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fde900fe006b"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Welcome to the Revelation Intensive. Please register before beginning Unit 14.",
+    "es": "Bienvenido al Intensivo de Apocalipsis. Por favor regístrese antes de comenzar la Unidad 14."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7196645f467a"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "scripture",
+   "text": {
+    "en": "<strong>Text: Revelation 20:1-6</strong>",
+    "es": "<strong>Texto: Apocalipsis 20:1-6</strong>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c65e5576a190"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "scripture",
+   "text": {
+    "en": "\"He laid hold of the dragon, that serpent of old, who is the Devil and Satan, and bound him for a thousand years... so that he should deceive the nations no more.\" — Revelation 20:2-3 (NKJV)",
+    "es": "\"Prendió al dragón, la serpiente antigua, que es el diablo y Satanás, y lo ató por mil años... para que no engañe más a las naciones.\" — Apocalipsis 20:2-3 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "559fbcfe9483"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "heading",
+   "text": {
+    "en": "What Amillennialism Holds",
+    "es": "Lo que Sostiene el Amilenialismo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8028e9545462"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "This unit presents the third of the three main views of the millennium, amillennialism, and the course continues to hold the three views side by side, presenting each at full strength and favoring none. The prefix \"a\" means \"no,\" and so the name signals that this view expects no literal, earthly thousand-year reign of Christ following His return. Instead, amillennialism teaches that the thousand years of Revelation 20 are a symbol of the entire present age, the whole span between the first and second comings of Christ. During this age Christ reigns now from heaven over His kingdom, the souls of the faithful who have died live and reign with Him, and Satan is restrained from deceiving the nations so as to stop the spread of the gospel. There is, in this view, no separate earthly kingdom between Christ's return and the eternal state. When Christ comes again, there is one general resurrection of the righteous and the wicked, one final judgment, and then immediately the new heaven and the new earth. Amillennialism therefore reads Revelation 20 as describing the church age in which believers now live, rather than a future period on earth, and it understands the millennium as a present spiritual reality rather than a coming political one. Amillennialists also emphasize how the book first spoke to its original readers. Revelation was written to a church under heavy persecution, and its first purpose was not to chart events thousands of years away but to assure suffering believers that their tribulation was bounded, that the beast and the mark of chapter thirteen wore a first-century face in the Roman emperor cult, and that Christ already reigns and will surely triumph. Read in this way, the thousand years of the present age are the very age in which the persecuted church lives and reigns with her enthroned Lord, and the book is heard as a word of comfort and endurance rather than a calendar of the distant future.",
+    "es": "Esta unidad presenta la tercera de las tres vistas principales del milenio, el amilenialismo, y el curso sigue sosteniendo las tres vistas lado a lado, presentando cada una a plena fuerza y favoreciendo ninguna. El prefijo \"a\" significa \"no,\" y así el nombre señala que esta vista no espera ningún reinado terrenal literal de mil años de Cristo después de su regreso. En cambio, el amilenialismo enseña que los mil años de Apocalipsis 20 son un símbolo de toda la presente edad, el lapso entero entre la primera y la segunda venida de Cristo. Durante esta edad Cristo reina ahora desde el cielo sobre su reino, las almas de los fieles que han muerto viven y reinan con él, y Satanás es contenido de engañar a las naciones de modo que detenga la difusión del evangelio. No hay, en esta vista, un reino terrenal separado entre el regreso de Cristo y el estado eterno. Cuando Cristo venga otra vez, hay una resurrección general de los justos y los impíos, un juicio final, y entonces inmediatamente el nuevo cielo y la nueva tierra. El amilenialismo por tanto lee Apocalipsis 20 como describiendo la edad de la iglesia en que los creyentes ahora viven, más que un período futuro en la tierra, y entiende el milenio como una realidad espiritual presente más que una venidera y política. Los amilenialistas también destacan cómo el libro habló primero a sus lectores originales. El Apocalipsis fue escrito a una iglesia bajo fuerte persecución, y su primer propósito no era trazar eventos a miles de años de distancia sino asegurar a los creyentes que sufrían que su tribulación era limitada, que la bestia y la marca del capítulo trece llevaban un rostro del primer siglo en el culto al emperador romano, y que Cristo ya reina y ciertamente triunfará. Leído de esta manera, los mil años de la presente edad son la misma edad en que la iglesia perseguida vive y reina con su Señor entronizado, y el libro se oye como una palabra de consuelo y perseverancia más que un calendario del futuro distante."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d3f42341e517"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "heading",
+   "text": {
+    "en": "The Order of Events",
+    "es": "El Orden de los Acontecimientos"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9f98cc39d796"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "The amillennial order is the simplest of the three. The present church age is itself the millennium, the time in which Christ reigns from heaven, the gospel goes to the nations, and the departed saints reign with Christ. Throughout this age, amillennialists hold, the kingdom grows and the gospel spreads, but evil also continues and even intensifies, for the wheat and the tares grow together until the harvest, and both ripen toward the end. There is no earthly golden age to be expected before the return, as in one of the other views, nor an earthly reign to follow it, as in the other. At the close of the age Satan is loosed for a little while in a final assault, which is the brief loosing of Revelation 20. Then Christ returns, once and visibly. At His single coming the dead are raised, the righteous and the wicked together, in one general resurrection; all stand before the great white throne for one final judgment; and then God brings in the new heaven and the new earth at once. So the whole drama turns on one return, one resurrection, and one judgment, without any thousand-year reign on the earth before or after.",
+    "es": "El orden amilenial es el más sencillo de los tres. La presente edad de la iglesia es ella misma el milenio, el tiempo en que Cristo reina desde el cielo, el evangelio va a las naciones, y los santos que han partido reinan con Cristo. A lo largo de esta edad, sostienen los amilenialistas, el reino crece y el evangelio se difunde, pero el mal también continúa y aun se intensifica, pues el trigo y la cizaña crecen juntos hasta la siega, y ambos maduran hacia el fin. No hay una edad de oro terrenal que esperar antes del regreso, como en una de las otras vistas, ni un reinado terrenal que le siga, como en la otra. Al cierre de la edad Satanás es suelto por un poco de tiempo en un asalto final, que es el breve soltar de Apocalipsis 20. Entonces Cristo regresa, una vez y visiblemente. En su única venida los muertos son resucitados, los justos y los impíos juntos, en una resurrección general; todos están delante del gran trono blanco para un juicio final; y entonces Dios trae el nuevo cielo y la nueva tierra de una vez. Así todo el drama gira sobre un regreso, una resurrección, y un juicio, sin ningún reinado de mil años en la tierra antes o después."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d4aff7e1cf5a"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "heading",
+   "text": {
+    "en": "The Biblical Case for Amillennialism",
+    "es": "El Caso Bíblico del Amilenialismo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f2fd80184fbc"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "Amillennialists build their case from the wider New Testament as well as from Revelation. They argue that the \"first resurrection\" of Revelation 20 is a spiritual rather than a bodily rising. Some take it as the new birth, since Scripture speaks of believers as already raised with Christ and made alive together with Him while they live on earth (John 5:24-25; Ephesians 2:1-6); others take it as the entrance of the believer's soul into life and reign with Christ at death. They appeal for the binding of Satan to the victory of Christ's first coming, when the strong man was bound, Satan fell like lightning, and the ruler of this world was cast out (Matthew 12:29; Luke 10:18; John 12:31), so that the nations he once held in darkness now hear the gospel. They stress that the rest of the New Testament presents the second coming as a single event that brings the resurrection of all, the final judgment, and the new creation together, not in stages separated by a thousand years (John 5:28-29; 2 Peter 3:10-13). And they point to the many texts that show Christ already enthroned and reigning now, until He has put all His enemies under His feet (Acts 2:32-36; 1 Corinthians 15:25; Ephesians 1:20-22).",
+    "es": "Los amilenialistas edifican su caso a partir del Nuevo Testamento más amplio así como de Apocalipsis. Argumentan que la \"primera resurrección\" de Apocalipsis 20 es un levantarse espiritual más que corporal. Algunos la toman como el nuevo nacimiento, pues la Escritura habla de los creyentes como ya resucitados con Cristo y vivificados juntamente con él mientras viven en la tierra (Juan 5:24-25; Efesios 2:1-6); otros la toman como la entrada del alma del creyente a la vida y al reinado con Cristo en la muerte. Apelan para el atar de Satanás a la victoria de la primera venida de Cristo, cuando el hombre fuerte fue atado, Satanás cayó como un rayo, y el príncipe de este mundo fue echado fuera (Mateo 12:29; Lucas 10:18; Juan 12:31), de modo que las naciones que él una vez retuvo en tinieblas ahora oyen el evangelio. Destacan que el resto del Nuevo Testamento presenta la segunda venida como un solo evento que trae la resurrección de todos, el juicio final, y la nueva creación juntos, no en etapas separadas por mil años (Juan 5:28-29; 2 Pedro 3:10-13). Y señalan los muchos textos que muestran a Cristo ya entronizado y reinando ahora, hasta que haya puesto a todos sus enemigos debajo de sus pies (Hechos 2:32-36; 1 Corintios 15:25; Efesios 1:20-22)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "02d768e87c26"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "heading",
+   "text": {
+    "en": "How Amillennialism Reads Revelation 20",
+    "es": "Cómo Lee el Amilenialismo Apocalipsis 20"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "dc133806acae"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "The key to the amillennial reading is that Revelation often circles back over the same ground, showing the same period again and again from new angles, as it does with the seals, the trumpets, and the bowls. On this principle, called recapitulation, chapter twenty does not follow chapter nineteen in time but returns to the beginning of the present age and views it afresh. The thousand years are taken as a symbolic number, signifying a long and complete period rather than a literal span of exactly one thousand calendar years. The binding of Satan is his restraint, by the power of Christ's first coming, from deceiving the nations so as to prevent the gospel from going out to them; he is bound for that purpose, though still active in other ways. The first resurrection is the spiritual life and reign of believers, whether in regeneration or in the life of the soul with Christ after death. At the end of the age Satan is loosed briefly, and then come the return of Christ and the one judgment of the closing verses of the chapter. So Revelation 20, read this way, pictures the present age and not a future earthly kingdom.",
+    "es": "La clave de la lectura amilenial es que Apocalipsis a menudo regresa sobre el mismo terreno, mostrando el mismo período una y otra vez desde nuevos ángulos, como lo hace con los sellos, las trompetas, y las copas. Sobre este principio, llamado recapitulación, el capítulo veinte no sigue al capítulo diecinueve en el tiempo sino que regresa al comienzo de la presente edad y la ve de nuevo. Los mil años se toman como un número simbólico, que significa un período largo y completo más que un lapso literal de exactamente mil años de calendario. El atar de Satanás es su contención, por el poder de la primera venida de Cristo, de engañar a las naciones de modo que impida que el evangelio salga a ellas; es atado para ese propósito, aunque sigue activo de otras maneras. La primera resurrección es la vida espiritual y el reinado de los creyentes, sea en la regeneración o en la vida del alma con Cristo después de la muerte. Al fin de la edad Satanás es suelto brevemente, y entonces vienen el regreso de Cristo y el único juicio de los versículos finales del capítulo. Así Apocalipsis 20, leído de esta manera, retrata la presente edad y no un reino terrenal futuro."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "eeb04abd67af"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "heading",
+   "text": {
+    "en": "Proponents and History",
+    "es": "Proponentes e Historia"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3ff3dbdaecb3"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "Amillennialism has the longest record as the majority view of the church through most of its history. The decisive figure was Augustine, whose work The City of God set out the reading that the thousand years are the present age and that the reign of the saints is spiritual. Under his influence the church largely turned away from the earlier expectation of an earthly reign, and amillennialism became the dominant view of the medieval church for a thousand years. The Reformers, including Luther and Calvin, stood broadly in this tradition, though the technical terms came later. The view remains common in Roman Catholic, Lutheran, and much of Reformed theology to this day. In modern times it has been carefully expounded by scholars such as Geerhardus Vos, Louis Berkhof, Anthony Hoekema, and William Hendriksen, the last of whom set out the recapitulation reading of Revelation in detail. So amillennialism is not a recent novelty but the ancient and widely held reading of the church, defended by many of its most respected teachers across the centuries.",
+    "es": "El amilenialismo tiene el registro más largo como la vista mayoritaria de la iglesia durante la mayor parte de su historia. La figura decisiva fue Agustín, cuya obra La Ciudad de Dios expuso la lectura de que los mil años son la presente edad y de que el reinado de los santos es espiritual. Bajo su influencia la iglesia en gran parte se apartó de la anterior expectativa de un reinado terrenal, y el amilenialismo llegó a ser la vista dominante de la iglesia medieval por mil años. Los Reformadores, incluidos Lutero y Calvino, estuvieron ampliamente en esta tradición, aunque los términos técnicos vinieron después. La vista sigue siendo común en la teología católica romana, luterana, y gran parte de la reformada hasta el día de hoy. En tiempos modernos ha sido cuidadosamente expuesta por eruditos como Geerhardus Vos, Louis Berkhof, Anthony Hoekema, y William Hendriksen, el último de los cuales expuso en detalle la lectura de recapitulación de Apocalipsis. Así el amilenialismo no es una novedad reciente sino la antigua y ampliamente sostenida lectura de la iglesia, defendida por muchos de sus más respetados maestros a lo largo de los siglos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f53b631419f0"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "heading",
+   "text": {
+    "en": "Objections Raised by Others",
+    "es": "Objeciones Planteadas por Otros"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "afe5cc75f5a0"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "Those who hold the other views raise serious objections, and fairness requires that they be given their full weight. The chief objection concerns the first resurrection. In Revelation 20 the same word is used for those who \"lived and reigned with Christ\" and for \"the rest of the dead\" who \"did not live again until the thousand years were finished\"; and since the second plainly means a bodily resurrection, critics argue that the first should mean a bodily resurrection too, so that taking one as spiritual and the other as bodily is inconsistent. Second, they argue that reading chapters nineteen and twenty in sequence is the natural reading, and that recapitulation, however common elsewhere, must here be assumed rather than proved. Third, they observe that Satan appears very active and powerful in the present age, prowling like a roaring lion and blinding the minds of unbelievers, which seems hard to square with his being bound. Fourth, they question the figurative reading of the thousand years and ask why the passage should not be taken literally. Some add that amillennialism does not do full justice to the Old Testament promises of an earthly kingdom or to the future of Israel. Amillennialists reply that the first resurrection is paired with the second death and so belongs to the spiritual order, that recapitulation is a genuine feature of the book, and that Satan's binding is limited to the deceiving of the nations.",
+    "es": "Los que sostienen las otras vistas plantean objeciones serias, y la justicia exige que se les dé todo su peso. La principal objeción se refiere a la primera resurrección. En Apocalipsis 20 se usa la misma palabra para los que \"vivieron y reinaron con Cristo\" y para \"los otros muertos\" que \"no volvieron a vivir hasta que se cumplieron mil años\"; y puesto que el segundo claramente significa una resurrección corporal, los críticos argumentan que el primero debería significar una resurrección corporal también, de modo que tomar uno como espiritual y el otro como corporal es inconsistente. Segundo, argumentan que leer los capítulos diecinueve y veinte en secuencia es la lectura natural, y que la recapitulación, por común que sea en otros lugares, aquí debe suponerse más que probarse. Tercero, observan que Satanás aparece muy activo y poderoso en la presente edad, rondando como león rugiente y cegando las mentes de los incrédulos, lo cual parece difícil de armonizar con que esté atado. Cuarto, cuestionan la lectura figurada de los mil años y preguntan por qué el pasaje no debería tomarse literalmente. Algunos añaden que el amilenialismo no hace plena justicia a las promesas del Antiguo Testamento de un reino terrenal ni al futuro de Israel. Los amilenialistas responden que la primera resurrección está emparejada con la muerte segunda y por tanto pertenece al orden espiritual, que la recapitulación es un rasgo genuino del libro, y que el atar de Satanás se limita al engaño de las naciones."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cbc22431a1d6"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "heading",
+   "text": {
+    "en": "Summary and an Even-Handed Word",
+    "es": "Resumen y una Palabra Imparcial"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "543070a07175"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "The strength claimed for amillennialism is that it fits the pattern of the rest of the New Testament, which sets the resurrection, the judgment, and the new creation at one coming; that it takes seriously the symbolism and the recapitulating structure of Revelation; and that it has been the church's majority reading for most of its history. Its central claim is that the thousand years are the present age, that Christ reigns now, and that there is no earthly millennium before or after His single return. Sincere, godly, orthodox Christians have held this view, among them many of the church's greatest theologians, and the course presents it at full strength without endorsing it, just as it has presented the other two. This completes the three views. Postmillennialism looks for a golden age of gospel triumph before Christ returns; premillennialism looks for a literal earthly reign after He returns; amillennialism understands the thousand years as the present age, with Christ reigning now. The course favors none of the three and urges students to study the Scriptures and weigh the views before God. What all three confess together, and what matters above every difference, is that the Lord Jesus Christ will surely return in glory, raise the dead, judge the world in righteousness, and reign forever with His people in the new creation.",
+    "es": "La fortaleza que se reclama para el amilenialismo es que encaja con el patrón del resto del Nuevo Testamento, que pone la resurrección, el juicio, y la nueva creación en una sola venida; que toma en serio el simbolismo y la estructura recapituladora de Apocalipsis; y que ha sido la lectura mayoritaria de la iglesia durante la mayor parte de su historia. Su afirmación central es que los mil años son la presente edad, que Cristo reina ahora, y que no hay milenio terrenal antes ni después de su única venida. Cristianos sinceros, piadosos, y ortodoxos han sostenido esta vista, entre ellos muchos de los más grandes teólogos de la iglesia, y el curso la presenta a plena fuerza sin respaldarla, tal como ha presentado las otras dos. Esto completa las tres vistas. El postmilenialismo busca una edad de oro de triunfo del evangelio antes de que Cristo regrese; el premilenialismo busca un reinado terrenal literal después de que regrese; el amilenialismo entiende los mil años como la presente edad, con Cristo reinando ahora. El curso no favorece ninguna de las tres y exhorta a los estudiantes a estudiar las Escrituras y sopesar las vistas delante de Dios. Lo que las tres confiesan juntas, y lo que importa sobre toda diferencia, es que el Señor Jesucristo ciertamente regresará en gloria, resucitará a los muertos, juzgará al mundo en justicia, y reinará para siempre con su pueblo en la nueva creación."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "73d8e62fe6ac"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "scripture",
+   "text": {
+    "en": "\"And the Spirit and the bride say, 'Come!'... Even so, come, Lord Jesus!\" — Revelation 22:17, 20 (NKJV)",
+    "es": "\"Y el Espíritu y la Esposa dicen: '¡Ven!'... Así sea, ven, Señor Jesús.\" — Apocalipsis 22:17, 20 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "efb6ab41b47a"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "Unit 14 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 14 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ca71929d428e"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33593c268178"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

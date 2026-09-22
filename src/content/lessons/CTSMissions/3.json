@@ -1,0 +1,572 @@
+{
+ "course": "CTSMissions",
+ "unit": 3,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<a href=\"index.html\" style=\"display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif\">📚 Catalog / Catálogo</a>\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"prevUnitBtn\">← Previous</button>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\">Next →</button>\n    </div>\n</div>\n<div class=\"lang-toggle-group\" role=\"group\" aria-label=\"Language\">\n  <button data-lang=\"en\" class=\"active\">English</button>\n  <button data-lang=\"es\">Español</button>\n  <button data-lang=\"both\">Both / Ambos</button>\n</div>\n<span id=\"trackBadgeSlot\"></span>\n\n<div id=\"regWarn\" class=\"reg-warn hidden\">\n  <span class=\"lang-en\"><!--cts:b001:en--></span>\n  <span class=\"lang-es\"><!--cts:b001:es--></span>\n</div>\n<div id=\"regModal\" class=\"reg-modal hidden\" role=\"dialog\" aria-labelledby=\"regModalTitle\">\n  <div class=\"reg-modal-inner\">\n    <h2 id=\"regModalTitle\"><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n    <label><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></label>\n    <input type=\"text\" id=\"regName\" placeholder=\"\" autocomplete=\"name\" aria-label=\"regName\">\n    <label><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></label>\n    <input type=\"email\" id=\"regEmail\" placeholder=\"\" autocomplete=\"email\" aria-label=\"regEmail\">\n    <label><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></label>\n    <div class=\"track-options\">\n      <label><input type=\"radio\" name=\"regTrack\" value=\"cert\" checked> <span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></label>\n      <label><input type=\"radio\" name=\"regTrack\" value=\"mdiv\"> <span class=\"lang-en\"><!--cts:b008:en--></span><span class=\"lang-es\"><!--cts:b008:es--></span></label>\n      <label><input type=\"radio\" name=\"regTrack\" value=\"thm\"> <span class=\"lang-en\"><!--cts:b009:en--></span><span class=\"lang-es\"><!--cts:b009:es--></span></label>\n    </div>\n    <p style=\"font-size:0.82rem; color:#6b5236; font-style:italic; margin-top:8px;\">\n      <span class=\"lang-en\"><!--cts:b010:en--></span>\n      <span class=\"lang-es\"><!--cts:b010:es--></span>\n    </p>\n    <button id=\"regSaveBtn\" type=\"button\"><span class=\"lang-en\"><!--cts:b011:en--></span><span class=\"lang-es\"><!--cts:b011:es--></span></button>\n  </div>\n</div>\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b012:en--></span><span class=\"lang-es\"><!--cts:b012:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b013:en--></span><span class=\"lang-es\"><!--cts:b013:es--></span></p>\n</div>\n\n<div class=\"card\" id=\"teachingContent\">\n    <div class=\"lang-en\">\n        <h2><!--cts:b014:en--></h2>\n        <p><!--cts:b015:en--></p>\n\n        <p><!--cts:b016:en--></p>\n\n        <p><!--cts:b017:en--></p>\n\n        <h2><!--cts:b018:en--></h2>\n        <p><!--cts:b019:en--></p>\n\n        <p><!--cts:b020:en--></p>\n\n        <p><!--cts:b021:en--></p>\n\n        <h2><!--cts:b022:en--></h2>\n        <p><!--cts:b023:en--></p>\n\n        <p><!--cts:b024:en--></p>\n\n        <h2><!--cts:b025:en--></h2>\n        <p><!--cts:b026:en--></p>\n\n        <p><!--cts:b027:en--></p>\n\n        <p><!--cts:b028:en--></p>\n\n        <h2><!--cts:b029:en--></h2>\n        <p><!--cts:b030:en--></p>\n\n        <p><!--cts:b031:en--></p>\n\n        <p><!--cts:b032:en--></p>\n\n        <h2><!--cts:b033:en--></h2>\n        <p><!--cts:b034:en--></p>\n    </div>\n    <div class=\"lang-es\">\n        <h2><!--cts:b014:es--></h2>\n        <p><!--cts:b015:es--></p>\n\n        <p><!--cts:b016:es--></p>\n\n        <p><!--cts:b017:es--></p>\n\n        <h2><!--cts:b018:es--></h2>\n        <p><!--cts:b019:es--></p>\n\n        <p><!--cts:b020:es--></p>\n\n        <p><!--cts:b021:es--></p>\n\n        <h2><!--cts:b022:es--></h2>\n        <p><!--cts:b023:es--></p>\n\n        <p><!--cts:b024:es--></p>\n\n        <h2><!--cts:b025:es--></h2>\n        <p><!--cts:b026:es--></p>\n\n        <p><!--cts:b027:es--></p>\n\n        <p><!--cts:b028:es--></p>\n\n        <h2><!--cts:b029:es--></h2>\n        <p><!--cts:b030:es--></p>\n\n        <p><!--cts:b031:es--></p>\n\n        <p><!--cts:b032:es--></p>\n\n        <h2><!--cts:b033:es--></h2>\n        <p><!--cts:b034:es--></p>\n    </div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b035:en--></span><span class=\"lang-es\"><!--cts:b035:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b036:en--></span><span class=\"lang-es\"><!--cts:b036:es--></span></p>\n    <div class=\"exam-status hidden\" id=\"examStatus\"></div>\n<div class=\"mc-section\" id=\"mcSection\">\n  <h3><span class=\"lang-en\"><!--cts:b037:en--></span><span class=\"lang-es\"><!--cts:b037:es--></span></h3>\n  <div id=\"mcContainer\"></div>\n</div>\n<div class=\"sa-section\" id=\"saSection\">\n  <h3><span class=\"lang-en\"><!--cts:b038:en--></span><span class=\"lang-es\"><!--cts:b038:es--></span></h3>\n  <p class=\"sa-note\"><span class=\"lang-en\" id=\"saNoteEn\"></span><span class=\"lang-es\" id=\"saNoteEs\"></span></p>\n  <div id=\"kwContainer\"></div>\n</div>\n<div style=\"margin-top: 20px;\">\n  <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b039:en--></span><span class=\"lang-es\"><!--cts:b039:es--></span></button>\n  <button id=\"resetExamBtn\" class=\"btn-reset\" type=\"button\"><span class=\"lang-en\"><!--cts:b040:en--></span><span class=\"lang-es\"><!--cts:b040:es--></span></button>\n  <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n</div>\n</div>\n</div>\n\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSMissionsReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "⚠ Please register your name to receive credit for this unit. <button class=\"small\" id=\"openRegBtn\" type=\"button\">Register</button>",
+    "es": "⚠ Por favor registre su nombre para recibir crédito por esta unidad. <button class=\"small\" id=\"openRegBtn2\" type=\"button\">Registrar</button>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "300bfc92ba6e"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "Welcome to World Missions",
+    "es": "Bienvenido a Misiones Mundiales"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e62af02944dd"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "Before you begin this unit, please enter your name and select your track. This information is stored only in your browser and is shared across all CTS courses.",
+    "es": "Antes de comenzar esta unidad, por favor ingrese su nombre y seleccione su vía. Esta información se guarda solo en su navegador y es compartida entre todos los cursos del CTS."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4efe49cf1f65"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "Full name",
+    "es": "Nombre completo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "eeb692087d62"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "Email (optional)",
+    "es": "Correo electrónico (opcional)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5c10b588a954"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Track",
+    "es": "Vía"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b1c5a7af06ba"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Certificate",
+    "es": "Certificado"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "10de46b3b341"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "M.Div",
+    "es": "M.Div"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "621c580e3436"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "Th.M.",
+    "es": "Th.M."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c7ffb710c525"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate:</strong> Multiple-choice only, 90% to pass each unit. <strong>M.Div / Th.M.:</strong> Multiple-choice + short-answer, both at 90%.",
+    "es": "<strong>Certificado:</strong> Solo opción múltiple, 90% para aprobar cada unidad. <strong>M.Div / Th.M.:</strong> Opción múltiple + respuesta corta, ambas al 90%."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "431989696561"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Save and Continue",
+    "es": "Guardar y Continuar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "49a2b0fecc60"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "🌍 World Missions — Unit 3: The Great Commission",
+    "es": "🌍 Misiones Mundiales — Unidad 3: La Gran Comisión"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33d49de07bff"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "heading",
+   "text": {
+    "en": "Introduction: The Missionary Magna Charta",
+    "es": "Introducción: La Carta Magna Misionera"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bb103755744a"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "Every fall, spectators crowd into the stadiums to cheer the home team. Every coach loves to hear the enthusiastic fans — but the fact is, the fans do not play the game. They never sweat in the grind of it; they never shed a single drop of blood; they do not complete one pass or carry the ball a single yard. Most of them have never even played. It was on a mountain in Galilee that Jesus called His disciples under the open sky, with the grand panorama of the whole country spread before Him, and there He transformed His followers from spectators into participants.",
+    "es": "Cada otoño, los espectadores se agolpan en los estadios para alentar al equipo local. A todo entrenador le gusta oír a los aficionados entusiasmados — pero lo cierto es que los aficionados no juegan el partido. Nunca sudan en la brega; nunca derraman una sola gota de sangre; no completan un solo pase ni avanzan el balón una sola yarda. La mayoría nunca ha jugado siquiera. Fue en un monte de Galilea donde Jesús llamó a sus discípulos bajo el cielo abierto, con el gran panorama de todo el país delante de Él, y allí transformó a sus seguidores de espectadores en participantes."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ad0d72ac79fa"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "The Great Commission of our Lord Jesus is one of the first passages a believer's child learns to memorize. So weighty are these words that the church has long called them the \"Missionary Magna Charta.\" Jesus said: <em>\"Go therefore and make disciples of all the nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit, teaching them to observe all things that I have commanded you; and lo, I am with you always, even to the end of the age\"</em> (Matthew 28:19–20, NKJV).",
+    "es": "La Gran Comisión de nuestro Señor Jesús es uno de los primeros pasajes que un hijo de creyentes aprende de memoria. Tan importantes son estas palabras que la iglesia las ha llamado por mucho tiempo la \"Carta Magna Misionera.\" Jesús dijo: <em>\"Por tanto, id, y enseñad a todas las naciones, bautizándolas en el nombre del Padre, y del Hijo, y del Espíritu Santo; enseñándoles que guarden todas las cosas que os he mandado; y he aquí, yo estoy con vosotros todos los días, hasta el fin del mundo\"</em> (Mateo 28:19–20, RVG)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dd52047feb7"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "Make no mistake about it: we owe the very idea of world missions to Jesus Himself. The New Testament is filled with powerful words and phrases that have sent thousands to the uttermost parts of the earth. When we support missions, we support an idea conceived in the mind of Jesus, proclaimed from the lips of Jesus, and carried out by the followers of Jesus. What, then, do these verses mean for us today? It seems clear that the missionary enterprise makes special demands upon four parts of the human anatomy — the lips, the feet, the head, and the heart. Some would argue, correctly, that missions calls for total commitment; but these four parts are especially affected.",
+    "es": "No nos engañemos: le debemos a Jesús mismo la idea misma de las misiones mundiales. El Nuevo Testamento está lleno de palabras y frases poderosas que han enviado a miles hasta lo último de la tierra. Cuando apoyamos las misiones, apoyamos una idea concebida en la mente de Jesús, proclamada de los labios de Jesús, y llevada a cabo por los seguidores de Jesús. ¿Qué, entonces, significan estos versículos para nosotros hoy? Parece claro que la empresa misionera hace demandas especiales sobre cuatro partes de la anatomía humana — los labios, los pies, la cabeza y el corazón. Algunos argumentarían, correctamente, que las misiones exigen entrega total; pero estas cuatro partes son especialmente afectadas."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33633ffd3ae8"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "heading",
+   "text": {
+    "en": "I. Jesus Put the Words on Our Lips",
+    "es": "I. Jesús Puso las Palabras en Nuestros Labios"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5d0a72a1223f"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "First, Jesus put the words on our lips, and He did it by giving His followers a message. They were to speak <em>\"all things\"</em> that He had commanded them. What a tremendous message! A college speaker once said that all anyone needs in order to become a public speaker is to stand up before an audience with an idea he really believes in. Really believing what you are saying will drive away fear and give a man a natural eloquence.",
+    "es": "Primero, Jesús puso las palabras en nuestros labios, y lo hizo dando a sus seguidores un mensaje. Habían de hablar <em>\"todas las cosas\"</em> que Él les había mandado. ¡Qué mensaje tan tremendo! Un orador universitario dijo una vez que todo lo que alguien necesita para llegar a ser un orador público es ponerse de pie ante un auditorio con una idea en la cual realmente crea. Creer de veras lo que uno dice ahuyentará el temor y dará al hombre una elocuencia natural."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "394b58c2f26e"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "The disciples believed the gospel message with all their hearts. How else can we explain Peter? — a man with no training as a speaker, a man whose beliefs had recently been shattered, now boldly standing on the streets of Jerusalem, addressing thousands. He truly believed that Jesus was the Son of God who had died on the cross for his sins and risen victoriously from the grave. He believed with every fiber of his body and to the depths of his soul that faith in Jesus gives abundant and eternal life.",
+    "es": "Los discípulos creyeron el mensaje del evangelio con todo su corazón. ¿De qué otra manera podemos explicar a Pedro? — un hombre sin entrenamiento como orador, un hombre cuyas creencias habían sido recientemente destrozadas, ahora de pie con denuedo en las calles de Jerusalén, dirigiéndose a miles. Verdaderamente creía que Jesús era el Hijo de Dios que había muerto en la cruz por sus pecados y resucitado victorioso de la tumba. Creía con cada fibra de su cuerpo y hasta lo profundo de su alma que la fe en Jesús da vida abundante y eterna."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "db9aabc9f0ee"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "Along with the message, Jesus also gave His followers a method — in fact, two methods: to preach and to teach. Preaching was a crucial part of the work. <em>\"Go into all the world and preach the gospel to every creature\"</em> (Mark 16:15, NKJV). The Greek word for \"preach\" is the same word used for a herald who announced the message of the king. The herald did not create his message, and he did not change his message; he simply lent his voice to repeating the king's message. When we preach, we ought to be able to proclaim, \"Jesus said it.\" The essential gospel message never changes. Teaching is the other half of our method. We are to teach men to observe all the things that Jesus taught. A man who has been saved does not merely need to hear the gospel every Sunday; he needs to be educated so that he can fulfill his potential as a Christian. And so we can say that Jesus put the words on our lips.",
+    "es": "Junto con el mensaje, Jesús también dio a sus seguidores un método — en realidad, dos métodos: predicar y enseñar. La predicación era una parte crucial de la obra. <em>\"Id por todo el mundo y predicad el evangelio a toda criatura\"</em> (Marcos 16:15, RVG). La palabra griega para \"predicar\" es la misma que se usaba para un heraldo que anunciaba el mensaje del rey. El heraldo no creaba su mensaje, ni lo cambiaba; simplemente prestaba su voz para repetir el mensaje del rey. Cuando predicamos, debemos poder proclamar: \"Jesús lo dijo.\" El mensaje esencial del evangelio nunca cambia. La enseñanza es la otra mitad de nuestro método. Hemos de enseñar a los hombres a guardar todas las cosas que Jesús enseñó. Un hombre que ha sido salvo no solo necesita oír el evangelio cada domingo; necesita ser educado para que pueda cumplir su potencial como cristiano. Y así podemos decir que Jesús puso las palabras en nuestros labios."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "14d74a6f9ca7"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "heading",
+   "text": {
+    "en": "II. Jesus Put Movement in Our Feet",
+    "es": "II. Jesús Puso Movimiento en Nuestros Pies"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "410926ca038e"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "Second, Jesus put movement in our feet. The disciples already had the message and the blessings of their Lord. They could have quietly returned to their villages and fished for a living again. They could have taught and preached only to those curious enough to seek them out. But with one word, Jesus put movement in their feet. He said, \"Go.\" The gospel does not wait for men to seek it out; it goes to where the people are. Jesus does not give waiting orders. He gives marching orders.",
+    "es": "Segundo, Jesús puso movimiento en nuestros pies. Los discípulos ya tenían el mensaje y las bendiciones de su Señor. Podrían haber regresado tranquilamente a sus aldeas y haber pescado para ganarse la vida otra vez. Podrían haber enseñado y predicado solo a los que tuvieran la curiosidad de buscarlos. Pero con una sola palabra, Jesús puso movimiento en sus pies. Dijo: \"Id.\" El evangelio no espera a que los hombres lo busquen; va a donde está la gente. Jesús no da órdenes de esperar. Da órdenes de marchar."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "79d7bbeefcf5"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "A short while ago a man I know was stationed in the service in Texas. He kept waiting for new orders to send him on to Colorado. He knew Colorado was his next station, but he could not leave until he had the orders in hand. In the Great Commission we have received our marching orders, and with them Jesus put movement in our feet. Paul made the same point in the book of Romans: <em>\"How beautiful are the feet of those who preach the gospel of peace, who bring glad tidings of good things!\"</em> (Romans 10:15, NKJV). Consider for a moment the feet of men like Paul and Peter — dirty, rough, cracked, and blistered. Yet they were beautiful, because they bore the good news of Jesus Christ. To those who receive the gospel, the feet of our missionaries are beautiful indeed. And we are to go everywhere preaching the gospel — not only in our own town, not only in our own region, not only in our own country, but to the uttermost parts of the earth.",
+    "es": "Hace poco, un hombre que conozco estaba destinado en el servicio militar en Texas. Seguía esperando nuevas órdenes que lo enviaran a Colorado. Sabía que Colorado era su siguiente destino, pero no podía partir hasta tener las órdenes en mano. En la Gran Comisión hemos recibido nuestras órdenes de marcha, y con ellas Jesús puso movimiento en nuestros pies. Pablo expuso lo mismo en el libro de Romanos: <em>\"¡Cuán hermosos son los pies de los que anuncian el evangelio de la paz, de los que anuncian buenas nuevas!\"</em> (Romanos 10:15, RVG). Considere por un momento los pies de hombres como Pablo y Pedro — sucios, ásperos, agrietados y ampollados. Y sin embargo eran hermosos, porque llevaban las buenas nuevas de Jesucristo. Para los que reciben el evangelio, los pies de nuestros misioneros son hermosos en verdad. Y hemos de ir a todas partes predicando el evangelio — no solo en nuestro propio pueblo, no solo en nuestra propia región, no solo en nuestro propio país, sino hasta lo último de la tierra."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2fc5d18d0fe8"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "heading",
+   "text": {
+    "en": "III. Jesus Put a Vision in Our Head",
+    "es": "III. Jesús Puso una Visión en Nuestra Cabeza"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "567672ad1188"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "Third, Jesus put a vision in our head. Unless men can catch a vision, they never know where they are going. The story is told of an airplane blown off course by a strong wind. The co-pilot asked, \"Where are we?\" and the pilot answered, \"I don't know, but we're making good time.\" A church busy with activity but with no vision is only making good time to nowhere.",
+    "es": "Tercero, Jesús puso una visión en nuestra cabeza. A menos que los hombres puedan captar una visión, nunca saben a dónde van. Se cuenta la historia de un avión desviado de su rumbo por un fuerte viento. El copiloto preguntó: \"¿Dónde estamos?\" y el piloto respondió: \"No lo sé, pero vamos haciendo buen tiempo.\" Una iglesia ocupada en actividad pero sin visión solo va haciendo buen tiempo hacia ninguna parte."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "36df05c7b1ef"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "Jesus had a vision. It was a vision of every knee bowing and every tongue confessing Him as Lord (Philippians 2:10–11). The people of the world differ in race, color, language, climate, and custom; yet all are included in the command, for all are sinners. All have souls, all need God's grace, all need a Savior. What we need today is a fresh vision of a world united in Christ. We must be honest: the church has not kept pace. Christianity grows by hundreds of thousands while the world grows by hundreds of millions. Perhaps one reason we have failed to keep pace is a lack of vision. We have captured cities for Christ, and even nations for Christ, but we have not yet captured the world.",
+    "es": "Jesús tenía una visión. Era una visión de toda rodilla doblándose y toda lengua confesándole como Señor (Filipenses 2:10–11). Los pueblos del mundo difieren en raza, color, idioma, clima y costumbre; sin embargo, todos están incluidos en el mandato, porque todos son pecadores. Todos tienen alma, todos necesitan la gracia de Dios, todos necesitan un Salvador. Lo que necesitamos hoy es una visión fresca de un mundo unido en Cristo. Debemos ser honestos: la iglesia no ha mantenido el paso. El cristianismo crece por cientos de miles mientras el mundo crece por cientos de millones. Quizá una razón por la que hemos fallado en mantener el paso es la falta de visión. Hemos conquistado ciudades para Cristo, y aun naciones para Cristo, pero todavía no hemos conquistado el mundo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "812dced44e13"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "There is an old story of an artist who was painting the love of Christ for the children of the world. He had done his finest work, but one night he awoke to find a stranger altering his pictures. \"Stop,\" he cried, \"you'll ruin it!\" The stranger replied, \"You have already ruined it. Who told you that all the faces in heaven would be white?\" \"I always thought of it that way,\" said the artist. \"You were wrong,\" answered the stranger. \"I have used some of the colors you forgot — red, yellow, brown, and black. For little ones come from many countries to answer My call.\" We need a vision of that call.",
+    "es": "Hay una vieja historia de un artista que pintaba el amor de Cristo por los niños del mundo. Había hecho su mejor obra, pero una noche despertó y halló a un desconocido alterando sus cuadros. \"¡Detente,\" gritó, \"lo arruinarás!\" El desconocido respondió: \"Ya lo has arruinado. ¿Quién te dijo que todos los rostros en el cielo serían blancos?\" \"Siempre lo imaginé así,\" dijo el artista. \"Estabas equivocado,\" respondió el desconocido. \"He usado algunos de los colores que olvidaste — rojo, amarillo, moreno y negro. Porque los pequeñitos vienen de muchos países para responder a mi llamado.\" Necesitamos una visión de ese llamado."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "19241f2520f6"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "heading",
+   "text": {
+    "en": "IV. Jesus Put a Burden on Our Heart",
+    "es": "IV. Jesús Puso una Carga en Nuestro Corazón"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "37ece575f774"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "Finally, Jesus put a burden on our heart. Those who have a vision in their head will also have a burden in their heart. Those who have caught the vision of a world won for Christ will gladly accept the responsibility of sending missionaries. For missionaries cannot send themselves; they must be sent. In Acts 13 we find the first commissioning service, the whole congregation assembled: <em>\"having fasted and prayed, and laid hands on them, they sent them away\"</em> (Acts 13:3, NKJV). God calls some to go. Many have left behind families and friends because of their burden for the lost, and we are obligated to identify with them, pray for them, and support them. But not everyone is called to go. When Jesus said \"Go,\" He was speaking to every one of us — and we must remember that those who send have as many responsibilities as those who go.",
+    "es": "Finalmente, Jesús puso una carga en nuestro corazón. Los que tienen una visión en su cabeza tendrán también una carga en su corazón. Los que han captado la visión de un mundo ganado para Cristo aceptarán de buena gana la responsabilidad de enviar misioneros. Porque los misioneros no pueden enviarse a sí mismos; deben ser enviados. En Hechos 13 hallamos el primer servicio de comisión, con toda la congregación reunida: <em>\"habiendo ayunado y orado, y puesto las manos sobre ellos, los enviaron\"</em> (Hechos 13:3, RVG). Dios llama a algunos a ir. Muchos han dejado atrás familias y amigos por su carga por los perdidos, y estamos obligados a identificarnos con ellos, orar por ellos y sostenerlos. Pero no todos son llamados a ir. Cuando Jesús dijo \"Id,\" hablaba a cada uno de nosotros — y debemos recordar que los que envían tienen tantas responsabilidades como los que van."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323b0dad7799"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "We have the responsibility to identify with their ministries. Any group that sends out a missionary and then forgets him should be ashamed before God. If we send them, they are an extension of us; their work is our work, and our work is their work. We have the responsibility to support them in prayer. When was the last time you prayed for a missionary? How many of us can even name three or four missionaries by name? Our missionaries may be wondering why they are not seeing more fruit; someone should tell them that the senders have turned off the power. Let us turn it on again. And we have the responsibility to support them in our giving. Those who go give their lives; those who send must see to it that the work does not stall for lack of support. Every year some who feel called as missionaries are turned away because the church cannot afford to send them. The lost world is crying out for the message of Christ, but too often there is no voice speaking to them — and many will live and die never having known the Savior, because no one was sent.",
+    "es": "Tenemos la responsabilidad de identificarnos con sus ministerios. Todo grupo que envía a un misionero y luego lo olvida debería avergonzarse delante de Dios. Si los enviamos, son una extensión de nosotros; su obra es nuestra obra, y nuestra obra es su obra. Tenemos la responsabilidad de sostenerlos en oración. ¿Cuándo fue la última vez que oró por un misionero? ¿Cuántos de nosotros podemos siquiera nombrar a tres o cuatro misioneros? Puede que nuestros misioneros se pregunten por qué no ven más fruto; alguien debería decirles que los que envían han apagado la fuente de poder. Volvámosla a encender. Y tenemos la responsabilidad de sostenerlos con nuestras ofrendas. Los que van dan su vida; los que envían deben procurar que la obra no se detenga por falta de sostén. Cada año, algunos que se sienten llamados como misioneros son rechazados porque la iglesia no puede costear su envío. El mundo perdido clama por el mensaje de Cristo, pero con demasiada frecuencia no hay voz que les hable — y muchos vivirán y morirán sin haber conocido jamás al Salvador, porque nadie fue enviado."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e04ba4250e3c"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "prose",
+   "text": {
+    "en": "Stephen Grellet, the noted Quaker, once felt a burden and the leading of the Holy Spirit to preach the gospel to the men of an American lumber camp. But when he arrived, he found the camp deserted, for the men had gone deeper into the forest. Believing nevertheless that the Spirit had sent him, he stood up in the empty mess hall and preached his sermon, heard, as he thought, only by the bare walls of the building and the lofty trees. Years afterward, crossing London Bridge in the evening gloom, he was stopped by a man who said, \"You are the man I have been looking for all these years.\" \"There must be some mistake,\" said Grellet; \"I have never seen you.\" \"No,\" said the man, \"but did you not preach in a lumber camp in the American forest? I had gone back for a saw that had been left behind, and through the chink in the logs I heard you preach. I was convicted of sin, I got hold of a copy of the Scriptures, I learned the way of life, I was saved, and I have brought others with me into the kingdom of heaven.\" The word of God does not return void. We are responsible to send it out — and to leave the harvest in His hands.",
+    "es": "Stephen Grellet, el conocido cuáquero, sintió una vez una carga y la dirección del Espíritu Santo para predicar el evangelio a los hombres de un campamento maderero en América. Pero al llegar, halló el campamento desierto, porque los hombres se habían internado más en el bosque. Creyendo, no obstante, que el Espíritu lo había enviado, se puso de pie en el comedor vacío y predicó su sermón, oído, según pensaba, solo por las paredes desnudas del edificio y los altos árboles. Años después, cruzando el Puente de Londres al anochecer, fue detenido por un hombre que le dijo: \"Usted es el hombre que he estado buscando todos estos años.\" \"Debe haber algún error,\" dijo Grellet; \"nunca lo he visto.\" \"No,\" dijo el hombre, \"pero ¿no predicó usted en un campamento maderero en el bosque de América? Yo había regresado por una sierra que se había quedado, y por una rendija entre los troncos lo oí predicar. Fui convencido de pecado, conseguí una copia de las Escrituras, aprendí el camino de la vida, fui salvo, y he traído a otros conmigo al reino de los cielos.\" La palabra de Dios no vuelve vacía. Somos responsables de enviarla — y de dejar la cosecha en sus manos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "647b3fa5b540"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "heading",
+   "text": {
+    "en": "Conclusion: Our Marching Orders",
+    "es": "Conclusión: Nuestras Órdenes de Marcha"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2fa77e7b9142"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "prose",
+   "text": {
+    "en": "And so we see why the Great Commission is a set of marching orders from Jesus. He is the One who put the words on our lips. He is the One who put movement in our feet. He is the One who put a vision in our head. And He is the One who put a burden on our heart. Jesus said, <em>\"As the Father has sent Me, I also send you\"</em> (John 20:21, NKJV). There is a great work to be done. The question is no longer whether the task is ours; the only question that remains is what part we will take in it — to go, to send, and to pray.",
+    "es": "Y así vemos por qué la Gran Comisión es un conjunto de órdenes de marcha de Jesús. Él es quien puso las palabras en nuestros labios. Él es quien puso movimiento en nuestros pies. Él es quien puso una visión en nuestra cabeza. Y Él es quien puso una carga en nuestro corazón. Jesús dijo: <em>\"Como me envió el Padre, así también yo os envío\"</em> (Juan 20:21, RVG). Hay una gran obra por hacer. La pregunta ya no es si la tarea es nuestra; la única pregunta que queda es qué parte tomaremos en ella — ir, enviar y orar."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b84622b6fccc"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "prose",
+   "text": {
+    "en": "Unit 3 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 3 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "002ac8db71ed"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "prose",
+   "text": {
+    "en": "<em><strong>Certificate track:</strong> 20 multiple-choice questions, 90% (18 of 20) to pass. <strong>M.Div track:</strong> 20 MC + 10 short-answer, both at 90% independently. Each MC scores immediately when you click. MC must be passed before SA scores count. A failure locks the relevant section for 15 minutes; if you have already passed MC, only SA locks after an SA fail.</em>",
+    "es": "<em><strong>Vía Certificado:</strong> 20 preguntas de opción múltiple, 90% (18 de 20) para aprobar. <strong>Vía M.Div:</strong> 20 OM + 10 respuesta corta, ambas al 90% independientemente. Cada OM califica inmediatamente al hacer clic. Debe aprobar OM antes de que cuente la sección RC. Una reprobación bloquea la sección por 15 minutos; si ya aprobó OM, solo se bloquea RC tras un fallo de RC.</em>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d196052e364e"
+    }
+   }
+  },
+  {
+   "id": "b037",
+   "type": "prose",
+   "text": {
+    "en": "Multiple Choice — 20 Questions",
+    "es": "Opción Múltiple — 20 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9906bf28c27c"
+    }
+   }
+  },
+  {
+   "id": "b038",
+   "type": "prose",
+   "text": {
+    "en": "Short Answer — 10 Questions <span class=\"sa-badge\" id=\"saBadgeEn\"></span>",
+    "es": "Respuesta Corta — 10 Preguntas <span class=\"sa-badge\" id=\"saBadgeEs\"></span>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b1d858341328"
+    }
+   }
+  },
+  {
+   "id": "b039",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b040",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

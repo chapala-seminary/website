@@ -1,0 +1,558 @@
+{
+ "course": "CTSDeaconFamilyMinistry",
+ "unit": 2,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<!-- CTS Deacon Family Ministry Plan — Unit 2. Built on Cook's validated Q24 masters engine (ported from Bible Characters Unit 3). Bilingual EN (NKJV) / ES (RVG). Author: Dr. Wayne Cook. Spanish + SA keywords/models pending native RVG / author spot-check. -->\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Unit 3 →</button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #2f4f2f;\"><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\">\n    <h2><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n    <input type=\"text\" id=\"regName\" placeholder=\"Full name / Nombre completo\" aria-label=\"Full name / Nombre completo\">\n    <input type=\"email\" id=\"regEmail\" placeholder=\"Email\" aria-label=\"Email\">\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"cert\">Certificate Track</option>\n        <option value=\"mdiv\">Master of Divinity (M.Div.) Track</option>\n        <option value=\"thm\">Master of Theology (Th.M.) Track</option>\n    </select>\n    <button class=\"nav-btn\" id=\"regBtn\"><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\"><p><!--cts:b007:en--></p>\n<p><!--cts:b008:en--></p>\n<p><!--cts:b009:en--></p>\n<p><!--cts:b010:en--></p>\n<div class=\"scripture\"><!--cts:b011:en--></div>\n<p><!--cts:b012:en--></p>\n<p><!--cts:b013:en--></p>\n<p><!--cts:b014:en--></p>\n<h2><!--cts:b015:en--></h2>\n<p><!--cts:b016:en--></p>\n<p><!--cts:b017:en--></p>\n<p><!--cts:b018:en--></p>\n<h2><!--cts:b019:en--></h2>\n<p><!--cts:b020:en--></p>\n<p><!--cts:b021:en--></p>\n<p><!--cts:b022:en--></p>\n<h2><!--cts:b023:en--></h2>\n<p><!--cts:b024:en--></p>\n<p><!--cts:b025:en--></p>\n<div class=\"illustration\"><!--cts:b026:en--></div>\n<h2><!--cts:b027:en--></h2>\n<p><!--cts:b028:en--></p>\n<p><!--cts:b029:en--></p>\n<p><!--cts:b030:en--></p>\n<p><!--cts:b031:en--></p>\n<h2><!--cts:b032:en--></h2>\n<p><!--cts:b033:en--></p>\n<p><!--cts:b034:en--></p>\n<p><!--cts:b035:en--></p></div>\n<div class=\"lang-es\"><p><!--cts:b007:es--></p>\n<p><!--cts:b008:es--></p>\n<p><!--cts:b009:es--></p>\n<p><!--cts:b010:es--></p>\n<div class=\"scripture\"><!--cts:b011:es--></div>\n<p><!--cts:b012:es--></p>\n<p><!--cts:b013:es--></p>\n<p><!--cts:b014:es--></p>\n<h2><!--cts:b015:es--></h2>\n<p><!--cts:b016:es--></p>\n<p><!--cts:b017:es--></p>\n<p><!--cts:b018:es--></p>\n<h2><!--cts:b019:es--></h2>\n<p><!--cts:b020:es--></p>\n<p><!--cts:b021:es--></p>\n<p><!--cts:b022:es--></p>\n<h2><!--cts:b023:es--></h2>\n<p><!--cts:b024:es--></p>\n<p><!--cts:b025:es--></p>\n<div class=\"illustration\"><!--cts:b026:es--></div>\n<h2><!--cts:b027:es--></h2>\n<p><!--cts:b028:es--></p>\n<p><!--cts:b029:es--></p>\n<p><!--cts:b030:es--></p>\n<p><!--cts:b031:es--></p>\n<h2><!--cts:b032:es--></h2>\n<p><!--cts:b033:es--></p>\n<p><!--cts:b034:es--></p>\n<p><!--cts:b035:es--></p></div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b036:en--></span><span class=\"lang-es\"><!--cts:b036:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b037:en--></span>\n       <span class=\"lang-es\"><!--cts:b037:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b038:en--></span><span class=\"lang-es\"><!--cts:b038:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b039:en--></span><span class=\"lang-es\"><!--cts:b039:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSDeaconFamilyMinistryReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "📖 Deacon Family Ministry Plan — Unit 2: Qualifications and Character of Deacons",
+    "es": "📖 Plan de Ministerio Familiar del Diácono — Unidad 2: Cualidades y Carácter de los Diáconos"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8988638530ba"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "\"But let these also first be tested; then let them serve as deacons, being found blameless.\" — 1 Timothy 3:10 (NKJV)",
+    "es": "«Y éstos también sean primero probados; y luego ejerzan el diaconado, siendo irreprensibles.» — 1 Timoteo 3:10 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "98f24f2785b5"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "📝 Course Registration",
+    "es": "📝 Registro del Curso"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fde900fe006b"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "Please register before beginning this unit.",
+    "es": "Por favor regístrese antes de comenzar esta unidad."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6c8b91fbfb6f"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "In Unit 1 we learned what a deacon is: a servant, set apart by the church to carry the load of practical care so that the ministry of the Word may go forward. But the New Testament is never content to tell us only what a deacon does; it is equally concerned with what a deacon <em>is</em>. Service in the church is never a matter of mere willingness or availability. The man who handles a congregation's people, its money, its sorrows, and its secrets must himself be a man of tested character. So in this unit we turn from the work to the worker, and we ask a single question: what kind of man may the church rightly set apart as a deacon?",
+    "es": "En la Unidad 1 aprendimos qué es un diácono: un siervo, apartado por la iglesia para llevar la carga del cuidado práctico de modo que el ministerio de la Palabra pueda avanzar. Pero el Nuevo Testamento nunca se contenta con decirnos solo lo que un diácono hace; le importa por igual lo que un diácono <em>es</em>. El servicio en la iglesia nunca es cuestión de mera disposición o disponibilidad. El hombre que maneja a la gente de una congregación, su dinero, sus dolores y sus secretos, debe ser él mismo un hombre de carácter probado. Así que en esta unidad pasamos de la obra al obrero, y hacemos una sola pregunta: ¿qué clase de hombre puede la iglesia apartar con razón como diácono?"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "49be5deeaf37"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "We have already seen the answer begin in Acts 6, where the seven were to be “men of good reputation, full of the Holy Spirit and wisdom” (Acts 6:3). Notice again that not one of those three marks was administrative skill. The work waiting to be done was the daily distribution of food; the requirement was spiritual maturity. From the very first day, the church refused to separate practical service from personal holiness. A man was chosen for what he was before he was trusted with what he would do.",
+    "es": "Ya hemos visto comenzar la respuesta en Hechos 6, donde los siete debían ser «varones de buen testimonio, llenos del Espíritu Santo y de sabiduría» (Hechos 6:3). Note de nuevo que ninguna de esas tres marcas era habilidad administrativa. La obra que esperaba era el reparto diario de los alimentos; el requisito era madurez espiritual. Desde el primer día, la iglesia se negó a separar el servicio práctico de la santidad personal. Un hombre era escogido por lo que era antes de que se le confiara lo que haría."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6fd2cddf20f4"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "Why should the standard be so high? Because the deacon stands where the life of the church is most tender. He enters homes in their grief, handles money given in sacrifice, and hears confessions no one else will ever hear. A careless member may wound one family; a careless deacon may wound many. The higher the trust, the higher the character it requires; and so the church examines the man before it ever hands him the work.",
+    "es": "¿Por qué ha de ser tan alta la norma? Porque el diácono está donde la vida de la iglesia es más tierna. Entra en los hogares en su dolor, maneja dinero dado en sacrificio, y oye confidencias que nadie más oirá jamás. Un miembro descuidado puede herir a una familia; un diácono descuidado puede herir a muchas. Cuanto mayor es la confianza, mayor es el carácter que exige; y por eso la iglesia examina al hombre antes de entregarle la obra."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "68c42acc6752"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "When the Apostle Paul came to write down the standing requirements for this office, he took those early marks and expanded them into a fuller portrait. To a young pastor in Ephesus he set down, in plain words, the character the church must look for:",
+    "es": "Cuando el apóstol Pablo llegó a poner por escrito los requisitos permanentes de este oficio, tomó aquellas primeras marcas y las amplió en un retrato más completo. A un joven pastor en Éfeso le dejó escrito, en palabras claras, el carácter que la iglesia debe buscar:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c4cc00bfe22b"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "scripture",
+   "text": {
+    "en": "Likewise deacons must be reverent, not double-tongued, not given to much wine, not greedy for money, holding the mystery of the faith with a pure conscience. But let these also first be tested; then let them serve as deacons, being found blameless. Likewise, their wives must be reverent, not slanderers, temperate, faithful in all things. Let deacons be the husbands of one wife, ruling their children and their own houses well. For those who have served well as deacons obtain for themselves a good standing and great boldness in the faith which is in Christ Jesus. (1 Timothy 3:8–13, NKJV)",
+    "es": "Los diáconos asimismo deben ser honestos, sin doblez, no dados a mucho vino, no amadores de las ganancias deshonestas; que tengan el misterio de la fe con limpia conciencia. Y éstos también sean primero probados; y luego ejerzan el diaconado, siendo irreprensibles. Las mujeres asimismo sean honestas, no calumniadoras, sino sobrias, fieles en todo. Los diáconos sean maridos de una sola esposa, que gobiernen bien sus hijos y sus casas. Porque los que bien ejercieren el diaconado, ganan para sí buen grado, y mucha confianza en la fe que es en Cristo Jesús. (1 Timoteo 3:8–13, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "374be9c736ca"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Subject:</strong> the qualifications and character of the deacon.",
+    "es": "<strong>Tema:</strong> las cualidades y el carácter del diácono."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "161ab961efd2"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Proposition:</strong> God requires that the deacon be a man of proven character, sound conviction, examined worth, and a well-ordered home before the church entrusts him with its service.",
+    "es": "<strong>Proposición:</strong> Dios requiere que el diácono sea un hombre de carácter probado, de convicción sólida, de valor examinado y de un hogar bien ordenado, antes de que la iglesia le confíe su servicio."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "edf2a7efbbec"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "prose",
+   "text": {
+    "en": "From this passage we will draw <strong>four qualifications</strong> the church must require of those it sets apart.",
+    "es": "De este pasaje sacaremos <strong>cuatro cualidades</strong> que la iglesia debe exigir a los que aparta."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a2118f60daff"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "heading",
+   "text": {
+    "en": "I. The Qualification of Character",
+    "es": "I. La Cualidad del Carácter"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "56f3fe4d2053"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "Paul begins not with what the deacon must <em>do</em> but with what he must <em>be</em>: “Likewise deacons must be reverent, not double-tongued, not given to much wine, not greedy for money” (1 Timothy 3:8). First comes a thing he must be, and then three things he must not be.",
+    "es": "Pablo no comienza con lo que el diácono debe <em>hacer</em>, sino con lo que debe <em>ser</em>: «Los diáconos asimismo deben ser honestos, sin doblez, no dados a mucho vino, no amadores de las ganancias deshonestas» (1 Timoteo 3:8). Primero viene algo que debe ser, y luego tres cosas que no debe ser."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "87f32b805937"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "He must be <strong>reverent</strong> — a man of weight and dignity, who is taken seriously because he himself takes holy things seriously. He is not frivolous or unstable, but a man whose bearing makes others trust him with sacred matters. Then come the three warnings. He must not be <strong>double-tongued</strong> — saying one thing to one person and another to the next. This is no small danger, for the deacon moves from home to home, and he must carry the same truth, and keep the same confidence, in every house he enters. A man who shades his words to please each listener will soon sow confusion and break trust across the whole congregation. He must not be <strong>given to much wine</strong> — not enslaved to appetite, for a man who cannot master his own cravings cannot be trusted to master a difficult visit or a delicate need. And he must not be <strong>greedy for money</strong> — for the deacon will often handle the benevolence funds of the church, and a man who loves money will sooner or later betray the very poor he was set apart to serve. The portrait is of a man whose private appetites are under control, so that he may be trusted in public service. Character is not what a man shows on the platform; it is what he is when no one is watching.",
+    "es": "Debe ser <strong>honesto</strong> (digno de respeto) — un hombre de peso y dignidad, a quien se toma en serio porque él mismo toma en serio las cosas santas. No es frívolo ni inestable, sino un hombre cuyo porte hace que otros le confíen asuntos sagrados. Luego vienen las tres advertencias. No debe ser <strong>de doblez</strong> — diciendo una cosa a una persona y otra a la siguiente. Este no es un peligro pequeño, porque el diácono va de hogar en hogar, y debe llevar la misma verdad, y guardar la misma confianza, en cada casa donde entra. Un hombre que matiza sus palabras para agradar a cada oyente pronto sembrará confusión y quebrará la confianza en toda la congregación. No debe ser <strong>dado a mucho vino</strong> — no esclavo del apetito, porque un hombre que no puede dominar sus propios antojos no puede ser confiado para dominar una visita difícil o una necesidad delicada. Y no debe ser <strong>amador de las ganancias deshonestas</strong> — porque el diácono a menudo manejará los fondos de beneficencia de la iglesia, y un hombre que ama el dinero tarde o temprano traicionará a los mismos pobres que fue apartado para servir. El retrato es de un hombre cuyos apetitos privados están bajo control, para que se le pueda confiar el servicio público. El carácter no es lo que un hombre muestra en la plataforma; es lo que es cuando nadie lo observa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "72ee64163a24"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "See how practical this list is. Every fault Paul names is one that does its damage quietly, in private, over time — a loose tongue, a secret thirst, a love of money. These are not the sins that get a man removed from the platform; they are the sins that slowly rot a ministry of care from the inside. So the church must look beneath the surface and ask not only, “Can this man serve?” but “Is this man sound all the way through?”",
+    "es": "Vea cuán práctica es esta lista. Cada falta que Pablo nombra es una que hace su daño en silencio, en privado, con el tiempo — una lengua suelta, una sed secreta, un amor al dinero. Estos no son los pecados que sacan a un hombre de la plataforma; son los pecados que poco a poco pudren un ministerio de cuidado desde adentro. Por eso la iglesia debe mirar debajo de la superficie y preguntar no solo: «¿Puede este hombre servir?» sino: «¿Es este hombre sólido hasta lo más hondo?»"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "96aa277c807a"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "heading",
+   "text": {
+    "en": "II. The Qualification of Conviction",
+    "es": "II. La Cualidad de la Convicción"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "aad5a74a515d"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "“holding the mystery of the faith with a pure conscience” (1 Timothy 3:9). The deacon is not merely a good man with clean habits; he is a man who holds the faith. The “mystery of the faith” is the gospel that was once hidden and is now revealed in Christ — and the deacon must hold it firmly and personally, not as a hired manager of a religious institution, but as a believer who himself rests on the truth he serves.",
+    "es": "«que tengan el misterio de la fe con limpia conciencia» (1 Timoteo 3:9). El diácono no es solo un buen hombre de hábitos limpios; es un hombre que tiene la fe. El «misterio de la fe» es el evangelio que estuvo una vez escondido y ahora es revelado en Cristo — y el diácono debe tenerlo firme y personalmente, no como un gerente contratado de una institución religiosa, sino como un creyente que él mismo descansa en la verdad que sirve."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9b3320855f54"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "And he must hold it “with a pure conscience” — that is, his belief and his behavior must agree. It is a terrible and hollow thing for a man to defend a faith his daily life denies. The deacon's doctrine and his conscience must be at peace with one another, so that what he confesses with his mouth is confirmed by the way he lives. A divided man — sound in word but careless in life — cannot lead the people of God, because they will follow what he does long before they follow what he says. Here, instead, is a man you can both trust and follow, because his creed and his conduct tell the same story.",
+    "es": "Y debe tenerlo «con limpia conciencia» — es decir, su creencia y su conducta deben concordar. Es algo terrible y hueco que un hombre defienda una fe que su vida diaria niega. La doctrina del diácono y su conciencia deben estar en paz una con otra, de modo que lo que confiesa con su boca sea confirmado por la manera en que vive. Un hombre dividido — sólido en palabra pero descuidado en la vida — no puede dirigir al pueblo de Dios, porque seguirán lo que hace mucho antes de seguir lo que dice. Aquí, en cambio, hay un hombre en quien se puede confiar y a quien se puede seguir, porque su credo y su conducta cuentan la misma historia."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3279e10ee6bf"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "And do not miss how much the deacon teaches without ever standing to preach. As he carries the gospel from house to house in word and in life, the families he serves read the faith in him. A deacon whose conviction is real and whose conscience is clean becomes a quiet sermon in every home he enters — and that is a kind of preaching the whole church needs.",
+    "es": "Y no pase por alto cuánto enseña el diácono sin jamás ponerse de pie a predicar. Conforme lleva el evangelio de casa en casa en palabra y en vida, las familias a quienes sirve leen la fe en él. Un diácono cuya convicción es real y cuya conciencia está limpia se vuelve un sermón callado en cada hogar donde entra — y esa es una clase de predicación que toda la iglesia necesita."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e76965568a7d"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "heading",
+   "text": {
+    "en": "III. The Qualification of Proven Worth",
+    "es": "III. La Cualidad del Valor Probado"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "00a942161696"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "“But let these also first be tested; then let them serve as deacons, being found blameless” (1 Timothy 3:10). Here is the great safeguard of the office, and the order is fixed and must never be reversed: first tested, then trusted; first proven, then placed. The church is not to lay its hands on a man hastily (compare 1 Timothy 5:22), handing a new or unknown convert the care of souls before his character has been seen over time.",
+    "es": "«Y éstos también sean primero probados; y luego ejerzan el diaconado, siendo irreprensibles» (1 Timoteo 3:10). Aquí está la gran salvaguarda del oficio, y el orden es fijo y nunca debe invertirse: primero probados, luego confiados; primero comprobados, luego colocados. La iglesia no ha de imponer las manos a un hombre apresuradamente (compare 1 Timoteo 5:22), entregando a un converso nuevo o desconocido el cuidado de las almas antes de que su carácter haya sido visto con el tiempo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ecfc2b72bd0a"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "The word “tested” does not mean a written examination; it means a life observed — a man watched in the ordinary trials of church life until the congregation can say of him, “He is blameless.” Watch how a man serves in small things, and you will know whether to trust him with large ones.",
+    "es": "La palabra «probados» no significa un examen escrito; significa una vida observada — un hombre vigilado en las pruebas ordinarias de la vida de la iglesia hasta que la congregación pueda decir de él: «Es irreprensible.» Observe cómo sirve un hombre en las cosas pequeñas, y sabrá si confiarle las grandes."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "28eb93f9340d"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Illustration.</strong> No wise builder hangs the weight of a roof on a beam he has never tested. He loads it first, watches it under strain, and only then builds upon it. The church does the same with a man's character: it lets him bear small weights — a hard visit, a quiet need, a sum of money — and watches how he carries them, before it lays upon him the care of souls. A gifted but ungodly worker will cost a church far more than an empty office ever could. Proven, then placed; tested, then trusted.",
+    "es": "<strong>Ilustración.</strong> Ningún constructor sabio cuelga el peso de un techo de una viga que nunca ha probado. La carga primero, la observa bajo tensión, y solo entonces edifica sobre ella. La iglesia hace lo mismo con el carácter de un hombre: le deja llevar pesos pequeños — una visita difícil, una necesidad callada, una suma de dinero — y observa cómo los carga, antes de poner sobre él el cuidado de las almas. Un obrero dotado pero impío le costará a la iglesia mucho más que un oficio vacío. Comprobado, luego colocado; probado, luego confiado."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "51aeb317efc3"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "heading",
+   "text": {
+    "en": "IV. The Qualification of a Well-Ordered Home",
+    "es": "IV. La Cualidad de un Hogar Bien Ordenado"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c001eff24915"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "The deacon's qualification reaches past himself to his household: “Likewise, their wives must be reverent, not slanderers, temperate, faithful in all things. Let deacons be the husbands of one wife, ruling their children and their own houses well” (1 Timothy 3:11–12).",
+    "es": "La cualidad del diácono se extiende más allá de sí mismo hasta su casa: «Las mujeres asimismo sean honestas, no calumniadoras, sino sobrias, fieles en todo. Los diáconos sean maridos de una sola esposa, que gobiernen bien sus hijos y sus casas» (1 Timoteo 3:11–12)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "50ff6f6b71d7"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "Verse 11 has been read in two ways by faithful interpreters, and a humble church should know both. Some take “their wives” to mean the wives of the deacons, who share so closely in this ministry of care that they too must be reverent, no slanderers — no carriers of gossip from house to house — temperate, and faithful in all things. Others take the same word to mean “the women” — women who themselves serve in a diaconal role, what some churches have called deaconesses, pointing to Phoebe, who is called a servant (<em>diakonos</em>) of the church at Cenchrea (Romans 16:1). The grammar allows both readings, and godly churches have differed in good conscience. What is beyond all dispute is that the women closely bound to this ministry of care must themselves be trustworthy, for they will hear the same sorrows and keep the same confidences as the deacons they serve beside.",
+    "es": "El versículo 11 se ha leído de dos maneras por intérpretes fieles, y una iglesia humilde debería conocer ambas. Algunos toman «las mujeres» como las esposas de los diáconos, que comparten tan de cerca este ministerio de cuidado que también ellas deben ser honestas, no calumniadoras — no portadoras de chismes de casa en casa — sobrias y fieles en todo. Otros toman la misma palabra como «las mujeres» que sirven ellas mismas en un papel diaconal, lo que algunas iglesias han llamado diaconisas, señalando a Febe, que es llamada sierva (<em>diakonos</em>) de la iglesia en Cencrea (Romanos 16:1). La gramática permite ambas lecturas, y iglesias piadosas han diferido en buena conciencia. Lo que está fuera de toda disputa es que las mujeres estrechamente ligadas a este ministerio de cuidado deben ser ellas mismas dignas de confianza, porque oirán los mismos dolores y guardarán las mismas confidencias que los diáconos junto a quienes sirven."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6b86634d5e85"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "Then Paul requires that the deacon be “the husband of one wife” — a man of marital faithfulness and undivided integrity — and one who rules “their children and their own houses well.” The reasoning is the same that Paul applies to the overseer just above: a man's home is the proving ground of his fitness to serve the household of God. If he cannot lead, love, and order his own family, he is not yet ready to be trusted with the family of the church. The man who is faithful in the small kingdom of his home gives the church good reason to trust him in the larger work of service.",
+    "es": "Luego Pablo requiere que el diácono sea «marido de una sola esposa» — un hombre de fidelidad conyugal e integridad indivisa — y uno que gobierne «bien sus hijos y sus casas.» El razonamiento es el mismo que Pablo aplica al obispo justo antes: el hogar de un hombre es el campo de prueba de su aptitud para servir a la casa de Dios. Si no puede dirigir, amar y ordenar a su propia familia, todavía no está listo para que se le confíe la familia de la iglesia. El hombre que es fiel en el pequeño reino de su hogar le da a la iglesia buena razón para confiar en él en la obra mayor del servicio."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f0ff2daea1c0"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "This is no harsh demand. It simply recognizes that the same graces a man needs to shepherd a home — patience, faithfulness, gentle authority, self-denial — are the very graces he will need to serve the wider family of God. The home is not a separate test from the ministry; it is the first rehearsal of it.",
+    "es": "Esto no es una exigencia dura. Simplemente reconoce que las mismas gracias que un hombre necesita para pastorear un hogar — paciencia, fidelidad, autoridad amable, abnegación — son las mismas gracias que necesitará para servir a la familia más amplia de Dios. El hogar no es una prueba aparte del ministerio; es el primer ensayo de él."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7ca99374b8da"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "heading",
+   "text": {
+    "en": "Conclusion",
+    "es": "Conclusión"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e39262defe80"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "Paul ends not with a threat but with a promise: “For those who have served well as deacons obtain for themselves a good standing and great boldness in the faith which is in Christ Jesus” (1 Timothy 3:13). The deacon who serves well gains two things. He gains a <strong>good standing</strong> — an honored place and a good reputation in the church and before God. And he gains <strong>great boldness in the faith</strong> — a holy confidence that grows in a man as he pours himself out in faithful service. Service never diminishes a man; it enlarges him.",
+    "es": "Pablo no termina con una amenaza, sino con una promesa: «Porque los que bien ejercieren el diaconado, ganan para sí buen grado, y mucha confianza en la fe que es en Cristo Jesús» (1 Timoteo 3:13). El diácono que sirve bien gana dos cosas. Gana un <strong>buen grado</strong> — un lugar honrado y una buena reputación en la iglesia y delante de Dios. Y gana <strong>mucha confianza en la fe</strong> — una santa seguridad que crece en un hombre conforme se derrama en servicio fiel. El servicio nunca disminuye a un hombre; lo engrandece."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "37cab600f7aa"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "prose",
+   "text": {
+    "en": "Gather the four qualifications and the portrait is complete. The deacon must be a man of tested character, sound conviction, proven worth, and a faithful home — the very pattern we first met in Acts 6, where the seven were to be of good reputation, full of the Spirit, and full of wisdom. The standard is high, and it is meant to be, for the deacon is not a volunteer filling a slot but a servant carrying the care of God's people. In Unit 3 we will trace how this biblical office took shape in Southern Baptist life and gave rise to the Deacon Family Ministry Plan. But the foundation is laid here, and it is the same foundation Paul and the apostles laid: the church must choose its deacons not first for what they can do, but for what, by the grace of God, they already are.",
+    "es": "Reúna las cuatro cualidades y el retrato queda completo. El diácono debe ser un hombre de carácter probado, de convicción sólida, de valor probado y de un hogar fiel — el mismo patrón que encontramos primero en Hechos 6, donde los siete debían ser de buen testimonio, llenos del Espíritu y llenos de sabiduría. La norma es alta, y así debe ser, porque el diácono no es un voluntario que llena un puesto, sino un siervo que lleva el cuidado del pueblo de Dios. En la Unidad 3 trazaremos cómo este oficio bíblico tomó forma en la vida bautista del Sur y dio origen al Plan de Ministerio Familiar del Diácono. Pero el fundamento queda puesto aquí, y es el mismo fundamento que Pablo y los apóstoles pusieron: la iglesia debe escoger a sus diáconos no primero por lo que pueden hacer, sino por lo que, por la gracia de Dios, ya son."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c4e5d740d675"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "prose",
+   "text": {
+    "en": "Let every church, then, weigh the man before it weighs the need. A need can wait a little; a wrong man in a trusted office can do harm that years will not undo. Choose slowly, choose prayerfully, and choose for character — and God will give His church servants worthy of the towel they carry.",
+    "es": "Que cada iglesia, pues, pese al hombre antes de pesar la necesidad. Una necesidad puede esperar un poco; un hombre equivocado en un oficio de confianza puede hacer un daño que los años no desharán. Escoja despacio, escoja con oración, y escoja por el carácter — y Dios dará a su iglesia siervos dignos de la toalla que llevan."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b6eb71dec2e4"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "prose",
+   "text": {
+    "en": "Unit 2 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 2 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "345cc83595a9"
+    }
+   }
+  },
+  {
+   "id": "b037",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33593c268178"
+    }
+   }
+  },
+  {
+   "id": "b038",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b039",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

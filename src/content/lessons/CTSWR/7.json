@@ -1,0 +1,558 @@
+{
+ "course": "CTSWR",
+ "unit": 7,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<a href=\"index.html\" style=\"display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif\">📚 Catalog / Catálogo</a>\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"prevUnitBtn\">← Previous</button>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Unit 8 →</button>\n    </div>\n</div>\n<div class=\"lang-toggle-group\" style=\"display:inline-block;margin-bottom:15px;\">\n<button class=\"toggle-btn\" data-lang=\"en\" id=\"langBtnEn\">English</button>\n<button class=\"toggle-btn\" data-lang=\"es\" id=\"langBtnEs\">Español</button>\n<button class=\"toggle-btn\" data-lang=\"both\" id=\"langBtnBoth\">Both / Ambos</button>\n</div>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #5b3a1f;\"><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"registrationCard\">\n    <h2><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n    <label><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></label>\n    <input type=\"text\" id=\"regName\" placeholder=\"\" >\n    <label><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></label>\n    <input type=\"email\" id=\"regEmail\" placeholder=\"\" >\n    <label><span class=\"lang-en\"><!--cts:b008:en--></span><span class=\"lang-es\"><!--cts:b008:es--></span></label>\n    <input type=\"text\" id=\"regCountry\" placeholder=\"\" >\n    <label><span class=\"lang-en\"><!--cts:b009:en--></span><span class=\"lang-es\"><!--cts:b009:es--></span></label>\n    <input type=\"hidden\" id=\"regTrack\" value=\"certificate\" >\n    <div id=\"trackButtons\" style=\"display:flex;flex-direction:column;gap:8px;margin:6px 0 12px;\">\n        <button type=\"button\" class=\"track-opt\" data-track=\"certificate\"><span class=\"lang-en\"><!--cts:b010:en--></span><span class=\"lang-es\"><!--cts:b010:es--></span></button>\n        <button type=\"button\" class=\"track-opt\" data-track=\"mdiv\"><span class=\"lang-en\"><!--cts:b011:en--></span><span class=\"lang-es\"><!--cts:b011:es--></span></button>\n        <button type=\"button\" class=\"track-opt\" data-track=\"thm\"><span class=\"lang-en\"><!--cts:b012:en--></span><span class=\"lang-es\"><!--cts:b012:es--></span></button>\n    </div>\n    <button class=\"small\" id=\"saveRegBtn\" style=\"margin-top: 10px;\"><span class=\"lang-en\"><!--cts:b013:en--></span><span class=\"lang-es\"><!--cts:b013:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\" id=\"teachingContent\">\n    <div class=\"lang-en\">\n        <h2><!--cts:b014:en--></h2>\n        <p><!--cts:b015:en--></p>\n\n        <p><!--cts:b016:en--></p>\n\n        <h2><!--cts:b017:en--></h2>\n        <p><!--cts:b018:en--></p>\n\n        <p><!--cts:b019:en--></p>\n\n        <p><!--cts:b020:en--></p>\n\n        <h2><!--cts:b021:en--></h2>\n        <p><!--cts:b022:en--></p>\n\n        <p><!--cts:b023:en--></p>\n\n        <p><!--cts:b024:en--></p>\n\n        <h2><!--cts:b025:en--></h2>\n        <p><!--cts:b026:en--></p>\n\n        <p><!--cts:b027:en--></p>\n\n        <p><!--cts:b028:en--></p>\n\n        <h2><!--cts:b029:en--></h2>\n        <p><!--cts:b030:en--></p>\n\n        <p><!--cts:b031:en--></p>\n\n        <h2><!--cts:b032:en--></h2>\n        <p><!--cts:b033:en--></p>\n\n        <p><!--cts:b034:en--></p>\n\n        <p style=\"text-align: center; margin-top: 30px; font-weight: bold;\"><!--cts:b035:en--></p>\n\n    </div>\n\n    <div class=\"lang-es\">\n        <h2><!--cts:b014:es--></h2>\n        <p><!--cts:b015:es--></p>\n\n        <p><!--cts:b016:es--></p>\n\n        <h2><!--cts:b017:es--></h2>\n        <p><!--cts:b018:es--></p>\n\n        <p><!--cts:b019:es--></p>\n\n        <p><!--cts:b020:es--></p>\n\n        <h2><!--cts:b021:es--></h2>\n        <p><!--cts:b022:es--></p>\n\n        <p><!--cts:b023:es--></p>\n\n        <p><!--cts:b024:es--></p>\n\n        <h2><!--cts:b025:es--></h2>\n        <p><!--cts:b026:es--></p>\n\n        <p><!--cts:b027:es--></p>\n\n        <p><!--cts:b028:es--></p>\n\n        <h2><!--cts:b029:es--></h2>\n        <p><!--cts:b030:es--></p>\n\n        <p><!--cts:b031:es--></p>\n\n        <h2><!--cts:b032:es--></h2>\n        <p><!--cts:b033:es--></p>\n\n        <p><!--cts:b034:es--></p>\n\n        <p style=\"text-align: center; margin-top: 30px; font-weight: bold;\"><!--cts:b035:es--></p>\n\n    </div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b036:en--></span><span class=\"lang-es\"><!--cts:b036:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b037:en--></span>\n       <span class=\"lang-es\"><!--cts:b037:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b038:en--></span><span class=\"lang-es\"><!--cts:b038:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small reset\"><span class=\"lang-en\"><!--cts:b039:en--></span><span class=\"lang-es\"><!--cts:b039:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n  \n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSWRReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "🌍 World Religions — Unit 7: Sikhism",
+    "es": "🌍 Religiones del Mundo — Unidad 7: El Sijismo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d4adb30aeb16"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "\"For there is no partiality with God.\" — Romans 2:11 (NKJV)",
+    "es": "\"Porque no hay acepción de personas para con Dios.\" — Romanos 2:11 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ff6d705db55f"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "Student Registration",
+    "es": "Registro del Estudiante"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f94d495eed0d"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "Please register before beginning this unit. Your registration is saved on this device and used across all CTS courses.",
+    "es": "Por favor regístrese antes de comenzar esta unidad. Su registro se guarda en este dispositivo y se usa en todos los cursos del CTS."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2330ea9c37a9"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Full Name",
+    "es": "Nombre Completo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "64346b483c0a"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Email",
+    "es": "Correo Electrónico"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "84add5b29527"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "Country",
+    "es": "País"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d523ebbd1014"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "Program Track",
+    "es": "Programa"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ec4b83520350"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "Certificate of Ministry",
+    "es": "Certificado de Ministerio"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4df6d896eb72"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Master of Divinity (M.Div.)",
+    "es": "Maestría en Divinidad (M.Div.)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8400c8c4d874"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "Master of Theology (Th.M.)",
+    "es": "Maestría en Teología (Th.M.)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a31c66296633"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "Save Registration",
+    "es": "Guardar Registro"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "019798420daf"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "heading",
+   "text": {
+    "en": "Orientation",
+    "es": "Orientación"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "86e4e3875420"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "With roughly thirty million adherents worldwide as of recent estimates, Sikhism is smaller than any religion this course has studied so far, yet it holds real significance for this survey for two reasons. First, unlike Hinduism and Buddhism, which developed gradually over centuries with no single identifiable founder in the way this course could name for Islam or Buddhism, Sikh tradition traces its origin to a specific historical figure, Guru Nanak, whose teaching arose in direct, conscious response to the religious tensions between Hinduism and Islam in the region where he lived, even as the tradition itself continued to take shape through the nine Gurus who followed him and the community's later history — making it, in a sense, this course's clearest case study in a founder whose followers understood him as pointing beyond, rather than simply reforming, two existing traditions. Second, Sikh communities have spread through immigration to nearly every part of the world, including a real and growing presence in Latin America, meaning a pastor is more likely to encounter an actual Sikh neighbor, easily recognizable by the turban many Sikh men wear, than he might expect given the religion's relatively modest global numbers.",
+    "es": "Con aproximadamente treinta millones de adherentes en todo el mundo según estimaciones recientes, el sijismo es más pequeño que cualquier religión que este curso haya estudiado hasta ahora, pero tiene una significación real para este estudio por dos razones. Primero, a diferencia del hinduismo y el budismo, que se desarrollaron gradualmente a lo largo de siglos sin un solo fundador identificable de la manera en que este curso pudo nombrar para el islam o el budismo, la tradición sij traza su origen a una figura histórica específica, el Gurú Nanak, cuya enseñanza surgió en respuesta directa y consciente a las tensiones religiosas entre el hinduismo y el islam en la región donde vivía, aun cuando la tradición misma siguió tomando forma a través de los nueve Gurús que lo siguieron y la historia posterior de la comunidad — haciéndolo, en cierto sentido, el estudio de caso más claro de este curso de un fundador cuyos seguidores lo entendieron como quien apuntaba más allá, en lugar de simplemente reformar, dos tradiciones existentes. Segundo, las comunidades sijes se han extendido a través de la inmigración a casi todas las partes del mundo, incluyendo una presencia real y creciente en América Latina, lo que significa que un pastor tiene más probabilidad de encontrarse con un vecino sij real, fácilmente reconocible por el turbante que muchos hombres sijes usan, de lo que podría esperar dados los números globales relativamente modestos de la religión."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1088f1aff221"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "This unit will trace Sikhism's origin in the teaching of Guru Nanak and the line of Gurus who followed him, examine its core theological convictions and its central scripture, describe the distinctive markers of Sikh identity known as the Five Ks, outline the practice of the Sikh community centered on the gurdwara, and close with guidance for gospel engagement with Sikh neighbors, following the pattern this course has applied consistently since Paul at the Areopagus in Unit 1.",
+    "es": "Esta unidad rastreará el origen del sijismo en la enseñanza del Gurú Nanak y la línea de Gurús que lo siguieron, examinará sus convicciones teológicas centrales y su escritura central, describirá los marcadores distintivos de la identidad sij conocidos como las Cinco Kas, delineará la práctica de la comunidad sij centrada en el gurdwara, y cerrará con orientación para el acercamiento evangelístico con vecinos sijes, siguiendo el patrón que este curso ha aplicado consistentemente desde Pablo en el Areópago en la Unidad 1."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ff21e6503e66"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "heading",
+   "text": {
+    "en": "I. Guru Nanak and the Founding of Sikhism",
+    "es": "I. El Gurú Nanak y la fundación del sijismo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "982e5bc8351b"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "Guru Nanak was born in 1469 in the Punjab region of what is now Pakistan and northern India, a region where Hindu and Muslim populations lived in close proximity, often in tension, each holding the other's core convictions to be false. According to Sikh tradition, Nanak, raised in a Hindu family but exposed from childhood to Muslim thought and community, underwent a profound spiritual experience around age thirty in which he disappeared into a river for three days and emerged declaring, \"There is no Hindu, there is no Muslim,\" a statement Sikh tradition understands not as declaring both religions equally true, but as pointing beyond the sectarian divide itself toward a single, formless God who transcends the particular rituals, scriptures, and social divisions both communities had built up around Him. Nanak spent the following decades traveling widely, by traditional account as far as Mecca and possibly beyond, teaching a message centered on the oneness of God, the equality of all people regardless of caste or gender, and the rejection of empty ritual in favor of sincere inward devotion and honest living.",
+    "es": "El Gurú Nanak nació en 1469 en la región del Punjab de lo que hoy es Pakistán y el norte de la India, una región donde las poblaciones hindúes y musulmanas vivían en proximidad cercana, a menudo en tensión, cada una considerando falsas las convicciones centrales de la otra. Según la tradición sij, Nanak, criado en una familia hindú pero expuesto desde la infancia al pensamiento y comunidad musulmanes, experimentó una profunda experiencia espiritual alrededor de los treinta años en la cual desapareció en un río durante tres días y emergió declarando: \"No hay hindú, no hay musulmán,\" una declaración que la tradición sij entiende no como declarando ambas religiones igualmente verdaderas, sino como señalando más allá de la división sectaria misma hacia un único Dios sin forma que trasciende los rituales particulares, escrituras, y divisiones sociales que ambas comunidades habían construido en torno a Él. Nanak pasó las siguientes décadas viajando ampliamente, según relato tradicional hasta La Meca y posiblemente más allá, enseñando un mensaje centrado en la unicidad de Dios, la igualdad de todas las personas sin importar casta o género, y el rechazo del ritual vacío en favor de la devoción interior sincera y la vida honesta."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "74738b626c6e"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "Nanak was the first of ten human Gurus recognized in the Sikh tradition, a line of succession lasting roughly two hundred years, each Guru understood to carry forward and develop the same essential teaching and spiritual authority Nanak first received. The tenth and final human Guru, Guru Gobind Singh, made two decisions of lasting consequence for Sikhism shortly before his death in 1708: he formally established the Khalsa, a disciplined order of committed Sikhs marked by the Five Ks discussed in Unit III below, and he declared that after his death, the line of human Gurus would end, with spiritual authority passing permanently to the Sikh scripture itself, thereafter called the Guru Granth Sahib — meaning Sikhism today recognizes no living human religious authority above the community and its sacred text, a structural feature that distinguishes it sharply from the papal or caliphal authority structures found in some other traditions this course has studied.",
+    "es": "Nanak fue el primero de diez Gurús humanos reconocidos en la tradición sij, una línea de sucesión que duró aproximadamente doscientos años, cada Gurú entendido como llevando adelante y desarrollando la misma enseñanza esencial y autoridad espiritual que Nanak recibió primero. El décimo y último Gurú humano, el Gurú Gobind Singh, tomó dos decisiones de consecuencia duradera para el sijismo poco antes de su muerte en 1708: estableció formalmente el Khalsa, una orden disciplinada de sijes comprometidos marcados por las Cinco Kas discutidas en la Unidad III más abajo, y declaró que después de su muerte, la línea de Gurús humanos terminaría, con la autoridad espiritual pasando permanentemente a la escritura sij misma, en adelante llamada el Guru Granth Sahib — lo que significa que el sijismo hoy no reconoce ninguna autoridad religiosa humana viviente por encima de la comunidad y su texto sagrado, una característica estructural que lo distingue agudamente de las estructuras de autoridad papal o califal encontradas en algunas otras tradiciones que este curso ha estudiado."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3f47f84ffc3f"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "The historical context of Guru Nanak's ministry deserves a pastor's attention, since it shapes how Sikhism has understood its own relationship to both Hinduism and Islam ever since. Sixteenth-century Punjab sat under the rule of the Muslim Mughal Empire while remaining home to a large Hindu population, and relations between the two communities were often marked by mutual suspicion, occasional violent conflict, and firm theological rejection of the other's core claims. Nanak's teaching was received by many of his earliest followers, drawn from both Hindu and Muslim backgrounds, as offering a genuine third way — not a synthesis that affirmed both traditions equally, and not a rejection of everything either tradition taught, but a distinct new revelation that Sikhs believe corrected and completed what both earlier traditions had gotten partly right and partly wrong. This self-understanding as neither Hindu nor Muslim, but a fresh disclosure of the one God to a divided region, remains central to how Sikhs understand their own identity today.",
+    "es": "El contexto histórico del ministerio del Gurú Nanak merece la atención de un pastor, ya que da forma a cómo el sijismo ha entendido su propia relación tanto con el hinduismo como con el islam desde entonces. El Punjab del siglo dieciséis estaba bajo el gobierno del Imperio Mogol musulmán mientras seguía siendo hogar de una gran población hindú, y las relaciones entre las dos comunidades a menudo estaban marcadas por sospecha mutua, conflicto violento ocasional, y firme rechazo teológico de las afirmaciones centrales de la otra. La enseñanza de Nanak fue recibida por muchos de sus primeros seguidores, provenientes de trasfondos tanto hindúes como musulmanes, como ofreciendo una genuina tercera vía — no una síntesis que afirmaba ambas tradiciones por igual, y no un rechazo de todo lo que ambas tradiciones enseñaban, sino una nueva revelación distinta que los sijes creen corrigió y completó lo que ambas tradiciones anteriores habían acertado en parte y errado en parte. Este autoentendimiento como ni hindú ni musulmán, sino una revelación fresca del único Dios a una región dividida, sigue siendo central para cómo los sijes entienden su propia identidad hoy."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5ac97595b735"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "heading",
+   "text": {
+    "en": "II. Core Beliefs: One God, the Guru Granth Sahib, and the Path to Liberation",
+    "es": "II. Creencias centrales: Un Dios, el Guru Granth Sahib, y el camino a la liberación"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "616f6f93be1d"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "Sikh theology centers on an uncompromising monotheism captured in the opening words of the Guru Granth Sahib, the Mul Mantar, beginning with the phrase <em>Ik Onkar</em>, \"There is one God.\" This God is understood as formless, eternal, uncreated, self-existent, and beyond full human comprehension or representation in any image or idol — a conviction that leads Sikhism to reject idol worship as firmly as Islam does, even though Sikhism arose in a Hindu cultural context where image worship was common. Unlike the impersonal Brahman of Hindu philosophy studied in Unit 4, however, Sikh theology describes God in terms that carry real personal warmth: God is often addressed as loving, gracious, and near to those who seek Him sincerely, knowable through devotion even while remaining formless and beyond full comprehension.",
+    "es": "La teología sij se centra en un monoteísmo intransigente capturado en las palabras iniciales del Guru Granth Sahib, el Mul Mantar, comenzando con la frase <em>Ik Onkar</em>, \"Hay un Dios.\" Este Dios se entiende como sin forma, eterno, increado, autoexistente, y más allá de la plena comprensión o representación humana en cualquier imagen o ídolo — una convicción que lleva al sijismo a rechazar la adoración de ídolos tan firmemente como lo hace el islam, aunque el sijismo surgió en un contexto cultural hindú donde la adoración de imágenes era común. A diferencia del Brahman impersonal de la filosofía hindú estudiada en la Unidad 4, sin embargo, la teología sij describe a Dios en términos que llevan calidez personal real: Dios a menudo se dirige como amoroso, misericordioso, y cercano a quienes lo buscan sinceramente, cognoscible a través de la devoción incluso mientras permanece sin forma y más allá de la plena comprensión."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8576af106d33"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "The Guru Granth Sahib, the central Sikh scripture, is a large collection of hymns and poetic compositions, composed by Guru Nanak and several of his successor Gurus along with a smaller number of respected Hindu and Muslim devotional poets whose writings the Sikh Gurus judged to be in harmony with their own teaching — itself a striking editorial decision that embodies Sikhism's founding conviction that genuine devotion to the one God can be found, in some measure, outside the boundaries of any single religious community. Since Guru Gobind Singh's declaration in 1708, the Guru Granth Sahib is treated with the reverence a living Guru would receive: installed on a throne-like platform in every gurdwara, ceremonially opened each morning and closed each night, and approached by worshipers with the same physical gestures of respect — bowing, offerings — that would be shown to a living spiritual teacher.",
+    "es": "El Guru Granth Sahib, la escritura sij central, es una gran colección de himnos y composiciones poéticas, compuesta por el Gurú Nanak y varios de sus Gurús sucesores junto con un número menor de respetados poetas devocionales hindúes y musulmanes cuyos escritos los Gurús sijes juzgaron estar en armonía con su propia enseñanza — en sí misma una decisión editorial sorprendente que encarna la convicción fundacional del sijismo de que la devoción genuina al único Dios puede encontrarse, en alguna medida, fuera de los límites de cualquier comunidad religiosa única. Desde la declaración del Gurú Gobind Singh en 1708, el Guru Granth Sahib se trata con la reverencia que recibiría un Gurú viviente: instalado en una plataforma tipo trono en cada gurdwara, abierto ceremonialmente cada mañana y cerrado cada noche, y abordado por los adoradores con los mismos gestos físicos de respeto — inclinarse, ofrendas — que se mostrarían a un maestro espiritual viviente."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a254d9d25537"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "Sikhism shares with Hinduism, studied in Unit 4, the concepts of karma and samsara, the cycle of rebirth governed by one's accumulated moral actions, and understands the goal of spiritual life, called <em>mukti</em>, as liberation from this cycle. Where Sikh teaching diverges most sharply from both Hindu and Buddhist paths to liberation studied in Units 4 and 5, however, is in its account of how liberation is achieved: not primarily through ascetic renunciation of ordinary life, philosophical meditation on impersonal ultimate reality, or monastic withdrawal, but through sincere remembrance of God's name, called <em>simran</em>, combined with honest work, generous sharing with others, and wholehearted engagement in ordinary family and community life — Sikhism explicitly rejects the value of celibate monasticism and ascetic withdrawal that both Hinduism and Buddhism, in their more rigorous forms, have historically prized.",
+    "es": "El sijismo comparte con el hinduismo, estudiado en la Unidad 4, los conceptos de karma y samsara, el ciclo de renacimiento gobernado por las acciones morales acumuladas de uno, y entiende la meta de la vida espiritual, llamada <em>mukti</em>, como liberación de este ciclo. Sin embargo, donde la enseñanza sij diverge más agudamente tanto de los caminos hindú como budista hacia la liberación estudiados en las Unidades 4 y 5, es en su relato de cómo se logra la liberación: no principalmente a través de la renuncia ascética a la vida ordinaria, la meditación filosófica sobre la realidad última impersonal, o el retiro monástico, sino a través del recuerdo sincero del nombre de Dios, llamado <em>simran</em>, combinado con trabajo honesto, compartir generosamente con otros, y compromiso pleno con la vida familiar y comunitaria ordinaria — el sijismo rechaza explícitamente el valor del monasticismo célibe y el retiro ascético que tanto el hinduismo como el budismo, en sus formas más rigurosas, históricamente han apreciado."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "dc83ab47811d"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "heading",
+   "text": {
+    "en": "III. The Five Ks and Sikh Identity",
+    "es": "III. Las Cinco Kas y la identidad sij"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "57a06c3e75e7"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "When Guru Gobind Singh formally established the Khalsa in 1699, he instituted five visible articles of faith, known as the Five Ks because each begins with that letter in Punjabi, that committed Sikh men and women who join the Khalsa are expected to wear at all times as a public, unmistakable declaration of their faith and their commitment to its ethical demands. <em>Kesh</em> is uncut hair, understood as accepting God's creation as given rather than altering it, and is the reason many Sikh men wear the turban, which serves to contain and dignify the uncut hair rather than being, itself, one of the Five Ks. <em>Kangha</em> is a wooden comb, worn in the hair, symbolizing cleanliness and discipline. <em>Kara</em> is a steel bracelet worn on the wrist, symbolizing restraint from wrongdoing and the unbroken, eternal nature of God. <em>Kachera</em> are cotton undergarments, symbolizing modesty and self-control. <em>Kirpan</em> is a small ceremonial sword or dagger, symbolizing the Khalsa's commitment to defend the defenseless, resist injustice, and protect religious freedom — a striking and, to many outsiders, surprising element of Sikh identity that a pastor should understand accurately rather than misreading as an endorsement of casual violence; Sikh teaching frames the kirpan strictly as a last-resort instrument of protection and justice, not aggression.",
+    "es": "Cuando el Gurú Gobind Singh estableció formalmente el Khalsa en 1699, instituyó cinco artículos visibles de fe, conocidos como las Cinco Kas porque cada uno comienza con esa letra en panyabí, que se espera que los hombres y mujeres sijes comprometidos que se unen al Khalsa usen en todo momento como una declaración pública e inconfundible de su fe y su compromiso con sus exigencias éticas. <em>Kesh</em> es el cabello sin cortar, entendido como aceptar la creación de Dios tal como se da en lugar de alterarla, y es la razón por la cual muchos hombres sijes usan el turbante, que sirve para contener y dignificar el cabello sin cortar en lugar de ser, en sí mismo, una de las Cinco Kas. <em>Kangha</em> es un peine de madera, usado en el cabello, simbolizando la limpieza y la disciplina. <em>Kara</em> es un brazalete de acero usado en la muñeca, simbolizando la restricción de hacer el mal y la naturaleza ininterrumpida y eterna de Dios. <em>Kachera</em> son prendas interiores de algodón, simbolizando la modestia y el autocontrol. <em>Kirpan</em> es una pequeña espada o daga ceremonial, simbolizando el compromiso del Khalsa de defender a los indefensos, resistir la injusticia, y proteger la libertad religiosa — un elemento sorprendente y, para muchos extraños, inesperado de la identidad sij que un pastor debe entender con precisión en lugar de malinterpretarlo como un respaldo a la violencia casual; la enseñanza sij enmarca el kirpan estrictamente como un instrumento de último recurso de protección y justicia, no de agresión."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c6489e04af6e"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "Not every person who identifies as Sikh has formally joined the Khalsa or maintains all Five Ks, much as this course found with the internal diversity of practice within Islam, Hinduism, and Buddhism in earlier units — but the Khalsa Sikh, visibly marked by the turban and the other Five Ks, represents the tradition's most complete, publicly committed expression of Sikh identity and remains the figure most immediately recognizable to a pastor meeting a Sikh neighbor for the first time.",
+    "es": "No toda persona que se identifica como sij se ha unido formalmente al Khalsa o mantiene las cinco Kas, tal como este curso encontró con la diversidad interna de práctica dentro del islam, el hinduismo y el budismo en unidades anteriores — pero el sij Khalsa, visiblemente marcado por el turbante y las otras Cinco Kas, representa la expresión más completa y públicamente comprometida de la identidad sij de la tradición y sigue siendo la figura más inmediatamente reconocible para un pastor que conoce a un vecino sij por primera vez."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "42f3f71fca04"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "A pastor should also understand the surnames many Sikhs carry as a further expression of the tradition's founding rejection of caste. Guru Gobind Singh instructed male members of the Khalsa to adopt the surname Singh, meaning \"lion,\" and female members to adopt Kaur, meaning \"princess,\" in place of family surnames that in the surrounding Hindu culture typically signaled caste status. This deliberate erasure of caste markers from personal names was a concrete, lasting institutional expression of Sikhism's theological conviction that caste distinctions have no standing before God — a conviction a pastor should recognize as a genuine point of moral seriousness worth acknowledging before turning to points of theological difference.",
+    "es": "Un pastor también debe entender los apellidos que muchos sijes llevan como una expresión adicional del rechazo fundacional de la tradición a la casta. El Gurú Gobind Singh instruyó a los miembros masculinos del Khalsa a adoptar el apellido Singh, que significa \"león,\" y a las miembros femeninas a adoptar Kaur, que significa \"princesa,\" en lugar de los apellidos familiares que en la cultura hindú circundante típicamente señalaban el estatus de casta. Esta borradura deliberada de los marcadores de casta de los nombres personales fue una expresión institucional concreta y duradera de la convicción teológica del sijismo de que las distinciones de casta no tienen validez delante de Dios — una convicción que un pastor debe reconocer como un punto genuino de seriedad moral que vale la pena reconocer antes de pasar a los puntos de diferencia teológica."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "060c710178da"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "heading",
+   "text": {
+    "en": "IV. Sikh Practice and Community",
+    "es": "IV. Práctica y comunidad sij"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "eca2ab6bd63e"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "The Sikh place of worship is called the <em>gurdwara</em>, literally \"the door of the Guru,\" referring to the Guru Granth Sahib enthroned within. Congregational worship centers on the singing of hymns from the scripture, called <em>kirtan</em>, and readings from the text, with no ordained priesthood in the formal sense; any respected member of the community, male or female, may lead worship or read from the scripture, reflecting Sikhism's founding commitment to equality that rejected the caste-based religious authority structures common in the Hindu context from which it emerged.",
+    "es": "El lugar de adoración sij se llama el <em>gurdwara</em>, literalmente \"la puerta del Gurú,\" refiriéndose al Guru Granth Sahib entronizado dentro. La adoración congregacional se centra en el canto de himnos de la escritura, llamado <em>kirtan</em>, y lecturas del texto, sin sacerdocio ordenado en el sentido formal; cualquier miembro respetado de la comunidad, hombre o mujer, puede dirigir la adoración o leer de la escritura, reflejando el compromiso fundacional del sijismo con la igualdad que rechazó las estructuras de autoridad religiosa basadas en castas comunes en el contexto hindú del cual surgió."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "dc01498e8848"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "Perhaps the most distinctive and widely admired Sikh institution is <em>langar</em>, the free communal kitchen maintained at every gurdwara worldwide, where volunteers prepare and serve a simple vegetarian meal to absolutely anyone who wishes to eat, regardless of religion, caste, wealth, or social status, with everyone seated together on the floor at the same level as an intentional, embodied statement of human equality before God. This institution, dating back to Guru Nanak himself, expresses concretely the Sikh principle of <em>seva</em>, selfless service to others, alongside <em>naam japna</em>, remembrance of God's name, and <em>vand chakna</em>, sharing what one has honestly earned — three pillars Sikh teaching holds together as inseparable, refusing any split between devotion to God and practical service to fellow human beings.",
+    "es": "Quizás la institución sij más distintiva y ampliamente admirada es el <em>langar</em>, la cocina comunitaria gratuita mantenida en cada gurdwara en todo el mundo, donde voluntarios preparan y sirven una comida vegetariana simple a absolutamente cualquiera que desee comer, sin importar religión, casta, riqueza, o estatus social, con todos sentados juntos en el suelo al mismo nivel como una declaración intencional y encarnada de la igualdad humana delante de Dios. Esta institución, que se remonta al propio Gurú Nanak, expresa concretamente el principio sij de <em>seva</em>, el servicio desinteresado a otros, junto con <em>naam japna</em>, el recuerdo del nombre de Dios, y <em>vand chakna</em>, compartir lo que uno ha ganado honestamente — tres pilares que la enseñanza sij mantiene juntos como inseparables, rechazando cualquier separación entre la devoción a Dios y el servicio práctico a los semejantes."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "07439d4d2b89"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "heading",
+   "text": {
+    "en": "V. Engaging Sikh Neighbors and Friends with the Gospel",
+    "es": "V. Acercándose a vecinos y amigos sijes con el evangelio"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1f663070ffde"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "Following the pattern this course has applied consistently since Unit 1, a pastor should begin engagement with a Sikh neighbor by honoring substantial genuine common ground. Sikhism's uncompromising monotheism, its rejection of idol worship, and its conviction that God is not merely an abstract philosophical concept but can be known personally through sincere devotion all resonate closely with the biblical picture of God, considerably more closely than the impersonal Brahman of Hindu philosophy or the largely silent question of ultimate reality in classical Buddhism. Sikhism's radical commitment to human equality, embodied so concretely in the langar kitchen, echoes Scripture's own insistence that \"there is no partiality with God\" (Romans 2:11) and that \"there is neither Jew nor Greek, there is neither slave nor free, there is neither male nor female; for you are all one in Christ Jesus\" (Galatians 3:28) — a pastor can affirm wholeheartedly that Sikhism has grasped something real and important about human dignity and equality before God, however differently the two traditions ground that conviction theologically.",
+    "es": "Siguiendo el patrón que este curso ha aplicado consistentemente desde la Unidad 1, un pastor debe comenzar el acercamiento a un vecino sij honrando un terreno común genuino y sustancial. El monoteísmo intransigente del sijismo, su rechazo de la adoración de ídolos, y su convicción de que Dios no es meramente un concepto filosófico abstracto sino que puede conocerse personalmente a través de la devoción sincera resuenan estrechamente con el cuadro bíblico de Dios, considerablemente más de cerca que el Brahman impersonal de la filosofía hindú o la pregunta en gran medida silenciada de la realidad última en el budismo clásico. El compromiso radical del sijismo con la igualdad humana, encarnado tan concretamente en la cocina langar, hace eco de la propia insistencia de la Escritura de que \"no hay acepción de personas para con Dios\" (Romanos 2:11) y que \"no hay judío ni griego; no hay esclavo ni libre; no hay varón ni mujer; porque todos vosotros sois uno en Cristo Jesús\" (Gálatas 3:28) — un pastor puede afirmar de todo corazón que el sijismo ha captado algo real e importante acerca de la dignidad humana y la igualdad delante de Dios, aunque las dos tradiciones fundamenten esa convicción teológicamente de manera muy diferente."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c9d86c8aa775"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "prose",
+   "text": {
+    "en": "From that foundation, the gospel offers what Sikhism, for all its genuine insight, structurally cannot. Where Sikh theology, like the Hindu and Buddhist traditions studied earlier, ultimately grounds liberation in the individual's own sincere devotion, honest living, and simran, offered across however many lifetimes karma requires, the gospel offers liberation as a finished gift, received by faith rather than achieved by accumulated merit: \"by grace you have been saved through faith, and that not of yourselves; it is the gift of God, not of works, lest anyone should boast\" (Ephesians 2:8-9). Where the Guru Granth Sahib, whatever its genuine spiritual insight, remains a book — however reverently enthroned, read, and approached — the gospel proclaims a living Person, God Himself become flesh, who did not merely teach the way to God but declared Himself to be \"the way, the truth, and the life\" (John 14:6), able not merely to instruct sincere seekers but actually to save them. A pastor who can affirm Sikhism's genuine grasp of God's oneness and human equality while clearly proclaiming the living Christ, rather than a book however sacred, as the true and final Guru, will be well equipped for this conversation.",
+    "es": "Desde ese fundamento, el evangelio ofrece lo que el sijismo, a pesar de toda su intuición genuina, no puede ofrecer estructuralmente. Donde la teología sij, como las tradiciones hindú y budista estudiadas anteriormente, en última instancia fundamenta la liberación en la propia devoción sincera del individuo, la vida honesta, y el simran, ofrecidos a lo largo de tantas vidas como el karma requiera, el evangelio ofrece la liberación como un regalo terminado, recibido por fe en lugar de logrado por mérito acumulado: \"por gracia sois salvos por medio de la fe; y esto no de vosotros, pues es don de Dios; no por obras, para que nadie se gloríe\" (Efesios 2:8-9). Donde el Guru Granth Sahib, cualquiera que sea su genuina intuición espiritual, sigue siendo un libro — por más reverentemente entronizado, leído, y abordado que sea — el evangelio proclama una Persona viviente, Dios mismo hecho carne, quien no meramente enseñó el camino a Dios sino que se declaró a sí mismo ser \"el camino, y la verdad, y la vida\" (Juan 14:6), capaz no meramente de instruir a buscadores sinceros sino realmente de salvarlos. Un pastor que pueda afirmar la genuina comprensión del sijismo de la unicidad de Dios y la igualdad humana mientras proclama claramente a Cristo viviente, en lugar de un libro por sagrado que sea, como el verdadero y final Gurú, estará bien equipado para esta conversación."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ab96229e2904"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "prose",
+   "text": {
+    "en": "— Dr. Wayne Cook<br>Chapala Theological Seminary",
+    "es": "— Dr. Wayne Cook<br>Seminario Teológico de Chapala"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7778fcb9bb8c"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "prose",
+   "text": {
+    "en": "Unit 7 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 7 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "39593a6cb288"
+    }
+   }
+  },
+  {
+   "id": "b037",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. <strong>If you fail, the unit locks for 15 minutes.</strong>",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. <strong>Si reprueba, se bloquea por 15 minutos.</strong>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d3b8e78884d7"
+    }
+   }
+  },
+  {
+   "id": "b038",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar &amp; Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b039",
+   "type": "prose",
+   "text": {
+    "en": "Reset",
+    "es": "Reiniciar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "44c57abd888a"
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,530 @@
+{
+ "course": "CTSAL",
+ "unit": 5,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right:15px; font-weight:bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Espa&ntilde;ol</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></p>\n    <p style=\"margin-top:10px; font-style:italic; color:#2f4f2f;\"><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n</div>\n\n<div id=\"regCard\" style=\"display:none;\">\n    <input type=\"text\" id=\"regName\" aria-label=\"regName\"><input type=\"email\" id=\"regEmail\" aria-label=\"regEmail\">\n    <select id=\"regTrack\" aria-label=\"regTrack\"><option value=\"certificate\"></option></select>\n    <button id=\"regBtn\"></button><div id=\"regStatus\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\">\n\n<h3><!--cts:b006:en--></h3>\n<p><!--cts:b007:en--></p>\n\n<h3><!--cts:b008:en--></h3>\n<p><!--cts:b009:en--></p>\n<p><!--cts:b010:en--></p>\n<div class=\"scripture\"><!--cts:b011:en--></div>\n\n<h3><!--cts:b012:en--></h3>\n<p><!--cts:b013:en--></p>\n<p><!--cts:b014:en--></p>\n\n<h3><!--cts:b015:en--></h3>\n<p><!--cts:b016:en--></p>\n<p><!--cts:b017:en--></p>\n<div class=\"scripture\"><!--cts:b018:en--></div>\n\n<h3><!--cts:b019:en--></h3>\n<p><!--cts:b020:en--></p>\n<p><!--cts:b021:en--></p>\n<div class=\"scripture\"><!--cts:b022:en--></div>\n\n<h3><!--cts:b023:en--></h3>\n<p><!--cts:b024:en--></p>\n<p><!--cts:b025:en--></p>\n\n<h3><!--cts:b026:en--></h3>\n<p><!--cts:b027:en--></p>\n<p><!--cts:b028:en--></p>\n<div class=\"scripture\"><!--cts:b029:en--></div>\n\n<h3><!--cts:b030:en--></h3>\n<p><!--cts:b031:en--></p>\n<p><!--cts:b032:en--></p>\n<div class=\"scripture\"><!--cts:b033:en--></div>\n\n</div>\n<div class=\"lang-es\">\n\n<h3><!--cts:b006:es--></h3>\n<p><!--cts:b007:es--></p>\n\n<h3><!--cts:b008:es--></h3>\n<p><!--cts:b009:es--></p>\n<p><!--cts:b010:es--></p>\n<div class=\"scripture\"><!--cts:b011:es--></div>\n\n<h3><!--cts:b012:es--></h3>\n<p><!--cts:b013:es--></p>\n<p><!--cts:b014:es--></p>\n\n<h3><!--cts:b015:es--></h3>\n<p><!--cts:b016:es--></p>\n<p><!--cts:b017:es--></p>\n<div class=\"scripture\"><!--cts:b018:es--></div>\n\n<h3><!--cts:b019:es--></h3>\n<p><!--cts:b020:es--></p>\n<p><!--cts:b021:es--></p>\n<div class=\"scripture\"><!--cts:b022:es--></div>\n\n<h3><!--cts:b023:es--></h3>\n<p><!--cts:b024:es--></p>\n<p><!--cts:b025:es--></p>\n\n<h3><!--cts:b026:es--></h3>\n<p><!--cts:b027:es--></p>\n<p><!--cts:b028:es--></p>\n<div class=\"scripture\"><!--cts:b029:es--></div>\n\n<h3><!--cts:b030:es--></h3>\n<p><!--cts:b031:es--></p>\n<p><!--cts:b032:es--></p>\n<div class=\"scripture\"><!--cts:b033:es--></div>\n\n</div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b034:en--></span><span class=\"lang-es\"><!--cts:b034:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b035:en--></span>\n       <span class=\"lang-es\"><!--cts:b035:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top:20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b036:en--></span><span class=\"lang-es\"><!--cts:b036:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b037:en--></span><span class=\"lang-es\"><!--cts:b037:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top:15px; font-weight:bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top:10px; font-size:0.9rem; color:#1f6b3b; display:none;\"></div>\n    </div>\n</div>\n</div>\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSALReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "Unit 6 →",
+    "es": "Unidad 6 →"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "32019379b230"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "📖 Administration &amp; Leadership — Unit 5: Financial Stewardship and Budgeting",
+    "es": "📖 Administración y Liderazgo — Unidad 5: Mayordomía financiera y presupuesto"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d2cf0f5bd12f"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "\"He who is faithful in what is least is faithful also in much.\" — Luke 16:10 (NKJV)",
+    "es": "⚑ \"El que es fiel en lo muy poco, también en lo más es fiel.\" — Lucas 16:10 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "59763eed8058"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "heading",
+   "text": {
+    "en": "Introduction — The Subject Jesus Did Not Avoid",
+    "es": "Introducción — El tema que Jesús no evitó"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2627dcb64a20"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "There is an old myth that money is somehow beneath the spiritual leader — that a true man of God should not dirty his hands with budgets and bank accounts. But you cannot read the Gospels honestly and believe that myth. Our Lord spoke about money constantly — more than He spoke of heaven, more than He spoke of prayer. He knew what we keep forgetting: that a man's wallet is wired directly to his heart, and that how a church handles its money is a spiritual matter from the first peso to the last. So we will not be too pious to talk about money and budgets. We will follow the Master, who looked the subject full in the face and called it by its name — a test.",
+    "es": "Hay un viejo mito de que el dinero está de algún modo por debajo del líder espiritual, que un verdadero hombre de Dios no debe ensuciarse las manos con presupuestos y cuentas de banco. Pero usted no puede leer los Evangelios con honradez y creer ese mito. Nuestro Señor habló del dinero constantemente — más de lo que habló del cielo, más de lo que habló de la oración. Él sabía lo que nosotros seguimos olvidando: que la billetera de un hombre está conectada directamente a su corazón, y que cómo maneja una iglesia su dinero es un asunto espiritual desde el primer peso hasta el último. Así que no seremos demasiado piadosos para hablar de pesos y presupuestos. Seguiremos al Maestro, que miró el tema de frente y lo llamó por su nombre — una prueba."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6184e054178a"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "heading",
+   "text": {
+    "en": "I. You Cannot Serve God and Money",
+    "es": "I. No podéis servir a Dios y a las riquezas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5fddcb7d93d6"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "Begin where Jesus begins, with a line that allows no middle ground: <em>\"No servant can serve two masters... You cannot serve God and mammon\"</em> (Luke 16:13). Mammon is money personified, money with a will of its own, money that wants to be lord. And Jesus says you will have a master; the only question is which one. Money is a wonderful servant and a terrible master. Under God it builds churches, feeds the hungry, and sends missionaries. On the throne it corrupts everything it touches, pastors included.",
+    "es": "Comience donde Jesús comienza, con una línea que no permite término medio: <em>\"Ningún siervo puede servir a dos señores... No podéis servir a Dios y a las riquezas\"</em> (⚑ Lucas 16:13). Las riquezas (Mamón) son el dinero personificado, el dinero con voluntad propia, el dinero que quiere ser señor. Y Jesús dice que usted tendrá un amo; la única pregunta es cuál. El dinero es un siervo maravilloso y un amo terrible. Bajo Dios construye iglesias, alimenta al hambriento y envía misioneros. En el trono corrompe todo lo que toca, incluidos los pastores."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "059d2f1366d6"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "And just before it, He gives the principle that governs this whole unit: <em>\"He who is faithful in what is least is faithful also in much... if you have not been faithful in the unrighteous mammon, who will commit to your trust the true riches?\"</em> (Luke 16:10-11). Hear what He says. Money is the very least — the training ground. God watches how a man handles the small, the dirty, and the temporary thing of money to decide whether He can trust him with the large and eternal thing of souls. Show me how a pastor handles the offering plate, and I will show you whether God can trust him with a flock. Faithfulness with money is the test that comes before the trust.",
+    "es": "Y justo antes, da el principio que gobierna toda esta unidad: <em>\"El que es fiel en lo muy poco, también en lo más es fiel... si en las riquezas injustas no fuisteis fieles, ¿quién os confiará lo verdadero?\"</em> (⚑ Lucas 16:10-11). Oiga lo que dice. El dinero es lo muy poco — el campo de entrenamiento. Dios observa cómo maneja un hombre lo pequeño, lo sucio y lo temporal del dinero para decidir si puede confiarle lo grande y eterno de las almas. Muéstreme cómo maneja un pastor el plato de la ofrenda, y le mostraré si Dios puede confiarle una grey. La fidelidad con las riquezas es la prueba que viene antes de la confianza."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e5f407c0546b"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "scripture",
+   "text": {
+    "en": "\"No servant can serve two masters... You cannot serve God and mammon.\" — Luke 16:13 (NKJV)",
+    "es": "⚑ \"Ningún siervo puede servir a dos señores... No podéis servir a Dios y a las riquezas.\" — Lucas 16:13 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "225bded0c012"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "heading",
+   "text": {
+    "en": "II. The Sacred Trust",
+    "es": "II. La confianza sagrada"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9f03bcb818b7"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "So whose money is it? Settle it the way we settled the question of the flock in Unit 2: it is not yours. When a widow lays her offering on the plate, she is not paying the pastor; she is giving to God. That money is a sacred trust — the worship of the people, laid on the altar, passing through your hands on its way to the work of God. The man who forgets this and begins to think of the church's money as his money has committed the first and most deadly error of church finance.",
+    "es": "Entonces, ¿de quién es el dinero? Resuélvalo como resolvimos la cuestión de la grey en la Unidad 2: no es suyo. Cuando una viuda deja su ofrenda en el plato, no le está pagando al pastor; está dando a Dios. Ese dinero es una confianza sagrada — la adoración del pueblo, puesta sobre el altar, pasando por sus manos camino a la obra de Dios. El hombre que olvida esto y comienza a pensar en el dinero de la iglesia como su dinero ha cometido el primero y más mortal error de las finanzas de la iglesia."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ac0674aee963"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "prose",
+   "text": {
+    "en": "The leader, then, handles the money exactly as he handles the flock: as a steward of what belongs to Another. He will give account for every peso, not first to an auditor but to God. This one conviction — this is God's money, entrusted by His people — will keep a man honest when no one is watching, careful when the amounts are large, and humble when the budget is healthy. Lose that conviction, and no accounting system on earth will save him. Hold it, and he will handle the Lord's money as the holy thing it is.",
+    "es": "El líder, pues, maneja el dinero exactamente como maneja la grey: como mayordomo de lo que pertenece a Otro. Dará cuenta de cada peso, no primero a un auditor sino a Dios. Esta sola convicción — este es el dinero de Dios, confiado por su pueblo — mantendrá honrado a un hombre cuando nadie observa, cuidadoso cuando las cantidades son grandes, y humilde cuando el presupuesto está sano. Pierda esa convicción, y ningún sistema contable en la tierra lo salvará. Sosténgala, y manejará el dinero del Señor como la cosa santa que es."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8982e4584cce"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "heading",
+   "text": {
+    "en": "III. Count the Cost: The Budget as a Plan",
+    "es": "III. Contad el costo: el presupuesto como plan"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "95815f3042a9"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "Now the practical tool, and notice that Jesus Himself recommends it. <em>\"For which of you, intending to build a tower, does not sit down first and count the cost, to see whether he has enough to finish it?\"</em> (Luke 14:28). That is budgeting, straight from the lips of the Lord. A church that rushes into commitments without sitting down to count the cost is the man who laid a foundation and could not finish, and <em>\"all who see it begin to mock him\"</em> (Luke 14:29). Budgeting is not unbelief; it is obedience to a direct word of Christ.",
+    "es": "Ahora la herramienta práctica, y note que Jesús mismo la recomienda. <em>\"Porque ¿quién de vosotros, queriendo edificar una torre, no se sienta primero y cuenta el costo, para ver si tiene lo que necesita para acabarla?\"</em> (⚑ Lucas 14:28). Eso es presupuestar, directamente de los labios del Señor. Una iglesia que se lanza a compromisos sin sentarse a contar el costo es el hombre que puso un cimiento y no pudo terminar, <em>\"y todos los que lo vieren comiencen a hacer burla de él\"</em> (⚑ Lucas 14:29). Presupuestar no es incredulidad; es obediencia a una palabra directa de Cristo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "05a4046b4d64"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "So understand what a budget really is. A budget is not a cage; it is a plan expressed in money. It is your priorities translated into numbers. Show me a church budget and I will read you the church's true values, because money does not lie — a church spends on what it truly treasures, whatever it says it treasures. This is why budgeting belongs in a leadership course and not only an accounting course. When you build a budget, you are putting the vision of Unit 3 into figures, deciding before God where the people's offerings will go. Count the cost. Make the plan. Let the money follow the mission.",
+    "es": "Así que entienda lo que un presupuesto realmente es. Un presupuesto no es una jaula; es un plan expresado en dinero. Son sus prioridades traducidas a números. Muéstreme un presupuesto de iglesia y le leeré los verdaderos valores de la iglesia, porque el dinero no miente — una iglesia gasta en lo que de veras atesora, diga lo que diga que atesora. Por eso presupuestar pertenece a un curso de liderazgo y no solo a un curso de contabilidad. Cuando construye un presupuesto, está poniendo la visión de la Unidad 3 en cifras, decidiendo delante de Dios a dónde irán las ofrendas del pueblo. Cuente el costo. Haga el plan. Que el dinero siga a la misión."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e5003ab3f663"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "scripture",
+   "text": {
+    "en": "\"For which of you, intending to build a tower, does not sit down first and count the cost...?\" — Luke 14:28 (NKJV)",
+    "es": "⚑ \"Porque ¿quién de vosotros, queriendo edificar una torre, no se sienta primero y cuenta el costo...?\" — Lucas 14:28 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6ad1f00a020e"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "heading",
+   "text": {
+    "en": "IV. Honest Before All",
+    "es": "IV. Honesto delante de todos"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4137be040aac"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "Now hear the apostle Paul, who handled an enormous relief offering for Jerusalem, tell you how to keep your hands clean. <em>\"Avoiding this: that anyone should blame us in this lavish gift which is administered by us — providing honorable things, not only in the sight of the Lord, but also in the sight of men\"</em> (2 Corinthians 8:20-21). Read it twice. Paul was an apostle; surely his integrity was beyond question. Yet he refused to carry the money alone. He traveled with trusted brothers chosen by the churches, so that no one could so much as whisper an accusation.",
+    "es": "Ahora oiga al apóstol Pablo, que manejó una enorme ofrenda de ayuda para Jerusalén, decirle cómo mantener limpias las manos. <em>\"Evitando que nadie nos vitupere en esta abundancia que administramos; procurando hacer las cosas honradamente, no sólo delante del Señor, sino también delante de los hombres\"</em> (⚑ 2 Corintios 8:20-21). Léalo dos veces. Pablo era apóstol; seguramente su integridad estaba fuera de duda. Sin embargo, se negó a llevar el dinero solo. Viajó con hermanos de confianza escogidos por las iglesias, para que nadie pudiera siquiera susurrar una acusación."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "717c41a519f8"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "There is the rule that has saved a thousand ministries and whose absence has destroyed a thousand more: be honest not only before God, who sees the heart, but before men, who see only the appearance. It is not enough to be honest; you must be visibly honest. This is why a church's money must never be controlled by one person alone — least of all the pastor — by himself. More than one hand counts it. More than one signature releases it. The books are open. There are reports the congregation can see and an audit they can trust. This is not suspicion; it is wisdom and love. The leader who builds these walls of transparency protects the church not only from himself; he protects himself from the accusation that will surely come, and he protects the gospel from reproach. Avoid even the appearance of evil where money is concerned, and you take a weapon out of the enemy's hand.",
+    "es": "Ahí está la regla que ha salvado a mil ministerios y cuya ausencia ha destruido a otros mil: sea honesto no solo delante de Dios, que ve el corazón, sino delante de los hombres, que solo ven la apariencia. No basta con ser honesto; debe ser visiblemente honesto. Por eso el dinero de la iglesia nunca debe ser controlado por una sola persona — y menos el pastor — a solas. Más de una mano lo cuenta. Más de una firma lo libera. Los libros están abiertos. Hay informes que la congregación puede ver, y una auditoría en la que pueda confiar. Esto no es sospecha; es sabiduría y amor. El líder que construye estos muros de transparencia no protege a la iglesia solo de sí mismo; se protege a sí mismo de la acusación que ciertamente vendrá, y protege el evangelio del oprobio. Evite aun la apariencia de mal donde el dinero está en juego, y quitará un arma de la mano del enemigo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d9aa6515ebd6"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "scripture",
+   "text": {
+    "en": "\"...providing honorable things, not only in the sight of the Lord, but also in the sight of men.\" — 2 Corinthians 8:21 (NKJV)",
+    "es": "⚑ \"...procurando hacer las cosas honradamente, no sólo delante del Señor, sino también delante de los hombres.\" — 2 Corintios 8:21 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d79c69c5bf9c"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "heading",
+   "text": {
+    "en": "V. The Joy of Generosity",
+    "es": "V. El gozo de la generosidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6803120569bd"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "But money in the church is not only to be guarded; it is to be given, and given with joy. <em>\"He who sows sparingly will also reap sparingly, and he who sows bountifully will also reap bountifully. So let each one give as he purposes in his heart, not grudgingly or of necessity; for God loves a cheerful giver\"</em> (2 Corinthians 9:6-7). And the promise that frees us to give: <em>\"And God is able to make all grace abound toward you, that you... may have an abundance for every good work\"</em> (2 Corinthians 9:8).",
+    "es": "Pero el dinero en la iglesia no solo se ha de guardar; se ha de dar, y dar con gozo. <em>\"El que siembra escasamente, también segará escasamente; y el que siembra abundantemente, abundantemente también segará. Cada uno dé como propuso en su corazón; no con tristeza, ni por necesidad; porque Dios ama al dador alegre\"</em> (⚑ 2 Corintios 9:6-7). Y la promesa que nos libera para dar: <em>\"Y poderoso es Dios para hacer que abunde en vosotros toda gracia; a fin de que... abundéis para toda buena obra\"</em> (⚑ 2 Corintios 9:8)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "128e151f97d5"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "A church that speaks of money only to receive it has missed the point entirely. The leader's task is to teach and to model generosity — to lead the people into the sheer joy of cheerful, open-handed giving, because that giving does them good. A generous church is a happy church, and a stingy church is a sick one, however full its accounts. So preach giving not as the church's need to receive but as the giver's privilege to sow, trusting the God who makes grace abound. And let the leaders give first and give most, for no man can call a people to a generosity he does not practice himself.",
+    "es": "Una iglesia que solo habla del dinero para recibirlo ha perdido el punto por completo. La tarea del líder es enseñar y modelar la generosidad — guiar al pueblo al puro gozo de un dar alegre y de mano abierta, porque ese dar les hace bien. Una iglesia generosa es una iglesia feliz, y una iglesia tacаña es una iglesia enferma, por llenas que estén sus cuentas. Así que predique el dar no como la necesidad de la iglesia de recibir sino como el privilegio del dador de sembrar, confiando en el Dios que hace abundar la gracia. Y que los líderes den primero y den más, porque ningún hombre puede llamar a un pueblo a una generosidad que él mismo no practica."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0aba139d110f"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "heading",
+   "text": {
+    "en": "VI. The Love of Money",
+    "es": "VI. El amor al dinero"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "af1ce9d4f23f"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "Now the warning, sharp and unavoidable. <em>\"For the love of money is a root of all kinds of evil, for which some have strayed from the faith in their greediness, and pierced themselves through with many sorrows\"</em> (1 Timothy 6:10). Mark the words well — not money, but the love of money; and not a trivial danger, but a root from which all kinds of evil spring. And note whom Paul warns: not rich pagans, but men who \"stray from the faith.\" Pastors fall here. The overseer, Paul says, must not be <em>\"greedy for money\"</em> (1 Timothy 3:3).",
+    "es": "Ahora la advertencia, aguda e inevitable. <em>\"Porque el amor al dinero es la raíz de todos los males; el cual codiciando algunos, se extraviaron de la fe, y fueron traspasados de muchos dolores\"</em> (⚑ 1 Timoteo 6:10). Marque bien las palabras — no el dinero, sino el amor al dinero; no la raíz de un mal, sino la raíz de todos los males. Y note a quién advierte Pablo: no a los paganos ricos, sino a hombres que \"se extravían de la fe\". Los pastores caen aquí. El obispo, dice Pablo, no ha de ser <em>\"codicioso de ganancias deshonestas\"</em> (⚑ 1 Timoteo 3:3)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "829771a04220"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "So the leader must mount a guard over his own heart at exactly the point where money meets ministry. The danger is not that he will steal — most never do. The danger is subtler: that money will quietly rise from servant to master, that he will begin to make decisions for the offering rather than for the Lord, that contentment will slip away and greed move in. The remedy is contentment, <em>\"for we brought nothing into this world, and it is certain we can carry nothing out\"</em> (1 Timothy 6:7). Guard your heart, brother. Keep money in its place as a servant, and never let the thing you handle every week become the thing you love.",
+    "es": "Así que el líder debe montar guardia sobre su propio corazón justo en el punto donde el dinero se encuentra con el ministerio. El peligro no es que robe — la mayoría nunca lo hace. El peligro es más sutil: que el dinero suba calladamente de siervo a amo, que empiece a tomar decisiones por la ofrenda en vez de por el Señor, que el contentamiento se fugue y la codicia se instale. El remedio es el contentamiento, <em>\"porque nada hemos traído a este mundo, y sin duda nada podremos sacar\"</em> (⚑ 1 Timoteo 6:7). Guarde su corazón, hermano. Mantenga el dinero en su lugar como siervo, y nunca deje que aquello que maneja cada semana se vuelva aquello que ama."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f8b1deeab264"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "scripture",
+   "text": {
+    "en": "\"For the love of money is a root of all kinds of evil... and pierced themselves through with many sorrows.\" — 1 Timothy 6:10 (NKJV)",
+    "es": "⚑ \"Porque el amor al dinero es la raíz de todos los males... y fueron traspasados de muchos dolores.\" — 1 Timoteo 6:10 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b50c28df2a6a"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "heading",
+   "text": {
+    "en": "VII. The Laborer Is Worthy",
+    "es": "VII. El obrero es digno"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "55914bc6d9f5"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "Lest all this make us stingy with those who serve, Paul corrects us in the other direction too. <em>\"Let the elders who rule well be counted worthy of double honor, especially those who labor in the word and doctrine. For the Scripture says, 'You shall not muzzle an ox while it treads out the grain,' and, 'The laborer is worthy of his wages'\"</em> (1 Timothy 5:17-18). Faithful stewardship is not only about guarding money from waste; it is about using it justly, and that includes justly providing for those who give their lives to the work.",
+    "es": "Para que todo esto no nos vuelva tacaños con quienes sirven, Pablo nos corrige también en la otra dirección. <em>\"Los ancianos que gobiernan bien, sean tenidos por dignos de doble honra; mayormente los que trabajan en predicar y enseñar. Pues la Escritura dice: No pondrás bozal al buey que trilla. Y: Digno es el obrero de su salario\"</em> (⚑ 1 Timoteo 5:17-18). La mayordomía fiel no se trata solo de guardar el dinero del despilfarro; se trata de usarlo con justicia, y eso incluye proveer con justicia para quienes dan su vida a la obra."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2c679f037124"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "prose",
+   "text": {
+    "en": "A church that leaves its pastor and its workers without what they need, while sitting on full accounts, is not being thrifty; it is muzzling the ox, and God notices. So the same budget that funds the mission must also honor the worker. Here is the beautiful balance of this whole unit: the leader himself must not be greedy, but the church must not be stingy with him; he holds money loosely for his own sake, and the church holds him generously for his. Guard it as a steward, give it as a holy thing, and provide for the worker as a just and grateful people. Be faithful with the unrighteous mammon, and the God who tested you with the very least will commit to you the true riches.",
+    "es": "Una iglesia que deja a su pastor y a sus obreros sin lo necesario, mientras se sienta sobre cuentas llenas, no está siendo ahorradora; está poniendo bozal al buey, y Dios lo nota. Así que el mismo presupuesto que financia la misión también debe honrar al obrero. Aquí está el hermoso equilibrio de toda esta unidad: el líder mismo no debe ser avaricioso, pero la iglesia no debe ser tacaña con él; él sostiene el dinero con holgura por su propio bien, y la iglesia lo sostiene con generosidad por el bien de él. Guárdelo como mayordomo, délo como santo, y provea para el obrero como un pueblo justo y agradecido. Sea fiel con las riquezas injustas, y el Dios que lo probó con lo muy poco le confiará las verdaderas riquezas."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "540a365262dc"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "scripture",
+   "text": {
+    "en": "\"The laborer is worthy of his wages.\" — 1 Timothy 5:18 (NKJV)",
+    "es": "⚑ \"Digno es el obrero de su salario.\" — 1 Timoteo 5:18 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a2d3ab1aa7f7"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "prose",
+   "text": {
+    "en": "Unit 5 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 5 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "68bacc2afdf3"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33593c268178"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b037",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

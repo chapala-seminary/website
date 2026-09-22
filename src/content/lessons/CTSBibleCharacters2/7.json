@@ -1,0 +1,558 @@
+{
+ "course": "CTSBibleCharacters2",
+ "unit": 7,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Unit 8 →</button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #2f4f2f;\"><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\">\n    <h2><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n    <input type=\"text\" id=\"regName\" placeholder=\"Full name / Nombre completo\" aria-label=\"Full name / Nombre completo\">\n    <input type=\"email\" id=\"regEmail\" placeholder=\"Email\" aria-label=\"Email\">\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate Track</option>\n        <option value=\"mdiv\">Master of Divinity (M.Div.) Track</option>\n        <option value=\"thm\">Master of Theology (Th.M.) Track</option>\n    </select>\n    <button class=\"nav-btn\" id=\"regBtn\"><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\"><p><!--cts:b007:en--></p><p><!--cts:b008:en--></p><p><!--cts:b009:en--></p><p><!--cts:b010:en--></p><h2><!--cts:b011:en--></h2><p><!--cts:b012:en--></p><div class=\"scripture\"><!--cts:b013:en--></div><p><!--cts:b014:en--></p><p><!--cts:b015:en--></p><h2><!--cts:b016:en--></h2><p><!--cts:b017:en--></p><p><!--cts:b018:en--></p><div class=\"scripture\"><!--cts:b019:en--></div><p><!--cts:b020:en--></p><p><!--cts:b021:en--></p><div class=\"scripture\"><!--cts:b022:en--></div><p><!--cts:b023:en--></p><p><!--cts:b024:en--></p><h2><!--cts:b025:en--></h2><p><!--cts:b026:en--></p><div class=\"scripture\"><!--cts:b027:en--></div><p><!--cts:b028:en--></p><h2><!--cts:b029:en--></h2><p><!--cts:b030:en--></p><p><!--cts:b031:en--></p><div class=\"scripture\"><!--cts:b032:en--></div><p><!--cts:b033:en--></p><h2><!--cts:b034:en--></h2><p><!--cts:b035:en--></p></div>\n<div class=\"lang-es\"><p><!--cts:b007:es--></p><p><!--cts:b008:es--></p><p><!--cts:b009:es--></p><p><!--cts:b010:es--></p><h2><!--cts:b011:es--></h2><p><!--cts:b012:es--></p><div class=\"scripture\"><!--cts:b013:es--></div><p><!--cts:b014:es--></p><p><!--cts:b015:es--></p><h2><!--cts:b016:es--></h2><p><!--cts:b017:es--></p><p><!--cts:b018:es--></p><div class=\"scripture\"><!--cts:b019:es--></div><p><!--cts:b020:es--></p><p><!--cts:b021:es--></p><div class=\"scripture\"><!--cts:b022:es--></div><p><!--cts:b023:es--></p><p><!--cts:b024:es--></p><h2><!--cts:b025:es--></h2><p><!--cts:b026:es--></p><div class=\"scripture\"><!--cts:b027:es--></div><p><!--cts:b028:es--></p><h2><!--cts:b029:es--></h2><p><!--cts:b030:es--></p><p><!--cts:b031:es--></p><div class=\"scripture\"><!--cts:b032:es--></div><p><!--cts:b033:es--></p><h2><!--cts:b034:es--></h2><p><!--cts:b035:es--></p></div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b036:en--></span><span class=\"lang-es\"><!--cts:b036:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b037:en--></span>\n       <span class=\"lang-es\"><!--cts:b037:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b038:en--></span><span class=\"lang-es\"><!--cts:b038:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b039:en--></span><span class=\"lang-es\"><!--cts:b039:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSBibleCharacters2Readings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "📖 Bible Characters II — Unit 7: Peter — From Fisherman to the Rock Who Feeds the Sheep",
+    "es": "📖 Personajes de la Biblia II — Unidad 7: Pedro — Del Pescador a la Roca que Apacienta las Ovejas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e0518c4c5bfe"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "\"But I have prayed for you, that your faith should not fail; and when you have returned to Me, strengthen your brethren.\" — Luke 22:32 (NKJV)",
+    "es": "«Mas yo he rogado por ti, que tu fe no falte; y tú, una vez vuelto, confirma a tus hermanos.» — Lucas 22:32 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "43573959e552"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "📝 Course Registration",
+    "es": "📝 Registro del Curso"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fde900fe006b"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "Please register before beginning this unit.",
+    "es": "Por favor regístrese antes de comenzar esta unidad."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6c8b91fbfb6f"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Of all the disciples, Peter is the one we know best, because Peter is the one most like us. He is bold and then afraid, believing and then doubting, loyal and then a coward — and through it all, loved and never let go by his Lord. His life asks each of us a single question: how firm is your faith? And it answers with good news for every faltering believer: Christ takes a stumbling man and, through failure and the power of the resurrection, makes him a rock who feeds the sheep.",
+    "es": "De todos los discípulos, Pedro es el que mejor conocemos, porque Pedro es el más parecido a nosotros. Es audaz y luego temeroso, creyente y luego dudoso, leal y luego cobarde —y a través de todo ello, amado y nunca soltado por su Señor—. Su vida nos hace a cada uno una sola pregunta: ¿cuán firme es tu fe? Y la responde con buenas nuevas para todo creyente vacilante: Cristo toma a un hombre que tropieza y, por medio del fracaso y del poder de la resurrección, lo hace una roca que apacienta las ovejas."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e32d9c921322"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Subject:</strong> Peter — from impulsive fisherman to the rock who feeds the flock.",
+    "es": "<strong>Tema:</strong> Pedro — del pescador impulsivo a la roca que apacienta el rebaño."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1d4f310b917f"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Proposition:</strong> Christ takes a faltering man and, through failure and resurrection-power, makes him a fearless shepherd.",
+    "es": "<strong>Proposición:</strong> Cristo toma a un hombre vacilante y, por medio del fracaso y del poder de la resurrección, lo hace un pastor sin temor."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1558ef4ea5a0"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "We will trace three movements in the life of Peter.",
+    "es": "Trazaremos tres movimientos en la vida de Pedro."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9547a7f8bcb1"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "heading",
+   "text": {
+    "en": "I. The Fisherman",
+    "es": "I. El Pescador"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "19a7a9de1794"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "Peter was a fisherman, mending his nets by the Sea of Galilee when Jesus walked by. Anyone who has watched the fishermen on Lake Chapala set out before dawn knows the life: hard, weathered, unglamorous, ruled by the wind and the catch. To that ordinary working man Jesus said:",
+    "es": "Pedro era un pescador, remendando sus redes junto al Mar de Galilea cuando Jesús pasó. Cualquiera que haya visto a los pescadores del Lago de Chapala salir antes del amanecer conoce esa vida: dura, curtida, sin glamur, gobernada por el viento y la pesca. A aquel hombre común y trabajador Jesús le dijo:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e8ca7810eddd"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "scripture",
+   "text": {
+    "en": "Follow Me, and I will make you fishers of men. (Matthew 4:19, NKJV)",
+    "es": "Venid en pos de mí, y os haré pescadores de hombres. (Mateo 4:19, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3b1ad1c81a20"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "prose",
+   "text": {
+    "en": "And Peter left his nets and followed. He did not yet understand all that it would mean; he simply came. That is where every disciple begins — not with a finished faith, but with a willingness to follow the One who calls.",
+    "es": "Y Pedro dejó sus redes y le siguió. Todavía no entendía todo lo que significaría; simplemente vino. Ahí es donde comienza todo discípulo —no con una fe terminada, sino con la disposición de seguir al que llama—."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "62a385d8d608"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "There was a day when Peter had fished all night and caught nothing, and Jesus told him to let down his nets once more. Peter obeyed, and the catch was so great that the nets began to break and the boats began to sink. Seeing it, Peter fell down at Jesus' knees and said, \"Depart from me, for I am a sinful man, O Lord!\" He sensed at once that he was unworthy to stand so near such holiness. But Jesus answered, \"Do not be afraid. From now on you will catch men.\" From the very beginning, then, the Lord was calling not a worthy man but a sinful one — and a sinful man is the only kind He has ever called.",
+    "es": "Hubo un día en que Pedro había pescado toda la noche sin sacar nada, y Jesús le dijo que echara las redes una vez más. Pedro obedeció, y la pesca fue tan grande que las redes comenzaron a romperse y las barcas a hundirse. Al verlo, Pedro cayó de rodillas ante Jesús y dijo: «Apártate de mí, Señor, porque soy hombre pecador». Sintió de inmediato que era indigno de estar tan cerca de tal santidad. Pero Jesús respondió: «No temas; desde ahora pescarás hombres». Desde el mismo principio, pues, el Señor estaba llamando no a un hombre digno sino a uno pecador —y un hombre pecador es el único que jamás ha llamado—."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "142b83e9684e"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "heading",
+   "text": {
+    "en": "II. The Disciple",
+    "es": "II. El Discípulo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3b14b4e6b5fc"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "Peter's years with Jesus show us the good, the bad, and the ugly — for the same man who reached the heights also stumbled badly, and the Lord used both.",
+    "es": "Los años de Pedro con Jesús nos muestran lo bueno, lo malo y lo feo —porque el mismo hombre que alcanzó las alturas también tropezó gravemente, y el Señor usó ambas cosas—."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fab2299143e8"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "<strong>The good — the great confession.</strong> When Jesus asked the disciples who they believed He was, it was Peter who answered for them all:",
+    "es": "<strong>Lo bueno — la gran confesión.</strong> Cuando Jesús preguntó a los discípulos quién creían que era Él, fue Pedro quien respondió por todos:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f843ffbad200"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "scripture",
+   "text": {
+    "en": "You are the Christ, the Son of the living God. (Matthew 16:16, NKJV)",
+    "es": "Tú eres el Cristo, el Hijo del Dios viviente. (Mateo 16:16, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4163c82811fb"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "This was a confession given by revelation, and Jesus blessed him for it. Upon the great truth Peter had just confessed, the Lord declared, \"On this rock I will build My church, and the gates of Hades shall not prevail against it.\" Here Peter is at his best, speaking the central truth of the faith.",
+    "es": "Esta fue una confesión dada por revelación, y Jesús lo bendijo por ella. Sobre la gran verdad que Pedro acababa de confesar, el Señor declaró: «Sobre esta roca edificaré mi iglesia; y las puertas del infierno no prevalecerán contra ella». Aquí Pedro está en su mejor momento, diciendo la verdad central de la fe."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "521cadc30efe"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "<strong>The bad — the Peter Doubt.</strong> But the same Peter who could rise so high could also sink. One night the disciples were straining at the oars in a storm when they saw Jesus walking on the water. Peter, impulsive as ever, called out, \"Lord, if it is You, command me to come to You on the water.\" Jesus said, \"Come\" — and Peter actually walked on the water toward Him. Then something happened:",
+    "es": "<strong>Lo malo — la Duda de Pedro.</strong> Pero el mismo Pedro que podía subir tan alto también podía hundirse. Una noche los discípulos remaban con esfuerzo en una tormenta cuando vieron a Jesús caminando sobre el agua. Pedro, impulsivo como siempre, gritó: «Señor, si eres tú, manda que yo vaya a ti sobre las aguas». Jesús dijo: «Ven» —y Pedro de veras caminó sobre el agua hacia Él—. Entonces algo sucedió:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2ff073909fce"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "scripture",
+   "text": {
+    "en": "But when he saw that the wind was boisterous, he was afraid; and beginning to sink he cried out, saying, \"Lord, save me!\" (Matthew 14:30, NKJV)",
+    "es": "Mas viendo el viento fuerte, tuvo miedo; y comenzando a hundirse, dio voces, diciendo: ¡Señor, sálvame! (Mateo 14:30, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "214ddae9a06d"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "As long as Peter looked at Christ, he walked; the moment he saw the wind, he lost faith in his Lord's power and began to sink. Jesus immediately reached out His hand and caught him, saying, \"O you of little faith, why did you doubt?\" Notice what failed — not Christ's power, but Peter's confidence in it. I once knew a seminary student named Wayne Woodward, a deaf man who had given up a good job at Boeing and moved his family clear across the country to prepare for ministry. His doubt was not about God at all; it was about himself. \"I don't belong here,\" he would say. \"I could never pastor a church.\" That is the Peter doubt — not doubting God's power, but doubting whether God could use someone like you. And the answer to it is always the same: God is not looking for ability; He is looking for availability. The One who bid Peter walk will not let him sink.",
+    "es": "Mientras Pedro miraba a Cristo, caminaba; en el momento en que vio el viento, perdió la fe en el poder de su Señor y comenzó a hundirse. Jesús enseguida extendió la mano y lo sostuvo, diciendo: «¡Hombre de poca fe! ¿por qué dudaste?». Note lo que falló —no el poder de Cristo, sino la confianza de Pedro en él—. Conocí una vez a un estudiante de seminario llamado Wayne Woodward, un hombre sordo que había dejado un buen empleo en Boeing y había mudado a su familia al otro lado del país para prepararse para el ministerio. Su duda no era acerca de Dios en absoluto; era acerca de sí mismo. «No pertenezco aquí», decía. «Nunca podría pastorear una iglesia». Esa es la duda de Pedro —no dudar del poder de Dios, sino dudar de que Dios pudiera usar a alguien como tú—. Y la respuesta es siempre la misma: Dios no busca capacidad; busca disponibilidad. El que mandó a Pedro caminar no lo dejará hundirse."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0115636e6e4f"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "<strong>The ugly — the denial.</strong> Then came Peter's darkest hour. On the night Jesus was arrested, Peter, who had sworn he would die before denying his Lord, denied three times that he even knew Him — the last time with curses, as a servant girl pressed him. And then the rooster crowed. Luke tells us that at that very moment \"the Lord turned and looked at Peter,\" and the memory of that look broke him. He went out and wept bitterly. This is the lowest point a follower can reach: not weakness on the water, but open denial of the Lord he loved.",
+    "es": "<strong>Lo feo — la negación.</strong> Luego vino la hora más oscura de Pedro. La noche en que Jesús fue arrestado, Pedro, que había jurado que moriría antes de negar a su Señor, negó tres veces que siquiera lo conocía —la última vez con maldiciones, mientras una criada lo presionaba—. Y entonces cantó el gallo. Lucas nos dice que en ese mismo momento «vuelto el Señor, miró a Pedro», y el recuerdo de aquella mirada lo quebrantó. Salió fuera y lloró amargamente. Este es el punto más bajo que un seguidor puede alcanzar: no la debilidad sobre el agua, sino la negación abierta del Señor a quien amaba."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf8d320ca34f"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "heading",
+   "text": {
+    "en": "III. The Pastor",
+    "es": "III. El Pastor"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4b7381b4e7e7"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "And here the gospel shines, for the story does not end at the denial. After the resurrection, the risen Christ sought Peter out by the same sea where He had first called him, and three times — one for each denial — He asked, \"Simon, son of Jonah, do you love Me?\" Each time Peter answered yes, and each time Jesus gave him a charge:",
+    "es": "Y aquí resplandece el evangelio, porque la historia no termina en la negación. Después de la resurrección, el Cristo resucitado buscó a Pedro junto al mismo mar donde lo había llamado por primera vez, y tres veces —una por cada negación— le preguntó: «Simón, hijo de Jonás, ¿me amas?». Cada vez Pedro respondió que sí, y cada vez Jesús le dio un encargo:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "78bf1801e01a"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "scripture",
+   "text": {
+    "en": "Feed My lambs... Tend My sheep... Feed My sheep. (John 21:15-17, NKJV)",
+    "es": "Apacienta mis corderos... Pastorea mis ovejas... Apacienta mis ovejas. (Juan 21:15-17, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e97df792e26b"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "The Lord did not cast Peter off for his failure; He restored him and recommissioned him. The fisherman who had denied his Master was made a shepherd to feed the flock. And feed them he did. On the Day of Pentecost, the same Peter who had cowered before a servant girl stood up before thousands and boldly preached Christ crucified and risen, and three thousand were saved. Later God used him to open the door of the gospel to the Gentiles, sending him to the house of Cornelius (Acts 10) with the realization that God shows no partiality. The denying disciple had become the rock who feeds the sheep. Years later this same Peter would write two letters to scattered, suffering believers, comforting them in their trials and urging the elders among them, \"Shepherd the flock of God which is among you, serving as overseers\" — the very charge the risen Christ had given him by the sea. The trembling lamb had truly become a faithful shepherd, and he spent the rest of his life feeding the flock he had once been too afraid to own.",
+    "es": "El Señor no desechó a Pedro por su fracaso; lo restauró y lo volvió a comisionar. El pescador que había negado a su Maestro fue hecho un pastor para apacentar el rebaño. Y vaya que lo apacentó. En el Día de Pentecostés, el mismo Pedro que se había acobardado ante una criada se puso de pie ante miles y predicó con valentía a Cristo crucificado y resucitado, y tres mil fueron salvos. Después Dios lo usó para abrir la puerta del evangelio a los gentiles, enviándolo a la casa de Cornelio (Hechos 10) con la comprensión de que Dios no hace acepción de personas. El discípulo que había negado se había vuelto la roca que apacienta las ovejas. Años después este mismo Pedro escribiría dos cartas a creyentes dispersos y sufrientes, consolándolos en sus pruebas y exhortando a los ancianos entre ellos: «Apacentad la grey de Dios que está entre vosotros, cuidando de ella» —el mismo encargo que el Cristo resucitado le había dado junto al mar—. El cordero tembloroso se había vuelto en verdad un pastor fiel, y pasó el resto de su vida apacentando el rebaño que una vez había tenido demasiado miedo de reconocer."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f332fd021ecb"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "heading",
+   "text": {
+    "en": "The Resurrection Turned the Coward into a Crusader",
+    "es": "La Resurrección Convirtió al Cobarde en Cruzado"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a5b9744359ab"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "What changed Peter? It was not a stronger personality or a fresh resolve. The difference was the resurrection. Before the resurrection, Peter denied Christ three times to save his own skin. After it, the very same man proclaimed Christ openly, was arrested, beaten, jailed, and threatened — and gained nothing for himself in this world. Tradition tells us Peter at last died for Christ, crucified upside down, counting himself unworthy to die as his Lord had died. No ordinary explanation accounts for that change. Only one thing does: he had seen the risen Lord. As Peter himself declared at Pentecost, \"This Jesus God has raised up, of which we are all witnesses\" (Acts 2:32).",
+    "es": "¿Qué cambió a Pedro? No fue una personalidad más fuerte ni una nueva resolución. La diferencia fue la resurrección. Antes de la resurrección, Pedro negó a Cristo tres veces para salvar su propio pellejo. Después de ella, el mismísimo hombre proclamó a Cristo abiertamente, fue arrestado, golpeado, encarcelado y amenazado —y no ganó nada para sí mismo en este mundo—. La tradición nos dice que Pedro al fin murió por Cristo, crucificado de cabeza, considerándose indigno de morir como había muerto su Señor. Ninguna explicación ordinaria da cuenta de ese cambio. Solo una lo hace: él había visto al Señor resucitado. Como el mismo Pedro declaró en Pentecostés: «A este Jesús resucitó Dios, de lo cual todos nosotros somos testigos» (Hechos 2:32)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ad0b19596655"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "The risen Christ still turns fear into courage. There was an African man named Malamba, a converted witch doctor, who was tormented by his neighbors' threats of voodoo and curses, until the missionaries taught him the words of the risen Christ to John:",
+    "es": "El Cristo resucitado todavía convierte el temor en valor. Hubo un hombre africano llamado Malamba, un hechicero convertido, que era atormentado por las amenazas de vudú y maldiciones de sus vecinos, hasta que los misioneros le enseñaron las palabras del Cristo resucitado a Juan:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1006f7dea71a"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "scripture",
+   "text": {
+    "en": "Do not be afraid; I am the First and the Last. I am He who lives, and was dead, and behold, I am alive forevermore. Amen. And I have the keys of Hades and of Death. (Revelation 1:17-18, NKJV)",
+    "es": "No temas; yo soy el primero y el último; y el que vivo, y he estado muerto; mas he aquí que vivo por los siglos de los siglos, Amén. Y tengo las llaves del infierno y de la muerte. (Apocalipsis 1:17-18, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "49991dd979d9"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "When Malamba grasped that the living Christ — not the witch doctors, not the spirits — held the keys of death and held his own destiny, fear lost its grip and he was filled with courage and hope. The same risen Lord who emptied the tomb holds your life in His hands as well.",
+    "es": "Cuando Malamba comprendió que el Cristo vivo —no los hechiceros, no los espíritus— tenía las llaves de la muerte y tenía su propio destino, el temor perdió su poder y fue lleno de valor y esperanza. El mismo Señor resucitado que vació la tumba tiene también tu vida en sus manos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b415b3484be9"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "heading",
+   "text": {
+    "en": "Failure Is Not the End",
+    "es": "El Fracaso No es el Fin"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f00c698ae67e"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "prose",
+   "text": {
+    "en": "This is the great encouragement of Peter's life: failure is not the end for the one Christ restores. Peter doubted on the water and denied at the fire, yet he became the rock who fed the flock and finally laid down his life for his Lord. It was never his natural strength that made him; it was grace and risen power. So if you have stumbled, take heart — the Lord who looked at Peter still looks at you, not to condemn, but to restore. He is asking the same question He asked by the sea: \"Do you love Me?\" And to all who answer yes, He gives the same charge and the same power: follow Me, and feed My sheep.",
+    "es": "Este es el gran consuelo de la vida de Pedro: el fracaso no es el fin para aquel a quien Cristo restaura. Pedro dudó sobre el agua y negó junto al fuego, y sin embargo llegó a ser la roca que apacentó el rebaño y al fin entregó su vida por su Señor. Nunca fue su fuerza natural lo que lo hizo; fue la gracia y el poder de la resurrección. Así que si has tropezado, ten ánimo —el Señor que miró a Pedro todavía te mira a ti, no para condenar, sino para restaurar—. Está haciendo la misma pregunta que hizo junto al mar: «¿Me amas?». Y a todos los que responden que sí, les da el mismo encargo y el mismo poder: sígueme, y apacienta mis ovejas."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a435de988147"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "prose",
+   "text": {
+    "en": "Unit 7 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 7 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "39593a6cb288"
+    }
+   }
+  },
+  {
+   "id": "b037",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33593c268178"
+    }
+   }
+  },
+  {
+   "id": "b038",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b039",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

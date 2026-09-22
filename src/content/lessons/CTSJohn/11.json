@@ -1,0 +1,446 @@
+{
+ "course": "CTSJohn",
+ "unit": 11,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right:15px; font-weight:bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Espa&ntilde;ol</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></p>\n    <p style=\"margin-top:10px; font-style:italic; color:#2f4f2f;\"><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\" style=\"display:none;\">\n    <h3><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></h3>\n    <p style=\"font-size:0.9rem;\"><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></p>\n    <label class=\"lang-en\"><!--cts:b008:en--></label><label class=\"lang-es\"><!--cts:b008:es--></label>\n    <input type=\"text\" id=\"regName\" placeholder=\"...\" aria-label=\"...\">\n    <label class=\"lang-en\"><!--cts:b009:en--></label><label class=\"lang-es\"><!--cts:b009:es--></label>\n    <input type=\"email\" id=\"regEmail\" placeholder=\"...\" aria-label=\"...\">\n    <label class=\"lang-en\"><!--cts:b010:en--></label><label class=\"lang-es\"><!--cts:b010:es--></label>\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate / Certificado</option>\n        <option value=\"mdiv\">M.Div.</option>\n        <option value=\"thm\">Th.M.</option>\n    </select>\n    <button id=\"regBtn\" class=\"nav-btn\"><span class=\"lang-en\"><!--cts:b011:en--></span><span class=\"lang-es\"><!--cts:b011:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top:8px;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\">\n\n<h3><!--cts:b012:en--></h3>\n<p><!--cts:b013:en--></p>\n\n<h3><!--cts:b014:en--></h3>\n<p><!--cts:b015:en--></p>\n<div class=\"illustration\"><!--cts:b016:en--></div>\n\n<h3><!--cts:b017:en--></h3>\n<p><!--cts:b018:en--></p>\n<p><!--cts:b019:en--></p>\n<div class=\"pull-quote\"><!--cts:b020:en--></div>\n<p><!--cts:b021:en--></p>\n\n<h3><!--cts:b022:en--></h3>\n<p><!--cts:b023:en--></p>\n\n<h3><!--cts:b024:en--></h3>\n<p><!--cts:b025:en--></p>\n<p><!--cts:b026:en--></p>\n<p><!--cts:b027:en--></p>\n\n</div>\n<div class=\"lang-es\">\n\n<h3><!--cts:b012:es--></h3>\n<p><!--cts:b013:es--></p>\n\n<h3><!--cts:b014:es--></h3>\n<p><!--cts:b015:es--></p>\n<div class=\"illustration\"><!--cts:b016:es--></div>\n\n<h3><!--cts:b017:es--></h3>\n<p><!--cts:b018:es--></p>\n<p><!--cts:b019:es--></p>\n<div class=\"pull-quote\"><!--cts:b020:es--></div>\n<p><!--cts:b021:es--></p>\n\n<h3><!--cts:b022:es--></h3>\n<p><!--cts:b023:es--></p>\n\n<h3><!--cts:b024:es--></h3>\n<p><!--cts:b025:es--></p>\n<p><!--cts:b026:es--></p>\n<p><!--cts:b027:es--></p>\n\n</div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b028:en--></span><span class=\"lang-es\"><!--cts:b028:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b029:en--></span>\n       <span class=\"lang-es\"><!--cts:b029:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top:20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b030:en--></span><span class=\"lang-es\"><!--cts:b030:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b031:en--></span><span class=\"lang-es\"><!--cts:b031:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top:15px; font-weight:bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top:10px; font-size:0.9rem; color:#1f6b3b; display:none;\"></div>\n    </div>\n</div>\n</div>\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSJohnReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "Unit 12 →",
+    "es": "Unidad 12 →"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "28a73042929f"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "📖 The Gospel of John — Unit 11: The Spirit and the High-Priestly Prayer",
+    "es": "📖 El Evangelio de Juan — Unidad 11: El Espíritu y la Oración Sumosacerdotal"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b3e9783e53f3"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "\"I will pray the Father, and He will give you another Helper, that He may abide with you forever.\" — John 14:16 (NKJV)",
+    "es": "⚡ \"Y yo rogaré al Padre, y os dará otro Consolador, para que esté con vosotros para siempre.\" — Juan 14:16 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d8c70a447dc8"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Register to Begin",
+    "es": "Regístrese para comenzar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "007cff4200ca"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Your name and track are saved on this device and carry across every unit and every CTS course.",
+    "es": "Su nombre y trayecto se guardan en este dispositivo y se conservan en cada unidad y curso de CTS."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c3782de1c2f1"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "label",
+   "text": {
+    "en": "Full name",
+    "es": "Nombre completo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "eeb692087d62"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "label",
+   "text": {
+    "en": "Email",
+    "es": "Correo electrónico"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "84add5b29527"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "label",
+   "text": {
+    "en": "Track",
+    "es": "Trayecto"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b1c5a7af06ba"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "heading",
+   "text": {
+    "en": "Introduction — \"I Will Not Leave You Orphans\"",
+    "es": "Introducción — \"No os dejaré huérfanos\""
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "944e513f6f22"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "Still in the upper room, on the night before the cross, Jesus kept speaking to His troubled friends. He had told them He was going away, and their hearts were breaking; they did not understand, and grief filled the room. But His leaving would not be abandonment. <em>\"I will not leave you orphans,\"</em> He promised (John 14:18), and He gave them two great gifts to prove it. The first was a Person to come and dwell with them — the Helper, the Holy Spirit. The second was a prayer, His own prayer lifting them up to the Father, the great prayer of John 17 that we call the High-Priestly Prayer. The Spirit would be God <em>with</em> them and <em>in</em> them; the prayer would hold them before the throne. Together they answer the fear of every disciple who has ever felt the Lord seem far away: you are not alone, and you are not forgotten.",
+    "es": "Aún en el aposento alto, la noche antes de la cruz, Jesús seguía hablando a sus amigos turbados. Les había dicho que se iba, y sus corazones se rompían; no entendían, y el dolor llenaba el cuarto. Pero su partida no sería abandono. ⚡ <em>\"No os dejaré huérfanos,\"</em> prometió (Juan 14:18), y les dio dos grandes regalos para probarlo. El primero fue una Persona que vendría a morar con ellos — el Consolador, el Espíritu Santo. El segundo fue una oración, su propia oración levantándolos al Padre, la gran oración de Juan 17 que llamamos la Oración Sumosacerdotal. El Espíritu sería Dios <em>con</em> ellos y <em>en</em> ellos; la oración los sostendría ante el trono. Juntos responden al temor de todo discípulo que alguna vez ha sentido al Señor lejano: no estás solo, y no estás olvidado."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0b5ac9d97c6a"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "heading",
+   "text": {
+    "en": "I. \"It Is to Your Advantage That I Go Away\"",
+    "es": "I. \"Os conviene que yo me vaya\""
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6a0e25cc88d3"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "The disciples could not see how His leaving could be anything but loss. Yet Jesus said something astonishing: <em>\"It is to your advantage that I go away; for if I do not go away, the Helper will not come to you; but if I depart, I will send Him to you\"</em> (John 16:7). While He walked the earth, Jesus could be in only one place at a time; by the Spirit, He would be with every believer everywhere, always. So their sorrow had a purpose they could not yet see. He compared it to a woman in labor, whose anguish is real but turns to joy when the child is born: \"You will weep and mourn... you will grieve, but your grief will turn to joy\" (John 16:20–22). This is the deep pattern of the life of faith — that we are often asked to trust the Father in the dark, before we are shown the reason.",
+    "es": "Los discípulos no podían ver cómo su partida pudiera ser otra cosa que pérdida. Sin embargo, Jesús dijo algo asombroso: ⚡ <em>\"os conviene que yo me vaya; porque si no me fuese, el Consolador no vendría a vosotros; mas si me fuere, os lo enviaré\"</em> (Juan 16:7). Mientras andaba en la tierra, Jesús podía estar en un solo lugar a la vez; por el Espíritu, estaría con cada creyente en todas partes, siempre. Así que su tristeza tenía un propósito que aún no podían ver. La comparó a una mujer de parto, cuya angustia es real pero se convierte en gozo cuando nace el niño: \"Lloraréis y lamentaréis... estaréis tristes, pero vuestra tristeza se convertirá en gozo\" (Juan 16:20–22). Este es el patrón hondo de la vida de fe — que a menudo se nos pide confiar en el Padre en la oscuridad, antes de que se nos muestre la razón."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ef2a2a83517e"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Trusting a plan we cannot yet see.</strong> Dr. Cook has often said that after half a century of ministry he still finds much of God's working past his understanding — why God allows the wars and famines, why bad things befall good people. He has known deep loss in his own family, watching loved ones taken by a cruel disease while he himself was spared, with no answer he could give. And yet his settled confidence is this: God has a plan, and even what we cannot understand in this world we will understand in the world to come. He tells, too, of a time early in ministry when he felt sure God meant him for a large church, while a tiny, poor congregation in a cold and distant place kept calling. Reluctantly he followed what he could not explain — and it was there that God blessed the work, provided for his family, and opened the door that eventually made him a seminary professor. Looking back, the confusing road was the right one. So the Spirit comes to be our Helper precisely when the way is unclear.",
+    "es": "<strong>Confiar en un plan que aún no vemos.</strong> El Dr. Cook ha dicho a menudo que tras medio siglo de ministerio aún halla mucho del obrar de Dios más allá de su entendimiento — por qué Dios permite las guerras y las hambrunas, por qué les sobrevienen males a los buenos. Ha conocido pérdidas hondas en su propia familia, viendo a seres queridos llevados por una enfermedad cruel mientras él mismo fue librado, sin respuesta que pudiera dar. Y sin embargo su confianza firme es esta: Dios tiene un plan, y aun lo que no podemos entender en este mundo lo entenderemos en el mundo venidero. Cuenta también de un tiempo temprano en el ministerio cuando se sentía seguro de que Dios lo destinaba a una iglesia grande, mientras una congregación diminuta y pobre en un lugar frío y lejano seguía llamándolo. De mala gana siguió lo que no podía explicar — y fue allí donde Dios bendijo la obra, proveyó para su familia, y abrió la puerta que con el tiempo lo hizo profesor de seminario. Mirando atrás, el camino confuso era el correcto. Así que el Espíritu viene a ser nuestro Ayudador justo cuando el camino no está claro."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3514d0b20b59"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "heading",
+   "text": {
+    "en": "II. The Helper, the Spirit of Truth",
+    "es": "II. El Consolador, el Espíritu de verdad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3a4793b1fedb"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "The name Jesus gives the Spirit is rich: the <em>Paraclete</em> — the Helper, the Comforter, the Advocate, literally \"one called alongside\" to stand with us. And He is given not for a visit but forever: <em>\"I will pray the Father, and He will give you another Helper, that He may abide with you forever — the Spirit of truth... He dwells with you and will be in you\"</em> (John 14:16–17). Notice that \"another\" Helper — another of the same kind as Jesus Himself, God come close. Jesus tells us what the Spirit does. He <strong>teaches</strong>: \"He will teach you all things, and bring to your remembrance all things that I said to you\" (14:26). He <strong>testifies</strong> of Christ: \"He will testify of Me\" (15:26). He <strong>convicts</strong>: He will \"convict the world of sin, and of righteousness, and of judgment\" (16:8), awakening the conscience that is dead to God. And He <strong>guides</strong>: \"He will guide you into all truth... He will glorify Me\" (16:13–14).",
+    "es": "El nombre que Jesús da al Espíritu es rico: el <em>Paracleto</em> — el Consolador, el Ayudador, el Abogado, literalmente \"uno llamado al lado\" para estar con nosotros. Y es dado no para una visita sino para siempre: ⚡ <em>\"Y yo rogaré al Padre, y os dará otro Consolador, para que esté con vosotros para siempre; el Espíritu de verdad... mora con vosotros, y estará en vosotros\"</em> (Juan 14:16–17). Note \"otro\" Consolador — otro de la misma clase que Jesús mismo, Dios acercado. Jesús nos dice lo que el Espíritu hace. <strong>Enseña</strong>: \"él os enseñará todas las cosas, y os recordará todo lo que os he dicho\" (14:26). <strong>Da testimonio</strong> de Cristo: \"él dará testimonio de mí\" (15:26). <strong>Convence</strong>: \"convencerá al mundo de pecado, de justicia y de juicio\" (16:8), despertando la conciencia que está muerta a Dios. Y <strong>guía</strong>: \"él os guiará a toda verdad... él me glorificará\" (16:13–14)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "409eae78952c"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "That last point is the key to knowing the Spirit's true work. The Spirit does not advertise Himself; He glorifies Christ. So a life truly filled with the Spirit will not draw attention to itself or to spectacular signs — it will point to Jesus. And this same Helper is our strength when the world turns hostile. Jesus warned that the world would hate His own as it hated Him; but the Spirit, the Advocate, empowers ordinary believers to bear bold witness even under persecution, so that the church has often grown fastest exactly where it has suffered most. The Comforter is no luxury for calm days; He is the courage of the martyr and the steady voice in the storm.",
+    "es": "Ese último punto es la clave para conocer la verdadera obra del Espíritu. El Espíritu no se anuncia a sí mismo; glorifica a Cristo. Así que una vida de veras llena del Espíritu no llamará la atención sobre sí misma ni sobre señales espectaculares — señalará a Jesús. Y este mismo Consolador es nuestra fuerza cuando el mundo se vuelve hostil. Jesús advirtió que el mundo odiaría a los suyos como le odió a él; pero el Espíritu, el Abogado, da poder a creyentes comunes para dar testimonio con denuedo aun bajo persecución, de modo que la iglesia a menudo ha crecido más rápido justo donde más ha sufrido. El Consolador no es un lujo para los días tranquilos; es el valor del mártir y la voz firme en la tormenta."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0978a4edc0d5"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "Jesus does not merely send help; He sends a Helper — a Person, God Himself, to dwell within the very people He has saved.",
+    "es": "Jesús no envía meramente ayuda; envía un Ayudador — una Persona, Dios mismo, para morar dentro del pueblo mismo que ha salvado."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0466f7315de7"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "This is the wonder the disciples could not yet grasp that night: the same God who had walked beside them on the roads of Galilee would now live within them. The Helper is not a force or a feeling but a divine Person who knows us, loves us, and never leaves. He prays in us when we do not know how to pray, He steadies us when our own strength fails, and He keeps quietly turning our eyes back to Christ. What Jesus had been to them on the outside, the Spirit would now be to every believer from the inside.",
+    "es": "Esta es la maravilla que los discípulos aún no podían captar aquella noche: el mismo Dios que había caminado junto a ellos por los caminos de Galilea ahora viviría dentro de ellos. El Consolador no es una fuerza ni un sentimiento sino una Persona divina que nos conoce, nos ama, y nunca nos deja. Ora en nosotros cuando no sabemos cómo orar, nos sostiene cuando nuestras propias fuerzas fallan, y sigue volviendo calladamente nuestros ojos a Cristo. Lo que Jesús había sido para ellos por fuera, el Espíritu lo sería ahora para cada creyente desde dentro."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e7a36bf723ee"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "heading",
+   "text": {
+    "en": "III. Sorrow Turned to Joy, and a Plan Revealed Day by Day",
+    "es": "III. La tristeza convertida en gozo, y un plan revelado día a día"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8dfa6d3e8752"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "The disciples kept asking one another what Jesus meant by \"a little while.\" We do the same. We want God to lay out the whole plan at once, plainly, the way a machine spits out an instant answer to a typed question. But God rarely answers that way. He revealed even to the disciples only what they could bear, a partial light for the next step, because He is not training slaves who obey blind orders but sons and daughters who are to grow into the very mind of Christ. <em>\"I have yet many things to say to you, but you cannot bear them now\"</em> (John 16:12). We learn more by seeking His will over time than we ever would from an instant reply; the seeking itself shapes us. And through all of it the promise holds: the grief will turn to joy that no one can take away, and \"whatever you ask the Father in My name He will give you\" (16:23). The God who works in us \"both to will and to do for His good pleasure\" (Philippians 2:13) unfolds His purpose patiently, day by day.",
+    "es": "Los discípulos seguían preguntándose qué quería decir Jesús con \"un poco.\" Nosotros hacemos lo mismo. Queremos que Dios despliegue todo el plan de una vez, claramente, como una máquina que arroja una respuesta instantánea a una pregunta escrita. Pero Dios rara vez responde así. Aun a los discípulos les reveló solo lo que podían soportar, una luz parcial para el siguiente paso, porque no está formando esclavos que obedecen órdenes ciegas sino hijos e hijas que han de crecer hasta la mente misma de Cristo. ⚡ <em>\"Aún tengo muchas cosas que deciros, pero ahora no las podéis sobrellevar\"</em> (Juan 16:12). Aprendemos más buscando su voluntad con el tiempo que lo que jamás aprenderíamos de una respuesta instantánea; el buscar mismo nos forma. Y a través de todo, la promesa se sostiene: la tristeza se convertirá en gozo que nadie podrá quitar, y \"todo cuanto pidiereis al Padre en mi nombre, os lo dará\" (16:23). El Dios que obra en nosotros \"así el querer como el hacer, por su buena voluntad\" (Filipenses 2:13) despliega su propósito con paciencia, día tras día."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "262ff0d60824"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "heading",
+   "text": {
+    "en": "IV. The High-Priestly Prayer (John 17)",
+    "es": "IV. La Oración Sumosacerdotal (Juan 17)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "72d3824dc712"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "Then Jesus lifted His eyes to heaven and prayed — and we are allowed to listen. John 17 is rightly called the High-Priestly Prayer, for here the great High Priest intercedes for His people on the eve of His sacrifice. <strong>First He prays for Himself</strong>: \"Father, the hour has come. Glorify Your Son, that Your Son also may glorify You\" (17:1), and He defines for us the very heart of salvation: <em>\"This is eternal life, that they may know You, the only true God, and Jesus Christ whom You have sent\"</em> (17:3). Eternal life is not first a place or a length of days; it is to know God. <strong>Then He prays for His disciples</strong>: not that the Father would take them out of the world, but keep them from the evil one, and <em>\"sanctify them by Your truth. Your word is truth\"</em> (17:17). He commits the frightened eleven to the Father's keeping.",
+    "es": "Entonces Jesús alzó los ojos al cielo y oró — y se nos permite escuchar. Juan 17 se llama con razón la Oración Sumosacerdotal, pues aquí el gran Sumo Sacerdote intercede por su pueblo en vísperas de su sacrificio. <strong>Primero ora por sí mismo</strong>: \"Padre, la hora ha llegado; glorifica a tu Hijo, para que tu Hijo también te glorifique a ti\" (17:1), y nos define el corazón mismo de la salvación: ⚡ <em>\"Y esta es la vida eterna: que te conozcan a ti, el único Dios verdadero, y a Jesucristo, a quien has enviado\"</em> (17:3). La vida eterna no es primero un lugar ni una cantidad de días; es conocer a Dios. <strong>Luego ora por sus discípulos</strong>: no que el Padre los quite del mundo, sino que los guarde del maligno, y ⚡ <em>\"Santifícalos en tu verdad; tu palabra es verdad\"</em> (17:17). Encomienda a los once atemorizados al cuidado del Padre."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "06299ddc7f31"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "<strong>And then He prays for us.</strong> \"I do not pray for these alone, but also for those who will believe in Me through their word\" (John 17:20). Every believer who has ever come to Christ through the apostles' testimony was named in that prayer on that night. And what He asks for us is oneness: <em>\"that they all may be one, as You, Father, are in Me, and I in You; that they also may be one in Us, that the world may believe that You sent Me\"</em> (17:21). The unity He prays for is not a forced uniformity or a mere organization; it is a shared life that mirrors the very oneness of the Father and the Son, and its purpose is evangelistic — so that the watching world will believe. He ends by reaching beyond this life altogether: \"Father, I desire that they also whom You gave Me may be with Me where I am, that they may behold My glory\" (17:24).",
+    "es": "<strong>Y entonces ora por nosotros.</strong> \"Mas no ruego solamente por éstos, sino también por los que han de creer en mí por la palabra de ellos\" (Juan 17:20). Todo creyente que alguna vez ha venido a Cristo por el testimonio de los apóstoles fue nombrado en aquella oración aquella noche. Y lo que pide por nosotros es unidad: ⚡ <em>\"para que todos sean uno; como tú, oh Padre, en mí, y yo en ti, que también ellos sean uno en nosotros; para que el mundo crea que tú me enviaste\"</em> (17:21). La unidad que pide no es una uniformidad forzada ni una mera organización; es una vida compartida que refleja la oneidad misma del Padre y el Hijo, y su propósito es evangelístico — para que el mundo que observa crea. Termina alcanzando más allá de esta vida: \"Padre, aquellos que me has dado, quiero que donde yo estoy, también ellos estén conmigo, para que vean mi gloria\" (17:24)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a2316355446a"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "So put the two gifts together. Jesus did not leave His own as orphans. He sent the Helper to be with us and in us, teaching, convicting, comforting, and glorifying Christ through us; and He Himself, our great High Priest, prays for us still before the Father's throne. Whatever your confusion, whatever your sorrow, whatever the hostility of the world, the Comforter is beside you and the Son is interceding for you. You are not alone, and you are not forgotten.",
+    "es": "Así que una los dos regalos. Jesús no dejó a los suyos huérfanos. Envió al Consolador para estar con nosotros y en nosotros, enseñando, convenciendo, consolando, y glorificando a Cristo por medio de nosotros; y él mismo, nuestro gran Sumo Sacerdote, ora por nosotros aún ante el trono del Padre. Cualquiera que sea su confusión, cualquiera que sea su tristeza, cualquiera que sea la hostilidad del mundo, el Consolador está a su lado y el Hijo intercede por usted. No está solo, y no está olvidado."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e5161b6d1403"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "Unit 11 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 11 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "308fac13cf5e"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. The short-answer section is practice for Certificate students and does not count against you.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. La sección de respuesta corta es práctica para el Certificado y no cuenta en su contra."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9168d4aa12d6"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

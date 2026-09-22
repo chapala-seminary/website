@@ -1,0 +1,404 @@
+{
+ "course": "CTSRev",
+ "unit": 5,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Unit 6 →</button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #2f4f2f;\"><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\">\n    <h2><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></p>\n    <input type=\"text\" id=\"regName\" placeholder=\"Full name / Nombre completo\" aria-label=\"Full name / Nombre completo\">\n    <input type=\"email\" id=\"regEmail\" placeholder=\"Email\" aria-label=\"Email\">\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate Track</option>\n        <option value=\"mdiv\">Master of Divinity (M.Div.) Track</option>\n        <option value=\"thm\">Master of Theology (Th.M.) Track</option>\n    </select>\n    <button class=\"nav-btn\" id=\"regBtn\"><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\">\n<p class=\"passage-label\"><!--cts:b008:en--></p>\n<div class=\"scripture\"><!--cts:b009:en--></div>\n\n<h3><!--cts:b010:en--></h3>\n<p><!--cts:b011:en--></p>\n\n<h3><!--cts:b012:en--></h3>\n<p><!--cts:b013:en--></p>\n\n<h3><!--cts:b014:en--></h3>\n<p><!--cts:b015:en--></p>\n\n<h3><!--cts:b016:en--></h3>\n<p><!--cts:b017:en--></p>\n\n<h3><!--cts:b018:en--></h3>\n<p><!--cts:b019:en--></p>\n\n<h3><!--cts:b020:en--></h3>\n<p><!--cts:b021:en--></p>\n\n<h3><!--cts:b022:en--></h3>\n<p><!--cts:b023:en--></p>\n<div class=\"scripture\"><!--cts:b024:en--></div>\n</div>\n\n<div class=\"lang-es\">\n<p class=\"passage-label\"><!--cts:b008:es--></p>\n<div class=\"scripture\"><!--cts:b009:es--></div>\n\n<h3><!--cts:b010:es--></h3>\n<p><!--cts:b011:es--></p>\n\n<h3><!--cts:b012:es--></h3>\n<p><!--cts:b013:es--></p>\n\n<h3><!--cts:b014:es--></h3>\n<p><!--cts:b015:es--></p>\n\n<h3><!--cts:b016:es--></h3>\n<p><!--cts:b017:es--></p>\n\n<h3><!--cts:b018:es--></h3>\n<p><!--cts:b019:es--></p>\n\n<h3><!--cts:b020:es--></h3>\n<p><!--cts:b021:es--></p>\n\n<h3><!--cts:b022:es--></h3>\n<p><!--cts:b023:es--></p>\n<div class=\"scripture\"><!--cts:b024:es--></div>\n</div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b025:en--></span><span class=\"lang-es\"><!--cts:b025:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b026:en--></span>\n       <span class=\"lang-es\"><!--cts:b026:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b027:en--></span><span class=\"lang-es\"><!--cts:b027:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b028:en--></span><span class=\"lang-es\"><!--cts:b028:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n  \n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSRevReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📖 Revelation Intensive — Unit 5: The Throne and the Lamb",
+    "es": "📖 Apocalipsis Intensivo — Unidad 5: El Trono y el Cordero"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "73d73d698c68"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "\"Worthy is the Lamb who was slain.\" — Revelation 5:12 (NKJV)",
+    "es": "\"El Cordero que fue inmolado es digno.\" — Apocalipsis 5:12 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b258d3c5a9f7"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "📝 Course Registration",
+    "es": "📝 Registro del Curso"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fde900fe006b"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Welcome to the Revelation Intensive. Please register before beginning Unit 5.",
+    "es": "Bienvenido al Intensivo de Apocalipsis. Por favor regístrese antes de comenzar la Unidad 5."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "059438a54fd9"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "scripture",
+   "text": {
+    "en": "<strong>Text: Revelation 4-5</strong>",
+    "es": "<strong>Texto: Apocalipsis 4-5</strong>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3e76c502a045"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "scripture",
+   "text": {
+    "en": "\"Immediately I was in the Spirit; and behold, a throne set in heaven, and One sat on the throne... 'You are worthy... for You were slain, and have redeemed us to God by Your blood.'\" — Revelation 4:2; 5:9 (NKJV)",
+    "es": "\"Al instante yo estaba en el Espíritu; y he aquí, un trono que estaba puesto en el cielo, y sobre el trono uno sentado... 'Digno eres... porque tú fuiste inmolado, y nos has redimido para Dios con tu sangre.'\" — Apocalipsis 4:2; 5:9 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8a9eff62e722"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "heading",
+   "text": {
+    "en": "A Door Standing Open in Heaven",
+    "es": "Una Puerta Abierta en el Cielo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cfb31dfbe113"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "With the letters to the seven churches finished, the scene changes. \"After these things I looked, and behold, a door standing open in heaven. And the first voice which I heard was like a trumpet speaking with me, saying, 'Come up here, and I will show you things which must take place after this'\" (Revelation 4:1). The reader is lifted from earth, where the churches struggle, into heaven itself, the realm of unseen reality that lies behind and above everything we can see. As in chapter one, John says, \"Immediately I was in the Spirit\" (Revelation 4:2), the phrase that marks the great visions of the book; he is carried by the Holy Spirit into a sight no natural eye could reach. The summons \"Come up here\" has been read in more than one way: some hear in it a foreshadowing of the church's being caught up to be with Christ, while others take it simply as John's own call to ascend in vision, and the course leaves the question open. What is certain is that the curtain is drawn back, and the rest of the book will be understood only from this vantage point, looking at the troubles of earth from the throne room of heaven.",
+    "es": "Terminadas las cartas a las siete iglesias, la escena cambia. \"Después de estas cosas miré, y he aquí una puerta abierta en el cielo; y la primera voz que oí, era como de trompeta que hablaba conmigo, diciendo: Sube acá, y yo te mostraré las cosas que han de ser después de éstas\" (Apocalipsis 4:1). El lector es levantado de la tierra, donde las iglesias luchan, hasta el cielo mismo, el reino de la realidad invisible que está detrás y por encima de todo lo que podemos ver. Como en el capítulo uno, Juan dice: \"Al instante yo estaba en el Espíritu\" (Apocalipsis 4:2), la frase que marca las grandes visiones del libro; es llevado por el Espíritu Santo a una vista que ningún ojo natural podría alcanzar. El llamado \"Sube acá\" se ha entendido de más de una manera: algunos oyen en él una prefiguración de que la iglesia sea arrebatada para estar con Cristo, mientras que otros lo toman simplemente como el llamado de Juan a ascender en visión, y el curso deja la pregunta abierta. Lo cierto es que se descorre la cortina, y el resto del libro se entenderá solo desde este punto de vista, mirando los problemas de la tierra desde la sala del trono del cielo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "75f259626b36"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "heading",
+   "text": {
+    "en": "One Seated on the Throne",
+    "es": "Uno Sentado sobre el Trono"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e0a5076ef031"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "The first thing John sees, and the center of everything that follows, is a throne. \"Behold, a throne set in heaven, and One sat on the throne\" (Revelation 4:2). The throne is the focal point of the entire book of Revelation; before any seal is opened, any trumpet sounded, or any bowl poured out, the reader is shown that God is seated, sovereign, and in command of all. John does not attempt to describe the One on the throne by face or form, but only by the flash of precious stones: He was \"like a jasper and a sardius stone in appearance; and there was a rainbow around the throne, in appearance like an emerald\" (Revelation 4:3). The brilliance speaks of a holiness and majesty too great for words, and the encircling rainbow recalls God's covenant mercy, the promise that His judgments are always ringed about with grace. Whatever storms break upon the earth in the chapters to come, this is the unchanging fact behind them all: a throne stands in heaven, and God is on it.",
+    "es": "Lo primero que Juan ve, y el centro de todo lo que sigue, es un trono. \"He aquí, un trono que estaba puesto en el cielo, y sobre el trono uno sentado\" (Apocalipsis 4:2). El trono es el punto focal de todo el libro del Apocalipsis; antes de que se abra un sello, suene una trompeta, o se derrame una copa, se le muestra al lector que Dios está sentado, soberano, y al mando de todo. Juan no intenta describir al que está sobre el trono por rostro o forma, sino solo por el destello de piedras preciosas: era \"semejante a una piedra de jaspe y de sardio; y había alrededor del trono un arco iris, semejante en aspecto a la esmeralda\" (Apocalipsis 4:3). El resplandor habla de una santidad y majestad demasiado grandes para palabras, y el arco iris que lo rodea recuerda la misericordia del pacto de Dios, la promesa de que sus juicios siempre están rodeados de gracia. Cualesquiera tormentas estallen sobre la tierra en los capítulos por venir, este es el hecho inmutable detrás de todas ellas: un trono está puesto en el cielo, y Dios está sobre él."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "39b6c4ad74c2"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "heading",
+   "text": {
+    "en": "The Elders and the Living Creatures",
+    "es": "Los Ancianos y los Cuatro Animales"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6a69f203cbe3"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "Around the throne John sees two circles of worshipers. First, \"around the throne were twenty-four thrones, and on the thrones I saw twenty-four elders sitting, clothed in white robes; and they had crowns of gold on their heads\" (Revelation 4:4). Their white robes speak of purity and their golden crowns of reward and reign. Who they are has been understood in more than one way: many take them as the redeemed people of God, perhaps the union of Israel and the church in their twelve-and-twelve numbers; others see an exalted order of heavenly beings; the course presents the views fairly and does not insist on one. From the throne proceed \"lightnings, thunderings, and voices,\" and before it burn \"seven lamps of fire, which are the seven Spirits of God\" (Revelation 4:5), a picture of the fullness of the Holy Spirit. Before the throne stretches what looks like \"a sea of glass, like crystal\" (Revelation 4:6), a floor of stillness and clarity. And in the midst are four living creatures full of eyes, one like a lion, one like a calf, one with a face like a man, and one like a flying eagle — beings much like the cherubim of Ezekiel and the seraphim of Isaiah, covered with eyes to show that nothing escapes their sight as they guard the throne of God.",
+    "es": "Alrededor del trono Juan ve dos círculos de adoradores. Primero, \"alrededor del trono había veinticuatro tronos; y vi sobre los tronos veinticuatro ancianos sentados, vestidos de ropas blancas; y tenían sobre sus cabezas coronas de oro\" (Apocalipsis 4:4). Sus ropas blancas hablan de pureza y sus coronas de oro de galardón y reinado. Quiénes son se ha entendido de más de una manera: muchos los toman como el pueblo redimido de Dios, quizás la unión de Israel y la iglesia en sus números de doce y doce; otros ven un orden exaltado de seres celestiales; el curso presenta las visiones con justicia y no insiste en una. Del trono salen \"relámpagos y truenos y voces,\" y delante de él arden \"siete lámparas de fuego, las cuales son los siete Espíritus de Dios\" (Apocalipsis 4:5), una imagen de la plenitud del Espíritu Santo. Delante del trono se extiende lo que parece \"un mar de vidrio semejante al cristal\" (Apocalipsis 4:6), un piso de quietud y claridad. Y en medio están cuatro animales llenos de ojos, uno semejante a un león, otro a un becerro, otro con rostro como de hombre, y otro como un águila volando — seres muy parecidos a los querubines de Ezequiel y los serafines de Isaías, cubiertos de ojos para mostrar que nada escapa a su vista mientras guardan el trono de Dios."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "64e26a223cbc"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "heading",
+   "text": {
+    "en": "Holy, Holy, Holy: The Worship of the Creator",
+    "es": "Santo, Santo, Santo: La Adoración del Creador"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "178299d21555"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "The living creatures never cease their cry, \"Holy, holy, holy, Lord God Almighty, who was and is and is to come!\" (Revelation 4:8). The threefold \"holy\" lifts up the perfect, unapproachable purity of God, and the title \"who was and is and is to come\" declares Him the eternal Lord of all time. As often as the creatures give glory, the twenty-four elders fall down before the throne and do a striking thing: they cast their crowns before it, surrendering every honor they have been given back to the One who gave it (Revelation 4:10). Their song names the ground of this first great act of worship: \"You are worthy, O Lord, to receive glory and honor and power; for You created all things, and by Your will they exist and were created\" (Revelation 4:11). Here God is worshiped as Creator. Because He made all things and holds them in being by His will, He alone is worthy of glory, and every crown in heaven belongs at His feet. Chapter four sets the throne and the worship of the Creator before us, and only then does the book move to the question that will fill chapter five.",
+    "es": "Los animales no cesan su clamor: \"Santo, santo, santo, Señor Dios Todopoderoso, el que era, el que es, y el que ha de venir\" (Apocalipsis 4:8). El triple \"santo\" exalta la pureza perfecta e inaccesible de Dios, y el título \"el que era, el que es, y el que ha de venir\" lo declara el Señor eterno de todo tiempo. Cada vez que los animales dan gloria, los veinticuatro ancianos se postran delante del trono y hacen algo impactante: echan sus coronas delante de él, entregando todo honor que se les ha dado de vuelta al que se lo dio (Apocalipsis 4:10). Su cántico nombra el fundamento de este primer gran acto de adoración: \"Señor, digno eres de recibir gloria y honra y poder; porque tú creaste todas las cosas, y por tu voluntad existen y fueron creadas\" (Apocalipsis 4:11). Aquí Dios es adorado como Creador. Porque hizo todas las cosas y las sostiene en existencia por su voluntad, solo él es digno de gloria, y toda corona en el cielo pertenece a sus pies. El capítulo cuatro pone delante de nosotros el trono y la adoración del Creador, y solo entonces el libro pasa a la pregunta que llenará el capítulo cinco."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "96bd0ef575bd"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "heading",
+   "text": {
+    "en": "The Sealed Scroll and the Lion Who Is a Lamb",
+    "es": "El Libro Sellado y el León que Es un Cordero"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0d94b25293fd"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "\"And I saw in the right hand of Him who sat on the throne a scroll written inside and on the back, sealed with seven seals\" (Revelation 5:1). The sealed scroll is best understood as the unfolding plan and purpose of God for all history, the title-deed to the world, which cannot take effect until someone is found worthy to break its seals. A strong angel cries out, \"Who is worthy to open the scroll and to loose its seals?\" (Revelation 5:2), and the silence is total: no one in heaven, on earth, or under the earth could open it. John weeps much at this, for if no one can open the scroll, then God's purposes seem to stall and history has no redeemer. Then one of the elders comforts him: \"Do not weep. Behold, the Lion of the tribe of Judah, the Root of David, has prevailed to open the scroll\" (Revelation 5:5). John turns to see the conquering Lion — and sees instead \"a Lamb as though it had been slain\" (Revelation 5:6). This is the heart of the vision. The mighty Lion of Judah, the King of all, has triumphed, but He triumphed by being slain; He still bears the marks of the One whose throat was cut as a sacrifice. The Lion and the Lamb are the same Person, and He conquers not by force but by His own death. The Lamb has seven horns and seven eyes, the fullness of power and of the Spirit sent into all the earth, and He steps forward and takes the scroll from the right hand of Him who sits on the throne.",
+    "es": "\"Y vi en la mano derecha del que estaba sentado sobre el trono un libro escrito por dentro y por fuera, sellado con siete sellos\" (Apocalipsis 5:1). El libro sellado se entiende mejor como el plan y propósito desplegado de Dios para toda la historia, el título de propiedad del mundo, que no puede tener efecto hasta que se halle a alguien digno de romper sus sellos. Un ángel fuerte clama: \"¿Quién es digno de abrir el libro y desatar sus sellos?\" (Apocalipsis 5:2), y el silencio es total: ninguno en el cielo, ni en la tierra, ni debajo de la tierra podía abrirlo. Juan llora mucho ante esto, pues si ninguno puede abrir el libro, entonces los propósitos de Dios parecen detenerse y la historia no tiene redentor. Entonces uno de los ancianos lo consuela: \"No llores; he aquí que el León de la tribu de Judá, la raíz de David, ha vencido para abrir el libro\" (Apocalipsis 5:5). Juan se vuelve para ver al León vencedor — y ve en cambio \"un Cordero como inmolado\" (Apocalipsis 5:6). Este es el corazón de la visión. El poderoso León de Judá, el Rey de todo, ha triunfado, pero triunfó siendo inmolado; aún lleva las marcas de aquel cuya garganta fue cortada como sacrificio. El León y el Cordero son la misma Persona, y vence no por la fuerza sino por su propia muerte. El Cordero tiene siete cuernos y siete ojos, la plenitud del poder y del Espíritu enviado a toda la tierra, y se adelanta y toma el libro de la mano derecha del que está sentado sobre el trono."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9a35f7a4d903"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "heading",
+   "text": {
+    "en": "The New Song: Worthy Is the Lamb",
+    "es": "El Nuevo Cántico: Digno Es el Cordero"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f677733fee56"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "The moment the Lamb takes the scroll, heaven erupts in worship. The four living creatures and the twenty-four elders fall down before Him, each holding a harp and \"golden bowls full of incense, which are the prayers of the saints\" (Revelation 5:8) — a tender detail, that the prayers of struggling believers on earth are gathered up and treasured in heaven. They sing a new song: \"You are worthy to take the scroll, and to open its seals; for You were slain, and have redeemed us to God by Your blood out of every tribe and tongue and people and nation, and have made us kings and priests to our God\" (Revelation 5:9-10). The Lamb is worthy because He was slain and by His blood purchased a people for God from every nation on earth, making them a kingdom of priests. Then the circle of worship widens. John hears the voice of countless angels around the throne, ten thousand times ten thousand and thousands of thousands, all saying with a loud voice, \"Worthy is the Lamb who was slain to receive power and riches and wisdom and strength and honor and glory and blessing!\" (Revelation 5:12). What chapter four gave to the Creator, chapter five now gives to the Lamb.",
+    "es": "En el momento en que el Cordero toma el libro, el cielo estalla en adoración. Los cuatro animales y los veinticuatro ancianos se postran delante de él, cada uno con un arpa y \"copas de oro llenas de incienso, que son las oraciones de los santos\" (Apocalipsis 5:8) — un detalle tierno, que las oraciones de los creyentes que luchan en la tierra son recogidas y atesoradas en el cielo. Cantan un nuevo cántico: \"Digno eres de tomar el libro y de abrir sus sellos; porque tú fuiste inmolado, y nos has redimido para Dios con tu sangre, de todo linaje y lengua y pueblo y nación; y nos has hecho para nuestro Dios reyes y sacerdotes\" (Apocalipsis 5:9-10). El Cordero es digno porque fue inmolado y por su sangre compró un pueblo para Dios de toda nación de la tierra, haciéndolos un reino de sacerdotes. Luego el círculo de adoración se ensancha. Juan oye la voz de innumerables ángeles alrededor del trono, millones de millones, todos diciendo a gran voz: \"El Cordero que fue inmolado es digno de tomar el poder y riquezas y sabiduría y fortaleza y honra y gloria y alabanza\" (Apocalipsis 5:12). Lo que el capítulo cuatro dio al Creador, el capítulo cinco ahora lo da al Cordero."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "81774976f72d"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "heading",
+   "text": {
+    "en": "Every Creature Worships the Lamb",
+    "es": "Toda Criatura Adora al Cordero"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e402408bb380"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "The worship spreads until it fills the whole creation. \"And every creature which is in heaven and on the earth and under the earth and such as are in the sea, and all that are in them, I heard saying: 'Blessing and honor and glory and power be to Him who sits on the throne, and to the Lamb, forever and ever!'\" (Revelation 5:13). This final doxology is addressed to two and yet sounds as one: to Him who sits on the throne and to the Lamb together. The slain Lamb receives the very worship given to God on the throne, which is among the clearest declarations in all of Scripture that Jesus Christ is fully God and shares the throne of heaven. The four living creatures answer \"Amen!\" and the elders fall down and worship (Revelation 5:14). So the two chapters set the stage for everything that follows. Whatever seals are about to be opened, whatever judgments are about to fall, history is utterly safe, because the One on the throne reigns over all and the slain Lamb has prevailed and holds the scroll. The right response, in heaven and on earth, is worship.",
+    "es": "La adoración se extiende hasta llenar toda la creación. \"Y oí a toda criatura que está en el cielo, y sobre la tierra, y debajo de la tierra, y que está en el mar, y todas las cosas que en ellos hay, diciendo: Al que está sentado en el trono, y al Cordero, sea la alabanza, y la honra, y la gloria, y el poder, para siempre jamás\" (Apocalipsis 5:13). Esta doxología final se dirige a dos y sin embargo suena como una: al que está sentado en el trono y al Cordero juntos. El Cordero inmolado recibe la misma adoración dada a Dios en el trono, lo cual es una de las declaraciones más claras de toda la Escritura de que Jesucristo es plenamente Dios y comparte el trono del cielo. Los cuatro animales responden \"Amén,\" y los ancianos se postran y adoran (Apocalipsis 5:14). Así los dos capítulos preparan el escenario para todo lo que sigue. Cualesquiera sellos estén por abrirse, cualesquiera juicios estén por caer, la historia está completamente segura, porque el que está sobre el trono reina sobre todo y el Cordero inmolado ha vencido y tiene el libro. La respuesta correcta, en el cielo y en la tierra, es la adoración."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d6a085e806f9"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "scripture",
+   "text": {
+    "en": "\"Worthy is the Lamb who was slain to receive power and riches and wisdom and strength and honor and glory and blessing!\" — Revelation 5:12 (NKJV)",
+    "es": "\"El Cordero que fue inmolado es digno de tomar el poder y riquezas y sabiduría y fortaleza y honra y gloria y alabanza.\" — Apocalipsis 5:12 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b27d32eefac4"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "Unit 5 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 5 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "68bacc2afdf3"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33593c268178"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

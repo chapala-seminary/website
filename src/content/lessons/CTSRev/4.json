@@ -1,0 +1,404 @@
+{
+ "course": "CTSRev",
+ "unit": 4,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Unit 5 →</button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #2f4f2f;\"><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\">\n    <h2><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></p>\n    <input type=\"text\" id=\"regName\" placeholder=\"Full name / Nombre completo\" aria-label=\"Full name / Nombre completo\">\n    <input type=\"email\" id=\"regEmail\" placeholder=\"Email\" aria-label=\"Email\">\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate Track</option>\n        <option value=\"mdiv\">Master of Divinity (M.Div.) Track</option>\n        <option value=\"thm\">Master of Theology (Th.M.) Track</option>\n    </select>\n    <button class=\"nav-btn\" id=\"regBtn\"><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\">\n<p class=\"passage-label\"><!--cts:b008:en--></p>\n<div class=\"scripture\"><!--cts:b009:en--></div>\n\n<h3><!--cts:b010:en--></h3>\n<p><!--cts:b011:en--></p>\n\n<h3><!--cts:b012:en--></h3>\n<p><!--cts:b013:en--></p>\n\n<h3><!--cts:b014:en--></h3>\n<p><!--cts:b015:en--></p>\n\n<h3><!--cts:b016:en--></h3>\n<p><!--cts:b017:en--></p>\n\n<h3><!--cts:b018:en--></h3>\n<p><!--cts:b019:en--></p>\n\n<h3><!--cts:b020:en--></h3>\n<p><!--cts:b021:en--></p>\n\n<h3><!--cts:b022:en--></h3>\n<p><!--cts:b023:en--></p>\n<div class=\"scripture\"><!--cts:b024:en--></div>\n</div>\n\n<div class=\"lang-es\">\n<p class=\"passage-label\"><!--cts:b008:es--></p>\n<div class=\"scripture\"><!--cts:b009:es--></div>\n\n<h3><!--cts:b010:es--></h3>\n<p><!--cts:b011:es--></p>\n\n<h3><!--cts:b012:es--></h3>\n<p><!--cts:b013:es--></p>\n\n<h3><!--cts:b014:es--></h3>\n<p><!--cts:b015:es--></p>\n\n<h3><!--cts:b016:es--></h3>\n<p><!--cts:b017:es--></p>\n\n<h3><!--cts:b018:es--></h3>\n<p><!--cts:b019:es--></p>\n\n<h3><!--cts:b020:es--></h3>\n<p><!--cts:b021:es--></p>\n\n<h3><!--cts:b022:es--></h3>\n<p><!--cts:b023:es--></p>\n<div class=\"scripture\"><!--cts:b024:es--></div>\n</div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b025:en--></span><span class=\"lang-es\"><!--cts:b025:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b026:en--></span>\n       <span class=\"lang-es\"><!--cts:b026:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b027:en--></span><span class=\"lang-es\"><!--cts:b027:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b028:en--></span><span class=\"lang-es\"><!--cts:b028:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n  \n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSRevReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📖 Revelation Intensive — Unit 4: The Seven Churches II — Sardis to Laodicea",
+    "es": "📖 Apocalipsis Intensivo — Unidad 4: Las Siete Iglesias II — Sardis a Laodicea"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9032358b8d40"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "\"Behold, I stand at the door and knock.\" — Revelation 3:20 (NKJV)",
+    "es": "\"He aquí, yo estoy a la puerta y llamo.\" — Apocalipsis 3:20 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "047d10c24da9"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "📝 Course Registration",
+    "es": "📝 Registro del Curso"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fde900fe006b"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Welcome to the Revelation Intensive. Please register before beginning Unit 4.",
+    "es": "Bienvenido al Intensivo de Apocalipsis. Por favor regístrese antes de comenzar la Unidad 4."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0ac286bf48ce"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "scripture",
+   "text": {
+    "en": "<strong>Text: Revelation 3</strong>",
+    "es": "<strong>Texto: Apocalipsis 3</strong>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8b6be4f16de0"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "scripture",
+   "text": {
+    "en": "\"I know your works, that you have a name that you are alive, but you are dead... Behold, I stand at the door and knock.\" — Revelation 3:1, 20 (NKJV)",
+    "es": "\"Yo conozco tus obras, que tienes nombre de que vives, y estás muerto... He aquí, yo estoy a la puerta y llamo.\" — Apocalipsis 3:1, 20 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d451a41583ce"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "heading",
+   "text": {
+    "en": "Sardis: A Name That You Are Alive, But You Are Dead",
+    "es": "Sardis: Tienes Nombre de que Vives, y Estás Muerto"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e59d979ec261"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "To Sardis the letter comes from \"He who has the seven Spirits of God and the seven stars\" (Revelation 3:1) — Christ in the fullness of the Spirit, holding the churches in His hand. His verdict is one of the most sobering in the book: \"I know your works, that you have a name that you are alive, but you are dead\" (Revelation 3:1). Sardis had a reputation. To those around it, it looked like a living church, busy and respected. But the eyes that search the lampstands saw past the reputation to the truth, that inwardly it was dead. A congregation can keep its name, its buildings, and its routines long after the life has gone out of it — a church that has become, in effect, a morgue, orderly and quiet, yet a place of the dead. The risen Christ does not flatter such a church; He tells it the truth. Yet even here there is hope, for He does not pronounce it dead and leave it there. He calls, \"Be watchful, and strengthen the things which remain, that are ready to die\" (Revelation 3:2). Something still remained; the embers were not all cold. They were to wake up, to strengthen what was left, to remember how they had received and heard the gospel, to hold fast, and to repent (Revelation 3:3). And He warns that if they will not watch, He will come upon them like a thief, at an hour they do not expect.",
+    "es": "A Sardis la carta viene de \"el que tiene los siete Espíritus de Dios, y las siete estrellas\" (Apocalipsis 3:1) — Cristo en la plenitud del Espíritu, sosteniendo las iglesias en su mano. Su veredicto es uno de los más solemnes del libro: \"Yo conozco tus obras, que tienes nombre de que vives, y estás muerto\" (Apocalipsis 3:1). Sardis tenía una reputación. A los que la rodeaban les parecía una iglesia viva, ocupada y respetada. Pero los ojos que escudriñan los candeleros vieron más allá de la reputación hasta la verdad, que por dentro estaba muerta. Una congregación puede conservar su nombre, sus edificios y sus rutinas mucho después de que la vida se le ha ido — una iglesia que se ha convertido, en efecto, en una morgue, ordenada y silenciosa, pero un lugar de los muertos. El Cristo resucitado no adula a tal iglesia; le dice la verdad. Sin embargo, aun aquí hay esperanza, pues no la declara muerta y la deja ahí. Llama: \"Sé vigilante, y confirma las otras cosas que están para morir\" (Apocalipsis 3:2). Algo aún permanecía; las brasas no estaban del todo frías. Habían de despertar, fortalecer lo que quedaba, recordar cómo habían recibido y oído el evangelio, retenerlo, y arrepentirse (Apocalipsis 3:3). Y advierte que si no velan, vendrá sobre ellos como ladrón, a una hora que no esperan."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0838af3d4054"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "heading",
+   "text": {
+    "en": "Sardis: A Few Names in White",
+    "es": "Sardis: Unas Pocas Personas en Vestiduras Blancas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "555029ec0bca"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "Even in a dying church, the Lord knows every faithful soul. \"You have a few names even in Sardis who have not defiled their garments; and they shall walk with Me in white, for they are worthy\" (Revelation 3:4). The defiled garment pictures a life stained by sin and compromise; the few who had kept themselves clean would walk with Christ in white, the dress of purity and victory. This leads to the promise to the overcomer: \"He who overcomes shall be clothed in white garments, and I will not blot out his name from the Book of Life; but I will confess his name before My Father and before His angels\" (Revelation 3:5). Three promises are bound together — white garments of righteousness, a name kept secure in the Book of Life, and open acknowledgment by Christ Himself before the Father and the holy angels. The dead church is called to wake; the faithful within it are assured that Christ knows them by name and will own them at the last. The same Lord who exposes what is dead tenderly guards what is alive.",
+    "es": "Aun en una iglesia que muere, el Señor conoce a cada alma fiel. \"Tienes unas pocas personas en Sardis que no han ensuciado sus vestiduras, y andarán conmigo en vestiduras blancas; porque son dignas\" (Apocalipsis 3:4). La vestidura ensuciada retrata una vida manchada por el pecado y la transigencia; los pocos que se habían guardado limpios andarían con Cristo en vestiduras blancas, el vestido de la pureza y la victoria. Esto lleva a la promesa al que vence: \"El que venciere será vestido de vestiduras blancas; y no borraré su nombre del libro de la vida, y confesaré su nombre delante de mi Padre, y delante de sus ángeles\" (Apocalipsis 3:5). Tres promesas se unen — vestiduras blancas de justicia, un nombre guardado seguro en el libro de la vida, y el reconocimiento abierto por Cristo mismo delante del Padre y de los santos ángeles. La iglesia muerta es llamada a despertar; los fieles dentro de ella tienen la certeza de que Cristo los conoce por nombre y los reconocerá al fin. El mismo Señor que expone lo que está muerto guarda tiernamente lo que está vivo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "30f303bded7d"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "heading",
+   "text": {
+    "en": "Philadelphia: The Open Door",
+    "es": "Filadelfia: La Puerta Abierta"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0a233b827ed9"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "To Philadelphia the letter comes from \"He who is holy, He who is true, He who has the key of David, He who opens and no one shuts, and shuts and no one opens\" (Revelation 3:7). Christ holds the key of David, the authority to open and close the door of the kingdom, and what He opens no power on earth can shut. To this church He says, \"I have set before you an open door, and no one can shut it; for you have a little strength, have kept My word, and have not denied My name\" (Revelation 3:8). Philadelphia was not a powerful church; it had only \"a little strength.\" Yet it had been faithful in the two things that matter most, for it had kept Christ's word and had not denied His name. To such a faithful, weak church Christ gives not a rebuke but an open door — an opportunity for witness and an entrance into His kingdom that no enemy can close. It is faithfulness, not strength, that He honors, and a small church that holds fast His word lacks nothing it truly needs.",
+    "es": "A Filadelfia la carta viene de \"el Santo, el Verdadero, el que tiene la llave de David, el que abre y ninguno cierra, y cierra y ninguno abre\" (Apocalipsis 3:7). Cristo tiene la llave de David, la autoridad para abrir y cerrar la puerta del reino, y lo que él abre ningún poder en la tierra puede cerrarlo. A esta iglesia le dice: \"He dado una puerta abierta delante de ti, y ninguno la puede cerrar; porque tienes un poco de fuerza, y has guardado mi palabra, y no has negado mi nombre\" (Apocalipsis 3:8). Filadelfia no era una iglesia poderosa; tenía solo \"un poco de fuerza.\" Sin embargo, había sido fiel en las dos cosas que más importan, pues había guardado la palabra de Cristo y no había negado su nombre. A tal iglesia fiel y débil Cristo le da no una reprensión sino una puerta abierta — una oportunidad para el testimonio y una entrada a su reino que ningún enemigo puede cerrar. Es la fidelidad, no la fuerza, lo que él honra, y una iglesia pequeña que retiene su palabra no carece de nada que verdaderamente necesite."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "27adfe5597b5"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "heading",
+   "text": {
+    "en": "Philadelphia: Kept Through the Hour of Trial",
+    "es": "Filadelfia: Guardada de la Hora de la Prueba"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ecd6469b3481"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "Christ promises to vindicate Philadelphia before its enemies, making those of \"the synagogue of Satan\" come and bow at their feet and know that He has loved them (Revelation 3:9). Then comes a precious promise: \"Because you have kept My command to persevere, I also will keep you from the hour of trial which shall come upon the whole world\" (Revelation 3:10). Christians have understood \"keep you from the hour of trial\" in more than one way — some as being kept safe through the trial, others as being kept out of it altogether — and the course leaves that question open, noting only the certainty that Christ will keep His faithful people. He adds, \"Behold, I am coming quickly! Hold fast what you have, that no one may take your crown\" (Revelation 3:11). To the overcomer He promises to make him \"a pillar in the temple of My God,\" permanent and secure, inscribed with the name of God, the name of the city of God, the New Jerusalem, and Christ's own new name (Revelation 3:12). Like Smyrna, Philadelphia receives no rebuke at all — only commendation, an open door, and a sure reward.",
+    "es": "Cristo promete vindicar a Filadelfia delante de sus enemigos, haciendo que los de \"la sinagoga de Satanás\" vengan y se postren a sus pies y sepan que él los ha amado (Apocalipsis 3:9). Luego viene una promesa preciosa: \"Por cuanto has guardado la palabra de mi paciencia, yo también te guardaré de la hora de la prueba que ha de venir sobre todo el mundo\" (Apocalipsis 3:10). Los cristianos han entendido \"te guardaré de la hora de la prueba\" de más de una manera — algunos como ser guardados a salvo a través de la prueba, otros como ser guardados fuera de ella por completo — y el curso deja esa pregunta abierta, notando solo la certeza de que Cristo guardará a su pueblo fiel. Añade: \"He aquí, yo vengo pronto; retén lo que tienes, para que ninguno tome tu corona\" (Apocalipsis 3:11). Al que vence le promete hacerlo \"columna en el templo de mi Dios,\" permanente y seguro, inscrito con el nombre de Dios, el nombre de la ciudad de Dios, la nueva Jerusalén, y el nombre nuevo de Cristo mismo (Apocalipsis 3:12). Como Esmirna, Filadelfia no recibe reprensión alguna — solo elogio, una puerta abierta, y un galardón seguro."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a5aca6054af8"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "heading",
+   "text": {
+    "en": "Laodicea: Neither Cold Nor Hot",
+    "es": "Laodicea: Ni Frío Ni Caliente"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5862ac211bd6"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "To Laodicea the letter comes from \"the Amen, the Faithful and True Witness, the Beginning of the creation of God\" (Revelation 3:14), the One whose word is utterly reliable. And the word He speaks is severe, for Laodicea is the only one of the seven churches that receives no commendation at all. One writer has called these verses an autopsy of a dead church. \"I know your works, that you are neither cold nor hot. I could wish you were cold or hot. So then, because you are lukewarm, and neither cold nor hot, I will vomit you out of My mouth\" (Revelation 3:15-16). The word cold pictures the unconverted person who has never yet been warmed by the gospel; the word hot, in the original, carries the sense of boiling, or \"zesty,\" and pictures the believer on fire for the Lord. Laodicea was neither. Perhaps they had once been hot, but they had cooled into the lukewarm, with no enthusiasm, no urgency, no compassion. The very name Laodicea was understood to mean something like \"the rights of the people,\" and the church had become exactly that, a people thinking of their own rights and preferences rather than how they might serve the Lord. Any church can drift there, wanting singing, sermons, and programs that please itself, when it ought to be asking how its members might better serve Christ. The picture is easy to feel: tea is welcome piping hot and refreshing poured cold over ice, but a cup gone lukewarm is flat and sickening, and the first sip is spit straight back out. Just so, lukewarmness is nauseating to Christ, who says the lukewarm church makes Him want to spew it from His mouth; He would sooner a church be honestly cold than comfortably lukewarm.",
+    "es": "A Laodicea la carta viene de \"el Amén, el testigo fiel y verdadero, el principio de la creación de Dios\" (Apocalipsis 3:14), aquel cuya palabra es totalmente confiable. Y la palabra que habla es severa, pues Laodicea es la única de las siete iglesias que no recibe elogio alguno. Alguien ha llamado a estos versículos una autopsia de una iglesia muerta. \"Yo conozco tus obras, que ni eres frío ni caliente. ¡Ojalá fueses frío o caliente! Mas porque eres tibio, y no frío ni caliente, te vomitaré de mi boca\" (Apocalipsis 3:15-16). La palabra frío retrata a la persona no convertida que nunca ha sido calentada por el evangelio; la palabra caliente, en el original, lleva el sentido de hervir, y retrata al creyente encendido para el Señor. Laodicea no era ninguno. Quizás una vez habían sido calientes, pero se habían enfriado hasta volverse tibios, sin entusiasmo, sin urgencia, sin compasión. El nombre mismo de Laodicea se entendía como algo así como \"los derechos del pueblo,\" y la iglesia se había vuelto exactamente eso, un pueblo que pensaba en sus propios derechos y preferencias en vez de cómo podría servir al Señor. Cualquier iglesia puede derivar allí, queriendo el canto, los sermones y los programas que le agradan a sí misma, cuando debería estar preguntando cómo sus miembros podrían servir mejor a Cristo. La imagen es fácil de sentir: el té se recibe bien muy caliente y refresca servido frío con hielo, pero una taza que se ha entibiado es desabrida y repugnante, y el primer sorbo se escupe de inmediato. Así también la tibieza le da náuseas a Cristo, quien dice que la iglesia tibia le da ganas de vomitarla de su boca; preferiría que una iglesia fuese honestamente fría a cómodamente tibia."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f65c59cef5dd"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "heading",
+   "text": {
+    "en": "Laodicea: The Lukewarm Heart",
+    "es": "Laodicea: El Corazón Tibio"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a2a613138f9b"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "The deepest danger of lukewarmness is that it does not know itself. \"You say, 'I am rich, have become wealthy, and have need of nothing'—and do not know that you are wretched, miserable, poor, blind, and naked\" (Revelation 3:17). They felt prosperous and self-sufficient; Christ saw spiritual poverty and shame. Several marks expose the lukewarm heart. First, it seeks first the things of this world. Laodicea had reversed the Lord's command to seek first the kingdom, and their pride was in what they had acquired. One man dreamed he came to heaven's gate clutching his stocks and his gold, only to be told that in that city gold is merely paving and what is treasured there is souls — and many will arrive with full hands and empty lives. Second, the lukewarm heart grows indifferent to sin. A society slowly loses its capacity to be shocked, until what once scandalized becomes ordinary entertainment, and the church ceases to be troubled by sin in itself or in others. A man stealing potatoes by night looked carefully in every direction but one; as his son reminded him, he had forgotten to look up, and an age of spiritual forgetfulness forgets that all must stand before the judgment seat. Third, the lukewarm heart has no interest in service. Laodicea was doing nothing for God. Christians tend to cool, beginning with fire and slowly growing cold, yet the one who stays near Christ stays near the flame. Like relief trucks that cannot reach starving people because the bridge has collapsed, a believer who will not carry the gospel leaves others stranded, and one trembles to imagine a soul in eternity asking, \"Why did you never tell me?\" Fourth, the lukewarm heart has no assurance. Scripture says we know that we know Him by keeping His commandments (1 John 2:3) — not by having walked an aisle, been baptized, or had believing parents, but by a life of obedience. The lukewarm man lacks assurance because he knows he is not walking in obedience.",
+    "es": "El peligro más profundo de la tibieza es que no se conoce a sí misma. \"Porque tú dices: Yo soy rico, y estoy enriquecido, y no tengo necesidad de ninguna cosa; y no conoces que tú eres un desventurado y miserable y pobre y ciego y desnudo\" (Apocalipsis 3:17). Se sentían prósperos y autosuficientes; Cristo veía pobreza espiritual y vergüenza. Varias marcas exponen el corazón tibio. Primera, busca primero las cosas de este mundo. Laodicea había invertido el mandato del Señor de buscar primero el reino, y su orgullo estaba en lo que había adquirido. Un hombre soñó que llegaba a la puerta del cielo aferrando sus acciones y su oro, solo para que le dijeran que en aquella ciudad el oro es mero pavimento y lo que se atesora allí son las almas — y muchos llegarán con las manos llenas y la vida vacía. Segunda, el corazón tibio se vuelve indiferente al pecado. Una sociedad pierde lentamente su capacidad de escandalizarse, hasta que lo que una vez escandalizaba se vuelve entretenimiento ordinario, y la iglesia deja de inquietarse por el pecado en sí misma o en otros. Un hombre que robaba papas de noche miró con cuidado en toda dirección menos una; como le recordó su hijo, había olvidado mirar hacia arriba, y una época de olvido espiritual olvida que todos hemos de comparecer ante el tribunal. Tercera, el corazón tibio no tiene interés en el servicio. Laodicea no hacía nada para Dios. Los cristianos tienden a enfriarse, comenzando con fuego y poco a poco volviéndose fríos, pero el que se queda cerca de Cristo se queda cerca de la llama. Como camiones de auxilio que no pueden llegar a la gente hambrienta porque el puente se ha derrumbado, un creyente que no lleva el evangelio deja a otros varados, y uno tiembla al imaginar a un alma en la eternidad preguntando: \"¿Por qué nunca me lo dijiste?\" Cuarta, el corazón tibio no tiene seguridad. La Escritura dice que sabemos que le conocemos guardando sus mandamientos (1 Juan 2:3) — no por haber caminado un pasillo, sido bautizados, o tenido padres creyentes, sino por una vida de obediencia. El hombre tibio carece de seguridad porque sabe que no anda en obediencia."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e6ac37b81f53"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "heading",
+   "text": {
+    "en": "Laodicea: The Gold, the Knock, and the Throne",
+    "es": "Laodicea: El Oro, el Llamado, y el Trono"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "99f5e3c460c1"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "Yet even to this church Christ comes not only with rebuke but with remedy. \"I counsel you to buy from Me gold refined in the fire, that you may be rich; and white garments, that you may be clothed... and anoint your eyes with eye salve, that you may see\" (Revelation 3:18). For their imagined wealth He offers true riches; for their nakedness, white garments; for their blindness, sight. And He frames the whole rebuke in love: \"As many as I love, I rebuke and chasten. Therefore be zealous and repent\" (Revelation 3:19). His sharp words are not the voice of an enemy but of a Lord who loves them too much to leave them as they are. Then comes one of the tenderest verses in all Scripture: \"Behold, I stand at the door and knock. If anyone hears My voice and opens the door, I will come in to him and dine with him, and he with Me\" (Revelation 3:20). A famous painting, The Light of the World by Holman Hunt, shows Christ knocking at a door with no latch on the outside, a door that can be opened only from within. To a self-satisfied church the living Lord stands outside, patiently knocking, asking to be let back in. And to the one who opens, the one who overcomes, He gives the highest promise of all the seven: \"To him who overcomes I will grant to sit with Me on My throne, as I also overcame and sat down with My Father on His throne\" (Revelation 3:21). The letters to all seven churches end as they began, with the same call: \"He who has an ear, let him hear what the Spirit says to the churches\" (Revelation 3:22). Across both chapters the message is one — Christ knows His churches, calls them to repent, and reserves His richest promises for the one who hears His voice and overcomes.",
+    "es": "Sin embargo, aun a esta iglesia Cristo viene no solo con reprensión sino con remedio. \"Yo te aconsejo que de mí compres oro refinado en fuego, para que seas rico; y vestiduras blancas, para que te vistas... y unge tus ojos con colirio, para que veas\" (Apocalipsis 3:18). Por su riqueza imaginada él ofrece riquezas verdaderas; por su desnudez, vestiduras blancas; por su ceguera, vista. Y enmarca toda la reprensión en amor: \"Yo reprendo y castigo a todos los que amo; sé pues celoso, y arrepiéntete\" (Apocalipsis 3:19). Sus palabras agudas no son la voz de un enemigo sino de un Señor que los ama demasiado para dejarlos como están. Luego viene uno de los versículos más tiernos de toda la Escritura: \"He aquí, yo estoy a la puerta y llamo; si alguno oye mi voz y abre la puerta, entraré a él, y cenaré con él, y él conmigo\" (Apocalipsis 3:20). Una pintura famosa, La Luz del Mundo de Holman Hunt, muestra a Cristo llamando a una puerta sin pestillo por fuera, una puerta que solo puede abrirse desde dentro. A una iglesia satisfecha de sí misma el Señor viviente está afuera, llamando pacientemente, pidiendo que lo dejen entrar de nuevo. Y al que abre, al que vence, le da la promesa más alta de las siete: \"Al que venciere, yo le daré que se siente conmigo en mi trono; así como yo he vencido, y me he sentado con mi Padre en su trono\" (Apocalipsis 3:21). Las cartas a las siete iglesias terminan como comenzaron, con el mismo llamado: \"El que tiene oído, oiga lo que el Espíritu dice a las iglesias\" (Apocalipsis 3:22). A través de ambos capítulos el mensaje es uno — Cristo conoce a sus iglesias, las llama a arrepentirse, y reserva sus promesas más ricas para el que oye su voz y vence."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "92fb3943912a"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "scripture",
+   "text": {
+    "en": "\"Behold, I stand at the door and knock. If anyone hears My voice and opens the door, I will come in to him and dine with him, and he with Me.\" — Revelation 3:20 (NKJV)",
+    "es": "\"He aquí, yo estoy a la puerta y llamo; si alguno oye mi voz y abre la puerta, entraré a él, y cenaré con él, y él conmigo.\" — Apocalipsis 3:20 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "85a3308c75e3"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "Unit 4 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 4 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "07d9dcb66810"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33593c268178"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

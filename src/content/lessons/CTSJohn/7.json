@@ -1,0 +1,432 @@
+{
+ "course": "CTSJohn",
+ "unit": 7,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right:15px; font-weight:bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Espa&ntilde;ol</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></p>\n    <p style=\"margin-top:10px; font-style:italic; color:#2f4f2f;\"><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\" style=\"display:none;\">\n    <h3><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></h3>\n    <p style=\"font-size:0.9rem;\"><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></p>\n    <label class=\"lang-en\"><!--cts:b008:en--></label><label class=\"lang-es\"><!--cts:b008:es--></label>\n    <input type=\"text\" id=\"regName\" placeholder=\"...\" aria-label=\"...\">\n    <label class=\"lang-en\"><!--cts:b009:en--></label><label class=\"lang-es\"><!--cts:b009:es--></label>\n    <input type=\"email\" id=\"regEmail\" placeholder=\"...\" aria-label=\"...\">\n    <label class=\"lang-en\"><!--cts:b010:en--></label><label class=\"lang-es\"><!--cts:b010:es--></label>\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate / Certificado</option>\n        <option value=\"mdiv\">M.Div.</option>\n        <option value=\"thm\">Th.M.</option>\n    </select>\n    <button id=\"regBtn\" class=\"nav-btn\"><span class=\"lang-en\"><!--cts:b011:en--></span><span class=\"lang-es\"><!--cts:b011:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top:8px;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\">\n\n<h3><!--cts:b012:en--></h3>\n<p><!--cts:b013:en--></p>\n\n<h3><!--cts:b014:en--></h3>\n<p><!--cts:b015:en--></p>\n<div class=\"illustration\"><!--cts:b016:en--></div>\n<p><!--cts:b017:en--></p>\n\n<h3><!--cts:b018:en--></h3>\n<p><!--cts:b019:en--></p>\n<p><!--cts:b020:en--></p>\n<p><!--cts:b021:en--></p>\n\n<h3><!--cts:b022:en--></h3>\n<p><!--cts:b023:en--></p>\n\n<h3><!--cts:b024:en--></h3>\n<p><!--cts:b025:en--></p>\n<div class=\"illustration\"><!--cts:b026:en--></div>\n\n</div>\n<div class=\"lang-es\">\n\n<h3><!--cts:b012:es--></h3>\n<p><!--cts:b013:es--></p>\n\n<h3><!--cts:b014:es--></h3>\n<p><!--cts:b015:es--></p>\n<div class=\"illustration\"><!--cts:b016:es--></div>\n<p><!--cts:b017:es--></p>\n\n<h3><!--cts:b018:es--></h3>\n<p><!--cts:b019:es--></p>\n<p><!--cts:b020:es--></p>\n<p><!--cts:b021:es--></p>\n\n<h3><!--cts:b022:es--></h3>\n<p><!--cts:b023:es--></p>\n\n<h3><!--cts:b024:es--></h3>\n<p><!--cts:b025:es--></p>\n<div class=\"illustration\"><!--cts:b026:es--></div>\n\n</div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b027:en--></span><span class=\"lang-es\"><!--cts:b027:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b028:en--></span>\n       <span class=\"lang-es\"><!--cts:b028:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top:20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b029:en--></span><span class=\"lang-es\"><!--cts:b029:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b030:en--></span><span class=\"lang-es\"><!--cts:b030:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top:15px; font-weight:bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top:10px; font-size:0.9rem; color:#1f6b3b; display:none;\"></div>\n    </div>\n</div>\n</div>\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSJohnReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "Unit 8 →",
+    "es": "Unidad 8 →"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a616a4927a56"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "📖 The Gospel of John — Unit 7: The Door and the Good Shepherd",
+    "es": "📖 El Evangelio de Juan — Unidad 7: La Puerta y el Buen Pastor"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "435ecd41a6fa"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "\"I am the good shepherd. The good shepherd gives His life for the sheep.\" — John 10:11 (NKJV)",
+    "es": "⚡ \"Yo soy el buen pastor; el buen pastor su vida da por las ovejas.\" — Juan 10:11 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1c133b5a0c6c"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Register to Begin",
+    "es": "Regístrese para comenzar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "007cff4200ca"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Your name and track are saved on this device and carry across every unit and every CTS course.",
+    "es": "Su nombre y trayecto se guardan en este dispositivo y se conservan en cada unidad y curso de CTS."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c3782de1c2f1"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "label",
+   "text": {
+    "en": "Full name",
+    "es": "Nombre completo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "eeb692087d62"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "label",
+   "text": {
+    "en": "Email",
+    "es": "Correo electrónico"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "84add5b29527"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "label",
+   "text": {
+    "en": "Track",
+    "es": "Trayecto"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b1c5a7af06ba"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "heading",
+   "text": {
+    "en": "Introduction — Sheep Without a Shepherd",
+    "es": "Introducción — Ovejas sin pastor"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6ecba9bd30c7"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "Sheep are not the self-sufficient creatures we might imagine. They need more care than any other animal on the farm: they are timid and easily frightened, stubborn, and quick to wander, and a lost sheep has no sense of direction at all. A dog or a horse can find its way home; a sheep cannot. That is exactly the picture Scripture paints of us: <em>\"All we like sheep have gone astray; we have turned, every one, to his own way\"</em> (Isaiah 53:6). The shepherd Phillip Keller once owned a fine ewe whose only fault was that she was a fence-crawler — restless, never content, always working her way out to some barren patch on the wrong side of the fence, and worse, she taught the other sheep to follow her. We are much like that. And it is into this picture — helpless, wandering sheep — that Jesus speaks two of His great \"I AM\" sayings: I am the door, and I am the good shepherd.",
+    "es": "Las ovejas no son las criaturas autosuficientes que podríamos imaginar. Necesitan más cuidado que cualquier otro animal de la granja: son tímidas y se asustan fácilmente, tercas y prontas a extraviarse, y una oveja perdida no tiene sentido alguno de la orientación. Un perro o un caballo encuentran el camino a casa; una oveja, no. Ese es justamente el cuadro que la Escritura pinta de nosotros: ⚡ <em>\"Todos nosotros nos descarriamos como ovejas, cada cual se apartó por su camino\"</em> (Isaías 53:6). El pastor Phillip Keller tuvo una buena oveja cuyo único defecto era que se escabullía por la cerca — inquieta, nunca contenta, siempre abriéndose paso a algún terreno yermo al otro lado, y peor aún, enseñaba a las demás a seguirla. Nos parecemos mucho a ella. Y es en este cuadro — ovejas indefensas y errantes — donde Jesús pronuncia dos de sus grandes declaraciones \"YO SOY\": yo soy la puerta, y yo soy el buen pastor."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9bd87b92d88c"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "heading",
+   "text": {
+    "en": "I. \"I Am the Door\"",
+    "es": "I. \"Yo soy la puerta\""
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0e70c8d19bda"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "To understand the saying we must picture the sheepfold. In the warm season the shepherd did not bring the flock back to the village at night; he gathered them into a rough fold out on the hillside — just an open space ringed by a low stone wall, with a single gap for the sheep to pass in and out. But that gap had no gate. So when night came, the shepherd himself lay down across the opening, and no sheep could go out and no wolf could come in except over his body. In the most literal sense, the shepherd <em>was</em> the door. That is what Jesus meant: <em>\"I am the door. If anyone enters by Me, he will be saved, and will go in and out and find pasture\"</em> (John 10:9). The sheep go in at night for safety and out in the morning for pasture, and the way is the same both times — through Him.",
+    "es": "Para entender el dicho hay que imaginar el redil. En la estación cálida el pastor no volvía el rebaño a la aldea por la noche; lo reunía en un redil rudo en la ladera — un espacio abierto cercado por un muro bajo, con una sola abertura para que las ovejas entraran y salieran. Pero esa abertura no tenía puerta. Así que al llegar la noche, el pastor mismo se acostaba atravesado en la abertura, y ninguna oveja podía salir ni ningún lobo entrar sino por encima de su cuerpo. En el sentido más literal, el pastor <em>era</em> la puerta. Eso quiso decir Jesús: ⚡ <em>\"Yo soy la puerta; el que por mí entrare, será salvo; y entrará, y saldrá, y hallará pastos\"</em> (Juan 10:9). Las ovejas entran de noche para estar seguras y salen de mañana a los pastos, y el camino es el mismo en ambos casos — por él."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d843b5622c29"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Locked out in the cold.</strong> Imagine a dream in which you are standing outside your own house on a freezing, sleeting night, dressed only for summer. Inside, every person you love is gathered at a warm and happy feast; you can see them through the lit windows. But you cannot find the door. You walk the length of one wall, then another, and another, for what feels like hours, then days, growing colder and more desperate — and there is no door anywhere. At last you come back around to the front, and suddenly there it is: one door, standing open. You step in, and the warmth and the welcome close around you. There is only one way in. Jesus says, \"I am the door,\" and the door is open. Outside is the cold and the dark; inside is life. He is the one entrance to the Father, and \"through Him we... have access\" (Ephesians 2:18).",
+    "es": "<strong>Afuera en el frío.</strong> Imagine un sueño en el que está de pie afuera de su propia casa en una noche helada de aguanieve, vestido solo para el verano. Adentro, cada persona que ama está reunida en un banquete cálido y alegre; los ve por las ventanas iluminadas. Pero no encuentra la puerta. Recorre el largo de una pared, y otra, y otra, por lo que parecen horas, luego días, sintiéndose más frío y desesperado — y no hay puerta por ningún lado. Al fin vuelve al frente, y de repente ahí está: una puerta, abierta. Entra, y el calor y la bienvenida lo rodean. Hay un solo modo de entrar. Jesús dice: \"Yo soy la puerta\", y la puerta está abierta. Afuera está el frío y la oscuridad; adentro está la vida. Él es la única entrada al Padre, y \"por medio de él... tenemos acceso\" (Efesios 2:18)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "aaaae319a674"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "This is why Jesus called the false leaders of His day \"thieves and robbers.\" They set themselves up to decide who could come to God, and shut people out of the very kingdom they claimed to guard. Every road that promises to reach God while going around the one Door falls short, for there is no other way in. And over against the thief, hear the Shepherd's promise: <em>\"The thief does not come except to steal, and to kill, and to destroy. I have come that they may have life, and that they may have it more abundantly\"</em> (John 10:10). The thief takes; the Shepherd gives, and gives to overflowing.",
+    "es": "Por eso Jesús llamó a los falsos líderes de su día \"ladrones y salteadores\". Se erigían en jueces de quién podía venir a Dios, y cerraban a la gente el mismo reino que decían guardar. Todo camino que promete llegar a Dios rodeando la única Puerta se queda corto, porque no hay otro modo de entrar. Y frente al ladrón, oiga la promesa del Pastor: ⚡ <em>\"El ladrón no viene sino para hurtar y matar y destruir; yo he venido para que tengan vida, y para que la tengan en abundancia\"</em> (Juan 10:10). El ladrón quita; el Pastor da, y da hasta desbordar."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "de7ec852fbd8"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "heading",
+   "text": {
+    "en": "II. \"I Am the Good Shepherd\"",
+    "es": "II. \"Yo soy el buen pastor\""
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "565301738337"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "This is the fourth of the great \"I AM\" sayings, and the word translated \"good\" is worth weighing. It does not mean merely skilled or kind; it means good in the very nature of the thing, the beautiful and ideal — the model others can safely follow. Goodness like that is not something Jesus achieved; it is what He is. To call Him \"good\" in that full sense is, in the end, to call Him God.",
+    "es": "Esta es la cuarta de las grandes declaraciones \"YO SOY\", y vale la pena pesar la palabra traducida \"buen\". No significa meramente hábil o amable; significa bueno en la naturaleza misma de la cosa, lo hermoso e ideal — el modelo que otros pueden seguir con seguridad. Una bondad así no es algo que Jesús logró; es lo que él es. Llamarle \"bueno\" en ese sentido pleno es, al fin, llamarle Dios."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4a774466a7d8"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "<strong>The Shepherd knows His sheep.</strong> In that land the shepherd was with his flock for years, and he gave the sheep names — homely, descriptive names like \"Brown-leg\" or \"Black-ear\" — and he called each one by its own name. There is a shepherd in the high country of New Zealand who still walks out at dawn calling his sheep one by one, and the hills come alive as each animal answers to its own name. So it is with the Lord: \"I know My sheep, and am known by My own\" (John 10:14). He has called His people by name all through the Scriptures — Abraham, Moses, Samuel, and many more. You are not a number to Him, not a face in a crowd. You are known, by name, by the God who set the stars in their places.",
+    "es": "<strong>El Pastor conoce a sus ovejas.</strong> En aquella tierra el pastor estaba con su rebaño por años, y daba nombres a las ovejas — nombres sencillos y descriptivos como \"Pata-parda\" u \"Oreja-negra\" — y llamaba a cada una por su propio nombre. Hay un pastor en las tierras altas de Nueva Zelanda que aún sale al amanecer llamando a sus ovejas una por una, y las colinas cobran vida al responder cada animal a su propio nombre. Así es con el Señor: ⚡ \"yo soy el buen pastor; y conozco mis ovejas, y las mías me conocen\" (Juan 10:14). Ha llamado a su pueblo por nombre por toda la Escritura — Abraham, Moisés, Samuel, y muchos más. Usted no es un número para él, ni un rostro en la multitud. Es conocido, por nombre, por el Dios que puso las estrellas en su lugar."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "875d1c3876db"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "<strong>The sheep know His voice.</strong> A traveler once watched two shepherds shelter their flocks together in a single cave near Bethlehem through the night. In the morning, how could the mingled sheep ever be sorted out? One shepherd simply walked off a little way and gave his own peculiar call — and his whole flock came running after him, and his alone. They would not follow a stranger; they knew their shepherd's voice. <em>\"My sheep hear My voice, and I know them, and they follow Me\"</em> (John 10:27). One man, long bound by drink and drugs, told how at the turning point of his life he heard within him a strong and certain voice say, \"Turn from the things of the world,\" and somehow he knew it was the voice of God — and from that moment the Maker of the universe was real to him. The sheep learn to know that voice, and to follow it.",
+    "es": "<strong>Las ovejas conocen su voz.</strong> Un viajero observó una vez a dos pastores guarecer sus rebaños juntos en una sola cueva cerca de Belén durante la noche. Por la mañana, ¿cómo se separarían las ovejas mezcladas? Un pastor simplemente se alejó un poco y dio su propio llamado peculiar — y todo su rebaño vino corriendo tras él, y solo el suyo. No seguirían a un extraño; conocían la voz de su pastor. ⚡ <em>\"Mis ovejas oyen mi voz, y yo las conozco, y me siguen\"</em> (Juan 10:27). Un hombre, largo tiempo atado a la bebida y las drogas, contó cómo en el momento decisivo de su vida oyó dentro de sí una voz fuerte y segura decir: \"Apártate de las cosas del mundo\", y de algún modo supo que era la voz de Dios — y desde aquel momento el Hacedor del universo le fue real. Las ovejas aprenden a conocer esa voz, y a seguirla."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "adf9d3b2ed3e"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "heading",
+   "text": {
+    "en": "III. The Shepherd Lays Down His Life",
+    "es": "III. El Pastor da su vida"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "305680f17ab2"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "Then comes the heart of it. <em>\"I am the good shepherd. The good shepherd gives His life for the sheep. But a hireling... sees the wolf coming and leaves the sheep and flees... because he is a hireling and does not care about the sheep\"</em> (John 10:11–13). There is the great divide. The hired man works only for wages; when the wolf comes, the sheep are nothing to him, and he saves himself and runs. But the true shepherd was born to the task; the sheep were his own, and he would put his body between them and the lion, the bear, the robber. Travelers in the Holy Land have told of more than one shepherd who literally fought to the death defending his flock from raiders rather than abandon them. That is the kind of shepherd Jesus is — only He went further than any other ever could. \"No one takes it from Me, but I lay it down of Myself\" (John 10:18). His death was not an accident or a defeat; it was a Shepherd deliberately giving His life for His sheep. The cross is where the ownership and the love of God are shown most clearly: there we see how far the Father would go to gather His sheep, for He gave His own Son.",
+    "es": "Luego viene el corazón de todo. ⚡ <em>\"Yo soy el buen pastor; el buen pastor su vida da por las ovejas. Mas el asalariado... ve venir al lobo y deja las ovejas y huye... porque es asalariado, y no le importan las ovejas\"</em> (Juan 10:11–13). Ahí está la gran división. El asalariado trabaja solo por la paga; cuando viene el lobo, las ovejas no son nada para él, y se salva a sí mismo y huye. Pero el verdadero pastor nació para la tarea; las ovejas eran suyas, y ponía su cuerpo entre ellas y el león, el oso, el salteador. Viajeros en Tierra Santa han contado de más de un pastor que literalmente luchó hasta la muerte defendiendo su rebaño de los asaltantes antes que abandonarlo. Así es el Pastor que es Jesús — solo que él fue más lejos de lo que ningún otro podría. \"Nadie me la quita, sino que yo de mí mismo la pongo\" (Juan 10:18). Su muerte no fue un accidente ni una derrota; fue un Pastor dando deliberadamente su vida por sus ovejas. La cruz es donde la propiedad y el amor de Dios se muestran con más claridad: allí vemos cuán lejos llegaría el Padre para reunir a sus ovejas, pues dio a su propio Hijo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a15625557a7f"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "heading",
+   "text": {
+    "en": "IV. Safe in His Hand",
+    "es": "IV. Seguras en su mano"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "82110c5930b0"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "And what He buys at such a price, He does not lose. <em>\"My sheep hear My voice, and I know them, and they follow Me. And I give them eternal life, and they shall never perish; neither shall anyone snatch them out of My hand\"</em> (John 10:27–28). The sheep are not held by the strength of their own grip on the Shepherd, which is weak, but by the strength of His grip on them, which is almighty. Then Jesus added the words that gathered up everything He had claimed: <em>\"I and My Father are one\"</em> (John 10:30). The leaders understood Him exactly — they took up stones again, for they heard a man making Himself God. And they were right about the claim, though wrong to throw the stones: the Good Shepherd who lays down His life and holds His sheep forever is none other than God in the flesh.",
+    "es": "Y lo que compra a tal precio, no lo pierde. ⚡ <em>\"Mis ovejas oyen mi voz, y yo las conozco, y me siguen; y yo les doy vida eterna; y no perecerán jamás, ni nadie las arrebatará de mi mano\"</em> (Juan 10:27–28). Las ovejas no se sostienen por la fuerza de su propio agarre del Pastor, que es débil, sino por la fuerza del agarre de él sobre ellas, que es todopoderoso. Entonces Jesús añadió las palabras que recogían todo lo que había afirmado: ⚡ <em>\"Yo y mi Padre uno somos\"</em> (Juan 10:30). Los líderes lo entendieron exactamente — tomaron piedras otra vez, pues oyeron a un hombre haciéndose Dios. Y tenían razón en cuanto a la afirmación, aunque erraron al arrojar las piedras: el Buen Pastor que da su vida y guarda a sus ovejas para siempre no es otro que Dios en carne."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "101a97b82331"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Knowing the Psalm, or knowing the Shepherd.</strong> Two men were once asked to recite the Twenty-third Psalm before a large gathering. The first was a trained orator, and he spoke the familiar words so beautifully that the room burst into applause and called for more. Then an old man rose and spoke the same words — \"The Lord is my shepherd; I shall not want\" — and when he finished, no one clapped; the room sat hushed and bowed in prayer. The orator stood again and said, \"I have a confession. The difference between us is simply this: I know the Psalm — but my friend knows the Shepherd.\" That is the whole question this chapter puts to us. It is not enough to admire the figure of the shepherd from outside the fold, in the cold. Have you come in by the Door? Do you know the Shepherd, and does He know you? His voice is calling your name. Come in, and find pasture, and life abundant, in the hand from which no one can ever pluck you.",
+    "es": "<strong>Saber el Salmo, o conocer al Pastor.</strong> A dos hombres se les pidió una vez recitar el Salmo 23 ante una gran reunión. El primero era un orador entrenado, y dijo las palabras tan bellamente que la sala estalló en aplausos y pidió más. Luego un anciano se levantó y dijo las mismas palabras — \"Jehová es mi pastor; nada me faltará\" — y cuando terminó, nadie aplaudió; la sala quedó en silencio e inclinada en oración. El orador se levantó de nuevo y dijo: \"Tengo una confesión. La diferencia entre nosotros es sencillamente esta: yo sé el Salmo — pero mi amigo conoce al Pastor.\" Esa es toda la pregunta que este capítulo nos pone. No basta admirar la figura del pastor desde afuera del redil, en el frío. ¿Ha entrado usted por la Puerta? ¿Conoce al Pastor, y le conoce él a usted? Su voz está llamando su nombre. Entre, y halle pastos, y vida en abundancia, en la mano de la cual nadie podrá jamás arrebatarle."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "59117d53496b"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "Unit 7 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 7 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "39593a6cb288"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. The short-answer section is practice for Certificate students and does not count against you.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. La sección de respuesta corta es práctica para el Certificado y no cuenta en su contra."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9168d4aa12d6"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

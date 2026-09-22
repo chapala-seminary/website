@@ -1,0 +1,628 @@
+{
+ "course": "CTSActs",
+ "unit": 1,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<a href=\"index.html\" style=\"display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif\">📚 Catalog / Catálogo</a>\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"prevUnitBtn\" disabled>← Previous</button>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\">Next →</button>\n    </div>\n</div>\n<div class=\"lang-toggle-group\" role=\"group\" aria-label=\"Language\">\n  <button data-lang=\"en\" class=\"active\">English</button>\n  <button data-lang=\"es\">Español</button>\n  <button data-lang=\"both\">Both / Ambos</button>\n</div>\n<span id=\"trackBadgeSlot\"></span>\n\n<div id=\"regWarn\" class=\"reg-warn hidden\">\n  <span class=\"lang-en\"><!--cts:b001:en--></span>\n  <span class=\"lang-es\"><!--cts:b001:es--></span>\n</div>\n<div id=\"regModal\" class=\"reg-modal hidden\" role=\"dialog\" aria-labelledby=\"regModalTitle\">\n  <div class=\"reg-modal-inner\">\n    <h2 id=\"regModalTitle\"><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n    <label><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></label>\n    <input type=\"text\" id=\"regName\" placeholder=\"\" autocomplete=\"name\" aria-label=\"regName\">\n    <label><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></label>\n    <input type=\"email\" id=\"regEmail\" placeholder=\"\" autocomplete=\"email\" aria-label=\"regEmail\">\n    <label><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></label>\n    <div class=\"track-options\">\n      <label><input type=\"radio\" name=\"regTrack\" value=\"cert\" checked> <span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></label>\n      <label><input type=\"radio\" name=\"regTrack\" value=\"mdiv\"> <span class=\"lang-en\"><!--cts:b008:en--></span><span class=\"lang-es\"><!--cts:b008:es--></span></label>\n      <label><input type=\"radio\" name=\"regTrack\" value=\"thm\"> <span class=\"lang-en\"><!--cts:b009:en--></span><span class=\"lang-es\"><!--cts:b009:es--></span></label>\n    </div>\n    <p style=\"font-size:0.82rem; color:#6b5236; font-style:italic; margin-top:8px;\">\n      <span class=\"lang-en\"><!--cts:b010:en--></span>\n      <span class=\"lang-es\"><!--cts:b010:es--></span>\n    </p>\n    <button id=\"regSaveBtn\" type=\"button\"><span class=\"lang-en\"><!--cts:b011:en--></span><span class=\"lang-es\"><!--cts:b011:es--></span></button>\n  </div>\n</div>\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b012:en--></span><span class=\"lang-es\"><!--cts:b012:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b013:en--></span><span class=\"lang-es\"><!--cts:b013:es--></span></p>\n</div>\n\n<div class=\"card\" id=\"teachingContent\">\n    <div class=\"lang-en\">\n        <h2><!--cts:b014:en--></h2>\n        <p><!--cts:b015:en--></p>\n\n        <p><!--cts:b016:en--></p>\n\n        <p><!--cts:b017:en--></p>\n\n        <h2><!--cts:b018:en--></h2>\n        <p><!--cts:b019:en--></p>\n\n        <p><!--cts:b020:en--></p>\n\n        <p><!--cts:b021:en--></p>\n\n        <h2><!--cts:b022:en--></h2>\n        <p><!--cts:b023:en--></p>\n\n        <p><!--cts:b024:en--></p>\n\n        <p><!--cts:b025:en--></p>\n\n        <p><!--cts:b026:en--></p>\n\n        <h2><!--cts:b027:en--></h2>\n        <p><!--cts:b028:en--></p>\n\n        <p><!--cts:b029:en--></p>\n\n        <p><!--cts:b030:en--></p>\n\n        <p><!--cts:b031:en--></p>\n\n        <h2><!--cts:b032:en--></h2>\n        <p><!--cts:b033:en--></p>\n\n        <p><!--cts:b034:en--></p>\n\n        <p><!--cts:b035:en--></p>\n\n        <h2><!--cts:b036:en--></h2>\n        <p><!--cts:b037:en--></p>\n\n        <p><!--cts:b038:en--></p>\n    </div>\n\n    <div class=\"lang-es\">\n        <h2><!--cts:b014:es--></h2>\n        <p><!--cts:b015:es--></p>\n\n        <p><!--cts:b016:es--></p>\n\n        <p><!--cts:b017:es--></p>\n\n        <h2><!--cts:b018:es--></h2>\n        <p><!--cts:b019:es--></p>\n\n        <p><!--cts:b020:es--></p>\n\n        <p><!--cts:b021:es--></p>\n\n        <h2><!--cts:b022:es--></h2>\n        <p><!--cts:b023:es--></p>\n\n        <p><!--cts:b024:es--></p>\n\n        <p><!--cts:b025:es--></p>\n\n        <p><!--cts:b026:es--></p>\n\n        <h2><!--cts:b027:es--></h2>\n        <p><!--cts:b028:es--></p>\n\n        <p><!--cts:b029:es--></p>\n\n        <p><!--cts:b030:es--></p>\n\n        <p><!--cts:b031:es--></p>\n\n        <h2><!--cts:b032:es--></h2>\n        <p><!--cts:b033:es--></p>\n\n        <p><!--cts:b034:es--></p>\n\n        <p><!--cts:b035:es--></p>\n\n        <h2><!--cts:b036:es--></h2>\n        <p><!--cts:b037:es--></p>\n\n        <p><!--cts:b038:es--></p>\n    </div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b039:en--></span><span class=\"lang-es\"><!--cts:b039:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b040:en--></span><span class=\"lang-es\"><!--cts:b040:es--></span></p>\n    <div class=\"exam-status hidden\" id=\"examStatus\"></div>\n<div class=\"mc-section\" id=\"mcSection\">\n  <h3><span class=\"lang-en\"><!--cts:b041:en--></span><span class=\"lang-es\"><!--cts:b041:es--></span></h3>\n  <div id=\"mcContainer\"></div>\n</div>\n<div class=\"sa-section\" id=\"saSection\">\n  <h3><span class=\"lang-en\"><!--cts:b042:en--></span><span class=\"lang-es\"><!--cts:b042:es--></span></h3>\n  <p class=\"sa-note\"><span class=\"lang-en\" id=\"saNoteEn\"></span><span class=\"lang-es\" id=\"saNoteEs\"></span></p>\n  <div id=\"kwContainer\"></div>\n</div>\n<div style=\"margin-top: 20px;\">\n  <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b043:en--></span><span class=\"lang-es\"><!--cts:b043:es--></span></button>\n  <button id=\"resetExamBtn\" class=\"btn-reset\" type=\"button\"><span class=\"lang-en\"><!--cts:b044:en--></span><span class=\"lang-es\"><!--cts:b044:es--></span></button>\n  <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n</div>\n</div>\n</div>\n\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSActsReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "⚠ Please register your name to receive credit for this unit. <button class=\"small\" id=\"openRegBtn\" type=\"button\">Register</button>",
+    "es": "⚠ Por favor registre su nombre para recibir crédito por esta unidad. <button class=\"small\" id=\"openRegBtn2\" type=\"button\">Registrar</button>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "300bfc92ba6e"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "Welcome to the Acts Intensive",
+    "es": "Bienvenido al Intensivo de Hechos"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3d244b1a85d3"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "Before you begin Unit 1, please enter your name and select your track. This information is stored only in your browser and is shared across all CTS courses.",
+    "es": "Antes de comenzar la Unidad 1, por favor ingrese su nombre y seleccione su vía. Esta información se guarda solo en su navegador y es compartida entre todos los cursos del CTS."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ee1211cde05f"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "Full name",
+    "es": "Nombre completo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "eeb692087d62"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "Email (optional)",
+    "es": "Correo electrónico (opcional)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5c10b588a954"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Track",
+    "es": "Vía"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b1c5a7af06ba"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Certificate",
+    "es": "Certificado"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "10de46b3b341"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "M.Div",
+    "es": "M.Div"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "621c580e3436"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "Th.M.",
+    "es": "Th.M."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c7ffb710c525"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate:</strong> Multiple-choice only, 90% to pass each unit. <strong>M.Div / Th.M.:</strong> Multiple-choice + short-answer, both at 90%.",
+    "es": "<strong>Certificado:</strong> Solo opción múltiple, 90% para aprobar cada unidad. <strong>M.Div / Th.M.:</strong> Opción múltiple + respuesta corta, ambas al 90%."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "431989696561"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Save and Continue",
+    "es": "Guardar y Continuar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "49a2b0fecc60"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "📖 Acts Intensive — Unit 1: From Jerusalem to the Uttermost Parts (Acts 1–2)",
+    "es": "📖 Intensivo de Hechos — Unidad 1: De Jerusalén hasta lo último de la tierra (Hechos 1–2)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "53d3ace21fc3"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "heading",
+   "text": {
+    "en": "I. Volume Two of a Two-Volume Story",
+    "es": "I. Volumen dos de una historia en dos volúmenes"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f13a142ae24b"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "Open your Bible to Acts 1:1 and read the first sentence carefully. <em>\"The former account I made, O Theophilus, of all that Jesus began both to do and teach, until the day in which He was taken up\"</em> (Acts 1:1–2, NKJV). Notice the verb. Luke does not say his Gospel was the account of all that Jesus <em>did</em>. He says it was the account of all Jesus <em>began</em> to do. The Gospel of Luke ends with the ascension, but the work has barely started. Acts is volume two — what the risen, ascended Lord Jesus continued to do and teach through His Spirit-empowered Church. The book has no formal ending, by the way, because the work still isn't finished. We are living in the long second volume.",
+    "es": "Abra su Biblia en Hechos 1:1 y lea con cuidado la primera frase. <em>\"En el primer tratado, oh Teófilo, he hablado de todas las cosas que Jesús comenzó a hacer y a enseñar, hasta el día en que fue recibido arriba\"</em> (Hechos 1:1–2, RVG). Note el verbo. Lucas no dice que su Evangelio fuera el relato de todo lo que Jesús <em>hizo</em>. Dice que fue el relato de todo lo que Jesús <em>comenzó</em> a hacer. El Evangelio de Lucas termina con la ascensión, pero la obra apenas ha empezado. Hechos es el segundo volumen — lo que el resucitado y ascendido Señor Jesús siguió haciendo y enseñando por medio de Su Iglesia llena del Espíritu. El libro no tiene un final formal, por cierto, porque la obra todavía no se ha terminado. Vivimos dentro del largo segundo volumen."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "876ce6da122c"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "Luke wrote both volumes. He was a physician, a Gentile, a careful historian, and a personal friend of the apostle Paul. The book was almost certainly written around AD 62 or 63, while Paul was still in his Roman house arrest. We know that because of what Luke does <em>not</em> mention — Nero's persecution that broke out in AD 64, Paul's death around AD 68, and the destruction of the temple in AD 70. None of those earth-shaking events appears in Acts. If they had happened, Luke would have written about them. So Acts covers about thirty years of history, from the ascension of Christ around AD 33 to Paul preaching in Rome around AD 62.",
+    "es": "Lucas escribió ambos volúmenes. Era médico, gentil, historiador cuidadoso y amigo personal del apóstol Pablo. El libro se escribió casi con toda seguridad alrededor del año 62 ó 63 d.C., mientras Pablo todavía estaba bajo arresto domiciliario en Roma. Lo sabemos por lo que Lucas <em>no</em> menciona — la persecución de Nerón en el 64, la muerte de Pablo hacia el 68, y la destrucción del templo en el 70. Ninguno de esos eventos sacudidores aparece en Hechos. Si hubieran ocurrido ya, Lucas los habría escrito. Así que Hechos cubre unos treinta años de historia, desde la ascensión de Cristo en el año 33 hasta Pablo predicando en Roma hacia el 62."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "64166b42c7f9"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "Think of the four Gospels as the vertical dimension of our faith — they show us the Trinity at work, the Father sending the Son, the Son obeying to the cross, the Spirit descending at the baptism. Acts is the horizontal dimension. It shows the gospel running outward from a temple-centered Jewish movement in Jerusalem to a world-wide community of every nation under heaven, indwelt not by a building but by the Holy Spirit Himself. The Church (in the Greek, the <em>ekklesia</em>, \"the called-out assembly\") is born here as the living body of the ascended Christ.",
+    "es": "Piense en los cuatro Evangelios como la dimensión vertical de nuestra fe — nos muestran la Trinidad obrando, el Padre enviando al Hijo, el Hijo obedeciendo hasta la cruz, el Espíritu descendiendo en el bautismo. Hechos es la dimensión horizontal. Muestra el evangelio corriendo hacia afuera, desde un movimiento judío centrado en el templo de Jerusalén hasta una comunidad mundial de toda nación bajo el cielo, habitada no por un edificio sino por el Espíritu Santo mismo. La Iglesia (en griego, la <em>ekklesia</em>, \"la asamblea llamada afuera\") nace aquí como el cuerpo vivo del Cristo ascendido."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f8cad5dd1207"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "heading",
+   "text": {
+    "en": "II. Forty Days and \"Many Infallible Proofs\"",
+    "es": "II. Cuarenta días y \"muchas pruebas indubitables\""
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "002cd07c9b80"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "After the resurrection Jesus did not call the disciples together and tell them to go preach immediately. He stayed forty days. Luke says He showed Himself alive <em>\"by many infallible proofs\"</em> (Acts 1:3, NKJV). The Greek word there is <em>tekmeriois</em> — incontrovertible evidence, the kind that holds up in a court of law. It is the only place in the entire New Testament where this word appears, and Luke the historian is the man who chose it.",
+    "es": "Tras la resurrección, Jesús no reunió a los discípulos y les dijo que salieran a predicar de inmediato. Se quedó cuarenta días. Lucas dice que se mostró vivo <em>\"con muchas pruebas indubitables\"</em> (Hechos 1:3, RVG). La palabra griega allí es <em>tekmeriois</em>, evidencia incontrovertible, del tipo que se sostiene en un tribunal. Es el único lugar en todo el Nuevo Testamento donde aparece esa palabra, y Lucas el historiador es quien la escogió."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2b53b0a82d88"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "You probably don't recognize the name Frank Morison. In the 1930s he was a young British lawyer who set out to do the world a favor. He was philosophically skeptical toward Christianity, and he believed the resurrection was the foundation stone of the whole faith. So he decided to write a book that would, once and for all, expose the resurrection as a tissue of fable. He had been trained in the law, so he resolved to admit nothing as evidence that did not meet the strict criteria of a courtroom. But while he was doing his research, a remarkable thing happened. The case was not as easy as he had supposed. As he examined the witnesses, the empty tomb, the changed disciples, and the early creeds, he became persuaded against his will of the bodily resurrection of Christ. The first chapter of his book is titled <em>\"The Book That Refused to Be Written.\"</em> The book itself is called <em>Who Moved the Stone?</em> — and three quarters of a century later it is still in print, still being handed to skeptics, still doing what Morison never intended it to do. Acts is built on the same kind of evidence Morison eventually trusted: forty days of physical, edible, touchable, repeated, public appearances of the risen Lord.",
+    "es": "Probablemente no reconoce el nombre Frank Morison. En la década de 1930 era un joven abogado británico que decidió hacerle un favor al mundo. Era filosóficamente escéptico hacia el cristianismo y creía que la resurrección era la piedra angular de toda la fe. Así que decidió escribir un libro que, de una vez por todas, expusiera la resurrección como un tejido de fábula. Estaba entrenado en derecho, así que se propuso no admitir nada como evidencia que no cumpliera con los criterios estrictos de un tribunal. Pero mientras hacía su investigación ocurrió algo notable. El caso no era tan fácil como había supuesto. Al examinar a los testigos, la tumba vacía, los discípulos transformados y los credos primitivos, quedó persuadido contra su voluntad de la resurrección corporal de Cristo. El primer capítulo de su libro se titula <em>\"El libro que se negó a ser escrito.\"</em> El libro mismo se llama <em>¿Quién movió la piedra?</em>, y tres cuartos de siglo después sigue impreso, sigue siendo entregado a escépticos, sigue haciendo lo que Morison nunca quiso que hiciera. Hechos se construye sobre la misma clase de evidencia en la que Morison terminó confiando: cuarenta días de apariciones físicas, comestibles, palpables, repetidas y públicas del Señor resucitado."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3f92fb6128b7"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "At the end of those forty days Jesus gave one last command and one last promise. The command: <em>\"do not depart from Jerusalem, but wait for the Promise of the Father\"</em> (Acts 1:4, NKJV). The promise: <em>\"you shall receive power when the Holy Spirit has come upon you; and you shall be witnesses to Me in Jerusalem, and in all Judea and Samaria, and to the end of the earth\"</em> (Acts 1:8, NKJV). That single verse is the table of contents of the whole book. Chapters 1–7 — Jerusalem. Chapters 8–12 — Judea and Samaria. Chapters 13–28 — the end of the earth. Memorize Acts 1:8 and you will never lose your place in this book.",
+    "es": "Al final de esos cuarenta días Jesús dio un último mandato y una última promesa. El mandato: <em>\"que no se fuesen de Jerusalén, sino que esperasen la promesa del Padre\"</em> (Hechos 1:4, RVG). La promesa: <em>\"recibiréis el poder del Espíritu Santo que vendrá sobre vosotros; y me seréis testigos en Jerusalén, en toda Judea, en Samaria, y hasta lo último de la tierra\"</em> (Hechos 1:8, RVG). Ese solo versículo es la tabla de contenido de todo el libro. Capítulos 1–7 — Jerusalén. Capítulos 8–12 — Judea y Samaria. Capítulos 13–28 — lo último de la tierra. Memorice Hechos 1:8 y nunca perderá el rumbo en este libro."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a254c576a8c9"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "heading",
+   "text": {
+    "en": "III. The Hardest Word in the Christian Vocabulary: <em>Wait</em>",
+    "es": "III. La palabra más difícil del vocabulario cristiano: <em>esperar</em>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fe1e8ddcfe69"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "It is striking how the disciples respond. They had just received a worldwide commission, and what does Jesus tell them to do? Sit still in Jerusalem. The hardest single word in the Christian vocabulary is <em>wait</em>. We are an instant generation. We have instant coffee, instant messaging, and instant opinions. We expect God to operate at our speed and on our schedule. Isaiah 40:31 says, <em>\"those who wait on the Lord shall renew their strength.\"</em> But waiting is a discipline almost nobody enjoys.",
+    "es": "Es notable cómo responden los discípulos. Acababan de recibir una comisión mundial, y ¿qué les dice Jesús que hagan? Quédense quietos en Jerusalén. La palabra más difícil del vocabulario cristiano es <em>esperar</em>. Somos una generación instantánea. Tenemos café instantáneo, mensajes instantáneos y opiniones instantáneas. Esperamos que Dios opere a nuestra velocidad y según nuestro horario. Isaías 40:31 dice: <em>\"los que esperan a Jehová tendrán nuevas fuerzas.\"</em> Pero esperar es una disciplina que casi nadie disfruta."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "afede147bcf7"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "Friends in our ministry once told me about their two-year-old son and his stuffed gorilla. The boy dragged Rilla everywhere. One day Rilla's seams gave out and the stuffing started leaking. The little boy waddled up to his mother and held out the gorilla and said, \"Mommy, Rilla's broked. Fizzit.\" She said, \"Honey, I'd be glad to fix him — give him to me.\" But when she reached for the toy, she found a two-year-old firmly attached to it. She tugged, he tugged, the tears started, and finally she said in exasperation, \"I can't fix it until you let go of it!\" And right at that moment, she said, the Holy Spirit tapped her on the shoulder and reminded her of about a half-dozen things in her own life that she had been holding onto with both fists while asking God to fix them.",
+    "es": "Unos amigos en nuestro ministerio me contaron una vez de su hijo de dos años y su gorila de peluche. El niño arrastraba a \"Rilla\" por todas partes. Un día las costuras del gorila cedieron y el relleno empezó a salirse. El pequeño se acercó tambaleando a su madre, le tendió el gorila y le dijo: \"Mami, Rilla está roto. Compónlo.\" Ella le dijo: \"Cariño, con gusto te lo compongo, dámelo.\" Pero cuando alargó la mano para tomar el peluche, descubrió que tenía a un niño de dos años firmemente prendido de él. Ella jaló, él jaló, llegaron las lágrimas, y al fin la mamá dijo, exasperada: \"¡No puedo componerlo si no lo sueltas!\" Y justo en ese momento, dice ella, el Espíritu Santo le tocó el hombro y le recordó como media docena de cosas en su propia vida que ella misma estaba sosteniendo con los dos puños mientras le pedía a Dios que se las arreglara."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d71677e3e0d6"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "That is exactly where the disciples were on Day Forty. Jesus had given them the world. They had things to do. But Jesus said, \"Wait. Don't run ahead of Me. Until the Holy Spirit comes, all you will do in your own strength is run with no power and disastrous results.\" So one hundred and twenty of them, including the women and Mary the mother of Jesus and His brothers, went up into the upper room and prayed for ten days. They did not know how long they would have to wait. They did not know what was coming. They simply obeyed.",
+    "es": "Eso es exactamente donde estaban los discípulos en el día cuarenta. Jesús les había dado el mundo. Tenían cosas que hacer. Pero Jesús dijo: \"Esperen. No corran delante de mí. Hasta que venga el Espíritu Santo, lo único que harán con sus propias fuerzas será correr sin poder y con resultados desastrosos.\" Así que ciento veinte de ellos, incluidas las mujeres y María la madre de Jesús y Sus hermanos, subieron al aposento alto y oraron diez días. No sabían cuánto tendrían que esperar. No sabían qué venía. Simplemente obedecieron."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a4637b02de91"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "One small footnote here, and I will admit it is a contrarian view, but the great J. Vernon McGee held it and so do I. In the middle of those ten days, Peter stood up and proposed that they replace Judas by lot, and the lot fell on Matthias (Acts 1:15–26). Matthias is never mentioned again in the Bible. Not once. God had already chosen Saul of Tarsus to be the twelfth apostle, and the Holy Spirit had not yet been poured out to make that clear. I think Peter ran a hundred yards ahead of the gun. Even good men, even apostles, can act before the Spirit has spoken. Sometimes the most spiritual thing we can do is sit on our hands and pray.",
+    "es": "Una nota al pie, y reconozco que es una opinión contraria, pero el gran J. Vernon McGee la sostuvo, y yo también. En medio de esos diez días Pedro se levantó y propuso reemplazar a Judas por suertes, y la suerte cayó sobre Matías (Hechos 1:15–26). Matías nunca vuelve a ser mencionado en la Biblia. Ni una sola vez. Dios ya había escogido a Saulo de Tarso para ser el doceavo apóstol, y el Espíritu Santo todavía no había sido derramado para dejarlo claro. Pienso que Pedro corrió cien metros antes del disparo de salida. Aun los hombres buenos, aun los apóstoles, pueden actuar antes de que el Espíritu haya hablado. A veces lo más espiritual que podemos hacer es sentarnos sobre las manos y orar."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "18691609cb0f"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "heading",
+   "text": {
+    "en": "IV. The Birthday of the Church",
+    "es": "IV. El cumpleaños de la Iglesia"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "44080a0611c9"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "On the fiftieth day after Passover the Jewish nation kept the Feast of Pentecost — also called the Feast of Weeks, or the Feast of Firstfruits. On that day each year the worshipers brought to the temple the first sheaf of the wheat harvest. It was a thanksgiving offering for the new crop and an act of faith that the rest of the harvest would follow. On that very day, in AD 33, God brought in His own firstfruits — three thousand new believers gathered out of every nation under heaven, the down payment on a harvest that has not stopped since.",
+    "es": "El día cincuenta después de la Pascua, la nación judía celebraba la Fiesta de Pentecostés — también llamada Fiesta de las Semanas o Fiesta de las Primicias. Ese día cada año los adoradores llevaban al templo el primer manojo de la cosecha de trigo. Era una ofrenda de acción de gracias por la nueva cosecha y un acto de fe de que el resto vendría. En ese mismo día, en el año 33 d.C., Dios trajo Sus propias primicias — tres mil nuevos creyentes recogidos de toda nación bajo el cielo, el anticipo de una cosecha que no se ha detenido desde entonces."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cdb1e99187a7"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "Luke describes the moment in three images. First, sound: <em>\"there came a sound from heaven, as of a rushing mighty wind, and it filled the whole house where they were sitting\"</em> (Acts 2:2, NKJV). The Greek word for wind, <em>pneuma</em>, is the same word for spirit; in Hebrew, <em>ruach</em>, the same. From Genesis 1, where the Spirit of God hovers over the waters, to Ezekiel 37, where the breath enters the dry bones, the wind has always been the signature of the Spirit. Second, sight: <em>\"there appeared to them divided tongues, as of fire, and one sat upon each of them\"</em> (Acts 2:3, NKJV). Fire is the Old Testament signature of God's presence — the burning bush, the pillar of fire, the altar at Carmel. Now the fire rests not on a building or a mountain but on individual men and women. The temple is being relocated. Third, speech: they began to speak the wonders of God in languages they had never learned, and Jewish pilgrims from sixteen named countries each heard the gospel in his own native dialect. This was Babel reversed. At Babel God had scattered the languages to confuse a proud humanity; at Pentecost He gathered them again to unite a humble one.",
+    "es": "Lucas describe el momento en tres imágenes. Primero, sonido: <em>\"vino del cielo un estruendo como de un viento recio que soplaba, el cual llenó toda la casa donde estaban sentados\"</em> (Hechos 2:2, RVG). La palabra griega para viento, <em>pneuma</em>, es la misma palabra para espíritu; en hebreo, <em>ruach</em>, también. Desde Génesis 1, donde el Espíritu de Dios se mueve sobre las aguas, hasta Ezequiel 37, donde el aliento entra en los huesos secos, el viento ha sido siempre la firma del Espíritu. Segundo, vista: <em>\"se les aparecieron lenguas repartidas, como de fuego, asentándose sobre cada uno de ellos\"</em> (Hechos 2:3, RVG). El fuego es la firma del Antiguo Testamento de la presencia de Dios — la zarza ardiendo, la columna de fuego, el altar del Carmelo. Ahora el fuego reposa no sobre un edificio o una montaña sino sobre hombres y mujeres individualmente. El templo se está reubicando. Tercero, palabra: comenzaron a hablar las maravillas de Dios en idiomas que nunca habían aprendido, y peregrinos judíos de dieciséis países nombrados oyeron cada uno el evangelio en su propio dialecto. Era Babel al revés. En Babel Dios había esparcido las lenguas para confundir a una humanidad orgullosa; en Pentecostés las recogió de nuevo para unir a una humilde."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "668df041dd7e"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "Some in the crowd jeered: <em>\"They are full of new wine\"</em> (Acts 2:13, NKJV). It is a sad commentary on us that the natural human reaction to a move of God is to suspect drunkenness. Peter stood up with the eleven and preached the first Christian sermon. He pointed out it was nine in the morning, far too early for that explanation, and he showed instead from the prophet Joel that what they were seeing was the long-promised pouring out of the Spirit on all flesh. Then he turned to Jesus — accredited by miracles, crucified by a deliberate plan of God, raised from the dead in fulfillment of David's words in Psalm 16, and now exalted at the right hand of God. He landed the sermon with a hammer: <em>\"Therefore let all the house of Israel know assuredly that God has made this Jesus, whom you crucified, both Lord and Christ\"</em> (Acts 2:36, NKJV).",
+    "es": "Algunos en la multitud se burlaron: <em>\"Están llenos de mosto\"</em> (Hechos 2:13, RVG). Es un comentario triste sobre nosotros que la reacción humana natural ante un mover de Dios sea sospechar embriaguez. Pedro se levantó con los once y predicó el primer sermón cristiano. Señaló que eran las nueve de la mañana, demasiado temprano para esa explicación, y mostró desde el profeta Joel que lo que veían era el largamente prometido derramamiento del Espíritu sobre toda carne. Luego se volvió hacia Jesús — acreditado por milagros, crucificado por un plan deliberado de Dios, resucitado de entre los muertos en cumplimiento de las palabras de David en el Salmo 16, y ahora exaltado a la diestra de Dios. Cerró el sermón con un martillo: <em>\"Sepa, pues, ciertísimamente toda la casa de Israel, que a este Jesús a quien vosotros crucificasteis, Dios le ha hecho Señor y Cristo\"</em> (Hechos 2:36, RVG)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ef401d8ea37e"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "The crowd was cut to the heart. <em>\"Men and brethren, what shall we do?\"</em> Peter's reply is the gospel in two clauses: <em>\"Repent, and let every one of you be baptized in the name of Jesus Christ for the remission of sins; and you shall receive the gift of the Holy Spirit\"</em> (Acts 2:38, NKJV). About three thousand believed and were added that day. The Church that had walked into the upper room one hundred and twenty strong walked out of Pentecost over three thousand strong.",
+    "es": "La multitud quedó traspasada de corazón. <em>\"Varones hermanos, ¿qué haremos?\"</em> La respuesta de Pedro es el evangelio en dos cláusulas: <em>\"Arrepentíos, y bautícese cada uno de vosotros en el nombre de Jesucristo para perdón de los pecados; y recibiréis el don del Espíritu Santo\"</em> (Hechos 2:38, RVG). Como tres mil creyeron y fueron añadidos aquel día. La Iglesia que entró al aposento alto siendo ciento veinte salió de Pentecostés con más de tres mil."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b802aa87723a"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "heading",
+   "text": {
+    "en": "V. The Marks of a Spirit-Filled Community",
+    "es": "V. Las marcas de una comunidad llena del Espíritu"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ff8d0887accc"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "Luke gives us the most beautiful description of the early church in Acts 2:42–47. <em>\"And they continued steadfastly in the apostles' doctrine and fellowship, in the breaking of bread, and in prayers\"</em> (Acts 2:42, NKJV). Four things — the Word, the family, the table, and the throne room. Drop any one of those four and you do not have the New Testament Church anymore; you have something else. They held things in common, sold property when needed, and met daily — daily — in the temple courts and from house to house, eating their meals <em>\"with gladness and simplicity of heart, praising God and having favor with all the people. And the Lord added to the church daily those who were being saved\"</em> (Acts 2:46–47, NKJV). The Lord did the adding. The Church did the gathering, the praying, the breaking of bread, the praising. He did the saving.",
+    "es": "Lucas nos da la descripción más hermosa de la iglesia primitiva en Hechos 2:42–47. <em>\"Y perseveraban en la doctrina de los apóstoles, y en la comunión, y en el partimiento del pan, y en las oraciones\"</em> (Hechos 2:42, RVG). Cuatro cosas — la Palabra, la familia, la mesa y la sala del trono. Quite una de esas cuatro y ya no tendrá la Iglesia del Nuevo Testamento; tendrá otra cosa. Tenían todas las cosas en común, vendían propiedades cuando hacía falta, y se reunían diariamente — diariamente — en los atrios del templo y de casa en casa, comiendo sus alimentos <em>\"con alegría y con sencillez de corazón, alabando a Dios, y teniendo gracia con todo el pueblo. Y el Señor añadía cada día a la iglesia los que habían de ser salvos\"</em> (Hechos 2:46–47, RVG). El Señor era quien añadía. La Iglesia hacía la reunión, la oración, el partimiento del pan, la alabanza. Él hacía la salvación."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a8045bd9b46e"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "prose",
+   "text": {
+    "en": "That same Spirit is still at work today. In 1949 on the Isle of Lewis, in the Outer Hebrides of Scotland, two elderly sisters lived in a stone cottage in the village of Barvas. Peggy Smith was eighty-four years old and blind. Her sister Christine was eighty-two years old and crippled with arthritis. They could not get out to attend the services anymore, but they were burdened to the point of breaking over the spiritual coldness of their island. So they began to pray. They knelt in their cottage at ten o'clock at night and they did not stop until three or four in the morning, twice a week, for months. They pleaded with God for a revival. One night God gave them the promise that revival was coming and that He would send a man named Duncan Campbell. They sent for him. When Campbell arrived, the Spirit fell. Churches that had been almost empty filled to overflowing in a single night. People who had never set foot in a church door fell under conviction in the fields and in their homes. Bars emptied. Crime virtually disappeared. Whole villages were transformed. Duncan Campbell said that the entire awakening was born in the persistent prayer of two elderly women in a Scottish cottage.",
+    "es": "Ese mismo Espíritu sigue obrando hoy. En 1949, en la Isla de Lewis, en las Hébridas Exteriores de Escocia, dos hermanas ancianas vivían en una cabaña de piedra en la aldea de Barvas. Peggy Smith tenía ochenta y cuatro años y era ciega. Su hermana Christine tenía ochenta y dos años y estaba paralizada por la artritis. Ya no podían salir a los servicios, pero estaban quebrantadas hasta los huesos por la frialdad espiritual de su isla. Así que empezaron a orar. Se arrodillaban en su cabaña a las diez de la noche y no se detenían hasta las tres o cuatro de la mañana, dos veces por semana, durante meses. Le rogaban a Dios un avivamiento. Una noche Dios les dio la promesa de que el avivamiento venía y de que enviaría a un hombre llamado Duncan Campbell. Mandaron a buscarlo. Cuando Campbell llegó, el Espíritu cayó. Iglesias que habían estado casi vacías se llenaron a desbordar en una sola noche. Personas que nunca habían pisado una iglesia cayeron bajo convicción en los campos y en sus casas. Los bares se vaciaron. El crimen prácticamente desapareció. Aldeas enteras fueron transformadas. Duncan Campbell decía que todo el avivamiento nació en la oración persistente de dos mujeres ancianas en una cabaña escocesa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9011be2ce12f"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "prose",
+   "text": {
+    "en": "And in 1907, in Pyongyang, Korea, missionaries felt revival might be coming. They scheduled the worst weeks of winter as a Bible school. The leader of a men's group decided to open the meeting with a brief prayer time. He said, \"Don't take too long.\" The first man prayed; six stood up to pray next. The second prayed; a dozen more stood. By the time the fifth had finished, every one of the fifteen hundred men in the room rose to his feet at the same time and began to pray aloud, simultaneously, so absorbed in God that they did not notice each other. An English missionary present that night wrote home that he heard \"a sound like a rushing wind.\" Almost eighty thousand Koreans came to Christ in that one revival. Today South Korea is one of the great missionary-sending nations on earth, and it traces its spiritual lineage straight back to Pentecost — wind, fire, and three thousand souls.",
+    "es": "Y en 1907, en Pyongyang, Corea, los misioneros sentían que el avivamiento podía estar llegando. Programaron las peores semanas del invierno como una escuela bíblica. El líder de un grupo de hombres decidió abrir la reunión con un breve tiempo de oración. Dijo: \"No se tarden mucho.\" El primer hombre oró; seis se pusieron de pie a orar después. El segundo oró; otra docena se levantó. Para cuando el quinto había terminado, los mil quinientos hombres del salón se pusieron de pie al mismo tiempo y comenzaron a orar en voz alta, simultáneamente, tan absortos en Dios que no se percataban unos de otros. Un misionero inglés presente esa noche escribió a casa que oyó \"un sonido como de un viento recio\". Casi ochenta mil coreanos vinieron a Cristo en aquel solo avivamiento. Hoy Corea del Sur es una de las grandes naciones misioneras del mundo, y rastrea su linaje espiritual directamente hasta Pentecostés — viento, fuego y tres mil almas."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "adf5b320784b"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "heading",
+   "text": {
+    "en": "VI. The Promise Is to You",
+    "es": "VI. La promesa es para vosotros"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a3367d208004"
+    }
+   }
+  },
+  {
+   "id": "b037",
+   "type": "prose",
+   "text": {
+    "en": "Peter ended his Pentecost sermon with this line: <em>\"For the promise is to you and to your children, and to all who are afar off, as many as the Lord our God will call\"</em> (Acts 2:39, NKJV). Read those last seven words again. <em>As many as the Lord our God will call.</em> The promise of the Spirit was not just for the people standing in front of Peter. It was not just for the apostolic age. It was for \"all who are afar off\" — that is, every Gentile in every century in every country. That includes you. The same Holy Spirit who fell on the upper room is available to fill any Christian who will wait, who will pray, and who will obey. Acts 1:8 is not just history. It is your job description.",
+    "es": "Pedro terminó su sermón de Pentecostés con esta línea: <em>\"Porque la promesa es para vosotros, y para vuestros hijos, y para todos los que están lejos; para cuantos el Señor nuestro Dios llamare\"</em> (Hechos 2:39, RVG). Lea esas últimas palabras otra vez. <em>Para cuantos el Señor nuestro Dios llamare.</em> La promesa del Espíritu no era solo para la gente parada delante de Pedro. No era solo para la era apostólica. Era para \"todos los que están lejos\" — esto es, cada gentil de cada siglo en cada país. Eso lo incluye a usted. El mismo Espíritu Santo que cayó sobre el aposento alto está disponible para llenar a cualquier cristiano que espere, ore y obedezca. Hechos 1:8 no es solo historia. Es la descripción de su trabajo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8761695f0b19"
+    }
+   }
+  },
+  {
+   "id": "b038",
+   "type": "prose",
+   "text": {
+    "en": "Where is your Jerusalem? Your Judea and Samaria? Your end of the earth? Begin praying about those three concentric circles. The Holy Spirit who built His Church on three thousand new believers in one morning has lost none of His power. The wind still blows. The fire still falls. The promise is still good. Wait, pray, obey — and watch what He will do.",
+    "es": "¿Dónde está su Jerusalén? ¿Su Judea y Samaria? ¿Su última parte de la tierra? Comience a orar sobre esos tres círculos concéntricos. El Espíritu Santo que edificó Su Iglesia con tres mil nuevos creyentes en una sola mañana no ha perdido nada de Su poder. El viento todavía sopla. El fuego todavía cae. La promesa todavía es buena. Espere, ore, obedezca — y vea lo que Él hará."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "55d6d58fc71f"
+    }
+   }
+  },
+  {
+   "id": "b039",
+   "type": "prose",
+   "text": {
+    "en": "Unit 1 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 1 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "eeba1211d031"
+    }
+   }
+  },
+  {
+   "id": "b040",
+   "type": "prose",
+   "text": {
+    "en": "<em><strong>Certificate track:</strong> 20 multiple-choice questions, 90% (18 of 20) to pass. <strong>M.Div track:</strong> 20 MC + 10 short-answer, both at 90% independently. Each MC scores immediately when you click. MC must be passed before SA scores count. A failure locks the relevant section for 15 minutes; if you have already passed MC, only SA locks after an SA fail.</em>",
+    "es": "<em><strong>Vía Certificado:</strong> 20 preguntas de opción múltiple, 90% (18 de 20) para aprobar. <strong>Vía M.Div:</strong> 20 OM + 10 respuesta corta, ambas al 90% independientemente. Cada OM califica inmediatamente al hacer clic. Debe aprobar OM antes de que cuente la sección RC. Una reprobación bloquea la sección por 15 minutos; si ya aprobó OM, solo se bloquea RC tras un fallo de RC.</em>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d196052e364e"
+    }
+   }
+  },
+  {
+   "id": "b041",
+   "type": "prose",
+   "text": {
+    "en": "Multiple Choice — 20 Questions",
+    "es": "Opción Múltiple — 20 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9906bf28c27c"
+    }
+   }
+  },
+  {
+   "id": "b042",
+   "type": "prose",
+   "text": {
+    "en": "Short Answer — 10 Questions <span class=\"sa-badge\" id=\"saBadgeEn\"></span>",
+    "es": "Respuesta Corta — 10 Preguntas <span class=\"sa-badge\" id=\"saBadgeEs\"></span>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b1d858341328"
+    }
+   }
+  },
+  {
+   "id": "b043",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b044",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

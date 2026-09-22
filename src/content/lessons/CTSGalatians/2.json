@@ -1,0 +1,404 @@
+{
+ "course": "CTSGalatians",
+ "unit": 2,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Unit 3 →</button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #2f4f2f;\"><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\">\n    <h2><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></p>\n    <input type=\"text\" id=\"regName\" placeholder=\"Full name / Nombre completo\" aria-label=\"Full name / Nombre completo\">\n    <input type=\"email\" id=\"regEmail\" placeholder=\"Email\" aria-label=\"Email\">\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"cert\">Certificate Track</option>\n        <option value=\"mdiv\">Master of Divinity (M.Div.) Track</option>\n        <option value=\"thm\">Master of Theology (Th.M.) Track</option>\n    </select>\n    <button class=\"nav-btn\" id=\"regBtn\"><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\">\n<p class=\"passage-label\"><!--cts:b008:en--></p>\n<div class=\"scripture\"><!--cts:b009:en--></div>\n\n<p><!--cts:b010:en--></p>\n\n<h3><!--cts:b011:en--></h3>\n<p><!--cts:b012:en--></p>\n\n<h3><!--cts:b013:en--></h3>\n<p><!--cts:b014:en--></p>\n\n<h3><!--cts:b015:en--></h3>\n<p><!--cts:b016:en--></p>\n\n<p class=\"pull-quote\"><!--cts:b017:en--></p>\n\n<h3><!--cts:b018:en--></h3>\n<p><!--cts:b019:en--></p>\n\n<p><!--cts:b020:en--></p>\n\n<h3><!--cts:b021:en--></h3>\n<p><!--cts:b022:en--></p>\n\n<p><!--cts:b023:en--></p>\n<div class=\"scripture\"><!--cts:b024:en--></div>\n</div>\n\n<div class=\"lang-es\">\n<p class=\"passage-label\"><!--cts:b008:es--></p>\n<div class=\"scripture\"><!--cts:b009:es--></div>\n\n<p><!--cts:b010:es--></p>\n\n<h3><!--cts:b011:es--></h3>\n<p><!--cts:b012:es--></p>\n\n<h3><!--cts:b013:es--></h3>\n<p><!--cts:b014:es--></p>\n\n<h3><!--cts:b015:es--></h3>\n<p><!--cts:b016:es--></p>\n\n<p class=\"pull-quote\"><!--cts:b017:es--></p>\n\n<h3><!--cts:b018:es--></h3>\n<p><!--cts:b019:es--></p>\n\n<p><!--cts:b020:es--></p>\n\n<h3><!--cts:b021:es--></h3>\n<p><!--cts:b022:es--></p>\n\n<p><!--cts:b023:es--></p>\n<div class=\"scripture\"><!--cts:b024:es--></div>\n</div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b025:en--></span><span class=\"lang-es\"><!--cts:b025:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b026:en--></span>\n       <span class=\"lang-es\"><!--cts:b026:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b027:en--></span><span class=\"lang-es\"><!--cts:b027:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b028:en--></span><span class=\"lang-es\"><!--cts:b028:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n  \n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSGalatiansReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📖 Galatians Intensive — Unit 2: Paul Defends the Gospel",
+    "es": "📖 Gálatas Intensivo — Unidad 2: Pablo Defiende el Evangelio"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d4b236390553"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "\"But I make known to you, brethren, that the gospel which was preached by me is not according to man... it came through the revelation of Jesus Christ.\" — Galatians 1:11-12 (NKJV)",
+    "es": "\"Mas os hago saber, hermanos, que el evangelio que fue predicado por mí, no es según hombre... sino por revelación de Jesucristo.\" — Gálatas 1:11-12 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9645b2d5d91d"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "📝 Course Registration",
+    "es": "📝 Registro del Curso"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fde900fe006b"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Welcome to the Galatians Intensive. Please register before beginning Unit 2.",
+    "es": "Bienvenido al Intensivo de Gálatas. Por favor regístrese antes de comenzar la Unidad 2."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4aabe676a3d8"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "scripture",
+   "text": {
+    "en": "<strong>Text: Galatians 1:11-2:10</strong>",
+    "es": "<strong>Texto: Gálatas 1:11-2:10 (RVG)</strong>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "85cbaa2aa109"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "scripture",
+   "text": {
+    "en": "\"But I make known to you, brethren, that the gospel which was preached by me is not according to man. For I neither received it from man, nor was I taught it, but it came through the revelation of Jesus Christ.\" — Galatians 1:11-12 (NKJV)",
+    "es": "\"Mas os hago saber, hermanos, que el evangelio que fue predicado por mí, no es según hombre; pues yo ni lo recibí ni lo aprendí de hombre alguno, sino por revelación de Jesucristo.\" — Gálatas 1:11-12 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ceff79dd66e7"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "In Unit 1 Paul defined the gospel — the gospel of grace — and pronounced a curse on anyone who would preach another. But the troublemakers in Galatia had a reply ready. They whispered that Paul's gospel was secondhand: that he had learned it from the apostles in Jerusalem and then softened it for the Gentiles, quietly leaving out the law. If that were true, Paul's gospel could be \"corrected\" by appealing to the real authorities. So in this long section Paul defends not the content of his gospel but its <em>source</em>. His argument is simple and powerful: my gospel came by revelation from Jesus Christ Himself, not from any man; and when I finally did meet the Jerusalem apostles, they added nothing to it — they recognized it and shook my hand. The gospel of grace stands on God's own authority, and the apostles confirmed it rather than corrected it.",
+    "es": "En la Unidad 1 Pablo definió el evangelio — el evangelio de la gracia — y pronunció una maldición sobre cualquiera que predicara otro. Pero los perturbadores en Galacia tenían una respuesta lista. Susurraban que el evangelio de Pablo era de segunda mano: que lo había aprendido de los apóstoles en Jerusalén y luego lo había suavizado para los gentiles, dejando calladamente fuera la ley. Si eso fuera cierto, el evangelio de Pablo podría \"corregirse\" apelando a las verdaderas autoridades. Así que en esta larga sección Pablo defiende no el contenido de su evangelio sino su <em>origen</em>. Su argumento es sencillo y poderoso: mi evangelio vino por revelación de Jesucristo mismo, no de hombre alguno; y cuando por fin conocí a los apóstoles de Jerusalén, nada le añadieron — lo reconocieron y me dieron la mano. El evangelio de la gracia descansa sobre la autoridad propia de Dios, y los apóstoles lo confirmaron en lugar de corregirlo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9adac4890c09"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "heading",
+   "text": {
+    "en": "Not According to Man",
+    "es": "No Según Hombre"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4c2aa931d97a"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "Paul states his case plainly: \"the gospel which was preached by me is not according to man. For I neither received it from man, nor was I taught it, but it came through the revelation of Jesus Christ\" (Galatians 1:11-12). He did not pick it up from a teacher, a school, or a council; the risen Christ revealed it to him directly. This matters for everything in the letter and for our whole course. A gospel that came down from God cannot be edited by men. If even Paul <em>received</em> it rather than invented it, then no later teacher, prophet, or church has the right to add to it or take from it. The message has one Author, and He has already spoken.",
+    "es": "Pablo expone su caso claramente: \"el evangelio que fue predicado por mí, no es según hombre; pues yo ni lo recibí ni lo aprendí de hombre alguno, sino por revelación de Jesucristo\" (Gálatas 1:11-12). No lo tomó de un maestro, una escuela, ni un concilio; el Cristo resucitado se lo reveló directamente. Esto importa para todo lo que sigue en la carta y para todo nuestro curso. Un evangelio que descendió de Dios no puede ser editado por hombres. Si aun Pablo lo <em>recibió</em> en lugar de inventarlo, entonces ningún maestro, profeta, o iglesia posterior tiene el derecho de añadirle o quitarle. El mensaje tiene un solo Autor, y Él ya ha hablado."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "db84d14d3384"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "heading",
+   "text": {
+    "en": "From Persecutor to Preacher",
+    "es": "De Perseguidor a Predicador"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a3bd309a0134"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "prose",
+   "text": {
+    "en": "To prove his gospel was no human invention, Paul points to his own past: \"you have heard of my former conduct in Judaism, how I persecuted the church of God beyond measure and tried to destroy it. And I advanced in Judaism beyond many of my contemporaries... being more exceedingly zealous for the traditions of my fathers\" (Galatians 1:13-14). Here is the last man on earth who would have dreamed up a gospel of grace apart from the law. He had been the law's fiercest champion and the church's fiercest enemy. Something happened to him that he did not manufacture. \"But when it pleased God, who separated me from my mother's womb and called me through His grace, to reveal His Son in me, that I might preach Him among the Gentiles...\" (Galatians 1:15-16). Mark the words: God <em>separated</em> him, <em>called</em> him <em>through His grace</em>, and <em>revealed His Son in</em> him. Paul's apostleship, like his salvation, was a gift of grace, not a reward for zeal. The persecutor became a preacher only because grace laid hold of him.",
+    "es": "Para probar que su evangelio no era invención humana, Pablo señala su propio pasado: \"ya habéis oído acerca de mi conducta en otro tiempo en el judaismo, que perseguía sobremanera la iglesia de Dios, y la asolaba; y en el judaismo aventajaba a muchos de mis contemporáneos... siendo mucho más celoso de las tradiciones de mis padres\" (Gálatas 1:13-14). Aquí está el último hombre en la tierra que habría inventado un evangelio de gracia aparte de la ley. Había sido el más feroz campeón de la ley y el más feroz enemigo de la iglesia. Algo le sucedió que él no fabricó. \"Mas cuando plugo a Dios, que me apartó desde el vientre de mi madre, y me llamó por su gracia, revelar a su Hijo en mí, para que le predicase entre los gentiles...\" (Gálatas 1:15-16). Note las palabras: Dios lo <em>apartó</em>, lo <em>llamó</em> <em>por su gracia</em>, y <em>reveló a su Hijo en</em> él. El apostolado de Pablo, como su salvación, fue un don de gracia, no una recompensa por su celo. El perseguidor se hizo predicador solo porque la gracia se apoderó de él."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7de9c23b92f2"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "heading",
+   "text": {
+    "en": "Not From the Other Apostles",
+    "es": "No de los Otros Apóstoles"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "075fbab3ac02"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "Paul then traces his movements to show he did not run to Jerusalem to be trained: \"I did not immediately confer with flesh and blood, nor did I go up to Jerusalem to those who were apostles before me; but I went to Arabia, and returned again to Damascus\" (Galatians 1:16-17). Only after three years did he go up to Jerusalem, and even then briefly: \"I went up to Jerusalem to see Peter, and remained with him fifteen days. But I saw none of the other apostles except James, the Lord's brother\" (Galatians 1:18-19). Fifteen days with Peter is a visit, not a seminary. The churches of Judea did not even know his face; \"they were hearing only, 'He who formerly persecuted us now preaches the faith which he once tried to destroy.' And they glorified God in me\" (Galatians 1:23-24). Paul's point is not that he despised the other apostles — far from it — but that his gospel did not come from them. It came from Christ, independently, and yet it was the very same gospel they preached.",
+    "es": "Pablo entonces traza sus movimientos para mostrar que no corrió a Jerusalén a ser entrenado: \"no consulté en seguida con carne y sangre; ni subí a Jerusalén a los que eran apóstoles antes que yo; sino que fui a Arabia, y volví de nuevo a Damasco\" (Gálatas 1:16-17). Solo después de tres años subió a Jerusalén, y aun entonces brevemente: \"subí a Jerusalén para ver a Pedro, y permanecí con él quince días. Pero no vi a ningún otro de los apóstoles, sino a Jacobo el hermano del Señor\" (Gálatas 1:18-19). Quince días con Pedro es una visita, no un seminario. Las iglesias de Judea ni siquiera conocían su rostro; \"solamente habían oído decir: Aquel que en otro tiempo nos perseguía, ahora predica la fe que en otro tiempo asolaba. Y glorificaban a Dios en mí\" (Gálatas 1:23-24). El punto de Pablo no es que despreciara a los otros apóstoles — lejos de eso — sino que su evangelio no vino de ellos. Vino de Cristo, de manera independiente, y aun así era el mismísimo evangelio que ellos predicaban."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dafa1ca3a42"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "The gospel of grace came to Paul by revelation, not by committee. What God gave from heaven, no council on earth may amend.",
+    "es": "El evangelio de la gracia vino a Pablo por revelación, no por comité. Lo que Dios dio desde el cielo, ningún concilio en la tierra puede enmendar."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "65dc5879bb1b"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "heading",
+   "text": {
+    "en": "The Gospel Confirmed at Jerusalem",
+    "es": "El Evangelio Confirmado en Jerusalén"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "70a8659b8818"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "Fourteen years later Paul did go up to Jerusalem, by revelation, and laid before the leaders the gospel he preached among the Gentiles (Galatians 2:1-2). What happened there settled the matter. First, a test case: \"not even Titus who was with me, being a Greek, was compelled to be circumcised\" (Galatians 2:3). Titus was an uncircumcised Gentile believer, and the leaders did not require him to be circumcised in order to be accepted. Grace, not circumcision, was enough.",
+    "es": "Catorce años después Pablo sí subió a Jerusalén, por revelación, y expuso ante los líderes el evangelio que predicaba entre los gentiles (Gálatas 2:1-2). Lo que sucedió allí zanjó el asunto. Primero, un caso de prueba: \"ni aun Tito, que estaba conmigo, siendo griego, fue obligado a circuncidarse\" (Gálatas 2:3). Tito era un creyente gentil incircunciso, y los líderes no exigieron que se circuncidara para ser aceptado. La gracia, no la circuncisión, era suficiente."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "66f16c0a2abe"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "But there was opposition: \"false brethren secretly brought in (who came in by stealth to spy out our liberty which we have in Christ Jesus, that they might bring us into bondage), to whom we did not yield submission even for an hour, that the truth of the gospel might continue with you\" (Galatians 2:4-5). Here are the Judaizers again, wanting to add the law to grace and so drag free people back into slavery. Paul would not give in — not for a single hour — because the truth of the gospel itself was on the line. This is the Unit 1 principle in action: where grace alone is at stake, there is no room for compromise.",
+    "es": "Pero hubo oposición: \"los falsos hermanos introducidos a escondidas, que entraban secretamente para espiar nuestra libertad que tenemos en Cristo Jesús, para reducirnos a esclavitud; a los cuales ni por una hora cedimos en sujeción, para que la verdad del evangelio permaneciese con vosotros\" (Gálatas 2:4-5). Aquí están de nuevo los judaizantes, queriendo añadir la ley a la gracia y así arrastrar a gente libre de vuelta a la esclavitud. Pablo no cedería — ni por una sola hora — porque la verdad del evangelio mismo estaba en juego. Esto es el principio de la Unidad 1 en acción: donde la gracia sola está en juego, no hay lugar para el compromiso."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f4f15797dc85"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "heading",
+   "text": {
+    "en": "They Added Nothing",
+    "es": "Nada Añadieron"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "59a46b84decf"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "And what did the great men of Jerusalem do? \"Those who seemed to be something added nothing to me\" (Galatians 2:6). They did not correct Paul's gospel or fasten requirements onto it. Instead, seeing the grace that was given to him, the pillars — James, Cephas (Peter), and John — \"gave me and Barnabas the right hand of fellowship, that we should go to the Gentiles and they to the circumcised\" (Galatians 2:9). One gospel, recognized by all; only the mission fields were divided. Their single request was tender and telling: \"that we should remember the poor, the very thing which I also was eager to do\" (Galatians 2:10). The apostles added nothing to the gospel because the gospel of grace needs nothing added. To add to it is not to improve it but to destroy it.",
+    "es": "¿Y qué hicieron los grandes hombres de Jerusalén? \"Los que parecían ser algo... nada nuevo me comunicaron\" (Gálatas 2:6). No corrigieron el evangelio de Pablo ni le sujetaron requisitos. Más bien, viendo la gracia que le había sido dada, los pilares — Jacobo, Cefas (Pedro), y Juan — \"nos dieron a mí y a Bernabé la diestra de compañerismo, para que nosotros fuésemos a los gentiles, y ellos a la circuncisión\" (Gálatas 2:9). Un solo evangelio, reconocido por todos; solo los campos de misión fueron divididos. Su única petición fue tierna y reveladora: \"que nos acordásemos de los pobres; lo mismo que yo también procuré con diligencia hacer\" (Gálatas 2:10). Los apóstoles nada añadieron al evangelio porque el evangelio de la gracia no necesita que se le añada nada. Añadirle no es mejorarlo sino destruirlo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "aac86c17b7d1"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "So Unit 2 plants a second post beside the first. In Unit 1 we learned <em>what</em> the gospel is and that it must not be changed. Here we learn <em>where</em> it comes from: not from men, but from God by revelation, and confirmed — not corrected — by the apostles themselves. This is why the gospel of grace stands above every teacher, every council, and every age. When we carry the test of Galatians 1 into the units ahead, we are not holding up a standard of our own making. We are holding up the gospel God gave from heaven and the apostles received with the right hand of fellowship.",
+    "es": "Así que la Unidad 2 planta un segundo poste junto al primero. En la Unidad 1 aprendimos <em>qué</em> es el evangelio y que no debe cambiarse. Aquí aprendemos <em>de dónde</em> viene: no de hombres, sino de Dios por revelación, y confirmado — no corregido — por los apóstoles mismos. Por eso el evangelio de la gracia está por encima de todo maestro, todo concilio, y toda época. Cuando llevemos la prueba de Gálatas 1 a las unidades por venir, no estamos levantando una norma de nuestra propia hechura. Estamos levantando el evangelio que Dios dio desde el cielo y que los apóstoles recibieron con la diestra de compañerismo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2ac0cc513ab3"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "scripture",
+   "text": {
+    "en": "\"...to whom we did not yield submission even for an hour, that the truth of the gospel might continue with you.\" — Galatians 2:5 (NKJV)",
+    "es": "\"...a los cuales ni por una hora cedimos en sujeción, para que la verdad del evangelio permaneciese con vosotros.\" — Gálatas 2:5 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6560ce398f3b"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "Unit 2 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 2 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "345cc83595a9"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33593c268178"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

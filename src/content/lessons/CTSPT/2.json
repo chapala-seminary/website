@@ -1,0 +1,446 @@
+{
+ "course": "CTSPT",
+ "unit": 2,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<a href=\"index.html\" style=\"display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif\">📚 Catalog / Catálogo</a>\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"prevUnitBtn\">← Previous</button>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\">Next →</button>\n    </div>\n</div>\n<div class=\"lang-toggle-group\" role=\"group\" aria-label=\"Language\">\n  <button data-lang=\"en\" class=\"active\">English</button>\n  <button data-lang=\"es\">Español</button>\n  <button data-lang=\"both\">Both / Ambos</button>\n</div>\n<span id=\"trackBadgeSlot\"></span>\n\n<div id=\"regWarn\" class=\"reg-warn hidden\">\n  <span class=\"lang-en\"><!--cts:b001:en--></span>\n  <span class=\"lang-es\"><!--cts:b001:es--></span>\n</div>\n<div id=\"regModal\" class=\"reg-modal hidden\" role=\"dialog\" aria-labelledby=\"regModalTitle\">\n  <div class=\"reg-modal-inner\">\n    <h2 id=\"regModalTitle\"><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n    <label><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></label>\n    <input type=\"text\" id=\"regName\" placeholder=\"\" autocomplete=\"name\" aria-label=\"regName\">\n    <label><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></label>\n    <input type=\"email\" id=\"regEmail\" placeholder=\"\" autocomplete=\"email\" aria-label=\"regEmail\">\n    <label><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></label>\n    <div class=\"track-options\">\n      <label><input type=\"radio\" name=\"regTrack\" value=\"cert\" checked> <span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></label>\n      <label><input type=\"radio\" name=\"regTrack\" value=\"mdiv\"> <span class=\"lang-en\"><!--cts:b008:en--></span><span class=\"lang-es\"><!--cts:b008:es--></span></label>\n      <label><input type=\"radio\" name=\"regTrack\" value=\"thm\"> <span class=\"lang-en\"><!--cts:b009:en--></span><span class=\"lang-es\"><!--cts:b009:es--></span></label>\n    </div>\n    <p style=\"font-size:0.82rem; color:#6b5236; font-style:italic; margin-top:8px;\">\n      <span class=\"lang-en\"><!--cts:b010:en--></span>\n      <span class=\"lang-es\"><!--cts:b010:es--></span>\n    </p>\n    <button id=\"regSaveBtn\" type=\"button\"><span class=\"lang-en\"><!--cts:b011:en--></span><span class=\"lang-es\"><!--cts:b011:es--></span></button>\n  </div>\n</div>\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b012:en--></span><span class=\"lang-es\"><!--cts:b012:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b013:en--></span><span class=\"lang-es\"><!--cts:b013:es--></span></p>\n</div>\n\n<div class=\"card\" id=\"teachingContent\">\n    <div class=\"lang-en\">\n        <h2><!--cts:b014:en--></h2>\n        <p><!--cts:b015:en--></p>\n\n        <h2><!--cts:b016:en--></h2>\n        <p><!--cts:b017:en--></p>\n\n        <h2><!--cts:b018:en--></h2>\n        <p><!--cts:b019:en--></p>\n\n        <h2><!--cts:b020:en--></h2>\n        <p><!--cts:b021:en--></p>\n\n        <h2><!--cts:b022:en--></h2>\n        <p><!--cts:b023:en--></p>\n\n        <h2><!--cts:b024:en--></h2>\n        <p><!--cts:b025:en--></p>\n    </div>\n    <div class=\"lang-es\">\n        <h2><!--cts:b014:es--></h2>\n        <p><!--cts:b015:es--></p>\n\n        <h2><!--cts:b016:es--></h2>\n        <p><!--cts:b017:es--></p>\n\n        <h2><!--cts:b018:es--></h2>\n        <p><!--cts:b019:es--></p>\n\n        <h2><!--cts:b020:es--></h2>\n        <p><!--cts:b021:es--></p>\n\n        <h2><!--cts:b022:es--></h2>\n        <p><!--cts:b023:es--></p>\n\n        <h2><!--cts:b024:es--></h2>\n        <p><!--cts:b025:es--></p>\n    </div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b026:en--></span><span class=\"lang-es\"><!--cts:b026:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b027:en--></span><span class=\"lang-es\"><!--cts:b027:es--></span></p>\n    <div class=\"exam-status hidden\" id=\"examStatus\"></div>\n<div class=\"mc-section\" id=\"mcSection\">\n  <h3><span class=\"lang-en\"><!--cts:b028:en--></span><span class=\"lang-es\"><!--cts:b028:es--></span></h3>\n  <div id=\"mcContainer\"></div>\n</div>\n<div class=\"sa-section\" id=\"saSection\">\n  <h3><span class=\"lang-en\"><!--cts:b029:en--></span><span class=\"lang-es\"><!--cts:b029:es--></span></h3>\n  <p class=\"sa-note\"><span class=\"lang-en\" id=\"saNoteEn\"></span><span class=\"lang-es\" id=\"saNoteEs\"></span></p>\n  <div id=\"kwContainer\"></div>\n</div>\n<div style=\"margin-top: 20px;\">\n  <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b030:en--></span><span class=\"lang-es\"><!--cts:b030:es--></span></button>\n  <button id=\"resetExamBtn\" class=\"btn-reset\" type=\"button\"><span class=\"lang-en\"><!--cts:b031:en--></span><span class=\"lang-es\"><!--cts:b031:es--></span></button>\n  <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n</div>\n</div>\n</div>\n\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSPTReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "⚠ Please register your name to receive credit for this unit. <button class=\"small\" id=\"openRegBtn\" type=\"button\">Register</button>",
+    "es": "⚠ Por favor registre su nombre para recibir crédito por esta unidad. <button class=\"small\" id=\"openRegBtn2\" type=\"button\">Registrar</button>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "300bfc92ba6e"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "Welcome to Practical Theology",
+    "es": "Bienvenido a la Teología Práctica"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8cc34b7da46f"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "Before you begin this unit, please enter your name and select your track. This information is stored only in your browser and is shared across all CTS courses.",
+    "es": "Antes de comenzar esta unidad, por favor ingrese su nombre y seleccione su vía. Esta información se guarda solo en su navegador y es compartida entre todos los cursos del CTS."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4efe49cf1f65"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "Full name",
+    "es": "Nombre completo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "eeb692087d62"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "Email (optional)",
+    "es": "Correo electrónico (opcional)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5c10b588a954"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Track",
+    "es": "Vía"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b1c5a7af06ba"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Certificate",
+    "es": "Certificado"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "10de46b3b341"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "M.Div",
+    "es": "M.Div"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "621c580e3436"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "Th.M.",
+    "es": "Th.M."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c7ffb710c525"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate:</strong> Multiple-choice only, 90% to pass each unit. <strong>M.Div / Th.M.:</strong> Multiple-choice + short-answer, both at 90%.",
+    "es": "<strong>Certificado:</strong> Solo opción múltiple, 90% para aprobar cada unidad. <strong>M.Div / Th.M.:</strong> Opción múltiple + respuesta corta, ambas al 90%."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "431989696561"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Save and Continue",
+    "es": "Guardar y Continuar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "49a2b0fecc60"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "🌱 Practical Theology — Unit 2: Walking with God",
+    "es": "🌱 Teología Práctica — Unidad 2: Andar con Dios"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "66289e3167a0"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professors:</strong> Dr. Wayne Cook &amp; Dr. Ted Rogers",
+    "es": "<strong>Profesores:</strong> Dr. Wayne Cook y Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1d25859271ef"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "heading",
+   "text": {
+    "en": "Introduction: The Oldest Description of a Godly Life",
+    "es": "Introducción: La Descripción Más Antigua de una Vida Piadosa"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "85c037ecb05d"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "The Bible's oldest and most beautiful description of a godly life is very simple: it says that a man <em>walked with God</em>. Before there were churches or seminaries or programs, there were men who simply walked with God, day by day. To walk with God is the very heart of the Christian life, and it is the soil out of which every other discipline in this course grows. If we do not learn to walk with Him, all our devotion and prayer and study will be only machinery. So we begin here, and ask two questions: what does it mean to walk with God, and how do we do it?",
+    "es": "La descripción más antigua y más hermosa de una vida piadosa en la Biblia es muy sencilla: dice que un hombre <em>caminó con Dios</em>. Antes de que hubiera iglesias o seminarios o programas, hubo hombres que sencillamente caminaron con Dios, día tras día. Andar con Dios es el corazón mismo de la vida cristiana, y es la tierra de la cual crece toda otra disciplina de este curso. Si no aprendemos a andar con Él, toda nuestra devoción y oración y estudio serán solo maquinaria. Así que comenzamos aquí, y hacemos dos preguntas: ¿qué significa andar con Dios, y cómo lo hacemos?"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0286af3fbd74"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "heading",
+   "text": {
+    "en": "I. Men Who Walked with God",
+    "es": "I. Hombres Que Caminaron con Dios"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9655c1bf994f"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "The phrase first appears with Enoch: <em>\"And Enoch walked with God; and he was not, for God took him\"</em> (Genesis 5:24, NKJV). His fellowship with God was so close that one day God simply took him home without death. It appears again with Noah: in a generation so corrupt that God was grieved He had made man, <em>\"Noah was a just man, perfect in his generations. Noah walked with God\"</em> (Genesis 6:9, NKJV) — and that walk preserved him and his house through the flood. And God said to Abraham, <em>\"I am Almighty God; walk before Me and be blameless\"</em> (Genesis 17:1, NKJV). The phrase runs all through Scripture, and it means this: to walk with God is to live one's whole life in His company.",
+    "es": "La frase aparece primero con Enoc: <em>\"Caminó, pues, Enoc con Dios, y desapareció, porque le llevó Dios\"</em> (Génesis 5:24, RVG). Su comunión con Dios era tan estrecha que un día Dios sencillamente lo llevó a casa sin pasar por la muerte. Aparece de nuevo con Noé: en una generación tan corrupta que Dios se dolió de haber hecho al hombre, <em>\"Noé, varón justo, era perfecto en sus generaciones; con Dios caminó Noé\"</em> (Génesis 6:9, RVG) — y ese caminar lo preservó a él y a su casa a través del diluvio. Y Dios dijo a Abraham: <em>\"Yo soy el Dios Todopoderoso; anda delante de mí, y sé perfecto\"</em> (Génesis 17:1, RVG). La frase recorre toda la Escritura, y significa esto: andar con Dios es vivir toda la vida en su compañía."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8e6302bb5c39"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "heading",
+   "text": {
+    "en": "II. What It Means to Walk with God",
+    "es": "II. Qué Significa Andar con Dios"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "52647f19957e"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "First, walking with God means <em>agreement</em>. The prophet asks, <em>\"Can two walk together, unless they are agreed?\"</em> (Amos 3:3, NKJV). Two men cannot walk the same road in step unless they have agreed to go the same way at the same pace. To walk with God, then, is to come into agreement with Him — to want what He wants and to go where He goes, rather than asking Him to follow our path. Second, it means <em>continual fellowship</em>. It is not one hour on Sunday or a prayer in a crisis, but a steady companionship through the ordinary day, the way two friends talk as they walk the same road. Third, it means <em>obedience</em>. John writes, <em>\"if we walk in the light as He is in the light\"</em> (1 John 1:7, NKJV) we have fellowship with Him. We cannot walk with God and walk in sin at the same time; the walk requires that we keep turning from darkness to light.",
+    "es": "Primero, andar con Dios significa <em>acuerdo</em>. El profeta pregunta: <em>\"¿Andarán dos juntos, si no estuvieren de acuerdo?\"</em> (Amós 3:3, RVG). Dos hombres no pueden caminar el mismo camino al mismo paso si no han acordado ir por la misma vía. Andar con Dios, entonces, es ponerse de acuerdo con Él — querer lo que Él quiere e ir adonde Él va, en lugar de pedirle que siga nuestro camino. Segundo, significa <em>comunión continua</em>. No es una hora el domingo ni una oración en una crisis, sino una compañía constante a través del día ordinario, como dos amigos que conversan mientras caminan el mismo camino. Tercero, significa <em>obediencia</em>. Juan escribe que <em>\"si andamos en luz, como él está en luz\"</em> (1 Juan 1:7, RVG) tenemos comunión con Él. No podemos andar con Dios y andar en pecado al mismo tiempo; el caminar requiere que sigamos volviéndonos de las tinieblas a la luz."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5bcc4de1de4f"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "heading",
+   "text": {
+    "en": "III. Abiding in Christ",
+    "es": "III. Permanecer en Cristo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7da0f8b12168"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "In the New Testament the Lord Jesus gave this walk a deeper name: <em>abiding</em>. <em>\"Abide in Me, and I in you. As the branch cannot bear fruit of itself, unless it abides in the vine, neither can you, unless you abide in Me… for without Me you can do nothing\"</em> (John 15:4–5, NKJV). To abide is to draw our very life from Christ, moment by moment, the way a branch draws its sap from the vine. Cut off from the vine, the branch withers and bears nothing; joined to it, the same branch bears much fruit. This is the great secret of walking with God: it is not striving harder in our own strength, but staying close to the Source of all strength. Apart from Him we can do nothing; in Him we can bear much fruit.",
+    "es": "En el Nuevo Testamento el Señor Jesús dio a este caminar un nombre más profundo: <em>permanecer</em>. <em>\"Permaneced en mí, y yo en vosotros. Como el pámpano no puede llevar fruto de sí mismo, si no permaneciere en la vid, así ni vosotros, si no permaneciereis en mí… porque sin mí nada podéis hacer\"</em> (Juan 15:4–5, RVG). Permanecer es sacar nuestra vida misma de Cristo, momento a momento, como el pámpano saca su savia de la vid. Cortada de la vid, la rama se seca y no lleva nada; unida a ella, esa misma rama lleva mucho fruto. Este es el gran secreto de andar con Dios: no es esforzarse más en nuestra propia fuerza, sino mantenerse cerca de la Fuente de toda fuerza. Sin Él nada podemos hacer; en Él podemos llevar mucho fruto."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c556ff774a09"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "heading",
+   "text": {
+    "en": "IV. A Daily Walk",
+    "es": "IV. Un Caminar Diario"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "35176373b130"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "A walk is made of steps — one after another, day after day. No one walks a long journey in a single stride, and no one walks with God by one great experience. We walk with Him by a thousand small, faithful steps: rising in the morning to meet Him, listening for Him in His Word, speaking to Him in prayer, obeying Him in the small decisions of the day, and returning to Him quickly whenever we stumble. The prophet Micah gathered it all into one sentence: the Lord requires us <em>\"to do justly, to love mercy, and to walk humbly with your God\"</em> (Micah 6:8, NKJV). The walk is humble, it is steady, and it is daily.",
+    "es": "Un caminar está hecho de pasos — uno tras otro, día tras día. Nadie camina un largo viaje en una sola zancada, y nadie anda con Dios por una sola gran experiencia. Andamos con Él por mil pasos pequeños y fieles: levantándonos por la mañana para encontrarnos con Él, escuchándolo en su Palabra, hablándole en oración, obedeciéndolo en las pequeñas decisiones del día, y volviendo a Él pronto cada vez que tropezamos. El profeta Miqueas lo reunió todo en una sola frase: el Señor requiere de nosotros <em>\"solamente hacer justicia, y amar misericordia, y humillarte ante tu Dios\"</em> (Miqueas 6:8, RVG). El caminar es humilde, es constante, y es diario."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b61aba6f0853"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "heading",
+   "text": {
+    "en": "Conclusion",
+    "es": "Conclusión"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e39262defe80"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "Every discipline we will study in this course — daily devotion, prayer, the Word, fellowship and accountability — exists to serve this one thing: that we might walk with God. Enoch walked with God in his generation; Noah walked with God in his; and the same God who walked with them invites us to walk with Him in ours. The question for each of us is simply this: are we walking with God, day by day? And if our walk has grown distant, the way back is always open — one step, today, toward Him.",
+    "es": "Toda disciplina que estudiaremos en este curso — la devoción diaria, la oración, la Palabra, la comunión y la rendición de cuentas — existe para servir a esta sola cosa: que andemos con Dios. Enoc caminó con Dios en su generación; Noé caminó con Dios en la suya; y el mismo Dios que caminó con ellos nos invita a andar con Él en la nuestra. La pregunta para cada uno de nosotros es sencillamente esta: ¿estamos andando con Dios, día tras día? Y si nuestro caminar se ha alejado, el camino de regreso siempre está abierto — un paso, hoy, hacia Él."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d8020683ee7a"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "Unit 2 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 2 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "345cc83595a9"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "<em><strong>Certificate track:</strong> 20 multiple-choice questions, 90% (18 of 20) to pass. <strong>M.Div track:</strong> 20 MC + 10 short-answer, both at 90% independently. Each MC scores immediately when you click. MC must be passed before SA scores count. A failure locks the relevant section for 15 minutes; if you have already passed MC, only SA locks after an SA fail.</em>",
+    "es": "<em><strong>Vía Certificado:</strong> 20 preguntas de opción múltiple, 90% (18 de 20) para aprobar. <strong>Vía M.Div:</strong> 20 OM + 10 respuesta corta, ambas al 90% independientemente. Cada OM califica inmediatamente al hacer clic. Debe aprobar OM antes de que cuente la sección RC. Una reprobación bloquea la sección por 15 minutos; si ya aprobó OM, solo se bloquea RC tras un fallo de RC.</em>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d196052e364e"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "Multiple Choice — 20 Questions",
+    "es": "Opción Múltiple — 20 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9906bf28c27c"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "Short Answer — 10 Questions <span class=\"sa-badge\" id=\"saBadgeEn\"></span>",
+    "es": "Respuesta Corta — 10 Preguntas <span class=\"sa-badge\" id=\"saBadgeEs\"></span>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b1d858341328"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

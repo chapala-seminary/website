@@ -1,0 +1,544 @@
+{
+ "course": "CTSBibleCharacters",
+ "unit": 9,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Unit 10 →</button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #2f4f2f;\"><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\">\n    <h2><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n    <input type=\"text\" id=\"regName\" placeholder=\"Full name / Nombre completo\" aria-label=\"Full name / Nombre completo\">\n    <input type=\"email\" id=\"regEmail\" placeholder=\"Email\" aria-label=\"Email\">\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate Track</option>\n        <option value=\"mdiv\">Master of Divinity (M.Div.) Track</option>\n        <option value=\"thm\">Master of Theology (Th.M.) Track</option>\n    </select>\n    <button class=\"nav-btn\" id=\"regBtn\"><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\"><p><!--cts:b007:en--></p>\n<p><!--cts:b008:en--></p>\n<p><!--cts:b009:en--></p>\n<p><!--cts:b010:en--></p>\n<h2><!--cts:b011:en--></h2>\n<p><!--cts:b012:en--></p>\n<div class=\"scripture\"><!--cts:b013:en--></div>\n<p><!--cts:b014:en--></p>\n<p><!--cts:b015:en--></p>\n<h2><!--cts:b016:en--></h2>\n<p><!--cts:b017:en--></p>\n<div class=\"scripture\"><!--cts:b018:en--></div>\n<p><!--cts:b019:en--></p>\n<p><!--cts:b020:en--></p>\n<h2><!--cts:b021:en--></h2>\n<p><!--cts:b022:en--></p>\n<div class=\"scripture\"><!--cts:b023:en--></div>\n<p><!--cts:b024:en--></p>\n<p><!--cts:b025:en--></p>\n<h2><!--cts:b026:en--></h2>\n<p><!--cts:b027:en--></p>\n<div class=\"scripture\"><!--cts:b028:en--></div>\n<p><!--cts:b029:en--></p>\n<p><!--cts:b030:en--></p>\n<h2><!--cts:b031:en--></h2>\n<p><!--cts:b032:en--></p>\n<div class=\"scripture\"><!--cts:b033:en--></div>\n<p><!--cts:b034:en--></p></div>\n<div class=\"lang-es\"><p><!--cts:b007:es--></p>\n<p><!--cts:b008:es--></p>\n<p><!--cts:b009:es--></p>\n<p><!--cts:b010:es--></p>\n<h2><!--cts:b011:es--></h2>\n<p><!--cts:b012:es--></p>\n<div class=\"scripture\"><!--cts:b013:es--></div>\n<p><!--cts:b014:es--></p>\n<p><!--cts:b015:es--></p>\n<h2><!--cts:b016:es--></h2>\n<p><!--cts:b017:es--></p>\n<div class=\"scripture\"><!--cts:b018:es--></div>\n<p><!--cts:b019:es--></p>\n<p><!--cts:b020:es--></p>\n<h2><!--cts:b021:es--></h2>\n<p><!--cts:b022:es--></p>\n<div class=\"scripture\"><!--cts:b023:es--></div>\n<p><!--cts:b024:es--></p>\n<p><!--cts:b025:es--></p>\n<h2><!--cts:b026:es--></h2>\n<p><!--cts:b027:es--></p>\n<div class=\"scripture\"><!--cts:b028:es--></div>\n<p><!--cts:b029:es--></p>\n<p><!--cts:b030:es--></p>\n<h2><!--cts:b031:es--></h2>\n<p><!--cts:b032:es--></p>\n<div class=\"scripture\"><!--cts:b033:es--></div>\n<p><!--cts:b034:es--></p></div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b035:en--></span><span class=\"lang-es\"><!--cts:b035:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b036:en--></span>\n       <span class=\"lang-es\"><!--cts:b036:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b037:en--></span><span class=\"lang-es\"><!--cts:b037:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b038:en--></span><span class=\"lang-es\"><!--cts:b038:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSBibleCharactersReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "📖 Bible Characters — Unit 9: Hannah — The Praying Mother Who Gave Her Son to God",
+    "es": "📖 Personajes de la Biblia — Unidad 9: Ana — La Madre que Oró y Dio su Hijo a Dios"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "36840bc4ce6d"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "\"For this child I prayed, and the LORD has granted me my petition which I asked of Him.\" — 1 Samuel 1:27 (NKJV)",
+    "es": "«Por este niño oraba, y Jehová me dio lo que le pedí.» — 1 Samuel 1:27 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c57fa6b0d3dd"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "📝 Course Registration",
+    "es": "📝 Registro del Curso"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fde900fe006b"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "Please register before beginning this unit.",
+    "es": "Por favor regístrese antes de comenzar esta unidad."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6c8b91fbfb6f"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Tucked into the opening of First Samuel, at one of the lowest points in Israel's history, stands one of the most beautiful women of faith in all the Bible. Hannah is not a queen or a warrior; she is a heartbroken wife who could not have a child. Yet out of her tears and her prayers came a son who would change the nation, and from her lips came a song that the mother of our Lord would one day echo. Hannah teaches us how to pray when life is hard, how to surrender what we love most, and how to praise the God who lifts up the lowly and fills the empty. Hers is the story of a praying mother who gave her son back to God.",
+    "es": "En el comienzo de Primero de Samuel, en uno de los puntos más bajos de la historia de Israel, está una de las mujeres de fe más hermosas de toda la Biblia. Ana no es una reina ni una guerrera; es una esposa con el corazón quebrantado que no podía tener un hijo. Y sin embargo, de sus lágrimas y sus oraciones vino un hijo que cambiaría la nación, y de sus labios vino un cántico que la madre de nuestro Señor un día repetiría. Ana nos enseña cómo orar cuando la vida es dura, cómo entregar lo que más amamos, y cómo alabar al Dios que levanta al humilde y llena al vacío. La suya es la historia de una madre que oró y dio su hijo de vuelta a Dios."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "52c7258f43d8"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Subject:</strong> Hannah — the praying mother who gave her son back to God.",
+    "es": "<strong>Tema:</strong> Ana — la madre que oró y dio su hijo de vuelta a Dios."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "484b8d7d4958"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Proposition:</strong> In a hard place Hannah poured out her heart to God in humble, persistent, fervent prayer; God heard her, gave her a son, and she gave him back — and her praise overflowed, teaching us that God lifts up the lowly, and that the surrendered son of a praying mother became the prophet who anointed kings, in the line that leads to Christ.",
+    "es": "<strong>Proposición:</strong> En una prueba dura Ana derramó su corazón ante Dios en oración humilde, persistente y ferviente; Dios la oyó, le dio un hijo, y ella lo devolvió —y su alabanza se desbordó, enseñándonos que Dios levanta al humilde, y que el hijo entregado de una madre que ora llegó a ser el profeta que ungió reyes, en el linaje que lleva a Cristo—."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "260ff85a562b"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "We will trace five movements in the life of Hannah.",
+    "es": "Trazaremos cinco movimientos en la vida de Ana."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e9ec4c2f06be"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "heading",
+   "text": {
+    "en": "I. A Hard Place",
+    "es": "I. Una Prueba Dura"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5c6730ac6e3c"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "Hannah's story begins in a dark time and a hard home. The nation of Israel had fallen far from God; in the days of the judges everyone did what was right in his own eyes, and even the house of God was corrupt, for the aged priest Eli had wicked sons who stole the offerings and defiled the worship. Into that spiritually barren age came a personally barren woman. Hannah's husband, Elkanah, had taken two wives — Hannah, whom he loved, and Peninnah, who had children.",
+    "es": "La historia de Ana comienza en un tiempo oscuro y un hogar difícil. La nación de Israel se había alejado mucho de Dios; en los días de los jueces cada uno hacía lo que bien le parecía, y aun la casa de Dios estaba corrompida, porque el anciano sacerdote Elí tenía hijos malvados que robaban las ofrendas y profanaban la adoración. A aquella época espiritualmente estéril vino una mujer personalmente sin hijos. El esposo de Ana, Elcana, había tomado dos esposas —Ana, a quien amaba, y Penina, que tenía hijos—."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c4dc5261486e"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "scripture",
+   "text": {
+    "en": "And her rival also provoked her severely, to make her miserable... So it was, year by year... that she provoked her; therefore she wept and did not eat. (1 Samuel 1:6-7, NKJV)",
+    "es": "Y su rival la irritaba, enojándola y entristeciéndola... Y así hacía cada año... ella la irritaba; y Ana lloraba, y no comía. (1 Samuel 1:6-7, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "64c30eeab909"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "prose",
+   "text": {
+    "en": "Year after year Peninnah taunted and provoked Hannah over her childlessness, until Hannah wept and could not eat. Perhaps you know something of Hannah's hard place — a world that has drifted from God, a family that is far from ideal, a private grief that others cannot see. Do not despise that place. It may be the very soil in which God means to teach you to pray as Hannah prayed.",
+    "es": "Año tras año Penina se burlaba de Ana y la provocaba por su esterilidad, hasta que Ana lloraba y no podía comer. Quizá tú conoces algo de la prueba dura de Ana —un mundo que se ha alejado de Dios, una familia que está lejos de ser ideal, un dolor privado que otros no pueden ver—. No desprecies ese lugar. Puede ser el suelo mismo en el que Dios quiere enseñarte a orar como oró Ana."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "29f7bfeb43db"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "It is worth pausing on how God so often begins His greatest works in the most unlikely places. The Bible has a striking pattern of barren women — Sarah, Rebekah, Rachel, Hannah, and later Elizabeth — to whom God gave sons of destiny. He seems to delight in starting where there is no human possibility, so that when the gift comes everyone knows it was His doing and not ours. Hannah's empty arms were not a sign that God had forgotten her; they were the place where He was preparing to show His power. If you are in a season of waiting and lack, do not assume God is absent. The very emptiness you grieve may be the room He intends to fill.",
+    "es": "Vale la pena detenernos en cómo Dios tan a menudo comienza sus obras más grandes en los lugares más improbables. La Biblia tiene un patrón llamativo de mujeres estériles —Sara, Rebeca, Raquel, Ana, y después Elisabet— a quienes Dios dio hijos de destino. Parece deleitarse en comenzar donde no hay posibilidad humana, para que cuando venga el don todos sepan que fue obra suya y no nuestra. Los brazos vacíos de Ana no eran una señal de que Dios la había olvidado; eran el lugar donde Él se preparaba para mostrar su poder. Si estás en una temporada de espera y carencia, no supongas que Dios está ausente. El vacío mismo que lamentas puede ser el espacio que Él se propone llenar."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7d74e2b5a033"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "heading",
+   "text": {
+    "en": "II. Hannah's Prayer",
+    "es": "II. La Oración de Ana"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8aaa710a0918"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "In her anguish Hannah went up to the house of the Lord and poured out her soul. Notice how she prayed.",
+    "es": "En su angustia Ana subió a la casa de Jehová y derramó su alma. Note cómo oró."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "139f858ef891"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "scripture",
+   "text": {
+    "en": "No, my lord, I am a woman of sorrowful spirit... but have poured out my soul before the LORD... for out of the abundance of my complaint and grief I have spoken until now. (1 Samuel 1:15-16, NKJV)",
+    "es": "No, señor mío... soy una mujer atribulada de espíritu... he derramado mi alma delante de Jehová... porque por la multitud de mis congojas y de mi aflicción he hablado hasta ahora. (1 Samuel 1:15-16, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d40c4b7544d2"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "She prayed humbly. She did not come demanding her rights; she called herself the Lord's maidservant and simply asked that He would remember her. She was the opposite of the proud man in Jesus' parable who stood and thanked God that he was not like other men, and went home unheard; Hannah came low, and God lifted her up. She prayed persistently. This was no first attempt; year by year she had come, and now in bitterness of soul she prayed and wept and would not give up until God answered. The Lord Himself taught us to pray like this — to keep knocking, like the man at his neighbor's door at midnight, until the door is opened. And she prayed fervently. Hannah was so caught up in pouring out her heart that only her lips moved and no sound came, and old Eli, watching, actually thought she was drunk. One wonders how many of us have ever been so lost in prayer that someone might mistake our earnestness for intoxication. Then Hannah made a vow: if God would give her a son, she would give him back to the Lord all the days of his life. Eli blessed her, and Hannah went away and ate, and her face was no longer sad. She had left her burden with God.",
+    "es": "Oró con humildad. No vino exigiendo sus derechos; se llamó a sí misma la sierva del Señor y simplemente pidió que Él se acordara de ella. Era lo opuesto del hombre soberbio en la parábola de Jesús que se puso de pie y dio gracias a Dios de que no era como los demás hombres, y se fue a casa sin ser oído; Ana vino baja, y Dios la levantó. Oró con persistencia. Este no era un primer intento; año tras año había venido, y ahora con amargura de alma oraba y lloraba y no se daría por vencida hasta que Dios respondiera. El Señor mismo nos enseñó a orar así —a seguir llamando, como el hombre a la puerta de su vecino a la medianoche, hasta que la puerta se abra—. Y oró con fervor. Ana estaba tan absorta derramando su corazón que solo se movían sus labios y no salía sonido, y el viejo Elí, observando, de hecho pensó que estaba borracha. Uno se pregunta cuántos de nosotros hemos estado alguna vez tan perdidos en oración que alguien pudiera confundir nuestro fervor con embriaguez. Entonces Ana hizo un voto: si Dios le daba un hijo, lo daría de vuelta al Señor todos los días de su vida. Elí la bendijo, y Ana se fue y comió, y su rostro ya no estuvo triste. Había dejado su carga con Dios."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ada9391d6b53"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "There is a quiet but important moment at the end of Hannah's praying that we must not miss. After she had poured out her soul and made her vow, the Scripture says she went her way, and ate, and her face was no longer sad — and all of this before there was any sign that her prayer would be answered. Nothing had changed in her circumstances; she was still childless when she rose from her knees. What had changed was that she had truly handed her burden over to God. That is the mark of real prayer: not that we always get an immediate answer, but that we are able to leave the matter with the Lord and walk away lighter. Hannah teaches us that we can cast our care on Him and rise in peace, trusting Him with the outcome.",
+    "es": "Hay un momento callado pero importante al final de la oración de Ana que no debemos pasar por alto. Después de haber derramado su alma y hecho su voto, la Escritura dice que se fue por su camino, y comió, y su rostro ya no estuvo triste —y todo esto antes de que hubiera señal alguna de que su oración sería respondida—. Nada había cambiado en sus circunstancias; seguía sin hijos cuando se levantó de rodillas. Lo que había cambiado era que verdaderamente había entregado su carga a Dios. Esa es la marca de la oración verdadera: no que siempre recibamos una respuesta inmediata, sino que podamos dejar el asunto con el Señor y alejarnos más livianos. Ana nos enseña que podemos echar sobre Él nuestra ansiedad y levantarnos en paz, confiándole el resultado."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "67d66d76f3ea"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "heading",
+   "text": {
+    "en": "III. The Vow Kept and a Mother's Love",
+    "es": "III. El Voto Cumplido y el Amor de una Madre"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2a9974c94d44"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "And God remembered Hannah. In time she conceived and bore a son, and she named him Samuel, for she had asked him of the Lord. But Hannah did not forget her vow. Many of us, having made such a promise in a desperate hour, would quietly take it back — we would tell ourselves we were under stress and did not really mean it. Hannah kept her word.",
+    "es": "Y Dios se acordó de Ana. A su tiempo concibió y dio a luz un hijo, y lo llamó Samuel, porque lo había pedido a Jehová. Pero Ana no olvidó su voto. Muchos de nosotros, habiendo hecho tal promesa en una hora desesperada, calladamente la retiraríamos —nos diríamos que estábamos bajo presión y que en realidad no lo dijimos en serio—. Ana cumplió su palabra."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0556ef6090b1"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "scripture",
+   "text": {
+    "en": "For this child I prayed, and the LORD has granted me my petition which I asked of Him. Therefore I also have lent him to the LORD; as long as he lives he shall be lent to the LORD. (1 Samuel 1:27-28, NKJV)",
+    "es": "Por este niño oraba, y Jehová me dio lo que le pedí. Yo, pues, lo dedico también a Jehová; todos los días que viva, será de Jehová. (1 Samuel 1:27-28, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9696f79af328"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "When the boy was weaned, she brought him to Eli at the house of the Lord, with a sacrifice, and gave him back: \"For this child I prayed, and the Lord has granted my petition; therefore I have lent him to the Lord as long as he lives.\" Think of what that cost her — the very thing she had wept and prayed for through all those bitter years, she now placed into the hands of God and left at the tabernacle. Yet giving him up did not mean she stopped loving him. Every year, when the family went up to worship, Hannah brought Samuel a little coat that she had sewn with her own hands, and we may be sure she put love into every stitch; as he grew, each year she made him a larger one. Is that not just like a mother? She had surrendered her son to God, but her love followed him all his days. This is faith come full circle — to ask God for a gift, to receive it with joy, to give it back open-handed, and to go on loving in the giving.",
+    "es": "Cuando el niño fue destetado, lo trajo a Elí a la casa de Jehová, con un sacrificio, y lo dio de vuelta: \"Por este niño oraba, y Jehová me dio mi petición; por tanto, yo lo dedico a Jehová todos los días que viva.\" Piense en lo que eso le costó —la cosa misma por la que había llorado y orado durante todos aquellos años amargos, ahora la colocaba en las manos de Dios y la dejaba en el tabernáculo—. Sin embargo, entregarlo no significó que dejara de amarlo. Cada año, cuando la familia subía a adorar, Ana le traía a Samuel un pequeño abrigo que había cosido con sus propias manos, y podemos estar seguros de que puso amor en cada puntada; conforme él crecía, cada año le hacía uno más grande. ¿No es eso justo como una madre? Había entregado a su hijo a Dios, pero su amor lo siguió todos sus días. Esta es la fe llegada a su círculo completo —pedir a Dios un don, recibirlo con gozo, devolverlo con la mano abierta, y seguir amando en el dar—."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2d7e7a64e51c"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "Consider also what Hannah's faithfulness meant for the nation. Because one mother kept her word and gave her son to God, Israel received Samuel, the prophet who would call the whole people back to the Lord and anoint its first kings. We never know what God intends to do through the children we dedicate to Him. Hannah could not have seen the centuries of history that hung upon her quiet obedience at the tabernacle door. Parents today carry the same unseen significance: when we give our children to the Lord, pray over them, and raise them for His purposes, we may be placing into His hands a life He will use far beyond anything we could imagine. Faithfulness in the small, hidden duties of the home echoes down through generations.",
+    "es": "Considere también lo que la fidelidad de Ana significó para la nación. Porque una madre cumplió su palabra y dio su hijo a Dios, Israel recibió a Samuel, el profeta que llamaría a todo el pueblo de vuelta al Señor y ungiría a sus primeros reyes. Nunca sabemos lo que Dios se propone hacer por medio de los hijos que le dedicamos. Ana no pudo haber visto los siglos de historia que pendían de su callada obediencia a la puerta del tabernáculo. Los padres de hoy llevan la misma significancia invisible: cuando damos nuestros hijos al Señor, oramos por ellos y los criamos para sus propósitos, podemos estar colocando en sus manos una vida que Él usará mucho más allá de cualquier cosa que pudiéramos imaginar. La fidelidad en los deberes pequeños y ocultos del hogar resuena por generaciones."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "15c58d909260"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "heading",
+   "text": {
+    "en": "IV. Praise That Overflows",
+    "es": "IV. Alabanza que se Desborda"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4ebb2bff25a9"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "And here is the wonder: it was after Hannah gave her son away that she sang. Her great song in First Samuel 2 is not the giddy relief of a prayer just answered; it rises in the aftermath of surrender.",
+    "es": "Y aquí está la maravilla: fue después de que Ana dio a su hijo que cantó. Su gran cántico en Primero de Samuel 2 no es el alivio eufórico de una oración recién respondida; se eleva en las secuelas de la entrega."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9f1cfdd1c1dc"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "scripture",
+   "text": {
+    "en": "My heart rejoices in the LORD... There is none holy like the LORD, for there is none besides You, nor is there any rock like our God. (1 Samuel 2:1-2, NKJV)",
+    "es": "Mi corazón se regocija en Jehová... No hay santo como Jehová; porque no hay ninguno fuera de ti, y no hay refugio como el Dios nuestro. (1 Samuel 2:1-2, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "dbe988b0badf"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "\"My heart rejoices in the Lord,\" she begins, and then she sings of the God who turns the world upside down: \"The bows of the mighty men are broken, and those who stumbled are girded with strength... The Lord makes poor and makes rich; He brings low and lifts up. He raises the poor from the dust and lifts the beggar from the ash heap, to set them among princes.\" This is the heart of Hannah's faith and the lesson of her life: God exalts the lowly and casts down the proud; He fills the empty and humbles the full. So let me ask you what Hannah's life asks us all: does your praise overflow from the good you have had to let go? Anyone can thank God for what they receive; Hannah teaches a deeper thanksgiving — the praise that is born when we surrender to Him the thing we love most. Centuries later a young virgin named Mary would stand and sing almost the same song — \"He has put down the mighty from their thrones, and exalted the lowly\" — for the God of Hannah is the God of the Magnificat, and He had not changed.",
+    "es": "\"Mi corazón se regocija en Jehová,\" comienza, y luego canta del Dios que pone el mundo al revés: \"Los arcos de los fuertes fueron quebrados, y los débiles se ciñeron de poder... Jehová empobrece, y Él enriquece; abate, y ensalza. Él levanta del polvo al pobre, y al menesteroso alza del estiércol, para hacerlos sentar con los príncipes.\" Este es el corazón de la fe de Ana y la lección de su vida: Dios exalta al humilde y abate al soberbio; llena al vacío y humilla al lleno. Así que déjame preguntarte lo que la vida de Ana nos pregunta a todos: ¿se desborda tu alabanza del bien que has tenido que soltar? Cualquiera puede dar gracias a Dios por lo que recibe; Ana enseña una acción de gracias más profunda —la alabanza que nace cuando le entregamos la cosa que más amamos—. Siglos después una joven virgen llamada María se pondría de pie y cantaría casi el mismo cántico —\"quitó de los tronos a los poderosos, y levantó a los humildes\"— porque el Dios de Ana es el Dios del Magníficat, y Él no había cambiado."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a146a518f641"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "It is striking that Hannah's song hardly mentions her baby at all. We might have expected a new mother's lullaby, full of the child she had longed for; instead she sings almost entirely about God — His holiness, His power, His justice, His care for the weak. Her answered prayer had lifted her eyes off the gift and onto the Giver. This is the true direction of praise. Lesser thanksgiving stops at the blessing; mature thanksgiving runs past the blessing to the God who gave it. Hannah received a son and worshiped the Lord; she let the good thing point her to the best thing. May our own answered prayers do the same in us, turning every gift into a window through which we see and adore the God behind it.",
+    "es": "Es llamativo que el cántico de Ana apenas menciona a su bebé. Habríamos esperado la canción de cuna de una nueva madre, llena del niño que había anhelado; en cambio canta casi enteramente acerca de Dios —su santidad, su poder, su justicia, su cuidado por el débil—. Su oración respondida había levantado sus ojos del don al Dador. Esta es la verdadera dirección de la alabanza. La acción de gracias menor se detiene en la bendición; la acción de gracias madura corre más allá de la bendición hasta el Dios que la dio. Ana recibió un hijo y adoró al Señor; dejó que lo bueno la señalara a lo mejor. Que nuestras propias oraciones respondidas hagan lo mismo en nosotros, convirtiendo cada don en una ventana por la cual veamos y adoremos al Dios detrás de él."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "dfb01e73c617"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "heading",
+   "text": {
+    "en": "V. From a Surrendered Son to the King of Kings",
+    "es": "V. De un Hijo Entregado al Rey de reyes"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "19b7f5d3dd00"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "prose",
+   "text": {
+    "en": "The child Hannah gave back to God became Samuel, the last of the judges and the first of the prophets — the very bridge from the chaos of the judges to the kingdom of Israel. While he was still a boy ministering before Eli, the Lord called him by name in the night, and the child answered, \"Speak, for Your servant hears.\"",
+    "es": "El niño que Ana dio de vuelta a Dios llegó a ser Samuel, el último de los jueces y el primero de los profetas —el puente mismo del caos de los jueces al reino de Israel—. Cuando aún era un niño ministrando delante de Elí, el Señor lo llamó por su nombre en la noche, y el niño respondió: \"Habla, que tu siervo oye.\""
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cbd77ddefcd9"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "scripture",
+   "text": {
+    "en": "He will guard the feet of His saints... The LORD will judge the ends of the earth. He will give strength to His king, and exalt the horn of His anointed. (1 Samuel 2:9-10, NKJV)",
+    "es": "Él guarda los pies de sus santos... Jehová juzgará los confines de la tierra; Él dará poder a su rey, y exaltará el poder de su ungido. (1 Samuel 2:9-10, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5d9e4b43ef5e"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "prose",
+   "text": {
+    "en": "It was this same Samuel who would one day anoint Saul, and then David, the shepherd-king after God's own heart, from whose line the Messiah Himself would come. Do you see it? Hannah's surrendered son stands at the hinge of the whole story. The thread runs straight from a weeping woman's prayer to the throne of David and on to David's greater Son, Jesus Christ, the King of kings. And the God of Hannah's song is the God of the gospel — the God who lifts the lowly, fills the empty, and exalts the humble; who receives everyone who comes to Him empty-handed and low; who gave His own Son so that we might be lifted from the dust and set among princes. Hannah came to God with nothing but her tears and went away with a song. So may we. Pray in the hard place, as Hannah prayed — humbly, persistently, fervently. Surrender to God the very thing you love most, as Hannah gave back her son, and go on loving in the giving. And let your praise overflow, not only for what He gives, but for the joy of belonging to the God who lifts up the lowly and fills the empty with good things. For the same Lord who heard a barren woman's prayer hears yours, and the King who came at last from her son's anointing reigns forever.",
+    "es": "Fue este mismo Samuel quien un día ungiría a Saúl, y luego a David, el rey pastor conforme al corazón de Dios, de cuyo linaje vendría el Mesías mismo. ¿Lo ves? El hijo entregado de Ana está en el gozne de toda la historia. El hilo corre directo de la oración de una mujer que lloraba al trono de David y sigue hasta el Hijo mayor de David, Jesucristo, el Rey de reyes. Y el Dios del cántico de Ana es el Dios del evangelio —el Dios que levanta al humilde, llena al vacío y exalta al humilde; que recibe a todo el que viene a Él con las manos vacías y bajo; que dio a su propio Hijo para que nosotros fuéramos levantados del polvo y sentados con los príncipes—. Ana vino a Dios con nada sino sus lágrimas y se fue con un cántico. Así también nosotros. Ora en la prueba dura, como oró Ana —con humildad, con persistencia, con fervor—. Entrega a Dios la cosa misma que más amas, como Ana dio de vuelta a su hijo, y sigue amando en el dar. Y deja que tu alabanza se desborde, no solo por lo que Él da, sino por el gozo de pertenecer al Dios que levanta al humilde y llena de bienes al vacío. Porque el mismo Señor que oyó la oración de una mujer estéril oye la tuya, y el Rey que vino al fin del ungimiento de su hijo reina para siempre."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bd295c28e2f4"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "prose",
+   "text": {
+    "en": "Unit 9 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 9 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c78e1ede3819"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33593c268178"
+    }
+   }
+  },
+  {
+   "id": "b037",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b038",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

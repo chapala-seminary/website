@@ -1,0 +1,607 @@
+{
+ "course": "CTSBibleCharacters",
+ "unit": 1,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Unit 2 →</button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #2f4f2f;\"><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\">\n    <h2><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n    <input type=\"text\" id=\"regName\" placeholder=\"Full name / Nombre completo\" aria-label=\"Full name / Nombre completo\">\n    <input type=\"email\" id=\"regEmail\" placeholder=\"Email\" aria-label=\"Email\">\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate Track</option>\n        <option value=\"mdiv\">Master of Divinity (M.Div.) Track</option>\n        <option value=\"thm\">Master of Theology (Th.M.) Track</option>\n    </select>\n    <button class=\"nav-btn\" id=\"regBtn\"><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\"><p><!--cts:b007:en--></p>\n<p><!--cts:b008:en--></p>\n<p><!--cts:b009:en--></p>\n<p><!--cts:b010:en--></p>\n<h2><!--cts:b011:en--></h2>\n<p><!--cts:b012:en--></p>\n<div class=\"scripture\"><!--cts:b013:en--></div>\n<p><!--cts:b014:en--></p>\n<p><!--cts:b015:en--></p>\n<h2><!--cts:b016:en--></h2>\n<p><!--cts:b017:en--></p>\n<p><!--cts:b018:en--></p>\n<div class=\"scripture\"><!--cts:b019:en--></div>\n<p><!--cts:b020:en--></p>\n<div class=\"scripture\"><!--cts:b021:en--></div>\n<p><!--cts:b022:en--></p>\n<p><!--cts:b023:en--></p>\n<h2><!--cts:b024:en--></h2>\n<p><!--cts:b025:en--></p>\n<div class=\"scripture\"><!--cts:b026:en--></div>\n<p><!--cts:b027:en--></p>\n<p><!--cts:b028:en--></p>\n<h2><!--cts:b029:en--></h2>\n<p><!--cts:b030:en--></p>\n<div class=\"scripture\"><!--cts:b031:en--></div>\n<p><!--cts:b032:en--></p>\n<p><!--cts:b033:en--></p>\n<h2><!--cts:b034:en--></h2>\n<p><!--cts:b035:en--></p>\n<div class=\"scripture\"><!--cts:b036:en--></div>\n<p><!--cts:b037:en--></p>\n<p><!--cts:b038:en--></p>\n<p><!--cts:b039:en--></p></div>\n<div class=\"lang-es\"><p><!--cts:b007:es--></p>\n<p><!--cts:b008:es--></p>\n<p><!--cts:b009:es--></p>\n<p><!--cts:b010:es--></p>\n<h2><!--cts:b011:es--></h2>\n<p><!--cts:b012:es--></p>\n<div class=\"scripture\"><!--cts:b013:es--></div>\n<p><!--cts:b014:es--></p>\n<p><!--cts:b015:es--></p>\n<h2><!--cts:b016:es--></h2>\n<p><!--cts:b017:es--></p>\n<p><!--cts:b018:es--></p>\n<div class=\"scripture\"><!--cts:b019:es--></div>\n<p><!--cts:b020:es--></p>\n<div class=\"scripture\"><!--cts:b021:es--></div>\n<p><!--cts:b022:es--></p>\n<p><!--cts:b023:es--></p>\n<h2><!--cts:b024:es--></h2>\n<p><!--cts:b025:es--></p>\n<div class=\"scripture\"><!--cts:b026:es--></div>\n<p><!--cts:b027:es--></p>\n<p><!--cts:b028:es--></p>\n<h2><!--cts:b029:es--></h2>\n<p><!--cts:b030:es--></p>\n<div class=\"scripture\"><!--cts:b031:es--></div>\n<p><!--cts:b032:es--></p>\n<p><!--cts:b033:es--></p>\n<h2><!--cts:b034:es--></h2>\n<p><!--cts:b035:es--></p>\n<div class=\"scripture\"><!--cts:b036:es--></div>\n<p><!--cts:b037:es--></p>\n<p><!--cts:b038:es--></p></div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b040:en--></span><span class=\"lang-es\"><!--cts:b040:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b041:en--></span>\n       <span class=\"lang-es\"><!--cts:b041:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b042:en--></span><span class=\"lang-es\"><!--cts:b042:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b043:en--></span><span class=\"lang-es\"><!--cts:b043:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSBibleCharactersReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "📖 Bible Characters — Unit 1: Enoch — The Man Who Walked with God",
+    "es": "📖 Personajes de la Biblia — Unidad 1: Enoc — El Hombre que Caminó con Dios"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "dd5f0a474e54"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "\"And Enoch walked with God; and he was not, for God took him.\" — Genesis 5:24 (NKJV)",
+    "es": "«Caminó, pues, Enoc con Dios, y desapareció, porque le llevó Dios.» — Génesis 5:24 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0b40afbfd9b6"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "📝 Course Registration",
+    "es": "📝 Registro del Curso"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fde900fe006b"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "Please register before beginning this unit.",
+    "es": "Por favor regístrese antes de comenzar esta unidad."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6c8b91fbfb6f"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "When I was a boy I sometimes went with my grandfather to bring his cattle in from the pasture. As I hurried along he would say to me, \"Watch where you walk.\" In those rough fields, full of holes and hazards, it was good advice — and it is good advice for the whole Christian life, because the Bible has a great deal to say about how a person walks. Scripture says of only a few men that they walked with God: Adam in the garden, Noah in a corrupt world, and most remarkably Enoch, who walked so closely with the Lord that one day God simply took him home. Enoch is one of the quietest figures in the Bible; only a handful of verses speak of him. Yet his life preaches one of the loftiest lessons in all of Scripture: that an ordinary man may walk with God.",
+    "es": "Cuando era niño, a veces iba con mi abuelo a traer su ganado del campo. Mientras yo me apresuraba, él me decía: «Mira por dónde caminas». En aquellos campos ásperos, llenos de hoyos y peligros, era un buen consejo —y es un buen consejo para toda la vida cristiana, porque la Biblia tiene mucho que decir sobre cómo camina una persona—. La Escritura dice de solo unos pocos hombres que caminaron con Dios: Adán en el huerto, Noé en un mundo corrupto, y de manera más notable Enoc, que caminó tan de cerca con el Señor que un día Dios simplemente lo llevó a casa. Enoc es una de las figuras más calladas de la Biblia; solo un puñado de versículos hablan de él. Sin embargo, su vida predica una de las lecciones más elevadas de toda la Escritura: que un hombre común puede caminar con Dios."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8893ffcf1d0e"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Subject:</strong> Enoch — the man who walked with God.",
+    "es": "<strong>Tema:</strong> Enoc — el hombre que caminó con Dios."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9f8c5ff4baea"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Proposition:</strong> God invites ordinary people into a close, daily walk of fellowship with Him — a walk of faith that pleases God and leads safely home to His presence.",
+    "es": "<strong>Proposición:</strong> Dios invita a la gente común a un caminar cercano y diario de comunión con Él —un caminar de fe que agrada a Dios y conduce a salvo a su presencia—."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90d9ddfad339"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "We will trace five movements in the walk of Enoch.",
+    "es": "Trazaremos cinco movimientos en el caminar de Enoc."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "eb7be9fefbdc"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "heading",
+   "text": {
+    "en": "I. A Walk Begun",
+    "es": "I. Un Caminar Comenzado"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d681bf02cea9"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "The record of Enoch is brief, almost hidden in a long list of names and ages. But one phrase lifts him above all the rest.",
+    "es": "El relato de Enoc es breve, casi escondido en una larga lista de nombres y edades. Pero una frase lo levanta por encima de todos los demás."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5979c9f41d9f"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "scripture",
+   "text": {
+    "en": "Enoch lived sixty-five years, and begot Methuselah. After he begot Methuselah, Enoch walked with God three hundred years, and had sons and daughters. (Genesis 5:21-22, NKJV)",
+    "es": "Y vivió Enoc sesenta y cinco años, y engendró a Matusalén. Y caminó Enoc con Dios, después que engendró a Matusalén, trescientos años, y engendró hijos e hijas. (Génesis 5:21-22, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "698562863434"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "prose",
+   "text": {
+    "en": "Notice when his walk is recorded — after the birth of his son. Enoch did not learn to walk with God by escaping into a desert cave or a mountain monastery; he walked with God in the thick of ordinary life, raising children, working, carrying the weight of a household for three centuries. We sometimes imagine that a close walk with God belongs only to ministers and missionaries, to people with no ordinary cares. Enoch shatters that idea. The walk with God is for fathers and mothers, for working people, for anyone in the middle of an ordinary life who chooses, day after day, to take the path that keeps them near to God. As my grandfather said in the pasture, so God says over a whole life: watch where you walk.",
+    "es": "Note cuándo se registra su caminar —después del nacimiento de su hijo—. Enoc no aprendió a caminar con Dios escapando a una cueva en el desierto ni a un monasterio en la montaña; caminó con Dios en medio de la vida común, criando hijos, trabajando, llevando el peso de un hogar por tres siglos. A veces imaginamos que un caminar cercano con Dios pertenece solo a ministros y misioneros, a personas sin preocupaciones comunes. Enoc destroza esa idea. El caminar con Dios es para padres y madres, para los que trabajan, para cualquiera en medio de una vida común que escoge, día tras día, tomar el camino que lo mantiene cerca de Dios. Como decía mi abuelo en el campo, así dice Dios sobre toda una vida: mira por dónde caminas."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "aa4277fb119f"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "There is comfort in where Enoch's story is placed. He is not set apart on some lonely page reserved for giants and miracle-workers; he is tucked quietly into a genealogy, between a father and a son, among births and birthdays and the slow passing of years. That is exactly where most of us live. We are not promised mountaintop experiences every morning. We are given ordinary days — work to do, people to love, bills to pay, children to raise — and the question God puts to us in the middle of all of it is simply whether we will walk with Him through it. Enoch answered yes, and not for a day or a season but for three hundred years. The walk with God is not built in a single shining hour; it is built in the quiet faithfulness of ten thousand ordinary days, the kind of days you and I are living right now.",
+    "es": "Hay consuelo en el lugar donde se coloca la historia de Enoc. No está apartado en alguna página solitaria reservada para gigantes y obradores de milagros; está metido calladamente en una genealogía, entre un padre y un hijo, entre nacimientos y cumpleaños y el lento pasar de los años. Ahí es exactamente donde la mayoría de nosotros vivimos. No se nos prometen experiencias en la cima del monte cada mañana. Se nos dan días comunes —trabajo que hacer, gente que amar, cuentas que pagar, hijos que criar— y la pregunta que Dios nos pone en medio de todo ello es simplemente si caminaremos con Él a través de ello. Enoc respondió que sí, y no por un día ni una temporada sino por trescientos años. El caminar con Dios no se construye en una sola hora brillante; se construye en la fidelidad callada de diez mil días comunes, la clase de días que usted y yo vivimos ahora mismo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "486b9219ca0e"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "heading",
+   "text": {
+    "en": "II. A Walk of Agreement",
+    "es": "II. Un Caminar de Acuerdo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "47cb5441e755"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "To walk with someone is to go the same direction, at the same pace, in the same company. A walk with God, then, is not a vague feeling; it is a settled agreement to go His way.",
+    "es": "Caminar con alguien es ir en la misma dirección, al mismo paso, en la misma compañía. Un caminar con Dios, pues, no es un sentimiento vago; es un acuerdo firme de ir por su camino."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1b5d07799a89"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "There is warmth in this picture as well. To walk with someone is one of the most companionable things two people can do — side by side, in step, sharing the road and the conversation mile after mile. God might have demanded that we march in front of Him as servants, or grovel beneath Him as slaves who never lift their eyes. Instead He invites us to walk with Him, the way a friend walks with a friend. That is the astonishing tenderness hidden in the gospel: the holy God actually desires our company. Walking with God, then, is not first a list of rules to keep but a Person to know and a fellowship to enjoy. The rules matter, but they serve the relationship; they are simply how we keep in step with the Friend who is glad to have us beside Him on the road.",
+    "es": "Hay también calidez en esta imagen. Caminar con alguien es una de las cosas más amistosas que dos personas pueden hacer —lado a lado, al mismo paso, compartiendo el camino y la conversación milla tras milla—. Dios pudo haber exigido que marcháramos delante de Él como siervos, o que nos arrastráramos debajo de Él como esclavos que nunca levantan los ojos. En cambio, nos invita a caminar con Él, como un amigo camina con un amigo. Esa es la ternura asombrosa escondida en el evangelio: el Dios santo de veras desea nuestra compañía. Caminar con Dios, pues, no es primero una lista de reglas que guardar sino una Persona a quien conocer y una comunión que disfrutar. Las reglas importan, pero sirven a la relación; son simplemente cómo llevamos el paso del Amigo que se alegra de tenernos a su lado en el camino. Por eso Enoc no fue un esclavo temeroso sino un amigo cercano, y por eso su largo caminar nunca se volvió una carga."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a6ecccfbc422"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "scripture",
+   "text": {
+    "en": "Can two walk together, unless they are agreed? (Amos 3:3, NKJV)",
+    "es": "¿Andarán dos juntos, si no estuvieren de acuerdo? (Amós 3:3, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f59f0ad5bced"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "To walk with God is to agree with God — to keep step with Him rather than wander off on a path of our own choosing. The Bible says that in the end there are only two ways for anyone to walk: with God in the light, or away from Him in the darkness.",
+    "es": "Caminar con Dios es estar de acuerdo con Dios —llevar su paso en vez de desviarnos por un camino de nuestra propia elección—. La Biblia dice que al final solo hay dos maneras de caminar para cualquiera: con Dios en la luz, o lejos de Él en las tinieblas."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "58c02a946db4"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "scripture",
+   "text": {
+    "en": "If we say that we have fellowship with Him, and walk in darkness, we lie and do not practice the truth. But if we walk in the light as He is in the light, we have fellowship with one another, and the blood of Jesus Christ His Son cleanses us from all sin. (1 John 1:6-7, NKJV)",
+    "es": "Si decimos que tenemos comunión con él, y andamos en tinieblas, mentimos, y no practicamos la verdad. Pero si andamos en luz, como él está en luz, tenemos comunión unos con otros, y la sangre de Jesucristo su Hijo nos limpia de todo pecado. (1 Juan 1:6-7, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6fec1108226a"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "This is worth remembering, because walking with God is rarely one grand, heroic act. It is far more often a thousand small steps in the same direction — choosing His way over ours this morning, and again this afternoon, and again tomorrow. Enoch did not walk with God in a single dramatic leap; he walked three hundred years, one ordinary step at a time. That is how every long walk is made.",
+    "es": "Esto vale la pena recordar, porque caminar con Dios rara vez es un solo acto grandioso y heroico. Es mucho más a menudo mil pequeños pasos en la misma dirección —escogiendo su camino sobre el nuestro esta mañana, y otra vez esta tarde, y otra vez mañana—. Enoc no caminó con Dios en un solo salto dramático; caminó trescientos años, un paso común a la vez. Así se hace todo caminar largo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "79c819daf840"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "This also means that walking with God will cost us our independence. By nature we want to set our own course, choose our own pace, and answer to no one. But two cannot walk together unless they are agreed, and in this walk it is God who sets the direction. To walk with Him we must be willing to turn when He turns and to stop when He stops, surrendering the steering of our lives into His hands. That sounds like a loss, and in a sense it is — the loss of our own stubborn way. Yet it is the happiest loss a person can ever suffer, for it trades our short-sighted wandering for the sure footing of the One who never once loses the path. In the end, \"watch where you walk\" simply means: stay close behind the One who already knows the way home.",
+    "es": "Esto también significa que caminar con Dios nos costará nuestra independencia. Por naturaleza queremos fijar nuestro propio rumbo, escoger nuestro propio paso y no responderle a nadie. Pero dos no pueden andar juntos si no están de acuerdo, y en este caminar es Dios quien fija la dirección. Para caminar con Él debemos estar dispuestos a girar cuando Él gira y a detenernos cuando Él se detiene, entregando el timón de nuestra vida en sus manos. Eso suena como una pérdida, y en cierto sentido lo es —la pérdida de nuestro propio camino terco—. Sin embargo, es la pérdida más feliz que una persona puede sufrir, porque cambia nuestro vagar de vista corta por el paso firme de Aquel que nunca pierde el camino. Al final, «mira por dónde caminas» simplemente significa: mantente cerca detrás de Aquel que ya conoce el camino a casa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "de3f14442b3d"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "heading",
+   "text": {
+    "en": "III. A Walk of Faith That Pleases God",
+    "es": "III. Un Caminar de Fe que Agrada a Dios"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "83e923e16f2f"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "When the New Testament looks back at Enoch, it tells us the secret hidden inside his walk.",
+    "es": "Cuando el Nuevo Testamento mira atrás a Enoc, nos dice el secreto escondido dentro de su caminar."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "497fd1462685"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "scripture",
+   "text": {
+    "en": "By faith Enoch was taken away so that he did not see death... for before he was taken he had this testimony, that he pleased God. But without faith it is impossible to please Him. (Hebrews 11:5-6, NKJV)",
+    "es": "Por la fe Enoc fue traspuesto para no ver muerte... y antes que fuese traspuesto, tuvo testimonio de haber agradado a Dios. Pero sin fe es imposible agradar a Dios. (Hebreos 11:5-6, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0bd2ae61b34b"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "Two things shine out of these verses. First, the aim of Enoch's whole life was to please God — not to please the crowd, not to please himself, but God. There is a quiet greatness in a life with that single goal. Second, the means of pleasing God was faith. We cannot walk with a God we will not trust; every step of the walk is a step of faith, believing that He is, and that He rewards those who diligently seek Him. The walk with God and the life of faith are not two things but one. Enoch teaches us that the way to please God is not to impress Him with our performance but to trust Him with our lives.",
+    "es": "Dos cosas brillan en estos versículos. Primera, el objetivo de toda la vida de Enoc era agradar a Dios —no agradar a la multitud, no agradarse a sí mismo, sino a Dios—. Hay una grandeza callada en una vida con esa sola meta. Segunda, el medio para agradar a Dios era la fe. No podemos caminar con un Dios en quien no confiamos; cada paso del caminar es un paso de fe, creyendo que Él es, y que recompensa a los que diligentemente le buscan. El caminar con Dios y la vida de fe no son dos cosas sino una. Enoc nos enseña que la manera de agradar a Dios no es impresionarlo con nuestro desempeño sino confiarle nuestra vida."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2d4f18bc95e5"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "We should not pass too quickly over that small word \"pleased.\" It is a tender thing to read that a man's life pleased God — that the Almighty looked down on one ordinary human walk and was glad of it. We so often picture God as hard to satisfy, forever scanning our lives for faults. Yet here is a God who takes real pleasure in the faith of His people. He was not waiting to catch Enoch in a misstep; He was delighting to walk beside him. The same is true for us. When we trust Him and keep step with Him, we are not merely tolerated or endured — we actually bring joy to the heart of God. That is reason enough to keep walking, even on the gray days when the walk feels small, ordinary, and entirely unseen by anyone else.",
+    "es": "No debemos pasar demasiado rápido sobre esa pequeña palabra «agradado». Es algo tierno leer que la vida de un hombre agradó a Dios —que el Todopoderoso miró un caminar humano común y se alegró de él—. Tan a menudo imaginamos a Dios como difícil de satisfacer, escudriñando para siempre nuestra vida en busca de faltas. Sin embargo, aquí hay un Dios que se complace de veras en la fe de su pueblo. No estaba esperando atrapar a Enoc en un paso en falso; se deleitaba en caminar a su lado. Lo mismo es cierto para nosotros. Cuando confiamos en Él y llevamos su paso, no somos meramente tolerados ni soportados —en realidad llevamos gozo al corazón de Dios—. Eso es razón suficiente para seguir caminando, aun en los días grises cuando el caminar se siente pequeño, común y enteramente invisible para los demás."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a96edb58b367"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "heading",
+   "text": {
+    "en": "IV. A Walk Against the Current",
+    "es": "IV. Un Caminar Contra la Corriente"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2b14e6eb544d"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "Enoch's walk is all the more remarkable because of when he lived. He walked with God in the generations just before the Flood — an age so corrupt that God would soon judge the whole earth with water. And Enoch did not merely keep quiet; he spoke against the ungodliness of his day.",
+    "es": "El caminar de Enoc es aún más notable por la época en que vivió. Caminó con Dios en las generaciones justo antes del Diluvio —una época tan corrupta que Dios pronto juzgaría toda la tierra con agua—. Y Enoc no solo guardó silencio; habló contra la impiedad de su día."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f66d88eab339"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "scripture",
+   "text": {
+    "en": "Now Enoch... prophesied about these men also, saying, \"Behold, the Lord comes with ten thousands of His saints, to execute judgment on all.\" (Jude 14-15, NKJV)",
+    "es": "Y de éstos también profetizó Enoc... diciendo: He aquí, el Señor viene con sus santos millares, a hacer juicio contra todos. (Judas 14-15, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9e913567268c"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "prose",
+   "text": {
+    "en": "He walked with God while the entire world was walking away from Him. There is great encouragement in this, for we too live in a day that largely walks away from God. Enoch proves that a person can keep close company with the Lord even when surrounded by those who will not. We do not need the crowd's permission, and we need not wait for the world to change direction. Walking with God has always been the path of the few, and it has always been open to anyone willing to take the next step with Him, whatever everyone else is doing.",
+    "es": "Caminó con Dios mientras el mundo entero caminaba lejos de Él. Hay gran aliento en esto, porque nosotros también vivimos en un día que en su mayoría camina lejos de Dios. Enoc prueba que una persona puede mantener compañía cercana con el Señor aun rodeada de quienes no lo harán. No necesitamos el permiso de la multitud, ni debemos esperar a que el mundo cambie de rumbo. Caminar con Dios siempre ha sido el camino de los pocos, y siempre ha estado abierto a cualquiera dispuesto a dar el siguiente paso con Él, sin importar lo que hagan todos los demás."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "094ba200195b"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "It helps to remember that Enoch was not a hero armed with special powers; he was a man like us who simply refused to drift. Drifting is the natural motion of the soul — we slide toward the world's direction without ever quite deciding to, the way a boat with no oar is carried downstream by a current it never notices. Enoch did not drift. Day after day he set himself, against the current, to stay near to God. And that is within the reach of any believer. We may not be able to change the age we happen to live in, but by grace we can refuse to be swept along by it, taking one deliberate step after another in God's direction while the whole world floats the other way. The current is strong, but a single soul anchored to God can stand against it.",
+    "es": "Ayuda recordar que Enoc no era un héroe armado con poderes especiales; era un hombre como nosotros que simplemente se negó a dejarse llevar. Dejarse llevar es el movimiento natural del alma —nos deslizamos hacia la dirección del mundo sin decidirlo del todo, como un bote sin remo es arrastrado río abajo por una corriente que nunca nota—. Enoc no se dejó llevar. Día tras día se dispuso, contra la corriente, a mantenerse cerca de Dios. Y eso está al alcance de cualquier creyente. Quizá no podamos cambiar la época en que nos toca vivir, pero por gracia podemos negarnos a ser arrastrados por ella, dando un paso deliberado tras otro en la dirección de Dios mientras el mundo entero flota hacia el otro lado. La corriente es fuerte, pero una sola alma anclada a Dios puede resistirla."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9e5e92645f7c"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "heading",
+   "text": {
+    "en": "V. A Walk That Leads Home",
+    "es": "V. Un Caminar que Conduce a Casa"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0f445de60896"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "prose",
+   "text": {
+    "en": "And where does such a walk lead? Enoch's walk had a destination unlike any other in his chapter. Five times in Genesis 5 a refrain tolls like a funeral bell over each name: \"and he died... and he died... and he died.\" But not over Enoch.",
+    "es": "¿Y a dónde conduce semejante caminar? El caminar de Enoc tuvo un destino distinto a cualquier otro en su capítulo. Cinco veces en Génesis 5 un estribillo dobla como campana de funeral sobre cada nombre: «y murió... y murió... y murió». Pero no sobre Enoc."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "62f1a366b190"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "scripture",
+   "text": {
+    "en": "And Enoch walked with God; and he was not, for God took him. (Genesis 5:24, NKJV)",
+    "es": "Y caminó Enoc con Dios, y desapareció, porque le llevó Dios. (Génesis 5:24, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b75cbd0b095b"
+    }
+   }
+  },
+  {
+   "id": "b037",
+   "type": "prose",
+   "text": {
+    "en": "Enoch did not die; God simply took him home, as He would later take Elijah in the whirlwind. His walk with God on earth did not stop at a grave — it stepped straight into the presence of God. That is the direction in which every true walk with God is heading: homeward, toward Him. The fellowship begun on earth is not broken by death but completed in glory.",
+    "es": "Enoc no murió; Dios simplemente lo llevó a casa, como más tarde llevaría a Elías en el torbellino. Su caminar con Dios en la tierra no se detuvo en una tumba —pasó directamente a la presencia de Dios—. Esa es la dirección hacia la que se dirige todo verdadero caminar con Dios: a casa, hacia Él. La comunión comenzada en la tierra no es rota por la muerte sino completada en gloria."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e4c6ec04e73a"
+    }
+   }
+  },
+  {
+   "id": "b038",
+   "type": "prose",
+   "text": {
+    "en": "What hope this gives to everyone who walks with God. The world looks at the long parade of human lives and sees only one ending repeated without mercy — \"and he died,\" over and over, with no exceptions allowed. But Enoch stands in that very chapter as God's quiet promise that death does not have the final word over those who walk with Him. The believer's road does not dead-end at a grave; it opens, on the far side, straight into the presence of the God we have been walking with all along. For the one who walks with God, death is not a wall but a doorway, and on the other side of it is home.",
+    "es": "Y aquí está el evangelio que hace posible semejante caminar. No comenzamos a caminar con Dios para ganar nuestro regreso a Él; nunca podríamos cerrar por nuestra cuenta la distancia que nuestro pecado ha abierto. Caminamos con Dios porque Cristo primero nos acercó. Él es el camino; caminar con Dios es, para nosotros, caminar con Cristo —que nos reconcilió con Dios por su cruz y ahora camina con nosotros por su Espíritu—. El caminar es comenzado, continuado y terminado por gracia, recibido por la fe, la misma fe que agradó a Dios en Enoc. Así que la vida de este hombre callado clama a cada uno de nosotros. Camina con Dios —en los días comunes, de acuerdo con su camino, por una fe que le agrada, contra la corriente de una época impía— y ese caminar te conducirá, tan ciertamente como condujo a Enoc, todo el camino a casa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "19ef3f62ebd2"
+    }
+   }
+  },
+  {
+   "id": "b039",
+   "type": "prose",
+   "text": {
+    "en": "And here is the gospel that makes such a walk possible at all. We do not begin to walk with God in order to earn our way back to Him; we could never close on our own the distance that our sin has opened. We walk with God because Christ has first brought us near. He is the way; to walk with God is, for us, to walk with Christ — who reconciled us to God by His cross and now walks with us by His Spirit. The walk is begun, continued, and finished by grace, received through faith, the very faith that pleased God in Enoch. So this quiet man's life calls out to every one of us. Walk with God — in the ordinary days, in agreement with His way, by a faith that pleases Him, against the current of an ungodly age — and that walk will lead you, as surely as it led Enoch, all the way home."
+   }
+  },
+  {
+   "id": "b040",
+   "type": "prose",
+   "text": {
+    "en": "Unit 1 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 1 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "eeba1211d031"
+    }
+   }
+  },
+  {
+   "id": "b041",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33593c268178"
+    }
+   }
+  },
+  {
+   "id": "b042",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b043",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

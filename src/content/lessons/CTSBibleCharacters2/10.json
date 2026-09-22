@@ -1,0 +1,460 @@
+{
+ "course": "CTSBibleCharacters2",
+ "unit": 10,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Unit 11 →</button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #2f4f2f;\"><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\">\n    <h2><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n    <input type=\"text\" id=\"regName\" placeholder=\"Full name / Nombre completo\" aria-label=\"Full name / Nombre completo\">\n    <input type=\"email\" id=\"regEmail\" placeholder=\"Email\" aria-label=\"Email\">\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate Track</option>\n        <option value=\"mdiv\">Master of Divinity (M.Div.) Track</option>\n        <option value=\"thm\">Master of Theology (Th.M.) Track</option>\n    </select>\n    <button class=\"nav-btn\" id=\"regBtn\"><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\"><p><!--cts:b007:en--></p><p><!--cts:b008:en--></p><p><!--cts:b009:en--></p><p><!--cts:b010:en--></p><h2><!--cts:b011:en--></h2><p><!--cts:b012:en--></p><div class=\"scripture\"><!--cts:b013:en--></div><p><!--cts:b014:en--></p><h2><!--cts:b015:en--></h2><p><!--cts:b016:en--></p><div class=\"scripture\"><!--cts:b017:en--></div><p><!--cts:b018:en--></p><div class=\"scripture\"><!--cts:b019:en--></div><p><!--cts:b020:en--></p><h2><!--cts:b021:en--></h2><p><!--cts:b022:en--></p><div class=\"scripture\"><!--cts:b023:en--></div><p><!--cts:b024:en--></p><h2><!--cts:b025:en--></h2><p><!--cts:b026:en--></p><p><!--cts:b027:en--></p><p><!--cts:b028:en--></p></div>\n<div class=\"lang-es\"><p><!--cts:b007:es--></p><p><!--cts:b008:es--></p><p><!--cts:b009:es--></p><p><!--cts:b010:es--></p><h2><!--cts:b011:es--></h2><p><!--cts:b012:es--></p><div class=\"scripture\"><!--cts:b013:es--></div><p><!--cts:b014:es--></p><h2><!--cts:b015:es--></h2><p><!--cts:b016:es--></p><div class=\"scripture\"><!--cts:b017:es--></div><p><!--cts:b018:es--></p><div class=\"scripture\"><!--cts:b019:es--></div><p><!--cts:b020:es--></p><h2><!--cts:b021:es--></h2><p><!--cts:b022:es--></p><div class=\"scripture\"><!--cts:b023:es--></div><p><!--cts:b024:es--></p><h2><!--cts:b025:es--></h2><p><!--cts:b026:es--></p><p><!--cts:b027:es--></p><p><!--cts:b028:es--></p></div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b029:en--></span><span class=\"lang-es\"><!--cts:b029:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b030:en--></span>\n       <span class=\"lang-es\"><!--cts:b030:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b031:en--></span><span class=\"lang-es\"><!--cts:b031:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b032:en--></span><span class=\"lang-es\"><!--cts:b032:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSBibleCharacters2Readings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "📖 Bible Characters II — Unit 10: Mary Magdalene — From Grief at the Tomb to the First Witness of the Risen Christ",
+    "es": "📖 Personajes de la Biblia II — Unidad 10: María Magdalena — Del Dolor en el Sepulcro a la Primera Testigo del Cristo Resucitado"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "231618f38c89"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "\"Jesus said to her, 'Mary!' She turned and said to Him, 'Rabboni!'\" — John 20:16 (NKJV)",
+    "es": "«Jesús le dijo: ¡María! Volviéndose ella, le dijo: ¡Raboni!» — Juan 20:16 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3b198f301ac1"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "📝 Course Registration",
+    "es": "📝 Registro del Curso"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fde900fe006b"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "Please register before beginning this unit.",
+    "es": "Por favor regístrese antes de comenzar esta unidad."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6c8b91fbfb6f"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "On the first Easter morning, the first person to see the risen Lord Jesus was not Peter, nor John, nor any of the twelve. It was a woman named Mary Magdalene, who came to the tomb in tears and went away in worship. Her story is the story of what the resurrection does to a human heart: the risen Christ turns weeping into worship, and the One who calls us by name takes our grief away.",
+    "es": "En la primera mañana de Pascua, la primera persona en ver al Señor Jesús resucitado no fue Pedro, ni Juan, ni ninguno de los doce. Fue una mujer llamada María Magdalena, que vino al sepulcro entre lágrimas y se fue en adoración. Su historia es la historia de lo que la resurrección hace a un corazón humano: el Cristo resucitado convierte el llanto en adoración, y Aquél que nos llama por nuestro nombre nos quita el dolor."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "973746c086aa"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Subject:</strong> Mary Magdalene — from grief at the tomb to the first witness of the risen Christ.",
+    "es": "<strong>Tema:</strong> María Magdalena — del dolor en el sepulcro a la primera testigo del Cristo resucitado."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e5a64d1a54d3"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Proposition:</strong> The risen Christ turns weeping into worship; the One who calls us by name takes our grief away.",
+    "es": "<strong>Proposición:</strong> El Cristo resucitado convierte el llanto en adoración; Aquél que nos llama por nuestro nombre nos quita el dolor."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bcfaffe1e079"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "First, let us be clear who she is. This is Mary Magdalene — not Mary the mother of Jesus, and not Mary of Bethany, the sister of Lazarus. The Bible tells us that she was a woman out of whom the Lord had cast seven demons (Luke 8:2). Whatever darkness had once held her, Jesus had set her completely free, and she never forgot it. She became one of the women who followed Jesus and supported His ministry out of their own means (Luke 8:1-3). When most of the disciples had fled in fear, Mary stood near the cross and watched her Lord die, and she watched to see where His body was laid (Mark 15:40, 47). And while it was still dark on the first day of the week, she was the first to come to the tomb. We will follow her through three movements.",
+    "es": "Primero, dejemos claro quién es ella. Esta es María Magdalena —no María la madre de Jesús, y no María de Betania, la hermana de Lázaro—. La Biblia nos dice que era una mujer de la cual el Señor había echado siete demonios (Lucas 8:2). Cualquiera que fuera la oscuridad que una vez la había dominado, Jesús la había librado por completo, y ella nunca lo olvidó. Llegó a ser una de las mujeres que seguían a Jesús y sostenían su ministerio con sus propios bienes (Lucas 8:1-3). Cuando la mayoría de los discípulos habían huido de miedo, María estuvo junto a la cruz y vio morir a su Señor, y observó dónde fue puesto su cuerpo (Marcos 15:40, 47). Y cuando aún estaba oscuro el primer día de la semana, ella fue la primera en venir al sepulcro. La seguiremos a través de tres movimientos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8f5be39b5769"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "heading",
+   "text": {
+    "en": "I. The Grief",
+    "es": "I. El Dolor"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e14cb034518a"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "Mary came to the tomb expecting to find a dead body to anoint, and instead she found the stone rolled away and the grave empty. To her this could mean only one terrible thing: someone had taken the body of her Lord. She did not yet believe in the resurrection; the thought never entered her mind. In fact she had already run to tell Simon Peter and John, \"They have taken away the Lord, and we do not know where they have laid Him.\" The two disciples raced to the tomb, saw the empty grave-clothes, and went back to their homes. But Mary could not leave. Love held her there at the graveside when everyone else had gone. So she stood outside the tomb, weeping. Stooping down to look inside, she saw two angels in white, sitting where the body of Jesus had lain.",
+    "es": "María vino al sepulcro esperando hallar un cuerpo muerto para ungir, y en cambio halló la piedra removida y la tumba vacía. Para ella esto solo podía significar una cosa terrible: alguien se había llevado el cuerpo de su Señor. Todavía no creía en la resurrección; el pensamiento jamás entró en su mente. De hecho, ella ya había corrido a decir a Simón Pedro y a Juan: «Se han llevado al Señor, y no sabemos dónde le han puesto». Los dos discípulos corrieron al sepulcro, vieron los lienzos vacíos, y volvieron a sus casas. Pero María no podía irse. El amor la retuvo allí junto a la tumba cuando todos los demás se habían ido. Así que se quedó fuera del sepulcro, llorando. Inclinándose para mirar adentro, vio a dos ángeles vestidos de blanco, sentados donde había estado el cuerpo de Jesús."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "68b90e1f8c6d"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "scripture",
+   "text": {
+    "en": "\"Woman, why are you weeping?\" She said to them, \"Because they have taken away my Lord, and I do not know where they have laid Him.\" (John 20:13, NKJV)",
+    "es": "«Mujer, ¿por qué lloras?» Ella les dijo: «Porque se han llevado a mi Señor, y no sé dónde le han puesto.» (Juan 20:13, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "af89df4c7b26"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "prose",
+   "text": {
+    "en": "Here is grief layered upon grief. It was not enough that they had crucified Him; now, she believed, they had even robbed Him of a resting place. Her state was one of trembling sorrow and fear, and she could not see past her tears. How often we are just like her — standing in the very presence of resurrection hope, yet so blinded by our weeping that we cannot see it.",
+    "es": "Aquí hay dolor sobre dolor. No bastaba que lo hubieran crucificado; ahora, creía ella, hasta le habían robado un lugar de reposo. Su estado era de trémula tristeza y temor, y no podía ver más allá de sus lágrimas. Cuán a menudo somos como ella —de pie en la misma presencia de la esperanza de resurrección, y sin embargo tan cegados por nuestro llanto que no podemos verla—."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "55e87a0d9aeb"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "heading",
+   "text": {
+    "en": "II. The Turning",
+    "es": "II. El Giro"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fb40a623cdd7"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "Then something made her turn around.",
+    "es": "Entonces algo la hizo volverse."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6f4105201c50"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "scripture",
+   "text": {
+    "en": "Now when she had said this, she turned around and saw Jesus standing there, and did not know that it was Jesus. (John 20:14, NKJV)",
+    "es": "Y habiendo dicho esto, se volvió, y vio a Jesús que estaba allí; mas no sabía que era Jesús. (Juan 20:14, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2cb6e5496d03"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "She supposed Him to be the gardener. Through her tears she did not recognize the very One she was looking for. \"Sir,\" she said, \"if You have carried Him away, tell me where You have laid Him, and I will take Him away.\" She was ready to carry the body herself, this woman who loved Him so. And then the Lord Jesus spoke a single word — her own name.",
+    "es": "Lo supuso ser el hortelano. A través de sus lágrimas no reconoció al mismo que buscaba. «Señor», dijo, «si tú lo has llevado, dime dónde lo has puesto, y yo lo llevaré.» Estaba dispuesta a cargar el cuerpo ella misma, esta mujer que tanto lo amaba. Y entonces el Señor Jesús pronunció una sola palabra —su propio nombre—."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f91f7f955f20"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "scripture",
+   "text": {
+    "en": "Jesus said to her, \"Mary!\" She turned and said to Him, \"Rabboni!\" (which is to say, Teacher). (John 20:16, NKJV)",
+    "es": "Jesús le dijo: «¡María!» Volviéndose ella, le dijo: «¡Raboni!» (que quiere decir, Maestro). (Juan 20:16, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c3cd957be720"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "One word, and everything changed. He did not preach her a sermon; He simply spoke her name, and in the sound of that beloved voice she knew Him at once. Grief became adoring worship in a single heartbeat. \"Rabboni!\" she cried — my Teacher, my Master. So overwhelmed was she that she took hold of Him, unwilling ever to let Him go again. But Jesus gently said, \"Do not cling to Me, for I have not yet ascended to My Father\" (John 20:17). She did not need to hold Him with her hands; He would be with her in a deeper and more lasting way than before. The risen Christ was not a ghost or a vision but her living Lord, the same Jesus she had followed, now triumphant over death. This is exactly what the Lord had said of Himself: the Good Shepherd \"calls his own sheep by name and leads them out\" (John 10:3). She knew His voice because she belonged to Him. The risen Christ still does this; He comes to His own in the middle of their sorrow and calls them by name, and the tears that blinded them are wiped away by the sight of His face.",
+    "es": "Una palabra, y todo cambió. No le predicó un sermón; simplemente pronunció su nombre, y en el sonido de aquella voz amada lo reconoció de inmediato. El dolor se volvió adoración en un solo latido. «¡Raboni!», clamó —mi Maestro, mi Señor—. Tan abrumada estaba que se asió de Él, sin querer dejarlo ir jamás de nuevo. Pero Jesús dijo con ternura: «No me toques, porque aún no he subido a mi Padre» (Juan 20:17). No necesitaba retenerlo con sus manos; Él estaría con ella de una manera más profunda y duradera que antes. El Cristo resucitado no era un fantasma ni una visión sino su Señor vivo, el mismo Jesús a quien había seguido, ahora triunfante sobre la muerte. Esto es exactamente lo que el Señor había dicho de sí mismo: el buen Pastor «a sus ovejas llama por nombre, y las saca» (Juan 10:3). Ella conoció su voz porque le pertenecía. El Cristo resucitado todavía hace esto; viene a los suyos en medio de su tristeza y los llama por nombre, y las lágrimas que los cegaban son enjugadas por la vista de su rostro."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6db8986304b2"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "heading",
+   "text": {
+    "en": "III. The Witness",
+    "es": "III. La Testigo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f9891a127ef6"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "There was one thing more. Mary Magdalene was not only the first to see the risen Lord; she was the first to be sent to tell the good news.",
+    "es": "Había una cosa más. María Magdalena no solo fue la primera en ver al Señor resucitado; fue la primera en ser enviada a anunciar las buenas nuevas."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "06aa7a7fd78e"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "scripture",
+   "text": {
+    "en": "Jesus said to her, \"Go to My brethren and say to them, 'I am ascending to My Father and your Father, and to My God and your God.'\" (John 20:17, NKJV)",
+    "es": "Jesús le dijo: «Ve a mis hermanos, y diles: Subo a mi Padre y a vuestro Padre, a mi Dios y a vuestro Dios.» (Juan 20:17, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3caefabd70af"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "The first preacher of the resurrection was this woman whose life Christ had completely remade. She ran to the disciples with the greatest announcement the world had ever heard: \"I have seen the Lord!\" The resurrection had changed everything for her, and it would soon change everything for them. There is a quiet wonder in this. In that day the testimony of a woman was given little weight, yet God chose a woman to be the very first herald of the resurrection. The Lord who had cast seven demons out of her now entrusted to her the greatest news in history. This is how Christ honors the lowly and the redeemed: He lifts up those the world overlooks and sends them out as His witnesses.",
+    "es": "La primera predicadora de la resurrección fue esta mujer cuya vida Cristo había rehecho por completo. Corrió a los discípulos con el más grande anuncio que el mundo jamás había oído: «¡He visto al Señor!». La resurrección lo había cambiado todo para ella, y pronto lo cambiaría todo para ellos. Hay una callada maravilla en esto. En aquel tiempo el testimonio de una mujer tenía poco peso, y sin embargo Dios escogió a una mujer para ser la primerísima heraldo de la resurrección. El Señor que había echado siete demonios de ella ahora le confiaba las más grandes nuevas de la historia. Así honra Cristo a los humildes y a los redimidos: levanta a los que el mundo pasa por alto y los envía como sus testigos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d8fa9f7fc08f"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "heading",
+   "text": {
+    "en": "The Fact That Changes Lives",
+    "es": "El Hecho que Cambia Vidas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fbeaf84de48c"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "This is the heart of the whole matter. The resurrection of Jesus Christ is not a comforting legend; it is a fact, and it is a fact that changes lives. The apostle Peter would later stand before thousands and declare, \"This Jesus God has raised up, of which we are all witnesses\" (Acts 2:32). Paul would write down the gospel in its simplest form: \"Christ died for our sins according to the Scriptures, and that He was buried, and that He rose again the third day according to the Scriptures\" (1 Corinthians 15:3-4), and he listed the many eyewitnesses who saw the risen Christ alive. Paul even staked the whole of the faith on it: if Christ is not risen, he said, then our preaching is empty and our faith is futile, and we are still in our sins. But Christ is risen indeed, and because He lives, all who belong to Him will live also. The empty tomb is the cornerstone of everything we believe and the guarantee of everything we hope for; it is the reason the gospel is good news at all. What the empty tomb took from Mary Magdalene was her grief; what it gave her was the living Christ. This is the difference between religion and the gospel. Religion can admire a dead teacher and keep his memory; only the gospel can introduce you to a Savior who is alive. Mary did not go home with a memory; she went home having seen the Lord.",
+    "es": "Este es el corazón de todo el asunto. La resurrección de Jesucristo no es una leyenda reconfortante; es un hecho, y es un hecho que cambia vidas. El apóstol Pedro más tarde se pararía ante miles y declararía: «A este Jesús resucitó Dios, de lo cual todos nosotros somos testigos» (Hechos 2:32). Pablo escribiría el evangelio en su forma más sencilla: «Cristo murió por nuestros pecados, conforme a las Escrituras; y que fue sepultado, y que resucitó al tercer día, conforme a las Escrituras» (1 Corintios 15:3-4), y enumeró a los muchos testigos oculares que vieron vivo al Cristo resucitado. Pablo incluso apostó toda la fe en ello: si Cristo no ha resucitado, dijo, entonces nuestra predicación es vana y nuestra fe es vana, y aún estamos en nuestros pecados. Pero Cristo ha resucitado verdaderamente, y porque Él vive, todos los que le pertenecen también vivirán. La tumba vacía es la piedra angular de todo lo que creemos y la garantía de todo lo que esperamos; es la razón por la que el evangelio es buenas nuevas en absoluto. Lo que la tumba vacía le quitó a María Magdalena fue su dolor; lo que le dio fue el Cristo vivo. Esta es la diferencia entre la religión y el evangelio. La religión puede admirar a un maestro muerto y guardar su memoria; solo el evangelio puede presentarte a un Salvador que está vivo. María no se fue a casa con un recuerdo; se fue a casa habiendo visto al Señor."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4338a4bd4d85"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "There was once a man in a faraway British colony who had heard only of the death of Jesus, only of the cross. Moved by the sufferings of the crucified Christ, he wore a black armband to mark himself a follower of the One who had died. He carried his sorrow about as a kind of devotion, until one day he heard a sermon on the resurrection — and learned for the first time that his Lord was not dead and buried at all, but alive and risen. He took off the black armband then, and he never put it on again. Why should he mourn a Savior who lives?",
+    "es": "Hubo una vez un hombre en una lejana colonia británica que solo había oído de la muerte de Jesús, solo de la cruz. Conmovido por los sufrimientos del Cristo crucificado, llevaba un brazalete negro para marcarse como seguidor de Aquél que había muerto. Cargaba su tristeza como una especie de devoción, hasta que un día oyó un sermón sobre la resurrección —y supo por primera vez que su Señor no estaba muerto y sepultado en absoluto, sino vivo y resucitado—. Se quitó entonces el brazalete negro, y nunca más se lo volvió a poner. ¿Por qué habría de lamentar a un Salvador que vive?"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3697de5aaef3"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "That is the difference the empty tomb makes. We do not serve a dead teacher whose grave we visit; we serve a living Lord who walks with us still. When Mary turned that morning, she turned from a tomb to a Person, from death to life, from weeping to worship. And the Lord who called her by name knows your name too. Whatever grief has you standing blinded by your tears, the risen Christ is nearer than you think, ready to speak your name and turn your mourning into joy. Mary's cry of \"Rabboni!\" is the cry of every heart that has met the living Lord — and it can be yours. This is where the whole story of every believer begins: not at a grave to be mourned, but at an empty tomb and a living Savior who speaks our name. The same power that raised Him will one day raise all who are His, and wipe away every tear from their eyes.",
+    "es": "Esa es la diferencia que hace la tumba vacía. No servimos a un maestro muerto cuya tumba visitamos; servimos a un Señor vivo que aún camina con nosotros. Cuando María se volvió aquella mañana, se volvió de una tumba a una Persona, de la muerte a la vida, del llanto a la adoración. Y el Señor que la llamó por nombre conoce también tu nombre. Cualquiera que sea el dolor que te tiene de pie cegado por tus lágrimas, el Cristo resucitado está más cerca de lo que piensas, listo para pronunciar tu nombre y convertir tu lamento en gozo. El clamor de María, «¡Raboni!», es el clamor de todo corazón que ha encontrado al Señor vivo —y puede ser el tuyo—. Aquí es donde comienza toda la historia de cada creyente: no en una tumba que lamentar, sino en un sepulcro vacío y un Salvador vivo que pronuncia nuestro nombre. El mismo poder que lo resucitó un día resucitará a todos los que son suyos, y enjugará toda lágrima de sus ojos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "64a0902cba22"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "Unit 10 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 10 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c3864158a03c"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33593c268178"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

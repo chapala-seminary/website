@@ -1,0 +1,726 @@
+{
+ "course": "CTSEvangelism",
+ "unit": 5,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <button class=\"nav-btn\" id=\"prevUnitBtn\">← <span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></button>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\"><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span> →</button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></a>\n<button class=\"clear-btn\" id=\"clearDataBtn\">🗑 <span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></button>\n\n<div class=\"card\">\n    <h1>\n        <span class=\"lang-en\"><!--cts:b005:en--></span>\n        <span class=\"lang-es\"><!--cts:b005:es--></span>\n    </h1>\n    <p class=\"attribution\">\n        <span class=\"lang-en\"><!--cts:b006:en--></span>\n        <span class=\"lang-es\"><!--cts:b006:es--></span>\n    </p>\n    <div id=\"trackBanner\" class=\"track-banner\" style=\"display:none;\"></div>\n</div>\n\n<!-- CTS audit 2026-05-23: registration panel removed. Registration happens once on Unit 1.\n     Later units read the saved student/track from localStorage (cts_student / cts_track).\n     If none is saved, the student silently defaults to the Certificate track (per Wayne). -->\n\n<div class=\"card\" id=\"teachingContent\">\n    <div class=\"lang-en\">\n        <h2><!--cts:b007:en--></h2>\n        <p><!--cts:b008:en--></p>\n        <p><!--cts:b009:en--></p>\n\n        <h3><!--cts:b010:en--></h3>\n        <p><!--cts:b011:en--></p>\n        <blockquote><!--cts:b012:en--></blockquote>\n        <p><!--cts:b013:en--></p>\n        <p><!--cts:b014:en--></p>\n        <blockquote><!--cts:b015:en--></blockquote>\n        <p><!--cts:b016:en--></p>\n\n        <h3><!--cts:b017:en--></h3>\n        <p><!--cts:b018:en--></p>\n        <p><!--cts:b019:en--></p>\n        <p><!--cts:b020:en--></p>\n        <p><!--cts:b021:en--></p>\n        <p><!--cts:b022:en--></p>\n\n        <h3><!--cts:b023:en--></h3>\n        <p><!--cts:b024:en--></p>\n        <p><!--cts:b025:en--></p>\n\n        <h3><!--cts:b026:en--></h3>\n        <p><!--cts:b027:en--></p>\n        <blockquote><!--cts:b028:en--></blockquote>\n        <p><!--cts:b029:en--></p>\n\n        <h3><!--cts:b030:en--></h3>\n        <p><!--cts:b031:en--></p>\n        <blockquote><!--cts:b032:en--></blockquote>\n        <p><!--cts:b033:en--></p>\n        <p><!--cts:b034:en--></p>\n\n        <h3><!--cts:b035:en--></h3>\n        <p><!--cts:b036:en--></p>\n        <p><!--cts:b037:en--></p>\n\n        <h3><!--cts:b038:en--></h3>\n        <p><!--cts:b039:en--></p>\n\n        <h3><!--cts:b040:en--></h3>\n        <p><!--cts:b041:en--></p>\n        <blockquote><!--cts:b042:en--></blockquote>\n        <p><!--cts:b043:en--></p>\n\n        <h3><!--cts:b044:en--></h3>\n        <p><!--cts:b045:en--></p>\n        <p><!--cts:b046:en--></p>\n    </div>\n\n    <div class=\"lang-es\">\n        <h2><!--cts:b007:es--></h2>\n        <p><!--cts:b008:es--></p>\n        <p><!--cts:b009:es--></p>\n\n        <h3><!--cts:b010:es--></h3>\n        <p><!--cts:b011:es--></p>\n        <blockquote><!--cts:b012:es--></blockquote>\n        <p><!--cts:b013:es--></p>\n        <p><!--cts:b014:es--></p>\n        <blockquote><!--cts:b015:es--></blockquote>\n        <p><!--cts:b016:es--></p>\n\n        <h3><!--cts:b017:es--></h3>\n        <p><!--cts:b018:es--></p>\n        <p><!--cts:b019:es--></p>\n        <p><!--cts:b020:es--></p>\n        <p><!--cts:b021:es--></p>\n        <p><!--cts:b022:es--></p>\n\n        <h3><!--cts:b023:es--></h3>\n        <p><!--cts:b024:es--></p>\n        <p><!--cts:b025:es--></p>\n\n        <h3><!--cts:b026:es--></h3>\n        <p><!--cts:b027:es--></p>\n        <blockquote><!--cts:b028:es--></blockquote>\n        <p><!--cts:b029:es--></p>\n\n        <h3><!--cts:b030:es--></h3>\n        <p><!--cts:b031:es--></p>\n        <blockquote><!--cts:b032:es--></blockquote>\n        <p><!--cts:b033:es--></p>\n        <p><!--cts:b034:es--></p>\n\n        <h3><!--cts:b035:es--></h3>\n        <p><!--cts:b036:es--></p>\n        <p><!--cts:b037:es--></p>\n\n        <h3><!--cts:b038:es--></h3>\n        <p><!--cts:b039:es--></p>\n\n        <h3><!--cts:b040:es--></h3>\n        <p><!--cts:b041:es--></p>\n        <blockquote><!--cts:b042:es--></blockquote>\n        <p><!--cts:b043:es--></p>\n\n        <h3><!--cts:b044:es--></h3>\n        <p><!--cts:b045:es--></p>\n        <p><!--cts:b046:es--></p>\n    </div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b047:en--></span><span class=\"lang-es\"><!--cts:b047:es--></span></h2>\n    <p>\n        <span class=\"lang-en\"><!--cts:b048:en--></span>\n        <span class=\"lang-es\"><!--cts:b048:es--></span>\n    </p>\n    <p>\n        <span class=\"lang-en\"><!--cts:b049:en--></span>\n        <span class=\"lang-es\"><!--cts:b049:es--></span>\n    </p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b050:en--></span><span class=\"lang-es\"><!--cts:b050:es--></span></button>\n        <button id=\"clearExamDataBtn\" class=\"small\" style=\"background:#a0512a;\">🗑 <span class=\"lang-en\"><!--cts:b051:en--></span><span class=\"lang-es\"><!--cts:b051:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\" aria-live=\"polite\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSEvangelismReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "Previous",
+    "es": "Anterior"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "50f94286ba30"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "Next",
+    "es": "Siguiente"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bc981983e7f5"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "Clear Saved Data",
+    "es": "Borrar Datos Guardados"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1f211da49ca3"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "📖 Evangelism — Unit 5: The Responsibility of the Believer in Evangelism",
+    "es": "📖 Evangelismo — Unidad 5: La Responsabilidad del Creyente en el Evangelismo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e95d5d051422"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Chapala Theological Seminary · Dr. Wayne Cook, Author and Professor · Dr. Ted Rogers, Seminary Director",
+    "es": "Seminario Teológico de Chapala · Dr. Wayne Cook, Autor y Profesor · Dr. Ted Rogers, Director del Seminario"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "09f5030da034"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "heading",
+   "text": {
+    "en": "Orientation: The Question Behind the Command",
+    "es": "Orientación: La Pregunta Detrás del Mandamiento"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0f555e58b818"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "If evangelism is a spiritual work that only the Spirit can complete, why does Scripture lay the responsibility on every believer? Because God has chosen to accomplish His work through human instruments. The Spirit convicts and regenerates, but He does so through the witness of His people. This means evangelism is not the specialty of a few; it is the responsibility of every believer. Unit 4 closed with the truth that \"our sufficiency is from God.\" Unit 5 begins with the corresponding truth: that sufficiency is given <em>to us</em>, that we may carry the message. The Spirit's work does not eliminate our responsibility — it defines it.",
+    "es": "Si el evangelismo es una obra espiritual que solo el Espíritu puede completar, ¿por qué pone la Escritura la responsabilidad sobre cada creyente? Porque Dios ha escogido cumplir Su obra por medio de instrumentos humanos. El Espíritu convence y regenera, pero lo hace a través del testimonio de Su pueblo. Esto significa que el evangelismo no es la especialidad de unos pocos; es la responsabilidad de cada creyente. La Unidad 4 cerró con la verdad de que \"nuestra suficiencia es de Dios\". La Unidad 5 comienza con la verdad correspondiente: esa suficiencia se nos da <em>a nosotros</em>, para que llevemos el mensaje. La obra del Espíritu no elimina nuestra responsabilidad — la define."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b5a6d8d4eb1e"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "This unit examines four motives that drive the believer's responsibility, the kind of life from which true witness flows, the faithful posture that trusts God for results, the overcoming of fear, the indispensable role of prayer, the consistency of life and message, and the sobering warning of the watchman in Ezekiel. The thesis is that evangelism is not optional for the believer. It is a stewardship for which every Christian will give account.",
+    "es": "Esta unidad examina cuatro motivos que impulsan la responsabilidad del creyente, la clase de vida de la cual fluye el verdadero testimonio, la postura fiel que confía en Dios para los resultados, la victoria sobre el temor, el papel indispensable de la oración, la consistencia entre vida y mensaje, y la solemne advertencia del atalaya en Ezequiel. La tesis es que el evangelismo no es opcional para el creyente. Es una mayordomía de la cual cada cristiano dará cuenta."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "29da8928b615"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "heading",
+   "text": {
+    "en": "I. The Command Is to All Believers",
+    "es": "I. El Mandamiento Es para Todos los Creyentes"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33aa2a5c698f"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Christ's parting words were not addressed to the eleven alone but to the whole church. Mark records the commission in its simplest form:",
+    "es": "Las palabras finales de Cristo no fueron dirigidas solo a los once, sino a toda la iglesia. Marcos registra la comisión en su forma más sencilla:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "11c891a3d93b"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "other",
+   "text": {
+    "en": "\"Go into all the world and preach the gospel to every creature.\" (Mark 16:15, NKJV)",
+    "es": "\"Id por todo el mundo y predicad el evangelio a toda criatura.\" (Marcos 16:15, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7ae5946216f1"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "Some have argued that evangelism is the duty only of pastors, evangelists, or those with special gifting. Ephesians 4:11–12 corrects that view. Apostles, prophets, evangelists, pastors, and teachers are given \"for the equipping of the saints for the work of ministry\" — meaning the leaders equip; the saints do the work. The pastor's job is to train the congregation to witness; the congregation's job is to witness.",
+    "es": "Algunos han argumentado que el evangelismo es deber solo de pastores, evangelistas o aquellos con dones especiales. Efesios 4:11–12 corrige esa visión. Apóstoles, profetas, evangelistas, pastores y maestros son dados \"a fin de perfeccionar a los santos para la obra del ministerio\" — es decir, los líderes capacitan; los santos hacen la obra. El trabajo del pastor es entrenar a la congregación para testificar; el trabajo de la congregación es testificar."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2bd62100ca61"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "prose",
+   "text": {
+    "en": "Peter calls every believer a priest:",
+    "es": "Pedro llama a cada creyente sacerdote:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d9b9a11ad6b8"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "other",
+   "text": {
+    "en": "\"you also, as living stones, are being built up a spiritual house, a holy priesthood, to offer up spiritual sacrifices acceptable to God through Jesus Christ.\" (1 Peter 2:5, NKJV)",
+    "es": "\"Vosotros también, como piedras vivas, sed edificados como casa espiritual y sacerdocio santo, para ofrecer sacrificios espirituales aceptables a Dios por medio de Jesucristo.\" (1 Pedro 2:5, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d7969404369f"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "The doctrine of the priesthood of the believer means we go directly to God through Christ, but it also means we represent God directly to others. In the Old Testament, the priests stood between the people and God. Now every believer stands in that gap, bearing the gospel to lost neighbors, coworkers, and family.",
+    "es": "La doctrina del sacerdocio del creyente significa que vamos directamente a Dios a través de Cristo, pero también significa que representamos a Dios directamente ante otros. En el Antiguo Testamento, los sacerdotes estaban entre el pueblo y Dios. Ahora cada creyente está en esa brecha, llevando el evangelio a vecinos, compañeros de trabajo y familiares perdidos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2e8d3a9cbd2a"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "heading",
+   "text": {
+    "en": "II. Four Motives for the Believer's Witness",
+    "es": "II. Cuatro Motivos para el Testimonio del Creyente"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3746edd04d5c"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "Delos Miles, in his <em>Introduction to Evangelism</em>, identifies four motives that ought to drive every Christian into witness. These four anchor the believer's responsibility in something deeper than duty.",
+    "es": "Delos Miles, en su <em>Introducción al Evangelismo</em>, identifica cuatro motivos que deben impulsar a cada cristiano al testimonio. Estos cuatro anclan la responsabilidad del creyente en algo más profundo que el deber."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "20225262d711"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "<strong>1. The love of Christ constrains us.</strong> \"For the love of Christ compels us\" (2 Corinthians 5:14, NKJV). A believer who has truly grasped what Christ did at the cross cannot remain silent. Love presses outward by its very nature.",
+    "es": "<strong>1. El amor de Cristo nos constriñe.</strong> \"Porque el amor de Cristo nos constriñe\" (2 Corintios 5:14, RVG). Un creyente que ha captado verdaderamente lo que Cristo hizo en la cruz no puede permanecer en silencio. El amor presiona hacia afuera por su misma naturaleza."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "88e3021e9b32"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "<strong>2. Christ commands it.</strong> \"Go therefore and make disciples of all the nations\" (Matthew 28:19–20, NKJV). The Great Commission is not a suggestion. It is the standing order of the King to His subjects.",
+    "es": "<strong>2. Cristo lo manda.</strong> \"Por tanto, id, y haced discípulos a todas las naciones\" (Mateo 28:19–20, RVG). La Gran Comisión no es una sugerencia. Es la orden permanente del Rey a Sus súbditos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5a0beb1f8e5a"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "<strong>3. The lostness of persons.</strong> Luke 19:10 records why Jesus came: \"to seek and to save that which was lost\" (NKJV). Every neighbor without Christ is genuinely, eternally lost. When that reality grips the heart, witness becomes urgent.",
+    "es": "<strong>3. La perdición de las personas.</strong> Lucas 19:10 registra por qué Jesús vino: \"a buscar y a salvar lo que se había perdido\" (RVG). Cada vecino sin Cristo está genuina y eternamente perdido. Cuando esa realidad agarra el corazón, el testimonio se vuelve urgente."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5c183a45dae9"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "<strong>4. The wrath of God.</strong> Romans 2:8–9 warns of \"indignation and wrath, tribulation and anguish, on every soul of man who does evil\" (NKJV). Modern preaching often shrinks from this motive, but Scripture does not. The reality of judgment is one of the strongest reasons we tell people the good news.",
+    "es": "<strong>4. La ira de Dios.</strong> Romanos 2:8–9 advierte de \"ira y enojo, tribulación y angustia, sobre todo ser humano que hace lo malo\" (RVG). La predicación moderna a menudo retrocede ante este motivo, pero la Escritura no. La realidad del juicio es una de las razones más fuertes por las que les decimos a las personas las buenas nuevas."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7619835f6473"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "heading",
+   "text": {
+    "en": "III. Witness Flows from a Changed Life",
+    "es": "III. El Testimonio Fluye de una Vida Transformada"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ae6a9a86e82d"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "The New Testament pattern is striking: the moment a person meets Christ, that person almost immediately tells someone else. Andrew finds his brother Peter: \"He first found his own brother Simon, and said to him, 'We have found the Messiah'\" (John 1:41, NKJV). The Samaritan woman leaves her waterpot and runs into the city. The Gerasene demoniac, freshly delivered, begs to follow Jesus, but Jesus sends him home with an assignment: \"Go home to your friends, and tell them what great things the Lord has done for you, and how He has had compassion on you\" (Mark 5:19, NKJV).",
+    "es": "El patrón del Nuevo Testamento es notable: en el momento que una persona se encuentra con Cristo, esa persona casi inmediatamente se lo dice a otra. Andrés encuentra a su hermano Pedro: \"Este halló primero a su hermano Simón, y le dijo: Hemos hallado al Mesías\" (Juan 1:41, RVG). La mujer samaritana deja su cántaro y corre a la ciudad. El endemoniado gadareno, recién liberado, ruega seguir a Jesús, pero Jesús lo envía a casa con una asignación: \"Vete a tu casa, a los tuyos, y cuéntales cuán grandes cosas el Señor ha hecho contigo, y cómo ha tenido misericordia de ti\" (Marcos 5:19, RVG)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "357ef200d11d"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "This pattern still holds. A.C. Archibald, cited by Miles, tells of an unprepossessing, humble woman from his church who worked in a textile mill. When he first met her, he wondered if she could be used in evangelism at all — she seemed so withdrawn and self-deprecating. He gave her the names of two young women from the mill. The next week she appeared at prayer meeting with both of them, freshly confessing faith in Christ. He gave her two more names. Week after week she returned with new converts. In eight weeks she won twenty-one young women to Christ — and then continued the work, on her own initiative, for several years. What set her apart? \"An illuminated countenance that came from much talking with the Lord.\" Her witness flowed from a life lived with Christ.",
+    "es": "Este patrón aún se mantiene. A.C. Archibald, citado por Miles, cuenta de una mujer humilde y poco impresionante de su iglesia que trabajaba en una fábrica textil. Cuando la conoció por primera vez, se preguntó si podría ser usada en el evangelismo en absoluto — parecía tan retraída y autocrítica. Le dio los nombres de dos jóvenes de la fábrica. La semana siguiente apareció en la reunión de oración con ambas, recién confesando fe en Cristo. Le dio dos nombres más. Semana tras semana regresaba con nuevos conversos. En ocho semanas ganó veintiuna jóvenes para Cristo — y luego continuó la obra, por iniciativa propia, durante varios años. ¿Qué la distinguía? \"Un semblante iluminado que provenía de mucho hablar con el Señor\". Su testimonio fluía de una vida vivida con Cristo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d8431f12ed80"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "heading",
+   "text": {
+    "en": "IV. Faithfulness, Not Results",
+    "es": "IV. Fidelidad, No Resultados"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "88a3df8cfef8"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "Paul reminded the Corinthians that the work is divided:",
+    "es": "Pablo recordó a los corintios que la obra está dividida:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "066f85e9175f"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "other",
+   "text": {
+    "en": "\"I planted, Apollos watered, but God gave the increase.\" (1 Corinthians 3:6, NKJV)",
+    "es": "\"Yo planté, Apolos regó; pero el crecimiento lo ha dado Dios.\" (1 Corintios 3:6, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9a351bb9bfc0"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "The believer is responsible for faithfulness. The results are God's. This distinction sets the witness free from two opposite errors: discouragement when results are slow, and pride when results are abundant. Both errors come from thinking that we produce the harvest. We do not. We plant and water; God gives the increase. Some plant where another will water; some water where another planted. But every faithful sower will receive his reward, and no faithful sower labors in vain.",
+    "es": "El creyente es responsable de la fidelidad. Los resultados son de Dios. Esta distinción libera al testigo de dos errores opuestos: el desánimo cuando los resultados son lentos, y el orgullo cuando los resultados son abundantes. Ambos errores vienen de pensar que nosotros producimos la cosecha. No la producimos. Plantamos y regamos; Dios da el crecimiento. Algunos plantan donde otro regará; algunos riegan donde otro plantó. Pero todo sembrador fiel recibirá su recompensa, y ningún sembrador fiel trabaja en vano."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1dcaf2f273a8"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "heading",
+   "text": {
+    "en": "V. Overcoming Fear",
+    "es": "V. Venciendo el Temor"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "31cc5aa95115"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "Fear is the most common obstacle to witness. Paul wrote young Timothy:",
+    "es": "El temor es el obstáculo más común al testimonio. Pablo escribió al joven Timoteo:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2b6298b4c9bd"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "other",
+   "text": {
+    "en": "\"For God has not given us a spirit of fear, but of power and of love and of a sound mind.\" (2 Timothy 1:7, NKJV)",
+    "es": "\"Porque no nos ha dado Dios espíritu de cobardía, sino de poder, de amor y de dominio propio.\" (2 Timoteo 1:7, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cc31dcf2f9df"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "Tom Phillips, a quiet, reserved executive, sensed God leading him to share Christ with Chuck Colson — then the most feared political operative in America. Tom's natural reserve rebelled. He rehearsed what he would say. The next day, when Colson walked into his office \"seemingly proud and confident,\" Phillips suddenly felt timid, fearing Colson might think him \"some sort of religious fanatic.\" He took several deep breaths, found an opportunity, and made his statement of faith. Colson did not respond at first; Phillips left convinced he had failed. Colson later wrote: \"To this day, I wonder what might have happened if Phillips at that critical moment had flinched and ignored what seemed to be God's clear call.\" That obedience opened the door to one of the most influential conversions of the twentieth century — and to Prison Fellowship, which would reach millions. Tom's boldness \"went against his low-key nature. Yet it was so obviously right.\"",
+    "es": "Tom Phillips, un ejecutivo callado y reservado, sintió que Dios lo guiaba a hablar de Cristo con Chuck Colson — entonces el operador político más temido de América. La reserva natural de Tom se rebeló. Ensayó lo que diría. Al día siguiente, cuando Colson entró a su oficina \"aparentemente orgulloso y confiado\", Phillips de repente se sintió tímido, temiendo que Colson lo considerara \"algún tipo de fanático religioso\". Tomó varias respiraciones profundas, encontró una oportunidad e hizo su declaración de fe. Colson no respondió al principio; Phillips se fue convencido de que había fracasado. Colson luego escribió: \"Hasta el día de hoy, me pregunto qué habría pasado si Phillips en ese momento crítico se hubiera echado atrás e ignorado lo que parecía ser el claro llamado de Dios\". Esa obediencia abrió la puerta a una de las conversiones más influyentes del siglo veinte — y a Prison Fellowship, que alcanzaría a millones. La audacia de Tom \"iba contra su naturaleza discreta. Sin embargo, era tan obviamente correcta\"."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "eed47b68a709"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "prose",
+   "text": {
+    "en": "Fear is overcome not by becoming naturally bold, but by yielding to the Spirit who is power, love, and a sound mind. The shy may witness more powerfully than the gregarious when they speak in dependence on God.",
+    "es": "El temor no se vence haciéndose naturalmente audaz, sino rindiéndose al Espíritu que es poder, amor y dominio propio. Los tímidos pueden testificar más poderosamente que los gregarios cuando hablan en dependencia de Dios."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2341c135e94c"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "heading",
+   "text": {
+    "en": "VI. The Role of Prayer",
+    "es": "VI. El Papel de la Oración"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ab45d26ad21f"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "prose",
+   "text": {
+    "en": "Paul, in chains, asked the Ephesians to pray \"that utterance may be given to me, that I may open my mouth boldly to make known the mystery of the gospel\" (Ephesians 6:19, NKJV). He asked the Colossians the same: \"that God would open to us a door for the word\" (Colossians 4:3, NKJV). If Paul needed prayer to be bold and clear, so does every believer.",
+    "es": "Pablo, encadenado, pidió a los efesios que oraran \"para que me sea dada palabra al abrir mi boca, para dar a conocer con denuedo el misterio del evangelio\" (Efesios 6:19, RVG). Pidió lo mismo a los colosenses: \"Para que el Señor nos abra puerta para la palabra\" (Colosenses 4:3, RVG). Si Pablo necesitaba oración para ser audaz y claro, también la necesita cada creyente."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9ea4f576b7db"
+    }
+   }
+  },
+  {
+   "id": "b037",
+   "type": "prose",
+   "text": {
+    "en": "Why pray for evangelism? Four reasons. First, because <strong>God desires all to be saved</strong> (2 Peter 3:9 — \"not willing that any should perish but that all should come to repentance,\" NKJV). Second, because <strong>only God can draw</strong> men to Christ (John 6:44). Third, because <strong>God is already seeking</strong> them — Acts 17:27 says He set the times and bounds of every nation \"so that they should seek the Lord, in the hope that they might grope for Him and find Him\" (NKJV). Fourth, because <strong>the Enemy is constantly undermining</strong> the witnessing activity — the wicked one \"snatches away what was sown in his heart\" (Matthew 13:19, NKJV), and \"the god of this age has blinded the minds of those who do not believe\" (2 Corinthians 4:4, NKJV). Prayer is not a preamble to evangelism. It is the warfare that makes evangelism possible. Jesus said, \"The harvest truly is plentiful, but the laborers are few. Therefore pray the Lord of the harvest to send out laborers into His harvest\" (Matthew 9:37–38, NKJV).",
+    "es": "¿Por qué orar por el evangelismo? Cuatro razones. Primero, porque <strong>Dios desea que todos sean salvos</strong> (2 Pedro 3:9 — \"no queriendo que ninguno perezca, sino que todos procedan al arrepentimiento\", RVG). Segundo, porque <strong>solo Dios puede atraer</strong> a los hombres a Cristo (Juan 6:44). Tercero, porque <strong>Dios ya los está buscando</strong> — Hechos 17:27 dice que Él fijó los tiempos y los límites de cada nación \"para que busquen a Dios, si en alguna manera, palpando, puedan hallarle\" (RVG). Cuarto, porque <strong>el Enemigo está constantemente socavando</strong> la actividad de testimonio — el maligno \"arrebata lo que fue sembrado en su corazón\" (Mateo 13:19, RVG), y \"el dios de este siglo cegó el entendimiento de los incrédulos\" (2 Corintios 4:4, RVG). La oración no es un preámbulo al evangelismo. Es la guerra que hace posible el evangelismo. Jesús dijo: \"A la verdad la mies es mucha, mas los obreros pocos. Rogad, pues, al Señor de la mies, que envíe obreros a su mies\" (Mateo 9:37–38, RVG)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b89e044998e5"
+    }
+   }
+  },
+  {
+   "id": "b038",
+   "type": "heading",
+   "text": {
+    "en": "VII. Consistency of Life and Message",
+    "es": "VII. Consistencia entre Vida y Mensaje"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fd2c445f8d03"
+    }
+   }
+  },
+  {
+   "id": "b039",
+   "type": "prose",
+   "text": {
+    "en": "The witness lives in glass. Jesus said, \"Let your light so shine before men, that they may see your good works and glorify your Father in heaven\" (Matthew 5:16, NKJV). Peter wrote, \"always be ready to give a defense to everyone who asks you a reason for the hope that is in you, with meekness and fear\" (1 Peter 3:15, NKJV). The world reads the believer's life before it reads the believer's tract. An inconsistent witness undermines the very gospel he preaches. A consistent witness, however ordinary, opens doors that no clever method could.",
+    "es": "El testigo vive en cristal. Jesús dijo: \"Así alumbre vuestra luz delante de los hombres, para que vean vuestras buenas obras, y glorifiquen a vuestro Padre que está en los cielos\" (Mateo 5:16, RVG). Pedro escribió: \"Estad siempre preparados para presentar defensa con mansedumbre y reverencia ante todo el que os demande razón de la esperanza que hay en vosotros\" (1 Pedro 3:15, RVG). El mundo lee la vida del creyente antes de leer su tratado. Un testimonio inconsistente socava el mismo evangelio que predica. Un testimonio consistente, por ordinario que sea, abre puertas que ningún método ingenioso podría."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "65d77ebc67f8"
+    }
+   }
+  },
+  {
+   "id": "b040",
+   "type": "heading",
+   "text": {
+    "en": "VIII. The Watchman: A Sobering Word",
+    "es": "VIII. El Atalaya: Una Palabra Solemne"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d02731142c15"
+    }
+   }
+  },
+  {
+   "id": "b041",
+   "type": "prose",
+   "text": {
+    "en": "Ezekiel describes the prophet as a watchman on the city wall. The watchman did not need to be a soldier; he only needed to sound the trumpet when he saw danger coming. God told Ezekiel:",
+    "es": "Ezequiel describe al profeta como un atalaya sobre el muro de la ciudad. El atalaya no necesitaba ser soldado; solo necesitaba sonar la trompeta cuando viera venir el peligro. Dios le dijo a Ezequiel:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d34cdfe3fc70"
+    }
+   }
+  },
+  {
+   "id": "b042",
+   "type": "other",
+   "text": {
+    "en": "\"When I say to the wicked, 'You shall surely die,' and you give him no warning, nor speak to warn the wicked from his wicked way, to save his life, that same wicked man shall die in his iniquity; but his blood I will require at your hand.\" (Ezekiel 3:18, NKJV)",
+    "es": "\"Cuando yo dijere al impío: De cierto morirás; y tú no le amonestares ni le hablares, para que el impío sea apercibido de su mal camino a fin de que viva, el impío morirá por su maldad, pero su sangre demandaré de tu mano.\" (Ezequiel 3:18, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9cdbe0cbb19c"
+    }
+   }
+  },
+  {
+   "id": "b043",
+   "type": "prose",
+   "text": {
+    "en": "But if the watchman warned and the wicked refused, \"you have delivered your soul\" (Ezekiel 3:19, NKJV). The believer is not responsible for the response. He is responsible for the warning. Silence in the face of eternity is a sin of omission Scripture takes with great seriousness.",
+    "es": "Pero si el atalaya advirtió y el impío rechazó, \"tú habrás librado tu alma\" (Ezequiel 3:19, RVG). El creyente no es responsable de la respuesta. Es responsable de la advertencia. El silencio frente a la eternidad es un pecado de omisión que la Escritura toma con gran seriedad."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d2218bcf27ea"
+    }
+   }
+  },
+  {
+   "id": "b044",
+   "type": "heading",
+   "text": {
+    "en": "Conclusion: A Stewardship to Be Discharged",
+    "es": "Conclusión: Una Mayordomía que Cumplir"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0392b0d9808b"
+    }
+   }
+  },
+  {
+   "id": "b045",
+   "type": "prose",
+   "text": {
+    "en": "Evangelism is not the believer's hobby. It is the believer's stewardship. The command is to all; the motives are deep; the witness flows from changed life; faithfulness, not results, is the measure; fear is overcome by the Spirit; prayer is the indispensable warfare; consistency between life and message is required; and the watchman's responsibility is to sound the trumpet. The unprepossessing woman in the textile mill, the reserved executive in his office, the believer in your church seat next Sunday — every one of them has been given a trumpet. The only question is whether they will blow it.",
+    "es": "El evangelismo no es el pasatiempo del creyente. Es la mayordomía del creyente. El mandamiento es para todos; los motivos son profundos; el testimonio fluye de una vida transformada; la fidelidad, no los resultados, es la medida; el temor se vence por el Espíritu; la oración es la guerra indispensable; la consistencia entre vida y mensaje es requerida; y la responsabilidad del atalaya es sonar la trompeta. La mujer humilde en la fábrica textil, el ejecutivo reservado en su oficina, el creyente en el banco de su iglesia el próximo domingo — a cada uno de ellos se le ha dado una trompeta. La única pregunta es si la harán sonar."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b50504ce2c9f"
+    }
+   }
+  },
+  {
+   "id": "b046",
+   "type": "prose",
+   "text": {
+    "en": "<em>Prayer: Lord, You have entrusted to us a message and a world that needs it. Forgive our silence. Make us bold like Tom Phillips, faithful like Andrew, urgent like Paul. Give us hearts pressed by love, gripped by lostness, sobered by judgment, and steady in faithfulness. May the trumpet sound from our lips while there is still day. In Jesus' name, Amen.</em>",
+    "es": "<em>Oración: Señor, nos has confiado un mensaje y un mundo que lo necesita. Perdona nuestro silencio. Haznos audaces como Tom Phillips, fieles como Andrés, urgentes como Pablo. Danos corazones presionados por el amor, agarrados por la perdición, sobrios por el juicio, y firmes en la fidelidad. Que la trompeta suene de nuestros labios mientras todavía es de día. En el nombre de Jesús, Amén.</em>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c81ea86a7278"
+    }
+   }
+  },
+  {
+   "id": "b047",
+   "type": "prose",
+   "text": {
+    "en": "Unit 5 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 5 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "68bacc2afdf3"
+    }
+   }
+  },
+  {
+   "id": "b048",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate track:</strong> Section A (multiple choice) required at 90%. Section B (short answer) optional.",
+    "es": "<strong>Pista de Certificado:</strong> Sección A (opción múltiple) obligatoria al 90%. Sección B (respuesta corta) opcional."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90b12df3fedf"
+    }
+   }
+  },
+  {
+   "id": "b049",
+   "type": "prose",
+   "text": {
+    "en": "<strong>M.Div./Th.M. track:</strong> Both sections required at 90% each, independently.",
+    "es": "<strong>Pista de M.Div./Th.M.:</strong> Ambas secciones obligatorias al 90% cada una, independientemente."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3c8a5fe1f97b"
+    }
+   }
+  },
+  {
+   "id": "b050",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b051",
+   "type": "prose",
+   "text": {
+    "en": "Clear My Answers",
+    "es": "Borrar Mis Respuestas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0068b9eef93e"
+    }
+   }
+  }
+ ]
+}

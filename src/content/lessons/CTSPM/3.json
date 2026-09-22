@@ -1,0 +1,628 @@
+{
+ "course": "CTSPM",
+ "unit": 3,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<a href=\"index.html\" style=\"display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif\">📚 Catalog / Catálogo</a>\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"prevUnitBtn\">← Unit 2</button>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Unit 4 →</button>\n    </div>\n</div>\n<div class=\"lang-toggle-group\" style=\"display:inline-block;margin-bottom:15px;\">\n<button class=\"toggle-btn\" data-lang=\"en\" id=\"langBtnEn\">English</button>\n<button class=\"toggle-btn\" data-lang=\"es\" id=\"langBtnEs\">Español</button>\n<button class=\"toggle-btn\" data-lang=\"both\" id=\"langBtnBoth\">Both / Ambos</button>\n</div>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #5b3a1f;\"><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n</div>\n\n<div id=\"regWarning\" class=\"reg-warning\" style=\"display:none;\">\n    <span class=\"lang-en\"><!--cts:b004:en--></span>\n    <span class=\"lang-es\"><!--cts:b004:es--></span>\n</div>\n\n<div class=\"card\" id=\"teachingContent\">\n    <div class=\"lang-en\">\n        <h2><!--cts:b005:en--></h2>\n        <p><!--cts:b006:en--></p>\n\n        <p><!--cts:b007:en--></p>\n\n        <p><!--cts:b008:en--></p>\n\n        <h2><!--cts:b009:en--></h2>\n        <p><!--cts:b010:en--></p>\n\n        <p><!--cts:b011:en--></p>\n\n        <p><!--cts:b012:en--></p>\n\n        <h2><!--cts:b013:en--></h2>\n        <p><!--cts:b014:en--></p>\n\n        <p><!--cts:b015:en--></p>\n\n        <p><!--cts:b016:en--></p>\n\n        <h2><!--cts:b017:en--></h2>\n        <p><!--cts:b018:en--></p>\n\n        <p><!--cts:b019:en--></p>\n\n        <p><!--cts:b020:en--></p>\n\n        <p><!--cts:b021:en--></p>\n\n        <p><!--cts:b022:en--></p>\n\n        <p><!--cts:b023:en--></p>\n\n        <h2><!--cts:b024:en--></h2>\n        <p><!--cts:b025:en--></p>\n\n        <p><!--cts:b026:en--></p>\n\n        <p><!--cts:b027:en--></p>\n\n        <p><!--cts:b028:en--></p>\n\n        <h2><!--cts:b029:en--></h2>\n        <p><!--cts:b030:en--></p>\n\n        <p><!--cts:b031:en--></p>\n\n        <p><!--cts:b032:en--></p>\n\n        <p><!--cts:b033:en--></p>\n\n        <p><!--cts:b034:en--></p>\n\n        <h2><!--cts:b035:en--></h2>\n        <p><!--cts:b036:en--></p>\n\n        <p><!--cts:b037:en--></p>\n\n        <h2><!--cts:b038:en--></h2>\n        <p><!--cts:b039:en--></p>\n\n        <p style=\"text-align: center; margin-top: 30px; font-weight: bold;\"><!--cts:b040:en--></p>\n    </div>\n\n    <div class=\"lang-es\">\n        <h2><!--cts:b005:es--></h2>\n        <p><!--cts:b006:es--></p>\n\n        <p><!--cts:b007:es--></p>\n\n        <p><!--cts:b008:es--></p>\n\n        <h2><!--cts:b009:es--></h2>\n        <p><!--cts:b010:es--></p>\n\n        <p><!--cts:b011:es--></p>\n\n        <p><!--cts:b012:es--></p>\n\n        <h2><!--cts:b013:es--></h2>\n        <p><!--cts:b014:es--></p>\n\n        <p><!--cts:b015:es--></p>\n\n        <p><!--cts:b016:es--></p>\n\n        <h2><!--cts:b017:es--></h2>\n        <p><!--cts:b018:es--></p>\n\n        <p><!--cts:b019:es--></p>\n\n        <p><!--cts:b020:es--></p>\n\n        <p><!--cts:b021:es--></p>\n\n        <p><!--cts:b022:es--></p>\n\n        <p><!--cts:b023:es--></p>\n\n        <h2><!--cts:b024:es--></h2>\n        <p><!--cts:b025:es--></p>\n\n        <p><!--cts:b026:es--></p>\n\n        <p><!--cts:b027:es--></p>\n\n        <p><!--cts:b028:es--></p>\n\n        <h2><!--cts:b029:es--></h2>\n        <p><!--cts:b030:es--></p>\n\n        <p><!--cts:b031:es--></p>\n\n        <p><!--cts:b032:es--></p>\n\n        <p><!--cts:b033:es--></p>\n\n        <p><!--cts:b034:es--></p>\n\n        <h2><!--cts:b035:es--></h2>\n        <p><!--cts:b036:es--></p>\n\n        <p><!--cts:b037:es--></p>\n\n        <h2><!--cts:b038:es--></h2>\n        <p><!--cts:b039:es--></p>\n\n        <p style=\"text-align: center; margin-top: 30px; font-weight: bold;\"><!--cts:b040:es--></p>\n    </div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b041:en--></span><span class=\"lang-es\"><!--cts:b041:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b042:en--></span>\n       <span class=\"lang-es\"><!--cts:b042:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b043:en--></span><span class=\"lang-es\"><!--cts:b043:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small reset\"><span class=\"lang-en\"><!--cts:b044:en--></span><span class=\"lang-es\"><!--cts:b044:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSPMReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "📖 Pastoral Ministries — Unit 3: Therapeutic Preaching",
+    "es": "📖 Ministerios Pastorales — Unidad 3: Predicación Terapéutica"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b1df8e028ee6"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "\"The Spirit of the LORD God is upon Me, because the LORD has anointed Me to preach good tidings to the poor; He has sent Me to heal the brokenhearted, to proclaim liberty to the captives, and the opening of the prison to those who are bound.\" — Isaiah 61:1 (NKJV)",
+    "es": "\"El Espíritu de Jehová el Señor está sobre mí, porque me ungió Jehová; me ha enviado a predicar buenas nuevas a los humildes, a vendar a los quebrantados de corazón, a publicar libertad a los cautivos, y a los presos apertura de la cárcel.\" — Isaías 61:1 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d4c538826b38"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "⚠️ You have not yet registered. Please <a href=\"CTSPMUnit1.html\" style=\"color:#5b3a1f;\">return to Unit 1</a> to register before continuing.",
+    "es": "⚠️ Aún no se ha registrado. Por favor <a href=\"CTSPMUnit1.html\" style=\"color:#5b3a1f;\">regrese a la Unidad 1</a> para registrarse antes de continuar."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "39fad2d627aa"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "heading",
+   "text": {
+    "en": "Orientation",
+    "es": "Orientación"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "86e4e3875420"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "The word <em>therapeutic</em> needs to be defined carefully before we use it. We are not borrowing a category from secular psychology and dressing it up with Christian language. The word goes back through the Greek <em>therapeuō</em> — to heal, to serve, to attend. The Septuagint uses it of the Lord Himself, who heals His people. When we say <em>therapeutic preaching</em>, we mean preaching that does what the Word of God was always meant to do — heal the wounded conscience, bind up the broken heart, set the captive free, and pour the oil and the wine into wounds that no human balm has ever reached.",
+    "es": "La palabra <em>terapéutica</em> necesita ser definida cuidadosamente antes de usarla. No estamos tomando prestada una categoría de la psicología secular y vistiéndola con lenguaje cristiano. La palabra se remonta al griego <em>therapeuō</em> — sanar, servir, atender. La Septuaginta la usa del Señor mismo, que sana a Su pueblo. Cuando decimos <em>predicación terapéutica</em>, queremos decir predicación que hace lo que la Palabra de Dios siempre se propuso hacer — sanar la conciencia herida, vendar el corazón quebrantado, libertar al cautivo, y derramar el aceite y el vino en heridas que ningún bálsamo humano ha alcanzado."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f2854e3f8417"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "The first sermon Jesus ever preached in His hometown opened with these words: <em>\"The Spirit of the LORD God is upon Me, because the LORD has anointed Me to preach good tidings to the poor; He has sent Me to heal the brokenhearted, to proclaim liberty to the captives, and the opening of the prison to those who are bound\"</em> (Isaiah 61:1, quoted by Christ in Luke 4:18). The Lord Jesus Himself — the greatest preacher who ever stood up to read a scroll — defined His preaching ministry as a ministry of healing the brokenhearted. Every undershepherd who follows Him takes up the same charge.",
+    "es": "El primer sermón que Jesús predicó en Su pueblo natal abrió con estas palabras: <em>\"El Espíritu de Jehová el Señor está sobre mí, porque me ungió Jehová; me ha enviado a predicar buenas nuevas a los humildes, a vendar a los quebrantados de corazón, a publicar libertad a los cautivos, y a los presos apertura de la cárcel\"</em> (Isaías 61:1, citado por Cristo en Lucas 4:18). El Señor Jesús mismo — el más grande predicador que jamás se levantó a leer un rollo — definió Su ministerio de predicación como un ministerio de sanar a los quebrantados de corazón. Cada subpastor que Lo sigue toma el mismo encargo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d7140adec12f"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "This unit examines that charge. We will look at the broken people who fill the pews on any given Sunday, the biblical pattern of preaching to wounded souls, the pastor as wounded healer, the three movements of therapeutic preaching, the common errors that turn the pulpit cold, and the pastor's own soul-work that makes therapeutic preaching possible.",
+    "es": "Esta unidad examina ese encargo. Veremos a las personas quebrantadas que llenan los bancos cada domingo, el patrón bíblico de predicar a las almas heridas, el pastor como sanador herido, los tres movimientos de la predicación terapéutica, los errores comunes que enfrían el púlpito, y el trabajo del propio pastor sobre su alma que hace posible la predicación terapéutica."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9748df7345b2"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "heading",
+   "text": {
+    "en": "I. The Pulpit and the Pew",
+    "es": "I. El púlpito y la banca"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e39425c37e09"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "Look out across your congregation next Sunday morning. Look slowly. The woman in the third row was told on Friday afternoon that her cancer has come back. The man behind her is two paychecks from losing his house. The young couple in the back row buried a baby last month. The teenager halfway down sits next to parents whose marriage is falling apart, and he is the only one who knows how bad it is. The widow in the second pew is keeping vigil on her late husband's empty side of the bed for the four hundred and thirteenth night in a row. The deacon on the front row is fighting a sin he has not told anyone about in eighteen years. They came in today smiling, shook your hand at the door, sang the hymns, and now they are looking up at you.",
+    "es": "Mire a través de su congregación el próximo domingo por la mañana. Mire despacio. A la mujer en la tercera fila le dijeron el viernes por la tarde que su cáncer ha regresado. El hombre detrás de ella está a dos pagos de perder su casa. La pareja joven en la última fila enterró un bebé el mes pasado. El adolescente a mitad de la nave se sienta junto a padres cuyo matrimonio se está deshaciendo, y él es el único que sabe lo malo que está. La viuda en la segunda banca está velando el lado vacío de la cama de su difunto esposo por cuatrocientas trece noches consecutivas. El diácono en la primera fila está peleando con un pecado del cual no le ha contado a nadie en dieciocho años. Entraron hoy sonriendo, le dieron la mano en la puerta, cantaron los himnos, y ahora le están mirando hacia arriba."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c9770f7f014f"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "If you preach to a generic crowd, you will preach over their heads. The pastor who forgets that his pew is a hospital ward will end up giving lectures while his sheep bleed quietly under their pew. Jesus saw the multitudes and <em>\"was moved with compassion for them, because they were weary and scattered, like sheep having no shepherd\"</em> (Matthew 9:36). The word translated <em>moved with compassion</em> is the Greek <em>splagchnizomai</em> — it means to be moved in the inward parts, to have one's gut twisted with the pain of another. That gut-twist is the starting place of therapeutic preaching. The man who steps into the pulpit with no compassion in his belly will preach like a man reading a phone book.",
+    "es": "Si predica a una multitud genérica, predicará por encima de sus cabezas. El pastor que olvida que su banca es una sala de hospital terminará dando conferencias mientras sus ovejas sangran calladamente debajo del banco. Jesús vio las multitudes y <em>\"tuvo compasión de ellas, porque estaban desamparadas y dispersas como ovejas que no tienen pastor\"</em> (Mateo 9:36). La palabra traducida <em>tuvo compasión</em> es el griego <em>splagchnizomai</em> — significa ser conmovido en las entrañas, tener las propias entrañas torcidas con el dolor de otro. Esa torcedura de entrañas es el punto de partida de la predicación terapéutica. El hombre que sube al púlpito sin compasión en sus entrañas predicará como un hombre leyendo una guía telefónica."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4741fd0e46e3"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "This does not mean every sermon must be a hospital visit set to music. The pastor still preaches the whole counsel of God — doctrine, exposition, prophecy, application, warning, and encouragement. But underneath every sermon, no matter the subject, there must be the awareness that wounded people are listening. The pastor who is conscious of the wounds in the room will, almost without trying, find his sermons taking on a tenderness, a particularity, a closeness to real life that the pure lecturer never achieves.",
+    "es": "Esto no significa que cada sermón deba ser una visita al hospital con música. El pastor todavía predica todo el consejo de Dios — doctrina, exposición, profecía, aplicación, advertencia y aliento. Pero debajo de cada sermón, sin importar el tema, debe haber la conciencia de que personas heridas están escuchando. El pastor que es consciente de las heridas en el cuarto, casi sin intentarlo, encontrará que sus sermones toman una ternura, una particularidad, una cercanía a la vida real que el puro conferenciante nunca alcanza."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "56d39cefa866"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "heading",
+   "text": {
+    "en": "II. The Biblical Pattern",
+    "es": "II. El patrón bíblico"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1a3e55e10467"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "prose",
+   "text": {
+    "en": "The prophets, the apostles, and the Lord Jesus Himself give us a clear pattern of preaching that heals. Isaiah 61:1–3 is the great manifesto: <em>\"to comfort all who mourn, to console those who mourn in Zion, to give them beauty for ashes, the oil of joy for mourning, the garment of praise for the spirit of heaviness.\"</em> Every phrase is a counseling room. <em>Beauty for ashes</em> — the funeral service. <em>Oil of joy for mourning</em> — the visit to the woman whose husband has just left. <em>Garment of praise for the spirit of heaviness</em> — the long phone call with the deacon battling depression.",
+    "es": "Los profetas, los apóstoles y el Señor Jesús mismo nos dan un patrón claro de predicación que sana. Isaías 61:1–3 es el gran manifiesto: <em>\"a consolar a todos los que lloran; a ordenar que a los afligidos de Sion se les dé gloria en lugar de ceniza, óleo de gozo en lugar de luto, manto de alegría en lugar del espíritu angustiado.\"</em> Cada frase es una sala de consejería. <em>Gloria en lugar de ceniza</em> — el servicio funeral. <em>Óleo de gozo en lugar de luto</em> — la visita a la mujer cuyo esposo acaba de irse. <em>Manto de alegría en lugar del espíritu angustiado</em> — la larga llamada telefónica con el diácono que batalla con la depresión."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e40f6bf74a38"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "Isaiah 53 takes us deeper. The Suffering Servant is not preaching from a distance. He is <em>\"a Man of sorrows and acquainted with grief\"</em> — the verb is intimate. <em>\"Surely He has borne our griefs and carried our sorrows.\"</em> The Christ who heals the brokenhearted is the Christ who has Himself been broken. Hebrews picks this up and applies it directly: <em>\"For we do not have a High Priest who cannot sympathize with our weaknesses, but was in all points tempted as we are, yet without sin\"</em> (Hebrews 4:15). Christian preaching that heals is rooted in a wounded Christ. Take the wounds of Christ out of the sermon and what remains is moralism.",
+    "es": "Isaías 53 nos lleva más profundo. El Siervo Sufriente no está predicando desde la distancia. Es <em>\"varón de dolores, experimentado en quebranto\"</em> — el verbo es íntimo. <em>\"Ciertamente llevó él nuestras enfermedades, y sufrió nuestros dolores.\"</em> El Cristo que sana al quebrantado de corazón es el Cristo que mismo ha sido quebrantado. Hebreos toma esto y lo aplica directamente: <em>\"Porque no tenemos un sumo sacerdote que no pueda compadecerse de nuestras flaquezas, sino que fue tentado en todo según nuestra semejanza, pero sin pecado\"</em> (Hebreos 4:15). La predicación cristiana que sana está enraizada en un Cristo herido. Quite las heridas de Cristo del sermón y lo que queda es moralismo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1d6722ad29e9"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "The apostle Paul gives us the doctrine of comfort in 2 Corinthians 1:3–4: <em>\"Blessed be the God and Father of our Lord Jesus Christ, the Father of mercies and God of all comfort, who comforts us in all our tribulation, that we may be able to comfort those who are in any trouble, with the comfort with which we ourselves are comforted by God.\"</em> Notice the chain. God comforts us; we comfort others; the comfort flows downhill. The pastor who has never been comforted by God in his own pain has nothing to give the broken people in his pew. The pastor who has been comforted, even a little, has the beginning of a therapeutic ministry.",
+    "es": "El apóstol Pablo nos da la doctrina del consuelo en 2 Corintios 1:3–4: <em>\"Bendito sea el Dios y Padre de nuestro Señor Jesucristo, Padre de misericordias y Dios de toda consolación, el cual nos consuela en todas nuestras tribulaciones, para que podamos también nosotros consolar a los que están en cualquier tribulación, por medio de la consolación con que nosotros somos consolados por Dios.\"</em> Note la cadena. Dios nos consuela; nosotros consolamos a otros; el consuelo fluye cuesta abajo. El pastor que nunca ha sido consolado por Dios en su propio dolor no tiene nada que dar a las personas quebrantadas en su banca. El pastor que ha sido consolado, aun un poco, tiene el comienzo de un ministerio terapéutico."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1792603fc2b5"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "heading",
+   "text": {
+    "en": "III. The Wounded Healer",
+    "es": "III. El sanador herido"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b6203c7842af"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "This brings us to a hard truth. The pastor preaches <em>from</em> his own wounds, not in spite of them. The man who has never grieved cannot preach to grieving people. The man who has never doubted cannot preach to doubters. The man who has never battled fear cannot stand in front of frightened people and tell them what to do with their fear. This does not mean every pastor should turn the pulpit into autobiography — far from it. The pulpit is for the Word of God, not the pastor's life story. But the pastor's life is the lens through which the Word travels. A polished, pain-free lens projects a polished, pain-free Christ — and a polished, pain-free Christ heals nobody.",
+    "es": "Esto nos trae a una verdad dura. El pastor predica <em>desde</em> sus propias heridas, no a pesar de ellas. El hombre que nunca ha llorado no puede predicar a personas que lloran. El hombre que nunca ha dudado no puede predicar a los que dudan. El hombre que nunca ha luchado contra el miedo no puede pararse delante de personas asustadas y decirles qué hacer con su miedo. Esto no significa que cada pastor deba convertir el púlpito en autobiografía — lejos de eso. El púlpito es para la Palabra de Dios, no para la historia de la vida del pastor. Pero la vida del pastor es el lente por el cual la Palabra viaja. Un lente pulido y libre de dolor proyecta un Cristo pulido y libre de dolor — y un Cristo pulido y libre de dolor no sana a nadie."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e71efd2436ce"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "Joe Bayly, in his book <em>The View From a Hearse</em>, tells a story that every preacher should read every five years. After his son died, well-meaning visitors came. One of them sat down beside him and began to talk. He talked about God's dealings, about why these things happen, about hope beyond the grave. He talked constantly. He said things, Bayly admitted, that he knew were true. <em>\"I was unmoved,\"</em> Bayly wrote, <em>\"except to wish he'd go away. He finally did.\"</em>",
+    "es": "Joe Bayly, en su libro <em>The View From a Hearse</em>, cuenta una historia que cada predicador debería leer cada cinco años. Después de que su hijo murió, vinieron visitantes con buenas intenciones. Uno de ellos se sentó a su lado y comenzó a hablar. Habló sobre los tratos de Dios, sobre por qué pasan estas cosas, sobre la esperanza más allá de la tumba. Habló constantemente. Dijo cosas, admitió Bayly, que él sabía que eran verdad. <em>\"Yo no fui conmovido,\"</em> escribió Bayly, <em>\"excepto al desear que se fuera. Por fin se fue.\"</em>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b57530d052e0"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "Then another came and sat beside him. <em>\"He hardly said a word. He didn't ask leading questions. He just sat beside me for an hour or more, listened when I said something, answered briefly, prayed simply, left. I was moved. I was comforted. I hated to see him go.\"</em>",
+    "es": "Luego vino otro y se sentó a su lado. <em>\"Apenas dijo una palabra. No hizo preguntas dirigidas. Simplemente se sentó a mi lado por una hora o más, escuchó cuando yo decía algo, respondió brevemente, oró sencillamente, se fue. Yo fui conmovido. Yo fui consolado. Detesté verlo irse.\"</em>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "dc50b6fd891d"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "The first man was correct. The second was therapeutic. The first preached <em>at</em> the grieving father. The second preached <em>with</em> him. The pulpit is not a place to escape the lessons of the hospital room. It is a place to apply them.",
+    "es": "El primer hombre era correcto. El segundo era terapéutico. El primero predicó <em>al</em> padre que lloraba. El segundo predicó <em>con</em> él. El púlpito no es un lugar para escapar de las lecciones de la sala de hospital. Es un lugar para aplicarlas."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "85249070f248"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "Years ago, on Interstate 95 in rural North Carolina, a tired truck driver was making his way south. A brown sedan in front of him began weaving violently from lane to lane. The trucker thought it was a drunk, but as he came closer he saw it was an older man, shaking uncontrollably, his car nearly going off the road. The trucker keyed his CB radio and said, <em>\"You in the brown Chevy, if you can hear me, pull over. Pull off the road!\"</em> Amazingly, the man did. The trucker stopped behind him and ran to the car. The elderly man fell into his arms on a rock beside the highway and poured out the story of months of fear and pain over his only daughter's terminal illness. He had just left her hospital room, where she had told him she was stopping treatment. The trucker prayed with him. They embraced. Then they got back into their vehicles and drove on, the trucker calling words of encouragement on the CB for the next fifty miles. As the older man approached his exit, a third voice broke in over the airwaves. It was another driver — a livestock hauler. <em>\"Breaker 19, don't worry, good buddy. Go your way. I'll see him home.\"</em>",
+    "es": "Hace años, en la Interestatal 95 en la zona rural de Carolina del Norte, un camionero cansado iba hacia el sur. Un sedán café delante de él comenzó a zigzaguear violentamente de carril a carril. El camionero pensó que era un borracho, pero al acercarse vio que era un hombre mayor, temblando incontrolablemente, su carro casi saliéndose de la carretera. El camionero presionó su radio CB y dijo: <em>\"Usted en el Chevy café, si me oye, oríllese. ¡Salga del camino!\"</em> Asombrosamente, el hombre lo hizo. El camionero se detuvo detrás de él y corrió al carro. El anciano cayó en sus brazos sobre una roca al lado de la carretera y derramó la historia de meses de miedo y dolor por la enfermedad terminal de su única hija. Acababa de salir de la habitación del hospital de ella, donde ella le había dicho que iba a dejar el tratamiento. El camionero oró con él. Se abrazaron. Luego volvieron a sus vehículos y siguieron, el camionero gritando palabras de aliento por la CB durante los próximos ochenta kilómetros. Cuando el hombre mayor se acercaba a su salida, una tercera voz interrumpió por las ondas. Era otro conductor — un transportador de ganado. <em>\"Canal 19, no se preocupe, buen amigo. Siga su camino. Yo lo veré llegar a casa.\"</em>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "75a73be07242"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "That is what therapeutic preaching looks like. The pastor in the pulpit is the trucker on the side of the road. The pastor cannot drive every grieving man all the way home — but he can come alongside, stop the swerving, pray, and call ahead so that someone else picks up the burden at the next exit. <em>I'll see him home.</em> That is the spirit of every sermon that heals.",
+    "es": "Eso es lo que se ve la predicación terapéutica. El pastor en el púlpito es el camionero al lado del camino. El pastor no puede manejar a cada hombre que llora todo el camino a casa — pero puede acercarse, detener el zigzag, orar, y llamar adelante para que alguien más recoja la carga en la próxima salida. <em>Yo lo veré llegar a casa.</em> Ese es el espíritu de cada sermón que sana."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2f88e128331b"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "heading",
+   "text": {
+    "en": "IV. The Three Movements of Therapeutic Preaching",
+    "es": "IV. Los tres movimientos de la predicación terapéutica"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cc1dbe858b4d"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "Therapeutic preaching has three movements. They are not three points of a sermon outline. They are three motions of the heart that should be present in every sermon, regardless of the text or subject.",
+    "es": "La predicación terapéutica tiene tres movimientos. No son tres puntos de un bosquejo de sermón. Son tres movimientos del corazón que deben estar presentes en cada sermón, sin importar el texto o el tema."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c6eafd5845e5"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "The first movement is <em>honest diagnosis</em>. The pastor must be willing to name the wound out loud. Many preachers, in an attempt to be encouraging, never let the congregation know that the preacher knows what is hurting them. So the wound stays hidden, and the sermon does not touch it. Honest diagnosis means saying things like, <em>\"Some of you have not slept through the night in weeks because of what is happening in your home.\"</em> Or, <em>\"I know what it is to read a doctor's report and feel the floor drop out from under you.\"</em> Or, <em>\"There are people in this room this morning who have stopped praying because the last prayer was answered with a no, and they have not had the heart to ask again.\"</em> Diagnosis names the pain and tells the wounded person, <em>I see you, and the Word of God sees you.</em>",
+    "es": "El primer movimiento es <em>diagnóstico honesto</em>. El pastor debe estar dispuesto a nombrar la herida en voz alta. Muchos predicadores, en un intento de ser alentadores, nunca le hacen saber a la congregación que el predicador sabe lo que les duele. Así que la herida permanece oculta, y el sermón no la toca. El diagnóstico honesto significa decir cosas como: <em>\"Algunos de ustedes no han dormido toda la noche en semanas debido a lo que está pasando en su hogar.\"</em> O: <em>\"Yo sé lo que es leer un reporte del doctor y sentir que el piso se cae bajo sus pies.\"</em> O: <em>\"Hay personas en este cuarto esta mañana que han dejado de orar porque la última oración fue contestada con un no, y no han tenido el corazón para volver a pedir.\"</em> El diagnóstico nombra el dolor y le dice a la persona herida: <em>Te veo, y la Palabra de Dios te ve.</em>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "430f6ba012eb"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "The second movement is <em>the application of Scripture as the only true balm</em>. The diagnosis is not the cure. Once the wound is named, the pastor must bring the Word of God to bear on it directly — not in vague generalities, but in specific verses, specific passages, specific promises, specific pictures. <em>\"Cast all your care upon Him, for He cares for you\"</em> (1 Peter 5:7). <em>\"He heals the brokenhearted and binds up their wounds\"</em> (Psalm 147:3). <em>\"Weeping may endure for a night, but joy comes in the morning\"</em> (Psalm 30:5). <em>\"My grace is sufficient for you\"</em> (2 Corinthians 12:9). The Word is the bandage. Platitudes are not. <em>\"Everything happens for a reason\"</em> is not in the Bible. <em>\"God will not give you more than you can handle\"</em> is not in the Bible. <em>\"He needed another angel\"</em> is not in the Bible. Therapeutic preaching does not invent comfort — it digs the comfort God has already buried in His Word and holds it up to the wounded heart.",
+    "es": "El segundo movimiento es <em>la aplicación de la Escritura como el único bálsamo verdadero</em>. El diagnóstico no es la cura. Una vez que la herida es nombrada, el pastor debe traer la Palabra de Dios a aplicarla directamente — no en generalidades vagas, sino en versículos específicos, pasajes específicos, promesas específicas, cuadros específicos. <em>\"Echando toda vuestra ansiedad sobre él, porque él tiene cuidado de vosotros\"</em> (1 Pedro 5:7). <em>\"Él sana a los quebrantados de corazón, y venda sus heridas\"</em> (Salmo 147:3). <em>\"Por la noche durará el lloro, mas a la mañana vendrá la alegría\"</em> (Salmo 30:5). <em>\"Bástate mi gracia\"</em> (2 Corintios 12:9). La Palabra es la venda. Las palabras hechas no lo son. <em>\"Todo pasa por una razón\"</em> no está en la Biblia. <em>\"Dios no te dará más de lo que puedes manejar\"</em> no está en la Biblia. <em>\"Él necesitaba otro ángel\"</em> no está en la Biblia. La predicación terapéutica no inventa el consuelo — desentierra el consuelo que Dios ya ha enterrado en Su Palabra y lo levanta hacia el corazón herido."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e26c6d1cf0fd"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "The third movement is <em>pointing to Christ as the Wounded Healer</em>. Every therapeutic sermon, no matter the text, eventually leads the broken person to the foot of the cross and the open tomb. The wound of Christ heals our wounds. The blood of Christ cleanses our shame. The empty tomb of Christ promises that our funerals are not the end of the story. The pastor who diagnoses well and applies Scripture skillfully but never gets to Christ has only done counseling, not preaching. Preaching is what happens when the wounded soul meets the Wounded Savior in the words of the man in the pulpit.",
+    "es": "El tercer movimiento es <em>señalar a Cristo como el Sanador Herido</em>. Cada sermón terapéutico, sin importar el texto, eventualmente lleva a la persona quebrantada al pie de la cruz y a la tumba abierta. La herida de Cristo sana nuestras heridas. La sangre de Cristo limpia nuestra vergüenza. La tumba vacía de Cristo promete que nuestros funerales no son el fin de la historia. El pastor que diagnostica bien y aplica la Escritura hábilmente pero nunca llega a Cristo solamente ha hecho consejería, no predicación. La predicación es lo que sucede cuando el alma herida se encuentra con el Salvador Herido en las palabras del hombre en el púlpito."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4357a74771f0"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "heading",
+   "text": {
+    "en": "V. Common Errors",
+    "es": "V. Errores comunes"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ab69207a8e8b"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "Four errors most often turn the pulpit cold to the wounded.",
+    "es": "Cuatro errores enfrían más a menudo el púlpito hacia los heridos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7568d8c4be56"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "The first is <em>triumphalism</em>. This is the preaching that suggests if you only had enough faith, your problems would disappear. It promises healing without suffering, victory without battle, joy without sorrow. It cannot speak to the woman whose cancer is terminal because in its theology her cancer should already be gone. Triumphalism wounds the wounded. It tells the suffering saint that her suffering is her own fault.",
+    "es": "El primero es <em>el triunfalismo</em>. Es la predicación que sugiere que si solo tuviera suficiente fe, sus problemas desaparecerían. Promete sanidad sin sufrimiento, victoria sin batalla, gozo sin tristeza. No puede hablar a la mujer cuyo cáncer es terminal porque en su teología su cáncer ya debería haberse ido. El triunfalismo hiere a los heridos. Le dice al santo que sufre que su sufrimiento es su propia culpa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6c7208dc985d"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "prose",
+   "text": {
+    "en": "The second is <em>sentimentality</em>. This is preaching by tear-jerking story rather than by Word and Spirit. The pastor reaches for emotion without truth, manipulates the heartstrings without engaging the conscience. The congregation cries on Sunday and forgets by Tuesday. Therapeutic preaching may move people to tears, but the tears come because the Word has done its real work — not because the preacher has performed an emotional aria.",
+    "es": "El segundo es <em>el sentimentalismo</em>. Es la predicación por historia lacrimógena en lugar de Palabra y Espíritu. El pastor alcanza la emoción sin verdad, manipula las cuerdas del corazón sin involucrar la conciencia. La congregación llora el domingo y olvida para el martes. La predicación terapéutica puede mover a las personas a las lágrimas, pero las lágrimas vienen porque la Palabra ha hecho su verdadera obra — no porque el predicador haya ejecutado un aria emocional."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "53f6f71f30b9"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "The third is <em>theological distance</em>. This is preaching that is doctrinally precise but pastorally cold. Every word is correct. Every reference is in place. But there is no warmth, no compassion, no reaching toward the people. The wounded leave more wounded — instructed, perhaps, but uncomforted.",
+    "es": "El tercero es <em>la distancia teológica</em>. Es la predicación que es doctrinalmente precisa pero pastoralmente fría. Cada palabra es correcta. Cada referencia está en su lugar. Pero no hay calor, no hay compasión, no hay alcance hacia las personas. Los heridos se van más heridos — instruidos, quizás, pero no consolados."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "83239bab3ed8"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "prose",
+   "text": {
+    "en": "The fourth is <em>cheap comfort</em>. This is the casual quoting of Romans 8:28 to a mother who has lost a child, or the well-meant <em>\"God's got a plan\"</em> to a man who has just been served divorce papers. The verse is true. The phrase may even be true. But thrown lightly at deep wounds, true words do real damage. The pastor must learn to weigh his words to the suffering by the same measure he would use if he were the one suffering.",
+    "es": "El cuarto es <em>el consuelo barato</em>. Es la cita casual de Romanos 8:28 a una madre que ha perdido un hijo, o el bien intencionado <em>\"Dios tiene un plan\"</em> a un hombre a quien acaban de entregar papeles de divorcio. El versículo es verdadero. La frase puede incluso ser verdadera. Pero arrojadas levemente a heridas profundas, las palabras verdaderas hacen daño real. El pastor debe aprender a pesar sus palabras a los que sufren con la misma medida que usaría si él fuera el que sufre."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f8f96262b6c9"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "heading",
+   "text": {
+    "en": "VI. The Preacher's Own Soul",
+    "es": "VI. El alma del propio predicador"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "45eac95fbb16"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "prose",
+   "text": {
+    "en": "A pastor cannot preach therapeutically out of an unhealed heart. He can fake it for a season — but eventually the dryness in his soul becomes the dryness in his pulpit, and the wounded sense it. The pastor must do his own grief work, his own confession, his own receiving of the comfort he intends to give. He must be willing to weep before he preaches about weeping. He must be willing to wrestle in prayer before he preaches about prayer. He must be willing to receive Scripture's comfort into his own heart before he holds it out to others.",
+    "es": "Un pastor no puede predicar terapéuticamente desde un corazón no sanado. Puede fingirlo por un tiempo — pero eventualmente la sequedad en su alma se vuelve la sequedad en su púlpito, y los heridos lo perciben. El pastor debe hacer su propio trabajo de duelo, su propia confesión, su propia recepción del consuelo que pretende dar. Debe estar dispuesto a llorar antes de predicar sobre llorar. Debe estar dispuesto a luchar en oración antes de predicar sobre la oración. Debe estar dispuesto a recibir el consuelo de la Escritura en su propio corazón antes de extenderlo a otros."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8765a9680d9a"
+    }
+   }
+  },
+  {
+   "id": "b037",
+   "type": "prose",
+   "text": {
+    "en": "This is one of the great gifts of pastoral suffering. The pastor who has lost a parent preaches differently at funerals afterward. The pastor who has battled depression preaches differently to the discouraged afterward. The pastor whose own marriage has been stretched to breaking preaches differently to other strained marriages afterward. God allows pastors to suffer because suffering is the seminary of therapeutic preaching. The pastor who has been spared every trial may have a polished homiletic, but he will not have the wounded healer's voice. The pastor who has been broken and bandaged by God Himself will preach with a tenderness that no homiletic class can teach.",
+    "es": "Este es uno de los grandes regalos del sufrimiento pastoral. El pastor que ha perdido un padre predica de manera diferente en los funerales después. El pastor que ha batallado con la depresión predica de manera diferente a los desanimados después. El pastor cuyo propio matrimonio ha sido estirado hasta el punto de quebrarse predica de manera diferente a otros matrimonios tensos después. Dios permite que los pastores sufran porque el sufrimiento es el seminario de la predicación terapéutica. El pastor que ha sido librado de cada prueba puede tener una homilética pulida, pero no tendrá la voz del sanador herido. El pastor que ha sido quebrantado y vendado por el mismo Dios predicará con una ternura que ninguna clase de homilética puede enseñar."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3a0859daa022"
+    }
+   }
+  },
+  {
+   "id": "b038",
+   "type": "heading",
+   "text": {
+    "en": "Closing",
+    "es": "Cierre"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "76a032e9c77c"
+    }
+   }
+  },
+  {
+   "id": "b039",
+   "type": "prose",
+   "text": {
+    "en": "The pulpit is a healing station. Every Sunday morning men and women drive into the church parking lot carrying invisible wounds. The faithful pastor stands in front of them, opens the Word of God, and offers what only the Word can give — the diagnosis they have been afraid to name, the balm of Scripture they have not yet applied, and the Wounded Healer Himself, who is the only physician who can finally make them whole. <em>\"Bless the LORD, O my soul… who forgives all your iniquities, who heals all your diseases, who redeems your life from destruction, who crowns you with lovingkindness and tender mercies\"</em> (Psalm 103:2–4). Therapeutic preaching is the pulpit ministry of a God who heals. May every pastor who reads this become, by the grace of Christ, a man whose voice in the pulpit is one more instrument of that healing.",
+    "es": "El púlpito es una estación de sanidad. Cada domingo por la mañana hombres y mujeres entran al estacionamiento de la iglesia llevando heridas invisibles. El pastor fiel se para delante de ellos, abre la Palabra de Dios, y ofrece lo que solo la Palabra puede dar — el diagnóstico que han tenido miedo de nombrar, el bálsamo de la Escritura que aún no han aplicado, y el Sanador Herido mismo, que es el único médico que finalmente puede hacerlos completos. <em>\"Bendice, alma mía, a Jehová… Él es quien perdona todas tus iniquidades, el que sana todas tus dolencias; el que rescata del hoyo tu vida, el que te corona de favores y misericordias\"</em> (Salmo 103:2–4). La predicación terapéutica es el ministerio del púlpito de un Dios que sana. Que cada pastor que lea esto se vuelva, por la gracia de Cristo, un hombre cuya voz en el púlpito sea un instrumento más de esa sanidad."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4595a7a9a9f5"
+    }
+   }
+  },
+  {
+   "id": "b040",
+   "type": "prose",
+   "text": {
+    "en": "— Dr. Wayne Cook<br>Chapala Theological Seminary",
+    "es": "— Dr. Wayne Cook<br>Seminario Teológico de Chapala"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7778fcb9bb8c"
+    }
+   }
+  },
+  {
+   "id": "b041",
+   "type": "prose",
+   "text": {
+    "en": "Unit 3 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 3 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "002ac8db71ed"
+    }
+   }
+  },
+  {
+   "id": "b042",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. <strong>If you fail, the unit locks for 15 minutes.</strong>",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. <strong>Si reprueba, se bloquea por 15 minutos.</strong>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d3b8e78884d7"
+    }
+   }
+  },
+  {
+   "id": "b043",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar &amp; Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b044",
+   "type": "prose",
+   "text": {
+    "en": "Reset",
+    "es": "Reiniciar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "44c57abd888a"
+    }
+   }
+  }
+ ]
+}

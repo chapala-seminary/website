@@ -1,0 +1,516 @@
+{
+ "course": "CTSJohn",
+ "unit": 2,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right:15px; font-weight:bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Espa&ntilde;ol</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></p>\n    <p style=\"margin-top:10px; font-style:italic; color:#2f4f2f;\"><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\" style=\"display:none;\">\n    <h3><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></h3>\n    <p style=\"font-size:0.9rem;\"><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></p>\n    <label class=\"lang-en\"><!--cts:b008:en--></label><label class=\"lang-es\"><!--cts:b008:es--></label>\n    <input type=\"text\" id=\"regName\" placeholder=\"...\" aria-label=\"...\">\n    <label class=\"lang-en\"><!--cts:b009:en--></label><label class=\"lang-es\"><!--cts:b009:es--></label>\n    <input type=\"email\" id=\"regEmail\" placeholder=\"...\" aria-label=\"...\">\n    <label class=\"lang-en\"><!--cts:b010:en--></label><label class=\"lang-es\"><!--cts:b010:es--></label>\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate / Certificado</option>\n        <option value=\"mdiv\">M.Div.</option>\n        <option value=\"thm\">Th.M.</option>\n    </select>\n    <button id=\"regBtn\" class=\"nav-btn\"><span class=\"lang-en\"><!--cts:b011:en--></span><span class=\"lang-es\"><!--cts:b011:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top:8px;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\">\n\n<h3><!--cts:b012:en--></h3>\n<p><!--cts:b013:en--></p>\n\n<h3><!--cts:b014:en--></h3>\n<p><!--cts:b015:en--></p>\n<p><!--cts:b016:en--></p>\n<p><!--cts:b017:en--></p>\n<p><!--cts:b018:en--></p>\n\n<h3><!--cts:b019:en--></h3>\n<p><!--cts:b020:en--></p>\n<p><!--cts:b021:en--></p>\n<p><!--cts:b022:en--></p>\n<p><!--cts:b023:en--></p>\n<div class=\"illustration\"><!--cts:b024:en--></div>\n\n<h3><!--cts:b025:en--></h3>\n<p><!--cts:b026:en--></p>\n<p><!--cts:b027:en--></p>\n<div class=\"pull-quote\"><!--cts:b028:en--></div>\n\n<h3><!--cts:b029:en--></h3>\n<p><!--cts:b030:en--></p>\n<p><!--cts:b031:en--></p>\n<p><!--cts:b032:en--></p>\n\n</div>\n<div class=\"lang-es\">\n\n<h3><!--cts:b012:es--></h3>\n<p><!--cts:b013:es--></p>\n\n<h3><!--cts:b014:es--></h3>\n<p><!--cts:b015:es--></p>\n<p><!--cts:b016:es--></p>\n<p><!--cts:b017:es--></p>\n<p><!--cts:b018:es--></p>\n\n<h3><!--cts:b019:es--></h3>\n<p><!--cts:b020:es--></p>\n<p><!--cts:b021:es--></p>\n<p><!--cts:b022:es--></p>\n<p><!--cts:b023:es--></p>\n<div class=\"illustration\"><!--cts:b024:es--></div>\n\n<h3><!--cts:b025:es--></h3>\n<p><!--cts:b026:es--></p>\n<p><!--cts:b027:es--></p>\n<div class=\"pull-quote\"><!--cts:b028:es--></div>\n\n<h3><!--cts:b029:es--></h3>\n<p><!--cts:b030:es--></p>\n<p><!--cts:b031:es--></p>\n<p><!--cts:b032:es--></p>\n\n</div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b033:en--></span><span class=\"lang-es\"><!--cts:b033:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b034:en--></span>\n       <span class=\"lang-es\"><!--cts:b034:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top:20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b035:en--></span><span class=\"lang-es\"><!--cts:b035:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b036:en--></span><span class=\"lang-es\"><!--cts:b036:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top:15px; font-weight:bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top:10px; font-size:0.9rem; color:#1f6b3b; display:none;\"></div>\n    </div>\n</div>\n</div>\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSJohnReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "Unit 3 →",
+    "es": "Unidad 3 →"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "98a91a650db5"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "📖 The Gospel of John — Unit 2: You Must Be Born Again",
+    "es": "📖 El Evangelio de Juan — Unidad 2: Os es necesario nacer de nuevo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "89080c8ffdd5"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "\"Most assuredly, I say to you, unless one is born again, he cannot see the kingdom of God.\" — John 3:3 (NKJV)",
+    "es": "⚡ \"De cierto, de cierto te digo, que el que no naciere de nuevo, no puede ver el reino de Dios.\" — Juan 3:3 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c571433a0169"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Register to Begin",
+    "es": "Regístrese para comenzar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "007cff4200ca"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Your name and track are saved on this device and carry across every unit and every CTS course.",
+    "es": "Su nombre y trayecto se guardan en este dispositivo y se conservan en cada unidad y curso de CTS."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c3782de1c2f1"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "label",
+   "text": {
+    "en": "Full name",
+    "es": "Nombre completo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "eeb692087d62"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "label",
+   "text": {
+    "en": "Email",
+    "es": "Correo electrónico"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "84add5b29527"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "label",
+   "text": {
+    "en": "Track",
+    "es": "Trayecto"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b1c5a7af06ba"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "heading",
+   "text": {
+    "en": "Introduction — A Ruler Comes by Night",
+    "es": "Introducción — Un principal viene de noche"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0c8490e4f0b7"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "There was a man named Nicodemus, a Pharisee, a ruler of the Jews — a member of the Sanhedrin, a teacher of Israel. He came to Jesus by night. Perhaps he came at night because he feared what the other rulers would say; perhaps because the night was the only quiet hour a busy man could find; perhaps because he wanted Jesus all to himself. He opened with a compliment: \"Rabbi, we know that You are a teacher come from God; for no one can do these signs that You do unless God is with him.\" It was a generous thing to say. But Jesus did not answer the compliment. He went straight past it to the man's deepest need, and what He said must have stunned a ruler of the Jews: <em>\"Most assuredly, I say to you, unless one is born again, he cannot see the kingdom of God\"</em> (John 3:3). Nicodemus had been taught all his life that to be a son of Abraham and to keep the law was enough. In one sentence Jesus tells him it is not enough. You must be born again. Maybe we are confused as Nicodemus was. How can a man know whether he has met the one requirement for entrance into God's heaven?",
+    "es": "Había un hombre llamado Nicodemo, fariseo, principal entre los judíos — miembro del Sanhedrín, maestro de Israel. Vino a Jesús de noche. Quizá vino de noche porque temía lo que dirían los otros principales; quizá porque la noche era la única hora tranquila que un hombre ocupado podía hallar; quizá porque quería a Jesús para sí solo. Abrió con un elogio: \"Rabí, sabemos que has venido de Dios por maestro; porque nadie puede hacer estas señales que tú haces, si no está Dios con él.\" Fue algo generoso de decir. Pero Jesús no respondió al elogio. Pasó de largo, directo a la necesidad más honda del hombre, y lo que dijo debió aturdir a un principal de los judíos: ⚡ <em>\"De cierto, de cierto te digo, que el que no naciere de nuevo, no puede ver el reino de Dios\"</em> (Juan 3:3). A Nicodemo le habían enseñado toda la vida que ser hijo de Abraham y guardar la ley bastaba. En una frase Jesús le dice que no basta. Os es necesario nacer de nuevo. Tal vez estemos confundidos como Nicodemo. ¿Cómo puede un hombre saber si ha cumplido el único requisito para entrar en el cielo de Dios?"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2a282aa0318e"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "heading",
+   "text": {
+    "en": "I. The New Birth Is Supernatural",
+    "es": "I. El nuevo nacimiento es sobrenatural"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ebff6e49afb5"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "Our Lord began with something familiar, for birth is a universal experience — every person listening has been born once. The word translated \"again\" carries a second meaning: \"from above.\" Though every human being has been born naturally on this earth, if he means to see heaven he must be born a second time, a birth that comes down from above.",
+    "es": "Nuestro Señor comenzó con algo familiar, pues el nacimiento es una experiencia universal — toda persona que escucha ha nacido una vez. La palabra traducida \"de nuevo\" lleva un segundo sentido: \"de lo alto.\" Aunque todo ser humano ha nacido naturalmente en esta tierra, si espera ver el cielo debe nacer una segunda vez, un nacimiento que desciende de lo alto."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "65b9e9160a92"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "Let me tell you about the first birth — about my own. For some months I had been, you might say, scuba diving in my mother's womb. Everything was going well; the cord that fed me oxygen was intact; I was content. Then one day the water drained out of the tank and I was forced out of my habitat, grabbed and shaken — and that is how I arrived in this world, exactly as every one of us did. We did not choose that first birth; our parents chose it for us. But Jesus says there is a second birth, and this one is ours to receive. <em>\"Unless one is born of water and the Spirit, he cannot enter the kingdom of God\"</em> (John 3:5) — the water, as I take it, pointing back to that first natural birth, and the Spirit to the second.",
+    "es": "Permítame contarle del primer nacimiento — del mío. Por algunos meses había estado, podría decirse, buceando en el vientre de mi madre. Todo iba bien; el cordón que me daba oxígeno estaba intacto; yo estaba tranquilo. Luego, un día, el agua se drenó del tanque y fui expulsado de mi hábitat, agarrado y sacudido — y así llegué a este mundo, tal como cada uno de nosotros. No elegimos ese primer nacimiento; nuestros padres lo eligieron por nosotros. Pero Jesús dice que hay un segundo nacimiento, y éste es nuestro para recibir. ⚡ <em>\"El que no naciere de agua y del Espíritu, no puede entrar en el reino de Dios\"</em> (Juan 3:5) — el agua, según lo entiendo, apuntando a aquel primer nacimiento natural, y el Espíritu al segundo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3a7e148c8e39"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "Nicodemus stumbled at it, as the natural mind always does. \"How can a man be born when he is old? Can he enter a second time into his mother's womb and be born?\" He was thinking of flesh; Jesus was speaking of the Spirit. Here we meet the strange blindness of the sinner: a learned teacher of Israel could not see what a child can receive. The pagans had their imitations of rebirth — the rabbis called a Gentile convert a newborn child; the Greek mystery religions staged it with ceremony and blood — but those were only symbols. The rebirth Jesus means is no symbol and no ceremony. It is supernatural. It is the work of the Holy Spirit, and nothing less than God can accomplish it.",
+    "es": "Nicodemo tropezó con ello, como siempre lo hace la mente natural. \"¿Cómo puede un hombre nacer siendo viejo? ¿Puede entrar por segunda vez en el vientre de su madre y nacer?\" Él pensaba en la carne; Jesús hablaba del Espíritu. Aquí nos topamos con la extraña ceguera del pecador: un docto maestro de Israel no podía ver lo que un niño puede recibir. Los paganos tenían sus imitaciones del renacimiento — los rabinos llamaban al gentil convertido un niño recién nacido; las religiones misteriosas griegas lo escenificaban con ceremonia y sangre — pero eran solo símbolos. El renacimiento que Jesús quiere decir no es símbolo ni ceremonia. Es sobrenatural. Es la obra del Espíritu Santo, y nada menos que Dios puede lograrlo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4d9a14debecb"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "A man without Christ is a lost man. I have a friend whose house sits high in the mountains, and I have learned that the map on my phone simply gives up in that country; more than once I have had to stop and telephone him to find the way. That is the soul without Christ — no map that works, no sure road, no certainty of where the path even goes. Then a Guide appears. The Guide is Christ, and He leads the lost out of the dark and into the life of the new birth.",
+    "es": "Un hombre sin Cristo es un hombre perdido. Tengo un amigo cuya casa está en lo alto de las montañas, y he aprendido que el mapa de mi teléfono sencillamente se rinde en aquella tierra; más de una vez he tenido que detenerme y llamarlo para hallar el camino. Así es el alma sin Cristo — ningún mapa que sirva, ningún camino seguro, ninguna certeza de adónde lleva siquiera la senda. Entonces aparece un Guía. El Guía es Cristo, y él saca a los perdidos de la oscuridad y los lleva a la vida del nuevo nacimiento."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7d53f68d6eb3"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "heading",
+   "text": {
+    "en": "II. The New Birth Is a Radical Transformation",
+    "es": "II. El nuevo nacimiento es una transformación radical"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "261215fd13f4"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "<em>\"That which is born of the flesh is flesh, and that which is born of the Spirit is spirit\"</em> (John 3:6). Flesh can only ever produce flesh; it cannot lift itself up into the things of God. Only the Spirit can give birth to spirit. Then Jesus reaches for the freest picture He could find: <em>\"The wind blows where it wishes, and you hear the sound of it, but cannot tell where it comes from and where it goes. So is everyone who is born of the Spirit\"</em> (John 3:8). You cannot command the wind. You cannot see it. But you can hear it in the trees and feel it on your face, and you know it is real by what it does. So it is with the Spirit. We cannot manage Him or schedule Him; we can only open our hearts and receive what He works.",
+    "es": "⚡ <em>\"Lo que es nacido de la carne, carne es; y lo que es nacido del Espíritu, espíritu es\"</em> (Juan 3:6). La carne solo puede producir carne; no puede elevarse a las cosas de Dios. Solo el Espíritu puede dar a luz espíritu. Entonces Jesús toma la imagen más libre que pudo hallar: ⚡ <em>\"El viento sopla de donde quiere, y oyes su sonido; mas ni sabes de dónde viene, ni a dónde va; así es todo aquel que es nacido del Espíritu\"</em> (Juan 3:8). No puedes mandar al viento. No puedes verlo. Pero puedes oírlo en los árboles y sentirlo en el rostro, y sabes que es real por lo que hace. Así es con el Espíritu. No podemos manejarlo ni agendarlo; solo podemos abrir el corazón y recibir lo que él obra."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e17df82ad92b"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "And mark this well, brother: did you think you became a Christian because one day you decided it on your own? You did not. \"No one can come to Me,\" Jesus said, \"unless the Father who sent Me draws him.\" The new birth is His work before it is ever our choice.",
+    "es": "Y note bien esto, hermano: ¿pensó que se hizo cristiano porque un día lo decidió por su cuenta? No fue así. \"Ninguno puede venir a mí,\" dijo Jesús, \"si el Padre que me envió no le trajere.\" El nuevo nacimiento es obra suya antes de ser nuestra elección."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ae7c051e2c25"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "I remember my own second birth. I was a boy of eight, under deep conviction during some special services at our church. I went home and talked with my parents and grandparents, and we agreed I was ready. The hard part, in a Baptist church, was walking to the front during the invitation to confess it publicly, and at eight years old I dreaded standing up there alone. I need not have worried — three others walked forward at the same moment. Of all the decisions I have made in the long years since, not one has mattered as much as the one I made at eight.",
+    "es": "Recuerdo mi propio segundo nacimiento. Era un niño de ocho años, bajo profunda convicción durante unos cultos especiales en nuestra iglesia. Fui a casa y hablé con mis padres y mis abuelos, y acordamos que yo estaba listo. Lo difícil, en una iglesia bautista, era pasar al frente durante la invitación para confesarlo públicamente, y a los ocho años me aterraba estar allí solo. No debí preocuparme — otros tres pasaron al frente en el mismo momento. De todas las decisiones que he tomado en los largos años desde entonces, ninguna ha importado tanto como la que tomé a los ocho."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0162c65c0052"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "What happens in that second birth is not a touch-up; it is a transformation from the inside out. Think of the caterpillar — earthbound, slow, bound to the leaf it crawls on. It spins itself into a cocoon, and inside that hidden place something miraculous happens, and what comes out is not a better caterpillar but a creature with wings. So is the man who meets Christ. He does not merely turn over a new leaf; he becomes a new creature. The old nature is put to death, and a new nature, alive to God, is given in its place.",
+    "es": "Lo que sucede en ese segundo nacimiento no es un retoque; es una transformación de adentro hacia afuera. Piense en la oruga — atada a la tierra, lenta, sujeta a la hoja por la que se arrastra. Se envuelve en un capullo, y dentro de aquel lugar oculto algo milagroso ocurre, y lo que sale no es una oruga mejor sino una criatura con alas. Así es el hombre que se encuentra con Cristo. No simplemente da vuelta a una nueva hoja; se vuelve una nueva criatura. La vieja naturaleza es muerta, y una nueva naturaleza, viva para Dios, le es dada en su lugar."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "958454646357"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "<strong>R. A. Torrey.</strong> When R. A. Torrey was young he had no faith in God or in the Book, and his praying mother pled with him as he walked deeper into sin. \"When you come to the darkest hour of all,\" she told him, \"if you will call on your mother's God with all your heart, you will get the help you need.\" Years later, in a hotel room, sleepless and weary of life, he reached for the gun in the drawer to end it — and his mother's words came back. He fell on his knees: \"O God of my mother, if there be such a Being, I need light. If You will give it, I will follow You.\" In that moment the dark heart filled with light. He rose a born-again man, and went on to lead thousands to Christ. That is what the Spirit does.",
+    "es": "<strong>R. A. Torrey.</strong> Cuando R. A. Torrey era joven no tenía fe en Dios ni en el Libro, y su madre, mujer de oración, le rogaba mientras él se adentraba más en el pecado. \"Cuando llegues a la hora más oscura de todas,\" le dijo, \"si invocas al Dios de tu madre con todo tu corazón, recibirás la ayuda que necesitas.\" Años después, en una habitación de hotel, sin poder dormir y cansado de la vida, alcanzó la pistola del cajón para terminar con todo — y las palabras de su madre volvieron a él. Cayó de rodillas: \"Oh Dios de mi madre, si existe un Ser así, necesito luz. Si me la das, te seguiré.\" En ese momento el corazón oscuro se llenó de luz. Se levantó hombre nacido de nuevo, y llegó a guiar a miles a Cristo. Eso es lo que hace el Espíritu."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "47a068b36ae6"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "heading",
+   "text": {
+    "en": "III. The New Birth Is Essential",
+    "es": "III. El nuevo nacimiento es esencial"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "aaad1e8681e0"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "<em>\"You must be born again\"</em> (John 3:7). I once heard a woman on a talk show say, \"I am a Christian, but not the born-again kind.\" I do not know what Bible she was reading. Jesus does not offer the new birth as one option on a menu; He lays it down as an absolute: you <em>must</em>. Truth has a way of being dogmatic. Two plus two is four — never three, never five. And so it is here: <em>\"unless one is born of water and the Spirit, he cannot enter the kingdom of God\"</em> (John 3:5).",
+    "es": "⚡ <em>\"Os es necesario nacer de nuevo\"</em> (Juan 3:7). Una vez oí a una mujer en un programa de entrevistas decir: \"Soy cristiana, pero no del tipo nacida de nuevo.\" No sé qué Biblia leía. Jesús no ofrece el nuevo nacimiento como una opción del menú; lo establece como un absoluto: os es <em>necesario</em>. La verdad suele ser dogmática. Dos más dos son cuatro — nunca tres, nunca cinco. Y así es aquí: ⚡ <em>\"el que no naciere de agua y del Espíritu, no puede entrar en el reino de Dios\"</em> (Juan 3:5)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bd1f90deb9fc"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "This is the most important requirement of your life, because there is an appointment none of us will miss. \"It is appointed for men to die once, but after this the judgment\" (Hebrews 9:27). Amos put it plainly: \"Prepare to meet your God\" (Amos 4:12). Picture a closed door, and behind it the kingdom of God, and crowds standing before it longing to go in — but the door is locked, and there is only one key. The key is the new birth. Or think of a border: no one crosses into another country without a passport, and the new birth is the passport stamped by heaven. Without it there is no entry.",
+    "es": "Este es el requisito más importante de su vida, porque hay una cita que ninguno de nosotros faltará. \"Está establecido para los hombres que mueran una sola vez, y después de esto el juicio\" (Hebreos 9:27). Amós lo dijo sin rodeos: \"Prepárate para venir al encuentro de tu Dios\" (Amós 4:12). Imagine una puerta cerrada, y tras ella el reino de Dios, y multitudes de pie ante ella anhelando entrar — pero la puerta está cerrada con llave, y hay una sola llave. La llave es el nuevo nacimiento. O piense en una frontera: nadie cruza a otro país sin pasaporte, y el nuevo nacimiento es el pasaporte sellado por el cielo. Sin él no hay entrada."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "088a1884e10b"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "The door is locked, and there is only one key. The key is the new birth.",
+    "es": "La puerta está cerrada con llave, y hay una sola llave. La llave es el nuevo nacimiento."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "884b56a4283f"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "heading",
+   "text": {
+    "en": "IV. The Serpent Lifted Up, and the Love of God",
+    "es": "IV. La serpiente levantada, y el amor de Dios"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "923ce29ca7da"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "Then Jesus, still teaching this ruler by night, took him back to a story Nicodemus knew by heart. In the wilderness the people were dying of serpent bites, and God told Moses to lift up a bronze serpent on a pole; whoever looked at it lived. <em>\"And as Moses lifted up the serpent in the wilderness, even so must the Son of Man be lifted up, that whoever believes in Him should not perish but have eternal life\"</em> (John 3:14–15). There it is — the cross, foretold to a midnight visitor. The dying did not have to climb or earn or even understand; they had only to look, and live. So it is with the lifted-up Savior: look to Him and live.",
+    "es": "Entonces Jesús, enseñando todavía a este principal de noche, lo llevó de vuelta a una historia que Nicodemo sabía de memoria. En el desierto el pueblo moría de mordeduras de serpiente, y Dios mandó a Moisés levantar una serpiente de bronce sobre un asta; todo el que la miraba vivía. ⚡ <em>\"Y como Moisés levantó la serpiente en el desierto, así es necesario que el Hijo del Hombre sea levantado; para que todo aquel que en él cree, no se pierda, mas tenga vida eterna\"</em> (Juan 3:14–15). Ahí está — la cruz, anunciada a un visitante de medianoche. Los moribundos no tenían que trepar ni ganar ni siquiera entender; solo tenían que mirar, y vivir. Así es con el Salvador levantado: mírelo y viva."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "481a6f9f21d2"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "And then comes the verse the whole Bible seems to lean toward: <em>\"For God so loved the world that He gave His only begotten Son, that whoever believes in Him should not perish but have everlasting life\"</em> (John 3:16). Hear that word — <em>whoever</em>. Not the worthy, not the Jew only, not the clean — whoever. The door is as wide as the word \"whoever.\" <em>\"For God did not send His Son into the world to condemn the world, but that the world through Him might be saved\"</em> (John 3:17). He did not come with a gavel; He came with a cross.",
+    "es": "Y entonces viene el versículo hacia el cual toda la Biblia parece inclinarse: ⚡ <em>\"Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna\"</em> (Juan 3:16). Oiga esa palabra — <em>todo aquel</em>. No los dignos, no solo el judío, no los limpios — todo aquel. La puerta es tan ancha como las palabras \"todo aquel.\" ⚡ <em>\"Porque no envió Dios a su Hijo al mundo para condenar al mundo, sino para que el mundo sea salvo por él\"</em> (Juan 3:17). No vino con un mazo de juez; vino con una cruz."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "47431f7d9d63"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "prose",
+   "text": {
+    "en": "Why, then, do men stay outside? \"This is the condemnation, that the light has come into the world, and men loved darkness rather than light, because their deeds were evil\" (John 3:19). The tragedy is never that the light is too dim; it is that men shut their eyes and love the dark. But the one who comes to the light is born of God. So I leave you where Jesus left Nicodemus — with the necessity and the offer in one breath. You must be born again; and whoever will come, may. Have you been born a second time? Not your church, not your heritage, not your good intentions — you. If the Spirit is stirring even now, do not marvel; open your heart and receive the gift of God.",
+    "es": "¿Por qué, entonces, se quedan fuera los hombres? \"Y esta es la condenación: que la luz vino al mundo, y los hombres amaron más las tinieblas que la luz, porque sus obras eran malas\" (Juan 3:19). La tragedia nunca es que la luz sea demasiado tenue; es que los hombres cierran los ojos y aman la oscuridad. Pero el que viene a la luz es nacido de Dios. Así que le dejo donde Jesús dejó a Nicodemo — con la necesidad y la oferta en un mismo aliento. Os es necesario nacer de nuevo; y todo aquel que quiera venir, puede. ¿Ha nacido usted por segunda vez? No su iglesia, no su herencia, no sus buenas intenciones — usted. Si el Espíritu le mueve aun ahora, no se maraville; abra el corazón y reciba el don de Dios."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d1f04cf9e76f"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "Unit 2 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 2 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "345cc83595a9"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. The short-answer section is practice for Certificate students and does not count against you.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. La sección de respuesta corta es práctica para el Certificado y no cuenta en su contra."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9168d4aa12d6"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

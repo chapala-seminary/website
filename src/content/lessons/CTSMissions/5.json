@@ -1,0 +1,530 @@
+{
+ "course": "CTSMissions",
+ "unit": 5,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<a href=\"index.html\" style=\"display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif\">📚 Catalog / Catálogo</a>\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"prevUnitBtn\">← Previous</button>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\">Next →</button>\n    </div>\n</div>\n<div class=\"lang-toggle-group\" role=\"group\" aria-label=\"Language\">\n  <button data-lang=\"en\" class=\"active\">English</button>\n  <button data-lang=\"es\">Español</button>\n  <button data-lang=\"both\">Both / Ambos</button>\n</div>\n<span id=\"trackBadgeSlot\"></span>\n\n<div id=\"regWarn\" class=\"reg-warn hidden\">\n  <span class=\"lang-en\"><!--cts:b001:en--></span>\n  <span class=\"lang-es\"><!--cts:b001:es--></span>\n</div>\n<div id=\"regModal\" class=\"reg-modal hidden\" role=\"dialog\" aria-labelledby=\"regModalTitle\">\n  <div class=\"reg-modal-inner\">\n    <h2 id=\"regModalTitle\"><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n    <label><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></label>\n    <input type=\"text\" id=\"regName\" placeholder=\"\" autocomplete=\"name\" aria-label=\"regName\">\n    <label><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></label>\n    <input type=\"email\" id=\"regEmail\" placeholder=\"\" autocomplete=\"email\" aria-label=\"regEmail\">\n    <label><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></label>\n    <div class=\"track-options\">\n      <label><input type=\"radio\" name=\"regTrack\" value=\"cert\" checked> <span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></label>\n      <label><input type=\"radio\" name=\"regTrack\" value=\"mdiv\"> <span class=\"lang-en\"><!--cts:b008:en--></span><span class=\"lang-es\"><!--cts:b008:es--></span></label>\n      <label><input type=\"radio\" name=\"regTrack\" value=\"thm\"> <span class=\"lang-en\"><!--cts:b009:en--></span><span class=\"lang-es\"><!--cts:b009:es--></span></label>\n    </div>\n    <p style=\"font-size:0.82rem; color:#6b5236; font-style:italic; margin-top:8px;\">\n      <span class=\"lang-en\"><!--cts:b010:en--></span>\n      <span class=\"lang-es\"><!--cts:b010:es--></span>\n    </p>\n    <button id=\"regSaveBtn\" type=\"button\"><span class=\"lang-en\"><!--cts:b011:en--></span><span class=\"lang-es\"><!--cts:b011:es--></span></button>\n  </div>\n</div>\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b012:en--></span><span class=\"lang-es\"><!--cts:b012:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b013:en--></span><span class=\"lang-es\"><!--cts:b013:es--></span></p>\n</div>\n\n<div class=\"card\" id=\"teachingContent\">\n    <div class=\"lang-en\">\n        <h2><!--cts:b014:en--></h2>\n        <p><!--cts:b015:en--></p>\n\n        <h2><!--cts:b016:en--></h2>\n        <p><!--cts:b017:en--></p>\n\n        <p><!--cts:b018:en--></p>\n\n        <h2><!--cts:b019:en--></h2>\n        <p><!--cts:b020:en--></p>\n\n        <p><!--cts:b021:en--></p>\n\n        <h2><!--cts:b022:en--></h2>\n        <p><!--cts:b023:en--></p>\n\n        <h2><!--cts:b024:en--></h2>\n        <p><!--cts:b025:en--></p>\n\n        <h2><!--cts:b026:en--></h2>\n        <p><!--cts:b027:en--></p>\n\n        <h2><!--cts:b028:en--></h2>\n        <p><!--cts:b029:en--></p>\n\n        <h2><!--cts:b030:en--></h2>\n        <p><!--cts:b031:en--></p>\n    </div>\n    <div class=\"lang-es\">\n        <h2><!--cts:b014:es--></h2>\n        <p><!--cts:b015:es--></p>\n\n        <h2><!--cts:b016:es--></h2>\n        <p><!--cts:b017:es--></p>\n\n        <p><!--cts:b018:es--></p>\n\n        <h2><!--cts:b019:es--></h2>\n        <p><!--cts:b020:es--></p>\n\n        <p><!--cts:b021:es--></p>\n\n        <h2><!--cts:b022:es--></h2>\n        <p><!--cts:b023:es--></p>\n\n        <h2><!--cts:b024:es--></h2>\n        <p><!--cts:b025:es--></p>\n\n        <h2><!--cts:b026:es--></h2>\n        <p><!--cts:b027:es--></p>\n\n        <h2><!--cts:b028:es--></h2>\n        <p><!--cts:b029:es--></p>\n\n        <h2><!--cts:b030:es--></h2>\n        <p><!--cts:b031:es--></p>\n    </div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b032:en--></span><span class=\"lang-es\"><!--cts:b032:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b033:en--></span><span class=\"lang-es\"><!--cts:b033:es--></span></p>\n    <div class=\"exam-status hidden\" id=\"examStatus\"></div>\n<div class=\"mc-section\" id=\"mcSection\">\n  <h3><span class=\"lang-en\"><!--cts:b034:en--></span><span class=\"lang-es\"><!--cts:b034:es--></span></h3>\n  <div id=\"mcContainer\"></div>\n</div>\n<div class=\"sa-section\" id=\"saSection\">\n  <h3><span class=\"lang-en\"><!--cts:b035:en--></span><span class=\"lang-es\"><!--cts:b035:es--></span></h3>\n  <p class=\"sa-note\"><span class=\"lang-en\" id=\"saNoteEn\"></span><span class=\"lang-es\" id=\"saNoteEs\"></span></p>\n  <div id=\"kwContainer\"></div>\n</div>\n<div style=\"margin-top: 20px;\">\n  <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b036:en--></span><span class=\"lang-es\"><!--cts:b036:es--></span></button>\n  <button id=\"resetExamBtn\" class=\"btn-reset\" type=\"button\"><span class=\"lang-en\"><!--cts:b037:en--></span><span class=\"lang-es\"><!--cts:b037:es--></span></button>\n  <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n</div>\n</div>\n</div>\n\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSMissionsReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "⚠ Please register your name to receive credit for this unit. <button class=\"small\" id=\"openRegBtn\" type=\"button\">Register</button>",
+    "es": "⚠ Por favor registre su nombre para recibir crédito por esta unidad. <button class=\"small\" id=\"openRegBtn2\" type=\"button\">Registrar</button>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "300bfc92ba6e"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "Welcome to World Missions",
+    "es": "Bienvenido a Misiones Mundiales"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e62af02944dd"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "Before you begin this unit, please enter your name and select your track. This information is stored only in your browser and is shared across all CTS courses.",
+    "es": "Antes de comenzar esta unidad, por favor ingrese su nombre y seleccione su vía. Esta información se guarda solo en su navegador y es compartida entre todos los cursos del CTS."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4efe49cf1f65"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "Full name",
+    "es": "Nombre completo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "eeb692087d62"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "Email (optional)",
+    "es": "Correo electrónico (opcional)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5c10b588a954"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Track",
+    "es": "Vía"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b1c5a7af06ba"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Certificate",
+    "es": "Certificado"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "10de46b3b341"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "M.Div",
+    "es": "M.Div"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "621c580e3436"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "Th.M.",
+    "es": "Th.M."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c7ffb710c525"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate:</strong> Multiple-choice only, 90% to pass each unit. <strong>M.Div / Th.M.:</strong> Multiple-choice + short-answer, both at 90%.",
+    "es": "<strong>Certificado:</strong> Solo opción múltiple, 90% para aprobar cada unidad. <strong>M.Div / Th.M.:</strong> Opción múltiple + respuesta corta, ambas al 90%."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "431989696561"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Save and Continue",
+    "es": "Guardar y Continuar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "49a2b0fecc60"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "🌍 World Missions — Unit 5: Paul the Missionary",
+    "es": "🌍 Misiones Mundiales — Unidad 5: Pablo el Misionero"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3a394dac390a"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "heading",
+   "text": {
+    "en": "Introduction: The Apostle to the Nations",
+    "es": "Introducción: El Apóstol a las Naciones"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "565c8e7860eb"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "After the Lord Jesus Himself, no one in history has shaped the work of world missions like the apostle Paul. He was the first great cross-cultural missionary, the model church-planter, and the theologian who explained to the church why the gospel must go to all nations. In roughly fifteen years of labor he carried the gospel across Asia Minor and into Europe, planted churches in city after city, and wrote letters that still instruct and convict the people of God today. To study missions is, in large part, to study Paul. In this unit we trace his call, his sending, his journeys, his strategy, his suffering, and his message.",
+    "es": "Después del Señor Jesús mismo, nadie en la historia ha dado forma a la obra de las misiones mundiales como el apóstol Pablo. Fue el primer gran misionero transcultural, el modelo del plantador de iglesias, y el teólogo que explicó a la iglesia por qué el evangelio debe ir a todas las naciones. En unos quince años de labor llevó el evangelio por Asia Menor y hasta Europa, plantó iglesias en ciudad tras ciudad, y escribió cartas que todavía instruyen y convencen al pueblo de Dios hoy. Estudiar las misiones es, en gran parte, estudiar a Pablo. En esta unidad trazamos su llamado, su envío, sus viajes, su estrategia, su sufrimiento y su mensaje."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c38319a2b687"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "heading",
+   "text": {
+    "en": "I. The Persecutor Turned Missionary",
+    "es": "I. El Perseguidor Convertido en Misionero"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "817cf5957b7c"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "Paul did not begin as a friend of the gospel. He began as its fiercest enemy, a one-man inquisition breathing threats and murder against the disciples. But on the road to Damascus the risen Christ stopped him with a flash of noonday light, and the persecutor became the preacher. From the very first moment, his commission was a missionary commission. The Lord said of him, <em>\"He is a chosen vessel of Mine to bear My name before Gentiles, kings, and the children of Israel\"</em> (Acts 9:15, NKJV).",
+    "es": "Pablo no comenzó como amigo del evangelio. Comenzó como su más feroz enemigo, una inquisición de un solo hombre que respiraba amenazas y muerte contra los discípulos. Pero en el camino a Damasco el Cristo resucitado lo detuvo con un destello de luz de mediodía, y el perseguidor se volvió predicador. Desde el primer momento, su comisión fue una comisión misionera. El Señor dijo de él: <em>\"Instrumento escogido me es éste, para llevar mi nombre en presencia de los gentiles, y de reyes, y de los hijos de Israel\"</em> (Hechos 9:15, RVG)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "afb7a174cbaf"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "Two lessons stand out from that conversion. First, nobody is too far gone. The same Christ who made a Paul out of a Saul still walks the roads of this world looking for hardened sinners; no one is beyond His reach. Second, conversion costs the convert. The Lord did not promise Saul comfort; He promised him suffering: <em>\"For I will show him how many things he must suffer for My name's sake\"</em> (Acts 9:16, NKJV). The gospel is the costliest free gift in the universe, and a faithful missionary tells men the price on the front end.",
+    "es": "Dos lecciones se destacan de aquella conversión. Primero, nadie está demasiado perdido. El mismo Cristo que hizo un Pablo de un Saulo todavía recorre los caminos de este mundo buscando a los pecadores endurecidos; nadie está fuera de su alcance. Segundo, la conversión le cuesta al convertido. El Señor no le prometió a Saulo comodidad; le prometió sufrimiento: <em>\"Porque yo le mostraré cuán grandes cosas le es necesario que padezca por mi nombre\"</em> (Hechos 9:16, RVG). El evangelio es el regalo gratuito más costoso del universo, y un misionero fiel le dice al hombre el precio desde el principio."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "98733512a338"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "heading",
+   "text": {
+    "en": "II. Sent by the Church",
+    "es": "II. Enviado por la Iglesia"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ae4662059eed"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "Paul did not send himself. As we saw in the last unit, it was the church at Antioch that laid hands on Barnabas and Saul and sent them out under the leading of the Holy Spirit. And here a third lesson from his early days deserves our attention: the church needs its Barnabases. When the disciples in Jerusalem were still afraid of the former persecutor, it was Barnabas who took him in and vouched for him. There are more Barnabas-shaped roles in any congregation than there will ever be Paul-shaped pulpits, and the future of the gospel often runs through the people willing to stand behind a new believer who has no reputation yet.",
+    "es": "Pablo no se envió a sí mismo. Como vimos en la unidad anterior, fue la iglesia de Antioquía la que impuso las manos sobre Bernabé y Saulo y los envió bajo la dirección del Espíritu Santo. Y aquí una tercera lección de sus primeros días merece nuestra atención: la iglesia necesita a sus Bernabés. Cuando los discípulos en Jerusalén todavía temían al ex perseguidor, fue Bernabé quien lo acogió y respondió por él. Hay más papeles con forma de Bernabé en cualquier congregación de los que jamás habrá púlpitos con forma de Pablo, y el futuro del evangelio muchas veces corre por medio de los que están dispuestos a respaldar a un nuevo creyente que aún no tiene reputación."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "965de5b0feb5"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "Paul never worked alone. He labored with Barnabas, then with Silas, with young Timothy, with Luke the physician, and with Priscilla and Aquila. Missions, in Paul's hands, was always the work of a team sent by a church.",
+    "es": "Pablo nunca trabajó solo. Trabajó con Bernabé, luego con Silas, con el joven Timoteo, con Lucas el médico, y con Priscila y Aquila. Las misiones, en manos de Pablo, fueron siempre la obra de un equipo enviado por una iglesia."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "febd60434e1c"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "heading",
+   "text": {
+    "en": "III. The Three Journeys",
+    "es": "III. Los Tres Viajes"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bb0ea90fd42a"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "Paul's life as a missionary is usually traced through three great journeys. On the first, he and Barnabas sailed to Cyprus and then crossed into the highlands of Galatia, preaching in Pisidian Antioch, Iconium, Lystra, and Derbe, and planting churches in the face of fierce opposition. On the second journey, God closed the door into Asia and gave Paul a vision of a man of Macedonia pleading, \"Come over and help us.\" With that vision the gospel crossed into Europe — to Philippi, Thessalonica, Berea, Athens, and eighteen fruitful months in Corinth. On the third journey Paul settled for nearly three years in Ephesus, until the word of the Lord had sounded throughout the whole province of Asia. The arc of his life ran ever westward, ever toward new ground.",
+    "es": "La vida de Pablo como misionero suele trazarse a través de tres grandes viajes. En el primero, él y Bernabé navegaron a Chipre y luego cruzaron a las tierras altas de Galacia, predicando en Antioquía de Pisidia, Iconio, Listra y Derbe, y plantando iglesias frente a una feroz oposición. En el segundo viaje, Dios cerró la puerta a Asia y dio a Pablo una visión de un varón macedonio que rogaba: \"Pasa a Macedonia y ayúdanos.\" Con aquella visión el evangelio cruzó a Europa — a Filipos, Tesalónica, Berea, Atenas, y dieciocho fructíferos meses en Corinto. En el tercer viaje Pablo se estableció por casi tres años en Éfeso, hasta que la palabra del Señor hubo resonado por toda la provincia de Asia. El arco de su vida corrió siempre hacia el occidente, siempre hacia terreno nuevo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1adc8b45336b"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "heading",
+   "text": {
+    "en": "IV. Paul's Missionary Strategy",
+    "es": "IV. La Estrategia Misionera de Pablo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "52528fb6c495"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "Paul's labors were not random; he worked by a clear strategy that missionaries still learn from. He went to the great cities — Antioch, Ephesus, Corinth, Philippi — strategic centers from which the gospel could radiate into the surrounding region. He began in the synagogue, taking the gospel to the Jew first, and when he was rejected he turned to the Gentiles. He planted churches, appointed elders to lead them, and moved on, returning later or writing letters to strengthen them. Above all, he aimed at unreached ground: <em>\"And so I have made it my aim to preach the gospel, not where Christ was named, lest I should build on another man's foundation\"</em> (Romans 15:20, NKJV). The regions beyond were always before him.",
+    "es": "Las labores de Pablo no fueron al azar; trabajó con una estrategia clara de la cual los misioneros todavía aprenden. Iba a las grandes ciudades — Antioquía, Éfeso, Corinto, Filipos — centros estratégicos desde los cuales el evangelio podía irradiar a la región circundante. Comenzaba en la sinagoga, llevando el evangelio al judío primero, y cuando era rechazado se volvía a los gentiles. Plantaba iglesias, nombraba ancianos para dirigirlas, y seguía adelante, regresando más tarde o escribiendo cartas para fortalecerlas. Sobre todo, apuntaba a terreno no alcanzado: <em>\"Y de esta manera me esforcé a predicar el evangelio, no donde Cristo ya hubiese sido nombrado, por no edificar sobre fundamento ajeno\"</em> (Romanos 15:20, RVG). Las regiones más allá siempre estaban delante de él."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bc1d7ead040c"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "heading",
+   "text": {
+    "en": "V. The Cost of the Mission",
+    "es": "V. El Costo de la Misión"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "468a7766481c"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "The missionary life of Paul was watered with tears. He could remind the Ephesian elders that for three years he did not cease to warn everyone night and day with tears (Acts 20:31). And it was a life marked by suffering. He was imprisoned often, beaten beyond measure, given the thirty-nine lashes five times, shipwrecked, and exposed to danger on every side, carrying daily the weight of his care for all the churches (2 Corinthians 11:23–28). Yet he never counted the cost too high. <em>\"I have become all things to all men, that I might by all means save some\"</em> (1 Corinthians 9:22, NKJV). The true missionary spends himself for the souls of others.",
+    "es": "La vida misionera de Pablo fue regada con lágrimas. Pudo recordar a los ancianos de Éfeso que por tres años no había cesado de amonestar con lágrimas a cada uno, de noche y de día (Hechos 20:31). Y fue una vida marcada por el sufrimiento. Fue encarcelado muchas veces, azotado sin medida, recibió los treinta y nueve azotes cinco veces, naufragó, y estuvo expuesto al peligro por todos lados, llevando cada día el peso de su preocupación por todas las iglesias (2 Corintios 11:23–28). Sin embargo, nunca tuvo el costo por demasiado alto. <em>\"A todos me he hecho todo, para que de todos modos salve a algunos\"</em> (1 Corintios 9:22, RVG). El verdadero misionero se gasta a sí mismo por las almas de los demás."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0a784455c963"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "heading",
+   "text": {
+    "en": "VI. The Theologian of the Mission",
+    "es": "VI. El Teólogo de la Misión"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8647464e25ca"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "Paul did not only labor in the mission; he explained it. In his letter to the Romans he laid bare the lostness of every man and the gospel that is for every nation, and he pressed the church with the unanswerable logic of sending: <em>\"How shall they hear without a preacher? And how shall they preach unless they are sent?\"</em> (Romans 10:14–15, NKJV). In his letter to the Galatians he defended the gospel of grace for the Gentiles against all who would burden them with the law, insisting that in Christ there is neither Jew nor Greek. His letters are the missionary's deepest schooling, and the church has never outgrown them.",
+    "es": "Pablo no solo trabajó en la misión; la explicó. En su carta a los Romanos puso al descubierto la perdición de todo hombre y el evangelio que es para toda nación, y apremió a la iglesia con la lógica incontestable del envío: <em>\"¿Cómo oirán sin haber quién les predique? ¿Y cómo predicarán si no fueren enviados?\"</em> (Romanos 10:14–15, RVG). En su carta a los Gálatas defendió el evangelio de la gracia para los gentiles contra todos los que querían cargarlos con la ley, insistiendo en que en Cristo no hay judío ni griego. Sus cartas son la escuela más profunda del misionero, y la iglesia nunca las ha superado."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "721b542917ed"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "heading",
+   "text": {
+    "en": "Conclusion: A Life Poured Out",
+    "es": "Conclusión: Una Vida Derramada"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7cd2d5d4f88e"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "Paul shows us what a life poured out for the nations looks like: called by grace, sent by a praying church, strategic in his labor, joyful in his suffering, and clear in his gospel. At the end he could write, <em>\"I have fought the good fight, I have finished the race, I have kept the faith\"</em> (2 Timothy 4:7, NKJV). The same Lord who made a missionary out of the persecutor of Tarsus is still calling and still sending. The only question is whether He will find in us the willing heart He found in Paul.",
+    "es": "Pablo nos muestra cómo es una vida derramada por las naciones: llamada por la gracia, enviada por una iglesia que ora, estratégica en su labor, gozosa en su sufrimiento, y clara en su evangelio. Al final pudo escribir: <em>\"He peleado la buena batalla, he acabado la carrera, he guardado la fe\"</em> (2 Timoteo 4:7, RVG). El mismo Señor que hizo un misionero del perseguidor de Tarso todavía está llamando y todavía está enviando. La única pregunta es si hallará en nosotros el corazón dispuesto que halló en Pablo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c8af4f1da38d"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "prose",
+   "text": {
+    "en": "Unit 5 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 5 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "68bacc2afdf3"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "<em><strong>Certificate track:</strong> 20 multiple-choice questions, 90% (18 of 20) to pass. <strong>M.Div track:</strong> 20 MC + 10 short-answer, both at 90% independently. Each MC scores immediately when you click. MC must be passed before SA scores count. A failure locks the relevant section for 15 minutes; if you have already passed MC, only SA locks after an SA fail.</em>",
+    "es": "<em><strong>Vía Certificado:</strong> 20 preguntas de opción múltiple, 90% (18 de 20) para aprobar. <strong>Vía M.Div:</strong> 20 OM + 10 respuesta corta, ambas al 90% independientemente. Cada OM califica inmediatamente al hacer clic. Debe aprobar OM antes de que cuente la sección RC. Una reprobación bloquea la sección por 15 minutos; si ya aprobó OM, solo se bloquea RC tras un fallo de RC.</em>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d196052e364e"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "prose",
+   "text": {
+    "en": "Multiple Choice — 20 Questions",
+    "es": "Opción Múltiple — 20 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9906bf28c27c"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "prose",
+   "text": {
+    "en": "Short Answer — 10 Questions <span class=\"sa-badge\" id=\"saBadgeEn\"></span>",
+    "es": "Respuesta Corta — 10 Preguntas <span class=\"sa-badge\" id=\"saBadgeEs\"></span>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b1d858341328"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b037",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

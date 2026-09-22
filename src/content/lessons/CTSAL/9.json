@@ -1,0 +1,474 @@
+{
+ "course": "CTSAL",
+ "unit": 9,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right:15px; font-weight:bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Espa&ntilde;ol</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></p>\n    <p style=\"margin-top:10px; font-style:italic; color:#2f4f2f;\"><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n</div>\n\n<div id=\"regCard\" style=\"display:none;\">\n    <input type=\"text\" id=\"regName\" aria-label=\"regName\"><input type=\"email\" id=\"regEmail\" aria-label=\"regEmail\">\n    <select id=\"regTrack\" aria-label=\"regTrack\"><option value=\"certificate\"></option></select>\n    <button id=\"regBtn\"></button><div id=\"regStatus\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\">\n\n<h3><!--cts:b006:en--></h3>\n<p><!--cts:b007:en--></p>\n\n<h3><!--cts:b008:en--></h3>\n<p><!--cts:b009:en--></p>\n<p><!--cts:b010:en--></p>\n<div class=\"pull-quote\"><!--cts:b011:en--></div>\n<div class=\"illustration\"><!--cts:b012:en--></div>\n\n<h3><!--cts:b013:en--></h3>\n<p><!--cts:b014:en--></p>\n<p><!--cts:b015:en--></p>\n<div class=\"scripture\"><!--cts:b016:en--></div>\n\n<h3><!--cts:b017:en--></h3>\n<p><!--cts:b018:en--></p>\n<p><!--cts:b019:en--></p>\n\n<h3><!--cts:b020:en--></h3>\n<p><!--cts:b021:en--></p>\n<p><!--cts:b022:en--></p>\n<div class=\"scripture\"><!--cts:b023:en--></div>\n\n<h3><!--cts:b024:en--></h3>\n<p><!--cts:b025:en--></p>\n<p><!--cts:b026:en--></p>\n\n<h3><!--cts:b027:en--></h3>\n<p><!--cts:b028:en--></p>\n<p><!--cts:b029:en--></p>\n\n</div>\n<div class=\"lang-es\">\n\n<h3><!--cts:b006:es--></h3>\n<p><!--cts:b007:es--></p>\n\n<h3><!--cts:b008:es--></h3>\n<p><!--cts:b009:es--></p>\n<p><!--cts:b010:es--></p>\n<div class=\"pull-quote\"><!--cts:b011:es--></div>\n<div class=\"illustration\"><!--cts:b012:es--></div>\n\n<h3><!--cts:b013:es--></h3>\n<p><!--cts:b014:es--></p>\n<p><!--cts:b015:es--></p>\n<div class=\"scripture\"><!--cts:b016:es--></div>\n\n<h3><!--cts:b017:es--></h3>\n<p><!--cts:b018:es--></p>\n<p><!--cts:b019:es--></p>\n\n<h3><!--cts:b020:es--></h3>\n<p><!--cts:b021:es--></p>\n<p><!--cts:b022:es--></p>\n<div class=\"scripture\"><!--cts:b023:es--></div>\n\n<h3><!--cts:b024:es--></h3>\n<p><!--cts:b025:es--></p>\n<p><!--cts:b026:es--></p>\n\n<h3><!--cts:b027:es--></h3>\n<p><!--cts:b028:es--></p>\n<p><!--cts:b029:es--></p>\n\n</div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b030:en--></span><span class=\"lang-es\"><!--cts:b030:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b031:en--></span>\n       <span class=\"lang-es\"><!--cts:b031:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top:20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b032:en--></span><span class=\"lang-es\"><!--cts:b032:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b033:en--></span><span class=\"lang-es\"><!--cts:b033:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top:15px; font-weight:bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top:10px; font-size:0.9rem; color:#1f6b3b; display:none;\"></div>\n    </div>\n</div>\n</div>\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSALReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "Unit 10 →",
+    "es": "Unidad 10 →"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9df351ac0dbf"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "📖 Administration &amp; Leadership — Unit 9: Multiplication, Church Planting, and Succession",
+    "es": "📖 Administración y Liderazgo — Unidad 9: Multiplicación, plantación de iglesias y sucesión"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "34c635e0e085"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "\"He must increase, but I must decrease.\" — John 3:30 (NKJV)",
+    "es": "⚑ \"A él conviene crecer, mas a mí menguar.\" — Juan 3:30 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cdfcdd0fe763"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "heading",
+   "text": {
+    "en": "Introduction — The Kingdom Grows by Multiplication, Not Addition",
+    "es": "Introducción — El reino crece por multiplicación, no por adición"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7bbbb4875fae"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "There are two kinds of math, and a church can be built on either one. The first is addition: the pastor works hard, the church grows by the souls his own two hands can reach, and when he is gone the growth stops with him. The second is multiplication: the pastor pours himself into others who pour themselves into still others, and the work spreads far beyond anything one man could touch and keeps spreading after he is dead. We saw the seed of this back in Unit 4, in Paul's word to Timothy — entrust the truth <em>\"to faithful men who will be able to teach others also\"</em> (2 Timothy 2:2), four generations of ministry in a single breath. Now we follow that principle out to its full reach: a leader who thinks beyond himself, beyond his lifetime, beyond his own church. The truest test of a leader is not the size of the crowd he gathers but whether the work outlives him. This unit is about building things that do.",
+    "es": "Hay dos clases de matemática, y una iglesia puede edificarse sobre cualquiera de las dos. La primera es la adición: el pastor trabaja duro, la iglesia crece por las almas que sus propias dos manos pueden alcanzar, y cuando él se va el crecimiento se detiene con él. La segunda es la multiplicación: el pastor se vuelca en otros que a su vez se vuelcan en otros más, y la obra se extiende mucho más allá de lo que un solo hombre podría tocar y sigue extendiéndose después de su muerte. Vimos la semilla de esto en la Unidad 4, en la palabra de Pablo a Timoteo — encomendar la verdad ⚑ <em>\"a hombres fieles que sean idóneos para enseñar también a otros\"</em> (2 Timoteo 2:2), cuatro generaciones de ministerio en un solo aliento. Ahora seguimos ese principio hasta su pleno alcance: un líder que piensa más allá de sí mismo, más allá de su vida, más allá de su propia iglesia. La prueba más verdadera de un líder no es el tamaño de la multitud que reúne sino si la obra le sobrevive. Esta unidad trata de edificar cosas que lo hagan."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "78b87d69cb90"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "heading",
+   "text": {
+    "en": "I. The Great Commission Is a Command to Reproduce",
+    "es": "I. La Gran Comisión es un mandato de reproducirse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b09a7ac7ae26"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "Go back to the marching orders the risen Lord left His church, and read them as the multiplication command they are. <em>\"Go therefore and make disciples of all the nations, baptizing them... teaching them to observe all things that I have commanded you\"</em> (Matthew 28:19–20). Notice what He did not say. He did not say \"make converts\" and stop there. He said make <em>disciples</em> — and a disciple, by definition, is one who is taught to obey \"all things,\" which includes this very command to go and make disciples.",
+    "es": "Vuelva a las órdenes de marcha que el Señor resucitado dejó a su iglesia, y léalas como el mandato de multiplicación que son. ⚑ <em>\"Por tanto, id, y enseñad a todas las naciones... enseñándoles que guarden todas las cosas que os he mandado\"</em> (Mateo 28:19–20). Note lo que no dijo. No dijo \"haced conversos\" y se detuvo allí. Dijo haced <em>discípulos</em> — y un discípulo, por definición, es uno enseñado a obedecer \"todas las cosas,\" lo cual incluye este mismo mandato de ir y hacer discípulos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "87caa7445812"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "Do you see the built-in multiplication? A true disciple is someone who makes other disciples. If you only win converts, you add. If you make disciples who make disciples, you multiply, and the kingdom spreads like a living thing reproducing after its kind. This is the difference between a ministry that fills seats and a ministry that reproduces leaders. The pastor who measures success only by how many gathered to hear <em>him</em> has misread the Commission. The Lord did not commission a performance; He commissioned a chain reaction. Make disciples who make disciples — that is the engine the whole kingdom runs on.",
+    "es": "¿Ve la multiplicación incorporada? Un verdadero discípulo es alguien que hace otros discípulos. Si solo gana conversos, suma. Si hace discípulos que hacen discípulos, multiplica, y el reino se extiende como una cosa viva que se reproduce según su especie. Esta es la diferencia entre un ministerio que llena asientos y un ministerio que reproduce líderes. El pastor que mide el éxito solo por cuántos se reunieron para oírle <em>a él</em> ha leído mal la Comisión. El Señor no comisionó una función; comisionó una reacción en cadena. Haga discípulos que hacen discípulos — ese es el motor sobre el que corre todo el reino."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4e83b4dceea7"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "The Lord did not commission a performance; He commissioned a chain reaction.",
+    "es": "El Señor no comisionó una función; comisionó una reacción en cadena."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d09309b3ba34"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "<strong>I have watched this chain run with my own eyes.</strong> In a prison where I served, God sent me men He had called to ministry inside those walls. I could have kept the work in my own hands; instead we built the training they needed, one program and then another, so they could be equipped to teach. They began to disciple other inmates, and those men discipled still others. Two I will never forget: one went on to earn a doctorate and teaches in a seminary today; another serves as a chaplain in a prison like the one where we met. The work did not stay with me — it ran on past me, and that is the whole point. I only handed on what had been handed to me; the increase was God's.",
+    "es": "<strong>He visto correr esta cadena con mis propios ojos.</strong> En una prisión donde serví, Dios me envió a hombres que Él había llamado al ministerio dentro de aquellos muros. Pude haber retenido la obra en mis propias manos; en cambio construimos la formación que necesitaban, un programa y luego otro, para que fueran capacitados para enseñar. Comenzaron a discipular a otros presos, y aquellos hombres discipularon a otros más. Dos jamás los olvidaré: uno llegó a obtener un doctorado y enseña hoy en un seminario; otro sirve como capellán en una prisión como aquella donde nos conocimos. La obra no se quedó conmigo — corrió más allá de mí, y ese es todo el punto. Yo solo transmití lo que me había sido transmitido; el aumento fue de Dios."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "92a04515b551"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "heading",
+   "text": {
+    "en": "II. A Sending Church: The Pattern of Antioch",
+    "es": "II. Una iglesia que envía: el patrón de Antioquía"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "faea31d4e042"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "prose",
+   "text": {
+    "en": "Now watch a healthy church behave the way the Commission intends, and let it correct a deep instinct in us. The church at Antioch was strong — gifted teachers, a thriving fellowship, everything a pastor would want to keep. And the Holy Spirit said: <em>\"Now separate to Me Barnabas and Saul for the work to which I have called them\"</em> (Acts 13:2). Read who that was. Barnabas and Saul — not the two men the church could most easily spare, but its two best, its finest teachers. And the church <em>\"sent them away\"</em> (Acts 13:3).",
+    "es": "Ahora observe a una iglesia sana comportarse como la Comisión lo pretende, y deje que corrija un instinto profundo en nosotros. La iglesia en Antioquía era fuerte — maestros dotados, una comunión próspera, todo lo que un pastor querría conservar. Y el Espíritu Santo dijo: ⚑ <em>\"Apartadme a Bernabé y a Saulo para la obra a que los he llamado\"</em> (Hechos 13:2). Lea quiénes eran. Bernabé y Saulo — no los dos hombres que la iglesia más fácilmente podía ceder, sino sus dos mejores, sus más finos maestros. Y la iglesia <em>\"los despidió\"</em> (Hechos 13:3)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "18d5845433b5"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "Here is the instinct the Spirit had to overcome, and He must overcome it in us too: every church wants to <em>keep</em> its best people. We hoard our strongest leaders, our most gifted teachers, because letting them go feels like loss. But a healthy church is a sending church, and sending always costs. Antioch gave away its best and was not weakened; it became the launching point of the gospel's spread across the world. A church that will not release its gifted people to plant, to go, to start something elsewhere, is a church practicing addition when God is calling it to multiply. Hold your best people with an open hand. The ones it costs you most to send are usually exactly the ones God means to send.",
+    "es": "Aquí está el instinto que el Espíritu tuvo que vencer, y debe vencerlo también en nosotros: toda iglesia quiere <em>conservar</em> a su mejor gente. Acaparamos a nuestros líderes más fuertes, nuestros maestros más dotados, porque dejarlos ir se siente como pérdida. Pero una iglesia sana es una iglesia que envía, y enviar siempre cuesta. Antioquía entregó a sus mejores y no fue debilitada; se convirtió en el punto de lanzamiento de la expansión del evangelio por todo el mundo. Una iglesia que no suelta a su gente dotada para plantar, para ir, para comenzar algo en otro lugar, es una iglesia que practica la adición cuando Dios la llama a multiplicar. Sostenga a su mejor gente con la mano abierta. Aquellos que más le cuesta enviar suelen ser exactamente los que Dios quiere enviar."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "58e511e395be"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "scripture",
+   "text": {
+    "en": "\"Now separate to Me Barnabas and Saul for the work to which I have called them.\" — Acts 13:2 (NKJV)",
+    "es": "⚑ \"Apartadme a Bernabé y a Saulo para la obra a que los he llamado.\" — Hechos 13:2 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cca2adb2dd14"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "heading",
+   "text": {
+    "en": "III. Plant, and Then Entrust",
+    "es": "III. Plante, y luego encomiende"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3ad9e69cfa97"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "When Paul planted churches, watch what he did <em>not</em> do: he did not make himself permanently indispensable. He preached, he won disciples, and then, with remarkable speed and trust, he handed the churches over to local leaders. <em>\"So when they had appointed elders in every church, and prayed with fasting, they commended them to the Lord in whom they had believed\"</em> (Acts 14:23). And to Titus he left the standing assignment: <em>\"set in order the things that are lacking, and appoint elders in every city as I had commanded you\"</em> (Titus 1:5).",
+    "es": "Cuando Pablo plantaba iglesias, observe lo que <em>no</em> hizo: no se hizo permanentemente indispensable. Predicaba, ganaba discípulos, y luego, con notable rapidez y confianza, entregaba las iglesias a líderes locales. ⚑ <em>\"Y constituyéndoles ancianos en cada iglesia, y habiendo orado con ayunos, los encomendaron al Señor en quien habían creído\"</em> (Hechos 14:23). Y a Tito le dejó la asignación permanente: ⚑ <em>\"corrigieses lo deficiente, y pusieses ancianos en cada ciudad, así como yo te mandé\"</em> (Tito 1:5)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a167a618c28f"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "This is the discipline that separates a church planter from a mere gatherer. The goal of planting is not a congregation permanently dependent on its founder; it is a self-governing, self-sustaining body with its own raised-up leaders. Paul planted to leave. He appointed elders, commended them to the Lord, and moved on, trusting God and the leaders he had developed. A missionary or planter who cannot bring himself to hand the work over has not finished planting — he has built a monument to himself that will collapse the day he leaves. Plant the church, raise up its leaders, entrust it to them and to the Lord, and go. The work that can only survive with you was never fully planted.",
+    "es": "Esta es la disciplina que separa a un plantador de iglesias de un mero recolector. La meta de plantar no es una congregación permanentemente dependiente de su fundador; es un cuerpo que se gobierna a sí mismo, que se sostiene a sí mismo, con sus propios líderes levantados. Pablo plantaba para irse. Constituía ancianos, los encomendaba al Señor, y seguía adelante, confiando en Dios y en los líderes que había desarrollado. Un misionero o plantador que no logra entregar la obra no ha terminado de plantar — ha construido un monumento a sí mismo que se desplomará el día que se vaya. Plante la iglesia, levante a sus líderes, encomiéndela a ellos y al Señor, y váyase. La obra que solo puede sobrevivir con usted nunca fue plantada del todo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0a8fa9c393a4"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "heading",
+   "text": {
+    "en": "IV. The Grain of Wheat Must Fall",
+    "es": "IV. El grano de trigo debe caer"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e128b10e9717"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "There is a cost under all of this that we must name honestly, because multiplication asks a leader to die a little. The Lord stated the law of all fruitfulness in one image: <em>\"unless a grain of wheat falls into the ground and dies, it remains alone; but if it dies, it produces much grain\"</em> (John 12:24). The seed that insists on staying a seed, whole and intact and safe, \"remains alone.\" Only the seed willing to be buried and broken open multiplies into a harvest.",
+    "es": "Hay un costo debajo de todo esto que debemos nombrar con honradez, porque la multiplicación le pide a un líder morir un poco. El Señor enunció la ley de toda fecundidad en una sola imagen: ⚑ <em>\"si el grano de trigo no cae en la tierra y muere, queda solo; mas si muere, lleva mucho fruto\"</em> (Juan 12:24). La semilla que insiste en seguir siendo semilla, entera e intacta y segura, \"queda sola.\" Solo la semilla dispuesta a ser enterrada y abierta se multiplica en una cosecha."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f5785c178b58"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "Apply it to the leader. As long as you cling to being the one who is needed, the one who does it, the one at the center, you remain alone — impressive, perhaps, but barren of any fruit that will outlast you. The multiplying leader accepts a kind of death: the death of his own indispensability, the death of the applause that comes from doing it all himself, the death of control. He lets others rise, even others who will surpass him. He decreases so the work may increase. This is why so few leaders truly multiply — not because they lack the skill, but because they cannot bear the dying. Be the grain willing to fall. The harvest is on the far side of that surrender, and there is no other road to it.",
+    "es": "Aplíquelo al líder. Mientras se aferre a ser el que es necesitado, el que lo hace, el que está en el centro, queda solo — impresionante, quizá, pero estéril de todo fruto que le sobreviva. El líder que multiplica acepta una clase de muerte: la muerte de su propia indispensabilidad, la muerte del aplauso que viene de hacerlo todo él mismo, la muerte del control. Deja que otros se levanten, aun otros que lo superarán. Mengua para que la obra crezca. Por esto tan pocos líderes verdaderamente multiplican — no porque les falte la habilidad, sino porque no soportan el morir. Sea el grano dispuesto a caer. La cosecha está al otro lado de esa entrega, y no hay otro camino a ella."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c703b3472abd"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "scripture",
+   "text": {
+    "en": "\"Unless a grain of wheat falls into the ground and dies, it remains alone; but if it dies, it produces much grain.\" — John 12:24 (NKJV)",
+    "es": "⚑ \"Si el grano de trigo no cae en la tierra y muere, queda solo; mas si muere, lleva mucho fruto.\" — Juan 12:24 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d843d88f3327"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "heading",
+   "text": {
+    "en": "V. Succession: The Work Outlives the Worker",
+    "es": "V. Sucesión: la obra sobrevive al obrero"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9f60dbe5f7c4"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "Now to the subject most leaders avoid until it is too late: who comes after you. Scripture treats succession as a mark of faithfulness, not a threat to be feared, and it gives us models to follow. Moses did not pretend he would lead forever. At God's direction he laid his hands on Joshua, gave him a public commissioning before all the people, and poured his authority into him so the nation would not be <em>\"as sheep which have no shepherd\"</em> (Numbers 27:17). When Moses died, the work did not die; Joshua led on, because Moses had prepared him.",
+    "es": "Ahora al tema que la mayoría de los líderes evita hasta que es demasiado tarde: quién viene después de usted. La Escritura trata la sucesión como una marca de fidelidad, no como una amenaza que temer, y nos da modelos a seguir. Moisés no fingió que lideraría para siempre. Por dirección de Dios puso sus manos sobre Josué, le dio una comisión pública ante todo el pueblo, y vertió su autoridad en él para que la nación no fuera ⚑ <em>\"como ovejas que no tienen pastor\"</em> (Números 27:17). Cuando Moisés murió, la obra no murió; Josué siguió liderando, porque Moisés lo había preparado."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "66795cbe9672"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "See it again with Elijah, who threw his mantle over Elisha and walked with him until the day it passed fully to the younger man, who carried on the prophetic work with a doubled portion. See it in David, who would not build the temple himself, yet spent his last energy gathering the materials and charging his son: <em>\"Be strong and of good courage, and do it; do not fear\"</em> (1 Chronicles 28:20) — preparing with all his heart for a work he knew another would complete. There is the pattern. The faithful leader prepares his successor deliberately, while there is still time: he identifies the next generation, invests in them, gives them real responsibility before he is gone, and hands off the work in an orderly way. The leader who makes no provision for who comes after him has not protected the church; he has gambled it on his own immortality, and that is a bet every man loses. Plan the handoff. The work must outlive the worker.",
+    "es": "Véalo otra vez con Elías, que echó su manto sobre Eliseo y caminó con él hasta el día en que pasó plenamente al hombre más joven, quien continuó la obra profética con una porción doblada. Véalo en David, que no construiría el templo él mismo, y sin embargo gastó su última energía reuniendo los materiales y encargando a su hijo: ⚑ <em>\"Esfuérzate y cobra ánimo, y manos a la obra; no temas\"</em> (1 Crónicas 28:20) — preparándose con todo su corazón para una obra que sabía que otro completaría. Allí está el patrón. El líder fiel prepara a su sucesor deliberadamente, mientras aún hay tiempo: identifica a la siguiente generación, invierte en ellos, les da responsabilidad real antes de irse, y entrega la obra de manera ordenada. El líder que no hace provisión para quien viene después de él no ha protegido a la iglesia; la ha apostado a su propia inmortalidad, y esa es una apuesta que todo hombre pierde. Planee la entrega. La obra debe sobrevivir al obrero."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9d6ef9d30214"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "heading",
+   "text": {
+    "en": "VI. He Must Increase, I Must Decrease",
+    "es": "VI. Él debe crecer, yo debo menguar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2a6d94eee699"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "What spirit makes a man able to do all this — to send his best, to entrust the church to others, to fall like a grain of wheat, to prepare the one who will replace him? It is the spirit of John the Baptist, who said the freest words a leader ever spoke. As his own followers fretted that the crowds were leaving him for Jesus, John answered without a trace of grief: <em>\"He must increase, but I must decrease\"</em> (John 3:30).",
+    "es": "¿Qué espíritu hace a un hombre capaz de hacer todo esto — enviar a sus mejores, encomendar la iglesia a otros, caer como grano de trigo, preparar al que lo reemplazará? Es el espíritu de Juan el Bautista, que dijo las palabras más libres que un líder haya pronunciado jamás. Mientras sus propios seguidores se inquietaban de que las multitudes lo dejaban por Jesús, Juan respondió sin un rastro de pesar: ⚑ <em>\"A él conviene crecer, mas a mí menguar\"</em> (Juan 3:30)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2b33ce887419"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "There is the heart of the multiplying, planting, succession-minded leader. He has settled, deep down, that the work is not about him. He measures success not by his own increase but by the increase of the kingdom and the rising of others — even when their rising means his own fading from the center. The insecure leader clings, controls, and refuses to develop anyone who might eclipse him, and so his work dies with him. The free leader gives himself away, raises up those who will surpass him, and rejoices to decrease so that Christ and His church may increase. Build with that spirit, brother. Make disciples who make disciples. Send your best. Plant and entrust. Fall like the grain. Prepare the one who follows you. And when the day comes that the work is thriving in younger hands and needs you less and less, do not grieve it as loss — receive it as the very fruit you were laboring for all along. He must increase. We must decrease. That is not the failure of a ministry. It is its crowning success.",
+    "es": "Allí está el corazón del líder que multiplica, planta y piensa en la sucesión. Ha resuelto, en lo profundo, que la obra no se trata de él. Mide el éxito no por su propio crecimiento sino por el crecimiento del reino y el ascenso de otros — aun cuando su ascenso signifique su propio desvanecerse del centro. El líder inseguro se aferra, controla, y se niega a desarrollar a quien pudiera eclipsarlo, y así su obra muere con él. El líder libre se entrega, levanta a quienes lo superarán, y se goza de menguar para que Cristo y su iglesia crezcan. Edifique con ese espíritu, hermano. Haga discípulos que hacen discípulos. Envíe a sus mejores. Plante y encomiende. Caiga como el grano. Prepare al que le sigue. Y cuando llegue el día en que la obra prospere en manos más jóvenes y lo necesite menos y menos, no lo lamente como pérdida — recíbalo como el fruto mismo por el que trabajaba todo el tiempo. Él debe crecer. Nosotros debemos menguar. Eso no es el fracaso de un ministerio. Es su éxito coronado."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9b796f0cd8f9"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "Unit 9 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 9 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c78e1ede3819"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33593c268178"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

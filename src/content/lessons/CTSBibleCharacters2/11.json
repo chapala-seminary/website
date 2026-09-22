@@ -1,0 +1,558 @@
+{
+ "course": "CTSBibleCharacters2",
+ "unit": 11,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Certificate →</button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #2f4f2f;\"><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\">\n    <h2><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n    <input type=\"text\" id=\"regName\" placeholder=\"Full name / Nombre completo\" aria-label=\"Full name / Nombre completo\">\n    <input type=\"email\" id=\"regEmail\" placeholder=\"Email\" aria-label=\"Email\">\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate Track</option>\n        <option value=\"mdiv\">Master of Divinity (M.Div.) Track</option>\n        <option value=\"thm\">Master of Theology (Th.M.) Track</option>\n    </select>\n    <button class=\"nav-btn\" id=\"regBtn\"><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\"><p><!--cts:b007:en--></p><p><!--cts:b008:en--></p><p><!--cts:b009:en--></p><p><!--cts:b010:en--></p><h2><!--cts:b011:en--></h2><p><!--cts:b012:en--></p><div class=\"scripture\"><!--cts:b013:en--></div><p><!--cts:b014:en--></p><h2><!--cts:b015:en--></h2><p><!--cts:b016:en--></p><div class=\"scripture\"><!--cts:b017:en--></div><p><!--cts:b018:en--></p><p><!--cts:b019:en--></p><div class=\"scripture\"><!--cts:b020:en--></div><p><!--cts:b021:en--></p><h2><!--cts:b022:en--></h2><p><!--cts:b023:en--></p><div class=\"scripture\"><!--cts:b024:en--></div><p><!--cts:b025:en--></p><div class=\"scripture\"><!--cts:b026:en--></div><p><!--cts:b027:en--></p><h2><!--cts:b028:en--></h2><p><!--cts:b029:en--></p><div class=\"scripture\"><!--cts:b030:en--></div><p><!--cts:b031:en--></p><div class=\"scripture\"><!--cts:b032:en--></div><p><!--cts:b033:en--></p><h2><!--cts:b034:en--></h2><p><!--cts:b035:en--></p></div>\n<div class=\"lang-es\"><p><!--cts:b007:es--></p><p><!--cts:b008:es--></p><p><!--cts:b009:es--></p><p><!--cts:b010:es--></p><h2><!--cts:b011:es--></h2><p><!--cts:b012:es--></p><div class=\"scripture\"><!--cts:b013:es--></div><p><!--cts:b014:es--></p><h2><!--cts:b015:es--></h2><p><!--cts:b016:es--></p><div class=\"scripture\"><!--cts:b017:es--></div><p><!--cts:b018:es--></p><p><!--cts:b019:es--></p><div class=\"scripture\"><!--cts:b020:es--></div><p><!--cts:b021:es--></p><h2><!--cts:b022:es--></h2><p><!--cts:b023:es--></p><div class=\"scripture\"><!--cts:b024:es--></div><p><!--cts:b025:es--></p><div class=\"scripture\"><!--cts:b026:es--></div><p><!--cts:b027:es--></p><h2><!--cts:b028:es--></h2><p><!--cts:b029:es--></p><div class=\"scripture\"><!--cts:b030:es--></div><p><!--cts:b031:es--></p><div class=\"scripture\"><!--cts:b032:es--></div><p><!--cts:b033:es--></p><h2><!--cts:b034:es--></h2><p><!--cts:b035:es--></p></div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b036:en--></span><span class=\"lang-es\"><!--cts:b036:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b037:en--></span>\n       <span class=\"lang-es\"><!--cts:b037:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b038:en--></span><span class=\"lang-es\"><!--cts:b038:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b039:en--></span><span class=\"lang-es\"><!--cts:b039:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSBibleCharacters2Readings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "📖 Bible Characters II — Unit 11: Paul — From Persecutor to Apostle of Grace",
+    "es": "📖 Personajes de la Biblia II — Unidad 11: Pablo — De Perseguidor a Apóstol de la Gracia"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "886970b26791"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "\"But by the grace of God I am what I am, and His grace toward me was not in vain.\" — 1 Corinthians 15:10 (NKJV)",
+    "es": "«Pero por la gracia de Dios soy lo que soy; y su gracia no ha sido en vano para conmigo.» — 1 Corintios 15:10 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7e92604064cd"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "📝 Course Registration",
+    "es": "📝 Registro del Curso"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fde900fe006b"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "Please register before beginning this unit.",
+    "es": "Por favor regístrese antes de comenzar esta unidad."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6c8b91fbfb6f"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "There is no more dramatic turnabout in all of history than the conversion of Saul of Tarsus. One day he was the fiercest enemy the young church had, hunting down believers and dragging them to prison; not long after, he was the church's greatest missionary, willing to be beaten, stoned, and finally killed for the very name he had tried to destroy. What could account for such a reversal? Only one thing: on a road to Damascus, Saul the persecutor met the risen Christ — and the grace that mastered him there is the same grace that can master and send any life.",
+    "es": "No hay en toda la historia un cambio más dramático que la conversión de Saulo de Tarso. Un día era el enemigo más feroz que tenía la joven iglesia, persiguiendo a los creyentes y arrastrándolos a la cárcel; no mucho después, era el mayor misionero de la iglesia, dispuesto a ser golpeado, apedreado y al fin muerto por el mismo nombre que había tratado de destruir. ¿Qué podría explicar semejante cambio? Solo una cosa: en un camino a Damasco, Saulo el perseguidor se encontró con el Cristo resucitado —y la gracia que lo dominó allí es la misma gracia que puede dominar y enviar cualquier vida—."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c2396b37b64b"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Subject:</strong> Paul — from persecutor to apostle.",
+    "es": "<strong>Tema:</strong> Pablo — de perseguidor a apóstol."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4727fbc074cd"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Proposition:</strong> The grace of the risen Christ, who appeared on the Damascus road, can master and send any life.",
+    "es": "<strong>Proposición:</strong> La gracia del Cristo resucitado, que apareció en el camino de Damasco, puede dominar y enviar cualquier vida."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "184d5e9e22ae"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "We will trace three movements in the life of Paul.",
+    "es": "Trazaremos tres movimientos en la vida de Pablo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "386effcc1bff"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "heading",
+   "text": {
+    "en": "I. A Deadly Mistake",
+    "es": "I. Un Error Mortal"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "80df72926386"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "Before he was Paul the apostle, he was Saul the Pharisee, and he was deadly in earnest. He was, as Luke puts it, \"breathing threats and murder against the disciples of the Lord.\" He led the way in arresting Christians, and when Stephen was stoned to death, the witnesses laid their coats at the feet of a young man named Saul, who stood there consenting to his death. Paul never softened what he had done:",
+    "es": "Antes de ser Pablo el apóstol, fue Saulo el fariseo, y lo era con mortal seriedad. Estaba, como dice Lucas, «respirando aún amenazas y muerte contra los discípulos del Señor». Iba al frente en el arresto de los cristianos, y cuando Esteban fue apedreado, los testigos pusieron sus ropas a los pies de un joven llamado Saulo, que estaba allí consintiendo en su muerte. Pablo nunca suavizó lo que había hecho:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "731eee8ed36a"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "scripture",
+   "text": {
+    "en": "For you have heard of my former conduct in Judaism, how I persecuted the church of God beyond measure and tried to destroy it. (Galatians 1:13, NKJV)",
+    "es": "Porque ya habéis oído acerca de mi conducta en otro tiempo en el judaísmo, que perseguía sobremanera a la iglesia de Dios, y la asolaba. (Gálatas 1:13, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0388eb8c0623"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "prose",
+   "text": {
+    "en": "And yet, in his own eyes, Saul was not a wicked man at all — he was a religious one. His confidence rested entirely in the flesh, in his pedigree and his performance. He was \"circumcised the eighth day, of the stock of Israel, of the tribe of Benjamin, a Hebrew of the Hebrews; concerning the law, a Pharisee... concerning the righteousness which is in the law, blameless\" (Philippians 3:5-6). Here was a man who had everything religion could give and was still dead wrong about the most important thing in the universe. His zeal was real, but it was zeal without knowledge, and it had made him an enemy of God while he thought he was serving Him. That is the most dangerous mistake a person can make — to be sincerely, religiously, and completely wrong. Saul reminds us that a person can be moral, devout, and busy in religion and still be utterly lost, needing not merely to try harder but to be met and changed by Christ.",
+    "es": "Y sin embargo, a sus propios ojos, Saulo no era un hombre malvado en absoluto —era un hombre religioso—. Su confianza descansaba enteramente en la carne, en su linaje y su desempeño. Había sido «circuncidado al octavo día, del linaje de Israel, de la tribu de Benjamín, hebreo de hebreos; en cuanto a la ley, fariseo... en cuanto a la justicia que es en la ley, irreprensible» (Filipenses 3:5-6). Aquí había un hombre que tenía todo lo que la religión podía dar y aun así estaba completamente equivocado en lo más importante del universo. Su celo era real, pero era celo sin conocimiento, y lo había hecho enemigo de Dios mientras creía que le servía. Ese es el error más peligroso que una persona puede cometer —estar sincera, religiosa y completamente equivocado—. Saulo nos recuerda que una persona puede ser moral, devota y ocupada en la religión y aun así estar completamente perdida, necesitando no simplemente esforzarse más, sino ser encontrada y cambiada por Cristo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5943c861bc8c"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "heading",
+   "text": {
+    "en": "II. A Dramatic Meeting",
+    "es": "II. Un Encuentro Dramático"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1564b0af8cbe"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "Then came the day that split Saul's life in two. He was on the road to Damascus, carrying letters that authorized him to arrest still more believers, when suddenly a light from heaven, brighter than the noonday sun, flashed around him and he fell to the ground. Out of the light came a voice:",
+    "es": "Entonces vino el día que partió en dos la vida de Saulo. Iba por el camino de Damasco, llevando cartas que lo autorizaban a arrestar a más creyentes, cuando de repente una luz del cielo, más brillante que el sol del mediodía, resplandeció a su alrededor y cayó a tierra. De la luz salió una voz:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ff499fae0a12"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "scripture",
+   "text": {
+    "en": "Saul, Saul, why are you persecuting Me? (Acts 9:4, NKJV)",
+    "es": "Saulo, Saulo, ¿por qué me persigues? (Hechos 9:4, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b2303120ab35"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "Trembling, Saul asked, \"Who are You, Lord?\" And the answer changed everything: \"I am Jesus, whom you are persecuting.\" Notice what the Lord said — not \"why are you persecuting My people,\" but \"why are you persecuting <em>Me</em>.\" To touch the church is to touch Christ Himself. In that moment Saul learned that the Jesus he thought was dead was alive, and that the believers he was hunting belonged to a living Lord. Blinded by the glory, he was led by the hand into the city, and three days later, through a disciple named Ananias, his sight was restored and he was filled with the Spirit. When the Lord first sent Ananias to him, Ananias was afraid, for Saul's reputation had gone before him; but the Lord said, \"Go, for he is a chosen vessel of Mine to bear My name before Gentiles, kings, and the children of Israel.\" The hunter of the church had been chosen to carry its message to the world. The persecutor had become a believer, and his only question now was the right one: \"Lord, what do You want me to do?\"",
+    "es": "Temblando, Saulo preguntó: «¿Quién eres, Señor?». Y la respuesta lo cambió todo: «Yo soy Jesús a quien tú persigues». Note lo que dijo el Señor —no «¿por qué persigues a mi pueblo?», sino «¿por qué me persigues <em>a mí</em>?»—. Tocar a la iglesia es tocar a Cristo mismo. En aquel momento Saulo aprendió que el Jesús que creía muerto estaba vivo, y que los creyentes que perseguía pertenecían a un Señor viviente. Cegado por la gloria, fue llevado de la mano a la ciudad, y tres días después, por medio de un discípulo llamado Ananías, su vista fue restaurada y fue lleno del Espíritu. Cuando el Señor envió primero a Ananías hacia él, Ananías tuvo miedo, porque la fama de Saulo lo precedía; pero el Señor dijo: «Ve, porque instrumento escogido me es éste, para llevar mi nombre en presencia de los gentiles, y de reyes, y de los hijos de Israel». El perseguidor de la iglesia había sido escogido para llevar su mensaje al mundo. El perseguidor se había vuelto creyente, y su única pregunta ahora era la correcta: «Señor, ¿qué quieres que yo haga?»."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e2bc7db2e920"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "Everything Saul had once counted as gain he now saw in a new light:",
+    "es": "Todo lo que Saulo había contado como ganancia ahora lo veía bajo una nueva luz:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e82e91e17ad5"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "scripture",
+   "text": {
+    "en": "But what things were gain to me, these I have counted loss for Christ. Yet indeed I also count all things loss for the excellence of the knowledge of Christ Jesus my Lord... that I may be found in Him, not having my own righteousness, which is from the law, but that which is through faith in Christ. (Philippians 3:7-9, NKJV)",
+    "es": "Pero las cosas que para mí eran ganancia, las he estimado como pérdida por amor de Cristo. Y ciertamente, aun estimo todas las cosas como pérdida por la excelencia del conocimiento de Cristo Jesús, mi Señor... y ser hallado en él, no teniendo mi propia justicia, que es por la ley, sino la que es por la fe de Cristo. (Filipenses 3:7-9, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d81fe6b2e37a"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "His pedigree, his law-keeping, his blameless record — all of it he now counted as loss, even as rubbish, compared with knowing Christ. For he had discovered the heart of the gospel: that a man is not saved by a righteousness of his own, earned by keeping the law, but by a righteousness received through faith in Christ. The proudest law-keeper of his generation became the great preacher of grace.",
+    "es": "Su linaje, su cumplimiento de la ley, su récord irreprensible —todo ello lo contaba ahora como pérdida, aun como estiércol, comparado con conocer a Cristo—. Porque había descubierto el corazón del evangelio: que un hombre no es salvo por una justicia propia, ganada por guardar la ley, sino por una justicia recibida por la fe en Cristo. El más orgulloso cumplidor de la ley de su generación llegó a ser el gran predicador de la gracia."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2a920021e7aa"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "heading",
+   "text": {
+    "en": "III. A Determined Mission",
+    "es": "III. Una Misión Decidida"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f3e7f6b6c771"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "The change was not in word only; it remade his whole life. The very energy that had driven Saul across Judea to persecute Christians now drove Paul across the known world to preach Christ. City after city, he carried the gospel — to Jews and Gentiles, to common people and kings — planting churches everywhere he went. From Antioch he sailed across Asia Minor and into Greece, reaching at last the very heart of the empire in Rome. He reasoned in synagogues, stood before governors and King Agrippa, and finally appealed to Caesar himself; and even his imprisonments became pulpits, for from his prison cells he wrote letters that still feed the church today. And it cost him everything. He was beaten with rods, whipped with thirty-nine lashes again and again, stoned and left for dead, shipwrecked, hungry, cold, and imprisoned. Yet through it all he never flinched, for he was a man under orders:",
+    "es": "El cambio no fue solo de palabra; rehízo toda su vida. La misma energía que había llevado a Saulo por toda Judea a perseguir cristianos ahora llevaba a Pablo por todo el mundo conocido a predicar a Cristo. Ciudad tras ciudad, llevó el evangelio —a judíos y gentiles, a gente común y a reyes— plantando iglesias por dondequiera que iba. Desde Antioquía navegó por toda Asia Menor y entró en Grecia, llegando al fin al corazón mismo del imperio en Roma. Razonó en las sinagogas, se presentó ante gobernadores y ante el rey Agripa, y finalmente apeló a César mismo; y aun sus encarcelamientos se volvieron púlpitos, porque desde sus celdas escribió cartas que todavía alimentan a la iglesia hoy. Y le costó todo. Fue golpeado con varas, azotado con treinta y nueve latigazos una y otra vez, apedreado y dejado por muerto, naufragó, pasó hambre y frío, y fue encarcelado. Pero a través de todo ello nunca vaciló, porque era un hombre bajo órdenes:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6746c115dfed"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "scripture",
+   "text": {
+    "en": "For if I preach the gospel, I have nothing to boast of, for necessity is laid upon me; yes, woe is me if I do not preach the gospel! (1 Corinthians 9:16, NKJV)",
+    "es": "Pues si predico el evangelio, no tengo por qué gloriarme; porque me es impuesta necesidad; y ¡ay de mí si no anunciare el evangelio! (1 Corintios 9:16, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "64061aa1d920"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "He could no more stop preaching than he could stop breathing; the love of Christ compelled him. And when at last he came to the end, awaiting execution in a Roman prison, he did not look back with regret but forward with triumph:",
+    "es": "No podía dejar de predicar más de lo que podía dejar de respirar; el amor de Cristo lo constreñía. Y cuando al fin llegó al final, esperando la ejecución en una cárcel romana, no miró atrás con remordimiento sino adelante con triunfo:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "dcbe3401951f"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "scripture",
+   "text": {
+    "en": "I have fought the good fight, I have finished the race, I have kept the faith. (2 Timothy 4:7, NKJV)",
+    "es": "He peleado la buena batalla, he acabado la carrera, he guardado la fe. (2 Timoteo 4:7, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "434b92e9ed3d"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "What a way to finish — the man who began by trying to destroy the faith ended by keeping it to the death.",
+    "es": "Qué manera de terminar —el hombre que comenzó tratando de destruir la fe terminó guardándola hasta la muerte—."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "80ad5de4ea2f"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "heading",
+   "text": {
+    "en": "The Resurrection Took Away His Ignorance",
+    "es": "La Resurrección Le Quitó la Ignorancia"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "95adb2d10c1c"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "How do we explain a transformation so complete? Saul gained nothing in this world by it — no wealth, no comfort, no safety, only hardship and finally a martyr's death. No clever argument and no earthly reward turned him. The only thing that accounts for it is that he truly met the risen Lord:",
+    "es": "¿Cómo explicamos una transformación tan completa? Saulo no ganó nada en este mundo con ella —ni riqueza, ni comodidad, ni seguridad, solo dificultad y al fin una muerte de mártir—. Ningún argumento ingenioso ni recompensa terrenal lo cambió. Lo único que lo explica es que verdaderamente se encontró con el Señor resucitado:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7b3b71558757"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "scripture",
+   "text": {
+    "en": "Then last of all He was seen by me also, as by one born out of due time. For I am the least of the apostles, who am not worthy to be called an apostle, because I persecuted the church of God. But by the grace of God I am what I am... (1 Corinthians 15:8-10, NKJV)",
+    "es": "Y al último de todos, como a un abortivo, me apareció a mí también. Porque yo soy el más pequeño de los apóstoles, que no soy digno de ser llamado apóstol, porque perseguí a la iglesia de Dios. Pero por la gracia de Dios soy lo que soy... (1 Corintios 15:8-10, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "53c2e6705326"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "There it is — \"by the grace of God I am what I am.\" Paul never got over it. The man who had once trusted in his own blamelessness now called himself the chief of sinners and pointed only to grace:",
+    "es": "Ahí está —«por la gracia de Dios soy lo que soy»—. Pablo nunca lo superó. El hombre que una vez había confiado en su propia irreprensibilidad ahora se llamaba el primero de los pecadores y señalaba solo a la gracia:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "251555854f46"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "scripture",
+   "text": {
+    "en": "This is a faithful saying and worthy of all acceptance, that Christ Jesus came into the world to save sinners, of whom I am chief. (1 Timothy 1:15, NKJV)",
+    "es": "Palabra fiel y digna de ser recibida de todos: que Cristo Jesús vino al mundo para salvar a los pecadores, de los cuales yo soy el primero. (1 Timoteo 1:15, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b0a297decc13"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "Next to the Lord Jesus Himself, Paul may be the most influential person in all of Christian history — the writer of much of the New Testament, the apostle to the nations. And the whole of it traces back to a few moments on the Damascus road when a living Christ stopped a raging persecutor in his tracks. He met the risen Lord, and nothing was ever the same.",
+    "es": "Junto al Señor Jesús mismo, Pablo bien puede ser la persona más influyente de toda la historia cristiana —el escritor de gran parte del Nuevo Testamento, el apóstol a las naciones—. Y todo ello se remonta a unos pocos momentos en el camino de Damasco cuando un Cristo viviente detuvo en seco a un perseguidor furioso. Se encontró con el Señor resucitado, y nada volvió a ser igual."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "01a59c08c844"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "heading",
+   "text": {
+    "en": "Grace Alone",
+    "es": "Solo la Gracia"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d31bd44e5bbb"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "prose",
+   "text": {
+    "en": "This is the lesson of Paul's life: grace alone. What Saul could never earn by all his law-keeping and all his zeal, the risen Christ gave him freely. The chief of sinners became the apostle of grace, not because he reformed himself, but because grace laid hold of him. And the same grace is offered to us. If the risen Christ could stop Saul of Tarsus on the road, master his hatred, and send him to the ends of the earth, then no one is beyond His reach and no life is too far gone for Him to use. He is still meeting people on their own Damascus roads, and to all who answer, \"Lord, what do You want me to do?\" He gives the same grace that made a persecutor into an apostle. No résumé recommends us to Him, and no record disqualifies us from Him; grace alone makes the difference, from first to last.",
+    "es": "Esta es la lección de la vida de Pablo: solo la gracia. Lo que Saulo nunca pudo ganar con todo su cumplimiento de la ley y todo su celo, el Cristo resucitado se lo dio gratuitamente. El primero de los pecadores llegó a ser el apóstol de la gracia, no porque se reformara a sí mismo, sino porque la gracia lo asió. Y la misma gracia se nos ofrece a nosotros. Si el Cristo resucitado pudo detener a Saulo de Tarso en el camino, dominar su odio, y enviarlo hasta los confines de la tierra, entonces nadie está fuera de su alcance y ninguna vida está demasiado perdida para que Él la use. Todavía está encontrando a las personas en sus propios caminos de Damasco, y a todos los que responden: «Señor, ¿qué quieres que yo haga?», les da la misma gracia que hizo de un perseguidor un apóstol. Ningún currículum nos recomienda ante Él, y ningún historial nos descalifica de Él; solo la gracia hace la diferencia, del principio al fin."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "500599f738e3"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "prose",
+   "text": {
+    "en": "Unit 11 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 11 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "308fac13cf5e"
+    }
+   }
+  },
+  {
+   "id": "b037",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33593c268178"
+    }
+   }
+  },
+  {
+   "id": "b038",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b039",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

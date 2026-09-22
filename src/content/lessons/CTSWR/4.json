@@ -1,0 +1,544 @@
+{
+ "course": "CTSWR",
+ "unit": 4,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<a href=\"index.html\" style=\"display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif\">📚 Catalog / Catálogo</a>\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"prevUnitBtn\">← Previous</button>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Unit 5 →</button>\n    </div>\n</div>\n<div class=\"lang-toggle-group\" style=\"display:inline-block;margin-bottom:15px;\">\n<button class=\"toggle-btn\" data-lang=\"en\" id=\"langBtnEn\">English</button>\n<button class=\"toggle-btn\" data-lang=\"es\" id=\"langBtnEs\">Español</button>\n<button class=\"toggle-btn\" data-lang=\"both\" id=\"langBtnBoth\">Both / Ambos</button>\n</div>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #5b3a1f;\"><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"registrationCard\">\n    <h2><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n    <label><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></label>\n    <input type=\"text\" id=\"regName\" placeholder=\"\" >\n    <label><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></label>\n    <input type=\"email\" id=\"regEmail\" placeholder=\"\" >\n    <label><span class=\"lang-en\"><!--cts:b008:en--></span><span class=\"lang-es\"><!--cts:b008:es--></span></label>\n    <input type=\"text\" id=\"regCountry\" placeholder=\"\" >\n    <label><span class=\"lang-en\"><!--cts:b009:en--></span><span class=\"lang-es\"><!--cts:b009:es--></span></label>\n    <input type=\"hidden\" id=\"regTrack\" value=\"certificate\" >\n    <div id=\"trackButtons\" style=\"display:flex;flex-direction:column;gap:8px;margin:6px 0 12px;\">\n        <button type=\"button\" class=\"track-opt\" data-track=\"certificate\"><span class=\"lang-en\"><!--cts:b010:en--></span><span class=\"lang-es\"><!--cts:b010:es--></span></button>\n        <button type=\"button\" class=\"track-opt\" data-track=\"mdiv\"><span class=\"lang-en\"><!--cts:b011:en--></span><span class=\"lang-es\"><!--cts:b011:es--></span></button>\n        <button type=\"button\" class=\"track-opt\" data-track=\"thm\"><span class=\"lang-en\"><!--cts:b012:en--></span><span class=\"lang-es\"><!--cts:b012:es--></span></button>\n    </div>\n    <button class=\"small\" id=\"saveRegBtn\" style=\"margin-top: 10px;\"><span class=\"lang-en\"><!--cts:b013:en--></span><span class=\"lang-es\"><!--cts:b013:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\" id=\"teachingContent\">\n    <div class=\"lang-en\">\n        <h2><!--cts:b014:en--></h2>\n        <p><!--cts:b015:en--></p>\n\n        <p><!--cts:b016:en--></p>\n\n        <p><!--cts:b017:en--></p>\n\n        <h2><!--cts:b018:en--></h2>\n        <p><!--cts:b019:en--></p>\n\n        <p><!--cts:b020:en--></p>\n\n        <p><!--cts:b021:en--></p>\n\n        <h2><!--cts:b022:en--></h2>\n        <p><!--cts:b023:en--></p>\n\n        <p><!--cts:b024:en--></p>\n\n        <h2><!--cts:b025:en--></h2>\n        <p><!--cts:b026:en--></p>\n\n        <p><!--cts:b027:en--></p>\n\n        <h2><!--cts:b028:en--></h2>\n        <p><!--cts:b029:en--></p>\n\n        <p><!--cts:b030:en--></p>\n\n        <h2><!--cts:b031:en--></h2>\n        <p><!--cts:b032:en--></p>\n\n        <p><!--cts:b033:en--></p>\n\n        <p style=\"text-align: center; margin-top: 30px; font-weight: bold;\"><!--cts:b034:en--></p>\n\n    </div>\n\n    <div class=\"lang-es\">\n        <h2><!--cts:b014:es--></h2>\n        <p><!--cts:b015:es--></p>\n\n        <p><!--cts:b016:es--></p>\n\n        <p><!--cts:b017:es--></p>\n\n        <h2><!--cts:b018:es--></h2>\n        <p><!--cts:b019:es--></p>\n\n        <p><!--cts:b020:es--></p>\n\n        <p><!--cts:b021:es--></p>\n\n        <h2><!--cts:b022:es--></h2>\n        <p><!--cts:b023:es--></p>\n\n        <p><!--cts:b024:es--></p>\n\n        <h2><!--cts:b025:es--></h2>\n        <p><!--cts:b026:es--></p>\n\n        <p><!--cts:b027:es--></p>\n\n        <h2><!--cts:b028:es--></h2>\n        <p><!--cts:b029:es--></p>\n\n        <p><!--cts:b030:es--></p>\n\n        <h2><!--cts:b031:es--></h2>\n        <p><!--cts:b032:es--></p>\n\n        <p><!--cts:b033:es--></p>\n\n        <p style=\"text-align: center; margin-top: 30px; font-weight: bold;\"><!--cts:b034:es--></p>\n\n    </div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b035:en--></span><span class=\"lang-es\"><!--cts:b035:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b036:en--></span>\n       <span class=\"lang-es\"><!--cts:b036:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b037:en--></span><span class=\"lang-es\"><!--cts:b037:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small reset\"><span class=\"lang-en\"><!--cts:b038:en--></span><span class=\"lang-es\"><!--cts:b038:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n  \n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSWRReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "🌍 World Religions — Unit 4: Hinduism",
+    "es": "🌍 Religiones del Mundo — Unidad 4: El Hinduismo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "42f6e64216e9"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "\"And as it is appointed for men to die once, but after this the judgment... Christ was offered once to bear the sins of many.\" — Hebrews 9:27–28 (NKJV)",
+    "es": "\"Y de la manera que está establecido para los hombres que mueran una sola vez, y después de esto el juicio... Cristo fue ofrecido una sola vez para llevar los pecados de muchos.\" — Hebreos 9:27–28 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "622e1c7ed4be"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "Student Registration",
+    "es": "Registro del Estudiante"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f94d495eed0d"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "Please register before beginning this unit. Your registration is saved on this device and used across all CTS courses.",
+    "es": "Por favor regístrese antes de comenzar esta unidad. Su registro se guarda en este dispositivo y se usa en todos los cursos del CTS."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2330ea9c37a9"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Full Name",
+    "es": "Nombre Completo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "64346b483c0a"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Email",
+    "es": "Correo Electrónico"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "84add5b29527"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "Country",
+    "es": "País"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d523ebbd1014"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "Program Track",
+    "es": "Programa"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ec4b83520350"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "Certificate of Ministry",
+    "es": "Certificado de Ministerio"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4df6d896eb72"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Master of Divinity (M.Div.)",
+    "es": "Maestría en Divinidad (M.Div.)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8400c8c4d874"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "Master of Theology (Th.M.)",
+    "es": "Maestría en Teología (Th.M.)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a31c66296633"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "Save Registration",
+    "es": "Guardar Registro"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "019798420daf"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "heading",
+   "text": {
+    "en": "Orientation",
+    "es": "Orientación"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "86e4e3875420"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "With Hinduism, this course turns for the first time to a religious tradition that shares almost no historical contact with the biblical world. Judaism gave birth to Christianity directly. Islam arose in close conversation with both. Hinduism developed on the Indian subcontinent over a long historical arc, from ancient Vedic traditions more than three thousand years old through centuries of later development into the diverse family of traditions known today, with no single founder, no single sacred text, no central authority, and no fixed creed in the way Christians, Jews, and Muslims each understand those terms. This makes Hinduism, in some ways, the hardest religion this course will study to summarize fairly, and the easiest to misrepresent — either by Western observers who flatten its enormous internal diversity into a few exotic images, or by well-meaning Christians who assume, wrongly, that a religion with so many gods must therefore have no serious theology at all.",
+    "es": "Con el hinduismo, este curso se dirige por primera vez a una tradición religiosa que comparte casi ningún contacto histórico con el mundo bíblico. El judaísmo dio origen directamente al cristianismo. El islam surgió en conversación cercana con ambos. El hinduismo se desarrolló en el subcontinente indio a lo largo de un extenso arco histórico, desde antiguas tradiciones védicas de más de tres mil años hasta siglos de desarrollo posterior en la diversa familia de tradiciones conocida hoy, sin un solo fundador, sin un solo texto sagrado, sin autoridad central, y sin un credo fijo de la manera en que los cristianos, judíos y musulmanes entienden esos términos. Esto hace del hinduismo, en cierto sentido, la religión más difícil que este curso estudiará para resumir con justicia, y la más fácil de tergiversar — ya sea por observadores occidentales que aplanan su enorme diversidad interna en unas pocas imágenes exóticas, o por cristianos bien intencionados que asumen, erróneamente, que una religión con tantos dioses no puede tener por lo tanto ninguna teología seria."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a06bf505be9d"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "Roughly one billion people worldwide identify as Hindu, the overwhelming majority in India and Nepal, with substantial diaspora communities in nearly every nation, including growing communities across Latin America. A pastor in Cuba or Mexico is statistically less likely to meet a Hindu neighbor than a Muslim or Jewish one, but yoga studios, meditation retreats, and popular spirituality drawing on Hindu concepts like karma and reincarnation have spread far beyond any ethnic or national boundary, meaning the ideas of Hinduism reach members of a pastor's own congregation more often than the formal religion itself does. Understanding these concepts accurately equips a pastor to recognize them when they surface, often unnamed, in a counseling conversation or a casual remark from someone who has never set foot in a Hindu temple.",
+    "es": "Aproximadamente mil millones de personas en todo el mundo se identifican como hindúes, la abrumadora mayoría en India y Nepal, con comunidades de diáspora sustanciales en casi toda nación, incluyendo comunidades crecientes en toda América Latina. Un pastor en Cuba o México tiene estadísticamente menos probabilidad de encontrarse con un vecino hindú que con uno musulmán o judío, pero los estudios de yoga, los retiros de meditación y la espiritualidad popular que se basa en conceptos hindúes como el karma y la reencarnación se han extendido mucho más allá de cualquier frontera étnica o nacional, lo que significa que las ideas del hinduismo llegan a los miembros de la propia congregación de un pastor con más frecuencia de lo que lo hace la religión formal misma. Entender estos conceptos con precisión equipa a un pastor para reconocerlos cuando surgen, a menudo sin nombre, en una conversación de consejería o un comentario casual de alguien que nunca ha puesto un pie en un templo hindú."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8c2de21c1b40"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "This diffusion of Hindu concepts into wider popular culture, detached from their original theological framework, poses its own particular pastoral challenge. A congregant who casually remarks \"well, that's just my karma\" after a run of bad luck, or who takes up a meditation practice marketed as purely secular stress relief but rooted in concepts of Atman and the dissolving of individual identity, may have no idea he is drawing on a coherent and very different theology of the self and the universe than the one Scripture teaches. Part of this unit's purpose is to equip a pastor to notice these borrowed concepts for what they are, gently and without alarm, so he can address the actual idea at work rather than merely the vocabulary someone happens to have picked up.",
+    "es": "Esta difusión de conceptos hindúes en la cultura popular más amplia, desprendidos de su marco teológico original, plantea su propio desafío pastoral particular. Un miembro de la congregación que comenta casualmente \"bueno, eso es simplemente mi karma\" después de una racha de mala suerte, o que emprende una práctica de meditación comercializada como puro alivio secular del estrés pero arraigada en conceptos del Atman y la disolución de la identidad individual, puede no tener idea de que está apoyándose en una teología coherente y muy diferente del yo y del universo que la que enseña la Escritura. Parte del propósito de esta unidad es equipar a un pastor para notar estos conceptos prestados por lo que son, con delicadeza y sin alarma, de modo que pueda abordar la idea real en juego en lugar de meramente el vocabulario que alguien resultó haber adoptado."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "24a22cfdb176"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "heading",
+   "text": {
+    "en": "I. Origins and the Foundation of Sanatana Dharma",
+    "es": "I. Orígenes y el fundamento del Sanatana Dharma"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "da51b7dded62"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "What outsiders call \"Hinduism\" — a term coined by foreign observers referring to the peoples living beyond the Indus River, not a name Hindus themselves originally used — is more accurately described by many of its own adherents as <em>Sanatana Dharma</em>, the \"eternal law\" or \"eternal way,\" a phrase that signals something important: Hinduism does not think of itself as a religion founded at a particular moment in history by a particular individual, the way Christianity looks to Christ, Islam to Muhammad, or Buddhism, which we study next, to the Buddha. It regards itself instead as an ancient and ongoing expression of truths built into the very structure of reality, transmitted across an unbroken chain of teachers and sacred texts stretching back further than reliable written history can trace.",
+    "es": "Lo que los extraños llaman \"hinduismo\" — un término acuñado por observadores extranjeros que se referían a los pueblos que vivían más allá del río Indo, no un nombre que los hindúes mismos originalmente usaban — se describe con más precisión por muchos de sus propios adherentes como <em>Sanatana Dharma</em>, la \"ley eterna\" o \"camino eterno,\" una frase que señala algo importante: el hinduismo no se piensa a sí mismo como una religión fundada en un momento particular de la historia por un individuo particular, de la manera en que el cristianismo mira a Cristo, el islam a Mahoma, o el budismo, que estudiaremos a continuación, a Buda. Se considera a sí mismo, en cambio, como una expresión antigua y continua de verdades incorporadas en la estructura misma de la realidad, transmitidas a través de una cadena ininterrumpida de maestros y textos sagrados que se remonta más allá de lo que la historia escrita confiable puede rastrear."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ffb4b5bec61d"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "Scholars generally trace the earliest layer of what became Hindu religious practice to the Vedic period, beginning perhaps 1500 B.C., associated with the arrival of Indo-Aryan peoples and cultures into the Indian subcontinent and the composition of the earliest of the Vedas, the Rigveda, a large collection of hymns to various deities associated with natural forces — fire, storm, sun, and the sacred drink called soma. Over the following centuries, this early Vedic religion, centered on ritual sacrifice performed by a priestly class called Brahmins, gradually developed and diversified into the vast and varied religious landscape scholars and Hindus alike now call Hinduism — a landscape so broad that it can comfortably contain strict philosophical monism, devotional worship of a personal deity, ritual observance with little interest in doctrine at all, and everything in between, all considered legitimate expressions of the same eternal way.",
+    "es": "Los eruditos generalmente rastrean la capa más temprana de lo que se convirtió en práctica religiosa hindú al período védico, que comienza quizás en el 1500 a.C., asociado con la llegada de pueblos y culturas indo-arias al subcontinente indio y la composición del más antiguo de los Vedas, el Rigveda, una gran colección de himnos a varias deidades asociadas con fuerzas naturales — el fuego, la tormenta, el sol y la bebida sagrada llamada soma. A lo largo de los siglos siguientes, esta religión védica temprana, centrada en el sacrificio ritual realizado por una clase sacerdotal llamada brahmanes, gradualmente se desarrolló y diversificó en el vasto y variado panorama religioso que eruditos e hindúes por igual ahora llaman hinduismo — un panorama tan amplio que puede contener cómodamente el monismo filosófico estricto, la adoración devocional de una deidad personal, la observancia ritual con poco interés en la doctrina en absoluto, y todo lo demás, todo considerado expresiones legítimas del mismo camino eterno."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0a1e17c31cc4"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "This developmental history also gave rise to the traditional social structure known as the caste system, dividing society into broad categories — Brahmins as priests and scholars, Kshatriyas as warriors and rulers, Vaishyas as merchants and farmers, and Shudras as laborers, with a further group historically excluded from this fourfold structure altogether. Traditional Hindu thought closely tied a person's caste at birth to the doctrine of karma discussed below, understanding one's social position as the moral result of actions in a previous life. Modern India has taken significant legal and social steps to dismantle caste-based discrimination, and many contemporary Hindus, especially in reform movements and in the diaspora, reject caste as a corruption of Hinduism's deeper spiritual teaching rather than an essential part of it — a debate a pastor should be aware exists within Hinduism itself rather than assuming every Hindu he meets holds an identical view of caste.",
+    "es": "Esta historia de desarrollo también dio lugar a la estructura social tradicional conocida como el sistema de castas, que dividía a la sociedad en amplias categorías — los brahmanes como sacerdotes y eruditos, los chatrías como guerreros y gobernantes, los vaisias como comerciantes y agricultores, y los sudras como trabajadores, con un grupo adicional históricamente excluido de esta estructura cuádruple por completo. El pensamiento hindú tradicional ligaba estrechamente la casta de una persona al nacer con la doctrina del karma discutida más abajo, entendiendo la posición social de uno como el resultado moral de acciones en una vida anterior. La India moderna ha tomado pasos legales y sociales significativos para desmantelar la discriminación basada en castas, y muchos hindúes contemporáneos, especialmente en movimientos de reforma y en la diáspora, rechazan la casta como una corrupción de la enseñanza espiritual más profunda del hinduismo en lugar de una parte esencial de ella — un debate que un pastor debe saber que existe dentro del hinduismo mismo en lugar de asumir que todo hindú que conoce sostiene una visión idéntica de la casta."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f9210bdfc7ea"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "heading",
+   "text": {
+    "en": "II. Core Concepts: Brahman, Atman, Karma, and Samsara",
+    "es": "II. Conceptos centrales: Brahman, Atman, karma y samsara"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "320f03c40e82"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "Despite its enormous diversity, several core concepts appear across nearly the whole spectrum of Hindu thought, and a pastor who understands these will be equipped to make sense of almost any conversation with a Hindu neighbor, however that neighbor's particular practice may differ from another's. <em>Brahman</em> refers, in the most philosophically developed strands of Hindu thought, to the single, ultimate, impersonal reality underlying and pervading the entire universe — not a god among other gods, but the ground of being itself, beyond all description, distinction, or limitation. <em>Atman</em> refers to the individual self or soul, and the central philosophical claim of the most influential school of Hindu thought, called Advaita Vedanta, is that Atman and Brahman are not, in the deepest sense, two things at all, but one — that the individual self's sense of being separate from ultimate reality is itself the fundamental illusion, called <em>maya</em>, that keeps a person bound to suffering.",
+    "es": "A pesar de su enorme diversidad, varios conceptos centrales aparecen a través de casi todo el espectro del pensamiento hindú, y un pastor que entienda estos estará equipado para dar sentido a casi cualquier conversación con un vecino hindú, sin importar cuánto pueda diferir la práctica particular de ese vecino de la de otro. <em>Brahman</em> se refiere, en las corrientes más desarrolladas filosóficamente del pensamiento hindú, a la única realidad última e impersonal que subyace y permea todo el universo — no un dios entre otros dioses, sino el fundamento del ser mismo, más allá de toda descripción, distinción o limitación. <em>Atman</em> se refiere al yo o alma individual, y la afirmación filosófica central de la escuela más influyente del pensamiento hindú, llamada Advaita Vedanta, es que Atman y Brahman no son, en el sentido más profundo, dos cosas en absoluto, sino una — que el sentido del yo individual de estar separado de la realidad última es en sí mismo la ilusión fundamental, llamada <em>maya</em>, que mantiene a una persona atada al sufrimiento."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f2e8dc58eede"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "<em>Karma</em>, a word many outside Hinduism now use loosely, refers in its proper Hindu sense to the moral law of cause and effect governing all action: every deed, good or bad, generates consequences that must eventually be experienced by the one who performed it, whether in this life or a future one. <em>Samsara</em> is the cycle of birth, death, and rebirth through which every soul passes, life after life, its circumstances in each new birth determined by the accumulated karma of its previous actions — a person's caste, health, wealth, and character at birth are understood, in traditional Hindu thought, as the direct moral consequence of choices made in earlier lives, not as arbitrary or unjust, but as the operation of a law as impersonal and inescapable as gravity. The ultimate goal of Hindu religious life, called <em>moksha</em>, is liberation from this entire cycle — not a better rebirth, but escape from rebirth altogether, understood variously as absorption into Brahman, blissful union with a personal deity, or the dissolution of the illusion of separateness, depending on which school of Hindu philosophy one follows.",
+    "es": "El <em>karma</em>, una palabra que muchos fuera del hinduismo ahora usan libremente, se refiere en su sentido hindú propio a la ley moral de causa y efecto que gobierna toda acción: todo hecho, bueno o malo, genera consecuencias que eventualmente deben ser experimentadas por quien lo realizó, ya sea en esta vida o en una futura. El <em>samsara</em> es el ciclo de nacimiento, muerte y renacimiento por el cual pasa toda alma, vida tras vida, sus circunstancias en cada nuevo nacimiento determinadas por el karma acumulado de sus acciones previas — la casta, salud, riqueza y carácter de una persona al nacer se entienden, en el pensamiento hindú tradicional, como la consecuencia moral directa de decisiones tomadas en vidas anteriores, no como arbitrarias o injustas, sino como la operación de una ley tan impersonal e ineludible como la gravedad. La meta última de la vida religiosa hindú, llamada <em>moksha</em>, es la liberación de todo este ciclo — no un mejor renacimiento, sino escapar del renacimiento por completo, entendido de diversas maneras como absorción en Brahman, unión dichosa con una deidad personal, o la disolución de la ilusión de separación, dependiendo de qué escuela de filosofía hindú se siga."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2b8d83b1a52a"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "heading",
+   "text": {
+    "en": "III. The Many Paths: Deities and Ways of Practice",
+    "es": "III. Los muchos caminos: Deidades y formas de práctica"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4b2bd60cff38"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "Hindu tradition speaks of thirty-three million gods, a number not meant to be taken as a literal census but as a way of expressing the conviction that the divine can be encountered and worshiped in essentially limitless forms. In practice, most Hindu worship centers on a smaller number of major deities. The <em>Trimurti</em>, or \"three forms,\" names Brahma the creator, Vishnu the preserver, and Shiva the destroyer, understood by many Hindus as three functions or manifestations of the one ultimate Brahman rather than three separate, competing gods — an important theological point, since it means most sophisticated Hindu thought is not simple polytheism in the way ancient Canaanite religion was, but something closer to a form of monism or henotheism wearing many faces. Vishnu is believed to descend to earth in various <em>avatars</em> during times of crisis to restore cosmic order (called <em>dharma</em>); the most beloved of these avatars are Krishna, whose teachings form the heart of the Bhagavad Gita, and Rama, hero of the epic Ramayana. Alongside these male deities, the Goddess, worshiped under many names including Devi, Durga, and Kali, holds central importance in large streams of Hindu devotion, understood as the active, creative power (<em>shakti</em>) without which even the great gods themselves remain inert.",
+    "es": "La tradición hindú habla de treinta y tres millones de dioses, un número que no debe tomarse como un censo literal sino como una forma de expresar la convicción de que lo divino puede encontrarse y adorarse en formas esencialmente ilimitadas. En la práctica, la mayor parte de la adoración hindú se centra en un número menor de deidades principales. El <em>Trimurti</em>, o \"tres formas,\" nombra a Brahma el creador, Vishnu el preservador, y Shiva el destructor, entendidos por muchos hindúes como tres funciones o manifestaciones del único Brahman último en lugar de tres dioses separados y en competencia — un punto teológico importante, ya que significa que gran parte del pensamiento hindú sofisticado no es simple politeísmo de la manera en que lo era la antigua religión cananea, sino algo más cercano a una forma de monismo o henoteísmo con muchos rostros. Se cree que Vishnu desciende a la tierra en varios <em>avatares</em> durante tiempos de crisis para restaurar el orden cósmico (llamado <em>dharma</em>); los más amados de estos avatares son Krishna, cuyas enseñanzas forman el corazón del Bhagavad Gita, y Rama, héroe de la épica Ramayana. Junto a estas deidades masculinas, la Diosa, adorada bajo muchos nombres incluyendo Devi, Durga y Kali, ocupa una importancia central en grandes corrientes de devoción hindú, entendida como el poder activo y creativo (<em>shakti</em>) sin el cual incluso los grandes dioses mismos permanecen inertes."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fbd6cbe308b4"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "Because Hinduism has no single required creed, it instead offers multiple recognized <em>margas</em>, or paths, toward the shared goal of moksha, suited to different temperaments. <em>Jnana yoga</em> is the path of knowledge, pursuing liberation through philosophical study and meditation aimed at directly realizing the identity of Atman and Brahman. <em>Bhakti yoga</em> is the path of devotion, pursuing liberation through loving worship of a personal deity — historically the most widely practiced path among ordinary Hindus, especially in popular devotion to Krishna, Rama, or the Goddess. <em>Karma yoga</em> is the path of selfless action, performing one's duties in life without attachment to the results. A pastor should understand that a devout, philosophically sophisticated Hindu following jnana yoga and a village grandmother offering flowers at a small shrine to Krishna practicing bhakti yoga may hold quite different theological pictures in their heads, even though both would recognize themselves as practicing the same eternal way.",
+    "es": "Debido a que el hinduismo no tiene un solo credo requerido, en cambio ofrece múltiples <em>margas</em>, o caminos, reconocidos hacia la meta compartida del moksha, adecuados a diferentes temperamentos. El <em>jnana yoga</em> es el camino del conocimiento, persiguiendo la liberación a través del estudio filosófico y la meditación dirigida a realizar directamente la identidad de Atman y Brahman. El <em>bhakti yoga</em> es el camino de la devoción, persiguiendo la liberación a través de la adoración amorosa de una deidad personal — históricamente el camino más ampliamente practicado entre los hindúes comunes, especialmente en la devoción popular a Krishna, Rama, o la Diosa. El <em>karma yoga</em> es el camino de la acción desinteresada, realizando los deberes propios en la vida sin apego a los resultados. Un pastor debe entender que un hindú devoto y filosóficamente sofisticado que sigue el jnana yoga y una abuela de pueblo que ofrece flores en un pequeño santuario a Krishna practicando bhakti yoga pueden sostener cuadros teológicos bastante diferentes en sus mentes, aunque ambos se reconocerían a sí mismos como practicando el mismo camino eterno."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "32990d57b809"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "heading",
+   "text": {
+    "en": "IV. Key Texts and the Question of Ultimate Reality",
+    "es": "IV. Textos clave y la cuestión de la realidad última"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "41567dd37555"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "Hindu sacred literature divides broadly into two categories. The <em>Shruti</em> texts, meaning \"that which is heard,\" are considered directly revealed and include the four Vedas and the philosophical treatises called the Upanishads, composed toward the end of the Vedic period and containing the classic statements of Brahman-Atman identity that shaped later Hindu philosophy so decisively. The <em>Smriti</em> texts, meaning \"that which is remembered,\" carry great authority without being considered directly revealed in the same sense, and include the two great epics, the Ramayana and the Mahabharata, along with the various Puranas, collections of mythology and religious instruction centered on particular deities. Embedded within the Mahabharata is the Bhagavad Gita, a relatively short philosophical dialogue between the warrior prince Arjuna and the god Krishna, arguably the single most widely read and beloved text in all of Hindu literature, addressing the tension between duty, action, and the pursuit of spiritual liberation in a manner countless Hindus, across every school and sect, have found personally compelling for over two thousand years.",
+    "es": "La literatura sagrada hindú se divide ampliamente en dos categorías. Los textos <em>Shruti</em>, que significa \"lo que se oye,\" se consideran directamente revelados e incluyen los cuatro Vedas y los tratados filosóficos llamados los Upanishads, compuestos hacia el final del período védico y que contienen las declaraciones clásicas de la identidad Brahman-Atman que dieron forma tan decisivamente a la filosofía hindú posterior. Los textos <em>Smriti</em>, que significa \"lo que se recuerda,\" llevan gran autoridad sin considerarse directamente revelados en el mismo sentido, e incluyen las dos grandes épicas, el Ramayana y el Mahabharata, junto con los diversos Puranas, colecciones de mitología e instrucción religiosa centradas en deidades particulares. Incorporado dentro del Mahabharata está el Bhagavad Gita, un diálogo filosófico relativamente corto entre el príncipe guerrero Arjuna y el dios Krishna, posiblemente el texto más ampliamente leído y amado de toda la literatura hindú, abordando la tensión entre el deber, la acción y la búsqueda de la liberación espiritual de una manera que innumerables hindúes, a través de cada escuela y secta, han encontrado personalmente convincente durante más de dos mil años."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9ec076dcd961"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "Where Christianity insists on a linear view of history moving toward a single, decisive, unrepeatable judgment — \"it is appointed for men to die once, but after this the judgment\" (Hebrews 9:27) — much of Hindu thought understands time itself as fundamentally cyclical, moving through vast cosmic ages that repeat without ultimate beginning or end, with individual souls likewise cycling through countless rebirths rather than moving toward a single decisive moment of accountability. This is not a minor difference in emphasis but a genuinely different picture of reality itself, and it shapes everything else: where Christianity offers one life, one death, and one judgment answered by one atoning sacrifice sufficient for all time (Hebrews 9:28; 10:10), Hindu thought generally offers countless lives, in which the soul must work out its own liberation across an almost unimaginable span of time through its own accumulated merit — moksha achieved, in traditional understanding, by the self, for the self, rather than received as a gift from outside the self.",
+    "es": "Donde el cristianismo insiste en una visión lineal de la historia que se mueve hacia un juicio único, decisivo e irrepetible — \"está establecido para los hombres que mueran una sola vez, y después de esto el juicio\" (Hebreos 9:27) — gran parte del pensamiento hindú entiende el tiempo mismo como fundamentalmente cíclico, moviéndose a través de vastas edades cósmicas que se repiten sin un comienzo o fin último, con las almas individuales asimismo cicladas a través de innumerables renacimientos en lugar de moverse hacia un solo momento decisivo de rendición de cuentas. Esta no es una diferencia menor de énfasis sino un cuadro genuinamente diferente de la realidad misma, y da forma a todo lo demás: donde el cristianismo ofrece una vida, una muerte, y un juicio respondido por un sacrificio expiatorio suficiente para todo tiempo (Hebreos 9:28; 10:10), el pensamiento hindú generalmente ofrece innumerables vidas, en las cuales el alma debe trabajar su propia liberación a lo largo de un lapso casi inimaginable de tiempo a través de su propio mérito acumulado — el moksha logrado, en el entendimiento tradicional, por el yo, para el yo, en lugar de recibido como un regalo desde fuera del yo."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f3d550f3bc43"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "heading",
+   "text": {
+    "en": "V. Engaging Hindu Neighbors and Friends with the Gospel",
+    "es": "V. Acercándose a vecinos y amigos hindúes con el evangelio"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "381acc4163a4"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "prose",
+   "text": {
+    "en": "Following the pattern of Paul at the Areopagus, a pastor engaging a Hindu neighbor should begin by honoring real, substantial common ground. Hindu tradition takes moral seriousness with genuine gravity — the conviction that actions have consequences, that the universe is not morally indifferent, and that spiritual discipline matters, resonates with much that Scripture itself teaches, even where the underlying explanation for why actions have consequences differs sharply from the biblical picture of sin against a personal, holy God. Hindu devotional practice, especially in the bhakti tradition, also displays a genuine hunger for personal relationship with the divine that a Christian can recognize and affirm as a true instinct, however differently it has been directed, echoing exactly the pattern this course established in Unit 1 regarding the universal religious impulse.",
+    "es": "Siguiendo el patrón de Pablo en el Areópago, un pastor que se relaciona con un vecino hindú debe comenzar honrando el terreno común real y sustancial. La tradición hindú toma la seriedad moral con genuina gravedad — la convicción de que las acciones tienen consecuencias, de que el universo no es moralmente indiferente, y de que la disciplina espiritual importa, resuena con mucho de lo que la Escritura misma enseña, incluso donde la explicación subyacente de por qué las acciones tienen consecuencias difiere agudamente del cuadro bíblico del pecado contra un Dios personal y santo. La práctica devocional hindú, especialmente en la tradición bhakti, también muestra un hambre genuina de relación personal con lo divino que un cristiano puede reconocer y afirmar como un instinto verdadero, aunque dirigido de manera diferente, haciendo eco exactamente del patrón que este curso estableció en la Unidad 1 respecto al impulso religioso universal."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8aeb7b4b5c30"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "From that foundation, a pastor can helpfully press toward several genuine points of difference the gospel resolves. Where karma offers a law with no mercy built into its structure — every debt must eventually be paid by the one who incurred it — the gospel offers a debt paid in full by Another, \"not by works of righteousness which we have done, but according to His mercy He saved us\" (Titus 3:5). Where samsara offers an almost endless cycle of further lives in which to keep trying, Hebrews 9:27 offers the sobering but ultimately merciful clarity of one life and one appointed judgment, met by one sufficient sacrifice, rather than a burden to be carried alone across countless future rebirths. And where the Hindu understanding of Atman-Brahman identity ultimately dissolves the individual self into an impersonal absolute, the gospel offers something Hindu thought does not: a personal God who knows the believer by name, who has always intended personal, conscious, eternal fellowship rather than absorption and loss of identity as the final goal of the spiritual life — \"now I know in part, but then I shall know just as I also am known\" (1 Corinthians 13:12). A pastor who can articulate clearly both the genuine spiritual seriousness of Hindu practice and these decisive points of gospel contrast will be equipped to engage a Hindu neighbor with the same combination of respect and urgent proclamation Paul modeled at the Areopagus.",
+    "es": "Desde ese fundamento, un pastor puede presionar de manera útil hacia varios puntos genuinos de diferencia que el evangelio resuelve. Donde el karma ofrece una ley sin misericordia incorporada en su estructura — toda deuda eventualmente debe ser pagada por quien la incurrió — el evangelio ofrece una deuda pagada en su totalidad por Otro, \"no por obras de justicia que nosotros hubiéramos hecho, sino por su misericordia, nos salvó\" (Tito 3:5). Donde el samsara ofrece un ciclo casi interminable de más vidas en las cuales seguir intentando, Hebreos 9:27 ofrece la sobria pero en última instancia misericordiosa claridad de una vida y un juicio señalado, encontrado por un sacrificio suficiente, en lugar de una carga que llevar solo a través de innumerables renacimientos futuros. Y donde el entendimiento hindú de la identidad Atman-Brahman finalmente disuelve el yo individual en un absoluto impersonal, el evangelio ofrece algo que el pensamiento hindú no ofrece: un Dios personal que conoce al creyente por nombre, que siempre ha tenido la intención de una comunión personal, consciente y eterna en lugar de la absorción y pérdida de identidad como meta final de la vida espiritual — \"ahora conozco en parte; pero entonces conoceré como fui conocido\" (1 Corintios 13:12). Un pastor que pueda articular claramente tanto la seriedad espiritual genuina de la práctica hindú como estos puntos decisivos de contraste evangélico estará equipado para relacionarse con un vecino hindú con la misma combinación de respeto y proclamación urgente que Pablo modeló en el Areópago."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f279f6487d13"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "prose",
+   "text": {
+    "en": "— Dr. Wayne Cook<br>Chapala Theological Seminary",
+    "es": "— Dr. Wayne Cook<br>Seminario Teológico de Chapala"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7778fcb9bb8c"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "prose",
+   "text": {
+    "en": "Unit 4 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 4 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "07d9dcb66810"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. <strong>If you fail, the unit locks for 15 minutes.</strong>",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. <strong>Si reprueba, se bloquea por 15 minutos.</strong>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d3b8e78884d7"
+    }
+   }
+  },
+  {
+   "id": "b037",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar &amp; Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b038",
+   "type": "prose",
+   "text": {
+    "en": "Reset",
+    "es": "Reiniciar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "44c57abd888a"
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,684 @@
+{
+ "course": "CTSEvangelism",
+ "unit": 4,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <button class=\"nav-btn\" id=\"prevUnitBtn\">← <span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></button>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\"><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span> →</button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></a>\n<button class=\"clear-btn\" id=\"clearDataBtn\">🗑 <span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></button>\n\n<div class=\"card\">\n    <h1>\n        <span class=\"lang-en\"><!--cts:b005:en--></span>\n        <span class=\"lang-es\"><!--cts:b005:es--></span>\n    </h1>\n    <p class=\"attribution\">\n        <span class=\"lang-en\"><!--cts:b006:en--></span>\n        <span class=\"lang-es\"><!--cts:b006:es--></span>\n    </p>\n    <div id=\"trackBanner\" class=\"track-banner\" style=\"display:none;\"></div>\n</div>\n\n<!-- CTS audit 2026-05-23: registration panel removed. Registration happens once on Unit 1.\n     Later units read the saved student/track from localStorage (cts_student / cts_track).\n     If none is saved, the student silently defaults to the Certificate track (per Wayne). -->\n\n<div class=\"card\" id=\"teachingContent\">\n    <div class=\"lang-en\">\n        <h2><!--cts:b007:en--></h2>\n        <p><!--cts:b008:en--></p>\n        <p><!--cts:b009:en--></p>\n\n        <h3><!--cts:b010:en--></h3>\n        <p><!--cts:b011:en--></p>\n        <blockquote><!--cts:b012:en--></blockquote>\n        <p><!--cts:b013:en--></p>\n        <p><!--cts:b014:en--></p>\n\n        <h3><!--cts:b015:en--></h3>\n        <p><!--cts:b016:en--></p>\n        <blockquote><!--cts:b017:en--></blockquote>\n        <p><!--cts:b018:en--></p>\n        <blockquote><!--cts:b019:en--></blockquote>\n        <p><!--cts:b020:en--></p>\n\n        <h3><!--cts:b021:en--></h3>\n        <p><!--cts:b022:en--></p>\n        <blockquote><!--cts:b023:en--></blockquote>\n        <p><!--cts:b024:en--></p>\n\n        <h3><!--cts:b025:en--></h3>\n        <p><!--cts:b026:en--></p>\n        <blockquote><!--cts:b027:en--></blockquote>\n        <p><!--cts:b028:en--></p>\n        <blockquote><!--cts:b029:en--></blockquote>\n        <p><!--cts:b030:en--></p>\n\n        <h3><!--cts:b031:en--></h3>\n        <p><!--cts:b032:en--></p>\n        <p><!--cts:b033:en--></p>\n\n        <h3><!--cts:b034:en--></h3>\n        <p><!--cts:b035:en--></p>\n        <p><!--cts:b036:en--></p>\n\n        <h3><!--cts:b037:en--></h3>\n        <p><!--cts:b038:en--></p>\n        <p><!--cts:b039:en--></p>\n\n        <h3><!--cts:b040:en--></h3>\n        <p><!--cts:b041:en--></p>\n        <blockquote><!--cts:b042:en--></blockquote>\n        <p><!--cts:b043:en--></p>\n    </div>\n\n    <div class=\"lang-es\">\n        <h2><!--cts:b007:es--></h2>\n        <p><!--cts:b008:es--></p>\n        <p><!--cts:b009:es--></p>\n\n        <h3><!--cts:b010:es--></h3>\n        <p><!--cts:b011:es--></p>\n        <blockquote><!--cts:b012:es--></blockquote>\n        <p><!--cts:b013:es--></p>\n        <p><!--cts:b014:es--></p>\n\n        <h3><!--cts:b015:es--></h3>\n        <p><!--cts:b016:es--></p>\n        <blockquote><!--cts:b017:es--></blockquote>\n        <p><!--cts:b018:es--></p>\n        <blockquote><!--cts:b019:es--></blockquote>\n        <p><!--cts:b020:es--></p>\n\n        <h3><!--cts:b021:es--></h3>\n        <p><!--cts:b022:es--></p>\n        <blockquote><!--cts:b023:es--></blockquote>\n        <p><!--cts:b024:es--></p>\n\n        <h3><!--cts:b025:es--></h3>\n        <p><!--cts:b026:es--></p>\n        <blockquote><!--cts:b027:es--></blockquote>\n        <p><!--cts:b028:es--></p>\n        <blockquote><!--cts:b029:es--></blockquote>\n        <p><!--cts:b030:es--></p>\n\n        <h3><!--cts:b031:es--></h3>\n        <p><!--cts:b032:es--></p>\n        <p><!--cts:b033:es--></p>\n\n        <h3><!--cts:b034:es--></h3>\n        <p><!--cts:b035:es--></p>\n        <p><!--cts:b036:es--></p>\n\n        <h3><!--cts:b037:es--></h3>\n        <p><!--cts:b038:es--></p>\n        <p><!--cts:b039:es--></p>\n\n        <h3><!--cts:b040:es--></h3>\n        <p><!--cts:b041:es--></p>\n        <blockquote><!--cts:b042:es--></blockquote>\n        <p><!--cts:b043:es--></p>\n    </div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b044:en--></span><span class=\"lang-es\"><!--cts:b044:es--></span></h2>\n    <p>\n        <span class=\"lang-en\"><!--cts:b045:en--></span>\n        <span class=\"lang-es\"><!--cts:b045:es--></span>\n    </p>\n    <p>\n        <span class=\"lang-en\"><!--cts:b046:en--></span>\n        <span class=\"lang-es\"><!--cts:b046:es--></span>\n    </p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b047:en--></span><span class=\"lang-es\"><!--cts:b047:es--></span></button>\n        <button id=\"clearExamDataBtn\" class=\"small\" style=\"background:#a0512a;\">🗑 <span class=\"lang-en\"><!--cts:b048:en--></span><span class=\"lang-es\"><!--cts:b048:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\" aria-live=\"polite\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSEvangelismReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "Previous",
+    "es": "Anterior"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "50f94286ba30"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "Next",
+    "es": "Siguiente"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bc981983e7f5"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "Clear Saved Data",
+    "es": "Borrar Datos Guardados"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1f211da49ca3"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "📖 Evangelism — Unit 4: The Role of the Holy Spirit in Evangelism",
+    "es": "📖 Evangelismo — Unidad 4: El Papel del Espíritu Santo en el Evangelismo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7356d9cc343f"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Chapala Theological Seminary · Dr. Wayne Cook, Author and Professor · Dr. Ted Rogers, Seminary Director",
+    "es": "Seminario Teológico de Chapala · Dr. Wayne Cook, Autor y Profesor · Dr. Ted Rogers, Director del Seminario"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "09f5030da034"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "heading",
+   "text": {
+    "en": "Orientation: Without the Spirit, Evangelism Is Human Effort",
+    "es": "Orientación: Sin el Espíritu, el Evangelismo es Esfuerzo Humano"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "56787b8690f3"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "The first three units established what evangelism is, the seven propositions and three patterns that shape it, and the four-point content that gives it substance. But content and conviction alone do not produce conversion. Evangelism is a spiritual work involving the transformation of the human heart, and that work cannot be accomplished by human ability—no matter how well-trained, articulate, or sincere the witness may be. Many failures and frustrations in evangelism come from trying to do in human strength what only God can do.",
+    "es": "Las primeras tres unidades establecieron qué es el evangelismo, las siete proposiciones y tres patrones que lo dan forma, y el contenido de cuatro puntos que le da sustancia. Pero el contenido y la convicción por sí solos no producen conversión. El evangelismo es una obra espiritual que implica la transformación del corazón humano, y esa obra no puede ser realizada por la habilidad humana—por más bien entrenado, articulado o sincero que sea el testigo. Muchos fracasos y frustraciones en el evangelismo provienen de intentar hacer en fuerza humana lo que solo Dios puede hacer."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8a291091d045"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "When the role of the Holy Spirit is neglected, evangelism becomes mechanical, pressured, and often ineffective. When His role is properly understood, evangelism becomes an act of dependence, faithfulness, and confidence in God. This unit examines the Spirit's essential work in five movements—conviction, drawing, regeneration, empowerment, and guidance—then warns of the danger of neglecting Him and closes with the practical posture of faithful dependence. The thesis is simple: the witness speaks the word; the Spirit does the work.",
+    "es": "Cuando se descuida el papel del Espíritu Santo, el evangelismo se vuelve mecánico, presionado y a menudo ineficaz. Cuando su papel se comprende correctamente, el evangelismo se convierte en un acto de dependencia, fidelidad y confianza en Dios. Esta unidad examina la obra esencial del Espíritu en cinco movimientos—convicción, atracción, regeneración, capacitación y guía—luego advierte sobre el peligro de descuidarlo y cierra con la postura práctica de la dependencia fiel. La tesis es simple: el testigo habla la palabra; el Espíritu hace la obra."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "467198d58acc"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "heading",
+   "text": {
+    "en": "I. The Spirit Convicts of Sin",
+    "es": "I. El Espíritu Convence de Pecado"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d4cdb3757362"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Jesus made the Spirit's first evangelistic work explicit:",
+    "es": "Jesús hizo explícita la primera obra evangelística del Espíritu:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b4f1bd3ecb4e"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "other",
+   "text": {
+    "en": "\"And when He has come, He will convict the world of sin, and of righteousness, and of judgment.\" (John 16:8, NKJV)",
+    "es": "\"Y cuando Él venga, convencerá al mundo de pecado, de justicia y de juicio.\" (Juan 16:8, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a16e3d0fbdbb"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "The word \"convict\" carries the sense of exposing, convincing, bringing into the light. Conviction is not merely making someone feel guilty; it is the Spirit of God revealing to the sinner the true nature of his sin, the righteousness of God against which he has offended, and the reality of the judgment that awaits. No evangelist can produce this through argument or persuasion. A speaker may explain sin clearly, but only the Spirit can cause a person to <em>see</em> it personally and respond to it genuinely. The Spirit works through the Word, applying it to the conscience. Without this divine conviction, the sinner remains complacent, unmoved by either the threat of judgment or the offer of grace.",
+    "es": "La palabra \"convencerá\" lleva el sentido de exponer, convencer, sacar a la luz. La convicción no es simplemente hacer que alguien se sienta culpable; es el Espíritu de Dios revelando al pecador la verdadera naturaleza de su pecado, la justicia de Dios contra la cual ha ofendido y la realidad del juicio que le espera. Ningún evangelista puede producir esto mediante argumento o persuasión. Un orador puede explicar el pecado claramente, pero solo el Espíritu puede hacer que una persona lo <em>vea</em> personalmente y responda a él genuinamente. El Espíritu obra a través de la Palabra, aplicándola a la conciencia. Sin esta convicción divina, el pecador permanece complaciente, sin ser movido ni por la amenaza del juicio ni por la oferta de la gracia."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1a26e03c58ae"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "prose",
+   "text": {
+    "en": "The witness must therefore pray for the Spirit's convicting work. Efforts to manufacture conviction through emotional manipulation or fear tactics are not only unbiblical but counterproductive, producing false converts rather than true penitents. The Welsh Revival of 1904 and the Korean Revival of 1907 were marked above all by deep, Spirit-wrought conviction of sin across entire communities, and from that conviction came lasting conversions—not from clever methods, but from the work of God upon the heart.",
+    "es": "Por lo tanto, el testigo debe orar por la obra convincente del Espíritu. Los esfuerzos por fabricar convicción mediante manipulación emocional o tácticas de miedo no solo son antibíblicos sino contraproducentes, produciendo falsos conversos en lugar de verdaderos penitentes. El Avivamiento Galés de 1904 y el Avivamiento Coreano de 1907 estuvieron marcados sobre todo por una convicción profunda de pecado obrada por el Espíritu en comunidades enteras, y de esa convicción vinieron conversiones duraderas—no de métodos ingeniosos, sino de la obra de Dios sobre el corazón."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8d3bf13e749e"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "heading",
+   "text": {
+    "en": "II. The Spirit Draws the Sinner",
+    "es": "II. El Espíritu Atrae al Pecador"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "defdebf50a74"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "Salvation is not initiated by man, but by God. Jesus declared it plainly:",
+    "es": "La salvación no es iniciada por el hombre, sino por Dios. Jesús lo declaró claramente:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2033675198d0"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "other",
+   "text": {
+    "en": "\"No one can come to Me unless the Father who sent Me draws him; and I will raise him up at the last day.\" (John 6:44, NKJV)",
+    "es": "\"Ninguno puede venir a mí, si el Padre que me envió no le trajere; y yo le resucitaré en el día postrero.\" (Juan 6:44, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cf4d139beb61"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "The evangelist is not responsible for creating spiritual desire. The Spirit of God works within the heart, drawing the sinner toward Christ. And remarkably, Paul told the philosophers at Mars Hill that God is already at work in this drawing before the witness ever arrives:",
+    "es": "El evangelista no es responsable de crear el deseo espiritual. El Espíritu de Dios obra dentro del corazón, atrayendo al pecador hacia Cristo. Y notablemente, Pablo dijo a los filósofos en el Areópago que Dios ya está obrando en esta atracción antes de que el testigo llegue:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "31cf7706d9d8"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "other",
+   "text": {
+    "en": "\"so that they should seek the Lord, in the hope that they might grope for Him and find Him, though He is not far from each one of us.\" (Acts 17:27, NKJV)",
+    "es": "\"Para que busquen a Dios, si en alguna manera, palpando, puedan hallarle, aunque ciertamente no está lejos de cada uno de nosotros.\" (Hechos 17:27, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cb9a9f625812"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "This truth removes the pressure from the evangelist and places confidence in God. If salvation depended on human persuasion, no one would be saved. But because God draws, the believer can speak with hope, knowing the Spirit is already at work even when no immediate response is visible. Our part is to plant and water faithfully; the drawing belongs to Him.",
+    "es": "Esta verdad elimina la presión del evangelista y pone la confianza en Dios. Si la salvación dependiera de la persuasión humana, nadie sería salvo. Pero porque Dios atrae, el creyente puede hablar con esperanza, sabiendo que el Espíritu ya está obrando incluso cuando no se ve una respuesta inmediata. Nuestra parte es plantar y regar fielmente; la atracción le pertenece a Él."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "651d11ca4d27"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "heading",
+   "text": {
+    "en": "III. The Spirit Gives New Life (Regeneration)",
+    "es": "III. El Espíritu Da Vida Nueva (Regeneración)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d957592a591f"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "Evangelism is not simply about changing opinions or improving behavior. It is about new birth. Jesus told Nicodemus, \"that which is born of the Spirit is spirit\" (John 3:6, NKJV). This new birth cannot be produced by a decision alone. It is the work of the Spirit of God. A person may respond outwardly to a message, but without the Spirit's regenerating work there is no true transformation. Regeneration is the Spirit's act of imparting spiritual life to a soul dead in sin:",
+    "es": "El evangelismo no se trata simplemente de cambiar opiniones o mejorar el comportamiento. Se trata del nuevo nacimiento. Jesús le dijo a Nicodemo: \"Lo que es nacido del Espíritu, espíritu es\" (Juan 3:6, RVG). Este nuevo nacimiento no puede ser producido solo por una decisión. Es una obra del Espíritu de Dios. Una persona puede responder externamente a un mensaje, pero sin la obra regeneradora del Espíritu no hay verdadera transformación. La regeneración es el acto del Espíritu de impartir vida espiritual a un alma muerta en pecado:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "db6797197a40"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "other",
+   "text": {
+    "en": "\"And you He made alive, who were dead in trespasses and sins.\" (Ephesians 2:1, NKJV)",
+    "es": "\"Y a vosotros, estando muertos en delitos y pecados, os dio vida.\" (Efesios 2:1, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "17d9a97a03cf"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "Before regeneration a person cannot see the kingdom of God, let alone enter it. After regeneration, the eyes are opened, the heart is softened, and faith becomes possible. This is why evangelism must go beyond securing decisions. The goal is not a raised hand or a signed card; the goal is genuine conversion, which is exclusively the Spirit's work. The witness depends on the Spirit to give life—he does not trust the method to produce it.",
+    "es": "Antes de la regeneración, una persona no puede ver el reino de Dios, y mucho menos entrar en él. Después de la regeneración, los ojos se abren, el corazón se ablanda y la fe se hace posible. Por eso el evangelismo debe ir más allá de asegurar decisiones. El objetivo no es una mano levantada o una tarjeta firmada; el objetivo es la conversión genuina, que es exclusivamente obra del Espíritu. El testigo depende del Espíritu para dar vida—no confía en el método para producirla."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8c23df245824"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "heading",
+   "text": {
+    "en": "IV. The Spirit Empowers the Witness",
+    "es": "IV. El Espíritu Capacita al Testigo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2a4eacb26c0f"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "While the Spirit works in the heart of the sinner, He also works in the life of the believer. Jesus told His disciples:",
+    "es": "Mientras el Espíritu obra en el corazón del pecador, también obra en la vida del creyente. Jesús dijo a sus discípulos:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "32de2e35cdea"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "other",
+   "text": {
+    "en": "\"But you shall receive power when the Holy Spirit has come upon you; and you shall be witnesses to Me in Jerusalem, and in all Judea and Samaria, and to the end of the earth.\" (Acts 1:8, NKJV)",
+    "es": "\"Pero recibiréis poder, cuando haya venido sobre vosotros el Espíritu Santo, y me seréis testigos en Jerusalén, en toda Judea, en Samaria, y hasta lo último de la tierra.\" (Hechos 1:8, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "621fb04fdea4"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "The ability to speak, the courage to witness, and the clarity to present the gospel all come from the Spirit. Evangelism does not depend on personality, training, or natural ability—it is empowered by God. Every believer, regardless of background or skill, can be used in evangelism when yielded to the Spirit. Pentecost itself was the proof: ordinary fishermen, filled with the Spirit, preached so that three thousand were saved in a single day. John reminds us that this anointing is permanent in the believer:",
+    "es": "La habilidad para hablar, el valor para testificar y la claridad para presentar el evangelio provienen del Espíritu. El evangelismo no depende de la personalidad, el entrenamiento o la habilidad natural—es potenciado por Dios. Todo creyente, sin importar su origen o habilidad, puede ser usado en el evangelismo cuando se rinde al Espíritu. Pentecostés mismo fue la prueba: pescadores comunes, llenos del Espíritu, predicaron de tal manera que tres mil fueron salvos en un solo día. Juan recuerda que esta unción permanece en el creyente:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8304c128938c"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "other",
+   "text": {
+    "en": "\"But the anointing which you have received from Him abides in you, and you do not need that anyone teach you; but as the same anointing teaches you concerning all things, and is true, and is not a lie.\" (1 John 2:27, NKJV)",
+    "es": "\"Pero la unción que vosotros recibisteis de él permanece en vosotros, y no tenéis necesidad de que nadie os enseñe; así como la unción misma os enseña todas las cosas, y es verdadera, y no es mentira.\" (1 Juan 2:27, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "516006bb9c46"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "This empowerment is not a one-time event but a continual filling. Paul commands, \"be filled with the Spirit\" (Ephesians 5:18, NKJV). A Spirit-filled believer speaks boldly, loves genuinely, and presents the gospel with supernatural effectiveness. The opposite is also true: when a believer relies on his own strength, his witness becomes weak, fearful, and unconvincing.",
+    "es": "Esta capacitación no es un evento único sino un llenado continuo. Pablo ordena: \"Sed llenos del Espíritu\" (Efesios 5:18, RVG). Un creyente lleno del Espíritu habla con valentía, ama genuinamente y presenta el evangelio con eficacia sobrenatural. Lo contrario también es cierto: cuando un creyente confía en su propia fuerza, su testimonio se vuelve débil, temeroso y poco convincente."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "22a6ccc87973"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "heading",
+   "text": {
+    "en": "V. The Spirit Guides in Evangelism",
+    "es": "V. El Espíritu Guía en el Evangelismo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ff570dbc7285"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "prose",
+   "text": {
+    "en": "The Holy Spirit not only empowers but also guides. In the book of Acts, believers were repeatedly directed by the Spirit in where to go and what to do. Philip was led to the Ethiopian eunuch (Acts 8:26–29). Paul was redirected mid-journey toward Macedonia (Acts 16:6–10). This guidance may not always be dramatic, but it is real. The Spirit gives discernment in conversations, wisdom in timing, and sensitivity to the needs of individuals. This is why evangelism must be carried out with attentiveness to God, not merely adherence to a method. A rigid script may help with clarity, but it cannot replace the Spirit's leading.",
+    "es": "El Espíritu Santo no solo capacita sino que también guía. En el libro de Hechos, los creyentes fueron dirigidos repetidamente por el Espíritu hacia dónde ir y qué hacer. Felipe fue llevado al eunuco etíope (Hechos 8:26–29). Pablo fue redirigido a mitad del viaje hacia Macedonia (Hechos 16:6–10). Esta guía puede no ser siempre dramática, pero es real. El Espíritu da discernimiento en las conversaciones, sabiduría en el momento oportuno y sensibilidad a las necesidades de los individuos. Por eso el evangelismo debe llevarse a cabo con atención a Dios, no meramente con apego a un método. Un guion rígido puede ayudar con la claridad, pero no puede reemplazar la dirección del Espíritu."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "46964b185da9"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "Prayer is the primary means of seeking this guidance. Before engaging in evangelism, the believer should ask the Spirit to open doors, to bring the right words, and to prepare the heart of the hearer. After the conversation, the believer should thank the Spirit for whatever was accomplished, trusting that even unseen work has been done.",
+    "es": "La oración es el medio principal para buscar esta guía. Antes de participar en el evangelismo, el creyente debe pedir al Espíritu que abra puertas, que traiga las palabras correctas y que prepare el corazón del oyente. Después de la conversación, el creyente debe agradecer al Espíritu por todo lo que se haya logrado, confiando en que incluso la obra invisible se ha realizado."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "778ac2e15b4f"
+    }
+   }
+  },
+  {
+   "id": "b034",
+   "type": "heading",
+   "text": {
+    "en": "VI. The Danger of Neglecting the Spirit",
+    "es": "VI. El Peligro de Descuidar al Espíritu"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5f315ce47bb6"
+    }
+   }
+  },
+  {
+   "id": "b035",
+   "type": "prose",
+   "text": {
+    "en": "When the role of the Holy Spirit is neglected, several problems arise. First, evangelism becomes mechanical rather than spiritual. Methods are followed without dependence on God. Second, pressure replaces persuasion. The evangelist tries to force a response rather than trusting the Spirit to work. Third, results are misinterpreted: outward decisions are assumed to be true conversions without evidence of new life. The history of evangelism is filled with examples of well-intentioned methods that produced nominal Christians—people who made a profession but showed no fruit. This happens when the Spirit is bypassed in favor of technique.",
+    "es": "Cuando se descuida el papel del Espíritu Santo, surgen varios problemas. Primero, el evangelismo se vuelve mecánico en lugar de espiritual. Se siguen métodos sin dependencia de Dios. Segundo, la presión reemplaza a la persuasión. El evangelista intenta forzar una respuesta en lugar de confiar en que el Espíritu obre. Tercero, los resultados se malinterpretan: se asume que las decisiones externas son conversiones verdaderas sin evidencia de nueva vida. La historia del evangelismo está llena de ejemplos de métodos bien intencionados que produjeron cristianos nominales—personas que hicieron una profesión pero no mostraron fruto. Esto sucede cuando el Espíritu es pasado por alto en favor de la técnica."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ff55e52f9390"
+    }
+   }
+  },
+  {
+   "id": "b036",
+   "type": "prose",
+   "text": {
+    "en": "There is also an enemy dimension that must not be forgotten. The Enemy is constantly undermining the witnessing activity—blinding minds, distracting hearts, and stirring opposition. Paul wrote that \"the god of this age has blinded the minds of those who do not believe\" (2 Corinthians 4:4, NKJV). Evangelism is therefore not merely educational or persuasive work; it is spiritual warfare. The believer who attempts it without the Spirit attempts the impossible.",
+    "es": "Hay también una dimensión enemiga que no se debe olvidar. El Enemigo está constantemente socavando la actividad del testimonio—cegando mentes, distrayendo corazones y avivando la oposición. Pablo escribió que \"el dios de este siglo cegó el entendimiento de los incrédulos\" (2 Corintios 4:4, RVG). El evangelismo, por lo tanto, no es meramente una obra educativa o persuasiva; es guerra espiritual. El creyente que lo intenta sin el Espíritu intenta lo imposible."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0f2395835b9e"
+    }
+   }
+  },
+  {
+   "id": "b037",
+   "type": "heading",
+   "text": {
+    "en": "VII. Faithful Dependence on the Spirit",
+    "es": "VII. Dependencia Fiel del Espíritu"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7df04d49924f"
+    }
+   }
+  },
+  {
+   "id": "b038",
+   "type": "prose",
+   "text": {
+    "en": "The proper response to these truths is not passivity, but dependence. The believer must pray for the Spirit's work, rely on Him in conversation, and trust Him for results. At the same time, the believer must speak, explain, and proclaim the gospel clearly. Dependence on the Spirit does not remove responsibility—it defines how responsibility is carried out. As Paul wrote, \"our sufficiency is from God\" (2 Corinthians 3:5, NKJV).",
+    "es": "La respuesta adecuada a estas verdades no es la pasividad, sino la dependencia. El creyente debe orar por la obra del Espíritu, confiar en Él en la conversación y confiar en Él para los resultados. Al mismo tiempo, el creyente debe hablar, explicar y proclamar el evangelio claramente. La dependencia del Espíritu no elimina la responsabilidad—define cómo se lleva a cabo esa responsabilidad. Como escribió Pablo: \"Nuestra suficiencia es de Dios\" (2 Corintios 3:5, RVG)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fcc372c17ca6"
+    }
+   }
+  },
+  {
+   "id": "b039",
+   "type": "prose",
+   "text": {
+    "en": "Consider two approaches to evangelism. One relies entirely on technique: the presentation is polished, the arguments clear, the structure well-practiced—yet there is little prayer, little dependence on God, and little awareness of the Spirit's work. The other also prepares and presents clearly, but does so with prayer, humility, and dependence on God. The difference is not in effort but in dependence. A farmer can prepare the soil perfectly, but he cannot make the seed grow. That power belongs to God alone. Similarly, an evangelist can present the gospel with perfect clarity, but only the Spirit can cause it to take root in the heart.",
+    "es": "Considere usted dos enfoques al evangelismo. Uno depende enteramente de la técnica: la presentación es pulida, los argumentos claros, la estructura bien practicada—sin embargo, hay poca oración, poca dependencia de Dios y poca conciencia de la obra del Espíritu. El otro también prepara y presenta claramente, pero lo hace con oración, humildad y dependencia de Dios. La diferencia no está en el esfuerzo, sino en la dependencia. Un agricultor puede preparar el suelo perfectamente, pero no puede hacer que la semilla crezca. Ese poder pertenece solo a Dios. De igual manera, un evangelista puede presentar el evangelio con perfecta claridad, pero solo el Espíritu puede hacer que eche raíces en el corazón."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7b2e340d2a03"
+    }
+   }
+  },
+  {
+   "id": "b040",
+   "type": "heading",
+   "text": {
+    "en": "Conclusion: Divine Power, Not Human Effort",
+    "es": "Conclusión: Poder Divino, No Esfuerzo Humano"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4ee37ddf557a"
+    }
+   }
+  },
+  {
+   "id": "b041",
+   "type": "prose",
+   "text": {
+    "en": "The Holy Spirit is central to all true evangelism. He convicts of sin, draws the sinner, gives new life, empowers the believer, and guides the process. Without Him, evangelism becomes mere human effort. With Him, it becomes a work of divine power. The evangelist must therefore labor faithfully, speak clearly, and depend completely on the Spirit of God for the results. As Paul concludes:",
+    "es": "El Espíritu Santo es central a todo evangelismo verdadero. Él convence de pecado, atrae al pecador, da vida nueva, capacita al creyente y guía el proceso. Sin Él, el evangelismo se convierte en mero esfuerzo humano. Con Él, se convierte en una obra de poder divino. El evangelista, por lo tanto, debe trabajar fielmente, hablar claramente y depender completamente del Espíritu de Dios para los resultados. Como concluye Pablo:"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0988d21ff833"
+    }
+   }
+  },
+  {
+   "id": "b042",
+   "type": "other",
+   "text": {
+    "en": "\"So then neither he who plants is anything, nor he who waters, but God who gives the increase.\" (1 Corinthians 3:7, NKJV)",
+    "es": "\"Así que ni el que planta es algo, ni el que riega, sino Dios, que da el crecimiento.\" (1 Corintios 3:7, RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9a8bbb52c8f7"
+    }
+   }
+  },
+  {
+   "id": "b043",
+   "type": "prose",
+   "text": {
+    "en": "A prayer for the student: <em>Lord, teach us to rely on Your Spirit. Forgive us for the times we have trusted in methods rather than in You. Fill us with boldness, guide our words, and convict the hearts of those who hear. We ask for nothing less than the power that raised Christ from the dead, working through our feeble witness. In Jesus' name, Amen.</em>",
+    "es": "Una oración por el estudiante: <em>Señor, enséñanos a depender de Tu Espíritu. Perdónanos por las veces que hemos confiado en métodos en lugar de en Ti. Llénanos de valentía, guía nuestras palabras y convence los corazones de los que oyen. Pedimos nada menos que el poder que resucitó a Cristo de entre los muertos, obrando a través de nuestro débil testimonio. En el nombre de Jesús, Amén.</em>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ed34435e00bc"
+    }
+   }
+  },
+  {
+   "id": "b044",
+   "type": "prose",
+   "text": {
+    "en": "Unit 4 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 4 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "07d9dcb66810"
+    }
+   }
+  },
+  {
+   "id": "b045",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate track:</strong> Section A (multiple choice) required at 90%. Section B (short answer) optional.",
+    "es": "<strong>Pista de Certificado:</strong> Sección A (opción múltiple) obligatoria al 90%. Sección B (respuesta corta) opcional."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90b12df3fedf"
+    }
+   }
+  },
+  {
+   "id": "b046",
+   "type": "prose",
+   "text": {
+    "en": "<strong>M.Div./Th.M. track:</strong> Both sections required at 90% each, independently.",
+    "es": "<strong>Pista de M.Div./Th.M.:</strong> Ambas secciones obligatorias al 90% cada una, independientemente."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3c8a5fe1f97b"
+    }
+   }
+  },
+  {
+   "id": "b047",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b048",
+   "type": "prose",
+   "text": {
+    "en": "Clear My Answers",
+    "es": "Borrar Mis Respuestas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0068b9eef93e"
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,474 @@
+{
+ "course": "CTSJohn",
+ "unit": 5,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right:15px; font-weight:bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Espa&ntilde;ol</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></p>\n    <p style=\"margin-top:10px; font-style:italic; color:#2f4f2f;\"><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\" style=\"display:none;\">\n    <h3><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></h3>\n    <p style=\"font-size:0.9rem;\"><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></p>\n    <label class=\"lang-en\"><!--cts:b008:en--></label><label class=\"lang-es\"><!--cts:b008:es--></label>\n    <input type=\"text\" id=\"regName\" placeholder=\"...\" aria-label=\"...\">\n    <label class=\"lang-en\"><!--cts:b009:en--></label><label class=\"lang-es\"><!--cts:b009:es--></label>\n    <input type=\"email\" id=\"regEmail\" placeholder=\"...\" aria-label=\"...\">\n    <label class=\"lang-en\"><!--cts:b010:en--></label><label class=\"lang-es\"><!--cts:b010:es--></label>\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate / Certificado</option>\n        <option value=\"mdiv\">M.Div.</option>\n        <option value=\"thm\">Th.M.</option>\n    </select>\n    <button id=\"regBtn\" class=\"nav-btn\"><span class=\"lang-en\"><!--cts:b011:en--></span><span class=\"lang-es\"><!--cts:b011:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top:8px;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\">\n\n<h3><!--cts:b012:en--></h3>\n<p><!--cts:b013:en--></p>\n\n<h3><!--cts:b014:en--></h3>\n<p><!--cts:b015:en--></p>\n\n<h3><!--cts:b016:en--></h3>\n<p><!--cts:b017:en--></p>\n<div class=\"pull-quote\"><!--cts:b018:en--></div>\n<p><!--cts:b019:en--></p>\n\n<h3><!--cts:b020:en--></h3>\n<p><!--cts:b021:en--></p>\n\n<h3><!--cts:b022:en--></h3>\n<p><!--cts:b023:en--></p>\n\n<h3><!--cts:b024:en--></h3>\n<p><!--cts:b025:en--></p>\n\n<h3><!--cts:b026:en--></h3>\n<p><!--cts:b027:en--></p>\n\n<h3><!--cts:b028:en--></h3>\n<p><!--cts:b029:en--></p>\n\n</div>\n<div class=\"lang-es\">\n\n<h3><!--cts:b012:es--></h3>\n<p><!--cts:b013:es--></p>\n\n<h3><!--cts:b014:es--></h3>\n<p><!--cts:b015:es--></p>\n\n<h3><!--cts:b016:es--></h3>\n<p><!--cts:b017:es--></p>\n<div class=\"pull-quote\"><!--cts:b018:es--></div>\n<p><!--cts:b019:es--></p>\n\n<h3><!--cts:b020:es--></h3>\n<p><!--cts:b021:es--></p>\n\n<h3><!--cts:b022:es--></h3>\n<p><!--cts:b023:es--></p>\n\n<h3><!--cts:b024:es--></h3>\n<p><!--cts:b025:es--></p>\n\n<h3><!--cts:b026:es--></h3>\n<p><!--cts:b027:es--></p>\n\n<h3><!--cts:b028:es--></h3>\n<p><!--cts:b029:es--></p>\n\n</div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b030:en--></span><span class=\"lang-es\"><!--cts:b030:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b031:en--></span>\n       <span class=\"lang-es\"><!--cts:b031:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top:20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b032:en--></span><span class=\"lang-es\"><!--cts:b032:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b033:en--></span><span class=\"lang-es\"><!--cts:b033:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top:15px; font-weight:bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top:10px; font-size:0.9rem; color:#1f6b3b; display:none;\"></div>\n    </div>\n</div>\n</div>\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSJohnReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "Unit 6 →",
+    "es": "Unidad 6 →"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "32019379b230"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "📖 The Gospel of John — Unit 5: The Light of the World",
+    "es": "📖 El Evangelio de Juan — Unidad 5: La Luz del Mundo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2df413a02687"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "\"I am the light of the world. He who follows Me shall not walk in darkness, but have the light of life.\" — John 8:12 (NKJV)",
+    "es": "⚡ \"Yo soy la luz del mundo; el que me sigue, no andará en tinieblas, mas tendrá la luz de la vida.\" — Juan 8:12 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "098c67bfeef0"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Register to Begin",
+    "es": "Regístrese para comenzar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "007cff4200ca"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Your name and track are saved on this device and carry across every unit and every CTS course.",
+    "es": "Su nombre y trayecto se guardan en este dispositivo y se conservan en cada unidad y curso de CTS."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c3782de1c2f1"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "label",
+   "text": {
+    "en": "Full name",
+    "es": "Nombre completo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "eeb692087d62"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "label",
+   "text": {
+    "en": "Email",
+    "es": "Correo electrónico"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "84add5b29527"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "label",
+   "text": {
+    "en": "Track",
+    "es": "Trayecto"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b1c5a7af06ba"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "heading",
+   "text": {
+    "en": "Introduction — A Greater Light",
+    "es": "Introducción — Una Luz mayor"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d4c3a9bd3ad4"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "The sun is one of God's great signs of His own power. It is so vast that more than a million earths could fit inside it; in its depths a furnace burns without ceasing, pouring out the energy that feeds every leaf and warms every living thing. We could not live a week without it. And yet there is a greater Light than the sun — found, if you will permit the play on the word, in another Son: the very Son of God, Jesus the Christ. He outshines the sun, for the sun lights only the world outside us, while He lights the depths of the soul. In the temple courts, with the great lamps of the Feast still in mind, He made one of the boldest claims that ever crossed human lips: <em>\"I am the light of the world. He who follows Me shall not walk in darkness, but have the light of life\"</em> (John 8:12). It is a claim of hope and a claim of judgment at once, and this unit traces what that Light does.",
+    "es": "El sol es una de las grandes señales de Dios de su propio poder. Es tan vasto que más de un millón de tierras cabrían dentro de él; en sus profundidades arde un horno sin cesar, derramando la energía que alimenta cada hoja y calienta cada ser vivo. No podríamos vivir una semana sin él. Y sin embargo hay una Luz mayor que el sol — hallada, si me permite el juego de palabras, en otro Hijo: el Hijo mismo de Dios, Jesús el Cristo. Él supera al sol, pues el sol alumbra solo el mundo fuera de nosotros, mientras que él alumbra lo hondo del alma. En los atrios del templo, con las grandes lámparas de la Fiesta aún en la mente, hizo una de las afirmaciones más audaces que jamás cruzaron labios humanos: ⚡ <em>\"Yo soy la luz del mundo; el que me sigue, no andará en tinieblas, mas tendrá la luz de la vida\"</em> (Juan 8:12). Es a la vez una afirmación de esperanza y de juicio, y esta unidad sigue lo que esa Luz hace."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "10a7d76405dd"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "heading",
+   "text": {
+    "en": "I. I Am the Light of the World",
+    "es": "I. Yo soy la luz del mundo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "dc294e8e5680"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "Notice that He does not say He will show us a light, or teach us about the light. He says, \"I am the light,\" and then, \"He who follows Me.\" Our Lord was never gathering a crowd of mere admirers; He was making disciples, and a disciple, by the very root of the word, is a learner, one under discipline, a student being trained in the truth by his Master. It is no accident that the first believers did not at first call themselves Christians; they called themselves followers of \"the Way.\" They had fixed their eyes on one Light and meant to walk by it — the Light, the Way, the Truth, and the Life.",
+    "es": "Note que no dice que nos mostrará una luz, ni que nos enseñará acerca de la luz. Dice: \"Yo soy la luz,\" y luego: \"el que me sigue.\" Nuestro Señor nunca reunía una multitud de meros admiradores; hacía discípulos, y un discípulo, por la raíz misma de la palabra, es un aprendiz, uno bajo disciplina, un estudiante entrenado en la verdad por su Maestro. No es casualidad que los primeros creyentes al principio no se llamaran cristianos; se llamaban seguidores del \"Camino.\" Habían fijado los ojos en una sola Luz y se proponían andar por ella — la Luz, el Camino, la Verdad y la Vida."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf90f3c6f18f"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "heading",
+   "text": {
+    "en": "II. Light Dispels the Darkness",
+    "es": "II. La luz disipa las tinieblas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f10526a921b8"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "The first thing light does is expose. Light and darkness cannot share a room; strike a single match in a cellar and the dark gives way at once. So when the Light of the world walked among men, He exposed them — and they were not grateful for it. <em>\"The light shines in the darkness, and the darkness did not comprehend it\"</em> (John 1:5). And again: <em>\"Men loved darkness rather than light, because their deeds were evil. For everyone practicing evil hates the light... lest his deeds should be exposed\"</em> (John 3:19–20). The religious leaders had imagined they had God neatly figured out: keep the rules, tighten the rules, and you are righteous. But no list of rules can hold the whole will of God, and the Light revealed how far their hearts fell short. Jesus is the visible image of the invisible God; in Him the holiness we knew from the Old Testament is joined to a love and mercy we had scarcely dared to see, and He came not to abolish the Law but to fulfill it. The dark always hates that kind of exposure.",
+    "es": "Lo primero que hace la luz es exponer. La luz y las tinieblas no pueden compartir un cuarto; encienda un solo fósforo en un sótano y la oscuridad cede al instante. Así que cuando la Luz del mundo anduvo entre los hombres, los expuso — y no se lo agradecieron. ⚡ <em>\"La luz resplandece en las tinieblas, y las tinieblas no la comprendieron\"</em> (Juan 1:5). Y otra vez: ⚡ <em>\"los hombres amaron más las tinieblas que la luz, porque sus obras eran malas. Porque todo aquel que hace lo malo, aborrece la luz... para que sus obras no sean reprendidas\"</em> (Juan 3:19–20). Los líderes religiosos habían imaginado que tenían a Dios perfectamente entendido: guardar las reglas, apretar las reglas, y se es justo. Pero ninguna lista de reglas puede contener toda la voluntad de Dios, y la Luz reveló cuán cortos quedaban sus corazones. Jesús es la imagen visible del Dios invisible; en él la santidad que conocíamos del Antiguo Testamento se une a un amor y una misericordia que apenas habíamos osado ver, y vino no para abolir la Ley sino para cumplirla. La oscuridad siempre odia esa clase de exposición."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "83f468d86004"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "We do not make the light; like a mirror, we can only reflect it — yet a small reflected flame can be seen for miles.",
+    "es": "No hacemos la luz; como un espejo, solo podemos reflejarla — y sin embargo una pequeña llama reflejada puede verse a kilómetros."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "02b7294b41f8"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "But the Light does more than expose; it also kindles. Once Christ shines into a heart, that heart becomes a reflector. On a lonely strip of sand in the Bahamas a lighthouse once burned with nothing but a small kerosene flame — yet set behind its mirrors and lenses, that little flame threw a beam twenty-five miles out to sea and steered ships safely past the reefs. We are like that. We make no light of our own; we only catch and throw back the light of Christ. So He says to those who follow Him, \"You are the light of the world... let your light shine before men, that they may see your good works and glorify your Father in heaven\" (Matthew 5:14–16). The disciple who walks in the Light becomes, in turn, a lamp for others still in the dark.",
+    "es": "Pero la Luz hace más que exponer; también enciende. Una vez que Cristo brilla en un corazón, ese corazón se vuelve un reflector. En una solitaria franja de arena en las Bahamas un faro ardía una vez con nada más que una pequeña llama de queroseno — y sin embargo, puesta tras sus espejos y lentes, aquella llamita lanzaba un haz a cuarenta kilómetros mar adentro y guiába a los barcos a salvo entre los arrecifes. Nosotros somos así. No hacemos luz propia; solo recibimos y devolvemos la luz de Cristo. Por eso dice a los que le siguen: \"Vosotros sois la luz del mundo... alumbre vuestra luz delante de los hombres, para que vean vuestras buenas obras, y glorifiquen a vuestro Padre que está en los cielos\" (Mateo 5:14–16). El discípulo que anda en la Luz se vuelve, a su vez, una lámpara para otros que siguen en las tinieblas."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "21e9ceb7fc54"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "heading",
+   "text": {
+    "en": "III. The Unique Son",
+    "es": "III. El Hijo único"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a61a01bca706"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "When they objected that a man may not testify about himself, Jesus answered that He did not stand alone: He bore witness, and the Father who sent Him bore witness too, so the Law's requirement of two witnesses was met (we will meet that whole courtroom of witnesses in the next unit). For He is no ordinary son of God; He is the <em>monogenes</em>, the one unique Son. We may be adopted into God's family, but there is only one Son who shares the Father's very nature. Here is the pattern we have seen from the first chapter: from His mother He took a true humanity, and so He grew weary, He thirsted, He could die; from the Father He has wisdom and power no man ever had, so that as a boy He astonished the teachers, He knew the secret history of strangers, He healed and walked upon the sea and rose from the tomb. Fully God and fully man, in one Person. It was this claim — that He was equal with God — that turned their objection into murder in their hearts.",
+    "es": "Cuando objetaron que un hombre no puede testificar de sí mismo, Jesús respondió que no estaba solo: él daba testimonio, y el Padre que le envió daba testimonio también, de modo que se cumplía el requisito de la Ley de dos testigos (encontraremos todo ese tribunal de testigos en la próxima unidad). Pues no es un hijo de Dios cualquiera; es el <em>monogenes</em>, el único Hijo. Nosotros podemos ser adoptados en la familia de Dios, pero hay un solo Hijo que comparte la naturaleza misma del Padre. Aquí está el patrón que hemos visto desde el primer capítulo: de su madre tomó una verdadera humanidad, y así se cansó, tuvo sed, pudo morir; del Padre tiene una sabiduría y un poder que ningún hombre tuvo, de modo que de niño asombró a los maestros, conocía la historia secreta de extraños, sanó y caminó sobre el mar y resucitó de la tumba. Plenamente Dios y plenamente hombre, en una Persona. Fue esta afirmación — que era igual a Dios — la que convirtió su objeción en homicidio en sus corazones."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6986051c1386"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "heading",
+   "text": {
+    "en": "IV. Before Abraham Was, I AM",
+    "es": "IV. Antes que Abraham fuese, YO SOY"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cf30359c2625"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "The argument rose until Jesus said the most staggering sentence in the chapter. They had boasted of Abraham; He answered that Abraham had rejoiced to see His day. \"You are not yet fifty years old, and have You seen Abraham?\" And then: <em>\"Most assuredly, I say to you, before Abraham was, I AM\"</em> (John 8:58). He did not say \"before Abraham was, I was.\" He said <em>I AM</em> — the very name God gave Moses at the burning bush, the name of the eternal, self-existent God. In one breath He claimed to exist before Abraham and to bear the divine Name. The leaders understood Him perfectly; that is why they took up stones to throw at Him. They would not bow, so they would kill — for in their ears a carpenter had just called Himself God. They were right about the claim and wrong about the Man.",
+    "es": "La discusión subió hasta que Jesús dijo la frase más asombrosa del capítulo. Ellos se habían jactado de Abraham; él respondió que Abraham se había gozado de ver su día. \"Aún no tienes cincuenta años, ¿y has visto a Abraham?\" Y entonces: ⚡ <em>\"De cierto, de cierto os digo: Antes que Abraham fuese, yo soy\"</em> (Juan 8:58). No dijo \"antes que Abraham fuese, yo era.\" Dijo <em>YO SOY</em> — el nombre mismo que Dios dio a Moisés en la zarza ardiente, el nombre del Dios eterno que existe por sí mismo. En un aliento afirmó existir antes de Abraham y llevar el Nombre divino. Los líderes lo entendieron perfectamente; por eso tomaron piedras para arrojarle. No se inclinarían, así que matarían — porque en sus oídos un carpintero acababa de llamarse Dios. Acertaron en la afirmación y se equivocaron en el Hombre."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fbb1bf54e3ea"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "heading",
+   "text": {
+    "en": "V. The Man Born Blind",
+    "es": "V. El hombre ciego de nacimiento"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "280378c52784"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "Then John shows us the claim in action. Jesus passed a man blind from birth, and the disciples asked the question their whole world assumed: \"Rabbi, who sinned, this man or his parents, that he was born blind?\" They took it for granted that such suffering must be punishment for somebody's sin. Jesus swept that away: <em>\"Neither this man nor his parents sinned, but that the works of God should be revealed in him\"</em> (John 9:3). Not every sorrow is a sentence for sin; this blindness had been waiting all the man's life to become a stage for the works of God. \"As long as I am in the world,\" Jesus said, \"I am the light of the world\" (John 9:5). Then He did a strange and tender thing: He spat on the ground, made clay, anointed the blind eyes, and sent him to wash in the pool of Siloam — a name that means <em>Sent</em>. The man went down in darkness and came up seeing. The Light of the world had given eyes to a man who had never seen, the way He had once said, \"Let there be light.\"",
+    "es": "Entonces Juan nos muestra la afirmación en acción. Jesús pasó junto a un hombre ciego de nacimiento, y los discípulos hicieron la pregunta que todo su mundo daba por sentada: \"Rabí, ¿quién pecó, éste o sus padres, para que naciese ciego?\" Daban por hecho que tal sufrimiento debía ser castigo por el pecado de alguien. Jesús lo barrió: ⚡ <em>\"No es que pecó éste, ni sus padres; sino para que las obras de Dios se manifiesten en él\"</em> (Juan 9:3). No todo dolor es sentencia por pecado; esta ceguera había esperado toda la vida del hombre para volverse un escenario de las obras de Dios. \"Entre tanto que estoy en el mundo,\" dijo Jesús, \"luz soy del mundo\" (Juan 9:5). Luego hizo algo extraño y tierno: escupió en tierra, hizo lodo, ungió los ojos ciegos, y le envió a lavarse al estanque de Siloé — nombre que significa <em>Enviado</em>. El hombre bajó en tinieblas y subió viendo. La Luz del mundo había dado ojos a un hombre que nunca había visto, como una vez había dicho: \"Sea la luz.\""
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b766cf0e05ec"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "heading",
+   "text": {
+    "en": "VI. From Darkness to Light",
+    "es": "VI. De las tinieblas a la luz"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7e54ec48744f"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "What follows is one of the most human and almost comic scenes in the Gospel, and it traces a soul climbing out of darkness step by step. The neighbors argue over whether it is even the same man. Dragged before the Pharisees, the healed man keeps it simple: <em>\"One thing I know: that though I was blind, now I see\"</em> (John 9:25). They press him, and his confession grows as he speaks. First Jesus is \"a man called Jesus.\" Then, \"He is a prophet.\" Then, against all their threats, \"If this Man were not from God, He could do nothing.\" They cast him out of the synagogue for it — and that is when Jesus found him and asked, \"Do you believe in the Son of God?\" The man answered, \"Lord, I believe,\" <em>and he worshiped Him</em> (John 9:38). Notice the irony John builds: the man's eyes were opened in one instant at the pool, but his heart came into the light by degrees, until he fell down and worshiped. The experts, meanwhile, with two good eyes apiece, grew darker by the hour. True sight, in the end, is a matter of the heart, not the eyes.",
+    "es": "Lo que sigue es una de las escenas más humanas y casi cómicas del Evangelio, y traza un alma saliendo de las tinieblas paso a paso. Los vecinos discuten si es siquiera el mismo hombre. Llevado ante los fariseos, el sanado lo mantiene sencillo: ⚡ <em>\"una cosa sé: que habiendo yo sido ciego, ahora veo\"</em> (Juan 9:25). Le presionan, y su confesión crece mientras habla. Primero Jesús es \"un hombre llamado Jesús.\" Luego, \"es un profeta.\" Luego, contra todas sus amenazas, \"si éste no fuera de Dios, nada podría hacer.\" Le echaron de la sinagoga por ello — y entonces Jesús lo halló y le preguntó: \"¿Crees tú en el Hijo de Dios?\" El hombre respondió: \"Creo, Señor,\" <em>y le adoró</em> (Juan 9:38). Note la ironía que Juan construye: los ojos del hombre se abrieron en un instante en el estanque, pero su corazón entró en la luz por grados, hasta que cayó y le adoró. Los expertos, en cambio, con dos buenos ojos cada uno, se volvían más oscuros a cada hora. La verdadera vista, al final, es cuestión del corazón, no de los ojos."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "68f13aa5cc17"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "heading",
+   "text": {
+    "en": "VII. Those Who Say They See",
+    "es": "VII. Los que dicen que ven"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c56480047dc1"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "Jesus drew the lesson Himself: <em>\"For judgment I have come into this world, that those who do not see may see, and that those who see may be made blind\"</em> (John 9:39). The Pharisees bristled: \"Are we blind also?\" And He gave them the most sobering word in the chapter: \"If you were blind, you would have no sin; but now you say, 'We see.' Therefore your sin remains\" (John 9:41). There is the whole tragedy. The beggar knew he was blind, and so he received his sight; the experts were sure they saw, and so they stayed in the dark. The Light of the world is still passing by, and the only people He cannot help are the ones who insist they need no help. So the question this unit leaves with you is simple and searching: which man are you — the one who admits his blindness and is given light, or the one who is certain he already sees? Follow the Light, and you will not walk in darkness.",
+    "es": "Jesús mismo sacó la lección: ⚡ <em>\"Para juicio he venido yo a este mundo; para que los que no ven, vean; y los que ven, sean cegados\"</em> (Juan 9:39). Los fariseos se erizaron: \"¿Acaso nosotros somos también ciegos?\" Y él les dio la palabra más solemne del capítulo: \"Si fuerais ciegos, no tendríais pecado; mas ahora, porque decís: Vemos, vuestro pecado permanece\" (Juan 9:41). Ahí está toda la tragedia. El mendigo sabía que era ciego, y por eso recibió la vista; los expertos estaban seguros de que veían, y por eso se quedaron en la oscuridad. La Luz del mundo sigue pasando, y las únicas personas a quienes no puede ayudar son las que insisten en que no necesitan ayuda. Así que la pregunta que esta unidad le deja es sencilla y penetrante: ¿cuál hombre es usted — el que admite su ceguera y recibe luz, o el que está seguro de que ya ve? Siga la Luz, y no andará en tinieblas."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a6473c373ebd"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "Unit 5 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 5 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "68bacc2afdf3"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. The short-answer section is practice for Certificate students and does not count against you.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. La sección de respuesta corta es práctica para el Certificado y no cuenta en su contra."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9168d4aa12d6"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

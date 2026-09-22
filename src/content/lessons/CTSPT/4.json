@@ -1,0 +1,446 @@
+{
+ "course": "CTSPT",
+ "unit": 4,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<a href=\"index.html\" style=\"display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif\">📚 Catalog / Catálogo</a>\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"prevUnitBtn\">← Previous</button>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\">Next →</button>\n    </div>\n</div>\n<div class=\"lang-toggle-group\" role=\"group\" aria-label=\"Language\">\n  <button data-lang=\"en\" class=\"active\">English</button>\n  <button data-lang=\"es\">Español</button>\n  <button data-lang=\"both\">Both / Ambos</button>\n</div>\n<span id=\"trackBadgeSlot\"></span>\n\n<div id=\"regWarn\" class=\"reg-warn hidden\">\n  <span class=\"lang-en\"><!--cts:b001:en--></span>\n  <span class=\"lang-es\"><!--cts:b001:es--></span>\n</div>\n<div id=\"regModal\" class=\"reg-modal hidden\" role=\"dialog\" aria-labelledby=\"regModalTitle\">\n  <div class=\"reg-modal-inner\">\n    <h2 id=\"regModalTitle\"><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n    <label><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></label>\n    <input type=\"text\" id=\"regName\" placeholder=\"\" autocomplete=\"name\" aria-label=\"regName\">\n    <label><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></label>\n    <input type=\"email\" id=\"regEmail\" placeholder=\"\" autocomplete=\"email\" aria-label=\"regEmail\">\n    <label><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></label>\n    <div class=\"track-options\">\n      <label><input type=\"radio\" name=\"regTrack\" value=\"cert\" checked> <span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></label>\n      <label><input type=\"radio\" name=\"regTrack\" value=\"mdiv\"> <span class=\"lang-en\"><!--cts:b008:en--></span><span class=\"lang-es\"><!--cts:b008:es--></span></label>\n      <label><input type=\"radio\" name=\"regTrack\" value=\"thm\"> <span class=\"lang-en\"><!--cts:b009:en--></span><span class=\"lang-es\"><!--cts:b009:es--></span></label>\n    </div>\n    <p style=\"font-size:0.82rem; color:#6b5236; font-style:italic; margin-top:8px;\">\n      <span class=\"lang-en\"><!--cts:b010:en--></span>\n      <span class=\"lang-es\"><!--cts:b010:es--></span>\n    </p>\n    <button id=\"regSaveBtn\" type=\"button\"><span class=\"lang-en\"><!--cts:b011:en--></span><span class=\"lang-es\"><!--cts:b011:es--></span></button>\n  </div>\n</div>\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b012:en--></span><span class=\"lang-es\"><!--cts:b012:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b013:en--></span><span class=\"lang-es\"><!--cts:b013:es--></span></p>\n</div>\n\n<div class=\"card\" id=\"teachingContent\">\n    <div class=\"lang-en\">\n        <h2><!--cts:b014:en--></h2>\n        <p><!--cts:b015:en--></p>\n\n        <h2><!--cts:b016:en--></h2>\n        <p><!--cts:b017:en--></p>\n        <p><!--cts:b018:en--></p>\n\n        <h2><!--cts:b019:en--></h2>\n        <p><!--cts:b020:en--></p>\n        <p><!--cts:b021:en--></p>\n\n        <h2><!--cts:b022:en--></h2>\n        <p><!--cts:b023:en--></p>\n\n        <h2><!--cts:b024:en--></h2>\n        <p><!--cts:b025:en--></p>\n    </div>\n    <div class=\"lang-es\">\n        <h2><!--cts:b014:es--></h2>\n        <p><!--cts:b015:es--></p>\n\n        <h2><!--cts:b016:es--></h2>\n        <p><!--cts:b017:es--></p>\n        <p><!--cts:b018:es--></p>\n\n        <h2><!--cts:b019:es--></h2>\n        <p><!--cts:b020:es--></p>\n        <p><!--cts:b021:es--></p>\n\n        <h2><!--cts:b022:es--></h2>\n        <p><!--cts:b023:es--></p>\n\n        <h2><!--cts:b024:es--></h2>\n        <p><!--cts:b025:es--></p>\n    </div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b026:en--></span><span class=\"lang-es\"><!--cts:b026:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b027:en--></span><span class=\"lang-es\"><!--cts:b027:es--></span></p>\n    <div class=\"exam-status hidden\" id=\"examStatus\"></div>\n<div class=\"mc-section\" id=\"mcSection\">\n  <h3><span class=\"lang-en\"><!--cts:b028:en--></span><span class=\"lang-es\"><!--cts:b028:es--></span></h3>\n  <div id=\"mcContainer\"></div>\n</div>\n<div class=\"sa-section\" id=\"saSection\">\n  <h3><span class=\"lang-en\"><!--cts:b029:en--></span><span class=\"lang-es\"><!--cts:b029:es--></span></h3>\n  <p class=\"sa-note\"><span class=\"lang-en\" id=\"saNoteEn\"></span><span class=\"lang-es\" id=\"saNoteEs\"></span></p>\n  <div id=\"kwContainer\"></div>\n</div>\n<div style=\"margin-top: 20px;\">\n  <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b030:en--></span><span class=\"lang-es\"><!--cts:b030:es--></span></button>\n  <button id=\"resetExamBtn\" class=\"btn-reset\" type=\"button\"><span class=\"lang-en\"><!--cts:b031:en--></span><span class=\"lang-es\"><!--cts:b031:es--></span></button>\n  <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n</div>\n</div>\n</div>\n\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSPTReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "⚠ Please register your name to receive credit for this unit. <button class=\"small\" id=\"openRegBtn\" type=\"button\">Register</button>",
+    "es": "⚠ Por favor registre su nombre para recibir crédito por esta unidad. <button class=\"small\" id=\"openRegBtn2\" type=\"button\">Registrar</button>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "300bfc92ba6e"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "Welcome to Practical Theology",
+    "es": "Bienvenido a la Teología Práctica"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8cc34b7da46f"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "Before you begin this unit, please enter your name and select your track. This information is stored only in your browser and is shared across all CTS courses.",
+    "es": "Antes de comenzar esta unidad, por favor ingrese su nombre y seleccione su vía. Esta información se guarda solo en su navegador y es compartida entre todos los cursos del CTS."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "4efe49cf1f65"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "Full name",
+    "es": "Nombre completo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "eeb692087d62"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "Email (optional)",
+    "es": "Correo electrónico (opcional)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5c10b588a954"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Track",
+    "es": "Vía"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b1c5a7af06ba"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Certificate",
+    "es": "Certificado"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "10de46b3b341"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "prose",
+   "text": {
+    "en": "M.Div",
+    "es": "M.Div"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "621c580e3436"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "Th.M.",
+    "es": "Th.M."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c7ffb710c525"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate:</strong> Multiple-choice only, 90% to pass each unit. <strong>M.Div / Th.M.:</strong> Multiple-choice + short-answer, both at 90%.",
+    "es": "<strong>Certificado:</strong> Solo opción múltiple, 90% para aprobar cada unidad. <strong>M.Div / Th.M.:</strong> Opción múltiple + respuesta corta, ambas al 90%."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "431989696561"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Save and Continue",
+    "es": "Guardar y Continuar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "49a2b0fecc60"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "prose",
+   "text": {
+    "en": "🌱 Practical Theology — Unit 4: Prayer I — What Prayer Is",
+    "es": "🌱 Teología Práctica — Unidad 4: La Oración I — Qué Es la Oración"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e7fd6f9722fc"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professors:</strong> Dr. Wayne Cook &amp; Dr. Ted Rogers",
+    "es": "<strong>Profesores:</strong> Dr. Wayne Cook y Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "1d25859271ef"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "heading",
+   "text": {
+    "en": "Introduction: At the Center of Our Time with God",
+    "es": "Introducción: En el Centro de Nuestro Tiempo con Dios"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d27decb836f4"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "We have learned to walk with God and to keep a daily time with Him. At the center of that time is prayer. But what is prayer, really? Many think of it as simply asking God for things, and others as the saying of certain religious words. It is far more than either. In this unit we ask three questions: what is prayer, how did the Lord Jesus teach us to pray, and what kinds of prayer does the Bible give us? The next unit will carry us further — into prayer in Scripture, praying together as a church, and fasting.",
+    "es": "Hemos aprendido a andar con Dios y a guardar un tiempo diario con Él. En el centro de ese tiempo está la oración. Pero ¿qué es la oración, en realidad? Muchos la piensan como sencillamente pedirle cosas a Dios, y otros como el decir ciertas palabras religiosas. Es mucho más que cualquiera de las dos. En esta unidad hacemos tres preguntas: ¿qué es la oración, cómo nos enseñó a orar el Señor Jesús, y qué clases de oración nos da la Biblia? La unidad siguiente nos llevará más adelante — a la oración en la Escritura, a orar juntos como iglesia, y al ayuno."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "a487bfbadcbe"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "heading",
+   "text": {
+    "en": "I. What Prayer Is — More Than a Conversation, Yet Like One",
+    "es": "I. Qué Es la Oración — Más Que una Conversación, y Sin Embargo Como Una"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "654a46b07d8a"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "Some say prayer is simply a conversation. It is much more than that. Dr. Ted Rogers, who teaches a course on prayer at our church, offers this careful definition: prayer is <em>to initiate communication with God for the purpose of intercession, supplication, praise, confession, and thanksgiving, with worshipful intent</em> — communication that draws us closer to God and, for that moment, even sets us in the place of one who stands before Him for others. Notice three things in that definition. Prayer is <em>initiated by us toward God</em>: it is not chanting, nor thanking \"the universe,\" nor speaking to any created thing, for the universe is made but God is self-existent. Already in the days of Enosh <em>\"men began to call on the name of the Lord\"</em> (Genesis 4:26, NKJV). Prayer is directed <em>to God, with worshipful intent</em>. And prayer <em>changes us</em> as we pray.",
+    "es": "Algunos dicen que la oración es sencillamente una conversación. Es mucho más que eso. El Dr. Ted Rogers, quien enseña un curso sobre la oración en nuestra iglesia, ofrece esta definición cuidadosa: la oración es <em>iniciar comunicación con Dios con el propósito de intercesión, súplica, alabanza, confesión y gratitud, con intención de adoración</em> — comunicación que nos acerca más a Dios y, por ese momento, hasta nos pone en el lugar de quien se presenta delante de Él por otros. Note tres cosas en esa definición. La oración es <em>iniciada por nosotros hacia Dios</em>: no es repetir cánticos, ni dar gracias al \"universo\", ni hablarle a cosa creada alguna, pues el universo es hecho, mas Dios es el que existe por sí mismo. Ya en los días de Enós <em>\"los hombres comenzaron a invocar el nombre de Jehová\"</em> (Génesis 4:26, RVG). La oración se dirige <em>a Dios, con intención de adoración</em>. Y la oración <em>nos cambia</em> al orar."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2ad2437f17cb"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "Yet though prayer is far more than mere conversation, it is meant to be carried on like one — like a conversation between friends. If we pictured the Lord Jesus sitting in a chair before us, we would not reach for stiff, artificial words; we would speak to Him plainly, as to a friend who loves us. (It is worth remembering that when the King James Bible was written, \"thee, thy, and thou\" were the everyday, informal words, while \"you\" was the formal speech of royalty. Today that is reversed — yet many of us still reach for old, formal-sounding words when we pray, as though God preferred a special religious language. He does not. Speak to Him honestly, in your own words.) And because prayer is a kind of conversation, we must also listen. <em>\"Be still, and know that I am God\"</em> (Psalm 46:10, NKJV). Do not be afraid of silence in prayer; God Himself may at that moment be speaking to you.",
+    "es": "Sin embargo, aunque la oración es mucho más que mera conversación, está destinada a llevarse a cabo como una — como una conversación entre amigos. Si imagináramos al Señor Jesús sentado en una silla delante de nosotros, no buscaríamos palabras rígidas y artificiales; le hablaríamos con sencillez, como a un amigo que nos ama. Muchas veces usamos con Dios palabras rígidas y \"religiosas\", como si Él prefiriera un lenguaje especial. No es así. Háblele con honestidad, en sus propias palabras. Y puesto que la oración es una especie de conversación, también debemos escuchar. <em>\"Estad quietos, y conoced que yo soy Dios\"</em> (Salmos 46:10, RVG). No tema al silencio en la oración; Dios mismo podría en ese momento estar hablándole."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b9a057077006"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "heading",
+   "text": {
+    "en": "II. How Jesus Taught Us to Pray: The Lord's Prayer",
+    "es": "II. Cómo Nos Enseñó Jesús a Orar: El Padre Nuestro"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ce9e0c63591f"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "When His disciples wanted to learn to pray, Jesus gave them a model. He had just warned, <em>\"when you pray, do not use vain repetitions as the heathen do\"</em> (Matthew 6:7, NKJV) — so the Lord's Prayer is not a set of magic words to be repeated mechanically, but a pattern to follow. <em>\"In this manner, therefore, pray: Our Father in heaven, hallowed be Your name. Your kingdom come. Your will be done on earth as it is in heaven. Give us this day our daily bread. And forgive us our debts, as we forgive our debtors. And do not lead us into temptation, but deliver us from the evil one\"</em> (Matthew 6:9–13, NKJV).",
+    "es": "Cuando sus discípulos quisieron aprender a orar, Jesús les dio un modelo. Acababa de advertir: <em>\"orando, no uséis vanas repeticiones, como los gentiles\"</em> (Mateo 6:7, RVG) — así que el Padre Nuestro no es un conjunto de palabras mágicas que se repiten mecánicamente, sino un patrón a seguir. <em>\"Vosotros, pues, oraréis así: Padre nuestro que estás en el cielo, santificado sea tu nombre. Venga tu reino. Hágase tu voluntad, como en el cielo, así también en la tierra. El pan nuestro de cada día, dánoslo hoy. Y perdónanos nuestras deudas, como también nosotros perdonamos a nuestros deudores. Y no nos metas en tentación, mas líbranos del mal\"</em> (Mateo 6:9–13, RVG)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "df715163f308"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "prose",
+   "text": {
+    "en": "Walk slowly through it. <em>\"Our Father\"</em> uses the word <em>abba</em>, the most intimate family word of that day — we come as a trusting child to a loving father; yet <em>\"hallowed be Your name\"</em> reminds us He is holy, set apart, utterly unique. Intimacy and reverence held together. <em>\"Your kingdom come, Your will be done\"</em> — before we ask anything for ourselves, we put God's kingdom and will first. <em>\"Give us this day our daily bread\"</em> — only now, halfway through, comes the first request for ourselves, and even it teaches us to depend on God as our Provider day by day. <em>\"Forgive us our debts, as we forgive our debtors\"</em> — our debts are our sins, and our being forgiven is tied to our forgiving others. <em>\"Do not lead us into temptation, but deliver us\"</em> — a plea that God would keep us and rescue us. Notice the order, for it is the opposite of how many are taught: adoration and God's will come first; our own needs and our confession come after. We do not begin with our shopping list, but with our God.",
+    "es": "Recórralo despacio. <em>\"Padre nuestro\"</em> usa la palabra <em>abba</em>, la palabra familiar más íntima de aquel día — venimos como un hijo que confía a un padre que ama; sin embargo, <em>\"santificado sea tu nombre\"</em> nos recuerda que Él es santo, apartado, completamente único. Intimidad y reverencia unidas. <em>\"Venga tu reino, hágase tu voluntad\"</em> — antes de pedir algo para nosotros, ponemos primero el reino y la voluntad de Dios. <em>\"El pan nuestro de cada día, dánoslo hoy\"</em> — solo ahora, a la mitad, viene la primera petición para nosotros, y aun ella nos enseña a depender de Dios como nuestro Proveedor día tras día. <em>\"Perdónanos nuestras deudas, como también nosotros perdonamos\"</em> — nuestras deudas son nuestros pecados, y el ser perdonados está ligado a que perdonemos a otros. <em>\"No nos metas en tentación, mas líbranos\"</em> — una súplica de que Dios nos guarde y nos rescate. Note el orden, porque es lo opuesto de como a muchos se les enseña: la adoración y la voluntad de Dios vienen primero; nuestras propias necesidades y nuestra confesión vienen después. No comenzamos con nuestra lista de peticiones, sino con nuestro Dios."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5042dc02e963"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "heading",
+   "text": {
+    "en": "III. The Many Kinds of Prayer",
+    "es": "III. Las Muchas Clases de Oración"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "de70bb3463ca"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "The Bible shows that prayer is not one single thing but many. There is <em>praise and adoration</em>, telling God how great and holy He is. There is <em>thanksgiving</em>, thanking Him for what He has done. There is <em>confession</em>: the Greek word means literally \"to say the same thing\" — in confession we agree with God about our sin, as the tax collector who cried, <em>\"God, be merciful to me a sinner!\"</em> (Luke 18:13, NKJV). There is <em>supplication</em>, which asks God to change our circumstances, yet even more to change our hearts, as the Lord Himself prayed in the garden, <em>\"not as I will, but as You will\"</em> (Matthew 26:39, NKJV). There is <em>intercession</em>, standing between God and others to pray for their needs — as Jesus prayed even for those who crucified Him, <em>\"Father, forgive them, for they do not know what they do\"</em> (Luke 23:34, NKJV). We may also <em>ask for ourselves</em>; this is not a lack of faith but obedience, for Scripture says plainly, <em>\"you do not have because you do not ask\"</em> (James 4:2, NKJV). We may bring our honest <em>questions</em> to God, who is patient with all who sincerely seek to understand Him. And when we are so overwhelmed that we do not know what to pray, there is the prayer of <em>groanings</em>: <em>\"the Spirit Himself makes intercession for us with groanings which cannot be uttered\"</em> (Romans 8:26, NKJV). After all our words, there remains the prayer of <em>listening</em> — being still before God.",
+    "es": "La Biblia muestra que la oración no es una sola cosa, sino muchas. Está la <em>alabanza y adoración</em>, decirle a Dios cuán grande y santo es. Está la <em>gratitud</em>, darle gracias por lo que ha hecho. Está la <em>confesión</em>: la palabra griega significa literalmente \"decir lo mismo\" — en la confesión estamos de acuerdo con Dios acerca de nuestro pecado, como el publicano que clamó: <em>\"Dios, sé propicio a mí, pecador\"</em> (Lucas 18:13, RVG). Está la <em>súplica</em>, que pide a Dios que cambie nuestras circunstancias, pero aún más que cambie nuestro corazón, como el Señor mismo oró en el huerto: <em>\"no sea como yo quiero, sino como tú\"</em> (Mateo 26:39, RVG). Está la <em>intercesión</em>, ponerse entre Dios y otros para orar por sus necesidades — como Jesús oró aun por los que lo crucificaban: <em>\"Padre, perdónalos, porque no saben lo que hacen\"</em> (Lucas 23:34, RVG). También podemos <em>pedir para nosotros mismos</em>; esto no es falta de fe sino obediencia, pues la Escritura dice claramente: <em>\"no tenéis, porque no pedís\"</em> (Santiago 4:2, RVG). Podemos traer a Dios nuestras honestas <em>preguntas</em>, pues Él es paciente con todos los que sinceramente buscan entenderlo. Y cuando estamos tan abrumados que no sabemos qué orar, está la oración de <em>gemidos</em>: <em>\"el Espíritu mismo intercede por nosotros con gemidos indecibles\"</em> (Romanos 8:26, RVG). Después de todas nuestras palabras, queda la oración de <em>escuchar</em> — estar quietos delante de Dios."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9ba3b39dcf67"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "heading",
+   "text": {
+    "en": "Conclusion",
+    "es": "Conclusión"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "e39262defe80"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "Prayer, then, is not a religious form but a living communication with a holy and loving Father — far more than conversation, yet carried on like one; ordered as the Lord taught us, with God first and our needs after; and rich in its many kinds, from praise to groaning to silent listening. In the next unit we will see how the saints and the Psalms prayed, how the church prays together, and how prayer is joined to fasting — and we will learn to pray expecting that our God hears and answers.",
+    "es": "La oración, entonces, no es una forma religiosa sino una comunicación viva con un Padre santo y amoroso — mucho más que una conversación, y sin embargo llevada a cabo como una; ordenada como el Señor nos enseñó, con Dios primero y nuestras necesidades después; y rica en sus muchas clases, desde la alabanza hasta el gemido y el escuchar en silencio. En la unidad siguiente veremos cómo oraron los santos y los Salmos, cómo ora junta la iglesia, y cómo se une la oración al ayuno — y aprenderemos a orar esperando que nuestro Dios oye y responde."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c52c222c4175"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "Unit 4 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 4 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "07d9dcb66810"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "<em><strong>Certificate track:</strong> 20 multiple-choice questions, 90% (18 of 20) to pass. <strong>M.Div track:</strong> 20 MC + 10 short-answer, both at 90% independently. Each MC scores immediately when you click. MC must be passed before SA scores count. A failure locks the relevant section for 15 minutes; if you have already passed MC, only SA locks after an SA fail.</em>",
+    "es": "<em><strong>Vía Certificado:</strong> 20 preguntas de opción múltiple, 90% (18 de 20) para aprobar. <strong>Vía M.Div:</strong> 20 OM + 10 respuesta corta, ambas al 90% independientemente. Cada OM califica inmediatamente al hacer clic. Debe aprobar OM antes de que cuente la sección RC. Una reprobación bloquea la sección por 15 minutos; si ya aprobó OM, solo se bloquea RC tras un fallo de RC.</em>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d196052e364e"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "Multiple Choice — 20 Questions",
+    "es": "Opción Múltiple — 20 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9906bf28c27c"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "Short Answer — 10 Questions <span class=\"sa-badge\" id=\"saBadgeEn\"></span>",
+    "es": "Respuesta Corta — 10 Preguntas <span class=\"sa-badge\" id=\"saBadgeEs\"></span>"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b1d858341328"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

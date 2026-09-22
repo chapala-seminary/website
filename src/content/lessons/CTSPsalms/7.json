@@ -1,0 +1,474 @@
+{
+ "course": "CTSPsalms",
+ "unit": 7,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right: 15px; font-weight: bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled>Unit 8 →</button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Español</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></p>\n    <p style=\"margin-top: 10px; font-style: italic; color: #2f4f2f;\"><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\">\n    <h2><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></p>\n    <input type=\"text\" id=\"regName\" placeholder=\"Full name / Nombre completo\" aria-label=\"Full name / Nombre completo\">\n    <input type=\"email\" id=\"regEmail\" placeholder=\"Email\" aria-label=\"Email\">\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate Track</option>\n        <option value=\"mdiv\">Master of Divinity (M.Div.) Track</option>\n        <option value=\"thm\">Master of Theology (Th.M.) Track</option>\n    </select>\n    <button class=\"nav-btn\" id=\"regBtn\"><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top: 10px; font-weight: bold;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\">\n            <h3><!--cts:b008:en--></h3>\n            <p><!--cts:b009:en--></p>\n            <p><!--cts:b010:en--></p>\n\n            <h3><!--cts:b011:en--></h3>\n            <div class=\"scripture\">\n                <!--cts:b012:en-->\n            </div>\n            <p><!--cts:b013:en--></p>\n\n            <h3><!--cts:b014:en--></h3>\n            <p><!--cts:b015:en--></p>\n            <p><!--cts:b016:en--></p>\n\n            <h3><!--cts:b017:en--></h3>\n            <p><!--cts:b018:en--></p>\n\n            <h3><!--cts:b019:en--></h3>\n            <div class=\"illustration\">\n                <!--cts:b020:en-->\n            </div>\n\n            <h3><!--cts:b021:en--></h3>\n            <p><!--cts:b022:en--></p>\n            <p><!--cts:b023:en--></p>\n\n            <h3><!--cts:b024:en--></h3>\n            <p><!--cts:b025:en--></p>\n            <p><!--cts:b026:en--></p>\n\n            <h3><!--cts:b027:en--></h3>\n            <p><!--cts:b028:en--></p>\n            <div class=\"illustration\">\n                <!--cts:b029:en-->\n            </div>\n</div>\n\n<div class=\"lang-es\">\n            <h3><!--cts:b008:es--></h3>\n            <p><!--cts:b009:es--></p>\n            <p><!--cts:b010:es--></p>\n\n            <h3><!--cts:b011:es--></h3>\n            <div class=\"scripture\">\n                <!--cts:b012:es-->\n            </div>\n            <p><!--cts:b013:es--></p>\n\n            <h3><!--cts:b014:es--></h3>\n            <p><!--cts:b015:es--></p>\n            <p><!--cts:b016:es--></p>\n\n            <h3><!--cts:b017:es--></h3>\n            <p><!--cts:b018:es--></p>\n\n            <h3><!--cts:b019:es--></h3>\n            <div class=\"illustration\">\n                <!--cts:b020:es-->\n            </div>\n\n            <h3><!--cts:b021:es--></h3>\n            <p><!--cts:b022:es--></p>\n            <p><!--cts:b023:es--></p>\n\n            <h3><!--cts:b024:es--></h3>\n            <p><!--cts:b025:es--></p>\n            <p><!--cts:b026:es--></p>\n\n            <h3><!--cts:b027:es--></h3>\n            <p><!--cts:b028:es--></p>\n            <div class=\"illustration\">\n                <!--cts:b029:es-->\n            </div>\n</div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b030:en--></span><span class=\"lang-es\"><!--cts:b030:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b031:en--></span>\n       <span class=\"lang-es\"><!--cts:b031:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top: 20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b032:en--></span><span class=\"lang-es\"><!--cts:b032:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b033:en--></span><span class=\"lang-es\"><!--cts:b033:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top: 15px; font-weight: bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top: 10px; font-size: 0.9rem; color: #1f6b3b; display: none;\"></div>\n    </div>\n</div>\n</div>\n\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSPsalmsReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📖 The Book of Psalms — Unit 7: Psalm 56, When I Am Afraid",
+    "es": "📖 El Libro de los Salmos — Unidad 7: Salmo 56, Cuando Tengo Miedo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "282ae12a074a"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "\"Whenever I am afraid, I will trust in You.\" — Psalm 56:3 (NKJV)",
+    "es": "\"En el día que temo, yo en ti confío.\" — Salmo 56:3 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b8d34e40052d"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "📝 Course Registration",
+    "es": "📝 Registro del Curso"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fde900fe006b"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Welcome to The Book of Psalms. Please register before beginning Unit 7.",
+    "es": "Bienvenido a El Libro de los Salmos. Por favor regístrese antes de comenzar la Unidad 7."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "30e98cdcca86"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "heading",
+   "text": {
+    "en": "1. My Father Is in the House",
+    "es": "1. Mi Padre Está en la Casa"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "861cf6499a12"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "prose",
+   "text": {
+    "en": "When I was a child I had the nightmares that so many children seem to have. I would wake with my heart pounding and my eyes wide open, certain that a monster or a robber had broken into the house. I was terribly afraid. Then I would remember that my father was in the house, and I knew that as long as he was there I did not have to be afraid. And I went back to sleep. That childhood memory holds the whole message of Psalm 56. The psalmist faces real danger, but he has learned where his Father is.",
+    "es": "Cuando era niño tenía las pesadillas que tantos niños parecen tener. Despertaba con el corazón latiendo fuerte y los ojos bien abiertos, seguro de que un monstruo o un ladrón había entrado en la casa. Tenía muchísimo miedo. Entonces recordaba que mi padre estaba en la casa, y sabía que mientras él estuviera allí yo no tenía que temer. Y volvía a dormirme. Ese recuerdo de la niñez encierra todo el mensaje del Salmo 56. El salmista enfrenta un peligro real, pero ha aprendido dónde está su Padre."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d64431ecb921"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "prose",
+   "text": {
+    "en": "During the days of the Covenanters in Scotland, believers faced terrible persecution; many were killed and tortured for their faith. Some of them developed a code phrase. When they were stopped and asked where they were going, they would answer, \"I am going to my Father's house.\" It meant more than a journey home. It was a confession that, whatever happened to the body, they belonged to God and were on their way to Him. They had learned to be unafraid because they knew the Father was in the house.",
+    "es": "En los días de los Covenanters en Escocia, los creyentes enfrentaron una persecución terrible; muchos fueron muertos y torturados por su fe. Algunos de ellos idearon una frase en clave. Cuando los detenían y les preguntaban a dónde iban, respondían: \"Voy a la casa de mi Padre.\" Significaba más que un viaje a casa. Era una confesión de que, pasara lo que pasara con el cuerpo, pertenecían a Dios e iban camino a Él. Habían aprendido a no temer porque sabían que el Padre estaba en la casa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ddbd29cf0414"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "heading",
+   "text": {
+    "en": "2. Whenever I Am Afraid",
+    "es": "2. En el Día que Temo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b4bf4a725691"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "scripture",
+   "text": {
+    "en": "<strong>Psalm 56:3-4 (NKJV):</strong> \"Whenever I am afraid, I will trust in You. In God (I will praise His word), in God I have put my trust; I will not fear. What can flesh do to me?\"",
+    "es": "<strong>Salmo 56:3-4 (RVG):</strong> \"En el día que temo, yo en ti confío. En Dios alabaré su palabra; en Dios he confiado; no temeré lo que el hombre pueda hacerme.\""
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "590e3623604d"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "I remember sitting before the television during the Gulf War, watching the live coverage as the conflict began with deadly swiftness. My first reaction was fear. My heart pounded. Men would die, and some commentators were speaking of Armageddon and a world plunged into war. And then I remembered that my Father was in the house, and that I did not have to be afraid. Notice that the psalmist does not say \"if\" I am afraid, but \"whenever\" I am afraid — he expects fear to come. The promise is not that the believer never feels afraid, but that in the moment of fear he has somewhere to turn: \"I will trust in You.\" Let us look at four reasons we do not have to be afraid.",
+    "es": "Recuerdo estar sentado ante el televisor durante la Guerra del Golfo, viendo la transmisión en vivo cuando el conflicto comenzó con rapidez mortal. Mi primera reacción fue el miedo. Mi corazón latía con fuerza. Hombres morirían, y algunos comentaristas hablaban de Armagedón y de un mundo hundido en la guerra. Y entonces recordé que mi Padre estaba en la casa, y que yo no tenía que temer. Note que el salmista no dice \"si\" tengo miedo, sino \"en el día que temo\" — espera que el miedo venga. La promesa no es que el creyente nunca sienta temor, sino que en el momento del temor tiene a dónde volverse: \"yo en ti confío.\" Veamos cuatro razones por las que no tenemos que temer."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "61c53f6030b0"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "heading",
+   "text": {
+    "en": "3. The Promises of God",
+    "es": "3. Las Promesas de Dios"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d805d085c516"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "First, we do not have to be afraid because of the promises of God. God keeps His promises. He has said, \"I will never leave you nor forsake you.\" In the days of the prophet Amos, Israel was prospering as never before, controlling more territory than at any other time, and the people assumed their wealth was a sign of God's favor. But beneath the prosperity was great sin — oppression of the poor, corruption in the courts, idolatry, and immorality. So Amos warned that God would send them into exile, and He did, by the hand of the Assyrians, whose capital Nineveh stood where Baghdad stands today. Yet even in judgment God promised mercy beyond it. For nearly two hundred years they were captives in a distant land, and surely they wondered whether God had forgotten His promises. But in the end they returned and rebuilt the Temple. Our promise is the same: that \"all things work together for good to those who love God, to those who are called according to His purpose.\"",
+    "es": "Primero, no tenemos que temer a causa de las promesas de Dios. Dios cumple Sus promesas. Ha dicho: \"No te desampararé, ni te dejaré.\" En los días del profeta Amós, Israel prosperaba como nunca, controlando más territorio que en ningún otro tiempo, y el pueblo suponía que su riqueza era señal del favor de Dios. Pero bajo la prosperidad había gran pecado — opresión del pobre, corrupción en los tribunales, idolatría e inmoralidad. Así que Amós advirtió que Dios los enviaría al exilio, y así fue, por mano de los asirios, cuya capital Nínive estaba donde hoy está Bagdad. Sin embargo, aun en el juicio Dios prometió misericordia más allá de él. Por casi doscientos años fueron cautivos en una tierra lejana, y seguramente se preguntaron si Dios había olvidado Sus promesas. Pero al final regresaron y reconstruyeron el Templo. Nuestra promesa es la misma: que \"a los que aman a Dios, todas las cosas les ayudan a bien, a los que conforme a su propósito son llamados.\""
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "769732cfdb85"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "prose",
+   "text": {
+    "en": "An elderly Christian lay dying in great distress. \"Oh, pastor,\" he said, \"for years I have relied upon the promises of God, but now in the hour of death I cannot remember a single one to comfort me.\" Knowing that Satan was troubling the man, the preacher answered, \"My brother, do you think that God will forget any of His promises?\" A smile spread over the face of the dying believer, and he exclaimed, \"No, no! He won't! Praise the Lord, now I can fall asleep in Jesus and trust Him to remember them all and bring me safely to heaven.\" Peace flooded his soul, and a short time later he was ushered into the light of God's eternal day.",
+    "es": "Un anciano cristiano yacía moribundo en gran angustia. \"Oh, pastor,\" dijo, \"por años me he apoyado en las promesas de Dios, pero ahora en la hora de la muerte no puedo recordar ni una sola para consolarme.\" Sabiendo que Satanás perturbaba al hombre, el predicador respondió: \"Hermano mío, ¿cree usted que Dios olvidará alguna de Sus promesas?\" Una sonrisa se extendió por el rostro del creyente moribundo, y exclamó: \"¡No, no! ¡No lo hará! Alabado sea el Señor; ahora puedo dormirme en Jesús y confiar en que Él las recuerde todas y me lleve a salvo al cielo.\" La paz inundó su alma, y poco después fue conducido a la luz del día eterno de Dios."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b1da9de7c253"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "heading",
+   "text": {
+    "en": "4. The Plan of God",
+    "es": "4. El Plan de Dios"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "87772fd5c3ec"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "Second, we do not have to be afraid because of the plan of God. Ephesians 1:11 says that God \"works all things according to the counsel of His will.\" Job declared, \"He makes nations great, and destroys them; He enlarges nations, and guides them.\" Through all of history nations have risen and fallen, grown strong and been led away captive, yet God has remained upon His throne. And this plan reaches both the great and the small: the Lord who governs the nations has also numbered the very hairs of our head. Someone may object that the world is full of chaos — rising crime, broken homes, gross immorality, weapons enough to destroy the earth many times over. Yet the Bible insists that God has a plan and that He is in control. The world has been in a desperate state before and has survived only because of God's providence. If not for His restraining hand, it would be far worse.",
+    "es": "Segundo, no tenemos que temer a causa del plan de Dios. Efesios 1:11 dice que Dios \"hace todas las cosas según el consejo de su voluntad.\" Job declaró: \"Él engrandece las naciones, y las destruye; Él esparce las naciones, y las vuelve a reunir.\" Por toda la historia las naciones han surgido y caído, se han fortalecido y han sido llevadas cautivas, y sin embargo Dios ha permanecido en Su trono. Y este plan alcanza tanto lo grande como lo pequeño: el Señor que gobierna las naciones también ha contado los cabellos mismos de nuestra cabeza. Alguien puede objetar que el mundo está lleno de caos — crimen creciente, hogares rotos, inmoralidad grosera, armas suficientes para destruir la tierra muchas veces. Sin embargo, la Biblia insiste en que Dios tiene un plan y que Él tiene el control. El mundo ha estado antes en un estado desesperado y ha sobrevivido solo por la providencia de Dios. De no ser por Su mano que lo refrena, sería mucho peor."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "aab424170631"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "heading",
+   "text": {
+    "en": "5. The Plan of God: No \"Ifs\" in His World",
+    "es": "5. El Plan de Dios: No Hay \"Si\" en Su Mundo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7c2c34b5e66b"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Corrie ten Boom and the Shrapnel:</strong> When Holland was under attack in the Second World War, Corrie ten Boom lay one night unable to sleep as warplanes growled overhead and artillery shattered the darkness. After a while she heard her sister downstairs and joined her for tea, and they talked through the night until the fighting died away. Stumbling back to her room in the dark, she reached down to pat her pillow and jerked back — something sharp had cut her hand. It was a jagged piece of shrapnel ten inches long, lying exactly where her head would have been. She ran to her sister with it and began, \"Betsie, if I hadn't heard you in the kitchen…\" But her sister stopped her: \"Don't say it, Corrie! There are no 'ifs' in God's world. The center of His will is our safety.\" In the far harder days of a Nazi prison, Corrie learned that truth again and again: God's will is our hiding place.",
+    "es": "<strong>Corrie ten Boom y la Metralla:</strong> Cuando Holanda era atacada en la Segunda Guerra Mundial, Corrie ten Boom yacía una noche sin poder dormir mientras los aviones de guerra rugían en lo alto y la artillería rompía la oscuridad. Al cabo de un rato oyó a su hermana abajo y se le unió para tomar té, y conversaron toda la noche hasta que los combates cesaron. Tropezando de regreso a su cuarto en la oscuridad, extendió la mano para palmear su almohada y se retiró de golpe — algo afilado le había cortado la mano. Era un pedazo dentado de metralla de veinticinco centímetros, justo donde habría estado su cabeza. Corrió a su hermana con él y comenzó: \"Betsie, si no te hubiera oído en la cocina…\" Pero su hermana la detuvo: \"¡No lo digas, Corrie! No hay 'si' en el mundo de Dios. El centro de Su voluntad es nuestra seguridad.\" En los días mucho más duros de una prisión nazi, Corrie aprendió esa verdad una y otra vez: la voluntad de Dios es nuestro escondedero."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f24d8789af93"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "heading",
+   "text": {
+    "en": "6. The Power of God",
+    "es": "6. El Poder de Dios"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "5a7b812743c6"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "Third, we do not have to be afraid because of the power of God. \"Great is our Lord, and mighty in power; His understanding is infinite.\" Job said, \"I know that You can do everything, and that no purpose of Yours can be withheld.\" At God's word the Red Sea divided and stood up like walls; the sun stood still; iron floated on the water; ravens carried food to Elijah; and the lions kept their mouths shut and would not touch Daniel. Men may, in their sin, make decisions outside the will of God, but in the end God's will is done. Nothing can finally stop His plan; one might as well try to hold back a flood with a wall of sand, or turn the stars from their orbits, as to overrule the sovereign will of God.",
+    "es": "Tercero, no tenemos que temer a causa del poder de Dios. \"Grande es el Señor nuestro, y de mucho poder; y su entendimiento es infinito.\" Job dijo: \"Yo sé que todo lo puedes, y que no hay pensamiento que se esconda de ti.\" A la palabra de Dios el Mar Rojo se dividió y se levantó como muros; el sol se detuvo; el hierro flotó sobre el agua; los cuervos llevaron comida a Elías; y los leones cerraron sus bocas y no tocaron a Daniel. Los hombres pueden, en su pecado, tomar decisiones fuera de la voluntad de Dios, pero al final la voluntad de Dios se cumple. Nada puede al fin detener Su plan; igual valdría tratar de contener una inundación con un muro de arena, o desviar las estrellas de sus órbitas, que anular la voluntad soberana de Dios."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "63f54a18ac00"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "prose",
+   "text": {
+    "en": "Consider Pharaoh, who thought his power was supreme and refused to free the Hebrew slaves. The Bible says four times that God hardened Pharaoh's heart, and three times that Pharaoh hardened his own. Who hardened it? Both did — for the same sun that melts the wax also hardens the clay; the heat is the same, but the nature of each is different. Napoleon and Hitler, too, dreamed of ruling the world, yet every power must finally bow to God. Napoleon himself wrote that he knew men, and that Jesus was more than a man — He was God.",
+    "es": "Considere a Faraón, que creía que su poder era supremo y se negó a liberar a los esclavos hebreos. La Biblia dice cuatro veces que Dios endureció el corazón de Faraón, y tres veces que Faraón endureció el suyo propio. ¿Quién lo endureció? Ambos — pues el mismo sol que derrite la cera también endurece el barro; el calor es el mismo, pero la naturaleza de cada uno es distinta. Napoleón y Hitler también soñaron con gobernar el mundo, y sin embargo todo poder debe al fin doblegarse ante Dios. El mismo Napoleón escribió que conocía a los hombres, y que Jesús era más que un hombre — era Dios."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f0a2fff87649"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "heading",
+   "text": {
+    "en": "7. The Power of God: The Righteous Seed Preserved",
+    "es": "7. El Poder de Dios: La Simiente Justa Preservada"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7d5ff7f110a5"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "Satan also has power, and sin can do great damage; if God did not restrain them, the world would be far worse. But Satan has never once been able to thwart God's plan. From the beginning he tried to destroy the Righteous Seed, remembering God's word that the seed of the woman would crush his head. Thinking Abel was the seed, he used Cain to kill him. Centuries later he used Pharaoh to try to drown the seed in Egypt. Because God had said the line would run through David, he used wicked Athaliah to slay every male in David's family — but a nurse hid away the infant Joash, and he lived to become king. He used Herod to kill the children of Bethlehem when Jesus was born.",
+    "es": "Satanás también tiene poder, y el pecado puede hacer gran daño; si Dios no los refrenara, el mundo sería mucho peor. Pero Satanás jamás ha podido frustrar el plan de Dios. Desde el principio trató de destruir la Simiente Justa, recordando la palabra de Dios de que la simiente de la mujer aplastaría su cabeza. Pensando que Abel era la simiente, usó a Caín para matarlo. Siglos después usó a Faraón para tratar de ahogar la simiente en Egipto. Porque Dios había dicho que el linaje correría por David, usó a la malvada Atalía para matar a todo varón de la familia de David — pero una nodriza escondió al niño Joás, y vivió para llegar a ser rey. Usó a Herodes para matar a los niños de Belén cuando Jesús nació."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6b0c02dcd925"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "prose",
+   "text": {
+    "en": "Finally, on the day Jesus died, it seemed that Satan had at last succeeded. We may imagine the demons rejoicing at the cross, certain the Righteous Seed was destroyed. But God had planned every bit of it from the beginning, and on the third day He raised Jesus from the dead. The divine plan is fixed; there can be no deviation from it and no destroying it. \"Forever, O LORD, Your word is settled in heaven.\" The very moment that looked like Satan's victory was the hour of our salvation.",
+    "es": "Finalmente, el día que Jesús murió, pareció que Satanás al fin había triunfado. Podemos imaginar a los demonios regocijándose ante la cruz, seguros de que la Simiente Justa había sido destruida. Pero Dios lo había planeado todo desde el principio, y al tercer día resucitó a Jesús de los muertos. El plan divino es fijo; no puede haber desviación de él ni destrucción de él. \"Para siempre, oh Jehová, permanece tu palabra en los cielos.\" El mismísimo momento que parecía la victoria de Satanás era la hora de nuestra salvación."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8c21ab834bc2"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "heading",
+   "text": {
+    "en": "8. The Protection of God",
+    "es": "8. La Protección de Dios"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "89e8c9888e35"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "prose",
+   "text": {
+    "en": "Fourth, we do not have to be afraid because of the protection of God, who \"upholds all things by the word of His power.\" A few centuries ago many people, including some of America's founders, held to Deism — the belief that God set the world in motion and then stepped back, leaving it to run like a great machine without His further involvement. If that were true, then God is not active now, prayer is useless, and the world is simply drifting toward chaos. But the Bible tells us the opposite: God upholds all things, and He calls us to pray, even for those in authority over us, whether or not we agree with them, for they need His wisdom. Men are sinful and make mistakes, sometimes terrible ones — yet God can take even the mistakes of men and still accomplish His purposes. God always knows what is best. Even if we knew every fact, we could not make every right decision; but God can. When we pray, God already knows our need, and He answers by giving what is best.",
+    "es": "Cuarto, no tenemos que temer a causa de la protección de Dios, quien \"sustenta todas las cosas con la palabra de su poder.\" Hace algunos siglos muchos, incluidos algunos de los fundadores de los Estados Unidos, sostenían el deísmo — la creencia de que Dios puso el mundo en marcha y luego se apartó, dejándolo correr como una gran máquina sin Su intervención posterior. Si eso fuera cierto, entonces Dios no está activo ahora, la oración es inútil, y el mundo simplemente va a la deriva hacia el caos. Pero la Biblia nos dice lo contrario: Dios sustenta todas las cosas, y nos llama a orar, aun por los que tienen autoridad sobre nosotros, estemos o no de acuerdo con ellos, pues necesitan Su sabiduría. Los hombres son pecadores y cometen errores, a veces terribles — y sin embargo Dios puede tomar aun los errores de los hombres y cumplir Sus propósitos. Dios siempre sabe lo que es mejor. Aunque conociéramos cada hecho, no podríamos tomar cada decisión correcta; pero Dios sí puede. Cuando oramos, Dios ya conoce nuestra necesidad, y responde dándonos lo que es mejor."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "40709e8a7d38"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "<strong>As Long as God Is Awake:</strong> A mother and her little four-year-old daughter were getting ready for bed. The child was afraid of the dark, and the mother, alone with her that night, felt fearful too. When the light went out, the child caught sight of the moon through the window. \"Mother,\" she asked, \"is the moon God's light?\" \"Yes,\" said the mother. \"Will God put out His light and go to sleep?\" \"No, my child,\" the mother answered, \"God never goes to sleep.\" Then out of the simplicity of a child's faith came the words that gave the fearful mother her own assurance: \"Well, as long as God is awake, there's no sense in both of us staying awake.\" Whenever you are afraid, remember that your Father is in the house, and He never sleeps. Trust in Him.",
+    "es": "<strong>Mientras Dios Esté Despierto:</strong> Una madre y su pequeña hija de cuatro años se preparaban para dormir. La niña temía la oscuridad, y la madre, sola con ella esa noche, también sentía temor. Cuando se apagó la luz, la niña alcanzó a ver la luna por la ventana. \"Mamá,\" preguntó, \"¿es la luna la luz de Dios?\" \"Sí,\" dijo la madre. \"¿Apagará Dios Su luz y se irá a dormir?\" \"No, hija mía,\" respondió la madre, \"Dios nunca se duerme.\" Entonces, de la sencillez de la fe de una niña, vinieron las palabras que dieron a la madre temerosa su propia seguridad: \"Bueno, mientras Dios esté despierto, no tiene sentido que las dos nos quedemos despiertas.\" Cuando tenga miedo, recuerde que su Padre está en la casa, y nunca duerme. Confíe en Él."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f0794929f1c3"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "Unit 7 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 7 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "39593a6cb288"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lección y vuelva a intentarlo tras una breve pausa."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "33593c268178"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,474 @@
+{
+ "course": "CTSJohn",
+ "unit": 3,
+ "sourceLang": "en",
+ "langs": [
+  "en",
+  "es"
+ ],
+ "template": "\n\n\n<div class=\"container\">\n<div class=\"nav-bar\">\n    <div class=\"progress-grid\" id=\"progressGrid\"></div>\n    <div>\n        <span id=\"studentGreeting\" style=\"margin-right:15px; font-weight:bold;\"></span>\n        <button class=\"nav-btn\" id=\"nextUnitBtn\" disabled><span class=\"lang-en\"><!--cts:b001:en--></span><span class=\"lang-es\"><!--cts:b001:es--></span></button>\n    </div>\n</div>\n<button class=\"toggle-btn\" id=\"langToggleBtn\">Espa&ntilde;ol</button>\n<a class=\"toggle-btn\" id=\"catalogLink\" href=\"index.html\" style=\"text-decoration:none;display:inline-block;\"><span class=\"lang-en\"><!--cts:b002:en--></span><span class=\"lang-es\"><!--cts:b002:es--></span></a>\n\n<div class=\"card\">\n    <h1><span class=\"lang-en\"><!--cts:b003:en--></span><span class=\"lang-es\"><!--cts:b003:es--></span></h1>\n    <p><span class=\"lang-en\"><!--cts:b004:en--></span><span class=\"lang-es\"><!--cts:b004:es--></span></p>\n    <p style=\"margin-top:10px; font-style:italic; color:#2f4f2f;\"><span class=\"lang-en\"><!--cts:b005:en--></span><span class=\"lang-es\"><!--cts:b005:es--></span></p>\n</div>\n\n<div class=\"card reg-form\" id=\"regCard\" style=\"display:none;\">\n    <h3><span class=\"lang-en\"><!--cts:b006:en--></span><span class=\"lang-es\"><!--cts:b006:es--></span></h3>\n    <p style=\"font-size:0.9rem;\"><span class=\"lang-en\"><!--cts:b007:en--></span><span class=\"lang-es\"><!--cts:b007:es--></span></p>\n    <label class=\"lang-en\"><!--cts:b008:en--></label><label class=\"lang-es\"><!--cts:b008:es--></label>\n    <input type=\"text\" id=\"regName\" placeholder=\"...\" aria-label=\"...\">\n    <label class=\"lang-en\"><!--cts:b009:en--></label><label class=\"lang-es\"><!--cts:b009:es--></label>\n    <input type=\"email\" id=\"regEmail\" placeholder=\"...\" aria-label=\"...\">\n    <label class=\"lang-en\"><!--cts:b010:en--></label><label class=\"lang-es\"><!--cts:b010:es--></label>\n    <select id=\"regTrack\" aria-label=\"regTrack\">\n        <option value=\"certificate\">Certificate / Certificado</option>\n        <option value=\"mdiv\">M.Div.</option>\n        <option value=\"thm\">Th.M.</option>\n    </select>\n    <button id=\"regBtn\" class=\"nav-btn\"><span class=\"lang-en\"><!--cts:b011:en--></span><span class=\"lang-es\"><!--cts:b011:es--></span></button>\n    <div id=\"regStatus\" style=\"margin-top:8px;\"></div>\n</div>\n\n<div class=\"card\">\n<div class=\"lang-en\">\n\n<h3><!--cts:b012:en--></h3>\n<p><!--cts:b013:en--></p>\n\n<h3><!--cts:b014:en--></h3>\n<p><!--cts:b015:en--></p>\n\n<h3><!--cts:b016:en--></h3>\n<p><!--cts:b017:en--></p>\n<p><!--cts:b018:en--></p>\n<div class=\"pull-quote\"><!--cts:b019:en--></div>\n<p><!--cts:b020:en--></p>\n\n<h3><!--cts:b021:en--></h3>\n<p><!--cts:b022:en--></p>\n\n<h3><!--cts:b023:en--></h3>\n<p><!--cts:b024:en--></p>\n<p><!--cts:b025:en--></p>\n\n<h3><!--cts:b026:en--></h3>\n<p><!--cts:b027:en--></p>\n\n<h3><!--cts:b028:en--></h3>\n<p><!--cts:b029:en--></p>\n\n</div>\n<div class=\"lang-es\">\n\n<h3><!--cts:b012:es--></h3>\n<p><!--cts:b013:es--></p>\n\n<h3><!--cts:b014:es--></h3>\n<p><!--cts:b015:es--></p>\n\n<h3><!--cts:b016:es--></h3>\n<p><!--cts:b017:es--></p>\n<p><!--cts:b018:es--></p>\n<div class=\"pull-quote\"><!--cts:b019:es--></div>\n<p><!--cts:b020:es--></p>\n\n<h3><!--cts:b021:es--></h3>\n<p><!--cts:b022:es--></p>\n\n<h3><!--cts:b023:es--></h3>\n<p><!--cts:b024:es--></p>\n<p><!--cts:b025:es--></p>\n\n<h3><!--cts:b026:es--></h3>\n<p><!--cts:b027:es--></p>\n\n<h3><!--cts:b028:es--></h3>\n<p><!--cts:b029:es--></p>\n\n</div>\n</div>\n\n<div class=\"card\">\n    <h2><span class=\"lang-en\"><!--cts:b030:en--></span><span class=\"lang-es\"><!--cts:b030:es--></span></h2>\n    <p><span class=\"lang-en\"><!--cts:b031:en--></span>\n       <span class=\"lang-es\"><!--cts:b031:es--></span></p>\n    <div id=\"questionsContainer\"></div>\n    <div style=\"margin-top:20px;\">\n        <button id=\"submitExamBtn\" class=\"small\"><span class=\"lang-en\"><!--cts:b032:en--></span><span class=\"lang-es\"><!--cts:b032:es--></span></button>\n        <button id=\"resetExamBtn\" class=\"small\" style=\"background:#8a1f1f;\"><span class=\"lang-en\"><!--cts:b033:en--></span><span class=\"lang-es\"><!--cts:b033:es--></span></button>\n        <div id=\"examResult\" style=\"margin-top:15px; font-weight:bold;\"></div>\n        <div id=\"mcBankedNotice\" style=\"margin-top:10px; font-size:0.9rem; color:#1f6b3b; display:none;\"></div>\n    </div>\n</div>\n</div>\n\n\n  \n  \n\n\n<div style=\"max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;\" data-cts-rrbox=\"1\"><div style=\"font-size:19px;font-weight:700;margin-bottom:8px;\">📖 Honors Readings &middot; Lecturas con Honores</div><div style=\"font-size:14px;line-height:1.5;margin-bottom:14px;\">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style=\"font-size:13px;\">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href=\"CTSJohnReadings.html\" style=\"display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;\">Open the Reading Room &rarr;<br><span style=\"font-size:12px;font-weight:400;\">Abrir la Sala de Lecturas</span></a></div>\n",
+ "blocks": [
+  {
+   "id": "b001",
+   "type": "prose",
+   "text": {
+    "en": "Unit 4 →",
+    "es": "Unidad 4 →"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d4f928b7ae44"
+    }
+   }
+  },
+  {
+   "id": "b002",
+   "type": "prose",
+   "text": {
+    "en": "📚 Catalog",
+    "es": "📚 Catálogo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6dba71b49be7"
+    }
+   }
+  },
+  {
+   "id": "b003",
+   "type": "prose",
+   "text": {
+    "en": "📖 The Gospel of John — Unit 3: Living Water",
+    "es": "📖 El Evangelio de Juan — Unidad 3: Agua Viva"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "fef6b707723d"
+    }
+   }
+  },
+  {
+   "id": "b004",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Professor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers",
+    "es": "<strong>Profesor:</strong> Dr. Wayne Cook | <strong>Director:</strong> Dr. Ted Rogers"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "323f1db66974"
+    }
+   }
+  },
+  {
+   "id": "b005",
+   "type": "prose",
+   "text": {
+    "en": "\"Whoever drinks of the water that I shall give him will never thirst. But the water that I shall give him will become in him a fountain of water springing up into everlasting life.\" — John 4:14 (NKJV)",
+    "es": "⚡ \"Mas el que bebiere del agua que yo le daré, no tendrá sed jamás; sino que el agua que yo le daré será en él una fuente de agua que salte para vida eterna.\" — Juan 4:14 (RVG)"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "7cc4afe7bbbf"
+    }
+   }
+  },
+  {
+   "id": "b006",
+   "type": "prose",
+   "text": {
+    "en": "Register to Begin",
+    "es": "Regístrese para comenzar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "007cff4200ca"
+    }
+   }
+  },
+  {
+   "id": "b007",
+   "type": "prose",
+   "text": {
+    "en": "Your name and track are saved on this device and carry across every unit and every CTS course.",
+    "es": "Su nombre y trayecto se guardan en este dispositivo y se conservan en cada unidad y curso de CTS."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c3782de1c2f1"
+    }
+   }
+  },
+  {
+   "id": "b008",
+   "type": "label",
+   "text": {
+    "en": "Full name",
+    "es": "Nombre completo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "eeb692087d62"
+    }
+   }
+  },
+  {
+   "id": "b009",
+   "type": "label",
+   "text": {
+    "en": "Email",
+    "es": "Correo electrónico"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "84add5b29527"
+    }
+   }
+  },
+  {
+   "id": "b010",
+   "type": "label",
+   "text": {
+    "en": "Track",
+    "es": "Trayecto"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "b1c5a7af06ba"
+    }
+   }
+  },
+  {
+   "id": "b011",
+   "type": "prose",
+   "text": {
+    "en": "Register",
+    "es": "Registrarse"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d672995a1465"
+    }
+   }
+  },
+  {
+   "id": "b012",
+   "type": "heading",
+   "text": {
+    "en": "Introduction — A Divine Partnership",
+    "es": "Introducción — Una Asociación Divina"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "ab32300d4179"
+    }
+   }
+  },
+  {
+   "id": "b013",
+   "type": "prose",
+   "text": {
+    "en": "Imagine a garden full of vibrant flowers, lush plants, and towering trees. God creates the life in the plants; He sends the sunshine and the rain. But the gardener must still nurture and trim and fertilize and weed, or the true beauty is never unveiled. Our lives are like that garden. Jesus offered the Samaritan woman living water — He offered her Himself — but the real beauty of her story was unveiled when she ran and shared the Christ she had only just met. Again and again Scripture shows this lovely symmetry: God provides salvation and the power of His Spirit, and then God works through us to finish His purpose. \"It is God who works in you both to will and to do for His good pleasure\" (Philippians 2:13). That is the Divine Partnership, and this chapter is its picture.",
+    "es": "Imagine un jardín lleno de flores vibrantes, plantas exuberantes y árboles imponentes. Dios crea la vida en las plantas; él envía el sol y la lluvia. Pero el jardinero aún debe cuidar, podar, fertilizar y desmalezar, o la verdadera belleza jamás se revela. Nuestras vidas son como ese jardín. Jesús ofreció a la mujer samaritana agua viva — se ofreció a sí mismo — pero la verdadera belleza de su historia se reveló cuando ella corrió y compartió al Cristo que apenas acababa de conocer. Una y otra vez la Escritura muestra esta hermosa simetría: Dios provee la salvación y el poder de su Espíritu, y luego Dios obra a través de nosotros para cumplir su propósito. ⚡ \"Porque Dios es el que en vosotros produce así el querer como el hacer, por su buena voluntad\" (Filipenses 2:13). Esa es la Asociación Divina, y este capítulo es su cuadro."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2f9ca3b2b433"
+    }
+   }
+  },
+  {
+   "id": "b014",
+   "type": "heading",
+   "text": {
+    "en": "I. The Woman at the Well",
+    "es": "I. La mujer junto al pozo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "baa86bde4b71"
+    }
+   }
+  },
+  {
+   "id": "b015",
+   "type": "prose",
+   "text": {
+    "en": "Jesus, wearied from His journey, sat down by Jacob's well about the sixth hour while His disciples went into the town to buy food. A woman of Samaria came to draw water. Everything about that meeting was a wall a respectable rabbi would not climb. She was a Samaritan, a half-Jew — and the Jews and the Samaritans despised one another. She was a woman, and the teachers did not speak with women in public. And she was, by the town's reckoning, a great sinner; she would prove to have had five husbands, and the man she lived with then was not her husband. She was, as we would say, a hopeless case. Yet Jesus opened the conversation Himself: \"Give Me a drink.\" The Maker of the spring asked a sinner for a cup of water, so that He might give her a fountain.",
+    "es": "Jesús, cansado del camino, se sentó junto al pozo de Jacob como a la hora sexta mientras sus discípulos iban al pueblo a comprar comida. Una mujer de Samaria vino a sacar agua. Todo en aquel encuentro era un muro que un rabí respetable no escalaría. Ella era samaritana, mitad judía — y judíos y samaritanos se despreciaban mutuamente. Era mujer, y los maestros no hablaban con mujeres en público. Y era, según el cálculo del pueblo, una gran pecadora; resultaría que había tenido cinco maridos, y el hombre con quien vivía entonces no era su marido. Era, como diríamos, un caso perdido. Sin embargo, Jesús mismo abrió la conversación: \"Dame de beber.\" El Hacedor del manantial pidió a una pecadora una taza de agua, para poder darle una fuente."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2891e7ca9b47"
+    }
+   }
+  },
+  {
+   "id": "b016",
+   "type": "heading",
+   "text": {
+    "en": "II. The Living Water",
+    "es": "II. El agua viva"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "643c82e00b6c"
+    }
+   }
+  },
+  {
+   "id": "b017",
+   "type": "prose",
+   "text": {
+    "en": "<em>\"If you knew the gift of God, and who it is who says to you, 'Give Me a drink,' you would have asked Him, and He would have given you living water\"</em> (John 4:10). She heard only the well at her feet — You have nothing to draw with, and the well is deep. But Jesus was speaking of another water altogether. <em>\"Whoever drinks of this water will thirst again, but whoever drinks of the water that I shall give him will never thirst. The water that I shall give him will become in him a fountain of water springing up into everlasting life\"</em> (John 4:13–14). The world's water always runs out; you drink, and within hours you are thirsty again. The water Christ gives does not sit in a cistern to be rationed — it springs up, it overflows, it becomes a fountain inside the one who drinks.",
+    "es": "⚡ <em>\"Si conocieras el don de Dios, y quién es el que te dice: Dame de beber; tú le pedirías a él, y él te daría agua viva\"</em> (Juan 4:10). Ella solo oyó el pozo a sus pies — no tienes con qué sacarla, y el pozo es hondo. Pero Jesús hablaba de otra agua del todo distinta. ⚡ <em>\"Cualquiera que bebiere de esta agua, volverá a tener sed; mas el que bebiere del agua que yo le daré, no tendrá sed jamás; sino que el agua que yo le daré será en él una fuente de agua que salte para vida eterna\"</em> (Juan 4:13–14). El agua del mundo siempre se acaba; usted bebe, y en pocas horas vuelve a tener sed. El agua que Cristo da no queda en una cisterna para racionarse — brota, se desborda, se vuelve una fuente dentro del que bebe."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "0eaf8ad3de2c"
+    }
+   }
+  },
+  {
+   "id": "b018",
+   "type": "prose",
+   "text": {
+    "en": "Some years ago I traveled in the Canadian province of Ontario and made sure to drive and see Niagara Falls, on the border of Canada and the United States — the grandest waterfall in all of North America, where millions of gallons pour over the edge every single minute and never, ever stop. That is a faint picture of the fullness Jesus offered that woman. He offered her Himself. Salvation, and a purpose for living, are found in Him alone, and they never run dry.",
+    "es": "Hace algunos años viajé por la provincia canadiense de Ontario y me aseguré de ir a ver las Cataratas del Niágara, en la frontera de Canadá y los Estados Unidos — la cascada más grandiosa de toda América del Norte, donde millones de galones caen por el borde cada minuto y nunca, jamás, se detienen. Ese es un débil cuadro de la plenitud que Jesús ofreció a aquella mujer. Le ofreció a sí mismo. La salvación, y un propósito para vivir, se hallan solo en él, y nunca se secan."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "f40b7d824c29"
+    }
+   }
+  },
+  {
+   "id": "b019",
+   "type": "prose",
+   "text": {
+    "en": "The world's water always runs out. The water Christ gives springs up — it overflows, it becomes a fountain inside the one who drinks.",
+    "es": "El agua del mundo siempre se acaba. El agua que Cristo da brota — se desborda, se vuelve una fuente dentro del que bebe."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "aa4abed7ad9e"
+    }
+   }
+  },
+  {
+   "id": "b020",
+   "type": "prose",
+   "text": {
+    "en": "Every one of us was made with a thirst that no well of this world can fill. We carry our buckets to the cisterns of money, of pleasure, of approval, of one more relationship, and we drink, and for an hour we are satisfied — and then the old dryness creeps back, because those wells were never deep enough for a soul. The woman at Jacob's well had been to that kind of cistern five times over, and the man she lived with then was a sixth bucket let down into an empty well. Jesus did not scold her thirst; He offered to end it. And He offers the same to us. The ache you cannot quite name, the restlessness that no achievement finally quiets, is the soul's cry for the only water that satisfies. His invitation has not changed in two thousand years: drink of Me, and you will never thirst again.",
+    "es": "Cada uno de nosotros fue hecho con una sed que ningún pozo de este mundo puede llenar. Llevamos nuestros cubos a las cisternas del dinero, del placer, de la aprobación, de una relación más, y bebemos, y por una hora quedamos satisfechos — y luego la vieja sequedad regresa, porque aquellos pozos nunca fueron lo bastante hondos para un alma. La mujer junto al pozo de Jacob había ido a esa clase de cisterna cinco veces, y el hombre con quien vivía entonces era un sexto cubo bajado a un pozo vacío. Jesús no regañó su sed; le ofreció ponerle fin. Y nos ofrece lo mismo. El anhelo que no logra nombrar, la inquietud que ningún logro acalla del todo, es el clamor del alma por la única agua que satisface. Su invitación no ha cambiado en dos mil años: bebe de mí, y no tendrás sed jamás."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "8c2d10b8093e"
+    }
+   }
+  },
+  {
+   "id": "b021",
+   "type": "heading",
+   "text": {
+    "en": "III. In Spirit and in Truth",
+    "es": "III. En espíritu y en verdad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9abaeb3031b2"
+    }
+   }
+  },
+  {
+   "id": "b022",
+   "type": "prose",
+   "text": {
+    "en": "Then He touched the wound. \"Go, call your husband, and come here.\" \"I have no husband.\" \"You have well said... for you have had five husbands, and the one whom you now have is not your husband.\" He did not shame her; He simply showed her that He already knew everything, and still was offering her the fountain. Seeing a prophet before her, she raised the old quarrel of worship: our fathers worshiped on this mountain, but you Jews say Jerusalem is the place. Jesus lifted the whole question to higher ground: <em>\"God is Spirit, and those who worship Him must worship in spirit and truth\"</em> (John 4:24). True worship is not finally a matter of the right mountain or the right building, but of the heart and the Spirit and the truth of God. And then, to this woman — a Samaritan, an outsider, a sinner — He said what He had said plainly to no one else: \"I who speak to you am He.\" The first soul to hear Jesus openly name Himself the Messiah was a woman at a well at noon.",
+    "es": "Entonces tocó la herida. \"Ve, llama a tu marido, y ven acá.\" \"No tengo marido.\" \"Bien has dicho... porque cinco maridos has tenido, y el que ahora tienes no es tu marido.\" No la avergonzó; sencillamente le mostró que ya lo sabía todo, y que aún le ofrecía la fuente. Viendo a un profeta ante ella, ella levantó la vieja disputa del culto: nuestros padres adoraron en este monte, mas vosotros los judíos decís que Jerusalén es el lugar. Jesús elevó toda la cuestión a un terreno más alto: ⚡ <em>\"Dios es Espíritu; y los que le adoran, en espíritu y en verdad es necesario que adoren\"</em> (Juan 4:24). La verdadera adoración no es finalmente cuestión del monte correcto ni del edificio correcto, sino del corazón y del Espíritu y de la verdad de Dios. Y entonces, a esta mujer — samaritana, marginada, pecadora — le dijo lo que a nadie más había dicho tan claramente: \"Yo soy, el que habla contigo.\" La primera alma en oír a Jesús nombrarse abiertamente el Mesías fue una mujer junto a un pozo al mediodía."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "6ee147bb8159"
+    }
+   }
+  },
+  {
+   "id": "b023",
+   "type": "heading",
+   "text": {
+    "en": "IV. The First Evangelist: Come and See",
+    "es": "IV. La primera evangelista: Ven y ve"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9b837a8b2f1a"
+    }
+   }
+  },
+  {
+   "id": "b024",
+   "type": "prose",
+   "text": {
+    "en": "What she did next preaches its own sermon. <em>\"The woman then left her waterpot, went her way into the city, and said to the men, 'Come, see a Man who told me all things that I ever did. Could this be the Christ?'\"</em> (John 4:28–29). She left the very waterpot she had come for — the old thirst forgotten in the new fountain — and ran to the same townspeople who knew her reputation. She could not have walked anyone through a set of spiritual laws. But she could say two words: come, see. And they came. <em>\"Many of the Samaritans of that city believed in Him because of the word of the woman\"</em> (John 4:39), and then many more believed because they heard Him for themselves, and said, \"Now we believe... and we know that this is indeed the Christ, the Savior of the world\" (John 4:42).",
+    "es": "Lo que hizo después predica su propio sermón. ⚡ <em>\"Entonces la mujer dejó su cántaro, y fue a la ciudad, y dijo a los hombres: Venid, ved un hombre que me ha dicho todo cuanto he hecho. ¿No es éste el Cristo?\"</em> (Juan 4:28–29). Dejó el mismo cántaro por el que había venido — la vieja sed olvidada en la nueva fuente — y corrió a los mismos del pueblo que conocían su reputación. No habría podido guiar a nadie por un conjunto de leyes espirituales. Pero podía decir dos palabras: venid, ved. Y vinieron. ⚡ <em>\"Y muchos de los samaritanos de aquella ciudad creyeron en él por la palabra de la mujer\"</em> (Juan 4:39), y luego muchos más creyeron porque le oyeron a él mismo, y decían: \"ya no creemos por tu dicho... y sabemos que verdaderamente éste es el Cristo, el Salvador del mundo\" (Juan 4:42)."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "3b11c63ebda8"
+    }
+   }
+  },
+  {
+   "id": "b025",
+   "type": "prose",
+   "text": {
+    "en": "Mark the contrast John quietly draws. The disciples had gone into that same town — trained men, three years under the Lord Himself, the most qualified evangelists on earth — and they came back with bread and no converts; there is no sign they spoke to a soul. The first evangelist in Samaria was one grateful, excited sinner. The living water must have been sparkling water, for it came bubbling up out of her life.",
+    "es": "Note el contraste que Juan dibuja en silencio. Los discípulos habían ido a ese mismo pueblo — hombres entrenados, tres años bajo el Señor mismo, los evangelistas más calificados de la tierra — y volvieron con pan y sin convertidos; no hay señal de que hablaran con un alma. La primera evangelista en Samaria fue una pecadora agradecida y emocionada. El agua viva debió ser agua chispeante, pues brotaba burbujeando de su vida."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "cbc5c3bc36d4"
+    }
+   }
+  },
+  {
+   "id": "b026",
+   "type": "heading",
+   "text": {
+    "en": "V. The Fields Are White",
+    "es": "V. Los campos están blancos"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "d762bf23615b"
+    }
+   }
+  },
+  {
+   "id": "b027",
+   "type": "prose",
+   "text": {
+    "en": "When the disciples urged Him to eat, Jesus said, \"My food is to do the will of Him who sent Me, and to finish His work\" (John 4:34). Then He pointed to the Samaritans even then streaming out of the town toward Him: <em>\"Lift up your eyes and look at the fields, for they are already white for harvest\"</em> (John 4:35). One sows, another reaps, and \"he who reaps receives wages... that both he who sows and he who reaps may rejoice together\" (John 4:36). There is the Divine Partnership again: Jesus had sown in one woman by a well, and already a whole village was ripening. God gives the increase, but He is pleased to let us carry the seed and swing the sickle, and to share the joy of the harvest.",
+    "es": "Cuando los discípulos le rogaron que comiera, Jesús dijo: \"Mi comida es que haga la voluntad del que me envió, y que acabe su obra\" (Juan 4:34). Luego señaló a los samaritanos que ya entonces salían del pueblo hacia él: ⚡ <em>\"Alzad vuestros ojos y mirad las regiones, porque ya están blancas para la siega\"</em> (Juan 4:35). Uno siembra, otro siega, y \"el que siega recibe salario... para que el que siembra goce juntamente con el que siega\" (Juan 4:36). Ahí está otra vez la Asociación Divina: Jesús había sembrado en una mujer junto a un pozo, y ya toda una aldea maduraba. Dios da el crecimiento, pero se complace en dejarnos llevar la semilla y empuñar la hoz, y compartir el gozo de la siega."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "824585373c35"
+    }
+   }
+  },
+  {
+   "id": "b028",
+   "type": "heading",
+   "text": {
+    "en": "VI. Every Believer on the Team",
+    "es": "VI. Cada creyente en el equipo"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "c4084c6155aa"
+    }
+   }
+  },
+  {
+   "id": "b029",
+   "type": "prose",
+   "text": {
+    "en": "People sometimes imagine there is only one kind of evangelist. There are many, and every believer belongs to the team. There is the <em>mass evangelist</em> — I once sat in a Billy Graham crusade and watched thousands stream forward. There is the <em>defender of the faith</em>, the apologist — men like Lee Strobel and Josh McDowell, or Nabeel Qureshi, who reasoned his way out of Islam into Christ and then spent his short life defending the faith. There is the <em>serving evangelist</em>, like Barnabas the son of encouragement, whose compassion gave weight to his words. There is the <em>tract evangelist</em>: I was told of a paralyzed man named J. D. Fore who could move almost nothing, yet stamped gospel tracts by gripping a rubber stamp in his teeth and, with his mother's help, mailed them to soldiers across the world — and his wall filled with letters from men saved through those tracts. There is the <em>timid or \"come and see\" evangelist</em>, like the little white-haired man on George Street in Sydney who asked passersby one quiet question — \"If you died today, where would you be?\" — and never knew, until late in life, how many he had sent to Christ. And there is the <em>invitational evangelist</em>, the Samaritan woman herself, who only said, \"Come and see.\" You may never preach to thousands or argue a skeptic to his knees. But you can say, \"Come and see.\" Have you drunk of the living water? Then leave the waterpot, and go.",
+    "es": "A veces se imagina que hay un solo tipo de evangelista. Hay muchos, y cada creyente pertenece al equipo. Está el <em>evangelista masivo</em> — una vez me senté en una cruzada de Billy Graham y vi a miles pasar al frente. Está el <em>defensor de la fe</em>, el apologista — hombres como Lee Strobel y Josh McDowell, o Nabeel Qureshi, que razonó su salida del islam hacia Cristo y luego pasó su corta vida defendiendo la fe. Está el <em>evangelista del servicio</em>, como Bernabé el hijo de consolación, cuya compasión daba peso a sus palabras. Está el <em>evangelista de folletos</em>: me contaron de un hombre paralítico llamado J. D. Fore que casi no podía mover nada, pero estampaba tratados del evangelio sujetando un sello de goma con los dientes y, con ayuda de su madre, los enviaba a soldados por todo el mundo — y su pared se llenó de cartas de hombres salvos por aquellos tratados. Está el <em>evangelista tímido o de \"ven y ve\"</em>, como el hombrecito de cabello blanco en George Street, en Sídney, que hacía a los transeúntes una pregunta callada — \"Si murieras hoy, ¿dónde estarías?\" — y nunca supo, hasta ya anciano, a cuántos había enviado a Cristo. Y está el <em>evangelista invitador</em>, la misma mujer samaritana, que solo dijo: \"Venid y ved.\" Quizá usted nunca predique a miles ni lleve a un escéptico de rodillas con argumentos. Pero puede decir: \"Ven y ve.\" ¿Ha bebido del agua viva? Entonces deje el cántaro, y vaya."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "2c774b8939a4"
+    }
+   }
+  },
+  {
+   "id": "b030",
+   "type": "prose",
+   "text": {
+    "en": "Unit 3 Final Exam — 30 Questions",
+    "es": "Examen Final de la Unidad 3 — 30 Preguntas"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "002ac8db71ed"
+    }
+   }
+  },
+  {
+   "id": "b031",
+   "type": "prose",
+   "text": {
+    "en": "<strong>Certificate students:</strong> Answer 1–20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. The short-answer section is practice for Certificate students and does not count against you.",
+    "es": "<strong>Certificado:</strong> 1–20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. La sección de respuesta corta es práctica para el Certificado y no cuenta en su contra."
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "9168d4aa12d6"
+    }
+   }
+  },
+  {
+   "id": "b032",
+   "type": "prose",
+   "text": {
+    "en": "Submit Exam &amp; Check Pass",
+    "es": "Enviar Examen y Verificar"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "bf961db09a75"
+    }
+   }
+  },
+  {
+   "id": "b033",
+   "type": "prose",
+   "text": {
+    "en": "Reset Unit",
+    "es": "Reiniciar Unidad"
+   },
+   "tr": {
+    "es": {
+     "status": "human",
+     "from": "90e0929876ce"
+    }
+   }
+  }
+ ]
+}
