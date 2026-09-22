@@ -20,6 +20,7 @@
  */
 import { execFileSync, execSync } from 'node:child_process';
 import fs from 'node:fs';
+import { parse as parseYaml, stringify as toYaml } from 'yaml';
 
 const BASE = process.env.BASE || 'http://127.0.0.1:8791';
 
@@ -212,6 +213,70 @@ const M = [
     apply: (f) => {
       write(f[0], read(f[0]).replace("scripture: ['div', 'scripture'],", "scripture: ['p', ''],"));
     },
+  },
+  /* The CMS config. Sveltia drops fields its config does not declare, so the
+     dangerous change here is a quiet one: data gains a field, the config does
+     not, and the next teacher to press save deletes it. */
+  {
+    id: 'cms-field-undeclared',
+    gate: 'node tools/verify-cms-config.mjs',
+    files: ['public/admin/config.yml'],
+    why: 'stop declaring the paragraph text — 301 paragraphs lose their words on the next save',
+    expect: /would delete them|not in the config/,
+    apply: (f) => {
+      /* Removed from the PARAGRAPH type only. Six other block types still
+         declare `text`, so a check that merely collected field names would see
+         nothing wrong. Edited through the YAML parser rather than with a
+         regex, so the mutation is the missing field and not a broken file. */
+      const c = parseYaml(read(f[0]));
+      const blocks = c.collections
+        .find((c) => String(c.name).startsWith('lessons_')).fields
+        .find((f) => f.name === 'blocks');
+      const prose = blocks.types.find((t) => t.name === 'prose');
+      const before = prose.fields.length;
+      prose.fields = prose.fields.filter((f) => f.name !== 'text');
+      if (prose.fields.length === before) throw new Error('the paragraph has no text field to remove');
+      write(f[0], toYaml(c));
+    },
+  },
+  {
+    id: 'cms-course-unlisted',
+    gate: 'node tools/verify-cms-config.mjs',
+    files: ['public/admin/config.yml'],
+    why: 'a converted course with no collection — its lessons are not editable and nobody is told',
+    expect: /has no collection/,
+    apply: (f) => {
+      const s = read(f[0]);
+      write(f[0], s.replace(/ {4}folder: src\/content\/lessons\/\w+\n/, '    folder: src/content/lessons/_none\n'));
+    },
+  },
+  {
+    id: 'cms-config-malformed',
+    gate: 'node tools/verify-cms-config.mjs',
+    files: ['public/admin/config.yml'],
+    why: 'break the YAML — the CMS would not load at all',
+    expect: /not valid YAML/,
+    apply: (f) => write(f[0], read(f[0]).replace(/^collections:$/m, 'collections: [oops')),
+  },
+  {
+    id: 'cms-unpublished',
+    gate: `node tools/verify-cms-loads.mjs ${BASE}`,
+    files: ['public/admin/index.html'],
+    needsBuild: true,
+    slow: true,
+    why: 'the editing interface stops being published — a teacher gets a 404 and nobody else finds out',
+    expect: /returns 200|FAIL/,
+    apply: (f) => write(f[0], read(f[0]).replace(/<script src=[^>]*><\/script>/, '')),
+  },
+  {
+    id: 'html-lang-stale',
+    gate: `node tools/verify-language.mjs ${BASE} dist`,
+    files: ['public/assets/js/cts-engine.js'],
+    needsBuild: true,
+    slow: true,
+    why: 'the document keeps saying lang="en" in Spanish — screen readers mispronounce every page',
+    expect: /html lang="en"|FAIL/,
+    apply: (f) => sub(f[0], 'if (lang !== "both") document.documentElement.lang = lang;', ''),
   },
   {
     id: 'catalog-title',

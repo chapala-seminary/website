@@ -88,6 +88,12 @@ node tools/prose-baseline.mjs check dist
 node tools/verify-lesson-render.mjs
 node test/lesson-translation.mjs
 
+# The editing interface. Sveltia writes back only the fields its config
+# declares, so a field in the content and not in the config is deleted the next
+# time a teacher saves that entry. This is the check that a generated config and
+# the content it edits have not drifted apart.
+node tools/verify-cms-config.mjs
+
 API_BASE="http://127.0.0.1:$PORT" node test/api.test.mjs
 
 # Some environments (the sandboxed Linux VM the desktop app runs commands in,
@@ -108,6 +114,7 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   node tools/audit-controls-built.mjs "http://127.0.0.1:$PORT"
   node tools/verify-devmode.mjs "http://127.0.0.1:$PORT"
   node tools/verify-certificates.mjs "http://127.0.0.1:$PORT"
+  node tools/verify-cms-loads.mjs "http://127.0.0.1:$PORT"
   # 948 assertions that the built site implements the agreed assessment policy
   # -- pass mark, lockouts, track rules. Also never run by this suite before.
   node tools/engine-test-built.mjs "http://127.0.0.1:$PORT"
@@ -133,7 +140,9 @@ else
   echo "  # that every page has a working submit control, that cts-sync.js      #"
   echo "  # carries a student's progress to another browser, that restoring     #"
   echo "  # never removes what a device already had, and that the script stays  #"
-  echo "  # dormant with no API deployed. Run this suite where Chromium works   #"
+  echo "  # dormant with no API deployed, and that the editing interface at     #"
+  echo "  # /admin still loads and reads its config. Run this suite where        #"
+  echo "  # Chromium works                                                       #"
   echo "  # before trusting any of those.                                       #"
   echo "  #                                                                     #"
   echo "  # Usually: npx playwright install --with-deps chromium                #"

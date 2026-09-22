@@ -67,6 +67,7 @@ async function worker() {
           text: document.body.innerText,
           cls: document.body.className,
           english: visible.length,
+          htmlLang: document.documentElement.lang,
         };
       });
 
@@ -80,6 +81,12 @@ async function worker() {
       // student would: is the English gone?
       else if (after.english > 0)
         fails.push(`${f}: still showing ${after.english} English block(s) after pressing "${pressed}" (body class "${after.cls}")`);
+      /* A page whose text is Spanish but whose document still says lang="en"
+         is read aloud by a screen reader with English pronunciation, and is
+         indexed as English. The body class changed; this asks whether the
+         document itself was told. */
+      else if (after.htmlLang !== 'es')
+        fails.push(`${f}: text is Spanish but <html lang="${after.htmlLang}"> — screen readers and search engines are told otherwise`);
       if (errs.length) fails.push(`${f}: page error — ${errs[0].slice(0, 90)}`);
     } catch (e) {
       fails.push(`${f}: ${String(e).slice(0, 90)}`);

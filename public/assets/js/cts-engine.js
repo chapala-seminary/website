@@ -552,6 +552,13 @@
     b.classList.remove("lang-en", "lang-es", "lang-both");
     b.classList.add("lang-" + lang);
     b.setAttribute("data-lang", lang);
+    /* Tell the document what language it is actually in. The page is served
+       with <html lang="en"> whatever the reader picks, so until now a student
+       reading in Spanish had every paragraph announced by a screen reader with
+       English pronunciation, and search engines were told the same thing. Not
+       set for "both", which is a display mode rather than a language and has
+       no valid value here. */
+    if (lang !== "both") document.documentElement.lang = lang;
     // "both" is a display mode rather than a language, so it must not overwrite
     // the student's remembered choice that cts-lang.js seeds every page from
     if (lang !== "both") { try { lsSet("cts_lang", lang); } catch (e) {} }

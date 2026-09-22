@@ -50,6 +50,12 @@ report('certificates missing from the sitemap', built.filter((f) => isCertificat
 report('reading rooms missing from the sitemap', built.filter((f) => isReadingRoom(f) && !listedSet.has(f)));
 report('reading digests that should not be listed', listed.filter(isDigest));
 report('excluded pages that should not be listed', listed.filter((p) => EXCLUDE.has(p)));
+/* The editing interface is not content. It is also the one page on the site
+   where being found by a search engine is actively unhelpful. */
+report('the editing interface should not be listed', listed.filter((p) => p.startsWith('admin/')));
+if (fs.existsSync(path.join(DIST, 'admin/index.html'))
+    && !/^\s*Disallow:\s*\/admin\//m.test(fs.readFileSync(path.join(DIST, 'robots.txt'), 'utf8')))
+  fails.push('robots.txt does not disallow /admin/, and the editing interface is published');
 
 // a sitemap of nothing would satisfy every "must not" rule above
 if (listed.length < 500) fails.push(`only ${listed.length} URLs — the site has ${built.length} pages, so something is wrong`);
