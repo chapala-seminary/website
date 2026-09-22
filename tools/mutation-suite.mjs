@@ -279,6 +279,20 @@ const M = [
     apply: (f) => sub(f[0], 'if (lang !== "both") document.documentElement.lang = lang;', ''),
   },
   {
+    id: 'lesson-entities-return',
+    gate: 'npx astro build',
+    files: ['src/content/lessons/CTSHermeneutics/3.json'],
+    why: 'an HTML entity gets back into the lesson text — a teacher reads &ldquo; instead of a quotation mark',
+    expect: /entities belong in HTML/,
+    apply: (f) => {
+      const j = JSON.parse(read(f[0]));
+      const b = j.blocks.find((b) => b.type === 'prose' && /\u201c|\u2014/.test(b.text?.en ?? ''));
+      if (!b) throw new Error('no block with a decoded character to re-encode');
+      b.text.en = b.text.en.replace(/\u201c/g, '&ldquo;').replace(/\u2014/g, '&mdash;');
+      write(f[0], JSON.stringify(j, null, 1));
+    },
+  },
+  {
     id: 'catalog-title',
     gate: 'node tools/verify-catalog.mjs _reference-index.html',
     files: ['src/content/courses/CTSActs.json'],

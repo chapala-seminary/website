@@ -93,6 +93,36 @@ Creating and deleting lessons is **off**. A unit comes into existence when a
 course is converted, and a teacher who can delete one from a web form will
 eventually delete one.
 
+### Text, not HTML entities
+
+The lessons were written as HTML files, where a curly quote had to be spelled
+`&ldquo;` because the file's encoding could not be relied on. The JSON they
+became is UTF-8, so it holds the character itself — an editor opening a
+paragraph sees `"` and not `&ldquo;`.
+
+This is a **build failure**, not a cleanup script, because the CMS writes to
+these files too and a rule nothing enforces comes back. A lesson carrying a
+decodable entity fails the build and names it:
+
+```
+blocks.0.text.en: HTML entities belong in HTML, not in a UTF-8 lesson:
+  &middot; — run: node tools/decode-entities.mjs <Course>
+```
+
+`tools/decode-entities.mjs` does the conversion for a converted course. It
+leaves `&amp;`, `&lt;` and `&gt;` alone — the field carries inline markup
+(`<em>`, `<strong>`), so it is HTML, and in HTML those three mean something
+other than themselves.
+
+It also carries each translation's provenance hash across, so decoding does not
+mark the whole course stale over a change of spelling — **but only where the
+translation was current to begin with.** One that was already stale stays
+stale; a cleanup pass must not be able to launder that.
+
+`_shared.json` is deliberately **not** covered. It is the page furniture — the
+exam section, the footer — stored as raw HTML, nobody edits it in the CMS, and
+entities are correct there.
+
 ### Translations
 
 Each block shows its text in every language the course has, one field per

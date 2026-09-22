@@ -87,7 +87,25 @@ const courses = defineCollection({
    actually be present in every block that has the source language, or a page
    ships half in English to a Spanish reader. The hand-written files could
    drop a <span class="lang-es"> and nothing noticed. */
-const text = z.record(z.string(), z.string());
+/* The lesson files are UTF-8, so a curly quote is a curly quote. The pages
+   were written as HTML, where it had to be spelled &ldquo;, and an editor
+   opening a paragraph in the CMS should not have to read that. &amp;, &lt;
+   and &gt; stay: the field carries inline markup, so in it those three mean
+   something other than themselves.
+
+   A build failure rather than a cleanup script, because the CMS writes to
+   these files too -- and a rule nothing enforces comes back. */
+const ENTITY = /&(?:[a-zA-Z][a-zA-Z0-9]*|#\d+|#[xX][0-9a-fA-F]+);/g;
+const STRUCTURAL = /^&(?:amp|lt|gt|AMP|LT|GT);$/;
+
+const plainText = z.string().superRefine((v, ctx) => {
+  const found = [...new Set((v.match(ENTITY) ?? []).filter((e) => !STRUCTURAL.test(e)))];
+  if (found.length) ctx.addIssue({ code: 'custom',
+    message: `HTML entities belong in HTML, not in a UTF-8 lesson: ${found.join(' ')}`
+      + ' — run: node tools/decode-entities.mjs <Course>' });
+});
+
+const text = z.record(z.string(), plainText);
 
 const tr = z.record(z.string(), z.object({
   status: z.enum(['human', 'machine', 'machine-edited']),
