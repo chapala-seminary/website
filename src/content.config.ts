@@ -118,6 +118,10 @@ const block = z.object({
                 'list-item', 'caption', 'label', 'other']),
   text,
   tr: tr.optional(),
+  /* true when the page never marked this text with a language: a diagram
+     label, a caption written with inline styles. Not an untranslated
+     paragraph. */
+  unmarked: z.boolean().optional(),
 });
 
 const lessons = defineCollection({

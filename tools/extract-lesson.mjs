@@ -81,7 +81,9 @@ function typeOf(el, depth) {
 const shapeOf = (el) => el.childNodes.filter((n) => n.tagName)
   .map((n) => n.tagName.toLowerCase()).join(',');
 
-function extractUnit(course, unit, html, problems, notes) {
+const plain = (h) => parse('<x>' + h + '</x>').text.replace(/\s+/g, ' ').trim();
+
+function extractUnit(course, unit, html, problems, notes, suspect) {
   /* comment: true, or the parser discards the holes as it goes -- they are
      comments, and it drops those by default. */
   const root = parse(html, { comment: true });
@@ -116,14 +118,32 @@ function extractUnit(course, unit, html, problems, notes) {
     const kind = (x) => { const t = x.tagName.toLowerCase(); return /^h[1-6]$/.test(t) ? 'h' : t; };
     const key = (x) => kind(x) + '.'
       + (classes(x).filter((c) => !MARKER_CLASS.has(c))[0] ?? '');
+    /* Two elements are a pair when they are the same kind AND roughly the
+       same amount of text. Matching on kind alone pairs any <p> with any <p>,
+       so one paragraph missing its translation shifts every pair after it by
+       one -- CTSRadical unit 4 had an English paragraph with no Spanish, and
+       the slip put the Spanish of the NEXT paragraph beside it. Both halves
+       were real, careful text; they were simply not each other's.
+
+       The ratio is generous (Spanish runs perhaps a fifth longer than English
+       as a rule), and only applied once both sides are long enough for length
+       to mean anything. */
+    const len = (x) => x.text.replace(/\s+/g, ' ').trim().length;
+    const fits = (x, y) => {
+      if (key(x) !== key(y)) return false;
+      const p = len(x), q = len(y);
+      if (p < 120 || q < 120) return true;
+      return p / q < 2.5 && q / p < 2.5;
+    };
+
     const L = Array.from({ length: n + 1 }, () => new Array(m + 1).fill(0));
     for (let i = n - 1; i >= 0; i--)
       for (let j = m - 1; j >= 0; j--)
-        L[i][j] = key(a[i]) === key(b[j]) ? L[i + 1][j + 1] + 1 : Math.max(L[i + 1][j], L[i][j + 1]);
+        L[i][j] = fits(a[i], b[j]) ? L[i + 1][j + 1] + 1 : Math.max(L[i + 1][j], L[i][j + 1]);
     const out = [];
     let i = 0, j = 0;
     while (i < n && j < m) {
-      if (key(a[i]) === key(b[j])) { out.push([a[i++], b[j++]]); }
+      if (fits(a[i], b[j])) { out.push([a[i++], b[j++]]); }
       else if (L[i + 1][j] >= L[i][j + 1]) out.push([a[i++], null]);
       else out.push([null, b[j++]]);
     }
@@ -148,10 +168,37 @@ function extractUnit(course, unit, html, problems, notes) {
     el.set_content(lead + HOLE(id, lang) + trail);
   }
 
+  /* One side sometimes wraps part of its content in a div the other side does
+     not have -- CTSST unit 12 keeps its English in a lang-en div plus a
+     lesson-section div, while all its Spanish sits flat in one container. The
+     two child lists then share almost nothing and the whole pair is taken as
+     one block, which is how ten thousand characters of real Spanish ended up
+     frozen in a template. Flattening a wrapper that carries no language
+     marker of its own, when doing so matches more, fixes that without any
+     rule about which courses are shaped which way. */
+  const WRAPPER = /^(div|section|article)$/i;
+  /* A marker on a child is not a reason to keep it whole here. By the time
+     two sides are being paired, which language each one is has already been
+     settled; a lang-en div INSIDE the English side is just a wrapper. Leaving
+     it intact is what kept CTSST unit 12's first section as one 5,800
+     character block while its Spanish counterpart was five paragraphs, so the
+     two lists misaligned and paragraphs were paired with the wrong ones. */
+  const flattenable = (el) => WRAPPER.test(el.tagName || '')
+    && hasBlockChildren(el) && el.childNodes.filter((x) => x.tagName).length > 1;
+
+  const flatten = (kids) => kids.flatMap((k) =>
+    flattenable(k) ? k.childNodes.filter((x) => x.tagName) : [k]);
+
+  const matches = (a, b) => align(a, b).filter(([x, y]) => x && y).length;
+
   function pairUp(en, es, isMasthead) {
     if (en && es && hasBlockChildren(en) && hasBlockChildren(es)) {
-      const pairs = align(en.childNodes.filter((x) => x.tagName),
-                          es.childNodes.filter((x) => x.tagName));
+      let a = en.childNodes.filter((x) => x.tagName);
+      let b = es.childNodes.filter((x) => x.tagName);
+      const best = matches(a, b);
+      const fa = flatten(a), fb = flatten(b);
+      if ((fa !== a || fb !== b) && matches(fa, fb) > best) { a = fa; b = fb; }
+      const pairs = align(a, b);
       let lopsided = 0;
       for (const [a, b] of pairs) {
         if (a && b) { pairUp(a, b, false); continue; }
@@ -186,6 +233,17 @@ function extractUnit(course, unit, html, problems, notes) {
        the English beside it. */
     if (en && es) block.tr = { es: { status: 'human', from: hash(text[SOURCE]) } };
     blocks.push(block);
+
+    /* A pair whose two halves are wildly different lengths is usually not a
+       pair at all -- it is two unrelated paragraphs that happened to land at
+       the same index when the alignment slipped. It renders correctly either
+       way, because each language keeps its own hole, so nothing else would
+       notice; this is the only thing that would. */
+    if (we?.text && ws?.text) {
+      const a = plain(we.text).length, b = plain(ws.text).length;
+      if (a > 120 && b > 120 && (a / b > 2.5 || b / a > 2.5))
+        suspect.push(`${course} unit ${unit} ${id}: ${a} chars of ${SOURCE} paired with ${b} of es`);
+    }
 
     /* Each element keeps its place, its tag, its classes and its id. Only its
        text moves out, and a hole marks where it goes back. */
@@ -234,12 +292,29 @@ function extractUnit(course, unit, html, problems, notes) {
       /* Some courses wrap one language and leave the other outside the
          wrapper. If nothing matched among the siblings and this fragment is
          the last thing in its parent, look at the parent's next sibling. */
-      if (!esRun.length && enRun.length === 1 && kids[kids.length - 1] === el) {
+      if (!esRun.length && enRun.length === 1) {
         let up = parent.nextElementSibling;
         while (up && !up.text.replace(/\s+/g, '').length) up = up.nextElementSibling;
         if (up && marks(up, es)) {
-          esRun = [up];
-          notes.push(`${course} unit ${unit}: the Spanish half sits outside the wrapper its English half is in (${el.tagName.toLowerCase()}.${en}) — paired anyway`);
+          if (kids[kids.length - 1] === el) {
+            esRun = [up];
+          } else if (kids[0] === el) {
+            /* The English is the first thing in the wrapper and more follows
+               it that carries no marker of its own -- CTSST unit 12 keeps
+               section one in a lang-en div and the rest in a lesson-section
+               div beside it, while all the Spanish sits in one container
+               outside. Pairing the WRAPPER against that container lets the
+               flattening above line the two up; pairing only the marked div
+               left ten thousand characters of Spanish frozen. */
+            pairUp(parent, up, false);
+            parent.querySelectorAll('*').forEach((d) => done.add(d));
+            up.querySelectorAll('*').forEach((d) => done.add(d));
+            done.add(parent); done.add(up);
+            notes.push(`${course} unit ${unit}: the English is split across a wrapper and the Spanish is outside it — the wrapper was paired as a whole`);
+            return;
+          }
+          if (esRun.length)
+            notes.push(`${course} unit ${unit}: the Spanish half sits outside the wrapper its English half is in (${el.tagName.toLowerCase()}.${en}) — paired anyway`);
         }
       }
 
@@ -273,6 +348,50 @@ function extractUnit(course, unit, html, problems, notes) {
     }
   };
   scan(root);
+
+  /* A second pass, for text the page never marked with a language.
+   *
+   * Diagram labels inside an <svg>, a figure caption written with inline
+   * styles instead of language classes, a stray heading -- none of it carries
+   * a marker, so the pairing above cannot see it, and it stayed in the
+   * template where no teacher could reach it. It is still the lesson.
+   *
+   * Everything left that holds text becomes a block, EXCEPT the page
+   * furniture named below. The list is the whole rule, so it can be read and
+   * argued with: a registration form's dropdown, the navigation buttons, the
+   * catalogue link, the honours-readings box the layout repeats on every
+   * page. Adding one of those to a CMS would bury the lesson in 1,047 copies
+   * of "Catalog / Catálogo". */
+  const FURNITURE = [
+    '#cts-register', '#greeting', '#regCard', '#registration-card', '#track-card',
+    '#lockout-block', '#exam-section', '#results-block', '#questionsContainer',
+    '#kwContainer', '#examResult', '#storageWarning', '#testBanner',
+    '.reg-form', '.nav-bar', '.toolbar', '.topbar', '.langbar', '.progress-grid',
+    '.storage-error', '.test-banner', '.crest', '.credits', '.unitnav', '.cts-unitnav',
+    'nav', 'footer', 'select', 'option', 'button', 'label', 'input', 'script', 'style',
+    '[data-cts-rrbox]',            // the honours-readings box, repeated on every page
+  ].join(',');
+
+  const furniture = new Set();
+  for (const el of root.querySelectorAll(FURNITURE))
+    { furniture.add(el); el.querySelectorAll('*').forEach((d) => furniture.add(d)); }
+
+  /* Ordered so a block's id still follows the document. */
+  for (const el of root.querySelectorAll('*')) {
+    if (furniture.has(el)) continue;
+    if (el.innerHTML.includes('<!--cts:')) continue;
+    if (el.childNodes.some((n) => n.tagName && n.text.trim())) continue;   // not a leaf
+    const w = inner(el);
+    if (!w.text) continue;
+    if (!plain(w.text)) continue;                    // markup with no words
+    const id = nextId();
+    /* `unmarked` says the page never gave this text a language at all -- a
+       diagram label, a caption written with inline styles. It is not an
+       untranslated paragraph, and counting it as one buried the four real
+       gaps under fifteen hundred diagram labels. */
+    blocks.push({ id, type: typeOf(el), unmarked: true, text: { [SOURCE]: w.text } });
+    emit(el, SOURCE, id, w.lead, w.trail);
+  }
 
   return { course, unit, sourceLang: SOURCE, langs: LANGS, template: root.toString(), blocks };
 }
@@ -329,12 +448,12 @@ function convert(course) {
     .sort((a, b) => unitOf(a) - unitOf(b));
   if (!files.length) return { course, skipped: 'no unit bodies' };
 
-  const problems = [], notes = [], lessons = [];
+  const problems = [], notes = [], suspect = [], lessons = [];
   for (const f of files) {
     const html = fs.readFileSync(path.join('src/body', f), 'utf8');
     const unit = unitOf(f);
     let lesson;
-    try { lesson = extractUnit(course, unit, html, problems, notes); }
+    try { lesson = extractUnit(course, unit, html, problems, notes, suspect); }
     catch (e) { problems.push(`${f}: ${e.message}`); continue; }
 
     let back;
@@ -372,7 +491,7 @@ function convert(course) {
   const units = new Set(lessons.map((l) => l.lesson.unit));
   if (lessons.length && units.size !== lessons.length)
     problems.push(`${course}: ${lessons.length} bodies produced only ${units.size} distinct unit numbers — they would overwrite each other`);
-  return { course, problems, notes, lessons, units: files.length };
+  return { course, problems, notes, suspect, lessons, units: files.length };
 }
 
 const done = new Set(fs.existsSync(OUT_ROOT) ? fs.readdirSync(OUT_ROOT) : []);
@@ -408,6 +527,10 @@ for (const course of targets) {
     + `  biggest block ${String(biggest).padStart(5)} chars${coarse ? '  <-- one long section in a single field' : ''}`
     + (r.notes.length ? `   (${r.notes.length} note${r.notes.length > 1 ? 's' : ''})` : ''));
   if (r.notes.length && !ALL) [...new Set(r.notes)].slice(0, 4).forEach((n) => console.log('    note: ' + n));
+  if (r.suspect.length) {
+    console.log(`    ${r.suspect.length} pair(s) look mismatched — the two languages are very different lengths:`);
+    r.suspect.slice(0, 3).forEach((n) => console.log('      ' + n));
+  }
   if (CHECK) continue;
   const dir = path.join(OUT_ROOT, course);
   fs.mkdirSync(dir, { recursive: true });

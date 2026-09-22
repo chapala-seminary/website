@@ -92,11 +92,23 @@ function read(dir, file, isDist) {
   return blocks(html);
 }
 
+/* Every unit page there is, whether it still has an HTML body or is a
+   converted lesson. Listing src/body alone was fine until the last course was
+   converted and that directory emptied -- at which point `record` wrote a
+   baseline of nothing and `check` passed against it without a word. */
+function pages(dir) {
+  const html = fs.readdirSync(dir).filter((f) => f.endsWith('.html'));
+  const lessons = [];
+  if (fs.existsSync(LESSONS))
+    for (const course of fs.readdirSync(LESSONS))
+      for (const f of fs.readdirSync(path.join(LESSONS, course)))
+        if (/^\d+\.json$/.test(f)) lessons.push(`${course}Unit${f.replace('.json', '')}.html`);
+  return [...new Set([...html, ...lessons])].sort();
+}
+
 function collect(dir, isDist) {
   const map = {};
-  for (const f of fs.readdirSync(dir).filter((f) => f.endsWith('.html'))) {
-    map[f] = read(dir, f, isDist);
-  }
+  for (const f of pages(dir)) map[f] = read(dir, f, isDist);
   return map;
 }
 
@@ -107,9 +119,28 @@ if (cmd === 'record') {
   const map = collect(BODY_DIR, false);
   const hashed = Object.fromEntries(
     Object.entries(map).map(([f, list]) => [f, list.map(hash)]));
+  const n = Object.values(map).reduce((a, b) => a + b.length, 0);
+
+  /* A baseline that records nothing satisfies every check ever made against
+     it. If this ever writes far less than the last one did, something has
+     gone wrong with the reading, not with the site -- and overwriting a good
+     baseline with an empty one is the one mistake from which the check can
+     never recover. */
+  if (fs.existsSync(OUT)) {
+    const had = Object.values(JSON.parse(fs.readFileSync(OUT, 'utf8')))
+      .reduce((a, b) => a + b.length, 0);
+    if (n < had * 0.95) {
+      console.error(`REFUSING to record: the last baseline had ${had} blocks and this one found ${n}.`);
+      console.error('Something is not being read. Fix that before recording, or the guard is gone.');
+      process.exit(1);
+    }
+  } else if (n < 1000) {
+    console.error(`REFUSING to record a baseline of only ${n} blocks from nothing.`);
+    process.exit(1);
+  }
+
   fs.mkdirSync(path.dirname(OUT), { recursive: true });
   fs.writeFileSync(OUT, JSON.stringify(hashed));
-  const n = Object.values(map).reduce((a, b) => a + b.length, 0);
   console.log(`recorded ${n} blocks across ${Object.keys(map).length} units -> ${OUT}`);
   process.exit(0);
 }

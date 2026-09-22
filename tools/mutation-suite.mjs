@@ -310,6 +310,39 @@ const M = [
     },
   },
   {
+    id: 'baseline-records-nothing',
+    gate: 'node tools/prose-baseline.mjs record',
+    files: ['tools/prose-baseline.mjs'],
+    why: 'the prose baseline records nothing and every check then passes against nothing',
+    expect: /REFUSING to record/,
+    apply: (f) => {
+      /* What actually happened: the last HTML body was converted, src/body
+         emptied, and `record` -- which listed that directory -- wrote a
+         baseline of zero blocks. `check` then passed, loudly, against it. */
+      write(f[0], read(f[0]).replace(
+        'for (const f of pages(dir)) map[f] = read(dir, f, isDist);',
+        "for (const f of fs.readdirSync(dir).filter((f) => f.endsWith('.html'))) map[f] = read(dir, f, isDist);"));
+    },
+  },
+  {
+    id: 'lesson-text-frozen',
+    gate: 'node tools/verify-editable.mjs',
+    files: ['src/content/lessons/CTSST/12.json'],
+    why: 'lesson text goes back into the template — on the page, and beyond a teacher\'s reach',
+    expect: /NOT page furniture/,
+    apply: (f) => {
+      /* What actually happened once: CTSST unit 12's Spanish sat in the
+         template because it never paired, rendered perfectly, and no gate
+         said a word. */
+      const j = JSON.parse(read(f[0]));
+      const b = j.blocks.find((b) => (b.text.en || '').length > 400);
+      if (!b) throw new Error('no long block to freeze');
+      j.template = j.template.replace(`<!--cts:${b.id}:en-->`, b.text.en);
+      j.blocks = j.blocks.filter((x) => x.id !== b.id);
+      write(f[0], JSON.stringify(j, null, 1));
+    },
+  },
+  {
     id: 'catalog-title',
     gate: 'node tools/verify-catalog.mjs _reference-index.html',
     files: ['src/content/courses/CTSActs.json'],

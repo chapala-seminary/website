@@ -26,6 +26,13 @@
  * lesson-status.mjs as wanting review, and a later correction sets it to
  * machine-edited and is never overwritten.
  *
+ * It also applies tools/data/edits.json: the handful of changes to what a
+ * reader sees that were asked for and approved, each recorded in
+ * docs/content-changes.md. They live in a data file rather than in a commit
+ * because converting a course is re-runnable, and anything applied by hand
+ * afterwards is lost the next time it is. This tool is the step that puts
+ * them back.
+ *
  *   node tools/fill-translation.mjs --check
  *   node tools/fill-translation.mjs
  */
@@ -144,6 +151,14 @@ for (const job of jobs) {
 
   b.text[job.lang] = job.text;
   b.tr = { ...(b.tr ?? {}), [job.lang]: { status: 'machine', from: hash(b.text[have]) } };
+
+  /* When the language supplied is the lesson's SOURCE language -- two CTSWR
+     headings were written in Spanish and their English added here -- the
+     language that was already there needs provenance too. Without it, the
+     original reads as a translation of nothing and shows up as stale
+     forever. It is human, and it now corresponds to this English. */
+  if (job.lang === lesson.sourceLang)
+    b.tr[have] = { status: 'human', from: hash(job.text) };
   lesson.template = root.toString();
 
   console.log(`ok   ${where}: added ${job.lang} (${job.text.length} chars) in <${clone.tagName.toLowerCase()} class="${clone.getAttribute('class') ?? ''}">`);
@@ -153,4 +168,72 @@ for (const job of jobs) {
 
 console.log(`\n${done} filled, ${failed} could not be`);
 if (CHECK) console.log('nothing was written (--check)');
+
+/* ── Approved edits to what a reader sees ─────────────────────────────────
+   Two kinds so far: merging a heading that existed twice in two places into
+   one bilingual block, and removing a block outright. Both are described in
+   docs/content-changes.md; this is the part that performs them. */
+const EDITS = 'tools/data/edits.json';
+if (fs.existsSync(EDITS)) {
+  for (const e of JSON.parse(fs.readFileSync(EDITS, 'utf8'))) {
+    const file = path.join(ROOT, e.course, `${e.unit}.json`);
+    const where = `${e.course} unit ${e.unit}`;
+    if (!fs.existsSync(file)) { console.log(`FAIL ${where}: no such lesson`); failed++; continue; }
+    const l = JSON.parse(fs.readFileSync(file, 'utf8'));
+
+    if (e.op === 'remove') {
+      const b = l.blocks.find((b) => b.id === e.block);
+      if (!b) { console.log(`skip ${where}: ${e.block} is already gone`); continue; }
+      const before = l.template;
+      /* The element that held it goes too, or the page keeps an empty
+         paragraph where the note was. */
+      l.template = l.template.replace(
+        new RegExp(`\\n?<${e.holder}><!--cts:${e.block}:\\w+--></${e.holder}>`, 'g'), '');
+      if (l.template === before) { console.log(`FAIL ${where}: ${e.block} is not held by a plain <${e.holder}>`); failed++; continue; }
+      l.blocks = l.blocks.filter((x) => x.id !== e.block);
+      if (!CHECK) fs.writeFileSync(file, JSON.stringify(l, null, 1) + '\n');
+      console.log(`ok   ${where}: removed ${e.block} and the <${e.holder}> that held it`);
+      done++;
+      continue;
+    }
+
+    if (e.op === 'merge') {
+      const keep = l.blocks.find((b) => b.id === e.keep);
+      const absorb = l.blocks.find((b) => b.id === e.absorb);
+      if (!keep) { console.log(`FAIL ${where}: no block ${e.keep}`); failed++; continue; }
+      if (!absorb) { console.log(`skip ${where}: ${e.absorb} is already merged`); continue; }
+
+      let t = l.template;
+      const before = t;
+      for (const [id, lang] of [[e.keep, keep.sourceLangOf ?? 'en'], [e.absorb, 'es']]) {
+        const el = t.match(new RegExp(`<(\\w+)([^>]*)><!--cts:${id}:\\w+--></\\1>`));
+        if (!el) continue;
+        t = t.replace(el[0], '');                                  // lift it out
+        const target = new RegExp(`(<[^>]*><!--cts:${e.moveBefore}:${id === e.keep ? 'en' : 'es'}-->)`);
+        const put = el[0].replace(`cts:${id}:`, `cts:${e.keep}:`);  // one id for both
+        t = t.replace(target, put + '$1');                          // and put it back
+      }
+      if (t === before) { console.log(`FAIL ${where}: the template is not shaped as expected`); failed++; continue; }
+
+      for (const [lang, text] of Object.entries(absorb.text)) keep.text[lang] ??= text;
+      /* The merged block's two halves are each other's translation now, so
+         the provenance is rewritten to say so rather than pointing at the
+         text one of them used to sit beside. */
+      keep.tr = {};
+      for (const lang of Object.keys(keep.text))
+        if (lang !== l.sourceLang) keep.tr[lang] = { status: 'human', from: hash(keep.text[l.sourceLang]) };
+      l.blocks = l.blocks.filter((b) => b.id !== e.absorb);
+      l.template = t;
+      if (!CHECK) fs.writeFileSync(file, JSON.stringify(l, null, 1) + '\n');
+      console.log(`ok   ${where}: ${e.absorb} merged into ${e.keep}, both now before ${e.moveBefore}`);
+      done++;
+      continue;
+    }
+
+    console.log(`FAIL ${where}: unknown edit "${e.op}"`);
+    failed++;
+  }
+}
+
+console.log(failed ? `FAIL: ${failed} change(s) could not be applied` : 'all approved content changes are in place');
 process.exitCode = failed ? 1 : 0;

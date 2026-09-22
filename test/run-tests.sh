@@ -94,6 +94,10 @@ node test/lesson-translation.mjs
 # the content it edits have not drifted apart.
 node tools/verify-cms-config.mjs
 
+# Can a teacher reach every word? Text left in a page template renders
+# perfectly and cannot be edited, so nothing else would notice it.
+node tools/verify-editable.mjs
+
 API_BASE="http://127.0.0.1:$PORT" node test/api.test.mjs
 
 # Some environments (the sandboxed Linux VM the desktop app runs commands in,

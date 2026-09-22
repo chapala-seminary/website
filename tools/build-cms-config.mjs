@@ -97,7 +97,14 @@ const blockTypes = (langs) => {
 
   return Object.entries(TYPE_LABEL).map(([name, label]) => ({
     name, label, widget: 'object',
-    fields: [{ label: 'Block id', name: 'id', widget: 'hidden' }, text, tr],
+    fields: [
+      { label: 'Block id', name: 'id', widget: 'hidden' },
+      /* Set on text the page never gave a language -- a diagram label. Hidden
+         and carried through, or a save would drop it and the block would look
+         like an untranslated paragraph again. */
+      { label: 'Never had a language', name: 'unmarked', widget: 'hidden' },
+      text, tr,
+    ],
   }));
 };
 

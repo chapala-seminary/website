@@ -28,6 +28,7 @@ const label = (b, lang, src) => {
   /* A block with no source text is not untranslated -- it is a fragment that
      exists only in the other language. Counted separately, because "missing"
      is something to fix and this is something to know. */
+  if (b.unmarked) return 'one language only';
   if (b.text?.[src] == null) return b.text?.[lang] != null ? 'source-only-other' : null;
   if (b.text[lang] == null) return 'missing';
   if (isStale(b, lang, src)) return 'stale';
@@ -55,7 +56,7 @@ for (const course of courses) {
 
     const line = others.map((lang) => {
       const t = tally[lang];
-      anyStale += (t.stale || 0) + (t.missing || 0);
+      anyStale += (t.stale || 0) + (t.missing || 0);   // a label that never had a language is not a gap
       const parts = Object.entries(t).sort().map(([k, n]) => `${n} ${k}`);
       return `${lang}: ${parts.join(', ') || '—'}`;
     }).join('   ');
