@@ -101,7 +101,21 @@ function extractUnit(course, unit, html, problems, notes) {
      enormous block per unit -- a clean round trip and a useless CMS. */
   function align(a, b) {
     const n = a.length, m = b.length;
-    const key = (x) => x.tagName.toLowerCase() + '.' + (classes(x)[0] ?? '');
+    /* The key ignores the language markers themselves. Keying on the first
+       class made <div class="lang-en block"> and <div class="lang-es block">
+       look like different elements, so eight pairs that already had a human
+       translation were split into sixteen half-blocks and reported as missing
+       translations -- the worst kind of wrong, because the fix looks like
+       "translate these" rather than "pair these". */
+    const MARKER_CLASS = new Set(MARKERS.flat());
+    /* Heading levels are treated as one kind. Four headings in CTSCG are an
+       <h3> in English and an <h2> in Spanish -- the same heading, typed at a
+       different level -- and matching on the exact tag left them as two
+       half-blocks reported as untranslated. The template keeps each element's
+       real tag, so nothing about the rendered page changes. */
+    const kind = (x) => { const t = x.tagName.toLowerCase(); return /^h[1-6]$/.test(t) ? 'h' : t; };
+    const key = (x) => kind(x) + '.'
+      + (classes(x).filter((c) => !MARKER_CLASS.has(c))[0] ?? '');
     const L = Array.from({ length: n + 1 }, () => new Array(m + 1).fill(0));
     for (let i = n - 1; i >= 0; i--)
       for (let j = m - 1; j >= 0; j--)

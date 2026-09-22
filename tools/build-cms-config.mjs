@@ -76,7 +76,12 @@ const blockTypes = (langs) => {
     label: 'Translation status', name: 'tr', widget: 'object', required: false,
     collapsed: true,
     hint: 'Edit the English and every translation of this block is marked out of date automatically.',
-    fields: langs.slice(1).map((l) => ({
+    /* Every language, not just the non-source ones. A lesson has one source
+       language, but a BLOCK can have been translated the other way -- two
+       CTSWR headings were written in Spanish and their English supplied
+       later, so they carry provenance for English. Declaring only the
+       translations would have had a teacher's save delete it. */
+    fields: langs.map((l) => ({
       label: langLabel(l), name: l, widget: 'object', required: false,
       fields: [
         { label: 'Written by', name: 'status', widget: 'select', required: false,
