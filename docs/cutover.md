@@ -62,30 +62,48 @@ the seminary into somebody else's.
 So `account_id` is pinned in `wrangler.jsonc`, and `npm run deploy` refuses to
 run while it — or any database id — is still a placeholder.
 
-1. **Find the id.** Cloudflare dashboard → switch to the **Chapala** account →
-   Workers & Pages. The **Account ID** is in the right-hand column. It is a
-   32-character hex string, and it is not a secret.
+The Chapala account is **`119b0919229edb3185b69f1c6bd04b66`**, and it is
+already pinned in `wrangler.jsonc`. The interactive Cloudflare login on this
+machine reaches a *different* account —
+`Robertwilliamallen@gmail.com's Account`, `21c5e8afecce4643a0b50282140557b0` —
+and nothing else. `npx wrangler whoami` shows which, in the Account ID column.
 
-2. **Put it in `wrangler.jsonc`**, in *both* places: the top-level `account_id`
-   and `env.beta.account_id`.
+So deploying needs credentials of its own.
 
-3. **Check that wrangler agrees**, from the repository root:
+1. **Make an API token inside the Chapala account.** Switch to it in the
+   dashboard, then My Profile → API Tokens → Create Token → **Edit Cloudflare
+   Workers** template. Set *Account Resources* to the Chapala account only, and
+   add **D1 : Edit** to the permissions — the template does not include it, and
+   the student records live in D1.
+
+2. **Use it:**
 
    ```
+   export CLOUDFLARE_API_TOKEN=...      # in the shell you deploy from
    npx wrangler whoami
-   npx wrangler d1 list
    ```
 
-   `whoami` lists every account the login can reach. `d1 list` shows the
-   databases in the one that is actually being used — which is the question
-   that matters, and the one that went wrong. If it lists the Website Machine
-   databases, stop here: the login is pointed at the wrong account.
+   `whoami` should now show the Chapala account. wrangler prefers the token
+   over the interactive login whenever it is set, so nothing has to be logged
+   out of and the Website Machine login is untouched.
 
-4. **Clean up anything created in the wrong account.** Easiest from the
-   dashboard rather than the CLI, because it avoids doing account-switching and
-   deletion in the same breath: switch to the account it landed in, Storage &
-   Databases → D1, and delete `chapala-students-beta` there. It has no data in
-   it — the migrations may not even have run.
+   The token is a real secret: keep it in a password manager, not in the
+   repository, and not in a file that gets committed. It only ever needs to
+   exist in the shell you are deploying from.
+
+3. **Clean up what went into the wrong account.** The first
+   `wrangler d1 create` here ran before any of this and made
+   `chapala-students-beta` in `21c5e8af…`. Do it from the dashboard rather
+   than the CLI, so that account-switching and deletion are not happening in
+   the same breath: switch to that account → Storage & Databases → D1 → delete
+   it. It has no data in it.
+
+`npm run deploy` and `npm run deploy:beta` ask wrangler which account the
+credentials reach and refuse if it is not the one named in `wrangler.jsonc`.
+That is the check that was missing the first time. It matters most in the case
+that is not obvious: credentials that reach *several* accounts and a config
+pointing at the wrong one — there, a plain `wrangler deploy` succeeds, into the
+wrong account, and says nothing.
 
 Every deploy below goes through `npm run deploy` / `npm run deploy:beta`, which
 run that check first. Calling `wrangler deploy` directly skips it.

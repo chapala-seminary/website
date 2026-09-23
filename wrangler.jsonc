@@ -21,14 +21,19 @@
   // cleanup; `wrangler deploy` in the wrong account publishes the seminary
   // into somebody else's, which is a different kind of afternoon.
   //
-  // The id is on the Cloudflare dashboard: pick the account, Workers & Pages,
-  // and it is in the right-hand column as "Account ID".
+  // 119b0919229edb3185b69f1c6bd04b66 is the Chapala account. The one this
+  // machine's Cloudflare login can reach by itself is a DIFFERENT account, so
+  // deploying needs an API token created inside the Chapala account:
   //
-  // The placeholders below are checked by `npm run deploy`, which refuses to
-  // run while any of them is unfilled. docs/cutover.md has the order.
+  //   export CLOUDFLARE_API_TOKEN=...      # see docs/cutover.md, step zero
+  //
+  // wrangler prefers that token over the interactive login when it is set, so
+  // nothing has to be logged out of. `npm run deploy` checks that the
+  // credentials in use actually reach the account named here before it
+  // publishes anything.
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "chapala-seminary",
-  "account_id": "PUT-THE-CHAPALA-SEMINARY-ACCOUNT-ID-HERE",
+  "account_id": "119b0919229edb3185b69f1c6bd04b66",
   "main": "worker/index.js",
   "compatibility_date": "2026-09-01",
   "observability": { "enabled": true },
@@ -66,7 +71,7 @@
     // leave a row in the real students' table.
     "beta": {
       "name": "chapala-seminary-beta",
-      "account_id": "PUT-THE-CHAPALA-SEMINARY-ACCOUNT-ID-HERE",
+      "account_id": "119b0919229edb3185b69f1c6bd04b66",
       "observability": { "enabled": true },
       "assets": {
         "directory": "./dist",
