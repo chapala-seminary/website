@@ -51,6 +51,47 @@ unit page, or a search engine that indexed one, is what that check protects.
 
 ---
 
+## Step zero — which Cloudflare account
+
+This repository is worked on from a machine with access to two Cloudflare
+accounts. **wrangler with no `account_id` picks one for you**, and the first
+`wrangler d1 create` here went to the wrong one. A database in the wrong
+account is a minute's cleanup. `wrangler deploy` in the wrong account publishes
+the seminary into somebody else's.
+
+So `account_id` is pinned in `wrangler.jsonc`, and `npm run deploy` refuses to
+run while it — or any database id — is still a placeholder.
+
+1. **Find the id.** Cloudflare dashboard → switch to the **Chapala** account →
+   Workers & Pages. The **Account ID** is in the right-hand column. It is a
+   32-character hex string, and it is not a secret.
+
+2. **Put it in `wrangler.jsonc`**, in *both* places: the top-level `account_id`
+   and `env.beta.account_id`.
+
+3. **Check that wrangler agrees**, from the repository root:
+
+   ```
+   npx wrangler whoami
+   npx wrangler d1 list
+   ```
+
+   `whoami` lists every account the login can reach. `d1 list` shows the
+   databases in the one that is actually being used — which is the question
+   that matters, and the one that went wrong. If it lists the Website Machine
+   databases, stop here: the login is pointed at the wrong account.
+
+4. **Clean up anything created in the wrong account.** Easiest from the
+   dashboard rather than the CLI, because it avoids doing account-switching and
+   deletion in the same breath: switch to the account it landed in, Storage &
+   Databases → D1, and delete `chapala-students-beta` there. It has no data in
+   it — the migrations may not even have run.
+
+Every deploy below goes through `npm run deploy` / `npm run deploy:beta`, which
+run that check first. Calling `wrangler deploy` directly skips it.
+
+---
+
 # Stage one — beta
 
 Nothing about the live site changes in this stage. It can be abandoned at any
@@ -60,10 +101,14 @@ point by deleting the beta Worker.
 
 ```
 npx wrangler d1 create chapala-students-beta
+npx wrangler d1 list
 ```
 
 Copy the `database_id` it prints into **`wrangler.jsonc`**, under
 `env.beta.d1_databases[0].database_id`, replacing `PUT-THE-BETA-DATABASE-ID-HERE`.
+
+`d1 list` afterwards is not ceremony: it shows which account the database
+actually landed in. Step zero explains why that is worth ten seconds.
 
 ```
 npx wrangler d1 migrations apply chapala-students-beta --remote
@@ -75,9 +120,10 @@ the site must not leave a row in the real students' table.
 ## 2. Deploy it
 
 ```
-npm run build
-npx wrangler deploy --env beta
+npm run deploy:beta
 ```
+
+It checks the account and database ids, builds, and deploys, in that order.
 
 **Check:** the command prints a `*.workers.dev` URL. Open it. The catalog
 should load, and `<that URL>/CTSActsUnit3.html` should open the lesson **with
@@ -125,7 +171,7 @@ Then read some yourself. The ones worth a human:
   it is you, then delete it and confirm it is gone
 * one page on a phone
 
-Anything wrong here is cheap. Fix, `npx wrangler deploy --env beta`, look again.
+Anything wrong here is cheap. Fix, `npm run deploy:beta`, look again.
 
 ---
 
@@ -149,8 +195,7 @@ npx wrangler d1 migrations apply chapala-students --remote
 ## 6. Deploy production
 
 ```
-npm run build
-npx wrangler deploy
+npm run deploy
 ```
 
 This publishes the Worker but **does not yet serve the seminary** — nothing

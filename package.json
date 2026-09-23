@@ -7,7 +7,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "test": "test/run-tests.sh"
+    "test": "test/run-tests.sh",
+    "deploy": "node tools/verify-worker-config.mjs --deploy && npm run build && wrangler deploy",
+    "deploy:beta": "node tools/verify-worker-config.mjs --deploy && npm run build && wrangler deploy --env beta"
   },
   "dependencies": {
     "astro": "^7.3.3",

@@ -12,11 +12,23 @@
   //   npx wrangler deploy                 -> chapalaseminary.org
   //   npx wrangler deploy --env beta      -> beta.chapalaseminary.org
   //
-  // The two database_id values below are placeholders until the databases
-  // exist. `npx wrangler d1 create <name>` prints the real one. docs/cutover.md
-  // has the order.
+  // WHICH CLOUDFLARE ACCOUNT
+  //
+  // account_id is pinned, and that is not housekeeping. This repository is
+  // worked on from a machine that has access to two Cloudflare accounts, and
+  // wrangler with no account_id picks one for you. The first `d1 create` went
+  // to the wrong account. A database in the wrong account is a minute's
+  // cleanup; `wrangler deploy` in the wrong account publishes the seminary
+  // into somebody else's, which is a different kind of afternoon.
+  //
+  // The id is on the Cloudflare dashboard: pick the account, Workers & Pages,
+  // and it is in the right-hand column as "Account ID".
+  //
+  // The placeholders below are checked by `npm run deploy`, which refuses to
+  // run while any of them is unfilled. docs/cutover.md has the order.
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "chapala-seminary",
+  "account_id": "PUT-THE-CHAPALA-SEMINARY-ACCOUNT-ID-HERE",
   "main": "worker/index.js",
   "compatibility_date": "2026-09-01",
   "observability": { "enabled": true },
@@ -54,6 +66,7 @@
     // leave a row in the real students' table.
     "beta": {
       "name": "chapala-seminary-beta",
+      "account_id": "PUT-THE-CHAPALA-SEMINARY-ACCOUNT-ID-HERE",
       "observability": { "enabled": true },
       "assets": {
         "directory": "./dist",

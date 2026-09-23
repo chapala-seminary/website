@@ -42,12 +42,27 @@ ok(db(prod) && db(prod.env?.beta) && db(prod) !== db(prod.env.beta),
   'beta has a database of its own, so testing it cannot touch real records',
   `production: ${db(prod)}, beta: ${db(prod.env?.beta)}`);
 
-const placeholders = [prod, prod.env?.beta].filter(Boolean)
-  .filter((c) => /PUT-THE|REPLACE/i.test(c.d1_databases?.[0]?.database_id || ''));
+/* Anything still spelled PUT-THE-... */
+const DEPLOY = process.argv.includes('--deploy');
+const unset = [];
+for (const [name, c] of [['production', prod], ['beta', prod.env?.beta]]) {
+  if (!c) continue;
+  const bad = (v) => !v || /PUT-THE|REPLACE/i.test(String(v));
+  if (bad(c.account_id)) unset.push(`${name}: account_id`);
+  if (bad(c.d1_databases?.[0]?.database_id)) unset.push(`${name}: database_id`);
+}
 
 console.log(`${checks} assertions on the deployment configuration`);
-if (placeholders.length)
-  console.log(`  note: ${placeholders.length} database id(s) are still placeholders — `
-    + '`wrangler d1 create` prints the real ones. docs/cutover.md has the order.');
+if (unset.length && !DEPLOY)
+  console.log(`  note: ${unset.length} id(s) not filled in yet (${unset.join(', ')}). `
+    + '`npm run deploy` refuses until they are; docs/cutover.md has the order.');
+if (unset.length && DEPLOY) {
+  console.error(`\nREFUSING TO DEPLOY — ${unset.length} id(s) are still placeholders:`);
+  for (const u of unset) console.error('  ' + u);
+  console.error('\nThe account id decides WHICH CLOUDFLARE ACCOUNT this is published to, and');
+  console.error('this machine has access to more than one. Fill them in in wrangler.jsonc.');
+  console.error('The account id is on the dashboard under Workers & Pages, right-hand column.');
+  process.exit(1);
+}
 if (!fails.length) console.log('PASS — what is tested and what is deployed answer requests the same way.');
 else { console.log(`FAIL — ${fails.length}:`); fails.forEach(f => console.log('  ' + f)); process.exitCode = 1; }
