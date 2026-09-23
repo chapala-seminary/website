@@ -1,0 +1,74 @@
+{
+  // The seminary, as a Worker with static assets.
+  //
+  // NOT Cloudflare Pages. Pages answers /CTSActsUnit3.html with a 308 to
+  // /CTSActsUnit3 and offers no way to turn that off. Every one of the 801
+  // pages here ends in .html, 8,878 links between them do too, and the Astro
+  // config sets `build.format: 'file'` for the sole purpose of keeping those
+  // URLs exactly as students and search engines already have them. See
+  // worker/index.js.
+  //
+  // DEPLOYING
+  //   npx wrangler deploy                 -> chapalaseminary.org
+  //   npx wrangler deploy --env beta      -> beta.chapalaseminary.org
+  //
+  // The two database_id values below are placeholders until the databases
+  // exist. `npx wrangler d1 create <name>` prints the real one. docs/cutover.md
+  // has the order.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "chapala-seminary",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-09-01",
+  "observability": { "enabled": true },
+
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+
+    // "none": no rewriting of any kind. /CTSActsUnit3.html is served as
+    // asked. It also means "/" is not resolved to "/index.html", so the
+    // Worker does that itself -- visibly, and checked by
+    // tools/verify-worker-routing.mjs.
+    "html_handling": "none",
+    "not_found_handling": "none",
+
+    // Every request goes through the Worker, assets included. With the
+    // default (false) the assets are served without the Worker ever running,
+    // and the staging guard in worker/index.js would protect nothing: the
+    // HTML pages, which are the entire indexing problem, would go straight
+    // out with no header on them.
+    "run_worker_first": true
+  },
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "chapala-students",
+      "database_id": "PUT-THE-PRODUCTION-DATABASE-ID-HERE"
+    }
+  ],
+
+  "env": {
+    // beta.chapalaseminary.org. Same code, same assets, its own database --
+    // so that registering a test student while checking the site cannot
+    // leave a row in the real students' table.
+    "beta": {
+      "name": "chapala-seminary-beta",
+      "observability": { "enabled": true },
+      "assets": {
+        "directory": "./dist",
+        "binding": "ASSETS",
+        "html_handling": "none",
+        "not_found_handling": "none",
+        "run_worker_first": true
+      },
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "chapala-students-beta",
+          "database_id": "PUT-THE-BETA-DATABASE-ID-HERE"
+        }
+      ]
+    }
+  }
+}

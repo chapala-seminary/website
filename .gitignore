@@ -20,6 +20,9 @@ dist/
 # ---- Cloudflare / Wrangler (Stage 2: Worker + D1) ----
 .wrangler/
 .wrangler-local/
+# `wrangler dev` writes its build scratch next to the config it was given, and
+# the test harness's config lives in test/.
+test/.wrangler/
 .dev.vars
 .dev.vars.*
 !.dev.vars.example

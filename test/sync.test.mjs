@@ -2,7 +2,7 @@
 // one device to another, and is it as harmless as it claims when the API is
 // not there?
 //
-//   wrangler pages dev public --port 8798 --d1 DB=chapala-students ...
+//   wrangler dev --config test/wrangler.local.jsonc --port 8798 ...
 //   node test/sync.test.mjs
 
 import { chromium } from 'playwright';

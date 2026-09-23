@@ -1,0 +1,23 @@
+{
+  // The test harness's copy of wrangler.jsonc. Same Worker, same assets, same
+  // routing -- a local database instead of a real one.
+  //
+  // It is a copy rather than an environment of the real config because the
+  // real config's database_id is a placeholder until the databases exist, and
+  // a suite that cannot run until someone has deployed is a suite nobody runs.
+  // tools/verify-worker-config.mjs fails if the two drift apart on anything
+  // that changes how a request is answered.
+  "name": "chapala-seminary-local",
+  "main": "../worker/index.js",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "../dist",
+    "binding": "ASSETS",
+    "html_handling": "none",
+    "not_found_handling": "none",
+    "run_worker_first": true
+  },
+  "d1_databases": [
+    { "binding": "DB", "database_name": "chapala-students", "database_id": "local-dev" }
+  ]
+}

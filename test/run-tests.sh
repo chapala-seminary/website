@@ -15,7 +15,7 @@ cd "$(dirname "$0")/.."
 
 PORT=${PORT:-8798}
 STATE=.wrangler-local
-CONFIG=test/wrangler.local.toml
+CONFIG=test/wrangler.local.jsonc
 
 # A fresh database every run. The suite used to keep whatever the last run
 # left behind, which is fine until something in the schema counts -- the
@@ -52,8 +52,8 @@ rm -f "$STATE/ref.html"
 [ -n "$HAVE_REFERENCE" ] || rm -f dist/_reference-index.html ./_reference-index.html
 trap 'rm -f dist/synctest.html dist/syncdown.html dist/_reference-index.html ./_reference-index.html' EXIT
 
-# The local database is keyed by the database_id in $CONFIG, which is also what
-# `pages dev --d1 DB=local-dev` binds -- that is the only way the schema applied
+# The local database is keyed by the database_id in $CONFIG, which is also the
+# config `wrangler dev` runs from -- that is the only way the schema applied
 # here and the schema the Worker sees are the same one.
 # Every migration, in order -- not just the first one. Naming 0001 explicitly
 # meant that the day a second migration was added, the suite ran against a
@@ -80,8 +80,13 @@ if curl -sf -m 3 "http://127.0.0.1:$PORT/api/health" >/dev/null 2>&1; then
   exit 2
 fi
 
-npx wrangler pages dev dist --port "$PORT" --persist-to "$STATE" \
-  --d1 DB=local-dev --compatibility-date 2026-09-01 > "$STATE/dev.log" 2>&1 &
+# `wrangler dev`, not `pages dev`. The site is deployed as a Worker with
+# static assets rather than as a Pages project, because Pages answers
+# /CTSActsUnit3.html with a 308 to /CTSActsUnit3 and cannot be told not to --
+# and all 801 pages here end in .html. tools/verify-worker-routing.mjs is the
+# check that keeps it that way; worker/index.js says why at length.
+npx wrangler dev --config "$CONFIG" --port "$PORT" --persist-to "$STATE" \
+  > "$STATE/dev.log" 2>&1 &
 DEV=$!
 trap 'kill $DEV 2>/dev/null || true; rm -f dist/synctest.html dist/syncdown.html dist/_reference-index.html ./_reference-index.html' EXIT
 
@@ -90,6 +95,18 @@ for i in $(seq 1 60); do
   curl -sf "http://127.0.0.1:$PORT/api/health" >/dev/null && break
   [ "$i" = 60 ] && { echo "the dev server never came up:"; tail -20 "$STATE/dev.log"; exit 1; }
 done
+
+# How every URL is answered. This is what the decision not to use Cloudflare
+# Pages rests on: .html served rather than redirected, and "/" resolved to
+# index.html by the Worker, since html_handling "none" stops doing it.
+node tools/verify-worker-routing.mjs "http://127.0.0.1:$PORT"
+
+# And that the config the suite just tested still matches the one that gets
+# deployed, on every field that changes how a request is answered.
+node tools/verify-worker-config.mjs
+
+# A staging host must not be indexable, and must not change the real site.
+node tools/verify-staging.mjs "http://127.0.0.1:$PORT"
 
 node tools/verify-sitemap.mjs dist
 
