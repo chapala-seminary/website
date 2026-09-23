@@ -102,6 +102,7 @@ maintained and never rendered is the thing this was built to get rid of.
 | `npm run build` | `renderLesson` refuses an unknown partial name |
 | `tools/verify-unchanged.mjs <dir>` | a build before a refactor against the build after, element by element |
 | `tools/mutation-suite.mjs --only partial-unknown-name,partial-no-reading-room,partial-unused,partial-build-stops` | all four gates have been seen to go red |
+| `tools/mutation-suite.mjs` | 41 mutations, all caught, given a served `dist/` and the reference front page |
 
 One thing this work turned up that has nothing to do with templating: the
 mutation suite was **unable to run at all**. It reads every mutation's files at
@@ -118,6 +119,16 @@ whatever the tree had just lost became the standard it was measured against. It
 had cost 781 blocks of coverage. The harness now hashes `test/fixtures`,
 `tools/content-baseline.json` and the CMS config around every mutation, puts
 back anything a gate wrote to, and stops the run naming the file.
+
+A third: `catalog-title` and `gating-core` had been reporting INCONCLUSIVE, and
+the message blamed the checkout for not reaching commit `c257ea2`. It was not
+the checkout. `git show <commit>:<path> > file` creates the file *before* git
+runs, so a failed extraction leaves a **zero-byte** reference behind; if a run
+is interrupted before its cleanup fires, the next run finds that file, accepts
+it because it exists, and both gates report themselves already broken. Both
+the harness and `test/run-tests.sh` now check that the reference looks like the
+front page rather than merely existing, and say what to run if it is missing.
+With a real reference both mutations are caught, so the suite is **41 of 41**.
 
 `verify-unchanged.mjs` is the one to reach for the next time markup is moved
 around. Snapshot `dist/` first, make the change, rebuild, point it at the

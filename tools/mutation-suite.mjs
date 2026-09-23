@@ -25,25 +25,47 @@ import { parse as parseYaml, stringify as toYaml } from 'yaml';
 
 const BASE = process.env.BASE || 'http://127.0.0.1:8791';
 
+const read = (f) => fs.readFileSync(f, 'utf8');
+const write = (f, s) => fs.writeFileSync(f, s);
+
 /* verify-catalog.mjs and verify-gating.mjs both compare against the
    hand-written front page as it stood before the catalog was generated. It
    lives in git, not in the tree -- test/run-tests.sh extracts it and removes
    it again. Do the same here, or the gate errors on a missing file and this
    harness reports INCONCLUSIVE rather than testing anything. */
 const REF = '_reference-index.html';
+
+/* A reference has to be a front page, not just a path that exists.
+   `git show ... > file` creates the file BEFORE git runs, so a checkout that
+   cannot reach that commit leaves a zero-byte file behind -- and if the run is
+   interrupted before its trap fires, the next run finds it, uses it, and both
+   gates report "already red". Which is what happened: two mutations were
+   reported INCONCLUSIVE for a week against an empty file, and the message
+   blamed the checkout. Anything that does not look like the page is no
+   reference at all. */
+const usable = (f) => {
+  try { return fs.statSync(f).size > 10_000 && read(f).includes('<html'); }
+  catch { return false; }
+};
+
 let refMade = false;
-try {
-  if (!fs.existsSync(REF)) {
+if (!usable(REF)) {
+  try { fs.unlinkSync(REF); } catch {}
+  try {
     execSync(`git show c257ea2:public/index.html > ${REF}`, { stdio: 'pipe' });
     refMade = true;
+  } catch { /* fall through to the copy below */ }
+  if (!usable(REF)) {
+    try { fs.unlinkSync(REF); } catch {}
+    refMade = false;
+    if (usable('dist/' + REF)) { fs.copyFileSync('dist/' + REF, REF); refMade = true; }
   }
-} catch {
-  if (!fs.existsSync('dist/' + REF)) {
-    console.error(`no ${REF}: this checkout cannot reach commit c257ea2, so the ` +
-                  'catalog and gating mutations cannot run. Everything else can.');
-  } else {
-    fs.copyFileSync('dist/' + REF, REF); refMade = true;
-  }
+}
+if (!usable(REF)) {
+  console.error(`no usable ${REF}: this checkout cannot reach commit c257ea2 and there is `
+    + 'no copy in dist/, so the catalog and gating mutations cannot run. Everything else can.\n'
+    + 'To run them anyway, put the front page as it stood at c257ea2 at that path:\n'
+    + `  git show c257ea2:public/index.html > ${REF}`);
 }
 process.on('exit', () => { if (refMade) { try { fs.unlinkSync(REF); } catch {} } });
 const args = process.argv.slice(2);
@@ -54,8 +76,6 @@ const LIST = args.includes('--list');
 
 /* ---- helpers ----------------------------------------------------------- */
 
-const read = (f) => fs.readFileSync(f, 'utf8');
-const write = (f, s) => fs.writeFileSync(f, s);
 
 /** Replace exactly once, or throw. A mutation that silently did nothing would
  *  make the gate look better than it is. */

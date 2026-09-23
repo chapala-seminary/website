@@ -30,13 +30,20 @@ cp test/fixtures/synctest.html test/fixtures/syncdown.html dist/
 # in which case that one check is skipped, loudly, instead of aborting the run.
 # verify-gating.mjs loads it over HTTP, so it has to be in dist/;
 # verify-catalog.mjs reads it from the working directory. Both, or neither.
-if git show c257ea2:public/index.html > dist/_reference-index.html 2>/dev/null; then
-  cp dist/_reference-index.html ./_reference-index.html
+# Written to a temporary file first. `git show ... > file` creates the file
+# BEFORE git runs, so a checkout that cannot reach that commit used to leave a
+# zero-byte reference behind -- and if a run was interrupted before its trap
+# fired, the next one found that empty file, used it, and both gates reported
+# themselves already broken. Size is checked, not just existence.
+HAVE_REFERENCE=
+if git show c257ea2:public/index.html > "$STATE/ref.html" 2>/dev/null \
+   && [ -s "$STATE/ref.html" ]; then
+  cp "$STATE/ref.html" dist/_reference-index.html
+  cp "$STATE/ref.html" ./_reference-index.html
   HAVE_REFERENCE=1
-else
-  HAVE_REFERENCE=
-  rm -f dist/_reference-index.html
 fi
+rm -f "$STATE/ref.html"
+[ -n "$HAVE_REFERENCE" ] || rm -f dist/_reference-index.html ./_reference-index.html
 trap 'rm -f dist/synctest.html dist/syncdown.html dist/_reference-index.html ./_reference-index.html' EXIT
 
 # The local database is keyed by the database_id in $CONFIG, which is also what
