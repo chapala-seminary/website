@@ -42,6 +42,10 @@ const STANDALONE: Record<string, number> = {
   'CTSCounseling.html': 0.8,              // a course that is one page, not units
   'CTS_Narrative_Preaching.html': 0.8,    // likewise
   'CTS_WiseSpeak_Preaching.html': 0.8,    // likewise — and a foundation course
+  /* Indexed deliberately, and low. A student who wants their record deleted
+     will search for it rather than hunt through a footer, so this is one of
+     the few utility pages that has to be findable from outside the site. */
+  'CTSPrivacy.html': 0.3,
 };
 
 const isDigest = (f: string) => /_digest\.html$/i.test(f) || /_Digest_/i.test(f);

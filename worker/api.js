@@ -328,6 +328,74 @@ function verifyPage(cert, typed) {
 
 /* ---- dispatch ------------------------------------------------------------- */
 
+
+/* ---- making a guessed code cost something -------------------------------- *
+ *
+ * A student code is a bearer credential: whoever holds it holds the record.
+ * Sixty bits makes guessing one infeasible, but "infeasible" is an argument
+ * about arithmetic, and arithmetic is not a defence on its own -- it says
+ * nothing about somebody working through a list of codes leaked from a shared
+ * computer, and it leaves the seminary with no way to notice.
+ *
+ * Cloudflare's own rate limiting is the first line, but on the free plan that
+ * is one rule, matched on path, counted by address, over a ten-second window.
+ * It stops a flood and nothing slower. And the rate-limiting BINDING, which
+ * would be the natural thing to reach for, is not available to Pages
+ * Functions. So the real guard is here.
+ *
+ * Only FAILURES are counted. Limiting every request would slow the students
+ * this exists to protect -- a class finishing a unit together shares one
+ * address -- while doing nothing extra to someone guessing, whose requests are
+ * failures almost by definition.
+ *
+ * Registration is deliberately NOT throttled here. It is the one endpoint
+ * where a burst from one address is the normal case: a room full of students
+ * signing up together. The zone rule covers a flood of them, and a row per
+ * registration is cheap; throttling it would lock out a classroom to make an
+ * abuser's life slightly harder.
+ */
+const THROTTLE = { window: 600, limit: 20 };   // failed lookups per address per 10 minutes
+const unix = () => Math.floor(Date.now() / 1000);
+
+/* The address is never stored in the clear. This table would otherwise be a
+   log of who used the site and when, which the seminary has no reason to keep
+   and an attacker would very much like to read. */
+async function bucketOf(request, kind) {
+  const ip = request.headers.get('CF-Connecting-IP')
+    || (request.headers.get('x-forwarded-for') || '').split(',')[0].trim()
+    || 'unknown';
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(kind + '\u0000' + ip));
+  return [...new Uint8Array(digest).slice(0, 16)].map((b) => b.toString(16).padStart(2, '0')).join('');
+}
+
+/* Run something that can answer "no such record", and count it when it does.
+   The check happens BEFORE the lookup, so a blocked address costs a row read
+   and nothing else. */
+async function guarded(request, env, kind, run) {
+  let bucket;
+  try { bucket = await bucketOf(request, kind); } catch { return await run(); }
+
+  const since = unix() - THROTTLE.window;
+  const seen = await env.DB.prepare(
+    'SELECT COUNT(*) AS n FROM lookup_failures WHERE bucket = ? AND at >= ?').bind(bucket, since).first();
+  if ((seen?.n || 0) >= THROTTLE.limit)
+    return json({ error: 'too many attempts. Wait a few minutes and try again.' }, 429,
+      { 'retry-after': String(THROTTLE.window) });
+
+  const res = await run();
+  if (res.status === 404) {
+    const t = unix();
+    await env.DB.batch([
+      env.DB.prepare('INSERT INTO lookup_failures (bucket, at) VALUES (?, ?)').bind(bucket, t),
+      /* Pruned here rather than on a schedule. The rows are worthless once the
+         window has passed, and a cron job is one more thing to deploy and then
+         forget about until the table is enormous. */
+      env.DB.prepare('DELETE FROM lookup_failures WHERE at < ?').bind(t - THROTTLE.window),
+    ]);
+  }
+  return res;
+}
+
 export async function handle(request, env) {
   const url = new URL(request.url);
   const path = url.pathname.replace(/\/+$/, '') || '/';
@@ -337,28 +405,37 @@ export async function handle(request, env) {
     if (!env?.DB) throw new HttpError(503, 'student records are not configured');
 
     if (path === '/api/register' && method === 'POST') return await register(request, env);
-    if (path === '/api/sync' && method === 'POST') return await sync(request, env);
+    if (path === '/api/sync' && method === 'POST')
+      return await guarded(request, env, 'student', () => sync(request, env));
 
     let m;
     if ((m = /^\/api\/student\/([^/]+)$/.exec(path))) {
-      if (method === 'GET') return await hydrate(env, decodeURIComponent(m[1]));
-      if (method === 'DELETE') return await deleteStudent(env, decodeURIComponent(m[1]));
+      if (method === 'GET')
+        return await guarded(request, env, 'student', () => hydrate(env, decodeURIComponent(m[1])));
+      /* Throttled too, and for a sharper reason than the others: a guessed
+         code here does not read somebody's record, it destroys it. */
+      if (method === 'DELETE')
+        return await guarded(request, env, 'student', () => deleteStudent(env, decodeURIComponent(m[1])));
       return fail(405, 'method not allowed');
     }
     if (path === '/api/certificate' && method === 'POST') return await issueCertificate(request, env);
 
     if ((m = /^\/api\/verify\/([^/]+)$/.exec(path)) && method === 'GET') {
-      const cert = await lookupCertificate(env, decodeURIComponent(m[1]));
-      return cert && !cert.revoked_at
-        ? json({ valid: true, name: cert.student_name, title: cert.title, level: cert.level, course: cert.course, issued: cert.issued_at })
-        : json({ valid: false }, cert ? 200 : 404);
+      return await guarded(request, env, 'verify', async () => {
+        const cert = await lookupCertificate(env, decodeURIComponent(m[1]));
+        return cert && !cert.revoked_at
+          ? json({ valid: true, name: cert.student_name, title: cert.title, level: cert.level, course: cert.course, issued: cert.issued_at })
+          : json({ valid: false }, cert ? 200 : 404);
+      });
     }
     if ((m = /^\/verify\/([^/]+)$/.exec(path)) && method === 'GET') {
+      return await guarded(request, env, 'verify', async () => {
       const typed = decodeURIComponent(m[1]);
       const cert = await lookupCertificate(env, typed);
       return new Response(verifyPage(cert, typed), {
         status: cert ? 200 : 404,
         headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store' },
+      });
       });
     }
     if (path === '/api/health') return json({ ok: true });

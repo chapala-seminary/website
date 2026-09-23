@@ -136,6 +136,18 @@
    * console noise, and no need to add a script tag on the day the database
    * goes live. When the API appears, this starts working by itself. */
   var API_KEY = 'cts_sync_api';
+
+  /* A student who asked to be forgotten stays forgotten.
+   *
+   * Deleting the record is not enough on its own. push() registers a new
+   * student whenever there is no code, and the name and email are still in
+   * this browser, so the very next unit they pass would quietly hand the
+   * seminary the same details again and the delete would undo itself. This
+   * flag is what makes it stick: set when a record is deleted, and cleared
+   * only when the student says, deliberately, that they want to take part
+   * again. Nothing reads it but this file. */
+  var OFF_KEY = 'cts_sync_off';
+  function optedOut() { return get(OFF_KEY) === '1'; }
   var apiCheck = null;
   function apiPresent() {
     if (apiCheck) return apiCheck;
@@ -157,7 +169,7 @@
   var inFlight = false;
 
   function syncOnce(force) {
-    if (inFlight || !available()) return Promise.resolve(null);
+    if (inFlight || !available() || optedOut()) return Promise.resolve(null);
     var snap = snapshot();
     // Nothing to sync until the student has registered in this browser.
     if (!snap.student || !snap.student.name) return Promise.resolve(null);
@@ -218,11 +230,30 @@
       .catch(function () { return { ok: false, error: 'could not reach the seminary' }; });
   }
 
+  /* Delete this student's record at the seminary.
+   *
+   * The code goes with it. It used to stay behind, which made the delete a
+   * lie in two ways at once: the browser still held the student's code, name
+   * and email after they had asked to be forgotten, and every poll from then
+   * on posted that code to an endpoint that answered 404. Clearing it is also
+   * what stops the record coming back -- push() registers a new student only
+   * when there is no code, so a code left behind is a code that keeps trying.
+   *
+   * What this does NOT do is erase the progress saved in this browser. That is
+   * a different request -- "stop holding my details" is not "delete my work" --
+   * and the page that offers this offers that separately, and says so. */
   function forget() {
     var c = get(CODE_KEY);
     if (!c) return Promise.resolve({ ok: false, error: 'this browser has no student code' });
     return fetch(API + '/student/' + encodeURIComponent(c), { method: 'DELETE', credentials: 'omit' })
-      .then(function (r) { return { ok: r.ok }; })
+      .then(function (r) {
+        if (!r.ok) return { ok: false, error: 'the seminary could not delete that record' };
+        try { localStorage.removeItem(CODE_KEY); } catch (e) {}
+        try { sessionStorage.removeItem(API_KEY); } catch (e) {}
+        set(OFF_KEY, '1');
+        lastDigest = null;
+        return { ok: true };
+      })
       .catch(function () { return { ok: false, error: 'could not reach the seminary' }; });
   }
 
@@ -250,5 +281,19 @@
     sync: function () { return syncOnce(true); },
     restore: restore,
     forget: forget,
+
+    /* Whether this browser is holding back from the seminary, and the way
+       back. A student who deleted their record and later wants their work
+       kept again has to be able to say so; an opt-out with no way out is not
+       a choice, it is a trap. rejoin() only permits syncing again -- it sends
+       nothing by itself, so the student's next passed unit is what registers
+       them, exactly as it would for anyone new. */
+    optedOut: optedOut,
+    rejoin: function () {
+      try { localStorage.removeItem(OFF_KEY); } catch (e) {}
+      apiCheck = null;
+      try { sessionStorage.removeItem(API_KEY); } catch (e) {}
+      return true;
+    },
   };
 })();

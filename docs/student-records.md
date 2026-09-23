@@ -155,24 +155,49 @@ making the merge take the later timestamp, letting a sync delete progress, and
 letting a restore clear local keys. A suite that only ever passes is worth
 nothing.
 
-## Still to decide before this goes live
+## Decided since this was written
 
-1. **The certificate pages** write `cts_done_codes` and do not yet load the sync
-   script. A student who finishes a course and then opens any unit page still
-   gets it synced, so nothing is lost — but the delay is avoidable.
-2. **A privacy statement and a delete path in the UI.** `CTS_SYNC.forget()`
-   exists; a page that calls it does not. Storing names, emails and countries
-   server-side turns a `localStorage` app into a system holding personal data on
-   identifiable people across jurisdictions. Small work now, unpleasant later.
-3. **Rate limiting.** 60 bits makes guessing a code infeasible, but a
-   Cloudflare rate-limiting rule on `/api/*` costs nothing and should exist.
+1. **The certificate pages** now load the sync client. All 69 of them, checked
+   by `tools/verify-certificates.mjs`.
+2. **A privacy statement and a delete path.** `CTSPrivacy.html` says what is
+   kept and where, shows a student their own record, and deletes it. Linked
+   from the footer of every unit page. `tools/verify-privacy.mjs` drives the
+   whole thing in a browser against a real Worker, because a delete button that
+   does not work is worse than no page at all.
+
+   Building it turned up a defect worth naming: `forget()` deleted the
+   seminary's copy but left the student code in the browser, so the next sync
+   registered the same person again from the name still in `localStorage` and
+   the delete quietly undid itself. It now clears the code and sets an opt-out
+   that the client honours until the student says otherwise.
+3. **Rate limiting.** Two layers, because the obvious one is thin and the
+   natural one is unavailable:
+   * A Cloudflare rate limiting rule on `/api/*`. On the Free plan that is one
+     rule, matching on path only, counting by IP only, over a fixed ten-second
+     window. It stops a flood and nothing slower. `docs/cutover.md` has the
+     exact settings.
+   * `worker/api.js` counts **failed** lookups per address — 20 in ten minutes,
+     then 429 with a `Retry-After`. Failures only, so a class finishing a unit
+     together is not throttled while somebody working through guessed codes is.
+     Registration is deliberately exempt: a room full of students signing up at
+     once is the normal case.
+
+     The Workers rate-limiting binding would have been the natural tool and is
+     **not available to Pages Functions**, which is why this is hand-rolled
+     against D1. Migration `0002_throttle.sql`; the address is stored hashed,
+     because otherwise that table is a log of who used the site and when.
 
 ## Deploying
+
+The full order, with what to check after each step and how to roll back, is in
+**`docs/cutover.md`**. The database part is:
 
 ```
 npx wrangler d1 create chapala-students
 npx wrangler d1 migrations apply chapala-students --remote
-# bind D1 = chapala-students to the Pages project (Settings → Bindings)
+# bind D1 = chapala-students to the Pages project (Settings -> Bindings)
 ```
 
-Nothing else. The Functions deploy with the site, and `cts-sync.js` notices.
+The binding must be named `DB`; the Worker looks for `env.DB` and answers 503
+to everything without it. The Functions deploy with the site, and
+`cts-sync.js` notices.

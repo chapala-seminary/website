@@ -166,6 +166,31 @@ It now lives once, in `src/lib/partials.ts`, and the templates say
 
 ---
 
+## 7. Every unit page gained one footer link — **Your information · Su información**
+
+A change a reader sees, so it is listed here rather than slipped in.
+
+The footer of all 451 unit pages, and of `cts-backup.html`, now carries a third
+link beside *All courses* and *Save my progress*:
+
+> Your information &middot; Su información
+
+It goes to `CTSPrivacy.html`, which says what the seminary keeps about a
+student, shows them their own record, and deletes it on request. That page had
+to exist before the student database is deployed: storing names, emails and
+countries on identifiable people across several countries without a visible way
+to see or delete them is not something to fix afterwards.
+
+Nothing else on any page changed. `test/fixtures/lesson-render.json` was
+re-recorded for this and this alone — the build before the link was added was
+compared against the reference first, and matched all 451 pages, so the only
+difference the new reference encodes is the link itself.
+
+The page is also in the sitemap, deliberately and at low priority: a student who
+wants their record deleted will search for it rather than hunt through a footer.
+
+---
+
 ## How to check any of this yourself
 
 ```

@@ -119,11 +119,45 @@ ok(probes.length === 1 && /\/api\/health$/.test(probes[0]),
 
 /* ---- deleting a record --------------------------------------------------- */
 
+const doneBefore = await one.page.evaluate(() => localStorage.getItem('cts_done_codes'));
 const gone = await one.page.evaluate(() => window.CTS_SYNC.forget());
 ok(gone.ok === true, 'a student can delete their record');
 const after = await device();
 ok((await after.page.evaluate(c => window.CTS_SYNC.restore(c), a.code)).ok === false,
   'and it is really gone');
+
+/* The code used to stay in the browser after the record was deleted, which
+   made the delete a lie twice over: the device still held the student's code
+   after they had asked to be forgotten, and every poll from then on posted it
+   to an endpoint that answered 404. */
+ok(await one.page.evaluate(() => window.CTS_SYNC.code()) === null,
+  'the student code is gone from the browser too, not just from the seminary');
+
+/* And it does not come back. push() registers a new student when there is no
+   code, so a delete that left the code behind would keep 404ing, while one
+   that cleared it must not quietly register the same person again. */
+await sync(one.page); await sync(one.page);
+await one.page.waitForTimeout(300);
+ok(await one.page.evaluate(() => window.CTS_SYNC.code()) === null,
+  'and syncing afterwards does not silently register them again');
+
+/* Deleting the seminary's copy is not the same request as erasing the work on
+   this device, and must not be treated as one. */
+ok(await one.page.evaluate(() => localStorage.getItem('cts_done_codes')) === doneBefore,
+  'the progress saved in this browser is left exactly as it was');
+
+/* An opt-out with no way out is not a choice. */
+ok(await one.page.evaluate(() => window.CTS_SYNC.optedOut()) === true,
+  'the browser reports that it is holding back from the seminary');
+await one.page.evaluate(() => window.CTS_SYNC.rejoin());
+ok(await one.page.evaluate(() => window.CTS_SYNC.optedOut()) === false,
+  'and a student who changes their mind can take part again');
+await sync(one.page);
+await one.page.waitForTimeout(300);
+const rejoined = await one.page.evaluate(() => window.CTS_SYNC.code());
+ok(typeof rejoined === 'string' && rejoined.length > 0 && rejoined !== a.code,
+  'after rejoining they are registered afresh, with a new code',
+  `code after rejoining: ${rejoined}`);
 
 await browser.close();
 console.log(`${checks} browser assertions against the Worker and D1`);

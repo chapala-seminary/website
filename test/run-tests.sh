@@ -17,6 +17,12 @@ PORT=${PORT:-8798}
 STATE=.wrangler-local
 CONFIG=test/wrangler.local.toml
 
+# A fresh database every run. The suite used to keep whatever the last run
+# left behind, which is fine until something in the schema counts -- the
+# moment failed lookups were being throttled, run two inherited run one's
+# failures and the API tests failed in a way that had nothing to do with the
+# change being tested.
+rm -rf "$STATE"
 mkdir -p "$STATE"
 [ -d dist ] || { echo "run 'npm run build' first"; exit 2; }
 # Copied in for the run and removed again on the way out: a fixture page left
@@ -49,8 +55,30 @@ trap 'rm -f dist/synctest.html dist/syncdown.html dist/_reference-index.html ./_
 # The local database is keyed by the database_id in $CONFIG, which is also what
 # `pages dev --d1 DB=local-dev` binds -- that is the only way the schema applied
 # here and the schema the Worker sees are the same one.
-npx wrangler d1 execute chapala-students --local --persist-to "$STATE" \
-  --config "$CONFIG" --file migrations/0001_init.sql >/dev/null
+# Every migration, in order -- not just the first one. Naming 0001 explicitly
+# meant that the day a second migration was added, the suite ran against a
+# schema the deployed database would not have, and the tests for whatever that
+# migration added would fail in a way that looked like the feature was broken.
+for m in migrations/*.sql; do
+  npx wrangler d1 execute chapala-students --local --persist-to "$STATE" \
+    --config "$CONFIG" --file "$m" >/dev/null
+done
+
+# Nothing else may be on this port. A dev server left behind by an earlier run
+# answers /api/health perfectly well while pointing at a database directory
+# this run has just deleted -- so the suite comes up green on the parts that do
+# not touch it and fails the rest for reasons that have nothing to do with the
+# code. Two full runs were spent on exactly that. Fail here instead, and say
+# what to do about it.
+if curl -sf -m 3 "http://127.0.0.1:$PORT/api/health" >/dev/null 2>&1; then
+  echo "Something is already serving port $PORT -- almost certainly a dev server"
+  echo "left behind by an earlier run. This suite would test that instead of its"
+  echo "own build. Stop it first:"
+  echo
+  echo "  ps -eo pid,cmd | grep -E 'workerd|wrangler' | grep -v grep"
+  echo
+  exit 2
+fi
 
 npx wrangler pages dev dist --port "$PORT" --persist-to "$STATE" \
   --d1 DB=local-dev --compatibility-date 2026-09-01 > "$STATE/dev.log" 2>&1 &
@@ -142,6 +170,11 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
     echo "           checkout to compare the generated catalog against."
   fi
   SYNC_BASE="http://127.0.0.1:$PORT" node test/code-ui.test.mjs
+
+  # The page that shows a student what is held about them and deletes it.
+  # Driven in a browser against the real Worker, because a privacy page whose
+  # delete button does not work is worse than no page at all.
+  node tools/verify-privacy.mjs "http://127.0.0.1:$PORT"
 else
   echo
   echo "  #######################################################################"
@@ -166,3 +199,10 @@ else
   echo "  #######################################################################"
   echo
 fi
+
+# LAST, and it has to be. The throttle counts failed lookups per address, and
+# every test here reaches the Worker from 127.0.0.1 -- one address, one budget.
+# Run these earlier and everything after them starts getting 429s and failing
+# for reasons that have nothing to do with what it is testing. test/throttle.test.mjs
+# says the same thing at greater length.
+API_BASE="http://127.0.0.1:$PORT" node test/throttle.test.mjs
