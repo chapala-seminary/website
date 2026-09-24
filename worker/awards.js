@@ -13,11 +13,12 @@
  * what the student sees. If those change, this must change with them --
  * test/api.test.mjs pins the numbers.
  *
- * Known limit: course_completions records that a course was finished, not on
- * which track. The master's degrees therefore also require the student to be
- * on a master's track now. A student who finished courses on the certificate
- * track and then switched would pass this check; the pages have the same gap
- * (they keep a separate cts_mdiv_done_codes the sync does not yet carry).
+ * A completion carries the track it was earned on (migrations/0003_tracker),
+ * because a degree counts only the courses finished at its own level: the
+ * Certificate of Ministry and the Associate count every course, the master's
+ * degrees only those finished on a master's track. A completion whose track
+ * is unknown (recorded before 0003, or from a browser with no master's list)
+ * counts as the student's current track, which is the best anyone can do.
  */
 import catalog from './catalog.json';
 
@@ -54,14 +55,23 @@ export function courseShortfall(slug, unitsDone) {
   return missing.length ? `units not recorded as passed: ${missing.join(', ')}` : null;
 }
 
-export function degreeShortfall(level, doneCodes, track) {
+/** completions: [{code, track}] (a bare code string is taken as track
+ *  unknown); track: the student's current track, used where a completion's
+ *  own track is unknown. null when the record supports the award. */
+export function degreeShortfall(level, completions, track) {
   const d = DEGREES[level];
   if (!d) return 'unknown award';
-  const have = new Set(doneCodes.map((c) => String(c).toUpperCase()));
+  const own = String(track || '').toLowerCase();
+  const have = new Set();
+  for (const c of completions) {
+    const code = String(typeof c === 'string' ? c : c.code).toUpperCase();
+    const earned = String((typeof c === 'string' ? null : c.track) || own).toLowerCase();
+    if (!d.masters || MASTERS.has(earned)) have.add(code);
+  }
+  const level_ = d.masters ? "master's-level " : '';
   const problems = [];
-  if (have.size < d.courses) problems.push(`${have.size} of ${d.courses} courses recorded`);
+  if (have.size < d.courses) problems.push(`${have.size} of ${d.courses} ${level_}courses recorded`);
   const core = d.core.filter((c) => !have.has(c));
-  if (core.length) problems.push(`required courses not recorded: ${core.join(', ')}`);
-  if (d.masters && !MASTERS.has(String(track || '').toLowerCase())) problems.push('student is not on a master\'s track');
+  if (core.length) problems.push(`required ${level_}courses not recorded: ${core.join(', ')}`);
   return problems.length ? problems.join('; ') : null;
 }

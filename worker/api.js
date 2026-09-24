@@ -21,9 +21,10 @@
  * from a student, which makes a stale or offline device harmless.
  */
 
-import { courseShortfall, degreeShortfall } from './awards.js';
+import { courseShortfall, degreeShortfall, DEGREES } from './awards.js';
+import catalog from './catalog.json';
 
-const MAX = { name: 120, email: 160, country: 80, track: 24, goal: 400, title: 200, course: 64, code: 40 };
+const MAX = { name: 120, email: 160, country: 80, track: 24, goal: 400, heard: 40, title: 200, course: 64, code: 40 };
 const TRACKS = new Set(['cert', 'certificate', 'associate', 'thm', 'mdiv']);
 const LEVELS = new Set(['course', 'certificate', 'associate', 'thm', 'mdiv']);
 
@@ -92,18 +93,30 @@ async function body(request) {
 
 async function loadState(env, id) {
   const student = await env.DB.prepare(
-    'SELECT id, name, email, country, track, goal, created_at, updated_at FROM students WHERE id = ?')
+    'SELECT id, name, email, country, track, goal, heard, created_at, updated_at FROM students WHERE id = ?')
     .bind(id).first();
   if (!student) return null;
   const [progress, completions, certs] = await Promise.all([
     env.DB.prepare('SELECT course, unit, completed_at FROM unit_progress WHERE student_id = ? ORDER BY course, unit').bind(id).all(),
-    env.DB.prepare('SELECT code, completed_at FROM course_completions WHERE student_id = ? ORDER BY code').bind(id).all(),
+    env.DB.prepare('SELECT code, track, completed_at FROM course_completions WHERE student_id = ? ORDER BY code').bind(id).all(),
     env.DB.prepare('SELECT verify_code, level, course, title, issued_at, revoked_at FROM certificates WHERE student_id = ? ORDER BY issued_at').bind(id).all(),
   ]);
+  // Each completion carries the track it was earned on and the course name
+  // the certificate page wrote, so a device restored from a code can rebuild
+  // the lists the degree pages count (cts_mdiv_done_codes, cts_degree_courses)
+  // and not only the gating list. The degrees are computed here once, by the
+  // same rules that issue them, for the privacy page and the tracker.
+  const done = (completions.results ?? []).map(r => ({
+    code: r.code, track: r.track ?? null, name: catalog.completions[r.code]?.name ?? null, completed_at: r.completed_at,
+  }));
+  const degrees = {};
+  for (const level of Object.keys(DEGREES)) degrees[level] = degreeShortfall(level, done, student.track) === null;
   return {
     student,
     progress: progress.results ?? [],
-    doneCodes: (completions.results ?? []).map(r => r.code),
+    doneCodes: done.map(d => d.code),
+    completions: done,
+    degrees,
     certificates: certs.results ?? [],
   };
 }
@@ -128,12 +141,25 @@ function progressRows(id, raw) {
   return [...seen.values()].map(v => [id, v.course, v.unit, v.at]);
 }
 
-function completionRows(id, raw) {
+/* doneCodes is the gating list every browser has kept; completionTracks is
+ * {CODE: 'mdiv'|'thm'} from the master's lists the certificate pages keep
+ * alongside it. A browser that sends the map knows its lists, so a code
+ * missing from them was earned on the certificate track -- that is what the
+ * lists mean. A browser that sends no map at all predates it (or the sync
+ * client is older), and there the student's own track is the best answer. */
+function completionRows(id, raw, tracks, studentTrack) {
   if (!Array.isArray(raw)) return [];
+  const sent = tracks && typeof tracks === 'object';
+  const t = sent ? tracks : {};
+  const fallback = !sent && (studentTrack === 'thm' || studentTrack === 'mdiv') ? studentTrack : 'cert';
   const out = new Map();
   for (const c of raw.slice(0, 500)) {
     const code = str(c, MAX.code, { field: 'done code' });
-    if (code && /^[A-Z0-9_]+$/i.test(code)) out.set(code.toUpperCase(), [id, code.toUpperCase(), now()]);
+    if (!code || !/^[A-Z0-9_]+$/i.test(code)) continue;
+    const up = code.toUpperCase();
+    const declared = String(t[up] ?? t[code] ?? '').toLowerCase();
+    const track = declared === 'thm' || declared === 'mdiv' ? declared : fallback;
+    out.set(up, [id, up, track, now()]);
   }
   return [...out.values()];
 }
@@ -152,10 +178,10 @@ async function register(request, env) {
   for (let attempt = 0; attempt < 5; attempt++) {
     const id = studentCode();
     const res = await env.DB.prepare(
-      `INSERT INTO students (id, name, email, country, track, goal, created_at, updated_at)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO NOTHING`)
+      `INSERT INTO students (id, name, email, country, track, goal, heard, created_at, updated_at)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO NOTHING`)
       .bind(id, name, str(b.email, MAX.email, { field: 'email' }), str(b.country, MAX.country, { field: 'country' }),
-        track, str(b.goal, MAX.goal, { field: 'goal' }), t, t).run();
+        track, str(b.goal, MAX.goal, { field: 'goal' }), str(b.heard, MAX.heard, { field: 'heard' }), t, t).run();
     if (res.meta?.changes) return json({ code: id, student: (await loadState(env, id)).student }, 201);
   }
   throw new HttpError(503, 'could not allocate a student code, please try again');
@@ -166,7 +192,7 @@ async function sync(request, env) {
   const id = normaliseCode(b.code);
   if (!id) throw new HttpError(400, 'a student code is required');
 
-  const exists = await env.DB.prepare('SELECT id FROM students WHERE id = ?').bind(id).first();
+  const exists = await env.DB.prepare('SELECT id, track FROM students WHERE id = ?').bind(id).first();
   if (!exists) return fail(404, 'no record for that student code');
 
   const statements = [];
@@ -181,9 +207,9 @@ async function sync(request, env) {
     statements.push(env.DB.prepare(
       `UPDATE students SET name = COALESCE(?, name), email = COALESCE(?, email),
          country = COALESCE(?, country), track = COALESCE(?, track),
-         goal = COALESCE(?, goal), updated_at = ? WHERE id = ?`)
+         goal = COALESCE(?, goal), heard = COALESCE(?, heard), updated_at = ? WHERE id = ?`)
       .bind(name, str(s.email, MAX.email, { field: 'email' }), str(s.country, MAX.country, { field: 'country' }),
-        track, str(s.goal, MAX.goal, { field: 'goal' }), now(), id));
+        track, str(s.goal, MAX.goal, { field: 'goal' }), str(s.heard, MAX.heard, { field: 'heard' }), now(), id));
   }
 
   for (const row of progressRows(id, b.progress))
@@ -192,10 +218,14 @@ async function sync(request, env) {
        ON CONFLICT(student_id, course, unit) DO UPDATE SET completed_at = MIN(completed_at, excluded.completed_at)`)
       .bind(...row));
 
-  for (const row of completionRows(id, b.doneCodes))
+  // The track of a completion is filled in once and never downgraded: a row
+  // that arrived without one (before 0003_tracker, or from a browser with no
+  // master's list) takes the first track any device reports for it.
+  const trackNow = (s && typeof s === 'object' && String(s.track || '').toLowerCase()) || exists.track;
+  for (const row of completionRows(id, b.doneCodes, b.completionTracks, trackNow))
     statements.push(env.DB.prepare(
-      `INSERT INTO course_completions (student_id, code, completed_at) VALUES (?, ?, ?)
-       ON CONFLICT(student_id, code) DO NOTHING`).bind(...row));
+      `INSERT INTO course_completions (student_id, code, track, completed_at) VALUES (?, ?, ?, ?)
+       ON CONFLICT(student_id, code) DO UPDATE SET track = COALESCE(course_completions.track, excluded.track)`).bind(...row));
 
   if (statements.length) await env.DB.batch(statements);
   return json(await loadState(env, id));
@@ -234,8 +264,8 @@ async function issueCertificate(request, env) {
     if (why) return fail(409, why);
   } else {
     const rows = await env.DB.prepare(
-      'SELECT code FROM course_completions WHERE student_id = ?').bind(id).all();
-    const why = degreeShortfall(level, (rows.results ?? []).map((r) => r.code), student.track);
+      'SELECT code, track FROM course_completions WHERE student_id = ?').bind(id).all();
+    const why = degreeShortfall(level, rows.results ?? [], student.track);
     if (why) return fail(409, why);
   }
 
@@ -430,6 +460,11 @@ export async function handle(request, env) {
       return fail(405, 'method not allowed');
     }
     if (path === '/api/certificate' && method === 'POST') return await issueCertificate(request, env);
+    // Public, static: the courses and the completion codes with their names,
+    // for anyone reading the records (the student tracker turns codes into
+    // course names with it). Nothing about any student is in it.
+    if (path === '/api/catalog' && method === 'GET')
+      return json(catalog, 200, { 'cache-control': 'public, max-age=3600' });
 
     if ((m = /^\/api\/verify\/([^/]+)$/.exec(path)) && method === 'GET') {
       return await guarded(request, env, 'verify', async () => {

@@ -159,6 +159,13 @@ node tools/verify-partials.mjs
 
 API_BASE="http://127.0.0.1:$PORT" node test/api.test.mjs
 
+# The view the student tracker reads (migrations/0003_tracker.sql) must be
+# there and must answer -- a migration that broke it would fail no API test.
+npx wrangler d1 execute chapala-students --local --persist-to "$STATE" --config "$CONFIG" \
+  --command "SELECT student_id, courses_done, foundation_done, masters_done, mdiv_core_done FROM degree_progress LIMIT 1" >/dev/null \
+  && echo "PASS — the degree_progress view answers." \
+  || { echo "FAIL — the degree_progress view is missing or broken"; exit 1; }
+
 # Some environments (the sandboxed Linux VM the desktop app runs commands in,
 # for one) have node and wrangler but not the shared libraries Chromium needs.
 # A skip is reported loudly and names what went unverified: a quiet skip is how

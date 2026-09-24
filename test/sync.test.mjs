@@ -25,25 +25,33 @@ async function device(page_ = 'synctest.html') {
   await page.goto(`${BASE}/${page_}`, { waitUntil: 'load' });
   return { ctx, page, errors };
 }
-const seed = (page, student, units, done = []) => page.evaluate(([s, u, d]) => {
+const seed = (page, student, units, done = [], mdivDone = [], names = []) => page.evaluate(([s, u, d, m, nm]) => {
   localStorage.setItem('cts_student', JSON.stringify(s));
   localStorage.setItem('cts_track', s.track);
   localStorage.setItem('cts_done_codes', JSON.stringify(d));
+  if (m.length) localStorage.setItem('cts_mdiv_done_codes', JSON.stringify(m));
+  if (nm.length) localStorage.setItem('cts_degree_courses', JSON.stringify(nm));
   u.forEach(([c, n]) => localStorage.setItem(`cts_${c}_u${n}_mc_passed`, '1'));
-}, [student, units, done]);
+}, [student, units, done, mdivDone, names]);
 const sync = page => page.evaluate(() => window.CTS_SYNC.sync());
 const snap = page => page.evaluate(() => ({
   code: window.CTS_SYNC.code(),
   units: window.CTS_SYNC.snapshot().progress.map(p => `${p.course}:${p.unit}`).sort(),
   done: window.CTS_SYNC.snapshot().doneCodes.slice().sort(),
   name: (JSON.parse(localStorage.getItem('cts_student') || '{}')).name,
+  heard: (JSON.parse(localStorage.getItem('cts_student') || '{}')).heard,
+  mdivDone: JSON.parse(localStorage.getItem('cts_mdiv_done_codes') || '[]').sort(),
+  names: JSON.parse(localStorage.getItem('cts_degree_courses') || '[]').sort(),
 }));
 
 /* ---- device one: an existing student, part-way through ------------------- */
 
 const one = await device();
-await seed(one.page, { name: 'Ana Ruiz', email: 'ana@example.org', country: 'MX', track: 'cert' },
-  [['1peter', 1], ['1peter', 2], ['romans', 1]], ['CTSOTS']);
+// Ana finished Old Testament Survey on the certificate track and then moved
+// to the M.Div. and finished Romans there: two completions, two tracks, and
+// the name roster the degree pages count.
+await seed(one.page, { name: 'Ana Ruiz', email: 'ana@example.org', country: 'MX', track: 'mdiv', heard: 'church' },
+  [['1peter', 1], ['1peter', 2], ['romans', 1]], ['CTSOTS', 'CTSROMANS'], ['CTSROMANS'], ['Old Testament Survey', 'Romans |']);
 await sync(one.page);
 const a = await snap(one.page);
 ok(/^CTS-/.test(a.code || ''), 'an existing student is given a code without being asked', `got ${a.code}`);
@@ -65,8 +73,11 @@ ok(restored.ok === true, `restoring from the code succeeds, got ${JSON.stringify
 const b = await snap(two.page);
 ok(b.units.join(' ') === '1peter:1 1peter:2 romans:1 romans:2',
   `every passed unit came back, got "${b.units.join(' ')}"`);
-ok(b.done.join(',') === 'CTSOTS', `course completions came back, got ${b.done}`);
+ok(b.done.join(',') === 'CTSOTS,CTSROMANS', `course completions came back, got ${b.done}`);
 ok(b.name === 'Ana Ruiz', 'and so did their name');
+ok(b.heard === 'church', `and how they heard of the seminary, got ${b.heard}`);
+ok(b.mdivDone.join(',') === 'CTSROMANS', `the master's-track list came back with only the course earned there, got ${b.mdivDone}`);
+ok(b.names.join('|') === 'Old Testament Survey|Romans |', `the course-name roster the degree pages count came back, got ${JSON.stringify(b.names)}`);
 ok(b.code === a.code, 'the second device now holds the same student code');
 
 // The restored device must also be able to see the progress grid, which the

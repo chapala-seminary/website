@@ -37,12 +37,53 @@ for (const [slug, c] of Object.entries(courses)) {
   }
 }
 
-const text = JSON.stringify({ generated: 'tools/gen-worker-catalog.mjs -- do not edit', courses }, null, 2) + '\n';
+// The completion codes and the course names the certificate pages write into
+// cts_done_codes / cts_degree_courses, derived exactly as cts-completion.js
+// derives them (code from the certificate filename, name from data-course or
+// the <title>), plus the pages that call CTSCurriculum.markComplete(code,
+// name) directly. The Worker serves this so a device restored from a student
+// code can rebuild the name roster the degree pages count, and so the student
+// tracker can turn a code into a course name.
+const completions = {};
+const html = (f) => fs.readFileSync(path.join('public', f), 'utf8');
+const unescape = (t) => t.replace(/&mdash;/g, '\u2014').replace(/&ndash;/g, '\u2013').replace(/&amp;/g, '&').replace(/&#39;/g, "'").replace(/&quot;/g, '"');
+for (const f of fs.readdirSync('public').sort()) {
+  if (!f.endsWith('.html')) continue;
+  const h = html(f);
+  if (/cts-completion\.js/.test(h)) {
+    const lower = f.toLowerCase();
+    if (!/certificate\.html$/.test(lower)) continue;
+    let code = lower.replace(/(thm|mth|mdiv)?certificate\.html$/, '').toUpperCase();
+    if (code === 'ETHICS_') code = 'ETHICS';
+    // degree pages load the same script but are not courses
+    if (['CTSASSOCIATE', 'CTSCERTIFICATEOFMINISTRY', 'CTSMDIV', 'CTSTHM'].includes(code)) continue;
+    const explicit = /data-course="([^"]+)"/.exec(h);
+    let name;
+    if (explicit) name = unescape(explicit[1]).trim();
+    else {
+      let t = unescape((/<title>([^<]*)<\/title>/.exec(h) || [, ''])[1]).replace(/^\s*CTS\s+/i, '');
+      t = t.split(/[\u2014\u2013\-(]/)[0];
+      t = t.replace(/certificate.*$/i, '').trim();
+      name = t || f.replace(/\.html$/, '');
+    }
+    const prev = completions[code];
+    if (prev && prev.name !== name) { console.error(`${f}: code ${code} named "${name}" but ${prev.page} named it "${prev.name}"`); process.exit(2); }
+    if (!prev) completions[code] = { name, page: f };
+  }
+  for (const m of h.matchAll(/markComplete\(\s*'([A-Z0-9_]+)'\s*,\s*'([^']+)'/g)) {
+    const [, code, name] = m;
+    const prev = completions[code];
+    if (prev && prev.name !== name) { console.error(`${f}: code ${code} named "${name}" but ${prev.page} named it "${prev.name}"`); process.exit(2); }
+    if (!prev) completions[code] = { name, page: f };
+  }
+}
+
+const text = JSON.stringify({ generated: 'tools/gen-worker-catalog.mjs -- do not edit', courses, completions }, null, 2) + '\n';
 if (process.argv.includes('--check')) {
   const cur = fs.existsSync(OUT) ? fs.readFileSync(OUT, 'utf8') : '';
   if (cur !== text) { console.error(`${OUT} is out of date: run node tools/gen-worker-catalog.mjs`); process.exit(1); }
-  console.log(`${OUT}: current (${Object.keys(courses).length} courses)`);
+  console.log(`${OUT}: current (${Object.keys(courses).length} courses, ${Object.keys(completions).length} completion codes)`);
 } else {
   fs.writeFileSync(OUT, text);
-  console.log(`wrote ${OUT}: ${Object.keys(courses).length} courses`);
+  console.log(`wrote ${OUT}: ${Object.keys(courses).length} courses, ${Object.keys(completions).length} completion codes`);
 }

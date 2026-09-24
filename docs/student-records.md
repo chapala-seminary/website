@@ -63,6 +63,7 @@ losing a passed unit is not.
 | `POST` | `/api/certificate` | records an award, returns a verification code |
 | `GET` | `/api/verify/<code>` | JSON |
 | `GET` | `/verify/<code>` | **the public verification page** |
+| `GET` | `/api/catalog` | public, static: the courses with their units, and every completion code with the course name its certificate page writes |
 
 `/verify/<code>` is the thing a church or an employer opens. It shows the name,
 the award and the date, says plainly that the seminary is not accredited, and
@@ -81,11 +82,60 @@ a fabricated complete record first. Re-printing the same award returns the
 same code rather than minting a second one. Server-side grading is the real
 fix and is not this table's job.
 
-Known gap: `course_completions` records that a course was finished, not on
-which track; the pages keep a separate `cts_mdiv_done_codes` /
-`cts_thm_done_codes` / `cts_degree_courses` that the sync does not yet carry,
-so a student's degree progress does not follow them to a new device. Worth
-closing before the degree pages are wired to the API.
+Closed on 24 Sept (migration `0003_tracker.sql`): a completion now carries
+the track it was earned on, taken from the `cts_mdiv_done_codes` /
+`cts_thm_done_codes` lists the certificate pages keep, and the sync rebuilds
+those lists and the `cts_degree_courses` name roster on a restored device
+from the catalog's code → name table. The master's degrees count only
+completions earned on a master's track; a completion whose track is unknown
+counts as the student's current track.
+
+## For the student tracker
+
+Wayne keeps a private tracker of every student — courses, track, degree
+progress, country — and until now filled it from the completion notices the
+certificate pages email, which arrive for some students and not others. Once
+the site is live he will read the records directly with his own Cloudflare
+access. What he needs to know:
+
+**Where.** Cloudflare D1, account `119b0919229edb3185b69f1c6bd04b66` (the
+Chapala account). Production database `chapala-students` (bound to the
+`chapala-seminary` Worker); beta database `chapala-students-beta`
+(`ae98d4cb-2d74-4bc4-a0a0-f01c22e95a7b`, bound to `chapala-seminary-beta`).
+Read-only access is all the tracker needs; nothing should write to these
+tables except the Worker.
+
+**What.**
+
+| table / view | holds |
+|---|---|
+| `students` | one row per registered student: `id` (the student code), `name`, `email`, `country` (ISO code as the form collects it), `track` (`cert` \| `thm` \| `mdiv`; the Associate is `cert` with `goal = assoc`), `goal`, `heard` (`search` \| `ai` \| `referral` \| `church` \| `social` \| `other`), `created_at`, `updated_at` |
+| `unit_progress` | every unit passed: `course` (storage slug, e.g. `1peter`), `unit`, `completed_at` |
+| `course_completions` | every course finished: `code` (e.g. `CTSOTS`), `track` it was earned on, `completed_at` |
+| `certificates` | every certificate the site has issued a verification code for (course and degree level), with `revoked_at` |
+| `degree_progress` | **the view to read first**: per student, `courses_done`, `foundation_done` (of 7), `masters_done`, `mdiv_core_done` (of 20), `last_completion_at`. Certificate of Ministry = 12 courses incl. all 7 foundation; Associate = 25 incl. foundation; Th.M. = 12 master's-level incl. foundation; M.Div. = 30 master's-level incl. the 20-course core. |
+
+Course codes map to names through `GET /api/catalog` (`completions.CODE.name`);
+the names are exactly what the certificate pages write, warts included
+(`CTSBIBLE` is "How We Got the Bible |", `CTSCS` is "Chapala Theological
+Seminary", because that is how those pages' titles parse).
+
+**Two honest caveats.**
+
+1. `completed_at` is the moment the record reached the seminary, not the day
+   the student finished. Progress lived only in browsers until now, with no
+   dates; a student who finished twenty courses last year and syncs for the
+   first time next month will show twenty completions dated next month. Dates
+   are true for anything completed after a student's first sync.
+2. Nothing arrives until a student opens the site with the new records live.
+   Ken's twenty-two master's courses and Ignacio's twenty-five will appear the
+   first time each of them opens any unit page in the browser that holds their
+   progress — the sync client registers them and pushes everything up without
+   asking. A student whose progress is on a phone they no longer have is not
+   recoverable from here; the inbox is the only record of them.
+
+The records also tell the privacy page (`CTSPrivacy.html`) what it shows, and
+that page now says the seminary keeps its student roll from them.
 
 ## Files
 

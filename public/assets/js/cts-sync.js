@@ -70,21 +70,32 @@
       });
     });
 
+    // The certificate pages keep, beside the gating list, the codes finished
+    // on a master's track; a degree counts only the courses at its own level,
+    // so the track each completion was earned on travels with it.
+    var tracks = {};
+    [['cts_mdiv_done_codes', 'mdiv'], ['cts_thm_done_codes', 'thm']].forEach(function (pair) {
+      var list = parse(get(pair[0]), []);
+      if (Array.isArray(list)) list.forEach(function (c) { tracks[String(c).toUpperCase()] = pair[1]; });
+    });
+
     return {
       student: student ? {
         name: student.name, email: student.email, country: student.country,
         track: (student.track || track || '').toLowerCase() || undefined,
-        goal: student.goal,
+        goal: student.goal, heard: student.heard,
       } : null,
       doneCodes: Array.isArray(done) ? done : [],
+      completionTracks: tracks,
       progress: progress,
     };
   }
 
   function digest(s) {
     return JSON.stringify([
-      s.student && [s.student.name, s.student.track, s.student.email, s.student.country],
+      s.student && [s.student.name, s.student.track, s.student.email, s.student.country, s.student.heard],
       s.doneCodes.slice().sort(),
+      Object.keys(s.completionTracks).sort().map(function (k) { return k + ':' + s.completionTracks[k]; }),
       s.progress.map(function (p) { return p.course + ':' + p.unit; }).sort(),
     ]);
   }
@@ -95,7 +106,7 @@
     var local = parse(get('cts_student'), {}) || {};
     // The server's copy fills gaps; it does not overwrite what this browser
     // has, because this browser is where the student is typing right now.
-    ['name', 'email', 'country', 'track', 'goal'].forEach(function (f) {
+    ['name', 'email', 'country', 'track', 'goal', 'heard'].forEach(function (f) {
       if (!local[f] && state.student[f]) local[f] = state.student[f];
     });
     set('cts_student', JSON.stringify(local));
@@ -106,6 +117,22 @@
     var added = false;
     (state.doneCodes || []).forEach(function (c) { if (done.indexOf(c) === -1) { done.push(c); added = true; } });
     if (added) set('cts_done_codes', JSON.stringify(done));
+
+    // The lists the degree pages count: master's completions by code, and
+    // every completion by the name its certificate page wrote. Without these
+    // a student restored onto a new device kept their unit progress and lost
+    // their degree progress.
+    function addTo(key, value) {
+      var list = parse(get(key), []);
+      if (!Array.isArray(list)) list = [];
+      if (list.indexOf(value) === -1) { list.push(value); set(key, JSON.stringify(list)); }
+    }
+    (state.completions || []).forEach(function (c) {
+      if (!c || !c.code) return;
+      if (c.track === 'mdiv') addTo('cts_mdiv_done_codes', c.code);
+      if (c.track === 'thm') addTo('cts_thm_done_codes', c.code);
+      if (c.name) addTo('cts_degree_courses', c.name);
+    });
 
     (state.progress || []).forEach(function (p) {
       var pk = 'cts_' + p.course + '_progress';
@@ -192,6 +219,7 @@
       : send('/register', {
         name: snap.student.name, email: snap.student.email,
         country: snap.student.country, track: snap.student.track || 'cert', goal: snap.student.goal,
+        heard: snap.student.heard,
       }).then(function (r) {
         if (!r || !r.code) return null;
         set(CODE_KEY, r.code);
@@ -200,7 +228,8 @@
 
     return start.then(function (c) {
       if (!c) return null;
-      return send('/sync', { code: c, student: snap.student, progress: snap.progress, doneCodes: snap.doneCodes });
+      return send('/sync', { code: c, student: snap.student, progress: snap.progress,
+                             doneCodes: snap.doneCodes, completionTracks: snap.completionTracks });
     }).then(function (state) {
       if (state) { apply(state); lastDigest = digest(snapshot()); }
       return state;

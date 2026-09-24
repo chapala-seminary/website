@@ -38,13 +38,14 @@ for (const [payload, why] of [
 }
 
 const reg = await jpost('/api/register', {
-  name: 'María de la Cruz', email: 'maria@example.org', country: 'MX', track: 'mdiv', goal: 'pastoral ministry',
+  name: 'María de la Cruz', email: 'maria@example.org', country: 'MX', track: 'mdiv', goal: 'pastoral ministry', heard: 'referral',
 });
 ok(reg.status === 201, `register returned ${reg.status}`);
 const CODE = reg.body?.code;
 ok(/^CTS-[0-9A-HJKMNP-TV-Z]{4}-[0-9A-HJKMNP-TV-Z]{4}-[0-9A-HJKMNP-TV-Z]{4}$/.test(CODE || ''),
   `student code has the documented shape`, `got ${CODE}`);
 ok(reg.body?.student?.name === 'María de la Cruz', 'the name survives a round trip with its accents');
+ok(reg.body?.student?.heard === 'referral' && reg.body?.student?.country === 'MX', 'country and how they heard of the seminary are kept');
 
 const second = await jpost('/api/register', { name: 'Someone Else', track: 'cert' });
 ok(second.body?.code && second.body.code !== CODE, 'two registrations get different codes');
@@ -176,7 +177,9 @@ const MDIV_CORE = [...FOUNDATION, 'CTSHERMENEUTICS', 'CTSLA', 'CTSGENESIS', 'CTS
   'CTSACTS', 'CTSAPOL', 'COUNSELING', 'CTSAL', 'CTSWORSHIP', 'CTSCE', 'CTSMISSIONS'];
 const filler = (n) => Array.from({ length: n }, (_, i) => `ELECTIVE${i + 1}`);
 
-// 12 courses but not the foundation: no Certificate of Ministry
+// 12 courses but not the foundation: no Certificate of Ministry. This
+// student is mdiv and sends no track list, so every completion counts as
+// earned on their track (the pre-0003 browser case).
 await jpost('/api/sync', { code: CODE, doneCodes: filler(12) });
 let d = await jpost('/api/certificate', { code: CODE, level: 'certificate', title: 'Certificate of Ministry' });
 ok(d.status === 409 && /required courses/.test(d.body?.error || ''),
@@ -198,14 +201,37 @@ await jpost('/api/sync', { code: CODE, doneCodes: [...MDIV_CORE, ...filler(10)] 
 d = await jpost('/api/certificate', { code: CODE, level: 'mdiv', title: 'Master of Divinity' });
 ok(d.status === 201, `the 20-course core + 10 electives earns the M.Div. (${d.status}: ${d.body?.error})`);
 
-// a certificate-track student with the same record does not get a master's award
+// a certificate-track student with the same 30 courses does not get a
+// master's award: the completions were earned on the certificate track
 const certReg = await jpost('/api/register', { name: 'Cert Track', track: 'cert' });
 await jpost('/api/sync', { code: certReg.body.code, doneCodes: [...MDIV_CORE, ...filler(10)] });
 d = await jpost('/api/certificate', { code: certReg.body.code, level: 'mdiv', title: 'Master of Divinity' });
-ok(d.status === 409 && /master's track/.test(d.body?.error || ''),
+ok(d.status === 409 && /0 of 30 master's-level/.test(d.body?.error || ''),
   `a certificate-track student is refused the M.Div. (${d.status}: ${d.body?.error})`);
 d = await jpost('/api/certificate', { code: certReg.body.code, level: 'associate', title: 'Associate of Divinity' });
 ok(d.status === 201, `and gets the Associate for the same 30 courses (${d.status}: ${d.body?.error})`);
+
+// ...and switching to the M.Div. afterwards does not turn certificate-track
+// completions into master's ones: the track a completion was earned on is
+// kept, and a completion sent with a master's track is counted there.
+await jpost('/api/sync', { code: certReg.body.code, student: { track: 'mdiv' }, doneCodes: [...MDIV_CORE, ...filler(10), 'CTSJOHN'], completionTracks: { CTSJOHN: 'mdiv' } });
+let st = await jget(`/api/student/${certReg.body.code}`);
+const byCode = Object.fromEntries((st.body?.completions || []).map(c => [c.code, c]));
+ok(byCode.CTSOTS?.track === 'cert' && byCode.CTSJOHN?.track === 'mdiv',
+  `completions keep the track they were earned on (CTSOTS ${byCode.CTSOTS?.track}, CTSJOHN ${byCode.CTSJOHN?.track})`);
+ok(byCode.CTSOTS?.name === 'Old Testament Survey', `a completion carries its course name, got ${byCode.CTSOTS?.name}`);
+ok(st.body?.degrees?.associate === true && st.body?.degrees?.mdiv === false,
+  `the state says which degrees the record supports, got ${JSON.stringify(st.body?.degrees)}`);
+d = await jpost('/api/certificate', { code: certReg.body.code, level: 'mdiv', title: 'Master of Divinity' });
+ok(d.status === 409 && /1 of 30 master's-level/.test(d.body?.error || ''),
+  `after switching track, only the master's-track completion counts toward the M.Div. (${d.status}: ${d.body?.error})`);
+
+/* ---- what the student tracker reads ---------------------------------------- */
+
+const cat = await jget('/api/catalog');
+ok(cat.status === 200 && cat.body?.completions?.CTSOTS?.name === 'Old Testament Survey' && cat.body?.courses?.['1peter']?.totalUnits === 12,
+  'the catalog is public: completion codes with names, courses with their units');
+ok(!JSON.stringify(cat.body).includes(CODE), 'and holds nothing about any student');
 
 /* ---- malformed requests --------------------------------------------------- */
 
