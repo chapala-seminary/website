@@ -271,6 +271,54 @@ message reads the next page from `nextHref` rather than adding one. The live
 site's Counseling pages had no pills or Next buttons at all, so nothing there
 regressed; this corrects the migration.
 
+### 8g. WiseSpeak gains a unit: "Preaching from the Inside Out" — 1 page changed
+
+Wayne added a unit to the Preaching course (WiseSpeak) on 22 Sept, sent as
+`CTS_Preaching_New.html`. His placement note puts it after sermon construction
+and before delivery, so it is **Unit 7**, between Beautify and Refine and
+Preparation and Delivery. The former units 7, 8 and 9 are now 8, 9 and 10; their
+text and questions are unchanged apart from the numbers (headings, "Section 8.7"
+references, one rubric's "Unit 7").
+
+* **Saved progress moves with the units.** WiseSpeak stores progress by unit
+  number in `cts_wisespeak_state`. On first load the page moves saved units
+  7–9 to 8–10 (answers, passes and any lockout go with them) and records
+  `cts_wisespeak_layout = "2"` so it never moves them twice. The marker is
+  written only after the moved state is saved. A student who had finished all
+  nine units keeps the course credit already recorded; the page now shows 9 of
+  10 until the new unit is passed.
+  *Rollback caution:* the old ZIP page reads the new layout wrongly (its Unit 7
+  slot would hold the old Unit 7's progress under the new Unit 8's number), so
+  do not roll back to the ZIP after students have loaded this page without
+  reversing the move.
+* **Grading follows the course's existing rules**, as Wayne's handoff asks:
+  20 multiple choice for everyone at 90%; the 10 essay questions (his 21–30)
+  required on Th.M./M.Div. The 10 fill-in-the-blank items, with Wayne's five or
+  six accepted equivalents in each language, are **practice for every track and
+  never count toward passing**. WiseSpeak has no "Standard" track, and an
+  Associate student is graded here as Certificate.
+* **Written for the site, not by Wayne:** the Spanish of the whole unit
+  (Wayne's file had Spanish only for the pulpit note and the fill-in answers),
+  the multiple-choice explanations, and the essay rubrics and keywords. Every
+  rubric passes the course's own essay grader in both languages. Scripture in
+  the lesson uses the ASV/RV1909 like the rest of the course; Scripture inside
+  the preserved manuscript is translated from the version the manuscript used,
+  and the page says so.
+* **Left out:** Wayne's notes addressed to Robert (integration note, degree-use
+  table, technical handoff) and the instructor answer key; his script that
+  recorded the unit as "Unit 10".
+* **The pulpit-note photo** was an 8.7 MB PNG inlined as base64 (11.7 MB page).
+  It is now `public/assets/img/wisespeak-galatians-4-4-pulpit-note.jpg`,
+  1200 px, 288 KB, loaded lazily. The course page grew from 651 KB to 750 KB.
+* **For Wayne to confirm:** his Spanish duplicate of the note lists "Barna"
+  where the handwritten note reads "Bruno", and it titles the points
+  Preparación / Provisión / Privilegio where the handwritten note has
+  Reasons / Results. Reproduced as he wrote it.
+* **Not changed, but stale before this:** Evangelistic Preaching cites
+  "WiseSpeak Unit 8" for evangelistic planning methods and "units 1–7" for the
+  keyword method. No unit of the current WiseSpeak has that material, so those
+  references were already wrong and need Wayne's word, not a renumber.
+
 ---
 
 ## How to check any of this yourself
