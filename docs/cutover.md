@@ -139,8 +139,13 @@ Copy the `database_id` it prints into **`wrangler.jsonc`**, under
 actually landed in. Step zero explains why that is worth ten seconds.
 
 ```
-npx wrangler d1 migrations apply chapala-students-beta --remote
+npx wrangler d1 migrations apply chapala-students-beta --env beta --remote
 ```
+
+`--env beta` is not optional. The beta database is declared inside `env.beta`,
+and without the flag wrangler looks only at the top-level block and says it
+cannot find a database by that name — which reads like the database is
+missing when it is only the flag that is.
 
 It is a separate database on purpose: registering a test student while reading
 the site must not leave a row in the real students' table.

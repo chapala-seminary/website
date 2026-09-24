@@ -61,14 +61,33 @@ const dbid = (c) => c?.d1_databases?.[0]?.database_id;
 ok(!dbid(prod) || !dbid(prod.env?.beta) || dbid(prod) !== dbid(prod.env.beta),
   'and it is not the same database under a different name');
 
-/* Anything still spelled PUT-THE-... */
+/* Anything still spelled PUT-THE-...
+ *
+ * Only for the environment being deployed. The first version demanded every
+ * id in the file, so `npm run deploy:beta` refused because PRODUCTION's
+ * database did not exist yet -- which is precisely the order things happen
+ * in: beta first, production once beta has been read. */
 const DEPLOY = process.argv.includes('--deploy');
+const envAt = process.argv.indexOf('--env');
+const ENV = envAt >= 0 ? process.argv[envAt + 1] : null;
+const target = ENV ? prod.env?.[ENV] : prod;
+const targetName = ENV || 'production';
+if (DEPLOY && !target) {
+  console.error(`REFUSING TO DEPLOY — wrangler.jsonc has no environment called "${ENV}".`);
+  process.exit(1);
+}
+
+const bad = (v) => !v || /PUT-THE|REPLACE/i.test(String(v));
 const unset = [];
+if (bad(target?.account_id)) unset.push(`${targetName}: account_id`);
+if (bad(target?.d1_databases?.[0]?.database_id)) unset.push(`${targetName}: database_id`);
+
+/* And, for the note in suite mode, everything that is still unfilled anywhere. */
+const unsetAnywhere = [];
 for (const [name, c] of [['production', prod], ['beta', prod.env?.beta]]) {
   if (!c) continue;
-  const bad = (v) => !v || /PUT-THE|REPLACE/i.test(String(v));
-  if (bad(c.account_id)) unset.push(`${name}: account_id`);
-  if (bad(c.d1_databases?.[0]?.database_id)) unset.push(`${name}: database_id`);
+  if (bad(c.account_id)) unsetAnywhere.push(`${name}: account_id`);
+  if (bad(c.d1_databases?.[0]?.database_id)) unsetAnywhere.push(`${name}: database_id`);
 }
 
 console.log(`${checks} assertions on the deployment configuration`);
@@ -94,7 +113,7 @@ function accountsWranglerCanReach() {
 }
 
 if (DEPLOY && !unset.length) {
-  const want = prod.account_id;
+  const want = target.account_id;
   let reach;
   try { reach = accountsWranglerCanReach(); }
   catch (e) {
