@@ -37,11 +37,29 @@ ok(prod.assets?.html_handling === 'none',
 ok(prod.assets?.run_worker_first === true,
   'run_worker_first is true, so the staging guard sees asset requests at all');
 
+/* One binding, called DB, per environment. `wrangler d1 create` appends a
+   second one to the top-level block -- under the database's own name, not
+   DB, and regardless of which environment it was created for. The Worker
+   reads env.DB and nothing else, so the extra binding is not merely untidy:
+   it is a database the code cannot see, sitting in production, while the
+   environment it was meant for still has a placeholder. */
+for (const [name, c] of [['production', prod], ['beta', prod.env?.beta]]) {
+  if (!c) continue;
+  const list = c.d1_databases || [];
+  ok(list.length === 1, `${name}: exactly one D1 binding`,
+    `${list.length} found: ${list.map((d) => d.binding).join(', ')} — wrangler d1 create appends one; move the id and delete the block`);
+  ok(list[0]?.binding === 'DB', `${name}: the D1 binding is called DB, which is what the Worker reads`,
+    `found ${JSON.stringify(list[0]?.binding)}`);
+}
+
 /* Beta must not write to the students' table. */
 const db = (c) => c?.d1_databases?.[0]?.database_name;
 ok(db(prod) && db(prod.env?.beta) && db(prod) !== db(prod.env.beta),
   'beta has a database of its own, so testing it cannot touch real records',
   `production: ${db(prod)}, beta: ${db(prod.env?.beta)}`);
+const dbid = (c) => c?.d1_databases?.[0]?.database_id;
+ok(!dbid(prod) || !dbid(prod.env?.beta) || dbid(prod) !== dbid(prod.env.beta),
+  'and it is not the same database under a different name');
 
 /* Anything still spelled PUT-THE-... */
 const DEPLOY = process.argv.includes('--deploy');

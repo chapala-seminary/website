@@ -21,16 +21,20 @@
   // cleanup; `wrangler deploy` in the wrong account publishes the seminary
   // into somebody else's, which is a different kind of afternoon.
   //
-  // 119b0919229edb3185b69f1c6bd04b66 is the Chapala account. The one this
-  // machine's Cloudflare login can reach by itself is a DIFFERENT account, so
-  // deploying needs an API token created inside the Chapala account:
+  // 119b0919229edb3185b69f1c6bd04b66 is the Chapala account. The personal
+  // login on this machine is a member of it, so one login reaches both
+  // accounts and this pin is what picks the right one. `npm run deploy`
+  // checks that the credentials in use actually reach the account named here
+  // before it publishes anything.
   //
-  //   export CLOUDFLARE_API_TOKEN=...      # see docs/cutover.md, step zero
+  // A WARNING ABOUT `wrangler d1 create`
   //
-  // wrangler prefers that token over the interactive login when it is set, so
-  // nothing has to be logged out of. `npm run deploy` checks that the
-  // credentials in use actually reach the account named here before it
-  // publishes anything.
+  // It edits this file. It appends a new binding to the TOP-LEVEL
+  // d1_databases -- under its own name, not "DB", and regardless of which
+  // environment the database is for -- and reformats everything while it is
+  // there. So after creating a database: take the id it printed, put it in
+  // the right place below, and delete the block it added.
+  // tools/verify-worker-config.mjs fails until that is done.
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "chapala-seminary",
   "account_id": "119b0919229edb3185b69f1c6bd04b66",
@@ -84,7 +88,7 @@
         {
           "binding": "DB",
           "database_name": "chapala-students-beta",
-          "database_id": "PUT-THE-BETA-DATABASE-ID-HERE"
+          "database_id": "ae98d4cb-2d74-4bc4-a0a0-f01c22e95a7b"
         }
       ]
     }

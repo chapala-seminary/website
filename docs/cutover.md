@@ -68,35 +68,45 @@ machine reaches a *different* account —
 `Robertwilliamallen@gmail.com's Account`, `21c5e8afecce4643a0b50282140557b0` —
 and nothing else. `npx wrangler whoami` shows which, in the Account ID column.
 
-So deploying needs credentials of its own.
+So the two have to be joined, and the way that worked is membership, not a
+token: **the personal login is made a member of the Chapala account.** One
+login then reaches both, and the pinned `account_id` picks the right one per
+repository.
 
-1. **Make an API token inside the Chapala account.** Switch to it in the
-   dashboard, then My Profile → API Tokens → Create Token → **Edit Cloudflare
-   Workers** template. Set *Account Resources* to the Chapala account only, and
-   add **D1 : Edit** to the permissions — the template does not include it, and
-   the student records live in D1.
+1. **Invite the personal login into the Chapala account.** Logged in with the
+   Chapala credentials: Manage Account → Members → Invite →
+   `robertwilliamallen@gmail.com`, role **Administrator**. That is enough to
+   deploy Workers and D1; Super Administrator only matters for billing and
+   other members. Accept the invitation from the gmail side.
 
-2. **Use it:**
+2. **Refresh wrangler's login.** The OAuth token it holds was issued with the
+   account list as it stood at login time, so it has to be reissued:
 
    ```
-   export CLOUDFLARE_API_TOKEN=...      # in the shell you deploy from
+   npx wrangler logout && npx wrangler login
    npx wrangler whoami
    ```
 
-   `whoami` should now show the Chapala account. wrangler prefers the token
-   over the interactive login whenever it is set, so nothing has to be logged
-   out of and the Website Machine login is untouched.
-
-   The token is a real secret: keep it in a password manager, not in the
-   repository, and not in a file that gets committed. It only ever needs to
-   exist in the shell you are deploying from.
+   The table now lists **both** accounts. Nothing else changes: the Website
+   Machine work keeps using its own account, because `account_id` is set per
+   repository.
 
 3. **Clean up what went into the wrong account.** The first
    `wrangler d1 create` here ran before any of this and made
-   `chapala-students-beta` in `21c5e8af…`. Do it from the dashboard rather
-   than the CLI, so that account-switching and deletion are not happening in
-   the same breath: switch to that account → Storage & Databases → D1 → delete
-   it. It has no data in it.
+   `chapala-students-beta` in `21c5e8af…`. Delete it from the dashboard of
+   that account — Storage & Databases → D1 — rather than the CLI, so that
+   account-switching and deletion are not happening in the same breath. It
+   has no data in it.
+
+*If membership is ever not an option* — a deploy from a machine whose login
+should not be a member — an API token created inside the Chapala account
+works instead: Manage Account → Account API Tokens → Create Token, the "Edit
+Cloudflare Workers" template plus **D1 : Edit**, then
+`export CLOUDFLARE_API_TOKEN=...` in the deploying shell. It is a real secret
+and never belongs in the repository. Note that this is an *account-owned*
+token: one made under My Profile belongs to the person and can only reach
+accounts that person is a member of, which is the same problem in a different
+place.
 
 `npm run deploy` and `npm run deploy:beta` ask wrangler which account the
 credentials reach and refuse if it is not the one named in `wrangler.jsonc`.
