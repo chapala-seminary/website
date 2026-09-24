@@ -104,6 +104,7 @@ node tools/verify-worker-routing.mjs "http://127.0.0.1:$PORT"
 # And that the config the suite just tested still matches the one that gets
 # deployed, on every field that changes how a request is answered.
 node tools/verify-worker-config.mjs
+node tools/gen-worker-catalog.mjs --check
 
 # A staging host must not be indexable, and must not change the real site.
 node tools/verify-staging.mjs "http://127.0.0.1:$PORT"

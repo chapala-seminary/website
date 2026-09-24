@@ -126,11 +126,20 @@ ok(unknown.status === 404 && malformed.status === 404 &&
 
 /* ---- certificates and public verification -------------------------------- */
 
-ok((await jpost('/api/certificate', { code: CODE, level: 'course', course: 'nosuchcourse', title: 'X' })).status === 409,
-  'a certificate cannot be issued for a course with no recorded progress');
+// The record so far: 1 Peter units 1 and 2 of 12. No award is supported yet.
+ok((await jpost('/api/certificate', { code: CODE, level: 'course', course: 'nosuchcourse', title: 'X' })).status === 400,
+  'a certificate for a course the Worker does not know is refused');
 ok((await jpost('/api/certificate', { code: CODE, level: 'sainthood', title: 'X' })).status === 400,
   'an unknown award level is refused');
+const partial = await jpost('/api/certificate', { code: CODE, level: 'course', course: '1peter', title: '1 Peter Intensive' });
+ok(partial.status === 409 && /units not recorded.*3, 4/.test(partial.body?.error || ''),
+  `a course certificate with units missing is refused and says which (${partial.status}: ${partial.body?.error})`);
+for (const level of ['certificate', 'associate', 'thm', 'mdiv'])
+  ok((await jpost('/api/certificate', { code: CODE, level, title: 'X' })).status === 409,
+    `a ${level} award with no completed courses is refused`);
 
+// Pass the rest of 1 Peter and the certificate is supported.
+await jpost('/api/sync', { code: CODE, progress: Array.from({ length: 12 }, (_, i) => ({ course: '1peter', unit: i + 1, completedAt: T_LATE })) });
 const cert = await jpost('/api/certificate', { code: CODE, level: 'course', course: '1peter', title: '1 Peter Intensive' });
 ok(cert.status === 201, `issuing a certificate returned ${cert.status}`);
 const VC = cert.body?.verifyCode;
@@ -159,6 +168,44 @@ ok(/No certificate has been issued/.test(await missPage.text()), 'and says so in
 // A code is echoed onto the page, so it is an injection surface.
 const xss = await get('/verify/' + encodeURIComponent('<script>alert(1)</script>'));
 ok(!(await xss.text()).includes('<script>alert(1)</script>'), 'a code containing markup is escaped, not executed');
+
+/* ---- degree awards follow the certificate pages' rules -------------------- */
+
+const FOUNDATION = ['CTSOTS', 'CTSNT', 'CTSST', 'CTSEVANGELISM', 'CTSPM', 'CTSCH', 'WISESPEAK'];
+const MDIV_CORE = [...FOUNDATION, 'CTSHERMENEUTICS', 'CTSLA', 'CTSGENESIS', 'CTSPSALMS', 'CTSMATT', 'CTSROMANS',
+  'CTSACTS', 'CTSAPOL', 'COUNSELING', 'CTSAL', 'CTSWORSHIP', 'CTSCE', 'CTSMISSIONS'];
+const filler = (n) => Array.from({ length: n }, (_, i) => `ELECTIVE${i + 1}`);
+
+// 12 courses but not the foundation: no Certificate of Ministry
+await jpost('/api/sync', { code: CODE, doneCodes: filler(12) });
+let d = await jpost('/api/certificate', { code: CODE, level: 'certificate', title: 'Certificate of Ministry' });
+ok(d.status === 409 && /required courses/.test(d.body?.error || ''),
+  `12 electives without the foundation do not earn the Certificate of Ministry (${d.status}: ${d.body?.error})`);
+
+// foundation plus five: yes
+await jpost('/api/sync', { code: CODE, doneCodes: FOUNDATION });
+d = await jpost('/api/certificate', { code: CODE, level: 'certificate', title: 'Certificate of Ministry' });
+ok(d.status === 201, `foundation + 5 electives earns the Certificate of Ministry (${d.status}: ${d.body?.error})`);
+d = await jpost('/api/certificate', { code: CODE, level: 'associate', title: 'Associate of Divinity' });
+ok(d.status === 409 && /of 25 courses/.test(d.body?.error || ''), `19 courses do not earn the Associate (${d.status}: ${d.body?.error})`);
+
+// Th.M.: 12 including the foundation, on a master's track (this student is mdiv)
+d = await jpost('/api/certificate', { code: CODE, level: 'thm', title: 'Master of Theology' });
+ok(d.status === 201, `an mdiv student with foundation + 5 earns the Th.M. (${d.status}: ${d.body?.error})`);
+
+// M.Div.: 30 including the 20-course core
+await jpost('/api/sync', { code: CODE, doneCodes: [...MDIV_CORE, ...filler(10)] });
+d = await jpost('/api/certificate', { code: CODE, level: 'mdiv', title: 'Master of Divinity' });
+ok(d.status === 201, `the 20-course core + 10 electives earns the M.Div. (${d.status}: ${d.body?.error})`);
+
+// a certificate-track student with the same record does not get a master's award
+const certReg = await jpost('/api/register', { name: 'Cert Track', track: 'cert' });
+await jpost('/api/sync', { code: certReg.body.code, doneCodes: [...MDIV_CORE, ...filler(10)] });
+d = await jpost('/api/certificate', { code: certReg.body.code, level: 'mdiv', title: 'Master of Divinity' });
+ok(d.status === 409 && /master's track/.test(d.body?.error || ''),
+  `a certificate-track student is refused the M.Div. (${d.status}: ${d.body?.error})`);
+d = await jpost('/api/certificate', { code: certReg.body.code, level: 'associate', title: 'Associate of Divinity' });
+ok(d.status === 201, `and gets the Associate for the same 30 courses (${d.status}: ${d.body?.error})`);
 
 /* ---- malformed requests --------------------------------------------------- */
 

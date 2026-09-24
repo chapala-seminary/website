@@ -21,6 +21,8 @@
  * from a student, which makes a stale or offline device harmless.
  */
 
+import { courseShortfall, degreeShortfall } from './awards.js';
+
 const MAX = { name: 120, email: 160, country: 80, track: 24, goal: 400, title: 200, course: 64, code: 40 };
 const TRACKS = new Set(['cert', 'certificate', 'associate', 'thm', 'mdiv']);
 const LEVELS = new Set(['course', 'certificate', 'associate', 'thm', 'mdiv']);
@@ -211,7 +213,7 @@ async function issueCertificate(request, env) {
   const b = await body(request);
   const id = normaliseCode(b.code);
   if (!id) throw new HttpError(400, 'a student code is required');
-  const student = await env.DB.prepare('SELECT id, name FROM students WHERE id = ?').bind(id).first();
+  const student = await env.DB.prepare('SELECT id, name, track FROM students WHERE id = ?').bind(id).first();
   if (!student) return fail(404, 'no record for that student code');
 
   const level = (str(b.level, 24, { required: true, field: 'level' }) || '').toLowerCase();
@@ -220,12 +222,21 @@ async function issueCertificate(request, env) {
   const title = str(b.title, MAX.title, { required: true, field: 'title' });
 
   // Grading is still client-side, so this cannot prove the work was done. It
-  // can refuse to mint a certificate for a course with no recorded progress,
-  // which means a fabricated certificate needs fabricated progress first.
+  // can refuse an award the record does not support: every unit of the course
+  // for a course certificate, the course counts and required courses for a
+  // degree (worker/awards.js). A fabricated certificate therefore needs a
+  // fabricated complete record first.
   if (level === 'course') {
-    const seen = await env.DB.prepare(
-      'SELECT COUNT(*) AS n FROM unit_progress WHERE student_id = ? AND course = ?').bind(id, course).first();
-    if (!seen?.n) return fail(409, 'no recorded progress for that course');
+    const rows = await env.DB.prepare(
+      'SELECT unit FROM unit_progress WHERE student_id = ? AND course = ?').bind(id, course.toLowerCase()).all();
+    const why = courseShortfall(course, (rows.results ?? []).map((r) => r.unit));
+    if (why === 'unknown course') throw new HttpError(400, 'unknown course: ' + course);
+    if (why) return fail(409, why);
+  } else {
+    const rows = await env.DB.prepare(
+      'SELECT code FROM course_completions WHERE student_id = ?').bind(id).all();
+    const why = degreeShortfall(level, (rows.results ?? []).map((r) => r.code), student.track);
+    if (why) return fail(409, why);
   }
 
   // Re-issuing the same award returns the same code rather than a second one,

@@ -72,10 +72,20 @@ shows neither the student code nor their email.
 
 Grading is still client-side, so a certificate record attests that the seminary
 issued a certificate for a name and a course — not that the work was
-independently verified. Issuing requires the student's code **and** matching
-progress rows, so a fabricated certificate needs fabricated progress first, and
-re-printing the same award returns the same code rather than minting a second
-one. Server-side grading is the real fix and is not this table's job.
+independently verified. Issuing requires the student's code **and** a record
+that supports the award: every unit of the course for a course certificate
+(`worker/catalog.json`), and for the degrees the same course counts and
+required courses the certificate pages enforce, plus a master's track for the
+master's degrees (`worker/awards.js`). A fabricated certificate therefore needs
+a fabricated complete record first. Re-printing the same award returns the
+same code rather than minting a second one. Server-side grading is the real
+fix and is not this table's job.
+
+Known gap: `course_completions` records that a course was finished, not on
+which track; the pages keep a separate `cts_mdiv_done_codes` /
+`cts_thm_done_codes` / `cts_degree_courses` that the sync does not yet carry,
+so a student's degree progress does not follow them to a new device. Worth
+closing before the degree pages are wired to the API.
 
 ## Files
 

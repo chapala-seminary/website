@@ -191,6 +191,88 @@ wants their record deleted will search for it rather than hunt through a footer.
 
 ---
 
+## 8. After Wayne's review of the beta (24 Sept 2026)
+
+Wayne ran the beta past an AI review and sent the findings. Two were
+regressions the unified engine had introduced against the original per-course
+engines; the rest were pre-existing and are dealt with here as well.
+
+### 8a. Multiple choice scores on click again — engine, no page content changed
+
+Every original engine marked a multiple-choice answer the moment it was
+clicked: the chosen option red or green, the correct letter shown, on every
+track. The unified engine of 18 Sept graded only on submit, and on the master's
+tracks showed nothing at all. `public/assets/js/cts-engine.js` now does what
+the originals did. A question, once answered, stays answered for that attempt
+(the verdict shows the key, so changing it would be free marks); after a
+failed attempt the answers stay on screen for review but the next visit, or
+the next click after the lock has expired, starts a fresh attempt.
+
+### 8b. Short answer counts on the master's tracks only — engine, no page content changed
+
+The originals required the short-answer section only on the M.Div. track
+(`// Certificate track — only MC matters`); the home page says the same
+("multiple-choice review, and short-answer work for the master's tracks"); the
+Counseling Situations course says outright that "unit completion is based on
+the multiple-choice questions". The unified engine had required it at 90% on
+every track. It now counts on M.Div. and Th.M. only. On the Certificate and
+Associate tracks the prompts are for reflection and the model answers are
+shown on submit, as before.
+
+`tools/engine-test-built.mjs` encodes both rules and fails on the 18 Sept
+behaviour.
+
+### 8c. "Saved only on this device" copy — five pages changed
+
+Written before student codes existed, and wrong since: the home-page banner,
+the caution card on `cts-backup.html`, and the "no registration found" notice
+on four certificate pages (CTSAL, CTSDP, CTSST, ethics) all said progress lived
+only in the browser. They now say that progress is kept under the student
+code, that the code is the key to the record (not filed under name or email,
+so keep it safe and do not share it), and that a backup file still works
+offline. The backup page's list of how to protect your work gained one item:
+write your code down the day you register.
+
+### 8d. The server refuses awards its record does not support — API, no page content changed
+
+`POST /api/certificate` used to issue a course certificate for any recorded
+progress in the course and a degree certificate for nothing at all. It now
+requires every unit of the course (from `worker/catalog.json`, generated from
+the unit files by `tools/gen-worker-catalog.mjs`, checked in the suite and
+before every deploy) and, for the degrees, the course counts and required
+courses the certificate pages themselves enforce (`worker/awards.js`), plus a
+master's track for the master's degrees. Grading is still in the browser;
+this stops a fabricated certificate needing anything less than a fabricated
+complete record. `test/api.test.mjs` pins the numbers.
+
+### 8e. Every unit now has ten short-answer questions — 29 units, 189 questions added
+
+Wayne asked that the units short of ten be brought up to ten to match the
+rest. Counseling Situations had five per unit (13 units), Pentecostalism and
+the Charismatic Movement three per unit (12 units), and Doctrinal Preaching
+unit 1, John unit 4, Revelation unit 12, and Systematic Theology unit 10 had
+none — which matched the live site. The new questions were written from each
+unit's own lesson text, in both languages, in the same shape as the existing
+ones (prompt, eight keyword stems a side, model answer), avoiding the ground
+the existing questions already cover. `tools/add-short-answer.mjs` merged
+them and checks that every model answer passes the engine's own grader, so a
+student who writes the model answer is never marked wrong. No multiple-choice
+question changed: `tools/content-baseline.json` was re-recorded and differs
+only in short-answer counts (4,321 → 4,510). All 451 units now carry ten.
+
+### 8f. Counseling Situations navigation — 13 pages changed
+
+The course numbers its units 0..12. The unified layout counted 1..13, so
+every page showed a pill for a Unit 13 that does not exist and none for
+Unit 0, unit 12's Next button led to a 404, and unit 1 had no Previous. The
+pills are now built from the units a course actually has, unit 12 has no
+Next, unit 1's Previous goes to Unit 0, and the engine's "Continue to Unit N"
+message reads the next page from `nextHref` rather than adding one. The live
+site's Counseling pages had no pills or Next buttons at all, so nothing there
+regressed; this corrects the migration.
+
+---
+
 ## How to check any of this yourself
 
 ```

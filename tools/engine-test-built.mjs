@@ -9,8 +9,9 @@
 // questions are, which is exactly what the student's browser has.
 //
 //   pass mark      90% of MC, as a ratio
+//   short answer   counts on the master's tracks only, 90% of SA
+//   MC feedback    every question is corrected on click, on every track
 //   lockout        master's 15 min, certificate 2 min
-//   reveal         certificate sees answers on submit; master's does not
 //   persistence    a passed MC section stays passed; SA-only lockout
 
 import { chromium } from 'playwright';
@@ -33,7 +34,10 @@ for (const f of fs.readdirSync(ROOT).sort()) {
   const [, course, n] = m;
   (byCourse.get(course) ?? byCourse.set(course, []).get(course)).push(+n);
 }
-const SAMPLES = [...byCourse].flatMap(([course, units]) =>
+// ENGINE_TEST_COURSES=CTSCS,CTSActs narrows a run while working on the engine;
+// the suite always runs everything.
+const ONLY = (process.env.ENGINE_TEST_COURSES || '').split(',').filter(Boolean);
+const SAMPLES = [...byCourse].filter(([c]) => !ONLY.length || ONLY.includes(c)).flatMap(([course, units]) =>
   units.sort((a, b) => a - b).slice(0, 2).map(u => [course, u]));
 
 const fails = [];
@@ -60,7 +64,11 @@ async function session(course, unit, track, nCorrect, fillSA = false) {
   // the unit as the STUDENT'S browser has it, not as the source tree has it
   const U = await page.evaluate(() => {
     const u = window.CTS_UNIT;
-    return u && { course: u.course, unit: u.unit, mc: (u.mc || []).map(q => q.answer), sa: (u.sa || []).length };
+    // sa counts only the short-answer questions the engine can grade: one
+    // with no keywords is credited as written (Genesis has none), so a blank
+    // answer cannot fail there and the SA rule is not testable on that unit.
+    const hasKw = q => { const k = q.keywords; return Array.isArray(k) ? k.length > 0 : !!(k && ((k.en || []).length || (k.es || []).length)); };
+    return u && { course: u.course, unit: u.unit, mc: (u.mc || []).map(q => q.answer), sa: (u.sa || []).filter(hasKw).length };
   });
   const rendered = await page.evaluate(() => document.querySelectorAll('.question[data-mc]').length);
 
@@ -97,6 +105,8 @@ async function session(course, unit, track, nCorrect, fillSA = false) {
   const out = await page.evaluate(() => ({
     result: (window.CTS_ENGINE?.controls?.result?.() || {}).textContent || '',
     revealed: document.querySelectorAll('button.option.correct').length,
+    verdicts: document.querySelectorAll('.question[data-mc] .feedback-text').length,
+    wrongMarked: document.querySelectorAll('button.option.wrong').length,
     ls: Object.fromEntries(Object.entries(localStorage).filter(([k]) => k.startsWith('cts_'))),
   }));
   await ctx.close();
@@ -118,29 +128,78 @@ for (const [course, unit] of SAMPLES) {
   ok(all.rendered === nMc, `${label}: rendered ${all.rendered} of ${nMc} MC questions`);
   ok(all.clickedSubmit, `${label}: no visible submit control for the student to press`);
 
-  // 2. exactly the pass mark passes
-  const atMark = await session(course, unit, 'cert', need, true);
-  ok(/Passed|Aprobado/.test(atMark.result), `${label}: ${need}/${nMc} (the 90% mark) did not pass`);
+  // 2. exactly the pass mark passes -- on the certificate track with NO short
+  //    answer written, since short answer does not count there
+  const atMark = await session(course, unit, 'cert', need, false);
+  ok(/Passed|Aprobado/.test(atMark.result), `${label}: ${need}/${nMc} (the 90% mark) did not pass on cert with SA blank`);
   ok(atMark.ls[`cts_${slug}_progress`]?.includes(`unit${unit}`), `${label}: passing did not record progress`);
 
   // 3. one below the mark fails
   const below = await session(course, unit, 'cert', need - 1);
   ok(!/Passed|Aprobado/.test(below.result), `${label}: ${need - 1}/${nMc} passed but should not`);
 
-  // 4. certificate track: 2-minute lock and answers revealed
+  // 4. every question is corrected the moment it is clicked, on every track:
+  //    a verdict line per question, the right option marked, wrong ones marked
+  ok(below.verdicts === nMc, `${label}: cert track showed ${below.verdicts} of ${nMc} per-question verdicts`);
+  ok(below.revealed === nMc, `${label}: cert track marked ${below.revealed} of ${nMc} correct options`);
+  ok(below.wrongMarked === nMc - (need - 1), `${label}: cert track marked ${below.wrongMarked} wrong options, expected ${nMc - (need - 1)}`);
   ok(/\b2 minute|2 minuto/.test(below.result), `${label}: cert lock not 2 minutes — "${below.result.slice(0, 80)}"`);
-  ok(below.revealed > 0, `${label}: cert track did not reveal correct answers`);
 
-  // 5. master's track: 15-minute lock and answers NOT revealed
   const mdiv = await session(course, unit, 'mdiv', need - 1);
+  ok(mdiv.verdicts === nMc, `${label}: mdiv track showed ${mdiv.verdicts} of ${nMc} per-question verdicts`);
+  ok(mdiv.revealed === nMc, `${label}: mdiv track marked ${mdiv.revealed} of ${nMc} correct options`);
   ok(/\b15 minute|15 minuto/.test(mdiv.result), `${label}: mdiv lock not 15 minutes — "${mdiv.result.slice(0, 80)}"`);
-  ok(mdiv.revealed === 0, `${label}: mdiv track revealed ${mdiv.revealed} correct answers on a failed attempt`);
+
+  // 5. short answer counts on the master's track: MC at the mark with SA
+  //    blank fails (where the unit has SA); with SA written it passes
+  if (probe.U.sa > 0) {
+    const mdivNoSA = await session(course, unit, 'mdiv', need, false);
+    ok(!/Passed|Aprobado/.test(mdivNoSA.result), `${label}: mdiv passed with short answer blank`);
+    ok(/short answer|respuesta corta/i.test(mdivNoSA.result), `${label}: mdiv SA failure did not name short answer — "${mdivNoSA.result.slice(0, 80)}"`);
+    ok(mdivNoSA.ls[`cts_${slug}_u${unit}_mc_passed`] === '1', `${label}: mdiv MC pass not banked when SA failed`);
+    ok(Object.keys(mdivNoSA.ls).some(k => /_sa_lock$/.test(k)), `${label}: mdiv SA failure did not apply an SA-only lock`);
+  }
+  const mdivSA = await session(course, unit, 'mdiv', need, true);
+  ok(/Passed|Aprobado/.test(mdivSA.result), `${label}: mdiv did not pass with MC at mark and SA written — "${mdivSA.result.slice(0, 80)}"`);
 
   // 6. a failed attempt records a lock
   ok(Object.keys(mdiv.ls).some(k => /_(sa|full)_lock$/.test(k)), `${label}: failed attempt recorded no lockout`);
 
   // 7. passing MC banks it
   ok(atMark.ls[`cts_${slug}_u${unit}_mc_passed`] === '1', `${label}: MC pass not banked`);
+}
+
+// 8. an answered question stays answered for the attempt (the verdict shows
+//    the key, so changing it would be free marks), and a reload after a failed
+//    attempt starts fresh rather than showing a locked, fully-answered form
+{
+  const [course, unit] = SAMPLES[0];
+  const ctx = await browser.newContext();
+  const page = await ctx.newPage();
+  await page.goto(`${BASE}/${course}Unit${unit}.html`, { waitUntil: 'load' });
+  await page.evaluate(() => { localStorage.clear(); localStorage.setItem('cts_track', 'cert'); });
+  await page.reload({ waitUntil: 'load' });
+  await page.waitForTimeout(300);
+  const changed = await page.evaluate(() => {
+    const q = document.querySelector('.question[data-mc="0"]');
+    q.querySelector('button.option[data-opt="0"]').click();
+    document.querySelector('.question[data-mc="0"] button.option[data-opt="1"]').click();
+    return document.querySelector('.question[data-mc="0"] button.option.selected')?.dataset.opt;
+  });
+  ok(changed === '0', `${course} u${unit}: an answered question could be changed (now ${changed})`);
+  await page.evaluate(() => {
+    document.querySelectorAll('.question[data-mc]').forEach(q => {
+      const wrong = window.CTS_UNIT.mc[+q.dataset.mc].answer === 0 ? 1 : 0;
+      const b = q.querySelector(`button.option[data-opt="${wrong}"]`); if (b && !q.querySelector('.selected')) b.click();
+    });
+    window.CTS_ENGINE.controls.submit().click();
+  });
+  await page.waitForTimeout(200);
+  await page.reload({ waitUntil: 'load' });
+  await page.waitForTimeout(300);
+  const after = await page.evaluate(() => document.querySelectorAll('button.option.selected').length);
+  ok(after === 0, `${course} u${unit}: reload after a failed attempt still showed ${after} answered questions`);
+  await ctx.close();
 }
 
 await browser.close();

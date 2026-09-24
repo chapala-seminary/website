@@ -4,20 +4,25 @@
    One engine for every course. Reads a single per-unit object, window.CTS_UNIT,
    defined by data/<slug>/unitN.js, which is loaded immediately before this file.
 
-   ASSESSMENT POLICY (seminary-wide, decided 2026-09-18)
+   ASSESSMENT POLICY (seminary-wide, decided 2026-09-18, corrected 2026-09-24
+   after Wayne's review of the beta restored two behaviours of the original
+   per-course engines)
      Pass mark      90% of the multiple-choice questions, as a ratio, so a unit
-                    may carry any number of questions. Short answer is graded by
-                    keyword coverage.
-     Lockout        Master's tracks (M.Div., Th.M.) wait 15 minutes after a
-                    failed attempt; certificate tracks wait 2 minutes.
-     Answer reveal  Certificate tracks see the correct answers when they submit.
-                    Master's tracks do not, until the unit is passed.
+                    may carry any number of questions.
+     Short answer   Required on the master's tracks (M.Div., Th.M.) only, 90%
+                    of the questions, each credited by keyword coverage. On the
+                    Certificate and Associate tracks the short-answer prompts
+                    are for the student's own reflection and do not count; the
+                    model answers are shown when the unit is submitted.
+     MC feedback    Every multiple-choice question scores the moment it is
+                    clicked, on every track: the chosen option is marked right
+                    or wrong and the correct letter is shown. A question, once
+                    answered, stays answered for that attempt.
+     Lockout        Master's tracks wait 15 minutes after a failed attempt;
+                    certificate tracks wait 2 minutes. The next click after the
+                    lock has expired starts a fresh attempt.
      Persistence    A passed multiple-choice section stays passed. A student who
                     passes MC but fails short answer retries only short answer.
-
-   The two tracks are deliberately different in difficulty. Certificate study is
-   meant to teach through immediate correction; master's study is meant to send
-   the student back to the lesson.
 
    STORAGE
    Keys are unchanged from the per-course engines, so existing students keep
@@ -36,7 +41,7 @@
   if (!U) { console.error("[cts] no CTS_UNIT for this page"); return; }
 
   // ---- policy ------------------------------------------------------------
-  var PASS_RATIO      = 0.90;   // of multiple-choice questions, and of short answer
+  var PASS_RATIO      = 0.90;   // of multiple-choice questions, and of short answer where it counts
   var SA_HIT_MIN      = 3;      // keyword matches needed to credit one answer
   var LOCK_MASTERS_MIN = 15;
   var LOCK_CERT_MIN    = 2;
@@ -64,13 +69,24 @@
   }
   function isMasters() { var t = track(); return t === "mdiv" || t === "thm" || t === "mth"; }
   function lockMinutes() { return isMasters() ? LOCK_MASTERS_MIN : LOCK_CERT_MIN; }
+  /* Where "continue" points: the next unit if the page has one, else the
+     certificate. Read from nextHref, not unit+1 < totalUnits, because
+     Counseling Situations numbers its units 0..12 and was told to continue
+     to a Unit 13 that does not exist. */
+  function nextWhere() {
+    var m = /Unit(\d+)\.html$/.exec(U.nextHref || "");
+    return m ? { en: "Unit " + m[1], es: "Unidad " + m[1] } : { en: "the Certificate", es: "el Certificado" };
+  }
+  // Short answer counts towards passing on the master's tracks only.
+  function saCounts() { return isMasters(); }
 
   var progress   = jget(KEY.progress, {});
   var unitPassed = !!progress["unit" + U.unit];
   var mcPassed   = lsGet(KEY.mcPassed) === "1";
 
-  /* Certificate students are corrected immediately; master's students are sent
-     back to the lesson. Once the unit is passed, everyone may review. */
+  /* Model answers for short-answer work: certificate tracks see them when
+     they submit; master's tracks, whose short answer is graded, see them once
+     the unit is passed. Multiple choice is corrected on click for everyone. */
   function revealAnswers() { return !isMasters() || unitPassed; }
 
   // ---- language ----------------------------------------------------------
@@ -103,7 +119,13 @@
     ? saved.saAnswers : new Array(sa.length).fill("");
   var graded = false;
 
-  function saveState() { lsSet(KEY.state, JSON.stringify({ mcAnswers: mcAnswers, saAnswers: saAnswers })); }
+  function saveState() {
+    /* After a failed attempt the answers stay on screen for review but are
+       not kept: the next visit starts a fresh attempt. Banked MC is kept. */
+    var keepMC = !graded || mcPassed || unitPassed;
+    lsSet(KEY.state, JSON.stringify({ mcAnswers: keepMC ? mcAnswers : new Array(mc.length).fill(null),
+                                      saAnswers: saAnswers }));
+  }
 
   function LETTERS(i) { return "ABCDEFGH".charAt(i); }
   function answerIndex(q) {
@@ -267,22 +289,26 @@
       mc.forEach(function (q, i) {
         out += '<div class="question" data-mc="' + i + '">';
         out += '<p style="font-weight:bold;">' + (i + 1) + ". " + bi(q.stem || q.text || q.prompt) + "</p>";
+        /* Answered questions are corrected at once, as the original engines
+           did: the chosen option is marked, the right one is marked, and a
+           line says which. This is how the courses teach, on every track. */
+        var chosen = mcAnswers[i], right = answerIndex(q), answered = chosen !== null && chosen !== undefined;
         options(q).forEach(function (opt, j) {
           var cls = "option";
-          /* Master's students are told nothing about correctness on a failed
-             attempt -- not even which of their own answers were right, since
-             that is still the answer key by elimination. They see only what
-             they chose. Certificate students are corrected immediately. */
-          if (mcAnswers[i] === j) cls += " selected";
-          if (graded && reveal) {
-            if (mcAnswers[i] === j) cls += (j === answerIndex(q) ? " correct" : " wrong");
-            if (j === answerIndex(q)) cls += " correct";
+          if (chosen === j) cls += " selected";
+          if (answered) {
+            if (j === right) cls += " correct";
+            else if (j === chosen) cls += " wrong";
           }
           out += '<button class="' + cls + '" data-mc="' + i + '" data-opt="' + j + '" type="button">' +
                  "<strong>" + LETTERS(j) + ".</strong> " + bi(opt) + "</button>";
         });
-        if (graded && reveal && q.why) {
-          out += '<div class="feedback">' + bi(q.why) + "</div>";
+        if (answered) {
+          out += chosen === right
+            ? '<div class="feedback-text correct">' + bi({ en: "&#10003; Correct!", es: "&#10003; ¡Correcto!" }) + "</div>"
+            : '<div class="feedback-text incorrect">' + bi({ en: "&#10007; Incorrect. Correct answer: " + LETTERS(right),
+                                                            es: "&#10007; Incorrecto. Respuesta correcta: " + LETTERS(right) }) + "</div>";
+          if (q.why) out += '<div class="feedback">' + bi(q.why) + "</div>";
         }
         out += "</div>";
       });
@@ -312,9 +338,16 @@
     scope.forEach(function (node) {
     node.querySelectorAll("button.option").forEach(function (b) {
       b.addEventListener("click", function () {
-        if (graded && unitPassed) return;
+        if (unitPassed) return;
         if (mcPassed) return;                       // MC already banked
-        mcAnswers[+b.dataset.mc] = +b.dataset.opt;
+        if (lockRemaining(KEY.fullLock)) return;    // still locked out
+        /* The feedback shows the answer, so a question cannot be changed
+           within an attempt. A click after a failed attempt's lock has
+           expired starts a fresh one. */
+        if (graded) { graded = false; mcAnswers = new Array(mc.length).fill(null); say("", "#000"); }
+        var i = +b.dataset.mc;
+        if (mcAnswers[i] !== null && mcAnswers[i] !== undefined) return;
+        mcAnswers[i] = +b.dataset.opt;
         saveState();
         renderQuestions();
       });
@@ -388,18 +421,17 @@
 
     graded = true;
     var mcOK = mcPassed || mc.length === 0 || gradeMC() >= needMC();
-    var saOK = sa.length === 0 || gradeSA() >= needSA();
+    var saOK = !saCounts() || sa.length === 0 || gradeSA() >= needSA();
 
     if (mcOK && !mcPassed) { lsSet(KEY.mcPassed, "1"); mcPassed = true; }
+    saveState();   // a failed attempt's MC answers are shown now but not kept
 
     if (mcOK && saOK) {
       progress["unit" + U.unit] = true;
       lsSet(KEY.progress, JSON.stringify(progress));
       unitPassed = true;
       lsDel(KEY.saLock); lsDel(KEY.fullLock);
-      var where = U.unit < U.totalUnits
-        ? { en: "Unit " + (U.unit + 1), es: "Unidad " + (U.unit + 1) }
-        : { en: "the Certificate", es: "el Certificado" };
+      var where = nextWhere();
       say(bi({ en: "&#10003; Passed. Continue to " + where.en + " above.",
                es: "&#10003; Aprobado. Continúe a " + where.es + " arriba." }), "#1f6b3b");
       var nb = el("nextUnitBtn"); if (nb) nb.disabled = false;
@@ -407,13 +439,14 @@
       // MC banked but short answer failed: lock only short answer
       applyLock(mcOK ? KEY.saLock : KEY.fullLock);
       var mins = lockMinutes();
-      var detail = mc.length
-        ? " (" + gradeMC() + "/" + mc.length + ", " + bi({ en: "need", es: "necesita" }) + " " + needMC() + ")"
-        : "";
-      say(bi({ en: "Not yet" + (mc.length ? " " + gradeMC() + "/" + mc.length + ", need " + needMC() : "") +
-                   ". Review the lesson and try again in " + mins + " minute(s).",
-               es: "Aún no" + (mc.length ? " " + gradeMC() + "/" + mc.length + ", necesita " + needMC() : "") +
-                   ". Repase la lección e inténtelo de nuevo en " + mins + " minuto(s)." }), "#8a1f1f");
+      // Name the section that fell short, so the student knows what to retry.
+      var part = !mcOK
+        ? { en: " — multiple choice " + gradeMC() + "/" + mc.length + ", need " + needMC(),
+            es: " — opción múltiple " + gradeMC() + "/" + mc.length + ", necesita " + needMC() }
+        : { en: " — short answer " + gradeSA() + "/" + sa.length + ", need " + needSA(),
+            es: " — respuesta corta " + gradeSA() + "/" + sa.length + ", necesita " + needSA() };
+      say(bi({ en: "Not yet" + part.en + ". Review the lesson and try again in " + mins + " minute(s).",
+               es: "Aún no" + part.es + ". Repase la lección e inténtelo de nuevo en " + mins + " minuto(s)." }), "#8a1f1f");
     }
     renderQuestions();
   }
@@ -452,9 +485,7 @@
 
     if (unitPassed) {
       graded = true;
-      var where = U.unit < U.totalUnits
-        ? { en: "Unit " + (U.unit + 1), es: "Unidad " + (U.unit + 1) }
-        : { en: "the Certificate", es: "el Certificado" };
+      var where = nextWhere();
       say(bi({ en: "&#10003; Unit already passed! Click " + where.en + " above.",
                es: "&#10003; Unidad ya aprobada. Haga clic en " + where.es + " arriba." }), "#1f6b3b");
       var sbp = submitEl(); if (sbp) sbp.disabled = true;
