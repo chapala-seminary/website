@@ -26,8 +26,9 @@ interface Props {
   unit: Unit;
   body: string;
   pagePrefix: string;
+  unitNumbers: number[];
 }
-const { title, bodyClass, styles, scripts, unit, body, pagePrefix } = Astro.props;
+const { title, bodyClass, styles, scripts, unit, body, pagePrefix, unitNumbers } = Astro.props;
 
 const { masthead, content } = shell(body);
 
@@ -40,11 +41,11 @@ const { masthead, content } = shell(body);
 const cls = bodyClass && /\blang-(en|es|both)\b/.test(bodyClass) ? bodyClass
           : `${bodyClass} lang-en`.trim();
 
-// The unit pills. A course of 13 units gets 13 circles; which are finished is
-// the engine's business at runtime, because it is the only thing that knows
-// what this browser has completed.
-const pills = Array.from({ length: unit.totalUnits + 1 }, (_, i) => i)
-  .filter((n) => n > 0 || unit.unit === 0)
+// The unit pills: one per unit the course actually has (Counseling
+// Situations runs 0..12). Which are finished is the engine's business at
+// runtime, because it is the only thing that knows what this browser has
+// completed.
+const pills = unitNumbers
   .map((n) => ({ n, href: `${pagePrefix}Unit${n}.html`, here: n === unit.unit }));
 
 const unitJson = JSON.stringify(unit).replace(/</g, '\\u003c');

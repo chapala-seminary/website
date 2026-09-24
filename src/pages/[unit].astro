@@ -11,14 +11,21 @@ export async function getStaticPaths() {
   const lessons = await getCollection('lessons');
   // a course is converted when its lessons are in the collection
   const byUnit = new Map(lessons.map((l) => [`${l.data.course}/${l.data.unit}`, l.data as Lesson]));
+  // The units a course actually has, for the pills. Counting 1..totalUnits
+  // gave Counseling Situations, whose units run 0..12, a pill 13 that led to
+  // a page that does not exist and no pill for its Unit 0.
+  const numbers = new Map<string, number[]>();
+  for (const e of units) (numbers.get(e.data.pagePrefix) ?? numbers.set(e.data.pagePrefix, []).get(e.data.pagePrefix)!).push(e.data.unit);
+  for (const list of numbers.values()) list.sort((a, b) => a - b);
   return units.map((entry) => ({
     // the page name is the URL the site already uses, e.g. CTS1PeterUnit1
     params: { unit: `${entry.data.pagePrefix}Unit${entry.data.unit}` },
-    props: { data: entry.data, lesson: byUnit.get(`${entry.data.pagePrefix}/${entry.data.unit}`) ?? null },
+    props: { data: entry.data, lesson: byUnit.get(`${entry.data.pagePrefix}/${entry.data.unit}`) ?? null,
+             unitNumbers: numbers.get(entry.data.pagePrefix)! },
   }));
 }
 
-const { data, lesson } = Astro.props;
+const { data, lesson, unitNumbers } = Astro.props;
 
 /* Two sources, one page. A course that has been converted renders from its
    lesson data; the rest still render from the HTML file they were written as,
@@ -36,4 +43,4 @@ if (lesson) {
 // pagePrefix is build-time routing, not something the engine reads
 const { title, bodyClass, styles, scripts, pagePrefix, ...unit } = data;
 ---
-<Unit title={title} bodyClass={bodyClass} styles={styles} scripts={scripts} unit={unit} body={body} pagePrefix={pagePrefix} />
+<Unit title={title} bodyClass={bodyClass} styles={styles} scripts={scripts} unit={unit} body={body} pagePrefix={pagePrefix} unitNumbers={unitNumbers} />
