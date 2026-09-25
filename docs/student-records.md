@@ -115,6 +115,7 @@ tables except the Worker.
 | `unit_progress` | every unit passed: `course` (storage slug, e.g. `1peter`), `unit`, `completed_at` |
 | `course_completions` | every course finished: `code` (e.g. `CTSOTS`), `track` it was earned on, `completed_at` |
 | `certificates` | every certificate the site has issued a verification code for (course and degree level), with `revoked_at` |
+| `notifications` | one row per notice the Worker sent the seminary: `kind` (`course` \| `certificate`), `code` (completion code or verification code), `status` (`sent` \| `failed`), `attempts`, `error`, `created_at`, `sent_at` |
 | `degree_progress` | **the view to read first**: per student, `courses_done`, `foundation_done` (of 7), `masters_done`, `mdiv_core_done` (of 20), `last_completion_at`. Certificate of Ministry = 12 courses incl. all 7 foundation; Associate = 25 incl. foundation; Th.M. = 12 master's-level incl. foundation; M.Div. = 30 master's-level incl. the 20-course core. |
 
 Course codes map to names through `GET /api/catalog` (`completions.CODE.name`);
@@ -266,6 +267,24 @@ nothing.
    Found on the way: a `/api/health` probe cut short by the student navigating
    away was being remembered for the session as "no API", silencing every
    page in the tab. Only an actual answer is remembered now.
+5. **The seminary is told of every completion and every certificate, by the
+   Worker** (25 Sept, `worker/notify.js`, migration `0005_notifications.sql`;
+   Wayne's audit item 5). When `/api/sync` records a course completion the
+   student's record did not hold before, and when `/api/certificate` issues a
+   new award, the Worker emails `NOTIFY_TO` (`info@chapalaseminary.org`,
+   `wrangler.jsonc` vars) through the same Resend path as student email, and
+   writes a row in `notifications` (`student_id, kind, code, status, attempts,
+   error, created_at, sent_at`; one per student/kind/code). The row is the
+   record: the tracker can read it directly, and a failed send is visible and
+   retried on the student's next sync (up to five attempts). A notice never
+   fails the request that records the event. The notice says what is true:
+   the student's browser reported the course complete; grading is still in
+   the browser. The Google Apps Script post in `cts-record.js` still keeps
+   the old sheet updated and can be retired once the tracker reads D1.
+
+   Before deploying: `npx wrangler d1 migrations apply chapala-students-beta
+   --env beta --remote` and `npx wrangler d1 migrations apply chapala-students
+   --remote` (applies 0005).
 
 ## Deploying
 

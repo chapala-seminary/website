@@ -24,6 +24,7 @@
 import { courseShortfall, degreeShortfall, resolveCourse, DEGREES } from './awards.js';
 import catalog from './catalog.json';
 import { emailConfigured, sendEmail, verificationEmail } from './email.js';
+import { notify, retryFailed } from './notify.js';
 
 const MAX = { name: 120, email: 160, country: 80, track: 24, goal: 400, heard: 40, title: 200, course: 64, code: 40 };
 const TRACKS = new Set(['cert', 'certificate', 'associate', 'thm', 'mdiv']);
@@ -193,7 +194,8 @@ async function sync(request, env) {
   const id = normaliseCode(b.code);
   if (!id) throw new HttpError(400, 'a student code is required');
 
-  const exists = await env.DB.prepare('SELECT id, track FROM students WHERE id = ?').bind(id).first();
+  const exists = await env.DB.prepare(
+    'SELECT id, name, email, email_verified_at, country, track, goal FROM students WHERE id = ?').bind(id).first();
   if (!exists) return fail(404, 'no record for that student code');
 
   const statements = [];
@@ -226,13 +228,34 @@ async function sync(request, env) {
   // that arrived without one (before 0003_tracker, or from a browser with no
   // master's list) takes the first track any device reports for it.
   const trackNow = (s && typeof s === 'object' && String(s.track || '').toLowerCase()) || exists.track;
-  for (const row of completionRows(id, b.doneCodes, b.completionTracks, trackNow))
+  const completions = completionRows(id, b.doneCodes, b.completionTracks, trackNow);
+  // Which of these the record did not hold before this request: those are the
+  // completions the seminary has not heard about, and the ones it is told of
+  // below. Read before the batch, so a course re-reported from a second device
+  // is not announced twice.
+  const held = new Set(completions.length
+    ? ((await env.DB.prepare('SELECT code FROM course_completions WHERE student_id = ?').bind(id).all()).results ?? []).map((r) => r.code)
+    : []);
+  for (const row of completions)
     statements.push(env.DB.prepare(
       `INSERT INTO course_completions (student_id, code, track, completed_at) VALUES (?, ?, ?, ?)
        ON CONFLICT(student_id, code) DO UPDATE SET track = COALESCE(course_completions.track, excluded.track)`).bind(...row));
 
   if (statements.length) await env.DB.batch(statements);
-  return json(await loadState(env, id));
+
+  // The notice to the seminary, from the request that recorded the completion
+  // (Wayne's audit item 5). One per course, kept in `notifications`; a failed
+  // send is retried here on the student's next sync. Never fails the sync.
+  const student = { ...exists, ...(s && typeof s === 'object' ? { name: str(s.name, MAX.name, { field: 'name' }) || exists.name } : {}) };
+  const notices = [];
+  for (const [, code, track] of completions)
+    if (!held.has(code)) { const n = await notify(env, student, { kind: 'course', code, track }); if (n) notices.push(n); }
+  notices.push(...await retryFailed(env, student));
+
+  const state = await loadState(env, id);
+  // The test configuration sends nothing; it is told what would have gone
+  // out so the suite can check it. Never present in a deployed Worker.
+  return json(env.EMAIL_MODE === 'log' && !env.RESEND_API_KEY ? { ...state, notifications: notices } : state);
 }
 
 async function hydrate(env, rawCode) {
@@ -247,7 +270,8 @@ async function issueCertificate(request, env) {
   const b = await body(request);
   const id = normaliseCode(b.code);
   if (!id) throw new HttpError(400, 'a student code is required');
-  const student = await env.DB.prepare('SELECT id, name, track, email_verified_at FROM students WHERE id = ?').bind(id).first();
+  const student = await env.DB.prepare(
+    'SELECT id, name, email, email_verified_at, country, track, goal FROM students WHERE id = ?').bind(id).first();
   if (!student) return fail(404, 'no record for that student code');
   // Students start with only a code; a certificate needs a confirmed email,
   // so the seminary can reach the person it certified and send them a copy.
@@ -302,7 +326,11 @@ async function issueCertificate(request, env) {
       `INSERT INTO certificates (verify_code, student_id, student_name, level, course, title, issued_at)
        VALUES (?, ?, ?, ?, ?, ?, ?) ON CONFLICT(verify_code) DO NOTHING`)
       .bind(vc, id, student.name, level, course, title, now()).run();
-    if (res.meta?.changes) return json({ verifyCode: vc, reissued: false }, 201);
+    if (res.meta?.changes) {
+      // The seminary hears of every award it issues, once (worker/notify.js).
+      const n = await notify(env, student, { kind: 'certificate', code: vc, level, course, title });
+      return json({ verifyCode: vc, reissued: false, ...(env.EMAIL_MODE === 'log' && !env.RESEND_API_KEY && n ? { notification: n } : {}) }, 201);
+    }
   }
   throw new HttpError(503, 'could not allocate a verification code, please try again');
 }
@@ -389,6 +417,7 @@ async function emailConfirm(request, env) {
   await env.DB.batch([
     env.DB.prepare('UPDATE students SET email = ?, email_verified_at = ?, updated_at = ? WHERE id = ?').bind(ch.email, t, t, id),
     env.DB.prepare('DELETE FROM email_challenges WHERE student_id = ?').bind(id),
+    env.DB.prepare('DELETE FROM notifications WHERE student_id = ?').bind(id),
   ]);
   return json({ verified: true, email: ch.email });
 }
@@ -413,6 +442,7 @@ async function deleteStudent(env, rawCode) {
     env.DB.prepare('DELETE FROM course_completions WHERE student_id = ?').bind(id),
     env.DB.prepare('DELETE FROM certificates WHERE student_id = ?').bind(id),
     env.DB.prepare('DELETE FROM email_challenges WHERE student_id = ?').bind(id),
+    env.DB.prepare('DELETE FROM notifications WHERE student_id = ?').bind(id),
   ]);
   return json({ deleted: true });
 }

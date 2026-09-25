@@ -73,6 +73,14 @@ let s = await jpost('/api/sync', {
 });
 const find = (st, course, unit) => st.progress.find(p => p.course === course && p.unit === unit);
 ok(find(s.body, '1peter', 1)?.completed_at === T_EARLY, 'the earlier completion time wins');
+
+/* ---- the seminary is told of each completion, once ----------------------- */
+// The test Worker sends nothing; it reports what it would have sent.
+const told = (st) => (st.notifications || []).map(n => `${n.kind}:${n.code}:${n.status}`).sort();
+ok(told(s.body).join(',') === 'course:CTSNT:sent',
+  `the sync that recorded New Testament told the seminary of it, and of nothing already recorded (${told(s.body)})`);
+const repeat = await jpost('/api/sync', { code: CODE, progress: [], doneCodes: ['CTSOTS', 'CTSNT'] });
+ok(told(repeat.body).length === 0, `re-reporting both courses from another device tells the seminary nothing (${told(repeat.body)})`);
 ok(!!find(s.body, '1peter', 2), 'a unit missing from this sync is NOT dropped');
 ok(s.body.doneCodes.join(',') === 'CTSNT,CTSOTS', `done codes are the union, got ${s.body.doneCodes}`);
 
@@ -171,10 +179,13 @@ const cert = await jpost('/api/certificate', { code: CODE, level: 'course', cour
 ok(cert.status === 201, `issuing a certificate returned ${cert.status}`);
 const VC = cert.body?.verifyCode;
 ok(/^[0-9A-HJKMNP-TV-Z]{10}$/.test(VC || ''), `verification code has the documented shape, got ${VC}`);
+ok(cert.body?.notification?.kind === 'certificate' && cert.body.notification.code === VC && cert.body.notification.status === 'sent',
+  `issuing the certificate told the seminary (${JSON.stringify(cert.body?.notification)})`);
 
 const again = await jpost('/api/certificate', { code: CODE, level: 'course', course: '1peter', title: '1 Peter Intensive' });
 ok(again.body?.verifyCode === VC && again.body?.reissued === true,
   'printing the same certificate twice does not mint a second verification code');
+ok(!again.body?.notification, 'and does not tell the seminary twice');
 
 // The same course by its completion code is the same award, not a second one.
 const viaCode = await jpost('/api/certificate', { code: CODE, level: 'course', course: 'CTS1PETER', title: '1 Peter Intensive' });

@@ -48,7 +48,9 @@
 	//   npx wrangler secret put RESEND_API_KEY --env beta (beta)
 	"vars": {
 		"EMAIL_FROM": "Chapala Theological Seminary <certificates@chapalaseminary.org>",
-		"EMAIL_REPLY_TO": "info@chapalaseminary.org"
+		"EMAIL_REPLY_TO": "info@chapalaseminary.org",
+		// where the seminary is told of completions and certificates (worker/notify.js)
+		"NOTIFY_TO": "info@chapalaseminary.org"
 	},
 	"assets": {
 		"directory": "./dist",
@@ -71,12 +73,6 @@
 			"binding": "DB",
 			"database_name": "chapala-students",
 			"database_id": "88a0b667-c2a6-4598-8779-0eb8970ae10d"
-		},
-		{
-			"binding": "chapala_students",
-			"database_name": "chapala-students",
-			"database_id": "88a0b667-c2a6-4598-8779-0eb8970ae10d",
-			"remote": true
 		}
 	],
 	"env": {
@@ -92,7 +88,8 @@
 			// vars are not inherited by an environment, so they are repeated
 			"vars": {
 				"EMAIL_FROM": "Chapala Theological Seminary <certificates@chapalaseminary.org>",
-				"EMAIL_REPLY_TO": "info@chapalaseminary.org"
+				"EMAIL_REPLY_TO": "info@chapalaseminary.org",
+				"NOTIFY_TO": "info@chapalaseminary.org"
 			},
 			"assets": {
 				"directory": "./dist",

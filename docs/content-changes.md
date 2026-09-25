@@ -441,6 +441,13 @@ as one line at the foot of the diploma. Nothing else on the page changed, and
 a student without a code, or offline, sees the page as before.
 `docs/student-records.md` §4 has the detail.
 
+### 8l. The seminary is told of completions by the Worker (25 Sept) — no page content changed
+
+`worker/notify.js` emails info@chapalaseminary.org from the request that
+records a course completion or issues a certificate, and keeps a row per
+notice in D1. Wayne's audit item 5. Nothing on any page changed; the Apps
+Script post in `cts-record.js` stays for the sheet.
+
 ---
 
 ## How to check any of this yourself
