@@ -491,6 +491,20 @@ M.Div. only.
   choice, and any multiple-choice count other than twenty outside Pentecostal
   (7), Counseling Situations (10) and CTSRE unit 1 (18).
 
+### 8n. Certificate pages for the three single-page courses (25 Sept) — 3 pages added, 3 changed
+
+Counseling, WiseSpeak and Narrative Preaching printed their certificate from a
+pop-up inside the course page, which no registration or verification could
+reach. Each now has a certificate page like every other course —
+`CTSCounselingCertificate.html`, `CTSPreachingCertificate.html`,
+`CTSNarrativePreachingCertificate.html` — built from the Pentateuch page's
+layout, unlocking on the course's completion code, with the same registration
+panel and verification stamp. Scripture on each: Galatians 6:2, 2 Timothy 4:2,
+Matthew 13:34. The "View Course Certificate" button on each course page is
+now a link to its certificate page; nothing else on the course pages changed.
+Students also receive their certificate by email once it is registered
+(`docs/student-records.md` §6–7).
+
 ---
 
 ## How to check any of this yourself

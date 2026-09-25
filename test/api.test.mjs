@@ -175,12 +175,13 @@ for (const level of ['certificate', 'associate', 'thm', 'mdiv'])
 
 // Pass the rest of 1 Peter and the certificate is supported.
 await jpost('/api/sync', { code: CODE, progress: Array.from({ length: 12 }, (_, i) => ({ course: '1peter', unit: i + 1, completedAt: T_LATE })) });
-const cert = await jpost('/api/certificate', { code: CODE, level: 'course', course: '1peter', title: '1 Peter Intensive' });
+const cert = await jpost('/api/certificate', { code: CODE, level: 'course', course: '1peter', title: '1 Peter Intensive', page: 'CTS1PeterCertificate.html' });
 ok(cert.status === 201, `issuing a certificate returned ${cert.status}`);
 const VC = cert.body?.verifyCode;
 ok(/^[0-9A-HJKMNP-TV-Z]{10}$/.test(VC || ''), `verification code has the documented shape, got ${VC}`);
 ok(cert.body?.notification?.kind === 'certificate' && cert.body.notification.code === VC && cert.body.notification.status === 'sent',
   `issuing the certificate told the seminary (${JSON.stringify(cert.body?.notification)})`);
+ok(cert.body?.emailed === true, `and emailed the student their copy (emailed: ${cert.body?.emailed})`);
 
 const again = await jpost('/api/certificate', { code: CODE, level: 'course', course: '1peter', title: '1 Peter Intensive' });
 ok(again.body?.verifyCode === VC && again.body?.reissued === true,

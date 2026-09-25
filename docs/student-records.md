@@ -285,6 +285,24 @@ nothing.
    Before deploying: `npx wrangler d1 migrations apply chapala-students-beta
    --env beta --remote` and `npx wrangler d1 migrations apply chapala-students
    --remote` (applies 0005).
+6. **The student gets their certificate by email** (25 Sept). When
+   `/api/certificate` issues a new award it also emails the student's
+   verified address (`certificateEmail()` in `worker/email.js`): the award,
+   the verification code and link, and the page to print it from (the browser
+   sends `page`, the certificate page's filename; the Worker accepts only a
+   plain `.html` name). The answer carries `emailed: true|false`; a failed
+   send never undoes the award, and the page shows the code either way.
+7. **The single-page courses have certificate pages** (25 Sept):
+   `CTSCounselingCertificate.html` (COUNSELING), `CTSPreachingCertificate.html`
+   (WISESPEAK) and `CTSNarrativePreachingCertificate.html` (STORYTEL). They
+   gate on the completion code in `cts_done_codes`, which the course page
+   records when the last unit is passed, and name their code with
+   `data-course-code` on `<body>` -- read by `cts-certify.js`,
+   `cts-completion.js` and `tools/gen-worker-catalog.mjs`, since none of those
+   codes can be spelled by a filename. The course pages' "View Course
+   Certificate" button now links there; their inline certificate modals are
+   unreachable from the completion notice and go when the courses move to the
+   shared engine.
 
 ## Deploying
 

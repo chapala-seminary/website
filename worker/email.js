@@ -61,3 +61,30 @@ export function verificationEmail(code) {
     `If you did not ask for this, ignore this message. / Si no lo solicitó, ignore este mensaje.`;
   return { subject: `Verification code ${code} · Código de verificación`, text };
 }
+
+/** The student's own copy of a certificate they just claimed: what it is for,
+ *  the code anyone can check it by, and where to print it. Plain text in both
+ *  languages, like the verification message. `page` is the certificate page's
+ *  filename when the browser said which one it was on, so the link goes back
+ *  to the printable diploma; `origin` is the site the request came in on. */
+export function certificateEmail({ name, award, code, page, origin }) {
+  const site = origin || 'https://chapalaseminary.org';
+  const verify = `${site}/verify/${code}`;
+  const print = page ? `${site}/${page}` : site;
+  const text =
+    `Dear ${name},\n\n` +
+    `Your certificate from Chapala Theological Seminary is registered:\n\n` +
+    `  ${award}\n` +
+    `  Verification code: ${code}\n` +
+    `  Anyone can check it at ${verify}\n\n` +
+    `To print it or save it as a PDF, open ${print} on the device where you study.\n\n` +
+    `----\n\n` +
+    `Estimado/a ${name}:\n\n` +
+    `Su certificado del Seminario Teológico de Chapala está registrado:\n\n` +
+    `  ${award}\n` +
+    `  Código de verificación: ${code}\n` +
+    `  Cualquiera puede comprobarlo en ${verify}\n\n` +
+    `Para imprimirlo o guardarlo como PDF, abra ${print} en el dispositivo donde estudia.\n\n` +
+    `Chapala Theological Seminary · Seminario Teológico de Chapala`;
+  return { subject: `Your certificate: ${award} · Su certificado`, text };
+}

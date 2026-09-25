@@ -23,7 +23,7 @@
 
 import { courseShortfall, degreeShortfall, resolveCourse, DEGREES } from './awards.js';
 import catalog from './catalog.json';
-import { emailConfigured, sendEmail, verificationEmail } from './email.js';
+import { emailConfigured, sendEmail, verificationEmail, certificateEmail } from './email.js';
 import { notify, retryFailed } from './notify.js';
 
 const MAX = { name: 120, email: 160, country: 80, track: 24, goal: 400, heard: 40, title: 200, course: 64, code: 40 };
@@ -282,6 +282,9 @@ async function issueCertificate(request, env) {
   if (!LEVELS.has(level)) throw new HttpError(400, 'level must be one of: ' + [...LEVELS].join(', '));
   let course = str(b.course, MAX.course, { required: level === 'course', field: 'course' });
   const title = str(b.title, MAX.title, { required: true, field: 'title' });
+  // The page the student is on, for the link in their email. A filename only,
+  // and only one this site serves; anything else is dropped, not echoed.
+  const page = /^[A-Za-z0-9_]+\.html$/.test(String(b.page || '')) ? String(b.page) : null;
 
   // Grading is still client-side, so this cannot prove the work was done. It
   // can refuse an award the record does not support: every unit of the course
@@ -329,7 +332,18 @@ async function issueCertificate(request, env) {
     if (res.meta?.changes) {
       // The seminary hears of every award it issues, once (worker/notify.js).
       const n = await notify(env, student, { kind: 'certificate', code: vc, level, course, title });
-      return json({ verifyCode: vc, reissued: false, ...(env.EMAIL_MODE === 'log' && !env.RESEND_API_KEY && n ? { notification: n } : {}) }, 201);
+      // And the student gets their own copy: the award, the code, where to
+      // print it. Their address is verified (checked above). A failed send
+      // does not undo the award -- the certificate exists and the page shows
+      // the code either way -- so the answer says only whether it went.
+      let emailed = false;
+      try {
+        await sendEmail(env, { to: student.email, ...certificateEmail({
+          name: student.name, award: title, code: vc, page, origin: new URL(request.url).origin }) });
+        emailed = true;
+      } catch (e) { console.error('certificate email failed', e && e.message); }
+      return json({ verifyCode: vc, reissued: false, emailed,
+        ...(env.EMAIL_MODE === 'log' && !env.RESEND_API_KEY && n ? { notification: n } : {}) }, 201);
     }
   }
   throw new HttpError(503, 'could not allocate a verification code, please try again');
