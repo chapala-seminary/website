@@ -31,6 +31,24 @@ const shortAnswer = z.object({
   minHits: z.number().int().positive().optional(),
 });
 
+/* Fill in the blank: a sentence with one gap, written `____`, and the word or
+   short phrase that fills it. Required on the Associate, Th.M. and M.Div.
+   tracks (Wayne's rule, 25 Sept 2026). Graded by comparing the student's
+   words with `answer`, or with any `accept` variant, after the engine's
+   normalise(): lower case, punctuation removed, spaces collapsed, accents
+   kept. `accept` is for other right answers -- "Christ" for "Jesus Christ" --
+   not for misspellings. */
+const BLANK = '____';
+const oneBlank = (s: string) => s.split(BLANK).length === 2;
+const fillIn = z.object({
+  prompt: bilingual.refine((p) => oneBlank(p.en) && oneBlank(p.es), {
+    message: `a fill-in prompt must contain exactly one blank, written ${BLANK}, in each language`,
+  }),
+  answer: z.object({ en: z.string().min(1), es: z.string().min(1) }),
+  accept: z.object({ en: z.array(z.string().min(1)).optional(),
+                     es: z.array(z.string().min(1)).optional() }).optional(),
+});
+
 const units = defineCollection({
   // id comes from the file path; without this the loader would adopt a data
   // field as the id and silently collapse every unit of a course into one
@@ -54,6 +72,8 @@ const units = defineCollection({
     unitTitles: z.object({ en: z.array(z.string()), es: z.array(z.string()) }).optional(),
     mc: z.array(multipleChoice),
     sa: z.array(shortAnswer),
+    // optional until every course has them; a unit that has them has ten
+    fill: z.array(fillIn).length(10, 'a unit with fill-ins has exactly ten').optional(),
   }),
 });
 

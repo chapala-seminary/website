@@ -196,6 +196,23 @@ const unitsCollection = () => ({
         { ...named('model', 'Model answer', 'text'), required: false },
         { label: 'Keywords needed to pass', name: 'minHits', widget: 'number', value_type: 'int', min: 1, required: false },
       ] },
+    /* Ten per unit where present (the build refuses any other number), so
+       adding or deleting one here fails the build until it is ten again. */
+    { label: 'Fill in the blank', name: 'fill', widget: 'list', label_singular: 'Question',
+      required: false,
+      summary: '{{fields.prompt.en}}',
+      hint: 'Write the gap as four underscores: ____ (one gap per sentence).',
+      fields: [
+        named('prompt', 'Sentence with a gap', 'text'),
+        named('answer', 'Answer', 'string'),
+        { label: 'Other accepted answers', name: 'accept', widget: 'object', required: false,
+          collapsed: true,
+          hint: 'Other wordings that are also right. Capitals and punctuation are already ignored, so they need no entry here.',
+          fields: [
+            { label: 'English', name: 'en', widget: 'list', required: false, field: { label: 'Answer', name: 'answer', widget: 'string' } },
+            { label: 'Spanish', name: 'es', widget: 'list', required: false, field: { label: 'Answer', name: 'answer', widget: 'string' } },
+          ] },
+      ] },
   ],
 });
 
