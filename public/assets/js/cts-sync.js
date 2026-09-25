@@ -247,12 +247,17 @@
     if (cached === '1') return (apiCheck = Promise.resolve(true));
     if (cached === '0') return (apiCheck = Promise.resolve(false));
     apiCheck = fetch(API + '/health', { credentials: 'omit' })
-      .then(function (r) { return r.ok; })
-      .catch(function () { return false; })
-      .then(function (up) {
-        try { sessionStorage.setItem(API_KEY, up ? '1' : '0'); } catch (e) {}
-        return up;
-      });
+      .then(function (r) {
+        // An answer, either way, is worth remembering for the session: an API
+        // that is there, or one that is not deployed (404). A request that
+        // never got an answer -- the student navigated away mid-probe, or the
+        // connection dropped -- says nothing about the API, and remembering
+        // it as "no API" would silence every page for the rest of the tab.
+        // (This page still asks only once; the next page asks again.)
+        try { sessionStorage.setItem(API_KEY, r.ok ? '1' : '0'); } catch (e) {}
+        return r.ok;
+      })
+      .catch(function () { return false; });
     return apiCheck;
   }
 

@@ -185,6 +185,9 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   node tools/audit-controls-built.mjs "http://127.0.0.1:$PORT"
   node tools/verify-devmode.mjs "http://127.0.0.1:$PORT"
   node tools/verify-certificates.mjs "http://127.0.0.1:$PORT"
+  # Registering a certificate from the page: email confirmed once, a
+  # verification code every time, nothing asked of a student with no record.
+  node tools/verify-certify.mjs "http://127.0.0.1:$PORT"
   # A course completes when its last unit is passed, never when its
   # certificate page is opened; the seminary hears about it once.
   node tools/verify-completion.mjs "http://127.0.0.1:$PORT"

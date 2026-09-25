@@ -429,6 +429,18 @@ no other lesson paragraph or multiple-choice bank missing. `tools/content-baseli
   `docs/apps-script/completion-notice.md` is the `MailApp.sendEmail` change
   for the Apps Script (item 5a).
 
+### 8k. Certificates can be registered with the seminary (25 Sept) — 71 pages gained one script tag
+
+Every certificate page now loads `assets/js/cts-certify.js` after the sync
+client (the Certificate of Ministry and the Ethics certificate, which had no
+sync client, gained that too). For a student with a student code it asks the
+seminary to register the award: once the student has confirmed an email
+address (a six-digit code sent to it), the certificate gets a verification
+code that anyone can check at `/verify/<code>`, shown on the page and printed
+as one line at the foot of the diploma. Nothing else on the page changed, and
+a student without a code, or offline, sees the page as before.
+`docs/student-records.md` §4 has the detail.
+
 ---
 
 ## How to check any of this yourself

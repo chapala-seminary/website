@@ -60,7 +60,9 @@ losing a passed unit is not.
 | `POST` | `/api/sync` | merges a device's state, returns the merged result |
 | `GET` | `/api/student/<code>` | rehydrates a device |
 | `DELETE` | `/api/student/<code>` | deletes the student and everything attached |
-| `POST` | `/api/certificate` | records an award, returns a verification code |
+| `POST` | `/api/email/start` | emails a six-digit code to the address given (one a minute, five a day) |
+| `POST` | `/api/email/confirm` | stores the address as verified once the code matches (five guesses per code) |
+| `POST` | `/api/certificate` | records an award, returns a verification code — **403 `{needs:'email'}` until the student's email is verified** |
 | `GET` | `/api/verify/<code>` | JSON |
 | `GET` | `/verify/<code>` | **the public verification page** |
 | `GET` | `/api/catalog` | public, static: the courses with their units, and every completion code with the course name its certificate page writes |
@@ -246,6 +248,24 @@ nothing.
      **not available to Pages Functions**, which is why this is hand-rolled
      against D1. Migration `0002_throttle.sql`; the address is stored hashed,
      because otherwise that table is a log of who used the site and when.
+
+4. **Registering a certificate from the page** (25 Sept, `public/assets/js/cts-certify.js`,
+   on every certificate page after the sync client). When a diploma is showing
+   and the browser holds a student code, the page asks the Worker for the
+   record. Email already verified: it posts `/api/certificate` at once and shows
+   the verification code, and prints it as a line inside the diploma
+   (`Verification: <code> · chapalaseminary.org/verify/<code>`). Not verified:
+   a small panel under the diploma asks for an email, sends the six-digit code,
+   confirms it, then registers. The Worker returns the same code for an award
+   it has already registered, so a second visit or a second device shows the
+   code without asking anything. With no code, no API, or a student who opted
+   out, the page is exactly what it was: printable. `tools/verify-certify.mjs`
+   drives the whole flow in a browser, including a wrong code, a second
+   device, and a degree page.
+
+   Found on the way: a `/api/health` probe cut short by the student navigating
+   away was being remembered for the session as "no API", silencing every
+   page in the tab. Only an actual answer is remembered now.
 
 ## Deploying
 
