@@ -28475,6 +28475,57 @@ collections:
             value_type: int
             min: 1
             required: false
+      - label: Fill in the blank
+        name: fill
+        widget: list
+        label_singular: Question
+        required: false
+        summary: "{{fields.prompt.en}}"
+        hint: "Write the gap as four underscores: ____ (one gap per sentence)."
+        fields:
+          - label: Sentence with a gap
+            name: prompt
+            widget: object
+            fields:
+              - label: English
+                name: en
+                widget: text
+              - label: Spanish
+                name: es
+                widget: text
+          - label: Answer
+            name: answer
+            widget: object
+            fields:
+              - label: English
+                name: en
+                widget: string
+              - label: Spanish
+                name: es
+                widget: string
+          - label: Other accepted answers
+            name: accept
+            widget: object
+            required: false
+            collapsed: true
+            hint: "Other wordings that are also right. Capitals and punctuation are already ignored, so they need no entry here."
+            fields:
+              - label: English
+                name: en
+                widget: list
+                required: false
+                field:
+                  label: Answer
+                  name: answer
+                  widget: string
+              - label: Spanish
+                name: es
+                widget: list
+                required: false
+                field:
+                  label: Answer
+                  name: answer
+                  widget: string
   - name: courses
     label: Course catalog
     label_singular: Course

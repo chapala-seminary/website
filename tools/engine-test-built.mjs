@@ -9,9 +9,13 @@
 // questions are, which is exactly what the student's browser has.
 //
 //   pass mark      90% of MC, as a ratio
+//   fill-ins       count on the Associate, Th.M. and M.Div., 9 of 10; on the
+//                  Certificate they do not count and their answers are shown
+//                  on submit (Wayne's rule, 25 Sept 2026)
 //   short answer   counts on Th.M. and M.Div., 90% of SA; not on the
-//                  Certificate of Ministry or the Associate (Wayne's rule,
-//                  25 Sept 2026: the Associate gets fill-ins instead, to come)
+//                  Certificate of Ministry or the Associate
+//   progress       cts_<course>_progress only when every part that counts
+//                  on the track has passed
 //   MC feedback    every question is corrected on click, on every track
 //   lockout        master's 15 min, certificate 2 min
 //   persistence    a passed MC section stays passed; SA-only lockout
@@ -48,8 +52,27 @@ function ok(cond, label) { checks++; if (!cond) fails.push(label); }
 
 const browser = await chromium.launch({ executablePath: CHROME });
 
-async function session(course, unit, track, nCorrect, fillSA = false) {
+/* Most units have no fill-ins yet (CTS1Peter is the pilot), and a rule tested
+   only on one course is a rule nobody will notice breaking on the other 39.
+   So a unit that has none is given ten made-up ones before the engine reads
+   it; a unit with real ones keeps them. `synthetic` in the result says which. */
+const SYNTH_FILL = Array.from({ length: 10 }, (_, i) => ({
+  prompt: { en: `Test sentence ${i + 1}: the ____ is here.`, es: `Frase de prueba ${i + 1}: el ____ está aquí.` },
+  answer: { en: `Word ${i + 1}`, es: `Palabra ${i + 1}` },
+  accept: i === 0 ? { en: ['first word'], es: ['primera palabra'] } : undefined,
+}));
+function injectFill(synth) {
+  let held;
+  Object.defineProperty(window, 'CTS_UNIT', {
+    configurable: true,
+    get() { return held; },
+    set(v) { if (v && !(v.fill && v.fill.length)) { v.fill = synth; v._syntheticFill = true; } held = v; },
+  });
+}
+
+async function session(course, unit, track, nCorrect, fillSA = false, fillN = 0) {
   const ctx = await browser.newContext();
+  await ctx.addInitScript(injectFill, SYNTH_FILL);
   const page = await ctx.newPage();
   const errs = [];
   page.on('pageerror', e => errs.push(e.message));
@@ -75,12 +98,19 @@ async function session(course, unit, track, nCorrect, fillSA = false) {
     // with no keywords is credited as written (Genesis has none), so a blank
     // answer cannot fail there and the SA rule is not testable on that unit.
     const hasKw = q => { const k = q.keywords; return Array.isArray(k) ? k.length > 0 : !!(k && ((k.en || []).length || (k.es || []).length)); };
-    return u && { course: u.course, unit: u.unit, mc: (u.mc || []).map(q => q.answer), sa: (u.sa || []).filter(hasKw).length };
+    return u && { course: u.course, unit: u.unit, mc: (u.mc || []).map(q => q.answer), sa: (u.sa || []).filter(hasKw).length,
+                  fill: (u.fill || []).length, synthetic: !!u._syntheticFill };
   });
   const rendered = await page.evaluate(() => document.querySelectorAll('.question[data-mc]').length);
 
-  await page.evaluate(([n, fill]) => {
+  await page.evaluate(([n, fill, fN]) => {
     const U = window.CTS_UNIT;
+    // the first fN fill-ins answered right (in English), the rest wrong
+    document.querySelectorAll('input[data-fill]').forEach(t => {
+      const i = +t.dataset.fill;
+      t.value = i < fN ? U.fill[i].answer.en : 'not the answer';
+      t.dispatchEvent(new Event('input', { bubbles: true }));
+    });
     document.querySelectorAll('.question[data-mc]').forEach(q => {
       const i = +q.dataset.mc;
       const want = i < n ? U.mc[i].answer : (U.mc[i].answer === 0 ? 1 : 0);
@@ -95,7 +125,7 @@ async function session(course, unit, track, nCorrect, fillSA = false) {
         t.dispatchEvent(new Event('input', { bubbles: true }));
       });
     }
-  }, [nCorrect, fillSA]);
+  }, [nCorrect, fillSA, fillN]);
   await page.waitForTimeout(150);
 
   // Drive the control the STUDENT uses. This must never fall back to calling
@@ -114,6 +144,9 @@ async function session(course, unit, track, nCorrect, fillSA = false) {
     revealed: document.querySelectorAll('button.option.correct').length,
     verdicts: document.querySelectorAll('.question[data-mc] .feedback-text').length,
     wrongMarked: document.querySelectorAll('button.option.wrong').length,
+    fillRendered: document.querySelectorAll('.question[data-fill] input[data-fill]').length,
+    // answers shown after submit: a "Correct" line or the right answer
+    fillShown: document.querySelectorAll('.question[data-fill] .feedback, .question[data-fill] .feedback-text').length,
     ls: Object.fromEntries(Object.entries(localStorage).filter(([k]) => k.startsWith('cts_'))),
   }));
   await ctx.close();
@@ -129,17 +162,24 @@ for (const [course, unit] of SAMPLES) {
   if (!nMc) { console.log(`  (skip ${label}: no multiple-choice questions)`); continue; }
   const need = Math.ceil(nMc * 0.90);
 
+  const nFill = probe.U.fill, needF = Math.ceil(nFill * 0.90);
+  const prog = (r) => !!r.ls[`cts_${slug}_progress`]?.includes(`"unit${unit}"`);
+  if (!probe.U.synthetic) console.log(`  (${label}: real fill-ins, ${nFill})`);
+
   // 1. everything renders, no page errors
-  const all = await session(course, unit, 'cert', nMc, true);
+  const all = await session(course, unit, 'cert', nMc, true, nFill);
   ok(all.errs.length === 0, `${label}: page errors: ${all.errs.slice(0, 2).join(' | ')}`);
   ok(all.rendered === nMc, `${label}: rendered ${all.rendered} of ${nMc} MC questions`);
+  ok(all.fillRendered === nFill, `${label}: rendered ${all.fillRendered} of ${nFill} fill-in questions`);
   ok(all.clickedSubmit, `${label}: no visible submit control for the student to press`);
 
-  // 2. exactly the pass mark passes -- on the certificate track with NO short
-  //    answer written, since short answer does not count there
+  // 2. exactly the pass mark passes -- on the certificate track with NO
+  //    fill-ins and NO short answer written, since neither counts there
   const atMark = await session(course, unit, 'cert', need, false);
-  ok(/Passed|Aprobado/.test(atMark.result), `${label}: ${need}/${nMc} (the 90% mark) did not pass on cert with SA blank`);
-  ok(atMark.ls[`cts_${slug}_progress`]?.includes(`unit${unit}`), `${label}: passing did not record progress`);
+  ok(/Passed|Aprobado/.test(atMark.result), `${label}: ${need}/${nMc} (the 90% mark) did not pass on cert with fill-ins and SA blank`);
+  ok(prog(atMark), `${label}: passing did not record progress`);
+  // on the Certificate the fill-in answers are shown on submit, for review
+  ok(atMark.fillShown === nFill, `${label}: cert showed ${atMark.fillShown} of ${nFill} fill-in answers after submit`);
 
   // 3. one below the mark fails
   const below = await session(course, unit, 'cert', need - 1);
@@ -157,26 +197,50 @@ for (const [course, unit] of SAMPLES) {
   ok(mdiv.revealed === nMc, `${label}: mdiv track marked ${mdiv.revealed} of ${nMc} correct options`);
   ok(/\b15 minute|15 minuto/.test(mdiv.result), `${label}: mdiv lock not 15 minutes — "${mdiv.result.slice(0, 80)}"`);
 
-  // 5. short answer counts on the master's track: MC at the mark with SA
-  //    blank fails (where the unit has SA); with SA written it passes
+  // 5. short answer counts on the master's track: MC and fill-ins at the
+  //    mark with SA blank fails (where the unit has SA); with SA written it
+  //    passes
   if (probe.U.sa > 0) {
-    const mdivNoSA = await session(course, unit, 'mdiv', need, false);
+    const mdivNoSA = await session(course, unit, 'mdiv', need, false, nFill);
     ok(!/Passed|Aprobado/.test(mdivNoSA.result), `${label}: mdiv passed with short answer blank`);
+    ok(!prog(mdivNoSA), `${label}: mdiv recorded the unit as passed with short answer blank`);
     ok(/short answer|respuesta corta/i.test(mdivNoSA.result), `${label}: mdiv SA failure did not name short answer — "${mdivNoSA.result.slice(0, 80)}"`);
     ok(mdivNoSA.ls[`cts_${slug}_u${unit}_mc_passed`] === '1', `${label}: mdiv MC pass not banked when SA failed`);
     ok(Object.keys(mdivNoSA.ls).some(k => /_sa_lock$/.test(k)), `${label}: mdiv SA failure did not apply an SA-only lock`);
   }
-  // 5b. the Associate is graded like the Certificate: MC at the mark passes
-  //     with short answer blank (Wayne's rule, 25 Sept 2026 -- fill-ins, not
-  //     short answer, will be the Associate's extra requirement), and a miss
-  //     gets the certificate lockout
-  const assocNoSA = await session(course, unit, 'assoc', need, false);
-  ok(/Passed|Aprobado/.test(assocNoSA.result), `${label}: associate did not pass with MC at mark and short answer blank — "${assocNoSA.result.slice(0, 80)}"`);
-  const assocBelow = await session(course, unit, 'assoc', need - 1);
+  // 5b. the Associate: MC plus fill-ins, no short answer (Wayne's rule,
+  //     25 Sept 2026). MC and fill-ins at the mark pass with short answer
+  //     blank; one fill-in short fails, banks the MC pass, locks only the
+  //     written part for the certificate 2 minutes, and records no progress
+  const assocNoSA = await session(course, unit, 'assoc', need, false, needF);
+  ok(/Passed|Aprobado/.test(assocNoSA.result), `${label}: associate did not pass with MC and fill-ins at the mark and short answer blank — "${assocNoSA.result.slice(0, 80)}"`);
+  ok(prog(assocNoSA), `${label}: associate pass did not record progress`);
+  const assocFill = await session(course, unit, 'assoc', need, false, needF - 1);
+  ok(!/Passed|Aprobado/.test(assocFill.result), `${label}: associate passed with ${needF - 1}/${nFill} fill-ins`);
+  ok(/fill in the blank|complete el espacio/i.test(assocFill.result), `${label}: associate fill-in failure did not name the fill-ins — "${assocFill.result.slice(0, 80)}"`);
+  ok(!/short answer|respuesta corta/i.test(assocFill.result), `${label}: associate failure named short answer, which does not count there`);
+  ok(!prog(assocFill), `${label}: associate recorded the unit as passed with the fill-ins failed`);
+  ok(assocFill.ls[`cts_${slug}_u${unit}_mc_passed`] === '1', `${label}: associate MC pass not banked when fill-ins failed`);
+  ok(!!assocFill.ls[`cts_${slug}_u${unit}_sa_lock`] && !assocFill.ls[`cts_${slug}_u${unit}_full_lock`],
+     `${label}: associate fill-in failure did not lock only the written part`);
+  ok(/\b2 minute|2 minuto/.test(assocFill.result), `${label}: associate fill-in lock not 2 minutes`);
+  ok(assocFill.fillShown === 0, `${label}: associate was shown ${assocFill.fillShown} fill-in answers before passing`);
+  const assocBelow = await session(course, unit, 'assoc', need - 1, false, nFill);
   ok(!/Passed|Aprobado/.test(assocBelow.result), `${label}: associate passed below the MC mark`);
   ok(/\b2 minute|2 minuto/.test(assocBelow.result), `${label}: associate lock not 2 minutes — "${assocBelow.result.slice(0, 80)}"`);
-  const mdivSA = await session(course, unit, 'mdiv', need, true);
-  ok(/Passed|Aprobado/.test(mdivSA.result), `${label}: mdiv did not pass with MC at mark and SA written — "${mdivSA.result.slice(0, 80)}"`);
+  const mdivSA = await session(course, unit, 'mdiv', need, true, needF);
+  ok(/Passed|Aprobado/.test(mdivSA.result), `${label}: mdiv did not pass with MC and fill-ins at the mark and SA written — "${mdivSA.result.slice(0, 80)}"`);
+  ok(prog(mdivSA), `${label}: mdiv pass did not record progress`);
+
+  // 5c. fill-ins count on both master's tracks too: everything else right
+  //     and the fill-ins blank fails, with no progress written
+  for (const t of ['mdiv', 'thm']) {
+    const noFill = await session(course, unit, t, need, true, 0);
+    ok(!/Passed|Aprobado/.test(noFill.result), `${label}: ${t} passed with the fill-ins blank`);
+    ok(/fill in the blank|complete el espacio/i.test(noFill.result), `${label}: ${t} fill-in failure did not name the fill-ins`);
+    ok(!prog(noFill), `${label}: ${t} recorded the unit as passed with the fill-ins blank`);
+    ok(noFill.ls[`cts_${slug}_u${unit}_mc_passed`] === '1', `${label}: ${t} MC pass not banked when fill-ins failed`);
+  }
 
   // 6. a failed attempt records a lock
   ok(Object.keys(mdiv.ls).some(k => /_(sa|full)_lock$/.test(k)), `${label}: failed attempt recorded no lockout`);
@@ -215,6 +279,84 @@ for (const [course, unit] of SAMPLES) {
   await page.waitForTimeout(300);
   const after = await page.evaluate(() => document.querySelectorAll('button.option.selected').length);
   ok(after === 0, `${course} u${unit}: reload after a failed attempt still showed ${after} answered questions`);
+  await ctx.close();
+}
+
+// 9. the MC-banked, fill-in-failed lock, start to finish, on the Associate:
+//    the retry after the lock needs only the fill-ins, and only then is the
+//    unit recorded. Also the grader's edges: case and punctuation do not
+//    matter, an accepted alternative counts, and "contains" is not enough.
+{
+  const [course, unit] = SAMPLES.find(([c]) => c === 'CTS1Peter') || SAMPLES[0];
+  const label = `${course} u${unit} (lock)`;
+  const ctx = await browser.newContext();
+  await ctx.addInitScript(injectFill, SYNTH_FILL);
+  const page = await ctx.newPage();
+  await page.goto(`${BASE}/${course}Unit${unit}.html`, { waitUntil: 'load' });
+  await page.evaluate(() => {
+    localStorage.clear();
+    localStorage.setItem('cts_student', JSON.stringify({ name: 'T', track: 'cert', goal: 'assoc' }));
+    localStorage.setItem('cts_track', 'cert'); localStorage.setItem('cts_goal', 'assoc');
+  });
+  await page.reload({ waitUntil: 'load' });
+  await page.waitForTimeout(300);
+  const typeFill = (vals) => page.evaluate((vals) => {
+    document.querySelectorAll('input[data-fill]').forEach(t => {
+      t.value = vals[+t.dataset.fill]; t.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+  }, vals);
+  const U = await page.evaluate(() => ({ course: window.CTS_UNIT.course, fill: window.CTS_UNIT.fill, mc: window.CTS_UNIT.mc.map(q => q.answer) }));
+  const slug = U.course;
+
+  // every answer the unit carries, in both languages, passes its own grader
+  const graderOK = await page.evaluate(() => window.CTS_UNIT.fill.every(q =>
+    [q.answer.en, q.answer.es, ...((q.accept || {}).en || []), ...((q.accept || {}).es || [])]
+      .every(a => window.CTS_ENGINE.fillRight(q, a))));
+  ok(graderOK, `${label}: a stored fill-in answer does not pass the engine's own grader`);
+  const edges = await page.evaluate(() => {
+    const q = window.CTS_UNIT.fill[0], r = window.CTS_ENGINE.fillRight;
+    return { shout: r(q, '  ' + q.answer.en.toUpperCase() + '!! '), extra: r(q, q.answer.en + ' and more words'),
+             blank: r(q, ''), es: r(q, q.answer.es) };
+  });
+  ok(edges.shout, `${label}: capitals, spaces or punctuation made a right fill-in wrong`);
+  ok(!edges.extra, `${label}: an answer with extra words was accepted`);
+  ok(!edges.blank, `${label}: a blank fill-in was accepted`);
+  ok(edges.es, `${label}: the Spanish answer was not accepted`);
+
+  // MC right, fill-ins half right: fail, MC banked, written part locked
+  await page.evaluate((ans) => document.querySelectorAll('.question[data-mc]').forEach(q => {
+    const b = q.querySelector(`button.option[data-opt="${ans[+q.dataset.mc]}"]`); if (b) b.click(); }), U.mc);
+  await typeFill(U.fill.map((q, i) => i < 5 ? q.answer.en : 'wrong'));
+  await page.evaluate(() => window.CTS_ENGINE.controls.submit().click());
+  await page.waitForTimeout(200);
+  let ls = await page.evaluate(() => ({ ...localStorage }));
+  ok(ls[`cts_${slug}_u${unit}_mc_passed`] === '1', `${label}: MC not banked`);
+  ok(!!ls[`cts_${slug}_u${unit}_sa_lock`] && !ls[`cts_${slug}_u${unit}_full_lock`], `${label}: not an MC-banked, written-part-only lock`);
+  ok(!(ls[`cts_${slug}_progress`] || '').includes(`"unit${unit}"`), `${label}: progress written with the fill-ins failed`);
+
+  // still locked: a resubmit is refused and records nothing
+  await typeFill(U.fill.map(q => q.answer.en));
+  await page.evaluate(() => window.CTS_ENGINE.controls.submit().click());
+  await page.waitForTimeout(200);
+  const locked = await page.evaluate(() => window.CTS_ENGINE.controls.result().textContent);
+  ok(/Locked|Bloqueado/.test(locked), `${label}: a resubmit inside the lock was not refused — "${locked.slice(0, 60)}"`);
+
+  // lock expires. The saved MC answers are wiped too, so a pass now can come
+  // only from the banked flag -- the fill-ins alone must be enough
+  await page.evaluate(([lk, sk]) => {
+    localStorage.setItem(lk, String(Date.now() - 1000));
+    const st = JSON.parse(localStorage.getItem(sk) || '{}'); st.mcAnswers = null;
+    localStorage.setItem(sk, JSON.stringify(st));
+  }, [`cts_${slug}_u${unit}_sa_lock`, `cts_${slug}_u${unit}_state`]);
+  await page.reload({ waitUntil: 'load' });
+  await page.waitForTimeout(300);
+  await typeFill(U.fill.map(q => q.answer.en));
+  await page.evaluate(() => window.CTS_ENGINE.controls.submit().click());
+  await page.waitForTimeout(200);
+  const res = await page.evaluate(() => window.CTS_ENGINE.controls.result().textContent);
+  ls = await page.evaluate(() => ({ ...localStorage }));
+  ok(/Passed|Aprobado/.test(res), `${label}: fill-ins alone did not pass after the lock with MC banked — "${res.slice(0, 60)}"`);
+  ok((ls[`cts_${slug}_progress`] || '').includes(`"unit${unit}"`), `${label}: passing after the lock did not record progress`);
   await ctx.close();
 }
 

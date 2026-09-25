@@ -14,6 +14,13 @@
  * digest of each question's normalised text. Text is normalised the same way
  * on both sides -- HTML tags and entities resolved, whitespace collapsed,
  * case folded -- so a reformat is invisible and a wording change is not.
+ *
+ * Fill-in-the-blank questions are fingerprinted the same way: the prompt and
+ * the answer in each language, and the accepted variants. --check also holds
+ * two counting rules that do not depend on the recorded baseline:
+ *   - a unit that has fill-ins has exactly ten;
+ *   - every unit has multiple-choice questions, twenty of them unless the
+ *     course is on the short list below of courses written with fewer.
  */
 import fs from 'fs';
 import path from 'path';
@@ -53,7 +60,29 @@ function unitFingerprint(U) {
       h: digest(q.prompt.en),
       k: (q.keywords ? JSON.stringify(q.keywords.en) : '').length,
     })),
+    // `accept` is hashed raw (not through norm) so adding a variant shows up
+    fill: (U.fill || []).map(q => ({
+      h: digest(q.prompt.en, q.answer.en),
+      hEs: digest(q.prompt.es, q.answer.es),
+      acc: crypto.createHash('sha256').update(JSON.stringify(q.accept || {})).digest('hex').slice(0, 16),
+    })),
   };
+}
+
+/* Multiple-choice counts that are not twenty, and are meant not to be: the
+   courses as written. A course or unit not listed here must have twenty. */
+const MC_COUNT = { CTSPentecostal: 7, CTSCS: 10, 'CTSRE/1': 18 };
+const FILL_COUNT = 10;
+function countProblems(all) {
+  const out = [];
+  for (const [k, u] of Object.entries(all)) {
+    const course = k.split('/')[0];
+    const want = MC_COUNT[k] ?? MC_COUNT[course] ?? 20;
+    if (!u.mc.length) out.push(`${k}: no multiple-choice questions`);
+    else if (u.mc.length !== want) out.push(`${k}: ${u.mc.length} multiple-choice questions, expected ${want}`);
+    if (u.fill.length && u.fill.length !== FILL_COUNT) out.push(`${k}: ${u.fill.length} fill-in questions, expected ${FILL_COUNT} or none`);
+  }
+  return out;
 }
 
 /* Reads whichever form the content currently lives in. The whole point of a
@@ -95,15 +124,15 @@ function loadAll() {
 
 const mode = process.argv[2] || '--check';
 const now = loadAll();
-const totals = Object.values(now).reduce((a, u) => ({ mc: a.mc + u.mc.length, sa: a.sa + u.sa.length }), { mc: 0, sa: 0 });
+const totals = Object.values(now).reduce((a, u) => ({ mc: a.mc + u.mc.length, sa: a.sa + u.sa.length, fill: a.fill + u.fill.length }), { mc: 0, sa: 0, fill: 0 });
 
 if (mode === '--write') {
   fs.writeFileSync(OUT, JSON.stringify({ units: Object.keys(now).length, ...totals, data: now }, null, 0));
-  console.log(`recorded ${Object.keys(now).length} units, ${totals.mc} MC, ${totals.sa} SA -> tools/content-baseline.json`);
+  console.log(`recorded ${Object.keys(now).length} units, ${totals.mc} MC, ${totals.sa} SA, ${totals.fill} fill-in -> tools/content-baseline.json`);
 } else {
   if (!fs.existsSync(OUT)) { console.error('no baseline recorded; run with --write'); process.exit(2); }
   const base = JSON.parse(fs.readFileSync(OUT, 'utf8'));
-  const problems = [];
+  const problems = countProblems(now);
   const keys = new Set([...Object.keys(base.data), ...Object.keys(now)]);
   let compared = 0;
   for (const k of keys) {
@@ -122,6 +151,15 @@ if (mode === '--write') {
       compared += 2;
       if (b.sa[i].h !== a.sa[i].h) problems.push(`${k}: SA${i + 1} prompt changed`);
       if (b.sa[i].k !== a.sa[i].k) problems.push(`${k}: SA${i + 1} keyword list changed`);
+    }
+    // a baseline recorded before fill-ins existed has none
+    const bf = b.fill || [];
+    if (bf.length !== a.fill.length) { problems.push(`${k}: fill-in count ${bf.length} -> ${a.fill.length}`); continue; }
+    for (let i = 0; i < bf.length; i++) {
+      compared += 3;
+      if (bf[i].h !== a.fill[i].h) problems.push(`${k}: fill-in ${i + 1} English prompt or answer changed`);
+      if (bf[i].hEs !== a.fill[i].hEs) problems.push(`${k}: fill-in ${i + 1} Spanish prompt or answer changed`);
+      if (bf[i].acc !== a.fill[i].acc) problems.push(`${k}: fill-in ${i + 1} accepted answers changed`);
     }
   }
   console.log(`${keys.size} units, ${compared} content comparisons against the recorded baseline`);

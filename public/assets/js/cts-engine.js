@@ -9,16 +9,22 @@
    per-course engines)
      Pass mark      90% of the multiple-choice questions, as a ratio, so a unit
                     may carry any number of questions.
+     Fill in the    Ten sentences a unit, each with one gap. Required on the
+     blank          Associate, Th.M. and M.Div. tracks: 9 of 10 (Wayne's rule,
+                    25 Sept 2026). An answer is right when, after normalise()
+                    below, it is exactly the expected word or phrase, or one of
+                    the listed alternatives, in English or Spanish. On the
+                    Certificate of Ministry they are for the student's own
+                    review and do not count; the answers are shown on submit.
+                    A unit with no fill-ins yet (most courses, until Wayne has
+                    reviewed the pilot) is graded without them.
      Short answer   Required on the Th.M. and M.Div. tracks, 90% of the
                     questions, each credited by keyword coverage (to be
                     replaced by AI grading). On the Certificate of Ministry and
                     the Associate of Divinity the short-answer prompts are for
                     the student's own reflection and do not count; the model
                     answers are shown on submit. (Associate was briefly
-                    required to pass them, 24-25 Sept 2026; Wayne's current
-                    rule is multiple choice plus ten fill-in-the-blank
-                    questions for the Associate -- the fill-ins are still to
-                    be built.)
+                    required to pass them, 24-25 Sept 2026.)
      MC feedback    Every multiple-choice question scores the moment it is
                     clicked, on every track: the chosen option is marked right
                     or wrong and the correct letter is shown. A question, once
@@ -27,7 +33,10 @@
                     certificate tracks wait 2 minutes. The next click after the
                     lock has expired starts a fresh attempt.
      Persistence    A passed multiple-choice section stays passed. A student who
-                    passes MC but fails short answer retries only short answer.
+                    passes MC but fails the fill-ins or short answer retries
+                    only the written part (fill-ins and short answer together).
+                    The unit counts as passed -- cts_<course>_progress -- only
+                    when every part that counts on the student's track passes.
 
    STORAGE
    Keys are unchanged from the per-course engines, so existing students keep
@@ -35,8 +44,13 @@
      cts_student, cts_track, cts_done_codes   (site-wide, shared with other JS)
      cts_<course>_progress                    { unit1: true, ... }
      cts_<course>_u<N>_state                  saved answers, mid-exam
+                                              (mcAnswers, saAnswers, fillAnswers)
      cts_<course>_u<N>_mc_passed
-     cts_<course>_u<N>_sa_lock                epoch ms
+     cts_<course>_u<N>_sa_lock                epoch ms. Despite the name: the
+                                              lock on the written part after MC
+                                              has passed -- fill-ins, short
+                                              answer, or both. Not renamed, so
+                                              a lock set before stays in force.
      cts_<course>_u<N>_full_lock              epoch ms
    ========================================================================== */
 (function () {
@@ -46,7 +60,7 @@
   if (!U) { console.error("[cts] no CTS_UNIT for this page"); return; }
 
   // ---- policy ------------------------------------------------------------
-  var PASS_RATIO      = 0.90;   // of multiple-choice questions, and of short answer where it counts
+  var PASS_RATIO      = 0.90;   // of multiple-choice questions, and of fill-ins and short answer where they count
   var SA_HIT_MIN      = 3;      // keyword matches needed to credit one answer
   var LOCK_MASTERS_MIN = 15;
   var LOCK_CERT_MIN    = 2;
@@ -92,10 +106,12 @@
     return String(lsGet("cts_goal") || (s && s.goal) || "").toLowerCase() === "assoc";
   }
   /* Short answer counts towards passing on the master's tracks only (Wayne's
-     rule, 25 Sept 2026). The Associate will need the ten fill-in-the-blank
-     questions instead, once they exist; isAssociate() is what that check will
-     use. Still keyword-graded for now. */
+     rule, 25 Sept 2026). Still keyword-graded for now. */
   function saCounts() { return isMasters(); }
+  /* The ten fill-ins count on every track except the Certificate of Ministry:
+     they are the Associate's step up from the Certificate, and the master's
+     tracks do them as well as short answer. */
+  function fillCounts() { return isAssociate() || isMasters(); }
 
   /* Passing the last unit is what completes a course -- not opening the
      certificate page (cts-record.js says why). Also run on load, so a course
@@ -188,10 +204,12 @@
   var unitPassed = !!progress["unit" + U.unit];
   var mcPassed   = lsGet(KEY.mcPassed) === "1";
 
-  /* Model answers for short-answer work: the Certificate of Ministry sees
-     them on submit; tracks whose short answer is graded see them once the
+  /* Model answers for short-answer work: the tracks where it does not count
+     see them on submit; tracks whose short answer is graded see them once the
      unit is passed. Multiple choice is corrected on click for everyone. */
   function revealAnswers() { return !saCounts() || unitPassed; }
+  // the same rule for the fill-ins' answers
+  function revealFill() { return !fillCounts() || unitPassed; }
 
   // ---- language ----------------------------------------------------------
   function isEs() {
@@ -215,12 +233,14 @@
   }
 
   // ---- answers -----------------------------------------------------------
-  var mc = U.mc || [], sa = U.sa || [];
+  var mc = U.mc || [], sa = U.sa || [], fill = U.fill || [];
   var saved = jget(KEY.state, {});
   var mcAnswers = Array.isArray(saved.mcAnswers) && saved.mcAnswers.length === mc.length
     ? saved.mcAnswers : new Array(mc.length).fill(null);
   var saAnswers = Array.isArray(saved.saAnswers) && saved.saAnswers.length === sa.length
     ? saved.saAnswers : new Array(sa.length).fill("");
+  var fillAnswers = Array.isArray(saved.fillAnswers) && saved.fillAnswers.length === fill.length
+    ? saved.fillAnswers : new Array(fill.length).fill("");
   var graded = false;
 
   function saveState() {
@@ -228,7 +248,7 @@
        not kept: the next visit starts a fresh attempt. Banked MC is kept. */
     var keepMC = !graded || mcPassed || unitPassed;
     lsSet(KEY.state, JSON.stringify({ mcAnswers: keepMC ? mcAnswers : new Array(mc.length).fill(null),
-                                      saAnswers: saAnswers }));
+                                      saAnswers: saAnswers, fillAnswers: fillAnswers }));
   }
 
   function LETTERS(i) { return "ABCDEFGH".charAt(i); }
@@ -418,6 +438,33 @@
       });
     }
 
+    /* Fill in the blank, between multiple choice and short answer. Always
+       with its own heading: pages with their own short-answer area have a
+       heading for that and none for this. */
+    if (fill.length) {
+      var counts = fillCounts(), showFill = graded && revealFill();
+      out += "<h3>" + bi({ en: "Fill in the Blank", es: "Complete el espacio en blanco" }) + "</h3>";
+      out += '<p class="small">' + (counts
+        ? bi({ en: "Type the missing word or phrase. You need " + needFill() + " of " + fill.length + " to pass.",
+               es: "Escriba la palabra o frase que falta. Necesita " + needFill() + " de " + fill.length + " para aprobar." })
+        : bi({ en: "For your own review: these do not count on the Certificate track. The answers are shown when you submit.",
+               es: "Para su propio repaso: no cuentan en el trayecto de Certificado. Las respuestas se muestran al enviar." })) + "</p>";
+      fill.forEach(function (q, i) {
+        var num = i + 1;
+        out += '<div class="question" data-fill="' + i + '">';
+        out += '<p style="font-weight:bold;">' + num + ". " + bi(q.prompt) + "</p>";
+        out += '<input type="text" data-fill="' + i + '" autocomplete="off" autocapitalize="off" spellcheck="false"' +
+               ' aria-label="' + (isEs() ? "Respuesta " : "Answer ") + num + '"' +
+               ' style="width:100%;max-width:24em;" value="' + attr(fillAnswers[i]) + '" />';
+        if (showFill) {
+          out += fillRight(q, fillAnswers[i])
+            ? '<div class="feedback-text correct">' + bi({ en: "&#10003; Correct", es: "&#10003; Correcto" }) + "</div>"
+            : '<div class="feedback">' + bi({ en: "Answer: " + q.answer.en, es: "Respuesta: " + q.answer.es }) + "</div>";
+        }
+        out += "</div>";
+      });
+    }
+
     if (sa.length) {
       var target = split ? "outSa" : "out";
       var block = "";
@@ -458,6 +505,9 @@
     });
     node.querySelectorAll("textarea[data-sa]").forEach(function (t) {
       t.addEventListener("input", function () { saAnswers[+t.dataset.sa] = t.value; saveState(); });
+    });
+    node.querySelectorAll("input[data-fill]").forEach(function (t) {
+      t.addEventListener("input", function () { fillAnswers[+t.dataset.fill] = t.value; saveState(); });
     });
     });
   }
@@ -509,6 +559,31 @@
   }
   function needSA() { return Math.ceil(sa.length * PASS_RATIO); }
 
+  /* A fill-in is right when the student's words, normalised, are exactly the
+     answer or one of the accepted alternatives -- in either language, since a
+     student reading both may answer in either. Exact, not "contains": typing
+     every word in the lesson must not score. */
+  function fillRight(q, given) {
+    var a = normalise(given).trim();
+    if (!a) return false;
+    var acc = q.accept || {};
+    var forms = [q.answer && q.answer.en, q.answer && q.answer.es]
+      .concat(acc.en || [], acc.es || []);
+    for (var f = 0; f < forms.length; f++) {
+      if (forms[f] && normalise(forms[f]).trim() === a) return true;
+    }
+    return false;
+  }
+  function gradeFill() {
+    var c = 0;
+    fill.forEach(function (q, i) { if (fillRight(q, fillAnswers[i])) c++; });
+    return c;
+  }
+  function needFill() { return Math.ceil(fill.length * PASS_RATIO); }
+  function attr(v) {
+    return String(v || "").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+  }
+
   function say(msg, colour) {
     var r = ensureResult();
     if (r) r.innerHTML = '<span style="color:' + colour + '">' + msg + "</span>";
@@ -525,12 +600,13 @@
 
     graded = true;
     var mcOK = mcPassed || mc.length === 0 || gradeMC() >= needMC();
+    var fillOK = !fillCounts() || fill.length === 0 || gradeFill() >= needFill();
     var saOK = !saCounts() || sa.length === 0 || gradeSA() >= needSA();
 
     if (mcOK && !mcPassed) { lsSet(KEY.mcPassed, "1"); mcPassed = true; }
     saveState();   // a failed attempt's MC answers are shown now but not kept
 
-    if (mcOK && saOK) {
+    if (mcOK && fillOK && saOK) {
       progress["unit" + U.unit] = true;
       lsSet(KEY.progress, JSON.stringify(progress));
       writeLegacy(U.unit);
@@ -542,15 +618,18 @@
                es: "&#10003; Aprobado. Continúe a " + where.es + " arriba." }), "#1f6b3b");
       var nb = el("nextUnitBtn"); if (nb) nb.disabled = false;
     } else {
-      // MC banked but short answer failed: lock only short answer
+      // MC banked but the written part failed: lock only the written part
       applyLock(mcOK ? KEY.saLock : KEY.fullLock);
       var mins = lockMinutes();
-      // Name the section that fell short, so the student knows what to retry.
-      var part = !mcOK
-        ? { en: " — multiple choice " + gradeMC() + "/" + mc.length + ", need " + needMC(),
-            es: " — opción múltiple " + gradeMC() + "/" + mc.length + ", necesita " + needMC() }
-        : { en: " — short answer " + gradeSA() + "/" + sa.length + ", need " + needSA(),
-            es: " — respuesta corta " + gradeSA() + "/" + sa.length + ", necesita " + needSA() };
+      // Name every section that fell short, so the student knows what to retry.
+      var en = [], es = [];
+      if (!mcOK) { en.push("multiple choice " + gradeMC() + "/" + mc.length + ", need " + needMC());
+                   es.push("opción múltiple " + gradeMC() + "/" + mc.length + ", necesita " + needMC()); }
+      if (!fillOK) { en.push("fill in the blank " + gradeFill() + "/" + fill.length + ", need " + needFill());
+                     es.push("complete el espacio " + gradeFill() + "/" + fill.length + ", necesita " + needFill()); }
+      if (!saOK) { en.push("short answer " + gradeSA() + "/" + sa.length + ", need " + needSA());
+                   es.push("respuesta corta " + gradeSA() + "/" + sa.length + ", necesita " + needSA()); }
+      var part = { en: " — " + en.join("; "), es: " — " + es.join("; ") };
       say(bi({ en: "Not yet" + part.en + ". Review the lesson and try again in " + mins + " minute(s).",
                es: "Aún no" + part.es + ". Repase la lección e inténtelo de nuevo en " + mins + " minuto(s)." }), "#8a1f1f");
     }
@@ -560,6 +639,7 @@
   function reset() {
     mcAnswers = new Array(mc.length).fill(null);
     saAnswers = new Array(sa.length).fill("");
+    fillAnswers = new Array(fill.length).fill("");
     graded = false;
     lsDel(KEY.state);
     renderQuestions();
@@ -637,6 +717,9 @@
     // exposed so tests drive the same controls the student does, rather than
     // assuming an element id that only some courses use
     controls: { submit: submitEl, reset: resetEl, result: resultEl, mc: mcHost, sa: saHost },
+    // the grader itself, so tools/add-fill-ins.mjs's promise -- every drafted
+    // answer passes -- can be checked against the page and not a copy
+    fillRight: fillRight,
     policy: { passRatio: PASS_RATIO, lockMasters: LOCK_MASTERS_MIN, lockCert: LOCK_CERT_MIN }
   };
 

@@ -83,7 +83,7 @@ So for the first message, in order of likelihood:
 | Collection | Files | Who it is for |
 |---|---|---|
 | **Hermeneutics** (one per converted course) | `src/content/lessons/<Course>/<n>.json` | the lesson itself — headings, paragraphs, Scripture quotations, in every language |
-| **Exam questions** | `src/content/units/<Course>/<n>.json` | multiple-choice and short-answer questions |
+| **Exam questions** | `src/content/units/<Course>/<n>.json` | multiple-choice, fill-in-the-blank and short-answer questions |
 | **Course catalog** | `src/content/courses/*.json` | the 44 cards on the front page |
 
 Only converted courses appear as lesson collections. The other 39 are still

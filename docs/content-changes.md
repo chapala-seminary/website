@@ -448,7 +448,50 @@ records a course completion or issues a certificate, and keeps a row per
 notice in D1. Wayne's audit item 5. Nothing on any page changed; the Apps
 Script post in `cts-record.js` stays for the sheet.
 
-### 8m. Certificate pages for the three single-page courses (25 Sept) — 3 pages added, 3 changed
+### 8m. Fill-in-the-blank questions (25 Sept) — 12 unit pages gained questions; 452 pages' registration note and 3 pages' track copy changed
+
+Wayne's rule from his consolidated audit: every unit gets ten fill-in-the-blank
+questions, required (9 of 10) on the Associate, Th.M. and M.Div. tracks, and
+shown for review on the Certificate of Ministry with the answers revealed on
+submit. The ten short-answer questions are unchanged and count on Th.M. and
+M.Div. only.
+
+* **Engine** (`public/assets/js/cts-engine.js`). A "Fill in the Blank /
+  Complete el espacio en blanco" section between multiple choice and short
+  answer, on any unit whose file has a `fill` list. An answer is right when,
+  after the engine's `normalise()` (lower case, punctuation removed, spaces
+  collapsed, accents kept), it is exactly the expected word or phrase or a
+  listed alternative, in English or Spanish. A unit is recorded as passed
+  (`cts_<course>_progress`) only when every part the track requires passes. A
+  failed fill-in section keeps the multiple-choice pass and locks only the
+  written part, using the existing `_sa_lock` key; no storage key was added or
+  renamed. A unit without fill-ins is graded as before.
+* **Content: CTS1Peter only, as a pilot** — 120 questions, 10 in each of its
+  12 units, drafted from each unit's lesson text with `tools/add-fill-ins.mjs`.
+  Every answer appears in that unit's lesson in its language and is accepted
+  by the engine's own grader. **Not yet reviewed by Wayne**; the review sheet
+  is `_review/fill-ins/CTS1Peter.md`. No other course has fill-ins, and none
+  will be drafted until the pilot is reviewed.
+* **Copy.** Home page: the Associate and Th.M. track cards and "How to
+  Proceed" step 3 (the Associate card had said "the ten short answers").
+  `CTSBeforeYouBegin.html`: three levels of work instead of two, and the
+  Associate row. `CTSCounseling.html`: the Associate's work, and that the
+  fill-ins come to that course later. The registration note on every unit page
+  (`src/layouts/Unit.astro`).
+* **Not changed:** the "Answer 1–20 / all 30" line inside each lesson's text
+  (lesson content; to be revised with Wayne's review), the two NT master's
+  certificates' wording, and the five courses that still run their own
+  engines — Genesis, WiseSpeak, Counseling, Narrative Preaching, Ethics ×10 —
+  which get fill-ins when they move onto the shared engine (server-side plan
+  Phase 5).
+* **Checks.** `tools/engine-test-built.mjs` tests the fill-in rules on every
+  sampled course (units without fill-ins are given ten made-up ones in the test
+  browser). `tools/content-baseline.mjs --check` fingerprints fill-ins, and
+  fails a unit with fill-ins that does not have ten, a unit with no multiple
+  choice, and any multiple-choice count other than twenty outside Pentecostal
+  (7), Counseling Situations (10) and CTSRE unit 1 (18).
+
+### 8n. Certificate pages for the three single-page courses (25 Sept) — 3 pages added, 3 changed
 
 Counseling, WiseSpeak and Narrative Preaching printed their certificate from a
 pop-up inside the course page, which no registration or verification could

@@ -113,6 +113,25 @@ for (const c of config.collections) {
   }
 }
 
+/* Fields the schema allows and the content may not have yet. The walk above
+   only sees what is THERE, so a field used in one course would be checked
+   only once that course was drafted. A sample unit carrying every optional
+   question field is walked against the config too. */
+{
+  const units = config.collections.find((c) => c.name === 'units');
+  const sample = {
+    fill: [{ prompt: { en: 'a ____', es: 'un ____' }, answer: { en: 'a', es: 'b' },
+             accept: { en: ['c'], es: ['d'] } }],
+  };
+  const lost = new Set();
+  check(sample, units?.fields, 'units(sample)', lost);
+  if (!units || lost.size) {
+    console.log('units: the config does not declare every fill-in field —');
+    [...lost].sort().forEach((p) => console.log(`    ${p}`));
+    missing += lost.size || 1;
+  }
+}
+
 /* Every converted course must have a collection, or its lessons are not
    editable at all and nobody finds out until they look. */
 const LESSONS = 'src/content/lessons';
