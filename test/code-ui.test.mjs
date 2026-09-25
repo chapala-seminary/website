@@ -89,8 +89,7 @@ ok((await backup.textContent('#code-value')).trim() === CODE,
 
 // give the first device some progress to carry across
 await one.page.evaluate(() => {
-  localStorage.setItem('cts_1peter_u1_mc_passed', '1');
-  localStorage.setItem('cts_1peter_u2_mc_passed', '1');
+  localStorage.setItem('cts_1peter_progress', JSON.stringify({ unit1: true, unit2: true }));
   return window.CTS_SYNC.sync();
 });
 await one.page.waitForTimeout(500);
@@ -116,7 +115,7 @@ const after = await two.page.evaluate(() => ({
   note: document.getElementById('code-note').textContent.trim(),
   cls: document.getElementById('code-note').className,
   code: (document.getElementById('code-value').textContent || '').trim(),
-  units: Object.keys(localStorage).filter((k) => /_mc_passed$/.test(k)).length,
+  units: Object.keys(JSON.parse(localStorage.getItem('cts_1peter_progress') || '{}')).length,
 }));
 ok(/Restored|Restaurado/.test(after.note), `restoring reports success`, `note was "${after.note}"`);
 ok(/\bok\b/.test(after.cls), 'and is styled as success, not as a warning');

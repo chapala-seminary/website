@@ -39,10 +39,17 @@
 
   // ---- read the student's state out of the keys the engine already writes --
   //
-  // Two shapes, both of which the engine has always written:
-  //   cts_<course>_u<N>_mc_passed = "1"
-  //   cts_<course>_progress       = {"unit3": true, ...}
-  // A unit counted by either is a unit the student passed.
+  // The engine writes two keys per unit, and only one of them means "passed":
+  //   cts_<course>_progress       = {"unit3": true, ...}   the unit is passed:
+  //                                 every part the student's track requires
+  //                                 (multiple choice, and short answer on the
+  //                                 master's tracks) reached its mark
+  //   cts_<course>_u<N>_mc_passed = "1"                    multiple choice is
+  //                                 banked while the rest is still to do
+  // Only the progress map is progress. Until 25 Sept 2026 the banked flag was
+  // read as well, so a master's student who passed multiple choice and failed
+  // short answer reached the seminary's records as having passed the unit,
+  // and a restore onto another device marked it complete (Wayne's audit, #2).
   /* ---- the keys the old per-course engines wrote ----------------------
    * Several courses kept progress under another slug or key shape before the
    * unified engine (see LEGACY in cts-engine.js -- the two tables must agree,
@@ -114,9 +121,7 @@
       if (!seen[id]) { seen[id] = 1; progress.push({ course: course, unit: +unit }); }
     }
     keys().forEach(function (k) {
-      var m = /^cts_(.+)_u(\d+)_mc_passed$/.exec(k);
-      if (m && get(k) === '1') { add(m[1], m[2]); return; }
-      m = /^cts_(.+)_progress$/.exec(k);
+      var m = /^cts_(.+)_progress$/.exec(k);
       if (!m) return;
       var course = m[1];
       var map = parse(get(k), null);

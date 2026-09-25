@@ -393,6 +393,42 @@ no other lesson paragraph or multiple-choice bank missing. `tools/content-baseli
 (which had recorded Missions 1 with no questions) and
 `test/fixtures/lesson-render.json` were updated for these two pages only.
 
+### 8j. After Wayne's consolidated audit (25 Sept 2026) — 9 pages, 2 scripts, 3 tests changed
+
+* **A unit is reported to the seminary only when it is fully passed** (audit
+  item 2). The engine banks a passed multiple-choice section in
+  `cts_<course>_uN_mc_passed` while short answer is still to do, and
+  `cts-sync.js` had read that flag as a passed unit: a master's student who
+  passed multiple choice and failed short answer reached the records as having
+  passed the unit, and a restore onto another device marked it complete. Sync
+  now reads only `cts_<course>_progress`, which the engine writes when every
+  part the track requires is passed. `test/sync.test.mjs` fails on the old
+  behaviour. No page content changed.
+* **Short answer counts on the master's tracks only, again.** On 24 Sept the
+  Associate had been made to pass short answer (8b's rule reversed); Wayne's
+  audit sets the Associate's extra requirement as ten fill-in-the-blank
+  questions per unit instead, still to be built. The engine, the four
+  single-page courses (Counseling, WiseSpeak, Narrative Preaching, Ethics ×10)
+  and their track notes say master's only; the home page's "How to Proceed"
+  step 4 likewise. `tools/engine-test-built.mjs` asserts it.
+* **"Treat your student code like a password"** (item 8), where the code is
+  first shown: the home-page code card, the unit registration box
+  (`src/layouts/Unit.astro`), and the Save & Restore page's code card and
+  caution list.
+* **Three certificate pages** (Pentecostal, Radical Discipleship, Genesis)
+  said only "no registration found on this device — begin at Unit 1"; they now
+  also point a student who registered elsewhere to the Save & Restore page,
+  as the other certificate pages already did (item 7).
+* **Privacy page fallback** (item 7): the message shown when the records
+  server cannot be reached said the records were "not switched on yet"; it
+  now says they can't be reached right now and the work on the device is
+  unaffected.
+* `docs/curriculum.md` records the degree rules, the two intentional gate
+  exceptions (How We Got the Bible, Deacon Family Ministry — item 14) and
+  every file the curriculum is currently written into (item 12);
+  `docs/apps-script/completion-notice.md` is the `MailApp.sendEmail` change
+  for the Apps Script (item 5a).
+
 ---
 
 ## How to check any of this yourself

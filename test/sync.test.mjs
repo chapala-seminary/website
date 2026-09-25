@@ -31,7 +31,11 @@ const seed = (page, student, units, done = [], mdivDone = [], names = []) => pag
   localStorage.setItem('cts_done_codes', JSON.stringify(d));
   if (m.length) localStorage.setItem('cts_mdiv_done_codes', JSON.stringify(m));
   if (nm.length) localStorage.setItem('cts_degree_courses', JSON.stringify(nm));
-  u.forEach(([c, n]) => localStorage.setItem(`cts_${c}_u${n}_mc_passed`, '1'));
+  // Seeded as the engine writes a passed unit: the progress map. (A banked
+  // cts_<course>_uN_mc_passed on its own is not a passed unit -- see below.)
+  const maps = {};
+  u.forEach(([c, n]) => { (maps[c] = maps[c] || {})[`unit${n}`] = true; });
+  Object.keys(maps).forEach(c => localStorage.setItem(`cts_${c}_progress`, JSON.stringify(maps[c])));
 }, [student, units, done, mdivDone, names]);
 const sync = page => page.evaluate(() => window.CTS_SYNC.sync());
 const snap = page => page.evaluate(() => ({
@@ -59,8 +63,17 @@ ok(a.units.length === 3, `their existing progress is picked up, got ${a.units.jo
 ok(one.errors.length === 0, `no page errors: ${one.errors.join(' | ')}`);
 
 // A unit passed after the first sync reaches the server on the next one.
-await one.page.evaluate(() => localStorage.setItem('cts_romans_u2_mc_passed', '1'));
+await one.page.evaluate(() => localStorage.setItem('cts_romans_progress', JSON.stringify({ unit1: true, unit2: true })));
 await sync(one.page);
+
+// Multiple choice banked while short answer is still to do is NOT a passed
+// unit. A master's student in exactly that state used to reach the seminary's
+// records as having passed the unit, and a restore marked it complete
+// (Wayne's audit, #2). Romans 3 stays on this device only.
+await one.page.evaluate(() => localStorage.setItem('cts_romans_u3_mc_passed', '1'));
+await sync(one.page);
+ok(!(await snap(one.page)).units.includes('romans:3'),
+  'a unit with only its multiple choice banked is not reported as passed');
 
 /* ---- device two: the same student, a different browser ------------------- */
 
@@ -72,7 +85,9 @@ const restored = await two.page.evaluate(c => window.CTS_SYNC.restore(c), a.code
 ok(restored.ok === true, `restoring from the code succeeds, got ${JSON.stringify(restored)}`);
 const b = await snap(two.page);
 ok(b.units.join(' ') === '1peter:1 1peter:2 romans:1 romans:2',
-  `every passed unit came back, got "${b.units.join(' ')}"`);
+  `every passed unit came back, and only passed units, got "${b.units.join(' ')}"`);
+ok(await two.page.evaluate(() => localStorage.getItem('cts_romans_u3_mc_passed')) === null,
+  'the half-done unit did not come across as passed');
 ok(b.done.join(',') === 'CTSOTS,CTSROMANS', `course completions came back, got ${b.done}`);
 ok(b.name === 'Ana Ruiz', 'and so did their name');
 ok(b.heard === 'church', `and how they heard of the seminary, got ${b.heard}`);

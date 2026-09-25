@@ -9,12 +9,16 @@
    per-course engines)
      Pass mark      90% of the multiple-choice questions, as a ratio, so a unit
                     may carry any number of questions.
-     Short answer   Required on the Associate, Th.M. and M.Div. tracks, 90%
-                    of the questions, each credited by keyword coverage (to be
-                    replaced by AI grading). On the Certificate of Ministry the
-                    short-answer prompts are for the student's own reflection
-                    and do not count; the model answers are shown on submit.
-                    (Associate added 2026-09-24, Wayne's track rule.)
+     Short answer   Required on the Th.M. and M.Div. tracks, 90% of the
+                    questions, each credited by keyword coverage (to be
+                    replaced by AI grading). On the Certificate of Ministry and
+                    the Associate of Divinity the short-answer prompts are for
+                    the student's own reflection and do not count; the model
+                    answers are shown on submit. (Associate was briefly
+                    required to pass them, 24-25 Sept 2026; Wayne's current
+                    rule is multiple choice plus ten fill-in-the-blank
+                    questions for the Associate -- the fill-ins are still to
+                    be built.)
      MC feedback    Every multiple-choice question scores the moment it is
                     clicked, on every track: the chosen option is marked right
                     or wrong and the correct letter is shown. A question, once
@@ -87,10 +91,11 @@
     if (t === "ad" || t === "associate" || t === "assoc") return true;
     return String(lsGet("cts_goal") || (s && s.goal) || "").toLowerCase() === "assoc";
   }
-  /* Short answer counts towards passing on every track but the Certificate of
-     Ministry: Associate, Th.M. and M.Div. (Wayne's rule, 24 Sept 2026). Still
-     keyword-graded for now. */
-  function saCounts() { return isMasters() || isAssociate(); }
+  /* Short answer counts towards passing on the master's tracks only (Wayne's
+     rule, 25 Sept 2026). The Associate will need the ten fill-in-the-blank
+     questions instead, once they exist; isAssociate() is what that check will
+     use. Still keyword-graded for now. */
+  function saCounts() { return isMasters(); }
 
   /* Passing the last unit is what completes a course -- not opening the
      certificate page (cts-record.js says why). Also run on load, so a course

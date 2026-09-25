@@ -38,15 +38,14 @@ async function studentDevice() {
   const page = await ctx.newPage();
   await page.goto(`${BASE}/synctest.html`, { waitUntil: 'domcontentloaded' });
   await page.waitForTimeout(400);
-  /* Seeded the way the site itself writes progress: one key per passed unit.
+  /* Seeded the way the site itself writes progress: the course's progress map.
      Inventing a shape here would test a shape nothing produces. */
   await page.evaluate(() => {
     localStorage.setItem('cts_student', JSON.stringify({
       name: 'Privacy Test Student', email: 'privacy@example.test', country: 'MX', track: 'cert',
     }));
     localStorage.setItem('cts_track', 'cert');
-    localStorage.setItem('cts_acts_u1_mc_passed', '1');
-    localStorage.setItem('cts_acts_u2_mc_passed', '1');
+    localStorage.setItem('cts_acts_progress', JSON.stringify({ unit1: true, unit2: true }));
     localStorage.setItem('cts_done_codes', JSON.stringify(['CTSOTS']));
   });
   await page.evaluate(() => window.CTS_SYNC.sync());

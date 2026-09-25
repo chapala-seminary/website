@@ -9,8 +9,9 @@
 // questions are, which is exactly what the student's browser has.
 //
 //   pass mark      90% of MC, as a ratio
-//   short answer   counts on Associate, Th.M. and M.Div., 90% of SA; not on
-//                  the Certificate of Ministry
+//   short answer   counts on Th.M. and M.Div., 90% of SA; not on the
+//                  Certificate of Ministry or the Associate (Wayne's rule,
+//                  25 Sept 2026: the Associate gets fill-ins instead, to come)
 //   MC feedback    every question is corrected on click, on every track
 //   lockout        master's 15 min, certificate 2 min
 //   persistence    a passed MC section stays passed; SA-only lockout
@@ -23,7 +24,7 @@ import fs from 'fs';
 // connection errors.
 const BASE = process.argv[2] || 'http://127.0.0.1:8823';
 const ROOT = './dist';
-const CHROME = '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
+const CHROME = process.env.CHROME_PATH || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
 
 const CORE = ['CTSOTS', 'CTSNT', 'CTSST', 'CTSEVANGELISM', 'CTSPM', 'CTSCH', 'WISESPEAK'];
 
@@ -165,16 +166,15 @@ for (const [course, unit] of SAMPLES) {
     ok(mdivNoSA.ls[`cts_${slug}_u${unit}_mc_passed`] === '1', `${label}: mdiv MC pass not banked when SA failed`);
     ok(Object.keys(mdivNoSA.ls).some(k => /_sa_lock$/.test(k)), `${label}: mdiv SA failure did not apply an SA-only lock`);
   }
-  // 5b. the same holds for the Associate (Wayne's rule, 24 Sept 2026), at the
-  //     certificate lockout
-  if (probe.U.sa > 0) {
-    const assocNoSA = await session(course, unit, 'assoc', need, false);
-    ok(!/Passed|Aprobado/.test(assocNoSA.result), `${label}: associate passed with short answer blank`);
-    ok(/short answer|respuesta corta/i.test(assocNoSA.result), `${label}: associate SA failure did not name short answer — "${assocNoSA.result.slice(0, 80)}"`);
-    ok(/\b2 minute|2 minuto/.test(assocNoSA.result), `${label}: associate lock not 2 minutes — "${assocNoSA.result.slice(0, 80)}"`);
-  }
-  const assocSA = await session(course, unit, 'assoc', need, true);
-  ok(/Passed|Aprobado/.test(assocSA.result), `${label}: associate did not pass with MC at mark and SA written — "${assocSA.result.slice(0, 80)}"`);
+  // 5b. the Associate is graded like the Certificate: MC at the mark passes
+  //     with short answer blank (Wayne's rule, 25 Sept 2026 -- fill-ins, not
+  //     short answer, will be the Associate's extra requirement), and a miss
+  //     gets the certificate lockout
+  const assocNoSA = await session(course, unit, 'assoc', need, false);
+  ok(/Passed|Aprobado/.test(assocNoSA.result), `${label}: associate did not pass with MC at mark and short answer blank — "${assocNoSA.result.slice(0, 80)}"`);
+  const assocBelow = await session(course, unit, 'assoc', need - 1);
+  ok(!/Passed|Aprobado/.test(assocBelow.result), `${label}: associate passed below the MC mark`);
+  ok(/\b2 minute|2 minuto/.test(assocBelow.result), `${label}: associate lock not 2 minutes — "${assocBelow.result.slice(0, 80)}"`);
   const mdivSA = await session(course, unit, 'mdiv', need, true);
   ok(/Passed|Aprobado/.test(mdivSA.result), `${label}: mdiv did not pass with MC at mark and SA written — "${mdivSA.result.slice(0, 80)}"`);
 

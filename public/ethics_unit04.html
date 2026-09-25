@@ -558,10 +558,12 @@ function gradeSA() {
     return c;
 }
 
-// Associate of Divinity students study at certificate rigor but must pass the
-// short answers too (Wayne's track rule, 24 Sept 2026). They are recognised by
-// the site-wide goal (cts_goal / cts_student.goal = "assoc") or an "ad" /
-// "associate" track written by other pages.
+// Associate of Divinity students study at certificate rigor: multiple choice
+// only, like the Certificate of Ministry. Short answer is master's work
+// (Wayne's rule, 25 Sept 2026; the 10 fill-in-the-blank questions Associate
+// students will also need are still to be built). Associate students are
+// recognised by the site-wide goal (cts_goal / cts_student.goal = "assoc") or
+// an "ad" / "associate" track written by other pages.
 // Finishing Unit 10 (or any last unit) completes the course here, not on
 // the certificate page -- see assets/js/cts-record.js.
 function ctsRecordEthics(){
@@ -597,7 +599,7 @@ function submitExam() {
     const mcOk = mcScore >= 18;
     if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
 
-    if (!isMastersLevel(track) && !ctsIsAssociate()) {
+    if (!isMastersLevel(track) || ctsIsAssociate()) {
         if (mcOk) {
             progress[`unit${UNIT}`] = true;
             localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress)); ctsRecordEthics();
