@@ -36,6 +36,10 @@
                  'ctsassociatecertificate.html': 'associate', 'ctscertificateofministry.html': 'certificate' };
   function award() {
     if (DEGREE[file]) return { level: DEGREE[file] };
+    // A page may name its code outright (the single-page courses' certificate
+    // pages do: COUNSELING, WISESPEAK, STORYTEL are not spelled in a filename).
+    var explicit = document.body && document.body.getAttribute('data-course-code');
+    if (explicit && /^[A-Z0-9_]+$/i.test(explicit.trim())) return { level: 'course', course: explicit.trim().toUpperCase() };
     var code = file.replace(/(thm|mth|mdiv)?certificate\.html$/, '').replace(/\.html$/, '').toUpperCase();
     if (code === 'ETHICS_') code = 'ETHICS';
     return code ? { level: 'course', course: code } : null;
@@ -111,6 +115,7 @@
     verified: { en: 'Email confirmed. Registering your certificate…', es: 'Correo confirmado. Registrando su certificado…' },
     done:     { en: 'Registered with the seminary. Verification code:', es: 'Registrado ante el seminario. Código de verificación:' },
     doneSub:  { en: 'It is printed on your certificate. Anyone can check it at', es: 'Está impreso en su certificado. Cualquiera puede comprobarlo en' },
+    mailed:   { en: 'A copy has been emailed to', es: 'Se ha enviado una copia por correo a' },
     notYet:   { en: 'The seminary’s record does not yet show every part of this award. Your progress syncs on its own; give it a moment and try again.',
                 es: 'El registro del seminario aún no muestra todas las partes de este título. Su progreso se sincroniza solo; espere un momento e inténtelo de nuevo.' },
     retry:    { en: 'Try again', es: 'Intentar de nuevo' },
@@ -124,7 +129,7 @@
     verifyLine: { en: 'Verification', es: 'Verificación' }
   };
 
-  var root, a, code, state = { step: 'email', email: '', verifyCode: null, msg: null, busy: false };
+  var root, a, code, state = { step: 'email', email: '', verifyCode: null, emailed: false, msg: null, busy: false };
 
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function verifyUrl(vc) { return location.origin + '/verify/' + encodeURIComponent(vc); }
@@ -134,7 +139,8 @@
     var h = '';
     if (state.step === 'done') {
       h += '<div class="cc-ok">' + t(S.done) + ' <code>' + esc(state.verifyCode) + '</code></div>' +
-           '<div class="cc-sub">' + t(S.doneSub) + ' <a href="' + esc(verifyUrl(state.verifyCode)) + '">' + esc(verifyUrl(state.verifyCode).replace(/^https?:\/\//, '')) + '</a></div>';
+           '<div class="cc-sub">' + t(S.doneSub) + ' <a href="' + esc(verifyUrl(state.verifyCode)) + '">' + esc(verifyUrl(state.verifyCode).replace(/^https?:\/\//, '')) + '</a>' +
+           (state.emailed && state.email ? '<br>' + t(S.mailed) + ' <b>' + esc(state.email) + '</b>.' : '') + '</div>';
     } else if (state.step === 'notyet') {
       h += '<div class="cc-head">' + t(S.head) + '</div><div class="cc-sub">' + t(S.notYet) + '</div>' +
            '<div><button type="button" data-act="retry">' + t(S.retry) + '</button></div>';
@@ -182,7 +188,7 @@
 
   function issue(dip) {
     state.step = 'issuing'; state.msg = null; render();
-    var payload = { code: code, level: a.level, title: title(a) };
+    var payload = { code: code, level: a.level, title: title(a), page: location.pathname.split('/').pop() || '' };
     if (a.level === 'course') payload.course = a.course;
     // Push anything this browser holds first: the record the Worker checks is
     // the one sync keeps, and the student may have arrived straight from the
@@ -190,7 +196,7 @@
     var pre = window.CTS_SYNC && window.CTS_SYNC.sync ? Promise.resolve(window.CTS_SYNC.sync()).catch(function () {}) : Promise.resolve();
     return pre.then(function () { return post('/certificate', payload); }).then(function (r) {
       if (r.ok && r.body && r.body.verifyCode) {
-        state.verifyCode = r.body.verifyCode; state.step = 'done'; render();
+        state.verifyCode = r.body.verifyCode; state.emailed = !!r.body.emailed; state.step = 'done'; render();
         stamp(dip || diploma(), state.verifyCode);
         return;
       }

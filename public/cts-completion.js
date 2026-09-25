@@ -143,6 +143,11 @@
      as it always did. */
   var DEGREE_PAGES = ["CTSASSOCIATE", "CTSCERTIFICATEOFMINISTRY", "CTSMDIV", "CTSTHM"];
   function pageCode() {
+    // A page may name its code outright (data-course-code on <body>): the
+    // single-page courses' certificate pages record COUNSELING, WISESPEAK and
+    // STORYTEL, none of which a filename spells.
+    var explicit = document.body && document.body.getAttribute("data-course-code");
+    if (explicit && /^[A-Z0-9_]+$/i.test(explicit.trim())) return explicit.trim().toUpperCase();
     var c = file.replace(/(thm|mth|mdiv)?certificate\.html$/, "").replace(/\.html$/, "").toUpperCase();
     return c === "ETHICS_" ? "ETHICS" : c;
   }

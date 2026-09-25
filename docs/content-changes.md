@@ -448,6 +448,20 @@ records a course completion or issues a certificate, and keeps a row per
 notice in D1. Wayne's audit item 5. Nothing on any page changed; the Apps
 Script post in `cts-record.js` stays for the sheet.
 
+### 8m. Certificate pages for the three single-page courses (25 Sept) — 3 pages added, 3 changed
+
+Counseling, WiseSpeak and Narrative Preaching printed their certificate from a
+pop-up inside the course page, which no registration or verification could
+reach. Each now has a certificate page like every other course —
+`CTSCounselingCertificate.html`, `CTSPreachingCertificate.html`,
+`CTSNarrativePreachingCertificate.html` — built from the Pentateuch page's
+layout, unlocking on the course's completion code, with the same registration
+panel and verification stamp. Scripture on each: Galatians 6:2, 2 Timothy 4:2,
+Matthew 13:34. The "View Course Certificate" button on each course page is
+now a link to its certificate page; nothing else on the course pages changed.
+Students also receive their certificate by email once it is registered
+(`docs/student-records.md` §6–7).
+
 ---
 
 ## How to check any of this yourself

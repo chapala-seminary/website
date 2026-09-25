@@ -58,6 +58,11 @@ for (const f of fs.readdirSync('public').sort()) {
     if (!/certificate\.html$/.test(lower)) continue;
     let code = lower.replace(/(thm|mth|mdiv)?certificate\.html$/, '').toUpperCase();
     if (code === 'ETHICS_') code = 'ETHICS';
+    // A page may name its code outright (data-course-code on <body>), as the
+    // single-page courses' certificate pages do; cts-completion.js and
+    // cts-certify.js read the same attribute.
+    const named = /<body[^>]*\sdata-course-code="([A-Za-z0-9_]+)"/.exec(h);
+    if (named) code = named[1].toUpperCase();
     // degree pages load the same script but are not courses
     if (['CTSASSOCIATE', 'CTSCERTIFICATEOFMINISTRY', 'CTSMDIV', 'CTSTHM'].includes(code)) continue;
     const explicit = /data-course="([^"]+)"/.exec(h);
@@ -71,15 +76,19 @@ for (const f of fs.readdirSync('public').sort()) {
     }
     const prev = completions[code];
     if (prev && prev.name !== name) { console.error(`${f}: code ${code} named "${name}" but ${prev.page} named it "${prev.name}"`); process.exit(2); }
-    if (!prev) completions[code] = { name, page: f };
+    // The first certificate page wins (CTSOTSCertificate, not its M.Div.
+    // variant) -- unless what is there came from a course page's
+    // markComplete, which sorts earlier: the certificate page is the page.
+    if (!prev || prev.fromCourse) completions[code] = { name, page: f };
   }
   for (const m of h.matchAll(/markComplete\(\s*'([A-Z0-9_]+)'\s*,\s*'([^']+)'/g)) {
     const [, code, name] = m;
     const prev = completions[code];
     if (prev && prev.name !== name) { console.error(`${f}: code ${code} named "${name}" but ${prev.page} named it "${prev.name}"`); process.exit(2); }
-    if (!prev) completions[code] = { name, page: f };
+    if (!prev) completions[code] = { name, page: f, fromCourse: true };
   }
 }
+for (const c of Object.values(completions)) delete c.fromCourse;
 
 // Every unit course is also known by the completion code its certificate page
 // writes (the slug "ots" is CTSOTS, "1peter" is CTS1PETER). The Worker needs

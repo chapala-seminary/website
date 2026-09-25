@@ -122,6 +122,7 @@ s = await panelState(one.page);
 ok(/^[A-Z0-9-]{6,}$/i.test(s.verifyCode || ''), 'confirming the code registers the certificate and shows a verification code', s.text.slice(0, 160));
 ok(s.stamped && s.stamped.includes(s.verifyCode) && /\/verify\//.test(s.stamped), 'the verification line is printed inside the diploma', s.stamped);
 const VC = s.verifyCode;
+ok(/emailed to|copia por correo a/.test(s.text) && /certify@example\.org/.test(s.text), 'and the student is told a copy went to their email', s.text.slice(0, 200));
 ok(one.errors.length === 0, `no page errors on the certificate page: ${one.errors.slice(0, 2).join(' | ')}`);
 
 // the public check recognises it
@@ -171,6 +172,31 @@ ok(s.stamped && s.stamped.includes(s.verifyCode || '-'), 'and stamps the degree 
 const deg = await fetch(`${BASE}/api/verify/${encodeURIComponent(s.verifyCode || 'x')}`).then((r) => r.json()).catch(() => null);
 ok(deg && deg.valid === true && deg.level === 'certificate', 'the public check knows it as a Certificate of Ministry', JSON.stringify(deg));
 ok(two.errors.length === 0, `no page errors on the degree page: ${two.errors.slice(0, 2).join(' | ')}`);
+
+/* ---- a single-page course's certificate page ----------------------------- */
+// Counseling, WiseSpeak and Narrative Preaching record their completion by
+// code, not by units; their certificate pages gate on that code and name it
+// with data-course-code. Same student, email already verified.
+await two.page.goto(`${BASE}/CTS1PeterUnit1.html`, { waitUntil: 'load' });
+await two.page.evaluate(() => {
+  const a = JSON.parse(localStorage.getItem('cts_done_codes') || '[]'); a.push('STORYTEL');
+  localStorage.setItem('cts_done_codes', JSON.stringify(a));
+});
+await two.page.evaluate(() => window.CTS_SYNC.sync());
+await two.page.waitForTimeout(400);
+await two.page.goto(`${BASE}/CTSNarrativePreachingCertificate.html`, { waitUntil: 'load' });
+await waitFor(two.page, () => document.querySelector('#cts-cert-panel .cc-ok code'));
+s = await panelState(two.page);
+ok(/^[A-Z0-9-]{6,}$/i.test(s.verifyCode || ''), 'a single-page course\'s certificate page registers by its named code', s.text.slice(0, 160));
+const sp = await fetch(`${BASE}/api/verify/${encodeURIComponent(s.verifyCode || 'x')}`).then((r) => r.json()).catch(() => null);
+ok(sp && sp.valid === true && sp.course === 'STORYTEL' && /Narrative Preaching/.test(sp.title || ''), 'and the public check knows it as Narrative Preaching', JSON.stringify(sp));
+// without the code, the same page shows nothing to print
+await two.page.evaluate(() => localStorage.setItem('cts_done_codes', JSON.stringify(['CTS1PETER'])));
+await two.page.reload({ waitUntil: 'load' });
+await two.page.waitForTimeout(800);
+s = await panelState(two.page);
+ok(!s.panel, 'a single-page certificate page without its code shows no diploma and no panel', s.text.slice(0, 80));
+ok(two.errors.length === 0, `no page errors on the single-page certificate: ${two.errors.slice(0, 2).join(' | ')}`);
 
 /* ---- no record at all: the page stays as it was -------------------------- */
 const three = await device();
