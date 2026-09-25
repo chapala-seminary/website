@@ -21,7 +21,7 @@ The endpoint is the `ENDPOINT` constant at the top of `cts-record.js`. Genesis u
 The script is not in this repository — it lives in the seminary's Google account (the one that owns the sheet the count is kept in). Open it at script.google.com, find `doPost`, and add the `MailApp.sendEmail` call after the row is appended. Nothing else changes.
 
 ```javascript
-var NOTIFY_TO = 'chapalatheological@gmail.com';
+var NOTIFY_TO = 'info@chapalaseminary.org';   // forwards to chapalatheological@gmail.com (Cloudflare Email Routing)
 
 function doPost(e) {
   var p = (e && e.parameter) || {};
@@ -59,7 +59,8 @@ Then **Deploy → Manage deployments → edit the active deployment → New vers
 
 Notes:
 
-* `MailApp` sends from the account that owns the script, so the notices come from that Gmail address to itself; the daily quota (100 for a consumer account) is far above the seminary's volume.
+* `info@chapalaseminary.org` is the seminary's mailbox as of 25 Sept 2026: Cloudflare Email Routing forwards it to chapalatheological@gmail.com, so the notices still land in the same inbox Wayne's tracker reads, and the address stays right if the Gmail account ever changes.
+* `MailApp` sends from the Google account that owns the script; the daily quota (100 for a consumer account) is far above the seminary's volume.
 * The first run after adding `MailApp` will ask for the additional "send email as you" permission; approve it once from the editor (**Run → doPost** with no arguments is enough to trigger the prompt, though the call itself will fail without parameters).
 * If the sheet is meant to stay the running count, no change there. If it is not, this is also the moment to confirm what the current `doPost` does with `row`.
 
