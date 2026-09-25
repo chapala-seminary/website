@@ -365,6 +365,34 @@ Live-site note: the old engines and their certificate pages matched, so
 none of the unlock failures existed on the ZIP site; the always-visible
 certificates, the JSON-as-name and the Genesis recording gap did.
 
+### 8i. Two unit-1 pages restored from the live site — 2 pages changed
+
+Found in a review of the beta. Both losses date from `c769367`, when the last
+courses moved to the unified engine, and both are the same kind of unit: the
+first unit of the course ran its own engine variant (`engine-al-v2.js`,
+`engine-missions-v2.js`) rather than the one the other nine units shared, and
+part of its content did not survive the move. For AL 1 the lesson lived in the
+variant's `DATA` object; for Missions 1 the questions were in its data file,
+and why the conversion wrote an empty bank for it was not traced further.
+
+* **Administration & Leadership, Unit 1** had lost its lesson: the unit title,
+  key Scripture, epigraph, and the whole teaching (5 headings, 15 paragraphs,
+  starting with the scene of Moses and Jethro in Exodus 18). The page drew them
+  from a `DATA` object at run time, so they were never in the page's HTML and
+  the prose baseline, which was recorded from the HTML, never held them. They
+  are restored from the live site (`24dbaa8`) in both languages, as 23 blocks
+  of lesson data like every other unit. HTML entities were decoded to
+  characters, and the key Scripture line is split into its English and Spanish
+  halves (the original showed both, with the entities undecoded).
+* **World Missions, Unit 1** had lost its 20 multiple-choice questions; only
+  the 10 short-answer questions remained. Restored from the live site with
+  their answer keys unchanged.
+
+A sweep of all 438 unit pages in `24dbaa8` against the current content found
+no other lesson paragraph or multiple-choice bank missing. `tools/content-baseline.json`
+(which had recorded Missions 1 with no questions) and
+`test/fixtures/lesson-render.json` were updated for these two pages only.
+
 ---
 
 ## How to check any of this yourself
