@@ -47,6 +47,7 @@ body.lang-es .lang-en { display: none; } body.lang-es .lang-es { display: inline
 <body class="lang-en">
 
 <script src="cts-lang.js"></script>
+<script src="assets/js/cts-record.js"></script>
 <div class="container">
 <div class="nav-bar">
     <div class="progress-grid" id="progressGrid"></div>
@@ -204,6 +205,7 @@ function updateProgressGrid() {
 }
 document.getElementById('nextUnitBtn').onclick = () => { location.href = NEXT_UNIT_URL; };
 updateProgressGrid();
+ctsRecordEthics();
 
 function displayStudentGreeting() {
     const student = JSON.parse(localStorage.getItem('cts_student') || 'null');
@@ -569,6 +571,26 @@ function gradeSA() {
     return c;
 }
 
+// Associate of Divinity students study at certificate rigor but must pass the
+// short answers too (Wayne's track rule, 24 Sept 2026). They are recognised by
+// the site-wide goal (cts_goal / cts_student.goal = "assoc") or an "ad" /
+// "associate" track written by other pages.
+// Finishing Unit 10 (or any last unit) completes the course here, not on
+// the certificate page -- see assets/js/cts-record.js.
+function ctsRecordEthics(){
+  if (!window.CTSRecord) return;
+  var r = window.CTSRecord.course({ slug: 'ethics', code: 'ETHICS', name: 'Pastoral & Christian Ethics',
+    page: 'ethics_certificate.html', units: [1,2,3,4,5,6,7,8,9,10] });
+  if (r === 'new' && window.CTS_SYNC) { try { window.CTS_SYNC.sync(); } catch (e) {} }
+}
+function ctsIsAssociate(){
+  try{
+    var s = JSON.parse(localStorage.getItem('cts_student') || 'null') || {};
+    var t = String(localStorage.getItem('cts_track') || s.track || '').toLowerCase();
+    if(t === 'ad' || t === 'associate' || t === 'assoc') return true;
+    return String(localStorage.getItem('cts_goal') || s.goal || '').toLowerCase() === 'assoc';
+  }catch(e){ return false; }
+}
 function isMastersLevel(track) {
     return track === 'mdiv' || track === 'thm';
 }
@@ -588,10 +610,10 @@ function submitExam() {
     const mcOk = mcScore >= 18;
     if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
 
-    if (!isMastersLevel(track)) {
+    if (!isMastersLevel(track) && !ctsIsAssociate()) {
         if (mcOk) {
             progress[`unit${UNIT}`] = true;
-            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress)); ctsRecordEthics();
             localStorage.setItem(MC_PASS_KEY, 'true');
             mcPreviouslyPassed = true; unitPassed = true;
             result.innerHTML = isEs
@@ -615,7 +637,7 @@ function submitExam() {
     if (mcPreviouslyPassed) {
         if (saOk) {
             progress[`unit${UNIT}`] = true;
-            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress)); ctsRecordEthics();
             unitPassed = true;
             result.innerHTML = isEs
                 ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC \u2713 banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
@@ -634,7 +656,7 @@ function submitExam() {
 
     if (mcOk && saOk) {
         progress[`unit${UNIT}`] = true;
-        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress)); ctsRecordEthics();
         localStorage.setItem(MC_PASS_KEY, 'true');
         mcPreviouslyPassed = true; unitPassed = true;
         result.innerHTML = isEs
@@ -670,7 +692,7 @@ function resetUnit() {
     localStorage.removeItem(SA_LOCK_KEY);
     localStorage.removeItem(FULL_LOCK_KEY);
     delete progress[`unit${UNIT}`];
-    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress)); ctsRecordEthics();
     mcAnswers = new Array(20).fill(null);
     kwAnswers = new Array(10).fill("");
     mcPreviouslyPassed = false;

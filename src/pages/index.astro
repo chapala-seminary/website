@@ -10,6 +10,7 @@
 import { getCollection } from 'astro:content';
 import groups from '../data/catalog-groups.json';
 import intro from '../data/catalog-intro.json';
+import catalog from '../../worker/catalog.json';
 
 const head = (await import('../body/index/head.html?raw')).default;
 const tail = (await import('../body/index/tail.html?raw')).default;
@@ -34,6 +35,15 @@ const byGroup = groups.map((g) => ({ ...g, courses: courses.filter((c) => c.grou
 const empty = byGroup.filter((g) => !g.courses.length);
 if (empty.length)
   throw new Error(`group(s) with a heading but no courses: ${empty.map((g) => g.id).join(', ')}`);
+// Every unit course, for cts-record.js's catch-up below: a student who
+// finished a course before completion moved off the certificate page, and
+// never opens one of its units again, is recorded when they visit the front
+// page. Single-page courses record themselves (CTSCurriculum.markComplete).
+const recordable = Object.entries(catalog.courses as Record<string, { code: string; units: number[] }>)
+  .map(([slug, c]) => ({ slug, code: c.code, units: c.units,
+    name: (catalog.completions as Record<string, { name: string; page: string }>)[c.code].name,
+    page: (catalog.completions as Record<string, { name: string; page: string }>)[c.code].page }));
+const recordJson = JSON.stringify(recordable).replace(/</g, '\\u003c');
 ---
 <Fragment set:html={head} />
 <section id="catalog">
@@ -52,4 +62,6 @@ if (empty.length)
     </div>
 ))}
   </section>
+<script is:inline src="/assets/js/cts-record.js"></script>
+<script is:inline set:html={`window.CTSRecord && window.CTSRecord.backfill(${recordJson});`} />
 <Fragment set:html={tail} />

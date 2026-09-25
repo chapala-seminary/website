@@ -41,6 +41,13 @@
   "main": "worker/index.js",
   "compatibility_date": "2026-09-01",
   "observability": { "enabled": true },
+  // Outgoing email (worker/email.js). The API key is a secret, never here:
+  //   npx wrangler secret put RESEND_API_KEY            (production)
+  //   npx wrangler secret put RESEND_API_KEY --env beta (beta)
+  "vars": {
+    "EMAIL_FROM": "Chapala Theological Seminary <certificates@chapalaseminary.org>",
+    "EMAIL_REPLY_TO": "chapalatheological@gmail.com"
+  },
 
   "assets": {
     "directory": "./dist",
@@ -77,6 +84,11 @@
       "name": "chapala-seminary-beta",
       "account_id": "119b0919229edb3185b69f1c6bd04b66",
       "observability": { "enabled": true },
+      // vars are not inherited by an environment, so they are repeated
+      "vars": {
+        "EMAIL_FROM": "Chapala Theological Seminary <certificates@chapalaseminary.org>",
+        "EMAIL_REPLY_TO": "chapalatheological@gmail.com"
+      },
       "assets": {
         "directory": "./dist",
         "binding": "ASSETS",

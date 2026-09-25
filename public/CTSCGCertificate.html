@@ -35,6 +35,7 @@
     padding:32px 16px 64px;
     min-height:100vh;
   }
+  .sheet-locked{max-width:640px;margin:40px auto;padding:32px;background:#fff;border:1px solid #d9cfae;border-radius:10px;text-align:center;font-family:Georgia,serif}
   .sheet{
     width:1056px;            /* 11in landscape @ 96dpi */
     max-width:100%;
@@ -234,7 +235,14 @@ img.cts-sig{max-height:50px;width:auto;max-width:92%;display:block;margin:2px au
   var TOTAL_UNITS = 12;
   var COURSE = 'cg';
 
-  function getStudent(){ return localStorage.getItem('cts_student') || ''; }
+
+  // cts_student is the registration record the home page writes, a JSON
+  // object with the student's name inside it. This page used to treat it as
+  // a bare name, printed the raw JSON on the certificate, and overwrote the
+  // whole record when the name was edited.
+  function ctsStudentName(){ var v = localStorage.getItem('cts_student') || ''; if (v.charAt(0) === '{') { try { return (JSON.parse(v).name || '').trim(); } catch (e) { return ''; } } return v; }
+  function ctsSetStudentName(n){ var v = localStorage.getItem('cts_student') || ''; var o = {}; if (v.charAt(0) === '{') { try { o = JSON.parse(v) || {}; } catch (e) { o = {}; } } o.name = n; localStorage.setItem('cts_student', JSON.stringify(o)); }
+  function getStudent(){ return ctsStudentName(); }
   function getTrack(){ return (localStorage.getItem('cts_track') || 'cert').toLowerCase(); }
 
   function trackLabel(t){
@@ -259,7 +267,13 @@ img.cts-sig{max-height:50px;width:auto;max-width:92%;display:block;margin:2px au
       'Awarded ' + new Date().toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'});
 
     if(GATING_ON && !allUnitsPassed()){
-      document.querySelector('.inner').innerHTML =
+      // hide the sheet itself: cts-completion.js records a completion the
+      // moment it sees a visible certificate, whatever the sheet says
+      var sheet = document.querySelector('.sheet'); if (sheet) sheet.style.display = 'none';
+      var notice = document.getElementById('cts-locked') || document.createElement('div');
+      notice.id = 'cts-locked'; notice.className = 'sheet-locked';
+      if (!notice.parentNode) (sheet ? sheet.parentNode : document.body).insertBefore(notice, sheet || null);
+      notice.innerHTML =
         '<div style="margin:auto;max-width:520px"><h2 class="institution">Not Yet Complete</h2>'+
         '<p class="credit">This certificate unlocks once all twelve units of <em>Church Growth</em> '+
         'have been completed on your current track. Keep going&mdash;you are almost home.</p></div>';
@@ -268,7 +282,7 @@ img.cts-sig{max-height:50px;width:auto;max-width:92%;display:block;margin:2px au
 
   function rename(){
     var n = prompt('Name as it should appear on the certificate:', getStudent());
-    if(n !== null){ localStorage.setItem('cts_student', n.trim()); render(); }
+    if(n !== null){ ctsSetStudentName(n.trim()); render(); }
   }
 
   render();

@@ -319,6 +319,52 @@ references, one rubric's "Unit 7").
   keyword method. No unit of the current WiseSpeak has that material, so those
   references were already wrong and need Wayne's word, not a renumber.
 
+### 8h. Every certificate unlocks again — 7 pages and 3 scripts changed
+
+Wayne reported a student finishing Ruth and Esther and being sent back to
+Unit 1 for ever. The cause reaches further than that course. Each certificate
+page was written against its own course's old engine, and several of those
+engines kept progress under a different slug (1 Peter was `1pet`, Galatians
+`gal`, Evangelism `ev`, Hermeneutics `herm`, Evangelistic Preaching
+`evenpreach`, Bible Characters `CTSBC`/`CTSBC2`, Deacon Family Ministry
+`CTSDFM`) or a different key shape (`re_unit3_passed`, `cts_pent_unit3_passed`,
+`cts_romans_unit3_passed`, `cts_bible_u3_mcpass`, `cts_cs_state`, the Genesis
+completion records). The unified engine of 18 Sept standardised on
+`cts_<slug>_progress` and `cts_<slug>_uN_mc_passed` and wrote nothing else, so
+on the new site **thirteen courses' certificates could never unlock**, and a
+student's progress from before the change was invisible to the engine.
+
+The engine and the sync client now carry a table of those old keys
+(`LEGACY`, checked identical by `tools/verify-legacy-table.mjs`): a unit
+passed under the old keys counts as passed, a pass writes the old keys too,
+and a device restored from a student code gets them. No certificate page had
+to learn new keys. `tools/verify-certificate-unlock.mjs` seeds a fully passed
+student the way the engine would, opens every certificate page (and the four
+degree pages), and requires the diploma to unlock and the completion code to
+be recorded — and, with nothing passed, neither.
+
+That check also turned up, and this change fixes:
+
+* **Four certificates showed to everyone.** Church Growth, Deacon Family
+  Ministry, Holy Spirit and Life of Christ kept the certificate box on screen
+  when locked (with a "not yet" message inside, or a disabled print button),
+  and `cts-completion.js` records a completion the moment it sees a visible
+  certificate — so opening the page recorded the course as finished. The box
+  is now hidden until earned. Holy Spirit and Life of Christ also read only
+  the old numeric progress keys and could not unlock at all.
+* **Three certificates printed the registration record as the name.** Church
+  Growth, Evangelistic Preaching and Ruth and Esther read `cts_student` as a
+  bare name; since registration it has been a JSON record, so the diploma
+  said `{"name":"…"}`. Two of them also *wrote* a bare name back over the
+  record when the student edited it. Fixed on all three.
+* **Genesis never recorded its completion** unless the student pressed
+  "Notify the seminary" — the shared completion script records on unlock,
+  the Genesis copy did not. Genesis is a required M.Div. core course.
+
+Live-site note: the old engines and their certificate pages matched, so
+none of the unlock failures existed on the ZIP site; the always-visible
+certificates, the JSON-as-name and the Genesis recording gap did.
+
 ---
 
 ## How to check any of this yourself

@@ -105,6 +105,7 @@ node tools/verify-worker-routing.mjs "http://127.0.0.1:$PORT"
 # deployed, on every field that changes how a request is answered.
 node tools/verify-worker-config.mjs
 node tools/gen-worker-catalog.mjs --check
+node tools/verify-legacy-table.mjs
 
 # A staging host must not be indexable, and must not change the real site.
 node tools/verify-staging.mjs "http://127.0.0.1:$PORT"
@@ -184,10 +185,18 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   node tools/audit-controls-built.mjs "http://127.0.0.1:$PORT"
   node tools/verify-devmode.mjs "http://127.0.0.1:$PORT"
   node tools/verify-certificates.mjs "http://127.0.0.1:$PORT"
+  # A course completes when its last unit is passed, never when its
+  # certificate page is opened; the seminary hears about it once.
+  node tools/verify-completion.mjs "http://127.0.0.1:$PORT"
   node tools/verify-cms-loads.mjs "http://127.0.0.1:$PORT"
   # 948 assertions that the built site implements the agreed assessment policy
   # -- pass mark, lockouts, track rules. Also never run by this suite before.
   node tools/engine-test-built.mjs "http://127.0.0.1:$PORT"
+
+  # Every certificate page unlocks for a finished course, records the
+  # completion, and shows nothing to a student who passed nothing. Ruth and
+  # Esther sent finished students back to Unit 1 until this existed.
+  node tools/verify-certificate-unlock.mjs "http://127.0.0.1:$PORT"
   if [ -n "$HAVE_REFERENCE" ]; then
     node tools/verify-catalog.mjs ./_reference-index.html
   else

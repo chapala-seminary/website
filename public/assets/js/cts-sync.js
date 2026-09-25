@@ -43,6 +43,64 @@
   //   cts_<course>_u<N>_mc_passed = "1"
   //   cts_<course>_progress       = {"unit3": true, ...}
   // A unit counted by either is a unit the student passed.
+  /* ---- the keys the old per-course engines wrote ----------------------
+   * Several courses kept progress under another slug or key shape before the
+   * unified engine (see LEGACY in cts-engine.js -- the two tables must agree,
+   * and tools/verify-legacy-table.mjs checks that they do). Here they matter
+   * twice: a browser that only has the old keys must still sync its progress,
+   * under the engine's slug; and a restored device must get the old keys
+   * written, because the certificate pages read them. */
+  var LEGACY = {
+    "1peter":               { slug: "1pet" },
+    "biblecharacters":      { slug: "CTSBC" },
+    "biblecharacters2":     { slug: "CTSBC2" },
+    "galatians":            { slug: "gal" },
+    "deaconfamilyministry": { slug: "CTSDFM" },
+    "evangelism":           { slug: "ev" },
+    "hermeneutics":         { slug: "herm",       flag: function (n) { return "cts_herm_u" + n + "_passed"; },         value: "true" },
+    "evanpreach":           { slug: "evenpreach", flag: function (n) { return "cts_evenpreach_unit" + n + "_passed"; }, value: "1" },
+    "bible":                { flag: function (n) { return "cts_bible_u" + n + "_mcpass"; },      value: "1" },
+    "pent":                 { flag: function (n) { return "cts_pent_unit" + n + "_passed"; },    value: "true" },
+    "romans":               { flag: function (n) { return "cts_romans_unit" + n + "_passed"; },  value: "true" },
+    "re":                   { flag: function (n) { return "re_unit" + n + "_passed"; },          value: "1" },
+    "cs":                   { state: "cts_cs_state" },                 // {n: {passed: true}}
+    "genesis":              { completion: "genesis" }                  // cts_genesis_uN_completion[_track]
+  };
+  var LEGACY_SLUG = {};                 // old slug -> engine slug
+  Object.keys(LEGACY).forEach(function (c) { if (LEGACY[c].slug) LEGACY_SLUG[LEGACY[c].slug] = c; });
+
+  function legacyUnits(course) {       // units passed under the old keys, by course
+    var l = LEGACY[course], out = [];
+    if (!l) return out;
+    for (var n = 0; n <= 40; n++) {
+      var hit = false;
+      if (l.flag) { var v = get(l.flag(n)); hit = v === '1' || v === 'true' || v === 'passed'; }
+      if (!hit && l.state) { var st = parse(get(l.state), {}) || {}; hit = !!(st[n] && st[n].passed); }
+      if (!hit && l.completion) {
+        hit = ['', '_cert', '_mdiv', '_thm'].some(function (t) { return !!parse(get('cts_genesis_u' + n + '_completion' + t), null); });
+      }
+      if (hit) out.push(n);
+    }
+    return out;
+  }
+  function writeLegacy(course, n) {
+    var l = LEGACY[course];
+    if (!l) return;
+    if (l.slug) {
+      set('cts_' + l.slug + '_u' + n + '_mc_passed', '1');
+      var lp = parse(get('cts_' + l.slug + '_progress'), {}) || {}; lp['unit' + n] = true;
+      set('cts_' + l.slug + '_progress', JSON.stringify(lp));
+    }
+    if (l.flag) set(l.flag(n), l.value);
+    if (l.state) { var st = parse(get(l.state), {}) || {}; st[n] = st[n] || {}; st[n].passed = true; set(l.state, JSON.stringify(st)); }
+    if (l.completion && !parse(get('cts_genesis_u' + n + '_completion'), null)) {
+      var tr = String(get('cts_track') || 'cert').toLowerCase(); tr = tr === 'mdiv' ? 'mdiv' : (tr === 'thm' || tr === 'mth') ? 'thm' : 'cert';
+      var c = { course: 'genesis', unit: n, completedAt: new Date().toISOString(), track: tr, version: 2 };
+      set('cts_genesis_u' + n + '_completion_' + tr, JSON.stringify(c));
+      set('cts_genesis_u' + n + '_completion', JSON.stringify(c));
+    }
+  }
+
   function snapshot() {
     var student = parse(get('cts_student'), null);
     var track = get('cts_track');
@@ -50,13 +108,14 @@
     var seen = {};
     var progress = [];
 
+    function add(course, unit) {
+      course = LEGACY_SLUG[course] || course;          // old slug -> engine slug
+      var id = course + '\u0000' + unit;
+      if (!seen[id]) { seen[id] = 1; progress.push({ course: course, unit: +unit }); }
+    }
     keys().forEach(function (k) {
       var m = /^cts_(.+)_u(\d+)_mc_passed$/.exec(k);
-      if (m && get(k) === '1') {
-        var id = m[1] + '\u0000' + m[2];
-        if (!seen[id]) { seen[id] = 1; progress.push({ course: m[1], unit: +m[2] }); }
-        return;
-      }
+      if (m && get(k) === '1') { add(m[1], m[2]); return; }
       m = /^cts_(.+)_progress$/.exec(k);
       if (!m) return;
       var course = m[1];
@@ -64,11 +123,10 @@
       if (!map || typeof map !== 'object') return;
       Object.keys(map).forEach(function (uk) {
         var um = /^unit(\d+)$/.exec(uk);
-        if (!um || !map[uk]) return;
-        var id2 = course + '\u0000' + um[1];
-        if (!seen[id2]) { seen[id2] = 1; progress.push({ course: course, unit: +um[1] }); }
+        if (um && map[uk]) add(course, um[1]);
       });
     });
+    Object.keys(LEGACY).forEach(function (c) { legacyUnits(c).forEach(function (n) { add(c, n); }); });
 
     // The certificate pages keep, beside the gating list, the codes finished
     // on a master's track; a degree counts only the courses at its own level,
@@ -140,6 +198,7 @@
       if (!map['unit' + p.unit]) { map['unit' + p.unit] = true; set(pk, JSON.stringify(map)); }
       var mk = 'cts_' + p.course + '_u' + p.unit + '_mc_passed';
       if (get(mk) !== '1') set(mk, '1');
+      writeLegacy(p.course, p.unit);                   // the keys the certificate page reads
     });
   }
 

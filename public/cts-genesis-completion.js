@@ -201,6 +201,13 @@
       var nm = findName();
       if (dip || nm) {
         clearInterval(iv);
+        // Record the completion the instant the certificate unlocks, as the
+        // shared cts-completion.js does -- not only when the student presses
+        // "Notify the seminary". Genesis is a required M.Div. core course; a
+        // student who printed the certificate and closed the tab had no
+        // CTSGENESIS in cts_done_codes and the degree page never counted it.
+        addToRoster(ctx.course);
+        recordCode();
         buildPanel(dip || document.body, ctx);
       } else if (tries > 60) {        // ~30s; give up quietly (page never unlocked)
         clearInterval(iv);

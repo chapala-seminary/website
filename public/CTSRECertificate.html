@@ -191,7 +191,7 @@ img.cts-sig{max-height:50px;width:auto;max-width:92%;display:block;margin:2px au
     document.getElementById('incomplete').classList.toggle('hidden', all);
     document.getElementById('diploma').classList.toggle('hidden', !all);
     if(all){
-      var nm = lsGet('cts_student');
+      var nm = lsGet('cts_student'); if (nm && nm.charAt(0) === '{') { try { nm = JSON.parse(nm).name || ''; } catch (e) { nm = ''; } }
       document.getElementById('studentName').textContent = nm ? nm : (es?'Estudiante':'Student');
       document.getElementById('trackLabel').textContent = trackLabelText();
       var d = new Date();

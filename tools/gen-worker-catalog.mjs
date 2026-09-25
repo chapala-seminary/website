@@ -50,7 +50,10 @@ const unescape = (t) => t.replace(/&mdash;/g, '\u2014').replace(/&ndash;/g, '\u2
 for (const f of fs.readdirSync('public').sort()) {
   if (!f.endsWith('.html')) continue;
   const h = html(f);
-  if (/cts-completion\.js/.test(h)) {
+  // cts-genesis-completion.js is Genesis's copy of cts-completion.js and
+  // derives code and name the same way. Skipping it left CTSGENESIS -- an
+  // M.Div. core course -- out of the catalog.
+  if (/cts-(genesis-)?completion\.js/.test(h)) {
     const lower = f.toLowerCase();
     if (!/certificate\.html$/.test(lower)) continue;
     let code = lower.replace(/(thm|mth|mdiv)?certificate\.html$/, '').toUpperCase();
@@ -76,6 +79,24 @@ for (const f of fs.readdirSync('public').sort()) {
     if (prev && prev.name !== name) { console.error(`${f}: code ${code} named "${name}" but ${prev.page} named it "${prev.name}"`); process.exit(2); }
     if (!prev) completions[code] = { name, page: f };
   }
+}
+
+// Every unit course is also known by the completion code its certificate page
+// writes (the slug "ots" is CTSOTS, "1peter" is CTS1PETER). The Worker needs
+// both: unit progress is keyed by slug, completions and degrees by code.
+for (const [slug, c] of Object.entries(courses)) {
+  const code = 'CTS' + slug.toUpperCase();
+  if (!completions[code]) { console.error(`${slug}: no certificate page writes completion code ${code}`); process.exit(2); }
+  c.code = code;
+}
+// And every course a degree requires must be one a page can actually record,
+// or that degree can never be awarded. (Wayne's audit of the beta asked about
+// WISESPEAK and COUNSELING; they are single-page courses, recorded by code.)
+{
+  const src = fs.readFileSync('worker/awards.js', 'utf8');
+  const listed = new Set([...src.matchAll(/'([A-Z0-9_]+)'/g)].map(m => m[1]));
+  const unknown = [...listed].filter(c => !completions[c]);
+  if (unknown.length) { console.error(`worker/awards.js requires courses no page records: ${unknown.join(', ')}`); process.exit(2); }
 }
 
 const text = JSON.stringify({ generated: 'tools/gen-worker-catalog.mjs -- do not edit', courses, completions }, null, 2) + '\n';

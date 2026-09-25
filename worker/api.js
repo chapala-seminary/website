@@ -21,8 +21,9 @@
  * from a student, which makes a stale or offline device harmless.
  */
 
-import { courseShortfall, degreeShortfall, DEGREES } from './awards.js';
+import { courseShortfall, degreeShortfall, resolveCourse, DEGREES } from './awards.js';
 import catalog from './catalog.json';
+import { emailConfigured, sendEmail, verificationEmail } from './email.js';
 
 const MAX = { name: 120, email: 160, country: 80, track: 24, goal: 400, heard: 40, title: 200, course: 64, code: 40 };
 const TRACKS = new Set(['cert', 'certificate', 'associate', 'thm', 'mdiv']);
@@ -93,7 +94,7 @@ async function body(request) {
 
 async function loadState(env, id) {
   const student = await env.DB.prepare(
-    'SELECT id, name, email, country, track, goal, heard, created_at, updated_at FROM students WHERE id = ?')
+    'SELECT id, name, email, email_verified_at, country, track, goal, heard, created_at, updated_at FROM students WHERE id = ?')
     .bind(id).first();
   if (!student) return null;
   const [progress, completions, certs] = await Promise.all([
@@ -200,12 +201,15 @@ async function sync(request, env) {
   if (s && typeof s === 'object') {
     // Identity is last-writer-wins; progress is never overwritten. Renaming
     // yourself is something a student does on purpose, losing a passed unit
-    // is not.
+    // is not. The one exception is a VERIFIED email: only /api/email/confirm
+    // changes it, so a stale device cannot swap it for an address nobody
+    // confirmed.
     const name = str(s.name, MAX.name, { field: 'name' });
     const track = (str(s.track, MAX.track, { field: 'track' }) || '').toLowerCase() || null;
     if (track && !TRACKS.has(track)) throw new HttpError(400, 'unknown track: ' + track);
     statements.push(env.DB.prepare(
-      `UPDATE students SET name = COALESCE(?, name), email = COALESCE(?, email),
+      `UPDATE students SET name = COALESCE(?, name),
+         email = CASE WHEN email_verified_at IS NULL THEN COALESCE(?, email) ELSE email END,
          country = COALESCE(?, country), track = COALESCE(?, track),
          goal = COALESCE(?, goal), heard = COALESCE(?, heard), updated_at = ? WHERE id = ?`)
       .bind(name, str(s.email, MAX.email, { field: 'email' }), str(s.country, MAX.country, { field: 'country' }),
@@ -243,12 +247,16 @@ async function issueCertificate(request, env) {
   const b = await body(request);
   const id = normaliseCode(b.code);
   if (!id) throw new HttpError(400, 'a student code is required');
-  const student = await env.DB.prepare('SELECT id, name, track FROM students WHERE id = ?').bind(id).first();
+  const student = await env.DB.prepare('SELECT id, name, track, email_verified_at FROM students WHERE id = ?').bind(id).first();
   if (!student) return fail(404, 'no record for that student code');
+  // Students start with only a code; a certificate needs a confirmed email,
+  // so the seminary can reach the person it certified and send them a copy.
+  if (!student.email_verified_at)
+    return json({ error: 'a verified email is required for a certificate', needs: 'email' }, 403);
 
   const level = (str(b.level, 24, { required: true, field: 'level' }) || '').toLowerCase();
   if (!LEVELS.has(level)) throw new HttpError(400, 'level must be one of: ' + [...LEVELS].join(', '));
-  const course = str(b.course, MAX.course, { required: level === 'course', field: 'course' });
+  let course = str(b.course, MAX.course, { required: level === 'course', field: 'course' });
   const title = str(b.title, MAX.title, { required: true, field: 'title' });
 
   // Grading is still client-side, so this cannot prove the work was done. It
@@ -257,11 +265,21 @@ async function issueCertificate(request, env) {
   // degree (worker/awards.js). A fabricated certificate therefore needs a
   // fabricated complete record first.
   if (level === 'course') {
-    const rows = await env.DB.prepare(
-      'SELECT unit FROM unit_progress WHERE student_id = ? AND course = ?').bind(id, course.toLowerCase()).all();
-    const why = courseShortfall(course, (rows.results ?? []).map((r) => r.unit));
-    if (why === 'unknown course') throw new HttpError(400, 'unknown course: ' + course);
-    if (why) return fail(409, why);
+    const c = resolveCourse(course);
+    if (!c) throw new HttpError(400, 'unknown course: ' + course);
+    // One stored name per course, so "ots" and "CTSOTS" are the same award.
+    course = c.slug || c.code;
+    if (c.units) {
+      const rows = await env.DB.prepare(
+        'SELECT unit FROM unit_progress WHERE student_id = ? AND course = ?').bind(id, c.slug).all();
+      const why = courseShortfall(c.slug, (rows.results ?? []).map((r) => r.unit));
+      if (why) return fail(409, why);
+    } else {
+      // A single-page course keeps no units; its completion code is the record.
+      const row = await env.DB.prepare(
+        'SELECT 1 FROM course_completions WHERE student_id = ? AND code = ?').bind(id, c.code).first();
+      if (!row) return fail(409, 'course completion not recorded: ' + c.code);
+    }
   } else {
     const rows = await env.DB.prepare(
       'SELECT code, track FROM course_completions WHERE student_id = ?').bind(id).all();
@@ -289,6 +307,92 @@ async function issueCertificate(request, env) {
   throw new HttpError(503, 'could not allocate a verification code, please try again');
 }
 
+/* ---- email verification (needed to claim a certificate) ------------------
+ *
+ * POST /api/email/start   {code, email}         -> a 6-digit code is emailed
+ * POST /api/email/confirm {code, verification}  -> the email is stored, verified
+ *
+ * Limits: one send a minute and five a day per student; five wrong guesses
+ * per code, after which a new one must be asked for. The code is stored only
+ * as a hash and expires in 15 minutes. */
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const CHALLENGE = { ttlMin: 15, resendSec: 60, perDay: 5, attempts: 5 };
+
+async function hashCode(id, code) {
+  const d = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(id + ':' + code));
+  return [...new Uint8Array(d)].map((b) => b.toString(16).padStart(2, '0')).join('');
+}
+function sixDigits() {
+  const n = crypto.getRandomValues(new Uint32Array(1))[0] % 1000000;
+  return String(n).padStart(6, '0');
+}
+
+async function emailStart(request, env) {
+  const b = await body(request);
+  const id = normaliseCode(b.code);
+  if (!id) return fail(404, 'no record for that student code');
+  const email = (str(b.email, MAX.email, { required: true, field: 'email' }) || '').toLowerCase();
+  if (!EMAIL_RE.test(email)) throw new HttpError(400, 'that does not look like an email address');
+  const student = await env.DB.prepare('SELECT id FROM students WHERE id = ?').bind(id).first();
+  if (!student) return fail(404, 'no record for that student code');
+  if (!emailConfigured(env)) throw new HttpError(503, 'email is not set up yet');
+
+  const t = new Date(), today = t.toISOString().slice(0, 10);
+  const prev = await env.DB.prepare('SELECT sent_at, sends_today, sends_day FROM email_challenges WHERE student_id = ?').bind(id).first();
+  if (prev) {
+    const wait = CHALLENGE.resendSec - Math.floor((t - new Date(prev.sent_at)) / 1000);
+    if (wait > 0) return json({ error: `wait ${wait} seconds before asking for another code` }, 429, { 'retry-after': String(wait) });
+    if (prev.sends_day === today && prev.sends_today >= CHALLENGE.perDay)
+      return json({ error: 'too many codes today. Try again tomorrow.' }, 429);
+  }
+  const sendsToday = prev && prev.sends_day === today ? prev.sends_today + 1 : 1;
+
+  const code = sixDigits();
+  const expires = new Date(t.getTime() + CHALLENGE.ttlMin * 60000).toISOString();
+  await env.DB.prepare(
+    `INSERT INTO email_challenges (student_id, email, code_hash, expires_at, attempts, sent_at, sends_today, sends_day)
+     VALUES (?, ?, ?, ?, 0, ?, ?, ?)
+     ON CONFLICT(student_id) DO UPDATE SET email = excluded.email, code_hash = excluded.code_hash,
+       expires_at = excluded.expires_at, attempts = 0, sent_at = excluded.sent_at,
+       sends_today = excluded.sends_today, sends_day = excluded.sends_day`)
+    .bind(id, email, await hashCode(id, code), expires, t.toISOString(), sendsToday, today).run();
+
+  try {
+    const r = await sendEmail(env, { to: email, ...verificationEmail(code) });
+    // The test configuration sends nothing; it gets the code back instead so
+    // the suite can finish a verification. Never true in a deployed Worker.
+    return json({ sent: true, ...(r.logged ? { devCode: code } : {}) });
+  } catch (e) {
+    await env.DB.prepare('DELETE FROM email_challenges WHERE student_id = ? AND code_hash = ?')
+      .bind(id, await hashCode(id, code)).run();
+    throw new HttpError(e.status || 502, e.message || 'the email could not be sent');
+  }
+}
+
+async function emailConfirm(request, env) {
+  const b = await body(request);
+  const id = normaliseCode(b.code);
+  if (!id) return fail(404, 'no record for that student code');
+  const typed = String(b.verification ?? '').replace(/\D/g, '');
+  if (typed.length !== 6) throw new HttpError(400, 'the verification code is 6 digits');
+  const ch = await env.DB.prepare('SELECT * FROM email_challenges WHERE student_id = ?').bind(id).first();
+  if (!ch) return fail(404, 'no verification is waiting for that student code');
+  if (new Date(ch.expires_at) < new Date() || ch.attempts >= CHALLENGE.attempts) {
+    await env.DB.prepare('UPDATE email_challenges SET expires_at = ? WHERE student_id = ?').bind(now(), id).run();
+    return fail(410, 'that code has expired. Ask for a new one.');
+  }
+  if (await hashCode(id, typed) !== ch.code_hash) {
+    await env.DB.prepare('UPDATE email_challenges SET attempts = attempts + 1 WHERE student_id = ?').bind(id).run();
+    return fail(400, 'that code is not right');
+  }
+  const t = now();
+  await env.DB.batch([
+    env.DB.prepare('UPDATE students SET email = ?, email_verified_at = ?, updated_at = ? WHERE id = ?').bind(ch.email, t, t, id),
+    env.DB.prepare('DELETE FROM email_challenges WHERE student_id = ?').bind(id),
+  ]);
+  return json({ verified: true, email: ch.email });
+}
+
 async function lookupCertificate(env, raw) {
   const vc = normaliseVerify(raw);
   const row = vc ? await env.DB.prepare(
@@ -308,6 +412,7 @@ async function deleteStudent(env, rawCode) {
     env.DB.prepare('DELETE FROM unit_progress WHERE student_id = ?').bind(id),
     env.DB.prepare('DELETE FROM course_completions WHERE student_id = ?').bind(id),
     env.DB.prepare('DELETE FROM certificates WHERE student_id = ?').bind(id),
+    env.DB.prepare('DELETE FROM email_challenges WHERE student_id = ?').bind(id),
   ]);
   return json({ deleted: true });
 }
@@ -460,6 +565,10 @@ export async function handle(request, env) {
       return fail(405, 'method not allowed');
     }
     if (path === '/api/certificate' && method === 'POST') return await issueCertificate(request, env);
+    if (path === '/api/email/start' && method === 'POST')
+      return await guarded(request, env, 'student', () => emailStart(request, env));
+    if (path === '/api/email/confirm' && method === 'POST')
+      return await guarded(request, env, 'student', () => emailConfirm(request, env));
     // Public, static: the courses and the completion codes with their names,
     // for anyone reading the records (the student tracker turns codes into
     // course names with it). Nothing about any student is in it.

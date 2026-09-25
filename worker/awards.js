@@ -39,17 +39,35 @@ export const DEGREES = {
 
 const MASTERS = new Set(['thm', 'mdiv']);
 
-/** The units a course certificate needs, or null for a course the Worker
- *  does not know (single-page courses record a completion code, not units). */
-export function courseUnits(slug) {
-  const c = catalog.courses[String(slug || '').toLowerCase()];
-  return c ? c.units : null;
+/** The units a course certificate needs, or null for a course with no units
+ *  (unknown, or a single-page course). Accepts the slug or the code. */
+export function courseUnits(slugOrCode) {
+  const r = resolveCourse(slugOrCode);
+  return r && r.units ? r.units : null;
+}
+
+/** What a course certificate is checked against:
+ *    { slug, code, units }  a unit course -- every unit must be recorded
+ *    { code }               a single-page course (Counseling, WiseSpeak,
+ *                           Narrative Preaching, Ethics) -- its completion
+ *                           code must be recorded, since it keeps no units
+ *    null                   not a course the seminary offers
+ *  Either name is accepted: unit progress is keyed by slug ("ots"), the
+ *  certificate pages and degrees by code ("CTSOTS"). */
+export function resolveCourse(slugOrCode) {
+  const raw = String(slugOrCode || '').trim();
+  const bySlug = catalog.courses[raw.toLowerCase()];
+  if (bySlug) return { slug: raw.toLowerCase(), code: bySlug.code, units: bySlug.units };
+  const code = raw.toUpperCase();
+  for (const [slug, c] of Object.entries(catalog.courses))
+    if (c.code === code) return { slug, code, units: c.units };
+  return catalog.completions[code] ? { code } : null;
 }
 
 /** null when the record supports the award, else a short reason. */
 export function courseShortfall(slug, unitsDone) {
   const need = courseUnits(slug);
-  if (!need) return 'unknown course';
+  if (!need) return resolveCourse(slug) ? 'no units: check the completion code' : 'unknown course';
   const have = new Set(unitsDone.map(Number));
   const missing = need.filter((u) => !have.has(u));
   return missing.length ? `units not recorded as passed: ${missing.join(', ')}` : null;

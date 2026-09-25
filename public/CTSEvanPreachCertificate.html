@@ -261,6 +261,13 @@ const COURSE_NAME = "Evangelistic Preaching";
 const COURSE_NAME_ES = "Predicación Evangelística";
 const TOTAL_UNITS = 10;
 const STUDENT_KEY = "cts_student";
+  // cts_student is the registration record the home page writes, a JSON
+  // object with the student's name inside it. This page used to treat it as
+  // a bare name, printed the raw JSON on the certificate, and overwrote the
+  // whole record when the name was edited.
+  function ctsStudentName(){ var v = localStorage.getItem('cts_student') || ''; if (v.charAt(0) === '{') { try { return (JSON.parse(v).name || '').trim(); } catch (e) { return ''; } } return v; }
+  function ctsSetStudentName(n){ var v = localStorage.getItem('cts_student') || ''; var o = {}; if (v.charAt(0) === '{') { try { o = JSON.parse(v) || {}; } catch (e) { o = {}; } } o.name = n; localStorage.setItem('cts_student', JSON.stringify(o)); }
+
 const TRACK_KEY   = "cts_track";
 
 const UNIT_TITLES = {
@@ -340,7 +347,7 @@ function render(){
   document.getElementById("certDateES").textContent = fmtDateES(now);
 
   // Name display
-  const savedName = localStorage.getItem(STUDENT_KEY) || "";
+  const savedName = ctsStudentName();
   document.getElementById("nameInput").value = savedName;
   document.getElementById("certName").textContent = savedName || (isEs ? "[Escriba su nombre arriba]" : "[Enter your name above]");
 
@@ -380,7 +387,7 @@ function saveName(){
     alert(isEs ? "Por favor escriba su nombre antes de guardar." : "Please type your name before saving.");
     return;
   }
-  localStorage.setItem(STUDENT_KEY, v);
+  ctsSetStudentName(v);
   render();
 }
 

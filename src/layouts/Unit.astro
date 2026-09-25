@@ -8,6 +8,7 @@
  * untouched. tools/prose-baseline.mjs is what makes that safe to assert.
  */
 import { shell } from '../lib/shell';
+import catalog from '../../worker/catalog.json';
 
 interface Unit {
   course: string;
@@ -48,7 +49,17 @@ const cls = bodyClass && /\blang-(en|es|both)\b/.test(bodyClass) ? bodyClass
 const pills = unitNumbers
   .map((n) => ({ n, href: `${pagePrefix}Unit${n}.html`, here: n === unit.unit }));
 
-const unitJson = JSON.stringify(unit).replace(/</g, '\\u003c');
+// What finishing this course records (public/assets/js/cts-record.js): the
+// code the certificate page and the degrees use, the name the degree pages
+// count, and every unit it takes. From worker/catalog.json, which is generated
+// from the same unit files and certificate pages, so the Worker and the page
+// cannot disagree about what a course is.
+const cat = (catalog.courses as Record<string, { code: string; units: number[] }>)[unit.course];
+const done = cat && (catalog.completions as Record<string, { name: string; page: string }>)[cat.code];
+if (!cat || !done) throw new Error(`worker/catalog.json has no course "${unit.course}": run node tools/gen-worker-catalog.mjs`);
+const unitJson = JSON.stringify({ ...unit,
+  completion: { slug: unit.course, code: cat.code, name: done.name, page: done.page, units: cat.units },
+}).replace(/</g, '\\u003c');
 
 // The language classes come from the body class the page already had; a page
 // that opened in Spanish still does.
@@ -129,8 +140,8 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
           <span class="lang-es">Regístrese una vez, para todos los cursos</span>
         </h2>
         <p>
-          <span class="lang-en">Your name and track are saved in this browser and carry into every class. Nothing is sent anywhere until you ask for a backup code.</span>
-          <span class="lang-es">Su nombre y trayecto se guardan en este navegador y se aplican a todas las clases. No se envía nada hasta que solicite un código de respaldo.</span>
+          <span class="lang-en">Your name, track and progress are kept with the seminary under your student code, so you can continue on any device. <a href="/CTSPrivacy.html">What we keep</a>.</span>
+          <span class="lang-es">Su nombre, trayecto y progreso se guardan en el seminario bajo su código de estudiante, para que pueda continuar en cualquier dispositivo. <a href="/CTSPrivacy.html">Lo que guardamos</a>.</span>
         </p>
         <div class="registration-fields">
           <div class="full">
@@ -186,6 +197,7 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
     </footer>
 
     <script is:inline set:html={`window.CTS_UNIT = ${unitJson};`} />
+    <script is:inline src="/assets/js/cts-record.js"></script>
     <script is:inline src="/assets/js/cts-engine.js"></script>
     {scripts.map((src) => <script is:inline src={`/${src.replace(/^\//, '')}`}></script>)}
     {/* Mirrors this browser's progress to the seminary's database so a cleared

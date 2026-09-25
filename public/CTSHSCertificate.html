@@ -214,7 +214,8 @@ function $(id){return document.getElementById(id);}
 
 function readProgress(){
   var p={};try{p=JSON.parse(lsGet(CFG.progressKey)||'{}');}catch(e){p={};}
-  var n=0;for(var i=1;i<=CFG.totalUnits;i++){if(p[i])n++;}
+  // the unified engine records a pass as p.unitN; the old engine as p[N]
+  var n=0;for(var i=1;i<=CFG.totalUnits;i++){if(p[i]||p['unit'+i]){p[i]=true;n++;}}
   return {map:p,count:n};
 }
 
@@ -244,6 +245,12 @@ function render(){
   $('c-name').textContent=STATE.name||'\u00a0';
   $('np-h').textContent=t.npH; $('np-l').textContent=t.npL; $('pp-h').textContent=t.ppH; if($('c-sig1'))$('c-sig1').textContent=t.sig1; if($('c-sig2'))$('c-sig2').textContent=t.sig2;
   $('printBtn').textContent=t.print;
+
+  // the certificate itself is shown only once it is earned (or when storage
+  // is blocked and nothing can be checked); cts-completion.js records a
+  // completion the moment it sees the certificate, so a locked page must not
+  // show one
+  $('cert').style.display=(STATE.blocked||STATE.done>=CFG.totalUnits)?'':'none';
 
   // status
   var s=$('status');

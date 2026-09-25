@@ -9,7 +9,8 @@
 // questions are, which is exactly what the student's browser has.
 //
 //   pass mark      90% of MC, as a ratio
-//   short answer   counts on the master's tracks only, 90% of SA
+//   short answer   counts on Associate, Th.M. and M.Div., 90% of SA; not on
+//                  the Certificate of Ministry
 //   MC feedback    every question is corrected on click, on every track
 //   lockout        master's 15 min, certificate 2 min
 //   persistence    a passed MC section stays passed; SA-only lockout
@@ -52,10 +53,15 @@ async function session(course, unit, track, nCorrect, fillSA = false) {
   const errs = [];
   page.on('pageerror', e => errs.push(e.message));
   await page.goto(`${BASE}/${course}Unit${unit}.html`, { waitUntil: 'load' });
+  // 'assoc' is how the front page registers an Associate: certificate rigor
+  // (cts_track "cert") with the degree goal recorded beside it.
   await page.evaluate(([t, core]) => {
     localStorage.clear();
-    localStorage.setItem('cts_student', JSON.stringify({ name: 'T', email: 't@x.org', track: t }));
+    const goal = t === 'assoc' ? 'assoc' : '';
+    if (goal) t = 'cert';
+    localStorage.setItem('cts_student', JSON.stringify({ name: 'T', email: 't@x.org', track: t, goal }));
     localStorage.setItem('cts_track', t);
+    if (goal) localStorage.setItem('cts_goal', goal);
     localStorage.setItem('cts_done_codes', JSON.stringify(core));
   }, [track, CORE]);
   await page.reload({ waitUntil: 'load' });
@@ -159,6 +165,16 @@ for (const [course, unit] of SAMPLES) {
     ok(mdivNoSA.ls[`cts_${slug}_u${unit}_mc_passed`] === '1', `${label}: mdiv MC pass not banked when SA failed`);
     ok(Object.keys(mdivNoSA.ls).some(k => /_sa_lock$/.test(k)), `${label}: mdiv SA failure did not apply an SA-only lock`);
   }
+  // 5b. the same holds for the Associate (Wayne's rule, 24 Sept 2026), at the
+  //     certificate lockout
+  if (probe.U.sa > 0) {
+    const assocNoSA = await session(course, unit, 'assoc', need, false);
+    ok(!/Passed|Aprobado/.test(assocNoSA.result), `${label}: associate passed with short answer blank`);
+    ok(/short answer|respuesta corta/i.test(assocNoSA.result), `${label}: associate SA failure did not name short answer — "${assocNoSA.result.slice(0, 80)}"`);
+    ok(/\b2 minute|2 minuto/.test(assocNoSA.result), `${label}: associate lock not 2 minutes — "${assocNoSA.result.slice(0, 80)}"`);
+  }
+  const assocSA = await session(course, unit, 'assoc', need, true);
+  ok(/Passed|Aprobado/.test(assocSA.result), `${label}: associate did not pass with MC at mark and SA written — "${assocSA.result.slice(0, 80)}"`);
   const mdivSA = await session(course, unit, 'mdiv', need, true);
   ok(/Passed|Aprobado/.test(mdivSA.result), `${label}: mdiv did not pass with MC at mark and SA written — "${mdivSA.result.slice(0, 80)}"`);
 

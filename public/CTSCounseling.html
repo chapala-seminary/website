@@ -1263,12 +1263,24 @@ body.spanish .lang-es{display:block}
 
 <script>
 // ============= COURSE DATA - QUESTION BANKS PER UNIT =============
+// Associate of Divinity students study at certificate rigor but must pass the
+// short answers too (Wayne's track rule, 24 Sept 2026). They are recognised by
+// the site-wide goal (cts_goal / cts_student.goal = "assoc") or an "ad" /
+// "associate" track written by other pages.
+function ctsIsAssociate(){
+  try{
+    var s = JSON.parse(localStorage.getItem('cts_student') || 'null') || {};
+    var t = String(localStorage.getItem('cts_track') || s.track || '').toLowerCase();
+    if(t === 'ad' || t === 'associate' || t === 'assoc') return true;
+    return String(localStorage.getItem('cts_goal') || s.goal || '').toLowerCase() === 'assoc';
+  }catch(e){ return false; }
+}
 const TRACK_NAMES = {cert:{en:"Certificate of Ministry",es:"Certificado de Ministerio"},mtheol:{en:"Master of Theology",es:"Maestría en Teología"},mdiv:{en:"Master of Divinity",es:"Maestría en Divinidad"}};
 
 // Question banks defined below by inserting into UNITS object.
 // Each unit: { mcq: [...], shortAnswer: [...] }
 // MCQ shape: { textEn, textEs, options:[{en,es}], correct:0..3, explainEn, explainEs }
-// Short-answer shape: { textEn, textEs, keywords:[...] } — Masters tracks only; keyword-graded
+// Short-answer shape: { textEn, textEs, keywords:[...] } — required on Associate and Masters tracks; keyword-graded
 const UNITS = {};
 UNITS[0] = {
   mcq: [
@@ -2265,24 +2277,24 @@ function renderQuiz(unitNum){
   // writing questions are always visible. For Certificate students they are optional and do
   // not count toward passing; for Master's students they are required (see submitUnit).
   if(essayContainer && unit.shortAnswer){
-    const isCert = state.registration && state.registration.track === 'cert';
-    const isMasters = state.registration && state.registration.track !== 'cert';
+    const isCert = state.registration && state.registration.track === 'cert' && !ctsIsAssociate();
+    const isMasters = state.registration && !isCert;
     let sh = '';
     if(!state.registration){
       // Not registered yet: everyone can still see and try the writing questions.
       sh += `<div class="essay-optional-note">
-        <span class="lang-en"><strong>Written questions (Master's level):</strong> These ten written questions are open to every student. Your answers are checked gently against the lesson's key ideas — this is a teaching exercise, not a test to fear. They are required for the Master of Theology and Master of Divinity tracks and are optional (they do not affect your score) for the Certificate of Ministry. Register above to have your track recorded.</span>
-        <span class="lang-es"><strong>Preguntas escritas (nivel de Maestría):</strong> Estas diez preguntas escritas están abiertas a todo estudiante. Sus respuestas se revisan con suavidad frente a las ideas clave de la lección — es un ejercicio de enseñanza, no un examen que temer. Se requieren para las pistas de Maestría en Teología y Maestría en Divinidades y son opcionales (no afectan su puntaje) para el Certificado de Ministerio. Regístrese arriba para que se registre su pista.</span>
+        <span class="lang-en"><strong>Written questions:</strong> These ten written questions are open to every student. Your answers are checked gently against the lesson's key ideas — this is a teaching exercise, not a test to fear. They are required for the Associate of Divinity, Master of Theology and Master of Divinity tracks and are optional (they do not affect your score) for the Certificate of Ministry. Register above to have your track recorded.</span>
+        <span class="lang-es"><strong>Preguntas escritas:</strong> Estas diez preguntas escritas están abiertas a todo estudiante. Sus respuestas se revisan con suavidad frente a las ideas clave de la lección — es un ejercicio de enseñanza, no un examen que temer. Se requieren para las pistas de Asociado en Divinidad, Maestría en Teología y Maestría en Divinidades y son opcionales (no afectan su puntaje) para el Certificado de Ministerio. Regístrese arriba para que se registre su pista.</span>
       </div>`;
     } else if(isCert){
       sh += `<div class="essay-optional-note">
-        <span class="lang-en"><strong>Optional for Certificate of Ministry students:</strong> These ten written questions are reflection items. You may complete them for your own learning, but they are not required for the Certificate of Ministry and do not count toward your passing score. Master of Theology and Master of Divinity students must complete this section.</span>
-        <span class="lang-es"><strong>Opcional para estudiantes del Certificado de Ministerio:</strong> Estas diez preguntas escritas son ejercicios de reflexión. Puede completarlas para su propio aprendizaje, pero no se requieren para el Certificado de Ministerio y no cuentan para su puntaje de aprobación. Los estudiantes de la Maestría en Teología y la Maestría en Divinidades deben completar esta sección.</span>
+        <span class="lang-en"><strong>Optional for Certificate of Ministry students:</strong> These ten written questions are reflection items. You may complete them for your own learning, but they are not required for the Certificate of Ministry and do not count toward your passing score. Associate of Divinity, Master of Theology and Master of Divinity students must complete this section.</span>
+        <span class="lang-es"><strong>Opcional para estudiantes del Certificado de Ministerio:</strong> Estas diez preguntas escritas son ejercicios de reflexión. Puede completarlas para su propio aprendizaje, pero no se requieren para el Certificado de Ministerio y no cuentan para su puntaje de aprobación. Los estudiantes del Asociado en Divinidad, la Maestría en Teología y la Maestría en Divinidades deben completar esta sección.</span>
       </div>`;
     } else if(isMasters){
       sh += `<div class="essay-optional-note">
-        <span class="lang-en"><strong>Required for your track:</strong> These ten written questions are part of the Master's-level requirement. Answers are checked gently against the lesson's key ideas, and the model answer is shown so you can study it. Aim to touch at least three of the key ideas in each answer.</span>
-        <span class="lang-es"><strong>Requerido para su pista:</strong> Estas diez preguntas escritas son parte del requisito de nivel de Maestría. Las respuestas se revisan con suavidad frente a las ideas clave de la lección, y se muestra la respuesta modelo para que la estudie. Procure tocar al menos tres de las ideas clave en cada respuesta.</span>
+        <span class="lang-en"><strong>Required for your track:</strong> These ten written questions are required for the Associate of Divinity, Master of Theology and Master of Divinity. Answers are checked gently against the lesson's key ideas, and the model answer is shown so you can study it. Aim to touch at least three of the key ideas in each answer.</span>
+        <span class="lang-es"><strong>Requerido para su pista:</strong> Estas diez preguntas escritas se requieren para el Asociado en Divinidad, la Maestría en Teología y la Maestría en Divinidad. Las respuestas se revisan con suavidad frente a las ideas clave de la lección, y se muestra la respuesta modelo para que la estudie. Procure tocar al menos tres de las ideas clave en cada respuesta.</span>
       </div>`;
     }
     unit.shortAnswer.forEach((q,i)=>{
@@ -2474,7 +2486,7 @@ function submitUnit(unitNum){
   const mcPct = total>0 ? Math.round((correct/total)*100) : 0;
   let passed = false;
   let saInfo = '';
-  if(unit.shortAnswer && state.registration.track !== 'cert'){
+  if(unit.shortAnswer && (state.registration.track !== 'cert' || ctsIsAssociate())){
     // Masters tracks on new-format units: also grade short-answer.
     // Use saChecked when present; otherwise auto-check now.
     const sa = unit.shortAnswer;
@@ -2518,7 +2530,7 @@ function submitUnit(unitNum){
   }
   state.unitState[unitNum].passed = passed;
   saveState();
-  const isCert = state.registration.track === 'cert';
+  const isCert = state.registration.track === 'cert' && !ctsIsAssociate();
   const result = document.getElementById('result_'+unitNum);
   if(result){
     result.className = 'unit-result show ' + (passed ? 'pass' : 'fail');

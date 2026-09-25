@@ -1,4 +1,4 @@
-/* CTS course-completion tracker
+/* CTS course-completion tracker -- certificate pages, READ-ONLY (see record())
    Fires once when a course certificate unlocks:
    1) silently records name/course/track/date to the Google Apps Script endpoint (the running count)
    2) offers a one-tap email (with optional student email) to the seminary
@@ -134,10 +134,29 @@
     } catch (e) {}
   }
 
+  /* READ-ONLY since 24 Sept 2026. This page no longer records the course as
+     complete -- passing the last unit does that (assets/js/cts-record.js),
+     and opening a certificate must never create a completion. What is left
+     here: the student's own "Notify the seminary" email, and the seminary's
+     count for a completion this browser has recorded but not yet reported.
+     A degree page (no course code of its own) still reports the award once,
+     as it always did. */
+  var DEGREE_PAGES = ["CTSASSOCIATE", "CTSCERTIFICATEOFMINISTRY", "CTSMDIV", "CTSTHM"];
+  function pageCode() {
+    var c = file.replace(/(thm|mth|mdiv)?certificate\.html$/, "").replace(/\.html$/, "").toUpperCase();
+    return c === "ETHICS_" ? "ETHICS" : c;
+  }
+  function reportable() {
+    var code = pageCode();
+    if (DEGREE_PAGES.indexOf(code) !== -1) return true;
+    try {
+      var a = JSON.parse(localStorage.getItem("cts_done_codes") || "[]");
+      return Array.isArray(a) && a.indexOf(code) !== -1;
+    } catch (e) { return false; }
+  }
+
   function record(payload, alsoEmail) {
-    addToRoster(payload.course);                   // count toward the degree (idempotent)
-    recordCode();                                  // stable code for prerequisite gating (idempotent)
-    if (localStorage.getItem(recKey)) {            // never double-count
+    if (localStorage.getItem(recKey) || !reportable()) {   // never double-count; never report what is not recorded
       if (alsoEmail) openMail(payload);
       return;
     }
@@ -209,12 +228,6 @@
       var nm = findName();
       if (dip || nm) {
         clearInterval(iv);
-        // Record completion the instant the certificate legitimately unlocks —
-        // do not wait on the 7s email-panel timer below. A student who prints
-        // the page and closes the tab right away must not stay locked out of
-        // the next course just because they never waited out that timer.
-        addToRoster(ctx.course);
-        recordCode();
         buildPanel(dip || document.body, ctx);
       } else if (tries > 60) {        // ~30s; give up quietly (page never unlocked)
         clearInterval(iv);

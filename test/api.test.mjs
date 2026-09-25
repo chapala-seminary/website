@@ -125,6 +125,32 @@ ok(unknown.status === 404 && malformed.status === 404 &&
    JSON.stringify(unknown.body) === JSON.stringify(malformed.body),
   'a wrong code and a malformed code are indistinguishable');
 
+/* ---- a verified email, required for any certificate ---------------------- */
+
+// Registered with an email, but nobody has confirmed it: no certificate.
+const unverified = await jpost('/api/certificate', { code: CODE, level: 'course', course: '1peter', title: '1 Peter Intensive' });
+ok(unverified.status === 403 && unverified.body?.needs === 'email',
+  `a certificate without a verified email is refused and says why (${unverified.status}: ${JSON.stringify(unverified.body)})`);
+
+ok((await jpost('/api/email/start', { code: CODE, email: 'not-an-address' })).status === 400, 'a malformed email is refused');
+const start = await jpost('/api/email/start', { code: CODE, email: 'Maria@Example.org' });
+ok(start.status === 200 && /^\d{6}$/.test(start.body?.devCode || ''), `a code is issued (test mode hands it back) (${start.status})`);
+const again0 = await jpost('/api/email/start', { code: CODE, email: 'maria@example.org' });
+ok(again0.status === 429, `a second code within a minute is refused (${again0.status})`);
+const wrongDigit = String((+start.body.devCode[0] + 1) % 10) + start.body.devCode.slice(1);
+ok((await jpost('/api/email/confirm', { code: CODE, verification: wrongDigit })).status === 400, 'a wrong code is refused');
+const conf = await jpost('/api/email/confirm', { code: CODE, verification: start.body.devCode });
+ok(conf.status === 200 && conf.body?.verified === true && conf.body?.email === 'maria@example.org',
+  `the right code verifies the address, lower-cased (${conf.status}: ${JSON.stringify(conf.body)})`);
+ok((await jpost('/api/email/confirm', { code: CODE, verification: start.body.devCode })).status === 404,
+  'a code works once');
+let es = await jget(`/api/student/${CODE}`);
+ok(!!es.body?.student?.email_verified_at, 'the record shows the address as verified');
+// A stale device cannot swap a verified address for an unconfirmed one.
+await jpost('/api/sync', { code: CODE, student: { email: 'someone-else@example.org' } });
+es = await jget(`/api/student/${CODE}`);
+ok(es.body?.student?.email === 'maria@example.org', `sync does not overwrite a verified email (got ${es.body?.student?.email})`);
+
 /* ---- certificates and public verification -------------------------------- */
 
 // The record so far: 1 Peter units 1 and 2 of 12. No award is supported yet.
@@ -149,6 +175,18 @@ ok(/^[0-9A-HJKMNP-TV-Z]{10}$/.test(VC || ''), `verification code has the documen
 const again = await jpost('/api/certificate', { code: CODE, level: 'course', course: '1peter', title: '1 Peter Intensive' });
 ok(again.body?.verifyCode === VC && again.body?.reissued === true,
   'printing the same certificate twice does not mint a second verification code');
+
+// The same course by its completion code is the same award, not a second one.
+const viaCode = await jpost('/api/certificate', { code: CODE, level: 'course', course: 'CTS1PETER', title: '1 Peter Intensive' });
+ok(viaCode.body?.verifyCode === VC, `a course named by its code (CTS1PETER) is the same award as by its slug (${viaCode.status})`);
+
+// Single-page courses keep no units; the completion code is their record.
+// (WiseSpeak is a foundation course, so this path cannot be "unknown course".)
+const ws0 = await jpost('/api/certificate', { code: CODE, level: 'course', course: 'WISESPEAK', title: 'Preaching' });
+ok(ws0.status === 409, `a single-page course certificate with no completion recorded is refused (${ws0.status}: ${ws0.body?.error})`);
+await jpost('/api/sync', { code: CODE, doneCodes: ['WISESPEAK'] });
+const ws1 = await jpost('/api/certificate', { code: CODE, level: 'course', course: 'WISESPEAK', title: 'Preaching' });
+ok(ws1.status === 201, `a single-page course certificate is issued once its completion is recorded (${ws1.status}: ${ws1.body?.error})`);
 
 const v = await jget(`/api/verify/${VC}`);
 ok(v.status === 200 && v.body?.valid === true && v.body?.name === 'María Cruz',
@@ -204,6 +242,10 @@ ok(d.status === 201, `the 20-course core + 10 electives earns the M.Div. (${d.st
 // a certificate-track student with the same 30 courses does not get a
 // master's award: the completions were earned on the certificate track
 const certReg = await jpost('/api/register', { name: 'Cert Track', track: 'cert' });
+{
+  const st0 = await jpost('/api/email/start', { code: certReg.body.code, email: 'cert@example.org' });
+  await jpost('/api/email/confirm', { code: certReg.body.code, verification: st0.body?.devCode });
+}
 await jpost('/api/sync', { code: certReg.body.code, doneCodes: [...MDIV_CORE, ...filler(10)] });
 d = await jpost('/api/certificate', { code: certReg.body.code, level: 'mdiv', title: 'Master of Divinity' });
 ok(d.status === 409 && /0 of 30 master's-level/.test(d.body?.error || ''),

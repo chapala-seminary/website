@@ -9,11 +9,12 @@
    per-course engines)
      Pass mark      90% of the multiple-choice questions, as a ratio, so a unit
                     may carry any number of questions.
-     Short answer   Required on the master's tracks (M.Div., Th.M.) only, 90%
-                    of the questions, each credited by keyword coverage. On the
-                    Certificate and Associate tracks the short-answer prompts
-                    are for the student's own reflection and do not count; the
-                    model answers are shown when the unit is submitted.
+     Short answer   Required on the Associate, Th.M. and M.Div. tracks, 90%
+                    of the questions, each credited by keyword coverage (to be
+                    replaced by AI grading). On the Certificate of Ministry the
+                    short-answer prompts are for the student's own reflection
+                    and do not count; the model answers are shown on submit.
+                    (Associate added 2026-09-24, Wayne's track rule.)
      MC feedback    Every multiple-choice question scores the moment it is
                     clicked, on every track: the chosen option is marked right
                     or wrong and the correct letter is shown. A question, once
@@ -77,17 +78,115 @@
     var m = /Unit(\d+)\.html$/.exec(U.nextHref || "");
     return m ? { en: "Unit " + m[1], es: "Unidad " + m[1] } : { en: "the Certificate", es: "el Certificado" };
   }
-  // Short answer counts towards passing on the master's tracks only.
-  function saCounts() { return isMasters(); }
+  /* Associate of Divinity students study at certificate rigor (cts_track
+     stays "cert", so their lockout is the certificate one) but record the
+     degree goal as cts_goal = "assoc". Older course pages' setTrack wrote the
+     track itself as "ad"; the Worker's records use "associate". */
+  function isAssociate() {
+    var s = student(), t = String(track()).toLowerCase();
+    if (t === "ad" || t === "associate" || t === "assoc") return true;
+    return String(lsGet("cts_goal") || (s && s.goal) || "").toLowerCase() === "assoc";
+  }
+  /* Short answer counts towards passing on every track but the Certificate of
+     Ministry: Associate, Th.M. and M.Div. (Wayne's rule, 24 Sept 2026). Still
+     keyword-graded for now. */
+  function saCounts() { return isMasters() || isAssociate(); }
+
+  /* Passing the last unit is what completes a course -- not opening the
+     certificate page (cts-record.js says why). Also run on load, so a course
+     finished before this existed is recorded the next time any of its units
+     is opened. Then sync straight away: a student who passes the last unit
+     and closes the tab should not wait for the next poll. */
+  function recordCourse() {
+    if (!window.CTSRecord || !U.completion) return;
+    if (window.CTSRecord.course(U.completion) === "new" && window.CTS_SYNC) {
+      try { window.CTS_SYNC.sync(); } catch (e) {}
+    }
+  }
 
   var progress   = jget(KEY.progress, {});
+
+  /* ---- the keys the old engines wrote, and the certificate pages read ----
+   *
+   * Each certificate page was written against its own course's engine, and
+   * several of those engines kept progress under a different slug (1 Peter
+   * was "1pet", Galatians "gal") or a different key shape ("re_unit3_passed",
+   * "cts_cs_state"). The unified engine standardised on cts_<slug>_progress
+   * and cts_<slug>_uN_mc_passed, which left two things behind: a student's
+   * progress from before the change, and every certificate page that reads
+   * the old keys -- Ruth and Esther sent a finished student back to Unit 1
+   * for ever. So: on load, a unit passed under the old keys counts as passed;
+   * on a pass, the old keys are written too. tools/verify-certificate-unlock
+   * opens every certificate page against a fully-passed student to hold this.
+   * Legacy slugs must also be known to cts-sync.js, which maps them back. */
+  var LEGACY = {
+    "1peter":               { slug: "1pet" },
+    "biblecharacters":      { slug: "CTSBC" },
+    "biblecharacters2":     { slug: "CTSBC2" },
+    "galatians":            { slug: "gal" },
+    "deaconfamilyministry": { slug: "CTSDFM" },
+    "evangelism":           { slug: "ev" },
+    "hermeneutics":         { slug: "herm",       flag: function (n) { return "cts_herm_u" + n + "_passed"; },         value: "true" },
+    "evanpreach":           { slug: "evenpreach", flag: function (n) { return "cts_evenpreach_unit" + n + "_passed"; }, value: "1" },
+    "bible":                { flag: function (n) { return "cts_bible_u" + n + "_mcpass"; },      value: "1" },
+    "pent":                 { flag: function (n) { return "cts_pent_unit" + n + "_passed"; },    value: "true" },
+    "romans":               { flag: function (n) { return "cts_romans_unit" + n + "_passed"; },  value: "true" },
+    "re":                   { flag: function (n) { return "re_unit" + n + "_passed"; },          value: "1" },
+    "cs":                   { state: "cts_cs_state" },                 // {n: {passed: true}}
+    "genesis":              { completion: "genesis" }                  // cts_genesis_uN_completion[_track]
+  };
+  var legacy = LEGACY[U.course] || null;
+  function genesisTrack() { var t = track(); return t === "mdiv" ? "mdiv" : (t === "thm" || t === "mth") ? "thm" : "cert"; }
+  function legacyPassed(n) {
+    if (!legacy) return false;
+    if (legacy.slug) {
+      if (lsGet("cts_" + legacy.slug + "_u" + n + "_mc_passed") === "1") return true;
+      if (jget("cts_" + legacy.slug + "_progress", {})["unit" + n]) return true;
+    }
+    if (legacy.flag) { var v = lsGet(legacy.flag(n)); if (v === "1" || v === "true" || v === "passed") return true; }
+    if (legacy.state) { var st = jget(legacy.state, {}); if (st[n] && st[n].passed) return true; }
+    if (legacy.completion) {
+      var ks = ["cts_genesis_u" + n + "_completion", "cts_genesis_u" + n + "_completion_cert",
+                "cts_genesis_u" + n + "_completion_mdiv", "cts_genesis_u" + n + "_completion_thm"];
+      for (var i = 0; i < ks.length; i++) if (jget(ks[i], null)) return true;
+    }
+    return false;
+  }
+  function writeLegacy(n) {
+    if (!legacy) return;
+    if (legacy.slug) {
+      lsSet("cts_" + legacy.slug + "_u" + n + "_mc_passed", "1");
+      var lp = jget("cts_" + legacy.slug + "_progress", {}); lp["unit" + n] = true;
+      lsSet("cts_" + legacy.slug + "_progress", JSON.stringify(lp));
+    }
+    if (legacy.flag) lsSet(legacy.flag(n), legacy.value);
+    if (legacy.state) { var st = jget(legacy.state, {}); st[n] = st[n] || {}; st[n].passed = true; lsSet(legacy.state, JSON.stringify(st)); }
+    if (legacy.completion) {
+      var c = { course: "genesis", unit: n, completedAt: new Date().toISOString(), track: genesisTrack(), version: 2 };
+      lsSet("cts_genesis_u" + n + "_completion_" + c.track, JSON.stringify(c));
+      lsSet("cts_genesis_u" + n + "_completion", JSON.stringify(c));
+    }
+  }
+  // import: a unit passed under the old keys is passed
+  if (legacy) {
+    var imported = false;
+    for (var ln = 0; ln <= U.totalUnits; ln++) {
+      if (!progress["unit" + ln] && legacyPassed(ln)) { progress["unit" + ln] = true; imported = true; }
+    }
+    if (imported) lsSet(KEY.progress, JSON.stringify(progress));
+    if (progress["unit" + U.unit] && lsGet(KEY.mcPassed) !== "1") lsSet(KEY.mcPassed, "1");
+    // and the other way: progress restored from a student code arrives in the
+    // new keys only, so give the certificate page its old ones
+    for (var wn = 0; wn <= U.totalUnits; wn++) if (progress["unit" + wn] && !legacyPassed(wn)) writeLegacy(wn);
+  }
+
   var unitPassed = !!progress["unit" + U.unit];
   var mcPassed   = lsGet(KEY.mcPassed) === "1";
 
-  /* Model answers for short-answer work: certificate tracks see them when
-     they submit; master's tracks, whose short answer is graded, see them once
-     the unit is passed. Multiple choice is corrected on click for everyone. */
-  function revealAnswers() { return !isMasters() || unitPassed; }
+  /* Model answers for short-answer work: the Certificate of Ministry sees
+     them on submit; tracks whose short answer is graded see them once the
+     unit is passed. Multiple choice is corrected on click for everyone. */
+  function revealAnswers() { return !saCounts() || unitPassed; }
 
   // ---- language ----------------------------------------------------------
   function isEs() {
@@ -429,8 +528,10 @@
     if (mcOK && saOK) {
       progress["unit" + U.unit] = true;
       lsSet(KEY.progress, JSON.stringify(progress));
+      writeLegacy(U.unit);
       unitPassed = true;
       lsDel(KEY.saLock); lsDel(KEY.fullLock);
+      recordCourse();
       var where = nextWhere();
       say(bi({ en: "&#10003; Passed. Continue to " + where.en + " above.",
                es: "&#10003; Aprobado. Continúe a " + where.es + " arriba." }), "#1f6b3b");
@@ -482,6 +583,7 @@
     wireNav();
     ensureResult();
     renderQuestions();
+    recordCourse();   // a course finished before completion moved here
 
     if (unitPassed) {
       graded = true;
