@@ -64,7 +64,10 @@ const unitFiles = fs.readdirSync(UNITS).filter((f) => /^\d+\.json$/.test(f))
   .sort((a, b) => parseInt(a) - parseInt(b));
 const units = unitFiles.map((f) => ({ file: path.join(UNITS, f), u: JSON.parse(fs.readFileSync(path.join(UNITS, f), 'utf8')) }));
 
-const stripTags = (s) => String(s || '').replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ')
+// inline markup (<em>, <strong>) goes without a trace -- a space in its place
+// showed "the hope ." for "the <em>hope</em>." and read as a typo; a line break
+// still separates words
+const stripTags = (s) => String(s || '').replace(/<br\s*\/?>/gi, ' ').replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ')
   .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/\s+/g, ' ').trim();
 function lesson(n) {
   const f = path.join(LESSONS, `${n}.json`);
