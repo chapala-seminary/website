@@ -48,6 +48,8 @@ async function ctx(){ const c=await b.newContext(); const p=await c.newPage(); c
   await p.evaluate(()=>{ const U=window.CTS_UNIT;
     document.querySelectorAll('.question[data-mc]').forEach(q=>{ const i=+q.dataset.mc; q.querySelector(`button.option[data-opt="${U.mc[i].answer}"]`)?.click(); });
     document.querySelectorAll('textarea[data-sa]').forEach(t=>{ const q=U.sa[+t.dataset.sa]; t.value=((q.keywords&&q.keywords.en)||[]).flat().join(' ')+' '+((q.model&&q.model.en)||''); t.dispatchEvent(new Event('input',{bubbles:true})); });
+    // the fill-ins count on the master's tracks too (every unit has them since 26 Sept)
+    document.querySelectorAll('input[data-fill]').forEach(t=>{ t.value=U.fill[+t.dataset.fill].answer.en; t.dispatchEvent(new Event('input',{bubbles:true})); });
     window.CTS_ENGINE.controls.submit().click(); });
   await p.waitForTimeout(800);
   const s=await p.evaluate(()=>({d:localStorage.getItem('cts_done_codes'), m:localStorage.getItem('cts_mdiv_done_codes'), res:(window.CTS_ENGINE.controls.result()||{}).textContent}));
