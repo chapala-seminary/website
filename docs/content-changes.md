@@ -523,6 +523,36 @@ Students also receive their certificate by email once it is registered
   graded on multiple choice alone with a 2-minute lock, and keeps their
   answers; `tools/engine-test-built.mjs` holds both.
 
+### 8p. Fill-in-the-blank questions for every unit (26 Sept) — 439 unit pages gained questions; 2 pages' track copy and 451 pages' registration note changed
+
+* **Content.** The other 39 courses on the shared exam engine now have ten
+  fill-ins per unit, as 1 Peter did (8m): 451 units, 4,510 questions in all.
+  Drafted from each unit's lesson with `tools/add-fill-ins.mjs`, at Robert's
+  request before Wayne's review of the 1 Peter pilot came back; the pilot
+  review's style changes are to be applied to all of them. Every answer is in
+  that unit's lesson text in its language and is accepted by the engine's own
+  grader, which `tools/content-baseline.mjs --check` now confirms for every
+  stored answer. A number written in words also accepts its digits, and an
+  answer that copies a lesson typo also accepts the right spelling.
+  Genesis is included: its unit pages run on the shared engine; only its
+  certificate page uses `cts-genesis-engine.js`.
+* **Grading.** A leading article ("the", "a", "la", "un"...) no longer makes a
+  right answer wrong; an article alone is still wrong.
+* **Review material** for Wayne, in `_review/fill-ins/`: a sheet per course,
+  `unsure.md` (questions where another answer might also be right) and
+  `lesson-text-issues.md` — 335 problems the drafters found in the lessons
+  themselves (typos, mistranslations, English and Spanish saying different
+  things, unfinished sections, a few factual slips). No lesson text was
+  changed.
+* **Copy.** "Being added course by course" is gone: the home page's How to
+  Proceed step and `CTSBeforeYouBegin.html` now name the four single-page
+  courses (Counseling, WiseSpeak, Narrative Preaching, Ethics) that will add
+  fill-ins later; the registration note on every unit page drops "where a unit
+  has them".
+* **Not in this change:** the four single-page courses; and ten lesson blocks
+  in CTSDP unit 1, CTSHS unit 3 and CTSLOC unit 7 that show literal escape
+  codes such as "\u00f3" to students (found while drafting; a separate fix).
+
 ---
 
 ## How to check any of this yourself
