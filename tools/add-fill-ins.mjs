@@ -147,8 +147,9 @@ function sheet(rows) {
       + `Associate, Th.M. and M.Div. students must get 9 of 10 right in each unit; `
       + `Certificate of Ministry students see them for review only, with the answers shown when they submit.\n\n`;
   md += `**How answers are marked.** The student's answer must be exactly the answer shown (or an "also" `
-      + `alternative), in English or Spanish. Capitals, punctuation and extra spaces are ignored; accents and `
-      + `spelling are not, so "Pedro", "PEDRO" and "pedro." are all right, but "Pdro" and "Pedro el apóstol" are not.\n\n`;
+      + `alternative), in English or Spanish. Capitals, punctuation, extra spaces and a leading article ("the", "a", "la") are ignored; `
+      + `accents and spelling are not, so "Pedro", "PEDRO" and "pedro." are all right, but "Pdro" and "Pedro el apóstol" are not. `
+      + `Each answer is marked the moment the student presses Check, and the right answer is then shown.\n\n`;
   md += `**What to check.** For each question: is it fair for a student who read this unit's lesson; is the `
       + `answer the only reasonable one (if not, name the others to accept, or reword); and is the Spanish right.\n`;
   for (const r of rows) {

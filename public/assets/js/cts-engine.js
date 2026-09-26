@@ -20,8 +20,8 @@
                     stays answered for that attempt (Wayne, 26 Sept 2026). On
                     the Certificate of Ministry they are for the student's own
                     review and do not count.
-                    A unit with no fill-ins yet (most courses, until Wayne has
-                    reviewed the pilot) is graded without them.
+                    A unit with no fill-ins is graded without them (every unit
+                    has ten since 26 Sept 2026; the rule stays for new units).
      Short answer   Required on the Th.M. and M.Div. tracks, 90% of the
                     questions, each credited by keyword coverage (to be
                     replaced by AI grading). On the Certificate of Ministry and

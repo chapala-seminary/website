@@ -72,6 +72,26 @@ function unitFingerprint(U) {
 /* Multiple-choice counts that are not twenty, and are meant not to be: the
    courses as written. A course or unit not listed here must have twenty. */
 const MC_COUNT = { CTSPentecostal: 7, CTSCS: 10, 'CTSRE/1': 18 };
+
+/* The engine's own fill-in grader, read out of cts-engine.js rather than
+   copied, so a stored answer the page would mark wrong fails here. */
+const ENGINE = fs.readFileSync(path.join(ROOT, 'public', 'assets', 'js', 'cts-engine.js'), 'utf8');
+const engineFn = (name) => (new RegExp(`\\n  function ${name}\\([^)]*\\) \\{[\\s\\S]*?\\n  \\}`).exec(ENGINE) || [''])[0];
+const fillRight = new Function(`${engineFn('normalise')}\n${engineFn('bare')}\n${engineFn('fillRight')}\nreturn fillRight;`)();
+function graderProblems() {
+  const out = [];
+  const COLL = path.join(ROOT, 'src', 'content', 'units');
+  if (!fs.existsSync(COLL)) return out;
+  for (const course of fs.readdirSync(COLL))
+    for (const file of fs.readdirSync(path.join(COLL, course)).filter((f) => f.endsWith('.json'))) {
+      const U = JSON.parse(fs.readFileSync(path.join(COLL, course, file), 'utf8'));
+      (U.fill || []).forEach((q, i) => {
+        const all = [q.answer.en, q.answer.es, ...((q.accept || {}).en || []), ...((q.accept || {}).es || [])];
+        for (const a of all) if (!fillRight(q, a)) out.push(`${course}/${U.unit}: fill-in ${i + 1}: the engine marks its own answer "${a}" wrong`);
+      });
+    }
+  return out;
+}
 const FILL_COUNT = 10;
 function countProblems(all) {
   const out = [];
@@ -132,7 +152,7 @@ if (mode === '--write') {
 } else {
   if (!fs.existsSync(OUT)) { console.error('no baseline recorded; run with --write'); process.exit(2); }
   const base = JSON.parse(fs.readFileSync(OUT, 'utf8'));
-  const problems = countProblems(now);
+  const problems = [...countProblems(now), ...graderProblems()];
   const keys = new Set([...Object.keys(base.data), ...Object.keys(now)]);
   let compared = 0;
   for (const k of keys) {

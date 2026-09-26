@@ -53,10 +53,10 @@ function ok(cond, label) { checks++; if (!cond) fails.push(label); }
 
 const browser = await chromium.launch({ executablePath: CHROME });
 
-/* Most units have no fill-ins yet (CTS1Peter is the pilot), and a rule tested
-   only on one course is a rule nobody will notice breaking on the other 39.
-   So a unit that has none is given ten made-up ones before the engine reads
-   it; a unit with real ones keeps them. `synthetic` in the result says which. */
+/* Every unit has had real fill-ins since 26 Sept 2026, and the tests use
+   them. A unit that ever arrives without them is given ten made-up ones
+   before the engine reads it, so the rules are still tested there;
+   `synthetic` in the result says which. */
 const SYNTH_FILL = Array.from({ length: 10 }, (_, i) => ({
   prompt: { en: `Test sentence ${i + 1}: the ____ is here.`, es: `Frase de prueba ${i + 1}: el ____ está aquí.` },
   answer: { en: `Word ${i + 1}`, es: `Palabra ${i + 1}` },
@@ -167,7 +167,7 @@ for (const [course, unit] of SAMPLES) {
 
   const nFill = probe.U.fill, needF = Math.ceil(nFill * 0.90);
   const prog = (r) => !!r.ls[`cts_${slug}_progress`]?.includes(`"unit${unit}"`);
-  if (!probe.U.synthetic) console.log(`  (${label}: real fill-ins, ${nFill})`);
+  if (probe.U.synthetic) console.log(`  (${label}: no fill-ins in the unit; tested with made-up ones)`);
 
   // 1. everything renders, no page errors
   const all = await session(course, unit, 'cert', nMc, true, nFill);
