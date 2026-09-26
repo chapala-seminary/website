@@ -377,8 +377,13 @@ for (const t of ['cert', 'assoc', 'mdiv']) {
   const edges = await page.evaluate(() => {
     const q = window.CTS_UNIT.fill[0], r = window.CTS_ENGINE.fillRight;
     return { shout: r(q, '  ' + q.answer.en.toUpperCase() + '!! '), extra: r(q, q.answer.en + ' and more words'),
-             blank: r(q, ''), es: r(q, q.answer.es) };
+             blank: r(q, ''), es: r(q, q.answer.es),
+             // a leading article is not a wrong answer, in either language
+             article: r(q, 'the ' + q.answer.en) && r(q, 'a ' + q.answer.en) && r(q, 'la ' + q.answer.es),
+             articleOnly: r(q, 'the') };
   });
+  ok(edges.article, `${label}: a right answer with "the"/"a"/"la" in front was marked wrong`);
+  ok(!edges.articleOnly, `${label}: an article alone was accepted`);
   ok(edges.shout, `${label}: capitals, spaces or punctuation made a right fill-in wrong`);
   ok(!edges.extra, `${label}: an answer with extra words was accepted`);
   ok(!edges.blank, `${label}: a blank fill-in was accepted`);
