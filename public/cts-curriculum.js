@@ -355,8 +355,21 @@
         "background:#e7d9ab;color:#5c4a1c;border-bottom:1px solid #cdbf8d;" +
         "font:600 12px/1 Georgia,serif;letter-spacing:.07em;text-transform:uppercase;" +
         "text-align:center;padding:11px 14px;cursor:pointer");
-      d.textContent = es ? "Modo prueba activo \u2014 el progreso de la unidad se reinicia en cada carga \u2014 toque para salir"
-                         : "Test mode on \u2014 unit progress resets on every reload \u2014 tap to exit";
+      /* Say which track the exams are graded on. The placeholder tester is on
+         the M.Div. track, and a reviewer who took themselves for a Certificate
+         student met master's rules -- fill-ins and short answer required, a
+         15-minute lock -- with nothing on screen to say why (Wayne, 26 Sept). */
+      var tk = "", st = null;
+      try {
+        st = JSON.parse(localStorage.getItem("cts_student") || "null");
+        tk = String(localStorage.getItem("cts_track") || (st && st.track) || "cert").toLowerCase();
+        if (String(localStorage.getItem("cts_goal") || (st && st.goal) || "").toLowerCase() === "assoc" || tk === "ad") tk = "assoc";
+      } catch (e) {}
+      var TN = es ? { cert: "Certificado", assoc: "Asociado", mdiv: "M.Div.", thm: "Th.M.", mth: "Th.M." }
+                  : { cert: "Certificate", assoc: "Associate", mdiv: "M.Div.", thm: "Th.M.", mth: "Th.M." };
+      var tn = TN[tk] || TN.cert;
+      d.textContent = es ? "Modo prueba activo \u2014 se califica como " + tn + " \u2014 el progreso de la unidad se reinicia en cada carga \u2014 toque para salir"
+                         : "Test mode on \u2014 graded as " + tn + " \u2014 unit progress resets on every reload \u2014 tap to exit";
       d.title = es ? "En modo prueba, el estado de aprobado/bloqueado de cada unidad se borra automáticamente cada vez que la página se carga, para que pueda volver a probarla. Esto no afecta a los estudiantes reales."
                    : "In test mode, each unit's passed/locked state is automatically cleared every time the page loads, so you can re-test it. This does not affect real students.";
       var leave = function (e) { if (e) e.preventDefault(); disableTest(); };

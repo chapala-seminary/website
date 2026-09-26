@@ -10,8 +10,9 @@
 //
 //   pass mark      90% of MC, as a ratio
 //   fill-ins       count on the Associate, Th.M. and M.Div., 9 of 10; on the
-//                  Certificate they do not count and their answers are shown
-//                  on submit (Wayne's rule, 25 Sept 2026)
+//                  Certificate they do not count (Wayne's rule, 25 Sept 2026).
+//                  Each is marked when checked, with the answer shown, and
+//                  cannot then be changed, like MC (Wayne, 26 Sept)
 //   short answer   counts on Th.M. and M.Div., 90% of SA; not on the
 //                  Certificate of Ministry or the Associate
 //   progress       cts_<course>_progress only when every part that counts
@@ -146,7 +147,9 @@ async function session(course, unit, track, nCorrect, fillSA = false, fillN = 0)
     wrongMarked: document.querySelectorAll('button.option.wrong').length,
     fillRendered: document.querySelectorAll('.question[data-fill] input[data-fill]').length,
     // answers shown after submit: a "Correct" line or the right answer
-    fillShown: document.querySelectorAll('.question[data-fill] .feedback, .question[data-fill] .feedback-text').length,
+    fillShown: document.querySelectorAll('.question[data-fill] .feedback-text').length,
+    // what the next attempt will start from, as saved
+    fillSaved: (JSON.parse(localStorage.getItem(`cts_${window.CTS_UNIT.course}_u${window.CTS_UNIT.unit}_state`) || '{}').fillAnswers || []).filter(Boolean).length,
     ls: Object.fromEntries(Object.entries(localStorage).filter(([k]) => k.startsWith('cts_'))),
   }));
   await ctx.close();
@@ -224,7 +227,10 @@ for (const [course, unit] of SAMPLES) {
   ok(!!assocFill.ls[`cts_${slug}_u${unit}_sa_lock`] && !assocFill.ls[`cts_${slug}_u${unit}_full_lock`],
      `${label}: associate fill-in failure did not lock only the written part`);
   ok(/\b2 minute|2 minuto/.test(assocFill.result), `${label}: associate fill-in lock not 2 minutes`);
-  ok(assocFill.fillShown === 0, `${label}: associate was shown ${assocFill.fillShown} fill-in answers before passing`);
+  // the failed attempt is marked for review, as MC is, and the next attempt
+  // starts empty: its answers have been shown and checked ones cannot change
+  ok(assocFill.fillShown === nFill, `${label}: associate failure marked ${assocFill.fillShown} of ${nFill} fill-ins for review`);
+  ok(assocFill.fillSaved === 0, `${label}: associate's failed fill-in answers were kept for the next attempt (${assocFill.fillSaved})`);
   const assocBelow = await session(course, unit, 'assoc', need - 1, false, nFill);
   ok(!/Passed|Aprobado/.test(assocBelow.result), `${label}: associate passed below the MC mark`);
   ok(/\b2 minute|2 minuto/.test(assocBelow.result), `${label}: associate lock not 2 minutes — "${assocBelow.result.slice(0, 80)}"`);
@@ -279,6 +285,61 @@ for (const [course, unit] of SAMPLES) {
   await page.waitForTimeout(300);
   const after = await page.evaluate(() => document.querySelectorAll('button.option.selected').length);
   ok(after === 0, `${course} u${unit}: reload after a failed attempt still showed ${after} answered questions`);
+  await ctx.close();
+}
+
+// 8b. a fill-in is marked the moment it is checked, on every track, like a
+//     multiple-choice click: right or wrong with the answer shown, and it
+//     cannot be changed afterwards (Wayne, 26 Sept 2026)
+for (const t of ['cert', 'assoc', 'mdiv']) {
+  const [course, unit] = SAMPLES.find(([c]) => c === 'CTS1Peter') || SAMPLES[0];
+  const label = `${course} u${unit} (${t}, check)`;
+  const ctx = await browser.newContext();
+  await ctx.addInitScript(injectFill, SYNTH_FILL);
+  const page = await ctx.newPage();
+  await page.goto(`${BASE}/${course}Unit${unit}.html`, { waitUntil: 'load' });
+  await page.evaluate(([t, core]) => {
+    localStorage.clear();
+    const goal = t === 'assoc' ? 'assoc' : '', tr = goal ? 'cert' : t;
+    localStorage.setItem('cts_student', JSON.stringify({ name: 'T', track: tr, goal }));
+    localStorage.setItem('cts_track', tr); localStorage.setItem('cts_goal', goal);
+    localStorage.setItem('cts_done_codes', JSON.stringify(core));
+  }, [t, CORE]);
+  await page.reload({ waitUntil: 'load' });
+  await page.waitForTimeout(300);
+  const r = await page.evaluate(async () => {
+    const U = window.CTS_UNIT, q = (i) => document.querySelector(`.question[data-fill="${i}"]`);
+    const type = (i, v) => { const t = q(i).querySelector('input'); t.value = v; t.dispatchEvent(new Event('input', { bubbles: true })); return t; };
+    const out = {};
+    out.buttons = document.querySelectorAll('button[data-fill-check]').length;
+    type(0, U.fill[0].answer.en); q(0).querySelector('button[data-fill-check]').click();
+    out.right = q(0).querySelector('.feedback-text.correct') !== null;
+    out.rightLocked = q(0).querySelector('input').disabled;
+    const t1 = type(1, 'not it');
+    t1.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+    out.wrong = (q(1).querySelector('.feedback-text.incorrect') || {}).textContent || '';
+    // try to change both after checking
+    // (a student cannot type into the disabled box; a script can set its
+    // value, so ask the engine what it kept by drawing the section again)
+    type(0, 'changed'); type(1, U.fill[1].answer.en);
+    window.CTS_ENGINE.render();
+    out.after = [q(0).querySelector('input').value, q(1).querySelector('input').value];
+    out.unchecked = q(2).querySelector('.feedback-text') === null;
+    out.saved = JSON.parse(localStorage.getItem(`cts_${U.course}_u${U.unit}_state`) || '{}').fillChecked || [];
+    out.answer = U.fill[1].answer.en;
+    return out;
+  });
+  ok(r.buttons === 10 || r.buttons === SYNTH_FILL.length, `${label}: ${r.buttons} Check buttons`);
+  ok(r.right && r.rightLocked, `${label}: a right fill-in was not marked right and fixed at once`);
+  ok(r.wrong.includes('Incorrect') && r.wrong.includes(r.answer), `${label}: a wrong fill-in did not say so and show the answer — "${r.wrong.slice(0, 60)}"`);
+  ok(r.after[1] === 'not it' && r.after[0] !== 'changed', `${label}: a checked fill-in could be changed (${r.after.join(' / ')})`);
+  ok(r.unchecked, `${label}: an unchecked fill-in showed a verdict`);
+  ok(r.saved[0] === true && r.saved[1] === true && !r.saved[2], `${label}: checked fill-ins not saved as checked`);
+  // and a reload keeps them marked
+  await page.reload({ waitUntil: 'load' });
+  await page.waitForTimeout(300);
+  const kept = await page.evaluate(() => document.querySelectorAll('.question[data-fill] .feedback-text').length);
+  ok(kept === 2, `${label}: after a reload ${kept} fill-ins were still marked, expected 2`);
   await ctx.close();
 }
 

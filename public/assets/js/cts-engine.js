@@ -13,9 +13,12 @@
      blank          Associate, Th.M. and M.Div. tracks: 9 of 10 (Wayne's rule,
                     25 Sept 2026). An answer is right when, after normalise()
                     below, it is exactly the expected word or phrase, or one of
-                    the listed alternatives, in English or Spanish. On the
-                    Certificate of Ministry they are for the student's own
-                    review and do not count; the answers are shown on submit.
+                    the listed alternatives, in English or Spanish. Like
+                    multiple choice, each is marked the moment the student
+                    presses Check (or Enter), with the right answer shown, and
+                    stays answered for that attempt (Wayne, 26 Sept 2026). On
+                    the Certificate of Ministry they are for the student's own
+                    review and do not count.
                     A unit with no fill-ins yet (most courses, until Wayne has
                     reviewed the pilot) is graded without them.
      Short answer   Required on the Th.M. and M.Div. tracks, 90% of the
@@ -44,7 +47,8 @@
      cts_student, cts_track, cts_done_codes   (site-wide, shared with other JS)
      cts_<course>_progress                    { unit1: true, ... }
      cts_<course>_u<N>_state                  saved answers, mid-exam
-                                              (mcAnswers, saAnswers, fillAnswers)
+                                              (mcAnswers, saAnswers, fillAnswers,
+                                              fillChecked)
      cts_<course>_u<N>_mc_passed
      cts_<course>_u<N>_sa_lock                epoch ms. Despite the name: the
                                               lock on the written part after MC
@@ -208,8 +212,6 @@
      see them on submit; tracks whose short answer is graded see them once the
      unit is passed. Multiple choice is corrected on click for everyone. */
   function revealAnswers() { return !saCounts() || unitPassed; }
-  // the same rule for the fill-ins' answers
-  function revealFill() { return !fillCounts() || unitPassed; }
 
   // ---- language ----------------------------------------------------------
   function isEs() {
@@ -241,6 +243,14 @@
     ? saved.saAnswers : new Array(sa.length).fill("");
   var fillAnswers = Array.isArray(saved.fillAnswers) && saved.fillAnswers.length === fill.length
     ? saved.fillAnswers : new Array(fill.length).fill("");
+  // a checked fill-in has been marked and shows its answer; it cannot change
+  var fillChecked = Array.isArray(saved.fillChecked) && saved.fillChecked.length === fill.length
+    ? saved.fillChecked : new Array(fill.length).fill(false);
+  /* A failed fill-in section is shown for review until its lock ends, then
+     the fill-ins start again empty -- their answers have been shown, so the
+     old ones cannot simply be kept, and checked answers cannot be changed.
+     Held in memory only: after a reload the fresh section is what is saved. */
+  var fillReview = null;
   var graded = false;
 
   function saveState() {
@@ -248,7 +258,8 @@
        not kept: the next visit starts a fresh attempt. Banked MC is kept. */
     var keepMC = !graded || mcPassed || unitPassed;
     lsSet(KEY.state, JSON.stringify({ mcAnswers: keepMC ? mcAnswers : new Array(mc.length).fill(null),
-                                      saAnswers: saAnswers, fillAnswers: fillAnswers }));
+                                      saAnswers: saAnswers, fillAnswers: fillAnswers,
+                                      fillChecked: fillChecked }));
   }
 
   function LETTERS(i) { return "ABCDEFGH".charAt(i); }
@@ -442,24 +453,36 @@
        with its own heading: pages with their own short-answer area have a
        heading for that and none for this. */
     if (fill.length) {
-      var counts = fillCounts(), showFill = graded && revealFill();
+      var counts = fillCounts();
+      var locked = !!(lockRemaining(KEY.saLock) || lockRemaining(KEY.fullLock));
+      if (fillReview && !locked) fillReview = null;          // the lock is over: start again
       out += "<h3>" + bi({ en: "Fill in the Blank", es: "Complete el espacio en blanco" }) + "</h3>";
       out += '<p class="small">' + (counts
-        ? bi({ en: "Type the missing word or phrase. You need " + needFill() + " of " + fill.length + " to pass.",
-               es: "Escriba la palabra o frase que falta. Necesita " + needFill() + " de " + fill.length + " para aprobar." })
-        : bi({ en: "For your own review: these do not count on the Certificate track. The answers are shown when you submit.",
-               es: "Para su propio repaso: no cuentan en el trayecto de Certificado. Las respuestas se muestran al enviar." })) + "</p>";
+        ? bi({ en: "Type the missing word or phrase and press Check (or Enter) to see at once whether it is right. You need " + needFill() + " of " + fill.length + " to pass.",
+               es: "Escriba la palabra o frase que falta y pulse Comprobar (o Intro) para ver en seguida si es correcta. Necesita " + needFill() + " de " + fill.length + " para aprobar." })
+        : bi({ en: "For your own review: these do not count on the Certificate track. Press Check (or Enter) to see whether your answer is right.",
+               es: "Para su propio repaso: no cuentan en el trayecto de Certificado. Pulse Comprobar (o Intro) para ver si su respuesta es correcta." })) + "</p>";
       fill.forEach(function (q, i) {
         var num = i + 1;
+        var given = fillReview ? fillReview[i] : fillAnswers[i];
+        var done = !!fillReview || fillChecked[i] || unitPassed;
         out += '<div class="question" data-fill="' + i + '">';
         out += '<p style="font-weight:bold;">' + num + ". " + bi(q.prompt) + "</p>";
         out += '<input type="text" data-fill="' + i + '" autocomplete="off" autocapitalize="off" spellcheck="false"' +
                ' aria-label="' + (isEs() ? "Respuesta " : "Answer ") + num + '"' +
-               ' style="width:100%;max-width:24em;" value="' + attr(fillAnswers[i]) + '" />';
-        if (showFill) {
-          out += fillRight(q, fillAnswers[i])
-            ? '<div class="feedback-text correct">' + bi({ en: "&#10003; Correct", es: "&#10003; Correcto" }) + "</div>"
-            : '<div class="feedback">' + bi({ en: "Answer: " + q.answer.en, es: "Respuesta: " + q.answer.es }) + "</div>";
+               ((done || locked) ? " disabled" : "") +
+               ' style="width:100%;max-width:24em;" value="' + attr(given) + '" />';
+        if (!done && !locked) {
+          out += ' <button type="button" class="btn" data-fill-check="' + i + '">' +
+                 bi({ en: "Check", es: "Comprobar" }) + "</button>";
+        }
+        if (done) {
+          var right = fillRight(q, given);
+          out += right
+            ? '<div class="feedback-text correct">' + bi({ en: "&#10003; Correct!", es: "&#10003; ¡Correcto!" }) + "</div>"
+            : '<div class="feedback-text incorrect">' +
+              bi({ en: (String(given || "").trim() ? "&#10007; Incorrect. " : "") + "Answer: " + attr(q.answer.en),
+                   es: (String(given || "").trim() ? "&#10007; Incorrecto. " : "") + "Respuesta: " + attr(q.answer.es) }) + "</div>";
         }
         out += "</div>";
       });
@@ -507,9 +530,50 @@
       t.addEventListener("input", function () { saAnswers[+t.dataset.sa] = t.value; saveState(); });
     });
     node.querySelectorAll("input[data-fill]").forEach(function (t) {
-      t.addEventListener("input", function () { fillAnswers[+t.dataset.fill] = t.value; saveState(); });
+      t.addEventListener("input", function () {
+        var i = +t.dataset.fill;
+        if (fillReview || fillChecked[i] || unitPassed) return;   // answered: stays as it is
+        fillAnswers[i] = t.value; saveState();
+      });
+      t.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.keyCode === 13) { e.preventDefault(); checkFill(+t.dataset.fill, t.value); }
+      });
+    });
+    node.querySelectorAll("button[data-fill-check]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var i = +b.dataset.fillCheck, t = node.querySelector('input[data-fill="' + i + '"]');
+        checkFill(i, t ? t.value : fillAnswers[i]);
+      });
     });
     });
+  }
+
+  /* Mark one fill-in now, as a multiple-choice click is marked: right or
+     wrong, with the answer shown, and fixed for the rest of the attempt. */
+  function checkFill(i, value) {
+    if (fillReview || fillChecked[i] || unitPassed) return;
+    if (lockRemaining(KEY.saLock) || lockRemaining(KEY.fullLock)) return;
+    if (!String(value || "").trim()) {
+      var empty = document.querySelector('input[data-fill="' + i + '"]');
+      if (empty) empty.focus();
+      return;
+    }
+    fillAnswers[i] = value;
+    fillChecked[i] = true;
+    saveState();
+    renderQuestions();
+    // on to the next one still open
+    for (var n = i + 1; n < fill.length; n++) {
+      if (!fillChecked[n]) { var next = document.querySelector('input[data-fill="' + n + '"]'); if (next) next.focus(); break; }
+    }
+  }
+
+  // Once a lock ends, redraw, so disabled fill-ins open again without a reload.
+  var unlockTimer = null;
+  function redrawAtUnlock() {
+    var until = Math.max(parseInt(lsGet(KEY.saLock) || "0", 10), parseInt(lsGet(KEY.fullLock) || "0", 10));
+    if (unlockTimer) clearTimeout(unlockTimer);
+    if (until > Date.now()) unlockTimer = setTimeout(renderQuestions, until - Date.now() + 250);
   }
 
   // ---- grading -----------------------------------------------------------
@@ -599,8 +663,17 @@
     }
 
     graded = true;
+    // submitting marks every fill-in, answered or not, as Check would
+    for (var fi = 0; fi < fill.length; fi++) fillChecked[fi] = true;
     var mcOK = mcPassed || mc.length === 0 || gradeMC() >= needMC();
     var fillOK = !fillCounts() || fill.length === 0 || gradeFill() >= needFill();
+    var fillScore = gradeFill();
+    if (!fillOK) {
+      // shown for review during the lock; the next attempt starts empty
+      fillReview = fillAnswers.slice();
+      fillAnswers = new Array(fill.length).fill("");
+      fillChecked = new Array(fill.length).fill(false);
+    }
     var saOK = !saCounts() || sa.length === 0 || gradeSA() >= needSA();
 
     if (mcOK && !mcPassed) { lsSet(KEY.mcPassed, "1"); mcPassed = true; }
@@ -625,13 +698,14 @@
       var en = [], es = [];
       if (!mcOK) { en.push("multiple choice " + gradeMC() + "/" + mc.length + ", need " + needMC());
                    es.push("opción múltiple " + gradeMC() + "/" + mc.length + ", necesita " + needMC()); }
-      if (!fillOK) { en.push("fill in the blank " + gradeFill() + "/" + fill.length + ", need " + needFill());
-                     es.push("complete el espacio " + gradeFill() + "/" + fill.length + ", necesita " + needFill()); }
+      if (!fillOK) { en.push("fill in the blank " + fillScore + "/" + fill.length + ", need " + needFill());
+                     es.push("complete el espacio " + fillScore + "/" + fill.length + ", necesita " + needFill()); }
       if (!saOK) { en.push("short answer " + gradeSA() + "/" + sa.length + ", need " + needSA());
                    es.push("respuesta corta " + gradeSA() + "/" + sa.length + ", necesita " + needSA()); }
       var part = { en: " — " + en.join("; "), es: " — " + es.join("; ") };
       say(bi({ en: "Not yet" + part.en + ". Review the lesson and try again in " + mins + " minute(s).",
                es: "Aún no" + part.es + ". Repase la lección e inténtelo de nuevo en " + mins + " minuto(s)." }), "#8a1f1f");
+      redrawAtUnlock();
     }
     renderQuestions();
   }
@@ -640,6 +714,8 @@
     mcAnswers = new Array(mc.length).fill(null);
     saAnswers = new Array(sa.length).fill("");
     fillAnswers = new Array(fill.length).fill("");
+    fillChecked = new Array(fill.length).fill(false);
+    fillReview = null;
     graded = false;
     lsDel(KEY.state);
     renderQuestions();
@@ -668,6 +744,7 @@
     wireNav();
     ensureResult();
     renderQuestions();
+    redrawAtUnlock();
     recordCourse();   // a course finished before completion moved here
 
     if (unitPassed) {

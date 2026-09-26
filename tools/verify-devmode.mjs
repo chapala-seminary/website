@@ -52,6 +52,7 @@ async function session(steps) {
         locked: cards.filter((a) => /cts-locked/.test(a.className)).length,
         overlay: !!document.getElementById('cts-lock-overlay'),
         bar: !!document.getElementById('cts-test-bar'),
+        barText: (document.getElementById('cts-test-bar') || {}).textContent || '',
         flag: localStorage.getItem('cts_test_mode'),
         tester: !!(s && s._tester),
         name: s && s.name,
@@ -83,6 +84,9 @@ async function session(steps) {
   ok(on.locked === 0, `ctstest=on: ${on.locked} course(s) still locked`);
   ok(on.bar, 'ctstest=on: no tester bar, so there is no visible way back out');
   ok(on.tester, 'ctstest=on: no placeholder student seeded — exams will refuse to grade');
+  // the placeholder is graded as M.Div.; the bar has to say so, or a reviewer
+  // meets master's rules believing they are a Certificate student
+  ok(/graded as M\.Div\./.test(on.barText), `ctstest=on: the tester bar does not name the graded track — "${on.barText.slice(0, 80)}"`);
   ok(!next.overlay, `${LOCKED_COURSE} after ctstest=on elsewhere: still covered by the lock overlay`);
   ok(next.bar, `${LOCKED_COURSE}: tester mode did not carry across pages`);
   ok(!errs.length, 'ctstest=on: page error', errs[0]);

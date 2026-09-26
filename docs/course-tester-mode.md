@@ -19,10 +19,14 @@ works the same way.
 While it is on:
 
 - every course opens, in the catalog and on the unit pages
-- a bar across the top says `TEST MODE ON`; tapping it turns the mode off
+- a bar across the top says `TEST MODE ON` and which track the exams are
+  graded as (the placeholder below is M.Div.); tapping it turns the mode off
 - a placeholder student, **Course Tester** on the M.Div. track, is created, so
   unit exams actually grade and reveal the answers instead of stopping at
-  "please register first"
+  "please register first". To review a course as a Certificate or
+  Associate student would see it, register as that track on the home page
+  first and then turn tester mode on (see "If you are already registered"
+  below): the catalog opens and the exams grade by your own track
 - unit pass and lockout state is cleared on each load, so a unit you have
   already passed will grade again rather than telling you that you are done
 
