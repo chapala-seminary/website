@@ -13,14 +13,15 @@
      blank          Associate, Th.M. and M.Div. tracks: 9 of 10 (Wayne's rule,
                     25 Sept 2026). An answer is right when, after normalise()
                     below, it is exactly the expected word or phrase, or one of
-                    the listed alternatives, in English or Spanish. Like
+                    the listed alternatives, in English or Spanish; a leading
+                    article ("the", "a", "la", "un"...) makes no difference. Like
                     multiple choice, each is marked the moment the student
                     presses Check (or Enter), with the right answer shown, and
                     stays answered for that attempt (Wayne, 26 Sept 2026). On
                     the Certificate of Ministry they are for the student's own
                     review and do not count.
-                    A unit with no fill-ins yet (most courses, until Wayne has
-                    reviewed the pilot) is graded without them.
+                    A unit with no fill-ins is graded without them (every unit
+                    has ten since 26 Sept 2026; the rule stays for new units).
      Short answer   Required on the Th.M. and M.Div. tracks, 90% of the
                     questions, each credited by keyword coverage (to be
                     replaced by AI grading). On the Certificate of Ministry and
@@ -628,15 +629,21 @@
      student reading both may answer in either. Exact, not "contains": typing
      every word in the lesson must not score. */
   function fillRight(q, given) {
-    var a = normalise(given).trim();
+    var a = bare(given);
     if (!a) return false;
     var acc = q.accept || {};
     var forms = [q.answer && q.answer.en, q.answer && q.answer.es]
       .concat(acc.en || [], acc.es || []);
     for (var f = 0; f < forms.length; f++) {
-      if (forms[f] && normalise(forms[f]).trim() === a) return true;
+      if (forms[f] && bare(forms[f]) === a) return true;
     }
     return false;
+  }
+  /* The words compared, less one leading article on either side: a student
+     who writes "a hypocrite" or "la gracia" for "hypocrite" or "gracia" has
+     the right answer, and the gap often cannot show which article belongs. */
+  function bare(s) {
+    return normalise(s).trim().replace(/^(?:a|an|the|el|la|los|las|lo|un|una|unos|unas) (?=\S)/, "");
   }
   function gradeFill() {
     var c = 0;

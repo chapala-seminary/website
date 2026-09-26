@@ -123,6 +123,12 @@ const plainText = z.string().superRefine((v, ctx) => {
   if (found.length) ctx.addIssue({ code: 'custom',
     message: `HTML entities belong in HTML, not in a UTF-8 lesson: ${found.join(' ')}`
       + ' — run: node tools/decode-entities.mjs <Course>' });
+  /* The same mistake one step removed: a character written as a JSON escape
+     inside the text, so the page shows "serm\\u00f3n" instead of "sermón".
+     Ten blocks in three lessons reached students that way (found 26 Sept). */
+  const escaped = v.match(/\\u[0-9a-fA-F]{4}/g);
+  if (escaped) ctx.addIssue({ code: 'custom',
+    message: `the text has ${escaped.length} escape code(s) such as ${escaped[0]} where the character itself belongs` });
 });
 
 const text = z.record(z.string(), plainText);

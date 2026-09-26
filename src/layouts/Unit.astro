@@ -9,6 +9,8 @@
  */
 import { shell } from '../lib/shell';
 import catalog from '../../worker/catalog.json';
+import fs from 'node:fs';
+import crypto from 'node:crypto';
 
 interface Unit {
   course: string;
@@ -61,6 +63,22 @@ const unitJson = JSON.stringify({ ...unit,
   completion: { slug: unit.course, code: cat.code, name: done.name, page: done.page, units: cat.units },
 }).replace(/</g, '\\u003c');
 
+/* Each script and the stylesheet are addressed with a fingerprint of their
+   contents: /assets/js/cts-engine.js?v=3f9c1a2b7e. A browser may keep a
+   script it has seen before and run it again on the next visit; when the
+   address changes with the contents, a new release can never be judged
+   against last week's engine. Wayne tested the fill-ins on beta and saw the
+   code from before the fix (26 Sept). A hand-kept ?v=... in a unit's script
+   list is replaced, because it is only right until someone forgets it. */
+const version = (src: string) => {
+  const file = src.replace(/^\//, '').split('?')[0];
+  try {
+    return `/${file}?v=${crypto.createHash('sha1').update(fs.readFileSync(`public/${file}`)).digest('hex').slice(0, 10)}`;
+  } catch {
+    return `/${src.replace(/^\//, '')}`;
+  }
+};
+
 // The language classes come from the body class the page already had; a page
 // that opened in Spanish still does.
 const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
@@ -77,7 +95,7 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap"
     />
-    <link rel="stylesheet" href="/assets/css/cts.css" />
+    <link rel="stylesheet" href={version('/assets/css/cts.css')} />
     {/* The 102 per-page stylesheets are gone; `styles` is kept in the schema
         only so a course with a genuinely special need can opt back in, and
         today none do. Loading them here was what made the unified design
@@ -171,8 +189,8 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
           </div>
         </div>
         <p class="small" style="margin-bottom:0">
-          <span class="lang-en">The Certificate track answers the multiple choice. The Associate adds the fill-in-the-blank questions where a unit has them; M.Div. and Th.M. add those and the short-answer questions. 90% of each part is required to pass.</span>
-          <span class="lang-es">El trayecto de Certificado responde la opción múltiple. El Asociado añade las preguntas de completar el espacio en blanco donde la unidad las tiene; M.Div. y Th.M. añaden esas y las preguntas de desarrollo. Se requiere 90% en cada parte para aprobar.</span>
+          <span class="lang-en">The Certificate track answers the multiple choice. The Associate adds the fill-in-the-blank questions; M.Div. and Th.M. add those and the short-answer questions. 90% of each part is required to pass.</span>
+          <span class="lang-es">El trayecto de Certificado responde la opción múltiple. El Asociado añade las preguntas de completar el espacio en blanco; M.Div. y Th.M. añaden esas y las preguntas de desarrollo. Se requiere 90% en cada parte para aprobar.</span>
         </p>
       </section>
       <p id="greeting" class="muted" style="margin-top:0"></p>
@@ -197,13 +215,13 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
     </footer>
 
     <script is:inline set:html={`window.CTS_UNIT = ${unitJson};`} />
-    <script is:inline src="/assets/js/cts-record.js"></script>
-    <script is:inline src="/assets/js/cts-engine.js"></script>
-    {scripts.map((src) => <script is:inline src={`/${src.replace(/^\//, '')}`}></script>)}
+    <script is:inline src={version('/assets/js/cts-record.js')}></script>
+    <script is:inline src={version('/assets/js/cts-engine.js')}></script>
+    {scripts.map((src) => <script is:inline src={version(src)}></script>)}
     {/* Mirrors this browser's progress to the seminary's database so a cleared
         browser or a new phone is no longer the end of someone's degree. It is
         dormant until the API exists: one probe per tab, then silence. See
         docs/student-records.md. */}
-    <script is:inline src="/assets/js/cts-sync.js" defer></script>
+    <script is:inline src={version('/assets/js/cts-sync.js')} defer></script>
   </body>
 </html>

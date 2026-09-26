@@ -56,7 +56,7 @@ const fnSource = (name) => {
   return m[0];
 };
 const { normalise, fillRight } = new Function(
-  `${fnSource('normalise')}\n${fnSource('fillRight')}\nreturn { normalise, fillRight };`)();
+  `${fnSource('normalise')}\n${fnSource('bare')}\n${fnSource('fillRight')}\nreturn { normalise, fillRight };`)();
 const norm = (s) => normalise(s).trim();
 
 // ---- the course -----------------------------------------------------------
@@ -64,7 +64,10 @@ const unitFiles = fs.readdirSync(UNITS).filter((f) => /^\d+\.json$/.test(f))
   .sort((a, b) => parseInt(a) - parseInt(b));
 const units = unitFiles.map((f) => ({ file: path.join(UNITS, f), u: JSON.parse(fs.readFileSync(path.join(UNITS, f), 'utf8')) }));
 
-const stripTags = (s) => String(s || '').replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ')
+// inline markup (<em>, <strong>) goes without a trace -- a space in its place
+// showed "the hope ." for "the <em>hope</em>." and read as a typo; a line break
+// still separates words
+const stripTags = (s) => String(s || '').replace(/<br\s*\/?>/gi, ' ').replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ')
   .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/\s+/g, ' ').trim();
 function lesson(n) {
   const f = path.join(LESSONS, `${n}.json`);
@@ -86,7 +89,9 @@ if (args.includes('--lesson')) {
   const l = lesson(n);
   if (!l) { console.error(`no lesson ${LESSONS}/${n}.json`); process.exit(2); }
   for (const b of l.blocks) {
-    if (!['prose', 'scripture', 'list-item', 'heading'].includes(b.type)) continue;
+    // every kind of block, the Bible-verse boxes ("other") included; the page
+    // heading and form labels only are left out
+    if (['masthead', 'label'].includes(b.type)) continue;
     console.log(`[${b.id} ${b.type}]`);
     for (const lang of l.langs) if (b.text[lang]) console.log(`  ${lang}: ${stripTags(b.text[lang])}`);
   }
@@ -142,8 +147,9 @@ function sheet(rows) {
       + `Associate, Th.M. and M.Div. students must get 9 of 10 right in each unit; `
       + `Certificate of Ministry students see them for review only, with the answers shown when they submit.\n\n`;
   md += `**How answers are marked.** The student's answer must be exactly the answer shown (or an "also" `
-      + `alternative), in English or Spanish. Capitals, punctuation and extra spaces are ignored; accents and `
-      + `spelling are not, so "Pedro", "PEDRO" and "pedro." are all right, but "Pdro" and "Pedro el apóstol" are not.\n\n`;
+      + `alternative), in English or Spanish. Capitals, punctuation, extra spaces and a leading article ("the", "a", "la") are ignored; `
+      + `accents and spelling are not, so "Pedro", "PEDRO" and "pedro." are all right, but "Pdro" and "Pedro el apóstol" are not. `
+      + `Each answer is marked the moment the student presses Check, and the right answer is then shown.\n\n`;
   md += `**What to check.** For each question: is it fair for a student who read this unit's lesson; is the `
       + `answer the only reasonable one (if not, name the others to accept, or reword); and is the Spanish right.\n`;
   for (const r of rows) {
