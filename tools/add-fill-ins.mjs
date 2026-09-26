@@ -89,7 +89,9 @@ if (args.includes('--lesson')) {
   const l = lesson(n);
   if (!l) { console.error(`no lesson ${LESSONS}/${n}.json`); process.exit(2); }
   for (const b of l.blocks) {
-    if (!['prose', 'scripture', 'list-item', 'heading'].includes(b.type)) continue;
+    // every kind of block, the Bible-verse boxes ("other") included; the page
+    // heading and form labels only are left out
+    if (['masthead', 'label'].includes(b.type)) continue;
     console.log(`[${b.id} ${b.type}]`);
     for (const lang of l.langs) if (b.text[lang]) console.log(`  ${lang}: ${stripTags(b.text[lang])}`);
   }
