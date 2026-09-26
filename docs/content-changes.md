@@ -505,6 +505,24 @@ now a link to its certificate page; nothing else on the course pages changed.
 Students also receive their certificate by email once it is registered
 (`docs/student-records.md` §6–7).
 
+### 8o. After Wayne tried the fill-ins on beta (26 Sept) — engine and tester bar, no page content changed
+
+* **Each fill-in is marked when it is checked**, as a multiple-choice answer is
+  marked when it is clicked: a Check button (or Enter) says right or wrong at
+  once and shows the answer, and a checked fill-in cannot be changed in that
+  attempt. Submitting checks any left unchecked. On the tracks where fill-ins
+  count, a failed section stays on screen for review until its lock ends and
+  then starts again empty — its answers have been shown, so they are not kept.
+  On the Certificate of Ministry they are still for review only.
+* **The course-tester bar names the track being graded** ("Test mode on —
+  graded as M.Div. — …"). Wayne reviewed in tester mode, whose placeholder
+  student is on the M.Div. track, believing he was a Certificate student, and
+  so met master's rules: fill-ins and short answer required, a 15-minute lock,
+  and — by tester mode's design — every unit's state cleared on reload, which
+  took his multiple-choice answers with it. A real Certificate student is
+  graded on multiple choice alone with a 2-minute lock, and keeps their
+  answers; `tools/engine-test-built.mjs` holds both.
+
 ---
 
 ## How to check any of this yourself
