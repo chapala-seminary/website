@@ -117,12 +117,20 @@ const courses = defineCollection({
    these files too -- and a rule nothing enforces comes back. */
 const ENTITY = /&(?:[a-zA-Z][a-zA-Z0-9]*|#\d+|#[xX][0-9a-fA-F]+);/g;
 const STRUCTURAL = /^&(?:amp|lt|gt|AMP|LT|GT);$/;
+/* The same rule for JSON escapes. A "\u2014" that is in the text itself -- a
+   backslash, a u and four hex digits -- is decoded by nothing and reaches the
+   page exactly as typed. */
+const U_ESCAPE = /\\u[0-9a-fA-F]{4}/g;
 
 const plainText = z.string().superRefine((v, ctx) => {
   const found = [...new Set((v.match(ENTITY) ?? []).filter((e) => !STRUCTURAL.test(e)))];
   if (found.length) ctx.addIssue({ code: 'custom',
     message: `HTML entities belong in HTML, not in a UTF-8 lesson: ${found.join(' ')}`
       + ' — run: node tools/decode-entities.mjs <Course>' });
+  const escapes = [...new Set(v.match(U_ESCAPE) ?? [])];
+  if (escapes.length) ctx.addIssue({ code: 'custom',
+    message: `Escape sequences reach the page as typed: ${escapes.join(' ')}`
+      + ' — replace each with the character it names (\\u2014 is —, \\u00e9 is é)' });
 });
 
 const text = z.record(z.string(), plainText);

@@ -525,6 +525,27 @@ Students also receive their certificate by email once it is registered
 
 ---
 
+## 9. Escape codes shown as text (26 Sept) — 3 pages changed
+
+Ten lesson texts held characters written as JSON escape codes — a backslash, a
+`u` and four hex digits — that nothing decoded, so the page showed them as
+typed: "sermón" for "sermón", "—" for "—". Each is now the character
+it names; no word changed.
+
+* **CTSDP unit 1** — the four paragraphs on structure (b020–b023), English and
+  Spanish: dashes and Spanish accents.
+* **CTSHS unit 3** — one English paragraph (b011): a dash.
+* **CTSLOC unit 7** — one Spanish list item (b004): "Última Cena".
+
+The Spanish of the five changed English blocks keeps its translation status:
+its `from` hash was moved to the decoded English, since the meaning is the same.
+The build now refuses such an escape in lesson text, as it already refuses HTML
+entities (`src/content.config.ts`). The prose baseline and render reference
+were updated for these ten texts only; the pages built before and after differ
+by nothing but the decoded characters.
+
+---
+
 ## How to check any of this yourself
 
 ```
