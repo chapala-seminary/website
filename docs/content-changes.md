@@ -553,6 +553,26 @@ Students also receive their certificate by email once it is registered
   in CTSDP unit 1, CTSHS unit 3 and CTSLOC unit 7 that show literal escape
   codes such as "\u00f3" to students (found while drafting; a separate fix).
 
+### 8q. Wayne still saw the old fill-ins; escape codes in three lessons (26 Sept) — 451 pages' script addresses and 3 pages' text changed
+
+* **Every unit page now asks for its scripts and stylesheet by a fingerprint
+  of their contents** (`/assets/js/cts-engine.js?v=0758bb53e1`), made at
+  build time in `src/layouts/Unit.astro`. Wayne's screenshot after the
+  8o fix showed the code from before it: no Check button, the old test-mode
+  bar. Either that deploy did not include 8o or his browser kept the old
+  scripts. The fingerprint makes the second impossible after any deploy: new
+  contents, new address. The hand-kept `cts-curriculum.js?v=20260915a` in
+  every unit's script list is replaced by the fingerprint the same way.
+* **Ten lesson blocks showed escape codes to students**, e.g. "serm\u00f3n"
+  for "sermón": CTSDP unit 1 (b020–b023, both languages), CTSHS unit 3 (b011)
+  and CTSLOC unit 7 (b004). Decoded; nothing else in those blocks changed, and
+  each translation keeps its status (its "made from" hash follows the decoded
+  source). The build now refuses lesson text containing an escape code
+  (`src/content.config.ts`).
+* `test/fixtures/prose-baseline.json`: the 10 blocks' entries replaced, nothing
+  else. `test/fixtures/lesson-render.json`: re-recorded; the only differences
+  are the script and stylesheet addresses and those 10 blocks.
+
 ---
 
 ## How to check any of this yourself
