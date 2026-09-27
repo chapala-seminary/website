@@ -1,5 +1,6 @@
 # CTSAL (Administration and Leadership) — items for Dr. Cook
 
-- **Unit 1, block b015, and Unit 4, block b014** — Exodus 18:21 is quoted in two different Spanish wordings, though both lessons cite RVG. Unit 1: "varones capaces, temerosos de Dios, hombres veraces, que aborrezcan la avaricia". Unit 4: "varones de virtud, temerosos de Dios, varones de verdad, que aborrezcan la avaricia". Which wording should both use?
-- **Unit 9, block b009** — The Spanish quotes Matthew 28:19 as "id, y enseñad a todas las naciones" (Reina-Valera wording), but the next sentences argue from the words "haced discípulos" ("No dijo 'haced conversos'… Dijo haced discípulos"), which are not in the verse as quoted. EN quotes "make disciples of all the nations". Change the verse wording, or the argument?
-- **Units 2 to 10** — Many Spanish Bible quotations have a small flag mark "⚑" in front of them (for example unit 3, block b022: "(⚑ Nehemías 2:17)"). Students see this mark. If it was a note to check those verses, please say whether they are checked; the marks can then be removed all at once.
+Nothing for Dr. Cook in this course.
+
+- Verse wording to confirm: Exodus 18:21 in Spanish is now "Además escoge tú de entre todo el pueblo varones de virtud, temerosos de Dios, varones de verdad, que aborrezcan la avaricia; y ponlos sobre el pueblo por jefes de millares, de centenas, de cincuenta y de diez" (Unit 1 b015; Unit 4 b014 already had "varones de virtud … varones de verdad"). That is the traditional Reina-Valera wording; the RVG may read "varones capaces" instead of "varones de virtud". Please check against a printed RVG.
+- The ⚑ marks (116, all Spanish, Units 2–10) are removed as he asked. The verses they marked were not each re-checked word for word against the RVG.
