@@ -610,6 +610,42 @@ Students also receive their certificate by email once it is registered
   re-recorded; the differences are the unit-data script (the accept lists) and
   the lesson text of the 187 corrected lessons.
 
+### 8s. Fill-in-the-blank questions on the four single-page courses (27 Sept) — 13 pages changed, 2 scripts and 4 data files added
+
+* **Counseling, Narrative Preaching, WiseSpeak Preaching and Ethics** now have
+  ten fill-in-the-blank questions per unit (390 in all: 11, 8, 10 and 10 units),
+  with the same rules as every other course: 9 of 10 for Associate, Th.M. and
+  M.Div.; review only on the Certificate track; each answer marked the moment
+  it is checked; a failed set shown for review, locked, then started again
+  empty. These pages still grade their own tests (moving them onto the unit
+  engine is Phase 5), so the fill-ins are drawn and marked by a small shared
+  script, `public/assets/js/cts-fill.js`, whose grader is the engine's word for
+  word, and each page's own submit decides the pass.
+* **The questions** live in `public/assets/js/fill/<course>.js`, written by
+  `tools/add-fill-ins-page.mjs` from `_review/fill-ins/drafts/<course>/`
+  (review sheets `_review/fill-ins/{counseling,narrative,wisespeak,ethics}.md`).
+  They include accepted synonyms from the start.
+* **Saved progress:** no new storage keys. The answers go inside each page's
+  existing saved state (`fillAnswers`, `fillChecked`); a state saved before
+  this loads unchanged, and a unit already passed stays passed.
+* **Locks:** Narrative and WiseSpeak already lock a failed unit (15 minutes);
+  Ethics locks the written part with its short-answer lock, banking the
+  multiple choice. Counseling had no lock at all; a failed set of fill-ins now
+  locks the fill-ins only (15 minutes on the master's tracks, 2 otherwise,
+  `lockedUntil` in the unit's state), since otherwise the answers just shown
+  could be typed straight back. On Counseling a unit already passed now stays
+  passed when it is submitted again.
+* **Copy:** Counseling's course description no longer promises the fill-ins
+  "in a later update"; the test notes on Narrative, WiseSpeak and Ethics say
+  who must answer them. Spanish typos corrected in Ethics units 4, 9 and 10
+  ("rebaño", "rehúsa", "Gástate", "Descuídela").
+* **Test:** `tools/verify-fill-single.mjs` (in `test/run-tests.sh`) drives all
+  four in a browser — Certificate, Associate at 8 and 9 of 10, M.Div., a
+  reload, and a pre-change saved state — and fails if `cts-fill.js`'s grader
+  differs from the engine's. Mutation-checked: removing the fill-in pass rule
+  from Narrative or Ethics, or the review-during-lock rule from the widget,
+  each fails it.
+
 ---
 
 ## How to check any of this yourself

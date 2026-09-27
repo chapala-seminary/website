@@ -170,3 +170,29 @@ These are small wording questions; none is a mistake as such.
 ## Worship: questions for Dr. Cook
 
 - **Unit 6, blocks b020 to b024 (Spanish):** the word "coro" is used for two different things. In b020 and b021 it means "choir" ("solo el coro y el clero cantaban"; "Un coro puede dirigir al pueblo a la alabanza"). In b023 and b024 it means "choruses", the short worship songs of the 1960s and later ("trayendo guitarras, coros, y estilos contemporáneos"; "la generación del coro"; "los nuevos coros"). Many Spanish-speaking churches do call these songs "coros" or "coritos", so this may be fine; but a reader could take "la generación del coro" as "the choir generation". Would you like "coritos" or "cantos de alabanza" in b023 and b024?
+
+## The four single-page courses — found while writing their fill-in questions
+
+These courses (Counseling, Narrative Preaching, WiseSpeak Preaching, Ethics) are
+still hand-built pages, so their lessons were not part of the fixes above. Plain
+Spanish typos in Ethics were corrected ("rebaño", "rehúsa", "Gástate",
+"Descuídela"). The rest needs you:
+
+- **Counseling, Units 0, 2, 3, 4:** the Spanish quotations of Proverbs 11:14, 18:13 and 20:5 are printed in English.
+- **Counseling, Unit 10 (10.2, 10.3), Spanish:** "puede haber sentido dispersa" (read "haberse sentido"); "la breve retrazada del consejero" ("retrazada" is not a word); "hacer la obra a la que vino a hacer" (read "la obra que vino a hacer").
+- **Counseling, Unit 7 (7.7):** "Have you talked with your elder about this? What does she think?" — a female elder; intended?
+- **Counseling, Unit 8 (8.2):** Spanish "costo eterno" where the English says "long-range cost".
+- **Narrative Preaching, Units 2–4, Spanish:** "Solomon" — King Solomon ("Salomón") or an author named Solomon?
+- **Narrative Preaching, Unit 6, Spanish:** "Esto debe sobriar al predicador" — "sobriar" is not a Spanish word.
+- **Narrative Preaching, Unit 8, Spanish:** "que solo Él puede tomar una historia" — ungrammatical ("el único que puede").
+- **WiseSpeak, Units 1–6, Spanish:** many sections have the full translation followed by a second, shorter summary of the same text, so Spanish readers see it twice.
+- **WiseSpeak, Unit 1:** the fifth reason in 1.2 and method 7 in 1.5 are missing from the full Spanish; the English says Philip's daughters "preached", the Spanish "profetizaban".
+- **WiseSpeak, Unit 2:** the English list of about 75 keywords is about 15 in Spanish.
+- **WiseSpeak, Unit 4, Spanish:** "pregunta probadora" ("P.P.") where Unit 2 says "pregunta de sondeo"; "tópico" where Unit 3 says "temático".
+- **WiseSpeak, Unit 5 (5.5):** the opening paragraph has no Spanish.
+- **WiseSpeak, Unit 7:** a Spanish "Duplicado de la Nota para el Púlpito" block with no English; the outline numbers "I. First Advent" but "2. The Second Advent".
+- **WiseSpeak, Unit 8, Spanish:** "ligamenor" (read "jugador de ligas menores").
+- **Ethics, Unit 3 (3.2), Spanish:** the opening paragraph on the three views of women in pastoral office is missing, and the Spanish still says one skill ("apto para enseñar") where the English was revised.
+- **Ethics, Unit 5 (5.4):** the confidentiality summary is repeated after the Colossians closing, in both languages.
+- **Ethics, Unit 8 (8.2); Unit 9 (9.2); Unit 10 (10.3):** English and Spanish say different things (confession "half its power"; the "borrowed manger"; whether the man in 2 Corinthians 2 is the man of 1 Corinthians 5).
+- **Ethics, Unit 9 (9.1):** 1 Timothy 6:10 reads "a root of all kinds of evil" in English but "la raíz de todos los males" in Spanish — the very misquotation the lesson warns about.
