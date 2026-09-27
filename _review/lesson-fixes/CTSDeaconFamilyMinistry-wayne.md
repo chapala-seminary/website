@@ -1,4 +1,3 @@
 # CTSDeaconFamilyMinistry (Deacon Family Ministry) — items for Dr. Cook
 
 - **Unit 7 — Matthew 28:19 in Spanish, two wordings.** The verse at the top of the unit (b003) quotes the RVG: "Por tanto, id, y enseñad a todas las naciones". The closing block (b039) quotes it as "«Id, y haced discípulos,» mandó el Señor" — a different wording of the same verse. In English both say "make disciples". Do you want the two Spanish wordings to match?
-- **Unit 7, block b026 — "asked Isaac of Abraham".** EN: "He may ask us to lay it down — as He once asked Isaac of Abraham, and all his riches of the rich young ruler." ES: "como una vez pidió a Isaac de Abraham, y todas sus riquezas del joven rico" — in Spanish this reads as if God asked something of Isaac. A possible rewording: EN "as He once asked Abraham for Isaac, and the rich young ruler for all his riches"; ES "como una vez le pidió a Abraham a Isaac, y al joven rico todas sus riquezas". Your call.

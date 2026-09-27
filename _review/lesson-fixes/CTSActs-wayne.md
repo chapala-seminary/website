@@ -1,11 +1,5 @@
 # CTSActs (Acts) — items for Dr. Cook
 
-- **Unit 4, block b026** — The syllable count is off in both languages. EN: "turn an enemy into a brother in the time it takes to say two syllables" — "Brother Saul" has three. ES: "en el tiempo que toma decir tres sílabas" — "Hermano Saulo" has five. Perhaps "two words" / "dos palabras", as the next paragraph says?
-- **Unit 7, block b033** — "on a hilltop above the Acropolis, a statue inscribed To the Unknown God" (ES "en una colina sobre la Acrópolis, una estatua"). Acts 17:23 speaks of an altar, not a statue, and the Acropolis is itself the highest hill in Athens (the Areopagus is below it). Please check the wording.
-- **Unit 8, block b020** — Edison's number differs. EN: "fail one thousand one hundred times". ES: "fracasar mil ciento una veces" (1,101). Which one?
-- **Unit 9, block b029** — The verse reference differs. EN quotes only verse 21: "(Acts 22:21, NKJV)". ES quotes words from verse 18 too: "(Hechos 22:18, 21, RVG)".
 - **Units 9 and 11, blocks b048 (u9) and b028 (u11)** — "Paul's four trials" / "the four trials at Caesarea", but only three are named in unit 11 (Felix, Festus, Agrippa). ES says the same ("cuatro juicios"). Four including the Sanhedrin in Jerusalem, perhaps — but then not all "at Caesarea"?
-- **Unit 10, block b041** — "(Acts 27:22–26) … I want to lift three sermons out of those four verses" — 22 to 26 is five verses. ES says the same ("aquellos cuatro versículos").
-- **Unit 10, block b048** — "Bell Rock off the Irish coast" (ES "frente a la costa irlandesa"). Bell Rock lighthouse is off the east coast of Scotland (near Arbroath), built by Robert Stevenson.
 - **Unit 10, block b054** — "The man who had survived the lions' den and the floor of the Mediterranean" (ES "el foso de los leones"). The lions' den was Daniel, not Paul. Perhaps you meant it as a picture (Paul "fought with beasts at Ephesus", 1 Corinthians 15:32, or "delivered out of the mouth of the lion", 2 Timothy 4:17)? As written, it reads as a mix-up.
 - **Unit 10, block b060** — "Acts 28 has no final chapter, because the final chapter is yours" (ES "Hechos 28 no tiene capítulo final"). Acts 28 is itself the final chapter; perhaps "Acts has no final chapter" or "Acts 28 has no final sentence"?
