@@ -573,6 +573,43 @@ Students also receive their certificate by email once it is registered
   else. `test/fixtures/lesson-render.json`: re-recorded; the only differences
   are the script and stylesheet addresses and those 10 blocks.
 
+### 8r. Fill-in synonyms; lesson-text corrections (27 Sept) — 451 pages' fill-in answers and 187 lessons' text changed
+
+* **Fill-ins accept fair synonyms.** Dr. Cook answered one with a synonym and
+  was marked wrong. Every question was gone through for the other answers a
+  student who understood the lesson could fairly write: true synonyms, other
+  forms (singular/plural, verb forms, Spanish without the enclitic), other
+  standard names and spellings, and the wording of other common Bible
+  translations. 4,249 accepted answers were added (227 before). Where too many
+  words would fit the gap to list, the sentence was reworded so only the
+  intended answer fits: 137 questions, answers unchanged. One wrong accepted
+  answer was removed (CTSAL unit 6 q10 took "100" for "eighty-twenty").
+  Accents are still graded, so two Spanish answers of "sí" (CTSCS 10 q2,
+  CTSPsalms 4 q4) mark "si" wrong; left as they are for now.
+* **284 writing errors fixed** in the lesson text: misspellings, missing or
+  wrong accents, wrong words ("sobriar", "directez"), letters from other
+  alphabets, a thinking-aloud aside ("— wait, no —"), a leftover author's note.
+  Lists in `_review/lesson-fixes/<Course>.json`, applied with
+  `tools/fix-lesson-text.mjs`, which refuses a fix that does not match exactly
+  once in its block. A translation that was current stays current.
+* **153 edits settling Dr. Cook's items as the site owner decided them**
+  (`_review/lesson-fixes/<Course>-2.json`): where English and Spanish said
+  different things, the Spanish now says what the English says; untranslated
+  passages translated; factual slips fixed in both languages (e.g. "Jesus,
+  Lover of My Soul" is Charles Wesley's; Ruth 4 is at the gate of Bethlehem);
+  tú/usted mixing brought into line with each course's own form. Spanish
+  written or rewritten this way is marked "Translated automatically" in the
+  CMS (`tr.es.status = machine`, `from` = the current English), so it can be
+  found and reviewed. A heading printed twice in CTSWR unit 10 was removed.
+* **Left for Dr. Cook**: 73 items in `_review/lesson-fixes/FOR-DR-COOK.md` —
+  Bible wording choices, doctrine, the unfinished "Pending Dr. Cook's own
+  sermon" sections in Matthew, and points only the author can settle.
+* `tools/content-baseline.json` re-recorded (fill-in accepted answers and
+  prompts). `test/fixtures/prose-baseline.json`: only the 354 changed blocks'
+  hashes replaced, chrome entries kept. `test/fixtures/lesson-render.json`:
+  re-recorded; the differences are the unit-data script (the accept lists) and
+  the lesson text of the 187 corrected lessons.
+
 ---
 
 ## How to check any of this yourself
