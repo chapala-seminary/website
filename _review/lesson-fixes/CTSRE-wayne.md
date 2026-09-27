@@ -1,0 +1,8 @@
+# Ruth and Esther: questions for Dr. Cook
+
+- **Unit 8, block b032 (both languages):** "Pride goes before the fall (Matthew 16:26)" / "La soberbia precede a la caída (Mateo 16:26)". The proverb is Proverbs 16:18; Matthew 16:26 is the verse that follows it in the sentence ("what good is it to gain the whole world..."). Should the reference be moved or both references given?
+- **Unit 6, block b011 (Spanish):** the English contrasts the name "Xerxes" (in the quoted verse) with "Ahasuerus" (in some translations). The Spanish quotes the verse with "Asuero" and then says "Algunas traducciones usan 'Asuero'", so the contrast is lost. Perhaps the Spanish verse should read "Jerjes", or the sentence reworded?
+- **Unit 1, block b015:** English says Samuel "became a leading prophet"; Spanish says "llegó a ser el primer profeta de Israel" ("Israel's first prophet"). Which is meant?
+- **Unit 1, block b019:** English says the women in Matthew's genealogy were "several of them Gentiles or associated with Gentile backgrounds"; Spanish says "Todas mujeres, todas gentiles" ("all of them Gentiles"), which does not fit Bathsheba. Should the Spanish follow the English?
+- **Unit 3, blocks b084 to b088:** the five requirements of a kinsman-redeemer are still in English on the Spanish page: "Near kinsman", "Willing to be", "Able to be", "Free himself", "Able to pay the price". A Spanish version is needed (for example "Pariente cercano", "Dispuesto a serlo", "Capaz de serlo", "Libre él mismo", "Capaz de pagar el precio").
+- **Unit 4, block b009 (both languages):** "Main gate to the city of Jerusalem" / "La puerta principal de la ciudad de Jerusalén". Ruth 4 takes place at the gate of Bethlehem. Should this say Bethlehem?
