@@ -1,0 +1,5 @@
+# CTSCults (Cults and World Religions) — items for Dr. Cook
+
+- **Unit 10 — two references for the Great Commission.** The key-verse list at the top (b009) gives "Matthew 28:19-20" / "Mateo 28:19-20", but the closing quotation (b027) is labelled "Matthew 28:18-20" / "Mateo 28:18-20". Should both use the same reference?
+- **Unit 8, block b018 — Mark 7:8 quotation in Spanish.** EN: Jesus rebuked the leaders for "laying aside the commandment of God" to "hold the tradition of men". ES: "Jesús reprendió a los líderes de su día por "dejando el mandamiento de Dios" para "tener la tradición de los hombres"" — "por dejando" is not correct Spanish, and the words do not match the RVG ("Porque dejando el mandamiento de Dios, os aferráis a la tradición de los hombres"). Please choose how to quote it (e.g. "por "dejar el mandamiento de Dios" y "aferrarse a la tradición de los hombres"").
+- **Unit 4 (b014) and Unit 10 (b026) — "Joseph Smith" or "José Smith".** The Spanish uses both: "Joseph Smith" twice in u4 b014, "José Smith" in u4 b012 and u10 b026. Which name do you want throughout? (Spanish-speaking Latter-day Saints themselves say "José Smith".)

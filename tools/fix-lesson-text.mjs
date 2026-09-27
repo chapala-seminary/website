@@ -12,6 +12,16 @@
 // that language, so a correction cannot land somewhere it was not meant for,
 // and nothing is written unless every fix in the file passes.
 //
+// Two more forms, for translation work rather than typos:
+//   { ..., "text": "..." }       the whole text of that block in that language,
+//                                for a passage that was never translated
+//   { ..., "retranslated": true } (with either form, translation language only)
+//                                the block's translation now says what the source
+//                                says: its `from` is set to the source as it is
+//                                after every fix in the file, and its status to
+//                                `machine` -- written by a program, for a person
+//                                to review (src/lib/lesson.ts, TRANSLATION STATE)
+//
 // Translation provenance (src/lib/lesson.ts): each translation records a
 // hash of the source text it was made from, and a changed source marks the
 // translation out of date. A typo fixed in the source does not make a
@@ -32,6 +42,7 @@ const fixes = JSON.parse(fs.readFileSync(file, 'utf8'));
 const lessons = new Map();          // path -> { raw, data }
 const problems = [];
 let applied = 0, rehashed = 0;
+const retranslated = [];            // [block, lang] to re-point once all fixes are in
 
 for (const [i, f] of fixes.entries()) {
   const at = `#${i + 1} ${f.course} u${f.unit} ${f.block} ${f.lang}`;
@@ -42,18 +53,31 @@ for (const [i, f] of fixes.entries()) {
   const b = l.blocks.find((x) => x.id === f.block);
   if (!b) { problems.push(`${at}: no block ${f.block}`); continue; }
   const text = b.text[f.lang];
-  if (typeof text !== 'string') { problems.push(`${at}: the block has no ${f.lang} text`); continue; }
-  if (!f.find || f.find === f.replace) { problems.push(`${at}: empty or no-op fix`); continue; }
-  const n = count(text, f.find);
-  if (n !== 1) { problems.push(`${at}: "${f.find}" occurs ${n} times in the block, not once`); continue; }
-  const next = text.replace(f.find, f.replace);
+  if (f.retranslated && f.lang === l.sourceLang) { problems.push(`${at}: retranslated is for a translation, not the source`); continue; }
+  let next;
+  if (typeof f.text === 'string') {
+    if (!f.text.trim() || f.text === text) { problems.push(`${at}: empty or no-op text`); continue; }
+    if (typeof b.text?.[l.sourceLang] !== 'string') { problems.push(`${at}: the block has no source text`); continue; }
+    next = f.text;
+  } else {
+    if (typeof text !== 'string') { problems.push(`${at}: the block has no ${f.lang} text`); continue; }
+    if (!f.find || f.find === f.replace) { problems.push(`${at}: empty or no-op fix`); continue; }
+    const n = count(text, f.find);
+    if (n !== 1) { problems.push(`${at}: "${f.find}" occurs ${n} times in the block, not once`); continue; }
+    next = text.replace(f.find, f.replace);
+  }
   if (f.lang === l.sourceLang) {
     for (const t of Object.values(b.tr || {})) {
       if (t.from === hash(text)) { t.from = hash(next); rehashed++; }
     }
   }
-  b.text[f.lang] = next;
+  if (f.retranslated) retranslated.push([b, f.lang, l.sourceLang]);
+  b.text = { ...b.text, [f.lang]: next };
   applied++;
+}
+
+for (const [b, lang, src] of retranslated) {
+  b.tr = { ...(b.tr ?? {}), [lang]: { status: 'machine', from: hash(b.text[src]) } };
 }
 
 if (problems.length) {
@@ -67,4 +91,4 @@ if (write) {
     fs.writeFileSync(p, JSON.stringify(data, null, indent) + (raw.endsWith('\n') ? '\n' : ''));
   }
 }
-console.log(`${applied} fix(es) in ${lessons.size} lesson(s) ${write ? 'written' : 'check passed (add --write)'}; ${rehashed} current translation(s) kept current`);
+console.log(`${applied} fix(es) in ${lessons.size} lesson(s) ${write ? 'written' : 'check passed (add --write)'}; ${rehashed} current translation(s) kept current; ${new Set(retranslated.map(([b, l]) => b.id + l)).size} retranslated`);
