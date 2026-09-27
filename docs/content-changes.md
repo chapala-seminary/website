@@ -646,6 +646,40 @@ Students also receive their certificate by email once it is registered
   from Narrative or Ethics, or the review-during-lock rule from the widget,
   each fails it.
 
+### 8t. Dr. Cook's answers applied (27 Sept) — 88 lessons, 11 unit tests, 2 charts changed
+
+* **Dr. Cook answered every item** in `_review/lesson-fixes/FOR-DR-COOK.md`
+  (his answers are summarised in that file's history and in the fix lists).
+  They are applied as 620 text edits (`_review/lesson-fixes/<Course>-3.json`,
+  Genesis `-3a`/`-3b`, `culminacion.json`) with `tools/fix-lesson-text.mjs`,
+  and 10 structural changes (`<Course>-3-ops.json`) with a new tool,
+  `tools/restructure-lesson.mjs`, which adds, moves or removes whole blocks
+  in both languages and refuses any block that is not on a line of its own.
+* **Bible wording:** NKJV word for word in English and RVG word for word in
+  Spanish for every verse his answers named, and for other quotations of the
+  same verse in the same course; where the lesson's point needs a word the RVG
+  lacks, the RVG quote is followed by "(es decir, …)". Verses whose exact RVG
+  text should be checked against a printed Bible are listed for him.
+* **New and rewritten text:** Matthew 3 is built from his sermon "Reasons We
+  Mourn" (19 new blocks); the persecuted Beatitude (Matthew 3) and the last
+  three petitions of the Lord's Prayer (Matthew 5, 4 new blocks) are written
+  by Claude in his voice for his review; Evangelistic Preaching units 6, 7, 8
+  and 10 are cut by about a quarter (repetition only; 7 blocks removed);
+  Genesis's Spanish is smoothed throughout (268 blocks); Radical Discipleship
+  13 has a new illustration, written in his voice, for him to confirm.
+* **Unit tests** that quoted changed wording follow it (Radical 13's questions
+  on the replaced story; "certezas", "José Smith", "Jehová-jireh", "Tema",
+  "posmilenialismo", "Luisiana", "Príncipe", "longanimidad", "six units",
+  "culminación"). `tools/content-baseline.json` re-recorded for those.
+* **Charts:** Pentateuch 12 and Systematic Theology 9 now follow the language
+  switch: each chart is drawn once per language, the author's own Spanish split
+  from the English, three lines that had no Spanish translated.
+* Spanish written or rewritten by these changes is `machine` in its translation
+  state, so it shows as "Translated automatically" in the CMS for review.
+* `test/fixtures/prose-baseline.json`: only the changed blocks' hashes
+  replaced. `test/fixtures/lesson-render.json`: re-recorded; the 89 pages that
+  differ are exactly those whose lesson or test changed.
+
 ---
 
 ## How to check any of this yourself
