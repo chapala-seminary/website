@@ -1,3 +1,5 @@
 # CTSApol (Apologetics) — items for Dr. Cook
 
-- **Unit 3, block b027** — The closing verse differs. EN: "Now He who has sealed us and given us the Spirit in our hearts as a guarantee is God." — 2 Corinthians 1:22 "(paraphrased from the apostle)". ES quotes the Reina-Valera text: "Y el que nos ungió... y nos selló…" — 2 Corintios 1:21-22 (RVG). Which reference and wording do you want in both?
+Nothing for Dr. Cook in this course.
+
+- Verse wording to confirm: 2 Corintios 1:21–22 (Unit 3 b027) is given as "Y el que nos confirma con vosotros en Cristo, y el que nos ungió, es Dios; el cual también nos ha sellado, y nos ha dado las arras del Espíritu en nuestros corazones." The words are the Reina-Valera text; the RVG's exact punctuation (";" or "," after "es Dios") should be checked against a printed RVG.

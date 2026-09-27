@@ -1,3 +1,5 @@
 # CTSPT — items for Dr. Cook
 
-- **Unit 9, block b017:** the unit's key term in Spanish is "dominio propio", but the quoted Galatians 5:22–23 (RVG) says "templanza". Students may not see that it is the same fruit. A short note ("templanza, es decir, dominio propio") might help.
+Nothing for Dr. Cook in this course.
+
+- Verse wording to confirm: Galatians 5:22–23 RVG (unit 9 b017), now "Mas el fruto del Espíritu es: amor, gozo, paz, longanimidad, benignidad, bondad, fe, mansedumbre, templanza; contra tales cosas no hay ley", matching the wording chosen for the Galatians course; not certain of "longanimidad" (the 1960 has "paciencia").
