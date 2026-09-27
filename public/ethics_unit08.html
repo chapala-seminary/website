@@ -48,6 +48,8 @@ body.lang-es .lang-en { display: none; } body.lang-es .lang-es { display: inline
 
 <script src="cts-lang.js"></script>
 <script src="assets/js/cts-record.js"></script>
+<script src="assets/js/cts-fill.js?v=20260927a"></script>
+<script src="assets/js/fill/ethics.js?v=20260927a"></script>
 <div class="container">
 <div class="nav-bar">
     <div class="progress-grid" id="progressGrid"></div>
@@ -132,8 +134,8 @@ body.lang-es .lang-en { display: none; } body.lang-es .lang-es { display: inline
 
 <div class="card">
     <h2><span class="lang-en">Unit 8 Final Exam &mdash; 30 Questions</span><span class="lang-es">Examen Final de la Unidad 8 &mdash; 30 Preguntas</span></h2>
-    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1&ndash;20. <strong>M.Div. / Th.M. students:</strong> Answer all 30. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
-       <span class="lang-es"><strong>Certificado:</strong> 1&ndash;20. <strong>M.Div. / Th.M.:</strong> las 30. 90% para aprobar. Si no aprueba, repase la lecci&oacute;n y vuelva a intentarlo tras una breve pausa.</span></p>
+    <p><span class="lang-en"><strong>Certificate students:</strong> Answer 1&ndash;20 (the fill-in-the-blank questions are for review). <strong>Associate students:</strong> 1&ndash;20 and the 10 fill-in-the-blank. <strong>M.Div. / Th.M. students:</strong> all 30 and the fill-in-the-blank. 90% required to pass. If you don't pass, review the lesson and try again after a short pause.</span>
+       <span class="lang-es"><strong>Certificado:</strong> 1&ndash;20 (los espacios en blanco son de repaso). <strong>Asociado:</strong> 1&ndash;20 y los 10 espacios en blanco. <strong>M.Div. / Th.M.:</strong> las 30 y los espacios en blanco. 90% para aprobar. Si no aprueba, repase la lecci&oacute;n y vuelva a intentarlo tras una breve pausa.</span></p>
     <div id="questionsContainer"></div>
     <div style="margin-top: 20px;">
         <button id="submitExamBtn" class="small"><span class="lang-en">Submit Exam &amp; Check Pass</span><span class="lang-es">Enviar Examen y Verificar</span></button>
@@ -347,14 +349,18 @@ let currentLang = 'en';
 let mcAnswers = new Array(20).fill(null);
 let kwAnswers = new Array(10).fill("");
 let mcRevealed = false;
+const fillState = {};   // fillAnswers, fillChecked -- see FILL below
 try {
     const st = JSON.parse(localStorage.getItem(STATE_KEY) || '{}');
     if (Array.isArray(st.mcAnswers) && st.mcAnswers.length === 20) mcAnswers = st.mcAnswers;
     if (Array.isArray(st.kwAnswers) && st.kwAnswers.length === 10) kwAnswers = st.kwAnswers;
+    if (Array.isArray(st.fillAnswers)) fillState.fillAnswers = st.fillAnswers;
+    if (Array.isArray(st.fillChecked)) fillState.fillChecked = st.fillChecked;
 } catch(e) {}
 
 function saveState() {
-    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers })); } catch(e) {}
+    try { localStorage.setItem(STATE_KEY, JSON.stringify({ mcAnswers, kwAnswers,
+        fillAnswers: fillState.fillAnswers, fillChecked: fillState.fillChecked })); } catch(e) {}
 }
 
 function checkLockouts() {
@@ -388,8 +394,8 @@ function checkLockouts() {
         const m = Math.ceil((saLock - now) / 60000);
         submitBtn.disabled = true;
         result.innerHTML = isEs
-            ? `<span style='color:#8a1f1f'>\u{1F4D6} Opci\u00f3n m\u00faltiple aprobada y guardada. Repase la lecci\u00f3n y las respuestas modelo, y reintente la secci\u00f3n de respuesta corta en ${m} minuto(s).</span>`
-            : `<span style='color:#8a1f1f'>\u{1F4D6} Multiple-choice passed and saved. Review the lesson and model answers, then retry the short-answer section in ${m} minute(s). Keep going!</span>`;
+            ? `<span style='color:#8a1f1f'>\u{1F4D6} Opci\u00f3n m\u00faltiple aprobada y guardada. Repase la lecci\u00f3n y las respuestas, y reintente la parte escrita (espacios en blanco / respuesta corta) en ${m} minuto(s).</span>`
+            : `<span style='color:#8a1f1f'>\u{1F4D6} Multiple-choice passed and saved. Review the lesson and the answers, then retry the written part (fill in the blank / short answer) in ${m} minute(s). Keep going!</span>`;
         notice.style.display = 'none';
         setTimeout(checkLockouts, 30000);
         return false;
@@ -398,8 +404,8 @@ function checkLockouts() {
     if (mcPreviouslyPassed) {
         notice.style.display = 'block';
         notice.innerHTML = isEs
-            ? "\u2713 MC ya aprobado y guardado. Solo necesita reenviar la secci\u00f3n de respuesta corta (9/10)."
-            : "\u2713 MC already passed and banked. Only need to resubmit the short-answer section (9/10).";
+            ? "\u2713 MC ya aprobado y guardado. Solo necesita reenviar la parte escrita (espacios en blanco / respuesta corta, 9/10 cada una)."
+            : "\u2713 MC already passed and banked. Only the written part needs resubmitting (fill in the blank / short answer, 9/10 each).";
     } else {
         notice.style.display = 'none';
     }
@@ -477,6 +483,8 @@ function renderQuestions() {
         }
         container.appendChild(div);
     });
+
+    if (FILL) { container.appendChild(fillHost); FILL.render(); }
 
     const kwTitle = document.createElement('h3');
     kwTitle.style.marginTop = '30px';
@@ -597,6 +605,33 @@ function isMastersLevel(track) {
     return track === 'mdiv' || track === 'thm';
 }
 
+// ---- Fill in the blank ----------------------------------------------------
+// Ten per unit, drawn and marked by assets/js/cts-fill.js (the unit engine's
+// fill-ins, for this page). They count for Associate, Th.M. and M.Div.
+// students -- 9 of 10 -- and are for review only on the Certificate track. A
+// failed set locks with the short answer (SA_LOCK_KEY, the multiple choice
+// banked), or with the whole unit when the multiple choice failed too.
+function fillTrack() {
+    try { return (JSON.parse(localStorage.getItem('cts_student') || 'null') || {}).track || 'certificate'; }
+    catch (e) { return 'certificate'; }
+}
+function fillCounts() { return ctsIsAssociate() || isMastersLevel(fillTrack()); }
+function fillLockedUntil() {
+    const full = parseInt(localStorage.getItem(FULL_LOCK_KEY) || '0', 10);
+    const sa = mcPreviouslyPassed ? parseInt(localStorage.getItem(SA_LOCK_KEY) || '0', 10) : 0;
+    return Math.max(full, sa);
+}
+const fillHost = document.createElement('div');
+const FILL = (window.CTSFill && CTSFill.questions('ethics', UNIT).length)
+    ? CTSFill.mount({ host: fillHost, questions: CTSFill.questions('ethics', UNIT), state: fillState,
+        counts: fillCounts, lockedUntil: fillLockedUntil, passed: () => unitPassed, save: saveState })
+    : null;
+function fillLine(fr, es) {
+    if (!fr || !fr.n || !fr.counted) return '';
+    return es ? ` + completar ${fr.score}/${fr.n}${fr.ok ? '' : ' (se requieren ' + fr.need + ')'}`
+              : ` + fill-in ${fr.score}/${fr.n}${fr.ok ? '' : ' (need ' + fr.need + ')'}`;
+}
+
 function submitExam() {
     if (!checkLockouts()) return;
     if (unitPassed) return;
@@ -612,29 +647,43 @@ function submitExam() {
     const mcOk = mcScore >= 18;
     if (!mcPreviouslyPassed) { mcRevealed = true; renderQuestions(); }
 
+    const fr = FILL ? FILL.submit() : null;
+    const fillOk = !fr || fr.ok;
+
     if (!isMastersLevel(track) || ctsIsAssociate()) {
+        if (mcOk && !fillOk) {
+            // the multiple choice is passed and kept; the fill-ins wait for the lock
+            localStorage.setItem(MC_PASS_KEY, 'true');
+            mcPreviouslyPassed = true;
+            localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
+            result.innerHTML = isEs
+                ? `<span style='color:#8a1f1f'>Opci\u00f3n m\u00faltiple ${mcScore}/20 \u2713 aprobada y guardada. Completar el espacio en blanco: ${fr.score}/${fr.n} (se necesitan ${fr.need}). Repase la lecci\u00f3n y las respuestas de abajo, y vuelva a intentar los espacios en blanco en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Multiple choice ${mcScore}/20 \u2713 passed and saved. Fill in the blank: ${fr.score}/${fr.n} (${fr.need} needed). Review the lesson and the answers below, then try the fill-ins again in ${lockMinutes()} minute(s).</span>`;
+            checkLockouts();
+            return;
+        }
         if (mcOk) {
             progress[`unit${UNIT}`] = true;
             localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress)); ctsRecordEthics();
             localStorage.setItem(MC_PASS_KEY, 'true');
             mcPreviouslyPassed = true; unitPassed = true;
             result.innerHTML = isEs
-                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! ${mcScore}/20. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
-                : `<span style='color:green'>\u2713 PASSED! ${mcScore}/20. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! ${mcScore}/20${fillLine(fr, true)}. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! ${mcScore}/20${fillLine(fr, false)}. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
             document.getElementById('nextUnitBtn').disabled = false;
             updateProgressGrid();
         } else {
             localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
             result.innerHTML = isEs
-                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar). \u00a1Est\u00e1 cerca, no se desanime! Repase la lecci\u00f3n de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de abajo muestran qu\u00e9 estudiar.</span>`
-                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass). You're close \u2014 don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
+                ? `<span style='color:#8a1f1f'>Obtuvo ${mcScore}/20 (se necesitan 18 para aprobar)${fillLine(fr, true)}. \u00a1Est\u00e1 cerca, no se desanime! Repase la lecci\u00f3n de arriba, y vuelva a intentarlo en ${lockMinutes()} minuto(s). Las explicaciones de abajo muestran qu\u00e9 estudiar.</span>`
+                : `<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass)${fillLine(fr, false)}. You're close \u2014 don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`;
             checkLockouts();
         }
         return;
     }
 
     const saScore = gradeSA();
-    const saOk = saScore >= 9;
+    const saOk = saScore >= 9 && fillOk;
 
     if (mcPreviouslyPassed) {
         if (saOk) {
@@ -642,15 +691,15 @@ function submitExam() {
             localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress)); ctsRecordEthics();
             unitPassed = true;
             result.innerHTML = isEs
-                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC \u2713 banco + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
-                : `<span style='color:green'>\u2713 PASSED! MC \u2713 banked + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+                ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC \u2713 banco + SA ${saScore}/10${fillLine(fr, true)}. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+                : `<span style='color:green'>\u2713 PASSED! MC \u2713 banked + SA ${saScore}/10${fillLine(fr, false)}. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
             document.getElementById('nextUnitBtn').disabled = false;
             updateProgressGrid();
         } else {
             localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
             result.innerHTML = isEs
-                ? `<span style='color:#8a1f1f'>Su aprobaci\u00f3n de opci\u00f3n m\u00faltiple est\u00e1 a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9). Buen esfuerzo \u2014 repase la lecci\u00f3n y las respuestas modelo abajo, y vuelva a intentar la secci\u00f3n de respuesta corta en ${lockMinutes()} minuto(s).</span>`
-                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed). Good effort \u2014 review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
+                ? `<span style='color:#8a1f1f'>Su aprobaci\u00f3n de opci\u00f3n m\u00faltiple est\u00e1 a salvo. Respuesta corta: ${saScore}/10 (se necesitan 9)${fillLine(fr, true)}. Buen esfuerzo \u2014 repase la lecci\u00f3n y las respuestas modelo abajo, y vuelva a intentar la secci\u00f3n de respuesta corta en ${lockMinutes()} minuto(s).</span>`
+                : `<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed)${fillLine(fr, false)}. Good effort \u2014 review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`;
             checkLockouts();
         }
         return;
@@ -662,8 +711,8 @@ function submitExam() {
         localStorage.setItem(MC_PASS_KEY, 'true');
         mcPreviouslyPassed = true; unitPassed = true;
         result.innerHTML = isEs
-            ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC ${mcScore}/20 + SA ${saScore}/10. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
-            : `<span style='color:green'>\u2713 PASSED! MC ${mcScore}/20 + SA ${saScore}/10. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
+            ? `<span style='color:#1f6b3b'>\u2713 \u00a1APROBADO! MC ${mcScore}/20 + SA ${saScore}/10${fillLine(fr, true)}. Sus respuestas están marcadas abajo. Repáselas, luego use el botón de arriba para continuar.</span>`
+            : `<span style='color:green'>\u2713 PASSED! MC ${mcScore}/20 + SA ${saScore}/10${fillLine(fr, false)}. Your answers are marked below. Review them, then use the button at the top to continue.</span>`;
         document.getElementById('nextUnitBtn').disabled = false;
         updateProgressGrid();
     } else if (mcOk && !saOk) {
@@ -671,14 +720,14 @@ function submitExam() {
         mcPreviouslyPassed = true;
         localStorage.setItem(SA_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
         result.innerHTML = isEs
-            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 aprobado y guardado. SA ${saScore}/10 (se requiere 9). Secci\u00f3n SA bloqueada ${lockMinutes()} min. Al desbloquear, reenv\u00ede solo la SA \u2014 el MC permanece aprobado.</span>`
-            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 passed and banked. SA ${saScore}/10 (need 9). SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only \u2014 MC stays passed.</span>`;
+            ? `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 aprobado y guardado. SA ${saScore}/10 (se requiere 9)${fillLine(fr, true)}. Secci\u00f3n SA bloqueada ${lockMinutes()} min. Al desbloquear, reenv\u00ede solo la SA \u2014 el MC permanece aprobado.</span>`
+            : `<span style='color:#8a1f1f'>MC ${mcScore}/20 \u2713 passed and banked. SA ${saScore}/10 (need 9)${fillLine(fr, false)}. SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only \u2014 MC stays passed.</span>`;
         checkLockouts();
     } else {
         localStorage.setItem(FULL_LOCK_KEY, String(Date.now() + lockMinutes() * 60 * 1000));
         result.innerHTML = isEs
-            ? `<span style='color:#8a1f1f'>\u2717 Reprobado: MC ${mcScore}/20 + SA ${saScore}/10 (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
-            : `<span style='color:#8a1f1f'>\u2717 Failed: MC ${mcScore}/20 + SA ${saScore}/10 (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
+            ? `<span style='color:#8a1f1f'>\u2717 Reprobado: MC ${mcScore}/20 + SA ${saScore}/10${fillLine(fr, true)} (se requiere 18 y 9). Unidad bloqueada ${lockMinutes()} minutos.</span>`
+            : `<span style='color:#8a1f1f'>\u2717 Failed: MC ${mcScore}/20 + SA ${saScore}/10${fillLine(fr, false)} (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`;
         checkLockouts();
     }
 }
@@ -702,7 +751,7 @@ function resetUnit() {
     try { location.reload(); } catch (e) {}
 }
 
-document.getElementById('submitExamBtn').onclick = submitExam;
+document.getElementById('submitExamBtn').onclick = function () { submitExam(); if (FILL) FILL.render(); };
 document.getElementById('resetExamBtn').onclick = resetUnit;
 renderQuestions();
 checkLockouts();
