@@ -1,0 +1,5 @@
+# Systematic Theology: questions for Dr. Cook
+
+- **Unit 9, block b049:** Matthew 28:19-20 is given in a loose paraphrase in English ("Go into all the world and teach them, baptizing them... and remember I am always with you"), while the Spanish uses the Reina-Valera wording, and block b052 just below quotes the verse in full from the NKJV. Should b049 use the NKJV wording too?
+- **Unit 9, block b026:** "look again at the central issue in the passage: 'Who do you say that I am?'" The verse quoted just above (b025, Matthew 16:13) is "Who do men say that I, the Son of Man, am?"; "Who do you say that I am?" is verse 15. Perhaps add verse 15 to the quote in b025, or give the verse number in b026?
+- **Unit 9, the two charts at the end ("How Does Grace Reach the Sinner?" and "Who Stands Between God and Man?", blocks b059 onward):** the English and Spanish lines of each chart are stored together as English text, with no Spanish version, so Spanish readers see both languages mixed. This is mainly a job for the web team; nothing is needed from you unless you want the chart wording changed.

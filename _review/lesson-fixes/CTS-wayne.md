@@ -1,0 +1,5 @@
+# CTS (Old Testament Survey) — items for Dr. Cook
+
+- **Unit 4, blocks b015/b016** — The same figure is called two different titles in Spanish. Heading and prose: "El Capitán del ejército de Jehová" / "El Capitán dice"; the quoted verse (Joshua 5:14): "como Príncipe del ejército de Jehová". EN uses "Captain" throughout. Also, ES "El Dios de Israel no finalmente toma lados en nuestras batallas" is a word-for-word copy of EN "does not finally take sides" and reads awkwardly in Spanish; please choose the wording you want.
+- **Unit 5, blocks b006 / b030 / b033** — The count of the southern kings disagrees. b006: "nineteen kings of the north, twenty kings of the south". b033: "The South gets nineteen kings and one queen". Which count should both say?
+- **Unit 13, block b030** — English wording of the four parties is clipped: "Four parties, four answers — Pharisees legalism, Sadducees compromise, Essenes withdrawal, Zealots violence." The Spanish spells it out ("Los fariseos ofrecían legalismo, los saduceos componenda…"). Would you like the English to say "the Pharisees offered legalism, the Sadducees compromise…"?
