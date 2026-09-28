@@ -48,7 +48,7 @@ async function open(file, unitPage, seed) {
   await page.reload({ waitUntil: 'load' });
   await page.waitForTimeout(300);
   await page.goto(`${BASE}/${file}`, { waitUntil: 'load' });
-  await page.waitForTimeout(700);
+  await page.waitForTimeout(1000);
   const r = await page.evaluate(() => {
     const visible = (el) => !!(el && el.offsetParent !== null && getComputedStyle(el).display !== 'none' && getComputedStyle(el).visibility !== 'hidden');
     const sels = ['#diploma', '#cert-wrap', '.diploma', '#certificate', '.certificate', '#cert', '.cert-wrap', '.sheet'];
@@ -56,7 +56,8 @@ async function open(file, unitPage, seed) {
     const name = ['#studentName', '#certName', '#cert-name', '#student-name', '#name', '.cert-name', '.student-name', '[data-student-name]']
       .map((s) => document.querySelector(s)).find(visible);
     let done = []; try { done = JSON.parse(localStorage.getItem('cts_done_codes') || '[]'); } catch (e) {}
-    return { diploma: !!dip, nameText: name ? name.textContent.trim().slice(0, 40) : null, done };
+    return { diploma: !!dip, nameText: name ? name.textContent.trim().slice(0, 40) : null, done,
+             pdf: !!document.querySelector('#cts-cert-pdf button') };
   });
   await ctx.close();
   return { ...r, errs };
@@ -81,9 +82,12 @@ for (const [slug, c] of Object.entries(catalog.courses)) {
     ok(yes.diploma, `${f}: does NOT unlock for a student who passed every unit of ${slug}`);
     if (yes.diploma) ok(!yes.nameText || !/^[\[{]/.test(yes.nameText), `${f}: shows raw JSON where the student's name should be: "${yes.nameText}"`);
     ok(yes.done.includes(code), `${f}: unlocking did not record the completion code ${code} (got ${JSON.stringify(yes.done)})`);
+    // the downloadable PDF (assets/js/cts-cert-pdf.js) is offered with the diploma, and only then
+    ok(!yes.diploma || yes.pdf, `${f}: the unlocked certificate has no Download PDF button`);
     const no = await open(f, unitPage, none);
     ok(!no.diploma, `${f}: shows the diploma to a student who passed nothing`);
     ok(!no.done.includes(code), `${f}: records completion ${code} for a student who passed nothing`);
+    ok(!no.pdf, `${f}: offers a PDF download to a student who passed nothing`);
   }
 }
 
@@ -113,12 +117,12 @@ async function openDegree(file, seed) {
   await page.goto(`${BASE}/${file}`, { waitUntil: 'load' });
   await page.evaluate((s) => { localStorage.clear(); for (const [k, v] of Object.entries(s)) localStorage.setItem(k, v); }, seed);
   await page.reload({ waitUntil: 'load' });
-  await page.waitForTimeout(500);
+  await page.waitForTimeout(900);
   const r = await page.evaluate(() => {
     const visible = (el) => !!(el && el.offsetParent !== null && getComputedStyle(el).display !== 'none');
     const dip = ['#certCard', '#diploma', '.diploma', '#certificate', '.certificate', '.cert-wrap', '#cert'].map((s) => document.querySelector(s)).find(visible);
     const print = [...document.querySelectorAll('button')].find((b) => /print|imprimir/i.test(b.textContent) && visible(b) && !b.disabled);
-    return { diploma: !!dip, print: !!print };
+    return { diploma: !!dip, print: !!print, pdf: !!document.querySelector('#cts-cert-pdf button') };
   });
   await ctx.close();
   return { ...r, errs };
@@ -134,8 +138,10 @@ for (const [file, codes, masters] of DEGREES) {
   ok(yes.errs.length === 0, `${file}: page errors: ${yes.errs.slice(0, 2).join(' | ')}`);
   // the master's diplomas are shown only in print; the enabled print button is the unlock
   ok(yes.print, `${file}: does not unlock a printable diploma for a student with the ${codes.length} required courses (diploma ${yes.diploma}, print ${yes.print})`);
+  ok(yes.pdf, `${file}: the unlocked diploma has no Download PDF button`);
   const short = await openDegree(file, degreeSeed(codes.slice(0, -1), masters));
   ok(!short.print && !short.diploma, `${file}: unlocks the diploma one course short`);
+  ok(!short.pdf, `${file}: offers a PDF download one course short`);
 }
 
 await browser.close();
