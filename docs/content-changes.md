@@ -646,6 +646,37 @@ Students also receive their certificate by email once it is registered
   from Narrative or Ethics, or the review-during-lock rule from the widget,
   each fails it.
 
+### 8u. Certificates as a PDF, in English or Spanish (28 Sept) — 74 certificate pages gained one script tag
+
+* **Why:** students saving their certificate from a phone got a blurry image
+  and wrote to the seminary for a PDF; Spanish-speaking students asked for
+  their certificates in Spanish (Dr. Cook, 27 Sept).
+* **What:** every certificate page now has a **Download PDF** button under an
+  unlocked certificate (next to Print on the Th.M. and M.Div. pages, whose
+  diploma is drawn for print only). It builds a one-page, letter-landscape,
+  vector PDF in the browser -- sharp at any size -- in the language the student
+  is reading the site in (cts-lang.js chooses it from their saved choice or
+  their browser), with a link for the other language. Nothing is sent
+  anywhere.
+* **Wording and design** follow the seminary's Certificate Maker, so a
+  downloaded certificate matches one the office emails: the course
+  certificate (name, course, track, With Honors when the class's honors
+  reading is done, both signatures, the seal, the date) and the degree
+  diploma for the Certificate of Ministry, Associate, Th.M. and M.Div. The
+  verification code is printed when the certificate has been registered.
+  Course names in both languages come from the catalog
+  (`src/content/courses`), written to `public/assets/js/cts-cert-names.js` by
+  `tools/build-cert-names.mjs`.
+* **Files:** `public/assets/js/cts-cert-pdf.js` (the button and the drawing);
+  `public/assets/vendor/jspdf.umd.min.js` (jsPDF 4.2.1, MIT, loaded only when
+  the button is pressed); `public/assets/img/sig-cook.png`, `sig-rogers.png`
+  (the signatures already on the certificate pages).
+* **Test:** `tools/verify-cert-pdf.mjs` builds real PDFs for a course and a
+  degree, in both languages, and checks their text; it fails if any
+  certificate page lacks the script or the names are out of date.
+  `tools/verify-certificate-unlock.mjs` now also checks that the button appears
+  with every unlocked certificate and never with a locked one.
+
 ---
 
 ## How to check any of this yourself
