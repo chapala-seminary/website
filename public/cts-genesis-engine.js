@@ -160,7 +160,9 @@
   }
 
   function testMode() {
-    try { return new URLSearchParams(location.search).get('ctstest') === 'on'; }
+    // the flag cts-curriculum.js sets once the tester key is given; the
+    // address alone ("?ctstest=on") no longer turns anything on
+    try { return localStorage.getItem('cts_test_mode') === '1'; }
     catch (_) { return false; }
   }
 

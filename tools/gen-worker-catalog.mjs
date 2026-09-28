@@ -98,6 +98,22 @@ for (const [slug, c] of Object.entries(courses)) {
   if (!completions[code]) { console.error(`${slug}: no certificate page writes completion code ${code}`); process.exit(2); }
   c.code = code;
 }
+// The course's title in both languages, from the catalog the front page is
+// built from (src/content/courses), matched by its first unit page. The
+// notes the seminary sends students name the course they stopped in, in the
+// student's language (worker/outreach.js).
+{
+  const titles = {};
+  for (const f of fs.readdirSync('src/content/courses')) {
+    const j = JSON.parse(fs.readFileSync(path.join('src/content/courses', f), 'utf8'));
+    if (j.entry && j.title) titles[j.entry] = j.title;
+  }
+  for (const [slug, c] of Object.entries(courses)) {
+    const t = titles[`${c.pages}Unit${c.units[0]}.html`];
+    if (!t?.en || !t?.es) { console.error(`${slug}: no English and Spanish title in src/content/courses for ${c.pages}Unit${c.units[0]}.html`); process.exit(2); }
+    c.title = { en: t.en, es: t.es };
+  }
+}
 // And every course a degree requires must be one a page can actually record,
 // or that degree can never be awarded. (Wayne's audit of the beta asked about
 // WISESPEAK and COUNSELING; they are single-page courses, recorded by code.)

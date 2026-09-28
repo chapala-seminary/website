@@ -81,6 +81,21 @@ ok(told(s.body).join(',') === 'course:CTSNT:sent',
   `the sync that recorded New Testament told the seminary of it, and of nothing already recorded (${told(s.body)})`);
 const repeat = await jpost('/api/sync', { code: CODE, progress: [], doneCodes: ['CTSOTS', 'CTSNT'] });
 ok(told(repeat.body).length === 0, `re-reporting both courses from another device tells the seminary nothing (${told(repeat.body)})`);
+
+// A returning student's first visit brings everything from the old site at
+// once: one email for all of it, not one per course -- but each course is
+// still recorded as told, so none is announced again.
+{
+  const r = await jpost('/api/register', { name: 'Returning Student', track: 'cert', lang: 'es' });
+  const first = await jpost('/api/sync', { code: r.body.code, progress: [], doneCodes: ['CTSOTS', 'CTSNT', 'CTSST'], lang: 'es' });
+  const n = first.body.notifications || [];
+  ok(told(first.body).join(',') === 'course:CTSNT:sent,course:CTSOTS:sent,course:CTSST:sent',
+    `three courses arriving together are each told once (${told(first.body)})`);
+  ok(n.every((x) => x.batch === 3), `and told in one email, not three (${JSON.stringify(n.map((x) => x.batch))})`);
+  const more = await jpost('/api/sync', { code: r.body.code, progress: [], doneCodes: ['CTSOTS', 'CTSNT', 'CTSST', 'CTSPM'] });
+  ok(told(more.body).join(',') === 'course:CTSPM:sent' && !(more.body.notifications[0] || {}).batch,
+    `a course finished afterwards is its own notice (${told(more.body)})`);
+}
 ok(!!find(s.body, '1peter', 2), 'a unit missing from this sync is NOT dropped');
 ok(s.body.doneCodes.join(',') === 'CTSNT,CTSOTS', `done codes are the union, got ${s.body.doneCodes}`);
 

@@ -11,7 +11,16 @@
   "main": "../worker/index.js",
   "compatibility_date": "2026-09-01",
   // Nothing is emailed in tests: /api/email/start returns the code instead.
-  "vars": { "EMAIL_MODE": "log", "NOTIFY_TO": "info@example.test" },
+  "vars": {
+    "EMAIL_MODE": "log", "NOTIFY_TO": "info@example.test",
+    // The staff pages, checked against the suite's own signing key instead of
+    // Cloudflare Access's (test/fixtures/access-test-key.json holds the private
+    // half). Never in wrangler.jsonc: tools/verify-worker-config.mjs refuses it.
+    "ACCESS_TEAM": "cts-test", "ACCESS_AUD": "cts-test-aud",
+    "ACCESS_JWKS": "{\"keys\":[{\"kty\":\"RSA\",\"n\":\"uAFzmd-9jg-cUHuUUsMwCkiJaUjShNmipEeaYXoSgDvVcGjK0AEeJJZYwvTk5EtW2AWCy5_iL-HK6gUDHVEogApIj2F1mMXFZsb76cLMZL1C1pnOBK6Pl5xlrf8Jvuc_dAdskUOFQNO3c3Cdyr6tvCWsrdGyGIsNYpno7qVPs5twkSpfvw_SvzkDD2A9iJcYlqADqkeIXz_fD0yABLXx_tgIZJvRAPl7CV1BNBlqRZDxi_eu2PiA_wDjDwUTYLovQhSwRZERGMyWU0umh0SoYW1UPrLP-EXxfxUi-oxwHSImIbV19hx5OKHnZN925llnl0cATZXe3oM7oE5zBx2sqQ\",\"e\":\"AQAB\",\"kid\":\"cts-test-1\",\"alg\":\"RS256\",\"use\":\"sig\"}]}",
+    // notes to students are "sent" -- in log mode, which sends nothing
+    "OUTREACH_MODE": "send", "SITE_ORIGIN": "https://chapalaseminary.org"
+  },
   "assets": {
     "directory": "../dist",
     "binding": "ASSETS",

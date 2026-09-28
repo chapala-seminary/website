@@ -137,6 +137,14 @@ Seminary", because that is how those pages' titles parse).
    asking. A student whose progress is on a phone they no longer have is not
    recoverable from here; the inbox is the only record of them.
 
+**Since 28 Sept** the tracker has its own pages: `/staff/students`, the same
+as CSV and JSON, behind Cloudflare Access, plus a daily note to students who
+have gone quiet and a weekly summary to the seminary. `migrations/0006_retention.sql`
+adds `students.lang`, `students.contact_opt_out_at`, the `outreach` and
+`contact_tokens` tables, and the `student_activity` view (one row per student
+with `last_progress_at`, `last_unit`, `notices_sent`, `last_contacted_at`).
+All of it is described in `docs/student-tracker.md`.
+
 The records also tell the privacy page (`CTSPrivacy.html`) what it shows, and
 that page now says the seminary keeps its student roll from them.
 

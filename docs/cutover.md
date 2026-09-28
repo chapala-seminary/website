@@ -225,6 +225,15 @@ npx wrangler d1 create chapala-students
 npx wrangler d1 migrations apply chapala-students --remote
 ```
 
+Before the next step, the student tracker (`docs/student-tracker.md`, "Before
+the cutover"):
+
+- set up Cloudflare Access for `/staff/*` and put `ACCESS_TEAM` and
+  `ACCESS_AUD` in `wrangler.jsonc`;
+- have Wayne read the notes to students at `/staff/notes` on beta.
+
+Production sends those notes from its first day (`OUTREACH_MODE` is `send`).
+
 ## 6. Deploy production
 
 ```

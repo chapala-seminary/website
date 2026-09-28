@@ -8,13 +8,22 @@ wrong behaviour for anyone reviewing the material, so there is an override.
 
 ## Turning it on
 
-Add `?ctstest=on` to any page on the site:
+Add `?ctstest=` and the **tester key** to any page on the site:
 
-    https://chapalaseminary.org/index.html?ctstest=on
+    https://chapalaseminary.org/index.html?ctstest=<tester key>
 
-That is the whole thing. It is stored in that browser, so it stays on as you
-click from course to course — you do not repeat the parameter. `?test=on`
-works the same way.
+The key is not written here or anywhere in the repository; Robert and Wayne
+have it. The page checks it, takes it out of the address bar, and reloads with
+tester mode on. It is stored in that browser, so it stays on as you click from
+course to course — you do not repeat it.
+
+On a locked course page, the small square under the buttons asks for the key
+too.
+
+`?ctstest=on` no longer does anything (since 28 Sept 2026). It had become the
+known fix for a catalog that would not unlock, passed from student to student;
+the underlying fault is fixed (`docs/content-changes.md` §8v), and a student
+who is locked out should be reported, not handed the switch.
 
 While it is on:
 
@@ -35,7 +44,7 @@ While it is on:
 Tap the bar, or visit any page with `?ctstest=off`. Either route clears the
 flag and removes the placeholder Course Tester account.
 
-From the browser console, `CTSCurriculum.testMode(true)` and
+From the browser console, `CTSCurriculum.testMode("<tester key>")` and
 `CTSCurriculum.testMode(false)` do the same thing without a reload.
 
 ## If you are already registered as yourself
@@ -55,15 +64,27 @@ registered.
 `public/cts-curriculum.js` — search for `TEST_KEY`. The flag is
 `cts_test_mode` in `localStorage`.
 
-It is deliberately a plain, guessable parameter. The lock exists to give
-students an order to study in, not to keep the material secret; every course
-is free to anyone who finishes the foundation. Nothing behind it is
-confidential, so there is nothing for a harder-to-guess switch to protect.
+Only the key's SHA-256 fingerprint is in the file (`TEST_HASH`), taken over
+`cts-tester:` followed by the key. To change the key, choose a new one and put
+its fingerprint in `TEST_HASH`:
+
+    node -e 'console.log(require("crypto").createHash("sha256").update("cts-tester:" + process.argv[1]).digest("hex"))' 'the-new-key'
+
+What this protects, honestly: the lock gives students an order to study in; it
+does not keep anything secret, and a determined person can still edit their
+own browser's storage, as with every lock on this site. The key keeps the
+override out of casual reach — a link passed around no longer opens the
+catalog.
+
+The test suite uses the key `local-test`, whose fingerprint is `LOCAL_HASH`.
+It is accepted only on `localhost` and `127.0.0.1`, never on the real site.
 
 ## What is checked
 
-`tools/verify-devmode.mjs`, in the suite: 23 assertions that the parameter
-opens every course, carries across pages, turns off again and removes the
-placeholder — and that a registered student who turns it on loses nothing.
-That last one is mutation-tested: the check fails if the code stops
-recognising a real student.
+`tools/verify-devmode.mjs`, in the suite: 35 assertions that the key opens
+every course, carries across pages, turns off again and removes the
+placeholder; that `?ctstest=on`, `?test=on`, a wrong key, the console without
+the key and the unlock box with a wrong key open nothing; that the key is not
+left in the address bar — and that a registered student who turns it on loses
+nothing. Two of these are mutation-tested: the check fails if the code stops
+recognising a real student, or accepts any key.

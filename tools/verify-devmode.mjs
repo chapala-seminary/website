@@ -20,6 +20,10 @@ import { chromium } from 'playwright';
 const BASE = process.argv[2] || 'http://127.0.0.1:8798';
 const CHROME = process.env.CHROME_PATH;
 const LOCKED_COURSE = 'CTSActsUnit1.html';   // locked until the foundation is done
+// The suite's tester key. Only its fingerprint is in cts-curriculum.js, and it
+// is accepted only on this machine's own addresses; the real key is not in
+// the repository.
+const KEY = 'local-test';
 const CORE = ['CTSOTS', 'CTSNT', 'CTSST', 'CTSEVANGELISM', 'CTSPM', 'CTSCH', 'WISESPEAK'];
 
 const browser = await chromium.launch(CHROME ? { executablePath: CHROME } : {});
@@ -43,7 +47,7 @@ async function session(steps) {
   const out = [];
   for (const step of steps) {
     await page.goto(`${BASE}/${step}`, { waitUntil: 'load' });
-    await page.waitForTimeout(900);          // prepTesterEnv reloads once
+    await page.waitForTimeout(1800);         // key check, then prepTesterEnv, each reload once
     out.push(await page.evaluate(() => {
       const cards = [...document.querySelectorAll('a.course')];
       const s = (() => { try { return JSON.parse(localStorage.getItem('cts_student') || 'null'); } catch { return null; } })();
@@ -57,6 +61,7 @@ async function session(steps) {
         tester: !!(s && s._tester),
         name: s && s.name,
         passed: Object.keys(localStorage).filter((k) => /_passed$/.test(k)).sort(),
+        search: location.search,
       };
     }));
   }
@@ -74,36 +79,65 @@ async function session(steps) {
   ok(!errs.length, 'catalog with no progress: page error', errs[0]);
 }
 
-/* 2. ?ctstest=on opens the catalog, and stays on for the next page without
+/* 1b. The old switch, and a wrong key, open nothing (28 Sept 2026: students
+       were passing "?ctstest=on" around as the fix for a locked catalog). */
+{
+  for (const v of ['on', '1', 'wrong-key']) {
+    const { out: [x] } = await session([`index.html?ctstest=${v}`]);
+    ok(x.flag === null && x.locked > 0 && !x.bar, `ctstest=${v}: tester mode turned on without the key (${x.locked} locked)`);
+    ok(!/ctstest/.test(x.search), `ctstest=${v}: left in the address bar (${x.search})`);
+  }
+  const { out: [t] } = await session(['index.html?test=on']);
+  ok(t.flag === null && t.locked > 0, 'test=on: tester mode turned on without the key');
+  // the console route needs the key too
+  const ctx = await browser.newContext(); const page = await ctx.newPage();
+  await page.goto(`${BASE}/index.html`, { waitUntil: 'load' });
+  const r = await page.evaluate(async () => [await window.CTSCurriculum.testMode(true), await window.CTSCurriculum.testMode('on'), localStorage.getItem('cts_test_mode')]);
+  ok(r[0] === false && r[1] === false && r[2] === null, 'CTSCurriculum.testMode() turned tester mode on without the key');
+  // the unlock box on a locked course page asks for the key and refuses a wrong one
+  await page.evaluate(() => localStorage.clear());
+  await page.goto(`${BASE}/${LOCKED_COURSE}`, { waitUntil: 'load' });
+  const answers = ['on', undefined];           // a wrong key, then "That is not the tester key."
+  page.on('dialog', (d) => d.accept(answers.shift()));
+  await page.click('#cts-keybox'); await page.waitForTimeout(800);
+  ok(await page.evaluate(() => localStorage.getItem('cts_test_mode')) === null, 'the unlock box accepted a wrong key');
+  answers.push(KEY);
+  await page.click('#cts-keybox'); await page.waitForTimeout(1800);
+  ok(await page.evaluate(() => localStorage.getItem('cts_test_mode')) === '1', 'the unlock box refused the right key');
+  await ctx.close();
+}
+
+/* 2. ?ctstest=<key> opens the catalog, and stays on for the next page without
       the parameter -- which is how it is actually used: set it once, then
       click around. */
 {
   const { out: [on, next], errs } =
-    await session(['index.html?ctstest=on', LOCKED_COURSE]);
-  ok(on.flag === '1', 'ctstest=on: the flag was not stored');
-  ok(on.locked === 0, `ctstest=on: ${on.locked} course(s) still locked`);
-  ok(on.bar, 'ctstest=on: no tester bar, so there is no visible way back out');
-  ok(on.tester, 'ctstest=on: no placeholder student seeded — exams will refuse to grade');
+    await session([`index.html?ctstest=${KEY}`, LOCKED_COURSE]);
+  ok(on.flag === '1', 'ctstest=<key>: the flag was not stored');
+  ok(!/ctstest/.test(on.search), `ctstest=<key>: the key was left in the address bar (${on.search})`);
+  ok(on.locked === 0, `ctstest=<key>: ${on.locked} course(s) still locked`);
+  ok(on.bar, 'ctstest=<key>: no tester bar, so there is no visible way back out');
+  ok(on.tester, 'ctstest=<key>: no placeholder student seeded — exams will refuse to grade');
   // the placeholder is graded as M.Div.; the bar has to say so, or a reviewer
   // meets master's rules believing they are a Certificate student
-  ok(/graded as M\.Div\./.test(on.barText), `ctstest=on: the tester bar does not name the graded track — "${on.barText.slice(0, 80)}"`);
-  ok(!next.overlay, `${LOCKED_COURSE} after ctstest=on elsewhere: still covered by the lock overlay`);
+  ok(/graded as M\.Div\./.test(on.barText), `ctstest=<key>: the tester bar does not name the graded track — "${on.barText.slice(0, 80)}"`);
+  ok(!next.overlay, `${LOCKED_COURSE} after ctstest=<key> elsewhere: still covered by the lock overlay`);
   ok(next.bar, `${LOCKED_COURSE}: tester mode did not carry across pages`);
-  ok(!errs.length, 'ctstest=on: page error', errs[0]);
+  ok(!errs.length, 'ctstest=<key>: page error', errs[0]);
 }
 
 /* 3. And on a locked course page directly, which is where someone reviewing a
       specific course would put it. */
 {
-  const { out: [u] } = await session([`${LOCKED_COURSE}?ctstest=on`]);
-  ok(!u.overlay, `${LOCKED_COURSE}?ctstest=on: still covered by the lock overlay`);
-  ok(u.bar, `${LOCKED_COURSE}?ctstest=on: no tester bar`);
+  const { out: [u] } = await session([`${LOCKED_COURSE}?ctstest=${KEY}`]);
+  ok(!u.overlay, `${LOCKED_COURSE}?ctstest=<key>: still covered by the lock overlay`);
+  ok(u.bar, `${LOCKED_COURSE}?ctstest=<key>: no tester bar`);
 }
 
 /* 4. Off again, and the placeholder student goes with it. A tester account
       left behind would show a student someone else's name. */
 {
-  const { out: [, off] } = await session(['index.html?ctstest=on', 'index.html?ctstest=off']);
+  const { out: [, off] } = await session([`index.html?ctstest=${KEY}`, 'index.html?ctstest=off']);
   ok(off.flag === null, 'ctstest=off: the flag is still set');
   ok(off.locked > 0, `ctstest=off: ${off.locked} locked, the catalog stayed open`);
   ok(!off.bar, 'ctstest=off: the tester bar is still showing');
@@ -127,8 +161,8 @@ async function session(steps) {
     localStorage.setItem('cts_ots_u1_mc_passed', '1');
     localStorage.setItem('cts_ots_progress', JSON.stringify({ unit1: true, unit2: true }));
   }, CORE);
-  await page.goto(`${BASE}/index.html?ctstest=on`, { waitUntil: 'load' });
-  await page.waitForTimeout(900);
+  await page.goto(`${BASE}/index.html?ctstest=${KEY}`, { waitUntil: 'load' });
+  await page.waitForTimeout(1800);
   const after = await page.evaluate(() => {
     const s = JSON.parse(localStorage.getItem('cts_student') || 'null');
     return {
@@ -153,7 +187,7 @@ await browser.close();
 
 console.log(`${checks} course-tester assertions`);
 if (!fails.length) {
-  console.log('PASS — ?ctstest=on opens every course, persists, turns off again, ' +
+  console.log('PASS — only the tester key opens every course; it persists, turns off again, ' +
               'and costs a registered student nothing.');
 } else {
   console.log(`FAIL — ${fails.length}:`);

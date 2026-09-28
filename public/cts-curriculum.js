@@ -81,20 +81,40 @@
 
   // ---- tester override -------------------------------------------------
   // Unlocks the whole catalog regardless of progress, for course testers.
-  // Turn on : visit any page with  ?test=on  or  ?ctstest=on   (persists across the site)
-  // Turn off: tap the top "test mode" bar, or visit any page with  ?test=off / ?ctstest=off
-  // The flag lives in this browser only (localStorage); change TEST_PARAM
-  // below if you ever want a different, less guessable switch.
+  // Turn on : visit any page with  ?ctstest=<the tester key>  (persists across the site)
+  // Turn off: tap the top "test mode" bar, or visit any page with  ?ctstest=off
+  //
+  // Until 28 Sept 2026 "?ctstest=on" was enough, and students found it: it was
+  // passed around as the fix for a catalog that would not unlock. Now it takes
+  // the tester key, which is not in this file or anywhere in the repository --
+  // only its SHA-256 fingerprint is (TEST_HASH). The key lives with Robert and
+  // Wayne; to change it, put the fingerprint of a new one here (the recipe is
+  // in docs/course-tester-mode.md). A browser's own storage can still be
+  // edited by someone determined -- that was always true of every lock on this
+  // site -- so this keeps the override out of casual reach, not out of reach.
+  //
+  // The test suite's key ("local-test") works only on this machine's own
+  // addresses, never on the real site.
   var TEST_KEY = "cts_test_mode";
   var TEST_PARAM = "ctstest";
+  var TEST_HASH = "2453cc3bb695bd64e1de77508179daece96cd5ea4fa0940810181aba769d56ab";
+  var LOCAL_HASH = "2c221c0736811fdee36db01b76655bfa1d645c51d5961843f70fb108cc87b4d3";
+  function isLocal() { return /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname || ""); }
   function testActive() { try { return localStorage.getItem(TEST_KEY) === "1"; } catch (e) { return false; } }
-  function applyTestParam() {
-    var q = (location.search || "") + "&" + (location.hash || "");
-    var m = q.match(new RegExp("[?&#](?:" + TEST_PARAM + "|test)=(on|off|1|0)", "i"));
-    if (!m) return;
-    var v = m[1].toLowerCase();
+  // Resolves true when `key` is the tester key. Needs a secure page (https or
+  // this machine), which every page of the site is.
+  function checkKey(key) {
     try {
-      if (v === "on" || v === "1") { localStorage.setItem(TEST_KEY, "1"); return; }
+      var bytes = new TextEncoder().encode("cts-tester:" + String(key || "").trim());
+      return crypto.subtle.digest("SHA-256", bytes).then(function (buf) {
+        var hex = Array.prototype.map.call(new Uint8Array(buf), function (b) { return ("0" + b.toString(16)).slice(-2); }).join("");
+        return hex === TEST_HASH || (isLocal() && hex === LOCAL_HASH);
+      }, function () { return false; });
+    } catch (e) { return Promise.resolve(false); }
+  }
+  function turnOn() { try { localStorage.setItem(TEST_KEY, "1"); } catch (e) {} }
+  function turnOff() {
+    try {
       localStorage.removeItem(TEST_KEY);
       // ?ctstest=off used to clear only the flag, leaving the placeholder
       // "Course Tester" account behind: the catalog locked itself again, but
@@ -106,6 +126,20 @@
       var s = JSON.parse(localStorage.getItem("cts_student") || "null");
       if (s && s._tester) localStorage.removeItem("cts_student");
     } catch (e) {}
+  }
+  function applyTestParam() {
+    var m = /[?&](ctstest|test)=([^&#]*)/i.exec(location.search || "");
+    if (!m) return;
+    var v = decodeURIComponent(m[2].replace(/\+/g, " "));
+    // The key is taken out of the address bar straight away, so it is not
+    // left in the browser's history or in a link someone copies from it.
+    try {
+      var q = (location.search || "").replace(/([?&])(ctstest|test)=[^&#]*&?/i, "$1").replace(/[?&]$/, "");
+      history.replaceState(null, "", location.pathname + q + location.hash);
+    } catch (e) {}
+    if (/^(off|0)$/i.test(v)) { turnOff(); return; }
+    if (m[1].toLowerCase() !== TEST_PARAM || testActive()) return;
+    checkKey(v).then(function (ok) { if (ok) { turnOn(); location.reload(); } });
   }
   applyTestParam();
 
@@ -168,28 +202,26 @@
 
   // turn the tester override on/off (used by the unlock box and the top bar)
   function enableTest()  {
-    // Tester mode must be an intentional action, not a stray tap on the small,
-    // unlabeled unlock control still shown on locked cards/pages for CTS staff.
-    try {
-      if (!confirm("Enable course-tester mode?\n\nThis is for CTS staff testing only and will not affect your saved progress.")) return;
-    } catch (e) {}
-    try { localStorage.setItem(TEST_KEY, "1"); } catch (e) {} location.reload();
+    // The small unlabeled control on a locked course page, for CTS staff: it
+    // asks for the tester key, and does nothing without it.
+    var key = null;
+    try { key = prompt("Course-tester key (CTS staff only):"); } catch (e) {}
+    if (!key) return;
+    checkKey(key).then(function (ok) {
+      if (ok) { turnOn(); location.reload(); }
+      else { try { alert("That is not the tester key."); } catch (e) {} }
+    });
   }
-  function disableTest() {
-    try {
-      localStorage.removeItem(TEST_KEY);
-      var s = JSON.parse(localStorage.getItem("cts_student") || "null");
-      if (s && s._tester) localStorage.removeItem("cts_student");    // drop the placeholder tester, keep real students
-    } catch (e) {}
-    location.reload();
-  }
+  function disableTest() { turnOff(); location.reload(); }
 
   // public helper (used by WiseSpeak, and available for any page)
   window.CTSCurriculum = {
     coreComplete: coreComplete,
     testActive: testActive,
-    testMode: function (on) {                 // console toggle: CTSCurriculum.testMode(true|false)
-      try { if (on === false) localStorage.removeItem(TEST_KEY); else localStorage.setItem(TEST_KEY, "1"); } catch (e) {}
+    // console: CTSCurriculum.testMode("<tester key>") turns it on, testMode(false) off
+    testMode: function (key) {
+      if (key === false) { turnOff(); return Promise.resolve(false); }
+      return checkKey(key).then(function (ok) { if (ok) turnOn(); return ok; });
     },
     done: codes,
     markComplete: function (code, name) {
@@ -276,7 +308,7 @@
       // A second, unlabeled control used to sit under the badge here: a tester
       // unlock for CTS staff. Two controls on a locked card read as a choice a
       // student is meant to make, and one of them was unexplained. Staff turn
-      // tester mode on with ?ctstest=on on any page, or from the unlock box on
+      // tester mode on with ?ctstest=<key> on any page, or from the unlock box on
       // a locked course page, both of which are deliberate rather than a tap
       // away on every card in the catalog.
       a.appendChild(wrap);

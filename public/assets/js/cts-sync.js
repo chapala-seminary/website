@@ -150,6 +150,8 @@
       } : null,
       doneCodes: Array.isArray(done) ? done : [],
       completionTracks: tracks,
+      // the language the student reads in, for notes the seminary sends them
+      lang: (function (l) { return l === 'en' || l === 'es' ? l : null; })(get('cts_lang')),
       progress: progress,
     };
   }
@@ -160,6 +162,7 @@
       s.doneCodes.slice().sort(),
       Object.keys(s.completionTracks).sort().map(function (k) { return k + ':' + s.completionTracks[k]; }),
       s.progress.map(function (p) { return p.course + ':' + p.unit; }).sort(),
+      s.lang,
     ]);
   }
 
@@ -269,6 +272,10 @@
     var snap = snapshot();
     // Nothing to sync until the student has registered in this browser.
     if (!snap.student || !snap.student.name) return Promise.resolve(null);
+    // Nor for the placeholder "Course Tester" that tester mode creates: it is
+    // not a person, and the seminary's roster (and its notes to students who
+    // have gone quiet) must not count it as one.
+    if ((parse(get('cts_student'), {}) || {})._tester) return Promise.resolve(null);
     var d = digest(snap);
     if (!force && d === lastDigest) return Promise.resolve(null);
 
@@ -288,7 +295,7 @@
       : send('/register', {
         name: snap.student.name, email: snap.student.email,
         country: snap.student.country, track: snap.student.track || 'cert', goal: snap.student.goal,
-        heard: snap.student.heard,
+        heard: snap.student.heard, lang: snap.lang,
       }).then(function (r) {
         if (!r || !r.code) return null;
         set(CODE_KEY, r.code);
@@ -298,7 +305,7 @@
     return start.then(function (c) {
       if (!c) return null;
       return send('/sync', { code: c, student: snap.student, progress: snap.progress,
-                             doneCodes: snap.doneCodes, completionTracks: snap.completionTracks });
+                             doneCodes: snap.doneCodes, completionTracks: snap.completionTracks, lang: snap.lang });
     }).then(function (state) {
       if (state) { apply(state); lastDigest = digest(snapshot()); }
       return state;

@@ -85,7 +85,7 @@ fi
 # /CTSActsUnit3.html with a 308 to /CTSActsUnit3 and cannot be told not to --
 # and all 801 pages here end in .html. tools/verify-worker-routing.mjs is the
 # check that keeps it that way; worker/index.js says why at length.
-npx wrangler dev --config "$CONFIG" --port "$PORT" --persist-to "$STATE" \
+npx wrangler dev --config "$CONFIG" --port "$PORT" --persist-to "$STATE" --test-scheduled \
   > "$STATE/dev.log" 2>&1 &
 DEV=$!
 trap 'kill $DEV 2>/dev/null || true; rm -f dist/synctest.html dist/syncdown.html dist/_reference-index.html ./_reference-index.html' EXIT
@@ -160,12 +160,25 @@ node tools/verify-partials.mjs
 
 API_BASE="http://127.0.0.1:$PORT" node test/api.test.mjs
 
+# The student tracker: the staff roster behind Cloudflare Access, and the notes
+# to students who have gone quiet (worker/staff.js, worker/outreach.js).
+API_BASE="http://127.0.0.1:$PORT" node test/staff.test.mjs
+
 # The view the student tracker reads (migrations/0003_tracker.sql) must be
 # there and must answer -- a migration that broke it would fail no API test.
 npx wrangler d1 execute chapala-students --local --persist-to "$STATE" --config "$CONFIG" \
   --command "SELECT student_id, courses_done, foundation_done, masters_done, mdiv_core_done FROM degree_progress LIMIT 1" >/dev/null \
   && echo "PASS — the degree_progress view answers." \
   || { echo "FAIL — the degree_progress view is missing or broken"; exit 1; }
+
+# The daily run itself -- the scheduled event Cloudflare fires -- completes
+# without an error (the notes it would send are tested above, through the
+# staff endpoint that runs the same code).
+curl -sf "http://127.0.0.1:$PORT/__scheduled?cron=0+15+*+*+*" >/dev/null && sleep 2 \
+  && ! grep -q "outreach error\|digest error" "$STATE/dev.log" \
+  && grep -q '^outreach {' "$STATE/dev.log" \
+  && echo "PASS — the daily run for the notes to students completes." \
+  || { echo "FAIL — the daily scheduled run failed:"; grep -E "outreach|digest" "$STATE/dev.log" | tail -5; exit 1; }
 
 # Some environments (the sandboxed Linux VM the desktop app runs commands in,
 # for one) have node and wrangler but not the shared libraries Chromium needs.

@@ -715,6 +715,59 @@ Students also receive their certificate by email once it is registered
 
 ---
 
+### 8v. The catalog unlocks for students from the old site; tester mode needs a key; the student tracker (28 Sept) — 4 scripts, 12 lesson templates, the privacy page and the Preaching page changed
+
+* **Why:** Wayne's tracker of 27 Sept: Paul Cox finished the foundation but the
+  catalog stayed locked until he was given `?ctstest=on`, and Daniel Johnson
+  was given the same link. Wayne also asked for a way to follow each student's
+  progress and write to the ones who go quiet.
+* **The lock (what students see).** On the old site a course was recorded as
+  finished only when its certificate page was opened, and the notice to the
+  seminary was sent at the same moment. Paul's three missing notices (OT
+  Survey, NT Survey, Preaching) are three of the seven foundation courses, so
+  his catalog stayed locked. The new site records a course when its last unit
+  is passed, and the front page catches up any course finished earlier. That
+  catch-up missed two cases, now fixed in `public/assets/js/cts-record.js`:
+  * courses whose progress is still under the old per-course storage names
+    (14 courses, including Evangelism, a foundation course);
+  * the single-page courses, Preaching (a foundation course) and Counseling.
+  A student who passed all nine Preaching units before unit 7 was added (24
+  Sept) keeps the course: it is recorded before the Preaching page renumbers
+  their units (`CTS_WiseSpeak_Preaching.html`). The old-storage table is now
+  in three scripts; `tools/verify-legacy-table.mjs` holds all three copies
+  equal.
+* **Tester mode** (`public/cts-curriculum.js`): `?ctstest=on` no longer does
+  anything. The switch is `?ctstest=<the tester key>`, and the key is not in
+  the repository. The small unlock square on a locked course page asks for the
+  key, and the console route needs it too. The key is removed from the address
+  bar once used. The placeholder "Course Tester" account is no longer uploaded
+  to the seminary's records (`cts-sync.js`). Genesis's certificate page read
+  `?ctstest=on` directly; it now reads the same stored switch. Genesis's 12
+  lesson templates had a hidden banner reading "CTS TEST MODE — ?ctstest=on";
+  it now reads "CTS TEST MODE". See `docs/course-tester-mode.md`.
+* **Privacy page:** the list of what the seminary keeps gains "the language
+  you read the site in, and any notes the seminary has sent you about your
+  progress", and a paragraph on when the seminary may write (both languages).
+* **Student tracker** (no page changes; `docs/student-tracker.md`):
+  * a staff roster behind Cloudflare Access;
+  * a daily note to students who have gone quiet;
+  * a weekly summary to the seminary;
+  * a returning student's history arriving as one completion notice, not one
+    per course;
+  * the sync now carries the student's language.
+  Confirming an email no longer deletes the record of notices sent about that
+  student.
+* **Test:**
+  * `tools/verify-completion.mjs`: an old-site student with the foundation
+    finished and nothing recorded gets all seven courses and an open catalog
+    from one visit to the front page.
+  * `tools/verify-devmode.mjs`: `?ctstest=on`, a wrong key, the console and
+    the unlock square all open nothing without the key.
+  * `test/staff.test.mjs`: the roster and the notes, 78 assertions.
+  * `test/api.test.mjs`: the single notice.
+
+---
+
 ## How to check any of this yourself
 
 ```

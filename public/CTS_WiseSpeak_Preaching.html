@@ -2045,6 +2045,20 @@ function migrateLayout(parsed){
   try{
     if(localStorage.getItem('cts_wisespeak_layout') === WS_LAYOUT) return parsed;
     if(parsed && typeof parsed === 'object' && !Array.isArray(parsed)){
+      // A student who passed all nine units before unit 7 was added finished
+      // the course as it then was: record it before renumbering, so the new
+      // unit does not take back a foundation course (and relock the catalog).
+      let allNine = true;
+      for(let n=1;n<=9;n++) if(!(parsed[n] && parsed[n].passed)) allNine = false;
+      if(allNine){
+        const add = (k,v)=>{ let a; try{ a = JSON.parse(localStorage.getItem(k)||'[]'); }catch(e){ a = []; }
+          if(!Array.isArray(a)) a = []; if(a.indexOf(v)<0){ a.push(v); localStorage.setItem(k, JSON.stringify(a)); } };
+        let isNew = true; try{ isNew = (JSON.parse(localStorage.getItem('cts_done_codes')||'[]')||[]).indexOf('WISESPEAK') < 0; }catch(e){}
+        add('cts_done_codes','WISESPEAK'); add('cts_degree_courses','Preaching');
+        const tr = String(localStorage.getItem('cts_track')||'').toLowerCase();
+        if(isNew && tr==='mdiv') add('cts_mdiv_done_codes','WISESPEAK');
+        if(isNew && (tr==='thm'||tr==='mth')) add('cts_thm_done_codes','WISESPEAK');
+      }
       const moved = {};
       Object.keys(parsed).forEach(k=>{
         const n = +k;
