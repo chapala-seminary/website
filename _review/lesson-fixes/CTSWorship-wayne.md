@@ -1,3 +1,3 @@
 # Worship: questions for Dr. Cook
 
-- **Unit 6, blocks b020 to b024 (Spanish):** the word "coro" is used for two different things. In b020 and b021 it means "choir" ("solo el coro y el clero cantaban"; "Un coro puede dirigir al pueblo a la alabanza"). In b023 and b024 it means "choruses", the short worship songs of the 1960s and later ("trayendo guitarras, coros, y estilos contemporáneos"; "la generación del coro"; "los nuevos coros"). Many Spanish-speaking churches do call these songs "coros" or "coritos", so this may be fine; but a reader could take "la generación del coro" as "the choir generation". Would you like "coritos" or "cantos de alabanza" in b023 and b024?
+Nothing for Dr. Cook in this course.

@@ -91,4 +91,4 @@ if (write) {
     fs.writeFileSync(p, JSON.stringify(data, null, indent) + (raw.endsWith('\n') ? '\n' : ''));
   }
 }
-console.log(`${applied} fix(es) in ${lessons.size} lesson(s) ${write ? 'written' : 'check passed (add --write)'}; ${rehashed} current translation(s) kept current; ${new Set(retranslated.map(([b, l]) => b.id + l)).size} retranslated`);
+console.log(`${applied} fix(es) in ${lessons.size} lesson(s) ${write ? 'written' : 'check passed (add --write)'}; ${rehashed} current translation(s) kept current; ${new Set(retranslated.map(([b, l]) => b.tr[l])).size} retranslated`);
