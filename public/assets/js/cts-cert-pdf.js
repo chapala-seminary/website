@@ -31,10 +31,6 @@
   window.CTS_CERT_PDF = true;
 
   var file = (location.pathname.split('/').pop() || '').toLowerCase();
-  // Courses Dr. Ted Rogers wrote: his signature carries "Course Author", and
-  // Dr. Cook's the role the certificate page gives him (Dr. Cook, 29 Sept 2026:
-  // "the certificate should identify Dr. Ted Rogers as Course Author, not me").
-  var ROGERS_AUTHOR = { 'ctspentcertificate.html': 1 };
   var DEGREE = { 'ctscertificateofministry.html': 'certificate', 'ctsassociatecertificate.html': 'associate',
                  'ctsthmcertificate.html': 'thm', 'ctsmdivcertificate.html': 'mdiv' };
 
@@ -58,42 +54,43 @@
       course: 'in recognition of the successful completion of the course',
       body: 'having faithfully completed the prescribed course of study and passed all required unit examinations, and is hereby awarded this certificate with all the rights and privileges thereunto appertaining.',
       honors: 'With Honors',
-      author: 'Course Author', director: 'Director of Education',
+      author: 'Course Author', director: 'Seminary Director',
       dateOf: 'Date of Completion: ',
       known: 'Be it hereby known that',
       confer: 'having faithfully completed all the requirements prescribed by the Faculty, is hereby admitted to the degree of',
       conferCert: 'having faithfully completed all the requirements prescribed by the Faculty, is hereby awarded the',
       rights: 'with all the rights, honors, and privileges thereunto appertaining.',
       given: 'Given at Chapala, Jalisco — ',
-      professor: 'Professor', semDirector: 'Seminary Director', founder: 'Founder & Instructor',
+      professor: 'Professor', semDirector: 'Seminary Director', founder: 'Founder',
       verify: 'Verification code: ',
       button: 'Download PDF', other: 'Descargar en español', busy: 'Preparing…',
       failed: 'The PDF could not be made on this device. Use Print / Save instead.'
     },
     es: {
       school: 'Seminario Teológico de Chapala',
-      awarded: 'Este certificado se otorga a',
-      course: 'en reconocimiento de haber completado satisfactoriamente el curso',
-      body: 'habiendo completado fielmente el plan de estudios prescrito y aprobado todos los exámenes de unidad requeridos, se le otorga este certificado con todos los derechos y privilegios que le corresponden.',
+      awarded: 'Se otorga este certificado a',
+      course: 'en reconocimiento por haber completado satisfactoriamente el curso',
+      body: 'por haber cumplido fielmente el programa de estudios prescrito y aprobado todos los exámenes de unidad requeridos, se le otorga este certificado con todos los derechos y privilegios que le corresponden.',
       honors: 'Con Honores',
-      author: 'Autor del Curso', director: 'Director de Educación',
+      author: 'Autor del curso', director: 'Director del Seminario',
       dateOf: 'Fecha de finalización: ',
-      known: 'Sépase por la presente que',
+      known: 'Por la presente se hace constar que',
       confer: 'habiendo cumplido fielmente todos los requisitos prescritos por la Facultad, se le confiere el grado de',
       conferCert: 'habiendo cumplido fielmente todos los requisitos prescritos por la Facultad, se le otorga el',
       rights: 'con todos los derechos, honores y privilegios que le corresponden.',
       given: 'Otorgado en Chapala, Jalisco — ',
-      professor: 'Profesor', semDirector: 'Director del Seminario', founder: 'Fundador e Instructor',
+      professor: 'Profesor', semDirector: 'Director del Seminario', founder: 'Fundador',
       verify: 'Código de verificación: ',
       button: 'Descargar PDF', other: 'Download in English', busy: 'Preparando…',
       failed: 'No se pudo crear el PDF en este dispositivo. Use Imprimir / Guardar.'
     }
   };
+  // as the Certificate Maker words the band: "<program> Track" / "Programa: <program>"
   var TRACK = {
-    certificate: { en: 'Certificate Track', es: 'Trayecto de Certificado' },
-    associate: { en: 'Associate of Divinity Track', es: 'Trayecto de Asociado en Divinidad' },
-    thm: { en: 'Master of Theology Track', es: 'Trayecto de Maestría en Teología' },
-    mdiv: { en: 'Master of Divinity Track', es: 'Trayecto de Maestría en Divinidad' }
+    certificate: { en: 'Certificate of Ministry Track', es: 'Programa: Certificado de Ministerio' },
+    associate: { en: 'Associate of Divinity Track', es: 'Programa: Asociado en Divinidad' },
+    thm: { en: 'Master of Theology Track', es: 'Programa: Maestría en Teología' },
+    mdiv: { en: 'Master of Divinity Track', es: 'Programa: Maestría en Divinidad' }
   };
   var DEGREE_NAME = {
     certificate: { en: 'Certificate of Ministry', es: 'Certificado de Ministerio', abbr: 'C.Min.' },
@@ -197,15 +194,25 @@
     doc.text(text, W2 - w / 2, y, { charSpace: space });
   }
   function signature(doc, img, cx, y, name, role, lang) {
-    var h = 34, w = img.naturalWidth / img.naturalHeight * h;
-    if (w > 170) { w = 170; h = w * img.naturalHeight / img.naturalWidth; }
-    doc.addImage(img, 'PNG', cx - w / 2, y - h, w, h);
+    if (img) {
+      var h = 34, w = img.naturalWidth / img.naturalHeight * h;
+      if (w > 170) { w = 170; h = w * img.naturalHeight / img.naturalWidth; }
+      doc.addImage(img, 'PNG', cx - w / 2, y - h, w, h);
+    } else {                            // no signature on file: the name, in a script hand
+      doc.setFont('times', 'italic'); doc.setFontSize(24); doc.setTextColor(31, 36, 51);
+      doc.text(name.replace(/,.*$/, ''), cx, y - 6, { align: 'center' });
+    }
     doc.setDrawColor.apply(doc, INK); doc.setLineWidth(0.8); doc.line(cx - 95, y + 2, cx + 95, y + 2);
     doc.setFont('times', 'bolditalic'); doc.setFontSize(13); doc.setTextColor.apply(doc, NAVY);
     doc.text(name, cx, y + 17, { align: 'center' });
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(7.5); doc.setTextColor.apply(doc, INK);
-    var r = role.toUpperCase(), rw = doc.getTextWidth(r) + 0.8 * (r.length - 1);
-    doc.text(r, cx - rw / 2, y + 29, { charSpace: 0.8 });
+    var r = role.toUpperCase(), size = 7.5, space = 0.8, rw;
+    doc.setFont('helvetica', 'bold'); doc.setTextColor.apply(doc, INK);
+    for (;;) {                          // "AUTOR DEL CURSO · DIRECTOR DEL SEMINARIO" must fit the line
+      doc.setFontSize(size); rw = doc.getTextWidth(r) + space * (r.length - 1);
+      if (rw <= 200 || size <= 5.5) break;
+      size -= 0.25; space = Math.max(0.3, space - 0.1);
+    }
+    doc.text(r, cx - rw / 2, y + 29, { charSpace: space });
     doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); doc.setTextColor.apply(doc, BLUE);
     doc.text(W[lang].school, cx, y + 40, { align: 'center' });
   }
@@ -226,10 +233,25 @@
     doc.setDrawColor.apply(doc, GOLD); doc.setLineWidth(1.6); doc.rect(36, 36, Wp - 72, Hp - 72, 'S');
     return { Wp: Wp, Hp: Hp };
   }
-  function footer(doc, lang, sig, y, dateLine, vc, roles) {
-    signature(doc, sig.cook, 206, y, 'Wayne Cook, Th.D.', roles[0], lang);
+  /* Who signs a course certificate, as the Certificate Maker lays it out: the
+     course's author on the left, the Seminary Director on the right. When
+     Dr. Rogers wrote the course, he signs on the left as author and director,
+     and Dr. Cook on the right as founder, so no one signs twice. Two authors
+     (Romans, Practical Theology) both sign as Course Author. An author who is
+     neither of them (Andi Cook, Glenda Rogers) is printed by name, in script,
+     with the Director on the right. */
+  var PEOPLE = { cook: 'Wayne Cook, Th.D.', rogers: 'Ted Rogers, D.Min.' };
+  function signers(authors, w) {
+    var a = authors[0], dirRole = w.author + ' · ' + w.director;
+    if (authors.length > 1 && authors.indexOf('rogers') > 0)
+      return [{ who: a, role: w.author }, { who: 'rogers', role: dirRole }];
+    if (a === 'rogers') return [{ who: 'rogers', role: dirRole }, { who: 'cook', role: w.founder }];
+    return [{ who: a, role: w.author }, { who: 'rogers', role: w.director }];
+  }
+  function footer(doc, lang, sig, y, dateLine, vc, signed) {
+    signature(doc, sig[signed[0].who], 206, y, PEOPLE[signed[0].who] || signed[0].who, signed[0].role, lang);
     seal(doc, doc.internal.pageSize.getWidth() / 2, y - 6);
-    signature(doc, sig.rogers, 586, y, 'Ted Rogers, D.Min.', roles[1], lang);
+    signature(doc, sig[signed[1].who], 586, y, PEOPLE[signed[1].who] || signed[1].who, signed[1].role, lang);
     doc.setFont('times', 'normal'); doc.setFontSize(10.5); doc.setTextColor.apply(doc, INK);
     centre(doc, dateLine, y + 62);
     if (vc) {
@@ -274,8 +296,8 @@
     doc.setTextColor.apply(doc, INK); doc.setFont('times', 'normal'); doc.setFontSize(11);
     var lines = doc.splitTextToSize(w.body, 500);
     doc.text(lines, f.Wp / 2, y + 42, { align: 'center', lineHeightFactor: 1.4 });
-    footer(doc, lang, sig, 466, w.dateOf + dateText(lang, when), verifyCode(),
-      ROGERS_AUTHOR[file] ? [w.founder, w.author] : [w.author, w.director]);
+    var byline = (names[file] && names[file].authors) || ['cook'];
+    footer(doc, lang, sig, 466, w.dateOf + dateText(lang, when), verifyCode(), signers(byline, w));
   }
 
   function degreePdf(doc, lang, sig, who, when) {
@@ -308,7 +330,8 @@
     }
     doc.setTextColor(68, 68, 68); doc.setFont('times', 'italic'); doc.setFontSize(11.5);
     centre(doc, w.rights, y + 4);
-    footer(doc, lang, sig, 466, w.given + dateText(lang, when), verifyCode(), [w.professor, w.semDirector]);
+    footer(doc, lang, sig, 466, w.given + dateText(lang, when), verifyCode(),
+      [{ who: 'cook', role: w.professor }, { who: 'rogers', role: w.semDirector }]);
     doc.setTextColor.apply(doc, GOLD); doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5);
     spaced(doc, 'SOLI DEO GLORIA', 56 + 0, 3);
   }

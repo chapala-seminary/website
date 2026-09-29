@@ -817,6 +817,60 @@ Students also receive their certificate by email once it is registered
   `public/CTSCounseling.html`; `public/assets/js/cts-cert-pdf.js`. The
   baselines were updated for exactly these pages.
 
+---
+
+### 8x. Course names and authors from the Certificate Maker (29 Sept) — the PDF, 18 catalog names, 34 certificate pages
+
+* **Why:** Dr. Cook asked that the site's certificates use the names in the
+  seminary's current, bilingual Certificate Maker, and that the website
+  catalog use the same terms (e.g. "Ministerio Pastoral", not "Ministerios
+  Pastorales"). Robert confirmed the co-authors on 29 Sept.
+* **Source:** the Maker's course list is copied into
+  `src/data/certificate-courses.json`: English name, Spanish name and
+  author(s) for 44 courses. The authors are:
+  * Pentateuch: Dr. Ted Rogers;
+  * Christian Education: Andi Cook;
+  * Romans and Practical Theology: Dr. Cook and Dr. Rogers;
+  * Ruth and Esther: Glenda Rogers;
+  * every other course: Dr. Cook.
+
+  Counseling Situations is not in the Maker, so it keeps the catalog's name.
+  "Parables of the Bible" is in the Maker but not on the site.
+* **PDF certificate** (`cts-cert-pdf.js`, names from `cts-cert-names.js`, now
+  written from that file):
+  * Names are the Maker's in both languages.
+  * Signatures follow the Maker: the course's author on the left as Course
+    Author, the Seminary Director on the right.
+  * On the Pentateuch, Dr. Rogers signs as "Course Author · Seminary Director"
+    and Dr. Cook as "Founder".
+  * On Romans and Practical Theology, both sign as Course Author.
+  * Andi Cook and Glenda Rogers have no signature on file, so their names are
+    printed in a script hand.
+  * The Spanish wording is the Maker's: "Se otorga este certificado a",
+    "Programa: Certificado de Ministerio", "Por la presente se hace constar
+    que", and the Maker's body text.
+  * The English track band reads "Certificate of Ministry Track".
+  * The director signs as "Seminary Director", the Maker's default, where it
+    was "Director of Education".
+* **Catalog** (`src/content/courses`): 18 Spanish names now follow the Maker.
+  Among them: "Hechos: Curso Intensivo" and the other intensives, "Personajes
+  Bíblicos", "Adoración Cristiana", "Ministerio Pastoral", "Pentateuco", "La
+  Doctrina del Espíritu Santo" and "Ética Pastoral y Cristiana".
+  * Preaching is "Predicación": the Maker's "(WiseSpeak)" is left off the
+    course's own name.
+  * The English names are unchanged.
+  * `tools/verify-catalog.mjs` lists the 18 renames and applies exactly those
+    to the hand-written reference, so any other change still fails.
+* **Certificate pages:**
+  * Where a page names its course in Spanish, it now uses the Maker's name:
+    title, heading, locked-page message, and the M.Div. and Th.M. diplomas'
+    course checklists. That covers 34 pages across 17 courses.
+  * "Profesor de Ministerios Pastorales" is Dr. Cook's title as a professor,
+    not a course name, and is left as is.
+* **Test:** `tools/verify-cert-pdf.mjs`, 112 assertions, now including who
+  signs for a course by Dr. Cook, the Pentateuch in both languages, Romans,
+  Ruth and Esther, and Christian Education.
+
 ## How to check any of this yourself
 
 ```
