@@ -70,7 +70,14 @@ for (const f of fs.readdirSync('public').sort()) {
     if (explicit) name = unescape(explicit[1]).trim();
     else {
       let t = unescape((/<title>([^<]*)<\/title>/.exec(h) || [, ''])[1]).replace(/^\s*CTS\s+/i, '');
-      t = t.split(/[\u2014\u2013\-(]/)[0];
+      // "CTS Romans | Certificate of Completion" and "Chapala Theological
+      // Seminary — Counseling Situations · Certificate": the course is the part
+      // before the separator, unless that part is the seminary's own name. The
+      // old certificate pages cut only at a dash, which is how "Romans |"
+      // reached the seminary's count (Dr. Cook's review, 29 Sept 2026). Courses
+      // are matched by code everywhere, never by this name; it is for reading.
+      const parts = t.split(/[\u2014\u2013\-(|\u00b7]/).map((x) => x.trim()).filter(Boolean);
+      t = /^chapala theological seminary$/i.test(parts[0] || '') && parts[1] ? parts[1] : (parts[0] || '');
       t = t.replace(/certificate.*$/i, '').trim();
       name = t || f.replace(/\.html$/, '');
     }

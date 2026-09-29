@@ -119,8 +119,8 @@ img.cts-sig { max-height:50px; width:auto; max-width:92%; display:block; margin:
   <div class="card" id="progressCard">
     <h1><span class="lang-en">Associate of Divinity</span><span class="lang-es">Asociado en Divinidad</span></h1>
     <p class="lead">
-      <span class="lang-en">The <strong>Associate of Divinity</strong> is awarded to students who complete <strong>25 courses</strong> &mdash; the 7 foundation courses plus 18 of their choosing &mdash; passing the multiple-choice review and the ten short answers in every unit. Your progress, saved under your student code, is shown below.</span>
-      <span class="lang-es">El <strong>Asociado en Divinidad</strong> se otorga a los estudiantes que completan <strong>25 cursos</strong> &mdash; los 7 cursos de fundamento m&aacute;s 18 de su elecci&oacute;n &mdash; aprobando el repaso de opci&oacute;n m&uacute;ltiple y las diez respuestas breves de cada unidad. A continuaci&oacute;n se muestra su progreso, guardado bajo su c&oacute;digo de estudiante.</span>
+      <span class="lang-en">The <strong>Associate of Divinity</strong> is awarded to students who complete <strong>25 courses</strong> &mdash; the 7 foundation courses plus 18 of their choosing &mdash; passing the multiple-choice questions and the ten fill-in-the-blank questions in every unit (9 of 10). Courses finished on the Certificate track count toward the Certificate of Ministry, not the Associate. Your progress, saved under your student code, is shown below.</span>
+      <span class="lang-es">El <strong>Asociado en Divinidad</strong> se otorga a los estudiantes que completan <strong>25 cursos</strong> &mdash; los 7 cursos de fundamento m&aacute;s 18 de su elecci&oacute;n &mdash; aprobando las preguntas de opci&oacute;n m&uacute;ltiple y las diez preguntas de completar el espacio de cada unidad (9 de 10). Los cursos terminados en el programa de Certificado cuentan para el Certificado de Ministerio, no para el Asociado. A continuaci&oacute;n se muestra su progreso, guardado bajo su c&oacute;digo de estudiante.</span>
     </p>
     <div class="progress-wrap"><div class="progress-bar" id="bar"></div></div>
     <div class="count-line" id="countLine"></div>
@@ -178,6 +178,8 @@ img.cts-sig { max-height:50px; width:auto; max-width:92%; display:block; margin:
 </div>
 
 <script src="cts-emblem.js" defer></script>
+<script src="assets/js/cts-cert-names.js"></script>
+<script src="assets/js/cts-degrees.js"></script>
 <script>
 (function () {
   "use strict";
@@ -189,17 +191,16 @@ img.cts-sig { max-height:50px; width:auto; max-width:92%; display:block; margin:
   function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
   function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
 
-  // distinct completed-course roster (written by cts-completion.js on each course completion)
-  var roster = [];
-  try { roster = JSON.parse(lsGet("cts_degree_courses") || "[]"); } catch(e){ roster = []; }
-  if (!Array.isArray(roster)) roster = [];
-  var seen = {}, courses = [];
-  for (var i = 0; i < roster.length; i++) {
-    var k = String(roster[i] || "").trim();
-    if (k && !seen[k.toLowerCase()]) { seen[k.toLowerCase()] = 1; courses.push(k); }
-  }
-  var count = courses.length;
-  var earned = count >= REQUIRED;
+  // The courses that count, by code and at the level each was completed on,
+  // by the seminary's own rules (assets/js/cts-degrees.js, the same as the
+  // Worker's). Until 29 Sept 2026 this counted course names of any level.
+  var st = window.CTSDegrees.status("associate");
+  var NAMES = window.CTS_COURSE_NAMES || {};
+  var courses = Object.keys(st.have).map(function(c){ return NAMES[c] || { en: c, es: c }; });
+  var count = st.count;
+  var FOUNDATION = st.core;
+  var foundationDone = st.coreDone;
+  var earned = st.earned;
 
   var student = null;
   try { student = JSON.parse(lsGet("cts_student") || "null"); } catch(e){ student = null; }
@@ -253,14 +254,21 @@ img.cts-sig { max-height:50px; width:auto; max-width:92%; display:block; margin:
     var remain = Math.max(REQUIRED - count, 0);
     var msEn = (count >= 12 ? "Certificate of Ministry milestone reached (12 courses). " : "") + remain + " more to earn the Associate of Divinity.";
     var msEs = (count >= 12 ? "Hito de Certificado en Ministerio alcanzado (12 cursos). " : "") + remain + " m\u00e1s para obtener el Asociado en Divinidad.";
+    if (st.missing.length) {
+      msEn += " Foundation courses still needed: " + st.missing.map(function(c){ return (NAMES[c] || {en:c}).en; }).join(", ") + ".";
+      msEs += " Cursos de fundamento pendientes: " + st.missing.map(function(c){ return (NAMES[c] || {es:c}).es; }).join(", ") + ".";
+    }
     document.getElementById("milestone").innerHTML =
       '<span class="lang-en">' + msEn + '</span><span class="lang-es">' + msEs + '</span>';
     if (count > 0) {
       show("courseListWrap");
       var ul = document.getElementById("courseList");
-      courses.sort(function(a,b){ return a.localeCompare(b); });
+      courses.sort(function(a,b){ return a.en.localeCompare(b.en); });
       for (var j = 0; j < courses.length; j++) {
-        var li = document.createElement("li"); li.textContent = courses[j]; ul.appendChild(li);
+        var li = document.createElement("li");
+        li.innerHTML = '<span class="lang-en"></span><span class="lang-es"></span>';
+        li.firstChild.textContent = courses[j].en; li.lastChild.textContent = courses[j].es;
+        ul.appendChild(li);
       }
     } else {
       show("noneMsg");

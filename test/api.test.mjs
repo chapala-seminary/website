@@ -82,6 +82,26 @@ ok(told(s.body).join(',') === 'course:CTSNT:sent',
 const repeat = await jpost('/api/sync', { code: CODE, progress: [], doneCodes: ['CTSOTS', 'CTSNT'] });
 ok(told(repeat.body).length === 0, `re-reporting both courses from another device tells the seminary nothing (${told(repeat.body)})`);
 
+// A course's level only rises: Associate recorded, a stale device's
+// Certificate report does not lower it, a master's report raises it, and the
+// Associate is not awarded from Certificate-level work.
+{
+  const r = await jpost('/api/register', { name: 'Level Student', track: 'cert', goal: 'assoc' });
+  const c = r.body.code;
+  let st = await jpost('/api/sync', { code: c, progress: [], doneCodes: ['CTSACTS'], completionTracks: { CTSACTS: 'assoc' } });
+  const lv = (s) => (s.body.completions.find((x) => x.code === 'CTSACTS') || {}).track;
+  ok(lv(st) === 'assoc', `an Associate-level completion is recorded as such (${lv(st)})`);
+  st = await jpost('/api/sync', { code: c, progress: [], doneCodes: ['CTSACTS'], completionTracks: {} });
+  ok(lv(st) === 'assoc', `a device reporting it at Certificate level does not lower it (${lv(st)})`);
+  st = await jpost('/api/sync', { code: c, progress: [], doneCodes: ['CTSACTS'], completionTracks: { CTSACTS: 'mdiv' } });
+  ok(lv(st) === 'mdiv', `a master's-level report raises it (${lv(st)})`);
+  const cert = await jpost('/api/register', { name: 'Cert Twentyfive', track: 'cert' });
+  const codes = Object.keys((await jget('/api/catalog')).body.completions).slice(0, 44);
+  const all = await jpost('/api/sync', { code: cert.body.code, progress: [], doneCodes: codes, completionTracks: {} });
+  ok(all.body.degrees.certificate === true && all.body.degrees.associate === false,
+    `44 Certificate-level courses make a Certificate of Ministry, not an Associate (${JSON.stringify(all.body.degrees)})`);
+}
+
 // A returning student's first visit brings everything from the old site at
 // once: one email for all of it, not one per course -- but each course is
 // still recorded as told, so none is announced again.
@@ -255,7 +275,7 @@ await jpost('/api/sync', { code: CODE, doneCodes: FOUNDATION });
 d = await jpost('/api/certificate', { code: CODE, level: 'certificate', title: 'Certificate of Ministry' });
 ok(d.status === 201, `foundation + 5 electives earns the Certificate of Ministry (${d.status}: ${d.body?.error})`);
 d = await jpost('/api/certificate', { code: CODE, level: 'associate', title: 'Associate of Divinity' });
-ok(d.status === 409 && /of 25 courses/.test(d.body?.error || ''), `19 courses do not earn the Associate (${d.status}: ${d.body?.error})`);
+ok(d.status === 409 && /of 25 Associate-level courses/.test(d.body?.error || ''), `19 courses do not earn the Associate (${d.status}: ${d.body?.error})`);
 
 // Th.M.: 12 including the foundation, on a master's track (this student is mdiv)
 d = await jpost('/api/certificate', { code: CODE, level: 'thm', title: 'Master of Theology' });
@@ -277,8 +297,13 @@ await jpost('/api/sync', { code: certReg.body.code, doneCodes: [...MDIV_CORE, ..
 d = await jpost('/api/certificate', { code: certReg.body.code, level: 'mdiv', title: 'Master of Divinity' });
 ok(d.status === 409 && /0 of 30 master's-level/.test(d.body?.error || ''),
   `a certificate-track student is refused the M.Div. (${d.status}: ${d.body?.error})`);
+// Nor the Associate: Certificate-level work does not count toward it (Dr.
+// Cook's review, 29 Sept 2026). It does make a Certificate of Ministry.
 d = await jpost('/api/certificate', { code: certReg.body.code, level: 'associate', title: 'Associate of Divinity' });
-ok(d.status === 201, `and gets the Associate for the same 30 courses (${d.status}: ${d.body?.error})`);
+ok(d.status === 409 && /0 of 25 Associate-level/.test(d.body?.error || ''),
+  `nor the Associate for the same 30 Certificate-level courses (${d.status}: ${d.body?.error})`);
+d = await jpost('/api/certificate', { code: certReg.body.code, level: 'certificate', title: 'Certificate of Ministry' });
+ok(d.status === 201, `but they earn the Certificate of Ministry (${d.status}: ${d.body?.error})`);
 
 // ...and switching to the M.Div. afterwards does not turn certificate-track
 // completions into master's ones: the track a completion was earned on is
@@ -289,7 +314,7 @@ const byCode = Object.fromEntries((st.body?.completions || []).map(c => [c.code,
 ok(byCode.CTSOTS?.track === 'cert' && byCode.CTSJOHN?.track === 'mdiv',
   `completions keep the track they were earned on (CTSOTS ${byCode.CTSOTS?.track}, CTSJOHN ${byCode.CTSJOHN?.track})`);
 ok(byCode.CTSOTS?.name === 'Old Testament Survey', `a completion carries its course name, got ${byCode.CTSOTS?.name}`);
-ok(st.body?.degrees?.associate === true && st.body?.degrees?.mdiv === false,
+ok(st.body?.degrees?.certificate === true && st.body?.degrees?.associate === false && st.body?.degrees?.mdiv === false,
   `the state says which degrees the record supports, got ${JSON.stringify(st.body?.degrees)}`);
 d = await jpost('/api/certificate', { code: certReg.body.code, level: 'mdiv', title: 'Master of Divinity' });
 ok(d.status === 409 && /1 of 30 master's-level/.test(d.body?.error || ''),

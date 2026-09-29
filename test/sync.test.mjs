@@ -92,7 +92,8 @@ ok(b.done.join(',') === 'CTSOTS,CTSROMANS', `course completions came back, got $
 ok(b.name === 'Ana Ruiz', 'and so did their name');
 ok(b.heard === 'church', `and how they heard of the seminary, got ${b.heard}`);
 ok(b.mdivDone.join(',') === 'CTSROMANS', `the master's-track list came back with only the course earned there, got ${b.mdivDone}`);
-ok(b.names.join('|') === 'Old Testament Survey|Romans |', `the course-name roster the degree pages count came back, got ${JSON.stringify(b.names)}`);
+// "Romans", no longer "Romans |" (29 Sept): names are for reading; every count is by code
+ok(b.names.join('|') === 'Old Testament Survey|Romans', `the course-name roster the degree pages count came back, got ${JSON.stringify(b.names)}`);
 ok(b.code === a.code, 'the second device now holds the same student code');
 
 // The restored device must also be able to see the progress grid, which the

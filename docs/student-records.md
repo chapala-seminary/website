@@ -116,7 +116,7 @@ tables except the Worker.
 | `course_completions` | every course finished: `code` (e.g. `CTSOTS`), `track` it was earned on, `completed_at` |
 | `certificates` | every certificate the site has issued a verification code for (course and degree level), with `revoked_at` |
 | `notifications` | one row per notice the Worker sent the seminary: `kind` (`course` \| `certificate`), `code` (completion code or verification code), `status` (`sent` \| `failed`), `attempts`, `error`, `created_at`, `sent_at` |
-| `degree_progress` | **the view to read first**: per student, `courses_done`, `foundation_done` (of 7), `masters_done`, `mdiv_core_done` (of 20), `last_completion_at`. Certificate of Ministry = 12 courses incl. all 7 foundation; Associate = 25 incl. foundation; Th.M. = 12 master's-level incl. foundation; M.Div. = 30 master's-level incl. the 20-course core. |
+| `degree_progress` | **the view to read first**: per student, `courses_done`, `foundation_done` (of 7), `assoc_done` (Associate level or higher, since 0007), `masters_done`, `mdiv_core_done` (of 20), `last_completion_at`. Certificate of Ministry = 12 courses incl. all 7 foundation; Associate = 25 Associate-level (or higher) incl. foundation; Th.M. = 12 master's-level incl. foundation; M.Div. = 30 master's-level incl. the 20-course core. |
 
 Course codes map to names through `GET /api/catalog` (`completions.CODE.name`);
 the names are exactly what the certificate pages write, warts included

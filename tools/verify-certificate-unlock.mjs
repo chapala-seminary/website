@@ -95,9 +95,10 @@ for (const [slug, c] of Object.entries(catalog.courses)) {
 }
 
 /* ---- the degree pages ----------------------------------------------------
- * They count what the course certificates recorded: cts_degree_courses (course
- * names, for the Certificate of Ministry and the Associate) and the master's
- * code lists (for the Th.M. and M.Div.). Seed exactly what a finished student
+ * They count completed course codes at the level each was completed on (29
+ * Sept): every list for the Certificate of Ministry, the Associate list or
+ * higher for the Associate, the master's lists for the Th.M. and M.Div.
+ * (tools/verify-degrees.mjs tests the levels). Seed exactly what a finished student
  * would hold and see that each diploma unlocks -- and, one course short, does
  * not. */
 const names = (codes) => codes.map((c) => catalog.completions[c]?.name).filter(Boolean);
@@ -107,10 +108,11 @@ const MDIV_CORE = [...FOUNDATION, 'CTSHERMENEUTICS', 'CTSLA', 'CTSGENESIS', 'CTS
 const allCodes = Object.keys(catalog.completions);
 const electives = (n, avoid) => allCodes.filter((c) => !avoid.includes(c)).slice(0, n);
 const student = JSON.stringify({ name: 'Prueba Test', track: 'mdiv' });
-const degreeSeed = (codes, masters) => ({
+const degreeSeed = (codes, level) => ({
   cts_student: student, cts_track: 'mdiv',
   cts_done_codes: JSON.stringify(codes), cts_degree_courses: JSON.stringify(names(codes)),
-  cts_mdiv_done_codes: JSON.stringify(masters ? codes : []), cts_thm_done_codes: JSON.stringify(masters ? codes : []),
+  cts_assoc_done_codes: JSON.stringify(level === 'assoc' ? codes : []),
+  cts_mdiv_done_codes: JSON.stringify(level === 'masters' ? codes : []), cts_thm_done_codes: JSON.stringify(level === 'masters' ? codes : []),
 });
 async function openDegree(file, seed) {
   const ctx = await browser.newContext();
@@ -131,18 +133,18 @@ async function openDegree(file, seed) {
   return { ...r, errs };
 }
 const DEGREES = [
-  ['CTSCertificateOfMinistry.html', [...FOUNDATION, ...electives(5, FOUNDATION)], false],
-  ['CTSAssociateCertificate.html', [...FOUNDATION, ...electives(18, FOUNDATION)], false],
-  ['CTSThMCertificate.html', [...FOUNDATION, ...electives(5, FOUNDATION)], true],
-  ['CTSMDivCertificate.html', [...MDIV_CORE, ...electives(10, MDIV_CORE)], true],
+  ['CTSCertificateOfMinistry.html', [...FOUNDATION, ...electives(5, FOUNDATION)], 'cert'],
+  ['CTSAssociateCertificate.html', [...FOUNDATION, ...electives(18, FOUNDATION)], 'assoc'],
+  ['CTSThMCertificate.html', [...FOUNDATION, ...electives(5, FOUNDATION)], 'masters'],
+  ['CTSMDivCertificate.html', [...MDIV_CORE, ...electives(10, MDIV_CORE)], 'masters'],
 ];
-for (const [file, codes, masters] of DEGREES) {
-  const yes = await openDegree(file, degreeSeed(codes, masters));
+for (const [file, codes, level] of DEGREES) {
+  const yes = await openDegree(file, degreeSeed(codes, level));
   ok(yes.errs.length === 0, `${file}: page errors: ${yes.errs.slice(0, 2).join(' | ')}`);
   // the master's diplomas are shown only in print; the enabled print button is the unlock
   ok(yes.print, `${file}: does not unlock a printable diploma for a student with the ${codes.length} required courses (diploma ${yes.diploma}, print ${yes.print})`);
   ok(yes.pdf, `${file}: the unlocked diploma has no Download PDF button`);
-  const short = await openDegree(file, degreeSeed(codes.slice(0, -1), masters));
+  const short = await openDegree(file, degreeSeed(codes.slice(0, -1), level));
   ok(!short.print && !short.diploma, `${file}: unlocks the diploma one course short`);
   ok(!short.pdf, `${file}: offers a PDF download one course short`);
 }

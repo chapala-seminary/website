@@ -49,11 +49,27 @@ for (const f of fs.readdirSync('public').filter((f) => /certificate/i.test(f) &&
 }
 if (problems.length) { problems.forEach((p) => console.error('  ' + p)); process.exit(1); }
 
+// Every course by its completion code, for the diploma pages' lists of the
+// courses that count (cts-degrees.js counts by code, and names them from this).
+const cat = JSON.parse(fs.readFileSync('worker/catalog.json', 'utf8'));
+const byCode = {};
+for (const [code, c] of Object.entries(cat.completions)) {
+  const slug = Object.keys(cat.courses).find((k) => cat.courses[k].code === code);
+  const single = { WISESPEAK: 'wisespeak', COUNSELING: 'counseling', STORYTEL: 'narrative', ETHICS: 'ethics' }[code];
+  const m = MAKER[slug] || MAKER[single];
+  const fallback = Object.values(courses).find((x) => (x.code || '').toUpperCase() === code || `CTS${(x.code || '').toUpperCase().replace(/^CTS/, '')}` === code);
+  byCode[code] = m ? { en: m.en, es: m.es }
+    : fallback ? { en: fallback.title.en, es: fallback.title.es }
+    : { en: c.name.replace(/\s*\|\s*$/, ''), es: c.name.replace(/\s*\|\s*$/, '') };
+}
+
 const text = '/* The course name on each course certificate, English and Spanish, and its\n' +
   '   author(s), for the downloadable PDF (cts-cert-pdf.js). Written by\n' +
   '   tools/build-cert-names.mjs from src/data/certificate-courses.json (the\n' +
   '   Certificate Maker\'s list) -- change that and re-run it. */\n' +
-  'window.CTS_CERT_NAMES = ' + JSON.stringify(names, null, 1) + ';\n';
+  'window.CTS_CERT_NAMES = ' + JSON.stringify(names, null, 1) + ';\n' +
+  '/* Every course by completion code, for the diploma pages (cts-degrees.js). */\n' +
+  'window.CTS_COURSE_NAMES = ' + JSON.stringify(byCode, null, 1) + ';\n';
 
 if (process.argv.includes('--check')) {
   const now = fs.existsSync(OUT) ? fs.readFileSync(OUT, 'utf8') : '';

@@ -1,6 +1,6 @@
 # Completion notices from the Google Apps Script (not needed since 25 Sept)
 
-> **Superseded the same day it was written.** The Worker now sends the notice itself (`worker/notify.js`, `docs/student-records.md` §5): one email per completion and per certificate to info@chapalaseminary.org, recorded in the `notifications` table. The Apps Script call in `cts-record.js` only keeps the old sheet updated. This page stays as the fallback if the Worker path is ever switched off.
+> **Superseded the same day it was written.** The Worker now sends the notice itself (`worker/notify.js`, `docs/student-records.md` §5): one email per completion and per certificate to info@chapalaseminary.org, recorded in the `notifications` table. Since 29 Sept the browser no longer calls the Apps Script at all (Dr. Cook's review: one notice only); the old Sheet keeps its 26 rows and receives nothing new. This page is kept as a record.
 
 _25 Sept 2026. Wayne's audit, item 5(a). Interim only: the plan is for the Cloudflare Worker to send this notice as part of one server-side completion event and to record it in D1 (see `claude/server-side-completion-plan.md`, Phase 2), after which the Apps Script call in `public/assets/js/cts-record.js` is removed._
 

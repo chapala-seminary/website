@@ -136,10 +136,20 @@
     // The certificate pages keep, beside the gating list, the codes finished
     // on a master's track; a degree counts only the courses at its own level,
     // so the track each completion was earned on travels with it.
+    // Lowest level first, so a course recorded at several keeps the highest;
+    // the Associate's list is new (29 Sept 2026, cts-degrees.js). A code on
+    // any list is a completion, as the degree pages count it.
     var tracks = {};
-    [['cts_mdiv_done_codes', 'mdiv'], ['cts_thm_done_codes', 'thm']].forEach(function (pair) {
+    done = Array.isArray(done) ? done.slice() : [];
+    var inDone = {};
+    done.forEach(function (c) { inDone[String(c).toUpperCase()] = 1; });
+    [['cts_assoc_done_codes', 'assoc'], ['cts_thm_done_codes', 'thm'], ['cts_mdiv_done_codes', 'mdiv']].forEach(function (pair) {
       var list = parse(get(pair[0]), []);
-      if (Array.isArray(list)) list.forEach(function (c) { tracks[String(c).toUpperCase()] = pair[1]; });
+      if (Array.isArray(list)) list.forEach(function (c) {
+        var up = String(c).toUpperCase();
+        tracks[up] = pair[1];
+        if (!inDone[up]) { inDone[up] = 1; done.push(up); }
+      });
     });
 
     return {
@@ -197,6 +207,7 @@
       if (!c || !c.code) return;
       if (c.track === 'mdiv') addTo('cts_mdiv_done_codes', c.code);
       if (c.track === 'thm') addTo('cts_thm_done_codes', c.code);
+      if (c.track === 'assoc') addTo('cts_assoc_done_codes', c.code);
       if (c.name) addTo('cts_degree_courses', c.name);
     });
 

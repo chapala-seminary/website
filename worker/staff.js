@@ -93,13 +93,13 @@ const NEED = { certificate: 12, associate: 25, thm: 12, mdiv: 30 };
 /* One row per student, everything the roster shows, computed once. */
 async function roster(env, asOf = new Date()) {
   const rows = (await env.DB.prepare(
-    `SELECT s.rowid AS n, a.*, d.foundation_done, d.masters_done, d.mdiv_core_done
+    `SELECT s.rowid AS n, a.*, d.foundation_done, d.assoc_done, d.masters_done, d.mdiv_core_done
      FROM student_activity a JOIN students s ON s.id = a.student_id JOIN degree_progress d ON d.student_id = a.student_id
      WHERE lower(COALESCE(a.email, '')) <> 'tester@chapalaseminary.org'
      ORDER BY a.last_progress_at DESC`).all()).results ?? [];
   return rows.map((r) => {
     const level = programLevel(r.track, r.goal);
-    const counted = level === 'thm' || level === 'mdiv' ? r.masters_done : r.courses_done;
+    const counted = level === 'thm' || level === 'mdiv' ? r.masters_done : level === 'associate' ? r.assoc_done : r.courses_done;
     const days = Math.floor((asOf.getTime() - Date.parse(r.last_progress_at)) / DAY);
     const m = /^(\S+) (\d+)$/.exec(r.last_unit || '');
     const c = m && catalog.courses[m[1]];

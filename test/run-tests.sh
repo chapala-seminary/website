@@ -164,10 +164,15 @@ API_BASE="http://127.0.0.1:$PORT" node test/api.test.mjs
 # to students who have gone quiet (worker/staff.js, worker/outreach.js).
 API_BASE="http://127.0.0.1:$PORT" node test/staff.test.mjs
 
+# Returning students from the old site (Dr. Cook's review, 29 Sept 2026):
+# three browsers as the old site left them, each opening the new site -- the
+# whole record arrives at the right level, once, with one notice.
+API_BASE="http://127.0.0.1:$PORT" node test/migration.test.mjs
+
 # The view the student tracker reads (migrations/0003_tracker.sql) must be
 # there and must answer -- a migration that broke it would fail no API test.
 npx wrangler d1 execute chapala-students --local --persist-to "$STATE" --config "$CONFIG" \
-  --command "SELECT student_id, courses_done, foundation_done, masters_done, mdiv_core_done FROM degree_progress LIMIT 1" >/dev/null \
+  --command "SELECT student_id, courses_done, foundation_done, assoc_done, masters_done, mdiv_core_done FROM degree_progress LIMIT 1" >/dev/null \
   && echo "PASS — the degree_progress view answers." \
   || { echo "FAIL — the degree_progress view is missing or broken"; exit 1; }
 
@@ -218,6 +223,9 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   node tools/verify-certificate-unlock.mjs "http://127.0.0.1:$PORT"
   # The certificate as a sharp PDF, in English or Spanish, built in the browser.
   node tools/verify-cert-pdf.mjs "http://127.0.0.1:$PORT"
+  # Credential boundaries: each course counts toward a degree only at the level
+  # it was completed on (Dr. Cook's review, 29 Sept), in the browser and the Worker.
+  node tools/verify-degrees.mjs "http://127.0.0.1:$PORT"
   if [ -n "$HAVE_REFERENCE" ]; then
     node tools/verify-catalog.mjs ./_reference-index.html
   else

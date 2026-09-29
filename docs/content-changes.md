@@ -901,6 +901,38 @@ Students also receive their certificate by email once it is registered
   applied course by course, not across the whole site.
 * **Baselines:** updated for exactly the 21 lessons and 3 units changed.
 
+### 8z. Dr. Cook's second review (29 Sept) — levels, wording, returning students
+
+* **Associate counts only Associate work.** A course now counts toward a
+  degree only at the level it was completed on. Certificate < Associate <
+  Th.M. = M.Div. A course passed on the Certificate track (multiple choice
+  only) counts toward the Certificate of Ministry, not the Associate; the
+  Associate needs its 25 courses passed with the fill-ins (9 of 10), including
+  the seven foundation courses. The browser keeps a new list,
+  `cts_assoc_done_codes`; a student whose goal was already the Associate has
+  everything they finished put on it once. The Worker stores `assoc` as a
+  level and never lowers one (`migrations/0007_levels.sql`, `worker/awards.js`,
+  `public/assets/js/cts-degrees.js`). The degree pages count through the same
+  rules as the Worker; `tools/verify-degrees.mjs` tests every boundary
+  Dr. Cook listed on both.
+* **Associate page wording:** "ten fill-in-the-blank questions", not short
+  answers; lists missing foundation courses.
+* **One sentence about records, everywhere:** progress is saved in the
+  browser and kept with the seminary under the student code; a confirmed
+  email is needed only for a certificate (front page, every unit page).
+* **Removed:** "four courses will get fill-ins in a later update" (front page,
+  Before You Begin) — they all have them.
+* **Course names in the records** no longer carry the certificate page's
+  " |" ("Romans |" → "Romans"). Matching always used the course code, so no
+  record changes; only names shown to staff do.
+* **One email per history:** the browser no longer posts to the old Apps
+  Script Sheet; the Worker's single notice is the only one.
+* **Tester mode** turns itself off twelve hours after the key is given.
+* **Tests:** `test/migration.test.mjs` (three returning students modelled on
+  Paul, Ignacio and Ken), `tools/verify-degrees.mjs` (boundaries, 44 course
+  IDs), `tools/verify-devmode.mjs` (the twelve hours; no records sent).
+* **Backups:** `docs/disaster-recovery.md`.
+
 ## How to check any of this yourself
 
 ```

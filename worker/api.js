@@ -21,7 +21,7 @@
  * from a student, which makes a stale or offline device harmless.
  */
 
-import { courseShortfall, degreeShortfall, resolveCourse, DEGREES } from './awards.js';
+import { courseShortfall, degreeShortfall, resolveCourse, studentLevel, DEGREES } from './awards.js';
 import catalog from './catalog.json';
 import { emailConfigured, sendEmail, verificationEmail, certificateEmail } from './email.js';
 import { notify, notifyBatch, retryFailed } from './notify.js';
@@ -115,7 +115,7 @@ async function loadState(env, id) {
     code: r.code, track: r.track ?? null, name: catalog.completions[r.code]?.name ?? null, completed_at: r.completed_at,
   }));
   const degrees = {};
-  for (const level of Object.keys(DEGREES)) degrees[level] = degreeShortfall(level, done, student.track) === null;
+  for (const level of Object.keys(DEGREES)) degrees[level] = degreeShortfall(level, done, studentLevel(student.track, student.goal)) === null;
   return {
     student,
     progress: progress.results ?? [],
@@ -163,7 +163,7 @@ function completionRows(id, raw, tracks, studentTrack) {
     if (!code || !/^[A-Z0-9_]+$/i.test(code)) continue;
     const up = code.toUpperCase();
     const declared = String(t[up] ?? t[code] ?? '').toLowerCase();
-    const track = declared === 'thm' || declared === 'mdiv' ? declared : fallback;
+    const track = declared === 'thm' || declared === 'mdiv' || declared === 'assoc' ? declared : fallback;
     out.set(up, [id, up, track, now()]);
   }
   return [...out.values()];
@@ -227,9 +227,10 @@ async function sync(request, env) {
        ON CONFLICT(student_id, course, unit) DO UPDATE SET completed_at = MIN(completed_at, excluded.completed_at)`)
       .bind(...row));
 
-  // The track of a completion is filled in once and never downgraded: a row
-  // that arrived without one (before 0003_tracker, or from a browser with no
-  // master's list) takes the first track any device reports for it.
+  // A completion's level only rises: a row with none takes the first any
+  // device reports, and a Certificate or Associate completion is raised when a
+  // device reports it done at a higher level (the student did the further
+  // work). A stale device reporting a lower level changes nothing.
   const trackNow = (s && typeof s === 'object' && String(s.track || '').toLowerCase()) || exists.track;
   const completions = completionRows(id, b.doneCodes, b.completionTracks, trackNow);
   // Which of these the record did not hold before this request: those are the
@@ -242,7 +243,11 @@ async function sync(request, env) {
   for (const row of completions)
     statements.push(env.DB.prepare(
       `INSERT INTO course_completions (student_id, code, track, completed_at) VALUES (?, ?, ?, ?)
-       ON CONFLICT(student_id, code) DO UPDATE SET track = COALESCE(course_completions.track, excluded.track)`).bind(...row));
+       ON CONFLICT(student_id, code) DO UPDATE SET track = CASE
+         WHEN course_completions.track IS NULL THEN excluded.track
+         WHEN course_completions.track = 'cert' AND excluded.track IN ('assoc', 'thm', 'mdiv') THEN excluded.track
+         WHEN course_completions.track = 'assoc' AND excluded.track IN ('thm', 'mdiv') THEN excluded.track
+         ELSE course_completions.track END`).bind(...row));
 
   if (statements.length) await env.DB.batch(statements);
 
@@ -314,7 +319,7 @@ async function issueCertificate(request, env) {
   } else {
     const rows = await env.DB.prepare(
       'SELECT code, track FROM course_completions WHERE student_id = ?').bind(id).all();
-    const why = degreeShortfall(level, rows.results ?? [], student.track);
+    const why = degreeShortfall(level, rows.results ?? [], studentLevel(student.track, student.goal));
     if (why) return fail(409, why);
   }
 

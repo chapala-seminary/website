@@ -496,3 +496,182 @@ window.CTS_CERT_NAMES = {
   ]
  }
 };
+/* Every course by completion code, for the diploma pages (cts-degrees.js). */
+window.CTS_COURSE_NAMES = {
+ "CTS1PETER": {
+  "en": "1 Peter Intensive",
+  "es": "1 Pedro: Curso Intensivo"
+ },
+ "CTSAL": {
+  "en": "Church Administration & Leadership",
+  "es": "Administración y Liderazgo de la Iglesia"
+ },
+ "CTSACTS": {
+  "en": "Acts Intensive",
+  "es": "Hechos: Curso Intensivo"
+ },
+ "CTSAPOL": {
+  "en": "Apologetics",
+  "es": "Apologética"
+ },
+ "CTSBIBLE": {
+  "en": "How We Got the Bible",
+  "es": "Cómo Obtuvimos la Biblia"
+ },
+ "CTSBIBLECHARACTERS2": {
+  "en": "Bible Characters II",
+  "es": "Personajes Bíblicos II"
+ },
+ "CTSBIBLECHARACTERS": {
+  "en": "Bible Characters",
+  "es": "Personajes Bíblicos"
+ },
+ "CTSCE": {
+  "en": "Christian Education",
+  "es": "Educación Cristiana"
+ },
+ "CTSCG": {
+  "en": "Church Growth",
+  "es": "Crecimiento de la Iglesia"
+ },
+ "CTSCH": {
+  "en": "Church History",
+  "es": "Historia de la Iglesia"
+ },
+ "CTSCS": {
+  "en": "Counseling Situations",
+  "es": "Situaciones de Consejería"
+ },
+ "COUNSELING": {
+  "en": "Counseling",
+  "es": "Consejería"
+ },
+ "CTSCULTS": {
+  "en": "Cults & World Religions",
+  "es": "Sectas y Religiones del Mundo"
+ },
+ "CTSDP": {
+  "en": "Doctrinal Preaching",
+  "es": "Predicación Doctrinal"
+ },
+ "CTSDEACONFAMILYMINISTRY": {
+  "en": "Deacon Family Ministry Plan",
+  "es": "Plan de Ministerio Familiar de Diáconos"
+ },
+ "CTSEVANPREACH": {
+  "en": "Evangelistic Preaching",
+  "es": "Predicación Evangelística"
+ },
+ "CTSEVANGELISM": {
+  "en": "Evangelism",
+  "es": "Evangelismo"
+ },
+ "CTSGALATIANS": {
+  "en": "Galatians Intensive",
+  "es": "Gálatas: Curso Intensivo"
+ },
+ "CTSGENESIS": {
+  "en": "Genesis Intensive",
+  "es": "Génesis: Curso Intensivo"
+ },
+ "CTSHS": {
+  "en": "The Doctrine of the Holy Spirit",
+  "es": "La Doctrina del Espíritu Santo"
+ },
+ "CTSHERMENEUTICS": {
+  "en": "Hermeneutics",
+  "es": "Hermenéutica"
+ },
+ "CTSJOHN": {
+  "en": "The Gospel of John",
+  "es": "El Evangelio de Juan"
+ },
+ "CTSJOSH": {
+  "en": "Joshua Intensive",
+  "es": "Josué: Curso Intensivo"
+ },
+ "CTSLA": {
+  "en": "Language Appreciation",
+  "es": "Apreciación de los Idiomas Bíblicos"
+ },
+ "CTSLOC": {
+  "en": "The Life of Christ",
+  "es": "La Vida de Cristo"
+ },
+ "CTSMATT": {
+  "en": "Matthew Intensive",
+  "es": "Mateo: Curso Intensivo"
+ },
+ "CTSMISSIONS": {
+  "en": "World Missions",
+  "es": "Misiones Mundiales"
+ },
+ "CTSNT": {
+  "en": "New Testament Survey",
+  "es": "Panorama del Nuevo Testamento"
+ },
+ "STORYTEL": {
+  "en": "Narrative Preaching",
+  "es": "Predicación Narrativa"
+ },
+ "CTSOTS": {
+  "en": "Old Testament Survey",
+  "es": "Panorama del Antiguo Testamento"
+ },
+ "CTSPM": {
+  "en": "Pastoral Ministries",
+  "es": "Ministerio Pastoral"
+ },
+ "CTSPT": {
+  "en": "Practical Theology",
+  "es": "Teología Práctica"
+ },
+ "CTSPENT": {
+  "en": "Pentateuch",
+  "es": "Pentateuco"
+ },
+ "CTSPENTECOSTAL": {
+  "en": "Pentecostalism & the Charismatic Movement",
+  "es": "El Pentecostalismo y el Movimiento Carismático"
+ },
+ "WISESPEAK": {
+  "en": "Preaching (WiseSpeak)",
+  "es": "Predicación (WiseSpeak)"
+ },
+ "CTSPSALMS": {
+  "en": "Psalms",
+  "es": "Salmos"
+ },
+ "CTSRE": {
+  "en": "Ruth and Esther",
+  "es": "Rut y Ester"
+ },
+ "CTSRADICAL": {
+  "en": "Radical Christianity",
+  "es": "Cristianismo Radical"
+ },
+ "CTSREV": {
+  "en": "Revelation Intensive",
+  "es": "Apocalipsis: Curso Intensivo"
+ },
+ "CTSROMANS": {
+  "en": "Romans",
+  "es": "Romanos"
+ },
+ "CTSST": {
+  "en": "Systematic Theology",
+  "es": "Teología Sistemática"
+ },
+ "CTSWR": {
+  "en": "World Religions",
+  "es": "Religiones del Mundo"
+ },
+ "CTSWORSHIP": {
+  "en": "Christian Worship",
+  "es": "Adoración Cristiana"
+ },
+ "ETHICS": {
+  "en": "Pastoral & Christian Ethics",
+  "es": "Ética Pastoral y Cristiana"
+ }
+};

@@ -100,7 +100,18 @@
   var TEST_HASH = "2453cc3bb695bd64e1de77508179daece96cd5ea4fa0940810181aba769d56ab";
   var LOCAL_HASH = "2c221c0736811fdee36db01b76655bfa1d645c51d5961843f70fb108cc87b4d3";
   function isLocal() { return /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname || ""); }
-  function testActive() { try { return localStorage.getItem(TEST_KEY) === "1"; } catch (e) { return false; } }
+  // Tester mode lasts twelve hours from the key being given (Dr. Cook's
+  // review, 29 Sept 2026: it must not stay on). After that the browser is
+  // put back as it was, and the key has to be given again.
+  var TEST_AT = "cts_test_mode_at", TEST_HOURS = 12;
+  function testActive() {
+    try {
+      if (localStorage.getItem(TEST_KEY) !== "1") return false;
+      var at = +localStorage.getItem(TEST_AT) || 0;
+      if (Date.now() - at < TEST_HOURS * 3600 * 1000) return true;
+      turnOff(); return false;
+    } catch (e) { return false; }
+  }
   // Resolves true when `key` is the tester key. Needs a secure page (https or
   // this machine), which every page of the site is.
   function checkKey(key) {
@@ -112,10 +123,11 @@
       }, function () { return false; });
     } catch (e) { return Promise.resolve(false); }
   }
-  function turnOn() { try { localStorage.setItem(TEST_KEY, "1"); } catch (e) {} }
+  function turnOn() { try { localStorage.setItem(TEST_KEY, "1"); localStorage.setItem(TEST_AT, String(Date.now())); } catch (e) {} }
   function turnOff() {
     try {
       localStorage.removeItem(TEST_KEY);
+      localStorage.removeItem(TEST_AT);
       // ?ctstest=off used to clear only the flag, leaving the placeholder
       // "Course Tester" account behind: the catalog locked itself again, but
       // the browser was still signed in as a tester on the M.Div. track, so
@@ -246,6 +258,12 @@
             if (!Array.isArray(th)) th = [];
             if (th.indexOf(code) === -1) { th.push(code); localStorage.setItem("cts_thm_done_codes", JSON.stringify(th)); }
           }
+          // the Associate's level (cts-degrees.js): MC and fill-ins passed on the Associate path
+          if (tr !== "mdiv" && tr !== "thm" && assocGoal()) {
+            var as = JSON.parse(localStorage.getItem("cts_assoc_done_codes") || "[]");
+            if (!Array.isArray(as)) as = [];
+            if (as.indexOf(code) === -1) { as.push(code); localStorage.setItem("cts_assoc_done_codes", JSON.stringify(as)); }
+          }
         } catch (e) {}
       }
       if (name) {                         // also feed the distinct-name roster (Associate degree count)
@@ -257,6 +275,21 @@
       }
     }
   };
+
+  function assocGoal() {
+    try {
+      var s = JSON.parse(localStorage.getItem("cts_student") || "null") || {};
+      var t = String(localStorage.getItem("cts_track") || s.track || "").toLowerCase();
+      return t === "ad" || t === "associate" || t === "assoc" ||
+             String(localStorage.getItem("cts_goal") || s.goal || "").toLowerCase() === "assoc";
+    } catch (e) { return false; }
+  }
+  // once: a student already on the Associate path keeps courses finished before
+  // levels were recorded (the same step as cts-degrees.js and cts-record.js)
+  try {
+    if (localStorage.getItem("cts_assoc_done_codes") === null)
+      localStorage.setItem("cts_assoc_done_codes", assocGoal() ? (localStorage.getItem("cts_done_codes") || "[]") : "[]");
+  } catch (e) {}
 
   function isEs() {
     var b = document.body;
