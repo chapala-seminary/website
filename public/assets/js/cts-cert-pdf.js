@@ -31,6 +31,10 @@
   window.CTS_CERT_PDF = true;
 
   var file = (location.pathname.split('/').pop() || '').toLowerCase();
+  // Courses Dr. Ted Rogers wrote: his signature carries "Course Author", and
+  // Dr. Cook's the role the certificate page gives him (Dr. Cook, 29 Sept 2026:
+  // "the certificate should identify Dr. Ted Rogers as Course Author, not me").
+  var ROGERS_AUTHOR = { 'ctspentcertificate.html': 1 };
   var DEGREE = { 'ctscertificateofministry.html': 'certificate', 'ctsassociatecertificate.html': 'associate',
                  'ctsthmcertificate.html': 'thm', 'ctsmdivcertificate.html': 'mdiv' };
 
@@ -61,7 +65,7 @@
       conferCert: 'having faithfully completed all the requirements prescribed by the Faculty, is hereby awarded the',
       rights: 'with all the rights, honors, and privileges thereunto appertaining.',
       given: 'Given at Chapala, Jalisco — ',
-      professor: 'Professor', semDirector: 'Seminary Director',
+      professor: 'Professor', semDirector: 'Seminary Director', founder: 'Founder & Instructor',
       verify: 'Verification code: ',
       button: 'Download PDF', other: 'Descargar en español', busy: 'Preparing…',
       failed: 'The PDF could not be made on this device. Use Print / Save instead.'
@@ -79,7 +83,7 @@
       conferCert: 'habiendo cumplido fielmente todos los requisitos prescritos por la Facultad, se le otorga el',
       rights: 'con todos los derechos, honores y privilegios que le corresponden.',
       given: 'Otorgado en Chapala, Jalisco — ',
-      professor: 'Profesor', semDirector: 'Director del Seminario',
+      professor: 'Profesor', semDirector: 'Director del Seminario', founder: 'Fundador e Instructor',
       verify: 'Código de verificación: ',
       button: 'Descargar PDF', other: 'Download in English', busy: 'Preparando…',
       failed: 'No se pudo crear el PDF en este dispositivo. Use Imprimir / Guardar.'
@@ -270,7 +274,8 @@
     doc.setTextColor.apply(doc, INK); doc.setFont('times', 'normal'); doc.setFontSize(11);
     var lines = doc.splitTextToSize(w.body, 500);
     doc.text(lines, f.Wp / 2, y + 42, { align: 'center', lineHeightFactor: 1.4 });
-    footer(doc, lang, sig, 466, w.dateOf + dateText(lang, when), verifyCode(), [w.author, w.director]);
+    footer(doc, lang, sig, 466, w.dateOf + dateText(lang, when), verifyCode(),
+      ROGERS_AUTHOR[file] ? [w.founder, w.author] : [w.author, w.director]);
   }
 
   function degreePdf(doc, lang, sig, who, when) {

@@ -85,6 +85,19 @@ const has = (t, s) => t.includes(s);
   for (const s of ['ANA LOPEZ', 'Pastoral Ministries', 'MASTER OF DIVINITY TRACK', 'Date of Completion']) ok(has(text, s), `course PDF (English) says "${s}"`);
   ok(!has(text, 'With Honors'), 'course PDF: no honors unless the honors reading is done');
 }
+// the Pentateuch, which Dr. Ted Rogers wrote: he is the Course Author on it, not Dr. Cook
+{
+  const seed = { cts_student: JSON.stringify({ name: 'Ana Lopez', track: 'certificate' }) };
+  const en = (await build('CTSPentCertificate.html', 'en', seed)).text;
+  ok(has(en, 'FOUNDER & INSTRUCTOR') && has(en, 'COURSE AUTHOR') && en.indexOf('FOUNDER & INSTRUCTOR') < en.indexOf('COURSE AUTHOR'),
+    'Pentateuch PDF: Dr. Cook is Founder & Instructor and Dr. Rogers the Course Author');
+  ok(!has(en, 'DIRECTOR OF EDUCATION'), 'Pentateuch PDF: Dr. Cook is not labelled the author, nor Dr. Rogers only the director');
+  const es = (await build('CTSPentCertificate.html', 'es', seed)).text;
+  ok(has(es, 'FUNDADOR E INSTRUCTOR') && has(es, 'AUTOR DEL CURSO'), 'Pentateuch PDF (Spanish): the same roles');
+  const other = (await build('CTSPMCertificate.html', 'en', seed)).text;
+  ok(other.indexOf('COURSE AUTHOR') < other.indexOf('DIRECTOR OF EDUCATION') && !has(other, 'FOUNDER & INSTRUCTOR'),
+    'every other course: Dr. Cook the Course Author, Dr. Rogers the Director of Education');
+}
 // a degree diploma
 {
   const seed = { cts_student: JSON.stringify({ name: 'Ana Lopez', track: 'mdiv' }) };

@@ -768,6 +768,55 @@ Students also receive their certificate by email once it is registered
 
 ---
 
+---
+
+### 8w. Dr. Cook's answers of 29 Sept — 5 lessons, 2 units' questions, the Counseling page and the Pentateuch PDF changed
+
+* **Matthew, Unit 5:** the three sections on the last petitions of the Lord's
+  Prayer, written by Claude in #6, are replaced with Dr. Cook's own teaching:
+  "Give Us This Day Our Daily Bread", "Forgive Us Our Debts, As We Forgive Our
+  Debtors" and "Lead Us Not into Temptation". The Spanish is Claude's
+  translation, marked "Translated automatically". Scripture in the Spanish
+  follows the wording the course already uses (Mateo 6:11–13, 6:14–15, Lucas
+  15:19, 22:42).
+* **Matthew, Unit 3:** "Edgar, the great musician" → "Elgar", in both
+  languages. The persecuted Beatitude section stays as written.
+* **Radical Discipleship, Unit 13:** the hospital illustration is replaced with
+  Dr. Cook's own account, "Jim's Last Words". Multiple-choice question 12 and
+  short-answer question 4 asked about the old illustration and now ask about
+  Jim.
+* **Joshua 5:13–15 in NKJV wording:**
+  * Old Testament Survey Unit 4: the heading, the quotation and the summary
+    now read "Commander of the army of the LORD" and "Take your sandal off your
+    foot, for the place where you stand is holy". Three of its questions
+    changed with them. The fill-in's answer is now "Commander", with
+    "Captain" and "Prince" accepted.
+  * Joshua Unit 10: the same verses are quoted from the NKJV, and the Spanish
+    from the RVG.
+  * The Joshua course's own teaching keeps "the Captain", as Dr. Cook asked on
+    27 Sept; only its quotations change.
+* **Counseling 7.7:** "What does she think?" → "What does he think?". The
+  Spanish now reads "su anciano … ¿Qué piensa él?".
+* **Unchanged, as Dr. Cook decided:**
+  * WiseSpeak keeps Philip's daughters "preached" in English and
+    "profetizaban" in Spanish.
+  * Every "Solomon" in Narrative Preaching refers to the author whose
+    framework the course follows. The one mention of King Solomon is
+    already "Salomón".
+* **Pentateuch PDF certificate:** Dr. Ted Rogers, who wrote the course, is
+  "Course Author" on it, and Dr. Cook is "Founder & Instructor", the roles the
+  certificate page itself shows. Every other course is unchanged.
+  `tools/verify-cert-pdf.mjs` checks both.
+* **Still open:**
+  * The Spanish course names from the current bilingual Certificate Maker.
+    The copy in hand is the older English-only one.
+  * The RVG wording checks listed in `_review/lesson-fixes/FOR-DR-COOK.md`.
+* **Files:** `_review/lesson-fixes/CTSMatt-4.json`, `CTSRadical-4.json`,
+  `joshua5-nkjv.json` (applied with `tools/fix-lesson-text.mjs`);
+  `src/content/units/CTS/4.json`, `src/content/units/CTSRadical/13.json`;
+  `public/CTSCounseling.html`; `public/assets/js/cts-cert-pdf.js`. The
+  baselines were updated for exactly these pages.
+
 ## How to check any of this yourself
 
 ```

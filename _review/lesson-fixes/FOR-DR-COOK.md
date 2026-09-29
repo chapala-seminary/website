@@ -1,14 +1,12 @@
-# Lesson questions for Dr. Cook — after your answers of 27 September
+# Lesson questions for Dr. Cook — after your answers of 27 and 29 September
+
+**29 September:** your answers are applied. Matthew Unit 5's last three petitions are now your own teaching; Radical Discipleship Unit 13 has "Jim's Last Words"; Elgar; Joshua 5:13–15 in NKJV wording (Old Testament Survey Unit 4, and Joshua Unit 10); the elder in Counseling 7.7 is "he"; Philip's daughters stay as they are; every "Solomon" in Narrative Preaching is the author whose framework the course follows (King Solomon is already "Salomón"), so none changed; the Pentateuch PDF certificate names Dr. Ted Rogers as Course Author. Still open: the Spanish course names from the bilingual Certificate Maker (the copy Robert has is the English-only one), and the RVG wording checks below.
 
 Thank you for the answers. Every one of them has been applied (website pull request #6), including your sermon "Reasons We Mourn" in Matthew Unit 3. What is left is short: sections Claude wrote that you asked to review, a few Bible verses whose exact RVG wording should be checked against a printed RVG, and two or three follow-up questions. Each item names the course, unit and the place in the lesson.
 
 Spanish written or rewritten to follow the English (including the smoothed Spanish of Genesis) is marked "Translated automatically" in the editor, so you can find and review it there.
 
 Your general rule for Bible wording (NKJV and RVG word for word) was applied to every verse your answers named, and to other quotations of those same verses in the same course. The other quotations across the courses have not yet been checked one by one against the NKJV and RVG; that is a larger pass, to do when you want it.
-
-## CTS (Old Testament Survey) — items for Dr. Cook
-
-- Note, not a question: Unit 4 b016 quotes Joshua 5:13–15 in English in older (KJV-style) wording ("Captain of the host of the LORD", "Take off your shoes … holy ground"); the NKJV reads "Commander of the army of the LORD" and "Take your sandal off your foot, for the place where you stand is holy." Left as is, since his answer kept "Captain" in the English; change it if the NKJV rule should reach this verse too.
 
 ## CTSAL (Administration and Leadership) — items for Dr. Cook
 
@@ -43,9 +41,7 @@ Your general rule for Bible wording (NKJV and RVG word for word) was applied to 
 
 ## CTSMatt — items for Dr. Cook
 
-- **Written by Claude, please review:** Unit 3, "Blessed Are the Persecuted" (b027), and the Unit 5 sections on the last three petitions of the Lord's Prayer ("Give Us This Day Our Daily Bread" b028/b029, "Forgive Us Our Debts" and "Lead Us Not into Temptation, but Deliver Us from Evil", new blocks after b029). You had no sermon on these, so Claude wrote them in your voice, in both languages.
-- **Unit 3, mourning sermon:** it says "Edgar, the great musician". This may be Elgar (William Barclay tells this story of Elgar). Please confirm the name.
-- **Verse wording to double-check against the RVG:** Romanos 7:15 and 7:24 (mourning sermon); Mateo 6:14-15 and 2 Timoteo 3:12 (the new sections). Claude was not certain of the exact RVG wording of these.
+- **Verse wording to double-check against the RVG:** Romanos 7:15 and 7:24 (mourning sermon); Mateo 6:14–15 (Unit 5, "Forgive Us Our Debts") and 2 Timoteo 3:12 (Unit 3, persecuted). Claude was not certain of the exact RVG wording of these. The Spanish of your Unit 5 petitions is Claude's translation, marked "Translated automatically".
 
 - **Unit 5 b032:** labelled NKJV but quoted in King James wording; it now reads "For Yours is the kingdom and the power and the glory forever. Amen." (NKJV).
 
@@ -77,7 +73,7 @@ Your general rule for Bible wording (NKJV and RVG word for word) was applied to 
 
 ## Radical Discipleship: questions for Dr. Cook
 
-- **Unit 13, block b020:** the Soviet labor camp story there has been replaced, as you asked, with a new illustration written in your voice, "Christ at the bedside": as a pastor you sat beside many hospital beds and watched believers face illness without bitterness, thanking the nurses and praying for others, so that they "preached most loudly by how they suffered." It is written in the first person, so please confirm it is true to your own experience, or change it.
+- **Unit 13, "Jim's Last Words":** in place, with your wording. Its Spanish is Claude's translation, and the unit's multiple-choice question 12 and short-answer question 4 now ask about Jim rather than the hospital illustration.
 
 ## Systematic Theology: questions for Dr. Cook
 
@@ -94,13 +90,11 @@ Spanish typos in Ethics were corrected ("rebaño", "rehúsa", "Gástate",
 
 - **Counseling, Units 0, 2, 3, 4:** the Spanish quotations of Proverbs 11:14, 18:13 and 20:5 are printed in English.
 - **Counseling, Unit 10 (10.2, 10.3), Spanish:** "puede haber sentido dispersa" (read "haberse sentido"); "la breve retrazada del consejero" ("retrazada" is not a word); "hacer la obra a la que vino a hacer" (read "la obra que vino a hacer").
-- **Counseling, Unit 7 (7.7):** "Have you talked with your elder about this? What does she think?" — a female elder; intended?
 - **Counseling, Unit 8 (8.2):** Spanish "costo eterno" where the English says "long-range cost".
-- **Narrative Preaching, Units 2–4, Spanish:** "Solomon" — King Solomon ("Salomón") or an author named Solomon?
 - **Narrative Preaching, Unit 6, Spanish:** "Esto debe sobriar al predicador" — "sobriar" is not a Spanish word.
 - **Narrative Preaching, Unit 8, Spanish:** "que solo Él puede tomar una historia" — ungrammatical ("el único que puede").
 - **WiseSpeak, Units 1–6, Spanish:** many sections have the full translation followed by a second, shorter summary of the same text, so Spanish readers see it twice.
-- **WiseSpeak, Unit 1:** the fifth reason in 1.2 and method 7 in 1.5 are missing from the full Spanish; the English says Philip's daughters "preached", the Spanish "profetizaban".
+- **WiseSpeak, Unit 1:** the fifth reason in 1.2 and method 7 in 1.5 are missing from the full Spanish. (Philip's daughters: kept as they were — "preached" in English, "profetizaban" in Spanish.)
 - **WiseSpeak, Unit 2:** the English list of about 75 keywords is about 15 in Spanish.
 - **WiseSpeak, Unit 4, Spanish:** "pregunta probadora" ("P.P.") where Unit 2 says "pregunta de sondeo"; "tópico" where Unit 3 says "temático".
 - **WiseSpeak, Unit 5 (5.5):** the opening paragraph has no Spanish.
