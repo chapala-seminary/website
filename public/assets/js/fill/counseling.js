@@ -463,17 +463,19 @@ window.CTS_FILL_DATA["counseling"] = {
   {
    "prompt": {
     "en": "\"He that answereth a matter before he heareth it, it is ____ and shame unto him\" (Proverbs 18:13).",
-    "es": "\"Al que responde palabra antes de oír, le es ____ y oprobio\" (Proverbios 18:13)."
+    "es": "\"El que responde palabra antes de oír, le es ____ y vergüenza\" (Proverbios 18:13)."
    },
    "answer": {
     "en": "folly",
-    "es": "fatuidad"
+    "es": "necedad"
    },
    "accept": {
     "en": [
      "foolishness"
     ],
-    "es": []
+    "es": [
+     "fatuidad"
+    ]
    }
   },
   {
@@ -970,7 +972,7 @@ window.CTS_FILL_DATA["counseling"] = {
   {
    "prompt": {
     "en": "\"Where no counsel is, the people fall: but in the multitude of counsellors there is ____\" (Proverbs 11:14).",
-    "es": "\"Donde no hay dirección sabia, caerá el pueblo; mas en la multitud de consejeros hay ____\" (Proverbios 11:14)."
+    "es": "\"Donde no hay consejo, el pueblo cae, mas en la multitud de consejeros hay ____\" (Proverbios 11:14)."
    },
    "answer": {
     "en": "safety",

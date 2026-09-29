@@ -871,6 +871,36 @@ Students also receive their certificate by email once it is registered
   signs for a course by Dr. Cook, the Pentateuch in both languages, Romans,
   Ruth and Esther, and Christian Education.
 
+---
+
+### 8y. Spanish Scripture checked against the RVG (29 Sept) — 21 lessons, 3 units' questions, the Counseling page
+
+* **Why:** Dr. Cook: "passages on the review list … should be checked against
+  the RVG text rather than rewritten stylistically." The Reina Valera Gómez
+  2010 is read at bibliaparalela.com/rvg, one chapter at a time.
+* **What:**
+  * Every verse on `_review/lesson-fixes/FOR-DR-COOK.md` was compared word
+    for word. Nine were already exact; the rest are now the RVG's words and
+    punctuation, together with other quotations of the same verse in the
+    same course. The list of corrections is in that file.
+    Fixes: `_review/lesson-fixes/rvg-check.json`, `rvg-check-2.json`.
+  * **Galatians 5:22:** the RVG reads "paciencia". §8t had changed the
+    quotations to "longanimidad" in the mistaken belief that it was the RVG.
+    Galatians 6 and 8 and Practical Theology 9 now read "paciencia", as do
+    the Galatians exam's model answers and one option.
+  * **Joshua 5:14–15** in Spanish (Old Testament Survey 4, Joshua 4 and 10):
+    "No; sino que he venido ahora como Príncipe del ejército de Jehová" and
+    "Quita las sandalias de tus pies". The Joshua 4 exam's model answer
+    follows.
+  * **Counseling:** its ten Spanish scripture boxes quoted the Reina-Valera
+    1960 and now quote the RVG, labelled "(RVG)". The Proverbs 18:13
+    fill-in, multiple-choice and short-answer questions follow ("necedad y
+    vergüenza"); "fatuidad" is still accepted in the fill-in. Its English
+    boxes are still KJV.
+* **Not done:** other courses' quotations of these verses. The rule has been
+  applied course by course, not across the whole site.
+* **Baselines:** updated for exactly the 21 lessons and 3 units changed.
+
 ## How to check any of this yourself
 
 ```
