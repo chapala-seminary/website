@@ -61,6 +61,23 @@ const dbid = (c) => c?.d1_databases?.[0]?.database_id;
 ok(!dbid(prod) || !dbid(prod.env?.beta) || dbid(prod) !== dbid(prod.env.beta),
   'and it is not the same database under a different name');
 
+/* The staff pages check Cloudflare Access's signature on every request
+   (worker/staff.js). ACCESS_JWKS swaps Access's keys for the test suite's own,
+   whose private half is in this repository: set on a deployed Worker, anyone
+   could sign themselves in to the student roster. */
+for (const [name, c] of [['production', prod], ['beta', prod.env?.beta]]) {
+  if (!c) continue;
+  ok(!c.vars?.ACCESS_JWKS, `${name}: ACCESS_JWKS is not set (it is for the test suite only)`);
+  ok(!c.vars?.EMAIL_MODE, `${name}: EMAIL_MODE is not set (it is for the test suite only)`);
+  // "A, B <x@y>" is two addresses to a mail server; a name with a comma must be quoted
+  for (const k of ['EMAIL_FROM', 'OUTREACH_FROM'])
+    ok(!/^[^"]*,[^"]*</.test(c.vars?.[k] || ''), `${name}: ${k} has no unquoted comma in the sender's name`, c.vars?.[k]);
+  ok((c.triggers?.crons || []).length === 1, `${name}: one daily scheduled run, for the notes to students`,
+    `found ${JSON.stringify(c.triggers?.crons)}`);
+}
+ok(prod.env?.beta?.vars?.OUTREACH_MODE !== 'send',
+  'beta does not write to students (its students are people testing the site)');
+
 /* Anything still spelled PUT-THE-...
  *
  * Only for the environment being deployed. The first version demanded every

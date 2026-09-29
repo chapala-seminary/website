@@ -24,10 +24,13 @@
 import { courseShortfall, degreeShortfall, resolveCourse, DEGREES } from './awards.js';
 import catalog from './catalog.json';
 import { emailConfigured, sendEmail, verificationEmail, certificateEmail } from './email.js';
-import { notify, retryFailed } from './notify.js';
+import { notify, notifyBatch, retryFailed } from './notify.js';
 
 const MAX = { name: 120, email: 160, country: 80, track: 24, goal: 400, heard: 40, title: 200, course: 64, code: 40 };
 const TRACKS = new Set(['cert', 'certificate', 'associate', 'thm', 'mdiv']);
+// The language a student reads in, from the language switch (cts_lang). Anything
+// else is dropped rather than refused: it is a preference, not a record.
+const lang = (v) => (v === 'en' || v === 'es' ? v : null);
 const LEVELS = new Set(['course', 'certificate', 'associate', 'thm', 'mdiv']);
 
 /* Crockford base32 without I, L, O and U: no character can be confused with
@@ -180,10 +183,10 @@ async function register(request, env) {
   for (let attempt = 0; attempt < 5; attempt++) {
     const id = studentCode();
     const res = await env.DB.prepare(
-      `INSERT INTO students (id, name, email, country, track, goal, heard, created_at, updated_at)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO NOTHING`)
+      `INSERT INTO students (id, name, email, country, track, goal, heard, lang, created_at, updated_at)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO NOTHING`)
       .bind(id, name, str(b.email, MAX.email, { field: 'email' }), str(b.country, MAX.country, { field: 'country' }),
-        track, str(b.goal, MAX.goal, { field: 'goal' }), str(b.heard, MAX.heard, { field: 'heard' }), t, t).run();
+        track, str(b.goal, MAX.goal, { field: 'goal' }), str(b.heard, MAX.heard, { field: 'heard' }), lang(b.lang), t, t).run();
     if (res.meta?.changes) return json({ code: id, student: (await loadState(env, id)).student }, 201);
   }
   throw new HttpError(503, 'could not allocate a student code, please try again');
@@ -213,9 +216,9 @@ async function sync(request, env) {
       `UPDATE students SET name = COALESCE(?, name),
          email = CASE WHEN email_verified_at IS NULL THEN COALESCE(?, email) ELSE email END,
          country = COALESCE(?, country), track = COALESCE(?, track),
-         goal = COALESCE(?, goal), heard = COALESCE(?, heard), updated_at = ? WHERE id = ?`)
+         goal = COALESCE(?, goal), heard = COALESCE(?, heard), lang = COALESCE(?, lang), updated_at = ? WHERE id = ?`)
       .bind(name, str(s.email, MAX.email, { field: 'email' }), str(s.country, MAX.country, { field: 'country' }),
-        track, str(s.goal, MAX.goal, { field: 'goal' }), str(s.heard, MAX.heard, { field: 'heard' }), now(), id));
+        track, str(s.goal, MAX.goal, { field: 'goal' }), str(s.heard, MAX.heard, { field: 'heard' }), lang(b.lang), now(), id));
   }
 
   for (const row of progressRows(id, b.progress))
@@ -247,9 +250,10 @@ async function sync(request, env) {
   // (Wayne's audit item 5). One per course, kept in `notifications`; a failed
   // send is retried here on the student's next sync. Never fails the sync.
   const student = { ...exists, ...(s && typeof s === 'object' ? { name: str(s.name, MAX.name, { field: 'name' }) || exists.name } : {}) };
-  const notices = [];
-  for (const [, code, track] of completions)
-    if (!held.has(code)) { const n = await notify(env, student, { kind: 'course', code, track }); if (n) notices.push(n); }
+  // Several new at once -- a returning student's first visit, bringing
+  // everything they finished on the old site -- go as one email.
+  const notices = await notifyBatch(env, student,
+    completions.filter(([, code]) => !held.has(code)).map(([, code, track]) => ({ kind: 'course', code, track })));
   notices.push(...await retryFailed(env, student));
 
   const state = await loadState(env, id);
@@ -431,7 +435,6 @@ async function emailConfirm(request, env) {
   await env.DB.batch([
     env.DB.prepare('UPDATE students SET email = ?, email_verified_at = ?, updated_at = ? WHERE id = ?').bind(ch.email, t, t, id),
     env.DB.prepare('DELETE FROM email_challenges WHERE student_id = ?').bind(id),
-    env.DB.prepare('DELETE FROM notifications WHERE student_id = ?').bind(id),
   ]);
   return json({ verified: true, email: ch.email });
 }
@@ -457,6 +460,8 @@ async function deleteStudent(env, rawCode) {
     env.DB.prepare('DELETE FROM certificates WHERE student_id = ?').bind(id),
     env.DB.prepare('DELETE FROM email_challenges WHERE student_id = ?').bind(id),
     env.DB.prepare('DELETE FROM notifications WHERE student_id = ?').bind(id),
+    env.DB.prepare('DELETE FROM outreach WHERE student_id = ?').bind(id),
+    env.DB.prepare('DELETE FROM contact_tokens WHERE student_id = ?').bind(id),
   ]);
   return json({ deleted: true });
 }

@@ -579,6 +579,15 @@ const M = [
     apply: (f) => sub(f[0], 'if (existing && existing.name && !existing._tester) return;', 'if (false) return;'),
   },
   {
+    id: 'devmode-no-key',
+    gate: `node tools/verify-devmode.mjs ${BASE}`,
+    files: ['public/cts-curriculum.js'],
+    needsBuild: true,
+    why: 'accept any tester key -- "?ctstest=on" opens every course again',
+    expect: /without the key|wrong key|FAIL/,
+    apply: (f) => sub(f[0], 'return hex === TEST_HASH || (isLocal() && hex === LOCAL_HASH);', 'return true;'),
+  },
+  {
     id: 'certificate-sync',
     gate: `node tools/verify-certificates.mjs ${BASE}`,
     files: ['public/CTSActsCertificate.html'],

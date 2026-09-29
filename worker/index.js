@@ -19,6 +19,8 @@
  * the whole indexing problem, would go straight out.
  */
 import { handle } from './api.js';
+import { handleStaff } from './staff.js';
+import { scheduled, stopNotes } from './outreach.js';
 
 /* The addresses that ARE the seminary. Everything else -- beta, a preview
    deployment, *.workers.dev -- is staging. See guard() below. */
@@ -87,10 +89,17 @@ async function route(request, env) {
   const path = new URL(request.url).pathname;
   if (path === '/api' || path.startsWith('/api/')) return await handle(request, env);
   if (path === '/verify' || path.startsWith('/verify/')) return await handle(request, env);
+  if (path === '/staff' || path.startsWith('/staff/')) return await handleStaff(request, env);
+  let m;
+  if ((m = /^\/stop-notes\/([^/]+)$/.exec(path)) && env.DB) return await stopNotes(request, env, decodeURIComponent(m[1]));
   return await asset(request, env);
 }
 
 export default {
+  // Once a day: notes to students who have gone quiet, and on Mondays the
+  // seminary's weekly summary (worker/outreach.js).
+  scheduled: (event, env, ctx) => ctx.waitUntil(scheduled(event, env)),
+
   async fetch(request, env) {
     const url = new URL(request.url);
     const canonical = isCanonical(request);

@@ -16,7 +16,10 @@ import { chromium } from 'playwright';
 import fs from 'fs';
 
 const BASE = process.argv[2] || 'http://127.0.0.1:8823';
-const CHROME = process.env.CHROME_PATH || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
+// CHROME_PATH names a browser to use (the Linux sandbox sets it); otherwise
+// Playwright's own, as every other check here does. A default pointing at
+// the sandbox's browser failed on the Mac, where that path does not exist.
+const CHROME = process.env.CHROME_PATH;
 const catalog = JSON.parse(fs.readFileSync('worker/catalog.json', 'utf8'));
 
 // the certificate pages of a course: <prefix>Certificate.html and its
@@ -32,7 +35,7 @@ const fails = [];
 let checks = 0;
 const ok = (c, m) => { checks++; if (!c) fails.push(m); };
 
-const browser = await chromium.launch({ executablePath: CHROME });
+const browser = await chromium.launch(CHROME ? { executablePath: CHROME } : {});
 
 // The seed is planted on a unit page and that page is loaded once, because
 // that is where a student's progress lives: the engine reconciles the old
