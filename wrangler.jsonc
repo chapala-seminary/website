@@ -99,6 +99,16 @@
 		"beta": {
 			"name": "chapala-seminary-beta",
 			"account_id": "119b0919229edb3185b69f1c6bd04b66",
+			// Its own address. A custom domain: `npm run deploy:beta` attaches it,
+			// and Cloudflare makes the DNS record and the certificate, since the
+			// chapalaseminary.org zone is in this account. Kept here rather than
+			// added in the dashboard, so a deploy can never quietly drop it. The
+			// staff pages' Cloudflare Access rule covers this address, not the
+			// workers.dev one. Production gets chapalaseminary.org only at the
+			// cutover (docs/cutover.md, step 7), so it has no routes here.
+			"routes": [
+				{ "pattern": "beta.chapalaseminary.org", "custom_domain": true }
+			],
 			"observability": {
 				"enabled": true
 			},
@@ -110,6 +120,7 @@
 				// beta's students are people testing the site: nobody is written
 				// to; /staff/notes shows who would be, and the notes themselves
 				"OUTREACH_MODE": "off",
+				"OUTREACH_FROM": "Wayne Cook at Chapala Theological Seminary <certificates@chapalaseminary.org>",
 				"SITE_ORIGIN": "https://beta.chapalaseminary.org",
 				// the same Access application covers beta's /staff
 				"ACCESS_TEAM": "chapalatheological",

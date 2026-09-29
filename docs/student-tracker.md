@@ -120,7 +120,7 @@ In `wrangler.jsonc` `vars`:
 | var | production | beta |
 |---|---|---|
 | `OUTREACH_MODE` | `send` | `off`: nobody is written to; `/staff/notes` still shows who would be |
-| `OUTREACH_FROM` | `Wayne Cook at Chapala Theological Seminary <certificates@chapalaseminary.org>` | falls back to `EMAIL_FROM` |
+| `OUTREACH_FROM` | `Wayne Cook at Chapala Theological Seminary <certificates@chapalaseminary.org>` | the same |
 | `OUTREACH_REPLY_TO` | not set: falls back to `EMAIL_REPLY_TO` (`info@`) | the same |
 | `SITE_ORIGIN` | `https://chapalaseminary.org` | `https://beta.chapalaseminary.org` |
 
