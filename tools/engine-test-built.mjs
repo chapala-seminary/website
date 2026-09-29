@@ -29,7 +29,10 @@ import fs from 'fs';
 // connection errors.
 const BASE = process.argv[2] || 'http://127.0.0.1:8823';
 const ROOT = './dist';
-const CHROME = process.env.CHROME_PATH || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
+// CHROME_PATH names a browser to use (the Linux sandbox sets it); otherwise
+// Playwright's own, as every other check here does. A default pointing at
+// the sandbox's browser failed on the Mac, where that path does not exist.
+const CHROME = process.env.CHROME_PATH;
 
 const CORE = ['CTSOTS', 'CTSNT', 'CTSST', 'CTSEVANGELISM', 'CTSPM', 'CTSCH', 'WISESPEAK'];
 
@@ -51,7 +54,7 @@ const fails = [];
 let checks = 0;
 function ok(cond, label) { checks++; if (!cond) fails.push(label); }
 
-const browser = await chromium.launch({ executablePath: CHROME });
+const browser = await chromium.launch(CHROME ? { executablePath: CHROME } : {});
 
 /* Every unit has had real fill-ins since 26 Sept 2026, and the tests use
    them. A unit that ever arrives without them is given ten made-up ones
