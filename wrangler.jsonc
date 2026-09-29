@@ -55,10 +55,14 @@
 		// "send" to write to them, anything else to write to nobody
 		"OUTREACH_MODE": "send",
 		"OUTREACH_FROM": "Wayne Cook at Chapala Theological Seminary <certificates@chapalaseminary.org>",
-		"SITE_ORIGIN": "https://chapalaseminary.org"
-		// The staff pages (worker/staff.js) stay closed until Cloudflare Access
-		// is set up and these two are added (docs/student-tracker.md):
-		//   "ACCESS_TEAM": "<team name>", "ACCESS_AUD": "<application audience tag>"
+		"SITE_ORIGIN": "https://chapalaseminary.org",
+		// The staff pages (worker/staff.js): Cloudflare Access, team domain
+		// chapalatheological.cloudflareaccess.com, and the audience tag of the
+		// Access application covering /staff on chapalaseminary.org and
+		// beta.chapalaseminary.org (docs/student-tracker.md). Not secrets: they
+		// say which sign-in to trust, and grant nothing on their own.
+		"ACCESS_TEAM": "chapalatheological",
+		"ACCESS_AUD": "debf55802de573c5790f05b163c141178b068b01ee8c84ef0ed14c26224bb25c"
 	},
 	// Once a day at 15:00 UTC (9:00 in Mexico City): notes to students who have
 	// gone quiet, and on Mondays the seminary's weekly summary.
@@ -106,7 +110,10 @@
 				// beta's students are people testing the site: nobody is written
 				// to; /staff/notes shows who would be, and the notes themselves
 				"OUTREACH_MODE": "off",
-				"SITE_ORIGIN": "https://beta.chapalaseminary.org"
+				"SITE_ORIGIN": "https://beta.chapalaseminary.org",
+				// the same Access application covers beta's /staff
+				"ACCESS_TEAM": "chapalatheological",
+				"ACCESS_AUD": "debf55802de573c5790f05b163c141178b068b01ee8c84ef0ed14c26224bb25c"
 			},
 			"triggers": {
 				"crons": ["0 15 * * *"]

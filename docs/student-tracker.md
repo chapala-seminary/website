@@ -79,6 +79,14 @@ all of it ("CTS completions: 22 courses — …"), not one email per course.
 
 ## Setting up the sign-in (once, by Robert)
 
+**Done 29 Sept 2026.** The team domain is
+`chapalatheological.cloudflareaccess.com`. One Access application covers
+`chapalaseminary.org/staff` and `beta.chapalaseminary.org/staff`, and lets in
+the addresses named in its "Email" policy. `ACCESS_TEAM` and `ACCESS_AUD` are
+in `wrangler.jsonc` for both environments. To let someone else in, add their
+address to that policy; nothing in the code changes. The steps below are kept
+for reference.
+
 The staff pages stay closed ("not set up on this site yet") until Cloudflare
 Access is configured. Access is Cloudflare's login gate. It is free for up to
 50 people. The people it lets in sign in with a one-time code emailed to them,
@@ -141,7 +149,7 @@ so a plain `curl` is refused:
 - Apply the migration to each database:
   `npx wrangler d1 migrations apply chapala-students-beta --env beta --remote`,
   and the same for `chapala-students`.
-- Set up Access (above).
+- Set up Access (above). Done 29 Sept.
 - **Wayne reads the notes** at `/staff/notes` on beta. The wording is
   Claude's draft, signed with his name; he should change anything that does
   not sound like him. The text is in `worker/outreach.js`, `note()`.
