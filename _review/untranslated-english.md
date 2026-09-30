@@ -1,5 +1,12 @@
 # English still showing when a unit is read in Spanish
 
+> **Update, 30 Sept (later):** sections 2 and 3 are done as drafts for Dr.
+> Cook — see `_review/spanish-drafts.md`. A closer look showed the diagrams
+> were drawn bilingual on purpose (each English line has its Spanish line
+> beneath it), so those pairs stay; the lines with no Spanish, the captions,
+> and the headings and buttons now follow the language switch. Section 4 is
+> unchanged.
+
 _30 Sept 2026, after Dr. Cook's real-device beta pass. Found by opening all
 451 unit pages in English and in Spanish, lesson and exam views, and listing
 text that stays the same in both and reads as English. Course names in

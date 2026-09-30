@@ -52,7 +52,7 @@ const student = (track) => ({
       await p.goto(`${BASE}/${f}`, { waitUntil: 'load' }); await p.waitForTimeout(100);
       const r = await p.evaluate(() => ({
         es: document.body.classList.contains('lang-es'),
-        en: [...document.querySelectorAll('.lang-en')].find((e) => e.offsetParent !== null && e.textContent.trim().length > 20)?.textContent.trim().slice(0, 50) || null,
+        en: [...document.querySelectorAll('.lang-en')].find((e) => e.checkVisibility({ checkVisibilityCSS: true }) && e.textContent.trim().length > 20)?.textContent.trim().slice(0, 50) || null,
       }));
       ok(r.es && !r.en, `${f}: a Spanish reader got English (${r.es ? `"${r.en}"` : 'page in English'})`);
     }
