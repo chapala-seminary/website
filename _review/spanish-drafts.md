@@ -10,8 +10,8 @@ bibliaparalela.com/rvg): Nehemías 8:8 and Mateo 28:19.
 
 - **Diagrams.** They were already drawn in both languages: nearly every English
   line has its Spanish line under it, and they stay that way. What was missing
-  was Spanish for the lines that had none (dates, verse references, a few
-  labels). Those lines now switch with the page's language.
+  was Spanish for the lines that had none (verse references and a few
+  labels; dates stay BC/AD as written). Those lines now switch with the page's language.
 - **Diagram captions** (the line under each diagram) were shown in English and
   Spanish together; each now shows only in its own language. 15 diagrams.
 - **Systematic Theology, Unit 7** ("The Order of Salvation") had its own Spanish
@@ -25,23 +25,6 @@ bibliaparalela.com/rvg): Nehemías 8:8 and Mateo 28:19.
 | English | Spanish (draft) | Where |
 |---|---|---|
 | Genesis 1–11 | Génesis 1–11 | Old Testament Survey 1 |
-| c. 2000 BC | c. 2000 a.C. | Old Testament Survey 1 |
-| c. 1446 BC | c. 1446 a.C. | Old Testament Survey 1 |
-| c. 1406 BC | c. 1406 a.C. | Old Testament Survey 1 |
-| c. 1375 BC | c. 1375 a.C. | Old Testament Survey 1 |
-| c. 1050 BC | c. 1050 a.C. | Old Testament Survey 1 |
-| 930 BC | 930 a.C. | Old Testament Survey 1 |
-| 722 BC | 722 a.C. | Old Testament Survey 1 |
-| 586 BC | 586 a.C. | Old Testament Survey 1 |
-| 538 BC | 538 a.C. | Old Testament Survey 1 |
-| c. 5–4 BC | c. 5–4 a.C. | New Testament Survey 1, Life of Christ 1 |
-| c. AD 26 | c. 26 d.C. | New Testament Survey 1, Life of Christ 1 |
-| c. AD 30 | c. 30 d.C. | New Testament Survey 1, Life of Christ 1 |
-| c. AD 34 | c. 34 d.C. | New Testament Survey 1, Life of Christ 1 |
-| c. AD 47–57 | c. 47–57 d.C. | New Testament Survey 1, Life of Christ 1 |
-| c. AD 48–67 | c. 48–67 d.C. | New Testament Survey 1, Life of Christ 1 |
-| AD 70 | 70 d.C. | New Testament Survey 1, Life of Christ 1 |
-| c. AD 95 | c. 95 d.C. | New Testament Survey 1, Life of Christ 1 |
 | Incense | Incienso | New Testament Survey 2, Life of Christ 7 |
 | The Life of Christ | La Vida de Cristo | Life of Christ 1, Life of Christ 2, Life of Christ 3, Life of Christ 4, Life of Christ 5, Life of Christ 6, Life of Christ 7, Life of Christ 8, Life of Christ 9, Life of Christ 10 |
 | Unit 1 · The Word Became Flesh | Unidad 1 · El Verbo fue hecho carne | Life of Christ 1 |
@@ -130,11 +113,9 @@ bibliaparalela.com/rvg): Nehemías 8:8 and Mateo 28:19.
 
 ## Questions for Dr. Cook
 
-1. **Dates:** "BC/AD" became "a.C./d.C." (e.g. "c. 1446 a.C.", "c. 26 d.C.").
-   Right for the students, or keep BC/AD?
-2. **YHWH** in Biblical Languages 5: "YHWH (Yahvé / «JEHOVÁ»)", following the
+1. **YHWH** in Biblical Languages 5: "YHWH (Yahvé / «JEHOVÁ»)", following the
    RVG's rendering of the Name. Or another form?
-3. **Unit 1 of Life of Christ:** "El Verbo fue hecho carne" follows the RVG of
+2. **Unit 1 of Life of Christ:** "El Verbo fue hecho carne" follows the RVG of
    John 1:14 ("Y aquel Verbo fue hecho carne").
-4. Left in English on purpose: Hebrew letter names, Greek transliterations,
+3. Left in English on purpose: Hebrew letter names, Greek transliterations,
    *Scutum Fidei*, *WiseSpeak*, and titles of real books and churches.
