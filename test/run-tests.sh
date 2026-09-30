@@ -226,6 +226,9 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   # Credential boundaries: each course counts toward a degree only at the level
   # it was completed on (Dr. Cook's review, 29 Sept), in the browser and the Worker.
   node tools/verify-degrees.mjs "http://127.0.0.1:$PORT"
+  # The lesson and its exam are never on screen together, on any unit page, so
+  # the browser's Find cannot search the lesson for an answer (29 Sept).
+  node tools/verify-exam-view.mjs "http://127.0.0.1:$PORT"
   if [ -n "$HAVE_REFERENCE" ]; then
     node tools/verify-catalog.mjs ./_reference-index.html
   else

@@ -932,6 +932,12 @@ Students also receive their certificate by email once it is registered
   Paul, Ignacio and Ken), `tools/verify-degrees.mjs` (boundaries, 44 course
   IDs), `tools/verify-devmode.mjs` (the twelve hours; no records sent).
 * **Backups:** `docs/disaster-recovery.md`.
+* **Lesson and exam shown separately (30 Sept).** Every unit page opens on
+  the lesson with a "Take the exam" button; opening the exam hides the lesson
+  ("Back to the lesson" returns, answers kept), so the browser's Find cannot
+  search the lesson for an answer (`assets/js/cts-exam-view.js`,
+  `tools/verify-exam-view.mjs` on all 451 pages). A stopgap: the answer key
+  stays in the page source until grading moves to the server, after cutover.
 
 ## How to check any of this yourself
 

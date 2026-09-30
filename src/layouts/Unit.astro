@@ -218,6 +218,9 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
     <script is:inline src={version('/assets/js/cts-record.js')}></script>
     <script is:inline src={version('/assets/js/cts-engine.js')}></script>
     {scripts.map((src) => <script is:inline src={version(src)}></script>)}
+    {/* The lesson and the exam are never shown together, so the browser's
+        Find cannot search the lesson for an answer (Dr. Cook's review, 29 Sept). */}
+    <script is:inline src={version('/assets/js/cts-exam-view.js')}></script>
     {/* Mirrors this browser's progress to the seminary's database so a cleared
         browser or a new phone is no longer the end of someone's degree. It is
         dormant until the API exists: one probe per tab, then silence. See
