@@ -30,11 +30,11 @@ const ok = (c, label, detail) => { checks++; if (!c) fails.push(label + (detail 
 const fnSource = (src, name) => (new RegExp(`\\n  function ${name}\\([^)]*\\) \\{[\\s\\S]*?\\n  \\}`).exec(src) || [''])[0];
 const engine = fs.readFileSync('public/assets/js/cts-engine.js', 'utf8');
 const widget = fs.readFileSync('public/assets/js/cts-fill.js', 'utf8');
-for (const f of ['normalise', 'bare', 'fillRight']) {
+for (const f of ['normalise', 'fold', 'bare', 'fillRight']) {
   ok(fnSource(engine, f) && fnSource(engine, f) === fnSource(widget, f),
     `cts-fill.js ${f}() is cts-engine.js's own, word for word`);
 }
-const { fillRight } = new Function(`${fnSource(engine, 'normalise')}\n${fnSource(engine, 'bare')}\n${fnSource(engine, 'fillRight')}\nreturn { fillRight };`)();
+const { fillRight } = new Function(`${fnSource(engine, 'normalise')}\n${fnSource(engine, 'fold')}\n${fnSource(engine, 'bare')}\n${fnSource(engine, 'fillRight')}\nreturn { fillRight };`)();
 
 const COURSES = {
   counseling: { units: 11, pages: ['CTSCounseling.html'] },

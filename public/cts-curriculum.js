@@ -461,7 +461,16 @@
    current deploy or a stale one. Bump BUILD (and version.txt) each deploy. */
 (function () {
   var BUILD = "2026-09-15-testerbar1";
+  /* Testers need it; students do not (Dr. Cook's beta pass, 30 Sept 2026).
+     Shown on the beta site and this machine, and on the real site only in
+     tester mode. /version.txt answers everywhere. */
+  function wanted() {
+    var h = location.hostname || "";
+    if (!/^(www\.)?chapalaseminary\.org$/.test(h)) return true;
+    try { return localStorage.getItem("cts_test_mode") === "1"; } catch (e) { return false; }
+  }
   function stamp() {
+    if (!wanted()) return;
     if (document.getElementById("cts-build-stamp")) return;
     if (!document.body) return;
     var el = document.createElement("div");

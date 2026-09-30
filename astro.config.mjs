@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import langIntegration from './tools/inject-lang.mjs';
 
 export default defineConfig({
   site: 'https://chapalaseminary.org',
@@ -7,4 +8,6 @@ export default defineConfig({
   build: { format: 'file' },
   outDir: './dist',
   publicDir: './public',
+  // every page restores the reader's chosen language (tools/inject-lang.mjs)
+  integrations: [langIntegration()],
 });

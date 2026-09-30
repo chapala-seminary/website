@@ -226,7 +226,7 @@
 </head>
 <body class="lang-en">
 <script src="cts-lang.js"></script>
-<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<a href="#catalog" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 <span class="en">Course Catalog</span><span class="es">Catálogo de cursos</span></a>
 
 <div class="topbar"><div class="wrap">
   <span class="mark">Chapala Theological Seminary</span>
@@ -376,10 +376,10 @@
         <h2 class="section" style="color:#fff;margin:4px 0 8px"><span class="en">Register Here &mdash; for Every Course</span><span class="es">Reg&iacute;strese Aqu&iacute; &mdash; para Todos los Cursos</span></h2>
         <p style="margin:0 0 16px;font-size:15px;line-height:1.5"><span class="en">Enter your name and choose your track &mdash; you only register once. Your progress is saved in this browser as you study, and kept with the seminary under your student code, so you can continue on any device. A confirmed email is needed only to receive a certificate.</span><span class="es">Escriba su nombre y elija su v&iacute;a &mdash; se registra una sola vez. Su progreso se guarda en este navegador mientras estudia, y en el seminario bajo su c&oacute;digo de estudiante, para que pueda continuar en cualquier dispositivo. Solo se necesita un correo confirmado para recibir un certificado.</span></p>
         <div id="cts-reg-form" style="display:grid;gap:10px;">
-          <input id="reg-name" type="text" placeholder="Full name / Nombre completo" style="padding:11px;border-radius:7px;border:1px solid #b08324;font:15px Georgia,serif;">
-          <input id="reg-email" type="email" placeholder="Email (needed for a certificate) / Correo (necesario para un certificado)" style="padding:11px;border-radius:7px;border:1px solid #b08324;font:15px Georgia,serif;">
-          <select id="reg-country" style="padding:11px;border-radius:7px;border:1px solid #b08324;font:15px Georgia,serif;background:#fff;">
-            <option value="">Country / Pa&iacute;s &mdash; select / seleccione</option>
+          <input id="reg-name" type="text" placeholder="Full name / Nombre completo" data-en="Full name" data-es="Nombre completo" style="padding:11px;border-radius:7px;border:1px solid #b08324;font:15px Georgia,serif;">
+          <input id="reg-email" type="email" placeholder="Email (needed for a certificate) / Correo (necesario para un certificado)" data-en="Email (needed for a certificate)" data-es="Correo (necesario para un certificado)" style="padding:11px;border-radius:7px;border:1px solid #b08324;font:15px Georgia,serif;">
+          <select id="reg-country" data-bilingual style="padding:11px;border-radius:7px;border:1px solid #b08324;font:15px Georgia,serif;background:#fff;">
+            <option value="" data-en="Country — select" data-es="País — seleccione">Country / Pa&iacute;s &mdash; select / seleccione</option>
 <option value="AF">Afghanistan · Afganistán</option>
 <option value="AL">Albania</option>
 <option value="DZ">Algeria · Argelia</option>
@@ -580,8 +580,8 @@
 <option value="ZW">Zimbabwe · Zimbabue</option>
 <option value="OT">Other / Prefer not to say · Otro / Prefiero no decir</option>
           </select>
-          <select id="reg-heard" style="padding:11px;border-radius:7px;border:1px solid #b08324;font:15px Georgia,serif;background:#fff;">
-            <option value="">How did you hear about CTS? / &iquest;C&oacute;mo se enter&oacute; de CTS? (optional / opcional)</option>
+          <select id="reg-heard" data-bilingual style="padding:11px;border-radius:7px;border:1px solid #b08324;font:15px Georgia,serif;background:#fff;">
+            <option value="" data-en="How did you hear about CTS? (optional)" data-es="¿Cómo se enteró de CTS? (opcional)">How did you hear about CTS? / &iquest;C&oacute;mo se enter&oacute; de CTS? (optional / opcional)</option>
             <option value="search">Google / Search Engine &middot; Google / Motor de b&uacute;squeda</option>
             <option value="ai">ChatGPT / AI &middot; ChatGPT / IA</option>
             <option value="referral">Friend or Pastor &middot; Amigo o Pastor</option>
@@ -589,7 +589,7 @@
             <option value="social">Social Media &middot; Redes Sociales</option>
             <option value="other">Other &middot; Otro</option>
           </select>
-          <select id="reg-track" style="padding:11px;border-radius:7px;border:1px solid #b08324;font:15px Georgia,serif;background:#fff;">
+          <select id="reg-track" data-bilingual style="padding:11px;border-radius:7px;border:1px solid #b08324;font:15px Georgia,serif;background:#fff;">
             <option value="cert">Certificate of Ministry &middot; Certificado de Ministerio</option>
             <option value="assoc">Associate of Divinity &middot; Asociado en Divinidad</option>
             <option value="thm">Master of Theology &middot; Maestr&iacute;a en Teolog&iacute;a</option>
@@ -617,25 +617,28 @@
             <span class="es">An&oacute;telo y mant&eacute;ngalo en privado: tr&aacute;telo como una contrase&ntilde;a. Es la &uacute;nica manera de recuperar su progreso si borra este navegador o cambia de dispositivo, y cualquiera que lo tenga puede abrir su registro. Puede volver a encontrarlo en la p&aacute;gina <a href="cts-backup.html" style="color:#6d2233;font-weight:700;">Guardar y Restaurar</a>.</span>
           </p>
         </div>
+        <script src="/assets/js/cts-fields-lang.js" defer></script>
         <script>
         function ctsRegister(){
           var name=(document.getElementById('reg-name').value||'').trim();
-          if(!name){ alert('Please enter your name  \u00b7  Escriba su nombre'); return; }
+          var es=document.body.classList.contains('lang-es');
+          if(!name){ alert(es?'Escriba su nombre':'Please enter your name'); return; }
           var email=(document.getElementById('reg-email').value||'').trim()||'\u2014';
           var country=document.getElementById('reg-country').value;
-          if(!country){ alert('Please select your country  \u00b7  Seleccione su pa\u00eds'); return; }
+          if(!country){ alert(es?'Seleccione su pa\u00eds':'Please select your country'); return; }
           var heard=document.getElementById('reg-heard').value||'\u2014';
           var sel=document.getElementById('reg-track').value;
-          var map={cert:{p:'Certificate of Ministry',g:''},assoc:{p:'Associate of Divinity',g:'assoc'},thm:{p:'Master of Theology',g:''},mdiv:{p:'Master of Divinity',g:''}};
+          var map={cert:{p:'Certificate of Ministry',es:'Certificado de Ministerio',g:''},assoc:{p:'Associate of Divinity',es:'Asociado en Divinidad',g:'assoc'},thm:{p:'Master of Theology',es:'Maestr\u00eda en Teolog\u00eda',g:''},mdiv:{p:'Master of Divinity',es:'Maestr\u00eda en Divinidad',g:''}};
           var m=map[sel]; var track=(sel==='assoc')?'cert':sel;
           try{
             localStorage.setItem('cts_student', JSON.stringify({name:name,email:email,country:country,heard:heard,track:track,program:m.p,goal:m.g,registered:new Date().toISOString()}));
             localStorage.setItem('cts_track', track);
             localStorage.setItem('cts_goal', m.g);
-          }catch(e){ alert('Could not save \u2014 enable storage  \u00b7  No se pudo guardar'); return; }
+          }catch(e){ alert(es?'No se pudo guardar \u2014 active el almacenamiento':'Could not save \u2014 enable storage'); return; }
           document.getElementById('cts-reg-form').style.display='none';
           var c=document.getElementById('reg-confirm'); c.style.display='block';
-          c.innerHTML='<b>\u2713 '+name+'</b> \u2014 '+m.p+'.<br><span class="en">You are registered. Open any course to begin.</span><span class="es">Est&aacute; registrado. Abra cualquier curso para comenzar.</span>';
+          var safe=name.replace(/[&<>"]/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch];});
+          c.innerHTML='<b>\u2713 '+safe+'</b> \u2014 <span class="en">'+m.p+'</span><span class="es">'+m.es+'</span>.<br><span class="en">You are registered. Open any course to begin.</span><span class="es">Est&aacute; registrado. Abra cualquier curso para comenzar.</span>';
           ctsShowCode();
         }
 

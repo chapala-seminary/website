@@ -61,7 +61,7 @@ const fnSource = (name) => {
   return m[0];
 };
 const { normalise, fillRight } = new Function(
-  `${fnSource('normalise')}\n${fnSource('bare')}\n${fnSource('fillRight')}\nreturn { normalise, fillRight };`)();
+  `${fnSource('normalise')}\n${fnSource('fold')}\n${fnSource('bare')}\n${fnSource('fillRight')}\nreturn { normalise, fillRight };`)();
 const norm = (s) => normalise(s).trim();
 
 // ---- the lesson text --------------------------------------------------------

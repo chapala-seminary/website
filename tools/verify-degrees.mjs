@@ -164,7 +164,7 @@ ok(seenPage.size === 8, 'every diploma page was opened on both sides of its boun
     window.CTS_ENGINE.controls.submit().click(); });
   await p.waitForTimeout(800);
   const r = await p.evaluate(() => ({ done: localStorage.getItem('cts_done_codes'), assoc: localStorage.getItem('cts_assoc_done_codes'), res: (window.CTS_ENGINE.controls.result() || {}).textContent }));
-  ok(/Passed|Aprobado/.test(r.res || ''), 'an Associate student passes the last unit with multiple choice and fill-ins, no short answer', (r.res || '').slice(0, 80));
+  ok(/passed|aprobada/i.test(r.res || ''), 'an Associate student passes the last unit with multiple choice and fill-ins, no short answer', (r.res || '').slice(0, 80));
   ok((r.done || '').includes('CTSACTS') && (r.assoc || '').includes('CTSACTS'), 'and the course is recorded at the Associate level', JSON.stringify(r));
   await ctx.close();
 }

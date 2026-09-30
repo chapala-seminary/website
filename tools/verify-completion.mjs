@@ -56,7 +56,7 @@ async function ctx(){ const c=await b.newContext(); const p=await c.newPage(); c
     window.CTS_ENGINE.controls.submit().click(); });
   await p.waitForTimeout(800);
   const s=await p.evaluate(()=>({d:localStorage.getItem('cts_done_codes'), m:localStorage.getItem('cts_mdiv_done_codes'), res:(window.CTS_ENGINE.controls.result()||{}).textContent}));
-  ok(/Passed|Aprobado/.test(s.res||''), 'last unit passed ('+(s.res||'').slice(0,60)+')');
+  ok(/passed|aprobada/i.test(s.res||''), 'last unit passed ('+(s.res||'').slice(0,60)+')');
   ok(s.d && s.d.includes('CTSACTS') && s.m && s.m.includes('CTSACTS'), 'passing the last unit recorded the course on the M.Div. list ('+s.d+' / '+s.m+')');
   ok(posts.length===0, 'and nothing posted to the old Sheet ('+posts.length+')');
   await c.close(); }
