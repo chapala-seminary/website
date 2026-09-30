@@ -162,7 +162,9 @@
   function testMode() {
     // the flag cts-curriculum.js sets once the tester key is given; the
     // address alone ("?ctstest=on") no longer turns anything on
-    try { return localStorage.getItem('cts_test_mode') === '1'; }
+    // (and only for the twelve hours it lasts)
+    try { return localStorage.getItem('cts_test_mode') === '1' &&
+      Date.now() - (+localStorage.getItem('cts_test_mode_at') || 0) < 12 * 3600 * 1000; }
     catch (_) { return false; }
   }
 

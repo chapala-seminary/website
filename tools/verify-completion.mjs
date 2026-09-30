@@ -35,9 +35,11 @@ async function ctx(){ const c=await b.newContext(); const p=await c.newPage(); c
   const ls2=await p.evaluate(()=>({d:localStorage.getItem('cts_done_codes'), r:localStorage.getItem('cts_degree_courses')}));
   ok(ls2.d && ls2.d.includes('CTSACTS'), 'front page catch-up recorded CTSACTS ('+ls2.d+')');
   ok(ls2.r && ls2.r.includes('Acts Intensive'), 'and the degree roster name ('+ls2.r+')');
-  ok(posts.length===1 && /course=Acts/.test(posts[0]||''), 'and notified the seminary once ('+posts.length+')');
+  // The seminary is told by the Worker when the sync brings this (worker/notify.js,
+  // test/api.test.mjs); the old Apps Script Sheet is no longer posted to.
+  ok(posts.length===0, 'nothing posted to the old Apps Script Sheet ('+posts.length+')');
   await p.reload(); await p.waitForTimeout(1500);
-  ok(posts.length===1, 'a second visit does not notify again ('+posts.length+')');
+  ok(posts.length===0, 'nor on a second visit ('+posts.length+')');
   await c.close(); }
 // 3. passing the last unit records it (associate: needs SA too)
 { const {c,p,posts}=await ctx();
@@ -56,7 +58,7 @@ async function ctx(){ const c=await b.newContext(); const p=await c.newPage(); c
   const s=await p.evaluate(()=>({d:localStorage.getItem('cts_done_codes'), m:localStorage.getItem('cts_mdiv_done_codes'), res:(window.CTS_ENGINE.controls.result()||{}).textContent}));
   ok(/Passed|Aprobado/.test(s.res||''), 'last unit passed ('+(s.res||'').slice(0,60)+')');
   ok(s.d && s.d.includes('CTSACTS') && s.m && s.m.includes('CTSACTS'), 'passing the last unit recorded the course on the M.Div. list ('+s.d+' / '+s.m+')');
-  ok(posts.length===1, 'and notified once ('+posts.length+')');
+  ok(posts.length===0, 'and nothing posted to the old Sheet ('+posts.length+')');
   await c.close(); }
 /* 4. A student from the old site who finished the foundation and was still
  * locked out (Wayne's tracker, 27 Sept: "the catalog didn't unlock for him at

@@ -30,14 +30,27 @@ export const MDIV_CORE = [
   'CTSAPOL', 'COUNSELING', 'CTSAL', 'CTSWORSHIP', 'CTSCE', 'CTSMISSIONS',
 ];
 
+/* A course counts toward a degree only at the level it was completed on
+   (Dr. Cook, 29 Sept 2026): cert < assoc < thm = mdiv. The same table is in
+   public/assets/js/cts-degrees.js, for the diploma pages;
+   tools/verify-degrees.mjs holds them equal. */
 export const DEGREES = {
-  certificate: { courses: 12, core: FOUNDATION, masters: false },   // Certificate of Ministry
-  associate:   { courses: 25, core: FOUNDATION, masters: false },   // Associate of Divinity
-  thm:         { courses: 12, core: FOUNDATION, masters: true },    // Master of Theology
-  mdiv:        { courses: 30, core: MDIV_CORE,  masters: true },    // Master of Divinity
+  certificate: { courses: 12, core: FOUNDATION, levels: ['cert', 'assoc', 'thm', 'mdiv'] },   // Certificate of Ministry
+  associate:   { courses: 25, core: FOUNDATION, levels: ['assoc', 'thm', 'mdiv'] },           // Associate of Divinity
+  thm:         { courses: 12, core: FOUNDATION, levels: ['thm', 'mdiv'] },                    // Master of Theology
+  mdiv:        { courses: 30, core: MDIV_CORE,  levels: ['thm', 'mdiv'] },                    // Master of Divinity
 };
 
-const MASTERS = new Set(['thm', 'mdiv']);
+/** The level a student's work is done at now: their track, with the
+ *  Associate goal (a Certificate-track student aiming at the Associate)
+ *  counted as 'assoc'. Used for a completion recorded without a level. */
+export function studentLevel(track, goal) {
+  const t = String(track || '').toLowerCase();
+  if (t === 'mdiv' || t === 'thm') return t;
+  if (t === 'mth') return 'thm';
+  if (t === 'assoc' || t === 'associate' || t === 'ad' || String(goal || '').toLowerCase() === 'assoc') return 'assoc';
+  return 'cert';
+}
 
 /** The units a course certificate needs, or null for a course with no units
  *  (unknown, or a single-page course). Accepts the slug or the code. */
@@ -74,19 +87,19 @@ export function courseShortfall(slug, unitsDone) {
 }
 
 /** completions: [{code, track}] (a bare code string is taken as track
- *  unknown); track: the student's current track, used where a completion's
- *  own track is unknown. null when the record supports the award. */
+ *  unknown); track: the student's level now (studentLevel), used where a
+ *  completion's own level is unknown. null when the record supports the award. */
 export function degreeShortfall(level, completions, track) {
   const d = DEGREES[level];
   if (!d) return 'unknown award';
-  const own = String(track || '').toLowerCase();
+  const own = studentLevel(track);
   const have = new Set();
   for (const c of completions) {
     const code = String(typeof c === 'string' ? c : c.code).toUpperCase();
-    const earned = String((typeof c === 'string' ? null : c.track) || own).toLowerCase();
-    if (!d.masters || MASTERS.has(earned)) have.add(code);
+    const earned = studentLevel((typeof c === 'string' ? null : c.track) || own);
+    if (d.levels.includes(earned)) have.add(code);
   }
-  const level_ = d.masters ? "master's-level " : '';
+  const level_ = level === 'thm' || level === 'mdiv' ? "master's-level " : level === 'associate' ? 'Associate-level ' : '';
   const problems = [];
   if (have.size < d.courses) problems.push(`${have.size} of ${d.courses} ${level_}courses recorded`);
   const core = d.core.filter((c) => !have.has(c));

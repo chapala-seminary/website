@@ -768,6 +768,177 @@ Students also receive their certificate by email once it is registered
 
 ---
 
+---
+
+### 8w. Dr. Cook's answers of 29 Sept — 5 lessons, 2 units' questions, the Counseling page and the Pentateuch PDF changed
+
+* **Matthew, Unit 5:** the three sections on the last petitions of the Lord's
+  Prayer, written by Claude in #6, are replaced with Dr. Cook's own teaching:
+  "Give Us This Day Our Daily Bread", "Forgive Us Our Debts, As We Forgive Our
+  Debtors" and "Lead Us Not into Temptation". The Spanish is Claude's
+  translation, marked "Translated automatically". Scripture in the Spanish
+  follows the wording the course already uses (Mateo 6:11–13, 6:14–15, Lucas
+  15:19, 22:42).
+* **Matthew, Unit 3:** "Edgar, the great musician" → "Elgar", in both
+  languages. The persecuted Beatitude section stays as written.
+* **Radical Discipleship, Unit 13:** the hospital illustration is replaced with
+  Dr. Cook's own account, "Jim's Last Words". Multiple-choice question 12 and
+  short-answer question 4 asked about the old illustration and now ask about
+  Jim.
+* **Joshua 5:13–15 in NKJV wording:**
+  * Old Testament Survey Unit 4: the heading, the quotation and the summary
+    now read "Commander of the army of the LORD" and "Take your sandal off your
+    foot, for the place where you stand is holy". Three of its questions
+    changed with them. The fill-in's answer is now "Commander", with
+    "Captain" and "Prince" accepted.
+  * Joshua Unit 10: the same verses are quoted from the NKJV, and the Spanish
+    from the RVG.
+  * The Joshua course's own teaching keeps "the Captain", as Dr. Cook asked on
+    27 Sept; only its quotations change.
+* **Counseling 7.7:** "What does she think?" → "What does he think?". The
+  Spanish now reads "su anciano … ¿Qué piensa él?".
+* **Unchanged, as Dr. Cook decided:**
+  * WiseSpeak keeps Philip's daughters "preached" in English and
+    "profetizaban" in Spanish.
+  * Every "Solomon" in Narrative Preaching refers to the author whose
+    framework the course follows. The one mention of King Solomon is
+    already "Salomón".
+* **Pentateuch PDF certificate:** Dr. Ted Rogers, who wrote the course, is
+  "Course Author" on it, and Dr. Cook is "Founder & Instructor", the roles the
+  certificate page itself shows. Every other course is unchanged.
+  `tools/verify-cert-pdf.mjs` checks both.
+* **Still open:**
+  * The Spanish course names from the current bilingual Certificate Maker.
+    The copy in hand is the older English-only one.
+  * The RVG wording checks listed in `_review/lesson-fixes/FOR-DR-COOK.md`.
+* **Files:** `_review/lesson-fixes/CTSMatt-4.json`, `CTSRadical-4.json`,
+  `joshua5-nkjv.json` (applied with `tools/fix-lesson-text.mjs`);
+  `src/content/units/CTS/4.json`, `src/content/units/CTSRadical/13.json`;
+  `public/CTSCounseling.html`; `public/assets/js/cts-cert-pdf.js`. The
+  baselines were updated for exactly these pages.
+
+---
+
+### 8x. Course names and authors from the Certificate Maker (29 Sept) — the PDF, 18 catalog names, 34 certificate pages
+
+* **Why:** Dr. Cook asked that the site's certificates use the names in the
+  seminary's current, bilingual Certificate Maker, and that the website
+  catalog use the same terms (e.g. "Ministerio Pastoral", not "Ministerios
+  Pastorales"). Robert confirmed the co-authors on 29 Sept.
+* **Source:** the Maker's course list is copied into
+  `src/data/certificate-courses.json`: English name, Spanish name and
+  author(s) for 44 courses. The authors are:
+  * Pentateuch: Dr. Ted Rogers;
+  * Christian Education: Andi Cook;
+  * Romans and Practical Theology: Dr. Cook and Dr. Rogers;
+  * Ruth and Esther: Glenda Rogers;
+  * every other course: Dr. Cook.
+
+  Counseling Situations is not in the Maker, so it keeps the catalog's name.
+  "Parables of the Bible" is in the Maker but not on the site.
+* **PDF certificate** (`cts-cert-pdf.js`, names from `cts-cert-names.js`, now
+  written from that file):
+  * Names are the Maker's in both languages.
+  * Signatures follow the Maker: the course's author on the left as Course
+    Author, the Seminary Director on the right.
+  * On the Pentateuch, Dr. Rogers signs as "Course Author · Seminary Director"
+    and Dr. Cook as "Founder".
+  * On Romans and Practical Theology, both sign as Course Author.
+  * Andi Cook and Glenda Rogers have no signature on file, so their names are
+    printed in a script hand.
+  * The Spanish wording is the Maker's: "Se otorga este certificado a",
+    "Programa: Certificado de Ministerio", "Por la presente se hace constar
+    que", and the Maker's body text.
+  * The English track band reads "Certificate of Ministry Track".
+  * The director signs as "Seminary Director", the Maker's default, where it
+    was "Director of Education".
+* **Catalog** (`src/content/courses`): 18 Spanish names now follow the Maker.
+  Among them: "Hechos: Curso Intensivo" and the other intensives, "Personajes
+  Bíblicos", "Adoración Cristiana", "Ministerio Pastoral", "Pentateuco", "La
+  Doctrina del Espíritu Santo" and "Ética Pastoral y Cristiana".
+  * Preaching is "Predicación": the Maker's "(WiseSpeak)" is left off the
+    course's own name.
+  * The English names are unchanged.
+  * `tools/verify-catalog.mjs` lists the 18 renames and applies exactly those
+    to the hand-written reference, so any other change still fails.
+* **Certificate pages:**
+  * Where a page names its course in Spanish, it now uses the Maker's name:
+    title, heading, locked-page message, and the M.Div. and Th.M. diplomas'
+    course checklists. That covers 34 pages across 17 courses.
+  * "Profesor de Ministerios Pastorales" is Dr. Cook's title as a professor,
+    not a course name, and is left as is.
+* **Test:** `tools/verify-cert-pdf.mjs`, 112 assertions, now including who
+  signs for a course by Dr. Cook, the Pentateuch in both languages, Romans,
+  Ruth and Esther, and Christian Education.
+
+---
+
+### 8y. Spanish Scripture checked against the RVG (29 Sept) — 21 lessons, 3 units' questions, the Counseling page
+
+* **Why:** Dr. Cook: "passages on the review list … should be checked against
+  the RVG text rather than rewritten stylistically." The Reina Valera Gómez
+  2010 is read at bibliaparalela.com/rvg, one chapter at a time.
+* **What:**
+  * Every verse on `_review/lesson-fixes/FOR-DR-COOK.md` was compared word
+    for word. Nine were already exact; the rest are now the RVG's words and
+    punctuation, together with other quotations of the same verse in the
+    same course. The list of corrections is in that file.
+    Fixes: `_review/lesson-fixes/rvg-check.json`, `rvg-check-2.json`.
+  * **Galatians 5:22:** the RVG reads "paciencia". §8t had changed the
+    quotations to "longanimidad" in the mistaken belief that it was the RVG.
+    Galatians 6 and 8 and Practical Theology 9 now read "paciencia", as do
+    the Galatians exam's model answers and one option.
+  * **Joshua 5:14–15** in Spanish (Old Testament Survey 4, Joshua 4 and 10):
+    "No; sino que he venido ahora como Príncipe del ejército de Jehová" and
+    "Quita las sandalias de tus pies". The Joshua 4 exam's model answer
+    follows.
+  * **Counseling:** its ten Spanish scripture boxes quoted the Reina-Valera
+    1960 and now quote the RVG, labelled "(RVG)". The Proverbs 18:13
+    fill-in, multiple-choice and short-answer questions follow ("necedad y
+    vergüenza"); "fatuidad" is still accepted in the fill-in. Its English
+    boxes are still KJV.
+* **Not done:** other courses' quotations of these verses. The rule has been
+  applied course by course, not across the whole site.
+* **Baselines:** updated for exactly the 21 lessons and 3 units changed.
+
+### 8z. Dr. Cook's second review (29 Sept) — levels, wording, returning students
+
+* **Associate counts only Associate work.** A course now counts toward a
+  degree only at the level it was completed on. Certificate < Associate <
+  Th.M. = M.Div. A course passed on the Certificate track (multiple choice
+  only) counts toward the Certificate of Ministry, not the Associate; the
+  Associate needs its 25 courses passed with the fill-ins (9 of 10), including
+  the seven foundation courses. The browser keeps a new list,
+  `cts_assoc_done_codes`; a student whose goal was already the Associate has
+  everything they finished put on it once. The Worker stores `assoc` as a
+  level and never lowers one (`migrations/0007_levels.sql`, `worker/awards.js`,
+  `public/assets/js/cts-degrees.js`). The degree pages count through the same
+  rules as the Worker; `tools/verify-degrees.mjs` tests every boundary
+  Dr. Cook listed on both.
+* **Associate page wording:** "ten fill-in-the-blank questions", not short
+  answers; lists missing foundation courses.
+* **One sentence about records, everywhere:** progress is saved in the
+  browser and kept with the seminary under the student code; a confirmed
+  email is needed only for a certificate (front page, every unit page).
+* **Removed:** "four courses will get fill-ins in a later update" (front page,
+  Before You Begin) — they all have them.
+* **Course names in the records** no longer carry the certificate page's
+  " |" ("Romans |" → "Romans"). Matching always used the course code, so no
+  record changes; only names shown to staff do.
+* **One email per history:** the browser no longer posts to the old Apps
+  Script Sheet; the Worker's single notice is the only one.
+* **Tester mode** turns itself off twelve hours after the key is given.
+* **Tests:** `test/migration.test.mjs` (three returning students modelled on
+  Paul, Ignacio and Ken), `tools/verify-degrees.mjs` (boundaries, 44 course
+  IDs), `tools/verify-devmode.mjs` (the twelve hours; no records sent).
+* **Backups:** `docs/disaster-recovery.md`.
+* **Lesson and exam shown separately (30 Sept).** Every unit page opens on
+  the lesson with a "Take the exam" button; opening the exam hides the lesson
+  ("Back to the lesson" returns, answers kept), so the browser's Find cannot
+  search the lesson for an answer (`assets/js/cts-exam-view.js`,
+  `tools/verify-exam-view.mjs` on all 451 pages). A stopgap: the answer key
+  stays in the page source until grading moves to the server, after cutover.
+
 ## How to check any of this yourself
 
 ```

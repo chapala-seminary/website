@@ -75,6 +75,12 @@ for (const [name, c] of [['production', prod], ['beta', prod.env?.beta]]) {
   ok((c.triggers?.crons || []).length === 1, `${name}: one daily scheduled run, for the notes to students`,
     `found ${JSON.stringify(c.triggers?.crons)}`);
 }
+/* Beta answers at beta.chapalaseminary.org, the address the staff pages'
+   Access rule covers; production takes no address from this file until the
+   cutover changes that on purpose (docs/cutover.md, step 7). */
+ok(JSON.stringify(prod.env?.beta?.routes) === JSON.stringify([{ pattern: 'beta.chapalaseminary.org', custom_domain: true }]),
+  'beta is attached to beta.chapalaseminary.org as a custom domain', JSON.stringify(prod.env?.beta?.routes));
+ok(!prod.routes && !prod.route, 'production claims no address before the cutover', JSON.stringify(prod.routes || prod.route));
 ok(prod.env?.beta?.vars?.OUTREACH_MODE !== 'send',
   'beta does not write to students (its students are people testing the site)');
 

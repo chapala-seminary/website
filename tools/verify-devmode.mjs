@@ -144,6 +144,39 @@ async function session(steps) {
   ok(!off.tester, 'ctstest=off: the placeholder tester account was left behind');
 }
 
+/* 4b. Tester mode does not stay on (Dr. Cook's review, 29 Sept 2026): twelve
+      hours after the key is given it turns itself off, as ?ctstest=off does. */
+{
+  const ctx = await browser.newContext();
+  const page = await ctx.newPage();
+  const api = [];
+  page.on('request', (r) => { if (/\/api\/(register|sync|student)/.test(r.url())) api.push(r.url()); });
+  await page.goto(`${BASE}/index.html`, { waitUntil: 'load' });
+  await page.evaluate(() => localStorage.clear());
+  await page.goto(`${BASE}/index.html?ctstest=${KEY}`, { waitUntil: 'load' });
+  await page.waitForTimeout(1800);
+  // and a tester's work never reaches the student records
+  await page.goto(`${BASE}/CTSActsUnit1.html`, { waitUntil: 'load' }); await page.waitForTimeout(2500);
+  await page.goto(`${BASE}/index.html`, { waitUntil: 'load' }); await page.waitForTimeout(2500);
+  ok(api.length === 0, `tester mode sent ${api.length} request(s) to the student records: ${api[0] || ''}`);
+  const on = await page.evaluate(() => ({ flag: localStorage.getItem('cts_test_mode'), at: +localStorage.getItem('cts_test_mode_at') }));
+  ok(on.flag === '1' && Date.now() - on.at < 60000, 'ctstest=<key>: the time it was turned on is not stored');
+  await page.evaluate(() => localStorage.setItem('cts_test_mode_at', String(Date.now() - 11 * 3600 * 1000)));
+  await page.reload({ waitUntil: 'load' }); await page.waitForTimeout(800);
+  ok(await page.evaluate(() => localStorage.getItem('cts_test_mode')) === '1', 'tester mode ended before its twelve hours');
+  await page.evaluate(() => localStorage.setItem('cts_test_mode_at', String(Date.now() - 13 * 3600 * 1000)));
+  await page.reload({ waitUntil: 'load' }); await page.waitForTimeout(800);
+  const after = await page.evaluate(() => {
+    const cards = [...document.querySelectorAll('a.course')];
+    const s = (() => { try { return JSON.parse(localStorage.getItem('cts_student') || 'null'); } catch { return null; } })();
+    return { flag: localStorage.getItem('cts_test_mode'), locked: cards.filter((a) => /cts-locked/.test(a.className)).length,
+      bar: !!document.getElementById('cts-test-bar'), tester: !!(s && s._tester) };
+  });
+  ok(after.flag === null && after.locked > 0 && !after.bar && !after.tester,
+    `tester mode still on after twelve hours (flag ${after.flag}, ${after.locked} locked, bar ${after.bar}, placeholder ${after.tester})`);
+  await ctx.close();
+}
+
 /* 5. The one that matters. A real student turns tester mode on -- to look at a
       course they have not unlocked -- and must not lose a single unit they
       have passed. cts-curriculum.js wipes per-unit state to make exams
@@ -187,7 +220,7 @@ await browser.close();
 
 console.log(`${checks} course-tester assertions`);
 if (!fails.length) {
-  console.log('PASS — only the tester key opens every course; it persists, turns off again, ' +
+  console.log('PASS — only the tester key opens every course; it lasts twelve hours, turns off again, ' +
               'and costs a registered student nothing.');
 } else {
   console.log(`FAIL — ${fails.length}:`);

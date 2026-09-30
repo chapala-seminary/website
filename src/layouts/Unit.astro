@@ -158,8 +158,8 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
           <span class="lang-es">Regístrese una vez, para todos los cursos</span>
         </h2>
         <p>
-          <span class="lang-en">Your name, track and progress are kept with the seminary under your student code, so you can continue on any device. Keep the code private, like a password. <a href="/CTSPrivacy.html">What we keep</a>.</span>
-          <span class="lang-es">Su nombre, trayecto y progreso se guardan en el seminario bajo su código de estudiante, para que pueda continuar en cualquier dispositivo. Mantenga el código en privado, como una contraseña. <a href="/CTSPrivacy.html">Lo que guardamos</a>.</span>
+          <span class="lang-en">Your progress is saved in this browser as you study, and kept with the seminary under your student code, so you can continue on any device. Keep the code private, like a password. A confirmed email is needed only to receive a certificate. <a href="/CTSPrivacy.html">What we keep</a>.</span>
+          <span class="lang-es">Su progreso se guarda en este navegador mientras estudia, y en el seminario bajo su código de estudiante, para que pueda continuar en cualquier dispositivo. Mantenga el código en privado, como una contraseña. Solo se necesita un correo confirmado para recibir un certificado. <a href="/CTSPrivacy.html">Lo que guardamos</a>.</span>
         </p>
         <div class="registration-fields">
           <div class="full">
@@ -218,6 +218,9 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
     <script is:inline src={version('/assets/js/cts-record.js')}></script>
     <script is:inline src={version('/assets/js/cts-engine.js')}></script>
     {scripts.map((src) => <script is:inline src={version(src)}></script>)}
+    {/* The lesson and the exam are never shown together, so the browser's
+        Find cannot search the lesson for an answer (Dr. Cook's review, 29 Sept). */}
+    <script is:inline src={version('/assets/js/cts-exam-view.js')}></script>
     {/* Mirrors this browser's progress to the seminary's database so a cleared
         browser or a new phone is no longer the end of someone's degree. It is
         dormant until the API exists: one probe per tab, then silence. See

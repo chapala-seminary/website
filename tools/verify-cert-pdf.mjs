@@ -71,7 +71,7 @@ const has = (t, s) => t.includes(s);
   ok(!errs.length, 'course PDF: no page errors', errs.join(' | '));
   ok(text.startsWith('%PDF-'), 'course PDF: a PDF is produced');
   ok(pages(text) === 1, 'course PDF: one page', `pages: ${pages(text)}`);
-  for (const s of ['JERSON VILLAFUERTE VALVERDE', 'Ministerios Pastorales', 'Con Honores', 'TRAYECTO DE CERTIFICADO',
+  for (const s of ['JERSON VILLAFUERTE VALVERDE', 'Ministerio Pastoral', 'Con Honores', 'PROGRAMA: CERTIFICADO DE MINISTERIO',
     'Seminario Teológico de Chapala', 'Fecha de finalización', 'AB12-CD34', 'Wayne Cook, Th.D.', 'Ted Rogers, D.Min.']) {
     ok(has(text, s), `course PDF (Spanish) says "${s}"`);
   }
@@ -85,6 +85,31 @@ const has = (t, s) => t.includes(s);
   for (const s of ['ANA LOPEZ', 'Pastoral Ministries', 'MASTER OF DIVINITY TRACK', 'Date of Completion']) ok(has(text, s), `course PDF (English) says "${s}"`);
   ok(!has(text, 'With Honors'), 'course PDF: no honors unless the honors reading is done');
 }
+/* Who signs, as the Certificate Maker lays it out (src/data/certificate-courses.json):
+   the author on the left, the Seminary Director on the right. */
+{
+  const seed = { cts_student: JSON.stringify({ name: 'Ana Lopez', track: 'certificate' }) };
+  const order = (t, a, b) => has(t, a) && has(t, b) && t.indexOf(a) < t.indexOf(b);
+  const pm = (await build('CTSPMCertificate.html', 'en', seed)).text;
+  ok(order(pm, 'Wayne Cook, Th.D.', 'Ted Rogers, D.Min.') && order(pm, 'COURSE AUTHOR', 'SEMINARY DIRECTOR') && !has(pm, 'FOUNDER'),
+    'a course Dr. Cook wrote: Dr. Cook, Course Author; Dr. Rogers, Seminary Director');
+  ok(!has(pm, 'DIRECTOR OF EDUCATION'), 'the director signs as Seminary Director, as the Certificate Maker has it');
+  const pent = (await build('CTSPentCertificate.html', 'en', seed)).text;
+  ok(order(pent, 'Ted Rogers, D.Min.', 'Wayne Cook, Th.D.') && order(pent, 'COURSE AUTHOR · SEMINARY DIRECTOR', 'FOUNDER'),
+    'the Pentateuch, which Dr. Rogers wrote: Dr. Rogers, Course Author and Director; Dr. Cook, Founder');
+  const pentEs = (await build('CTSPentCertificate.html', 'es', seed)).text;
+  ok(has(pentEs, 'AUTOR DEL CURSO · DIRECTOR DEL SEMINARIO') && has(pentEs, 'FUNDADOR') && has(pentEs, 'Pentateuco'), 'the same in Spanish');
+  const rom = (await build('CTSRomansCertificate.html', 'en', seed)).text;
+  ok(order(rom, 'Wayne Cook, Th.D.', 'Ted Rogers, D.Min.') && order(rom, 'COURSE AUTHOR', 'COURSE AUTHOR · SEMINARY DIRECTOR'),
+    'Romans, by both: each signs as Course Author');
+  const re = (await build('CTSRECertificate.html', 'en', seed)).text;
+  ok(has(re, 'Glenda Rogers') && !has(re, 'Wayne Cook, Th.D.') && order(re, 'COURSE AUTHOR', 'SEMINARY DIRECTOR') && has(re, 'Ruth and Esther'),
+    'Ruth and Esther: Glenda Rogers, Course Author, by name; Dr. Rogers, Seminary Director');
+  const imgs = (t) => (t.match(/\/Subtype \/Image/g) || []).length;   // a PNG with transparency counts twice
+  ok(imgs(re) > 0 && imgs(re) < imgs(pm), `and only the one signature on file is an image (${imgs(re)} image objects, ${imgs(pm)} with two)`);
+  const ce = (await build('CTSCECertificate.html', 'es', seed)).text;
+  ok(has(ce, 'Andi Cook') && has(ce, 'Educación Cristiana'), 'Christian Education: Andi Cook, Course Author');
+}
 // a degree diploma
 {
   const seed = { cts_student: JSON.stringify({ name: 'Ana Lopez', track: 'mdiv' }) };
@@ -93,7 +118,7 @@ const has = (t, s) => t.includes(s);
   ok(pages(text) === 1, 'degree PDF: one page');
   for (const s of ['Be it hereby known that', 'Master of Divinity', 'M.DIV.', 'Given at Chapala, Jalisco']) ok(has(text, s), `degree PDF says "${s}"`);
   const es = (await build('CTSCertificateOfMinistry.html', 'es', seed)).text;
-  for (const s of ['Sépase por la presente que', 'Certificado de Ministerio', 'se le otorga el']) ok(has(es, s), `degree PDF (Spanish) says "${s}"`);
+  for (const s of ['Por la presente se hace constar que', 'Certificado de Ministerio', 'se le otorga el']) ok(has(es, s), `degree PDF (Spanish) says "${s}"`);
 }
 
 await browser.close();

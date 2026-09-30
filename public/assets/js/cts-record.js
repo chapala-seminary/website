@@ -17,11 +17,12 @@
  * same keys, so existing students' records and every page that reads them are
  * unchanged:
  *   cts_done_codes            the code, for course gating and the Worker
- *   cts_mdiv_done_codes /
- *   cts_thm_done_codes        the code again if earned on that master's track
- *   cts_degree_courses        the course name, which the degree pages count
- *   seminary notification     once per course per browser: the Google Apps
- *                             Script endpoint that keeps Wayne's running count
+ *   cts_assoc_done_codes /
+ *   cts_thm_done_codes /
+ *   cts_mdiv_done_codes       the code again, at the level it was earned on
+ *                             (the degree pages count by level: cts-degrees.js)
+ *   cts_degree_courses        the course name, for reading
+ *   (the seminary is told by the Worker when the sync brings the completion)
  *
  *   CTSRecord.course({ slug, code, name, page, units })
  *       -> false (not complete), true (already recorded), "new" (recorded now)
@@ -35,8 +36,6 @@
   "use strict";
   if (window.CTSRecord) return;
 
-  var ENDPOINT = "https://script.google.com/macros/s/AKfycbxB02hawCZC6pPkp2mTmdIXL601M7WiWU-0TT-NWo5D1QwwKh_jGyWO_Nz9IaQVp-3qNw/exec";
-
   var mem = {};
   function get(k) { try { return localStorage.getItem(k); } catch (e) { return k in mem ? mem[k] : null; } }
   function set(k, v) { try { localStorage.setItem(k, v); } catch (e) { mem[k] = String(v); } }
@@ -48,15 +47,18 @@
     var s = student();
     return String(get("cts_track") || s.track || s.program || "cert").toLowerCase();
   }
-  // The label the seminary's count has always used (cts-completion.js).
-  function trackLabel() {
+  function goalIsAssoc() {
     var t = trackToken(), s = student();
-    if (t === "mdiv" || /master of divinity|m\.div/.test(t)) return "Master of Divinity (M.Div.)";
-    if (t === "thm" || t === "mth" || /master of theology|m\.th|th\.m/.test(t)) return "Master of Theology (Th.M.)";
-    var g = String(get("cts_goal") || s.goal || "").toLowerCase();
-    if (g === "assoc" || t === "ad" || t === "associate") return "Associate of Divinity";
-    return "Certificate of Ministry";
+    return t === "ad" || t === "associate" || t === "assoc" ||
+           String(get("cts_goal") || s.goal || "").toLowerCase() === "assoc";
   }
+  /* The level a course is completed at is kept beside cts_done_codes; the
+     Associate's list is new (29 Sept 2026, cts-degrees.js). Before anything is
+     recorded, a student already on the Associate path keeps every course
+     finished before the list existed -- the same step, run once, as
+     cts-degrees.js and cts-curriculum.js take. */
+  if (get("cts_assoc_done_codes") === null)
+    set("cts_assoc_done_codes", JSON.stringify(goalIsAssoc() ? list("cts_done_codes") : []));
 
   function json(k, dflt) { try { var v = JSON.parse(get(k) || "null"); return v == null ? dflt : v; } catch (e) { return dflt; } }
 
@@ -134,22 +136,16 @@
     return true;
   }
 
+  /* The seminary used to be told from here, by a post to a Google Apps Script
+     that kept the "CTS Completions" Sheet. Since 25 Sept 2026 the Worker tells
+     the seminary itself, and records it, when the sync brings the completion
+     (worker/notify.js) -- and a returning student's history arrives as one
+     notice. The Sheet received nothing after 30 Aug; posting to it as well
+     could only add stray emails beside that one notice (Dr. Cook's review,
+     29 Sept 2026), so the post is gone. The key stays: the Th.M. and M.Div.
+     pages still read it. */
   function notify(c) {
-    // Same key the certificate pages used, so a course they already reported
-    // is never reported twice.
-    var key = "cts_cc_recorded_" + String(c.page || c.code).toLowerCase();
-    if (get(key)) return;
-    set(key, "1");
-    var s = student();
-    var data = { name: s.name || "", course: c.name, track: trackLabel(),
-                 date: new Date().toISOString().slice(0, 10), email: s.email || "" };
-    var body = Object.keys(data).map(function (k) {
-      return encodeURIComponent(k) + "=" + encodeURIComponent(data[k]);
-    }).join("&");
-    try {
-      fetch(ENDPOINT, { method: "POST", mode: "no-cors", keepalive: true,
-        headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: body }).catch(function () {});
-    } catch (e) {}
+    set("cts_cc_recorded_" + String(c.page || c.code).toLowerCase(), "1");
   }
 
   function course(c) {
@@ -168,7 +164,8 @@
     // later switched to the M.Div. must not have it counted as master's work.
     var t = trackToken();
     if (t === "mdiv") add("cts_mdiv_done_codes", code);
-    if (t === "thm" || t === "mth") add("cts_thm_done_codes", code);
+    else if (t === "thm" || t === "mth") add("cts_thm_done_codes", code);
+    else if (goalIsAssoc()) add("cts_assoc_done_codes", code);
     notify(c);
     return "new";
   }

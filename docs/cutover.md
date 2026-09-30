@@ -164,11 +164,12 @@ no redirect** — the address bar still says `.html`.
 
 ## 3. Give it the beta address
 
-**Workers & Pages → chapala-seminary-beta → Settings → Domains & Routes → Add
-→ Custom domain → `beta.chapalaseminary.org`.**
-
-Cloudflare creates the DNS record itself, because the zone is on Cloudflare.
-It takes a minute or two to issue the certificate.
+Nothing to do by hand: `wrangler.jsonc` gives the beta environment the custom
+domain `beta.chapalaseminary.org` (`routes`, since 29 Sept 2026), so
+`npm run deploy:beta` attaches it. Cloudflare creates the DNS record itself,
+because the zone is on Cloudflare, and takes a minute or two to issue the
+certificate. If the deploy reports that a DNS record for `beta` already
+exists, delete that record in **DNS → Records** and deploy again.
 
 **Check:**
 

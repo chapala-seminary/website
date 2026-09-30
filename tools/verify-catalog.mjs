@@ -63,9 +63,43 @@ const norm = s => decode(s)
   .replace(/\s+/g, ' ')
   .trim();
 
+/* Spanish course names changed on purpose since the catalog was hand-written:
+   the seminary's Certificate Maker names (Dr. Cook, 29 Sept 2026: "where the
+   website catalog and Certificate Maker differ ... use the terminology from the
+   current Certificate Maker"; src/data/certificate-courses.json). Each is
+   applied to the reference -- that course's card, its Spanish title, from
+   exactly this to exactly that -- so the comparison still fails on anything
+   else. [course file, was, is] */
+const RENAMED = [
+  ["CTS1Peter", "1 Pedro Intensivo", "1 Pedro: Curso Intensivo"],
+  ["CTSActs", "Hechos", "Hechos: Curso Intensivo"],
+  ["CTSBibleCharacters", "Personajes de la Biblia", "Personajes Bíblicos"],
+  ["CTSBibleCharacters2", "Personajes de la Biblia II", "Personajes Bíblicos II"],
+  ["CTSWorship", "Adoración", "Adoración Cristiana"],
+  ["CTSCults", "Las Sectas y las Religiones del Mundo", "Sectas y Religiones del Mundo"],
+  ["CTSDeaconFamilyMinistry", "Plan de Ministerio Familiar del Diácono", "Plan de Ministerio Familiar de Diáconos"],
+  ["CTSGalatians", "Gálatas Intensivo", "Gálatas: Curso Intensivo"],
+  ["CTSGenesis", "Génesis Intensivo", "Génesis: Curso Intensivo"],
+  ["CTSJosh", "Josué", "Josué: Curso Intensivo"],
+  ["CTSMatt", "Mateo Intensivo", "Mateo: Curso Intensivo"],
+  ["CTS_Narrative_Preaching", "La Predicación Narrativa", "Predicación Narrativa"],
+  ["ethics_unit01", "Ética Cristiana", "Ética Pastoral y Cristiana"],
+  ["CTSPM", "Ministerios Pastorales", "Ministerio Pastoral"],
+  ["CTSPent", "El Pentateuco", "Pentateuco"],
+  ["CTS_WiseSpeak_Preaching", "La Predicación", "Predicación"],
+  ["CTSRev", "Apocalipsis Intensivo", "Apocalipsis: Curso Intensivo"],
+  ["CTSHS", "El Espíritu Santo", "La Doctrina del Espíritu Santo"]
+];
+
 const [origFile = REF, builtFile = 'dist/index.html'] = process.argv.slice(2);
 
-const o = norm(catalog(origFile));
+let o = norm(catalog(origFile));
+for (const [key, was, is] of RENAMED) {
+  const en = JSON.parse(fs.readFileSync(`src/content/courses/${key}.json`, 'utf8')).title.en;
+  const from = `<span class="en">${en}</span><span class="es">${was}</span>`;
+  if (o.split(from).length !== 2) { console.log(`FAIL — the reference has no single card "${en} / ${was}" to rename`); process.exit(1); }
+  o = o.replace(from, `<span class="en">${en}</span><span class="es">${is}</span>`);
+}
 const b = norm(catalog(builtFile));
 
 const count = s => (s.match(/<a class="course"/g) || []).length;

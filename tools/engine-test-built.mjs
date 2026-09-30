@@ -55,6 +55,10 @@ let checks = 0;
 function ok(cond, label) { checks++; if (!cond) fails.push(label); }
 
 const browser = await chromium.launch(CHROME ? { executablePath: CHROME } : {});
+// Each unit opens on the lesson; the exam is a second view the student opens
+// (assets/js/cts-exam-view.js). These tests are about the exam, so every page
+// opens on it -- as it does for a student who reloads mid-exam.
+const examOpen = (ctx) => ctx.addInitScript(() => { try { sessionStorage.setItem('cts_exam_view:' + location.pathname, '1'); } catch (e) {} });
 
 /* Every unit has had real fill-ins since 26 Sept 2026, and the tests use
    them. A unit that ever arrives without them is given ten made-up ones
@@ -76,6 +80,7 @@ function injectFill(synth) {
 
 async function session(course, unit, track, nCorrect, fillSA = false, fillN = 0) {
   const ctx = await browser.newContext();
+  await examOpen(ctx);
   await ctx.addInitScript(injectFill, SYNTH_FILL);
   const page = await ctx.newPage();
   const errs = [];
@@ -264,6 +269,7 @@ for (const [course, unit] of SAMPLES) {
 {
   const [course, unit] = SAMPLES[0];
   const ctx = await browser.newContext();
+  await examOpen(ctx);
   const page = await ctx.newPage();
   await page.goto(`${BASE}/${course}Unit${unit}.html`, { waitUntil: 'load' });
   await page.evaluate(() => { localStorage.clear(); localStorage.setItem('cts_track', 'cert'); });
@@ -298,6 +304,7 @@ for (const t of ['cert', 'assoc', 'mdiv']) {
   const [course, unit] = SAMPLES.find(([c]) => c === 'CTS1Peter') || SAMPLES[0];
   const label = `${course} u${unit} (${t}, check)`;
   const ctx = await browser.newContext();
+  await examOpen(ctx);
   await ctx.addInitScript(injectFill, SYNTH_FILL);
   const page = await ctx.newPage();
   await page.goto(`${BASE}/${course}Unit${unit}.html`, { waitUntil: 'load' });
@@ -354,6 +361,7 @@ for (const t of ['cert', 'assoc', 'mdiv']) {
   const [course, unit] = SAMPLES.find(([c]) => c === 'CTS1Peter') || SAMPLES[0];
   const label = `${course} u${unit} (lock)`;
   const ctx = await browser.newContext();
+  await examOpen(ctx);
   await ctx.addInitScript(injectFill, SYNTH_FILL);
   const page = await ctx.newPage();
   await page.goto(`${BASE}/${course}Unit${unit}.html`, { waitUntil: 'load' });

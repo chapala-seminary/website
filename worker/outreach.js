@@ -40,7 +40,7 @@
  *   SITE_ORIGIN        links in the notes; falls back to https://chapalaseminary.org
  */
 import { emailConfigured, sendEmail } from './email.js';
-import { degreeShortfall } from './awards.js';
+import { degreeShortfall, studentLevel } from './awards.js';
 import catalog from './catalog.json';
 
 export const QUIET_DAYS = 21;
@@ -171,7 +171,7 @@ export async function candidates(env, asOf = new Date()) {
     if (st.last_quiet_note && st.last_quiet_note >= st.last_progress_at) continue;      // already written to this spell
     const done = (await env.DB.prepare('SELECT code, track FROM course_completions WHERE student_id = ?')
       .bind(st.student_id).all()).results ?? [];
-    if (degreeShortfall(programLevel(st.track, st.goal), done, st.track) === null) continue;   // program finished
+    if (degreeShortfall(programLevel(st.track, st.goal), done, studentLevel(st.track, st.goal)) === null) continue;   // program finished
     out.push({ kind: 'quiet', st });
   }
   return out;

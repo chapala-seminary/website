@@ -178,6 +178,8 @@ img.cts-sig { max-height:50px; width:auto; max-width:92%; display:block; margin:
 </div>
 
 <script src="cts-emblem.js" defer></script>
+<script src="assets/js/cts-cert-names.js"></script>
+<script src="assets/js/cts-degrees.js"></script>
 <script>
 (function () {
   "use strict";
@@ -189,21 +191,16 @@ img.cts-sig { max-height:50px; width:auto; max-width:92%; display:block; margin:
   function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return (k in _ctsMem) ? _ctsMem[k] : null; } }
   function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){ _ctsMem[k] = String(v); } }
 
-  // distinct completed-course roster (written by cts-completion.js on each course completion)
-  var roster = [];
-  try { roster = JSON.parse(lsGet("cts_degree_courses") || "[]"); } catch(e){ roster = []; }
-  if (!Array.isArray(roster)) roster = [];
-  var seen = {}, courses = [];
-  for (var i = 0; i < roster.length; i++) {
-    var k = String(roster[i] || "").trim();
-    if (k && !seen[k.toLowerCase()]) { seen[k.toLowerCase()] = 1; courses.push(k); }
-  }
-  var count = courses.length;
-  var FOUNDATION = ["old testament survey","new testament survey","systematic theology",
-                     "evangelism","pastoral ministries","church history","preaching"];
-  var have = {}; courses.forEach(function(c){ have[c.toLowerCase()] = 1; });
-  var foundationDone = FOUNDATION.filter(function(f){ return !!have[f]; }).length;
-  var earned = (count >= REQUIRED && foundationDone === FOUNDATION.length);
+  // The courses that count, by code and at the level each was completed on,
+  // by the seminary's own rules (assets/js/cts-degrees.js, the same as the
+  // Worker's). Until 29 Sept 2026 this counted course names of any level.
+  var st = window.CTSDegrees.status("certificate");
+  var NAMES = window.CTS_COURSE_NAMES || {};
+  var courses = Object.keys(st.have).map(function(c){ return NAMES[c] || { en: c, es: c }; });
+  var count = st.count;
+  var FOUNDATION = st.core;
+  var foundationDone = st.coreDone;
+  var earned = st.earned;
 
   var student = null;
   try { student = JSON.parse(lsGet("cts_student") || "null"); } catch(e){ student = null; }
@@ -265,9 +262,12 @@ img.cts-sig { max-height:50px; width:auto; max-width:92%; display:block; margin:
     if (count > 0) {
       show("courseListWrap");
       var ul = document.getElementById("courseList");
-      courses.sort(function(a,b){ return a.localeCompare(b); });
+      courses.sort(function(a,b){ return a.en.localeCompare(b.en); });
       for (var j = 0; j < courses.length; j++) {
-        var li = document.createElement("li"); li.textContent = courses[j]; ul.appendChild(li);
+        var li = document.createElement("li");
+        li.innerHTML = '<span class="lang-en"></span><span class="lang-es"></span>';
+        li.firstChild.textContent = courses[j].en; li.lastChild.textContent = courses[j].es;
+        ul.appendChild(li);
       }
     } else {
       show("noneMsg");

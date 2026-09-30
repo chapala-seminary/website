@@ -70,6 +70,8 @@ async function work(){
     try{
       await p.goto(`${BASE}/${f}`,{waitUntil:'load',timeout:15000});
       await p.waitForTimeout(150);
+      // the exam is shown once the student opens it (cts-exam-view.js, 30 Sept)
+      await p.evaluate(()=>window.CTS_EXAM_VIEW?.open());
       const r = await p.evaluate(()=>{
         const C = window.CTS_ENGINE?.controls;
         const s = C?.submit?.(), res = C?.result?.(), mc = C?.mc?.();
