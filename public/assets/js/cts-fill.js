@@ -54,8 +54,18 @@
   /* The words compared, less one leading article on either side: a student
      who writes "a hypocrite" or "la gracia" for "hypocrite" or "gracia" has
      the right answer, and the gap often cannot show which article belongs. */
+  /* Accents do not decide a fill-in (Dr. Cook's beta pass, 30 Sept 2026):
+     "geografia" is "geografía", "inspiracion" is "inspiración" -- on a phone
+     the accent is a long-press away. Both sides are folded the same way, so a
+     misspelling still fails ("certexa" is not "certeza"). The tilde of ñ is
+     kept: "año" and "ano" are different words. */
+  function fold(s) {
+    s = String(s || "").toLowerCase();
+    if (!s.normalize) return s;
+    return s.normalize("NFD").replace(/n\u0303/g, "\u00f1").replace(/[\u0300-\u036f]/g, "");
+  }
   function bare(s) {
-    return normalise(s).trim().replace(/^(?:a|an|the|el|la|los|las|lo|un|una|unos|unas) (?=\S)/, "");
+    return normalise(fold(s)).trim().replace(/^(?:a|an|the|el|la|los|las|lo|un|una|unos|unas) (?=\S)/, "");
   }
 
   function need(n) { return Math.ceil(n * PASS_RATIO); }

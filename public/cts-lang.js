@@ -49,12 +49,58 @@
     document.body.classList.add('lang-es');
   }
 
-  // Mirror a manual toggle on class-engine pages back into the shared key, so the
-  // choice carries over to the STATE and data-lang courses as well.
-  function persist() {
-    if (document.body) lsSet(KEY, document.body.classList.contains('lang-es') ? 'es' : 'en');
+  /* The language a page is showing, by whichever convention it uses:
+   *   lang-es / lang-en      -- the units, the certificates, the reading rooms
+   *   show-es / show-en      -- the digests (their own toggle, see below)
+   *   spanish                -- Counseling, Narrative and WiseSpeak Preaching
+ *   es                     -- a few certificates (Radical, Th.M., M.Div.)
+   * null when the page says nothing definite: lang-both ("Both" is a way of
+   * displaying, not a language), or a page with no switch at all. Until 30
+   * Sept any change to the body's classes saved "en" unless lang-es was
+   * present -- so choosing "Both", or opening a single-page course, quietly
+   * reset a Spanish reader to English on the next page (Dr. Cook's beta pass). */
+  function showing() {
+    var c = document.body && document.body.classList;
+    if (!c) return null;
+    if (c.contains('lang-both')) return null;
+    if (c.contains('lang-es') || c.contains('show-es') || c.contains('spanish') || c.contains('es')) return 'es';
+    if (c.contains('lang-en') || c.contains('show-en')) return 'en';
+    return null;
   }
+  function persist() { var l = showing(); if (l) lsSet(KEY, l); }
+
+  /* The digests switch themselves to English at the end of the page, after
+     this has run; put the reader's language back once they have. */
+  function digests() {
+    var c = document.body && document.body.classList;
+    if (!c || !c.contains('show-en') || lsGet(KEY) !== 'es') return;
+    c.remove('show-en'); c.add('show-es');
+    var bs = document.querySelectorAll('.toggle button[data-lang]');
+    for (var i = 0; i < bs.length; i++) bs[i].setAttribute('aria-pressed', bs[i].getAttribute('data-lang') === 'es' ? 'true' : 'false');
+  }
+  /* Some pages keep a language of their own and apply it as they load -- the
+     course certificates remember one per course -- so a Spanish reader
+     arriving from a unit met English. Once the page has settled, if it is
+     showing English and the reader chose Spanish, press its own Español
+     button, so whatever else that button does happens too. */
+  function settle() {
+    if (lsGet(KEY) !== 'es' || document.body.classList.contains('lang-both')) return;
+    // a page that keeps its language in a script says so on <html lang>
+    var now = showing() || (document.documentElement.lang || '').slice(0, 2);
+    if (now !== 'en') return;
+    var b = document.querySelector('button[data-lang="es"], a[data-lang="es"], #esBtn');
+    if (b) { b.click(); return; }
+    // a single English/Español toggle: pressed once, it shows Spanish
+    var t = document.getElementById('langBtn') || document.getElementById('langToggle');
+    if (t) { t.click(); return; }
+    var c = document.body.classList;
+    if (c.contains('lang-en')) { c.remove('lang-en'); c.add('lang-es'); }
+  }
+  if (document.readyState === 'complete') settle();
+  else window.addEventListener('load', settle);
+
   function observe() {
+    digests();
     if (!document.body || typeof MutationObserver === 'undefined') return;
     new MutationObserver(persist).observe(document.body, { attributes: true, attributeFilter: ['class'] });
   }

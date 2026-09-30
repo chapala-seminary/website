@@ -111,13 +111,13 @@ for (const [course, slug, unit] of SAMPLES) {
 
   // 2. exactly the pass mark passes
   const atMark = await session(course, slug, unit, 'cert', need, true);
-  ok(/Passed|Aprobado/.test(atMark.result), `${label}: ${need}/${U.mc.length} (the 90% mark) did not pass`);
+  ok(/passed|aprobada/i.test(atMark.result), `${label}: ${need}/${U.mc.length} (the 90% mark) did not pass`);
   ok(atMark.ls[`cts_${slug}_progress`]?.includes(`unit${unit}`),
     `${label}: passing did not record progress`);
 
   // 3. one below the mark fails
   const below = await session(course, slug, unit, 'cert', need - 1);
-  ok(!/Passed|Aprobado/.test(below.result), `${label}: ${need - 1}/${U.mc.length} passed but should not`);
+  ok(!/passed|aprobada/i.test(below.result), `${label}: ${need - 1}/${U.mc.length} passed but should not`);
 
   // 4. certificate track: 2-minute lock and answers revealed
   ok(/\b2 minute|2 minuto/.test(below.result), `${label}: cert lock not 2 minutes — "${below.result.slice(0, 80)}"`);

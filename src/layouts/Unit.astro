@@ -102,6 +102,12 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
         invisible: they came after cts.css and simply won. */}
   </head>
   <body class={cls} data-course={unit.course}>
+    {/* The student's language, restored before anything paints. 414 pages
+        listed cts-lang.js themselves and 37 did not -- Bible, Genesis,
+        Galatians, Pentecostal -- so those opened in English whatever the
+        student had chosen (Dr. Cook's beta pass, 30 Sept). Every unit loads
+        it here now, once. */}
+    <script is:inline src={version('/cts-lang.js')}></script>
     <a class="btn skip" href="#lesson" style="position:absolute;left:-9999px">
       <span class="lang-en">Skip to the lesson</span><span class="lang-es">Saltar a la lección</span>
     </a>
@@ -176,10 +182,10 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
           <div>
             <label for="regTrack"><span class="lang-en">Study track</span><span class="lang-es">Trayecto de estudio</span></label>
             <select id="regTrack">
-              <option value="cert">Certificate of Ministry</option>
-              <option value="ad">Associate of Divinity</option>
-              <option value="mdiv">Master of Divinity</option>
-              <option value="thm">Master of Theology (Th.M.)</option>
+              <option value="cert" data-es="Certificado de Ministerio">Certificate of Ministry</option>
+              <option value="ad" data-es="Asociado en Divinidad">Associate of Divinity</option>
+              <option value="mdiv" data-es="Maestría en Divinidad (M.Div.)">Master of Divinity</option>
+              <option value="thm" data-es="Maestría en Teología (Th.M.)">Master of Theology (Th.M.)</option>
             </select>
           </div>
           <div class="full">
@@ -205,7 +211,7 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
           <span class="lang-es">Seminario Teológico de Chapala · Formación teológica gratuita y bilingüe.</span>
         </span>
         <span>
-          <a href="/index.html"><span class="lang-en">All courses</span><span class="lang-es">Todos los cursos</span></a>
+          <a href="/index.html#catalog"><span class="lang-en">All courses</span><span class="lang-es">Todos los cursos</span></a>
           &nbsp;·&nbsp;
           <a href="/cts-backup.html"><span class="lang-en">Save my progress</span><span class="lang-es">Guardar mi progreso</span></a>
           &nbsp;&middot;&nbsp;
@@ -217,10 +223,11 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
     <script is:inline set:html={`window.CTS_UNIT = ${unitJson};`} />
     <script is:inline src={version('/assets/js/cts-record.js')}></script>
     <script is:inline src={version('/assets/js/cts-engine.js')}></script>
-    {scripts.map((src) => <script is:inline src={version(src)}></script>)}
+    {scripts.filter((src) => !/(^|\/)cts-lang\.js$/.test(src)).map((src) => <script is:inline src={version(src)}></script>)}
     {/* The lesson and the exam are never shown together, so the browser's
         Find cannot search the lesson for an answer (Dr. Cook's review, 29 Sept). */}
     <script is:inline src={version('/assets/js/cts-exam-view.js')}></script>
+    <script is:inline src={version('/assets/js/cts-fields-lang.js')}></script>
     {/* Mirrors this browser's progress to the seminary's database so a cleared
         browser or a new phone is no longer the end of someone's degree. It is
         dormant until the API exists: one probe per tab, then silence. See

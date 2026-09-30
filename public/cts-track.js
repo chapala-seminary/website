@@ -42,17 +42,30 @@
   }
 
   function isEs() {
+    var c = document.body && document.body.classList;
+    if (c && (c.contains("lang-es") || c.contains("show-es") || c.contains("spanish"))) return true;
+    if (c && (c.contains("lang-en") || c.contains("lang-both") || c.contains("show-en"))) return false;
     var l = (document.body && document.body.getAttribute("data-lang")) ||
             document.documentElement.lang || "en";
     return l.slice(0, 2) === "es";
   }
+  function labels() {
+    return isEs()
+      ? { tg: "Cambiar plan", cert: "Certificado de Ministerio", assoc: "Asociado en Divinidad", mdiv: "Maestr\u00eda en Divinidad", thm: "Maestr\u00eda en Teolog\u00eda" }
+      : { tg: "Change track", cert: "Certificate of Ministry", assoc: "Associate of Divinity", mdiv: "Master of Divinity", thm: "Master of Theology" };
+  }
+  /* The labels follow the page's language switch; they were fixed at load, so
+     "Change track" stayed English on a page switched to Spanish (Dr. Cook's
+     beta pass, 30 Sept 2026). */
+  function relabel(wrap) {
+    var L = labels();
+    wrap.querySelector(".tg").textContent = L.tg + " \u25BE";
+    Array.prototype.forEach.call(wrap.querySelectorAll(".menu button"), function (b) { b.textContent = L[b.getAttribute("data-t")]; });
+  }
 
   function build() {
     if (document.getElementById("cts-track-ctl") || !document.body) return;
-    var es = isEs();
-    var L = es
-      ? { tg: "Cambiar plan", cert: "Certificado de Ministerio", assoc: "Asociado en Divinidad", mdiv: "Maestr\u00eda en Divinidad", mth: "Maestr\u00eda en Teolog\u00eda" }
-      : { tg: "Change track", cert: "Certificate of Ministry", assoc: "Associate of Divinity", mdiv: "Master of Divinity", mth: "Master of Theology" };
+    var L = labels();
 
     var st = document.createElement("style");
     st.textContent =
@@ -75,9 +88,11 @@
         '<button data-t="cert">' + L.cert + '</button>' +
         '<button data-t="assoc">' + L.assoc + '</button>' +
         '<button data-t="mdiv">' + L.mdiv + '</button>' +
-        '<button data-t="thm">' + L.mth + '</button>' +
+        '<button data-t="thm">' + L.thm + '</button>' +
       '</div>';
     document.body.appendChild(wrap);
+    if (typeof MutationObserver !== "undefined")
+      new MutationObserver(function () { relabel(wrap); }).observe(document.body, { attributes: true, attributeFilter: ["class", "data-lang"] });
 
     var menu = wrap.querySelector(".menu");
     wrap.querySelector(".tg").addEventListener("click", function () {

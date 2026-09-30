@@ -229,6 +229,10 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   # The lesson and its exam are never on screen together, on any unit page, so
   # the browser's Find cannot search the lesson for an answer (29 Sept).
   node tools/verify-exam-view.mjs "http://127.0.0.1:$PORT"
+  # Dr. Cook's real-device beta pass (30 Sept): Spanish carries through,
+  # fill-ins ignore accents, model answers wait for a real answer, a passed
+  # unit says so, and the catalog link reaches the course list.
+  node tools/verify-beta-pass.mjs "http://127.0.0.1:$PORT"
   if [ -n "$HAVE_REFERENCE" ]; then
     node tools/verify-catalog.mjs ./_reference-index.html
   else

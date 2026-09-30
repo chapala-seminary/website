@@ -213,6 +213,17 @@
      see them on submit; tracks whose short answer is graded see them once the
      unit is passed. Multiple choice is corrected on click for everyone. */
   function revealAnswers() { return !saCounts() || unitPassed; }
+  /* And only under a question the student has really answered (Dr. Cook's
+     beta pass, 30 Sept 2026): answering question 1 and pressing Check showed
+     the model answers for the nine left blank -- and anyone can switch to the
+     Certificate track, where short answers are shown on submit, and back. A
+     real attempt is a sentence: at least SA_MIN_WORDS words and SA_MIN_CHARS
+     letters, so a single character or "x x x" does not open it. */
+  var SA_MIN_WORDS = 6, SA_MIN_CHARS = 30;
+  function attempted(text) {
+    var t = String(text || "").trim();
+    return t.replace(/\s+/g, "").length >= SA_MIN_CHARS && t.split(/\s+/).length >= SA_MIN_WORDS;
+  }
 
   // ---- language ----------------------------------------------------------
   function isEs() {
@@ -404,12 +415,48 @@
     }
   }
 
+  /* A passed unit says so plainly, with where to go next (Dr. Cook's beta
+     pass, 30 Sept 2026: "it was not obvious where to confirm that the unit
+     had actually been recorded"). Shown in the result after passing, and at
+     the top of the page whenever a passed unit is opened again. */
+  function passedCount() {
+    var n = 0;
+    for (var u = 1; u <= (U.totalUnits || 0); u++) if (progress["unit" + u]) n++;
+    return n;
+  }
+  function passedPanel() {
+    var total = U.totalUnits || 0, n = passedCount(), all = total && n >= total;
+    var cert = (U.completion && U.completion.page) || null;
+    var nextIsUnit = /Unit\d+\.html$/.test(U.nextHref || "");
+    var go = all && cert ? { href: cert, en: "Go to your course certificate", es: "Ir a su certificado del curso" }
+      : nextIsUnit ? { href: U.nextHref, en: "Go to " + nextWhere().en, es: "Ir a la " + nextWhere().es }
+      : cert ? { href: cert, en: "See your progress in this course", es: "Ver su progreso en este curso" } : null;
+    var h = '<div class="cts-passed" role="status">' +
+      '<p class="cts-passed-title">&#10003; ' + bi({ en: "Unit " + U.unit + " passed", es: "Unidad " + U.unit + " aprobada" }) + "</p>" +
+      "<p>" + bi({ en: "It is saved to your progress" + (total ? ": " + n + " of " + total + " units of this course passed." : "."),
+                   es: "Quedó guardada en su progreso" + (total ? ": " + n + " de " + total + " unidades de este curso aprobadas." : ".") }) + "</p>";
+    if (go) h += '<a class="btn solid" href="' + attr(go.href) + '">' + bi({ en: go.en, es: go.es }) + " &rarr;</a>";
+    if (cert && go && go.href !== cert)
+      h += ' <a class="btn" href="' + attr(cert) + '">' + bi({ en: "Progress in this course", es: "Progreso en este curso" }) + "</a>";
+    return h + "</div>";
+  }
+  function renderPassedBanner() {
+    var g = greetEl(), b = el("cts-passed-banner");
+    if (!unitPassed) { if (b) b.remove(); return; }
+    if (!g || !g.parentNode) return;
+    if (!b) { b = document.createElement("div"); b.id = "cts-passed-banner"; g.parentNode.insertBefore(b, g.nextSibling); }
+    b.innerHTML = passedPanel();
+  }
+
   function renderGreeting() {
     var g = greetEl();
     if (!g) return;
     var s = student();
     if (!s || !s.name) { g.textContent = ""; return; }
-    var label = { cert: "Certificate", ad: "Associate of Divinity", mdiv: "M.Div.", thm: "Th.M.", mth: "Th.M." }[track()] || "Certificate";
+    var names = isEs()
+      ? { cert: "Certificado de Ministerio", ad: "Asociado en Divinidad", mdiv: "M.Div.", thm: "Th.M.", mth: "Th.M." }
+      : { cert: "Certificate of Ministry", ad: "Associate of Divinity", mdiv: "M.Div.", thm: "Th.M.", mth: "Th.M." };
+    var label = names[track()] || names.cert;
     g.textContent = (isEs() ? "Bienvenido, " : "Welcome, ") + s.name + " — " + label;
   }
 
@@ -499,7 +546,11 @@
         block += '<textarea data-sa="' + i + '" rows="4" style="width:100%;">' +
                  String(saAnswers[i] || "").replace(/</g, "&lt;") + "</textarea>";
         if (graded && reveal && q.model) {
-          block += '<div class="model-answer">' + bi(q.model) + "</div>";
+          block += attempted(saAnswers[i])
+            ? '<div class="model-answer">' + bi(q.model) + "</div>"
+            : '<p class="small model-wait">' + bi({
+                en: "Write your own answer — a few sentences — and check again to see the model answer.",
+                es: "Escriba su propia respuesta — unas cuantas oraciones — y revise de nuevo para ver la respuesta modelo." }) + "</p>";
         }
         block += "</div>";
       });
@@ -642,8 +693,18 @@
   /* The words compared, less one leading article on either side: a student
      who writes "a hypocrite" or "la gracia" for "hypocrite" or "gracia" has
      the right answer, and the gap often cannot show which article belongs. */
+  /* Accents do not decide a fill-in (Dr. Cook's beta pass, 30 Sept 2026):
+     "geografia" is "geografía", "inspiracion" is "inspiración" -- on a phone
+     the accent is a long-press away. Both sides are folded the same way, so a
+     misspelling still fails ("certexa" is not "certeza"). The tilde of ñ is
+     kept: "año" and "ano" are different words. */
+  function fold(s) {
+    s = String(s || "").toLowerCase();
+    if (!s.normalize) return s;
+    return s.normalize("NFD").replace(/n\u0303/g, "\u00f1").replace(/[\u0300-\u036f]/g, "");
+  }
   function bare(s) {
-    return normalise(s).trim().replace(/^(?:a|an|the|el|la|los|las|lo|un|una|unos|unas) (?=\S)/, "");
+    return normalise(fold(s)).trim().replace(/^(?:a|an|the|el|la|los|las|lo|un|una|unos|unas) (?=\S)/, "");
   }
   function gradeFill() {
     var c = 0;
@@ -693,9 +754,9 @@
       unitPassed = true;
       lsDel(KEY.saLock); lsDel(KEY.fullLock);
       recordCourse();
-      var where = nextWhere();
-      say(bi({ en: "&#10003; Passed. Continue to " + where.en + " above.",
-               es: "&#10003; Aprobado. Continúe a " + where.es + " arriba." }), "#1f6b3b");
+      var r = ensureResult();
+      if (r) r.innerHTML = passedPanel();
+      renderPassedBanner();
       var nb = el("nextUnitBtn"); if (nb) nb.disabled = false;
     } else {
       // MC banked but the written part failed: lock only the written part
@@ -748,6 +809,7 @@
     renderRegister();
     wireRegister();
     renderGreeting();
+    renderPassedBanner();
     wireNav();
     ensureResult();
     renderQuestions();
@@ -756,9 +818,8 @@
 
     if (unitPassed) {
       graded = true;
-      var where = nextWhere();
-      say(bi({ en: "&#10003; Unit already passed! Click " + where.en + " above.",
-               es: "&#10003; Unidad ya aprobada. Haga clic en " + where.es + " arriba." }), "#1f6b3b");
+      var rp = ensureResult();
+      if (rp) rp.innerHTML = passedPanel();
       var sbp = submitEl(); if (sbp) sbp.disabled = true;
       var nbp = el("nextUnitBtn"); if (nbp) nbp.disabled = false;
       renderQuestions();
@@ -868,6 +929,8 @@
     // the student's remembered choice that cts-lang.js seeds every page from
     if (lang !== "both") { try { lsSet("cts_lang", lang); } catch (e) {} }
     syncLangControls(lang);
+    renderGreeting();          // "Welcome, … — Certificate" stayed English (beta pass, 30 Sept)
+    renderPassedBanner();
     renderQuestions();
   }
 

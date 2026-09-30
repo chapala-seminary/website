@@ -77,7 +77,7 @@ const MC_COUNT = { CTSPentecostal: 7, CTSCS: 10, 'CTSRE/1': 18 };
    copied, so a stored answer the page would mark wrong fails here. */
 const ENGINE = fs.readFileSync(path.join(ROOT, 'public', 'assets', 'js', 'cts-engine.js'), 'utf8');
 const engineFn = (name) => (new RegExp(`\\n  function ${name}\\([^)]*\\) \\{[\\s\\S]*?\\n  \\}`).exec(ENGINE) || [''])[0];
-const fillRight = new Function(`${engineFn('normalise')}\n${engineFn('bare')}\n${engineFn('fillRight')}\nreturn fillRight;`)();
+const fillRight = new Function(`${engineFn('normalise')}\n${engineFn('fold')}\n${engineFn('bare')}\n${engineFn('fillRight')}\nreturn fillRight;`)();
 function graderProblems() {
   const out = [];
   const COLL = path.join(ROOT, 'src', 'content', 'units');

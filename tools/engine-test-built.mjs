@@ -187,14 +187,14 @@ for (const [course, unit] of SAMPLES) {
   // 2. exactly the pass mark passes -- on the certificate track with NO
   //    fill-ins and NO short answer written, since neither counts there
   const atMark = await session(course, unit, 'cert', need, false);
-  ok(/Passed|Aprobado/.test(atMark.result), `${label}: ${need}/${nMc} (the 90% mark) did not pass on cert with fill-ins and SA blank`);
+  ok(/passed|aprobada/i.test(atMark.result), `${label}: ${need}/${nMc} (the 90% mark) did not pass on cert with fill-ins and SA blank`);
   ok(prog(atMark), `${label}: passing did not record progress`);
   // on the Certificate the fill-in answers are shown on submit, for review
   ok(atMark.fillShown === nFill, `${label}: cert showed ${atMark.fillShown} of ${nFill} fill-in answers after submit`);
 
   // 3. one below the mark fails
   const below = await session(course, unit, 'cert', need - 1);
-  ok(!/Passed|Aprobado/.test(below.result), `${label}: ${need - 1}/${nMc} passed but should not`);
+  ok(!/passed|aprobada/i.test(below.result), `${label}: ${need - 1}/${nMc} passed but should not`);
 
   // 4. every question is corrected the moment it is clicked, on every track:
   //    a verdict line per question, the right option marked, wrong ones marked
@@ -213,7 +213,7 @@ for (const [course, unit] of SAMPLES) {
   //    passes
   if (probe.U.sa > 0) {
     const mdivNoSA = await session(course, unit, 'mdiv', need, false, nFill);
-    ok(!/Passed|Aprobado/.test(mdivNoSA.result), `${label}: mdiv passed with short answer blank`);
+    ok(!/passed|aprobada/i.test(mdivNoSA.result), `${label}: mdiv passed with short answer blank`);
     ok(!prog(mdivNoSA), `${label}: mdiv recorded the unit as passed with short answer blank`);
     ok(/short answer|respuesta corta/i.test(mdivNoSA.result), `${label}: mdiv SA failure did not name short answer — "${mdivNoSA.result.slice(0, 80)}"`);
     ok(mdivNoSA.ls[`cts_${slug}_u${unit}_mc_passed`] === '1', `${label}: mdiv MC pass not banked when SA failed`);
@@ -224,10 +224,10 @@ for (const [course, unit] of SAMPLES) {
   //     blank; one fill-in short fails, banks the MC pass, locks only the
   //     written part for the certificate 2 minutes, and records no progress
   const assocNoSA = await session(course, unit, 'assoc', need, false, needF);
-  ok(/Passed|Aprobado/.test(assocNoSA.result), `${label}: associate did not pass with MC and fill-ins at the mark and short answer blank — "${assocNoSA.result.slice(0, 80)}"`);
+  ok(/passed|aprobada/i.test(assocNoSA.result), `${label}: associate did not pass with MC and fill-ins at the mark and short answer blank — "${assocNoSA.result.slice(0, 80)}"`);
   ok(prog(assocNoSA), `${label}: associate pass did not record progress`);
   const assocFill = await session(course, unit, 'assoc', need, false, needF - 1);
-  ok(!/Passed|Aprobado/.test(assocFill.result), `${label}: associate passed with ${needF - 1}/${nFill} fill-ins`);
+  ok(!/passed|aprobada/i.test(assocFill.result), `${label}: associate passed with ${needF - 1}/${nFill} fill-ins`);
   ok(/fill in the blank|complete el espacio/i.test(assocFill.result), `${label}: associate fill-in failure did not name the fill-ins — "${assocFill.result.slice(0, 80)}"`);
   ok(!/short answer|respuesta corta/i.test(assocFill.result), `${label}: associate failure named short answer, which does not count there`);
   ok(!prog(assocFill), `${label}: associate recorded the unit as passed with the fill-ins failed`);
@@ -240,17 +240,17 @@ for (const [course, unit] of SAMPLES) {
   ok(assocFill.fillShown === nFill, `${label}: associate failure marked ${assocFill.fillShown} of ${nFill} fill-ins for review`);
   ok(assocFill.fillSaved === 0, `${label}: associate's failed fill-in answers were kept for the next attempt (${assocFill.fillSaved})`);
   const assocBelow = await session(course, unit, 'assoc', need - 1, false, nFill);
-  ok(!/Passed|Aprobado/.test(assocBelow.result), `${label}: associate passed below the MC mark`);
+  ok(!/passed|aprobada/i.test(assocBelow.result), `${label}: associate passed below the MC mark`);
   ok(/\b2 minute|2 minuto/.test(assocBelow.result), `${label}: associate lock not 2 minutes — "${assocBelow.result.slice(0, 80)}"`);
   const mdivSA = await session(course, unit, 'mdiv', need, true, needF);
-  ok(/Passed|Aprobado/.test(mdivSA.result), `${label}: mdiv did not pass with MC and fill-ins at the mark and SA written — "${mdivSA.result.slice(0, 80)}"`);
+  ok(/passed|aprobada/i.test(mdivSA.result), `${label}: mdiv did not pass with MC and fill-ins at the mark and SA written — "${mdivSA.result.slice(0, 80)}"`);
   ok(prog(mdivSA), `${label}: mdiv pass did not record progress`);
 
   // 5c. fill-ins count on both master's tracks too: everything else right
   //     and the fill-ins blank fails, with no progress written
   for (const t of ['mdiv', 'thm']) {
     const noFill = await session(course, unit, t, need, true, 0);
-    ok(!/Passed|Aprobado/.test(noFill.result), `${label}: ${t} passed with the fill-ins blank`);
+    ok(!/passed|aprobada/i.test(noFill.result), `${label}: ${t} passed with the fill-ins blank`);
     ok(/fill in the blank|complete el espacio/i.test(noFill.result), `${label}: ${t} fill-in failure did not name the fill-ins`);
     ok(!prog(noFill), `${label}: ${t} recorded the unit as passed with the fill-ins blank`);
     ok(noFill.ls[`cts_${slug}_u${unit}_mc_passed`] === '1', `${label}: ${t} MC pass not banked when fill-ins failed`);
@@ -432,7 +432,7 @@ for (const t of ['cert', 'assoc', 'mdiv']) {
   await page.waitForTimeout(200);
   const res = await page.evaluate(() => window.CTS_ENGINE.controls.result().textContent);
   ls = await page.evaluate(() => ({ ...localStorage }));
-  ok(/Passed|Aprobado/.test(res), `${label}: fill-ins alone did not pass after the lock with MC banked — "${res.slice(0, 60)}"`);
+  ok(/passed|aprobada/i.test(res), `${label}: fill-ins alone did not pass after the lock with MC banked — "${res.slice(0, 60)}"`);
   ok((ls[`cts_${slug}_progress`] || '').includes(`"unit${unit}"`), `${label}: passing after the lock did not record progress`);
   await ctx.close();
 }

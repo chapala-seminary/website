@@ -70,18 +70,21 @@ export const READING_ROOM: Record<string, string> = {
   CTSWorship: "CTSWorshipReadings.html",
 };
 
-/* The honours-readings box. Bilingual in the markup itself: the box is not
-   language-switched, and it was not before this file existed either. */
+/* The honours-readings box. It showed English and Spanish together, English
+   first and larger; a Spanish reader took it for English (Dr. Cook's beta
+   pass, 30 Sept 2026). It now follows the page's language switch, like the
+   rest of the unit, and shows both only in the "Both" view. */
 export const honoursBox = ({ course }: PartialContext): string => {
   const href = READING_ROOM[course];
   if (!href) throw new Error(`no reading room is recorded for ${course}, so the honours box cannot be rendered`);
   return `<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1">`
-  + `<div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div>`
-  + `<div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br>`
-  + `<span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span>`
+  + `<div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 <span class="lang-en">Honors Readings</span><span class="lang-es">Lecturas con Honores</span></div>`
+  + `<div style="font-size:14px;line-height:1.5;margin-bottom:14px;">`
+  + `<span class="lang-en">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.</span>`
+  + `<span class="lang-es">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span>`
   + `</div>`
-  + `<a href="${href}" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br>`
-  + `<span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span>`
+  + `<a href="${href}" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">`
+  + `<span class="lang-en">Open the Reading Room &rarr;</span><span class="lang-es">Abrir la Sala de Lecturas &rarr;</span>`
   + `</a>`
   + `</div>`;
 };

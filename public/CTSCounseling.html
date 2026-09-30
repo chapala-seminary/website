@@ -331,7 +331,7 @@ body.spanish .lang-es{display:block}
 </head>
 <body>
 <script src="cts-lang.js"></script>
-<a href="index.html" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
+<a href="index.html#catalog" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif">📚 Catalog / Catálogo</a>
 
 <div class="seminary-header">
   <h1>
@@ -2405,6 +2405,11 @@ function saModel(q){
   return es ? (q.modelEs || '') : (q.modelEn || '');
 }
 // Reveal the gold model-answer box beneath an SA item, if a model exists.
+// A model answer or rubric is shown only under an essay the student has really
+// written (Dr. Cook's beta pass, 30 Sept 2026: model answers appeared under
+// questions left blank). Six words and thirty letters, as in cts-engine.js.
+function ctsAttempted(t){ t=String(t||'').trim(); return t.replace(/\s+/g,'').length>=30 && t.split(/\s+/).length>=6; }
+const CTS_WRITE_FIRST = `<br><span class="lang-en">Write your own answer — a few sentences — and check again to see the model answer.</span><span class="lang-es">Escriba su propia respuesta — unas cuantas oraciones — y revise de nuevo para ver la respuesta modelo.</span>`;
 function revealModel(u,i){
   const q = UNITS[u].shortAnswer[i];
   if(!q) return;
@@ -2526,7 +2531,8 @@ function submitUnit(unitNum){
       const rub = document.getElementById(`rub_${unitNum}_${i}`);
       if(rub){
         rub.className='essay-rubric show';
-        rub.innerHTML = `<strong><span class="lang-en">Model answer / rubric:</span><span class="lang-es">Respuesta modelo / rúbrica:</span></strong><br><span class="lang-en">${e.rubricEn}</span><span class="lang-es">${e.rubricEs}</span>`;
+        const ans = (state.unitState[unitNum].essays||[])[i] || '';
+        rub.innerHTML = ctsAttempted(ans) ? `<strong><span class="lang-en">Model answer / rubric:</span><span class="lang-es">Respuesta modelo / rúbrica:</span></strong><br><span class="lang-en">${e.rubricEn}</span><span class="lang-es">${e.rubricEs}</span>` : CTS_WRITE_FIRST;
       }
     });
   }

@@ -939,6 +939,40 @@ Students also receive their certificate by email once it is registered
   `tools/verify-exam-view.mjs` on all 451 pages). A stopgap: the answer key
   stays in the page source until grading moves to the server, after cutover.
 
+### 8aa. Dr. Cook's real-device beta pass (30 Sept) — Spanish, fill-ins, model answers, progress
+
+1. **Spanish carries through.** 37 unit pages (Bible, Genesis, Galatians,
+   Pentecostal) never loaded `cts-lang.js`, so they opened in English
+   whatever the student had chosen. The unit layout now loads it on every
+   unit, and the build adds it to every other page (`tools/inject-lang.mjs`:
+   reading rooms, digests, certificates). It also stopped saving "English"
+   whenever "Both" was chosen or a page used another class for Spanish, and
+   it now puts back the student's language on pages that keep their own
+   (the digests, the course certificates).
+2. **Spanish text in Spanish.** The greeting's track name, the registration
+   dropdowns and placeholders (`assets/js/cts-fields-lang.js`), the
+   registration confirmation, the honours-readings box and the "Change track"
+   button now follow the language switch. English that remains is in lesson
+   text, illustration captions and a few course-specific labels (listed for
+   Dr. Cook).
+3. **Fill-ins ignore accents**, case and extra spaces: "geografia" is
+   "geografía". A misspelling still fails, and ñ still counts ("ano" is not
+   "año"). `cts-engine.js` and `cts-fill.js`.
+4. **Model answers only under a real answer**: six words and thirty letters,
+   per question, on every track (the Certificate track shows them on
+   submit, and anyone can switch to it). The same rule on WiseSpeak and
+   Narrative Preaching essays and Counseling's older essays.
+5. **The build stamp** shows on the beta site and in tester mode only.
+6. **A passed unit says so**: "Unit 2 passed — 2 of 13 units of this course
+   passed", with the next unit (or the certificate) and the course's
+   progress page, at the top of the page and in the result. Passed units
+   carry a tick in the unit bar.
+7. **The catalog button** went to the front page, whose course list is half
+   way down on a phone; it now goes straight to the list (`index.html#catalog`),
+   as does "All courses" at the foot of every unit.
+
+Checked by `tools/verify-beta-pass.mjs`.
+
 ## How to check any of this yourself
 
 ```
