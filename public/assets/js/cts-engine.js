@@ -798,9 +798,25 @@
       else p.disabled = true;
     }
     if (n) {
-      if (U.nextHref) n.onclick = function () { location.href = U.nextHref; };
+      if (U.nextHref) n.onclick = function () { if (mayGoOn()) location.href = U.nextHref; };
       else n.disabled = true;
     }
+    /* Next goes on only once this unit is passed, as it did on the old site
+       (Dr. Cook's audit, 30 Sept 2026; Robert's decision, 1 Oct). Like the
+       old site, this is the button only: the unit numbers and a typed
+       address still open any unit, and the certificate needs every unit. */
+    var nx = el("cts-next");
+    if (nx) nx.addEventListener("click", function (e) { if (!mayGoOn()) e.preventDefault(); });
+  }
+  // tester mode (cts-curriculum.js), for the twelve hours it lasts
+  function testMode() {
+    return lsGet("cts_test_mode") === "1" && Date.now() - (+lsGet("cts_test_mode_at") || 0) < 12 * 3600 * 1000;
+  }
+  function mayGoOn() {
+    if (unitPassed || testMode()) return true;
+    alert(isEs() ? "Por favor apruebe la Unidad " + U.unit + " primero."
+                 : "Please pass Unit " + U.unit + " first.");
+    return false;
   }
 
   // ---- boot --------------------------------------------------------------

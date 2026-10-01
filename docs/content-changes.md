@@ -992,6 +992,12 @@ Checked by `tools/verify-beta-pass.mjs`.
 * **Front page:** "Begin wherever the Lord leads — there is no single starting
   point" now says to begin with any of the seven foundation courses.
 
+* **Decided 1 Oct:** Next goes on only once the unit is passed, as on the old
+  site ("Please pass Unit 1 first"); the unit numbers and a typed address
+  still open any unit, and tester mode is not held back. How We Got the
+  Bible and Deacon Family Ministry are both open without the foundation;
+  Before You Begin now names both.
+
 ## How to check any of this yourself
 
 ```
