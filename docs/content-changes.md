@@ -973,6 +973,31 @@ Students also receive their certificate by email once it is registered
 
 Checked by `tools/verify-beta-pass.mjs`.
 
+### 8ab. Dr. Cook's audit (30 Sept, afternoon)
+
+* **Certificate of Ministry progress page** was covered by "This course is
+  locked" for a student without the foundation; the course lock skipped
+  pages whose names end in "Certificate", and this one does not. It is now
+  exempt like the Associate, Th.M. and M.Div. pages; the certificate itself
+  still needs the courses. `tools/verify-beta-pass.mjs` checks all four.
+* **Tracker counts:** a student with nothing done showed 1/25 (Associate),
+  1/12 (Th.M.) or 1/30 (M.Div.) toward the program. The `degree_progress`
+  view counted the empty row its join gives a student with no completions.
+  `migrations/0008_progress_counts.sql` makes it again; only the staff
+  roster read these numbers. `test/staff.test.mjs` checks empty records.
+* **Release label:** the build writes `/version.txt` (date and commit,
+  `tools/write-version.mjs`); the beta stamp shows that. The hand-typed
+  labels ("2026-09-15-testerbar1", and "2026-06-28-a7f3" on Before You
+  Begin) are gone.
+* **Front page:** "Begin wherever the Lord leads — there is no single starting
+  point" now says to begin with any of the seven foundation courses.
+
+* **Decided 1 Oct:** Next goes on only once the unit is passed, as on the old
+  site ("Please pass Unit 1 first"); the unit numbers and a typed address
+  still open any unit, and tester mode is not held back. How We Got the
+  Bible and Deacon Family Ministry are both open without the foundation;
+  Before You Begin now names both.
+
 ## How to check any of this yourself
 
 ```

@@ -365,6 +365,11 @@
     var f = file();
     if (!f || f === "index" || f === "ctsbeforeyoubegin") return;
     if (/certificate$/.test(f)) return;                // certificates gate themselves on their own course
+    // The program progress page. Its name does not end in "certificate", so it
+    // was covered by the course lock while the Associate, Th.M. and M.Div. pages
+    // stayed readable (Dr. Cook's audit, 30 Sept 2026). It shows progress to
+    // anyone and issues the certificate only to a student who has earned it.
+    if (f === "ctscertificateofministry") return;
     if (OPEN_FILE[f]) return;                          // WiseSpeak etc.
     var prefix = f.replace(/unit\d+$/, "");
     if (OPEN_PREFIX[prefix]) return;                   // a unit of an always-open course
@@ -455,12 +460,12 @@
 
 
 /* CTS build stamp -----------------------------------------------------
-   Visible version marker injected on every page that loads this file,
-   plus a canonical /version.txt at the site root. Purpose: when a tester
-   reports a problem, we can tell at a glance whether they are on the
-   current deploy or a stale one. Bump BUILD (and version.txt) each deploy. */
+   The release this page came from, for testers: when a problem is reported we
+   can tell at a glance which deploy it was on. The label is /version.txt,
+   which the build writes (tools/write-version.mjs) -- nothing to bump by
+   hand, so the stamp cannot drift from what is deployed. Shown on beta and
+   this machine, and on the real site only in tester mode. */
 (function () {
-  var BUILD = "2026-09-15-testerbar1";
   /* Testers need it; students do not (Dr. Cook's beta pass, 30 Sept 2026).
      Shown on the beta site and this machine, and on the real site only in
      tester mode. /version.txt answers everywhere. */
@@ -471,32 +476,30 @@
   }
   function stamp() {
     if (!wanted()) return;
-    if (document.getElementById("cts-build-stamp")) return;
-    if (!document.body) return;
-    var el = document.createElement("div");
-    el.id = "cts-build-stamp";
-    el.textContent = "build " + BUILD;
-    el.title = "Deployed build of this site. Open /version.txt to confirm the live version.";
-    el.style.cssText =
-      "position:fixed;bottom:3px;right:6px;z-index:2147483646;" +
-      "font:10px/1.4 ui-monospace,Menlo,Consolas,monospace;" +
-      "color:#8a8f96;background:rgba(255,255,255,.66);" +
-      "padding:1px 6px;border-radius:6px;pointer-events:none;" +
-      "letter-spacing:.02em;max-width:62vw;overflow:hidden;" +
-      "white-space:nowrap;text-overflow:ellipsis;";
-    document.body.appendChild(el);
-    /* Prefer the freshly-fetched canonical version over this (cacheable) JS. */
+    if (document.getElementById("cts-build-stamp") || !document.body) return;
     try {
-      fetch("version.txt?t=" + Date.now(), { cache: "no-store" })
+      fetch("/version.txt?t=" + Date.now(), { cache: "no-store" })
         .then(function (r) { return r.ok ? r.text() : null; })
         .then(function (t) {
-          if (!t) return;
-          t = t.trim().split("\n")[0].trim();
-          if (t) el.textContent = "build " + t;
+          t = (t || "").trim().split("\n")[0].trim();
+          if (!t || document.getElementById("cts-build-stamp")) return;
+          var el = document.createElement("div");
+          el.id = "cts-build-stamp";
+          el.textContent = "build " + t;
+          el.title = "The release this page came from (/version.txt).";
+          el.style.cssText =
+            "position:fixed;bottom:3px;right:6px;z-index:2147483646;" +
+            "font:10px/1.4 ui-monospace,Menlo,Consolas,monospace;" +
+            "color:#8a8f96;background:rgba(255,255,255,.66);" +
+            "padding:1px 6px;border-radius:6px;pointer-events:none;" +
+            "letter-spacing:.02em;max-width:62vw;overflow:hidden;" +
+            "white-space:nowrap;text-overflow:ellipsis;";
+          document.body.appendChild(el);
         })
         .catch(function () {});
     } catch (e) {}
   }
+
   if (document.readyState === "loading")
     document.addEventListener("DOMContentLoaded", stamp);
   else stamp();

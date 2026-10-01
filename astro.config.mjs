@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import langIntegration from './tools/inject-lang.mjs';
+import versionIntegration from './tools/write-version.mjs';
 
 export default defineConfig({
   site: 'https://chapalaseminary.org',
@@ -9,5 +10,6 @@ export default defineConfig({
   outDir: './dist',
   publicDir: './public',
   // every page restores the reader's chosen language (tools/inject-lang.mjs)
-  integrations: [langIntegration()],
+  // and /version.txt names the release (tools/write-version.mjs)
+  integrations: [langIntegration(), versionIntegration()],
 });

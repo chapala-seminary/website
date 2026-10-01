@@ -170,6 +170,41 @@ const student = (track) => ({
   await ctx.close();
 }
 
+/* Audit, 30 Sept: the four program progress pages are readable with no
+   courses done -- none is covered by the course lock -- and none offers a
+   certificate to print. */
+{
+  const ctx = await context({ cts_student: JSON.stringify({ name: 'Ana Prueba', track: 'cert' }), cts_track: 'cert' });
+  const p = await ctx.newPage();
+  for (const f of ['CTSCertificateOfMinistry.html', 'CTSAssociateCertificate.html', 'CTSThMCertificate.html', 'CTSMDivCertificate.html']) {
+    await p.goto(`${BASE}/${f}`, { waitUntil: 'load' }); await p.waitForTimeout(300);
+    const r = await p.evaluate(() => ({
+      lock: !!document.getElementById('cts-lock-overlay'),
+      print: [...document.querySelectorAll('button')].some((b) => /print|imprimir/i.test(b.textContent) && b.offsetParent !== null && !b.disabled),
+    }));
+    ok(!r.lock, `${f}: covered by the course lock with no courses done`);
+    ok(!r.print, `${f}: offers a certificate to print with no courses done`);
+  }
+  await ctx.close();
+}
+
+/* Next goes on only once the unit is passed, as on the old site (audit,
+   30 Sept; decided 1 Oct). The unit numbers still open any unit. */
+{
+  const ctx = await context(student('cert'));
+  const p = await ctx.newPage();
+  let said = null;
+  p.on('dialog', (d) => { said = d.message(); d.dismiss(); });
+  await p.goto(`${BASE}/CTSBibleUnit1.html`, { waitUntil: 'load' });
+  await p.click('#cts-next'); await p.waitForTimeout(500);
+  ok(/CTSBibleUnit1\.html$/.test(p.url()) && /pass Unit 1 first/.test(said || ''), `Next before passing Unit 1: went to ${p.url()}, said "${said}"`);
+  await p.evaluate(() => localStorage.setItem('cts_bible_progress', JSON.stringify({ unit1: true })));
+  await p.reload({ waitUntil: 'load' }); said = null;
+  await p.click('#cts-next'); await p.waitForURL(/CTSBibleUnit2\.html$/, { timeout: 5000 }).catch(() => {});
+  ok(/CTSBibleUnit2\.html$/.test(p.url()) && !said, `Next after passing Unit 1: went to ${p.url()}`);
+  await ctx.close();
+}
+
 await browser.close();
 console.log(`${checks} assertions on Dr. Cook's beta pass (30 Sept)`);
 if (fails.length) { fails.slice(0, 40).forEach((f) => console.log('  FAIL: ' + f)); console.log(`FAIL — ${fails.length}`); process.exit(1); }
