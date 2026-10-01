@@ -85,6 +85,17 @@ await reg({ name: SHOUT, email: `shout-${tag}@example.test`, track: 'thm' });
   const d2 = (await (await staff('/staff/students.json')).json()).find((x) => x.name === DONE);
   ok(d2 && d2.email_verified && d2.notices === 12, `confirming an email keeps the record of notices sent (${d2 && d2.notices})`);
   ok(!JSON.stringify(rows).includes(quietCode), 'the JSON never has a student code');
+  // Nothing done is nothing toward the program, on every track (audit, 30 Sept:
+  // an empty Associate record showed 1/25 -- migrations/0008_progress_counts.sql)
+  const EMPTY = { assoc: `Empty Assoc ${tag}`, thm: `Empty ThM ${tag}`, mdiv: `Empty MDiv ${tag}` };
+  await reg({ name: EMPTY.assoc, track: 'cert', goal: 'assoc' });
+  await reg({ name: EMPTY.thm, track: 'thm' });
+  await reg({ name: EMPTY.mdiv, track: 'mdiv' });
+  const er = await (await staff('/staff/students.json')).json();
+  for (const [k, want] of [['assoc', '0/25'], ['thm', '0/12'], ['mdiv', '0/30']]) {
+    const e = er.find((x) => x.name === EMPTY[k]);
+    ok(e && e.program_progress === want && e.courses_done === 0, `a ${k} student with nothing done shows ${want}`, JSON.stringify(e && { p: e.program_progress, c: e.courses_done }));
+  }
   const csv = await (await staff('/staff/students.csv')).text();
   ok(/^Name,Email,Country,Language,Program/.test(csv), 'the CSV has a header row');
   ok(csv.includes(`"'=HYPERLINK(""x"") ${tag}"`), 'a name a spreadsheet would run as a formula is defused in the CSV',

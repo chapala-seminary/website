@@ -170,6 +170,24 @@ const student = (track) => ({
   await ctx.close();
 }
 
+/* Audit, 30 Sept: the four program progress pages are readable with no
+   courses done -- none is covered by the course lock -- and none offers a
+   certificate to print. */
+{
+  const ctx = await context({ cts_student: JSON.stringify({ name: 'Ana Prueba', track: 'cert' }), cts_track: 'cert' });
+  const p = await ctx.newPage();
+  for (const f of ['CTSCertificateOfMinistry.html', 'CTSAssociateCertificate.html', 'CTSThMCertificate.html', 'CTSMDivCertificate.html']) {
+    await p.goto(`${BASE}/${f}`, { waitUntil: 'load' }); await p.waitForTimeout(300);
+    const r = await p.evaluate(() => ({
+      lock: !!document.getElementById('cts-lock-overlay'),
+      print: [...document.querySelectorAll('button')].some((b) => /print|imprimir/i.test(b.textContent) && b.offsetParent !== null && !b.disabled),
+    }));
+    ok(!r.lock, `${f}: covered by the course lock with no courses done`);
+    ok(!r.print, `${f}: offers a certificate to print with no courses done`);
+  }
+  await ctx.close();
+}
+
 await browser.close();
 console.log(`${checks} assertions on Dr. Cook's beta pass (30 Sept)`);
 if (fails.length) { fails.slice(0, 40).forEach((f) => console.log('  FAIL: ' + f)); console.log(`FAIL — ${fails.length}`); process.exit(1); }

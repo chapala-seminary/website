@@ -138,6 +138,7 @@ so a plain `curl` is refused:
 
 | file | what |
 |---|---|
+| `migrations/0008_progress_counts.sql` | `degree_progress` counts only real completions (an empty record showed 1/25) |
 | `migrations/0007_levels.sql` | `degree_progress.assoc_done`: courses that count toward the Associate (Associate level or higher) |
 | `migrations/0006_retention.sql` | `students.lang`, `students.contact_opt_out_at`, the `outreach` and `contact_tokens` tables, the `student_activity` view |
 | `worker/staff.js` | the staff pages and the Access check |
