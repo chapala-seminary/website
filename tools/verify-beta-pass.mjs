@@ -138,6 +138,10 @@ const student = (track) => ({
     const t = document.querySelector('textarea[data-sa="0"]');
     t.value = 'Moses met God at the burning bush and was sent to deliver Israel from Egypt.';
     t.dispatchEvent(new Event('input', { bubbles: true }));
+    // eight words is not yet a real attempt (Dr. Cook, 2 Oct: ten words, fifty characters)
+    const u = document.querySelector('textarea[data-sa="1"]');
+    u.value = 'God gave Moses the commandments on Mount Sinai.';
+    u.dispatchEvent(new Event('input', { bubbles: true }));
     window.CTS_ENGINE.controls.submit().click();
   });
   await p.waitForTimeout(300);

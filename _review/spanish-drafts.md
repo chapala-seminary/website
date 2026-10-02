@@ -72,7 +72,7 @@ bibliaparalela.com/rvg): Nehemías 8:8 and Mateo 28:19.
 | Unit 8 · The Helps of the Spirit | Unidad 8 · Las ayudas del Espíritu | Holy Spirit 8 |
 | Unit 9 · The Fruit of the Spirit | Unidad 9 · El fruto del Espíritu | Holy Spirit 9 |
 | Unit 10 · The Gifts of the Spirit | Unidad 10 · Los dones del Espíritu | Holy Spirit 10 |
-| YHWH (Yahweh / "the LORD") | YHWH (Yahvé / «JEHOVÁ») | Biblical Languages 5 |
+| YHWH (Yahweh / "the LORD") | YHWH (Yahvé; tradicionalmente «JEHOVÁ») — settled 2 Oct | Biblical Languages 5 |
 | God calls every hearer to Christ  ·  1 Timothy 2:4 · John 3:16 | Dios llama a todo oyente a Cristo  ·  1 Timoteo 2:4 · Juan 3:16 | Systematic Theology 7 |
 | It opens blind eyes and frees the will to respond  ·  John 6:44 | Abre los ojos ciegos y libra la voluntad para responder  ·  Juan 6:44 | Systematic Theology 7 |
 | >new spiritual life< | >nueva vida espiritual< | Systematic Theology 7 |
@@ -111,11 +111,9 @@ bibliaparalela.com/rvg): Nehemías 8:8 and Mateo 28:19.
 | the believer raised and made perfectly like Christ | el creyente resucitado y hecho perfectamente semejante a Cristo |
 | Romans 5:1 · John 1:12 · Ephesians 1:13 | Romanos 5:1 · Juan 1:12 · Efesios 1:13 |
 
-## Questions for Dr. Cook
+## Settled (Dr. Cook, 2 Oct)
 
-1. **YHWH** in Biblical Languages 5: "YHWH (Yahvé / «JEHOVÁ»)", following the
-   RVG's rendering of the Name. Or another form?
-2. **Unit 1 of Life of Christ:** "El Verbo fue hecho carne" follows the RVG of
-   John 1:14 ("Y aquel Verbo fue hecho carne").
+1. **YHWH:** "YHWH (Yahvé; tradicionalmente «JEHOVÁ»)".
+2. **Life of Christ 1:** "El Verbo fue hecho carne" stays.
 3. Left in English on purpose: Hebrew letter names, Greek transliterations,
    *Scutum Fidei*, *WiseSpeak*, and titles of real books and churches.

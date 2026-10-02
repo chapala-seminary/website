@@ -958,7 +958,8 @@ Students also receive their certificate by email once it is registered
 3. **Fill-ins ignore accents**, case and extra spaces: "geografia" is
    "geografía". A misspelling still fails, and ñ still counts ("ano" is not
    "año"). `cts-engine.js` and `cts-fill.js`.
-4. **Model answers only under a real answer**: six words and thirty letters,
+4. **Model answers only under a real answer**: ten words and fifty characters
+   (raised from six words on 2 Oct at Dr. Cook's request),
    per question, on every track (the Certificate track shows them on
    submit, and anyone can switch to it). The same rule on WiseSpeak and
    Narrative Preaching essays and Counseling's older essays.
@@ -1008,6 +1009,14 @@ again, as many times as needed. It is now on the front page (a step under
 in a short form above every exam (`assets/js/cts-exam-view.js`). The wording
 mentions the short wait between attempts (2 minutes on the Certificate
 track, 15 on the master's tracks), which the engine enforces.
+
+### 8ad. Dr. Cook's answers (2 Oct)
+
+* Biblical Languages 5: "YHWH (Yahvé; tradicionalmente «JEHOVÁ»)".
+* Life of Christ 1: "El Verbo fue hecho carne" stays. Both now marked reviewed.
+* Model answers appear under a short answer of at least ten words and fifty
+  characters (was six words), in the unit engine and the three single-page
+  courses.
 
 ## How to check any of this yourself
 

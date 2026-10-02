@@ -1542,8 +1542,8 @@ function saveEssay(u,i,v){
 // student's per-scenario result always matches what the unit submission will score.
 // A model answer or rubric is shown only under an essay the student has really
 // written (Dr. Cook's beta pass, 30 Sept 2026: model answers appeared under
-// questions left blank). Six words and thirty letters, as in cts-engine.js.
-function ctsAttempted(t){ t=String(t||'').trim(); return t.replace(/\s+/g,'').length>=30 && t.split(/\s+/).length>=6; }
+// questions left blank). Ten words and fifty characters, as in cts-engine.js.
+function ctsAttempted(t){ t=String(t||'').trim().replace(/\s+/g,' '); return t.length>=50 && t.split(' ').length>=10; }
 const CTS_WRITE_FIRST = `<br><span class="lang-en">Write your own answer — a few sentences — and check again to see the model answer.</span><span class="lang-es">Escriba su propia respuesta — unas cuantas oraciones — y revise de nuevo para ver la respuesta modelo.</span>`;
 function checkEssay(u,i){
   const unit = UNITS[u];

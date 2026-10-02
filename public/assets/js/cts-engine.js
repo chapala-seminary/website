@@ -217,13 +217,15 @@
      beta pass, 30 Sept 2026): answering question 1 and pressing Check showed
      the model answers for the nine left blank -- and anyone can switch to the
      Certificate track, where short answers are shown on submit, and back. A
-     real attempt is a sentence: at least SA_MIN_WORDS words and SA_MIN_CHARS
-     letters, so a single character or "x x x" does not open it. */
-  var SA_MIN_WORDS = 6, SA_MIN_CHARS = 30;
+     real attempt is at least ten words and fifty characters (Dr. Cook, 2 Oct:
+     six words was too easy to satisfy). This decides only what is shown; it
+     grades nothing. */
+  var SA_MIN_WORDS = 10, SA_MIN_CHARS = 50;
   function attempted(text) {
-    var t = String(text || "").trim();
-    return t.replace(/\s+/g, "").length >= SA_MIN_CHARS && t.split(/\s+/).length >= SA_MIN_WORDS;
+    var t = String(text || "").trim().replace(/\s+/g, " ");
+    return t.length >= SA_MIN_CHARS && t.split(" ").length >= SA_MIN_WORDS;
   }
+
 
   // ---- language ----------------------------------------------------------
   function isEs() {
