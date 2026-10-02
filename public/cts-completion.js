@@ -5,7 +5,7 @@
    Self-configures from the page: track from filename, course from <title>. */
 (function () {
   "use strict";
-  var NOTIFY_EMAIL = "chapalatheological@gmail.com";
+  var NOTIFY_EMAIL = "info@chapalaseminary.org";
   var ENDPOINT = "https://script.google.com/macros/s/AKfycbxB02hawCZC6pPkp2mTmdIXL601M7WiWU-0TT-NWo5D1QwwKh_jGyWO_Nz9IaQVp-3qNw/exec";
 
   var file = (location.pathname.split("/").pop() || "").toLowerCase();
