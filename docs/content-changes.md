@@ -998,6 +998,17 @@ Checked by `tools/verify-beta-pass.mjs`.
   Bible and Deacon Family Ministry are both open without the foundation;
   Before You Begin now names both.
 
+### 8ac. How the examinations work (1 Oct)
+
+Dr. Cook asked that the seminary's view of testing be stated where students
+see it: the exams are there to help students learn, not to trick them; the
+goal is mastery; a student who falls short reviews the lesson and tries
+again, as many times as needed. It is now on the front page (a step under
+"How to Proceed"), on Before You Begin ("How the Examinations Work"), and
+in a short form above every exam (`assets/js/cts-exam-view.js`). The wording
+mentions the short wait between attempts (2 minutes on the Certificate
+track, 15 on the master's tracks), which the engine enforces.
+
 ## How to check any of this yourself
 
 ```

@@ -110,6 +110,7 @@
     "body.cts-exam-open [data-cts-part=lesson]{display:none!important}" +
     ".cts-exam-switch{margin:24px 0;padding:18px 20px;border:2px solid var(--gold,#b08324);border-radius:12px;text-align:center}" +
     ".cts-exam-switch p{margin:0 0 12px}" +
+    ".cts-exam-switch .cts-exam-aim{font-size:.92em;font-style:italic}" +
     ".cts-exam-switch button{font:inherit;font-weight:700;padding:12px 26px;border-radius:24px;border:0;cursor:pointer;background:var(--gold,#b08324);color:#2a1a0a}";
   document.head.appendChild(css);
 
@@ -120,6 +121,9 @@
         '<button type="button" id="cts-exam-back"><span class="lang-en">Back to the lesson</span><span class="lang-es">Volver a la lección</span></button>'
       : '<p><span class="lang-en">When you are ready, open the exam. The lesson will be hidden while you take it.</span>' +
         '<span class="lang-es">Cuando esté listo, abra el examen. La lección estará oculta mientras lo presenta.</span></p>' +
+        // the seminary's view of examinations (Dr. Cook, 1 Oct 2026), where every student sees it
+        '<p class="cts-exam-aim"><span class="lang-en">This exam is here to help you learn, not to trick you. If you do not pass the first time, review the lesson and try again &mdash; you may retake it as many times as you need.</span>' +
+        '<span class="lang-es">Este examen está para ayudarle a aprender, no para engañarle. Si no aprueba la primera vez, repase la lección e inténtelo de nuevo &mdash; puede volver a presentarlo cuantas veces lo necesite.</span></p>' +
         '<button type="button" id="cts-exam-open"><span class="lang-en">Take the exam</span><span class="lang-es">Presentar el examen</span></button>';
     bar.querySelector("button").addEventListener("click", function () { set(!open, true); });
   }
