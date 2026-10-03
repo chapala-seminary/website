@@ -8,9 +8,8 @@
  * untouched. tools/prose-baseline.mjs is what makes that safe to assert.
  */
 import { shell } from '../lib/shell';
+import { version } from '../lib/version';
 import catalog from '../../worker/catalog.json';
-import fs from 'node:fs';
-import crypto from 'node:crypto';
 
 interface Unit {
   course: string;
@@ -30,8 +29,11 @@ interface Props {
   body: string;
   pagePrefix: string;
   unitNumbers: number[];
+  /* The course's Master's textbook, when it has one (src/content/textbooks):
+     a box under the greeting on every unit, with the book and its test. */
+  textbook?: { page: string; title: { en: string; es: string } } | null;
 }
-const { title, bodyClass, styles, scripts, unit, body, pagePrefix, unitNumbers } = Astro.props;
+const { title, bodyClass, styles, scripts, unit, body, pagePrefix, unitNumbers, textbook = null } = Astro.props;
 
 const { masthead, content } = shell(body);
 
@@ -64,20 +66,8 @@ const unitJson = JSON.stringify({ ...unit,
 }).replace(/</g, '\\u003c');
 
 /* Each script and the stylesheet are addressed with a fingerprint of their
-   contents: /assets/js/cts-engine.js?v=3f9c1a2b7e. A browser may keep a
-   script it has seen before and run it again on the next visit; when the
-   address changes with the contents, a new release can never be judged
-   against last week's engine. Wayne tested the fill-ins on beta and saw the
-   code from before the fix (26 Sept). A hand-kept ?v=... in a unit's script
-   list is replaced, because it is only right until someone forgets it. */
-const version = (src: string) => {
-  const file = src.replace(/^\//, '').split('?')[0];
-  try {
-    return `/${file}?v=${crypto.createHash('sha1').update(fs.readFileSync(`public/${file}`)).digest('hex').slice(0, 10)}`;
-  } catch {
-    return `/${src.replace(/^\//, '')}`;
-  }
-};
+   contents (src/lib/version.ts says why). A hand-kept ?v=... in a unit's
+   script list is replaced, because it is only right until someone forgets it. */
 
 // The language classes come from the body class the page already had; a page
 // that opened in Spanish still does.
@@ -200,6 +190,18 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
         </p>
       </section>
       <p id="greeting" class="muted" style="margin-top:0"></p>
+      {textbook && (
+        <aside class="cts-textbook" id="cts-textbook">
+          <span class="cts-textbook-mark" aria-hidden="true">📘</span>
+          <span>
+            <strong><span class="lang-en">Textbook for this course</span><span class="lang-es">Libro de texto de este curso</span></strong>
+            <span class="lang-en"> — required reading on the M.Div. and Th.M. tracks: </span><span class="lang-es"> — lectura obligatoria en los trayectos M.Div. y Th.M.: </span>
+            <a href={`/${textbook.page}.html`}><span class="lang-en">{textbook.title.en}</span><span class="lang-es">{textbook.title.es}</span></a>
+            &nbsp;·&nbsp;
+            <a href={`/${textbook.page}Test.html`}><span class="lang-en">Textbook test</span><span class="lang-es">Examen del libro</span></a>
+          </span>
+        </aside>
+      )}
 
       <Fragment set:html={content} />
     </main>

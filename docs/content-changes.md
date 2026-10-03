@@ -1018,6 +1018,56 @@ track, 15 on the master's tracks), which the engine enforces.
   characters (was six words), in the unit engine and the three single-page
   courses.
 
+### 8ae. Parables of the Bible, the Master's textbooks and their tests (3 Oct 2026) — 15 unit pages, 1 certificate, 1 reading room and 18 textbook pages added; 77 unit pages, 2 course pages and the front page changed
+
+Dr. Cook's October delivery (`CTS-2026.1-Nine-Book-FINAL`), the first course
+to go through `docs/adding-a-course.md`.
+
+* **Parables of the Bible**, the 45th course: 15 units, each with the lesson,
+  20 multiple-choice, 10 short-answer and 10 fill-in-the-blank questions, on
+  the one engine. Dr. Cook's own engine in the delivered pages was not used
+  (a wrong multiple-choice click highlighted the right answer; 100 characters
+  of filler revealed the model answer); `tools/import-parables.mjs` took the
+  content only. The four illustrations are files (`assets/img/parables/`), not
+  200 KB of base64 each. The honours card on each unit became the standard
+  honours box; the reading room is `CTSParablesReadings.html` (its five
+  readings, as delivered; the attestation also writes the standard
+  `cts_honors_v1:Parables` record the certificate reads). The certificate is
+  the standard one (seal, signatures, verification code, registration,
+  completion recorded when unit 15 is passed) in place of the delivered page,
+  which kept its own progress key and reported nothing. The card sits after
+  Bible Characters II; the course is locked like every elective. Course count
+  44 → 45 on the front page, About, the Catalog page and its structured data,
+  and `tools/verify-degrees.mjs`. Spanish titles and text are Dr. Cook's.
+* **Nine textbooks**, English and Spanish, converted from the Word masters and
+  read on the site (`CTSTextbook<Name>.html`), with the PDFs to download; a
+  box on every unit of the nine courses (and on the two single-page course
+  pages) and a section on the front page. The English Deaconship book had no
+  heading styles and was reflowed — a styled master is wanted.
+* **Nine textbook tests** on separate pages (`CTSTextbook<Name>Test.html`):
+  fill-in-the-blank only, 20 drawn from 40 each attempt, 18 to pass, marked
+  without regard to capitals, accents or punctuation, locked after a failure
+  for the student's usual wait. Passes are kept in the browser only; whether
+  they count toward a master's completion is still to be decided. The
+  test-bank Word and PDF files (answers) are not published.
+* **The checks** know about added courses now: `ADDED` in
+  `tools/verify-catalog.mjs` and `tools/verify-gating.mjs`, and the gating
+  baseline records 45 cards. New: `tools/verify-textbooks.mjs` and
+  `tools/verify-textbook-test.mjs`. Baselines re-recorded with the new course
+  and the textbook box (`tools/content-baseline.json`,
+  `test/fixtures/lesson-render.json`).
+
+* **The front page's catalog link from a certificate** landed about 260px
+  past the course list: the browser works out where to scroll while the page
+  is still in the fallback font, the web fonts arrive, everything above the
+  catalog gets shorter, and the smooth scroll overshoots (the certificate
+  pages load no web fonts, so the hop always fetches them). Found by
+  `tools/verify-beta-pass.mjs` on this branch and on `main` alike; the front
+  page now scrolls to the hash again once the fonts are in. One script line in
+  `src/body/index/tail.html`.
+
+Details: `docs/textbooks.md`.
+
 ## How to check any of this yourself
 
 ```

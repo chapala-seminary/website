@@ -19,6 +19,14 @@ const courses = (await getCollection('courses'))
   .map((e) => e.data)
   .sort((a, b) => a.order - b.order);
 
+// The Master's textbooks (src/content/textbooks), listed after the courses.
+// Each must belong to a course on this page, or its card has nowhere to point.
+const textbooks = (await getCollection('textbooks')).map((e) => e.data).sort((a, b) => a.number - b.number);
+const cardOf = new Map(courses.map((c) => [c.code, c]));
+for (const t of textbooks)
+  if (!cardOf.has(t.course))
+    throw new Error(`textbook ${t.slug} belongs to course "${t.course}", which has no catalog card`);
+
 // Invariants the hand-written catalog had no way to enforce.
 if (courses.length !== intro.statedCount)
   throw new Error(
@@ -61,6 +69,25 @@ const recordJson = JSON.stringify(recordable).replace(/</g, '\\u003c');
       </div>
     </div>
 ))}
+  </section>
+<section id="textbooks">
+    <style is:inline>
+      #textbooks .tb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:14px;margin-top:14px}
+      #textbooks a.textbook{display:block;min-width:0;background:#fffdf9;border:1px solid var(--line,#e2d6c9);border-radius:12px;padding:16px 18px;text-decoration:none;color:inherit}
+      #textbooks a.textbook:hover{border-color:var(--gold,#b08324)}
+      #textbooks .tb-title{font-family:"Cormorant Garamond",serif;font-size:1.3rem;color:var(--oxblood,#6d2233);line-height:1.12}
+      #textbooks .tb-for{font-size:.88rem;color:var(--muted,#6b5b4d);margin-top:5px;line-height:1.45}
+      #textbooks .tb-go{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted,#6b5b4d);margin-top:11px;display:inline-block}
+    </style>
+    <div class="kicker"><span class="en">Required Reading</span><span class="es">Lecturas Obligatorias</span></div>
+    <h2 class="section"><span class="en">Master's Textbooks</span><span class="es">Libros de Texto de Maestría</span></h2>
+    <p><span class="en">Nine textbooks, each in English and Spanish, written for nine of the courses above. They are required reading on the M.Div. and Th.M. tracks and open to every student. Each has a short test of its own.</span>
+    <span class="es">Nueve libros de texto, cada uno en inglés y en español, escritos para nueve de los cursos anteriores. Son lectura obligatoria en los trayectos M.Div. y Th.M. y están abiertos a todos los estudiantes. Cada uno tiene su propio examen breve.</span></p>
+    <div class="tb-grid">
+      {textbooks.map((t) => (
+        <a class="textbook" href={`${t.page}.html`}><div class="tb-title"><span class="en">{t.title.en}</span><span class="es">{t.title.es}</span></div><div class="tb-for"><span class="en">For {cardOf.get(t.course)!.title.en}</span><span class="es">Para {cardOf.get(t.course)!.title.es}</span></div><span class="tb-go"><span class="en">Read →</span><span class="es">Leer →</span></span></a>
+      ))}
+    </div>
   </section>
 <script is:inline src="/assets/js/cts-record.js"></script>
 <script is:inline set:html={`window.CTSRecord && window.CTSRecord.backfill(${recordJson});`} />

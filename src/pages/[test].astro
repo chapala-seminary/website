@@ -1,0 +1,52 @@
+---
+/* The textbook test, on a page of its own: CTSTextbookCultsTest.html and the
+ * other eight. Twenty fill-in-the-blank questions drawn at random from the
+ * book's forty, eighteen right to pass (Dr. Cook, 3 Oct 2026), marked by the
+ * same grader as every unit's fill-ins (public/assets/js/cts-fill.js:
+ * capitals, accents and punctuation do not count). The book is not on this
+ * page, so the browser's Find cannot search it for an answer. The page's own
+ * script is public/assets/js/cts-textbook.js. */
+import { getCollection } from 'astro:content';
+import Textbook from '../layouts/Textbook.astro';
+
+export async function getStaticPaths() {
+  const books = await getCollection('textbooks');
+  const courses = await getCollection('courses');
+  const units = await getCollection('units');
+  const card = new Map(courses.map((c) => [c.id, c.data]));
+  const slugOf = new Map(units.map((u) => [u.data.pagePrefix, u.data.course]));
+  return books.map((b) => {
+    const course = card.get(b.data.course);
+    if (!course) throw new Error(`textbook ${b.data.slug} belongs to course "${b.data.course}", which has no catalog card`);
+    return { params: { test: `${b.data.page}Test` }, props: { book: b.data, course, accent: slugOf.get(b.data.course) ?? null } };
+  });
+}
+const { book, course, accent } = Astro.props;
+const { draw, pass, questions } = book.test;
+const data = JSON.stringify({ slug: book.slug, page: book.page, title: book.title, draw, pass, questions }).replace(/</g, '\\u003c');
+---
+<Textbook kind="test" book={book} course={course} accent={accent} scripts={['/assets/js/cts-fill.js']}>
+  <section class="card tb-about">
+    <h2><span class="lang-en">Textbook test</span><span class="lang-es">Examen del libro de texto</span></h2>
+    <p>
+      <span class="lang-en">Twenty fill-in-the-blank questions, drawn at random from forty, on <em>{book.title.en}</em>. You need {pass} of {draw} to pass. Type the missing word or phrase and press Check (or Enter): each answer is marked at once. Capitals, accents and punctuation do not matter; you may answer in English or Spanish. If you fall short, review the book and try again after a short wait; the next attempt draws a fresh twenty.</span>
+      <span class="lang-es">Veinte preguntas para completar, tomadas al azar de cuarenta, sobre <em>{book.title.es}</em>. Necesita {pass} de {draw} para aprobar. Escriba la palabra o frase que falta y pulse Comprobar (o Intro): cada respuesta se califica en seguida. No importan las mayúsculas, los acentos ni la puntuación; puede responder en inglés o en español. Si no alcanza la nota, repase el libro e inténtelo de nuevo tras una breve espera; el siguiente intento toma otras veinte.</span>
+    </p>
+    <p class="small muted">
+      <span class="lang-en">The book is not on this page: <a href={`/${book.page}.html`}>read it first</a>, then come back.</span>
+      <span class="lang-es">El libro no está en esta página: <a href={`/${book.page}.html`}>léalo primero</a> y luego vuelva.</span>
+    </p>
+  </section>
+
+  <section class="card tb-test" id="tb-test">
+    <div id="tb-status" role="status"></div>
+    <div id="tb-questions"></div>
+    <div class="actions">
+      <button type="button" class="btn solid" id="tb-submit"><span class="lang-en">Submit the test</span><span class="lang-es">Enviar el examen</span></button>
+      <button type="button" class="btn secondary" id="tb-reset"><span class="lang-en">Clear my answers</span><span class="lang-es">Borrar mis respuestas</span></button>
+    </div>
+    <div id="tb-result" style="margin-top:15px;font-weight:bold;"></div>
+  </section>
+
+  <script is:inline set:html={`window.CTS_TEXTBOOK_TEST = ${data};`} />
+</Textbook>

@@ -9,6 +9,9 @@ const bodies = import.meta.glob('../body/*.html', { query: '?raw', import: 'defa
 export async function getStaticPaths() {
   const units = await getCollection('units');
   const lessons = await getCollection('lessons');
+  // the course's textbook, if it has one (src/content/textbooks), for the box on every unit
+  const textbooks = await getCollection('textbooks');
+  const bookOf = new Map(textbooks.map((t) => [t.data.course, { page: t.data.page, title: t.data.title }]));
   // a course is converted when its lessons are in the collection
   const byUnit = new Map(lessons.map((l) => [`${l.data.course}/${l.data.unit}`, l.data as Lesson]));
   // The units a course actually has, for the pills. Counting 1..totalUnits
@@ -21,11 +24,12 @@ export async function getStaticPaths() {
     // the page name is the URL the site already uses, e.g. CTS1PeterUnit1
     params: { unit: `${entry.data.pagePrefix}Unit${entry.data.unit}` },
     props: { data: entry.data, lesson: byUnit.get(`${entry.data.pagePrefix}/${entry.data.unit}`) ?? null,
-             unitNumbers: numbers.get(entry.data.pagePrefix)! },
+             unitNumbers: numbers.get(entry.data.pagePrefix)!,
+             textbook: bookOf.get(entry.data.pagePrefix) ?? null },
   }));
 }
 
-const { data, lesson, unitNumbers } = Astro.props;
+const { data, lesson, unitNumbers, textbook } = Astro.props;
 
 /* Two sources, one page. A course that has been converted renders from its
    lesson data; the rest still render from the HTML file they were written as,
@@ -43,4 +47,4 @@ if (lesson) {
 // pagePrefix is build-time routing, not something the engine reads
 const { title, bodyClass, styles, scripts, pagePrefix, ...unit } = data;
 ---
-<Unit title={title} bodyClass={bodyClass} styles={styles} scripts={scripts} unit={unit} body={body} pagePrefix={pagePrefix} unitNumbers={unitNumbers} />
+<Unit title={title} bodyClass={bodyClass} styles={styles} scripts={scripts} unit={unit} body={body} pagePrefix={pagePrefix} unitNumbers={unitNumbers} textbook={textbook} />

@@ -62,6 +62,12 @@ export const GET: APIRoute = async () => {
   // Generated course units, straight from the collection that builds them.
   for (const entry of await getCollection('units'))
     add(`${entry.data.pagePrefix}Unit${entry.data.unit}.html`, 0.8);
+  // The Master's textbooks and their tests, generated from the same collection
+  // that builds them (src/pages/[textbook].astro, [test].astro).
+  for (const entry of await getCollection('textbooks')) {
+    add(`${entry.data.page}.html`, 0.7);
+    add(`${entry.data.page}Test.html`, 0.5);
+  }
 
   // Everything else is a static page; classify by what it is.
   for (const f of fs.readdirSync('public').filter((f) => f.endsWith('.html'))) {

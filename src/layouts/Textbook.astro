@@ -1,0 +1,104 @@
+---
+/* One layout for the textbook pages: the book itself (CTSTextbookX.html) and
+ * its test (CTSTextbookXTest.html). The same masthead, language control and
+ * footer as a unit page, without the unit navigation, the registration card
+ * and the exam engine, none of which apply: a textbook is read, and its test
+ * is a page of its own (src/pages/[test].astro), so the browser's Find cannot
+ * search the book for an answer -- the reason Dr. Cook asked for separate
+ * pages (3 Oct 2026).
+ */
+import { version } from '../lib/version';
+
+interface Bi { en: string; es: string }
+interface Book { slug: string; page: string; course: string; title: Bi; subtitle?: Bi; credits?: Bi; edition: string }
+interface Card { entry: string; title: Bi }
+interface Props {
+  kind: 'book' | 'test';
+  book: Book;
+  course: Card;
+  accent: string | null;      // the course's storage slug, for its colour
+  scripts?: string[];
+}
+const { kind, book, course, accent, scripts = [] } = Astro.props;
+const title = kind === 'book'
+  ? `CTS Textbook: ${book.title.en}`
+  : `CTS Textbook Test: ${book.title.en}`;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap"
+    />
+    <link rel="stylesheet" href={version('/assets/css/cts.css')} />
+  </head>
+  <body class="lang-en" data-course={accent ?? undefined} data-textbook={book.slug} data-textbook-page={kind}>
+    <script is:inline src={version('/cts-lang.js')}></script>
+    <a class="btn skip" href="#content" style="position:absolute;left:-9999px">
+      <span class="lang-en">Skip to the content</span><span class="lang-es">Saltar al contenido</span>
+    </a>
+
+    <header class="cts-masthead">
+      <div class="wrap">
+        <div class="eyebrow">
+          <span class="lang-en">{kind === 'book' ? "Master's textbook" : "Master's textbook · test"}</span>
+          <span class="lang-es">{kind === 'book' ? 'Libro de texto de maestría' : 'Libro de texto de maestría · examen'}</span>
+        </div>
+        <h1>📘 <span class="lang-en">{book.title.en}</span><span class="lang-es">{book.title.es}</span></h1>
+        {book.subtitle && (book.subtitle.en || book.subtitle.es) && (
+          <h2><span class="lang-en">{book.subtitle.en}</span><span class="lang-es">{book.subtitle.es}</span></h2>
+        )}
+        {book.credits && (book.credits.en || book.credits.es) && (
+          <p class="credits"><span class="lang-en">{book.credits.en}</span><span class="lang-es">{book.credits.es}</span></p>
+        )}
+      </div>
+    </header>
+
+    <nav class="cts-nav" aria-label="Textbook">
+      <div class="wrap">
+        <div class="cts-navmain">
+          <div class="cts-steps">
+            <a class="btn" href={`/${course.entry}`}>← <span class="lang-en">Course: {course.title.en}</span><span class="lang-es">Curso: {course.title.es}</span></a>
+            {kind === 'book'
+              ? <a class="btn solid" href={`/${book.page}Test.html`}><span class="lang-en">Textbook test</span><span class="lang-es">Examen del libro</span> →</a>
+              : <a class="btn solid" href={`/${book.page}.html`}>← <span class="lang-en">Read the textbook</span><span class="lang-es">Leer el libro</span></a>}
+          </div>
+        </div>
+        <div class="cts-seg" role="group" aria-label="Language / Idioma">
+          <button type="button" data-lang="en">English</button>
+          <button type="button" data-lang="es">Español</button>
+          <button type="button" data-lang="both"><span class="lang-en">Both</span><span class="lang-es">Ambos</span></button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="wrap" id="content">
+      <slot />
+    </main>
+
+    <footer class="cts-foot">
+      <div class="wrap">
+        <span>
+          <span class="lang-en">Chapala Theological Seminary · Free, bilingual theological training.</span>
+          <span class="lang-es">Seminario Teológico de Chapala · Formación teológica gratuita y bilingüe.</span>
+        </span>
+        <span>
+          <a href="/index.html#textbooks"><span class="lang-en">All textbooks</span><span class="lang-es">Todos los libros de texto</span></a>
+          &nbsp;·&nbsp;
+          <a href="/index.html#catalog"><span class="lang-en">All courses</span><span class="lang-es">Todos los cursos</span></a>
+          &nbsp;·&nbsp;
+          <a href="/CTSPrivacy.html"><span class="lang-en">Your information</span><span class="lang-es">Su información</span></a>
+        </span>
+      </div>
+    </footer>
+
+    {scripts.map((src) => <script is:inline src={version(src)}></script>)}
+    <script is:inline src={version('/assets/js/cts-textbook.js')}></script>
+  </body>
+</html>

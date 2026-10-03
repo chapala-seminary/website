@@ -210,4 +210,55 @@ const lessons = defineCollection({
     }),
 });
 
-export const collections = { units, courses, lessons };
+/* The Master's textbooks (Dr. Cook's October 2026 delivery): nine books, each
+   in English and Spanish, read on the site and tested on a separate page. The
+   body is the book's own text as HTML, converted from the Word file by
+   tools/import-textbooks.mjs, never typed here; the Word file is the master
+   (src/data/textbooks/). The test is forty fill-in-the-blank questions, of
+   which the page draws `draw` at random and asks for `pass` right, graded by
+   the same fillRight() as every unit's fill-ins. */
+const textbookFill = z.object({
+  prompt: bilingual.refine((p) => oneBlank(p.en) && oneBlank(p.es), {
+    message: `a textbook question must contain exactly one blank, written ${BLANK}, in each language`,
+  }),
+  answer: z.object({ en: z.string().min(1), es: z.string().min(1) }),
+  accept: z.object({ en: z.array(z.string().min(1)).optional(),
+                     es: z.array(z.string().min(1)).optional() }).optional(),
+});
+const bookHtml = z.string().min(1).superRefine((v, ctx) => {
+  const found = [...new Set((v.match(ENTITY) ?? []).filter((e) => !STRUCTURAL.test(e)))];
+  if (found.length) ctx.addIssue({ code: 'custom', message: `HTML entities in a UTF-8 textbook: ${found.join(' ')}` });
+  if (/<(script|style|iframe|img)\b/i.test(v)) ctx.addIssue({ code: 'custom', message: 'a textbook body carries text only: no scripts, styles, frames or images' });
+});
+const textbooks = defineCollection({
+  loader: glob({
+    pattern: '*.json',
+    base: './src/content/textbooks',
+    generateId: ({ entry }) => entry.replace(/\.json$/, ''),
+  }),
+  schema: z.object({
+    slug: z.string().regex(/^[a-z]+$/),
+    page: z.string().regex(/^CTSTextbook[A-Za-z]+$/, 'the page name: CTSTextbookX, giving CTSTextbookX.html and CTSTextbookXTest.html'),
+    course: z.string().min(1),        // the catalog card (src/content/courses/<course>.json) the book belongs to
+    number: z.number().int().positive(),
+    title: bilingual,
+    subtitle: bilingual.optional(),
+    credits: bilingual.optional(),
+    edition: z.string().min(1),
+    files: z.object({
+      pdf: bilingual,                 // public/ paths, for download
+      docx: bilingual,                // the masters, under src/data/textbooks
+      sha256: bilingual,              // of the Word files this was converted from
+    }),
+    body: z.object({ en: bookHtml, es: bookHtml }),
+    test: z.object({
+      draw: z.number().int().positive(),
+      pass: z.number().int().positive(),
+      questions: z.array(textbookFill).min(20),
+    }).refine((t) => t.pass <= t.draw && t.draw <= t.questions.length, {
+      message: 'pass <= draw <= number of questions',
+    }),
+  }),
+});
+
+export const collections = { units, courses, lessons, textbooks };

@@ -31,6 +31,7 @@ const isDigest = (f) => /_digest\.html$/i.test(f) || /_Digest_/i.test(f);
 const isUnit = (f) => /Unit\d+\.html$/i.test(f) || /^ethics_unit\d+\.html$/i.test(f);
 const isCertificate = (f) => /Certificate\.html$/i.test(f);
 const isReadingRoom = (f) => /Readings\.html$/i.test(f);
+const isTextbook = (f) => /^CTSTextbook[A-Za-z0-9]+(Test)?\.html$/.test(f);
 
 const xml = fs.readFileSync(MAP, 'utf8');
 const listed = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)]
@@ -48,6 +49,7 @@ report('listed but the build does not produce them', listed.filter((p) => !fs.ex
 report('course units missing from the sitemap', built.filter((f) => isUnit(f) && !listedSet.has(f)));
 report('certificates missing from the sitemap', built.filter((f) => isCertificate(f) && !listedSet.has(f)));
 report('reading rooms missing from the sitemap', built.filter((f) => isReadingRoom(f) && !listedSet.has(f)));
+report('textbook pages missing from the sitemap', built.filter((f) => isTextbook(f) && !listedSet.has(f)));
 report('reading digests that should not be listed', listed.filter(isDigest));
 report('excluded pages that should not be listed', listed.filter((p) => EXCLUDE.has(p)));
 /* The editing interface is not content. It is also the one page on the site
@@ -62,7 +64,7 @@ if (listed.length < 500) fails.push(`only ${listed.length} URLs — the site has
 
 const count = (fn) => built.filter(fn).length;
 console.log(`${listed.length} URLs listed; the build has ${built.length} pages`);
-console.log(`  units ${count(isUnit)}  certificates ${count(isCertificate)}  reading rooms ${count(isReadingRoom)}` +
+console.log(`  units ${count(isUnit)}  certificates ${count(isCertificate)}  reading rooms ${count(isReadingRoom)}  textbook pages ${count(isTextbook)}` +
             `  digests ${count(isDigest)} (excluded on purpose)`);
 
 if (!fails.length) console.log('PASS — the sitemap matches the build and the stated policy.');

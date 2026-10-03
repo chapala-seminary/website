@@ -112,6 +112,12 @@ node tools/verify-staging.mjs "http://127.0.0.1:$PORT"
 
 node tools/verify-sitemap.mjs dist
 
+# The Master's textbooks (Oct 2026): each belongs to a course that links to
+# it, its test stands on a page apart from the book, every answer the bank
+# accepts is one the grader marks right, and no staff-only answer file is
+# published.
+node tools/verify-textbooks.mjs dist
+
 # The question bank: 451 units, 34,778 comparisons of stems, options and answer
 # keys, in a form that does not care what file format the content lives in.
 # The migration plan calls this "the gate for every step" -- and until now the
@@ -216,6 +222,10 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   # The same fill-in rules on the four courses the engine does not run:
   # Counseling, Narrative and WiseSpeak Preaching, and Ethics.
   node tools/verify-fill-single.mjs "http://127.0.0.1:$PORT"
+  # The textbook tests (Oct 2026): twenty drawn from forty, eighteen to pass,
+  # locked after a failure, a fresh draw after the wait -- as a student
+  # would use the page.
+  node tools/verify-textbook-test.mjs "http://127.0.0.1:$PORT"
 
   # Every certificate page unlocks for a finished course, records the
   # completion, and shows nothing to a student who passed nothing. Ruth and
