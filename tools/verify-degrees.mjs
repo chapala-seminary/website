@@ -40,21 +40,21 @@ for (const [k, d] of Object.entries(DEGREES))
 
 /* ---- one permanent ID per course (Dr. Cook's review, item 9) --------------
    The completion code is the ID: the browser's lists, the Worker, the
-   database and the certificate names all use it. Exactly 44, no two alike,
+   database and the certificate names all use it. Exactly 45, no two alike,
    and every list of courses names only those. */
 {
   const cat = JSON.parse(fs.readFileSync('worker/catalog.json', 'utf8'));
   const ids = Object.keys(cat.completions);
-  ok(ids.length === 44 && new Set(ids).size === 44, `the Worker knows exactly 44 course IDs, none repeated (${ids.length})`);
+  ok(ids.length === 45 && new Set(ids).size === 45, `the Worker knows exactly 45 course IDs, none repeated (${ids.length})`);
   const names = new Function('window', fs.readFileSync('public/assets/js/cts-cert-names.js', 'utf8') + '; return window.CTS_COURSE_NAMES;')({});
-  ok(Object.keys(names).length === 44 && Object.keys(names).every((c) => cat.completions[c]),
-    'the certificate names use the same 44 IDs', Object.keys(names).filter((c) => !cat.completions[c]).join(' '));
+  ok(Object.keys(names).length === 45 && Object.keys(names).every((c) => cat.completions[c]),
+    'the certificate names use the same 45 IDs', Object.keys(names).filter((c) => !cat.completions[c]).join(' '));
   const unitCodes = Object.values(cat.courses).map((c) => c.code);
   ok(unitCodes.every((c) => cat.completions[c]) && new Set(unitCodes).size === unitCodes.length,
     'every course with unit pages has one of those IDs, and no two share one');
   ok([...FOUNDATION, ...MDIV_CORE].every((c) => cat.completions[c]), 'the foundation and M.Div. core name only those IDs');
   const names2 = new Set(Object.values(cat.completions).map((c) => c.name));
-  ok(names2.size === 44, 'and no two courses share a name', `${names2.size} distinct names`);
+  ok(names2.size === 45, 'and no two courses share a name', `${names2.size} distinct names`);
 }
 
 /* ---- the boundaries ------------------------------------------------------- */

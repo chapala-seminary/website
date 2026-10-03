@@ -2,8 +2,9 @@
 
 _3 Oct 2026. Written for Dr. Cook and the AI tools he works with (Claude Code
 and Codex). The first course to go through it is **Parables of the Bible**,
-the seminary's 45th course. Parables is used as the example all the way
-through. For another course, swap in its own names._
+the seminary's 45th course, added the same day (see **Record** at the end).
+Parables is used as the example all the way through. For another course,
+swap in its own names._
 
 This is a checklist. Do the steps in order and tick them off in the pull
 request (see step 12). Each step says which file to touch and how to check it.
@@ -90,7 +91,11 @@ Create `src/content/courses/CTSParables.json`:
 ### 2. The lessons — one file per unit
 
 Create `src/content/lessons/CTSParables/1.json` … `N.json`. Start each one as
-a copy of the matching `src/content/lessons/CTSJohn/<n>.json` and change it:
+a copy of the matching `src/content/lessons/CTSJohn/<n>.json` and change it.
+(If the course arrives as finished HTML pages, as Parables did, write a small
+import tool instead of editing by hand — `tools/import-parables.mjs` is the
+model: it reads the pages, pairs the English and Spanish paragraphs, checks
+every question, and writes these files and the ones in step 3.)
 
 - `"course": "CTSParables"`, `"unit": <n>`.
 - **`template`**: keep John's layout. That includes the exam section at the
@@ -136,8 +141,8 @@ copy of `src/content/units/CTSJohn/<n>.json` and change:
 | `course` | `"parables"`, the short name. Students' progress is saved under it. |
 | `pagePrefix`, `filePrefix` | `"CTSParables"` |
 | `unit`, `totalUnits` | this unit's number, and N |
-| `title` | `"CTS Parables of the Bible &mdash; Unit 3: …"` |
-| `styles`, `scripts`, `bodyClass` | as in John (`styles` is unused but required) |
+| `title` | `"CTS Parables of the Bible — Unit 3: …"`, with the dash typed as a character. (The older files write `&mdash;`, which the page shows literally in the browser tab; do not copy that.) |
+| `styles`, `scripts`, `bodyClass` | as in John (`styles` is unused but required; `[]` is fine). A `?v=…` on a script is ignored — the build fingerprints every script itself. |
 | `prevHref` | the previous unit's page; `null` on unit 1 |
 | `nextHref` | the next unit's page; on the last unit, `"CTSParablesCertificate.html"` |
 | `unitTitles` | the list of all N unit titles, `en` and `es`, the same in every unit |
@@ -274,11 +279,22 @@ If a check complains about **any other course**, stop. Do not record; that
 complaint is a real problem. Ask Robert in the pull request.
 
 Two checks, `tools/verify-catalog.mjs` and `tools/verify-gating.mjs`, compare
-the front page with the original 44-card front page, so they report one extra
-card. The suite stops at the first failing check, so this stops it partway.
-**Do not change those two checks yourself.** Before the first new course,
-Robert teaches them about added courses. If they still report the Parables
-card, stop and say so in the pull request.
+the front page with the original 44-card front page. Each has an `ADDED` list
+of the courses added since; a course not on it is reported as an extra card
+and the suite stops partway. So:
+
+- add `["CTSParables", "CTSBibleCharacters2"]` (the course file, and the file
+  of the card it follows) to `ADDED` in `tools/verify-catalog.mjs`;
+- add `'Parables of the Bible'` (the English title) to `ADDED` in
+  `tools/verify-gating.mjs`;
+- in `test/fixtures/gating-baseline.json`, raise `cards` to 45 in both
+  student states and add the title to the first state's `locked` list, in
+  alphabetical order (a new course is locked for a student without the
+  foundation and open for one with it; the check asserts both).
+
+The lead's "Forty-four courses" is handled the same way (`COUNT` in
+`verify-catalog.mjs`): the next course changes it to forty-six in both
+languages.
 
 ### 11. Run everything and look at it
 
@@ -316,6 +332,18 @@ and then publishes it.
 
 ---
 
+## Record
+
+| Course | Date | How |
+|---|---|---|
+| Parables of the Bible (`CTSParables`, 15 units) | 3 Oct 2026 | `tools/import-parables.mjs` from Dr. Cook's delivered pages; every step above; `docs/content-changes.md` §8ae |
+
+## Textbooks
+
+A course's Master's textbook and its test are not part of this list; they
+are generated from the Word masters by `tools/import-textbooks.mjs`. See
+`docs/textbooks.md`.
+
 ## Quick reference: every file a new course touches
 
 | File | New or changed | Step |
@@ -329,4 +357,5 @@ and then publishes it.
 | `public/assets/css/cts.css` | optional | 6 |
 | `worker/catalog.json`, `public/assets/js/cts-cert-names.js`, `public/admin/config.yml` | regenerated | 7 |
 | `src/data/catalog-intro.json`, `src/body/index/head.html`, `src/body/index/tail.html`, `public/CTSAbout.html`, `public/CTSCatalog.html`, `tools/verify-degrees.mjs` | changed | 8 |
+| `tools/verify-catalog.mjs`, `tools/verify-gating.mjs`, `test/fixtures/gating-baseline.json` | changed | 10 |
 | `tools/content-baseline.json`, `test/fixtures/lesson-render.json` | re-recorded | 10 |
