@@ -354,6 +354,13 @@ window.CTS_CERT_NAMES = {
    "rogers"
   ]
  },
+ "ctsparablescertificate.html": {
+  "en": "Parables of the Bible",
+  "es": "Las Parábolas de la Biblia",
+  "authors": [
+   "cook"
+  ]
+ },
  "ctspentcertificate.html": {
   "en": "Pentateuch",
   "es": "Pentateuco",
@@ -625,6 +632,10 @@ window.CTS_COURSE_NAMES = {
  "CTSPT": {
   "en": "Practical Theology",
   "es": "Teología Práctica"
+ },
+ "CTSPARABLES": {
+  "en": "Parables of the Bible",
+  "es": "Las Parábolas de la Biblia"
  },
  "CTSPENT": {
   "en": "Pentateuch",

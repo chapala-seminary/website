@@ -1,0 +1,64 @@
+---
+/* A Master's textbook, read on the site: CTSTextbookCults.html and the other
+ * eight. The book's own text, both languages, from src/content/textbooks
+ * (made from the Word masters by tools/import-textbooks.mjs), with a contents
+ * list, the PDFs to download, and the way to its test -- which is a separate
+ * page, so this one can be searched freely. */
+import { getCollection } from 'astro:content';
+import Textbook from '../layouts/Textbook.astro';
+
+export async function getStaticPaths() {
+  const books = await getCollection('textbooks');
+  const courses = await getCollection('courses');
+  const units = await getCollection('units');
+  const card = new Map(courses.map((c) => [c.id, c.data]));
+  // the course's storage slug ("cults"), which keys its colour; the two
+  // single-page courses have no units and take the default
+  const slugOf = new Map(units.map((u) => [u.data.pagePrefix, u.data.course]));
+  return books.map((b) => {
+    const course = card.get(b.data.course);
+    if (!course) throw new Error(`textbook ${b.data.slug} belongs to course "${b.data.course}", which has no catalog card in src/content/courses`);
+    return { params: { textbook: b.data.page }, props: { book: b.data, course, accent: slugOf.get(b.data.course) ?? null } };
+  });
+}
+const { book, course, accent } = Astro.props;
+
+// the contents, from the headings the importer gave ids to
+const toc = (html: string) =>
+  [...html.matchAll(/<(h2|h3) id="([^"]+)">([\s\S]*?)<\/\1>/g)]
+    .map((m) => ({ level: m[1], id: m[2], text: m[3].replace(/<[^>]+>/g, '') }));
+const contents = { en: toc(book.body.en), es: toc(book.body.es) };
+---
+<Textbook kind="book" book={book} course={course} accent={accent}>
+  <section class="card tb-about">
+    <h2><span class="lang-en">About this textbook</span><span class="lang-es">Sobre este libro de texto</span></h2>
+    <p>
+      <span class="lang-en">This is the textbook for <a href={`/${course.entry}`}>{course.title.en}</a>. It is required reading for students on the M.Div. and Th.M. tracks, and open to everyone. Read it here in English or Spanish, or download it as a PDF. When you have read it, take the textbook test: twenty fill-in-the-blank questions, drawn from forty, on a page of its own.</span>
+      <span class="lang-es">Este es el libro de texto del curso <a href={`/${course.entry}`}>{course.title.es}</a>. Es lectura obligatoria para los estudiantes de los trayectos M.Div. y Th.M., y está abierto a todos. Léalo aquí en inglés o en español, o descárguelo en PDF. Cuando lo haya leído, presente el examen del libro: veinte preguntas para completar, tomadas de cuarenta, en una página aparte.</span>
+    </p>
+    <div class="actions tb-actions">
+      <a class="btn solid" href={`/${book.page}Test.html`}><span class="lang-en">Take the textbook test</span><span class="lang-es">Presentar el examen del libro</span> →</a>
+      <a class="btn" href={`/${book.files.pdf.en}`} download><span class="lang-en">PDF (English)</span><span class="lang-es">PDF (inglés)</span></a>
+      <a class="btn" href={`/${book.files.pdf.es}`} download><span class="lang-en">PDF (Spanish)</span><span class="lang-es">PDF (español)</span></a>
+    </div>
+    <p class="small muted" id="tb-passed-note" hidden></p>
+  </section>
+
+  <nav class="card tb-toc" aria-label="Contents">
+    <h2><span class="lang-en">Contents</span><span class="lang-es">Contenido</span></h2>
+    <ol class="lang-en">
+      {contents.en.map((c) => <li class={c.level === 'h3' ? 'l3' : 'l2'}><a href={`#${c.id}`}>{c.text}</a></li>)}
+    </ol>
+    <ol class="lang-es">
+      {contents.es.map((c) => <li class={c.level === 'h3' ? 'l3' : 'l2'}><a href={`#${c.id}`}>{c.text}</a></li>)}
+    </ol>
+  </nav>
+
+  <article class="card tb-book lang-en" lang="en" set:html={book.body.en} />
+  <article class="card tb-book lang-es" lang="es" set:html={book.body.es} />
+
+  <p class="small muted tb-edition">
+    <span class="lang-en">CTS Textbook Edition {book.edition}. The Word file is the master; this page was made from it.</span>
+    <span class="lang-es">Edición de libro de texto CTS {book.edition}. El archivo de Word es el original; esta página se hizo a partir de él.</span>
+  </p>
+</Textbook>

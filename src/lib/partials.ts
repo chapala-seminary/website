@@ -58,6 +58,7 @@ export const READING_ROOM: Record<string, string> = {
   CTSNT: "CTSNTReadings.html",
   CTSPM: "CTSPMReadings.html",
   CTSPT: "CTSPTReadings.html",
+  CTSParables: "CTSParablesReadings.html",
   CTSPent: "CTSPentReadings.html",
   CTSPentecostal: "CTSPentecostalReadings.html",
   CTSPsalms: "CTSPsalmsReadings.html",

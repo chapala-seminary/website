@@ -5,7 +5,7 @@
 # content itself and checked by tools/verify-cms-config.mjs, which fails if a
 # field exists in the data and not here.
 #
-# Lesson collections: CTS, CTS1Peter, CTSAL, CTSActs, CTSApol, CTSBible, CTSBibleCharacters, CTSBibleCharacters2, CTSCE, CTSCG, CTSCH, CTSCS, CTSCults, CTSDP, CTSDeaconFamilyMinistry, CTSEvanPreach, CTSEvangelism, CTSGalatians, CTSGenesis, CTSHS, CTSHermeneutics, CTSJohn, CTSJosh, CTSLA, CTSLOC, CTSMatt, CTSMissions, CTSNT, CTSPM, CTSPT, CTSPent, CTSPentecostal, CTSPsalms, CTSRE, CTSRadical, CTSRev, CTSRomans, CTSST, CTSWR, CTSWorship
+# Lesson collections: CTS, CTS1Peter, CTSAL, CTSActs, CTSApol, CTSBible, CTSBibleCharacters, CTSBibleCharacters2, CTSCE, CTSCG, CTSCH, CTSCS, CTSCults, CTSDP, CTSDeaconFamilyMinistry, CTSEvanPreach, CTSEvangelism, CTSGalatians, CTSGenesis, CTSHS, CTSHermeneutics, CTSJohn, CTSJosh, CTSLA, CTSLOC, CTSMatt, CTSMissions, CTSNT, CTSPM, CTSPT, CTSParables, CTSPent, CTSPentecostal, CTSPsalms, CTSRE, CTSRadical, CTSRev, CTSRomans, CTSST, CTSWR, CTSWorship
 # Regenerate with: node tools/build-cms-config.mjs
 
 backend:
@@ -20566,6 +20566,714 @@ collections:
     filter:
       field: course
       value: CTSPT
+    fields:
+      - label: Course
+        name: course
+        widget: hidden
+      - label: Unit number
+        name: unit
+        widget: number
+        value_type: int
+      - label: Written in
+        name: sourceLang
+        widget: hidden
+      - label: Languages
+        name: langs
+        widget: hidden
+      - label: Page template
+        name: template
+        widget: hidden
+      - label: Lesson
+        name: blocks
+        widget: list
+        label_singular: Block
+        summary: "{{fields.text.en}}"
+        types:
+          - name: masthead
+            label: Page heading
+            widget: object
+            fields:
+              - label: Block id
+                name: id
+                widget: hidden
+              - label: Never had a language
+                name: unmarked
+                widget: hidden
+              - label: Text
+                name: text
+                widget: object
+                fields:
+                  - label: English
+                    name: en
+                    widget: text
+                    required: false
+                  - label: Spanish
+                    name: es
+                    widget: text
+                    required: false
+              - label: Translation status
+                name: tr
+                widget: object
+                required: false
+                collapsed: true
+                hint: Edit the English and every translation of this block is marked out of date automatically.
+                fields:
+                  - label: English
+                    name: en
+                    widget: object
+                    required: false
+                    fields:
+                      - label: Written by
+                        name: status
+                        widget: select
+                        required: false
+                        options:
+                          - label: A person
+                            value: human
+                          - label: Translated automatically
+                            value: machine
+                          - label: "Automatic, then corrected"
+                            value: machine-edited
+                      - label: Source hash
+                        name: from
+                        widget: hidden
+                  - label: Spanish
+                    name: es
+                    widget: object
+                    required: false
+                    fields:
+                      - label: Written by
+                        name: status
+                        widget: select
+                        required: false
+                        options:
+                          - label: A person
+                            value: human
+                          - label: Translated automatically
+                            value: machine
+                          - label: "Automatic, then corrected"
+                            value: machine-edited
+                      - label: Source hash
+                        name: from
+                        widget: hidden
+          - name: title
+            label: Unit title
+            widget: object
+            fields:
+              - label: Block id
+                name: id
+                widget: hidden
+              - label: Never had a language
+                name: unmarked
+                widget: hidden
+              - label: Text
+                name: text
+                widget: object
+                fields:
+                  - label: English
+                    name: en
+                    widget: text
+                    required: false
+                  - label: Spanish
+                    name: es
+                    widget: text
+                    required: false
+              - label: Translation status
+                name: tr
+                widget: object
+                required: false
+                collapsed: true
+                hint: Edit the English and every translation of this block is marked out of date automatically.
+                fields:
+                  - label: English
+                    name: en
+                    widget: object
+                    required: false
+                    fields:
+                      - label: Written by
+                        name: status
+                        widget: select
+                        required: false
+                        options:
+                          - label: A person
+                            value: human
+                          - label: Translated automatically
+                            value: machine
+                          - label: "Automatic, then corrected"
+                            value: machine-edited
+                      - label: Source hash
+                        name: from
+                        widget: hidden
+                  - label: Spanish
+                    name: es
+                    widget: object
+                    required: false
+                    fields:
+                      - label: Written by
+                        name: status
+                        widget: select
+                        required: false
+                        options:
+                          - label: A person
+                            value: human
+                          - label: Translated automatically
+                            value: machine
+                          - label: "Automatic, then corrected"
+                            value: machine-edited
+                      - label: Source hash
+                        name: from
+                        widget: hidden
+          - name: subtitle
+            label: Unit subtitle
+            widget: object
+            fields:
+              - label: Block id
+                name: id
+                widget: hidden
+              - label: Never had a language
+                name: unmarked
+                widget: hidden
+              - label: Text
+                name: text
+                widget: object
+                fields:
+                  - label: English
+                    name: en
+                    widget: text
+                    required: false
+                  - label: Spanish
+                    name: es
+                    widget: text
+                    required: false
+              - label: Translation status
+                name: tr
+                widget: object
+                required: false
+                collapsed: true
+                hint: Edit the English and every translation of this block is marked out of date automatically.
+                fields:
+                  - label: English
+                    name: en
+                    widget: object
+                    required: false
+                    fields:
+                      - label: Written by
+                        name: status
+                        widget: select
+                        required: false
+                        options:
+                          - label: A person
+                            value: human
+                          - label: Translated automatically
+                            value: machine
+                          - label: "Automatic, then corrected"
+                            value: machine-edited
+                      - label: Source hash
+                        name: from
+                        widget: hidden
+                  - label: Spanish
+                    name: es
+                    widget: object
+                    required: false
+                    fields:
+                      - label: Written by
+                        name: status
+                        widget: select
+                        required: false
+                        options:
+                          - label: A person
+                            value: human
+                          - label: Translated automatically
+                            value: machine
+                          - label: "Automatic, then corrected"
+                            value: machine-edited
+                      - label: Source hash
+                        name: from
+                        widget: hidden
+          - name: heading
+            label: Section heading
+            widget: object
+            fields:
+              - label: Block id
+                name: id
+                widget: hidden
+              - label: Never had a language
+                name: unmarked
+                widget: hidden
+              - label: Text
+                name: text
+                widget: object
+                fields:
+                  - label: English
+                    name: en
+                    widget: text
+                    required: false
+                  - label: Spanish
+                    name: es
+                    widget: text
+                    required: false
+              - label: Translation status
+                name: tr
+                widget: object
+                required: false
+                collapsed: true
+                hint: Edit the English and every translation of this block is marked out of date automatically.
+                fields:
+                  - label: English
+                    name: en
+                    widget: object
+                    required: false
+                    fields:
+                      - label: Written by
+                        name: status
+                        widget: select
+                        required: false
+                        options:
+                          - label: A person
+                            value: human
+                          - label: Translated automatically
+                            value: machine
+                          - label: "Automatic, then corrected"
+                            value: machine-edited
+                      - label: Source hash
+                        name: from
+                        widget: hidden
+                  - label: Spanish
+                    name: es
+                    widget: object
+                    required: false
+                    fields:
+                      - label: Written by
+                        name: status
+                        widget: select
+                        required: false
+                        options:
+                          - label: A person
+                            value: human
+                          - label: Translated automatically
+                            value: machine
+                          - label: "Automatic, then corrected"
+                            value: machine-edited
+                      - label: Source hash
+                        name: from
+                        widget: hidden
+          - name: prose
+            label: Paragraph
+            widget: object
+            fields:
+              - label: Block id
+                name: id
+                widget: hidden
+              - label: Never had a language
+                name: unmarked
+                widget: hidden
+              - label: Text
+                name: text
+                widget: object
+                fields:
+                  - label: English
+                    name: en
+                    widget: text
+                    required: false
+                  - label: Spanish
+                    name: es
+                    widget: text
+                    required: false
+              - label: Translation status
+                name: tr
+                widget: object
+                required: false
+                collapsed: true
+                hint: Edit the English and every translation of this block is marked out of date automatically.
+                fields:
+                  - label: English
+                    name: en
+                    widget: object
+                    required: false
+                    fields:
+                      - label: Written by
+                        name: status
+                        widget: select
+                        required: false
+                        options:
+                          - label: A person
+                            value: human
+                          - label: Translated automatically
+                            value: machine
+                          - label: "Automatic, then corrected"
+                            value: machine-edited
+                      - label: Source hash
+                        name: from
+                        widget: hidden
+                  - label: Spanish
+                    name: es
+                    widget: object
+                    required: false
+                    fields:
+                      - label: Written by
+                        name: status
+                        widget: select
+                        required: false
+                        options:
+                          - label: A person
+                            value: human
+                          - label: Translated automatically
+                            value: machine
+                          - label: "Automatic, then corrected"
+                            value: machine-edited
+                      - label: Source hash
+                        name: from
+                        widget: hidden
+          - name: scripture
+            label: Scripture quotation
+            widget: object
+            fields:
+              - label: Block id
+                name: id
+                widget: hidden
+              - label: Never had a language
+                name: unmarked
+                widget: hidden
+              - label: Text
+                name: text
+                widget: object
+                fields:
+                  - label: English
+                    name: en
+                    widget: text
+                    required: false
+                  - label: Spanish
+                    name: es
+                    widget: text
+                    required: false
+              - label: Translation status
+                name: tr
+                widget: object
+                required: false
+                collapsed: true
+                hint: Edit the English and every translation of this block is marked out of date automatically.
+                fields:
+                  - label: English
+                    name: en
+                    widget: object
+                    required: false
+                    fields:
+                      - label: Written by
+                        name: status
+                        widget: select
+                        required: false
+                        options:
+                          - label: A person
+                            value: human
+                          - label: Translated automatically
+                            value: machine
+                          - label: "Automatic, then corrected"
+                            value: machine-edited
+                      - label: Source hash
+                        name: from
+                        widget: hidden
+                  - label: Spanish
+                    name: es
+                    widget: object
+                    required: false
+                    fields:
+                      - label: Written by
+                        name: status
+                        widget: select
+                        required: false
+                        options:
+                          - label: A person
+                            value: human
+                          - label: Translated automatically
+                            value: machine
+                          - label: "Automatic, then corrected"
+                            value: machine-edited
+                      - label: Source hash
+                        name: from
+                        widget: hidden
+          - name: list-item
+            label: List item
+            widget: object
+            fields:
+              - label: Block id
+                name: id
+                widget: hidden
+              - label: Never had a language
+                name: unmarked
+                widget: hidden
+              - label: Text
+                name: text
+                widget: object
+                fields:
+                  - label: English
+                    name: en
+                    widget: text
+                    required: false
+                  - label: Spanish
+                    name: es
+                    widget: text
+                    required: false
+              - label: Translation status
+                name: tr
+                widget: object
+                required: false
+                collapsed: true
+                hint: Edit the English and every translation of this block is marked out of date automatically.
+                fields:
+                  - label: English
+                    name: en
+                    widget: object
+                    required: false
+                    fields:
+                      - label: Written by
+                        name: status
+                        widget: select
+                        required: false
+                        options:
+                          - label: A person
+                            value: human
+                          - label: Translated automatically
+                            value: machine
+                          - label: "Automatic, then corrected"
+                            value: machine-edited
+                      - label: Source hash
+                        name: from
+                        widget: hidden
+                  - label: Spanish
+                    name: es
+                    widget: object
+                    required: false
+                    fields:
+                      - label: Written by
+                        name: status
+                        widget: select
+                        required: false
+                        options:
+                          - label: A person
+                            value: human
+                          - label: Translated automatically
+                            value: machine
+                          - label: "Automatic, then corrected"
+                            value: machine-edited
+                      - label: Source hash
+                        name: from
+                        widget: hidden
+          - name: caption
+            label: Caption
+            widget: object
+            fields:
+              - label: Block id
+                name: id
+                widget: hidden
+              - label: Never had a language
+                name: unmarked
+                widget: hidden
+              - label: Text
+                name: text
+                widget: object
+                fields:
+                  - label: English
+                    name: en
+                    widget: text
+                    required: false
+                  - label: Spanish
+                    name: es
+                    widget: text
+                    required: false
+              - label: Translation status
+                name: tr
+                widget: object
+                required: false
+                collapsed: true
+                hint: Edit the English and every translation of this block is marked out of date automatically.
+                fields:
+                  - label: English
+                    name: en
+                    widget: object
+                    required: false
+                    fields:
+                      - label: Written by
+                        name: status
+                        widget: select
+                        required: false
+                        options:
+                          - label: A person
+                            value: human
+                          - label: Translated automatically
+                            value: machine
+                          - label: "Automatic, then corrected"
+                            value: machine-edited
+                      - label: Source hash
+                        name: from
+                        widget: hidden
+                  - label: Spanish
+                    name: es
+                    widget: object
+                    required: false
+                    fields:
+                      - label: Written by
+                        name: status
+                        widget: select
+                        required: false
+                        options:
+                          - label: A person
+                            value: human
+                          - label: Translated automatically
+                            value: machine
+                          - label: "Automatic, then corrected"
+                            value: machine-edited
+                      - label: Source hash
+                        name: from
+                        widget: hidden
+          - name: label
+            label: Label
+            widget: object
+            fields:
+              - label: Block id
+                name: id
+                widget: hidden
+              - label: Never had a language
+                name: unmarked
+                widget: hidden
+              - label: Text
+                name: text
+                widget: object
+                fields:
+                  - label: English
+                    name: en
+                    widget: text
+                    required: false
+                  - label: Spanish
+                    name: es
+                    widget: text
+                    required: false
+              - label: Translation status
+                name: tr
+                widget: object
+                required: false
+                collapsed: true
+                hint: Edit the English and every translation of this block is marked out of date automatically.
+                fields:
+                  - label: English
+                    name: en
+                    widget: object
+                    required: false
+                    fields:
+                      - label: Written by
+                        name: status
+                        widget: select
+                        required: false
+                        options:
+                          - label: A person
+                            value: human
+                          - label: Translated automatically
+                            value: machine
+                          - label: "Automatic, then corrected"
+                            value: machine-edited
+                      - label: Source hash
+                        name: from
+                        widget: hidden
+                  - label: Spanish
+                    name: es
+                    widget: object
+                    required: false
+                    fields:
+                      - label: Written by
+                        name: status
+                        widget: select
+                        required: false
+                        options:
+                          - label: A person
+                            value: human
+                          - label: Translated automatically
+                            value: machine
+                          - label: "Automatic, then corrected"
+                            value: machine-edited
+                      - label: Source hash
+                        name: from
+                        widget: hidden
+          - name: other
+            label: Text
+            widget: object
+            fields:
+              - label: Block id
+                name: id
+                widget: hidden
+              - label: Never had a language
+                name: unmarked
+                widget: hidden
+              - label: Text
+                name: text
+                widget: object
+                fields:
+                  - label: English
+                    name: en
+                    widget: text
+                    required: false
+                  - label: Spanish
+                    name: es
+                    widget: text
+                    required: false
+              - label: Translation status
+                name: tr
+                widget: object
+                required: false
+                collapsed: true
+                hint: Edit the English and every translation of this block is marked out of date automatically.
+                fields:
+                  - label: English
+                    name: en
+                    widget: object
+                    required: false
+                    fields:
+                      - label: Written by
+                        name: status
+                        widget: select
+                        required: false
+                        options:
+                          - label: A person
+                            value: human
+                          - label: Translated automatically
+                            value: machine
+                          - label: "Automatic, then corrected"
+                            value: machine-edited
+                      - label: Source hash
+                        name: from
+                        widget: hidden
+                  - label: Spanish
+                    name: es
+                    widget: object
+                    required: false
+                    fields:
+                      - label: Written by
+                        name: status
+                        widget: select
+                        required: false
+                        options:
+                          - label: A person
+                            value: human
+                          - label: Translated automatically
+                            value: machine
+                          - label: "Automatic, then corrected"
+                            value: machine-edited
+                      - label: Source hash
+                        name: from
+                        widget: hidden
+  - name: lessons_CTSParables
+    label: Parables
+    label_singular: Unit
+    folder: src/content/lessons/CTSParables
+    extension: json
+    format: json
+    create: false
+    delete: false
+    identifier_field: unit
+    summary: "Unit {{fields.unit}}"
+    sortable_fields:
+      - unit
+    filter:
+      field: course
+      value: CTSParables
     fields:
       - label: Course
         name: course

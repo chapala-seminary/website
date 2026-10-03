@@ -91,6 +91,20 @@ const RENAMED = [
   ["CTSHS", "El Espíritu Santo", "La Doctrina del Espíritu Santo"]
 ];
 
+/* Courses added since the catalog was hand-written (docs/adding-a-course.md).
+   Each one's card is taken out of the built catalog before the comparison --
+   after checking it is there exactly once and sits directly after the card it
+   was placed behind -- so everything else is still compared character for
+   character. [course file, the course file whose card it follows] */
+const ADDED = [
+  ["CTSParables", "CTSBibleCharacters2"],          // 3 Oct 2026, the 45th course
+];
+/* The lead spells the course count out in words; the reference says forty-four. */
+const COUNT = [
+  ["Forty-four courses", "Forty-five courses"],
+  ["Cuarenta y cuatro cursos", "Cuarenta y cinco cursos"],
+];
+
 const [origFile = REF, builtFile = 'dist/index.html'] = process.argv.slice(2);
 
 let o = norm(catalog(origFile));
@@ -100,7 +114,23 @@ for (const [key, was, is] of RENAMED) {
   if (o.split(from).length !== 2) { console.log(`FAIL — the reference has no single card "${en} / ${was}" to rename`); process.exit(1); }
   o = o.replace(from, `<span class="en">${en}</span><span class="es">${is}</span>`);
 }
-const b = norm(catalog(builtFile));
+for (const [was, is] of COUNT) {
+  if (o.split(was).length !== 2) { console.log(`FAIL — the reference does not say "${was}" exactly once`); process.exit(1); }
+  o = o.replace(was, is);
+}
+let b = norm(catalog(builtFile));
+for (const [key, after] of ADDED) {
+  const entry = JSON.parse(fs.readFileSync(`src/content/courses/${key}.json`, 'utf8')).entry;
+  const prev = JSON.parse(fs.readFileSync(`src/content/courses/${after}.json`, 'utf8')).entry;
+  const card = new RegExp('<a class="course" href="' + entry + '">[\\s\\S]*?</a>').exec(b);
+  if (!card || b.split(card[0]).length !== 2) { console.log(`FAIL — the built catalog does not have exactly one card for ${key} (${entry})`); process.exit(1); }
+  const before = b.slice(0, card.index);
+  if (!new RegExp('<a class="course" href="' + prev + '">[\\s\\S]*?</a>$').test(before)) {
+    console.log(`FAIL — ${key}'s card does not directly follow ${after}'s, where it was placed`); process.exit(1);
+  }
+  b = b.split(card[0]).join('');
+  console.log(`added course set aside: ${key}, after ${after}`);
+}
 
 const count = s => (s.match(/<a class="course"/g) || []).length;
 console.log(`cards: ${count(o)} original, ${count(b)} built`);

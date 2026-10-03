@@ -32,7 +32,7 @@
 /* Per-course accent. The seminary's ground stays the same warm paper; the
    spine colour tells a student which course they are in without a label. */
 body[data-course="ots"],body[data-course="genesis"],body[data-course="psalms"]{--accent:#5b3a1f}
-body[data-course="nt"],body[data-course="matt"],body[data-course="john"],body[data-course="acts"]{--accent:#7a3b12}
+body[data-course="nt"],body[data-course="matt"],body[data-course="john"],body[data-course="parables"],body[data-course="acts"]{--accent:#7a3b12}
 body[data-course="1peter"],body[data-course="galatians"],body[data-course="romans"],body[data-course="rev"]{--accent:#2f4f2f}
 body[data-course="st"],body[data-course="hs"],body[data-course="pent"]{--accent:#3d3a6b}
 body[data-course="ch"],body[data-course="pentecostal"],body[data-course="cults"]{--accent:#5c2c3a}
@@ -354,3 +354,25 @@ body.lang-both .cts-masthead :is(.lang-es,.es-only,span.es){color:rgba(255,255,2
 /* Diagram lines that swap with the language (a <tspan> per language): the
    diagrams are already drawn bilingual, so "Both" shows the English line. */
 body.lang-both svg tspan.lang-es{display:none}
+
+/* ── Textbooks (Dr. Cook's Master's textbooks, Oct 2026) ──────────────────── */
+/* The box on every unit of a course that has a textbook. */
+.cts-textbook{display:flex;gap:var(--s2);align-items:flex-start;
+  background:#fbf6ea;border:1px solid #d8c8a8;border-radius:var(--r);
+  padding:var(--s2) var(--s3);margin:0 0 var(--s4);font-size:.95rem;line-height:1.5}
+.cts-textbook .cts-textbook-mark{flex:none}
+.cts-textbook a{font-weight:600}
+/* The book page: contents and the book itself. */
+.tb-toc ol{margin:0;padding-left:1.4em}
+.tb-toc li{margin:var(--s1) 0}
+.tb-toc li.l3{margin-left:1.1em;font-size:.94em}
+.tb-toc a{text-decoration:none}
+.tb-toc a:hover{text-decoration:underline}
+.tb-book h2{margin-top:var(--s5);scroll-margin-top:72px}
+.tb-book h3{scroll-margin-top:72px}
+.tb-book p,.tb-book li{max-width:72ch}
+body.lang-both .tb-book.lang-es{color:var(--ink)}
+.tb-edition{text-align:center}
+/* The test page. */
+.tb-test .cts-fill h3{margin-top:0}
+.tb-test .actions{margin-top:var(--s4)}

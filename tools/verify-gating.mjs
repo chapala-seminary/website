@@ -21,6 +21,13 @@ const REFERENCE = process.argv[3] || '_reference-index.html';
 const CHROME = process.env.CHROME_PATH;
 
 const CORE = ['CTSOTS', 'CTSNT', 'CTSST', 'CTSEVANGELISM', 'CTSPM', 'CTSCH', 'WISESPEAK'];
+/* Courses added since the reference page was hand-written, by their English
+   title (docs/adding-a-course.md). Each is on the built page only. It is
+   checked on its own -- locked, and sent to Before You Begin, for a student
+   without the foundation; open for one with it -- and then set aside, so the
+   rest of the page is compared with the reference like for like. The recorded
+   baseline below keeps the whole page, added courses included. */
+const ADDED = ['Parables of the Bible'];
 
 /* Comparing the built page against the reference page is necessary and not
    sufficient. Both are served from the same directory and both load the same
@@ -78,7 +85,17 @@ for (const [label, done] of [['a student who has finished nothing', []], ['a stu
 
   ok(ref.errs.length === 0 && built.errs.length === 0,
     `${label}: page errors`, `reference: ${ref.errs[0] || '-'} | built: ${built.errs[0] || '-'}`);
-  ok(ref.cards === built.cards, `${label}: ${built.cards} cards rendered, reference has ${ref.cards}`);
+  const whole = { cards: built.cards, locked: built.locked.slice() };
+  for (const title of ADDED) {
+    const dest = built.destinations[title], locked = built.locked.includes(title);
+    ok(title in built.destinations, `${label}: added course "${title}" is not on the built page`);
+    if (!done.length) ok(locked && dest === 'CTSBeforeYouBegin.html', `${label}: added course "${title}" should be locked and lead to Before You Begin`, `locked ${locked}, href ${dest}`);
+    else ok(!locked && /Unit1\.html$/.test(dest || ''), `${label}: added course "${title}" should be open and lead to its first unit`, `locked ${locked}, href ${dest}`);
+    built.locked = built.locked.filter((t) => t !== title);
+    delete built.destinations[title];
+    built.cards -= 1;
+  }
+  ok(ref.cards === built.cards, `${label}: ${built.cards} cards rendered (added courses set aside), reference has ${ref.cards}`);
   ok(ref.cards > 0, `${label}: no course cards rendered at all — the check would pass vacuously`);
 
   const same = JSON.stringify(ref.locked) === JSON.stringify(built.locked);
@@ -90,8 +107,8 @@ for (const [label, done] of [['a student who has finished nothing', []], ['a stu
   ok(JSON.stringify(ref.destinations) === JSON.stringify(built.destinations),
     `${label}: a card leads somewhere different`);
 
-  recorded[label] = { cards: built.cards, locked: built.locked };
-  console.log(`  ${label}: ${built.locked.length}/${built.cards} locked (reference ${ref.locked.length}/${ref.cards})`);
+  recorded[label] = whole;
+  console.log(`  ${label}: ${whole.locked.length}/${whole.cards} locked (reference ${ref.locked.length}/${ref.cards}, ${ADDED.length} added course(s) set aside)`);
 }
 
 /* The rule itself, not only its consequences.
