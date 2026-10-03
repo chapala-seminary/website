@@ -69,6 +69,12 @@
     try{localStorage.setItem('cts_lang', b.classList.contains('lang-es')?'es':'en');}catch(e){}
   }
   try{ if(localStorage.getItem('cts_lang')==='es'){document.body.classList.remove('lang-en');document.body.classList.add('lang-es');document.body.setAttribute('lang','es');} }catch(e){}
+  /* A link to #catalog from another page landed about 260px past the course
+     list: the browser works out where to scroll while the page is still laid
+     out in the fallback font, the web fonts arrive, everything above the
+     catalog gets shorter, and the smooth scroll overshoots. Once the fonts are
+     in, scroll to the hash again (found 3 Oct 2026 by tools/verify-beta-pass.mjs). */
+  try{ if(location.hash&&document.fonts&&document.fonts.ready){document.fonts.ready.then(function(){var el=document.getElementById(location.hash.slice(1));if(el)el.scrollIntoView();});} }catch(e){}
 </script>
 <script src="cts-curriculum.js?v=20260915a" defer></script>
 <!-- Mirrors this browser's progress to the seminary's database and issues the
