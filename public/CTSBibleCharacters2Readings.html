@@ -532,6 +532,176 @@
     </article>
 
   </main>
+<!-- CTS-ATTEST: the honours-reading attestation, written by tools/reading-rooms.mjs; edit there -->
+<style>
+.cts-attest{background:var(--card,#fff);border:1px solid var(--line,#dde1ea);border-top:4px solid var(--accent,#1f3d8c);border-radius:10px;padding:18px;margin:22px 0;box-shadow:0 2px 8px #0000000b}
+.cts-attest h2{margin:0 0 8px;font-size:1.25rem}
+.cts-attest label.cts-field{display:block;margin:12px 0 4px;font:700 .9rem Arial,sans-serif;color:var(--muted,#5a6272)}
+.cts-attest input[type=text]{width:100%;max-width:420px;padding:9px 11px;border:1px solid var(--line,#dde1ea);border-radius:7px;font:1rem Georgia,serif}
+.cts-attest .cts-oath{display:flex;gap:10px;align-items:flex-start;margin:12px 0}
+.cts-attest .cts-oath input{width:20px;height:20px;margin-top:2px;accent-color:var(--accent,#1f3d8c);flex-shrink:0}
+.cts-attest .cts-btn{display:inline-block;padding:9px 13px;border-radius:7px;border:0;cursor:pointer;background:var(--accent,#1f3d8c);color:#fff;font:700 .9rem Arial,sans-serif}
+.cts-attest .cts-btn.ghost{background:#fff;color:var(--accent,#1f3d8c);border:1px solid var(--accent,#1f3d8c)}
+.cts-attest .cts-msg{margin:8px 0 0;font-family:Arial,sans-serif;font-size:.92rem;color:#8a1f1f;min-height:1em}
+.cts-attest .cts-done{display:none;margin:8px 0 0;font-family:Arial,sans-serif;font-size:.95rem;color:#2f6b3a}
+.cts-attest .cts-record{display:none;margin-top:16px;padding-top:14px;border-top:2px solid var(--accent,#1f3d8c)}
+.cts-attest .cts-record.show{display:block}
+.cts-attest .cts-record .cts-name{font-size:1.4rem;margin:4px 0}
+.cts-attest .cts-record ul{margin:6px 0 0 18px;padding:0}
+@media print{.cts-attest input,.cts-attest label.cts-field,.cts-attest .cts-oath,.cts-attest .cts-btn,.cts-attest .cts-msg,.cts-attest .cts-done,.cts-attest .cts-intro{display:none!important}.cts-attest .cts-record{display:block!important;border:none}}
+</style>
+<section class="cts-attest" id="cts-attest" data-honors-code="BibleCharacters2" data-honors-course="Bible Characters II">
+<h2>Record your reading <span class="es">/ Registre su lectura</span></h2>
+<p class="cts-intro">When you have read your three chosen readings in full, enter your name and affirm it below. This record is kept on your honor, in this browser; it shows on your certificate as <em>with honors</em>.<br><span class="es">Cuando haya leído por completo sus tres lecturas elegidas, escriba su nombre y confírmelo abajo. Este registro se guarda bajo su honor, en este navegador; aparece en su certificado como <em>con honores</em>.</span></p>
+<label class="cts-field" for="cts-att-name">Your name <span class="es">/ Su nombre</span></label>
+<input type="text" id="cts-att-name" autocomplete="name">
+<div class="cts-oath"><input type="checkbox" id="cts-att-oath"><label for="cts-att-oath">On my honor, I have read in full the three readings I selected above.<br><span class="es">Bajo mi honor, he leído por completo las tres lecturas que seleccioné arriba.</span></label></div>
+<button type="button" class="cts-btn" id="cts-att-record">Record my reading <span class="es">/ Registrar mi lectura</span></button>
+<p class="cts-msg" id="cts-att-msg" role="status"></p>
+<p class="cts-done" id="cts-att-done">&#10003; Recorded &mdash; this class counts toward your With Honors progress. <a href="cts-honors.html">The Honors Reading Library &#8599;</a><br><span class="es">&#10003; Registrado &mdash; esta clase cuenta para su progreso Con Honores. <a href="cts-honors.html">La Biblioteca de Lecturas de Honores &#8599;</a></span></p>
+<div class="cts-record" id="cts-att-record-card">
+<div class="num">Honors Reading &mdash; recorded <span class="es">/ Lectura con Honores &mdash; registrada</span></div>
+<div class="cts-name" id="cts-att-rec-name"></div>
+<p>affirmed on <span id="cts-att-rec-date"></span> to have read, in full: <span class="es">/ afirmó haber leído, por completo:</span></p>
+<ul id="cts-att-rec-list"></ul>
+<p class="byline">Chapala Theological Seminary &middot; Bible Characters II &middot; present or print this page as your honors reading record. <span class="es">/ Presente o imprima esta página como su registro de lectura con honores.</span></p>
+<p><button type="button" class="cts-btn ghost" onclick="window.print()">Print this record <span class="es">/ Imprimir</span></button> <button type="button" class="cts-btn ghost" id="cts-att-reset">Start over <span class="es">/ Empezar de nuevo</span></button></p>
+</div>
+</section>
+<script>
+(function(){
+  var root=document.getElementById('cts-attest'); if(!root) return;
+  var CODE=root.getAttribute('data-honors-code'), COURSE=root.getAttribute('data-honors-course'), MAX=3;
+  var KEY='cts_honors_v1:'+CODE;
+  function get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+  function el(id){ return document.getElementById(id); }
+  // the five digests' own checkboxes, whatever the page calls them
+  function boxes(){ var m=document.querySelector('main')||document; return Array.prototype.slice.call(m.querySelectorAll('article input[type=checkbox]')); }
+  function titleOf(box){ var a=box.closest('article'); var h=a&&a.querySelector('h3'); if(!h) return ''; var c=h.cloneNode(true); Array.prototype.forEach.call(c.querySelectorAll('.es'),function(s){ s.parentNode.removeChild(s); }); return c.textContent.replace(/\s+/g,' ').trim(); }
+  function say(m){ el('cts-att-msg').textContent=m; }
+  function showDone(on){ el('cts-att-done').style.display=on?'block':'none'; }
+  function record(){
+    var chosen=boxes().filter(function(b){ return b.checked; });
+    var name=el('cts-att-name').value.trim(), oath=el('cts-att-oath').checked;
+    if(chosen.length!==MAX){ say('Choose exactly three readings above to record them. / Elija exactamente tres lecturas arriba para registrarlas.'); return; }
+    if(!name){ say('Enter your name to record your reading. / Escriba su nombre para registrar su lectura.'); return; }
+    if(!oath){ say('Check the box to affirm you have read all three. / Marque la casilla para afirmar que ha leído las tres.'); return; }
+    say('');
+    var now=new Date(), en=now.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    var works=chosen.map(titleOf);
+    el('cts-att-rec-name').textContent=name; el('cts-att-rec-date').textContent=en;
+    var ul=el('cts-att-rec-list'); ul.innerHTML=''; works.forEach(function(w){ var li=document.createElement('li'); li.textContent=w; ul.appendChild(li); });
+    set('cts_honors_name_v1', name);
+    set(KEY, JSON.stringify({name:name,date:en,course:COURSE,works:works}));
+    showDone(true);
+    var card=el('cts-att-record-card'); card.classList.add('show'); card.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function reset(){ el('cts-att-name').value=''; el('cts-att-oath').checked=false; el('cts-att-record-card').classList.remove('show'); say(''); }
+  el('cts-att-record').addEventListener('click', record);
+  el('cts-att-reset').addEventListener('click', reset);
+  if(get(KEY)) showDone(true);
+  var nm=get('cts_honors_name_v1'); if(nm && !el('cts-att-name').value) el('cts-att-name').value=nm;
+})();
+</script>
+<!-- /CTS-ATTEST -->
+
+<!-- CTS-SHELF: the public-domain shelf, written by tools/reading-rooms.mjs from src/data/reading-shelf.json; edit there -->
+<style>
+.cts-shelf{margin:34px 0 10px}
+.cts-shelf-head{text-align:center;margin:0 0 6px}
+.cts-shelf-head h2{font-weight:normal;font-size:1.4rem;border:none;padding:0;margin:0;display:inline-block;color:var(--primary,var(--accent,#5b3a1f))}
+.cts-shelf-rule{width:60px;height:2px;background:var(--gold,#c9a227);margin:12px auto 0}
+.cts-shelf-note{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-left:4px solid var(--gold,#c9a227);border-radius:12px;padding:14px 18px;margin:16px 0 18px;font-size:.96rem}
+.cts-shelf-panel{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-radius:16px;padding:18px 22px;margin:22px 0}
+.cts-shelf-panel > h3{font-weight:normal;font-size:1.15rem;margin:0 0 8px;color:var(--primary,var(--accent,#5b3a1f))}
+.cts-shelf-entry{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-radius:16px;padding:18px 22px;margin:14px 0;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+.cts-shelf-locus{letter-spacing:.16em;text-transform:uppercase;font-size:.68rem;color:var(--gold-deep,var(--accent,#98771d));margin-bottom:6px}
+.cts-shelf-title{font-size:1.1rem;color:var(--primary,var(--accent,#5b3a1f));margin-bottom:2px}
+.cts-shelf-num{display:inline-block;min-width:1.5em;color:var(--gold-deep,var(--accent,#98771d));font-style:italic}
+.cts-shelf-byline{color:var(--ink-soft,var(--muted,#6b5844));font-style:italic;font-size:.92rem;margin-bottom:8px}
+.cts-shelf-caption{font-size:.97rem;margin:8px 0}
+.cts-shelf-foot{margin-top:12px;padding-top:10px;border-top:1px solid var(--border,var(--line,#e5d8c8));display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
+.cts-shelf-link{color:var(--primary,var(--accent,#5b3a1f));text-decoration:none;border-bottom:1.5px solid var(--gold,#c9a227);padding-bottom:1px;font-size:.95rem}
+.cts-shelf-badge{font-size:.8rem;color:var(--ink-soft,var(--muted,#6b5844))}
+@media print{.cts-shelf{display:none}}
+</style>
+<section class="cts-shelf" id="cts-shelf" aria-labelledby="cts-shelf-h">
+<div class="cts-shelf-head"><h2 id="cts-shelf-h">Further Study: Ten Public-Domain Works <span class="es">/ Para Profundizar: diez obras de dominio público</span></h2><div class="cts-shelf-rule"></div></div>
+<div class="cts-shelf-note">These ten works are for further study, for the student who wants to go on reading. They are not part of the honors reading above: that stays as it is &mdash; the five CTS digests, any three read in full and recorded on your honor. All ten are in the public domain; each link opens the work online, and most can also be found in the Internet Archive or Project Gutenberg. Most are in English: the Chrome browser can translate a page (right-click, &ldquo;Translate to&hellip;&rdquo;; on a phone, the browser menu).<br><span class="es">Estas diez obras son para profundizar, para el estudiante que quiere seguir leyendo. No forman parte de la lectura con honores de arriba, que sigue igual: los cinco resúmenes del STC, tres cualesquiera leídos por completo y registrados bajo su honor. Las diez están en el dominio público; cada enlace abre la obra en línea, y la mayoría también se encuentra en Internet Archive o en el Proyecto Gutenberg. La mayoría están en inglés: el navegador Chrome puede traducir una página (clic derecho, &ldquo;Traducir a&hellip;&rdquo;; en un teléfono, el menú del navegador).</span></div>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Gallery &middot; New Testament Portraits <span class="es">/ La Galería &middot; Retratos del Nuevo Testamento</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">1.</span> Bible Characters: New Testament <span class="es">/ Personajes de la Biblia: Nuevo Testamento</span></div>
+<div class="cts-shelf-byline">Alexander Whyte &middot; 1900</div>
+<p class="cts-shelf-caption">Whyte turns his gift for the human heart to the people around Jesus and the apostles who followed &mdash; among them John the Baptist, Peter, Thomas, Mary Magdalene, and Paul, several of our very figures. His New Testament sketches read each life for its sin and its grace with unusual candor, and make the men and women of the Gospels and Acts feel like people we have known. It is the ideal gallery for a course that meets them one by one.<br><span class="es">Whyte vuelca su don para el corazón humano en las personas alrededor de Jesús y en los apóstoles que le siguieron &mdash; entre ellos Juan el Bautista, Pedro, Tomás, María Magdalena y Pablo, varias de nuestras propias figuras. Sus retratos del Nuevo Testamento leen cada vida por su pecado y su gracia con inusual franqueza, y hacen que los hombres y mujeres de los Evangelios y de Hechos se sientan como personas que hemos conocido. Es la galería ideal para un curso que los encuentra uno por uno.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Alexander+Whyte+Bible+Characters+New+Testament+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Jonah &middot; The Prophet Who Ran from God <span class="es">/ Jonás &middot; El Profeta que Huyó de Dios</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">2.</span> The Prophet Jonah <span class="es">/ El Profeta Jonás</span></div>
+<div class="cts-shelf-byline">Hugh Martin &middot; 1866</div>
+<p class="cts-shelf-caption">Martin reads Jonah not as a fable but as true history and as a living picture of the gospel &mdash; the prophet swallowed and raised on the third day, whom the Lord Himself made a sign of His own death and resurrection. It answers those who would explain the book away, and speaks straight to our first unit: the prophet who ran from God, and the mercy that pursued both him and the great city he was sent to.<br><span class="es">Martin lee a Jonás no como una fábula sino como historia verdadera y como una imagen viva del evangelio &mdash; el profeta tragado y levantado al tercer día, a quien el Señor mismo hizo señal de su propia muerte y resurrección. Responde a quienes quisieran explicar el libro como algo distinto, y habla directamente a nuestra primera unidad: el profeta que huyó de Dios, y la misericordia que los persiguió a él y a la gran ciudad a la que fue enviado.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Hugh+Martin+The+Prophet+Jonah+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Hosea &middot; The Love That Will Not Let Go <span class="es">/ Oseas &middot; El Amor que No Suelta</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">3.</span> The Minor Prophets: Hosea <span class="es">/ Los Profetas Menores: Oseas</span></div>
+<div class="cts-shelf-byline">Keil &amp; Delitzsch &middot; 1868</div>
+<p class="cts-shelf-caption">This careful conservative commentary opens Hosea with precision &mdash; the prophet commanded to love an unfaithful wife as a living parable of God's own faithful love for a faithless people. It treats the book as true prophecy against the critics of its day, and lays bare the heart of our second unit: a love that will not let go, even of those who have broken every vow.<br><span class="es">Este cuidadoso comentario conservador abre Oseas con precisión &mdash; el profeta a quien se manda amar a una esposa infiel como parábola viva del propio amor fiel de Dios por un pueblo infiel. Trata el libro como verdadera profecía frente a los críticos de su tiempo, y descubre el corazón de nuestra segunda unidad: un amor que no suelta, ni siquiera a quienes han roto todo voto.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Keil+Delitzsch+Minor+Prophets+Hosea+commentary+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Jeremiah &middot; The Weeping Prophet <span class="es">/ Jeremías &middot; El Profeta que Lloró</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">4.</span> Jeremiah: Priest and Prophet <span class="es">/ Jeremías: Sacerdote y Profeta</span></div>
+<div class="cts-shelf-byline">F. B. Meyer &middot; 1894</div>
+<p class="cts-shelf-caption">Meyer walks with Jeremiah through the long heartbreak of his ministry &mdash; called young, opposed on every side, weeping over a nation that would not turn, yet faithful to the end. It fits our third unit exactly, showing how a tender and often crushed man kept speaking God's word through decades of rejection, and pointing to the tears of a greater Prophet still to come.<br><span class="es">Meyer camina con Jeremías a través del largo quebranto de su ministerio &mdash; llamado joven, opuesto por todos lados, llorando sobre una nación que no quiso volverse, y sin embargo fiel hasta el fin. Encaja exactamente con nuestra tercera unidad, mostrando cómo un hombre tierno y a menudo aplastado siguió hablando la palabra de Dios a través de décadas de rechazo, y señalando las lágrimas de un Profeta mayor aún por venir.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=F.B.+Meyer+Jeremiah+Priest+and+Prophet+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Ezra &amp; Esther &middot; Return from Exile <span class="es">/ Esdras y Ester &middot; El Regreso del Exilio</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">5.</span> Ezra, Nehemiah, and Esther <span class="es">/ Esdras, Nehemías y Ester</span></div>
+<div class="cts-shelf-byline">W. F. Adeney &middot; 1893</div>
+<p class="cts-shelf-caption">Adeney expounds the books of the return from exile, when a scattered people came home to rebuild the ruined city and to recover the Word of God they had nearly lost. It serves our fourth and fifth units together &mdash; Esther in the Persian court, where a hidden God preserved His people, and Ezra the scribe, who set the law of the Lord again before them and led a nation back to its Scriptures.<br><span class="es">Adeney expone los libros del regreso del exilio, cuando un pueblo disperso volvió a casa para reconstruir la ciudad en ruinas y recobrar la Palabra de Dios que casi habían perdido. Sirve a nuestras unidades cuarta y quinta juntas &mdash; Ester en la corte persa, donde un Dios oculto preservó a su pueblo, y Esdras el escriba, que puso de nuevo la ley del Señor ante ellos y llevó una nación de vuelta a sus Escrituras.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Adeney+Ezra+Nehemiah+and+Esther+Expositor%27s+Bible+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">John the Baptist &middot; The Forerunner Who Doubted <span class="es">/ Juan el Bautista &middot; El Precursor que Dudó</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">6.</span> John the Baptist <span class="es">/ Juan el Bautista</span></div>
+<div class="cts-shelf-byline">F. B. Meyer &middot; 1900</div>
+<p class="cts-shelf-caption">Meyer studies the forerunner who prepared the way of the Lord &mdash; the burning voice in the wilderness, the humility that said &ldquo;He must increase, but I must decrease,&rdquo; and the dark hour in prison when even he sent to ask, &ldquo;Are you the one who is to come?&rdquo; It matches our sixth unit closely, honoring both the greatness of John and the doubt that visited him in the dark, and the gentle answer of Christ.<br><span class="es">Meyer estudia al precursor que preparó el camino del Señor &mdash; la voz ardiente en el desierto, la humildad que dijo &ldquo;Es necesario que él crezca, pero que yo mengüe,&rdquo; y la hora oscura en la cárcel cuando aun él mandó preguntar: &ldquo;¿Eres tú el que había de venir?&rdquo; Corresponde de cerca a nuestra sexta unidad, honrando tanto la grandeza de Juan como la duda que lo visitó en la oscuridad, y la tierna respuesta de Cristo.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=F.B.+Meyer+John+the+Baptist+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Peter &middot; The Rock Who Feeds the Sheep <span class="es">/ Pedro &middot; La Roca que Apacienta las Ovejas</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">7.</span> Peter: Fisherman, Disciple, Apostle <span class="es">/ Pedro: Pescador, Discípulo, Apóstol</span></div>
+<div class="cts-shelf-byline">F. B. Meyer &middot; 1919</div>
+<p class="cts-shelf-caption">Meyer follows Peter through every turn &mdash; the fisherman called from his nets, the disciple who walked on water and then sank, the friend who denied his Lord and was restored by the sea, the apostle who fed the flock and died for the Name. It is the perfect companion to our seventh unit, tracing the long grace that turned an impulsive, failing man into the rock who strengthened his brothers.<br><span class="es">Meyer sigue a Pedro por cada giro &mdash; el pescador llamado de sus redes, el discípulo que anduvo sobre el agua y luego se hundió, el amigo que negó a su Señor y fue restaurado junto al mar, el apóstol que apacentó el rebaño y murió por el Nombre. Es el compañero perfecto de nuestra séptima unidad, trazando la larga gracia que convirtió a un hombre impulsivo y fallido en la roca que fortaleció a sus hermanos.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=F.B.+Meyer+Peter+Fisherman+Disciple+Apostle+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Paul &middot; From Persecutor to Apostle of Grace <span class="es">/ Pablo &middot; De Perseguidor a Apóstol de la Gracia</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">8.</span> Paul: A Servant of Jesus Christ <span class="es">/ Pablo: Un Siervo de Jesucristo</span></div>
+<div class="cts-shelf-byline">F. B. Meyer &middot; 1897</div>
+<p class="cts-shelf-caption">Meyer gives a full life of Paul &mdash; the zealous persecutor stopped on the Damascus road, the tireless missionary who planted churches across the empire, the prisoner who wrote letters that still teach the church. It suits our eleventh unit exactly, showing the grace that turned the chief of enemies into the apostle of grace, and a life poured out to the last drop for the gospel he once tried to destroy.<br><span class="es">Meyer ofrece una vida completa de Pablo &mdash; el perseguidor celoso detenido en el camino de Damasco, el misionero incansable que plantó iglesias por todo el imperio, el prisionero que escribió cartas que aún enseñan a la iglesia. Conviene exactamente a nuestra undécima unidad, mostrando la gracia que convirtió al principal de los enemigos en el apóstol de la gracia, y una vida derramada hasta la última gota por el evangelio que una vez intentó destruir.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=F.B.+Meyer+Paul+Servant+of+Jesus+Christ+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Risen Lord &middot; Thomas &amp; Mary at the Tomb <span class="es">/ El Señor Resucitado &middot; Tomás y María en el Sepulcro</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">9.</span> The Risen Master <span class="es">/ El Maestro Resucitado</span></div>
+<div class="cts-shelf-byline">Henry Latham &middot; 1901</div>
+<p class="cts-shelf-caption">Latham studies the forty days between the resurrection and the ascension with unusual care, weighing each appearance of the risen Lord as sober evidence and living scene. It gathers up three of our figures at once &mdash; Thomas, whose doubt turned to the great confession &ldquo;My Lord and my God,&rdquo; and Mary Magdalene, the first witness at the tomb, whose grief became joy &mdash; and shows the same risen Christ who had called Lazarus out of the grave.<br><span class="es">Latham estudia los cuarenta días entre la resurrección y la ascensión con inusual cuidado, sopesando cada aparición del Señor resucitado como evidencia sobria y escena viva. Reúne de una vez a tres de nuestras figuras &mdash; Tomás, cuya duda se volvió la gran confesión &ldquo;Señor mío y Dios mío,&rdquo; y María Magdalena, la primera testigo en el sepulcro, cuyo dolor se volvió gozo &mdash; y muestra al mismo Cristo resucitado que había llamado a Lázaro fuera de la tumba.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Henry+Latham+The+Risen+Master+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Portraits of Faith &middot; New Testament Men <span class="es">/ Retratos de Fe &middot; Hombres del Nuevo Testamento</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">10.</span> The Representative Men of the New Testament <span class="es">/ Los Hombres Representativos del Nuevo Testamento</span></div>
+<div class="cts-shelf-byline">George Matheson &middot; 1905</div>
+<p class="cts-shelf-caption">Matheson draws thoughtful portraits of the leading men of the New Testament, finding in each a distinct pattern of the soul's meeting with Christ. Read beside Whyte's sketches, it gives a second and more meditative view of Peter, Thomas, Paul, and their fellows, and rewards the reader who wants to ponder what each life reveals of the grace that changed it.<br><span class="es">Matheson traza retratos reflexivos de los hombres principales del Nuevo Testamento, hallando en cada uno un patrón distinto del encuentro del alma con Cristo. Leído junto a los retratos de Whyte, ofrece una segunda mirada, más meditativa, de Pedro, Tomás, Pablo y sus compañeros, y recompensa al lector que quiere ponderar lo que cada vida revela de la gracia que la cambió.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=George+Matheson+Representative+Men+of+the+New+Testament+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+</section>
+<!-- /CTS-SHELF -->
+
 
   <div class="notice">
     <strong>Honor attestation:</strong> By selecting three readings above, you affirm that you have read those three digests in full. The digests are CTS-authored summaries that may include brief excerpts or adaptations of public-domain works.<br>

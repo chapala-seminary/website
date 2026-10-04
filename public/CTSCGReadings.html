@@ -528,6 +528,176 @@
     </article>
 
   </main>
+<!-- CTS-ATTEST: the honours-reading attestation, written by tools/reading-rooms.mjs; edit there -->
+<style>
+.cts-attest{background:var(--card,#fff);border:1px solid var(--line,#dde1ea);border-top:4px solid var(--accent,#1f3d8c);border-radius:10px;padding:18px;margin:22px 0;box-shadow:0 2px 8px #0000000b}
+.cts-attest h2{margin:0 0 8px;font-size:1.25rem}
+.cts-attest label.cts-field{display:block;margin:12px 0 4px;font:700 .9rem Arial,sans-serif;color:var(--muted,#5a6272)}
+.cts-attest input[type=text]{width:100%;max-width:420px;padding:9px 11px;border:1px solid var(--line,#dde1ea);border-radius:7px;font:1rem Georgia,serif}
+.cts-attest .cts-oath{display:flex;gap:10px;align-items:flex-start;margin:12px 0}
+.cts-attest .cts-oath input{width:20px;height:20px;margin-top:2px;accent-color:var(--accent,#1f3d8c);flex-shrink:0}
+.cts-attest .cts-btn{display:inline-block;padding:9px 13px;border-radius:7px;border:0;cursor:pointer;background:var(--accent,#1f3d8c);color:#fff;font:700 .9rem Arial,sans-serif}
+.cts-attest .cts-btn.ghost{background:#fff;color:var(--accent,#1f3d8c);border:1px solid var(--accent,#1f3d8c)}
+.cts-attest .cts-msg{margin:8px 0 0;font-family:Arial,sans-serif;font-size:.92rem;color:#8a1f1f;min-height:1em}
+.cts-attest .cts-done{display:none;margin:8px 0 0;font-family:Arial,sans-serif;font-size:.95rem;color:#2f6b3a}
+.cts-attest .cts-record{display:none;margin-top:16px;padding-top:14px;border-top:2px solid var(--accent,#1f3d8c)}
+.cts-attest .cts-record.show{display:block}
+.cts-attest .cts-record .cts-name{font-size:1.4rem;margin:4px 0}
+.cts-attest .cts-record ul{margin:6px 0 0 18px;padding:0}
+@media print{.cts-attest input,.cts-attest label.cts-field,.cts-attest .cts-oath,.cts-attest .cts-btn,.cts-attest .cts-msg,.cts-attest .cts-done,.cts-attest .cts-intro{display:none!important}.cts-attest .cts-record{display:block!important;border:none}}
+</style>
+<section class="cts-attest" id="cts-attest" data-honors-code="CG" data-honors-course="Church Growth">
+<h2>Record your reading <span class="es">/ Registre su lectura</span></h2>
+<p class="cts-intro">When you have read your three chosen readings in full, enter your name and affirm it below. This record is kept on your honor, in this browser; it shows on your certificate as <em>with honors</em>.<br><span class="es">Cuando haya leído por completo sus tres lecturas elegidas, escriba su nombre y confírmelo abajo. Este registro se guarda bajo su honor, en este navegador; aparece en su certificado como <em>con honores</em>.</span></p>
+<label class="cts-field" for="cts-att-name">Your name <span class="es">/ Su nombre</span></label>
+<input type="text" id="cts-att-name" autocomplete="name">
+<div class="cts-oath"><input type="checkbox" id="cts-att-oath"><label for="cts-att-oath">On my honor, I have read in full the three readings I selected above.<br><span class="es">Bajo mi honor, he leído por completo las tres lecturas que seleccioné arriba.</span></label></div>
+<button type="button" class="cts-btn" id="cts-att-record">Record my reading <span class="es">/ Registrar mi lectura</span></button>
+<p class="cts-msg" id="cts-att-msg" role="status"></p>
+<p class="cts-done" id="cts-att-done">&#10003; Recorded &mdash; this class counts toward your With Honors progress. <a href="cts-honors.html">The Honors Reading Library &#8599;</a><br><span class="es">&#10003; Registrado &mdash; esta clase cuenta para su progreso Con Honores. <a href="cts-honors.html">La Biblioteca de Lecturas de Honores &#8599;</a></span></p>
+<div class="cts-record" id="cts-att-record-card">
+<div class="num">Honors Reading &mdash; recorded <span class="es">/ Lectura con Honores &mdash; registrada</span></div>
+<div class="cts-name" id="cts-att-rec-name"></div>
+<p>affirmed on <span id="cts-att-rec-date"></span> to have read, in full: <span class="es">/ afirmó haber leído, por completo:</span></p>
+<ul id="cts-att-rec-list"></ul>
+<p class="byline">Chapala Theological Seminary &middot; Church Growth &middot; present or print this page as your honors reading record. <span class="es">/ Presente o imprima esta página como su registro de lectura con honores.</span></p>
+<p><button type="button" class="cts-btn ghost" onclick="window.print()">Print this record <span class="es">/ Imprimir</span></button> <button type="button" class="cts-btn ghost" id="cts-att-reset">Start over <span class="es">/ Empezar de nuevo</span></button></p>
+</div>
+</section>
+<script>
+(function(){
+  var root=document.getElementById('cts-attest'); if(!root) return;
+  var CODE=root.getAttribute('data-honors-code'), COURSE=root.getAttribute('data-honors-course'), MAX=3;
+  var KEY='cts_honors_v1:'+CODE;
+  function get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+  function el(id){ return document.getElementById(id); }
+  // the five digests' own checkboxes, whatever the page calls them
+  function boxes(){ var m=document.querySelector('main')||document; return Array.prototype.slice.call(m.querySelectorAll('article input[type=checkbox]')); }
+  function titleOf(box){ var a=box.closest('article'); var h=a&&a.querySelector('h3'); if(!h) return ''; var c=h.cloneNode(true); Array.prototype.forEach.call(c.querySelectorAll('.es'),function(s){ s.parentNode.removeChild(s); }); return c.textContent.replace(/\s+/g,' ').trim(); }
+  function say(m){ el('cts-att-msg').textContent=m; }
+  function showDone(on){ el('cts-att-done').style.display=on?'block':'none'; }
+  function record(){
+    var chosen=boxes().filter(function(b){ return b.checked; });
+    var name=el('cts-att-name').value.trim(), oath=el('cts-att-oath').checked;
+    if(chosen.length!==MAX){ say('Choose exactly three readings above to record them. / Elija exactamente tres lecturas arriba para registrarlas.'); return; }
+    if(!name){ say('Enter your name to record your reading. / Escriba su nombre para registrar su lectura.'); return; }
+    if(!oath){ say('Check the box to affirm you have read all three. / Marque la casilla para afirmar que ha leído las tres.'); return; }
+    say('');
+    var now=new Date(), en=now.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    var works=chosen.map(titleOf);
+    el('cts-att-rec-name').textContent=name; el('cts-att-rec-date').textContent=en;
+    var ul=el('cts-att-rec-list'); ul.innerHTML=''; works.forEach(function(w){ var li=document.createElement('li'); li.textContent=w; ul.appendChild(li); });
+    set('cts_honors_name_v1', name);
+    set(KEY, JSON.stringify({name:name,date:en,course:COURSE,works:works}));
+    showDone(true);
+    var card=el('cts-att-record-card'); card.classList.add('show'); card.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function reset(){ el('cts-att-name').value=''; el('cts-att-oath').checked=false; el('cts-att-record-card').classList.remove('show'); say(''); }
+  el('cts-att-record').addEventListener('click', record);
+  el('cts-att-reset').addEventListener('click', reset);
+  if(get(KEY)) showDone(true);
+  var nm=get('cts_honors_name_v1'); if(nm && !el('cts-att-name').value) el('cts-att-name').value=nm;
+})();
+</script>
+<!-- /CTS-ATTEST -->
+
+<!-- CTS-SHELF: the public-domain shelf, written by tools/reading-rooms.mjs from src/data/reading-shelf.json; edit there -->
+<style>
+.cts-shelf{margin:34px 0 10px}
+.cts-shelf-head{text-align:center;margin:0 0 6px}
+.cts-shelf-head h2{font-weight:normal;font-size:1.4rem;border:none;padding:0;margin:0;display:inline-block;color:var(--primary,var(--accent,#5b3a1f))}
+.cts-shelf-rule{width:60px;height:2px;background:var(--gold,#c9a227);margin:12px auto 0}
+.cts-shelf-note{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-left:4px solid var(--gold,#c9a227);border-radius:12px;padding:14px 18px;margin:16px 0 18px;font-size:.96rem}
+.cts-shelf-panel{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-radius:16px;padding:18px 22px;margin:22px 0}
+.cts-shelf-panel > h3{font-weight:normal;font-size:1.15rem;margin:0 0 8px;color:var(--primary,var(--accent,#5b3a1f))}
+.cts-shelf-entry{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-radius:16px;padding:18px 22px;margin:14px 0;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+.cts-shelf-locus{letter-spacing:.16em;text-transform:uppercase;font-size:.68rem;color:var(--gold-deep,var(--accent,#98771d));margin-bottom:6px}
+.cts-shelf-title{font-size:1.1rem;color:var(--primary,var(--accent,#5b3a1f));margin-bottom:2px}
+.cts-shelf-num{display:inline-block;min-width:1.5em;color:var(--gold-deep,var(--accent,#98771d));font-style:italic}
+.cts-shelf-byline{color:var(--ink-soft,var(--muted,#6b5844));font-style:italic;font-size:.92rem;margin-bottom:8px}
+.cts-shelf-caption{font-size:.97rem;margin:8px 0}
+.cts-shelf-foot{margin-top:12px;padding-top:10px;border-top:1px solid var(--border,var(--line,#e5d8c8));display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
+.cts-shelf-link{color:var(--primary,var(--accent,#5b3a1f));text-decoration:none;border-bottom:1.5px solid var(--gold,#c9a227);padding-bottom:1px;font-size:.95rem}
+.cts-shelf-badge{font-size:.8rem;color:var(--ink-soft,var(--muted,#6b5844))}
+@media print{.cts-shelf{display:none}}
+</style>
+<section class="cts-shelf" id="cts-shelf" aria-labelledby="cts-shelf-h">
+<div class="cts-shelf-head"><h2 id="cts-shelf-h">Further Study: Ten Public-Domain Works <span class="es">/ Para Profundizar: diez obras de dominio público</span></h2><div class="cts-shelf-rule"></div></div>
+<div class="cts-shelf-note">These ten works are for further study, for the student who wants to go on reading. They are not part of the honors reading above: that stays as it is &mdash; the five CTS digests, any three read in full and recorded on your honor. All ten are in the public domain; each link opens the work online, and most can also be found in the Internet Archive or Project Gutenberg. Most are in English: the Chrome browser can translate a page (right-click, &ldquo;Translate to&hellip;&rdquo;; on a phone, the browser menu).<br><span class="es">Estas diez obras son para profundizar, para el estudiante que quiere seguir leyendo. No forman parte de la lectura con honores de arriba, que sigue igual: los cinco resúmenes del STC, tres cualesquiera leídos por completo y registrados bajo su honor. Las diez están en el dominio público; cada enlace abre la obra en línea, y la mayoría también se encuentra en Internet Archive o en el Proyecto Gutenberg. La mayoría están en inglés: el navegador Chrome puede traducir una página (clic derecho, &ldquo;Traducir a&hellip;&rdquo;; en un teléfono, el menú del navegador).</span></div>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Biblical Background &middot; The Acts of the Spirit <span class="es">/ Fundamento Bíblico &middot; Los Hechos del Espíritu</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">1.</span> The Acts of the Holy Spirit <span class="es">/ Los Hechos del Espíritu Santo</span></div>
+<div class="cts-shelf-byline">Arthur T. Pierson &middot; 1895</div>
+<p class="cts-shelf-caption">Pierson reads the book of Acts as the record of the Holy Spirit building the church &mdash; showing how, at every step of its explosive early growth, it was the Spirit who convicted, converted, empowered, and multiplied. It is the ideal companion to the course's units on the biblical background of church growth, grounding the whole subject where it belongs: not in human strategy, but in the living work of God, who alone turned a hundred and twenty disciples into a movement that filled the world.<br><span class="es">Pierson lee el libro de Hechos como el registro del Espíritu Santo edificando la iglesia &mdash; mostrando cómo, en cada paso de su explosivo crecimiento temprano, fue el Espíritu quien convenció, convirtió, empoderó y multiplicó. Es el compañero ideal de las unidades del curso sobre el fundamento bíblico del crecimiento de la iglesia, arraigando todo el tema donde pertenece: no en la estrategia humana, sino en la obra viva de Dios, que por sí solo convirtió a ciento veinte discípulos en un movimiento que llenó el mundo.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Arthur+Pierson+The+Acts+of+the+Holy+Spirit+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Ground of Growth &middot; The Gospel for All <span class="es">/ El Fundamento del Crecimiento &middot; El Evangelio para Todos</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">2.</span> The Gospel Worthy of All Acceptation <span class="es">/ El Evangelio Digno de Toda Aceptación</span></div>
+<div class="cts-shelf-byline">Andrew Fuller &middot; 1785</div>
+<p class="cts-shelf-caption">Fuller's landmark work broke the grip of a cold hyper-Calvinism that had paralyzed evangelism, arguing that the gospel is to be freely offered to and pressed upon every sinner without exception. It is a fitting foundation for the course's units on the biblical basis and principles of growth, for a church will only reach out as widely as its theology allows &mdash; and Fuller's recovery of the free, universal offer of Christ was the very spark that lit the modern era of missionary and evangelistic expansion.<br><span class="es">La obra decisiva de Fuller rompió el dominio de un frío hipercalvinismo que había paralizado el evangelismo, argumentando que el evangelio ha de ofrecerse libremente y urgirse a todo pecador sin excepción. Es un fundamento apropiado para las unidades del curso sobre la base bíblica y los principios del crecimiento, pues una iglesia solo alcanzará tan ampliamente como su teología lo permita &mdash; y la recuperación por Fuller de la oferta libre y universal de Cristo fue la chispa misma que encendió la era moderna de la expansión misionera y evangelística.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Andrew+Fuller+The+Gospel+Worthy+of+All+Acceptation+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Revival &middot; A Faithful Narrative <span class="es">/ Avivamiento &middot; Una Narración Fiel</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">3.</span> A Faithful Narrative of the Surprising Work of God <span class="es">/ Una Narración Fiel de la Sorprendente Obra de Dios</span></div>
+<div class="cts-shelf-byline">Jonathan Edwards &middot; 1737</div>
+<p class="cts-shelf-caption">Edwards' famous account tells how, in a single New England town, God poured out His Spirit and brought hundreds to Christ in a short time &mdash; one of the first great narratives of revival and rapid church growth. It speaks to the course's units on the history and principles of growth, showing what genuine, God-sent increase looks like: not manufactured by technique, but granted from heaven, marked by deep conviction, real conversion, and lasting change.<br><span class="es">El famoso relato de Edwards cuenta cómo, en un solo pueblo de Nueva Inglaterra, Dios derramó su Espíritu y trajo a cientos a Cristo en poco tiempo &mdash; uno de los primeros grandes relatos de avivamiento y crecimiento rápido de la iglesia. Habla a las unidades del curso sobre la historia y los principios del crecimiento, mostrando cómo se ve el aumento genuino y enviado por Dios: no fabricado por la técnica, sino concedido desde el cielo, marcado por profunda convicción, conversión real, y cambio duradero.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Jonathan+Edwards+A+Faithful+Narrative+of+the+Surprising+Work+of+God+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Great Awakening &middot; A History of Revival <span class="es">/ El Gran Despertar &middot; Una Historia de Avivamiento</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">4.</span> The Great Awakening <span class="es">/ El Gran Despertar</span></div>
+<div class="cts-shelf-byline">Joseph Tracy &middot; 1842</div>
+<p class="cts-shelf-caption">Tracy's history gathers the story of the eighteenth-century Great Awakening &mdash; the vast, continent-shaking revival under Whitefield, Edwards, and others that swelled the churches of America. It is a rich companion to the course's units on the history of church growth, showing both the glory and the growing pains of a genuine movement of God, and giving today's reader a longer memory than any modern model can &mdash; a reminder that the greatest growth the church has known came when God drew near to His people.<br><span class="es">La historia de Tracy reúne el relato del Gran Despertar del siglo dieciocho &mdash; el vasto avivamiento que sacudió el continente bajo Whitefield, Edwards y otros, y que llenó las iglesias de América. Es un rico compañero de las unidades del curso sobre la historia del crecimiento de la iglesia, mostrando tanto la gloria como los dolores de crecimiento de un genuino movimiento de Dios, y dando al lector de hoy una memoria más larga que cualquier modelo moderno &mdash; un recordatorio de que el mayor crecimiento que la iglesia ha conocido vino cuando Dios se acercó a su pueblo.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Joseph+Tracy+The+Great+Awakening+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Spirit's Fire &middot; The Church's True Power <span class="es">/ El Fuego del Espíritu &middot; El Verdadero Poder de la Iglesia</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">5.</span> The Tongue of Fire <span class="es">/ La Lengua de Fuego</span></div>
+<div class="cts-shelf-byline">William Arthur &middot; 1856</div>
+<p class="cts-shelf-caption">Arthur's classic on the power of the Holy Spirit takes Pentecost as its pattern, arguing that the church's true strength for growth is not organization or eloquence but the fire of the Spirit resting on ordinary believers. It speaks to the course's units on principles and on pastoral leadership, calling church and pastor alike to seek first the power from on high, without which all effort is barren, and with which even the weakest church may become a force that spreads the gospel like flame.<br><span class="es">El clásico de Arthur sobre el poder del Espíritu Santo toma Pentecostés como su patrón, argumentando que la verdadera fuerza de la iglesia para el crecimiento no es la organización ni la elocuencia sino el fuego del Espíritu reposando sobre creyentes comunes. Habla a las unidades del curso sobre los principios y sobre el liderazgo pastoral, llamando a la iglesia y al pastor por igual a buscar primero el poder de lo alto, sin el cual todo esfuerzo es estéril, y con el cual aun la iglesia más débil puede volverse una fuerza que extiende el evangelio como llama.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=William+Arthur+The+Tongue+of+Fire+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Revival in the Field &middot; By My Spirit <span class="es">/ Avivamiento en el Campo &middot; Por Mi Espíritu</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">6.</span> By My Spirit <span class="es">/ Por Mi Espíritu</span></div>
+<div class="cts-shelf-byline">Jonathan Goforth &middot; 1929</div>
+<p class="cts-shelf-caption">Goforth tells the story of the remarkable revival God gave through his ministry in China and Korea, and draws from it the abiding lesson of its title: not by might, nor by power, but by God's Spirit. It is a stirring companion to the course's units on principles and leadership, a firsthand account of real church growth in a hard mission field, and a rebuke to every attempt to grow the church by human energy apart from the reviving breath of God.<br><span class="es">Goforth cuenta la historia del notable avivamiento que Dios dio a través de su ministerio en China y Corea, y saca de ella la lección permanente de su título: no con ejército, ni con fuerza, sino con el Espíritu de Dios. Es un conmovedor compañero de las unidades del curso sobre los principios y el liderazgo, un relato de primera mano del crecimiento real de la iglesia en un difícil campo misionero, y una reprensión a todo intento de hacer crecer la iglesia por energía humana aparte del aliento reavivador de Dios.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Jonathan+Goforth+By+My+Spirit+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Prayer &middot; The Engine of Growth <span class="es">/ Oración &middot; El Motor del Crecimiento</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">7.</span> The Power of Prayer <span class="es">/ El Poder de la Oración</span></div>
+<div class="cts-shelf-byline">R. A. Torrey &middot; 1924</div>
+<p class="cts-shelf-caption">Torrey argues that prayer is the great secret behind every true revival and every growing church &mdash; that God has bound the outpouring of His power to the persistent, believing prayers of His people. It is a searching companion to the course's units on principles and leadership, pressing pastor and congregation to see that no program can substitute for a praying church, and that the shortest road to genuine growth runs through the prayer closet and the united prayer meeting.<br><span class="es">Torrey argumenta que la oración es el gran secreto detrás de todo verdadero avivamiento y de toda iglesia en crecimiento &mdash; que Dios ha ligado el derramamiento de su poder a las oraciones persistentes y creyentes de su pueblo. Es un escudriñador compañero de las unidades del curso sobre los principios y el liderazgo, instando al pastor y a la congregación a ver que ningún programa puede sustituir a una iglesia que ora, y que el camino más corto al crecimiento genuino pasa por el aposento de oración y la reunión unida de oración.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=R.A.+Torrey+The+Power+of+Prayer+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Discipleship &middot; The Training of the Twelve <span class="es">/ Discipulado &middot; El Adiestramiento de los Doce</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">8.</span> The Training of the Twelve <span class="es">/ El Adiestramiento de los Doce</span></div>
+<div class="cts-shelf-byline">A. B. Bruce &middot; 1871</div>
+<p class="cts-shelf-caption">Bruce studies how Jesus grew His movement not by gathering crowds but by patiently training twelve men who would carry it on &mdash; the original and enduring pattern of disciple-making. It is the ideal companion to the course's unit on discipleship, showing that the deepest and most lasting church growth comes not from filling seats but from making disciples who make disciples, exactly as the Lord Himself did, one committed life at a time.<br><span class="es">Bruce estudia cómo Jesús hizo crecer su movimiento no reuniendo multitudes sino entrenando pacientemente a doce hombres que lo llevarían adelante &mdash; el patrón original y perdurable de hacer discípulos. Es el compañero ideal de la unidad del curso sobre el discipulado, mostrando que el crecimiento más profundo y duradero de la iglesia no viene de llenar asientos sino de hacer discípulos que hacen discípulos, exactamente como el Señor mismo lo hizo, una vida comprometida a la vez.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=A.B.+Bruce+The+Training+of+the+Twelve+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Establishing Believers &middot; Christian Progress <span class="es">/ Establecer a los Creyentes &middot; El Progreso Cristiano</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">9.</span> Christian Progress <span class="es">/ El Progreso Cristiano</span></div>
+<div class="cts-shelf-byline">John Angell James &middot; 1834</div>
+<p class="cts-shelf-caption">James wrote this sequel to his Anxious Inquirer to help the new believer grow up into a strong and settled faith &mdash; the very work a growing church must do if it is to keep those it wins. It speaks directly to the course's units on discipleship and on closing the back door, for a church that gathers converts but never establishes them will lose them; here is wise, warm guidance for leading young believers on from their first steps to a mature and lasting walk with Christ.<br><span class="es">James escribió esta secuela de su Buscador Ansioso para ayudar al nuevo creyente a crecer hacia una fe fuerte y firme &mdash; la obra misma que una iglesia en crecimiento debe hacer si ha de guardar a los que gana. Habla directamente a las unidades del curso sobre el discipulado y sobre cerrar la puerta trasera, pues una iglesia que reúne convertidos pero nunca los establece los perderá; aquí hay guía sabia y cálida para llevar a los jóvenes creyentes desde sus primeros pasos hasta un andar maduro y duradero con Cristo.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=John+Angell+James+Christian+Progress+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Right Kind of Growth &middot; Practical Religion <span class="es">/ La Clase Correcta de Crecimiento &middot; Religión Práctica</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">10.</span> Practical Religion <span class="es">/ Religión Práctica</span></div>
+<div class="cts-shelf-byline">J. C. Ryle &middot; 1878</div>
+<p class="cts-shelf-caption">Ryle's plain, powerful chapters on the practical Christian life &mdash; on growth in grace, assurance, self-denial, and perseverance &mdash; describe the very health that church growth exists to produce. It is a strong companion to the course's units on discipleship and retention, keeping the reader's aim fixed on the right kind of growth: not a crowd of shallow attenders, but a body of real, growing, persevering Christians, which is the only increase worth counting in the sight of God.<br><span class="es">Los capítulos claros y poderosos de Ryle sobre la vida cristiana práctica &mdash; sobre el crecimiento en gracia, la seguridad, la abnegación y la perseverancia &mdash; describen la salud misma que el crecimiento de la iglesia existe para producir. Es un fuerte compañero de las unidades del curso sobre el discipulado y la retención, manteniendo el objetivo del lector fijo en la clase correcta de crecimiento: no una multitud de asistentes superficiales, sino un cuerpo de cristianos reales, que crecen y perseveran, que es el único aumento digno de contarse a la vista de Dios.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=J.C.+Ryle+Practical+Religion+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+</section>
+<!-- /CTS-SHELF -->
+
 
   <div class="notice">
     <strong>Honor attestation:</strong> By selecting three readings above, you affirm that you have read those three digests in full. The digests are CTS-authored summaries that may include brief excerpts or adaptations of public-domain works.<br>

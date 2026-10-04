@@ -406,6 +406,176 @@
 <p><b>Fuente.</b> Un estudio del Seminario Teológico de Chapala, anclado en la obra de E. M. Bounds <em>Power Through Prayer</em> y en la de J. H. Jowett <em>The Preacher: His Life and Work</em>, ambas de dominio público, y en la Escritura. Esta es enseñanza de autoría del STC, no una reproducción; los clásicos están disponibles gratuitamente. WiseSpeak es el método propio del seminario, enseñado en las lecciones del curso.</p>
 <p><b>Sobre los guías.</b> E. M. Bounds (1835–1913) escribió libritos ardientes sobre la oración como el secreto del poder de un predicador; J. H. Jowett (1863–1923) enseñó que el poder público del predicador fluye de su vida escondida con Dios.</p>
 </footer>
-</div></div></details><label class="btn alt"><input type="checkbox"> Select for honors · Elegir para honores</label></div></article></main><footer>Each reading above is a Chapala Theological Seminary bilingual digest, drawn from public-domain classics of preaching and included in your course download so it can be read entirely offline. · Cada lectura es un resumen bilingüe del STC, tomado de clásicos de la predicación de dominio público e incluido en la descarga de su curso para leerse sin conexión.</footer></div><script>
+</div></div></details><label class="btn alt"><input type="checkbox"> Select for honors · Elegir para honores</label></div></article></main>
+<!-- CTS-ATTEST: the honours-reading attestation, written by tools/reading-rooms.mjs; edit there -->
+<style>
+.cts-attest{background:var(--card,#fff);border:1px solid var(--line,#dde1ea);border-top:4px solid var(--accent,#1f3d8c);border-radius:10px;padding:18px;margin:22px 0;box-shadow:0 2px 8px #0000000b}
+.cts-attest h2{margin:0 0 8px;font-size:1.25rem}
+.cts-attest label.cts-field{display:block;margin:12px 0 4px;font:700 .9rem Arial,sans-serif;color:var(--muted,#5a6272)}
+.cts-attest input[type=text]{width:100%;max-width:420px;padding:9px 11px;border:1px solid var(--line,#dde1ea);border-radius:7px;font:1rem Georgia,serif}
+.cts-attest .cts-oath{display:flex;gap:10px;align-items:flex-start;margin:12px 0}
+.cts-attest .cts-oath input{width:20px;height:20px;margin-top:2px;accent-color:var(--accent,#1f3d8c);flex-shrink:0}
+.cts-attest .cts-btn{display:inline-block;padding:9px 13px;border-radius:7px;border:0;cursor:pointer;background:var(--accent,#1f3d8c);color:#fff;font:700 .9rem Arial,sans-serif}
+.cts-attest .cts-btn.ghost{background:#fff;color:var(--accent,#1f3d8c);border:1px solid var(--accent,#1f3d8c)}
+.cts-attest .cts-msg{margin:8px 0 0;font-family:Arial,sans-serif;font-size:.92rem;color:#8a1f1f;min-height:1em}
+.cts-attest .cts-done{display:none;margin:8px 0 0;font-family:Arial,sans-serif;font-size:.95rem;color:#2f6b3a}
+.cts-attest .cts-record{display:none;margin-top:16px;padding-top:14px;border-top:2px solid var(--accent,#1f3d8c)}
+.cts-attest .cts-record.show{display:block}
+.cts-attest .cts-record .cts-name{font-size:1.4rem;margin:4px 0}
+.cts-attest .cts-record ul{margin:6px 0 0 18px;padding:0}
+@media print{.cts-attest input,.cts-attest label.cts-field,.cts-attest .cts-oath,.cts-attest .cts-btn,.cts-attest .cts-msg,.cts-attest .cts-done,.cts-attest .cts-intro{display:none!important}.cts-attest .cts-record{display:block!important;border:none}}
+</style>
+<section class="cts-attest" id="cts-attest" data-honors-code="Preaching" data-honors-course="Preaching">
+<h2>Record your reading <span class="es">/ Registre su lectura</span></h2>
+<p class="cts-intro">When you have read your three chosen readings in full, enter your name and affirm it below. This record is kept on your honor, in this browser; it shows on your certificate as <em>with honors</em>.<br><span class="es">Cuando haya leído por completo sus tres lecturas elegidas, escriba su nombre y confírmelo abajo. Este registro se guarda bajo su honor, en este navegador; aparece en su certificado como <em>con honores</em>.</span></p>
+<label class="cts-field" for="cts-att-name">Your name <span class="es">/ Su nombre</span></label>
+<input type="text" id="cts-att-name" autocomplete="name">
+<div class="cts-oath"><input type="checkbox" id="cts-att-oath"><label for="cts-att-oath">On my honor, I have read in full the three readings I selected above.<br><span class="es">Bajo mi honor, he leído por completo las tres lecturas que seleccioné arriba.</span></label></div>
+<button type="button" class="cts-btn" id="cts-att-record">Record my reading <span class="es">/ Registrar mi lectura</span></button>
+<p class="cts-msg" id="cts-att-msg" role="status"></p>
+<p class="cts-done" id="cts-att-done">&#10003; Recorded &mdash; this class counts toward your With Honors progress. <a href="cts-honors.html">The Honors Reading Library &#8599;</a><br><span class="es">&#10003; Registrado &mdash; esta clase cuenta para su progreso Con Honores. <a href="cts-honors.html">La Biblioteca de Lecturas de Honores &#8599;</a></span></p>
+<div class="cts-record" id="cts-att-record-card">
+<div class="num">Honors Reading &mdash; recorded <span class="es">/ Lectura con Honores &mdash; registrada</span></div>
+<div class="cts-name" id="cts-att-rec-name"></div>
+<p>affirmed on <span id="cts-att-rec-date"></span> to have read, in full: <span class="es">/ afirmó haber leído, por completo:</span></p>
+<ul id="cts-att-rec-list"></ul>
+<p class="byline">Chapala Theological Seminary &middot; Preaching &middot; present or print this page as your honors reading record. <span class="es">/ Presente o imprima esta página como su registro de lectura con honores.</span></p>
+<p><button type="button" class="cts-btn ghost" onclick="window.print()">Print this record <span class="es">/ Imprimir</span></button> <button type="button" class="cts-btn ghost" id="cts-att-reset">Start over <span class="es">/ Empezar de nuevo</span></button></p>
+</div>
+</section>
+<script>
+(function(){
+  var root=document.getElementById('cts-attest'); if(!root) return;
+  var CODE=root.getAttribute('data-honors-code'), COURSE=root.getAttribute('data-honors-course'), MAX=3;
+  var KEY='cts_honors_v1:'+CODE;
+  function get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+  function el(id){ return document.getElementById(id); }
+  // the five digests' own checkboxes, whatever the page calls them
+  function boxes(){ var m=document.querySelector('main')||document; return Array.prototype.slice.call(m.querySelectorAll('article input[type=checkbox]')); }
+  function titleOf(box){ var a=box.closest('article'); var h=a&&a.querySelector('h3'); if(!h) return ''; var c=h.cloneNode(true); Array.prototype.forEach.call(c.querySelectorAll('.es'),function(s){ s.parentNode.removeChild(s); }); return c.textContent.replace(/\s+/g,' ').trim(); }
+  function say(m){ el('cts-att-msg').textContent=m; }
+  function showDone(on){ el('cts-att-done').style.display=on?'block':'none'; }
+  function record(){
+    var chosen=boxes().filter(function(b){ return b.checked; });
+    var name=el('cts-att-name').value.trim(), oath=el('cts-att-oath').checked;
+    if(chosen.length!==MAX){ say('Choose exactly three readings above to record them. / Elija exactamente tres lecturas arriba para registrarlas.'); return; }
+    if(!name){ say('Enter your name to record your reading. / Escriba su nombre para registrar su lectura.'); return; }
+    if(!oath){ say('Check the box to affirm you have read all three. / Marque la casilla para afirmar que ha leído las tres.'); return; }
+    say('');
+    var now=new Date(), en=now.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    var works=chosen.map(titleOf);
+    el('cts-att-rec-name').textContent=name; el('cts-att-rec-date').textContent=en;
+    var ul=el('cts-att-rec-list'); ul.innerHTML=''; works.forEach(function(w){ var li=document.createElement('li'); li.textContent=w; ul.appendChild(li); });
+    set('cts_honors_name_v1', name);
+    set(KEY, JSON.stringify({name:name,date:en,course:COURSE,works:works}));
+    showDone(true);
+    var card=el('cts-att-record-card'); card.classList.add('show'); card.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function reset(){ el('cts-att-name').value=''; el('cts-att-oath').checked=false; el('cts-att-record-card').classList.remove('show'); say(''); }
+  el('cts-att-record').addEventListener('click', record);
+  el('cts-att-reset').addEventListener('click', reset);
+  if(get(KEY)) showDone(true);
+  var nm=get('cts_honors_name_v1'); if(nm && !el('cts-att-name').value) el('cts-att-name').value=nm;
+})();
+</script>
+<!-- /CTS-ATTEST -->
+
+<!-- CTS-SHELF: the public-domain shelf, written by tools/reading-rooms.mjs from src/data/reading-shelf.json; edit there -->
+<style>
+.cts-shelf{margin:34px 0 10px}
+.cts-shelf-head{text-align:center;margin:0 0 6px}
+.cts-shelf-head h2{font-weight:normal;font-size:1.4rem;border:none;padding:0;margin:0;display:inline-block;color:var(--primary,var(--accent,#5b3a1f))}
+.cts-shelf-rule{width:60px;height:2px;background:var(--gold,#c9a227);margin:12px auto 0}
+.cts-shelf-note{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-left:4px solid var(--gold,#c9a227);border-radius:12px;padding:14px 18px;margin:16px 0 18px;font-size:.96rem}
+.cts-shelf-panel{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-radius:16px;padding:18px 22px;margin:22px 0}
+.cts-shelf-panel > h3{font-weight:normal;font-size:1.15rem;margin:0 0 8px;color:var(--primary,var(--accent,#5b3a1f))}
+.cts-shelf-entry{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-radius:16px;padding:18px 22px;margin:14px 0;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+.cts-shelf-locus{letter-spacing:.16em;text-transform:uppercase;font-size:.68rem;color:var(--gold-deep,var(--accent,#98771d));margin-bottom:6px}
+.cts-shelf-title{font-size:1.1rem;color:var(--primary,var(--accent,#5b3a1f));margin-bottom:2px}
+.cts-shelf-num{display:inline-block;min-width:1.5em;color:var(--gold-deep,var(--accent,#98771d));font-style:italic}
+.cts-shelf-byline{color:var(--ink-soft,var(--muted,#6b5844));font-style:italic;font-size:.92rem;margin-bottom:8px}
+.cts-shelf-caption{font-size:.97rem;margin:8px 0}
+.cts-shelf-foot{margin-top:12px;padding-top:10px;border-top:1px solid var(--border,var(--line,#e5d8c8));display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
+.cts-shelf-link{color:var(--primary,var(--accent,#5b3a1f));text-decoration:none;border-bottom:1.5px solid var(--gold,#c9a227);padding-bottom:1px;font-size:.95rem}
+.cts-shelf-badge{font-size:.8rem;color:var(--ink-soft,var(--muted,#6b5844))}
+@media print{.cts-shelf{display:none}}
+</style>
+<section class="cts-shelf" id="cts-shelf" aria-labelledby="cts-shelf-h">
+<div class="cts-shelf-head"><h2 id="cts-shelf-h">Further Study: Ten Public-Domain Works <span class="es">/ Para Profundizar: diez obras de dominio público</span></h2><div class="cts-shelf-rule"></div></div>
+<div class="cts-shelf-note">These ten works are for further study, for the student who wants to go on reading. They are not part of the honors reading above: that stays as it is &mdash; the five CTS digests, any three read in full and recorded on your honor. All ten are in the public domain; each link opens the work online, and most can also be found in the Internet Archive or Project Gutenberg. Most are in English: the Chrome browser can translate a page (right-click, &ldquo;Translate to&hellip;&rdquo;; on a phone, the browser menu).<br><span class="es">Estas diez obras son para profundizar, para el estudiante que quiere seguir leyendo. No forman parte de la lectura con honores de arriba, que sigue igual: los cinco resúmenes del STC, tres cualesquiera leídos por completo y registrados bajo su honor. Las diez están en el dominio público; cada enlace abre la obra en línea, y la mayoría también se encuentra en Internet Archive o en el Proyecto Gutenberg. La mayoría están en inglés: el navegador Chrome puede traducir una página (clic derecho, &ldquo;Traducir a&hellip;&rdquo;; en un teléfono, el menú del navegador).</span></div>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Classic Textbook &middot; Preparation and Delivery <span class="es">/ El Manual Clásico &middot; Preparación y Entrega</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">1.</span> A Treatise on the Preparation and Delivery of Sermons <span class="es">/ Tratado sobre la Preparación y Entrega de Sermones</span></div>
+<div class="cts-shelf-byline">John A. Broadus &middot; 1870</div>
+<p class="cts-shelf-caption">Broadus wrote the textbook that shaped preaching in the English-speaking world for generations &mdash; a thorough, orderly guide from the choice of a text, through the subject and the arrangement of the sermon, to matters of style and delivery. It is the natural companion to nearly every module of this course, and the place many preachers first learned the discipline of building a sermon that is clear, unified, and faithful to the text.<br><span class="es">Broadus escribió el manual que dio forma a la predicación en el mundo de habla inglesa por generaciones &mdash; una guía minuciosa y ordenada desde la elección de un texto, pasando por el sujeto y la disposición del sermón, hasta cuestiones de estilo y entrega. Es el compañero natural de casi cada módulo de este curso, y el lugar donde muchos predicadores aprendieron por primera vez la disciplina de construir un sermón claro, unificado y fiel al texto.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=John+Broadus+Preparation+and+Delivery+of+Sermons+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Truth Through Personality &middot; The Yale Lectures <span class="es">/ La Verdad a Través de la Personalidad &middot; Las Conferencias de Yale</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">2.</span> Lectures on Preaching <span class="es">/ Conferencias sobre la Predicación</span></div>
+<div class="cts-shelf-byline">Phillips Brooks &middot; 1877</div>
+<p class="cts-shelf-caption">In these famous Yale lectures, Phillips Brooks gave preaching its most quoted definition: truth mediated through personality. Less a manual than a meditation on what preaching is and who the preacher must be, it speaks to the opening and closing of the course &mdash; that a sermon is not only a thing to be built but a truth to be lived and spoken by a real man before real people.<br><span class="es">En estas famosas conferencias de Yale, Phillips Brooks dio a la predicación su definición más citada: la verdad mediada a través de la personalidad. Menos un manual que una meditación sobre qué es la predicación y quién debe ser el predicador, habla al inicio y al cierre del curso &mdash; que un sermón no es solo algo que se construye sino una verdad que ha de ser vivida y hablada por un hombre real ante personas reales.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Phillips+Brooks+Lectures+on+Preaching+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Prince of Preachers &middot; Practical Counsel <span class="es">/ El Príncipe de los Predicadores &middot; Consejo Práctico</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">3.</span> Lectures to My Students <span class="es">/ Discursos a Mis Estudiantes</span></div>
+<div class="cts-shelf-byline">C. H. Spurgeon &middot; 1875</div>
+<p class="cts-shelf-caption">Spurgeon's lectures to the young men in his college pour out a lifetime of pulpit wisdom with warmth and wit &mdash; on choosing texts, holding attention, using the voice, and above all keeping a living walk with God behind the sermon. It speaks to the course's later modules on refining and delivering the message, from a man who preached to thousands and knew every joy and pitfall of the craft.<br><span class="es">Las conferencias de Spurgeon a los jóvenes de su colegio derraman toda una vida de sabiduría del púlpito con calidez e ingenio &mdash; sobre elegir textos, sostener la atención, usar la voz, y sobre todo mantener un andar vivo con Dios detrás del sermón. Habla a los módulos posteriores del curso sobre refinar y entregar el mensaje, de un hombre que predicó a miles y conoció todo gozo y todo peligro del oficio.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Spurgeon+Lectures+to+My+Students+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Theory of Preaching &middot; Building the Sermon <span class="es">/ La Teoría de la Predicación &middot; Construir el Sermón</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">4.</span> The Theory of Preaching <span class="es">/ La Teoría de la Predicación</span></div>
+<div class="cts-shelf-byline">Austin Phelps &middot; 1881</div>
+<p class="cts-shelf-caption">Phelps taught preaching for thirty years, and this careful work is the fruit of it &mdash; a full treatment of how a sermon is built, from stating the one proposition clearly to dividing and developing it so the whole hangs together. It is a rich companion to the course's central modules on developing an idea and constructing an outline, patient and thorough where a preacher needs to think hard about structure.<br><span class="es">Phelps enseñó predicación por treinta años, y esta obra cuidadosa es su fruto &mdash; un tratamiento completo de cómo se construye un sermón, desde declarar con claridad la única proposición hasta dividirla y desarrollarla de modo que el todo se sostenga unido. Es un rico compañero de los módulos centrales del curso sobre desarrollar una idea y construir un bosquejo, paciente y minucioso donde el predicador necesita pensar a fondo en la estructura.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Austin+Phelps+The+Theory+of+Preaching+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Nine Lectures &middot; The Craft of the Sermon <span class="es">/ Nueve Conferencias &middot; El Oficio del Sermón</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">5.</span> Nine Lectures on Preaching <span class="es">/ Nueve Conferencias sobre la Predicación</span></div>
+<div class="cts-shelf-byline">R. W. Dale &middot; 1878</div>
+<p class="cts-shelf-caption">Dale, a great preacher himself, gave these lectures on the craft and calling of preaching &mdash; on the aim of the sermon, its unity and arrangement, and the earnestness that must carry it. It complements the course's modules on shaping a clear, single-minded sermon, and reminds the preacher that method serves a purpose: to press one truth home upon the hearer until it takes hold.<br><span class="es">Dale, un gran predicador él mismo, dio estas conferencias sobre el oficio y el llamado de la predicación &mdash; sobre el fin del sermón, su unidad y disposición, y la seriedad que debe llevarlo. Complementa los módulos del curso sobre dar forma a un sermón claro y de un solo propósito, y recuerda al predicador que el método sirve a un fin: grabar una verdad en el oyente hasta que arraigue.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=R.W.+Dale+Nine+Lectures+on+Preaching+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">A History of Preaching &middot; From the Apostles Onward <span class="es">/ Una Historia de la Predicación &middot; Desde los Apóstoles en Adelante</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">6.</span> A History of Preaching <span class="es">/ Una Historia de la Predicación</span></div>
+<div class="cts-shelf-byline">Edwin C. Dargan &middot; 1905</div>
+<p class="cts-shelf-caption">Dargan's classic history follows the preaching of the church from the apostles down through the centuries &mdash; the great preachers, the great ages, and the lessons of each. It is the ideal companion to the course's module on the great centuries of preaching, showing the student that he stands in a long and honorable line, and that every age of gospel power has been an age of preaching.<br><span class="es">La historia clásica de Dargan sigue la predicación de la iglesia desde los apóstoles a través de los siglos &mdash; los grandes predicadores, las grandes épocas y las lecciones de cada una. Es el compañero ideal del módulo del curso sobre los grandes siglos de la predicación, mostrando al estudiante que está en una larga y honorable línea, y que toda época de poder del evangelio ha sido una época de predicación.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Edwin+Dargan+A+History+of+Preaching+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Preacher's Power &middot; Prayer and the Preacher <span class="es">/ El Poder del Predicador &middot; La Oración y el Predicador</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">7.</span> Power Through Prayer <span class="es">/ Poder a Través de la Oración</span></div>
+<div class="cts-shelf-byline">E. M. Bounds &middot; 1907</div>
+<p class="cts-shelf-caption">First published as &ldquo;Preacher and Prayer,&rdquo; this burning little book insists that the making of the preacher is more important than the making of the sermon, and that the secret power of preaching is found on the knees. It speaks to the course's module on the preacher's own preparation, pressing home that no skill in the pulpit can replace a life soaked in prayer, and that God's power flows through praying men.<br><span class="es">Publicado primero como &ldquo;El Predicador y la Oración,&rdquo; este ardiente librito insiste en que la formación del predicador es más importante que la del sermón, y que el poder secreto de la predicación se halla de rodillas. Habla al módulo del curso sobre la propia preparación del predicador, insistiendo en que ninguna destreza en el púlpito puede reemplazar una vida empapada de oración, y que el poder de Dios fluye a través de hombres que oran.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=E.M.+Bounds+Power+Through+Prayer+Preacher+and+Prayer+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Preacher &middot; His Life and Work <span class="es">/ El Predicador &middot; Su Vida y Obra</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">8.</span> The Preacher: His Life and Work <span class="es">/ El Predicador: Su Vida y Obra</span></div>
+<div class="cts-shelf-byline">J. H. Jowett &middot; 1912</div>
+<p class="cts-shelf-caption">Jowett's Yale lectures look at the preacher himself &mdash; his calling, his study, his walk with God, and the great aim of his work: to bring men to Christ and build them up in Him. It complements the course's opening and closing modules on the preacher and the purposes of preaching, and is full of the wisdom of a man who took the pulpit with reverence and gave his life to it.<br><span class="es">Las conferencias de Yale de Jowett miran al predicador mismo &mdash; su llamado, su estudio, su andar con Dios, y el gran fin de su obra: traer hombres a Cristo y edificarlos en Él. Complementa los módulos inicial y final del curso sobre el predicador y los propósitos de la predicación, y está lleno de la sabiduría de un hombre que tomó el púlpito con reverencia y le dio su vida.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=John+Henry+Jowett+The+Preacher+His+Life+and+Work+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Expository Preaching &middot; Plans and Methods <span class="es">/ Predicación Expositiva &middot; Planes y Métodos</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">9.</span> Expository Preaching: Plans and Methods <span class="es">/ Predicación Expositiva: Planes y Métodos</span></div>
+<div class="cts-shelf-byline">F. B. Meyer &middot; 1910</div>
+<p class="cts-shelf-caption">Meyer, a preacher famous for opening the Scriptures book by book, sets out here the plans and methods of expository preaching &mdash; how to draw a sermon out of the text itself rather than laying an idea upon it. It complements the course's modules on the text and the building of the sermon, and points toward preaching that lets the Word set the agenda and feeds the flock from the passage before them.<br><span class="es">Meyer, un predicador famoso por abrir las Escrituras libro por libro, expone aquí los planes y métodos de la predicación expositiva &mdash; cómo extraer un sermón del texto mismo en lugar de imponerle una idea. Complementa los módulos del curso sobre el texto y la construcción del sermón, y apunta a una predicación que deja que la Palabra fije la agenda y alimenta al rebaño desde el pasaje que tiene delante.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=F.B.+Meyer+Expository+Preaching+Plans+and+Methods+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Art of Illustration &middot; Windows for the Sermon <span class="es">/ El Arte de la Ilustración &middot; Ventanas para el Sermón</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">10.</span> The Art of Illustration <span class="es">/ El Arte de la Ilustración</span></div>
+<div class="cts-shelf-byline">C. H. Spurgeon &middot; 1894</div>
+<p class="cts-shelf-caption">In this companion to his student lectures, Spurgeon teaches the use of illustration &mdash; the windows that let light into a sermon and help the truth reach the heart. It speaks to the course's module on amplifying the outline, showing how a well-chosen picture or story can make a doctrine plain and memorable, and warning, too, against illustration that dazzles the eye but leaves the truth in the dark.<br><span class="es">En este complemento de sus conferencias a estudiantes, Spurgeon enseña el uso de la ilustración &mdash; las ventanas que dejan entrar la luz en un sermón y ayudan a que la verdad alcance el corazón. Habla al módulo del curso sobre amplificar el bosquejo, mostrando cómo una imagen o historia bien elegida puede hacer una doctrina clara y memorable, y advirtiendo también contra la ilustración que deslumbra el ojo pero deja la verdad en la oscuridad.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Spurgeon+The+Art+of+Illustration+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+</section>
+<!-- /CTS-SHELF -->
+<footer>Each reading above is a Chapala Theological Seminary bilingual digest, drawn from public-domain classics of preaching and included in your course download so it can be read entirely offline. · Cada lectura es un resumen bilingüe del STC, tomado de clásicos de la predicación de dominio público e incluido en la descarga de su curso para leerse sin conexión.</footer></div><script>
 function key(i){return 'cts-honors-'+document.body.dataset.course+'-'+i}function sync(){document.querySelectorAll('input[type=checkbox]').forEach((c,i)=>c.checked=localStorage.getItem(key(i))==='1');let n=[...document.querySelectorAll('input[type=checkbox]')].filter(x=>x.checked).length;document.getElementById('count').textContent=n}document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('input[type=checkbox]').forEach((c,i)=>c.addEventListener('change',()=>{localStorage.setItem(key(i),c.checked?'1':'0');sync()}));sync()});
 </script></body></html>

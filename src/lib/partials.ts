@@ -47,6 +47,7 @@ export const READING_ROOM: Record<string, string> = {
   CTSEvanPreach: "CTSEvanPreachReadings.html",
   CTSEvangelism: "CTSEvangelismReadings.html",
   CTSGalatians: "CTSGalatiansReadings.html",
+  CTSGenesis: "CTSGenesisReadings.html",
   CTSHS: "CTSHSReadings.html",
   CTSHermeneutics: "CTSHermeneuticsReadings.html",
   CTSJohn: "CTSJohnReadings.html",

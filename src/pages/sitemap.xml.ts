@@ -50,7 +50,7 @@ const STANDALONE: Record<string, number> = {
 
 const isDigest = (f: string) => /_digest\.html$/i.test(f) || /_Digest_/i.test(f);
 const isCertificate = (f: string) => /Certificate\.html$/i.test(f);
-const isReadingRoom = (f: string) => /Readings\.html$/i.test(f);
+const isReadingRoom = (f: string) => /Readings\.html$/i.test(f) || f === 'CTSWRRequired.html';   // the World Religions required readings sit beside its room
 const isEthicsUnit = (f: string) => /^ethics_unit\d+\.html$/i.test(f);
 
 export const GET: APIRoute = async () => {
@@ -68,6 +68,9 @@ export const GET: APIRoute = async () => {
     add(`${entry.data.page}.html`, 0.7);
     add(`${entry.data.page}Test.html`, 0.5);
   }
+  // The required-reading tests (src/pages/[readingtest].astro); the readings
+  // themselves are static pages, classified below.
+  for (const entry of await getCollection('readings')) add(`${entry.data.page}Test.html`, 0.5);
 
   // Everything else is a static page; classify by what it is.
   for (const f of fs.readdirSync('public').filter((f) => f.endsWith('.html'))) {

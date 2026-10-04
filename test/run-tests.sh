@@ -118,6 +118,11 @@ node tools/verify-sitemap.mjs dist
 # published.
 node tools/verify-textbooks.mjs dist
 
+# The reading rooms (Dr. Cook's Add-ons, Oct 2026): every room carries the
+# public-domain shelf its data says and an honours attestation, written by
+# tools/reading-rooms.mjs -- a room edited by hand drifts from the data.
+node tools/reading-rooms.mjs --check
+
 # The question bank: 451 units, 34,778 comparisons of stems, options and answer
 # keys, in a form that does not care what file format the content lives in.
 # The migration plan calls this "the gate for every step" -- and until now the
@@ -226,6 +231,9 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   # locked after a failure, a fresh draw after the wait -- as a student
   # would use the page.
   node tools/verify-textbook-test.mjs "http://127.0.0.1:$PORT"
+  # The reading rooms in a browser: the shelf shows, the attestation records
+  # under the code the certificate reads, in each family of room.
+  node tools/verify-reading-rooms.mjs "http://127.0.0.1:$PORT"
 
   # Every certificate page unlocks for a finished course, records the
   # completion, and shows nothing to a student who passed nothing. Ruth and

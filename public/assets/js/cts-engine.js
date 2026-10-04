@@ -432,7 +432,11 @@
     var nextIsUnit = /Unit\d+\.html$/.test(U.nextHref || "");
     // every unit passed, but on a master's track the course waits for its textbook test
     var tbHold = all && window.CTSRecord && window.CTSRecord.textbookHolds && window.CTSRecord.textbookHolds(U.completion);
-    var go = tbHold ? { href: U.completion.textbookPage + "Test.html", en: "Take the textbook test", es: "Presentar el examen del libro" }
+    // the same hold for a required-reading test (Genesis, World Religions), in its own words
+    var tbReading = tbHold && U.completion.textbookKind === "reading";
+    var go = tbHold ? { href: U.completion.textbookPage + "Test.html",
+                        en: tbReading ? "Take the required-reading test" : "Take the textbook test",
+                        es: tbReading ? "Presentar el examen de lecturas requeridas" : "Presentar el examen del libro" }
       : all && cert ? { href: cert, en: "Go to your course certificate", es: "Ir a su certificado del curso" }
       : nextIsUnit ? { href: U.nextHref, en: "Go to " + nextWhere().en, es: "Ir a la " + nextWhere().es }
       : cert ? { href: cert, en: "See your progress in this course", es: "Ver su progreso en este curso" } : null;
@@ -440,8 +444,11 @@
       '<p class="cts-passed-title">&#10003; ' + bi({ en: "Unit " + U.unit + " passed", es: "Unidad " + U.unit + " aprobada" }) + "</p>" +
       "<p>" + bi({ en: "It is saved to your progress" + (total ? ": " + n + " of " + total + " units of this course passed." : "."),
                    es: "Quedó guardada en su progreso" + (total ? ": " + n + " de " + total + " unidades de este curso aprobadas." : ".") }) + "</p>";
-    if (tbHold) h += "<p>" + bi({ en: "On the M.Div. and Th.M. tracks the course is complete when the textbook test is passed as well.",
-                                  es: "En los trayectos M.Div. y Th.M. el curso se completa cuando también se aprueba el examen del libro de texto." }) + "</p>";
+    if (tbHold) h += "<p>" + bi(tbReading
+      ? { en: "On the M.Div. and Th.M. tracks the course is complete when the required-reading test is passed as well.",
+          es: "En los trayectos M.Div. y Th.M. el curso se completa cuando también se aprueba el examen de lecturas requeridas." }
+      : { en: "On the M.Div. and Th.M. tracks the course is complete when the textbook test is passed as well.",
+          es: "En los trayectos M.Div. y Th.M. el curso se completa cuando también se aprueba el examen del libro de texto." }) + "</p>";
     if (go) h += '<a class="btn solid" href="' + attr(go.href) + '">' + bi({ en: go.en, es: go.es }) + " &rarr;</a>";
     if (cert && go && go.href !== cert)
       h += ' <a class="btn" href="' + attr(cert) + '">' + bi({ en: "Progress in this course", es: "Progreso en este curso" }) + "</a>";

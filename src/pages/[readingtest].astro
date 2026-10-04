@@ -1,0 +1,68 @@
+---
+/* The required-reading test, on a page of its own: CTSGenesisReadingsTest.html
+ * and CTSWRRequiredTest.html (Dr. Cook's "CTS Add-ons", 4 Oct 2026). The same
+ * test as a Master's textbook's -- twenty fill-in-the-blank questions drawn at
+ * random from forty, eighteen right to pass, marked by cts-fill.js -- but on
+ * the course's required readings, which are on the room page, not here, so
+ * the browser's Find cannot search them for an answer. On the M.Div. and
+ * Th.M. tracks the course waits for this pass; Certificate and Associate
+ * students may take it as a learning opportunity. The page's own script is
+ * public/assets/js/cts-textbook.js, which reads `kind` and says "readings"
+ * where it would say "book". */
+import { getCollection } from 'astro:content';
+import Textbook from '../layouts/Textbook.astro';
+import catalog from '../../worker/catalog.json';
+
+export async function getStaticPaths() {
+  const tests = await getCollection('readings');
+  const courses = await getCollection('courses');
+  const units = await getCollection('units');
+  const card = new Map(courses.map((c) => [c.id, c.data]));
+  const slugOf = new Map(units.map((u) => [u.data.pagePrefix, u.data.course]));
+  return tests.map((r) => {
+    const course = card.get(r.data.course);
+    if (!course) throw new Error(`required readings ${r.data.slug} belong to course "${r.data.course}", which has no catalog card`);
+    return { params: { readingtest: `${r.data.page}Test` }, props: { reading: r.data, course, accent: slugOf.get(r.data.course) ?? null } };
+  });
+}
+const { reading, course, accent } = Astro.props;
+const { draw, pass, questions } = reading.test;
+/* What a pass completes, from worker/catalog.json: the one map the Worker
+   applies (the test sits in `textbooks` with kind "reading"). */
+const tb = (catalog.textbooks as Record<string, { code: string; kind: string }>)[reading.slug];
+const unitCourse = Object.entries(catalog.courses as Record<string, { code: string; units: number[]; textbook?: string }>).find(([, c]) => c.textbook === reading.slug);
+if (!tb || !unitCourse) throw new Error(`worker/catalog.json does not carry the required readings ${reading.slug}: run node tools/gen-worker-catalog.mjs`);
+const done = (catalog.completions as Record<string, { name: string; page: string }>)[tb.code];
+const completion = { slug: unitCourse[0], code: tb.code, name: done.name, page: done.page, units: unitCourse[1].units, textbook: reading.slug, textbookKind: 'reading', textbookPage: reading.page };
+const book = { slug: reading.slug, page: reading.page, course: reading.course, title: reading.title, edition: 'readings' };
+const data = JSON.stringify({ slug: reading.slug, page: reading.page, kind: 'reading', title: reading.title, draw, pass, questions, completion }).replace(/</g, '\\u003c');
+---
+<Textbook kind="reading-test" book={book} course={course} accent={accent} scripts={['/assets/js/cts-fill.js', '/assets/js/cts-record.js']} sync={true}>
+  <section class="card tb-about">
+    <h2><span class="lang-en">Required-reading test</span><span class="lang-es">Examen de lecturas requeridas</span></h2>
+    <p>
+      <span class="lang-en">Twenty fill-in-the-blank questions, drawn at random from forty, on {reading.room.en}. You need {pass} of {draw} to pass. Type the missing word or phrase and press Check (or Enter): each answer is marked at once. Capitals, accents and punctuation do not matter; you may answer in English or Spanish. If you fall short, go back to the readings and try again after a short wait; the next attempt draws a fresh twenty.</span>
+      <span class="lang-es">Veinte preguntas para completar, tomadas al azar de cuarenta, sobre {reading.room.es}. Necesita {pass} de {draw} para aprobar. Escriba la palabra o frase que falta y pulse Comprobar (o Intro): cada respuesta se califica en seguida. No importan las mayúsculas, los acentos ni la puntuación; puede responder en inglés o en español. Si no alcanza la nota, vuelva a las lecturas e inténtelo de nuevo tras una breve espera; el siguiente intento toma otras veinte.</span>
+    </p>
+    <p>
+      <span class="lang-en">On the M.Div. and Th.M. tracks this test is required: the course is complete when its units and this test are passed. Certificate and Associate students may take it too, as a learning opportunity; nothing of theirs depends on it.</span>
+      <span class="lang-es">En los trayectos M.Div. y Th.M. este examen es obligatorio: el curso se completa cuando se aprueban sus unidades y este examen. Los estudiantes de Certificado y Asociado también pueden presentarlo, como oportunidad de aprendizaje; nada de lo suyo depende de él.</span>
+    </p>
+    <p class="small muted">
+      <span class="lang-en">The readings are not on this page: <a href={`/${reading.page}.html`}>read them first</a>, then come back.</span>
+      <span class="lang-es">Las lecturas no están en esta página: <a href={`/${reading.page}.html`}>léalas primero</a> y luego vuelva.</span>
+    </p>
+  </section>
+
+  <section class="card tb-test" id="tb-test">
+    <div id="tb-status" role="status"></div>
+    <div id="tb-questions"></div>
+    <div class="actions">
+      <button type="button" class="btn solid" id="tb-submit"><span class="lang-en">Submit the test</span><span class="lang-es">Enviar el examen</span></button>
+      <button type="button" class="btn secondary" id="tb-reset"><span class="lang-en">Clear my answers</span><span class="lang-es">Borrar mis respuestas</span></button>
+    </div>
+    <div id="tb-result" style="margin-top:15px;font-weight:bold;"></div>
+  </section>
+
+  <script is:inline set:html={`window.CTS_TEXTBOOK_TEST = ${data};`} />
+</Textbook>

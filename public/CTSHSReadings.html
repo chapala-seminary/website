@@ -532,6 +532,176 @@
     </article>
 
   </main>
+<!-- CTS-ATTEST: the honours-reading attestation, written by tools/reading-rooms.mjs; edit there -->
+<style>
+.cts-attest{background:var(--card,#fff);border:1px solid var(--line,#dde1ea);border-top:4px solid var(--accent,#1f3d8c);border-radius:10px;padding:18px;margin:22px 0;box-shadow:0 2px 8px #0000000b}
+.cts-attest h2{margin:0 0 8px;font-size:1.25rem}
+.cts-attest label.cts-field{display:block;margin:12px 0 4px;font:700 .9rem Arial,sans-serif;color:var(--muted,#5a6272)}
+.cts-attest input[type=text]{width:100%;max-width:420px;padding:9px 11px;border:1px solid var(--line,#dde1ea);border-radius:7px;font:1rem Georgia,serif}
+.cts-attest .cts-oath{display:flex;gap:10px;align-items:flex-start;margin:12px 0}
+.cts-attest .cts-oath input{width:20px;height:20px;margin-top:2px;accent-color:var(--accent,#1f3d8c);flex-shrink:0}
+.cts-attest .cts-btn{display:inline-block;padding:9px 13px;border-radius:7px;border:0;cursor:pointer;background:var(--accent,#1f3d8c);color:#fff;font:700 .9rem Arial,sans-serif}
+.cts-attest .cts-btn.ghost{background:#fff;color:var(--accent,#1f3d8c);border:1px solid var(--accent,#1f3d8c)}
+.cts-attest .cts-msg{margin:8px 0 0;font-family:Arial,sans-serif;font-size:.92rem;color:#8a1f1f;min-height:1em}
+.cts-attest .cts-done{display:none;margin:8px 0 0;font-family:Arial,sans-serif;font-size:.95rem;color:#2f6b3a}
+.cts-attest .cts-record{display:none;margin-top:16px;padding-top:14px;border-top:2px solid var(--accent,#1f3d8c)}
+.cts-attest .cts-record.show{display:block}
+.cts-attest .cts-record .cts-name{font-size:1.4rem;margin:4px 0}
+.cts-attest .cts-record ul{margin:6px 0 0 18px;padding:0}
+@media print{.cts-attest input,.cts-attest label.cts-field,.cts-attest .cts-oath,.cts-attest .cts-btn,.cts-attest .cts-msg,.cts-attest .cts-done,.cts-attest .cts-intro{display:none!important}.cts-attest .cts-record{display:block!important;border:none}}
+</style>
+<section class="cts-attest" id="cts-attest" data-honors-code="HS" data-honors-course="The Doctrine of the Holy Spirit">
+<h2>Record your reading <span class="es">/ Registre su lectura</span></h2>
+<p class="cts-intro">When you have read your three chosen readings in full, enter your name and affirm it below. This record is kept on your honor, in this browser; it shows on your certificate as <em>with honors</em>.<br><span class="es">Cuando haya leído por completo sus tres lecturas elegidas, escriba su nombre y confírmelo abajo. Este registro se guarda bajo su honor, en este navegador; aparece en su certificado como <em>con honores</em>.</span></p>
+<label class="cts-field" for="cts-att-name">Your name <span class="es">/ Su nombre</span></label>
+<input type="text" id="cts-att-name" autocomplete="name">
+<div class="cts-oath"><input type="checkbox" id="cts-att-oath"><label for="cts-att-oath">On my honor, I have read in full the three readings I selected above.<br><span class="es">Bajo mi honor, he leído por completo las tres lecturas que seleccioné arriba.</span></label></div>
+<button type="button" class="cts-btn" id="cts-att-record">Record my reading <span class="es">/ Registrar mi lectura</span></button>
+<p class="cts-msg" id="cts-att-msg" role="status"></p>
+<p class="cts-done" id="cts-att-done">&#10003; Recorded &mdash; this class counts toward your With Honors progress. <a href="cts-honors.html">The Honors Reading Library &#8599;</a><br><span class="es">&#10003; Registrado &mdash; esta clase cuenta para su progreso Con Honores. <a href="cts-honors.html">La Biblioteca de Lecturas de Honores &#8599;</a></span></p>
+<div class="cts-record" id="cts-att-record-card">
+<div class="num">Honors Reading &mdash; recorded <span class="es">/ Lectura con Honores &mdash; registrada</span></div>
+<div class="cts-name" id="cts-att-rec-name"></div>
+<p>affirmed on <span id="cts-att-rec-date"></span> to have read, in full: <span class="es">/ afirmó haber leído, por completo:</span></p>
+<ul id="cts-att-rec-list"></ul>
+<p class="byline">Chapala Theological Seminary &middot; The Doctrine of the Holy Spirit &middot; present or print this page as your honors reading record. <span class="es">/ Presente o imprima esta página como su registro de lectura con honores.</span></p>
+<p><button type="button" class="cts-btn ghost" onclick="window.print()">Print this record <span class="es">/ Imprimir</span></button> <button type="button" class="cts-btn ghost" id="cts-att-reset">Start over <span class="es">/ Empezar de nuevo</span></button></p>
+</div>
+</section>
+<script>
+(function(){
+  var root=document.getElementById('cts-attest'); if(!root) return;
+  var CODE=root.getAttribute('data-honors-code'), COURSE=root.getAttribute('data-honors-course'), MAX=3;
+  var KEY='cts_honors_v1:'+CODE;
+  function get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+  function el(id){ return document.getElementById(id); }
+  // the five digests' own checkboxes, whatever the page calls them
+  function boxes(){ var m=document.querySelector('main')||document; return Array.prototype.slice.call(m.querySelectorAll('article input[type=checkbox]')); }
+  function titleOf(box){ var a=box.closest('article'); var h=a&&a.querySelector('h3'); if(!h) return ''; var c=h.cloneNode(true); Array.prototype.forEach.call(c.querySelectorAll('.es'),function(s){ s.parentNode.removeChild(s); }); return c.textContent.replace(/\s+/g,' ').trim(); }
+  function say(m){ el('cts-att-msg').textContent=m; }
+  function showDone(on){ el('cts-att-done').style.display=on?'block':'none'; }
+  function record(){
+    var chosen=boxes().filter(function(b){ return b.checked; });
+    var name=el('cts-att-name').value.trim(), oath=el('cts-att-oath').checked;
+    if(chosen.length!==MAX){ say('Choose exactly three readings above to record them. / Elija exactamente tres lecturas arriba para registrarlas.'); return; }
+    if(!name){ say('Enter your name to record your reading. / Escriba su nombre para registrar su lectura.'); return; }
+    if(!oath){ say('Check the box to affirm you have read all three. / Marque la casilla para afirmar que ha leído las tres.'); return; }
+    say('');
+    var now=new Date(), en=now.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    var works=chosen.map(titleOf);
+    el('cts-att-rec-name').textContent=name; el('cts-att-rec-date').textContent=en;
+    var ul=el('cts-att-rec-list'); ul.innerHTML=''; works.forEach(function(w){ var li=document.createElement('li'); li.textContent=w; ul.appendChild(li); });
+    set('cts_honors_name_v1', name);
+    set(KEY, JSON.stringify({name:name,date:en,course:COURSE,works:works}));
+    showDone(true);
+    var card=el('cts-att-record-card'); card.classList.add('show'); card.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function reset(){ el('cts-att-name').value=''; el('cts-att-oath').checked=false; el('cts-att-record-card').classList.remove('show'); say(''); }
+  el('cts-att-record').addEventListener('click', record);
+  el('cts-att-reset').addEventListener('click', reset);
+  if(get(KEY)) showDone(true);
+  var nm=get('cts_honors_name_v1'); if(nm && !el('cts-att-name').value) el('cts-att-name').value=nm;
+})();
+</script>
+<!-- /CTS-ATTEST -->
+
+<!-- CTS-SHELF: the public-domain shelf, written by tools/reading-rooms.mjs from src/data/reading-shelf.json; edit there -->
+<style>
+.cts-shelf{margin:34px 0 10px}
+.cts-shelf-head{text-align:center;margin:0 0 6px}
+.cts-shelf-head h2{font-weight:normal;font-size:1.4rem;border:none;padding:0;margin:0;display:inline-block;color:var(--primary,var(--accent,#5b3a1f))}
+.cts-shelf-rule{width:60px;height:2px;background:var(--gold,#c9a227);margin:12px auto 0}
+.cts-shelf-note{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-left:4px solid var(--gold,#c9a227);border-radius:12px;padding:14px 18px;margin:16px 0 18px;font-size:.96rem}
+.cts-shelf-panel{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-radius:16px;padding:18px 22px;margin:22px 0}
+.cts-shelf-panel > h3{font-weight:normal;font-size:1.15rem;margin:0 0 8px;color:var(--primary,var(--accent,#5b3a1f))}
+.cts-shelf-entry{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-radius:16px;padding:18px 22px;margin:14px 0;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+.cts-shelf-locus{letter-spacing:.16em;text-transform:uppercase;font-size:.68rem;color:var(--gold-deep,var(--accent,#98771d));margin-bottom:6px}
+.cts-shelf-title{font-size:1.1rem;color:var(--primary,var(--accent,#5b3a1f));margin-bottom:2px}
+.cts-shelf-num{display:inline-block;min-width:1.5em;color:var(--gold-deep,var(--accent,#98771d));font-style:italic}
+.cts-shelf-byline{color:var(--ink-soft,var(--muted,#6b5844));font-style:italic;font-size:.92rem;margin-bottom:8px}
+.cts-shelf-caption{font-size:.97rem;margin:8px 0}
+.cts-shelf-foot{margin-top:12px;padding-top:10px;border-top:1px solid var(--border,var(--line,#e5d8c8));display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
+.cts-shelf-link{color:var(--primary,var(--accent,#5b3a1f));text-decoration:none;border-bottom:1.5px solid var(--gold,#c9a227);padding-bottom:1px;font-size:.95rem}
+.cts-shelf-badge{font-size:.8rem;color:var(--ink-soft,var(--muted,#6b5844))}
+@media print{.cts-shelf{display:none}}
+</style>
+<section class="cts-shelf" id="cts-shelf" aria-labelledby="cts-shelf-h">
+<div class="cts-shelf-head"><h2 id="cts-shelf-h">Further Study: Ten Public-Domain Works <span class="es">/ Para Profundizar: diez obras de dominio público</span></h2><div class="cts-shelf-rule"></div></div>
+<div class="cts-shelf-note">These ten works are for further study, for the student who wants to go on reading. They are not part of the honors reading above: that stays as it is &mdash; the five CTS digests, any three read in full and recorded on your honor. All ten are in the public domain; each link opens the work online, and most can also be found in the Internet Archive or Project Gutenberg. Most are in English: the Chrome browser can translate a page (right-click, &ldquo;Translate to&hellip;&rdquo;; on a phone, the browser menu).<br><span class="es">Estas diez obras son para profundizar, para el estudiante que quiere seguir leyendo. No forman parte de la lectura con honores de arriba, que sigue igual: los cinco resúmenes del STC, tres cualesquiera leídos por completo y registrados bajo su honor. Las diez están en el dominio público; cada enlace abre la obra en línea, y la mayoría también se encuentra en Internet Archive o en el Proyecto Gutenberg. La mayoría están en inglés: el navegador Chrome puede traducir una página (clic derecho, &ldquo;Traducir a&hellip;&rdquo;; en un teléfono, el menú del navegador).</span></div>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Whole Doctrine &middot; Person and Work <span class="es">/ Toda la Doctrina &middot; Persona y Obra</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">1.</span> The Person and Work of the Holy Spirit <span class="es">/ La Persona y Obra del Espíritu Santo</span></div>
+<div class="cts-shelf-byline">R. A. Torrey &middot; 1910</div>
+<p class="cts-shelf-caption">Torrey lays out the whole doctrine plainly from Scripture &mdash; that the Holy Spirit is a Person to be known, truly God, and at work convicting, regenerating, indwelling, and empowering the believer. It is the ideal anchor for our course, matching its early units on the Spirit's personality and deity and its later units on His work, in the clear, practical style for which Torrey is loved.<br><span class="es">Torrey expone toda la doctrina con sencillez desde la Escritura &mdash; que el Espíritu Santo es una Persona a quien conocer, verdaderamente Dios, y que obra convenciendo, regenerando, morando y capacitando al creyente. Es el ancla ideal de nuestro curso, correspondiendo a sus primeras unidades sobre la personalidad y la deidad del Espíritu y a sus unidades posteriores sobre su obra, en el estilo claro y práctico por el que se ama a Torrey.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=R.A.+Torrey+The+Person+and+Work+of+the+Holy+Spirit+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Full Doctrine &middot; A Theology of the Spirit <span class="es">/ La Doctrina Completa &middot; Una Teología del Espíritu</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">2.</span> The Doctrine of the Holy Spirit <span class="es">/ La Doctrina del Espíritu Santo</span></div>
+<div class="cts-shelf-byline">George Smeaton &middot; 1882</div>
+<p class="cts-shelf-caption">Smeaton gives the fullest historical and biblical theology of the Spirit on this shelf, tracing His work from creation and the Old Testament through Pentecost and into the church. It is a rich, thorough treatment for the student who wants depth on our first five units; written from a Reformed standpoint, it is best read alongside the Wesleyan voice here, so you weigh the questions where Christians differ.<br><span class="es">Smeaton ofrece la teología del Espíritu más completa, histórica y bíblica, de este estante, trazando su obra desde la creación y el Antiguo Testamento a través de Pentecostés y hasta la iglesia. Es un tratamiento rico y minucioso para el estudiante que quiere profundidad en nuestras primeras cinco unidades; escrito desde una postura reformada, conviene leerlo junto a la voz wesleyana de aquí, para que sopese las cuestiones donde los cristianos difieren.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=George+Smeaton+The+Doctrine+of+the+Holy+Spirit+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Spirit's Saving Work &middot; The Puritan Classic <span class="es">/ La Obra Salvadora del Espíritu &middot; El Clásico Puritano</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">3.</span> A Discourse Concerning the Holy Spirit <span class="es">/ Discurso sobre el Espíritu Santo</span></div>
+<div class="cts-shelf-byline">John Owen &middot; 1674</div>
+<p class="cts-shelf-caption">Owen's monumental work on the Spirit is the greatest of the Puritan treatments, unfolding above all the Spirit's saving work in regeneration and sanctification. It gives our sixth unit its full weight; it presents the Reformed understanding of that saving work, which our course sets fairly beside the Arminian view rather than settling by one system &mdash; read it with Wesley's sermons and judge from Scripture.<br><span class="es">La obra monumental de Owen sobre el Espíritu es el mayor de los tratamientos puritanos, desplegando sobre todo la obra salvadora del Espíritu en la regeneración y la santificación. Da a nuestra sexta unidad todo su peso; presenta la comprensión reformada de esa obra salvadora, que nuestro curso coloca con justicia junto a la postura arminiana en lugar de zanjarla por un solo sistema &mdash; léalo con los sermones de Wesley y juzgue desde la Escritura.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=John+Owen+Discourse+Concerning+the+Holy+Spirit+Pneumatologia+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Witness of the Spirit &middot; Assurance <span class="es">/ El Testimonio del Espíritu &middot; La Seguridad</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">4.</span> The Witness of the Spirit <span style="font-size:.85em;font-style:italic">(Sermons) <span class="es">/ El Testimonio del Espíritu <span style="font-size:.85em;font-style:italic">(Sermones)</span></div>
+<div class="cts-shelf-byline">John Wesley &middot; 1746</div>
+<p class="cts-shelf-caption">Wesley preaches on the Spirit's inner witness &mdash; how the Holy Spirit testifies with our spirit that we are children of God, giving the believer a true and humble assurance of grace. It is the clear Arminian voice on this shelf, the side our course leans toward, set beside the Reformed treatments so the two may be weighed together on the Spirit's work in the heart and His helps to the believer.<br><span class="es">Wesley predica sobre el testimonio interior del Espíritu &mdash; cómo el Espíritu Santo da testimonio a nuestro espíritu de que somos hijos de Dios, dando al creyente una seguridad verdadera y humilde de la gracia. Es la clara voz arminiana de este estante, el lado hacia el que se inclina nuestro curso, puesta junto a los tratamientos reformados para que ambos se sopesen sobre la obra del Espíritu en el corazón y sus ayudas al creyente.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=John+Wesley+The+Witness+of+the+Spirit+sermon+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Indwelling Spirit &middot; Daily Communion <span class="es">/ El Espíritu que Mora en Nosotros &middot; Comunión Diaria</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">5.</span> The Spirit of Christ <span class="es">/ El Espíritu de Cristo</span></div>
+<div class="cts-shelf-byline">Andrew Murray &middot; 1888</div>
+<p class="cts-shelf-caption">Murray writes on the indwelling Spirit with the warmth of a devotional master, teaching the believer to live in daily communion with the Spirit of Christ within. It matches our units on the Spirit's coming and His helps, turning doctrine toward experience &mdash; not merely to know about the Spirit, but to walk in Him and be filled.<br><span class="es">Murray escribe sobre el Espíritu que mora en nosotros con la calidez de un maestro devocional, enseñando al creyente a vivir en comunión diaria con el Espíritu de Cristo interior. Corresponde a nuestras unidades sobre la venida del Espíritu y sus ayudas, volviendo la doctrina hacia la experiencia &mdash; no solo saber acerca del Espíritu, sino andar en Él y ser llenos.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Andrew+Murray+The+Spirit+of+Christ+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Spirit's Ministry &middot; In the Believer <span class="es">/ El Ministerio del Espíritu &middot; En el Creyente</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">6.</span> The Ministry of the Spirit <span class="es">/ El Ministerio del Espíritu</span></div>
+<div class="cts-shelf-byline">A. J. Gordon &middot; 1894</div>
+<p class="cts-shelf-caption">Gordon unfolds the Spirit's ministry in the believer and the church &mdash; regenerating, indwelling, sealing, filling, and bearing fruit &mdash; in a warm and orderly study. It serves our units on the Spirit's saving work and His helps, and shows the Spirit not as a doctrine to be filed away but as the living power for holiness and service.<br><span class="es">Gordon despliega el ministerio del Espíritu en el creyente y en la iglesia &mdash; regenerando, morando, sellando, llenando y dando fruto &mdash; en un estudio cálido y ordenado. Sirve a nuestras unidades sobre la obra salvadora del Espíritu y sus ayudas, y muestra al Espíritu no como una doctrina para archivar sino como el poder vivo para la santidad y el servicio.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=A.J.+Gordon+The+Ministry+of+the+Spirit+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Grieve Not the Spirit &middot; The Heart's Experience <span class="es">/ No Contristéis al Espíritu &middot; La Experiencia del Corazón</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">7.</span> The Work of the Holy Spirit <span class="es">/ La Obra del Espíritu Santo</span></div>
+<div class="cts-shelf-byline">Octavius Winslow &middot; 1840</div>
+<p class="cts-shelf-caption">Winslow writes on the Spirit's work as it is felt in the believer's own heart &mdash; convicting, comforting, and sanctifying &mdash; with unusual tenderness and self-searching. It touches our seventh unit directly, for it dwells on what it means to grieve and to quench the Spirit, and how the same gentle Spirit restores the soul that has wounded Him.<br><span class="es">Winslow escribe sobre la obra del Espíritu tal como se siente en el propio corazón del creyente &mdash; convenciendo, consolando y santificando &mdash; con inusual ternura y examen de sí mismo. Toca directamente nuestra séptima unidad, pues se detiene en lo que significa contristar y apagar al Espíritu, y cómo el mismo Espíritu apacible restaura al alma que le ha herido.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Octavius+Winslow+The+Work+of+the+Holy+Spirit+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Fruit of the Spirit &middot; Love, the Greatest <span class="es">/ El Fruto del Espíritu &middot; El Amor, el Mayor</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">8.</span> The Greatest Thing in the World <span class="es">/ Lo Más Grande del Mundo</span></div>
+<div class="cts-shelf-byline">Henry Drummond &middot; 1887</div>
+<p class="cts-shelf-caption">Drummond's famous address on First Corinthians thirteen holds up love as the greatest thing in the world &mdash; and love stands first among the fruit our ninth unit studies. Short, luminous, and beloved for over a century, it shows that the surest evidence of the Spirit is not power or gift but the quiet growth of Christlike love, and sends the reader back to Galatians five with new eyes.<br><span class="es">El célebre discurso de Drummond sobre Primera de Corintios trece exalta el amor como lo más grande del mundo &mdash; y el amor es el primero entre los frutos que estudia nuestra novena unidad. Breve, luminoso y amado por más de un siglo, muestra que la evidencia más segura del Espíritu no es el poder ni el don sino el callado crecimiento del amor semejante al de Cristo, y devuelve al lector a Gálatas cinco con nuevos ojos.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Henry+Drummond+The+Greatest+Thing+in+the+World+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Gifts and Synthesis &middot; A Balanced Survey <span class="es">/ Dones y Síntesis &middot; Un Estudio Equilibrado</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">9.</span> The Holy Spirit of God <span class="es">/ El Espíritu Santo de Dios</span></div>
+<div class="cts-shelf-byline">W. H. Griffith Thomas &middot; 1913</div>
+<p class="cts-shelf-caption">Griffith Thomas surveys the whole doctrine of the Spirit with rare balance &mdash; biblical, historical, and practical &mdash; and treats the gifts of the Spirit soberly, without the extremes of either side. It is an excellent companion to our tenth unit and its synthesis, gathering the threads of the course into one clear, reverent, and even-handed view.<br><span class="es">Griffith Thomas examina toda la doctrina del Espíritu con rara mesura &mdash; bíblica, histórica y práctica &mdash; y trata los dones del Espíritu con sobriedad, sin los extremos de ningún lado. Es un excelente compañero de nuestra décima unidad y su síntesis, reuniendo los hilos del curso en una visión clara, reverente y equilibrada.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=W.H.+Griffith+Thomas+The+Holy+Spirit+of+God+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">A Bible Study &middot; The Spirit Through Scripture <span class="es">/ Un Estudio Bíblico &middot; El Espíritu a Través de la Escritura</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">10.</span> Through the Eternal Spirit <span class="es">/ Por el Espíritu Eterno</span></div>
+<div class="cts-shelf-byline">James Elder Cumming &middot; 1891</div>
+<p class="cts-shelf-caption">Cumming offers a plain Bible study of the Holy Spirit, tracing His name and work through the whole of Scripture from Genesis onward. It is a warm, accessible guide that touches our unit on the Spirit in the Old Testament and draws the doctrine together for the reader who wants to search it out passage by passage with an open Bible.<br><span class="es">Cumming ofrece un sencillo estudio bíblico del Espíritu Santo, trazando su nombre y su obra a través de toda la Escritura desde Génesis en adelante. Es una guía cálida y accesible que toca nuestra unidad sobre el Espíritu en el Antiguo Testamento y reúne la doctrina para el lector que quiere escudriñarla pasaje por pasaje con la Biblia abierta.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=James+Elder+Cumming+Through+the+Eternal+Spirit+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+</section>
+<!-- /CTS-SHELF -->
+
 
   <div class="notice">
     <strong>Honor attestation:</strong> By selecting three readings above, you affirm that you have read those three digests in full. The digests are CTS-authored summaries that may include brief excerpts or adaptations of public-domain works.<br>
