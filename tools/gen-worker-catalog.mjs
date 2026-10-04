@@ -131,7 +131,26 @@ for (const [slug, c] of Object.entries(courses)) {
   if (unknown.length) { console.error(`worker/awards.js requires courses no page records: ${unknown.join(', ')}`); process.exit(2); }
 }
 
-const text = JSON.stringify({ generated: 'tools/gen-worker-catalog.mjs -- do not edit', courses, completions }, null, 2) + '\n';
+// The Master's textbooks (src/content/textbooks), by the completion code of the
+// course each belongs to: a unit course by its slug, the two single-page
+// courses by the code their certificate page names. On the master's tracks the
+// course is complete only when the textbook test is passed (worker/awards.js,
+// public/assets/js/cts-record.js); the pages and the Worker read this one map.
+const textbooks = {};
+{
+  const SINGLE = { CTSCounseling: 'COUNSELING', CTS_Narrative_Preaching: 'STORYTEL' };
+  const dir = 'src/content/textbooks';
+  for (const f of fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => f.endsWith('.json')).sort() : []) {
+    const t = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
+    const unitCourse = Object.entries(courses).find(([, c]) => c.pages === t.course);
+    const code = unitCourse ? unitCourse[1].code : SINGLE[t.course];
+    if (!code || !completions[code]) { console.error(`textbook ${t.slug}: its course ${t.course} has no completion code`); process.exit(2); }
+    if (unitCourse) unitCourse[1].textbook = t.slug;
+    textbooks[t.slug] = { code, page: t.page, title: t.title };
+  }
+}
+
+const text = JSON.stringify({ generated: 'tools/gen-worker-catalog.mjs -- do not edit', courses, completions, textbooks }, null, 2) + '\n';
 if (process.argv.includes('--check')) {
   const cur = fs.existsSync(OUT) ? fs.readFileSync(OUT, 'utf8') : '';
   if (cur !== text) { console.error(`${OUT} is out of date: run node tools/gen-worker-catalog.mjs`); process.exit(1); }

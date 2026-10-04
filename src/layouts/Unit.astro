@@ -58,11 +58,14 @@ const pills = unitNumbers
 // count, and every unit it takes. From worker/catalog.json, which is generated
 // from the same unit files and certificate pages, so the Worker and the page
 // cannot disagree about what a course is.
-const cat = (catalog.courses as Record<string, { code: string; units: number[] }>)[unit.course];
+const cat = (catalog.courses as Record<string, { code: string; units: number[]; textbook?: string }>)[unit.course];
 const done = cat && (catalog.completions as Record<string, { name: string; page: string }>)[cat.code];
 if (!cat || !done) throw new Error(`worker/catalog.json has no course "${unit.course}": run node tools/gen-worker-catalog.mjs`);
 const unitJson = JSON.stringify({ ...unit,
-  completion: { slug: unit.course, code: cat.code, name: done.name, page: done.page, units: cat.units },
+  completion: { slug: unit.course, code: cat.code, name: done.name, page: done.page, units: cat.units,
+                // the course's Master's textbook, which the master's tracks must pass the test of
+                textbook: cat.textbook ?? null,
+                textbookPage: cat.textbook ? (catalog.textbooks as Record<string, { page: string }>)[cat.textbook].page : null },
 }).replace(/</g, '\\u003c');
 
 /* Each script and the stylesheet are addressed with a fingerprint of their

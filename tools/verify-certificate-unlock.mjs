@@ -74,6 +74,12 @@ for (const [slug, c] of Object.entries(catalog.courses)) {
   for (const u of c.units) { progress[`unit${u}`] = true; passed[`cts_${slug}_u${u}_mc_passed`] = '1'; }
   passed[`cts_${slug}_progress`] = JSON.stringify(progress);
   const none = { cts_student: passed.cts_student, cts_track: 'mdiv' };
+  // A course with a Master's textbook: on the master's tracks the certificate
+  // waits for the textbook test as well (Dr. Cook, 4 Oct 2026); the
+  // Certificate track does not.
+  const held = c.textbook ? { ...passed } : null;
+  if (c.textbook) passed[`cts_textbook_${c.textbook}_passed`] = '2026-10-04';
+  const certTrack = c.textbook ? { ...held, cts_student: JSON.stringify({ name: 'Prueba Test', track: 'cert' }), cts_track: 'cert' } : null;
 
   const unitPage = `${c.pages}Unit${c.units[0]}.html`;
   for (const f of files) {
@@ -87,6 +93,13 @@ for (const [slug, c] of Object.entries(catalog.courses)) {
     ok(yes.done.includes(code), `${f}: unlocking did not record the completion code ${code} (got ${JSON.stringify(yes.done)})`);
     // the downloadable PDF (assets/js/cts-cert-pdf.js) is offered with the diploma, and only then
     ok(!yes.diploma || yes.pdf, `${f}: the unlocked certificate has no Download PDF button`);
+    if (held) {
+      const h = await open(f, unitPage, held);
+      ok(!h.diploma && !h.pdf, `${f}: shows the diploma to a master's student who has not passed the ${c.textbook} textbook test`);
+      ok(!h.done.includes(code), `${f}: records ${code} for a master's student without the textbook test (got ${JSON.stringify(h.done)})`);
+      const ct = await open(f, unitPage, certTrack);
+      ok(ct.diploma && ct.done.includes(code), `${f}: a Certificate-track student is held by the textbook test, which does not apply to them`);
+    }
     const no = await open(f, unitPage, none);
     ok(!no.diploma, `${f}: shows the diploma to a student who passed nothing`);
     ok(!no.done.includes(code), `${f}: records completion ${code} for a student who passed nothing`);

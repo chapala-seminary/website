@@ -133,6 +133,41 @@ const student = JSON.stringify({ name: 'T', track: 'cert' });
   await ctx.close();
 }
 
+// 6. the course waits for the test on the master's tracks (Dr. Cook, 4 Oct 2026)
+{
+  const units = {}; for (let u = 1; u <= 10; u++) units['unit' + u] = true;
+  const mdiv = { cts_student: JSON.stringify({ name: 'T', track: 'mdiv' }), cts_track: 'mdiv', cts_cults_progress: JSON.stringify(units) };
+  // a master's student with every Cults unit passed: not complete, told to take the test
+  const { ctx, p, errs } = await open(mdiv);
+  await p.goto(`${BASE}/CTSCultsUnit10.html`, { waitUntil: 'load' }); await p.waitForTimeout(400);
+  const u = await p.evaluate(() => ({ done: localStorage.getItem('cts_done_codes') || '', banner: (document.getElementById('cts-passed-banner') || {}).innerText || '' }));
+  ok(!u.done.includes('CTSCULTS'), `a master's student with all Cults units is recorded complete without the textbook test (${u.done})`);
+  ok(/textbook test/i.test(u.banner), `the passed banner does not send the master's student to the textbook test: "${u.banner.slice(0, 120)}"`);
+  // the certificate page holds the diploma and says why
+  await p.goto(`${BASE}/CTSCultsCertificate.html`, { waitUntil: 'load' }); await p.waitForTimeout(800);
+  const c1 = await p.evaluate(() => { const v = (el) => !!(el && el.offsetParent !== null); return { dip: v(document.querySelector('#diploma,#cert-wrap,.diploma,#certificate,.certificate,#cert,.cert-wrap')), hold: v(document.getElementById('cts-textbook-hold')) }; });
+  ok(!c1.dip && c1.hold, `the certificate page should hold the diploma and show the textbook note (diploma ${c1.dip}, note ${c1.hold})`);
+  // passing the test completes the course
+  await p.goto(`${BASE}/${PAGE}`, { waitUntil: 'load' }); await p.waitForTimeout(200);
+  await answer(p, 20);
+  await p.locator('#tb-submit').click(); await p.waitForTimeout(500);
+  const after = await p.evaluate(() => ({ done: localStorage.getItem('cts_done_codes') || '', mdiv: localStorage.getItem('cts_mdiv_done_codes') || '', res: document.getElementById('tb-result').textContent }));
+  ok(after.done.includes('CTSCULTS') && after.mdiv.includes('CTSCULTS'), `passing the test did not complete the course on the M.Div. list (${after.done} / ${after.mdiv})`);
+  ok(/completes the course/.test(after.res), `the result does not say the course is complete: "${after.res}"`);
+  await p.goto(`${BASE}/CTSCultsCertificate.html`, { waitUntil: 'load' }); await p.waitForTimeout(800);
+  const c2 = await p.evaluate(() => { const v = (el) => !!(el && el.offsetParent !== null); return { dip: v(document.querySelector('#diploma,#cert-wrap,.diploma,#certificate,.certificate,#cert,.cert-wrap')), hold: v(document.getElementById('cts-textbook-hold')) }; });
+  ok(c2.dip && !c2.hold, `after the test the certificate should show (diploma ${c2.dip}, note ${c2.hold})`);
+  ok(errs.length === 0, 'page errors in the master\'s flow', errs[0]);
+  await ctx.close();
+  // a Certificate-track student is not held
+  const cert = { ...mdiv, cts_student: JSON.stringify({ name: 'T', track: 'cert' }), cts_track: 'cert' };
+  const b = await open(cert);
+  await b.p.goto(`${BASE}/CTSCultsUnit10.html`, { waitUntil: 'load' }); await b.p.waitForTimeout(400);
+  const d = await b.p.evaluate(() => localStorage.getItem('cts_done_codes') || '');
+  ok(d.includes('CTSCULTS'), `a Certificate-track student with all Cults units is held by the textbook test, which does not apply to them (${d})`);
+  await b.ctx.close();
+}
+
 await browser.close();
 console.log(`${checks} assertions on ${PAGE}`);
 if (!fails.length) console.log('PASS — the textbook test draws, marks, locks and keeps as Dr. Cook asked.');

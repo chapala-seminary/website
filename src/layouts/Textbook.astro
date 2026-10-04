@@ -18,8 +18,9 @@ interface Props {
   course: Card;
   accent: string | null;      // the course's storage slug, for its colour
   scripts?: string[];
+  sync?: boolean;             // the test page: a pass goes to the student record
 }
-const { kind, book, course, accent, scripts = [] } = Astro.props;
+const { kind, book, course, accent, scripts = [], sync = false } = Astro.props;
 const title = kind === 'book'
   ? `CTS Textbook: ${book.title.en}`
   : `CTS Textbook Test: ${book.title.en}`;
@@ -100,5 +101,6 @@ const title = kind === 'book'
 
     {scripts.map((src) => <script is:inline src={version(src)}></script>)}
     <script is:inline src={version('/assets/js/cts-textbook.js')}></script>
+    {sync && <script is:inline src={version('/assets/js/cts-sync.js')} defer></script>}
   </body>
 </html>

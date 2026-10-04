@@ -47,8 +47,8 @@ if (empty.length)
 // finished a course before completion moved off the certificate page, and
 // never opens one of its units again, is recorded when they visit the front
 // page. Single-page courses record themselves (CTSCurriculum.markComplete).
-const recordable = Object.entries(catalog.courses as Record<string, { code: string; units: number[] }>)
-  .map(([slug, c]) => ({ slug, code: c.code, units: c.units,
+const recordable = Object.entries(catalog.courses as Record<string, { code: string; units: number[]; textbook?: string }>)
+  .map(([slug, c]) => ({ slug, code: c.code, units: c.units, textbook: c.textbook ?? null,
     name: (catalog.completions as Record<string, { name: string; page: string }>)[c.code].name,
     page: (catalog.completions as Record<string, { name: string; page: string }>)[c.code].page }));
 const recordJson = JSON.stringify(recordable).replace(/</g, '\\u003c');

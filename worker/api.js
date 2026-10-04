@@ -21,7 +21,7 @@
  * from a student, which makes a stale or offline device harmless.
  */
 
-import { courseShortfall, degreeShortfall, resolveCourse, studentLevel, DEGREES } from './awards.js';
+import { courseShortfall, textbookShortfall, degreeShortfall, resolveCourse, studentLevel, DEGREES } from './awards.js';
 import catalog from './catalog.json';
 import { emailConfigured, sendEmail, verificationEmail, certificateEmail } from './email.js';
 import { notify, notifyBatch, retryFailed } from './notify.js';
@@ -101,10 +101,11 @@ async function loadState(env, id) {
     'SELECT id, name, email, email_verified_at, country, track, goal, heard, created_at, updated_at FROM students WHERE id = ?')
     .bind(id).first();
   if (!student) return null;
-  const [progress, completions, certs] = await Promise.all([
+  const [progress, completions, certs, textbooks] = await Promise.all([
     env.DB.prepare('SELECT course, unit, completed_at FROM unit_progress WHERE student_id = ? ORDER BY course, unit').bind(id).all(),
     env.DB.prepare('SELECT code, track, completed_at FROM course_completions WHERE student_id = ? ORDER BY code').bind(id).all(),
     env.DB.prepare('SELECT verify_code, level, course, title, issued_at, revoked_at FROM certificates WHERE student_id = ? ORDER BY issued_at').bind(id).all(),
+    env.DB.prepare('SELECT textbook, passed_at FROM textbook_results WHERE student_id = ? ORDER BY textbook').bind(id).all(),
   ]);
   // Each completion carries the track it was earned on and the course name
   // the certificate page wrote, so a device restored from a code can rebuild
@@ -123,7 +124,26 @@ async function loadState(env, id) {
     completions: done,
     degrees,
     certificates: certs.results ?? [],
+    // the textbook tests passed (migration 0009): a course's completion on the
+    // master's tracks waits for its textbook's (worker/awards.js)
+    textbooks: textbooks.results ?? [],
   };
+}
+
+/* A textbook test passed on any device stays passed, with the earliest time
+ * either side knows about -- the same rule as a unit. */
+function textbookRows(id, raw) {
+  if (!Array.isArray(raw)) return [];
+  const seen = new Map();
+  for (const t of raw.slice(0, 200)) {
+    if (!t || typeof t !== 'object') continue;
+    const slug = String(t.slug || t.textbook || '').toLowerCase();
+    if (!/^[a-z]{2,40}$/.test(slug)) continue;
+    const at = typeof t.passedAt === 'string' && !Number.isNaN(Date.parse(t.passedAt)) ? new Date(t.passedAt).toISOString() : now();
+    const prev = seen.get(slug);
+    if (!prev || at < prev) seen.set(slug, at);
+  }
+  return [...seen].map(([slug, at]) => [id, slug, at]);
 }
 
 /* A unit passed on any device stays passed, and keeps the earliest completion
@@ -227,12 +247,29 @@ async function sync(request, env) {
        ON CONFLICT(student_id, course, unit) DO UPDATE SET completed_at = MIN(completed_at, excluded.completed_at)`)
       .bind(...row));
 
+  const textbookRowsNow = textbookRows(id, b.textbooks);
+  for (const row of textbookRowsNow)
+    statements.push(env.DB.prepare(
+      `INSERT INTO textbook_results (student_id, textbook, passed_at) VALUES (?, ?, ?)
+       ON CONFLICT(student_id, textbook) DO UPDATE SET passed_at = MIN(passed_at, excluded.passed_at)`)
+      .bind(...row));
+
   // A completion's level only rises: a row with none takes the first any
   // device reports, and a Certificate or Associate completion is raised when a
   // device reports it done at a higher level (the student did the further
   // work). A stale device reporting a lower level changes nothing.
   const trackNow = (s && typeof s === 'object' && String(s.track || '').toLowerCase()) || exists.track;
-  const completions = completionRows(id, b.doneCodes, b.completionTracks, trackNow);
+  let completions = completionRows(id, b.doneCodes, b.completionTracks, trackNow);
+  /* A master's-level completion of a course with a textbook is not recorded
+     until the record holds a pass on its textbook test (Dr. Cook, 4 Oct
+     2026). The browser reports its completions on every sync, so the course
+     is recorded by the sync after the test is passed. Completions the record
+     already holds are left as they are. */
+  {
+    const passed = new Set(textbookRowsNow.map(([, slug]) => slug));
+    for (const r of (await env.DB.prepare('SELECT textbook FROM textbook_results WHERE student_id = ?').bind(id).all()).results ?? []) passed.add(r.textbook);
+    completions = completions.filter(([, code, track]) => !textbookShortfall(code, track, [...passed]));
+  }
   // Which of these the record did not hold before this request: those are the
   // completions the seminary has not heard about, and the ones it is told of
   // below. Read before the batch, so a course re-reported from a second device
@@ -308,13 +345,17 @@ async function issueCertificate(request, env) {
     if (c.units) {
       const rows = await env.DB.prepare(
         'SELECT unit FROM unit_progress WHERE student_id = ? AND course = ?').bind(id, c.slug).all();
-      const why = courseShortfall(c.slug, (rows.results ?? []).map((r) => r.unit));
+      const tb = (await env.DB.prepare('SELECT textbook FROM textbook_results WHERE student_id = ?').bind(id).all()).results ?? [];
+      const why = courseShortfall(c.slug, (rows.results ?? []).map((r) => r.unit), studentLevel(student.track, student.goal), tb);
       if (why) return fail(409, why);
     } else {
       // A single-page course keeps no units; its completion code is the record.
       const row = await env.DB.prepare(
         'SELECT 1 FROM course_completions WHERE student_id = ? AND code = ?').bind(id, c.code).first();
       if (!row) return fail(409, 'course completion not recorded: ' + c.code);
+      const tb = (await env.DB.prepare('SELECT textbook FROM textbook_results WHERE student_id = ?').bind(id).all()).results ?? [];
+      const why = textbookShortfall(c.code, studentLevel(student.track, student.goal), tb);
+      if (why) return fail(409, why);
     }
   } else {
     const rows = await env.DB.prepare(
@@ -462,6 +503,7 @@ async function deleteStudent(env, rawCode) {
   await env.DB.batch([
     env.DB.prepare('DELETE FROM unit_progress WHERE student_id = ?').bind(id),
     env.DB.prepare('DELETE FROM course_completions WHERE student_id = ?').bind(id),
+    env.DB.prepare('DELETE FROM textbook_results WHERE student_id = ?').bind(id),
     env.DB.prepare('DELETE FROM certificates WHERE student_id = ?').bind(id),
     env.DB.prepare('DELETE FROM email_challenges WHERE student_id = ?').bind(id),
     env.DB.prepare('DELETE FROM notifications WHERE student_id = ?').bind(id),

@@ -100,14 +100,22 @@
     return false;
   }
 
+  /* On the M.Div. and Th.M. tracks a course with a Master's textbook is
+     complete only when its textbook test is passed as well (Dr. Cook, 4 Oct
+     2026); cts-textbook.js records the pass and calls course() again. The
+     Certificate and Associate tracks are not held by it. */
+  function mastersTrack() { var t = trackToken(); return t === "mdiv" || t === "thm" || t === "mth"; }
+  function textbookPassed(slug) { return !!get("cts_textbook_" + slug + "_passed"); }
+  function textbookHolds(c) { return !!(c && c.textbook && mastersTrack() && !textbookPassed(c.textbook)); }
+
   function complete(c) {
     if (!c) return false;
-    if (c.single) return singleComplete(c);
+    if (c.single) return singleComplete(c) && !textbookHolds(c);
     if (!c.slug || !c.units || !c.units.length) return false;
     var p = json("cts_" + c.slug + "_progress", {}) || {};
     for (var i = 0; i < c.units.length; i++)
       if (!p["unit" + c.units[i]] && !legacyPassed(c.slug, c.units[i])) return false;
-    return true;
+    return !textbookHolds(c);
   }
 
   /* The single-page courses keep their own state and record themselves when
@@ -122,7 +130,7 @@
       state: "cts_wisespeak_state", layout: "cts_wisespeak_layout",
       units: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], before: { "": [1, 2, 3, 4, 5, 6, 7, 8, 9] } },
     { single: true, code: "COUNSELING", name: "Counseling", page: "CTSCounselingCertificate.html",
-      state: "cts_drakeford_state", units: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }
+      state: "cts_drakeford_state", units: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], textbook: "counseling" }
   ];
   function singleComplete(c) {
     var st = json(c.state, null);
@@ -178,5 +186,7 @@
       return n;
     },
     isComplete: complete,
+    // true when only the textbook test stands between this student and the course
+    textbookHolds: textbookHolds,
   };
 })();

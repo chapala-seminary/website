@@ -159,15 +159,26 @@
       if (lockRemaining()) { renderStatus(); return; }
       if (passedOn() && !practice) return;
       var r = fill.submit();
-      var ok = r.score >= T.pass;
+      var ok = r.score >= T.pass, completedNow = false;
       if (ok) {
         if (!practice) {
           var d = new Date(), when = d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
           lsSet(KEY.passed, when);
           var all = jget("cts_textbooks_passed", []); if (all.indexOf(slug) === -1) { all.push(slug); lsSet("cts_textbooks_passed", JSON.stringify(all)); }
           lsDel(KEY.lock); delete state.redrawAt; save();
+          /* On the master's tracks the course was waiting for this: record it
+             now (cts-record.js) and send the record up (cts-sync.js). The
+             single-page courses record themselves on their own page, so for
+             them only the pass is sent. */
+          try {
+            var c = T.completion;
+            if (window.CTSRecord && c && !c.single) completedNow = window.CTSRecord.course(c);
+            if (window.CTS_SYNC && window.CTS_SYNC.sync) window.CTS_SYNC.sync();
+          } catch (e) {}
         }
-        say(bi({ en: "&#10003; Passed: " + r.score + " of " + r.n + " right (" + T.pass + " needed).", es: "&#10003; Aprobado: " + r.score + " de " + r.n + " correctas (se necesitan " + T.pass + ")." }), "#1f6b3b");
+        say(bi({ en: "&#10003; Passed: " + r.score + " of " + r.n + " right (" + T.pass + " needed)." + (completedNow === "new" ? " That completes the course: " : ""),
+                 es: "&#10003; Aprobado: " + r.score + " de " + r.n + " correctas (se necesitan " + T.pass + ")." + (completedNow === "new" ? " Con esto el curso queda completo: " : "") })
+            + (completedNow === "new" && T.completion.page ? '<a href="/' + esc(T.completion.page) + '">' + bi({ en: "your certificate", es: "su certificado" }) + "</a>" : ""), "#1f6b3b");
         practice = false;
       } else {
         var mins = isMasters() ? LOCK_MASTERS_MIN : LOCK_CERT_MIN;
