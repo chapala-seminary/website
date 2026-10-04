@@ -8,7 +8,10 @@
  *   fill-in grader, so a word that passes in a unit passes here.
  *
  *   The page carries the bank as window.CTS_TEXTBOOK_TEST:
- *     { slug, page, title, draw, pass, questions: [{ prompt, answer, accept }] }
+ *     { slug, page, kind, title, draw, pass, questions: [{ prompt, answer, accept }] }
+ *   kind is "textbook" or "reading": the required-reading tests (Genesis
+ *   Intensive, World Religions; Dr. Cook's Add-ons, 4 Oct 2026) are the same
+ *   test on the course's readings, and only the words differ.
  *
  * WHAT IS KEPT, in this browser (nothing reaches the seminary's record yet --
  * whether a textbook test counts toward a master's course is Dr. Cook's and
@@ -77,7 +80,10 @@
   function testPage() {
     var T = window.CTS_TEXTBOOK_TEST;
     if (!T || !window.CTSFill) return;
-    var slug = T.slug, n = T.questions.length;
+    var slug = T.slug, n = T.questions.length, reading = T.kind === "reading";
+    var W = reading
+      ? { passed: { en: "Required-reading test passed", es: "Examen de lecturas requeridas aprobado" }, review: { en: "Go back to the readings", es: "Vuelva a las lecturas" } }
+      : { passed: { en: "Textbook test passed", es: "Examen del libro aprobado" }, review: { en: "Review the book", es: "Repase el libro" } };
     var KEY = { state: "cts_textbook_" + slug + "_state", lock: "cts_textbook_" + slug + "_lock", passed: "cts_textbook_" + slug + "_passed" };
     var LOCK_MASTERS_MIN = 15, LOCK_CERT_MIN = 2;
     function track() { var s = jget("cts_student", null); return String(lsGet("cts_track") || (s && s.track) || "cert").toLowerCase(); }
@@ -130,12 +136,12 @@
     function renderStatus() {
       var when = passedOn(), m = lockRemaining(), h = "";
       if (when && !practice) {
-        h += '<div class="cts-passed"><p class="cts-passed-title">&#10003; ' + bi({ en: "Textbook test passed", es: "Examen del libro aprobado" }) + "</p>" +
+        h += '<div class="cts-passed"><p class="cts-passed-title">&#10003; ' + bi(W.passed) + "</p>" +
              "<p>" + bi({ en: "Passed on " + esc(when) + ". It is saved in this browser.", es: "Aprobado el " + esc(when) + ". Quedó guardado en este navegador." }) + "</p>" +
              '<button type="button" class="btn" id="tb-practice">' + bi({ en: "Try another twenty, for practice", es: "Otras veinte, para practicar" }) + "</button></div>";
       } else if (m) {
-        h += '<div class="exam-status fail">' + bi({ en: "Locked after a failed attempt. Review the book and try again in " + m + " minute(s); the next attempt draws a fresh twenty.",
-                                                     es: "Bloqueado tras un intento fallido. Repase el libro e inténtelo de nuevo en " + m + " minuto(s); el siguiente intento toma otras veinte." }) + "</div>";
+        h += '<div class="exam-status fail">' + bi({ en: "Locked after a failed attempt. " + W.review.en + " and try again in " + m + " minute(s); the next attempt draws a fresh twenty.",
+                                                     es: "Bloqueado tras un intento fallido. " + W.review.es + " e inténtelo de nuevo en " + m + " minuto(s); el siguiente intento toma otras veinte." }) + "</div>";
       }
       status.innerHTML = h;
       var pb = el("tb-practice");
@@ -185,8 +191,8 @@
         var until = Date.now() + mins * 60000;
         lsSet(KEY.lock, String(until));
         state.redrawAt = until; save();
-        say(bi({ en: "Not yet: " + r.score + " of " + r.n + " right, " + T.pass + " needed. Review the book and try again in " + mins + " minute(s).",
-                 es: "Aún no: " + r.score + " de " + r.n + " correctas; se necesitan " + T.pass + ". Repase el libro e inténtelo de nuevo en " + mins + " minuto(s)." }), "#8a1f1f");
+        say(bi({ en: "Not yet: " + r.score + " of " + r.n + " right, " + T.pass + " needed. " + W.review.en + " and try again in " + mins + " minute(s).",
+                 es: "Aún no: " + r.score + " de " + r.n + " correctas; se necesitan " + T.pass + ". " + W.review.es + " e inténtelo de nuevo en " + mins + " minuto(s)." }), "#8a1f1f");
       }
       fill.render();
       renderStatus();

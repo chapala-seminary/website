@@ -31,7 +31,7 @@ interface Props {
   unitNumbers: number[];
   /* The course's Master's textbook, when it has one (src/content/textbooks):
      a box under the greeting on every unit, with the book and its test. */
-  textbook?: { page: string; title: { en: string; es: string } } | null;
+  textbook?: { page: string; title: { en: string; es: string }; kind: 'textbook' | 'reading' } | null;
 }
 const { title, bodyClass, styles, scripts, unit, body, pagePrefix, unitNumbers, textbook = null } = Astro.props;
 
@@ -65,7 +65,9 @@ const unitJson = JSON.stringify({ ...unit,
   completion: { slug: unit.course, code: cat.code, name: done.name, page: done.page, units: cat.units,
                 // the course's Master's textbook, which the master's tracks must pass the test of
                 textbook: cat.textbook ?? null,
-                textbookPage: cat.textbook ? (catalog.textbooks as Record<string, { page: string }>)[cat.textbook].page : null },
+                textbookPage: cat.textbook ? (catalog.textbooks as Record<string, { page: string }>)[cat.textbook].page : null,
+                // "textbook", or "reading" for a required-reading test (the same rule, other words)
+                textbookKind: cat.textbook ? (catalog.textbooks as Record<string, { kind: string }>)[cat.textbook].kind : null },
 }).replace(/</g, '\\u003c');
 
 /* Each script and the stylesheet are addressed with a fingerprint of their
@@ -193,7 +195,19 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
         </p>
       </section>
       <p id="greeting" class="muted" style="margin-top:0"></p>
-      {textbook && (
+      {textbook && textbook.kind === 'reading' && (
+        <aside class="cts-textbook" id="cts-textbook" data-kind="reading">
+          <span class="cts-textbook-mark" aria-hidden="true">📖</span>
+          <span>
+            <strong><span class="lang-en">Required readings for this course</span><span class="lang-es">Lecturas requeridas de este curso</span></strong>
+            <span class="lang-en"> — required on the M.Div. and Th.M. tracks, open to every student: </span><span class="lang-es"> — obligatorias en los trayectos M.Div. y Th.M., abiertas a todos los estudiantes: </span>
+            <a href={`/${textbook.page}.html`}><span class="lang-en">{textbook.title.en}</span><span class="lang-es">{textbook.title.es}</span></a>
+            &nbsp;·&nbsp;
+            <a href={`/${textbook.page}Test.html`}><span class="lang-en">Required-reading test</span><span class="lang-es">Examen de lecturas requeridas</span></a>
+          </span>
+        </aside>
+      )}
+      {textbook && textbook.kind !== 'reading' && (
         <aside class="cts-textbook" id="cts-textbook">
           <span class="cts-textbook-mark" aria-hidden="true">📘</span>
           <span>

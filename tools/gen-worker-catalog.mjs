@@ -146,7 +146,19 @@ const textbooks = {};
     const code = unitCourse ? unitCourse[1].code : SINGLE[t.course];
     if (!code || !completions[code]) { console.error(`textbook ${t.slug}: its course ${t.course} has no completion code`); process.exit(2); }
     if (unitCourse) unitCourse[1].textbook = t.slug;
-    textbooks[t.slug] = { code, page: t.page, title: t.title };
+    textbooks[t.slug] = { code, page: t.page, title: t.title, kind: 'textbook' };
+  }
+  // The required-reading tests (src/content/readings, Dr. Cook's Add-ons, 4 Oct
+  // 2026) sit in the same map with kind "reading": the Worker and the pages
+  // apply one rule to both, and only the words differ.
+  const rdir = 'src/content/readings';
+  for (const f of fs.existsSync(rdir) ? fs.readdirSync(rdir).filter((f) => f.endsWith('.json')).sort() : []) {
+    const t = JSON.parse(fs.readFileSync(path.join(rdir, f), 'utf8'));
+    const unitCourse = Object.entries(courses).find(([, c]) => c.pages === t.course);
+    if (!unitCourse) { console.error(`required readings ${t.slug}: its course ${t.course} is not a unit course`); process.exit(2); }
+    if (unitCourse[1].textbook) { console.error(`required readings ${t.slug}: ${t.course} already waits for ${unitCourse[1].textbook}; a course has one required test`); process.exit(2); }
+    unitCourse[1].textbook = t.slug;
+    textbooks[t.slug] = { code: unitCourse[1].code, page: t.page, title: t.title, kind: 'reading' };
   }
 }
 

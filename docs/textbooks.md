@@ -32,6 +32,15 @@ Which courses:
 The page names are permanent once the site is live: they are the addresses
 students bookmark and the keys their browsers keep a pass under.
 
+## The required-reading tests (Genesis Intensive, World Religions)
+
+Dr. Cook's Add-ons (4 Oct 2026) bind a forty-question bank to each of these
+two courses the way a textbook is bound: the same test page, draw, pass mark,
+grader, record (`textbook_results`), hold on the master's tracks and gate on
+the certificate page, with "required readings" said wherever "textbook"
+would be. They sit in the same map (`worker/catalog.json` `textbooks`, kind
+`reading`; a course has one required test). See `docs/reading-rooms.md`.
+
 ## Where things live
 
 | Path | What |

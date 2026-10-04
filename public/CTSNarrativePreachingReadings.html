@@ -528,6 +528,176 @@
     </article>
 
   </main>
+<!-- CTS-ATTEST: the honours-reading attestation, written by tools/reading-rooms.mjs; edit there -->
+<style>
+.cts-attest{background:var(--card,#fff);border:1px solid var(--line,#dde1ea);border-top:4px solid var(--accent,#1f3d8c);border-radius:10px;padding:18px;margin:22px 0;box-shadow:0 2px 8px #0000000b}
+.cts-attest h2{margin:0 0 8px;font-size:1.25rem}
+.cts-attest label.cts-field{display:block;margin:12px 0 4px;font:700 .9rem Arial,sans-serif;color:var(--muted,#5a6272)}
+.cts-attest input[type=text]{width:100%;max-width:420px;padding:9px 11px;border:1px solid var(--line,#dde1ea);border-radius:7px;font:1rem Georgia,serif}
+.cts-attest .cts-oath{display:flex;gap:10px;align-items:flex-start;margin:12px 0}
+.cts-attest .cts-oath input{width:20px;height:20px;margin-top:2px;accent-color:var(--accent,#1f3d8c);flex-shrink:0}
+.cts-attest .cts-btn{display:inline-block;padding:9px 13px;border-radius:7px;border:0;cursor:pointer;background:var(--accent,#1f3d8c);color:#fff;font:700 .9rem Arial,sans-serif}
+.cts-attest .cts-btn.ghost{background:#fff;color:var(--accent,#1f3d8c);border:1px solid var(--accent,#1f3d8c)}
+.cts-attest .cts-msg{margin:8px 0 0;font-family:Arial,sans-serif;font-size:.92rem;color:#8a1f1f;min-height:1em}
+.cts-attest .cts-done{display:none;margin:8px 0 0;font-family:Arial,sans-serif;font-size:.95rem;color:#2f6b3a}
+.cts-attest .cts-record{display:none;margin-top:16px;padding-top:14px;border-top:2px solid var(--accent,#1f3d8c)}
+.cts-attest .cts-record.show{display:block}
+.cts-attest .cts-record .cts-name{font-size:1.4rem;margin:4px 0}
+.cts-attest .cts-record ul{margin:6px 0 0 18px;padding:0}
+@media print{.cts-attest input,.cts-attest label.cts-field,.cts-attest .cts-oath,.cts-attest .cts-btn,.cts-attest .cts-msg,.cts-attest .cts-done,.cts-attest .cts-intro{display:none!important}.cts-attest .cts-record{display:block!important;border:none}}
+</style>
+<section class="cts-attest" id="cts-attest" data-honors-code="NarrativePreaching" data-honors-course="Narrative Preaching">
+<h2>Record your reading <span class="es">/ Registre su lectura</span></h2>
+<p class="cts-intro">When you have read your three chosen readings in full, enter your name and affirm it below. This record is kept on your honor, in this browser; it shows on your certificate as <em>with honors</em>.<br><span class="es">Cuando haya leído por completo sus tres lecturas elegidas, escriba su nombre y confírmelo abajo. Este registro se guarda bajo su honor, en este navegador; aparece en su certificado como <em>con honores</em>.</span></p>
+<label class="cts-field" for="cts-att-name">Your name <span class="es">/ Su nombre</span></label>
+<input type="text" id="cts-att-name" autocomplete="name">
+<div class="cts-oath"><input type="checkbox" id="cts-att-oath"><label for="cts-att-oath">On my honor, I have read in full the three readings I selected above.<br><span class="es">Bajo mi honor, he leído por completo las tres lecturas que seleccioné arriba.</span></label></div>
+<button type="button" class="cts-btn" id="cts-att-record">Record my reading <span class="es">/ Registrar mi lectura</span></button>
+<p class="cts-msg" id="cts-att-msg" role="status"></p>
+<p class="cts-done" id="cts-att-done">&#10003; Recorded &mdash; this class counts toward your With Honors progress. <a href="cts-honors.html">The Honors Reading Library &#8599;</a><br><span class="es">&#10003; Registrado &mdash; esta clase cuenta para su progreso Con Honores. <a href="cts-honors.html">La Biblioteca de Lecturas de Honores &#8599;</a></span></p>
+<div class="cts-record" id="cts-att-record-card">
+<div class="num">Honors Reading &mdash; recorded <span class="es">/ Lectura con Honores &mdash; registrada</span></div>
+<div class="cts-name" id="cts-att-rec-name"></div>
+<p>affirmed on <span id="cts-att-rec-date"></span> to have read, in full: <span class="es">/ afirmó haber leído, por completo:</span></p>
+<ul id="cts-att-rec-list"></ul>
+<p class="byline">Chapala Theological Seminary &middot; Narrative Preaching &middot; present or print this page as your honors reading record. <span class="es">/ Presente o imprima esta página como su registro de lectura con honores.</span></p>
+<p><button type="button" class="cts-btn ghost" onclick="window.print()">Print this record <span class="es">/ Imprimir</span></button> <button type="button" class="cts-btn ghost" id="cts-att-reset">Start over <span class="es">/ Empezar de nuevo</span></button></p>
+</div>
+</section>
+<script>
+(function(){
+  var root=document.getElementById('cts-attest'); if(!root) return;
+  var CODE=root.getAttribute('data-honors-code'), COURSE=root.getAttribute('data-honors-course'), MAX=3;
+  var KEY='cts_honors_v1:'+CODE;
+  function get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+  function el(id){ return document.getElementById(id); }
+  // the five digests' own checkboxes, whatever the page calls them
+  function boxes(){ var m=document.querySelector('main')||document; return Array.prototype.slice.call(m.querySelectorAll('article input[type=checkbox]')); }
+  function titleOf(box){ var a=box.closest('article'); var h=a&&a.querySelector('h3'); if(!h) return ''; var c=h.cloneNode(true); Array.prototype.forEach.call(c.querySelectorAll('.es'),function(s){ s.parentNode.removeChild(s); }); return c.textContent.replace(/\s+/g,' ').trim(); }
+  function say(m){ el('cts-att-msg').textContent=m; }
+  function showDone(on){ el('cts-att-done').style.display=on?'block':'none'; }
+  function record(){
+    var chosen=boxes().filter(function(b){ return b.checked; });
+    var name=el('cts-att-name').value.trim(), oath=el('cts-att-oath').checked;
+    if(chosen.length!==MAX){ say('Choose exactly three readings above to record them. / Elija exactamente tres lecturas arriba para registrarlas.'); return; }
+    if(!name){ say('Enter your name to record your reading. / Escriba su nombre para registrar su lectura.'); return; }
+    if(!oath){ say('Check the box to affirm you have read all three. / Marque la casilla para afirmar que ha leído las tres.'); return; }
+    say('');
+    var now=new Date(), en=now.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    var works=chosen.map(titleOf);
+    el('cts-att-rec-name').textContent=name; el('cts-att-rec-date').textContent=en;
+    var ul=el('cts-att-rec-list'); ul.innerHTML=''; works.forEach(function(w){ var li=document.createElement('li'); li.textContent=w; ul.appendChild(li); });
+    set('cts_honors_name_v1', name);
+    set(KEY, JSON.stringify({name:name,date:en,course:COURSE,works:works}));
+    showDone(true);
+    var card=el('cts-att-record-card'); card.classList.add('show'); card.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function reset(){ el('cts-att-name').value=''; el('cts-att-oath').checked=false; el('cts-att-record-card').classList.remove('show'); say(''); }
+  el('cts-att-record').addEventListener('click', record);
+  el('cts-att-reset').addEventListener('click', reset);
+  if(get(KEY)) showDone(true);
+  var nm=get('cts_honors_name_v1'); if(nm && !el('cts-att-name').value) el('cts-att-name').value=nm;
+})();
+</script>
+<!-- /CTS-ATTEST -->
+
+<!-- CTS-SHELF: the public-domain shelf, written by tools/reading-rooms.mjs from src/data/reading-shelf.json; edit there -->
+<style>
+.cts-shelf{margin:34px 0 10px}
+.cts-shelf-head{text-align:center;margin:0 0 6px}
+.cts-shelf-head h2{font-weight:normal;font-size:1.4rem;border:none;padding:0;margin:0;display:inline-block;color:var(--primary,var(--accent,#5b3a1f))}
+.cts-shelf-rule{width:60px;height:2px;background:var(--gold,#c9a227);margin:12px auto 0}
+.cts-shelf-note{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-left:4px solid var(--gold,#c9a227);border-radius:12px;padding:14px 18px;margin:16px 0 18px;font-size:.96rem}
+.cts-shelf-panel{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-radius:16px;padding:18px 22px;margin:22px 0}
+.cts-shelf-panel > h3{font-weight:normal;font-size:1.15rem;margin:0 0 8px;color:var(--primary,var(--accent,#5b3a1f))}
+.cts-shelf-entry{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-radius:16px;padding:18px 22px;margin:14px 0;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+.cts-shelf-locus{letter-spacing:.16em;text-transform:uppercase;font-size:.68rem;color:var(--gold-deep,var(--accent,#98771d));margin-bottom:6px}
+.cts-shelf-title{font-size:1.1rem;color:var(--primary,var(--accent,#5b3a1f));margin-bottom:2px}
+.cts-shelf-num{display:inline-block;min-width:1.5em;color:var(--gold-deep,var(--accent,#98771d));font-style:italic}
+.cts-shelf-byline{color:var(--ink-soft,var(--muted,#6b5844));font-style:italic;font-size:.92rem;margin-bottom:8px}
+.cts-shelf-caption{font-size:.97rem;margin:8px 0}
+.cts-shelf-foot{margin-top:12px;padding-top:10px;border-top:1px solid var(--border,var(--line,#e5d8c8));display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
+.cts-shelf-link{color:var(--primary,var(--accent,#5b3a1f));text-decoration:none;border-bottom:1.5px solid var(--gold,#c9a227);padding-bottom:1px;font-size:.95rem}
+.cts-shelf-badge{font-size:.8rem;color:var(--ink-soft,var(--muted,#6b5844))}
+@media print{.cts-shelf{display:none}}
+</style>
+<section class="cts-shelf" id="cts-shelf" aria-labelledby="cts-shelf-h">
+<div class="cts-shelf-head"><h2 id="cts-shelf-h">Further Study: Ten Public-Domain Works <span class="es">/ Para Profundizar: diez obras de dominio público</span></h2><div class="cts-shelf-rule"></div></div>
+<div class="cts-shelf-note">These ten works are for further study, for the student who wants to go on reading. They are not part of the honors reading above: that stays as it is &mdash; the five CTS digests, any three read in full and recorded on your honor. All ten are in the public domain; each link opens the work online, and most can also be found in the Internet Archive or Project Gutenberg. Most are in English: the Chrome browser can translate a page (right-click, &ldquo;Translate to&hellip;&rdquo;; on a phone, the browser menu).<br><span class="es">Estas diez obras son para profundizar, para el estudiante que quiere seguir leyendo. No forman parte de la lectura con honores de arriba, que sigue igual: los cinco resúmenes del STC, tres cualesquiera leídos por completo y registrados bajo su honor. Las diez están en el dominio público; cada enlace abre la obra en línea, y la mayoría también se encuentra en Internet Archive o en el Proyecto Gutenberg. La mayoría están en inglés: el navegador Chrome puede traducir una página (clic derecho, &ldquo;Traducir a&hellip;&rdquo;; en un teléfono, el menú del navegador).</span></div>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Bible as Story &middot; Why Narrative <span class="es">/ La Biblia como Historia &middot; Por Qué la Narrativa</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">1.</span> The Literary Study of the Bible <span class="es">/ El Estudio Literario de la Biblia</span></div>
+<div class="cts-shelf-byline">Richard G. Moulton &middot; 1895</div>
+<p class="cts-shelf-caption">Moulton was among the first to read the Bible as the great literature it is &mdash; showing how much of Scripture comes to us as story, drama, and poetry, each with its own shape and power. It lays the foundation for this whole course, making the biblical case for narrative plain: God did not give us mostly lists and arguments, but mostly stories, and the preacher who would be faithful must learn to preach them as stories.<br><span class="es">Moulton fue de los primeros en leer la Biblia como la gran literatura que es &mdash; mostrando cuánto de la Escritura nos llega como historia, drama y poesía, cada uno con su propia forma y poder. Sienta el fundamento de todo este curso, haciendo claro el caso bíblico de la narrativa: Dios no nos dio en su mayor parte listas y argumentos, sino en su mayor parte historias, y el predicador que quiera ser fiel debe aprender a predicarlas como historias.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Richard+Moulton+The+Literary+Study+of+the+Bible+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Parables of Jesus &middot; The Master's Method <span class="es">/ Las Parábolas de Jesús &middot; El Método del Maestro</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">2.</span> The Parabolic Teaching of Christ <span class="es">/ La Enseñanza Parabólica de Cristo</span></div>
+<div class="cts-shelf-byline">A. B. Bruce &middot; 1882</div>
+<p class="cts-shelf-caption">Bruce studies the parables of Jesus as a whole &mdash; how the Master taught the deepest truths not in propositions but in unforgettable little stories drawn from field and home and road. It is the ideal companion to the course's module on the parables, showing both what Jesus taught through them and how He told them, and setting before every preacher the supreme example of the story used to carry truth into the heart.<br><span class="es">Bruce estudia las parábolas de Jesús como un todo &mdash; cómo el Maestro enseñó las verdades más profundas no en proposiciones sino en pequeñas historias inolvidables tomadas del campo, el hogar y el camino. Es el compañero ideal del módulo del curso sobre las parábolas, mostrando tanto lo que Jesús enseñó por ellas como el modo en que las contó, y poniendo ante cada predicador el ejemplo supremo de la historia usada para llevar la verdad al corazón.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=A.B.+Bruce+The+Parabolic+Teaching+of+Christ+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Preaching the Bible's Narratives &middot; The Scene Made Alive <span class="es">/ Predicar los Relatos de la Biblia &middot; La Escena Hecha Viva</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">3.</span> The People's Bible <span class="es">/ La Biblia del Pueblo</span></div>
+<div class="cts-shelf-byline">Joseph Parker &middot; 1885</div>
+<p class="cts-shelf-caption">Joseph Parker preached his way through the whole Bible in these volumes with a dramatic, imaginative power that filled his London pulpit for years. He does not merely explain the narratives; he makes them happen before you. It is a rich model for the course's module on preaching the Bible's own stories, showing how a preacher can enter a scene, feel its weight, and bring a congregation in with him.<br><span class="es">Joseph Parker predicó a través de toda la Biblia en estos volúmenes con un poder dramático e imaginativo que llenó su púlpito de Londres por años. No se limita a explicar los relatos; los hace suceder ante usted. Es un rico modelo para el módulo del curso sobre predicar los relatos mismos de la Biblia, mostrando cómo un predicador puede entrar en una escena, sentir su peso, y llevar consigo a la congregación.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Joseph+Parker+The+People%27s+Bible+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Preaching the Text &middot; A Master Expositor <span class="es">/ Predicar el Texto &middot; Un Maestro Expositor</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">4.</span> Expositions of Holy Scripture <span class="es">/ Exposiciones de la Sagrada Escritura</span></div>
+<div class="cts-shelf-byline">Alexander Maclaren &middot; early 1900s</div>
+<p class="cts-shelf-caption">Maclaren was one of the great expository preachers of his age, and these expositions open passage after passage with clarity, warmth, and a gift for the vivid phrase that lodges in the memory. They model the course's aim of preaching the text so it lives, showing how careful attention to a narrative and a well-turned word can make an old story new for people who have heard it many times.<br><span class="es">Maclaren fue uno de los grandes predicadores expositivos de su época, y estas exposiciones abren pasaje tras pasaje con claridad, calidez y un don para la frase vívida que se aloja en la memoria. Modelan el objetivo del curso de predicar el texto para que viva, mostrando cómo la atención cuidadosa a un relato y una palabra bien dicha pueden hacer nueva una vieja historia para quienes la han oído muchas veces.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Alexander+Maclaren+Expositions+of+Holy+Scripture+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Preaching a Bible Story &middot; Scene by Scene <span class="es">/ Predicar una Historia Bíblica &middot; Escena por Escena</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">5.</span> Elijah the Tishbite <span class="es">/ Elías el Tisbita</span></div>
+<div class="cts-shelf-byline">F. W. Krummacher &middot; 1836</div>
+<p class="cts-shelf-caption">Krummacher takes the story of Elijah and preaches it as a gripping drama, scene by scene &mdash; the drought, the ravens, the fire on Carmel, the still small voice &mdash; never losing the truth in the telling nor the telling in the truth. It is a superb model for the course's modules on preaching biblical narrative and biography, showing how a single life from the Old Testament can hold a congregation and feed them at once.<br><span class="es">Krummacher toma la historia de Elías y la predica como un drama cautivador, escena por escena &mdash; la sequía, los cuervos, el fuego en el Carmelo, el silbo apacible &mdash; sin perder nunca la verdad en el relato ni el relato en la verdad. Es un modelo excelente para los módulos del curso sobre predicar el relato bíblico y la biografía, mostrando cómo una sola vida del Antiguo Testamento puede cautivar a una congregación y alimentarla a la vez.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Krummacher+Elijah+the+Tishbite+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Biographical Preaching &middot; The Preacher's Insight <span class="es">/ La Predicación Biográfica &middot; La Perspicacia del Predicador</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">6.</span> Sermons <span class="es">/ Sermones</span></div>
+<div class="cts-shelf-byline">Frederick W. Robertson &middot; 1855</div>
+<p class="cts-shelf-caption">Frederick Robertson, preaching in Brighton, had a rare gift for seeing into the hearts of the Bible's people and the meaning beneath its scenes, and his sermons have been treasured ever since for their insight. They model the course's biographical and narrative preaching at a high level, showing how a preacher can enter a Bible character's struggle so deeply that the hearer sees his own struggle in it.<br><span class="es">Frederick Robertson, predicando en Brighton, tenía un don raro para ver dentro de los corazones de la gente de la Biblia y el sentido bajo sus escenas, y sus sermones han sido atesorados desde entonces por su perspicacia. Modelan la predicación biográfica y narrativa del curso a un alto nivel, mostrando cómo un predicador puede entrar en la lucha de un personaje bíblico tan hondamente que el oyente ve su propia lucha en ella.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Frederick+W.+Robertson+Sermons+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Biographical Preaching &middot; Bible People Made Real <span class="es">/ La Predicación Biográfica &middot; La Gente de la Biblia Hecha Real</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">7.</span> Bible Characters <span class="es">/ Personajes de la Biblia</span></div>
+<div class="cts-shelf-byline">Alexander Whyte &middot; 1896</div>
+<p class="cts-shelf-caption">Whyte's sketches of the men and women of Scripture are the classic of biographical preaching &mdash; drawing each figure with such honesty and life that we recognize ourselves in their sins and their grace. It is the model to study for the course's module on biographical preaching, teaching the preacher to look closely at a Bible person until the portrait becomes a mirror, and the old story searches the hearer's own heart.<br><span class="es">Los retratos de Whyte de los hombres y mujeres de la Escritura son el clásico de la predicación biográfica &mdash; dibujando a cada figura con tal honestidad y vida que nos reconocemos en sus pecados y su gracia. Es el modelo a estudiar para el módulo del curso sobre la predicación biográfica, enseñando al predicador a mirar de cerca a una persona bíblica hasta que el retrato se vuelve espejo, y la vieja historia escudriña el corazón del oyente.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Alexander+Whyte+Bible+Characters+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Story Inside the Sermon &middot; The Power of the Picture <span class="es">/ La Historia Dentro del Sermón &middot; El Poder de la Imagen</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">8.</span> The Gospel in Ezekiel <span class="es">/ El Evangelio en Ezequiel</span></div>
+<div class="cts-shelf-byline">Thomas Guthrie &middot; 1855</div>
+<p class="cts-shelf-caption">Guthrie was famous above all for his power of illustration, and here he preaches the gospel from Ezekiel in a stream of vivid pictures that light up the truth and hold the eye. It speaks straight to the course's module on the story inside the sermon, showing how a well-chosen image or scene, placed within an argument, can carry a truth past the defenses of the mind and into the heart, where it stays.<br><span class="es">Guthrie fue famoso sobre todo por su poder de ilustración, y aquí predica el evangelio desde Ezequiel en un caudal de imágenes vívidas que iluminan la verdad y retienen la mirada. Habla directamente al módulo del curso sobre la historia dentro del sermón, mostrando cómo una imagen o escena bien elegida, puesta dentro de un argumento, puede llevar una verdad más allá de las defensas de la mente y hasta el corazón, donde permanece.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Thomas+Guthrie+The+Gospel+in+Ezekiel+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Power of Story &middot; A Tale That Preaches <span class="es">/ El Poder de la Historia &middot; Un Relato que Predica</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">9.</span> In His Steps <span class="es">/ En Sus Pasos</span></div>
+<div class="cts-shelf-byline">Charles M. Sheldon &middot; 1896</div>
+<p class="cts-shelf-caption">Sheldon did not write an argument for following Jesus; he wrote a story about it &mdash; and that story has moved more people than a hundred arguments could. It is itself a demonstration of the course's opening case for narrative: that a well-told story slips past our defenses and reaches the will as bare instruction rarely does, and it shows the preacher the sheer converting power that lives in a story faithfully told.<br><span class="es">Sheldon no escribió un argumento a favor de seguir a Jesús; escribió una historia sobre ello &mdash; y esa historia ha movido a más personas de las que cien argumentos podrían. Es en sí misma una demostración del caso inicial del curso a favor de la narrativa: que una historia bien contada se desliza más allá de nuestras defensas y alcanza la voluntad como rara vez lo hace la mera instrucción, y muestra al predicador el puro poder transformador que vive en una historia contada con fidelidad.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Charles+Sheldon+In+His+Steps+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Story Sermon &middot; The Supreme Example <span class="es">/ El Sermón-Historia &middot; El Ejemplo Supremo</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">10.</span> The Pilgrim's Progress <span class="es">/ El Progreso del Peregrino</span></div>
+<div class="cts-shelf-byline">John Bunyan &middot; 1678</div>
+<p class="cts-shelf-caption">Bunyan preached the whole Christian life as one great story &mdash; a journey with a beginning, a burden, a cross, dangers, companions, and a Celestial City at the end &mdash; and it has done the work of ten thousand sermons. It is the supreme example in English of the story sermon, the form the course sets before you, and proof that a tale rightly shaped can teach doctrine, stir the heart, and be remembered for three centuries.<br><span class="es">Bunyan predicó toda la vida cristiana como una gran historia &mdash; un viaje con un comienzo, una carga, una cruz, peligros, compañeros y una Ciudad Celestial al final &mdash; y ha hecho la obra de diez mil sermones. Es el ejemplo supremo en inglés del sermón-historia, la forma que el curso pone ante usted, y prueba de que un relato bien formado puede enseñar doctrina, conmover el corazón y ser recordado por tres siglos.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=John+Bunyan+The+Pilgrim%27s+Progress+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+</section>
+<!-- /CTS-SHELF -->
+
 
   <div class="notice">
     <strong>Honor attestation:</strong> By selecting three readings above, you affirm that you have read those three digests in full. The digests are CTS-authored summaries that may include brief excerpts or adaptations of public-domain works.<br>

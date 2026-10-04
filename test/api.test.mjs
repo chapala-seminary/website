@@ -304,15 +304,15 @@ d = await jpost('/api/certificate', { code: CODE, level: 'thm', title: 'Master o
 ok(d.status === 201, `an mdiv student with foundation + 5 earns the Th.M. (${d.status}: ${d.body?.error})`);
 
 // M.Div.: 30 including the 20-course core. Three core courses have a Master's
-// textbook, so on this master's track their completions wait for the
-// textbook tests (4 Oct 2026): first without the passes -- held and refused --
-// then with them.
+// textbook and one (Genesis) required readings, so on this master's track
+// their completions wait for the tests (4 Oct 2026): first without the
+// passes -- held and refused -- then with them.
 await jpost('/api/sync', { code: CODE, doneCodes: [...MDIV_CORE, ...filler(10)] });
 d = await jpost('/api/certificate', { code: CODE, level: 'mdiv', title: 'Master of Divinity' });
-ok(d.status === 409 && /CTSLA|COUNSELING|CTSWORSHIP/.test(d.body?.error || ''),
+ok(d.status === 409 && /CTSLA|COUNSELING|CTSWORSHIP|CTSGENESIS/.test(d.body?.error || ''),
   `without the textbook tests the core's textbook courses are held and the M.Div. refused (${d.status}: ${d.body?.error})`);
 await jpost('/api/sync', { code: CODE, doneCodes: [...MDIV_CORE, ...filler(10)],
-  textbooks: ['language', 'counseling', 'worship'].map((slug) => ({ slug, passedAt: T_LATE })) });
+  textbooks: ['language', 'counseling', 'worship', 'genesisreadings'].map((slug) => ({ slug, passedAt: T_LATE })) });
 d = await jpost('/api/certificate', { code: CODE, level: 'mdiv', title: 'Master of Divinity' });
 ok(d.status === 201, `the 20-course core + 10 electives earns the M.Div. (${d.status}: ${d.body?.error})`);
 
