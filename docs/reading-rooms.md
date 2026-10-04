@@ -44,9 +44,16 @@ and refuses a room whose certificate it cannot find.
 
 ## Known limits
 
-- Most "Open reading" links on the shelf are web searches for the work, as
-  delivered; a few point at the Internet Archive, Gutenberg or CCEL.
-- The World Religions Required Readings page lists the works with no links
-  in the delivery; the site adds a search link per work, nothing more.
+- The shelf links straight to a public-domain copy wherever a stable, legal
+  one exists (Dr. Cook, 4 Oct 2026): 305 of the 336 delivered web searches
+  now open the work itself on the Internet Archive, Project Gutenberg, CCEL
+  or the Wesley Center, each checked for title, author, a pre-1930 edition
+  and an open (not borrow-only) copy. 31 stay searches: the work is still in
+  copyright, or exists online only as a borrow-only or modern reprint.
+  `tools/apply-shelf-links.mjs` applies a result file; a few links open the
+  first volume of a set or a larger volume containing the work. Seven links
+  in the delivery itself were dead (404) and were replaced the same way.
+- The World Religions Required Readings page links each of its five works
+  directly (the three primary texts separately).
 - The Honors Reading Library page (`cts-honors.html`) still describes the
   rooms as "five complete readings", which remains true.

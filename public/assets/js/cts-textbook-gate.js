@@ -58,6 +58,16 @@
       dip.parentNode.insertBefore(note, dip);
     }
     if (!note) return;
+    /* Some pages hide the diploma's whole wrapper until the units are done
+       (Doctrinal Preaching), and the note went with it, so a master's student
+       there never learned the test was needed. Put it before the outermost
+       hidden wrapper instead. */
+    if (hold && note.offsetParent === null) {
+      var top = null;
+      for (var a = note.parentNode; a && a !== b; a = a.parentNode)
+        if (window.getComputedStyle(a).display === "none") top = a;
+      if (top && note.nextSibling !== top) top.parentNode.insertBefore(note, top);
+    }
     var state = (hold ? "hold" : "clear") + ":" + (isEs() ? "es" : "en");
     if (state === shown) return;
     shown = state;

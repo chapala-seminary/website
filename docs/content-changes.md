@@ -1103,6 +1103,69 @@ Details: `docs/textbooks.md`.
 
 Details: `docs/reading-rooms.md`.
 
+### 8ah. Dr. Cook's external beta audit (4 Oct 2026, evening)
+
+His five findings, and the site-wide checks he asked for, run on the working
+copy rather than on the pages he happened to see.
+
+* **The exam rule names every track.** 716 blocks in 385 lessons said
+  "Certificate students: Answer 1–20. M.Div. / Th.M. students: Answer all
+  30" (or one of eight variants, some with rules the one engine does not
+  apply: a 70/30 weighting, a 15-minute lock for every track, "you will be
+  redirected to your certificate"). Each is now the sentence Dr. Cook
+  approved for Parables (§8af), naming the Certificate, the Associate and the
+  master's tracks; courses that split the rule over two blocks keep two
+  blocks; headings no longer count "30 Questions" on a page that asks 40.
+  The Spanish is rewritten with the English (its `from` hash reset).
+  `tools/fix-exam-instructions.mjs`; `--check` fails on any old wording.
+  Ethics' ten pages already named the Associate; their headings lose the count.
+* **Old track pickers hidden.** New Testament, Biblical Languages, Ruth &
+  Esther and Evangelistic Preaching still showed their own engines' track
+  pickers: no Associate, not connected to grading, and Ruth & Esther's stored
+  the track as "undefined". The engine hides them; the track is chosen at
+  registration and named in the greeting. CTSBible's working buttons stay.
+* **"Included in your course download"** is gone from 47 pages (reading
+  rooms, the honours page, the Stage 1 anthology), English and Spanish:
+  the readings are "available here on the site". The "Reading offline"
+  headings and "on your device, with no internet connection" go with it.
+  `tools/fix-download-wording.mjs --check`. CTSResources.html keeps
+  "offline": it describes third-party apps that are.
+* **A course with a textbook or required readings** is complete on the
+  M.Div. and Th.M. tracks only with its test passed (§8af); the front page's
+  How to Proceed, Before You Begin's levels, the Counseling course page and
+  the locked text of the 17 certificate pages of those eleven courses now
+  say so. The hold note (`cts-textbook-gate.js`) was inside a hidden wrapper
+  on Doctrinal Preaching's certificate while the units were unfinished; it
+  now moves above the outermost hidden wrapper.
+* **Privacy page**: what the seminary keeps now lists test passes and course
+  completions; deletion names them; "what is held" counts test passes; it
+  says honours readings stay in the browser.
+* **Spanish lesson missing on 20 units.** Holy Spirit and Life of Christ
+  ship their Spanish as `<div id="teach-es" class="hide">`; the stylesheet's
+  `.hide{display:none!important}` won, and a Spanish reader saw no lesson
+  at all. One rule in `cts.css`. Found by rendering all 841 pages in each
+  language and comparing the visible text section by section; no other page
+  differs by more than ordinary translation length. World Religions is at
+  parity (Spanish 6–14% longer than English in every unit).
+* **"44 courses"**: the Catalog page's intro (both languages) and `llms.txt`.
+* **World Religions Required Readings**: direct links to the five works
+  (Internet Archive, Project Gutenberg), three for the primary texts.
+* **Further Study shelf: direct public-domain links.** 305 of the 336 web
+  searches on the 41 shelves now open the work itself (Internet Archive,
+  Project Gutenberg, CCEL, Wesley Center), each checked for title, author, a
+  pre-1930 edition and an open copy; 31 stay searches where no dependable
+  legal copy exists. Seven dead links in the delivery replaced. The honours
+  rule (any three of the five digests) is untouched. `docs/reading-rooms.md`.
+* **Fill-in accepted answers.** 2,546 alternatives added across the 5,050
+  unit fill-ins (synonyms, plural/singular, fuller forms, digits, standard
+  spellings), each kept only after a strict question-by-question review;
+  7,512 drafted forms were rejected. 894 questions now accept three or more
+  in both languages; most of the rest test one specific name, term or
+  Scripture word and are listed for Dr. Cook. `_review/fill-ins/variants/`
+  (README, per-course proposals, kept and removed lists);
+  `tools/fill-variants.mjs`. Baselines re-recorded (content, prose, lesson
+  render).
+
 ## How to check any of this yourself
 
 ```

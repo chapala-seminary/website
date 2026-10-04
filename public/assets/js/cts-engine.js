@@ -834,7 +834,25 @@
   }
 
   // ---- boot --------------------------------------------------------------
+  /* Four courses kept a track picker from their own engines: radio buttons
+     (New Testament, Biblical Languages), a drop-down (Ruth & Esther,
+     Evangelistic Preaching). None offered the Associate, and none was
+     connected to grading -- Ruth & Esther's stored the track as "undefined".
+     The track is chosen once, at registration, and the greeting names it, so
+     they are hidden (Dr. Cook's audit, 4 Oct 2026). CTSBible's buttons work
+     and include the Associate; they stay. */
+  function hideOldTrackPickers() {
+    function hide(n) { if (n) n.style.display = "none"; }
+    hide(el("track-select") && el("track-select").querySelector("input[name=track]") ? el("track-select") : null);
+    var r = document.querySelector("input[name=ctsTrack]");
+    if (r) for (var p = r.parentNode; p && p !== document.body; p = p.parentNode)
+      if (p.className === "track-bar") { hide(p); break; }
+    var s = el("trackSel"); if (s) hide(s.parentNode);
+    var t = document.querySelector("select#track[onchange]"); if (t) hide(t.parentNode);
+  }
+
   function boot() {
+    hideOldTrackPickers();
     renderUnitPills();
     renderRegister();
     wireRegister();
@@ -992,6 +1010,9 @@
   define("setTrack", function (t) {
     var map = { masters: "mdiv", master: "mdiv", assoc: "ad", associate: "ad", mth: "thm" };
     var v = map[t] || t;
+    // Ruth & Esther's old picker called setTrack() with no argument, which
+    // stored the track as "undefined"
+    if (!v) return;
     lsSet("cts_track", v);
     var st = student();
     if (st) { st.track = v; lsSet("cts_student", JSON.stringify(st)); }

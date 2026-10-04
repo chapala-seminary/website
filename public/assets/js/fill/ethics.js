@@ -89,6 +89,14 @@ window.CTS_FILL_DATA["ethics"] = {
    "answer": {
     "en": "relativism",
     "es": "relativismo"
+   },
+   "accept": {
+    "en": [
+     "moral relativism"
+    ],
+    "es": [
+     "relativismo moral"
+    ]
    }
   },
   {
@@ -116,7 +124,8 @@ window.CTS_FILL_DATA["ethics"] = {
      "guardian"
     ],
     "es": [
-     "tutor"
+     "tutor",
+     "pedagogo"
     ]
    }
   },
@@ -183,7 +192,9 @@ window.CTS_FILL_DATA["ethics"] = {
      "plumbline",
      "plumb"
     ],
-    "es": []
+    "es": [
+     "plomada de albañil"
+    ]
    }
   },
   {
@@ -199,7 +210,9 @@ window.CTS_FILL_DATA["ethics"] = {
     "en": [
      "nature"
     ],
-    "es": []
+    "es": [
+     "naturaleza"
+    ]
    }
   },
   {
@@ -213,10 +226,12 @@ window.CTS_FILL_DATA["ethics"] = {
    },
    "accept": {
     "en": [
-     "likeness"
+     "likeness",
+     "image and likeness"
     ],
     "es": [
-     "semejanza"
+     "semejanza",
+     "imagen y semejanza"
     ]
    }
   },
@@ -228,6 +243,14 @@ window.CTS_FILL_DATA["ethics"] = {
    "answer": {
     "en": "moral",
     "es": "moral"
+   },
+   "accept": {
+    "en": [
+     "moral law"
+    ],
+    "es": [
+     "ley moral"
+    ]
    }
   },
   {
@@ -256,6 +279,11 @@ window.CTS_FILL_DATA["ethics"] = {
    "answer": {
     "en": "mirror",
     "es": "espejo"
+   },
+   "accept": {
+    "en": [
+     "looking glass"
+    ]
    }
   },
   {
@@ -279,10 +307,12 @@ window.CTS_FILL_DATA["ethics"] = {
    },
    "accept": {
     "en": [
-     "historical-grammatical"
+     "historical-grammatical",
+     "grammatico-historical"
     ],
     "es": [
-     "histórico-gramatical"
+     "histórico-gramatical",
+     "gramático-histórico"
     ]
    }
   },
@@ -317,7 +347,8 @@ window.CTS_FILL_DATA["ethics"] = {
    },
    "accept": {
     "en": [
-     "outward"
+     "outward",
+     "outer"
     ],
     "es": [
      "exterior"
@@ -375,7 +406,8 @@ window.CTS_FILL_DATA["ethics"] = {
    },
    "accept": {
     "en": [
-     "conceit"
+     "conceit",
+     "arrogance"
     ],
     "es": [
      "envanecimiento",
@@ -470,7 +502,8 @@ window.CTS_FILL_DATA["ethics"] = {
      "testing ground"
     ],
     "es": [
-     "prueba"
+     "prueba",
+     "terreno de prueba"
     ]
    }
   },
@@ -508,7 +541,8 @@ window.CTS_FILL_DATA["ethics"] = {
      "household"
     ],
     "es": [
-     "hogar"
+     "hogar",
+     "casa"
     ]
    }
   },
@@ -558,6 +592,11 @@ window.CTS_FILL_DATA["ethics"] = {
    "answer": {
     "en": "gift",
     "es": "don"
+   },
+   "accept": {
+    "es": [
+     "regalo"
+    ]
    }
   },
   {
@@ -578,6 +617,11 @@ window.CTS_FILL_DATA["ethics"] = {
    "answer": {
     "en": "fishbowl",
     "es": "pecera"
+   },
+   "accept": {
+    "en": [
+     "goldfish bowl"
+    ]
    }
   },
   {
@@ -591,9 +635,13 @@ window.CTS_FILL_DATA["ethics"] = {
    },
    "accept": {
     "en": [
-     "rival"
+     "rival",
+     "paramour"
     ],
-    "es": []
+    "es": [
+     "rival",
+     "querida"
+    ]
    }
   }
  ],
@@ -611,7 +659,9 @@ window.CTS_FILL_DATA["ethics"] = {
     "en": [
      "trust"
     ],
-    "es": []
+    "es": [
+     "confianza"
+    ]
    }
   },
   {
@@ -632,6 +682,15 @@ window.CTS_FILL_DATA["ethics"] = {
    "answer": {
     "en": "equals",
     "es": "iguales"
+   },
+   "accept": {
+    "en": [
+     "peers",
+     "equal partners"
+    ],
+    "es": [
+     "pares"
+    ]
    }
   },
   {
@@ -647,7 +706,9 @@ window.CTS_FILL_DATA["ethics"] = {
     "en": [
      "openness"
     ],
-    "es": []
+    "es": [
+     "apertura"
+    ]
    }
   },
   {
@@ -658,6 +719,14 @@ window.CTS_FILL_DATA["ethics"] = {
    "answer": {
     "en": "Achan",
     "es": "Acán"
+   },
+   "accept": {
+    "en": [
+     "Achar"
+    ],
+    "es": [
+     "Acar"
+    ]
    }
   },
   {
@@ -671,7 +740,8 @@ window.CTS_FILL_DATA["ethics"] = {
    },
    "accept": {
     "en": [
-     "sheep stealing"
+     "sheep stealing",
+     "sheep poaching"
     ],
     "es": []
    }
@@ -694,6 +764,11 @@ window.CTS_FILL_DATA["ethics"] = {
    "answer": {
     "en": "storm",
     "es": "tormenta"
+   },
+   "accept": {
+    "es": [
+     "tempestad"
+    ]
    }
   },
   {
@@ -707,10 +782,12 @@ window.CTS_FILL_DATA["ethics"] = {
    },
    "accept": {
     "en": [
-     "Gibeonite"
+     "Gibeonite",
+     "men of Gibeon"
     ],
     "es": [
-     "gabaonita"
+     "gabaonita",
+     "hombres de Gabaón"
     ]
    }
   },
@@ -752,6 +829,14 @@ window.CTS_FILL_DATA["ethics"] = {
    "answer": {
     "en": "manipulation",
     "es": "manipulación"
+   },
+   "accept": {
+    "en": [
+     "emotional manipulation"
+    ],
+    "es": [
+     "manipulación emocional"
+    ]
    }
   },
   {
@@ -872,6 +957,11 @@ window.CTS_FILL_DATA["ethics"] = {
    "answer": {
     "en": "irreducible",
     "es": "irreductible"
+   },
+   "accept": {
+    "es": [
+     "irreducible"
+    ]
    }
   },
   {
@@ -885,10 +975,12 @@ window.CTS_FILL_DATA["ethics"] = {
    },
    "accept": {
     "en": [
-     "abilities"
+     "abilities",
+     "capabilities"
     ],
     "es": [
-     "habilidades"
+     "habilidades",
+     "aptitudes"
     ]
    }
   },
@@ -972,6 +1064,16 @@ window.CTS_FILL_DATA["ethics"] = {
    "answer": {
     "en": "euthanasia",
     "es": "eutanasia"
+   },
+   "accept": {
+    "en": [
+     "mercy killing",
+     "active euthanasia"
+    ],
+    "es": [
+     "eutanasia activa",
+     "muerte por piedad"
+    ]
    }
   },
   {
@@ -1057,7 +1159,11 @@ window.CTS_FILL_DATA["ethics"] = {
    },
    "accept": {
     "es": [
-     "fogón"
+     "fogón",
+     "chimenea"
+    ],
+    "en": [
+     "fireplace"
     ]
    }
   },
@@ -1104,6 +1210,11 @@ window.CTS_FILL_DATA["ethics"] = {
    "answer": {
     "en": "mark",
     "es": "blanco"
+   },
+   "accept": {
+    "en": [
+     "target"
+    ]
    }
   },
   {
@@ -1181,6 +1292,11 @@ window.CTS_FILL_DATA["ethics"] = {
    "answer": {
     "en": "contentment",
     "es": "contentamiento"
+   },
+   "accept": {
+    "en": [
+     "contentedness"
+    ]
    }
   },
   {
@@ -1201,6 +1317,14 @@ window.CTS_FILL_DATA["ethics"] = {
    "answer": {
     "en": "needle",
     "es": "aguja"
+   },
+   "accept": {
+    "en": [
+     "sewing needle"
+    ],
+    "es": [
+     "aguja de coser"
+    ]
    }
   },
   {
