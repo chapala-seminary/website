@@ -1068,6 +1068,24 @@ to go through `docs/adding-a-course.md`.
 
 Details: `docs/textbooks.md`.
 
+### 8af. Dr. Cook's answers on the textbooks (4 Oct 2026) — 15 lessons, 13 certificate pages, the engine, the sync, the Worker
+
+* **A textbook pass is part of the student record** (`textbook_results`,
+  migration 0009; the sync carries it, earliest time wins) **and on the M.Div.
+  and Th.M. tracks the course is complete only when the textbook test is
+  passed** (Dr. Cook, 4 Oct). The last unit's "passed" panel sends a master's
+  student to the test; the certificate page holds the diploma and says why
+  (`cts-textbook-gate.js` on the nine courses' thirteen certificate pages);
+  passing the test completes the course on the spot and syncs it; the Worker
+  holds a master's-level completion and refuses the course certificate until
+  the pass is in the record. Certificate and Associate students are not held.
+  The books and tests stay open to everyone.
+* **Parables exam headings**: "Unit N Exam — 30 Questions" and the old
+  "answer 1–20" instruction said what the delivered engine did; the page
+  carries 40 items and the one engine applies the rule by track. Every unit's
+  heading is now "Unit N Exam" and the note says what each track completes
+  (the sentence from the registration card). Dr. Cook's request.
+
 ## How to check any of this yourself
 
 ```

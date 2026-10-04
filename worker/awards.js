@@ -77,13 +77,35 @@ export function resolveCourse(slugOrCode) {
   return catalog.completions[code] ? { code } : null;
 }
 
-/** null when the record supports the award, else a short reason. */
-export function courseShortfall(slug, unitsDone) {
+/** null when the record supports the award, else a short reason.
+ *  `level` is the student's level (studentLevel) and `textbooks` the slugs of
+ *  the textbook tests the record holds: on the master's tracks a course with
+ *  a textbook is not complete until its test is passed (Dr. Cook, 4 Oct 2026). */
+export function courseShortfall(slug, unitsDone, level, textbooks) {
   const need = courseUnits(slug);
   if (!need) return resolveCourse(slug) ? 'no units: check the completion code' : 'unknown course';
   const have = new Set(unitsDone.map(Number));
   const missing = need.filter((u) => !have.has(u));
-  return missing.length ? `units not recorded as passed: ${missing.join(', ')}` : null;
+  if (missing.length) return `units not recorded as passed: ${missing.join(', ')}`;
+  return textbookShortfall(resolveCourse(slug).code, level, textbooks);
+}
+
+/** The textbook a course requires on the master's tracks, by completion code
+ *  (worker/catalog.json), or null. */
+export function textbookFor(code) {
+  const up = String(code || '').toUpperCase();
+  for (const [slug, t] of Object.entries(catalog.textbooks || {})) if (t.code === up) return slug;
+  return null;
+}
+
+/** null unless the level is a master's one, the course has a textbook, and
+ *  the record does not hold a pass on its test. */
+export function textbookShortfall(code, level, textbooks) {
+  if (level !== 'thm' && level !== 'mdiv') return null;
+  const slug = textbookFor(code);
+  if (!slug) return null;
+  const have = new Set((textbooks || []).map((t) => String(typeof t === 'string' ? t : t.textbook).toLowerCase()));
+  return have.has(slug) ? null : `textbook test not recorded as passed: ${slug}`;
 }
 
 /** completions: [{code, track}] (a bare code string is taken as track

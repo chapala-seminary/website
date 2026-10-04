@@ -152,6 +152,15 @@
       });
     });
 
+    // The textbook tests passed (cts-textbook.js keeps one dated key per
+    // book); on the master's tracks a course's completion waits for its
+    // textbook's, so the pass has to travel with the record (4 Oct 2026).
+    var textbooks = [];
+    keys().forEach(function (k) {
+      var m = /^cts_textbook_([a-z]+)_passed$/.exec(k);
+      if (m && get(k)) textbooks.push({ slug: m[1], passedAt: /^\d{4}-\d{2}-\d{2}$/.test(get(k)) ? get(k) + 'T12:00:00.000Z' : undefined });
+    });
+
     return {
       student: student ? {
         name: student.name, email: student.email, country: student.country,
@@ -163,6 +172,7 @@
       // the language the student reads in, for notes the seminary sends them
       lang: (function (l) { return l === 'en' || l === 'es' ? l : null; })(get('cts_lang')),
       progress: progress,
+      textbooks: textbooks,
     };
   }
 
@@ -172,6 +182,7 @@
       s.doneCodes.slice().sort(),
       Object.keys(s.completionTracks).sort().map(function (k) { return k + ':' + s.completionTracks[k]; }),
       s.progress.map(function (p) { return p.course + ':' + p.unit; }).sort(),
+      (s.textbooks || []).map(function (t) { return t.slug; }).sort(),
       s.lang,
     ]);
   }
@@ -218,6 +229,13 @@
       var mk = 'cts_' + p.course + '_u' + p.unit + '_mc_passed';
       if (get(mk) !== '1') set(mk, '1');
       writeLegacy(p.course, p.unit);                   // the keys the certificate page reads
+    });
+
+    (state.textbooks || []).forEach(function (t) {
+      if (!t || !/^[a-z]+$/.test(String(t.textbook || ''))) return;
+      var k = 'cts_textbook_' + t.textbook + '_passed';
+      if (!get(k)) set(k, String(t.passed_at || '').slice(0, 10) || new Date().toISOString().slice(0, 10));
+      addTo('cts_textbooks_passed', t.textbook);
     });
   }
 
