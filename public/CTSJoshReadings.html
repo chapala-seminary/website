@@ -476,6 +476,176 @@
     </article>
 
   </main>
+<!-- CTS-ATTEST: the honours-reading attestation, written by tools/reading-rooms.mjs; edit there -->
+<style>
+.cts-attest{background:var(--card,#fff);border:1px solid var(--line,#dde1ea);border-top:4px solid var(--accent,#1f3d8c);border-radius:10px;padding:18px;margin:22px 0;box-shadow:0 2px 8px #0000000b}
+.cts-attest h2{margin:0 0 8px;font-size:1.25rem}
+.cts-attest label.cts-field{display:block;margin:12px 0 4px;font:700 .9rem Arial,sans-serif;color:var(--muted,#5a6272)}
+.cts-attest input[type=text]{width:100%;max-width:420px;padding:9px 11px;border:1px solid var(--line,#dde1ea);border-radius:7px;font:1rem Georgia,serif}
+.cts-attest .cts-oath{display:flex;gap:10px;align-items:flex-start;margin:12px 0}
+.cts-attest .cts-oath input{width:20px;height:20px;margin-top:2px;accent-color:var(--accent,#1f3d8c);flex-shrink:0}
+.cts-attest .cts-btn{display:inline-block;padding:9px 13px;border-radius:7px;border:0;cursor:pointer;background:var(--accent,#1f3d8c);color:#fff;font:700 .9rem Arial,sans-serif}
+.cts-attest .cts-btn.ghost{background:#fff;color:var(--accent,#1f3d8c);border:1px solid var(--accent,#1f3d8c)}
+.cts-attest .cts-msg{margin:8px 0 0;font-family:Arial,sans-serif;font-size:.92rem;color:#8a1f1f;min-height:1em}
+.cts-attest .cts-done{display:none;margin:8px 0 0;font-family:Arial,sans-serif;font-size:.95rem;color:#2f6b3a}
+.cts-attest .cts-record{display:none;margin-top:16px;padding-top:14px;border-top:2px solid var(--accent,#1f3d8c)}
+.cts-attest .cts-record.show{display:block}
+.cts-attest .cts-record .cts-name{font-size:1.4rem;margin:4px 0}
+.cts-attest .cts-record ul{margin:6px 0 0 18px;padding:0}
+@media print{.cts-attest input,.cts-attest label.cts-field,.cts-attest .cts-oath,.cts-attest .cts-btn,.cts-attest .cts-msg,.cts-attest .cts-done,.cts-attest .cts-intro{display:none!important}.cts-attest .cts-record{display:block!important;border:none}}
+</style>
+<section class="cts-attest" id="cts-attest" data-honors-code="Josh" data-honors-course="Joshua Intensive">
+<h2>Record your reading <span class="es">/ Registre su lectura</span></h2>
+<p class="cts-intro">When you have read your three chosen readings in full, enter your name and affirm it below. This record is kept on your honor, in this browser; it shows on your certificate as <em>with honors</em>.<br><span class="es">Cuando haya leído por completo sus tres lecturas elegidas, escriba su nombre y confírmelo abajo. Este registro se guarda bajo su honor, en este navegador; aparece en su certificado como <em>con honores</em>.</span></p>
+<label class="cts-field" for="cts-att-name">Your name <span class="es">/ Su nombre</span></label>
+<input type="text" id="cts-att-name" autocomplete="name">
+<div class="cts-oath"><input type="checkbox" id="cts-att-oath"><label for="cts-att-oath">On my honor, I have read in full the three readings I selected above.<br><span class="es">Bajo mi honor, he leído por completo las tres lecturas que seleccioné arriba.</span></label></div>
+<button type="button" class="cts-btn" id="cts-att-record">Record my reading <span class="es">/ Registrar mi lectura</span></button>
+<p class="cts-msg" id="cts-att-msg" role="status"></p>
+<p class="cts-done" id="cts-att-done">&#10003; Recorded &mdash; this class counts toward your With Honors progress. <a href="cts-honors.html">The Honors Reading Library &#8599;</a><br><span class="es">&#10003; Registrado &mdash; esta clase cuenta para su progreso Con Honores. <a href="cts-honors.html">La Biblioteca de Lecturas de Honores &#8599;</a></span></p>
+<div class="cts-record" id="cts-att-record-card">
+<div class="num">Honors Reading &mdash; recorded <span class="es">/ Lectura con Honores &mdash; registrada</span></div>
+<div class="cts-name" id="cts-att-rec-name"></div>
+<p>affirmed on <span id="cts-att-rec-date"></span> to have read, in full: <span class="es">/ afirmó haber leído, por completo:</span></p>
+<ul id="cts-att-rec-list"></ul>
+<p class="byline">Chapala Theological Seminary &middot; Joshua Intensive &middot; present or print this page as your honors reading record. <span class="es">/ Presente o imprima esta página como su registro de lectura con honores.</span></p>
+<p><button type="button" class="cts-btn ghost" onclick="window.print()">Print this record <span class="es">/ Imprimir</span></button> <button type="button" class="cts-btn ghost" id="cts-att-reset">Start over <span class="es">/ Empezar de nuevo</span></button></p>
+</div>
+</section>
+<script>
+(function(){
+  var root=document.getElementById('cts-attest'); if(!root) return;
+  var CODE=root.getAttribute('data-honors-code'), COURSE=root.getAttribute('data-honors-course'), MAX=3;
+  var KEY='cts_honors_v1:'+CODE;
+  function get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+  function el(id){ return document.getElementById(id); }
+  // the five digests' own checkboxes, whatever the page calls them
+  function boxes(){ var m=document.querySelector('main')||document; return Array.prototype.slice.call(m.querySelectorAll('article input[type=checkbox]')); }
+  function titleOf(box){ var a=box.closest('article'); var h=a&&a.querySelector('h3'); if(!h) return ''; var c=h.cloneNode(true); Array.prototype.forEach.call(c.querySelectorAll('.es'),function(s){ s.parentNode.removeChild(s); }); return c.textContent.replace(/\s+/g,' ').trim(); }
+  function say(m){ el('cts-att-msg').textContent=m; }
+  function showDone(on){ el('cts-att-done').style.display=on?'block':'none'; }
+  function record(){
+    var chosen=boxes().filter(function(b){ return b.checked; });
+    var name=el('cts-att-name').value.trim(), oath=el('cts-att-oath').checked;
+    if(chosen.length!==MAX){ say('Choose exactly three readings above to record them. / Elija exactamente tres lecturas arriba para registrarlas.'); return; }
+    if(!name){ say('Enter your name to record your reading. / Escriba su nombre para registrar su lectura.'); return; }
+    if(!oath){ say('Check the box to affirm you have read all three. / Marque la casilla para afirmar que ha leído las tres.'); return; }
+    say('');
+    var now=new Date(), en=now.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    var works=chosen.map(titleOf);
+    el('cts-att-rec-name').textContent=name; el('cts-att-rec-date').textContent=en;
+    var ul=el('cts-att-rec-list'); ul.innerHTML=''; works.forEach(function(w){ var li=document.createElement('li'); li.textContent=w; ul.appendChild(li); });
+    set('cts_honors_name_v1', name);
+    set(KEY, JSON.stringify({name:name,date:en,course:COURSE,works:works}));
+    showDone(true);
+    var card=el('cts-att-record-card'); card.classList.add('show'); card.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function reset(){ el('cts-att-name').value=''; el('cts-att-oath').checked=false; el('cts-att-record-card').classList.remove('show'); say(''); }
+  el('cts-att-record').addEventListener('click', record);
+  el('cts-att-reset').addEventListener('click', reset);
+  if(get(KEY)) showDone(true);
+  var nm=get('cts_honors_name_v1'); if(nm && !el('cts-att-name').value) el('cts-att-name').value=nm;
+})();
+</script>
+<!-- /CTS-ATTEST -->
+
+<!-- CTS-SHELF: the public-domain shelf, written by tools/reading-rooms.mjs from src/data/reading-shelf.json; edit there -->
+<style>
+.cts-shelf{margin:34px 0 10px}
+.cts-shelf-head{text-align:center;margin:0 0 6px}
+.cts-shelf-head h2{font-weight:normal;font-size:1.4rem;border:none;padding:0;margin:0;display:inline-block;color:var(--primary,var(--accent,#5b3a1f))}
+.cts-shelf-rule{width:60px;height:2px;background:var(--gold,#c9a227);margin:12px auto 0}
+.cts-shelf-note{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-left:4px solid var(--gold,#c9a227);border-radius:12px;padding:14px 18px;margin:16px 0 18px;font-size:.96rem}
+.cts-shelf-panel{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-radius:16px;padding:18px 22px;margin:22px 0}
+.cts-shelf-panel > h3{font-weight:normal;font-size:1.15rem;margin:0 0 8px;color:var(--primary,var(--accent,#5b3a1f))}
+.cts-shelf-entry{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-radius:16px;padding:18px 22px;margin:14px 0;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+.cts-shelf-locus{letter-spacing:.16em;text-transform:uppercase;font-size:.68rem;color:var(--gold-deep,var(--accent,#98771d));margin-bottom:6px}
+.cts-shelf-title{font-size:1.1rem;color:var(--primary,var(--accent,#5b3a1f));margin-bottom:2px}
+.cts-shelf-num{display:inline-block;min-width:1.5em;color:var(--gold-deep,var(--accent,#98771d));font-style:italic}
+.cts-shelf-byline{color:var(--ink-soft,var(--muted,#6b5844));font-style:italic;font-size:.92rem;margin-bottom:8px}
+.cts-shelf-caption{font-size:.97rem;margin:8px 0}
+.cts-shelf-foot{margin-top:12px;padding-top:10px;border-top:1px solid var(--border,var(--line,#e5d8c8));display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
+.cts-shelf-link{color:var(--primary,var(--accent,#5b3a1f));text-decoration:none;border-bottom:1.5px solid var(--gold,#c9a227);padding-bottom:1px;font-size:.95rem}
+.cts-shelf-badge{font-size:.8rem;color:var(--ink-soft,var(--muted,#6b5844))}
+@media print{.cts-shelf{display:none}}
+</style>
+<section class="cts-shelf" id="cts-shelf" aria-labelledby="cts-shelf-h">
+<div class="cts-shelf-head"><h2 id="cts-shelf-h">Further Study: Ten Public-Domain Works <span class="es">/ Para Profundizar: diez obras de dominio público</span></h2><div class="cts-shelf-rule"></div></div>
+<div class="cts-shelf-note">These ten works are for further study, for the student who wants to go on reading. They are not part of the honors reading above: that stays as it is &mdash; the five CTS digests, any three read in full and recorded on your honor. All ten are in the public domain; each link opens the work online, and most can also be found in the Internet Archive or Project Gutenberg. Most are in English: the Chrome browser can translate a page (right-click, &ldquo;Translate to&hellip;&rdquo;; on a phone, the browser menu).<br><span class="es">Estas diez obras son para profundizar, para el estudiante que quiere seguir leyendo. No forman parte de la lectura con honores de arriba, que sigue igual: los cinco resúmenes del STC, tres cualesquiera leídos por completo y registrados bajo su honor. Las diez están en el dominio público; cada enlace abre la obra en línea, y la mayoría también se encuentra en Internet Archive o en el Proyecto Gutenberg. La mayoría están en inglés: el navegador Chrome puede traducir una página (clic derecho, &ldquo;Traducir a&hellip;&rdquo;; en un teléfono, el menú del navegador).</span></div>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Whole Book &middot; A Faithful Exposition <span class="es">/ Todo el Libro &middot; Una Exposición Fiel</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">1.</span> The Book of Joshua <span class="es">/ El Libro de Josué</span></div>
+<div class="cts-shelf-byline">W. G. Blaikie &middot; 1893</div>
+<p class="cts-shelf-caption">Blaikie's exposition is the classic guide to the whole book of Joshua &mdash; clear, warm, and faithful to the text. He follows the story from the commission to the final farewell, opening the meaning of each event and drawing from it lessons for faith and life. He does not flinch from the book's hard passages, but treats them with reverence and honesty. For the student working through this intensive, it is the ideal companion: a steady, trustworthy hand through every chapter, always keeping in view the God whose faithfulness the book is written to display.<br><span class="es">La exposición de Blaikie es la guía clásica de todo el libro de Josué &mdash; clara, cálida, y fiel al texto. Sigue la historia desde la comisión hasta la despedida final, abriendo el significado de cada evento y extrayendo de él lecciones para la fe y la vida. No rehúye los pasajes difíciles del libro, sino que los trata con reverencia y honestidad. Para el estudiante que recorre este curso intensivo, es el compañero ideal: una mano firme y confiable a través de cada capítulo, manteniendo siempre a la vista al Dios cuya fidelidad el libro fue escrito para mostrar.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=W.G.+Blaikie+The+Book+of+Joshua+Expositor%27s+Bible+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Inheritance &middot; A Life of Victory <span class="es">/ La Herencia &middot; Una Vida de Victoria</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">2.</span> Joshua and the Land of Promise <span class="es">/ Josué y la Tierra de Promisión</span></div>
+<div class="cts-shelf-byline">F. B. Meyer</div>
+<p class="cts-shelf-caption">Meyer's devotional study reads Joshua as the story of a life of victory &mdash; the inheritance God has promised, entered and possessed step by step through faith and obedience. Warm and searching, it draws from the crossing of the Jordan, the fall of Jericho, and the taking of the land rich lessons for the believer's own walk. It is a perfect companion to the course, turning the ancient conquest into a present call: that there is a land of rest and fullness God has given us in Christ, and that we are to go up, in His strength, and take possession of it.<br><span class="es">El estudio devocional de Meyer lee a Josué como la historia de una vida de victoria &mdash; la herencia que Dios ha prometido, entrada y poseída paso a paso por la fe y la obediencia. Cálido y escudriñador, extrae del cruce del Jordán, la caída de Jericó, y la toma de la tierra ricas lecciones para el andar del creyente. Es un compañero perfecto del curso, convirtiendo la antigua conquista en un llamado presente: que hay una tierra de reposo y plenitud que Dios nos ha dado en Cristo, y que hemos de subir, en su fuerza, y tomar posesión de ella.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=F.B.+Meyer+Joshua+and+the+Land+of+Promise+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Verse by Verse &middot; The Riches of the Book <span class="es">/ Versículo por Versículo &middot; Las Riquezas del Libro</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">3.</span> Gleanings in Joshua <span class="es">/ Espigando en Josué</span></div>
+<div class="cts-shelf-byline">Arthur W. Pink</div>
+<p class="cts-shelf-caption">Pink's verse-by-verse study gathers the spiritual riches of Joshua with care and depth, drawing out its doctrine and its many pictures of Christ and the Christian life. Substantial yet devotional, it lingers over details others pass by, showing how the Captain of the LORD's host, the scarlet cord, and the cities of refuge all speak of the Savior. It richly serves every unit of the course, and rewards the reader who wants to mine the book thoroughly &mdash; to see that Joshua is not merely a record of ancient battles, but a treasury of gospel truth.<br><span class="es">El estudio versículo por versículo de Pink reúne las riquezas espirituales de Josué con cuidado y profundidad, extrayendo su doctrina y sus muchas figuras de Cristo y de la vida cristiana. Sustancial mas devocional, se detiene en detalles que otros pasan por alto, mostrando cómo el Capitán del ejército del Señor, el cordón de grana, y las ciudades de refugio hablan todos del Salvador. Sirve ricamente a cada unidad del curso, y recompensa al lector que quiere explorar el libro a fondo &mdash; para ver que Josué no es meramente un registro de batallas antiguas, sino un tesoro de verdad evangélica.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Arthur+Pink+Gleanings+in+Joshua+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Great Moments &middot; Expository Preaching <span class="es">/ Los Grandes Momentos &middot; Predicación Expositiva</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">4.</span> Expositions of Holy Scripture: Joshua–Judges <span class="es">/ Exposiciones de la Santa Escritura: Josué–Jueces</span></div>
+<div class="cts-shelf-byline">Alexander Maclaren</div>
+<p class="cts-shelf-caption">Maclaren was among the greatest expository preachers of his age, and his expositions on Joshua open selected passages with rare spiritual insight and beauty of expression. Rather than covering every verse, he settles on the great moments &mdash; the commission, the crossing, the fall of Jericho, the choice at the end &mdash; and draws from each a rich and searching message. It is an ideal companion to the course for the reader who wants not only to understand the text but to feel its power, from a preacher who could make an ancient story speak straight to the heart.<br><span class="es">Maclaren fue uno de los más grandes predicadores expositivos de su época, y sus exposiciones sobre Josué abren pasajes selectos con rara perspicacia espiritual y belleza de expresión. En lugar de cubrir cada versículo, se detiene en los grandes momentos &mdash; la comisión, el cruce, la caída de Jericó, la elección al final &mdash; y extrae de cada uno un mensaje rico y escudriñador. Es un compañero ideal del curso para el lector que quiere no solo entender el texto sino sentir su poder, de un predicador que podía hacer que una historia antigua hablara directamente al corazón.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Alexander+Maclaren+Expositions+Joshua+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Savior Foreshadowed &middot; Christ in Joshua <span class="es">/ El Salvador Prefigurado &middot; Cristo en Josué</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">5.</span> Christ in All the Scriptures <span class="es">/ Cristo en Todas las Escrituras</span></div>
+<div class="cts-shelf-byline">A. M. Hodgkin &middot; 1907</div>
+<p class="cts-shelf-caption">Hodgkin's much-loved book shows how Christ is foreshadowed in every part of the Bible, and its pages on Joshua are especially rich. Here the reader sees the Savior in the Captain of the LORD's host, in Rahab's scarlet cord, in the ark that went before the people into the Jordan, and in the cities of refuge that sheltered the guilty. It serves the course's deeper theme, that the whole of Scripture testifies to Christ. Clear and reverent, it trains the eye to find Him where He may easily be missed &mdash; and turns the study of Joshua into a fresh sight of the Redeemer.<br><span class="es">El muy amado libro de Hodgkin muestra cómo Cristo es prefigurado en cada parte de la Biblia, y sus páginas sobre Josué son especialmente ricas. Aquí el lector ve al Salvador en el Capitán del ejército del Señor, en el cordón de grana de Rahab, en el arca que iba delante del pueblo al Jordán, y en las ciudades de refugio que amparaban al culpable. Sirve al tema más profundo del curso, que la totalidad de la Escritura da testimonio de Cristo. Claro y reverente, entrena el ojo para hallarlo donde fácilmente puede pasarse por alto &mdash; y convierte el estudio de Josué en una visión fresca del Redentor.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=A.M.+Hodgkin+Christ+in+All+the+Scriptures+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The War Within &middot; The Conquest of the Soul <span class="es">/ La Guerra Interior &middot; La Conquista del Alma</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">6.</span> The Holy War <span class="es">/ La Guerra Santa</span></div>
+<div class="cts-shelf-byline">John Bunyan &middot; 1682</div>
+<p class="cts-shelf-caption">Bunyan's great allegory tells of the town of Mansoul &mdash; how it was lost to the enemy, besieged and reclaimed by its rightful King, and defended ever after. Written by the author of Pilgrim's Progress, it turns the warfare of Joshua inward, picturing the conquest and keeping of the human heart by Christ. It is a fitting companion to the course's units on the campaigns for the land, lifting the theme of holy war from the battlefields of Canaan to the deeper struggle within, where the real victory is won &mdash; not by sword, but by the grace and power of the King of kings.<br><span class="es">La gran alegoría de Bunyan narra sobre la ciudad de Alma-humana &mdash; cómo fue perdida ante el enemigo, sitiada y recuperada por su legítimo Rey, y defendida en adelante. Escrita por el autor de El Progreso del Peregrino, vuelve hacia adentro la guerra de Josué, retratando la conquista y la custodia del corazón humano por Cristo. Es un compañero apropiado de las unidades del curso sobre las campañas por la tierra, elevando el tema de la guerra santa desde los campos de batalla de Canaán hasta la lucha más profunda en el interior, donde se gana la verdadera victoria &mdash; no con espada, sino por la gracia y el poder del Rey de reyes.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=John+Bunyan+The+Holy+War+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Long View &middot; Joshua in God's Plan <span class="es">/ La Visión Larga &middot; Josué en el Plan de Dios</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">7.</span> A History of the Work of Redemption <span class="es">/ Una Historia de la Obra de Redención</span></div>
+<div class="cts-shelf-byline">Jonathan Edwards</div>
+<p class="cts-shelf-caption">Edwards's sweeping work traces the whole plan of God from creation to the last day, showing how every age &mdash; including the conquest under Joshua &mdash; forms one part of His great work of redemption. It sets the book of Joshua in its largest frame, helping the reader see the taking of the land not as an isolated episode but as one step in the unfolding purpose that runs to Christ and beyond. Read it to gain the long view: that the God who gave Israel its inheritance was, through all of it, steadily preparing the way for the salvation of the world.<br><span class="es">La panorámica obra de Edwards traza todo el plan de Dios desde la creación hasta el último día, mostrando cómo cada época &mdash; incluyendo la conquista bajo Josué &mdash; forma una parte de su gran obra de redención. Sitúa el libro de Josué en su marco más amplio, ayudando al lector a ver la toma de la tierra no como un episodio aislado sino como un paso en el propósito en despliegue que corre hasta Cristo y más allá. Léalo para ganar la visión larga: que el Dios que dio a Israel su herencia estaba, a través de todo ello, preparando firmemente el camino para la salvación del mundo.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Jonathan+Edwards+A+History+of+the+Work+of+Redemption+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">&ldquo;Choose This Day&rdquo; &middot; Decisive Faith <span class="es">/ &ldquo;Escogeos Hoy&rdquo; &middot; La Fe Decidida</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">8.</span> The Rise and Progress of Religion in the Soul <span class="es">/ El Surgimiento y Progreso de la Religión en el Alma</span></div>
+<div class="cts-shelf-byline">Philip Doddridge &middot; 1745</div>
+<p class="cts-shelf-caption">Doddridge's classic speaks straight to the heart of Joshua's closing challenge: &lsquo;choose this day whom ye will serve.&rsquo; With great tenderness and seriousness it leads the reader from careless indifference to decisive faith, and on into a growing, wholehearted life of devotion to God. It is a fitting companion to the course's final unit, pressing home the personal decision the whole book is driving toward. Read it to hear, in your own soul, the call that Joshua set before Israel &mdash; and to answer, with him, &lsquo;as for me and my house, we will serve the LORD.&rsquo;<br><span class="es">El clásico de Doddridge habla directamente al corazón del desafío final de Josué: &lsquo;escogeos hoy a quién sirváis.&rsquo; Con gran ternura y seriedad lleva al lector de la despreocupada indiferencia a la fe decidida, y de allí a una vida creciente y de todo corazón de devoción a Dios. Es un compañero apropiado de la unidad final del curso, recalcando la decisión personal hacia la cual todo el libro apunta. Léalo para oír, en su propia alma, el llamado que Josué puso delante de Israel &mdash; y para responder, con él, &lsquo;yo y mi casa serviremos al Señor.&rsquo;</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Philip+Doddridge+The+Rise+and+Progress+of+Religion+in+the+Soul+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Everyday Help &middot; Warm and Practical <span class="es">/ Ayuda Cotidiana &middot; Cálida y Práctica</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">9.</span> Commentary on the Book of Joshua <span class="es">/ Comentario sobre el Libro de Josué</span></div>
+<div class="cts-shelf-byline">Matthew Henry</div>
+<p class="cts-shelf-caption">Matthew Henry's commentary has fed the church for three centuries, and his treatment of Joshua is a warm, verse-by-verse guide full of practical wisdom and devotional warmth. He explains the text plainly, then presses its lessons home for the conscience and the heart, with the memorable turns of phrase for which he is famous. It is an ideal everyday companion to the course, accessible to every reader, and endlessly quotable. For simple, faithful, heart-warming help through each chapter of Joshua, there is scarcely a better place to turn.<br><span class="es">El comentario de Matthew Henry ha alimentado a la iglesia por tres siglos, y su tratamiento de Josué es una cálida guía versículo por versículo llena de sabiduría práctica y calor devocional. Explica el texto con sencillez, y luego recalca sus lecciones para la conciencia y el corazón, con los giros memorables por los que es famoso. Es un compañero cotidiano ideal del curso, accesible a todo lector, e infinitamente citable. Para una ayuda sencilla, fiel, y que calienta el corazón a través de cada capítulo de Josué, apenas hay mejor lugar al cual acudir.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Matthew+Henry+Commentary+Book+of+Joshua+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Possessed by Faith &middot; The Secret of Every Victory <span class="es">/ Poseída por Fe &middot; El Secreto de Cada Victoria</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">10.</span> The Life, Walk, and Triumph of Faith <span class="es">/ La Vida, el Andar, y el Triunfo de la Fe</span></div>
+<div class="cts-shelf-byline">William Romaine &middot; 1793</div>
+<p class="cts-shelf-caption">Romaine's classic on the life of faith is a fitting crown to a study of Joshua, whose every victory was won by believing God. In three parts he traces faith from its first stirrings, through the daily walk, to its final triumph &mdash; showing that the Christian, like Israel of old, receives the promises and overcomes the enemy not by his own strength but by trusting the word of the Lord. It serves the course's great theme of possessing the inheritance by faith. Read it to learn the secret of every conquest in Joshua and in the Christian life: not &lsquo;I am strong,&rsquo; but &lsquo;the LORD is faithful.&rsquo;<br><span class="es">El clásico de Romaine sobre la vida de fe es una corona apropiada para un estudio de Josué, cuya cada victoria fue ganada creyendo a Dios. En tres partes traza la fe desde sus primeros movimientos, a través del andar diario, hasta su triunfo final &mdash; mostrando que el cristiano, como el Israel de antaño, recibe las promesas y vence al enemigo no por su propia fuerza sino confiando en la palabra del Señor. Sirve al gran tema del curso de poseer la herencia por la fe. Léalo para aprender el secreto de cada conquista en Josué y en la vida cristiana: no &lsquo;yo soy fuerte,&rsquo; sino &lsquo;el Señor es fiel.&rsquo;</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=William+Romaine+The+Life+Walk+and+Triumph+of+Faith+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+</section>
+<!-- /CTS-SHELF -->
+
 
   <div class="notice">
     <strong>Honor attestation:</strong> By selecting three readings above, you affirm that you have read those three digests in full. The digests are CTS-authored summaries that may include brief excerpts or adaptations of public-domain works.<br>

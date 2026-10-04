@@ -488,6 +488,176 @@
     </article>
 
   </main>
+<!-- CTS-ATTEST: the honours-reading attestation, written by tools/reading-rooms.mjs; edit there -->
+<style>
+.cts-attest{background:var(--card,#fff);border:1px solid var(--line,#dde1ea);border-top:4px solid var(--accent,#1f3d8c);border-radius:10px;padding:18px;margin:22px 0;box-shadow:0 2px 8px #0000000b}
+.cts-attest h2{margin:0 0 8px;font-size:1.25rem}
+.cts-attest label.cts-field{display:block;margin:12px 0 4px;font:700 .9rem Arial,sans-serif;color:var(--muted,#5a6272)}
+.cts-attest input[type=text]{width:100%;max-width:420px;padding:9px 11px;border:1px solid var(--line,#dde1ea);border-radius:7px;font:1rem Georgia,serif}
+.cts-attest .cts-oath{display:flex;gap:10px;align-items:flex-start;margin:12px 0}
+.cts-attest .cts-oath input{width:20px;height:20px;margin-top:2px;accent-color:var(--accent,#1f3d8c);flex-shrink:0}
+.cts-attest .cts-btn{display:inline-block;padding:9px 13px;border-radius:7px;border:0;cursor:pointer;background:var(--accent,#1f3d8c);color:#fff;font:700 .9rem Arial,sans-serif}
+.cts-attest .cts-btn.ghost{background:#fff;color:var(--accent,#1f3d8c);border:1px solid var(--accent,#1f3d8c)}
+.cts-attest .cts-msg{margin:8px 0 0;font-family:Arial,sans-serif;font-size:.92rem;color:#8a1f1f;min-height:1em}
+.cts-attest .cts-done{display:none;margin:8px 0 0;font-family:Arial,sans-serif;font-size:.95rem;color:#2f6b3a}
+.cts-attest .cts-record{display:none;margin-top:16px;padding-top:14px;border-top:2px solid var(--accent,#1f3d8c)}
+.cts-attest .cts-record.show{display:block}
+.cts-attest .cts-record .cts-name{font-size:1.4rem;margin:4px 0}
+.cts-attest .cts-record ul{margin:6px 0 0 18px;padding:0}
+@media print{.cts-attest input,.cts-attest label.cts-field,.cts-attest .cts-oath,.cts-attest .cts-btn,.cts-attest .cts-msg,.cts-attest .cts-done,.cts-attest .cts-intro{display:none!important}.cts-attest .cts-record{display:block!important;border:none}}
+</style>
+<section class="cts-attest" id="cts-attest" data-honors-code="1Peter" data-honors-course="1 Peter Intensive">
+<h2>Record your reading <span class="es">/ Registre su lectura</span></h2>
+<p class="cts-intro">When you have read your three chosen readings in full, enter your name and affirm it below. This record is kept on your honor, in this browser; it shows on your certificate as <em>with honors</em>.<br><span class="es">Cuando haya leído por completo sus tres lecturas elegidas, escriba su nombre y confírmelo abajo. Este registro se guarda bajo su honor, en este navegador; aparece en su certificado como <em>con honores</em>.</span></p>
+<label class="cts-field" for="cts-att-name">Your name <span class="es">/ Su nombre</span></label>
+<input type="text" id="cts-att-name" autocomplete="name">
+<div class="cts-oath"><input type="checkbox" id="cts-att-oath"><label for="cts-att-oath">On my honor, I have read in full the three readings I selected above.<br><span class="es">Bajo mi honor, he leído por completo las tres lecturas que seleccioné arriba.</span></label></div>
+<button type="button" class="cts-btn" id="cts-att-record">Record my reading <span class="es">/ Registrar mi lectura</span></button>
+<p class="cts-msg" id="cts-att-msg" role="status"></p>
+<p class="cts-done" id="cts-att-done">&#10003; Recorded &mdash; this class counts toward your With Honors progress. <a href="cts-honors.html">The Honors Reading Library &#8599;</a><br><span class="es">&#10003; Registrado &mdash; esta clase cuenta para su progreso Con Honores. <a href="cts-honors.html">La Biblioteca de Lecturas de Honores &#8599;</a></span></p>
+<div class="cts-record" id="cts-att-record-card">
+<div class="num">Honors Reading &mdash; recorded <span class="es">/ Lectura con Honores &mdash; registrada</span></div>
+<div class="cts-name" id="cts-att-rec-name"></div>
+<p>affirmed on <span id="cts-att-rec-date"></span> to have read, in full: <span class="es">/ afirmó haber leído, por completo:</span></p>
+<ul id="cts-att-rec-list"></ul>
+<p class="byline">Chapala Theological Seminary &middot; 1 Peter Intensive &middot; present or print this page as your honors reading record. <span class="es">/ Presente o imprima esta página como su registro de lectura con honores.</span></p>
+<p><button type="button" class="cts-btn ghost" onclick="window.print()">Print this record <span class="es">/ Imprimir</span></button> <button type="button" class="cts-btn ghost" id="cts-att-reset">Start over <span class="es">/ Empezar de nuevo</span></button></p>
+</div>
+</section>
+<script>
+(function(){
+  var root=document.getElementById('cts-attest'); if(!root) return;
+  var CODE=root.getAttribute('data-honors-code'), COURSE=root.getAttribute('data-honors-course'), MAX=3;
+  var KEY='cts_honors_v1:'+CODE;
+  function get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+  function el(id){ return document.getElementById(id); }
+  // the five digests' own checkboxes, whatever the page calls them
+  function boxes(){ var m=document.querySelector('main')||document; return Array.prototype.slice.call(m.querySelectorAll('article input[type=checkbox]')); }
+  function titleOf(box){ var a=box.closest('article'); var h=a&&a.querySelector('h3'); if(!h) return ''; var c=h.cloneNode(true); Array.prototype.forEach.call(c.querySelectorAll('.es'),function(s){ s.parentNode.removeChild(s); }); return c.textContent.replace(/\s+/g,' ').trim(); }
+  function say(m){ el('cts-att-msg').textContent=m; }
+  function showDone(on){ el('cts-att-done').style.display=on?'block':'none'; }
+  function record(){
+    var chosen=boxes().filter(function(b){ return b.checked; });
+    var name=el('cts-att-name').value.trim(), oath=el('cts-att-oath').checked;
+    if(chosen.length!==MAX){ say('Choose exactly three readings above to record them. / Elija exactamente tres lecturas arriba para registrarlas.'); return; }
+    if(!name){ say('Enter your name to record your reading. / Escriba su nombre para registrar su lectura.'); return; }
+    if(!oath){ say('Check the box to affirm you have read all three. / Marque la casilla para afirmar que ha leído las tres.'); return; }
+    say('');
+    var now=new Date(), en=now.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    var works=chosen.map(titleOf);
+    el('cts-att-rec-name').textContent=name; el('cts-att-rec-date').textContent=en;
+    var ul=el('cts-att-rec-list'); ul.innerHTML=''; works.forEach(function(w){ var li=document.createElement('li'); li.textContent=w; ul.appendChild(li); });
+    set('cts_honors_name_v1', name);
+    set(KEY, JSON.stringify({name:name,date:en,course:COURSE,works:works}));
+    showDone(true);
+    var card=el('cts-att-record-card'); card.classList.add('show'); card.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function reset(){ el('cts-att-name').value=''; el('cts-att-oath').checked=false; el('cts-att-record-card').classList.remove('show'); say(''); }
+  el('cts-att-record').addEventListener('click', record);
+  el('cts-att-reset').addEventListener('click', reset);
+  if(get(KEY)) showDone(true);
+  var nm=get('cts_honors_name_v1'); if(nm && !el('cts-att-name').value) el('cts-att-name').value=nm;
+})();
+</script>
+<!-- /CTS-ATTEST -->
+
+<!-- CTS-SHELF: the public-domain shelf, written by tools/reading-rooms.mjs from src/data/reading-shelf.json; edit there -->
+<style>
+.cts-shelf{margin:34px 0 10px}
+.cts-shelf-head{text-align:center;margin:0 0 6px}
+.cts-shelf-head h2{font-weight:normal;font-size:1.4rem;border:none;padding:0;margin:0;display:inline-block;color:var(--primary,var(--accent,#5b3a1f))}
+.cts-shelf-rule{width:60px;height:2px;background:var(--gold,#c9a227);margin:12px auto 0}
+.cts-shelf-note{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-left:4px solid var(--gold,#c9a227);border-radius:12px;padding:14px 18px;margin:16px 0 18px;font-size:.96rem}
+.cts-shelf-panel{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-radius:16px;padding:18px 22px;margin:22px 0}
+.cts-shelf-panel > h3{font-weight:normal;font-size:1.15rem;margin:0 0 8px;color:var(--primary,var(--accent,#5b3a1f))}
+.cts-shelf-entry{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-radius:16px;padding:18px 22px;margin:14px 0;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+.cts-shelf-locus{letter-spacing:.16em;text-transform:uppercase;font-size:.68rem;color:var(--gold-deep,var(--accent,#98771d));margin-bottom:6px}
+.cts-shelf-title{font-size:1.1rem;color:var(--primary,var(--accent,#5b3a1f));margin-bottom:2px}
+.cts-shelf-num{display:inline-block;min-width:1.5em;color:var(--gold-deep,var(--accent,#98771d));font-style:italic}
+.cts-shelf-byline{color:var(--ink-soft,var(--muted,#6b5844));font-style:italic;font-size:.92rem;margin-bottom:8px}
+.cts-shelf-caption{font-size:.97rem;margin:8px 0}
+.cts-shelf-foot{margin-top:12px;padding-top:10px;border-top:1px solid var(--border,var(--line,#e5d8c8));display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
+.cts-shelf-link{color:var(--primary,var(--accent,#5b3a1f));text-decoration:none;border-bottom:1.5px solid var(--gold,#c9a227);padding-bottom:1px;font-size:.95rem}
+.cts-shelf-badge{font-size:.8rem;color:var(--ink-soft,var(--muted,#6b5844))}
+@media print{.cts-shelf{display:none}}
+</style>
+<section class="cts-shelf" id="cts-shelf" aria-labelledby="cts-shelf-h">
+<div class="cts-shelf-head"><h2 id="cts-shelf-h">Further Study: Ten Public-Domain Works <span class="es">/ Para Profundizar: diez obras de dominio público</span></h2><div class="cts-shelf-rule"></div></div>
+<div class="cts-shelf-note">These ten works are for further study, for the student who wants to go on reading. They are not part of the honors reading above: that stays as it is &mdash; the five CTS digests, any three read in full and recorded on your honor. All ten are in the public domain; each link opens the work online, and most can also be found in the Internet Archive or Project Gutenberg. Most are in English: the Chrome browser can translate a page (right-click, &ldquo;Translate to&hellip;&rdquo;; on a phone, the browser menu).<br><span class="es">Estas diez obras son para profundizar, para el estudiante que quiere seguir leyendo. No forman parte de la lectura con honores de arriba, que sigue igual: los cinco resúmenes del STC, tres cualesquiera leídos por completo y registrados bajo su honor. Las diez están en el dominio público; cada enlace abre la obra en línea, y la mayoría también se encuentra en Internet Archive o en el Proyecto Gutenberg. La mayoría están en inglés: el navegador Chrome puede traducir una página (clic derecho, &ldquo;Traducir a&hellip;&rdquo;; en un teléfono, el menú del navegador).</span></div>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Whole Epistle &middot; A Devotional Commentary <span class="es">/ Toda la Epístola &middot; Un Comentario Devocional</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">1.</span> A Practical Commentary upon the First Epistle of Peter <span class="es">/ Comentario Práctico sobre la Primera Epístola de Pedro</span></div>
+<div class="cts-shelf-byline">Robert Leighton &middot; 1693</div>
+<p class="cts-shelf-caption">Leighton walks slowly through the whole of First Peter, drawing out its comfort and its call to holiness with a warmth that has made it a treasured devotional classic for over three centuries. Written by a gentle Scottish churchman, it is the great companion to our course &mdash; unhurried, Christ-centered, and unfailingly practical &mdash; the ideal way to read the letter through with a wise guide at your side.<br><span class="es">Leighton recorre despacio toda la Primera de Pedro, extrayendo su consuelo y su llamado a la santidad con una calidez que la ha hecho un atesorado clásico devocional por más de tres siglos. Escrita por un apacible pastor escocés, es la gran compañera de nuestro curso &mdash; sin prisa, centrada en Cristo y siempre práctica &mdash; la manera ideal de leer toda la carta con un guía sabio a su lado.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Robert+Leighton+A+Practical+Commentary+First+Epistle+of+Peter+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Whole Epistle &middot; Tried by Fire <span class="es">/ Toda la Epístola &middot; Probado por el Fuego</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">2.</span> Tried by Fire: Expositions of the First Epistle of Peter <span class="es">/ Probado por el Fuego: Exposiciones de la Primera Epístola de Pedro</span></div>
+<div class="cts-shelf-byline">F. B. Meyer &middot; 1897</div>
+<p class="cts-shelf-caption">Meyer expounds First Peter chapter by chapter under the theme the letter gives him &mdash; faith tried and proven by fire &mdash; with the fervent, encouraging tone for which he is loved. It is a briefer companion to Leighton's fuller commentary, and it stays close to the heart of our course: how the believer is to suffer, hope, and stand while a stranger in this world.<br><span class="es">Meyer expone la Primera de Pedro capítulo por capítulo bajo el tema que la carta misma le da &mdash; la fe probada y acrisolada por el fuego &mdash; con el tono ferviente y alentador por el que se le ama. Es un compañero más breve que el comentario más amplio de Leighton, y se mantiene cerca del corazón de nuestro curso: cómo ha de sufrir, esperar y permanecer firme el creyente mientras es extranjero en este mundo.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=F.B.+Meyer+Tried+by+Fire+First+Epistle+of+Peter+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Be Holy &middot; The Call to Holiness <span class="es">/ Sed Santos &middot; El Llamado a la Santidad</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">3.</span> Holiness <span class="es">/ Santidad</span></div>
+<div class="cts-shelf-byline">J. C. Ryle &middot; 1877</div>
+<p class="cts-shelf-caption">Ryle sets out plainly what holiness is, why every believer is called to it, and how it grows &mdash; the very charge our third unit takes up from Peter's &ldquo;be holy, for I am holy.&rdquo; A clear-headed Anglican evangelical writing for ordinary Christians, he answers the easy religion of his day with a sober, Scripture-soaked call to a changed life, and the book has strengthened believers across every tradition since.<br><span class="es">Ryle expone con sencillez qué es la santidad, por qué todo creyente es llamado a ella y cómo crece &mdash; el mismo mandato que aborda nuestra tercera unidad a partir del &ldquo;sed santos, porque yo soy santo&rdquo; de Pedro. Evangélico anglicano de mente clara que escribe para cristianos comunes, responde a la religión fácil de su tiempo con un llamado sobrio y empapado de Escritura a una vida transformada, y el libro ha fortalecido a creyentes de toda tradición desde entonces.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=J.C.+Ryle+Holiness+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Pilgrims of the Dispersion <span class="es">/ Peregrinos de la Dispersión</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">4.</span> The Pilgrim's Progress <span class="es">/ El Progreso del Peregrino</span></div>
+<div class="cts-shelf-byline">John Bunyan &middot; 1678</div>
+<p class="cts-shelf-caption">Bunyan tells, as an allegory, the whole journey of a Christian from the City of Destruction to the Celestial City &mdash; through the Slough of Despond, Vanity Fair, and the valley of the shadow &mdash; the very picture of the &ldquo;sojourners and pilgrims&rdquo; our first unit meets in Peter's greeting. After the Bible it has been the most widely read book in the English language, and no work better captures the exile's road this letter describes.<br><span class="es">Bunyan narra, en forma de alegoría, todo el viaje de un cristiano desde la Ciudad de Destrucción hasta la Ciudad Celestial &mdash; por el Pantano del Desaliento, la Feria de la Vanidad y el valle de sombra &mdash; la imagen misma de los &ldquo;peregrinos y extranjeros&rdquo; que encuentra nuestra primera unidad en el saludo de Pedro. Después de la Biblia ha sido el libro más leído en lengua inglesa, y ninguna obra capta mejor el camino del desterrado que describe esta carta.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Bunyan+Pilgrim%27s+Progress+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Fiery Trial &middot; God's Hand in Affliction <span class="es">/ La Prueba de Fuego &middot; La Mano de Dios en la Aflicción</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">5.</span> The Crook in the Lot <span class="es">/ El Torcido en la Suerte</span></div>
+<div class="cts-shelf-byline">Thomas Boston &middot; 1737</div>
+<p class="cts-shelf-caption">Boston takes up the &ldquo;crook&rdquo; &mdash; the trouble God bends into every life &mdash; and shows from Scripture that no affliction is by chance and none is without purpose in the hand of a wise and loving God. It speaks directly to the fiery trial of our second and eleventh units, teaching the sufferer not merely to endure but to trust; a Scottish classic that has comforted the afflicted for nearly three centuries.<br><span class="es">Boston aborda el &ldquo;torcido&rdquo; &mdash; la aflicción que Dios dobla en cada vida &mdash; y muestra desde la Escritura que ninguna aflicción es por azar y ninguna carece de propósito en la mano de un Dios sabio y amoroso. Habla directamente a la prueba de fuego de nuestras unidades segunda y undécima, enseñando al que sufre no solo a soportar sino a confiar; un clásico escocés que ha consolado a los afligidos por casi tres siglos.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Thomas+Boston+The+Crook+in+the+Lot+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Roaring Lion &middot; Resisting the Adversary <span class="es">/ El León Rugiente &middot; Resistir al Adversario</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">6.</span> Precious Remedies Against Satan's Devices <span class="es">/ Remedios Preciosos contra las Artimañas de Satanás</span></div>
+<div class="cts-shelf-byline">Thomas Brooks &middot; 1652</div>
+<p class="cts-shelf-caption">Brooks lays bare the schemes the tempter uses against the soul and sets a scriptural remedy beside each one, arming the believer to stand against the &ldquo;roaring lion&rdquo; Peter warns of in our final unit. It is among the most practical of the Puritan books on spiritual conflict &mdash; clear, orderly, and full of hard-won wisdom for resisting the adversary, steadfast in the faith.<br><span class="es">Brooks pone al descubierto las artimañas que usa el tentador contra el alma y coloca un remedio bíblico junto a cada una, armando al creyente para resistir al &ldquo;león rugiente&rdquo; que advierte Pedro en nuestra última unidad. Está entre los libros puritanos más prácticos sobre el conflicto espiritual &mdash; claro, ordenado y lleno de sabiduría ganada a pulso para resistir al adversario, firmes en la fe.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Thomas+Brooks+Precious+Remedies+Against+Satan%27s+Devices+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Shepherds of the Flock <span class="es">/ Pastores del Rebaño</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">7.</span> The Reformed Pastor <span class="es">/ El Pastor Renovado <span style="font-style:italic">(The Reformed Pastor)</span></div>
+<div class="cts-shelf-byline">Richard Baxter &middot; 1656</div>
+<p class="cts-shelf-caption">Baxter presses the shepherds of the church to know, feed, and watch over the flock with all diligence &mdash; the very charge Peter gives the elders in our closing unit, to shepherd the flock of God willingly and not for gain. It is the classic Puritan manual on pastoral care (the word &ldquo;reformed&rdquo; here meaning renewed and faithful, not a party name), and it has shaped devoted ministers for generations.<br><span class="es">Baxter insta a los pastores de la iglesia a conocer, alimentar y velar por el rebaño con toda diligencia &mdash; el mismo encargo que Pedro da a los ancianos en nuestra unidad final, apacentar la grey de Dios de buena voluntad y no por ganancia. Es el manual puritano clásico sobre el cuidado pastoral (la palabra &ldquo;reformado&rdquo; aquí significa renovado y fiel, no el nombre de un partido), y ha formado a ministros consagrados por generaciones.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Richard+Baxter+The+Reformed+Pastor+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Make Your Defense &middot; Ready to Answer <span class="es">/ Presentad Defensa &middot; Listos para Responder</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">8.</span> A View of the Evidences of Christianity <span class="es">/ Un Examen de las Evidencias del Cristianismo</span></div>
+<div class="cts-shelf-byline">William Paley &middot; 1794</div>
+<p class="cts-shelf-caption">Paley marshals the historical evidence for the truth of the Christian faith &mdash; above all the testimony of the first witnesses, who suffered and died rather than deny what they had seen. It equips the reader for the charge of our eighth unit, to be &ldquo;ready always to give an answer&rdquo; for the hope within; written before the modern debates, it still models how to reason for the faith with an honest appeal to the facts.<br><span class="es">Paley reúne la evidencia histórica de la verdad de la fe cristiana &mdash; sobre todo el testimonio de los primeros testigos, que sufrieron y murieron antes que negar lo que habían visto. Equipa al lector para el mandato de nuestra octava unidad, estar &ldquo;siempre preparados para responder&rdquo; por la esperanza que hay en nosotros; escrito antes de los debates modernos, todavía modela cómo razonar por la fe con una apelación honesta a los hechos.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=William+Paley+A+View+of+the+Evidences+of+Christianity+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Suffering for the Name &middot; Witnesses in the Fire <span class="es">/ Sufrir por el Nombre &middot; Testigos en el Fuego</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">9.</span> Foxe's Book of Martyrs <span class="es">/ El Libro de los Mártires de Foxe</span></div>
+<div class="cts-shelf-byline">John Foxe &middot; 1563</div>
+<p class="cts-shelf-caption">Foxe records the long line of Christians who suffered and died for their faith, from the early martyrs to the Reformation, so that the church would never forget what it has cost to keep the Word of God. It gives flesh and blood to the &ldquo;fiery trial&rdquo; and the suffering &ldquo;for the name&rdquo; that run through this whole letter &mdash; sobering, strengthening, and a reminder that our trials join a great company. Read it for its witness rather than for every disputed historical detail.<br><span class="es">Foxe registra la larga fila de cristianos que sufrieron y murieron por su fe, desde los primeros mártires hasta la Reforma, para que la iglesia nunca olvide lo que ha costado guardar la Palabra de Dios. Da carne y sangre a la &ldquo;prueba de fuego&rdquo; y al sufrimiento &ldquo;por el nombre&rdquo; que recorren toda esta carta &mdash; conmovedor, fortalecedor y un recordatorio de que nuestras pruebas se unen a una gran compañía. Léase por su testimonio más que por cada detalle histórico discutido.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Foxe%27s+Book+of+Martyrs+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Refined Faith &middot; Comfort for the Bruised <span class="es">/ Fe Acrisolada &middot; Consuelo para el Quebrantado</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">10.</span> The Bruised Reed <span class="es">/ La Caña Cascada</span></div>
+<div class="cts-shelf-byline">Richard Sibbes &middot; 1630</div>
+<p class="cts-shelf-caption">Sibbes opens the gentle promise that Christ &ldquo;will not break the bruised reed nor quench the smoking flax,&rdquo; showing how tenderly the Lord deals with weak and struggling believers. It is balm for the tried and refined faith of our second unit &mdash; a reminder that the God who tests faith like gold does not despise the weak &mdash; and one of the most comforting of all the Puritan books, loved far beyond the tradition that produced it.<br><span class="es">Sibbes despliega la tierna promesa de que Cristo &ldquo;no quebrará la caña cascada ni apagará el pábilo humeante,&rdquo; mostrando con cuánta ternura trata el Señor a los creyentes débiles y luchadores. Es bálsamo para la fe probada y acrisolada de nuestra segunda unidad &mdash; un recordatorio de que el Dios que prueba la fe como al oro no desprecia al débil &mdash; y uno de los libros puritanos más consoladores, amado mucho más allá de la tradición que lo produjo.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Richard+Sibbes+The+Bruised+Reed+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+</section>
+<!-- /CTS-SHELF -->
+
 
   <div class="notice">
     <strong>Honor attestation:</strong> By selecting three readings above, you affirm that you have read those three digests in full. The digests are CTS-authored summaries that may include brief excerpts or adaptations of public-domain works.<br>

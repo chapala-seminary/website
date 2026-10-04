@@ -1086,6 +1086,23 @@ Details: `docs/textbooks.md`.
   heading is now "Unit N Exam" and the note says what each track completes
   (the sentence from the registration card). Dr. Cook's request.
 
+### 8ag. Dr. Cook's Add-ons (4 Oct 2026) — 45 reading rooms, Genesis and World Religions
+
+* **Every reading room keeps its five CTS digests and the honours rule** (any
+  three, in full, on your honour). Below them, 41 rooms gain the ten-work
+  public-domain shelf from the delivery as further study, with no selection
+  and no "included in your course download" (`tools/reading-rooms.mjs`,
+  `src/data/reading-shelf.json`). The 25 rooms without an honours attestation
+  gain one, recording under the code the certificate PDF reads.
+* **Genesis Intensive** units gain the honours box (its room was unlinked);
+  its 40-question bank becomes the required-reading test. **World Religions**
+  gains a Required Readings page beside its room and its own test. Both tests
+  follow the textbook rule (§8af) and accept three to five answers per
+  question. Not a change to any lesson's text; the twelve Genesis templates
+  gain the partial, and the Genesis and World Religions pages the readings box.
+
+Details: `docs/reading-rooms.md`.
+
 ## How to check any of this yourself
 
 ```

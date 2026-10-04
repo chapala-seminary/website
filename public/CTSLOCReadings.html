@@ -524,6 +524,176 @@
     </article>
 
   </main>
+<!-- CTS-ATTEST: the honours-reading attestation, written by tools/reading-rooms.mjs; edit there -->
+<style>
+.cts-attest{background:var(--card,#fff);border:1px solid var(--line,#dde1ea);border-top:4px solid var(--accent,#1f3d8c);border-radius:10px;padding:18px;margin:22px 0;box-shadow:0 2px 8px #0000000b}
+.cts-attest h2{margin:0 0 8px;font-size:1.25rem}
+.cts-attest label.cts-field{display:block;margin:12px 0 4px;font:700 .9rem Arial,sans-serif;color:var(--muted,#5a6272)}
+.cts-attest input[type=text]{width:100%;max-width:420px;padding:9px 11px;border:1px solid var(--line,#dde1ea);border-radius:7px;font:1rem Georgia,serif}
+.cts-attest .cts-oath{display:flex;gap:10px;align-items:flex-start;margin:12px 0}
+.cts-attest .cts-oath input{width:20px;height:20px;margin-top:2px;accent-color:var(--accent,#1f3d8c);flex-shrink:0}
+.cts-attest .cts-btn{display:inline-block;padding:9px 13px;border-radius:7px;border:0;cursor:pointer;background:var(--accent,#1f3d8c);color:#fff;font:700 .9rem Arial,sans-serif}
+.cts-attest .cts-btn.ghost{background:#fff;color:var(--accent,#1f3d8c);border:1px solid var(--accent,#1f3d8c)}
+.cts-attest .cts-msg{margin:8px 0 0;font-family:Arial,sans-serif;font-size:.92rem;color:#8a1f1f;min-height:1em}
+.cts-attest .cts-done{display:none;margin:8px 0 0;font-family:Arial,sans-serif;font-size:.95rem;color:#2f6b3a}
+.cts-attest .cts-record{display:none;margin-top:16px;padding-top:14px;border-top:2px solid var(--accent,#1f3d8c)}
+.cts-attest .cts-record.show{display:block}
+.cts-attest .cts-record .cts-name{font-size:1.4rem;margin:4px 0}
+.cts-attest .cts-record ul{margin:6px 0 0 18px;padding:0}
+@media print{.cts-attest input,.cts-attest label.cts-field,.cts-attest .cts-oath,.cts-attest .cts-btn,.cts-attest .cts-msg,.cts-attest .cts-done,.cts-attest .cts-intro{display:none!important}.cts-attest .cts-record{display:block!important;border:none}}
+</style>
+<section class="cts-attest" id="cts-attest" data-honors-code="LOC" data-honors-course="The Life of Christ">
+<h2>Record your reading <span class="es">/ Registre su lectura</span></h2>
+<p class="cts-intro">When you have read your three chosen readings in full, enter your name and affirm it below. This record is kept on your honor, in this browser; it shows on your certificate as <em>with honors</em>.<br><span class="es">Cuando haya leído por completo sus tres lecturas elegidas, escriba su nombre y confírmelo abajo. Este registro se guarda bajo su honor, en este navegador; aparece en su certificado como <em>con honores</em>.</span></p>
+<label class="cts-field" for="cts-att-name">Your name <span class="es">/ Su nombre</span></label>
+<input type="text" id="cts-att-name" autocomplete="name">
+<div class="cts-oath"><input type="checkbox" id="cts-att-oath"><label for="cts-att-oath">On my honor, I have read in full the three readings I selected above.<br><span class="es">Bajo mi honor, he leído por completo las tres lecturas que seleccioné arriba.</span></label></div>
+<button type="button" class="cts-btn" id="cts-att-record">Record my reading <span class="es">/ Registrar mi lectura</span></button>
+<p class="cts-msg" id="cts-att-msg" role="status"></p>
+<p class="cts-done" id="cts-att-done">&#10003; Recorded &mdash; this class counts toward your With Honors progress. <a href="cts-honors.html">The Honors Reading Library &#8599;</a><br><span class="es">&#10003; Registrado &mdash; esta clase cuenta para su progreso Con Honores. <a href="cts-honors.html">La Biblioteca de Lecturas de Honores &#8599;</a></span></p>
+<div class="cts-record" id="cts-att-record-card">
+<div class="num">Honors Reading &mdash; recorded <span class="es">/ Lectura con Honores &mdash; registrada</span></div>
+<div class="cts-name" id="cts-att-rec-name"></div>
+<p>affirmed on <span id="cts-att-rec-date"></span> to have read, in full: <span class="es">/ afirmó haber leído, por completo:</span></p>
+<ul id="cts-att-rec-list"></ul>
+<p class="byline">Chapala Theological Seminary &middot; The Life of Christ &middot; present or print this page as your honors reading record. <span class="es">/ Presente o imprima esta página como su registro de lectura con honores.</span></p>
+<p><button type="button" class="cts-btn ghost" onclick="window.print()">Print this record <span class="es">/ Imprimir</span></button> <button type="button" class="cts-btn ghost" id="cts-att-reset">Start over <span class="es">/ Empezar de nuevo</span></button></p>
+</div>
+</section>
+<script>
+(function(){
+  var root=document.getElementById('cts-attest'); if(!root) return;
+  var CODE=root.getAttribute('data-honors-code'), COURSE=root.getAttribute('data-honors-course'), MAX=3;
+  var KEY='cts_honors_v1:'+CODE;
+  function get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+  function el(id){ return document.getElementById(id); }
+  // the five digests' own checkboxes, whatever the page calls them
+  function boxes(){ var m=document.querySelector('main')||document; return Array.prototype.slice.call(m.querySelectorAll('article input[type=checkbox]')); }
+  function titleOf(box){ var a=box.closest('article'); var h=a&&a.querySelector('h3'); if(!h) return ''; var c=h.cloneNode(true); Array.prototype.forEach.call(c.querySelectorAll('.es'),function(s){ s.parentNode.removeChild(s); }); return c.textContent.replace(/\s+/g,' ').trim(); }
+  function say(m){ el('cts-att-msg').textContent=m; }
+  function showDone(on){ el('cts-att-done').style.display=on?'block':'none'; }
+  function record(){
+    var chosen=boxes().filter(function(b){ return b.checked; });
+    var name=el('cts-att-name').value.trim(), oath=el('cts-att-oath').checked;
+    if(chosen.length!==MAX){ say('Choose exactly three readings above to record them. / Elija exactamente tres lecturas arriba para registrarlas.'); return; }
+    if(!name){ say('Enter your name to record your reading. / Escriba su nombre para registrar su lectura.'); return; }
+    if(!oath){ say('Check the box to affirm you have read all three. / Marque la casilla para afirmar que ha leído las tres.'); return; }
+    say('');
+    var now=new Date(), en=now.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    var works=chosen.map(titleOf);
+    el('cts-att-rec-name').textContent=name; el('cts-att-rec-date').textContent=en;
+    var ul=el('cts-att-rec-list'); ul.innerHTML=''; works.forEach(function(w){ var li=document.createElement('li'); li.textContent=w; ul.appendChild(li); });
+    set('cts_honors_name_v1', name);
+    set(KEY, JSON.stringify({name:name,date:en,course:COURSE,works:works}));
+    showDone(true);
+    var card=el('cts-att-record-card'); card.classList.add('show'); card.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function reset(){ el('cts-att-name').value=''; el('cts-att-oath').checked=false; el('cts-att-record-card').classList.remove('show'); say(''); }
+  el('cts-att-record').addEventListener('click', record);
+  el('cts-att-reset').addEventListener('click', reset);
+  if(get(KEY)) showDone(true);
+  var nm=get('cts_honors_name_v1'); if(nm && !el('cts-att-name').value) el('cts-att-name').value=nm;
+})();
+</script>
+<!-- /CTS-ATTEST -->
+
+<!-- CTS-SHELF: the public-domain shelf, written by tools/reading-rooms.mjs from src/data/reading-shelf.json; edit there -->
+<style>
+.cts-shelf{margin:34px 0 10px}
+.cts-shelf-head{text-align:center;margin:0 0 6px}
+.cts-shelf-head h2{font-weight:normal;font-size:1.4rem;border:none;padding:0;margin:0;display:inline-block;color:var(--primary,var(--accent,#5b3a1f))}
+.cts-shelf-rule{width:60px;height:2px;background:var(--gold,#c9a227);margin:12px auto 0}
+.cts-shelf-note{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-left:4px solid var(--gold,#c9a227);border-radius:12px;padding:14px 18px;margin:16px 0 18px;font-size:.96rem}
+.cts-shelf-panel{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-radius:16px;padding:18px 22px;margin:22px 0}
+.cts-shelf-panel > h3{font-weight:normal;font-size:1.15rem;margin:0 0 8px;color:var(--primary,var(--accent,#5b3a1f))}
+.cts-shelf-entry{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-radius:16px;padding:18px 22px;margin:14px 0;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+.cts-shelf-locus{letter-spacing:.16em;text-transform:uppercase;font-size:.68rem;color:var(--gold-deep,var(--accent,#98771d));margin-bottom:6px}
+.cts-shelf-title{font-size:1.1rem;color:var(--primary,var(--accent,#5b3a1f));margin-bottom:2px}
+.cts-shelf-num{display:inline-block;min-width:1.5em;color:var(--gold-deep,var(--accent,#98771d));font-style:italic}
+.cts-shelf-byline{color:var(--ink-soft,var(--muted,#6b5844));font-style:italic;font-size:.92rem;margin-bottom:8px}
+.cts-shelf-caption{font-size:.97rem;margin:8px 0}
+.cts-shelf-foot{margin-top:12px;padding-top:10px;border-top:1px solid var(--border,var(--line,#e5d8c8));display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
+.cts-shelf-link{color:var(--primary,var(--accent,#5b3a1f));text-decoration:none;border-bottom:1.5px solid var(--gold,#c9a227);padding-bottom:1px;font-size:.95rem}
+.cts-shelf-badge{font-size:.8rem;color:var(--ink-soft,var(--muted,#6b5844))}
+@media print{.cts-shelf{display:none}}
+</style>
+<section class="cts-shelf" id="cts-shelf" aria-labelledby="cts-shelf-h">
+<div class="cts-shelf-head"><h2 id="cts-shelf-h">Further Study: Ten Public-Domain Works <span class="es">/ Para Profundizar: diez obras de dominio público</span></h2><div class="cts-shelf-rule"></div></div>
+<div class="cts-shelf-note">These ten works are for further study, for the student who wants to go on reading. They are not part of the honors reading above: that stays as it is &mdash; the five CTS digests, any three read in full and recorded on your honor. All ten are in the public domain; each link opens the work online, and most can also be found in the Internet Archive or Project Gutenberg. Most are in English: the Chrome browser can translate a page (right-click, &ldquo;Translate to&hellip;&rdquo;; on a phone, the browser menu).<br><span class="es">Estas diez obras son para profundizar, para el estudiante que quiere seguir leyendo. No forman parte de la lectura con honores de arriba, que sigue igual: los cinco resúmenes del STC, tres cualesquiera leídos por completo y registrados bajo su honor. Las diez están en el dominio público; cada enlace abre la obra en línea, y la mayoría también se encuentra en Internet Archive o en el Proyecto Gutenberg. La mayoría están en inglés: el navegador Chrome puede traducir una página (clic derecho, &ldquo;Traducir a&hellip;&rdquo;; en un teléfono, el menú del navegador).</span></div>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Whole Life &middot; Its Jewish World <span class="es">/ La Vida Entera &middot; Su Mundo Judío</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">1.</span> The Life and Times of Jesus the Messiah <span class="es">/ La Vida y los Tiempos de Jesús el Mesías</span></div>
+<div class="cts-shelf-byline">Alfred Edersheim &middot; 1883</div>
+<p class="cts-shelf-caption">Edersheim sets the whole life of Jesus against the world of first-century Judaism &mdash; its temple, its rabbis, its feasts and customs &mdash; so that the Gospels are read the way their first hearers would have understood them. A converted Jewish scholar writing in defense of Christ as Messiah, he meets the critical scholarship of his day not by retreating from it but by out-knowing it, and this remains the great reference work standing behind our whole course.<br><span class="es">Edersheim sitúa la vida entera de Jesús en el mundo del judaísmo del primer siglo &mdash; su templo, sus rabinos, sus fiestas y costumbres &mdash; para que los Evangelios se lean como los habrían entendido sus primeros oyentes. Erudito judío convertido que escribe en defensa de Cristo como Mesías, enfrenta la crítica de su tiempo no retirándose de ella sino conociéndola mejor, y sigue siendo la gran obra de referencia detrás de todo nuestro curso.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.ccel.org/ccel/edersheim/lifetimes.html" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Whole Life &middot; A Brief Portrait <span class="es">/ La Vida Entera &middot; Un Retrato Breve</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">2.</span> The Life of Jesus Christ <span class="es">/ La Vida de Jesucristo</span></div>
+<div class="cts-shelf-byline">James Stalker &middot; 1880</div>
+<p class="cts-shelf-caption">Stalker draws the life of Christ in short, vivid strokes &mdash; a portrait brief enough to be almost committed to memory, yet full of insight into the stages of the ministry from Nazareth to the empty tomb. It is the ideal companion to Edersheim's larger work: read the two together and the shape of our Lord's life, which our course traces unit by unit, comes clearly into view.<br><span class="es">Stalker traza la vida de Cristo en trazos breves y vívidos &mdash; un retrato lo bastante conciso para casi memorizarse, y a la vez lleno de discernimiento sobre las etapas del ministerio desde Nazaret hasta la tumba vacía. Es el compañero ideal de la obra mayor de Edersheim: léalos juntos y la forma de la vida de nuestro Señor, que nuestro curso recorre unidad por unidad, se ve con claridad.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/lifeofjesuschris03stal" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Word Became Flesh <span class="es">/ El Verbo se Hizo Carne</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">3.</span> On the Incarnation <span class="es">/ Sobre la Encarnación</span></div>
+<div class="cts-shelf-byline">Athanasius &middot; c. 318</div>
+<p class="cts-shelf-caption">Athanasius explains why the eternal Son had to take our flesh &mdash; to conquer death from within our own nature and restore the image of God in us &mdash; in the great early defense of the deity of Christ. It reaches beneath the whole Gospel story to the question our first unit asks: who is this child born in Bethlehem, and why did the Word become flesh?<br><span class="es">Atanasio explica por qué el Hijo eterno tuvo que tomar nuestra carne &mdash; para vencer la muerte desde dentro de nuestra propia naturaleza y restaurar en nosotros la imagen de Dios &mdash; en la gran defensa antigua de la deidad de Cristo. Se remonta por debajo de toda la historia del Evangelio a la pregunta que hace nuestra primera unidad: ¿quién es este niño nacido en Belén, y por qué el Verbo se hizo carne?</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.ccel.org/ccel/athanasius/incarnation.html" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The King &amp; His Disciples <span class="es">/ El Rey y Sus Discípulos</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">4.</span> The Training of the Twelve <span class="es">/ La Formación de los Doce</span></div>
+<div class="cts-shelf-byline">A. B. Bruce &middot; 1871</div>
+<p class="cts-shelf-caption">Bruce follows the patient way Jesus taught and shaped the twelve through the heart of His ministry &mdash; from their calling, through Peter's great confession, to the eve of the cross &mdash; showing that the making of these few men was itself a central part of His work. It illuminates the turning point our course reaches at the confession and the transfiguration, and it is a classic every pastor returns to.<br><span class="es">Bruce sigue la manera paciente en que Jesús enseñó y formó a los doce a lo largo del corazón de su ministerio &mdash; desde su llamamiento, pasando por la gran confesión de Pedro, hasta la víspera de la cruz &mdash; mostrando que formar a estos pocos hombres fue en sí una parte central de su obra. Ilumina el punto de inflexión que nuestro curso alcanza en la confesión y la transfiguración, y es un clásico al que todo pastor vuelve.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.ccel.org/ccel/bruce/twelve.html" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Signs &middot; The Greater Sign <span class="es">/ Las Señales &middot; La Señal Mayor</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">5.</span> Notes on the Miracles of Our Lord <span class="es">/ Notas sobre los Milagros de Nuestro Señor</span></div>
+<div class="cts-shelf-byline">R. C. Trench &middot; 1846</div>
+<p class="cts-shelf-caption">Trench takes up the miracles of Jesus one by one, showing each not as a mere wonder but as a sign that reveals who He is and what His kingdom brings. It gives careful attention to the raising of Lazarus &mdash; the &ldquo;greater sign&rdquo; our sixth unit reaches on the road to Jerusalem &mdash; and treats each miracle as sober history against those who would explain the wonders away.<br><span class="es">Trench aborda los milagros de Jesús uno por uno, mostrando cada uno no como un mero prodigio sino como una señal que revela quién es Él y qué trae su reino. Presta cuidadosa atención a la resurrección de Lázaro &mdash; la &ldquo;señal mayor&rdquo; que alcanza nuestra sexta unidad en el camino a Jerusalén &mdash; y trata cada milagro como historia sobria frente a quienes quisieran explicar los prodigios como otra cosa.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/notesonmiracles00trengoog" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The King &amp; His Kingdom <span class="es">/ El Rey y Su Reino</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">6.</span> The Teaching of Jesus concerning the Kingdom of God and the Church <span class="es">/ La Enseñanza de Jesús acerca del Reino de Dios y la Iglesia</span></div>
+<div class="cts-shelf-byline">Geerhardus Vos &middot; 1903</div>
+<p class="cts-shelf-caption">Vos gathers what Jesus Himself taught about the kingdom of God &mdash; already present in His coming, yet awaiting its fullness &mdash; and shows how the kingdom and the church belong together. It is the clearest guide to the King's own message that our fourth unit takes up, from a careful scholar reasoning wholly from the words of Christ.<br><span class="es">Vos reúne lo que Jesús mismo enseñó sobre el reino de Dios &mdash; ya presente en su venida, y a la vez esperando su plenitud &mdash; y muestra cómo el reino y la iglesia van juntos. Es la guía más clara del mensaje propio del Rey que aborda nuestra cuarta unidad, de un erudito cuidadoso que razona plenamente desde las palabras de Cristo.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/theteachingofjes00vosuoft" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Week That Changed the World <span class="es">/ La Semana Que Cambió el Mundo</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">7.</span> The Suffering Saviour <span class="es">/ El Salvador Sufriente</span></div>
+<div class="cts-shelf-byline">F. W. Krummacher &middot; 1854</div>
+<p class="cts-shelf-caption">Krummacher leads the reader step by step through the last days of Jesus &mdash; the upper room, Gethsemane, the arrest and the trial &mdash; in meditations that dwell on the meaning of each scene of the passion. It is a rich devotional companion to the seventh and eighth units, written to warm the heart as much as to inform the mind, and long treasured by preachers.<br><span class="es">Krummacher conduce al lector paso a paso por los últimos días de Jesús &mdash; el aposento alto, Getsemaní, el arresto y el juicio &mdash; en meditaciones que se detienen en el significado de cada escena de la pasión. Es un rico compañero devocional para las unidades séptima y octava, escrito para calentar el corazón tanto como para informar la mente, y largamente apreciado por los predicadores.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/sufferingsavior00jackgoog" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Lamb of God &middot; The Cross <span class="es">/ El Cordero de Dios &middot; La Cruz</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">8.</span> The Death of Christ <span class="es">/ La Muerte de Cristo</span></div>
+<div class="cts-shelf-byline">James Denney &middot; 1902</div>
+<p class="cts-shelf-caption">Denney gathers the New Testament's own witness to why Christ died, showing that His death was no accident and no mere example but a work that deals with sin at its root. It gives our eighth unit its doctrinal weight &mdash; reading the cross as the Lamb of God bearing sin &mdash; and answers, from Scripture, those who would empty the atonement of its meaning.<br><span class="es">Denney reúne el propio testimonio del Nuevo Testamento sobre por qué murió Cristo, mostrando que su muerte no fue un accidente ni un mero ejemplo sino una obra que trata con el pecado en su raíz. Da a nuestra octava unidad su peso doctrinal &mdash; leyendo la cruz como el Cordero de Dios que lleva el pecado &mdash; y responde, desde la Escritura, a quienes quisieran vaciar la expiación de su significado.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/TheDeathOfChrist" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Lord Is Risen <span class="es">/ El Señor Ha Resucitado</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">9.</span> The Resurrection of Our Lord <span class="es">/ La Resurrección de Nuestro Señor</span></div>
+<div class="cts-shelf-byline">William Milligan &middot; 1881</div>
+<p class="cts-shelf-caption">Milligan sets out the evidence for the bodily resurrection of Jesus and unfolds its meaning for the believer's hope, treating the empty tomb as the best-attested fact of the Gospel record. It stands squarely behind our ninth unit, answering the doubts of critical scholarship with the plain testimony of the witnesses who saw the risen Lord.<br><span class="es">Milligan expone la evidencia de la resurrección corporal de Jesús y despliega su significado para la esperanza del creyente, tratando la tumba vacía como el hecho mejor atestiguado del relato del Evangelio. Se sitúa firmemente detrás de nuestra novena unidad, respondiendo a las dudas de la crítica con el testimonio sencillo de los testigos que vieron al Señor resucitado.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/resurrectionofou00mill" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Glory of Christ <span class="es">/ La Gloria de Cristo</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">10.</span> Meditations and Discourses on the Glory of Christ <span class="es">/ Meditaciones y Discursos sobre la Gloria de Cristo</span></div>
+<div class="cts-shelf-byline"><span class="lang-en">John Owen &middot; 1684</span><span class="lang-es">John Owen &middot; 1684</span></div>
+<p class="cts-shelf-caption">Owen closes the shelf where our final unit closes the course &mdash; not with more information about Jesus, but with the beholding of His glory in His person, His work as Mediator, and His exaltation. Drawn up as the dying testimony of one of the greatest of the Puritans, it answers the question &ldquo;Who do you say that I am?&rdquo; by turning the eyes of faith upon Christ Himself, that we may know Him and not only know about Him.<br><span class="es">Owen cierra el estante donde nuestra unidad final cierra el curso &mdash; no con más información sobre Jesús, sino con la contemplación de su gloria en su persona, su obra como Mediador y su exaltación. Redactado como el testimonio final de uno de los más grandes puritanos, responde a la pregunta &ldquo;¿Quién dices que soy yo?&rdquo; volviendo los ojos de la fe hacia Cristo mismo, para que le conozcamos y no solo sepamos acerca de Él.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.ccel.org/ccel/owen/glory.html" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+</section>
+<!-- /CTS-SHELF -->
+
 
   <div class="notice">
     <strong>Honor attestation:</strong> By selecting three readings above, you affirm that you have read those three digests in full. The digests are CTS-authored summaries that may include brief excerpts or adaptations of public-domain works.<br>

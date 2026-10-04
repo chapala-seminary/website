@@ -168,7 +168,46 @@ const student = JSON.stringify({ name: 'T', track: 'cert' });
   await b.ctx.close();
 }
 
+// 7. the required-reading tests (Dr. Cook's Add-ons, 4 Oct 2026) are the same test
+//    on the readings: Genesis Intensive, held on the master's tracks, in its own words
+{
+  const R = 'CTSGenesisReadingsTest.html';
+  const units = {}; for (let u = 1; u <= 12; u++) units['unit' + u] = true;
+  const mdiv = { cts_student: JSON.stringify({ name: 'T', track: 'mdiv' }), cts_track: 'mdiv', cts_genesis_progress: JSON.stringify(units) };
+  const { ctx, p, errs } = await open(mdiv);
+  await p.goto(`${BASE}/${R}`, { waitUntil: 'load' }); await p.waitForTimeout(300);
+  const T = await bank(p), d = await draw(p);
+  ok(T.kind === 'reading' && T.draw === 20 && T.pass === 18 && T.questions.length === 40, `the Genesis readings test says kind ${T.kind}, draw ${T.draw}, pass ${T.pass}, ${T.questions.length} questions`);
+  ok(d.length === 20 && new Set(d).size === 20, 'the readings test draws twenty distinct questions');
+  ok(/readings/i.test(await p.locator('.tb-about').textContent()), 'the page does not speak of readings');
+  ok(!/textbook/i.test(await p.locator('.cts-masthead').textContent()), 'the masthead calls the readings a textbook');
+  // all units passed on the M.Div.: held, and sent to the readings test in those words
+  await p.goto(`${BASE}/CTSGenesisUnit12.html`, { waitUntil: 'load' }); await p.waitForTimeout(400);
+  const u = await p.evaluate(() => ({ done: localStorage.getItem('cts_done_codes') || '', banner: (document.getElementById('cts-passed-banner') || {}).innerText || '', box: (document.getElementById('cts-textbook') || {}).innerText || '' }));
+  ok(!u.done.includes('CTSGENESIS'), `a master's student with all Genesis units is recorded complete without the readings test (${u.done})`);
+  ok(/required-reading test/i.test(u.banner) && !/textbook/i.test(u.banner), `the passed banner should send to the required-reading test, not a textbook: "${u.banner.slice(0, 160)}"`);
+  ok(/Required readings/i.test(u.box) && /Required-reading test/i.test(u.box), `the unit box should name the readings and their test: "${u.box.slice(0, 120)}"`);
+  await p.goto(`${BASE}/CTSGenesisCertificate.html`, { waitUntil: 'load' }); await p.waitForTimeout(800);
+  const c1 = await p.evaluate(() => { const v = (el) => !!(el && el.offsetParent !== null); return { dip: v(document.querySelector('#diploma,#cert-wrap,.diploma,#certificate,.certificate,#cert,.cert-wrap')), hold: v(document.getElementById('cts-textbook-hold')), text: (document.getElementById('cts-textbook-hold') || {}).innerText || '' }; });
+  ok(!c1.dip && c1.hold && /required-reading/i.test(c1.text), `the Genesis certificate should hold the diploma and name the readings test (diploma ${c1.dip}, note ${c1.hold}: "${c1.text.slice(0, 80)}")`);
+  // passing the test completes the course
+  await p.goto(`${BASE}/${R}`, { waitUntil: 'load' }); await p.waitForTimeout(200);
+  await answer(p, 20, (a) => a);
+  await p.locator('#tb-submit').click(); await p.waitForTimeout(500);
+  const after = await p.evaluate(() => ({ done: localStorage.getItem('cts_done_codes') || '', passed: localStorage.getItem('cts_textbook_genesisreadings_passed'), res: document.getElementById('tb-result').textContent }));
+  ok(!!after.passed && after.done.includes('CTSGENESIS'), `passing the readings test did not complete Genesis on the M.Div. (${after.done}, pass ${after.passed})`);
+  ok(/completes the course/.test(after.res), `the result does not say the course is complete: "${after.res}"`);
+  ok(errs.length === 0, 'page errors in the readings flow', errs[0]);
+  await ctx.close();
+  // the accepted alternate, as a student types it: "beginning" marks right
+  const b = await open({ cts_student: student });
+  await b.p.goto(`${BASE}/${R}`, { waitUntil: 'load' }); await b.p.waitForTimeout(200);
+  const right = await b.p.evaluate(() => { const q = window.CTS_TEXTBOOK_TEST.questions[0]; return [window.CTSFill.fillRight(q, 'beginning'), window.CTSFill.fillRight(q, 'The Beginnings'), window.CTSFill.fillRight(q, 'ending')]; });
+  ok(right[0] === true && right[1] === true && right[2] === false, '"beginning" and "The Beginnings" should be right for Genesis #1 and "ending" wrong', JSON.stringify(right));
+  await b.ctx.close();
+}
+
 await browser.close();
-console.log(`${checks} assertions on ${PAGE}`);
+console.log(`${checks} assertions on ${PAGE} and the Genesis readings test`);
 if (!fails.length) console.log('PASS — the textbook test draws, marks, locks and keeps as Dr. Cook asked.');
 else { console.log(`FAIL — ${fails.length}:`); fails.forEach((f) => console.log('  ' + f)); process.exit(1); }

@@ -13,6 +13,8 @@
   "use strict";
   var b = document.body;
   var slug = b && b.getAttribute("data-textbook"), page = b && b.getAttribute("data-textbook-page");
+  // data-textbook-kind="reading": a required-reading test (Genesis, World Religions), the same hold in its own words
+  var reading = b && b.getAttribute("data-textbook-kind") === "reading";
   if (!slug || !page) return;
   function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function track() {
@@ -60,7 +62,13 @@
     if (state === shown) return;
     shown = state;
     note.style.display = hold ? "" : "none";
-    note.innerHTML = isEs()
+    note.innerHTML = reading
+      ? (isEs()
+        ? "<strong>Falta el examen de lecturas requeridas.</strong> En los trayectos M.Div. y Th.M. este curso se completa, y su certificado se emite, cuando también se aprueba el examen de lecturas requeridas. " +
+          '<a href="' + page + 'Test.html">Presentar el examen</a> &nbsp;·&nbsp; <a href="' + page + '.html">Las lecturas</a>'
+        : "<strong>The required-reading test is still to pass.</strong> On the M.Div. and Th.M. tracks this course is complete, and its certificate issued, when the required-reading test is passed as well. " +
+          '<a href="' + page + 'Test.html">Take the test</a> &nbsp;·&nbsp; <a href="' + page + '.html">The readings</a>')
+      : isEs()
       ? "<strong>Falta el examen del libro de texto.</strong> En los trayectos M.Div. y Th.M. este curso se completa, y su certificado se emite, cuando también se aprueba el examen del libro de texto. " +
         '<a href="' + page + 'Test.html">Presentar el examen del libro</a> &nbsp;·&nbsp; <a href="' + page + '.html">Leer el libro</a>'
       : "<strong>The textbook test is still to pass.</strong> On the M.Div. and Th.M. tracks this course is complete, and its certificate issued, when the textbook test is passed as well. " +

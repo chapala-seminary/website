@@ -261,4 +261,35 @@ const textbooks = defineCollection({
   }),
 });
 
-export const collections = { units, courses, lessons, textbooks };
+/* The required-reading tests (Dr. Cook's "CTS Add-ons", 4 Oct 2026): a forty-
+   question bank for Genesis Intensive and one for World Religions, bound to
+   the course the way a textbook test is -- the same draw, pass mark, grader,
+   record and master's rule -- but on the readings, not a book: the student
+   reads the room (or the Required Readings page) and takes the test on a
+   page of its own. Made by tools/import-readings.mjs from Dr. Cook's bank
+   and the accepted alternates in src/data/readings/. */
+const readings = defineCollection({
+  loader: glob({
+    pattern: '*.json',
+    base: './src/content/readings',
+    generateId: ({ entry }) => entry.replace(/\.json$/, ''),
+  }),
+  schema: z.object({
+    slug: z.string().regex(/^[a-z]+readings$/, 'the slug ends in "readings", so it cannot be mistaken for a textbook in the one map both share'),
+    page: z.string().regex(/^CTS[A-Za-z]+$/, 'the page the readings are on: CTSX, giving CTSX.html and CTSXTest.html'),
+    course: z.string().min(1),        // the catalog card (src/content/courses/<course>.json)
+    kind: z.literal('reading'),
+    title: bilingual,
+    room: bilingual,                  // what the student reads first, in a sentence
+    source: z.object({ file: z.string(), course: z.string() }),
+    test: z.object({
+      draw: z.number().int().positive(),
+      pass: z.number().int().positive(),
+      questions: z.array(textbookFill).min(20),
+    }).refine((t) => t.pass <= t.draw && t.draw <= t.questions.length, {
+      message: 'pass <= draw <= number of questions',
+    }),
+  }),
+});
+
+export const collections = { units, courses, lessons, textbooks, readings };

@@ -13,7 +13,7 @@ interface Bi { en: string; es: string }
 interface Book { slug: string; page: string; course: string; title: Bi; subtitle?: Bi; credits?: Bi; edition: string }
 interface Card { entry: string; title: Bi }
 interface Props {
-  kind: 'book' | 'test';
+  kind: 'book' | 'test' | 'reading-test';   // reading-test: a required-reading test (src/pages/[readingtest].astro)
   book: Book;
   course: Card;
   accent: string | null;      // the course's storage slug, for its colour
@@ -21,9 +21,10 @@ interface Props {
   sync?: boolean;             // the test page: a pass goes to the student record
 }
 const { kind, book, course, accent, scripts = [], sync = false } = Astro.props;
-const title = kind === 'book'
-  ? `CTS Textbook: ${book.title.en}`
+const title = kind === 'book' ? `CTS Textbook: ${book.title.en}`
+  : kind === 'reading-test' ? `CTS Required-Reading Test: ${book.title.en}`
   : `CTS Textbook Test: ${book.title.en}`;
+const reading = kind === 'reading-test';
 ---
 <!doctype html>
 <html lang="en">
@@ -39,7 +40,7 @@ const title = kind === 'book'
     />
     <link rel="stylesheet" href={version('/assets/css/cts.css')} />
   </head>
-  <body class="lang-en" data-course={accent ?? undefined} data-textbook={book.slug} data-textbook-page={kind}>
+  <body class="lang-en" data-course={accent ?? undefined} data-textbook={book.slug} data-textbook-page={kind} data-textbook-kind={reading ? 'reading' : 'textbook'}>
     <script is:inline src={version('/cts-lang.js')}></script>
     <a class="btn skip" href="#content" style="position:absolute;left:-9999px">
       <span class="lang-en">Skip to the content</span><span class="lang-es">Saltar al contenido</span>
@@ -48,10 +49,10 @@ const title = kind === 'book'
     <header class="cts-masthead">
       <div class="wrap">
         <div class="eyebrow">
-          <span class="lang-en">{kind === 'book' ? "Master's textbook" : "Master's textbook · test"}</span>
-          <span class="lang-es">{kind === 'book' ? 'Libro de texto de maestría' : 'Libro de texto de maestría · examen'}</span>
+          <span class="lang-en">{kind === 'book' ? "Master's textbook" : reading ? 'Required readings · test' : "Master's textbook · test"}</span>
+          <span class="lang-es">{kind === 'book' ? 'Libro de texto de maestría' : reading ? 'Lecturas requeridas · examen' : 'Libro de texto de maestría · examen'}</span>
         </div>
-        <h1>📘 <span class="lang-en">{book.title.en}</span><span class="lang-es">{book.title.es}</span></h1>
+        <h1>{reading ? '📖' : '📘'} <span class="lang-en">{book.title.en}</span><span class="lang-es">{book.title.es}</span></h1>
         {book.subtitle && (book.subtitle.en || book.subtitle.es) && (
           <h2><span class="lang-en">{book.subtitle.en}</span><span class="lang-es">{book.subtitle.es}</span></h2>
         )}
@@ -68,6 +69,8 @@ const title = kind === 'book'
             <a class="btn" href={`/${course.entry}`}>← <span class="lang-en">Course: {course.title.en}</span><span class="lang-es">Curso: {course.title.es}</span></a>
             {kind === 'book'
               ? <a class="btn solid" href={`/${book.page}Test.html`}><span class="lang-en">Textbook test</span><span class="lang-es">Examen del libro</span> →</a>
+              : reading
+              ? <a class="btn solid" href={`/${book.page}.html`}>← <span class="lang-en">The readings</span><span class="lang-es">Las lecturas</span></a>
               : <a class="btn solid" href={`/${book.page}.html`}>← <span class="lang-en">Read the textbook</span><span class="lang-es">Leer el libro</span></a>}
           </div>
         </div>

@@ -26,6 +26,12 @@ const cardOf = new Map(courses.map((c) => [c.code, c]));
 for (const t of textbooks)
   if (!cardOf.has(t.course))
     throw new Error(`textbook ${t.slug} belongs to course "${t.course}", which has no catalog card`);
+// The required readings (src/content/readings), listed with the textbooks:
+// the same rule on the master's tracks, open to every student.
+const readings = (await getCollection('readings')).map((e) => e.data).sort((a, b) => a.title.en.localeCompare(b.title.en));
+for (const r of readings)
+  if (!cardOf.has(r.course))
+    throw new Error(`required readings ${r.slug} belong to course "${r.course}", which has no catalog card`);
 
 // Invariants the hand-written catalog had no way to enforce.
 if (courses.length !== intro.statedCount)
@@ -86,6 +92,14 @@ const recordJson = JSON.stringify(recordable).replace(/</g, '\\u003c');
     <div class="tb-grid">
       {textbooks.map((t) => (
         <a class="textbook" href={`${t.page}.html`}><div class="tb-title"><span class="en">{t.title.en}</span><span class="es">{t.title.es}</span></div><div class="tb-for"><span class="en">For {cardOf.get(t.course)!.title.en}</span><span class="es">Para {cardOf.get(t.course)!.title.es}</span></div><span class="tb-go"><span class="en">Read →</span><span class="es">Leer →</span></span></a>
+      ))}
+    </div>
+    <h3 style="margin-top:26px"><span class="en">Required Readings</span><span class="es">Lecturas Requeridas</span></h3>
+    <p><span class="en">Two courses set required readings instead of a textbook, each with a test of its own under the same rule.</span>
+    <span class="es">Dos cursos fijan lecturas requeridas en lugar de un libro de texto, cada uno con su propio examen bajo la misma regla.</span></p>
+    <div class="tb-grid" id="required-readings">
+      {readings.map((r) => (
+        <a class="textbook reading" href={`${r.page}.html`}><div class="tb-title"><span class="en">{r.title.en}</span><span class="es">{r.title.es}</span></div><div class="tb-for"><span class="en">For {cardOf.get(r.course)!.title.en}</span><span class="es">Para {cardOf.get(r.course)!.title.es}</span></div><span class="tb-go"><span class="en">Read →</span><span class="es">Leer →</span></span></a>
       ))}
     </div>
   </section>
