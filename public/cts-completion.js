@@ -31,7 +31,20 @@
     if (/thm|mth/.test(file)) return "Master of Theology (Th.M.)";
     return "Certificate of Ministry";
   }
+  /* The course name the seminary's records server uses, from the
+     certificate's own entry in cts-cert-names.js, and the course code. The
+     page title gave older names ("Romans |"), and the records server reports
+     the same completion under today's name, so the tracker sheet held one
+     course twice under two names (Dr. Cook, 5 Oct 2026). The code lets the
+     sheet match the two. */
+  var CODE_ALIASES = { CTSCOUNSELING: "COUNSELING", CTSNARRATIVEPREACHING: "STORYTEL", CTSPREACHING: "WISESPEAK", ETHICS_: "ETHICS" };
+  function courseCode() {
+    var c = file.replace(/(thm|mth|mdiv)?certificate\.html$/, "").toUpperCase();
+    return CODE_ALIASES[c] || c;
+  }
   function course() {
+    var n = window.CTS_CERT_NAMES && window.CTS_CERT_NAMES[file];
+    if (n && n.en) return n.en;
     var explicit = (document.body && document.body.getAttribute("data-course")) ||
                    (document.documentElement && document.documentElement.getAttribute("data-course"));
     if (explicit && explicit.trim()) return explicit.trim();   // page may name itself (overrides title parsing)
@@ -209,13 +222,13 @@
 
     document.getElementById("cts-cc-btn").addEventListener("click", function () {
       var em = (document.getElementById("cts-cc-email").value || "").trim();
-      record({ name: ctx.name(), course: ctx.course, track: ctx.track, date: ctx.date, email: em }, true);
+      record({ name: ctx.name(), course: ctx.course(), code: ctx.code, track: ctx.track, date: ctx.date, email: em }, true);
     });
 
     // Auto-record fallback after 7s if the student doesn't click (count still captured, email blank)
     setTimeout(function () {
       var em = (document.getElementById("cts-cc-email") || {}).value || "";
-      record({ name: ctx.name(), course: ctx.course, track: ctx.track, date: ctx.date, email: em.trim() }, false);
+      record({ name: ctx.name(), course: ctx.course(), code: ctx.code, track: ctx.track, date: ctx.date, email: em.trim() }, false);
     }, 7000);
   }
 
@@ -225,7 +238,11 @@
   }
 
   function start() {
-    var ctx = { course: course(), track: track(), date: dateStr(), name: findName };
+    if (!window.CTS_CERT_NAMES) {               // loaded once, well before the 7-second record
+      var sc = document.createElement("script"); sc.src = "assets/js/cts-cert-names.js"; sc.defer = true;
+      document.head.appendChild(sc);
+    }
+    var ctx = { course: course, code: courseCode(), track: track(), date: dateStr(), name: findName };
     var tries = 0;
     var iv = setInterval(function () {
       tries++;

@@ -102,6 +102,21 @@ ok(told(repeat.body).length === 0, `re-reporting both courses from another devic
     `44 Certificate-level courses make a Certificate of Ministry, not an Associate (${JSON.stringify(all.body.degrees)})`);
 }
 
+// One course, one completion (Dr. Cook, 5 Oct 2026): a returning browser
+// reports the old site's certificate-file codes beside today's, and the
+// degree pages' own non-course codes. Each course is held once, under today's
+// code, at the higher level; a code that is not a course is not held.
+{
+  const r = await jpost('/api/register', { name: 'Alias Student', track: 'cert' });
+  const st = await jpost('/api/sync', { code: r.body.code, progress: [],
+    doneCodes: ['COUNSELING', 'CTSCOUNSELING', 'CTSPREACHING', 'OTS', 'CTSOTS', 'CTS', 'CTSASSOCIATE',
+      'CTSBIBLECERTIFICATE', 'CTSPSALMS', 'CTSPSALMSMDIVCERTIFICATE', 'ETHICS_CERTIFICATE'],
+    completionTracks: { CTSCOUNSELING: 'assoc' } });
+  const got = st.body.completions.map((c) => `${c.code}:${c.track}`).sort().join(',');
+  ok(got === 'COUNSELING:assoc,CTSBIBLE:cert,CTSOTS:cert,CTSPSALMS:mdiv,ETHICS:cert,WISESPEAK:cert',
+    `old and current codes for one course are held once, non-course codes not at all (${got})`);
+}
+
 // A returning student's first visit brings everything from the old site at
 // once: one email for all of it, not one per course -- but each course is
 // still recorded as told, so none is announced again.
@@ -282,7 +297,11 @@ ok(!(await xss.text()).includes('<script>alert(1)</script>'), 'a code containing
 const FOUNDATION = ['CTSOTS', 'CTSNT', 'CTSST', 'CTSEVANGELISM', 'CTSPM', 'CTSCH', 'WISESPEAK'];
 const MDIV_CORE = [...FOUNDATION, 'CTSHERMENEUTICS', 'CTSLA', 'CTSGENESIS', 'CTSPSALMS', 'CTSMATT', 'CTSROMANS',
   'CTSACTS', 'CTSAPOL', 'COUNSELING', 'CTSAL', 'CTSWORSHIP', 'CTSCE', 'CTSMISSIONS'];
-const filler = (n) => Array.from({ length: n }, (_, i) => `ELECTIVE${i + 1}`);
+// real electives with no textbook test (a made-up code is not a course, and is
+// not counted: canonicalCode() in worker/awards.js)
+const ELECTIVES = ['CTS1PETER', 'CTSBIBLE', 'CTSBIBLECHARACTERS', 'CTSBIBLECHARACTERS2', 'CTSCG', 'CTSEVANPREACH',
+  'CTSGALATIANS', 'CTSHS', 'CTSJOSH', 'CTSLOC', 'CTSPT', 'CTSPARABLES', 'CTSPENT', 'CTSRE', 'CTSRADICAL', 'CTSREV', 'ETHICS', 'CTSJOHN'];
+const filler = (n) => ELECTIVES.slice(0, n);
 
 // 12 courses but not the foundation: no Certificate of Ministry. This
 // student is mdiv and sends no track list, so every completion counts as

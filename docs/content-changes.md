@@ -1166,6 +1166,41 @@ copy rather than on the pages he happened to see.
   `tools/fill-variants.mjs`. Baselines re-recorded (content, prose, lesson
   render).
 
+### 8ai. Dr. Cook's answers and the doubled completions (5 Oct 2026)
+
+* **Fill-ins:** a question keeps fewer than three accepted answers when only
+  one or two are genuinely correct (Dr. Cook). No change; `fill-variants.mjs
+  --check` lists them.
+* **World Religions Required Readings:** "catalog course 44" (and "course
+  26" for Cults & World Religions) removed, English and Spanish.
+* **Deacon Family Ministry certificate** in Spanish: every line, the locked
+  notice, the buttons and the name prompt, with a language button and the
+  student's saved language. 1 Timothy 3:13 in Spanish is RVR 1960 wording,
+  to be checked against the RVG. The page also named an Associate student's
+  track "Certificate Track"; it now says Associate of Divinity.
+* **One course, one completion.** A returning student's record held a
+  course twice (Dr. Cook: 29 completions for 15 courses). The Worker stored
+  whatever code a browser sent, and returning students' browsers sent old
+  forms beside today's codes. On 5 Oct production held 103 completion rows
+  under 43 codes; 51 rows were the whole certificate file name
+  (`CTSOTSCERTIFICATE`, `CTSOTSTHMCERTIFICATE`, `ETHICS_CERTIFICATE`) beside
+  `CTSOTS`. Four courses' old file names also differ from today's codes
+  (`CTSCOUNSELING` for `COUNSELING`), and the degree pages left non-course
+  codes ("CTS", "CTSASSOCIATE"). The roster and `degree_progress` count rows;
+  the degree check counted codes. `canonicalCode()` (`worker/awards.js`) now
+  maps every reported form to today's code, keeping the level a
+  `...MDIVCERTIFICATE` / `...THMCERTIFICATE` name records, and drops
+  non-courses, at sync and in the degree check.
+  `migrations/0010_course_codes.sql` merges the rows already held (higher
+  level, earlier date kept; a course held only under its file name is kept
+  under today's code) and removes non-course codes. `test/api.test.mjs`
+  holds it; the degree tests now use real elective codes.
+* **The Google tracker sheet** got the same completion under two names:
+  `cts-completion.js` posted the name parsed from the page title ("Romans |")
+  while the Worker's notice used today's catalog name. It now posts the
+  certificate's name from `cts-cert-names.js` and the course `code`, which
+  the sheet can match on.
+
 ## How to check any of this yourself
 
 ```

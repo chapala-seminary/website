@@ -21,7 +21,7 @@
  * from a student, which makes a stale or offline device harmless.
  */
 
-import { courseShortfall, textbookShortfall, degreeShortfall, resolveCourse, studentLevel, DEGREES } from './awards.js';
+import { courseShortfall, textbookShortfall, degreeShortfall, resolveCourse, studentLevel, canonicalCode, certificateLevel, DEGREES } from './awards.js';
 import catalog from './catalog.json';
 import { emailConfigured, sendEmail, verificationEmail, certificateEmail } from './email.js';
 import { notify, notifyBatch, retryFailed } from './notify.js';
@@ -172,6 +172,7 @@ function progressRows(id, raw) {
  * missing from them was earned on the certificate track -- that is what the
  * lists mean. A browser that sends no map at all predates it (or the sync
  * client is older), and there the student's own track is the best answer. */
+const RANK = { cert: 0, assoc: 1, thm: 2, mdiv: 2 };
 function completionRows(id, raw, tracks, studentTrack) {
   if (!Array.isArray(raw)) return [];
   const sent = tracks && typeof tracks === 'object';
@@ -181,9 +182,15 @@ function completionRows(id, raw, tracks, studentTrack) {
   for (const c of raw.slice(0, 500)) {
     const code = str(c, MAX.code, { field: 'done code' });
     if (!code || !/^[A-Z0-9_]+$/i.test(code)) continue;
-    const up = code.toUpperCase();
-    const declared = String(t[up] ?? t[code] ?? '').toLowerCase();
-    const track = declared === 'thm' || declared === 'mdiv' || declared === 'assoc' ? declared : fallback;
+    // today's code for an old one; a code that is not a course is not kept
+    const up = canonicalCode(code);
+    if (!up) continue;
+    const declared = String(t[code.toUpperCase()] ?? t[code] ?? t[up] ?? '').toLowerCase();
+    let track = declared === 'thm' || declared === 'mdiv' || declared === 'assoc' ? declared : fallback;
+    const named = certificateLevel(code);      // CTSOTSTHMCERTIFICATE was earned on the Th.M.
+    if (named && RANK[named] > RANK[track]) track = named;
+    const had = out.get(up);                   // an old and a new code for one course: keep the higher level
+    if (had && RANK[had[2]] >= RANK[track]) continue;
     out.set(up, [id, up, track, now()]);
   }
   return [...out.values()];
