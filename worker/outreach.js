@@ -38,6 +38,11 @@
  *                      falls back to EMAIL_FROM
  *   OUTREACH_REPLY_TO  where a student's reply goes; falls back to EMAIL_REPLY_TO
  *   SITE_ORIGIN        links in the notes; falls back to https://chapalaseminary.org
+ *   DIGEST_MODE        "send" emails the Monday summary; anything else (or
+ *                      unset) does not. Beta's is off: its summary of test
+ *                      students went to the same inbox as the live one and
+ *                      was taken for it (Wayne, 5 Oct 2026). /staff/digest
+ *                      still shows any site's summary on request.
  */
 import { emailConfigured, sendEmail } from './email.js';
 import { degreeShortfall, studentLevel } from './awards.js';
@@ -276,7 +281,7 @@ export async function scheduled(event, env) {
   const asOf = new Date(event.scheduledTime || Date.now());
   try { console.log('outreach', JSON.stringify(await runOutreach(env, { asOf }))); }
   catch (e) { console.error('outreach error', e && e.stack || e); }
-  if (asOf.getUTCDay() === 1) {
+  if (asOf.getUTCDay() === 1 && env.DIGEST_MODE === 'send') {
     try { console.log('digest', JSON.stringify(await sendDigest(env, asOf))); }
     catch (e) { console.error('digest error', e && e.stack || e); }
   }

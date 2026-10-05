@@ -35,7 +35,16 @@
                     answered, stays answered for that attempt.
      Lockout        Master's tracks wait 15 minutes after a failed attempt;
                     certificate tracks wait 2 minutes. The next click after the
-                    lock has expired starts a fresh attempt.
+                    lock has expired starts a fresh attempt. A page opened
+                    during the wait says so and counts it down; it does not
+                    look like an open exam that ignores clicks.
+     Cannot pass   Once enough answers are wrong that the attempt cannot pass,
+                    the page says so and points to Submit, which records the
+                    attempt and starts the wait. Answered questions cannot be
+                    changed, so without this a student who saw three wrong
+                    and did not submit had no way forward (Wayne, 5 Oct 2026).
+                    Reset on such an attempt is the same as Submit: it does
+                    not skip the wait.
      Persistence    A passed multiple-choice section stays passed. A student who
                     passes MC but fails the fill-ins or short answer retries
                     only the written part (fill-ins and short answer together).
@@ -571,7 +580,7 @@
       if (target === "outSa") outSa = block; else out += block;
     }
 
-    h.innerHTML = out;
+    h.innerHTML = '<div id="cts-exam-status" role="status"></div>' + out;
     if (split) hSa.innerHTML = outSa;
     var scope = split ? [h, hSa] : [h];
 
@@ -580,7 +589,7 @@
       b.addEventListener("click", function () {
         if (unitPassed) return;
         if (mcPassed) return;                       // MC already banked
-        if (lockRemaining(KEY.fullLock)) return;    // still locked out
+        if (lockRemaining(KEY.fullLock)) { sayLock(); return; }   // still locked out
         /* The feedback shows the answer, so a question cannot be changed
            within an attempt. A click after a failed attempt's lock has
            expired starts a fresh one. */
@@ -612,13 +621,14 @@
       });
     });
     });
+    renderStatus();
   }
 
   /* Mark one fill-in now, as a multiple-choice click is marked: right or
      wrong, with the answer shown, and fixed for the rest of the attempt. */
   function checkFill(i, value) {
     if (fillReview || fillChecked[i] || unitPassed) return;
-    if (lockRemaining(KEY.saLock) || lockRemaining(KEY.fullLock)) return;
+    if (lockRemaining(KEY.saLock) || lockRemaining(KEY.fullLock)) { sayLock(); return; }
     if (!String(value || "").trim()) {
       var empty = document.querySelector('input[data-fill="' + i + '"]');
       if (empty) empty.focus();
@@ -633,6 +643,70 @@
       if (!fillChecked[n]) { var next = document.querySelector('input[data-fill="' + n + '"]'); if (next) next.focus(); break; }
     }
   }
+
+  /* ---- what the student needs to know before answering more ------------
+     Two states used to be silent (Wayne, 5 Oct 2026). A page opened during
+     the wait after a failed attempt looked like an open exam whose answers
+     ignored every click. And an attempt with too many wrong answers to pass
+     could not be changed -- answered questions are fixed -- yet nothing said
+     that Submit is what records it and starts the wait, so a student who saw
+     three wrong and did not submit was stuck. Both are said at the top of
+     the exam, and beside Submit. */
+  function lockedMinutes() { return Math.max(lockRemaining(KEY.fullLock), lockRemaining(KEY.saLock)); }
+  function wrongMC() {
+    var c = 0;
+    mc.forEach(function (q, i) { var a = mcAnswers[i]; if (a !== null && a !== undefined && a !== answerIndex(q)) c++; });
+    return c;
+  }
+  function wrongFill() {
+    var c = 0;
+    fill.forEach(function (q, i) { if (fillChecked[i] && !fillRight(q, fillAnswers[i])) c++; });
+    return c;
+  }
+  // The sections this attempt can no longer pass, or null. Short answer is
+  // only known on submit, so it is not judged here.
+  function cannotPass() {
+    if (unitPassed || graded || lockedMinutes()) return null;
+    var en = [], es = [];
+    if (!mcPassed && mc.length && wrongMC() > mc.length - needMC()) {
+      en.push("multiple choice: " + wrongMC() + " wrong, and " + needMC() + " of " + mc.length + " are needed");
+      es.push("opción múltiple: " + wrongMC() + " incorrectas, y se necesitan " + needMC() + " de " + mc.length);
+    }
+    if (fillCounts() && !fillReview && fill.length && wrongFill() > fill.length - needFill()) {
+      en.push("fill in the blank: " + wrongFill() + " wrong, and " + needFill() + " of " + fill.length + " are needed");
+      es.push("complete el espacio: " + wrongFill() + " incorrectas, y se necesitan " + needFill() + " de " + fill.length);
+    }
+    return en.length ? { en: en.join("; "), es: es.join("; ") } : null;
+  }
+  function lockMessage() {
+    var m = lockedMinutes();
+    if (!m) return null;
+    return lockRemaining(KEY.fullLock)
+      ? { en: "Your last attempt did not pass. The exam opens again in " + m + " minute(s), with every question empty. Review the lesson in the meantime.",
+          es: "Su último intento no aprobó. El examen se abre de nuevo en " + m + " minuto(s), con todas las preguntas vacías. Mientras tanto, repase la lección." }
+      : { en: "Your last attempt did not pass. Your multiple choice is passed and kept; the fill-in and short-answer part opens again in " + m + " minute(s). Review the lesson in the meantime.",
+          es: "Su último intento no aprobó. Su opción múltiple está aprobada y se conserva; la parte de completar y respuesta corta se abre de nuevo en " + m + " minuto(s). Mientras tanto, repase la lección." };
+  }
+  function cannotPassMessage(c) {
+    return { en: "This attempt cannot pass now (" + c.en + "). You may finish the questions for practice. Then press Submit to record the attempt: after a " + lockMinutes() + "-minute wait the exam opens again, empty, and you can retake it.",
+             es: "Este intento ya no puede aprobar (" + c.es + "). Puede terminar las preguntas como práctica. Luego pulse Enviar para registrar el intento: después de una espera de " + lockMinutes() + " minuto(s) el examen se abre de nuevo, vacío, y puede volver a presentarlo." };
+  }
+  function notice(msg) {
+    return '<p class="cts-exam-status" style="margin:0 0 16px;padding:12px 16px;border-left:4px solid #8a1f1f;background:rgba(138,31,31,.06);color:#8a1f1f;font-weight:600;">' + bi(msg) + "</p>";
+  }
+  // Fills the notice at the top of the exam, and the line beside Submit
+  // unless that holds a graded attempt's result.
+  function renderStatus() {
+    var top = el("cts-exam-status");
+    if (unitPassed) { if (top) top.innerHTML = ""; return; }
+    var lockMsg = lockMessage(), c = cannotPass();
+    var msg = lockMsg || (c && cannotPassMessage(c));
+    if (top) top.innerHTML = msg ? notice(msg) : "";
+    if (graded) return;
+    if (msg) say(bi(msg), "#8a1f1f");
+    else { var r = resultEl(); if (r && r.textContent) say("", "#000"); }
+  }
+  function sayLock() { var m = lockMessage(); if (m) say(bi(m), "#8a1f1f"); }
 
   // Once a lock ends, redraw, so disabled fill-ins open again without a reload.
   var unlockTimer = null;
@@ -793,6 +867,12 @@
   }
 
   function reset() {
+    /* Reset used to clear a failed attempt without the wait: answer, see too
+       many wrong, reset, go again. During the wait it now just says so, and
+       on an attempt that cannot pass it does what Submit does. */
+    if (unitPassed) return;
+    if (lockedMinutes()) { renderStatus(); sayLock(); return; }
+    if (cannotPass()) { submit(); return; }
     mcAnswers = new Array(mc.length).fill(null);
     saAnswers = new Array(sa.length).fill("");
     fillAnswers = new Array(fill.length).fill("");
@@ -862,6 +942,8 @@
     ensureResult();
     renderQuestions();
     redrawAtUnlock();
+    // the countdown in the notice, without redrawing answers being typed
+    setInterval(function () { if (lockedMinutes()) renderStatus(); }, 20000);
     recordCourse();   // a course finished before completion moved here
 
     if (unitPassed) {
