@@ -55,6 +55,17 @@ function normaliseCode(raw) {
   const m = /^CTS([0-9A-Z]{12})$/.exec(s);
   return m ? `CTS-${m[1].slice(0, 4)}-${m[1].slice(4, 8)}-${m[1].slice(8)}` : null;
 }
+/* The record a code stands for. A student who registered twice has had the
+   second record merged into the first (migrations/0010_merged_students.sql,
+   tools/merge-duplicate-students.sql); the merged record stays, pointing at
+   the first, so the code saved in that student's other browser keeps working
+   and syncs to the one record. Every lookup by code goes through here. */
+async function resolveCode(env, raw) {
+  const id = normaliseCode(raw);
+  if (!id) return null;
+  const row = await env.DB.prepare('SELECT merged_into FROM students WHERE id = ?').bind(id).first();
+  return row?.merged_into || id;
+}
 function normaliseVerify(raw) {
   if (typeof raw !== 'string') return null;
   const s = raw.toUpperCase().replace(/[^0-9A-Z]/g, '')
@@ -221,7 +232,7 @@ async function register(request, env) {
 
 async function sync(request, env) {
   const b = await body(request);
-  const id = normaliseCode(b.code);
+  const id = await resolveCode(env, b.code);
   if (!id) throw new HttpError(400, 'a student code is required');
 
   const exists = await env.DB.prepare(
@@ -230,7 +241,11 @@ async function sync(request, env) {
 
   const statements = [];
   const s = b.student;
-  if (s && typeof s === 'object') {
+  // A code since merged into another record adds its progress there but does
+  // not rewrite who the student is: its browser still holds the details of
+  // the record that was merged away, and the merge kept the better of the two.
+  const viaMerged = normaliseCode(b.code) !== id;
+  if (s && typeof s === 'object' && !viaMerged) {
     // Identity is last-writer-wins; progress is never overwritten. Renaming
     // yourself is something a student does on purpose, losing a passed unit
     // is not. The one exception is a VERIFIED email: only /api/email/confirm
@@ -312,7 +327,7 @@ async function sync(request, env) {
 }
 
 async function hydrate(env, rawCode) {
-  const id = normaliseCode(rawCode);
+  const id = await resolveCode(env, rawCode);
   // A malformed code and an unknown code get the same answer on purpose:
   // the difference would tell someone guessing that they were close.
   const state = id ? await loadState(env, id) : null;
@@ -321,7 +336,7 @@ async function hydrate(env, rawCode) {
 
 async function issueCertificate(request, env) {
   const b = await body(request);
-  const id = normaliseCode(b.code);
+  const id = await resolveCode(env, b.code);
   if (!id) throw new HttpError(400, 'a student code is required');
   const student = await env.DB.prepare(
     'SELECT id, name, email, email_verified_at, country, track, goal FROM students WHERE id = ?').bind(id).first();
@@ -428,7 +443,7 @@ function sixDigits() {
 
 async function emailStart(request, env) {
   const b = await body(request);
-  const id = normaliseCode(b.code);
+  const id = await resolveCode(env, b.code);
   if (!id) return fail(404, 'no record for that student code');
   const email = (str(b.email, MAX.email, { required: true, field: 'email' }) || '').toLowerCase();
   if (!EMAIL_RE.test(email)) throw new HttpError(400, 'that does not look like an email address');
@@ -470,7 +485,7 @@ async function emailStart(request, env) {
 
 async function emailConfirm(request, env) {
   const b = await body(request);
-  const id = normaliseCode(b.code);
+  const id = await resolveCode(env, b.code);
   if (!id) return fail(404, 'no record for that student code');
   const typed = String(b.verification ?? '').replace(/\D/g, '');
   if (typed.length !== 6) throw new HttpError(400, 'the verification code is 6 digits');
@@ -501,21 +516,29 @@ async function lookupCertificate(env, raw) {
 }
 
 async function deleteStudent(env, rawCode) {
-  const id = normaliseCode(rawCode);
+  const id = await resolveCode(env, rawCode);
   if (!id) return fail(404, 'no record for that student code');
+  // A student who asks to be forgotten is forgotten under every code: the
+  // record, and any record of theirs merged into it.
+  const merged = ((await env.DB.prepare('SELECT id FROM students WHERE merged_into = ?').bind(id).all()).results ?? [])
+    .map((r) => r.id);
   const res = await env.DB.prepare('DELETE FROM students WHERE id = ?').bind(id).run();
   if (!res.meta?.changes) return fail(404, 'no record for that student code');
   // The foreign keys cascade, but D1 does not enable them by default, so the
   // dependent rows are removed explicitly rather than on trust.
+  const gone = [id, ...merged];
   await env.DB.batch([
-    env.DB.prepare('DELETE FROM unit_progress WHERE student_id = ?').bind(id),
-    env.DB.prepare('DELETE FROM course_completions WHERE student_id = ?').bind(id),
-    env.DB.prepare('DELETE FROM textbook_results WHERE student_id = ?').bind(id),
-    env.DB.prepare('DELETE FROM certificates WHERE student_id = ?').bind(id),
-    env.DB.prepare('DELETE FROM email_challenges WHERE student_id = ?').bind(id),
-    env.DB.prepare('DELETE FROM notifications WHERE student_id = ?').bind(id),
-    env.DB.prepare('DELETE FROM outreach WHERE student_id = ?').bind(id),
-    env.DB.prepare('DELETE FROM contact_tokens WHERE student_id = ?').bind(id),
+    ...merged.map((m) => env.DB.prepare('DELETE FROM students WHERE id = ?').bind(m)),
+    ...gone.flatMap((g) => [
+      env.DB.prepare('DELETE FROM unit_progress WHERE student_id = ?').bind(g),
+      env.DB.prepare('DELETE FROM course_completions WHERE student_id = ?').bind(g),
+      env.DB.prepare('DELETE FROM textbook_results WHERE student_id = ?').bind(g),
+      env.DB.prepare('DELETE FROM certificates WHERE student_id = ?').bind(g),
+      env.DB.prepare('DELETE FROM email_challenges WHERE student_id = ?').bind(g),
+      env.DB.prepare('DELETE FROM notifications WHERE student_id = ?').bind(g),
+      env.DB.prepare('DELETE FROM outreach WHERE student_id = ?').bind(g),
+      env.DB.prepare('DELETE FROM contact_tokens WHERE student_id = ?').bind(g),
+    ]),
   ]);
   return json({ deleted: true });
 }
