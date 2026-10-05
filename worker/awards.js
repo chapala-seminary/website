@@ -77,6 +77,40 @@ export function resolveCourse(slugOrCode) {
   return catalog.completions[code] ? { code } : null;
 }
 
+/* The old site named a completion after its certificate file
+   (cts-completion.js: CTSCounselingCertificate.html -> CTSCOUNSELING), and a
+   returning student's browser still holds those names. Four of them differ
+   from today's codes. The degree pages' own files made codes that are not
+   courses at all ("CTS" from CTSThMCertificate.html, "CTSASSOCIATE"); counted,
+   they inflated a student's courses (Dr. Cook, 5 Oct 2026). */
+export const CODE_ALIASES = {
+  CTSCOUNSELING: 'COUNSELING', CTSNARRATIVEPREACHING: 'STORYTEL',
+  CTSPREACHING: 'WISESPEAK', ETHICS_: 'ETHICS',
+};
+
+/** Today's completion code for a code a browser reports, or null when it is
+ *  not a course the seminary offers. Accepts a code, an old certificate-file
+ *  code, or a course slug. */
+export function canonicalCode(raw) {
+  /* The commonest old form keeps the whole certificate file name: production
+     held CTSOTSTHMCERTIFICATE, CTSBIBLECERTIFICATE, ETHICS_CERTIFICATE beside
+     CTSOTS and CTSBIBLE (5 Oct 2026). certificateLevel() reads the level it
+     names. */
+  const up = String(raw || '').trim().toUpperCase().replace(/\.HTML$/, '').replace(/(MDIV|THM|MTH)?CERTIFICATE$/, '');
+  if (!up) return null;
+  if (catalog.completions[up]) return up;
+  if (CODE_ALIASES[up]) return CODE_ALIASES[up];
+  const c = catalog.courses[up.toLowerCase()] || catalog.courses[up.replace(/^CTS/, '').toLowerCase()];
+  return c ? c.code : null;
+}
+
+/** The level an old certificate-file code names ('mdiv' for
+ *  CTSPSALMSMDIVCERTIFICATE, 'thm' for ...THMCERTIFICATE), or null. */
+export function certificateLevel(raw) {
+  const m = /(MDIV|THM|MTH)CERTIFICATE(\.HTML)?$/.exec(String(raw || '').trim().toUpperCase());
+  return m ? (m[1].toLowerCase() === 'mdiv' ? 'mdiv' : 'thm') : null;
+}
+
 /** null when the record supports the award, else a short reason.
  *  `level` is the student's level (studentLevel) and `textbooks` the slugs of
  *  the textbook tests the record holds: on the master's tracks a course with
@@ -117,7 +151,8 @@ export function degreeShortfall(level, completions, track) {
   const own = studentLevel(track);
   const have = new Set();
   for (const c of completions) {
-    const code = String(typeof c === 'string' ? c : c.code).toUpperCase();
+    const code = canonicalCode(typeof c === 'string' ? c : c.code);
+    if (!code) continue;                       // not a course: counts toward nothing
     const earned = studentLevel((typeof c === 'string' ? null : c.track) || own);
     if (d.levels.includes(earned)) have.add(code);
   }
