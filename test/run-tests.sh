@@ -294,6 +294,11 @@ else
   echo
 fi
 
+# Students who registered twice, merged: the SQL on a database built from
+# every migration, then both codes against this Worker. Late, because the
+# merge runs over this run's whole database.
+API_BASE="http://127.0.0.1:$PORT" MERGE_STATE="$STATE" MERGE_CONFIG="$CONFIG" node test/merge.test.mjs
+
 # LAST, and it has to be. The throttle counts failed lookups per address, and
 # every test here reaches the Worker from 127.0.0.1 -- one address, one budget.
 # Run these earlier and everything after them starts getting 429s and failing

@@ -230,12 +230,12 @@ export async function digest(env, asOf = new Date()) {
     WHERE a.contact_opt_out_at IS NULL AND a.last_contacted_at IS NOT NULL AND a.last_contacted_at >= a.last_progress_at
       AND a.last_contacted_at <= ? ORDER BY a.last_progress_at`,
     new Date(asOf.getTime() - (FOLLOW_UP_DAYS - QUIET_DAYS) * DAY).toISOString());
-  const joined = await q(`SELECT name, email, country, track, goal, lang FROM students WHERE created_at >= ? AND lower(COALESCE(email, '')) <> ? ORDER BY created_at`, since, TESTER_EMAIL);
+  const joined = await q(`SELECT name, email, country, track, goal, lang FROM students WHERE created_at >= ? AND merged_into IS NULL AND lower(COALESCE(email, '')) <> ? ORDER BY created_at`, since, TESTER_EMAIL);
   const finished = await q(`SELECT s.name, c.code FROM course_completions c JOIN students s ON s.id = c.student_id
     WHERE c.completed_at >= ? ORDER BY s.name, c.code`, since);
   const failedNotices = await q(`SELECT n.kind, n.code, n.error, s.name FROM notifications n JOIN students s ON s.id = n.student_id
     WHERE n.status = 'failed'`);
-  const [{ n: total } = { n: 0 }] = await q(`SELECT COUNT(*) AS n FROM students WHERE lower(COALESCE(email, '')) <> ?`, TESTER_EMAIL);
+  const [{ n: total } = { n: 0 }] = await q(`SELECT COUNT(*) AS n FROM students WHERE merged_into IS NULL AND lower(COALESCE(email, '')) <> ?`, TESTER_EMAIL);
   const [{ n: active } = { n: 0 }] = await q(`SELECT COUNT(*) AS n FROM student_activity WHERE last_progress_at >= ? AND lower(COALESCE(email, '')) <> ?`,
     new Date(asOf.getTime() - QUIET_DAYS * DAY).toISOString(), TESTER_EMAIL);
 
@@ -306,7 +306,9 @@ button{background:#4A1E3A;color:#fff;border:0;border-radius:24px;padding:11px 22
 
 export async function stopNotes(request, env, token) {
   const row = /^[A-Za-z0-9_-]{8,64}$/.test(token)
-    ? await env.DB.prepare('SELECT s.id, s.contact_opt_out_at FROM contact_tokens t JOIN students s ON s.id = t.student_id WHERE t.token = ?')
+    // a link sent to a record since merged stops notes on the record it joined
+    ? await env.DB.prepare(`SELECT s.id, s.contact_opt_out_at FROM contact_tokens t JOIN students m ON m.id = t.student_id
+        JOIN students s ON s.id = COALESCE(m.merged_into, m.id) WHERE t.token = ?`)
       .bind(token).first()
     : null;
   if (!row) return page('Link not recognised', `<h1>This link is not recognised</h1>
