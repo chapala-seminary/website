@@ -119,7 +119,7 @@ ok(readings.length === 2, `${readings.length} required-reading tests in src/cont
 for (const r of readings) {
   ok(!!courses[r.course], `${r.slug}: course "${r.course}" has no catalog card`);
   ok(/readings$/.test(r.slug) && !books.some((b) => b.slug === r.slug), `${r.slug}: the slug must end in "readings" and not be a textbook's`);
-  ok(fs.existsSync(path.join('public', `${r.page}.html`)), `${r.slug}: the readings page public/${r.page}.html is missing`);
+  ok(fs.existsSync(path.join('src/body/rooms', `${r.page}.html`)), `${r.slug}: the readings page src/body/rooms/${r.page}.html is missing`);
   const { draw, pass, questions } = r.test;
   ok(draw === 20 && pass === 18 && questions.length === 40, `${r.slug}: draws ${draw}, asks ${pass}, of ${questions.length}; the delivery says 20 of 40, 18 to pass`);
   questions.forEach((q, i) => {

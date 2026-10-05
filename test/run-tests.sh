@@ -234,6 +234,9 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   # The reading rooms in a browser: the shelf shows, the attestation records
   # under the code the certificate reads, in each family of room.
   node tools/verify-reading-rooms.mjs "http://127.0.0.1:$PORT"
+  # ...and on the unit design (Oct 2026): English shows no Spanish, Spanish
+  # no English, Both shows both, in every room and on the honors page.
+  node tools/verify-room-language.mjs "http://127.0.0.1:$PORT"
 
   # Every certificate page unlocks for a finished course, records the
   # completion, and shows nothing to a student who passed nothing. Ruth and

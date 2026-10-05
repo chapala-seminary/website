@@ -20,6 +20,7 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 import fs from 'node:fs';
+import rooms from '../data/rooms.json';
 
 const SITE = 'https://chapalaseminary.org';
 
@@ -38,7 +39,6 @@ const STANDALONE: Record<string, number> = {
   'CTSBeforeYouBegin.html': 0.7,
   'CTSCatalog.html': 0.7,
   'CTSResources.html': 0.7,
-  'cts-honors.html': 0.7,
   'CTSCounseling.html': 0.8,              // a course that is one page, not units
   'CTS_Narrative_Preaching.html': 0.8,    // likewise
   'CTS_WiseSpeak_Preaching.html': 0.8,    // likewise — and a foundation course
@@ -50,7 +50,6 @@ const STANDALONE: Record<string, number> = {
 
 const isDigest = (f: string) => /_digest\.html$/i.test(f) || /_Digest_/i.test(f);
 const isCertificate = (f: string) => /Certificate\.html$/i.test(f);
-const isReadingRoom = (f: string) => /Readings\.html$/i.test(f) || f === 'CTSWRRequired.html';   // the World Religions required readings sit beside its room
 const isEthicsUnit = (f: string) => /^ethics_unit\d+\.html$/i.test(f);
 
 export const GET: APIRoute = async () => {
@@ -72,13 +71,17 @@ export const GET: APIRoute = async () => {
   // themselves are static pages, classified below.
   for (const entry of await getCollection('readings')) add(`${entry.data.page}Test.html`, 0.5);
 
+  // The reading rooms, the World Religions required readings and the honors
+  // page (src/pages/[room].astro), from the data that builds them.
+  for (const [page, room] of Object.entries(rooms.rooms as Record<string, { kind: string }>))
+    add(`${page}.html`, room.kind === 'honors' ? 0.7 : 0.6);
+
   // Everything else is a static page; classify by what it is.
   for (const f of fs.readdirSync('public').filter((f) => f.endsWith('.html'))) {
     if (EXCLUDE.has(f) || isDigest(f)) continue;
     if (f in STANDALONE) add(f, STANDALONE[f]);
     else if (isEthicsUnit(f)) add(f, 0.8);
     else if (isCertificate(f)) add(f, 0.6);
-    else if (isReadingRoom(f)) add(f, 0.6);
     // anything unrecognised is left out on purpose: a new kind of page should
     // be classified here deliberately, not swept in by a catch-all
   }

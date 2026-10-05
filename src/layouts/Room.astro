@@ -1,0 +1,106 @@
+---
+/* One layout for the reading rooms (CTS<Course>Readings.html), the World
+ * Religions required readings beside its room, and the honors page
+ * (cts-honors.html). The furniture of a unit page -- masthead in the course's
+ * colour, the sticky bar with the English / Español / Both switch, the footer
+ * -- around the room's own content (src/body/rooms), so a student moving from
+ * a unit to its readings stays on the same site (Robert, 5 Oct 2026). Until
+ * then the 45 rooms were standalone pages with a dozen looks, and 25 of them
+ * showed English and Spanish at once with no way to choose.
+ */
+import { version } from '../lib/version';
+
+interface Bi { en: string; es: string }
+interface Props {
+  page: string;                     // the page name, CTSBibleReadings
+  kind: 'room' | 'required' | 'honors';
+  title: string;                    // <title>, as the page always had it
+  heading: Bi;
+  tagline?: Bi | null;
+  course?: { entry: string; title: Bi } | null;
+  accent?: string | null;           // the course's storage slug, for its colour
+  body: string;
+}
+const { page, kind, title, heading, tagline = null, course = null, accent = null, body } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap"
+    />
+    <link rel="stylesheet" href={version('/assets/css/cts.css')} />
+    <link rel="stylesheet" href={version('/assets/css/cts-rooms.css')} />
+  </head>
+  <body class="lang-en cts-room" data-course={accent ?? undefined} data-room={page} data-room-kind={kind}>
+    <script is:inline src={version('/cts-lang.js')}></script>
+    <a class="btn skip" href="#content" style="position:absolute;left:-9999px">
+      <span class="lang-en">Skip to the content</span><span class="lang-es">Saltar al contenido</span>
+    </a>
+
+    <header class="cts-masthead">
+      <div class="wrap">
+        <div class="eyebrow">
+          {course
+            ? <><span class="lang-en">{course.title.en}</span><span class="lang-es">{course.title.es}</span></>
+            : <><span class="lang-en">Chapala Theological Seminary</span><span class="lang-es">Seminario Teológico de Chapala</span></>}
+        </div>
+        <h1><span class="lang-en" set:html={heading.en} /><span class="lang-es" set:html={heading.es} /></h1>
+        {tagline && <p><span class="lang-en" set:html={tagline.en} /><span class="lang-es" set:html={tagline.es} /></p>}
+      </div>
+    </header>
+
+    <nav class="cts-nav" aria-label={kind === 'honors' ? 'Reading With Honors' : 'Reading room'}>
+      <div class="wrap">
+        <div class="cts-navmain">
+          <div class="cts-steps">
+            {course && (
+              <a class="btn" href={`/${course.entry}`}>← <span class="lang-en">Back to the course</span><span class="lang-es">Volver al curso</span></a>
+            )}
+            {kind === 'room' && (
+              <a class="btn" href="/cts-honors.html"><span class="lang-en">Reading With Honors</span><span class="lang-es">Lectura con Honores</span></a>
+            )}
+            {kind === 'required' && (
+              <a class="btn solid" href={`/${page}Test.html`}><span class="lang-en">Required-reading test</span><span class="lang-es">Examen de lecturas requeridas</span> →</a>
+            )}
+            {kind === 'honors' && (
+              <a class="btn" href="/index.html#catalog">← <span class="lang-en">All courses</span><span class="lang-es">Todos los cursos</span></a>
+            )}
+          </div>
+        </div>
+        <div class="cts-seg" role="group" aria-label="Language / Idioma">
+          <button type="button" data-lang="en">English</button>
+          <button type="button" data-lang="es">Español</button>
+          <button type="button" data-lang="both"><span class="lang-en">Both</span><span class="lang-es">Ambos</span></button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="wrap" id="content">
+      <Fragment set:html={body} />
+    </main>
+
+    <footer class="cts-foot">
+      <div class="wrap">
+        <span>
+          <span class="lang-en">Chapala Theological Seminary · Free, bilingual theological training.</span>
+          <span class="lang-es">Seminario Teológico de Chapala · Formación teológica gratuita y bilingüe.</span>
+        </span>
+        <span>
+          <a href="/index.html#catalog"><span class="lang-en">All courses</span><span class="lang-es">Todos los cursos</span></a>
+          {kind !== 'honors' && <>&nbsp;·&nbsp;<a href="/cts-honors.html"><span class="lang-en">Reading With Honors</span><span class="lang-es">Lectura con Honores</span></a></>}
+          &nbsp;·&nbsp;
+          <a href="/CTSPrivacy.html"><span class="lang-en">Your information</span><span class="lang-es">Su información</span></a>
+        </span>
+      </div>
+    </footer>
+
+    <script is:inline src={version('/assets/js/cts-room.js')}></script>
+  </body>
+</html>

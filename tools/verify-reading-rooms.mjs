@@ -49,7 +49,7 @@ for (const [file, code, course] of [['CTSWRReadings.html', 'WR', 'World Religion
   if (DATA[key]) {
     ok((await p.locator('#cts-shelf .cts-shelf-entry').count()) === want(key), `${file}: the shelf shows ${want(key)} works`, String(await p.locator('#cts-shelf .cts-shelf-entry').count()));
     ok((await p.locator('#cts-shelf input[type=checkbox]').count()) === 0, `${file}: the shelf offers no selection`);
-    const shelfTop = await p.locator('#cts-shelf').boundingBox(), lastDigest = await p.locator('main article').last().boundingBox();
+    const shelfTop = await p.locator('#cts-shelf').boundingBox(), lastDigest = await p.locator('main article.reading').last().boundingBox();
     ok(shelfTop && lastDigest && shelfTop.y > lastDigest.y, `${file}: the shelf is below the digests`);
     ok(!/course download|in your download/i.test(await p.locator('#cts-shelf').textContent()), `${file}: the shelf says nothing about a download`);
   } else ok((await p.locator('#cts-shelf').count()) === 0, `${file}: no shelf was delivered for it, so none shows`);
@@ -100,10 +100,10 @@ for (const [file, code, course] of [['CTSWRReadings.html', 'WR', 'World Religion
 // 3. World Religions: the Required Readings page beside the room, and its test
 {
   const { ctx, p, errs } = await open('CTSWRRequired.html');
-  ok((await p.locator('main article').count()) === 5, 'WR required: five assigned readings');
+  ok((await p.locator('#cts-readings article').count()) === 5, 'WR required: five assigned readings');
   ok((await p.locator('a[href="CTSWRRequiredTest.html"]').count()) >= 1, 'WR required: leads to its test');
   ok((await p.locator('a[href="CTSWRReadings.html"]').count()) >= 1, 'WR required: names the Supplemental Reading Room beside it');
-  ok(!/Cults/.test(await p.locator('main').textContent()), 'WR required: the readings are not the Cults room');
+  ok(!/Cults/.test(await p.locator('#cts-readings').textContent()), 'WR required: the readings are not the Cults room');
   await p.goto(`${BASE}/CTSWRRequiredTest.html`, { waitUntil: 'load' }); await p.waitForTimeout(300);
   ok((await p.locator('input[data-cts-fill]').count()) === 20, 'WR test: twenty answer boxes');
   ok((await p.locator('a[href="/CTSWRRequired.html"]').count()) >= 1, 'WR test: leads back to the readings');

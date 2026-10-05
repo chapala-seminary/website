@@ -1,0 +1,40 @@
+---
+/* The reading rooms, the World Religions required readings, and the honors
+ * page, at the addresses they always had (CTSBibleReadings.html,
+ * CTSWRRequired.html, cts-honors.html). Each is its own content
+ * (src/body/rooms/<page>.html) in the unit design (src/layouts/Room.astro);
+ * src/data/rooms.json names the course it belongs to and its masthead. */
+import { getCollection } from 'astro:content';
+import Room from '../layouts/Room.astro';
+import data from '../data/rooms.json';
+
+// raw bodies, imported at build time so nothing is fetched at runtime
+const bodies = import.meta.glob('../body/rooms/*.html', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
+
+interface Bi { en: string; es: string }
+interface Entry { course: string | null; title: string; kind: 'room' | 'required' | 'honors'; heading: Bi; tagline: Bi | null }
+
+export async function getStaticPaths() {
+  const courses = await getCollection('courses');
+  const units = await getCollection('units');
+  const card = new Map(courses.map((c) => [c.id, c.data]));
+  // the course's storage slug ("bible"), which keys its colour in cts.css; the
+  // single-page courses have no units and take the seminary's own
+  const slugOf = new Map(units.map((u) => [u.data.pagePrefix, u.data.course]));
+  return Object.entries(data.rooms as Record<string, Entry>).map(([page, room]) => {
+    const course = room.course ? card.get(room.course) : null;
+    if (room.course && !course) throw new Error(`src/data/rooms.json: ${page} belongs to course "${room.course}", which has no catalog card in src/content/courses`);
+    return {
+      params: { room: page },
+      props: { page, room, course: course ? { entry: course.entry, title: course.title } : null,
+               accent: room.course ? slugOf.get(room.course) ?? null : null },
+    };
+  });
+}
+
+const { page, room, course, accent } = Astro.props;
+const body = bodies[`../body/rooms/${page}.html`];
+if (body === undefined) throw new Error(`no body file src/body/rooms/${page}.html`);
+---
+<Room page={page} kind={room.kind} title={room.title} heading={room.heading} tagline={room.tagline}
+      course={course} accent={accent} body={body} />
