@@ -92,7 +92,7 @@ async function session(course, unit, track, nCorrect, fillSA = false, fillN = 0)
     localStorage.clear();
     const goal = t === 'assoc' ? 'assoc' : '';
     if (goal) t = 'cert';
-    localStorage.setItem('cts_student', JSON.stringify({ name: 'T', email: 't@x.org', track: t, goal }));
+    localStorage.setItem('cts_student', JSON.stringify({ name: 'T', email: 't-' + Math.random().toString(36).slice(2) + '@x.org', track: t, goal }));
     localStorage.setItem('cts_track', t);
     if (goal) localStorage.setItem('cts_goal', goal);
     localStorage.setItem('cts_done_codes', JSON.stringify(core));

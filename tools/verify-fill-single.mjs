@@ -76,7 +76,7 @@ const single = (key, page, regKey, extra = {}) => ({
   async register(p, track) {
     await p.evaluate(([regKey, t, goal, extra]) => {
       localStorage.clear();
-      const who = { name: 'Fill Test', email: 'fill-test@example.invalid', country: 'MX' };
+      const who = { name: 'Fill Test', email: 'fill-test-' + Math.random().toString(36).slice(2) + '@example.invalid', country: 'MX' };
       localStorage.setItem('cts_student', JSON.stringify({ ...who, track: t === 'cert' ? 'certificate' : t }));
       if (goal) localStorage.setItem('cts_goal', goal);
       localStorage.setItem(regKey, JSON.stringify({ ...who, track: t }));
@@ -102,7 +102,7 @@ const DRIVERS = [
     async register(p, track) {
       await p.evaluate(([t, goal]) => {
         localStorage.clear();
-        localStorage.setItem('cts_student', JSON.stringify({ name: 'Fill Test', email: 'fill-test@example.invalid', track: t }));
+        localStorage.setItem('cts_student', JSON.stringify({ name: 'Fill Test', email: 'fill-test-' + Math.random().toString(36).slice(2) + '@example.invalid', track: t }));
         if (goal) localStorage.setItem('cts_goal', goal);
       }, [TRACK.ethics[track], track === 'assoc' ? 'assoc' : '']);
     },

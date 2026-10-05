@@ -264,6 +264,9 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
     echo "           checkout to compare the generated catalog against."
   fi
   SYNC_BASE="http://127.0.0.1:$PORT" node test/code-ui.test.mjs
+  # Registering twice: the same name and email are paused and offered their
+  # code by email; "not me" registers separately (Wayne, 5 Oct 2026).
+  API_BASE="http://127.0.0.1:$PORT" DEV_LOG="$STATE/dev.log" node test/dup-register.test.mjs
 
   # The page that shows a student what is held about them and deletes it.
   # Driven in a browser against the real Worker, because a privacy page whose

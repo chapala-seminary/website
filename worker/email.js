@@ -62,6 +62,25 @@ export function verificationEmail(code) {
   return { subject: `Verification code ${code} · Código de verificación`, text };
 }
 
+/** A student's code, sent to the address on their record when they ask for
+ *  it ("Email me my code"). Every live record with the address is listed, by
+ *  name: two people may share one inbox. Both languages, like the others. */
+export function codeEmail({ students, origin }) {
+  const page = `${origin || 'https://chapalaseminary.org'}/cts-backup.html`;
+  const list = students.map((s) => `  ${s.name}: ${s.id}`).join('\n');
+  const one = students.length === 1;
+  const text =
+    `You asked for your Chapala Theological Seminary student code${one ? '' : 's'}:\n\n${list}\n\n` +
+    `To continue with your progress on this device, open ${page} and enter the code under ` +
+    `"Restore from a code". Keep it private, like a password.\n\n` +
+    `----\n\n` +
+    `Usted solicitó su${one ? '' : 's'} código${one ? '' : 's'} de estudiante del Seminario Teológico de Chapala:\n\n${list}\n\n` +
+    `Para continuar con su progreso en este dispositivo, abra ${page} y escriba el código en ` +
+    `"Restaurar desde un código". Manténgalo en privado, como una contraseña.\n\n` +
+    `If you did not ask for this, ignore this message. / Si no lo solicitó, ignore este mensaje.`;
+  return { subject: 'Your student code · Su código de estudiante', text };
+}
+
 /** The student's own copy of a certificate they just claimed: what it is for,
  *  the code anyone can check it by, and where to print it. Plain text in both
  *  languages, like the verification message. `page` is the certificate page's

@@ -617,6 +617,37 @@
             <span class="es">An&oacute;telo y mant&eacute;ngalo en privado: tr&aacute;telo como una contrase&ntilde;a. Es la &uacute;nica manera de recuperar su progreso si borra este navegador o cambia de dispositivo, y cualquiera que lo tenga puede abrir su registro. Puede volver a encontrarlo en la p&aacute;gina <a href="cts-backup.html" style="color:#6d2233;font-weight:700;">Guardar y Restaurar</a>.</span>
           </p>
         </div>
+        <!-- A second registration under a name and email that already have a
+             record is paused (Wayne, 5 Oct 2026): the code goes to that email,
+             never to this page, and "not me" registers separately. -->
+        <div id="reg-existing" role="status" style="display:none;margin-top:12px;background:#fbf6ea;color:#2a241d;border-radius:8px;padding:14px 16px;font-size:15px;line-height:1.5;">
+          <p style="margin:0 0 10px;font-weight:700;">
+            <span class="en">You already have a student record under this name and email.</span>
+            <span class="es">Ya tiene un registro de estudiante con este nombre y correo.</span>
+          </p>
+          <p style="margin:0 0 10px;">
+            <span class="en">Continue with it, so your progress stays in one place: we can email your student code to <b id="reg-existing-to"></b>, and only there.</span>
+            <span class="es">Contin&uacute;e con &eacute;l, para que su progreso quede en un solo lugar: podemos enviar su c&oacute;digo de estudiante a <b id="reg-existing-to-es"></b>, y solo ah&iacute;.</span>
+          </p>
+          <button id="reg-existing-email" type="button" style="border:0;background:#6d2233;color:#fff;border-radius:20px;padding:9px 20px;font:600 15px Georgia,serif;cursor:pointer;">
+            <span class="en">Email me my code</span><span class="es">Enviarme mi c&oacute;digo</span>
+          </button>
+          <p id="reg-existing-sent" style="margin:8px 0 0;"></p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;">
+            <input id="reg-existing-code" type="text" autocapitalize="characters" autocomplete="off" spellcheck="false" placeholder="CTS-XXXX-XXXX-XXXX" aria-label="Student code" style="flex:1 1 200px;min-width:0;padding:9px 12px;border:1px solid #d8c8a8;border-radius:6px;font:600 15px ui-monospace,Menlo,Consolas,monospace;">
+            <button id="reg-existing-restore" type="button" style="border:1.5px solid #6d2233;background:#fff;color:#6d2233;border-radius:20px;padding:8px 18px;font:600 14px Georgia,serif;cursor:pointer;">
+              <span class="en">Continue with this code</span><span class="es">Continuar con este c&oacute;digo</span>
+            </button>
+          </div>
+          <p id="reg-existing-note" style="margin:8px 0 0;"></p>
+          <p style="margin:12px 0 0;font-size:14px;">
+            <span class="en">Not you &mdash; someone else with the same name sharing this email?</span>
+            <span class="es">&iquest;No es usted, sino otra persona con el mismo nombre que comparte este correo?</span>
+            <button id="reg-existing-separate" type="button" style="border:0;background:none;color:#6d2233;text-decoration:underline;font:inherit;cursor:pointer;padding:0;">
+              <span class="en">Register separately</span><span class="es">Registrarse por separado</span>
+            </button>
+          </p>
+        </div>
         <script src="/assets/js/cts-fields-lang.js" defer></script>
         <script>
         function ctsRegister(){
@@ -660,6 +691,7 @@
               if(!up) return null;
               return window.CTS_SYNC.sync();
             }).then(function(){
+              ctsShowExisting();
               var code=window.CTS_SYNC.code();
               if(!code) return;
               document.getElementById('reg-code-value').textContent=code;
@@ -668,6 +700,49 @@
           }catch(e){}
         }
 
+        /* The paused registration: shown when cts-sync.js says this name and
+           email already have a record, gone once the student chooses. */
+        function ctsShowExisting(){
+          var box=document.getElementById('reg-existing');
+          if(!box || !window.CTS_SYNC || !window.CTS_SYNC.existing) return;
+          if(!window.CTS_SYNC.existing()){ box.style.display='none'; return; }
+          var st={}; try{ st=JSON.parse(localStorage.getItem('cts_student')||'{}')||{}; }catch(e){}
+          var to=String(st.email||'');
+          document.getElementById('reg-existing-to').textContent=to;
+          document.getElementById('reg-existing-to-es').textContent=to;
+          box.style.display='block';
+        }
+        document.addEventListener('cts-sync-existing', ctsShowExisting);
+        (function(){
+          function say(id, en, es){ document.getElementById(id).innerHTML='<span class="en">'+en+'</span><span class="es">'+es+'</span>'; }
+          var send=document.getElementById('reg-existing-email');
+          if(!send) return;
+          send.addEventListener('click', function(){
+            var st={}; try{ st=JSON.parse(localStorage.getItem('cts_student')||'{}')||{}; }catch(e){}
+            send.disabled=true;
+            window.CTS_SYNC.emailCode(st.email).then(function(r){
+              send.disabled=false;
+              if(r.ok) say('reg-existing-sent','Sent. Check that inbox (and its spam folder), then enter the code below.','Enviado. Revise ese correo (y la carpeta de spam), y escriba el c\u00f3digo abajo.');
+              else if(r.status===429) say('reg-existing-sent','Too many requests today. Try again tomorrow.','Demasiadas solicitudes hoy. Int\u00e9ntelo ma\u00f1ana.');
+              else say('reg-existing-sent','The email could not be sent. Try again later.','No se pudo enviar el correo. Int\u00e9ntelo m\u00e1s tarde.');
+            });
+          });
+          document.getElementById('reg-existing-restore').addEventListener('click', function(){
+            var btn=this, typed=(document.getElementById('reg-existing-code').value||'').trim();
+            if(!typed){ say('reg-existing-note','Enter the code from the email first.','Escriba primero el c\u00f3digo del correo.'); return; }
+            btn.disabled=true;
+            window.CTS_SYNC.restore(typed).then(function(r){
+              btn.disabled=false;
+              if(!r || !r.ok){ say('reg-existing-note','No record found for that code. Check it and try again.','No se encontr\u00f3 ning\u00fan registro con ese c\u00f3digo. Rev\u00edselo e int\u00e9ntelo de nuevo.'); return; }
+              document.getElementById('reg-existing').style.display='none';
+              ctsShowCode();
+            });
+          });
+          document.getElementById('reg-existing-separate').addEventListener('click', function(){
+            document.getElementById('reg-existing').style.display='none';
+            window.CTS_SYNC.registerSeparately().then(function(){ ctsShowCode(); });
+          });
+        })();
         (function(){
           var btn=document.getElementById('reg-code-copy');
           if(!btn) return;

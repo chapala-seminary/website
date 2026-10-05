@@ -22,7 +22,7 @@ async function ctx(){ const c=await b.newContext(); const p=await c.newPage(); c
 // 1. certificate page with all units passed but nothing recorded: stays read-only
 { const {c,p,posts}=await ctx();
   await p.goto(BASE+'/CTSActsCertificate.html'); 
-  await p.evaluate(()=>{ localStorage.clear(); localStorage.setItem('cts_student', JSON.stringify({name:'Ana', email:'a@x.org', track:'cert'})); localStorage.setItem('cts_track','cert');
+  await p.evaluate(()=>{ localStorage.clear(); localStorage.setItem('cts_student', JSON.stringify({name:'Ana', email:'a-'+Math.random().toString(36).slice(2)+'@x.org', track:'cert'})); localStorage.setItem('cts_track','cert');
     const pr={}; for(let i=1;i<=11;i++) pr['unit'+i]=true; localStorage.setItem('cts_acts_progress', JSON.stringify(pr)); });
   await p.reload(); await p.waitForTimeout(9000);
   const ls=await p.evaluate(()=>({d:localStorage.getItem('cts_done_codes'), r:localStorage.getItem('cts_degree_courses'),
@@ -44,7 +44,7 @@ async function ctx(){ const c=await b.newContext(); const p=await c.newPage(); c
 // 3. passing the last unit records it (associate: needs SA too)
 { const {c,p,posts}=await ctx();
   await p.goto(BASE+'/CTSActsUnit11.html');
-  await p.evaluate(()=>{ localStorage.clear(); localStorage.setItem('cts_student', JSON.stringify({name:'Ben', email:'b@x.org', track:'mdiv'})); localStorage.setItem('cts_track','mdiv');
+  await p.evaluate(()=>{ localStorage.clear(); localStorage.setItem('cts_student', JSON.stringify({name:'Ben', email:'b-'+Math.random().toString(36).slice(2)+'@x.org', track:'mdiv'})); localStorage.setItem('cts_track','mdiv');
     const pr={}; for(let i=1;i<=10;i++) pr['unit'+i]=true; localStorage.setItem('cts_acts_progress', JSON.stringify(pr)); });
   await p.reload(); await p.waitForTimeout(500);
   ok(!(await p.evaluate(()=>localStorage.getItem('cts_done_codes')||'')).includes('CTSACTS'), 'not recorded before the last unit is passed');
@@ -70,7 +70,7 @@ async function ctx(){ const c=await b.newContext(); const p=await c.newPage(); c
  * record all seven and open the catalog. */
 const FOUNDATION = ['CTSOTS', 'CTSNT', 'CTSST', 'CTSEVANGELISM', 'CTSPM', 'CTSCH', 'WISESPEAK'];
 function oldSiteFoundation() {
-  const seed = { cts_student: JSON.stringify({ name: 'Old Student', email: 'o@x.org', track: 'cert' }), cts_track: 'cert' };
+  const seed = { cts_student: JSON.stringify({ name: 'Old Student', email: 'o-' + Math.random().toString(36).slice(2) + '@x.org', track: 'cert' }), cts_track: 'cert' };
   for (const [slug, c] of Object.entries(catalog.courses)) {
     if (!FOUNDATION.includes(c.code)) continue;
     const pr = {}; for (const u of c.units) pr['unit' + u] = true;

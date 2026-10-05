@@ -60,16 +60,18 @@ const PREVIEW = fs.readFileSync('tools/merge-duplicate-students-preview.sql', 'u
   // Tester-mode placeholders: never merged.
   student('T1', 'Tester', 'tester@chapalaseminary.org', 'cert', T('1-01'));
   student('T2', 'Tester', 'tester@chapalaseminary.org', 'cert', T('1-02'));
-  // No email: nothing to match on.
+  // No email, or the front page's "—" for none: nothing to match on.
   student('N1', 'Nadie', null, 'cert', T('1-01'));
   student('N2', 'Nadie', null, 'cert', T('1-02'));
+  student('D1', 'Dash', '—', 'cert', T('1-01'));
+  student('D2', 'Dash', '—', 'cert', T('1-02'));
 
   const preview = db.prepare(PREVIEW).all();
   const act = (row) => preview.find((p) => p.roster_row === db.prepare('SELECT rowid AS r FROM students WHERE id = ?').get(row).r)?.action;
   ok(act('A1') === 'keep' && act('A2') === 'merge', 'preview: the first registration is kept, the second merged', JSON.stringify(preview));
   ok(act('B1') === 'keep' && act('B2') === 'merge' && act('B3') === 'merge', 'preview: three registrations, two merged');
   ok(act('C1') === 'check' && act('C2') === 'check', 'preview: one address, two names -- left to be checked');
-  ok(!act('T1') && !act('N1'), 'preview: tester placeholders and records with no email are not listed');
+  ok(!act('T1') && !act('N1') && !act('D1'), 'preview: tester placeholders and records with no email (or "—") are not listed');
   ok(!preview.some((p) => Object.values(p).some((v) => /@|Ruiz|Ben|Pérez|^A\d$/.test(String(v)))),
     'preview shows no names, emails or codes');
   ok(db.prepare('SELECT COUNT(*) AS n FROM students WHERE merged_into IS NOT NULL').get().n === 0, 'preview changes nothing');
@@ -86,7 +88,7 @@ const PREVIEW = fs.readFileSync('tools/merge-duplicate-students-preview.sql', 'u
   ok(s('B1').contact_opt_out_at === T('5-01'), 'a request for no more notes on either record is honoured');
   ok(!s('C1').merged_into && !s('C2').merged_into && s('C1').track === 'mdiv' && s('C2').track === 'cert',
     'two people sharing an address are left exactly as they were');
-  ok(!s('T2').merged_into && !s('N2').merged_into, 'tester placeholders and records with no email are left alone');
+  ok(!s('T2').merged_into && !s('N2').merged_into && !s('D2').merged_into, 'tester placeholders and records with no email (or "—") are left alone');
 
   const units = db.prepare("SELECT unit, completed_at FROM unit_progress WHERE student_id = 'A1' ORDER BY unit").all();
   ok(units.length === 2 && units[0].completed_at === T('3-01'), 'units: both kept once, the earlier date wins', JSON.stringify(units));
@@ -127,7 +129,9 @@ if (BASE && process.env.MERGE_STATE && process.env.MERGE_CONFIG) {
   const tag = crypto.randomBytes(4).toString('hex');
   const email = `merge-${tag}@example.org`;
   const first = (await jpost('/api/register', { name: `Merge Test ${tag}`, email, track: 'cert' })).body.code;
-  const second = (await jpost('/api/register', { name: `Merge Test ${tag}`, email, track: 'thm' })).body.code;
+  // registration now pauses a second record like this (test/dup-register.test.mjs);
+  // "register separately" is the way one can still arise
+  const second = (await jpost('/api/register', { name: `Merge Test ${tag}`, email, track: 'thm', separate: true })).body.code;
   ok(first && second && first !== second, 'two registrations, two codes');
   await jpost('/api/sync', { code: first, progress: [{ course: 'st', unit: 1, completedAt: '2026-03-01T00:00:00.000Z' }] });
   await jpost('/api/sync', { code: second, progress: [{ course: 'st', unit: 2, completedAt: '2026-03-02T00:00:00.000Z' }] });

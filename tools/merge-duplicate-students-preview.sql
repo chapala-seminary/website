@@ -14,7 +14,7 @@ WITH live AS (
   SELECT s.rowid AS row, s.id, s.created_at, s.track, s.goal,
          lower(trim(s.email)) AS e, lower(trim(s.name)) AS nm
   FROM students s
-  WHERE s.merged_into IS NULL AND trim(COALESCE(s.email, '')) <> ''
+  WHERE s.merged_into IS NULL AND s.email LIKE '%_@_%'
     AND lower(trim(s.email)) <> 'tester@chapalaseminary.org'
 ),
 dup AS (

@@ -23,7 +23,7 @@
 
 import { courseShortfall, textbookShortfall, degreeShortfall, resolveCourse, studentLevel, canonicalCode, certificateLevel, DEGREES } from './awards.js';
 import catalog from './catalog.json';
-import { emailConfigured, sendEmail, verificationEmail, certificateEmail } from './email.js';
+import { emailConfigured, sendEmail, verificationEmail, certificateEmail, codeEmail } from './email.js';
 import { notify, notifyBatch, retryFailed } from './notify.js';
 
 const MAX = { name: 120, email: 160, country: 80, track: 24, goal: 400, heard: 40, title: 200, course: 64, code: 40 };
@@ -215,6 +215,22 @@ async function register(request, env) {
   const track = (str(b.track, MAX.track, { required: true, field: 'track' }) || '').toLowerCase();
   if (!TRACKS.has(track)) throw new HttpError(400, 'track must be one of: ' + [...TRACKS].join(', '));
 
+  /* Registering twice (Wayne, 5 Oct 2026: six students had two records).
+     A live record with the same email AND the same name is almost always the
+     same person on a new browser, so no second record is made: the page
+     offers to email that address its code instead (/api/code/email), and
+     never hands the code back here -- the email is unverified, and a code
+     given to whoever typed an address would give away that student's record.
+     Same email, different name registers as before: two people can share an
+     address. `separate: true` is the student saying "this is not me". */
+  const email = str(b.email, MAX.email, { field: 'email' });
+  if (b.separate !== true && email && EMAIL_RE.test(email.toLowerCase())) {
+    const same = await env.DB.prepare(
+      `SELECT 1 FROM students WHERE merged_into IS NULL AND lower(trim(email)) = ? AND lower(trim(name)) = ? LIMIT 1`)
+      .bind(email.toLowerCase(), name.toLowerCase()).first();
+    if (same) return json({ existing: true, error: 'a student record already has this name and email' }, 409);
+  }
+
   const t = now();
   // A collision at 60 bits is not going to happen, but a silent overwrite of
   // somebody's record if it did is not a risk worth carrying for three lines.
@@ -223,7 +239,7 @@ async function register(request, env) {
     const res = await env.DB.prepare(
       `INSERT INTO students (id, name, email, country, track, goal, heard, lang, created_at, updated_at)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO NOTHING`)
-      .bind(id, name, str(b.email, MAX.email, { field: 'email' }), str(b.country, MAX.country, { field: 'country' }),
+      .bind(id, name, email, str(b.country, MAX.country, { field: 'country' }),
         track, str(b.goal, MAX.goal, { field: 'goal' }), str(b.heard, MAX.heard, { field: 'heard' }), lang(b.lang), t, t).run();
     if (res.meta?.changes) return json({ code: id, student: (await loadState(env, id)).student }, 201);
   }
@@ -439,6 +455,49 @@ async function hashCode(id, code) {
 function sixDigits() {
   const n = crypto.getRandomValues(new Uint32Array(1))[0] % 1000000;
   return String(n).padStart(6, '0');
+}
+
+/* "Email me my code": the code of every live record with this address, sent
+ * to that address and nowhere else. It is how a student who registered once
+ * gets back to their record on a new browser, and what the page offers when a
+ * second registration is paused (register(), above).
+ *
+ * The answer is the same whether or not the address has a record, so this
+ * cannot be used to find out who studies here. It is throttled by address
+ * (three a day: nobody needs more, and nobody's inbox should be filled from
+ * here) and by the asking address (twenty an hour: a classroom on one
+ * connection is not stopped, and nobody can mail a list from it). Both are counted on every request, found or not, and stored hashed.
+ */
+const CODE_EMAIL = { perAddressPerDay: 3, perIpPerHour: 20 };
+async function hashed(text) {
+  const d = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+  return [...new Uint8Array(d).slice(0, 16)].map((x) => x.toString(16).padStart(2, '0')).join('');
+}
+async function emailMyCode(request, env) {
+  const b = await body(request);
+  const email = (str(b.email, MAX.email, { required: true, field: 'email' }) || '').toLowerCase();
+  if (!EMAIL_RE.test(email)) throw new HttpError(400, 'that does not look like an email address');
+  if (!emailConfigured(env)) throw new HttpError(503, 'email is not set up yet');
+
+  const t = unix();
+  const byAddress = await hashed('code-email\u0000' + email);
+  const byIp = await bucketOf(request, 'code-email');
+  const count = async (bucket, since) => (await env.DB.prepare(
+    'SELECT COUNT(*) AS n FROM code_email_requests WHERE bucket = ? AND at >= ?').bind(bucket, since).first())?.n || 0;
+  if (await count(byAddress, t - 86400) >= CODE_EMAIL.perAddressPerDay
+      || await count(byIp, t - 3600) >= CODE_EMAIL.perIpPerHour)
+    return json({ error: 'too many requests. Try again tomorrow.' }, 429);
+  await env.DB.batch([
+    env.DB.prepare('INSERT INTO code_email_requests (bucket, at) VALUES (?, ?), (?, ?)').bind(byAddress, t, byIp, t),
+    env.DB.prepare('DELETE FROM code_email_requests WHERE at < ?').bind(t - 86400),
+  ]);
+
+  const students = (await env.DB.prepare(
+    `SELECT id, name FROM students WHERE merged_into IS NULL AND lower(trim(email)) = ? ORDER BY created_at`)
+    .bind(email).all()).results ?? [];
+  if (students.length)
+    await sendEmail(env, { to: email, ...codeEmail({ students, origin: new URL(request.url).origin }) });
+  return json({ ok: true });
 }
 
 async function emailStart(request, env) {
@@ -691,6 +750,7 @@ export async function handle(request, env) {
       return fail(405, 'method not allowed');
     }
     if (path === '/api/certificate' && method === 'POST') return await issueCertificate(request, env);
+    if (path === '/api/code/email' && method === 'POST') return await emailMyCode(request, env);
     if (path === '/api/email/start' && method === 'POST')
       return await guarded(request, env, 'student', () => emailStart(request, env));
     if (path === '/api/email/confirm' && method === 'POST')
