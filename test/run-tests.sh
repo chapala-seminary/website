@@ -224,6 +224,9 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   # 948 assertions that the built site implements the agreed assessment policy
   # -- pass mark, lockouts, track rules. Also never run by this suite before.
   node tools/engine-test-built.mjs "http://127.0.0.1:$PORT"
+  # A failed attempt always says how to retake: Submit when it cannot pass,
+  # the time left when the page opens during the wait (Wayne, 5 Oct 2026).
+  node tools/verify-retake.mjs "http://127.0.0.1:$PORT"
   # The same fill-in rules on the four courses the engine does not run:
   # Counseling, Narrative and WiseSpeak Preaching, and Ethics.
   node tools/verify-fill-single.mjs "http://127.0.0.1:$PORT"
