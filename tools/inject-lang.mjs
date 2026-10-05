@@ -1,7 +1,8 @@
 /* Every student page restores the reader's language (Dr. Cook's beta pass,
  * 30 Sept 2026). cts-lang.js does it, but only the pages that listed it loaded
  * it: the unit layout now does, and this adds it to every other built page --
- * the reading rooms, the digests, the certificates -- straight after <body>,
+ * the digests, the certificates (the reading rooms have their own layout
+ * now, src/layouts/Room.astro, which loads it) -- straight after <body>,
  * so it runs before the page's own scripts. The pages in public/ stay as the
  * seminary wrote them. Run by astro.config.mjs when a build finishes.
  */

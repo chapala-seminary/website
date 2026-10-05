@@ -1,0 +1,224 @@
+/* The reading rooms and the honors page, on the unit design (5 Oct 2026).
+ *
+ * Loaded after cts.css by src/layouts/Room.astro, and only there. cts.css
+ * gives the rooms what a unit has: the paper, the type, the masthead, the
+ * sticky bar, the language switch and the course's colour (--accent). This
+ * file styles what only a room has -- the five readings, the digests that open
+ * in place, the honours record, the public-domain shelf, Further Study -- in
+ * the same tokens, so a room looks like the course it belongs to.
+ *
+ * The rooms came in two families with their own vocabularies (see
+ * tools/rooms-to-astro.mjs); both are styled here, side by side, rather than
+ * rewriting either family's markup.
+ */
+
+body.cts-room{--gold-deep:#8a6a1b;--card-line:var(--rule);--shadow:0 2px 10px rgba(34,32,29,.06)}
+.cts-room main.wrap{max-width:860px;padding-block:var(--s5) var(--s6)}
+.cts-room main h2{font-size:1.45rem;color:var(--accent);margin:0 0 var(--s2);border-bottom:0;padding-bottom:0}
+.cts-room main h3{font-size:1.28rem;color:var(--ink)}
+.cts-room main p{margin:var(--s2) 0}
+
+/* ── Two languages ──────────────────────────────────────────────────────────
+   cts.css hides the other language and, under "Both", shows each Spanish
+   passage on its own line, muted. A room also has short labels in both --
+   "Select", "Reading 1", a button -- which read better on one line under
+   Both: "Select / Elegir". A passage marked .block keeps its own line. */
+.cts-room span.block{display:block}
+body.lang-both.cts-room span.lang-es:not(.block){display:inline!important;margin:0}
+body.lang-both.cts-room span.lang-es:not(.block)::before{content:" / ";color:var(--rule)}
+body.lang-both.cts-room .cts-masthead span.lang-es:not(.block)::before{color:rgba(255,255,255,.5)}
+body.lang-both.cts-room .lang-es.block{margin-top:var(--s2)}
+/* a badge is a mark, not a sentence: under Both it keeps one word */
+body.lang-both.cts-room :is(.dg-badge,.fs-badge) span.lang-es:not(.block){display:none!important}
+/* on a dark ground (the count, a pressed or solid button) the second
+   language keeps the ground's own ink, a little softer, not the page's grey */
+body.lang-both.cts-room :is(.counter,.cts-seg button.active,.cts-seg button[aria-pressed="true"],.btn.solid,.cts-btn:not(.ghost),.attest .btn:not(.ghost),.fs-btn:not(.fs-alt)) .lang-es{color:inherit!important;opacity:.78}
+body.lang-both.cts-room :is(.counter,.cts-seg button.active,.cts-seg button[aria-pressed="true"],.btn.solid,.cts-btn:not(.ghost),.attest .btn:not(.ghost),.fs-btn:not(.fs-alt)) span.lang-es::before{color:inherit}
+
+/* ── Cards: the notices, the framing cards, each reading ────────────────── */
+.cts-room .notice,.cts-room .card,.cts-room .about,.cts-room .test,
+.cts-room .entry,.cts-room article.reading,.cts-room .cts-attest,.cts-room .cts-shelf-entry,
+.cts-room .cts-shelf-panel,.cts-room .fs-card,.cts-room .dir-card{
+  background:var(--card);border:1px solid var(--card-line);border-radius:var(--r);
+  padding:var(--s4);margin:var(--s4) 0;box-shadow:var(--shadow)}
+.cts-room .notice,.cts-room .about{background:color-mix(in srgb,var(--accent) 5%,var(--card));border-color:color-mix(in srgb,var(--accent) 22%,var(--rule))}
+.cts-room .test{background:color-mix(in srgb,var(--gold) 8%,var(--card));border-color:color-mix(in srgb,var(--gold) 40%,var(--rule))}
+.cts-room .card > h2{font-size:1.3rem}
+.cts-room .card.honors{border-top:3px solid var(--gold)}
+.cts-room .lead{font-size:1.05rem}
+.cts-room .pill-note{display:inline-block;background:var(--paper);border:1px solid var(--rule);
+  border-radius:999px;padding:2px 12px;font-size:.85rem;color:var(--accent);margin-top:var(--s1)}
+.cts-room .room-note,.cts-room .footnote{color:var(--muted);font-size:.9rem;text-align:center;margin-top:var(--s5)}
+
+/* ── The five readings ──────────────────────────────────────────────────── */
+.cts-room .shelf-head{text-align:center;margin:var(--s5) 0 var(--s2)}
+.cts-room .shelf-head h2,.cts-room .cts-shelf-head h2{display:inline-block;margin:0}
+.cts-room .rule,.cts-room .cts-shelf-rule{width:64px;height:2px;background:var(--gold);margin:var(--s2) auto 0}
+.cts-room .grid{display:block}
+/* The count of chosen readings sits just under the sticky bar while the
+   student scrolls the five; --cts-nav-h is set by cts-room.js. */
+.cts-room .counter{position:sticky;top:calc(var(--cts-nav-h,60px) + 8px);z-index:20;
+  width:max-content;max-width:100%;margin:var(--s3) auto var(--s2);
+  background:var(--accent);color:var(--accent-ink);border:0;border-radius:999px;
+  padding:7px 18px;font-size:.95rem;box-shadow:0 3px 10px rgba(0,0,0,.14)}
+.cts-room .counter b,.cts-room .counter strong{color:var(--gold-bright)}
+.cts-room .limit-note{text-align:center;color:var(--gold-deep);font-size:.92rem;min-height:1.2em;margin:var(--s1) 0 0}
+.cts-room .entry.chosen,.cts-room article.reading:has(input:checked){border-color:var(--accent);
+  box-shadow:0 0 0 2px var(--accent) inset,var(--shadow)}
+/* the line above the title: "Reading 1 · The Old Testament Canon", "Acts 1–2" */
+.cts-room .num,.cts-room .locus,.cts-room .cts-shelf-locus,.cts-room .fs-kind,.cts-room .fs-eyebrow{
+  font:600 .74rem/1.4 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep);margin:0 0 var(--s1)}
+.cts-room .entry .title,.cts-room .cts-shelf-title{font:700 1.28rem/1.25 var(--display);color:var(--accent)}
+.cts-room .entry .title .num,.cts-room .cts-shelf-num{display:inline-block;min-width:1.6em;letter-spacing:0;
+  font:italic 400 1.1rem var(--body);text-transform:none;color:var(--gold-deep);margin:0}
+.cts-room article.reading h3{color:var(--accent);margin:0 0 var(--s1)}
+.cts-room .byline,.cts-room .meta,.cts-room .cts-shelf-byline,.cts-room .len,.cts-room .fs-meta{
+  color:var(--muted);font-style:italic;font-size:.95rem;margin:0 0 var(--s2)}
+.cts-room .caption,.cts-room .cts-shelf-caption{font-size:1rem}
+.cts-room .portion,.cts-room .assignment,.cts-room .assignment-note{background:var(--paper);border-left:3px solid var(--gold);
+  border-radius:0 6px 6px 0;padding:var(--s2) var(--s3);margin:var(--s2) 0;font-size:.95rem}
+.cts-room .assignment p{margin:0}
+.cts-room .assignment .length{white-space:nowrap;font-style:italic}
+.cts-room .kind{display:inline-block;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;
+  border-radius:999px;padding:2px 9px;background:var(--paper);border:1px solid var(--rule);color:var(--gold-deep)}
+.cts-room .foot,.cts-room .actions{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s4);align-items:center;
+  justify-content:space-between;margin-top:var(--s3);padding-top:var(--s3);border-top:1px solid var(--rule-soft)}
+.cts-room .actions{justify-content:flex-start}
+.cts-room .actions > .digest-inline,.cts-room .foot > .digest-inline{flex:1 1 100%}
+.cts-room .read-links{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center}
+.cts-room .read-link{color:var(--accent);text-decoration:none;border-bottom:1.5px solid var(--gold)}
+.cts-room .actions a.btn{border-radius:999px}
+/* "Select" -- choosing a reading for the three */
+.cts-room .pick,.cts-room label.btn.alt{display:inline-flex;align-items:center;gap:var(--s2);cursor:pointer;
+  font:600 .95rem/1.2 var(--body);color:var(--ink);user-select:none;background:none;border:0;padding:0;min-height:0}
+.cts-room .pick input,.cts-room label.btn.alt input,.cts-room .oath input,.cts-room .cts-oath input{
+  width:20px;height:20px;accent-color:var(--accent);cursor:pointer;flex-shrink:0}
+.cts-room .pick.disabled{opacity:.4;cursor:not-allowed}
+/* cts.css sets a unit's form labels in small capitals; a room's labels are
+   sentences ("Select for my three", the oath) and read as sentences */
+.cts-room .pick,.cts-room label.btn.alt,.cts-room .oath label,.cts-room .cts-oath label,.cts-room #attest label{
+  text-transform:none;letter-spacing:0}
+.cts-room .oath label,.cts-room .cts-oath label,.cts-room #attest label{display:inline;font:inherit;color:var(--ink);margin:0}
+
+/* Church History's martyrs and reasons, kept as lists */
+.cts-room ul.people,.cts-room ul.reasons{padding-left:1.2em}
+.cts-room .who{font-weight:600;color:var(--accent)}
+
+/* Parables: each reading is a <details> card */
+.cts-room details.reading.card > summary{cursor:pointer;font:700 1.15rem/1.3 var(--display);color:var(--accent)}
+.cts-room .progress{font-weight:600;font-size:1.05rem;color:var(--accent);margin:0}
+.cts-room #attest input[type=text]{width:100%;max-width:420px;padding:9px 12px;margin:var(--s2) 0;
+  border:1px solid var(--rule);border-radius:8px;font:1rem var(--body);background:#fff}
+
+/* ── A digest, opened in place ──────────────────────────────────────────── */
+.cts-room .digest-inline{margin:var(--s2) 0;border:1px solid var(--rule);border-radius:var(--r);background:#fff;overflow:hidden}
+.cts-room .digest-inline > summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:var(--s2);
+  padding:var(--s2) var(--s3);font:600 1rem/1.3 var(--body);color:var(--accent)}
+.cts-room .digest-inline > summary::-webkit-details-marker{display:none}
+.cts-room .digest-inline > summary::after{content:"\25B8";margin-left:auto;color:var(--gold-deep)}
+.cts-room .digest-inline[open] > summary::after{content:"\25BE"}
+.cts-room .digest-inline[open] > summary{border-bottom:1px solid var(--rule-soft);background:var(--paper)}
+.cts-room .dg-badge{flex:none;background:var(--accent);color:var(--accent-ink);font:700 .62rem/1 var(--body);
+  letter-spacing:.12em;padding:5px 8px;border-radius:5px}
+.cts-room .dg-note-line{font-size:.85rem;color:var(--muted);padding:var(--s1) var(--s3) 0}
+.cts-room .dg-scroll{padding:var(--s1) var(--s4) var(--s4)}
+.cts-room .dg-block{max-width:68ch;margin:0}
+.cts-room .dg-block .dg-doc{border-bottom:1px solid var(--rule);padding-bottom:var(--s2);margin:var(--s3) 0}
+.cts-room .dg-block h1{font-size:1.5rem;color:var(--accent);margin:0 0 var(--s1)}
+.cts-room .dg-block .dg-sub{color:var(--muted);font-style:italic;margin:0 0 var(--s1)}
+.cts-room .dg-block .dg-src{font-size:.88rem;color:var(--muted);margin:var(--s1) 0}
+.cts-room .dg-block .dg-chips{margin:var(--s2) 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.cts-room .dg-block .dg-chips li{font:600 .72rem/1 var(--body);background:var(--paper);color:var(--accent);
+  border:1px solid var(--rule);border-radius:999px;padding:4px 9px}
+.cts-room .dg-block .dg-note,.cts-room .dg-block .dg-reflect{background:var(--paper);border-left:3px solid var(--gold);
+  border-radius:0 6px 6px 0;padding:var(--s2) var(--s3);margin:var(--s3) 0}
+.cts-room .dg-block h2{font-size:1.2rem;color:var(--accent);margin:var(--s4) 0 var(--s1);padding-top:var(--s2);border-top:1px solid var(--rule-soft)}
+.cts-room .dg-block h2 .dg-n{color:var(--gold-deep);font-weight:400;margin-right:.35rem}
+.cts-room .dg-block p{margin:0 0 var(--s3)}
+.cts-room .dg-block blockquote{margin:var(--s3) 0;padding:2px 0 2px var(--s3);border-left:3px solid var(--rule);font-style:italic;color:var(--muted)}
+.cts-room .dg-block footer{margin-top:var(--s4);padding-top:var(--s2);border-top:1px solid var(--rule);font-size:.88rem;color:var(--muted)}
+/* Under "Both" a digest shows each language in full, one after the other. */
+body.lang-both.cts-room .dg-block.lang-es{border-top:2px solid var(--gold);margin-top:var(--s4);padding-top:var(--s2);color:var(--ink)}
+
+/* ── The honours record: both families' versions ────────────────────────── */
+.cts-room .attest,.cts-room .cts-attest{border-top:3px solid var(--accent)}
+.cts-room .cts-attest h2{font-size:1.3rem}
+.cts-room .attest label.field,.cts-room .cts-attest label.cts-field{display:block;margin:var(--s3) 0 var(--s1);
+  font-size:.92rem;font-weight:600;color:var(--muted)}
+.cts-room .attest input[type=text],.cts-room .cts-attest input[type=text]{width:100%;max-width:440px;
+  padding:10px 13px;border:1px solid var(--rule);border-radius:8px;font:1rem var(--body);background:#fff;color:var(--ink)}
+.cts-room .oath,.cts-room .cts-oath{display:flex;gap:var(--s2);align-items:flex-start;margin:var(--s3) 0;
+  background:var(--paper);border:1px solid var(--rule-soft);border-radius:8px;padding:var(--s2) var(--s3)}
+.cts-room .attest .btn:not(.ghost),.cts-room .cts-btn:not(.ghost){background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.cts-room .cts-btn{appearance:none;cursor:pointer;font:600 .9rem/1 var(--body);min-height:38px;padding:10px 16px;
+  border-radius:999px;border:1px solid var(--accent);background:var(--card);color:var(--accent)}
+.cts-room .msg,.cts-room .cts-msg{color:var(--no-ink);font-size:.95rem;margin-top:var(--s2);min-height:1.2em}
+.cts-room .cts-done{display:none;color:var(--ok-ink);font-size:.98rem;margin-top:var(--s2)}
+.cts-room .record,.cts-room .cts-record{display:none;margin-top:var(--s4);padding-top:var(--s3);border-top:2px solid var(--gold)}
+.cts-room .record.show,.cts-room .cts-record.show{display:block}
+.cts-room .record .seal-line{width:70px;height:2px;background:var(--gold);margin:var(--s1) 0 var(--s3)}
+.cts-room .record .named,.cts-room .cts-record .cts-name{font:700 1.6rem var(--display);color:var(--accent);margin:var(--s1) 0 var(--s2)}
+.cts-room .record .named{display:inline-block;border-bottom:1px solid var(--gold-deep);padding:0 10px 4px}
+.cts-room .record .stamp{font-style:italic;color:var(--muted);font-size:.92rem}
+
+/* ── Further Study: the public-domain shelf ─────────────────────────────── */
+.cts-room .cts-shelf{margin:var(--s6) 0 var(--s2)}
+.cts-room .cts-shelf-head{text-align:center}
+.cts-room .cts-shelf-note{background:var(--card);border:1px solid color-mix(in srgb,var(--gold) 40%,var(--rule));
+  border-radius:var(--r);padding:var(--s3) var(--s4);margin:var(--s3) 0}
+.cts-room .cts-shelf-panel > h3{color:var(--accent);margin:0 0 var(--s2)}
+.cts-room .cts-shelf-entry{margin:var(--s3) 0}
+.cts-room .cts-shelf-foot{margin-top:var(--s2);padding-top:var(--s2);border-top:1px solid var(--rule-soft);
+  display:flex;flex-wrap:wrap;gap:var(--s1) var(--s4);align-items:center}
+.cts-room .cts-shelf-link{color:var(--accent);text-decoration:none;border-bottom:1.5px solid var(--gold);padding-bottom:1px}
+.cts-room .cts-shelf-badge{font-size:.85rem;color:var(--muted)}
+
+/* ── Further Study: online ──────────────────────────────────────────────── */
+.cts-room .fs-wrap{margin:var(--s6) 0 var(--s2)}
+.cts-room .fs-head{background:var(--card);border:1px solid var(--rule);border-top:3px solid var(--accent);
+  border-radius:var(--r);padding:var(--s4)}
+.cts-room .fs-head h2{margin:var(--s1) 0 0}
+.cts-room .fs-tag{color:var(--muted);font-size:.95rem;margin:var(--s2) 0 0}
+.cts-room .fs-online{display:flex;gap:var(--s2);align-items:flex-start;background:var(--card);
+  border:1px solid color-mix(in srgb,var(--accent) 30%,var(--rule));border-radius:var(--r);padding:var(--s2) var(--s3);margin:var(--s3) 0}
+.cts-room .fs-online p{margin:0;font-size:.95rem}
+.cts-room .fs-badge{flex:none;font:700 .66rem/1 var(--body);letter-spacing:.1em;color:var(--accent-ink);
+  background:var(--accent);padding:6px 9px;border-radius:5px;margin-top:3px}
+.cts-room .fs-grid{display:grid;gap:var(--s3)}
+.cts-room .fs-card{margin:0}
+.cts-room .fs-card h3{margin:var(--s1) 0}
+.cts-room .fs-langs span{font:600 .68rem/1 var(--body);background:var(--paper);color:var(--accent);
+  border:1px solid var(--rule);border-radius:999px;padding:3px 8px;margin-left:5px;font-style:normal}
+.cts-room .fs-note{background:var(--paper);border-left:3px solid var(--gold);border-radius:0 6px 6px 0;padding:var(--s2) var(--s3);font-size:.92rem}
+.cts-room .fs-links{display:flex;gap:var(--s2);flex-wrap:wrap;margin-top:var(--s2)}
+.cts-room .fs-btn{display:inline-flex;align-items:center;min-height:38px;padding:9px 16px;border-radius:999px;text-decoration:none;
+  font:600 .9rem/1 var(--body);background:var(--accent);color:var(--accent-ink);border:1px solid var(--accent)}
+.cts-room .fs-btn.fs-alt{background:var(--card);color:var(--accent)}
+.cts-room .fs-pick{border-style:dashed;box-shadow:none;color:var(--muted)}
+.cts-room .fs-pick h3{color:var(--muted)}
+.cts-room .fs-foot{margin-top:var(--s3);font-size:.88rem;color:var(--muted)}
+
+/* ── The honors page: the course directory ──────────────────────────────── */
+.cts-room .dir-group{margin:var(--s4) 0 0}
+.cts-room .dir-group h3{font-size:1.15rem;color:var(--accent);padding-bottom:var(--s1);border-bottom:2px solid var(--gold);margin-bottom:var(--s2)}
+.cts-room .dir-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:var(--s2)}
+.cts-room .dir-list a{display:block;text-decoration:none;color:var(--ink);background:var(--paper);
+  border:1px solid var(--rule);border-radius:8px;padding:var(--s2) var(--s3);line-height:1.3}
+.cts-room .dir-list a:hover{border-color:var(--accent);color:var(--accent)}
+.cts-room .dir-list a .lang-en,.cts-room .dir-list a .lang-es{font-weight:600}
+body.lang-both.cts-room .dir-list a span.lang-es:not(.block){display:block!important;font-weight:400;font-size:.88rem;color:var(--muted)}
+body.lang-both.cts-room .dir-list a span.lang-es::before{content:none}
+
+@media (max-width:600px){
+  .cts-room main.wrap{padding-block:var(--s4) var(--s5)}
+  .cts-room .notice,.cts-room .card,.cts-room .about,.cts-room .test,.cts-room .entry,.cts-room article.reading,
+  .cts-room .cts-attest,.cts-room .cts-shelf-entry,.cts-room .cts-shelf-panel,.cts-room .fs-card{padding:var(--s3)}
+  .cts-room .dg-scroll{padding:var(--s1) var(--s3) var(--s3)}
+  .cts-room .foot{flex-direction:column;align-items:flex-start}
+}
+
+/* Print: the honours record, which a student may present. */
+@media print{
+  .cts-room .counter,.cts-room .limit-note,.cts-room .no-print,.cts-room .cts-shelf,.cts-room .fs-wrap{display:none!important}
+  .cts-room .record,.cts-room .cts-record{display:block!important}
+}
