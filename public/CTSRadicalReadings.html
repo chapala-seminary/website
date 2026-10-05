@@ -69,8 +69,8 @@
   </div>
 
   <div class="notice">
-    <strong>Fully offline:</strong> Each of the five readings is a Chapala Theological Seminary bilingual digest (English and Spanish), written by CTS and included in your course download — so every one opens directly on your device, with no internet connection at all. The digests are CTS-authored teaching that rests on the great public-domain classics of discipleship (Thomas à Kempis, William Law, John Bunyan, Charles M. Sheldon, Andrew Murray, E. M. Bounds, A. B. Bruce, Henry Drummond, George Müller, and others); those classic works are freely available online for any who wish to read them in full.<br>
-    <span class="es"><strong>Totalmente sin conexión:</strong> Cada una de las cinco lecturas es un resumen bilingüe del Seminario Teológico de Chapala (inglés y español), escrito por el STC e incluido en la descarga de su curso — de modo que cada una se abre directamente en su dispositivo, sin conexión alguna. Los resúmenes son enseñanza de autoría del STC que se apoya en los grandes clásicos de dominio público del discipulado (Tomás de Kempis, William Law, John Bunyan, Charles M. Sheldon, Andrew Murray, E. M. Bounds, A. B. Bruce, Henry Drummond, George Müller, y otros); esas obras clásicas están disponibles gratuitamente en línea para quien desee leerlas por completo.</span>
+    <strong>On this site:</strong> Each of the five readings is a Chapala Theological Seminary bilingual digest (English and Spanish), written by CTS and available here on the site — every one opens directly from this page, with nothing to download. The digests are CTS-authored teaching that rests on the great public-domain classics of discipleship (Thomas à Kempis, William Law, John Bunyan, Charles M. Sheldon, Andrew Murray, E. M. Bounds, A. B. Bruce, Henry Drummond, George Müller, and others); those classic works are freely available online for any who wish to read them in full.<br>
+    <span class="es"><strong>En este sitio:</strong> Cada una de las cinco lecturas es un resumen bilingüe del Seminario Teológico de Chapala (inglés y español), escrito por el STC y disponible aquí en el sitio — cada una se abre directamente desde esta página, sin nada que descargar. Los resúmenes son enseñanza de autoría del STC que se apoya en los grandes clásicos de dominio público del discipulado (Tomás de Kempis, William Law, John Bunyan, Charles M. Sheldon, Andrew Murray, E. M. Bounds, A. B. Bruce, Henry Drummond, George Müller, y otros); esas obras clásicas están disponibles gratuitamente en línea para quien desee leerlas por completo.</span>
   </div>
 
   <div class="counter">Selected / Elegidas: <strong id="count">0</strong> of 3</div>
@@ -528,6 +528,176 @@
     </article>
 
   </main>
+<!-- CTS-ATTEST: the honours-reading attestation, written by tools/reading-rooms.mjs; edit there -->
+<style>
+.cts-attest{background:var(--card,#fff);border:1px solid var(--line,#dde1ea);border-top:4px solid var(--accent,#1f3d8c);border-radius:10px;padding:18px;margin:22px 0;box-shadow:0 2px 8px #0000000b}
+.cts-attest h2{margin:0 0 8px;font-size:1.25rem}
+.cts-attest label.cts-field{display:block;margin:12px 0 4px;font:700 .9rem Arial,sans-serif;color:var(--muted,#5a6272)}
+.cts-attest input[type=text]{width:100%;max-width:420px;padding:9px 11px;border:1px solid var(--line,#dde1ea);border-radius:7px;font:1rem Georgia,serif}
+.cts-attest .cts-oath{display:flex;gap:10px;align-items:flex-start;margin:12px 0}
+.cts-attest .cts-oath input{width:20px;height:20px;margin-top:2px;accent-color:var(--accent,#1f3d8c);flex-shrink:0}
+.cts-attest .cts-btn{display:inline-block;padding:9px 13px;border-radius:7px;border:0;cursor:pointer;background:var(--accent,#1f3d8c);color:#fff;font:700 .9rem Arial,sans-serif}
+.cts-attest .cts-btn.ghost{background:#fff;color:var(--accent,#1f3d8c);border:1px solid var(--accent,#1f3d8c)}
+.cts-attest .cts-msg{margin:8px 0 0;font-family:Arial,sans-serif;font-size:.92rem;color:#8a1f1f;min-height:1em}
+.cts-attest .cts-done{display:none;margin:8px 0 0;font-family:Arial,sans-serif;font-size:.95rem;color:#2f6b3a}
+.cts-attest .cts-record{display:none;margin-top:16px;padding-top:14px;border-top:2px solid var(--accent,#1f3d8c)}
+.cts-attest .cts-record.show{display:block}
+.cts-attest .cts-record .cts-name{font-size:1.4rem;margin:4px 0}
+.cts-attest .cts-record ul{margin:6px 0 0 18px;padding:0}
+@media print{.cts-attest input,.cts-attest label.cts-field,.cts-attest .cts-oath,.cts-attest .cts-btn,.cts-attest .cts-msg,.cts-attest .cts-done,.cts-attest .cts-intro{display:none!important}.cts-attest .cts-record{display:block!important;border:none}}
+</style>
+<section class="cts-attest" id="cts-attest" data-honors-code="Radical" data-honors-course="Radical Christianity">
+<h2>Record your reading <span class="es">/ Registre su lectura</span></h2>
+<p class="cts-intro">When you have read your three chosen readings in full, enter your name and affirm it below. This record is kept on your honor, in this browser; it shows on your certificate as <em>with honors</em>.<br><span class="es">Cuando haya leído por completo sus tres lecturas elegidas, escriba su nombre y confírmelo abajo. Este registro se guarda bajo su honor, en este navegador; aparece en su certificado como <em>con honores</em>.</span></p>
+<label class="cts-field" for="cts-att-name">Your name <span class="es">/ Su nombre</span></label>
+<input type="text" id="cts-att-name" autocomplete="name">
+<div class="cts-oath"><input type="checkbox" id="cts-att-oath"><label for="cts-att-oath">On my honor, I have read in full the three readings I selected above.<br><span class="es">Bajo mi honor, he leído por completo las tres lecturas que seleccioné arriba.</span></label></div>
+<button type="button" class="cts-btn" id="cts-att-record">Record my reading <span class="es">/ Registrar mi lectura</span></button>
+<p class="cts-msg" id="cts-att-msg" role="status"></p>
+<p class="cts-done" id="cts-att-done">&#10003; Recorded &mdash; this class counts toward your With Honors progress. <a href="cts-honors.html">The Honors Reading Library &#8599;</a><br><span class="es">&#10003; Registrado &mdash; esta clase cuenta para su progreso Con Honores. <a href="cts-honors.html">La Biblioteca de Lecturas de Honores &#8599;</a></span></p>
+<div class="cts-record" id="cts-att-record-card">
+<div class="num">Honors Reading &mdash; recorded <span class="es">/ Lectura con Honores &mdash; registrada</span></div>
+<div class="cts-name" id="cts-att-rec-name"></div>
+<p>affirmed on <span id="cts-att-rec-date"></span> to have read, in full: <span class="es">/ afirmó haber leído, por completo:</span></p>
+<ul id="cts-att-rec-list"></ul>
+<p class="byline">Chapala Theological Seminary &middot; Radical Christianity &middot; present or print this page as your honors reading record. <span class="es">/ Presente o imprima esta página como su registro de lectura con honores.</span></p>
+<p><button type="button" class="cts-btn ghost" onclick="window.print()">Print this record <span class="es">/ Imprimir</span></button> <button type="button" class="cts-btn ghost" id="cts-att-reset">Start over <span class="es">/ Empezar de nuevo</span></button></p>
+</div>
+</section>
+<script>
+(function(){
+  var root=document.getElementById('cts-attest'); if(!root) return;
+  var CODE=root.getAttribute('data-honors-code'), COURSE=root.getAttribute('data-honors-course'), MAX=3;
+  var KEY='cts_honors_v1:'+CODE;
+  function get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+  function el(id){ return document.getElementById(id); }
+  // the five digests' own checkboxes, whatever the page calls them
+  function boxes(){ var m=document.querySelector('main')||document; return Array.prototype.slice.call(m.querySelectorAll('article input[type=checkbox]')); }
+  function titleOf(box){ var a=box.closest('article'); var h=a&&a.querySelector('h3'); if(!h) return ''; var c=h.cloneNode(true); Array.prototype.forEach.call(c.querySelectorAll('.es'),function(s){ s.parentNode.removeChild(s); }); return c.textContent.replace(/\s+/g,' ').trim(); }
+  function say(m){ el('cts-att-msg').textContent=m; }
+  function showDone(on){ el('cts-att-done').style.display=on?'block':'none'; }
+  function record(){
+    var chosen=boxes().filter(function(b){ return b.checked; });
+    var name=el('cts-att-name').value.trim(), oath=el('cts-att-oath').checked;
+    if(chosen.length!==MAX){ say('Choose exactly three readings above to record them. / Elija exactamente tres lecturas arriba para registrarlas.'); return; }
+    if(!name){ say('Enter your name to record your reading. / Escriba su nombre para registrar su lectura.'); return; }
+    if(!oath){ say('Check the box to affirm you have read all three. / Marque la casilla para afirmar que ha leído las tres.'); return; }
+    say('');
+    var now=new Date(), en=now.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    var works=chosen.map(titleOf);
+    el('cts-att-rec-name').textContent=name; el('cts-att-rec-date').textContent=en;
+    var ul=el('cts-att-rec-list'); ul.innerHTML=''; works.forEach(function(w){ var li=document.createElement('li'); li.textContent=w; ul.appendChild(li); });
+    set('cts_honors_name_v1', name);
+    set(KEY, JSON.stringify({name:name,date:en,course:COURSE,works:works}));
+    showDone(true);
+    var card=el('cts-att-record-card'); card.classList.add('show'); card.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function reset(){ el('cts-att-name').value=''; el('cts-att-oath').checked=false; el('cts-att-record-card').classList.remove('show'); say(''); }
+  el('cts-att-record').addEventListener('click', record);
+  el('cts-att-reset').addEventListener('click', reset);
+  if(get(KEY)) showDone(true);
+  var nm=get('cts_honors_name_v1'); if(nm && !el('cts-att-name').value) el('cts-att-name').value=nm;
+})();
+</script>
+<!-- /CTS-ATTEST -->
+
+<!-- CTS-SHELF: the public-domain shelf, written by tools/reading-rooms.mjs from src/data/reading-shelf.json; edit there -->
+<style>
+.cts-shelf{margin:34px 0 10px}
+.cts-shelf-head{text-align:center;margin:0 0 6px}
+.cts-shelf-head h2{font-weight:normal;font-size:1.4rem;border:none;padding:0;margin:0;display:inline-block;color:var(--primary,var(--accent,#5b3a1f))}
+.cts-shelf-rule{width:60px;height:2px;background:var(--gold,#c9a227);margin:12px auto 0}
+.cts-shelf-note{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-left:4px solid var(--gold,#c9a227);border-radius:12px;padding:14px 18px;margin:16px 0 18px;font-size:.96rem}
+.cts-shelf-panel{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-radius:16px;padding:18px 22px;margin:22px 0}
+.cts-shelf-panel > h3{font-weight:normal;font-size:1.15rem;margin:0 0 8px;color:var(--primary,var(--accent,#5b3a1f))}
+.cts-shelf-entry{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-radius:16px;padding:18px 22px;margin:14px 0;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+.cts-shelf-locus{letter-spacing:.16em;text-transform:uppercase;font-size:.68rem;color:var(--gold-deep,var(--accent,#98771d));margin-bottom:6px}
+.cts-shelf-title{font-size:1.1rem;color:var(--primary,var(--accent,#5b3a1f));margin-bottom:2px}
+.cts-shelf-num{display:inline-block;min-width:1.5em;color:var(--gold-deep,var(--accent,#98771d));font-style:italic}
+.cts-shelf-byline{color:var(--ink-soft,var(--muted,#6b5844));font-style:italic;font-size:.92rem;margin-bottom:8px}
+.cts-shelf-caption{font-size:.97rem;margin:8px 0}
+.cts-shelf-foot{margin-top:12px;padding-top:10px;border-top:1px solid var(--border,var(--line,#e5d8c8));display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
+.cts-shelf-link{color:var(--primary,var(--accent,#5b3a1f));text-decoration:none;border-bottom:1.5px solid var(--gold,#c9a227);padding-bottom:1px;font-size:.95rem}
+.cts-shelf-badge{font-size:.8rem;color:var(--ink-soft,var(--muted,#6b5844))}
+@media print{.cts-shelf{display:none}}
+</style>
+<section class="cts-shelf" id="cts-shelf" aria-labelledby="cts-shelf-h">
+<div class="cts-shelf-head"><h2 id="cts-shelf-h">Further Study: Ten Public-Domain Works <span class="es">/ Para Profundizar: diez obras de dominio público</span></h2><div class="cts-shelf-rule"></div></div>
+<div class="cts-shelf-note">These ten works are for further study, for the student who wants to go on reading. They are not part of the honors reading above: that stays as it is &mdash; the five CTS digests, any three read in full and recorded on your honor. All ten are in the public domain; each link opens the work online, and most can also be found in the Internet Archive or Project Gutenberg. Most are in English: the Chrome browser can translate a page (right-click, &ldquo;Translate to&hellip;&rdquo;; on a phone, the browser menu).<br><span class="es">Estas diez obras son para profundizar, para el estudiante que quiere seguir leyendo. No forman parte de la lectura con honores de arriba, que sigue igual: los cinco resúmenes del STC, tres cualesquiera leídos por completo y registrados bajo su honor. Las diez están en el dominio público; cada enlace abre la obra en línea, y la mayoría también se encuentra en Internet Archive o en el Proyecto Gutenberg. La mayoría están en inglés: el navegador Chrome puede traducir una página (clic derecho, &ldquo;Traducir a&hellip;&rdquo;; en un teléfono, el menú del navegador).</span></div>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Following Christ &middot; The Imitation of Christ <span class="es">/ Seguir a Cristo &middot; La Imitación de Cristo</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">1.</span> The Imitation of Christ <span class="es">/ La Imitación de Cristo</span></div>
+<div class="cts-shelf-byline">Thomas à Kempis &middot; c. 1420</div>
+<p class="cts-shelf-caption">For six centuries this little book has called Christians to the one thing that matters: to follow Christ closely, to deny self, and to prize a humble walk with God above all learning and all comfort. It is the heart of radical discipleship, and it speaks to unit after unit of this course &mdash; loving God, being holy, being humble &mdash; teaching that the truest greatness is to be least, and the fullest life is to lose it for Christ.<br><span class="es">Por seis siglos este librito ha llamado a los cristianos a la única cosa que importa: seguir a Cristo de cerca, negarse a sí mismo y estimar un andar humilde con Dios por encima de todo saber y todo consuelo. Es el corazón del discipulado radical, y habla a unidad tras unidad de este curso &mdash; amar a Dios, ser santo, ser humilde &mdash; enseñando que la verdadera grandeza es ser el menor, y la vida más plena es perderla por Cristo.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.gutenberg.org/ebooks/1653" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">A Serious Call &middot; Wholehearted Devotion <span class="es">/ Un Llamado Serio &middot; Devoción de Todo Corazón</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">2.</span> A Serious Call to a Devout and Holy Life <span class="es">/ Un Llamado Serio a una Vida Devota y Santa</span></div>
+<div class="cts-shelf-byline">William Law &middot; 1729</div>
+<p class="cts-shelf-caption">Law's searching classic asks a single, radical question: if we really believe the gospel, why is so much of our life no different from the world's? It calls the reader to give the whole of life &mdash; time, money, work, and prayer &mdash; wholly to God, and few books have so stirred people to a serious, thoroughgoing Christianity. It goes straight to the course's call to costly discipleship and to be holy.<br><span class="es">El penetrante clásico de Law hace una sola pregunta radical: si de veras creemos el evangelio, ¿por qué tanto de nuestra vida no se diferencia en nada de la del mundo? Llama al lector a entregar toda la vida &mdash; tiempo, dinero, trabajo y oración &mdash; enteramente a Dios, y pocos libros han movido tanto a las personas a un cristianismo serio y cabal. Va directamente al llamado del curso al discipulado costoso y a ser santos.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/seriouscalltode00laww" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Disciple's Journey &middot; Counting the Cost <span class="es">/ El Viaje del Discípulo &middot; Contar el Costo</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">3.</span> The Pilgrim's Progress <span class="es">/ El Progreso del Peregrino</span></div>
+<div class="cts-shelf-byline">John Bunyan &middot; 1678</div>
+<p class="cts-shelf-caption">Bunyan's immortal allegory follows Christian as he flees the City of Destruction and presses on, through every danger and temptation, to the Celestial City. It is the great picture of discipleship as a costly journey &mdash; the narrow way, the burden rolled away at the cross, the battles and the perseverance &mdash; and it speaks to the course's opening call to count the cost and follow all the way home.<br><span class="es">La inmortal alegoría de Bunyan sigue a Cristiano mientras huye de la Ciudad de Destrucción y avanza, por todo peligro y tentación, hasta la Ciudad Celestial. Es la gran imagen del discipulado como un viaje costoso &mdash; el camino angosto, la carga que rueda en la cruz, las batallas y la perseverancia &mdash; y habla al llamado inicial del curso a contar el costo y seguir todo el camino a casa.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://ccel.org/ccel/bunyan/pilgrim" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">In His Steps &middot; What Would Jesus Do? <span class="es">/ En Sus Pasos &middot; ¿Qué Haría Jesús?</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">4.</span> In His Steps <span class="es">/ En Sus Pasos</span></div>
+<div class="cts-shelf-byline">Charles M. Sheldon &middot; 1896</div>
+<p class="cts-shelf-caption">Sheldon's famous story tells of a town whose people pledged to do nothing for a year without first asking, &ldquo;What would Jesus do?&rdquo; &mdash; and of how that one question turned their ordinary lives upside down. It brings the whole course to earth, showing radical discipleship not as a feeling but as a daily choice, worked out in how we treat our neighbor, spend our money, and follow Jesus in every decision.<br><span class="es">La célebre historia de Sheldon cuenta de un pueblo cuya gente se comprometió a no hacer nada por un año sin antes preguntar: &ldquo;¿Qué haría Jesús?&rdquo; &mdash; y de cómo esa sola pregunta trastornó sus vidas ordinarias. Trae todo el curso a la tierra, mostrando el discipulado radical no como un sentimiento sino como una elección diaria, obrada en cómo tratamos al prójimo, gastamos nuestro dinero y seguimos a Jesús en cada decisión.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.gutenberg.org/ebooks/4540" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Be Humble &middot; The Beauty of Lowliness <span class="es">/ Sed Humildes &middot; La Belleza de la Humildad</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">5.</span> Humility <span class="es">/ Humildad</span></div>
+<div class="cts-shelf-byline">Andrew Murray &middot; 1895</div>
+<p class="cts-shelf-caption">Murray's short, piercing classic holds up the humility of Jesus &mdash; who emptied Himself and took the form of a servant &mdash; as the very heart of holiness and the mark of every true disciple. It is the ideal companion to the course's call to be humble, teaching that pride is the last enemy to fall, and that the lowly place at the feet of Christ is the only safe and the only truly great one.<br><span class="es">El breve y punzante clásico de Murray exalta la humildad de Jesús &mdash; que se despojó a sí mismo y tomó forma de siervo &mdash; como el corazón mismo de la santidad y la marca de todo verdadero discípulo. Es el compañero ideal del llamado del curso a ser humildes, enseñando que el orgullo es el último enemigo en caer, y que el lugar bajo a los pies de Cristo es el único seguro y el único verdaderamente grande.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/humilitybeautyof00murr" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Be Prayerful &middot; Power Through Prayer <span class="es">/ Sed Orantes &middot; Poder a Través de la Oración</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">6.</span> Power Through Prayer <span class="es">/ Poder a Través de la Oración</span></div>
+<div class="cts-shelf-byline">E. M. Bounds &middot; 1907</div>
+<p class="cts-shelf-caption">Bounds writes on prayer with a holy fire, insisting that God works through praying people, and that no gift or effort can take the place of time spent on the knees. It is the perfect companion to the course's call to be prayerful, pressing on every disciple &mdash; and every would-be servant of God &mdash; that the secret power of a life for Christ is found in secret prayer, and nowhere else.<br><span class="es">Bounds escribe sobre la oración con un fuego santo, insistiendo en que Dios obra a través de personas que oran, y que ningún don ni esfuerzo puede ocupar el lugar del tiempo pasado de rodillas. Es el compañero perfecto del llamado del curso a ser orantes, insistiendo a cada discípulo &mdash; y a cada aspirante a siervo de Dios &mdash; en que el poder secreto de una vida para Cristo se halla en la oración secreta, y en ningún otro lugar.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.gutenberg.org/ebooks/65115" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Be a Disciplemaker &middot; How Jesus Trained the Twelve <span class="es">/ Sed Hacedores de Discípulos &middot; Cómo Jesús Formó a los Doce</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">7.</span> The Training of the Twelve <span class="es">/ La Formación de los Doce</span></div>
+<div class="cts-shelf-byline">A. B. Bruce &middot; 1871</div>
+<p class="cts-shelf-caption">Bruce studies how Jesus took twelve ordinary men and, over three years, made them into the disciples who would carry the gospel to the world. It is the ideal companion to the course's call to be a disciplemaker, showing the Lord's own patient method &mdash; teaching, correcting, and shaping character &mdash; and teaching every disciple that we are made not only to follow but to bring others along the way.<br><span class="es">Bruce estudia cómo Jesús tomó a doce hombres ordinarios y, en tres años, los hizo los discípulos que llevarían el evangelio al mundo. Es el compañero ideal del llamado del curso a ser hacedores de discípulos, mostrando el método paciente del Señor mismo &mdash; enseñando, corrigiendo y formando el carácter &mdash; y enseñando a cada discípulo que somos hechos no solo para seguir sino para traer a otros por el camino.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://ccel.org/ccel/bruce/twelve" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Love God, Love Neighbor &middot; The Greatest Thing <span class="es">/ Amar a Dios, Amar al Prójimo &middot; Lo Más Grande</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">8.</span> The Greatest Thing in the World <span class="es">/ Lo Más Grande del Mundo</span></div>
+<div class="cts-shelf-byline">Henry Drummond &middot; 1887</div>
+<p class="cts-shelf-caption">Drummond's beloved address on First Corinthians thirteen shows that love is the greatest thing of all &mdash; the sum of the whole law, the fulfilling of every command to love God and neighbor. It speaks to the very center of the course, where the commands of Jesus are gathered into love, and it teaches that a kind, patient, unselfish love is the surest proof that a life has truly been given to Christ.<br><span class="es">El amado discurso de Drummond sobre Primera de Corintios trece muestra que el amor es lo más grande de todo &mdash; la suma de toda la ley, el cumplimiento de todo mandato de amar a Dios y al prójimo. Habla al centro mismo del curso, donde los mandamientos de Jesús se reúnen en el amor, y enseña que un amor bondadoso, paciente y desinteresado es la prueba más segura de que una vida ha sido de veras entregada a Cristo.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.gutenberg.org/ebooks/16739" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Radical Trust &middot; A Life of Faith <span class="es">/ Confianza Radical &middot; Una Vida de Fe</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">9.</span> The Life of Trust <span class="es">/ La Vida de Fe</span></div>
+<div class="cts-shelf-byline">George Müller &middot; 1837 onward</div>
+<p class="cts-shelf-caption">Müller's narrative tells how he cared for thousands of orphans for decades, asking no one but God for a penny, and seeing every need supplied in answer to prayer. It is radical trust made visible &mdash; the course's call to trust God turned into a life &mdash; and it rebukes our small faith and lifts our eyes to a Father who can be relied upon utterly, by anyone bold enough to take Him at His word.<br><span class="es">La narrativa de Müller cuenta cómo cuidó de miles de huérfanos por décadas, sin pedir a nadie sino a Dios un solo centavo, y viendo suplida cada necesidad en respuesta a la oración. Es la confianza radical hecha visible &mdash; el llamado del curso a confiar en Dios convertido en una vida &mdash; y reprende nuestra poca fe y levanta nuestros ojos a un Padre en quien se puede confiar por completo, por cualquiera lo bastante audaz para tomarle la palabra.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.gutenberg.org/ebooks/27288" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Turning the World Upside Down &middot; A Consumed Life <span class="es">/ Trastornar el Mundo &middot; Una Vida Consumida</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">10.</span> The Life of David Brainerd <span class="es">/ La Vida de David Brainerd</span></div>
+<div class="cts-shelf-byline">ed. Jonathan Edwards &middot; 1749</div>
+<p class="cts-shelf-caption">Edwards edited the diary of David Brainerd, a young missionary who poured out his short life for the gospel among the native peoples of the American frontier, and died at twenty-nine, consumed with love for Christ and for souls. It has stirred more Christians to radical, sacrificial service than almost any book, and it is a fitting capstone &mdash; the picture of a single surrendered life that, in God's hands, helped turn a world upside down.<br><span class="es">Edwards editó el diario de David Brainerd, un joven misionero que derramó su corta vida por el evangelio entre los pueblos nativos de la frontera americana, y murió a los veintinueve años, consumido de amor por Cristo y por las almas. Ha movido a más cristianos al servicio radical y sacrificial que casi cualquier libro, y es una síntesis apropiada &mdash; la imagen de una sola vida entregada que, en las manos de Dios, ayudó a trastornar un mundo.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/accountofdavidb" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+</section>
+<!-- /CTS-SHELF -->
+
 
   <div class="notice">
     <strong>Honor attestation:</strong> By selecting three readings above, you affirm that you have read those three digests in full. The digests are CTS-authored summaries that may include brief excerpts or adaptations of public-domain works.<br>

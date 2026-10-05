@@ -12,6 +12,11 @@ window.CTS_FILL_DATA["counseling"] = {
    "answer": {
     "en": "alive",
     "es": "vivo"
+   },
+   "accept": {
+    "en": [
+     "living"
+    ]
    }
   },
   {
@@ -77,7 +82,9 @@ window.CTS_FILL_DATA["counseling"] = {
     "es": "refuerzo"
    },
    "accept": {
-    "en": [],
+    "en": [
+     "positive reinforcement"
+    ],
     "es": [
      "reforzamiento"
     ]
@@ -94,7 +101,8 @@ window.CTS_FILL_DATA["counseling"] = {
    },
    "accept": {
     "en": [
-     "specifying"
+     "specifying",
+     "specification"
     ],
     "es": [
      "especificación"
@@ -200,10 +208,12 @@ window.CTS_FILL_DATA["counseling"] = {
    },
    "accept": {
     "en": [
-     "semi-public"
+     "semi-public",
+     "partly public"
     ],
     "es": [
-     "semi-público"
+     "semi-público",
+     "parcialmente público"
     ]
    }
   },
@@ -219,7 +229,8 @@ window.CTS_FILL_DATA["counseling"] = {
    "accept": {
     "en": [],
     "es": [
-     "intachable"
+     "intachable",
+     "irreprensible"
     ]
    }
   },
@@ -251,6 +262,14 @@ window.CTS_FILL_DATA["counseling"] = {
    "answer": {
     "en": "marketplace",
     "es": "plaza pública"
+   },
+   "accept": {
+    "en": [
+     "market place"
+    ],
+    "es": [
+     "plaza"
+    ]
    }
   },
   {
@@ -304,9 +323,12 @@ window.CTS_FILL_DATA["counseling"] = {
    },
    "accept": {
     "en": [
-     "two thirds"
+     "two thirds",
+     "2/3"
     ],
-    "es": []
+    "es": [
+     "2/3"
+    ]
    }
   },
   {
@@ -322,7 +344,10 @@ window.CTS_FILL_DATA["counseling"] = {
     "en": [
      "open"
     ],
-    "es": []
+    "es": [
+     "de final abierto",
+     "de respuesta abierta"
+    ]
    }
   },
   {
@@ -333,6 +358,14 @@ window.CTS_FILL_DATA["counseling"] = {
    "answer": {
     "en": "grunt",
     "es": "gruñido"
+   },
+   "accept": {
+    "en": [
+     "grunts"
+    ],
+    "es": [
+     "gruñidos"
+    ]
    }
   },
   {
@@ -383,6 +416,14 @@ window.CTS_FILL_DATA["counseling"] = {
    "answer": {
     "en": "body",
     "es": "cuerpo"
+   },
+   "accept": {
+    "en": [
+     "body language"
+    ],
+    "es": [
+     "lenguaje corporal"
+    ]
    }
   },
   {
@@ -425,6 +466,11 @@ window.CTS_FILL_DATA["counseling"] = {
    "answer": {
     "en": "presenting",
     "es": "presentado"
+   },
+   "accept": {
+    "en": [
+     "presented"
+    ]
    }
   },
   {
@@ -437,7 +483,10 @@ window.CTS_FILL_DATA["counseling"] = {
     "es": "eventos"
    },
    "accept": {
-    "en": [],
+    "en": [
+     "incidents",
+     "occurrences"
+    ],
     "es": [
      "sucesos",
      "acontecimientos"
@@ -486,6 +535,14 @@ window.CTS_FILL_DATA["counseling"] = {
    "answer": {
     "en": "meaning",
     "es": "significado"
+   },
+   "accept": {
+    "en": [
+     "significance"
+    ],
+    "es": [
+     "sentido"
+    ]
    }
   },
   {
@@ -547,7 +604,8 @@ window.CTS_FILL_DATA["counseling"] = {
    },
    "accept": {
     "en": [
-     "severity"
+     "severity",
+     "gravity"
     ],
     "es": [
      "severidad",
@@ -602,10 +660,12 @@ window.CTS_FILL_DATA["counseling"] = {
    },
    "accept": {
     "en": [
-     "all-powerful"
+     "all-powerful",
+     "almighty"
     ],
     "es": [
-     "todopoderoso"
+     "todopoderoso",
+     "todo poderoso"
     ]
    }
   },
@@ -657,6 +717,11 @@ window.CTS_FILL_DATA["counseling"] = {
    "answer": {
     "en": "switchboard",
     "es": "conmutador"
+   },
+   "accept": {
+    "es": [
+     "centralita"
+    ]
    }
   }
  ],
@@ -672,7 +737,8 @@ window.CTS_FILL_DATA["counseling"] = {
    },
    "accept": {
     "en": [
-     "pivot"
+     "pivot",
+     "turning point"
     ],
     "es": []
    }
@@ -718,10 +784,13 @@ window.CTS_FILL_DATA["counseling"] = {
    },
    "accept": {
     "en": [
-     "healing"
+     "healing",
+     "curative"
     ],
     "es": [
-     "terapéutico"
+     "terapéutico",
+     "sanadora",
+     "curativa"
     ]
    }
   },
@@ -824,7 +893,8 @@ window.CTS_FILL_DATA["counseling"] = {
    "accept": {
     "en": [
      "personal disclosure",
-     "self disclosure"
+     "self disclosure",
+     "self-revelation"
     ],
     "es": [
      "revelación personal",
@@ -920,7 +990,8 @@ window.CTS_FILL_DATA["counseling"] = {
    },
    "accept": {
     "en": [
-     "admirer"
+     "admirer",
+     "fans"
     ],
     "es": [
      "admirador"
@@ -955,6 +1026,11 @@ window.CTS_FILL_DATA["counseling"] = {
    "answer": {
     "en": "vocabulary",
     "es": "vocabulario"
+   },
+   "accept": {
+    "es": [
+     "léxico"
+    ]
    }
   }
  ],
@@ -967,6 +1043,14 @@ window.CTS_FILL_DATA["counseling"] = {
    "answer": {
     "en": "tsar",
     "es": "tsar"
+   },
+   "accept": {
+    "en": [
+     "tzar"
+    ],
+    "es": [
+     "tzar"
+    ]
    }
   },
   {
@@ -1008,9 +1092,12 @@ window.CTS_FILL_DATA["counseling"] = {
    },
    "accept": {
     "en": [
-     "brainstorm"
+     "brainstorm",
+     "brain storming"
     ],
-    "es": []
+    "es": [
+     "tormenta de ideas"
+    ]
    }
   },
   {
@@ -1145,7 +1232,9 @@ window.CTS_FILL_DATA["counseling"] = {
      "outcomes"
     ],
     "es": [
-     "resultados"
+     "resultados",
+     "efectos",
+     "repercusiones"
     ]
    }
   },
@@ -1161,7 +1250,8 @@ window.CTS_FILL_DATA["counseling"] = {
    "accept": {
     "en": [
      "long range",
-     "long-term"
+     "long-term",
+     "long run"
     ],
     "es": [
      "largo plazo"
@@ -1195,9 +1285,12 @@ window.CTS_FILL_DATA["counseling"] = {
    },
    "accept": {
     "en": [
-     "rock"
+     "rock",
+     "pebble"
     ],
-    "es": []
+    "es": [
+     "roca"
+    ]
    }
   },
   {
@@ -1249,7 +1342,9 @@ window.CTS_FILL_DATA["counseling"] = {
     "en": [
      "catastrophising"
     ],
-    "es": []
+    "es": [
+     "catastrofismo"
+    ]
    }
   }
  ],
@@ -1283,7 +1378,8 @@ window.CTS_FILL_DATA["counseling"] = {
    },
    "accept": {
     "en": [
-     "overwhelm"
+     "overwhelm",
+     "swamp"
     ],
     "es": [
      "abrumar"
@@ -1320,7 +1416,8 @@ window.CTS_FILL_DATA["counseling"] = {
    "accept": {
     "en": [],
     "es": [
-     "remitir"
+     "remitir",
+     "derivar"
     ]
    }
   },
@@ -1335,7 +1432,8 @@ window.CTS_FILL_DATA["counseling"] = {
    },
    "accept": {
     "en": [
-     "remembered"
+     "remembered",
+     "recalled"
     ],
     "es": [
      "recordada"
@@ -1350,6 +1448,11 @@ window.CTS_FILL_DATA["counseling"] = {
    "answer": {
     "en": "noise",
     "es": "ruido"
+   },
+   "accept": {
+    "en": [
+     "static"
+    ]
    }
   },
   {
@@ -1360,6 +1463,14 @@ window.CTS_FILL_DATA["counseling"] = {
    "answer": {
     "en": "tool",
     "es": "herramienta"
+   },
+   "accept": {
+    "en": [
+     "instrument"
+    ],
+    "es": [
+     "instrumento"
+    ]
    }
   },
   {
@@ -1384,7 +1495,8 @@ window.CTS_FILL_DATA["counseling"] = {
    "accept": {
     "en": [
      "parakletos",
-     "paraclete"
+     "paraclete",
+     "Paraklete"
     ],
     "es": [
      "parakletos",
@@ -1403,10 +1515,12 @@ window.CTS_FILL_DATA["counseling"] = {
    },
    "accept": {
     "en": [
-     "pride"
+     "pride",
+     "arrogance"
     ],
     "es": [
-     "orgullo"
+     "orgullo",
+     "soberbia"
     ]
    }
   }
@@ -1433,10 +1547,12 @@ window.CTS_FILL_DATA["counseling"] = {
    },
    "accept": {
     "en": [
-     "seals"
+     "seals",
+     "solidifies"
     ],
     "es": [
-     "sella"
+     "sella",
+     "afianza"
     ]
    }
   },
@@ -1498,10 +1614,12 @@ window.CTS_FILL_DATA["counseling"] = {
    },
    "accept": {
     "en": [
-     "praying"
+     "praying",
+     "prayers"
     ],
     "es": [
-     "orar"
+     "orar",
+     "plegaria"
     ]
    }
   },

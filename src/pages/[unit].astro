@@ -11,7 +11,12 @@ export async function getStaticPaths() {
   const lessons = await getCollection('lessons');
   // the course's textbook, if it has one (src/content/textbooks), for the box on every unit
   const textbooks = await getCollection('textbooks');
-  const bookOf = new Map(textbooks.map((t) => [t.data.course, { page: t.data.page, title: t.data.title }]));
+  const bookOf = new Map(textbooks.map((t) => [t.data.course, { page: t.data.page, title: t.data.title, kind: 'textbook' as const }]));
+  // or its required readings (src/content/readings): the same box, on the readings and their test
+  for (const r of await getCollection('readings')) {
+    if (bookOf.has(r.data.course)) throw new Error(`${r.data.course} has both a textbook and required readings; a course has one required test`);
+    bookOf.set(r.data.course, { page: r.data.page, title: r.data.title, kind: 'reading' as const });
+  }
   // a course is converted when its lessons are in the collection
   const byUnit = new Map(lessons.map((l) => [`${l.data.course}/${l.data.unit}`, l.data as Lesson]));
   // The units a course actually has, for the pills. Counting 1..totalUnits

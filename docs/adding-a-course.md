@@ -204,6 +204,12 @@ Only if the course has supplementary readings:
   `src/lib/partials.ts`;
 - add a link in `public/cts-honors.html` under the right volume.
 
+Then give it the public-domain shelf and the attestation like the others:
+add its entry to `src/data/reading-shelf.json` (or re-extract from a
+delivery with `tools/extract-reading-shelf.mjs`) and run
+`node tools/reading-rooms.mjs`; its `--check` is in the suite. See
+`docs/reading-rooms.md`.
+
 Without a reading room, leave out the `<!--cts-part:honours-->` line in step 2.
 
 ### 6. The course colour (optional)

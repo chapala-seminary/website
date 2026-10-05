@@ -316,6 +316,11 @@ body.lang-both .cts-masthead :is(.lang-es,.es-only,span.es){color:rgba(255,255,2
 
 /* ── Utility ────────────────────────────────────────────────────────────── */
 .hidden,.hide,[hidden]{display:none!important}
+/* Holy Spirit and Life of Christ (20 units) ship their Spanish lesson as
+   <div id="teach-es" class="hide">, which their own engine used to un-hide.
+   The rule above won, so a Spanish reader saw no lesson at all (found by the
+   EN/ES parity check, 4 Oct 2026). */
+body.lang-es #teach-es.hide,body.lang-both #teach-es.hide{display:block!important}
 .small{font-size:.85rem}
 .muted{color:var(--muted)}
 .center{text-align:center}

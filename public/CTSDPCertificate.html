@@ -353,8 +353,8 @@ function render() {
 
     if (!allDone) {
         statusArea.innerHTML = `<div class="status-banner incomplete">
-            <span class="lang-en block"><strong>${passedCount} of ${TOTAL_UNITS} units passed.</strong> Your certificate will be issued once all ten units are complete. Units still to finish: ${missing.join(', ')}.</span>
-            <span class="lang-es block"><strong>${passedCount} de ${TOTAL_UNITS} unidades aprobadas.</strong> Su certificado se emitirá una vez que complete las diez unidades. Unidades pendientes: ${missing.join(', ')}.</span>
+            <span class="lang-en block"><strong>${passedCount} of ${TOTAL_UNITS} units passed.</strong> Your certificate will be issued once all ten units are complete (on the M.Div. and Th.M. tracks, and the textbook test). Units still to finish: ${missing.join(', ')}.</span>
+            <span class="lang-es block"><strong>${passedCount} de ${TOTAL_UNITS} unidades aprobadas.</strong> Su certificado se emitirá una vez que complete las diez unidades (en los trayectos M.Div. y Th.M., también el examen del libro de texto). Unidades pendientes: ${missing.join(', ')}.</span>
         </div>`;
         const firstMissing = missing[0];
         actionArea.innerHTML = `<a class="nav-btn" href="CTSDPUnit${firstMissing}.html" style="display:inline-block;text-decoration:none;"><span class="lang-en">Continue with Unit ${firstMissing} →</span><span class="lang-es">Continuar con la Unidad ${firstMissing} →</span></a>`;

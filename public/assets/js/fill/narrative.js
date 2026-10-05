@@ -85,6 +85,14 @@ window.CTS_FILL_DATA["narrative"] = {
    "answer": {
     "en": "visions",
     "es": "visiones"
+   },
+   "accept": {
+    "en": [
+     "vision"
+    ],
+    "es": [
+     "visión"
+    ]
    }
   },
   {
@@ -286,7 +294,8 @@ window.CTS_FILL_DATA["narrative"] = {
    },
    "accept": {
     "en": [
-     "rambling"
+     "rambling",
+     "aimless rambling"
     ],
     "es": []
    }
@@ -377,6 +386,11 @@ window.CTS_FILL_DATA["narrative"] = {
    "answer": {
     "en": "servant",
     "es": "sierva"
+   },
+   "accept": {
+    "es": [
+     "servidora"
+    ]
    }
   }
  ],
@@ -465,7 +479,8 @@ window.CTS_FILL_DATA["narrative"] = {
    "accept": {
     "en": [],
     "es": [
-     "guión"
+     "guión",
+     "libreto"
     ]
    }
   },
@@ -540,7 +555,8 @@ window.CTS_FILL_DATA["narrative"] = {
      "ensamples"
     ],
     "es": [
-     "ejemplos"
+     "ejemplos",
+     "figura"
     ]
    }
   },
@@ -595,10 +611,12 @@ window.CTS_FILL_DATA["narrative"] = {
    },
    "accept": {
     "en": [
-     "message"
+     "message",
+     "biographical sermon"
     ],
     "es": [
-     "mensaje"
+     "mensaje",
+     "sermón biográfico"
     ]
    }
   },
@@ -702,7 +720,9 @@ window.CTS_FILL_DATA["narrative"] = {
    },
    "accept": {
     "en": [
-     "filter"
+     "filter",
+     "strainer",
+     "sifter"
     ],
     "es": [
      "tamiz",
@@ -736,7 +756,8 @@ window.CTS_FILL_DATA["narrative"] = {
      "St. Augustine"
     ],
     "es": [
-     "San Agustín"
+     "San Agustín",
+     "Agustín de Hipona"
     ]
    }
   },
@@ -898,7 +919,8 @@ window.CTS_FILL_DATA["narrative"] = {
      "clothes line"
     ],
     "es": [
-     "tendedor"
+     "tendedor",
+     "tendedero de ropa"
     ]
    }
   },
@@ -969,7 +991,8 @@ window.CTS_FILL_DATA["narrative"] = {
      "details"
     ],
     "es": [
-     "detalles"
+     "detalles",
+     "pormenor"
     ]
    }
   },
@@ -984,10 +1007,13 @@ window.CTS_FILL_DATA["narrative"] = {
    },
    "accept": {
     "en": [
-     "brevity"
+     "brevity",
+     "concision",
+     "conciseness"
     ],
     "es": [
-     "brevedad"
+     "brevedad",
+     "concisión"
     ]
    }
   },
@@ -1032,7 +1058,8 @@ window.CTS_FILL_DATA["narrative"] = {
    },
    "accept": {
     "en": [
-     "silence"
+     "silence",
+     "hush"
     ],
     "es": []
    }
@@ -1085,7 +1112,9 @@ window.CTS_FILL_DATA["narrative"] = {
     "es": "sierva"
    },
    "accept": {
-    "en": [],
+    "en": [
+     "handmaid"
+    ],
     "es": [
      "servidora"
     ]
@@ -1112,10 +1141,12 @@ window.CTS_FILL_DATA["narrative"] = {
    },
    "accept": {
     "en": [
-     "Holy Spirit"
+     "Holy Spirit",
+     "Holy Ghost"
     ],
     "es": [
-     "Espíritu Santo"
+     "Espíritu Santo",
+     "Santo Espíritu"
     ]
    }
   }

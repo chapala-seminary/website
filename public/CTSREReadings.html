@@ -69,8 +69,8 @@
   </div>
 
   <div class="notice">
-    <strong>Fully offline:</strong> Each of the five readings is a Chapala Theological Seminary bilingual digest (English and Spanish), written by CTS and included in your course download — so every one opens directly on your device, with no internet connection at all. The digests are CTS-authored teaching that rests on the great public-domain classics on Ruth and Esther (Samuel Cox, Alexander Maclaren, Matthew Henry, Alexander Raleigh, Alexander Carson, Charles F. Deems, and others); those classic works are freely available online for any who wish to read them in full.<br>
-    <span class="es"><strong>Totalmente sin conexión:</strong> Cada una de las cinco lecturas es un resumen bilingüe del Seminario Teológico de Chapala (inglés y español), escrito por el STC e incluido en la descarga de su curso — de modo que cada una se abre directamente en su dispositivo, sin conexión alguna. Los resúmenes son enseñanza de autoría del STC que se apoya en los grandes clásicos de dominio público sobre Rut y Ester (Samuel Cox, Alexander Maclaren, Matthew Henry, Alexander Raleigh, Alexander Carson, Charles F. Deems, y otros); esas obras clásicas están disponibles gratuitamente en línea para quien desee leerlas por completo.</span>
+    <strong>On this site:</strong> Each of the five readings is a Chapala Theological Seminary bilingual digest (English and Spanish), written by CTS and available here on the site — every one opens directly from this page, with nothing to download. The digests are CTS-authored teaching that rests on the great public-domain classics on Ruth and Esther (Samuel Cox, Alexander Maclaren, Matthew Henry, Alexander Raleigh, Alexander Carson, Charles F. Deems, and others); those classic works are freely available online for any who wish to read them in full.<br>
+    <span class="es"><strong>En este sitio:</strong> Cada una de las cinco lecturas es un resumen bilingüe del Seminario Teológico de Chapala (inglés y español), escrito por el STC y disponible aquí en el sitio — cada una se abre directamente desde esta página, sin nada que descargar. Los resúmenes son enseñanza de autoría del STC que se apoya en los grandes clásicos de dominio público sobre Rut y Ester (Samuel Cox, Alexander Maclaren, Matthew Henry, Alexander Raleigh, Alexander Carson, Charles F. Deems, y otros); esas obras clásicas están disponibles gratuitamente en línea para quien desee leerlas por completo.</span>
   </div>
 
   <div class="counter">Selected / Elegidas: <strong id="count">0</strong> of 3</div>
@@ -532,6 +532,176 @@
     </article>
 
   </main>
+<!-- CTS-ATTEST: the honours-reading attestation, written by tools/reading-rooms.mjs; edit there -->
+<style>
+.cts-attest{background:var(--card,#fff);border:1px solid var(--line,#dde1ea);border-top:4px solid var(--accent,#1f3d8c);border-radius:10px;padding:18px;margin:22px 0;box-shadow:0 2px 8px #0000000b}
+.cts-attest h2{margin:0 0 8px;font-size:1.25rem}
+.cts-attest label.cts-field{display:block;margin:12px 0 4px;font:700 .9rem Arial,sans-serif;color:var(--muted,#5a6272)}
+.cts-attest input[type=text]{width:100%;max-width:420px;padding:9px 11px;border:1px solid var(--line,#dde1ea);border-radius:7px;font:1rem Georgia,serif}
+.cts-attest .cts-oath{display:flex;gap:10px;align-items:flex-start;margin:12px 0}
+.cts-attest .cts-oath input{width:20px;height:20px;margin-top:2px;accent-color:var(--accent,#1f3d8c);flex-shrink:0}
+.cts-attest .cts-btn{display:inline-block;padding:9px 13px;border-radius:7px;border:0;cursor:pointer;background:var(--accent,#1f3d8c);color:#fff;font:700 .9rem Arial,sans-serif}
+.cts-attest .cts-btn.ghost{background:#fff;color:var(--accent,#1f3d8c);border:1px solid var(--accent,#1f3d8c)}
+.cts-attest .cts-msg{margin:8px 0 0;font-family:Arial,sans-serif;font-size:.92rem;color:#8a1f1f;min-height:1em}
+.cts-attest .cts-done{display:none;margin:8px 0 0;font-family:Arial,sans-serif;font-size:.95rem;color:#2f6b3a}
+.cts-attest .cts-record{display:none;margin-top:16px;padding-top:14px;border-top:2px solid var(--accent,#1f3d8c)}
+.cts-attest .cts-record.show{display:block}
+.cts-attest .cts-record .cts-name{font-size:1.4rem;margin:4px 0}
+.cts-attest .cts-record ul{margin:6px 0 0 18px;padding:0}
+@media print{.cts-attest input,.cts-attest label.cts-field,.cts-attest .cts-oath,.cts-attest .cts-btn,.cts-attest .cts-msg,.cts-attest .cts-done,.cts-attest .cts-intro{display:none!important}.cts-attest .cts-record{display:block!important;border:none}}
+</style>
+<section class="cts-attest" id="cts-attest" data-honors-code="RE" data-honors-course="Ruth and Esther">
+<h2>Record your reading <span class="es">/ Registre su lectura</span></h2>
+<p class="cts-intro">When you have read your three chosen readings in full, enter your name and affirm it below. This record is kept on your honor, in this browser; it shows on your certificate as <em>with honors</em>.<br><span class="es">Cuando haya leído por completo sus tres lecturas elegidas, escriba su nombre y confírmelo abajo. Este registro se guarda bajo su honor, en este navegador; aparece en su certificado como <em>con honores</em>.</span></p>
+<label class="cts-field" for="cts-att-name">Your name <span class="es">/ Su nombre</span></label>
+<input type="text" id="cts-att-name" autocomplete="name">
+<div class="cts-oath"><input type="checkbox" id="cts-att-oath"><label for="cts-att-oath">On my honor, I have read in full the three readings I selected above.<br><span class="es">Bajo mi honor, he leído por completo las tres lecturas que seleccioné arriba.</span></label></div>
+<button type="button" class="cts-btn" id="cts-att-record">Record my reading <span class="es">/ Registrar mi lectura</span></button>
+<p class="cts-msg" id="cts-att-msg" role="status"></p>
+<p class="cts-done" id="cts-att-done">&#10003; Recorded &mdash; this class counts toward your With Honors progress. <a href="cts-honors.html">The Honors Reading Library &#8599;</a><br><span class="es">&#10003; Registrado &mdash; esta clase cuenta para su progreso Con Honores. <a href="cts-honors.html">La Biblioteca de Lecturas de Honores &#8599;</a></span></p>
+<div class="cts-record" id="cts-att-record-card">
+<div class="num">Honors Reading &mdash; recorded <span class="es">/ Lectura con Honores &mdash; registrada</span></div>
+<div class="cts-name" id="cts-att-rec-name"></div>
+<p>affirmed on <span id="cts-att-rec-date"></span> to have read, in full: <span class="es">/ afirmó haber leído, por completo:</span></p>
+<ul id="cts-att-rec-list"></ul>
+<p class="byline">Chapala Theological Seminary &middot; Ruth and Esther &middot; present or print this page as your honors reading record. <span class="es">/ Presente o imprima esta página como su registro de lectura con honores.</span></p>
+<p><button type="button" class="cts-btn ghost" onclick="window.print()">Print this record <span class="es">/ Imprimir</span></button> <button type="button" class="cts-btn ghost" id="cts-att-reset">Start over <span class="es">/ Empezar de nuevo</span></button></p>
+</div>
+</section>
+<script>
+(function(){
+  var root=document.getElementById('cts-attest'); if(!root) return;
+  var CODE=root.getAttribute('data-honors-code'), COURSE=root.getAttribute('data-honors-course'), MAX=3;
+  var KEY='cts_honors_v1:'+CODE;
+  function get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+  function el(id){ return document.getElementById(id); }
+  // the five digests' own checkboxes, whatever the page calls them
+  function boxes(){ var m=document.querySelector('main')||document; return Array.prototype.slice.call(m.querySelectorAll('article input[type=checkbox]')); }
+  function titleOf(box){ var a=box.closest('article'); var h=a&&a.querySelector('h3'); if(!h) return ''; var c=h.cloneNode(true); Array.prototype.forEach.call(c.querySelectorAll('.es'),function(s){ s.parentNode.removeChild(s); }); return c.textContent.replace(/\s+/g,' ').trim(); }
+  function say(m){ el('cts-att-msg').textContent=m; }
+  function showDone(on){ el('cts-att-done').style.display=on?'block':'none'; }
+  function record(){
+    var chosen=boxes().filter(function(b){ return b.checked; });
+    var name=el('cts-att-name').value.trim(), oath=el('cts-att-oath').checked;
+    if(chosen.length!==MAX){ say('Choose exactly three readings above to record them. / Elija exactamente tres lecturas arriba para registrarlas.'); return; }
+    if(!name){ say('Enter your name to record your reading. / Escriba su nombre para registrar su lectura.'); return; }
+    if(!oath){ say('Check the box to affirm you have read all three. / Marque la casilla para afirmar que ha leído las tres.'); return; }
+    say('');
+    var now=new Date(), en=now.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    var works=chosen.map(titleOf);
+    el('cts-att-rec-name').textContent=name; el('cts-att-rec-date').textContent=en;
+    var ul=el('cts-att-rec-list'); ul.innerHTML=''; works.forEach(function(w){ var li=document.createElement('li'); li.textContent=w; ul.appendChild(li); });
+    set('cts_honors_name_v1', name);
+    set(KEY, JSON.stringify({name:name,date:en,course:COURSE,works:works}));
+    showDone(true);
+    var card=el('cts-att-record-card'); card.classList.add('show'); card.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function reset(){ el('cts-att-name').value=''; el('cts-att-oath').checked=false; el('cts-att-record-card').classList.remove('show'); say(''); }
+  el('cts-att-record').addEventListener('click', record);
+  el('cts-att-reset').addEventListener('click', reset);
+  if(get(KEY)) showDone(true);
+  var nm=get('cts_honors_name_v1'); if(nm && !el('cts-att-name').value) el('cts-att-name').value=nm;
+})();
+</script>
+<!-- /CTS-ATTEST -->
+
+<!-- CTS-SHELF: the public-domain shelf, written by tools/reading-rooms.mjs from src/data/reading-shelf.json; edit there -->
+<style>
+.cts-shelf{margin:34px 0 10px}
+.cts-shelf-head{text-align:center;margin:0 0 6px}
+.cts-shelf-head h2{font-weight:normal;font-size:1.4rem;border:none;padding:0;margin:0;display:inline-block;color:var(--primary,var(--accent,#5b3a1f))}
+.cts-shelf-rule{width:60px;height:2px;background:var(--gold,#c9a227);margin:12px auto 0}
+.cts-shelf-note{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-left:4px solid var(--gold,#c9a227);border-radius:12px;padding:14px 18px;margin:16px 0 18px;font-size:.96rem}
+.cts-shelf-panel{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-radius:16px;padding:18px 22px;margin:22px 0}
+.cts-shelf-panel > h3{font-weight:normal;font-size:1.15rem;margin:0 0 8px;color:var(--primary,var(--accent,#5b3a1f))}
+.cts-shelf-entry{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-radius:16px;padding:18px 22px;margin:14px 0;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+.cts-shelf-locus{letter-spacing:.16em;text-transform:uppercase;font-size:.68rem;color:var(--gold-deep,var(--accent,#98771d));margin-bottom:6px}
+.cts-shelf-title{font-size:1.1rem;color:var(--primary,var(--accent,#5b3a1f));margin-bottom:2px}
+.cts-shelf-num{display:inline-block;min-width:1.5em;color:var(--gold-deep,var(--accent,#98771d));font-style:italic}
+.cts-shelf-byline{color:var(--ink-soft,var(--muted,#6b5844));font-style:italic;font-size:.92rem;margin-bottom:8px}
+.cts-shelf-caption{font-size:.97rem;margin:8px 0}
+.cts-shelf-foot{margin-top:12px;padding-top:10px;border-top:1px solid var(--border,var(--line,#e5d8c8));display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
+.cts-shelf-link{color:var(--primary,var(--accent,#5b3a1f));text-decoration:none;border-bottom:1.5px solid var(--gold,#c9a227);padding-bottom:1px;font-size:.95rem}
+.cts-shelf-badge{font-size:.8rem;color:var(--ink-soft,var(--muted,#6b5844))}
+@media print{.cts-shelf{display:none}}
+</style>
+<section class="cts-shelf" id="cts-shelf" aria-labelledby="cts-shelf-h">
+<div class="cts-shelf-head"><h2 id="cts-shelf-h">Further Study: Ten Public-Domain Works <span class="es">/ Para Profundizar: diez obras de dominio público</span></h2><div class="cts-shelf-rule"></div></div>
+<div class="cts-shelf-note">These ten works are for further study, for the student who wants to go on reading. They are not part of the honors reading above: that stays as it is &mdash; the five CTS digests, any three read in full and recorded on your honor. All ten are in the public domain; each link opens the work online, and most can also be found in the Internet Archive or Project Gutenberg. Most are in English: the Chrome browser can translate a page (right-click, &ldquo;Translate to&hellip;&rdquo;; on a phone, the browser menu).<br><span class="es">Estas diez obras son para profundizar, para el estudiante que quiere seguir leyendo. No forman parte de la lectura con honores de arriba, que sigue igual: los cinco resúmenes del STC, tres cualesquiera leídos por completo y registrados bajo su honor. Las diez están en el dominio público; cada enlace abre la obra en línea, y la mayoría también se encuentra en Internet Archive o en el Proyecto Gutenberg. La mayoría están en inglés: el navegador Chrome puede traducir una página (clic derecho, &ldquo;Traducir a&hellip;&rdquo;; en un teléfono, el menú del navegador).</span></div>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Both Books &middot; A Devotional Commentary <span class="es">/ Ambos Libros &middot; Un Comentario Devocional</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">1.</span> Commentary on Ruth and Esther <span class="es">/ Comentario sobre Rut y Ester</span></div>
+<div class="cts-shelf-byline">Matthew Henry &middot; c. 1710</div>
+<p class="cts-shelf-caption">Henry's beloved commentary walks through both little books with the warmth and practical wisdom that have kept it in use for three centuries, drawing out the goodness of God at work in ordinary lives. It is the ideal single companion to the whole course &mdash; Ruth in the barley fields and Esther in the Persian court &mdash; reading each scene for what it shows of God's care and what it asks of us.<br><span class="es">El amado comentario de Henry recorre ambos libritos con la calidez y la sabiduría práctica que lo han mantenido en uso por tres siglos, extrayendo la bondad de Dios obrando en vidas ordinarias. Es el compañero único ideal para todo el curso &mdash; Rut en los campos de cebada y Ester en la corte persa &mdash; leyendo cada escena por lo que muestra del cuidado de Dios y por lo que nos pide.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://ccel.org/ccel/henry/mhc2" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Ruth &middot; An Exposition <span class="es">/ Rut &middot; Una Exposición</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">2.</span> The Book of Ruth <span class="es">/ El Libro de Rut</span></div>
+<div class="cts-shelf-byline">Samuel Cox &middot; 1876</div>
+<p class="cts-shelf-caption">Cox lingers over the story of Ruth &mdash; the famine, the widow's grief, the gleaning, and the redemption by Boaz &mdash; unfolding its beauty and its quiet witness to the providence of God. It is a full and tender exposition of the book our first four units walk through, drawing out how a Moabite outsider was brought by grace into the very line from which the Messiah would come.<br><span class="es">Cox se detiene en la historia de Rut &mdash; el hambre, el duelo de la viuda, la espiga y la redención por Booz &mdash; desplegando su belleza y su callado testimonio de la providencia de Dios. Es una exposición completa y tierna del libro que recorren nuestras primeras cuatro unidades, y muestra cómo una extranjera moabita fue traída por gracia a la línea misma de la que vendría el Mesías.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/bwb_C0-ACA-526" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Esther &middot; An Exposition <span class="es">/ Ester &middot; Una Exposición</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">3.</span> The Book of Esther <span class="es">/ El Libro de Ester</span></div>
+<div class="cts-shelf-byline">Alexander Raleigh &middot; 1880</div>
+<p class="cts-shelf-caption">Raleigh reads Esther as high drama &mdash; the banquets, the plot of Haman, the courage of the queen, and the great reversal &mdash; and shows the hand of an unnamed God governing every turn. It is a rich exposition of the book our last five units take up, dwelling on the famous hinge of the story: that Esther may have come to the kingdom &ldquo;for such a time as this.&rdquo;<br><span class="es">Raleigh lee Ester como alto drama &mdash; los banquetes, la conspiración de Amán, el valor de la reina y la gran reversión &mdash; y muestra la mano de un Dios no nombrado gobernando cada giro. Es una rica exposición del libro que abordan nuestras últimas cinco unidades, deteniéndose en el famoso eje de la historia: que Ester quizá llegó al reino &ldquo;para un tiempo como este.&rdquo;</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/bookofestheritsp00rale" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Hidden Hand &middot; Providence <span class="es">/ La Mano Oculta &middot; La Providencia</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">4.</span> The Mystery of Providence <span class="es">/ El Misterio de la Providencia</span></div>
+<div class="cts-shelf-byline">John Flavel &middot; 1678</div>
+<p class="cts-shelf-caption">Flavel teaches the believer to trace the hand of God through the whole course of a life &mdash; in mercies and in troubles alike &mdash; and to read His providence with a watchful, worshipful eye. No book better opens the deepest theme of these two, where God's name is barely spoken in Ruth and never named in Esther, yet His unseen governing is everywhere. Read it, and the quiet workings of both stories come into the light.<br><span class="es">Flavel enseña al creyente a rastrear la mano de Dios a lo largo de toda una vida &mdash; tanto en las misericordias como en las pruebas &mdash; y a leer su providencia con ojo atento y adorador. Ningún libro abre mejor el tema más profundo de estos dos, donde el nombre de Dios apenas se menciona en Rut y nunca en Ester, y sin embargo su gobierno invisible está en todas partes. Léalo, y las calladas obras de ambas historias salen a la luz.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/divineconductorm00flav" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Kinsman-Redeemer &middot; Christ Our Redeemer <span class="es">/ El Pariente Redentor &middot; Cristo Nuestro Redentor</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">5.</span> The Everlasting Righteousness <span class="es">/ La Justicia Eterna</span></div>
+<div class="cts-shelf-byline">Horatius Bonar &middot; 1873</div>
+<p class="cts-shelf-caption">Bonar unfolds how a sinner is made righteous before God through the redeeming work of Christ &mdash; the great reality foreshadowed when Boaz, the kinsman-redeemer, buys back Ruth and Naomi's inheritance and takes Ruth as his own. It carries the reader from the field of Boaz to the cross, showing the Redeemer to whom Ruth's story quietly points, and the righteousness He gives as a gift.<br><span class="es">Bonar despliega cómo un pecador es hecho justo ante Dios por la obra redentora de Cristo &mdash; la gran realidad prefigurada cuando Booz, el pariente redentor, rescata la heredad de Rut y Noemí y toma a Rut por suya. Lleva al lector del campo de Booz a la cruz, mostrando al Redentor a quien la historia de Rut señala calladamente, y la justicia que Él da como don.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/everlastingright00bona" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">From Bitter to Sweet &middot; Providence in Sorrow <span class="es">/ De lo Amargo a lo Dulce &middot; Providencia en el Dolor</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">6.</span> The Crook in the Lot <span class="es">/ El Torcido en la Suerte</span></div>
+<div class="cts-shelf-byline">Thomas Boston &middot; 1737</div>
+<p class="cts-shelf-caption">Boston takes up the &ldquo;crook&rdquo; God bends into a life &mdash; the loss, the emptiness, the bitter turn &mdash; and shows that His wise hand is in it, working toward a good we cannot yet see. It reads like a commentary on Naomi, who came home empty and called herself Mara, &ldquo;bitter,&rdquo; before God filled her arms again; a Scottish classic for everyone whose story has passed through sorrow on the way to joy.<br><span class="es">Boston aborda el &ldquo;torcido&rdquo; que Dios dobla en una vida &mdash; la pérdida, el vacío, el giro amargo &mdash; y muestra que su mano sabia está en ello, obrando hacia un bien que aún no podemos ver. Se lee como un comentario sobre Noemí, que volvió vacía y se llamó Mara, &ldquo;amarga,&rdquo; antes de que Dios llenara de nuevo sus brazos; un clásico escocés para todo aquel cuya historia ha pasado por el dolor camino del gozo.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://ccel.org/ccel/boston/crook" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">For Such a Time &middot; A Life Kept for God <span class="es">/ Para un Tiempo Como Este &middot; Una Vida Guardada para Dios</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">7.</span> Kept for the Master's Use <span class="es">/ Guardada para el Uso del Maestro</span></div>
+<div class="cts-shelf-byline">Frances Ridley Havergal &middot; 1879</div>
+<p class="cts-shelf-caption">Havergal writes of a life wholly given to God and kept for His purposes &mdash; every part, in its time, laid open to His use. It speaks straight to the turning point of Esther, who was placed in the palace and, at the risk of her life, spent for the saving of her people &ldquo;for such a time as this.&rdquo; A gentle, searching book on being ready when God's moment comes.<br><span class="es">Havergal escribe de una vida enteramente entregada a Dios y guardada para sus propósitos &mdash; cada parte, a su tiempo, puesta a su disposición. Habla directamente al punto de inflexión de Ester, que fue puesta en el palacio y, a riesgo de su vida, entregada para la salvación de su pueblo &ldquo;para un tiempo como este.&rdquo; Un libro tierno y penetrante sobre estar listos cuando llega el momento de Dios.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.gutenberg.org/ebooks/31647" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The God Who Delivers &middot; Providence Seen <span class="es">/ El Dios Que Libra &middot; Providencia Vista</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">8.</span> The Life of Trust <span class="es">/ La Vida de Fe</span></div>
+<div class="cts-shelf-byline">George Müller &middot; 1837 onward</div>
+<p class="cts-shelf-caption">Müller's narrative records how God met the needs of hundreds of orphans, year after year, in answer to prayer alone &mdash; providence not argued but witnessed. It puts flesh on the deliverance at the heart of Esther, where God's people are rescued at the last hour, and encourages the reader to trust the same unseen Hand that turned the plot of Haman on its head.<br><span class="es">La narrativa de Müller registra cómo Dios suplió las necesidades de cientos de huérfanos, año tras año, en respuesta solo a la oración &mdash; la providencia no argumentada sino atestiguada. Da carne a la liberación en el corazón de Ester, donde el pueblo de Dios es rescatado a última hora, y anima al lector a confiar en la misma Mano invisible que volvió del revés la conspiración de Amán.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.gutenberg.org/ebooks/27288" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Trusting the Unseen Hand &middot; A Life of Faith <span class="es">/ Confiar en la Mano Invisible &middot; Una Vida de Fe</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">9.</span> The Christian's Secret of a Happy Life <span class="es">/ El Secreto Cristiano de una Vida Feliz</span></div>
+<div class="cts-shelf-byline">Hannah Whitall Smith &middot; 1875</div>
+<p class="cts-shelf-caption">Smith presses one simple, life-changing lesson: that the believer may hand the whole of life over to God and rest in His care, in the dark passages as much as the bright. It draws together the trust both books call for &mdash; Ruth clinging to Naomi's God on the road out of Moab, Esther going in to the king though she might perish &mdash; and teaches the reader to live by that same quiet confidence.<br><span class="es">Smith insiste en una lección sencilla y transformadora: que el creyente puede entregar toda su vida a Dios y descansar en su cuidado, tanto en los pasajes oscuros como en los luminosos. Reúne la confianza que ambos libros piden &mdash; Rut aferrándose al Dios de Noemí en el camino de salida de Moab, Ester entrando ante el rey aunque pereciera &mdash; y enseña al lector a vivir por esa misma callada confianza.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/christianssecret01smit" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Line to the Christ &middot; Both Books in God's Plan <span class="es">/ La Línea hacia el Cristo &middot; Ambos Libros en el Plan de Dios</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">10.</span> Christ in All the Scriptures <span class="es">/ Cristo en Todas las Escrituras</span></div>
+<div class="cts-shelf-byline">A. M. Hodgkin &middot; 1907</div>
+<p class="cts-shelf-caption">Hodgkin traces the golden thread of Christ through every part of the Bible, showing how the whole story leans toward Him. It sets Ruth and Esther in that larger design &mdash; Ruth in the very line from which the Christ would be born, Esther in the preserving of the people through whom He would come &mdash; so that two quiet Old Testament stories are seen to serve the one great purpose of God in His Son.<br><span class="es">Hodgkin traza el hilo de oro de Cristo por cada parte de la Biblia, mostrando cómo toda la historia se inclina hacia Él. Sitúa a Rut y Ester en ese diseño mayor &mdash; Rut en la línea misma de la que nacería el Cristo, Ester en la preservación del pueblo por el cual Él vendría &mdash; de modo que dos calladas historias del Antiguo Testamento se ven al servicio del único gran propósito de Dios en su Hijo.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=A.M.+Hodgkin+Christ+in+All+the+Scriptures+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+</section>
+<!-- /CTS-SHELF -->
+
 
   <div class="notice">
     <strong>Honor attestation:</strong> By selecting three readings above, you affirm that you have read those three digests in full. The digests are CTS-authored summaries that may include brief excerpts or adaptations of public-domain works.<br>

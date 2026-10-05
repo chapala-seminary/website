@@ -9,7 +9,7 @@ body{background:#f4f1e8} .certificate{display:none;max-width:900px;margin:24px a
 .signatures{display:flex;justify-content:space-around;align-items:flex-start;gap:28px;flex-wrap:wrap;max-width:680px;margin:26px auto 6px}.sig-block{text-align:center;min-width:200px;flex:1}.sig-line{min-height:48px;border-bottom:1.5px solid #6b5523;margin-bottom:6px;padding-bottom:2px;display:flex;align-items:flex-end;justify-content:center}.cts-sig{max-height:46px;width:auto;max-width:92%}.sig-name{font-weight:700;font-size:.92rem;color:#222}.sig-title{font-size:.8rem;color:#666;font-style:italic}
 @media print{.noprint,.status,.checklist,.nav-bar{display:none!important} body{background:#fff} .certificate{display:block!important;border:6px double #000;margin:0;padding:28px}}
 </style></head>
-<body class="lang-en" data-course="Genesis Intensive">
+<body class="lang-en" data-course="Genesis Intensive" data-textbook="genesisreadings" data-textbook-page="CTSGenesisReadings" data-textbook-kind="reading">
 <div class="container">
 <div class="nav-bar noprint"><div id="progressGrid" class="progress-grid"></div><button id="langBtn" class="toggle-btn">Español</button></div>
 <div id="statusArea" class="status"></div><div id="checklist" class="checklist noprint"></div><div id="actionArea" class="noprint"></div>
@@ -68,7 +68,7 @@ function render(){
  }
  const st=document.getElementById('statusArea'), act=document.getElementById('actionArea'), cw=document.getElementById('certWrap');
  if(!s){st.innerHTML='<span class="lang-en">No student registration was found on this device. If you registered on another device, enter your student code on the <a href="cts-backup.html">Save &amp; Restore page</a> to bring your work here.</span><span class="lang-es">No se encontró registro de estudiante en este dispositivo. Si se registró en otro dispositivo, ingrese su código de estudiante en la página <a href="cts-backup.html">Guardar y Restaurar</a> para traer su trabajo aquí.</span>';act.innerHTML='<a class="nav-btn" href="CTSGenesisUnit1.html">Unit 1 / Unidad 1 →</a>';cw.style.display='none';applyLang();return;}
- if(passed!==TOTAL_UNITS){st.innerHTML='<span class="lang-en"><strong>'+passed+' of 12 units passed.</strong> Complete every unit on the selected track to unlock the certificate.</span><span class="lang-es"><strong>'+passed+' de 12 unidades aprobadas.</strong> Complete todas las unidades en el nivel seleccionado para desbloquear el certificado.</span>';act.innerHTML='<a class="nav-btn" href="CTSGenesisUnit'+firstMissing+'.html"><span class="lang-en">Continue with Unit '+firstMissing+' →</span><span class="lang-es">Continuar con Unidad '+firstMissing+' →</span></a>';cw.style.display='none';applyLang();return;}
+ if(passed!==TOTAL_UNITS){st.innerHTML='<span class="lang-en"><strong>'+passed+' of 12 units passed.</strong> Complete every unit on the selected track to unlock the certificate (on the M.Div. and Th.M. tracks, and the required-reading test).</span><span class="lang-es"><strong>'+passed+' de 12 unidades aprobadas.</strong> Complete todas las unidades en el nivel seleccionado para desbloquear el certificado (en los trayectos M.Div. y Th.M., también el examen de lecturas requeridas).</span>';act.innerHTML='<a class="nav-btn" href="CTSGenesisUnit'+firstMissing+'.html"><span class="lang-en">Continue with Unit '+firstMissing+' →</span><span class="lang-es">Continuar con Unidad '+firstMissing+' →</span></a>';cw.style.display='none';applyLang();return;}
  st.innerHTML='<span class="lang-en"><strong>All 12 units complete.</strong> Your certificate is unlocked.</span><span class="lang-es"><strong>Las 12 unidades completas.</strong> Su certificado está desbloqueado.</span>';act.innerHTML='';cw.style.display='block';
  document.getElementById('certName').textContent=s.name||'—';document.getElementById('certCredential').innerHTML='<span class="lang-en">'+CREDS[tr].en+'</span><span class="lang-es">'+CREDS[tr].es+'</span>';document.getElementById('certTrackLine').innerHTML='<span class="lang-en">'+SHORT[tr].en+'</span><span class="lang-es">'+SHORT[tr].es+'</span>';document.getElementById('certDate').textContent=dateText();applyLang();
 }
@@ -78,6 +78,7 @@ render();
 </script>
 <script src="cts-genesis-completion.js" defer></script><script src="cts-track.js" defer></script>
 <script src="assets/js/cts-sync.js" defer></script>
+<script src="assets/js/cts-textbook-gate.js" defer></script>
 <script src="assets/js/cts-certify.js" defer></script>
 <script src="assets/js/cts-cert-pdf.js" defer></script>
 </body></html>

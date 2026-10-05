@@ -110,6 +110,51 @@ for (const b of books) {
   }
 }
 
-console.log(`${checks} textbook assertions across ${books.length} textbooks`);
+/* The required-reading tests (src/content/readings; Dr. Cook's Add-ons, 4 Oct
+   2026): the same checks as a textbook's, on the readings' page instead of a
+   book -- and the page the student reads must stand apart from the test. */
+const readings = fs.existsSync('src/content/readings') ? fs.readdirSync('src/content/readings').filter((f) => f.endsWith('.json'))
+  .map((f) => JSON.parse(fs.readFileSync(path.join('src/content/readings', f), 'utf8'))) : [];
+ok(readings.length === 2, `${readings.length} required-reading tests in src/content/readings; expected Genesis Intensive and World Religions`);
+for (const r of readings) {
+  ok(!!courses[r.course], `${r.slug}: course "${r.course}" has no catalog card`);
+  ok(/readings$/.test(r.slug) && !books.some((b) => b.slug === r.slug), `${r.slug}: the slug must end in "readings" and not be a textbook's`);
+  ok(fs.existsSync(path.join('public', `${r.page}.html`)), `${r.slug}: the readings page public/${r.page}.html is missing`);
+  const { draw, pass, questions } = r.test;
+  ok(draw === 20 && pass === 18 && questions.length === 40, `${r.slug}: draws ${draw}, asks ${pass}, of ${questions.length}; the delivery says 20 of 40, 18 to pass`);
+  questions.forEach((q, i) => {
+    for (const lang of ['en', 'es']) {
+      ok((q.prompt[lang].match(/____/g) || []).length === 1, `${r.slug} #${i + 1}: not one blank in ${lang}`);
+      ok(fillRight(q, q.answer[lang]), `${r.slug} #${i + 1}: the ${lang} answer "${q.answer[lang]}" is not marked right`);
+      const acc = (q.accept && q.accept[lang]) || [];
+      ok(acc.length >= 1 && acc.length + 1 <= 5, `${r.slug} #${i + 1}: ${acc.length + 1} accepted ${lang} answers; Dr. Cook asked for alternates, three to five in all`);
+      for (const a of acc) ok(fillRight(q, a), `${r.slug} #${i + 1}: accepted ${lang} answer "${a}" is not marked right`);
+    }
+    ok(!fillRight(q, ''), `${r.slug} #${i + 1}: an empty answer is marked right`);
+  });
+  // Dr. Cook's example: "beginning" must not fail for "beginnings"
+  if (r.slug === 'genesisreadings') ok(fillRight(questions[0], 'beginning') && fillRight(questions[0], 'Beginning'), 'Genesis #1: "beginning" is not accepted for "beginnings"');
+  const room = page(`${r.page}.html`), test = page(`${r.page}Test.html`);
+  ok(!!room, `${r.page}.html was not built`);
+  ok(!!test, `${r.page}Test.html was not built`);
+  ok(index.includes(`href="${r.page}.html"`), `the front page does not list the required readings ${r.page}`);
+  if (room) ok(room.includes(`${r.page}Test.html`), `${r.page}.html does not lead to its test`);
+  if (test) {
+    ok(test.includes(`${r.page}.html`), `${r.page}Test.html does not lead back to the readings`);
+    ok(/data-textbook-kind="reading"/.test(test), `${r.page}Test.html does not say it is a required-reading test`);
+    // the readings' own paragraphs are not on the test page
+    const paras = [...(room || '').matchAll(/<p>([\s\S]*?)<\/p>/g)].map((m) => m[1].replace(/<[^>]+>/g, '')).filter((t) => t.length > 200).map((t) => t.slice(0, 120));
+    ok(paras.length > 0 && !paras.some((t) => test.includes(t)), `${r.page}Test.html carries the readings' text: the test must stand apart from the readings`);
+  }
+  for (const n of units[r.course] || []) {
+    const h = page(`${r.course}Unit${n}.html`);
+    ok(!!h && h.includes(`${r.page}.html`) && h.includes(`${r.page}Test.html`), `${r.course}Unit${n}.html does not link to ${r.page} and its test`);
+  }
+  // the certificate page holds the diploma on a master's track until the pass (cts-textbook-gate.js)
+  const code = Object.values(JSON.parse(fs.readFileSync('worker/catalog.json', 'utf8')).completions).find((c) => c.name && page(c.page) && page(c.page).includes(`data-textbook="${r.slug}"`));
+  ok(!!code, `no certificate page names data-textbook="${r.slug}" for the gate`);
+}
+
+console.log(`${checks} textbook assertions across ${books.length} textbooks and ${readings.length} required-reading tests`);
 if (!fails.length) console.log('PASS — the textbooks, their tests and their pages agree.');
 else { console.log(`FAIL — ${fails.length}:`); fails.slice(0, 30).forEach((f) => console.log('  ' + f)); if (fails.length > 30) console.log(`  … and ${fails.length - 30} more`); process.exit(1); }

@@ -67,8 +67,8 @@
   </div>
 
   <div class="notice">
-    <strong>Fully offline:</strong> Each of the five readings is a Chapala Theological Seminary bilingual digest (English and Spanish), written by CTS and included in your course download &mdash; so every one opens directly on your device, with no internet connection at all. The digests are CTS-authored teaching that rests on the great public-domain works of Louis Gaussen, A.T. Robertson, Richard Trench, Robert Girdlestone, Marvin Vincent, Robert Lowth, J. Gresham Machen, Charles Spurgeon, and Arthur T. Pierson; those classic works are freely available online for any who wish to read them in full. The whole course commends the biblical languages as enrichment, never as a barrier &mdash; for God's Word is fully given in faithful translation, and these riches are within reach of every believer.<br>
-    <span class="es"><strong>Totalmente sin conexión:</strong> Cada una de las cinco lecturas es un resumen bilingüe del Seminario Teológico de Chapala (inglés y español), escrito por el STC e incluido en la descarga de su curso &mdash; de modo que cada una se abre directamente en su dispositivo, sin conexión alguna. Los resúmenes son enseñanza de autoría del STC que se apoya en las grandes obras de dominio público de Louis Gaussen, A.T. Robertson, Richard Trench, Robert Girdlestone, Marvin Vincent, Robert Lowth, J. Gresham Machen, Charles Spurgeon, y Arthur T. Pierson; esas obras clásicas están disponibles gratuitamente en línea para quien desee leerlas por completo. Todo el curso recomienda los idiomas bíblicos como enriquecimiento, nunca como una barrera &mdash; porque la Palabra de Dios es plenamente dada en traducción fiel, y estas riquezas están al alcance de todo creyente.</span>
+    <strong>On this site:</strong> Each of the five readings is a Chapala Theological Seminary bilingual digest (English and Spanish), written by CTS and available here on the site &mdash; every one opens directly from this page, with nothing to download. The digests are CTS-authored teaching that rests on the great public-domain works of Louis Gaussen, A.T. Robertson, Richard Trench, Robert Girdlestone, Marvin Vincent, Robert Lowth, J. Gresham Machen, Charles Spurgeon, and Arthur T. Pierson; those classic works are freely available online for any who wish to read them in full. The whole course commends the biblical languages as enrichment, never as a barrier &mdash; for God's Word is fully given in faithful translation, and these riches are within reach of every believer.<br>
+    <span class="es"><strong>En este sitio:</strong> Cada una de las cinco lecturas es un resumen bilingüe del Seminario Teológico de Chapala (inglés y español), escrito por el STC y disponible aquí en el sitio &mdash; cada una se abre directamente desde esta página, sin nada que descargar. Los resúmenes son enseñanza de autoría del STC que se apoya en las grandes obras de dominio público de Louis Gaussen, A.T. Robertson, Richard Trench, Robert Girdlestone, Marvin Vincent, Robert Lowth, J. Gresham Machen, Charles Spurgeon, y Arthur T. Pierson; esas obras clásicas están disponibles gratuitamente en línea para quien desee leerlas por completo. Todo el curso recomienda los idiomas bíblicos como enriquecimiento, nunca como una barrera &mdash; porque la Palabra de Dios es plenamente dada en traducción fiel, y estas riquezas están al alcance de todo creyente.</span>
   </div>
 
   <div class="counter">Selected / Elegidas: <strong id="count">0</strong> of 3</div>
@@ -526,6 +526,176 @@
     </article>
 
   </main>
+<!-- CTS-ATTEST: the honours-reading attestation, written by tools/reading-rooms.mjs; edit there -->
+<style>
+.cts-attest{background:var(--card,#fff);border:1px solid var(--line,#dde1ea);border-top:4px solid var(--accent,#1f3d8c);border-radius:10px;padding:18px;margin:22px 0;box-shadow:0 2px 8px #0000000b}
+.cts-attest h2{margin:0 0 8px;font-size:1.25rem}
+.cts-attest label.cts-field{display:block;margin:12px 0 4px;font:700 .9rem Arial,sans-serif;color:var(--muted,#5a6272)}
+.cts-attest input[type=text]{width:100%;max-width:420px;padding:9px 11px;border:1px solid var(--line,#dde1ea);border-radius:7px;font:1rem Georgia,serif}
+.cts-attest .cts-oath{display:flex;gap:10px;align-items:flex-start;margin:12px 0}
+.cts-attest .cts-oath input{width:20px;height:20px;margin-top:2px;accent-color:var(--accent,#1f3d8c);flex-shrink:0}
+.cts-attest .cts-btn{display:inline-block;padding:9px 13px;border-radius:7px;border:0;cursor:pointer;background:var(--accent,#1f3d8c);color:#fff;font:700 .9rem Arial,sans-serif}
+.cts-attest .cts-btn.ghost{background:#fff;color:var(--accent,#1f3d8c);border:1px solid var(--accent,#1f3d8c)}
+.cts-attest .cts-msg{margin:8px 0 0;font-family:Arial,sans-serif;font-size:.92rem;color:#8a1f1f;min-height:1em}
+.cts-attest .cts-done{display:none;margin:8px 0 0;font-family:Arial,sans-serif;font-size:.95rem;color:#2f6b3a}
+.cts-attest .cts-record{display:none;margin-top:16px;padding-top:14px;border-top:2px solid var(--accent,#1f3d8c)}
+.cts-attest .cts-record.show{display:block}
+.cts-attest .cts-record .cts-name{font-size:1.4rem;margin:4px 0}
+.cts-attest .cts-record ul{margin:6px 0 0 18px;padding:0}
+@media print{.cts-attest input,.cts-attest label.cts-field,.cts-attest .cts-oath,.cts-attest .cts-btn,.cts-attest .cts-msg,.cts-attest .cts-done,.cts-attest .cts-intro{display:none!important}.cts-attest .cts-record{display:block!important;border:none}}
+</style>
+<section class="cts-attest" id="cts-attest" data-honors-code="LA" data-honors-course="Language Appreciation">
+<h2>Record your reading <span class="es">/ Registre su lectura</span></h2>
+<p class="cts-intro">When you have read your three chosen readings in full, enter your name and affirm it below. This record is kept on your honor, in this browser; it shows on your certificate as <em>with honors</em>.<br><span class="es">Cuando haya leído por completo sus tres lecturas elegidas, escriba su nombre y confírmelo abajo. Este registro se guarda bajo su honor, en este navegador; aparece en su certificado como <em>con honores</em>.</span></p>
+<label class="cts-field" for="cts-att-name">Your name <span class="es">/ Su nombre</span></label>
+<input type="text" id="cts-att-name" autocomplete="name">
+<div class="cts-oath"><input type="checkbox" id="cts-att-oath"><label for="cts-att-oath">On my honor, I have read in full the three readings I selected above.<br><span class="es">Bajo mi honor, he leído por completo las tres lecturas que seleccioné arriba.</span></label></div>
+<button type="button" class="cts-btn" id="cts-att-record">Record my reading <span class="es">/ Registrar mi lectura</span></button>
+<p class="cts-msg" id="cts-att-msg" role="status"></p>
+<p class="cts-done" id="cts-att-done">&#10003; Recorded &mdash; this class counts toward your With Honors progress. <a href="cts-honors.html">The Honors Reading Library &#8599;</a><br><span class="es">&#10003; Registrado &mdash; esta clase cuenta para su progreso Con Honores. <a href="cts-honors.html">La Biblioteca de Lecturas de Honores &#8599;</a></span></p>
+<div class="cts-record" id="cts-att-record-card">
+<div class="num">Honors Reading &mdash; recorded <span class="es">/ Lectura con Honores &mdash; registrada</span></div>
+<div class="cts-name" id="cts-att-rec-name"></div>
+<p>affirmed on <span id="cts-att-rec-date"></span> to have read, in full: <span class="es">/ afirmó haber leído, por completo:</span></p>
+<ul id="cts-att-rec-list"></ul>
+<p class="byline">Chapala Theological Seminary &middot; Language Appreciation &middot; present or print this page as your honors reading record. <span class="es">/ Presente o imprima esta página como su registro de lectura con honores.</span></p>
+<p><button type="button" class="cts-btn ghost" onclick="window.print()">Print this record <span class="es">/ Imprimir</span></button> <button type="button" class="cts-btn ghost" id="cts-att-reset">Start over <span class="es">/ Empezar de nuevo</span></button></p>
+</div>
+</section>
+<script>
+(function(){
+  var root=document.getElementById('cts-attest'); if(!root) return;
+  var CODE=root.getAttribute('data-honors-code'), COURSE=root.getAttribute('data-honors-course'), MAX=3;
+  var KEY='cts_honors_v1:'+CODE;
+  function get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+  function el(id){ return document.getElementById(id); }
+  // the five digests' own checkboxes, whatever the page calls them
+  function boxes(){ var m=document.querySelector('main')||document; return Array.prototype.slice.call(m.querySelectorAll('article input[type=checkbox]')); }
+  function titleOf(box){ var a=box.closest('article'); var h=a&&a.querySelector('h3'); if(!h) return ''; var c=h.cloneNode(true); Array.prototype.forEach.call(c.querySelectorAll('.es'),function(s){ s.parentNode.removeChild(s); }); return c.textContent.replace(/\s+/g,' ').trim(); }
+  function say(m){ el('cts-att-msg').textContent=m; }
+  function showDone(on){ el('cts-att-done').style.display=on?'block':'none'; }
+  function record(){
+    var chosen=boxes().filter(function(b){ return b.checked; });
+    var name=el('cts-att-name').value.trim(), oath=el('cts-att-oath').checked;
+    if(chosen.length!==MAX){ say('Choose exactly three readings above to record them. / Elija exactamente tres lecturas arriba para registrarlas.'); return; }
+    if(!name){ say('Enter your name to record your reading. / Escriba su nombre para registrar su lectura.'); return; }
+    if(!oath){ say('Check the box to affirm you have read all three. / Marque la casilla para afirmar que ha leído las tres.'); return; }
+    say('');
+    var now=new Date(), en=now.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    var works=chosen.map(titleOf);
+    el('cts-att-rec-name').textContent=name; el('cts-att-rec-date').textContent=en;
+    var ul=el('cts-att-rec-list'); ul.innerHTML=''; works.forEach(function(w){ var li=document.createElement('li'); li.textContent=w; ul.appendChild(li); });
+    set('cts_honors_name_v1', name);
+    set(KEY, JSON.stringify({name:name,date:en,course:COURSE,works:works}));
+    showDone(true);
+    var card=el('cts-att-record-card'); card.classList.add('show'); card.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function reset(){ el('cts-att-name').value=''; el('cts-att-oath').checked=false; el('cts-att-record-card').classList.remove('show'); say(''); }
+  el('cts-att-record').addEventListener('click', record);
+  el('cts-att-reset').addEventListener('click', reset);
+  if(get(KEY)) showDone(true);
+  var nm=get('cts_honors_name_v1'); if(nm && !el('cts-att-name').value) el('cts-att-name').value=nm;
+})();
+</script>
+<!-- /CTS-ATTEST -->
+
+<!-- CTS-SHELF: the public-domain shelf, written by tools/reading-rooms.mjs from src/data/reading-shelf.json; edit there -->
+<style>
+.cts-shelf{margin:34px 0 10px}
+.cts-shelf-head{text-align:center;margin:0 0 6px}
+.cts-shelf-head h2{font-weight:normal;font-size:1.4rem;border:none;padding:0;margin:0;display:inline-block;color:var(--primary,var(--accent,#5b3a1f))}
+.cts-shelf-rule{width:60px;height:2px;background:var(--gold,#c9a227);margin:12px auto 0}
+.cts-shelf-note{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-left:4px solid var(--gold,#c9a227);border-radius:12px;padding:14px 18px;margin:16px 0 18px;font-size:.96rem}
+.cts-shelf-panel{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-radius:16px;padding:18px 22px;margin:22px 0}
+.cts-shelf-panel > h3{font-weight:normal;font-size:1.15rem;margin:0 0 8px;color:var(--primary,var(--accent,#5b3a1f))}
+.cts-shelf-entry{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-radius:16px;padding:18px 22px;margin:14px 0;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+.cts-shelf-locus{letter-spacing:.16em;text-transform:uppercase;font-size:.68rem;color:var(--gold-deep,var(--accent,#98771d));margin-bottom:6px}
+.cts-shelf-title{font-size:1.1rem;color:var(--primary,var(--accent,#5b3a1f));margin-bottom:2px}
+.cts-shelf-num{display:inline-block;min-width:1.5em;color:var(--gold-deep,var(--accent,#98771d));font-style:italic}
+.cts-shelf-byline{color:var(--ink-soft,var(--muted,#6b5844));font-style:italic;font-size:.92rem;margin-bottom:8px}
+.cts-shelf-caption{font-size:.97rem;margin:8px 0}
+.cts-shelf-foot{margin-top:12px;padding-top:10px;border-top:1px solid var(--border,var(--line,#e5d8c8));display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
+.cts-shelf-link{color:var(--primary,var(--accent,#5b3a1f));text-decoration:none;border-bottom:1.5px solid var(--gold,#c9a227);padding-bottom:1px;font-size:.95rem}
+.cts-shelf-badge{font-size:.8rem;color:var(--ink-soft,var(--muted,#6b5844))}
+@media print{.cts-shelf{display:none}}
+</style>
+<section class="cts-shelf" id="cts-shelf" aria-labelledby="cts-shelf-h">
+<div class="cts-shelf-head"><h2 id="cts-shelf-h">Further Study: Ten Public-Domain Works <span class="es">/ Para Profundizar: diez obras de dominio público</span></h2><div class="cts-shelf-rule"></div></div>
+<div class="cts-shelf-note">These ten works are for further study, for the student who wants to go on reading. They are not part of the honors reading above: that stays as it is &mdash; the five CTS digests, any three read in full and recorded on your honor. All ten are in the public domain; each link opens the work online, and most can also be found in the Internet Archive or Project Gutenberg. Most are in English: the Chrome browser can translate a page (right-click, &ldquo;Translate to&hellip;&rdquo;; on a phone, the browser menu).<br><span class="es">Estas diez obras son para profundizar, para el estudiante que quiere seguir leyendo. No forman parte de la lectura con honores de arriba, que sigue igual: los cinco resúmenes del STC, tres cualesquiera leídos por completo y registrados bajo su honor. Las diez están en el dominio público; cada enlace abre la obra en línea, y la mayoría también se encuentra en Internet Archive o en el Proyecto Gutenberg. La mayoría están en inglés: el navegador Chrome puede traducir una página (clic derecho, &ldquo;Traducir a&hellip;&rdquo;; en un teléfono, el menú del navegador).</span></div>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Greek Word Riches &middot; Word Studies <span class="es">/ Riquezas de las Palabras Griegas &middot; Estudios de Palabras</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">1.</span> Word Studies in the New Testament <span class="es">/ Estudios de Palabras en el Nuevo Testamento</span></div>
+<div class="cts-shelf-byline">Marvin R. Vincent &middot; 1887</div>
+<p class="cts-shelf-caption">Vincent's beloved classic walks through the New Testament passage by passage, pausing to open the meaning, color, and force of the key Greek words &mdash; riches that no translation can fully carry. It is the ideal companion to the course's units on Greek words and the first word study, showing again and again how a single word in the original can light up a whole verse. For the English reader who wants to see what lies beneath the surface of the text, few books are more rewarding.<br><span class="es">El amado clásico de Vincent recorre el Nuevo Testamento pasaje por pasaje, deteniéndose para abrir el significado, el color y la fuerza de las palabras griegas clave &mdash; riquezas que ninguna traducción puede llevar por completo. Es el compañero ideal de las unidades del curso sobre las palabras griegas y el primer estudio de palabras, mostrando una y otra vez cómo una sola palabra en el original puede iluminar todo un versículo. Para el lector de habla inglesa que quiere ver lo que yace bajo la superficie del texto, pocos libros son más gratificantes.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.google.com/search?q=Marvin+Vincent+Word+Studies+in+the+New+Testament+full+text" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Precise Greek Words &middot; Synonyms of the NT <span class="es">/ Palabras Griegas Precisas &middot; Sinónimos del NT</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">2.</span> Synonyms of the New Testament <span class="es">/ Sinónimos del Nuevo Testamento</span></div>
+<div class="cts-shelf-byline">Richard Chenevix Trench &middot; 1854</div>
+<p class="cts-shelf-caption">Trench's masterpiece takes groups of Greek words that English translates alike &mdash; two words for love, two for new, several for sin &mdash; and shows the precise, God-intended difference between them. It goes to the heart of the course's units on the vocabulary of the New Testament, teaching the reader that in Scripture words are chosen with care, and that seeing why one word was used and not another opens depths of meaning hidden to those who read only the translation.<br><span class="es">La obra maestra de Trench toma grupos de palabras griegas que el español traduce igual &mdash; dos palabras para amor, dos para nuevo, varias para pecado &mdash; y muestra la diferencia precisa, querida por Dios, entre ellas. Va al corazón de las unidades del curso sobre el vocabulario del Nuevo Testamento, enseñando al lector que en la Escritura las palabras se eligen con cuidado, y que ver por qué se usó una palabra y no otra abre profundidades de significado ocultas a quienes leen solo la traducción.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/synonymsnewtest01trengoog" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Hebrew Word Treasures &middot; Synonyms of the OT <span class="es">/ Tesoros de Palabras Hebreas &middot; Sinónimos del AT</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">3.</span> Synonyms of the Old Testament <span class="es">/ Sinónimos del Antiguo Testamento</span></div>
+<div class="cts-shelf-byline">Robert B. Girdlestone &middot; 1871</div>
+<p class="cts-shelf-caption">Girdlestone did for the Hebrew of the Old Testament what Trench did for the Greek of the New &mdash; opening the great Hebrew words for God, sin, atonement, holiness, and redemption, and the fine distinctions among them. It is the ideal companion to the course's units on Hebrew word treasures, giving the English reader a trustworthy way into the vocabulary of the Old Testament, and showing how much theology is carried in the very choice of Hebrew words the Spirit inspired.<br><span class="es">Girdlestone hizo por el hebreo del Antiguo Testamento lo que Trench hizo por el griego del Nuevo &mdash; abriendo las grandes palabras hebreas para Dios, el pecado, la expiación, la santidad y la redención, y las finas distinciones entre ellas. Es el compañero ideal de las unidades del curso sobre los tesoros de palabras hebreas, dando al lector de habla inglesa una vía confiable al vocabulario del Antiguo Testamento, y mostrando cuánta teología se lleva en la elección misma de las palabras hebreas que el Espíritu inspiró.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/synonymsofoldtes00gird" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Word Study &middot; Knowing the Scriptures <span class="es">/ Estudio de Palabras &middot; Conocer las Escrituras</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">4.</span> Knowing the Scriptures <span class="es">/ Conocer las Escrituras</span></div>
+<div class="cts-shelf-byline">Arthur T. Pierson &middot; 1910</div>
+<p class="cts-shelf-caption">Pierson's practical guide teaches the ordinary believer how to study the Bible well &mdash; including how to trace a word through Scripture, compare its uses, and let the Bible interpret itself. It speaks directly to the course's units on word study and the use of tools, putting sound methods within reach of anyone willing to work, and showing that the deepest treasures of the Word are not reserved for scholars but open to every diligent reader who will dig for them.<br><span class="es">La guía práctica de Pierson enseña al creyente común cómo estudiar bien la Biblia &mdash; incluyendo cómo rastrear una palabra a través de la Escritura, comparar sus usos, y dejar que la Biblia se interprete a sí misma. Habla directamente a las unidades del curso sobre el estudio de palabras y el uso de herramientas, poniendo métodos sólidos al alcance de cualquiera dispuesto a trabajar, y mostrando que los tesoros más profundos de la Palabra no están reservados para los eruditos sino abiertos a todo lector diligente que cave por ellos.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/knowingscripture00pier" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Genius of Hebrew &middot; Sacred Poetry <span class="es">/ El Genio del Hebreo &middot; La Poesía Sagrada</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">5.</span> Lectures on the Sacred Poetry of the Hebrews <span class="es">/ Conferencias sobre la Poesía Sagrada de los Hebreos</span></div>
+<div class="cts-shelf-byline">Robert Lowth &middot; 1753</div>
+<p class="cts-shelf-caption">Lowth's famous lectures first opened to the modern world the poetic genius of Hebrew &mdash; its parallelism, its imagery, its music &mdash; and reshaped how we read the Psalms and the Prophets. It enriches the course's units on Hebrew, showing that much of the Old Testament is exalted poetry, and that to feel the shape and beauty of the Hebrew line is to hear the Word as its first hearers did. It is a doorway into the sheer artistry of how God chose to speak.<br><span class="es">Las famosas conferencias de Lowth abrieron por primera vez al mundo moderno el genio poético del hebreo &mdash; su paralelismo, su imaginería, su música &mdash; y transformaron cómo leemos los Salmos y los Profetas. Enriquece las unidades del curso sobre el hebreo, mostrando que gran parte del Antiguo Testamento es poesía sublime, y que sentir la forma y la belleza de la línea hebrea es oír la Palabra como la oyeron sus primeros oyentes. Es una entrada a la pura maestría de cómo Dios eligió hablar.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/lecturesonsacred00lowtrich" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Greek New Testament &middot; For the Minister <span class="es">/ El Nuevo Testamento Griego &middot; Para el Ministro</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">6.</span> The Minister and His Greek New Testament <span class="es">/ El Ministro y su Nuevo Testamento Griego</span></div>
+<div class="cts-shelf-byline">A. T. Robertson &middot; 1923</div>
+<p class="cts-shelf-caption">Robertson, the greatest of New Testament Greek scholars, wrote this short and inviting book to show pastors and students why the Greek New Testament is worth their effort, and how even a little Greek richly repays the preacher. It speaks to the course's units on why the languages matter and on the Greek words themselves, written not to intimidate but to encourage &mdash; a warm summons from a master to come and taste for yourself the freshness of reading the New Testament in the words the apostles wrote.<br><span class="es">Robertson, el más grande de los eruditos del griego del Nuevo Testamento, escribió este libro breve y acogedor para mostrar a pastores y estudiantes por qué el Nuevo Testamento griego vale su esfuerzo, y cómo aun un poco de griego recompensa ricamente al predicador. Habla a las unidades del curso sobre por qué importan los idiomas y sobre las palabras griegas mismas, escrito no para intimidar sino para animar &mdash; una cálida invitación de un maestro a venir y probar usted mismo la frescura de leer el Nuevo Testamento en las palabras que los apóstoles escribieron.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/ministerhisgreek00robe" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Tools of Study &middot; Commenting and Commentaries <span class="es">/ Las Herramientas de Estudio &middot; Comentando y Comentarios</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">7.</span> Commenting and Commentaries <span class="es">/ Comentando y Comentarios</span></div>
+<div class="cts-shelf-byline">C. H. Spurgeon &middot; 1876</div>
+<p class="cts-shelf-caption">In this practical guide Spurgeon counsels the preacher and student on how to choose and use the tools of Bible study &mdash; commentaries, concordances, and reference works &mdash; with his usual wit and good sense. It speaks to the course's units on Strong's numbers and study tools, for word study is only as good as the tools one learns to use; and here the prince of preachers helps the reader build, wisely and without waste, the working library that will serve a lifetime of feeding on the Word.<br><span class="es">En esta guía práctica Spurgeon aconseja al predicador y al estudiante sobre cómo elegir y usar las herramientas del estudio bíblico &mdash; comentarios, concordancias y obras de referencia &mdash; con su acostumbrado ingenio y buen sentido. Habla a las unidades del curso sobre los números de Strong y las herramientas de estudio, pues el estudio de palabras es solo tan bueno como las herramientas que uno aprende a usar; y aquí el príncipe de los predicadores ayuda al lector a construir, sabiamente y sin desperdicio, la biblioteca de trabajo que servirá a toda una vida de alimentarse de la Palabra.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/commentingcommen00spur" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Why the Words Matter &middot; Inspiration <span class="es">/ Por Qué Importan las Palabras &middot; La Inspiración</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">8.</span> Theopneustia: The Plenary Inspiration of the Holy Scriptures <span class="es">/ Teopneustia: La Plena Inspiración de las Sagradas Escrituras</span></div>
+<div class="cts-shelf-byline">Louis Gaussen &middot; 1840</div>
+<p class="cts-shelf-caption">Gaussen's classic defends the full inspiration of Scripture &mdash; that the Bible is, in all its parts and to its very words, breathed out by God. It grounds the course's opening question of why the biblical languages are worth appreciating at all: because it was in these actual Hebrew and Greek words that the Spirit spoke. If every word is God-given, then no word is wasted, and the careful study of the original text is not dry scholarship but reverent attention to the very speech of God.<br><span class="es">El clásico de Gaussen defiende la plena inspiración de la Escritura &mdash; que la Biblia es, en todas sus partes y hasta sus mismas palabras, exhalada por Dios. Fundamenta la pregunta inicial del curso de por qué los idiomas bíblicos valen la pena apreciar: porque fue en estas palabras hebreas y griegas reales que el Espíritu habló. Si cada palabra es dada por Dios, entonces ninguna palabra se desperdicia, y el estudio cuidadoso del texto original no es árida erudición sino reverente atención al habla misma de Dios.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/theopneustiaple00gausgoog" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Going Further &middot; A First Greek Course <span class="es">/ Ir Más Allá &middot; Un Primer Curso de Griego</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">9.</span> New Testament Greek for Beginners <span class="es">/ Griego del Nuevo Testamento para Principiantes</span></div>
+<div class="cts-shelf-byline">J. Gresham Machen &middot; 1923 &middot; <span style="font-style:normal" class="lang-en">optional depth</span><span style="font-style:normal" class="lang-es">profundidad opcional</span></div>
+<p class="cts-shelf-caption">For the student whose appreciation grows into a desire to read the New Testament for himself, Machen's famous beginners' course is the classic first door into Greek &mdash; clear, patient, and thorough. It goes beyond what this course requires, into the units on the Greek alphabet and words and further still; but for the willing, it is the surest path from admiring the Greek from a distance to actually reading it, one lesson at a time. Countless preachers first learned their Greek from these very pages.<br><span class="es">Para el estudiante cuya apreciación crece hasta el deseo de leer el Nuevo Testamento por sí mismo, el famoso curso para principiantes de Machen es la clásica primera puerta al griego &mdash; claro, paciente y minucioso. Va más allá de lo que este curso requiere, hacia las unidades sobre el alfabeto y las palabras griegas y aun más lejos; pero para el dispuesto, es la vía más segura desde admirar el griego a la distancia hasta realmente leerlo, una lección a la vez. Incontables predicadores aprendieron su griego por primera vez de estas mismas páginas.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/newtestamentgree0000jgre_q1s0" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Going Further &middot; A First Hebrew Course <span class="es">/ Ir Más Allá &middot; Un Primer Curso de Hebreo</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">10.</span> An Introductory Hebrew Grammar <span class="es">/ Una Gramática Hebrea Introductoria</span></div>
+<div class="cts-shelf-byline">A. B. Davidson &middot; 1874 &middot; <span style="font-style:normal" class="lang-en">optional depth</span><span style="font-style:normal" class="lang-es">profundidad opcional</span></div>
+<p class="cts-shelf-caption">Davidson's standard grammar has introduced generations of students to the Hebrew of the Old Testament, and remains a trusted first course for those who wish to move from appreciating Hebrew to reading it. Like Machen's Greek, it goes beyond this course's aim, reaching into and past the units on the Hebrew alphabet and words; but for the reader whose heart is set on the Old Testament in its own tongue, it is a patient and reliable guide into one of the great treasures a lifetime of Bible study can hold.<br><span class="es">La gramática estándar de Davidson ha introducido a generaciones de estudiantes al hebreo del Antiguo Testamento, y sigue siendo un confiable primer curso para quienes deseen pasar de apreciar el hebreo a leerlo. Como el griego de Machen, va más allá del objetivo de este curso, alcanzando hacia y más allá de las unidades sobre el alfabeto y las palabras hebreas; pero para el lector cuyo corazón está puesto en el Antiguo Testamento en su propia lengua, es un guía paciente y confiable hacia uno de los grandes tesoros que toda una vida de estudio bíblico puede contener.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/anintroductoryh00davigoog" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+</section>
+<!-- /CTS-SHELF -->
+
 
   <div class="notice">
     <strong>Honor attestation:</strong> By selecting three readings above, you affirm that you have read those three digests in full. The digests are CTS-authored summaries that may include brief excerpts or adaptations of public-domain works.<br>

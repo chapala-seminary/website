@@ -58,6 +58,15 @@ window.CTS_FILL_DATA["wisespeak"] = {
    "answer": {
     "en": "Zedekiah",
     "es": "Sedequías"
+   },
+   "accept": {
+    "en": [
+     "Zedekiah of Judah"
+    ],
+    "es": [
+     "Sedequías de Judá",
+     "Sedecías"
+    ]
    }
   },
   {
@@ -106,6 +115,14 @@ window.CTS_FILL_DATA["wisespeak"] = {
    "answer": {
     "en": "weave",
     "es": "tejer"
+   },
+   "accept": {
+    "en": [
+     "weave together"
+    ],
+    "es": [
+     "entretejer"
+    ]
    }
   },
   {
@@ -134,7 +151,8 @@ window.CTS_FILL_DATA["wisespeak"] = {
      "slave"
     ],
     "es": [
-     "esclavo"
+     "esclavo",
+     "servidor"
     ]
    }
   }
@@ -178,6 +196,12 @@ window.CTS_FILL_DATA["wisespeak"] = {
    "answer": {
     "en": "how much",
     "es": "cuánto"
+   },
+   "accept": {
+    "es": [
+     "cuántos",
+     "cuánta"
+    ]
    }
   },
   {
@@ -188,6 +212,14 @@ window.CTS_FILL_DATA["wisespeak"] = {
    "answer": {
     "en": "reasons",
     "es": "razones"
+   },
+   "accept": {
+    "en": [
+     "reason"
+    ],
+    "es": [
+     "motivos"
+    ]
    }
   },
   {
@@ -198,6 +230,16 @@ window.CTS_FILL_DATA["wisespeak"] = {
    "answer": {
     "en": "plural",
     "es": "plural"
+   },
+   "accept": {
+    "en": [
+     "plural form",
+     "in the plural"
+    ],
+    "es": [
+     "en plural",
+     "forma plural"
+    ]
    }
   },
   {
@@ -208,6 +250,14 @@ window.CTS_FILL_DATA["wisespeak"] = {
    "answer": {
     "en": "things",
     "es": "cosas"
+   },
+   "accept": {
+    "en": [
+     "thing"
+    ],
+    "es": [
+     "cosa"
+    ]
    }
   },
   {
@@ -241,7 +291,8 @@ window.CTS_FILL_DATA["wisespeak"] = {
    },
    "accept": {
     "en": [
-     "an action"
+     "an action",
+     "actions"
     ],
     "es": []
    }
@@ -308,7 +359,9 @@ window.CTS_FILL_DATA["wisespeak"] = {
     "es": "pasivos"
    },
    "accept": {
-    "en": [],
+    "en": [
+     "passive voice"
+    ],
     "es": [
      "pasivo"
     ]
@@ -372,9 +425,13 @@ window.CTS_FILL_DATA["wisespeak"] = {
    },
    "accept": {
     "en": [
-     "sub-points"
+     "sub-points",
+     "subdivisions"
     ],
-    "es": []
+    "es": [
+     "subdivisiones",
+     "puntos secundarios"
+    ]
    }
   }
  ],
@@ -410,9 +467,12 @@ window.CTS_FILL_DATA["wisespeak"] = {
    },
    "accept": {
     "en": [
-     "backwards"
+     "backwards",
+     "in reverse"
     ],
-    "es": []
+    "es": [
+     "en sentido inverso"
+    ]
    }
   },
   {
@@ -425,9 +485,12 @@ window.CTS_FILL_DATA["wisespeak"] = {
     "es": "Verbo"
    },
    "accept": {
-    "en": [],
+    "en": [
+     "Logos"
+    ],
     "es": [
-     "Palabra"
+     "Palabra",
+     "Logos"
     ]
    }
   },
@@ -503,7 +566,9 @@ window.CTS_FILL_DATA["wisespeak"] = {
     "en": [
      "final"
     ],
-    "es": []
+    "es": [
+     "postrera"
+    ]
    }
   }
  ],
@@ -526,6 +591,14 @@ window.CTS_FILL_DATA["wisespeak"] = {
    "answer": {
     "en": "narration",
     "es": "narración"
+   },
+   "accept": {
+    "en": [
+     "narrative"
+    ],
+    "es": [
+     "narrativa"
+    ]
    }
   },
   {
@@ -546,6 +619,16 @@ window.CTS_FILL_DATA["wisespeak"] = {
    "answer": {
     "en": "servant",
     "es": "sierva"
+   },
+   "accept": {
+    "en": [
+     "handmaid",
+     "handmaiden"
+    ],
+    "es": [
+     "criada",
+     "sirvienta"
+    ]
    }
   },
   {
@@ -559,10 +642,12 @@ window.CTS_FILL_DATA["wisespeak"] = {
    },
    "accept": {
     "en": [
-     "starts"
+     "starts",
+     "commences"
     ],
     "es": [
-     "empieza"
+     "empieza",
+     "inicia"
     ]
    }
   },
@@ -623,6 +708,14 @@ window.CTS_FILL_DATA["wisespeak"] = {
    "answer": {
     "en": "testimony",
     "es": "testimonio"
+   },
+   "accept": {
+    "en": [
+     "witness"
+    ],
+    "es": [
+     "testimonio personal"
+    ]
    }
   }
  ],
@@ -653,6 +746,12 @@ window.CTS_FILL_DATA["wisespeak"] = {
    "answer": {
     "en": "parallelism",
     "es": "paralelismo"
+   },
+   "accept": {
+    "en": [
+     "parallel structure",
+     "parallel construction"
+    ]
    }
   },
   {
@@ -830,10 +929,12 @@ window.CTS_FILL_DATA["wisespeak"] = {
    },
    "accept": {
     "en": [
-     "illustration"
+     "illustration",
+     "Illustrating"
     ],
     "es": [
-     "ilustración"
+     "ilustración",
+     "Ilustrando"
     ]
    }
   },
@@ -876,6 +977,11 @@ window.CTS_FILL_DATA["wisespeak"] = {
    "answer": {
     "en": "arrival",
     "es": "llegada"
+   },
+   "accept": {
+    "es": [
+     "arribo"
+    ]
    }
   },
   {
@@ -889,7 +995,8 @@ window.CTS_FILL_DATA["wisespeak"] = {
    },
    "accept": {
     "en": [
-     "Immanuel"
+     "Immanuel",
+     "Emanuel"
     ],
     "es": [
      "Emmanuel",
@@ -908,7 +1015,8 @@ window.CTS_FILL_DATA["wisespeak"] = {
    },
    "accept": {
     "en": [
-     "God fearers"
+     "God fearers",
+     "godfearers"
     ],
     "es": []
    }
@@ -939,6 +1047,11 @@ window.CTS_FILL_DATA["wisespeak"] = {
    "answer": {
     "en": "parousia",
     "es": "parusía"
+   },
+   "accept": {
+    "es": [
+     "parousía"
+    ]
    }
   }
  ],
@@ -970,6 +1083,14 @@ window.CTS_FILL_DATA["wisespeak"] = {
    "answer": {
     "en": "introduction",
     "es": "introducción"
+   },
+   "accept": {
+    "en": [
+     "intro"
+    ],
+    "es": [
+     "intro"
+    ]
    }
   },
   {
@@ -1070,6 +1191,14 @@ window.CTS_FILL_DATA["wisespeak"] = {
    "answer": {
     "en": "facial",
     "es": "facial"
+   },
+   "accept": {
+    "en": [
+     "facial expressions"
+    ],
+    "es": [
+     "expresiones faciales"
+    ]
    }
   },
   {
@@ -1152,6 +1281,14 @@ window.CTS_FILL_DATA["wisespeak"] = {
    "answer": {
     "en": "German",
     "es": "alemán"
+   },
+   "accept": {
+    "en": [
+     "High German"
+    ],
+    "es": [
+     "alto alemán"
+    ]
    }
   },
   {
@@ -1220,6 +1357,11 @@ window.CTS_FILL_DATA["wisespeak"] = {
    "answer": {
     "en": "arrow",
     "es": "flecha"
+   },
+   "accept": {
+    "es": [
+     "saeta"
+    ]
    }
   }
  ],
@@ -1234,9 +1376,13 @@ window.CTS_FILL_DATA["wisespeak"] = {
     "es": "temática"
    },
    "accept": {
-    "en": [],
+    "en": [
+     "thematic",
+     "topic based"
+    ],
     "es": [
-     "temático"
+     "temático",
+     "tópica"
     ]
    }
   },
@@ -1248,6 +1394,11 @@ window.CTS_FILL_DATA["wisespeak"] = {
    "answer": {
     "en": "expository",
     "es": "expositivo"
+   },
+   "accept": {
+    "en": [
+     "expositional"
+    ]
    }
   },
   {
@@ -1298,6 +1449,16 @@ window.CTS_FILL_DATA["wisespeak"] = {
    "answer": {
     "en": "Felix",
     "es": "Félix"
+   },
+   "accept": {
+    "en": [
+     "Governor Felix",
+     "Antonius Felix"
+    ],
+    "es": [
+     "gobernador Félix",
+     "Antonio Félix"
+    ]
    }
   },
   {
@@ -1334,6 +1495,11 @@ window.CTS_FILL_DATA["wisespeak"] = {
    "answer": {
     "en": "moralism",
     "es": "moralismo"
+   },
+   "accept": {
+    "en": [
+     "moralizing"
+    ]
    }
   },
   {

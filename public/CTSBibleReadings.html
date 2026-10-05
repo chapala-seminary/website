@@ -69,8 +69,8 @@
   </div>
 
   <div class="notice">
-    <strong>Fully offline:</strong> Each of the five readings is a Chapala Theological Seminary bilingual digest (English and Spanish), written by CTS and included in your course download — so every one opens directly on your device, with no internet connection at all. The digests are CTS-authored teaching that rests on the great public-domain classics on the Bible's history (William Henry Green, Brooke Foss Westcott, Frederic G. Kenyon, F. H. A. Scrivener, John William Burgon, Ira Maurice Price, George Rawlinson, A. H. Sayce, Camden M. Cobern, and others); those classic works are freely available online for any who wish to read them in full.<br>
-    <span class="es"><strong>Totalmente sin conexión:</strong> Cada una de las cinco lecturas es un resumen bilingüe del Seminario Teológico de Chapala (inglés y español), escrito por el STC e incluido en la descarga de su curso — de modo que cada una se abre directamente en su dispositivo, sin conexión alguna. Los resúmenes son enseñanza de autoría del STC que se apoya en los grandes clásicos de dominio público sobre la historia de la Biblia (William Henry Green, Brooke Foss Westcott, Frederic G. Kenyon, F. H. A. Scrivener, John William Burgon, Ira Maurice Price, George Rawlinson, A. H. Sayce, Camden M. Cobern, y otros); esas obras clásicas están disponibles gratuitamente en línea para quien desee leerlas por completo.</span>
+    <strong>On this site:</strong> Each of the five readings is a Chapala Theological Seminary bilingual digest (English and Spanish), written by CTS and available here on the site — every one opens directly from this page, with nothing to download. The digests are CTS-authored teaching that rests on the great public-domain classics on the Bible's history (William Henry Green, Brooke Foss Westcott, Frederic G. Kenyon, F. H. A. Scrivener, John William Burgon, Ira Maurice Price, George Rawlinson, A. H. Sayce, Camden M. Cobern, and others); those classic works are freely available online for any who wish to read them in full.<br>
+    <span class="es"><strong>En este sitio:</strong> Cada una de las cinco lecturas es un resumen bilingüe del Seminario Teológico de Chapala (inglés y español), escrito por el STC y disponible aquí en el sitio — cada una se abre directamente desde esta página, sin nada que descargar. Los resúmenes son enseñanza de autoría del STC que se apoya en los grandes clásicos de dominio público sobre la historia de la Biblia (William Henry Green, Brooke Foss Westcott, Frederic G. Kenyon, F. H. A. Scrivener, John William Burgon, Ira Maurice Price, George Rawlinson, A. H. Sayce, Camden M. Cobern, y otros); esas obras clásicas están disponibles gratuitamente en línea para quien desee leerlas por completo.</span>
   </div>
 
   <div class="counter">Selected / Elegidas: <strong id="count">0</strong> of 3</div>
@@ -528,6 +528,176 @@
     </article>
 
   </main>
+<!-- CTS-ATTEST: the honours-reading attestation, written by tools/reading-rooms.mjs; edit there -->
+<style>
+.cts-attest{background:var(--card,#fff);border:1px solid var(--line,#dde1ea);border-top:4px solid var(--accent,#1f3d8c);border-radius:10px;padding:18px;margin:22px 0;box-shadow:0 2px 8px #0000000b}
+.cts-attest h2{margin:0 0 8px;font-size:1.25rem}
+.cts-attest label.cts-field{display:block;margin:12px 0 4px;font:700 .9rem Arial,sans-serif;color:var(--muted,#5a6272)}
+.cts-attest input[type=text]{width:100%;max-width:420px;padding:9px 11px;border:1px solid var(--line,#dde1ea);border-radius:7px;font:1rem Georgia,serif}
+.cts-attest .cts-oath{display:flex;gap:10px;align-items:flex-start;margin:12px 0}
+.cts-attest .cts-oath input{width:20px;height:20px;margin-top:2px;accent-color:var(--accent,#1f3d8c);flex-shrink:0}
+.cts-attest .cts-btn{display:inline-block;padding:9px 13px;border-radius:7px;border:0;cursor:pointer;background:var(--accent,#1f3d8c);color:#fff;font:700 .9rem Arial,sans-serif}
+.cts-attest .cts-btn.ghost{background:#fff;color:var(--accent,#1f3d8c);border:1px solid var(--accent,#1f3d8c)}
+.cts-attest .cts-msg{margin:8px 0 0;font-family:Arial,sans-serif;font-size:.92rem;color:#8a1f1f;min-height:1em}
+.cts-attest .cts-done{display:none;margin:8px 0 0;font-family:Arial,sans-serif;font-size:.95rem;color:#2f6b3a}
+.cts-attest .cts-record{display:none;margin-top:16px;padding-top:14px;border-top:2px solid var(--accent,#1f3d8c)}
+.cts-attest .cts-record.show{display:block}
+.cts-attest .cts-record .cts-name{font-size:1.4rem;margin:4px 0}
+.cts-attest .cts-record ul{margin:6px 0 0 18px;padding:0}
+@media print{.cts-attest input,.cts-attest label.cts-field,.cts-attest .cts-oath,.cts-attest .cts-btn,.cts-attest .cts-msg,.cts-attest .cts-done,.cts-attest .cts-intro{display:none!important}.cts-attest .cts-record{display:block!important;border:none}}
+</style>
+<section class="cts-attest" id="cts-attest" data-honors-code="Bible" data-honors-course="How We Got the Bible">
+<h2>Record your reading <span class="es">/ Registre su lectura</span></h2>
+<p class="cts-intro">When you have read your three chosen readings in full, enter your name and affirm it below. This record is kept on your honor, in this browser; it shows on your certificate as <em>with honors</em>.<br><span class="es">Cuando haya leído por completo sus tres lecturas elegidas, escriba su nombre y confírmelo abajo. Este registro se guarda bajo su honor, en este navegador; aparece en su certificado como <em>con honores</em>.</span></p>
+<label class="cts-field" for="cts-att-name">Your name <span class="es">/ Su nombre</span></label>
+<input type="text" id="cts-att-name" autocomplete="name">
+<div class="cts-oath"><input type="checkbox" id="cts-att-oath"><label for="cts-att-oath">On my honor, I have read in full the three readings I selected above.<br><span class="es">Bajo mi honor, he leído por completo las tres lecturas que seleccioné arriba.</span></label></div>
+<button type="button" class="cts-btn" id="cts-att-record">Record my reading <span class="es">/ Registrar mi lectura</span></button>
+<p class="cts-msg" id="cts-att-msg" role="status"></p>
+<p class="cts-done" id="cts-att-done">&#10003; Recorded &mdash; this class counts toward your With Honors progress. <a href="cts-honors.html">The Honors Reading Library &#8599;</a><br><span class="es">&#10003; Registrado &mdash; esta clase cuenta para su progreso Con Honores. <a href="cts-honors.html">La Biblioteca de Lecturas de Honores &#8599;</a></span></p>
+<div class="cts-record" id="cts-att-record-card">
+<div class="num">Honors Reading &mdash; recorded <span class="es">/ Lectura con Honores &mdash; registrada</span></div>
+<div class="cts-name" id="cts-att-rec-name"></div>
+<p>affirmed on <span id="cts-att-rec-date"></span> to have read, in full: <span class="es">/ afirmó haber leído, por completo:</span></p>
+<ul id="cts-att-rec-list"></ul>
+<p class="byline">Chapala Theological Seminary &middot; How We Got the Bible &middot; present or print this page as your honors reading record. <span class="es">/ Presente o imprima esta página como su registro de lectura con honores.</span></p>
+<p><button type="button" class="cts-btn ghost" onclick="window.print()">Print this record <span class="es">/ Imprimir</span></button> <button type="button" class="cts-btn ghost" id="cts-att-reset">Start over <span class="es">/ Empezar de nuevo</span></button></p>
+</div>
+</section>
+<script>
+(function(){
+  var root=document.getElementById('cts-attest'); if(!root) return;
+  var CODE=root.getAttribute('data-honors-code'), COURSE=root.getAttribute('data-honors-course'), MAX=3;
+  var KEY='cts_honors_v1:'+CODE;
+  function get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+  function el(id){ return document.getElementById(id); }
+  // the five digests' own checkboxes, whatever the page calls them
+  function boxes(){ var m=document.querySelector('main')||document; return Array.prototype.slice.call(m.querySelectorAll('article input[type=checkbox]')); }
+  function titleOf(box){ var a=box.closest('article'); var h=a&&a.querySelector('h3'); if(!h) return ''; var c=h.cloneNode(true); Array.prototype.forEach.call(c.querySelectorAll('.es'),function(s){ s.parentNode.removeChild(s); }); return c.textContent.replace(/\s+/g,' ').trim(); }
+  function say(m){ el('cts-att-msg').textContent=m; }
+  function showDone(on){ el('cts-att-done').style.display=on?'block':'none'; }
+  function record(){
+    var chosen=boxes().filter(function(b){ return b.checked; });
+    var name=el('cts-att-name').value.trim(), oath=el('cts-att-oath').checked;
+    if(chosen.length!==MAX){ say('Choose exactly three readings above to record them. / Elija exactamente tres lecturas arriba para registrarlas.'); return; }
+    if(!name){ say('Enter your name to record your reading. / Escriba su nombre para registrar su lectura.'); return; }
+    if(!oath){ say('Check the box to affirm you have read all three. / Marque la casilla para afirmar que ha leído las tres.'); return; }
+    say('');
+    var now=new Date(), en=now.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    var works=chosen.map(titleOf);
+    el('cts-att-rec-name').textContent=name; el('cts-att-rec-date').textContent=en;
+    var ul=el('cts-att-rec-list'); ul.innerHTML=''; works.forEach(function(w){ var li=document.createElement('li'); li.textContent=w; ul.appendChild(li); });
+    set('cts_honors_name_v1', name);
+    set(KEY, JSON.stringify({name:name,date:en,course:COURSE,works:works}));
+    showDone(true);
+    var card=el('cts-att-record-card'); card.classList.add('show'); card.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function reset(){ el('cts-att-name').value=''; el('cts-att-oath').checked=false; el('cts-att-record-card').classList.remove('show'); say(''); }
+  el('cts-att-record').addEventListener('click', record);
+  el('cts-att-reset').addEventListener('click', reset);
+  if(get(KEY)) showDone(true);
+  var nm=get('cts_honors_name_v1'); if(nm && !el('cts-att-name').value) el('cts-att-name').value=nm;
+})();
+</script>
+<!-- /CTS-ATTEST -->
+
+<!-- CTS-SHELF: the public-domain shelf, written by tools/reading-rooms.mjs from src/data/reading-shelf.json; edit there -->
+<style>
+.cts-shelf{margin:34px 0 10px}
+.cts-shelf-head{text-align:center;margin:0 0 6px}
+.cts-shelf-head h2{font-weight:normal;font-size:1.4rem;border:none;padding:0;margin:0;display:inline-block;color:var(--primary,var(--accent,#5b3a1f))}
+.cts-shelf-rule{width:60px;height:2px;background:var(--gold,#c9a227);margin:12px auto 0}
+.cts-shelf-note{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-left:4px solid var(--gold,#c9a227);border-radius:12px;padding:14px 18px;margin:16px 0 18px;font-size:.96rem}
+.cts-shelf-panel{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-radius:16px;padding:18px 22px;margin:22px 0}
+.cts-shelf-panel > h3{font-weight:normal;font-size:1.15rem;margin:0 0 8px;color:var(--primary,var(--accent,#5b3a1f))}
+.cts-shelf-entry{background:var(--card,#fffdf8);border:1px solid var(--border,var(--line,#e5d8c8));border-radius:16px;padding:18px 22px;margin:14px 0;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+.cts-shelf-locus{letter-spacing:.16em;text-transform:uppercase;font-size:.68rem;color:var(--gold-deep,var(--accent,#98771d));margin-bottom:6px}
+.cts-shelf-title{font-size:1.1rem;color:var(--primary,var(--accent,#5b3a1f));margin-bottom:2px}
+.cts-shelf-num{display:inline-block;min-width:1.5em;color:var(--gold-deep,var(--accent,#98771d));font-style:italic}
+.cts-shelf-byline{color:var(--ink-soft,var(--muted,#6b5844));font-style:italic;font-size:.92rem;margin-bottom:8px}
+.cts-shelf-caption{font-size:.97rem;margin:8px 0}
+.cts-shelf-foot{margin-top:12px;padding-top:10px;border-top:1px solid var(--border,var(--line,#e5d8c8));display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
+.cts-shelf-link{color:var(--primary,var(--accent,#5b3a1f));text-decoration:none;border-bottom:1.5px solid var(--gold,#c9a227);padding-bottom:1px;font-size:.95rem}
+.cts-shelf-badge{font-size:.8rem;color:var(--ink-soft,var(--muted,#6b5844))}
+@media print{.cts-shelf{display:none}}
+</style>
+<section class="cts-shelf" id="cts-shelf" aria-labelledby="cts-shelf-h">
+<div class="cts-shelf-head"><h2 id="cts-shelf-h">Further Study: Ten Public-Domain Works <span class="es">/ Para Profundizar: diez obras de dominio público</span></h2><div class="cts-shelf-rule"></div></div>
+<div class="cts-shelf-note">These ten works are for further study, for the student who wants to go on reading. They are not part of the honors reading above: that stays as it is &mdash; the five CTS digests, any three read in full and recorded on your honor. All ten are in the public domain; each link opens the work online, and most can also be found in the Internet Archive or Project Gutenberg. Most are in English: the Chrome browser can translate a page (right-click, &ldquo;Translate to&hellip;&rdquo;; on a phone, the browser menu).<br><span class="es">Estas diez obras son para profundizar, para el estudiante que quiere seguir leyendo. No forman parte de la lectura con honores de arriba, que sigue igual: los cinco resúmenes del STC, tres cualesquiera leídos por completo y registrados bajo su honor. Las diez están en el dominio público; cada enlace abre la obra en línea, y la mayoría también se encuentra en Internet Archive o en el Proyecto Gutenberg. La mayoría están en inglés: el navegador Chrome puede traducir una página (clic derecho, &ldquo;Traducir a&hellip;&rdquo;; en un teléfono, el menú del navegador).</span></div>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Whole Story &middot; From Manuscript to Translation <span class="es">/ Toda la Historia &middot; Del Manuscrito a la Traducción</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">1.</span> The Ancestry of Our English Bible <span class="es">/ La Ascendencia de Nuestra Biblia</span></div>
+<div class="cts-shelf-byline">Ira M. Price &middot; 1906</div>
+<p class="cts-shelf-caption">Price's classic tells the whole story of how our Bible came down to us &mdash; from the earliest manuscripts, through the ancient versions, to the translations we read today. It is the ideal companion to the entire course, weaving together the canon, the copying of the text, and the work of translation into one clear and readable account. For the student who wants to grasp the big picture before diving into details, there is no better place to begin: it shows that the Bible in your hands is the end of a long and faithful chain of witnesses.<br><span class="es">El clásico de Price narra toda la historia de cómo nuestra Biblia llegó hasta nosotros &mdash; desde los manuscritos más antiguos, pasando por las versiones antiguas, hasta las traducciones que leemos hoy. Es el compañero ideal de todo el curso, entretejiendo el canon, la copia del texto, y la obra de traducción en un relato claro y legible. Para el estudiante que quiere captar el panorama general antes de sumergirse en los detalles, no hay mejor lugar para comenzar: muestra que la Biblia en sus manos es el final de una larga y fiel cadena de testigos.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/theancestrybible00pricuoft" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Right Books &middot; The Old Testament Canon <span class="es">/ Los Libros Correctos &middot; El Canon del Antiguo Testamento</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">2.</span> General Introduction to the Old Testament: The Canon <span class="es">/ Introducción General al Antiguo Testamento: El Canon</span></div>
+<div class="cts-shelf-byline">William Henry Green &middot; 1898</div>
+<p class="cts-shelf-caption">Green's careful study takes up the question of the Old Testament canon &mdash; how Israel came to recognize exactly these books as the Word of God, and no others. It richly serves the course's unit on the right books of the Old Testament, defending the integrity of the Hebrew Scriptures against the doubts raised in his day. This is a more technical work, offered for the student who wishes to go deeper; but it rewards the effort with a firm, well-reasoned confidence that the Old Testament we possess is the one God gave His people.<br><span class="es">El cuidadoso estudio de Green aborda la cuestión del canon del Antiguo Testamento &mdash; cómo Israel llegó a reconocer exactamente estos libros como la Palabra de Dios, y ningún otro. Sirve ricamente a la unidad del curso sobre los libros correctos del Antiguo Testamento, defendiendo la integridad de las Escrituras hebreas contra las dudas levantadas en su día. Esta es una obra más técnica, ofrecida para el estudiante que desea profundizar; pero recompensa el esfuerzo con una confianza firme y bien razonada de que el Antiguo Testamento que poseemos es el que Dios dio a su pueblo.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/generalintroduct00gree" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Right Books &middot; The New Testament &amp; the Apocrypha <span class="es">/ Los Libros Correctos &middot; El Nuevo Testamento y los Apócrifos</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">3.</span> A History of the Canon of the New Testament <span class="es">/ Historia del Canon del Nuevo Testamento</span></div>
+<div class="cts-shelf-byline">Brooke Foss Westcott &middot; 1855</div>
+<p class="cts-shelf-caption">Westcott's landmark work traces how the books of the New Testament were recognized by the early church &mdash; tested, received, and gathered as Scripture &mdash; and why the writings of the Apocrypha and later centuries were not. It is the ideal foundation for the course's unit on the New Testament canon, showing from the earliest testimony that the church did not create the canon but recognized the books God had given. Careful and scholarly, it lays to rest the notion that our New Testament was a late or arbitrary collection.<br><span class="es">La obra emblemática de Westcott traza cómo los libros del Nuevo Testamento fueron reconocidos por la iglesia primitiva &mdash; probados, recibidos, y reunidos como Escritura &mdash; y por qué los escritos de los Apócrifos y de siglos posteriores no lo fueron. Es el fundamento ideal para la unidad del curso sobre el canon del Nuevo Testamento, mostrando desde el testimonio más antiguo que la iglesia no creó el canon sino que reconoció los libros que Dios había dado. Cuidadosa y erudita, sepulta la noción de que nuestro Nuevo Testamento fue una colección tardía o arbitraria.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/ageneralsurveyof00westuoft" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Witnesses &middot; The Manuscripts <span class="es">/ Los Testigos &middot; Los Manuscritos</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">4.</span> Our Bible and the Ancient Manuscripts <span class="es">/ Nuestra Biblia y los Manuscritos Antiguos</span></div>
+<div class="cts-shelf-byline">Frederic G. Kenyon &middot; 1895</div>
+<p class="cts-shelf-caption">Kenyon, one of the great manuscript scholars, wrote this beloved introduction to the handwritten witnesses behind our Bible &mdash; how the text of both Testaments was copied, preserved, and recovered across the centuries. It is the perfect companion to the course's units on the copying of the text and the manuscript gallery, explaining clearly and without jargon what the great codices are and why they matter. More than any other single book, it shows the ordinary reader how astonishingly well-attested the Bible is compared to every other ancient writing.<br><span class="es">Kenyon, uno de los grandes eruditos de manuscritos, escribió esta amada introducción a los testigos manuscritos detrás de nuestra Biblia &mdash; cómo el texto de ambos Testamentos fue copiado, preservado, y recuperado a través de los siglos. Es el compañero perfecto de las unidades del curso sobre la copia del texto y la galería de manuscritos, explicando con claridad y sin tecnicismos qué son los grandes códices y por qué importan. Más que cualquier otro libro, muestra al lector común cuán asombrosamente bien atestiguada está la Biblia comparada con todo otro escrito antiguo.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/ourbibleancien00keny" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Right Words &middot; Establishing the Text <span class="es">/ Las Palabras Correctas &middot; Estableciendo el Texto</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">5.</span> A Plain Introduction to the Criticism of the New Testament <span class="es">/ Una Introducción Sencilla a la Crítica del Nuevo Testamento</span></div>
+<div class="cts-shelf-byline">F. H. A. Scrivener &middot; 1861</div>
+<p class="cts-shelf-caption">Scrivener's manual is the classic nineteenth-century guide to the textual criticism of the New Testament &mdash; the manuscripts, the versions, and the principles by which scholars weigh them. It deepens the course's units on the copying and the printed editions of the text, and holds a special interest: Scrivener was himself the editor of the Received Text that stands behind the King James and its heirs, yet a careful master of the wider evidence. This is technical study for the serious student, and a fair and learned guide to how the words of the New Testament are established.<br><span class="es">El manual de Scrivener es la guía clásica del siglo diecinueve para la crítica textual del Nuevo Testamento &mdash; los manuscritos, las versiones, y los principios por los cuales los eruditos los ponderan. Profundiza las unidades del curso sobre la copia y las ediciones impresas del texto, y tiene un interés especial: Scrivener fue él mismo el editor del Texto Recibido que está detrás de la Reina-Valera y sus herederas, y a la vez un cuidadoso maestro de la evidencia más amplia. Este es estudio técnico para el estudiante serio, y una guía justa y erudita de cómo se establecen las palabras del Nuevo Testamento.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://www.gutenberg.org/ebooks/36548" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Two Printed Texts &middot; The Traditional Text <span class="es">/ Dos Textos Impresos &middot; El Texto Tradicional</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">6.</span> The Traditional Text of the Holy Gospels <span class="es">/ El Texto Tradicional de los Santos Evangelios</span></div>
+<div class="cts-shelf-byline">John William Burgon &middot; 1896</div>
+<p class="cts-shelf-caption">Dean Burgon was the most formidable defender of the traditional text of the Gospels &mdash; the reading found in the great majority of manuscripts and reflected in the Received Text &mdash; against the newer critical editions of his day. This work presents his scholarly case with learning and force. It directly serves the course's unit on the two printed texts, giving the strongest voice for the traditional side of a discussion that continues still. Read alongside the manuscript scholars, it lets the student weigh both traditions fairly and understand why the seminary reads from the New King James and the Reina-Valera Gómez.<br><span class="es">El deán Burgon fue el más formidable defensor del texto tradicional de los Evangelios &mdash; la lectura hallada en la gran mayoría de los manuscritos y reflejada en el Texto Recibido &mdash; frente a las nuevas ediciones críticas de su día. Esta obra presenta su caso erudito con saber y fuerza. Sirve directamente a la unidad del curso sobre los dos textos impresos, dando la voz más fuerte al lado tradicional de una discusión que aún continúa. Leída junto a los eruditos de manuscritos, permite al estudiante ponderar ambas tradiciones con justicia y entender por qué el seminario lee de la Reina-Valera Gómez y de la New King James en inglés.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/traditionaltexto00burgrich" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Stones That Speak &middot; The Witness of Archaeology <span class="es">/ Piedras que Hablan &middot; El Testimonio de la Arqueología</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">7.</span> The 'Higher Criticism' and the Verdict of the Monuments <span class="es">/ La 'Alta Crítica' y el Veredicto de los Monumentos</span></div>
+<div class="cts-shelf-byline">A. H. Sayce &middot; 1894</div>
+<p class="cts-shelf-caption">Sayce, a pioneering Assyriologist, gathered the testimony of the ancient monuments &mdash; the inscriptions, tablets, and ruins unearthed across the Bible lands &mdash; and showed how repeatedly they confirmed the Old Testament record against the doubts of the critics. It is a vivid companion to the course's units on the witness of archaeology, letting the very stones speak. Some of its details have been refined by later discovery, but its great theme stands: as the spade has turned, again and again it has vindicated the history the Bible tells.<br><span class="es">Sayce, un asiriólogo pionero, reunió el testimonio de los monumentos antiguos &mdash; las inscripciones, tablillas, y ruinas desenterradas por las tierras bíblicas &mdash; y mostró cuán repetidamente confirmaban el registro del Antiguo Testamento contra las dudas de los críticos. Es un vívido compañero de las unidades del curso sobre el testimonio de la arqueología, dejando hablar a las piedras mismas. Algunos de sus detalles han sido refinados por descubrimientos posteriores, pero su gran tema permanece: conforme la pala ha cavado, una y otra vez ha vindicado la historia que la Biblia cuenta.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/highercriticism00saycuoft" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">A Land You Can Walk &middot; Biblical Geography <span class="es">/ Una Tierra que Puedes Recorrer &middot; Geografía Bíblica</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">8.</span> The Historical Geography of the Holy Land <span class="es">/ La Geografía Histórica de la Tierra Santa</span></div>
+<div class="cts-shelf-byline">George Adam Smith &middot; 1894</div>
+<p class="cts-shelf-caption">Smith's celebrated work walks the reader across the very land of the Bible &mdash; its hills and valleys, roads and rivers, cities and wilderness &mdash; showing how its geography shaped the history that unfolded upon it. It is the ideal companion to the course's unit on the land you can walk, making the stage of the biblical story real and vivid. The Bible is no myth set in no place; it happened here, on ground that can still be traced &mdash; and Smith is the classic guide to that ground.<br><span class="es">La célebre obra de Smith lleva al lector a recorrer la tierra misma de la Biblia &mdash; sus montes y valles, caminos y ríos, ciudades y desierto &mdash; mostrando cómo su geografía moldeó la historia que se desarrolló sobre ella. Es el compañero ideal de la unidad del curso sobre la tierra que se puede recorrer, haciendo real y vívido el escenario de la historia bíblica. La Biblia no es un mito situado en ningún lugar; sucedió aquí, sobre un suelo que aún puede trazarse &mdash; y Smith es el guía clásico de ese suelo.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/historicalgeogra00smit" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">Can We Trust It? &middot; The Historical Record <span class="es">/ ¿Podemos Confiar? &middot; El Registro Histórico</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">9.</span> The Historical Evidences of the Truth of the Scripture Records <span class="es">/ Las Evidencias Históricas de la Verdad de los Registros de la Escritura</span></div>
+<div class="cts-shelf-byline">George Rawlinson &middot; 1859</div>
+<p class="cts-shelf-caption">Rawlinson, a distinguished historian, set out the historical evidence for the truth of the Bible's record &mdash; testing its accounts against what is known of the ancient world from every other source. It speaks to the course's opening and closing questions: can we trust what we hold, and may we know it for certain? Measured and scholarly rather than heated, it shows that the Scriptures stand up as history &mdash; that the events they report belong not to legend but to the real past, confirmed again and again where they can be tested.<br><span class="es">Rawlinson, un historiador distinguido, expuso la evidencia histórica de la verdad del registro de la Biblia &mdash; probando sus relatos contra lo que se conoce del mundo antiguo por toda otra fuente. Habla a las preguntas de apertura y cierre del curso: ¿podemos confiar en lo que tenemos, y podemos saberlo con certeza? Mesurado y erudito más que acalorado, muestra que las Escrituras se sostienen como historia &mdash; que los eventos que reportan pertenecen no a la leyenda sino al pasado real, confirmados una y otra vez donde pueden ser probados.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/historicalevide00rawl" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+<article class="cts-shelf-entry">
+<div class="cts-shelf-locus">The Spade Testifies &middot; The New Testament World <span class="es">/ La Pala Testifica &middot; El Mundo del Nuevo Testamento</span></div>
+<div class="cts-shelf-title"><span class="cts-shelf-num">10.</span> The New Archeological Discoveries and Their Bearing upon the New Testament <span class="es">/ Los Nuevos Descubrimientos Arqueológicos y su Relación con el Nuevo Testamento</span></div>
+<div class="cts-shelf-byline">Camden M. Cobern &middot; 1917</div>
+<p class="cts-shelf-caption">Cobern brought together the discoveries that shed light on the New Testament &mdash; the ancient papyri, inscriptions, and everyday documents that illuminate its language, its world, and the reliability of its text. It complements the course's units on the manuscripts and on archaeology, extending the witness of the spade from the Old Testament into the New. Here the student sees how the buried evidence of the Roman world confirms the setting of the Gospels and Acts, and how the humble papyri recovered from the sands brought the very words of the New Testament into sharper light.<br><span class="es">Cobern reunió los descubrimientos que arrojan luz sobre el Nuevo Testamento &mdash; los antiguos papiros, inscripciones, y documentos cotidianos que iluminan su lenguaje, su mundo, y la confiabilidad de su texto. Complementa las unidades del curso sobre los manuscritos y sobre la arqueología, extendiendo el testimonio de la pala desde el Antiguo Testamento hasta el Nuevo. Aquí el estudiante ve cómo la evidencia sepultada del mundo romano confirma el escenario de los Evangelios y Hechos, y cómo los humildes papiros recuperados de las arenas trajeron las palabras mismas del Nuevo Testamento a una luz más clara.</span></p>
+<div class="cts-shelf-foot"><a class="cts-shelf-link" href="https://archive.org/details/newarcheological00cobe" target="_blank" rel="noopener">Open reading &#8599; <span class="es">/ Abrir lectura &#8599;</span></a></div>
+</article>
+</section>
+<!-- /CTS-SHELF -->
+
 
   <div class="notice">
     <strong>Honor attestation:</strong> By selecting three readings above, you affirm that you have read those three digests in full. The digests are CTS-authored summaries that may include brief excerpts or adaptations of public-domain works.<br>
