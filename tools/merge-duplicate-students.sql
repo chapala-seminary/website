@@ -10,7 +10,10 @@
 -- Safe to run again: a second run finds nothing new to mark or move.
 --
 -- WHO IS MERGED. Live records sharing an email (case and spaces ignored) AND
--- a name (the same). Same email, different names is left alone: a husband and
+-- a name (the same). Only a real address counts: the front page stores "—"
+-- for a blank email, and the 5 Oct run matched one pair on it (the same
+-- person, as it turned out -- same country, program and language, and no
+-- progress on either -- but nothing about "—" says so). Same email, different names is left alone: a husband and
 -- wife may share one address, and two people must never become one record.
 -- The preview lists those pairs by roster row number; to merge one after
 -- checking it on the staff roster, mark it by hand and run this file again:
@@ -41,7 +44,7 @@ UPDATE students SET
                  ORDER BY k.created_at, k.id LIMIT 1),
   merged_at = strftime('%Y-%m-%dT%H:%M:%fZ', 'now')
 WHERE merged_into IS NULL
-  AND trim(COALESCE(email, '')) <> ''
+  AND email LIKE '%_@_%'
   AND lower(trim(email)) <> 'tester@chapalaseminary.org'
   AND id <> (SELECT k.id FROM students k
              WHERE k.merged_into IS NULL

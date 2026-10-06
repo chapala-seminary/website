@@ -42,7 +42,7 @@ async function studentDevice() {
      Inventing a shape here would test a shape nothing produces. */
   await page.evaluate(() => {
     localStorage.setItem('cts_student', JSON.stringify({
-      name: 'Privacy Test Student', email: 'privacy@example.test', country: 'MX', track: 'cert',
+      name: 'Privacy Test Student', email: 'privacy-' + Math.random().toString(36).slice(2) + '@example.test', country: 'MX', track: 'cert',
     }));
     localStorage.setItem('cts_track', 'cert');
     localStorage.setItem('cts_acts_progress', JSON.stringify({ unit1: true, unit2: true }));
@@ -75,7 +75,7 @@ await a.page.click('#show-held');
 await a.page.waitForTimeout(500);
 const held = await a.page.textContent('#held');
 ok(/Privacy Test Student/.test(held), 'the record it shows is the one actually stored', held?.slice(0, 120));
-ok(/privacy@example\.test/.test(held), 'including the email address, which is the point');
+ok(/privacy-[a-z0-9]+@example\.test/.test(held), 'including the email address, which is the point');
 ok(/(^|\D)2(\D|$)/.test(held), 'and how many units are recorded',
   `what the page showed: ${String(held).replace(/\s+/g, ' ').slice(0, 160)}`);
 

@@ -32,7 +32,7 @@ async function device(page_ = '') {
 const one = await device();
 await one.page.selectOption('#reg-country', { index: 1 });
 await one.page.fill('#reg-name', 'Ana Ruiz');
-await one.page.fill('#reg-email', 'ana@example.org');
+await one.page.fill('#reg-email', 'ana.code-ui@example.org');
 await one.page.click('#reg-save');
 await one.page.waitForFunction(() => {
   const el = document.getElementById('reg-code');

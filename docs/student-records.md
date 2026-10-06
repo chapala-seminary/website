@@ -56,7 +56,8 @@ losing a passed unit is not.
 
 | | | |
 |---|---|---|
-| `POST` | `/api/register` | issues a student code |
+| `POST` | `/api/register` | issues a student code — **409 `{existing:true}` when a live record has the same email and name** (no record made; `separate:true` registers anyway) |
+| `POST` | `/api/code/email` | emails the code of every live record with that address, to that address; the same answer whether or not there is one (three a day per address, twenty an hour per sender) |
 | `POST` | `/api/sync` | merges a device's state, returns the merged result |
 | `GET` | `/api/student/<code>` | rehydrates a device |
 | `DELETE` | `/api/student/<code>` | deletes the student and everything attached |
@@ -190,6 +191,24 @@ two sets are merged. `test/code-ui.test.mjs` drives both pages in a browser
 against a real API — registering, copying, reloading, and restoring onto a
 second device with the code typed in lower case with spaces instead of dashes,
 as a person would.
+
+## Registering twice
+
+Six students registered twice before this existed (merged 5 Oct 2026,
+`tools/merge-duplicate-students.sql`). Now a registration whose email and
+name (case and spaces ignored) match a live record makes no record: the
+answer is 409 with no code in it. The email is unverified, so the code is
+never handed to whoever typed it; the front page instead offers **Email me
+my code**, which sends it to that address, and a box to type it into. "Not
+you? Register separately" covers two people with one name sharing an
+address (`separate: true`). Same email, different name registers as always.
+A blank email, or the front page's "—" for none, is never matched.
+
+`cts-sync.js` keeps the pause (`cts_reg_existing`, holding the name and
+email it was for) and sends nothing while it holds -- no retry each poll --
+until the student restores a code or registers separately. Pages without
+the choice show one line pointing to Save & Restore, which also has
+**Lost your code?** for anyone. `test/dup-register.test.mjs` drives it.
 
 ## The client is dormant until the API exists
 

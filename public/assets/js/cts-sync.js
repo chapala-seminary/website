@@ -24,6 +24,13 @@
   // the test harness points at a dev server and how a separate API host would.
   var API = (typeof window !== 'undefined' && window.CTS_SYNC_API) || '/api';
   var CODE_KEY = 'cts_student_code';
+  /* A registration the seminary paused because this name and email already
+     have a record (Wayne, 5 Oct 2026; worker/api.js, register). Holds the
+     name and email it was paused for, so a student who corrects either is
+     registered as normal. While it holds, nothing is sent: the student
+     chooses -- their code by email, or "this is not me" (SEPARATE_KEY). */
+  var EXISTING_KEY = 'cts_reg_existing';
+  var SEPARATE_KEY = 'cts_reg_separate';
   var POLL_MS = 5000;
 
   // ---- storage, tolerant of blocked localStorage (some Android webviews) ----
@@ -311,23 +318,41 @@
     return apiPresent().then(function (up) { return up ? push(snap, d) : null; });
   }
 
+  function who(student) {
+    return String(student.name || '').trim().toLowerCase() + '\u0000' + String(student.email || '').trim().toLowerCase();
+  }
+  function paused(snap) {
+    var held = get(EXISTING_KEY);
+    return !!held && !get(CODE_KEY) && held === who(snap.student);
+  }
+
   function push(snap, d) {
     if (inFlight) return Promise.resolve(null);
+    // paused: wait for the student's choice rather than asking again every poll
+    if (paused(snap)) { showExisting(); return Promise.resolve(null); }
     inFlight = true;
     var code = get(CODE_KEY);
+    var separate = get(SEPARATE_KEY) === who(snap.student);
 
     var start = code
       ? Promise.resolve(code)
       // An existing student, already part-way through their degree, gets a
       // code on their next visit and their whole localStorage is pushed up.
       // Nobody has to start again, and nobody is asked to do anything.
-      : send('/register', {
-        name: snap.student.name, email: snap.student.email,
-        country: snap.student.country, track: snap.student.track || 'cert', goal: snap.student.goal,
-        heard: snap.student.heard, lang: snap.lang,
+      : fetch(API + '/register', {
+        method: 'POST', headers: { 'content-type': 'application/json' }, credentials: 'omit', keepalive: true,
+        body: JSON.stringify({
+          name: snap.student.name, email: snap.student.email,
+          country: snap.student.country, track: snap.student.track || 'cert', goal: snap.student.goal,
+          heard: snap.student.heard, lang: snap.lang, separate: separate || undefined,
+        }),
       }).then(function (r) {
+        if (r.status === 409) { set(EXISTING_KEY, who(snap.student)); showExisting(); return null; }
+        return r.ok ? r.json().catch(function () { return null; }) : null;
+      }, function () { return null; }).then(function (r) {
         if (!r || !r.code) return null;
         set(CODE_KEY, r.code);
+        try { localStorage.removeItem(EXISTING_KEY); localStorage.removeItem(SEPARATE_KEY); } catch (e) {}
         return r.code;
       });
 
@@ -354,6 +379,8 @@
         if (!state) return { ok: false, error: 'no record for that code' };
         apply(state);
         set(CODE_KEY, state.student.id);
+        try { localStorage.removeItem(EXISTING_KEY); localStorage.removeItem(SEPARATE_KEY); } catch (e) {}
+        var note = document.getElementById('cts-existing-note'); if (note) note.remove();
         // A successful restore is proof the API is there, whatever an earlier
         // probe concluded.
         apiCheck = Promise.resolve(true);
@@ -391,6 +418,54 @@
       .catch(function () { return { ok: false, error: 'could not reach the seminary' }; });
   }
 
+  /* "Email me my code": sent by the seminary to that address only. The answer
+     does not say whether the address has a record. */
+  function emailCode(email) {
+    var e = String(email || '').trim();
+    if (!e) return Promise.resolve({ ok: false, error: 'no email given' });
+    return fetch(API + '/code/email', {
+      method: 'POST', headers: { 'content-type': 'application/json' }, credentials: 'omit',
+      body: JSON.stringify({ email: e }),
+    }).then(function (r) {
+      if (r.ok) return { ok: true };
+      return { ok: false, status: r.status, error: r.status === 429 ? 'too many requests' : 'could not send' };
+    }, function () { return { ok: false, error: 'could not reach the seminary' }; });
+  }
+  /* "This is not me": two people share the address and the name. Register
+     anyway, once, for exactly this name and email. */
+  function registerSeparately() {
+    var snap = snapshot();
+    if (!snap.student || !snap.student.name) return Promise.resolve(null);
+    set(SEPARATE_KEY, who(snap.student));
+    try { localStorage.removeItem(EXISTING_KEY); } catch (e) {}
+    var note = document.getElementById('cts-existing-note'); if (note) note.remove();
+    return syncOnce(true);
+  }
+  function existing() {
+    var snap = snapshot();
+    return !!(snap.student && snap.student.name && paused(snap));
+  }
+  /* Pages without their own place for this (every page but the front page
+     and Save & Restore, which show the full choice) get one line pointing to
+     where the choice is made. */
+  function showExisting() {
+    if (typeof document === 'undefined' || !document.body) return;
+    if (document.getElementById('reg-code') || document.getElementById('code-card')) {
+      try { document.dispatchEvent(new CustomEvent('cts-sync-existing')); } catch (e) {}
+      return;
+    }
+    if (document.getElementById('cts-existing-note')) return;
+    var d = document.createElement('div');
+    d.id = 'cts-existing-note';
+    d.setAttribute('role', 'status');
+    d.style.cssText = 'margin:0;padding:10px 16px;background:#fbf6ea;color:#2a241d;border-bottom:2px solid #b08324;font:15px/1.5 Georgia,serif;text-align:center';
+    d.innerHTML = '<span class="lang-en en en-only">You already have a student record under this name and email. ' +
+      '<a href="/cts-backup.html" style="color:#6d2233;font-weight:700">Continue with it</a> so this progress is kept with it.</span>' +
+      '<span class="lang-es es es-only">Ya tiene un registro de estudiante con este nombre y correo. ' +
+      '<a href="/cts-backup.html" style="color:#6d2233;font-weight:700">Contin\u00fae con \u00e9l</a> para que este progreso se guarde en \u00e9l.</span>';
+    document.body.insertBefore(d, document.body.firstChild);
+  }
+
   // ---- when to sync --------------------------------------------------------
   function schedule() {
     syncOnce(true);
@@ -415,6 +490,10 @@
     sync: function () { return syncOnce(true); },
     restore: restore,
     forget: forget,
+    // a paused registration (this name and email already have a record)
+    existing: existing,
+    emailCode: emailCode,
+    registerSeparately: registerSeparately,
 
     /* Whether this browser is holding back from the seminary, and the way
        back. A student who deleted their record and later wants their work

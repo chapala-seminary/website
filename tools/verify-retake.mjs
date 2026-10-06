@@ -35,7 +35,7 @@ async function open(track) {
   await page.goto(`${BASE}/${PAGE}`, { waitUntil: 'load' });
   await page.evaluate((t) => {
     localStorage.clear();
-    localStorage.setItem('cts_student', JSON.stringify({ name: 'T', email: 't@x.org', track: t }));
+    localStorage.setItem('cts_student', JSON.stringify({ name: 'T', email: 't-' + Math.random().toString(36).slice(2) + '@x.org', track: t }));
     localStorage.setItem('cts_track', t);
   }, track);
   await page.reload({ waitUntil: 'load' });

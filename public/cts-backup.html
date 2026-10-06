@@ -99,7 +99,9 @@ footer a{color:var(--blue-dark);font-weight:600}
     </div>
 
     <div id="code-none" style="display:none">
-      <p class="sub" style="margin:0"><span class="en-only">No code yet on this device. Register on the home page and one is issued to you.</span><span class="es-only">A&uacute;n no hay c&oacute;digo en este dispositivo. Reg&iacute;strese en la p&aacute;gina principal y se le emitir&aacute; uno.</span></p>
+      <p class="sub" style="margin:0" id="code-none-new"><span class="en-only">No code yet on this device. Register on the home page and one is issued to you.</span><span class="es-only">A&uacute;n no hay c&oacute;digo en este dispositivo. Reg&iacute;strese en la p&aacute;gina principal y se le emitir&aacute; uno.</span></p>
+      <!-- a registration paused because this name and email already have a record -->
+      <p class="sub" style="margin:0;display:none;font-weight:600" id="code-none-existing"><span class="en-only">You already have a student record under this name and email. Email yourself its code below, then restore it here, so this device&rsquo;s progress is kept with it.</span><span class="es-only">Ya tiene un registro de estudiante con este nombre y correo. Env&iacute;ese su c&oacute;digo abajo y rest&aacute;urelo aqu&iacute;, para que el progreso de este dispositivo se guarde con &eacute;l.</span></p>
     </div>
 
     <h2 style="margin-top:22px;font-size:1.1rem"><span class="en-only">Restore from a code</span><span class="es-only">Restaurar desde un c&oacute;digo</span></h2>
@@ -109,6 +111,17 @@ footer a{color:var(--blue-dark);font-weight:600}
       <button class="action" id="code-restore" type="button" style="width:auto;flex:0 0 auto"><span class="en-only">Restore</span><span class="es-only">Restaurar</span></button>
     </div>
     <p class="note" id="code-note"></p>
+
+    <!-- "Email me my code" (Wayne, 5 Oct 2026): the code goes only to the
+         address on the record, and the answer is the same whether or not
+         there is one. -->
+    <h2 style="margin-top:22px;font-size:1.1rem"><span class="en-only">Lost your code?</span><span class="es-only">&iquest;Perdi&oacute; su c&oacute;digo?</span></h2>
+    <p class="sub"><span class="en-only">Enter the email you registered with. If it has a student record, we send its code to that address.</span><span class="es-only">Escriba el correo con el que se registr&oacute;. Si tiene un registro de estudiante, enviamos su c&oacute;digo a esa direcci&oacute;n.</span></p>
+    <div style="display:flex;flex-wrap:wrap;gap:10px">
+      <input id="forgot-email" type="email" autocomplete="email" spellcheck="false" placeholder="you@example.org" style="flex:1 1 220px;min-width:0;padding:12px;border:1px solid #c9d3e6;border-radius:6px;font:16px inherit">
+      <button class="action" id="forgot-send" type="button" style="width:auto;flex:0 0 auto"><span class="en-only">Email me my code</span><span class="es-only">Enviarme mi c&oacute;digo</span></button>
+    </div>
+    <p class="note" id="forgot-note"></p>
   </div>
 
   <!-- BACKUP -->
@@ -267,6 +280,16 @@ document.getElementById('restore-file').addEventListener('change', function(){
     $('code-have').style.display = code ? 'block' : 'none';
     $('code-none').style.display = code ? 'none' : 'block';
     if(code) $('code-value').textContent=code;
+    var held=!code && window.CTS_SYNC.existing && window.CTS_SYNC.existing();
+    $('code-none-new').style.display = held ? 'none' : 'block';
+    $('code-none-existing').style.display = held ? 'block' : 'none';
+    if(held && !$('forgot-email').value){
+      try{ $('forgot-email').value=(JSON.parse(localStorage.getItem('cts_student')||'{}')||{}).email||''; }catch(e){}
+    }
+  }
+  function say(id, kind, en, es){
+    var n=$(id); n.className='note '+kind;
+    n.innerHTML='<span class="en-only">'+en+'</span><span class="es-only">'+es+'</span>';
   }
   ready(function(){
     if(!window.CTS_SYNC) return;               // no sync client: card stays hidden
@@ -300,6 +323,19 @@ document.getElementById('restore-file').addEventListener('change', function(){
       if(navigator.clipboard && navigator.clipboard.writeText)
         navigator.clipboard.writeText(code).then(done,fallback);
       else fallback();
+    });
+
+    document.addEventListener('cts-sync-existing', paint);
+    $('forgot-send').addEventListener('click', function(){
+      var btn=this, email=($('forgot-email').value||'').trim();
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){ say('forgot-note','warn','Enter the email you registered with.','Escriba el correo con el que se registr\u00f3.'); return; }
+      btn.disabled=true;
+      window.CTS_SYNC.emailCode(email).then(function(r){
+        btn.disabled=false;
+        if(r.ok) say('forgot-note','ok','If that email has a student record, its code is on the way. Check the inbox (and the spam folder), then restore it above.','Si ese correo tiene un registro de estudiante, su c\u00f3digo va en camino. Revise el correo (y la carpeta de spam) y rest\u00e1urelo arriba.');
+        else if(r.status===429) say('forgot-note','warn','Too many requests today. Try again tomorrow.','Demasiadas solicitudes hoy. Int\u00e9ntelo ma\u00f1ana.');
+        else say('forgot-note','warn','The email could not be sent. Try again later.','No se pudo enviar el correo. Int\u00e9ntelo m\u00e1s tarde.');
+      });
     });
 
     $('code-restore').addEventListener('click', function(){
