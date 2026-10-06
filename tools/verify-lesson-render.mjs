@@ -45,8 +45,15 @@ for (const course of fs.readdirSync(LESSONS))
    NOT declared is compared strictly. */
 const REPAIRED = new Set(['figcaption']);
 
+/* A shared script or stylesheet is addressed by a fingerprint of its contents
+   (src/lib/version.ts): /assets/js/cts-sync.js?v=082eee1063. Editing the
+   script changes the fingerprint on all 466 pages at once, and that is not a
+   change to any lesson. The fingerprint is dropped before hashing; the tag,
+   its path and every other attribute are still compared. */
+const unversioned = (k, v) => (k === 'src' || k === 'href') ? v.replace(/\?v=[0-9a-f]+$/, '') : v;
+
 const sig = (el) => {
-  const attrs = Object.entries(el.attributes || {}).map(([k, v]) => `${k}=${v}`).sort().join(' ');
+  const attrs = Object.entries(el.attributes || {}).map(([k, v]) => `${k}=${unversioned(k, v)}`).sort().join(' ');
   return `${el.tagName.toLowerCase()}[${attrs}]`;
 };
 
