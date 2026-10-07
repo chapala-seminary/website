@@ -13,7 +13,7 @@
      blank          Associate, Th.M. and M.Div. tracks: 9 of 10 (Wayne's rule,
                     25 Sept 2026). An answer is right when, after normalise()
                     below, it is exactly the expected word or phrase, or one of
-                    the listed alternatives, in English or Spanish; a leading
+                    the listed alternatives, in the reader or source language; a leading
                     article ("the", "a", "la", "un"...) makes no difference. Like
                     multiple choice, each is marked the moment the student
                     presses Check (or Enter), with the right answer shown, and
@@ -237,24 +237,35 @@
 
 
   // ---- language ----------------------------------------------------------
-  function isEs() {
-    var b = document.body;
-    if (b && b.classList.contains("lang-es")) return true;
+  // Language codes come from the unit and page, so another language does not
+  // need another yes/no branch in the grader. "both" remains a legacy mode.
+  function sourceLang() { return U.sourceLang || "en"; }
+  function languages() {
+    return Array.from(new Set(["en", "es", "fr", sourceLang()].concat(U.langs || [])));
+  }
+  function readerLang() {
+    var b = document.body, codes = languages();
     var l = (b && b.getAttribute("data-lang")) || document.documentElement.lang || "en";
-    return l.slice(0, 2) === "es";
+    if (l === "both" || (b && b.classList.contains("lang-both"))) return "es";
+    for (var i = 0; i < codes.length; i++)
+      if (b && b.classList.contains("lang-" + codes[i])) return codes[i];
+    return l.toLowerCase().split("-")[0];
   }
-  function pick(o) {           // {en,es} | plain value
+  function isLanguageMap(o) { return o && typeof o === "object" && !Array.isArray(o); }
+  function pick(o) {
     if (o === null || o === undefined) return "";
-    if (typeof o === "object" && ("en" in o || "es" in o)) return (isEs() ? o.es : o.en) || o.en || "";
-    return o;
+    return isLanguageMap(o) ? (o[readerLang()] || o[sourceLang()] || o.en || "") : o;
   }
-  function bi(o) {             // both languages, toggled by cts-lang.js
+  function bi(o) {
     if (o === null || o === undefined) return "";
-    if (typeof o === "object" && ("en" in o || "es" in o)) {
-      return '<span class="lang-en">' + (o.en || "") + '</span>' +
-             '<span class="lang-es">' + (o.es || o.en || "") + "</span>";
-    }
-    return String(o);
+    if (!isLanguageMap(o)) return String(o);
+    // Keep the existing bilingual markup until per-language pages replace it.
+    var codes = U.sourceLang || !["en", "es"].includes(readerLang())
+      ? [readerLang(), sourceLang()] : ["en", "es"];
+    return Array.from(new Set(codes)).map(function (lang) {
+      return '<span class="lang-' + lang + '" lang="' + lang + '">' +
+        (o[lang] || o[sourceLang()] || o.en || "") + '</span>';
+    }).join("");
   }
 
   // ---- answers -----------------------------------------------------------
@@ -296,7 +307,7 @@
   function options(q) {
     var o = q.options;
     if (Array.isArray(o)) return o;
-    if (o && (o.en || o.es)) return isEs() ? (o.es || o.en) : o.en;
+    if (isLanguageMap(o)) return pick(o) || [];
     return [];
   }
 
@@ -476,11 +487,12 @@
     if (!g) return;
     var s = student();
     if (!s || !s.name) { g.textContent = ""; return; }
-    var names = isEs()
-      ? { cert: "Certificado de Ministerio", ad: "Asociado en Divinidad", mdiv: "M.Div.", thm: "Th.M.", mth: "Th.M." }
-      : { cert: "Certificate of Ministry", ad: "Associate of Divinity", mdiv: "M.Div.", thm: "Th.M.", mth: "Th.M." };
+    var names = pick({
+      en: { cert: "Certificate of Ministry", ad: "Associate of Divinity", mdiv: "M.Div.", thm: "Th.M.", mth: "Th.M." },
+      es: { cert: "Certificado de Ministerio", ad: "Asociado en Divinidad", mdiv: "M.Div.", thm: "Th.M.", mth: "Th.M." }
+    });
     var label = names[track()] || names.cert;
-    g.textContent = (isEs() ? "Bienvenido, " : "Welcome, ") + s.name + " — " + label;
+    g.textContent = pick({ en: "Welcome, ", es: "Bienvenido, " }) + s.name + " — " + label;
   }
 
   function renderQuestions() {
@@ -540,7 +552,7 @@
         out += '<div class="question" data-fill="' + i + '">';
         out += '<p style="font-weight:bold;">' + num + ". " + bi(q.prompt) + "</p>";
         out += '<input type="text" data-fill="' + i + '" autocomplete="off" autocapitalize="off" spellcheck="false"' +
-               ' aria-label="' + (isEs() ? "Respuesta " : "Answer ") + num + '"' +
+               ' aria-label="' + pick({ en: "Answer ", es: "Respuesta " }) + num + '"' +
                ((done || locked) ? " disabled" : "") +
                ' style="width:100%;max-width:24em;" value="' + attr(given) + '" />';
         if (!done && !locked) {
@@ -548,7 +560,7 @@
                  bi({ en: "Check", es: "Comprobar" }) + "</button>";
         }
         if (done) {
-          var right = fillRight(q, given);
+          var right = unitFillRight(q, given);
           out += right
             ? '<div class="feedback-text correct">' + bi({ en: "&#10003; Correct!", es: "&#10003; ¡Correcto!" }) + "</div>"
             : '<div class="feedback-text incorrect">' +
@@ -660,7 +672,7 @@
   }
   function wrongFill() {
     var c = 0;
-    fill.forEach(function (q, i) { if (fillChecked[i] && !fillRight(q, fillAnswers[i])) c++; });
+    fill.forEach(function (q, i) { if (fillChecked[i] && !unitFillRight(q, fillAnswers[i])) c++; });
     return c;
   }
   // The sections this attempt can no longer pass, or null. Short answer is
@@ -725,58 +737,59 @@
   function needMC() { return Math.ceil(mc.length * PASS_RATIO); }
 
   function normalise(s) {
-    return " " + String(s || "").toLowerCase()
-      .replace(/[^a-z0-9áéíóúñü\s]/g, " ").replace(/\s+/g, " ") + " ";
+    return " " + String(s || "").toLowerCase().normalize("NFC")
+      .replace(/[^\p{L}\p{N}\s]/gu, " ").replace(/\s+/g, " ") + " ";
+  }
+  function keywordPass(ks, answer, minHits) {
+    if (!ks.length) return true; // unchanged for questions with no keywords
+    var a = normalise(answer), hits = 0;
+    ks.forEach(function (k) {
+      var forms = Array.isArray(k) ? k : [k];
+      if (forms.some(function (form) {
+        var needle = normalise(form).trim();
+        // Existing keywords include stems ("apôtr" matches "apôtres").
+        return needle && a.indexOf(needle) !== -1;
+      })) hits++;
+    });
+    return hits >= Math.min(minHits || SA_HIT_MIN, ks.length);
+  }
+  function shortAnswerRight(q, answer) {
+    var ks = q.keywords;
+    if (!ks || Array.isArray(ks)) return keywordPass(ks || [], answer, q.minHits);
+    var lists = Array.from(new Set([readerLang(), sourceLang()]))
+      .map(function (lang) { return ks[lang]; }).filter(Array.isArray);
+    // Missing translation keys must not make a required answer a free pass.
+    return lists.length > 0 && lists.some(function (list) {
+      return keywordPass(list, answer, q.minHits);
+    });
   }
   function gradeSA() {
-    var c = 0;
-    sa.forEach(function (q, i) {
-      var ks = q.keywords;
-      ks = Array.isArray(ks) ? ks : (ks ? (isEs() ? ks.es : ks.en) : []) || [];
-      if (!ks.length) { c++; return; }
-      var a = normalise(saAnswers[i]), hits = 0;
-      /* Two things matter here, and both were wrong at first:
-
-         1. A keyword must be normalised the same way as the answer. Matching a
-            raw keyword against a stripped answer scored zero for every keyword
-            carrying an apostrophe or accent -- which is most of them.
-         2. An entry may be a STRING or an ARRAY OF SYNONYMS. Some courses
-            write one concept per entry with several wordings for it; treating
-            that array as a single string never matched anything, so those
-            courses could not pass short answer at all. */
-      ks.forEach(function (k) {
-        var forms = Array.isArray(k) ? k : [k];
-        for (var f = 0; f < forms.length; f++) {
-          var needle = normalise(forms[f]).trim();
-          if (needle && a.indexOf(needle) !== -1) { hits++; return; }
-        }
-      });
-      /* A fixed number of matches, not a proportion of the list. Courses write
-         keyword lists of very different lengths -- some are a handful of
-         distinct concepts, others two dozen synonyms for one idea -- so a
-         percentage rule would grade them on wildly different standards. Three
-         matches is what the original engines required. */
-      var need = Math.min(q.minHits || SA_HIT_MIN, ks.length);
-      if (hits >= need) c++;
-    });
-    return c;
+    return sa.filter(function (q, i) { return shortAnswerRight(q, saAnswers[i]); }).length;
   }
   function needSA() { return Math.ceil(sa.length * PASS_RATIO); }
 
   /* A fill-in is right when the student's words, normalised, are exactly the
-     answer or one of the accepted alternatives -- in either language, since a
-     student reading both may answer in either. Exact, not "contains": typing
+     answer or one of the accepted alternatives in the requested languages. Exact, not "contains": typing
      every word in the lesson must not score. */
-  function fillRight(q, given) {
+  function fillRight(q, given, codes) {
     var a = bare(given);
     if (!a) return false;
     var acc = q.accept || {};
-    var forms = [q.answer && q.answer.en, q.answer && q.answer.es]
-      .concat(acc.en || [], acc.es || []);
+    codes = codes || ["en", "es"]; // compatibility for the standalone widget
+    var forms = [];
+    codes.forEach(function (lang) {
+      forms = forms.concat(q.answer && q.answer[lang], acc[lang] || []);
+    });
     for (var f = 0; f < forms.length; f++) {
       if (forms[f] && bare(forms[f]) === a) return true;
     }
     return false;
+  }
+  function unitFillRight(q, given) {
+    // Old pages accepted both EN/ES. Language pages declare sourceLang.
+    var codes = !U.sourceLang && ["en", "es"].includes(readerLang())
+      ? ["en", "es"] : Array.from(new Set([readerLang(), sourceLang()]));
+    return fillRight(q, given, codes);
   }
   /* The words compared, less one leading article on either side: a student
      who writes "a hypocrite" or "la gracia" for "hypocrite" or "gracia" has
@@ -789,14 +802,14 @@
   function fold(s) {
     s = String(s || "").toLowerCase();
     if (!s.normalize) return s;
-    return s.normalize("NFD").replace(/n\u0303/g, "\u00f1").replace(/[\u0300-\u036f]/g, "");
+    return s.normalize("NFD").replace(/n\u0303/g, "\u00f1").replace(/(\p{Script=Latin})[\u0300-\u036f]+/gu, "$1").normalize("NFC");
   }
   function bare(s) {
-    return normalise(fold(s)).trim().replace(/^(?:a|an|the|el|la|los|las|lo|un|una|unos|unas) (?=\S)/, "");
+    return normalise(fold(s)).trim().replace(/^(?:a|an|the|el|la|los|las|lo|un|una|unos|unas|le|les|l|une|des) (?=\S)/, "");
   }
   function gradeFill() {
     var c = 0;
-    fill.forEach(function (q, i) { if (fillRight(q, fillAnswers[i])) c++; });
+    fill.forEach(function (q, i) { if (unitFillRight(q, fillAnswers[i])) c++; });
     return c;
   }
   function needFill() { return Math.ceil(fill.length * PASS_RATIO); }
@@ -908,8 +921,8 @@
   }
   function mayGoOn() {
     if (unitPassed || testMode()) return true;
-    alert(isEs() ? "Por favor apruebe la Unidad " + U.unit + " primero."
-                 : "Please pass Unit " + U.unit + " first.");
+    alert(pick({ en: "Please pass Unit " + U.unit + " first.",
+                 es: "Por favor apruebe la Unidad " + U.unit + " primero." }));
     return false;
   }
 
@@ -994,7 +1007,7 @@
     controls: { submit: submitEl, reset: resetEl, result: resultEl, mc: mcHost, sa: saHost },
     // the grader itself, so tools/add-fill-ins.mjs's promise -- every drafted
     // answer passes -- can be checked against the page and not a copy
-    fillRight: fillRight,
+    fillRight: unitFillRight, shortAnswerRight: shortAnswerRight, normalise: normalise,
     policy: { passRatio: PASS_RATIO, lockMasters: LOCK_MASTERS_MIN, lockCert: LOCK_CERT_MIN }
   };
 
@@ -1039,13 +1052,13 @@
 
   function langNow() {
     if (document.body.classList.contains("lang-both")) return "both";
-    return isEs() ? "es" : "en";
+    return readerLang();
   }
 
   function applyLang(lang) {
-    lang = (lang === "es" || lang === "both") ? lang : "en";
+    lang = languages().includes(lang) || lang === "both" ? lang : sourceLang();
     var b = document.body;
-    b.classList.remove("lang-en", "lang-es", "lang-both");
+    languages().concat(["both"]).forEach(function (code) { b.classList.remove("lang-" + code); });
     b.classList.add("lang-" + lang);
     b.setAttribute("data-lang", lang);
     /* Tell the document what language it is actually in. The page is served
@@ -1083,11 +1096,11 @@
     if (!node || node.getAttribute("onclick")) return;
     node.addEventListener("click", function (e) {
       if (node.tagName === "A") e.preventDefault();
-      applyLang(lang || (isEs() ? "en" : "es"));
+      applyLang(lang || ((readerLang() === "es") ? "en" : "es"));
     });
   }
   define("setLang", applyLang);
-  define("toggleLang", function () { applyLang(isEs() ? "en" : "es"); });
+  define("toggleLang", function () { applyLang((readerLang() === "es") ? "en" : "es"); });
 
   define("setTrack", function (t) {
     var map = { masters: "mdiv", master: "mdiv", assoc: "ad", associate: "ad", mth: "thm" };

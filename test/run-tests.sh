@@ -201,6 +201,7 @@ curl -sf "http://127.0.0.1:$PORT/__scheduled?cron=0+15+*+*+*" >/dev/null && slee
 # A skip is reported loudly and names what went unverified: a quiet skip is how
 # a suite ends up proving nothing.
 if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{};p.chromium.launch(o).then(b=>b.close()).catch(()=>process.exit(1))" 2>/dev/null; then
+  node test/engine-languages.mjs
   SYNC_BASE="http://127.0.0.1:$PORT" node test/sync.test.mjs
   if [ -n "$HAVE_REFERENCE" ]; then
     node tools/verify-gating.mjs "http://127.0.0.1:$PORT" _reference-index.html
