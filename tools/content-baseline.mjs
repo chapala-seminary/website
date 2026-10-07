@@ -77,7 +77,7 @@ const MC_COUNT = { CTSPentecostal: 7, CTSCS: 10, 'CTSRE/1': 18 };
    copied, so a stored answer the page would mark wrong fails here. */
 const ENGINE = fs.readFileSync(path.join(ROOT, 'public', 'assets', 'js', 'cts-engine.js'), 'utf8');
 const engineFn = (name) => (new RegExp(`\\n  function ${name}\\([^)]*\\) \\{[\\s\\S]*?\\n  \\}`).exec(ENGINE) || [''])[0];
-const fillRight = new Function(`${engineFn('normalise')}\n${engineFn('fold')}\n${engineFn('bare')}\n${engineFn('fillRight')}\nreturn fillRight;`)();
+const fillRightFor = new Function(`${engineFn('normalise')}\n${engineFn('fold')}\n${engineFn('bare')}\n${engineFn('fillRight')}\nreturn fillRight;`);
 function graderProblems() {
   const out = [];
   const COLL = path.join(ROOT, 'src', 'content', 'units');
@@ -86,8 +86,11 @@ function graderProblems() {
     for (const file of fs.readdirSync(path.join(COLL, course)).filter((f) => f.endsWith('.json'))) {
       const U = JSON.parse(fs.readFileSync(path.join(COLL, course, file), 'utf8'));
       (U.fill || []).forEach((q, i) => {
-        const all = [q.answer.en, q.answer.es, ...((q.accept || {}).en || []), ...((q.accept || {}).es || [])];
-        for (const a of all) if (!fillRight(q, a)) out.push(`${course}/${U.unit}: fill-in ${i + 1}: the engine marks its own answer "${a}" wrong`);
+        for (const lang of Object.keys(q.answer)) {
+          const fillRight = fillRightFor();
+          const all = [q.answer[lang], ...((q.accept || {})[lang] || [])];
+          for (const a of all) if (!fillRight(q, a, [lang, U.sourceLang || 'en'])) out.push(`${course}/${U.unit}: fill-in ${i + 1} (${lang}): the engine marks its own answer "${a}" wrong`);
+        }
       });
     }
   return out;

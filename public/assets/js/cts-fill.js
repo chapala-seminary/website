@@ -32,20 +32,23 @@
   var PASS_RATIO = 0.9;
 
   function normalise(s) {
-    return " " + String(s || "").toLowerCase()
-      .replace(/[^a-z0-9áéíóúñü\s]/g, " ").replace(/\s+/g, " ") + " ";
+    return " " + String(s || "").toLowerCase().normalize("NFC")
+      .replace(/[^\p{L}\p{N}\s]/gu, " ").replace(/\s+/g, " ") + " ";
   }
 
   /* A fill-in is right when the student's words, normalised, are exactly the
      answer or one of the accepted alternatives -- in either language, since a
      student reading both may answer in either. Exact, not "contains": typing
      every word in the lesson must not score. */
-  function fillRight(q, given) {
+  function fillRight(q, given, codes) {
     var a = bare(given);
     if (!a) return false;
     var acc = q.accept || {};
-    var forms = [q.answer && q.answer.en, q.answer && q.answer.es]
-      .concat(acc.en || [], acc.es || []);
+    codes = codes || ["en", "es"]; // compatibility for the standalone widget
+    var forms = [];
+    codes.forEach(function (lang) {
+      forms = forms.concat(q.answer && q.answer[lang], acc[lang] || []);
+    });
     for (var f = 0; f < forms.length; f++) {
       if (forms[f] && bare(forms[f]) === a) return true;
     }
@@ -62,10 +65,10 @@
   function fold(s) {
     s = String(s || "").toLowerCase();
     if (!s.normalize) return s;
-    return s.normalize("NFD").replace(/n\u0303/g, "\u00f1").replace(/[\u0300-\u036f]/g, "");
+    return s.normalize("NFD").replace(/n\u0303/g, "\u00f1").replace(/(\p{Script=Latin})[\u0300-\u036f]+/gu, "$1").normalize("NFC");
   }
   function bare(s) {
-    return normalise(fold(s)).trim().replace(/^(?:a|an|the|el|la|los|las|lo|un|una|unos|unas) (?=\S)/, "");
+    return normalise(fold(s)).trim().replace(/^(?:a|an|the|el|la|los|las|lo|un|una|unos|unas|le|les|l|une|des) (?=\S)/, "");
   }
 
   function need(n) { return Math.ceil(n * PASS_RATIO); }
