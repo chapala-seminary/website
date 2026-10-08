@@ -29102,6 +29102,51 @@ collections:
         label_singular: Question
         summary: "{{fields.stem.en}}"
         fields:
+          - label: Translation status
+            name: tr
+            widget: object
+            required: false
+            collapsed: true
+            hint: "After correcting a translation or its answer keys, mark it as human or machine-edited. Source hashes are carried through unchanged; stale work still needs source review."
+            fields:
+              - label: English
+                name: en
+                widget: object
+                required: false
+                fields:
+                  - label: Written by
+                    name: status
+                    widget: select
+                    required: false
+                    options:
+                      - label: A person
+                        value: human
+                      - label: Translated automatically
+                        value: machine
+                      - label: "Automatic, then corrected"
+                        value: machine-edited
+                  - label: Source hash
+                    name: from
+                    widget: hidden
+              - label: Spanish
+                name: es
+                widget: object
+                required: false
+                fields:
+                  - label: Written by
+                    name: status
+                    widget: select
+                    required: false
+                    options:
+                      - label: A person
+                        value: human
+                      - label: Translated automatically
+                        value: machine
+                      - label: "Automatic, then corrected"
+                        value: machine-edited
+                  - label: Source hash
+                    name: from
+                    widget: hidden
           - label: Question
             name: stem
             widget: object
@@ -29152,6 +29197,51 @@ collections:
         label_singular: Question
         summary: "{{fields.prompt.en}}"
         fields:
+          - label: Translation status
+            name: tr
+            widget: object
+            required: false
+            collapsed: true
+            hint: "After correcting a translation or its answer keys, mark it as human or machine-edited. Source hashes are carried through unchanged; stale work still needs source review."
+            fields:
+              - label: English
+                name: en
+                widget: object
+                required: false
+                fields:
+                  - label: Written by
+                    name: status
+                    widget: select
+                    required: false
+                    options:
+                      - label: A person
+                        value: human
+                      - label: Translated automatically
+                        value: machine
+                      - label: "Automatic, then corrected"
+                        value: machine-edited
+                  - label: Source hash
+                    name: from
+                    widget: hidden
+              - label: Spanish
+                name: es
+                widget: object
+                required: false
+                fields:
+                  - label: Written by
+                    name: status
+                    widget: select
+                    required: false
+                    options:
+                      - label: A person
+                        value: human
+                      - label: Translated automatically
+                        value: machine
+                      - label: "Automatic, then corrected"
+                        value: machine-edited
+                  - label: Source hash
+                    name: from
+                    widget: hidden
           - label: Question
             name: prompt
             widget: object
@@ -29191,6 +29281,51 @@ collections:
         summary: "{{fields.prompt.en}}"
         hint: "Write the gap as four underscores: ____ (one gap per sentence)."
         fields:
+          - label: Translation status
+            name: tr
+            widget: object
+            required: false
+            collapsed: true
+            hint: "After correcting a translation or its answer keys, mark it as human or machine-edited. Source hashes are carried through unchanged; stale work still needs source review."
+            fields:
+              - label: English
+                name: en
+                widget: object
+                required: false
+                fields:
+                  - label: Written by
+                    name: status
+                    widget: select
+                    required: false
+                    options:
+                      - label: A person
+                        value: human
+                      - label: Translated automatically
+                        value: machine
+                      - label: "Automatic, then corrected"
+                        value: machine-edited
+                  - label: Source hash
+                    name: from
+                    widget: hidden
+              - label: Spanish
+                name: es
+                widget: object
+                required: false
+                fields:
+                  - label: Written by
+                    name: status
+                    widget: select
+                    required: false
+                    options:
+                      - label: A person
+                        value: human
+                      - label: Translated automatically
+                        value: machine
+                      - label: "Automatic, then corrected"
+                        value: machine-edited
+                  - label: Source hash
+                    name: from
+                    widget: hidden
           - label: Sentence with a gap
             name: prompt
             widget: object

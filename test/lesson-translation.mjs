@@ -18,7 +18,13 @@ const root = fs.mkdtempSync(path.join(os.tmpdir(), 'cts-tr-'));
 const dir = path.join(root, 'src/content/lessons/CTSTest');
 fs.mkdirSync(dir, { recursive: true });
 fs.cpSync('src/lib', path.join(root, 'src/lib'), { recursive: true });
-fs.cpSync('tools/translate-lesson.mjs', path.join(root, 'tools/translate-lesson.mjs'));
+fs.mkdirSync(path.join(root, 'tools'), { recursive: true });
+for (const tool of ['translate-lesson.mjs', 'translation-plan.mjs']) fs.cpSync('tools/' + tool, path.join(root, 'tools', tool));
+const unitDir = path.join(root, 'src/content/units/CTSTest');
+fs.mkdirSync(unitDir, { recursive: true });
+const exam = () => ({unit:1, mc:[{stem:{en:'Who?',es:'¿Quién?'}, options:{en:['Adam','Noah'],es:['Adán','Noé']}, answer:0,why:{en:'First man',es:'Primer hombre'}}], fill:[{prompt:{en:'The first man was ____.',es:'El primer hombre fue ____.'},answer:{en:'Adam',es:'Adán'},accept:{en:['the man'],es:['el hombre']}}], sa:[{prompt:{en:'Explain.',es:'Explique.'},keywords:{en:[['creation','created'],'God'],es:[['creación','creado'],'Dios']},model:{en:'God created.',es:'Dios creó.'}}]});
+const saveExam = (u=exam()) => fs.writeFileSync(path.join(unitDir,'1.json'),JSON.stringify(u));
+saveExam();
 fs.cpSync('node_modules', path.join(root, 'node_modules'), { recursive: true, dereference: false });
 
 let failed = 0;
@@ -79,15 +85,46 @@ console.log('editing the source makes exactly that block stale');
   ok(JSON.stringify(stale) === '[false,true,false]', 'one block is stale, the other two are not');
 
   const out = run('--lang', 'es');
-  ok(/1 block\(s\) translated/.test(out), 'only the stale block is translated');
-  ok(/a human translation is stale and will be replaced/.test(out),
-     'replacing a person\'s work is announced, not done quietly');
+  ok(/human needs review; preserved/.test(out), 'stale human translation is reported for review');
   const after = load();
-  ok(after.blocks[0].text.es === 'El primer párrafo.', 'the untouched block keeps its human translation');
-  ok(after.blocks[1].tr.es.status === 'machine', 'the stale block is now machine');
-  ok(after.blocks[1].tr.es.from === hash('The second paragraph, rewritten.'),
-     'and is stamped with the source it was actually made from');
-  ok(!isStale(after.blocks[1], 'es', 'en'), 'so it is no longer stale');
+  ok(after.blocks[1].text.es === l.blocks[1].text.es, 'stale human wording is preserved');
+  ok(after.blocks[1].tr.es.status === 'human', 'reviewed status is preserved');
+  ok(isStale(after.blocks[1], 'es', 'en'), 'staleness remains visible until human review');
+}
+
+console.log('lesson and all exam fields travel together without losing answer structure');
+{
+  save(base()); saveExam(); run('--lang','fr');
+  const u=JSON.parse(fs.readFileSync(path.join(unitDir,'1.json')));
+  ok(u.mc[0].answer===0 && u.mc[0].options.fr.length===2, 'MC answer index and option order survive');
+  ok(u.fill[0].prompt.fr.includes('____') && u.fill[0].accept.fr.length===1, 'fill prompt, answer and alternates translated together');
+  ok(Array.isArray(u.sa[0].keywords.fr[0]) && u.sa[0].model.fr, 'keyword synonym groups and models survive');
+  for (const section of ['mc','fill','sa']) ok(u[section][0].tr.fr.status==='machine', section+' provenance recorded');
+  u.mc[0].tr.fr.status='human';u.mc[0].answer=1;saveExam(u);
+  ok(/mc 1: human needs review; preserved/.test(run('--lang','fr')),'shared MC key changes flag the reviewed translation for review');
+  const before=fs.readFileSync(path.join(unitDir,'1.json'),'utf8');run('--lang','fr');
+  ok(fs.readFileSync(path.join(unitDir,'1.json'),'utf8')===before,'second pass is idempotent');
+  u.fill[0].tr.fr.status='machine-edited';u.fill[0].prompt.en='A changed ____ prompt.';saveExam(u);
+  const protectedBefore=JSON.stringify(u.fill[0]);run('--lang','fr');
+  ok(JSON.stringify(JSON.parse(fs.readFileSync(path.join(unitDir,'1.json'))).fill[0])===protectedBefore,'stale edited question and its keys stay intact');
+  const l=base();l.blocks[2].text.en='Changed source';save(l);run('--lang','es');
+  ok(load().blocks[2].text.es===l.blocks[2].text.es,'stale machine-edited lesson stays intact');
+  saveExam();
+}
+
+console.log('stale machine work refreshes and unmarked work stays safe');
+{
+  save(base());saveExam();run('--lang','fr');
+  const l=load();l.blocks[0].text.en='An updated paragraph.';l.blocks[1].text.fr='Unmarked correction';delete l.blocks[1].tr.fr;save(l);
+  run('--lang','fr');
+  ok(load().blocks[0].text.fr==='[en->fr] An updated paragraph.','stale machine block refreshes');
+  ok(load().blocks[1].text.fr==='Unmarked correction','unmarked existing text is preserved');
+  const before=fs.readFileSync(path.join(dir,'1.json'),'utf8');
+  const second=base();second.unit=2;fs.writeFileSync(path.join(dir,'2.json'),JSON.stringify(second));
+  let rejected=false;try {run('--lang','de');} catch {rejected=true;}
+  ok(rejected,'missing exam file rejects the selected batch');
+  ok(fs.readFileSync(path.join(dir,'1.json'),'utf8')===before,'earlier unit is not partially written after a later failure');
+  fs.unlinkSync(path.join(dir,'2.json'));saveExam();
 }
 
 console.log('a dry run writes nothing');

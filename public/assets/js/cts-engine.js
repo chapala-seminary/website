@@ -108,7 +108,7 @@
      to a Unit 13 that does not exist. */
   function nextWhere() {
     var m = /Unit(\d+)\.html$/.exec(U.nextHref || "");
-    return m ? { en: "Unit " + m[1], es: "Unidad " + m[1] } : { en: "the Certificate", es: "el Certificado" };
+    return m ? { en: "Unit " + m[1], es: "Unidad " + m[1], fr: "Unité " + m[1] } : { en: "the Certificate", es: "el Certificado", fr: "le certificat" };
   }
   /* Associate of Divinity students study at certificate rigor (cts_track
      stays "cert", so their lockout is the certificate one) but record the
@@ -465,22 +465,22 @@
     var tbReading = tbHold && U.completion.textbookKind === "reading";
     var go = tbHold ? { href: U.completion.textbookPage + "Test.html",
                         en: tbReading ? "Take the required-reading test" : "Take the textbook test",
-                        es: tbReading ? "Presentar el examen de lecturas requeridas" : "Presentar el examen del libro" }
-      : all && cert ? { href: cert, en: "Go to your course certificate", es: "Ir a su certificado del curso" }
-      : nextIsUnit ? { href: U.nextHref, en: "Go to " + nextWhere().en, es: "Ir a la " + nextWhere().es }
-      : cert ? { href: cert, en: "See your progress in this course", es: "Ver su progreso en este curso" } : null;
+                        es: tbReading ? "Presentar el examen de lecturas requeridas" : "Presentar el examen del libro", fr: tbReading ? "Passer le test des lectures obligatoires" : "Passer le test du manuel" }
+      : all && cert ? { href: cert, en: "Go to your course certificate", es: "Ir a su certificado del curso", fr: "Accéder au certificat du cours" }
+      : nextIsUnit ? { href: U.nextHref, en: "Go to " + nextWhere().en, es: "Ir a la " + nextWhere().es, fr: "Aller à " + nextWhere().fr }
+      : cert ? { href: cert, en: "See your progress in this course", es: "Ver su progreso en este curso", fr: "Voir votre progression dans ce cours" } : null;
     var h = '<div class="cts-passed" role="status">' +
-      '<p class="cts-passed-title">&#10003; ' + bi({ en: "Unit " + U.unit + " passed", es: "Unidad " + U.unit + " aprobada" }) + "</p>" +
+      '<p class="cts-passed-title">&#10003; ' + bi({ en: "Unit " + U.unit + " passed", es: "Unidad " + U.unit + " aprobada", fr: "Unité " + U.unit + " réussie" }) + "</p>" +
       "<p>" + bi({ en: "It is saved to your progress" + (total ? ": " + n + " of " + total + " units of this course passed." : "."),
-                   es: "Quedó guardada en su progreso" + (total ? ": " + n + " de " + total + " unidades de este curso aprobadas." : ".") }) + "</p>";
+                   es: "Quedó guardada en su progreso" + (total ? ": " + n + " de " + total + " unidades de este curso aprobadas." : "."), fr: "Votre progression est enregistrée" + (total ? " : " + n + " unités réussies sur " + total + "." : ".") }) + "</p>";
     if (tbHold) h += "<p>" + bi(tbReading
       ? { en: "On the M.Div. and Th.M. tracks the course is complete when the required-reading test is passed as well.",
-          es: "En los trayectos M.Div. y Th.M. el curso se completa cuando también se aprueba el examen de lecturas requeridas." }
+          es: "En los trayectos M.Div. y Th.M. el curso se completa cuando también se aprueba el examen de lecturas requeridas.", fr: "Pour les parcours M.Div. et Th.M., il faut aussi réussir le test des lectures obligatoires pour terminer le cours." }
       : { en: "On the M.Div. and Th.M. tracks the course is complete when the textbook test is passed as well.",
-          es: "En los trayectos M.Div. y Th.M. el curso se completa cuando también se aprueba el examen del libro de texto." }) + "</p>";
-    if (go) h += '<a class="btn solid" href="' + attr(go.href) + '">' + bi({ en: go.en, es: go.es }) + " &rarr;</a>";
+          es: "En los trayectos M.Div. y Th.M. el curso se completa cuando también se aprueba el examen del libro de texto.", fr: "Pour les parcours M.Div. et Th.M., il faut aussi réussir le test du manuel pour terminer le cours." }) + "</p>";
+    if (go) h += '<a class="btn solid" href="' + attr(go.href) + '">' + bi({ en: go.en, es: go.es, fr: go.fr }) + " &rarr;</a>";
     if (cert && go && go.href !== cert)
-      h += ' <a class="btn" href="' + attr(cert) + '">' + bi({ en: "Progress in this course", es: "Progreso en este curso" }) + "</a>";
+      h += ' <a class="btn" href="' + attr(cert) + '">' + bi({ en: "Progress in this course", es: "Progreso en este curso", fr: "Progression dans ce cours" }) + "</a>";
     return h + "</div>";
   }
   function renderPassedBanner() {
@@ -498,10 +498,11 @@
     if (!s || !s.name) { g.textContent = ""; return; }
     var names = pick({
       en: { cert: "Certificate of Ministry", ad: "Associate of Divinity", mdiv: "M.Div.", thm: "Th.M.", mth: "Th.M." },
-      es: { cert: "Certificado de Ministerio", ad: "Asociado en Divinidad", mdiv: "M.Div.", thm: "Th.M.", mth: "Th.M." }
+      es: { cert: "Certificado de Ministerio", ad: "Asociado en Divinidad", mdiv: "M.Div.", thm: "Th.M.", mth: "Th.M." },
+      fr: { cert: "Certificat de ministère", ad: "Diplôme associé en théologie", mdiv: "M.Div.", thm: "Th.M.", mth: "Th.M." }
     });
     var label = names[track()] || names.cert;
-    g.textContent = pick({ en: "Welcome, ", es: "Bienvenido, " }) + s.name + " — " + label;
+    g.textContent = pick({ en: "Welcome, ", es: "Bienvenido, ", fr: "Bienvenue, " }) + s.name + " — " + label;
   }
 
   function renderQuestions() {
@@ -512,7 +513,7 @@
     var reveal = revealAnswers(), out = "", outSa = "";
 
     if (mc.length) {
-      if (!split) out += "<h3>" + bi({ en: "Multiple Choice", es: "Opción Múltiple" }) + "</h3>";
+      if (!split) out += "<h3>" + bi({ en: "Multiple Choice", es: "Opción Múltiple", fr: "Questions à choix multiple" }) + "</h3>";
       mc.forEach(function (q, i) {
         out += '<div class="question" data-mc="' + i + '">';
         out += '<p style="font-weight:bold;">' + (i + 1) + ". " + bi(q.stem || q.text || q.prompt) + "</p>";
@@ -534,9 +535,9 @@
         });
         if (answered) {
           out += chosen === right
-            ? '<div class="feedback-text correct">' + bi({ en: "&#10003; Correct!", es: "&#10003; ¡Correcto!" }) + "</div>"
+            ? '<div class="feedback-text correct">' + bi({ en: "&#10003; Correct!", es: "&#10003; ¡Correcto!", fr: "&#10003; Correct !" }) + "</div>"
             : '<div class="feedback-text incorrect">' + bi({ en: "&#10007; Incorrect. Correct answer: " + LETTERS(right),
-                                                            es: "&#10007; Incorrecto. Respuesta correcta: " + LETTERS(right) }) + "</div>";
+                                                            es: "&#10007; Incorrecto. Respuesta correcta: " + LETTERS(right), fr: "&#10007; Incorrect. Bonne réponse : " + LETTERS(right) }) + "</div>";
           if (q.why) out += '<div class="feedback">' + bi(q.why) + "</div>";
         }
         out += "</div>";
@@ -550,12 +551,12 @@
       var counts = fillCounts();
       var locked = !!(lockRemaining(KEY.saLock) || lockRemaining(KEY.fullLock));
       if (fillReview && !locked) fillReview = null;          // the lock is over: start again
-      out += "<h3>" + bi({ en: "Fill in the Blank", es: "Complete el espacio en blanco" }) + "</h3>";
+      out += "<h3>" + bi({ en: "Fill in the Blank", es: "Complete el espacio en blanco", fr: "Texte à compléter" }) + "</h3>";
       out += '<p class="small">' + (counts
         ? bi({ en: "Type the missing word or phrase and press Check (or Enter) to see at once whether it is right. You need " + needFill() + " of " + fill.length + " to pass.",
-               es: "Escriba la palabra o frase que falta y pulse Comprobar (o Intro) para ver en seguida si es correcta. Necesita " + needFill() + " de " + fill.length + " para aprobar." })
+               es: "Escriba la palabra o frase que falta y pulse Comprobar (o Intro) para ver en seguida si es correcta. Necesita " + needFill() + " de " + fill.length + " para aprobar.", fr: "Saisissez le mot ou la phrase qui manque et appuyez sur Vérifier (ou Entrée). Il faut " + needFill() + " bonnes réponses sur " + fill.length + " pour réussir." })
         : bi({ en: "For your own review: these do not count on the Certificate track. Press Check (or Enter) to see whether your answer is right.",
-               es: "Para su propio repaso: no cuentan en el trayecto de Certificado. Pulse Comprobar (o Intro) para ver si su respuesta es correcta." })) + "</p>";
+               es: "Para su propio repaso: no cuentan en el trayecto de Certificado. Pulse Comprobar (o Intro) para ver si su respuesta es correcta.", fr: "Pour vous exercer : ces questions ne comptent pas pour le certificat. Appuyez sur Vérifier (ou Entrée) pour vérifier votre réponse." })) + "</p>";
       fill.forEach(function (q, i) {
         var num = i + 1;
         var given = fillReview ? fillReview[i] : fillAnswers[i];
@@ -563,20 +564,20 @@
         out += '<div class="question" data-fill="' + i + '">';
         out += '<p style="font-weight:bold;">' + num + ". " + bi(q.prompt) + "</p>";
         out += '<input type="text" data-fill="' + i + '" autocomplete="off" autocapitalize="off" spellcheck="false"' +
-               ' aria-label="' + pick({ en: "Answer ", es: "Respuesta " }) + num + '"' +
+               ' aria-label="' + pick({ en: "Answer ", es: "Respuesta ", fr: "Réponse " }) + num + '"' +
                ((done || locked) ? " disabled" : "") +
                ' style="width:100%;max-width:24em;" value="' + attr(given) + '" />';
         if (!done && !locked) {
           out += ' <button type="button" class="btn" data-fill-check="' + i + '">' +
-                 bi({ en: "Check", es: "Comprobar" }) + "</button>";
+                 bi({ en: "Check", es: "Comprobar", fr: "Vérifier" }) + "</button>";
         }
         if (done) {
           var right = unitFillRight(q, given);
           out += right
-            ? '<div class="feedback-text correct">' + bi({ en: "&#10003; Correct!", es: "&#10003; ¡Correcto!" }) + "</div>"
+            ? '<div class="feedback-text correct">' + bi({ en: "&#10003; Correct!", es: "&#10003; ¡Correcto!", fr: "&#10003; Correct !" }) + "</div>"
             : '<div class="feedback-text incorrect">' +
               bi({ en: (String(given || "").trim() ? "&#10007; Incorrect. " : "") + "Answer: " + attr(q.answer.en),
-                   es: (String(given || "").trim() ? "&#10007; Incorrecto. " : "") + "Respuesta: " + attr(q.answer.es) }) + "</div>";
+                   es: (String(given || "").trim() ? "&#10007; Incorrecto. " : "") + "Respuesta: " + attr(q.answer.es), fr: (String(given || "").trim() ? "&#10007; Incorrect. " : "") + "Réponse : " + attr(q.answer.fr || q.answer[sourceLang()] || q.answer.en) }) + "</div>";
         }
         out += "</div>";
       });
@@ -585,7 +586,7 @@
     if (sa.length) {
       var target = split ? "outSa" : "out";
       var block = "";
-      if (!split) block += "<h3>" + bi({ en: "Short Answer", es: "Respuesta Corta" }) + "</h3>";
+      if (!split) block += "<h3>" + bi({ en: "Short Answer", es: "Respuesta Corta", fr: "Réponse courte" }) + "</h3>";
       sa.forEach(function (q, i) {
         block += '<div class="question" data-sa="' + i + '">';
         block += '<p style="font-weight:bold;">' + (i + 1) + ". " + bi(q.prompt || q.stem) + "</p>";
@@ -596,7 +597,7 @@
             ? '<div class="model-answer">' + bi(q.model) + "</div>"
             : '<p class="small model-wait">' + bi({
                 en: "Write your own answer — a few sentences — and check again to see the model answer.",
-                es: "Escriba su propia respuesta — unas cuantas oraciones — y revise de nuevo para ver la respuesta modelo." }) + "</p>";
+                es: "Escriba su propia respuesta — unas cuantas oraciones — y revise de nuevo para ver la respuesta modelo.", fr: "Rédigez votre propre réponse en quelques phrases, puis vérifiez à nouveau pour voir la réponse modèle." }) + "</p>";
         }
         block += "</div>";
       });
@@ -690,29 +691,31 @@
   // only known on submit, so it is not judged here.
   function cannotPass() {
     if (unitPassed || graded || lockedMinutes()) return null;
-    var en = [], es = [];
+    var en = [], es = [], fr = [];
     if (!mcPassed && mc.length && wrongMC() > mc.length - needMC()) {
       en.push("multiple choice: " + wrongMC() + " wrong, and " + needMC() + " of " + mc.length + " are needed");
       es.push("opción múltiple: " + wrongMC() + " incorrectas, y se necesitan " + needMC() + " de " + mc.length);
+      fr.push("choix multiple: " + wrongMC() + " incorrectes ; il faut " + needMC() + " sur " + mc.length);
     }
     if (fillCounts() && !fillReview && fill.length && wrongFill() > fill.length - needFill()) {
       en.push("fill in the blank: " + wrongFill() + " wrong, and " + needFill() + " of " + fill.length + " are needed");
       es.push("complete el espacio: " + wrongFill() + " incorrectas, y se necesitan " + needFill() + " de " + fill.length);
+      fr.push("texte à compléter: " + wrongFill() + " incorrectes ; il faut " + needFill() + " sur " + fill.length);
     }
-    return en.length ? { en: en.join("; "), es: es.join("; ") } : null;
+    return en.length ? { en: en.join("; "), es: es.join("; "), fr: fr.join("; ") } : null;
   }
   function lockMessage() {
     var m = lockedMinutes();
     if (!m) return null;
     return lockRemaining(KEY.fullLock)
       ? { en: "Your last attempt did not pass. The exam opens again in " + m + " minute(s), with every question empty. Review the lesson in the meantime.",
-          es: "Su último intento no aprobó. El examen se abre de nuevo en " + m + " minuto(s), con todas las preguntas vacías. Mientras tanto, repase la lección." }
+          es: "Su último intento no aprobó. El examen se abre de nuevo en " + m + " minuto(s), con todas las preguntas vacías. Mientras tanto, repase la lección.", fr: "Votre dernier essai a échoué. Le test sera de nouveau disponible dans " + m + " minute(s), avec les réponses effacées. Révisez la leçon en attendant." }
       : { en: "Your last attempt did not pass. Your multiple choice is passed and kept; the fill-in and short-answer part opens again in " + m + " minute(s). Review the lesson in the meantime.",
-          es: "Su último intento no aprobó. Su opción múltiple está aprobada y se conserva; la parte de completar y respuesta corta se abre de nuevo en " + m + " minuto(s). Mientras tanto, repase la lección." };
+          es: "Su último intento no aprobó. Su opción múltiple está aprobada y se conserva; la parte de completar y respuesta corta se abre de nuevo en " + m + " minuto(s). Mientras tanto, repase la lección.", fr: "Votre dernier essai a échoué. Votre réussite au choix multiple est conservée. La partie écrite sera de nouveau disponible dans " + m + " minute(s). Révisez la leçon en attendant." };
   }
   function cannotPassMessage(c) {
     return { en: "This attempt cannot pass now (" + c.en + "). You may finish the questions for practice. Then press Submit to record the attempt: after a " + lockMinutes() + "-minute wait the exam opens again, empty, and you can retake it.",
-             es: "Este intento ya no puede aprobar (" + c.es + "). Puede terminar las preguntas como práctica. Luego pulse Enviar para registrar el intento: después de una espera de " + lockMinutes() + " minuto(s) el examen se abre de nuevo, vacío, y puede volver a presentarlo." };
+             es: "Este intento ya no puede aprobar (" + c.es + "). Puede terminar las preguntas como práctica. Luego pulse Enviar para registrar el intento: después de una espera de " + lockMinutes() + " minuto(s) el examen se abre de nuevo, vacío, y puede volver a presentarlo.", fr: "Cet essai ne peut plus réussir (" + c.fr + "). Vous pouvez terminer les questions pour vous exercer. Appuyez ensuite sur Envoyer pour enregistrer cet essai. Après " + lockMinutes() + " minute(s), le test sera de nouveau disponible avec les réponses effacées." };
   }
   function notice(msg) {
     return '<p class="cts-exam-status" style="margin:0 0 16px;padding:12px 16px;border-left:4px solid #8a1f1f;background:rgba(138,31,31,.06);color:#8a1f1f;font-weight:600;">' + bi(msg) + "</p>";
@@ -838,7 +841,7 @@
     if (full || saOnly) {
       var m = full || saOnly;
       say(bi({ en: "Locked. Review the lesson and try again in " + m + " minute(s).",
-               es: "Bloqueado. Repase la lección e inténtelo de nuevo en " + m + " minuto(s)." }), "#8a1f1f");
+               es: "Bloqueado. Repase la lección e inténtelo de nuevo en " + m + " minuto(s).", fr: "Test bloqué. Révisez la leçon et réessayez dans " + m + " minute(s)." }), "#8a1f1f");
       return;
     }
 
@@ -875,16 +878,19 @@
       applyLock(mcOK ? KEY.saLock : KEY.fullLock);
       var mins = lockMinutes();
       // Name every section that fell short, so the student knows what to retry.
-      var en = [], es = [];
+      var en = [], es = [], fr = [];
       if (!mcOK) { en.push("multiple choice " + gradeMC() + "/" + mc.length + ", need " + needMC());
-                   es.push("opción múltiple " + gradeMC() + "/" + mc.length + ", necesita " + needMC()); }
+                   es.push("opción múltiple " + gradeMC() + "/" + mc.length + ", necesita " + needMC());
+                   fr.push("choix multiple " + gradeMC() + "/" + mc.length + ", requis " + needMC()); }
       if (!fillOK) { en.push("fill in the blank " + fillScore + "/" + fill.length + ", need " + needFill());
-                     es.push("complete el espacio " + fillScore + "/" + fill.length + ", necesita " + needFill()); }
+                     es.push("complete el espacio " + fillScore + "/" + fill.length + ", necesita " + needFill());
+                     fr.push("texte à compléter " + fillScore + "/" + fill.length + ", requis " + needFill()); }
       if (!saOK) { en.push("short answer " + gradeSA() + "/" + sa.length + ", need " + needSA());
-                   es.push("respuesta corta " + gradeSA() + "/" + sa.length + ", necesita " + needSA()); }
-      var part = { en: " — " + en.join("; "), es: " — " + es.join("; ") };
+                   es.push("respuesta corta " + gradeSA() + "/" + sa.length + ", necesita " + needSA());
+                   fr.push("réponse courte " + gradeSA() + "/" + sa.length + ", requis " + needSA()); }
+      var part = { en: " — " + en.join("; "), es: " — " + es.join("; "), fr: " — " + fr.join("; ") };
       say(bi({ en: "Not yet" + part.en + ". Review the lesson and try again in " + mins + " minute(s).",
-               es: "Aún no" + part.es + ". Repase la lección e inténtelo de nuevo en " + mins + " minuto(s)." }), "#8a1f1f");
+               es: "Aún no" + part.es + ". Repase la lección e inténtelo de nuevo en " + mins + " minuto(s).", fr: "Pas encore réussi" + part.fr + ". Révisez la leçon et réessayez dans " + mins + " minute(s)." }), "#8a1f1f");
       redrawAtUnlock();
     }
     renderQuestions();
@@ -933,7 +939,7 @@
   function mayGoOn() {
     if (unitPassed || testMode()) return true;
     alert(pick({ en: "Please pass Unit " + U.unit + " first.",
-                 es: "Por favor apruebe la Unidad " + U.unit + " primero." }));
+                 es: "Por favor apruebe la Unidad " + U.unit + " primero.", fr: "Veuillez réussir l’unité " + U.unit + " d’abord." }));
     return false;
   }
 

@@ -61,7 +61,7 @@ for (const file of files) {
       const rendered = root.querySelectorAll(`[data-cts-block="${b.id}"]`);
       ok(rendered.length === 1, `${route}: block ${b.id} appears ${rendered.length} times`);
       const reading = rendered[0]?.querySelectorAll('.cts-reading').map(el=>el.innerHTML).join('') || '';
-      ok(words(reading) === words(retained.get(b.id + ':' + (b.text[lang] ? lang : lesson.sourceLang))), `${route}: block ${b.id} reader words differ`);
+      ok(words(reading) === words((retained.get(b.id + ':' + (b.text[lang] ? lang : lesson.sourceLang)) ?? b.text[lang] ?? b.text[lesson.sourceLang])), `${route}: block ${b.id} reader words differ`);
       if (lang !== lesson.sourceLang && b.text[lang] && b.text[lesson.sourceLang])
         ok(words(rendered[0]?.querySelectorAll('.cts-source').map(el=>el.innerHTML).join('') || root.querySelector(`[data-cts-source-block="${b.id}"]`)?.innerHTML) === words(retained.get(b.id + ':' + lesson.sourceLang)), `${route}: block ${b.id} source words differ`);
     }

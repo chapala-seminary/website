@@ -143,16 +143,18 @@ const lessonCollection = (course, langs) => ({
 /* The questions. Most of these fields are plumbing -- which page follows which,
    what the body class is -- and a teacher must neither see them nor lose them.
    Hidden carries them through untouched. */
-const bilingual = (label, widget = 'string') => ({
+const bilingual = (label, widget = 'string', langs = ['en', 'es']) => ({
   label, name: undefined, widget: 'object',
-  fields: [
-    { label: 'English', name: 'en', widget },
-    { label: 'Spanish', name: 'es', widget },
-  ],
+  fields: langs.map(l => ({ label: langLabel(l), name: l, widget, ...(l !== 'en' && l !== 'es' ? { required: false } : {}) })),
 });
-const named = (name, label, widget) => ({ ...bilingual(label, widget), name });
+const named = (name, label, widget, langs) => ({ ...bilingual(label, widget, langs), name });
 
-const unitsCollection = () => ({
+const questionReview = langs => ({
+  ...blockTypes(langs)[0].fields.find(field => field.name === 'tr'),
+  hint: 'After correcting a translation or its answer keys, mark it as human or machine-edited. Source hashes are carried through unchanged; stale work still needs source review.',
+});
+
+const unitsCollection = (langs) => ({
   name: 'units',
   label: 'Exam questions',
   label_singular: 'Unit',
@@ -180,20 +182,21 @@ const unitsCollection = () => ({
     { label: 'Multiple choice', name: 'mc', widget: 'list', label_singular: 'Question',
       summary: '{{fields.stem.en}}',
       fields: [
-        named('stem', 'Question', 'text'),
+        questionReview(langs),
+        named('stem', 'Question', 'text', langs),
         { label: 'Options', name: 'options', widget: 'object', fields: [
-          { label: 'English', name: 'en', widget: 'list', field: { label: 'Option', name: 'option', widget: 'string' } },
-          { label: 'Spanish', name: 'es', widget: 'list', field: { label: 'Option', name: 'option', widget: 'string' } },
+          ...langs.map(l => ({ label: langLabel(l), name: l, widget: 'list', ...(l !== 'en' && l !== 'es' ? { required: false } : {}), field: { label: 'Option', name: 'option', widget: 'string' } })),
         ] },
         { label: 'Correct option (0 = the first)', name: 'answer', widget: 'number', value_type: 'int', min: 0 },
-        { ...named('why', 'Explanation', 'text'), required: false },
+        { ...named('why', 'Explanation', 'text', langs), required: false },
       ] },
     { label: 'Short answer', name: 'sa', widget: 'list', label_singular: 'Question',
       summary: '{{fields.prompt.en}}',
       fields: [
-        named('prompt', 'Question', 'text'),
+        questionReview(langs),
+        named('prompt', 'Question', 'text', langs),
         { label: 'Keywords', name: 'keywords', widget: 'hidden', required: false },
-        { ...named('model', 'Model answer', 'text'), required: false },
+        { ...named('model', 'Model answer', 'text', langs), required: false },
         { label: 'Keywords needed to pass', name: 'minHits', widget: 'number', value_type: 'int', min: 1, required: false },
       ] },
     /* Ten per unit where present (the build refuses any other number), so
@@ -203,14 +206,14 @@ const unitsCollection = () => ({
       summary: '{{fields.prompt.en}}',
       hint: 'Write the gap as four underscores: ____ (one gap per sentence).',
       fields: [
-        named('prompt', 'Sentence with a gap', 'text'),
-        named('answer', 'Answer', 'string'),
+        questionReview(langs),
+        named('prompt', 'Sentence with a gap', 'text', langs),
+        named('answer', 'Answer', 'string', langs),
         { label: 'Other accepted answers', name: 'accept', widget: 'object', required: false,
           collapsed: true,
           hint: 'Other wordings that are also right. Capitals and punctuation are already ignored, so they need no entry here.',
           fields: [
-            { label: 'English', name: 'en', widget: 'list', required: false, field: { label: 'Answer', name: 'answer', widget: 'string' } },
-            { label: 'Spanish', name: 'es', widget: 'list', required: false, field: { label: 'Answer', name: 'answer', widget: 'string' } },
+            ...langs.map(l => ({ label: langLabel(l), name: l, widget: 'list', required: false, field: { label: 'Answer', name: 'answer', widget: 'string' } })),
           ] },
       ] },
   ],
@@ -244,8 +247,8 @@ const converted = fs.existsSync(LESSONS)
 
 /* A course's languages come from its own lessons, not from a list here. */
 const langsOf = (course) => {
-  const f = fs.readdirSync(path.join(LESSONS, course)).find((f) => /^\d+\.json$/.test(f));
-  return JSON.parse(fs.readFileSync(path.join(LESSONS, course, f), 'utf8')).langs;
+  const files = fs.readdirSync(path.join(LESSONS, course)).filter(f => /^\d+\.json$/.test(f));
+  return [...new Set(files.flatMap(f => JSON.parse(fs.readFileSync(path.join(LESSONS, course, f), 'utf8')).langs))];
 };
 
 const config = {
@@ -265,7 +268,7 @@ const config = {
   publish_mode: 'editorial_workflow',
   collections: [
     ...converted.map((c) => lessonCollection(c, langsOf(c))),
-    unitsCollection(),
+    unitsCollection([...new Set(['en', 'es', ...converted.flatMap(langsOf)])]),
     coursesCollection(),
   ],
 };

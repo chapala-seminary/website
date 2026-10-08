@@ -24,6 +24,10 @@
  */
 (function () {
   "use strict";
+  function wording(en, es, fr) {
+    return window.CTSLanguage ? window.CTSLanguage.bi({ en: en, es: es, fr: fr })
+      : '<span class="lang-en">' + en + '</span><span class="lang-es">' + es + '</span>';
+  }
   var main = document.getElementById("lesson");
   var qs = document.getElementById("questionsContainer");
   if (!main || !qs || !main.contains(qs)) return;
@@ -118,13 +122,13 @@
     bar.innerHTML = open
       ? '<p><span class="lang-en">The lesson is hidden while you take the exam. Your answers are kept if you go back to it.</span>' +
         '<span class="lang-es">La lección está oculta mientras presenta el examen. Sus respuestas se conservan si vuelve a ella.</span></p>' +
-        '<button type="button" id="cts-exam-back"><span class="lang-en">Back to the lesson</span><span class="lang-es">Volver a la lección</span></button>'
+        '<button type="button" id="cts-exam-back">' + wording('Back to the lesson', 'Volver a la lección', 'Retour à la leçon') + '</button>'
       : '<p><span class="lang-en">When you are ready, open the exam. The lesson will be hidden while you take it.</span>' +
         '<span class="lang-es">Cuando esté listo, abra el examen. La lección estará oculta mientras lo presenta.</span></p>' +
         // the seminary's view of examinations (Dr. Cook, 1 Oct 2026), where every student sees it
         '<p class="cts-exam-aim"><span class="lang-en">This exam is here to help you learn, not to trick you. If you do not pass the first time, review the lesson and try again &mdash; you may retake it as many times as you need.</span>' +
         '<span class="lang-es">Este examen está para ayudarle a aprender, no para engañarle. Si no aprueba la primera vez, repase la lección e inténtelo de nuevo &mdash; puede volver a presentarlo cuantas veces lo necesite.</span></p>' +
-        '<button type="button" id="cts-exam-open"><span class="lang-en">Take the exam</span><span class="lang-es">Presentar el examen</span></button>';
+        '<button type="button" id="cts-exam-open">' + wording('Take the exam', 'Presentar el examen', 'Passer le test') + '</button>';
     bar.querySelector("button").addEventListener("click", function () { set(!open, true); });
   }
   function set(open, user) {
