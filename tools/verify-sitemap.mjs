@@ -37,7 +37,8 @@ const xml = fs.readFileSync(MAP, 'utf8');
 const listed = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)]
   .map((m) => m[1].replace(/^https?:\/\/[^/]+\//, '') || 'index.html');
 const listedSet = new Set(listed);
-const built = fs.readdirSync(DIST).filter((f) => f.endsWith('.html'));
+const built = ['', 'es/'].flatMap(prefix => fs.readdirSync(path.join(DIST,prefix)).filter(f => f.endsWith('.html')).map(f=>prefix+f));
+const basename = p => p.split('/').pop();
 
 const fails = [];
 const report = (label, items) => {
@@ -49,9 +50,9 @@ report('listed but the build does not produce them', listed.filter((p) => !fs.ex
 report('course units missing from the sitemap', built.filter((f) => isUnit(f) && !listedSet.has(f)));
 report('certificates missing from the sitemap', built.filter((f) => isCertificate(f) && !listedSet.has(f)));
 report('reading rooms missing from the sitemap', built.filter((f) => isReadingRoom(f) && !listedSet.has(f)));
-report('textbook pages missing from the sitemap', built.filter((f) => isTextbook(f) && !listedSet.has(f)));
+report('textbook pages missing from the sitemap', built.filter((f) => isTextbook(basename(f)) && !listedSet.has(f)));
 report('reading digests that should not be listed', listed.filter(isDigest));
-report('excluded pages that should not be listed', listed.filter((p) => EXCLUDE.has(p)));
+report('excluded pages that should not be listed', listed.filter((p) => EXCLUDE.has(basename(p))));
 /* The editing interface is not content. It is also the one page on the site
    where being found by a search engine is actively unhelpful. */
 report('the editing interface should not be listed', listed.filter((p) => p.startsWith('admin/')));

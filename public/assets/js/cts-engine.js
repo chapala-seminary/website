@@ -245,6 +245,7 @@
   }
   function readerLang() {
     var b = document.body, codes = languages();
+    if (b && b.dataset.pageLang) return b.dataset.pageLang;
     var l = (b && b.getAttribute("data-lang")) || document.documentElement.lang || "en";
     if (l === "both" || (b && b.classList.contains("lang-both"))) return "es";
     for (var i = 0; i < codes.length; i++)
@@ -259,7 +260,15 @@
   function bi(o) {
     if (o === null || o === undefined) return "";
     if (!isLanguageMap(o)) return String(o);
-    // Keep the existing bilingual markup until per-language pages replace it.
+    if (document.body && document.body.dataset.pageLang) {
+      var reader = readerLang(), source = sourceLang(), target = o[reader];
+      var actual = target == null || target === "" ? source : reader;
+      var main = target || o[source] || o.en || "";
+      return '<span class="cts-text-pair"><span class="cts-reading" lang="' + actual + '">' + main + '</span>' +
+        (reader !== source && actual === reader && o[source]
+          ? '<span class="cts-source" lang="' + source + '">' + o[source] + '</span>' : '') + '</span>';
+    }
+    // Fixture and older pages keep their original bilingual convention.
     var codes = U.sourceLang || !["en", "es"].includes(readerLang())
       ? [readerLang(), sourceLang()] : ["en", "es"];
     return Array.from(new Set(codes)).map(function (lang) {
@@ -519,7 +528,9 @@
             else if (j === chosen) cls += " wrong";
           }
           out += '<button class="' + cls + '" data-mc="' + i + '" data-opt="' + j + '" type="button">' +
-                 "<strong>" + LETTERS(j) + ".</strong> " + bi(opt) + "</button>";
+                 "<strong>" + LETTERS(j) + ".</strong> " + bi(document.body.dataset.pageLang && isLanguageMap(q.options) ? Object.fromEntries(Object.keys(q.options).map(function (code) {
+                   return [code, q.options[code][j]];
+                 })) : opt) + "</button>";
         });
         if (answered) {
           out += chosen === right
@@ -1056,6 +1067,11 @@
   }
 
   function applyLang(lang) {
+    if (document.body.dataset.pageLang && window.CTSLanguage) {
+      if (lang !== readerLang() || lang === "both") window.CTSLanguage.choose(lang);
+      else { syncLangControls(lang); renderGreeting(); renderPassedBanner(); renderQuestions(); }
+      return;
+    }
     lang = languages().includes(lang) || lang === "both" ? lang : sourceLang();
     var b = document.body;
     languages().concat(["both"]).forEach(function (code) { b.classList.remove("lang-" + code); });

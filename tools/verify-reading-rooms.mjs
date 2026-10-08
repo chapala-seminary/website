@@ -91,8 +91,9 @@ for (const [file, code, course] of [['CTSWRReadings.html', 'WR', 'World Religion
   await p.evaluate(() => recordReading()); await p.waitForTimeout(200);
   const rec = await p.evaluate(() => JSON.parse(localStorage.getItem('cts_honors_v1:John') || 'null'));
   ok(rec && rec.works && rec.works.length === 3, 'John: still records under cts_honors_v1:John', JSON.stringify(rec));
-  await p.locator('button[data-lang="es"]').click();
-  ok(await p.locator('#cts-shelf .lang-es').first().isVisible() && !(await p.locator('#cts-shelf .lang-en').first().isVisible()), 'John: the shelf follows the language switch');
+  await Promise.all([p.waitForURL('**/es/*.html'), p.locator('[data-cts-lang="es"]').click()]);
+  await p.waitForLoadState('load');
+  ok(await p.locator('#cts-shelf .cts-reading[lang="es"]').first().isVisible() && !(await p.locator('#cts-shelf .cts-source').first().isVisible()), 'John: the shelf follows the language switch');
   ok(errs.length === 0, 'John: page errors', errs[0]);
   await ctx.close();
 }
@@ -101,8 +102,8 @@ for (const [file, code, course] of [['CTSWRReadings.html', 'WR', 'World Religion
 {
   const { ctx, p, errs } = await open('CTSWRRequired.html');
   ok((await p.locator('#cts-readings article').count()) === 5, 'WR required: five assigned readings');
-  ok((await p.locator('a[href="CTSWRRequiredTest.html"]').count()) >= 1, 'WR required: leads to its test');
-  ok((await p.locator('a[href="CTSWRReadings.html"]').count()) >= 1, 'WR required: names the Supplemental Reading Room beside it');
+  ok((await p.locator('a[href="/CTSWRRequiredTest.html"]').count()) >= 1, 'WR required: leads to its test');
+  ok((await p.locator('a[href="/CTSWRReadings.html"]').count()) >= 1, 'WR required: names the Supplemental Reading Room beside it');
   ok(!/Cults/.test(await p.locator('#cts-readings').textContent()), 'WR required: the readings are not the Cults room');
   await p.goto(`${BASE}/CTSWRRequiredTest.html`, { waitUntil: 'load' }); await p.waitForTimeout(300);
   ok((await p.locator('input[data-cts-fill]').count()) === 20, 'WR test: twenty answer boxes');

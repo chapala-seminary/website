@@ -32,28 +32,20 @@ async function worker() {
   while (queue.length) {
     const f = queue.shift();
     const ctx = await browser.newContext();
+    await ctx.addInitScript(() => localStorage.setItem('cts_done_codes', JSON.stringify(['CTSOTS','CTSNT','CTSST','CTSEVANGELISM','CTSPM','CTSCH','WISESPEAK'])));
     const page = await ctx.newPage();
     const errs = [];
     page.on('pageerror', (e) => errs.push(e.message));
     try {
       await page.goto(`${BASE}/${f}`, { waitUntil: 'load', timeout: 20000 });
-      await page.evaluate(() => { localStorage.clear(); localStorage.setItem('cts_lang', 'en'); });
+      await page.evaluate(() => { localStorage.clear(); localStorage.setItem('cts_done_codes',JSON.stringify(['CTSOTS','CTSNT','CTSST','CTSEVANGELISM','CTSPM','CTSCH','WISESPEAK'])); localStorage.setItem('cts_lang', 'en'); });
       await page.reload({ waitUntil: 'load', timeout: 20000 });
       await page.waitForTimeout(250);
 
       const before = await page.evaluate(() => document.body.innerText);
-      const pressed = await page.evaluate(() => {
-        // whatever a Spanish-speaking student would press
-        const els = [...document.querySelectorAll('button, a, [onclick]')];
-        const es = els.find((e) => {
-          const t = (e.textContent || '').trim();
-          return t.length < 40 && /espa[nñ]ol/i.test(t);
-        });
-        if (!es) return null;
-        es.click();
-        return (es.textContent || '').trim().slice(0, 30);
-      });
-      await page.waitForTimeout(400);
+      const pressed = await page.locator('[data-cts-lang="es"]').textContent();
+      await Promise.all([page.waitForURL('**/es/' + f), page.locator('[data-cts-lang="es"]').click()]);
+      await page.waitForLoadState('load');
       const after = await page.evaluate(() => {
         // Every fragment the site marks as English, in all five of its
         // spellings. In Spanish none of them should be on screen.

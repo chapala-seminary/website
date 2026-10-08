@@ -164,13 +164,16 @@ async function session(course, unit, track, nCorrect, fillSA = false, fillN = 0)
   return { U, rendered, errs, clickedSubmit, ...out };
 }
 
-for (const [course, unit] of SAMPLES) {
+// Each sample uses fresh browser contexts; no sample shares localStorage.
+// Run independent samples together without reducing any policy assertions.
+let finishedSamples = 0;
+async function checkSample([course, unit]) {
   const label = `${course} u${unit}`;
   const probe = await session(course, unit, 'cert', 0);
-  if (!probe.U) { fails.push(`${label}: page exposes no CTS_UNIT`); checks++; continue; }
+  if (!probe.U) { fails.push(`${label}: page exposes no CTS_UNIT`); checks++; return; }
   const slug = probe.U.course;
   const nMc = probe.U.mc.length;
-  if (!nMc) { console.log(`  (skip ${label}: no multiple-choice questions)`); continue; }
+  if (!nMc) { console.log(`  (skip ${label}: no multiple-choice questions)`); return; }
   const need = Math.ceil(nMc * 0.90);
 
   const nFill = probe.U.fill, needF = Math.ceil(nFill * 0.90);
@@ -261,7 +264,13 @@ for (const [course, unit] of SAMPLES) {
 
   // 7. passing MC banks it
   ok(atMark.ls[`cts_${slug}_u${unit}_mc_passed`] === '1', `${label}: MC pass not banked`);
+  if (++finishedSamples % 10 === 0) console.log(`  ${finishedSamples}/${SAMPLES.length} policy samples`);
 }
+const pendingSamples = SAMPLES.slice();
+async function sampleWorker() {
+  while (pendingSamples.length) await checkSample(pendingSamples.shift());
+}
+await Promise.all(Array.from({length:4},sampleWorker));
 
 // 8. an answered question stays answered for the attempt (the verdict shows
 //    the key, so changing it would be free marks), and a reload after a failed
@@ -364,9 +373,10 @@ for (const t of ['cert', 'assoc', 'mdiv']) {
   await examOpen(ctx);
   await ctx.addInitScript(injectFill, SYNTH_FILL);
   const page = await ctx.newPage();
-  await page.goto(`${BASE}/${course}Unit${unit}.html`, { waitUntil: 'load' });
+  await page.goto(`${BASE}/es/${course}Unit${unit}.html?cts_lang=es`, { waitUntil: 'load' });
   await page.evaluate(() => {
     localStorage.clear();
+    localStorage.setItem('cts_lang', 'es');
     localStorage.setItem('cts_student', JSON.stringify({ name: 'T', track: 'cert', goal: 'assoc' }));
     localStorage.setItem('cts_track', 'cert'); localStorage.setItem('cts_goal', 'assoc');
   });

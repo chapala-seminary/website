@@ -154,8 +154,8 @@ const allow = fs.existsSync(CHROME_ALLOW)
   ? new Set(JSON.parse(fs.readFileSync(CHROME_ALLOW, 'utf8')))
   : new Set();
 
-const isDist = target === 'dist';
-const dir = isDist ? 'dist' : BODY_DIR;
+const isDist = !!target;
+const dir = isDist ? target : BODY_DIR;
 
 /* What the missing hashes stood for. Read back from the source bodies, which
    is the point of storing hashes rather than the prose twice over. */

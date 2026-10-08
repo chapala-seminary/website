@@ -54,30 +54,29 @@ page.on('pageerror', (e) => errors.push(`${page.url()}: ${e.message}`));
 await page.addInitScript(() => { try { if (!sessionStorage.getItem('seeded')) { localStorage.setItem('cts_lang', 'en'); sessionStorage.setItem('seeded', '1'); } } catch (e) {} });
 
 for (const room of ROOMS) {
-  const url = `${BASE}/${room}.html`;
-  await page.goto(url, { waitUntil: 'load' });
-  await page.evaluate(() => { for (const d of document.querySelectorAll('details')) d.open = true; });
-  for (const lang of ['en', 'es', 'both']) {
-    await page.click(`.cts-seg button[data-lang="${lang}"]`);
-    const state = await page.evaluate((l) => ({
-      body: document.body.classList.contains(`lang-${l}`),
-      pressed: [...document.querySelectorAll('.cts-seg button[aria-pressed="true"]')].map((b) => b.dataset.lang),
-    }), lang);
-    ok(state.body && state.pressed.join() === lang, `${room}: the ${lang} button did not switch the page (pressed: ${state.pressed})`);
+  for (const lang of ['en', 'es', 'fr']) {
+    const url = `${BASE}/${lang === 'en' ? '' : lang + '/'}${room}.html?cts_lang=${lang}`;
+    await page.goto(url, { waitUntil: 'load' });
+    await page.evaluate(() => { for (const d of document.querySelectorAll('details')) d.open = true; });
+    ok(await page.evaluate(l => document.body.dataset.pageLang === l && document.documentElement.lang === l, lang), `${room}: wrong ${lang} metadata`);
     const ps = await page.evaluate(passages);
-    const wrong = ps.filter((p) => (lang === 'en' && p.lang === 'es') || (lang === 'es' && p.lang === 'en'));
-    ok(!wrong.length, `${room}: ${wrong.length} passage(s) in the wrong language under ${lang}:\n        ${wrong.slice(0, 12).map((p) => p.t).join('\n        ')}`);
-    if (lang === 'both') ok(ps.some((p) => p.lang === 'es') && ps.some((p) => p.lang === 'en'), `${room}: Both does not show both languages`);
+    const wrong = ps.filter(p => (lang === 'en' && p.lang === 'es') || (lang === 'es' && p.lang === 'en'));
+    ok(!wrong.length, `${room}: unmarked passages in the wrong language under ${lang}: ${wrong.slice(0,4).map(p=>p.t).join('; ')}`);
+    if (lang === 'es') {
+      await page.locator('#cts-show-source').uncheck();
+      ok(await page.evaluate(() => ![...document.querySelectorAll('.cts-source')].some(e=>e.checkVisibility({checkVisibilityCSS:true}))), `${room}: English source visible with option off`);
+      await page.locator('#cts-show-source').check();
+      ok(await page.evaluate(() => [...document.querySelectorAll('.cts-source')].some(e=>e.checkVisibility({checkVisibilityCSS:true}))), `${room}: source option did not show English`);
+    }
   }
 }
-
-// a choice of Español follows the reader to the next room
-await page.goto(`${BASE}/${ROOMS[0]}.html`, { waitUntil: 'load' });
-await page.click('.cts-seg button[data-lang="es"]');
-await page.goto(`${BASE}/${ROOMS[1]}.html`, { waitUntil: 'load' });
-await page.waitForTimeout(200);
-ok(await page.evaluate(() => document.body.classList.contains('lang-es') && document.querySelector('.cts-seg button[data-lang="es"]').getAttribute('aria-pressed') === 'true'),
-  `${ROOMS[1]}: a reader who chose Español in ${ROOMS[0]} met English`);
+// remembered choice redirects old English links; explicit English overrides it
+await page.goto(`${BASE}/es/${ROOMS[0]}.html?cts_lang=es`, {waitUntil:'load'});
+await page.goto(`${BASE}/${ROOMS[1]}.html`, {waitUntil:'load'});
+await page.waitForURL(`**/es/${ROOMS[1]}.html`);
+ok(await page.evaluate(()=>document.documentElement.lang === 'es'), `${ROOMS[1]}: Spanish choice was lost`);
+await Promise.all([page.waitForURL(url=>url.pathname === `/${ROOMS[1]}.html`), page.locator('[data-cts-lang="en"]').click()]);
+ok(await page.evaluate(()=>document.documentElement.lang === 'en'), `${ROOMS[1]}: English did not override memory`);
 
 // on a phone: no sideways scroll, the bar stays put
 const phone = await browser.newContext({ viewport: { width: 375, height: 760 }, isMobile: true });

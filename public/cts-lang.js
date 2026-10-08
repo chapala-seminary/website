@@ -1,3 +1,95 @@
+/* Generated language pages use one URL per reader language. The fallback
+ * below still supports legacy fixtures and pages outside this build. */
+(function () {
+  "use strict";
+  var body = document.body;
+  if (!body || !body.dataset.pageLang) return;
+  var codes = ["en", "es", "fr"], current = body.dataset.pageLang;
+  var source = body.dataset.sourceLang || "en", file = body.dataset.languagePage;
+  var get = function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } };
+  var set = function (k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } };
+  var url = new URL(location.href), explicit = url.searchParams.get("cts_lang");
+  var stored = get("cts_lang");
+  if (stored === "both") { stored = "es"; set("cts_show_source", "true"); }
+  var want = codes.includes(explicit) ? explicit : codes.includes(stored) ? stored : current;
+  if (!explicit && !stored && current === "en") {
+    var browser = (navigator.language || "en").split("-")[0].toLowerCase();
+    // French is selectable now, but not a default until the reviewed pilot exists.
+    if (browser === "es") want = "es";
+  }
+  function href(lang) {
+    var target = new URL(location.href);
+    target.pathname = "/" + (lang === "en" ? "" : lang + "/") + file;
+    target.searchParams.set("cts_lang", lang);
+    return target.href;
+  }
+  function choose(lang) {
+    if (lang === "both") { set("cts_show_source", "true"); showSource = true; lang = "es"; }
+    if (!codes.includes(lang)) return;
+    set("cts_lang", lang);
+    if (lang === current) { enforce(); return; }
+    location.assign(href(lang));
+  }
+  function bi(text) {
+    var target = text[current], actual = target == null || target === "" ? source : current;
+    return '<span class="cts-text-pair"><span class="cts-reading" lang="' + actual + '">' +
+      (target || text[source] || "") + '</span>' +
+      (current !== source && target && text[source] ? '<span class="cts-source" lang="' + source + '">' + text[source] + '</span>' : '') + '</span>';
+  }
+  window.CTSLanguage = { bi: bi, choose: choose, lang: current, sourceLang: source, storagePath: "/" + file };
+  var remembered = set("cts_lang", want);
+  if (want !== current) { location.replace(href(want)); return; }
+  if (explicit && remembered) {
+    url.searchParams.delete("cts_lang");
+    history.replaceState(history.state, "", url.href);
+  }
+  var showSource = get("cts_show_source") === "true";
+  function sourceVisibility() {
+    body.dataset.showSource = String(current !== source && showSource);
+    var box = document.getElementById("cts-show-source");
+    if (box) box.checked = body.dataset.showSource === "true";
+  }
+  function enforce() {
+    for (var i = 0; i < codes.length; i++) body.classList.toggle("lang-" + codes[i], codes[i] === current);
+    body.classList.remove("lang-both");
+    if (body.getAttribute("data-lang") !== current) body.setAttribute("data-lang", current);
+    document.documentElement.lang = current;
+    sourceVisibility();
+    set("cts_lang", current);
+  }
+  var internal = false;
+  document.addEventListener("click", function (event) {
+    if (internal) return;
+    var node = event.target.closest("[data-cts-lang], [data-cts-legacy-control] button, [data-cts-legacy-control] a");
+    if (!node) return;
+    var lang = node.dataset.ctsLang || node.dataset.lang;
+    if (!lang) lang = current === "es" ? "en" : "es";
+    event.preventDefault(); event.stopImmediatePropagation(); choose(lang);
+  }, true);
+  document.addEventListener("change", function (event) {
+    if (event.target.id !== "cts-show-source") return;
+    showSource = event.target.checked;
+    set("cts_show_source", String(showSource)); sourceVisibility();
+    document.dispatchEvent(new CustomEvent("cts-source", { detail: event.target.checked }));
+  });
+  enforce();
+  function ready() {
+    enforce();
+    // Static certificate/book scripts keep a language in their own state.
+    // Let their existing control update that state without URL navigation.
+    var legacy = document.querySelector('[data-cts-legacy-control] [data-lang="' + (current === "es" ? "es" : "en") + '"]');
+    if (legacy && !window.CTS_ENGINE && !body.classList.contains("cts-room")) { internal = true; legacy.click(); internal = false; }
+    enforce();
+    document.dispatchEvent(new CustomEvent("cts-lang", { detail: current }));
+    var previous = body.className;
+    new MutationObserver(function () {
+      if (previous === body.className) return;
+      enforce(); previous = body.className;
+    }).observe(body, { attributes: true, attributeFilter: ["class"] });
+  }
+  if (document.readyState === "complete") ready(); else window.addEventListener("load", ready);
+})();
+
 /* cts-lang.js — CTS language auto-default + unified cross-engine persistence
  *
  * Problem: units default to English. Spanish-speaking students who don't spot the
@@ -27,6 +119,7 @@
  * only the shared cts_lang key and (for the class engine) the body lang class.
  */
 (function () {
+  if (document.body && document.body.dataset.pageLang) return;
   var KEY = 'cts_lang';
 
   function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }

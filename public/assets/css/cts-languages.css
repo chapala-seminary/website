@@ -1,0 +1,33 @@
+/* Language is a URL; source visibility is a separate preference. */
+[data-cts-legacy-control]{display:none!important}
+.cts-language-controls{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.5rem;padding:.4rem}
+.cts-language-choices{display:flex;flex-wrap:wrap;gap:.15rem}
+.cts-language-choice{display:inline-block;padding:.35rem .7rem;border:1px solid currentColor;border-radius:.35rem;text-decoration:none}
+.cts-language-choice.active{font-weight:bold;background:#6b2330;color:#fff}
+.cts-source-control{display:inline-flex;align-items:center;gap:.35rem;white-space:nowrap;font-size:.9rem;margin:0;padding:0;text-transform:none;letter-spacing:normal}
+.cts-source-control input{display:inline-block;width:auto;margin:0;padding:0;flex:none}
+.cts-source{display:none!important}
+.cts-reading{min-width:0}
+.cts-text-pair{overflow-wrap:anywhere;white-space:normal;max-width:100%}
+[data-show-source="true"] .cts-text-pair:has(>.cts-source){display:inline-grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1rem;width:100%;vertical-align:top}
+[data-show-source="true"] .cts-source{display:block!important;color:inherit;opacity:.8}
+.cts-masthead .cts-source{font-size:.85em}
+.cts-translation-pending{padding:1rem;border:1px solid #9b7537;background:#fff7e5;color:#312414;margin:1rem 0}
+@media(max-width:700px){[data-show-source="true"] .cts-text-pair:has(>.cts-source){display:inline-block;width:auto;max-width:100%}[data-show-source="true"] .cts-source{margin-top:.4rem;border-left:2px solid currentColor;padding-left:.6rem}}
+/* Legacy page scripts can still render language-marked interface text. The
+   generated page language remains authoritative, including French fallback. */
+body[data-page-lang="en"] :is(.lang-es,.es-only,.block-es,.teach-es,.es-lbl){display:none!important}
+body[data-page-lang="es"] :is(.lang-en,.en-only,.block-en,.teach-en,.en-lbl){display:none!important}
+body[data-page-lang="fr"] :is(.lang-es,.es-only,.block-es,.teach-es,.es-lbl){display:none!important}
+
+/* Question sources belong directly below the translated wording. */
+[data-show-source="true"] .question .cts-text-pair:has(>.cts-source),
+[data-show-source="true"] .cts-fill-q .cts-text-pair:has(>.cts-source),
+[data-show-source="true"] #kwContainer .cts-text-pair:has(>.cts-source){display:block}
+[data-show-source="true"] .question .cts-source{margin-top:.35rem;font-weight:normal}
+
+@media print{.cts-language-controls,.cts-translation-pending{display:none!important}}
+
+/* The source option applies to reading and exam wording, not navigation labels. */
+.cts-nav .cts-source{display:none!important}
+.cts-nav .cts-text-pair{display:inline!important;width:auto}

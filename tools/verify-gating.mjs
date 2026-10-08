@@ -71,7 +71,7 @@ async function state(page_, done) {
       cards: cards.length,
       locked: cards.filter((a) => /cts-locked/.test(a.className)).map(name).sort(),
       // where each card actually sends a student -- the redirect IS the feature
-      destinations: Object.fromEntries(cards.map((a) => [name(a), a.getAttribute('href')])),
+      destinations: Object.fromEntries(cards.map((a) => [name(a), a.href])),
     };
   });
   await ctx.close();
@@ -89,7 +89,7 @@ for (const [label, done] of [['a student who has finished nothing', []], ['a stu
   for (const title of ADDED) {
     const dest = built.destinations[title], locked = built.locked.includes(title);
     ok(title in built.destinations, `${label}: added course "${title}" is not on the built page`);
-    if (!done.length) ok(locked && dest === 'CTSBeforeYouBegin.html', `${label}: added course "${title}" should be locked and lead to Before You Begin`, `locked ${locked}, href ${dest}`);
+    if (!done.length) ok(locked && dest === `${BASE}/CTSBeforeYouBegin.html`, `${label}: added course "${title}" should be locked and lead to Before You Begin`, `locked ${locked}, href ${dest}`);
     else ok(!locked && /Unit1\.html$/.test(dest || ''), `${label}: added course "${title}" should be open and lead to its first unit`, `locked ${locked}, href ${dest}`);
     built.locked = built.locked.filter((t) => t !== title);
     delete built.destinations[title];

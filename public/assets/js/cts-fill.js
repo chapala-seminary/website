@@ -76,7 +76,7 @@
     return String(v == null ? "" : v).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
   }
   // both languages, always: each page shows one and hides the other with CSS
-  function bi(o) { return '<span class="lang-en">' + o.en + '</span><span class="lang-es">' + o.es + "</span>"; }
+  function bi(o) { if (window.CTSLanguage) return window.CTSLanguage.bi(o); return '<span class="lang-en">' + o.en + '</span><span class="lang-es">' + o.es + "</span>"; }
   function isEs() {
     var b = document.body;
     return !!b && (b.classList.contains("spanish") || b.classList.contains("lang-es"));

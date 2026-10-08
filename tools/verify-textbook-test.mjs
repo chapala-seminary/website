@@ -127,9 +127,10 @@ const student = JSON.stringify({ name: 'T', track: 'cert' });
 // 5. the language control
 {
   const { ctx, p } = await open({ cts_student: student });
-  await p.locator('button[data-lang="es"]').click();
+  await Promise.all([p.waitForURL('**/es/*.html'), p.locator('[data-cts-lang="es"]').click()]);
+  await p.waitForLoadState('load');
   ok(await p.evaluate(() => document.body.classList.contains('lang-es') && localStorage.getItem('cts_lang') === 'es'), 'Español did not switch the page');
-  ok(await p.locator('#tb-submit .lang-es').isVisible() && !(await p.locator('#tb-submit .lang-en').isVisible()), 'the Spanish label is not what shows');
+  ok(await p.locator('#tb-submit .cts-reading[lang="es"]').isVisible() && !(await p.locator('#tb-submit .cts-source').isVisible()), 'the Spanish label is not what shows');
   await ctx.close();
 }
 

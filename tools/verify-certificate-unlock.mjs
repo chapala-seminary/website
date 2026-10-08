@@ -66,9 +66,12 @@ async function open(file, unitPage, seed) {
   return { ...r, errs };
 }
 
-for (const [slug, c] of Object.entries(catalog.courses)) {
+// Each course opens fresh contexts. Check independent courses together while
+// retaining every completed/incomplete/textbook assertion.
+let finishedCourses = 0;
+async function checkCourse([slug, c]) {
   const files = pages(c.pages);
-  if (!files.length) { fails.push(`${c.pages}: no certificate page found`); checks++; continue; }
+  if (!files.length) { fails.push(`${c.pages}: no certificate page found`); checks++; return; }
   const passed = { cts_student: JSON.stringify({ name: 'Prueba Test', track: 'mdiv' }), cts_track: 'mdiv' };
   const progress = {};
   for (const u of c.units) { progress[`unit${u}`] = true; passed[`cts_${slug}_u${u}_mc_passed`] = '1'; }
@@ -106,6 +109,12 @@ for (const [slug, c] of Object.entries(catalog.courses)) {
     ok(!no.pdf, `${f}: offers a PDF download to a student who passed nothing`);
   }
 }
+
+const pendingCourses = Object.entries(catalog.courses);
+async function courseWorker() {
+  while (pendingCourses.length) { await checkCourse(pendingCourses.shift()); if (++finishedCourses % 10 === 0) console.log(`  ${finishedCourses}/${Object.keys(catalog.courses).length} certificate courses`); }
+}
+await Promise.all(Array.from({length:4}, courseWorker));
 
 /* ---- the degree pages ----------------------------------------------------
  * They count completed course codes at the level each was completed on (29
