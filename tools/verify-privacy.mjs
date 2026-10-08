@@ -128,8 +128,8 @@ ok(!(await visible(f, 'see-card')) && !(await visible(f, 'delete-card')),
 
 /* ---- both languages ------------------------------------------------------ */
 /* The site has shipped a dead Spanish control before, on 409 pages. */
-await f.click('#btn-es');
-await f.waitForTimeout(200);
+await Promise.all([f.waitForURL('**/es/CTSPrivacy.html'), f.locator('[data-cts-lang="es"]').click()]);
+await f.waitForLoadState('load');
 const es = await f.evaluate(() => document.body.innerText);
 ok(/Su informaci/i.test(es) && !/What is kept, and where/.test(es),
   'the Spanish control switches the page, and the English goes away');

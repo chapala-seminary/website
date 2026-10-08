@@ -46,9 +46,14 @@ let written = 0, shelves = 0, attests = 0;
 const esc = (s) => String(s).replace(/&(?![a-zA-Z#][a-zA-Z0-9]*;)/g, '&amp;').replace(/"/g, '&quot;');
 const text = (s) => String(s).replace(/<[^>]+>/g, '');
 
+// Several delivered shelf titles contain an unclosed italic span. Close it
+// inside its language label so later cards and scripts remain outside it.
+const closeTitleSpans = (s) => s + '</span>'.repeat(Math.max(0,
+  (s.match(/<span\b/gi) || []).length - (s.match(/<\/span>/gi) || []).length));
+
 /* A thing said in two languages, as every room now says it. */
 const L = {
-  inline: (en, es) => `<span class="lang-en">${en}</span><span class="lang-es">${es}</span>`,
+  inline: (en, es) => `<span class="lang-en">${closeTitleSpans(en)}</span><span class="lang-es">${closeTitleSpans(es)}</span>`,
   block: (en, es, tag = 'p', cls = '') => `<${tag} class="lang-en${cls}">${en}</${tag}><${tag} class="lang-es${cls}">${es}</${tag}>`,
 };
 

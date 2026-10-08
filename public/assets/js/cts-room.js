@@ -31,6 +31,7 @@
     }
   }
   function apply(lang) {
+    if (window.CTSLanguage && document.body.dataset.pageLang) { window.CTSLanguage.choose(lang); return; }
     lang = (lang === "es" || lang === "both") ? lang : "en";
     var b = document.body;
     b.classList.remove("lang-en", "lang-es", "lang-both");
@@ -45,7 +46,7 @@
     n.addEventListener("click", function () { apply(n.getAttribute("data-lang")); });
   })(g[i]);
   var now = langNow();
-  if (now !== "both") document.documentElement.lang = now;
+  if (now !== "both" && !document.body.dataset.pageLang) document.documentElement.lang = now;
   sync(now);
 
   var nav = document.querySelector(".cts-nav");

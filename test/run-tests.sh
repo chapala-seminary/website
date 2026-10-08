@@ -144,7 +144,8 @@ node tools/verify-one-class.mjs dist
 # what the seminary actually wrote. This compares every recorded text block
 # against the built page, so a change to the layout or the shell transform
 # cannot drop a paragraph without naming it.
-node tools/prose-baseline.mjs check dist
+node tools/prose-baseline.mjs check .astro/language-base
+node tools/verify-language-pages.mjs dist
 
 # The converted courses. Their lessons are data now, so two things need saying
 # that the prose baseline cannot say on its own: that the data still renders
@@ -239,7 +240,7 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   # under the code the certificate reads, in each family of room.
   node tools/verify-reading-rooms.mjs "http://127.0.0.1:$PORT"
   # ...and on the unit design (Oct 2026): English shows no Spanish, Spanish
-  # no English, Both shows both, in every room and on the honors page.
+  # no English, and the source option shows both in every room and on the honors page.
   node tools/verify-room-language.mjs "http://127.0.0.1:$PORT"
 
   # Every certificate page unlocks for a finished course, records the
@@ -259,7 +260,7 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   # unit says so, and the catalog link reaches the course list.
   node tools/verify-beta-pass.mjs "http://127.0.0.1:$PORT"
   if [ -n "$HAVE_REFERENCE" ]; then
-    node tools/verify-catalog.mjs ./_reference-index.html
+    node tools/verify-catalog.mjs ./_reference-index.html .astro/language-base/index.html
   else
     echo "  SKIPPED: tools/verify-catalog.mjs — no reference front page in this"
     echo "           checkout to compare the generated catalog against."
@@ -268,6 +269,8 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   # Registering twice: the same name and email are paused and offered their
   # code by email; "not me" registers separately (Wayne, 5 Oct 2026).
   API_BASE="http://127.0.0.1:$PORT" DEV_LOG="$STATE/dev.log" node test/dup-register.test.mjs
+  # Every generated language page, on desktop and phone, including source text.
+  node tools/verify-language-browser.mjs "http://127.0.0.1:$PORT"
 
   # The page that shows a student what is held about them and deletes it.
   # Driven in a browser against the real Worker, because a privacy page whose

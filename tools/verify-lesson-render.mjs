@@ -28,7 +28,7 @@ import crypto from 'node:crypto';
 const REF = 'test/fixtures/lesson-render.json';
 const RECORD = process.argv[2] === 'record';
 const BEFORE = RECORD ? process.argv[3] : process.argv[2];
-const AFTER = (RECORD ? null : process.argv[3]) || 'dist';
+const AFTER = (RECORD ? null : process.argv[3]) || '.astro/language-base';
 if (RECORD && !BEFORE) { console.error('usage: node tools/verify-lesson-render.mjs record <dir>'); process.exit(2); }
 
 const LESSONS = 'src/content/lessons';

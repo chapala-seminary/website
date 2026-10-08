@@ -38,7 +38,7 @@
   function jget(k, d) { try { return JSON.parse(lsGet(k)) || d; } catch (e) { return d; } }
   function el(id) { return document.getElementById(id); }
   function isEs() { return !!(document.body && document.body.classList.contains("lang-es")); }
-  function bi(o) { return '<span class="lang-en">' + o.en + '</span><span class="lang-es">' + o.es + "</span>"; }
+  function bi(o) { if (window.CTSLanguage) return window.CTSLanguage.bi(o); return '<span class="lang-en">' + o.en + '</span><span class="lang-es">' + o.es + "</span>"; }
   function esc(v) { return String(v == null ? "" : v).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;"); }
 
   // ---- language: the same control as a unit page, without the engine --------

@@ -1201,6 +1201,31 @@ copy rather than on the pages he happened to see.
   certificate's name from `cts-cert-names.js` and the course `code`, which
   the sheet can match on.
 
+### 8aj. Pages by language and the source option (7 Oct 2026)
+
+* English keeps the existing addresses; Spanish uses `/es/<same file>`, and
+  French uses `/fr/<same file>`. The build makes all three from the same
+  content. French currently displays a translation-pending notice and English
+  fallback; these routes are excluded from indexing until reviewed content exists.
+* English / Español / Français chooses a page. A separate source checkbox
+  shows English beside translated lesson text on desktop, below each block on
+  phones, and below exam wording. It is absent on English pages. Reading rooms
+  and the honors page use the same controls.
+* Saved language choices redirect old links; explicit choices override them.
+  Saved Both becomes Spanish with source on. Progress, answers and reading-room
+  selections keep their existing keys. Canonical and language-alternate links
+  connect the versions; the Spanish sitemap follows the English inclusion policy.
+* Reading paragraphs now pair within digest headers and body sections.
+  Existing Spanish digests that condense multiple English paragraphs keep the
+  corresponding runs together. Unclosed shelf-title spans in eight rooms and
+  a stray nested quotation in the New Testament room are repaired, so later
+  content stays outside the language label or quotation; no new translation
+  is written.
+* Course JSON and question banks are unchanged. Old Testament Survey is the
+  confirmed French pilot; Wayne can draft Unit 1 separately while the safe
+  translation import and French interface are completed. See
+  `docs/language-pages.md` for the page contract and validation.
+
 ## How to check any of this yourself
 
 ```

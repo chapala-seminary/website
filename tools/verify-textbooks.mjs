@@ -87,7 +87,7 @@ for (const b of books) {
   const book = page(`${b.page}.html`), test = page(`${b.page}Test.html`);
   ok(!!book, `${b.page}.html was not built`);
   ok(!!test, `${b.page}Test.html was not built`);
-  ok(index.includes(`href="${b.page}.html"`), `the front page does not list ${b.page}`);
+  ok(index.includes(`href="/${b.page}.html"`), `the front page does not list ${b.page}`);
   if (book) ok(book.includes(`${b.page}Test.html`), `${b.page}.html does not lead to its test`);
   if (test) {
     ok(test.includes(`${b.page}.html`), `${b.page}Test.html does not lead back to the book`);
@@ -137,7 +137,7 @@ for (const r of readings) {
   const room = page(`${r.page}.html`), test = page(`${r.page}Test.html`);
   ok(!!room, `${r.page}.html was not built`);
   ok(!!test, `${r.page}Test.html was not built`);
-  ok(index.includes(`href="${r.page}.html"`), `the front page does not list the required readings ${r.page}`);
+  ok(index.includes(`href="/${r.page}.html"`), `the front page does not list the required readings ${r.page}`);
   if (room) ok(room.includes(`${r.page}Test.html`), `${r.page}.html does not lead to its test`);
   if (test) {
     ok(test.includes(`${r.page}.html`), `${r.page}Test.html does not lead back to the readings`);

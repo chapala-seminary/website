@@ -77,15 +77,16 @@ const student = (track) => ({
   await ctx.close();
 }
 
-/* 1c. "Both", then the next unit: still Spanish */
+/* 1c. source visibility, then the next unit: still Spanish */
 {
   const ctx = await context({ ...student('cert'), cts_lang: 'es' });
   const p = await ctx.newPage();
   await p.goto(`${BASE}/CTSUnit1.html`, { waitUntil: 'load' });
-  await p.click('button[data-lang="both"]');
+  await p.waitForURL('**/es/CTSUnit1.html');
+  await p.locator('#cts-show-source').check();
   await p.waitForTimeout(100);
   await p.goto(`${BASE}/CTSUnit2.html`, { waitUntil: 'load' }); await p.waitForTimeout(100);
-  ok(await p.evaluate(() => document.body.classList.contains('lang-es')), 'choosing "Both" on one unit sent the next unit back to English');
+  ok(await p.evaluate(() => document.body.classList.contains('lang-es')), 'showing the source on one unit sent the next unit back to English');
   await ctx.close();
 }
 
@@ -115,11 +116,11 @@ const student = (track) => ({
   await ctx2.close();
 }
 
-/* 3. accents */
+/* 3. Spanish accents, on the Spanish reading page; English is its source. */
 {
-  const ctx = await context(student('ad'));
+  const ctx = await context({ ...student('ad'), cts_lang: 'es' });
   const p = await ctx.newPage();
-  await p.goto(`${BASE}/CTSUnit2.html`, { waitUntil: 'load' });
+  await p.goto(`${BASE}/es/CTSUnit2.html?cts_lang=es`, { waitUntil: 'load' });
   const r = await p.evaluate(() => {
     const E = window.CTS_ENGINE, q = { answer: { en: 'geography', es: 'geografía' } }, q2 = { answer: { en: 'certainty', es: 'certeza' } }, q3 = { answer: { en: 'year', es: 'año' } };
     return [E.fillRight(q, 'geografia'), E.fillRight(q, '  GEOGRAFÍA '), E.fillRight(q2, 'certexa'), E.fillRight(q3, 'ano'), E.fillRight(q3, 'Año')];
@@ -167,7 +168,7 @@ const student = (track) => ({
   const ctx = await context(student('cert'));
   const p = await ctx.newPage();
   await p.goto(`${BASE}/CTSOTSCertificate.html`, { waitUntil: 'load' });
-  await p.click('a[href="index.html#catalog"]');
+  await p.click('a[href="/index.html#catalog"]');
   await p.waitForTimeout(2000);          // the front page scrolls smoothly
   const r = await p.evaluate(() => ({ url: location.pathname + location.hash, top: Math.round(document.getElementById('catalog').getBoundingClientRect().top) }));
   ok(r.url === '/index.html#catalog' && Math.abs(r.top) < 200, `the catalog link from a certificate lands at ${r.url}, the course list ${r.top}px from the top`);

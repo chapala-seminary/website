@@ -328,7 +328,7 @@
     document.head.appendChild(st);
 
     cards.forEach(function (a) {
-      var href = (a.getAttribute("href") || "").toLowerCase();
+      var href = (a.getAttribute("href") || "").split(/[?#]/)[0].split("/").pop().toLowerCase();
       if (OPEN_ENTRY[href] || open) return;          // always-open, or foundation finished
       a.classList.add("cts-locked");
       if (getComputedStyle(a).position === "static") a.style.position = "relative";
