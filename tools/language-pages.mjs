@@ -79,8 +79,12 @@ export function buildLanguagePages(dir) {
       if (lang === 'fr' && (!translated || !complete)) h.insertAdjacentHTML('beforeend', '<meta name="robots" content="noindex,follow">');
       const notice = lang !== sourceLang && !translated ? `<aside class="cts-translation-pending" lang="en">${NAMES[lang]} translation is not available yet. Showing ${NAMES[sourceLang] || sourceLang}.</aside>` : '';
       const controls = control(file, lang, sourceLang, translated);
+      const brandRow = root.querySelector('.topbar .wrap');
       const nav = root.querySelector('.cts-nav .wrap');
-      if (nav) nav.insertAdjacentHTML('beforeend', controls); else b.insertAdjacentHTML('afterbegin', controls);
+      if (brandRow) {
+        brandRow.classList.add('cts-language-header');
+        brandRow.insertAdjacentHTML('beforeend', controls);
+      } else if (nav) nav.insertAdjacentHTML('beforeend', controls); else b.insertAdjacentHTML('afterbegin', controls);
       if (notice) { const main = root.querySelector('main'); if (main) main.insertAdjacentHTML('afterbegin', notice); else b.insertAdjacentHTML('afterbegin', notice); }
       // Language script must run before any legacy page initialization.
       for (const script of root.querySelectorAll('script[src]')) if (/\/cts-lang\.js(?:\?|$)|^cts-lang\.js(?:\?|$)/.test(script.getAttribute('src'))) script.remove();

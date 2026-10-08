@@ -60,3 +60,7 @@ are required: the snapshot alone cannot prove the final transformation.
   language/source choices, unmarked passages, remembered choices and sticky bar.
 - Existing exam, gating, progress, certificates and Worker checks remain in
   `npm test`; language-control checks now navigate between the real pages.
+
+The home page places its language choices at the right of the seminary-name
+header row. On narrow screens the controls wrap within that row. Unit-page
+choices remain in their course navigation bar.
