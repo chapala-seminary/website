@@ -153,6 +153,8 @@ node tools/verify-language-pages.mjs dist
 # will not overwrite work a person did.
 node tools/verify-lesson-render.mjs
 node test/lesson-translation.mjs
+node test/french-schema.mjs
+node test/french-cms.mjs
 
 # The editing interface. Sveltia writes back only the fields its config
 # declares, so a field in the content and not in the config is deleted the next
@@ -203,6 +205,7 @@ curl -sf "http://127.0.0.1:$PORT/__scheduled?cron=0+15+*+*+*" >/dev/null && slee
 # a suite ends up proving nothing.
 if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{};p.chromium.launch(o).then(b=>b.close()).catch(()=>process.exit(1))" 2>/dev/null; then
   node test/engine-languages.mjs
+  node tools/verify-french-interface.mjs "http://127.0.0.1:$PORT"
   SYNC_BASE="http://127.0.0.1:$PORT" node test/sync.test.mjs
   if [ -n "$HAVE_REFERENCE" ]; then
     node tools/verify-gating.mjs "http://127.0.0.1:$PORT" _reference-index.html

@@ -5,31 +5,45 @@ import { glob } from 'astro/loaders';
    at build time. A malformed unit fails the build instead of reaching a
    student, which is what every hand-written engine used to risk. */
 
-const bilingual = z.object({ en: z.string(), es: z.string() });
+const bilingual = z.object({ en: z.string(), es: z.string() }).catchall(z.string());
+const translationState = z.record(z.string(), z.object({
+  status: z.enum(['human', 'machine', 'machine-edited']), from: z.string().length(12),
+}));
+
+const completeQuestionLanguages = (question: Record<string, any>, ctx: any) => {
+  const fields = ['stem', 'prompt', 'options', 'why', 'answer', 'accept', 'keywords', 'model']
+    .filter(key => question[key] && typeof question[key] === 'object' && question[key].en != null);
+  const languages = new Set(fields.flatMap(key => Object.keys(question[key])));
+  for (const lang of languages) if (!['en', 'es'].includes(lang)) for (const key of fields)
+    if (question[key][lang] == null) ctx.addIssue({ code: 'custom',
+      message: `${lang} question has no ${key}; prompts and keys must be translated together` });
+};
 
 const multipleChoice = z
   .object({
     stem: bilingual,
-    options: z.object({ en: z.array(z.string()).min(2), es: z.array(z.string()).min(2) }),
+    options: z.object({ en: z.array(z.string()).min(2), es: z.array(z.string()).min(2) }).catchall(z.array(z.string()).min(2)),
     answer: z.number().int().nonnegative(),
     why: bilingual.optional(),
+    tr: translationState.optional(),
   })
   .refine((q) => q.answer < q.options.en.length, {
     message: 'answer index falls outside the option list',
   })
-  .refine((q) => q.options.en.length === q.options.es.length, {
-    message: 'English and Spanish option lists are different lengths',
-  });
+  .refine((q) => Object.values(q.options).every(options => options.length === q.options.en.length), {
+    message: 'translated option lists are different lengths',
+  }).superRefine(completeQuestionLanguages);
 
 // a keyword entry is one word/phrase, or a group of synonyms for one concept
 const keyword = z.union([z.string(), z.array(z.string()).min(1)]);
 
 const shortAnswer = z.object({
   prompt: bilingual,
-  keywords: z.object({ en: z.array(keyword), es: z.array(keyword) }).optional(),
+  keywords: z.object({ en: z.array(keyword), es: z.array(keyword) }).catchall(z.array(keyword)).optional(),
   model: bilingual.optional(),
   minHits: z.number().int().positive().optional(),
-});
+  tr: translationState.optional(),
+}).superRefine(completeQuestionLanguages);
 
 /* Fill in the blank: a sentence with one gap, written `____`, and the word or
    short phrase that fills it. Required on the Associate, Th.M. and M.Div.
@@ -41,13 +55,14 @@ const shortAnswer = z.object({
 const BLANK = '____';
 const oneBlank = (s: string) => s.split(BLANK).length === 2;
 const fillIn = z.object({
-  prompt: bilingual.refine((p) => oneBlank(p.en) && oneBlank(p.es), {
+  prompt: bilingual.refine((p) => Object.values(p).every(oneBlank), {
     message: `a fill-in prompt must contain exactly one blank, written ${BLANK}, in each language`,
   }),
-  answer: z.object({ en: z.string().min(1), es: z.string().min(1) }),
+  answer: z.object({ en: z.string().min(1), es: z.string().min(1) }).catchall(z.string().min(1)),
   accept: z.object({ en: z.array(z.string().min(1)).optional(),
-                     es: z.array(z.string().min(1)).optional() }).optional(),
-});
+                     es: z.array(z.string().min(1)).optional() }).catchall(z.array(z.string().min(1))).optional(),
+  tr: translationState.optional(),
+}).superRefine(completeQuestionLanguages);
 
 const units = defineCollection({
   // id comes from the file path; without this the loader would adopt a data
@@ -204,7 +219,10 @@ const lessons = defineCollection({
         const langs = holes.get(b.id);
         if (!langs) { ctx.addIssue({ code: 'custom',
           message: `block ${b.id} has no hole in the template, so its text would never reach the page` }); continue; }
-        for (const lang of Object.keys(b.text)) if (!langs.has(lang)) ctx.addIssue({ code: 'custom',
+        // New language pages project extra translations into the source slot.
+        // Original EN/ES slots remain mandatory so legacy loss checks hold.
+        for (const lang of Object.keys(b.text)) if (!langs.has(lang) &&
+          !(!['en', 'es', l.sourceLang].includes(lang) && l.langs.includes(lang) && langs.has(l.sourceLang))) ctx.addIssue({ code: 'custom',
           message: `block ${b.id} has ${lang} text and no ${lang} hole, so that language would vanish from the page` });
       }
     }),
@@ -218,13 +236,14 @@ const lessons = defineCollection({
    which the page draws `draw` at random and asks for `pass` right, graded by
    the same fillRight() as every unit's fill-ins. */
 const textbookFill = z.object({
-  prompt: bilingual.refine((p) => oneBlank(p.en) && oneBlank(p.es), {
+  prompt: bilingual.refine((p) => Object.values(p).every(oneBlank), {
     message: `a textbook question must contain exactly one blank, written ${BLANK}, in each language`,
   }),
-  answer: z.object({ en: z.string().min(1), es: z.string().min(1) }),
+  answer: z.object({ en: z.string().min(1), es: z.string().min(1) }).catchall(z.string().min(1)),
   accept: z.object({ en: z.array(z.string().min(1)).optional(),
-                     es: z.array(z.string().min(1)).optional() }).optional(),
-});
+                     es: z.array(z.string().min(1)).optional() }).catchall(z.array(z.string().min(1))).optional(),
+  tr: translationState.optional(),
+}).superRefine(completeQuestionLanguages);
 const bookHtml = z.string().min(1).superRefine((v, ctx) => {
   const found = [...new Set((v.match(ENTITY) ?? []).filter((e) => !STRUCTURAL.test(e)))];
   if (found.length) ctx.addIssue({ code: 'custom', message: `HTML entities in a UTF-8 textbook: ${found.join(' ')}` });

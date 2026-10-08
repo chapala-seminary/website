@@ -45,10 +45,10 @@
  * the page before. Keeping the holes where the text was means those checks
  * still mean what they say.
  *
- * The cost is that a language which has no hole cannot be rendered into a
- * page -- adding French to a course that wraps each language in its own
- * container needs that container cloned. That is a render-time problem to
- * solve when French is real, and solving it does not need the data reshaped.
+ * The legacy renderer below fills the original EN/ES holes unchanged.
+ * Per-language pages use language-content.ts to project a new translation
+ * into the source-language slot. Extra languages therefore need no new
+ * template containers; the original holes remain for loss checks.
  *
  * TRANSLATION STATE -- `tr`
  *
@@ -64,7 +64,8 @@
  * what each translation was made from, so every translation of that block is
  * provably stale -- per paragraph, not per lesson. Re-translating refreshes
  * it; a hand correction refreshes it and sets `human`, so a careful fix is
- * never silently overwritten by the next automatic pass. Without this, a
+ * never overwritten by an automatic pass, even after its source changes.
+ * Stale reviewed text is flagged for a person to revisit. Without this, a
  * re-translation either clobbers a person's work or leaves the wrong text in
  * place, and nothing can tell you which happened.
  *

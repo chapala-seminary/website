@@ -14,6 +14,7 @@
 (function () {
   "use strict";
   function lang() {
+    if (document.body.dataset.pageLang) return document.body.dataset.pageLang;
     var c = document.body.classList;
     if (c.contains("lang-both")) return "both";
     return c.contains("lang-es") || c.contains("es") ? "es" : "en";
@@ -24,7 +25,7 @@
     document.querySelectorAll("[data-es]").forEach(function (e) {
       var en = e.getAttribute("data-en"), es = e.getAttribute("data-es");
       if (en == null) { en = e.tagName === "OPTION" ? e.textContent : e.getAttribute("placeholder"); e.setAttribute("data-en", en); }
-      var t = pick(en, es, l);
+      var t = l === "fr" ? (e.getAttribute("data-fr") || en) : pick(en, es, l);
       if (e.tagName === "OPTION") e.textContent = t; else e.setAttribute("placeholder", t);
     });
     document.querySelectorAll("select[data-bilingual] option:not([data-es])").forEach(function (o) {

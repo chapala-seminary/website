@@ -7,6 +7,8 @@ import { parse } from 'node-html-parser';
 import { shell } from '../src/lib/shell.ts';
 import { LANGUAGES, NAMES, localeHref, localizeMarkup, renderLanguageLesson } from '../src/lib/language-content.ts';
 
+import { frenchInterface } from '../src/lib/french-interface.ts';
+
 const SITE = 'https://chapalaseminary.org';
 export const REFERENCE = '.astro/language-base';
 function rewriteLinks(root, file, lang, files) {
@@ -74,6 +76,7 @@ export function buildLanguagePages(dir) {
         }
       }
       rewriteLinks(root, file, lang, fileSet);
+      if (lang === 'fr') frenchInterface(root);
       for (const node of h.querySelectorAll('link[rel="alternate"][hreflang], link[rel="canonical"]')) node.remove();
       h.insertAdjacentHTML('beforeend', LANGUAGES.map(l => `<link rel="alternate" hreflang="${l}" href="${SITE}${localeHref(file, l)}">`).join('') + `<link rel="canonical" href="${SITE}${localeHref(file, lang)}"><link rel="stylesheet" href="/assets/css/cts-languages.css">`);
       if (lang === 'fr' && (!translated || !complete)) h.insertAdjacentHTML('beforeend', '<meta name="robots" content="noindex,follow">');

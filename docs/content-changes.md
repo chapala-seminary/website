@@ -1226,6 +1226,22 @@ copy rather than on the pages he happened to see.
   translation import and French interface are completed. See
   `docs/language-pages.md` for the page contract and validation.
 
+### 8ak. French pilot preparation (7 Oct 2026)
+
+* Shared-unit registration/navigation, exam-view buttons and exam-engine
+  greetings, feedback, progress counts and retry messages have French drafts.
+  Course-specific static wording, catalog, reading rooms and student-code
+  dialogs still need translation. Untranslated course pages retain fallback
+  notices; no French course content is published by this change.
+* The translation tool preserves reviewed and unmarked translations, even
+  stale, and translates lesson blocks plus prompts and answer-key fields in
+  the same pass. The schema preserves extra language keys and checks translated
+  question completeness, option counts and one blank per fill prompt.
+* Old Testament Survey Unit 1 is confirmed. A tag-only copy proves its 87
+  blocks and 40 questions survive the build; canonical content is restored.
+  Wayne's Markdown draft and qualified French review are still pending. No
+  paid provider is connected. See `docs/french-pilot.md` for the review steps.
+
 ## How to check any of this yourself
 
 ```
