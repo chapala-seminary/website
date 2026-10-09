@@ -39,7 +39,16 @@ two courses the way a textbook is bound: the same test page, draw, pass mark,
 grader, record (`textbook_results`), hold on the master's tracks and gate on
 the certificate page, with "required readings" said wherever "textbook"
 would be. They sit in the same map (`worker/catalog.json` `textbooks`, kind
-`reading`; a course has one required test). See `docs/reading-rooms.md`.
+`reading`). See `docs/reading-rooms.md`.
+
+A course may have two required tests (9 Oct 2026): its textbook and its
+five readings, piloted on Pentecostalism. `worker/catalog.json` lists them on
+the course as `tests` (textbook first; a course has at most one reading
+test), `public/assets/js/cts-required-tests.js` gives the same list to the
+certificate pages, and a master's completion needs every one that counts. A
+reading test with `requiredFrom` counts from that moment only, and not for a
+master's completion the record held before it (`docs/reading-rooms.md`,
+"Master's reading tests").
 
 ## Where things live
 

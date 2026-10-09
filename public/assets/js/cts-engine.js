@@ -459,11 +459,15 @@
     var total = U.totalUnits || 0, n = passedCount(), all = total && n >= total;
     var cert = (U.completion && U.completion.page) || null;
     var nextIsUnit = /Unit\d+\.html$/.test(U.nextHref || "");
-    // every unit passed, but on a master's track the course waits for its textbook test
+    // every unit passed, but on a master's track the course waits for its textbook test,
+    // or its required-reading test, or both (9 Oct 2026): the panel names the first still to pass
     var tbHold = all && window.CTSRecord && window.CTSRecord.textbookHolds && window.CTSRecord.textbookHolds(U.completion);
+    var pending = tbHold && window.CTSRecord.pendingTests ? window.CTSRecord.pendingTests(U.completion) : [];
+    var first = pending[0] || (U.completion ? { page: U.completion.textbookPage, kind: U.completion.textbookKind } : {});
     // the same hold for a required-reading test (Genesis, World Religions), in its own words
-    var tbReading = tbHold && U.completion.textbookKind === "reading";
-    var go = tbHold ? { href: U.completion.textbookPage + "Test.html",
+    var tbReading = tbHold && first.kind === "reading";
+    var tbBoth = tbHold && pending.length > 1;
+    var go = tbHold ? { href: first.page + "Test.html",
                         en: tbReading ? "Take the required-reading test" : "Take the textbook test",
                         es: tbReading ? "Presentar el examen de lecturas requeridas" : "Presentar el examen del libro", fr: tbReading ? "Passer le test des lectures obligatoires" : "Passer le test du manuel" }
       : all && cert ? { href: cert, en: "Go to your course certificate", es: "Ir a su certificado del curso", fr: "Accéder au certificat du cours" }
@@ -473,7 +477,10 @@
       '<p class="cts-passed-title">&#10003; ' + bi({ en: "Unit " + U.unit + " passed", es: "Unidad " + U.unit + " aprobada", fr: "Unité " + U.unit + " réussie" }) + "</p>" +
       "<p>" + bi({ en: "It is saved to your progress" + (total ? ": " + n + " of " + total + " units of this course passed." : "."),
                    es: "Quedó guardada en su progreso" + (total ? ": " + n + " de " + total + " unidades de este curso aprobadas." : "."), fr: "Votre progression est enregistrée" + (total ? " : " + n + " unités réussies sur " + total + "." : ".") }) + "</p>";
-    if (tbHold) h += "<p>" + bi(tbReading
+    if (tbBoth) h += "<p>" + bi({ en: "On the M.Div. and Th.M. tracks the course is complete when the textbook test and the required-reading test are both passed as well.",
+                                  es: "En los trayectos M.Div. y Th.M. el curso se completa cuando también se aprueban el examen del libro de texto y el examen de lecturas requeridas.",
+                                  fr: "Pour les parcours M.Div. et Th.M., il faut aussi réussir le test du manuel et le test des lectures obligatoires pour terminer le cours." }) + "</p>";
+    else if (tbHold) h += "<p>" + bi(tbReading
       ? { en: "On the M.Div. and Th.M. tracks the course is complete when the required-reading test is passed as well.",
           es: "En los trayectos M.Div. y Th.M. el curso se completa cuando también se aprueba el examen de lecturas requeridas.", fr: "Pour les parcours M.Div. et Th.M., il faut aussi réussir le test des lectures obligatoires pour terminer le cours." }
       : { en: "On the M.Div. and Th.M. tracks the course is complete when the textbook test is passed as well.",

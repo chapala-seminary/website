@@ -29,11 +29,14 @@ interface Props {
   body: string;
   pagePrefix: string;
   unitNumbers: number[];
-  /* The course's Master's textbook, when it has one (src/content/textbooks):
-     a box under the greeting on every unit, with the book and its test. */
-  textbook?: { page: string; title: { en: string; es: string }; kind: 'textbook' | 'reading' } | null;
+  /* The course's required tests, when it has any: its Master's textbook
+     (src/content/textbooks), its required readings (src/content/readings), or
+     both (9 Oct 2026). A box under the greeting on every unit for each, with
+     the book or the readings and the test. `requiredFrom` null: a reading
+     test not yet in force. */
+  tests?: { page: string; title: { en: string; es: string }; kind: 'textbook' | 'reading'; requiredFrom?: string | null }[];
 }
-const { title, bodyClass, styles, scripts, unit, body, pagePrefix, unitNumbers, textbook = null } = Astro.props;
+const { title, bodyClass, styles, scripts, unit, body, pagePrefix, unitNumbers, tests = [] } = Astro.props;
 
 const { masthead, content } = shell(body);
 
@@ -58,16 +61,23 @@ const pills = unitNumbers
 // count, and every unit it takes. From worker/catalog.json, which is generated
 // from the same unit files and certificate pages, so the Worker and the page
 // cannot disagree about what a course is.
-const cat = (catalog.courses as Record<string, { code: string; units: number[]; textbook?: string }>)[unit.course];
+const cat = (catalog.courses as Record<string, { code: string; units: number[]; tests?: string[] }>)[unit.course];
 const done = cat && (catalog.completions as Record<string, { name: string; page: string }>)[cat.code];
 if (!cat || !done) throw new Error(`worker/catalog.json has no course "${unit.course}": run node tools/gen-worker-catalog.mjs`);
+const tbMap = catalog.textbooks as Record<string, { page: string; kind: string; requiredFrom?: string | null }>;
+const required = (cat.tests ?? []).map((slug) => ({ slug, page: tbMap[slug].page, kind: tbMap[slug].kind,
+  ...('requiredFrom' in tbMap[slug] ? { requiredFrom: tbMap[slug].requiredFrom } : {}) }));
+const first = cat.tests?.[0] ?? null;
 const unitJson = JSON.stringify({ ...unit,
   completion: { slug: unit.course, code: cat.code, name: done.name, page: done.page, units: cat.units,
                 // the course's Master's textbook, which the master's tracks must pass the test of
-                textbook: cat.textbook ?? null,
-                textbookPage: cat.textbook ? (catalog.textbooks as Record<string, { page: string }>)[cat.textbook].page : null,
+                textbook: first,
+                textbookPage: first ? tbMap[first].page : null,
                 // "textbook", or "reading" for a required-reading test (the same rule, other words)
-                textbookKind: cat.textbook ? (catalog.textbooks as Record<string, { kind: string }>)[cat.textbook].kind : null },
+                textbookKind: first ? tbMap[first].kind : null,
+                // every test the course requires, textbook first (cts-record.js holds the course for each)
+                // (only where it says more than the three fields above: two tests, or an activation date)
+                ...(required.length > 1 || required.some((t) => 'requiredFrom' in t) ? { tests: required } : {}) },
 }).replace(/</g, '\\u003c');
 
 /* Each script and the stylesheet are addressed with a fingerprint of their
@@ -195,30 +205,31 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
         </p>
       </section>
       <p id="greeting" class="muted" style="margin-top:0"></p>
-      {textbook && textbook.kind === 'reading' && (
-        <aside class="cts-textbook" id="cts-textbook" data-kind="reading">
+      {tests.map((t, i) => t.kind === 'reading' ? (
+        <aside class="cts-textbook" id={i === 0 ? 'cts-textbook' : 'cts-required-readings'} data-kind="reading">
           <span class="cts-textbook-mark" aria-hidden="true">📖</span>
           <span>
             <strong><span class="lang-en">Required readings for this course</span><span class="lang-es">Lecturas requeridas de este curso</span></strong>
-            <span class="lang-en"> — required on the M.Div. and Th.M. tracks, open to every student: </span><span class="lang-es"> — obligatorias en los trayectos M.Div. y Th.M., abiertas a todos los estudiantes: </span>
-            <a href={`/${textbook.page}.html`}><span class="lang-en">{textbook.title.en}</span><span class="lang-es">{textbook.title.es}</span></a>
+            {t.requiredFrom === null
+              ? <Fragment><span class="lang-en"> — a test on all five readings, being introduced for the M.Div. and Th.M. tracks and not yet required; open to every student: </span><span class="lang-es"> — un examen sobre las cinco lecturas, que se está introduciendo para los trayectos M.Div. y Th.M. y aún no es obligatorio; abierto a todos los estudiantes: </span></Fragment>
+              : <Fragment><span class="lang-en"> — required on the M.Div. and Th.M. tracks, open to every student: </span><span class="lang-es"> — obligatorias en los trayectos M.Div. y Th.M., abiertas a todos los estudiantes: </span></Fragment>}
+            <a href={`/${t.page}.html`}><span class="lang-en">{t.title.en}</span><span class="lang-es">{t.title.es}</span></a>
             &nbsp;·&nbsp;
-            <a href={`/${textbook.page}Test.html`}><span class="lang-en">Required-reading test</span><span class="lang-es">Examen de lecturas requeridas</span></a>
+            <a href={`/${t.page}Test.html`}><span class="lang-en">Required-reading test</span><span class="lang-es">Examen de lecturas requeridas</span></a>
           </span>
         </aside>
-      )}
-      {textbook && textbook.kind !== 'reading' && (
-        <aside class="cts-textbook" id="cts-textbook">
+      ) : (
+        <aside class="cts-textbook" id={i === 0 ? 'cts-textbook' : 'cts-textbook-2'}>
           <span class="cts-textbook-mark" aria-hidden="true">📘</span>
           <span>
             <strong><span class="lang-en">Textbook for this course</span><span class="lang-es">Libro de texto de este curso</span></strong>
             <span class="lang-en"> — required reading on the M.Div. and Th.M. tracks: </span><span class="lang-es"> — lectura obligatoria en los trayectos M.Div. y Th.M.: </span>
-            <a href={`/${textbook.page}.html`}><span class="lang-en">{textbook.title.en}</span><span class="lang-es">{textbook.title.es}</span></a>
+            <a href={`/${t.page}.html`}><span class="lang-en">{t.title.en}</span><span class="lang-es">{t.title.es}</span></a>
             &nbsp;·&nbsp;
-            <a href={`/${textbook.page}Test.html`}><span class="lang-en">Textbook test</span><span class="lang-es">Examen del libro</span></a>
+            <a href={`/${t.page}Test.html`}><span class="lang-en">Textbook test</span><span class="lang-es">Examen del libro</span></a>
           </span>
         </aside>
-      )}
+      ))}
 
       <Fragment set:html={content} />
     </main>

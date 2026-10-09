@@ -115,13 +115,27 @@ for (const b of books) {
    book -- and the page the student reads must stand apart from the test. */
 const readings = fs.existsSync('src/content/readings') ? fs.readdirSync('src/content/readings').filter((f) => f.endsWith('.json'))
   .map((f) => JSON.parse(fs.readFileSync(path.join('src/content/readings', f), 'utf8'))) : [];
-ok(readings.length === 2, `${readings.length} required-reading tests in src/content/readings; expected Genesis Intensive and World Religions`);
+// Genesis Intensive and World Religions (4 Oct 2026), and the Master's
+// five-reading pilot on Pentecostalism (9 Oct 2026); more join it course by course.
+for (const want of ['genesisreadings', 'wrreadings', 'pentecostalreadings'])
+  ok(readings.some((r) => r.slug === want), `src/content/readings has no ${want}`);
+const catalogJson = JSON.parse(fs.readFileSync('worker/catalog.json', 'utf8'));
 for (const r of readings) {
   ok(!!courses[r.course], `${r.slug}: course "${r.course}" has no catalog card`);
   ok(/readings$/.test(r.slug) && !books.some((b) => b.slug === r.slug), `${r.slug}: the slug must end in "readings" and not be a textbook's`);
   ok(fs.existsSync(path.join('src/body/rooms', `${r.page}.html`)), `${r.slug}: the readings page src/body/rooms/${r.page}.html is missing`);
   const { draw, pass, questions } = r.test;
   ok(draw === 20 && pass === 18 && questions.length === 40, `${r.slug}: draws ${draw}, asks ${pass}, of ${questions.length}; the delivery says 20 of 40, 18 to pass`);
+  // drawn by reading (9 Oct 2026): every question names one of the five, eight each, four drawn from each
+  if (r.test.perReading) {
+    const per = {};
+    for (const q of questions) per[q.reading] = (per[q.reading] || 0) + 1;
+    ok(r.test.perReading === 4 && Object.keys(per).length === 5 && Object.values(per).every((c) => c === 8),
+      `${r.slug}: drawn by reading, but ${JSON.stringify(per)} with ${r.test.perReading} each; expected eight questions on each of five readings, four drawn from each`);
+  }
+  const pending = 'requiredFrom' in r && r.requiredFrom == null;
+  ok(!('requiredFrom' in r) || r.requiredFrom === null || !Number.isNaN(Date.parse(r.requiredFrom)), `${r.slug}: requiredFrom is not a date: ${r.requiredFrom}`);
+  ok(JSON.stringify(catalogJson.textbooks[r.slug]?.requiredFrom) === JSON.stringify(r.requiredFrom), `${r.slug}: worker/catalog.json does not carry its activation as the content does`);
   questions.forEach((q, i) => {
     for (const lang of ['en', 'es']) {
       ok((q.prompt[lang].match(/____/g) || []).length === 1, `${r.slug} #${i + 1}: not one blank in ${lang}`);
@@ -137,7 +151,10 @@ for (const r of readings) {
   const room = page(`${r.page}.html`), test = page(`${r.page}Test.html`);
   ok(!!room, `${r.page}.html was not built`);
   ok(!!test, `${r.page}Test.html was not built`);
-  ok(index.includes(`href="/${r.page}.html"`), `the front page does not list the required readings ${r.page}`);
+  // a test not yet in force is reached from its course and its room, not listed on the front page
+  if (pending) ok(!index.includes(`href="/${r.page}.html"`), `the front page lists ${r.page}, which is not yet in force`);
+  else ok(index.includes(`href="/${r.page}.html"`), `the front page does not list the required readings ${r.page}`);
+  if (test && pending) ok(/not yet required/.test(test), `${r.page}Test.html does not say the test is not yet required`);
   if (room) ok(room.includes(`${r.page}Test.html`), `${r.page}.html does not lead to its test`);
   if (test) {
     ok(test.includes(`${r.page}.html`), `${r.page}Test.html does not lead back to the readings`);
@@ -151,8 +168,13 @@ for (const r of readings) {
     ok(!!h && h.includes(`${r.page}.html`) && h.includes(`${r.page}Test.html`), `${r.course}Unit${n}.html does not link to ${r.page} and its test`);
   }
   // the certificate page holds the diploma on a master's track until the pass (cts-textbook-gate.js)
-  const code = Object.values(JSON.parse(fs.readFileSync('worker/catalog.json', 'utf8')).completions).find((c) => c.name && page(c.page) && page(c.page).includes(`data-textbook="${r.slug}"`));
-  ok(!!code, `no certificate page names data-textbook="${r.slug}" for the gate`);
+  // -- by its own attribute, or, for a course with a textbook as well, by the
+  // generated requirements the page loads (cts-required-tests.js)
+  const tbCode = catalogJson.textbooks[r.slug]?.code;
+  const certPage = catalogJson.completions[tbCode]?.page;
+  const cert = certPage && page(certPage);
+  ok(!!cert && (cert.includes(`data-textbook="${r.slug}"`) || (cert.includes('cts-required-tests.js') && cert.indexOf('cts-required-tests.js') < cert.indexOf('cts-textbook-gate.js'))),
+    `the certificate page ${certPage} neither names data-textbook="${r.slug}" nor loads cts-required-tests.js before the gate`);
 }
 
 console.log(`${checks} textbook assertions across ${books.length} textbooks and ${readings.length} required-reading tests`);

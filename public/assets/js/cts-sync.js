@@ -244,6 +244,19 @@
       if (!get(k)) set(k, String(t.passed_at || '').slice(0, 10) || new Date().toISOString().slice(0, 10));
       addTo('cts_textbooks_passed', t.textbook);
     });
+
+    // The required-reading tests the record does not need of this student: a
+    // master's completion of the course it held before the test began to count
+    // (9 Oct 2026; worker/awards.js). Kept apart from the passes -- never sent
+    // up as one -- so the pages say what the record says (cts-record.js,
+    // cts-textbook-gate.js).
+    (state.exemptions || []).forEach(function (slug) {
+      if (!/^[a-z]+$/.test(String(slug || ''))) return;
+      var k = 'cts_textbook_' + slug + '_exempt';
+      if (!get(k)) set(k, 'record');
+    });
+    // pages that show something by these keys (the certificate's gate) look again
+    try { document.dispatchEvent(new CustomEvent('cts-sync-applied')); } catch (e) {}
   }
 
   // ---- the network, which is always allowed to fail ------------------------
