@@ -484,7 +484,11 @@ body:not(.spanish) .manuscript-margin .mm b .lang-es,body.spanish .manuscript-ma
   <div class="course-complete" id="courseComplete">
     <span class="lang-en">🎓 Congratulations! You have completed all ten units.</span>
     <span class="lang-es">🎓 ¡Felicitaciones! Ha completado las diez unidades.</span>
-    <div style="margin-top:.7rem"><a href="CTSPreachingCertificate.html" style="display:inline-block;padding:.55rem 1.1rem;background:#2c3e36;color:#fff;border-radius:6px;text-decoration:none;font-weight:bold">
+    <p id="cts-ws-hold" hidden role="status" style="margin:.7rem 0 0;line-height:1.6">
+      <span class="lang-en">To record this course toward your Master’s degree, <a href="CTSPreachingReadingsTest.html" style="color:#2c3e36;font-weight:bold;text-decoration:underline">pass the required-reading test</a>. Your certificate follows.</span>
+      <span class="lang-es">Para registrar este curso para su maestría, <a href="CTSPreachingReadingsTest.html" style="color:#2c3e36;font-weight:bold;text-decoration:underline">apruebe el examen de las lecturas requeridas</a>. Luego recibirá su certificado.</span>
+    </p>
+    <div id="cts-ws-certlink" style="margin-top:.7rem"><a href="CTSPreachingCertificate.html" style="display:inline-block;padding:.55rem 1.1rem;background:#2c3e36;color:#fff;border-radius:6px;text-decoration:none;font-weight:bold">
       <span class="lang-en">Your certificate →</span>
       <span class="lang-es">Su certificado →</span>
     </a></div>
@@ -1629,6 +1633,8 @@ Cómo, Dónde y Quién.</em></span></div>
 </div>
 <script src="assets/js/cts-fill.js?v=20260927a"></script>
 <script src="assets/js/fill/wisespeak.js?v=20260927a"></script>
+<script src="assets/js/cts-required-tests.js?v=20261010a"></script>
+<script src="assets/js/cts-record.js?v=20261010a"></script>
 <script>
 // ============= COURSE DATA - QUESTION BANKS PER UNIT =============
 const TRACK_NAMES = {cert:{en:"Certificate of Ministry",es:"Certificado de Ministerio"},mtheol:{en:"Master of Theology",es:"Maestría en Teología"},mdiv:{en:"Master of Divinity",es:"Maestría en Divinidad"}};
@@ -2560,10 +2566,16 @@ function updateProgress(){
     `<span class="lang-en">${passed} of ${UNIT_COUNT} units completed</span><span class="lang-es">${passed} de ${UNIT_COUNT} unidades completadas</span>`;
   if(passed===UNIT_COUNT){
     document.getElementById('courseComplete').classList.add('show');
+    // Recorded through the shared recorder, like Counseling and Narrative Preaching:
+    // while a required test still holds a Master's student, nothing is written and
+    // the student is pointed to the test instead of to a held certificate.
     try{
-      if(window.CTSCurriculum&&CTSCurriculum.markComplete){ CTSCurriculum.markComplete('WISESPEAK','Preaching'); }
-      var r=JSON.parse(localStorage.getItem('cts_degree_courses')||'[]'); if(!Array.isArray(r))r=[];
-      if(r.indexOf('Preaching')<0){r.push('Preaching');localStorage.setItem('cts_degree_courses',JSON.stringify(r));}
+      const course = window.CTSRecord ? CTSRecord.singleCourse('WISESPEAK') : null;
+      const held = !!(course && CTSRecord.textbookHolds(course));
+      const note = document.getElementById('cts-ws-hold'); if(note) note.hidden = !held;
+      const link = document.getElementById('cts-ws-certlink'); if(link) link.style.display = held ? 'none' : '';
+      if(course && !held) CTSRecord.course(course);
+      else if(!course && window.CTSCurriculum && CTSCurriculum.markComplete) CTSCurriculum.markComplete('WISESPEAK','Preaching');
     }catch(e){}
     var wsSec=document.getElementById('cts-wisespeak-complete'); if(wsSec) wsSec.style.display='none';
   }
