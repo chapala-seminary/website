@@ -81,4 +81,24 @@ for(const code of ['COUNSELING','STORYTEL']) for(const track of ['cert','mdiv','
   if(code==='STORYTEL') {assert.equal(node('cts-st-hold').hidden,true); checks++;}
   assert.equal(JSON.parse(storage.get('cts_done_codes')||'[]').includes(code),true); checks++;
 }
+// Preaching (WiseSpeak) records through the same recorder. With no reading test
+// configured it completes exactly as before; with one in force it holds a
+// Master's student until the test is passed, and an inactive one (null) holds no one.
+for(const [from,label] of [[undefined,'none'],[null,'inactive'],['2020-01-01T00:00:00Z','active']]) for(const track of ['cert','mdiv','thm']) {
+  const storage=new Map([['cts_track',track],['cts_wisespeak_layout','2']]);
+  const win={};
+  if(from!==undefined) win.CTS_REQUIRED_TESTS={WISESPEAK:[{slug:'preachingreadings',kind:'reading',requiredFrom:from}]};
+  const ctx=vm.createContext({window:win,localStorage:{getItem:k=>storage.get(k)??null,setItem:(k,v)=>storage.set(k,String(v))}});
+  vm.runInContext(source,ctx);
+  const record=ctx.window.CTSRecord, course=record.singleCourse('WISESPEAK');
+  storage.set(course.state,JSON.stringify(Object.fromEntries(course.units.map(i=>[i,{passed:true}]))));
+  const held=label==='active'&&track!=='cert';
+  assert.equal(record.textbookHolds(course),held); checks++;
+  assert.equal(!!record.course(course),!held); checks++;
+  if(held){ storage.set('cts_textbook_preachingreadings_passed','2026-10-10'); assert.equal(!!record.course(course),true); checks++; }
+  assert.equal(JSON.parse(storage.get('cts_done_codes')||'[]').includes('WISESPEAK'),true); checks++;
+}
+const wsHtml=fs.readFileSync('public/CTS_WiseSpeak_Preaching.html','utf8');
+assert.ok(wsHtml.indexOf('cts-required-tests.js')<wsHtml.indexOf('assets/js/cts-record.js')); checks++;
+assert.ok(wsHtml.includes("CTSRecord.singleCourse('WISESPEAK')")&&wsHtml.includes('id="cts-ws-hold"')); checks++;
 console.log(`PASS — ${checks} single-course recorder assertions`);
