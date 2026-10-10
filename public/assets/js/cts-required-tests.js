@@ -33,6 +33,20 @@ window.CTS_REQUIRED_TESTS = {
    "kind": "textbook"
   }
  ],
+ "CTSJOSH": [
+  {
+   "slug": "joshua",
+   "page": "CTSTextbookJoshua",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "joshuareadings",
+   "page": "CTSJoshReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
  "CTSLA": [
   {
    "slug": "language",
@@ -117,14 +131,6 @@ window.CTS_REQUIRED_TESTS = {
   {
    "slug": "hermeneuticsreadings",
    "page": "CTSHermeneuticsReadings",
-   "kind": "reading",
-   "requiredFrom": null
-  }
- ],
- "CTSJOSH": [
-  {
-   "slug": "joshuareadings",
-   "page": "CTSJoshReadings",
    "kind": "reading",
    "requiredFrom": null
   }

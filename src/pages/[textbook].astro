@@ -28,18 +28,30 @@ const toc = (html: string) =>
   [...html.matchAll(/<(h2|h3) id="([^"]+)">([\s\S]*?)<\/\1>/g)]
     .map((m) => ({ level: m[1], id: m[2], text: m[3].replace(/<[^>]+>/g, '') }));
 const contents = { en: toc(book.body.en), es: toc(book.body.es) };
+const web = ('html' in book.files ? book.files.html : undefined);
+const pdf = ('pdf' in book.files ? book.files.pdf : undefined);
 ---
 <Textbook kind="book" book={book} course={course} accent={accent}>
   <section class="card tb-about">
     <h2><span class="lang-en">About this textbook</span><span class="lang-es">Sobre este libro de texto</span></h2>
-    <p>
+    <p hidden={!!web}>
       <span class="lang-en">This is the textbook for <a href={`/${course.entry}`}>{course.title.en}</a>. It is required reading for students on the M.Div. and Th.M. tracks, and open to everyone. Read it here in English or Spanish, or download it as a PDF. When you have read it, take the textbook test: twenty fill-in-the-blank questions, drawn from forty, on a page of its own.</span>
       <span class="lang-es">Este es el libro de texto del curso <a href={`/${course.entry}`}>{course.title.es}</a>. Es lectura obligatoria para los estudiantes de los trayectos M.Div. y Th.M., y está abierto a todos. Léalo aquí en inglés o en español, o descárguelo en PDF. Cuando lo haya leído, presente el examen del libro: veinte preguntas para completar, tomadas de cuarenta, en una página aparte.</span>
     </p>
+    {web && <p><span class="lang-en">Read the original English book or the CTS Spanish translation of the assigned chapters on the seminary website. This textbook examination is optional for now; it does not delay course completion.</span><span class="lang-es">Lea el libro original completo en inglés o la traducción CTS de los capítulos asignados en español dentro del sitio del seminario. Este examen es opcional por ahora y no retrasa la finalización del curso.</span></p>}
     <div class="actions tb-actions">
       <a class="btn solid" href={`/${book.page}Test.html`}><span class="lang-en">Take the textbook test</span><span class="lang-es">Presentar el examen del libro</span> →</a>
-      <a class="btn" href={`/${book.files.pdf.en}`} download><span class="lang-en">PDF (English)</span><span class="lang-es">PDF (inglés)</span></a>
-      <a class="btn" href={`/${book.files.pdf.es}`} download><span class="lang-en">PDF (Spanish)</span><span class="lang-es">PDF (español)</span></a>
+      {web ? (
+        <>
+          <a class="btn" href={`/${web.en}`}><span class="lang-en">Full book (English)</span><span class="lang-es">Libro completo (inglés)</span></a>
+          <a class="btn" href={`/${web.es}`}><span class="lang-en">Assigned chapters (Spanish)</span><span class="lang-es">Capítulos asignados (español)</span></a>
+        </>
+      ) : (
+        <>
+          <a class="btn" href={`/${pdf?.en}`} download><span class="lang-en">PDF (English)</span><span class="lang-es">PDF (inglés)</span></a>
+          <a class="btn" href={`/${pdf?.es}`} download><span class="lang-en">PDF (Spanish)</span><span class="lang-es">PDF (español)</span></a>
+        </>
+      )}
     </div>
     <p class="small muted" id="tb-passed-note" hidden></p>
   </section>
@@ -58,7 +70,6 @@ const contents = { en: toc(book.body.en), es: toc(book.body.es) };
   <article class="card tb-book lang-es" lang="es" set:html={book.body.es} />
 
   <p class="small muted tb-edition">
-    <span class="lang-en">CTS Textbook Edition {book.edition}. The Word file is the master; this page was made from it.</span>
-    <span class="lang-es">Edición de libro de texto CTS {book.edition}. El archivo de Word es el original; esta página se hizo a partir de él.</span>
+      {web ? <><span class="lang-en">Historical public-domain edition; the CTS Spanish assigned chapters are linked above.</span><span class="lang-es">Edición histórica de dominio público; arriba se enlazan los capítulos asignados traducidos por CTS.</span></> : <><span class="lang-en">CTS Textbook Edition {book.edition}. The Word file is the master; this page was made from it.</span><span class="lang-es">Edición de libro de texto CTS {book.edition}. El archivo de Word es el original; esta página se hizo a partir de él.</span></>}
   </p>
 </Textbook>

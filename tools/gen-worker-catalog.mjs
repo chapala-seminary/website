@@ -148,7 +148,9 @@ const textbooks = {};
     const code = unitCourse ? unitCourse[1].code : SINGLE[t.course];
     if (!code || !completions[code]) { console.error(`textbook ${t.slug}: its course ${t.course} has no completion code`); process.exit(2); }
     if (unitCourse) (unitCourse[1].tests ??= []).push(t.slug);
-    textbooks[t.slug] = { code, page: t.page, title: t.title, kind: 'textbook' };
+    if (t.requiredFrom != null && Number.isNaN(Date.parse(t.requiredFrom))) { console.error(`textbook ${t.slug}: bad activation date`); process.exit(2); }
+    textbooks[t.slug] = { code, page: t.page, title: t.title, kind: 'textbook',
+      ...('requiredFrom' in t ? { requiredFrom: t.requiredFrom } : {}) };
   }
   // The required-reading tests (src/content/readings, Dr. Cook's Add-ons, 4 Oct
   // 2026) sit in the same map with kind "reading": the Worker and the pages

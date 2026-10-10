@@ -39,7 +39,8 @@ const tests = testsOfCourseWith(book.slug);
 const completion = unitCourse
   ? { slug: unitCourse[0], code: tb.code, name: done.name, page: done.page, units: unitCourse[1].units, textbook: book.slug, ...(tests.length > 1 ? { tests } : {}) }
   : { single: true, code: tb.code, name: done.name, page: done.page, textbook: book.slug, ...(tests.length > 1 ? { tests } : {}) };
-const data = JSON.stringify({ slug: book.slug, page: book.page, title: book.title, draw, pass, questions, completion }).replace(/</g, '\\u003c');
+const data = JSON.stringify({ slug: book.slug, page: book.page, title: book.title, draw, pass, questions, completion,
+  ...('requiredFrom' in book ? { requiredFrom: book.requiredFrom } : {}) }).replace(/</g, '\\u003c');
 ---
 <Textbook kind="test" book={book} course={course} accent={accent} scripts={['/assets/js/cts-fill.js', '/assets/js/cts-required-tests.js', '/assets/js/cts-record.js']} sync={true}>
   <section class="card tb-about">

@@ -13,7 +13,8 @@ export async function getStaticPaths() {
   type Test = { page: string; title: { en: string; es: string }; kind: 'textbook' | 'reading'; requiredFrom?: string | null };
   const testsOf = new Map<string, Test[]>();
   const add = (course: string, t: Test) => (testsOf.get(course) ?? testsOf.set(course, []).get(course)!).push(t);
-  for (const t of await getCollection('textbooks')) add(t.data.course, { page: t.data.page, title: t.data.title, kind: 'textbook' });
+  for (const t of await getCollection('textbooks')) add(t.data.course, { page: t.data.page, title: t.data.title, kind: 'textbook',
+    ...('requiredFrom' in t.data ? { requiredFrom: t.data.requiredFrom ?? null } : {}) });
   // and its required readings (src/content/readings): a box of their own, after the textbook's --
   // a course may have both (9 Oct 2026); worker/catalog.json allows one required-reading test a course
   for (const r of await getCollection('readings'))
