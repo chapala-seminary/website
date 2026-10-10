@@ -118,6 +118,11 @@ node tools/verify-sitemap.mjs dist
 # published.
 node tools/verify-textbooks.mjs dist
 
+# The World Religions Spanish readers (Oct 2026): each page is what its
+# translation gives, and every Spanish answer of the revised bank is in its
+# reading's reader -- for every reading, once the revised bank is in force.
+node tools/wr-readers.mjs
+
 # The reading rooms (Dr. Cook's Add-ons, Oct 2026): every room carries the
 # public-domain shelf its data says and an honours attestation, written by
 # tools/reading-rooms.mjs -- a room edited by hand drifts from the data.
