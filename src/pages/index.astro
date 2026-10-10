@@ -22,7 +22,10 @@ const courses = (await getCollection('courses'))
 
 // The Master's textbooks (src/content/textbooks), listed after the courses.
 // Each must belong to a course on this page, or its card has nowhere to point.
-const textbooks = (await getCollection('textbooks')).map((e) => e.data).sort((a, b) => a.number - b.number);
+// Pilot textbooks are available from their course, not advertised as mandatory.
+const textbooks = (await getCollection('textbooks')).map((e) => e.data)
+  .filter((t) => !('requiredFrom' in t) || t.requiredFrom != null)
+  .sort((a, b) => a.number - b.number);
 const cardOf = new Map(courses.map((c) => [c.code, c]));
 for (const t of textbooks)
   if (!cardOf.has(t.course))

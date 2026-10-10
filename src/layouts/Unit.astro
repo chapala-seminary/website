@@ -223,7 +223,11 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
           <span class="cts-textbook-mark" aria-hidden="true">📘</span>
           <span>
             <strong><span class="lang-en">Textbook for this course</span><span class="lang-es">Libro de texto de este curso</span></strong>
-            <span class="lang-en"> — required reading on the M.Div. and Th.M. tracks: </span><span class="lang-es"> — lectura obligatoria en los trayectos M.Div. y Th.M.: </span>
+            {t.requiredFrom === null ? (
+              <><span class="lang-en"> — optional test, not yet a Master's requirement: </span><span class="lang-es"> — examen opcional, todavía no obligatorio para maestría: </span></>
+            ) : (
+              <><span class="lang-en"> — required reading on the M.Div. and Th.M. tracks: </span><span class="lang-es"> — lectura obligatoria en los trayectos M.Div. y Th.M.: </span></>
+            )}
             <a href={`/${t.page}.html`}><span class="lang-en">{t.title.en}</span><span class="lang-es">{t.title.es}</span></a>
             &nbsp;·&nbsp;
             <a href={`/${t.page}Test.html`}><span class="lang-en">Textbook test</span><span class="lang-es">Examen del libro</span></a>

@@ -67,9 +67,13 @@ for (const b of books) {
     ok(!fillRight(q, ''), `${b.slug} #${i + 1}: an empty answer is marked right`);
   });
   for (const lang of ['en', 'es']) {
-    ok(fs.existsSync(path.join('public', b.files.pdf[lang])), `${b.slug}: ${b.files.pdf[lang]} is not in public/`);
-    ok(fs.existsSync(b.files.docx[lang]), `${b.slug}: the Word master ${b.files.docx[lang]} is missing`);
-    ok(/<h2 /.test(b.body[lang]), `${b.slug}: the ${lang} book has no chapter headings`);
+    if (b.files.html) {
+      ok(fs.existsSync(path.join('public', b.files.html[lang])), `${b.slug}: published book ${b.files.html[lang]} is missing`);
+    } else {
+      ok(fs.existsSync(path.join('public', b.files.pdf[lang])), `${b.slug}: ${b.files.pdf[lang]} is not in public/`);
+      ok(fs.existsSync(b.files.docx[lang]), `${b.slug}: Word master ${b.files.docx[lang]} missing`);
+    }
+    ok(/<h2 /.test(b.body[lang]), `${b.slug}: ${lang} book has no headings`);
   }
 }
 
@@ -87,7 +91,8 @@ for (const b of books) {
   const book = page(`${b.page}.html`), test = page(`${b.page}Test.html`);
   ok(!!book, `${b.page}.html was not built`);
   ok(!!test, `${b.page}Test.html was not built`);
-  ok(index.includes(`href="/${b.page}.html"`), `the front page does not list ${b.page}`);
+  if (b.requiredFrom === null) ok(!index.includes(`href="/${b.page}.html"`), `pilot ${b.page} should not appear as mandatory on front page`);
+  else ok(index.includes(`href="/${b.page}.html"`), `the front page does not list ${b.page}`);
   if (book) ok(book.includes(`${b.page}Test.html`), `${b.page}.html does not lead to its test`);
   if (test) {
     ok(test.includes(`${b.page}.html`), `${b.page}Test.html does not lead back to the book`);
@@ -97,7 +102,7 @@ for (const b of books) {
       ok(!test.includes(`<h2 id="${lang}-1">`), `${b.page}Test.html carries the ${lang} book's chapter headings`);
       const paras = [...b.body[lang].matchAll(/<p>([\s\S]*?)<\/p>/g)].map((m) => m[1].replace(/<[^>]+>/g, '')).filter((t) => t.length > 220);
       const sample = paras.filter((_, i) => i % 5 === 0).map((t) => t.slice(0, 160));
-      ok(sample.length > 0 && !sample.some((s) => test.includes(s)), `${b.page}Test.html carries the ${lang} book's text: the test must stand apart from the book`);
+      if (!b.files.html) ok(sample.length > 0 && !sample.some((s) => test.includes(s)), `${b.page}Test.html carries the ${lang} book's text: the test must stand apart from the book`);
     }
   }
   // the course links to its book: every unit of a unit course, or the single page

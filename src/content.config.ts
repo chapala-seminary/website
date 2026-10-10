@@ -269,11 +269,16 @@ const textbooks = defineCollection({
     subtitle: bilingual.optional(),
     credits: bilingual.optional(),
     edition: z.string().min(1),
-    files: z.object({
-      pdf: bilingual,                 // public/ paths, for download
-      docx: bilingual,                // the masters, under src/data/textbooks
-      sha256: bilingual,              // of the Word files this was converted from
-    }),
+    // Original CTS books use Word/PDF masters. Public-domain commentaries
+    // use existing complete on-site HTML (full English, assigned Spanish).
+    files: z.union([
+      z.object({ pdf: bilingual, docx: bilingual, sha256: bilingual }),
+      z.object({ html: bilingual }),
+    ]),
+    // Null means students may take the new textbook test, but NO master's
+    // course completion is held by it. Omitted means old mandatory textbook.
+    requiredFrom: z.string().refine((v) => /^\d{4}-\d{2}-\d{2}T/.test(v) && !Number.isNaN(Date.parse(v)),
+      { message: 'requiredFrom must be an ISO date/time' }).nullable().optional(),
     body: z.object({ en: bookHtml, es: bookHtml }),
     test: z.object({
       draw: z.number().int().positive(),
