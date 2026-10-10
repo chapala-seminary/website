@@ -11,6 +11,7 @@ import { getCollection } from 'astro:content';
 import groups from '../data/catalog-groups.json';
 import intro from '../data/catalog-intro.json';
 import catalog from '../../worker/catalog.json';
+import { requiredTests } from '../lib/required-tests.ts';
 
 const head = (await import('../body/index/head.html?raw')).default;
 const tail = (await import('../body/index/tail.html?raw')).default;
@@ -28,10 +29,19 @@ for (const t of textbooks)
     throw new Error(`textbook ${t.slug} belongs to course "${t.course}", which has no catalog card`);
 // The required readings (src/content/readings), listed with the textbooks:
 // the same rule on the master's tracks, open to every student.
-const readings = (await getCollection('readings')).map((e) => e.data).sort((a, b) => a.title.en.localeCompare(b.title.en));
+// A reading test not yet in force (requiredFrom null, 9 Oct 2026) is not listed
+// here until it is: it is reached from its course's units and reading room.
+const readings = (await getCollection('readings')).map((e) => e.data)
+  .filter((r) => !('requiredFrom' in r) || r.requiredFrom != null)
+  .sort((a, b) => a.title.en.localeCompare(b.title.en));
 for (const r of readings)
   if (!cardOf.has(r.course))
     throw new Error(`required readings ${r.slug} belong to course "${r.course}", which has no catalog card`);
+
+// The count in words, as the lead above it spells its counts.
+const WORDS_EN = ['No', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'];
+const WORDS_ES = ['Ningún', 'Un', 'Dos', 'Tres', 'Cuatro', 'Cinco', 'Seis', 'Siete', 'Ocho', 'Nueve', 'Diez'];
+const readingCount = { en: WORDS_EN[readings.length] ?? String(readings.length), es: WORDS_ES[readings.length] ?? String(readings.length) };
 
 // Invariants the hand-written catalog had no way to enforce.
 if (courses.length !== intro.statedCount)
@@ -53,8 +63,10 @@ if (empty.length)
 // finished a course before completion moved off the certificate page, and
 // never opens one of its units again, is recorded when they visit the front
 // page. Single-page courses record themselves (CTSCurriculum.markComplete).
-const recordable = Object.entries(catalog.courses as Record<string, { code: string; units: number[]; textbook?: string }>)
-  .map(([slug, c]) => ({ slug, code: c.code, units: c.units, textbook: c.textbook ?? null,
+const recordable = Object.entries(catalog.courses as Record<string, { code: string; units: number[]; tests?: string[] }>)
+  .map(([slug, c]) => ({ slug, code: c.code, units: c.units, textbook: c.tests?.[0] ?? null,
+    // every test, where there is more to say than the first (two tests, or an activation date: 9 Oct 2026)
+    ...((t) => t.length > 1 || t.some((x) => 'requiredFrom' in x) ? { tests: t } : {})(requiredTests(c.tests)),
     name: (catalog.completions as Record<string, { name: string; page: string }>)[c.code].name,
     page: (catalog.completions as Record<string, { name: string; page: string }>)[c.code].page }));
 const recordJson = JSON.stringify(recordable).replace(/</g, '\\u003c');
@@ -95,8 +107,13 @@ const recordJson = JSON.stringify(recordable).replace(/</g, '\\u003c');
       ))}
     </div>
     <h3 style="margin-top:26px"><span class="en">Required Readings</span><span class="es">Lecturas Requeridas</span></h3>
+    {readings.length === 2 ? (
     <p><span class="en">Two courses set required readings instead of a textbook, each with a test of its own under the same rule.</span>
     <span class="es">Dos cursos fijan lecturas requeridas en lugar de un libro de texto, cada uno con su propio examen bajo la misma regla.</span></p>
+    ) : (
+    <p><span class="en">{readingCount.en} courses set required readings, each with a test of its own under the same rule. A course that also has a textbook has two tests, each passed on its own.</span>
+    <span class="es">{readingCount.es} cursos fijan lecturas requeridas, cada uno con su propio examen bajo la misma regla. Un curso que también tiene libro de texto tiene dos exámenes, y cada uno se aprueba por separado.</span></p>
+    )}
     <div class="tb-grid" id="required-readings">
       {readings.map((r) => (
         <a class="textbook reading" href={`${r.page}.html`}><div class="tb-title"><span class="en">{r.title.en}</span><span class="es">{r.title.es}</span></div><div class="tb-for"><span class="en">For {cardOf.get(r.course)!.title.en}</span><span class="es">Para {cardOf.get(r.course)!.title.es}</span></div><span class="tb-go"><span class="en">Read →</span><span class="es">Leer →</span></span></a>

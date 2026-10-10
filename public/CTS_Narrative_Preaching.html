@@ -1034,6 +1034,8 @@ body.spanish .lang-es{display:block}
 </div>
 <script src="assets/js/cts-fill.js?v=20260927a"></script>
 <script src="assets/js/fill/narrative.js?v=20260927a"></script>
+<script src="assets/js/cts-required-tests.js?v=f6e0623b02"></script>
+<script src="assets/js/cts-record.js?v=20261010a"></script>
 <script>
 // ============= COURSE DATA - QUESTION BANKS PER UNIT =============
 const TRACK_NAMES = {cert:{en:"Certificate of Ministry",es:"Certificado de Ministerio"},mtheol:{en:"Master of Theology",es:"Maestría en Teología"},mdiv:{en:"Master of Divinity",es:"Maestría en Divinidad"}};
@@ -1847,9 +1849,8 @@ function updateProgress(){
   document.getElementById('progressFill').textContent = pct+'%';
   document.getElementById('progressText').innerHTML =
     `<span class="lang-en">${passed} of ${TOTAL_UNITS} units completed</span><span class="lang-es">${passed} de ${TOTAL_UNITS} unidades completadas</span>`;
-  if(passed===TOTAL_UNITS){
-    document.getElementById('courseComplete').classList.add('show');
-  }
+  document.getElementById('courseComplete').classList.toggle('show', passed===TOTAL_UNITS);
+  if(window.ctsStorytelRefresh) window.ctsStorytelRefresh();
 }
 function showCert(unitNum){
   if(!state.registration){alert('Register first');return}
@@ -1860,7 +1861,6 @@ function showCert(unitNum){
   document.getElementById('certTrack').textContent = t.en;
   document.getElementById('certTrackEs').textContent = t.es;
   document.getElementById('certModal').classList.add('show');
-  if(window.ctsStorytelComplete) window.ctsStorytelComplete();
 }
 document.getElementById('certModal').addEventListener('click',(e)=>{
   if(e.target.id==='certModal') e.target.classList.remove('show');
@@ -1886,9 +1886,13 @@ updateProgress();
     <span class="lang-en">Narrative Preaching is an elective in the preaching track that develops the story sermon as a biblical form. When you have worked through the units above, mark it complete to record it toward your program.</span>
     <span class="lang-es">La Predicaci&oacute;n Narrativa es un curso electivo de la l&iacute;nea de predicaci&oacute;n que desarrolla el serm&oacute;n-historia como forma b&iacute;blica. Cuando haya trabajado las unidades anteriores, m&aacute;rquelo como completado para registrarlo en su programa.</span>
   </p>
-  <button id="cts-st-done" type="button" style="background:#4A1E3A;color:#fff;border:0;border-radius:26px;padding:12px 26px;font:inherit;font-weight:bold;cursor:pointer">
+  <button id="cts-st-done" type="button" hidden style="background:#4A1E3A;color:#fff;border:0;border-radius:26px;padding:12px 26px;font:inherit;font-weight:bold;cursor:pointer">
     <span class="lang-en">Mark this course complete</span><span class="lang-es">Marcar este curso como completado</span>
   </button>
+  <p id="cts-st-hold" hidden role="status" style="margin:14px 0 0;color:#5a3550;line-height:1.6">
+    <span class="lang-en">Your units are complete. To record this course toward your Master’s degree, <a href="CTSTextbookNarrativePreachingTest.html">pass the textbook test</a>.</span>
+    <span class="lang-es">Ha completado las unidades. Para registrar este curso para su maestría, <a href="CTSTextbookNarrativePreachingTest.html">apruebe el examen del libro de texto</a>.</span>
+  </p>
   <p id="cts-st-status" style="margin:14px 0 0;color:#2c6e49;font-weight:bold;display:none">
     <span class="lang-en">Recorded &mdash; Narrative Preaching is saved toward your program.</span>
     <span class="lang-es">Registrado &mdash; La Predicaci&oacute;n Narrativa se guarda en su programa.</span>
@@ -1907,19 +1911,21 @@ updateProgress();
     if(tk==="mtheol"||tk==="thm"||tk==="mth")return "Master of Theology (Th.M.)";
     return "Certificate of Ministry";
   }
-  function recordLocal(){
-    try{
-      if(window.CTSCurriculum&&CTSCurriculum.markComplete){ CTSCurriculum.markComplete('STORYTEL','Narrative Preaching'); }
-      else {
-        var a=JSON.parse(localStorage.getItem('cts_done_codes')||'[]'); if(!Array.isArray(a))a=[];
-        if(a.indexOf('STORYTEL')<0){a.push('STORYTEL');localStorage.setItem('cts_done_codes',JSON.stringify(a));}
-        var r=JSON.parse(localStorage.getItem('cts_degree_courses')||'[]'); if(!Array.isArray(r))r=[];
-        if(r.indexOf('Narrative Preaching')<0){r.push('Narrative Preaching');localStorage.setItem('cts_degree_courses',JSON.stringify(r));}
-      }
-    }catch(e){}
+  function unitsComplete(){
+    for(var i=1;i<=TOTAL_UNITS;i++) if(!state.unitState[i]?.passed) return false;
+    return true;
   }
   function recordCompletion(){
-    recordLocal();                                   // gating code + Associate roster (idempotent)
+    // Recheck even for a direct call: the button and unit certificate are not proof.
+    if(!unitsComplete() || !window.CTSRecord) return false;
+    var course=CTSRecord.singleCourse('STORYTEL');
+    var held=CTSRecord.textbookHolds(course);
+    var note=document.getElementById('cts-st-hold'); if(note) note.hidden=!held;
+    if(held){
+      var status=document.getElementById('cts-st-status'); if(status) status.style.display='none';
+      return false;
+    }
+    if(!CTSRecord.course(course)) return false;
     try{
       var reg=null; try{ if(typeof state!=='undefined'&&state&&state.registration) reg=state.registration; }catch(e){}
       if(reg&&reg.name&&!localStorage.getItem(POST_KEY)){   // log to the seminary sheet once
@@ -1935,8 +1941,22 @@ updateProgress();
     }catch(e){}
     var s=document.getElementById('cts-st-status'); if(s)s.style.display='block';
   }
-  window.ctsStorytelComplete=recordCompletion;       // let the certificate view trigger it
-  function wire(){ var b=document.getElementById('cts-st-done'); if(b)b.addEventListener('click',recordCompletion); }
+  window.ctsStorytelComplete=recordCompletion;
+  function refreshCompletion(){
+    var b=document.getElementById('cts-st-done');
+    if(b) b.hidden=!unitsComplete();
+    if(unitsComplete()) recordCompletion();
+    else {
+      var note=document.getElementById('cts-st-hold'); if(note) note.hidden=true;
+      var status=document.getElementById('cts-st-status'); if(status) status.style.display='none';
+    }
+  }
+  window.ctsStorytelRefresh=refreshCompletion;
+  function wire(){
+    var b=document.getElementById('cts-st-done');
+    if(b)b.addEventListener('click',recordCompletion);
+    refreshCompletion();
+  }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',wire); else wire();
 })();
 </script>

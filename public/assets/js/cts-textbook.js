@@ -96,17 +96,37 @@
     var practice = false;             // after a pass: another set, for practice, not recorded
     function save() { lsSet(KEY.state, JSON.stringify(state)); }
 
-    /* A fresh draw: `draw` distinct indices into the bank, in random order. */
+    /* A fresh draw: `draw` distinct indices into the bank, in random order.
+       A reading test drawn by reading (T.perReading, 9 Oct 2026) takes that
+       many from each reading's questions, so every attempt covers all five;
+       the twenty are then shuffled together. */
+    function shuffle(a) {
+      for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
+      return a;
+    }
     function newDraw() {
       var idx = [], i;
+      if (T.perReading) {
+        var groups = {}, order = [];
+        for (i = 0; i < n; i++) {
+          var r = T.questions[i].reading;
+          if (!groups[r]) { groups[r] = []; order.push(r); }
+          groups[r].push(i);
+        }
+        order.forEach(function (r) { idx = idx.concat(shuffle(groups[r]).slice(0, T.perReading)); });
+        return shuffle(idx).slice(0, Math.min(T.draw, n));
+      }
       for (i = 0; i < n; i++) idx.push(i);
-      for (i = n - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = idx[i]; idx[i] = idx[j]; idx[j] = t; }
-      return idx.slice(0, Math.min(T.draw, n));
+      return shuffle(idx).slice(0, Math.min(T.draw, n));
     }
     function drawOK(d) {
       if (!Array.isArray(d) || d.length !== Math.min(T.draw, n)) return false;
-      var seen = {};
-      for (var i = 0; i < d.length; i++) { if (typeof d[i] !== "number" || d[i] < 0 || d[i] >= n || seen[d[i]]) return false; seen[d[i]] = 1; }
+      var seen = {}, per = {};
+      for (var i = 0; i < d.length; i++) {
+        if (typeof d[i] !== "number" || d[i] < 0 || d[i] >= n || seen[d[i]]) return false;
+        seen[d[i]] = 1;
+        if (T.perReading) { var r = T.questions[d[i]].reading; per[r] = (per[r] || 0) + 1; if (per[r] > T.perReading) return false; }
+      }
       return true;
     }
     function startAttempt() {
@@ -133,8 +153,23 @@
       scheduleUnlock();
     }
 
+    /* What the seminary's record says about this test for this student
+       (9 Oct 2026): not yet in force, or not needed for a master's
+       completion the record held before it was. Only said; the test can
+       still be taken, and a pass is kept as any pass is. */
+    function standing() {
+      if ("requiredFrom" in T && T.requiredFrom == null)
+        return bi({ en: "This test is being introduced and is not yet required on any track.",
+                    es: "Este examen se está introduciendo y aún no es obligatorio en ningún trayecto." });
+      if (lsGet("cts_textbook_" + slug + "_exempt"))
+        return bi({ en: "Your record already held this course as a master's completion before this test began to count, so it is not required of you for this course. You may still take it.",
+                    es: "Su registro ya tenía este curso como finalización de maestría antes de que este examen empezara a contar, así que no se le exige para este curso. Aun así puede presentarlo." });
+      return "";
+    }
     function renderStatus() {
       var when = passedOn(), m = lockRemaining(), h = "";
+      var st = standing();
+      if (st && !when) h += '<p class="small muted" id="tb-standing">' + st + "</p>";
       if (when && !practice) {
         h += '<div class="cts-passed"><p class="cts-passed-title">&#10003; ' + bi(W.passed) + "</p>" +
              "<p>" + bi({ en: "Passed on " + esc(when) + ". It is saved in this browser.", es: "Aprobado el " + esc(when) + ". Quedó guardado en este navegador." }) + "</p>" +
@@ -159,6 +194,18 @@
       if (until > Date.now()) unlockTimer = setTimeout(function () { startAttempt(); say(""); mount(); }, until - Date.now() + 600);
     }
 
+    /* After a pass, the course's other required test, if it is still to pass:
+       a textbook test and a five-reading test are passed separately. */
+    function stillToPass() {
+      try {
+        var left = (window.CTSRecord && window.CTSRecord.pendingTests && T.completion) ? window.CTSRecord.pendingTests(T.completion) : [];
+        left = left.filter(function (t) { return t.slug !== slug; });
+        if (!left.length) return "";
+        var t = left[0], rd = t.kind === "reading";
+        return " " + bi({ en: "The course also needs its " + (rd ? "required-reading test" : "textbook test") + ": ", es: "El curso también necesita su " + (rd ? "examen de lecturas requeridas" : "examen del libro de texto") + ": " })
+          + '<a href="/' + esc(t.page) + 'Test.html">' + bi({ en: "take it", es: "preséntelo" }) + "</a>.";
+      } catch (e) { return ""; }
+    }
     function say(msg, colour) { result.innerHTML = msg ? '<span style="color:' + (colour || "#000") + '">' + msg + "</span>" : ""; }
 
     function submit() {
@@ -184,7 +231,8 @@
         }
         say(bi({ en: "&#10003; Passed: " + r.score + " of " + r.n + " right (" + T.pass + " needed)." + (completedNow === "new" ? " That completes the course: " : ""),
                  es: "&#10003; Aprobado: " + r.score + " de " + r.n + " correctas (se necesitan " + T.pass + ")." + (completedNow === "new" ? " Con esto el curso queda completo: " : "") })
-            + (completedNow === "new" && T.completion.page ? '<a href="/' + esc(T.completion.page) + '">' + bi({ en: "your certificate", es: "su certificado" }) + "</a>" : ""), "#1f6b3b");
+            + (completedNow === "new" && T.completion.page ? '<a href="/' + esc(T.completion.page) + '">' + bi({ en: "your certificate", es: "su certificado" }) + "</a>" : "")
+            + stillToPass(), "#1f6b3b");
         practice = false;
       } else {
         var mins = isMasters() ? LOCK_MASTERS_MIN : LOCK_CERT_MIN;

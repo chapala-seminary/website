@@ -69,6 +69,8 @@ for (const [name, c] of [['production', prod], ['beta', prod.env?.beta]]) {
   if (!c) continue;
   ok(!c.vars?.ACCESS_JWKS, `${name}: ACCESS_JWKS is not set (it is for the test suite only)`);
   ok(!c.vars?.EMAIL_MODE, `${name}: EMAIL_MODE is not set (it is for the test suite only)`);
+  // the activation dates of the required-reading tests, swapped for the suite's (worker/api.js testRequiredFrom)
+  ok(!c.vars?.TEST_REQUIRED_FROM, `${name}: TEST_REQUIRED_FROM is not set (it is for the test suite only)`);
   // "A, B <x@y>" is two addresses to a mail server; a name with a comma must be quoted
   for (const k of ['EMAIL_FROM', 'OUTREACH_FROM'])
     ok(!/^[^"]*,[^"]*</.test(c.vars?.[k] || ''), `${name}: ${k} has no unquoted comma in the sender's name`, c.vars?.[k]);
