@@ -14,6 +14,7 @@
  *                        Dr. Cook asked for "three to five accepted answers
  *                        where appropriate", so a plural, a fuller name or an
  *                        obvious equivalent does not fail a right answer.
+ *                        A question with one clear answer may have none.
  * A bank may also say how many questions to draw from each reading
  * (format.questions_drawn_per_reading); each of its questions then names its
  * reading, and every attempt draws that many from each.
@@ -79,6 +80,7 @@ for (const t of TESTS) {
     if (groups * perReading !== f.questions_per_attempt) { console.error(`${t.slug}: ${groups} readings x ${perReading} is not ${f.questions_per_attempt} a draw`); process.exit(2); }
     for (const [r, c] of Object.entries(counts)) if (c < perReading) { console.error(`${t.slug}: reading ${r} has ${c} questions, fewer than the ${perReading} drawn from it`); process.exit(2); }
   }
+  const single = { en: 0, es: 0 };
   const questions = bank.questions.map((q) => {
     const blank = (s) => s.replace(/_{3,}/g, '____').replace(/\.''$/, ".'").trim();
     const alt = accept[String(q.id)] || {};
@@ -91,7 +93,10 @@ for (const t of TESTS) {
     const en = list('en', q.answer_en), es = list('es', q.answer_es);
     for (const [lang, a] of [['en', en], ['es', es]]) {
       if (a.length + 1 > 5) { console.error(`${t.slug} #${q.id}: ${a.length + 1} ${lang} answers; Dr. Cook asked for three to five`); problems++; }
-      if (!a.length) { console.error(`${t.slug} #${q.id}: no accepted ${lang} alternate`); problems++; }
+      // An alternate is optional (Dr. Cook, 10 Oct 2026): a question with one clear
+      // answer -- Polycarp, Nicaea, 325 -- goes in as it is rather than with an
+      // invented synonym that would mark a wrong answer right. Counted, not refused.
+      if (!a.length) single[lang]++;
     }
     for (const [lang, p] of [['en', q.en], ['es', q.es]])
       if (blank(p).split('____').length !== 2) { console.error(`${t.slug} #${q.id}: not one blank in ${lang}: ${p}`); problems++; }
@@ -105,6 +110,7 @@ for (const t of TESTS) {
   if (t.requiredFrom != null && Number.isNaN(Date.parse(t.requiredFrom))) { console.error(`${t.slug}: requiredFrom is not a date and time: ${t.requiredFrom}`); process.exit(2); }
   const counts = questions.map((q) => 1 + q.accept.en.length);
   console.log(`${t.slug}: ${questions.length} questions, accepted answers per question ${Math.min(...counts)}–${Math.max(...counts)} (English), for ${t.course}`);
+  if (single.en || single.es) console.log(`  ${single.en} English and ${single.es} Spanish questions take their one answer only (no alternate)`);
   if (WRITE) { fs.mkdirSync(OUT, { recursive: true }); fs.writeFileSync(path.join(OUT, `${t.slug}.json`), JSON.stringify(out, null, 1) + '\n'); console.log(`  wrote ${OUT}/${t.slug}.json`); }
 }
 if (problems) { console.error(`${problems} problem(s)`); process.exit(1); }
