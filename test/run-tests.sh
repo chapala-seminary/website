@@ -17,6 +17,8 @@ PORT=${PORT:-8798}
 STATE=.wrangler-local
 CONFIG=test/wrangler.local.jsonc
 
+node test/single-completion.test.mjs
+
 # A fresh database every run. The suite used to keep whatever the last run
 # left behind, which is fine until something in the schema counts -- the
 # moment failed lookups were being throttled, run two inherited run one's
@@ -246,6 +248,7 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   # The same fill-in rules on the four courses the engine does not run:
   # Counseling, Narrative and WiseSpeak Preaching, and Ethics.
   node tools/verify-fill-single.mjs "http://127.0.0.1:$PORT"
+  node tools/verify-single-completion.mjs "http://127.0.0.1:$PORT"
   # The textbook tests (Oct 2026): twenty drawn from forty, eighteen to pass,
   # locked after a failure, a fresh draw after the wait -- as a student
   # would use the page.
