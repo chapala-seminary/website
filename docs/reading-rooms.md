@@ -42,6 +42,31 @@ The honours code a room records under is the certificate page's name
 (`cts-cert-pdf.js`); `reading-rooms.mjs` takes it from `worker/catalog.json`
 and refuses a room whose certificate it cannot find.
 
+## The revised World Religions bank (10 Oct 2026) — not yet in force
+
+The current World Religions test does not test the five assigned readings
+(ChatGPT's source audit, 10 Oct 2026). A revised bank is ready beside it and
+approved under Dr. Cook's delegation: eight questions on each reading, four
+drawn from each, 18 of 20 to pass, every answer checked against the linked
+edition.
+
+| Path | What |
+|---|---|
+| `src/data/readings/wrreadings.v2.bank.json` | The revised bank: each question names its `reading` (1–5) and its source passage; `format` gives `questions_per_reading` and the bank `revision`. **Answer-bearing: never under `public/`.** |
+| `src/data/readings/wrreadings.v2.accept.json` | Its accepted alternates, keyed by question id. |
+| `tools/import-readings.mjs` | The World Religions row's `next: { bank: 'wrreadings.v2', active: false }`. Every run checks the revised bank. Only `active: true` makes `--write` put it in `src/content/readings/wrreadings.json`. `--next-out DIR` writes it elsewhere for the tests. |
+| `public/assets/js/cts-textbook.js` | A bank with `perGroup` draws that many from each reading. A bank with a `revision` starts a fresh attempt when a saved one was begun under another revision, or before there was one. The pass, its date and any lock are kept. Banks without them (every textbook, Genesis) are unchanged. |
+| `tools/verify-grouped-reading-test.mjs` | The browser check, run by the suite. |
+
+**Not to be switched on before the readings can be read in Spanish** (decision
+of 10 Oct 2026; the Spanish readers wait on a rights check). To switch on:
+set `active: true`, run `node tools/import-readings.mjs --write`, build, and
+run the suite. The test page then says "four on each of the five readings".
+A student partway through the old test gets a fresh attempt on the new
+questions. Their typed answers belong to the old questions, so they are not
+carried over. Passes already recorded, in the browser and on the server,
+stand.
+
 ## Known limits
 
 - The shelf links straight to a public-domain copy wherever a stable, legal

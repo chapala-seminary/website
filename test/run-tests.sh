@@ -239,6 +239,15 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   # locked after a failure, a fresh draw after the wait -- as a student
   # would use the page.
   node tools/verify-textbook-test.mjs "http://127.0.0.1:$PORT"
+  # A required-reading test drawn by reading (World Religions, revised Oct
+  # 2026): four from each of the five readings, and an attempt begun on other
+  # questions set aside, the pass and any lock kept. Until the revised bank is
+  # in force the site has no page for it, so it is tested on a copy of the
+  # page with the site's scripts, from the bank the importer would write.
+  NEXT_READINGS=$(mktemp -d)
+  node tools/import-readings.mjs --next-out "$NEXT_READINGS"
+  node tools/verify-grouped-reading-test.mjs "http://127.0.0.1:$PORT" "$NEXT_READINGS/wrreadings.json"
+  rm -rf "$NEXT_READINGS"
   # The reading rooms in a browser: the shelf shows, the attestation records
   # under the code the certificate reads, in each family of room.
   node tools/verify-reading-rooms.mjs "http://127.0.0.1:$PORT"
