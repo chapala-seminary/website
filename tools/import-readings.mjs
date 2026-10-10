@@ -76,6 +76,24 @@ const TESTS = [
   ].map(([slug, page, course, en, es]) => ({ slug, page, course, kind: 'reading', requiredFrom: null, dir: 'src/data/readings/staged', alternates: 'optional',
     title: { en: `${en}: Required Readings`, es: `${es}: Lecturas Requeridas` },
     room: { en: `the five readings in the ${en} Reading Room`, es: `las cinco lecturas de la Sala de Lecturas de ${es}` } })),
+  /* Batch B (10 Oct 2026, ChatGPT's banks): Joshua, Galatians, Romans, Acts
+     and Matthew, on the five CTS digests. Same terms as the eight above;
+     Acts and Matthew have no alternates yet (optional). */
+  { slug: 'joshuareadings', page: 'CTSJoshReadings', course: 'CTSJosh', kind: 'reading', requiredFrom: null,
+    title: {"en": "Joshua: Required Readings", "es": "Josué: Lecturas Requeridas"},
+    room: {"en": "the five readings in the Joshua Reading Room", "es": "las cinco lecturas de Josué"} },
+  { slug: 'galatiansreadings', page: 'CTSGalatiansReadings', course: 'CTSGalatians', kind: 'reading', requiredFrom: null,
+    title: {"en": "Galatians: Required Readings", "es": "Gálatas: Lecturas Requeridas"},
+    room: {"en": "the five readings in the Galatians Reading Room", "es": "las cinco lecturas de Gálatas"} },
+  { slug: 'romansreadings', page: 'CTSRomansReadings', course: 'CTSRomans', kind: 'reading', requiredFrom: null,
+    title: {"en": "Romans: Required Readings", "es": "Romanos: Lecturas Requeridas"},
+    room: {"en": "the five readings in the Romans Reading Room", "es": "las cinco lecturas de Romanos"} },
+  { slug: 'actsreadings', page: 'CTSActsReadings', course: 'CTSActs', kind: 'reading', requiredFrom: null, alternates: 'optional',
+    title: {"en": "Acts: Required Readings", "es": "Hechos: Lecturas Requeridas"},
+    room: {"en": "the five readings in the Acts Reading Room", "es": "las cinco lecturas de Hechos"} },
+  { slug: 'mattreadings', page: 'CTSMattReadings', course: 'CTSMatt', kind: 'reading', requiredFrom: null, alternates: 'optional',
+    title: {"en": "Matthew Intensive: Required Readings", "es": "Intensivo de Mateo: Lecturas Requeridas"},
+    room: {"en": "the five readings in the Matthew Reading Room", "es": "las cinco lecturas de Mateo"} },
 ];
 
 const fold = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^\p{L}\p{N} ]+/gu, ' ').replace(/\s+/g, ' ').trim();

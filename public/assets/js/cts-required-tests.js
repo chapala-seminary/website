@@ -74,6 +74,14 @@ window.CTS_REQUIRED_TESTS = {
    "kind": "textbook"
   }
  ],
+ "CTSACTS": [
+  {
+   "slug": "actsreadings",
+   "page": "CTSActsReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
  "CTSCH": [
   {
    "slug": "chreadings",
@@ -90,6 +98,14 @@ window.CTS_REQUIRED_TESTS = {
    "requiredFrom": null
   }
  ],
+ "CTSGALATIANS": [
+  {
+   "slug": "galatiansreadings",
+   "page": "CTSGalatiansReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
  "CTSGENESIS": [
   {
    "slug": "genesisreadings",
@@ -101,6 +117,22 @@ window.CTS_REQUIRED_TESTS = {
   {
    "slug": "hermeneuticsreadings",
    "page": "CTSHermeneuticsReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSJOSH": [
+  {
+   "slug": "joshuareadings",
+   "page": "CTSJoshReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSMATT": [
+  {
+   "slug": "mattreadings",
+   "page": "CTSMattReadings",
    "kind": "reading",
    "requiredFrom": null
   }
@@ -125,6 +157,14 @@ window.CTS_REQUIRED_TESTS = {
   {
    "slug": "pmreadings",
    "page": "CTSPMReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSROMANS": [
+  {
+   "slug": "romansreadings",
+   "page": "CTSRomansReadings",
    "kind": "reading",
    "requiredFrom": null
   }
