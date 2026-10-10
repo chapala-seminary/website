@@ -18,6 +18,8 @@ STATE=.wrangler-local
 CONFIG=test/wrangler.local.jsonc
 
 node test/single-completion.test.mjs
+node test/single-page-readings.test.mjs
+node tools/verify-staged-readings.mjs
 
 # A fresh database every run. The suite used to keep whatever the last run
 # left behind, which is fine until something in the schema counts -- the

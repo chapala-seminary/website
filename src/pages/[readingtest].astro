@@ -32,13 +32,18 @@ const { draw, pass, questions } = reading.test;
    applies (the test sits in `textbooks` with kind "reading"). */
 const tb = (catalog.textbooks as Record<string, { code: string; kind: string }>)[reading.slug];
 const unitCourse = unitCourseWith(reading.slug);
-if (!tb || !unitCourse) throw new Error(`worker/catalog.json does not carry the required readings ${reading.slug}: run node tools/gen-worker-catalog.mjs`);
+if (!tb) throw new Error(`worker/catalog.json does not carry the required readings ${reading.slug}: run node tools/gen-worker-catalog.mjs`);
 const done = (catalog.completions as Record<string, { name: string; page: string }>)[tb.code];
 /* Every test the course requires, this one among them (9 Oct 2026): a pass
    here completes the course only when nothing else is still to pass. */
 const tests = testsOfCourseWith(reading.slug);
 const dated = tests.length > 1 || tests.some((t) => 'requiredFrom' in t);
-const completion = { slug: unitCourse[0], code: tb.code, name: done.name, page: done.page, units: unitCourse[1].units, textbook: reading.slug, textbookKind: 'reading', textbookPage: reading.page, ...(dated ? { tests } : {}) };
+/* A single-page course (Preaching) has no unit record: the test page names
+   the course by its code, as the textbook test pages do for Counseling, and
+   the course's own page goes on recording its completion (cts-record.js). */
+const completion = unitCourse
+  ? { slug: unitCourse[0], code: tb.code, name: done.name, page: done.page, units: unitCourse[1].units, textbook: reading.slug, textbookKind: 'reading', textbookPage: reading.page, ...(dated ? { tests } : {}) }
+  : { single: true, code: tb.code, name: done.name, page: done.page, textbook: reading.slug, textbookKind: 'reading', textbookPage: reading.page, ...(dated ? { tests } : {}) };
 const book = { slug: reading.slug, page: reading.page, course: reading.course, title: reading.title, edition: 'readings' };
 const perReading = reading.test.perReading ?? null;
 const pending = 'requiredFrom' in reading && reading.requiredFrom == null;

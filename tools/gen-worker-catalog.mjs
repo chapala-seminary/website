@@ -138,7 +138,9 @@ for (const [slug, c] of Object.entries(courses)) {
 // public/assets/js/cts-record.js); the pages and the Worker read this one map.
 const textbooks = {};
 {
-  const SINGLE = { CTSCounseling: 'COUNSELING', CTS_Narrative_Preaching: 'STORYTEL' };
+  // Preaching (WiseSpeak) has no textbook test; it is here for its proposed
+  // five-reading test (10 Oct 2026), which is staged, not installed.
+  const SINGLE = { CTSCounseling: 'COUNSELING', CTS_Narrative_Preaching: 'STORYTEL', CTS_WiseSpeak_Preaching: 'WISESPEAK' };
   const dir = 'src/content/textbooks';
   for (const f of fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => f.endsWith('.json')).sort() : []) {
     const t = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
@@ -161,12 +163,16 @@ const textbooks = {};
   const rdir = 'src/content/readings';
   for (const f of fs.existsSync(rdir) ? fs.readdirSync(rdir).filter((f) => f.endsWith('.json')).sort() : []) {
     const t = JSON.parse(fs.readFileSync(path.join(rdir, f), 'utf8'));
+    // A unit course by its slug; a single-page course (no numbered unit
+    // record, e.g. Preaching) by the code its certificate page names, as for
+    // the textbooks above.
     const unitCourse = Object.entries(courses).find(([, c]) => c.pages === t.course);
-    if (!unitCourse) { console.error(`required readings ${t.slug}: its course ${t.course} is not a unit course`); process.exit(2); }
-    if ((unitCourse[1].tests || []).some((s) => textbooks[s]?.kind === 'reading')) { console.error(`required readings ${t.slug}: ${t.course} already has a required-reading test; a course has one`); process.exit(2); }
-    (unitCourse[1].tests ??= []).push(t.slug);
+    const code = unitCourse ? unitCourse[1].code : SINGLE[t.course];
+    if (!code || !completions[code]) { console.error(`required readings ${t.slug}: its course ${t.course} is neither a unit course nor a single-page course with a completion code`); process.exit(2); }
+    if (Object.values(textbooks).some((x) => x.code === code && x.kind === 'reading')) { console.error(`required readings ${t.slug}: ${t.course} already has a required-reading test; a course has one`); process.exit(2); }
+    if (unitCourse) (unitCourse[1].tests ??= []).push(t.slug);
     if (t.requiredFrom != null && Number.isNaN(Date.parse(t.requiredFrom))) { console.error(`required readings ${t.slug}: requiredFrom is not a date and time: ${t.requiredFrom}`); process.exit(2); }
-    textbooks[t.slug] = { code: unitCourse[1].code, page: t.page, title: t.title, kind: 'reading',
+    textbooks[t.slug] = { code, page: t.page, title: t.title, kind: 'reading',
       ...('requiredFrom' in t ? { requiredFrom: t.requiredFrom } : {}) };
   }
 }
