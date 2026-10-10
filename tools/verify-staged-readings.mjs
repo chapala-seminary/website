@@ -6,8 +6,7 @@
  * Checks that the staged files are the ones ChatGPT delivered (SHA-256 in
  * academic_manifest.json), that each bank has the agreed shape (40 questions,
  * eight per reading, four drawn per reading, 18 of 20 to pass), that every
- * one is inactive and NOT installed (no src/content/readings file, not in
- * tools/import-readings.mjs), and that every primary answer, English and
+ * one is inactive (installed, if at all, with requiredFrom null), and that every primary answer, English and
  * Spanish, occurs in the course's reading room -- the five CTS digests the
  * questions are written on. Missing accepted alternates are counted and
  * reported, not failed: faculty supply them (299 of 320 when staged). */
@@ -23,7 +22,6 @@ const norm = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
   .replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/\s+/g, ' ');
 const text = (h) => norm(h.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, ' ')
   .replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&#39;|&rsquo;|&lsquo;/g, "'").replace(/&quot;|&ldquo;|&rdquo;/g, '"'));
-const importer = fs.readFileSync('tools/import-readings.mjs', 'utf8');
 
 if (m.requiredFrom !== null || m.never_auto_import !== true) bad('manifest: requiredFrom must be null and never_auto_import true');
 let total = 0, missingAlt = 0;
@@ -34,8 +32,10 @@ for (const c of m.courses) {
   if (crypto.createHash('sha256').update(raw).digest('hex') !== c.bank_sha256) bad(`${tag}: bank differs from the delivered file`);
   if (crypto.createHash('sha256').update(accRaw).digest('hex') !== c.accept_sha256) bad(`${tag}: accept file differs from the delivered file`);
   if (c.requiredFrom !== null || c.academic_status !== 'DRAFT_NEEDS_FACULTY_REVIEW' || c.deployment_status !== 'STAGING_ONLY') bad(`${tag}: not marked inactive draft staging`);
-  if (fs.existsSync(path.join('src/content/readings', `${c.slug}.json`))) bad(`${tag}: installed in src/content/readings`);
-  if (importer.includes(c.slug)) bad(`${tag}: listed in tools/import-readings.mjs`);
+  // Installed 10 Oct 2026 at Dr. Cook's request -- open to all, required of
+  // no one: an installed test must still carry requiredFrom null.
+  const inst = path.join('src/content/readings', `${c.slug}.json`);
+  if (fs.existsSync(inst) && JSON.parse(fs.readFileSync(inst, 'utf8')).requiredFrom !== null) bad(`${tag}: installed with a requiredFrom date; it must stay null until faculty approve`);
   const bank = JSON.parse(raw), acc = JSON.parse(accRaw), qs = bank.questions;
   const f = bank.format || {};
   if (qs.length !== 40 || f.questions_per_attempt !== 20 || f.questions_drawn_per_reading !== 4 || f.passing_score !== 18) bad(`${tag}: not 40 questions / 20 drawn / 4 per reading / 18 to pass`);
@@ -58,4 +58,4 @@ for (const c of m.courses) {
 }
 console.log(`${m.courses.length} staged banks, ${total} questions; ${missingAlt} still need accepted alternates from faculty (not an error)`);
 if (problems.length) { for (const p of problems) console.error('  ' + p); console.error(`FAIL: ${problems.length} problem(s)`); process.exit(1); }
-console.log('PASS: staged only, inactive, unchanged, answers supported by the reading rooms. Nothing written.');
+console.log('PASS: inactive (requiredFrom null), unchanged, answers supported by the reading rooms. Nothing written.');

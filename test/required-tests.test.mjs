@@ -38,7 +38,7 @@ ok(JSON.stringify(A.testsFor(CODE)) === JSON.stringify([BOOK, READ]), 'Pentecost
 ok(A.textbookFor(CODE) === BOOK, 'its textbook is still "the textbook" for anything that asks for one');
 ok(JSON.stringify(A.testsFor('CTSGENESIS')) === '["genesisreadings"]', 'Genesis keeps its one required-reading test');
 ok(JSON.stringify(A.testsFor('CTSWR')) === '["wrreadings"]', 'World Religions keeps its one required-reading test');
-ok(A.testsFor('CTSOTS').length === 0, 'a course with no test requires none');
+ok(A.testsFor('CTSPSALMS').length === 0, 'a course with no test requires none');
 ok(catalog.textbooks[READ].requiredFrom === null, 'the pilot ships NOT in force: requiredFrom is null until Robert activates it', catalog.textbooks[READ]);
 ok(!('requiredFrom' in catalog.textbooks.genesisreadings) && !('requiredFrom' in catalog.textbooks.wrreadings),
   'Genesis and World Religions carry no activation date: they have counted since 4 Oct and still do');

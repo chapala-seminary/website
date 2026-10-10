@@ -60,7 +60,7 @@ ok(cat.textbooks[WS]?.code === 'WISESPEAK' && cat.textbooks[WS]?.kind === 'readi
 ok(cat.textbooks[WS]?.requiredFrom === null, 'and stays inactive: requiredFrom null', cat.textbooks[WS]);
 ok(!Object.values(cat.courses).some((c) => (c.tests || []).includes(WS)), 'no unit course is given the test');
 ok(JSON.stringify(cat.completions.WISESPEAK) === JSON.stringify(before.completions.WISESPEAK), 'the WISESPEAK completion itself is unchanged');
-for (const [slug, t] of Object.entries(before.textbooks))
+for (const [slug, t] of Object.entries(before.textbooks)) if (slug !== WS)
   ok(JSON.stringify(cat.textbooks[slug]) === JSON.stringify(t), `existing test ${slug} unchanged`);
 ok(JSON.stringify(cat.courses) === JSON.stringify(before.courses), 'every unit course unchanged');
 const req = fs.readFileSync(path.join(dir, 'public/assets/js/cts-required-tests.js'), 'utf8');
@@ -78,7 +78,7 @@ const R = '2026-11-01T00:00:00.000Z', early = '2026-10-20T15:00:00.000Z', late =
 const active = (completions = [], now = late) => ({ requiredFrom: { [WS]: R }, now, completions });
 
 ok(JSON.stringify(A.testsFor('WISESPEAK')) === JSON.stringify([WS]), 'Preaching requires the one reading test');
-ok(A.testsFor('CTSNT').length === 0, 'a course with no test still requires none');
+ok(A.testsFor('CTSPSALMS').length === 0, 'a course with no test still requires none');
 
 // inactive, as staged
 for (const level of ['cert', 'associate', 'thm', 'mdiv', null])
