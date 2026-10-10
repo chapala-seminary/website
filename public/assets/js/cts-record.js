@@ -43,9 +43,15 @@
   function add(k, v) { var a = list(k); if (a.indexOf(v) === -1) { a.push(v); set(k, JSON.stringify(a)); } }
   function student() { try { return JSON.parse(get("cts_student") || "null") || {}; } catch (e) { return {}; } }
 
-  function trackToken() {
+  function trackToken(c) {
     var s = student();
-    return String(get("cts_track") || s.track || s.program || "cert").toLowerCase();
+    var t = get("cts_track") || s.track || s.program;
+    // The single-page courses also allow registration on their own page.
+    if (!t && c && c.registration) t = (json(c.registration, {}) || {}).track;
+    t = String(t || "cert").toLowerCase();
+    if (t === "mtheol" || t === "mth" || /master of theology/.test(t)) return "thm";
+    if (/master of divinity/.test(t)) return "mdiv";
+    return t;
   }
   function goalIsAssoc() {
     var t = trackToken(), s = student();
@@ -104,9 +110,9 @@
      complete only when its textbook test is passed as well (Dr. Cook, 4 Oct
      2026); cts-textbook.js records the pass and calls course() again. The
      Certificate and Associate tracks are not held by it. */
-  function mastersTrack() { var t = trackToken(); return t === "mdiv" || t === "thm" || t === "mth"; }
+  function mastersTrack(c) { var t = trackToken(c); return t === "mdiv" || t === "thm" || t === "mth"; }
   function textbookPassed(slug) { return !!get("cts_textbook_" + slug + "_passed"); }
-  function textbookHolds(c) { return !!(c && c.textbook && mastersTrack() && !textbookPassed(c.textbook)); }
+  function textbookHolds(c) { return !!(c && c.textbook && mastersTrack(c) && !textbookPassed(c.textbook)); }
 
   function complete(c) {
     if (!c) return false;
@@ -130,7 +136,9 @@
       state: "cts_wisespeak_state", layout: "cts_wisespeak_layout",
       units: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], before: { "": [1, 2, 3, 4, 5, 6, 7, 8, 9] } },
     { single: true, code: "COUNSELING", name: "Counseling", page: "CTSCounselingCertificate.html",
-      state: "cts_drakeford_state", units: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], textbook: "counseling" }
+      state: "cts_drakeford_state", registration: "cts_drakeford_reg", units: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], textbook: "counseling" },
+    { single: true, code: "STORYTEL", name: "Narrative Preaching", page: "CTSNarrativePreachingCertificate.html",
+      state: "cts_storytel_state", registration: "cts_storytel_reg", units: [1, 2, 3, 4, 5, 6, 7, 8], textbook: "narrative" }
   ];
   function singleComplete(c) {
     var st = json(c.state, null);
@@ -170,7 +178,7 @@
     // The track is the one the course was finished on. Only a new completion
     // takes it: a student who finished a course on the certificate track and
     // later switched to the M.Div. must not have it counted as master's work.
-    var t = trackToken();
+    var t = trackToken(c);
     if (t === "mdiv") add("cts_mdiv_done_codes", code);
     else if (t === "thm" || t === "mth") add("cts_thm_done_codes", code);
     else if (goalIsAssoc()) add("cts_assoc_done_codes", code);
@@ -186,6 +194,10 @@
       return n;
     },
     isComplete: complete,
+    singleCourse: function (code) {
+      for (var i = 0; i < SINGLES.length; i++) if (SINGLES[i].code === code) return SINGLES[i];
+      return null;
+    },
     // true when only the textbook test stands between this student and the course
     textbookHolds: textbookHolds,
   };

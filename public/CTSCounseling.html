@@ -1267,6 +1267,7 @@ body.spanish .lang-es{display:block}
 
 <script src="assets/js/cts-fill.js?v=20260927a"></script>
 <script src="assets/js/fill/counseling.js?v=20260927a"></script>
+<script src="assets/js/cts-record.js?v=20261010a"></script>
 <script>
 // ============= COURSE DATA - QUESTION BANKS PER UNIT =============
 // Associate of Divinity students answer the multiple choice and the ten
@@ -2651,7 +2652,8 @@ function updateProgress(){
   document.getElementById('progressText').innerHTML =
     `<span class="lang-en">${passed} of 11 units completed</span><span class="lang-es">${passed} de 11 unidades completadas</span>`;
   if(passed===11){
-    document.getElementById('courseComplete').classList.add('show'); try{ if(window.CTSCurriculum&&CTSCurriculum.markComplete){ CTSCurriculum.markComplete('COUNSELING','Counseling'); } else { var _a=JSON.parse(localStorage.getItem('cts_done_codes')||'[]'); if(!Array.isArray(_a))_a=[]; if(_a.indexOf('COUNSELING')<0){_a.push('COUNSELING');localStorage.setItem('cts_done_codes',JSON.stringify(_a));} var _r=JSON.parse(localStorage.getItem('cts_degree_courses')||'[]'); if(!Array.isArray(_r))_r=[]; if(_r.indexOf('Counseling')<0){_r.push('Counseling');localStorage.setItem('cts_degree_courses',JSON.stringify(_r));} } }catch(e){}
+    document.getElementById('courseComplete').classList.add('show');
+    if(window.CTSRecord) CTSRecord.course(CTSRecord.singleCourse('COUNSELING'));
   }
 }
 function showCert(unitNum){
