@@ -57,13 +57,34 @@ const TESTS = [
   { slug: 'pentecostalreadings', page: 'CTSPentecostalReadings', course: 'CTSPentecostal', kind: 'reading', requiredFrom: null,
     title: { en: 'Pentecostalism & the Charismatic Movement: Required Readings', es: 'El Pentecostalismo y el Movimiento Carismático: Lecturas Requeridas' },
     room: { en: 'the five readings in the Pentecostalism Reading Room', es: 'las cinco lecturas de la Sala de Lecturas del Pentecostalismo' } },
+  /* The eight Master's five-reading tests on the CTS reading digests (10 Oct
+     2026), from ChatGPT's banks in src/data/readings/staged/. Dr. Cook asked
+     for them online now -- open to every student, required of no one
+     (requiredFrom null) -- with the academic review to follow. Their accepted
+     alternates are optional, as he decided for reading tests whose answer is
+     one clear word (Oct 2026): a question with no alternate yet is reported,
+     not refused, and faculty add alternates to the .accept.json later. */
+  ...[
+    ['otsreadings', 'CTSOTSReadings', 'CTS', 'Old Testament Survey', 'Panorama del Antiguo Testamento'],
+    ['ntreadings', 'CTSNTReadings', 'CTSNT', 'New Testament Survey', 'Panorama del Nuevo Testamento'],
+    ['streadings', 'CTSSTReadings', 'CTSST', 'Systematic Theology', 'Teología Sistemática'],
+    ['evangelismreadings', 'CTSEvangelismReadings', 'CTSEvangelism', 'Evangelism', 'Evangelismo'],
+    ['pmreadings', 'CTSPMReadings', 'CTSPM', 'Pastoral Ministries', 'Ministerios Pastorales'],
+    ['chreadings', 'CTSCHReadings', 'CTSCH', 'Church History', 'Historia de la Iglesia'],
+    ['wisespeakreadings', 'CTSPreachingReadings', 'CTS_WiseSpeak_Preaching', 'Preaching', 'Predicación'],
+    ['hermeneuticsreadings', 'CTSHermeneuticsReadings', 'CTSHermeneutics', 'Hermeneutics', 'Hermenéutica'],
+  ].map(([slug, page, course, en, es]) => ({ slug, page, course, kind: 'reading', requiredFrom: null, dir: 'src/data/readings/staged', alternates: 'optional',
+    title: { en: `${en}: Required Readings`, es: `${es}: Lecturas Requeridas` },
+    room: { en: `the five readings in the ${en} Reading Room`, es: `las cinco lecturas de la Sala de Lecturas de ${es}` } })),
 ];
 
 const fold = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^\p{L}\p{N} ]+/gu, ' ').replace(/\s+/g, ' ').trim();
-let problems = 0;
+let problems = 0, optionalMissing = 0;
+const outputs = [];
 for (const t of TESTS) {
-  const bank = JSON.parse(fs.readFileSync(path.join(SRC, `${t.slug}.bank.json`), 'utf8'));
-  const accept = JSON.parse(fs.readFileSync(path.join(SRC, `${t.slug}.accept.json`), 'utf8'));
+  const dir = t.dir || SRC;
+  const bank = JSON.parse(fs.readFileSync(path.join(dir, `${t.slug}.bank.json`), 'utf8'));
+  const accept = JSON.parse(fs.readFileSync(path.join(dir, `${t.slug}.accept.json`), 'utf8'));
   const f = bank.format || {};
   if (f.questions_per_attempt !== 20 || f.passing_score !== 18 || f.type !== 'fill-in-the-blank') { console.error(`${t.slug}: the bank's format is not 20 of 40, 18 to pass, fill-in-the-blank`); process.exit(2); }
   /* A bank that names how many questions to draw from each reading tags
@@ -91,7 +112,7 @@ for (const t of TESTS) {
     const en = list('en', q.answer_en), es = list('es', q.answer_es);
     for (const [lang, a] of [['en', en], ['es', es]]) {
       if (a.length + 1 > 5) { console.error(`${t.slug} #${q.id}: ${a.length + 1} ${lang} answers; Dr. Cook asked for three to five`); problems++; }
-      if (!a.length) { console.error(`${t.slug} #${q.id}: no accepted ${lang} alternate`); problems++; }
+      if (!a.length) { if (t.alternates === 'optional') optionalMissing++; else { console.error(`${t.slug} #${q.id}: no accepted ${lang} alternate`); problems++; } }
     }
     for (const [lang, p] of [['en', q.en], ['es', q.es]])
       if (blank(p).split('____').length !== 2) { console.error(`${t.slug} #${q.id}: not one blank in ${lang}: ${p}`); problems++; }
@@ -100,11 +121,15 @@ for (const t of TESTS) {
   });
   const out = { slug: t.slug, page: t.page, course: t.course, kind: t.kind, title: t.title, room: t.room,
     ...('requiredFrom' in t ? { requiredFrom: t.requiredFrom } : {}),
-    source: { file: `src/data/readings/${t.slug}.bank.json`, course: bank.course },
+    source: { file: `${dir}/${t.slug}.bank.json`, course: bank.course },
     test: { draw: f.questions_per_attempt, pass: f.passing_score, ...(perReading !== null ? { perReading } : {}), questions } };
   if (t.requiredFrom != null && Number.isNaN(Date.parse(t.requiredFrom))) { console.error(`${t.slug}: requiredFrom is not a date and time: ${t.requiredFrom}`); process.exit(2); }
   const counts = questions.map((q) => 1 + q.accept.en.length);
   console.log(`${t.slug}: ${questions.length} questions, accepted answers per question ${Math.min(...counts)}–${Math.max(...counts)} (English), for ${t.course}`);
-  if (WRITE) { fs.mkdirSync(OUT, { recursive: true }); fs.writeFileSync(path.join(OUT, `${t.slug}.json`), JSON.stringify(out, null, 1) + '\n'); console.log(`  wrote ${OUT}/${t.slug}.json`); }
+  outputs.push(out);
 }
-if (problems) { console.error(`${problems} problem(s)`); process.exit(1); }
+if (optionalMissing) console.log(`${optionalMissing} answer(s) with no accepted alternate yet, on tests where alternates are optional (faculty to add)`);
+if (problems) { console.error(`${problems} problem(s); nothing written`); process.exit(1); }
+/* Written only when every test is sound, so a bank with a problem never
+   leaves half its tests updated. */
+if (WRITE) for (const out of outputs) { fs.mkdirSync(OUT, { recursive: true }); fs.writeFileSync(path.join(OUT, `${out.slug}.json`), JSON.stringify(out, null, 1) + '\n'); console.log(`  wrote ${OUT}/${out.slug}.json`); }

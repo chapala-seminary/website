@@ -74,11 +74,75 @@ window.CTS_REQUIRED_TESTS = {
    "kind": "textbook"
   }
  ],
+ "CTSCH": [
+  {
+   "slug": "chreadings",
+   "page": "CTSCHReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSEVANGELISM": [
+  {
+   "slug": "evangelismreadings",
+   "page": "CTSEvangelismReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
  "CTSGENESIS": [
   {
    "slug": "genesisreadings",
    "page": "CTSGenesisReadings",
    "kind": "reading"
+  }
+ ],
+ "CTSHERMENEUTICS": [
+  {
+   "slug": "hermeneuticsreadings",
+   "page": "CTSHermeneuticsReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSNT": [
+  {
+   "slug": "ntreadings",
+   "page": "CTSNTReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSOTS": [
+  {
+   "slug": "otsreadings",
+   "page": "CTSOTSReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSPM": [
+  {
+   "slug": "pmreadings",
+   "page": "CTSPMReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSST": [
+  {
+   "slug": "streadings",
+   "page": "CTSSTReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "WISESPEAK": [
+  {
+   "slug": "wisespeakreadings",
+   "page": "CTSPreachingReadings",
+   "kind": "reading",
+   "requiredFrom": null
   }
  ],
  "CTSWR": [
