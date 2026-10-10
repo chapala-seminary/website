@@ -242,6 +242,8 @@ const textbookFill = z.object({
   answer: z.object({ en: z.string().min(1), es: z.string().min(1) }).catchall(z.string().min(1)),
   accept: z.object({ en: z.array(z.string().min(1)).optional(),
                      es: z.array(z.string().min(1)).optional() }).catchall(z.array(z.string().min(1))).optional(),
+  // the reading the question is on, in a bank drawn by reading (tools/import-readings.mjs)
+  group: z.number().int().positive().optional(),
   tr: translationState.optional(),
 }).superRefine(completeQuestionLanguages);
 const bookHtml = z.string().min(1).superRefine((v, ctx) => {
@@ -305,8 +307,26 @@ const readings = defineCollection({
       draw: z.number().int().positive(),
       pass: z.number().int().positive(),
       questions: z.array(textbookFill).min(20),
+      /* A bank drawn by reading: `perGroup` from each group, every question in
+         one; and the bank's revision, so cts-textbook.js starts a fresh
+         attempt rather than grade one begun on other questions. */
+      perGroup: z.number().int().positive().optional(),
+      revision: z.string().min(1).optional(),
     }).refine((t) => t.pass <= t.draw && t.draw <= t.questions.length, {
       message: 'pass <= draw <= number of questions',
+    }).superRefine((t, ctx) => {
+      if (!t.perGroup) {
+        if (t.questions.some((q) => q.group !== undefined)) ctx.addIssue({ code: 'custom', message: 'questions carry a reading group, but the test has no perGroup' });
+        return;
+      }
+      if (!t.revision) ctx.addIssue({ code: 'custom', message: 'a bank drawn by reading needs a revision' });
+      const sizes = new Map();
+      for (const [i, q] of t.questions.entries()) {
+        if (q.group === undefined) ctx.addIssue({ code: 'custom', message: `question ${i + 1} names no reading group` });
+        else sizes.set(q.group, (sizes.get(q.group) ?? 0) + 1);
+      }
+      if (sizes.size * t.perGroup !== t.draw) ctx.addIssue({ code: 'custom', message: `${t.perGroup} from each of ${sizes.size} reading groups is not the ${t.draw} drawn` });
+      for (const [g, n] of sizes) if (n < t.perGroup) ctx.addIssue({ code: 'custom', message: `reading group ${g} has ${n} questions; ${t.perGroup} are drawn from each` });
     }),
   }),
 });

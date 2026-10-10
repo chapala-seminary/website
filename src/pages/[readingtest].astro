@@ -26,7 +26,11 @@ export async function getStaticPaths() {
   });
 }
 const { reading, course, accent } = Astro.props;
-const { draw, pass, questions } = reading.test;
+const { draw, pass, questions, perGroup, revision } = reading.test;
+/* A bank drawn by reading (World Religions, revised 10 Oct 2026): perGroup
+   from each reading, said so on the page, and the revision cts-textbook.js
+   checks before it resumes an attempt. */
+const groups = perGroup ? new Set(questions.map((q) => q.group)).size : 0;
 /* What a pass completes, from worker/catalog.json: the one map the Worker
    applies (the test sits in `textbooks` with kind "reading"). */
 const tb = (catalog.textbooks as Record<string, { code: string; kind: string }>)[reading.slug];
@@ -35,14 +39,14 @@ if (!tb || !unitCourse) throw new Error(`worker/catalog.json does not carry the 
 const done = (catalog.completions as Record<string, { name: string; page: string }>)[tb.code];
 const completion = { slug: unitCourse[0], code: tb.code, name: done.name, page: done.page, units: unitCourse[1].units, textbook: reading.slug, textbookKind: 'reading', textbookPage: reading.page };
 const book = { slug: reading.slug, page: reading.page, course: reading.course, title: reading.title, edition: 'readings' };
-const data = JSON.stringify({ slug: reading.slug, page: reading.page, kind: 'reading', title: reading.title, draw, pass, questions, completion }).replace(/</g, '\\u003c');
+const data = JSON.stringify({ slug: reading.slug, page: reading.page, kind: 'reading', title: reading.title, draw, pass, questions, completion, ...(perGroup ? { perGroup, revision } : {}) }).replace(/</g, '\\u003c');
 ---
 <Textbook kind="reading-test" book={book} course={course} accent={accent} scripts={['/assets/js/cts-fill.js', '/assets/js/cts-record.js']} sync={true}>
   <section class="card tb-about">
     <h2><span class="lang-en">Required-reading test</span><span class="lang-es">Examen de lecturas requeridas</span></h2>
     <p>
-      <span class="lang-en">Twenty fill-in-the-blank questions, drawn at random from forty, on {reading.room.en}. You need {pass} of {draw} to pass. Type the missing word or phrase and press Check (or Enter): each answer is marked at once. Capitals, accents and punctuation do not matter; you may answer in English or Spanish. If you fall short, go back to the readings and try again after a short wait; the next attempt draws a fresh twenty.</span>
-      <span class="lang-es">Veinte preguntas para completar, tomadas al azar de cuarenta, sobre {reading.room.es}. Necesita {pass} de {draw} para aprobar. Escriba la palabra o frase que falta y pulse Comprobar (o Intro): cada respuesta se califica en seguida. No importan las mayúsculas, los acentos ni la puntuación; puede responder en inglés o en español. Si no alcanza la nota, vuelva a las lecturas e inténtelo de nuevo tras una breve espera; el siguiente intento toma otras veinte.</span>
+      <span class="lang-en">Twenty fill-in-the-blank questions, drawn at random from forty{groups ? `, ${perGroup} on each of the ${groups} readings` : ''}, on {reading.room.en}. You need {pass} of {draw} to pass. Type the missing word or phrase and press Check (or Enter): each answer is marked at once. Capitals, accents and punctuation do not matter; you may answer in English or Spanish. If you fall short, go back to the readings and try again after a short wait; the next attempt draws a fresh twenty.</span>
+      <span class="lang-es">Veinte preguntas para completar, tomadas al azar de cuarenta{groups ? `, ${perGroup} de cada una de las ${groups} lecturas` : ''}, sobre {reading.room.es}. Necesita {pass} de {draw} para aprobar. Escriba la palabra o frase que falta y pulse Comprobar (o Intro): cada respuesta se califica en seguida. No importan las mayúsculas, los acentos ni la puntuación; puede responder en inglés o en español. Si no alcanza la nota, vuelva a las lecturas e inténtelo de nuevo tras una breve espera; el siguiente intento toma otras veinte.</span>
     </p>
     <p>
       <span class="lang-en">On the M.Div. and Th.M. tracks this test is required: the course is complete when its units and this test are passed. Certificate and Associate students may take it too, as a learning opportunity; nothing of theirs depends on it.</span>

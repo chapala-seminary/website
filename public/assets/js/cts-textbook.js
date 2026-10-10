@@ -27,6 +27,17 @@
  * A failed attempt is shown for review until the wait is over; the next
  * attempt draws a fresh twenty. Reload mid-attempt and the same twenty come
  * back with the answers so far.
+ *
+ * A BANK DRAWN BY READING (World Religions, revised 10 Oct 2026). When the
+ * bank says `perGroup` and each question its `group`, every attempt takes
+ * perGroup questions from each group -- four from each of the five readings
+ * -- and shuffles them together; a saved attempt that does not is drawn
+ * afresh. Such a bank also carries a `revision`, kept with the attempt as
+ * state.rev: an attempt saved under another revision (or none) was begun on
+ * other questions, whose numbers now point at different ones, so it is set
+ * aside for a fresh draw before anything is shown or graded. Only the attempt
+ * in hand is replaced: the pass, its date and any lock are left as they are.
+ * A bank without them (every textbook, Genesis) draws as it always has.
  */
 (function () {
   "use strict";
@@ -96,25 +107,44 @@
     var practice = false;             // after a pass: another set, for practice, not recorded
     function save() { lsSet(KEY.state, JSON.stringify(state)); }
 
-    /* A fresh draw: `draw` distinct indices into the bank, in random order. */
+    // a bank drawn by reading: perGroup from each group (see the head of this file)
+    var PER = T.perGroup || 0, REV = T.revision || null, GROUPS = {};
+    if (PER) for (var gi = 0; gi < n; gi++) { var g = T.questions[gi].group; (GROUPS[g] = GROUPS[g] || []).push(gi); }
+
+    function shuffle(a) {
+      for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
+      return a;
+    }
+    /* A fresh draw: `draw` distinct indices into the bank, in random order --
+       for a bank drawn by reading, perGroup from each group, shuffled together. */
     function newDraw() {
       var idx = [], i;
+      if (PER) {
+        Object.keys(GROUPS).forEach(function (g) { idx = idx.concat(shuffle(GROUPS[g].slice()).slice(0, PER)); });
+        return shuffle(idx);
+      }
       for (i = 0; i < n; i++) idx.push(i);
-      for (i = n - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = idx[i]; idx[i] = idx[j]; idx[j] = t; }
-      return idx.slice(0, Math.min(T.draw, n));
+      return shuffle(idx).slice(0, Math.min(T.draw, n));
     }
     function drawOK(d) {
       if (!Array.isArray(d) || d.length !== Math.min(T.draw, n)) return false;
-      var seen = {};
-      for (var i = 0; i < d.length; i++) { if (typeof d[i] !== "number" || d[i] < 0 || d[i] >= n || seen[d[i]]) return false; seen[d[i]] = 1; }
+      var seen = {}, per = {};
+      for (var i = 0; i < d.length; i++) {
+        if (typeof d[i] !== "number" || d[i] < 0 || d[i] >= n || seen[d[i]]) return false;
+        seen[d[i]] = 1;
+        if (PER) { var g = T.questions[d[i]].group; per[g] = (per[g] || 0) + 1; }
+      }
+      if (PER) for (var k in GROUPS) if (per[k] !== PER) return false;
       return true;
     }
     function startAttempt() {
       state = { draw: newDraw(), fillAnswers: [], fillChecked: [] };
+      if (REV) state.rev = REV;
       save();
     }
-    // the attempt in hand, or a new one: after a failed attempt's wait, or if nothing usable is saved
-    if (!drawOK(state.draw) || (state.redrawAt && Date.now() >= state.redrawAt && !lockRemaining())) startAttempt();
+    /* the attempt in hand, or a new one: after a failed attempt's wait, if
+       nothing usable is saved, or if it was begun on another revision of the bank */
+    if (!drawOK(state.draw) || (REV && state.rev !== REV) || (state.redrawAt && Date.now() >= state.redrawAt && !lockRemaining())) startAttempt();
 
     var host = el("tb-questions"), status = el("tb-status"), result = el("tb-result");
     var fill = null, unlockTimer = null;
