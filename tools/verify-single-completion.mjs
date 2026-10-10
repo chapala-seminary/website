@@ -48,6 +48,12 @@ try {
       if(c.code==='STORYTEL') await page.locator('#cts-st-done').click();
       await expectCredit(page,c,track,pass);
       if(c.code==='STORYTEL') {assert.equal(await page.locator('#cts-st-hold').isVisible(),!pass); checks++;}
+      if(c.code==='COUNSELING') {
+        // A held Master's student is pointed to the textbook test, not to a held certificate.
+        assert.equal(await page.locator('#cts-cn-hold').isVisible(),!pass,`COUNSELING ${track}: hold note`); checks++;
+        assert.equal(await page.locator('#cts-cn-hold a[href="CTSTextbookCounselingTest.html"]').first().isVisible(),!pass,`COUNSELING ${track}: hold link`); checks++;
+        assert.equal(await page.locator('#cts-cn-certlink').isVisible(),pass,`COUNSELING ${track}: certificate link`); checks++;
+      }
       await page.goto(`${BASE}/${c.cert}`,{waitUntil:'load'});
       assert.equal(await page.locator('#cts-textbook-hold').isVisible(),!pass); checks++;
       if(!pass) assert.equal(await page.locator('#diploma, #cert-wrap, .diploma, #certificate, .certificate, #cert, .cert-wrap, .sheet, #certCard').first().isVisible(),false);
@@ -57,12 +63,16 @@ try {
         await page.evaluate(slug=>localStorage.setItem(`cts_textbook_${slug}_passed`,'2026-10-10'),c.slug);
         await page.reload({waitUntil:'load'});
         await expectCredit(page,c,track,true);
+        if(c.code==='COUNSELING') {assert.equal(await page.locator('#cts-cn-hold').isVisible(),false,'COUNSELING: note gone after the pass'); checks++;}
       }
       await ctx.close();
     }
     for(const assoc of [false,true]) {
       const {ctx,page}=await open(c,'cert',c.units.length,false,false,assoc);
       await expectCredit(page,c,'cert',true,assoc);
+      // Certificate and Associate students are never shown a Master's hold.
+      const hold=c.code==='COUNSELING'?'#cts-cn-hold':'#cts-st-hold';
+      assert.equal(await page.locator(hold).isVisible(),false,`${c.code} cert${assoc?' (Associate)':''}: no hold note`); checks++;
       await ctx.close();
     }
     for(const track of ['mdiv','thm']) {

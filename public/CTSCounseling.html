@@ -396,7 +396,11 @@ body.spanish .lang-es{display:block}
   <div class="course-complete" id="courseComplete">
     <span class="lang-en">🎓 Congratulations! You have completed all eleven units (Foundation + Drakeford's Ten Steps).</span>
     <span class="lang-es">🎓 ¡Felicitaciones! Ha completado las once unidades (Fundamento + los Diez Pasos de Drakeford).</span>
-    <div style="margin-top:.7rem"><a href="CTSCounselingCertificate.html" style="display:inline-block;padding:.55rem 1.1rem;background:#2c3e36;color:#fff;border-radius:6px;text-decoration:none;font-weight:bold">
+    <p id="cts-cn-hold" hidden role="status" style="margin:.7rem 0 0;line-height:1.6">
+      <span class="lang-en">To record this course toward your Master’s degree, <a href="CTSTextbookCounselingTest.html" style="color:#2c3e36;font-weight:bold;text-decoration:underline">pass the textbook test</a>. Your certificate follows.</span>
+      <span class="lang-es">Para registrar este curso para su maestría, <a href="CTSTextbookCounselingTest.html" style="color:#2c3e36;font-weight:bold;text-decoration:underline">apruebe el examen del libro de texto</a>. Luego recibirá su certificado.</span>
+    </p>
+    <div id="cts-cn-certlink" style="margin-top:.7rem"><a href="CTSCounselingCertificate.html" style="display:inline-block;padding:.55rem 1.1rem;background:#2c3e36;color:#fff;border-radius:6px;text-decoration:none;font-weight:bold">
       <span class="lang-en">Your certificate →</span>
       <span class="lang-es">Su certificado →</span>
     </a></div>
@@ -2653,7 +2657,12 @@ function updateProgress(){
     `<span class="lang-en">${passed} of 11 units completed</span><span class="lang-es">${passed} de 11 unidades completadas</span>`;
   if(passed===11){
     document.getElementById('courseComplete').classList.add('show');
-    if(window.CTSRecord) CTSRecord.course(CTSRecord.singleCourse('COUNSELING'));
+    // A Master's student waiting for the textbook test is told so here, not sent to a held certificate.
+    const course = window.CTSRecord ? CTSRecord.singleCourse('COUNSELING') : null;
+    const held = !!(course && CTSRecord.textbookHolds(course));
+    const note = document.getElementById('cts-cn-hold'); if(note) note.hidden = !held;
+    const link = document.getElementById('cts-cn-certlink'); if(link) link.style.display = held ? 'none' : '';
+    if(course && !held) CTSRecord.course(course);
   }
 }
 function showCert(unitNum){
