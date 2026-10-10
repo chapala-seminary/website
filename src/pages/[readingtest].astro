@@ -12,6 +12,7 @@
 import { getCollection } from 'astro:content';
 import Textbook from '../layouts/Textbook.astro';
 import catalog from '../../worker/catalog.json';
+import { testsOfCourseWith, unitCourseWith } from '../lib/required-tests.ts';
 
 export async function getStaticPaths() {
   const tests = await getCollection('readings');
@@ -30,24 +31,41 @@ const { draw, pass, questions } = reading.test;
 /* What a pass completes, from worker/catalog.json: the one map the Worker
    applies (the test sits in `textbooks` with kind "reading"). */
 const tb = (catalog.textbooks as Record<string, { code: string; kind: string }>)[reading.slug];
-const unitCourse = Object.entries(catalog.courses as Record<string, { code: string; units: number[]; textbook?: string }>).find(([, c]) => c.textbook === reading.slug);
+const unitCourse = unitCourseWith(reading.slug);
 if (!tb || !unitCourse) throw new Error(`worker/catalog.json does not carry the required readings ${reading.slug}: run node tools/gen-worker-catalog.mjs`);
 const done = (catalog.completions as Record<string, { name: string; page: string }>)[tb.code];
-const completion = { slug: unitCourse[0], code: tb.code, name: done.name, page: done.page, units: unitCourse[1].units, textbook: reading.slug, textbookKind: 'reading', textbookPage: reading.page };
+/* Every test the course requires, this one among them (9 Oct 2026): a pass
+   here completes the course only when nothing else is still to pass. */
+const tests = testsOfCourseWith(reading.slug);
+const dated = tests.length > 1 || tests.some((t) => 'requiredFrom' in t);
+const completion = { slug: unitCourse[0], code: tb.code, name: done.name, page: done.page, units: unitCourse[1].units, textbook: reading.slug, textbookKind: 'reading', textbookPage: reading.page, ...(dated ? { tests } : {}) };
 const book = { slug: reading.slug, page: reading.page, course: reading.course, title: reading.title, edition: 'readings' };
-const data = JSON.stringify({ slug: reading.slug, page: reading.page, kind: 'reading', title: reading.title, draw, pass, questions, completion }).replace(/</g, '\\u003c');
+const perReading = reading.test.perReading ?? null;
+const pending = 'requiredFrom' in reading && reading.requiredFrom == null;
+const from = reading.requiredFrom ? new Date(reading.requiredFrom) : null;
+const fromText = from ? { en: from.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }),
+                          es: from.toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }) } : null;
+const data = JSON.stringify({ slug: reading.slug, page: reading.page, kind: 'reading', title: reading.title, draw, pass, questions, completion,
+  ...(perReading ? { perReading } : {}), ...('requiredFrom' in reading ? { requiredFrom: reading.requiredFrom ?? null } : {}) }).replace(/</g, '\\u003c');
 ---
-<Textbook kind="reading-test" book={book} course={course} accent={accent} scripts={['/assets/js/cts-fill.js', '/assets/js/cts-record.js']} sync={true}>
+<Textbook kind="reading-test" book={book} course={course} accent={accent} scripts={['/assets/js/cts-fill.js', '/assets/js/cts-required-tests.js', '/assets/js/cts-record.js']} sync={true}>
   <section class="card tb-about">
     <h2><span class="lang-en">Required-reading test</span><span class="lang-es">Examen de lecturas requeridas</span></h2>
     <p>
-      <span class="lang-en">Twenty fill-in-the-blank questions, drawn at random from forty, on {reading.room.en}. You need {pass} of {draw} to pass. Type the missing word or phrase and press Check (or Enter): each answer is marked at once. Capitals, accents and punctuation do not matter; you may answer in English or Spanish. If you fall short, go back to the readings and try again after a short wait; the next attempt draws a fresh twenty.</span>
-      <span class="lang-es">Veinte preguntas para completar, tomadas al azar de cuarenta, sobre {reading.room.es}. Necesita {pass} de {draw} para aprobar. Escriba la palabra o frase que falta y pulse Comprobar (o Intro): cada respuesta se califica en seguida. No importan las mayúsculas, los acentos ni la puntuación; puede responder en inglés o en español. Si no alcanza la nota, vuelva a las lecturas e inténtelo de nuevo tras una breve espera; el siguiente intento toma otras veinte.</span>
+      <span class="lang-en">Twenty fill-in-the-blank questions, drawn at random from forty{perReading ? ` — ${perReading} from each of the five readings —` : ','} on {reading.room.en}. You need {pass} of {draw} to pass. Type the missing word or phrase and press Check (or Enter): each answer is marked at once. Capitals, accents and punctuation do not matter; you may answer in English or Spanish. If you fall short, go back to the readings and try again after a short wait; the next attempt draws a fresh twenty.</span>
+      <span class="lang-es">Veinte preguntas para completar, tomadas al azar de cuarenta{perReading ? ` — ${perReading} de cada una de las cinco lecturas —` : ','} sobre {reading.room.es}. Necesita {pass} de {draw} para aprobar. Escriba la palabra o frase que falta y pulse Comprobar (o Intro): cada respuesta se califica en seguida. No importan las mayúsculas, los acentos ni la puntuación; puede responder en inglés o en español. Si no alcanza la nota, vuelva a las lecturas e inténtelo de nuevo tras una breve espera; el siguiente intento toma otras veinte.</span>
     </p>
+    {pending ? (
     <p>
-      <span class="lang-en">On the M.Div. and Th.M. tracks this test is required: the course is complete when its units and this test are passed. Certificate and Associate students may take it too, as a learning opportunity; nothing of theirs depends on it.</span>
-      <span class="lang-es">En los trayectos M.Div. y Th.M. este examen es obligatorio: el curso se completa cuando se aprueban sus unidades y este examen. Los estudiantes de Certificado y Asociado también pueden presentarlo, como oportunidad de aprendizaje; nada de lo suyo depende de él.</span>
+      <span class="lang-en">This test is being introduced for the M.Div. and Th.M. tracks and is not yet required: the seminary will announce when it begins to count. Until then any student may take it; a pass is kept in your record and will count when it does.</span>
+      <span class="lang-es">Este examen se está introduciendo para los trayectos M.Div. y Th.M. y aún no es obligatorio: el seminario anunciará cuándo empieza a contar. Mientras tanto cualquier estudiante puede presentarlo; la aprobación queda en su registro y contará cuando así sea.</span>
     </p>
+    ) : (
+    <p>
+      <span class="lang-en">On the M.Div. and Th.M. tracks this test is required: the course is complete when its units{tests.length > 1 ? ', its textbook test' : ''} and this test are passed.{fromText ? ` It counts from ${fromText.en}; a master's completion of the course already in your record before then stands as it is.` : ''} Certificate and Associate students may take it too, as a learning opportunity; nothing of theirs depends on it.</span>
+      <span class="lang-es">En los trayectos M.Div. y Th.M. este examen es obligatorio: el curso se completa cuando se aprueban sus unidades{tests.length > 1 ? ', el examen del libro de texto' : ''} y este examen.{fromText ? ` Cuenta desde el ${fromText.es}; una finalización de maestría del curso que ya estaba en su registro antes de esa fecha queda como está.` : ''} Los estudiantes de Certificado y Asociado también pueden presentarlo, como oportunidad de aprendizaje; nada de lo suyo depende de él.</span>
+    </p>
+    )}
     <p class="small muted">
       <span class="lang-en">The readings are not on this page: <a href={`/${reading.page}.html`}>read them first</a>, then come back.</span>
       <span class="lang-es">Las lecturas no están en esta página: <a href={`/${reading.page}.html`}>léalas primero</a> y luego vuelva.</span>

@@ -9,6 +9,7 @@
 import { getCollection } from 'astro:content';
 import Textbook from '../layouts/Textbook.astro';
 import catalog from '../../worker/catalog.json';
+import { testsOfCourseWith, unitCourseWith } from '../lib/required-tests.ts';
 
 export async function getStaticPaths() {
   const books = await getCollection('textbooks');
@@ -29,14 +30,18 @@ const { draw, pass, questions } = book.test;
    map the Worker applies. A unit course is recorded by its units; a
    single-page course by its own completion code. */
 const tb = (catalog.textbooks as Record<string, { code: string }>)[book.slug];
-const unitCourse = Object.entries(catalog.courses as Record<string, { code: string; units: number[]; textbook?: string }>).find(([, c]) => c.textbook === book.slug);
+const unitCourse = unitCourseWith(book.slug);
 const done = (catalog.completions as Record<string, { name: string; page: string }>)[tb.code];
+/* Every test the course requires, this one among them: passing one is not
+   passing the other (9 Oct 2026), so a pass here completes the course only
+   when nothing else is still to pass. */
+const tests = testsOfCourseWith(book.slug);
 const completion = unitCourse
-  ? { slug: unitCourse[0], code: tb.code, name: done.name, page: done.page, units: unitCourse[1].units, textbook: book.slug }
-  : { single: true, code: tb.code, name: done.name, page: done.page, textbook: book.slug };
+  ? { slug: unitCourse[0], code: tb.code, name: done.name, page: done.page, units: unitCourse[1].units, textbook: book.slug, ...(tests.length > 1 ? { tests } : {}) }
+  : { single: true, code: tb.code, name: done.name, page: done.page, textbook: book.slug, ...(tests.length > 1 ? { tests } : {}) };
 const data = JSON.stringify({ slug: book.slug, page: book.page, title: book.title, draw, pass, questions, completion }).replace(/</g, '\\u003c');
 ---
-<Textbook kind="test" book={book} course={course} accent={accent} scripts={['/assets/js/cts-fill.js', '/assets/js/cts-record.js']} sync={true}>
+<Textbook kind="test" book={book} course={course} accent={accent} scripts={['/assets/js/cts-fill.js', '/assets/js/cts-required-tests.js', '/assets/js/cts-record.js']} sync={true}>
   <section class="card tb-about">
     <h2><span class="lang-en">Textbook test</span><span class="lang-es">Examen del libro de texto</span></h2>
     <p>

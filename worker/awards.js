@@ -113,33 +113,106 @@ export function certificateLevel(raw) {
 
 /** null when the record supports the award, else a short reason.
  *  `level` is the student's level (studentLevel) and `textbooks` the slugs of
- *  the textbook tests the record holds: on the master's tracks a course with
- *  a textbook is not complete until its test is passed (Dr. Cook, 4 Oct 2026). */
-export function courseShortfall(slug, unitsDone, level, textbooks) {
+ *  the tests the record holds: on the master's tracks a course with a
+ *  required test is not complete until it is passed (Dr. Cook, 4 Oct 2026),
+ *  and a course with two -- a textbook and its five readings (9 Oct 2026) --
+ *  until both are. `ctx` is what testShortfall needs for a test with an
+ *  activation date: { completions, now }. */
+export function courseShortfall(slug, unitsDone, level, textbooks, ctx) {
   const need = courseUnits(slug);
   if (!need) return resolveCourse(slug) ? 'no units: check the completion code' : 'unknown course';
   const have = new Set(unitsDone.map(Number));
   const missing = need.filter((u) => !have.has(u));
   if (missing.length) return `units not recorded as passed: ${missing.join(', ')}`;
-  return textbookShortfall(resolveCourse(slug).code, level, textbooks);
+  return textbookShortfall(resolveCourse(slug).code, level, textbooks, ctx);
 }
 
-/** The textbook a course requires on the master's tracks, by completion code
- *  (worker/catalog.json), or null. */
-export function textbookFor(code) {
+/** Every test a course requires on the master's tracks, by completion code
+ *  (worker/catalog.json `textbooks`): its textbook's, its required readings',
+ *  or both, in that order. Empty when it has none. */
+export function testsFor(code) {
   const up = String(code || '').toUpperCase();
-  for (const [slug, t] of Object.entries(catalog.textbooks || {})) if (t.code === up) return slug;
-  return null;
+  const out = [];
+  for (const [slug, t] of Object.entries(catalog.textbooks || {})) if (t.code === up) out.push(slug);
+  return out.sort((a, b) => (catalog.textbooks[a].kind === 'textbook' ? 0 : 1) - (catalog.textbooks[b].kind === 'textbook' ? 0 : 1));
+}
+/** The first of them, or null: what "the course's textbook" meant before a
+ *  course could have two. */
+export function textbookFor(code) { return testsFor(code)[0] ?? null; }
+
+/** Whether a test counts toward a master's completion of `code`, judged by
+ *  the seminary's own record (Dr. Cook and ChatGPT's authorization, 9 Oct
+ *  2026). A test with no `requiredFrom` -- every textbook, and Genesis and
+ *  World Religions -- always counts, as it has since 4 Oct. One whose
+ *  `requiredFrom` is null has not been activated and counts for no one. Once
+ *  activated it counts, except for a completion of the course the record
+ *  already held AT A MASTER'S LEVEL before that moment, with the time the
+ *  server itself wrote (course_completions.completed_at): that completion
+ *  stays valid without it.
+ *    - finished before, reported after: the server's time is after, so the
+ *      test counts (Robert may correct a documented exception by hand);
+ *    - a Certificate or Associate completion from before, by a student who
+ *      has since moved to the M.Div. or Th.M.: its level in the record is
+ *      not a master's one, so the test counts;
+ *    - started before, not finished: no completion, so the test counts.
+ *  ctx.completions: [{ code, track, completed_at }] from the record;
+ *  ctx.now: an ISO time, the server's own clock unless a test passes one. */
+export function testCounts(slug, code, ctx = {}) {
+  const t = (catalog.textbooks || {})[slug];
+  if (!t) return false;
+  /* ctx.requiredFrom: { slug: time } stands in for the catalog's date. Only
+     the test suite passes one (worker/api.js testRequiredFrom); a deployed
+     Worker always goes by the catalog. */
+  const raw = ctx.requiredFrom && Object.prototype.hasOwnProperty.call(ctx.requiredFrom, slug) ? ctx.requiredFrom[slug]
+    : ('requiredFrom' in t ? t.requiredFrom : undefined);
+  if (raw === undefined) return true;
+  if (raw == null) return false;
+  if (Number.isNaN(Date.parse(raw))) return true;      // an unreadable date never lets a test lapse
+  const from = new Date(raw).toISOString();
+  const now = ctx.now || new Date().toISOString();
+  if (when(now) < when(from)) return false;
+  return !exemptBefore(code, from, ctx.completions);
+}
+/** A master's-level completion of `code` the record held before `from`. */
+export function exemptBefore(code, from, completions) {
+  const up = canonicalCode(code) || String(code || '').toUpperCase();
+  return (completions || []).some((c) => c && (canonicalCode(c.code) || String(c.code).toUpperCase()) === up
+    && (c.track === 'thm' || c.track === 'mdiv')
+    && typeof c.completed_at === 'string' && when(c.completed_at) < when(from));
+}
+/* Times compared as times: the record writes ISO strings, and SQLite's own
+   'YYYY-MM-DD HH:MM:SS' is read as UTC. Unreadable is never "before". */
+function when(s) {
+  // (no quoted capital letters here: tools/gen-worker-catalog.mjs reads every
+  // one in this file as a course code a degree requires)
+  const sqlite = /^\d{4}-\d{2}-\d{2} \d/.test(s), zoned = /[zZ]|[+-]\d\d:?\d\d$/.test(s);
+  const t = Date.parse(sqlite ? s.replace(' ', String.fromCharCode(84)) + (zoned ? '' : String.fromCharCode(90)) : s);
+  return Number.isNaN(t) ? Infinity : t;
+}
+/** The tests of a course the record holds a master's completion from before
+ *  their activation: the student record says so, and the browser shows it
+ *  (cts-sync.js keeps it as cts_textbook_<slug>_exempt). */
+export function exemptionsFor(completions, ctx = {}) {
+  const out = [];
+  for (const [slug, t] of Object.entries(catalog.textbooks || {})) {
+    const raw = ctx.requiredFrom && Object.prototype.hasOwnProperty.call(ctx.requiredFrom, slug) ? ctx.requiredFrom[slug] : t.requiredFrom;
+    if (raw && !Number.isNaN(Date.parse(raw)) && exemptBefore(t.code, new Date(raw).toISOString(), completions)) out.push(slug);
+  }
+  return out;
 }
 
-/** null unless the level is a master's one, the course has a textbook, and
- *  the record does not hold a pass on its test. */
-export function textbookShortfall(code, level, textbooks) {
+/** null unless the level is a master's one, the course has a required test
+ *  that counts (testCounts), and the record does not hold a pass on it. */
+export function textbookShortfall(code, level, textbooks, ctx) {
   if (level !== 'thm' && level !== 'mdiv') return null;
-  const slug = textbookFor(code);
-  if (!slug) return null;
   const have = new Set((textbooks || []).map((t) => String(typeof t === 'string' ? t : t.textbook).toLowerCase()));
-  return have.has(slug) ? null : `textbook test not recorded as passed: ${slug}`;
+  for (const slug of testsFor(code)) {
+    if (have.has(slug) || !testCounts(slug, code, ctx)) continue;
+    return catalog.textbooks[slug].kind === 'reading'
+      ? `required-reading test not recorded as passed: ${slug}`
+      : `textbook test not recorded as passed: ${slug}`;
+  }
+  return null;
 }
 
 /** completions: [{code, track}] (a bare code string is taken as track

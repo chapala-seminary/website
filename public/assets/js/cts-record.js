@@ -103,10 +103,40 @@
   /* On the M.Div. and Th.M. tracks a course with a Master's textbook is
      complete only when its textbook test is passed as well (Dr. Cook, 4 Oct
      2026); cts-textbook.js records the pass and calls course() again. The
-     Certificate and Associate tracks are not held by it. */
+     Certificate and Associate tracks are not held by it.
+
+     A course may require two tests -- its textbook and its five readings
+     (9 Oct 2026) -- and is held until each is passed; a pass on one is never
+     a pass on the other. The tests come from cts-required-tests.js (generated
+     from worker/catalog.json) when the page loads it, else from the course
+     object (`tests`, or the older `textbook`). A required-reading test with
+     a `requiredFrom` counts only from that moment (null: not yet in force),
+     and not for a course the student record held as a master's completion
+     before it: the Worker says so, and cts-sync.js keeps it here as
+     cts_textbook_<slug>_exempt. The browser never decides that by itself. */
   function mastersTrack() { var t = trackToken(); return t === "mdiv" || t === "thm" || t === "mth"; }
   function textbookPassed(slug) { return !!get("cts_textbook_" + slug + "_passed"); }
-  function textbookHolds(c) { return !!(c && c.textbook && mastersTrack() && !textbookPassed(c.textbook)); }
+  function testsOf(c) {
+    if (!c) return [];
+    var map = window.CTS_REQUIRED_TESTS, code = String(c.code || "").toUpperCase();
+    if (map && code && Object.prototype.hasOwnProperty.call(map, code)) return map[code] || [];
+    if (map && code && !c.tests && !c.textbook) return [];
+    if (Array.isArray(c.tests)) return c.tests.map(function (t) { return typeof t === "string" ? { slug: t } : t; });
+    return c.textbook ? [{ slug: c.textbook, page: c.textbookPage, kind: c.textbookKind || "textbook" }] : [];
+  }
+  function testCounts(t) {
+    if (!t || !("requiredFrom" in t)) return true;
+    if (t.requiredFrom == null) return false;
+    var from = Date.parse(t.requiredFrom);
+    if (isNaN(from) || Date.now() < from) return false;
+    return !get("cts_textbook_" + t.slug + "_exempt");
+  }
+  // the tests still standing between a master's student and this course, in order
+  function pendingTests(c) {
+    if (!c || !mastersTrack()) return [];
+    return testsOf(c).filter(function (t) { return t && t.slug && testCounts(t) && !textbookPassed(t.slug); });
+  }
+  function textbookHolds(c) { return pendingTests(c).length > 0; }
 
   function complete(c) {
     if (!c) return false;
@@ -186,7 +216,10 @@
       return n;
     },
     isComplete: complete,
-    // true when only the textbook test stands between this student and the course
+    // true when only a required test stands between this student and the course
     textbookHolds: textbookHolds,
+    // which: [{ slug, page, kind }], textbook first (an empty list when none)
+    pendingTests: pendingTests,
+    testsOf: testsOf,
   };
 })();

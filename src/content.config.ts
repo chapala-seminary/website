@@ -235,7 +235,7 @@ const lessons = defineCollection({
    (src/data/textbooks/). The test is forty fill-in-the-blank questions, of
    which the page draws `draw` at random and asks for `pass` right, graded by
    the same fillRight() as every unit's fill-ins. */
-const textbookFill = z.object({
+const textbookFillFields = {
   prompt: bilingual.refine((p) => Object.values(p).every(oneBlank), {
     message: `a textbook question must contain exactly one blank, written ${BLANK}, in each language`,
   }),
@@ -243,7 +243,12 @@ const textbookFill = z.object({
   accept: z.object({ en: z.array(z.string().min(1)).optional(),
                      es: z.array(z.string().min(1)).optional() }).catchall(z.array(z.string().min(1))).optional(),
   tr: translationState.optional(),
-}).superRefine(completeQuestionLanguages);
+};
+const textbookFill = z.object(textbookFillFields).superRefine(completeQuestionLanguages);
+/* A required-reading question may name the reading (1 to 5) it is on, so that
+   every attempt draws the same number from each reading (test.perReading). */
+const readingFill = z.object({ ...textbookFillFields, reading: z.number().int().min(1).optional() })
+  .superRefine(completeQuestionLanguages);
 const bookHtml = z.string().min(1).superRefine((v, ctx) => {
   const found = [...new Set((v.match(ENTITY) ?? []).filter((e) => !STRUCTURAL.test(e)))];
   if (found.length) ctx.addIssue({ code: 'custom', message: `HTML entities in a UTF-8 textbook: ${found.join(' ')}` });
@@ -300,13 +305,29 @@ const readings = defineCollection({
     kind: z.literal('reading'),
     title: bilingual,
     room: bilingual,                  // what the student reads first, in a sentence
+    /* When the test begins to count toward a master's completion (the
+       Master's five-reading tests, 9 Oct 2026): null until Robert activates
+       it, then the moment he did. Absent on Genesis and World Religions,
+       whose tests have counted since 4 Oct 2026. */
+    requiredFrom: z.string().refine((v) => /^\d{4}-\d{2}-\d{2}T/.test(v) && !Number.isNaN(Date.parse(v)),
+      { message: 'requiredFrom is an ISO date and time, e.g. 2026-11-01T00:00:00Z' }).nullable().optional(),
     source: z.object({ file: z.string(), course: z.string() }),
     test: z.object({
       draw: z.number().int().positive(),
       pass: z.number().int().positive(),
-      questions: z.array(textbookFill).min(20),
+      perReading: z.number().int().positive().optional(),
+      questions: z.array(readingFill).min(20),
     }).refine((t) => t.pass <= t.draw && t.draw <= t.questions.length, {
       message: 'pass <= draw <= number of questions',
+    }).superRefine((t, ctx) => {
+      if (!t.perReading) return;
+      const counts = new Map<number, number>();
+      for (const q of t.questions) {
+        if (!q.reading) { ctx.addIssue({ code: 'custom', message: 'a test drawn by reading needs every question to name its reading' }); return; }
+        counts.set(q.reading, (counts.get(q.reading) ?? 0) + 1);
+      }
+      if (counts.size * t.perReading !== t.draw) ctx.addIssue({ code: 'custom', message: `${counts.size} readings x ${t.perReading} is not the draw of ${t.draw}` });
+      for (const [r, c] of counts) if (c < t.perReading) ctx.addIssue({ code: 'custom', message: `reading ${r} has ${c} questions, fewer than the ${t.perReading} drawn from it` });
     }),
   }),
 });
