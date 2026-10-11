@@ -59,7 +59,7 @@ const body = (lang) => ex[lang].map((e, i) =>
   e.paras.map((p) => `<p>${inline(p)}</p>`).join('')).join('');
 
 const bank = JSON.parse(rd(cfg.bank));
-const qs = bank.questions || [];
+const qs = (bank.questions || []).map((q) => ({ ...q, group: q.group ?? q.reading }));
 if (qs.length !== 40) bad(`${qs.length} questions, not 40`);
 for (let g = 1; g <= 5; g++) {
   const n = qs.filter((q) => q.group === g).length;
