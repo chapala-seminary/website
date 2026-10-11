@@ -67,7 +67,9 @@ for (const b of books) {
     ok(!fillRight(q, ''), `${b.slug} #${i + 1}: an empty answer is marked right`);
   });
   for (const lang of ['en', 'es']) {
-    if (b.files.html) {
+    if (b.files.excerpts) {
+      ok(b.body[lang].length > 2000, `${b.slug}: the ${lang} excerpts are missing from the page`);
+    } else if (b.files.html) {
       ok(fs.existsSync(path.join('public', b.files.html[lang])), `${b.slug}: published book ${b.files.html[lang]} is missing`);
     } else {
       ok(fs.existsSync(path.join('public', b.files.pdf[lang])), `${b.slug}: ${b.files.pdf[lang]} is not in public/`);

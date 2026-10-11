@@ -33,6 +33,14 @@ window.CTS_REQUIRED_TESTS = {
    "kind": "textbook"
   }
  ],
+ "CTS1PETER": [
+  {
+   "slug": "firstpeter",
+   "page": "CTSTextbookFirstPeter",
+   "kind": "textbook",
+   "requiredFrom": null
+  }
+ ],
  "CTSJOSH": [
   {
    "slug": "joshua",

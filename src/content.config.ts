@@ -274,6 +274,8 @@ const textbooks = defineCollection({
     files: z.union([
       z.object({ pdf: bilingual, docx: bilingual, sha256: bilingual }),
       z.object({ html: bilingual }),
+      // Assigned excerpts only: the readings are the page body itself.
+      z.object({ excerpts: z.literal(true) }),
     ]),
     // Null means students may take the new textbook test, but NO master's
     // course completion is held by it. Omitted means old mandatory textbook.
