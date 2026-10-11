@@ -41,6 +41,14 @@ window.CTS_REQUIRED_TESTS = {
    "requiredFrom": null
   }
  ],
+ "CTSJOHN": [
+  {
+   "slug": "john",
+   "page": "CTSTextbookJohn",
+   "kind": "textbook",
+   "requiredFrom": null
+  }
+ ],
  "CTSJOSH": [
   {
    "slug": "joshua",
@@ -79,6 +87,14 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "pentecostalreadings",
    "page": "CTSPentecostalReadings",
    "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSRE": [
+  {
+   "slug": "ruthesther",
+   "page": "CTSTextbookRuthEsther",
+   "kind": "textbook",
    "requiredFrom": null
   }
  ],

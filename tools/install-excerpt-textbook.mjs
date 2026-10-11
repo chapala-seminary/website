@@ -29,23 +29,26 @@ const base = path.dirname(cfgPath);
 const rd = (p) => fs.readFileSync(path.resolve(base, p), 'utf8');
 const problems = [];
 const bad = (m) => problems.push(m);
+/* An answer word that appears in another question's prompt is listed for the
+   faculty reviewers, not refused: in a book about Ruth, "Boaz" will be both. */
+const warnings = [];
 
 const fold = (s) => s.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
-const words = (s) => ` ${fold(s).replace(/[^\p{L}\p{N}'’]+/gu, ' ')} `;
-const hasWords = (text, phrase) => words(text).includes(` ${fold(phrase).replace(/[^\p{L}\p{N}'’]+/gu, ' ').trim()} `);
+const words = (s) => ` ${fold(s).replace(/[^\p{L}\p{N}]+/gu, ' ')} `;
+const hasWords = (text, phrase) => words(text).includes(` ${fold(phrase).replace(/[^\p{L}\p{N}]+/gu, ' ').trim()} `);
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const inline = (s) => esc(s).replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>').replace(/\*([^*]+)\*/g, '<em>$1</em>');
 
-/* An excerpt file: "# N. Title", a source line, optional "> " notes for
-   reviewers (left out of the page), then paragraphs. */
+/* An excerpt file: "# N. Title", a source line, optional "> " or all-bold
+   notes for reviewers (left out of the page), then paragraphs. */
 function parse(md) {
   const blocks = md.replace(/\r/g, '').split(/\n\s*\n/).map((b) => b.trim()).filter(Boolean);
   const head = blocks.shift();
-  if (!/^# /.test(head)) bad(`excerpt does not start with a "# " heading: ${head.slice(0, 40)}`);
-  const title = head.replace(/^#\s*/, '').replace(/^\d+\.\s*/, '');
+  if (!/^#{1,2} /.test(head)) bad(`excerpt does not start with a "# " heading: ${head.slice(0, 40)}`);
+  const title = head.replace(/^#+\s*/, '').replace(/^\d+\.\s*/, '');
   const source = blocks.shift() || '';
-  const paras = blocks.filter((b) => !b.startsWith('>')).map((b) => b.replace(/\n/g, ' '));
+  const paras = blocks.filter((b) => !b.startsWith('>') && !/^\*\*[^*]+\*\*$/.test(b)).map((b) => b.replace(/\n/g, ' '));
   return { title, source, paras, text: paras.join('\n') };
 }
 const ex = { en: cfg.en.map((p) => parse(rd(p))), es: cfg.es.map((p) => parse(rd(p))) };
@@ -65,7 +68,8 @@ for (let g = 1; g <= 5; g++) {
 if (bank.requiredFrom !== null && bank.requiredFrom !== undefined) bad('the bank carries a requiredFrom');
 
 const digest = cfg.digest && fs.existsSync(path.resolve(base, cfg.digest))
-  ? new Set((JSON.parse(rd(cfg.digest)).questions || JSON.parse(rd(cfg.digest))).flatMap((q) => Object.values(q.answer || {}).map(fold)))
+  ? (() => { const d = JSON.parse(rd(cfg.digest)); const list = d.questions || (d.test && d.test.questions) || d;
+      return new Set(list.flatMap((q) => Object.values(q.answer || {}).map(fold))); })()
   : null;
 
 for (const q of qs) {
@@ -74,7 +78,7 @@ for (const q of qs) {
     const own = ex[lang][q.group - 1]?.text || '';
     const options = [q.answer[lang], ...((q.accept && q.accept[lang]) || [])];
     if (!options.some((a) => hasWords(own, a))) bad(`${q.id}: no ${lang} answer of [${options.join(' / ')}] in excerpt ${q.group}`);
-    for (const r of qs) if (r !== q && hasWords(r.prompt[lang], q.answer[lang])) bad(`${q.id}: its ${lang} answer "${q.answer[lang]}" is in the prompt of ${r.id}`);
+    for (const r of qs) if (r !== q && hasWords(r.prompt[lang], q.answer[lang])) warnings.push(`${q.id}: its ${lang} answer "${q.answer[lang]}" is in the prompt of ${r.id}`);
     if (digest && digest.has(fold(q.answer[lang]))) bad(`${q.id}: ${lang} answer "${q.answer[lang]}" is also a reading-test answer`);
   }
 }
@@ -100,6 +104,9 @@ files.set(`src/data/textbooks/staged/${path.basename(cfg.bank)}`, rd(cfg.bank));
 cfg.en.forEach((p, i) => files.set(`docs/readers/textbooks/${cfg.slug}/excerpts/en/${i + 1}.md`, rd(p)));
 cfg.es.forEach((p, i) => files.set(`docs/readers/textbooks/${cfg.slug}/excerpts/es/${i + 1}.md`, rd(p)));
 
+if (warnings.length) files.set(`docs/textbooks-staged/${cfg.slug}-excerpts-review.md`,
+  `# ${cfg.title.en}: answers that appear in another question's prompt\n\nFor the faculty reviewers (made by tools/install-excerpt-textbook.mjs). Not refused: decide whether each is a real clue.\n\n${warnings.map((w) => `- ${w}`).join('\n')}\n`);
+
 const marker = `<!-- ${cfg.slug} textbook exam: optional, assigned excerpts -->`;
 const room = fs.readFileSync(cfg.room, 'utf8');
 if (!room.includes(marker)) {
@@ -109,7 +116,7 @@ if (!room.includes(marker)) {
   files.set(cfg.room, room.slice(0, at + 6) + notice + room.slice(at + 6));
 }
 
-console.log(JSON.stringify({ slug: cfg.slug, questions: qs.length, digestChecked: !!digest, files: [...files.keys()], problems }, null, 2));
+console.log(JSON.stringify({ slug: cfg.slug, questions: qs.length, digestChecked: !!digest, files: [...files.keys()], warnings: warnings.length, problems }, null, 2));
 if (problems.length) { console.error(`REFUSED: ${problems.length} problem(s)`); process.exit(1); }
 if (write) {
   for (const [f, t] of files) { fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, t); }
