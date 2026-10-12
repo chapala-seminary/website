@@ -134,6 +134,9 @@ const TESTS = [
     ['ptreadings', 'CTSPTReadings', 'CTSPT', 'Practical Theology', 'Teología Práctica'],
     ['parablesreadings', 'CTSParablesReadings', 'CTSParables', 'Parables of the Bible', 'Las Parábolas de la Biblia'],
     ['radicalreadings', 'CTSRadicalReadings', 'CTSRadical', 'Radical Christianity', 'Cristianismo Radical'],
+    /* Christian Ethics (single-page course, ethics_unit01), added 11 Oct 2026:
+       the last course without a five-reading test. */
+    ['ethicsreadings', 'CTSEthicsReadings', 'ethics_unit01', 'Pastoral & Christian Ethics', 'Ética Pastoral y Cristiana'],
     ['worshipreadings', 'CTSWorshipReadings', 'CTSWorship', 'Worship', 'Adoración Cristiana'],
   ].map(([slug, page, course, en, es]) => ({ slug, page, course, kind: 'reading', requiredFrom: null, alternates: 'optional',
     title: { en: `${en}: Required Readings`, es: `${es}: Lecturas Requeridas` },
