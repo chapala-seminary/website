@@ -234,6 +234,7 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   node test/engine-languages.mjs
   node test/french-drafts.test.mjs
   node tools/verify-french-interface.mjs "http://127.0.0.1:$PORT"
+  node tools/verify-french-landing.mjs "http://127.0.0.1:$PORT"
   SYNC_BASE="http://127.0.0.1:$PORT" node test/sync.test.mjs
   if [ -n "$HAVE_REFERENCE" ]; then
     node tools/verify-gating.mjs "http://127.0.0.1:$PORT" _reference-index.html

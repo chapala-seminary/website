@@ -7,6 +7,7 @@ import { parse } from 'node-html-parser';
 import { shell } from '../src/lib/shell.ts';
 import { LANGUAGES, NAMES, localeHref, localizeMarkup, renderLanguageLesson } from '../src/lib/language-content.ts';
 
+import { frenchLanding } from '../src/lib/french-landing.ts';
 import { frenchWiseSpeak } from './french-wisespeak.mjs';
 import { frenchInterface } from '../src/lib/french-interface.ts';
 
@@ -27,8 +28,8 @@ function rewriteLinks(root, file, lang, files) {
 }
 function control(file, lang, sourceLang, translated) {
   const choices = LANGUAGES.map(l => `<a class="cts-language-choice${l === lang ? ' active' : ''}" data-cts-lang="${l}" aria-current="${l === lang ? 'page' : 'false'}" href="${localeHref(file, l)}?cts_lang=${l}">${NAMES[l]}</a>`).join('');
-  const label = lang === 'es' ? `Mostrar ${NAMES[sourceLang] || sourceLang}` : lang === 'fr' ? `Afficher ${NAMES[sourceLang] || sourceLang}` : `Show ${NAMES[sourceLang] || sourceLang}`;
-  return `<div class="cts-language-controls"><div class="cts-language-choices" role="group" aria-label="Language">${choices}</div>${lang !== sourceLang ? `<label class="cts-source-control"><input type="checkbox" id="cts-show-source"${translated ? '' : ' disabled'}> ${label}</label>` : ''}</div>`;
+  const label = lang === 'es' ? `Mostrar ${NAMES[sourceLang] || sourceLang}` : lang === 'fr' ? `Afficher ${sourceLang === 'en' ? 'l’anglais' : NAMES[sourceLang] || sourceLang}` : `Show ${NAMES[sourceLang] || sourceLang}`;
+  return `<div class="cts-language-controls"><div class="cts-language-choices" role="group" aria-label="${lang === 'fr' ? 'Langue' : lang === 'es' ? 'Idioma' : 'Language'}">${choices}</div>${lang !== sourceLang ? `<label class="cts-source-control"><input type="checkbox" id="cts-show-source"${translated ? '' : ' disabled'}> ${label}</label>` : ''}</div>`;
 }
 export function buildLanguagePages(dir) {
   const files = fs.readdirSync(dir).filter(f => f.endsWith('.html') && !f.startsWith('_'));
@@ -60,6 +61,7 @@ export function buildLanguagePages(dir) {
         const header = root.querySelector('.cts-masthead .wrap');
         if (header && rendered.masthead) header.set_content(rendered.masthead);
       }
+      if (lang === 'fr' && file === 'index.html') frenchLanding(root);
       root = parse(localizeMarkup(root.toString(), lang, sourceLang), { comment: true, parseNoneClosedTags: true });
       const b = root.querySelector('body'), h = root.querySelector('head');
       const translated = lang === sourceLang || !!root.querySelector(`.cts-reading[lang="${lang}"]:not([data-cts-fallback])`);

@@ -27,7 +27,10 @@ async function worker() {
       await page.goto(`${BASE}/${lang === 'en' ? '' : lang + '/'}${file}?cts_lang=${lang}`, {waitUntil:'load', timeout:20000});
       await page.waitForFunction(l => document.body?.dataset.pageLang === l && document.documentElement.lang === l, lang);
       const box = page.locator('#cts-show-source:not([disabled])');
-      if (await box.count()) await box.check();
+      if (await box.count()) {
+        await box.check();
+        if (await page.evaluate(() => document.body.dataset.showSource) !== 'true') fails.push(`${label}: source switch did not enable source display`);
+      }
       await page.evaluate(() => {for (const d of document.querySelectorAll('details')) d.open = true;});
       const state = await page.evaluate(() => {
         const visible = el => !!el && el.checkVisibility({checkVisibilityCSS:true});
@@ -36,7 +39,7 @@ async function worker() {
         const a = pair?.querySelector(':scope > .cts-reading')?.getBoundingClientRect();
         const b = pair?.querySelector(':scope > .cts-source')?.getBoundingClientRect();
         const exam = !!pair?.closest('.question, #kwContainer, .cts-fill-q');
-        return {lang:document.documentElement.lang, wide:document.documentElement.scrollWidth-innerWidth,
+        return {showSource:document.body.dataset.showSource === "true", lang:document.documentElement.lang, wide:document.documentElement.scrollWidth-innerWidth,
           badExamSources:pairs.filter(e => e.closest('.question, #kwContainer, .cts-fill-q')).filter(e => {
             const reader = e.querySelector(':scope > .cts-reading').getBoundingClientRect(), source = e.querySelector(':scope > .cts-source').getBoundingClientRect();
             return source.top < reader.bottom-1;
@@ -47,8 +50,11 @@ async function worker() {
       });
       if (state.lang !== lang || state.controls !== 3) fails.push(`${label}: language or controls ${JSON.stringify(state)}`);
       if (state.wide > 1) fails.push(`${label}: sideways scroll ${state.wide}px`);
-      if (state.source === false || ((phone || state.exam) && !state.below) || (!phone && !state.exam && !state.beside)) fails.push(`${label}: source text not visible/below translation`);
-      if (state.badExamSources) fails.push(`${label}: exam source is not below its wording`);
+      // Fallback pages can have translated dynamic controls but a disabled
+      // source switch. Hidden source nodes have zero rectangles; only check
+      // their placement when source display is actually on.
+      if (state.showSource && (state.source === false || ((phone || state.exam) && !state.below) || (!phone && !state.exam && !state.beside))) fails.push(`${label}: source text not visible/below translation`);
+      if (state.showSource && state.badExamSources) fails.push(`${label}: exam source is not below its wording`);
       if (state.wrong) fails.push(`${label}: unexpected reading language`);
       if (errors.length) fails.push(`${label}: ${errors.join('; ')}`);
     } catch(e) { fails.push(`${label}: ${String(e).slice(0,200)}`); }
