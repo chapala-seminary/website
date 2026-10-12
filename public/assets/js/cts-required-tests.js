@@ -10,13 +10,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "actsstokes",
    "page": "CTSTextbookActsStokes",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "actsreadings",
    "page": "CTSActsReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSAPOL": [
@@ -24,13 +24,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "apologetics",
    "page": "CTSTextbookApologetics",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "apolreadings",
    "page": "CTSApolReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSBIBLECHARACTERS2": [
@@ -38,13 +38,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "biblecharacterstwo",
    "page": "CTSTextbookBibleCharactersTwo",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "biblecharacterstworeadings",
    "page": "CTSBibleCharacters2Readings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSBIBLE": [
@@ -52,13 +52,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "biblehandbook",
    "page": "CTSTextbookBibleHandbook",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "biblereadings",
    "page": "CTSBibleReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "WISESPEAK": [
@@ -66,13 +66,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "broadus",
    "page": "CTSTextbookBroadus",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "wisespeakreadings",
    "page": "CTSPreachingReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "ETHICS": [
@@ -80,13 +80,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "christianethics",
    "page": "CTSTextbookChristianEthics",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "ethicsreadings",
    "page": "CTSEthicsReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSCH": [
@@ -94,13 +94,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "churchhistory",
    "page": "CTSTextbookChurchHistory",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "chreadings",
    "page": "CTSCHReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSWR": [
@@ -108,7 +108,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "comparativereligion",
    "page": "CTSTextbookComparativeReligion",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "wrreadings",
@@ -126,7 +126,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "counselingreadings",
    "page": "CTSCounselingReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSCULTS": [
@@ -139,7 +139,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "cultsreadings",
    "page": "CTSCultsReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSDEACONFAMILYMINISTRY": [
@@ -152,7 +152,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "deaconreadings",
    "page": "CTSDeaconFamilyMinistryReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSDP": [
@@ -165,7 +165,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "dpreadings",
    "page": "CTSDPReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSST": [
@@ -173,13 +173,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "doctrines",
    "page": "CTSTextbookFundamentalDoctrines",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "streadings",
    "page": "CTSSTReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSEVANGELISM": [
@@ -187,13 +187,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "evangelismtorrey",
    "page": "CTSTextbookEvangelismTorrey",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "evangelismreadings",
    "page": "CTSEvangelismReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTS1PETER": [
@@ -201,13 +201,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "firstpeter",
    "page": "CTSTextbookFirstPeter",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "firstpeterreadings",
    "page": "CTS1PeterReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSGALATIANS": [
@@ -215,13 +215,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "galatiansfindlay",
    "page": "CTSTextbookGalatiansFindlay",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "galatiansreadings",
    "page": "CTSGalatiansReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSGENESIS": [
@@ -229,7 +229,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "genesisdods",
    "page": "CTSTextbookGenesisDods",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "genesisreadings",
@@ -242,13 +242,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "holiness",
    "page": "CTSTextbookHoliness",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "radicalreadings",
    "page": "CTSRadicalReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSHS": [
@@ -256,13 +256,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "holyspirit",
    "page": "CTSTextbookHolySpirit",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "hsreadings",
    "page": "CTSHSReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSJOHN": [
@@ -270,13 +270,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "john",
    "page": "CTSTextbookJohn",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "johnreadings",
    "page": "CTSJohnReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSJOSH": [
@@ -284,13 +284,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "joshua",
    "page": "CTSTextbookJoshua",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "joshuareadings",
    "page": "CTSJoshReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSLA": [
@@ -303,7 +303,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "lareadings",
    "page": "CTSLAReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSMATT": [
@@ -311,13 +311,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "matthewgibson",
    "page": "CTSTextbookMatthewGibson",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "mattreadings",
    "page": "CTSMattReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSEVANPREACH": [
@@ -325,13 +325,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "ministryword",
    "page": "CTSTextbookMinistryWord",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "evanpreachreadings",
    "page": "CTSEvanPreachReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSCG": [
@@ -339,13 +339,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "missionarychurches",
    "page": "CTSTextbookMissionaryChurches",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "cgreadings",
    "page": "CTSCGReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSMISSIONS": [
@@ -353,13 +353,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "missionarymethods",
    "page": "CTSTextbookMissionaryMethods",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "missionsreadings",
    "page": "CTSMissionsReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "STORYTEL": [
@@ -372,7 +372,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "narrativereadings",
    "page": "CTSNarrativePreachingReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSNT": [
@@ -380,13 +380,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "newtestament",
    "page": "CTSTextbookNewTestament",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "ntreadings",
    "page": "CTSNTReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSOTS": [
@@ -394,13 +394,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "oldtestament",
    "page": "CTSTextbookOldTestament",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "otsreadings",
    "page": "CTSOTSReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSPARABLES": [
@@ -408,13 +408,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "parables",
    "page": "CTSTextbookParables",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "parablesreadings",
    "page": "CTSParablesReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSPM": [
@@ -422,13 +422,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "pastor",
    "page": "CTSTextbookPastor",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "pmreadings",
    "page": "CTSPMReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSAL": [
@@ -436,13 +436,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "pastoralepistles",
    "page": "CTSTextbookPastoralEpistles",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "alreadings",
    "page": "CTSALReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSPENT": [
@@ -450,13 +450,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "pentateuch",
    "page": "CTSTextbookPentateuch",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "pentreadings",
    "page": "CTSPentReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSPENTECOSTAL": [
@@ -469,7 +469,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "pentecostalreadings",
    "page": "CTSPentecostalReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSPSALMS": [
@@ -477,13 +477,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "psalmsmaclaren",
    "page": "CTSTextbookPsalmsMaclaren",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "psalmsreadings",
    "page": "CTSPsalmsReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSREV": [
@@ -491,13 +491,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "revelationmilligan",
    "page": "CTSTextbookRevelationMilligan",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "revelationreadings",
    "page": "CTSRevReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSROMANS": [
@@ -505,13 +505,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "romansmoule",
    "page": "CTSTextbookRomansMoule",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "romansreadings",
    "page": "CTSRomansReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSRE": [
@@ -519,13 +519,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "ruthesther",
    "page": "CTSTextbookRuthEsther",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "ruthestherreadings",
    "page": "CTSREReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSCS": [
@@ -538,7 +538,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "csreadings",
    "page": "CTSCSReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSPT": [
@@ -546,13 +546,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "soulcare",
    "page": "CTSTextbookSoulCare",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "ptreadings",
    "page": "CTSPTReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSHERMENEUTICS": [
@@ -560,13 +560,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "studybible",
    "page": "CTSTextbookStudyBible",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "hermeneuticsreadings",
    "page": "CTSHermeneuticsReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSCE": [
@@ -574,13 +574,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "teaching",
    "page": "CTSTextbookTeaching",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "cereadings",
    "page": "CTSCEReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSLOC": [
@@ -588,13 +588,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "trainingtwelve",
    "page": "CTSTextbookTrainingTwelve",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "locreadings",
    "page": "CTSLOCReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSBIBLECHARACTERS": [
@@ -602,13 +602,13 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "whytecharacters",
    "page": "CTSTextbookWhyteCharacters",
    "kind": "textbook",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   },
   {
    "slug": "biblecharactersreadings",
    "page": "CTSBibleCharactersReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ],
  "CTSWORSHIP": [
@@ -621,7 +621,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "worshipreadings",
    "page": "CTSWorshipReadings",
    "kind": "reading",
-   "requiredFrom": null
+   "requiredFrom": "2026-10-14T06:00:00Z"
   }
  ]
 };
