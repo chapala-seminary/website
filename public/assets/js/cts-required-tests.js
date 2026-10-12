@@ -33,11 +33,39 @@ window.CTS_REQUIRED_TESTS = {
    "kind": "textbook"
   }
  ],
+ "CTSEVANGELISM": [
+  {
+   "slug": "evangelismtorrey",
+   "page": "CTSTextbookEvangelismTorrey",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "evangelismreadings",
+   "page": "CTSEvangelismReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
  "CTS1PETER": [
   {
    "slug": "firstpeter",
    "page": "CTSTextbookFirstPeter",
    "kind": "textbook",
+   "requiredFrom": null
+  }
+ ],
+ "CTSGALATIANS": [
+  {
+   "slug": "galatiansfindlay",
+   "page": "CTSTextbookGalatiansFindlay",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "galatiansreadings",
+   "page": "CTSGalatiansReadings",
+   "kind": "reading",
    "requiredFrom": null
   }
  ],
@@ -90,6 +118,20 @@ window.CTS_REQUIRED_TESTS = {
    "requiredFrom": null
   }
  ],
+ "CTSROMANS": [
+  {
+   "slug": "romansmoule",
+   "page": "CTSTextbookRomansMoule",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "romansreadings",
+   "page": "CTSRomansReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
  "CTSRE": [
   {
    "slug": "ruthesther",
@@ -124,22 +166,6 @@ window.CTS_REQUIRED_TESTS = {
   {
    "slug": "chreadings",
    "page": "CTSCHReadings",
-   "kind": "reading",
-   "requiredFrom": null
-  }
- ],
- "CTSEVANGELISM": [
-  {
-   "slug": "evangelismreadings",
-   "page": "CTSEvangelismReadings",
-   "kind": "reading",
-   "requiredFrom": null
-  }
- ],
- "CTSGALATIANS": [
-  {
-   "slug": "galatiansreadings",
-   "page": "CTSGalatiansReadings",
    "kind": "reading",
    "requiredFrom": null
   }
@@ -187,14 +213,6 @@ window.CTS_REQUIRED_TESTS = {
   {
    "slug": "pmreadings",
    "page": "CTSPMReadings",
-   "kind": "reading",
-   "requiredFrom": null
-  }
- ],
- "CTSROMANS": [
-  {
-   "slug": "romansreadings",
-   "page": "CTSRomansReadings",
    "kind": "reading",
    "requiredFrom": null
   }

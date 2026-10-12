@@ -106,14 +106,14 @@
     }
     function newDraw() {
       var idx = [], i;
-      if (T.perReading) {
+      if (T.perReading || T.perChapter) {
         var groups = {}, order = [];
         for (i = 0; i < n; i++) {
-          var r = T.questions[i].reading;
+          var r = T.perChapter ? T.questions[i].chapter : T.questions[i].reading;
           if (!groups[r]) { groups[r] = []; order.push(r); }
           groups[r].push(i);
         }
-        order.forEach(function (r) { idx = idx.concat(shuffle(groups[r]).slice(0, T.perReading)); });
+        order.forEach(function (r) { idx = idx.concat(shuffle(groups[r]).slice(0, T.perReading || T.perChapter)); });
         return shuffle(idx).slice(0, Math.min(T.draw, n));
       }
       for (i = 0; i < n; i++) idx.push(i);
@@ -125,7 +125,7 @@
       for (var i = 0; i < d.length; i++) {
         if (typeof d[i] !== "number" || d[i] < 0 || d[i] >= n || seen[d[i]]) return false;
         seen[d[i]] = 1;
-        if (T.perReading) { var r = T.questions[d[i]].reading; per[r] = (per[r] || 0) + 1; if (per[r] > T.perReading) return false; }
+        if (T.perReading || T.perChapter) { var r = T.perChapter ? T.questions[d[i]].chapter : T.questions[d[i]].reading; per[r] = (per[r] || 0) + 1; if (per[r] > (T.perReading || T.perChapter)) return false; }
       }
       return true;
     }

@@ -244,7 +244,7 @@ const textbookFillFields = {
                      es: z.array(z.string().min(1)).optional() }).catchall(z.array(z.string().min(1))).optional(),
   tr: translationState.optional(),
 };
-const textbookFill = z.object(textbookFillFields).superRefine(completeQuestionLanguages);
+const textbookFill = z.object({ ...textbookFillFields, chapter: z.number().int().min(1).optional() }).superRefine(completeQuestionLanguages);
 /* A required-reading question may name the reading (1 to 5) it is on, so that
    every attempt draws the same number from each reading (test.perReading). */
 const readingFill = z.object({ ...textbookFillFields, reading: z.number().int().min(1).optional() })
@@ -285,9 +285,19 @@ const textbooks = defineCollection({
     test: z.object({
       draw: z.number().int().positive(),
       pass: z.number().int().positive(),
+      perChapter: z.number().int().positive().optional(),
       questions: z.array(textbookFill).min(20),
     }).refine((t) => t.pass <= t.draw && t.draw <= t.questions.length, {
       message: 'pass <= draw <= number of questions',
+    }).superRefine((t, ctx) => {
+      if (!t.perChapter) return;
+      const counts = new Map<number, number>();
+      for (const q of t.questions) {
+        if (!q.chapter) { ctx.addIssue({ code: 'custom', message: 'balanced textbook question needs chapter group' }); return; }
+        counts.set(q.chapter, (counts.get(q.chapter) ?? 0) + 1);
+      }
+      if (counts.size * t.perChapter !== t.draw) ctx.addIssue({ code: 'custom', message: 'textbook group count does not match draw' });
+      for (const [g, n] of counts) if (n < t.perChapter) ctx.addIssue({ code: 'custom', message: `textbook group ${g} has too few questions` });
     }),
   }),
 });
