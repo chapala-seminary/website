@@ -47,6 +47,14 @@ window.CTS_REQUIRED_TESTS = {
    "requiredFrom": null
   }
  ],
+ "ETHICS": [
+  {
+   "slug": "christianethics",
+   "page": "CTSTextbookChristianEthics",
+   "kind": "textbook",
+   "requiredFrom": null
+  }
+ ],
  "CTSCH": [
   {
    "slug": "churchhistory",

@@ -138,9 +138,11 @@ for (const [slug, c] of Object.entries(courses)) {
 // public/assets/js/cts-record.js); the pages and the Worker read this one map.
 const textbooks = {};
 {
-  // Preaching (WiseSpeak) has no textbook test; it is here for its proposed
-  // five-reading test (10 Oct 2026), which is staged, not installed.
-  const SINGLE = { CTSCounseling: 'COUNSELING', CTS_Narrative_Preaching: 'STORYTEL', CTS_WiseSpeak_Preaching: 'WISESPEAK' };
+  // Preaching (WiseSpeak) is here for its five-reading test (10 Oct 2026).
+  // Christian Ethics (ethics_unit01..10, hand-written pages outside the unit
+  // engine) is known by the code its certificate page writes, ETHICS, for its
+  // textbook (Alexander, 12 Oct 2026).
+  const SINGLE = { CTSCounseling: 'COUNSELING', CTS_Narrative_Preaching: 'STORYTEL', CTS_WiseSpeak_Preaching: 'WISESPEAK', ethics_unit01: 'ETHICS' };
   const dir = 'src/content/textbooks';
   for (const f of fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => f.endsWith('.json')).sort() : []) {
     const t = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));

@@ -113,7 +113,17 @@ has one. Still without a textbook: Bible Characters I and II, Church Growth,
 Practical Theology, Radical Christianity (no suitable book in the Drive
 library yet).
 
-All twenty-eight, and the five-reading tests, are online with
+One more (12 Oct): Alexander, *Christianity and Ethics* (1914), for
+Pastoral & Christian Ethics (`ethics_unit01`, completion code ETHICS): five
+excerpts on Christ as the pattern of the good life, the Christian motive
+(forgiveness, sonship, calling), repentance, faith and obedience, love as the
+bond of the virtues, and duties to others. Ethics is outside the unit engine,
+so `tools/gen-worker-catalog.mjs` knows it as a single-page course and each of
+its ten unit pages carries the textbook box by hand. Its certificate page
+(`ethics_certificate.html`) does not yet load `cts-required-tests.js` and
+`cts-textbook-gate.js`: that is needed before this test is activated.
+
+All twenty-nine, and the five-reading tests, are online with
 `requiredFrom: null`: open to everyone, required of no one. Dr. Cook wants
 them required on the M.Div. and Th.M. tracks once published. To do that:
 
