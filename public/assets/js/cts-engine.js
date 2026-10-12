@@ -599,7 +599,7 @@
         block += '<p style="font-weight:bold;">' + (i + 1) + ". " + bi(q.prompt || q.stem) + "</p>";
         block += '<textarea data-sa="' + i + '" rows="4" style="width:100%;">' +
                  String(saAnswers[i] || "").replace(/</g, "&lt;") + "</textarea>";
-        if (graded && reveal && q.model) {
+        if (graded && reveal && pick(q.model)) {
           block += attempted(saAnswers[i])
             ? '<div class="model-answer">' + bi(q.model) + "</div>"
             : '<p class="small model-wait">' + bi({

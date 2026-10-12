@@ -91,6 +91,7 @@
 
   // ---- the network ------------------------------------------------------
   function post(path, payload) {
+    payload.lang = window.CTSLanguage?.lang || get('cts_lang');
     return fetch(API + path, { method: 'POST', credentials: 'omit',
       headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) })
       .then(function (r) { return r.json().catch(function () { return {}; }).then(function (b) { return { status: r.status, ok: r.ok, body: b, retry: r.headers.get('retry-after') }; }); });

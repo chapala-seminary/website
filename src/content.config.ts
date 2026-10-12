@@ -40,7 +40,7 @@ const keyword = z.union([z.string(), z.array(z.string()).min(1)]);
 const shortAnswer = z.object({
   prompt: bilingual,
   keywords: z.object({ en: z.array(keyword), es: z.array(keyword) }).catchall(z.array(keyword)).optional(),
-  model: bilingual.optional(),
+  model: z.object({ en: z.string().optional(), es: z.string().optional() }).catchall(z.string()).optional(),
   minHits: z.number().int().positive().optional(),
   tr: translationState.optional(),
 }).superRefine(completeQuestionLanguages);
