@@ -127,6 +127,7 @@ const readings = fs.existsSync('src/content/readings') ? fs.readdirSync('src/con
 for (const want of ['genesisreadings', 'wrreadings', 'pentecostalreadings'])
   ok(readings.some((r) => r.slug === want), `src/content/readings has no ${want}`);
 const catalogJson = JSON.parse(fs.readFileSync('worker/catalog.json', 'utf8'));
+let noAlternate = 0;   // answers, per language, on the Master's reading tests with no alternate yet
 for (const r of readings) {
   ok(!!courses[r.course], `${r.slug}: course "${r.course}" has no catalog card`);
   ok(/readings$/.test(r.slug) && !books.some((b) => b.slug === r.slug), `${r.slug}: the slug must end in "readings" and not be a textbook's`);
@@ -148,7 +149,14 @@ for (const r of readings) {
       ok((q.prompt[lang].match(/____/g) || []).length === 1, `${r.slug} #${i + 1}: not one blank in ${lang}`);
       ok(fillRight(q, q.answer[lang]), `${r.slug} #${i + 1}: the ${lang} answer "${q.answer[lang]}" is not marked right`);
       const acc = (q.accept && q.accept[lang]) || [];
-      ok(acc.length >= 1 && acc.length + 1 <= 5, `${r.slug} #${i + 1}: ${acc.length + 1} accepted ${lang} answers; Dr. Cook asked for alternates: at least one besides the answer, at most five answers in all`);
+      /* Genesis and World Religions: at least one alternate (Dr. Cook, 4 Oct).
+         The Master's five-reading tests (those with a requiredFrom): alternates
+         are optional, as Dr. Cook decided for reading tests whose answer is one
+         clear word -- a question without one is counted, not refused, exactly
+         as tools/import-readings.mjs reports it. At most five answers in all. */
+      const optional = 'requiredFrom' in r;
+      ok((optional || acc.length >= 1) && acc.length + 1 <= 5, `${r.slug} #${i + 1}: ${acc.length + 1} accepted ${lang} answers; Dr. Cook asked for alternates: at least one besides the answer, at most five answers in all`);
+      if (optional && !acc.length) noAlternate++;
       for (const a of acc) ok(fillRight(q, a), `${r.slug} #${i + 1}: accepted ${lang} answer "${a}" is not marked right`);
     }
     ok(!fillRight(q, ''), `${r.slug} #${i + 1}: an empty answer is marked right`);
@@ -185,5 +193,6 @@ for (const r of readings) {
 }
 
 console.log(`${checks} textbook assertions across ${books.length} textbooks and ${readings.length} required-reading tests`);
+if (noAlternate) console.log(`${noAlternate} answer(s) on the Master's reading tests have no accepted alternate yet (optional; faculty to add)`);
 if (!fails.length) console.log('PASS — the textbooks, their tests and their pages agree.');
 else { console.log(`FAIL — ${fails.length}:`); fails.slice(0, 30).forEach((f) => console.log('  ' + f)); if (fails.length > 30) console.log(`  … and ${fails.length - 30} more`); process.exit(1); }
