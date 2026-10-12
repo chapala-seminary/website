@@ -52,7 +52,7 @@ export function buildLanguagePages(dir) {
         const rendered = shell(renderLanguageLesson(lesson, lang));
         const main = root.querySelector('#lesson');
         if (!main) throw new Error(`unit ${file} has no #lesson`);
-        const keep = main.childNodes.filter(n => ['cts-register', 'greeting', 'cts-textbook'].includes(n.id)).map(n => n.toString()).join('');
+        const keep = main.childNodes.filter(n => ['cts-register', 'greeting', 'cts-textbook', 'cts-textbook-2', 'cts-required-readings'].includes(n.id)).map(n => n.toString()).join('');
         main.set_content(keep + rendered.content);
         const header = root.querySelector('.cts-masthead .wrap');
         if (header && rendered.masthead) header.set_content(rendered.masthead);

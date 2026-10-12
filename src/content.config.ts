@@ -329,7 +329,7 @@ const readings = defineCollection({
   }),
   schema: z.object({
     slug: z.string().regex(/^[a-z]+readings$/, 'the slug ends in "readings", so it cannot be mistaken for a textbook in the one map both share'),
-    page: z.string().regex(/^CTS[A-Za-z]+$/, 'the page the readings are on: CTSX, giving CTSX.html and CTSXTest.html'),
+    page: z.string().regex(/^CTS[A-Za-z0-9]+$/, 'the page the readings are on: CTSX, giving CTSX.html and CTSXTest.html'),
     course: z.string().min(1),        // the catalog card (src/content/courses/<course>.json)
     kind: z.literal('reading'),
     title: bilingual,
