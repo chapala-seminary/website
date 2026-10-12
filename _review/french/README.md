@@ -6,7 +6,7 @@ Robert authorized beta publication of these drafts on 12 October. Nine courses
 are imported into canonical `src/content`; WiseSpeak uses these packets in its
 French build. See `docs/french-beta-publication.md` for editing and provenance.
 
-Start with **SUMMARY.md**: what was done, problems found in the English site, and the
+Start with **SUMMARY.md** (batch 1) and **SUMMARY-batch2.md**: what was done, problems found in the English site, and the
 decisions Dr. Cook needs to make for the whole French edition.
 
 ## Folders
@@ -19,6 +19,14 @@ decisions Dr. Cook needs to make for the whole French edition.
 | `CTSPM` | Ministères pastoraux (Pastoral Ministries) | 1–12 |
 | `CTSCH` | Histoire de l'Église (Church History) | 1–10 |
 | `WiseSpeak` | WiseSpeak : l'art de la prédication (Preaching) | 0 (page frame), 1–10 |
+| `CTSHermeneutics` | Herméneutique (batch 2) | 1–11 |
+| `CTSLA` | Initiation aux langues bibliques (batch 2) | 1–11 |
+| `CTSGenesis` | Étude approfondie de la Genèse (batch 2) | 1–12 |
+| `CTSApol` | Apologétique (batch 2) | 1–10 |
+| `CTSAL` | Administration et leadership de l'Église (batch 2) | 1–10 |
+| `CTSWorship` | Le culte (batch 2) | 1–11 |
+| `CTSCE` | Éducation chrétienne (batch 2) | 1–10 |
+| `CTSMissions` | Missions mondiales (batch 2) | 1–10 |
 | `CTSBible` | Comment nous avons reçu la Bible (How We Got the Bible) | 1–10 |
 | `CTSPent` | Le Pentateuque (Pentateuch) | 1–12 |
 | `CTSJosh` | Cours intensif sur Josué (Joshua Intensive) | 1–10 |
