@@ -51,7 +51,7 @@ try {
       if(c.code==='COUNSELING') {
         // A held Master's student is pointed to the textbook test, not to a held certificate.
         assert.equal(await page.locator('#cts-cn-hold').isVisible(),!pass,`COUNSELING ${track}: hold note`); checks++;
-        assert.equal(await page.locator('#cts-cn-hold a[href="CTSTextbookCounselingTest.html"]').first().isVisible(),!pass,`COUNSELING ${track}: hold link`); checks++;
+        assert.equal(await page.locator('#cts-cn-hold a[href="/CTSTextbookCounselingTest.html"]').first().isVisible(),!pass,`COUNSELING ${track}: hold link`); checks++;
         assert.equal(await page.locator('#cts-cn-certlink').isVisible(),pass,`COUNSELING ${track}: certificate link`); checks++;
       }
       await page.goto(`${BASE}/${c.cert}`,{waitUntil:'load'});

@@ -242,6 +242,8 @@ const textbookFillFields = {
   answer: z.object({ en: z.string().min(1), es: z.string().min(1) }).catchall(z.string().min(1)),
   accept: z.object({ en: z.array(z.string().min(1)).optional(),
                      es: z.array(z.string().min(1)).optional() }).catchall(z.array(z.string().min(1))).optional(),
+  // the reading the question is on, in a bank drawn by reading (tools/import-readings.mjs)
+  group: z.number().int().positive().optional(),
   tr: translationState.optional(),
   /* Multiple choice (the newer textbook exams, 11 Oct 2026): four choices,
      the same in both languages and in the same order, the answer among them. */
@@ -345,10 +347,22 @@ const readings = defineCollection({
       draw: z.number().int().positive(),
       pass: z.number().int().positive(),
       perReading: z.number().int().positive().optional(),
+      perGroup: z.number().int().positive().optional(),
+      revision: z.string().min(1).optional(),
       questions: z.array(readingFill).min(20),
     }).refine((t) => t.pass <= t.draw && t.draw <= t.questions.length, {
       message: 'pass <= draw <= number of questions',
     }).superRefine((t, ctx) => {
+      if (t.perGroup) {
+        if (!t.revision) ctx.addIssue({ code: 'custom', message: 'a grouped bank needs a revision' });
+        const groups = new Map<number, number>();
+        for (const q of t.questions) {
+          if (!q.group) ctx.addIssue({ code: 'custom', message: 'a grouped question needs a group' });
+          else groups.set(q.group, (groups.get(q.group) ?? 0) + 1);
+        }
+        if (groups.size * t.perGroup !== t.draw) ctx.addIssue({ code: 'custom', message: 'group counts do not match draw' });
+        for (const count of groups.values()) if (count < t.perGroup) ctx.addIssue({ code: 'custom', message: 'group too small' });
+      } else if (t.questions.some(q => q.group)) ctx.addIssue({ code: 'custom', message: 'group without perGroup' });
       if (!t.perReading) return;
       const counts = new Map<number, number>();
       for (const q of t.questions) {

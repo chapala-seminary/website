@@ -165,7 +165,7 @@ async function openDegree(file, seed) {
 const DEGREES = [
   ['CTSCertificateOfMinistry.html', [...FOUNDATION, ...electives(5, FOUNDATION)], 'cert'],
   ['CTSAssociateCertificate.html', [...FOUNDATION, ...electives(18, FOUNDATION)], 'assoc'],
-  ['CTSThMCertificate.html', [...FOUNDATION, ...electives(5, FOUNDATION)], 'masters'],
+  ['CTSThMCertificate.html', [...FOUNDATION, ...electives(8, FOUNDATION)], 'masters'],
   ['CTSMDivCertificate.html', [...MDIV_CORE, ...electives(10, MDIV_CORE)], 'masters'],
 ];
 for (const [file, codes, level] of DEGREES) {

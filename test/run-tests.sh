@@ -129,6 +129,10 @@ node tools/verify-textbooks.mjs dist
 # completions the record held before a reading test was activated: the rule
 # itself, case by case, without a server.
 node test/required-tests.test.mjs
+# The World Religions Spanish readers (Oct 2026): each page is what its
+# translation gives, and every Spanish answer of the revised bank is in its
+# reading's reader -- for every reading, once the revised bank is in force.
+node tools/wr-readers.mjs
 
 # The reading rooms (Dr. Cook's Add-ons, Oct 2026): every room carries the
 # public-domain shelf its data says and an honours attestation, written by
@@ -257,9 +261,19 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   # locked after a failure, a fresh draw after the wait -- as a student
   # would use the page.
   node tools/verify-textbook-test.mjs "http://127.0.0.1:$PORT"
+  node tools/verify-textbook-mc.mjs "http://127.0.0.1:$PORT"
   # ...and the Master's five-reading test beside a textbook's: four from each
   # reading, 90%, retakes, the certificate waiting for whichever is left.
   node tools/verify-required-tests.mjs "http://127.0.0.1:$PORT"
+  # A required-reading test drawn by reading (World Religions, revised Oct
+  # 2026): four from each of the five readings, and an attempt begun on other
+  # questions set aside, the pass and any lock kept. Until the revised bank is
+  # in force the site has no page for it, so it is tested on a copy of the
+  # page with the site's scripts, from the bank the importer would write.
+  NEXT_READINGS=$(mktemp -d)
+  node tools/import-readings.mjs --next-out "$NEXT_READINGS"
+  node tools/verify-grouped-reading-test.mjs "http://127.0.0.1:$PORT" "$NEXT_READINGS/wrreadings.json"
+  rm -rf "$NEXT_READINGS"
   # The reading rooms in a browser: the shelf shows, the attestation records
   # under the code the certificate reads, in each family of room.
   node tools/verify-reading-rooms.mjs "http://127.0.0.1:$PORT"

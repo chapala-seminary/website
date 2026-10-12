@@ -20,12 +20,26 @@
  * The two are merged into one question in the same shape as a textbook's
  * (src/content.config.ts: prompt, answer, accept), with the blank written
  * ____ as every fill-in on the site writes it. Nothing else is changed.
+ *
+ * A bank grouped by reading (World Religions, revised 10 Oct 2026) also
+ * says which reading each question is on (`reading`, 1..5), how many to draw
+ * from each (format.questions_per_reading) and its revision
+ * (format.revision). They become the question's `group` and the test's
+ * `perGroup` and `revision`: cts-textbook.js then draws that many from each
+ * reading, and starts a fresh attempt when the revision changes, so an
+ * attempt begun on the old questions is never graded against the new ones.
+ *
+ * A test may have a `next` bank waiting to replace its current one. It is
+ * checked on every run, written to src/content only once its row says
+ * `active: true`, and can be written elsewhere for the browser tests:
+ *   node tools/import-readings.mjs --next-out DIR   # DIR/<slug>.json
  */
 import fs from 'node:fs';
 import path from 'node:path';
 
 const SRC = 'src/data/readings', OUT = 'src/content/readings';
 const WRITE = process.argv.includes('--write');
+const NEXT_OUT = (() => { const i = process.argv.indexOf('--next-out'); return i > 0 ? process.argv[i + 1] : null; })();
 
 /* One row per test. `page` names the page the test belongs to -- the room
    the student reads first -- and the test is at <page>Test.html. */
@@ -33,7 +47,7 @@ const TESTS = [
   { slug: 'genesisreadings', page: 'CTSGenesisReadings', course: 'CTSGenesis', kind: 'reading',
     title: { en: 'Genesis Intensive: Required Readings', es: 'Intensivo de Génesis: Lecturas Requeridas' },
     room: { en: 'the five readings in the Genesis Reading Room', es: 'las cinco lecturas de la Sala de Lecturas de Génesis' } },
-  { slug: 'wrreadings', page: 'CTSWRRequired', course: 'CTSWR', kind: 'reading',
+  { next: { bank: 'wrreadings.v2', active: false }, slug: 'wrreadings', page: 'CTSWRRequired', course: 'CTSWR', kind: 'reading',
     title: { en: 'World Religions: Required Readings', es: 'Religiones del Mundo: Lecturas Requeridas' },
     room: { en: 'the five assigned readings on the Required Readings page', es: 'las cinco lecturas asignadas de la página de Lecturas Requeridas' } },
   /* The Master's five-reading test (Dr. Cook and ChatGPT's authorization, 9
@@ -146,11 +160,11 @@ const TESTS = [
 const SCHEDULED = fs.existsSync('src/data/required-from.json') ? JSON.parse(fs.readFileSync('src/data/required-from.json', 'utf8')) : {};
 const fold = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^\p{L}\p{N} ]+/gu, ' ').replace(/\s+/g, ' ').trim();
 let problems = 0, optionalMissing = 0;
-const outputs = [];
-for (const t of TESTS) {
+const outputs = [], nextOutputs = [];
+function build(t, name) {
   const dir = t.dir || SRC;
-  const bank = JSON.parse(fs.readFileSync(path.join(dir, `${t.slug}.bank.json`), 'utf8'));
-  const accept = JSON.parse(fs.readFileSync(path.join(dir, `${t.slug}.accept.json`), 'utf8'));
+  const bank = JSON.parse(fs.readFileSync(path.join(dir, `${name}.bank.json`), 'utf8'));
+  const accept = JSON.parse(fs.readFileSync(path.join(dir, `${name}.accept.json`), 'utf8'));
   const f = bank.format || {};
   if (f.questions_per_attempt !== 20 || f.passing_score !== 18 || f.type !== 'fill-in-the-blank') { console.error(`${t.slug}: the bank's format is not 20 of 40, 18 to pass, fill-in-the-blank`); process.exit(2); }
   /* A bank that names how many questions to draw from each reading tags
@@ -195,10 +209,29 @@ for (const t of TESTS) {
   if (t.requiredFrom != null && Number.isNaN(Date.parse(t.requiredFrom))) { console.error(`${t.slug}: requiredFrom is not a date and time: ${t.requiredFrom}`); process.exit(2); }
   const counts = questions.map((q) => 1 + q.accept.en.length);
   console.log(`${t.slug}: ${questions.length} questions, accepted answers per question ${Math.min(...counts)}–${Math.max(...counts)} (English), for ${t.course}`);
-  outputs.push(out);
+  if (t.next?.bank === name && f.questions_per_reading) {
+    const per = f.questions_per_reading, k = f.readings, sizes = {};
+    for (const [i, q] of bank.questions.entries()) {
+      if (!Number.isInteger(q.reading) || q.reading < 1 || q.reading > k) { console.error(`${name} #${i + 1}: invalid reading`); problems++; }
+      sizes[q.reading] = (sizes[q.reading] || 0) + 1;
+      questions[i].group = q.reading;
+    }
+    for (let g = 1; g <= k; g++) if ((sizes[g] || 0) < per) problems++;
+    if (per * k !== out.test.draw || !f.revision) problems++;
+    out.test.perGroup = per;
+    out.test.revision = String(f.revision);
+    out.source.file = `${dir}/${name}.bank.json`;
+  }
+  return out;
+}
+for (const t of TESTS) {
+  outputs.push(build(t, t.next?.active ? t.next.bank : t.slug));
+  if (t.next && !t.next.active) nextOutputs.push(build(t, t.next.bank));
 }
 if (optionalMissing) console.log(`${optionalMissing} answer(s) with no accepted alternate yet, on tests where alternates are optional (faculty to add)`);
 if (problems) { console.error(`${problems} problem(s); nothing written`); process.exit(1); }
 /* Written only when every test is sound, so a bank with a problem never
    leaves half its tests updated. */
 if (WRITE) for (const out of outputs) { fs.mkdirSync(OUT, { recursive: true }); fs.writeFileSync(path.join(OUT, `${out.slug}.json`), JSON.stringify(out, null, 1) + '\n'); console.log(`  wrote ${OUT}/${out.slug}.json`); }
+
+if (NEXT_OUT) for (const out of nextOutputs) { fs.mkdirSync(NEXT_OUT, { recursive: true }); fs.writeFileSync(path.join(NEXT_OUT, `${out.slug}.json`), JSON.stringify(out, null, 1) + "\n"); }

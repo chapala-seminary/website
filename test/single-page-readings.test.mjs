@@ -75,7 +75,7 @@ ok(gen(none).status === 2, 'a reading test on a course with no completion code i
 
 const A = await import(path.join(dir, 'worker/awards.js'));
 const R = '2026-11-01T00:00:00.000Z', early = '2026-10-20T15:00:00.000Z', late = '2026-11-05T15:00:00.000Z';
-const active = (completions = [], now = late) => ({ requiredFrom: { [WS]: R }, now, completions });
+const active = (completions = [], now = late) => ({ requiredFrom: { broadus: null, [WS]: R }, now, completions });
 
 ok(JSON.stringify(A.testsFor('WISESPEAK')) === JSON.stringify(['broadus', WS]), 'Preaching lists its textbook (Broadus, 12 Oct 2026, inactive) and then its reading test');
 ok(A.testsFor('CTSNOSUCHCOURSE').length === 0, 'a course with no test still requires none');

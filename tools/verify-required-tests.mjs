@@ -137,7 +137,7 @@ async function answer(p, right, lang = 'en') {
   const lock = Number(await p.evaluate(() => localStorage.getItem('cts_textbook_pentecostalreadings_lock')));
   ok(lock > Date.now() + 14 * 60e3, 'the lock is set for the master\'s wait');
   ok(!(await p.evaluate(() => localStorage.getItem('cts_textbook_pentecostalreadings_passed'))), 'a failed attempt is not a pass');
-  await p.evaluate(() => localStorage.setItem('cts_textbook_pentecostalreadings_lock', String(Date.now() - 1000)));
+  await p.evaluate(() => { const past = Date.now() - 1000; localStorage.setItem('cts_textbook_pentecostalreadings_lock', String(past)); const state = JSON.parse(localStorage.getItem('cts_textbook_pentecostalreadings_state')); state.redrawAt = past; localStorage.setItem('cts_textbook_pentecostalreadings_state', JSON.stringify(state)); });
   await p.reload({ waitUntil: 'load' }); await p.waitForTimeout(200);
   const d2 = await draw(p);
   ok(JSON.stringify(d1) !== JSON.stringify(d2), 'after the wait a fresh twenty are drawn (unlimited retakes)');

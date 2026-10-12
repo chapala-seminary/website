@@ -27,7 +27,11 @@ export async function getStaticPaths() {
   });
 }
 const { reading, course, accent } = Astro.props;
-const { draw, pass, questions } = reading.test;
+const { draw, pass, questions, perGroup, revision } = reading.test;
+/* A bank drawn by reading (World Religions, revised 10 Oct 2026): perGroup
+   from each reading, said so on the page, and the revision cts-textbook.js
+   checks before it resumes an attempt. */
+const groups = perGroup ? new Set(questions.map((q) => q.group)).size : 0;
 /* What a pass completes, from worker/catalog.json: the one map the Worker
    applies (the test sits in `textbooks` with kind "reading"). */
 const tb = (catalog.textbooks as Record<string, { code: string; kind: string }>)[reading.slug];
@@ -51,14 +55,14 @@ const from = reading.requiredFrom ? new Date(reading.requiredFrom) : null;
 const fromText = from ? { en: from.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }),
                           es: from.toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }) } : null;
 const data = JSON.stringify({ slug: reading.slug, page: reading.page, kind: 'reading', title: reading.title, draw, pass, questions, completion,
-  ...(perReading ? { perReading } : {}), ...('requiredFrom' in reading ? { requiredFrom: reading.requiredFrom ?? null } : {}) }).replace(/</g, '\\u003c');
+  ...(perGroup ? { perGroup, revision } : {}), ...(perReading ? { perReading } : {}), ...('requiredFrom' in reading ? { requiredFrom: reading.requiredFrom ?? null } : {}) }).replace(/</g, '\\u003c');
 ---
 <Textbook kind="reading-test" book={book} course={course} accent={accent} scripts={['/assets/js/cts-fill.js', '/assets/js/cts-required-tests.js', '/assets/js/cts-record.js']} sync={true}>
   <section class="card tb-about">
     <h2><span class="lang-en">Required-reading test</span><span class="lang-es">Examen de lecturas requeridas</span></h2>
     <p>
-      <span class="lang-en">Twenty fill-in-the-blank questions, drawn at random from forty{perReading ? ` — ${perReading} from each of the five readings —` : ','} on {reading.room.en}. You need {pass} of {draw} to pass. Type the missing word or phrase and press Check (or Enter): each answer is marked at once. Capitals, accents and punctuation do not matter; you may answer in English or Spanish. If you fall short, go back to the readings and try again after a short wait; the next attempt draws a fresh twenty.</span>
-      <span class="lang-es">Veinte preguntas para completar, tomadas al azar de cuarenta{perReading ? ` — ${perReading} de cada una de las cinco lecturas —` : ','} sobre {reading.room.es}. Necesita {pass} de {draw} para aprobar. Escriba la palabra o frase que falta y pulse Comprobar (o Intro): cada respuesta se califica en seguida. No importan las mayúsculas, los acentos ni la puntuación; puede responder en inglés o en español. Si no alcanza la nota, vuelva a las lecturas e inténtelo de nuevo tras una breve espera; el siguiente intento toma otras veinte.</span>
+      <span class="lang-en">Twenty fill-in-the-blank questions, drawn at random from forty{(perReading || perGroup) ? ` — ${perReading || perGroup} from each of the five readings —` : ','} on {reading.room.en}. You need {pass} of {draw} to pass. Type the missing word or phrase and press Check (or Enter): each answer is marked at once. Capitals, accents and punctuation do not matter; you may answer in English or Spanish. If you fall short, go back to the readings and try again after a short wait; the next attempt draws a fresh twenty.</span>
+      <span class="lang-es">Veinte preguntas para completar, tomadas al azar de cuarenta{(perReading || perGroup) ? ` — ${perReading || perGroup} de cada una de las cinco lecturas —` : ','} sobre {reading.room.es}. Necesita {pass} de {draw} para aprobar. Escriba la palabra o frase que falta y pulse Comprobar (o Intro): cada respuesta se califica en seguida. No importan las mayúsculas, los acentos ni la puntuación; puede responder en inglés o en español. Si no alcanza la nota, vuelva a las lecturas e inténtelo de nuevo tras una breve espera; el siguiente intento toma otras veinte.</span>
     </p>
     {pending ? (
     <p>

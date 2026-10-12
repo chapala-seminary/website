@@ -1,6 +1,6 @@
 # French drafts — foundation courses (for review, not published)
 
-Machine drafts of six foundation courses in French, for pastors in Kinshasa (DR Congo).
+Machine drafts of ten courses (115 packets, including the WiseSpeak page frame) in French, for pastors in Kinshasa (DR Congo).
 Old Testament Survey, the seventh, was drafted earlier as the pilot (see `docs/french-pilot.md`).
 **Nothing here is read by the build or shown on the site.** Course data in `src/content`
 is unchanged.
@@ -78,3 +78,12 @@ text itself is not committed, see the script). Each unit passes `tools/validate.
 (same grading rules as `check_french.py`, plus checks that a French prompt cannot pass its
 own keywords), then had an independent second check. `tools/BRIEF.md` holds the
 translation rules and the edition-wide conventions Dr. Cook settled on 12 Oct.
+
+## Technical staging review (12 October)
+
+Both packet formats can be checked with either entry point:
+
+    python3 _review/french/tools/validate.py COURSE-unitN-source.json COURSE-unitN-fr.json
+    python3 _review/french/check_french.py COURSE-unitN-source.json COURSE-unitN-fr.json
+
+Both return a nonzero exit status on an error. All 115 packets passed after the validator repair. This checks structure and grading, not theological accuracy. The English corrections in PR #65 postdate the source packets; update affected NT Survey and Evangelism drafts before import. See `docs/beta-staging-review-2026-10-12.md`.

@@ -40,7 +40,8 @@ export function buildLanguagePages(dir) {
     const m = /^(.*)Unit(\d+)\.html$/.exec(file);
     const lessonFile = m && `src/content/lessons/${m[1]}/${m[2]}.json`;
     const lesson = lessonFile && fs.existsSync(lessonFile) ? JSON.parse(fs.readFileSync(lessonFile, 'utf8')) : null;
-    const sourceLang = lesson?.sourceLang || 'en';
+    const declaredSource = parse(canonical).querySelector('body')?.getAttribute('data-source-lang');
+    const sourceLang = lesson?.sourceLang || (LANGUAGES.includes(declaredSource) ? declaredSource : 'en');
     for (const lang of LANGUAGES) {
       let root = parse(canonical, { comment: true, parseNoneClosedTags: true });
       const html = root.querySelector('html'), body = root.querySelector('body'), head = root.querySelector('head');
