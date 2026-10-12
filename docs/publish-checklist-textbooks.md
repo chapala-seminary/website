@@ -1,6 +1,6 @@
 # Publishing the textbooks and reading tests: Robert's checklist
 
-_12 Oct 2026. For the stacked draft pull requests #40 to #49 and #51 to #54, the pull requests on top of #54 (#55, #57, #58, #59), and the separate #50. Nothing here
+_12 Oct 2026. For the stacked draft pull requests #40 to #49 and #51 to #54, the pull requests on top of #54 (#55, #57–#60), and the separate #50. Nothing here
 has been merged or deployed. Dr. Cook approves before anything goes live._
 
 ## What is in the stack
@@ -23,7 +23,7 @@ below it:
 | #53 | World Religions and Church Administration textbooks; reading tests for the last 22 rooms (every course now has one) |
 | #54 | Christian Ethics (Alexander), Preaching (Broadus) and Practical Theology (Collins, *Soul Care*) textbooks; Ethics joins the catalog as a single-page course, code ETHICS. `ethics_certificate.html` gets the certificate gate in #59 |
 
-Five pull requests sit side by side on top of #54. Each contains #54 but not the others:
+Six pull requests sit side by side on top of #54. Each contains #54 but not the others:
 
 | PR | What it adds |
 |---|---|
@@ -31,6 +31,7 @@ Five pull requests sit side by side on top of #54. Each contains #54 but not the
 | #55 | Radical Christianity textbook (*Holiness Through the Ages*) |
 | #57 | Church Growth textbook (Nevius), number 63 |
 | #58 | Bible Characters textbook (Whyte, *Adam to Achan*), number 64 |
+| #60 | Bible Characters II textbook (Gibson, Bruce, Dods and Stokes), number 65 |
 | #56 | Christian Ethics reading test — its title says not to merge yet |
 
 They all change the generated files (`worker/catalog.json`, `public/assets/js/cts-required-tests.js` and the `?v=` on the certificate pages), so merge them into `claude/textbooks-batch6` one at a time and, after each, take either side of a conflict in those files and rerun:
@@ -39,7 +40,7 @@ They all change the generated files (`worker/catalog.json`, `public/assets/js/ct
     node tools/room-test-notices.mjs --write
     node tools/import-readings.mjs --write
 
-Testing `claude/textbooks-batch6` after those merges tests the whole stack. Bible Characters II still has no textbook: it needs Whyte's later volumes.
+Testing `claude/textbooks-batch6` after those merges tests the whole stack.
 
 **#50 is separate.** It is based on `main` and carries the approved corrections to the nine live textbook exams (`src/data/textbooks/corrections.json`). It can be built, tested and deployed on its own, before or after the stack. #35 to #39 are
 older drafts. Check which of them are still needed before merging #40, which
@@ -102,7 +103,7 @@ Until this step, every new test is open to everyone and required of no one.
 Dr. Cook announces a start date, which must be **after** the deploy that carries it:
 
     node tools/activate-required.mjs --list
-    node tools/activate-required.mjs --at 2026-11-01T06:00:00Z --all-pending            # dry run: lists the tests (74 with #54; 77 with #55, #57 and #58)
+    node tools/activate-required.mjs --at 2026-11-01T06:00:00Z --all-pending            # dry run: lists the tests (74 with #54; 78 with #55, #57, #58 and #60)
     node tools/activate-required.mjs --at 2026-11-01T06:00:00Z --all-pending --write
     npm run build && test/run-tests.sh
     npm run deploy
