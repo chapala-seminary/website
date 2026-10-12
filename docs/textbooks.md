@@ -50,6 +50,40 @@ reading test with `requiredFrom` counts from that moment only, and not for a
 master's completion the record held before it (`docs/reading-rooms.md`,
 "Master's reading tests").
 
+## The seven new textbooks, and making tests required (11 Oct 2026)
+
+Joshua (Blaikie), Galatians (Findlay), Romans (Moule), Evangelism (Torrey),
+1 Peter, John and Ruth–Esther have public-domain textbooks with a
+forty-question test each. Their tests are **multiple choice** (four choices,
+in both languages; marked the moment one is clicked, with the right answer
+shown when it is wrong): each question carries `options {en, es}`, and
+`src/content.config.ts` refuses a question whose answer is not among its
+choices at the same place in both languages. The nine original textbooks and
+the reading tests stay fill-in-the-blank (Dr. Cook: adjust only the new ones).
+
+Where the reading is: Joshua, Galatians and Romans link the full English book
+and the CTS Spanish assigned chapters (`files.html`); Evangelism (five
+chapters), 1 Peter, John and Ruth–Esther carry their assigned readings on the
+book page itself (`files: {excerpts: true}`), rebuilt from
+`docs/readers/textbooks/<slug>/excerpts/{en,es}/{1..5}.md` by
+`node tools/excerpt-body.mjs <slug>` (`--check` to compare).
+
+All seven, and the five-reading tests installed in October, are online with
+`requiredFrom: null`: open to everyone, required of no one. Dr. Cook wants
+them required on the M.Div. and Th.M. tracks once published. To do that:
+
+    node tools/activate-required.mjs --list
+    node tools/activate-required.mjs --at 2026-11-01T00:00:00Z --all-pending --except actsreadings          # what it would do
+    node tools/activate-required.mjs --at 2026-11-01T00:00:00Z --all-pending --except actsreadings --write
+
+The moment must be after the deploy that carries it. The tool records it in
+`src/data/required-from.json`, sets `requiredFrom` in each textbook record,
+re-runs `tools/import-readings.mjs --write` (which reads the same file) and
+`tools/gen-worker-catalog.mjs`; then build, suite, deploy. A master's
+completion the record already held before that moment is kept
+(`worker/awards.js` `testCounts`). Acts is left out until its revised readings
+are in.
+
 ## Where things live
 
 | Path | What |

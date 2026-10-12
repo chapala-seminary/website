@@ -96,6 +96,7 @@ const TESTS = [
     room: {"en": "the five readings in the Matthew Reading Room", "es": "las cinco lecturas de Mateo"} },
 ];
 
+const SCHEDULED = fs.existsSync('src/data/required-from.json') ? JSON.parse(fs.readFileSync('src/data/required-from.json', 'utf8')) : {};
 const fold = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^\p{L}\p{N} ]+/gu, ' ').replace(/\s+/g, ' ').trim();
 let problems = 0, optionalMissing = 0;
 const outputs = [];
@@ -137,6 +138,9 @@ for (const t of TESTS) {
     return { prompt: { en: blank(q.en), es: blank(q.es) }, answer: { en: q.answer_en, es: q.answer_es }, accept: { en, es },
       ...(perReading !== null ? { reading: q.reading } : {}) };
   });
+  // a test made required by tools/activate-required.mjs takes its moment from
+  // src/data/required-from.json; one in force since its install has no requiredFrom
+  if ('requiredFrom' in t && SCHEDULED[t.slug]) t.requiredFrom = SCHEDULED[t.slug];
   const out = { slug: t.slug, page: t.page, course: t.course, kind: t.kind, title: t.title, room: t.room,
     ...('requiredFrom' in t ? { requiredFrom: t.requiredFrom } : {}),
     source: { file: `${dir}/${t.slug}.bank.json`, course: bank.course },

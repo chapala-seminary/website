@@ -30,7 +30,7 @@ const toc = (html: string) =>
 const contents = { en: toc(book.body.en), es: toc(book.body.es) };
 const web = ('html' in book.files ? book.files.html : undefined);
 const pdf = ('pdf' in book.files ? book.files.pdf : undefined);
-// assigned excerpts: the readings are the body of this page, in both languages
+// assigned readings (excerpts or whole chapters): the body of this page, in both languages
 const excerpts = ('excerpts' in book.files);
 ---
 <Textbook kind="book" book={book} course={course} accent={accent}>
@@ -40,8 +40,15 @@ const excerpts = ('excerpts' in book.files);
       <span class="lang-en">This is the textbook for <a href={`/${course.entry}`}>{course.title.en}</a>. It is required reading for students on the M.Div. and Th.M. tracks, and open to everyone. Read it here in English or Spanish, or download it as a PDF. When you have read it, take the textbook test: twenty fill-in-the-blank questions, drawn from forty, on a page of its own.</span>
       <span class="lang-es">Este es el libro de texto del curso <a href={`/${course.entry}`}>{course.title.es}</a>. Es lectura obligatoria para los estudiantes de los trayectos M.Div. y Th.M., y está abierto a todos. Léalo aquí en inglés o en español, o descárguelo en PDF. Cuando lo haya leído, presente el examen del libro: veinte preguntas para completar, tomadas de cuarenta, en una página aparte.</span>
     </p>
-    {web && <p><span class="lang-en">Read the original English book or the CTS Spanish translation of the assigned chapters on the seminary website. This textbook examination is optional for now; it does not delay course completion.</span><span class="lang-es">Lea el libro original completo en inglés o la traducción CTS de los capítulos asignados en español dentro del sitio del seminario. Este examen es opcional por ahora y no retrasa la finalización del curso.</span></p>}
-    {excerpts && <p><span class="lang-en">The assigned readings from this book are the five excerpts on this page, in English and in a CTS Spanish translation. This textbook examination is optional for now; it does not delay course completion.</span><span class="lang-es">Las lecturas asignadas de este libro son los cinco fragmentos de esta página, en inglés y en una traducción al español del STC. Este examen es opcional por ahora y no retrasa la finalización del curso.</span></p>}
+    {(web || excerpts) && <p>
+      {web
+        ? <><span class="lang-en">Read the original English book or the CTS Spanish translation of the assigned chapters on the seminary website.</span><span class="lang-es">Lea el libro original completo en inglés o la traducción del STC de los capítulos asignados en español dentro del sitio del seminario.</span></>
+        : <><span class="lang-en">The assigned readings from this book are on this page, in English and in a CTS Spanish translation.</span><span class="lang-es">Las lecturas asignadas de este libro están en esta página, en inglés y en una traducción al español del STC.</span></>}
+      {' '}
+      {book.requiredFrom
+        ? <><span class="lang-en">Students on the M.Div. and Th.M. tracks must read them and pass the textbook test (twenty multiple-choice questions) to complete the course; it is open to everyone.</span><span class="lang-es">Los estudiantes de los trayectos M.Div. y Th.M. deben leerlas y aprobar el examen del libro (veinte preguntas de opción múltiple) para completar el curso; está abierto a todos.</span></>
+        : <><span class="lang-en">This textbook examination is optional for now; it does not delay course completion.</span><span class="lang-es">Este examen es opcional por ahora y no retrasa la finalización del curso.</span></>}
+    </p>}
     <div class="actions tb-actions">
       <a class="btn solid" href={`/${book.page}Test.html`}><span class="lang-en">Take the textbook test</span><span class="lang-es">Presentar el examen del libro</span> →</a>
       {web ? (
@@ -73,6 +80,6 @@ const excerpts = ('excerpts' in book.files);
   <article class="card tb-book lang-es" lang="es" set:html={book.body.es} />
 
   <p class="small muted tb-edition">
-      {excerpts ? <><span class="lang-en">Excerpts from a historical public-domain edition ({book.edition}); the Spanish is a CTS translation of the excerpts.</span><span class="lang-es">Fragmentos de una edición histórica de dominio público ({book.edition}); el español es una traducción del STC de los fragmentos.</span></> : web ? <><span class="lang-en">Historical public-domain edition; the CTS Spanish assigned chapters are linked above.</span><span class="lang-es">Edición histórica de dominio público; arriba se enlazan los capítulos asignados traducidos por CTS.</span></> : <><span class="lang-en">CTS Textbook Edition {book.edition}. The Word file is the master; this page was made from it.</span><span class="lang-es">Edición de libro de texto CTS {book.edition}. El archivo de Word es el original; esta página se hizo a partir de él.</span></>}
+      {excerpts ? <><span class="lang-en">Assigned readings from a historical public-domain edition ({book.edition}); the Spanish is a CTS translation.</span><span class="lang-es">Lecturas asignadas de una edición histórica de dominio público ({book.edition}); el español es una traducción del STC.</span></> : web ? <><span class="lang-en">Historical public-domain edition; the CTS Spanish assigned chapters are linked above.</span><span class="lang-es">Edición histórica de dominio público; arriba se enlazan los capítulos asignados traducidos por el STC.</span></> : <><span class="lang-en">CTS Textbook Edition {book.edition}. The Word file is the master; this page was made from it.</span><span class="lang-es">Edición de libro de texto CTS {book.edition}. El archivo de Word es el original; esta página se hizo a partir de él.</span></>}
   </p>
 </Textbook>
