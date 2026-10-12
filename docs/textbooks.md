@@ -131,7 +131,15 @@ truly, application, and expository preaching. It is listed before the
 course's five-reading test; Dr. Cook's own WiseSpeak remains the course's
 method. The box is written into the single course page.
 
-All thirty, and the five-reading tests, are online with
+And Practical Theology (CTSPT; 12 Oct): Kenneth J. Collins, *Soul Care:
+Deliverance and Renewal through the Christian Life* (First Fruits Press,
+2014), used under its Creative Commons Attribution-NonCommercial 3.0 US
+license, which allows translation with credit (`CTSTextbookSoulCare`): sin as
+unbelief, the detour of moralism, justification, reading the Scriptures,
+prayer. Its English quotes the NIV, as the book does; the Spanish uses the
+Reina-Valera 1909.
+
+All thirty-one, and the five-reading tests, are online with
 `requiredFrom: null`: open to everyone, required of no one. Dr. Cook wants
 them required on the M.Div. and Th.M. tracks once published. To do that:
 

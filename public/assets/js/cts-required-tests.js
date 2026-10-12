@@ -493,6 +493,20 @@ window.CTS_REQUIRED_TESTS = {
    "requiredFrom": null
   }
  ],
+ "CTSPT": [
+  {
+   "slug": "soulcare",
+   "page": "CTSTextbookSoulCare",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "ptreadings",
+   "page": "CTSPTReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
  "CTSHERMENEUTICS": [
   {
    "slug": "studybible",
@@ -568,14 +582,6 @@ window.CTS_REQUIRED_TESTS = {
   {
    "slug": "cgreadings",
    "page": "CTSCGReadings",
-   "kind": "reading",
-   "requiredFrom": null
-  }
- ],
- "CTSPT": [
-  {
-   "slug": "ptreadings",
-   "page": "CTSPTReadings",
    "kind": "reading",
    "requiredFrom": null
   }

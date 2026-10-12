@@ -21,7 +21,7 @@ below it:
 | #51 | Church History, Old and New Testament Survey, Life of Christ and Christian Education |
 | #52 | Hermeneutics, Apologetics, Evangelistic Preaching, World Missions, Genesis and Matthew |
 | #53 | World Religions and Church Administration textbooks; reading tests for the last 22 rooms (every course now has one) |
-| #54 | Christian Ethics textbook (Alexander); Ethics joins the catalog as a single-page course, code ETHICS. Before activating it, `ethics_certificate.html` needs `cts-required-tests.js` and `cts-textbook-gate.js`, as the other certificate pages have, or use `--except christianethics` |
+| #54 | Christian Ethics (Alexander), Preaching (Broadus) and Practical Theology (Collins, *Soul Care*) textbooks; Ethics joins the catalog as a single-page course, code ETHICS. Before activating it, `ethics_certificate.html` needs `cts-required-tests.js` and `cts-textbook-gate.js`, as the other certificate pages have, or use `--except christianethics` |
 
 Testing `claude/textbooks-batch6` (#54) tests the whole stack.
 
@@ -86,7 +86,7 @@ Until this step, every new test is open to everyone and required of no one.
 Dr. Cook announces a start date, which must be **after** the deploy that carries it:
 
     node tools/activate-required.mjs --list
-    node tools/activate-required.mjs --at 2026-11-01T06:00:00Z --all-pending            # dry run: lists the tests (72 with #54)
+    node tools/activate-required.mjs --at 2026-11-01T06:00:00Z --all-pending            # dry run: lists the tests (74 with #54)
     node tools/activate-required.mjs --at 2026-11-01T06:00:00Z --all-pending --write
     npm run build && test/run-tests.sh
     npm run deploy
