@@ -412,8 +412,6 @@
     var save = el("regSave");
     if (save) save.addEventListener("click", function () {
       if (!readReg()) {
-        var n = el("regName");
-        if (n) { n.focus(); n.setAttribute("aria-invalid", "true"); }
         return;
       }
       var t = el("regTrack");
@@ -1156,10 +1154,23 @@
       return "";
     }
     var name = val("regName", "reg-name", "studentName", "m-name", "student-name");
-    if (!name) return false;
+    var email = val("regEmail", "reg-email", "studentEmail", "student-email");
+    var error = el("regError");
+    if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      if (error) {
+        error.hidden = false;
+        error.innerHTML = bi({ en: "Enter your name and a valid email address to save your registration.", es: "Escriba su nombre y una dirección de correo válida para guardar su registro.", fr: "Saisissez votre nom et une adresse courriel valide pour enregistrer votre inscription." });
+      }
+      var invalid = el(!name ? "regName" : "regEmail");
+      if (invalid) { invalid.focus(); invalid.setAttribute("aria-invalid", "true"); }
+      return false;
+    }
+    if (error) error.hidden = true;
+    var emailField = el("regEmail");
+    if (emailField) emailField.removeAttribute("aria-invalid");
     var st = student() || {};
     st.name = name;
-    st.email = val("regEmail", "reg-email", "studentEmail", "student-email") || st.email || "";
+    st.email = email;
     st.country = val("regCountry", "reg-country", "studentCountry") || st.country || "";
     st.track = st.track || track();
     lsSet("cts_student", JSON.stringify(st));

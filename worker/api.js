@@ -21,6 +21,7 @@
  * from a student, which makes a stale or offline device harmless.
  */
 
+import { activationEnvironment, activatedTests } from './test-activation.js';
 import { courseShortfall, textbookShortfall, exemptionsFor, degreeShortfall, resolveCourse, studentLevel, canonicalCode, certificateLevel, DEGREES } from './awards.js';
 import catalog from './catalog.json';
 import { emailConfigured, emailLogOnly, sendEmail, verificationEmail, certificateEmail, codeEmail } from './email.js';
@@ -121,7 +122,7 @@ function testRequiredFrom(env) {
 /* What testCounts needs: the completions the record holds now, with the time
  * and level the server wrote, and the server's clock. */
 function testContext(env, completions) {
-  return { completions: completions || [], now: now(), requiredFrom: testRequiredFrom(env) };
+  return { completions: completions || [], now: now(), requiredFrom: { ...activatedTests(env), ...testRequiredFrom(env) } };
 }
 
 async function loadState(env, id) {
@@ -147,6 +148,7 @@ async function loadState(env, id) {
   for (const level of Object.keys(DEGREES)) degrees[level] = degreeShortfall(level, done, studentLevel(student.track, student.goal)) === null;
   return {
     student,
+    requiredFrom: activatedTests(env),
     progress: progress.results ?? [],
     doneCodes: done.map(d => d.code),
     completions: done,
@@ -538,7 +540,7 @@ async function emailMyCode(request, env) {
     .bind(email).all()).results ?? [];
   if (students.length)
     await sendEmail(env, { to: email, ...codeEmail({ students, origin: new URL(request.url).origin, lang: lang(b.lang) || students[0]?.lang }) });
-  return json({ ok: true });
+  return json({ ok: true, requiredFrom: activatedTests(env) });
 }
 
 async function emailStart(request, env) {
@@ -677,11 +679,18 @@ async function deleteStudent(env, rawCode) {
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
 function verifyPage(cert, typed) {
+  const lookup = typed === undefined;
   const ok = cert && !cert.revoked_at;
-  const title = ok ? 'Certificate verified · Certificado verificado'
+  const title = lookup ? 'Verify a certificate · Verificar un certificado' : ok ? 'Certificate verified · Certificado verificado'
     : cert ? 'Certificate withdrawn · Certificado retirado'
       : 'No such certificate · Certificado no encontrado';
-  const rows = ok ? `
+  const rows = lookup ? `
+      <p>Enter the certificate verification code.<br><span lang="es">Escriba el código de verificación del certificado.</span></p>
+      <form action="/verify" method="get">
+        <label for="verify-code">Verification code · Código de verificación</label>
+        <input id="verify-code" name="code" required maxlength="32" autocomplete="off" spellcheck="false">
+        <button type="submit">Verify · Verificar</button>
+      </form>` : ok ? `
       <dl>
         <dt>Awarded to · Otorgado a</dt><dd>${esc(cert.student_name)}</dd>
         <dt>Award · Reconocimiento</dt><dd>${esc(cert.title)}</dd>
@@ -711,9 +720,11 @@ function verifyPage(cert, typed) {
   .muted{color:var(--muted)}
   footer{margin-top:22px;font-size:.82rem;color:var(--muted)}
   a{color:var(--gold)}
+  label{display:block} input,button{box-sizing:border-box;max-width:100%;font:inherit;padding:10px;margin-top:8px}
+  input{width:100%;border:1px solid var(--muted);border-radius:4px} button{background:var(--oxblood);color:#fff;border:0;border-radius:4px;cursor:pointer}
 </style></head>
 <body><main><div class="card">
-  <div class="status ${ok ? 'ok' : 'no'}">${ok ? '✓ Verified · Verificado' : '· Not verified · No verificado'}</div>
+  ${lookup ? '' : `<div class="status ${ok ? 'ok' : 'no'}">${ok ? '✓ Verified · Verificado' : '· Not verified · No verificado'}</div>`}
   <h1>Chapala Theological Seminary</h1>
   ${rows}
   <footer>
@@ -803,7 +814,17 @@ export async function handle(request, env) {
   const method = request.method.toUpperCase();
 
   try {
+    if (path === '/verify' && method === 'GET') {
+      const code = (url.searchParams.get('code') || '').trim();
+      if (code) return new Response(null, { status: 303, headers: {
+        location: '/verify/' + encodeURIComponent(code.slice(0, 32)), 'cache-control': 'no-store',
+      } });
+      return new Response(verifyPage(null), { headers: {
+        'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store',
+      } });
+    }
     if (!env?.DB) throw new HttpError(503, 'student records are not configured');
+    env = await activationEnvironment(env);
 
     if (path === '/api/register' && method === 'POST') return await register(request, env);
     if (path === '/api/sync' && method === 'POST')
@@ -851,7 +872,7 @@ export async function handle(request, env) {
       });
       });
     }
-    if (path === '/api/health') return json({ ok: true });
+    if (path === '/api/health') return json({ ok: true, requiredFrom: activatedTests(env) });
 
     return fail(404, 'no such endpoint');
   } catch (e) {

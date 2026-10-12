@@ -44,6 +44,8 @@ try {
     check('Spanish source short answer', e.shortAnswerRight(sa, 'apostles church faith'), true);
     check('Spanish short answer', e.shortAnswerRight(sa, 'apóstoles iglesia fe'), true);
     check('Spanish accents do not lose concepts', e.shortAnswerRight({ keywords: { es: ['koine', 'idioma comun', 'traduccion'] } }, 'El koiné era el idioma común; la traducción servía al pueblo.'), true);
+    // Reverse-direction case retained from Wayne's audit repair PR #73.
+    check('Spanish accented keywords match unaccented answer', e.shortAnswerRight({ keywords: { es: ['traducción', 'común', 'preparación'] } }, 'traduccion comun preparacion'), true);
     check('Spanish short-answer ñ stays distinct', e.shortAnswerRight({ keywords: { es: ['año'] } }, 'ano'), false);
     check('Spanish decomposed short-answer ñ matches', e.shortAnswerRight({ keywords: { es: ['año'] } }, 'an\u0303o'), true);
     check('Spanish fill accents folded', e.fillRight(q, 'el apostol'), true);
