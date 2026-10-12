@@ -50,6 +50,10 @@ def main(srcp, frp):
     S = json.load(open(srcp)); F = json.load(open(frp))
     err, warn = [], []
     fb = F.get('blocks', {})
+    if isinstance(fb, list):
+        ids = [b.get('id') for b in fb]
+        if len(set(ids)) != len(ids): err.append('duplicate French block ids')
+        fb = {b.get('id'): b.get('fr') for b in fb}
     for b in S['blocks']:
         t = fb.get(b['id'])
         if not isinstance(t, str) or not t.strip():
@@ -84,8 +88,8 @@ def main(srcp, frp):
             warn.append(f'fill{i}: answer appears elsewhere in the prompt')
     for i, (s, f) in enumerate(zip(S['sa'], F.get('sa', [])), 1):
         ks, m = f.get('keywords') or [], f.get('model') or ''
-        if len(ks) != len(s['keywords_en'] or []):
-            err.append(f"sa{i}: {len(ks)} keyword groups, English has {len(s['keywords_en'] or [])}")
+        if len(ks) != len(s.get('keywords_en', s.get('keywords', [])) or []):
+            err.append(f"sa{i}: {len(ks)} keyword groups, English has {len(s.get('keywords_en', s.get('keywords', [])) or [])}")
         for k in ks:
             for form in (k if isinstance(k, list) else [k]):
                 n = normalise(form).strip()

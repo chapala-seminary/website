@@ -22,6 +22,13 @@ risk, update the brain **on a branch** (`project/website-memory-update`), run
 `./scripts/validate-memory.sh` there, and say so in your summary. Never commit
 to the brain's `main`. The rules are in `../brain/AGENT_RULES.md`.
 
+## Staging and release
+
+New website work goes through a PR targeting `beta` first. `beta.chapalaseminary.org`
+publishes the tested `beta` branch with its own database. `main` is production;
+promotion to main and production deployment are separate steps authorized by Robert.
+Read `docs/beta-staging.md`. A staging merge does not replace faculty or translation review.
+
 ## Rules for this repo
 
 - **Commit only your own files.** Several sessions work in this tree at once;

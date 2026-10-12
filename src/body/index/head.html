@@ -76,7 +76,7 @@
       "name": "What credentials can I earn?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Students can pursue a Certificate, a Th.M., an M.Div., or an Associate of Divinity. The Certificate and Th.M. tracks differ mainly by the level of written work required; the M.Div. also requires a specific 20-course core plus electives, for 30 courses in all."
+        "text": "Students can pursue a Certificate of Ministry (12 courses), an Associate of Divinity (25 courses), a Master of Theology, Th.M. (15 courses), or a Master of Divinity, M.Div. (30 courses). Every student studies the same bilingual teaching content and begins with the same seven foundation courses. The programs differ in the work required in each unit: the Certificate takes the multiple-choice review; the Associate adds fill-in-the-blank questions; the Th.M. and M.Div. add written short answers and, in courses that have them, a textbook or required-readings test. The M.Div. also requires a specific 20-course core."
       }
     },
     {
@@ -314,9 +314,9 @@
       </div>
       <div class="track">
         <div class="t-name"><span class="en">Master of Theology (Th.M.)</span><span class="es">Maestr&iacute;a en Teolog&iacute;a (Th.M.)</span></div>
-        <div class="t-req"><span class="en">Master&rsquo;s level &middot; 12 courses</span><span class="es">Nivel de maestr&iacute;a &middot; 12 cursos</span></div>
-        <p><span class="en">Twelve courses at the master&rsquo;s level &mdash; the seven foundation courses plus five of your choosing &mdash; adding the ten fill-in-the-blank questions and the written short-answer work in each unit.</span>
-        <span class="es">Doce cursos al nivel de maestr&iacute;a &mdash; los siete cursos de fundamento m&aacute;s cinco de su elecci&oacute;n &mdash; a&ntilde;adiendo las diez preguntas de completar el espacio en blanco y el trabajo escrito de respuesta breve en cada unidad.</span></p>
+        <div class="t-req"><span class="en">Master&rsquo;s level &middot; 15 courses</span><span class="es">Nivel de maestr&iacute;a &middot; 15 cursos</span></div>
+        <p><span class="en">Fifteen courses at the master&rsquo;s level &mdash; the seven foundation courses plus eight of your choosing &mdash; adding the ten fill-in-the-blank questions and the written short-answer work in each unit.</span>
+        <span class="es">Quince cursos al nivel de maestr&iacute;a &mdash; los siete cursos de fundamento m&aacute;s ocho de su elecci&oacute;n &mdash; a&ntilde;adiendo las diez preguntas de completar el espacio en blanco y el trabajo escrito de respuesta breve en cada unidad.</span></p>
       </div>
       <div class="track">
         <div class="t-name"><span class="en">Master of Divinity (M.Div.)</span><span class="es">Maestr&iacute;a en Divinidad (M.Div.)</span></div>
@@ -374,10 +374,10 @@
       <section id="register" style="max-width:760px;margin:0 auto 8px;padding:22px;background:#5a1f1f;border:3px solid #b08324;border-radius:14px;color:#f0e0b8;">
         <div class="kicker" style="color:#e9c877"><span class="en">Register Once</span><span class="es">Reg&iacute;strese Una Vez</span></div>
         <h2 class="section" style="color:#fff;margin:4px 0 8px"><span class="en">Register Here &mdash; for Every Course</span><span class="es">Reg&iacute;strese Aqu&iacute; &mdash; para Todos los Cursos</span></h2>
-        <p style="margin:0 0 16px;font-size:15px;line-height:1.5"><span class="en">Enter your name and choose your track &mdash; you only register once. Your progress is saved in this browser as you study, and kept with the seminary under your student code, so you can continue on any device. A confirmed email is needed only to receive a certificate.</span><span class="es">Escriba su nombre y elija su v&iacute;a &mdash; se registra una sola vez. Su progreso se guarda en este navegador mientras estudia, y en el seminario bajo su c&oacute;digo de estudiante, para que pueda continuar en cualquier dispositivo. Solo se necesita un correo confirmado para recibir un certificado.</span></p>
+        <p style="margin:0 0 16px;font-size:15px;line-height:1.5"><span class="en">Enter your name and email address and choose your track &mdash; you only register once. Your progress is saved in this browser as you study, and kept with the seminary under your student code, so you can continue on any device. A confirmed email is needed only to receive a certificate.</span><span class="es">Escriba su nombre y correo electr&oacute;nico y elija su v&iacute;a &mdash; se registra una sola vez. Su progreso se guarda en este navegador mientras estudia, y en el seminario bajo su c&oacute;digo de estudiante, para que pueda continuar en cualquier dispositivo. Solo se necesita un correo confirmado para recibir un certificado.</span></p>
         <div id="cts-reg-form" style="display:grid;gap:10px;">
           <input id="reg-name" type="text" placeholder="Full name / Nombre completo" data-en="Full name" data-es="Nombre completo" style="padding:11px;border-radius:7px;border:1px solid #b08324;font:15px Georgia,serif;">
-          <input id="reg-email" type="email" placeholder="Email (needed for a certificate) / Correo (necesario para un certificado)" data-en="Email (needed for a certificate)" data-es="Correo (necesario para un certificado)" style="padding:11px;border-radius:7px;border:1px solid #b08324;font:15px Georgia,serif;">
+          <input id="reg-email" type="email" required maxlength="160" autocomplete="email" aria-label="Email / Correo" placeholder="Email (required) / Correo (obligatorio)" data-en="Email (required)" data-es="Correo (obligatorio)" style="padding:11px;border-radius:7px;border:1px solid #b08324;font:15px Georgia,serif;">
           <select id="reg-country" data-bilingual style="padding:11px;border-radius:7px;border:1px solid #b08324;font:15px Georgia,serif;background:#fff;">
             <option value="" data-en="Country — select" data-es="País — seleccione">Country / Pa&iacute;s &mdash; select / seleccione</option>
 <option value="AF">Afghanistan · Afganistán</option>
@@ -649,14 +649,25 @@
           </p>
         </div>
         <script src="/assets/js/cts-fields-lang.js" defer></script>
+        <p><a href="/cts-confirm-email.html" style="color:#f0e0b8;"><span class="en">Confirm your email when convenient — you can keep studying.</span><span class="es">Confirme su correo cuando pueda — puede seguir estudiando.</span></a></p>
         <script>
+        function ctsHomeMessage(text){ return (window.CTS_HOME_FR||{})[text] || text; }
+        function ctsHomePair(en, es){
+          return window.CTS_HOME_FR && window.CTSLanguage ? window.CTSLanguage.bi({en:en,es:es,fr:(window.CTS_HOME_FR||{})[en]}) : '<span class="en">'+en+'</span><span class="es">'+es+'</span>';
+        }
         function ctsRegister(){
           var name=(document.getElementById('reg-name').value||'').trim();
           var es=document.body.classList.contains('lang-es');
-          if(!name){ alert(es?'Escriba su nombre':'Please enter your name'); return; }
-          var email=(document.getElementById('reg-email').value||'').trim()||'\u2014';
+          if(!name){ alert(ctsHomeMessage(es?'Escriba su nombre':'Please enter your name')); return; }
+          var emailField=document.getElementById('reg-email');
+          var email=(emailField.value||'').trim();
+          emailField.value=email;
+          if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) || !emailField.checkValidity() || email.length>160){
+            alert(ctsHomeMessage(es?'Escriba un correo electr\u00f3nico v\u00e1lido para registrarse':'Please enter a valid email address to register'));
+            emailField.focus(); return;
+          }
           var country=document.getElementById('reg-country').value;
-          if(!country){ alert(es?'Seleccione su pa\u00eds':'Please select your country'); return; }
+          if(!country){ alert(ctsHomeMessage(es?'Seleccione su pa\u00eds':'Please select your country')); return; }
           var heard=document.getElementById('reg-heard').value||'\u2014';
           var sel=document.getElementById('reg-track').value;
           var map={cert:{p:'Certificate of Ministry',es:'Certificado de Ministerio',g:''},assoc:{p:'Associate of Divinity',es:'Asociado en Divinidad',g:'assoc'},thm:{p:'Master of Theology',es:'Maestr\u00eda en Teolog\u00eda',g:''},mdiv:{p:'Master of Divinity',es:'Maestr\u00eda en Divinidad',g:''}};
@@ -665,11 +676,11 @@
             localStorage.setItem('cts_student', JSON.stringify({name:name,email:email,country:country,heard:heard,track:track,program:m.p,goal:m.g,registered:new Date().toISOString()}));
             localStorage.setItem('cts_track', track);
             localStorage.setItem('cts_goal', m.g);
-          }catch(e){ alert(es?'No se pudo guardar \u2014 active el almacenamiento':'Could not save \u2014 enable storage'); return; }
+          }catch(e){ alert(ctsHomeMessage(es?'No se pudo guardar \u2014 active el almacenamiento':'Could not save \u2014 enable storage')); return; }
           document.getElementById('cts-reg-form').style.display='none';
           var c=document.getElementById('reg-confirm'); c.style.display='block';
           var safe=name.replace(/[&<>"]/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch];});
-          c.innerHTML='<b>\u2713 '+safe+'</b> \u2014 <span class="en">'+m.p+'</span><span class="es">'+m.es+'</span>.<br><span class="en">You are registered. Open any course to begin.</span><span class="es">Est&aacute; registrado. Abra cualquier curso para comenzar.</span>';
+          c.innerHTML='<b>\u2713 '+safe+'</b> \u2014 '+ctsHomePair(m.p,m.es)+'.<br>'+ctsHomePair('You are registered. Open any course to begin.','Est&aacute; registrado. Abra cualquier curso para comenzar.');
           ctsShowCode();
         }
 
@@ -710,11 +721,12 @@
           var to=String(st.email||'');
           document.getElementById('reg-existing-to').textContent=to;
           document.getElementById('reg-existing-to-es').textContent=to;
+          var frTo=document.getElementById('reg-existing-to-fr'); if(frTo) frTo.textContent=to;
           box.style.display='block';
         }
         document.addEventListener('cts-sync-existing', ctsShowExisting);
         (function(){
-          function say(id, en, es){ document.getElementById(id).innerHTML='<span class="en">'+en+'</span><span class="es">'+es+'</span>'; }
+          function say(id, en, es){ document.getElementById(id).innerHTML=ctsHomePair(en,es); }
           var send=document.getElementById('reg-existing-email');
           if(!send) return;
           send.addEventListener('click', function(){
@@ -749,8 +761,8 @@
           btn.addEventListener('click', function(){
             var code=document.getElementById('reg-code-value').textContent;
             var done=function(){
-              btn.innerHTML='<span class="en">Copied \u2713</span><span class="es">Copiado \u2713</span>';
-              setTimeout(function(){ btn.innerHTML='<span class="en">Copy</span><span class="es">Copiar</span>'; }, 2500);
+              btn.innerHTML=ctsHomePair('Copied \u2713','Copiado \u2713');
+              setTimeout(function(){ btn.innerHTML=ctsHomePair('Copy','Copiar'); }, 2500);
             };
             // execCommand is the fallback because navigator.clipboard needs a
             // secure context, and some of these students are on http webviews.
@@ -774,7 +786,7 @@
             }
           });
         })();
-        (function(){ try{ var s=JSON.parse(localStorage.getItem('cts_student')||'null'); if(s&&s.name&&!s._tester){ document.getElementById('cts-reg-form').style.display='none'; var c=document.getElementById('reg-confirm'); c.style.display='block'; c.innerHTML='<b>\u2713 '+s.name+'</b> \u2014 '+(s.program||'')+'.<br><span class="en">Already registered on this device.</span><span class="es">Ya est&aacute; registrado en este dispositivo.</span>'; ctsShowCode(); } }catch(e){} })();
+        (function(){ try{ var s=JSON.parse(localStorage.getItem('cts_student')||'null'); if(s&&s.name&&!s._tester){ document.getElementById('cts-reg-form').style.display='none'; var c=document.getElementById('reg-confirm'); c.style.display='block'; c.innerHTML='<b>\u2713 '+s.name+'</b> \u2014 '+ctsHomeMessage(s.program||'')+'.<br>'+ctsHomePair('Already registered on this device.','Ya est&aacute; registrado en este dispositivo.'); ctsShowCode(); } }catch(e){} })();
         </script>
       </section>
 

@@ -40,7 +40,7 @@ const keyword = z.union([z.string(), z.array(z.string()).min(1)]);
 const shortAnswer = z.object({
   prompt: bilingual,
   keywords: z.object({ en: z.array(keyword), es: z.array(keyword) }).catchall(z.array(keyword)).optional(),
-  model: bilingual.optional(),
+  model: z.object({ en: z.string().optional(), es: z.string().optional() }).catchall(z.string()).optional(),
   minHits: z.number().int().positive().optional(),
   tr: translationState.optional(),
 }).superRefine(completeQuestionLanguages);
@@ -235,15 +235,34 @@ const lessons = defineCollection({
    (src/data/textbooks/). The test is forty fill-in-the-blank questions, of
    which the page draws `draw` at random and asks for `pass` right, graded by
    the same fillRight() as every unit's fill-ins. */
-const textbookFill = z.object({
+const textbookFillFields = {
   prompt: bilingual.refine((p) => Object.values(p).every(oneBlank), {
     message: `a textbook question must contain exactly one blank, written ${BLANK}, in each language`,
   }),
   answer: z.object({ en: z.string().min(1), es: z.string().min(1) }).catchall(z.string().min(1)),
   accept: z.object({ en: z.array(z.string().min(1)).optional(),
                      es: z.array(z.string().min(1)).optional() }).catchall(z.array(z.string().min(1))).optional(),
+  // the reading the question is on, in a bank drawn by reading (tools/import-readings.mjs)
+  group: z.number().int().positive().optional(),
   tr: translationState.optional(),
-}).superRefine(completeQuestionLanguages);
+  /* Multiple choice (the newer textbook exams, 11 Oct 2026): four choices,
+     the same in both languages and in the same order, the answer among them. */
+  options: z.object({ en: z.array(z.string().min(1)).length(4), es: z.array(z.string().min(1)).length(4) }).optional(),
+};
+const textbookFill = z.object({ ...textbookFillFields, chapter: z.number().int().min(1).optional() }).superRefine(completeQuestionLanguages)
+  .superRefine((q, ctx) => {
+    if (!q.options) return;
+    for (const lang of ['en', 'es'] as const) {
+      const at = q.options[lang].indexOf(q.answer[lang]);
+      if (at < 0) ctx.addIssue({ code: 'custom', message: `the ${lang} answer "${q.answer[lang]}" is not among its choices` });
+      else if (q.options.en.indexOf(q.answer.en) !== q.options.es.indexOf(q.answer.es)) ctx.addIssue({ code: 'custom', message: 'the answer is not at the same place in both languages' });
+      if (new Set(q.options[lang].map((s) => s.toLowerCase())).size !== 4) ctx.addIssue({ code: 'custom', message: `two ${lang} choices are the same` });
+    }
+  });
+/* A required-reading question may name the reading (1 to 5) it is on, so that
+   every attempt draws the same number from each reading (test.perReading). */
+const readingFill = z.object({ ...textbookFillFields, reading: z.number().int().min(1).optional() })
+  .superRefine(completeQuestionLanguages);
 const bookHtml = z.string().min(1).superRefine((v, ctx) => {
   const found = [...new Set((v.match(ENTITY) ?? []).filter((e) => !STRUCTURAL.test(e)))];
   if (found.length) ctx.addIssue({ code: 'custom', message: `HTML entities in a UTF-8 textbook: ${found.join(' ')}` });
@@ -264,18 +283,35 @@ const textbooks = defineCollection({
     subtitle: bilingual.optional(),
     credits: bilingual.optional(),
     edition: z.string().min(1),
-    files: z.object({
-      pdf: bilingual,                 // public/ paths, for download
-      docx: bilingual,                // the masters, under src/data/textbooks
-      sha256: bilingual,              // of the Word files this was converted from
-    }),
+    // Original CTS books use Word/PDF masters. Public-domain commentaries
+    // use existing complete on-site HTML (full English, assigned Spanish).
+    files: z.union([
+      z.object({ pdf: bilingual, docx: bilingual, sha256: bilingual }),
+      z.object({ html: bilingual }),
+      // Assigned excerpts only: the readings are the page body itself.
+      z.object({ excerpts: z.literal(true) }),
+    ]),
+    // Null means students may take the new textbook test, but NO master's
+    // course completion is held by it. Omitted means old mandatory textbook.
+    requiredFrom: z.string().refine((v) => /^\d{4}-\d{2}-\d{2}T/.test(v) && !Number.isNaN(Date.parse(v)),
+      { message: 'requiredFrom must be an ISO date/time' }).nullable().optional(),
     body: z.object({ en: bookHtml, es: bookHtml }),
     test: z.object({
       draw: z.number().int().positive(),
       pass: z.number().int().positive(),
+      perChapter: z.number().int().positive().optional(),
       questions: z.array(textbookFill).min(20),
     }).refine((t) => t.pass <= t.draw && t.draw <= t.questions.length, {
       message: 'pass <= draw <= number of questions',
+    }).superRefine((t, ctx) => {
+      if (!t.perChapter) return;
+      const counts = new Map<number, number>();
+      for (const q of t.questions) {
+        if (!q.chapter) { ctx.addIssue({ code: 'custom', message: 'balanced textbook question needs chapter group' }); return; }
+        counts.set(q.chapter, (counts.get(q.chapter) ?? 0) + 1);
+      }
+      if (counts.size * t.perChapter !== t.draw) ctx.addIssue({ code: 'custom', message: 'textbook group count does not match draw' });
+      for (const [g, n] of counts) if (n < t.perChapter) ctx.addIssue({ code: 'custom', message: `textbook group ${g} has too few questions` });
     }),
   }),
 });
@@ -295,18 +331,46 @@ const readings = defineCollection({
   }),
   schema: z.object({
     slug: z.string().regex(/^[a-z]+readings$/, 'the slug ends in "readings", so it cannot be mistaken for a textbook in the one map both share'),
-    page: z.string().regex(/^CTS[A-Za-z]+$/, 'the page the readings are on: CTSX, giving CTSX.html and CTSXTest.html'),
+    page: z.string().regex(/^CTS[A-Za-z0-9]+$/, 'the page the readings are on: CTSX, giving CTSX.html and CTSXTest.html'),
     course: z.string().min(1),        // the catalog card (src/content/courses/<course>.json)
     kind: z.literal('reading'),
     title: bilingual,
     room: bilingual,                  // what the student reads first, in a sentence
+    /* When the test begins to count toward a master's completion (the
+       Master's five-reading tests, 9 Oct 2026): null until Robert activates
+       it, then the moment he did. Absent on Genesis and World Religions,
+       whose tests have counted since 4 Oct 2026. */
+    requiredFrom: z.string().refine((v) => /^\d{4}-\d{2}-\d{2}T/.test(v) && !Number.isNaN(Date.parse(v)),
+      { message: 'requiredFrom is an ISO date and time, e.g. 2026-11-01T00:00:00Z' }).nullable().optional(),
     source: z.object({ file: z.string(), course: z.string() }),
     test: z.object({
       draw: z.number().int().positive(),
       pass: z.number().int().positive(),
-      questions: z.array(textbookFill).min(20),
+      perReading: z.number().int().positive().optional(),
+      perGroup: z.number().int().positive().optional(),
+      revision: z.string().min(1).optional(),
+      questions: z.array(readingFill).min(20),
     }).refine((t) => t.pass <= t.draw && t.draw <= t.questions.length, {
       message: 'pass <= draw <= number of questions',
+    }).superRefine((t, ctx) => {
+      if (t.perGroup) {
+        if (!t.revision) ctx.addIssue({ code: 'custom', message: 'a grouped bank needs a revision' });
+        const groups = new Map<number, number>();
+        for (const q of t.questions) {
+          if (!q.group) ctx.addIssue({ code: 'custom', message: 'a grouped question needs a group' });
+          else groups.set(q.group, (groups.get(q.group) ?? 0) + 1);
+        }
+        if (groups.size * t.perGroup !== t.draw) ctx.addIssue({ code: 'custom', message: 'group counts do not match draw' });
+        for (const count of groups.values()) if (count < t.perGroup) ctx.addIssue({ code: 'custom', message: 'group too small' });
+      } else if (t.questions.some(q => q.group)) ctx.addIssue({ code: 'custom', message: 'group without perGroup' });
+      if (!t.perReading) return;
+      const counts = new Map<number, number>();
+      for (const q of t.questions) {
+        if (!q.reading) { ctx.addIssue({ code: 'custom', message: 'a test drawn by reading needs every question to name its reading' }); return; }
+        counts.set(q.reading, (counts.get(q.reading) ?? 0) + 1);
+      }
+      if (counts.size * t.perReading !== t.draw) ctx.addIssue({ code: 'custom', message: `${counts.size} readings x ${t.perReading} is not the draw of ${t.draw}` });
+      for (const [r, c] of counts) if (c < t.perReading) ctx.addIssue({ code: 'custom', message: `reading ${r} has ${c} questions, fewer than the ${t.perReading} drawn from it` });
     }),
   }),
 });

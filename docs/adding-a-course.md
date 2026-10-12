@@ -84,6 +84,11 @@ Create `src/content/courses/CTSParables.json`:
 
 - The `title` must match the names in `src/data/certificate-courses.json`
   exactly. Those names come from the seminary's Certificate Maker.
+- Add French translations of the card title and description to
+  `src/data/french-landing.json`, using their exact English text as keys.
+  Update the French catalog lead there whenever the course count changes.
+  The build rejects missing landing translations. This translates the card;
+  French lesson publication follows its separate review process.
 - `group` is one of the ids in `src/data/catalog-groups.json`.
 - `order` is the card's position within its group. 19 puts it after Bible
   Characters II. To put it somewhere else, renumber the cards that follow it.

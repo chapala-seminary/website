@@ -65,7 +65,7 @@ ok((await fetch(BASE + '/api/verify/ZZZZZZZZZZ')).status !== 429,
 
 /* Registering is not a lookup and is deliberately not throttled: a room full
    of students signing up together is the normal case, not the abusive one. */
-const after = await jpost('/api/register', { name: 'Throttle Survivor', track: 'cert' });
+const after = await jpost('/api/register', { name: 'Throttle Survivor', email: 'throttle@example.org', track: 'cert' });
 ok(after.status === 201 && !!after.body?.code,
   'registering still works while lookups are throttled', `status ${after.status}`);
 

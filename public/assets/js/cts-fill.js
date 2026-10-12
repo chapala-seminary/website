@@ -24,6 +24,13 @@
  *                  set its lock
  *   f.reset();              clear the answers
  *
+ * A question may instead be multiple choice (the newer textbook exams, Dr.
+ * Cook 11 Oct 2026): it carries options: { en: [four], es: [four] }, the same
+ * choices in the same order in both languages, the answer among them. A click
+ * on a choice is marked at once, like Check on a fill-in, and a wrong choice
+ * shows the right answer. The choice is saved as its English text, so the
+ * same fillRight() marks it.
+ *
  * normalise(), bare() and fillRight() are cts-engine.js's own, word for word:
  * tools/verify-fill-single.mjs fails if they drift apart.
  */
@@ -71,6 +78,8 @@
     return normalise(fold(s)).trim().replace(/^(?:a|an|the|el|la|los|las|lo|un|una|unos|unas|le|les|l|une|des) (?=\S)/, "");
   }
 
+  function fillCodes() { return window.CTSLanguage?.lang === "fr" ? ["fr", "en"] : ["en", "es"]; }
+
   function need(n) { return Math.ceil(n * PASS_RATIO); }
   function esc(v) {
     return String(v == null ? "" : v).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
@@ -95,6 +104,11 @@
       ".cts-fill-q p{font-weight:bold;margin:.2em 0 .4em}" +
       ".cts-fill-q input{width:100%;max-width:24em;box-sizing:border-box;padding:.35em;font:inherit}" +
       ".cts-fill-q button{margin:.3em 0 0 .3em;padding:.35em .9em;font:inherit;cursor:pointer}" +
+      ".cts-fill-q .cts-mc{display:block;width:100%;max-width:32em;text-align:left;margin:.3em 0;padding:.5em .8em;border:1px solid #9bb;border-radius:6px;background:#fff}" +
+      ".cts-fill-q .cts-mc[disabled]{cursor:default;color:inherit;opacity:1}" +
+      ".cts-fill-q .cts-mc.picked-ok{border-color:#1f6b3b;background:#e8f4ec}" +
+      ".cts-fill-q .cts-mc.picked-bad{border-color:#8a1f1f;background:#f8e9e9}" +
+      ".cts-fill-q .cts-mc.right{border-color:#1f6b3b}" +
       ".cts-fill-ok{color:#1f6b3b;font-weight:bold;margin-top:.3em}" +
       ".cts-fill-bad{color:#8a1f1f;font-weight:bold;margin-top:.3em}";
     (document.head || document.documentElement).appendChild(s);
@@ -116,8 +130,12 @@
       style();
       var lock = locked(), passed = o.passed(), counts = o.counts();
       if (review && !lock) review = null;          // the lock is over: start again
-      var out = '<div class="cts-fill"><h3>' + bi({ en: "Fill in the Blank", es: "Complete el espacio en blanco" }) + "</h3>";
-      out += '<p class="cts-fill-note">' + (counts
+      var mc = qs.every(function (q) { return !!q.options; });
+      var out = '<div class="cts-fill"><h3>' + (mc ? bi({ en: "Multiple Choice", es: "Opción múltiple", fr: "Choix multiple" }) : bi({ en: "Fill in the Blank", es: "Complete el espacio en blanco", fr: "Complétez le blanc" })) + "</h3>";
+      out += '<p class="cts-fill-note">' + (mc
+        ? bi({ en: "Choose the answer that completes each statement: each choice is marked at once, and a wrong choice shows the right answer. You need " + need(n) + " of " + n + " to pass.",
+               es: "Elija la respuesta que completa cada enunciado: cada elección se califica en seguida y, si es incorrecta, se muestra la respuesta correcta. Necesita " + need(n) + " de " + n + " para aprobar." })
+        : counts
         ? bi({ en: "Type the missing word or phrase and press Check (or Enter) to see at once whether it is right. You need " + need(n) + " of " + n + " to pass.",
                es: "Escriba la palabra o frase que falta y pulse Comprobar (o Intro) para ver en seguida si es correcta. Necesita " + need(n) + " de " + n + " para aprobar." })
         : bi({ en: "For your own review: these do not count on the Certificate track. Press Check (or Enter) to see whether your answer is right.",
@@ -125,17 +143,25 @@
       qs.forEach(function (q, i) {
         var given = review ? review[i] : st.fillAnswers[i];
         var done = !!review || st.fillChecked[i] || passed;
-        out += '<div class="cts-fill-q" data-cts-fill="' + i + '"><p>' + bi({ en: (i + 1) + ". " + esc(q.prompt.en), es: (i + 1) + ". " + esc(q.prompt.es) }) + "</p>";
+        out += '<div class="cts-fill-q" data-cts-fill="' + i + '"><p>' + bi({ en: (i + 1) + ". " + esc(q.prompt.en), es: (i + 1) + ". " + esc(q.prompt.es), fr: (i + 1) + ". " + esc(q.prompt.fr || q.prompt.en) }) + "</p>";
+        if (q.options) {
+          q.options.en.forEach(function (opt, k) {
+            var chosen = done && given === opt, right = fillRight(q, opt, fillCodes());
+            var cls = "cts-mc" + (chosen ? (right ? " picked-ok" : " picked-bad") : (done && right ? " right" : ""));
+            out += '<button type="button" class="' + cls + '" data-cts-mc="' + i + '" data-cts-opt="' + k + '"' + ((done || lock) ? " disabled" : "") + ">" +
+                   String.fromCharCode(65 + k) + ". " + bi({ en: esc(opt), es: esc(q.options.es[k]) }) + "</button>";
+          });
+        } else
         out += '<input type="text" data-cts-fill="' + i + '" autocomplete="off" autocapitalize="off" spellcheck="false"' +
                ' aria-label="' + (isEs() ? "Respuesta " : "Answer ") + (i + 1) + '"' +
                ((done || lock) ? " disabled" : "") + ' value="' + esc(given) + '" />';
-        if (!done && !lock) out += '<button type="button" data-cts-fill-check="' + i + '">' + bi({ en: "Check", es: "Comprobar" }) + "</button>";
+        if (!done && !lock && !q.options) out += '<button type="button" data-cts-fill-check="' + i + '">' + bi({ en: "Check", es: "Comprobar", fr: "Vérifier" }) + "</button>";
         if (done) {
           var some = String(given || "").trim();
-          out += fillRight(q, given)
-            ? '<div class="cts-fill-ok">' + bi({ en: "&#10003; Correct!", es: "&#10003; ¡Correcto!" }) + "</div>"
+          out += fillRight(q, given, fillCodes())
+            ? '<div class="cts-fill-ok">' + bi({ en: "&#10003; Correct!", es: "&#10003; ¡Correcto!", fr: "&#10003; Correct !" }) + "</div>"
             : '<div class="cts-fill-bad">' + bi({ en: (some ? "&#10007; Incorrect. " : "") + "Answer: " + esc(q.answer.en),
-                                                 es: (some ? "&#10007; Incorrecto. " : "") + "Respuesta: " + esc(q.answer.es) }) + "</div>";
+                                                 es: (some ? "&#10007; Incorrecto. " : "") + "Respuesta: " + esc(q.answer.es), fr: (some ? "&#10007; Incorrect. " : "") + "Réponse : " + esc(q.answer.fr || q.answer.en) }) + "</div>";
         }
         out += "</div>";
       });
@@ -149,6 +175,12 @@
         });
         t.addEventListener("keydown", function (e) {
           if (e.key === "Enter" || e.keyCode === 13) { e.preventDefault(); check(+t.getAttribute("data-cts-fill"), t.value); }
+        });
+      });
+      o.host.querySelectorAll("button[data-cts-mc]").forEach(function (b) {
+        b.addEventListener("click", function () {
+          var i = +b.getAttribute("data-cts-mc"), k = +b.getAttribute("data-cts-opt");
+          check(i, qs[i].options.en[k]);
         });
       });
       o.host.querySelectorAll("button[data-cts-fill-check]").forEach(function (b) {
@@ -185,7 +217,7 @@
 
     function score() {
       var c = 0;
-      qs.forEach(function (q, i) { if (fillRight(q, st.fillAnswers[i])) c++; });
+      qs.forEach(function (q, i) { if (fillRight(q, st.fillAnswers[i], fillCodes())) c++; });
       return c;
     }
 

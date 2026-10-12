@@ -4,8 +4,8 @@
  * course (or degree) is done. That is what the student prints. This file adds
  * the seminary's half: the certificate is registered with the seminary and
  * gets a verification code, so anyone the student shows it to can check it at
- * /verify/<code>. Registering needs a verified email (students start with
- * only a student code, and a certificate is the moment the seminary needs to
+ * /verify/<code>. Registering needs a verified email (signup collects an
+ * email without requiring confirmation, and a certificate is when we need to
  * be able to reach the person it certified), so the page asks for one, sends
  * a six-digit code to it, and confirms it -- once. After that, every
  * certificate this student claims is registered at once.
@@ -91,6 +91,7 @@
 
   // ---- the network ------------------------------------------------------
   function post(path, payload) {
+    payload.lang = window.CTSLanguage?.lang || get('cts_lang');
     return fetch(API + path, { method: 'POST', credentials: 'omit',
       headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) })
       .then(function (r) { return r.json().catch(function () { return {}; }).then(function (b) { return { status: r.status, ok: r.ok, body: b, retry: r.headers.get('retry-after') }; }); });
@@ -106,7 +107,9 @@
     why:      { en: 'A registered certificate gets a verification code that anyone can check at chapalaseminary.org/verify. The seminary needs a confirmed email address first, so it can reach you and send you a copy.',
                 es: 'Un certificado registrado recibe un código de verificación que cualquiera puede comprobar en chapalaseminary.org/verify. El seminario necesita primero un correo confirmado, para poder contactarle y enviarle una copia.' },
     email:    { en: 'Your email address', es: 'Su correo electrónico' },
-    send:     { en: 'Send me a code', es: 'Enviarme un código' },
+    send:     { en: 'Send confirmation email', es: 'Enviar correo de confirmación' },
+    methods:  { en: 'The email also contains a confirmation link. After using it, reload this certificate page.', es: 'El correo también contiene un enlace de confirmación. Después de usarlo, vuelva a cargar esta página del certificado.' },
+    general:  { en: 'Confirm your email before certificate time', es: 'Confirme su correo antes de solicitar un certificado' },
     sent:     { en: 'We sent a 6-digit code to', es: 'Enviamos un código de 6 dígitos a' },
     codePh:   { en: '6-digit code', es: 'código de 6 dígitos' },
     confirm:  { en: 'Confirm', es: 'Confirmar' },
@@ -151,11 +154,13 @@
            '<div class="cc-sub">' + t(S.sent) + ' <b>' + esc(state.email) + '</b>.</div>' +
            '<div><input id="cts-cert-code" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="one-time-code" placeholder="' + t(S.codePh) + '">' +
            '<button type="button" data-act="confirm">' + t(S.confirm) + '</button></div>' +
-           '<div><button type="button" class="link" data-act="change">' + t(S.change) + '</button></div>';
+           '<div><button type="button" class="link" data-act="change">' + t(S.change) + '</button></div>' +
+           '<div class="cc-sub">' + t(S.methods) + '</div>';
     } else {
       h += '<div class="cc-head">' + t(S.head) + '</div><div class="cc-sub">' + t(S.why) + '</div>' +
            '<div><input id="cts-cert-email" type="email" autocomplete="email" placeholder="' + t(S.email) + '" value="' + esc(state.email) + '">' +
-           '<button type="button" data-act="send">' + t(S.send) + '</button></div>';
+           '<button type="button" data-act="send">' + t(S.send) + '</button></div>' +
+           '<div class="cc-sub"><a href="/cts-confirm-email.html">' + t(S.general) + '</a></div>';
     }
     if (state.msg) h += '<div class="cc-msg' + (state.msg.err ? ' err' : '') + '">' + t(state.msg) + '</div>';
     root.innerHTML = h;

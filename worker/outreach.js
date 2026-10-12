@@ -44,7 +44,7 @@
  *                      was taken for it (Wayne, 5 Oct 2026). /staff/digest
  *                      still shows any site's summary on request.
  */
-import { emailConfigured, sendEmail } from './email.js';
+import { emailConfigured, emailLogOnly, sendEmail } from './email.js';
 import { degreeShortfall, studentLevel } from './awards.js';
 import catalog from './catalog.json';
 
@@ -144,12 +144,22 @@ export function note(kind, st, { stopUrl, site }) {
   const subject = kind === 'quiet'
     ? { en: 'How is your study going?', es: '¿Cómo van sus estudios?' }
     : { en: 'Getting started at Chapala Theological Seminary', es: 'Para comenzar en el Seminario Teológico de Chapala' };
-  if (st.lang === 'es') return { subject: subject.es, text: [...es, ...sign.es, ...stop.es].join('\n') };
-  if (st.lang === 'en') return { subject: subject.en, text: [...en, ...sign.en, ...stop.en].join('\n') };
-  return {
-    subject: `${subject.en} · ${subject.es}`,
-    text: [...en, ...sign.en, '', '----', '', ...es, ...sign.es, ...stop.en, stop.es[2]].join('\n'),
-  };
+  if (st.lang === 'fr') {
+    const goFr = go.replace(site + '/', site + '/fr/');
+    const fr = kind === 'quiet' ? [
+      `Bonjour ${n},`, '',
+      where ? `Quelques semaines se sont écoulées depuis votre dernière unité (${where.course}, unité ${where.unit}). Je souhaitais prendre de vos nouvelles.` : 'Quelques semaines se sont écoulées depuis votre dernière progression dans les cours. Je souhaitais prendre de vos nouvelles.',
+      "Il n'y a ni date limite ni pression. Quand vous serez prêt, vous pourrez reprendre là où vous vous êtes arrêté :", '', `  ${goFr}`, '',
+      "Si une difficulté sur le site vous a empêché d'avancer — une page qui ne s'ouvre pas, un examen qui ne se corrige pas ou un cours qui reste bloqué —, répondez à ce message. Nous lisons chaque réponse et cela nous aide à améliorer le site.",
+    ] : [
+      `Bonjour ${n},`, '', "Merci de votre inscription au Séminaire théologique de Chapala. Je voulais m'assurer que vous avez pu commencer.",
+      "La plupart des étudiants commencent par le Survol de l'Ancien Testament, l'un des sept cours fondamentaux :", '', `  ${site}/fr/CTSUnit1.html`, '',
+      "Si vous avez rencontré une difficulté — site inaccessible, cours bloqué ou incertitude sur le point de départ —, répondez à ce message. Nous lisons chaque réponse.",
+    ];
+    return { subject: kind === 'quiet' ? 'Comment avancent vos études ?' : 'Commencer vos études au Séminaire théologique de Chapala', text: [...fr, '', 'Bien cordialement,', 'Wayne Cook', 'Séminaire théologique de Chapala', '', '--', `Vous recevez ce message parce que vous vous êtes inscrit sur ${site.replace(/^https?:\/\//, '')}. Pour ne plus recevoir de messages sur votre progression : ${stopUrl}`].join('\n') };
+  }
+  if (st.lang === 'es') return { subject: subject.es, text: [...es.map(line => line.replaceAll(site + '/', site + '/es/')), ...sign.es, ...stop.es].join('\n') };
+  return { subject: subject.en, text: [...en, ...sign.en, ...stop.en].join('\n') };
 }
 
 /* Who would be written to today, and why. Pure reading: nothing is sent or
@@ -198,7 +208,7 @@ export async function runOutreach(env, { asOf = new Date(), send = env.OUTREACH_
   const site = origin(env);
   const results = [];
   for (const { kind, st } of list.slice(0, DAILY_CAP)) {
-    const r = { kind, student: st.name, email: st.email, lang: st.lang || 'both' };
+    const r = { kind, student: st.name, email: st.email, lang: st.lang || 'en' };
     if (!send) { results.push({ ...r, status: 'preview' }); continue; }
     const stopUrl = `${site}/stop-notes/${await contactToken(env, st.student_id)}`;
     let status = 'sent', error = null, msg = null;
@@ -213,7 +223,7 @@ export async function runOutreach(env, { asOf = new Date(), send = env.OUTREACH_
     await env.DB.prepare('INSERT INTO outreach (student_id, kind, status, error, sent_at) VALUES (?, ?, ?, ?, ?)')
       .bind(st.student_id, kind, status, error, asOf.toISOString()).run();
     // The test configuration sends nothing; it is shown what would have gone.
-    const shown = env.EMAIL_MODE === 'log' && !env.RESEND_API_KEY && msg ? { message: msg } : {};
+    const shown = emailLogOnly(env) && msg ? { message: msg } : {};
     results.push({ ...r, status, ...(error ? { error } : {}), ...shown });
   }
   return { considered: list.length, capped: Math.max(0, list.length - DAILY_CAP), results };
@@ -249,7 +259,7 @@ export async function digest(env, asOf = new Date()) {
     `${total} students; ${active} made progress in the last ${QUIET_DAYS} days.`,
     '',
     `NOTES SENT TO STUDENTS (${notes.length})`,
-    ...(notes.length ? notes.map((n) => `  ${day(n.sent_at)}  ${n.name} <${n.email}>  ${KIND[n.kind] || n.kind}, ${n.lang || 'both languages'}` +
+    ...(notes.length ? notes.map((n) => `  ${day(n.sent_at)}  ${n.name} <${n.email}>  ${KIND[n.kind] || n.kind}, ${n.lang || 'English (default)'}` +
       (n.status === 'sent' ? '' : `  -- NOT SENT: ${n.error}`)) : ['  none']),
     '',
     `STILL QUIET ${FOLLOW_UP_DAYS / 7} WEEKS AFTER A NOTE (${stillQuiet.length}) -- worth a personal word`,

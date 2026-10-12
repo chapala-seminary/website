@@ -1,9 +1,12 @@
-# French drafts — foundation courses (for review, not published)
+# French drafts — beta publication and review packets
 
-Machine drafts of six foundation courses in French, for pastors in Kinshasa (DR Congo).
-Old Testament Survey, the seventh, was drafted earlier as the pilot (see `docs/french-pilot.md`).
-**Nothing here is read by the build or shown on the site.** Course data in `src/content`
-is unchanged.
+Machine drafts of fourteen courses (161 packets, including the WiseSpeak page frame) in French, for pastors in Kinshasa (DR Congo).
+The first ten courses (115 packets) are published on beta. The four Batch 2 courses
+(46 packets) remain review-only drafts and are not imported or displayed on the site.
+Old Testament Survey was drafted separately as the pilot (see `docs/french-pilot.md`).
+Robert authorized beta publication of the first ten courses on 12 October. Nine courses
+are imported into canonical `src/content`; WiseSpeak uses these packets in its
+French build. See `docs/french-beta-publication.md` for editing and provenance.
 
 Start with **SUMMARY.md**: what was done, problems found in the English site, and the
 decisions Dr. Cook needs to make for the whole French edition.
@@ -43,7 +46,7 @@ Each unit has three files:
    1910, looked up online.
 2. `check_french.py` mirrors the site's grader (`public/assets/js/cts-engine.js`). It confirms
    that every block is present, HTML tags match, each fill-in has exactly one blank, option
-   counts match, and each French short-answer model passes its own keywords. All 71 units pass.
+   counts match, and each French short-answer model passes its own keywords. All 115 packets pass.
    Run it with: `python3 check_french.py <unit>-source.json <unit>-fr.json`
 3. A second, independent pass compared every unit with the English and fixed about 135
    small problems.
@@ -68,8 +71,9 @@ fix). Do not edit the files directly.
 ## Not yet done
 
 - Review by a French-speaking reader with theological training.
-- Import into `src/content` (Robert). Follow `docs/french-pilot.md`: mark the text
-  `machine`, add the source hash, and regenerate the CMS config.
+- Human review of the published beta drafts and subsequent corrections.
+  Collection imports are marked `machine` with source hashes; the CMS config is regenerated.
+- Review and a separate import/publication change for the four Batch 2 courses.
 - WiseSpeak is still the single-page `public/CTS_WiseSpeak_Preaching.html`, so its block ids
   are sequence numbers within this packet, not lesson-data ids.
 
@@ -86,5 +90,19 @@ translation rules and the edition-wide conventions Dr. Cook settled on 12 Oct.
 ## Batch 2 (12 Oct 2026)
 
 John, Matthew, Acts and Romans (46 units), made and checked the same way as batch 1.
-Start with **BATCH2-FINDINGS.md**. Batch 1 files were also refreshed with the edition-wide
-conventions Dr. Cook settled (track names, "couler le moucheron", "la Parole", etc.).
+Start with **BATCH2-FINDINGS.md**. These are new translations of existing courses.
+The Batch 2 PR does not change the earlier Batch 1 packets. These four courses
+remain review-only until a separate import/publication change.
+
+## Technical staging review (12 October)
+
+Both packet formats can be checked with either entry point:
+
+    python3 _review/french/tools/validate.py COURSE-unitN-source.json COURSE-unitN-fr.json
+    python3 _review/french/check_french.py COURSE-unitN-source.json COURSE-unitN-fr.json
+
+Both return a nonzero exit status on an error. All 115 packets passed after the validator repair. This checks structure and grading, not theological accuracy. The English corrections in PR #65 postdate the source packets. The beta importer applies explicit corrections to the published NT Survey and Evangelism fields while retaining the original packets as review history. See `docs/beta-staging-review-2026-10-12.md`.
+
+The additional 46 Batch 2 packets also pass the repaired `tools/validate.py`
+validator with 27 warnings and no errors. No French short-answer prompt passes
+its own keywords. These checks do not establish French theological approval.

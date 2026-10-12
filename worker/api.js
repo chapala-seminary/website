@@ -21,16 +21,16 @@
  * from a student, which makes a stale or offline device harmless.
  */
 
-import { courseShortfall, textbookShortfall, degreeShortfall, resolveCourse, studentLevel, canonicalCode, certificateLevel, DEGREES } from './awards.js';
+import { courseShortfall, textbookShortfall, exemptionsFor, degreeShortfall, resolveCourse, studentLevel, canonicalCode, certificateLevel, DEGREES } from './awards.js';
 import catalog from './catalog.json';
-import { emailConfigured, sendEmail, verificationEmail, certificateEmail, codeEmail } from './email.js';
+import { emailConfigured, emailLogOnly, sendEmail, verificationEmail, certificateEmail, codeEmail } from './email.js';
 import { notify, notifyBatch, retryFailed } from './notify.js';
 
 const MAX = { name: 120, email: 160, country: 80, track: 24, goal: 400, heard: 40, title: 200, course: 64, code: 40 };
 const TRACKS = new Set(['cert', 'certificate', 'associate', 'thm', 'mdiv']);
 // The language a student reads in, from the language switch (cts_lang). Anything
 // else is dropped rather than refused: it is a preference, not a record.
-const lang = (v) => (v === 'en' || v === 'es' ? v : null);
+const lang = (v) => (['en', 'es', 'fr'].includes(v) ? v : null);
 const LEVELS = new Set(['course', 'certificate', 'associate', 'thm', 'mdiv']);
 
 /* Crockford base32 without I, L, O and U: no character can be confused with
@@ -107,9 +107,26 @@ async function body(request) {
 
 /* ---- reading and merging a student's state ------------------------------ */
 
+/* The activation date of a required-reading test comes from worker/catalog.json
+ * (worker/awards.js testCounts). The test suite needs to see the rule both
+ * before and after a date, so its configuration -- and only its: EMAIL_MODE
+ * "log" with no Resend key, the same condition that lets the suite see the
+ * notices it would send -- may set TEST_REQUIRED_FROM, a JSON map
+ * { slug: ISO time }. tools/verify-worker-config.mjs refuses the variable in
+ * the deployed configuration. */
+function testRequiredFrom(env) {
+  if (env.EMAIL_MODE !== 'log' || env.RESEND_API_KEY || !env.TEST_REQUIRED_FROM) return undefined;
+  try { const m = JSON.parse(env.TEST_REQUIRED_FROM); return m && typeof m === 'object' ? m : undefined; } catch { return undefined; }
+}
+/* What testCounts needs: the completions the record holds now, with the time
+ * and level the server wrote, and the server's clock. */
+function testContext(env, completions) {
+  return { completions: completions || [], now: now(), requiredFrom: testRequiredFrom(env) };
+}
+
 async function loadState(env, id) {
   const student = await env.DB.prepare(
-    'SELECT id, name, email, email_verified_at, country, track, goal, heard, created_at, updated_at FROM students WHERE id = ?')
+    'SELECT id, name, email, email_verified_at, country, track, goal, heard, lang, created_at, updated_at FROM students WHERE id = ?')
     .bind(id).first();
   if (!student) return null;
   const [progress, completions, certs, textbooks] = await Promise.all([
@@ -138,6 +155,11 @@ async function loadState(env, id) {
     // the textbook tests passed (migration 0009): a course's completion on the
     // master's tracks waits for its textbook's (worker/awards.js)
     textbooks: textbooks.results ?? [],
+    // The required-reading tests this record does not need: a master's
+    // completion of the course it held before the test was activated
+    // (worker/awards.js exemptBefore). The browser keeps them so its pages say
+    // what the record says (cts-sync.js). Never a pass: passes are above.
+    exemptions: exemptionsFor(done, testContext(env, done)),
   };
 }
 
@@ -223,7 +245,8 @@ async function register(request, env) {
      given to whoever typed an address would give away that student's record.
      Same email, different name registers as before: two people can share an
      address. `separate: true` is the student saying "this is not me". */
-  const email = str(b.email, MAX.email, { field: 'email' });
+  const email = str(b.email, MAX.email, { required: true, field: 'email' });
+  if (!EMAIL_RE.test(email)) throw new HttpError(400, 'that does not look like an email address');
   if (b.separate !== true && email && EMAIL_RE.test(email.toLowerCase())) {
     const same = await env.DB.prepare(
       `SELECT 1 FROM students WHERE merged_into IS NULL AND lower(trim(email)) = ? AND lower(trim(name)) = ? LIMIT 1`)
@@ -252,7 +275,7 @@ async function sync(request, env) {
   if (!id) throw new HttpError(400, 'a student code is required');
 
   const exists = await env.DB.prepare(
-    'SELECT id, name, email, email_verified_at, country, track, goal FROM students WHERE id = ?').bind(id).first();
+    'SELECT id, name, email, email_verified_at, country, track, goal, lang FROM students WHERE id = ?').bind(id).first();
   if (!exists) return fail(404, 'no record for that student code');
 
   const statements = [];
@@ -279,17 +302,22 @@ async function sync(request, env) {
         track, str(s.goal, MAX.goal, { field: 'goal' }), str(s.heard, MAX.heard, { field: 'heard' }), lang(b.lang), now(), id));
   }
 
+  // Browsers resend their full record. D1 counts an UPDATE as a write even
+  // when the value stays the same, so conflict handlers only update a pass
+  // whose date is earlier, or a completion whose earned level rises.
   for (const row of progressRows(id, b.progress))
     statements.push(env.DB.prepare(
       `INSERT INTO unit_progress (student_id, course, unit, completed_at) VALUES (?, ?, ?, ?)
-       ON CONFLICT(student_id, course, unit) DO UPDATE SET completed_at = MIN(completed_at, excluded.completed_at)`)
+       ON CONFLICT(student_id, course, unit) DO UPDATE SET completed_at = excluded.completed_at
+       WHERE excluded.completed_at < unit_progress.completed_at`)
       .bind(...row));
 
   const textbookRowsNow = textbookRows(id, b.textbooks);
   for (const row of textbookRowsNow)
     statements.push(env.DB.prepare(
       `INSERT INTO textbook_results (student_id, textbook, passed_at) VALUES (?, ?, ?)
-       ON CONFLICT(student_id, textbook) DO UPDATE SET passed_at = MIN(passed_at, excluded.passed_at)`)
+       ON CONFLICT(student_id, textbook) DO UPDATE SET passed_at = excluded.passed_at
+       WHERE excluded.passed_at < textbook_results.passed_at`)
       .bind(...row));
 
   // A completion's level only rises: a row with none takes the first any
@@ -303,10 +331,17 @@ async function sync(request, env) {
      2026). The browser reports its completions on every sync, so the course
      is recorded by the sync after the test is passed. Completions the record
      already holds are left as they are. */
+  /* A course may require two tests (a textbook and its five readings, 9 Oct
+     2026); each must be passed. A required-reading test with an activation
+     date does not hold a completion the record already held at a master's
+     level before that date -- judged by the record as it stood before this
+     request, with the times the server wrote (worker/awards.js testCounts). */
   {
     const passed = new Set(textbookRowsNow.map(([, slug]) => slug));
     for (const r of (await env.DB.prepare('SELECT textbook FROM textbook_results WHERE student_id = ?').bind(id).all()).results ?? []) passed.add(r.textbook);
-    completions = completions.filter(([, code, track]) => !textbookShortfall(code, track, [...passed]));
+    const recorded = (await env.DB.prepare('SELECT code, track, completed_at FROM course_completions WHERE student_id = ?').bind(id).all()).results ?? [];
+    const ctx = testContext(env, recorded);
+    completions = completions.filter(([, code, track]) => !textbookShortfall(code, track, [...passed], ctx));
   }
   // Which of these the record did not hold before this request: those are the
   // completions the seminary has not heard about, and the ones it is told of
@@ -322,7 +357,10 @@ async function sync(request, env) {
          WHEN course_completions.track IS NULL THEN excluded.track
          WHEN course_completions.track = 'cert' AND excluded.track IN ('assoc', 'thm', 'mdiv') THEN excluded.track
          WHEN course_completions.track = 'assoc' AND excluded.track IN ('thm', 'mdiv') THEN excluded.track
-         ELSE course_completions.track END`).bind(...row));
+         ELSE course_completions.track END
+       WHERE (course_completions.track IS NULL AND excluded.track IS NOT NULL)
+          OR (course_completions.track = 'cert' AND excluded.track IN ('assoc', 'thm', 'mdiv'))
+          OR (course_completions.track = 'assoc' AND excluded.track IN ('thm', 'mdiv'))`).bind(...row));
 
   if (statements.length) await env.DB.batch(statements);
 
@@ -339,7 +377,7 @@ async function sync(request, env) {
   const state = await loadState(env, id);
   // The test configuration sends nothing; it is told what would have gone
   // out so the suite can check it. Never present in a deployed Worker.
-  return json(env.EMAIL_MODE === 'log' && !env.RESEND_API_KEY ? { ...state, notifications: notices } : state);
+  return json(emailLogOnly(env) ? { ...state, notifications: notices } : state);
 }
 
 async function hydrate(env, rawCode) {
@@ -355,7 +393,7 @@ async function issueCertificate(request, env) {
   const id = await resolveCode(env, b.code);
   if (!id) throw new HttpError(400, 'a student code is required');
   const student = await env.DB.prepare(
-    'SELECT id, name, email, email_verified_at, country, track, goal FROM students WHERE id = ?').bind(id).first();
+    'SELECT id, name, email, email_verified_at, country, track, goal, lang FROM students WHERE id = ?').bind(id).first();
   if (!student) return fail(404, 'no record for that student code');
   // Students start with only a code; a certificate needs a confirmed email,
   // so the seminary can reach the person it certified and send them a copy.
@@ -384,7 +422,8 @@ async function issueCertificate(request, env) {
       const rows = await env.DB.prepare(
         'SELECT unit FROM unit_progress WHERE student_id = ? AND course = ?').bind(id, c.slug).all();
       const tb = (await env.DB.prepare('SELECT textbook FROM textbook_results WHERE student_id = ?').bind(id).all()).results ?? [];
-      const why = courseShortfall(c.slug, (rows.results ?? []).map((r) => r.unit), studentLevel(student.track, student.goal), tb);
+      const done = (await env.DB.prepare('SELECT code, track, completed_at FROM course_completions WHERE student_id = ?').bind(id).all()).results ?? [];
+      const why = courseShortfall(c.slug, (rows.results ?? []).map((r) => r.unit), studentLevel(student.track, student.goal), tb, testContext(env, done));
       if (why) return fail(409, why);
     } else {
       // A single-page course keeps no units; its completion code is the record.
@@ -392,7 +431,8 @@ async function issueCertificate(request, env) {
         'SELECT 1 FROM course_completions WHERE student_id = ? AND code = ?').bind(id, c.code).first();
       if (!row) return fail(409, 'course completion not recorded: ' + c.code);
       const tb = (await env.DB.prepare('SELECT textbook FROM textbook_results WHERE student_id = ?').bind(id).all()).results ?? [];
-      const why = textbookShortfall(c.code, studentLevel(student.track, student.goal), tb);
+      const done = (await env.DB.prepare('SELECT code, track, completed_at FROM course_completions WHERE student_id = ?').bind(id).all()).results ?? [];
+      const why = textbookShortfall(c.code, studentLevel(student.track, student.goal), tb, testContext(env, done));
       if (why) return fail(409, why);
     }
   } else {
@@ -427,11 +467,11 @@ async function issueCertificate(request, env) {
       let emailed = false;
       try {
         await sendEmail(env, { to: student.email, ...certificateEmail({
-          name: student.name, award: title, code: vc, page, origin: new URL(request.url).origin }) });
+          name: student.name, award: title, code: vc, page, origin: new URL(request.url).origin, lang: lang(b.lang) || student.lang }) });
         emailed = true;
       } catch (e) { console.error('certificate email failed', e && e.message); }
       return json({ verifyCode: vc, reissued: false, emailed,
-        ...(env.EMAIL_MODE === 'log' && !env.RESEND_API_KEY && n ? { notification: n } : {}) }, 201);
+        ...(emailLogOnly(env) && n ? { notification: n } : {}) }, 201);
     }
   }
   throw new HttpError(503, 'could not allocate a verification code, please try again');
@@ -439,8 +479,9 @@ async function issueCertificate(request, env) {
 
 /* ---- email verification (needed to claim a certificate) ------------------
  *
- * POST /api/email/start   {code, email}         -> a 6-digit code is emailed
+ * POST /api/email/start   {code, email}         -> a code and link are emailed
  * POST /api/email/confirm {code, verification}  -> the email is stored, verified
+ * POST /api/email/link    {token}               -> same confirmation, no sign-in
  *
  * Limits: one send a minute and five a day per student; five wrong guesses
  * per code, after which a new one must be asked for. The code is stored only
@@ -493,10 +534,10 @@ async function emailMyCode(request, env) {
   ]);
 
   const students = (await env.DB.prepare(
-    `SELECT id, name FROM students WHERE merged_into IS NULL AND lower(trim(email)) = ? ORDER BY created_at`)
+    `SELECT id, name, lang FROM students WHERE merged_into IS NULL AND lower(trim(email)) = ? ORDER BY created_at`)
     .bind(email).all()).results ?? [];
   if (students.length)
-    await sendEmail(env, { to: email, ...codeEmail({ students, origin: new URL(request.url).origin }) });
+    await sendEmail(env, { to: email, ...codeEmail({ students, origin: new URL(request.url).origin, lang: lang(b.lang) || students[0]?.lang }) });
   return json({ ok: true });
 }
 
@@ -506,10 +547,11 @@ async function emailStart(request, env) {
   if (!id) return fail(404, 'no record for that student code');
   const email = (str(b.email, MAX.email, { required: true, field: 'email' }) || '').toLowerCase();
   if (!EMAIL_RE.test(email)) throw new HttpError(400, 'that does not look like an email address');
-  const student = await env.DB.prepare('SELECT id FROM students WHERE id = ?').bind(id).first();
+  const student = await env.DB.prepare('SELECT id, lang FROM students WHERE id = ?').bind(id).first();
   if (!student) return fail(404, 'no record for that student code');
   if (!emailConfigured(env)) throw new HttpError(503, 'email is not set up yet');
 
+  if (lang(b.lang)) await env.DB.prepare('UPDATE students SET lang = ?, updated_at = ? WHERE id = ?').bind(lang(b.lang), now(), id).run();
   const t = new Date(), today = t.toISOString().slice(0, 10);
   const prev = await env.DB.prepare('SELECT sent_at, sends_today, sends_day FROM email_challenges WHERE student_id = ?').bind(id).first();
   if (prev) {
@@ -521,20 +563,26 @@ async function emailStart(request, env) {
   const sendsToday = prev && prev.sends_day === today ? prev.sends_today + 1 : 1;
 
   const code = sixDigits();
+  const token = [...crypto.getRandomValues(new Uint8Array(32))].map(b => b.toString(16).padStart(2, '0')).join('');
+  const linkHash = await hashCode('email-link', token);
+  const preferredLanguage = lang(b.lang) || student.lang || 'en';
+  const link = new URL((preferredLanguage === 'en' ? '/' : '/' + preferredLanguage + '/') + 'cts-confirm-email.html', request.url);
+  // A fragment is never sent to the server or included in referrer headers.
+  link.hash = 'token=' + token;
   const expires = new Date(t.getTime() + CHALLENGE.ttlMin * 60000).toISOString();
   await env.DB.prepare(
-    `INSERT INTO email_challenges (student_id, email, code_hash, expires_at, attempts, sent_at, sends_today, sends_day)
-     VALUES (?, ?, ?, ?, 0, ?, ?, ?)
+    `INSERT INTO email_challenges (student_id, email, code_hash, link_hash, expires_at, attempts, sent_at, sends_today, sends_day)
+     VALUES (?, ?, ?, ?, ?, 0, ?, ?, ?)
      ON CONFLICT(student_id) DO UPDATE SET email = excluded.email, code_hash = excluded.code_hash,
-       expires_at = excluded.expires_at, attempts = 0, sent_at = excluded.sent_at,
+       link_hash = excluded.link_hash, expires_at = excluded.expires_at, attempts = 0, sent_at = excluded.sent_at,
        sends_today = excluded.sends_today, sends_day = excluded.sends_day`)
-    .bind(id, email, await hashCode(id, code), expires, t.toISOString(), sendsToday, today).run();
+    .bind(id, email, await hashCode(id, code), linkHash, expires, t.toISOString(), sendsToday, today).run();
 
   try {
-    const r = await sendEmail(env, { to: email, ...verificationEmail(code) });
+    const r = await sendEmail(env, { to: email, ...verificationEmail(code, link.href, lang(b.lang) || student.lang) });
     // The test configuration sends nothing; it gets the code back instead so
     // the suite can finish a verification. Never true in a deployed Worker.
-    return json({ sent: true, ...(r.logged ? { devCode: code } : {}) });
+    return json({ sent: true, ...(r.logged ? { devCode: code, devLink: link.href } : {}) });
   } catch (e) {
     await env.DB.prepare('DELETE FROM email_challenges WHERE student_id = ? AND code_hash = ?')
       .bind(id, await hashCode(id, code)).run();
@@ -551,19 +599,41 @@ async function emailConfirm(request, env) {
   const ch = await env.DB.prepare('SELECT * FROM email_challenges WHERE student_id = ?').bind(id).first();
   if (!ch) return fail(404, 'no verification is waiting for that student code');
   if (new Date(ch.expires_at) < new Date() || ch.attempts >= CHALLENGE.attempts) {
-    await env.DB.prepare('UPDATE email_challenges SET expires_at = ? WHERE student_id = ?').bind(now(), id).run();
+    await env.DB.prepare('UPDATE email_challenges SET expires_at = ? WHERE student_id = ? AND sent_at = ?').bind(now(), id, ch.sent_at).run();
     return fail(410, 'that code has expired. Ask for a new one.');
   }
   if (await hashCode(id, typed) !== ch.code_hash) {
-    await env.DB.prepare('UPDATE email_challenges SET attempts = attempts + 1 WHERE student_id = ?').bind(id).run();
+    await env.DB.prepare('UPDATE email_challenges SET attempts = attempts + 1 WHERE student_id = ? AND sent_at = ?').bind(id, ch.sent_at).run();
     return fail(400, 'that code is not right');
   }
+  return await completeEmailChallenge(env, ch);
+}
+
+async function completeEmailChallenge(env, ch) {
   const t = now();
-  await env.DB.batch([
-    env.DB.prepare('UPDATE students SET email = ?, email_verified_at = ?, updated_at = ? WHERE id = ?').bind(ch.email, t, t, id),
-    env.DB.prepare('DELETE FROM email_challenges WHERE student_id = ?').bind(id),
+  // Consume atomically: simultaneous code/link submissions cannot both win,
+  // and an older request cannot consume a newly resent challenge.
+  const result = await env.DB.batch([
+    env.DB.prepare(`UPDATE students SET email = ?, email_verified_at = ?, updated_at = ?
+      WHERE id = ? AND EXISTS (SELECT 1 FROM email_challenges
+        WHERE student_id = ? AND code_hash = ? AND sent_at = ? AND expires_at > ? AND attempts < ?)`)
+      .bind(ch.email, t, t, ch.student_id, ch.student_id, ch.code_hash, ch.sent_at, t, CHALLENGE.attempts),
+    env.DB.prepare('DELETE FROM email_challenges WHERE student_id = ? AND code_hash = ? AND sent_at = ? AND expires_at > ? AND attempts < ?')
+      .bind(ch.student_id, ch.code_hash, ch.sent_at, t, CHALLENGE.attempts),
   ]);
+  if (result[0].meta?.changes !== 1) return fail(410, 'that confirmation has expired or was already used');
   return json({ verified: true, email: ch.email });
+}
+
+async function emailLink(request, env) {
+  const b = await body(request);
+  if (typeof b.token !== 'string' || !/^[a-f0-9]{64}$/.test(b.token))
+    return fail(400, 'that confirmation link is not valid');
+  const ch = await env.DB.prepare(`SELECT c.* FROM email_challenges c
+    JOIN students s ON s.id = c.student_id WHERE c.link_hash = ? AND s.merged_into IS NULL`)
+    .bind(await hashCode('email-link', b.token)).first();
+  if (!ch) return fail(410, 'that confirmation has expired or was already used');
+  return await completeEmailChallenge(env, ch);
 }
 
 async function lookupCertificate(env, raw) {
@@ -714,7 +784,7 @@ async function guarded(request, env, kind, run) {
       { 'retry-after': String(THROTTLE.window) });
 
   const res = await run();
-  if (res.status === 404) {
+  if (res.status === 404 || (kind === 'email-link' && res.status >= 400)) {
     const t = unix();
     await env.DB.batch([
       env.DB.prepare('INSERT INTO lookup_failures (bucket, at) VALUES (?, ?)').bind(bucket, t),
@@ -755,6 +825,8 @@ export async function handle(request, env) {
       return await guarded(request, env, 'student', () => emailStart(request, env));
     if (path === '/api/email/confirm' && method === 'POST')
       return await guarded(request, env, 'student', () => emailConfirm(request, env));
+    if (path === '/api/email/link' && method === 'POST')
+      return await guarded(request, env, 'email-link', () => emailLink(request, env));
     // Public, static: the courses and the completion codes with their names,
     // for anyone reading the records (the student tracker turns codes into
     // course names with it). Nothing about any student is in it.

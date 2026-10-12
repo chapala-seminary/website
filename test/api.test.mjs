@@ -28,6 +28,9 @@ async function jpost(p, b) { const r = await post(p, b); return { status: r.stat
 
 for (const [payload, why] of [
   [{}, 'no name'],
+  ...[undefined, null, '', '   ', '\t\n', '—', 'not-an-address', 42, 'a@b', 'a@b.c'.repeat(40)].map(email =>
+    [{ name: 'Email Required', track: 'cert', email }, `invalid or missing email ${JSON.stringify(email)}`]),
+  [{ name: 'Email Required', track: 'cert', separate: true }, 'separate registration without email'],
   [{ name: 'A' }, 'no track'],
   [{ name: 'A', track: 'wizard' }, 'unknown track'],
   [{ name: 'x'.repeat(200), track: 'cert' }, 'name over the length cap'],
@@ -40,6 +43,7 @@ for (const [payload, why] of [
 const reg = await jpost('/api/register', {
   name: 'María de la Cruz', email: 'maria@example.org', country: 'MX', track: 'mdiv', goal: 'pastoral ministry', heard: 'referral',
 });
+ok(!reg.body?.student?.email_verified_at, 'signup succeeds before email verification');
 ok(reg.status === 201, `register returned ${reg.status}`);
 const CODE = reg.body?.code;
 ok(/^CTS-[0-9A-HJKMNP-TV-Z]{4}-[0-9A-HJKMNP-TV-Z]{4}-[0-9A-HJKMNP-TV-Z]{4}$/.test(CODE || ''),
@@ -47,7 +51,7 @@ ok(/^CTS-[0-9A-HJKMNP-TV-Z]{4}-[0-9A-HJKMNP-TV-Z]{4}-[0-9A-HJKMNP-TV-Z]{4}$/.tes
 ok(reg.body?.student?.name === 'María de la Cruz', 'the name survives a round trip with its accents');
 ok(reg.body?.student?.heard === 'referral' && reg.body?.student?.country === 'MX', 'country and how they heard of the seminary are kept');
 
-const second = await jpost('/api/register', { name: 'Someone Else', track: 'cert' });
+const second = await jpost('/api/register', { name: 'Someone Else', email: 'someone-else@example.org', track: 'cert' });
 ok(second.body?.code && second.body.code !== CODE, 'two registrations get different codes');
 
 /* ---- sync and merge ------------------------------------------------------ */
@@ -86,7 +90,7 @@ ok(told(repeat.body).length === 0, `re-reporting both courses from another devic
 // Certificate report does not lower it, a master's report raises it, and the
 // Associate is not awarded from Certificate-level work.
 {
-  const r = await jpost('/api/register', { name: 'Level Student', track: 'cert', goal: 'assoc' });
+  const r = await jpost('/api/register', { name: 'Level Student', email: 'level-student@example.org', track: 'cert', goal: 'assoc' });
   const c = r.body.code;
   let st = await jpost('/api/sync', { code: c, progress: [], doneCodes: ['CTSACTS'], completionTracks: { CTSACTS: 'assoc' } });
   const lv = (s) => (s.body.completions.find((x) => x.code === 'CTSACTS') || {}).track;
@@ -95,7 +99,7 @@ ok(told(repeat.body).length === 0, `re-reporting both courses from another devic
   ok(lv(st) === 'assoc', `a device reporting it at Certificate level does not lower it (${lv(st)})`);
   st = await jpost('/api/sync', { code: c, progress: [], doneCodes: ['CTSACTS'], completionTracks: { CTSACTS: 'mdiv' } });
   ok(lv(st) === 'mdiv', `a master's-level report raises it (${lv(st)})`);
-  const cert = await jpost('/api/register', { name: 'Cert Twentyfive', track: 'cert' });
+  const cert = await jpost('/api/register', { name: 'Cert Twentyfive', email: 'cert-twentyfive@example.org', track: 'cert' });
   const codes = Object.keys((await jget('/api/catalog')).body.completions).slice(0, 44);
   const all = await jpost('/api/sync', { code: cert.body.code, progress: [], doneCodes: codes, completionTracks: {} });
   ok(all.body.degrees.certificate === true && all.body.degrees.associate === false,
@@ -107,7 +111,7 @@ ok(told(repeat.body).length === 0, `re-reporting both courses from another devic
 // degree pages' own non-course codes. Each course is held once, under today's
 // code, at the higher level; a code that is not a course is not held.
 {
-  const r = await jpost('/api/register', { name: 'Alias Student', track: 'cert' });
+  const r = await jpost('/api/register', { name: 'Alias Student', email: 'alias-student@example.org', track: 'cert' });
   const st = await jpost('/api/sync', { code: r.body.code, progress: [],
     doneCodes: ['COUNSELING', 'CTSCOUNSELING', 'CTSPREACHING', 'OTS', 'CTSOTS', 'CTS', 'CTSASSOCIATE',
       'CTSBIBLECERTIFICATE', 'CTSPSALMS', 'CTSPSALMSMDIVCERTIFICATE', 'ETHICS_CERTIFICATE'],
@@ -121,7 +125,7 @@ ok(told(repeat.body).length === 0, `re-reporting both courses from another devic
 // once: one email for all of it, not one per course -- but each course is
 // still recorded as told, so none is announced again.
 {
-  const r = await jpost('/api/register', { name: 'Returning Student', track: 'cert', lang: 'es' });
+  const r = await jpost('/api/register', { name: 'Returning Student', email: 'returning-student@example.org', track: 'cert', lang: 'es' });
   const first = await jpost('/api/sync', { code: r.body.code, progress: [], doneCodes: ['CTSOTS', 'CTSNT', 'CTSST'], lang: 'es' });
   const n = first.body.notifications || [];
   ok(told(first.body).join(',') === 'course:CTSNT:sent,course:CTSOTS:sent,course:CTSST:sent',
@@ -246,7 +250,7 @@ tb = await jpost('/api/sync', { code: CODE, textbooks: [{ slug: 'cults', passedA
 ok(tb.body.textbooks.find((t) => t.textbook === 'cults')?.passed_at === T_EARLY, 'the earliest pass time wins');
 ok((await jpost('/api/certificate', { code: CODE, level: 'course', course: 'cults', title: 'Cults & World Religions' })).status === 201, 'and the certificate is issued');
 {
-  const r = await jpost('/api/register', { name: 'Cert Reader', track: 'cert' });
+  const r = await jpost('/api/register', { name: 'Cert Reader', email: 'cert-reader@example.org', track: 'cert' });
   const st = await jpost('/api/sync', { code: r.body.code, doneCodes: ['CTSCULTS'], completionTracks: {} });
   ok(st.body.completions.some((c) => c.code === 'CTSCULTS'), 'a Certificate-track completion of the course is recorded without the test');
 }
@@ -268,6 +272,16 @@ ok(viaCode.body?.verifyCode === VC, `a course named by its code (CTS1PETER) is t
 // (WiseSpeak is a foundation course, so this path cannot be "unknown course".)
 const ws0 = await jpost('/api/certificate', { code: CODE, level: 'course', course: 'WISESPEAK', title: 'Preaching' });
 ok(ws0.status === 409, `a single-page course certificate with no completion recorded is refused (${ws0.status}: ${ws0.body?.error})`);
+// Single-page Master's completions must wait for their textbook test, too.
+for (const [course, slug] of [['COUNSELING', 'counseling'], ['STORYTEL', 'narrative']]) {
+  const r = await jpost('/api/register', { name: `Synthetic ${course} Hold`, email: `synthetic-${course.toLowerCase()}-hold@example.test`, track: 'mdiv' });
+  const payload = { code: r.body.code, doneCodes: [course], completionTracks: { [course]: 'mdiv' } };
+  const held = await jpost('/api/sync', payload);
+  ok(!held.body.completions.some(c => c.code === course), `${course}: no official Master's completion before textbook pass`);
+  const released = await jpost('/api/sync', { ...payload, textbooks: [{ slug, passedAt: T_LATE }] });
+  ok(released.body.completions.some(c => c.code === course && c.track === 'mdiv'), `${course}: textbook pass releases official Master's completion`);
+}
+
 await jpost('/api/sync', { code: CODE, doneCodes: ['WISESPEAK'] });
 const ws1 = await jpost('/api/certificate', { code: CODE, level: 'course', course: 'WISESPEAK', title: 'Preaching' });
 ok(ws1.status === 201, `a single-page course certificate is issued once its completion is recorded (${ws1.status}: ${ws1.body?.error})`);
@@ -318,9 +332,10 @@ ok(d.status === 201, `foundation + 5 electives earns the Certificate of Ministry
 d = await jpost('/api/certificate', { code: CODE, level: 'associate', title: 'Associate of Divinity' });
 ok(d.status === 409 && /of 25 Associate-level courses/.test(d.body?.error || ''), `19 courses do not earn the Associate (${d.status}: ${d.body?.error})`);
 
-// Th.M.: 12 including the foundation, on a master's track (this student is mdiv)
+// Th.M.: 15 including the foundation, on a master's track (this student is
+// mdiv and has 19: the foundation plus the 12 electives synced above)
 d = await jpost('/api/certificate', { code: CODE, level: 'thm', title: 'Master of Theology' });
-ok(d.status === 201, `an mdiv student with foundation + 5 earns the Th.M. (${d.status}: ${d.body?.error})`);
+ok(d.status === 201, `an mdiv student with foundation + 12 earns the Th.M. (${d.status}: ${d.body?.error})`);
 
 // M.Div.: 30 including the 20-course core. Three core courses have a Master's
 // textbook and one (Genesis) required readings, so on this master's track
@@ -337,7 +352,7 @@ ok(d.status === 201, `the 20-course core + 10 electives earns the M.Div. (${d.st
 
 // a certificate-track student with the same 30 courses does not get a
 // master's award: the completions were earned on the certificate track
-const certReg = await jpost('/api/register', { name: 'Cert Track', track: 'cert' });
+const certReg = await jpost('/api/register', { name: 'Cert Track', email: 'cert-track@example.org', track: 'cert' });
 {
   const st0 = await jpost('/api/email/start', { code: certReg.body.code, email: 'cert@example.org' });
   await jpost('/api/email/confirm', { code: certReg.body.code, verification: st0.body?.devCode });

@@ -1,0 +1,30 @@
+# Beta staging and production promotion
+
+Staging: https://beta.chapalaseminary.org — branch `beta`, Worker `chapala-seminary-beta`, database `chapala-students-beta`.
+Production: https://chapalaseminary.org — branch `main`, Worker `chapala-seminary`, database `chapala-students`.
+
+## New work
+
+Start from the latest beta branch and open PRs with base `beta`. Review the change, run `npm run build && npm test` on the Mac, fix failures and merge to beta. Keep related drafts and dependencies identifiable; do not import unreviewed French text into published content.
+
+The beta Actions workflow runs a fresh build and the complete suite on each push, then deploys with `npm run deploy:beta`. A failed check prevents publication. It needs repository Actions secret `CTS_BETA_CLOUDFLARE_API_TOKEN`, a deployment token limited to the CTS account `119b0919229edb3185b69f1c6bd04b66`, including Workers deployment/routes, account/zone read and D1 access needed by Wrangler. Set it through GitHub's secret settings; do not put the value in files, PR descriptions or chat.
+
+For a manual staging deployment, use a clean checkout of the exact published beta commit:
+
+    git fetch origin
+    git switch beta
+    git pull --ff-only origin beta
+    npm run build && npm test
+    npm run deploy:beta
+
+The beta deploy command verifies branch, published commit, clean working tree and the pinned Cloudflare account. It preserves the existing beta custom domain, separate D1 database, noindex guard, outreach off and digest off. Do not attach production records to beta or use real student records as fixtures.
+
+## Review and promotion
+
+Wayne and Robert check the beta site, including English/Spanish exams, completion, certificates and readings. Faculty approve content and a qualified French theological reader approves French text before import. New requirements marked as drafts stay optional. Choose activation dates after the production deploy that carries them.
+
+Then open a separate PR from `beta` to `main`. Review the complete change and rerun build/tests before promotion. Robert authorizes merging to main and production publishing. From the reviewed main commit, deploy only with `npm run deploy`; production has no automatic push-to-main deployment workflow.
+
+## October 12 integration
+
+See [the PR review record](beta-staging-review-2026-10-12.md) for all 31 original heads, repairs, content-review boundaries and validation evidence.

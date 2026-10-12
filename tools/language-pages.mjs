@@ -7,6 +7,8 @@ import { parse } from 'node-html-parser';
 import { shell } from '../src/lib/shell.ts';
 import { LANGUAGES, NAMES, localeHref, localizeMarkup, renderLanguageLesson } from '../src/lib/language-content.ts';
 
+import { frenchLanding } from '../src/lib/french-landing.ts';
+import { frenchWiseSpeak } from './french-wisespeak.mjs';
 import { frenchInterface } from '../src/lib/french-interface.ts';
 
 const SITE = 'https://chapalaseminary.org';
@@ -26,8 +28,8 @@ function rewriteLinks(root, file, lang, files) {
 }
 function control(file, lang, sourceLang, translated) {
   const choices = LANGUAGES.map(l => `<a class="cts-language-choice${l === lang ? ' active' : ''}" data-cts-lang="${l}" aria-current="${l === lang ? 'page' : 'false'}" href="${localeHref(file, l)}?cts_lang=${l}">${NAMES[l]}</a>`).join('');
-  const label = lang === 'es' ? `Mostrar ${NAMES[sourceLang] || sourceLang}` : lang === 'fr' ? `Afficher ${NAMES[sourceLang] || sourceLang}` : `Show ${NAMES[sourceLang] || sourceLang}`;
-  return `<div class="cts-language-controls"><div class="cts-language-choices" role="group" aria-label="Language">${choices}</div>${lang !== sourceLang ? `<label class="cts-source-control"><input type="checkbox" id="cts-show-source"${translated ? '' : ' disabled'}> ${label}</label>` : ''}</div>`;
+  const label = lang === 'es' ? `Mostrar ${NAMES[sourceLang] || sourceLang}` : lang === 'fr' ? `Afficher ${sourceLang === 'en' ? 'l’anglais' : NAMES[sourceLang] || sourceLang}` : `Show ${NAMES[sourceLang] || sourceLang}`;
+  return `<div class="cts-language-controls"><div class="cts-language-choices" role="group" aria-label="${lang === 'fr' ? 'Langue' : lang === 'es' ? 'Idioma' : 'Language'}">${choices}</div>${lang !== sourceLang ? `<label class="cts-source-control"><input type="checkbox" id="cts-show-source"${translated ? '' : ' disabled'}> ${label}</label>` : ''}</div>`;
 }
 export function buildLanguagePages(dir) {
   const files = fs.readdirSync(dir).filter(f => f.endsWith('.html') && !f.startsWith('_'));
@@ -40,9 +42,11 @@ export function buildLanguagePages(dir) {
     const m = /^(.*)Unit(\d+)\.html$/.exec(file);
     const lessonFile = m && `src/content/lessons/${m[1]}/${m[2]}.json`;
     const lesson = lessonFile && fs.existsSync(lessonFile) ? JSON.parse(fs.readFileSync(lessonFile, 'utf8')) : null;
-    const sourceLang = lesson?.sourceLang || 'en';
+    const declaredSource = parse(canonical).querySelector('body')?.getAttribute('data-source-lang');
+    const sourceLang = lesson?.sourceLang || (LANGUAGES.includes(declaredSource) ? declaredSource : 'en');
     for (const lang of LANGUAGES) {
       let root = parse(canonical, { comment: true, parseNoneClosedTags: true });
+      if (lang === 'fr' && file === 'CTS_WiseSpeak_Preaching.html') frenchWiseSpeak(root);
       const html = root.querySelector('html'), body = root.querySelector('body'), head = root.querySelector('head');
       if (!html || !body || !head) continue;
       // The legacy controls stay as hidden hooks for old inline scripts. All
@@ -52,11 +56,12 @@ export function buildLanguagePages(dir) {
         const rendered = shell(renderLanguageLesson(lesson, lang));
         const main = root.querySelector('#lesson');
         if (!main) throw new Error(`unit ${file} has no #lesson`);
-        const keep = main.childNodes.filter(n => ['cts-register', 'greeting', 'cts-textbook'].includes(n.id)).map(n => n.toString()).join('');
+        const keep = main.childNodes.filter(n => ['cts-register', 'greeting', 'cts-textbook', 'cts-textbook-2', 'cts-required-readings'].includes(n.id)).map(n => n.toString()).join('');
         main.set_content(keep + rendered.content);
         const header = root.querySelector('.cts-masthead .wrap');
         if (header && rendered.masthead) header.set_content(rendered.masthead);
       }
+      if (lang === 'fr' && file === 'index.html') frenchLanding(root);
       root = parse(localizeMarkup(root.toString(), lang, sourceLang), { comment: true, parseNoneClosedTags: true });
       const b = root.querySelector('body'), h = root.querySelector('head');
       const translated = lang === sourceLang || !!root.querySelector(`.cts-reading[lang="${lang}"]:not([data-cts-fallback])`);
@@ -88,6 +93,11 @@ export function buildLanguagePages(dir) {
         brandRow.classList.add('cts-language-header');
         brandRow.insertAdjacentHTML('beforeend', controls);
       } else if (nav) nav.insertAdjacentHTML('beforeend', controls); else b.insertAdjacentHTML('afterbegin', controls);
+      const draftFrench = lang === 'fr' && (file === 'CTS_WiseSpeak_Preaching.html' || !!lesson?.blocks.some(block => block.tr?.fr?.status === 'machine'));
+      if (draftFrench) {
+        h.insertAdjacentHTML('beforeend', '<meta name="robots" content="noindex,follow">');
+        b.insertAdjacentHTML('afterbegin', '<aside class="cts-translation-pending" lang="fr">Traduction provisoire publiée pour relecture. Des corrections peuvent encore être apportées ; vous pouvez afficher le texte anglais de référence.</aside>');
+      }
       if (notice) { const main = root.querySelector('main'); if (main) main.insertAdjacentHTML('afterbegin', notice); else b.insertAdjacentHTML('afterbegin', notice); }
       // Language script must run before any legacy page initialization.
       for (const script of root.querySelectorAll('script[src]')) if (/\/cts-lang\.js(?:\?|$)|^cts-lang\.js(?:\?|$)/.test(script.getAttribute('src'))) script.remove();
