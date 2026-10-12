@@ -89,12 +89,16 @@ ok(!leaked.length, `staff-only test-bank files under public/: ${leaked.join(', '
 if (!fs.existsSync(path.join(DIST, 'index.html'))) { console.error(`no build at ${DIST}/ — run npm run build first`); process.exit(2); }
 const page = (f) => fs.existsSync(path.join(DIST, f)) ? fs.readFileSync(path.join(DIST, f), 'utf8') : null;
 const index = page('index.html');
+/* The front page links with relative hrefs ("Page.html"); other pages use "/Page.html". Accept
+   either form, with or without "./", a query or a fragment, so a valid link is never reported missing. */
+const esc = (t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const linksTo = (html, file) => new RegExp(`href=["'](?:\\.?/)?${esc(file)}(?:[?#][^"']*)?["']`).test(html);
 for (const b of books) {
   const book = page(`${b.page}.html`), test = page(`${b.page}Test.html`);
   ok(!!book, `${b.page}.html was not built`);
   ok(!!test, `${b.page}Test.html was not built`);
-  if (b.requiredFrom === null) ok(!index.includes(`href="/${b.page}.html"`), `pilot ${b.page} should not appear as mandatory on front page`);
-  else ok(index.includes(`href="/${b.page}.html"`), `the front page does not list ${b.page}`);
+  if (b.requiredFrom === null) ok(!linksTo(index, `${b.page}.html`), `pilot ${b.page} should not appear as mandatory on front page`);
+  else ok(linksTo(index, `${b.page}.html`), `the front page does not list ${b.page}`);
   if (book) ok(book.includes(`${b.page}Test.html`), `${b.page}.html does not lead to its test`);
   if (test) {
     ok(test.includes(`${b.page}.html`), `${b.page}Test.html does not lead back to the book`);
@@ -167,8 +171,8 @@ for (const r of readings) {
   ok(!!room, `${r.page}.html was not built`);
   ok(!!test, `${r.page}Test.html was not built`);
   // a test not yet in force is reached from its course and its room, not listed on the front page
-  if (pending) ok(!index.includes(`href="/${r.page}.html"`), `the front page lists ${r.page}, which is not yet in force`);
-  else ok(index.includes(`href="/${r.page}.html"`), `the front page does not list the required readings ${r.page}`);
+  if (pending) ok(!linksTo(index, `${r.page}.html`), `the front page lists ${r.page}, which is not yet in force`);
+  else ok(linksTo(index, `${r.page}.html`), `the front page does not list the required readings ${r.page}`);
   if (test && pending) ok(/not yet required/.test(test), `${r.page}Test.html does not say the test is not yet required`);
   if (room) ok(room.includes(`${r.page}Test.html`), `${r.page}.html does not lead to its test`);
   if (test) {

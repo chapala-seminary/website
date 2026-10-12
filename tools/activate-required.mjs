@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /* Makes Master's tests required from a given moment: the textbook tests and
- * five-reading tests that are online now but "required of no one"
+ * five-reading tests that are in this checkout but "required of no one"
  * (requiredFrom null). Dr. Cook (11 Oct 2026): on the M.Div. and Th.M. tracks
  * the readings must be read and their test passed, and the textbook read and
  * its test passed, for the course to be complete.
@@ -41,7 +41,7 @@ const tests = [
 
 if (flag('--list') || !args.length) {
   for (const t of tests.sort((a, b) => a.course.localeCompare(b.course) || a.kind.localeCompare(b.kind)))
-    console.log(`${t.slug.padEnd(22)} ${t.kind.padEnd(8)} ${t.course.padEnd(26)} ${t.state === 'always' ? 'in force (since its install)' : t.state === 'pending' ? 'online, required of no one' : `required from ${t.state}`}`);
+    console.log(`${t.slug.padEnd(22)} ${t.kind.padEnd(8)} ${t.course.padEnd(26)} ${t.state === 'always' ? 'in force (since its install)' : t.state === 'pending' ? 'pending: in this checkout, required of no one (live only once deployed)' : `required from ${t.state}`}`);
   process.exit(0);
 }
 

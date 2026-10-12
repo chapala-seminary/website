@@ -1,6 +1,6 @@
 # Publishing the textbooks and reading tests: Robert's checklist
 
-_12 Oct 2026. For the stacked draft pull requests #40 to #49 and #51 to #54, the pull requests on top of #54 (#55, #57–#60), and the separate #50. Nothing here
+_12 Oct 2026. For the stacked draft pull requests #40 to #49 and #51 to #54, the pull requests on top of #54 (#55, #57–#60), the optional #56 (Ethics reading test, not in the merge order unless Dr. Cook approves it), and the separate #50. Nothing here
 has been merged or deployed. Dr. Cook approves before anything goes live._
 
 ## What is in the stack
@@ -103,7 +103,7 @@ Until this step, every new test is open to everyone and required of no one.
 Dr. Cook announces a start date, which must be **after** the deploy that carries it:
 
     node tools/activate-required.mjs --list
-    node tools/activate-required.mjs --at 2026-11-01T06:00:00Z --all-pending            # dry run: lists the tests (74 with #54; 78 with #55, #57, #58 and #60)
+    node tools/activate-required.mjs --at 2026-11-01T06:00:00Z --all-pending            # dry run: lists the tests (74 with #54; 78 with #55, #57, #58 and #60; 79 if #56 is also merged)
     node tools/activate-required.mjs --at 2026-11-01T06:00:00Z --all-pending --write
     npm run build && test/run-tests.sh
     npm run deploy
