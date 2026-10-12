@@ -25,6 +25,8 @@ export async function getStaticPaths() {
 }
 const { book, course, accent } = Astro.props;
 const { draw, pass, questions } = book.test;
+// multiple choice when every question carries its four choices
+const mc = questions.every((q) => !!q.options);
 /* What a pass completes: on the master's tracks the course waits for this
    test (public/assets/js/cts-record.js). From worker/catalog.json, the same
    map the Worker applies. A unit course is recorded by its units; a
@@ -46,10 +48,17 @@ const data = JSON.stringify({ slug: book.slug, page: book.page, title: book.titl
 <Textbook kind="test" book={book} course={course} accent={accent} scripts={['/assets/js/cts-fill.js', '/assets/js/cts-required-tests.js', '/assets/js/cts-record.js']} sync={true}>
   <section class="card tb-about">
     <h2><span class="lang-en">Textbook test</span><span class="lang-es">Examen del libro de texto</span></h2>
+    {mc ? (
+    <p>
+      <span class="lang-en">Twenty multiple-choice questions, drawn at random from forty, on <em>{book.title.en}</em>. You need {pass} of {draw} to pass. Choose the answer that completes each statement: each choice is marked at once, and a wrong choice shows the right answer. If you fall short, review the book and try again after a short wait; the next attempt draws a fresh twenty.</span>
+      <span class="lang-es">Veinte preguntas de opción múltiple, tomadas al azar de cuarenta, sobre <em>{book.title.es}</em>. Necesita {pass} de {draw} para aprobar. Elija la respuesta que completa cada enunciado: cada elección se califica en seguida y, si es incorrecta, se muestra la respuesta correcta. Si no alcanza la nota, repase el libro e inténtelo de nuevo tras una breve espera; el siguiente intento toma otras veinte.</span>
+    </p>
+    ) : (
     <p>
       <span class="lang-en">Twenty fill-in-the-blank questions, drawn at random from forty, on <em>{book.title.en}</em>. You need {pass} of {draw} to pass. Type the missing word or phrase and press Check (or Enter): each answer is marked at once. Capitals, accents and punctuation do not matter; you may answer in English or Spanish. If you fall short, review the book and try again after a short wait; the next attempt draws a fresh twenty.</span>
       <span class="lang-es">Veinte preguntas para completar, tomadas al azar de cuarenta, sobre <em>{book.title.es}</em>. Necesita {pass} de {draw} para aprobar. Escriba la palabra o frase que falta y pulse Comprobar (o Intro): cada respuesta se califica en seguida. No importan las mayúsculas, los acentos ni la puntuación; puede responder en inglés o en español. Si no alcanza la nota, repase el libro e inténtelo de nuevo tras una breve espera; el siguiente intento toma otras veinte.</span>
     </p>
+    )}
     <p class="small muted">
       <span class="lang-en">The book is not on this page: <a href={`/${book.page}.html`}>read it first</a>, then come back.</span>
       <span class="lang-es">El libro no está en esta página: <a href={`/${book.page}.html`}>léalo primero</a> y luego vuelva.</span>
