@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* Rebuilds the page text of an assigned-excerpts textbook from its sources,
  * leaving its exam alone:
- *   docs/readers/textbooks/<slug>/excerpts/{en,es}/{1..5}.md
+ *   docs/readers/textbooks/<slug>/excerpts/{en,es}/{1..N}.md  (five, or ten)
  *     -> src/content/textbooks/<slug>.json  body.en / body.es
  * Each source: "# Title", one source line, then paragraphs ("> " lines and
  * all-bold paragraphs are reviewers' notes and are left out).
@@ -20,8 +20,11 @@ function parse(md) {
   const paras = blocks.filter((b) => !b.startsWith('>') && !/^\*\*[^*]+\*\*$/.test(b)).map((b) => b.replace(/\n/g, ' '));
   return { title, source, paras };
 }
-const body = (lang) => [1, 2, 3, 4, 5].map((i) => {
-  const e = parse(fs.readFileSync(`docs/readers/textbooks/${slug}/excerpts/${lang}/${i}.md`, 'utf8'));
+const dir = `docs/readers/textbooks/${slug}/excerpts`;
+const count = fs.readdirSync(`${dir}/en`).filter((f) => /^\d+\.md$/.test(f)).length;
+if (!count || fs.readdirSync(`${dir}/es`).filter((f) => /^\d+\.md$/.test(f)).length !== count) { console.error(`${slug}: English and Spanish excerpts do not match`); process.exit(2); }
+const body = (lang) => Array.from({ length: count }, (_, k) => k + 1).map((i) => {
+  const e = parse(fs.readFileSync(`${dir}/${lang}/${i}.md`, 'utf8'));
   return `<h2 id="${lang}-${i}">${i}. ${inline(e.title)}</h2><p class="small muted">${inline(e.source)}</p>` + e.paras.map((p) => `<p>${inline(p)}</p>`).join('');
 }).join('');
 const file = `src/content/textbooks/${slug}.json`;

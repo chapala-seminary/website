@@ -68,21 +68,38 @@ book page itself (`files: {excerpts: true}`), rebuilt from
 `docs/readers/textbooks/<slug>/excerpts/{en,es}/{1..5}.md` by
 `node tools/excerpt-body.mjs <slug>` (`--check` to compare).
 
-All seven, and the five-reading tests installed in October, are online with
+Three more (11 Oct, ChatGPT's "complete course packages", reviewed by
+Claude): Acts (Stokes, five excerpts, Spanish newly translated in full where
+the package had a condensed adaptation), Revelation (Milligan, ten short
+excerpts -- the opening of ten chapters -- two questions drawn from each) and
+Psalms (Maclaren, five selections with the Psalm in his own rendering). Same
+standard: multiple choice, assigned readings on the book page. The
+Pentateuch textbook in the same delivery is **not** installed: its book
+assignment is still a candidate, and its Genesis excerpt (Dods) argues that
+Genesis 1 and 2 give two creation accounts "which no ingenuity can
+reconcile" -- Dr. Cook to decide. Its five-reading test is installed.
+Six more five-reading tests came with them: 1 Peter, John, Ruth–Esther,
+Revelation, Psalms, Pentateuch.
+
+All ten, and the five-reading tests installed in October, are online with
 `requiredFrom: null`: open to everyone, required of no one. Dr. Cook wants
 them required on the M.Div. and Th.M. tracks once published. To do that:
 
     node tools/activate-required.mjs --list
-    node tools/activate-required.mjs --at 2026-11-01T00:00:00Z --all-pending --except actsreadings          # what it would do
-    node tools/activate-required.mjs --at 2026-11-01T00:00:00Z --all-pending --except actsreadings --write
+    node tools/activate-required.mjs --at 2026-11-01T00:00:00Z --all-pending            # what it would do
+    node tools/activate-required.mjs --at 2026-11-01T00:00:00Z --all-pending --write
 
 The moment must be after the deploy that carries it. The tool records it in
 `src/data/required-from.json`, sets `requiredFrom` in each textbook record,
 re-runs `tools/import-readings.mjs --write` (which reads the same file) and
 `tools/gen-worker-catalog.mjs`; then build, suite, deploy. A master's
 completion the record already held before that moment is kept
-(`worker/awards.js` `testCounts`). Acts is left out until its revised readings
-are in.
+(`worker/awards.js` `testCounts`). `--except <slug>,...` leaves any test
+optional.
+
+Each reading room carries one standard notice for each of its tests,
+written by `node tools/room-test-notices.mjs --write`; the wording does not
+change at activation (the test pages say whether a test is in force).
 
 ## Where things live
 

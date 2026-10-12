@@ -5,6 +5,20 @@
  * master's completion the student record held before it is not held by it.
  * Read by cts-textbook-gate.js and cts-record.js. */
 window.CTS_REQUIRED_TESTS = {
+ "CTSACTS": [
+  {
+   "slug": "actsstokes",
+   "page": "CTSTextbookActsStokes",
+   "kind": "textbook",
+   "requiredFrom": "2026-11-01T00:00:00Z"
+  },
+  {
+   "slug": "actsreadings",
+   "page": "CTSActsReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
  "COUNSELING": [
   {
    "slug": "counseling",
@@ -130,6 +144,34 @@ window.CTS_REQUIRED_TESTS = {
    "requiredFrom": null
   }
  ],
+ "CTSPSALMS": [
+  {
+   "slug": "psalmsmaclaren",
+   "page": "CTSTextbookPsalmsMaclaren",
+   "kind": "textbook",
+   "requiredFrom": "2026-11-01T00:00:00Z"
+  },
+  {
+   "slug": "psalmsreadings",
+   "page": "CTSPsalmsReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSREV": [
+  {
+   "slug": "revelationmilligan",
+   "page": "CTSTextbookRevelationMilligan",
+   "kind": "textbook",
+   "requiredFrom": "2026-11-01T00:00:00Z"
+  },
+  {
+   "slug": "revelationreadings",
+   "page": "CTSRevReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
  "CTSROMANS": [
   {
    "slug": "romansmoule",
@@ -170,14 +212,6 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "worship",
    "page": "CTSTextbookWorship",
    "kind": "textbook"
-  }
- ],
- "CTSACTS": [
-  {
-   "slug": "actsreadings",
-   "page": "CTSActsReadings",
-   "kind": "reading",
-   "requiredFrom": null
   }
  ],
  "CTSCH": [
@@ -239,22 +273,6 @@ window.CTS_REQUIRED_TESTS = {
   {
    "slug": "pmreadings",
    "page": "CTSPMReadings",
-   "kind": "reading",
-   "requiredFrom": null
-  }
- ],
- "CTSPSALMS": [
-  {
-   "slug": "psalmsreadings",
-   "page": "CTSPsalmsReadings",
-   "kind": "reading",
-   "requiredFrom": null
-  }
- ],
- "CTSREV": [
-  {
-   "slug": "revelationreadings",
-   "page": "CTSRevReadings",
    "kind": "reading",
    "requiredFrom": null
   }
