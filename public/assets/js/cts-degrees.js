@@ -30,7 +30,7 @@
   var DEGREES = {
     certificate: { courses: 12, core: FOUNDATION, levels: ["cert", "assoc", "thm", "mdiv"] },
     associate:   { courses: 25, core: FOUNDATION, levels: ["assoc", "thm", "mdiv"] },
-    thm:         { courses: 12, core: FOUNDATION, levels: ["thm", "mdiv"] },
+    thm:         { courses: 15, core: FOUNDATION, levels: ["thm", "mdiv"] },
     mdiv:        { courses: 30, core: MDIV_CORE,  levels: ["thm", "mdiv"] }
   };
 

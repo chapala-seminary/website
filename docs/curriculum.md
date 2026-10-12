@@ -9,7 +9,7 @@ _25 Sept 2026. Written after Wayne's consolidated audit of the beta (items 12 an
 | Foundation courses (required of everyone; every other course is locked until all seven are done) | Old Testament Survey `CTSOTS`, New Testament Survey `CTSNT`, Systematic Theology `CTSST`, Evangelism `CTSEVANGELISM`, Pastoral Ministries `CTSPM`, Church History `CTSCH`, Preaching / WiseSpeak `WISESPEAK` |
 | Certificate of Ministry | 12 courses including the seven foundation courses |
 | Associate of Divinity | 25 courses including the seven foundation courses |
-| Master of Theology (Th.M.) | 12 courses including the seven foundation courses, earned on a master's track |
+| Master of Theology (Th.M.) | 15 courses including the seven foundation courses, earned on a master's track |
 | Master of Divinity (M.Div.) | 30 courses including the 20 M.Div. core courses, earned on a master's track |
 | M.Div. core (20) | the seven foundation courses plus Hermeneutics `CTSHERMENEUTICS`, Language Appreciation `CTSLA`, Genesis Intensive `CTSGENESIS`, Psalms `CTSPSALMS`, Matthew Intensive `CTSMATT`, Romans `CTSROMANS`, Acts Intensive `CTSACTS`, Apologetics `CTSAPOL`, Counseling `COUNSELING`, Church Administration & Leadership `CTSAL`, Christian Worship `CTSWORSHIP`, Christian Education `CTSCE`, World Missions `CTSMISSIONS` |
 

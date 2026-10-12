@@ -88,7 +88,7 @@ const NOSTORE = { 'cache-control': 'no-store', 'x-robots-tag': 'noindex, nofollo
 const html = (body, status = 200) => new Response(body, { status, headers: { 'content-type': 'text/html; charset=utf-8', ...NOSTORE } });
 const json = (v, status = 200) => new Response(JSON.stringify(v, null, 1), { status, headers: { 'content-type': 'application/json; charset=utf-8', ...NOSTORE } });
 
-const NEED = { certificate: 12, associate: 25, thm: 12, mdiv: 30 };
+const NEED = { certificate: 12, associate: 25, thm: 15, mdiv: 30 };
 
 /* One row per student, everything the roster shows, computed once. */
 async function roster(env, asOf = new Date()) {

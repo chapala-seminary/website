@@ -37,7 +37,7 @@ export const MDIV_CORE = [
 export const DEGREES = {
   certificate: { courses: 12, core: FOUNDATION, levels: ['cert', 'assoc', 'thm', 'mdiv'] },   // Certificate of Ministry
   associate:   { courses: 25, core: FOUNDATION, levels: ['assoc', 'thm', 'mdiv'] },           // Associate of Divinity
-  thm:         { courses: 12, core: FOUNDATION, levels: ['thm', 'mdiv'] },                    // Master of Theology
+  thm:         { courses: 15, core: FOUNDATION, levels: ['thm', 'mdiv'] },                    // Master of Theology
   mdiv:        { courses: 30, core: MDIV_CORE,  levels: ['thm', 'mdiv'] },                    // Master of Divinity
 };
 
