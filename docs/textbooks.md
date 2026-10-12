@@ -39,7 +39,139 @@ two courses the way a textbook is bound: the same test page, draw, pass mark,
 grader, record (`textbook_results`), hold on the master's tracks and gate on
 the certificate page, with "required readings" said wherever "textbook"
 would be. They sit in the same map (`worker/catalog.json` `textbooks`, kind
-`reading`; a course has one required test). See `docs/reading-rooms.md`.
+`reading`). See `docs/reading-rooms.md`.
+
+A course may have two required tests (9 Oct 2026): its textbook and its
+five readings, piloted on Pentecostalism. `worker/catalog.json` lists them on
+the course as `tests` (textbook first; a course has at most one reading
+test), `public/assets/js/cts-required-tests.js` gives the same list to the
+certificate pages, and a master's completion needs every one that counts. A
+reading test with `requiredFrom` counts from that moment only, and not for a
+master's completion the record held before it (`docs/reading-rooms.md`,
+"Master's reading tests").
+
+## The seven new textbooks, and making tests required (11 Oct 2026)
+
+Joshua (Blaikie), Galatians (Findlay), Romans (Moule), Evangelism (Torrey),
+1 Peter, John and Ruth–Esther have public-domain textbooks with a
+forty-question test each. Their tests are **multiple choice** (four choices,
+in both languages; marked the moment one is clicked, with the right answer
+shown when it is wrong): each question carries `options {en, es}`, and
+`src/content.config.ts` refuses a question whose answer is not among its
+choices at the same place in both languages. The nine original textbooks and
+the reading tests stay fill-in-the-blank (Dr. Cook: adjust only the new ones).
+
+Where the reading is: Joshua, Galatians and Romans link the full English book
+and the CTS Spanish assigned chapters (`files.html`); Evangelism (five
+chapters), 1 Peter, John and Ruth–Esther carry their assigned readings on the
+book page itself (`files: {excerpts: true}`), rebuilt from
+`docs/readers/textbooks/<slug>/excerpts/{en,es}/{1..5}.md` by
+`node tools/excerpt-body.mjs <slug>` (`--check` to compare).
+
+Three more (11 Oct, ChatGPT's "complete course packages", reviewed by
+Claude): Acts (Stokes, five excerpts, Spanish newly translated in full where
+the package had a condensed adaptation), Revelation (Milligan, ten short
+excerpts -- the opening of ten chapters -- two questions drawn from each) and
+Psalms (Maclaren, five selections with the Psalm in his own rendering). Same
+standard: multiple choice, assigned readings on the book page. The
+Pentateuch textbook (`CTSTextbookPentateuch`, five excerpts from the
+Expositor's Bible on each book) is installed with two changes Dr. Cook asked
+for on 11 Oct, so as not to offend readers who take a very conservative
+view: Dods on Genesis is now his chapter on the covenant with Abram (Gen. 15,
+faith counted for righteousness) instead of the Creation chapter, which says
+Genesis 1 and 2 cannot be reconciled; and Harper on Deuteronomy is cut to his
+exposition of the Shema, leaving out his argument for a late author.
+Six more five-reading tests came with them: 1 Peter, John, Ruth–Esther,
+Revelation, Psalms, Pentateuch.
+
+Five more, chosen from the Drive library (CTS_Book_0xx) with Dr. Cook's
+go-ahead (11 Oct): Torrey, *The Person and Work of the Holy Spirit* (CTSHS);
+Torrey, *The Fundamental Doctrines of the Christian Faith* (CTSST); Arnot,
+*The Parables of Our Lord* (CTSParables); Angus, *The Bible Hand-Book*
+(CTSBible); Harvey, *The Pastor* (CTSPM). Five excerpts each, chosen to
+avoid polemic and anything that would trouble very conservative readers.
+
+Five more (11 Oct, same terms): Hurst, *Short History of the Christian
+Church* (CTSCH); Boyd, *A Brief Bible History*, Old Testament part (CTS, Old
+Testament Survey -- Hurlbut's *Outline Studies* is mostly outlines and says the
+Flood was probably not global); Machen, *The Literature and History of New
+Testament Times* (CTSNT); Bruce, *The Training of the Twelve* (CTSLOC);
+Trumbull, *Teaching and Teachers* (CTSCE).
+
+Six more (11 Oct): Torrey, *How to Study the Bible* (CTSHermeneutics);
+Fisher, *The Grounds of Theistic and Christian Belief*, 1902 (CTSApol);
+Taylor, *The Ministry of the Word* (CTSEvanPreach); Allen, *Missionary
+Methods* (CTSMissions); Dods, *Genesis* -- Abraham, Jacob and Joseph chapters,
+not the Creation chapter (CTSGenesis, beside its reading test, which stays
+in force as before); Gibson, *Matthew* (CTSMatt).
+
+Two more (11 Oct): Jevons, *An Introduction to the Study of Comparative
+Religion* (CTSWR, beside its reading test, which stays in force); Plummer, *The
+Pastoral Epistles* (CTSAL). And five-reading tests for the last 22 rooms
+(Claude's banks, `tools/import-readings.mjs` batch D), so every course now
+has one. Still without a textbook: Bible Characters I and II, Church Growth,
+Practical Theology, Radical Christianity (no suitable book in the Drive
+library yet).
+
+One more (12 Oct): Alexander, *Christianity and Ethics* (1914), for
+Pastoral & Christian Ethics (`ethics_unit01`, completion code ETHICS): five
+excerpts on Christ as the pattern of the good life, the Christian motive
+(forgiveness, sonship, calling), repentance, faith and obedience, love as the
+bond of the virtues, and duties to others. Ethics is outside the unit engine,
+so `tools/gen-worker-catalog.mjs` knows it as a single-page course and each of
+its ten unit pages carries the textbook box by hand. Its certificate page
+(`ethics_certificate.html`) does not yet load `cts-required-tests.js` and
+`cts-textbook-gate.js`: that is needed before this test is activated.
+
+And one for Preaching (WiseSpeak, `CTS_WiseSpeak_Preaching`, code
+WISESPEAK; 12 Oct): Broadus, *A Treatise on the Preparation and Delivery of
+Sermons*, 1898 edition revised by Dargan (`CTSTextbookBroadus`): the
+importance of preaching, its four requisites, the duty to interpret the text
+truly, application, and expository preaching. It is listed before the
+course's five-reading test; Dr. Cook's own WiseSpeak remains the course's
+method. The box is written into the single course page.
+
+And Practical Theology (CTSPT; 12 Oct): Kenneth J. Collins, *Soul Care:
+Deliverance and Renewal through the Christian Life* (First Fruits Press,
+2014), used under its Creative Commons Attribution-NonCommercial 3.0 US
+license, which allows translation with credit (`CTSTextbookSoulCare`): sin as
+unbelief, the detour of moralism, justification, reading the Scriptures,
+prayer. Its English quotes the NIV, as the book does; the Spanish uses the
+Reina-Valera 1909.
+
+And Radical Christianity (CTSRadical, code CTSRADICAL; 12 Oct):
+*Holiness Through the Ages: An Historical Reader of Christian Writers on
+Holiness*, ed. Robert E. Coleman, Robert A. Danielson and Faith E. Parry
+(First Fruits Press, 2014; Dr. Cook's upload), used under its Creative
+Commons Attribution-NonCommercial 3.0 US license (`CTSTextbookHoliness`).
+Five excerpts, one writer each: Whitefield, "The Almost Christian";
+Edwards, a selection of his *Resolutions*; Ryle, "Holiness" (the editors'
+abridged text); Müller on stewardship; Torrey, *Why God Used D. L. Moody*
+(surrender, humility, freedom from the love of money). Chosen away from the
+course's five digests (Law, Murray, Bounds, Drummond) and from the book's
+writers on entire sanctification, revival technique and women's preaching.
+The English keeps each writer's quotations; the Spanish uses the
+Reina-Valera 1909.
+
+All thirty-two, and the five-reading tests, are online with
+`requiredFrom: null`: open to everyone, required of no one. Dr. Cook wants
+them required on the M.Div. and Th.M. tracks once published. To do that:
+
+    node tools/activate-required.mjs --list
+    node tools/activate-required.mjs --at 2026-11-01T00:00:00Z --all-pending            # what it would do
+    node tools/activate-required.mjs --at 2026-11-01T00:00:00Z --all-pending --write
+
+The moment must be after the deploy that carries it. The tool records it in
+`src/data/required-from.json`, sets `requiredFrom` in each textbook record,
+re-runs `tools/import-readings.mjs --write` (which reads the same file) and
+`tools/gen-worker-catalog.mjs`; then build, suite, deploy. A master's
+completion the record already held before that moment is kept
+(`worker/awards.js` `testCounts`). `--except <slug>,...` leaves any test
+optional.
+
+Each reading room carries one standard notice for each of its tests,
+written by `node tools/room-test-notices.mjs --write`; the wording does not
+change at activation (the test pages say whether a test is in force).
 
 ## Where things live
 

@@ -80,9 +80,17 @@ async function checkCourse([slug, c]) {
   // A course with a Master's textbook: on the master's tracks the certificate
   // waits for the textbook test as well (Dr. Cook, 4 Oct 2026); the
   // Certificate track does not.
-  const held = c.textbook ? { ...passed } : null;
-  if (c.textbook) passed[`cts_textbook_${c.textbook}_passed`] = '2026-10-04';
-  const certTrack = c.textbook ? { ...held, cts_student: JSON.stringify({ name: 'Prueba Test', track: 'cert' }), cts_track: 'cert' } : null;
+  // A course may require two tests -- its textbook and its five readings (9
+  // Oct 2026); a reading test not yet activated (requiredFrom null), or
+  // activated in the future, holds nobody yet. tools/verify-required-tests.mjs
+  // checks the two-test course with its test activated.
+  const need = (c.tests || []).filter((s) => {
+    const t = catalog.textbooks[s];
+    return !('requiredFrom' in t) || (t.requiredFrom != null && Date.parse(t.requiredFrom) <= Date.now());
+  });
+  const held = need.length ? { ...passed } : null;
+  for (const s of need) passed[`cts_textbook_${s}_passed`] = '2026-10-04';
+  const certTrack = need.length ? { ...held, cts_student: JSON.stringify({ name: 'Prueba Test', track: 'cert' }), cts_track: 'cert' } : null;
 
   const unitPage = `${c.pages}Unit${c.units[0]}.html`;
   for (const f of files) {
@@ -98,7 +106,7 @@ async function checkCourse([slug, c]) {
     ok(!yes.diploma || yes.pdf, `${f}: the unlocked certificate has no Download PDF button`);
     if (held) {
       const h = await open(f, unitPage, held);
-      ok(!h.diploma && !h.pdf, `${f}: shows the diploma to a master's student who has not passed the ${c.textbook} textbook test`);
+      ok(!h.diploma && !h.pdf, `${f}: shows the diploma to a master's student who has not passed the ${need.join(' and ')} test`);
       ok(!h.done.includes(code), `${f}: records ${code} for a master's student without the textbook test (got ${JSON.stringify(h.done)})`);
       const ct = await open(f, unitPage, certTrack);
       ok(ct.diploma && ct.done.includes(code), `${f}: a Certificate-track student is held by the textbook test, which does not apply to them`);

@@ -14,6 +14,9 @@
  *                        Dr. Cook asked for "three to five accepted answers
  *                        where appropriate", so a plural, a fuller name or an
  *                        obvious equivalent does not fail a right answer.
+ * A bank may also say how many questions to draw from each reading
+ * (format.questions_drawn_per_reading); each of its questions then names its
+ * reading, and every attempt draws that many from each.
  * The two are merged into one question in the same shape as a textbook's
  * (src/content.config.ts: prompt, answer, accept), with the blank written
  * ____ as every fill-in on the site writes it. Nothing else is changed.
@@ -33,15 +36,136 @@ const TESTS = [
   { slug: 'wrreadings', page: 'CTSWRRequired', course: 'CTSWR', kind: 'reading',
     title: { en: 'World Religions: Required Readings', es: 'Religiones del Mundo: Lecturas Requeridas' },
     room: { en: 'the five assigned readings on the Required Readings page', es: 'las cinco lecturas asignadas de la página de Lecturas Requeridas' } },
+  /* The Master's five-reading test (Dr. Cook and ChatGPT's authorization, 9
+     Oct 2026), piloted on Pentecostalism & the Charismatic Movement before the
+     other courses: forty questions, eight on each of the room's five
+     readings, twenty drawn -- four from each reading -- and eighteen to pass.
+     The course keeps its textbook test as well; a master's student passes
+     both (worker/awards.js).
+
+     `requiredFrom` is when the test begins to count. Until it is set (null)
+     the test is open to everyone and required of no one. Robert sets it to
+     the moment the requirement begins -- an ISO date and time, e.g.
+     '2026-11-01T00:00:00Z', and a moment AFTER the deploy that carries it,
+     so that every completion recorded before it is recorded by a Worker that
+     already knows the date -- then runs this tool with --write and
+     gen-worker-catalog.mjs. From then on a master's completion of the course
+     needs the pass, except a master's completion the student record already
+     held before that moment (docs/reading-rooms.md, "Master's reading
+     tests"). Genesis and World Religions carry no such date: their tests have
+     counted since 4 Oct 2026, and nothing about them changes. */
+  { slug: 'pentecostalreadings', page: 'CTSPentecostalReadings', course: 'CTSPentecostal', kind: 'reading', requiredFrom: null,
+    title: { en: 'Pentecostalism & the Charismatic Movement: Required Readings', es: 'El Pentecostalismo y el Movimiento Carismático: Lecturas Requeridas' },
+    room: { en: 'the five readings in the Pentecostalism Reading Room', es: 'las cinco lecturas de la Sala de Lecturas del Pentecostalismo' } },
+  /* The eight Master's five-reading tests on the CTS reading digests (10 Oct
+     2026), from ChatGPT's banks in src/data/readings/staged/. Dr. Cook asked
+     for them online now -- open to every student, required of no one
+     (requiredFrom null) -- with the academic review to follow. Their accepted
+     alternates are optional, as he decided for reading tests whose answer is
+     one clear word (Oct 2026): a question with no alternate yet is reported,
+     not refused, and faculty add alternates to the .accept.json later. */
+  ...[
+    ['otsreadings', 'CTSOTSReadings', 'CTS', 'Old Testament Survey', 'Panorama del Antiguo Testamento'],
+    ['ntreadings', 'CTSNTReadings', 'CTSNT', 'New Testament Survey', 'Panorama del Nuevo Testamento'],
+    ['streadings', 'CTSSTReadings', 'CTSST', 'Systematic Theology', 'Teología Sistemática'],
+    ['evangelismreadings', 'CTSEvangelismReadings', 'CTSEvangelism', 'Evangelism', 'Evangelismo'],
+    ['pmreadings', 'CTSPMReadings', 'CTSPM', 'Pastoral Ministries', 'Ministerios Pastorales'],
+    ['chreadings', 'CTSCHReadings', 'CTSCH', 'Church History', 'Historia de la Iglesia'],
+    ['wisespeakreadings', 'CTSPreachingReadings', 'CTS_WiseSpeak_Preaching', 'Preaching', 'Predicación'],
+    ['hermeneuticsreadings', 'CTSHermeneuticsReadings', 'CTSHermeneutics', 'Hermeneutics', 'Hermenéutica'],
+  ].map(([slug, page, course, en, es]) => ({ slug, page, course, kind: 'reading', requiredFrom: null, dir: 'src/data/readings/staged', alternates: 'optional',
+    title: { en: `${en}: Required Readings`, es: `${es}: Lecturas Requeridas` },
+    room: { en: `the five readings in the ${en} Reading Room`, es: `las cinco lecturas de la Sala de Lecturas de ${es}` } })),
+  /* Batch B (10 Oct 2026, ChatGPT's banks): Joshua, Galatians, Romans, Acts
+     and Matthew, on the five CTS digests. Same terms as the eight above;
+     Acts and Matthew have no alternates yet (optional). */
+  { slug: 'joshuareadings', page: 'CTSJoshReadings', course: 'CTSJosh', kind: 'reading', requiredFrom: null,
+    title: {"en": "Joshua: Required Readings", "es": "Josué: Lecturas Requeridas"},
+    room: {"en": "the five readings in the Joshua Reading Room", "es": "las cinco lecturas de Josué"} },
+  { slug: 'galatiansreadings', page: 'CTSGalatiansReadings', course: 'CTSGalatians', kind: 'reading', requiredFrom: null,
+    title: {"en": "Galatians: Required Readings", "es": "Gálatas: Lecturas Requeridas"},
+    room: {"en": "the five readings in the Galatians Reading Room", "es": "las cinco lecturas de Gálatas"} },
+  { slug: 'romansreadings', page: 'CTSRomansReadings', course: 'CTSRomans', kind: 'reading', requiredFrom: null,
+    title: {"en": "Romans: Required Readings", "es": "Romanos: Lecturas Requeridas"},
+    room: {"en": "the five readings in the Romans Reading Room", "es": "las cinco lecturas de Romanos"} },
+  { slug: 'actsreadings', page: 'CTSActsReadings', course: 'CTSActs', kind: 'reading', requiredFrom: null, alternates: 'optional',
+    title: {"en": "Acts: Required Readings", "es": "Hechos: Lecturas Requeridas"},
+    room: {"en": "the five readings in the Acts Reading Room", "es": "las cinco lecturas de Hechos"} },
+  { slug: 'mattreadings', page: 'CTSMattReadings', course: 'CTSMatt', kind: 'reading', requiredFrom: null, alternates: 'optional',
+    title: {"en": "Matthew Intensive: Required Readings", "es": "Intensivo de Mateo: Lecturas Requeridas"},
+    room: {"en": "the five readings in the Matthew Reading Room", "es": "las cinco lecturas de Mateo"} },
+  /* Batch C (11 Oct 2026, ChatGPT's "complete course packages"): the five
+     CTS digests of six more rooms. Same terms: open to all, required of no
+     one until tools/activate-required.mjs dates them; alternates optional.
+     Claude's review: every answer is in its room in both languages; one
+     Spanish prompt reworded (John #26), Marcelino for Psalms #4, numerals
+     accepted where the answer is a number. */
+  ...[
+    ['firstpeterreadings', 'CTS1PeterReadings', 'CTS1Peter', '1 Peter', '1 Pedro'],
+    ['johnreadings', 'CTSJohnReadings', 'CTSJohn', 'John', 'Juan'],
+    ['ruthestherreadings', 'CTSREReadings', 'CTSRE', 'Ruth and Esther', 'Rut y Ester'],
+    ['revelationreadings', 'CTSRevReadings', 'CTSRev', 'Revelation', 'Apocalipsis'],
+    ['psalmsreadings', 'CTSPsalmsReadings', 'CTSPsalms', 'Psalms', 'Salmos'],
+    ['pentreadings', 'CTSPentReadings', 'CTSPent', 'Pentateuch', 'Pentateuco'],
+  ].map(([slug, page, course, en, es]) => ({ slug, page, course, kind: 'reading', requiredFrom: null, alternates: 'optional',
+    title: { en: `${en}: Required Readings`, es: `${es}: Lecturas Requeridas` },
+    room: { en: `the five readings in the ${en} Reading Room`, es: `las cinco lecturas de ${es}` } })),  /* Batch D (11 Oct 2026, Claude's banks, Dr. Cook's go-ahead): the five CTS
+     digests of the remaining 22 rooms. Same terms: open to all, required of
+     no one until activated; alternates optional. */
+  ...[
+    ['alreadings', 'CTSALReadings', 'CTSAL', 'Church Administration & Leadership', 'Administración y Liderazgo de la Iglesia'],
+    ['apolreadings', 'CTSApolReadings', 'CTSApol', 'Apologetics', 'Apologética'],
+    ['biblecharactersreadings', 'CTSBibleCharactersReadings', 'CTSBibleCharacters', 'Bible Characters', 'Personajes Bíblicos'],
+    ['biblecharacterstworeadings', 'CTSBibleCharacters2Readings', 'CTSBibleCharacters2', 'Bible Characters II', 'Personajes Bíblicos II'],
+    ['biblereadings', 'CTSBibleReadings', 'CTSBible', 'How We Got the Bible', 'Cómo Obtuvimos la Biblia'],
+    ['cereadings', 'CTSCEReadings', 'CTSCE', 'Christian Education', 'Educación Cristiana'],
+    ['cgreadings', 'CTSCGReadings', 'CTSCG', 'Church Growth', 'Crecimiento de la Iglesia'],
+    ['csreadings', 'CTSCSReadings', 'CTSCS', 'Counseling Situations', 'Situaciones de Consejería'],
+    ['counselingreadings', 'CTSCounselingReadings', 'CTSCounseling', 'Counseling', 'Consejería'],
+    ['cultsreadings', 'CTSCultsReadings', 'CTSCults', 'Cults & World Religions', 'Sectas y Religiones del Mundo'],
+    ['dpreadings', 'CTSDPReadings', 'CTSDP', 'Doctrinal Preaching', 'Predicación Doctrinal'],
+    ['deaconreadings', 'CTSDeaconFamilyMinistryReadings', 'CTSDeaconFamilyMinistry', 'Deacon Family Ministry Plan', 'Plan de Ministerio Familiar del Diácono'],
+    ['evanpreachreadings', 'CTSEvanPreachReadings', 'CTSEvanPreach', 'Evangelistic Preaching', 'Predicación Evangelística'],
+    ['hsreadings', 'CTSHSReadings', 'CTSHS', 'The Holy Spirit', 'El Espíritu Santo'],
+    ['lareadings', 'CTSLAReadings', 'CTSLA', 'Language Appreciation', 'Apreciación de los Idiomas Bíblicos'],
+    ['locreadings', 'CTSLOCReadings', 'CTSLOC', 'The Life of Christ', 'La Vida de Cristo'],
+    ['missionsreadings', 'CTSMissionsReadings', 'CTSMissions', 'World Missions', 'Misiones Mundiales'],
+    ['narrativereadings', 'CTSNarrativePreachingReadings', 'CTS_Narrative_Preaching', 'Narrative Preaching', 'Predicación Narrativa'],
+    ['ptreadings', 'CTSPTReadings', 'CTSPT', 'Practical Theology', 'Teología Práctica'],
+    ['parablesreadings', 'CTSParablesReadings', 'CTSParables', 'Parables of the Bible', 'Las Parábolas de la Biblia'],
+    ['radicalreadings', 'CTSRadicalReadings', 'CTSRadical', 'Radical Christianity', 'Cristianismo Radical'],
+    /* Christian Ethics (single-page course, ethics_unit01), added 11 Oct 2026:
+       the last course without a five-reading test. */
+    ['ethicsreadings', 'CTSEthicsReadings', 'ethics_unit01', 'Pastoral & Christian Ethics', 'Ética Pastoral y Cristiana'],
+    ['worshipreadings', 'CTSWorshipReadings', 'CTSWorship', 'Worship', 'Adoración Cristiana'],
+  ].map(([slug, page, course, en, es]) => ({ slug, page, course, kind: 'reading', requiredFrom: null, alternates: 'optional',
+    title: { en: `${en}: Required Readings`, es: `${es}: Lecturas Requeridas` },
+    room: { en: `the five readings in the ${en} Reading Room`, es: `las cinco lecturas de ${es}` } })),
 ];
 
+const SCHEDULED = fs.existsSync('src/data/required-from.json') ? JSON.parse(fs.readFileSync('src/data/required-from.json', 'utf8')) : {};
 const fold = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^\p{L}\p{N} ]+/gu, ' ').replace(/\s+/g, ' ').trim();
-let problems = 0;
+let problems = 0, optionalMissing = 0;
+const outputs = [];
 for (const t of TESTS) {
-  const bank = JSON.parse(fs.readFileSync(path.join(SRC, `${t.slug}.bank.json`), 'utf8'));
-  const accept = JSON.parse(fs.readFileSync(path.join(SRC, `${t.slug}.accept.json`), 'utf8'));
+  const dir = t.dir || SRC;
+  const bank = JSON.parse(fs.readFileSync(path.join(dir, `${t.slug}.bank.json`), 'utf8'));
+  const accept = JSON.parse(fs.readFileSync(path.join(dir, `${t.slug}.accept.json`), 'utf8'));
   const f = bank.format || {};
   if (f.questions_per_attempt !== 20 || f.passing_score !== 18 || f.type !== 'fill-in-the-blank') { console.error(`${t.slug}: the bank's format is not 20 of 40, 18 to pass, fill-in-the-blank`); process.exit(2); }
+  /* A bank that names how many questions to draw from each reading tags
+     every question with its reading (1 to 5) and has enough on each. */
+  const perReading = f.questions_drawn_per_reading ?? null;
+  if (perReading !== null) {
+    const counts = {};
+    for (const q of bank.questions) {
+      if (!Number.isInteger(q.reading) || q.reading < 1) { console.error(`${t.slug} #${q.id}: no reading number`); process.exit(2); }
+      counts[q.reading] = (counts[q.reading] || 0) + 1;
+    }
+    const groups = Object.keys(counts).length;
+    if (groups * perReading !== f.questions_per_attempt) { console.error(`${t.slug}: ${groups} readings x ${perReading} is not ${f.questions_per_attempt} a draw`); process.exit(2); }
+    for (const [r, c] of Object.entries(counts)) if (c < perReading) { console.error(`${t.slug}: reading ${r} has ${c} questions, fewer than the ${perReading} drawn from it`); process.exit(2); }
+  }
   const questions = bank.questions.map((q) => {
     const blank = (s) => s.replace(/_{3,}/g, '____').replace(/\.''$/, ".'").trim();
     const alt = accept[String(q.id)] || {};
@@ -54,17 +178,27 @@ for (const t of TESTS) {
     const en = list('en', q.answer_en), es = list('es', q.answer_es);
     for (const [lang, a] of [['en', en], ['es', es]]) {
       if (a.length + 1 > 5) { console.error(`${t.slug} #${q.id}: ${a.length + 1} ${lang} answers; Dr. Cook asked for three to five`); problems++; }
-      if (!a.length) { console.error(`${t.slug} #${q.id}: no accepted ${lang} alternate`); problems++; }
+      if (!a.length) { if (t.alternates === 'optional') optionalMissing++; else { console.error(`${t.slug} #${q.id}: no accepted ${lang} alternate`); problems++; } }
     }
     for (const [lang, p] of [['en', q.en], ['es', q.es]])
       if (blank(p).split('____').length !== 2) { console.error(`${t.slug} #${q.id}: not one blank in ${lang}: ${p}`); problems++; }
-    return { prompt: { en: blank(q.en), es: blank(q.es) }, answer: { en: q.answer_en, es: q.answer_es }, accept: { en, es } };
+    return { prompt: { en: blank(q.en), es: blank(q.es) }, answer: { en: q.answer_en, es: q.answer_es }, accept: { en, es },
+      ...(perReading !== null ? { reading: q.reading } : {}) };
   });
+  // a test made required by tools/activate-required.mjs takes its moment from
+  // src/data/required-from.json; one in force since its install has no requiredFrom
+  if ('requiredFrom' in t && SCHEDULED[t.slug]) t.requiredFrom = SCHEDULED[t.slug];
   const out = { slug: t.slug, page: t.page, course: t.course, kind: t.kind, title: t.title, room: t.room,
-    source: { file: `src/data/readings/${t.slug}.bank.json`, course: bank.course },
-    test: { draw: f.questions_per_attempt, pass: f.passing_score, questions } };
+    ...('requiredFrom' in t ? { requiredFrom: t.requiredFrom } : {}),
+    source: { file: `${dir}/${t.slug}.bank.json`, course: bank.course },
+    test: { draw: f.questions_per_attempt, pass: f.passing_score, ...(perReading !== null ? { perReading } : {}), questions } };
+  if (t.requiredFrom != null && Number.isNaN(Date.parse(t.requiredFrom))) { console.error(`${t.slug}: requiredFrom is not a date and time: ${t.requiredFrom}`); process.exit(2); }
   const counts = questions.map((q) => 1 + q.accept.en.length);
   console.log(`${t.slug}: ${questions.length} questions, accepted answers per question ${Math.min(...counts)}–${Math.max(...counts)} (English), for ${t.course}`);
-  if (WRITE) { fs.mkdirSync(OUT, { recursive: true }); fs.writeFileSync(path.join(OUT, `${t.slug}.json`), JSON.stringify(out, null, 1) + '\n'); console.log(`  wrote ${OUT}/${t.slug}.json`); }
+  outputs.push(out);
 }
-if (problems) { console.error(`${problems} problem(s)`); process.exit(1); }
+if (optionalMissing) console.log(`${optionalMissing} answer(s) with no accepted alternate yet, on tests where alternates are optional (faculty to add)`);
+if (problems) { console.error(`${problems} problem(s); nothing written`); process.exit(1); }
+/* Written only when every test is sound, so a bank with a problem never
+   leaves half its tests updated. */
+if (WRITE) for (const out of outputs) { fs.mkdirSync(OUT, { recursive: true }); fs.writeFileSync(path.join(OUT, `${out.slug}.json`), JSON.stringify(out, null, 1) + '\n'); console.log(`  wrote ${OUT}/${out.slug}.json`); }

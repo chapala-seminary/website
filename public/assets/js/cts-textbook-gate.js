@@ -8,6 +8,16 @@
  * visible diploma, and the Worker refuses the award on its own
  * (worker/awards.js), so nothing is issued meanwhile. The Certificate and
  * Associate tracks are not held.
+ *
+ * A course may require two tests -- its textbook and its five readings (9 Oct
+ * 2026). When the page also loads cts-required-tests.js (generated from
+ * worker/catalog.json), the tests come from there, by the certificate's
+ * completion code, and the diploma waits for every one that counts: a
+ * required-reading test with a `requiredFrom` counts from that moment (null:
+ * not yet in force), and not where the student record held a master's
+ * completion of the course before it (cts_textbook_<slug>_exempt, kept by
+ * cts-sync.js from what the Worker says). Without that script the page's own
+ * data-textbook attributes are the one test, as before.
  */
 (function () {
   "use strict";
@@ -15,8 +25,28 @@
   var slug = b && b.getAttribute("data-textbook"), page = b && b.getAttribute("data-textbook-page");
   // data-textbook-kind="reading": a required-reading test (Genesis, World Religions), the same hold in its own words
   var reading = b && b.getAttribute("data-textbook-kind") === "reading";
-  if (!slug || !page) return;
+  /* The certificate's completion code, as tools/gen-worker-catalog.mjs derives
+     it: named on <body>, or from the page's file name. */
+  function pageCode() {
+    var named = b && b.getAttribute("data-course-code");
+    if (named) return named.toUpperCase();
+    var f = String(location.pathname.split("/").pop() || "").toLowerCase();
+    var c = f.replace(/(thm|mth|mdiv)?certificate\.html$/, "").toUpperCase();
+    return c === "ETHICS_" ? "ETHICS" : c;
+  }
+  var map = window.CTS_REQUIRED_TESTS, code = pageCode();
+  var tests = map && code && Object.prototype.hasOwnProperty.call(map, code) ? map[code]
+    : (slug && page ? [{ slug: slug, page: page, kind: reading ? "reading" : "textbook" }] : []);
+  if (!tests.length) return;
   function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function counts(t) {
+    if (!("requiredFrom" in t)) return true;
+    if (t.requiredFrom == null) return false;
+    var from = Date.parse(t.requiredFrom);
+    if (isNaN(from) || Date.now() < from) return false;
+    return !get("cts_textbook_" + t.slug + "_exempt");
+  }
+  function pending() { return tests.filter(function (t) { return counts(t) && !get("cts_textbook_" + t.slug + "_passed"); }); }
   function track() {
     var s = {}; try { s = JSON.parse(get("cts_student") || "null") || {}; } catch (e) {}
     return String(get("cts_track") || s.track || s.program || "").toLowerCase();
@@ -30,7 +60,8 @@
   function diplomas() { return Array.prototype.slice.call(document.querySelectorAll(SELS)); }
   var note = null, shown = null;      // what the page shows now: the observer must find nothing to change
   function gate() {
-    var hold = masters() && !get("cts_textbook_" + slug + "_passed");
+    var left = masters() ? pending() : [];
+    var hold = left.length > 0;
     var dips = diplomas();
     if (!dips.length) return;
     var dip = dips[0];
@@ -68,10 +99,23 @@
         if (window.getComputedStyle(a).display === "none") top = a;
       if (top && note.nextSibling !== top) top.parentNode.insertBefore(note, top);
     }
-    var state = (hold ? "hold" : "clear") + ":" + (isEs() ? "es" : "en");
+    var state = (hold ? "hold" : "clear") + ":" + (isEs() ? "es" : "en") + ":" + left.map(function (t) { return t.slug; }).join(",");
     if (state === shown) return;
     shown = state;
     note.style.display = hold ? "" : "none";
+    if (!hold) return;
+    if (left.length > 1) {
+      var tb = left.filter(function (t) { return t.kind !== "reading"; })[0] || left[0];
+      var rd = left.filter(function (t) { return t.kind === "reading"; })[0] || left[1];
+      note.innerHTML = isEs()
+        ? "<strong>Faltan dos exámenes.</strong> En los trayectos M.Div. y Th.M. este curso se completa, y su certificado se emite, cuando también se aprueban el examen del libro de texto y el examen de lecturas requeridas; cada uno se aprueba por separado. " +
+          '<a href="' + tb.page + 'Test.html">Examen del libro</a> &nbsp;·&nbsp; <a href="' + rd.page + 'Test.html">Examen de lecturas requeridas</a>'
+        : "<strong>Two tests are still to pass.</strong> On the M.Div. and Th.M. tracks this course is complete, and its certificate issued, when the textbook test and the required-reading test are both passed as well; each is passed on its own. " +
+          '<a href="' + tb.page + 'Test.html">The textbook test</a> &nbsp;·&nbsp; <a href="' + rd.page + 'Test.html">The required-reading test</a>';
+      return;
+    }
+    reading = left[0].kind === "reading";
+    page = left[0].page;
     note.innerHTML = reading
       ? (isEs()
         ? "<strong>Falta el examen de lecturas requeridas.</strong> En los trayectos M.Div. y Th.M. este curso se completa, y su certificado se emite, cuando también se aprueba el examen de lecturas requeridas. " +
@@ -88,6 +132,8 @@
     gate();
     // the page's own script may draw the diploma after this runs, and the language switches by a class on <body>
     try { new MutationObserver(gate).observe(document.body, { attributes: true, childList: true, subtree: true, attributeFilter: ["class", "style", "data-lang"] }); } catch (e) {}
+    // and when the sync brings a pass or an exemption from the student record (cts-sync.js)
+    document.addEventListener("cts-sync-applied", function () { shown = null; gate(); });
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
 })();

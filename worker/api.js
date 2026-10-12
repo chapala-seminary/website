@@ -21,7 +21,7 @@
  * from a student, which makes a stale or offline device harmless.
  */
 
-import { courseShortfall, textbookShortfall, degreeShortfall, resolveCourse, studentLevel, canonicalCode, certificateLevel, DEGREES } from './awards.js';
+import { courseShortfall, textbookShortfall, exemptionsFor, degreeShortfall, resolveCourse, studentLevel, canonicalCode, certificateLevel, DEGREES } from './awards.js';
 import catalog from './catalog.json';
 import { emailConfigured, sendEmail, verificationEmail, certificateEmail, codeEmail } from './email.js';
 import { notify, notifyBatch, retryFailed } from './notify.js';
@@ -107,6 +107,23 @@ async function body(request) {
 
 /* ---- reading and merging a student's state ------------------------------ */
 
+/* The activation date of a required-reading test comes from worker/catalog.json
+ * (worker/awards.js testCounts). The test suite needs to see the rule both
+ * before and after a date, so its configuration -- and only its: EMAIL_MODE
+ * "log" with no Resend key, the same condition that lets the suite see the
+ * notices it would send -- may set TEST_REQUIRED_FROM, a JSON map
+ * { slug: ISO time }. tools/verify-worker-config.mjs refuses the variable in
+ * the deployed configuration. */
+function testRequiredFrom(env) {
+  if (env.EMAIL_MODE !== 'log' || env.RESEND_API_KEY || !env.TEST_REQUIRED_FROM) return undefined;
+  try { const m = JSON.parse(env.TEST_REQUIRED_FROM); return m && typeof m === 'object' ? m : undefined; } catch { return undefined; }
+}
+/* What testCounts needs: the completions the record holds now, with the time
+ * and level the server wrote, and the server's clock. */
+function testContext(env, completions) {
+  return { completions: completions || [], now: now(), requiredFrom: testRequiredFrom(env) };
+}
+
 async function loadState(env, id) {
   const student = await env.DB.prepare(
     'SELECT id, name, email, email_verified_at, country, track, goal, heard, created_at, updated_at FROM students WHERE id = ?')
@@ -138,6 +155,11 @@ async function loadState(env, id) {
     // the textbook tests passed (migration 0009): a course's completion on the
     // master's tracks waits for its textbook's (worker/awards.js)
     textbooks: textbooks.results ?? [],
+    // The required-reading tests this record does not need: a master's
+    // completion of the course it held before the test was activated
+    // (worker/awards.js exemptBefore). The browser keeps them so its pages say
+    // what the record says (cts-sync.js). Never a pass: passes are above.
+    exemptions: exemptionsFor(done, testContext(env, done)),
   };
 }
 
@@ -303,10 +325,17 @@ async function sync(request, env) {
      2026). The browser reports its completions on every sync, so the course
      is recorded by the sync after the test is passed. Completions the record
      already holds are left as they are. */
+  /* A course may require two tests (a textbook and its five readings, 9 Oct
+     2026); each must be passed. A required-reading test with an activation
+     date does not hold a completion the record already held at a master's
+     level before that date -- judged by the record as it stood before this
+     request, with the times the server wrote (worker/awards.js testCounts). */
   {
     const passed = new Set(textbookRowsNow.map(([, slug]) => slug));
     for (const r of (await env.DB.prepare('SELECT textbook FROM textbook_results WHERE student_id = ?').bind(id).all()).results ?? []) passed.add(r.textbook);
-    completions = completions.filter(([, code, track]) => !textbookShortfall(code, track, [...passed]));
+    const recorded = (await env.DB.prepare('SELECT code, track, completed_at FROM course_completions WHERE student_id = ?').bind(id).all()).results ?? [];
+    const ctx = testContext(env, recorded);
+    completions = completions.filter(([, code, track]) => !textbookShortfall(code, track, [...passed], ctx));
   }
   // Which of these the record did not hold before this request: those are the
   // completions the seminary has not heard about, and the ones it is told of
@@ -384,7 +413,8 @@ async function issueCertificate(request, env) {
       const rows = await env.DB.prepare(
         'SELECT unit FROM unit_progress WHERE student_id = ? AND course = ?').bind(id, c.slug).all();
       const tb = (await env.DB.prepare('SELECT textbook FROM textbook_results WHERE student_id = ?').bind(id).all()).results ?? [];
-      const why = courseShortfall(c.slug, (rows.results ?? []).map((r) => r.unit), studentLevel(student.track, student.goal), tb);
+      const done = (await env.DB.prepare('SELECT code, track, completed_at FROM course_completions WHERE student_id = ?').bind(id).all()).results ?? [];
+      const why = courseShortfall(c.slug, (rows.results ?? []).map((r) => r.unit), studentLevel(student.track, student.goal), tb, testContext(env, done));
       if (why) return fail(409, why);
     } else {
       // A single-page course keeps no units; its completion code is the record.
@@ -392,7 +422,8 @@ async function issueCertificate(request, env) {
         'SELECT 1 FROM course_completions WHERE student_id = ? AND code = ?').bind(id, c.code).first();
       if (!row) return fail(409, 'course completion not recorded: ' + c.code);
       const tb = (await env.DB.prepare('SELECT textbook FROM textbook_results WHERE student_id = ?').bind(id).all()).results ?? [];
-      const why = textbookShortfall(c.code, studentLevel(student.track, student.goal), tb);
+      const done = (await env.DB.prepare('SELECT code, track, completed_at FROM course_completions WHERE student_id = ?').bind(id).all()).results ?? [];
+      const why = textbookShortfall(c.code, studentLevel(student.track, student.goal), tb, testContext(env, done));
       if (why) return fail(409, why);
     }
   } else {
