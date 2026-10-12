@@ -569,6 +569,20 @@ window.CTS_REQUIRED_TESTS = {
    "requiredFrom": null
   }
  ],
+ "CTSBIBLECHARACTERS": [
+  {
+   "slug": "whytecharacters",
+   "page": "CTSTextbookWhyteCharacters",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "biblecharactersreadings",
+   "page": "CTSBibleCharactersReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
  "CTSWORSHIP": [
   {
    "slug": "worship",
@@ -578,14 +592,6 @@ window.CTS_REQUIRED_TESTS = {
   {
    "slug": "worshipreadings",
    "page": "CTSWorshipReadings",
-   "kind": "reading",
-   "requiredFrom": null
-  }
- ],
- "CTSBIBLECHARACTERS": [
-  {
-   "slug": "biblecharactersreadings",
-   "page": "CTSBibleCharactersReadings",
    "kind": "reading",
    "requiredFrom": null
   }
