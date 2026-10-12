@@ -123,7 +123,15 @@ its ten unit pages carries the textbook box by hand. Its certificate page
 (`ethics_certificate.html`) does not yet load `cts-required-tests.js` and
 `cts-textbook-gate.js`: that is needed before this test is activated.
 
-All twenty-nine, and the five-reading tests, are online with
+And one for Preaching (WiseSpeak, `CTS_WiseSpeak_Preaching`, code
+WISESPEAK; 12 Oct): Broadus, *A Treatise on the Preparation and Delivery of
+Sermons*, 1898 edition revised by Dargan (`CTSTextbookBroadus`): the
+importance of preaching, its four requisites, the duty to interpret the text
+truly, application, and expository preaching. It is listed before the
+course's five-reading test; Dr. Cook's own WiseSpeak remains the course's
+method. The box is written into the single course page.
+
+All thirty, and the five-reading tests, are online with
 `requiredFrom: null`: open to everyone, required of no one. Dr. Cook wants
 them required on the M.Div. and Th.M. tracks once published. To do that:
 

@@ -47,6 +47,20 @@ window.CTS_REQUIRED_TESTS = {
    "requiredFrom": null
   }
  ],
+ "WISESPEAK": [
+  {
+   "slug": "broadus",
+   "page": "CTSTextbookBroadus",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "wisespeakreadings",
+   "page": "CTSPreachingReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
  "ETHICS": [
   {
    "slug": "christianethics",
@@ -570,14 +584,6 @@ window.CTS_REQUIRED_TESTS = {
   {
    "slug": "radicalreadings",
    "page": "CTSRadicalReadings",
-   "kind": "reading",
-   "requiredFrom": null
-  }
- ],
- "WISESPEAK": [
-  {
-   "slug": "wisespeakreadings",
-   "page": "CTSPreachingReadings",
    "kind": "reading",
    "requiredFrom": null
   }
