@@ -1,6 +1,6 @@
 # Publishing the textbooks and reading tests: Robert's checklist
 
-_11 Oct 2026. For the stacked draft pull requests #40 to #49. Nothing here
+_11 Oct 2026. For the stacked draft pull requests #40 to #49 and #51, and the separate #50. Nothing here
 has been merged or deployed. Dr. Cook approves before anything goes live._
 
 ## What is in the stack
@@ -17,16 +17,19 @@ below it:
 | #45–#46 | The Galatians, Romans and Joshua exams (switched off) |
 | #47 | The excerpt-textbook page; 1 Peter |
 | #48 | The seven new textbooks ready to publish: multiple-choice exams, Spanish fixed, `tools/activate-required.mjs` |
-| #49 | The Acts, Revelation, Psalms and Pentateuch textbooks; six more reading tests; one standard notice per room (`tools/room-test-notices.mjs`) |
+| #49 | The Acts, Revelation, Psalms and Pentateuch textbooks; Holy Spirit, Doctrines, Parables, Bible Hand-Book and Pastor; six more reading tests; one standard notice per room (`tools/room-test-notices.mjs`) |
+| #51 | Church History, Old and New Testament Survey, Life of Christ and Christian Education |
 
-Testing `claude/textbooks-batch2` (#49) tests the whole stack. #35 to #39 are
+Testing `claude/textbooks-batch3` (#51) tests the whole stack.
+
+**#50 is separate.** It is based on `main` and carries the approved corrections to the nine live textbook exams (`src/data/textbooks/corrections.json`). It can be built, tested and deployed on its own, before or after the stack. #35 to #39 are
 older drafts. Check which of them are still needed before merging #40, which
 already combines #35 and #36.
 
 ## 1. Build and test on the Mac
 
     git fetch origin
-    git switch -c review/textbooks origin/claude/textbooks-batch2
+    git switch -c review/textbooks origin/claude/textbooks-batch3
     npm ci
     node tools/gen-worker-catalog.mjs --check      # must say "current"
     npm run build
@@ -97,6 +100,5 @@ Dr. Cook announces a start date, which must be **after** the deploy that carries
 
 ## Not in the stack (waiting on Dr. Cook)
 
-- ChatGPT's 23 corrections to seven live textbook exams. Claude reviewed them: 10 approve, 4 approve with a change, 9 reject. None is applied yet.
 - The required-email registration change.
 - ChatGPT's drafts: Matthew, World Missions, the Genesis supplement and Hermeneutics.
