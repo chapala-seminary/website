@@ -300,7 +300,7 @@ nothing.
    Wayne's audit item 5). When `/api/sync` records a course completion the
    student's record did not hold before, and when `/api/certificate` issues a
    new award, the Worker emails `NOTIFY_TO` (`info@chapalaseminary.org`,
-   `wrangler.jsonc` vars) through the same Resend path as student email, and
+   `wrangler.jsonc` vars) through the same sending path as student email (Cloudflare Email Service, Resend as the fallback: worker/email.js), and
    writes a row in `notifications` (`student_id, kind, code, status, attempts,
    error, created_at, sent_at`; one per student/kind/code). The row is the
    record: the tracker can read it directly, and a failed send is visible and

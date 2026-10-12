@@ -43,9 +43,13 @@
 	"observability": {
 		"enabled": true
 	},
-	// Outgoing email (worker/email.js). The API key is a secret, never here:
+	// Outgoing email (worker/email.js): Cloudflare Email Service through this
+	// binding, with Resend kept as the fallback. The domain must be onboarded
+	// once (Compute > Email Service > Email Sending) before the binding reaches
+	// students. Resend's key stays a secret, never here:
 	//   npx wrangler secret put RESEND_API_KEY            (production)
 	//   npx wrangler secret put RESEND_API_KEY --env beta (beta)
+	"send_email": [{ "name": "EMAIL" }],
 	"vars": {
 		"EMAIL_FROM": "Chapala Theological Seminary <certificates@chapalaseminary.org>",
 		"EMAIL_REPLY_TO": "info@chapalaseminary.org",
@@ -114,7 +118,8 @@
 			"observability": {
 				"enabled": true
 			},
-			// vars are not inherited by an environment, so they are repeated
+			// bindings and vars are not inherited by an environment, so they are repeated
+			"send_email": [{ "name": "EMAIL" }],
 			"vars": {
 				"EMAIL_FROM": "Chapala Theological Seminary <certificates@chapalaseminary.org>",
 				"EMAIL_REPLY_TO": "info@chapalaseminary.org",
