@@ -1242,6 +1242,32 @@ copy rather than on the pages he happened to see.
   Wayne's Markdown draft and qualified French review are still pending. No
   paid provider is connected. See `docs/french-pilot.md` for the review steps.
 
+## Required email at signup (12 Oct 2026)
+
+Wayne requires an email for every new signup. The English/Spanish registration
+card marks email required and rejects blank, whitespace, the old dash placeholder
+and malformed addresses before saving. The Worker applies required-field,
+length and basic email-format validation before creating any student account,
+including separate registrations. Verification remains separate from enrollment.
+Existing account lookup, access and sync remain unchanged, with no database
+migration or backfill. Browser-only legacy records need email before creating
+a server account; their local progress remains intact. Reminder and certificate
+verification rules are unchanged. API and browser tests cover rejection and
+signup before verification; a synthetic pre-existing email-less account checks
+continued sync and reminder exclusion.
+
+## Two ways to confirm email (12 Oct 2026)
+
+A general confirmation page, linked from registration, Save / Restore and
+certificate registration, lets students confirm before certificate time without
+blocking study. Each bilingual confirmation email offers both a six-digit code
+and an expiring link. Both use the same one-use challenge; expiry, resend limits
+and wrong-code limits remain in effect. The link asks for an explicit Confirm
+email button press and never signs the recipient in or replaces the student
+account on that device. Certificate pages continue to accept codes; reload
+after confirming by link to register and receive the certificate. Deployment
+needs `0012_email_links.sql` before the Worker. See `docs/student-records.md`.
+
 ## How to check any of this yourself
 
 ```

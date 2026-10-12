@@ -110,7 +110,7 @@ const student = (track) => ({
   }));
   ok(f.name === 'Nombre completo' && f.track[0] === 'Certificado de Ministerio' && f.country === 'Mexico · México'.split(' · ')[1],
     `the front-page registration in Spanish reads ${JSON.stringify(f)}`);
-  await h.fill('#reg-name', 'Ana Prueba'); await h.selectOption('#reg-country', 'MX'); await h.click('#reg-save');
+  await h.fill('#reg-name', 'Ana Prueba'); await h.fill('#reg-email', 'ana-beta@example.org'); await h.selectOption('#reg-country', 'MX'); await h.click('#reg-save');
   const confirm = await h.evaluate(() => [...document.querySelectorAll('#reg-confirm *')].filter((e) => e.offsetParent !== null).map((e) => e.textContent).join(' '));
   ok(/Certificado de Ministerio/.test(confirm) && !/Certificate of Ministry/.test(confirm), `the registration confirmation in Spanish reads "${confirm}"`);
   await ctx2.close();

@@ -48,14 +48,17 @@ for (const [why, headers] of [
 
 /* ---- students to find -------------------------------------------------------- */
 const tag = Math.random().toString(36).slice(2, 7);
-const reg = async (b) => (await (await fetch(BASE + '/api/register', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b) })).json()).code;
+const reg = async (b) => (await (await fetch(BASE + '/api/register', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ email: `staff-fixture-${encodeURIComponent(b.name)}@example.test`, ...b }) })).json()).code;
 const sync = (b) => fetch(BASE + '/api/sync', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b) }).then((r) => r.json());
 
-const QUIET = `Quiet ${tag}`, FRESH = `Fresh ${tag}`, NOMAIL = `Nomail ${tag}`, DONE = `Done ${tag}`, SHOUT = `=HYPERLINK("x") ${tag}`;
+const QUIET = `Quiet ${tag}`, FRESH = `Fresh ${tag}`, NOMAIL = 'Legacy No Email', DONE = `Done ${tag}`, SHOUT = `=HYPERLINK("x") ${tag}`;
 const quietCode = await reg({ name: QUIET, email: `quiet-${tag}@example.test`, track: 'cert', country: 'MX', lang: 'es' });
 await sync({ code: quietCode, progress: [{ course: 'acts', unit: 1 }, { course: 'acts', unit: 2 }], doneCodes: [], lang: 'es' });
 await reg({ name: FRESH, email: `fresh-${tag}@example.test`, track: 'mdiv' });
-await reg({ name: NOMAIL, track: 'cert' });
+// This pre-existing account is seeded directly in the local test database.
+const legacy = await sync({ code: 'CTS-TEST-0000-0001', student: { email: '' }, progress: [{ course: 'acts', unit: 1 }] });
+ok(legacy.student?.name === NOMAIL && !legacy.student.email && legacy.progress.length === 1,
+  'an existing account without email still syncs and keeps access');
 const doneCode = await reg({ name: DONE, email: `done-${tag}@example.test`, track: 'cert' });
 await sync({ code: doneCode, progress: [{ course: 'acts', unit: 1 }],
   doneCodes: ['CTSOTS', 'CTSNT', 'CTSST', 'CTSEVANGELISM', 'CTSPM', 'CTSCH', 'WISESPEAK', 'CTSACTS', 'CTSGENESIS', 'CTSPSALMS', 'CTSMATT', 'CTSROMANS'] });
@@ -105,7 +108,7 @@ await reg({ name: SHOUT, email: `shout-${tag}@example.test`, track: 'thm' });
 
 /* ---- who gets a note, and when ------------------------------------------------ */
 const run = async (days) => (await (await staff(`/staff/notes/run?asOf=${later(days)}`, { method: 'POST' })).json());
-const mine = (res) => res.results.filter((x) => x.student.includes(tag));
+const mine = (res) => res.results.filter((x) => x.student.includes(tag) || x.student === NOMAIL);
 {
   const none = mine(await run(3));
   ok(!none.length, `three days in, nobody is written to (${none.map((x) => x.student)})`);
@@ -174,7 +177,7 @@ const mine = (res) => res.results.filter((x) => x.student.includes(tag));
   ok(/NOTES SENT TO STUDENTS/.test(d.text) && d.text.includes(FRESH) && /not started after a week/.test(d.text), 'the weekly summary lists the notes sent', d.text.slice(0, 300));
   ok(!d.text.includes('Course Tester') && !d.text.includes(quietCode), 'and never the tester placeholder or a student code');
   const now = await (await staff('/staff/digest', { method: 'POST' })).json();
-  ok(/NEW STUDENTS/.test(now.text) && now.text.includes(NOMAIL), 'it lists the week\'s new students');
+  ok(/NEW STUDENTS/.test(now.text) && now.text.includes(FRESH), 'it lists the week\'s new students');
   const p = await (await staff('/staff/notes')).text();
   ok(/Estimado\/a/.test(p) && /Dear /.test(p) && /Sending is ON/.test(p), 'the notes page shows both notes in both languages, and whether sending is on');
 }

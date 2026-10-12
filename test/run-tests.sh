@@ -68,6 +68,9 @@ for m in migrations/*.sql; do
     --config "$CONFIG" --file "$m" >/dev/null
 done
 
+npx wrangler d1 execute chapala-students --local --persist-to "$STATE" \
+  --config "$CONFIG" --file test/fixtures/legacy-no-email.sql >/dev/null
+
 # Nothing else may be on this port. A dev server left behind by an earlier run
 # answers /api/health perfectly well while pointing at a database directory
 # this run has just deleted -- so the suite comes up green on the parts that do
@@ -189,6 +192,7 @@ node tools/verify-editable.mjs
 node tools/verify-partials.mjs
 
 API_BASE="http://127.0.0.1:$PORT" node test/api.test.mjs
+API_BASE="http://127.0.0.1:$PORT" EMAIL_TEST_STATE="$STATE" node test/email-options.test.mjs
 
 # The same rule through the Worker: both tests on their own, the four student-
 # record cases (a completion from before activation is written straight into
