@@ -45,6 +45,7 @@ import crypto from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import mammoth from 'mammoth';
 import { parse } from 'node-html-parser';
+import { applyCorrections } from './textbook-corrections.mjs';
 
 const args = process.argv.slice(2);
 const WRITE = args.includes('--write');
@@ -259,6 +260,14 @@ for (const book of BOOKS) {
   const en = stats(d.body.en), es = stats(d.body.es);
   console.log(`deaconship: EN reflowed to ${en.h2} chapters / ${en.h3} sections / ${en.p} paragraphs; ES has ${es.h2} / ${es.h3} / ${es.p}`);
   if (en.h2 !== es.h2 || Math.abs(en.h3 - es.h3) > 2) say(`deaconship: the reflowed English (${en.h2} chapters, ${en.h3} sections) does not match the Spanish (${es.h2}, ${es.h3})`);
+}
+// Dr. Cook's approved corrections (src/data/textbooks/corrections.json),
+// so a re-import keeps them; a correction the new bank no longer fits is a
+// problem to resolve by hand, not something to overwrite
+for (const r of results) {
+  const c = applyCorrections(r);
+  if (c.applied) console.log(`${r.slug}: ${c.applied} correction(s) applied`);
+  c.stale.forEach((x) => say(`correction no longer fits: ${x}`));
 }
 if (problems.length) {
   console.error(`\n${problems.length} problem(s):`); problems.forEach((p) => console.error('  ' + p)); process.exit(1);
