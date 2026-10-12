@@ -33,6 +33,20 @@ window.CTS_REQUIRED_TESTS = {
    "requiredFrom": null
   }
  ],
+ "CTSBIBLECHARACTERS2": [
+  {
+   "slug": "biblecharacterstwo",
+   "page": "CTSTextbookBibleCharactersTwo",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "biblecharacterstworeadings",
+   "page": "CTSBibleCharacters2Readings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
  "CTSBIBLE": [
   {
    "slug": "biblehandbook",
@@ -566,14 +580,6 @@ window.CTS_REQUIRED_TESTS = {
   {
    "slug": "biblecharactersreadings",
    "page": "CTSBibleCharactersReadings",
-   "kind": "reading",
-   "requiredFrom": null
-  }
- ],
- "CTSBIBLECHARACTERS2": [
-  {
-   "slug": "biblecharacterstworeadings",
-   "page": "CTSBibleCharacters2Readings",
    "kind": "reading",
    "requiredFrom": null
   }
