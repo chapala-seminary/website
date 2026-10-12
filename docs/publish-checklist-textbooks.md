@@ -1,6 +1,6 @@
 # Publishing the textbooks and reading tests: Robert's checklist
 
-_11 Oct 2026. For the stacked draft pull requests #40 to #49, #51 and #52, and the separate #50. Nothing here
+_11 Oct 2026. For the stacked draft pull requests #40 to #49 and #51 to #53, and the separate #50. Nothing here
 has been merged or deployed. Dr. Cook approves before anything goes live._
 
 ## What is in the stack
@@ -20,8 +20,9 @@ below it:
 | #49 | The Acts, Revelation, Psalms and Pentateuch textbooks; Holy Spirit, Doctrines, Parables, Bible Hand-Book and Pastor; six more reading tests; one standard notice per room (`tools/room-test-notices.mjs`) |
 | #51 | Church History, Old and New Testament Survey, Life of Christ and Christian Education |
 | #52 | Hermeneutics, Apologetics, Evangelistic Preaching, World Missions, Genesis and Matthew |
+| #53 | World Religions and Church Administration textbooks; reading tests for the last 22 rooms (every course now has one) |
 
-Testing `claude/textbooks-batch4` (#52) tests the whole stack.
+Testing `claude/textbooks-batch5` (#53) tests the whole stack.
 
 **#50 is separate.** It is based on `main` and carries the approved corrections to the nine live textbook exams (`src/data/textbooks/corrections.json`). It can be built, tested and deployed on its own, before or after the stack. #35 to #39 are
 older drafts. Check which of them are still needed before merging #40, which
@@ -30,7 +31,7 @@ already combines #35 and #36.
 ## 1. Build and test on the Mac
 
     git fetch origin
-    git switch -c review/textbooks origin/claude/textbooks-batch4
+    git switch -c review/textbooks origin/claude/textbooks-batch5
     npm ci
     node tools/gen-worker-catalog.mjs --check      # must say "current"
     npm run build
@@ -84,7 +85,7 @@ Until this step, every new test is open to everyone and required of no one.
 Dr. Cook announces a start date, which must be **after** the deploy that carries it:
 
     node tools/activate-required.mjs --list
-    node tools/activate-required.mjs --at 2026-11-01T06:00:00Z --all-pending            # dry run: lists the tests (47 with #52)
+    node tools/activate-required.mjs --at 2026-11-01T06:00:00Z --all-pending            # dry run: lists the tests (71 with #53)
     node tools/activate-required.mjs --at 2026-11-01T06:00:00Z --all-pending --write
     npm run build && test/run-tests.sh
     npm run deploy

@@ -25,6 +25,12 @@ window.CTS_REQUIRED_TESTS = {
    "page": "CTSTextbookApologetics",
    "kind": "textbook",
    "requiredFrom": null
+  },
+  {
+   "slug": "apolreadings",
+   "page": "CTSApolReadings",
+   "kind": "reading",
+   "requiredFrom": null
   }
  ],
  "CTSBIBLE": [
@@ -32,6 +38,12 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "biblehandbook",
    "page": "CTSTextbookBibleHandbook",
    "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "biblereadings",
+   "page": "CTSBibleReadings",
+   "kind": "reading",
    "requiredFrom": null
   }
  ],
@@ -49,11 +61,30 @@ window.CTS_REQUIRED_TESTS = {
    "requiredFrom": null
   }
  ],
+ "CTSWR": [
+  {
+   "slug": "comparativereligion",
+   "page": "CTSTextbookComparativeReligion",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "wrreadings",
+   "page": "CTSWRRequired",
+   "kind": "reading"
+  }
+ ],
  "COUNSELING": [
   {
    "slug": "counseling",
    "page": "CTSTextbookCounseling",
    "kind": "textbook"
+  },
+  {
+   "slug": "counselingreadings",
+   "page": "CTSCounselingReadings",
+   "kind": "reading",
+   "requiredFrom": null
   }
  ],
  "CTSCULTS": [
@@ -61,6 +92,12 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "cults",
    "page": "CTSTextbookCults",
    "kind": "textbook"
+  },
+  {
+   "slug": "cultsreadings",
+   "page": "CTSCultsReadings",
+   "kind": "reading",
+   "requiredFrom": null
   }
  ],
  "CTSDEACONFAMILYMINISTRY": [
@@ -68,6 +105,12 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "deaconship",
    "page": "CTSTextbookDeaconship",
    "kind": "textbook"
+  },
+  {
+   "slug": "deaconreadings",
+   "page": "CTSDeaconFamilyMinistryReadings",
+   "kind": "reading",
+   "requiredFrom": null
   }
  ],
  "CTSDP": [
@@ -75,6 +118,12 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "doctrinal",
    "page": "CTSTextbookDoctrinalPreaching",
    "kind": "textbook"
+  },
+  {
+   "slug": "dpreadings",
+   "page": "CTSDPReadings",
+   "kind": "reading",
+   "requiredFrom": null
   }
  ],
  "CTSST": [
@@ -152,6 +201,12 @@ window.CTS_REQUIRED_TESTS = {
    "page": "CTSTextbookHolySpirit",
    "kind": "textbook",
    "requiredFrom": null
+  },
+  {
+   "slug": "hsreadings",
+   "page": "CTSHSReadings",
+   "kind": "reading",
+   "requiredFrom": null
   }
  ],
  "CTSJOHN": [
@@ -187,6 +242,12 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "language",
    "page": "CTSTextbookLanguage",
    "kind": "textbook"
+  },
+  {
+   "slug": "lareadings",
+   "page": "CTSLAReadings",
+   "kind": "reading",
+   "requiredFrom": null
   }
  ],
  "CTSMATT": [
@@ -209,6 +270,12 @@ window.CTS_REQUIRED_TESTS = {
    "page": "CTSTextbookMinistryWord",
    "kind": "textbook",
    "requiredFrom": null
+  },
+  {
+   "slug": "evanpreachreadings",
+   "page": "CTSEvanPreachReadings",
+   "kind": "reading",
+   "requiredFrom": null
   }
  ],
  "CTSMISSIONS": [
@@ -217,6 +284,12 @@ window.CTS_REQUIRED_TESTS = {
    "page": "CTSTextbookMissionaryMethods",
    "kind": "textbook",
    "requiredFrom": null
+  },
+  {
+   "slug": "missionsreadings",
+   "page": "CTSMissionsReadings",
+   "kind": "reading",
+   "requiredFrom": null
   }
  ],
  "STORYTEL": [
@@ -224,6 +297,12 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "narrative",
    "page": "CTSTextbookNarrativePreaching",
    "kind": "textbook"
+  },
+  {
+   "slug": "narrativereadings",
+   "page": "CTSNarrativePreachingReadings",
+   "kind": "reading",
+   "requiredFrom": null
   }
  ],
  "CTSNT": [
@@ -260,6 +339,12 @@ window.CTS_REQUIRED_TESTS = {
    "page": "CTSTextbookParables",
    "kind": "textbook",
    "requiredFrom": null
+  },
+  {
+   "slug": "parablesreadings",
+   "page": "CTSParablesReadings",
+   "kind": "reading",
+   "requiredFrom": null
   }
  ],
  "CTSPM": [
@@ -272,6 +357,20 @@ window.CTS_REQUIRED_TESTS = {
   {
    "slug": "pmreadings",
    "page": "CTSPMReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSAL": [
+  {
+   "slug": "pastoralepistles",
+   "page": "CTSTextbookPastoralEpistles",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "alreadings",
+   "page": "CTSALReadings",
    "kind": "reading",
    "requiredFrom": null
   }
@@ -364,6 +463,12 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "situations",
    "page": "CTSTextbookCounselingSituations",
    "kind": "textbook"
+  },
+  {
+   "slug": "csreadings",
+   "page": "CTSCSReadings",
+   "kind": "reading",
+   "requiredFrom": null
   }
  ],
  "CTSHERMENEUTICS": [
@@ -386,6 +491,12 @@ window.CTS_REQUIRED_TESTS = {
    "page": "CTSTextbookTeaching",
    "kind": "textbook",
    "requiredFrom": null
+  },
+  {
+   "slug": "cereadings",
+   "page": "CTSCEReadings",
+   "kind": "reading",
+   "requiredFrom": null
   }
  ],
  "CTSLOC": [
@@ -394,6 +505,12 @@ window.CTS_REQUIRED_TESTS = {
    "page": "CTSTextbookTrainingTwelve",
    "kind": "textbook",
    "requiredFrom": null
+  },
+  {
+   "slug": "locreadings",
+   "page": "CTSLOCReadings",
+   "kind": "reading",
+   "requiredFrom": null
   }
  ],
  "CTSWORSHIP": [
@@ -401,6 +518,52 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "worship",
    "page": "CTSTextbookWorship",
    "kind": "textbook"
+  },
+  {
+   "slug": "worshipreadings",
+   "page": "CTSWorshipReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSBIBLECHARACTERS": [
+  {
+   "slug": "biblecharactersreadings",
+   "page": "CTSBibleCharactersReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSBIBLECHARACTERS2": [
+  {
+   "slug": "biblecharacterstworeadings",
+   "page": "CTSBibleCharacters2Readings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSCG": [
+  {
+   "slug": "cgreadings",
+   "page": "CTSCGReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSPT": [
+  {
+   "slug": "ptreadings",
+   "page": "CTSPTReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSRADICAL": [
+  {
+   "slug": "radicalreadings",
+   "page": "CTSRadicalReadings",
+   "kind": "reading",
+   "requiredFrom": null
   }
  ],
  "WISESPEAK": [
@@ -409,13 +572,6 @@ window.CTS_REQUIRED_TESTS = {
    "page": "CTSPreachingReadings",
    "kind": "reading",
    "requiredFrom": null
-  }
- ],
- "CTSWR": [
-  {
-   "slug": "wrreadings",
-   "page": "CTSWRRequired",
-   "kind": "reading"
   }
  ]
 };

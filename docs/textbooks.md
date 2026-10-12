@@ -105,7 +105,15 @@ Methods* (CTSMissions); Dods, *Genesis* -- Abraham, Jacob and Joseph chapters,
 not the Creation chapter (CTSGenesis, beside its reading test, which stays
 in force as before); Gibson, *Matthew* (CTSMatt).
 
-All twenty-six, and the five-reading tests installed in October, are online with
+Two more (11 Oct): Jevons, *An Introduction to the Study of Comparative
+Religion* (CTSWR, beside its reading test, which stays in force); Plummer, *The
+Pastoral Epistles* (CTSAL). And five-reading tests for the last 22 rooms
+(Claude's banks, `tools/import-readings.mjs` batch D), so every course now
+has one. Still without a textbook: Bible Characters I and II, Church Growth,
+Practical Theology, Radical Christianity (no suitable book in the Drive
+library yet).
+
+All twenty-eight, and the five-reading tests, are online with
 `requiredFrom: null`: open to everyone, required of no one. Dr. Cook wants
 them required on the M.Div. and Th.M. tracks once published. To do that:
 

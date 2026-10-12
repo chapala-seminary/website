@@ -56,7 +56,7 @@ for (const r of readings.filter((x) => 'requiredFrom' in x)) {
   if (/<div class="notice" id="cts-required">/.test(s)) { /* keep */ }
   else if (/<!-- =+ HONORS =+ -->/.test(s)) s = s.replace(/^(\s*)(<!-- =+ HONORS =+ -->)/m, `$1<!-- ============ MASTER'S READING TEST ============ -->\n${rdNotice(r)}\n$1$2`);
   else if (b) s = s.replace('<!-- /CTS-TEXTBOOK-TEST -->\n', `<!-- /CTS-TEXTBOOK-TEST -->\n${rdNotice(r)}\n`);
-  else { console.error(`${r.page}: no place for the reading-test notice`); problems++; continue; }
+  else s = rdNotice(r) + '\n' + s;   // no honors card and no textbook notice: at the top of the room
   if (/cts-textbook-test-pilot|CTS-COMPLETE-|has not been activated/.test(s)) { console.error(`${r.page}: an old notice is left`); problems++; }
   if (s !== before) { changed++; console.log(`${r.page}: ${b ? 'textbook + reading' : 'reading'} notices`); if (WRITE) fs.writeFileSync(file, s); }
 }

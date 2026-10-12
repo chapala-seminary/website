@@ -109,6 +109,34 @@ const TESTS = [
     ['pentreadings', 'CTSPentReadings', 'CTSPent', 'Pentateuch', 'Pentateuco'],
   ].map(([slug, page, course, en, es]) => ({ slug, page, course, kind: 'reading', requiredFrom: null, alternates: 'optional',
     title: { en: `${en}: Required Readings`, es: `${es}: Lecturas Requeridas` },
+    room: { en: `the five readings in the ${en} Reading Room`, es: `las cinco lecturas de ${es}` } })),  /* Batch D (11 Oct 2026, Claude's banks, Dr. Cook's go-ahead): the five CTS
+     digests of the remaining 22 rooms. Same terms: open to all, required of
+     no one until activated; alternates optional. */
+  ...[
+    ['alreadings', 'CTSALReadings', 'CTSAL', 'Church Administration & Leadership', 'Administración y Liderazgo de la Iglesia'],
+    ['apolreadings', 'CTSApolReadings', 'CTSApol', 'Apologetics', 'Apologética'],
+    ['biblecharactersreadings', 'CTSBibleCharactersReadings', 'CTSBibleCharacters', 'Bible Characters', 'Personajes Bíblicos'],
+    ['biblecharacterstworeadings', 'CTSBibleCharacters2Readings', 'CTSBibleCharacters2', 'Bible Characters II', 'Personajes Bíblicos II'],
+    ['biblereadings', 'CTSBibleReadings', 'CTSBible', 'How We Got the Bible', 'Cómo Obtuvimos la Biblia'],
+    ['cereadings', 'CTSCEReadings', 'CTSCE', 'Christian Education', 'Educación Cristiana'],
+    ['cgreadings', 'CTSCGReadings', 'CTSCG', 'Church Growth', 'Crecimiento de la Iglesia'],
+    ['csreadings', 'CTSCSReadings', 'CTSCS', 'Counseling Situations', 'Situaciones de Consejería'],
+    ['counselingreadings', 'CTSCounselingReadings', 'CTSCounseling', 'Counseling', 'Consejería'],
+    ['cultsreadings', 'CTSCultsReadings', 'CTSCults', 'Cults & World Religions', 'Sectas y Religiones del Mundo'],
+    ['dpreadings', 'CTSDPReadings', 'CTSDP', 'Doctrinal Preaching', 'Predicación Doctrinal'],
+    ['deaconreadings', 'CTSDeaconFamilyMinistryReadings', 'CTSDeaconFamilyMinistry', 'Deacon Family Ministry Plan', 'Plan de Ministerio Familiar del Diácono'],
+    ['evanpreachreadings', 'CTSEvanPreachReadings', 'CTSEvanPreach', 'Evangelistic Preaching', 'Predicación Evangelística'],
+    ['hsreadings', 'CTSHSReadings', 'CTSHS', 'The Holy Spirit', 'El Espíritu Santo'],
+    ['lareadings', 'CTSLAReadings', 'CTSLA', 'Language Appreciation', 'Apreciación de los Idiomas Bíblicos'],
+    ['locreadings', 'CTSLOCReadings', 'CTSLOC', 'The Life of Christ', 'La Vida de Cristo'],
+    ['missionsreadings', 'CTSMissionsReadings', 'CTSMissions', 'World Missions', 'Misiones Mundiales'],
+    ['narrativereadings', 'CTSNarrativePreachingReadings', 'CTS_Narrative_Preaching', 'Narrative Preaching', 'Predicación Narrativa'],
+    ['ptreadings', 'CTSPTReadings', 'CTSPT', 'Practical Theology', 'Teología Práctica'],
+    ['parablesreadings', 'CTSParablesReadings', 'CTSParables', 'Parables of the Bible', 'Las Parábolas de la Biblia'],
+    ['radicalreadings', 'CTSRadicalReadings', 'CTSRadical', 'Radical Christianity', 'Cristianismo Radical'],
+    ['worshipreadings', 'CTSWorshipReadings', 'CTSWorship', 'Worship', 'Adoración Cristiana'],
+  ].map(([slug, page, course, en, es]) => ({ slug, page, course, kind: 'reading', requiredFrom: null, alternates: 'optional',
+    title: { en: `${en}: Required Readings`, es: `${es}: Lecturas Requeridas` },
     room: { en: `the five readings in the ${en} Reading Room`, es: `las cinco lecturas de ${es}` } })),
 ];
 
