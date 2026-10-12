@@ -52,12 +52,14 @@ export async function sendEmail(env, msg) {
 
 /** The verification message, in both languages: the site is bilingual and
  *  the Worker does not know which one the student is reading. */
-export function verificationEmail(code) {
+export function verificationEmail(code, link) {
   const text =
     `Your Chapala Theological Seminary verification code is ${code}\n` +
-    `Enter it on the certificate page. It expires in 15 minutes.\n\n` +
+    `Enter it on the email confirmation or certificate page. It expires in 15 minutes.\n` +
+    (link ? `Or open this link and press Confirm email:\n${link}\n\n` : '\n') +
     `Su código de verificación del Seminario Teológico de Chapala es ${code}\n` +
-    `Escríbalo en la página del certificado. Vence en 15 minutos.\n\n` +
+    `Escríbalo en la página de confirmación del correo o del certificado. Vence en 15 minutos.\n` +
+    (link ? `O abra este enlace y pulse Confirmar correo:\n${link}\n\n` : '\n') +
     `If you did not ask for this, ignore this message. / Si no lo solicitó, ignore este mensaje.`;
   return { subject: `Verification code ${code} · Código de verificación`, text };
 }

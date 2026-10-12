@@ -32,7 +32,26 @@ async function device(page_ = '') {
 const one = await device();
 await one.page.selectOption('#reg-country', { index: 1 });
 await one.page.fill('#reg-name', 'Ana Ruiz');
-await one.page.fill('#reg-email', 'ana.code-ui@example.org');
+ok(await one.page.getAttribute('#reg-email', 'required') !== null, 'email is marked required');
+for (const lang of ['en', 'es']) {
+  await one.page.goto(`${BASE}/${lang === 'es' ? 'es/' : ''}index.html?cts_lang=${lang}`, { waitUntil: 'load' });
+  await one.page.selectOption('#reg-country', { index: 1 });
+  await one.page.fill('#reg-name', 'Ana Ruiz');
+  for (const email of ['', '   ', 'not-an-address', '—', 'a@b.c']) {
+    await one.page.fill('#reg-email', email);
+    const dialog = one.page.waitForEvent('dialog');
+    const clicked = one.page.click('#reg-save');
+    const alert = await dialog;
+    ok(lang === 'es' ? /correo/.test(alert.message()) : /email/.test(alert.message()), `invalid email gets a ${lang} explanation`);
+    await alert.accept(); await clicked;
+    ok(await one.page.evaluate(() => !localStorage.getItem('cts_student') && !window.CTS_SYNC.code()),
+      `invalid email (${JSON.stringify(email)}) creates no local registration or code`);
+  }
+}
+await one.page.goto(`${BASE}/index.html?cts_lang=en`, { waitUntil: 'load' });
+await one.page.selectOption('#reg-country', { index: 1 });
+await one.page.fill('#reg-name', 'Ana Ruiz');
+await one.page.fill('#reg-email', `ana.code-ui-${Date.now()}@example.org`);
 await one.page.click('#reg-save');
 await one.page.waitForFunction(() => {
   const el = document.getElementById('reg-code');
@@ -134,6 +153,17 @@ const bad = await two.page.evaluate(() => ({
 ok(/No record|No se encontr/.test(bad.note), `a wrong code is reported`, `note was "${bad.note}"`);
 ok(/warn/.test(bad.cls), 'and is styled as a warning');
 }
+
+/* ---- existing students need no email to restore and continue ------------- */
+const legacy = await device();
+const restored = await legacy.page.evaluate(() => window.CTS_SYNC.restore('CTS-TEST-0000-0001'));
+ok(restored.ok, 'an existing student without email can restore their code');
+await legacy.page.reload({ waitUntil: 'load' });
+ok(await legacy.page.evaluate(() => {
+  const student = JSON.parse(localStorage.getItem('cts_student') || '{}');
+  return student.name === 'Legacy No Email' && !student.email &&
+    document.getElementById('cts-reg-form').style.display === 'none';
+}), 'the returning student without email stays registered and is not sent through signup');
 
 await browser.close();
 console.log(`${checks} assertions on the student-code interface`);

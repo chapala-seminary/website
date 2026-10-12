@@ -24,6 +24,7 @@ if (!fs.existsSync(MAP)) { console.error(`no sitemap at ${MAP} — build first`)
 
 // kept in step with src/pages/sitemap.xml.ts
 const EXCLUDE = new Set([
+  'cts-confirm-email.html', // private email-confirmation utility
   'cts-backup.html', 'CTS_ARCHIVE_INDEX.html', 'START_HERE.html',
   'Apologetics_Self_Contained_Unlocked_Preview.html', 'Romans_Digest_01_Haldane_EN.html',
 ]);

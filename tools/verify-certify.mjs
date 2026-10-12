@@ -43,7 +43,7 @@ async function device() {
    loaded first because that is where the engine writes the old keys the
    certificate page reads (verify-certificate-unlock.mjs says why). */
 const course = catalog.courses['1peter'];
-const seed = { name: 'Certify Test', track: 'cert', email: '' };
+const seed = { name: 'Certify Test', track: 'cert', email: 'certify-signup@example.org' };
 async function finishedStudent(d, extra = {}) {
   await d.page.goto(`${BASE}/CTS1PeterUnit1.html`, { waitUntil: 'load' });
   await d.page.evaluate(([s, units, extra]) => {

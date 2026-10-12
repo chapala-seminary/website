@@ -26,6 +26,7 @@ const SITE = 'https://chapalaseminary.org';
 
 /** Pages that exist but are not for search engines, and why. */
 const EXCLUDE = new Set([
+  'cts-confirm-email.html', // private email-confirmation utility
   'cts-backup.html',            // a student's own save/restore utility
   'CTS_ARCHIVE_INDEX.html',     // internal index of every file in the site
   'START_HERE.html',            // internal note, not student-facing

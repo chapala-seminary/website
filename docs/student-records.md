@@ -63,6 +63,7 @@ losing a passed unit is not.
 | `DELETE` | `/api/student/<code>` | deletes the student and everything attached |
 | `POST` | `/api/email/start` | emails a six-digit code to the address given (one a minute, five a day) |
 | `POST` | `/api/email/confirm` | stores the address as verified once the code matches (five guesses per code) |
+| `POST` | `/api/email/link` | confirms the same challenge with its one-use link token; no student code or sign-in; never confirms on GET |
 | `POST` | `/api/certificate` | records an award, returns a verification code — **403 `{needs:'email'}` until the student's email is verified** |
 | `GET` | `/api/verify/<code>` | JSON |
 | `GET` | `/verify/<code>` | **the public verification page** |
@@ -202,7 +203,14 @@ never handed to whoever typed it; the front page instead offers **Email me
 my code**, which sends it to that address, and a box to type it into. "Not
 you? Register separately" covers two people with one name sharing an
 address (`separate: true`). Same email, different name registers as always.
-A blank email, or the front page's "—" for none, is never matched.
+Since 12 Oct 2026, every new registration requires a nonblank email address
+with a valid basic format (including `separate: true`). The bilingual form
+rejects it before saving locally; `/api/register` rejects it with 400 before
+creating a record. Signup does not require email verification. Existing
+student codes, account lookup and syncing remain available without email;
+no database constraint or migration is applied to existing students.
+A browser-only legacy student without an email can still study locally, but
+must provide an email before a new server account can be created.
 
 `cts-sync.js` keeps the pause (`cts_reg_existing`, holding the name and
 email it was for) and sends nothing while it holds -- no retry each poll --
@@ -346,3 +354,31 @@ npx wrangler d1 migrations apply chapala-students --remote
 The binding must be named `DB`; the Worker looks for `env.DB` and answers 503
 to everything without it. The Functions deploy with the site, and
 `cts-sync.js` notices.
+
+## Email confirmation by link or code (12 Oct 2026)
+
+`cts-confirm-email.html` is the general English/Spanish confirmation page,
+linked from registration, Save / Restore, and the certificate panel. It is
+optional during enrollment and study. A student uses their saved student code
+or enters it manually, then requests an email. Every confirmation email now
+includes both the existing six-digit code and an expiring link. The certificate
+panel's existing code flow still works; after confirming in another tab/device,
+reload the certificate page to register and receive the certificate.
+
+Both methods confirm the same address and challenge, expire after 15 minutes,
+and invalidate each other on use or resend. Five wrong code guesses expire the
+challenge. Existing resend limits remain one per minute and five per day.
+Link failures use a separate address-based throttle. The link uses a random
+256-bit token; only its hash is stored. It is carried in a URL fragment, removed
+from the visible URL immediately, and submitted only after pressing Confirm
+email. Merely opening a link does not confirm, sign in, reveal a student code,
+or replace another account's local progress. Confirmation requests are consumed
+atomically to protect concurrent code/link submissions and resends.
+
+Deployment requires migration `0012_email_links.sql` on the target database
+before publishing the updated Worker. It adds a nullable hash column and index
+to pending challenges; it does not alter existing student accounts or mark
+unverified addresses as verified. Existing pending six-digit codes remain usable.
+No reminder campaign, mandatory enrollment check or production change is part
+of this local implementation. `test/email-options.test.mjs` covers both methods,
+replay, expiry, resend, limits, concurrent confirmation and bilingual browsers.
