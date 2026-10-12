@@ -34,7 +34,7 @@ function update(code, sql) {
 const one = await student('link');
 const link = await challenge(one);
 const message = verificationEmail(link.devCode, link.devLink);
-ok(message.text.includes(link.devCode) && message.text.includes(link.devLink) && /Confirmar correo/.test(message.text), 'one bilingual message includes both methods');
+ok(message.text.includes(link.devCode) && message.text.includes(link.devLink) && /Confirm email/.test(message.text) && !/Confirmar correo/.test(message.text), 'one English message includes both methods');
 await fetch(link.devLink);
 ok(!(await state(one.code)).email_verified_at, 'opening the email URL alone does not confirm');
 ok((await post('/api/email/link', { token: link.token })).status === 200, 'the link works without a student code or login');

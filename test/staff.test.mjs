@@ -120,8 +120,8 @@ const mine = (res) => res.results.filter((x) => x.student.includes(tag) || x.stu
     'in the student\'s language only');
   ok(/Hechos: Curso Intensivo, Unidad 2/.test(got[QUIET]?.message?.text || '') && /CTSActsUnit3\.html/.test(got[QUIET]?.message?.text || ''),
     'naming where they stopped, with a link to the next unit', (got[QUIET]?.message?.text || '').slice(0, 400));
-  ok(got[FRESH]?.kind === 'not_started' && got[FRESH]?.lang === 'both' && /Dear Fresh/.test(got[FRESH]?.message?.text || '') && /Estimado\/a Fresh/.test(got[FRESH]?.message?.text || ''),
-    'registered and never started: a getting-started note, in both languages when the language is not known');
+  ok(got[FRESH]?.kind === 'not_started' && got[FRESH]?.lang === 'en' && /Dear Fresh/.test(got[FRESH]?.message?.text || '') && !/Estimado\/a Fresh/.test(got[FRESH]?.message?.text || ''),
+    'registered and never started: a getting-started note, in English only when the language is not known');
   ok(!got[NOMAIL], 'no email: no note');
   ok(!got[DONE], 'program finished: no note');
   ok(!got[SHOUT] || got[SHOUT].kind === 'not_started', 'the formula-named student is just a student');

@@ -1274,8 +1274,9 @@ The French `/fr/index.html` now translates the complete landing page: introducti
 faculty, program requirements, all 45 course cards, nine textbooks, two reading
 lists, FAQ, contact/footer, country and form options, and registration/recovery
 messages. Page titles, descriptions, social metadata and FAQ structured data are
-French too. The catalog and language FAQ explicitly describe French courses as
-in preparation; course content remains subject to its existing publication review.
+French too. The catalog and language FAQ explain that some French courses have
+provisional translations for review, with English fallback where no translation
+is available. Course content remains subject to its existing publication review.
 The French Scripture quotation is attributed to Louis Segond 1910.
 
 French copy lives in `src/data/french-landing.json`, keyed by its exact English

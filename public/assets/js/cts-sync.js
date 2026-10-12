@@ -177,7 +177,7 @@
       doneCodes: Array.isArray(done) ? done : [],
       completionTracks: tracks,
       // the language the student reads in, for notes the seminary sends them
-      lang: (function (l) { return l === 'en' || l === 'es' ? l : null; })(get('cts_lang')),
+      lang: (function (l) { return l === 'en' || l === 'es' || l === 'fr' ? l : null; })(get('cts_lang')),
       progress: progress,
       textbooks: textbooks,
     };
@@ -438,7 +438,7 @@
     if (!e) return Promise.resolve({ ok: false, error: 'no email given' });
     return fetch(API + '/code/email', {
       method: 'POST', headers: { 'content-type': 'application/json' }, credentials: 'omit',
-      body: JSON.stringify({ email: e }),
+      body: JSON.stringify({ email: e, lang: get('cts_lang') }),
     }).then(function (r) {
       if (r.ok) return { ok: true };
       return { ok: false, status: r.status, error: r.status === 429 ? 'too many requests' : 'could not send' };

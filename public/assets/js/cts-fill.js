@@ -78,6 +78,8 @@
     return normalise(fold(s)).trim().replace(/^(?:a|an|the|el|la|los|las|lo|un|una|unos|unas|le|les|l|une|des) (?=\S)/, "");
   }
 
+  function fillCodes() { return window.CTSLanguage?.lang === "fr" ? ["fr", "en"] : ["en", "es"]; }
+
   function need(n) { return Math.ceil(n * PASS_RATIO); }
   function esc(v) {
     return String(v == null ? "" : v).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
@@ -129,7 +131,7 @@
       var lock = locked(), passed = o.passed(), counts = o.counts();
       if (review && !lock) review = null;          // the lock is over: start again
       var mc = qs.every(function (q) { return !!q.options; });
-      var out = '<div class="cts-fill"><h3>' + (mc ? bi({ en: "Multiple Choice", es: "Opción múltiple" }) : bi({ en: "Fill in the Blank", es: "Complete el espacio en blanco" })) + "</h3>";
+      var out = '<div class="cts-fill"><h3>' + (mc ? bi({ en: "Multiple Choice", es: "Opción múltiple", fr: "Choix multiple" }) : bi({ en: "Fill in the Blank", es: "Complete el espacio en blanco", fr: "Complétez le blanc" })) + "</h3>";
       out += '<p class="cts-fill-note">' + (mc
         ? bi({ en: "Choose the answer that completes each statement: each choice is marked at once, and a wrong choice shows the right answer. You need " + need(n) + " of " + n + " to pass.",
                es: "Elija la respuesta que completa cada enunciado: cada elección se califica en seguida y, si es incorrecta, se muestra la respuesta correcta. Necesita " + need(n) + " de " + n + " para aprobar." })
@@ -141,10 +143,10 @@
       qs.forEach(function (q, i) {
         var given = review ? review[i] : st.fillAnswers[i];
         var done = !!review || st.fillChecked[i] || passed;
-        out += '<div class="cts-fill-q" data-cts-fill="' + i + '"><p>' + bi({ en: (i + 1) + ". " + esc(q.prompt.en), es: (i + 1) + ". " + esc(q.prompt.es) }) + "</p>";
+        out += '<div class="cts-fill-q" data-cts-fill="' + i + '"><p>' + bi({ en: (i + 1) + ". " + esc(q.prompt.en), es: (i + 1) + ". " + esc(q.prompt.es), fr: (i + 1) + ". " + esc(q.prompt.fr || q.prompt.en) }) + "</p>";
         if (q.options) {
           q.options.en.forEach(function (opt, k) {
-            var chosen = done && given === opt, right = fillRight(q, opt);
+            var chosen = done && given === opt, right = fillRight(q, opt, fillCodes());
             var cls = "cts-mc" + (chosen ? (right ? " picked-ok" : " picked-bad") : (done && right ? " right" : ""));
             out += '<button type="button" class="' + cls + '" data-cts-mc="' + i + '" data-cts-opt="' + k + '"' + ((done || lock) ? " disabled" : "") + ">" +
                    String.fromCharCode(65 + k) + ". " + bi({ en: esc(opt), es: esc(q.options.es[k]) }) + "</button>";
@@ -153,13 +155,13 @@
         out += '<input type="text" data-cts-fill="' + i + '" autocomplete="off" autocapitalize="off" spellcheck="false"' +
                ' aria-label="' + (isEs() ? "Respuesta " : "Answer ") + (i + 1) + '"' +
                ((done || lock) ? " disabled" : "") + ' value="' + esc(given) + '" />';
-        if (!done && !lock && !q.options) out += '<button type="button" data-cts-fill-check="' + i + '">' + bi({ en: "Check", es: "Comprobar" }) + "</button>";
+        if (!done && !lock && !q.options) out += '<button type="button" data-cts-fill-check="' + i + '">' + bi({ en: "Check", es: "Comprobar", fr: "Vérifier" }) + "</button>";
         if (done) {
           var some = String(given || "").trim();
-          out += fillRight(q, given)
-            ? '<div class="cts-fill-ok">' + bi({ en: "&#10003; Correct!", es: "&#10003; ¡Correcto!" }) + "</div>"
+          out += fillRight(q, given, fillCodes())
+            ? '<div class="cts-fill-ok">' + bi({ en: "&#10003; Correct!", es: "&#10003; ¡Correcto!", fr: "&#10003; Correct !" }) + "</div>"
             : '<div class="cts-fill-bad">' + bi({ en: (some ? "&#10007; Incorrect. " : "") + "Answer: " + esc(q.answer.en),
-                                                 es: (some ? "&#10007; Incorrecto. " : "") + "Respuesta: " + esc(q.answer.es) }) + "</div>";
+                                                 es: (some ? "&#10007; Incorrecto. " : "") + "Respuesta: " + esc(q.answer.es), fr: (some ? "&#10007; Incorrect. " : "") + "Réponse : " + esc(q.answer.fr || q.answer.en) }) + "</div>";
         }
         out += "</div>";
       });
@@ -215,7 +217,7 @@
 
     function score() {
       var c = 0;
-      qs.forEach(function (q, i) { if (fillRight(q, st.fillAnswers[i])) c++; });
+      qs.forEach(function (q, i) { if (fillRight(q, st.fillAnswers[i], fillCodes())) c++; });
       return c;
     }
 

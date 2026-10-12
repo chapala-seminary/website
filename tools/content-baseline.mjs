@@ -64,7 +64,7 @@ function unitFingerprint(U) {
     fill: (U.fill || []).map(q => ({
       h: digest(q.prompt.en, q.answer.en),
       hEs: digest(q.prompt.es, q.answer.es),
-      acc: crypto.createHash('sha256').update(JSON.stringify(q.accept || {})).digest('hex').slice(0, 16),
+      acc: crypto.createHash('sha256').update(JSON.stringify(Object.fromEntries(Object.entries(q.accept || {}).filter(([lang]) => lang === 'en' || lang === 'es')))).digest('hex').slice(0, 16),
     })),
   };
 }

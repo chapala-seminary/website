@@ -274,7 +274,7 @@ const ws0 = await jpost('/api/certificate', { code: CODE, level: 'course', cours
 ok(ws0.status === 409, `a single-page course certificate with no completion recorded is refused (${ws0.status}: ${ws0.body?.error})`);
 // Single-page Master's completions must wait for their textbook test, too.
 for (const [course, slug] of [['COUNSELING', 'counseling'], ['STORYTEL', 'narrative']]) {
-  const r = await jpost('/api/register', { name: `Synthetic ${course} Hold`, email: `synthetic-${course.toLowerCase()}-hold@example.invalid`, track: 'mdiv' });
+  const r = await jpost('/api/register', { name: `Synthetic ${course} Hold`, email: `synthetic-${course.toLowerCase()}-hold@example.test`, track: 'mdiv' });
   const payload = { code: r.body.code, doneCodes: [course], completionTracks: { [course]: 'mdiv' } };
   const held = await jpost('/api/sync', payload);
   ok(!held.body.completions.some(c => c.code === course), `${course}: no official Master's completion before textbook pass`);

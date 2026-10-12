@@ -36,7 +36,7 @@ const done = (track) => ({ doneCodes: [CODE], completionTracks: track === 'cert'
 const has = (st, track) => (st.completions || []).some((c) => c.code === CODE && (!track || c.track === track));
 let n = 0;
 const student = async (track, extra = {}) => {
-  const r = await jpost('/api/register', { name: `Pentecostal Tester ${++n} ${track}`, email: `pentecostal-tester-${n}@example.invalid`, track, ...extra });
+  const r = await jpost('/api/register', { name: `Pentecostal Tester ${++n} ${track}`, email: `required-test-${n}-${track}@example.test`, track, ...extra });
   if (r.status !== 201) throw new Error(`register returned ${r.status}: ${JSON.stringify(r.body)}`);
   return r.body.code;
 };
