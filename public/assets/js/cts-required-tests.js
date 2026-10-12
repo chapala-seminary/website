@@ -33,6 +33,20 @@ window.CTS_REQUIRED_TESTS = {
    "requiredFrom": null
   }
  ],
+ "CTSBIBLECHARACTERS2": [
+  {
+   "slug": "biblecharacterstwo",
+   "page": "CTSTextbookBibleCharactersTwo",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "biblecharacterstworeadings",
+   "page": "CTSBibleCharacters2Readings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
  "CTSBIBLE": [
   {
    "slug": "biblehandbook",
@@ -320,6 +334,20 @@ window.CTS_REQUIRED_TESTS = {
    "requiredFrom": null
   }
  ],
+ "CTSCG": [
+  {
+   "slug": "missionarychurches",
+   "page": "CTSTextbookMissionaryChurches",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "cgreadings",
+   "page": "CTSCGReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
  "CTSMISSIONS": [
   {
    "slug": "missionarymethods",
@@ -592,22 +620,6 @@ window.CTS_REQUIRED_TESTS = {
   {
    "slug": "worshipreadings",
    "page": "CTSWorshipReadings",
-   "kind": "reading",
-   "requiredFrom": null
-  }
- ],
- "CTSBIBLECHARACTERS2": [
-  {
-   "slug": "biblecharacterstworeadings",
-   "page": "CTSBibleCharacters2Readings",
-   "kind": "reading",
-   "requiredFrom": null
-  }
- ],
- "CTSCG": [
-  {
-   "slug": "cgreadings",
-   "page": "CTSCGReadings",
    "kind": "reading",
    "requiredFrom": null
   }
