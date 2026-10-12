@@ -7,6 +7,7 @@ import { parse } from 'node-html-parser';
 import { shell } from '../src/lib/shell.ts';
 import { LANGUAGES, NAMES, localeHref, localizeMarkup, renderLanguageLesson } from '../src/lib/language-content.ts';
 
+import { frenchWiseSpeak } from './french-wisespeak.mjs';
 import { frenchInterface } from '../src/lib/french-interface.ts';
 
 const SITE = 'https://chapalaseminary.org';
@@ -44,6 +45,7 @@ export function buildLanguagePages(dir) {
     const sourceLang = lesson?.sourceLang || (LANGUAGES.includes(declaredSource) ? declaredSource : 'en');
     for (const lang of LANGUAGES) {
       let root = parse(canonical, { comment: true, parseNoneClosedTags: true });
+      if (lang === 'fr' && file === 'CTS_WiseSpeak_Preaching.html') frenchWiseSpeak(root);
       const html = root.querySelector('html'), body = root.querySelector('body'), head = root.querySelector('head');
       if (!html || !body || !head) continue;
       // The legacy controls stay as hidden hooks for old inline scripts. All
@@ -89,6 +91,11 @@ export function buildLanguagePages(dir) {
         brandRow.classList.add('cts-language-header');
         brandRow.insertAdjacentHTML('beforeend', controls);
       } else if (nav) nav.insertAdjacentHTML('beforeend', controls); else b.insertAdjacentHTML('afterbegin', controls);
+      const draftFrench = lang === 'fr' && (file === 'CTS_WiseSpeak_Preaching.html' || !!lesson?.blocks.some(block => block.tr?.fr?.status === 'machine'));
+      if (draftFrench) {
+        h.insertAdjacentHTML('beforeend', '<meta name="robots" content="noindex,follow">');
+        b.insertAdjacentHTML('afterbegin', '<aside class="cts-translation-pending" lang="fr">Traduction provisoire publiée pour relecture. Des corrections peuvent encore être apportées ; vous pouvez afficher le texte anglais de référence.</aside>');
+      }
       if (notice) { const main = root.querySelector('main'); if (main) main.insertAdjacentHTML('afterbegin', notice); else b.insertAdjacentHTML('afterbegin', notice); }
       // Language script must run before any legacy page initialization.
       for (const script of root.querySelectorAll('script[src]')) if (/\/cts-lang\.js(?:\?|$)|^cts-lang\.js(?:\?|$)/.test(script.getAttribute('src'))) script.remove();

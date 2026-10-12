@@ -113,6 +113,7 @@ node tools/verify-worker-routing.mjs "http://127.0.0.1:$PORT"
 node tools/verify-worker-config.mjs
 # outgoing email: Cloudflare first, Resend as the fallback (worker/email.js)
 node tools/verify-email.mjs
+node test/email-language.test.mjs
 node tools/gen-worker-catalog.mjs --check
 node tools/verify-legacy-table.mjs
 
@@ -193,6 +194,7 @@ node tools/verify-partials.mjs
 
 API_BASE="http://127.0.0.1:$PORT" node test/api.test.mjs
 API_BASE="http://127.0.0.1:$PORT" EMAIL_TEST_STATE="$STATE" node test/email-options.test.mjs
+API_BASE="http://127.0.0.1:$PORT" node test/student-language.test.mjs
 
 # The same rule through the Worker: both tests on their own, the four student-
 # record cases (a completion from before activation is written straight into
@@ -230,6 +232,7 @@ curl -sf "http://127.0.0.1:$PORT/__scheduled?cron=0+15+*+*+*" >/dev/null && slee
 # a suite ends up proving nothing.
 if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{};p.chromium.launch(o).then(b=>b.close()).catch(()=>process.exit(1))" 2>/dev/null; then
   node test/engine-languages.mjs
+  node test/french-drafts.test.mjs
   node tools/verify-french-interface.mjs "http://127.0.0.1:$PORT"
   SYNC_BASE="http://127.0.0.1:$PORT" node test/sync.test.mjs
   if [ -n "$HAVE_REFERENCE" ]; then
@@ -260,6 +263,7 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   # The same fill-in rules on the four courses the engine does not run:
   # Counseling, Narrative and WiseSpeak Preaching, and Ethics.
   node tools/verify-fill-single.mjs "http://127.0.0.1:$PORT"
+  node tools/verify-french-wisespeak.mjs "http://127.0.0.1:$PORT"
   node tools/verify-single-completion.mjs "http://127.0.0.1:$PORT"
   # The textbook tests (Oct 2026): twenty drawn from forty, eighteen to pass,
   # locked after a failure, a fresh draw after the wait -- as a student

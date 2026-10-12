@@ -30,7 +30,7 @@ const MAX = { name: 120, email: 160, country: 80, track: 24, goal: 400, heard: 4
 const TRACKS = new Set(['cert', 'certificate', 'associate', 'thm', 'mdiv']);
 // The language a student reads in, from the language switch (cts_lang). Anything
 // else is dropped rather than refused: it is a preference, not a record.
-const lang = (v) => (v === 'en' || v === 'es' ? v : null);
+const lang = (v) => (['en', 'es', 'fr'].includes(v) ? v : null);
 const LEVELS = new Set(['course', 'certificate', 'associate', 'thm', 'mdiv']);
 
 /* Crockford base32 without I, L, O and U: no character can be confused with
@@ -126,7 +126,7 @@ function testContext(env, completions) {
 
 async function loadState(env, id) {
   const student = await env.DB.prepare(
-    'SELECT id, name, email, email_verified_at, country, track, goal, heard, created_at, updated_at FROM students WHERE id = ?')
+    'SELECT id, name, email, email_verified_at, country, track, goal, heard, lang, created_at, updated_at FROM students WHERE id = ?')
     .bind(id).first();
   if (!student) return null;
   const [progress, completions, certs, textbooks] = await Promise.all([
@@ -275,7 +275,7 @@ async function sync(request, env) {
   if (!id) throw new HttpError(400, 'a student code is required');
 
   const exists = await env.DB.prepare(
-    'SELECT id, name, email, email_verified_at, country, track, goal FROM students WHERE id = ?').bind(id).first();
+    'SELECT id, name, email, email_verified_at, country, track, goal, lang FROM students WHERE id = ?').bind(id).first();
   if (!exists) return fail(404, 'no record for that student code');
 
   const statements = [];
@@ -385,7 +385,7 @@ async function issueCertificate(request, env) {
   const id = await resolveCode(env, b.code);
   if (!id) throw new HttpError(400, 'a student code is required');
   const student = await env.DB.prepare(
-    'SELECT id, name, email, email_verified_at, country, track, goal FROM students WHERE id = ?').bind(id).first();
+    'SELECT id, name, email, email_verified_at, country, track, goal, lang FROM students WHERE id = ?').bind(id).first();
   if (!student) return fail(404, 'no record for that student code');
   // Students start with only a code; a certificate needs a confirmed email,
   // so the seminary can reach the person it certified and send them a copy.
@@ -459,7 +459,7 @@ async function issueCertificate(request, env) {
       let emailed = false;
       try {
         await sendEmail(env, { to: student.email, ...certificateEmail({
-          name: student.name, award: title, code: vc, page, origin: new URL(request.url).origin }) });
+          name: student.name, award: title, code: vc, page, origin: new URL(request.url).origin, lang: lang(b.lang) || student.lang }) });
         emailed = true;
       } catch (e) { console.error('certificate email failed', e && e.message); }
       return json({ verifyCode: vc, reissued: false, emailed,
@@ -526,10 +526,10 @@ async function emailMyCode(request, env) {
   ]);
 
   const students = (await env.DB.prepare(
-    `SELECT id, name FROM students WHERE merged_into IS NULL AND lower(trim(email)) = ? ORDER BY created_at`)
+    `SELECT id, name, lang FROM students WHERE merged_into IS NULL AND lower(trim(email)) = ? ORDER BY created_at`)
     .bind(email).all()).results ?? [];
   if (students.length)
-    await sendEmail(env, { to: email, ...codeEmail({ students, origin: new URL(request.url).origin }) });
+    await sendEmail(env, { to: email, ...codeEmail({ students, origin: new URL(request.url).origin, lang: lang(b.lang) || students[0]?.lang }) });
   return json({ ok: true });
 }
 
@@ -539,10 +539,11 @@ async function emailStart(request, env) {
   if (!id) return fail(404, 'no record for that student code');
   const email = (str(b.email, MAX.email, { required: true, field: 'email' }) || '').toLowerCase();
   if (!EMAIL_RE.test(email)) throw new HttpError(400, 'that does not look like an email address');
-  const student = await env.DB.prepare('SELECT id FROM students WHERE id = ?').bind(id).first();
+  const student = await env.DB.prepare('SELECT id, lang FROM students WHERE id = ?').bind(id).first();
   if (!student) return fail(404, 'no record for that student code');
   if (!emailConfigured(env)) throw new HttpError(503, 'email is not set up yet');
 
+  if (lang(b.lang)) await env.DB.prepare('UPDATE students SET lang = ?, updated_at = ? WHERE id = ?').bind(lang(b.lang), now(), id).run();
   const t = new Date(), today = t.toISOString().slice(0, 10);
   const prev = await env.DB.prepare('SELECT sent_at, sends_today, sends_day FROM email_challenges WHERE student_id = ?').bind(id).first();
   if (prev) {
@@ -556,7 +557,8 @@ async function emailStart(request, env) {
   const code = sixDigits();
   const token = [...crypto.getRandomValues(new Uint8Array(32))].map(b => b.toString(16).padStart(2, '0')).join('');
   const linkHash = await hashCode('email-link', token);
-  const link = new URL('/cts-confirm-email.html', request.url);
+  const preferredLanguage = lang(b.lang) || student.lang || 'en';
+  const link = new URL((preferredLanguage === 'en' ? '/' : '/' + preferredLanguage + '/') + 'cts-confirm-email.html', request.url);
   // A fragment is never sent to the server or included in referrer headers.
   link.hash = 'token=' + token;
   const expires = new Date(t.getTime() + CHALLENGE.ttlMin * 60000).toISOString();
@@ -569,7 +571,7 @@ async function emailStart(request, env) {
     .bind(id, email, await hashCode(id, code), linkHash, expires, t.toISOString(), sendsToday, today).run();
 
   try {
-    const r = await sendEmail(env, { to: email, ...verificationEmail(code, link.href) });
+    const r = await sendEmail(env, { to: email, ...verificationEmail(code, link.href, lang(b.lang) || student.lang) });
     // The test configuration sends nothing; it gets the code back instead so
     // the suite can finish a verification. Never true in a deployed Worker.
     return json({ sent: true, ...(r.logged ? { devCode: code, devLink: link.href } : {}) });
