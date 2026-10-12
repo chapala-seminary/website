@@ -44,6 +44,10 @@ try {
     check('Spanish source short answer', e.shortAnswerRight(sa, 'apostles church faith'), true);
     check('Spanish short answer', e.shortAnswerRight(sa, 'apóstoles iglesia fe'), true);
     check('Spanish fill accents folded', e.fillRight(q, 'el apostol'), true);
+    // Accents do not decide a short-answer keyword either (beta audit, 12 Oct 2026)
+    check('Spanish unaccented keywords match accented answer', e.shortAnswerRight({ keywords: { es: ['traduccion', 'comun', 'preparacion'] } }, 'Traducción común y preparación.'), true);
+    check('Spanish accented keywords match unaccented answer', e.shortAnswerRight({ keywords: { es: ['traducción', 'común', 'preparación'] } }, 'traduccion comun preparacion'), true);
+    check('Spanish ñ is kept in keywords', e.shortAnswerRight({ keywords: { es: ['año', 'niño', 'señor'] } }, 'ano nino senor'), false);
     const spanish = { answer: { en: 'year', es: 'año' } };
     check('Spanish ñ is kept', e.fillRight(spanish, 'ano'), false);
     check('Spanish ñ decomposed', e.fillRight(spanish, 'an\u0303o'), true);
