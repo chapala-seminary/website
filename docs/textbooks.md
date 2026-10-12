@@ -74,10 +74,13 @@ the package had a condensed adaptation), Revelation (Milligan, ten short
 excerpts -- the opening of ten chapters -- two questions drawn from each) and
 Psalms (Maclaren, five selections with the Psalm in his own rendering). Same
 standard: multiple choice, assigned readings on the book page. The
-Pentateuch textbook in the same delivery is **not** installed: its book
-assignment is still a candidate, and its Genesis excerpt (Dods) argues that
-Genesis 1 and 2 give two creation accounts "which no ingenuity can
-reconcile" -- Dr. Cook to decide. Its five-reading test is installed.
+Pentateuch textbook (`CTSTextbookPentateuch`, five excerpts from the
+Expositor's Bible on each book) is installed with two changes Dr. Cook asked
+for on 11 Oct, so as not to offend readers who take a very conservative
+view: Dods on Genesis is now his chapter on the covenant with Abram (Gen. 15,
+faith counted for righteousness) instead of the Creation chapter, which says
+Genesis 1 and 2 cannot be reconciled; and Harper on Deuteronomy is cut to his
+exposition of the Shema, leaving out his argument for a late author.
 Six more five-reading tests came with them: 1 Peter, John, Ruth–Esther,
 Revelation, Psalms, Pentateuch.
 

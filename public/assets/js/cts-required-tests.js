@@ -131,6 +131,20 @@ window.CTS_REQUIRED_TESTS = {
    "kind": "textbook"
   }
  ],
+ "CTSPENT": [
+  {
+   "slug": "pentateuch",
+   "page": "CTSTextbookPentateuch",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "pentreadings",
+   "page": "CTSPentReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
  "CTSPENTECOSTAL": [
   {
    "slug": "pentecostal",
@@ -257,14 +271,6 @@ window.CTS_REQUIRED_TESTS = {
   {
    "slug": "otsreadings",
    "page": "CTSOTSReadings",
-   "kind": "reading",
-   "requiredFrom": null
-  }
- ],
- "CTSPENT": [
-  {
-   "slug": "pentreadings",
-   "page": "CTSPentReadings",
    "kind": "reading",
    "requiredFrom": null
   }
