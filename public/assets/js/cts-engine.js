@@ -763,11 +763,13 @@
   }
   function keywordPass(ks, answer, minHits) {
     if (!ks.length) return true; // unchanged for questions with no keywords
-    var a = normalise(answer), hits = 0;
+    // Accents do not decide a keyword, as for fill-ins (fold() below): "traducción"
+    // matches "traduccion" and the reverse. The tilde of ñ is kept.
+    var a = normalise(fold(answer)), hits = 0;
     ks.forEach(function (k) {
       var forms = Array.isArray(k) ? k : [k];
       if (forms.some(function (form) {
-        var needle = normalise(form).trim();
+        var needle = normalise(fold(form)).trim();
         // Existing keywords include stems ("apôtr" matches "apôtres").
         return needle && a.indexOf(needle) !== -1;
       })) hits++;
