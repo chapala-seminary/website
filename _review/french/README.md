@@ -18,6 +18,10 @@ decisions Dr. Cook needs to make for the whole French edition.
 | `CTSPM` | Ministères pastoraux (Pastoral Ministries) | 1–12 |
 | `CTSCH` | Histoire de l'Église (Church History) | 1–10 |
 | `WiseSpeak` | WiseSpeak : l'art de la prédication (Preaching) | 0 (page frame), 1–10 |
+| `CTSBible` | Comment nous avons reçu la Bible (How We Got the Bible) | 1–10 |
+| `CTSPent` | Le Pentateuque (Pentateuch) | 1–12 |
+| `CTSJosh` | Cours intensif sur Josué (Joshua Intensive) | 1–10 |
+| `CTSPsalms` | Le livre des Psaumes (Psalms) | 1–12 |
 
 Each unit has three files:
 
@@ -64,3 +68,13 @@ fix). Do not edit the files directly.
   `machine`, add the source hash, and regenerate the CMS config.
 - WiseSpeak is still the single-page `public/CTS_WiseSpeak_Preaching.html`, so its block ids
   are sequence numbers within this packet, not lesson-data ids.
+
+## Batch 1 of the remaining courses (12 Oct 2026)
+
+How We Got the Bible, Pentateuch, Joshua and Psalms (44 units). Start with
+**BATCH1-FINDINGS.md**. Same file layout as above. Every Bible quotation was checked word
+for word against an offline public-domain Louis Segond 1910 text (`tools/lsg.py`; the
+text itself is not committed, see the script). Each unit passes `tools/validate.py`
+(same grading rules as `check_french.py`, plus checks that a French prompt cannot pass its
+own keywords), then had an independent second check. `tools/BRIEF.md` holds the
+translation rules and the edition-wide conventions Dr. Cook settled on 12 Oct.
