@@ -300,6 +300,20 @@ window.CTS_REQUIRED_TESTS = {
    "requiredFrom": null
   }
  ],
+ "CTSCG": [
+  {
+   "slug": "missionarychurches",
+   "page": "CTSTextbookMissionaryChurches",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "cgreadings",
+   "page": "CTSCGReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
  "CTSMISSIONS": [
   {
    "slug": "missionarymethods",
@@ -574,14 +588,6 @@ window.CTS_REQUIRED_TESTS = {
   {
    "slug": "biblecharacterstworeadings",
    "page": "CTSBibleCharacters2Readings",
-   "kind": "reading",
-   "requiredFrom": null
-  }
- ],
- "CTSCG": [
-  {
-   "slug": "cgreadings",
-   "page": "CTSCGReadings",
    "kind": "reading",
    "requiredFrom": null
   }
