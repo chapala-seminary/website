@@ -217,6 +217,20 @@ window.CTS_REQUIRED_TESTS = {
    "kind": "reading"
   }
  ],
+ "CTSRADICAL": [
+  {
+   "slug": "holiness",
+   "page": "CTSTextbookHoliness",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "radicalreadings",
+   "page": "CTSRadicalReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
  "CTSHS": [
   {
    "slug": "holyspirit",
@@ -582,14 +596,6 @@ window.CTS_REQUIRED_TESTS = {
   {
    "slug": "cgreadings",
    "page": "CTSCGReadings",
-   "kind": "reading",
-   "requiredFrom": null
-  }
- ],
- "CTSRADICAL": [
-  {
-   "slug": "radicalreadings",
-   "page": "CTSRadicalReadings",
    "kind": "reading",
    "requiredFrom": null
   }

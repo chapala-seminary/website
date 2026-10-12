@@ -139,7 +139,21 @@ unbelief, the detour of moralism, justification, reading the Scriptures,
 prayer. Its English quotes the NIV, as the book does; the Spanish uses the
 Reina-Valera 1909.
 
-All thirty-one, and the five-reading tests, are online with
+And Radical Christianity (CTSRadical, code CTSRADICAL; 12 Oct):
+*Holiness Through the Ages: An Historical Reader of Christian Writers on
+Holiness*, ed. Robert E. Coleman, Robert A. Danielson and Faith E. Parry
+(First Fruits Press, 2014; Dr. Cook's upload), used under its Creative
+Commons Attribution-NonCommercial 3.0 US license (`CTSTextbookHoliness`).
+Five excerpts, one writer each: Whitefield, "The Almost Christian";
+Edwards, a selection of his *Resolutions*; Ryle, "Holiness" (the editors'
+abridged text); Müller on stewardship; Torrey, *Why God Used D. L. Moody*
+(surrender, humility, freedom from the love of money). Chosen away from the
+course's five digests (Law, Murray, Bounds, Drummond) and from the book's
+writers on entire sanctification, revival technique and women's preaching.
+The English keeps each writer's quotations; the Spanish uses the
+Reina-Valera 1909.
+
+All thirty-two, and the five-reading tests, are online with
 `requiredFrom: null`: open to everyone, required of no one. Dr. Cook wants
 them required on the M.Div. and Th.M. tracks once published. To do that:
 
