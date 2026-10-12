@@ -46,6 +46,11 @@ path. Optional email recovery can be layered on later without changing this.
 
 ## Merging is monotonic
 
+Repeated snapshots skip database updates to unchanged unit passes, textbook
+passes and course completions. Earlier pass dates and higher earned levels
+still merge. Sync continues to refresh the student's activity timestamp;
+this reduces D1 row writes without making active students appear inactive.
+
 A unit passed on any device stays passed, and keeps the **earliest** completion
 time either side knows about. Nothing the API does can take progress away from a
 student, which is what makes a stale or offline device harmless. Identity

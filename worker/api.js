@@ -302,17 +302,22 @@ async function sync(request, env) {
         track, str(s.goal, MAX.goal, { field: 'goal' }), str(s.heard, MAX.heard, { field: 'heard' }), lang(b.lang), now(), id));
   }
 
+  // Browsers resend their full record. D1 counts an UPDATE as a write even
+  // when the value stays the same, so conflict handlers only update a pass
+  // whose date is earlier, or a completion whose earned level rises.
   for (const row of progressRows(id, b.progress))
     statements.push(env.DB.prepare(
       `INSERT INTO unit_progress (student_id, course, unit, completed_at) VALUES (?, ?, ?, ?)
-       ON CONFLICT(student_id, course, unit) DO UPDATE SET completed_at = MIN(completed_at, excluded.completed_at)`)
+       ON CONFLICT(student_id, course, unit) DO UPDATE SET completed_at = excluded.completed_at
+       WHERE excluded.completed_at < unit_progress.completed_at`)
       .bind(...row));
 
   const textbookRowsNow = textbookRows(id, b.textbooks);
   for (const row of textbookRowsNow)
     statements.push(env.DB.prepare(
       `INSERT INTO textbook_results (student_id, textbook, passed_at) VALUES (?, ?, ?)
-       ON CONFLICT(student_id, textbook) DO UPDATE SET passed_at = MIN(passed_at, excluded.passed_at)`)
+       ON CONFLICT(student_id, textbook) DO UPDATE SET passed_at = excluded.passed_at
+       WHERE excluded.passed_at < textbook_results.passed_at`)
       .bind(...row));
 
   // A completion's level only rises: a row with none takes the first any
@@ -352,7 +357,10 @@ async function sync(request, env) {
          WHEN course_completions.track IS NULL THEN excluded.track
          WHEN course_completions.track = 'cert' AND excluded.track IN ('assoc', 'thm', 'mdiv') THEN excluded.track
          WHEN course_completions.track = 'assoc' AND excluded.track IN ('thm', 'mdiv') THEN excluded.track
-         ELSE course_completions.track END`).bind(...row));
+         ELSE course_completions.track END
+       WHERE (course_completions.track IS NULL AND excluded.track IS NOT NULL)
+          OR (course_completions.track = 'cert' AND excluded.track IN ('assoc', 'thm', 'mdiv'))
+          OR (course_completions.track = 'assoc' AND excluded.track IN ('thm', 'mdiv'))`).bind(...row));
 
   if (statements.length) await env.DB.batch(statements);
 
