@@ -318,9 +318,10 @@ ok(d.status === 201, `foundation + 5 electives earns the Certificate of Ministry
 d = await jpost('/api/certificate', { code: CODE, level: 'associate', title: 'Associate of Divinity' });
 ok(d.status === 409 && /of 25 Associate-level courses/.test(d.body?.error || ''), `19 courses do not earn the Associate (${d.status}: ${d.body?.error})`);
 
-// Th.M.: 12 including the foundation, on a master's track (this student is mdiv)
+// Th.M.: 15 including the foundation, on a master's track (this student is
+// mdiv and has 19: the foundation plus the 12 electives synced above)
 d = await jpost('/api/certificate', { code: CODE, level: 'thm', title: 'Master of Theology' });
-ok(d.status === 201, `an mdiv student with foundation + 5 earns the Th.M. (${d.status}: ${d.body?.error})`);
+ok(d.status === 201, `an mdiv student with foundation + 12 earns the Th.M. (${d.status}: ${d.body?.error})`);
 
 // M.Div.: 30 including the 20-course core. Three core courses have a Master's
 // textbook and one (Genesis) required readings, so on this master's track

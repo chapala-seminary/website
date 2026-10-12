@@ -153,7 +153,7 @@ const KEN_CERT = ['CTSBIBLE', 'CTSLOC', 'CTS1PETER', 'CTSGENESIS', 'CTSBIBLECHAR
 await run('Ken', { name: 'Kenneth Migrante', track: 'mdiv', recorded: [...KEN_MDIV, ...KEN_CERT], unrecorded: ['CTSACTS'], mdiv: KEN_MDIV }, {
   unlocked: true, foundation: 7, progress: '12/30',
   levels: { ...Object.fromEntries(KEN_MDIV.map((c) => [c, 'mdiv'])), ...Object.fromEntries(KEN_CERT.map((c) => [c, 'cert'])), CTSACTS: 'mdiv' },
-  degrees: { certificate: true, associate: false, thm: true, mdiv: false },   // 12 master's-level: not yet 25 for the Associate
+  degrees: { certificate: true, associate: false, thm: false, mdiv: false },   // 12 master's-level: not yet 15 for the Th.M. or 25 for the Associate
 });
 
 await browser.close();
