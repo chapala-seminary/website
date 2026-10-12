@@ -43,6 +43,9 @@ try {
     document.body.className = 'lang-es'; document.body.dataset.lang = 'es';
     check('Spanish source short answer', e.shortAnswerRight(sa, 'apostles church faith'), true);
     check('Spanish short answer', e.shortAnswerRight(sa, 'apóstoles iglesia fe'), true);
+    check('Spanish accents do not lose concepts', e.shortAnswerRight({ keywords: { es: ['koine', 'idioma comun', 'traduccion'] } }, 'El koiné era el idioma común; la traducción servía al pueblo.'), true);
+    check('Spanish short-answer ñ stays distinct', e.shortAnswerRight({ keywords: { es: ['año'] } }, 'ano'), false);
+    check('Spanish decomposed short-answer ñ matches', e.shortAnswerRight({ keywords: { es: ['año'] } }, 'an\u0303o'), true);
     check('Spanish fill accents folded', e.fillRight(q, 'el apostol'), true);
     const spanish = { answer: { en: 'year', es: 'año' } };
     check('Spanish ñ is kept', e.fillRight(spanish, 'ano'), false);
