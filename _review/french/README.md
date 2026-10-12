@@ -22,6 +22,10 @@ decisions Dr. Cook needs to make for the whole French edition.
 | `CTSPent` | Le Pentateuque (Pentateuch) | 1–12 |
 | `CTSJosh` | Cours intensif sur Josué (Joshua Intensive) | 1–10 |
 | `CTSPsalms` | Le livre des Psaumes (Psalms) | 1–12 |
+| `CTSJohn` | L'Évangile de Jean (Gospel of John) | 1–12 |
+| `CTSMatt` | Cours intensif sur Matthieu (Matthew Intensive) | 1–13 |
+| `CTSActs` | Cours intensif sur les Actes (Acts Intensive) | 1–11 |
+| `CTSRomans` | L'Épître aux Romains (Romans) | 1–10 |
 
 Each unit has three files:
 
@@ -78,3 +82,9 @@ text itself is not committed, see the script). Each unit passes `tools/validate.
 (same grading rules as `check_french.py`, plus checks that a French prompt cannot pass its
 own keywords), then had an independent second check. `tools/BRIEF.md` holds the
 translation rules and the edition-wide conventions Dr. Cook settled on 12 Oct.
+
+## Batch 2 (12 Oct 2026)
+
+John, Matthew, Acts and Romans (46 units), made and checked the same way as batch 1.
+Start with **BATCH2-FINDINGS.md**. Batch 1 files were also refreshed with the edition-wide
+conventions Dr. Cook settled (track names, "couler le moucheron", "la Parole", etc.).
