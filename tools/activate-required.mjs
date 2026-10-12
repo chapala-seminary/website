@@ -22,7 +22,9 @@
  * src/content/textbooks/<slug>.json, re-runs tools/import-readings.mjs --write
  * (which reads the same file for the reading tests) and
  * tools/gen-worker-catalog.mjs. Then: build, test suite, deploy.
- * A test already in force is never changed here.
+ * A test already in force is never changed here; one scheduled for a moment
+ * not yet reached is moved to the new --at (so the start can be brought
+ * forward or put back before it arrives).
  */
 import fs from 'node:fs';
 import { execFileSync } from 'node:child_process';
@@ -51,17 +53,20 @@ if (!at || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2})?(\.\d+)?Z$/.test(at) || Numb
 }
 if (Date.parse(at) <= Date.now()) { console.error(`${at} is not in the future; pick a moment after the deploy`); process.exit(2); }
 
+/* A test scheduled for a moment not yet reached can be moved; once its moment
+   has passed it is in force and is never changed here. */
+const movable = (t) => t.state === 'pending' || (t.state !== 'always' && Date.parse(t.state) > Date.now());
 const except = new Set((val('--except') || '').split(',').filter(Boolean));
 const named = args.filter((a, i) => !a.startsWith('--') && !['--at', '--except'].includes(args[i - 1])).flatMap((a) => a.split(',')).filter(Boolean);
 let chosen;
-if (flag('--all-pending')) chosen = tests.filter((t) => t.state === 'pending' && !except.has(t.slug));
+if (flag('--all-pending')) chosen = tests.filter((t) => movable(t) && !except.has(t.slug));
 else {
   if (!named.length) { console.error('name the tests (slugs) or say --all-pending'); process.exit(2); }
   chosen = named.map((s) => tests.find((t) => t.slug === s) || (console.error(`no test called ${s}`), process.exit(2)));
 }
 for (const s of except) if (!tests.some((t) => t.slug === s)) { console.error(`--except: no test called ${s}`); process.exit(2); }
-const notPending = chosen.filter((t) => t.state !== 'pending');
-if (notPending.length) { console.error(`already in force, left alone: ${notPending.map((t) => t.slug).join(', ')}`); chosen = chosen.filter((t) => t.state === 'pending'); }
+const notPending = chosen.filter((t) => !movable(t));
+if (notPending.length) { console.error(`already in force, left alone: ${notPending.map((t) => t.slug).join(', ')}`); chosen = chosen.filter(movable); }
 if (!chosen.length) { console.error('nothing to activate'); process.exit(1); }
 
 console.log(`Required on the M.Div. and Th.M. tracks from ${at}:`);
