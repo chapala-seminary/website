@@ -17,6 +17,10 @@ PORT=${PORT:-8798}
 STATE=.wrangler-local
 CONFIG=test/wrangler.local.jsonc
 
+node test/single-completion.test.mjs
+node test/single-page-readings.test.mjs
+node tools/verify-staged-readings.mjs
+
 # A fresh database every run. The suite used to keep whatever the last run
 # left behind, which is fine until something in the schema counts -- the
 # moment failed lookups were being throttled, run two inherited run one's
@@ -104,6 +108,8 @@ node tools/verify-worker-routing.mjs "http://127.0.0.1:$PORT"
 # And that the config the suite just tested still matches the one that gets
 # deployed, on every field that changes how a request is answered.
 node tools/verify-worker-config.mjs
+# outgoing email: Cloudflare first, Resend as the fallback (worker/email.js)
+node tools/verify-email.mjs
 node tools/gen-worker-catalog.mjs --check
 node tools/verify-legacy-table.mjs
 
@@ -117,6 +123,16 @@ node tools/verify-sitemap.mjs dist
 # accepts is one the grader marks right, and no staff-only answer file is
 # published.
 node tools/verify-textbooks.mjs dist
+
+# A course with two required tests -- its textbook and its five readings
+# (9 Oct 2026, piloted on Pentecostalism) -- and the protection of master's
+# completions the record held before a reading test was activated: the rule
+# itself, case by case, without a server.
+node test/required-tests.test.mjs
+# The World Religions Spanish readers (Oct 2026): each page is what its
+# translation gives, and every Spanish answer of the revised bank is in its
+# reading's reader -- for every reading, once the revised bank is in force.
+node tools/wr-readers.mjs
 
 # The reading rooms (Dr. Cook's Add-ons, Oct 2026): every room carries the
 # public-domain shelf its data says and an honours attestation, written by
@@ -173,6 +189,11 @@ node tools/verify-editable.mjs
 node tools/verify-partials.mjs
 
 API_BASE="http://127.0.0.1:$PORT" node test/api.test.mjs
+
+# The same rule through the Worker: both tests on their own, the four student-
+# record cases (a completion from before activation is written straight into
+# this run's database), Certificate and Associate unchanged.
+API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/required-tests.api.mjs
 
 # The student tracker: the staff roster behind Cloudflare Access, and the notes
 # to students who have gone quiet (worker/staff.js, worker/outreach.js).
@@ -235,10 +256,24 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   # The same fill-in rules on the four courses the engine does not run:
   # Counseling, Narrative and WiseSpeak Preaching, and Ethics.
   node tools/verify-fill-single.mjs "http://127.0.0.1:$PORT"
+  node tools/verify-single-completion.mjs "http://127.0.0.1:$PORT"
   # The textbook tests (Oct 2026): twenty drawn from forty, eighteen to pass,
   # locked after a failure, a fresh draw after the wait -- as a student
   # would use the page.
   node tools/verify-textbook-test.mjs "http://127.0.0.1:$PORT"
+  node tools/verify-textbook-mc.mjs "http://127.0.0.1:$PORT"
+  # ...and the Master's five-reading test beside a textbook's: four from each
+  # reading, 90%, retakes, the certificate waiting for whichever is left.
+  node tools/verify-required-tests.mjs "http://127.0.0.1:$PORT"
+  # A required-reading test drawn by reading (World Religions, revised Oct
+  # 2026): four from each of the five readings, and an attempt begun on other
+  # questions set aside, the pass and any lock kept. Until the revised bank is
+  # in force the site has no page for it, so it is tested on a copy of the
+  # page with the site's scripts, from the bank the importer would write.
+  NEXT_READINGS=$(mktemp -d)
+  node tools/import-readings.mjs --next-out "$NEXT_READINGS"
+  node tools/verify-grouped-reading-test.mjs "http://127.0.0.1:$PORT" "$NEXT_READINGS/wrreadings.json"
+  rm -rf "$NEXT_READINGS"
   # The reading rooms in a browser: the shelf shows, the attestation records
   # under the code the certificate reads, in each family of room.
   node tools/verify-reading-rooms.mjs "http://127.0.0.1:$PORT"

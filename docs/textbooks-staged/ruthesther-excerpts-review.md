@@ -1,0 +1,47 @@
+# The Expositor’s Bible: Ruth (Watson) and Esther (Adeney) (assigned excerpts): answers that appear in another question's prompt
+
+For the faculty reviewers (made by tools/install-excerpt-textbook.mjs). Not refused: decide whether each is a real clue.
+
+- CTSRE-TEXTBOOK-01: its en answer "Elimelech" is in the prompt of CTSRE-TEXTBOOK-02
+- CTSRE-TEXTBOOK-01: its en answer "Elimelech" is in the prompt of CTSRE-TEXTBOOK-07
+- CTSRE-TEXTBOOK-01: its es answer "Elimelec" is in the prompt of CTSRE-TEXTBOOK-02
+- CTSRE-TEXTBOOK-01: its es answer "Elimelec" is in the prompt of CTSRE-TEXTBOOK-07
+- CTSRE-TEXTBOOK-02: its en answer "Naomi" is in the prompt of CTSRE-TEXTBOOK-01
+- CTSRE-TEXTBOOK-02: its en answer "Naomi" is in the prompt of CTSRE-TEXTBOOK-SECTION2-Q02
+- CTSRE-TEXTBOOK-02: its es answer "Noemí" is in the prompt of CTSRE-TEXTBOOK-01
+- CTSRE-TEXTBOOK-02: its es answer "Noemí" is in the prompt of CTSRE-TEXTBOOK-SECTION2-Q02
+- CTSRE-TEXTBOOK-03: its en answer "Mahlon" is in the prompt of CTSRE-TEXTBOOK-04
+- CTSRE-TEXTBOOK-03: its es answer "Mahlón" is in the prompt of CTSRE-TEXTBOOK-04
+- CTSRE-TEXTBOOK-05: its en answer "Bethlehem" is in the prompt of CTSRE-TEXTBOOK-SECTION3-Q03
+- CTSRE-TEXTBOOK-05: its es answer "Belén" is in the prompt of CTSRE-TEXTBOOK-SECTION3-Q03
+- CTSRE-TEXTBOOK-07: its en answer "Moab" is in the prompt of CTSRE-TEXTBOOK-SECTION2-Q01
+- CTSRE-TEXTBOOK-07: its en answer "Moab" is in the prompt of CTSRE-TEXTBOOK-SECTION2-Q05
+- CTSRE-TEXTBOOK-07: its es answer "Moab" is in the prompt of CTSRE-TEXTBOOK-SECTION2-Q01
+- CTSRE-TEXTBOOK-07: its es answer "Moab" is in the prompt of CTSRE-TEXTBOOK-SECTION2-Q05
+- CTSRE-TEXTBOOK-SECTION2-Q03: its en answer "Orpah" is in the prompt of CTSRE-TEXTBOOK-SECTION2-Q01
+- CTSRE-TEXTBOOK-SECTION2-Q03: its en answer "Orpah" is in the prompt of CTSRE-TEXTBOOK-SECTION2-Q02
+- CTSRE-TEXTBOOK-SECTION2-Q03: its en answer "Orpah" is in the prompt of CTSRE-TEXTBOOK-SECTION2-Q04
+- CTSRE-TEXTBOOK-SECTION2-Q03: its en answer "Orpah" is in the prompt of CTSRE-TEXTBOOK-SECTION2-Q06
+- CTSRE-TEXTBOOK-SECTION2-Q03: its en answer "Orpah" is in the prompt of CTSRE-TEXTBOOK-SECTION2-Q07
+- CTSRE-TEXTBOOK-SECTION2-Q03: its en answer "Orpah" is in the prompt of CTSRE-TEXTBOOK-SECTION2-Q08
+- CTSRE-TEXTBOOK-SECTION2-Q03: its es answer "Orfa" is in the prompt of CTSRE-TEXTBOOK-SECTION2-Q01
+- CTSRE-TEXTBOOK-SECTION2-Q03: its es answer "Orfa" is in the prompt of CTSRE-TEXTBOOK-SECTION2-Q02
+- CTSRE-TEXTBOOK-SECTION2-Q03: its es answer "Orfa" is in the prompt of CTSRE-TEXTBOOK-SECTION2-Q04
+- CTSRE-TEXTBOOK-SECTION2-Q03: its es answer "Orfa" is in the prompt of CTSRE-TEXTBOOK-SECTION2-Q06
+- CTSRE-TEXTBOOK-SECTION2-Q03: its es answer "Orfa" is in the prompt of CTSRE-TEXTBOOK-SECTION2-Q07
+- CTSRE-TEXTBOOK-SECTION3-Q03: its en answer "Boaz" is in the prompt of CTSRE-TEXTBOOK-SECTION3-Q04
+- CTSRE-TEXTBOOK-SECTION3-Q03: its en answer "Boaz" is in the prompt of CTSRE-TEXTBOOK-SECTION3-Q08
+- CTSRE-TEXTBOOK-SECTION3-Q03: its es answer "Booz" is in the prompt of CTSRE-TEXTBOOK-SECTION3-Q04
+- CTSRE-TEXTBOOK-SECTION3-Q03: its es answer "Booz" is in the prompt of CTSRE-TEXTBOOK-SECTION3-Q08
+- CTSRE-TEXTBOOK-SECTION3-Q04: its en answer "gate" is in the prompt of CTSRE-TEXTBOOK-SECTION3-Q03
+- CTSRE-TEXTBOOK-SECTION3-Q04: its es answer "puerta" is in the prompt of CTSRE-TEXTBOOK-SECTION3-Q03
+- CTSRE-TEXTBOOK-SECTION3-Q07: its en answer "Ruth" is in the prompt of CTSRE-TEXTBOOK-SECTION2-Q01
+- CTSRE-TEXTBOOK-SECTION3-Q07: its es answer "Rut" is in the prompt of CTSRE-TEXTBOOK-SECTION2-Q01
+- CTSRE-TEXTBOOK-SECTION4-Q06: its en answer "Mordecai" is in the prompt of CTSRE-TEXTBOOK-SECTION5-Q01
+- CTSRE-TEXTBOOK-SECTION4-Q06: its en answer "Mordecai" is in the prompt of CTSRE-TEXTBOOK-SECTION5-Q03
+- CTSRE-TEXTBOOK-SECTION4-Q06: its en answer "Mordecai" is in the prompt of CTSRE-TEXTBOOK-SECTION5-Q04
+- CTSRE-TEXTBOOK-SECTION4-Q06: its en answer "Mordecai" is in the prompt of CTSRE-TEXTBOOK-SECTION5-Q08
+- CTSRE-TEXTBOOK-SECTION4-Q06: its es answer "Mardoqueo" is in the prompt of CTSRE-TEXTBOOK-SECTION5-Q01
+- CTSRE-TEXTBOOK-SECTION4-Q06: its es answer "Mardoqueo" is in the prompt of CTSRE-TEXTBOOK-SECTION5-Q03
+- CTSRE-TEXTBOOK-SECTION4-Q06: its es answer "Mardoqueo" is in the prompt of CTSRE-TEXTBOOK-SECTION5-Q04
+- CTSRE-TEXTBOOK-SECTION4-Q06: its es answer "Mardoqueo" is in the prompt of CTSRE-TEXTBOOK-SECTION5-Q08

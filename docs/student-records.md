@@ -118,7 +118,7 @@ tables except the Worker.
 | `certificates` | every certificate the site has issued a verification code for (course and degree level), with `revoked_at` |
 | `textbook_results` | every Master's textbook test a student has passed: `textbook` (the book's slug: `cults`, `counseling`, `situations`, `worship`, `language`, `narrative`, `doctrinal`, `pentecostal`, `deaconship`), `passed_at`. On the M.Div. and Th.M. tracks a course with a textbook is recorded complete only once its pass is here (migration 0009, 4 Oct 2026; `docs/textbooks.md`) |
 | `notifications` | one row per notice the Worker sent the seminary: `kind` (`course` \| `certificate`), `code` (completion code or verification code), `status` (`sent` \| `failed`), `attempts`, `error`, `created_at`, `sent_at` |
-| `degree_progress` | **the view to read first**: per student, `courses_done`, `foundation_done` (of 7), `assoc_done` (Associate level or higher, since 0007), `masters_done`, `mdiv_core_done` (of 20), `last_completion_at`. Certificate of Ministry = 12 courses incl. all 7 foundation; Associate = 25 Associate-level (or higher) incl. foundation; Th.M. = 12 master's-level incl. foundation; M.Div. = 30 master's-level incl. the 20-course core. |
+| `degree_progress` | **the view to read first**: per student, `courses_done`, `foundation_done` (of 7), `assoc_done` (Associate level or higher, since 0007), `masters_done`, `mdiv_core_done` (of 20), `last_completion_at`. Certificate of Ministry = 12 courses incl. all 7 foundation; Associate = 25 Associate-level (or higher) incl. foundation; Th.M. = 15 master's-level incl. foundation; M.Div. = 30 master's-level incl. the 20-course core. |
 
 Course codes map to names through `GET /api/catalog` (`completions.CODE.name`);
 the names are exactly what the certificate pages write, warts included
@@ -300,7 +300,7 @@ nothing.
    Wayne's audit item 5). When `/api/sync` records a course completion the
    student's record did not hold before, and when `/api/certificate` issues a
    new award, the Worker emails `NOTIFY_TO` (`info@chapalaseminary.org`,
-   `wrangler.jsonc` vars) through the same Resend path as student email, and
+   `wrangler.jsonc` vars) through the same sending path as student email (Cloudflare Email Service, Resend as the fallback: worker/email.js), and
    writes a row in `notifications` (`student_id, kind, code, status, attempts,
    error, created_at, sent_at`; one per student/kind/code). The row is the
    record: the tracker can read it directly, and a failed send is visible and

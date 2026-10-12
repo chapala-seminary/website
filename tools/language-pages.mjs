@@ -40,7 +40,8 @@ export function buildLanguagePages(dir) {
     const m = /^(.*)Unit(\d+)\.html$/.exec(file);
     const lessonFile = m && `src/content/lessons/${m[1]}/${m[2]}.json`;
     const lesson = lessonFile && fs.existsSync(lessonFile) ? JSON.parse(fs.readFileSync(lessonFile, 'utf8')) : null;
-    const sourceLang = lesson?.sourceLang || 'en';
+    const declaredSource = parse(canonical).querySelector('body')?.getAttribute('data-source-lang');
+    const sourceLang = lesson?.sourceLang || (LANGUAGES.includes(declaredSource) ? declaredSource : 'en');
     for (const lang of LANGUAGES) {
       let root = parse(canonical, { comment: true, parseNoneClosedTags: true });
       const html = root.querySelector('html'), body = root.querySelector('body'), head = root.querySelector('head');
@@ -52,7 +53,7 @@ export function buildLanguagePages(dir) {
         const rendered = shell(renderLanguageLesson(lesson, lang));
         const main = root.querySelector('#lesson');
         if (!main) throw new Error(`unit ${file} has no #lesson`);
-        const keep = main.childNodes.filter(n => ['cts-register', 'greeting', 'cts-textbook'].includes(n.id)).map(n => n.toString()).join('');
+        const keep = main.childNodes.filter(n => ['cts-register', 'greeting', 'cts-textbook', 'cts-textbook-2', 'cts-required-readings'].includes(n.id)).map(n => n.toString()).join('');
         main.set_content(keep + rendered.content);
         const header = root.querySelector('.cts-masthead .wrap');
         if (header && rendered.masthead) header.set_content(rendered.masthead);

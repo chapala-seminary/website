@@ -268,6 +268,16 @@ ok(viaCode.body?.verifyCode === VC, `a course named by its code (CTS1PETER) is t
 // (WiseSpeak is a foundation course, so this path cannot be "unknown course".)
 const ws0 = await jpost('/api/certificate', { code: CODE, level: 'course', course: 'WISESPEAK', title: 'Preaching' });
 ok(ws0.status === 409, `a single-page course certificate with no completion recorded is refused (${ws0.status}: ${ws0.body?.error})`);
+// Single-page Master's completions must wait for their textbook test, too.
+for (const [course, slug] of [['COUNSELING', 'counseling'], ['STORYTEL', 'narrative']]) {
+  const r = await jpost('/api/register', { name: `Synthetic ${course} Hold`, track: 'mdiv' });
+  const payload = { code: r.body.code, doneCodes: [course], completionTracks: { [course]: 'mdiv' } };
+  const held = await jpost('/api/sync', payload);
+  ok(!held.body.completions.some(c => c.code === course), `${course}: no official Master's completion before textbook pass`);
+  const released = await jpost('/api/sync', { ...payload, textbooks: [{ slug, passedAt: T_LATE }] });
+  ok(released.body.completions.some(c => c.code === course && c.track === 'mdiv'), `${course}: textbook pass releases official Master's completion`);
+}
+
 await jpost('/api/sync', { code: CODE, doneCodes: ['WISESPEAK'] });
 const ws1 = await jpost('/api/certificate', { code: CODE, level: 'course', course: 'WISESPEAK', title: 'Preaching' });
 ok(ws1.status === 201, `a single-page course certificate is issued once its completion is recorded (${ws1.status}: ${ws1.body?.error})`);
@@ -318,9 +328,10 @@ ok(d.status === 201, `foundation + 5 electives earns the Certificate of Ministry
 d = await jpost('/api/certificate', { code: CODE, level: 'associate', title: 'Associate of Divinity' });
 ok(d.status === 409 && /of 25 Associate-level courses/.test(d.body?.error || ''), `19 courses do not earn the Associate (${d.status}: ${d.body?.error})`);
 
-// Th.M.: 12 including the foundation, on a master's track (this student is mdiv)
+// Th.M.: 15 including the foundation, on a master's track (this student is
+// mdiv and has 19: the foundation plus the 12 electives synced above)
 d = await jpost('/api/certificate', { code: CODE, level: 'thm', title: 'Master of Theology' });
-ok(d.status === 201, `an mdiv student with foundation + 5 earns the Th.M. (${d.status}: ${d.body?.error})`);
+ok(d.status === 201, `an mdiv student with foundation + 12 earns the Th.M. (${d.status}: ${d.body?.error})`);
 
 // M.Div.: 30 including the 20-course core. Three core courses have a Master's
 // textbook and one (Genesis) required readings, so on this master's track

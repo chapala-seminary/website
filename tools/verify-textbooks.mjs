@@ -67,9 +67,15 @@ for (const b of books) {
     ok(!fillRight(q, ''), `${b.slug} #${i + 1}: an empty answer is marked right`);
   });
   for (const lang of ['en', 'es']) {
-    ok(fs.existsSync(path.join('public', b.files.pdf[lang])), `${b.slug}: ${b.files.pdf[lang]} is not in public/`);
-    ok(fs.existsSync(b.files.docx[lang]), `${b.slug}: the Word master ${b.files.docx[lang]} is missing`);
-    ok(/<h2 /.test(b.body[lang]), `${b.slug}: the ${lang} book has no chapter headings`);
+    if (b.files.excerpts) {
+      ok(b.body[lang].length > 2000, `${b.slug}: the ${lang} excerpts are missing from the page`);
+    } else if (b.files.html) {
+      ok(fs.existsSync(path.join('public', b.files.html[lang])), `${b.slug}: published book ${b.files.html[lang]} is missing`);
+    } else {
+      ok(fs.existsSync(path.join('public', b.files.pdf[lang])), `${b.slug}: ${b.files.pdf[lang]} is not in public/`);
+      ok(fs.existsSync(b.files.docx[lang]), `${b.slug}: Word master ${b.files.docx[lang]} missing`);
+    }
+    ok(/<h2 /.test(b.body[lang]), `${b.slug}: ${lang} book has no headings`);
   }
 }
 
@@ -83,11 +89,16 @@ ok(!leaked.length, `staff-only test-bank files under public/: ${leaked.join(', '
 if (!fs.existsSync(path.join(DIST, 'index.html'))) { console.error(`no build at ${DIST}/ — run npm run build first`); process.exit(2); }
 const page = (f) => fs.existsSync(path.join(DIST, f)) ? fs.readFileSync(path.join(DIST, f), 'utf8') : null;
 const index = page('index.html');
+/* The front page links with relative hrefs ("Page.html"); other pages use "/Page.html". Accept
+   either form, with or without "./", a query or a fragment, so a valid link is never reported missing. */
+const esc = (t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const linksTo = (html, file) => new RegExp(`href=["'](?:\\.?/)?${esc(file)}(?:[?#][^"']*)?["']`).test(html);
 for (const b of books) {
   const book = page(`${b.page}.html`), test = page(`${b.page}Test.html`);
   ok(!!book, `${b.page}.html was not built`);
   ok(!!test, `${b.page}Test.html was not built`);
-  ok(index.includes(`href="/${b.page}.html"`), `the front page does not list ${b.page}`);
+  if (b.requiredFrom === null) ok(!linksTo(index, `${b.page}.html`), `pilot ${b.page} should not appear as mandatory on front page`);
+  else ok(linksTo(index, `${b.page}.html`), `the front page does not list ${b.page}`);
   if (book) ok(book.includes(`${b.page}Test.html`), `${b.page}.html does not lead to its test`);
   if (test) {
     ok(test.includes(`${b.page}.html`), `${b.page}Test.html does not lead back to the book`);
@@ -97,7 +108,7 @@ for (const b of books) {
       ok(!test.includes(`<h2 id="${lang}-1">`), `${b.page}Test.html carries the ${lang} book's chapter headings`);
       const paras = [...b.body[lang].matchAll(/<p>([\s\S]*?)<\/p>/g)].map((m) => m[1].replace(/<[^>]+>/g, '')).filter((t) => t.length > 220);
       const sample = paras.filter((_, i) => i % 5 === 0).map((t) => t.slice(0, 160));
-      ok(sample.length > 0 && !sample.some((s) => test.includes(s)), `${b.page}Test.html carries the ${lang} book's text: the test must stand apart from the book`);
+      if (!b.files.html) ok(sample.length > 0 && !sample.some((s) => test.includes(s)), `${b.page}Test.html carries the ${lang} book's text: the test must stand apart from the book`);
     }
   }
   // the course links to its book: every unit of a unit course, or the single page
@@ -115,19 +126,41 @@ for (const b of books) {
    book -- and the page the student reads must stand apart from the test. */
 const readings = fs.existsSync('src/content/readings') ? fs.readdirSync('src/content/readings').filter((f) => f.endsWith('.json'))
   .map((f) => JSON.parse(fs.readFileSync(path.join('src/content/readings', f), 'utf8'))) : [];
-ok(readings.length === 2, `${readings.length} required-reading tests in src/content/readings; expected Genesis Intensive and World Religions`);
+// Genesis Intensive and World Religions (4 Oct 2026), and the Master's
+// five-reading pilot on Pentecostalism (9 Oct 2026); more join it course by course.
+for (const want of ['genesisreadings', 'wrreadings', 'pentecostalreadings'])
+  ok(readings.some((r) => r.slug === want), `src/content/readings has no ${want}`);
+const catalogJson = JSON.parse(fs.readFileSync('worker/catalog.json', 'utf8'));
+let noAlternate = 0;   // answers, per language, on the Master's reading tests with no alternate yet
 for (const r of readings) {
   ok(!!courses[r.course], `${r.slug}: course "${r.course}" has no catalog card`);
   ok(/readings$/.test(r.slug) && !books.some((b) => b.slug === r.slug), `${r.slug}: the slug must end in "readings" and not be a textbook's`);
   ok(fs.existsSync(path.join('src/body/rooms', `${r.page}.html`)), `${r.slug}: the readings page src/body/rooms/${r.page}.html is missing`);
   const { draw, pass, questions } = r.test;
   ok(draw === 20 && pass === 18 && questions.length === 40, `${r.slug}: draws ${draw}, asks ${pass}, of ${questions.length}; the delivery says 20 of 40, 18 to pass`);
+  // drawn by reading (9 Oct 2026): every question names one of the five, eight each, four drawn from each
+  if (r.test.perReading) {
+    const per = {};
+    for (const q of questions) per[q.reading] = (per[q.reading] || 0) + 1;
+    ok(r.test.perReading === 4 && Object.keys(per).length === 5 && Object.values(per).every((c) => c === 8),
+      `${r.slug}: drawn by reading, but ${JSON.stringify(per)} with ${r.test.perReading} each; expected eight questions on each of five readings, four drawn from each`);
+  }
+  const pending = 'requiredFrom' in r && r.requiredFrom == null;
+  ok(!('requiredFrom' in r) || r.requiredFrom === null || !Number.isNaN(Date.parse(r.requiredFrom)), `${r.slug}: requiredFrom is not a date: ${r.requiredFrom}`);
+  ok(JSON.stringify(catalogJson.textbooks[r.slug]?.requiredFrom) === JSON.stringify(r.requiredFrom), `${r.slug}: worker/catalog.json does not carry its activation as the content does`);
   questions.forEach((q, i) => {
     for (const lang of ['en', 'es']) {
       ok((q.prompt[lang].match(/____/g) || []).length === 1, `${r.slug} #${i + 1}: not one blank in ${lang}`);
       ok(fillRight(q, q.answer[lang]), `${r.slug} #${i + 1}: the ${lang} answer "${q.answer[lang]}" is not marked right`);
       const acc = (q.accept && q.accept[lang]) || [];
-      ok(acc.length >= 1 && acc.length + 1 <= 5, `${r.slug} #${i + 1}: ${acc.length + 1} accepted ${lang} answers; Dr. Cook asked for alternates, three to five in all`);
+      /* Genesis and World Religions: at least one alternate (Dr. Cook, 4 Oct).
+         The Master's five-reading tests (those with a requiredFrom): alternates
+         are optional, as Dr. Cook decided for reading tests whose answer is one
+         clear word -- a question without one is counted, not refused, exactly
+         as tools/import-readings.mjs reports it. At most five answers in all. */
+      const optional = 'requiredFrom' in r;
+      ok((optional || acc.length >= 1) && acc.length + 1 <= 5, `${r.slug} #${i + 1}: ${acc.length + 1} accepted ${lang} answers; Dr. Cook asked for alternates: at least one besides the answer, at most five answers in all`);
+      if (optional && !acc.length) noAlternate++;
       for (const a of acc) ok(fillRight(q, a), `${r.slug} #${i + 1}: accepted ${lang} answer "${a}" is not marked right`);
     }
     ok(!fillRight(q, ''), `${r.slug} #${i + 1}: an empty answer is marked right`);
@@ -137,7 +170,10 @@ for (const r of readings) {
   const room = page(`${r.page}.html`), test = page(`${r.page}Test.html`);
   ok(!!room, `${r.page}.html was not built`);
   ok(!!test, `${r.page}Test.html was not built`);
-  ok(index.includes(`href="/${r.page}.html"`), `the front page does not list the required readings ${r.page}`);
+  // a test not yet in force is reached from its course and its room, not listed on the front page
+  if (pending) ok(!linksTo(index, `${r.page}.html`), `the front page lists ${r.page}, which is not yet in force`);
+  else ok(linksTo(index, `${r.page}.html`), `the front page does not list the required readings ${r.page}`);
+  if (test && pending) ok(/not yet required/.test(test), `${r.page}Test.html does not say the test is not yet required`);
   if (room) ok(room.includes(`${r.page}Test.html`), `${r.page}.html does not lead to its test`);
   if (test) {
     ok(test.includes(`${r.page}.html`), `${r.page}Test.html does not lead back to the readings`);
@@ -151,10 +187,16 @@ for (const r of readings) {
     ok(!!h && h.includes(`${r.page}.html`) && h.includes(`${r.page}Test.html`), `${r.course}Unit${n}.html does not link to ${r.page} and its test`);
   }
   // the certificate page holds the diploma on a master's track until the pass (cts-textbook-gate.js)
-  const code = Object.values(JSON.parse(fs.readFileSync('worker/catalog.json', 'utf8')).completions).find((c) => c.name && page(c.page) && page(c.page).includes(`data-textbook="${r.slug}"`));
-  ok(!!code, `no certificate page names data-textbook="${r.slug}" for the gate`);
+  // -- by its own attribute, or, for a course with a textbook as well, by the
+  // generated requirements the page loads (cts-required-tests.js)
+  const tbCode = catalogJson.textbooks[r.slug]?.code;
+  const certPage = catalogJson.completions[tbCode]?.page;
+  const cert = certPage && page(certPage);
+  ok(!!cert && (cert.includes(`data-textbook="${r.slug}"`) || (cert.includes('cts-required-tests.js') && cert.indexOf('cts-required-tests.js') < cert.indexOf('cts-textbook-gate.js'))),
+    `the certificate page ${certPage} neither names data-textbook="${r.slug}" nor loads cts-required-tests.js before the gate`);
 }
 
 console.log(`${checks} textbook assertions across ${books.length} textbooks and ${readings.length} required-reading tests`);
+if (noAlternate) console.log(`${noAlternate} answer(s) on the Master's reading tests have no accepted alternate yet (optional; faculty to add)`);
 if (!fails.length) console.log('PASS — the textbooks, their tests and their pages agree.');
 else { console.log(`FAIL — ${fails.length}:`); fails.slice(0, 30).forEach((f) => console.log('  ' + f)); if (fails.length > 30) console.log(`  … and ${fails.length - 30} more`); process.exit(1); }

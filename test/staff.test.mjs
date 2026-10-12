@@ -92,7 +92,7 @@ await reg({ name: SHOUT, email: `shout-${tag}@example.test`, track: 'thm' });
   await reg({ name: EMPTY.thm, track: 'thm' });
   await reg({ name: EMPTY.mdiv, track: 'mdiv' });
   const er = await (await staff('/staff/students.json')).json();
-  for (const [k, want] of [['assoc', '0/25'], ['thm', '0/12'], ['mdiv', '0/30']]) {
+  for (const [k, want] of [['assoc', '0/25'], ['thm', '0/15'], ['mdiv', '0/30']]) {
     const e = er.find((x) => x.name === EMPTY[k]);
     ok(e && e.program_progress === want && e.courses_done === 0, `a ${k} student with nothing done shows ${want}`, JSON.stringify(e && { p: e.program_progress, c: e.courses_done }));
   }

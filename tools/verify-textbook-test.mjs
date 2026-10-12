@@ -184,7 +184,7 @@ const student = JSON.stringify({ name: 'T', track: 'cert' });
   ok(!/textbook/i.test(await p.locator('.cts-masthead').textContent()), 'the masthead calls the readings a textbook');
   // all units passed on the M.Div.: held, and sent to the readings test in those words
   await p.goto(`${BASE}/CTSGenesisUnit12.html`, { waitUntil: 'load' }); await p.waitForTimeout(400);
-  const u = await p.evaluate(() => ({ done: localStorage.getItem('cts_done_codes') || '', banner: (document.getElementById('cts-passed-banner') || {}).innerText || '', box: (document.getElementById('cts-textbook') || {}).innerText || '' }));
+  const u = await p.evaluate(() => ({ done: localStorage.getItem('cts_done_codes') || '', banner: (document.getElementById('cts-passed-banner') || {}).innerText || '', box: (document.getElementById('cts-required-readings') || {}).innerText || '' }));
   ok(!u.done.includes('CTSGENESIS'), `a master's student with all Genesis units is recorded complete without the readings test (${u.done})`);
   ok(/required-reading test/i.test(u.banner) && !/textbook/i.test(u.banner), `the passed banner should send to the required-reading test, not a textbook: "${u.banner.slice(0, 160)}"`);
   ok(/Required readings/i.test(u.box) && /Required-reading test/i.test(u.box), `the unit box should name the readings and their test: "${u.box.slice(0, 120)}"`);
