@@ -1,3 +1,11 @@
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **F2.34, MC 3 option 1** (distractor): « Schématizō (manigancer) » → « Syschēmatizō (se conformer à un modèle) » (answer index unchanged)
+- **F2.22, SA 8 prompt**: « en Romains 14:1-12 » → « en Romains 14 »
+- **F2.22, SA 8 model**: foundations 3–4 now match b047: « (3) Le fort ne doit pas mépriser ; le faible ne doit pas juger. (4) Aucun ne doit violer la conscience de l'autre. » → « (3) Le royaume de Dieu, ce n'est pas le manger et le boire, mais la justice, la paix et la joie, par le Saint-Esprit. (4) « Tout ce qui n'est pas le produit d'une conviction est péché » : personne ne doit donc agir contre sa propre conscience. » (LSG 14:17, 14:23); « aucun ne doit mépriser ni juger l'autre » moved to the opening. Model hits 8 of 8.
+
 ## Questions for Wayne
 
 1. **Romans 12:1, "I beseech you".** LSG has "Je vous exhorte". The lesson (b016) contrasts *command* with *beseech*. I kept "exhorte" (LSG) and added that the Greek verb means both "exhorter" and "supplier", so the idea of pleading is still there.
@@ -22,7 +30,7 @@
 1. **SA8 model vs. lesson.** The model lists "four foundations": the Lord's servant; giving account; the strong must not despise and the weak must not judge; and do not violate conscience. The lesson's four foundations (b047) are different: servant, giving account, the kingdom is not eating and drinking, and whatever is not of faith is sin. I translated the model as written.
 2. **SA9 model.** It quotes Romans 14:20 ("do not destroy the work of God for the sake of food"), which the lesson never mentions or teaches. It also says the kingdom is "bigger than disputes that have divided churches throughout history", which is not in the lesson. This is minor. I translated it as written.
 3. **b030, MC9, SA4, "coals of fire".** The lesson says the Old Testament background is "consistently" God's judgment, but the list includes Proverbs 25:21-22. Paul is quoting that passage, so it is not independent evidence, and its own context ("the LORD will reward you") is often read as leading the enemy to shame or repentance. 2 Samuel 22:9 and Psalm 18:13 describe a theophany more than judgment on a person. The view is defensible, but the lesson presents it as the only view. I translated it faithfully.
-4. **MC3, distractor "Schematizō (to scheme)".** The verb Paul actually uses for "conformed" in 12:2 is *syschēmatizō*, which means "to conform to a pattern", not "to scheme". The distractor is still wrong as an answer, but its gloss is inaccurate. I translated it as "manigancer".
+4. **MC3, distractor "Schematizō (to scheme)".** The verb Paul actually uses for "conformed" in 12:2 is *syschēmatizō*, which means "to conform to a pattern", not "to scheme". The distractor is still wrong as an answer, but its gloss is inaccurate. I translated it as "manigancer". **Updated 12 Oct 2026:** now « Syschēmatizō (se conformer à un modèle) », matching the corrected English.
 5. **English SA keywords.** In SA1, SA2, SA3 and SA6, the English prompt alone reaches 3 or more keyword hits (for example, SA3 reaches 4 with "body/gift/tool/weapon"). Following convention 10, I rebuilt the French groups around ideas from the answers. Every French prompt reaches 0 hits, and every French model reaches 8.
 
 ## Checker's changes

@@ -1,5 +1,11 @@
 # CTSMatt Unit 6 — French draft review notes
 
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **F2.31, MC 12 stem** (stem now points to the wineskins teaching): « Selon le résumé que fait la leçon, le contraste » → « Dans l'enseignement de la leçon sur le vin nouveau et les vieilles outres, le contraste »
+
 ## Questions for Wayne
 
 1. **Matthew 9:13, "to repentance."** Segond follows the shorter Greek text: "je ne suis pas venu appeler des justes, mais des pécheurs" (no "à la repentance"). The lesson (b023), MC10's `why` and SA6's model all rely on "to repentance." I quoted Segond exactly and added one sentence to b023 saying some Greek manuscripts add "à la repentance," as in Luke 5:32. SA6's model keeps "à la repentance" as a paraphrase. Checker: kept, reworded to "Certains manuscrits grecs ajoutent ici « à la repentance », comme en Luc 5:32" (Luke 5:32 LSG does contain "à la repentance"); this is a Greek-text note, not "other versions say". MC10's option now quotes Segond's exact words with an ellipsis. Please confirm.
@@ -13,7 +19,7 @@
 
 ## Problems in the English source
 
-- **MC12 stem:** "According to the lesson's summary of *your sermon*" seems to be left over from an earlier draft. The French says "Selon le résumé que fait la leçon" and drops "your sermon."
+- **MC12 stem:** "According to the lesson's summary of *your sermon*" seems to be left over from an earlier draft. The French says "Selon le résumé que fait la leçon" and drops "your sermon." *(Updated 12 Oct 2026 after the English correction; see "Updated after English corrections" above.)*
 - **MC18 `why`, SA9 model:** both say this "sets up the sending in the next unit." The lesson (b027) says only that the Pharisees' charge grows into the *conflict* of the next unit. Sending is never mentioned. Translated as is.
 - **MC15 `why`:** "'Son of David' confesses Jesus as the promised messianic King" is not taught in the lesson. This is minor.
 - **SA5 keyword "blasph":** the lesson never mentions blasphemy (it says "scandalized"). I kept the group, and the French model mentions it because Matthew 9:3 says so.

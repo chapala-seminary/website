@@ -1,3 +1,9 @@
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **F2.21, SA 3 model**: « C'est plus qu'un symbole : c'est l'identification réelle du croyant… » → « L'eau ne crée pas cette union ; elle illustre et confesse publiquement l'identification réelle du croyant, par la foi, avec le Christ crucifié et ressuscité. » (keywords unchanged; model hits 8 of 8)
+
 # CTSRomans Unit 5 — French draft review notes
 
 All quotations were checked against the offline LSG tool: Romains 4:3, 5:20, 6:1-23, 7:1-6; Actes 9:2, 19:9, 24:14. Independent checker re-verified every quotation (lesson, MC, fill, SA models): all match Segond 1910 exactly.

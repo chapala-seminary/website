@@ -1,3 +1,9 @@
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **R7, b038**: « …son fils nouveau-né. Il s'est écrié : » → « …son fils nouveau-né. Des années plus tard, pour son fils Absalom, il s'est écrié : »
+
 # CTSRomans Unit 7 — French draft review notes
 
 Checker re-verified every quotation against the offline LSG (Romains 8:1-39, Psaume 23:4, Psaume 44:22 via Romains 8:36, 2 Samuel 18:33, and Apocalypse 12:10 for MC 17's "l'accusateur de nos frères"): all exact, no corrections needed.

@@ -1,3 +1,15 @@
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **A1, b020** (Morison: 1920s, advertising man and writer, not a young lawyer): « Dans les années 1930, c'était un jeune juriste britannique qui » → « Dans les années 1920, c'était un publicitaire et écrivain britannique qui »
+- **A1, b020** (Legal-training claim removed): « Comme il avait reçu une formation juridique, il résolut de n'accepter comme preuve que ce qui répondait aux critères stricts d'un tribunal. » → « Il résolut de peser les preuves avec la même rigueur qu'un tribunal. »
+- **A1, b020** ('three quarters of a century' -> 'nearly a century'): « et trois quarts de siècle plus tard, » → « et près d'un siècle plus tard, »
+- **A1, MC 18 stem** (Stem: advertising writer, not lawyer): « Frank Morison, le juriste britannique, » → « Frank Morison, un rédacteur publicitaire britannique, »
+- **F1.6, MC 9 stem** ('primarily' dropped): « était avant tout un miracle : » → « était un miracle : »
+- **F1.6, MC 9 option 1** (Key option: known human languages (index unchanged)): « De l'écoute — chaque pèlerin entendait dans sa propre langue » → « De langues humaines connues — chaque pèlerin entendait dans sa propre langue »
+- **F1.6, SA 4 model** (Model: real languages spoken, not a miracle of hearing): « — le miracle portait sur l'écoute, et tout le monde ne s'est pas mis à parler une seule langue — » → « — les disciples ont parlé de vraies langues qu'ils n'avaient jamais apprises, et chaque pèlerin a entendu dans la sienne ; personne n'a été obligé de… »
+
 ## Questions for Wayne
 
 1. **Acts 1:3, "many infallible proofs".** LSG has only "plusieurs preuves". There is no word for "infallible", and the lesson's point about *tekmeriois* depends on that idea. I quoted LSG and added one sentence: "Le texte grec dit littéralement « plusieurs preuves certaines »". The heading (b018), Fill 3 and MC3 use "plusieurs preuves".
@@ -14,8 +26,8 @@
 
 ## Problems in the English source
 
-1. **MC9.** The key says the tongues miracle was "primarily a miracle of hearing". The lesson (b029) says the disciples "began to speak… in languages they had never learned", and Acts 2:4 says they spoke. The lesson never teaches that the miracle was mainly one of hearing; that idea appears only in the SA4 model. I translated it as written. Please consider rewording the key or adding a sentence to the lesson.
-2. **b020, Frank Morison.** "Frank Morison" was the pen name of Albert Henry Ross, who was born in 1881. In 1930 he was about 49, not "young", and he worked in advertising and journalism; he was not a lawyer. The book came out in 1930, so it is now about 95 years later, not "three quarters of a century". MC18 calls him "the British lawyer". I translated the lesson and MC18 as written, using "juriste".
+1. **MC9.** The key says the tongues miracle was "primarily a miracle of hearing". The lesson (b029) says the disciples "began to speak… in languages they had never learned", and Acts 2:4 says they spoke. The lesson never teaches that the miracle was mainly one of hearing; that idea appears only in the SA4 model. I translated it as written. Please consider rewording the key or adding a sentence to the lesson. **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
+2. **b020, Frank Morison.** "Frank Morison" was the pen name of Albert Henry Ross, who was born in 1881. In 1930 he was about 49, not "young", and he worked in advertising and journalism; he was not a lawyer. The book came out in 1930, so it is now about 95 years later, not "three quarters of a century". MC18 calls him "the British lawyer". I translated the lesson and MC18 as written, using "juriste". **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
 3. **b029, "sixteen named countries".** Acts 2:9–11 lists about 15 peoples and regions, depending on how you count; a count of 16 includes "Jews and proselytes" or Rome. This is minor.
 4. **SA3 model.** It cites Sinai for the fire background. The lesson names the burning bush, the pillar of fire and Carmel, but not Sinai. My French model names both, and the keyword group accepts "carmel" or "sinaï".
 5. **English SA keywords.** In SA1, SA2, SA3, SA6, SA8, SA9 and SA10, the English prompt alone reaches 3 or more keyword hits, so a student could pass by copying the question. SA6 reaches all 8. The problem keywords include "neglect", "modern", "marks", "personal", "specific", "apply" and "sign". Following settled convention 10, I replaced those groups in French with ideas taken from the answers. Each French prompt now reaches no more than 2 hits.

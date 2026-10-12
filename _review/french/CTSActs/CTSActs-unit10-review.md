@@ -1,3 +1,15 @@
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **A10a, b044** ('five or six days later' -> 'the next morning' + Acts 27:29 (LSG)): « Le naufrage n'eut lieu que cinq ou six jours plus tard. » → « Le naufrage n'eut lieu que le lendemain matin ; pendant les heures sombres, ils jetèrent quatre ancres et « attendirent le jour avec impatience » (Act… »
+- **A10b, b046** ('on Paul's orders' removed): « Puis, sur les ordres de Paul, quand » → « Puis, quand »
+- **A10c, b053** (Stayed three days at Syracuse): « jusqu'à Syracuse, sur la côte est de la Sicile, pendant trois jours, puis » → « jusqu'à Syracuse, sur la côte est de la Sicile, et y restèrent trois jours, puis »
+- **A10d, b056** ('only book that does not end' / 'mid-sentence' removed): « Le livre des Actes est le seul livre de la Bible qui ne se termine pas. Il s'arrête simplement, en pleine marche, sur un participe. » → « Le livre des Actes, plutôt que de se terminer, s'arrête en pleine marche, sur ses participes : « prêchant… enseignant ». »
+- **A10d, b060** ('mid-sentence' -> 'mid-story'): « Luc s'arrête au milieu de la phrase. » → « Luc s'arrête au milieu de l'histoire. »
+- **A10d, SA 10 prompt** ('mid-sentence with a participle' -> 'mid-story'): « termine le récit de Luc au milieu d'un élan (« prêchant… enseignant… en toute liberté et sans obstacle »). » → « termine le récit de Luc au milieu de l'histoire, alors que Paul est encore « prêchant… enseignant… en toute liberté et sans obstacle ». »
+- **A10d, SA 10 model**: no change; the French model never claimed a mid-sentence ending.
+
 ## Questions for Wayne
 
 1. **Acts 24:25, "self-control".** LSG has "la tempérance". I quoted LSG and added that the Greek word means "la maîtrise de soi". After that, b021 uses "la tempérance, c'est-à-dire la maîtrise de soi". The answer to Fill 2 is "tempérance". It also accepts "maîtrise de soi", "maîtrise", "sobriété" and "continence". MC3 reads "la tempérance (la maîtrise de soi)".
@@ -15,14 +27,14 @@
 
 ## Problems in the English source
 
-1. **b041/b044, the timing of the angel's message.** The lesson says Paul gave the speech of 27:21–26 on the fourteenth night, and that the wreck came "five or six days later". In Acts, the speech comes before v. 27 ("La quatorzième nuit"), and the ship runs aground at daybreak after the fourteenth night (vv. 33, 39–41). The "five or six days" claim does not fit the text. I translated it as written.
-2. **b053, "sailed north to Syracuse… for three days".** Acts 28:12 says they *stayed* at Syracuse for three days. I translated it as written.
+1. **b041/b044, the timing of the angel's message.** The lesson says Paul gave the speech of 27:21–26 on the fourteenth night, and that the wreck came "five or six days later". In Acts, the speech comes before v. 27 ("La quatorzième nuit"), and the ship runs aground at daybreak after the fourteenth night (vv. 33, 39–41). The "five or six days" claim does not fit the text. I translated it as written. **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
+2. **b053, "sailed north to Syracuse… for three days".** Acts 28:12 says they *stayed* at Syracuse for three days. I translated it as written. **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
 3. **b025, the right of appeal.** The lesson says the right of appeal to Caesar was "on the books since the founding of the republic". The republic's *provocatio* was an appeal to the people. An appeal to the emperor dates from Augustus.
 4. **b020, Drusilla.** She was about 16 when she married Felix around AD 53, not at the time of the hearing around AD 57. Agrippa I died in AD 44, about 13 years before the hearing rather than 15.
 5. **b021 and b031, how Felix and Agrippa ended.** "Paul outlived him in office" is unclear. "Died without it" and "Both of them died lost" go beyond anything Scripture records. I translated them as written.
-6. **b046, running aground.** The ship was run aground by the crew (27:39–41), not "on Paul's orders".
+6. **b046, running aground.** The ship was run aground by the crew (27:39–41), not "on Paul's orders". **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
 7. **b055, the chain.** The lesson says the Lord told Paul about "the chain" in the Antonia barracks. Acts 23:11 mentions no chain; Agabus foretold the chains in Acts 21:11. The "four-hour shift" detail is conjecture.
-8. **b056/b060, how Acts ends.** "Ends mid-sentence… with a participle" overstates it. The Greek sentence is complete and ends with the adverb *akōlytōs*.
+8. **b056/b060, how Acts ends.** "Ends mid-sentence… with a participle" overstates it. The Greek sentence is complete and ends with the adverb *akōlytōs*. **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
 9. **b038, b028 (minor).** Acts 27:2 calls the first ship "un navire d'Adramytte", not a grain freighter. "Longest single recorded speech of his life" is arguable, since Acts 13:16–41 is about as long.
 10. **SA keywords.** In all 10 short-answer items, the English prompt alone hits 3 or more of its own keywords. SA1 hits 7, and SA5 hits 7. Following convention 10, I replaced those groups in French with distinct ideas taken from the lesson. Each French prompt now hits no more than 2 groups, and each French model hits all 8.
 11. **SA3 model.** It says Paul went to Rome "at government expense". The lesson never says this. I kept it.
