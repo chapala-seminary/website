@@ -39,7 +39,12 @@ ok(A.textbookFor(CODE) === BOOK, 'its textbook is still "the textbook" for anyth
 ok(JSON.stringify(A.testsFor('CTSGENESIS')) === '["genesisreadings"]', 'Genesis keeps its one required-reading test');
 ok(JSON.stringify(A.testsFor('CTSWR')) === '["wrreadings"]', 'World Religions keeps its one required-reading test');
 ok(A.testsFor('CTSPSALMS').length === 0, 'a course with no test requires none');
-ok(catalog.textbooks[READ].requiredFrom === null, 'the pilot ships NOT in force: requiredFrom is null until Robert activates it', catalog.textbooks[READ]);
+// shipped NOT in force (null) -- or, once Robert runs tools/activate-required.mjs,
+// the moment it recorded in src/data/required-from.json, and nothing else
+const fs = await import('node:fs');
+const SCHED = fs.existsSync('src/data/required-from.json') ? JSON.parse(fs.readFileSync('src/data/required-from.json', 'utf8')) : {};
+const shipped = SCHED[READ] ?? null;
+ok(catalog.textbooks[READ].requiredFrom === shipped, 'the pilot ships NOT in force (requiredFrom null) until Robert activates it, and then from the moment he set', catalog.textbooks[READ]);
 ok(!('requiredFrom' in catalog.textbooks.genesisreadings) && !('requiredFrom' in catalog.textbooks.wrreadings),
   'Genesis and World Religions carry no activation date: they have counted since 4 Oct and still do');
 ok(JSON.stringify(catalog.courses.pentecostal.tests) === JSON.stringify([BOOK, READ]), 'the catalog lists both tests on the course');
@@ -78,7 +83,7 @@ ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active(case1)) === null, 'Case 1: a
 ok(A.textbookShortfall(CODE, 'thm', [BOOK], active([{ code: CODE, track: 'thm', completed_at: before }])) === null, 'Case 1 on the Th.M. as well');
 ok(/textbook test/.test(A.textbookShortfall(CODE, 'mdiv', [], active(case1)) || ''), 'Case 1 protects from the new test only: the textbook rule of 4 Oct is unchanged');
 ok(JSON.stringify(A.exemptionsFor(case1, active())) === JSON.stringify([READ]), 'Case 1: the record names the exemption, for the browser to show', A.exemptionsFor(case1, active()));
-ok(A.exemptionsFor(case1).length === 0, 'and names none while the test is not activated');
+ok(A.exemptionsFor(case1).length === (shipped && Date.parse(before) < Date.parse(shipped) ? 1 : 0), 'and names none while the test is not activated (one, once it is and the completion came first)');
 ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active([{ code: CODE, track: 'mdiv', completed_at: '2026-10-20 15:00:00' }])) === null,
   'Case 1 with the time as SQLite writes it');
 ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active([{ code: 'CTSPENTECOSTALMDIVCERTIFICATE', track: 'mdiv', completed_at: before }])) === null,
@@ -111,7 +116,7 @@ ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active([{ code: 'CTSGENESIS', track
   new Function('window', js)(win);
   const m = win.CTS_REQUIRED_TESTS || {};
   ok(JSON.stringify(m[CODE]?.map((t) => t.slug)) === JSON.stringify([BOOK, READ]), 'cts-required-tests.js gives the pages both tests', m[CODE]);
-  ok(m[CODE]?.[1]?.requiredFrom === null, 'and the reading test\'s activation, not yet set');
+  ok(m[CODE]?.[1]?.requiredFrom === shipped, 'and the reading test\'s activation, as shipped');
   ok(m.COUNSELING?.[0]?.slug === 'counseling' && m.STORYTEL?.[0]?.slug === 'narrative', 'the single-page courses keep their textbooks');
 }
 

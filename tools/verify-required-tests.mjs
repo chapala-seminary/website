@@ -95,8 +95,12 @@ async function answer(p, right, lang = 'en') {
   const { p, errs } = await openOn(ctx, TEST, who('mdiv'));
   const T = await bank(p);
   ok(T.draw === 20 && T.pass === 18 && T.questions.length === 40 && T.perReading === 4, `the test is 20 of 40, 18 to pass, 4 per reading (got ${T.draw}/${T.questions.length}/${T.pass}/${T.perReading})`);
-  ok(T.requiredFrom === null, 'the page knows the test is not yet in force');
-  ok(/not yet required/i.test(await p.locator('main, body').first().innerText()), 'the page says it is not yet required');
+  // as shipped: not in force -- or, once tools/activate-required.mjs has run,
+  // in force from the moment it recorded in src/data/required-from.json
+  const sched = fs.existsSync('src/data/required-from.json') ? JSON.parse(fs.readFileSync('src/data/required-from.json', 'utf8')) : {};
+  const from = sched.pentecostalreadings ?? null;
+  ok(T.requiredFrom === from, `the page knows when the test is in force (${from ?? 'not yet'})`);
+  ok((from ? /is required/i : /not yet required/i).test(await p.locator('main, body').first().innerText()), from ? 'the page says it is required' : 'the page says it is not yet required');
   const per = {};
   for (const q of T.questions) per[q.reading] = (per[q.reading] || 0) + 1;
   ok(JSON.stringify(per) === JSON.stringify({ 1: 8, 2: 8, 3: 8, 4: 8, 5: 8 }), 'eight questions on each of the five readings', per);
