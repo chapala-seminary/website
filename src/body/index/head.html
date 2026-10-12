@@ -651,19 +651,23 @@
         <script src="/assets/js/cts-fields-lang.js" defer></script>
         <p><a href="/cts-confirm-email.html" style="color:#f0e0b8;"><span class="en">Confirm your email when convenient — you can keep studying.</span><span class="es">Confirme su correo cuando pueda — puede seguir estudiando.</span></a></p>
         <script>
+        function ctsHomeMessage(text){ return (window.CTS_HOME_FR||{})[text] || text; }
+        function ctsHomePair(en, es){
+          return window.CTS_HOME_FR && window.CTSLanguage ? window.CTSLanguage.bi({en:en,es:es,fr:(window.CTS_HOME_FR||{})[en]}) : '<span class="en">'+en+'</span><span class="es">'+es+'</span>';
+        }
         function ctsRegister(){
           var name=(document.getElementById('reg-name').value||'').trim();
           var es=document.body.classList.contains('lang-es');
-          if(!name){ alert(es?'Escriba su nombre':'Please enter your name'); return; }
+          if(!name){ alert(ctsHomeMessage(es?'Escriba su nombre':'Please enter your name')); return; }
           var emailField=document.getElementById('reg-email');
           var email=(emailField.value||'').trim();
           emailField.value=email;
           if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) || !emailField.checkValidity() || email.length>160){
-            alert(es?'Escriba un correo electr\u00f3nico v\u00e1lido para registrarse':'Please enter a valid email address to register');
+            alert(ctsHomeMessage(es?'Escriba un correo electr\u00f3nico v\u00e1lido para registrarse':'Please enter a valid email address to register'));
             emailField.focus(); return;
           }
           var country=document.getElementById('reg-country').value;
-          if(!country){ alert(es?'Seleccione su pa\u00eds':'Please select your country'); return; }
+          if(!country){ alert(ctsHomeMessage(es?'Seleccione su pa\u00eds':'Please select your country')); return; }
           var heard=document.getElementById('reg-heard').value||'\u2014';
           var sel=document.getElementById('reg-track').value;
           var map={cert:{p:'Certificate of Ministry',es:'Certificado de Ministerio',g:''},assoc:{p:'Associate of Divinity',es:'Asociado en Divinidad',g:'assoc'},thm:{p:'Master of Theology',es:'Maestr\u00eda en Teolog\u00eda',g:''},mdiv:{p:'Master of Divinity',es:'Maestr\u00eda en Divinidad',g:''}};
@@ -672,11 +676,11 @@
             localStorage.setItem('cts_student', JSON.stringify({name:name,email:email,country:country,heard:heard,track:track,program:m.p,goal:m.g,registered:new Date().toISOString()}));
             localStorage.setItem('cts_track', track);
             localStorage.setItem('cts_goal', m.g);
-          }catch(e){ alert(es?'No se pudo guardar \u2014 active el almacenamiento':'Could not save \u2014 enable storage'); return; }
+          }catch(e){ alert(ctsHomeMessage(es?'No se pudo guardar \u2014 active el almacenamiento':'Could not save \u2014 enable storage')); return; }
           document.getElementById('cts-reg-form').style.display='none';
           var c=document.getElementById('reg-confirm'); c.style.display='block';
           var safe=name.replace(/[&<>"]/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch];});
-          c.innerHTML='<b>\u2713 '+safe+'</b> \u2014 <span class="en">'+m.p+'</span><span class="es">'+m.es+'</span>.<br><span class="en">You are registered. Open any course to begin.</span><span class="es">Est&aacute; registrado. Abra cualquier curso para comenzar.</span>';
+          c.innerHTML='<b>\u2713 '+safe+'</b> \u2014 '+ctsHomePair(m.p,m.es)+'.<br>'+ctsHomePair('You are registered. Open any course to begin.','Est&aacute; registrado. Abra cualquier curso para comenzar.');
           ctsShowCode();
         }
 
@@ -717,11 +721,12 @@
           var to=String(st.email||'');
           document.getElementById('reg-existing-to').textContent=to;
           document.getElementById('reg-existing-to-es').textContent=to;
+          var frTo=document.getElementById('reg-existing-to-fr'); if(frTo) frTo.textContent=to;
           box.style.display='block';
         }
         document.addEventListener('cts-sync-existing', ctsShowExisting);
         (function(){
-          function say(id, en, es){ document.getElementById(id).innerHTML='<span class="en">'+en+'</span><span class="es">'+es+'</span>'; }
+          function say(id, en, es){ document.getElementById(id).innerHTML=ctsHomePair(en,es); }
           var send=document.getElementById('reg-existing-email');
           if(!send) return;
           send.addEventListener('click', function(){
@@ -756,8 +761,8 @@
           btn.addEventListener('click', function(){
             var code=document.getElementById('reg-code-value').textContent;
             var done=function(){
-              btn.innerHTML='<span class="en">Copied \u2713</span><span class="es">Copiado \u2713</span>';
-              setTimeout(function(){ btn.innerHTML='<span class="en">Copy</span><span class="es">Copiar</span>'; }, 2500);
+              btn.innerHTML=ctsHomePair('Copied \u2713','Copiado \u2713');
+              setTimeout(function(){ btn.innerHTML=ctsHomePair('Copy','Copiar'); }, 2500);
             };
             // execCommand is the fallback because navigator.clipboard needs a
             // secure context, and some of these students are on http webviews.
@@ -781,7 +786,7 @@
             }
           });
         })();
-        (function(){ try{ var s=JSON.parse(localStorage.getItem('cts_student')||'null'); if(s&&s.name&&!s._tester){ document.getElementById('cts-reg-form').style.display='none'; var c=document.getElementById('reg-confirm'); c.style.display='block'; c.innerHTML='<b>\u2713 '+s.name+'</b> \u2014 '+(s.program||'')+'.<br><span class="en">Already registered on this device.</span><span class="es">Ya est&aacute; registrado en este dispositivo.</span>'; ctsShowCode(); } }catch(e){} })();
+        (function(){ try{ var s=JSON.parse(localStorage.getItem('cts_student')||'null'); if(s&&s.name&&!s._tester){ document.getElementById('cts-reg-form').style.display='none'; var c=document.getElementById('reg-confirm'); c.style.display='block'; c.innerHTML='<b>\u2713 '+s.name+'</b> \u2014 '+ctsHomeMessage(s.program||'')+'.<br>'+ctsHomePair('Already registered on this device.','Ya est&aacute; registrado en este dispositivo.'); ctsShowCode(); } }catch(e){} })();
         </script>
       </section>
 

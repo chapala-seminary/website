@@ -1268,6 +1268,28 @@ account on that device. Certificate pages continue to accept codes; reload
 after confirming by link to register and receive the certificate. Deployment
 needs `0012_email_links.sql` before the Worker. See `docs/student-records.md`.
 
+## French landing page (12 Oct 2026)
+
+The French `/fr/index.html` now translates the complete landing page: introduction,
+faculty, program requirements, all 45 course cards, nine textbooks, two reading
+lists, FAQ, contact/footer, country and form options, and registration/recovery
+messages. Page titles, descriptions, social metadata and FAQ structured data are
+French too. The catalog and language FAQ explicitly describe French courses as
+in preparation; course content remains subject to its existing publication review.
+The French Scripture quotation is attributed to Louis Segond 1910.
+
+French copy lives in `src/data/french-landing.json`, keyed by its exact English
+source, with the page-specific build adapter in `src/lib/french-landing.ts`.
+Changed source copy without a translation fails the build. Course lesson and
+answer-key data are untouched. Registration program values and student progress
+keys retain their existing values; dynamic messages use the shared language
+renderer. The source checkbox still shows the corresponding English.
+
+`tools/verify-french-landing.mjs` checks complete French coverage, catalog links,
+metadata, desktop/phone layout, the source checkbox, signup validation, saved
+registration and recovery messages, plus English/Spanish signup confirmations. It runs in `test/run-tests.sh` and blocks
+API writes while testing with synthetic data.
+
 ## How to check any of this yourself
 
 ```
