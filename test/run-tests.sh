@@ -108,6 +108,8 @@ node tools/verify-worker-routing.mjs "http://127.0.0.1:$PORT"
 # And that the config the suite just tested still matches the one that gets
 # deployed, on every field that changes how a request is answered.
 node tools/verify-worker-config.mjs
+# outgoing email: Cloudflare first, Resend as the fallback (worker/email.js)
+node tools/verify-email.mjs
 node tools/gen-worker-catalog.mjs --check
 node tools/verify-legacy-table.mjs
 

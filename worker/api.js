@@ -23,7 +23,7 @@
 
 import { courseShortfall, textbookShortfall, exemptionsFor, degreeShortfall, resolveCourse, studentLevel, canonicalCode, certificateLevel, DEGREES } from './awards.js';
 import catalog from './catalog.json';
-import { emailConfigured, sendEmail, verificationEmail, certificateEmail, codeEmail } from './email.js';
+import { emailConfigured, emailLogOnly, sendEmail, verificationEmail, certificateEmail, codeEmail } from './email.js';
 import { notify, notifyBatch, retryFailed } from './notify.js';
 
 const MAX = { name: 120, email: 160, country: 80, track: 24, goal: 400, heard: 40, title: 200, course: 64, code: 40 };
@@ -368,7 +368,7 @@ async function sync(request, env) {
   const state = await loadState(env, id);
   // The test configuration sends nothing; it is told what would have gone
   // out so the suite can check it. Never present in a deployed Worker.
-  return json(env.EMAIL_MODE === 'log' && !env.RESEND_API_KEY ? { ...state, notifications: notices } : state);
+  return json(emailLogOnly(env) ? { ...state, notifications: notices } : state);
 }
 
 async function hydrate(env, rawCode) {
@@ -462,7 +462,7 @@ async function issueCertificate(request, env) {
         emailed = true;
       } catch (e) { console.error('certificate email failed', e && e.message); }
       return json({ verifyCode: vc, reissued: false, emailed,
-        ...(env.EMAIL_MODE === 'log' && !env.RESEND_API_KEY && n ? { notification: n } : {}) }, 201);
+        ...(emailLogOnly(env) && n ? { notification: n } : {}) }, 201);
     }
   }
   throw new HttpError(503, 'could not allocate a verification code, please try again');

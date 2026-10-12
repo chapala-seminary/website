@@ -1,34 +1,77 @@
-/* Outgoing email, through Resend (decided 25 Sept 2026).
+/* Outgoing email: Cloudflare Email Service first, Resend as the fallback.
  *
- * Cloudflare's own send_email binding only reaches addresses verified in the
- * seminary's account -- fine for notices to the seminary, useless for a
- * student. Resend sends to anyone from a verified domain; the free plan is
- * 3,000 emails a month and 100 a day, far above what the seminary sends.
+ * Decided 25 Sept 2026: Resend, because Cloudflare's send_email binding then
+ * reached only addresses verified in the seminary's account. Revised 12 Oct
+ * 2026 (Dr. Cook): Cloudflare Email Service now sends to any recipient on
+ * Workers Paid, which the seminary has had since 11 Oct, with 3,000 emails a
+ * month included -- while Resend's free plan stops at 100 a day, a limit the
+ * site reached on 9 Oct.
  *
- * Configuration (wrangler.jsonc vars + one secret):
- *   RESEND_API_KEY  secret: `npx wrangler secret put RESEND_API_KEY [--env beta]`
+ * Order of attempts:
+ *   1. env.EMAIL (the send_email binding), when it exists;
+ *   2. Resend, when RESEND_API_KEY is set -- used if there is no binding, or
+ *      if Cloudflare refuses for a reason that is about Cloudflare rather
+ *      than the message (domain not yet onboarded, a quota, a rate limit, a
+ *      temporary error). Email Service is in beta and new accounts start on a
+ *      small daily quota that grows, so Resend's 100 a day stays as a cushion.
+ *
+ * Configuration (wrangler.jsonc):
+ *   send_email      [{ "name": "EMAIL" }]  -- the Cloudflare binding
+ *   RESEND_API_KEY  secret, optional now:  `npx wrangler secret put RESEND_API_KEY [--env beta]`
  *   EMAIL_FROM      e.g. "Chapala Theological Seminary <certificates@chapalaseminary.org>"
  *   EMAIL_REPLY_TO  where a student's reply goes (the seminary's inbox)
  *   EMAIL_MODE      "log" in the test config only: nothing is sent, and the
  *                   caller is told so, so the suite can finish a verification
  *
- * With no key and no log mode, sending fails loudly (503) rather than
+ * Before the binding can reach students, chapalaseminary.org must be onboarded
+ * once in the dashboard: Compute > Email Service > Email Sending > Onboard
+ * Domain (it adds SPF, DKIM and bounce records on cf-bounce.chapalaseminary.org
+ * and a DMARC record). Until then Cloudflare answers E_SENDER_DOMAIN_NOT_AVAILABLE
+ * and every message goes through Resend, exactly as before.
+ *
+ * With no way to send and no log mode, sending fails loudly (503) rather than
  * pretending a message went out.
  */
 
+const hasCloudflare = (env) => !!(env && env.EMAIL && typeof env.EMAIL.send === 'function');
+
 export function emailConfigured(env) {
-  return !!(env && (env.RESEND_API_KEY || env.EMAIL_MODE === 'log'));
+  return !!(env && (hasCloudflare(env) || env.RESEND_API_KEY || env.EMAIL_MODE === 'log'));
 }
 
-/** { to, subject, text, html? } -> { id } | { logged: true }; throws on failure. */
-export async function sendEmail(env, msg) {
-  if (env.EMAIL_MODE === 'log' && !env.RESEND_API_KEY) {
-    console.log('email (log mode):', msg.to, '|', msg.subject);
-    return { logged: true };
-  }
-  if (!env.RESEND_API_KEY || !env.EMAIL_FROM) {
-    const e = new Error('email is not configured'); e.status = 503; throw e;
-  }
+/** True only in the test harness: log mode with nothing that could really send. */
+export function emailLogOnly(env) {
+  return !!(env && env.EMAIL_MODE === 'log' && !env.RESEND_API_KEY && !hasCloudflare(env));
+}
+
+/** "Name <a@b>" -> { name, email }; a bare address -> { email }. */
+export function parseAddress(s) {
+  const m = /^\s*"?([^"<]*?)"?\s*<\s*([^>\s]+)\s*>\s*$/.exec(s || '');
+  if (m) return m[1] ? { name: m[1], email: m[2] } : { email: m[2] };
+  return { email: String(s || '').trim() };
+}
+
+/* Cloudflare's refusals that say nothing is wrong with the message itself, so
+   Resend may still deliver it. A bad address, a suppressed recipient or an
+   outright delivery failure would fail at Resend too, and are not retried. */
+const FALL_BACK_ON = new Set([
+  'E_SENDER_DOMAIN_NOT_AVAILABLE', 'E_SENDER_NOT_VERIFIED', 'E_RECIPIENT_NOT_ALLOWED',
+  'E_DAILY_LIMIT_EXCEEDED', 'E_RATE_LIMIT_EXCEEDED', 'E_INTERNAL_SERVER_ERROR',
+]);
+
+async function viaCloudflare(env, msg) {
+  const r = await env.EMAIL.send({
+    from: parseAddress(env.EMAIL_FROM),
+    to: msg.to,
+    subject: msg.subject,
+    text: msg.text,
+    ...(msg.html ? { html: msg.html } : {}),
+    ...(env.EMAIL_REPLY_TO ? { replyTo: env.EMAIL_REPLY_TO } : {}),
+  });
+  return { id: r && r.messageId, via: 'cloudflare' };
+}
+
+async function viaResend(env, msg) {
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { authorization: `Bearer ${env.RESEND_API_KEY}`, 'content-type': 'application/json' },
@@ -47,7 +90,30 @@ export async function sendEmail(env, msg) {
     console.error('resend error', res.status, (await res.text()).slice(0, 500));
     const e = new Error('the email could not be sent'); e.status = 502; throw e;
   }
-  return await res.json();
+  return { ...(await res.json()), via: 'resend' };
+}
+
+/** { to, subject, text, html? } -> { id, via } | { logged: true }; throws on failure. */
+export async function sendEmail(env, msg) {
+  if (emailLogOnly(env)) {
+    console.log('email (log mode):', msg.to, '|', msg.subject);
+    return { logged: true };
+  }
+  if (!env.EMAIL_FROM || !(hasCloudflare(env) || env.RESEND_API_KEY)) {
+    const e = new Error('email is not configured'); e.status = 503; throw e;
+  }
+  if (hasCloudflare(env)) {
+    try {
+      return await viaCloudflare(env, msg);
+    } catch (err) {
+      const code = err && err.code;
+      console.error('cloudflare email error', code || '', String((err && err.message) || err).slice(0, 300));
+      if (!(env.RESEND_API_KEY && FALL_BACK_ON.has(code))) {
+        const e = new Error('the email could not be sent'); e.status = 502; throw e;
+      }
+    }
+  }
+  return await viaResend(env, msg);
 }
 
 /** The verification message, in both languages: the site is bilingual and

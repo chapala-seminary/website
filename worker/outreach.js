@@ -44,7 +44,7 @@
  *                      was taken for it (Wayne, 5 Oct 2026). /staff/digest
  *                      still shows any site's summary on request.
  */
-import { emailConfigured, sendEmail } from './email.js';
+import { emailConfigured, emailLogOnly, sendEmail } from './email.js';
 import { degreeShortfall, studentLevel } from './awards.js';
 import catalog from './catalog.json';
 
@@ -213,7 +213,7 @@ export async function runOutreach(env, { asOf = new Date(), send = env.OUTREACH_
     await env.DB.prepare('INSERT INTO outreach (student_id, kind, status, error, sent_at) VALUES (?, ?, ?, ?, ?)')
       .bind(st.student_id, kind, status, error, asOf.toISOString()).run();
     // The test configuration sends nothing; it is shown what would have gone.
-    const shown = env.EMAIL_MODE === 'log' && !env.RESEND_API_KEY && msg ? { message: msg } : {};
+    const shown = emailLogOnly(env) && msg ? { message: msg } : {};
     results.push({ ...r, status, ...(error ? { error } : {}), ...shown });
   }
   return { considered: list.length, capped: Math.max(0, list.length - DAILY_CAP), results };
