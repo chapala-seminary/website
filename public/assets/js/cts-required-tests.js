@@ -19,6 +19,14 @@ window.CTS_REQUIRED_TESTS = {
    "requiredFrom": null
   }
  ],
+ "CTSBIBLE": [
+  {
+   "slug": "biblehandbook",
+   "page": "CTSTextbookBibleHandbook",
+   "kind": "textbook",
+   "requiredFrom": null
+  }
+ ],
  "COUNSELING": [
   {
    "slug": "counseling",
@@ -45,6 +53,20 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "doctrinal",
    "page": "CTSTextbookDoctrinalPreaching",
    "kind": "textbook"
+  }
+ ],
+ "CTSST": [
+  {
+   "slug": "doctrines",
+   "page": "CTSTextbookFundamentalDoctrines",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "streadings",
+   "page": "CTSSTReadings",
+   "kind": "reading",
+   "requiredFrom": null
   }
  ],
  "CTSEVANGELISM": [
@@ -89,6 +111,14 @@ window.CTS_REQUIRED_TESTS = {
    "requiredFrom": null
   }
  ],
+ "CTSHS": [
+  {
+   "slug": "holyspirit",
+   "page": "CTSTextbookHolySpirit",
+   "kind": "textbook",
+   "requiredFrom": null
+  }
+ ],
  "CTSJOHN": [
   {
    "slug": "john",
@@ -129,6 +159,28 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "narrative",
    "page": "CTSTextbookNarrativePreaching",
    "kind": "textbook"
+  }
+ ],
+ "CTSPARABLES": [
+  {
+   "slug": "parables",
+   "page": "CTSTextbookParables",
+   "kind": "textbook",
+   "requiredFrom": null
+  }
+ ],
+ "CTSPM": [
+  {
+   "slug": "pastor",
+   "page": "CTSTextbookPastor",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "pmreadings",
+   "page": "CTSPMReadings",
+   "kind": "reading",
+   "requiredFrom": null
   }
  ],
  "CTSPENT": [
@@ -271,22 +323,6 @@ window.CTS_REQUIRED_TESTS = {
   {
    "slug": "otsreadings",
    "page": "CTSOTSReadings",
-   "kind": "reading",
-   "requiredFrom": null
-  }
- ],
- "CTSPM": [
-  {
-   "slug": "pmreadings",
-   "page": "CTSPMReadings",
-   "kind": "reading",
-   "requiredFrom": null
-  }
- ],
- "CTSST": [
-  {
-   "slug": "streadings",
-   "page": "CTSSTReadings",
    "kind": "reading",
    "requiredFrom": null
   }

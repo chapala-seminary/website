@@ -24,13 +24,16 @@ const load = (dir) => fs.readdirSync(dir).filter((f) => f.endsWith('.json')).map
 const books = load('src/content/textbooks');
 const readings = load('src/content/readings');
 
-const tbNotice = (b) => {
+const tbNotice = (b, reading = true) => {
   const mc = b.test.questions.every((q) => q.options);
   const kind = mc
     ? { en: 'twenty multiple-choice questions', es: 'veinte preguntas de opción múltiple' }
     : { en: 'twenty fill-in-the-blank questions', es: 'veinte preguntas para completar' };
+  reading = reading
+    ? { en: ' It is separate from the reading test on the five digests below: passing one does not pass the other. On the M.Div. and Th.M. tracks both tests are being introduced; each test\'s page says whether it is in force yet. Until then any student may take them, and a pass is kept in your record.', es: ' Es distinto del examen de lecturas sobre los cinco resúmenes que siguen: aprobar uno no aprueba el otro. En los trayectos M.Div. y Th.M. ambos exámenes se están introduciendo; la página de cada examen indica si ya está en vigor. Mientras tanto cualquier estudiante puede presentarlos, y su aprobación queda en su expediente.' }
+    : { en: " On the M.Div. and Th.M. tracks this test is being introduced; its page says whether it is in force yet. Until then any student may take it, and a pass is kept in your record.", es: ' En los trayectos M.Div. y Th.M. este examen se está introduciendo; su página indica si ya está en vigor. Mientras tanto cualquier estudiante puede presentarlo, y su aprobación queda en su expediente.' };
   return `<!-- CTS-TEXTBOOK-TEST (tools/room-test-notices.mjs) -->
-<div class="notice" id="cts-textbook"><span class="lang-en block"><strong>The Master's textbook test:</strong> read <a href="/${b.page}.html">${b.title.en}</a>, then take <a href="/${b.page}Test.html">its test</a>: ${kind.en}, drawn from forty; eighteen right passes. Each answer is marked at once, and when it is wrong the right answer is shown. It is separate from the reading test on the five digests below: passing one does not pass the other. On the M.Div. and Th.M. tracks both tests are being introduced; each test's page says whether it is in force yet. Until then any student may take them, and a pass is kept in your record.</span><span class="lang-es block"><strong>El examen del libro de texto de maestría:</strong> lea <a href="/${b.page}.html">${b.title.es}</a> y luego presente <a href="/${b.page}Test.html">su examen</a>: ${kind.es}, tomadas de cuarenta; se aprueba con dieciocho. Cada respuesta se califica en seguida y, si es incorrecta, se muestra la correcta. Es distinto del examen de lecturas sobre los cinco resúmenes que siguen: aprobar uno no aprueba el otro. En los trayectos M.Div. y Th.M. ambos exámenes se están introduciendo; la página de cada examen indica si ya está en vigor. Mientras tanto cualquier estudiante puede presentarlos, y su aprobación queda en su expediente.</span></div>
+<div class="notice" id="cts-textbook"><span class="lang-en block"><strong>The Master's textbook test:</strong> read <a href="/${b.page}.html">${b.title.en}</a>, then take <a href="/${b.page}Test.html">its test</a>: ${kind.en}, drawn from forty; eighteen right passes. Each answer is marked at once, and when it is wrong the right answer is shown.${reading.en ?? ''}</span><span class="lang-es block"><strong>El examen del libro de texto de maestría:</strong> lea <a href="/${b.page}.html">${b.title.es}</a> y luego presente <a href="/${b.page}Test.html">su examen</a>: ${kind.es}, tomadas de cuarenta; se aprueba con dieciocho. Cada respuesta se califica en seguida y, si es incorrecta, se muestra la correcta.${reading.es ?? ''}</span></div>
 <!-- /CTS-TEXTBOOK-TEST -->
 `;
 };
@@ -56,6 +59,15 @@ for (const r of readings.filter((x) => 'requiredFrom' in x)) {
   else { console.error(`${r.page}: no place for the reading-test notice`); problems++; continue; }
   if (/cts-textbook-test-pilot|CTS-COMPLETE-|has not been activated/.test(s)) { console.error(`${r.page}: an old notice is left`); problems++; }
   if (s !== before) { changed++; console.log(`${r.page}: ${b ? 'textbook + reading' : 'reading'} notices`); if (WRITE) fs.writeFileSync(file, s); }
+}
+/* A course with a new textbook test but no reading test yet: the textbook
+   notice goes at the top of the course's reading room, <course>Readings. */
+for (const b of books.filter((x) => 'requiredFrom' in x && !readings.some((r) => r.course === x.course && 'requiredFrom' in r))) {
+  const file = `src/body/rooms/${b.course}Readings.html`;
+  if (!fs.existsSync(file)) { console.log(`${b.slug}: no room ${file}; the units and the book page carry the test`); continue; }
+  const before = fs.readFileSync(file, 'utf8');
+  const s = tbNotice(b, false) + before.replace(/<!-- CTS-TEXTBOOK-TEST [^\n]*-->\n[\s\S]*?<!-- \/CTS-TEXTBOOK-TEST -->\n/, '');
+  if (s !== before) { changed++; console.log(`${b.course}Readings: textbook notice`); if (WRITE) fs.writeFileSync(file, s); }
 }
 console.log(`${changed} room(s) ${WRITE ? 'written' : 'to change (add --write)'}`);
 process.exit(problems ? 1 : 0);
