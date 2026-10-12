@@ -80,7 +80,7 @@ Until this step, every new test is open to everyone and required of no one.
 Dr. Cook announces a start date, which must be **after** the deploy that carries it:
 
     node tools/activate-required.mjs --list
-    node tools/activate-required.mjs --at 2026-11-01T06:00:00Z --all-pending            # dry run: lists the tests (36 as of #49)
+    node tools/activate-required.mjs --at 2026-11-01T06:00:00Z --all-pending            # dry run: lists the tests (41 with #51)
     node tools/activate-required.mjs --at 2026-11-01T06:00:00Z --all-pending --write
     npm run build && test/run-tests.sh
     npm run deploy

@@ -91,7 +91,14 @@ Torrey, *The Fundamental Doctrines of the Christian Faith* (CTSST); Arnot,
 (CTSBible); Harvey, *The Pastor* (CTSPM). Five excerpts each, chosen to
 avoid polemic and anything that would trouble very conservative readers.
 
-All fifteen, and the five-reading tests installed in October, are online with
+Five more (11 Oct, same terms): Hurst, *Short History of the Christian
+Church* (CTSCH); Boyd, *A Brief Bible History*, Old Testament part (CTS, Old
+Testament Survey -- Hurlbut's *Outline Studies* is mostly outlines and says the
+Flood was probably not global); Machen, *The Literature and History of New
+Testament Times* (CTSNT); Bruce, *The Training of the Twelve* (CTSLOC);
+Trumbull, *Teaching and Teachers* (CTSCE).
+
+All twenty, and the five-reading tests installed in October, are online with
 `requiredFrom: null`: open to everyone, required of no one. Dr. Cook wants
 them required on the M.Div. and Th.M. tracks once published. To do that:
 

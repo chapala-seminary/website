@@ -27,6 +27,20 @@ window.CTS_REQUIRED_TESTS = {
    "requiredFrom": null
   }
  ],
+ "CTSCH": [
+  {
+   "slug": "churchhistory",
+   "page": "CTSTextbookChurchHistory",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "chreadings",
+   "page": "CTSCHReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
  "COUNSELING": [
   {
    "slug": "counseling",
@@ -161,6 +175,34 @@ window.CTS_REQUIRED_TESTS = {
    "kind": "textbook"
   }
  ],
+ "CTSNT": [
+  {
+   "slug": "newtestament",
+   "page": "CTSTextbookNewTestament",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "ntreadings",
+   "page": "CTSNTReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSOTS": [
+  {
+   "slug": "oldtestament",
+   "page": "CTSTextbookOldTestament",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "otsreadings",
+   "page": "CTSOTSReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
  "CTSPARABLES": [
   {
    "slug": "parables",
@@ -273,19 +315,27 @@ window.CTS_REQUIRED_TESTS = {
    "kind": "textbook"
   }
  ],
+ "CTSCE": [
+  {
+   "slug": "teaching",
+   "page": "CTSTextbookTeaching",
+   "kind": "textbook",
+   "requiredFrom": null
+  }
+ ],
+ "CTSLOC": [
+  {
+   "slug": "trainingtwelve",
+   "page": "CTSTextbookTrainingTwelve",
+   "kind": "textbook",
+   "requiredFrom": null
+  }
+ ],
  "CTSWORSHIP": [
   {
    "slug": "worship",
    "page": "CTSTextbookWorship",
    "kind": "textbook"
-  }
- ],
- "CTSCH": [
-  {
-   "slug": "chreadings",
-   "page": "CTSCHReadings",
-   "kind": "reading",
-   "requiredFrom": null
   }
  ],
  "CTSGENESIS": [
@@ -307,22 +357,6 @@ window.CTS_REQUIRED_TESTS = {
   {
    "slug": "mattreadings",
    "page": "CTSMattReadings",
-   "kind": "reading",
-   "requiredFrom": null
-  }
- ],
- "CTSNT": [
-  {
-   "slug": "ntreadings",
-   "page": "CTSNTReadings",
-   "kind": "reading",
-   "requiredFrom": null
-  }
- ],
- "CTSOTS": [
-  {
-   "slug": "otsreadings",
-   "page": "CTSOTSReadings",
    "kind": "reading",
    "requiredFrom": null
   }
