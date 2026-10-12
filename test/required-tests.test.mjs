@@ -36,9 +36,9 @@ const active = (completions = [], now = after) => ({ requiredFrom: { [READ]: R }
 
 ok(JSON.stringify(A.testsFor(CODE)) === JSON.stringify([BOOK, READ]), 'Pentecostalism requires its textbook test and its five-reading test, textbook first', A.testsFor(CODE));
 ok(A.textbookFor(CODE) === BOOK, 'its textbook is still "the textbook" for anything that asks for one');
-ok(JSON.stringify(A.testsFor('CTSGENESIS')) === '["genesisreadings"]', 'Genesis keeps its one required-reading test');
+ok(JSON.stringify(A.testsFor('CTSGENESIS')) === '["genesisdods","genesisreadings"]', 'Genesis keeps its required-reading test; its new textbook test (11 Oct) comes first');
 ok(JSON.stringify(A.testsFor('CTSWR')) === '["wrreadings"]', 'World Religions keeps its one required-reading test');
-ok(A.testsFor('CTSAPOL').length === 0, 'a course with no test requires none');
+ok(A.testsFor('CTSAL').length === 0, 'a course with no test requires none');
 // shipped NOT in force (null) -- or, once Robert runs tools/activate-required.mjs,
 // the moment it recorded in src/data/required-from.json, and nothing else
 const fs = await import('node:fs');

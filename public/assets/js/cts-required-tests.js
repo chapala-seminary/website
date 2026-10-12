@@ -19,6 +19,14 @@ window.CTS_REQUIRED_TESTS = {
    "requiredFrom": null
   }
  ],
+ "CTSAPOL": [
+  {
+   "slug": "apologetics",
+   "page": "CTSTextbookApologetics",
+   "kind": "textbook",
+   "requiredFrom": null
+  }
+ ],
  "CTSBIBLE": [
   {
    "slug": "biblehandbook",
@@ -125,6 +133,19 @@ window.CTS_REQUIRED_TESTS = {
    "requiredFrom": null
   }
  ],
+ "CTSGENESIS": [
+  {
+   "slug": "genesisdods",
+   "page": "CTSTextbookGenesisDods",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "genesisreadings",
+   "page": "CTSGenesisReadings",
+   "kind": "reading"
+  }
+ ],
  "CTSHS": [
   {
    "slug": "holyspirit",
@@ -166,6 +187,36 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "language",
    "page": "CTSTextbookLanguage",
    "kind": "textbook"
+  }
+ ],
+ "CTSMATT": [
+  {
+   "slug": "matthewgibson",
+   "page": "CTSTextbookMatthewGibson",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "mattreadings",
+   "page": "CTSMattReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSEVANPREACH": [
+  {
+   "slug": "ministryword",
+   "page": "CTSTextbookMinistryWord",
+   "kind": "textbook",
+   "requiredFrom": null
+  }
+ ],
+ "CTSMISSIONS": [
+  {
+   "slug": "missionarymethods",
+   "page": "CTSTextbookMissionaryMethods",
+   "kind": "textbook",
+   "requiredFrom": null
   }
  ],
  "STORYTEL": [
@@ -315,6 +366,20 @@ window.CTS_REQUIRED_TESTS = {
    "kind": "textbook"
   }
  ],
+ "CTSHERMENEUTICS": [
+  {
+   "slug": "studybible",
+   "page": "CTSTextbookStudyBible",
+   "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "hermeneuticsreadings",
+   "page": "CTSHermeneuticsReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
  "CTSCE": [
   {
    "slug": "teaching",
@@ -336,29 +401,6 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "worship",
    "page": "CTSTextbookWorship",
    "kind": "textbook"
-  }
- ],
- "CTSGENESIS": [
-  {
-   "slug": "genesisreadings",
-   "page": "CTSGenesisReadings",
-   "kind": "reading"
-  }
- ],
- "CTSHERMENEUTICS": [
-  {
-   "slug": "hermeneuticsreadings",
-   "page": "CTSHermeneuticsReadings",
-   "kind": "reading",
-   "requiredFrom": null
-  }
- ],
- "CTSMATT": [
-  {
-   "slug": "mattreadings",
-   "page": "CTSMattReadings",
-   "kind": "reading",
-   "requiredFrom": null
   }
  ],
  "WISESPEAK": [

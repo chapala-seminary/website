@@ -98,7 +98,14 @@ Flood was probably not global); Machen, *The Literature and History of New
 Testament Times* (CTSNT); Bruce, *The Training of the Twelve* (CTSLOC);
 Trumbull, *Teaching and Teachers* (CTSCE).
 
-All twenty, and the five-reading tests installed in October, are online with
+Six more (11 Oct): Torrey, *How to Study the Bible* (CTSHermeneutics);
+Fisher, *The Grounds of Theistic and Christian Belief*, 1902 (CTSApol);
+Taylor, *The Ministry of the Word* (CTSEvanPreach); Allen, *Missionary
+Methods* (CTSMissions); Dods, *Genesis* -- Abraham, Jacob and Joseph chapters,
+not the Creation chapter (CTSGenesis, beside its reading test, which stays
+in force as before); Gibson, *Matthew* (CTSMatt).
+
+All twenty-six, and the five-reading tests installed in October, are online with
 `requiredFrom: null`: open to everyone, required of no one. Dr. Cook wants
 them required on the M.Div. and Th.M. tracks once published. To do that:
 

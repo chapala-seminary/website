@@ -78,7 +78,7 @@ const R = '2026-11-01T00:00:00.000Z', early = '2026-10-20T15:00:00.000Z', late =
 const active = (completions = [], now = late) => ({ requiredFrom: { [WS]: R }, now, completions });
 
 ok(JSON.stringify(A.testsFor('WISESPEAK')) === JSON.stringify([WS]), 'Preaching requires the one reading test');
-ok(A.testsFor('CTSAPOL').length === 0, 'a course with no test still requires none');
+ok(A.testsFor('CTSAL').length === 0, 'a course with no test still requires none');
 
 // inactive, as staged
 for (const level of ['cert', 'associate', 'thm', 'mdiv', null])
