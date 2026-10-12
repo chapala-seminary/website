@@ -148,7 +148,7 @@ for (const r of readings) {
       ok((q.prompt[lang].match(/____/g) || []).length === 1, `${r.slug} #${i + 1}: not one blank in ${lang}`);
       ok(fillRight(q, q.answer[lang]), `${r.slug} #${i + 1}: the ${lang} answer "${q.answer[lang]}" is not marked right`);
       const acc = (q.accept && q.accept[lang]) || [];
-      ok(acc.length >= 1 && acc.length + 1 <= 5, `${r.slug} #${i + 1}: ${acc.length + 1} accepted ${lang} answers; Dr. Cook asked for alternates, three to five in all`);
+      ok(acc.length >= 1 && acc.length + 1 <= 5, `${r.slug} #${i + 1}: ${acc.length + 1} accepted ${lang} answers; Dr. Cook asked for alternates: at least one besides the answer, at most five answers in all`);
       for (const a of acc) ok(fillRight(q, a), `${r.slug} #${i + 1}: accepted ${lang} answer "${a}" is not marked right`);
     }
     ok(!fillRight(q, ''), `${r.slug} #${i + 1}: an empty answer is marked right`);
