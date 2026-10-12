@@ -94,6 +94,22 @@ const TESTS = [
   { slug: 'mattreadings', page: 'CTSMattReadings', course: 'CTSMatt', kind: 'reading', requiredFrom: null, alternates: 'optional',
     title: {"en": "Matthew Intensive: Required Readings", "es": "Intensivo de Mateo: Lecturas Requeridas"},
     room: {"en": "the five readings in the Matthew Reading Room", "es": "las cinco lecturas de Mateo"} },
+  /* Batch C (11 Oct 2026, ChatGPT's "complete course packages"): the five
+     CTS digests of six more rooms. Same terms: open to all, required of no
+     one until tools/activate-required.mjs dates them; alternates optional.
+     Claude's review: every answer is in its room in both languages; one
+     Spanish prompt reworded (John #26), Marcelino for Psalms #4, numerals
+     accepted where the answer is a number. */
+  ...[
+    ['firstpeterreadings', 'CTS1PeterReadings', 'CTS1Peter', '1 Peter', '1 Pedro'],
+    ['johnreadings', 'CTSJohnReadings', 'CTSJohn', 'John', 'Juan'],
+    ['ruthestherreadings', 'CTSREReadings', 'CTSRE', 'Ruth and Esther', 'Rut y Ester'],
+    ['revelationreadings', 'CTSRevReadings', 'CTSRev', 'Revelation', 'Apocalipsis'],
+    ['psalmsreadings', 'CTSPsalmsReadings', 'CTSPsalms', 'Psalms', 'Salmos'],
+    ['pentreadings', 'CTSPentReadings', 'CTSPent', 'Pentateuch', 'Pentateuco'],
+  ].map(([slug, page, course, en, es]) => ({ slug, page, course, kind: 'reading', requiredFrom: null, alternates: 'optional',
+    title: { en: `${en}: Required Readings`, es: `${es}: Lecturas Requeridas` },
+    room: { en: `the five readings in the ${en} Reading Room`, es: `las cinco lecturas de ${es}` } })),
 ];
 
 const SCHEDULED = fs.existsSync('src/data/required-from.json') ? JSON.parse(fs.readFileSync('src/data/required-from.json', 'utf8')) : {};

@@ -53,6 +53,12 @@ window.CTS_REQUIRED_TESTS = {
    "page": "CTSTextbookFirstPeter",
    "kind": "textbook",
    "requiredFrom": null
+  },
+  {
+   "slug": "firstpeterreadings",
+   "page": "CTS1PeterReadings",
+   "kind": "reading",
+   "requiredFrom": null
   }
  ],
  "CTSGALATIANS": [
@@ -74,6 +80,12 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "john",
    "page": "CTSTextbookJohn",
    "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "johnreadings",
+   "page": "CTSJohnReadings",
+   "kind": "reading",
    "requiredFrom": null
   }
  ],
@@ -137,6 +149,12 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "ruthesther",
    "page": "CTSTextbookRuthEsther",
    "kind": "textbook",
+   "requiredFrom": null
+  },
+  {
+   "slug": "ruthestherreadings",
+   "page": "CTSREReadings",
+   "kind": "reading",
    "requiredFrom": null
   }
  ],
@@ -209,10 +227,34 @@ window.CTS_REQUIRED_TESTS = {
    "requiredFrom": null
   }
  ],
+ "CTSPENT": [
+  {
+   "slug": "pentreadings",
+   "page": "CTSPentReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
  "CTSPM": [
   {
    "slug": "pmreadings",
    "page": "CTSPMReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSPSALMS": [
+  {
+   "slug": "psalmsreadings",
+   "page": "CTSPsalmsReadings",
+   "kind": "reading",
+   "requiredFrom": null
+  }
+ ],
+ "CTSREV": [
+  {
+   "slug": "revelationreadings",
+   "page": "CTSRevReadings",
    "kind": "reading",
    "requiredFrom": null
   }
