@@ -84,7 +84,14 @@ exposition of the Shema, leaving out his argument for a late author.
 Six more five-reading tests came with them: 1 Peter, John, Ruth–Esther,
 Revelation, Psalms, Pentateuch.
 
-All ten, and the five-reading tests installed in October, are online with
+Five more, chosen from the Drive library (CTS_Book_0xx) with Dr. Cook's
+go-ahead (11 Oct): Torrey, *The Person and Work of the Holy Spirit* (CTSHS);
+Torrey, *The Fundamental Doctrines of the Christian Faith* (CTSST); Arnot,
+*The Parables of Our Lord* (CTSParables); Angus, *The Bible Hand-Book*
+(CTSBible); Harvey, *The Pastor* (CTSPM). Five excerpts each, chosen to
+avoid polemic and anything that would trouble very conservative readers.
+
+All fifteen, and the five-reading tests installed in October, are online with
 `requiredFrom: null`: open to everyone, required of no one. Dr. Cook wants
 them required on the M.Div. and Th.M. tracks once published. To do that:
 

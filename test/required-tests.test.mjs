@@ -44,6 +44,13 @@ ok(A.testsFor('CTSAPOL').length === 0, 'a course with no test requires none');
 const fs = await import('node:fs');
 const SCHED = fs.existsSync('src/data/required-from.json') ? JSON.parse(fs.readFileSync('src/data/required-from.json', 'utf8')) : {};
 const shipped = SCHED[READ] ?? null;
+// every dated test was dated by activate-required.mjs, at the moment it recorded;
+// a stray date (a trial run left behind) would hold students for no reason
+for (const dir of ['src/content/textbooks', 'src/content/readings'])
+  for (const f of fs.readdirSync(dir).filter((x) => x.endsWith('.json'))) {
+    const r = JSON.parse(fs.readFileSync(`${dir}/${f}`, 'utf8'));
+    if (r.requiredFrom != null) ok(SCHED[r.slug] === r.requiredFrom, `${r.slug}: requiredFrom ${r.requiredFrom} is not the moment recorded in src/data/required-from.json`);
+  }
 ok(catalog.textbooks[READ].requiredFrom === shipped, 'the pilot ships NOT in force (requiredFrom null) until Robert activates it, and then from the moment he set', catalog.textbooks[READ]);
 ok(!('requiredFrom' in catalog.textbooks.genesisreadings) && !('requiredFrom' in catalog.textbooks.wrreadings),
   'Genesis and World Religions carry no activation date: they have counted since 4 Oct and still do');
