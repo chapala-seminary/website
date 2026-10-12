@@ -10,7 +10,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "actsstokes",
    "page": "CTSTextbookActsStokes",
    "kind": "textbook",
-   "requiredFrom": "2026-11-01T00:00:00Z"
+   "requiredFrom": null
   },
   {
    "slug": "actsreadings",
@@ -215,7 +215,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "psalmsmaclaren",
    "page": "CTSTextbookPsalmsMaclaren",
    "kind": "textbook",
-   "requiredFrom": "2026-11-01T00:00:00Z"
+   "requiredFrom": null
   },
   {
    "slug": "psalmsreadings",
@@ -229,7 +229,7 @@ window.CTS_REQUIRED_TESTS = {
    "slug": "revelationmilligan",
    "page": "CTSTextbookRevelationMilligan",
    "kind": "textbook",
-   "requiredFrom": "2026-11-01T00:00:00Z"
+   "requiredFrom": null
   },
   {
    "slug": "revelationreadings",
