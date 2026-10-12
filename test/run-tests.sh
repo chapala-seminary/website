@@ -235,6 +235,9 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   node test/engine-languages.mjs
   node test/french-drafts.test.mjs
 node test/published-models.test.mjs
+  # Short answers in John, Matthew, Acts and Romans (French Batch 2 review):
+  # a copied question never passes, correct answers do, known wrong ones fail.
+  node test/sa-keywords.test.mjs
   node tools/verify-french-interface.mjs "http://127.0.0.1:$PORT"
   node tools/verify-french-landing.mjs "http://127.0.0.1:$PORT"
   SYNC_BASE="http://127.0.0.1:$PORT" node test/sync.test.mjs

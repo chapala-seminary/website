@@ -1291,6 +1291,35 @@ metadata, desktop/phone layout, the source checkbox, signup validation, saved
 registration and recovery messages, plus English/Spanish signup confirmations. It runs in `test/run-tests.sh` and blocks
 API writes while testing with synthetic data.
 
+## French Batch 2 findings: John, Matthew, Acts, Romans (12 Oct 2026)
+
+The French Batch 2 review (PR #68, `_review/french/BATCH2-FINDINGS.md`) listed
+problems in the English site. Each was checked against the lesson, question,
+key and model together and against Scripture or historical sources; the
+disposition of every finding is in `docs/batch2-findings-disposition.md`.
+
+* **Lessons and questions, English and Spanish together** (28 lesson files,
+  units in all four courses): wrong keys (Acts 6, 8, 11; Romans 1),
+  keys the lesson did not support (Acts 1, 11), exam items the lesson did not
+  teach (a sentence added to the lesson, or the item reworded), model answers
+  that contradicted their lesson, a duplicate MC (Acts 4 MC 18 replaced), and
+  factual slips in names, numbers, dates and references (e.g. tetelestai is a
+  Greek word; Acts does not end "mid-sentence"; Romans 1:18–3:20 is 64 verses).
+  MC answer positions are unchanged except where the replaced item says so.
+  Spanish translations were revised in the same edit and keep status `human`
+  with their source hash refreshed, as in §8ah; they were written by an AI
+  agent and want a Spanish reader's check. Romans 2 b026 now quotes the RVG
+  exactly ("una mente reprobada").
+* **Short-answer keywords** (411 of 460 questions): copied questions no longer
+  pass in either language; models and independent correct answers still pass.
+  `docs/short-answer-keyword-repairs.md`; held by `test/sa-keywords.test.mjs`.
+* **Not changed:** 20 theological or editorial choices (election, eternal
+  security, Romans 7, the end times, denominational framing, Phoebe/Junia,
+  French edition conventions, diagram language) are listed for Wayne and
+  Robert in the disposition file.
+
+Content, prose and lesson-render baselines re-recorded for these edits.
+
 ## How to check any of this yourself
 
 ```
