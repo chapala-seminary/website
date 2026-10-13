@@ -32,16 +32,30 @@ in every language. Legacy inline language controls remain hidden hooks only
 where a page's old script still needs them. The generated page's language stays
 authoritative when those scripts initialize.
 
-French routes currently show English with an explicit translation-pending
-notice, use English language tags on fallback text, and are `noindex,follow`.
-They are not French translations. French is selectable, but does not become an
-automatic browser-language default yet. The French interface, confirmed Old
-Testament Survey pilot and human review are separate work. No course content
-is translated by the page builder.
+French routes without a French translation show English with a
+translation-pending notice written in the reader's language (on a page that
+asks questions it adds that answers may be given in English), use English
+language tags on fallback text, and are `noindex,follow`. French is
+selectable, but does not become an automatic browser-language default yet. No
+course content is translated by the page builder.
 
-Each page has canonical and en/es/fr `hreflang` links. Spanish sitemap entries
-follow the same inclusion/exclusion policy as English. Untranslated French
-routes are excluded. Shared assets stay at their original root paths.
+The page frame is French on every French page. Layouts write French beside
+their English and Spanish (`lang-fr`) and mark frame elements
+`data-cts-chrome`; `src/lib/french-interface.ts` stops the build when a frame
+element on a French page would fall back to English. Static pages are
+translated by their own dictionary in `src/data/french-pages/<page>.json`
+(keyed by the English markup; missing and unused entries both stop the build),
+and the reading rooms share `src/data/french-pages/_rooms.json` for their
+instructions and honors form. Such pages are machine drafts: they carry the
+draft-review notice and stay `noindex`. `src/lib/french-titles.ts` gives every
+French page a French `<title>` from the canonical French course names
+(certificate pages keep theirs, because their scripts read it). A last pass
+gives French text nodes no-break spaces before `: ; ! ?` and inside « »,
+never in attributes or scripts.
+
+Each page has canonical, en/es/fr and `x-default` (English) `hreflang` links.
+Spanish sitemap entries follow the same inclusion/exclusion policy as English.
+French routes are excluded except the French home page, `/fr/index.html`. Shared assets stay at their original root paths.
 
 ## Checks
 

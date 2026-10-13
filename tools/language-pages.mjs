@@ -10,8 +10,9 @@ import { LANGUAGES, NAMES, localeHref, localizeMarkup, renderLanguageLesson } fr
 import { frenchLanding } from '../src/lib/french-landing.ts';
 import { frenchWiseSpeak } from './french-wisespeak.mjs';
 import { frenchInterface } from '../src/lib/french-interface.ts';
-import { frenchPage, fallbackNotice, frenchTypography } from '../src/lib/french-pages.ts';
-import { frenchTitle, frCompletionNames } from '../src/lib/french-titles.ts';
+import { frenchPage, frenchRoom, checkRoomDictionary, fallbackNotice, frenchTypography } from '../src/lib/french-pages.ts';
+import { frenchTitle, frCompletionNames, frBookTitle } from '../src/lib/french-titles.ts';
+import roomsData from '../src/data/rooms.json' with { type: 'json' };
 
 const SITE = 'https://chapalaseminary.org';
 export const REFERENCE = '.astro/language-base';
@@ -66,6 +67,8 @@ export function buildLanguagePages(dir) {
       if (lang === 'fr' && file === 'index.html') frenchLanding(root);
       // A static page with its own French dictionary (src/data/french-pages).
       const frenchStatic = lang === 'fr' && !lesson && frenchPage(root, file);
+      const room = roomsData.rooms[file.replace(/\.html$/, '')];
+      if (lang === 'fr' && room && room.kind !== 'honors') frenchRoom(root, frBookTitle);
       root = parse(localizeMarkup(root.toString(), lang, sourceLang), { comment: true, parseNoneClosedTags: true });
       const b = root.querySelector('body'), h = root.querySelector('head');
       // Translated registration labels do not mean the course lesson is translated.
@@ -124,6 +127,7 @@ export function buildLanguagePages(dir) {
       fs.writeFileSync(target, root.toString());
     }
   }
+  checkRoomDictionary();
   // Spanish aliases follow the existing inclusion policy. Untranslated and
   // draft French pages are not indexed; only the French home page is listed.
   const map = path.join(dir, 'sitemap.xml');

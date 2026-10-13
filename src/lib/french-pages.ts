@@ -137,3 +137,43 @@ export function frenchTypography(root: HTMLElement) {
   const html = root.querySelector('html');
   if (html) walk(html, (html.getAttribute('lang') || 'fr').slice(0, 2));
 }
+
+/* The reading rooms share their instructions and honors form, room by room
+ * (src/data/french-pages/_rooms.json). Links and book titles differ between
+ * rooms: a key writes each link as href=X and a textbook's title as {book};
+ * the French uses the same placeholders, in the same order. The rooms' own
+ * readings are content and stay as they are. */
+const ROOM_USED = new Set<string>();
+let roomDict: Record<string, string> | null = null;
+export function roomKey(html: string) {
+  const hrefs: string[] = [], books: string[] = [];
+  const key = html.replace(/<a\b([^>]*?)href="([^"]*)"([^>]*)>([\s\S]*?)<\/a>/g, (_m, pre, href, post, inner) => {
+    hrefs.push(href);
+    if (/\/CTSTextbook[A-Za-z]+\.html$/.test(href) && !/Test\.html$/.test(href)) { books.push(inner); inner = '{book}'; }
+    return `<a${pre}href=X${post}>${inner}</a>`;
+  });
+  return { key: norm(key), hrefs, books };
+}
+export function frenchRoom(root: HTMLElement, bookTitle: (en: string) => string) {
+  roomDict ??= JSON.parse(fs.readFileSync(`${DIR}/_rooms.json`, 'utf8'));
+  const dict = roomDict!;
+  for (const { node, kind } of frenchPageUnits(root)) {
+    if (kind !== 'marked') continue;
+    const { key, hrefs, books } = roomKey(node.innerHTML);
+    if (!(key in dict)) continue;
+    ROOM_USED.add(key);
+    let i = 0, j = 0;
+    const fr = dict[key].replace(/href=X/g, () => `href="${hrefs[i++]}"`).replace(/\{book\}/g, () => bookTitle(books[j++]));
+    const marker = (node.getAttribute('class') || '').split(/\s+/).find(c => FR_CLASS[c]) || 'en';
+    const cls = (node.getAttribute('class') || '').split(/\s+/).map(c => FR_CLASS[c] || c).join(' ');
+    node.insertAdjacentHTML('afterend', `<${node.rawTagName} class="${cls || FR_CLASS[marker]}">${fr}</${node.rawTagName}>`);
+    // Interface, not the room's content: the room still shows its English notice.
+    node.setAttribute('data-cts-chrome', '');
+  }
+}
+/** After every room is built: a room entry no room uses is stale. */
+export function checkRoomDictionary() {
+  if (!roomDict) return;
+  const stale = Object.keys(roomDict).filter(k => !k.startsWith('@') && !ROOM_USED.has(k));
+  if (stale.length) throw new Error(`Unused French in ${DIR}/_rooms.json (the English changed?):\n` + stale.slice(0, 20).map(k => '  ' + JSON.stringify(k)).join('\n'));
+}
