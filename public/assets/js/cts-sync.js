@@ -390,7 +390,8 @@
     return start.then(function (c) {
       if (!c) return null;
       return send('/sync', { code: c, student: snap.student, progress: snap.progress,
-                             doneCodes: snap.doneCodes, completionTracks: snap.completionTracks, lang: snap.lang });
+                             doneCodes: snap.doneCodes, completionTracks: snap.completionTracks,
+                             textbooks: snap.textbooks, lang: snap.lang });
     }).then(function (state) {
       if (state) {
         apply(state); lastDigest = digest(snapshot());

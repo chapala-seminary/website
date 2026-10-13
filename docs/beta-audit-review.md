@@ -36,3 +36,24 @@ The controlled verification-message receipt already confirmed by Robert is deliv
 Until those live checks are recorded, this is a tested repair proposal, not full live release sign-off. Robert must choose the separate production activation date before production promotion.
 
 Wayne’s second local audit used fee076a and could not inspect the live site. Its deployment timestamps are historical observations, not the current release status. Signup still asks the student to initiate email confirmation; no automatic signup email is introduced by these repairs. The earlier controlled receipt proves delivery, while provider headers and the connected workflow remain live acceptance checks.
+
+## Live follow-up: textbook results missing from sync requests
+
+The live controlled learner passed the NT textbook exam on beta `99f53979`,
+but its server record still had no textbook result. `cts-sync.js` collected
+the dated book/reading keys in its snapshot and omitted them from the actual
+request. This predates the audit repair branch. Including the results in the
+request repairs cross-device recovery and allows the server to recognize both
+assigned tests before recording a new master’s completion.
+
+A new regression runs the browser’s real sync script against Worker/D1, then
+restores on a second browser and repeats sync. It checks both textbook and
+reading results and their original dates. It failed against the published
+implementation with an empty server result list. API-only textbook checks did
+not exercise the browser’s outgoing request, which is why they missed this.
+
+The live language sweep passed all 5,778 desktop/phone renders and all 135
+textbook exam pages show typed inputs. These rendering checks do not establish
+pass transmission or replace the connected student workflow. Its confirmation
+challenge rejected a request after expiry with HTTP 410; inbox receipt and
+confirmation/certificate acceptance remain pending. Production is unchanged.

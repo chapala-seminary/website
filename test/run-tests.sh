@@ -241,6 +241,7 @@ node test/published-models.test.mjs
   node tools/verify-french-interface.mjs "http://127.0.0.1:$PORT"
   node tools/verify-french-landing.mjs "http://127.0.0.1:$PORT"
   SYNC_BASE="http://127.0.0.1:$PORT" node test/sync.test.mjs
+  SYNC_BASE="http://127.0.0.1:$PORT" node test/textbook-sync.test.mjs
   if [ -n "$HAVE_REFERENCE" ]; then
     node tools/verify-gating.mjs "http://127.0.0.1:$PORT" _reference-index.html
   else
