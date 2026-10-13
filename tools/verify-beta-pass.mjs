@@ -41,6 +41,13 @@ const student = (track) => ({
   cts_done_codes: JSON.stringify(FOUNDATION),
 });
 
+async function spanishPage(page, file) {
+  await page.goto(`${BASE}/${file}`, { waitUntil: 'load' });
+  // A saved preference redirects the root page through JavaScript. Loading
+  // the root document plus a fixed sleep does not prove that redirect finished.
+  await page.waitForURL(url => url.pathname === `/es/${file}`, { waitUntil: 'load', timeout: 10000 });
+}
+
 /* 1. every unit page opens in Spanish, with nothing of any length in English */
 {
   const ctx = await context({ ...student('cert'), cts_lang: 'es' });
@@ -49,7 +56,7 @@ const student = (track) => ({
     const p = await ctx.newPage();
     while (q.length) {
       const f = q.shift();
-      await p.goto(`${BASE}/${f}`, { waitUntil: 'load' }); await p.waitForTimeout(100);
+      await spanishPage(p, f);
       const r = await p.evaluate(() => ({
         es: document.body.classList.contains('lang-es'),
         en: [...document.querySelectorAll('.lang-en')].find((e) => e.checkVisibility({ checkVisibilityCSS: true }) && e.textContent.trim().length > 20)?.textContent.trim().slice(0, 50) || null,
@@ -67,7 +74,7 @@ const student = (track) => ({
   const p = await ctx.newPage();
   for (const f of ['index.html', 'CTSRomansCertificate.html', 'CTSHSCertificate.html', 'CTSRadicalCertificate.html',
                    'CTS_OTS_Christ-in-the-OT_digest.html', 'CTSOTSReadings.html', 'CTSGenesisCertificate.html']) {
-    await p.goto(`${BASE}/${f}`, { waitUntil: 'load' }); await p.waitForTimeout(300);
+    await spanishPage(p, f); await p.waitForTimeout(300);
     const r = await p.evaluate(() => {
       const c = document.body.classList;
       return c.contains('lang-es') || c.contains('show-es') || c.contains('es') || c.contains('spanish') || document.documentElement.lang === 'es';
@@ -81,11 +88,10 @@ const student = (track) => ({
 {
   const ctx = await context({ ...student('cert'), cts_lang: 'es' });
   const p = await ctx.newPage();
-  await p.goto(`${BASE}/CTSUnit1.html`, { waitUntil: 'load' });
-  await p.waitForURL('**/es/CTSUnit1.html');
+  await spanishPage(p, 'CTSUnit1.html');
   await p.locator('#cts-show-source').check();
   await p.waitForTimeout(100);
-  await p.goto(`${BASE}/CTSUnit2.html`, { waitUntil: 'load' }); await p.waitForTimeout(100);
+  await spanishPage(p, 'CTSUnit2.html');
   ok(await p.evaluate(() => document.body.classList.contains('lang-es')), 'showing the source on one unit sent the next unit back to English');
   await ctx.close();
 }
@@ -94,7 +100,7 @@ const student = (track) => ({
 {
   const ctx = await context({ ...student('cert'), cts_lang: 'es' });
   const p = await ctx.newPage();
-  await p.goto(`${BASE}/CTSUnit2.html`, { waitUntil: 'load' }); await p.waitForTimeout(200);
+  await spanishPage(p, 'CTSUnit2.html'); await p.waitForTimeout(200);
   const g = await p.evaluate(() => document.getElementById('greeting').textContent);
   ok(/Bienvenido, Ana Prueba — Certificado de Ministerio/.test(g), `the greeting in Spanish reads "${g}"`);
   const box = await p.evaluate(() => [...document.querySelectorAll('[data-cts-rrbox] *')].filter((e) => e.offsetParent !== null && !e.children.length).map((e) => e.textContent.trim()).join(' | '));
@@ -102,7 +108,7 @@ const student = (track) => ({
   await ctx.close();
   const ctx2 = await context({ cts_lang: 'es' });
   const h = await ctx2.newPage();
-  await h.goto(`${BASE}/index.html`, { waitUntil: 'load' }); await h.waitForTimeout(300);
+  await spanishPage(h, 'index.html'); await h.waitForTimeout(300);
   const f = await h.evaluate(() => ({
     name: document.getElementById('reg-name').placeholder,
     track: [...document.querySelectorAll('#reg-track option')].map((o) => o.textContent),

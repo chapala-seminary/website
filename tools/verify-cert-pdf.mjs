@@ -12,6 +12,8 @@
  *   node tools/verify-cert-pdf.mjs http://127.0.0.1:8798
  */
 import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { chromium } from 'playwright';
 
@@ -33,6 +35,7 @@ ok(/jsPDF/.test(fs.readFileSync('public/assets/vendor/jspdf.umd.min.js', 'utf8')
 
 // ---- building PDFs ------------------------------------------------------------------
 const browser = await chromium.launch(CHROME ? { executablePath: CHROME } : {});
+const downloads = fs.mkdtempSync(path.join(os.tmpdir(), 'cts-pdf-check-'));
 
 // The full-width PDF controls must wrap below the NT certificate, not force
 // the non-wrapping flex row off screen. Check all three awards and languages.
@@ -60,6 +63,22 @@ for (const width of [1280, 390]) {
         `${name}/${lang}/${width}: certificate remains inside viewport`, JSON.stringify(geometry));
       ok(geometry.controlsTop >= geometry.bottom - 1,
         `${name}/${lang}/${width}: PDF controls appear below certificate`, JSON.stringify(geometry));
+      // Use the real button and lazy asset loader, rather than preloading jsPDF
+      // or replacing save(). Relative asset URLs broke language-directory pages.
+      if (width === 390) {
+        try {
+          const [download] = await Promise.all([
+            p.waitForEvent('download', { timeout: 15000 }),
+            p.locator('#cts-cert-pdf button').click({ timeout: 15000 })
+          ]);
+          const target = path.join(downloads, `${lang}-${name}.pdf`);
+          await download.saveAs(target);
+          ok(fs.readFileSync(target).subarray(0, 5).equals(Buffer.from('%PDF-')),
+            `${name}/${lang}: actual button downloads a PDF`);
+        } catch (error) {
+          ok(false, `${name}/${lang}: actual button downloads a PDF`, error.message);
+        }
+      }
     }
     await ctx.close();
   }
@@ -153,6 +172,7 @@ const has = (t, s) => t.includes(s);
 }
 
 await browser.close();
+fs.rmSync(downloads, { recursive: true, force: true });
 console.log(`${checks} assertions on the downloadable PDF certificate`);
 if (fails.length) {
   fails.forEach((f) => console.log('  FAIL: ' + f));
