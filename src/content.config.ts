@@ -245,23 +245,13 @@ const textbookFillFields = {
   // the reading the question is on, in a bank drawn by reading (tools/import-readings.mjs)
   group: z.number().int().positive().optional(),
   tr: translationState.optional(),
-  /* Multiple choice (the newer textbook exams, 11 Oct 2026): four choices,
-     the same in both languages and in the same order, the answer among them. */
-  options: z.object({ en: z.array(z.string().min(1)).length(4), es: z.array(z.string().min(1)).length(4) }).optional(),
 };
-const textbookFill = z.object({ ...textbookFillFields, chapter: z.number().int().min(1).optional() }).superRefine(completeQuestionLanguages)
-  .superRefine((q, ctx) => {
-    if (!q.options) return;
-    for (const lang of ['en', 'es'] as const) {
-      const at = q.options[lang].indexOf(q.answer[lang]);
-      if (at < 0) ctx.addIssue({ code: 'custom', message: `the ${lang} answer "${q.answer[lang]}" is not among its choices` });
-      else if (q.options.en.indexOf(q.answer.en) !== q.options.es.indexOf(q.answer.es)) ctx.addIssue({ code: 'custom', message: 'the answer is not at the same place in both languages' });
-      if (new Set(q.options[lang].map((s) => s.toLowerCase())).size !== 4) ctx.addIssue({ code: 'custom', message: `two ${lang} choices are the same` });
-    }
-  });
+// Reject choices in these banks: a textbook or reading exam is a typed fill.
+const textbookFill = z.object({ ...textbookFillFields, chapter: z.number().int().min(1).optional() }).strict()
+  .superRefine(completeQuestionLanguages);
 /* A required-reading question may name the reading (1 to 5) it is on, so that
    every attempt draws the same number from each reading (test.perReading). */
-const readingFill = z.object({ ...textbookFillFields, reading: z.number().int().min(1).optional() })
+const readingFill = z.object({ ...textbookFillFields, reading: z.number().int().min(1).optional() }).strict()
   .superRefine(completeQuestionLanguages);
 const bookHtml = z.string().min(1).superRefine((v, ctx) => {
   const found = [...new Set((v.match(ENTITY) ?? []).filter((e) => !STRUCTURAL.test(e)))];

@@ -61,7 +61,8 @@ for(const code of ['COUNSELING','STORYTEL']) for(const track of ['cert','mdiv','
   const progress=html.slice(html.indexOf('function updateProgress(){'),html.indexOf('function showCert(unitNum){'));
   vm.runInContext(progress,ctx);
   if(code==='STORYTEL') {
-    const callbacks=html.slice(html.lastIndexOf('<script>')+8,html.lastIndexOf('</script>'));
+    const start=html.lastIndexOf('<script>')+8;
+    const callbacks=html.slice(start,html.indexOf('</script>',start));
     vm.runInContext(callbacks,ctx);
     const cert=html.slice(html.indexOf('function showCert(unitNum){'),html.indexOf("document.getElementById('certModal').addEventListener"));
     vm.runInContext(cert,ctx);

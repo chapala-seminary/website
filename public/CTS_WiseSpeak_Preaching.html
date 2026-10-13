@@ -443,7 +443,7 @@ body:not(.spanish) .manuscript-margin .mm b .lang-es,body.spanish .manuscript-ma
 </div>
 
 <div class="cts-textbook-link" style="max-width:1100px;margin:12px auto 0;padding:10px 14px;background:#fbf6ea;border:1px solid #d8c8a8;border-radius:10px;font:15px/1.5 Georgia,serif">
-  📘 <strong><span class="lang-en">Textbook for this course</span><span class="lang-es">Libro de texto de este curso</span></strong><span class="lang-en"> — optional test, not yet a Master's requirement: </span><span class="lang-es"> — examen opcional, todavía no obligatorio para maestría: </span><a href="CTSTextbookBroadus.html"><span class="lang-en">Broadus, On the Preparation and Delivery of Sermons (assigned excerpts)</span><span class="lang-es">La preparación y predicación de sermones, de Broadus (fragmentos asignados)</span></a> &nbsp;·&nbsp; <a href="CTSTextbookBroadusTest.html"><span class="lang-en">Textbook test</span><span class="lang-es">Examen del libro</span></a>
+  📘 <strong><span class="lang-en">Textbook for this course</span><span class="lang-es">Libro de texto de este curso</span></strong><span class="lang-en"> — Master’s test after activation; see the test page: </span><span class="lang-es"> — examen de maestría después de su activación; consulte la página del examen: </span><a href="CTSTextbookBroadus.html"><span class="lang-en">Broadus, On the Preparation and Delivery of Sermons (assigned excerpts)</span><span class="lang-es">La preparación y predicación de sermones, de Broadus (fragmentos asignados)</span></a> &nbsp;·&nbsp; <a href="CTSTextbookBroadusTest.html"><span class="lang-en">Textbook test</span><span class="lang-es">Examen del libro</span></a>
 </div>
 
 <div class="registration-bar" id="registrationBar">
@@ -2141,12 +2141,20 @@ document.getElementById('saveRegBtn').addEventListener('click',()=>{
   const email = document.getElementById('studentEmail').value.trim();
   const country = document.getElementById('studentCountry').value.trim();
   const track = document.getElementById('programTrack').value;
-  if(!name||!email||!country){
+  if(!name||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||!country){
     alert(document.body.classList.contains('spanish')?'Por favor complete todos los campos':'Please complete all fields');
     return;
   }
   state.registration = {name,email,country,track};
   saveState();
+  // Keep this legacy form connected to the shared recoverable student record.
+  try {
+    const shared = JSON.parse(localStorage.getItem('cts_student') || 'null') || {};
+    const sharedTrack = track === 'mtheol' ? 'thm' : track;
+    localStorage.setItem('cts_student', JSON.stringify({...shared, name, email, country, track: sharedTrack}));
+    localStorage.setItem('cts_track', sharedTrack);
+    if(window.CTS_SYNC) window.CTS_SYNC.sync();
+  } catch(e) {}
   renderRegStatus();
   // Re-render all units now that we know the track, so essay scenarios appear immediately
   // (at initial page load there was no registration yet, so essays were skipped).
@@ -2891,5 +2899,6 @@ function checkP3Outline(){
 </section>
 <script src="cts-curriculum.js?v=20260915a" defer></script>
 <script src="cts-track.js" defer></script>
+<script src="/assets/js/cts-sync.js" defer></script>
 </body>
 </html>

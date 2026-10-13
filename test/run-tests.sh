@@ -171,6 +171,7 @@ node tools/verify-language-pages.mjs dist
 # that the prose baseline cannot say on its own: that the data still renders
 # the page it replaced, element for element, and that automatic translation
 # will not overwrite work a person did.
+node tools/verify-question-counts.mjs dist
 node tools/verify-lesson-render.mjs
 node test/lesson-translation.mjs
 node test/french-schema.mjs
@@ -196,6 +197,8 @@ API_BASE="http://127.0.0.1:$PORT" node test/api.test.mjs
 API_BASE="http://127.0.0.1:$PORT" SYNC_WRITE_STATE="$STATE" node test/sync-writes.test.mjs
 API_BASE="http://127.0.0.1:$PORT" EMAIL_TEST_STATE="$STATE" node test/email-options.test.mjs
 API_BASE="http://127.0.0.1:$PORT" node test/student-language.test.mjs
+API_BASE="http://127.0.0.1:$PORT" node test/registration-entry.test.mjs
+API_BASE="http://127.0.0.1:$PORT" node test/beta-activation.test.mjs
 
 # The same rule through the Worker: both tests on their own, the four student-
 # record cases (a completion from before activation is written straight into
@@ -235,9 +238,13 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   node test/engine-languages.mjs
   node test/french-drafts.test.mjs
 node test/published-models.test.mjs
+  # Short answers in John, Matthew, Acts and Romans (French Batch 2 review):
+  # a copied question never passes, correct answers do, known wrong ones fail.
+  node test/sa-keywords.test.mjs
   node tools/verify-french-interface.mjs "http://127.0.0.1:$PORT"
   node tools/verify-french-landing.mjs "http://127.0.0.1:$PORT"
   SYNC_BASE="http://127.0.0.1:$PORT" node test/sync.test.mjs
+  SYNC_BASE="http://127.0.0.1:$PORT" node test/textbook-sync.test.mjs
   if [ -n "$HAVE_REFERENCE" ]; then
     node tools/verify-gating.mjs "http://127.0.0.1:$PORT" _reference-index.html
   else
@@ -320,6 +327,7 @@ node test/published-models.test.mjs
   API_BASE="http://127.0.0.1:$PORT" DEV_LOG="$STATE/dev.log" node test/dup-register.test.mjs
   # Every generated language page, on desktop and phone, including source text.
   node tools/verify-language-browser.mjs "http://127.0.0.1:$PORT"
+  node test/french-exam-fallback.test.mjs "http://127.0.0.1:$PORT"
 
   # The page that shows a student what is held about them and deletes it.
   # Driven in a browser against the real Worker, because a privacy page whose

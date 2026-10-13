@@ -292,6 +292,13 @@ ok(v.status === 200 && v.body?.valid === true && v.body?.name === 'María Cruz',
 ok((await jget('/api/verify/ZZZZZZZZZZ')).status === 404, 'an unknown verification code is not confirmed');
 
 const page = await get(`/verify/${VC}`);
+const lookupPage = await get('/verify');
+const lookupHtml = await lookupPage.text();
+ok(lookupPage.status === 200 && /text\/html/.test(lookupPage.headers.get('content-type') || ''), 'bare verification route is an HTML lookup page');
+ok(lookupHtml.includes('name="code"') && lookupHtml.includes('method="get"') && !lookupHtml.includes('Not verified'), 'lookup requests a certificate code without claiming verification failed');
+const lookupResult = await get('/verify?code=' + encodeURIComponent(VC));
+ok(lookupResult.url.endsWith('/verify/' + encodeURIComponent(VC)) && lookupResult.status === 200, 'lookup form leads to the existing valid certificate page');
+ok((await get('/verify?code=ZZZZZZZZZZ')).status === 404, 'lookup form does not confirm an unknown code');
 const html = await page.text();
 ok(page.status === 200 && /text\/html/.test(page.headers.get('content-type') || ''), 'the public page renders HTML');
 ok(html.includes('María Cruz') && html.includes('1 Peter Intensive'), 'the page shows the award');
