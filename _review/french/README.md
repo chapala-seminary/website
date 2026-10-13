@@ -29,6 +29,10 @@ decisions Dr. Cook needs to make for the whole French edition.
 | `CTSMatt` | Cours intensif sur Matthieu (Matthew Intensive) | 1–13 |
 | `CTSActs` | Cours intensif sur les Actes (Acts Intensive) | 1–11 |
 | `CTSRomans` | L'Épître aux Romains (Romans) | 1–10 |
+| `CTSLOC` | La vie du Christ (Life of Christ) | 1–10 |
+| `CTS1Peter` | Cours intensif sur 1 Pierre (1 Peter Intensive) | 1–12 |
+| `CTSGalatians` | Cours intensif sur Galates (Galatians Intensive) | 1–12 |
+| `CTSRev` | Cours intensif sur l'Apocalypse (Revelation Intensive) | 1–15 |
 
 Each unit has three files:
 
@@ -106,3 +110,9 @@ Both return a nonzero exit status on an error. All 115 packets passed after the 
 The additional 46 Batch 2 packets also pass the repaired `tools/validate.py`
 validator with 27 warnings and no errors. No French short-answer prompt passes
 its own keywords. These checks do not establish French theological approval.
+
+## Batch 3 (12 Oct 2026)
+
+Life of Christ, 1 Peter, Galatians and Revelation (49 units), made and checked the same way.
+Start with **BATCH3-FINDINGS.md**. Life of Christ had no Spanish on the site; its French was made
+from the English alone.
