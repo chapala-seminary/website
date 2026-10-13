@@ -90,7 +90,11 @@
     es: { reg: "Registre su finalizaci\u00f3n ante el seminario",
           ph: "Su correo electr\u00f3nico (opcional)",
           btn: "Notificar al seminario",
-          done: "Registrado \u2014 gracias." }
+          done: "Registrado \u2014 gracias." },
+    fr: { reg: "Signaler votre r\u00e9ussite au s\u00e9minaire",
+          ph: "Votre adresse courriel (facultatif)",
+          btn: "Pr\u00e9venir le s\u00e9minaire",
+          done: "Enregistr\u00e9 \u2014 merci." }
   };
 
   function encode(data) {
@@ -180,7 +184,7 @@
     }
     try { localStorage.setItem(recKey, "1"); } catch (e) {}
     submitGoogle(payload);
-    var s = STR[lang() === "es" ? "es" : "en"];
+    var s = STR[lang()] || STR.en;
     var status = document.getElementById("cts-cc-status");
     if (status) status.textContent = s.done;
     if (alsoEmail) openMail(payload);
@@ -199,7 +203,7 @@
 
   function buildPanel(container, ctx) {
     if (document.getElementById("cts-cc-panel")) return;
-    var s = STR[lang() === "es" ? "es" : "en"];
+    var s = STR[lang()] || STR.en;
 
     var st = document.createElement("style");
     st.textContent = "@media print{#cts-cc-panel{display:none!important}}" +
@@ -239,7 +243,9 @@
 
   function start() {
     if (!window.CTS_CERT_NAMES) {               // loaded once, well before the 7-second record
-      var sc = document.createElement("script"); sc.src = "assets/js/cts-cert-names.js"; sc.defer = true;
+      // From the site root: on /es/ and /fr/ a relative path 404s, and the
+      // record then falls back to the page title (French review, 13 Oct 2026).
+      var sc = document.createElement("script"); sc.src = "/assets/js/cts-cert-names.js"; sc.defer = true;
       document.head.appendChild(sc);
     }
     var ctx = { course: course, code: courseCode(), track: track(), date: dateStr(), name: findName };
@@ -323,7 +329,23 @@
     var box = document.createElement("div");
     box.id = "cts-honors-prompt";
     var h = "";
-    if (isDegree) {
+    // A French page shows French only (its links stay on /fr/: they are relative).
+    if (document.body.getAttribute("data-page-lang") === "fr") {
+      if (isDegree) {
+        h += '<div class="hh">&#10022; Obtenez votre Dipl&ocirc;me associ&eacute; avec mention</div>';
+        h += '<div class="bd">Terminez la lecture pour la mention dans 25 cours et votre Dipl&ocirc;me associ&eacute; vous sera d&eacute;cern&eacute; avec mention.</div>';
+        h += '<a class="go" href="' + HUB + '">Page de la mention &#8599;</a>';
+      } else if (done) {
+        h += '<div class="dn">&#10003; Vous avez termin&eacute; la lecture pour la mention de ce cours.</div>';
+        h += '<div class="bd">Elle compte pour l&rsquo;obtention de votre dipl&ocirc;me avec mention.</div>';
+        h += '<a class="alt" href="' + HUB + '">Progression vers la mention &#8599;</a>';
+      } else {
+        h += '<div class="hh">&#10022; Obtenez ce cours avec mention</div>';
+        h += '<div class="bd">Lisez trois ouvrages au choix dans la salle de lectures compl&eacute;mentaires de ce cours et attestez-le sur l&rsquo;honneur &mdash; cela compte pour l&rsquo;obtention de votre dipl&ocirc;me avec mention.</div>';
+        h += '<a class="go" href="' + room + '">Salle de lectures &#8599;</a>';
+        h += '<a class="alt" href="' + HUB + '">Progression vers la mention &#8599;</a>';
+      }
+    } else if (isDegree) {
       h += '<div class="hh">&#10022; Earn your Associate With Honors<span class="es">&#10022; Obtenga su Asociado Con Honores</span></div>';
       h += '<div class="bd">Complete the honors reading in 25 classes and your Associate is awarded With Honors.' +
            '<span class="es">Complete la lectura con honores en 25 clases y su Asociado ser&aacute; otorgado Con Honores.</span></div>';

@@ -37,14 +37,20 @@
   function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function parse(s) { try { return JSON.parse(s); } catch (e) { return null; } }
   function student() { return parse(get('cts_student')) || {}; }
-  function pageEs() {
+  // The page's language. A generated language page names it (data-page-lang),
+  // so a French page gets the French certificate; an older page says es or en.
+  function pageLang() {
     var b = document.body;
-    if (!b) return false;
-    if (b.classList.contains('es') || b.classList.contains('lang-es') || b.classList.contains('spanish')) return true;
+    if (!b) return 'en';
+    if (b.dataset.pageLang && W[b.dataset.pageLang]) return b.dataset.pageLang;
+    if (b.classList.contains('es') || b.classList.contains('lang-es') || b.classList.contains('spanish')) return 'es';
     var l = b.getAttribute('data-lang') || document.documentElement.lang || '';
-    if (l) return l.slice(0, 2) === 'es';
-    return get('cts_lang') === 'es';
+    if (l) return l.slice(0, 2) === 'es' ? 'es' : 'en';
+    return get('cts_lang') === 'es' ? 'es' : 'en';
   }
+  // The second link offers the other language a reader is likely to want:
+  // English for a Spanish or French reader, Spanish for an English one.
+  var OTHER = { en: 'es', es: 'en', fr: 'en' };
 
   // ---- the words -------------------------------------------------------------
   var W = {
@@ -83,26 +89,47 @@
       verify: 'Código de verificación: ',
       button: 'Descargar PDF', other: 'Download in English', busy: 'Preparando…',
       failed: 'No se pudo crear el PDF en este dispositivo. Use Imprimir / Guardar.'
+    },
+    // Straight apostrophes: the PDF's built-in fonts have no curly one.
+    fr: {
+      school: 'Séminaire théologique de Chapala',
+      awarded: 'Ce certificat est décerné à',
+      course: 'en reconnaissance de la réussite du cours',
+      body: "pour avoir fidèlement suivi le programme d'études prescrit et réussi tous les examens d'unité requis\u00a0; ce certificat lui est décerné avec tous les droits et privilèges qui s'y rattachent.",
+      honors: 'Avec mention',
+      author: 'Auteur du cours', director: 'Directeur du séminaire',
+      dateOf: "Date d'achèvement\u00a0: ",
+      known: 'Le présent document atteste que',
+      confer: 'ayant fidèlement rempli toutes les exigences prescrites par la Faculté, reçoit par les présentes le diplôme de',
+      conferCert: 'ayant fidèlement rempli toutes les exigences prescrites par la Faculté, reçoit par les présentes le',
+      rights: "avec tous les droits, honneurs et privilèges qui s'y rattachent.",
+      given: 'Délivré à Chapala, Jalisco — ',
+      professor: 'Professeur', semDirector: 'Directeur du séminaire', founder: 'Fondateur',
+      verify: 'Code de vérification\u00a0: ',
+      button: 'Télécharger le PDF', other: 'Télécharger en anglais', busy: 'Préparation…',
+      failed: "Impossible de créer le PDF sur cet appareil. Utilisez plutôt Imprimer / enregistrer."
     }
   };
   // as the Certificate Maker words the band: "<program> Track" / "Programa: <program>"
   var TRACK = {
-    certificate: { en: 'Certificate of Ministry Track', es: 'Programa: Certificado de Ministerio' },
-    associate: { en: 'Associate of Divinity Track', es: 'Programa: Asociado en Divinidad' },
-    thm: { en: 'Master of Theology Track', es: 'Programa: Maestría en Teología' },
-    mdiv: { en: 'Master of Divinity Track', es: 'Programa: Maestría en Divinidad' }
+    certificate: { en: 'Certificate of Ministry Track', es: 'Programa: Certificado de Ministerio', fr: 'Parcours Certificat de ministère' },
+    associate: { en: 'Associate of Divinity Track', es: 'Programa: Asociado en Divinidad', fr: 'Parcours Diplôme associé en théologie' },
+    thm: { en: 'Master of Theology Track', es: 'Programa: Maestría en Teología', fr: 'Parcours Master en théologie' },
+    mdiv: { en: 'Master of Divinity Track', es: 'Programa: Maestría en Divinidad', fr: 'Parcours Master en théologie pastorale' }
   };
   var DEGREE_NAME = {
-    certificate: { en: 'Certificate of Ministry', es: 'Certificado de Ministerio', abbr: 'C.Min.' },
-    associate: { en: 'Associate of Divinity', es: 'Asociado en Divinidad', abbr: 'A.Div.' },
-    thm: { en: 'Master of Theology', es: 'Maestría en Teología', abbr: 'Th.M.' },
-    mdiv: { en: 'Master of Divinity', es: 'Maestría en Divinidad', abbr: 'M.Div.' }
+    certificate: { en: 'Certificate of Ministry', es: 'Certificado de Ministerio', fr: 'Certificat de ministère', abbr: 'C.Min.' },
+    associate: { en: 'Associate of Divinity', es: 'Asociado en Divinidad', fr: 'Diplôme associé en théologie', abbr: 'A.Div.' },
+    thm: { en: 'Master of Theology', es: 'Maestría en Teología', fr: 'Master en théologie', abbr: 'Th.M.' },
+    mdiv: { en: 'Master of Divinity', es: 'Maestría en Divinidad', fr: 'Master en théologie pastorale', abbr: 'M.Div.' }
   };
   var MONTHS = {
     en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-    es: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
+    es: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
+    fr: ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
   };
   function dateText(lang, d) {
+    if (lang === 'fr') return (d.getDate() === 1 ? '1er' : d.getDate()) + ' ' + MONTHS.fr[d.getMonth()] + ' ' + d.getFullYear();
     return lang === 'es' ? d.getDate() + ' de ' + MONTHS.es[d.getMonth()] + ' de ' + d.getFullYear()
                          : MONTHS.en[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
   }
@@ -263,9 +290,9 @@
   function coursePdf(doc, lang, sig, who, when) {
     var w = W[lang], f = frame(doc), maxW = f.Wp - 170;
     var names = window.CTS_CERT_NAMES || {};
-    var course = names[file] ? names[file][lang] : (document.body.getAttribute('data-course') || '');
+    var course = names[file] ? names[file][lang] || names[file].en : (document.body.getAttribute('data-course') || '');
     doc.setTextColor.apply(doc, BLUE); doc.setFont('helvetica', 'bold'); doc.setFontSize(8);
-    spaced(doc, 'CHAPALA THEOLOGICAL SEMINARY · SEMINARIO TEOLÓGICO DE CHAPALA', 76, 1.2);
+    spaced(doc, lang === 'fr' ? 'SÉMINAIRE THÉOLOGIQUE DE CHAPALA · CHAPALA THEOLOGICAL SEMINARY' : 'CHAPALA THEOLOGICAL SEMINARY · SEMINARIO TEOLÓGICO DE CHAPALA', 76, 1.2);
     doc.setTextColor.apply(doc, NAVY); doc.setFont('times', 'bold'); doc.setFontSize(23);
     centre(doc, w.school, 104);
     doc.setDrawColor.apply(doc, GOLD); doc.setLineWidth(1.6); doc.line(f.Wp / 2 - 60, 116, f.Wp / 2 + 60, 116);
@@ -308,7 +335,7 @@
     fit(doc, big, 'times', 'bold', 24, maxW);
     spaced(doc, big, 92, 2);
     doc.setTextColor.apply(doc, GOLD); doc.setFont('times', 'italic'); doc.setFontSize(12);
-    centre(doc, W[lang === 'es' ? 'en' : 'es'].school, 110);
+    centre(doc, W[OTHER[lang]].school, 110);
     doc.setDrawColor.apply(doc, GOLD); doc.setLineWidth(0.8); doc.line(f.Wp / 2 - 110, 124, f.Wp / 2 + 110, 124);
     doc.setTextColor(85, 85, 85); doc.setFont('times', 'italic'); doc.setFontSize(13);
     centre(doc, w.known, 150);
@@ -349,7 +376,7 @@
       if (DEGREE[file]) degreePdf(doc, lang, sig, who, when); else coursePdf(doc, lang, sig, who, when);
       var what = DEGREE[file] ? DEGREE_NAME[DEGREE[file]].en
         : ((window.CTS_CERT_NAMES || {})[file] || {}).en || 'Course';
-      doc.save('CTS-' + slug(what) + '-' + slug(who) + (lang === 'es' ? '-ES' : '') + '.pdf');
+      doc.save('CTS-' + slug(what) + '-' + slug(who) + (lang === 'en' ? '' : '-' + lang.toUpperCase()) + '.pdf');
     });
   }
 
@@ -369,7 +396,7 @@
     box.className = 'noprint';
     dip.parentNode.insertBefore(box, dip.nextSibling);
     function draw() {
-      var lang = pageEs() ? 'es' : 'en', other = lang === 'es' ? 'en' : 'es';
+      var lang = pageLang(), other = OTHER[lang];
       box.innerHTML = '<button type="button">' + W[lang].button + '</button><a href="#" role="button">' + W[lang].other + '</a><div class="msg"></div>';
       var btn = box.querySelector('button'), alt = box.querySelector('a'), msg = box.querySelector('.msg');
       function go(l) {
@@ -383,8 +410,8 @@
     draw();
     // follow the page's language switch
     if (typeof MutationObserver !== 'undefined') {
-      var last = pageEs();
-      new MutationObserver(function () { if (pageEs() !== last) { last = pageEs(); draw(); } })
+      var last = pageLang();
+      new MutationObserver(function () { if (pageLang() !== last) { last = pageLang(); draw(); } })
         .observe(document.body, { attributes: true, attributeFilter: ['class', 'data-lang'] });
     }
   }
@@ -395,7 +422,7 @@
   function printButton() {
     var bs = document.querySelectorAll('button');
     for (var i = 0; i < bs.length; i++) {
-      if (/print|imprimir/i.test(bs[i].textContent) && visible(bs[i]) && !bs[i].disabled) return bs[i];
+      if (/print|imprimir|imprimer/i.test(bs[i].textContent) && visible(bs[i]) && !bs[i].disabled) return bs[i];
     }
     return null;
   }
