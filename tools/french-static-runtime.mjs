@@ -33,3 +33,9 @@ export function replaceOnce(code, from, to, label) {
   if (!code.includes(from)) throw new Error(`${label}: expected code not found ${from.slice(0, 80)}`);
   return code.replace(from, to);
 }
+/* Page chrome shared by the French single-page courses: the browser title and
+ * the old bilingual catalog link. */
+export function pageChrome(root, title) {
+  const t = root.querySelector('title'); if (t && title) t.set_content(title.replaceAll('&', '&amp;'));
+  for (const a of root.querySelectorAll('a')) if (a.innerHTML.trim() === '📚 Catalog / Catálogo') a.set_content('📚 Catalogue');
+}

@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import {parse} from 'node-html-parser';
 import {markedLanguage} from '../src/lib/language-content.ts';
-import {frenchRuntimeSpans, replaceLiterals, replaceOnce} from './french-static-runtime.mjs';
+import {frenchRuntimeSpans, replaceLiterals, replaceOnce, pageChrome} from './french-static-runtime.mjs';
 const norm=s=>parse(String(s).replaceAll('\\xa0',' ')).text.replace(/\s+/g,' ').trim();
 const json=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 /* Add a French sibling after each English-marked element whose wording matches
@@ -84,5 +84,7 @@ export function frenchWiseSpeak(root){
  code=replaceOnce(code,'function checkP1Match(){',`for(const [id,words] of Object.entries(${JSON.stringify(w.match)}))U1_ANSWERS[id].push(...words);\nfunction checkP1Match(){`,'WiseSpeak');
  code=replaceOnce(code,'function normFill(v){',`${JSON.stringify(ui.u7)}.forEach((f,i)=>{U7_FILL[i].fr=f.fr;U7_FILL[i].accept.push(...f.accept);});\nfunction normFill(v){`,'WiseSpeak');
  code=replaceOnce(code,"document.getElementById('certTrack').textContent = t.en;","document.getElementById('certTrack').textContent = t.fr || t.en;",'WiseSpeak');
- script.set_content(code);return source.length;
+ script.set_content(code);
+ pageChrome(root,'Chapala Theological Seminary — WiseSpeak : l’art de la prédication');
+ return source.length;
 }
