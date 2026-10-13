@@ -250,6 +250,7 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   # completion, and shows nothing to a student who passed nothing. Ruth and
   # Esther sent finished students back to Unit 1 until this existed.
   node tools/verify-certificate-unlock.mjs "http://127.0.0.1:$PORT"
+  node tools/verify-certificate-sync.mjs "http://127.0.0.1:$PORT"
   # The certificate as a sharp PDF, in English or Spanish, built in the browser.
   node tools/verify-cert-pdf.mjs "http://127.0.0.1:$PORT"
   # Credential boundaries: each course counts toward a degree only at the level

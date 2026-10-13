@@ -288,11 +288,13 @@
     });
   }
 
+  var polling = null, started = false;
   function start() {
+    if (polling || started) return;
     a = award();
     if (!a || !window.CTS_SYNC) return;
     var tries = 0;
-    var iv = setInterval(function () {
+    polling = setInterval(function () {
       tries++;
       var dip = diploma();
       if (dip) {
@@ -300,13 +302,14 @@
         // for a student who just passed the last unit; wait for it a little.
         code = window.CTS_SYNC.code();
         if (code) {
-          clearInterval(iv);
+          clearInterval(polling); polling = null; started = true;
           window.CTS_SYNC.available().then(function (up) { if (up) begin(dip); });
-        } else if (tries > 60) clearInterval(iv);  // no record: the page is still printable
-      } else if (tries > 60) clearInterval(iv);    // ~30 s; the page never unlocked
+        } else if (tries > 60) { clearInterval(polling); polling = null; }  // no record: the page is still printable
+      } else if (tries > 60) { clearInterval(polling); polling = null; }    // ~30 s; the page never unlocked
     }, 500);
   }
 
+  document.addEventListener('cts-sync-applied', start);
   window.CTS_CERTIFY = { award: award, state: function () { return state; } };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
   else start();

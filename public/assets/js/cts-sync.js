@@ -244,6 +244,9 @@
       if (!get(k)) set(k, String(t.passed_at || '').slice(0, 10) || new Date().toISOString().slice(0, 10));
       addTo('cts_textbooks_passed', t.textbook);
     });
+    // Same-tab storage writes do not fire the browser's storage event. Notify
+    // certificate views only after all restored keys have been applied.
+    try { document.dispatchEvent(new CustomEvent('cts-sync-applied')); } catch (e) {}
   }
 
   // ---- the network, which is always allowed to fail ------------------------
