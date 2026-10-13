@@ -291,27 +291,31 @@
       localStorage.setItem("cts_assoc_done_codes", assocGoal() ? (localStorage.getItem("cts_done_codes") || "[]") : "[]");
   } catch (e) {}
 
-  function isEs() {
+  /* The page's language: the generated language pages name it on <body>. */
+  function pageLang() {
     var b = document.body;
     if (b) {
-      var d = b.getAttribute("data-lang"); if (d) return d.slice(0, 2) === "es";
-      if (b.classList.contains("lang-es")) return true;
-      if (b.classList.contains("lang-en")) return false;
+      var p = b.getAttribute("data-page-lang"); if (p) return p.slice(0, 2);
+      var d = b.getAttribute("data-lang"); if (d) return d.slice(0, 2);
+      if (b.classList.contains("lang-es")) return "es";
+      if (b.classList.contains("lang-en")) return "en";
     }
-    return (document.documentElement.lang || "en").slice(0, 2) === "es";
+    return (document.documentElement.lang || "en").slice(0, 2);
   }
 
   var T = {
-    badge:  { en: "Locked", es: "Bloqueado" },
+    badge:  { en: "Locked", es: "Bloqueado", fr: "Verrouillé" },
     legend: { en: "\uD83D\uDD12 Locked courses open once you complete the seven required foundation courses listed above.",
-              es: "\uD83D\uDD12 Los cursos bloqueados se abren al completar los siete cursos de fundamento indicados arriba." },
-    lockTitle: { en: "This course is locked", es: "Este curso está bloqueado" },
+              es: "\uD83D\uDD12 Los cursos bloqueados se abren al completar los siete cursos de fundamento indicados arriba.",
+              fr: "\uD83D\uDD12 Les cours verrouillés s\u2019ouvrent lorsque vous avez terminé les sept cours fondamentaux indiqués ci-dessus." },
+    lockTitle: { en: "This course is locked", es: "Este curso está bloqueado", fr: "Ce cours est verrouillé" },
     lockBody:  { en: "Complete the seven foundation courses first — Old Testament Survey, New Testament Survey, Systematic Theology, Evangelism, Pastoral Ministries, Church History, and Preaching. Once those are done, the whole catalog opens.",
-                 es: "Complete primero los siete cursos de fundamento — Panorama del Antiguo Testamento, Panorama del Nuevo Testamento, Teología Sistemática, Evangelismo, Ministerios Pastorales, Historia de la Iglesia y Predicación. Una vez completados, todo el catálogo se abre." },
-    toCat:   { en: "Go to the course catalog", es: "Ir al catálogo de cursos" },
-    toGuide: { en: "Read \u201CBefore You Begin\u201D", es: "Leer \u00ABAntes de Comenzar\u00BB" }
+                 es: "Complete primero los siete cursos de fundamento — Panorama del Antiguo Testamento, Panorama del Nuevo Testamento, Teología Sistemática, Evangelismo, Ministerios Pastorales, Historia de la Iglesia y Predicación. Una vez completados, todo el catálogo se abre.",
+                 fr: "Terminez d\u2019abord les sept cours fondamentaux\u00a0: Survol de l\u2019Ancien Testament, Survol du Nouveau Testament, Théologie systématique, Évangélisation, Ministères pastoraux, Histoire de l\u2019Église et Prédication. Ensuite, tout le catalogue s\u2019ouvre." },
+    toCat:   { en: "Go to the course catalog", es: "Ir al catálogo de cursos", fr: "Aller au catalogue des cours" },
+    toGuide: { en: "Read \u201CBefore You Begin\u201D", es: "Leer \u00ABAntes de Comenzar\u00BB", fr: "Lire \u00AB\u00a0Avant de commencer\u00a0\u00BB" }
   };
-  function t(o) { return isEs() ? o.es : o.en; }
+  function t(o) { return o[pageLang()] || o.en; }
 
   // ---------- catalog page: grey + badge the locked course cards ----------
   function gateCatalog() {
@@ -415,7 +419,7 @@
   function showTestBar() {
     var put = function () {
       if (document.getElementById("cts-test-bar") || !document.body) return;
-      var es = isEs();
+      var lang = pageLang(), es = lang === "es", fr = lang === "fr";
       var d = document.createElement("div");
       d.id = "cts-test-bar";
       d.setAttribute("role", "button");
@@ -436,11 +440,14 @@
         if (String(localStorage.getItem("cts_goal") || (st && st.goal) || "").toLowerCase() === "assoc" || tk === "ad") tk = "assoc";
       } catch (e) {}
       var TN = es ? { cert: "Certificado", assoc: "Asociado", mdiv: "M.Div.", thm: "Th.M.", mth: "Th.M." }
+             : fr ? { cert: "Certificat", assoc: "Diplôme associé", mdiv: "M.Div.", thm: "Th.M.", mth: "Th.M." }
                   : { cert: "Certificate", assoc: "Associate", mdiv: "M.Div.", thm: "Th.M.", mth: "Th.M." };
       var tn = TN[tk] || TN.cert;
       d.textContent = es ? "Modo prueba activo \u2014 se califica como " + tn + " \u2014 el progreso de la unidad se reinicia en cada carga \u2014 toque para salir"
+                    : fr ? "Mode test activé \u2014 corrigé comme " + tn + " \u2014 la progression de l\u2019unité est remise à zéro à chaque chargement \u2014 touchez pour quitter"
                          : "Test mode on \u2014 graded as " + tn + " \u2014 unit progress resets on every reload \u2014 tap to exit";
       d.title = es ? "En modo prueba, el estado de aprobado/bloqueado de cada unidad se borra automáticamente cada vez que la página se carga, para que pueda volver a probarla. Esto no afecta a los estudiantes reales."
+              : fr ? "En mode test, l\u2019état réussi/verrouillé de chaque unité est effacé automatiquement à chaque chargement de la page, pour que vous puissiez la tester de nouveau. Cela ne touche pas les vrais étudiants."
                    : "In test mode, each unit's passed/locked state is automatically cleared every time the page loads, so you can re-test it. This does not affect real students.";
       var leave = function (e) { if (e) e.preventDefault(); disableTest(); };
       d.addEventListener("click", leave);
