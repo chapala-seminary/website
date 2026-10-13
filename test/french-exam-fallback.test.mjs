@@ -10,7 +10,8 @@ try {
   try{
    await context.addInitScript(()=>localStorage.setItem('cts_show_source','true'));
    const page=await context.newPage();
-   for(const file of ['CTS1PeterReadingsTest.html','CTSTextbookFirstPeterTest.html']){
+   // untranslated tests (1 Peter's are the French pilot: test/french-readings.test.mjs)
+   for(const file of ['CTSJohnReadingsTest.html','CTSTextbookCultsTest.html']){
     await page.goto(`${base}/fr/${file}?cts_lang=fr`);
     await page.waitForSelector('.cts-fill-q');
     const prompts=await page.locator('.cts-fill-q > p:first-child').evaluateAll(nodes=>nodes.map(node=>({language:node.querySelector('.cts-reading')?.lang,sources:node.querySelectorAll('.cts-source').length,text:node.innerText})));
