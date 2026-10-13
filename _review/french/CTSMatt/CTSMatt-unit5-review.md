@@ -1,3 +1,10 @@
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **F2.3, MC 2 stem** (stem narrowed to prayer): « lorsque nous donnons, prions et jeûnons, nous devons » → « lorsque nous prions, nous devons »
+- **M5, b031** (reference covers God's answer): « (Exode 33:18) » → « (Exode 33:18–23) »
+
 ## Questions for Wayne
 
 1. **Matthew 6:7, "vain repetitions" vs. LSG "vaines paroles".** I quoted LSG in b011 and added a sentence on the Greek sense ("ne répétez pas sans fin les mêmes mots"). Fill 2 answer: "paroles". It also accepts répétitions, redites. MC3 option: "leurs nombreuses paroles / vaines paroles".

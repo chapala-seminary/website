@@ -1,3 +1,10 @@
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **F2.2, b013** (lesson now teaches the term MC 1 asks for): « son dernier enseignement, le plus intime. C'était » → « son dernier enseignement, le plus intime — les chapitres (Jean 14–17) que l'on appelle so… »
+- **J10, b021** (Great Vine: about 120 ft / 36 m, not 200 ft): « des branches qui s'étendent sur une soixantaine de mètres » → « des branches qui s'étendent sur quelque trente-six mètres »
+
 ## Questions for Wayne
 
 1. **John 14:2, "many mansions"**: Segond has "plusieurs demeures". The lesson explains that the word means "rooms, abiding places", and Segond's word already says this, so I wrote: Le mot traduit par « demeures » signifie simplement des chambres, des lieux où l'on demeure. I also skipped "Si cela n'était pas, je vous l'aurais dit" with […], where the English has "...".
@@ -16,11 +23,11 @@
 4. **MC7**: the correct option adds "service", but the lesson says "humility and obedience". The option also says "few take", while the lesson says "few find". The item can still be answered.
 5. **SA9**: the model adds "persistent prayer and selfless service to others" and "drawn to Christ". The lesson teaches none of these, and the keyword "service" has no basis in the lesson.
 6. **SA6 and SA10**: the keyword "word" in SA6 ("as His word remains in us", John 15:7) and the keyword "follow" in SA10 do not appear in the lesson.
-7. **b021, factual**: the Great Vine at Hampton Court is usually reported as about 36 m (120 ft) long, not 200 ft. I translated faithfully as "une soixantaine de mètres".
+7. **b021, factual**: the Great Vine at Hampton Court is usually reported as about 36 m (120 ft) long, not 200 ft. I translated faithfully as "une soixantaine de mètres". *(Updated 12 Oct 2026 after the English correction; see "Updated after English corrections" above.)*
 
 ## Adaptations
 
-- I converted all measurements to metric. "Two feet thick" became "environ soixante centimètres". "Two hundred feet" became "une soixantaine de mètres". "Hundreds of pounds" became "plus d'une centaine de kilos".
+- I converted all measurements to metric. "Two feet thick" became "environ soixante centimètres". "Two hundred feet" became "une soixantaine de mètres". "Hundreds of pounds" became "plus d'une centaine de kilos". *(Updated 12 Oct 2026 after the English correction; see "Updated after English corrections" above.)*
 - "Pie in the sky" became "un beau rêve en l'air".
 - "Graduation… keynote speaker" became "cérémonie de fin d'études… orateur principal".
 - The phone-charging illustration was kept as written. It works well for readers in Kinshasa.

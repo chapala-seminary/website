@@ -1,3 +1,17 @@
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **A2a, b017** (Acts 4:4 paraphrased accurately (LSG wording)): « et les trois mille devinrent cinq mille (Actes 4:4) » → « et le nombre des hommes qui crurent s'éleva à environ cinq mille (Actes 4:4) »
+- **F2.5, b032** (Acts 5:34 (LSG) replaces 'wise man'): « Selon le Nouveau Testament lui-même, c'était un homme sage. » → « Luc l'appelle un « docteur de la loi, estimé de tout le peuple » (Actes 5:34). »
+- **A2b, b035** (Rank: Commander): « Le capitaine Mitsuo Fuchida » → « Le commandant Mitsuo Fuchida »
+- **A2b, b035** ('thirty years together' / 'tens of thousands' replaced): « parcoururent ensemble tout le Japon pendant les trente années suivantes en prêchant l'Évangile. Des dizaines de milliers de Japonais vinrent à Christ. » → « prêchèrent l'Évangile côte à côte au Japon, et Fuchida passa le reste de sa vie, plus de vingt-cinq ans, comme évangéliste. Beaucoup vinrent à Christ… »
+- **F2.5, b036** (Added: Luke never says Gamaliel believed): « Gamaliel en savait assez pour avoir peur. » → « Gamaliel en savait assez pour avoir peur. Luc ne nous dit jamais que Gamaliel lui-même ait cru ; son conseil relevait de la prudence, non de la foi. »
+- **F2.5, SA 6 model** ('no evidence' -> 'Scripture never says'): « Rien n'indique qu'il soit devenu croyant » → « L'Écriture ne dit jamais qu'il soit devenu croyant »
+- **F2.15, SA 8 model** (Tract handed by an American (matches b035)): « reçut un tract des mains de Jacob DeShazer, un aviateur américain » → « reçut d'un Américain, dans une gare de Tokyo, un tract contenant le témoignage de Jacob DeShazer, un aviateur américain »
+- **F2.15, SA 8 model** ('across Japan' softened): « prêchèrent ensuite l'Évangile à travers le Japon. » → « prêchèrent ensuite l'Évangile ensemble au Japon. »
+- **F2.5, MC 13**: unchanged; b032 now teaches its answer (Acts 5:34).
+
 # CTSActs Unit 2 — French draft review notes
 
 Checker re-verified every quotation against the offline LSG tool (Actes 3:2, 3:6, 3:8, 3:12, 4:2, 4:7, 4:10, 4:12, 4:13, 4:19-20, 4:22, 4:29, 4:31, 4:36, 5:4, 5:11, 5:17, 5:20, 5:25, 5:28-29, 5:34, 5:39, 5:41, 6:2-4, 6:7, Luc 23:34): all exact except one verb agreement in Actes 4:13 (b021), now corrected.
@@ -18,12 +32,12 @@ Checker re-verified every quotation against the offline LSG tool (Actes 3:2, 3:6
 
 ## Problems in the English source
 
-1. **SA 8 model** says Fuchida "was handed a tract by Jacob DeShazer". The lesson (b035) says an unnamed American handed him a tract that DeShazer wrote. I translated the model faithfully.
-2. **b032** says Gamaliel was "by the New Testament's own admission, a wise man". Acts 5:34 calls him a teacher of the law respected by all the people; it does not call him wise. **MC 13** tests "respected by all the people", which the lesson never states.
+1. **SA 8 model** says Fuchida "was handed a tract by Jacob DeShazer". The lesson (b035) says an unnamed American handed him a tract that DeShazer wrote. I translated the model faithfully. **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
+2. **b032** says Gamaliel was "by the New Testament's own admission, a wise man". Acts 5:34 calls him a teacher of the law respected by all the people; it does not call him wise. **MC 13** tests "respected by all the people", which the lesson never states. **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
 3. **SA 6** asks whether Gamaliel became a believer. The lesson does not address this.
 4. **MC 8** and **SA 4 model** say Ananias lied "to the Holy Spirit". The lesson quotes only 5:4 ("to God"); 5:3 (the Holy Spirit) is not quoted. The point is minor, and the answer is still correct.
-5. **b017**: "three thousand more became five thousand (Acts 4:4)". This is garbled: Acts 4:4 says the number of men came to about five thousand. I translated it as "les trois mille devinrent cinq mille".
-6. **b035** facts worth checking: Fuchida's rank was Commander (chūsa), not "Captain". The claims that he and DeShazer travelled together "for the next thirty years" and that "tens of thousands" were converted are overstated. Fuchida died in 1976 and mostly toured separately, including in the US.
+5. **b017**: "three thousand more became five thousand (Acts 4:4)". This is garbled: Acts 4:4 says the number of men came to about five thousand. I translated it as "les trois mille devinrent cinq mille". **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
+6. **b035** facts worth checking: Fuchida's rank was Commander (chūsa), not "Captain". The claims that he and DeShazer travelled together "for the next thirty years" and that "tens of thousands" were converted are overstated. Fuchida died in 1976 and mostly toured separately, including in the US. **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
 7. The answer keys look correct, and no `why` fields are present.
 
 ## Adaptations

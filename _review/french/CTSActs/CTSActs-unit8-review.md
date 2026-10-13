@@ -1,3 +1,12 @@
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **A8a, b022** (Mandaeans: size, place and book corrected): « une petite communauté religieuse d'environ deux mille personnes, surtout en Irak et en Iran, se dit toujours disciple de Jean-Baptiste. On les appelle… » → « une petite communauté religieuse de quelques dizaines de milliers de personnes, de l'Irak et de l'Iran jusqu'à une diaspora dans le monde entier, hono… »
+- **F2.19, SA 6 model** (Model gives the lesson's figure (about 150 years of wages)): « sans doute l'équivalent de plusieurs dizaines d'années de salaire d'un ouvrier ordinaire » → « environ cent cinquante ans de salaire d'un ouvrier ordinaire »
+- **A8b, b017**: no change; the French already read « Relisez ces mots » (no number).
+- **F1.4, MC 12 option 4**: no change; the French already said « son temple était l'une des sept merveilles ».
+
 # CTSActs Unit 8 — French draft review
 
 ## Questions for Wayne
@@ -18,14 +27,14 @@
 
 ## Problems in the English source
 
-1. **b022, Mandaeans.** "About two thousand people, mostly in Iraq and Iran" is far too low. Usual estimates are tens of thousands, and most now live in the diaspora. Their main sacred book is the Ginza Rabba, not a "gospel of John the Baptist", although they do have a *Book of John*. Translated as written.
+1. **b022, Mandaeans.** "About two thousand people, mostly in Iraq and Iran" is far too low. Usual estimates are tens of thousands, and most now live in the diaspora. Their main sacred book is the Ginza Rabba, not a "gospel of John the Baptist", although they do have a *Book of John*. Translated as written. **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
 2. **b027 vs Acts 19:16.** "Jumped on all seven" does not match the critical text ("both"). See Question 3.
-3. **b017.** "Read those eight words": the quotation has more than eight words. I dropped the number ("Relisez ces mots"), as the Spanish did.
+3. **b017.** "Read those eight words": the quotation has more than eight words. I dropped the number ("Relisez ces mots"), as the Spanish did. **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
 4. **b040, Moody.** "Many of the people in that congregation lost their lives that night" goes beyond what Moody's own accounts say (he said he never saw some of them again). Translated as written.
 5. **b020, Edison.** The "eleven hundred ways" figure is a popular, unsourced version of the quote (it often appears as "10,000"). Translated as written.
 6. **b032.** "Prayed in his lodgings" is not in Acts. Acts 19:30–31 says the disciples and the Asiarchs kept Paul away. Translated as written.
 7. **MC12.** The correct option calls the goddess "one of the seven wonders". It was her temple. The French says "son temple était l'une des sept merveilles", which is a slight correction.
-8. **SA6 model.** It says "decades of wages", but the lesson (b029) says about 150 years. I translated it as "plusieurs dizaines d'années".
+8. **SA6 model.** It says "decades of wages", but the lesson (b029) says about 150 years. I translated it as "plusieurs dizaines d'années". **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
 9. **SA8 model.** The last clause repeats the earlier point ("preachers… risk falling asleep during a long sermon"). Translated faithfully.
 10. **SA9 model.** "A savage wolf, and wolves like it" is garbled. I rendered it as "des loups cruels".
 11. **SA3 keywords "narrow"/"broad".** The lesson never mentions the narrow or broad road. These ideas appear only in the model. They are kept as "étroit/resserré" and "large/spacieux".

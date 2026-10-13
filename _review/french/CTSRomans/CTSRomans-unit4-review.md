@@ -1,3 +1,10 @@
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **F2.11, b026** (new sentence, Romans 5:10, teaches MC 11, MC 12, SA 10): + « Pourtant, « lorsque nous étions ennemis, nous avons été réconciliés avec Dieu par la mort de son Fils » (5:10). La réconciliation est le rétablissement d'une relation brisée : la justification règle notre situation légale devant le Juge, tandis que la réconciliation fait des ennemis des amis. » (LSG)
+- **F2.11, MC 11 why**: no change; the French already quoted Segond (« par la mort de son Fils »).
+
 ## Questions for Wayne
 
 1. **Rom 5:2, "access ... in which we stand".** Segond has "à qui nous devons d'avoir eu par la foi accès à cette grâce, dans laquelle nous demeurons fermes". The offline Segond text leaves out the opening "à" ("qui nous devons…"). As the brief requires, b017 copies the tool exactly. Please have the French reader check a printed Segond 1910 and add "à" if it is there. b018, MC 3 and Fill 2 use "accès … dans laquelle nous demeurons fermes". Fill 2's answer is "accès", and it also accepts "entrée".

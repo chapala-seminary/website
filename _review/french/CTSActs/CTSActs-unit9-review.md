@@ -1,3 +1,12 @@
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **A9a, b023** ('thirty' -> 'about twenty-five' years): « avait poussé trente ans plus tôt » → « avait poussé environ vingt-cinq ans plus tôt »
+- **A9b, b032** (Porcian laws: no '195 BC capital crime'): « La loi romaine, depuis la Lex Porcia de 195 av. J.-C., faisait du fouet infligé à un citoyen romain un crime capital. » → « La loi romaine, depuis les lois Porcia du début du IIe siècle av. J.-C., interdisait, sous de lourdes peines, de fouetter un citoyen romain. »
+- **F2.8, b043** ('teenager' -> 'boy'): « prenant par la main un adolescent juif » → « prenant par la main un garçon juif »
+- **F2.20, SA 4 model** (Model follows Acts 22:23 (LSG wording, as b029)): « déchirant ses vêtements et réclamant sa mort » → « jetant ses vêtements, lançant de la poussière en l'air et réclamant sa mort »
+
 # CTSActs Unit 9 — French draft review
 
 ## Questions for Wayne
@@ -16,12 +25,12 @@
 
 ## Problems in the English source
 
-1. **SA4 model**: it says the crowd was "tearing their clothes". The lesson (b029) and Acts 22:23 say they *threw* their cloaks. Translated as written ("déchirant ses vêtements"). Consider changing it to "jetant".
+1. **SA4 model**: it says the crowd was "tearing their clothes". The lesson (b029) and Acts 22:23 say they *threw* their cloaks. Translated as written ("déchirant ses vêtements"). Consider changing it to "jetant". **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
 2. **SA2 model**: "his disciples fear for him just as the disciples once feared for Christ". This is not in the lesson or in Acts 21–23 (it may come from Acts 21:12–13 in the previous unit). Translated as written.
 3. **SA2 keywords_en** ("away", "him") are fragments of one phrase, and "luke" and "embed" come straight from the prompt. Following convention 10, the French uses 8 distinct ideas (foule, procès, sanhédrin, Pilate/gouverneur, Hérode, disciple, maître, mourir). The other SA sets were also rebuilt so that the French prompt alone scores 0.
-4. **b023**: "thirty years earlier" for Pilate's palace. The arrest (c. AD 57) came about 24–27 years after the crucifixion. Translated as written; consider "vingt-cinq ans".
+4. **b023**: "thirty years earlier" for Pilate's palace. The arrest (c. AD 57) came about 24–27 years after the crucifixion. Translated as written; consider "vingt-cinq ans". **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
 5. **b025**: the lesson combines Acts' "four thousand… into the wilderness" with Josephus's march to the Mount of Olives (Josephus gives a much larger number). Translated as written.
-6. **b032**: the Porcian laws are usually dated c. 195–184 BC. They forbade the flogging of citizens, but "a capital crime" overstates them. Translated as written.
+6. **b032**: the Porcian laws are usually dated c. 195–184 BC. They forbade the flogging of citizens, but "a capital crime" overstates them. Translated as written. **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
 7. **b016**: "Paul had taken Nazirite vows in Cenchrea". Acts 18:18 says only "a vow", in the singular, and does not call it Nazirite. Translated as written.
 
 ## Adaptations
