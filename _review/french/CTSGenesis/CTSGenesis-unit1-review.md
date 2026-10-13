@@ -22,8 +22,8 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
   _Bloc b010, QCM 7, texte à trous 5. Vérifié en ligne. « familles » correspond à l’anglais « families »._
 - **Genèse 12:2** — « je rendrai ton nom grand »  
   _Bloc b016 ; QCM 14 en reprend l’idée sans citation. Vérifié en ligne._
-- **Actes 2:11 (allusion)** — « nous les entendons parler dans nos langues des merveilles de Dieu »  
-  _Bloc b017 : simple allusion, non citée entre guillemets ; formulée « les merveilles de Dieu » pour rester proche de LSG. Non vérifié en ligne (allusion seulement)._
+- **Actes 2:11 (allusion)** — « comment les entendons-nous parler dans nos langues des merveilles de Dieu? »  
+  _Bloc b017 : simple allusion, non citée entre guillemets ; formulée « les merveilles de Dieu » pour rester proche de LSG. Revérifié avec l'outil LSG hors ligne (12 oct. 2026)._
 
 ## 3. Terms for the reviewer to confirm
 
@@ -55,7 +55,7 @@ La Genèse — Le livre des commencements
 > EN: Genesis — The Book of Beginnings
 
 **b004**  
-La Genèse s’ouvre sur Dieu. Avant de nous parler d’Adam, de Noé, d’Abraham, de Jacob ou de Joseph, le livre dirige notre attention vers Celui qui se tient derrière toute l’histoire. « Au commencement, Dieu créa les cieux et la terre » (Genèse 1:1, LSG). La Bible ne commence pas par chercher à prouver l’existence de Dieu ; elle commence par Dieu, la réalité éternelle de qui la création reçoit son existence. Les êtres humains se demandent naturellement d’où ils viennent, un peu comme une famille remonte sa généalogie à la recherche de ses racines. La Genèse pousse cette question plus loin. Derrière notre arbre généalogique, derrière la race humaine et derrière l’ordre créé se tient Dieu lui-même.
+La Genèse s’ouvre sur Dieu. Avant de nous parler d’Adam, de Noé, d’Abraham, de Jacob ou de Joseph, le livre dirige notre attention vers celui qui se tient derrière toute l’histoire. « Au commencement, Dieu créa les cieux et la terre » (Genèse 1:1, LSG). La Bible ne commence pas par chercher à prouver l’existence de Dieu ; elle commence par Dieu, la réalité éternelle de qui la création reçoit son existence. Les êtres humains se demandent naturellement d’où ils viennent, un peu comme une famille remonte sa généalogie à la recherche de ses racines. La Genèse pousse cette question plus loin. Derrière notre arbre généalogique, derrière la race humaine et derrière l’ordre créé se tient Dieu lui-même.
 
 > EN: Genesis opens with God. Before the book tells us about Adam, Noah, Abraham, Jacob, or Joseph, it directs our attention to the One who stands behind the whole story. “In the beginning God created the heavens and the earth” (Genesis 1:1, NKJV). The Bible does not begin by arguing God into existence; it begins with God as the eternal reality from whom creation receives its existence. Human beings naturally ask where they came from, much as a family traces its ancestry in search of its roots. Genesis takes that question deeper. Behind our family tree, behind the human race, and behind the created order stands God Himself.
 

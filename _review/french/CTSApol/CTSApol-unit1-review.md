@@ -14,6 +14,11 @@ Counts: 35 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 4. MC 14 has the distractor 'Because Spanish is required'. It is kept as 'l'espagnol est obligatoire'. Would you prefer 'le français' in the French edition, or a different distractor?
 5. Romans 1:16 in LSG has no 'of Christ' ('l'Évangile', not 'l'Évangile de Christ'). The LSG wording is kept; nothing in the exam depends on it.
 
+## Problems in the English source
+
+- SA4: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -23,7 +28,7 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
 - **⚠** **Romains 1:20** — « En effet, les perfections invisibles de Dieu, sa puissance éternelle et sa divinité, se voient comme à l'œil, depuis la création du monde, quand on les considère dans ses ouvrages. Ils sont donc inexcusables, »  
   _Checked online. 'invisible qualities' = 'perfections invisibles'; 'divine nature' = 'divinité'; 'clearly seen' = 'se voient comme à l'œil'; 'understood from what has been made' = 'quand on les considère dans ses ouvrages'; 'without excuse' = 'inexcusables'. MC 12 and SA 8 (prompt, keywords, model) adjusted to LSG wording._
 - **Romains 1:16** — « Car je n'ai point honte de l'Évangile: c'est une puissance de Dieu pour le salut de quiconque croit, »  
-  _Checked online. English (NKJV) has 'gospel of Christ'; LSG has no 'de Christ'. LSG 'une puissance' vs English 'the power'. MC 20 uses LSG wording; nothing in the exam depends on 'of Christ'._
+  _Checked online. English (NKJV) has 'gospel of Christ'; LSG has no 'de Christ'. LSG 'une puissance' vs English 'the power'. MC 20 uses LSG wording; nothing in the exam depends on 'of Christ'. Catch-up 12 Oct 2026: b035 checked against offline LSG; space before colon removed to match Segond verbatim._
 - **Jean 20:27** — « Avance ici ton doigt »  
   _Checked online (biblestudytools.com/lsg). English 'Put your finger here'. Used in b023 and fill 6._
 - **Jean 1:14 (allusion, b014)** — « pleine de grâce et de vérité »  
@@ -200,7 +205,7 @@ Le commandement de 1 Pierre 3:15 n'est pas donné aux seuls savants, ni aux seul
 > EN: The command of 1 Peter 3:15 is not given to scholars only, or to pastors only, or to those with a gift for argument. It is given to every believer, because every believer has a hope, and someday someone is going to ask about it. A neighbor over the fence. A child at bedtime. A coworker who has watched you through a hard season and finally says, "How are you not falling apart?" In that moment you do not need to be a philosopher. You need only to be ready — ready to point past yourself to the design of the heavens, the fingerprint of prophecy, the empty tomb, and the steady record of those who were there. We follow the clues back to the Baker. Are you ready to give an answer?
 
 **b035**  
-« Car je n'ai point honte de l'Évangile : c'est une puissance de Dieu pour le salut de quiconque croit. » — Romains 1:16
+« Car je n'ai point honte de l'Évangile: c'est une puissance de Dieu pour le salut de quiconque croit. » — Romains 1:16
 
 > EN: "For I am not ashamed of the gospel of Christ, for it is the power of God to salvation for everyone who believes." — Romans 1:16
 
@@ -210,7 +215,7 @@ Examen final de l'unité 1
 > EN: Unit 1 Final Exam
 
 **b037**  
-Parcours Certificat : les 20 questions à choix multiple. Associé : les questions à choix multiple et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiple, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous échouez, l'examen impose un court délai avant une nouvelle tentative.
+Parcours Certificat : les 20 questions à choix multiple. Parcours Associé en divinité : les questions à choix multiple et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiple, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous échouez, l'examen impose un court délai avant une nouvelle tentative.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -449,12 +454,12 @@ Modèle : Dans l'histoire, un homme mange tout le plateau de biscuits et cache s
 > EN: Explain the Ice-Box Cookie illustration and what it teaches about the evidence for a Creator in the world.
 
 **3. Pourquoi cette unité dit-elle que l'apologétique ne consiste pas à gagner une discussion mais à dégager un chemin ? Servez-vous de l'illustration du mur.**  
-Mots-clés : dégag / degag · le mur / un mur / du mur / muraille · pierres / une pierre / chaque pierre · obstacle · enlev / retir / ôtant / ôter · question · crainte / peurs · bloqu / empêch / empech / barrière / barriere  
+Mots-clés : dégag / degag · le mur / un mur / du mur / muraille · pierres / une pierre / chaque pierre · obstacle · enlev / retir / ôtant / ôter / otant / oter · question · crainte / peurs · bloqu / empêch / empech / barrière / barriere  
 Modèle : Cette unité dit que le but n'est pas un adversaire vaincu, mais une porte ouverte. Une personne se tient derrière un mur fait de pierres, et chaque pierre est un obstacle qui l'empêche de voir Christ : une question difficile, une fausseté qu'on lui a enseignée, une blessure causée par l'Église, une crainte. L'apologétique n'utilise pas un bélier pour faire basculer la personne par-dessus le mur. Elle s'approche plutôt tranquillement et enlève les pierres une à une, en répondant aux questions et en apaisant les craintes, jusqu'à ce qu'il en reste assez peu pour que la personne puisse lever les yeux et voir Christ debout de l'autre côté. Gagner une discussion pourrait laisser le mur debout et la personne humiliée ; dégager le chemin enlève les obstacles afin que la personne puisse voir et répondre par elle-même. Nous ne sauvons personne ; nous ne faisons qu'enlever les pierres.
 
 > EN: Why does the unit say apologetics is not about winning an argument but about clearing a path? Use the wall illustration.
 
-**4. Comment le doute honnête peut-il être un chemin vers la foi plutôt que son ennemi ? Servez-vous de l'exemple de Thomas.**  
+**4. Comment une incertitude sincère peut-elle conduire à la foi au lieu de la combattre ? Servez-vous de l'exemple de Thomas.**  
 Mots-clés : doute / douter / doutait · chemin · confiance / croire / foi personnelle / foi plus profonde · thomas · honnête / honnete · question · profond · ennemi  
 Modèle : Cette unité soutient que la foi n'est pas aveugle ; le doute n'a donc pas à être l'ennemi de la foi. Ce qui compte, c'est la direction que prend le doute. Le doute qui fuit Dieu et refuse de poser ses questions se durcit en incrédulité. Mais le doute qui court vers Dieu, qui apporte ses questions honnêtes à la lumière et les pose à haute voix, est souvent un chemin vers une foi plus profonde et plus personnelle. Thomas en est l'exemple. Il a refusé de croire sur la parole de ses amis et a exigé de toucher les plaies ; pourtant, Jésus ne l'a pas chassé ni réprimandé : il est revenu et a invité Thomas à mettre son doigt dans les plaies. Celui qui doutait honnêtement a été accueilli, non rejeté. Nous ne devons donc pas craindre les questions honnêtes, mais les accueillir, car elles sont souvent le premier obstacle qui tombe et le commencement d'une foi qu'une personne peut vraiment faire sienne.
 
@@ -490,7 +495,7 @@ Modèle : Cette unité rejette l'idée répandue selon laquelle la foi serait un
 
 > EN: The unit says faith is not 'a leap in the dark.' Explain the comparison it uses instead and what it means.
 
-**10. Pourquoi chaque croyant — et pas seulement les savants ou les pasteurs — doit-il être prêt à rendre raison de l'espérance qui est en lui ?**  
+**10. Pourquoi l'appel de 1 Pierre 3:15 à se défendre concerne-t-il tous les chrétiens, et pas seulement les spécialistes ou les pasteurs ?**  
 Mots-clés : chaque / tout croyant / tous les croyants · croyant · savant · commande / ordre · toujours prêt / toujours pret / être prêt / etre pret · espéran / esperan · interroge / demande · raison  
 Modèle : Cette unité souligne que le commandement de 1 Pierre 3:15 n'est pas donné seulement aux savants, aux pasteurs ou à ceux qui ont un don pour l'argumentation, mais à chaque croyant. La raison en est simple : chaque croyant a une espérance, et un jour quelqu'un l'interrogera à ce sujet, que ce soit un voisin, un enfant au moment du coucher ou un collègue qui l'a observé pendant une période difficile. À ce moment-là, il n'a pas besoin d'être philosophe ; il lui suffit d'être prêt à diriger les regards au-delà de lui-même, vers les preuves que le cours suivra : la conception des cieux, l'empreinte de la prophétie, le tombeau vide et le témoignage constant de ceux qui étaient là. Parce que le commandement s'adresse à tous les croyants, et parce que les questions viennent à des gens ordinaires dans la vie ordinaire, la responsabilité d'être toujours prêt à rendre raison de notre espérance appartient à chaque chrétien.
 

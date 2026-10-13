@@ -15,16 +15,21 @@ Counts: 72 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 5. MC 15 calls Andi's fiction 'Wattpad' fiction, but the lesson never mentions Wattpad; translated as is. Also the book titles were translated (following the Spanish); keep English titles instead?
 6. Byline kept as in the source: « Dr. Wayne Cook avec Andi Cook  |  Directeur : Dr. Ted Rogers » (same as other French units).
 
+## Problems in the English source
+
+- SA2: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
 
 - **⚠** **2 Timothée 3:15** — « dès ton enfance, tu connais les saintes lettres, qui peuvent te rendre sage à salut par la foi en Jésus-Christ. »  
-  _Verified online (biblestudytools.com LSG). NKJV 'the Holy Scriptures' = LSG « les saintes lettres ». This is the course motto (b022, b023, b027, b075, MC 17, SA 10) and b039 teaches that the literal sense is 'sacred letters'. LSG already says « lettres », so b039 now reads naturally; fill 3 (« ____ sacrées » = lettres) is phrased around « saintes Écritures » as the common rendering. Also used b029 (paraphrase, no quotation marks), b032, b048, MC 9, SA 5._
+  _Verified online (biblestudytools.com LSG). NKJV 'the Holy Scriptures' = LSG « les saintes lettres ». This is the course motto (b022, b023, b027, b075, MC 17, SA 10) and b039 teaches that the literal sense is 'sacred letters'. LSG already says « lettres », so b039 now reads naturally; fill 3 (« ____ sacrées » = lettres) now asks for the literal sense of Paul's Greek phrase (convention 1). Also used b029 (paraphrase, no quotation marks), b032, b048, MC 9, SA 5._
 - **⚠** **2 Timothée 3:16** — « Toute Ecriture est inspirée de Dieu, et utile pour enseigner, pour convaincre, pour corriger, pour instruire dans la justice, »  
   _Verified online. Written with modern « Écriture ». KJV 'for doctrine, for reproof, for correction, for instruction in righteousness' = LSG « pour enseigner, pour convaincre, pour corriger, pour instruire dans la justice ». The lesson headings (b062–b068), MC 12, fill 9 and SA 9 depend on these four words: headings keep LSG with the English sense in brackets — « Pour enseigner (la doctrine) », « Pour convaincre (reprendre) », « Pour instruire dans la justice (former) ». 'Reproof' → « convaincre » is the main shift. 'Given by inspiration of God' = « inspirée de Dieu » (b056, MC 10, fill 8, SA 7)._
 - **⚠** **2 Timothée 3:17** — « afin que l'homme de Dieu soit accompli et propre à toute bonne oeuvre. »  
-  _Verified online. KJV 'perfect, thoroughly furnished unto all good works' = LSG « accompli et propre à toute bonne œuvre ». b069, MC 13 and fill 10 explain the word 'perfect'; the French explains « accompli » (noting « parfait » in some versions). Fill 10 answer « mûr » unaffected._
+  _Verified online. KJV 'perfect, thoroughly furnished unto all good works' = LSG « accompli et propre à toute bonne œuvre ». b069, MC 13 and fill 10 explain the word 'perfect'; the French explains « accompli » as the Greek sense (no 'other versions' wording, per convention 1). Fill 10 answer « mûr » unaffected._
 - **Proverbes 22:6** — « Instruis l'enfant selon la voie qu'il doit suivre; Et quand il sera vieux, il ne s'en détournera pas. »  
   _Verified online. b034, MC 5._
 - **Marc 10:14** — « Laissez venir à moi les petits enfants, et ne les en empêchez pas; car le royaume de Dieu est pour ceux qui leur ressemblent. »  
@@ -382,7 +387,7 @@ Examen de l'Unité 1
 > EN: Unit 1 Examination
 
 **b078**  
-Certificat de ministère : 20 questions à choix multiples, 90 % (18 sur 20) pour réussir. Master of Theology & Master of Divinity : 20 questions à choix multiples + 10 questions à réponse courte, 90 % exigés dans chacune des deux parties séparément. Chaque question à choix multiples est notée dès que vous cliquez. Il faut réussir les choix multiples avant que les réponses courtes ne comptent. Un échec verrouille la partie concernée pendant 15 minutes ; si vous avez déjà réussi les choix multiples, seule la partie à réponse courte est verrouillée après un échec à cette partie.
+Certificat de ministère : 20 questions à choix multiples, 90 % (18 sur 20) pour réussir. Th.M. & M.Div. : 20 questions à choix multiples + 10 questions à réponse courte, 90 % exigés dans chacune des deux parties séparément. Chaque question à choix multiples est notée dès que vous cliquez. Il faut réussir les choix multiples avant que les réponses courtes ne comptent. Un échec verrouille la partie concernée pendant 15 minutes ; si vous avez déjà réussi les choix multiples, seule la partie à réponse courte est verrouillée après un échec à cette partie.
 
 > EN: Certificate of Ministry: 20 multiple-choice questions, 90% (18 of 20) to pass. Master of Theology & Master of Divinity: 20 MC + 10 short-answer, both at 90% independently. Each MC scores immediately when you click. MC must be passed before SA scores count. A failure locks the relevant section for 15 minutes; if you have already passed MC, only SA locks after an SA fail.
 
@@ -521,7 +526,7 @@ _Pourquoi :_ C'est la liste exacte de Paul en 2 Timothée 3:16. Chaque usage dé
 · B. Richesse et influence  
 ✓ C. Que l'homme de Dieu soit accompli (complet, mûr, équipé) et propre à toute bonne œuvre  
 · D. La reconnaissance de l'Église  
-_Pourquoi :_ Le mot grec rendu par « accompli » (« parfait » dans certaines versions) signifie complet, mûr, pleinement équipé — et non sans défaut. C'est le but de toute Éducation chrétienne : un homme ou une femme de Dieu pleinement équipé, prêt pour toute bonne œuvre.  
+_Pourquoi :_ Le mot grec rendu par « accompli » signifie complet, mûr, pleinement équipé — et non sans défaut. C'est le but de toute Éducation chrétienne : un homme ou une femme de Dieu pleinement équipé, prêt pour toute bonne œuvre.  
 > EN: What is the result Paul promises in 2 Timothy 3:17? — ✓ The man of God may be perfect (complete, mature, equipped) for every good work
 
 **14. Selon Wayne, en quoi l'Éducation chrétienne s'effondre-t-elle si l'on retire l'un des cinq faits concernant l'Écriture ?**  
@@ -592,7 +597,7 @@ Réponse : **poumons** · aussi acceptées : poumon
 Réponse : **Loïs**  
 > EN: Timothy was trained to know God's Word by his mother Eunice and his grandmother ____. — **Lois**
 
-**3.** L'expression de Paul souvent traduite « saintes Écritures » (2 Timothée 3:15) signifie littéralement « ____ sacrées ».  
+**3.** En 2 Timothée 3:15, l'expression grecque que Paul emploie pour les saintes Écritures signifie littéralement « ____ sacrées ».  
 Réponse : **lettres** · aussi acceptées : lettre, écritures, écrits  
 > EN: A literal translation of Paul's phrase "holy Scriptures" is sacred ____. — **letters**
 
@@ -620,7 +625,7 @@ Réponse : **theopneustos**
 Réponse : **justice**  
 > EN: Scripture is "profitable for doctrine, for reproof, for correction, for instruction in ____" (2 Timothy 3:16). — **righteousness**
 
-**10.** En 2 Timothée 3:17, le mot rendu par « accompli » (« parfait » dans certaines versions) signifie complet, ____, pleinement équipé.  
+**10.** En 2 Timothée 3:17, le mot grec rendu par « accompli » signifie complet, ____, pleinement équipé.  
 Réponse : **mûr** · aussi acceptées : mature, pleinement mûr, arrivé à maturité  
 > EN: In 2 Timothy 3:17, the word perfect means complete, ____, fully equipped. — **mature**
 
@@ -634,7 +639,7 @@ Modèle : Les cinq faits sont : (1) les Écritures peuvent être enseignées, à
 
 > EN: State the five facts about the Scripture from 2 Timothy 3:15-17 that Wayne uses as the five reasons Christian Education exists.
 
-**2. Racontez l'histoire du garçon dont le père a jeté la Bible au feu et expliquez son application à l'Éducation chrétienne.**  
+**2. Racontez l'histoire du jeune lecteur dont le père a jeté la Bible au feu et expliquez son application à l'Éducation chrétienne.**  
 Mots-clés : garçon / garcon · fils · père / pere · au feu / le feu / du feu / incendi · flamme · brûl / brul · cœur / coeur · parole  
 Modèle : Un père avait interdit à son fils de lire la Bible, mais le garçon continuait à la lire. Un jour, le père la lui arracha et la jeta au feu. Le garçon souriait et dit, en montrant son cœur : « Vous ne pouvez pas brûler ce qui est là-dedans. » Application : l'Éducation chrétienne garde son trésor dans le cœur, là où la flamme de l'épreuve ne peut l'atteindre. Son but est de placer la Parole de Dieu dans le cœur des apprenants de telle manière que le monde ne puisse jamais l'en retirer.
 
@@ -653,13 +658,13 @@ Modèle : Voltaire, l'esprit le plus célèbre de son siècle, aurait prédit qu
 > EN: Tell the Voltaire story and explain what it teaches about the holiness of the Scriptures.
 
 **5. Expliquez la différence entre dire « la Bible sauve » et dire « la Bible conduit au salut ».**  
-Mots-clés : bible · écritur / ecritur · sauvé / sauve · salut · christ · messie · la foi / sa foi / foi en · confian  
+Mots-clés : bible · écritur / ecritur · magique / satan / diable · salut · christ · messie · la foi / sa foi / foi en · confian  
 Modèle : Dire « la Bible sauve », c'est en faire un livre magique, comme si la toucher, la garder sur une étagère ou même y croire suffisait. Satan connaît la Bible chapitre et verset, et il n'est pas sauvé. Paul dit plutôt que les Écritures « peuvent te rendre sage à salut par la foi en Jésus-Christ ». La Bible conduit au salut ; le salut lui-même vient par la foi en Christ, que la Bible révèle. L'Écriture est le pont ; Christ est la destination. L'enseignant est le Paul qui conduit Timothée de l'Écriture à Christ.
 
 > EN: Explain the difference between saying "the Bible saves" and saying "the Bible leads to salvation."
 
 **6. Racontez l'histoire du promeneur sur la plage chilienne et expliquez ce qu'elle enseigne à l'enseignant d'Éducation chrétienne.**  
-Mots-clés : chili / chilien · séisme / seisme / tremblement · vague / raz de mar · page / feuille · plage / rivage · chrétien / chretien / la foi · distribu · esprit  
+Mots-clés : chili / chilien · séisme / seisme / tremblement · vague / raz de mar · page / feuille · plage / rivage · la foi / converti / devint chrétien / devint chretien / devenu chrétien / devenu chretien · distribu · esprit  
 Modèle : Au Chili, après un tremblement de terre et un raz-de-marée, un homme marchait sur la plage parmi les débris rejetés par la vague. Il y trouva quelques pages mouillées d'un livre, les fit sécher et les lut. Troublé, il se procura la Bible entière, la lut, devint chrétien et consacra le reste de sa vie à distribuer les Écritures dans les villages oubliés du nord du Chili. Leçon : la vague a placé la Parole sur son chemin, et la Parole a fait le reste. L'enseignant est la vague ; il distribue la Parole semaine après semaine, et c'est l'Esprit qui tourne la page.
 
 > EN: Tell the story of the Chilean beachcomber and explain what it teaches the Christian Education teacher.
@@ -670,7 +675,7 @@ Modèle : Theopneustos, le mot grec traduit « inspirée de Dieu » en 2 Timoth�
 
 > EN: Explain the meaning of theopneustos and why it matters for the Christian classroom.
 
-**8. Expliquez l'analogie des « deux poumons » que Wayne applique à la chaire et à la salle de classe, et ce qu'elle enseigne sur l'Église locale.**  
+**8. Expliquez l'analogie des « deux poumons » utilisée par Wayne : que représentent ces deux poumons, et quelle leçon en tirer pour l'assemblée locale ?**  
 Mots-clés : chaire · estrade / prédicat / predicat · classe · enseign · poumon · partenai · ensemble · église / eglise  
 Modèle : Pour Wayne, la chaire et la salle de classe sont les deux poumons de l'Église locale. Les pasteurs prêchent, les enseignants enseignent : ils ne sont pas en concurrence mais en partenariat. Une Église qui ne respire qu'avec un seul poumon manque de souffle dans tout ce qu'elle fait. La prédication et l'enseignement doivent donc travailler ensemble.
 

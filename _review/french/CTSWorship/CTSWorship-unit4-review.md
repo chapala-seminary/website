@@ -12,14 +12,25 @@ Counts: 22 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 2. Many readers in Kinshasa are Catholic or from Catholic backgrounds. Do you want « mariolâtrie » kept as is, or explained (e.g., « la vénération excessive de Marie »)? I kept your term.
 3. The header and SA 8 mention « la frontière » (the American frontier), but the lesson text never explains it. Should a short phrase be added for francophone African readers?
 
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+- SA2: English prompt passes its own keywords
+- SA4: English prompt passes its own keywords
+- SA5: English prompt passes its own keywords
+- SA6: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
 
 - **Jean 4:24** — « Dieu est Esprit, et il faut que ceux qui l'adorent l'adorent en esprit et en vérité. »  
-  _Only the phrase « en esprit et en vérité » is quoted (b020 and SA5 model); LSG wording used. Verified on biblestudytools.com (BibleGateway rate-limited)._
+  _Only the phrase « en esprit et en vérité » is quoted (b020 and SA5 model); verbatim LSG, checked against the offline LSG text._
 - **Actes 2:6-8 (allusion)** — « chacun les entendait parler dans sa propre langue »  
-  _Paraphrased allusion in b016 and fill 2 (« chacun entendit l'Évangile dans sa propre langue »), not a quotation, so no quotation marks. LSG wording not checked online._
+  _Paraphrased allusion in b016 and fill 2 (« chacun entendit l'Évangile dans sa propre langue »), not a quotation, so no quotation marks. Checked against the offline LSG text (Actes 2:6)._
 
 ## 3. Terms for the reviewer to confirm
 
@@ -120,7 +131,7 @@ Examen final de l'Unité 4
 > EN: Unit 4 Final Exam
 
 **b028**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -341,14 +352,14 @@ Réponse : **invitation** · aussi acceptées : appel, appel à l'autel, invitat
 
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
-**1. Décrivez comment le clergé et le peuple se sont détachés l'un de l'autre dans le culte médiéval, et pourquoi le culte en latin était un retour à Babel.**  
+**1. Décrivez la distance qui s'est installée entre ceux qui célébraient et l'assemblée dans le culte du Moyen Âge, et expliquez pourquoi ce culte dans une langue inconnue était un retour à Babel.**  
 Mots-clés : médiév / mediev / moyen âge / moyen age · latin · prêtre / pretre / clergé / clerge · détach / detach / sépar / separ · peuple · le dos / tournant le dos · comprend / compren / compris · babel  
 Modèle : Dans le culte médiéval, le prêtre se tenait à l'autel, le dos tourné au peuple, célébrant la messe en latin, une langue que les fidèles ordinaires ne pouvaient plus comprendre, tandis que les Écritures restaient enfermées entre les mains des prêtres, car peu de gens savaient lire. Ce détachement faisait du culte en latin un retour à Babel, car c'était l'exact opposé de la Pentecôte, où chacun entendit l'Évangile dans sa propre langue : au lieu que la compréhension rassemble les gens, une langue incompréhensible tenait le clergé et le peuple à distance.
 
 > EN: Describe how clergy and people became detached in medieval worship, and why Latin worship was a return to Babel.
 
-**2. Expliquez les quatre développements théologiques du culte médiéval : la mariolâtrie, la confession, les indulgences et la transsubstantiation.**  
-Mots-clés : marie / mariol · indulgence · tetzel · transsubstant / transubstant · confess · purgatoire · pièce / piece / argent · dévelop / develop  
+**2. Expliquez ces quatre traits du culte médiéval : la mariolâtrie, la confession, les indulgences et la transsubstantiation.**  
+Mots-clés : marie / mariol · vend / commerc / transaction · tetzel · transsubstant / transubstant · intercess / médiat / mediat · purgatoire · pièce / piece / argent · dévelop / develop  
 Modèle : La mariolâtrie a fait de Marie une intercesseuse, ajoutant une médiatrice en plus de Christ seul. La confession est devenue un système de pardon prescrit, administré par les prêtres, au lieu d'un accès direct à Dieu. Les indulgences étaient vendues par des hommes comme Tetzel, dont le slogan grossier promettait que, dès que la pièce tinte dans le coffre, l'âme s'élance hors du purgatoire, transformant la grâce en transaction commerciale. La transsubstantiation enseignait que le pain et le vin devenaient littéralement le corps et le sang de Christ, élevant le rite lui-même à une place que l'Écriture ne lui a jamais donnée.
 
 > EN: Explain the four theological developments of medieval worship: Mariolatry, confession, indulgences, and transubstantiation.
@@ -360,36 +371,36 @@ Modèle : La Réforme s'est efforcée de ramener le culte au modèle du Nouveau 
 > EN: How did the Reformation try to return worship to the New Testament pattern?
 
 **4. Comparez les apports de Luther, de Zwingli et de Calvin au culte.**  
-Mots-clés : luther · zwingli / zwingle · calvin · consubstant · symbol · genève / geneve / genevois · chant · réform / reform  
+Mots-clés : luther · zwingli / zwingle · cène / cene · consubstant · symbol · genève / geneve / genevois · chant · réform / reform  
 Modèle : Luther voulait seulement réformer Rome, non rompre avec elle, et il enseignait la consubstantiation contre la transsubstantiation. Zwingli était le radical : il traitait la sainte cène comme un pur symbole et alla jusqu'à supprimer la musique de ses cultes. Calvin instaura le chant de l'assemblée, mit l'accent sur la sainte cène et produisit le Livre de culte de Genève, qui façonna le culte réformé en France, en Suisse, en Hollande et en Écosse. Chacun de ces réformateurs a laissé une empreinte distincte et durable sur la pratique du culte.
 
 > EN: Compare the worship contributions of Luther, Zwingli, and Calvin.
 
-**5. Calvin mettait l'accent sur les points et les sous-points, s'adressant à l'intelligence. Discutez la force et la faiblesse de cette méthode, et la manière dont Jean 4:24 la corrige.**  
+**5. Calvin organisait son enseignement de façon très ordonnée et s'adressait surtout à la tête. Discutez la force et la faiblesse de cette méthode, et la manière dont Jean 4:24 la corrige.**  
 Mots-clés : calvin · point · sous-point / souspoint / sous point · intelligence / intellect / raison · sèche / seche / aride / desséch / dessech · esprit · vérité / verite · prédic / predic / prêch / prech / sermon  
 Modèle : L'accent de Calvin sur les points, sous-points et sous-sous-points s'adresse à l'intelligence et prend pleinement au sérieux la moitié « vérité » de Jean 4:24 : sa force est une doctrine soigneuse et saine. Sa faiblesse, quand on la pousse trop loin, est qu'elle peut devenir sèche, nourrissant la tête sans atteindre le cœur. L'appel de Jean 4:24 à adorer « en esprit et en vérité » corrige cela en exigeant le « l'un et l'autre » : nous donnons à Dieu notre intelligence et notre louange, le sermon soigneusement raisonné et le cœur élevé dans le chant.
 
 > EN: Calvin emphasized points and subpoints, appealing to the mind. Discuss the strength and weakness of this, and how John 4:24 corrects it.
 
-**6. Expliquez la première grande division de 451 apr. J.-C. à Chalcédoine et les Églises orthodoxes orientales.**  
+**6. Expliquez la première grande division de l'Église, au concile de Chalcédoine, et les Églises qui en sont issues.**  
 Mots-clés : 451 · chalcédoine / chalcedoine / calcédoine / calcedoine · oriental · copte · miaphys · divis / sépar / separ / rupture · nature · schism  
 Modèle : La première grande division survint au concile de Chalcédoine en 451 apr. J.-C., lorsque six Églises anciennes refusèrent la formule du concile selon laquelle Christ est une seule Personne en deux natures ; elles s'en tinrent plutôt au miaphysisme, la doctrine selon laquelle Christ est pleinement divin et pleinement humain en une seule nature. Elles devinrent les Églises orthodoxes orientales : l'Église copte d'Égypte, les Églises éthiopienne et érythréenne, l'Église syriaque, l'Église arménienne et l'Église malankare de l'Inde, qui existent dans une continuité ininterrompue depuis plus de quinze siècles.
 
 > EN: Explain the first great split of AD 451 at Chalcedon and the Oriental Orthodox churches.
 
-**7. Expliquez le Grand Schisme de 1054 entre l'Orient et l'Occident.**  
+**7. Expliquez le Grand Schisme de 1054 : qui s'est séparé de qui, et comment ?**  
 Mots-clés : 1054 · schism · orient · occident · orthodox · rome · constantinople · excommuni  
 Modèle : Le Grand Schisme de 1054 eut lieu lorsque le patriarche de Constantinople et le pape de Rome s'excommunièrent mutuellement, divisant l'Église entre l'Église orthodoxe en Orient et l'Église catholique romaine en Occident. Ces excommunications mutuelles restèrent en vigueur plus de neuf cents ans et ne furent levées qu'en 1965, ce qui montre combien la division est devenue profonde et durable.
 
 > EN: Explain the Great Schism of 1054 between East and West.
 
-**8. Expliquez les trois forces qui ont façonné le culte au dix-neuvième siècle : le revivalisme, le romantisme et le dénominationalisme.**  
-Mots-clés : revival / réveil / reveil · romanti · dénomination / denomination / confessionnal · invitation · frontière / frontiere · gothique · divis / sépar / separ · dix-neuv / dixneuv / dix neuv / xixe  
+**8. Expliquez les trois forces qui ont façonné le culte dans les années 1800 : le revivalisme, le romantisme et le dénominationalisme.**  
+Mots-clés : revival / réveil / reveil · romanti · racial / raciaux · invitation · frontière / frontiere · gothique · divis / sépar / separ · dix-neuv / dixneuv / dix neuv / xixe  
 Modèle : Le revivalisme a donné naissance à l'invitation d'évangélisation encore utilisée dans de nombreuses Églises. Le romantisme, né à Oxford, a fait renaître l'architecture gothique, façonnant l'aspect et l'atmosphère de nombreux bâtiments d'église. Le dénominationalisme a divisé de nombreuses Églises sur des questions raciales et autres, fragmentant la chrétienté selon de nouvelles lignes au dix-neuvième siècle ; chacune de ces trois forces a laissé une empreinte durable sur la manière dont les Églises se rassemblaient et rendaient leur culte.
 
 > EN: Explain the three forces that shaped nineteenth-century worship: revivalism, romanticism, and denominationalism.
 
-**9. Expliquez comment le réaménagement du mobilier par la Réforme (placer la chaire au centre) était une déclaration théologique.**  
+**9. Expliquez en quoi la nouvelle disposition du lieu de culte voulue par la Réforme (la place donnée à la chaire) était une déclaration de foi.**  
 Mots-clés : mobilier / meuble · chaire · autel · centr · parole · sacrement · salle / sanctuaire · théolog / theolog  
 Modèle : Le sanctuaire catholique médiéval plaçait l'autel au centre, le prêtre tourné vers lui, faisant du sacrement l'élément suprême ; les réformateurs, eux, placèrent la chaire au centre. Ce n'était pas une simple décoration, mais une confession de foi sous forme visible : la salle médiévale disait que le salut vient par le sacrement, tandis que la salle réformée disait que le salut vient par la Parole prêchée. L'architecture même de la salle prêchait une théologie.
 

@@ -14,6 +14,10 @@ Counts: 56 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 4. Byline: kept as in the source, « Dr. Wayne Cook avec Andi Cook ». Since Andi is the course's author, should the French byline name her first or alone?
 5. The exam block calls the track 'Certificate of Ministry'. I used the house term « Parcours Certificat » (as in the Unit 5 draft), but the Unit 7 draft says « Certificat de ministère ». Which one should all units use?
 
+## Problems in the English source
+
+- SA3: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -45,7 +49,7 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
 - **Actes 2:32** — « C'est ce Jésus que Dieu a ressuscité; nous en sommes tous témoins. »  
   _Checked on bible.com (LSG). Quoted in b041._
 - **⚠** **Actes 2:37** — « Après avoir entendu ce discours, ils eurent le cœur vivement touché, et ils dirent à Pierre et aux autres apôtres: Hommes frères, que ferons-nous? »  
-  _Checked on bible.com (LSG). Quoted in b042; MC16, fill 9, SA7. KJV 'pricked in their heart' = LSG « ils eurent le cœur vivement touché » — a softer image than 'pricked/pierced'. b042 keeps the author's « Ils étaient transpercés »; fill 9 blank is « cœur » (accepts « coeur »); SA7 keyword 'pricked' became « touch »._
+  _Checked on bible.com (LSG). Quoted in b042; MC16, fill 9, SA7. KJV 'pricked in their heart' = LSG « ils eurent le cœur vivement touché » — a softer image than 'pricked/pierced'. b042 now follows convention 1: after the Segond quotation it says « Le texte grec dit littéralement qu'ils furent « transpercés » au cœur. »; fill 9 blank is « cœur » (accepts « coeur »); SA7 keyword 'pricked' became « touch »._
 - **Actes 2:38** — « Pierre leur dit: Repentez-vous, et que chacun de vous soit baptisé au nom de Jésus-Christ, pour le pardon de vos péchés; et vous recevrez le don du Saint-Esprit. »  
   _Checked on bible.com (LSG). Quoted from « Repentez-vous » in b043; MC17, fill 10, SA7. KJV 'remission' = « pardon »; 'Holy Ghost' = « Saint-Esprit »._
 - **Actes 2:41** — « Ceux qui acceptèrent sa parole furent baptisés; et, en ce jour-là, le nombre des disciples s'augmenta d'environ trois mille âmes. »  
@@ -269,7 +273,7 @@ Revenez à Actes 2. Pierre a ouvert par la question de la foule. Il a bâti son 
 > EN: Return to Acts 2. Peter has opened with the question of the crowd. He has built his body in three movements: the prophecy of Joel about the last days, the witness of David about the resurrection, the testimony that Jesus is both Lord and Christ. The crowd has followed him from What meaneth this? all the way to This Jesus hath God raised up, whereof we all are witnesses (Acts 2:32). And then comes the closing.
 
 **b042**  
-Luc rapporte ce qui s'est passé en une phrase saisissante : « Après avoir entendu ce discours, ils eurent le cœur vivement touché, et ils dirent à Pierre et aux autres apôtres : Hommes frères, que ferons-nous ? » (Actes 2:37). C'est la foule elle-même qui a posé à Pierre la question de la conclusion. Ils étaient transpercés. Ils avaient été conduits de leur tête à leur conscience. Ils connaissaient la vérité, et maintenant ils voulaient savoir quelle réponse donner.
+Luc rapporte ce qui s'est passé en une phrase saisissante : « Après avoir entendu ce discours, ils eurent le cœur vivement touché, et ils dirent à Pierre et aux autres apôtres : Hommes frères, que ferons-nous ? » (Actes 2:37). C'est la foule elle-même qui a posé à Pierre la question de la conclusion. Le texte grec dit littéralement qu'ils furent « transpercés » au cœur. Ils avaient été conduits de leur tête à leur conscience. Ils connaissaient la vérité, et maintenant ils voulaient savoir quelle réponse donner.
 
 > EN: Luke records what happened in one stunning sentence: "Now when they heard this, they were pricked in their heart, and said unto Peter and to the rest of the apostles, Men and brethren, what shall we do?" (Acts 2:37). The crowd asked Peter the closing question themselves. They were pierced. They had been moved from their head to their conscience. They knew the truth, and now they wanted to know the response.
 
@@ -319,7 +323,7 @@ Examen de l'Unité 6
 > EN: Unit 6 Examination
 
 **b052**  
-Parcours Certificat : 20 questions à choix multiples, 90 % (18 sur 20) pour réussir. Master of Theology & Master of Divinity : 20 questions à choix multiples + 10 questions à réponse courte, chaque partie à 90 % de façon indépendante. Chaque question à choix multiples est notée dès que vous cliquez. Il faut réussir les questions à choix multiples avant que les réponses courtes ne comptent. Un échec verrouille la partie concernée pendant 15 minutes ; si vous avez déjà réussi les questions à choix multiples, seule la partie à réponse courte est verrouillée après un échec à cette partie.
+Parcours Certificat : 20 questions à choix multiples, 90 % (18 sur 20) pour réussir. Th.M. & M.Div. : 20 questions à choix multiples + 10 questions à réponse courte, chaque partie à 90 % de façon indépendante. Chaque question à choix multiples est notée dès que vous cliquez. Il faut réussir les questions à choix multiples avant que les réponses courtes ne comptent. Un échec verrouille la partie concernée pendant 15 minutes ; si vous avez déjà réussi les questions à choix multiples, seule la partie à réponse courte est verrouillée après un échec à cette partie.
 
 > EN: Certificate of Ministry: 20 multiple-choice questions, 90% (18 of 20) to pass. Master of Theology & Master of Divinity: 20 MC + 10 short-answer, both at 90% independently. Each MC scores immediately when you click. MC must be passed before SA scores count. A failure locks the relevant section for 15 minutes; if you have already passed MC, only SA locks after an SA fail.
 
@@ -565,8 +569,8 @@ Réponse : **Repentez-vous** · aussi acceptées : Repentez, se repentir, repent
 
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
-**1. Expliquez ce que 1 Corinthiens 14:8 (la trompette au son confus) enseigne à l'enseignant d'éducation chrétienne.**  
-Mots-clés : trompette · confus · combat / bataille · objectif · clair · soldat · son confus / sonne · prépar / prepar  
+**1. Expliquez ce que 1 Corinthiens 14:8 enseigne à l'enseignant d'éducation chrétienne.**  
+Mots-clés : trompette · confus · combat / bataille · objectif · clair · soldat · dispers · prépar / prepar  
 Modèle : Paul dit : « Si la trompette rend un son confus, qui se préparera au combat ? » Si la trompette ne sait pas ce qu'elle sonne, aucun soldat ne peut se préparer ; l'armée se disperse. Une communication qui n'est pas claire ne rend personne clair. De même, l'enseignant doit savoir quel est son objectif pour cette heure ; sinon les apprenants n'entendent que quarante minutes de bruit vague et repartent sans être préparés.
 
 > EN: Explain what 1 Corinthians 14:8 (the uncertain trumpet) teaches the Christian Education teacher.
@@ -577,7 +581,7 @@ Modèle : Un objectif d'enseignement est la chose unique que la leçon doit fair
 
 > EN: Define a teaching aim and list the three elements every aim should contain.
 
-**3. Racontez comment Néhémie a donné l'exemple d'une planification précise avant de rebâtir la muraille.**  
+**3. Racontez comment Néhémie s'est préparé avec soin avant de reconstruire les remparts de Jérusalem.**  
 Mots-clés : néhémie / nehemie · muraille · précis / precis / spécifique / specifique · charpente / du bois · inspect / examin · plan · les portes / chaque porte / une porte / la porte · durée / duree / combien de temps / délai / delai  
 Modèle : Néhémie, échanson du roi, pleura, jeûna et pria, puis il fit un plan. Quand le roi lui demanda ce qu'il voulait, il fit une demande précise : être envoyé en Juda pour rebâtir la ville. Il fixa une durée pour son voyage, demanda des lettres de passage et une lettre à Asaph pour obtenir du bois de charpente. À Jérusalem, il inspecta de nuit chaque porte et chaque brèche avant d'appeler le peuple à bâtir. La muraille fut achevée en cinquante-deux jours.
 

@@ -11,23 +11,28 @@ Counts: 23 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 1. Section IV (b022–b023), MC 12–13 and SA 7 speak directly to 'the Mexican church' ('we must speak plainly and directly to you'). For pastors in Kinshasa this is the heart of the closing appeal. I kept Mexico faithfully, as in earlier units. Would you like a Congolese/African version of this section instead (e.g. the Congolese church's ties of language and culture across francophone Africa)? That would also require changing MC 12–13 and SA 7.
 2. Matthew 28:20: NKJV 'to the end of the age' vs LSG « jusqu'à la fin du monde ». Fill 10 now expects « monde » (also accepts « siècle », « âge ») and the conclusion heading follows LSG. Acceptable?
 
+## Problems in the English source
+
+- SA2: English prompt passes its own keywords
+- SA6: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
 
-- **Apocalypse 7.9** — « Après cela, je regardai, et voici, il y avait une grande foule, que personne ne pouvait compter, de toute nation, de toute tribu, de tout peuple, et de toute langue. Ils se tenaient devant le trône et devant l'agneau, revêtus de robes blanches, et des palmes dans leurs mains. »  
+- **Apocalypse 7:9** — « Après cela, je regardai, et voici, il y avait une grande foule, que personne ne pouvait compter, de toute nation, de toute tribu, de tout peuple, et de toute langue. Ils se tenaient devant le trône et devant l'agneau, revêtus de robes blanches, et des palmes dans leurs mains. »  
   _Checked online (biblestudytools.com/lsg). Quoted in b017 (partial). 'number' = « compter » (fill 2). Citation changed from NKJV to LSG._
-- **2 Pierre 3.9** — « Le Seigneur ne tarde pas dans l'accomplissement de la promesse, comme quelques-uns le croient; mais il use de patience envers vous, ne voulant pas qu'aucun périsse, mais voulant que tous arrivent à la repentance. »  
+- **2 Pierre 3:9** — « Le Seigneur ne tarde pas dans l'accomplissement de la promesse, comme quelques-uns le croient; mais il use de patience envers vous, ne voulant pas qu'aucun périsse, mais voulant que tous arrivent à la repentance. »  
   _Checked online (biblestudytools.com/lsg), clause quoted. Quoted in b019 (introduced with « il use de patience », from the same verse, so the participle reads naturally) and MC 7 (« patient, ne voulant pas... »). Fill 5 = « périsse »._
-- **Matthieu 24.14** — « Cette bonne nouvelle du royaume sera prêchée dans le monde entier, pour servir de témoignage à toutes les nations. Alors viendra la fin. »  
+- **Matthieu 24:14** — « Cette bonne nouvelle du royaume sera prêchée dans le monde entier, pour servir de témoignage à toutes les nations. Alors viendra la fin. »  
   _First sentence checked online (biblestudytools.com/lsg); second sentence « Alors viendra la fin. » confirmed only in paraphrase by the site summary. LSG has « bonne nouvelle » for 'gospel' and « témoignage » for 'witness' (EN fill 9 already accepted 'testimony'). Fill 9 = « témoignage »; SA 9 keywords include « bonne nouvelle »._
-- **⚠** **Matthieu 28.20** — « Et voici, je suis avec vous tous les jours, jusqu'à la fin du monde. »  
+- **⚠** **Matthieu 28:20** — « Et voici, je suis avec vous tous les jours, jusqu'à la fin du monde. »  
   _Checked online (biblestudytools.com/lsg). NKJV 'to the end of the age'; LSG « jusqu'à la fin du monde ». Fill 10 answer is now « monde » (accepts « siècle », « âge »); conclusion heading b026 rendered « jusqu'à la fin du monde » to match; MC 19 option uses LSG._
-- **Matthieu 9.38 (allusion, b025, b027, MC 14, SA 8)** — « Priez donc le maître de la moisson d'envoyer des ouvriers dans sa moisson. »  
+- **Matthieu 9:38 (allusion, b025, b027, MC 14, SA 8)** — « Priez donc le maître de la moisson d'envoyer des ouvriers dans sa moisson. »  
   _Checked online. Not a marked quotation in the English ('thrust out laborers'); French follows LSG wording « le maître de la moisson d'envoyer des ouvriers » without quotation marks._
-- **Jean 4.35 (allusion, b027)** — « ...levez les yeux, et regardez les champs qui déjà blanchissent pour la moisson. »  
+- **Jean 4:35 (allusion, b027)** — « ...levez les yeux, et regardez les champs qui déjà blanchissent pour la moisson. »  
   _Checked online. Allusion only: « Les champs blanchissent toujours pour la moisson », no quotation marks._
-- **Actes 18.3 (allusion, b023, fill 8)** — « ...ils étaient faiseurs de tentes. »  
+- **Actes 18:3 (allusion, b023, fill 8)** — « ...ils étaient faiseurs de tentes. »  
   _Not checked online. 'tentmaker' rendered « faiseur de tentes » after LSG; fill 8 also accepts « fabricant de tentes »._
 
 ## 3. Terms for the reviewer to confirm
@@ -71,7 +76,7 @@ I. La tâche qui reste
 > EN: I. The Task That Remains
 
 **b017**  
-Quand Jésus a donné la Grande Commission, il ne nous a pas dit simplement d'atteindre chaque pays ; il nous a dit de faire des disciples de toutes les nations — chaque ethnos, chaque peuple, chaque tribu et chaque langue. Le but, c'est la scène même qui fut montrée à l'apôtre Jean dans le ciel : « une grande foule, que personne ne pouvait compter, de toute nation, de toute tribu, de tout peuple, et de toute langue. Ils se tenaient devant le trône » (Apocalypse 7.9, LSG). Aujourd'hui, l'Évangile a atteint la plupart des pays du monde, et c'est là une grande grâce. Pourtant, des milliers de groupes ethniques distincts restent encore ce que les missionnaires appellent des peuples « non atteints » — des peuples parmi lesquels il n'existe encore aucune Église assez forte pour porter l'Évangile aux siens. Beaucoup d'entre eux se trouvent dans une vaste bande qui traverse l'Afrique du Nord, le Moyen-Orient et l'Asie, et que l'on appelle parfois la « fenêtre 10/40 ». Des milliards de personnes vivent aujourd'hui sans avoir jamais entendu l'Évangile clairement, ne serait-ce qu'une seule fois. La tâche n'est pas achevée.
+Quand Jésus a donné la Grande Commission, il ne nous a pas dit simplement d'atteindre chaque pays ; il nous a dit de faire des disciples de toutes les nations — chaque ethnos, chaque peuple, chaque tribu et chaque langue. Le but, c'est la scène même qui fut montrée à l'apôtre Jean dans le ciel : « une grande foule, que personne ne pouvait compter, de toute nation, de toute tribu, de tout peuple, et de toute langue. Ils se tenaient devant le trône » (Apocalypse 7:9, LSG). Aujourd'hui, l'Évangile a atteint la plupart des pays du monde, et c'est là une grande grâce. Pourtant, des milliers de groupes ethniques distincts restent encore ce que les missionnaires appellent des peuples « non atteints » — des peuples parmi lesquels il n'existe encore aucune Église assez forte pour porter l'Évangile aux siens. Beaucoup d'entre eux se trouvent dans une vaste bande qui traverse l'Afrique du Nord, le Moyen-Orient et l'Asie, et que l'on appelle parfois la « fenêtre 10/40 ». Des milliards de personnes vivent aujourd'hui sans avoir jamais entendu l'Évangile clairement, ne serait-ce qu'une seule fois. La tâche n'est pas achevée.
 
 > EN: When Jesus gave the Great Commission, He did not tell us simply to reach every country; He told us to make disciples of every nation — every ethnos, every people, tribe, and tongue. The goal is the very scene that the apostle John was shown in heaven: "a great multitude which no one could number, of all nations, tribes, peoples, and tongues, standing before the throne" (Revelation 7:9, NKJV). Today the gospel has reached most of the countries of the world, and that is a great mercy. Yet thousands of distinct people groups still remain what missionaries call "unreached" — peoples among whom there is still no church strong enough to carry the gospel to its own. Many of them are found in a great band across North Africa, the Middle East, and Asia that is sometimes called the "10/40 Window." Billions of people are alive today who have never yet heard the gospel clearly even once. The task is not finished.
 
@@ -81,7 +86,7 @@ II. Pourquoi elle attend encore
 > EN: II. Why It Still Waits
 
 **b019**  
-Pourquoi, après vingt siècles, la tâche n'est-elle toujours pas accomplie ? Ce n'est pas parce que Dieu ne le veut pas, car il use de patience, « ne voulant pas qu'aucun périsse, mais voulant que tous arrivent à la repentance » (2 Pierre 3.9, LSG). Ce n'est pas parce que l'Évangile aurait perdu quoi que ce soit de sa puissance. Si la tâche attend encore, c'est en grande partie parce que l'Église n'a pas encore pleinement obéi. Il y a encore bien trop peu d'ouvriers pour une si grande moisson, trop peu de prière, trop peu de sacrifice, et bien trop de croyants qui ne se sont jamais sérieusement demandé quelle part de l'œuvre leur revient. L'échec même que nous avons vu dans la première Église de Jérusalem — se contenter de garder l'Évangile près de chez soi — freine encore l'avancée aujourd'hui. La tâche inachevée est donc une convocation : un appel adressé à l'Église pour qu'elle achève ce que le Seigneur lui-même a commencé.
+Pourquoi, après vingt siècles, la tâche n'est-elle toujours pas accomplie ? Ce n'est pas parce que Dieu ne le veut pas, car il use de patience, « ne voulant pas qu'aucun périsse, mais voulant que tous arrivent à la repentance » (2 Pierre 3:9, LSG). Ce n'est pas parce que l'Évangile aurait perdu quoi que ce soit de sa puissance. Si la tâche attend encore, c'est en grande partie parce que l'Église n'a pas encore pleinement obéi. Il y a encore bien trop peu d'ouvriers pour une si grande moisson, trop peu de prière, trop peu de sacrifice, et bien trop de croyants qui ne se sont jamais sérieusement demandé quelle part de l'œuvre leur revient. L'échec même que nous avons vu dans la première Église de Jérusalem — se contenter de garder l'Évangile près de chez soi — freine encore l'avancée aujourd'hui. La tâche inachevée est donc une convocation : un appel adressé à l'Église pour qu'elle achève ce que le Seigneur lui-même a commencé.
 
 > EN: Why, after twenty centuries, is the task still not done? It is not because God is unwilling, for He is "not willing that any should perish but that all should come to repentance" (2 Peter 3:9, NKJV). It is not because the gospel has lost any of its power. The task still waits, in large part, because the church has not yet fully obeyed. There are still far too few laborers for so great a harvest, too little prayer, too little sacrifice, and far too many believers who have never seriously asked what part of the work belongs to them. The very failure we saw in the first church at Jerusalem — content to keep the gospel close to home — still slows the advance today. The unfinished task is therefore a summons: a call to the church to finish what the Lord Himself began.
 
@@ -111,7 +116,7 @@ V. Comment la tâche sera achevée
 > EN: V. How the Task Will Be Finished
 
 **b025**  
-Comment donc la tâche sera-t-elle achevée ? Par les mêmes moyens que le Seigneur a toujours employés. En priant le maître de la moisson d'envoyer des ouvriers dans sa moisson. En allant nous-mêmes, partout où il nous envoie. En envoyant et en soutenant fidèlement ceux qu'il appelle à partir. En donnant, afin que l'œuvre ne s'arrête pas faute de moyens. Et en élevant des enfants et en formant des responsables pour la génération suivante — ce qui est la raison même de l'existence de ce séminaire. Aucun de nous ne peut achever la tâche à lui seul. Mais chacun de nous peut prendre sa place ; et ensemble, sous la main de Dieu, l'œuvre sera accomplie. Car le Seigneur lui-même l'a promis : « Cette bonne nouvelle du royaume sera prêchée dans le monde entier, pour servir de témoignage à toutes les nations. Alors viendra la fin » (Matthieu 24.14, LSG).
+Comment donc la tâche sera-t-elle achevée ? Par les mêmes moyens que le Seigneur a toujours employés. En priant le maître de la moisson d'envoyer des ouvriers dans sa moisson. En allant nous-mêmes, partout où il nous envoie. En envoyant et en soutenant fidèlement ceux qu'il appelle à partir. En donnant, afin que l'œuvre ne s'arrête pas faute de moyens. Et en élevant des enfants et en formant des responsables pour la génération suivante — ce qui est la raison même de l'existence de ce séminaire. Aucun de nous ne peut achever la tâche à lui seul. Mais chacun de nous peut prendre sa place ; et ensemble, sous la main de Dieu, l'œuvre sera accomplie. Car le Seigneur lui-même l'a promis : « Cette bonne nouvelle du royaume sera prêchée dans le monde entier, pour servir de témoignage à toutes les nations. Alors viendra la fin » (Matthieu 24:14, LSG).
 
 > EN: How, then, shall the task be finished? In the same ways the Lord has always used. By praying the Lord of the harvest to thrust out laborers into His harvest. By going ourselves, wherever He sends us. By sending and faithfully supporting those whom He calls to go. By giving, so that the work does not stall for lack of means. And by raising children and training leaders for the next generation — which is the very reason this seminary exists. No single one of us can finish the task alone. But every one of us can take our place; and together, under God, the work will be done. For the Lord Himself has promised: "this gospel of the kingdom will be preached in all the world as a witness to all the nations, and then the end will come" (Matthew 24:14, NKJV).
 
@@ -121,7 +126,7 @@ Conclusion : jusqu'à la fin du monde
 > EN: Conclusion: To the End of the Age
 
 **b027**  
-Nous avons commencé ce cours avec le Dieu qui envoie, et nous le terminons avec la tâche qu'il nous a donnée à achever. La même histoire qui s'est déroulée d'Abraham à Antioche, de Carey aux martyrs de la jungle, se poursuit maintenant à travers nous. Les champs blanchissent toujours pour la moisson. Le maître de la moisson appelle toujours. Et la dernière parole de la Grande Commission demeure aussi vraie aujourd'hui que sur la montagne de Galilée : « Et voici, je suis avec vous tous les jours, jusqu'à la fin du monde » (Matthieu 28.20, LSG). Alors, allez — ou envoyez, ou priez, ou donnez —, mais ne restez pas les bras croisés tant que la tâche demeure inachevée. À celui qui nous envoie, et qui va avec nous jusqu'à la fin, soit la gloire parmi toutes les nations.
+Nous avons commencé ce cours avec le Dieu qui envoie, et nous le terminons avec la tâche qu'il nous a donnée à achever. La même histoire qui s'est déroulée d'Abraham à Antioche, de Carey aux martyrs de la jungle, se poursuit maintenant à travers nous. Les champs blanchissent toujours pour la moisson. Le maître de la moisson appelle toujours. Et la dernière parole de la Grande Commission demeure aussi vraie aujourd'hui que sur la montagne de Galilée : « Et voici, je suis avec vous tous les jours, jusqu'à la fin du monde » (Matthieu 28:20, LSG). Alors, allez — ou envoyez, ou priez, ou donnez —, mais ne restez pas les bras croisés tant que la tâche demeure inachevée. À celui qui nous envoie, et qui va avec nous jusqu'à la fin, soit la gloire parmi toutes les nations.
 
 > EN: We began this course with the God who sends, and we end it with the task He has given us to finish. The same story that ran from Abraham to Antioch, from Carey to the martyrs in the jungle, now runs through us. The fields are still white for harvest. The Lord of the harvest is still calling. And the last word of the Great Commission still stands as true today as it did on the mountain in Galilee: "lo, I am with you always, even to the end of the age" (Matthew 28:20, NKJV). So go — or send, or pray, or give — but do not stand idle while the task remains unfinished. To Him who sends us, and who goes with us to the very end, be glory among all the nations.
 
@@ -131,7 +136,7 @@ Examen final de l'unité 10
 > EN: Unit 10 Final Exam
 
 **b029**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les questions à choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez essayer de nouveau.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les questions à choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez essayer de nouveau.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -178,7 +183,7 @@ Réinitialiser l'unité
 · D. capitale de continent  
 > EN: Jesus commanded us to reach not merely every country, but every: — ✓ ethnos — every people, tribe, and tongue
 
-**3. Le but décrit en Apocalypse 7.9 est une grande foule venue :**  
+**3. Le but décrit en Apocalypse 7:9 est une grande foule venue :**  
 ✓ A. de toute nation, de toute tribu, de tout peuple et de toute langue  
 · B. de l'Europe seulement  
 · C. d'une seule nation  
@@ -206,7 +211,7 @@ Réinitialiser l'unité
 ✓ D. l'Église n'a pas encore pleinement obéi  
 > EN: The lesson says the task still waits largely because: — ✓ the church has not yet fully obeyed
 
-**7. D'après 2 Pierre 3.9, Dieu est :**  
+**7. D'après 2 Pierre 3:9, Dieu est :**  
 ✓ A. patient, ne voulant pas qu'aucun périsse, mais voulant que tous arrivent à la repentance  
 · B. indifférent aux perdus  
 · C. pressé de juger  
@@ -269,7 +274,7 @@ Réinitialiser l'unité
 · D. imprimer des livres  
 > EN: Among the ways to finish the task, the lesson highlights one that is the very heart of what this seminary exists to do: — ✓ raising children and training leaders for the next generation
 
-**16. Matthieu 24.14 promet que cette bonne nouvelle du royaume sera prêchée :**  
+**16. Matthieu 24:14 promet que cette bonne nouvelle du royaume sera prêchée :**  
 · A. seulement à Jérusalem  
 · B. à quelques nations  
 ✓ C. dans le monde entier, pour servir de témoignage à toutes les nations ; alors viendra la fin  
@@ -312,7 +317,7 @@ Grading ignores accents, capitals and one leading article (le/la/les/l'/un/une/d
 Réponse : **ethnos**  
 > EN: Jesus told us to make disciples not simply of every country but of every nation, every ____, the Greek word from which we get "ethnic." — **ethnos**
 
-**2.** Jean a vu dans le ciel « une grande foule, que personne ne pouvait ____, de toute nation, de toute tribu, de tout peuple, et de toute langue » (Apocalypse 7.9).  
+**2.** Jean a vu dans le ciel « une grande foule, que personne ne pouvait ____, de toute nation, de toute tribu, de tout peuple, et de toute langue » (Apocalypse 7:9).  
 Réponse : **compter** · aussi acceptées : dénombrer  
 > EN: John saw in heaven "a great multitude which no one could ____, of all nations, tribes, peoples, and tongues" (Revelation 7:9). — **number**
 
@@ -324,7 +329,7 @@ Réponse : **atteints** · aussi acceptées : atteint, évangélisés, touchés
 Réponse : **fenêtre**  
 > EN: Many unreached peoples live in a great band across North Africa, the Middle East, and Asia called the 10/40 ____. — **Window**
 
-**5.** Si la tâche attend, ce n'est pas que Dieu ne le veuille pas, car il use de patience, « ne voulant pas qu'aucun ____ » (2 Pierre 3.9).  
+**5.** Si la tâche attend, ce n'est pas que Dieu ne le veuille pas, car il use de patience, « ne voulant pas qu'aucun ____ » (2 Pierre 3:9).  
 Réponse : **périsse** · aussi acceptées : périr  
 > EN: The task does not wait because God is unwilling, for He is "not willing that any should ____" (2 Peter 3:9). — **perish**
 
@@ -340,11 +345,11 @@ Réponse : **force**
 Réponse : **faiseur de tentes** · aussi acceptées : fabricant de tentes, faiseur de tente, fabricant de tente  
 > EN: The same God who sent a shoemaker out from England and a ____ out from Tarsus is calling believers out from Mexico. — **tentmaker**
 
-**9.** « Cette bonne nouvelle du royaume sera prêchée dans le monde entier, pour servir de ____ à toutes les nations. Alors viendra la fin » (Matthieu 24.14).  
+**9.** « Cette bonne nouvelle du royaume sera prêchée dans le monde entier, pour servir de ____ à toutes les nations. Alors viendra la fin » (Matthieu 24:14).  
 Réponse : **témoignage** · aussi acceptées : témoin  
 > EN: "This gospel of the kingdom will be preached in all the world as a ____ to all the nations, and then the end will come" (Matthew 24:14). — **witness**
 
-**10.** La dernière parole de la Grande Commission : « Et voici, je suis avec vous tous les jours, jusqu'à la fin du ____ » (Matthieu 28.20).  
+**10.** La dernière parole de la Grande Commission : « Et voici, je suis avec vous tous les jours, jusqu'à la fin du ____ » (Matthieu 28:20).  
 Réponse : **monde** · aussi acceptées : siècle, âge  
 > EN: The last word of the Great Commission: "lo, I am with you always, even to the end of the ____" (Matthew 28:20). — **age**
 
@@ -358,9 +363,9 @@ Modèle : La leçon veut dire que, malgré vingt siècles d'avancée de l'Évang
 
 > EN: What does the lesson mean when it says the Great Commission is still 'unfinished'?
 
-**2. Expliquez la différence entre atteindre chaque pays et atteindre chaque « ethnos » (groupe ethnique). Appuyez-vous sur Apocalypse 7.9.**  
+**2. Expliquez la différence entre atteindre chaque pays et atteindre chaque « ethnos », en vous appuyant sur la vision de la grande foule devant le trône.**  
 Mots-clés : ethnos · peuple · tribu · langue · nation · groupe · multitude / foule · apocalypse / révélation / revelation  
-Modèle : Atteindre chaque pays est une question de frontières politiques, mais atteindre chaque « ethnos », c'est atteindre chaque groupe ethnique distinct, chaque tribu et chaque langue — beaucoup de pays comptent des dizaines, voire des centaines de tels groupes, certains atteints et d'autres non. Apocalypse 7.9 décrit le but final comme une grande foule de toute nation, de toute tribu, de tout peuple et de toute langue devant le trône, ce qui montre que le but est une plénitude ethnique et linguistique, et pas seulement une couverture des nations politiques.
+Modèle : Atteindre chaque pays est une question de frontières politiques, mais atteindre chaque « ethnos », c'est atteindre chaque groupe ethnique distinct, chaque tribu et chaque langue — beaucoup de pays comptent des dizaines, voire des centaines de tels groupes, certains atteints et d'autres non. Apocalypse 7:9 décrit le but final comme une grande foule de toute nation, de toute tribu, de tout peuple et de toute langue devant le trône, ce qui montre que le but est une plénitude ethnique et linguistique, et pas seulement une couverture des nations politiques.
 
 > EN: Explain the difference between reaching every country and reaching every 'ethnos' (people group). Use Revelation 7:9.
 
@@ -371,7 +376,7 @@ Modèle : Un « groupe ethnique non atteint » est un peuple parmi lequel il n'e
 > EN: What is an 'unreached people group,' and where are many of them found?
 
 **4. Pourquoi la leçon dit-elle que la tâche attend encore après vingt siècles ?**  
-Mots-clés : église / eglise · obéi / obei · ouvrier · trop peu / peu d · prière / priere / prier · sacrifi · près de chez / jérusalem / jerusalem · voulant / volonté / volonte / veuille  
+Mots-clés : église / eglise · obéi / obei · ouvrier · trop peu / peu d · prière / priere / prier · sacrifi · près de chez / pres de chez / jérusalem / jerusalem · voulant / volonté / volonte / veuille  
 Modèle : La tâche attend encore après vingt siècles, non parce que Dieu ne le veuille pas, puisqu'il use de patience, voulant que tous arrivent à la repentance, ni parce que l'Évangile aurait perdu sa puissance, mais parce que l'Église n'a pas encore pleinement obéi. Il y a encore trop peu d'ouvriers, trop peu de prière, trop peu de sacrifice, et trop de croyants qui ne se sont jamais sérieusement demandé quelle part de l'œuvre leur revient — le même échec que celui de l'Église de Jérusalem, restée près de chez elle, freine encore l'avancée aujourd'hui.
 
 > EN: Why does the lesson say the task still waits after twenty centuries?
@@ -382,7 +387,7 @@ Modèle : Pendant la plus grande partie de l'ère missionnaire moderne, les miss
 
 > EN: How is the sending of missionaries changing in our own day?
 
-**6. Pourquoi la leçon dit-elle que l'Église d'Amérique latine devient une force missionnaire, et pas seulement un champ de mission ?**  
+**6. Pourquoi la leçon dit-elle que l'Église d'Amérique latine ne se contente plus de recevoir des missionnaires ?**  
 Mots-clés : latin · force · champ / terrain · envoi / envoy · missionnai · croissan / grandi · évangile / evangile / bonne nouvelle · continent  
 Modèle : La leçon dit que l'Église d'Amérique latine devient une force missionnaire, et pas seulement un champ de mission, parce que l'Église des pays du Sud a grandi avec vigueur et envoie maintenant ses propres missionnaires au lieu de seulement en recevoir. Ce qui était autrefois une région uniquement réceptrice fournit désormais activement des ouvriers pour porter l'Évangile aux peuples non atteints ailleurs dans le monde, d'un continent à l'autre.
 
@@ -400,9 +405,9 @@ Modèle : La leçon dit que la tâche sera achevée en priant le maître de la m
 
 > EN: List the ways the lesson says the task will be finished.
 
-**9. Comment Matthieu 24.14 donne-t-il espérance et motivation pour la tâche inachevée ?**  
+**9. Comment Matthieu 24:14 donne-t-il espérance et motivation pour la tâche inachevée ?**  
 Mots-clés : évangile / evangile / bonne nouvelle · prêch / prech · monde · nation · témoign / temoign · la fin · viendra / venue / avènement / avenement · royaume  
-Modèle : Matthieu 24.14 promet que « cette bonne nouvelle du royaume sera prêchée dans le monde entier, pour servir de témoignage à toutes les nations. Alors viendra la fin. » Ce verset donne de l'espérance parce qu'il garantit que la tâche sera finalement accomplie — le dessein de Dieu ne peut échouer —, et il donne de la motivation parce que notre participation fidèle à la prédication de l'Évangile est directement liée à l'accomplissement de cette promesse et à la venue de Christ.
+Modèle : Matthieu 24:14 promet que « cette bonne nouvelle du royaume sera prêchée dans le monde entier, pour servir de témoignage à toutes les nations. Alors viendra la fin. » Ce verset donne de l'espérance parce qu'il garantit que la tâche sera finalement accomplie — le dessein de Dieu ne peut échouer —, et il donne de la motivation parce que notre participation fidèle à la prédication de l'Évangile est directement liée à l'accomplissement de cette promesse et à la venue de Christ.
 
 > EN: How does Matthew 24:14 give hope and motivation for the unfinished task?
 

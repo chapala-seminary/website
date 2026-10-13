@@ -11,7 +11,13 @@ Counts: 52 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 1. Jean 19:39: LSG keeps « cent livres ». I kept that wording and added « une trentaine de kilos » once in the prose (b041) to follow the metric rule. Do you want the gloss, or should it be removed?
 2. SA 9's English model answer gives a different third diagnostic question (« is this a figure of speech or a literal statement of reality? ») from the lesson and MC 14 (« what spiritual reality does the figure deliver? »). I translated it as written. Should the model be brought into line with the lesson?
 3. Two sentences in the source should be checked. b036 says « the literal stones of Goliath », but the stones were David's; I wrote « les pierres bien réelles de David contre Goliath ». b028 says the Samaritan woman had « five failed marriages »; John 4:18 says « cinq maris ». I kept the author's wording.
-4. [check] Track name in b006 is not consistent across the French course: units 6, 7, 10 say « Parcours Certificat », units 3, 4, 5, 8, 11 say « Certificat de ministère », units 2 and 9 say « Parcours Certificat de ministère ». The 📚 Catalogue button also varies (« Catalogue » vs « Catalogue / Catálogo »). Pick one wording for all units?
+
+## Problems in the English source
+
+- SA5: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
 
 ## 2. Bible quotations (Louis Segond 1910)
 
@@ -24,7 +30,7 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
 - **Jean 3:3** — « En vérité, en vérité, je te le dis, si un homme ne naît de nouveau, il ne peut voir le royaume de Dieu. »  
   _Verified._
 - **Jean 3:4** — « Comment un homme peut-il naître quand il est vieux? Peut-il rentrer dans le sein de sa mère et naître? »  
-  _LSG has no explicit « a second time » (NKJV); « rentrer » carries the idea. Used in b015, b022, b024 (paraphrase), b039, MC 2, MC 4, MC 8. « womb » = « sein » in LSG quotations, « ventre » in the author's own prose. Verified._
+  _LSG has no explicit « a second time » (NKJV); « rentrer » carries the idea. Used in b015, b022, b024 (paraphrase), b039, MC 2, MC 4, MC 8. « womb » = « sein » in LSG quotations, « ventre » in the author's own prose. Verified. Catch-up: b024 and MC 4 why now quote LSG verbatim (« Peut-il rentrer dans le sein de sa mère et naître ? »)._
 - **Jean 3:6-7** — « Ce qui est né de la chair est chair, et ce qui est né de l'Esprit est esprit. Ne t'étonne pas que je t'aie dit: Il faut que vous naissiez de nouveau. »  
   _Also b019 « il faut que vous naissiez de nouveau » and MC 16. Verified._
 - **Jean 3:8** — « Le vent souffle où il veut, et tu en entends le bruit; mais tu ne sais d'où il vient, ni où il va. Il en est ainsi de tout homme qui est né de l'Esprit. »  
@@ -36,7 +42,7 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
 - **Ézéchiel 36:26** — « Je vous donnerai un coeur nouveau, et je mettrai en vous un esprit nouveau »  
   _Lesson quotes two fragments: « un cœur nouveau » / « un esprit nouveau » (b021, MC 15). Verified._
 - **Jérémie 31:33** — « Je mettrai ma loi au dedans d'eux, Je l'écrirai dans leur coeur »  
-  _English « I will write My law upon their hearts »; LSG says « je l'écrirai » with « ma loi » in the preceding clause, so both clauses are quoted in b021 and MC 15 why. MC 15 option paraphrased as « la loi de Dieu écrite dans leur cœur ». Verified._
+  _English « I will write My law upon their hearts »; LSG says « je l'écrirai » with « ma loi » in the preceding clause, so both clauses are quoted in b021 and MC 15 why. MC 15 option paraphrased as « la loi de Dieu écrite dans leur cœur ». Verified. Catch-up: « Je l'écrirai » capitalized as in LSG._
 - **Jean 4:10** — « Si tu connaissais le don de Dieu et qui est celui qui te dit: Donne-moi à boire! tu lui aurais toi-même demandé à boire, et il t'aurait donné de l'eau vive. »  
   _« living water » = « eau vive » (LSG); fill 6 answer « vive ». Verified._
 - **Jean 4:11** — « Seigneur, lui dit la femme, tu n'as rien pour puiser, et le puits est profond; d'où aurais-tu donc cette eau vive? »  
@@ -92,17 +98,17 @@ Choisissez votre parcours
 > EN: Choose your track
 
 **b006**  
-Parcours Certificat de ministère : Vingt questions à choix multiple par unité. Réussite à 18 sur 20 (90 %).
+Parcours Certificat : Vingt questions à choix multiple par unité. Réussite à 18 sur 20 (90 %).
 
 > EN: Certificate of Ministry: Twenty multiple-choice questions per unit. Pass at 18 of 20 (90%).
 
 **b007**  
-Master of Divinity : Les mêmes vingt questions à choix multiple, plus dix questions à réponse courte. Réussite à 18 sur 20 au choix multiple et 9 sur 10 aux réponses courtes, notés séparément.
+M.Div. : Les mêmes vingt questions à choix multiple, plus dix questions à réponse courte. Réussite à 18 sur 20 au choix multiple et 9 sur 10 aux réponses courtes, notés séparément.
 
 > EN: Master of Divinity: Same twenty multiple-choice questions, plus ten short-answer questions. Pass at 18 of 20 multiple-choice and 9 of 10 short-answer, scored independently.
 
 **b008**  
-Master of Theology : Évalué exactement comme le Master of Divinity — les mêmes vingt questions à choix multiple plus dix questions à réponse courte, avec réussite à 18 sur 20 au choix multiple et 9 sur 10 aux réponses courtes, notés séparément.
+Th.M. : Évalué exactement comme le M.Div. — les mêmes vingt questions à choix multiple plus dix questions à réponse courte, avec réussite à 18 sur 20 au choix multiple et 9 sur 10 aux réponses courtes, notés séparément.
 
 > EN: Master of Theology: Graded exactly like the Master of Divinity — the same twenty multiple-choice questions plus ten short-answer questions, passing at 18 of 20 multiple-choice and 9 of 10 short-answer, scored independently.
 
@@ -112,12 +118,12 @@ Certificat
 > EN: Certificate
 
 **b010**  
-M.Div
+M.Div.
 
 > EN: M.Div
 
 **b011**  
-Th.M
+Th.M.
 
 > EN: Th.M
 
@@ -167,7 +173,7 @@ Mais le sens littéral n'est pas toujours le sens physique plat. Quand Jésus di
 > EN: 3. Where Nicodemus Stumbled
 
 **b021**  
-Nicodème vint de nuit, ce qui est en soi l'un des indices discrets de Jean : cet homme était encore dans les ténèbres. Jésus dit naître de nouveau, en employant un mot grec qui peut aussi se traduire naître d'en haut. L'une et l'autre traduction désignent la même réalité — un nouveau commencement spirituel qui vient de Dieu. Tout rabbin du premier siècle qui connaissait les prophètes aurait dû en entendre l'écho. Ézéchiel avait promis un cœur nouveau … un esprit nouveau. Jérémie avait annoncé : Je mettrai ma loi au dedans d'eux, je l'écrirai dans leur cœur. Les prophètes de l'alliance répétaient depuis des siècles que le royaume de Dieu exigeait une transformation plus profonde que l'observance de la loi.
+Nicodème vint de nuit, ce qui est en soi l'un des indices discrets de Jean : cet homme était encore dans les ténèbres. Jésus dit naître de nouveau, en employant un mot grec qui peut aussi se traduire naître d'en haut. L'une et l'autre traduction désignent la même réalité — un nouveau commencement spirituel qui vient de Dieu. Tout rabbin du premier siècle qui connaissait les prophètes aurait dû en entendre l'écho. Ézéchiel avait promis un cœur nouveau … un esprit nouveau. Jérémie avait annoncé : Je mettrai ma loi au dedans d'eux, Je l'écrirai dans leur cœur. Les prophètes de l'alliance répétaient depuis des siècles que le royaume de Dieu exigeait une transformation plus profonde que l'observance de la loi.
 
 > EN: Nicodemus came at night, which is itself one of John’s gentle clues that this man was still in the dark. Jesus said born again, using a Greek word that can also be rendered born from above. Either translation points to the same reality — a new spiritual beginning that comes from God. Any first-century rabbi familiar with the prophets should have heard the echo. Ezekiel had promised a new heart and a new spirit. Jeremiah had announced I will write My law upon their hearts. The covenant prophets had been saying for centuries that the kingdom of God required a transformation deeper than law-keeping.
 
@@ -182,7 +188,7 @@ Mais Nicodème tombe dans une lecture physique : Peut-il rentrer dans le sein de
 > EN: 4. The Wind
 
 **b024**  
-Alors Jésus recourt à une illustration pour ouvrir le cœur de Nicodème. Le vent souffle où il veut, et tu en entends le bruit ; mais tu ne sais d'où il vient, ni où il va. Il en est ainsi de tout homme qui est né de l'Esprit. Le mot grec pneuma signifie à la fois vent et esprit — le même mot pour le souffle que vous ne pouvez pas voir et pour l'Esprit dont vous ne pouvez pas tracer la carte. Jésus fait plus que raconter une métaphore à Nicodème. Il lui apprend à lire. Le vent est invisible. Son origine est cachée. Sa destination est cachée. Mais son effet est visible. Les feuilles bougent. Les voiles se gonflent. Les cheveux se soulèvent. Vous ne pouvez pas voir le vent, mais vous pouvez voir ce qu'il fait. Ainsi en est-il de l'Esprit. Vous ne pouvez pas voir la nouvelle naissance, mais vous pouvez voir ce qu'elle fait. La question physique plate que Nicodème a posée — un homme peut-il rentrer dans le sein de sa mère ? — relève de la mauvaise catégorie. La bonne catégorie est : pouvez-vous voir ce que l'Esprit a fait ?
+Alors Jésus recourt à une illustration pour ouvrir le cœur de Nicodème. Le vent souffle où il veut, et tu en entends le bruit ; mais tu ne sais d'où il vient, ni où il va. Il en est ainsi de tout homme qui est né de l'Esprit. Le mot grec pneuma signifie à la fois vent et esprit — le même mot pour le souffle que vous ne pouvez pas voir et pour l'Esprit dont vous ne pouvez pas tracer la carte. Jésus fait plus que raconter une métaphore à Nicodème. Il lui apprend à lire. Le vent est invisible. Son origine est cachée. Sa destination est cachée. Mais son effet est visible. Les feuilles bougent. Les voiles se gonflent. Les cheveux se soulèvent. Vous ne pouvez pas voir le vent, mais vous pouvez voir ce qu'il fait. Ainsi en est-il de l'Esprit. Vous ne pouvez pas voir la nouvelle naissance, mais vous pouvez voir ce qu'elle fait. La question physique plate que Nicodème a posée — Peut-il rentrer dans le sein de sa mère et naître ? — relève de la mauvaise catégorie. La bonne catégorie est : pouvez-vous voir ce que l'Esprit a fait ?
 
 > EN: Then Jesus reaches for an illustration to break Nicodemus open. The wind blows where it wishes, and you hear the sound of it, but cannot tell where it comes from and where it goes. So is everyone who is born of the Spirit. The Greek word pneuma means both wind and spirit — the same word for the breath you cannot see and the Spirit you cannot map. Jesus is doing more than telling Nicodemus a metaphor. He is teaching him how to read. The wind is invisible. Its origin is hidden. Its destination is hidden. But its effect is visible. Leaves move. Sails fill. Hair lifts. You cannot see the wind, but you can see what it does. So with the Spirit. You cannot see the new birth, but you can see what it does. The flat physical question Nicodemus asked — can a man enter his mother’s womb? — is the wrong category. The right category is can you see what the Spirit has done?
 
@@ -359,7 +365,7 @@ _Pourquoi :_ Exact. Quand Jésus dit « Je suis la porte », le sens littéral E
 · B. Le vent est un sujet plus important que la nouvelle naissance  
 · C. Le climat d'Israël a une grande portée théologique  
 · D. Les pharisiens devraient étudier la météorologie avant la théologie  
-_Pourquoi :_ Exact. Le mot grec « pneuma » signifie à la fois vent et Esprit. L'erreur de Nicodème a été de poser la mauvaise question — « un homme peut-il rentrer dans le sein de sa mère ? ». La bonne question est : « pouvez-vous voir ce que l'Esprit a fait ? ». Effet visible, origine cachée.  
+_Pourquoi :_ Exact. Le mot grec « pneuma » signifie à la fois vent et Esprit. L'erreur de Nicodème a été de poser la mauvaise question — « Peut-il rentrer dans le sein de sa mère et naître ? ». La bonne question est : « pouvez-vous voir ce que l'Esprit a fait ? ». Effet visible, origine cachée.  
 > EN: Jesus' wind illustration in John 3:8 is meant to teach Nicodemus that: — ✓ The Spirit's origin is hidden but His effect is visible — you cannot see the wind, but you can see what it does
 
 **5. En Jean 4, la Samaritaine commet la même erreur littéraliste que Nicodème lorsque :**  
@@ -447,7 +453,7 @@ _Pourquoi :_ Exact. Une fois que vous avez nommé la figure, nommez la vérité.
 · B. Un nouveau roi politique et une nouvelle armée  
 · C. Une nouvelle patrie géographique et une nouvelle langue  
 ✓ D. Un cœur nouveau et un esprit nouveau ; la loi de Dieu écrite dans leur cœur  
-_Pourquoi :_ Exact. Ézéchiel a promis « un cœur nouveau » et « un esprit nouveau » (Ézéchiel 36:26). Jérémie a promis : « Je mettrai ma loi au dedans d'eux, je l'écrirai dans leur cœur » (Jérémie 31:33). Tout rabbin du premier siècle qui connaissait les prophètes aurait dû en entendre l'écho. Nicodème connaissait les textes mais est passé à côté du sens.  
+_Pourquoi :_ Exact. Ézéchiel a promis « un cœur nouveau » et « un esprit nouveau » (Ézéchiel 36:26). Jérémie a promis : « Je mettrai ma loi au dedans d'eux, Je l'écrirai dans leur cœur » (Jérémie 31:33). Tout rabbin du premier siècle qui connaissait les prophètes aurait dû en entendre l'écho. Nicodème connaissait les textes mais est passé à côté du sens.  
 > EN: The lesson identifies Ezekiel and Jeremiah as prophets who had already promised what Jesus told Nicodemus. The two key prophetic promises were: — ✓ A new heart and a new spirit; God's law written on their hearts
 
 **16. Jésus dit à Nicodème : « Ce qui est né de la chair est chair, et ce qui est né de l'Esprit est esprit. » La leçon comprend cette parole comme :**  
@@ -562,7 +568,7 @@ Modèle : Au puits de Sychar, la Samaritaine commet la même erreur que Nicodèm
 
 > EN: Describe how the Samaritan Woman in John 4 makes the same literalist mistake as Nicodemus, and explain why John has paired these two encounters in consecutive chapters.
 
-**5. Expliquez pourquoi « Je suis la porte » ou « Je suis le pain de vie » doivent être lus littéralement — et comment le sens littéral est ici le sens figuré.**  
+**5. Expliquez pourquoi les déclarations de Jésus en « Je suis » de Jean 10 et de Jean 6 doivent être lues littéralement — et comment le sens littéral est ici le sens figuré.**  
 Mots-clés : porte · pain · figur · voulu / voulait / intention · spirituel · littéral / litteral · entrée / entree / accès / acces · rassasi / satisfait  
 Modèle : Quand Jésus dit « Je suis la porte » ou « Je suis le pain de vie », nous le lisons littéralement en retenant la figure qu'il a voulue — il est l'entrée vers le salut, celui qui rassasie l'âme. Le sens littéral est ici le sens figuré, parce que c'est ce que l'auteur a voulu dire. Exiger du bois ou du blé serait une lecture littéraliste, qui passerait à côté du sens spirituel voulu par Jésus.
 
@@ -574,13 +580,13 @@ Modèle : Le test de l'absurdité demande : si je prends ce passage de manière 
 
 > EN: State the absurdity test for spotting figures of speech in Scripture, and apply it to one example from the lesson.
 
-**7. Racontez l'histoire du « Vieux Bill » devenu le « Nouveau Bill », à Evansville (Indiana), et expliquez comment elle illustre le sens littéral de « naître de nouveau ».**  
+**7. Racontez l'histoire de Bill, à Evansville (Indiana), et expliquez comment elle illustre le sens littéral de la parole de Jésus à Nicodème (Jean 3).**  
 Mots-clés : bill · evansville · sauveur · nouveau / nouvelle · la vie / sa vie / une vie / vie nouvelle / nouvelle vie · transform · naître / naitre / naissance / né de / ne de · chang  
 Modèle : Le Vieux Bill d'Evansville fut si changé après avoir placé sa confiance dans le Sauveur que la ville se mit à l'appeler le Nouveau Bill. La transformation de sa vie était si réelle et si visible qu'un nouveau nom s'imposait. Voilà le sens littéral de « naître de nouveau » — non pas une seconde naissance physique, mais une vie véritablement nouvelle, un homme si transformé qu'il n'est plus la même personne.
 
 > EN: Tell the story of "Old Bill" / "New Bill" of Evansville, Indiana, and explain how the story illustrates the literal meaning of "born again."
 
-**8. Expliquez l'erreur OPPOSÉE au littéralisme (la sur-spiritualisation), et décrivez comment la règle de l'Unité 8 — identifier le type de langage avant de décider ce qu'on va en faire — protège contre les deux extrêmes.**  
+**8. Expliquez l'erreur OPPOSÉE au littéralisme (la sur-spiritualisation), et décrivez comment la règle de l'Unité 8 protège contre l'un et l'autre extrême.**  
 Mots-clés : spiritualis · allégori / allegori · genre · langage · auteur · intention · deux / les deux · littéral / litteral  
 Modèle : L'erreur opposée au littéralisme est la sur-spiritualisation — transformer une simple déclaration historique en allégorie cachée. La règle de l'Unité 8 protège contre les deux extrêmes : identifier d'abord le type de langage et le genre avant de décider ce qu'on va en faire. Il faut chercher l'intention de l'auteur. Certains textes sont de l'histoire au sens littéral, d'autres sont des figures ; bien lire le genre garde le pasteur à la fois d'un littéralisme plat et d'une allégorie débridée.
 
@@ -592,7 +598,7 @@ Modèle : Les trois questions de diagnostic sont : Que voulait réellement dire 
 
 > EN: List the three diagnostic questions the pastor should ask when interpreting Scripture, and briefly explain each one.
 
-**10. Décrivez comment Nicodème reparaît en Jean 19 avec cent livres de myrrhe et d'aloès, et expliquez ce que cette image finale enseigne au pasteur sur la prédication du sens littéral sans déformation littéraliste.**  
+**10. Décrivez comment Nicodème reparaît en Jean 19 avec cent livres d'aromates, et expliquez ce que cette image finale enseigne au pasteur sur la prédication du sens littéral sans le déformer en le prenant trop à la lettre.**  
 Mots-clés : nicodème / nicodeme · myrrhe · sépulture / sepulture / ensevel / funéra / funera · le roi / du roi / un roi / royal · naître / naitre / naissance / né de / ne de · obscurité / obscurite / ténèbres / tenebres / de nuit · ouvertement / au grand jour / publiquement · littéral / litteral  
 Modèle : Nicodème, qui était d'abord venu vers Jésus dans l'obscurité, reparaît en Jean 19 apportant ouvertement cent livres de myrrhe pour la sépulture du Roi crucifié. L'homme qui avait autrefois trébuché sur une lecture littéraliste de « naître de nouveau » vit maintenant sa vérité littérale : c'est un homme changé, qui ne se cache plus. Cette image finale enseigne qu'une lecture juste du sens littéral — la nouvelle naissance que Jésus voulait dire — produit une transformation réelle, sans déformation littéraliste.
 

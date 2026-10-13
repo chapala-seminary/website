@@ -13,6 +13,12 @@ Counts: 32 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 3. SA 0 model and keyword speak of « the strongest arrow in the skeptic's quiver », but the lesson text (b008) uses the image of a « trump card », not an arrow. Translated as in the source; would you like the lesson and the model answer to match?
 4. MC 17 says the « boomerang » turns the objection into evidence that the longing for justice has its answer in God, but the « Boomerang » section (b010) is about the standard of good; the longing-for-justice point is in b028. Translated as is.
 
+## Problems in the English source
+
+- SA6: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -20,9 +26,9 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
 - **⚠** **Ésaïe 53:4** — « Cependant, ce sont nos souffrances qu'il a portées, C'est de nos douleurs qu'il s'est chargé; Et nous l'avons considéré comme puni, Frappé de Dieu, et humilié. »  
   _Checked online (biblestudytools.com). English « griefs … sorrows » = LSG « souffrances … douleurs ». Fill 0 asks for this word: French answer is now « souffrances » (accepting souffrance, maladies, peines, chagrins). Also echoed in b024, b028 (« le Dieu qui a porté nos souffrances ») and SA 6/9 models. Used in b004, b006._
 - **Ésaïe 53:3** — « Méprisé et abandonné des hommes, Homme de douleur et habitué à la souffrance, Semblable à celui dont on détourne le visage… »  
-  _Checked online (biblestudytools.com). LSG has no « He was »; quoted as LSG in b029 (first half of the verse, as in the English). Line-initial capitals lowercased in the lesson, as in Unit 2._
+  _Checked online (biblestudytools.com). LSG has no « He was »; quoted as LSG in b029 (first half of the verse, as in the English). Segond's line-initial capitals now kept verbatim (b004, b006, b029, fill 1)._
 - **⚠** **Genèse 50:20** — « Vous aviez médité de me faire du mal: Dieu l'a changé en bien, pour accomplir ce qui arrive aujourd'hui, pour sauver la vie à un peuple nombreux. »  
-  _Opening checked online (biblestudytools.com). English « God meant it for good » (God's intention) vs LSG « Dieu l'a changé en bien » (God turned it into good). The quotation in b026, MC 14 option, fill 8 and SA 8 model use LSG; fill 8 answer « bien » still works. Heading b025 adapted to « Médité pour le mal, changé en bien » to echo LSG. The lesson's « master weaver » point fits LSG well._
+  _Opening checked online (biblestudytools.com). English « God meant it for good » (God's intention) vs LSG « Dieu l'a changé en bien » (God turned it into good). The quotation in b026, MC 14 option, fill 8 and SA 8 model use LSG; b026 now adds the Hebrew sense (« Dieu l'a pensé en bien ») per convention 1; fill 8 answer « bien » still works. Heading b025 adapted to « Médité pour le mal, changé en bien » to echo LSG. The lesson's « master weaver » point fits LSG well._
 - **Romains 8:28** — « Nous savons, du reste, que toutes choses concourent au bien de ceux qui aiment Dieu, de ceux qui sont appelés selon son dessein. »  
   _Checked online (biblestudytools.com). « work together for good » = « concourent au bien ». Used in b026, MC 15, SA 8 model._
 - **Matthieu 27:46** — « … c'est-à-dire: Mon Dieu, mon Dieu, pourquoi m'as-tu abandonné? »  
@@ -60,7 +66,7 @@ Professeur : Dr. Wayne Cook | Directeur : Dr. Ted Rogers
 > EN: Professor: Dr. Wayne Cook | Director: Dr. Ted Rogers
 
 **b004**  
-« Cependant, ce sont nos souffrances qu'il a portées, c'est de nos douleurs qu'il s'est chargé. » — Ésaïe 53:4
+« Cependant, ce sont nos souffrances qu'il a portées, C'est de nos douleurs qu'il s'est chargé. » — Ésaïe 53:4
 
 > EN: "Surely He has borne our griefs and carried our sorrows." — Isaiah 53:4
 
@@ -70,7 +76,7 @@ Texte : Ésaïe 53:4
 > EN: Text: Isaiah 53:4
 
 **b006**  
-« Cependant, ce sont nos souffrances qu'il a portées, c'est de nos douleurs qu'il s'est chargé ; et nous l'avons considéré comme puni, frappé de Dieu, et humilié. » — Ésaïe 53:4
+« Cependant, ce sont nos souffrances qu'il a portées, C'est de nos douleurs qu'il s'est chargé ; Et nous l'avons considéré comme puni, Frappé de Dieu, et humilié. » — Ésaïe 53:4
 
 > EN: "Surely He has borne our griefs and carried our sorrows; yet we esteemed Him stricken, smitten by God, and afflicted." — Isaiah 53:4
 
@@ -170,7 +176,7 @@ Médité pour le mal, changé en bien
 > EN: Meant for Evil, Meant for Good
 
 **b026**  
-Encore une chose. Le Dieu qui est entré dans notre souffrance est aussi capable de la tisser, sans jamais en être l'auteur, en un bien que nous n'aurions pas pu imaginer. Joseph, vendu comme esclave par ses frères et laissé à pourrir dans une prison étrangère, s'est finalement trouvé devant les hommes qui lui avaient fait du tort et leur a dit : « Vous aviez médité de me faire du mal : Dieu l'a changé en bien » (Genèse 50:20). Remarquez qu'il n'a pas dit que le mal était bon — c'était un vrai mal, et ses frères l'avaient vraiment voulu. Mais Dieu, le maître tisserand, a pris le fil sombre que les frères avaient filé par méchanceté et l'a travaillé en une tapisserie qui a sauvé une nation. Telle est la promesse que Paul fait à tout croyant : « Toutes choses concourent au bien de ceux qui aiment Dieu » (Romains 8:28). Non pas que toutes choses soient bonnes, mais que toutes choses sont tissées pour le bien par des mains assez sages et assez fortes pour racheter même le pire.
+Encore une chose. Le Dieu qui est entré dans notre souffrance est aussi capable de la tisser, sans jamais en être l'auteur, en un bien que nous n'aurions pas pu imaginer. Joseph, vendu comme esclave par ses frères et laissé à pourrir dans une prison étrangère, s'est finalement trouvé devant les hommes qui lui avaient fait du tort et leur a dit : « Vous aviez médité de me faire du mal : Dieu l'a changé en bien » (Genèse 50:20). Le texte hébreu dit littéralement : « Dieu l'a pensé en bien » — Dieu lui-même avait un bon dessein. Remarquez qu'il n'a pas dit que le mal était bon — c'était un vrai mal, et ses frères l'avaient vraiment voulu. Mais Dieu, le maître tisserand, a pris le fil sombre que les frères avaient filé par méchanceté et l'a travaillé en une tapisserie qui a sauvé une nation. Telle est la promesse que Paul fait à tout croyant : « Toutes choses concourent au bien de ceux qui aiment Dieu » (Romains 8:28). Non pas que toutes choses soient bonnes, mais que toutes choses sont tissées pour le bien par des mains assez sages et assez fortes pour racheter même le pire.
 
 > EN: One thing more. The God who entered our suffering is also able to weave it, without ever being its author, into a good we could not have imagined. Joseph, sold by his brothers into slavery and left to rot in a foreign prison, came at last to the men who had wronged him and said, "You meant evil against me; but God meant it for good" (Genesis 50:20). Notice he did not say the evil was good — it was real evil, and his brothers truly meant it. But God, the master weaver, took the dark thread the brothers spun in malice and worked it into a tapestry that saved a nation. This is the promise Paul makes to every believer: "All things work together for good to those who love God" (Romans 8:28). Not that all things are good, but that all things are woven for good by hands wise enough and strong enough to redeem even the worst.
 
@@ -185,7 +191,7 @@ Ainsi, nous tenons le mystère avec humilité, mais nous tenons la croix avec fe
 > EN: So we hold the mystery humbly, but we hold the cross firmly. When we go to a man in his sorrow, we do not bring him a clever theory of evil; we bring him a wounded Savior who has been where he is. We move, as the skeptic never expects us to, from defense to invitation: the very evil he hurls at God is the proof that he longs for a justice this world cannot give — and that longing, like every other, has its answer in the God who bore our griefs. Do not be afraid of this question. Feel its weight, refuse the tidy lie, and then point, as you always must, to the hands with the scars in them.
 
 **b029**  
-« Méprisé et abandonné des hommes, homme de douleur et habitué à la souffrance. » — Ésaïe 53:3
+« Méprisé et abandonné des hommes, Homme de douleur et habitué à la souffrance. » — Ésaïe 53:3
 
 > EN: "He was despised and rejected by men, a Man of sorrows and acquainted with grief." — Isaiah 53:3
 
@@ -195,7 +201,7 @@ Examen final de l'Unité 4
 > EN: Unit 4 Final Exam
 
 **b031**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -377,7 +383,7 @@ _Pourquoi :_ Christ est entré jusque dans l'expérience d'être abandonné de D
 
 Grading ignores accents, capitals and one leading article (le/la/les/l'/un/une/des).
 
-**1.** « Cependant, ce sont nos ____ qu'il a portées, c'est de nos douleurs qu'il s'est chargé. » (Ésaïe 53:4)  
+**1.** « Cependant, ce sont nos ____ qu'il a portées, C'est de nos douleurs qu'il s'est chargé. » (Ésaïe 53:4)  
 Réponse : **souffrances** · aussi acceptées : souffrance, maladies, peines, chagrins  
 > EN: "Surely He has borne our ____ and carried our sorrows." (Isaiah 53:4) — **griefs**
 
@@ -451,7 +457,7 @@ Modèle : L'unité utilise l'image d'un tableau dans lequel le maître n'a pas t
 
 > EN: Explain the painting-and-shadows illustration and the limit the unit places on it.
 
-**6. Pourquoi l'unité refuse-t-elle de donner une réponse toute faite à la souffrance des innocents ?**  
+**6. Pourquoi l'unité ne propose-t-elle aucune explication nette à la douleur de ceux qui n'ont commis aucune faute ?**  
 Mots-clés : innocent · souffr · toute faite / tout fait / simpliste / facile · déchu / dechu / chute · soupir / gémi / gemi · silence / silencieu / se taire / taire · job · mystère / mystere  
 Modèle : L'unité affirme que le libre arbitre explique le mal que les hommes choisissent, mais non la souffrance des innocents que personne n'a choisie, comme le cancer d'un enfant ou un village sous une vague. Ici, elle refuse de donner une réponse toute faite et met en garde contre quiconque en donne une. Nous vivons dans un monde qui n'est pas seulement libre mais déchu, où la création tout entière soupire, et une partie de ces soupirs ne peut être rattachée à aucune cause que nous puissions nommer. Il y a des souffrances devant lesquelles le croyant le plus sage ne peut que garder le silence. L'unité préfère laisser une douleur honnête plutôt qu'une réponse malhonnête. Elle rappelle que Job a exigé une explication et que Dieu ne la lui a jamais donnée ; Dieu a plutôt donné à Job sa propre personne, ce qui oriente vers la réponse la plus profonde : le mystère rencontré non par une théorie, mais par la présence même de Dieu.
 
@@ -463,13 +469,13 @@ Modèle : La réponse centrale de l'unité est le Dieu crucifié, ce qu'aucune a
 
 > EN: Explain 'the crucified God' as the unit's central answer to suffering.
 
-**8. Qu'est-ce qui rend unique la réponse du christianisme à la souffrance, par rapport aux autres religions ?**  
-Mots-clés : religion · unique / singuli / distinct · souffr · dieu · entré / descendu / descendre / entrer · croix · distant / lointain / loin · compren / compri  
+**8. Qu'est-ce que la réponse chrétienne à la douleur a d'unique, comparée à celle des autres croyances ?**  
+Mots-clés : religion · unique / singuli / distinct · souffr · dieu · entré / est entre / descendu / descendre / entrer · croix · distant / lointain / loin · compren / compri  
 Modèle : Ce qui rend unique la réponse du christianisme, dit l'unité, c'est que son Dieu n'est pas resté distant de la souffrance, mais qu'il y est lui-même entré. D'autres religions peuvent présenter un dieu qui regarde la douleur humaine depuis un trône lointain, serein et intouchable, ou qui appelle la souffrance une illusion, mais seul le Dieu chrétien est descendu, a pris une chair et a souffert sur une croix. Parce que Jésus a pleuré devant une tombe, a saigné sous les clous et a même goûté à l'abandon, aucune personne qui souffre ne peut dire que Dieu ne comprend pas. La réponse chrétienne n'est pas une meilleure théorie de la douleur, mais un Dieu qui l'a partagée. C'est pourquoi, quand nous allons vers ceux qui souffrent, nous ne leur montrons pas une idée, mais un Sauveur qui est passé par où ils passent.
 
 > EN: What is unique about Christianity's answer to suffering compared to other religions?
 
-**9. Expliquez Joseph (Genèse 50:20) et Romains 8:28 — comment Dieu tisse le mal en bien sans en être l'auteur.**  
+**9. À partir de l'histoire de Joseph (Genèse 50:20) et de Romains 8:28, expliquez comment Dieu fait servir ce qui est mauvais à un bon dessein sans en être la cause.**  
 Mots-clés : joseph · le mal / du mal · en bien / au bien / le bien / un bien · tisse / tissé / tissa · auteur · romains · frère / frere · rachet / rachat / rachèt / rédem / redem  
 Modèle : L'unité évoque Joseph, qui fut vendu comme esclave par ses frères et laissé dans une prison étrangère, mais qui leur dit plus tard : Vous aviez médité de me faire du mal : Dieu l'a changé en bien, selon Genèse 50:20. Joseph n'a pas dit que le mal était bon ; c'était un vrai mal, et ses frères l'avaient vraiment voulu. Mais Dieu, le maître tisserand, a pris le fil sombre filé par méchanceté et l'a travaillé en une tapisserie qui a sauvé une nation. Ainsi Dieu peut tisser même le mal en un bien sans jamais en être l'auteur. C'est la promesse de Romains 8:28 : toutes choses concourent au bien de ceux qui aiment Dieu ; non pas que toutes choses soient bonnes, mais que toutes sont tissées pour le bien par des mains assez sages et assez fortes pour racheter même le pire.
 

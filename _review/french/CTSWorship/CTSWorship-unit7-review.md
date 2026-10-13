@@ -12,12 +12,22 @@ Counts: 20 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 2. For 'petition' I used « demande » (prière de demande) instead of the rare French word « pétition ». Is that acceptable, or would you prefer « supplication » or « requête »?
 3. All 20 multiple-choice explanations ('why') are empty in the English source, so none were translated. Is that intended?
 
+## Problems in the English source
+
+- SA2: English prompt passes its own keywords
+- SA3: English prompt passes its own keywords
+- SA4: English prompt passes its own keywords
+- SA5: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
 
 - **Matthieu 6:9-10** — « Voici donc comment vous devez prier: Notre Père qui es aux cieux! Que ton nom soit sanctifié; que ton règne vienne; que ta volonté soit faite sur la terre comme au ciel. »  
-  _Not quoted; the Lord's Prayer is described (b020, mc7, mc15, fill7, sa3). The wording « sanctifie le nom de Dieu » follows LSG « Que ton nom soit sanctifié ». Verses 9-11 checked online (biblestudytools.com LSG)._
+  _Not quoted; the Lord's Prayer is described (b020, mc7, mc15, fill7, sa3). The wording « sanctifie le nom de Dieu » follows LSG « Que ton nom soit sanctifié ». Verses 9-10 verified against offline LSG (lsg.py)._
 
 ## 3. Terms for the reviewer to confirm
 
@@ -104,7 +114,7 @@ Examen final de l'Unité 7
 > EN: Unit 7 Final Exam
 
 **b026**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les questions à choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les questions à choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -331,32 +341,32 @@ Modèle : L'appel à l'adoration a un double objectif : attirer l'attention sur 
 
 > EN: Explain the purpose of the call to worship at the beginning of a service.
 
-**2. Pourquoi la lecture de l'Écriture est-elle souvent négligée, et comment faut-il la faire avec soin ?**  
+**2. Pourquoi la lecture publique de la Bible est-elle souvent négligée, et comment faut-il la faire avec soin ?**  
 Mots-clés : écritur / ecritur · lectur / lecteur / lire · néglig / neglig · import · prédica / predica / prêch / prech · exerc / entraîn / entrain / pratiqu / répét / repet · annonc · convenab / accept / correct  
 Modèle : La lecture de l'Écriture est souvent négligée parce qu'elle prend moins de temps que les annonces, alors qu'elle est bien plus importante qu'elles : on a tendance à mal préparer ce qui paraît bref. Pour bien la faire, le lecteur doit s'exercer à voix haute à l'avance, lire convenablement, sans diction exagérée ni marmonnement négligent, et annoncer le passage en indiquant où le trouver afin que l'assemblée puisse suivre. Certains appellent à juste titre la lecture de l'Écriture elle-même une forme de prédication, puisque Dieu parle à travers elle lorsqu'elle est bien lue.
 
 > EN: Why is the reading of Scripture often neglected, and how should it be done well?
 
 **3. Comment la prière donne-t-elle le ton de tout le culte ? Appuyez-vous sur Taylor et sur le Notre Père comme modèle.**  
-Mots-clés : prière / priere / prier · le ton / tonalit / la note · taylor · modèle / modele · notre père / notre pere / seigneur · import · culte / service · dirig / condui  
+Mots-clés : prière / priere / prier · succès / succes / échec / echec / réussite / reussite · taylor · sanctifi / son nom / nom de dieu · volonté / volonte · import · besoin · dirig / condui  
 Modèle : William Taylor a dit que la prière donne le ton de tout le culte et porte en elle-même le succès ou l'échec de la journée. C'est une affirmation de grand poids, et pourtant elle est vraie, car la prière du début façonne l'esprit dans lequel tout ce qui suit est reçu. Le Notre Père nous sert de modèle : il sanctifie le nom de Dieu, recherche sa volonté, et présente devant lui nos besoins matériels aussi bien que spirituels, dans le bon ordre.
 
 > EN: How does prayer set the tone of the whole service? Use Taylor and the Lord's Prayer as a model.
 
 **4. Énumérez les six éléments de la prière et expliquez la différence entre l'intercession et la demande.**  
-Mots-clés : adorat · action de gr / actions de gr / remerci / gratitude · interce · demande / requête / requete / pétition / petition · confess · consécra / consecra / dédica / dedica · élément / element · six élém / six elem / sixième / sixieme  
+Mots-clés : adorat · action de gr / actions de gr / remerci / gratitude · interce · demande / requête / requete / pétition / petition · confess · consécra / consecra / dédica / dedica · les autres / autrui / extérieur / exterieur · nos propres / nos besoins / propres besoins  
 Modèle : Les six éléments de la prière sont l'adoration, louer Dieu pour qui il est ; l'action de grâces, la gratitude pour ce qu'il a donné ; l'intercession, la prière en faveur des autres ; la demande, la prière pour nos propres besoins ; la confession, reconnaître notre péché et rechercher la purification ; et la consécration, nous abandonner à Dieu. L'intercession et la demande sont distinctes, car l'intercession regarde vers l'extérieur, vers les besoins des autres, tandis que la demande présente à Dieu nos propres besoins. Les garder séparées nous préserve d'une vie de prière qui ne serait qu'une liste de désirs personnels.
 
 > EN: List the six elements of prayer and explain the distinction between intercession and petition.
 
 **5. Expliquez le parallèle entre les cinq ambiances du culte et les six éléments de la prière.**  
-Mots-clés : ambianc / motif · prière / priere · élément / element · parallè / parallel / correspond · culte / service · petit · grand · forme / structur  
+Mots-clés : ambianc / motif · prière / priere · reconnaiss / louange / illumin · échelle / echelle / mouvement · adorat / action de gr / actions de gr / consécr / consecr · petit · grand · forme / structur  
 Modèle : Les cinq ambiances du culte — la reconnaissance, la louange, la confession, l'illumination et la dédicace — sont parallèles aux six éléments de la prière, car les mêmes mouvements tournés vers Dieu, l'adoration, l'action de grâces, la confession et la consécration, façonnent à la fois la structure du culte tout entier et celle d'une seule prière. En un sens bien réel, le culte est une grande prière et une prière est un petit culte ; l'adoration a une seule et même forme à toutes les échelles.
 
 > EN: Explain the parallel between the five moods of the service and the six elements of prayer.
 
 **6. Expliquez l'élément de l'adoration dans la prière, et en quoi il diffère de la demande.**  
-Mots-clés : adorat · louange / louer / célébr / celebr · dieu / seigneur · qui il est / sa personne / caract · commen / début / debut / premi · demande / requête / requete / pétition / petition · demand / sollicit / réclam / reclam · adora / culte  
+Mots-clés : adorat · louange / louer / célébr / celebr · dieu / seigneur · qui il est / sa personne / caract · commen / début / debut / premi · demande / requête / requete / pétition / petition · sollicit / réclam / reclam / besoin · valeur / digne / dignité / dignite  
 Modèle : L'adoration consiste à louer Dieu simplement pour qui il est, indépendamment de tout ce qu'il nous a donné ou a fait pour nous ; elle vient en premier parce qu'elle centre notre attention sur le caractère même de Dieu avant toute autre chose. Elle diffère de la demande, qui sollicite de Dieu une chose précise dont nous avons besoin : l'adoration commence par la valeur de Dieu, tandis que la demande commence par notre besoin.
 
 > EN: Explain the element of adoration in prayer, and how it differs from petition.
@@ -368,19 +378,19 @@ Modèle : La confession consiste à reconnaître honnêtement notre péché deva
 > EN: Explain confession and dedication as elements of prayer.
 
 **8. Expliquez l'intercession et l'action de grâces comme éléments de la prière.**  
-Mots-clés : interce · action de gr / actions de gr · autres / autrui / prochain · gratitude / reconnaiss · prière / priere / prier · en faveur / au nom / à la place / a la place · remerci / merci · besoin  
+Mots-clés : interce · action de gr / actions de gr · autres / autrui / prochain · gratitude / reconnaiss · fidélit / fidelit / brèche / breche / provision · en faveur / au nom / à la place / a la place · remerci / merci · besoin  
 Modèle : L'intercession est la prière en faveur des autres : nous nous tenons à la brèche devant Dieu pour leurs besoins plutôt que pour les nôtres. L'action de grâces est la gratitude pour ce que Dieu a donné : nous le remercions en nommant ses dons précis et ses actes de provision. Ensemble, elles tournent la prière vers l'extérieur — vers les autres dans l'intercession, et vers la fidélité passée de Dieu dans l'action de grâces — au lieu de laisser la prière se réduire à nos seuls désirs du moment.
 
 > EN: Explain intercession and thanksgiving as elements of prayer.
 
 **9. Pourquoi les éléments parlés sont-ils considérés comme certaines des parties les plus importantes du culte, alors qu'ils sont souvent les moins préparés ?**  
-Mots-clés : parlé / parle / oral · prépar / prepar · import · néglig / neglig · écritur / ecritur · prière / priere · dirig / condui / responsab · soin / soigneu  
+Mots-clés : parlé / parle / oral · prépar / prepar · appel / le ton · néglig / neglig · écritur / ecritur · prière / priere · dirig / condui / responsab · soin / soigneu  
 Modèle : Les éléments parlés comptent parmi les parties les plus importantes du culte parce que l'appel à l'adoration oriente l'attention de l'assemblée, que la lecture de l'Écriture fait entendre à haute voix la parole même de Dieu, et que la prière donne le ton de tout le culte et est offerte au nom de toutes les personnes présentes. Pourtant, ils sont souvent les moins préparés parce qu'ils peuvent sembler brefs ou informels comparés au sermon, ce qui pousse les responsables à mal préparer justement les éléments qui portent le plus grand poids spirituel ; ils méritent d'être préparés avec soin.
 
 > EN: Why are the spoken elements considered some of the most important parts of worship, though often the least prepared?
 
 **10. Comment celui qui dirige le culte doit-il se préparer pour bien conduire la prière publique ?**  
-Mots-clés : public · prière / priere · prépar / prepar · dirig / condui · assemblée / assemblee / congrégation / congregation / fidèles / fideles · modèle / modele / notre père / notre pere · élément / element · le ton / tonalit / la note  
+Mots-clés : improvis / réfléch / reflech / avance · prière / priere · prépar / prepar · sermon / au nom · assemblée / assemblee / congrégation / congregation / fidèles / fideles · modèle / modele / notre père / notre pere · élément / element · le ton / tonalit / la note  
 Modèle : Celui qui dirige le culte doit se préparer à conduire la prière publique en réfléchissant à l'avance à ce qu'il va dire dans sa prière plutôt que de tout improviser, en y incluant délibérément les éléments de la vraie prière — l'adoration, l'action de grâces, l'intercession, la demande, la confession et la consécration —, et en se souvenant que sa prière est offerte au nom de toute l'assemblée et donne le ton pour toutes les personnes présentes ; elle mérite donc la même préparation soigneuse que le sermon.
 
 > EN: How should a worship leader prepare to lead public prayer well?

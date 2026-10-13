@@ -8,15 +8,22 @@ Counts: 25 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 
 ## 1. Questions for Wayne
 
-1. Isaiah 54:3: English (NKJV) says 'your descendants will inherit the nations'; LSG says 'ta postérité envahira des nations' ('will invade/overrun nations'). The French lesson quotes LSG and the SA 5 model follows it. Is that acceptable, or would you prefer a note or a different version for this verse?
+1. Isaiah 54:3: English (NKJV) says 'your descendants will inherit the nations'; LSG says 'ta postérité envahira des nations' ('will invade/overrun nations'). Per settled convention 1 the lesson (b023) quotes LSG and adds one sentence giving the Hebrew sense ('prendre possession, hériter'); the SA 5 model follows LSG. Please confirm.
 2. Carey's pamphlet title is given only in French translation. Should the original English title also appear (e.g. in parentheses) so students can look it up?
 3. MC 13 option 'Here I stand' rendered with the well-known French form of Luther's words « Me voici, je ne puis autrement » — fine?
+
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+- SA6: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
 
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
 
-- **⚠** **Ésaïe 54.2-3** — « Élargis l'espace de ta tente; Qu'on déploie les couvertures de ta demeure: Ne retiens pas! Allonge tes cordages, Et affermis tes pieux! Car tu te répandras à droite et à gauche; Ta postérité envahira des nations, Et peuplera des villes désertes. »  
+- **⚠** **Ésaïe 54:2-3** — « Élargis l'espace de ta tente; Qu'on déploie les couvertures de ta demeure: Ne retiens pas! Allonge tes cordages, Et affermis tes pieux! Car tu te répandras à droite et à gauche; Ta postérité envahira des nations, Et peuplera des villes désertes. »  
   _Checked online (biblestudytools.com/lsg). English NKJV 'your descendants will inherit the nations'; LSG 'ta postérité envahira des nations' (will invade/take possession of nations). Quoted in b023 with LSG wording (ellipsis as in the English); SA 5 model adjusted to LSG wording. Fill 6 ('tente') unaffected. Source cites NKJV; changed citation to LSG._
 
 ## 3. Terms for the reviewer to confirm
@@ -89,7 +96,7 @@ IV. Attendez de grandes choses ; entreprenez de grandes choses
 > EN: IV. Expect Great Things; Attempt Great Things
 
 **b023**  
-En mai 1792, Carey prêcha un sermon à Nottingham sur les paroles d'Ésaïe 54 : « Élargis l'espace de ta tente… Car tu te répandras à droite et à gauche ; ta postérité envahira des nations » (Ésaïe 54.2-3, LSG). De ce sermon sortirent les paroles qui allaient devenir la devise du mouvement missionnaire moderne : « Attendez de grandes choses de Dieu ; entreprenez de grandes choses pour Dieu. » Les frères de Carey furent remués, et en quelques mois un petit groupe d'entre eux fonda la Société missionnaire baptiste pour l'envoyer — la première des grandes sociétés missionnaires qui allaient porter l'Évangile tout autour du monde.
+En mai 1792, Carey prêcha un sermon à Nottingham sur les paroles d'Ésaïe 54 : « Élargis l'espace de ta tente… Car tu te répandras à droite et à gauche ; ta postérité envahira des nations » (Ésaïe 54:2-3, LSG). Le verbe hébreu traduit par « envahira » signifie littéralement « prendre possession, hériter ». De ce sermon sortirent les paroles qui allaient devenir la devise du mouvement missionnaire moderne : « Attendez de grandes choses de Dieu ; entreprenez de grandes choses pour Dieu. » Les frères de Carey furent remués, et en quelques mois un petit groupe d'entre eux fonda la Société missionnaire baptiste pour l'envoyer — la première des grandes sociétés missionnaires qui allaient porter l'Évangile tout autour du monde.
 
 > EN: In May of 1792 Carey preached a sermon at Nottingham on the words of Isaiah 54: "Enlarge the place of your tent... for you shall expand to the right and to the left, and your descendants will inherit the nations" (Isaiah 54:2–3, NKJV). From that sermon came the words that would become the motto of the modern missionary movement: "Expect great things from God; attempt great things for God." Carey's brethren were stirred, and within months a small band of them founded the Baptist Missionary Society to send him out — the first of the great mission societies that would carry the gospel around the world.
 
@@ -129,7 +136,7 @@ Examen final de l'Unité 7
 > EN: Unit 7 Final Exam
 
 **b031**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les questions à choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez essayer de nouveau.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les questions à choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez essayer de nouveau.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -326,7 +333,7 @@ Réponse : **moyens** · aussi acceptées : moyen, moyens humains
 Réponse : **Nottingham**  
 > EN: In May of 1792 Carey preached a famous sermon at ____ on the words of Isaiah 54. — **Nottingham**
 
-**6.** Le texte du sermon de Carey était Ésaïe 54.2 : « Élargis l'espace de ta ____. »  
+**6.** Le texte du sermon de Carey était Ésaïe 54:2 : « Élargis l'espace de ta ____. »  
 Réponse : **tente** · aussi acceptées : tentes  
 > EN: Carey's sermon text was Isaiah 54:2: "Enlarge the place of your ____." — **tent**
 
@@ -350,7 +357,7 @@ Réponse : **Serampore** · aussi acceptées : Serampur, Srirampur
 
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
-**1. Qui était William Carey, et pourquoi l'appelle-t-on le père des missions modernes ?**  
+**1. Qui était William Carey, et quel titre d'honneur la leçon lui donne-t-elle dans l'histoire de l'Église ? Pourquoi ?**  
 Mots-clés : carey · cordonnier / savetier · modern · mission · père / pere · l'inde / en inde / indien · grande · commission  
 Modèle : William Carey (1761-1834) était un pauvre cordonnier anglais, en grande partie autodidacte, qui devint le père des missions modernes parce qu'il rouvrit la Grande Commission pour toute l'Église après près de deux siècles où les protestants avaient négligé les missions à l'étranger. Il répondit à l'opinion dominante de son temps, selon laquelle la Commission n'était que pour les apôtres, s'embarqua pour l'Inde en 1793 et mit en marche le mouvement missionnaire moderne, qui fit du dix-neuvième siècle la plus grande époque d'expansion de l'Évangile depuis la Pentecôte.
 
@@ -376,23 +383,23 @@ Modèle : La brochure de Carey, Une enquête sur l'obligation des chrétiens d'e
 
 **5. Quelle était la célèbre devise de Carey, et de quel sermon et de quel texte est-elle née ?**  
 Mots-clés : attendez · grandes choses / grande · entrepren / tentez · dieu · nottingham · ésaïe / esaie · sermon · tente  
-Modèle : La célèbre devise de Carey était : « Attendez de grandes choses de Dieu ; entreprenez de grandes choses pour Dieu. » Elle est née d'un sermon qu'il prêcha à Nottingham en mai 1792 sur Ésaïe 54.2-3, qui parle d'élargir l'espace de sa tente parce qu'on se répandra à droite et à gauche et que sa postérité envahira des nations — ce sermon remua ses frères et conduisit, en quelques mois, à la fondation de la Société missionnaire baptiste.
+Modèle : La célèbre devise de Carey était : « Attendez de grandes choses de Dieu ; entreprenez de grandes choses pour Dieu. » Elle est née d'un sermon qu'il prêcha à Nottingham en mai 1792 sur Ésaïe 54:2-3, qui parle d'élargir l'espace de sa tente parce qu'on se répandra à droite et à gauche et que sa postérité envahira des nations — ce sermon remua ses frères et conduisit, en quelques mois, à la fondation de la Société missionnaire baptiste.
 
 > EN: What was Carey's famous motto, and what sermon and text gave rise to it?
 
-**6. Décrivez les quarante et un ans de Carey en Inde, y compris le Trio de Serampore et le travail de traduction.**  
+**6. Décrivez les quarante et un ans de Carey en Inde : ses deux collaborateurs et l'œuvre qu'ils accomplirent ensemble.**  
 Mots-clés : l'inde / en inde / indien · serampore · trio · tradu · bible · langue · collège / college · congé / conge  
 Modèle : Carey s'embarqua pour l'Inde en 1793 et ne revit jamais l'Angleterre ; il y travailla quarante et un ans sans un seul congé au pays. Avec ses collègues Joshua Marshman et William Ward, connus comme le Trio de Serampore, il traduisit la Bible, en entier ou en partie, dans plus de trente langues de l'Inde, et il fonda en 1818 le Collège de Serampore, le premier établissement chrétien d'enseignement supérieur en Asie, bien qu'il ait attendu sept ans son premier converti indien et enterré un enfant sur le champ de mission.
 
 > EN: Describe Carey's forty-one years in India, including the Serampore Trio and the translation work.
 
-**7. Que montre la fondation de la Société missionnaire baptiste sur la manière dont les missionnaires sont envoyés ?**  
+**7. Qu'enseigne la naissance de la Société missionnaire baptiste sur la façon dont un ouvrier part pour le champ de mission ?**  
 Mots-clés : société / societe · envo · soutien / soutenu / soutenir · église / eglise · carey · missionnaire · premi · fond  
 Modèle : La fondation de la Société missionnaire baptiste montre que les missionnaires ne sont pas censés s'envoyer eux-mêmes — les frères de Carey, remués, s'organisèrent pour l'envoyer et le soutenir officiellement, et cette société devint la première des grandes sociétés missionnaires qui allaient porter l'Évangile tout autour du monde. Elle illustre le modèle d'un envoi organisé et communautaire, par l'Église, plutôt qu'une initiative individuelle isolée.
 
 > EN: What does the founding of the Baptist Missionary Society show about how missionaries are sent?
 
-**8. Pourquoi la leçon appelle-t-elle le dix-neuvième siècle le plus grand siècle d'expansion chrétienne depuis la Pentecôte ?**  
+**8. Pourquoi la leçon voit-elle dans le XIXe siècle la plus grande époque de croissance chrétienne depuis la Pentecôte ?**  
 Mots-clés : siècle / siecle · expansion · continent · église / eglise · langue · évangile / evangile · monde · dix-neuvième / dix neuvieme / dix-neuvieme / xixe  
 Modèle : La leçon appelle le dix-neuvième siècle le plus grand siècle d'expansion chrétienne depuis la Pentecôte parce qu'en l'an 1800, peut-être un seul chrétien sur cent dans le monde vivait hors d'Europe et d'Amérique du Nord, mais qu'en 1900 l'Évangile avait atteint tous les continents, implanté des Églises dans des centaines de langues et suscité des croyants autochtones sur tous les rivages — une explosion sans précédent de l'expansion de l'Évangile en un seul siècle.
 
@@ -404,7 +411,7 @@ Modèle : La vie de Carey enseigne que Dieu prend plaisir à se servir des gens 
 
 > EN: What does Carey's life teach about whom God uses for missions?
 
-**10. Carey a dit : « Attendez de grandes choses de Dieu ; entreprenez de grandes choses pour Dieu. » Quelle grande chose Dieu vous appelle-t-il peut-être à attendre et à entreprendre ?**  
+**10. Pensez à la célèbre devise de Carey. Quelle œuvre audacieuse le Seigneur pourrait-il vous inviter à espérer de lui et à tenter pour lui ?**  
 Mots-clés : attend · entrepren · grand · dieu · appel · mission · une foi / la foi / confian · obéi / obei  
 Modèle : Il s'agit d'une question de réflexion personnelle qui invite l'étudiant à considérer quelle grande chose Dieu l'appelle peut-être à attendre et à entreprendre, à l'exemple de Carey, qui unissait une foi audacieuse à une action concrète. Une réponse réfléchie nomme un domaine précis — dans les missions, le ministère ou un autre appel — où l'étudiant sent que Dieu l'invite à lui faire confiance pour plus que ce qui paraît humainement possible.
 

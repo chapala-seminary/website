@@ -61,6 +61,22 @@ questions in French. The units were made and checked the same way as batch 1:
 
 Each unit's `-review.md` lists its own questions.
 
+## Upgrade to the shared standard (12 Oct, evening)
+
+After the edition-wide conventions were settled, all 85 units were brought up to the shared
+`tools/BRIEF.md` standard:
+- **Short answers:** no French prompt passes its own keywords any more (356 were fixed by
+  rewording prompts or replacing keyword groups that only repeated the prompt). Where the
+  English prompt has the same flaw, it is listed under "Problems in the English source" in
+  each unit's review file.
+- **Scripture:** every quotation was re-checked against the offline Segond 1910 (`tools/lsg.py`)
+  and corrected to match word for word. Mostly this was capitals and punctuation, plus a few
+  paraphrases set in quotation marks, such as 1 Cor 11:1 and Matthew 18:17.
+- **Conventions:** « Parcours Certificat », « Parcours Associé en divinité », « M.Div. »,
+  « Th.M. »; "sacrificateur" for priests; no "other versions say" (the Hebrew/Greek sense
+  instead); English verse numbering (e.g. Psaume 19:1).
+All 85 units pass `tools/validate.py` with 0 errors.
+
 ## Found while checking: short answers that pass by copying the question
 
 Beta's French checker warns when a short-answer question's own wording already contains enough

@@ -12,6 +12,12 @@ Counts: 30 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 2. 2 Pierre 1:21 in LSG has « des hommes » with no « saints » (« holy men » in the NKJV). The French follows LSG and drops « holy » in b024 and SA 8/9 models. OK?
 3. « Game of telephone »: we used « jeu du téléphone » (avoiding the French « téléphone arabe »). Is there a better-known name for this game in Kinshasa?
 
+## Problems in the English source
+
+- SA2: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -169,7 +175,7 @@ Ainsi, les documents tiennent debout, et ils se tiennent sur un terrain qu'aucun
 > EN: So the documents stand, and they stand on ground no other ancient book can claim. Men have buried this book a hundred times — burned it, banned it, mocked it, pronounced it dead and dancing on its grave — and every time, the grave would not hold it. "Heaven and earth will pass away," said the One it proclaims, "but My words will by no means pass away." Yet remember once more what reliability can and cannot do. To prove the documents trustworthy is to establish that the Witnesses are credible; it is to bring the jury to the brink of its verdict. But a credible witness still asks to be believed. The reliability of Scripture carries us to the door. Whether we will walk through it and trust the One to whom every page bears witness — that is the question still waiting on the other side.
 
 **b027**  
-« L'herbe sèche, la fleur tombe ; mais la parole de notre Dieu subsiste éternellement. » — Ésaïe 40:8
+« L'herbe sèche, la fleur tombe ; Mais la parole de notre Dieu subsiste éternellement. » — Ésaïe 40:8
 
 > EN: "The grass withers, the flower fades, but the word of our God stands forever." — Isaiah 40:8
 
@@ -179,7 +185,7 @@ Examen final de l'Unité 5
 > EN: Unit 5 Final Exam
 
 **b029**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -362,7 +368,7 @@ _Pourquoi :_ La fiabilité nous conduit jusqu'à la porte ; la question demeure 
 Grading ignores accents, capitals and one leading article (le/la/les/l'/un/une/des).
 
 **1.** « Toute Écriture est ____ de Dieu. » (2 Timothée 3:16)  
-Réponse : **inspirée** · aussi acceptées : inspiré, inspirée de Dieu  
+Réponse : **inspirée** · aussi acceptées : inspiré, inspirée de Dieu, soufflée, soufflée par Dieu  
 > EN: "All Scripture is given by ____ of God." (2 Timothy 3:16) — **inspiration**
 
 **2.** Le test standard des historiens, qui demande combien de copies ont survécu et quel est l'écart avec l'original, s'appelle le test ____.  
@@ -397,7 +403,7 @@ Réponse : **femmes** · aussi acceptées : femme
 Réponse : **reconnu** · aussi acceptées : reçu, accueilli  
 > EN: The church did not create the canon; it ____ it. — **recognized**
 
-**10.** « L'herbe sèche, la fleur tombe ; mais la parole de notre Dieu subsiste ____. » (Ésaïe 40:8)  
+**10.** « L'herbe sèche, la fleur tombe ; Mais la parole de notre Dieu subsiste ____. » (Ésaïe 40:8)  
 Réponse : **éternellement** · aussi acceptées : à jamais, pour toujours, toujours  
 > EN: "The grass withers, the flower fades, but the word of our God stands ____." (Isaiah 40:8) — **forever**
 
@@ -411,7 +417,7 @@ Modèle : Le sceptique accuse la Bible d'avoir été copiée et recopiée pendan
 
 > EN: State the skeptic's charge that the Bible has been changed, and how the unit frames its answer.
 
-**2. Expliquez le test bibliographique et la manière dont le Nouveau Testament se compare à des écrits comme ceux d'Homère et de César.**  
+**2. Expliquez le test bibliographique et comparez le Nouveau Testament à des classiques comme l'Iliade ou la Guerre des Gaules.**  
 Mots-clés : bibliograph · copie / copié / copier / copiste · écart / ecart / intervalle · origin · homère / homere · césar / cesar · antiq / ancien · test bibliographique / critère / critere / épreuve / epreuve  
 Modèle : Le test bibliographique est le critère que les historiens appliquent à tout écrit ancien, et il pose deux questions : combien de copies ont survécu, et quel est l'écart entre l'original et la plus ancienne copie. Davantage de copies permettent aux spécialistes de comparer et de repérer les erreurs, et un écart plus court laisse moins de temps à la légende pour s'introduire. Appliqué à d'autres œuvres anciennes, ce test montre que la Guerre des Gaules de César ne subsiste qu'en une poignée de copies, la plus ancienne datant d'environ neuf cents ans après l'original, et l'Iliade d'Homère en quelques centaines de copies ; pourtant aucun spécialiste n'en doute. Appliqué au Nouveau Testament, le même test donne une montagne de copies et un écart d'une génération ou deux seulement, ce qui signifie que, selon le critère même des historiens, le Nouveau Testament est bien mieux attesté que les classiques que personne ne remet en question.
 
@@ -447,13 +453,13 @@ Modèle : L'accent de la vérité, ou critère d'embarras, repose sur ce constat
 
 > EN: Explain the 'ring of truth' (the criterion of embarrassment) in the Gospels.
 
-**8. Expliquez le rapport de l'Église avec le canon — elle l'a reconnu plutôt que créé.**  
-Mots-clés : canon · église / eglise · reconn · créé / créer / créa / creer / crea · reçu / recu / recev / accueill · parole · donné / donne · souffl / inspir  
+**8. Expliquez le rôle de l'Église face à la liste des livres bibliques : l'a-t-elle fabriquée, ou seulement constatée ?**  
+Mots-clés : canon · église / eglise · reconn · créé / cree / créer / créa / creer / crea · reçu / recu / recev / accueill · parole · donné / donne · souffl / inspir  
 Modèle : L'unité corrige l'idée selon laquelle l'Église aurait créé la Bible en admettant ou en rejetant des livres par vote, selon son bon plaisir. La vérité est l'inverse : l'Église n'a pas créé le canon, elle l'a reconnu. Dieu a donné sa Parole, et, au fil du temps, l'Église a reçu ce qui portait les marques du souffle même de Dieu et a mis de côté ce qui ne les portait pas. L'autorité de l'Écriture ne vient donc pas du vote d'un concile, mais de Dieu qui l'a soufflée ; l'Église n'a fait que reconnaître ce qui était déjà sa Parole. C'est pourquoi le canon n'est pas l'invention d'un comité humain, mais un don divin que l'Église a reconnu avec reconnaissance : la même Parole que 2 Timothée déclare inspirée de Dieu, et dont Pierre dit que c'est poussés par le Saint-Esprit que des hommes ont parlé de la part de Dieu.
 
 > EN: Explain how the church related to the canon — recognizing it rather than creating it.
 
-**9. Que veut dire 2 Timothée 3:16 par « inspirée », et comment l'Écriture est-elle à la fois divine et humaine ?**  
+**9. Que dit 2 Timothée 3:16 sur l'origine de la Bible, et comment la Bible peut-elle venir à la fois de Dieu et d'auteurs humains ?**  
 Mots-clés : inspir · écriture / ecriture · souffl · divin · humain · timothée / timothee · pierre · modèle / modele / schéma / schema  
 Modèle : 2 Timothée 3:16 dit que toute Écriture est inspirée de Dieu, et le mot inspirée signifie littéralement soufflée par Dieu. L'Écriture n'est donc pas seulement constituée de pensées humaines inspirantes, mais elle est le souffle même de Dieu exprimé par des auteurs humains. Pierre ajoute que c'est poussés par le Saint-Esprit que des hommes ont parlé de la part de Dieu, ce qui montre la même vérité du côté humain. Cela rend l'Écriture à la fois divine et humaine : divine dans son origine, puisque Dieu l'a soufflée, et humaine dans sa rédaction, puisque de vrais hommes l'ont écrite dans leurs propres langues et styles. L'unité compare cela au modèle Dieu-et-homme de l'incarnation elle-même, où la vérité parfaite de Dieu a été transmise par des instruments humains sans être corrompue par eux.
 

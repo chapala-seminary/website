@@ -18,6 +18,16 @@ Counts: 90 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 8. [check] Term mismatch across units: Unit 10 says « numéros de Strong » and « transfert illégitime de totalité »; Unit 11 says « numéro Strong » and « transfert illégitime de la totalité des sens » (MC13, b057). Pick one form for both units?
 9. [check] The English MC10 stem says Paul wrote Romans 'FROM and TO Rome', and MC6's explanation says he 'writes from Rome'. Romans is usually dated to Paul's stay in Corinth, before he reached Rome. The French MC6 says « écrit à Rome » (to Rome); MC10 keeps « DEPUIS et POUR Rome ». Should the English (and French) drop 'FROM'?
 
+## Problems in the English source
+
+- SA2: English prompt passes its own keywords
+- SA3: English prompt passes its own keywords
+- SA4: English prompt passes its own keywords
+- SA5: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -34,7 +44,7 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
   _Verified on bible.com (LSG). b037 quotes the 15:3b-4a portion; MC8 option and 'why' paraphrase it (not in quotation marks)._
 - **Apocalypse 14:6** — « Je vis un autre ange qui volait par le milieu du ciel, ayant un Évangile éternel, pour l'annoncer aux habitants de la terre, à toute nation, à toute tribu, à toute langue, et à tout peuple. »  
   _Verified on bible.com (LSG). Only the phrase 'everlasting euangelion' is quoted (b033, b039, MC19 'why') = « euangelion éternel » (LSG « Évangile éternel »)._
-- **Ésaïe 52:7** — « Qu'ils sont beaux sur les montagnes, Les pieds de celui qui apporte de bonnes nouvelles, Qui publie la paix! De celui qui apporte de bonnes nouvelles, Qui publie le salut! De celui qui dit à Sion: Ton Dieu règne! »  
+- **Ésaïe 52:7** — « Qu'ils sont beaux sur les montagnes, Les pieds de celui qui apporte de bonnes nouvelles, Qui publie la paix! De celui qui apporte de bonnes nouvelles, Qui publie le salut! De celui qui dit à Sion: ton Dieu règne! »  
   _Verified on bible.com (LSG). b042, MC7 stem/why. KJV 'bringeth good tidings of good' = LSG simply « apporte de bonnes nouvelles »; the key phrase the lesson tags as basar is present. Verse-internal capitals of LSG poetry lowered in running text._
 - **Ésaïe 61:1** — « L'esprit du Seigneur, l'Éternel, est sur moi, Car l'Éternel m'a oint pour porter de bonnes nouvelles aux malheureux; »  
   _Verified on bible.com (LSG). b043, MC7 'why'. KJV 'the Lord GOD' = LSG « le Seigneur, l'Éternel »; 'the meek' = « aux malheureux »; LSG writes « L'esprit » lowercase — kept as LSG. The phrase the lesson tags as basar, 'to preach good tidings', = « pour porter de bonnes nouvelles »._
@@ -74,7 +84,7 @@ Votre première étude de mot — Le travail de synthèse
 > EN: "For the word of God is living and powerful, and sharper than any two-edged sword…"
 
 **b007**  
-Texte biblique de l'unité : « Car la parole de Dieu est vivante et efficace, plus tranchante qu'une épée quelconque à deux tranchants, pénétrante jusqu'à partager âme et esprit, jointures et moelles ; elle juge les sentiments et les pensées du cœur. » — Hébreux 4:12 (LSG)
+Texte biblique de l'unité : « Car la parole de Dieu est vivante et efficace, plus tranchante qu'une épée quelconque à deux tranchants, pénétrante jusqu'à partager âme et esprit, jointures et moelles; elle juge les sentiments et les pensées du cœur. » — Hébreux 4:12 (LSG)
 
 > EN: Unit Scripture: "For the word of God is living and powerful, and sharper than any two-edged sword, piercing even to the division of soul and spirit, and of joints and marrow, and is a discerner of the thoughts and intents of the heart." — Hebrews 4:12 (NKJV)
 
@@ -174,7 +184,7 @@ Regardez à quoi ressemble une étude de mot complète. En voici une du début �
 > EN: Step 1 (CHOOSE): The verse and the word
 
 **b027**  
-Nous revenons à Romains 1:16, vu dans l'unité 9 : « Car je n'ai point honte de l'Évangile : c'est une puissance de Dieu pour le salut de quiconque croit. » Nous choisissons le mot « Évangile » — le cœur doctrinal du verset. Sans « Évangile », la phrase s'effondre.
+Nous revenons à Romains 1:16, vu dans l'unité 9 : « Car je n'ai point honte de l'Évangile: c'est une puissance de Dieu pour le salut de quiconque croit. » Nous choisissons le mot « Évangile » — le cœur doctrinal du verset. Sans « Évangile », la phrase s'effondre.
 
 > EN: We return to Romans 1:16 from Unit 9: "For I am not ashamed of the gospel of Christ: for it is the power of God unto salvation." We pick the English word "gospel" — the doctrinal heart of the verse. Without "gospel" the sentence collapses.
 
@@ -204,7 +214,7 @@ La brève définition de Strong dit : « un bon message, une bonne nouvelle ». 
 > EN: Step 4 (TRACE): Every occurrence in the New Testament
 
 **b033**  
-Le numéro Strong G2098 apparaît 76 fois dans le Nouveau Testament grec. La forme verbale euangelizô (G2097, « annoncer une bonne nouvelle ») apparaît encore 54 fois. Au total, plus de 130 occurrences. Le mot est très fréquent chez Paul (plus de 60 emplois), bien présent dans les Évangiles synoptiques (surtout Matthieu et Marc), et il culmine en Apocalypse 14:6, où un ange proclame l'« euangelion éternel ». Prenez un échantillon de cinq versets stratégiques :
+Le numéro Strong G2098 apparaît 76 fois dans le Nouveau Testament grec. La forme verbale euangelizô (G2097, « annoncer une bonne nouvelle ») apparaît encore 54 fois. Au total, plus de 130 occurrences. Le mot est très fréquent chez Paul (plus de 60 emplois), bien présent dans les Évangiles synoptiques (surtout Matthieu et Marc), et il culmine en Apocalypse 14:6, où un ange vole « ayant un Évangile éternel » (en grec, euangelion). Prenez un échantillon de cinq versets stratégiques :
 
 > EN: Strong's number G2098 appears 76 times in the Greek New Testament. The verb form euangelizô (G2097, "to announce good news") appears another 54 times. Together over 130 occurrences. The word is dense in Paul (60+ uses), prominent in the Synoptic Gospels (Matthew and Mark especially), and culminates in Revelation 14:6 where an angel proclaims the "everlasting euangelion." Sample five strategic verses:
 
@@ -214,17 +224,17 @@ VersetCe qu'il nous apprend sur euangelion
 > EN: VerseWhat it tells us about euangelion
 
 **b035**  
-Marc 1:1« Commencement de l'euangelion de Jésus-Christ, Fils de Dieu. » Le premier mot du deuxième Évangile. L'Évangile COMMENCE ici ; tout ce qui précédait était préparation.
+Marc 1:1« Commencement de l'Évangile de Jésus-Christ, Fils de Dieu. » Ici, « Évangile » traduit euangelion. Le premier mot du deuxième Évangile. L'Évangile COMMENCE ici ; tout ce qui précédait était préparation.
 
 > EN: Mark 1:1"The beginning of the euangelion of Jesus Christ, the Son of God." The opening word of the second Gospel. The gospel BEGINS here; everything before was preparation.
 
 **b036**  
-Romains 1:1Paul se dit « mis à part pour annoncer l'euangelion de Dieu ». Toute sa vie est désormais définie par le fait de porter une seule nouvelle.
+Romains 1:1Paul se dit « mis à part pour annoncer l'Évangile de Dieu » (en grec, l'euangelion). Toute sa vie est désormais définie par le fait de porter une seule nouvelle.
 
 > EN: Romans 1:1Paul calls himself "separated unto the euangelion of God." His whole life is now defined by carrying one piece of news.
 
 **b037**  
-1 Corinthiens 15:1–4Le résumé le plus clair de Paul : l'euangelion, c'est « que Christ est mort pour nos péchés, selon les Écritures ; qu'il a été enseveli, et qu'il est ressuscité le troisième jour ». Mort, ensevelissement, résurrection. Trois événements historiques.
+1 Corinthiens 15:1–4Le résumé le plus clair de Paul : l'euangelion, c'est « que Christ est mort pour nos péchés, selon les Écritures; qu'il a été enseveli, et qu'il est ressuscité le troisième jour ». Mort, ensevelissement, résurrection. Trois événements historiques.
 
 > EN: 1 Corinthians 15:1–4Paul's clearest summary: the euangelion is "Christ died for our sins according to the scriptures; and that he was buried, and that he rose again the third day." Death, burial, resurrection. Three historical events.
 
@@ -234,7 +244,7 @@ Galates 1:8–9Paul frappe d'anathème quiconque prêche un euangelion différen
 > EN: Galatians 1:8–9Paul anathematizes anyone preaching a different euangelion — not different doctrines in general, but a different gospel. The message is so specific that it can be falsified.
 
 **b039**  
-Apocalypse 14:6L'« euangelion éternel » annoncé à toute nation. La même bonne nouvelle, qui atteint maintenant la dernière île et la dernière langue. L'histoire se termine par le mot qui l'avait ouverte.
+Apocalypse 14:6L'« Évangile éternel » (euangelion) annoncé à toute nation. La même bonne nouvelle, qui atteint maintenant la dernière île et la dernière langue. L'histoire se termine par le mot qui l'avait ouverte.
 
 > EN: Revelation 14:6The "everlasting euangelion" preached to every nation. The same good news, now reaching the last island and the last language. The story closes with the word that opened.
 
@@ -249,12 +259,12 @@ C'est là que l'étude de mot rapporte souvent ses plus gros dividendes. Euangel
 > EN: This is where word study often pays its biggest dividend. Euangelion did not appear from nowhere in the first century. The Septuagint (the Greek Old Testament we met in Unit 2) had used the verb form euangelizô in two places that the New Testament writers all knew by heart. Both passages translate the Hebrew verb basar (H1319), "to announce good news."
 
 **b042**  
-Ésaïe 52:7 : « Qu'ils sont beaux sur les montagnes, les pieds de celui qui apporte de bonnes nouvelles, qui publie la paix ! De celui qui apporte de bonnes nouvelles, qui publie le salut ! De celui qui dit à Sion : Ton Dieu règne ! » Derrière « apporte de bonnes nouvelles » se trouve l'hébreu basar. La LXX le rend par euangelizomenou. Paul cite ce verset en Romains 10:15 pour montrer que la prédication de l'Évangile est l'œuvre annoncée par les prophètes, confiée aux hérauts du Messie. Les coureurs sur les montagnes, dans la vision d'Ésaïe, ce sont les apôtres, les évangélistes, chaque chrétien qui a un jour porté la nouvelle à son voisin.
+Ésaïe 52:7 : « Qu'ils sont beaux sur les montagnes, Les pieds de celui qui apporte de bonnes nouvelles, Qui publie la paix! De celui qui apporte de bonnes nouvelles, Qui publie le salut! De celui qui dit à Sion: ton Dieu règne! » Derrière « apporte de bonnes nouvelles » se trouve l'hébreu basar. La LXX le rend par euangelizomenou. Paul cite ce verset en Romains 10:15 pour montrer que la prédication de l'Évangile est l'œuvre annoncée par les prophètes, confiée aux hérauts du Messie. Les coureurs sur les montagnes, dans la vision d'Ésaïe, ce sont les apôtres, les évangélistes, chaque chrétien qui a un jour porté la nouvelle à son voisin.
 
 > EN: Isaiah 52:7: "How beautiful upon the mountains are the feet of him that bringeth good tidings, that publisheth peace; that bringeth good tidings of good, that publisheth salvation; that saith unto Zion, Thy God reigneth!" The Hebrew basar stands behind "bringeth good tidings." The LXX renders it euangelizomenou. Paul quotes this verse in Romans 10:15 to argue that gospel preaching is the prophesied work of the Messiah's heralds. The runners over the mountains in Isaiah's vision are the apostles, the evangelists, every Christian who has ever taken the news to a neighbor.
 
 **b043**  
-Ésaïe 61:1 : « L'esprit du Seigneur, l'Éternel, est sur moi, car l'Éternel m'a oint pour porter de bonnes nouvelles aux malheureux. » De nouveau l'hébreu basar. Dans la LXX, euangelisasthai. Et Jésus lit ce verset même dans la synagogue de sa ville natale, en Luc 4:18, se l'applique à lui-même et annonce que la prophétie est maintenant accomplie. Le basar de l'Ancien Testament et l'euangelion du Nouveau Testament sont le même mot en deux langues. Sept cents ans d'attente prophétique hébraïque se déversent dans un seul nom grec.
+Ésaïe 61:1 : « L'esprit du Seigneur, l'Éternel, est sur moi, Car l'Éternel m'a oint pour porter de bonnes nouvelles aux malheureux » De nouveau l'hébreu basar. Dans la LXX, euangelisasthai. Et Jésus lit ce verset même dans la synagogue de sa ville natale, en Luc 4:18, se l'applique à lui-même et annonce que la prophétie est maintenant accomplie. Le basar de l'Ancien Testament et l'euangelion du Nouveau Testament sont le même mot en deux langues. Sept cents ans d'attente prophétique hébraïque se déversent dans un seul nom grec.
 
 > EN: Isaiah 61:1: "The Spirit of the Lord God is upon me; because the Lord hath anointed me to preach good tidings unto the meek." Hebrew basar again. LXX euangelisasthai. And Jesus reads this very verse at His hometown synagogue in Luke 4:18, applies it to Himself, and announces that the prophecy is now fulfilled. The Old Testament basar and the New Testament euangelion are the same word in two languages. Seven hundred years of Hebrew prophetic anticipation flows into one Greek noun.
 
@@ -264,7 +274,7 @@ C'est là que l'étude de mot rapporte souvent ses plus gros dividendes. Euangel
 > EN: Step 6 (RETURN): Rereading Romans 1:16
 
 **b045**  
-Relisez maintenant le verset : « Car je n'ai point honte de l'Évangile : c'est une puissance de Dieu pour le salut de quiconque croit. » Voici ce que le mot porte désormais. Le monde romain avait son propre euangelion — la proclamation de la victoire impériale, l'annonce de l'anniversaire de César, la nouvelle d'un nouvel empereur sur le trône. Paul écrit cette lettre à Rome, la capitale impériale, et il emploie le même mot pour une annonce rivale : la nouvelle qu'un autre Seigneur (kyrios — vous vous souvenez de l'unité 9 ?) a été intronisé. La croix avait l'air d'une défaite. La résurrection l'a changée en euangelion. Et Paul affirme que cette annonce rivale est une puissance de Dieu pour le salut. Elle fait ce que l'euangelion de César n'a jamais fait. Elle sauve. Le mot grec oppose l'empire et le Christ dans le verset même où Luther a vu naître la Réforme. Romains 1:16 a plus de profondeur que le français seul ne le révèle. Euangelion ouvre ces profondeurs.
+Relisez maintenant le verset : « Car je n'ai point honte de l'Évangile: c'est une puissance de Dieu pour le salut de quiconque croit. » Voici ce que le mot porte désormais. Le monde romain avait son propre euangelion — la proclamation de la victoire impériale, l'annonce de l'anniversaire de César, la nouvelle d'un nouvel empereur sur le trône. Paul écrit cette lettre à Rome, la capitale impériale, et il emploie le même mot pour une annonce rivale : la nouvelle qu'un autre Seigneur (kyrios — vous vous souvenez de l'unité 9 ?) a été intronisé. La croix avait l'air d'une défaite. La résurrection l'a changée en euangelion. Et Paul affirme que cette annonce rivale est une puissance de Dieu pour le salut. Elle fait ce que l'euangelion de César n'a jamais fait. Elle sauve. Le mot grec oppose l'empire et le Christ dans le verset même où Luther a vu naître la Réforme. Romains 1:16 a plus de profondeur que le français seul ne le révèle. Euangelion ouvre ces profondeurs.
 
 > EN: Now reread the verse: "For I am not ashamed of the gospel of Christ: for it is the power of God unto salvation." Here is what the word now carries. The Roman world had its own euangelion — the proclamation of imperial victory, the announcement of Caesar's birthday, the news of a new emperor on the throne. Paul writes this letter to Rome, the imperial capital, and uses the same word for a rival announcement: the news that a different Lord (kyrios — remember Unit 9?) has been enthroned. The cross looked like defeat. The resurrection turned it into euangelion. And Paul claims this rival announcement is the power of God unto salvation. It does what Caesar's euangelion never did. It saves. The Greek word is doing imperial-versus-Christ work in the very verse Luther saw the Reformation in. Romans 1:16 is more layered than the English alone reveals. Euangelion opens those layers.
 
@@ -478,12 +488,12 @@ Certificat de ministère — seules les 20 questions à choix multiples comptent
 > EN: Certificate of Ministry — only the 20 multiple-choice count (need 18/20).
 
 **b086**  
-Master of Theology — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
+Th.M. — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
 
 > EN: Master of Theology — 20 multiple-choice (18/20) and 10 short-answer (9/10).
 
 **b087**  
-Master of Divinity — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
+M.Div. — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
 
 > EN: Master of Divinity — 20 multiple-choice (18/20) and 10 short-answer (9/10).
 
@@ -569,7 +579,7 @@ _Pourquoi :_ Au premier siècle, euangelion avait un poids impérial. C'était u
 ✓ B. basar (H1319, « annoncer une bonne nouvelle »)  
 · C. shalom (H7965, « paix »)  
 · D. ruach (H7307, « esprit »)  
-_Pourquoi :_ Le mot hébreu basar (H1319) signifie « annoncer une bonne nouvelle », et la Septante le traduit régulièrement par euangelizô. Ésaïe 52:7 (« Qu'ils sont beaux sur les montagnes, les pieds de celui qui apporte de bonnes nouvelles ») emploie basar ; la LXX le rend par euangelizomenou. Paul cite ce verset en Romains 10:15. Ésaïe 61:1 (« pour porter de bonnes nouvelles aux malheureux ») emploie aussi basar ; Jésus le lit en Luc 4:18 et se l'applique à lui-même. Le basar de l'Ancien Testament et l'euangelion du Nouveau Testament sont la même annonce en deux langues.  
+_Pourquoi :_ Le mot hébreu basar (H1319) signifie « annoncer une bonne nouvelle », et la Septante le traduit régulièrement par euangelizô. Ésaïe 52:7 (« Qu'ils sont beaux sur les montagnes, Les pieds de celui qui apporte de bonnes nouvelles ») emploie basar ; la LXX le rend par euangelizomenou. Paul cite ce verset en Romains 10:15. Ésaïe 61:1 (« pour porter de bonnes nouvelles aux malheureux ») emploie aussi basar ; Jésus le lit en Luc 4:18 et se l'applique à lui-même. Le basar de l'Ancien Testament et l'euangelion du Nouveau Testament sont la même annonce en deux langues.  
 > EN: What Hebrew Old Testament word does euangelizô translate in the Septuagint, especially in the famous 'good news on the mountains' passage of Isaiah 52:7? — ✓ basar (H1319, 'to announce good news')
 
 **8. Dans 1 Corinthiens 15:1–4, Paul donne sa définition la plus claire de l'euangelion. Selon ce passage, qu'est-ce que l'Évangile ?**  
@@ -665,7 +675,7 @@ _Pourquoi :_ L'image finale : Strong est un tournevis, la Parole est une épée.
 ✓ B. Plus de 130 occurrences (76 pour le nom + 54 pour les formes verbales)  
 · C. Exactement 7  
 · D. Plus de 5 000  
-_Pourquoi :_ Euangelion (G2098, le nom « bonne nouvelle ») apparaît 76 fois dans le NT. Euangelizô (G2097, le verbe « annoncer une bonne nouvelle ») apparaît 54 fois. Au total, plus de 130 occurrences. Cette famille de mots est très fréquente chez Paul (plus de 60 emplois), bien présente dans Matthieu et Marc, et elle culmine en Apocalypse 14:6 (« l'euangelion éternel »). Quand vous retracez un mot grec aussi courant à l'étape 4 d'une étude de mot, prenez un échantillon de cinq à dix versets stratégiques plutôt que de lire les 130.  
+_Pourquoi :_ Euangelion (G2098, le nom « bonne nouvelle ») apparaît 76 fois dans le NT. Euangelizô (G2097, le verbe « annoncer une bonne nouvelle ») apparaît 54 fois. Au total, plus de 130 occurrences. Cette famille de mots est très fréquente chez Paul (plus de 60 emplois), bien présente dans Matthieu et Marc, et elle culmine en Apocalypse 14:6 (« un Évangile éternel », en grec euangelion). Quand vous retracez un mot grec aussi courant à l'étape 4 d'une étude de mot, prenez un échantillon de cinq à dix versets stratégiques plutôt que de lire les 130.  
 > EN: Roughly how many total occurrences do euangelion (G2098) and euangelizô (G2097) combined have in the Greek New Testament? — ✓ Over 130 occurrences (76 noun + 54 verb forms)
 
 **20. Que se passe-t-il une fois que vous avez réussi l'examen de l'unité 11 ?**  
@@ -731,37 +741,37 @@ Modèle : 1. CHOISIR : on choisit un verset, puis le mot clé du verset, un nom 
 > EN: Walk through the six-step workflow for a word study, naming each step and what the workman does in it.
 
 **2. Racontez avec vos propres mots l'exemple développé sur euangelion. Que signifie ce mot grec, d'où vient-il, et comment éclaire-t-il Romains 1:16 ?**  
-Mots-clés : euangelion · évangile / evangile · bonne · nouvelle · annonce · césar / cesar · empereur · victoire · rome · paul · romains · 1:16 · kyrios · croix · résurrection / resurrection / ressuscit · bonne · nouvelle · évangile / evangile · annonce · césar / cesar · empereur · victoire · rome · paul · romains · croix · résurrection / resurrection / ressuscit  
+Mots-clés : euangelion · évangile / evangile · bonne · nouvelle · annonce · césar / cesar · empereur · victoire · rome · paul · romains · héraut / heraut · kyrios · croix · résurrection / resurrection / ressuscit · bonne · nouvelle · évangile / evangile · annonce · césar / cesar · empereur · victoire · rome · paul · puissance · croix · résurrection / resurrection / ressuscit  
 Modèle : Euangelion (G2098) est le mot grec pour « évangile » : eu- (« bon ») + angelion (« message, annonce »), de angelos, messager. C'est donc la « bonne annonce », la bonne nouvelle. Dans le grec classique, c'était un mot de héraut pour proclamer une victoire militaire ou l'avènement d'un nouvel empereur ; la naissance et les victoires de César étaient annoncées comme euangelion. Quand Paul écrit aux Romains, dans la capitale impériale, « je n'ai point honte de l'Évangile » (Romains 1:16), il prend le vocabulaire de César pour une annonce rivale : un autre Seigneur (kyrios) a été intronisé. La croix avait l'air d'une défaite, mais la résurrection l'a changée en victoire. Cet euangelion fait ce que celui de César n'a jamais fait : il est une puissance de Dieu pour le salut.
 
 > EN: Tell the worked example of euangelion in your own words. What does this Greek word mean, where does it come from, and how does it light up Romans 1:16?
 
 **3. Expliquez comment le mot hébreu basar (H1319), dans Ésaïe 52:7 et Ésaïe 61:1, est lié au grec euangelion du Nouveau Testament. Pourquoi est-ce important ?**  
-Mots-clés : basar · ésaïe / esaie / esaïe / isaïe / isaie · 52:7 · 61:1 · septante / septuaginte · lxx · euangeliz / évangélis / evangelis · bonne · nouvelle · paul · romains · 10:15 · luc 4 / de luc / selon luc · 4:18 · jésus / jesus · septante / septuaginte · euangeliz / évangélis / evangelis · bonne · nouvelle · paul · romains · luc 4 / de luc / selon luc · jésus / jesus  
+Mots-clés : basar · ésaïe / esaie / esaïe / isaïe / isaie · synagogue · prophè / prophe · septante / septuaginte · lxx · euangeliz / évangélis / evangelis · bonne · nouvelle · paul · romains · 10:15 · luc 4 / de luc / selon luc · 4:18 · jésus / jesus · septante / septuaginte · euangeliz / évangélis / evangelis · bonne · nouvelle · paul · romains · luc 4 / de luc / selon luc · jésus / jesus  
 Modèle : Le verbe hébreu basar (H1319) signifie « annoncer une bonne nouvelle ». Dans Ésaïe 52:7, « les pieds de celui qui apporte de bonnes nouvelles » traduisent basar, et la Septante (LXX) le rend par euangelizomenou, une forme de euangelizô. Paul cite ce verset en Romains 10:15 pour montrer que la prédication de l'Évangile est l'œuvre des hérauts du Messie annoncée par les prophètes. Dans Ésaïe 61:1, « pour porter de bonnes nouvelles aux malheureux » est encore basar, rendu dans la LXX par euangelisasthai ; Jésus lit ce texte dans la synagogue en Luc 4:18 et déclare qu'il s'accomplit en lui. C'est important parce que l'euangelion du Nouveau Testament n'est pas un mot neuf : c'est le même mot que le basar de l'Ancien Testament, en deux langues. Sept cents ans d'attente prophétique se déversent dans ce nom grec.
 
 > EN: Explain how the Hebrew word basar (H1319) in Isaiah 52:7 and Isaiah 61:1 is connected to the Greek euangelion in the New Testament. Why does this matter?
 
-**4. Qu'enseigne Hébreux 4:12 (zôn + energês) sur la Parole de Dieu, et qu'est-ce que cela signifie pour la manière dont nous utilisons les numéros Strong ?**  
-Mots-clés : hébreux / hebreux · 4:12 · zôn / zon · energ / énerg · vivant · actif / active / agiss / à l'œuvre / a l oeuvre · efficace · parole · épée / epee · tournevis · outil · lame · lire / lisez / lit le · lecteur · hébreux / hebreux · vivant · efficace · parole · épée / epee · tournevis · outil · lame · lecteur  
+**4. Qu'enseigne Hébreux 4:12 sur l'Écriture, et qu'est-ce que cela signifie pour la manière dont nous utilisons les numéros Strong ?**  
+Mots-clés : hébreux / hebreux · 4:12 · zôn / zon · energ / énerg · vivant · actif / active / agiss / à l'œuvre / a l oeuvre · efficace · parole · épée / epee · tournevis · outil · lame · lire / lisez / lit le · lecteur · remplac · vivant · efficace · parole · épée / epee · tournevis · outil · lame · lecteur  
 Modèle : Hébreux 4:12 dit que la parole de Dieu est vivante (zôn, participe présent de zaô : vivante, qui respire) et efficace (energês : active, à l'œuvre, produisant son effet). La Parole ne contient pas seulement une vérité vivante ; elle est vivante. Plus tranchante qu'une épée à deux tranchants, elle pénètre, partage et juge les pensées du cœur : la Parole lit le lecteur. Pour les numéros Strong, cela veut dire que l'outil ne doit jamais remplacer la Parole. Strong est un tournevis ; la Parole est l'épée. Le tournevis aide à ajuster la poignée, mais il ne remplace pas la lame. Le travail dans les langues originales sert la lecture quotidienne de la Bible ; il ne la remplace pas.
 
 > EN: What does Hebrews 4:12 (zôn + energês) teach about the Word of God, and what does this mean for how we use Strong's numbers?
 
-**5. Décrivez les exigences exactes du travail de synthèse (étude de mot) : le choix du mot, la longueur, les six étapes et la remise du travail.**  
+**5. Décrivez exactement ce qui est demandé pour le travail final de ce cours : le choix du terme, la longueur, les six points demandés et la manière de le rendre.**  
 Mots-clés : synthèse / synthese · un mot / mots / du mot · étude / etude · 800 · étape / etape · strong · grec · hébreu / hebreu · logos · agapê / agape · charis · pneuma · pistis · sôzô / sozo · dikaiosynê / dikaiosyne · kyrios · wayne · andi · remett / remis / soumett · synthèse / synthese · un mot / mots / du mot · étude / etude · étape / etape · strong · grec · hébreu / hebreu · remett / remis / soumett  
 Modèle : Il faut choisir un mot grec du Nouveau Testament, de préférence un mot des unités 5 à 9 : logos, agapê, charis, pneuma, pistis, sôzô, dikaiosynê, kyrios, ou l'un des mots hébreux de l'unité 5 ; tout autre mot grec ou hébreu doit être approuvé d'avance par Wayne. L'étude compte environ 800 mots (entre 750 et 900) et couvre les six étapes : le verset choisi et la raison du choix du mot ; le numéro Strong et l'article du lexique (Strong + Thayer ou BDB) ; l'éventail des sens et l'étymologie ; un parcours de 5 à 10 occurrences représentatives ; l'arrière-plan hébreu dans la Septante, s'il y a lieu ; et la relecture du verset de départ. On la remet à Wayne avant la date limite qu'il annonce.
 
 > EN: Describe the exact requirements of the capstone word study assignment: word choice, length, the six steps, and submission.
 
-**6. En regardant en arrière sur le cours en onze unités, résumez le parcours : nommez le sujet principal de chaque grand bloc d'unités (1–2, 3–5, 6–9, 10, 11).**  
+**6. Résumez le cours de onze unités dans son ensemble : nommez le sujet principal de chaque grand bloc (1–2, 3–5, 6–9, 10, 11).**  
 Mots-clés : textuel · histoire · hébreu / hebreu · alphabet · grec · un mot / mots · strong · synthèse / synthese · étude / etude · parcours / voyage / chemin · textuel · histoire · alphabet · grec · hébreu / hebreu · un mot / mots · synthèse / synthese · synthèse / synthese · parcours / voyage / chemin · unité / unite  
 Modèle : Unités 1–2 : l'histoire textuelle de la Bible, du souffle de Dieu jusqu'à nos mains, par les scribes hébreux, les copistes grecs, Jérôme, Wycliffe, Tyndale, la Réforme et les traductions modernes. Unités 3–5 : l'alphabet hébreu (22 consonnes, lecture de droite à gauche) puis les trésors des mots hébreux : hesed, shalom, ruach, dabar. Unités 6–9 : l'alphabet grec, la lecture de Jean 1:1, puis les grands mots grecs de Jean (logos, agapê, charis, pneuma) et de Romains (pistis, sôzô, dikaiosynê, kyrios). Unité 10 : les numéros Strong sur papier, téléphone et internet. Unité 11 : la première étude de mot complète, le travail de synthèse. Tout ce parcours conduit de la curiosité à la capacité d'ouvrir soi-même n'importe quel mot de l'Écriture.
 
 > EN: Looking back at the eleven-unit course, summarize the journey: name the major topic of each major block of units (1–2, 3–5, 6–9, 10, 11).
 
-**7. Appliquez la thèse de ce cours (« un seul Livre, un seul Auteur, un seul Thème, un seul Héros ») aux mots que vous avez étudiés dans ce cours. Comment avez-vous vu le Christ dans ces mots ?**  
-Mots-clés : mears · christ · héros / heros · un seul / une seule · livre · auteur · thème / theme · aleph · tav · alpha · oméga / omega · logos · agapê / agape · charis · pneuma · pistis · sôzô / sozo · dikaiosynê / dikaiosyne · kyrios · christ · héros / heros · un seul / une seule · livre · auteur · thème / theme  
+**7. Appliquez la thèse centrale de ce cours aux mots que vous avez étudiés tout au long du cours. Comment avez-vous vu le Christ dans ces mots ?**  
+Mots-clés : mears · christ · héros / heros · un seul / une seule · livre · auteur · thème / theme · aleph · tav · alpha · oméga / omega · logos · agapê / agape · charis · pneuma · pistis · sôzô / sozo · dikaiosynê / dikaiosyne · kyrios · croix · héros / heros · un seul / une seule · livre · auteur · thème / theme  
 Modèle : La Bible est un seul Livre, d'un seul Auteur, sur un seul Thème, à propos d'un seul Héros : le Christ. Je l'ai vu dans l'Aleph-Tav hébreu et dans l'Alpha-Oméga grec, le Premier et le Dernier. Je l'ai vu dans le Logos, la Parole faite chair ; dans l'agapê, l'amour qui l'a conduit à la croix ; dans la charis, la grâce qu'il apporte ; dans le pneuma, l'Esprit qu'il envoie. Dans Romains, je l'ai vu dans la pistis, la foi qui le reçoit ; dans sôzô, le salut qu'il opère ; dans la dikaiosynê, la justice qu'il accorde ; et dans kyrios, la seigneurie qu'il revendique. Chaque mot était une fenêtre ouverte sur son visage : un seul Héros, beaucoup de langues.
 
 > EN: Apply the thesis of this course ('one Book, one Author, one Theme, one Hero') to the words you have studied across this course. How did you see Christ in the words?
@@ -772,14 +782,14 @@ Modèle : Premièrement, continuer à le faire : un ouvrier revient à l'établi
 
 > EN: State the closing three-fold charge of Unit 11 in your own words.
 
-**9. Pourquoi est-il important de choisir, pour votre travail de synthèse, un mot qui vous tient vraiment à cœur ? Quelle est la différence entre une étude de mot mécanique et une étude faite avec un amour sincère pour le texte ?**  
+**9. Pourquoi est-il important de choisir, pour votre travail final, un mot qui vous touche personnellement ? Quelle différence y a-t-il entre une étude de mot faite par simple obligation et une étude faite par attachement véritable au texte ?**  
 Mots-clés : cœur / coeur · amour · intérê / interet / intéress / interess · mécani / mecani · wayne · andi · lire / lisez / lit le · lisible · passion · sincère / sincere / authenti · christ · la vie / vie chrétienne / vie chretienne · cœur / coeur · amour · intérê / interet / intéress / interess · mécani / mecani · lire / lisez / lit le · lisible · passion · sincère / sincere / authenti · christ · la vie / vie chrétienne / vie chretienne  
 Modèle : Un mot qui me tient à cœur me pousse à chercher vraiment à comprendre quelque chose de profond sur le Christ ou sur la vie chrétienne. Une telle étude, faite par amour et avec un intérêt sincère, est vivante et agréable à lire. Une étude faite seulement parce que le devoir l'exige sonne mécanique, et Wayne fait la différence en deux paragraphes. La passion pour le texte se voit dans l'écriture : elle transforme d'abord ma propre lecture de l'Écriture, puis celle de mon assemblée.
 
 > EN: Why is it important to choose a word you actually care about for your capstone assignment? What is the difference between a mechanical word study and one done with genuine love for the text?
 
-**10. En pensant à votre lecture quotidienne de la Bible APRÈS la fin de ce cours, rédigez un paragraphe personnel : quel est le SEUL changement dans vos habitudes de lecture que vous vous engagez à faire désormais, et quelle place les numéros Strong y auront-ils ?**  
-Mots-clés : chaque jour / quotidien · lecture · engage · un mot / mots · strong · cherch · un seul / une seule · étude / etude / étudi / etudi · change · avenir / désormais / desormais / futur · habitude · blue · letter · bible · chaque jour / quotidien · lecture · engage · un mot / mots · strong · cherch · un seul / une seule · étude / etude / étudi / etudi · change · avenir / désormais / desormais / futur · habitude  
+**10. Pensez à votre temps personnel dans l'Écriture APRÈS la fin de ce cours, et rédigez un paragraphe personnel : quelle est la SEULE nouvelle pratique que vous adopterez, et quel rôle y joueront les numéros Strong ?**  
+Mots-clés : chaque jour / quotidien · lecture · engage · un mot / mots · strong · cherch · un seul / une seule · étude / etude / étudi / etudi · change · avenir / désormais / desormais / futur · habitude · blue · letter · bible · chaque jour / quotidien · lecture · engage · un mot / mots · sermon / prédic / predic / assemblée / assemblee · cherch · un seul / une seule · étude / etude / étudi / etudi · change · avenir / désormais / desormais / futur · habitude  
 Modèle : Le seul changement auquel je m'engage, c'est de chercher chaque jour un mot dans Strong pendant ma lecture quotidienne de la Bible. Désormais, à chaque lecture, je choisirai un mot clé du passage, je toucherai ce mot dans Blue Letter Bible pour trouver son numéro Strong, je lirai l'article du lexique et je suivrai quelques autres occurrences. Cette nouvelle habitude ne remplacera pas ma lecture ; elle la servira. À l'avenir, j'étudierai ainsi un mot par jour, pour mes sermons et pour nourrir mon assemblée.
 
 > EN: Looking ahead to your daily Bible reading AFTER this course is finished, write a personal paragraph: what is the ONE change in your reading habits you will commit to going forward, and how will Strong's numbers fit into it?

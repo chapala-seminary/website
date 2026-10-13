@@ -14,6 +14,16 @@ Counts: 76 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 4. 2 Timothy 2:15: the lesson explains the KJV word 'study', but it quotes the NKJV ('Be diligent'). LSG says « Efforce-toi … dispense droitement ». b016, MC4 and MC5 were adjusted to name both the KJV and the LSG wording. Please confirm.
 5. [check] The 'Adapting to Congo' question above had been wrongly tagged '[Resolved: answer keys…]'; that tag only applies to the answer-key item, so the tag was removed and the question is open again.
 
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+- SA2: English prompt passes its own keywords
+- SA3: English prompt passes its own keywords
+- SA6: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -406,12 +416,12 @@ Certificat de ministère — seules les 20 questions à choix multiples comptent
 > EN: Certificate of Ministry — only the 20 multiple-choice count (need 18/20).
 
 **b075**  
-Master of Theology — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
+Th.M. — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
 
 > EN: Master of Theology — 20 multiple-choice (18/20) and 10 short-answer (9/10).
 
 **b076**  
-Master of Divinity — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
+M.Div. — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
 
 > EN: Master of Divinity — 20 multiple-choice (18/20) and 10 short-answer (9/10).
 
@@ -638,19 +648,19 @@ Réponse : **Bérée** · aussi acceptées : Berea
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
 **1. Racontez l'histoire de James Strong et de sa Concordance exhaustive. Combien de temps le projet a-t-il pris, quand a-t-il été publié, et pourquoi est-ce important ?**  
-Mots-clés : strong · drew · séminaire / seminaire · 1890 · vingt · vingt-sept / vingt sept / 27 · années / annees · concordance · anglais · grec · hébreu / hebreu · numéro / numero · laïc / laic / laïque / laique · strong · drew · séminaire / seminaire · 1890 · vingt-sept / vingt sept / 27 · années / annees · concordance · grec · hébreu / hebreu · numéro / numero · laïc / laic / laïque / laique  
+Mots-clés : strong · drew · séminaire / seminaire · 1890 · vingt · vingt-sept / vingt sept / 27 · années / annees · concordance · anglais · grec · hébreu / hebreu · numéro / numero · laïc / laic / laïque / laique · bénévol / benevol / assistant · drew · séminaire / seminaire · 1890 · vingt-sept / vingt sept / 27 · années / annees · king james / kjv · grec · hébreu / hebreu · numéro / numero · laïc / laic / laïque / laique  
 Modèle : En 1863, James Strong, professeur méthodiste d'hébreu et de grec au Drew Theological Seminary, dans le New Jersey, entreprit de faire remonter chaque mot anglais de la Bible King James jusqu'au mot hébreu ou grec qui se trouve derrière. Il travailla le soir et le week-end, avec plus de cent assistants bénévoles, pendant vingt-sept années. La Concordance exhaustive fut publiée en 1890. Elle donnait à chaque mot hébreu (H1 à H8674) et à chaque mot grec (G1 à G5624) un numéro unique, avec deux dictionnaires à la fin. C'est important parce que, pour la première fois, n'importe quel laïc pouvait trouver le sens du mot original sans aller au séminaire : le mur entre le séminaire et le peuple de Dieu était tombé.
 
 > EN: Tell the story of James Strong and his Exhaustive Concordance. How long did the project take, when was it published, and why does it matter?
 
-**2. Expliquez le système de numérotation de Strong. Que signifie le préfixe H ou G, et quelle est la série de numéros pour chaque langue ?**  
+**2. Expliquez le système de classement de Strong. Que signifie le H ou le G placé devant chaque nombre, et de combien à combien vont les nombres pour chaque langue ?**  
 Mots-clés : hébreu / hebreu · grec · lettre h / h pour / h signifie / h indique / h1 · lettre g / g pour / g signifie / g indique / g1 · préfixe / prefixe · h1 / g1 / partir de 1 · 8674 · 5624 · numéro / numero · unique · langue · hébreu / hebreu · grec · préfixe / prefixe · numéro / numero · unique · langue  
 Modèle : Strong attribue à chaque mot hébreu et à chaque mot grec de la Bible un numéro unique. Le préfixe indique la langue : la lettre H signifie hébreu (Ancien Testament) et la lettre G signifie grec (Nouveau Testament). Les mots hébreux vont de H1 (av, « père ») à H8674 ; les mots grecs vont de G1 (Alpha) à G5624. Ainsi G25 renvoie toujours au même mot grec, agapaô, quelle que soit la langue de votre Bible : le numéro ne dépend d'aucune langue.
 
 > EN: Explain Strong's numbering system. What does the H or G prefix mean, and what is the range of numbers for each language?
 
-**3. Faites une recherche Strong d'exemple : prenez Jean 3:16 (« Car Dieu a tant aimé le monde »), suivez les quatre étapes et dites ce que vous découvrez sur le mot grec traduit par « aimé ».**  
-Mots-clés : jean · 3:16 · aimé / aime · g25 · agapaô / agapao / agapaō · agapê / agape / agapè · sacrifi · amour · grec · numéro / numero · lexique / lexicon · jean · aimé / aime · agapê / agape / agapè · sacrifi · amour · grec · numéro / numero · lexique / lexicon  
+**3. Faites une recherche Strong d'exemple : prenez Jean 3:16 (« Car Dieu a tant aimé le monde »), suivez les quatre étapes et dites ce que vous découvrez sur le mot original traduit par « aimé ».**  
+Mots-clés : jean · concordance · aimé / aime · g25 · agapaô / agapao / agapaō · agapê / agape / agapè · sacrifi · amour · grec · numéro / numero · lexique / lexicon · dictionnaire · verbe / verbal · agapê / agape / agapè · sacrifi · amour · grec · numéro / numero · lexique / lexicon  
 Modèle : Première étape : je cherche le mot « aimé » dans la concordance principale. Deuxième étape : je parcours la liste jusqu'à Jean 3:16. Troisième étape : je note le numéro de Strong imprimé à côté : G25 (G pour grec). Quatrième étape : je me reporte au dictionnaire grec à la fin, à l'entrée G25 du lexique. J'y découvre le verbe agapaô, la forme verbale du nom agapê : l'amour qui se donne et se sacrifie, le même amour par lequel le Christ nous commande d'aimer nos ennemis. Sans le numéro, je n'aurais pas su lequel des mots grecs pour l'amour se trouve derrière « aimé ».
 
 > EN: Walk through a sample Strong's lookup: take John 3:16 ('For God so loved the world'), follow the four steps, and report what you discover about the Greek word for 'loved.'
@@ -662,19 +672,19 @@ Modèle : Première forme : le papier, c'est-à-dire la Concordance exhaustive o
 > EN: Name the three forms in which Strong's numbers can be used today, and give one specific tool or example for each form.
 
 **5. Expliquez avec vos propres mots le sophisme de la racine et donnez un exemple de la façon dont il peut produire un sermon faux.**  
-Mots-clés : racine · étymolog / etymolog · dynamis · dynamite · puissance · original / originel · contexte · époque / epoque / période / periode · dériv / deriv · erreur · sophisme / erreur · racine · étymolog / etymolog · dynamite · puissance · original / originel · contexte · dériv / deriv · erreur · sophisme / erreur  
+Mots-clés : racine · étymolog / etymolog · dynamis · dynamite · puissance · original / originel · contexte · époque / epoque / période / periode · dériv / deriv · erreur · sophisme / erreur · emploi / usage · étymolog / etymolog · dynamite · puissance · original / originel · contexte · dériv / deriv · erreur · 1867 / inventé / invente  
 Modèle : Le sophisme de la racine est l'erreur qui consiste à croire que le sens originel de la racine d'un mot, son étymologie, est ce que le mot veut vraiment dire dans n'importe quel passage. Exemple : un prédicateur annonce « l'Église, c'est de la dynamite ! » à partir de dynamis en Actes 1:8, parce que le mot dynamite en est dérivé. Mais la dynamite n'a été inventée qu'en 1867 ; au premier siècle, dynamis signifiait simplement « puissance, capacité », sans rien d'explosif. Le sens d'un mot se décide par son emploi à son époque et dans son contexte, non par son origine.
 
 > EN: Explain the root fallacy in your own words and give one example of how it can produce a wrong sermon.
 
-**6. Pourquoi le contexte l'emporte-t-il toujours sur l'étude des mots ? Expliquez pourquoi connaître le mot grec ne suffit pas, à lui seul, à établir le sens d'un verset.**  
+**6. Pourquoi le contexte l'emporte-t-il toujours sur l'étude des mots ? Expliquez pourquoi connaître le mot grec ne suffit pas, à lui seul, pour comprendre ce que dit un texte de l'Écriture.**  
 Mots-clés : contexte · éventail / eventail / gamme / étendue / etendue · sens / signification · lexique · totalit · transfert · auteur · passage · verset · un seul / une seule · contexte · éventail / eventail / gamme / étendue / etendue · sens / signification · lexique · totalit · transfert · auteur · passage · verset · un seul / une seule  
 Modèle : Le lexique ne donne que l'éventail des sens possibles d'un mot ; c'est le contexte qui indique lequel l'auteur voulait dire dans ce passage. Supposer qu'un mot signifie à la fois tout ce que le lexique énumère, c'est le transfert illégitime de totalité. Par exemple, sôzô peut signifier délivrer de la noyade, de la maladie, de la mort ou du péché, mais dans un verset donné il a généralement un seul de ces sens. Connaître le mot grec ouvre donc des possibilités ; seul le contexte du verset tranche.
 
 > EN: Why does context still trump word study? Explain why knowing the Greek word does not by itself solve the meaning of a verse.
 
-**7. Retracez la longue tradition qui a rendu l'Écriture accessible à tous, de Wycliffe à Tyndale, puis à Cruden et à Strong, et expliquez la place de Strong dans cette lignée.**  
-Mots-clés : wycliffe · tyndale · cruden · strong · anglais · bible · laïc / laic / laïque / laique · séminaire / seminaire · le mur / muraille / un mur · démocratis / democratis · tradu · concordance · wycliffe · tyndale · cruden · strong · bible · laïc / laic / laïque / laique · séminaire / seminaire · le mur / muraille / un mur · démocratis / democratis · tradu · concordance  
+**7. Retracez la longue tradition qui a rendu l'Écriture accessible à tous, de Wycliffe jusqu'à Strong en passant par les étapes intermédiaires, et expliquez la place de Strong dans cette lignée.**  
+Mots-clés : wycliffe · tyndale · cruden · strong · anglais · bible · laïc / laic / laïque / laique · séminaire / seminaire · le mur / muraille / un mur · démocratis / democratis · tradu · concordance · martyr · tyndale · cruden · imprim · bible · laïc / laic / laïque / laique · séminaire / seminaire · le mur / muraille / un mur · démocratis / democratis · tradu · concordance  
 Modèle : Dans les années 1380, Wycliffe a traduit toute la Bible en anglais pour que chaque paysan puisse la lire. Dans les années 1520, Tyndale a traduit et imprimé le Nouveau Testament anglais ; il fut martyrisé en 1536, et sa prière fut exaucée par la Grande Bible de 1539. En 1737, Cruden a compilé la première grande concordance anglaise. En 1890, Strong a franchi l'étape suivante : sa concordance a donné au laïc l'accès aux mots hébreux et grecs eux-mêmes. Chaque génération a démocratisé un peu plus l'Écriture et entamé le mur entre le séminaire et le croyant ordinaire ; Strong a été le plus gros marteau de cette lignée.
 
 > EN: Trace the long tradition of democratizing Scripture from Wycliffe through Tyndale to Cruden to Strong, and explain Strong's place in this line.
@@ -685,14 +695,14 @@ Modèle : 1) Blue Letter Bible (blueletterbible.org) : on passe la souris sur un
 
 > EN: List four free internet tools (websites) where a student can use Strong's numbers today, and say what each one is especially good at.
 
-**9. Expliquez l'attitude des Béréens (Actes 17:11) et comment les numéros de Strong font de chaque laïc un Béréen.**  
-Mots-clés : béréen / bereen · actes · 17:11 · anakrinô / anakrino · examin · enquêt / enquet / investig · contre interrog · écriture / ecriture · paul · vérifi / verifi / contrôl / control · vérifi / verifi · laïc / laic / laïque / laique · laïcs / laics / fidèles / fideles · strong · béréen / bereen · actes · examin · enquêt / enquet / investig · écriture / ecriture · paul · vérifi / verifi · laïc / laic / laïque / laique  
+**9. Expliquez l'attitude des habitants de Bérée (Actes 17:11) et comment les numéros de Strong permettent à chaque croyant ordinaire d'adopter la même attitude.**  
+Mots-clés : béréen / bereen · actes · chaque jour / quotidien · anakrinô / anakrino · examin · enquêt / enquet / investig · contre interrog · écriture / ecriture · paul · vérifi / verifi / contrôl / control · vérifi / verifi · laïc / laic / laïque / laique · laïcs / laics / fidèles / fideles · strong · béréen / bereen · tribunal · examin · enquêt / enquet / investig · écriture / ecriture · paul · vérifi / verifi · laïc / laic / laïque / laique  
 Modèle : En Actes 17:11, les Béréens reçurent la parole de Paul avec empressement, mais ils examinaient chaque jour les Écritures pour voir si ce qu'on leur disait était exact. Le verbe grec est anakrinô (G350), un verbe de tribunal : examiner avec soin, enquêter, contre-interroger. Ils aimaient Paul, mais ils vérifiaient même sa prédication à la lumière du texte inspiré. Les numéros de Strong donnent cet outil à chaque laïc : il n'a plus besoin de croire un prédicateur sur parole quant à ce que dit le grec ; il peut le vérifier lui-même. Les fidèles deviennent ainsi des Béréens.
 
 > EN: Explain the Berean attitude (Acts 17:11) and how Strong's numbers make every layperson a Berean.
 
-**10. Activité du cahier (Unité 10) : choisissez un verset de Romains 5 et faites dans votre cahier une brève étude de mot avec Strong. Indiquez (a) quel verset et quel mot vous avez choisis, (b) le numéro de Strong, (c) le sens donné par le lexique, et (d) comment le fait de voir les autres emplois du même mot a changé ou approfondi votre lecture du verset.**  
-Mots-clés : romains · verset · le mot / un mot / mots · strong · numéro / numero · lexique · lecture · chang · approfondi · occurrence / emploi · romains · verset · le mot / un mot / mots · numéro / numero · lexique · lecture · chang · approfondi · occurrence / emploi  
+**10. Activité du cahier (Unité 10) : choisissez un passage de Romains 5 et faites dans votre cahier une brève étude de mot avec Strong. Indiquez (a) le passage et le terme choisis, (b) son code Strong, (c) ce qu'en dit le dictionnaire grec, et (d) en quoi ses autres apparitions dans la Bible ont modifié ou enrichi votre compréhension du passage.**  
+Mots-clés : romains · verset · le mot / un mot / mots · strong · numéro / numero · lexique · lecture · chang · approfondi · occurrence / emploi · défini / defini · verset · le mot / un mot / mots · numéro / numero · lexique · lecture · chang · approfondi · occurrence / emploi  
 Modèle : (a) J'ai choisi Romains 5:5, et le mot « amour » : « l'amour de Dieu est répandu dans nos cœurs ». (b) Le numéro de Strong est G26, agapê. (c) Le lexique le définit comme l'amour qui se donne, l'amour de bienveillance. (d) En lisant les autres occurrences de G26 dans Romains (par exemple Romains 5:8, 8:35, 8:39 et 13:10), j'ai vu que cet amour est d'abord celui que Dieu a démontré envers nous à la croix, et dont rien ne peut nous séparer. Cela a approfondi ma lecture de Romains 5:5 : ce qui est répandu dans nos cœurs n'est pas un sentiment, mais l'amour même de Dieu, donné par le Saint-Esprit.
 
 > EN: Notebook activity (Unit 10): Pick a verse from Romans 5 and walk through a brief Strong's word study in your notebook. Describe (a) which verse and which English word you chose, (b) the Strong's number, (c) the lexicon meaning, and (d) how seeing the other uses of the same word changed or deepened your reading of the verse.

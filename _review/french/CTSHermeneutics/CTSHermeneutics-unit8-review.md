@@ -13,7 +13,17 @@ Counts: 56 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 3. Noms bibliques : j'ai suivi les graphies LSG (Jizreel, Lo-Ruchama, Naomi, Machlon, Kiljon, Bethléhem) plutôt que les formes courantes « Noémi », « Jezreel ». D'accord ?
 4. Bloc b002 (bouton de langue) : laissé « Español ». Sur la page française, faut-il plutôt « English / Español » ?
 5. QCM 6 (Exode 21:32, trente sicles) et QCM 11 (Boaz qui « couvre » Ruth et « paie le prix ») : les explications citent des éléments que la leçon n'enseigne pas. À ajouter à la leçon ou à alléger ?
-6. [check] Track name in b006 is not consistent across the French course: units 6, 7, 10 say « Parcours Certificat », units 3, 4, 5, 8, 11 say « Certificat de ministère », units 2 and 9 say « Parcours Certificat de ministère ». The 📚 Catalogue button also varies (« Catalogue » vs « Catalogue / Catálogo »). Pick one wording for all units?
+
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+- SA3: English prompt passes its own keywords
+- SA4: English prompt passes its own keywords
+- SA5: English prompt passes its own keywords
+- SA6: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
 
 ## 2. Bible quotations (Louis Segond 1910)
 
@@ -24,17 +34,17 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
 - **Osée 1:4, 1:6, 1:9** — « Appelle-le du nom de Jizreel … Donne-lui le nom de Lo-Ruchama … Donne-lui le nom de Lo-Ammi; car vous n'êtes pas mon peuple, et je ne suis pas votre Dieu. »  
   _Vérifié en ligne. Graphies LSG utilisées (Jizreel, Lo-Ruchama, Lo-Ammi) au lieu de Jezreel/Lo-Ruhamah. Les sens donnés (Dieu dispersera, pas de pitié, pas mon peuple) sont les gloses de l'auteur, non citées._
 - **Osée 3:1** — « L'Éternel me dit: Va encore, et aime une femme aimée d'un amant, et adultère; aime-la comme l'Éternel aime les enfants d'Israël… »  
-  _Vérifié en ligne. La leçon paraphrase (« Va encore, et aime cette femme ») ; traduit comme paraphrase en italique, sans guillemets LSG._
+  _Vérifié avec l'outil LSG hors ligne. La leçon (b022, b025) cite désormais Segond mot pour mot (« Va encore, et aime une femme aimée d'un amant, et adultère ») au lieu de la paraphrase « aime cette femme »._
 - **Osée 3:2** — « Je l'achetai pour quinze sicles d'argent, un homer d'orge et un léthec d'orge. »  
   _Vérifié en ligne. Non cité ; la leçon dit « un homer et demi d'orge » (un léthec = un demi-homer), cohérent avec LSG. Prix de référence : Exode 21:32 « trente sicles d'argent » (MC 6, explication), non vérifié en ligne._
 - **Ruth 1:2** — « Le nom de cet homme était Élimélec, celui de sa femme Naomi, et ses deux fils s'appelaient Machlon et Kiljon »  
   _Vérifié en ligne. Graphies LSG des noms utilisées partout (Naomi, Machlon, Kiljon, Bethléhem)._
 - **Ruth 1:20** — « Elle leur dit: Ne m'appelez pas Naomi; appelez-moi Mara, car le Tout-Puissant m'a remplie d'amertume. »  
-  _Vérifié en ligne. La leçon (b029, MC 9) paraphrase en traduisant les noms (« Plaisir », « Amère ») ; gardé comme paraphrase en italique, avec la fin du verset selon LSG._
+  _Vérifié avec l'outil LSG hors ligne. b029 et MC 9 citent Segond mot pour mot, puis ajoutent le sens hébreu littéral (« Ne m'appelez pas Plaisir ; appelez-moi Amère ») selon la convention 1._
 - **Ruth 4:17** — « Les voisines lui donnèrent un nom, en disant: Un fils est né à Naomi! Et elles l'appelèrent Obed. Ce fut le père d'Isaï père de David. »  
   _Vérifié en ligne. Anglais « Naomi has a son » rendu par la formule LSG « Un fils est né à Naomi! » (b030)._
-- **Psaumes 22:2 (22:1 dans les Bibles anglaises)** — « Mon Dieu! mon Dieu! pourquoi m'as-tu abandonné »  
-  _Vérifié en ligne. Numérotation LSG décalée d'un verset ; la leçon ne donne pas de numéro de verset. « abandonné » s'accorde avec « l'abandon divin » de la leçon._
+- **Psaumes 22:1** — « Mon Dieu! mon Dieu! pourquoi m'as-tu abandonné »  
+  _Vérifié avec l'outil LSG hors ligne (numérotation anglaise, convention 11 ; le titre du psaume fait partie du v. 1). La leçon ne donne pas de numéro de verset._
 - **Psaumes 23:1** — « L'Éternel est mon berger: je ne manquerai de rien. »  
   _Vérifié en ligne._
 - **Proverbes 22:6** — « Instruis l'enfant selon la voie qu'il doit suivre; Et quand il sera vieux, il ne s'en détournera pas. »  
@@ -84,17 +94,17 @@ Choisissez votre parcours
 > EN: Choose your track
 
 **b006**  
-Certificat de ministère : Vingt questions à choix multiples par unité. Réussite à 18 sur 20 (90 %).
+Parcours Certificat : Vingt questions à choix multiples par unité. Réussite à 18 sur 20 (90 %).
 
 > EN: Certificate of Ministry: Twenty multiple-choice questions per unit. Pass at 18 of 20 (90%).
 
 **b007**  
-Master of Divinity : Les mêmes vingt questions à choix multiples, plus dix questions à réponse courte. Réussite à 18 sur 20 aux questions à choix multiples et à 9 sur 10 aux réponses courtes, notées séparément.
+M.Div. : Les mêmes vingt questions à choix multiples, plus dix questions à réponse courte. Réussite à 18 sur 20 aux questions à choix multiples et à 9 sur 10 aux réponses courtes, notées séparément.
 
 > EN: Master of Divinity: Same twenty multiple-choice questions, plus ten short-answer questions. Pass at 18 of 20 multiple-choice and 9 of 10 short-answer, scored independently.
 
 **b008**  
-Master of Theology : Noté exactement comme le Master of Divinity — les mêmes vingt questions à choix multiples plus dix questions à réponse courte, avec réussite à 18 sur 20 aux questions à choix multiples et à 9 sur 10 aux réponses courtes, notées séparément.
+Th.M. : Noté exactement comme le M.Div. — les mêmes vingt questions à choix multiples plus dix questions à réponse courte, avec réussite à 18 sur 20 aux questions à choix multiples et à 9 sur 10 aux réponses courtes, notées séparément.
 
 > EN: Master of Theology: Graded exactly like the Master of Divinity — the same twenty multiple-choice questions plus ten short-answer questions, passing at 18 of 20 multiple-choice and 9 of 10 short-answer, scored independently.
 
@@ -104,12 +114,12 @@ Certificat
 > EN: Certificate
 
 **b010**  
-M.Div
+M.Div.
 
 > EN: M.Div
 
 **b011**  
-Th.M
+Th.M.
 
 > EN: Th.M
 
@@ -164,7 +174,7 @@ Certaines choses semblent impardonnables. Le livre d'Osée s'ouvre sur l'une d'e
 > EN: “Go, take yourself a wife of harlotry and children of harlotry, for the land has committed great harlotry by departing from the LORD.” (Hosea 1:2, NKJV)
 
 **b022**  
-Osée obéit. Il épouse Gomer, une prostituée. Ils ont trois enfants. Le premier s'appelle Jizreel, ce qui signifie Dieu dispersera. La deuxième s'appelle Lo-Ruchama, ce qui signifie pas de pitié. Le troisième s'appelle Lo-Ammi, ce qui signifie pas mon peuple. Gomer quitte Osée et retourne à son ancienne vie. Elle finit par se vendre comme esclave. Puis vient le second ordre, au chapitre trois : Va encore, et aime cette femme. Osée se rend au marché aux esclaves. Les esclaves étaient vendus nus sur l'estrade des enchères. La propre femme d'Osée se tient nue devant une cour remplie d'hommes bruyants. Osée entre dans les enchères. Il la rachète pour quinze pièces d'argent et un homer et demi d'orge — la moitié du prix normal d'une esclave. Le péché avait fait chuter ce qu'elle valait aux enchères. Il paie le prix, la ramène chez lui et l'aime de nouveau.
+Osée obéit. Il épouse Gomer, une prostituée. Ils ont trois enfants. Le premier s'appelle Jizreel, ce qui signifie Dieu dispersera. La deuxième s'appelle Lo-Ruchama, ce qui signifie pas de pitié. Le troisième s'appelle Lo-Ammi, ce qui signifie pas mon peuple. Gomer quitte Osée et retourne à son ancienne vie. Elle finit par se vendre comme esclave. Puis vient le second ordre, au chapitre trois : Va encore, et aime une femme aimée d'un amant, et adultère. Cette femme, c'est Gomer. Osée se rend au marché aux esclaves. Les esclaves étaient vendus nus sur l'estrade des enchères. La propre femme d'Osée se tient nue devant une cour remplie d'hommes bruyants. Osée entre dans les enchères. Il la rachète pour quinze pièces d'argent et un homer et demi d'orge — la moitié du prix normal d'une esclave. Le péché avait fait chuter ce qu'elle valait aux enchères. Il paie le prix, la ramène chez lui et l'aime de nouveau.
 
 > EN: Hosea obeys. He marries Gomer, a prostitute. They have three children. The first is named Jezreel, meaning God will scatter. The second is Lo-Ruhamah, meaning not pitied. The third is Lo-Ammi, meaning not My people. Gomer leaves Hosea and returns to her old life. She eventually sells herself into slavery. And then comes the second command in chapter three: Go again and love this woman. Hosea walks to the slave market. Slaves were sold naked on the auction block. Hosea’s own wife stands naked before a courtyard of rowdy men. Hosea enters the bidding. He buys her back for fifteen pieces of silver and a homer and a half of barley — half the normal price for a slave. Sin had taken its toll on what she fetched at auction. He pays the price, takes her home, and loves her again.
 
@@ -179,7 +189,7 @@ Posez la question du genre. Si Osée est une autobiographie, c'est l'histoire d�
 > EN: 4. What Hosea’s Genre Unlocks
 
 **b025**  
-Dès que vous reconnaissez le genre, chaque détail douloureux devient théologie. Gomer, c'est Israël. Osée, c'est Dieu. Israël s'est prostitué en courant après Baal et d'autres dieux. Les noms des enfants annoncent le jugement : Dieu dispersera, plus de pitié, pas mon peuple. La descente d'Israël dans l'esclavage spirituel, c'est la descente de Gomer dans l'esclavage réel. Le prix qu'Osée paie aux enchères est le prix que Dieu paie pour racheter un peuple infidèle. La phrase la plus dure du livre est le second ordre de Dieu : Va encore, et aime cette femme. Aucun cœur humain ne ferait cela. Aucun mari humain ne devrait y être obligé. Mais le genre nous dit pourquoi Dieu l'a exigé. Il prêchait son propre amour d'alliance à travers la vie brisée d'Osée. Dieu lui-même montrait par avance ce qu'il allait faire pour Israël.
+Dès que vous reconnaissez le genre, chaque détail douloureux devient théologie. Gomer, c'est Israël. Osée, c'est Dieu. Israël s'est prostitué en courant après Baal et d'autres dieux. Les noms des enfants annoncent le jugement : Dieu dispersera, plus de pitié, pas mon peuple. La descente d'Israël dans l'esclavage spirituel, c'est la descente de Gomer dans l'esclavage réel. Le prix qu'Osée paie aux enchères est le prix que Dieu paie pour racheter un peuple infidèle. La phrase la plus dure du livre est le second ordre de Dieu : Va encore, et aime une femme aimée d'un amant, et adultère. Aucun cœur humain ne ferait cela. Aucun mari humain ne devrait y être obligé. Mais le genre nous dit pourquoi Dieu l'a exigé. Il prêchait son propre amour d'alliance à travers la vie brisée d'Osée. Dieu lui-même montrait par avance ce qu'il allait faire pour Israël.
 
 > EN: Once you recognize the genre, every painful detail becomes theology. Gomer is Israel. Hosea is God. Israel has played the harlot, chasing after Baal and other gods. The children’s names announce judgment: God will scatter, no longer pitied, not My people. Israel’s descent into spiritual slavery is Gomer’s descent into literal slavery. The price Hosea pays at the auction is the price God pays to redeem an unfaithful people. The hardest line in the book is God’s second command: Go again, and love this woman. No human heart would do that. No human husband should be required to. But the genre tells us why God required it. He was preaching His own covenant love through Hosea’s broken life. God Himself was modeling what He was about to do for Israel.
 
@@ -199,7 +209,7 @@ Ouvrez le livre de Ruth, et vous voilà dans un tout autre genre. Pas d'action s
 > EN: Open the book of Ruth and you are in a different genre entirely. No symbolic action. No vision. No covenant lawsuit. Just a story. A famine drives a Bethlehem family to Moab. The father dies. The two sons marry Moabite women and die. Three widows are left. One returns to her people. The other — Ruth — clings to her mother-in-law and follows her back to Bethlehem, where she gleans in the field of a wealthy kinsman named Boaz. He notices her. He marries her. They have a son named Obed, who becomes the grandfather of King David. Four chapters. One love story. A whole theology of redemption.
 
 **b029**  
-Le récit est un vrai genre, avec de vraies règles. L'une de ces règles est que le narrateur n'annonce généralement pas la théologie à haute voix — il l'inscrit dans les noms, les détails, la structure. Regardez les noms. Élimélec signifie mon Dieu est Roi. Naomi signifie plaisir. Machlon signifie malade. Kiljon signifie dépérissement. Les fils de Plaisir s'appellent Malade et Dépérissement ; ce n'est pas un hasard. Ruth signifie beauté. Quand Naomi revient à Bethléhem, elle demande qu'on l'appelle Mara, qui signifie amère : ne m'appelez pas Plaisir ; appelez-moi Amère, car le Tout-Puissant m'a remplie d'amertume. Le narrateur prêche, mais il prêche à travers les noms, non par-dessus eux.
+Le récit est un vrai genre, avec de vraies règles. L'une de ces règles est que le narrateur n'annonce généralement pas la théologie à haute voix — il l'inscrit dans les noms, les détails, la structure. Regardez les noms. Élimélec signifie mon Dieu est Roi. Naomi signifie plaisir. Machlon signifie malade. Kiljon signifie dépérissement. Les fils de Plaisir s'appellent Malade et Dépérissement ; ce n'est pas un hasard. Ruth signifie beauté. Quand Naomi revient à Bethléhem, elle demande qu'on l'appelle Mara, qui signifie amère : Ne m'appelez pas Naomi; appelez-moi Mara, car le Tout-Puissant m'a remplie d'amertume. Le texte hébreu dit littéralement : « Ne m'appelez pas Plaisir ; appelez-moi Amère. » Le narrateur prêche, mais il prêche à travers les noms, non par-dessus eux.
 
 > EN: Narrative is a real genre with real rules. One rule is that the narrator usually does not announce the theology aloud — he embeds it in the names, the details, the structure. Look at the names. Elimelech means my God is King. Naomi means pleasure. Mahlon means sick. Chilion means pining away. Pleasure’s sons are sick and pining away; that is no accident. Ruth means beauty. When Naomi returns to Bethlehem she asks to be renamed Mara, meaning bitter: do not call me Pleasure; call me Bitter, because the Almighty has dealt bitterly with me. The narrator is preaching, but he preaches through the names, not above them.
 
@@ -234,7 +244,7 @@ La poésie hébraïque a sa propre grammaire. Les vers vont par paires parallèl
 > EN: Hebrew poetry has its own grammar. Lines come in parallel pairs — the second line restates, intensifies, or contrasts the first. Imagery is compressed. Emotion is given room to speak. Why have You forsaken me? in Psalm 22 is a poet’s cry, not a doctrinal statement about divine abandonment. The LORD is my shepherd, I shall not want in Psalm 23 is a metaphor; David is not literally a sheep. Read the Psalms as flat doctrinal propositions and you will preach abstractions where the Psalmist meant to wring tears. Read them as poetry — with image and feeling and form intact — and they will teach your people to pray.
 
 **b036**  
-La littérature de sagesse a, elle aussi, ses propres règles. Les proverbes sont des observations sur la manière dont le monde fonctionne habituellement sous le règne de Dieu. Ce ne sont pas des promesses absolues. Instruis l'enfant selon la voie qu'il doit suivre; et quand il sera vieux, il ne s'en détournera pas décrit une tendance générale. Ce n'est pas une garantie que des parents obéissants n'élèveront jamais d'enfants prodigues. Le genre des Proverbes exige du pasteur qu'il enseigne le proverbe et qu'il fasse aussi place à l'exception — sinon son peuple sera écrasé le jour où la vie montrera les limites du proverbe. L'Ecclésiaste avertit qu'il en est ainsi : la course n'est point aux agiles ni la guerre aux vaillants […]; car tout dépend pour eux du temps et des circonstances.
+La littérature de sagesse a, elle aussi, ses propres règles. Les proverbes sont des observations sur la manière dont le monde fonctionne habituellement sous le règne de Dieu. Ce ne sont pas des promesses absolues. Instruis l'enfant selon la voie qu'il doit suivre; Et quand il sera vieux, il ne s'en détournera pas décrit une tendance générale. Ce n'est pas une garantie que des parents obéissants n'élèveront jamais d'enfants prodigues. Le genre des Proverbes exige du pasteur qu'il enseigne le proverbe et qu'il fasse aussi place à l'exception — sinon son peuple sera écrasé le jour où la vie montrera les limites du proverbe. L'Ecclésiaste avertit qu'il en est ainsi : la course n'est point aux agiles ni la guerre aux vaillants […]; car tout dépend pour eux du temps et des circonstances.
 
 > EN: Wisdom literature has its own rules too. Proverbs are observations of how the world usually works under God’s rule. They are not absolute promises. Train up a child in the way he should go, and when he is old he will not depart from it describes a general pattern. It is not a guarantee that obedient parents will never raise prodigals. The genre of Proverbs requires the pastor to teach the proverb and also to make room for the exception — or his people will be crushed when life proves the proverb’s limits. Ecclesiastes warns this is so: The race is not to the swift, nor the battle to the strong; time and chance happen to them all.
 
@@ -411,7 +421,7 @@ _Pourquoi :_ Exact. Ruth est un récit — une histoire racontée comme théolog
 · B. Un surnom que lui donnèrent ses petits-enfants  
 · C. Une coutume hébraïque ancienne exigée à chaque funérailles  
 · D. Une erreur de traduction du texte original  
-_Pourquoi :_ Exact. « Ne m'appelez pas Plaisir ; appelez-moi Amère, car le Tout-Puissant m'a remplie d'amertume. » Dans le genre narratif, les noms portent la théologie. En changeant de nom, Naomi permet au narrateur de prêcher son chagrin à travers son nom lui-même.  
+_Pourquoi :_ Exact. « Ne m'appelez pas Naomi; appelez-moi Mara, car le Tout-Puissant m'a remplie d'amertume. » (Le texte hébreu dit littéralement : « Ne m'appelez pas Plaisir ; appelez-moi Amère. ») Dans le genre narratif, les noms portent la théologie. En changeant de nom, Naomi permet au narrateur de prêcher son chagrin à travers son nom lui-même.  
 > EN: In Ruth, Naomi asks to be renamed "Mara." The lesson explains this as: — ✓ A narrator's device — Naomi means "pleasure"; Mara means "bitter"; the change preaches theology through a name
 
 **10. La leçon décrit l'arc structurel de Ruth comme :**  
@@ -550,7 +560,7 @@ Réponse : **fable** · aussi acceptées : fables
 
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
-**1. Énoncez avec vos propres mots le principe central de cette unité, et expliquez pourquoi la question « quel genre d'écrit suis-je en train de lire ? » doit venir avant « qu'est-ce que cela signifie ? »**  
+**1. Énoncez avec vos propres mots le principe central de cette unité, et expliquez pourquoi la question « quel genre d'écrit ai-je sous les yeux ? » doit précéder la question du sens.**  
 Mots-clés : genre · détermin / determin · interprét / interpret · sorte / nature du texte / type de · lecture / lire / lisons / lisez · avant · signifi / veut dire · règle / regle  
 Modèle : Le principe central est que le genre détermine l'interprétation : la sorte d'écrit fixe les règles de sa lecture. « Quel genre d'écrit suis-je en train de lire ? » doit venir avant « qu'est-ce que cela signifie ? », parce que les mêmes mots ne signifient pas la même chose dans une loi, un poème, un proverbe ou un récit. Identifiez d'abord le genre, puis le sens.
 
@@ -562,49 +572,49 @@ Modèle : La leçon nomme six principaux genres bibliques : le récit, qui racon
 
 > EN: List the six main biblical genres named in this lesson, and briefly describe what makes each one distinct.
 
-**3. Expliquez pourquoi Osée doit être lu comme une PROPHÉTIE plutôt que comme une autobiographie, et ce que le genre prophétique ouvre dans le livre qu'une autobiographie laisserait échapper.**  
+**3. Expliquez pourquoi Osée doit être lu comme une PROPHÉTIE plutôt que comme le simple récit de la vie privée du prophète, et ce que cette façon de lire ouvre dans le livre qu'une lecture purement biographique laisserait échapper.**  
 Mots-clés : osée / osee · prophéti / propheti · symboli · mariage · israël / israel · sermon / prédication / predication · genre · autobiograph  
 Modèle : Osée doit être lu comme une prophétie, non comme une autobiographie. Son mariage avec Gomer est une action symbolique — un sermon mis en scène pour Israël — et pas seulement le mariage difficile d'un pasteur de l'Antiquité. Lu comme une autobiographie, il devient un débat sur la question de savoir si Dieu a dit à un homme d'épouser une prostituée. Lu dans son genre prophétique, chaque détail douloureux devient une théologie sur Dieu et sur l'Israël infidèle.
 
 > EN: Explain why Hosea must be read as PROPHECY rather than as autobiography, and what the prophetic genre unlocks in the book that autobiography would miss.
 
-**4. Retracez ce que le mariage d'Osée avec Gomer prêche théologiquement : nommez le rôle de Gomer, le rôle d'Osée, le sens des noms des enfants et ce que signifie le rachat au marché aux esclaves.**  
+**4. Retracez ce que le mariage d'Osée avec Gomer prêche théologiquement : le rôle de chacun des deux époux, le message des trois naissances du chapitre 1, et la signification du moment où Osée la reprend en payant un prix.**  
 Mots-clés : gomer · israël / israel · osée / osee · dieu · enfant · rachet / rachèt / rachat / rédemp / redemp · esclav · noms / nommé / nomme  
 Modèle : Le mariage d'Osée prêche une théologie. Gomer joue le rôle d'Israël, l'épouse infidèle ; Osée joue le rôle de Dieu, le mari fidèle. Les noms des enfants annoncent le jugement sur Israël. Et quand Osée rachète Gomer au marché aux esclaves, cela signifie que Dieu rachète son peuple de la servitude — qu'il reprend l'infidèle en payant un prix.
 
 > EN: Trace what Hosea's marriage to Gomer preaches theologically: name Gomer's role, Hosea's role, the meaning of the children's names, and what the redemption from the slave market signifies.
 
-**5. Expliquez pourquoi Ruth est présenté comme un récit théologique, et décrivez comment les noms (Élimélec, Naomi, Machlon, Kiljon, Ruth, Mara) portent la théologie du livre.**  
+**5. Expliquez à quel genre la leçon rattache le livre de Ruth et pourquoi, puis montrez comment le sens des appellations des personnages (Élimélec, Machlon, Kiljon…) porte le message du livre.**  
 Mots-clés : ruth · récit / recit / narrati · noms / nommé / nomme · naomi / noémi / noemi · mara · amère / amere / amertume · plaisir / plaisant / agréable / agreable · théolog / theolog  
 Modèle : Ruth est un récit théologique — une histoire qui prêche sans visions symboliques. Même les noms portent la théologie : Naomi signifie « plaisir », mais quand elle revient de Moab les mains vides, elle se nomme Mara, qui signifie « amère ». Le passage du plaisir à l'amertume, puis à la bénédiction, est la théologie de la rédemption racontée sous forme de récit.
 
 > EN: Explain why Ruth is identified as theological narrative, and describe how the names (Elimelech, Naomi, Mahlon, Chilion, Ruth, Mara) carry the theology of the book.
 
-**6. Décrivez l'arc structurel de Ruth (de Moab à Bethléhem) et expliquez comment la structure elle-même est la théologie dans le genre narratif.**  
+**6. Décrivez l'arc du livre de Ruth (de Moab à Bethléhem) et expliquez comment la forme même du récit constitue sa théologie dans le genre narratif.**  
 Mots-clés : moab · bethléhem / bethlehem / bethléem / bethleem · famine · morts / décès / deces · naissance · david · messie · structure  
 Modèle : La structure de Ruth est sa théologie. Le livre commence par une famine et trois morts en Moab et se termine par une naissance à Bethléhem — la famine devient abondance, l'amertume devient bénédiction. L'enfant qui naît est Obed, grand-père de David, dans la lignée du Messie. La forme même du récit, du vide à la plénitude, prêche la rédemption.
 
 > EN: Describe the structural arc of Ruth (from Moab to Bethlehem) and explain how the structure itself is the theology in narrative genre.
 
-**7. Comparez le fils prodigue (Luc 15) et Osée (Osée 1-3) pour montrer comment le même Évangile est prêché à travers deux genres différents. Identifiez la principale différence théologique entre les deux histoires.**  
+**7. Comparez le fils prodigue (Luc 15) et Osée (Osée 1-3) pour montrer comment le même message de salut est prêché à travers deux formes littéraires différentes. Identifiez la principale différence théologique entre les deux histoires.**  
 Mots-clés : prodigue · parabole · osée / osee · prophéti / propheti · amour / aime · rachet / rachèt / rachat / rédemp / redemp · genre · évangile / evangile  
 Modèle : Le fils prodigue (une parabole) et Osée (une prophétie) prêchent le même Évangile d'un amour fidèle qui reprend l'infidèle, mais à travers deux genres différents. La principale différence théologique est le prix montré : le père du prodigue court l'accueillir dans la grâce, tandis qu'Osée doit racheter Gomer au marché aux esclaves — le même amour rédempteur, raconté une fois en parabole, une fois en prophétie mise en scène.
 
 > EN: Compare the Prodigal Son (Luke 15) with Hosea (Hosea 1-3) to show how the same gospel is preached through two different genres. Identify the key theological difference between the two stories.
 
-**8. Expliquez le danger de lire la poésie hébraïque (les Psaumes) comme des propositions doctrinales plates, et décrivez ce que le genre poétique exige que le pasteur respecte.**  
+**8. Expliquez le danger de réduire la poésie hébraïque des Psaumes à une liste d'énoncés de doctrine, et décrivez ce que ce genre littéraire exige que le pasteur respecte.**  
 Mots-clés : poésie / poesie / poétique / poetique · parallél / parallel / parallèl · image · émotion / emotion · métaphor / metaphor · plat / aplati · proposition · psaume  
 Modèle : Lire la poésie hébraïque — les Psaumes — comme des propositions doctrinales plates, c'est passer à côté de sa manière de fonctionner. La poésie parle par vers parallèles qui reprennent et intensifient, par images condensées et par métaphores, et elle laisse de la place à l'émotion. Le genre poétique exige que le pasteur respecte le parallélisme, les images et le sentiment, au lieu d'aplatir un psaume en une liste de propositions.
 
 > EN: Explain the danger of reading Hebrew poetry (the Psalms) as flat doctrinal propositions, and describe what the poetic genre requires the pastor to honor.
 
-**9. Expliquez pourquoi les Proverbes ne doivent PAS être lus comme des promesses absolues, en prenant Proverbes 22:6 (« Instruis l'enfant… ») comme exemple. Quels dégâts pastoraux résultent d'une mauvaise lecture du genre ?**  
+**9. Expliquez pourquoi les Proverbes ne doivent PAS être lus comme des garanties inconditionnelles, en prenant Proverbes 22:6 (« Instruis l'enfant… ») comme exemple. Quel tort pastoral cause une mauvaise lecture du genre ?**  
 Mots-clés : proverbe · observation · général / general · promesse · exception · tendance / modèle / modele · absolu · dommage / dégât / degat / blesse  
 Modèle : Les proverbes sont des observations sur la manière dont la vie fonctionne habituellement sous le règne de Dieu, non des promesses absolues. « Instruis l'enfant selon la voie qu'il doit suivre » (22:6) décrit une tendance générale, non une garantie, et il existe des exceptions. Lu comme une promesse de fer, ce verset cause des dégâts pastoraux — il blesse un parent fidèle dont l'enfant adulte s'est égaré, en lui disant qu'il a forcément échoué.
 
 > EN: Explain why Proverbs should NOT be read as absolute promises, using Proverbs 22:6 ("Train up a child...") as an example. What pastoral damage results when the genre is misread?
 
-**10. Énoncez et expliquez l'image finale de la leçon : « Lire la bibliothèque comme une bibliothèque. » Qu'exige cette exhortation du pasteur, chaque semaine, dans la préparation de ses sermons ?**  
+**10. Énoncez et expliquez l'image finale de la leçon : « Lire la bibliothèque comme une bibliothèque. » Qu'exige cette exhortation du pasteur, semaine après semaine, dans la préparation de ses sermons ?**  
 Mots-clés : bibliothèque / bibliotheque · genre · chaque · manière / maniere / façon / facon · bible · prêch / prech · seuil · lire / lecture / lisez  
 Modèle : L'image finale est : « lire la bibliothèque comme une bibliothèque ». La Bible est une bibliothèque de nombreux genres que Dieu a choisis à dessein, chacun étant une manière différente de faire entrer la vérité dans le cœur. De même qu'un lecteur ne lirait pas de la poésie comme un annuaire téléphonique, le pasteur doit s'arrêter sur le seuil de chaque livre et lire chaque genre à sa propre manière avant de le prêcher.
 

@@ -30,8 +30,8 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
   _Vérifié en ligne. Paraphrase non citée (bloc b030, question à trous n° 9). La LSG dit « mon âme a été sauvée » là où l'anglais dit « my life has been preserved » ; la leçon traduit l'anglais (« sa vie a été préservée ») puisqu'il ne s'agit pas d'une citation. Le sens hébreu est « ma vie a été épargnée » ; aucune question n'en dépend._
 - **Genèse 35:1-2** — « Lève-toi, monte à Béthel, et demeures-y; là, tu dresseras un autel au Dieu qui t'apparut, lorsque tu fuyais Esaü, ton frère. [...] Otez les dieux étrangers qui sont au milieu de vous, purifiez-vous, et changez de vêtements. »  
   _Vérifié en ligne (biblestudytools.com/lsg). Paraphrases aux blocs b036, b038, b040 et titres b037/b039 ; vocabulaire LSG repris (« ôtez », « dieux étrangers », « purifiez-vous », « changez de vêtements », « anneaux », « enfouit »). Question à trous n° 10 : réponse « étrangers »._
-- **Osée 12:4-5** — «  »  
-  _Non cité ; paraphrase au bloc b022 (« lutta avec l'ange... pleura et implora sa faveur »). Non vérifié en ligne._
+- **Osée 12:4-5** — « Il lutta avec l'ange, et il fut vainqueur, Il pleura, et lui adressa des supplications. »  
+  _Non cité ; paraphrase au bloc b022 (« lutta avec l'ange... pleura et implora sa faveur »). Vérifié avec l'outil LSG hors ligne (Osée 12:4 ; le verset 5 ne porte pas sur Jacob). Paraphrase indirecte, sans guillemets : conservée._
 
 ## 3. Terms for the reviewer to confirm
 

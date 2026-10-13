@@ -13,6 +13,17 @@ Counts: 21 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 3. SA 7's model answer mentions 'delivered prayerfully, depending on the Spirit rather than mere technique' and grounding in 'the actual meaning of the text' — slightly more than the lesson; translated as is.
 4. The source MC items have no 'why' explanations; French 'why' left empty (null).
 
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+- SA2: English prompt passes its own keywords
+- SA3: English prompt passes its own keywords
+- SA5: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -109,7 +120,7 @@ Examen final de l'Unité 8
 > EN: Unit 8 Final Exam
 
 **b027**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les questions à choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les questions à choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -331,19 +342,19 @@ Réponse : **Esprit** · aussi acceptées : Saint-Esprit, Esprit Saint, Esprit d
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
 **1. Expliquez pourquoi la prédication est en elle-même un acte de culte, et non une simple instruction.**  
-Mots-clés : prédica / predica / prêch / prech · culte / adora · parole · dieu · procla · acte · centr · touche / toucher / émouv / emouv / mouvoir  
+Mots-clés : prédica / predica / prêch / prech · culte / adora · parole · dieu · procla · chaire / sanctuaire · centr · touche / toucher / émouv / emouv / mouvoir  
 Modèle : La prédication est en elle-même un acte de culte, et non une simple instruction, parce que lorsque la parole de Dieu est proclamée, Dieu parle à son peuple et son peuple lui répond. C'est pourquoi les réformateurs ont placé la chaire au centre du sanctuaire, confessant ainsi que la Parole prêchée, et non l'hostie consacrée, est l'acte central du culte. Un sermon ne vise pas seulement à informer le peuple, mais à toucher la personne tout entière, l'intelligence, le cœur et la volonté, ce qui est en soi le culte en mouvement.
 
 > EN: Explain why preaching is itself an act of worship, not merely instruction.
 
 **2. Expliquez en quoi l'offrande est un acte d'adoration et de dédicace, et non une simple collecte de fonds.**  
-Mots-clés : offrand · culte / adora · dédica / dedica / consacr / consécr / consecr · donner / donné / donne / rendre / rendons · ressourc · dieu · acte · fonds / argent  
+Mots-clés : offrand · ambianc / unité 5 / unite 5 · dédica / dedica / consacr / consécr / consecr · donner / donné / donne / rendre / rendons · ressourc · dieu · une part / portion / abord · enseign  
 Modèle : L'offrande est un acte d'adoration et de dédicace, et non une simple collecte de fonds, parce que par elle nous consacrons nos ressources à Dieu, en lui rendant une part de ce qu'il nous a d'abord donné. Elle appartient à l'ambiance de dédicace étudiée dans l'Unité 5, et elle doit être présentée comme un acte d'adoration, un don fait à Dieu, plutôt que comme une collecte d'argent pour payer les factures : la manière dont on la dirige enseigne au peuple ce qu'elle signifie vraiment.
 
 > EN: Explain the offering as an act of worship and dedication, not merely fundraising.
 
 **3. Comment faut-il gérer les annonces pour qu'elles ne nuisent pas au culte ?**  
-Mots-clés : annonce · brève / breve / bref / courte / concis · culte / adora · nuire / nuisent / nuise · temps / durée / duree · distrai / distract / détourn / detourn · minim / réduire / reduire · place / plaç / plac  
+Mots-clés : annonce · brève / breve / bref / courte / concis · écritur / ecritur / lecture · nuire / nuisent / nuise · temps / durée / duree · distrai / distract / détourn / detourn · minim / réduire / reduire · place / plaç / plac  
 Modèle : Pour que les annonces ne nuisent pas au culte, il faut les garder brèves et bien les placer dans le déroulement du culte, car le danger est qu'elles gonflent jusqu'à prendre plus de temps qu'elles n'en méritent et brisent l'ambiance du culte. La lecture de l'Écriture est bien plus importante que les annonces, et pourtant elle prend souvent moins de temps ; les responsables doivent donc réduire les annonces au minimum, voire les imprimer, plutôt que de les laisser dévorer l'heure du culte.
 
 > EN: How should announcements be handled so they do not detract from worship?
@@ -355,7 +366,7 @@ Modèle : Wayne considère l'invitation comme la partie la plus importante du cu
 > EN: Why does Wayne consider the invitation the most important part of the service?
 
 **5. Expliquez comment l'invitation se rattache à l'ambiance de dédicace.**  
-Mots-clés : invitation · dédica / dedica / consacr / consécr / consecr · offrand · nous-mêmes / nous-memes / lui-même / lui-meme / soi-même / soi-meme / se redonne / se donne · répon / repon · donner / donne / rendre / rend  · ambianc · décision / decision  
+Mots-clés : invitation · dédica / dedica / consacr / consécr / consecr · offrand · nous-mêmes / nous-memes / lui-même / lui-meme / soi-même / soi-meme / se redonne / se donne · répon / repon · donner / donne / rendre / rend  · culmin / sommet / apogée / apogee · décision / decision  
 Modèle : L'invitation se rattache à l'ambiance de dédicace parce que la dédicace intervient à deux moments : dans l'offrande, nous consacrons nos ressources, et dans l'invitation, nous nous consacrons nous-mêmes. L'invitation est le moment où l'adorateur se redonne à Dieu, ce qui en fait le point culminant personnel de tout le culte, parallèle à la dédicace matérielle de l'offrande, mais distincte d'elle.
 
 > EN: Explain how the invitation connects to the mood of dedication.
@@ -367,25 +378,25 @@ Modèle : Parmi les règles pratiques pour bien faire une invitation, il y a cel
 > EN: What are some practical guidelines for giving an invitation well?
 
 **7. Comment le sermon doit-il être préparé et prêché en tant que partie du culte ?**  
-Mots-clés : sermon · prépar / prepar · écritur / ecritur / texte · prêch / prech / délivr / delivr / présent / present · parole · prédica / predica / prédicat / predicat · étude · appliqu / applic  
+Mots-clés : esprit · prépar / prepar · écritur / ecritur / texte · prière / priere / prier · parole · prédica / predica / prédicat / predicat · étude / etude / étudi / etudi · appliqu / applic  
 Modèle : Le sermon doit être préparé à partir de l'Écriture par une étude attentive, en l'enracinant dans le sens réel du texte plutôt que dans l'opinion personnelle, et prêché dans la prière, en comptant sur l'Esprit plutôt que sur la simple technique. Il ne doit pas viser seulement à informer le peuple, mais à toucher la personne tout entière, l'intelligence, le cœur et la volonté, afin que la prédication devienne un acte de culte plutôt qu'une conférence.
 
 > EN: How should the sermon be prepared and delivered as part of worship?
 
 **8. Expliquez la relation entre la parole prêchée et la réponse donnée lors de l'invitation.**  
-Mots-clés : parole · répon / repon · invitation · prêch / prech / prédica / predica · décision / decision · appel · agir / action · entend / audit  
+Mots-clés : mouvement / ensemble · répon / repon · invitation · prépar / prepar / touche · décision / decision · appel · agir / action · entend / audit  
 Modèle : La relation entre la parole prêchée et l'invitation est celle de l'appel et de la réponse : la parole appelle, et l'invitation est le lieu où la réponse est donnée. La prédication prépare et touche l'auditeur, et l'invitation donne à cet auditeur l'occasion concrète d'agir selon ce qu'il a entendu ; les deux vont donc ensemble comme un seul mouvement, et non comme des parties séparées et sans lien du culte.
 
 > EN: Explain the relationship between the preached word and the response of the invitation.
 
 **9. Comment la prédication, l'offrande, les annonces et l'invitation trouvent-elles chacune leur place dans le déroulement du culte ?**  
-Mots-clés : déroul / deroul · prédica / predica / prêch / prech · offrand · annonce · invitation · place · mouvement · culte  
+Mots-clés : déroul / deroul · procla · ressourc / matériel / materiel · brève / breve / bref / discr · culmin / sommet / apogée / apogee · place · mouvement · don de soi / se donne / soi-même / soi-meme / personnel  
 Modèle : La prédication proclame la parole et touche le peuple ; l'offrande consacre ses ressources matérielles ; les annonces restent brèves et discrètes afin de ne pas voler du temps au culte ; et l'invitation forme le point culminant de la réponse personnelle. Chacun de ces éléments a sa place et son but propres dans le déroulement du culte, dans un mouvement qui va de la proclamation, en passant par la consécration des ressources, jusqu'au point culminant personnel qu'est le don de soi.
 
 > EN: How do preaching, offering, announcements, and invitation each fit the flow of the service?
 
 **10. Pourquoi le prédicateur doit-il veiller à ce que les éléments secondaires n'évincent pas les parties les plus importantes du culte ?**  
-Mots-clés : veill / protég / proteg / garde · secondaire / moindre · évinc / evinc / étouff / etouff / envahi · important · annonce · prédica / predica / prêch / prech · invitation · temps / minute  
+Mots-clés : veill / protég / proteg / garde · limit / attention · évinc / evinc / étouff / etouff / envahi · poids / proportion · annonce · gérer / gerer / gère / gere / dériv / deriv · invitation · temps / minute  
 Modèle : Le prédicateur doit veiller à ce que les éléments secondaires n'évincent pas les parties les plus importantes du culte, parce que le temps et l'attention sont limités : chaque minute accordée aux annonces ou à des questions dérisoires est une minute retirée à la parole prêchée et à l'invitation, qui portent le plus grand poids spirituel du culte. Protéger ce qui compte le plus signifie que le prédicateur doit gérer activement les proportions du culte plutôt que de les laisser dériver.
 
 > EN: Why must the preacher guard against letting lesser elements crowd out the most important parts of worship?

@@ -8,20 +8,28 @@ Counts: 30 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 
 ## 1. Questions for Wayne
 
-1. Psalm 19:1 is Psaume 19:2 in Louis Segond, and LSG says « l'étendue » instead of « firmament ». I changed the references and fill-in 1 now expects « l'étendue » (« firmament » and « ciel » also accepted). Is that acceptable?
+1. LSG says « l'étendue » instead of « firmament » in Psaume 19:1. Fill-in 1 now expects « l'étendue » (« firmament » and « ciel » also accepted). Is that acceptable?
 2. Distances are now in kilometres (93 million miles = about 150 million km). The wrong MC 15 options were converted too (1.6 million km, 480 million km, 80,000 km). OK?
 3. The 'Goldilocks' story is rendered « Boucle d'or », its French name, but it may not be well known in Kinshasa. Keep it, or call it « zone habitable » with a one-line explanation?
 4. b008 says 'The African builds an altar to the sun.' This was kept as written. For readers in Kinshasa, would you like to soften it, for example to « Les anciens peuples dressaient des autels au soleil »?
 5. [check] Terminology consistency: Unit 1 renders 'the design of the heavens' (b030, b034, MC 11) as « la conception des cieux », but this unit's title (b002) and lesson use « dessein » (« Le dessein des cieux », « argument du dessein »). Both are correct French; pick one for the course so students see the same term for the same clue.
 
+## Problems in the English source
+
+- SA2: English prompt passes its own keywords
+- SA3: English prompt passes its own keywords
+- SA4: English prompt passes its own keywords
+- SA5: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
 
-- **⚠** **Psaume 19:2 (= Psalm 19:1 in English Bibles)** — « Les cieux racontent la gloire de Dieu, Et l'étendue manifeste l'œuvre de ses mains. »  
-  _Checked online (info-bible.org). LSG numbers this verse 19:2 (the title is v.1), so all references were changed to Psaume 19:2. LSG says « l'étendue », not « firmament »; fill-in 1 now expects « l'étendue » (accepting « firmament » and « ciel »). Used in b004, b005, b006, MC 1, fill 1._
+- **⚠** **Psaume 19:1** — « Les cieux racontent la gloire de Dieu, Et l'étendue manifeste l'œuvre de ses mains. »  
+  _Checked against the offline LSG (12 Oct 2026). Verse numbering follows the English/NKJV numbering (convention 11), so Psaume 19:1; quoted verbatim with Segond's capital « Et » at the start of the second line. LSG says « l'étendue », not « firmament »; fill-in 1 expects « l'étendue » (accepting « firmament » and « ciel »). Used in b004, b005, b006, MC 1, fill 1._
 - **Psaume 14:1** — « L'insensé dit en son cœur: Il n'y a point de Dieu! »  
-  _Checked online (info-bible.org). Used in b009, MC 3, fill 2._
+  _Checked online (info-bible.org). Used in b009, MC 3, fill 2. Catch-up 12 Oct 2026: b009 and fill 2 now copy Segond's punctuation exactly (no space before « : » and « ! »)._
 - **Genèse 1:1** — « Au commencement, Dieu créa les cieux et la terre. »  
   _Checked online (biblestudytools.com). Used in b013 and SA 1 model._
 - **Romains 1:20** — « En effet, les perfections invisibles de Dieu, sa puissance éternelle et sa divinité, se voient comme à l'œil, depuis la création du monde, quand on les considère dans ses ouvrages. »  
@@ -56,17 +64,17 @@ Professeur : Dr. Wayne Cook | Directeur : Dr. Ted Rogers
 > EN: Professor: Dr. Wayne Cook | Director: Dr. Ted Rogers
 
 **b004**  
-« Les cieux racontent la gloire de Dieu, et l'étendue manifeste l'œuvre de ses mains. » — Psaume 19:2
+« Les cieux racontent la gloire de Dieu, Et l'étendue manifeste l'œuvre de ses mains. » — Psaume 19:1
 
 > EN: "The heavens declare the glory of God; and the firmament shows His handiwork." — Psalm 19:1
 
 **b005**  
-Texte : Psaume 19:2
+Texte : Psaume 19:1
 
 > EN: Text: Psalm 19:1
 
 **b006**  
-« Les cieux racontent la gloire de Dieu, et l'étendue manifeste l'œuvre de ses mains. » — Psaume 19:2
+« Les cieux racontent la gloire de Dieu, Et l'étendue manifeste l'œuvre de ses mains. » — Psaume 19:1
 
 > EN: "The heavens declare the glory of God; and the firmament shows His handiwork." — Psalm 19:1
 
@@ -81,7 +89,7 @@ Dans l'unité précédente, nous avons appris à suivre les indices jusqu'au Bou
 > EN: In the last unit we learned to follow the clues back to the Baker. In this unit we walk the first trail, and it begins by looking up. From the dawn of the human story, in every age and on every continent, men have lifted their eyes to the heavens and known, somewhere below words, that they were not alone. The African builds an altar to the sun. The Greek raises a statue to an unknown god, lest he overlook one. The modern man, who says he believes in nothing, stands in a hospital corridor at two in the morning and finds himself praying to a God he has not addressed in thirty years. Augustine put his finger on it: "You have made us for Yourself, and our hearts are restless until they rest in You." The longing is universal because the Maker is real, and He has not left Himself without a witness.
 
 **b009**  
-Voilà pourquoi le psalmiste dit que l'insensé a parlé dans son cœur, et non dans sa tête : « L'insensé dit en son cœur : Il n'y a point de Dieu ! » (Psaume 14:1). Remarquez l'endroit — le cœur, non la tête. L'incrédulité est bien plus souvent un souhait qu'une conclusion. Nous ne voyons pas le vent, et pourtant nous y croyons sans hésiter, parce que nous voyons ce qu'il fait : l'arbre qui ploie, le nuage qui file, la voile gonflée et tendue. Il en est ainsi de Dieu. Nous ne le voyons pas de nos yeux, mais nous lisons son ouvrage partout où son vent a passé. Suivons maintenant cette lecture avec soin.
+Voilà pourquoi le psalmiste dit que l'insensé a parlé dans son cœur, et non dans sa tête : « L'insensé dit en son cœur: Il n'y a point de Dieu! » (Psaume 14:1). Remarquez l'endroit — le cœur, non la tête. L'incrédulité est bien plus souvent un souhait qu'une conclusion. Nous ne voyons pas le vent, et pourtant nous y croyons sans hésiter, parce que nous voyons ce qu'il fait : l'arbre qui ploie, le nuage qui file, la voile gonflée et tendue. Il en est ainsi de Dieu. Nous ne le voyons pas de nos yeux, mais nous lisons son ouvrage partout où son vent a passé. Suivons maintenant cette lecture avec soin.
 
 > EN: This is why the psalmist says the fool has said in his heart, not in his head, "There is no God" (Psalm 14:1). Mark the place — the heart, not the head. Unbelief is far more often a wish than a conclusion. We do not see the wind, yet we believe in it without hesitation, because we see what it does: the bending tree, the driven cloud, the sail filled taut. So it is with God. We do not see Him with the eye, but we read His handiwork everywhere His wind has passed. Let us now follow that reading carefully.
 
@@ -181,7 +189,7 @@ Examen final de l'Unité 2
 > EN: Unit 2 Final Exam
 
 **b029**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -199,12 +207,12 @@ Réinitialiser l'unité
 
 ✓ marks the keyed answer (same position in all languages).
 
-**1. Selon le Psaume 19:2, les cieux racontent :**  
+**1. Selon le Psaume 19:1, les cieux racontent :**  
 ✓ A. La gloire de Dieu  
 · B. L'âge des étoiles  
 · C. Les lois de la physique  
 · D. L'avenir des nations  
-_Pourquoi :_ Le Psaume 19:2 dit que les cieux racontent la gloire de Dieu et que l'étendue manifeste l'œuvre de ses mains.  
+_Pourquoi :_ Le Psaume 19:1 dit que les cieux racontent la gloire de Dieu et que l'étendue manifeste l'œuvre de ses mains.  
 > EN: According to Psalm 19:1, the heavens declare: — ✓ The glory of God
 
 **2. Comment l'unité appelle-t-elle les arguments classiques en faveur de Dieu ?**  
@@ -363,11 +371,11 @@ _Pourquoi :_ La raison amène une personne jusqu'à la porte ; c'est le Dieu viv
 
 Grading ignores accents, capitals and one leading article (le/la/les/l'/un/une/des).
 
-**1.** « Les cieux racontent la gloire de Dieu, et ____ manifeste l'œuvre de ses mains. » (Psaume 19:2)  
+**1.** « Les cieux racontent la gloire de Dieu, Et ____ manifeste l'œuvre de ses mains. » (Psaume 19:1)  
 Réponse : **l'étendue** · aussi acceptées : firmament, le ciel, les étendues  
 > EN: "The heavens declare the glory of God; and the ____ shows His handiwork." (Psalm 19:1) — **firmament**
 
-**2.** « L'insensé dit en son ____ : Il n'y a point de Dieu ! » (Psaume 14:1) — dans son cœur, non dans sa tête ; l'incrédulité est plus souvent un souhait qu'une conclusion.  
+**2.** « L'insensé dit en son ____: Il n'y a point de Dieu! » (Psaume 14:1) — dans son cœur, non dans sa tête ; l'incrédulité est plus souvent un souhait qu'une conclusion.  
 Réponse : **cœur** · aussi acceptées : coeur  
 > EN: The fool has said in his ____, not in his head, "There is no God" (Psalm 14:1); unbelief is more often a wish than a conclusion. — **heart**
 
@@ -413,25 +421,25 @@ Modèle : L'argument de la cause, ou argument cosmologique, part du principe que
 
 > EN: Explain the argument from cause (the cosmological argument) and the illustration the unit uses for it.
 
-**2. Expliquez l'argument du dessein de Paley (l'argument téléologique), y compris l'illustration de la montre.**  
+**2. Expliquez l'argument téléologique de Paley, y compris son illustration principale.**  
 Mots-clés : dessein / concept / téléolog / teleolog · une montre / la montre / horlog · paley · ordre · complex · minuti / ingéni / ingeni / intriq · fabriq / façonn / faconn / créé / cree · champ  
 Modèle : L'argument du dessein, ou argument téléologique, a reçu son image la plus claire de William Paley. Si vous trouviez une montre posée dans un champ, vous ne diriez jamais qu'elle s'est assemblée d'elle-même par hasard, car ses rouages, son ressort et ses aiguilles en mouvement montrent un ordre et une complexité qui exigent un concepteur. Il en va de même de l'œil, de la cellule vivante et de l'ordre minutieux du monde. Comme une montre implique un horloger, le dessein de la création implique un Concepteur. Il ne s'agit pas seulement de dire que le monde est ancien ou vaste, mais qu'il est ordonné et orienté vers un but, et un ordre de ce genre ne naît pas d'un accident ; il pointe au-delà de lui-même vers une intelligence qui l'a fabriqué.
 
 > EN: Explain Paley's argument from design (the teleological argument), including the watch illustration.
 
-**3. Énoncez l'argument moral et expliquez pourquoi le sens universel du bien et du mal indique un Législateur.**  
+**3. Énoncez l'argument moral et expliquez pourquoi le sens universel de ce qui est juste ou injuste indique un Législateur.**  
 Mots-clés : moral · le bien / du bien / bonté / bonte · le mal / du mal / mauvais · législateur / legislateur · la loi / une loi / lois · objecti · norme / critère / critere / étalon / etalon · command / ordre  
 Modèle : L'argument moral part du sens humain universel du bien et du mal. Dans chaque tribu et chaque nation, nous constatons que la cruauté est condamnée et que la bonté est louée, non comme une simple préférence, mais comme quelque chose qui oblige, un commandement. Cela indique une loi morale écrite dans le cœur, et une loi implique un Législateur. S'il n'y avait pas de Dieu, « mal » signifierait seulement qu'il se trouve que quelqu'un n'aime pas une chose, et le déplaisir d'une personne n'aurait aucune autorité sur celui d'une autre. Mais quand nous disons qu'une atrocité est vraiment un mal, nous en appelons à une norme qui nous dépasse tous. Cette norme objective est la loi morale, et derrière la loi se tient le Législateur transcendant, qui est Dieu.
 
 > EN: State the moral argument and explain why the universal sense of right and wrong points to a Lawgiver.
 
-**4. Résumez l'argument ontologique (l'argument de l'être) et l'objection que Kant a soulevée contre lui.**  
-Mots-clés : ontolog · plus grand · l être / un être / l etre / un etre · exist · kant · anselme · concev / conçu / concep · humbl / humilit  
+**4. Résumez l'argument ontologique et l'objection que Kant a soulevée contre lui.**  
+Mots-clés : ontolog · plus grand · l être / un être / l etre / un etre · exist · kant · anselme · concev / conçu / concep / concu · humbl / humilit  
 Modèle : L'argument ontologique, formulé par Anselme, définit Dieu comme l'être le plus grand que l'on puisse concevoir. Anselme raisonnait qu'un être qui existe dans la réalité est plus grand qu'un être qui n'existe que dans l'esprit ; le plus grand être concevable doit donc exister, puisque sinon il ne serait pas le plus grand. L'unité le présente comme le plus subtil des arguments. Elle mentionne aussi la célèbre objection d'Emmanuel Kant, qui soutenait que l'existence n'est pas une propriété que l'on ajoute à une chose comme on ajoute la sagesse ou la puissance, de sorte qu'on ne peut pas simplement faire exister un être par définition. À cause de cette objection, l'unité tient l'argument ontologique avec humilité et ne fait pas reposer toute la cause sur lui ; elle le présente comme le plus rigoureux des cinq plutôt que comme une preuve décisive.
 
 > EN: Summarize the ontological argument (the argument from being) and the objection Kant raised against it.
 
-**5. Expliquez l'argument du désir (l'argument de l'aspiration) tel que C. S. Lewis l'a formulé.**  
+**5. Expliquez l'argument du désir tel que C. S. Lewis l'a formulé.**  
 Mots-clés : désir / desir · aspiration / nostalgi / soupir · la faim / a faim / affam · la soif / a soif / assoiff · satisf / combl / rassasi · lewis · indiqu / pointe / renvoi · terre / ici-bas  
 Modèle : L'argument du désir, auquel C. S. Lewis a donné sa forme la plus claire, observe que chaque désir naturel correspond à un objet réel capable de le satisfaire. La faim ne prouve pas qu'un homme mangera, mais elle indique l'existence de la nourriture ; la soif indique l'eau, et l'œil est fait pour la lumière. Pourtant, il existe dans le cœur humain une aspiration que rien sur cette terre — aucun plaisir, aucun succès, aucune relation — n'a jamais pleinement satisfaite, une sorte de nostalgie d'un pays que nous n'avons jamais vu. Si nous étions faits pour ce monde seulement, rien en lui ne devrait nous laisser aussi agités. L'explication la plus probable est que nous avons été faits pour Dieu, et que cette aspiration profonde et inassouvie est le cordon qui relie l'âme à son Créateur.
 
@@ -455,7 +463,7 @@ Modèle : L'unité ajoute que la Terre ne garde pas son équilibre toute seule. 
 
 > EN: Explain the role the moon and Jupiter play in the fine-tuning case for life on Earth.
 
-**9. Comment l'aspiration universelle à Dieu, à travers les cultures, sert-elle de témoignage à sa réalité ?**  
+**9. Comment l'aspiration à Dieu que l'on trouve chez tous les peuples témoigne-t-elle de sa réalité ?**  
 Mots-clés : aspiration / nostalgi / soupir / désir / desir · culture · universel · augustin · sans repos / inquiet / agité / agite · cherch / quête / quete · cœur / coeur · autel  
 Modèle : L'unité observe qu'à toutes les époques et sur tous les continents, les hommes ont tendu la main vers Dieu, et elle y voit un témoignage de sa réalité. Elle souligne l'aspiration universelle qu'Augustin a nommée lorsqu'il a dit que notre cœur est sans repos jusqu'à ce qu'il repose en Dieu. Elle rappelle que, partout, les cultures dressent des autels et cherchent le divin — jusqu'aux Grecs qui élevaient un autel à un dieu inconnu pour n'en oublier aucun — et que l'homme moderne qui prétend ne croire en rien se met pourtant à prier dans une crise. Cette quête répandue et inquiète est difficile à expliquer s'il n'y a rien à chercher. L'explication la plus simple est que cette aspiration est universelle parce que le Créateur est réel et qu'il a placé dans chaque cœur un instinct qui le ramène vers lui.
 

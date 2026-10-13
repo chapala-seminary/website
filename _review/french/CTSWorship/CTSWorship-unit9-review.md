@@ -12,18 +12,26 @@ Counts: 23 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 2. SA4 English keyword 'baptist' (likely from an earlier 'Baptist' wording) is now matched by French « baptist » (baptistère/baptiste), so the slot works without a denominational label. Confirm OK.
 3. Pronouns for God left lowercase (il/lui/son, LSG style), pending your decision.
 
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+- SA4: English prompt passes its own keywords
+- SA6: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
 
 - **Romains 6:4** — « Nous avons donc été ensevelis avec lui par le baptême en sa mort, afin que, comme Christ est ressuscité des morts par la gloire du Père, de même nous aussi nous marchions en nouveauté de vie. »  
-  _Allusion only (b016, b020, SA1, SA3, MC2); not quoted as LSG. The English formula 'raised to walk in the newness of His likeness' blends Rom 6:4 ('nouveauté de vie') and 6:5 ('conformité à sa résurrection'); translated as the author's paraphrase. Checked online (biblestudytools.com/lsg)._
+  _Allusion only (b016, b020, SA1, SA3, MC2); not quoted as LSG. The English formula 'raised to walk in the newness of His likeness' blends Rom 6:4 ('nouveauté de vie') and 6:5 ('conformité à sa résurrection'); translated as the author's paraphrase. Verified against offline LSG (lsg.py)._
 - **Romains 6:5** — « En effet, si nous sommes devenus une même plante avec lui par la conformité à sa mort, nous le serons aussi par la conformité à sa résurrection, »  
-  _Source of 'likeness' (LSG: « conformité »). Paraphrase kept as « ressemblance ». Checked online._
+  _Source of 'likeness' (LSG: « conformité »). Paraphrase kept as « ressemblance ». Verified against offline LSG (lsg.py)._
 - **1 Corinthiens 11:24-25** — « faites ceci en mémoire de moi »  
-  _Allusion in b023 ('in remembrance of Christ'): rendered « en mémoire de Christ », consistent with LSG. Checked online._
+  _Allusion in b023 ('in remembrance of Christ'): rendered « en mémoire de Christ », consistent with LSG. Verified against offline LSG (lsg.py)._
 - **⚠** **1 Corinthiens 11:26** — « Car toutes les fois que vous mangez ce pain et que vous buvez cette coupe, vous annoncez la mort du Seigneur, jusqu'à ce qu'il vienne. »  
-  _Paraphrased in b023, MC11, fill 7, SA5 using LSG wording in first person plural. LSG has « annoncez » where the English lesson says 'proclaim' and builds the key term 'proclamation' on it (MC10, fill 7, SA5). I kept « proclamation » as the teaching term and LSG « annonçons » in the paraphrase; fill 7 accepts « annonce » and SA5 accepts both « proclam » and « annonc ». Checked online._
+  _Paraphrased in b023, MC11, fill 7, SA5 using LSG wording in first person plural. LSG has « annoncez » where the English lesson says 'proclaim' and builds the key term 'proclamation' on it (MC10, fill 7, SA5). I kept « proclamation » as the teaching term and LSG « annonçons » in the paraphrase; fill 7 accepts « annonce » and SA5 accepts both « proclam » and « annonc ». Verified against offline LSG (lsg.py)._
 
 ## 3. Terms for the reviewer to confirm
 
@@ -124,7 +132,7 @@ Examen final de l'Unité 9
 > EN: Unit 9 Final Exam
 
 **b029**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les questions à choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen attend un court moment avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les questions à choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen attend un court moment avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -346,7 +354,7 @@ Réponse : **visible** · aussi acceptées : visibles
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
 **1. Expliquez le sens du baptême comme confession publique de la foi, y compris son symbolisme de la mort et de la résurrection.**  
-Mots-clés : baptême / bapteme · public · confess · enseveli / sépult / sepult · ressuscit / relevé / releve · christ · mort / mourir · symbol  
+Mots-clés : descend / immers / plong / dans l eau · public / publiq · ne sauve pas / salut déjà / salut deja / déjà reçu / deja recu · enseveli / sépult / sepult · ressuscit / relevé / releve · christ · mort / mourir · nouveauté / nouveaute / nouvelle vie  
 Modèle : Le baptême est une confession publique de la foi ; il symbolise le fait d'être enseveli avec Christ dans sa mort et ressuscité pour marcher dans la nouveauté de sa ressemblance. Le croyant descend dans l'eau et en est relevé, image de la mort et de la résurrection. Le baptême ne sauve pas ; il confesse un salut déjà reçu et identifie publiquement le croyant à la mort et à la résurrection de Christ devant l'Église rassemblée.
 
 > EN: Explain the meaning of baptism as a public confession of faith, including its symbolism of death and resurrection.
@@ -357,26 +365,26 @@ Modèle : Le baptistère est placé bien en évidence et au centre, généraleme
 
 > EN: Describe how the architecture of the baptistry in a believer's-baptism church reflects its theology of baptism.
 
-**3. Décrivez la scène du baptême et l'« Amen » de l'assemblée, et expliquez ce qu'il confesse.**  
+**3. Décrivez la scène du baptême et l'« Amen » de l'assemblée, et expliquez ce qu'il affirme.**  
 Mots-clés : amen · assemblée / assemblee / congrégation / congregation · peuple · ratifi · enseveli / sépult / sepult · témoin / temoin / témoign / temoign · église / eglise · dise / confess  
 Modèle : Au moment du baptême, le pasteur prononce les paroles « enseveli avec Christ dans sa mort et ressuscité pour marcher dans sa ressemblance », puis il se tourne vers l'assemblée et dit : « Et que tout le peuple dise », et l'Église répond : « Amen. » Cet Amen de l'assemblée confesse que la famille de Dieu a été témoin de ce qui s'est passé et l'a ratifié ensemble : le baptême n'est jamais une affaire privée, puisque tout le corps l'affirme.
 
 > EN: Describe the baptism scene and the congregational 'Amen,' and explain what it confesses.
 
 **4. Comparez la pratique du baptême des croyants avec les fonts baptismaux catholiques et le baptême des nourrissons, et expliquez la théologie différente que chacun reflète.**  
-Mots-clés : catholi · fonts / cuve · nourrisson / enfant / bébé / bebe · entrée / entree / entrer · grâce / grace · côté / coté / cote · baptist · différ / differ / oppos  
+Mots-clés : catholi · public / publiq · nourrisson / enfant / bébé / bebe · entrée / entree / entrer · grâce / grace · côté / coté / cote · baptist · originel  
 Modèle : Les fonts baptismaux catholiques sont généralement petits et placés sur le côté, près de l'entrée, ce qui reflète une théologie où le baptême est le rite d'entrée dans l'Église, administré généralement à un nourrisson, et dont on croit qu'il confère la grâce qui sauve et efface le péché originel. Le baptistère central et visible de l'Église qui pratique le baptême des croyants prêche au contraire que le baptême est la confession publique d'un croyant qui a déjà la foi : la même ordonnance, mais des théologies opposées, qu'on lit simplement dans l'endroit où se trouve l'eau dans la salle.
 
 > EN: Contrast believer's-baptism practice with the Catholic font and infant baptism, and explain the different theology each reflects.
 
 **5. Expliquez le sens de la sainte cène comme mémorial et proclamation.**  
-Mots-clés : cène / cene / souper · mémorial / memorial / commémor / commemor · souven / mémoire / memoire · proclam / annonc · mort / mourir · pain · coupe · christ  
+Mots-clés : cène / cene / souper · retour / vienne / reviendr · souven / mémoire / memoire · proclam / annonc / annonç · mort / mourir · pain · coupe · christ  
 Modèle : La sainte cène est un mémorial et une proclamation. Nous la célébrons en mémoire de Christ, comme il l'a commandé : le pain représente son corps et la coupe son sang, donnés pour nous. Paul nous dit que toutes les fois que nous mangeons ce pain et que nous buvons cette coupe, nous annonçons la mort du Seigneur jusqu'à ce qu'il vienne ; ainsi, la cène regarde dans deux directions à la fois : en arrière vers la croix et en avant vers son retour.
 
 > EN: Explain the meaning of the Lord's Supper as a memorial and proclamation.
 
 **6. Comment l'emplacement de la table de la sainte cène dans un sanctuaire reflète-t-il une théologie ?**  
-Mots-clés : table · emplacement / placée / placee / dispos · chaire · dessous / sous la chaire · autel · parole · théolog / theolog · salle / sanctuaire  
+Mots-clés : table · emplacement / placée / placee / dispos · sacrement · dessous / sous la chaire · autel · parole · catholi / avant et au centre · protestant  
 Modèle : Dans un sanctuaire protestant, la table de communion est au centre mais en dessous de la chaire, ce qui déclare que la Parole est élevée au-dessus du sacrement. Dans une église catholique, l'autel se dresse à l'avant et au centre, ce qui déclare que le sacrement qui sauve est central. La table sous la chaire et l'autel à l'avant et au centre prêchent deux évangiles différents, par le seul emplacement du mobilier : une théologie se lit dans la disposition de la salle.
 
 > EN: How does the placement of the Lord's Supper table in a sanctuary reflect a theology?
@@ -394,13 +402,13 @@ Modèle : Le mode approprié du baptême est l'immersion, puisque le mot grec ba
 > EN: What is the proper mode of baptism in the believer's-baptism tradition, and why?
 
 **9. Comment les ordonnances doivent-elles être administrées pour demeurer des actes de culte pleins de sens ?**  
-Mots-clés : administ · signification / sens · culte / adoration · expliqu / explicat · respect / révéren / reveren · prépar / prepar · hâte / hate / précipit / precipit · ordonnance  
+Mots-clés : administ · signification / sens · rituel · expliqu / explicat · respect / révéren / reveren · prépar / prepar · hâte / hate / précipit / precipit · évangile / evangile  
 Modèle : Les deux ordonnances doivent être administrées avec respect, avec préparation et une explication claire, afin qu'elles demeurent des actes de culte pleins de sens plutôt qu'un rituel vide. Quand le pasteur en explique le sens à l'avance, le peuple saisit l'Évangile qu'elles représentent, au lieu de regarder un rite accompli à la hâte ou sans contexte.
 
 > EN: How should the ordinances be administered so they remain meaningful acts of worship?
 
 **10. Résumez comment les deux ordonnances rendent l'Évangile visible dans le culte.**  
-Mots-clés : évangile / evangile · visible · ordonnance · baptême / bapteme · cène / cene · mort / mourir · représent / represent / image / montre · prêch / prech  
+Mots-clés : évangile / evangile · visible · sans parole / sans mot · baptême / bapteme · cène / cene · mort / mourir · représent / represent / image / montre · prêch / prech  
 Modèle : Les deux ordonnances rendent l'Évangile visible dans le culte : le baptême montre la mort, l'ensevelissement et la résurrection du croyant avec Christ, tandis que la sainte cène montre le corps de Christ rompu et son sang versé pour le péché. Ensemble, elles prêchent l'Évangile sans paroles, afin que, dans le culte, le peuple n'entende pas seulement l'Évangile, mais qu'il le voie représenté sous ses yeux.
 
 > EN: Summarize how both ordinances make the gospel visible in worship.

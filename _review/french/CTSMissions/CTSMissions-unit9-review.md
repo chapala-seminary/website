@@ -12,6 +12,13 @@ Counts: 24 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 2. Mark 9:41 in LSG reads « un verre d'eau » (no 'cold'); the lesson's own phrase 'a cup of cold water' (closer to Matthew 10:42) is kept as « un verre d'eau froide » in your prose and in MC 17. Fine?
 3. The 20 multiple-choice items have no explanations ('why') in the English source, so the French has none either.
 
+## Problems in the English source
+
+- SA3: English prompt passes its own keywords
+- SA6: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -142,7 +149,7 @@ Examen final de l'Unité 9
 > EN: Unit 9 Final Exam
 
 **b030**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les questions à choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez essayer de nouveau.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les questions à choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez essayer de nouveau.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -375,13 +382,13 @@ Modèle : L'appel d'un missionnaire vient de Dieu, non de l'ambition humaine ; i
 
 > EN: Where does a missionary's call come from, and what does it usually look like?
 
-**3. Expliquez la réponse d'Ésaïe, « Me voici, envoie-moi », et ce qu'elle enseigne sur la disponibilité.**  
+**3. Expliquez la réponse du prophète en Ésaïe 6:8 et ce qu'elle enseigne sur l'attitude du serviteur.**  
 Mots-clés : ésaïe / esaie / isaïe / isaie · voici · envoie / envoy · disponib / volont · prêt / pret · dieu · partir / aller / allez · appel / appelé / appele  
 Modèle : La réponse d'Ésaïe, « Me voici, envoie-moi » (Ésaïe 6:8), fut une offre immédiate et sans condition de sa personne, avant même qu'il connaisse la tâche précise ou sa difficulté. Elle enseigne que la disponibilité vient en premier, avant de connaître tous les détails : le croyant s'offre à Dieu de manière générale, en lui faisant confiance pour préciser ensuite la mission particulière.
 
 > EN: Explain Isaiah's response, 'Here am I! Send me,' and what it teaches about willingness.
 
-**4. Qu'enseigne Jésus sur le coût de le suivre (Luc 9:23) ?**  
+**4. Qu'enseigne Jésus sur le prix à payer pour être son disciple (Luc 9:23) ?**  
 Mots-clés : coût / cout · renonce · croix · suive / suivre · chaque jour / quotidien · souffr · sacrifi · christ / jésus / jesus  
 Modèle : Jésus enseigne que le suivre comporte un coût réel : « Si quelqu'un veut venir après moi, qu'il renonce à lui-même, qu'il se charge chaque jour de sa croix, et qu'il me suive » (Luc 9:23). Cela signifie que le renoncement à soi-même n'est pas occasionnel mais quotidien, et qu'il peut inclure de véritables souffrances, comme ce fut le cas pour Paul, Judson, Slessor et Elliot.
 
@@ -393,7 +400,7 @@ Modèle : La leçon dit que le coût n'a jamais le dernier mot parce que Jésus 
 
 > EN: Why does the lesson say the cost is never the final word? Use Jesus' promise and Elliot's words.
 
-**6. Pourquoi l'Église qui envoie est-elle aussi essentielle que le missionnaire ? Utilisez Romains 10:15.**  
+**6. Selon Romains 10:15, pourquoi l'assemblée locale qui envoie compte-t-elle autant que celui qui part annoncer l'Évangile au loin ?**  
 Mots-clés : envoie / envoyer · église / eglise · prédicat / predicat / prêch / prech · envoyé / envoye · essentiel / nécessaire / necessaire · missionnai · soutien / soutenir / soutient · partir / aller  
 Modèle : L'Église qui envoie est aussi essentielle que le missionnaire parce que Romains 10:15 demande : « Comment y aura-t-il des prédicateurs, s'ils ne sont pas envoyés ? » — un missionnaire ne peut pas partir sans quelqu'un qui l'envoie ; envoyer n'est donc pas un rôle inférieur ou secondaire, mais un maillon nécessaire de la même chaîne qui apporte l'Évangile aux peuples non atteints.
 
@@ -405,7 +412,7 @@ Modèle : Les trois devoirs de tous ceux qui envoient sont : s'identifier au mis
 
 > EN: List and explain the three duties of every sender (from Unit 3).
 
-**8. À partir de Marc 9:41, expliquez comment celui qui donne et celui qui part ont part à la même récompense.**  
+**8. En vous appuyant sur Marc 9:41, expliquez pourquoi celui qui soutient l'œuvre depuis chez lui n'a pas moins de valeur aux yeux de Dieu que le missionnaire.**  
 Mots-clés : verre · d'eau / d eau · récompense / recompense · donne / donner · partir / partent / aller / traverse · partag / ont part · même / meme · en son nom / au nom / en mon nom / nom de  
 Modèle : Marc 9:41 dit que quiconque donne ne serait-ce qu'un verre d'eau au nom de Jésus ne perdra point sa récompense. Cela montre que celui qui soutient le missionnaire depuis chez lui, par de petits gestes concrets, a part à la même récompense que celui qui traverse la mer pour partir : les deux actes, accomplis au nom de Christ, ont la même valeur aux yeux de Dieu.
 
@@ -417,7 +424,7 @@ Modèle : Aucun croyant n'est dispensé de la mission, car la Grande Commission 
 
 > EN: The unit says no believer is excused from the mission. Explain why, and what part each may take.
 
-**10. Quelle part Dieu vous appelle-t-il à prendre dans la mission — partir, envoyer, prier ou donner ? Soyez honnête et précis.**  
+**10. Dans l'œuvre missionnaire, quelle place Dieu vous demande-t-il de tenir aujourd'hui ? Soyez honnête et précis, en nommant une démarche concrète.**  
 Mots-clés : partir / aller · envoy · prie / prière / priere · donne / donner / dons · appel / appelé / appele · ma part / sa part / participer / rôle / role · disponib / volont · mission  
 Modèle : Il s'agit d'une question de réflexion personnelle qui invite l'étudiant à identifier honnêtement sa propre part dans la mission — partir, envoyer, prier ou donner — plutôt qu'un engagement général et vague. Une réponse réfléchie nomme une étape concrète et dit honnêtement où en est l'étudiant actuellement, y compris ses hésitations ou ses incertitudes.
 

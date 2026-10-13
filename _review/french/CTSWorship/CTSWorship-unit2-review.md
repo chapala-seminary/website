@@ -14,6 +14,18 @@ Counts: 22 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 4. The English word-play on « awful » (full of awe) is kept and explained as an English word (b017, MC 4, SA 2). Keep it, or replace it with a French example for Kinshasa readers?
 5. The golf-course/lake and Moody's ice-skating examples are kept as written; skating may be unfamiliar in Kinshasa. Adapt or keep?
 
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+- SA2: English prompt passes its own keywords
+- SA4: English prompt passes its own keywords
+- SA5: English prompt passes its own keywords
+- SA6: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -93,7 +105,7 @@ II. Humble, spirituel, libre et joyeux
 > EN: II. Humble, Spiritual, Free, and Joyous
 
 **b019**  
-Quatrièmement, le culte est humble. Nous ne pouvons pas adorer Dieu avec orgueil. Au buisson ardent, Dieu dit à Moïse d'ôter ses sandales, car c'était une terre sainte. Ésaïe, voyant le Seigneur, s'écria : « Malheur à moi ! » Le pharisien orgueilleux, au contraire, remercia Dieu de ce qu'il n'était pas comme les autres hommes, et rentra chez lui sans être justifié. Vous ne pouvez pas élever Dieu et vous élever vous-même au même moment. Cinquièmement, le culte est spirituel. Jésus a dit qu'il faut adorer en esprit et en vérité (Jean 4:24). Le vrai culte est conduit par l'Esprit de Dieu ; le contraire est le culte charnel, et il est tout à fait possible de prier et même de prêcher selon la chair plutôt que par l'Esprit.
+Quatrièmement, le culte est humble. Nous ne pouvons pas adorer Dieu avec orgueil. Au buisson ardent, Dieu dit à Moïse d'ôter ses sandales, car c'était une terre sainte. Ésaïe, voyant le Seigneur, s'écria : « Malheur à moi! » Le pharisien orgueilleux, au contraire, remercia Dieu de ce qu'il n'était pas comme les autres hommes, et rentra chez lui sans être justifié. Vous ne pouvez pas élever Dieu et vous élever vous-même au même moment. Cinquièmement, le culte est spirituel. Jésus a dit qu'il faut adorer en esprit et en vérité (Jean 4:24). Le vrai culte est conduit par l'Esprit de Dieu ; le contraire est le culte charnel, et il est tout à fait possible de prier et même de prêcher selon la chair plutôt que par l'Esprit.
 
 > EN: Fourth, worship is humble. We cannot worship God with pride. At the burning bush God told Moses to remove his sandals, for the ground was holy. Isaiah, seeing the Lord, cried "Woe is me!" The proud Pharisee, by contrast, thanked God that he was not like other men, and went home unjustified. You cannot exalt God and self at the same moment. Fifth, worship is spiritual. Jesus said we must worship in spirit and in truth (John 4:24). True worship is guided by the Spirit of God; the opposite is fleshly worship, and it is entirely possible to pray and even preach in the flesh rather than in the Spirit.
 
@@ -138,7 +150,7 @@ Examen final de l'Unité 2
 > EN: Unit 2 Final Exam
 
 **b028**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -360,13 +372,13 @@ Réponse : **repos** · aussi acceptées : sabbat, shabbat, sabbath
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
 **1. La première caractéristique du culte est qu'il est centré sur Dieu. Expliquez-le à l'aide d'Ésaïe 6:1 et indiquez son contraire.**  
-Mots-clés : dieu · centr · trône / trone · ésaïe / esaie / esaïe · homme · contraire / opposé / oppose · élevé / eleve · au dessus / en haut / hauteur  
+Mots-clés : vision / seigneur · centr · trône / trone · ésaïe / esaie / esaïe · homme · divertiss / préférence / preference · élevé / eleve · au dessus / en haut / hauteur  
 Modèle : Le culte est centré sur Dieu parce qu'Ésaïe 6:1 fixe toute la vision sur Dieu : « je vis le Seigneur assis sur un trône très élevé ». L'attention reste sur qui est Dieu au lieu de glisser vers nous. Le contraire est le culte centré sur l'homme, où l'attention glisse discrètement de Dieu vers nos propres préférences, nos sentiments et notre divertissement.
 
 > EN: The first characteristic of worship is that it is God-centered. Explain this using Isaiah 6:1, and identify its opposite.
 
 **2. Le culte doit être révérencieux. Expliquez la place de la crainte révérencielle dans le culte et indiquez l'attitude contraire.**  
-Mots-clés : révéren / reveren · crainte / émerveil / emerveil · saint · contraire / opposé / oppose · banal / ordinaire / vulgaire · profane · respect · désinvol / desinvol / familier / légèreté / legerete  
+Mots-clés : révéren / reveren · crainte / émerveil / emerveil · saint · grossi / semblable à nous / semblable a nous · banal / ordinaire / vulgaire · profane · respect · désinvol / desinvol / familier / légèreté / legerete  
 Modèle : Le culte révérencieux comporte un sentiment de crainte révérencielle devant le Dieu saint — le vieux mot anglais « awful » signifiait autrefois « plein de crainte révérencielle », ce qui exprime bien cette juste attitude. L'attitude contraire est un culte qui devient banal, grossier ou profane, et qui traite Dieu comme s'il était semblable à nous, au lieu du Dieu saint qu'il est.
 
 > EN: Worship must be reverent. Explain the place of awe in worship and identify the opposite attitude.
@@ -378,43 +390,43 @@ Modèle : Le culte est communautaire parce que c'est le culte du corps rassembl�
 > EN: Worship is corporate. Explain this characteristic using Hebrews 10:25 and identify its opposite.
 
 **4. Le culte doit être humble. À l'aide des exemples de Moïse, d'Ésaïe et du pharisien, expliquez pourquoi l'orgueil est incompatible avec le culte.**  
-Mots-clés : humble / humilit · orgueil · moïse / moise · sandale / soulier / chaussure · saint · ésaïe / esaie · pharisien · exalt / élever / elever  
-Modèle : L'orgueil est incompatible avec le culte parce qu'on ne peut pas élever Dieu et s'élever soi-même au même moment. Au buisson ardent, Dieu dit à Moïse d'ôter ses sandales, car c'était une terre sainte — un acte d'humilité. Ésaïe, voyant le Seigneur, s'écria « Malheur à moi ! » au lieu de se vanter. Au contraire, le pharisien orgueilleux remercia Dieu de ce qu'il n'était pas comme les autres hommes et rentra chez lui sans être justifié, ce qui montre que l'orgueil empêche le vrai culte, même quand les paroles semblent religieuses.
+Mots-clés : humble / humilit · orgueil · buisson · sandale / soulier / chaussure · saint · malheur · justifi · exalt / élever / elever  
+Modèle : L'orgueil est incompatible avec le culte parce qu'on ne peut pas élever Dieu et s'élever soi-même au même moment. Au buisson ardent, Dieu dit à Moïse d'ôter ses sandales, car c'était une terre sainte — un acte d'humilité. Ésaïe, voyant le Seigneur, s'écria « Malheur à moi! » au lieu de se vanter. Au contraire, le pharisien orgueilleux remercia Dieu de ce qu'il n'était pas comme les autres hommes et rentra chez lui sans être justifié, ce qui montre que l'orgueil empêche le vrai culte, même quand les paroles semblent religieuses.
 
 > EN: Worship must be humble. Using the examples of Moses, Isaiah, and the Pharisee, explain why pride is incompatible with worship.
 
 **5. Le culte doit être spirituel. Expliquez ce que signifie adorer en esprit, à l'aide de Jean 4:23, et indiquez le contraire.**  
-Mots-clés : spirituel · esprit · vérité / verite · chair · guidé / guide / conduit · contraire / opposé / oppose · charnel · jean  
+Mots-clés : spirituel · esprit · vérité / verite · chair · guidé / guide / conduit · effort / performance · charnel · prêch / prech / prier  
 Modèle : Adorer en esprit et en vérité, comme le décrit Jean 4:24, signifie que le vrai culte est conduit par l'Esprit de Dieu, et non simplement produit par l'effort ou la performance humaine. Le contraire est le culte charnel — il est tout à fait possible de prier et même de prêcher selon la chair plutôt que par l'Esprit, en accomplissant des gestes religieux sans véritable vie spirituelle derrière eux.
 
 > EN: Worship must be spiritual. Explain what it means to worship in the Spirit, using John 4:23, and identify the opposite.
 
 **6. Le culte doit être libre. Expliquez comment le culte est à la fois préparé et ouvert à l'Esprit, à l'aide de Jean 3:8.**  
-Mots-clés : libre / liberté / liberte · prépar / prepar / planifi / programme · esprit · agir / agit / mouv / souffl · flexib / souple / souplesse / rigid · sensib / attentif / attentive · le vent / du vent · invitation / appel  
+Mots-clés : improvis · prépar / prepar / planifi / programme · esprit · agir / agit / mouv / souffl · flexib / souple / souplesse / rigid · sensib / attentif / attentive · le vent / du vent · invitation / appel  
 Modèle : Le culte doit être préparé, mais il doit toujours laisser de la place à l'action de l'Esprit, puisque Jean 3:8 dit que le vent souffle où il veut. Être libre ne veut pas dire être improvisé ; cela veut dire tenir le programme avec assez de souplesse pour que l'Esprit puisse encore agir à l'intérieur ou au-delà de ce programme, plutôt que de l'éteindre par une rigidité inflexible.
 
 > EN: Worship must be free. Explain how worship is both planned and open to the Spirit, using John 3:8.
 
 **7. Le culte doit être joyeux. Expliquez comment la sainteté et la joie vont ensemble, et indiquez le contraire.**  
-Mots-clés : joyeu · joie · heureu · consacr · moody · froid · contraire / opposé / oppose · psaume  
+Mots-clés : joyeu · joie · heureu · consacr · moody · froid · patin · psaume  
 Modèle : La sainteté et la joie vont ensemble parce qu'il est tout à fait possible d'être consacré et heureux en même temps — le Psaume 100:2 ordonne : « Servez l'Éternel, avec joie ». La vraie révérence n'exige pas la froideur. Le contraire est un culte si froid et sans vie que D. L. Moody racontait être entré dans une église si froide qu'on aurait pu patiner dans l'allée centrale.
 
 > EN: Worship should be joyous. Explain how holiness and joy belong together, and identify the opposite.
 
-**8. Le culte répond à un besoin humain profond d'adorer. Expliquez-le à l'aide de l'observation de Horton sur l'âme.**  
-Mots-clés : besoin · instinct · adore / adoration · satisf / répond / repond / combl · horton · détourn / detourn / dériv / deriv · âme / ame vivante · profond  
+**8. Pourquoi l'être humain porte-t-il en lui une soif d'adorer ? Expliquez-le à l'aide de l'observation de Douglas Horton.**  
+Mots-clés : besoin · instinct · idol / argent / célébr / celebr · satisf / répond / repond / combl · horton · détourn / detourn / dériv / deriv · l'âme / l'ame / âme vivante / ame vivante · profond  
 Modèle : Le culte répond à un besoin humain profondément enraciné parce que, comme l'a fait remarquer Douglas Horton, l'homme devient une âme vivante et veut adorer — il y a en nous quelque chose d'instinctif qui cherche à adorer quelque chose. Cet instinct peut être détourné vers les idoles, l'argent, la célébrité ou soi-même, mais il ne peut pas être supprimé ; l'âme a été faite pour adorer et elle est sans repos jusqu'à ce qu'elle adore le Dieu qui l'a faite.
 
 > EN: Worship satisfies a deep-seated human need to worship. Explain this, using Horton's observation about the soul.
 
-**9. Le culte édifie la communion fraternelle. Expliquez-le à l'aide de l'affirmation de Horton sur les relations présentes dans le culte.**  
+**9. Le culte fait grandir les liens entre les croyants. Expliquez-le à l'aide de l'affirmation de Horton sur ce qui est déjà présent dans le culte.**  
 Mots-clés : communion / fraterni · édifi / edifi / bâtit / batit / construi · dieu · les autres / autrui · relation · horton · église / eglise · besoin  
 Modèle : Le culte édifie la communion fraternelle parce que, comme l'a affirmé Horton, toute la tâche de l'Église est d'étendre à toute la vie les relations déjà présentes dans le culte — nous avons été créés pour la communion, à la fois avec Dieu et les uns avec les autres. Il y a là une vérité pastorale pratique : si une personne nouvelle ne noue pas une vraie relation avec deux ou trois personnes au cours de ses premiers mois, elle ne restera pas dans l'église, et c'est dans le culte que naissent ces liens.
 
 > EN: Worship builds fellowship. Explain this, using Horton's claim about the relationships present in worship.
 
-**10. Le culte plaît à Dieu et il est ordonné par Dieu. Expliquez ces deux aspects à l'aide du grand commandement et du commandement du jour du repos (le sabbat).**  
-Mots-clés : plaît / plait / plaisir · dieu · command / ordonn · communion · aimer / amour / aimeras · sabbat / jour du repos · désir / desir · grand  
+**10. Le culte plaît à Dieu et il est ordonné par Dieu. Expliquez ces deux aspects en citant les deux commandements bibliques présentés dans la leçon.**  
+Mots-clés : plaît / plait / plaisir · parent / enfant · command / ordonn · communion · aimer / amour / aimeras · sabbat / jour du repos · désir / desir · grand  
 Modèle : Le culte plaît à Dieu parce qu'il désire notre communion comme un parent désire la compagnie de son enfant ; il prend plaisir à ce que nous venions à lui, au lieu d'y être indifférent. Le culte est aussi ordonné : le plus grand commandement est d'aimer le Seigneur, votre Dieu, de tout votre cœur, de toute votre âme, de toute votre force et de toute votre pensée, et « Souviens-toi du jour du repos, pour le sanctifier » est l'un des dix commandements, et non l'une de dix suggestions.
 
 > EN: Worship both pleases God and is commanded by God. Explain both, using the great commandment and the Sabbath command.

@@ -13,12 +13,16 @@ Counts: 25 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 3. Néhémie 4:9 (and 'Nehemiah 4' for the opposition) uses English verse numbering, as do online LSG sources; some printed LSG Bibles number this passage Néhémie 3:33–4:17 (4:9 = 4:3). Should references be adjusted for the Kinshasa pastors' Bibles?
 4. [check] 'Leader' is rendered « dirigeant » in Units 1 and 4, « responsable » in Unit 2 and « leader » in Unit 3; Unit 3 also writes « église » in lower case where the others write « Église ». None is wrong, but do you want one term (and one spelling) used across the whole course?
 
+## Problems in the English source
+
+- SA7: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
 
 - **⚠** **Proverbes 29:18** — « Quand il n'y a pas de révélation, le peuple est sans frein; Heureux s'il observe la loi! »  
-  _Checked online (biblestudytools.com /lsg/). LSG has « révélation » (not « vision ») and « sans frein » (not « périt »). The whole unit is built on the KJV/NKJV wording 'no vision ... perish'. LSG quoted in b005 and b010; b010 adds a short clause « le mot que d'autres versions rendent ici par “vision” » so the lesson still makes sense. Fill 2 now expects « sans frein » (also accepting « périt »); fill 3 expects « révélation »; MC 3 stem reads « pas de vision (de révélation) ». The teaching 'the people perish' is kept in prose._
+  _Checked online (biblestudytools.com /lsg/). LSG has « révélation » (not « vision ») and « sans frein » (not « périt »). The whole unit is built on the KJV/NKJV wording 'no vision ... perish'. LSG quoted in b005 and b010; b010 adds a short sentence on the Hebrew sense (« Le texte hébreu dit littéralement « vision » : au sens ancien, une révélation — une parole de Dieu. ») per convention 1. Fill 2 now expects « sans frein » (also accepting « périt »); fill 3 expects « révélation »; MC 3 stem reads « pas de vision (de révélation) ». The teaching 'the people perish' is kept in prose._
 - **Néhémie 1:4** — « Lorsque j'entendis ces choses, je m'assis, je pleurai, et je fus plusieurs jours dans la désolation. Je jeûnai et je priai devant le Dieu des cieux, »  
   _Checked online (info-bible.org). 'Mourned' = « dans la désolation ». Used in b007 (full) and b008 (abridged as in the English)._
 - **Luc 14:28** — « Car, lequel de vous, s'il veut bâtir une tour, ne s'assied d'abord pour calculer la dépense et voir s'il a de quoi la terminer? »  
@@ -26,7 +30,7 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
 - **Néhémie 2:20** — « Le Dieu des cieux nous donnera le succès. Nous, ses serviteurs, nous nous lèverons et nous bâtirons; »  
   _Checked online (biblestudytools.com /lsg/). 'Prosper us' = « nous donnera le succès »; MC 11 and SA 4 keyword adjusted accordingly. Used in b019, b020, MC 11._
 - **Néhémie 4:9** — « Nous priâmes notre Dieu, et nous établîmes une garde jour et nuit pour nous défendre contre leurs attaques. »  
-  _Checked online (info-bible.org), which numbers it 4:9 as in English Bibles. Some printed LSG editions follow the Hebrew numbering (Néhémie 3:33–4:17), where this verse is 4:3 and the opposition begins at 3:33; reviewer should confirm against the Bibles used in Kinshasa. Used in b019, MC 10, fill 9 (expects « une garde »)._
+  _Checked online (info-bible.org), which numbers it 4:9 as in English Bibles. Some printed LSG editions follow the Hebrew numbering (Néhémie 3:33–4:17), where this verse is 4:3 and the opposition begins at 3:33; reviewer should confirm against the Bibles used in Kinshasa. Used in b019, MC 10, fill 9 (expects « une garde »). Catch-up: fill 9 prompt now quotes LSG verbatim (« Nous priâmes notre Dieu, et nous établîmes ____ jour et nuit »); it had paraphrased « établit ____ jour et nuit »._
 - **Néhémie 2:17** — « Venez, rebâtissons la muraille de Jérusalem, et nous ne serons plus dans l'opprobre. »  
   _Checked online (biblestudytools.com /lsg/). Used in b022._
 - **⚠** **Néhémie 2:18** — « Ils dirent: Levons-nous, et bâtissons! Et ils se fortifièrent dans cette bonne résolution. »  
@@ -80,7 +84,7 @@ La vision n'est pas un slogan
 > EN: Vision Is Not a Slogan
 
 **b010**  
-Le mot vision a été tellement usé par le monde des affaires qu'il nous faut le sauver avant de pouvoir l'employer. Dans la bouche d'un service de marketing, une vision est une phrase habile affichée au mur. Dans la bouche de l'Écriture, c'est quelque chose de bien plus lourd. « Quand il n'y a pas de révélation, le peuple est sans frein » (Proverbes 29:18). Le mot que d'autres versions rendent ici par « vision » a pour sens ancien la révélation — une parole de Dieu — et le proverbe l'associe à l'observation de la loi, de sorte que la vraie vision n'est jamais l'ambition personnelle d'un leader habillée d'un langage spirituel. C'est un fardeau donné par Dieu, en accord avec la Parole de Dieu, et qui conduit à l'action. Une vision qui contredit l'Écriture n'est pas une vision mais de la présomption. Une vision qui ne va jamais au-delà d'une phrase encadrée n'est pas une vision mais une décoration. La vraie vision est une perception claire, donnée par l'Esprit, de ce que Dieu veut que ce peuple devienne et accomplisse — et elle porte en elle l'énergie nécessaire pour la poursuivre réellement. Sans elle, avertit le proverbe, le peuple se disperse et périt ; il rejette tout frein et part à la dérive, parce que personne ne lui a dit où il va ni pourquoi.
+Le mot vision a été tellement usé par le monde des affaires qu'il nous faut le sauver avant de pouvoir l'employer. Dans la bouche d'un service de marketing, une vision est une phrase habile affichée au mur. Dans la bouche de l'Écriture, c'est quelque chose de bien plus lourd. « Quand il n'y a pas de révélation, le peuple est sans frein » (Proverbes 29:18). Le texte hébreu dit littéralement « vision » : au sens ancien, une révélation — une parole de Dieu. Le proverbe l'associe à l'observation de la loi, de sorte que la vraie vision n'est jamais l'ambition personnelle d'un leader habillée d'un langage spirituel. C'est un fardeau donné par Dieu, en accord avec la Parole de Dieu, et qui conduit à l'action. Une vision qui contredit l'Écriture n'est pas une vision mais de la présomption. Une vision qui ne va jamais au-delà d'une phrase encadrée n'est pas une vision mais une décoration. La vraie vision est une perception claire, donnée par l'Esprit, de ce que Dieu veut que ce peuple devienne et accomplisse — et elle porte en elle l'énergie nécessaire pour la poursuivre réellement. Sans elle, avertit le proverbe, le peuple se disperse et périt ; il rejette tout frein et part à la dérive, parce que personne ne lui a dit où il va ni pourquoi.
 
 > EN: The word vision has been so worn down by the business world that we must rescue it before we can use it. In the mouth of a marketing department, a vision is a clever sentence on a wall. In the mouth of Scripture, it is something far weightier. "Where there is no vision, the people perish" (Proverbs 29:18). The older sense of that word is revelation — a word from God — and the proverb pairs it with keeping the law, so that true vision is never a leader's private ambition dressed up in spiritual language. It is a God-given burden that aligns with God's Word and leads to action. A vision that contradicts Scripture is not vision but presumption. A vision that never moves beyond a framed sentence is not vision but decoration. Real vision is a clear, Spirit-given sense of what God would have this people become and do — and it carries within it the energy to actually pursue it. Without it, the proverb warns, the people scatter and perish; they cast off restraint and drift, because no one has told them where they are going or why.
 
@@ -155,7 +159,7 @@ Examen final de l'Unité 3
 > EN: Unit 3 Final Exam
 
 **b025**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -345,7 +349,7 @@ Réponse : **échanson** · aussi acceptées : échanson du roi, échanson royal
 Réponse : **sans frein** · aussi acceptées : sans freins, périt  
 > EN: Proverbs 29:18 warns: "Where there is no vision, the people ____." — **perish**
 
-**3.** En Proverbes 29:18, le mot que d'autres versions rendent par « vision » a pour sens ancien la ____, une parole de Dieu.  
+**3.** En Proverbes 29:18, le texte hébreu dit littéralement « vision » ; au sens ancien, ce mot désigne la ____, une parole de Dieu.  
 Réponse : **révélation** · aussi acceptées : révélation divine, prophétie  
 > EN: The older sense of the word vision in Proverbs 29:18 is ____, a word from God. — **revelation**
 
@@ -369,7 +373,7 @@ Réponse : **dépense** · aussi acceptées : coût, dépenses
 Réponse : **Sanballat** · aussi acceptées : Sanballat le Horonite  
 > EN: Nehemiah had barely begun to build before ____ and Tobiah were mocking, scheming and threatening. — **Sanballat**
 
-**9.** Quand les menaces devinrent sérieuses, le peuple de Néhémie pria Dieu et « établit ____ jour et nuit » (Néhémie 4:9).  
+**9.** Quand les menaces devinrent sérieuses, Néhémie raconte : « Nous priâmes notre Dieu, et nous établîmes ____ jour et nuit » (Néhémie 4:9).  
 Réponse : **une garde** · aussi acceptées : des gardes, des sentinelles, une sentinelle  
 > EN: When the threats grew serious, Nehemiah's people prayed to God and "set ____ against them day and night" (Nehemiah 4:9). — **a watch**
 
@@ -417,7 +421,7 @@ Modèle : Le danger d'une église sans vision, c'est qu'elle part à la dérive 
 
 > EN: What is the danger of a church with no vision, as pictured in the illustration?
 
-**7. Comment le modèle divin/humain apparaît-il dans la vision et la planification de Néhémie ?**  
+**7. Comment le modèle divin/humain apparaît-il dans la vision de Néhémie et dans la manière dont il a préparé l'œuvre ?**  
 Mots-clés : divin · humain · fardeau · dieu · planif / projet · diligen · prière / priere / prier / priai / priant · effort  
 Modèle : Le modèle divin/humain apparaît en ce que la vision et la planification de Néhémie ont uni l'œuvre de Dieu et l'effort humain. Le fardeau est venu de Dieu pendant que Néhémie pleurait et priait ; il était d'origine divine, et non fabriqué par lui. Mais le plan est venu de Dieu à travers la propre diligence de Néhémie, lorsqu'il examina les murailles et calcula ce que l'œuvre exigerait. La prière a fondé la planification au lieu de la remplacer. C'est le même modèle qui traverse toute l'Écriture : Dieu accomplit son dessein par des moyens humains ; le leader cherche donc Dieu à genoux pour recevoir le fardeau, et il travaille avec diligence, de ses mains et de son intelligence, pour le mettre en œuvre.
 

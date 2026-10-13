@@ -9,11 +9,15 @@ Counts: 58 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 ## 1. Questions for Wayne
 
 1. The English short-answer items have no model answers (model: null). I wrote French model answers from the lesson text so the grader check passes. Please review them or send English models to translate.
-2. Mark 10:16 in LSG has a different order: « il les prit dans ses bras, et les bénit, en leur imposant les mains » (arms, blessing, hands), but b022 and MC 5 build a point on KJV's order 'arms first, then hands, then words'. I kept Andi's order as a paraphrase without quotation marks. Should the French soften the 'order' point, or add a note that it follows the KJV/Greek order?
+2. Mark 10:16 in LSG has a different order: « il les prit dans ses bras, et les bénit, en leur imposant les mains » (arms, blessing, hands), but b022 and MC 5 build a point on KJV's order 'arms first, then hands, then words'. I kept Andi's order as a paraphrase without quotation marks. Should the French soften the 'order' point, or add a note that it follows the KJV/Greek order? (The Greek itself has LSG's order — arms, blessed, laying on hands — so the order point rests only on the KJV/NKJV English.)
 3. The source counts Jesus's gestures inconsistently: b022 says 'three short things ... each of those three motions', but b023, MC 5's stem and SA 3 say 'four motions' (MC 5's correct option lists three). I translated as written. Which number should it be?
 4. 2 Timothy 3:15 in LSG says « les saintes lettres », not 'the holy scriptures'; 2 Timothy 3:16 says « inspirée de Dieu » (so fill 9's answer is « inspirée », not 'inspiration'); James 1:22 has « mettez en pratique la parole » rather than 'doers'. I used the LSG wording in the teaching and questions. OK?
-5. The exam block says 'Certificate of Ministry'. I used the house term « Parcours Certificat », but the Unit 7 French draft used « Certificat de ministère ». Which do you want across the course?
+5. The exam block says 'Certificate of Ministry'. Resolved by the edition-wide convention: « Parcours Certificat » (and « Th.M. & M.Div. ») in all four exam blocks (Units 7–10).
 6. [check] Item numbers in the notes above were corrected (MC 4→5, MC 17→18, fill 8→9).
+
+## Problems in the English source
+
+- SA4: English prompt passes its own keywords
 
 ## 2. Bible quotations (Louis Segond 1910)
 
@@ -26,11 +30,11 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
 - **⚠** **Marc 10:14** — « Jésus, voyant cela, fut indigné, et leur dit: Laissez venir à moi les petits enfants, et ne les en empêchez pas; car le royaume de Dieu est pour ceux qui leur ressemblent. »  
   _Checked on bible.com. KJV 'much displeased' = LSG « fut indigné » (fits the lesson's 'righteous indignation' point even better). KJV 'for of such is the kingdom of God' = LSG « car le royaume de Dieu est pour ceux qui leur ressemblent ». Fill 2 answer is « indigné » (accepts irrité, fâché, mécontent); fill 3 answer « royaume » unaffected. b021, MC3, MC19, SA2, SA9._
 - **⚠** **Marc 10:16** — « Puis il les prit dans ses bras, et les bénit, en leur imposant les mains. »  
-  _Checked on bible.com. ORDER DIFFERS: KJV 'took them up in his arms, put his hands upon them, and blessed them'; LSG 'arms, blessed, laying on hands'. b022 builds a point on the order 'arms first, then hands, then words' (also MC4 why). The verse is paraphrased, not quoted, in b022/MC4/SA2, so I kept Andi's order without quotation marks. A Kinshasa reader checking LSG will see a different order. Question for Wayne._
+  _Checked on bible.com. ORDER DIFFERS: KJV 'took them up in his arms, put his hands upon them, and blessed them'; LSG 'arms, blessed, laying on hands'. b022 builds a point on the order 'arms first, then hands, then words' (also MC4 why). The verse is paraphrased, not quoted, in b022/MC4/SA2, so I kept Andi's order without quotation marks. A Kinshasa reader checking LSG will see a different order. Question for Wayne. Note: the Greek order (ἐναγκαλισάμενος … κατευλόγει τιθεὶς τὰς χεῖρας) is arms, blessing, laying on hands — the same as LSG; the 'arms, hands, words' order comes from the KJV/NKJV English, so convention 1's 'Greek sense' sentence cannot support it._
 - **Matthieu 18:1** — « En ce moment, les disciples s'approchèrent de Jésus, et dirent: Qui donc est le plus grand dans le royaume des cieux? »  
   _Checked on bible.com. b032, MC7, SA4._
 - **Matthieu 18:2** — « Jésus, ayant appelé un petit enfant, le plaça au milieu d'eux, »  
-  _Checked on bible.com. b033 quotes « Ayant appelé un petit enfant, [il] le plaça au milieu d'eux ». 'In the midst' = « au milieu » (SA4 keyword)._
+  _Checked with the offline LSG. b033 now quotes the verse verbatim: « Jésus, ayant appelé un petit enfant, le plaça au milieu d'eux » (the earlier bracketed « [il] » removed). 'In the midst' = « au milieu » (SA4 keyword)._
 - **Matthieu 18:6** — « Mais, si quelqu'un scandalisait un de ces petits qui croient en moi, il vaudrait mieux pour lui qu'on suspendît à son cou une meule de moulin, et qu'on le jetât au fond de la mer. »  
   _Checked on bible.com. NKJV 'causes ... to sin' / KJV 'offend' = LSG « scandalisait »; the lesson's 'welcomed, not offended' becomes « accueilli, non scandalisé ». b033, b034, MC9 (correct option is LSG wording), fill 6 (answer « meule »), SA4._
 - **⚠** **2 Timothée 3:14-15** — « Toi, demeure dans les choses que tu as apprises, et reconnues certaines, sachant de qui tu les as apprises; dès ton enfance, tu connais les saintes lettres, qui peuvent te rendre sage à salut par la foi en Jésus-Christ. »  
@@ -211,7 +215,7 @@ Le sermon pour enfants n'est pas seulement un acte de bienveillance envers les e
 > EN: The children's sermon is not only an act of kindness toward the children. It is also a theological act, and the theology behind it is laid down by the Master Teacher himself in Matthew 18. The disciples came to Jesus with a question that was, in its honest form, about themselves: "Who is the greatest in the kingdom of heaven?" (Matthew 18:1). They wanted a ranking. They expected Jesus to point to one of them.
 
 **b033**  
-Jésus ne désigna aucun disciple. « Ayant appelé un petit enfant, [il] le plaça au milieu d'eux » (Matthieu 18:2). Puis il prononça la parole qui devrait planer sur tout ministère auprès des enfants dans le monde entier : « Je vous le dis en vérité, si vous ne vous convertissez et si vous ne devenez comme les petits enfants, vous n'entrerez pas dans le royaume des cieux » (Matthieu 18:3). Et ensuite le verset qui devrait dégriser tout adulte présent : « Mais, si quelqu'un scandalisait un de ces petits qui croient en moi, il vaudrait mieux pour lui qu'on suspendît à son cou une meule de moulin, et qu'on le jetât au fond de la mer » (Matthieu 18:6).
+Jésus ne désigna aucun disciple. « Jésus, ayant appelé un petit enfant, le plaça au milieu d'eux » (Matthieu 18:2). Puis il prononça la parole qui devrait planer sur tout ministère auprès des enfants dans le monde entier : « Je vous le dis en vérité, si vous ne vous convertissez et si vous ne devenez comme les petits enfants, vous n'entrerez pas dans le royaume des cieux » (Matthieu 18:3). Et ensuite le verset qui devrait dégriser tout adulte présent : « Mais, si quelqu'un scandalisait un de ces petits qui croient en moi, il vaudrait mieux pour lui qu'on suspendît à son cou une meule de moulin, et qu'on le jetât au fond de la mer » (Matthieu 18:6).
 
 > EN: Jesus did not point to a disciple. He "called a little child to Him, set him in the midst of them" (Matthew 18:2). Then he said the line that should hang over every children's ministry in the world: "Assuredly, I say to you, unless you are converted and become as little children, you will by no means enter the kingdom of heaven" (Matthew 18:3). And then the verse that should sober every adult in the room: "But whoever causes one of these little ones who believe in Me to sin, it would be better for him if a millstone were hung around his neck, and he were drowned in the depth of the sea" (Matthew 18:6).
 
@@ -316,7 +320,7 @@ Examen de l'Unité 10 (examen final)
 > EN: Unit 10 Examination (Final)
 
 **b054**  
-Parcours Certificat : 20 questions à choix multiples, 90 % (18 sur 20) pour réussir. Master of Theology & Master of Divinity : 20 questions à choix multiples + 10 questions à réponse courte, chaque partie à 90 % de façon indépendante. Chaque question à choix multiples est notée dès que vous cliquez. Il faut réussir les questions à choix multiples avant que les réponses courtes ne comptent. Un échec verrouille la partie concernée pendant 15 minutes ; si vous avez déjà réussi les questions à choix multiples, seule la partie à réponse courte est verrouillée après un échec à cette partie.
+Parcours Certificat : 20 questions à choix multiples, 90 % (18 sur 20) pour réussir. Th.M. & M.Div. : 20 questions à choix multiples + 10 questions à réponse courte, chaque partie à 90 % de façon indépendante. Chaque question à choix multiples est notée dès que vous cliquez. Il faut réussir les questions à choix multiples avant que les réponses courtes ne comptent. Un échec verrouille la partie concernée pendant 15 minutes ; si vous avez déjà réussi les questions à choix multiples, seule la partie à réponse courte est verrouillée après un échec à cette partie.
 
 > EN: Certificate of Ministry: 20 multiple-choice questions, 90% (18 of 20) to pass. Master of Theology & Master of Divinity: 20 MC + 10 short-answer, both at 90% independently. Each MC scores immediately when you click. MC must be passed before SA scores count. A failure locks the relevant section for 15 minutes; if you have already passed MC, only SA locks after an SA fail.
 
@@ -580,7 +584,7 @@ Modèle : Des parents amenaient leurs petits enfants à Jésus pour qu'il les to
 
 > EN: Tell the story of Mark 10:13-16 and explain the four motions Jesus made with the children.
 
-**4. Décrivez les cinq mouvements (rassemblement, récit, vérité, réponse, réserve) d'un sermon pour enfants de cinq minutes.**  
+**4. Décrivez, minute par minute, les cinq mouvements d'un court sermon pour enfants.**  
 Mots-clés : rassembl · récit / recit / histoire · vérité / verite · réponse / reponse · minute  
 Modèle : La première minute est le rassemblement : l'enseignant attend que les enfants s'installent, sourit, salue quelques-uns par leur nom et montre l'objet. La deuxième et la troisième minute sont le récit : un seul récit biblique court, raconté avec ses propres mots, avec des personnages, un problème, une action de Dieu et un résultat. La quatrième minute est la vérité : une phrase théologique, dite deux fois, par exemple « Dieu est fidèle ». La cinquième minute est la réponse : une prière, un verset appris par cœur ou une question. Une minute de réserve couvre ce qui prend plus de temps que prévu.
 

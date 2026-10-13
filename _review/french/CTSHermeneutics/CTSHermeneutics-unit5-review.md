@@ -12,7 +12,13 @@ Counts: 62 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 2. Block b002 is the language-switch button ('Español'). It was left as « Español ». On the French page, should this button offer English, Spanish, or both?
 3. Distances: 'seven miles' Jerusalem–Emmaus was converted to « onze kilomètres » everywhere (lesson, MC 19, fill 1). OK?
 4. SA 6 model answer (English) calls chain-quoting 'the cult habit of chain-quoting verses out of context to prove a system', and SA 7 model quotes the JW rendering 'the Word was a god'; neither detail is in the lesson. Translated as is — keep?
-5. Track names: « Certificat de ministère » was used for 'Certificate of Ministry'; 'Master of Divinity' / 'Master of Theology' kept in English per house style.
+5. Track names: per the settled conventions, the track labels are « Parcours Certificat », « M.Div. » and « Th.M. » (« Certificat de ministère » is reserved for the 12-course certificate).
+
+## Problems in the English source
+
+- SA5: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
 
 ## 2. Bible quotations (Louis Segond 1910)
 
@@ -76,17 +82,17 @@ Choisissez votre parcours
 > EN: Choose your track
 
 **b006**  
-Certificat de ministère : vingt questions à choix multiples par unité. Réussite à 18 sur 20 (90 %).
+Parcours Certificat : vingt questions à choix multiples par unité. Réussite à 18 sur 20 (90 %).
 
 > EN: Certificate of Ministry: Twenty multiple-choice questions per unit. Pass at 18 of 20 (90%).
 
 **b007**  
-Master of Divinity : les mêmes vingt questions à choix multiples, plus dix questions à réponse courte. Réussite à 18 sur 20 aux choix multiples et 9 sur 10 aux réponses courtes, notées séparément.
+M.Div. : les mêmes vingt questions à choix multiples, plus dix questions à réponse courte. Réussite à 18 sur 20 aux choix multiples et 9 sur 10 aux réponses courtes, notées séparément.
 
 > EN: Master of Divinity: Same twenty multiple-choice questions, plus ten short-answer questions. Pass at 18 of 20 multiple-choice and 9 of 10 short-answer, scored independently.
 
 **b008**  
-Master of Theology : noté exactement comme le Master of Divinity — les mêmes vingt questions à choix multiples plus dix questions à réponse courte, avec réussite à 18 sur 20 aux choix multiples et 9 sur 10 aux réponses courtes, notées séparément.
+Th.M. : noté exactement comme le M.Div. — les mêmes vingt questions à choix multiples plus dix questions à réponse courte, avec réussite à 18 sur 20 aux choix multiples et 9 sur 10 aux réponses courtes, notées séparément.
 
 > EN: Master of Theology: Graded exactly like the Master of Divinity — the same twenty multiple-choice questions plus ten short-answer questions, passing at 18 of 20 multiple-choice and 9 of 10 short-answer, scored independently.
 
@@ -596,7 +602,7 @@ Modèle : Philippiens 4:13 — « Je puis tout par celui qui me fortifie » — 
 
 > EN: Take Philippians 4:13 as your worked example. Show how reading verses 11-12 with it transforms the meaning and refutes the prosperity-gospel reading.
 
-**5. Racontez l'histoire d'Eric Booth (l'acteur new-yorkais qui mémorisa l'Évangile selon Marc) et expliquez ce qu'elle enseigne sur la puissance transformatrice de l'Écriture lorsqu'on s'en imprègne jusqu'à saturation.**  
+**5. Racontez l'histoire d'Eric Booth et expliquez ce qu'elle enseigne sur la puissance transformatrice de l'Écriture quand on s'en imprègne en profondeur.**  
 Mots-clés : booth · acteur · selon marc / de marc · mémoris / memoris / par cœur / par coeur · sans religion / sécul / secul / incroyant / non croyant · saturation · la foi / devenu chrétien / devenu chretien / croire · évangile / evangile  
 Modèle : Eric Booth était un acteur new-yorkais sans religion, engagé pour réciter de mémoire tout l'Évangile selon Marc, sans aucun parti pris. Pendant qu'il mémorisait le texte, le travail se mit à faire son œuvre en lui, et la Parole reçue jusqu'à saturation conduisit cet acteur incroyant à la foi. L'histoire montre la puissance transformatrice de l'Écriture lorsqu'on s'en imprègne jusqu'à saturation.
 
@@ -614,9 +620,9 @@ Modèle : Une secte à verset unique comme les Témoins de Jéhovah s'appuie sur
 
 > EN: Explain how a single-verse cult (such as the Jehovah's Witness use of John 1:1) is corrected by the principle of Scripture-interprets-Scripture.
 
-**8. Commentez Luc 24:32 — « Notre cœur ne brûlait-il pas au dedans de nous ? » — et expliquez pourquoi ce verset décrit le vrai fruit du principe « l'Écriture interprète l'Écriture ».**  
+**8. Commentez Luc 24:32 — « Notre cœur ne brûlait-il pas au dedans de nous ? » — et montrez pourquoi ce verset décrit le vrai bénéfice du principe selon lequel la Bible s'interprète par elle-même.**  
 Mots-clés : cœur / coeur · brûl / brul · chemin / route · écriture / ecriture · ouvr / expliqu · fruit / récompense / recompense / résultat / resultat · le feu / un feu / flamme · esprit  
-Modèle : Sur le chemin d'Emmaüs, les disciples se demandèrent : « Notre cœur ne brûlait-il pas au dedans de nous, lorsqu'il nous expliquait les Écritures ? » Ce cœur brûlant est le fruit du principe selon lequel l'Écriture interprète l'Écriture — non de meilleures notes de cours, mais un feu que l'Esprit allume quand les parties de la Bible se parlent les unes aux autres. La Parole donnée par l'Esprit est ouverte par l'Esprit et réchauffe le peuple de l'Esprit.
+Modèle : Sur le chemin d'Emmaüs, les disciples se demandèrent : « Notre cœur ne brûlait-il pas au dedans de nous, lorsqu'il nous parlait en chemin et nous expliquait les Écritures ? » Ce cœur brûlant est le fruit du principe selon lequel l'Écriture interprète l'Écriture — non de meilleures notes de cours, mais un feu que l'Esprit allume quand les parties de la Bible se parlent les unes aux autres. La Parole donnée par l'Esprit est ouverte par l'Esprit et réchauffe le peuple de l'Esprit.
 
 > EN: Discuss Luke 24:32 — "Did not our heart burn within us?" — and explain why this verse describes the true payoff of Scripture-interprets-Scripture.
 
@@ -626,8 +632,8 @@ Modèle : La leçon recommande trois habitudes : utiliser les références crois
 
 > EN: Name the three practical habits this lesson recommends for forming a pastor who lets Scripture interpret Scripture, and briefly explain each.
 
-**10. Expliquez ce que signifie l'affirmation « la Bible interprète l'homme qui vit à l'intérieur d'elle » et pourquoi elle relie le principe « l'Écriture interprète l'Écriture » à la transformation du pasteur lui-même.**  
-Mots-clés : satur · pasteur · transform · catégorie / categorie · métaphore / metaphore · interpr · intérieur / interieur / habite · bible  
+**10. Expliquez ce que signifie l'affirmation « la Bible interprète l'homme qui vit à l'intérieur d'elle » et pourquoi elle relie le principe « l'Écriture interprète l'Écriture » au changement qui s'opère chez le prédicateur lui-même.**  
+Mots-clés : satur · pasteur · transform · catégorie / categorie · métaphore / metaphore · interpr · intérieur / interieur / habite · pense / pensé / imprègn / impregn  
 Modèle : Quand un pasteur vit assez longtemps à l'intérieur de la Bible, la Bible commence à l'interpréter : la saturation transforme sa pensée jusqu'à ce que ses catégories et ses métaphores deviennent bibliques. Cela relie le principe « l'Écriture interprète l'Écriture » à la transformation du pasteur lui-même — la Parole qu'il interprète toute la semaine finit par interpréter et remodeler l'homme lui-même.
 
 > EN: Explain what it means that "the Bible interprets the man who lives inside it" and why this connects Scripture-interprets-Scripture to the pastor's own transformation.

@@ -12,6 +12,12 @@ Counts: 27 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 2. Romans 15:20: LSG reads 'je me suis fait honneur' instead of 'made it my aim'. I kept the lesson's point that Paul 'aimed' at unreached ground, and SA6 accepts either wording. OK?
 3. The 20 multiple-choice items have no explanations ('why') in the English source, so the French has none either. Do you want explanations added later?
 
+## Problems in the English source
+
+- SA3: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -160,7 +166,7 @@ Examen final de l'unité 5
 > EN: Unit 5 Final Exam
 
 **b033**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les questions à choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen attend un court moment avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les questions à choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen attend un court moment avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -387,14 +393,14 @@ Modèle : Sur le chemin de Damas, le Christ ressuscité arrêta Paul, alors Saul
 
 > EN: Describe Paul's conversion on the Damascus road and explain how his commission was missionary from the start.
 
-**2. Quelles sont les deux leçons que la leçon tire de la conversion de Paul (sur qui peut être sauvé et sur le prix) ?**  
-Mots-clés : trop loin / éloigné / eloigne · perdu / endurci / portée / portee · sauvé / sauve / sauver / salut · coût / coûte / prix · conver · souffr · évangile / evangile · christ  
+**2. Quelles sont les deux leçons que la leçon tire de la conversion de Paul (l'une sur la grâce, l'autre sur ce qu'exige la vie de disciple) ?**  
+Mots-clés : trop loin / éloigné / eloigne · perdu / endurci / portée / portee · sauvé / sauve / sauver / salut · coût / cout / coûte / coute / prix · conver · souffr · évangile / evangile · christ  
 Modèle : La leçon tire deux leçons de la conversion de Paul : premièrement, personne n'est trop loin — le même Christ qui a fait d'un Saul un Paul atteint encore aujourd'hui les pécheurs endurcis. Deuxièmement, la conversion coûte au converti — le Seigneur n'a pas promis le confort à Saul, mais lui a montré tout ce qu'il devait souffrir pour son nom (Actes 9:16). Cela montre que l'Évangile est le don gratuit le plus coûteux, et qu'un missionnaire fidèle annonce le prix aux gens dès le départ.
 
 > EN: What two lessons does the lesson draw from Paul's conversion (about who can be saved and about the cost)?
 
-**3. Pourquoi la leçon dit-elle que l'Église a besoin de ses Barnabas ? Expliquez le rôle de Barnabas auprès de Saul.**  
-Mots-clés : barnabas · garant / recommand / répondu / repondu · réputation / reputation · croyant / converti · saul · église / eglise · rôle / fonction / tâche / tache · soutenir / soutien / derrière / derriere / appui  
+**3. Pourquoi la leçon dit-elle que l'Église a besoin de ses Barnabas ? Qu'a fait Barnabas pour l'ancien persécuteur ?**  
+Mots-clés : barnabas · garant / recommand / répondu / repondu · réputation / reputation · croyant / converti · saul · église / eglise · rôle / role / fonction / tâche / tache · soutenir / soutien / derrière / derriere / appui  
 Modèle : La leçon dit que l'Église a besoin de ses Barnabas parce que, lorsque les disciples de Jérusalem craignaient encore Saul, l'ancien persécuteur, c'est Barnabas qui le prit avec lui et se porta garant de lui auprès de l'Église. Le rôle de Barnabas montre qu'il y a dans toute assemblée plus de rôles à la mesure d'un Barnabas que de chaires à la mesure d'un Paul, et que l'avenir de l'Évangile dépend souvent de personnes prêtes à soutenir un nouveau croyant qui n'a encore aucune réputation.
 
 > EN: Why does the lesson say the church needs its Barnabases? Explain Barnabas's role with Saul.
@@ -406,7 +412,7 @@ Modèle : Lors du premier voyage de Paul, Barnabas et lui firent voile vers Chyp
 > EN: Trace Paul's three missionary journeys, naming a key region or city from each.
 
 **5. Expliquez la stratégie missionnaire de Paul consistant à aller dans les grandes villes.**  
-Mots-clés : ville / cités · centre · rayonn · synagogue · juif / juifs · païen / paien / non-juif / nations · église / eglise · ancien  
+Mots-clés : ville / cités / cites · centre · rayonn · synagogue · juif / juifs · païen / paien / non-juif / nations · église / eglise · ancien  
 Modèle : Paul visait de façon stratégique de grandes villes comme Antioche, Éphèse, Corinthe et Philippes, parce qu'elles étaient des centres d'où l'Évangile pouvait rayonner vers la région environnante. Il commençait à la synagogue, portant l'Évangile d'abord au Juif, puis aux païens lorsqu'il était rejeté, et après avoir fondé des Églises, il établissait des anciens pour les diriger avant de repartir — une démarche délibérée et stratégique, et non une errance au hasard.
 
 > EN: Explain Paul's missionary strategy of going to the great cities.
@@ -423,7 +429,7 @@ Modèle : La mission de Paul lui a coûté des larmes — il rappela aux anciens
 
 > EN: Describe the cost of Paul's mission — both his tears and his sufferings.
 
-**8. Expliquez ces paroles de Paul : « Je me suis fait tout à tous, afin d'en sauver de toute manière quelques-uns. »**  
+**8. Expliquez ce que veut dire Paul en 1 Corinthiens 9:22 quand il dit s'être fait « tout à tous ».**  
 Mots-clés : tout à tous / tout a tous · tous les hommes / hommes / personnes · sauver / sauvé / sauve · quelques-uns / quelques uns / quelques · flexib / souple / souplesse · évangile / evangile · adapt · dépens / depens / sacrifi  
 Modèle : Les paroles de Paul, « Je me suis fait tout à tous, afin d'en sauver de toute manière quelques-uns » (1 Corinthiens 9:22), expriment sa disposition à adapter sa manière et son approche pour atteindre des personnes différentes, sans jamais compromettre l'Évangile lui-même. Il était souple dans la méthode, mais jamais dans le message, se dépensant de toutes les façons nécessaires afin que quelques-uns, par tous les moyens, soient sauvés.
 
@@ -435,9 +441,9 @@ Modèle : Paul fut le théologien de la mission parce qu'il ne s'est pas content
 
 > EN: How was Paul not only a missionary but the theologian of the mission? Use Romans and Galatians.
 
-**10. Paul a écrit : « J'ai combattu le bon combat, j'ai achevé la course. » Qu'est-ce que sa vie versée en offrande vous enseigne sur votre part dans les missions ?**  
+**10. Paul a écrit : « J'ai combattu le bon combat » (2 Timothée 4:7). Qu'est-ce que l'exemple de sa vie vous enseigne sur votre propre part dans l'œuvre de Dieu parmi les nations ?**  
 Mots-clés : combat · course · achev / termin · gardé la foi / garde la foi / fidèle / fidele / fidélité / fidelite · versée / versee / répandu / repandu / offrande / libation / consacr · appel · envoy · mission  
-Modèle : Il s'agit d'une question de réflexion personnelle qui invite l'étudiant à considérer ce que la vie de Paul versée en offrande — appelé par la grâce, envoyé par une Église qui prie, stratégique dans son labeur, joyeux dans la souffrance, clair dans son Évangile — enseigne sur sa propre part dans les missions. Une réponse réfléchie relie un aspect précis de l'exemple de Paul (sa disposition à souffrir, son travail d'équipe, sa stratégie ou sa visée des territoires non atteints) à une manière concrète dont l'étudiant pourrait le vivre.
+Modèle : Il s'agit d'une question de réflexion personnelle qui invite l'étudiant à considérer ce que la vie de Paul versée en offrande — appelé par la grâce, envoyé par une Église qui prie, stratégique dans son labeur, joyeux dans la souffrance, clair dans son Évangile, fidèle jusqu'au bout — enseigne sur sa propre part dans les missions. Une réponse réfléchie relie un aspect précis de l'exemple de Paul (sa disposition à souffrir, son travail d'équipe, sa stratégie ou sa visée des territoires non atteints) à une manière concrète dont l'étudiant pourrait le vivre.
 
 > EN: Paul wrote, 'I have fought the good fight, I have finished the race.' What does his poured-out life teach you about your part in missions?
 

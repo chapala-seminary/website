@@ -12,6 +12,15 @@ Counts: 28 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 2. Romans 3:23: LSG 'sont privés de la gloire de Dieu' ('are deprived of') instead of 'fall short of'. MC 9 and SA 7 follow LSG. OK?
 3. The source has no MC explanations ('why' is empty for all 20 items); the French leaves them empty too.
 
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+- SA4: English prompt passes its own keywords
+- SA5: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -95,7 +104,7 @@ II. Le but des missions : la gloire de Dieu parmi les nations
 > EN: II. The Goal of Missions: The Glory of God Among the Nations
 
 **b019**  
-Pourquoi Dieu poursuit-il les nations ? La réponse la plus profonde ne nous concerne pas d'abord. Elle le concerne, lui. Le but ultime des missions est la gloire de Dieu parmi tous les peuples. Dieu est jaloux de son propre nom, et il ne partagera pas sa gloire avec des idoles. « Racontez parmi les nations sa gloire, parmi tous les peuples ses merveilles ! » (Psaume 96:3, LSG). Les prophètes ont vu venir un jour où « la terre sera remplie de la connaissance de la gloire de l'Éternel, comme le fond de la mer par les eaux qui le couvrent » (Habacuc 2:14, LSG).
+Pourquoi Dieu poursuit-il les nations ? La réponse la plus profonde ne nous concerne pas d'abord. Elle le concerne, lui. Le but ultime des missions est la gloire de Dieu parmi tous les peuples. Dieu est jaloux de son propre nom, et il ne partagera pas sa gloire avec des idoles. « Racontez parmi les nations sa gloire, Parmi tous les peuples ses merveilles ! » (Psaume 96:3, LSG). Les prophètes ont vu venir un jour où « la terre sera remplie de la connaissance de la gloire de l'Éternel, Comme le fond de la mer par les eaux qui le couvrent » (Habacuc 2:14, LSG).
 
 > EN: Why does God pursue the nations? The deepest answer is not first about us. It is about Him. The ultimate goal of missions is the glory of God among all peoples. God is jealous for His own name, and He will not share His glory with idols. "Declare His glory among the nations, His wonders among all peoples" (Psalm 96:3, NKJV). The prophets saw a day coming when "the earth will be filled with the knowledge of the glory of the LORD, as the waters cover the sea" (Habakkuk 2:14, NKJV).
 
@@ -170,7 +179,7 @@ Examen final de l'Unité 1
 > EN: Unit 1 Final Exam
 
 **b034**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les questions à choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les questions à choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -391,7 +400,7 @@ Réponse : **repentance**
 
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
-**1. Expliquez ce que l'on entend par missio Dei, et pourquoi il est important que les missions commencent dans le cœur de Dieu plutôt qu'avec l'Église.**  
+**1. Expliquez ce que l'on entend par missio Dei, et pourquoi il est important que les missions prennent leur source en Dieu lui-même plutôt que dans une initiative humaine.**  
 Mots-clés : dieu · envoi / envoy / envoie · père / pere · fils · esprit · cœur / coeur · église / eglise · mission  
 Modèle : La missio Dei est le terme théologique pour « la mission de Dieu » — la vérité selon laquelle les missions n'ont pas commencé avec un grand missionnaire ni même avec la Grande Commission, mais dans l'éternité, dans le cœur même de Dieu : le Père a envoyé le Fils, le Père et le Fils ont envoyé l'Esprit, et le Fils ressuscité envoie maintenant son Église. Il est important que les missions commencent avec Dieu plutôt qu'avec l'Église, car si les missions n'étaient que notre idée, nous pourrions les mettre de côté quand elles deviennent coûteuses ; mais puisqu'elles découlent du caractère du Dieu qui envoie, quand nous partons, nous ne commençons pas quelque chose de nouveau, nous rejoignons ce que Dieu lui-même fait déjà.
 
@@ -409,19 +418,19 @@ Modèle : La chaîne de Paul en Romains 10:13-15 remonte à rebours à partir du
 
 > EN: Trace Paul's chain of missions in Romans 10:13–15. What does each link teach, and what is the conclusion for the unreached?
 
-**4. Pourquoi Jésus-Christ est-il le seul Sauveur, et quels passages l'établissent ? (Actes 4:12 ; Jean 14:6 ; 1 Timothée 2:5)**  
+**4. Pourquoi n'y a-t-il pas d'autre Sauveur que Jésus, et quels passages l'établissent ? (Actes 4:12 ; Jean 14:6 ; 1 Timothée 2:5)**  
 Mots-clés : christ · seul / unique · chemin · autre nom / aucun nom / son nom · médiateur / mediateur · salut · jésus / jesus · vérité / verite  
 Modèle : Jésus-Christ est le seul Sauveur parce que l'Écriture l'établit sans exception : Pierre a déclaré qu'il n'y a de salut en aucun autre, car il n'y a sous le ciel aucun autre nom qui ait été donné parmi les hommes (Actes 4:12) ; Jésus a dit qu'il est le chemin, la vérité, et la vie, et que nul ne vient au Père que par lui (Jean 14:6) ; et Paul a écrit qu'il y a un seul Dieu et un seul médiateur entre Dieu et les hommes, Jésus-Christ homme (1 Timothée 2:5). Ensemble, ces trois passages établissent que le salut se trouve exclusivement en Christ, et non comme une option parmi d'autres.
 
 > EN: Why is Jesus Christ the only Savior, and what passages establish this? (Acts 4:12; John 14:6; 1 Timothy 2:5)
 
-**5. Expliquez pourquoi la vérité qu'il n'y a qu'un seul chemin vers Dieu rend les missions aimantes plutôt que cruelles.**  
+**5. Expliquez pourquoi la vérité qu'il n'y a qu'un seul chemin vers Dieu fait des missions un acte de bonté et non de dureté.**  
 Mots-clés : un seul / une seule / unique · chemin · aimant / amour · cruel / cruaut · sauveur · perdu / mourant / meurent · portons / porter / apporter / apportons · évangile / evangile  
 Modèle : S'il y avait beaucoup de chemins vers Dieu, les missions seraient un gaspillage cruel, envoyant des gens au-delà des océans pour colporter une option parmi beaucoup d'autres chemins tout aussi valables. Mais précisément parce qu'il n'y a qu'un seul Chemin et un seul Médiateur, les missions deviennent la chose la plus aimante que l'Église puisse faire — nous portons le seul pain à des gens qui meurent de faim et le seul remède à des gens qui sont en train de mourir, de sorte que le retenir ne serait pas de la tolérance, mais la pire des cruautés.
 
 > EN: Explain why the truth that there is only one Way to God makes missions loving rather than cruel.
 
-**6. D'après l'Écriture, décrivez le désir de Dieu de sauver le monde. Quelle est la largeur de son cœur et de l'œuvre de la croix ? (1 Timothée 2:4 ; 2 Pierre 3:9 ; 1 Jean 2:2)**  
+**6. D'après l'Écriture, décrivez jusqu'où s'étend l'intention salvatrice de Dieu envers l'humanité. Quelle est la largeur de son cœur et de l'œuvre de la croix ? (1 Timothée 2:4 ; 2 Pierre 3:9 ; 1 Jean 2:2)**  
 Mots-clés : tous / toutes · sauvé / sauve / salut · veut / désir / desir / voulant · périsse / perisse / périr / perir · repentance / repentir · monde · mort / mourut · entier / entière / entiere  
 Modèle : L'Écriture décrit le désir de Dieu de sauver comme s'étendant à tous, sans exception : il veut que tous les hommes soient sauvés et parviennent à la connaissance de la vérité (1 Timothée 2:4) ; il ne veut pas qu'aucun périsse, mais veut que tous arrivent à la repentance (2 Pierre 3:9) ; et Christ est une victime expiatoire pour nos péchés, non seulement pour les nôtres, mais aussi pour ceux du monde entier (1 Jean 2:2). Le cœur de Dieu et la portée de la croix sont aussi larges que la race humaine tout entière, sans qu'aucune nation ni aucun peuple ne soit exclu.
 
@@ -433,19 +442,19 @@ Modèle : Hors de Christ, l'humanité n'est pas simplement malheureuse, mais per
 
 > EN: What is the lostness of humanity apart from Christ, and why does it make missions urgent? (Romans 3:23; Ephesians 2:12)
 
-**8. Expliquez pourquoi la foi est la porte établie du salut, à l'aide d'Hébreux 11:6. Pourquoi l'appel à croire doit-il parvenir à chaque personne ?**  
+**8. Expliquez, à l'aide d'Hébreux 11:6, pourquoi Dieu a fait de la foi le seul accès au salut. Pourquoi cet appel doit-il atteindre tout être humain ?**  
 Mots-clés : la foi / sans foi / par foi · croire / croit / croient / croyant · porte · agréable / agreable · hébreux / hebreux · offre · reçu / recu / recev / reçoi / recoi · chaque / toute personne / tous  
 Modèle : Hébreux 11:6 dit que sans la foi il est impossible d'être agréable à Dieu, ce qui établit la foi comme la porte établie par laquelle le salut doit être reçu. Parce que la foi est la réponse nécessaire, et que la foi vient de ce qu'on entend, l'appel à croire doit parvenir à chaque personne sans exception — personne ne peut franchir une porte qu'on ne lui a jamais montrée ; l'offre de l'Évangile doit donc être présentée avec insistance à toutes les oreilles.
 
 > EN: Explain why faith is the appointed door of salvation, using Hebrews 11:6. Why must the call to believe reach every person?
 
-**9. Qu'enseigne Jean 20:21 sur ceux qui sont envoyés en mission ? En quel sens chaque croyant est-il envoyé ?**  
+**9. Qu'enseigne Jean 20:21 sur ceux que Jésus envoie ? En quel sens tout disciple a-t-il part à cet envoi ?**  
 Mots-clés : envoyé / envoye · père / pere · église / eglise · envoie / envoyer / envoi · croyant · aller / allant / partir / partant · commission · mission  
 Modèle : Jean 20:21 rapporte que Jésus a dit : « Comme le Père m'a envoyé, moi aussi je vous envoie. » Cela enseigne que le fait que l'Église soit envoyée découle directement du fait que Christ lui-même a été envoyé — et cette parole n'a pas été adressée seulement aux missionnaires de profession, mais à l'Église tout entière, ce qui signifie que chaque croyant a part à cet envoi, que ce soit en allant, en envoyant ou en priant.
 
 > EN: What does John 20:21 teach about who is sent on mission? In what sense is every believer sent?
 
-**10. Le Dieu qui envoie envoie encore. Quelle est votre propre réponse : irez-vous, enverrez-vous ou prierez-vous ? Soyez précis.**  
+**10. Dieu n'a pas fini de lancer son appel. Quelle est votre propre réponse : irez-vous, enverrez-vous ou prierez-vous ? Soyez précis.**  
 Mots-clés : aller / irai / partir / partirai · envoyer / enverr · prier / prière / priere / prierai · nation / peuple · particip / ma part · envoie / envoi · encore / toujours · mission  
 Modèle : Il s'agit d'une question de réponse personnelle qui invite l'étudiant à nommer une manière précise et concrète dont il participera à la mission continue de Dieu — que ce soit en allant lui-même, en envoyant d'autres personnes par un soutien financier ou pratique, ou en s'engageant à prier régulièrement pour les peuples non atteints. Une réponse réfléchie nomme une nation, une personne ou une démarche précise plutôt qu'une intention vague et générale.
 

@@ -18,7 +18,7 @@ Counts: 45 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
 
 - **⚠** **Genèse 18:14** — « Y a-t-il rien qui soit étonnant de la part de l'Éternel ? »  
-  _Verset-thème de l'unité (b002, b017, b018, texte à trous 6, QCM 19). L'anglais (NKJV) dit « too hard » (trop difficile) ; LSG dit « étonnant ». Citations gardées en LSG ; le texte à trous porte sur « étonnant » et accepte « difficile / trop difficile / impossible ». Dans b042 (paraphrase, sans guillemets) : « n'est trop difficile pour l'Éternel ». QCM 19 : « rien n'est étonnant de la part de Dieu ». Vérifié en ligne (biblestudytools.com/lsg)._
+  _Verset-thème de l'unité (b002, b017, b018, texte à trous 6, QCM 19). L'anglais (NKJV) dit « too hard » (trop difficile) ; LSG dit « étonnant ». Citations gardées en LSG ; le texte à trous porte sur « étonnant » et accepte « difficile / trop difficile / impossible ». Dans b042 (paraphrase, sans guillemets) : « n'est trop difficile pour l'Éternel ». QCM 19 : « rien n'est trop difficile pour Dieu » (formule courante, non citée comme verset). Conformément à la convention 1, b018 ajoute le sens littéral de l'hébreu (« trop extraordinaire », c'est-à-dire trop difficile). Vérifié avec l'outil LSG hors ligne._
 - **⚠** **Genèse 18:25** — « Celui qui juge toute la terre n'exercera-t-il pas la justice ? »  
   _L'anglais a le nom « Judge » (texte à trous 7 : « Judge ») ; LSG a le verbe « celui qui juge ». Le texte à trous porte donc sur « juge » ; QCM 9 reformulé « la justice de celui qui juge toute la terre ». Vérifié en ligne._
 - **⚠** **Genèse 19:16** — « car l'Éternel voulait l'épargner »  
@@ -130,7 +130,7 @@ Abraham et Sara réagissent tous deux par le rire lorsqu'ils sont placés devant
 > EN: “Is Anything Too Hard for the LORD?”
 
 **b018**  
-Genèse 18:14 pose la question qui domine cette étape de la vie d'Abraham : « Y a-t-il rien qui soit étonnant de la part de l'Éternel ? » Dans son contexte, la question est directement liée au retour annoncé par Dieu et au fils promis à Sara. Elle enseigne donc plus qu'un simple optimisme, mais moins qu'un chèque en blanc pour tout souhait humain. Rien de ce que Dieu se propose et promet ne dépasse sa capacité de l'accomplir. La foi ne repose pas sur le prétendu pouvoir de l'attente positive, mais sur la puissance et la fidélité de l'Éternel.
+Genèse 18:14 pose la question qui domine cette étape de la vie d'Abraham : « Y a-t-il rien qui soit étonnant de la part de l'Éternel ? » Le texte hébreu dit littéralement : « Y a-t-il une chose trop extraordinaire pour l'Éternel ? », c'est-à-dire trop difficile pour lui. Dans son contexte, la question est directement liée au retour annoncé par Dieu et au fils promis à Sara. Elle enseigne donc plus qu'un simple optimisme, mais moins qu'un chèque en blanc pour tout souhait humain. Rien de ce que Dieu se propose et promet ne dépasse sa capacité de l'accomplir. La foi ne repose pas sur le prétendu pouvoir de l'attente positive, mais sur la puissance et la fidélité de l'Éternel.
 
 > EN: Genesis 18:14 asks the question that stands over this stage of Abraham’s life: “Is anything too hard for the LORD?” In context, the question is tied directly to God’s announced return and Sarah’s promised son. It therefore teaches more than optimism but less than a blank check for every human wish. Nothing God purposes and promises is beyond His ability to accomplish. Faith rests not in the supposed power of positive expectation but in the power and faithfulness of the LORD.
 
@@ -170,7 +170,7 @@ La miséricorde au milieu du jugement
 > EN: Mercy in the Midst of Judgment
 
 **b026**  
-Genèse 19 dit que les anges saisirent Lot et sa famille par la main, « car l'Éternel voulait l'épargner ». Même dans un récit de jugement, la délivrance est présentée comme un acte de miséricorde. Le sauvetage de Lot n'est pas une approbation de toutes les décisions qu'il a prises. C'est un rappel de plus que les personnages humains de la Genèse survivent par la miséricorde divine, et non en présentant un dossier sans faute. Le jugement saint et la miséricorde imméritée se tiennent côte à côte.
+Genèse 19 dit que les anges saisirent Lot et sa famille par la main, « car l'Éternel voulait l'épargner ». Le texte hébreu parle littéralement de la compassion de l'Éternel envers lui. Même dans un récit de jugement, la délivrance est présentée comme un acte de miséricorde. Le sauvetage de Lot n'est pas une approbation de toutes les décisions qu'il a prises. C'est un rappel de plus que les personnages humains de la Genèse survivent par la miséricorde divine, et non en présentant un dossier sans faute. Le jugement saint et la miséricorde imméritée se tiennent côte à côte.
 
 > EN: Genesis 19 says that the angels took Lot and his family by the hand because the LORD was merciful to him. Even in a judgment narrative, deliverance is described in the language of mercy. Lot’s rescue is not an endorsement of every decision he has made. It is another reminder that the human characters of Genesis survive by divine mercy rather than by presenting flawless records. Holy judgment and undeserved mercy stand beside one another.
 

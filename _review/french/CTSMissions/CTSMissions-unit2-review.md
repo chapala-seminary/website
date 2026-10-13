@@ -13,6 +13,16 @@ Counts: 26 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 3. Ésaïe 49:6: LSG says the Servant is set 'pour porter mon salut' (to carry God's salvation), while the NKJV says 'that You should be My salvation'. MC 9 follows LSG. Is that acceptable?
 4. All 20 multiple-choice questions have no 'why' explanation in the source, so the French has none either (the 'why' field is left empty).
 
+## Problems in the English source
+
+- SA2: English prompt passes its own keywords
+- SA4: English prompt passes its own keywords
+- SA6: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -28,8 +38,8 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
 - **⚠** **Exode 19:6** — « vous serez pour moi un royaume de sacrificateurs et une nation sainte. »  
   _English 'priests' = LSG 'sacrificateurs'. Fill 6 answer is 'sacrificateurs' (accepts 'prêtres'); MC 4 uses LSG; lesson prose b020 explains 'un sacrificateur, c'est-à-dire un prêtre'; MC 5 says 'le prêtre (sacrificateur)'._
 - **Deutéronome 4:6** — « Cette grande nation est un peuple absolument sage et intelligent! »
-- **Psaume 67:2-3** — « Que Dieu ait pitié de nous et qu'il nous bénisse ... Afin que l'on connaisse sur la terre ta voie, Et parmi toutes les nations ton salut! »  
-  _Verse numbering: English Psalm 67:1-2 = LSG Psaume 67:2-3 (LSG numbers the title as v. 1). Reference changed in b023 and SA 3 model. 'Be merciful' = LSG 'ait pitié'._
+- **Psaume 67:1-2** — « Que Dieu ait pitié de nous et qu'il nous bénisse, Qu'il fasse luire sur nous sa face, -Pause. Afin que l'on connaisse sur la terre ta voie, Et parmi toutes les nations ton salut! »  
+  _Reference follows the English/NKJV numbering (Psaume 67:1-2), per convention 11; the earlier draft had renumbered it to 67:2-3, now reverted in b023 and the SA 3 model. 'Be merciful' = LSG 'ait pitié'._
 - **Psaume 96:3** — « Racontez parmi les nations sa gloire, Parmi tous les peuples ses merveilles! »
 - **Psaume 86:9** — « Toutes les nations que tu as faites viendront Se prosterner devant ta face, Seigneur, Et rendre gloire à ton nom. »
 - **⚠** **Ésaïe 49:6** — « Je t'établis pour être la lumière des nations, Pour porter mon salut jusqu'aux extrémités de la terre. »  
@@ -113,7 +123,7 @@ III. Les nations dans les cantiques d'Israël
 > EN: III. The Nations in the Songs of Israel
 
 **b023**  
-Si nous écoutons attentivement le recueil de cantiques d'Israël, nous entendrons battre le cœur missionnaire presque à chaque page. Les Psaumes sont remplis des nations. « Que Dieu ait pitié de nous et qu'il nous bénisse… Afin que l'on connaisse sur la terre ta voie, Et parmi toutes les nations ton salut ! » (Psaume 67:2-3). « Racontez parmi les nations sa gloire, Parmi tous les peuples ses merveilles ! » (Psaume 96:3). « Toutes les nations que tu as faites viendront Se prosterner devant ta face, Seigneur, Et rendre gloire à ton nom » (Psaume 86:9). Le peuple de Dieu chantait un monde gagné à Dieu bien avant qu'aucun missionnaire ne prenne la mer. La vision de toute langue confessant le Seigneur, que nous rencontrerons dans l'Unité 3, était déjà vivante dans leurs chants.
+Si nous écoutons attentivement le recueil de cantiques d'Israël, nous entendrons battre le cœur missionnaire presque à chaque page. Les Psaumes sont remplis des nations. « Que Dieu ait pitié de nous et qu'il nous bénisse… Afin que l'on connaisse sur la terre ta voie, Et parmi toutes les nations ton salut ! » (Psaume 67:1-2). « Racontez parmi les nations sa gloire, Parmi tous les peuples ses merveilles ! » (Psaume 96:3). « Toutes les nations que tu as faites viendront Se prosterner devant ta face, Seigneur, Et rendre gloire à ton nom » (Psaume 86:9). Le peuple de Dieu chantait un monde gagné à Dieu bien avant qu'aucun missionnaire ne prenne la mer. La vision de toute langue confessant le Seigneur, que nous rencontrerons dans l'Unité 3, était déjà vivante dans leurs chants.
 
 > EN: If we listen carefully to the hymnbook of Israel, we will hear the missionary heartbeat on nearly every page. The Psalms are filled with the nations. "God be merciful to us and bless us... that Your way may be known on earth, Your salvation among all nations" (Psalm 67:1–2, NKJV). "Declare His glory among the nations, His wonders among all peoples" (Psalm 96:3, NKJV). "All nations whom You have made shall come and worship before You, O Lord, and shall glorify Your name" (Psalm 86:9, NKJV). The people of God were singing of a world won to God long before any missionary set sail. The vision of every tongue confessing the Lord, which we will meet in Unit 3, was already alive in their songs.
 
@@ -158,7 +168,7 @@ Examen final de l'Unité 2
 > EN: Unit 2 Final Exam
 
 **b032**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -359,7 +369,7 @@ Réponse : **bonne nouvelle** · aussi acceptées : Évangile, bonne nouvelle de
 Réponse : **sacrificateurs** · aussi acceptées : sacrificateur, prêtres, prêtre  
 > EN: God told Israel, "You shall be to Me a kingdom of ____ and a holy nation" (Exodus 19:6). — **priests**
 
-**7.** Le Psaume 67 prie « afin que l'on connaisse sur la terre ta voie, et parmi toutes les nations ton ____ ».  
+**7.** Le Psaume 67 prie « Afin que l'on connaisse sur la terre ta voie, Et parmi toutes les nations ton ____ ».  
 Réponse : **salut**  
 > EN: Psalm 67 prays "that Your way may be known on earth, Your ____ among all nations." — **salvation**
 
@@ -385,7 +395,7 @@ Modèle : Le plan missionnaire de Dieu est inscrit dans son alliance même avec 
 
 > EN: Explain how God's missionary plan is written into His covenant promise to Abraham.
 
-**2. Que signifiait pour Israël être un « royaume de sacrificateurs » ? Utilisez l'explication que la leçon donne du prêtre.**  
+**2. Selon Exode 19:6, que signifiait pour les descendants de Jacob être un « royaume de sacrificateurs » ? Utilisez l'explication que la leçon donne de ce rôle.**  
 Mots-clés : sacrificat / prêtre / pretre · royaume · entre dieu / intermédiaire / intermediaire · dieu · nation · médiat / mediat · représent / represent · israël / israel  
 Modèle : Le prêtre se tient entre Dieu et les autres hommes : il représente Dieu auprès d'eux et les amène à Dieu. Pour Israël, être « un royaume de sacrificateurs » (Exode 19:6) signifiait que la nation tout entière était mise à part pour transmettre, comme médiatrice, la connaissance du vrai Dieu à toutes les autres nations de la terre — Israël a été choisi non pour garder Dieu pour lui-même, mais pour le représenter devant le monde qui l'observait.
 
@@ -393,11 +403,11 @@ Modèle : Le prêtre se tient entre Dieu et les autres hommes : il représente D
 
 **3. Montrez comment les Psaumes révèlent le cœur de Dieu pour les nations. Donnez au moins un exemple.**  
 Mots-clés : psaume · nation · salut · gloire · prosterner / adorer / adoration / culte · connai / connaî / connu · terre · peuple  
-Modèle : Les Psaumes révèlent le cœur de Dieu pour les nations tout au long du recueil de cantiques d'Israël. Le Psaume 67:2-3 prie afin que l'on connaisse sur la terre la voie de Dieu, et parmi toutes les nations son salut ; le Psaume 96:3 appelle Israël à raconter sa gloire parmi les nations ; et le Psaume 86:9 montre toutes les nations venant se prosterner devant le Seigneur. Le peuple de Dieu chantait un monde gagné à lui bien avant qu'aucun missionnaire ne prenne la mer.
+Modèle : Les Psaumes révèlent le cœur de Dieu pour les nations tout au long du recueil de cantiques d'Israël. Le Psaume 67:1-2 prie afin que l'on connaisse sur la terre la voie de Dieu, et parmi toutes les nations son salut ; le Psaume 96:3 appelle Israël à raconter sa gloire parmi les nations ; et le Psaume 86:9 montre toutes les nations venant se prosterner devant le Seigneur. Le peuple de Dieu chantait un monde gagné à lui bien avant qu'aucun missionnaire ne prenne la mer.
 
 > EN: Show how the Psalms reveal God's heart for the nations. Give at least one example.
 
-**4. Comment le prophète Ésaïe annonce-t-il un salut qui atteint les extrémités de la terre ?**  
+**4. Comment le prophète Ésaïe annonce-t-il un salut destiné à tous les peuples du monde ?**  
 Mots-clés : ésaïe / esaie / esaïe / ésaie · lumière / lumiere · païen / paien / nations / non-juif / nonjuif · salut · extrémité / extremite · terre · prière / priere · serviteur  
 Modèle : Ésaïe annonce à plusieurs reprises un salut qui atteint les extrémités de la terre : Dieu dit de son Serviteur : « Je t'établis pour être la lumière des nations, Pour porter mon salut jusqu'aux extrémités de la terre » (Ésaïe 49:6), et il déclare que son temple sera « une maison de prière pour tous les peuples » (Ésaïe 56:7). Ésaïe a aussi vu d'avance les nations affluer vers la montagne de l'Éternel pour apprendre ses voies, montrant que le salut n'a jamais été destiné à rester enfermé en Israël.
 
@@ -409,31 +419,31 @@ Modèle : Dieu a appelé Jonas à aller prêcher à Ninive, une grande ville pa�
 
 > EN: Tell the story of Jonah and explain why he ran from his mission to Nineveh.
 
-**6. Quel danger Jonas révèle-t-il au sujet du peuple de Dieu ? Reliez-le au cœur missionnaire.**  
+**6. Quel danger Jonas révèle-t-il au sujet du peuple de Dieu ? Reliez-le à l'esprit missionnaire.**  
 Mots-clés : vérité / verite · fardeau / souci · perdu · cœur / coeur · pitié / pitie · nation · danger · jonas  
 Modèle : Jonas révèle le danger d'un peuple qui possède la connaissance de Dieu et pourtant ne ressent aucun fardeau pour les perdus — il avait la vérité sur Dieu, mais pas de cœur pour les nations qui ne le connaissaient pas. Cela touche directement au cœur missionnaire, car la pitié de Dieu lui-même pour Ninive perdue, exprimée dans la question qu'il pose à Jonas à la fin du livre, est le fardeau même que les croyants sont appelés à porter aujourd'hui pour les peuples non atteints.
 
 > EN: What danger does Jonah reveal about the people of God? Connect it to the missionary heart.
 
-**7. Expliquez l'affirmation selon laquelle Israël était « le canal », mais le monde était « le but ».**  
+**7. Expliquez l'affirmation de la leçon selon laquelle le peuple élu était « le canal », mais l'humanité entière était « le but ».**  
 Mots-clés : israël / israel · canal · monde · le but / finalité / finalite · béni / beni / bénédiction / benediction · nation · choisi / élection / election · dessein / projet / intention  
 Modèle : Israël était « le canal » parce que la bénédiction de Dieu devait couler à travers cette nation pour atteindre les autres, et non s'arrêter à Israël lui-même ; le monde était « le but » parce que le dessein ultime du choix d'Israël a toujours été la bénédiction de toutes les familles de la terre. Israël n'a jamais été choisi pour lui seul, mais comme le moyen par lequel le dessein de salut de Dieu pour le monde entier allait progresser.
 
 > EN: Explain the statement that Israel was 'the channel' but the world was 'the goal.'
 
-**8. Comment Malachie, le dernier prophète, montre-t-il que l'Ancien Testament regarde encore vers l'extérieur, vers les nations ?**  
-Mots-clés : malachie · son nom / mon nom / le nom · grand · nation · païen / paien / non-juif / nonjuif · soleil · extérieur / exterieur / au-delà / audela · adorat / adorer / culte / encens / offrande  
+**8. Comment Malachie, le dernier prophète, montre-t-il que l'Ancien Testament garde jusqu'au bout le regard tourné vers les peuples étrangers ?**  
+Mots-clés : malachie · son nom / mon nom / le nom · grand · nation · païen / paien / non-juif / nonjuif · soleil · extérieur / exterieur / au-delà / audela / au-dela · adorat / adorer / culte / encens / offrande  
 Modèle : Malachie, le dernier prophète de l'Ancien Testament, déclare que le nom de Dieu est grand parmi les nations, depuis le lever du soleil jusqu'à son couchant (Malachie 1:11). Même à la fin de l'Ancien Testament, la parole prophétique regarde encore vers l'extérieur et attend toujours que l'adoration monte du milieu des nations, montrant que la vision missionnaire ne s'est jamais éteinte, même lorsque l'époque de l'Ancien Testament touchait à sa fin.
 
 > EN: How does Malachi, the last prophet, show that the Old Testament still looks outward to the nations?
 
-**9. Pourquoi la leçon dit-elle que la Grande Commission n'est pas une idée nouvelle ? Remontez jusqu'à l'Ancien Testament.**  
+**9. Pourquoi la leçon dit-elle que la Grande Commission n'est pas une innovation ? Remontez jusqu'à l'Ancien Testament.**  
 Mots-clés : nouve · abraham · semence / postérité / posterite · promesse / promis · ancien · nation · moisson / récolte / recolte · commission  
 Modèle : La leçon dit que la Grande Commission n'est pas une idée nouvelle parce qu'elle est la moisson d'une semence que Dieu avait plantée bien avant, à commencer par la promesse faite à Abraham que toutes les nations de la terre seraient bénies en sa postérité. Quand Jésus a dit : « faites de toutes les nations des disciples », il menait à son accomplissement un dessein déjà présent dans la Genèse, porté plus loin par la vocation d'Israël comme royaume de sacrificateurs, par les cantiques des Psaumes et par la vision des prophètes voyant les nations venir à Dieu.
 
 > EN: Why does the lesson say the Great Commission is not a new idea? Trace it back to the Old Testament.
 
-**10. La leçon appelle la mission auprès des païens « l'accomplissement de la plus ancienne promesse ». Expliquez ce que cela signifie pour l'Église d'aujourd'hui.**  
+**10. La leçon appelle la mission auprès des païens « l'accomplissement de la plus ancienne promesse ». Expliquez ce que cela signifie pour les croyants de notre temps.**  
 Mots-clés : accompli · promesse / promis · évangile / evangile / bonne nouvelle · nation · abraham · église / eglise · aujourd · terre  
 Modèle : Appeler la mission auprès des païens « l'accomplissement de la plus ancienne promesse » signifie que, lorsque l'Église porte l'Évangile aux nations aujourd'hui, elle ne fait pas quelque chose de nouveau : elle achève ce que Dieu a commencé quand il a dit à Abraham qu'en lui toutes les familles de la terre seraient bénies. Pour l'Église d'aujourd'hui, cela signifie que notre travail missionnaire n'est pas une innovation facultative, mais la continuation du plus ancien dessein rédempteur de Dieu, poursuivi jusqu'à ce qu'il parvienne à son achèvement.
 

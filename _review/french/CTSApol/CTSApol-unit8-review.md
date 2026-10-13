@@ -12,6 +12,13 @@ Counts: 28 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 2. God as 'Mind' is rendered « Esprit » (capital E) to keep the link with the human mind (« esprit »). Could Kinshasa readers confuse it with the Holy Spirit? Alternative: « Intelligence ».
 3. The kettle-and-tea and 'watch on the heath' (« lande ») images were kept as written. Would you like any of them adapted for Congo (for example « savane » instead of « lande »)?
 
+## Problems in the English source
+
+- SA2: English prompt passes its own keywords
+- SA3: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -159,7 +166,7 @@ Ainsi, le chrétien rend à l'univers son étage supérieur. La science lit l'é
 > EN: So the Christian gives the universe back its second story. Science reads the lower floor and reads it well: the how, the mechanism, the law. But the law itself points upward, for a law implies a Lawgiver, and an orderly cosmos that the human mind can actually understand implies a Mind behind it kin to our own. Paul says it in a single breath: "in Him all things consist" — He holds them together. The very regularities that the scientist studies are the faithful habits of the God who upholds all things by the word of His power. Faith is not the retreat of a frightened mind from the advance of knowledge; it is the larger room in which the knowledge finally makes sense. The naturalist must believe that everything came from nothing, that order came from chaos, that mind came from mindless matter, and that reason can be trusted though it was built by an unreasoning process. Hold those up to the light and tell me honestly which takes the greater faith. I, for one, do not have enough faith to be an unbeliever.
 
 **b025**  
-« L'insensé dit en son cœur : Il n'y a point de Dieu ! » — Psaume 14:1
+« L'insensé dit en son cœur: Il n'y a point de Dieu! » — Psaume 14:1
 
 > EN: "The fool has said in his heart, 'There is no God.'" — Psalm 14:1
 
@@ -169,7 +176,7 @@ Examen final de l'Unité 8
 > EN: Unit 8 Final Exam
 
 **b027**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -401,14 +408,14 @@ Modèle : L'unité insiste sur le fait que la querelle n'oppose pas du tout la f
 
 > EN: Explain why the unit says the real quarrel is not between faith and science.
 
-**2. Expliquez la différence entre la question du « comment » et celle du « pourquoi », en vous servant de l'illustration de la bouilloire.**  
+**2. Expliquez la différence entre la question du « comment » et celle du « pourquoi », en vous servant de l'illustration de l'eau qui bout sur le feu.**  
 Mots-clés : comment · pourquoi · science · bouilloire · molécule · tasse de thé / tasse de the · ordre · concurrence  
 Modèle : L'unité distingue deux sortes de questions que l'on ne cesse de confondre. La science est magnifique lorsqu'il s'agit d'étudier les mécanismes et les causes à l'intérieur de la nature : comment une étoile brûle, comment une cellule se divise. Mais l'investigation empirique, de par sa méthode, ne peut pas trancher la question du but ultime — pourquoi il existe un univers, ou pourquoi nous sommes ici. La bouilloire illustre ce point. Un scientifique explique réellement comment l'eau bout : la chaleur agite les molécules jusqu'à ce qu'elles s'échappent sous forme de vapeur. Pourtant ce n'est pas toute la vérité, car il y a aussi une autre question, celle du but : l'eau bout parce que quelqu'un veut une tasse de thé. Les deux réponses ne se font pas concurrence ; elles appartiennent à des ordres d'explication différents. L'homme qui affirme que les molécules sont la seule vraie réponse et que le thé est un conte de fées n'est pas devenu plus scientifique ; il est simplement devenu sourd à la moitié de la réalité, en traitant l'explication causale comme si elle était le tout.
 
 > EN: Explain the difference between the 'how' question and the 'why' question, using the boiling-kettle illustration.
 
 **3. Expliquez le problème du « singe nu » et du « rien d'autre que », en vous servant de l'illustration de la cathédrale.**  
-Mots-clés : rien d'autre · singe · animal · cathédrale / cathedrale · calcaire · décri / decri · contrebande · édifice / edifice / bâtiment / batiment  
+Mots-clés : chimi · singe · animal · cathédrale / cathedrale · calcaire · décri / decri · contrebande · édifice / edifice / bâtiment / batiment  
 Modèle : L'unité met en garde contre la petite expression « rien d'autre que », qu'elle appelle l'expression la plus malhonnête du débat. Il est vrai que l'homme est un animal fait d'atomes qui obéissent à la chimie, et le chrétien n'a pas à reculer devant cela. Mais le saut de « l'homme est un animal » à « l'homme n'est rien d'autre qu'un animal », un singe nu, n'est pas de la science, mais une philosophie introduite en contrebande sous le couvert de la science. La cathédrale le montre clairement. Un chimiste peut analyser une cathédrale et déclarer avec exactitude qu'elle n'est rien d'autre que du calcaire et du verre. Il aurait raison au sujet des pierres et tort au sujet de la cathédrale, car il a tout décrit, sauf ce qui fait d'elle une cathédrale. De la même manière, dire que l'amour n'est rien d'autre que de la chimie ou que vous n'êtes rien d'autre qu'un singe, c'est peser les pierres et passer complètement à côté de l'édifice.
 
 > EN: Explain the 'naked ape' / 'nothing but' problem, using the cathedral illustration.
@@ -443,13 +450,13 @@ Modèle : L'unité rend à l'univers son étage supérieur. La science lit bien 
 
 > EN: How does Colossians 1:17 frame the Christian answer about the order science studies?
 
-**9. Pourquoi l'unité dit-elle que le credo du naturaliste demande en réalité plus de foi que la croyance en un Créateur ?**  
+**9. Pourquoi l'unité dit-elle que le credo du naturaliste est en réalité plus difficile à croire que la croyance en un Créateur ?**  
 Mots-clés : naturalis · rien · chaos · sans esprit · raison · fier / confiance · la foi / de foi / acte de foi · créateur / createur  
 Modèle : L'unité termine en retournant l'accusation. Le naturaliste doit croire une série de choses remarquables : que tout est venu de rien, que l'ordre est sorti du chaos, que l'esprit est venu d'une matière sans esprit, et que l'on peut se fier à la raison bien qu'elle ait été construite par un processus dépourvu de raison, qui ne visait que la survie. Chacune de ces croyances est un grand acte de foi, et toutes ensemble elles en forment un énorme. Le croyant, au contraire, tient qu'un Dieu raisonnable a fait un monde ordonné et a donné à ses créatures un esprit capable de le connaître, ce qui rend réellement compte de l'ordre, de la raison et du sens que le naturaliste doit accepter par une confiance aveugle. Ainsi, quand on expose les deux positions à la lumière, la croyance au Créateur est la plus raisonnable, et l'unité se termine par le refrain du cours : l'auteur n'a pas assez de foi pour être incroyant.
 
 > EN: Why does the unit say the naturalist's creed actually takes more faith than belief in a Creator?
 
-**10. Comment résumeriez-vous l'argumentation d'ensemble de l'unité sur la science et les limites du naturalisme ?**  
+**10. Résumez l'argumentation d'ensemble de l'unité sur ce que la science peut établir et sur ce que le naturalisme ne peut pas expliquer.**  
 Mots-clés : science · comment · pourquoi · naturalis · limite · concept / dessein · esprit · croyan / confiance  
 Modèle : L'argumentation d'ensemble de l'unité est que la science et la foi ne sont pas ennemies, mais que le naturalisme, la philosophie selon laquelle la matière est tout ce qui existe, a des limites qu'il cache. La science étudie brillamment le comment, les mécanismes et les causes à l'intérieur de la nature, mais la méthode empirique, à elle seule, ne tranche pas la question du pourquoi, celle du but ultime ou du sens, et l'expression « rien d'autre que » fait passer une philosophie en contrebande à la faveur de cette limite. L'évolution, même si elle était vraie, présuppose un univers finement réglé qu'elle n'a pas créé, et la conception apparente, comme celle de l'œil, pointe vers un Concepteur, comme une montre pointe vers un horloger. Plus profondément encore, le pur matérialisme sape la raison elle-même, puisqu'un esprit qui ne serait que matière ne pourrait pas mériter notre confiance pour atteindre la vérité, et il ne peut expliquer ni la pensée abstraite, ni la loi morale, ni la soif de sens. La réponse chrétienne est qu'un Esprit se tient derrière l'ordre que la science étudie, en qui toutes choses subsistent, de sorte que la foi est la pièce plus vaste dans laquelle le savoir prend son sens, et que la croyance au Créateur demande moins de foi que l'incrédulité.
 

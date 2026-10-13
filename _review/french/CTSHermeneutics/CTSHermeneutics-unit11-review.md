@@ -15,6 +15,10 @@ Counts: 54 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 5. Acts 17:23b: LSG is neuter (« Ce que vous révérez sans le connaître, c'est ce que je vous annonce »), while the lesson's point is 'introduce the One'. OK to keep LSG here?
 6. b002 is the language switch ('Español'); kept as « Español ». Should the French page offer English/Spanish switching differently?
 
+## Problems in the English source
+
+- SA1, SA2, SA6, SA9, SA10: English prompt passes its own keywords (SA1 hits 6 of 8, SA2 6, SA6 5, SA9 3, SA10 4). French prompts reworded so each reaches at most 2 groups (convention 10). SA3's French prompt also passed (« Expliquez » matched the 'expounded' stem « expliqu »); reworded to « Commentez ».
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -52,7 +56,7 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
 - **Consummation** → Consommation — Standard theological French (« la consommation des siècles ») but may read as 'consumption' to some; alternative « l'accomplissement final ».
 - **the Everlasting One** → Celui qui est éternel — [check] Changed from « l'Éternel », which LSG reserves for YHWH/LORD and so added an identification the English does not make.
 - **delay / delayers** → remettre à plus tard / ceux qui remettent à plus tard — Chosen for plain language; fill 10 accepts temporiser/différer/reporter/procrastiner.
-- **Certificate of Ministry** → Certificat de ministère — Other French courses use « Parcours Certificat » in a different exam-intro block; confirm label.
+- **Certificate of Ministry** → Parcours Certificat — Settled by edition convention 9: « Parcours Certificat » for the track; « Certificat de ministère » only for the 12-course certificate. Master of Divinity / Master of Theology tracks = « Parcours M.Div. » / « Parcours Th.M. ».
 - **lunatic** → on l'a traité de fou — Cf. Marc 3:21 LSG « Il est hors de sens ».
 
 ## 4. Lesson
@@ -90,12 +94,12 @@ Parcours Certificat : vingt questions à choix multiples par unité. Réussite �
 > EN: Certificate of Ministry: Twenty multiple-choice questions per unit. Pass at 18 of 20 (90%).
 
 **b007**  
-Master of Divinity : les mêmes vingt questions à choix multiples, plus dix questions à réponse courte. Réussite à 18 sur 20 aux choix multiples et 9 sur 10 aux réponses courtes, notées séparément.
+Parcours M.Div. : les mêmes vingt questions à choix multiples, plus dix questions à réponse courte. Réussite à 18 sur 20 aux choix multiples et 9 sur 10 aux réponses courtes, notées séparément.
 
 > EN: Master of Divinity: Same twenty multiple-choice questions, plus ten short-answer questions. Pass at 18 of 20 multiple-choice and 9 of 10 short-answer, scored independently.
 
 **b008**  
-Master of Theology : noté exactement comme le Master of Divinity — les mêmes vingt questions à choix multiples plus dix questions à réponse courte, avec réussite à 18 sur 20 aux choix multiples et 9 sur 10 aux réponses courtes, notées séparément.
+Parcours Th.M. : noté exactement comme le parcours M.Div. — les mêmes vingt questions à choix multiples plus dix questions à réponse courte, avec réussite à 18 sur 20 aux choix multiples et 9 sur 10 aux réponses courtes, notées séparément.
 
 > EN: Master of Theology: Graded exactly like the Master of Divinity — the same twenty multiple-choice questions plus ten short-answer questions, passing at 18 of 20 multiple-choice and 9 of 10 short-answer, scored independently.
 
@@ -105,12 +109,12 @@ Certificat
 > EN: Certificate
 
 **b010**  
-M.Div
+M.Div.
 
 > EN: M.Div
 
 **b011**  
-Th.M
+Th.M.
 
 > EN: Th.M
 
@@ -175,7 +179,7 @@ Chaque passage de la Bible se situe quelque part sur cet arc. L'arc est la carte
 > EN: 4. Four Roads to Christ
 
 **b024**  
-À partir de n'importe quel passage de l'Ancien Testament, il existe quatre chemins fiables vers le Christ. La promesse. Dieu l'a dit ; le Christ l'a accompli. Genèse 3:15, la postérité de la femme ; 2 Samuel 7, le fils de David ; Ésaïe 53, le serviteur souffrant ; Jérémie 31, la nouvelle alliance. La ligne va droit de la promesse à la Personne. Le type. Un personnage ou un événement historique préfigure le Christ par sa forme, sinon par son identité. Adam est un type du second Adam. Joseph est un type du frère trahi qui sauve sa famille. Moïse est un type du prophète qui devait venir. Le serpent d'airain dans le désert est un type que Jésus lui-même a revendiqué. L'image. La Bible emploie des images que le Christ vient ensuite habiter. L'agneau de la Pâque. La manne. Le rocher qui donna de l'eau. Le grand prêtre. Le temple. Il dit : Je suis le pain, je suis la porte, je suis le chemin, et chaque image qu'il revendique a une longue histoire dans l'Ancien Testament, une histoire qu'il vient accomplir. La présence. Le Christ préincarné apparaît tout au long de l'Ancien Testament — le quatrième homme dans la fournaise ardente, l'ange de l'Éternel qui lutte avec Jacob, le chef de l'armée de l'Éternel qui vient à la rencontre de Josué. La même Personne qui naîtra à Bethléhem marchait déjà à travers la Genèse.
+À partir de n'importe quel passage de l'Ancien Testament, il existe quatre chemins fiables vers le Christ. La promesse. Dieu l'a dit ; le Christ l'a accompli. Genèse 3:15, la postérité de la femme ; 2 Samuel 7, le fils de David ; Ésaïe 53, le serviteur souffrant ; Jérémie 31, la nouvelle alliance. La ligne va droit de la promesse à la Personne. Le type. Un personnage ou un événement historique préfigure le Christ par sa forme, sinon par son identité. Adam est un type du second Adam. Joseph est un type du frère trahi qui sauve sa famille. Moïse est un type du prophète qui devait venir. Le serpent d'airain dans le désert est un type que Jésus lui-même a revendiqué. L'image. La Bible emploie des images que le Christ vient ensuite habiter. L'agneau de la Pâque. La manne. Le rocher qui donna de l'eau. Le souverain sacrificateur. Le temple. Il dit : Je suis le pain, je suis la porte, je suis le chemin, et chaque image qu'il revendique a une longue histoire dans l'Ancien Testament, une histoire qu'il vient accomplir. La présence. Le Christ préincarné apparaît tout au long de l'Ancien Testament — le quatrième homme dans la fournaise ardente, l'ange de l'Éternel qui lutte avec Jacob, le chef de l'armée de l'Éternel qui vient à la rencontre de Josué. La même Personne qui naîtra à Bethléhem marchait déjà à travers la Genèse.
 
 > EN: From any Old Testament passage, there are four reliable roads to Christ. Promise. God said it; Christ fulfilled it. Genesis 3:15, the seed of the woman; 2 Samuel 7, the son of David; Isaiah 53, the suffering servant; Jeremiah 31, the new covenant. The line runs straight from the promise to the Person. Type. A historical figure or event prefigures Christ in shape if not in identity. Adam is a type of the second Adam. Joseph is a type of the brother betrayed who saves his family. Moses is a type of the prophet who would come. The bronze serpent in the wilderness is a type Jesus Himself claimed. Image. The Bible uses pictures that Christ later inhabits. The Passover lamb. The manna. The rock that gave water. The high priest. The temple. He says, I am the bread, I am the door, I am the way, and every image He claims has a long Old Testament history that He is fulfilling. Presence. The pre-incarnate Christ appears throughout the Old Testament — the fourth Man in the fiery furnace, the Angel of the Lord wrestling Jacob, the Captain of the host meeting Joshua. The same Person who will be born in Bethlehem has been walking through Genesis already.
 
@@ -541,19 +545,19 @@ Réponse : **remettre à plus tard** · aussi acceptées : temporiser, différer
 
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
-**1. Énoncez avec vos propres mots la thèse centrale de cette unité, et expliquez pourquoi chaque texte de la Bible fait partie d'une seule histoire qui suit la trace du Christ.**  
+**1. Énoncez avec vos propres mots la thèse centrale de cette unité, et expliquez quelle place occupe tout passage de l'Écriture dans l'ensemble du Livre.**  
 Mots-clés : entière / entiere / toute la bible · bible · christ · trace / suivre / suit  · histoire · chaque / tous les textes · pointe / mène / mene / conduit · une seule / unique  
 Modèle : La thèse de cette unité est que toute la Bible est une seule histoire qui suit la trace du Christ : chaque texte, dans chaque livre, trouve sa place dans l'unique récit qui pointe vers lui. De la Genèse à l'Apocalypse, les Écritures mènent au Christ ; la tâche du pasteur est donc de trouver où se situe un passage donné dans cette seule histoire et de suivre la ligne jusqu'à lui.
 
 > EN: State the central thesis of this unit in your own words, and explain why every text in the Bible is part of one Christ-tracking story.
 
-**2. Racontez l'histoire de Paul sur l'Aréopage (Actes 17), et expliquez comment il a conduit son auditoire hostile de l'autel « à un dieu inconnu » jusqu'au Christ ressuscité en un seul sermon.**  
+**2. Racontez la prédication de Paul sur l'Aréopage (Actes 17), et expliquez comment, en un seul sermon, il a conduit un auditoire hostile du point où il se trouvait jusqu'au cœur de l'Évangile.**  
 Mots-clés : paul · athènes / athenes · mars / aréopage / areopage · inconnu · dieu · autel · résurrection / resurrection / ressusc · christ  
 Modèle : À Athènes, Paul se tenait sur l'Aréopage, parmi des autels dédiés à tous les dieux grecs, dont un portait l'inscription « À un dieu inconnu ». Il a commencé là où se trouvait son auditoire hostile, avec cet autel, et l'a conduit pas à pas vers le Dieu qu'il ne connaissait pas et vers le Christ ressuscité. En un seul sermon, il est allé de leur propre religion jusqu'à la résurrection.
 
 > EN: Tell the story of Paul on Mars Hill (Acts 17), and explain how he moved his hostile audience from the altar of "the unknown god" to the risen Christ in a single sermon.
 
-**3. Expliquez Luc 24:27, ce que Jésus a fait sur le chemin d'Emmaüs, et pourquoi ce verset est le fondement de tout sermon centré sur le Christ.**  
+**3. Commentez Luc 24:27 : ce que Jésus a fait sur le chemin d'Emmaüs, et pourquoi ce verset est le fondement de tout sermon centré sur le Christ.**  
 Mots-clés : emmaüs / emmaus · moïse / moise · prophète / prophete · écritures / ecritures · lui même / lui meme / le concernait · christ · expliqu / expos · concern  
 Modèle : Luc 24:27 est le fondement de tout sermon centré sur le Christ. Sur le chemin d'Emmaüs, commençant par Moïse et par tous les prophètes, Jésus a expliqué dans toutes les Écritures ce qui le concernait. Il montre que l'Ancien Testament parle de lui ; le prédicateur est donc autorisé — et tenu — à suivre la trace du Christ à travers chaque passage, comme Jésus l'a fait.
 
@@ -571,7 +575,7 @@ Modèle : Il existe quatre chemins qui mènent de n'importe quel passage de l'An
 
 > EN: Identify and briefly describe the four roads from any Old Testament passage to Christ.
 
-**6. Expliquez avec vos propres mots la progression christologique « Comme homme, mais comme Dieu ». Pourquoi tout sermon centré sur le Christ doit-il garder les deux natures en vue en même temps ?**  
+**6. Expliquez avec vos propres mots la progression « Comme homme, mais comme Dieu ». Pourquoi tout sermon centré sur le Seigneur doit-il présenter à la fois son humanité et sa divinité ?**  
 Mots-clés : homme · dieu · natures · personne · christ · les deux / deux natures · crèche / creche / mangeoire · pain de vie / le pain  
 Modèle : La progression « Comme homme, mais comme Dieu » garde en vue en même temps les deux natures du Christ : comme homme, il est né dans une crèche, mais comme Dieu, il est Celui qui est éternel ; comme homme, il a eu faim, mais comme Dieu, il est le Pain de vie ; comme homme, il a eu soif, mais comme Dieu, il est l'Eau vive. Tout sermon centré sur le Christ doit tenir les deux natures ensemble, car il est une seule Personne, pleinement Dieu et pleinement homme.
 
@@ -589,13 +593,13 @@ Modèle : La méthode de l'Aréopage comporte quatre étapes. Commencer là où 
 
 > EN: List the four steps of the Mars Hill preaching method, and briefly explain each.
 
-**9. Décrivez les trois réactions au sermon de Paul sur l'Aréopage, et expliquez pourquoi le fait de REMETTRE À PLUS TARD est présenté comme la plus dangereuse des trois.**  
+**9. Décrivez les trois réactions au sermon de l'apôtre sur l'Aréopage, et expliquez pourquoi le fait de REMETTRE À PLUS TARD est présenté comme la pire des trois.**  
 Mots-clés : moqu · remirent / remettre / remet / plus tard / différ / differ · crurent / ont cru / croyant / crois · danger · décision / decision / décid / decid · press / insist · réponse / reponse / répondre / repondre · paul  
 Modèle : Le sermon de Paul sur l'Aréopage a suscité trois réactions : les uns se moquèrent, d'autres remirent à plus tard en disant « Nous t'entendrons là-dessus une autre fois », et quelques-uns crurent. Remettre à plus tard est présenté comme le plus dangereux, car on peut encore discuter avec le moqueur et le croyant est sauvé, mais celui qui remet à plus tard pense n'avoir pris aucune décision alors qu'il en a pris une — il repousse jusqu'à ce que le moment soit passé. Le prédicateur doit presser ses auditeurs de prendre une décision maintenant, pas plus tard.
 
 > EN: Describe the three responses to Paul's Mars Hill sermon, and explain why DELAY is named the most dangerous of the three.
 
-**10. Racontez l'histoire du garçon sans abri devenu pasteur (telle qu'elle est racontée dans cette leçon) et expliquez l'image finale « Dieu avait mon adresse » : qu'enseigne-t-elle au pasteur sur la prédication devant un Aréopage qui n'a aucun autel ?**  
+**10. Racontez l'histoire du garçon devenu pasteur (telle qu'elle est racontée dans cette leçon) et expliquez la parole par laquelle il la résume : qu'enseigne-t-elle au pasteur sur la prédication devant un Aréopage qui n'a aucun autel ?**  
 Mots-clés : abandonn · sans abri / sans domicile / sans logis / à la rue / a la rue · pont · dieu · adresse · prêch / prech · mars / aréopage / areopage · perdu  
 Modèle : Le garçon de l'histoire avait été abandonné ; sans abri, il dormait sous un pont et étudiait à la lumière d'un 7-Eleven, et pourtant, treize ans plus tard, il prêchait devant mille cinq cents personnes. En regardant en arrière, il a dit : « Dieu avait mon adresse » — Dieu savait où le trouver, même sans maison. La leçon, c'est que le pasteur prêche devant un Aréopage qui n'a aucun autel, en ayant confiance que Dieu a déjà l'adresse de chaque auditeur perdu.
 

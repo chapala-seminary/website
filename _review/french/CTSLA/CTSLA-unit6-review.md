@@ -17,6 +17,14 @@ Counts: 147 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 7. Letter names use standard French spellings (Bêta, Zêta, Êta, Thêta, Oméga), and the reader's language is « français » throughout (e.g. « Héritière en français », « comme le français et l'anglais »), following Unit 1. b051's 'G' as a stand-in for 'God' became « D » for « Dieu », as in the Spanish edition. Please confirm.
 8. b110: the English transliteration of Matthew 4:23 has 'holen'; the Greek ὅλην has an eta, so the French prints 'holên' to match the course's ê-for-eta convention. Please confirm.
 
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+- SA2: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords (single-letter keywords 'h', 'r', 'p', 'n', 'v', 'b' match almost any text; the French replaces them with phrases)
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -26,7 +34,7 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
 - **⚠** **Matthieu 5:18** — « Car, je vous le dis en vérité, tant que le ciel et la terre ne passeront point, il ne disparaîtra pas de la loi un seul iota ou un seul trait de lettre, jusqu'à ce que tout soit arrivé. »  
   _Verified on biblestudytools (LSG). Quoted in b052 and MC9 why. English (KJV-style) says 'not one jot or one tittle'; LSG says « un seul iota ou un seul trait de lettre ». This helps the lesson (Jesus names the iota), but MC9's stem in English calls it 'one jot'; quoting LSG there would give away the answer 'Iota', so the French stem paraphrases (« pas même la plus petite lettre ne disparaîtra de la loi ») without quotation marks._
 - **Matthieu 6:10** — « que ton règne vienne; que ta volonté soit faite sur la terre comme au ciel. »  
-  _Verified on biblestudytools (LSG). « que ta volonté soit faite » used in b098, MC11 (options and why), Fill 9, SA6. MC11 option texts for bread/name/kingdom ('donne-nous aujourd'hui notre pain quotidien', 'que ton nom soit sanctifié', 'que ton règne vienne') follow LSG Matthieu 6:9-11 wording from memory; v. 9 and v. 11 not checked online._
+  _Verified on biblestudytools (LSG). « que ta volonté soit faite » used in b098, MC11 (options and why), Fill 9, SA6. MC11 option texts for bread/name/kingdom ('donne-nous aujourd'hui notre pain quotidien', 'que ton nom soit sanctifié', 'que ton règne vienne') match LSG Matthieu 6:9-11 (checked with the offline LSG tool)._
 - **Romains 12:2** — « Ne vous conformez pas au siècle présent, mais soyez transformés par le renouvellement de l'intelligence, afin que vous discerniez quelle est la volonté de Dieu, ce qui est bon, agréable et parfait. »  
   _Verified on biblestudytools (LSG). b098 and MC11 why quote « quelle est la volonté de Dieu, ce qui est bon, agréable et parfait » (English: 'the good and acceptable and perfect will of God'). In LSG the adjectives describe what God's will is; the word « volonté » (thelêma) is kept, so the lesson's point stands._
 - **Matthieu 2:1** — « Jésus étant né à Bethléhem en Judée, au temps du roi Hérode, voici des mages d'Orient arrivèrent à Jérusalem, »  
@@ -34,7 +42,7 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
 - **Luc 2:4** — « Joseph aussi monta de la Galilée, de la ville de Nazareth, pour se rendre en Judée, dans la ville de David, appelée Bethléhem, parce qu'il était de la maison et de la famille de David, »  
   _Verified on biblestudytools (LSG). b103, MC17 why: « dans la ville de David, appelée Bethléhem » (English quotation substitutes 'Bêthleem'; same handling as Matthieu 2:1)._
 - **Matthieu 4:23** — « Jésus parcourait toute la Galilée, enseignant dans les synagogues, prêchant la bonne nouvelle du royaume, et guérissant toute maladie et toute infirmité parmi le peuple. »  
-  _First part verified on biblestudytools (LSG); the end of the verse (after 'du royaume') was summarised by the tool, not quoted, so it is from memory. b110 quotes only « Jésus parcourait toute la Galilée ». The English gloss 'And Jesus went...' renders the Greek kai; LSG has no « Et ». Transliteration 'holen' corrected to 'holên' (ὅλην has an eta), consistent with the lesson's ê-for-eta convention._
+  _Checked with the offline LSG tool. b110 quotes only « Jésus parcourait toute la Galilée ». The English gloss 'And Jesus went...' renders the Greek kai; LSG has no « Et ». Transliteration 'holen' corrected to 'holên' (ὅλην has an eta), consistent with the lesson's ê-for-eta convention._
 - **Jean 1:1** — « Au commencement était la Parole, et la Parole était avec Dieu, et la Parole était Dieu. »  
   _Verified on biblestudytools (LSG). b060 and MC18 why quote « Au commencement était la Parole ». MC18's English why says 'In the beginning was the Logos' (an adapted quotation); French quotes LSG and adds « (en grec, le Logos) » outside the quotation marks. 'Word' = « Parole », as in Unit 1._
 
@@ -635,7 +643,7 @@ Examen de l'Unité 6
 > EN: Unit 6 Examination
 
 **b119**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -650,12 +658,12 @@ Certificat de ministère — seules les 20 questions à choix multiples comptent
 > EN: Certificate of Ministry — only the 20 multiple-choice count (need 18/20).
 
 **b122**  
-Master of Theology — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
+Th.M. — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
 
 > EN: Master of Theology — 20 multiple-choice (18/20) and 10 short-answer (9/10).
 
 **b123**  
-Master of Divinity — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
+M.Div. — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
 
 > EN: Master of Divinity — 20 multiple-choice (18/20) and 10 short-answer (9/10).
 
@@ -1001,14 +1009,14 @@ Réponse : **pain**
 
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
-**1. Racontez l'histoire de Constantin Tischendorf et du Codex Sinaiticus, et expliquez pourquoi cette unité s'ouvre avec elle.**  
-Mots-clés : tischendorf · sinaï / sinai · catherine · monast · tissu rouge / étoffe rouge / etoffe rouge / linge rouge / drap rouge · codex · sinaiticus · 1859 · grec · préserv / preserv / conserv · tischendorf · sinaï / sinai · catherine · monast · tissu rouge / étoffe rouge / etoffe rouge / linge rouge / drap rouge · codex · sinaiticus · 1859 · grec · préserv / preserv / conserv  
+**1. Racontez l'histoire de Constantin Tischendorf et du manuscrit qu'il découvrit, et expliquez pourquoi cette unité s'ouvre avec elle.**  
+Mots-clés : tischendorf · sinaï / sinai · catherine · monast · tissu rouge / étoffe rouge / etoffe rouge / linge rouge / drap rouge · codex · sinaiticus · 1859 · grec · préserv / preserv / conserv · parchemin · mer morte · catherine · monast · tissu rouge / étoffe rouge / etoffe rouge / linge rouge / drap rouge · identique · british library / londres · 1859 · grec · préserv / preserv / conserv  
 Modèle : En 1859, lors de sa troisième visite au monastère Sainte-Catherine, au pied du mont Sinaï, le bibliste allemand Constantin von Tischendorf, qui avait déjà trouvé quinze ans plus tôt quarante-trois feuillets d'une très ancienne Bible grecque dans un panier destiné au feu, se vit montrer par l'économe, la veille de son départ, un manuscrit enveloppé dans un tissu rouge : 346 feuillets de parchemin contenant la plus grande partie de l'Ancien Testament grec et tout le Nouveau Testament grec, vers 350 apr. J.-C. Il ne dormit pas de la nuit. Ce manuscrit est le Codex Sinaiticus, aujourd'hui à la British Library. L'unité s'ouvre avec cette histoire parce que, comme les manuscrits de la mer Morte pour l'hébreu, le Codex prouve la préservation du texte grec du Nouveau Testament : comparé aux manuscrits médiévaux mille deux cents ans plus tard, il est presque identique. Les lettres grecques que nous apprenons ont été fidèlement préservées.
 
 > EN: Tell the story of Constantin Tischendorf and Codex Sinaiticus and explain why this unit opens with it.
 
-**2. Expliquez pourquoi Dieu a choisi le grec koinè comme langue du Nouveau Testament et quel rôle a joué Alexandre le Grand.**  
-Mots-clés : koinè / koine / koinê · commun · alexandre · grand · conqu · méditerran / mediterran · autoroute · univers · évangile / evangile · septante · koinè / koine / koinê · commun · alexandre · grand · conqu · méditerran / mediterran · autoroute · univers · évangile / evangile · septante  
+**2. Expliquez pourquoi Dieu a choisi le grec koinè comme langue du Nouveau Testament et quel rôle a joué Alexandre de Macédoine.**  
+Mots-clés : koinè / koine / koinê · commun · alexandre · grand · conqu · méditerran / mediterran · autoroute · univers · évangile / evangile · septante · commerce · commun · apôtre / apotre · grèce / grece · conqu · méditerran / mediterran · autoroute · univers · évangile / evangile · septante  
 Modèle : Vers 330 av. J.-C., Alexandre le Grand conquit le monde connu, de la Grèce à l'Inde, et sa conquête répandit dans tout le monde méditerranéen le grec commun, la koinè, langue du commerce, de l'administration et de la conversation. Au temps de Jésus, toute personne lettrée de Rome à Babylone lisait ou parlait un peu de grec. Dieu a ainsi construit son autoroute avant d'y faire rouler son Évangile : les apôtres écrivirent en koinè pour que le monde entier puisse lire ; l'Ancien Testament existait déjà en grec dans la Septante, que les apôtres citaient ; et le grec devint la langue chrétienne universelle pendant cinq siècles.
 
 > EN: Explain why God chose Koiné Greek as the language of the New Testament and how Alexander the Great played a role.
@@ -1020,7 +1028,7 @@ Modèle : Alpha (α) : « a » comme dans « papa ». Bêta (β) : « b ». Gamm
 > EN: List the first twelve letters of the Greek alphabet in order with their sounds.
 
 **4. Comparez l'alphabet grec et l'alphabet hébreu en nommant au moins trois différences importantes.**  
-Mots-clés : grec · hébreu / hebreu · 24 · 22 · voyelle · consonne · gauche · droite · direction / sens de lecture / sens · famili · français / francais / anglais · grec · hébreu / hebreu · 24 · 22 · voyelle · consonne · gauche · droite · direction / sens de lecture / sens · famili · français / francais / anglais  
+Mots-clés : grec · hébreu / hebreu · 24 · 22 · voyelle · consonne · gauche · droite · direction / sens de lecture / sens · famili · français / francais / anglais · racine · préfix / prefix / terminaison · 24 · 22 · voyelle · consonne · gauche · droite · direction / sens de lecture / sens · famili · français / francais / anglais  
 Modèle : Premièrement, le grec a 24 lettres avec les voyelles intégrées, tandis que l'hébreu a 22 consonnes et les voyelles ajoutées sous forme de signes. Deuxièmement, le sens de lecture : l'hébreu se lit de droite à gauche, le grec de gauche à droite, comme le français. Troisièmement, la structure des mots : l'hébreu repose sur des racines de trois consonnes, le grec sur des radicaux avec préfixes et terminaisons. Enfin, la familiarité : l'hébreu paraît étranger, alors que beaucoup de lettres grecques ressemblent déjà aux lettres françaises — avec le piège que certaines (η, ρ, ν) n'ont pas le son qu'elles semblent avoir.
 
 > EN: Compare the Greek and Hebrew alphabets, naming at least three significant differences.
@@ -1043,20 +1051,20 @@ Modèle : Βηθλέεμ se lit Bêthleem (Bêta-Êta-Thêta-Lambda-Epsilon-Epsi
 
 > EN: Read the Greek place name Βηθλέεμ and explain its meaning and origin.
 
-**8. Expliquez le titre de Christ « Je suis l'alpha et l'oméga » (Apocalypse 22:13) et reliez-le au mot hébreu « et » (Aleph-Tav) vu dans l'Unité 3.**  
-Mots-clés : alpha · oméga / omega · premi · derni · grec · aleph · tav · hébreu / hebreu · mot et / petit et / hébreu et / hebreu et · christ · genèse / genese · apocalypse · alpha · oméga / omega · premi · derni · grec · aleph · tav · hébreu / hebreu · mot et / petit et / hébreu et / hebreu et · christ · genèse / genese · apocalypse  
+**8. Expliquez le titre « Je suis l'alpha et l'oméga » et montrez son lien avec un petit mot étudié dans l'Unité 3.**  
+Mots-clés : alpha · oméga / omega · premi · derni · grec · aleph · tav · hébreu / hebreu · mot et / petit et / hébreu et / hebreu et · christ · genèse / genese · apocalypse · commencement · deux testament · premi · derni · grec · aleph · tav · hébreu / hebreu · mot et / petit et / hébreu et / hebreu et · christ · genèse / genese · apocalypse  
 Modèle : En Apocalypse 22:13, Christ dit : « Je suis l'alpha et l'oméga, le premier et le dernier, le commencement et la fin. » Alpha est la première lettre de l'alphabet grec et Oméga la dernière : Christ revendique tout l'alphabet, toute la langue et tout le Nouveau Testament écrit ; il est tout, de A à Z. Dans l'Unité 3, nous avons vu que le petit mot hébreu et, en Genèse 1:1, s'écrit Aleph-Tav, la première et la dernière lettre de l'alphabet hébreu. La même idée encadre donc les deux Testaments : Christ dans l'hébreu, Christ dans le grec ; la première phrase de la Genèse contient discrètement le titre que l'Apocalypse proclame ouvertement.
 
 > EN: Explain Christ's title 'I am the Alpha and the Omega' (Revelation 22:13) and connect it to the Hebrew 'et' (Aleph-Tav) from Unit 3.
 
 **9. Expliquez trois pièges qu'un nouveau lecteur du grec doit éviter parce que certaines lettres grecques ressemblent à des lettres françaises mais produisent des sons différents.**  
-Mots-clés : êta / eta · h · long · rhô / rho · r · p · nu · n · v · bêta / beta · b · v · ressembl / semble · prononc / le son / un son / sonor · différ / differ · êta / eta · h · long · rhô / rho · r · p · nu · n · v · bêta / beta · b · v · ressembl / semble · prononc / le son / un son / sonor · différ / differ  
+Mots-clés : êta / eta · h français / h francais / jamais h / pas h / pas un h · long · rhô / rho · est un r / son r / comme un r / prononce r · à un p / a un p / comme un p / forme de p / forme d un p · le nu / du nu / lettre nu · est un n / son n / comme un n / prononce n · à un v / a un v / comme un v / forme de v · bêta / beta · son b / comme un b / à un b / a un b / prononce b · moderne · ressembl / semble · prononc / le son / un son / sonor · différ / differ · êta / eta · h français / h francais / jamais h / pas h / pas un h · long · rhô / rho · est un r / son r / comme un r / prononce r · à un p / a un p / comme un p / forme de p / forme d un p · le nu / du nu / lettre nu · est un n / son n / comme un n / prononce n · à un v / a un v / comme un v / forme de v · bêta / beta · son b / comme un b / à un b / a un b / prononce b · ancien · familier / familière / familiere · prononc / le son / un son / sonor · forme  
 Modèle : Premier piège : l'Êta majuscule (Η) ressemble au H français, mais il se prononce comme un « e » long, jamais « h ». Deuxième piège : le Rhô (ρ) ressemble à un p, mais c'est un r. Troisième piège : le Nu (ν) ressemble à un v, mais c'est un n. On peut ajouter le Bêta (β) : il ressemble à un B et se prononce « b » en grec ancien, mais « v » en grec moderne. La difficulté du grec n'est donc pas l'étrangeté des formes : des lettres qui semblent familières ont un son différent.
 
 > EN: Explain three pitfalls a new reader of Greek must watch out for because some Greek letters look like English letters but make different sounds.
 
-**10. Décrivez l'Activité du cahier de l'Unité 6 et expliquez pourquoi il est important d'écrire à la main les douze lettres grecques.**  
-Mots-clés : cahier · douze · grec · lettre · tableau · majuscule · minuscule · apocalypse · thelêma / thelema · kai · la main / à la main / a la main / de la main · mémoire / memoire / mémoris / memoris · cahier · douze · grec · lettre · tableau · majuscule · minuscule · apocalypse · thelêma / thelema · kai · la main / à la main / a la main / de la main · mémoire / memoire / mémoris / memoris  
+**10. Décrivez l'Activité du cahier de l'Unité 6 et expliquez pourquoi il est important d'écrire soi-même, au stylo, les caractères appris dans cette unité.**  
+Mots-clés : cahier · douze · grec · lettre · tableau · majuscule · minuscule · apocalypse · thelêma / thelema · kai · la main / à la main / a la main / de la main · mémoire / memoire / mémoris / memoris · colonne · douze · grec · lettre · tableau · majuscule · minuscule · apocalypse · thelêma / thelema · kai · la main / à la main / a la main / de la main · mémoire / memoire / mémoris / memoris  
 Modèle : Dans le cahier, sur une nouvelle page intitulée « Unité 6 — La première moitié de l'alphabet grec », on trace un tableau de cinq colonnes (majuscule, minuscule, nom, son, héritière en français) et on y inscrit les douze lettres grecques d'Alpha à Mu. En dessous, on écrit trois lignes : « Je suis l'alpha et l'oméga » (Apocalypse 22:13) ; thelêma = la volonté de Dieu ; kai = « et ». Puis on écrit encore cinq fois chaque minuscule, lentement. Écrire à la main compte parce que la main enseigne l'œil : le geste grave la forme dans la mémoire, si bien qu'on reconnaît ensuite les lettres sans y penser.
 
 > EN: Describe the Notebook Activity for Unit 6 and explain why writing all twelve Greek letters by hand matters.

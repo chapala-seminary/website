@@ -14,6 +14,10 @@ Counts: 52 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 4. MC 2's explanation says 2 Timothy 2:2 describes the teacher by 'five attributes (faithful, having heard, tested by witnesses, able to teach, multiplying others)', but the lesson itself does not list five attributes. Translated as is; do you want the English explanation adjusted?
 5. Word for 'teacher': « enseignant » is used throughout. Congolese churches often say « moniteur / monitrice » for Sunday-school teachers. Keep « enseignant »?
 
+## Problems in the English source
+
+- SA3: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -264,7 +268,7 @@ Examen de l'Unité 2
 > EN: Unit 2 Examination
 
 **b048**  
-Certificat de ministère : 20 questions à choix multiples, 90 % (18 sur 20) pour réussir. Master of Theology & Master of Divinity : 20 questions à choix multiples + 10 questions à réponse courte, chaque partie à 90 % séparément. Chaque question à choix multiples est notée dès que vous cliquez. Il faut réussir les choix multiples avant que les réponses courtes ne comptent. Un échec verrouille la partie concernée pendant 15 minutes ; si vous avez déjà réussi les choix multiples, seule la partie des réponses courtes se verrouille après un échec.
+Certificat de ministère : 20 questions à choix multiples, 90 % (18 sur 20) pour réussir. Th.M. & M.Div. : 20 questions à choix multiples + 10 questions à réponse courte, chaque partie à 90 % séparément. Chaque question à choix multiples est notée dès que vous cliquez. Il faut réussir les choix multiples avant que les réponses courtes ne comptent. Un échec verrouille la partie concernée pendant 15 minutes ; si vous avez déjà réussi les choix multiples, seule la partie des réponses courtes se verrouille après un échec.
 
 > EN: Certificate of Ministry: 20 multiple-choice questions, 90% (18 of 20) to pass. Master of Theology & Master of Divinity: 20 MC + 10 short-answer, both at 90% independently. Each MC scores immediately when you click. MC must be passed before SA scores count. A failure locks the relevant section for 15 minutes; if you have already passed MC, only SA locks after an SA fail.
 
@@ -522,7 +526,7 @@ Modèle : Pour Andi, l'enseignant compte plus que le programme, la salle de clas
 
 > EN: Explain why Andi says the teacher is the most important element in the teaching-learning process.
 
-**3. Dites ce que 2 Timothée 2:2 enseigne sur l'enseignant et expliquez comment Paul décrit un enseignement fidèle.**  
+**3. Dites ce que 2 Timothée 2:2 dit de celui qui instruit les croyants, et expliquez comment Paul y décrit une instruction digne de confiance.**  
 Mots-clés : fidèl / fidel · entendu · témoin / temoin · confie / confié / confier · transmet / transmis / remet / remis · enseign · autres · timoth  
 Modèle : Paul écrit à Timothée : « Ce que tu as entendu de moi en présence de beaucoup de témoins, confie-le à des hommes fidèles, qui soient capables de l'enseigner aussi à d'autres. » L'enseignant est une personne fidèle qui a entendu les choses de Dieu devant des témoins, qui les reçoit et les transmet. Il n'est question ni de programme, ni de salle, ni de manuel : un enseignement fidèle est une chaîne de personnes fidèles qui transmettent la vérité à d'autres, qui la transmettront à leur tour.
 

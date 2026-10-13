@@ -16,6 +16,13 @@ Counts: 66 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 6. Helen Keller's quotation (b019, b021) is translated from your English; a published French edition of 'The Story of My Life' exists if you prefer its wording. The finger-spelled words were changed to French (P-O-U-P-É-E, G-Â-T-E-A-U, E-A-U), as the Spanish edition did (M-U-Ñ-E-C-A, A-G-U-A) — please confirm.
 7. Following the Spanish edition, 'English' as the reader's language became « français » (b022, b029, b064, MC3, MC5, MC16), and 'English or Spanish' became « le français ou l'anglais » (b028, b058). Historical statements about Strong's English Bible stay 'anglais'.
 
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -349,7 +356,7 @@ Examen de l'Unité 1
 > EN: Unit 1 Examination
 
 **b069**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -364,12 +371,12 @@ Certificat de ministère — seules les 20 questions à choix multiples comptent
 > EN: Certificate of Ministry — only the 20 multiple-choice count (need 18/20).
 
 **b072**  
-Master of Theology — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
+Th.M. — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
 
 > EN: Master of Theology — 20 multiple-choice (18/20) and 10 short-answer (9/10).
 
 **b073**  
-Master of Divinity — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
+M.Div. — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
 
 > EN: Master of Divinity — 20 multiple-choice (18/20) and 10 short-answer (9/10).
 
@@ -595,8 +602,8 @@ Réponse : **principe**
 
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
-**1. Racontez l'histoire d'Helen Keller à la pompe et expliquez quelle leçon elle donne à l'étudiant des langues bibliques.**  
-Mots-clés : helen · keller · l eau / d eau · anne · sullivan · pompe · paume · langage / langue · un nom / chaque nom / noms / nommer · signe · substance · helen · keller · l eau / d eau · anne · sullivan · pompe · paume · langage / langue · un nom / chaque nom / noms / nommer · signe · substance  
+**1. Racontez ce qui est arrivé à Helen Keller en avril 1887 et expliquez quelle leçon cet épisode donne à celui qui étudie l'hébreu et le grec de la Bible.**  
+Mots-clés : helen · keller · l eau / d eau · anne · sullivan · pompe · paume · langage / langue · un nom / chaque nom / noms / nommer · signe · substance · aveugle / sourd · épel / epel · l eau / d eau · anne · sullivan · pompe · paume · langage / langue · un nom / chaque nom / noms / nommer · signe · substance  
 Modèle : Helen Keller était devenue sourde et aveugle à dix-neuf mois. Son enseignante, Anne Sullivan, épelait pendant des semaines des mots dans la paume de sa main, mais Helen ne faisait qu'imiter les gestes. Le 5 avril 1887, à la pompe, Anne fit couler de l'eau froide sur une main d'Helen tout en épelant E-A-U dans l'autre. Helen comprit soudain que ce signe désignait la substance qui coulait sur sa main : toute chose avait un nom, et le langage lui fut révélé. Leçon pour nous : le mot français de notre Bible est le signe dans la paume ; le grec ou l'hébreu est l'eau fraîche. Quand les deux se rejoignent, les versets deviennent des portes.
 
 > EN: Tell the story of Helen Keller at the water pump and explain what lesson it gives to a student of biblical languages.
@@ -607,7 +614,7 @@ Modèle : L'hébreu : la langue de presque tout l'Ancien Testament ; 22 consonne
 
 > EN: List the three biblical languages and give one basic fact about each (where it is used, what it is like).
 
-**3. Donnez au moins trois raisons pour lesquelles les langues bibliques originales comptent, même si les traductions modernes sont bonnes.**  
+**3. Donnez au moins trois raisons pour lesquelles il vaut la peine d'étudier l'hébreu et le grec de la Bible, même si les versions françaises modernes sont bonnes.**  
 Mots-clés : inspir · traduction · perd / perte · nuance · précis / precis / spécifique / specifique · langue · accès / acces · maîtrise / maitrise / couramment · séminaire / seminaire · le mur / muraille · strong · laïc / laic / laïque / laique · inspir · traduction · perd / perte · nuance · précis / precis / spécifique / specifique · langue · accès / acces · maîtrise / maitrise / couramment · séminaire / seminaire · le mur / muraille · strong · laïc / laic / laïque / laique  
 Modèle : Premièrement, Dieu a choisi des langues précises : le choix de la langue faisait partie de l'inspiration. Deuxièmement, aucune traduction ne rend tout ; chaque traduction gagne et perd quelque chose, car la nuance de l'hébreu et du grec ne passe pas entièrement dans une autre langue. Troisièmement, l'étude des mots ouvre des portes : « amour » recouvre quatre mots grecs. Quatrièmement, nous n'avons pas besoin de la maîtrise courante mais d'un accès. Cinquièmement, le mur du séminaire est tombé : depuis la Concordance de Strong, tout laïc peut chercher le mot original.
 
@@ -626,18 +633,18 @@ Modèle : 1) « Abba », c'est-à-dire « père » : Jésus prie ainsi à Geths�
 > EN: Give four examples of Aramaic words or phrases preserved in the New Testament Greek text, with what they mean and where they appear.
 
 **6. Expliquez avec vos propres mots ce que le cours veut dire par « l'accès, non la maîtrise courante ». Pourquoi cette distinction est-elle importante ?**  
-Mots-clés : accès / acces · maîtrise / maitrise / couramment · érudit / erudit / spécialiste / specialiste · cherch / recherch · consult / trouver · minute · verset · séminaire / seminaire · années / annees · facile · quotidien / ordinaire · accès / acces · maîtrise / maitrise / couramment · érudit / erudit / spécialiste / specialiste · cherch / recherch · minute · verset · séminaire / seminaire · années / annees · facile · quotidien / ordinaire  
+Mots-clés : accès / acces · maîtrise / maitrise / couramment · érudit / erudit / spécialiste / specialiste · cherch / recherch · consult / trouver · minute · verset · séminaire / seminaire · années / annees · facile · quotidien / ordinaire · semaine · profond · érudit / erudit / spécialiste / specialiste · cherch / recherch · minute · verset · séminaire / seminaire · années / annees · facile · quotidien / ordinaire  
 Modèle : La maîtrise courante, c'est lire et parler le grec ou l'hébreu comme un spécialiste ; cela demande des années d'étude, souvent au séminaire. L'accès, c'est la capacité de chercher n'importe quel mot biblique en moins d'une minute et de savoir ce qu'il signifie dans son verset ; cela demande quelques semaines. La distinction est importante parce qu'elle rend l'étude des langues facile et possible pour le croyant ordinaire, dans sa vie quotidienne : il n'a pas besoin de devenir érudit pour lire l'Écriture en profondeur.
 
 > EN: Explain in your own words what the course means by saying we want 'access, not fluency.' Why is this an important distinction?
 
 **7. Expliquez pourquoi le cours dit que « le mur du séminaire est tombé » et comment les outils modernes ont rendu l'étude des langues bibliques démocratique.**  
-Mots-clés : strong · 1890 · concordance · numéro / numero · blue · letter · bible · bible hub · téléphone / telephone / smartphone · application / appli · laïc / laic / laïque / laique · démocrat / democrat · séminaire / seminaire · strong · 1890 · concordance · numéro / numero · téléphone / telephone / smartphone · laïc / laic / laïque / laique · démocrat / democrat · séminaire / seminaire  
+Mots-clés : strong · 1890 · concordance · numéro / numero · blue · letter · bible · bible hub · téléphone / telephone / smartphone · application / appli · laïc / laic / laïque / laique · démocrat / democrat · séminaire / seminaire · strong · 1890 · concordance · numéro / numero · téléphone / telephone / smartphone · laïc / laic / laïque / laique · gratuit · professeur  
 Modèle : Autrefois, seuls les professeurs de séminaire pouvaient lire les mots originaux de la Bible. En 1890, James Strong publia sa Concordance exhaustive, qui donnait un numéro à chaque mot hébreu et grec ; tout laïc pouvait alors trouver le mot original derrière un verset sans connaître l'alphabet. Aujourd'hui, des applications gratuites comme Blue Letter Bible et Bible Hub ont achevé ce travail : quiconque a un téléphone peut faire ce que seul un professeur de grec pouvait faire. L'étude est devenue démocratique, ouverte à tous.
 
 > EN: Explain why the course says 'the seminary wall has fallen' and how modern tools have made biblical language study democratic.
 
-**8. Énoncez avec vos propres mots le but de ce cours d'Initiation aux langues bibliques, et expliquez quel genre de lecteur de la Bible l'étudiant sera devenu à la fin.**  
+**8. Dites, en vous exprimant librement, à quoi sert ce cours d'Initiation aux langues bibliques, et décrivez comment l'étudiant abordera la Bible à la fin.**  
 Mots-clés : accès / acces · porte · lire / lecteur / lecture / lisant · parole / mots / un mot · profond · logos · abba · euangelion · ordinaire · croyant · outil · objectif / le but · accès / acces · porte · lire / lecteur / lecture / lisant · parole / mots / un mot · profond · logos · abba · euangelion · ordinaire · croyant · outil · objectif / le but  
 Modèle : Le but du cours n'est pas de faire de moi un spécialiste mais de me donner l'accès : connaître les alphabets hébreu et grec, le sens de quelques mots clés, et savoir chercher n'importe quel mot en moins d'une minute avec les bons outils. À la fin, je serai un croyant ordinaire qui lit la Bible devant une porte ouverte : en lisant Jean 1:1, je verrai le logos ; en lisant Marc 14:36, j'entendrai Abba. Je pourrai lire l'Écriture en profondeur pour le reste de ma vie.
 
@@ -649,8 +656,8 @@ Modèle : Premièrement, ce verset parle lui-même de mots : la révélation de 
 
 > EN: Explain why John 1:1 is the anchor scripture of this course. Give at least two reasons.
 
-**10. Décrivez avec vos propres mots l'activité du cahier de l'Unité 1, et expliquez pourquoi écrire les choses est essentiel dans ce cours.**  
-Mots-clés : cahier · page · trois · colonne · français / francais · mots / un mot / mot français / mot francais · verset · pourquoi · veux / voudr / désir / desir · savoir / connaître / connaitre / sais · la main / à la main / a la main · stylo / plume / crayon · cahier · page · trois · colonne · français / francais · mots / un mot / mot français / mot francais · verset · pourquoi · signifi / sens · veux / voudr / désir / desir · savoir / connaître / connaitre / sais · la main / à la main / a la main · stylo / plume / crayon  
+**10. Décrivez à votre manière l'activité du cahier de l'Unité 1, et dites en quoi le fait d'écrire est essentiel dans ce cours.**  
+Mots-clés : cahier · page · trois · colonne · français / francais · mots / un mot / mot français / mot francais · verset · pourquoi · veux / voudr / désir / desir · savoir / connaître / connaitre / sais · la main / à la main / a la main · stylo / plume / crayon · titre · page · trois · colonne · français / francais · mots / un mot / mot français / mot francais · verset · pourquoi · signifi / sens · veux / voudr / désir / desir · savoir / connaître / connaitre / sais · la main / à la main / a la main · stylo / plume / crayon  
 Modèle : J'ouvre une nouvelle page de mon cahier et j'écris en haut le titre du cours et le nom du Dr. Wayne Cook. Puis je trace trois colonnes : le mot français, le verset où je veux l'étudier, et pourquoi je veux savoir ce qu'il signifie. J'y inscris trois mots, par exemple « amour » en 1 Corinthiens 13. Écrire à la main est essentiel parce qu'on n'apprend pas une langue en lisant à son sujet, mais en écrivant ; le cahier m'accompagnera dans tout le cours.
 
 > EN: Describe the Notebook Activity for Unit 1 in your own words, and explain why writing things down is essential to this course.

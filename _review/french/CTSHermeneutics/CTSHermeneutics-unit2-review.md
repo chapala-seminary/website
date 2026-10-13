@@ -14,7 +14,18 @@ Counts: 68 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 4. Block b002 is the language-switch button ('Español' on the English page). I left it as « Español ». On the French page, should it read « English », « Español », or offer both?
 5. MC10 says Maria Monsen's story happened in 1932, while the lesson says only 'the 1930s'. Translated as is; is 1932 correct?
 6. SA9's model answer lists Moses' biblical objections (Who am I? What is his name? They will not believe me; not eloquent), while the lesson (b056) lists four different excuses (no body, no authority, no credentials, no ability). Both translated as is. Do you want the two lists made consistent?
-7. [check] Units 1–3 are inconsistent with each other: the language switch b002 reads « English » in unit 1 but « Español » in units 2 and 3, and the Certificate track label is « Parcours Certificat » (unit 1), « Parcours Certificat de ministère » (unit 2) and « Certificat de ministère » (unit 3). Please pick one form for each so the whole course matches.
+7. [check] Units 1–3 are inconsistent with each other: the language switch b002 reads « English » in unit 1 but « Español » in units 2 and 3. Please pick one form so the whole course matches. (The track labels are now settled: « Parcours Certificat », « M.Div. », « Th.M. », as in the rest of the edition.)
+
+## Problems in the English source
+
+- SA2: English prompt passes its own keywords
+- SA3: English prompt passes its own keywords
+- SA4: English prompt passes its own keywords
+- SA5: English prompt passes its own keywords
+- SA6: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
 
 ## 2. Bible quotations (Louis Segond 1910)
 
@@ -24,7 +35,7 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
   _b018, b017, MC1, fill 1, SA1. Verified on biblestudytools.com (LSG). NKJV 'the deep things of God' = LSG 'les profondeurs de Dieu'; fill 1 answer changed from 'deep' to « profondeurs », and lesson prose uses « profondeurs » throughout. Citation label changed from NKJV to LSG._
 - **⚠** **1 Corinthiens 2:14** — « Mais l'homme animal ne reçoit pas les choses de l'Esprit de Dieu, car elles sont une folie pour lui, et il ne peut les connaître, parce que c'est spirituellement qu'on en juge. »  
   _b020, MC2, fill 2, SA1. Verified on biblestudytools.com (LSG). NKJV 'natural man' = LSG 'homme animal' (an old sense of 'animal' = psychikos, not 'beast'). Fill 2 answer is « animal », with « naturel » accepted; MC2 stem and SA1 model gloss it as « l'homme naturel »; SA1 keyword accepts both._
-- **⚠** **Esdras 7:10** — « Car Esdras avait appliqué son coeur à étudier et à mettre en pratique la loi de l'Eternel »  
+- **⚠** **Esdras 7:10** — « Car Esdras avait appliqué son coeur à étudier et à mettre en pratique la loi de l'Éternel »  
   _b024, MC5, SA2. Verified on biblestudytools.com (LSG), first half of verse quoted. NKJV 'prepared his heart to seek the Law' vs LSG 'avait appliqué son cœur à étudier'. The lesson's point (the heart comes first) survives; MC5 option and SA2 still say « préparer son cœur », with the LSG wording given in the SA2 prompt and MC5 'why'. SA2 keyword accepts « prépar » or « appliqu »._
 - **⚠** **Jacques 1:5** — « Si quelqu'un d'entre vous manque de sagesse, qu'il la demande à Dieu, qui donne à tous simplement et sans reproche, et elle lui sera donnée. »  
   _b029, MC7, fill 6, SA3. Verified on biblestudytools.com (LSG). NKJV 'liberally' vs LSG 'simplement'. MC7 option glosses « simplement (généreusement) »; SA3 keyword accepts « simplement », « généreu », « libéral »._
@@ -38,7 +49,7 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
   _b041. Verified on biblestudytools.com (LSG)._
 - **Matthieu 14:31** — « Homme de peu de foi, pourquoi as-tu douté? »  
   _b045. Verified on biblestudytools.com (LSG)._
-- **Ésaïe 59:1** — « Non, la main de l'Eternel n'est pas trop courte pour sauver »  
+- **Ésaïe 59:1** — « Non, la main de l'Éternel n'est pas trop courte pour sauver »  
   _b049. Allusion, not marked as a quotation; LSG wording « la main de l'Éternel n'est pas trop courte » used (English 'the hand of the Lord'). Verified on biblestudytools.com (LSG)._
 - **Jean 1:29** — « Voici l'Agneau de Dieu, qui ôte le péché du monde. »  
   _b051, first clause quoted. Verified on biblestudytools.com (LSG)._
@@ -53,7 +64,7 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
 - **Hébreux 13:5** — « Je ne te délaisserai point, et je ne t'abandonnerai point. »  
   _b054, MC17 why. Verified on biblestudytools.com (LSG)._
 - **Exode 4:10** — « Ah! Seigneur, je ne suis pas un homme qui ait la parole facile, ... car j'ai la bouche et la langue embarrassées. »  
-  _b056 (paraphrased in italics), MC18 option and why, SA9 model. English 'slow of speech and tongue' = LSG 'la bouche et la langue embarrassées'. Verified on biblestudytools.com (LSG)._
+  _b056 (paraphrased in italics), MC18 option and why, SA9 model. English 'slow of speech and tongue' = LSG 'la bouche et la langue embarrassées'. Verified on biblestudytools.com (LSG). SA 9 model now quotes Segond verbatim (« Je ne suis pas un homme qui ait la parole facile… j'ai la bouche et la langue embarrassées »); it had a paraphrase in quotation marks._
 - **Exode 4:11** — « Qui a fait la bouche de l'homme? »  
   _b056, MC18, MC19 why. English 'Who made the mouth?'; LSG wording used. Verified on biblestudytools.com (LSG)._
 - **Exode 3:11; 3:13; 4:1** — « Qui suis-je, pour aller vers Pharaon ... quel est son nom ... Voici, ils ne me croiront point »  
@@ -63,7 +74,7 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
 
 ## 3. Terms for the reviewer to confirm
 
-- **Certificate of Ministry (track)** → Parcours Certificat de ministère — House term is « Parcours Certificat »; I added « de ministère » to match the English label. Shorten if the other courses use the bare form.
+- **Certificate of Ministry (track)** → Parcours Certificat — Settled edition-wide (convention 9): the track is « Parcours Certificat »; « Certificat de ministère » is reserved for the 12-course certificate.
 - **eisegesis** → eiségèse — Usual French form « eiségèse »; some write « eisegèse ». Fill-in grading ignores accents, and the English « eisegesis » is also accepted.
 - **natural man (1 Cor 2:14)** → l'homme animal (LSG) / l'homme naturel — LSG's « animal » is archaic and may mislead; glossed with « naturel » in teaching and questions.
 - **a Helper** → un Aide — Echoes Jean 14 (LSG « consolateur »). « un Aide » keeps the author's wording; « le Consolateur » would be another option.
@@ -100,17 +111,17 @@ Choisissez votre parcours
 > EN: Choose your track
 
 **b006**  
-Parcours Certificat de ministère : vingt questions à choix multiples par unité. Réussite avec 18 sur 20 (90 %).
+Parcours Certificat : vingt questions à choix multiples par unité. Réussite avec 18 sur 20 (90 %).
 
 > EN: Certificate of Ministry: Twenty multiple-choice questions per unit. Pass at 18 of 20 (90%).
 
 **b007**  
-Master of Divinity : les mêmes vingt questions à choix multiples, plus dix questions à réponse courte. Réussite avec 18 sur 20 aux choix multiples et 9 sur 10 aux réponses courtes, notées séparément.
+M.Div. : les mêmes vingt questions à choix multiples, plus dix questions à réponse courte. Réussite avec 18 sur 20 aux choix multiples et 9 sur 10 aux réponses courtes, notées séparément.
 
 > EN: Master of Divinity: Same twenty multiple-choice questions, plus ten short-answer questions. Pass at 18 of 20 multiple-choice and 9 of 10 short-answer, scored independently.
 
 **b008**  
-Master of Theology : noté exactement comme le Master of Divinity — les mêmes vingt questions à choix multiples plus dix questions à réponse courte, avec réussite à 18 sur 20 aux choix multiples et 9 sur 10 aux réponses courtes, notées séparément.
+Th.M. : noté exactement comme le M.Div. — les mêmes vingt questions à choix multiples plus dix questions à réponse courte, avec réussite à 18 sur 20 aux choix multiples et 9 sur 10 aux réponses courtes, notées séparément.
 
 > EN: Master of Theology: Graded exactly like the Master of Divinity — the same twenty multiple-choice questions plus ten short-answer questions, passing at 18 of 20 multiple-choice and 9 of 10 short-answer, scored independently.
 
@@ -120,12 +131,12 @@ Certificat
 > EN: Certificate
 
 **b010**  
-M.Div
+M.Div.
 
 > EN: M.Div
 
 **b011**  
-Th.M
+Th.M.
 
 > EN: Th.M
 
@@ -632,31 +643,31 @@ Modèle : Paul dit que l'Esprit sonde les profondeurs de Dieu et nous les révè
 
 > EN: According to 1 Corinthians 2:10-14, why is the Holy Spirit essential for understanding the Bible? Explain what only the Spirit can give the interpreter.
 
-**2. Expliquez le principe d'Esdras 7:10 : « Esdras avait appliqué son cœur » (il avait préparé son cœur). Pourquoi la préparation du cœur vient-elle avant l'exégèse dans l'argument de cette unité ?**  
+**2. Expliquez le principe d'Esdras 7:10 sur la disposition intérieure de l'interprète. Pourquoi, dans l'argument de cette unité, cette disposition doit-elle précéder l'exégèse ?**  
 Mots-clés : cœur / coeur · prépar / prepar / appliqu · humbl / humilit · posture / attitude · prière / priere / prier / priant · incline / prosterne / courbe / genoux · avant · Esdras  
 Modèle : Esdras avait préparé son cœur avant de manier la loi. La préparation du cœur vient avant l'exégèse parce que l'interprète doit venir dans une attitude humble — en priant et en s'inclinant devant la page — afin de lire pour obéir plutôt que pour dominer le texte. Un cœur orgueilleux déformera même une bonne exégèse.
 
 > EN: Explain the principle in Ezra 7:10 that "Ezra prepared his heart." Why does heart-preparation come before exegesis in this unit's argument?
 
-**3. Jacques 1:5-8 demande au pasteur de demander à Dieu la sagesse. Expliquez quel genre de demande reçoit la sagesse, et quel genre de demande ne la reçoit PAS.**  
-Mots-clés : sagesse · demand · avec foi / la foi / confiance · dout · flot / agité / agite / hésit / hesit / balloté / ballote · irrésolu / irresolu / double / partagé · simplement / libéral / liberal / généreu / genereu / largement · reçoi / recoi / recev / reçu / obtien  
+**3. Jacques 1:5-8 invite le pasteur à prier Dieu pour la sagesse. Expliquez quelle sorte de prière est exaucée, et quelle sorte ne l'est PAS.**  
+Mots-clés : sagesse · demand · avec foi / la foi / confiance · dout · flot / agité / agite / hésit / hesit / balloté / ballote · irrésolu / irresolu / double / partagé / partage · simplement / libéral / liberal / généreu / genereu / largement · reçoi / recoi / recev / obtien  
 Modèle : Dieu donne la sagesse simplement, c'est-à-dire généreusement, à celui qui la demande avec foi, sans douter. La demande qui reçoit, c'est une confiance sans partage ; celle qui ne reçoit pas, c'est celle de l'homme irrésolu, qui est agité comme le flot de la mer : il ne doit pas s'imaginer qu'il recevra quelque chose du Seigneur.
 
 > EN: James 1:5-8 tells the pastor to ask God for wisdom. Explain what kind of asking receives wisdom, and what kind of asking does NOT.
 
-**4. Décrivez au moins deux des trois histoires de prière de cette unité (Maria Monsen, « Dieu a vendu le bétail », l'homme aux listes de prière) et expliquez ce que chacune enseigne sur la prière devant la Bible.**  
+**4. Décrivez au moins deux des trois histoires de prière racontées dans cette unité, et expliquez ce que chacune enseigne sur la prière devant la Bible.**  
 Mots-clés : Monsen · goutte · accord · réveil / reveil · Dallas · bétail / betail / troupeau · chèque / cheque · prière / priere / prier / prié / prie  
 Modèle : Maria Monsen priait pour un réveil en Chine ; se souvenant que le Yangtsé commence par des gouttes de pluie, elle trouva une partenaire qui fut d'accord avec elle — et le réveil vint. Au séminaire de Dallas, menacé de saisie, Harry Ironside pria pour que Dieu vende une partie du bétail sur mille collines, et un éleveur texan arriva avec un chèque du montant exact de la dette. Ces deux histoires enseignent que la prière devant la Bible pousse Dieu à agir.
 
 > EN: Describe at least two of the three prayer stories in this unit (Maria Monsen, "God sold the cattle," the man with prayer lists) and explain what each teaches about prayer over the Bible.
 
-**5. La leçon nomme trois doutes d'après Thomas, Pierre et Jean-Baptiste. Nommez chaque doute et expliquez brièvement la question qu'il pose.**  
+**5. La leçon distingue trois doutes, chacun portant le nom d'un personnage biblique. Nommez chaque doute et expliquez brièvement la question qu'il pose.**  
 Mots-clés : Thomas · Pierre · Jean · exist · puissance / pouvoir · atteint / atteindre · vraiment / réellement / reellement · doute  
 Modèle : Les trois doutes portent le nom de trois hommes. Le doute de Thomas demande : « Dieu existe-t-il vraiment ? » Le doute de Pierre demande : « Sa puissance m'atteint-elle ? » Et le doute de Jean-Baptiste demande : « Suis-je vraiment à lui ? » Le premier porte sur Dieu, le deuxième sur sa puissance, le troisième sur moi-même.
 
 > EN: The lesson names three doubts after Thomas, Peter, and John the Baptist. Name each doubt and briefly explain the question it asks.
 
-**6. Expliquez le doute de Thomas et la manière dont un pasteur qui a lutté avec ce doute peut aider un incroyant ou un croyant qui doute.**  
+**6. Expliquez le doute de Thomas et comment un pasteur qui l'a affronté peut aider ceux qui ne croient pas encore, ou les croyants ébranlés.**  
 Mots-clés : Thomas · exist · ressuscit · Christ · preuve / évidence / evidence · doute · incroyant / non croyant / incrédul / incredul · réponse / reponse / répond / repond  
 Modèle : Le doute de Thomas demande si Dieu existe et si le Christ ressuscité est réel. Le pasteur qui a terrassé ce doute — et qui a trouvé sa réponse dans le Christ ressuscité lui-même, et pas seulement dans les preuves de l'apologétique — peut se tenir calmement devant un incroyant ou un croyant qui doute et accueillir la même question avec une confiance paisible.
 
@@ -668,19 +679,19 @@ Modèle : Wayne Woodward a quitté un bon emploi chez Boeing à Winnipeg et a em
 
 > EN: Tell the Wayne Woodward story in your own words and explain why it is an illustration of Peter doubt rather than Thomas doubt or John the Baptist doubt.
 
-**8. Expliquez le doute de Jean-Baptiste et la manière dont Jésus a répondu à la question que Jean lui a posée depuis sa prison. Qu'est-ce que cela enseigne sur l'accompagnement pastoral des croyants qui doutent ?**  
-Mots-clés : Jean · Baptiste · prison · Messie / celui qui doit venir · preuve / évidence / evidence · heureux · œuvre / oeuvre · doute  
+**8. Expliquez le doute de Jean-Baptiste et la manière dont Jésus a répondu à la question qu'il lui fit porter pendant sa captivité. Qu'est-ce que cela enseigne sur l'accompagnement pastoral des croyants ébranlés ?**  
+Mots-clés : Jean · aveugle / boiteux · prison · Messie / celui qui doit venir · preuve / évidence / evidence · heureux · œuvre / oeuvre · doute  
 Modèle : Jean-Baptiste, en prison, envoya demander si Jésus était vraiment le Messie, « celui qui doit venir ». Jésus ne le reprit pas ; il désigna la preuve de ses œuvres — les aveugles voient, les boiteux marchent — et dit : « Heureux celui pour qui je ne serai pas une occasion de chute ! » Cela enseigne au pasteur à accueillir un croyant qui doute non avec mépris, mais avec des preuves présentées avec douceur et des paroles rassurantes.
 
 > EN: Explain John the Baptist doubt and how Jesus addressed John's question from prison. What does this teach about pastoral care for doubting believers?
 
-**9. Citez au moins trois des quatre excuses de Moïse en Exode 3-4, et expliquez le résumé de la leçon : « Dieu s'intéresse à la disponibilité, non à la capacité. »**  
+**9. Citez au moins trois des quatre objections de Moïse en Exode 3-4, et expliquez le résumé de la leçon selon lequel Dieu cherche des serviteurs disponibles plutôt que doués.**  
 Mots-clés : Moïse / Moise · excuse · bouche · capacit / aptitude · disponib · parole · langue · envoi / envoy  
-Modèle : Au buisson ardent, Moïse présenta quatre excuses : « Qui suis-je ? » « Quel est son nom ? » « Ils ne me croiront point. » Et : « Je n'ai pas la parole facile ; j'ai la bouche et la langue embarrassées. » À chacune, Dieu répondit par sa propre suffisance. La leçon est que Dieu s'intéresse à la disponibilité, non à la capacité — il fournit la bouche et les paroles ; il demande seulement que Moïse aille là où il l'envoie.
+Modèle : Au buisson ardent, Moïse présenta quatre excuses : « Qui suis-je ? » « Quel est son nom ? » « Ils ne me croiront point. » Et : « Je ne suis pas un homme qui ait la parole facile… j'ai la bouche et la langue embarrassées. » À chacune, Dieu répondit par sa propre suffisance. La leçon est que Dieu s'intéresse à la disponibilité, non à la capacité — il fournit la bouche et les paroles ; il demande seulement que Moïse aille là où il l'envoie.
 
 > EN: List at least three of Moses' four excuses in Exodus 3-4, and explain the lesson's summary: "God is interested in availability, not ability."
 
-**10. La leçon appelle l'herméneutique « une conversation entre trois Personnes et le prédicateur ». Nommez chaque Personne et expliquez brièvement le rôle que chacune joue dans l'interprétation de l'Écriture par le pasteur.**  
+**10. La leçon décrit l'herméneutique comme un échange entre trois Personnes et celui qui prêche. Nommez chaque Personne et expliquez brièvement le rôle que chacune joue quand le pasteur lit et explique l'Écriture.**  
 Mots-clés : Père / Pere · Fils · Esprit · prédicat / predicat · interprét / interpret · Trinit · Parole · conversation / dialogue  
 Modèle : L'herméneutique est une conversation entre trois Personnes et le prédicateur. Le Père est la source qui parle ; le Fils est la Parole, le centre de toute l'Écriture ; l'Esprit révèle le sens et l'applique à l'interprète. Le prédicateur écoute les trois et porte la Parole au peuple ; ainsi, l'interprétation est une conversation façonnée par la Trinité, et non un acte solitaire.
 

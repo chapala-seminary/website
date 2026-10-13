@@ -12,6 +12,10 @@ Counts: 33 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 2. 'Plans and pesos' was adapted to « plans et francs » for Kinshasa. Is that OK, or would you rather have a neutral « plans et argent »?
 3. 'Patron saint of personnel development' (Barnabas) was kept as « saint patron ». Would « le modèle par excellence » suit Protestant readers in Kinshasa better?
 
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -27,7 +31,7 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
 - **1 Timothée 5:22** — « N'impose les mains à personne avec précipitation, et ne participe pas aux péchés d'autrui; toi-même, conserve-toi pur. »  
   _Checked online (bible.com). First clause quoted in b017 and MC8 stem. 'hastily' = 'avec précipitation' (SA3 keyword 'précipit')._
 - **⚠** **Actes 4:36** — « Joseph, surnommé par les apôtres Barnabas, ce qui signifie fils d'exhortation, Lévite, originaire de Chypre, »  
-  _Wording reused from CTSEvangelism unit 6 (checked on biblestudytools.com). LSG 'fils d'exhortation' where NKJV has 'Son of Encouragement', and the unit builds on 'encouragement'. b022, fill 6 and SA5 quote LSG and add the gloss « on pourrait dire « fils d'encouragement » »; SA5 keyword slot accepts 'encourag' or 'exhort'. Fill 6 accepts « Barnabé » (Catholic/common spelling) besides LSG « Barnabas »._
+  _Wording reused from CTSEvangelism unit 6 (checked on biblestudytools.com). LSG 'fils d'exhortation' where NKJV has 'Son of Encouragement', and the unit builds on 'encouragement'. b022, fill 6 and SA5 quote LSG and explain the Greek sense (b022: « le mot grec signifie aussi « encouragement » »; SA5 model: « c'est-à-dire fils d'encouragement »); SA5 keyword slot accepts 'encourag' or 'exhort'. Fill 6 accepts « Barnabé » (Catholic/common spelling) besides LSG « Barnabas »._
 - **Actes 9:27** — « Alors Barnabas, l'ayant pris avec lui, le conduisit vers les apôtres, et leur raconta comment sur le chemin Saul avait vu le Seigneur, ... »  
   _Checked online (bible.com) for the quoted clause; rest of verse not quoted. Quoted in b023._
 - **2 Timothée 4:11** — « Luc seul est avec moi. Prends Marc, et amène-le avec toi, car il m'est utile pour le ministère. »  
@@ -152,7 +156,7 @@ V. Le ministère de Barnabas
 > EN: V. The Barnabas Ministry
 
 **b022**  
-Permettez-moi de vous présenter le saint patron du développement du personnel. Il s'appelait Joseph, mais les apôtres le surnommèrent Barnabas, « ce qui signifie fils d'exhortation » (Actes 4:36) — on pourrait dire « fils d'encouragement » —, et il avait un don dont l'Église a désespérément besoin à chaque génération : il voyait ce que les gens pouvaient devenir et il investissait en eux avant qu'ils aient fait leurs preuves.
+Permettez-moi de vous présenter le saint patron du développement du personnel. Il s'appelait Joseph, mais les apôtres le surnommèrent Barnabas, « ce qui signifie fils d'exhortation » (Actes 4:36) — le mot grec signifie aussi « encouragement » —, et il avait un don dont l'Église a désespérément besoin à chaque génération : il voyait ce que les gens pouvaient devenir et il investissait en eux avant qu'ils aient fait leurs preuves.
 
 > EN: Let me introduce you to the patron saint of personnel development. His name was Joseph, but the apostles nicknamed him Barnabas, "Son of Encouragement" (Acts 4:36), and he had a gift the church desperately needs in every generation: he saw what people could become and he invested in them before they had proven it.
 
@@ -207,7 +211,7 @@ Examen final de l'Unité 6
 > EN: Unit 6 Final Exam
 
 **b033**  
-Parcours Certificat : les 20 questions à choix multiple. Associé : les questions à choix multiple et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiple, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiple. Parcours Associé en divinité : les questions à choix multiple et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiple, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -276,7 +280,7 @@ _Pourquoi :_ Ne venir que pour demander, c'est bâtir une transaction, et les tr
 **7. D'après Actes 6:3, même les hommes choisis pour servir aux tables devaient être :**  
 · A. Riches et influents  
 · B. Officiellement consacrés  
-✓ C. Des hommes de qui l'on rende un bon témoignage, pleins d'Esprit et de sagesse  
+✓ C. Des hommes de qui l'on rende un bon témoignage, pleins d'Esprit-Saint et de sagesse  
 · D. Apparentés aux apôtres  
 _Pourquoi :_ Même pour distribuer la nourriture, la barre était le caractère : un bon témoignage, plein de l'Esprit, et de la sagesse.  
 > EN: According to Acts 6:3, even men chosen to wait tables had to be: — ✓ Of good reputation, full of the Spirit and wisdom
@@ -433,7 +437,7 @@ Réponse : **80/20** · aussi acceptées : quatre-vingts/vingt, quatre-vingt-vin
 
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
-**1. Pourquoi la gestion du personnel dans l'Église est-elle « le travail du berger sous un autre nom », et que signifie gérer les personnes en bon intendant plutôt que les utiliser ?**  
+**1. Pourquoi la gestion du personnel dans l'Église est-elle « le travail du berger sous un autre nom », et quelle différence y a-t-il entre prendre soin des personnes que Dieu confie et se servir d'elles ?**  
 Mots-clés : berger / pasteur / pastoral / paître / paitre · intendan / dispensat · dons / son don / leur don / charism · âme / ames · utilis / exploit · troupeau · contrema · consum / consomm  
 Modèle : Gérer le personnel dans l'Église, c'est le travail du berger sous un autre nom, car une Église n'est pas faite de plans et de francs mais de personnes, chacune étant une âme que Dieu a confiée au responsable et qu'il a dotée par son Esprit. Ce n'est donc pas une compétence d'entreprise empruntée au monde, mais l'œuvre pastorale qui consiste à prendre soin d'un troupeau. Gérer les personnes en bon intendant plutôt que les utiliser, c'est recevoir le don de chacun, le placer, le développer et l'honorer, en traitant l'ouvrier comme un frère ou une sœur prêté pour un temps, non comme une main-d'œuvre gratuite ou un mercenaire qu'on fait travailler jusqu'à l'os. Le responsable qui utilise les gens aura toujours un problème de personnel, car les gens sentent la différence entre être conduits par un berger et être utilisés. Comme le dit 1 Pierre 4:10, chacun a reçu un don pour le mettre au service des autres, comme un bon dispensateur des grâces de Dieu ; le responsable est l'intendant des personnes et de leurs dons, non leur propriétaire. Il ne doit pas les consumer comme un contremaître ; il doit les gérer fidèlement.
 

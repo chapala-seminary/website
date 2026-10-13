@@ -13,6 +13,11 @@ Counts: 30 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 3. Proverbs 22:3 LSG says the prudent man 'sees' (voit) evil, not 'foresees'. MC11 uses « voir le mal et se cacher ». OK?
 4. I changed 'peso' to 'franc' for Congolese readers. Do you approve?
 
+## Problems in the English source
+
+- SA8: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -87,7 +92,7 @@ Commencez par une conviction simple : le lieu où le peuple de Dieu se rassemble
 > EN: Begin with a simple conviction: the place where God's people gather is not nothing. Under the old covenant, God gave page after page of detailed instruction for the care of the tabernacle and then the temple — who carried what, who cleaned what, who guarded the doors, how the furnishings were kept. The Levites had whole careers in what we would call facilities administration, and God counted it holy work. When the temple fell into disrepair, godly kings like Joash and Josiah made its repair a spiritual priority, gathering funds and hiring honest workmen to restore the house of the Lord.
 
 **b010**  
-Mais il faut ici être prudent, car le bâtiment n'est pas l'Église — c'est le peuple qui est désormais le temple du Saint-Esprit, non les briques. Pourtant, le lieu où le troupeau se rassemble pour adorer, pour apprendre et pour recevoir des soins est un outil que Dieu a donné pour l'œuvre, et un intendant ne laisse pas les outils du Maître rouiller et pourrir. Un toit qui fuit sur la tête des fidèles, une salle des tout-petits sale, un bâtiment qui tombe en ruine par négligence — tout cela prêche un sermon à sa manière, et ce n'est pas un bon sermon. Prendre soin du lieu où le peuple se rassemble, c'est honorer ceux qui s'y rassemblent et le Dieu qu'ils viennent adorer. Tenez la maison en bon ordre. Cela fait partie de « tout faire avec bienséance ».
+Mais il faut ici être prudent, car le bâtiment n'est pas l'Église — c'est le peuple qui est désormais le temple du Saint-Esprit, non les briques. Pourtant, le lieu où le troupeau se rassemble pour adorer, pour apprendre et pour recevoir des soins est un outil que Dieu a donné pour l'œuvre, et un intendant ne laisse pas les outils du Maître rouiller et pourrir. Un toit qui fuit sur la tête des fidèles, une salle des tout-petits sale, un bâtiment qui tombe en ruine par négligence — tout cela prêche un sermon à sa manière, et ce n'est pas un bon sermon. Prendre soin du lieu où le peuple se rassemble, c'est honorer ceux qui s'y rassemblent et le Dieu qu'ils viennent adorer. Tenez la maison en bon ordre. Cela aussi, c'est faire toutes choses avec bienséance.
 
 > EN: Now we must be careful here, because the building is not the church — the people are the temple of the Holy Spirit now, not the bricks. But the place where the flock gathers to worship, to learn, and to be cared for is a tool God has given for the work, and a steward does not let the Master's tools rust and rot. A roof that leaks over the heads of worshipers, a dirty nursery, a building falling apart from neglect — these preach a sermon of their own, and it is not a good one. To care for the place where the people gather is to honor the people who gather there and the God they gather to worship. Keep the house in good order. It is part of doing all things decently.
 
@@ -137,17 +142,17 @@ IV. L'homme prudent voit le danger : la gestion des risques
 > EN: IV. The Prudent See Danger: Risk Management
 
 **b020**  
-Venons-en maintenant à la discipline que le monde appelle gestion des risques, et que l'Écriture appelle simplement prudence. « L'homme prudent voit le mal et se cache, mais les simples avancent et sont punis » (Proverbes 22:3). Le dirigeant sage regarde loin devant et se demande, avant que cela n'arrive : « Qu'est-ce qui pourrait mal tourner ici, et que ferions-nous ? » Le dirigeant insensé ne se pose jamais la question avant que le désastre ne lui tombe dessus, et alors il est trop tard.
+Venons-en maintenant à la discipline que le monde appelle gestion des risques, et que l'Écriture appelle simplement prudence. « L'homme prudent voit le mal et se cache, Mais les simples avancent et sont punis » (Proverbes 22:3). Le dirigeant sage regarde loin devant et se demande, avant que cela n'arrive : « Qu'est-ce qui pourrait mal tourner ici, et que ferions-nous ? » Le dirigeant insensé ne se pose jamais la question avant que le désastre ne lui tombe dessus, et alors il est trop tard.
 
 > EN: Now to the discipline the world calls risk management, which Scripture simply calls prudence. "A prudent man foresees evil and hides himself; but the simple pass on and are punished" (Proverbs 22:3). The wise leader looks down the road and asks, before it happens, "What could go wrong here, and what would we do?" The foolish leader never asks until the disaster is already on top of him, and by then it is too late.
 
 **b021**  
-Ce n'est pas un manque de foi ; c'est la sagesse même que Dieu recommande. « Connais bien chacune de tes brebis, donne tes soins à tes troupeaux » (Proverbes 27:23) — l'attention soigneuse et régulière du berger à l'état réel de ce qui lui est confié. Souvenez-vous de Néhémie dans l'Unité 3 : quand la menace est venue, il ne s'est pas contenté de prier ; il a établi une garde. La foi et la vigilance vont ensemble. Ainsi, l'Église prudente regarde en avant vers les dangers prévisibles et se prépare : elle souscrit l'assurance qu'un intendant responsable souscrirait, afin qu'un accident ou un incendie ne détruise pas l'œuvre ; elle maintient son bâtiment véritablement sûr — l'installation électrique, les sorties, les escaliers, la cuisine ; elle met de l'argent de côté en prévision de l'année maigre au lieu de dépenser chaque franc dès qu'il arrive. Rien de tout cela ne trahit un manque de confiance en Dieu. Le Dieu qui a nourri l'Égypte de Joseph pendant sept années de famine grâce à sept années de stockage du blé est le même Dieu qui dit à l'homme prudent de voir venir le danger. Faites entièrement confiance à Dieu — et vérifiez les détecteurs de fumée.
+Ce n'est pas un manque de foi ; c'est la sagesse même que Dieu recommande. « Connais bien chacune de tes brebis, Donne tes soins à tes troupeaux » (Proverbes 27:23) — l'attention soigneuse et régulière du berger à l'état réel de ce qui lui est confié. Souvenez-vous de Néhémie dans l'Unité 3 : quand la menace est venue, il ne s'est pas contenté de prier ; il a établi une garde. La foi et la vigilance vont ensemble. Ainsi, l'Église prudente regarde en avant vers les dangers prévisibles et se prépare : elle souscrit l'assurance qu'un intendant responsable souscrirait, afin qu'un accident ou un incendie ne détruise pas l'œuvre ; elle maintient son bâtiment véritablement sûr — l'installation électrique, les sorties, les escaliers, la cuisine ; elle met de l'argent de côté en prévision de l'année maigre au lieu de dépenser chaque franc dès qu'il arrive. Rien de tout cela ne trahit un manque de confiance en Dieu. Le Dieu qui a nourri l'Égypte de Joseph pendant sept années de famine grâce à sept années de stockage du blé est le même Dieu qui dit à l'homme prudent de voir venir le danger. Faites entièrement confiance à Dieu — et vérifiez les détecteurs de fumée.
 
 > EN: This is not a lack of faith; it is the very wisdom God commends. "Be diligent to know the state of your flocks, and attend to your herds" (Proverbs 27:23) — the shepherd's careful, regular attention to the real condition of what is in his care. Remember Nehemiah from Unit 3: when the threat came, he did not only pray; he set a guard. Faith and a watch go together. So the prudent church looks ahead to foreseeable dangers and prepares: it carries the insurance a responsible steward would carry, so that an accident or fire does not destroy the work; it keeps its building genuinely safe — the wiring, the exits, the stairs, the kitchen; it sets aside money against the lean year instead of spending every peso as it comes. None of this betrays a lack of trust in God. The God who fed Joseph's Egypt through seven years of famine by means of seven years of storing grain is the same God who tells the prudent to see danger coming. Trust God fully — and check the smoke detectors.
 
 **b022**  
-« L'homme prudent voit le mal et se cache, mais les simples avancent et sont punis. » — Proverbes 22:3 (LSG)
+« L'homme prudent voit le mal et se cache, Mais les simples avancent et sont punis. » — Proverbes 22:3 (LSG)
 
 > EN: "A prudent man foresees evil and hides himself; but the simple pass on and are punished." — Proverbs 22:3 (NKJV)
 
@@ -187,7 +192,7 @@ Examen final de l'Unité 8
 > EN: Unit 8 Final Exam
 
 **b030**  
-Parcours Certificat : les 20 questions à choix multiple. Associé : les questions à choix multiple et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiple, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiple. Parcours Associé en divinité : les questions à choix multiple et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiple, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -389,7 +394,7 @@ Réponse : **témoignage** · aussi acceptées : temoignages, réputation
 Réponse : **prudence** · aussi acceptées : prévoyance, sagesse prévoyante  
 > EN: What the world calls risk management, Scripture calls ____, the particular kind of wisdom in Proverbs 22:3 that foresees evil and hides itself. — **prudence**
 
-**6.** « Connais bien chacune de tes ____, donne tes soins à tes troupeaux » (Proverbes 27:23).  
+**6.** « Connais bien chacune de tes ____, Donne tes soins à tes troupeaux » (Proverbes 27:23).  
 Réponse : **brebis** · aussi acceptées : ses brebis, tes brebis, moutons  
 > EN: "Be diligent to know the state of your ____, and attend to your herds" (Proverbs 27:23). — **flocks**
 
@@ -443,8 +448,8 @@ Modèle : La gestion des risques est ce que le monde appelle une discipline, mai
 
 > EN: Show how risk management is simply biblical prudence, using Proverbs 22:3 and 27:23.
 
-**6. Expliquez pourquoi se préparer (assurance, épargne, sécurité) ne trahit pas un manque de confiance en Dieu.**  
-Mots-clés : confiance · prépar / prepar · joseph · du blé / grain / stockage · famine · prudent · la foi / foi et · dieu  
+**6. Expliquez pourquoi souscrire une assurance, épargner et veiller à la sécurité ne trahit pas un manque de foi envers le Seigneur.**  
+Mots-clés : confiance · prépar / prepar · joseph · du blé / du ble / grain / stockage · famine · prudent · la foi / foi et · dieu  
 Modèle : Se préparer avec sagesse ne trahit pas un manque de confiance en Dieu ; c'est obéir au Dieu qui recommande la prudence. Le même Dieu qui a nourri l'Égypte de Joseph pendant sept années de famine grâce à sept années de stockage du blé est le Dieu qui dit à l'homme prudent de voir venir le danger et de s'y préparer. Une Église peut donc faire entièrement confiance à Dieu tout en souscrivant une assurance, en gardant son bâtiment sûr et en mettant de l'argent de côté en prévision de l'année maigre. La foi et la préparation fidèle ne sont pas rivales ; faire confiance à Dieu et vérifier les détecteurs de fumée vont ensemble.
 
 > EN: Explain why preparing (insurance, savings, safety) does not betray a lack of trust in God.
@@ -455,13 +460,13 @@ Modèle : La protection des enfants et des personnes vulnérables dépasse tous 
 
 > EN: Why does the protection of children rise above every other risk, and what guards should a church put in place?
 
-**8. Comment les règles des deux adultes et de la vérification protègent-elles le serviteur aussi bien que l'enfant ?**  
+**8. Comment la consigne des deux adultes et la vérification préalable protègent-elles le serviteur aussi bien que l'enfant ?**  
 Mots-clés : serviteur · enfant · seul avec / seuls avec / isolé / isole · accusation · fausse · protég / proteg / protect · règle / regle · innocent  
 Modèle : Des règles sensées, qui font qu'aucun serviteur n'est jamais seul avec un enfant hors de tout contrôle, remplissent une double fonction : elles protègent l'enfant contre le mal, et elles protègent aussi le serviteur innocent contre une fausse accusation. Quand un serviteur n'est jamais isolé avec un enfant, il existe un contrôle qui met à l'abri le bon serviteur si son intégrité est un jour mise en doute. Loin d'insulter les serviteurs fidèles, ces règles les protègent ; le dirigeant qui qualifie une telle protection de soupçonneuse n'a pas compris ce qui est en jeu pour l'enfant comme pour le serviteur innocent.
 
 > EN: How do the two-adult/screening rules protect the worker as well as the child?
 
-**9. Expliquez « Soyez donc prudents comme les serpents, et simples comme les colombes » (Mt 10:16) appliqué à l'administration de l'Église.**  
+**9. Expliquez la parole de Jésus sur le serpent et la colombe (Matthieu 10:16), appliquée à l'administration de l'Église.**  
 Mots-clés : sage / prudents comme · serpent · colombe · innocen / simple · prudence · deux / à la fois / a la fois · naïv / naiv · ruse  
 Modèle : Le Seigneur a dit aux disciples qu'il envoyait d'être prudents comme les serpents et simples comme les colombes — les deux à la fois. L'innocence de la colombe sans la prudence du serpent est de la naïveté et expose le troupeau aux blessures ; la prudence du serpent sans l'innocence de la colombe n'est que ruse mondaine. Le dirigeant fidèle tient les deux : innocent de cœur et avisé dans la pratique. Il confie tout à Dieu et pourtant il ferme la porte à clé, paie l'impôt, assure le toit et vérifie le serviteur, refusant de choisir entre l'innocence et la prudence.
 

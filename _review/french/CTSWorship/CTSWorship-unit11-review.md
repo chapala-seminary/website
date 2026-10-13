@@ -12,6 +12,17 @@ Counts: 21 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 2. Section titles: « Synthèse finale » for 'Capstone' and « La mission confiée » for 'The Charge'. Do these fit your intent, or would you prefer « Couronnement » / « L'exhortation finale »?
 3. [check] Coptic 'endurance' is « l'endurance » in Unit 10 but « la persévérance » in Unit 11 (b018, b019, MC5, MC6, MC12, fill 5, SA2, SA3). Both are correct French and each exam is internally consistent, but should Unit 11 switch to « endurance » to match Unit 10?
 
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+- SA3: English prompt passes its own keywords
+- SA4: English prompt passes its own keywords
+- SA6: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -113,7 +124,7 @@ Examen final de l'Unité 11
 > EN: Unit 11 Final Exam
 
 **b027**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les questions à choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les questions à choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -334,7 +345,7 @@ Réponse : **enseignant** · aussi acceptées : instructeur, maître, formateur,
 
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
-**1. Faites la synthèse de tout le cours : comment Jean 4:24, adorer en esprit et en vérité, tient-il tout ensemble ?**  
+**1. Faites la synthèse de tout le cours : comment Jean 4:24 relie-t-il tous les sujets étudiés ?**  
 Mots-clés : esprit · vérité / verite · intelligence / pensée / pensee / raison · cœur / coeur · jean · ensemble · entier / entière / entiere / totalit · équilibr / equilibr  
 Modèle : Jean 4:24, « Dieu est Esprit, et il faut que ceux qui l'adorent l'adorent en esprit et en vérité », tient tout le cours ensemble, car chaque élément étudié — les définitions, l'histoire, la planification, la musique, les éléments parlés, les ordonnances et la salle elle-même — existe pour servir ce seul équilibre : adorer à la fois avec le cœur et avec l'intelligence, avec l'affection et avec la doctrine. L'esprit sans la vérité dérive vers une erreur sincère ; la vérité sans l'esprit se dessèche en un cours magistral froid ; tout le cours a enseigné comment tenir les deux ensemble.
 
@@ -346,14 +357,14 @@ Modèle : Le culte catholique cultive la crainte révérencielle par son archite
 
 > EN: Summarize how each major tradition cultivates a true feeling that worship should include.
 
-**3. Expliquez le danger qui existe dans chaque tradition : prendre la partie que nous connaissons pour la totalité du culte.**  
+**3. Expliquez le danger, présent dans chaque tradition, de considérer ce que nous connaissons comme s'il s'agissait de tout le culte.**  
 Mots-clés : danger · partie · totalit / entier / entière / entiere / le tout · crainte / révérence / reverence · joie · mystère / mystere · prendre la partie / prend la partie / confond / erreur · équilibr / equilibr  
 Modèle : Le danger, dans chaque tradition, est de prendre la partie qu'elle connaît bien pour la totalité du culte : la crainte révérencielle sans la joie rend Dieu lointain, la joie sans la crainte révérencielle le rend banal, le mystère sans la vérité devient superstition, la persévérance sans la grâce devient légalisme, et la Parole sans l'affection devient un simple cours magistral. Chaque tradition est tentée de traiter son propre sentiment vrai comme s'il était tout ce que le culte doit être, plutôt que comme une vraie partie d'un tout plus grand.
 
 > EN: Explain the danger in every tradition of mistaking the part we know for the whole of worship.
 
-**4. Comment le pasteur mûr doit-il apprendre des traditions autres que la sienne ?**  
-Mots-clés : maturit / pasteur mûr / pasteur mur · pasteur · apprend / apprenn · autre · tradition · humilit / humble · honor / honneur · écriture / ecriture / biblique  
+**4. Comment le pasteur mûr doit-il tirer profit des Églises dont les usages diffèrent des siens ?**  
+Mots-clés : maturit / pasteur mûr / pasteur mur · familier / familière / familiere / voix · apprend / apprenn · autre · tradition · humilit / humble · honor / honneur · écriture / ecriture / biblique  
 Modèle : Le pasteur mûr apprend d'Ésaïe et de David, de Calvin et des liturgies coptes, des spirituals chantés dans les chaînes, et à travers eux tous il entend une seule voix, celle de l'Église qui adore. Il honore avec humilité ce que l'Écriture honore dans chaque tradition ; il refuse de rejeter les traditions différentes de la sienne simplement parce qu'elles lui sont peu familières, et il cherche plutôt la vérité biblique que chacune a réellement préservée.
 
 > EN: How should the mature pastor learn from traditions other than his own?
@@ -364,19 +375,19 @@ Modèle : Le fil « la salle prêche » traverse le cours, depuis le mobilier de
 
 > EN: Draw together the thread of 'the room preaches' from across the course.
 
-**6. Rassemblez le parallèle entre les ambiances et les éléments de la prière comme fil conducteur du cours.**  
-Mots-clés : ambianc · prière / priere · élément / element · culte · petit · grand · forme / structure / schéma / schema · parallè / parallel  
+**6. Rassemblez le fil du cours qui relie les ambiances de la réunion d'adoration et les composantes de la prière.**  
+Mots-clés : ambianc · prière / priere · élément / element · culte · petit · grand · forme / structure / schéma / schema · parallè / paralle  
 Modèle : Les cinq ambiances qui façonnent l'ensemble du culte (reconnaissance, louange, confession, illumination, dédicace) sont parallèles aux six éléments qui façonnent une seule prière (adoration, action de grâces, intercession, requête, confession, consécration) ; les deux se dirigent vers Dieu selon le même schéma de base. Cela signifie que le culte est une grande prière et qu'une prière est un petit culte — l'adoration a une seule forme à toutes les échelles, qu'il s'agisse d'une réunion d'une heure ou d'une prière personnelle de deux minutes.
 
 > EN: Draw together the parallel of the moods and the prayer elements as a thread of the course.
 
 **7. Que signifie donner à Dieu à la fois notre intelligence et notre louange, et pourquoi le culte exige-t-il les deux ?**  
-Mots-clés : intelligence / pensée / pensee / raison · louange · les deux / à la fois / a la fois · dimension · doctrin · affection / sentiment / émotion / emotion · entier / entière / entiere / totalit · dieu  
+Mots-clés : intelligence / pensée / pensee / raison · louange · créé / cree / créa / crea · dimension · doctrin · affection / sentiment / émotion / emotion · entier / entière / entiere / totalit · dessèch / desséch / dessech / dériv / deriv  
 Modèle : Donner à Dieu à la fois notre intelligence et notre louange, c'est engager ensemble une saine doctrine et une affection sincère, au lieu de choisir l'une plutôt que l'autre. Le culte exige les deux parce que nous ne sommes pas des êtres à une seule dimension — Dieu nous a créés avec une intelligence et des émotions ensemble. Un culte qui n'engage que l'intelligence finit par se dessécher, tandis qu'un culte qui n'engage que les émotions finit par dériver ; c'est donc la personne tout entière qui doit répondre à tout ce que Dieu est.
 
 > EN: What does it mean to give God both our minds and our praise, and why does worship require both?
 
-**8. Résumez les paires que la synthèse finale tient ensemble : la Parole et le sacrement, la révérence et la joie, l'individu et l'assemblée.**  
+**8. Résumez les trois paires que la synthèse finale refuse de séparer — par exemple la Parole et le sacrement — et dites ce que chacune protège.**  
 Mots-clés : parole · sacrement · révérence / reverence / respect · joie · individu / personnel · assemblée / assemblee / communaut · ensemble · tient / tenir / maintien / unies / unis  
 Modèle : La synthèse finale tient ensemble la Parole et le sacrement, afin que la prédication et les ordonnances aient chacune leur juste place sans que l'une n'écrase l'autre ; la révérence et la joie, afin que la crainte devant la sainteté de Dieu n'exclue pas l'allégresse en sa présence ; et l'individu et l'assemblée, afin que la dévotion personnelle et le culte communautaire comptent tous deux, sans que l'un ne remplace l'autre. Le culte tient ces paires ensemble au lieu de les séparer en camps opposés.
 
@@ -388,7 +399,7 @@ Modèle : Le culte, en un mot, est la réponse de la personne tout entière au D
 
 > EN: As a capstone, state in your own words what worship is and why it matters, drawing on the whole course.
 
-**10. Le cours se termine ainsi : « Allez et adorez-le. Et enseignez à votre peuple à faire de même. » Quelle est la mission confiée au pasteur dans cette conclusion ?**  
+**10. Que demande au pasteur la phrase finale du cours, et comment doit-il y obéir ?**  
 Mots-clés : allez · adore / adora · enseign · peuple / assemblée / assemblee · pasteur · dirig / conduire / conduit · mission / charge / exhortation · même / meme  
 Modèle : La mission confiée au pasteur est que tout ce que le cours a enseigné doit être mis en pratique dans la conduite d'une assemblée — il doit d'abord donner à Dieu sa propre intelligence et sa propre louange, puis conduire son peuple dans la véritable adoration, en esprit et en vérité. Il a pour mission de construire une salle qui dise ce qu'il veut dire, de planifier des cultes qui avancent vers leur point culminant, de veiller sur les éléments parlés, de chanter avec profondeur et avec joie, de rendre l'Évangile visible dans les ordonnances, et par-dessus tout d'adorer Dieu lui-même, afin que son peuple apprenne l'adoration en le regardant adorer.
 

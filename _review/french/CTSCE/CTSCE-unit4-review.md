@@ -14,6 +14,12 @@ Counts: 57 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 4. The Unit 4 exam note (b053) mentions only the Certificate and Master tracks, though the unit has 10 fill-in-the-blank items; translated as is. Should the French note mention the Associate track?
 5. SA 2 English keyword 'eli' is too short for French substring matching; replaced with priest forms (« prêtre / sacrificat »). Acceptable?
 
+## Problems in the English source
+
+- SA3: English prompt passes its own keywords
+- SA4: English prompt passes its own keywords
+- SA5: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -126,7 +132,7 @@ Les enfants, depuis la petite enfance jusqu'à environ douze ans, sont des appre
 > EN: Children from infancy through about age twelve are imitative learners. They learn by watching, copying, and asking. Their thinking is largely concrete — they understand a story before they understand a doctrine, a person before a principle. They trust deeply, they memorize easily, and they believe what is told to them by adults whom they trust. The Christian Education teacher of children stands in a sacred place, because that trust is being placed in the teacher and, through the teacher, in the Word the teacher carries.
 
 **b017**  
-Dieu n'a jamais eu peur d'agir à travers des enfants. L'exemple le plus célèbre de l'Ancien Testament est Samuel. Le garçon était si jeune que, lorsque l'Éternel l'appela dans la nuit, Samuel courut vers Éli et dit : « Me voici, car tu m'as appelé » (1 Samuel 3:5). Il fallut trois appels avant que le vieil Éli comprenne ce qui se passait. Alors Éli dit à Samuel de répondre à l'Éternel : « Parle, Éternel, car ton serviteur écoute » (1 Samuel 3:9). Et l'Éternel dit à un petit garçon ce qu'il ne voulut pas dire au vieux prêtre.
+Dieu n'a jamais eu peur d'agir à travers des enfants. L'exemple le plus célèbre de l'Ancien Testament est Samuel. Le garçon était si jeune que, lorsque l'Éternel l'appela dans la nuit, Samuel courut vers Éli et dit : « Me voici, car tu m'as appelé » (1 Samuel 3:5). Il fallut trois appels avant que le vieil Éli comprenne ce qui se passait. Alors Éli dit à Samuel de répondre à l'Éternel : « Parle, Éternel, car ton serviteur écoute » (1 Samuel 3:9). Et l'Éternel dit à un petit garçon ce qu'il ne voulut pas dire au vieux sacrificateur.
 
 > EN: God has never been afraid of working through children. The most famous example in the Old Testament is Samuel. The boy was so young that when the LORD called him in the night, Samuel ran to Eli and said, "Here am I; for thou calledst me" (1 Samuel 3:5). It took three calls before old Eli realized what was happening. Then Eli told Samuel to answer the LORD: "Speak, LORD; for thy servant heareth" (1 Samuel 3:9). And the LORD spoke to a little boy what he would not speak to the old priest.
 
@@ -306,7 +312,7 @@ Examen de l'Unité 4
 > EN: Unit 4 Examination
 
 **b053**  
-Parcours Certificat : 20 questions à choix multiples (QCM), 90 % (18 sur 20) pour réussir. Master of Theology & Master of Divinity : 20 QCM + 10 questions à réponse courte (RC), chacune des deux parties à 90 %, de façon indépendante. Chaque QCM est noté dès que vous cliquez. Il faut réussir les QCM avant que les RC comptent. Un échec verrouille la partie concernée pendant 15 minutes ; si vous avez déjà réussi les QCM, seule la partie RC se verrouille après un échec aux RC.
+Parcours Certificat : 20 questions à choix multiples (QCM), 90 % (18 sur 20) pour réussir. Th.M. & M.Div. : 20 QCM + 10 questions à réponse courte (RC), chacune des deux parties à 90 %, de façon indépendante. Chaque QCM est noté dès que vous cliquez. Il faut réussir les QCM avant que les RC comptent. Un échec verrouille la partie concernée pendant 15 minutes ; si vous avez déjà réussi les QCM, seule la partie RC se verrouille après un échec aux RC.
 
 > EN: Certificate of Ministry: 20 multiple-choice questions, 90% (18 of 20) to pass. Master of Theology & Master of Divinity: 20 MC + 10 short-answer, both at 90% independently. Each MC scores immediately when you click. MC must be passed before SA scores count. A failure locks the relevant section for 15 minutes; if you have already passed MC, only SA locks after an SA fail.
 
@@ -560,23 +566,23 @@ Modèle : L'Unité 4 distingue trois catégories d'âge. Les enfants, de la peti
 
 **2. Décrivez les caractéristiques des enfants en tant qu'apprenants et la leçon tirée du jeune Samuel.**  
 Mots-clés : concret · imitat · samuel · prêtre / pretre / sacrificat · écout / ecout · modèle / modele / exemple · confian · enfant  
-Modèle : L'enfant est un apprenant imitateur : il apprend en observant, en copiant et en questionnant. Sa pensée est concrète ; il comprend une histoire avant une doctrine. Il fait confiance, mémorise facilement et regarde l'enseignant plus qu'il ne l'écoute, d'où l'importance du modèle. Le jeune Samuel courut trois fois vers Éli, le vieux prêtre, jusqu'à ce qu'Éli lui apprenne à répondre : « Parle, Éternel, car ton serviteur écoute. » L'enseignant d'enfants est dans la lignée d'Éli : il apprend à l'enfant à écouter, puis s'efface pour que l'Éternel parle.
+Modèle : L'enfant est un apprenant imitateur : il apprend en observant, en copiant et en questionnant. Sa pensée est concrète ; il comprend une histoire avant une doctrine. Il fait confiance, mémorise facilement et regarde l'enseignant plus qu'il ne l'écoute, d'où l'importance du modèle. Le jeune Samuel courut trois fois vers Éli, le vieux sacrificateur, jusqu'à ce qu'Éli lui apprenne à répondre : « Parle, Éternel, car ton serviteur écoute. » L'enseignant d'enfants est dans la lignée d'Éli : il apprend à l'enfant à écouter, puis s'efface pour que l'Éternel parle.
 
 > EN: Describe the characteristics of children as learners and the lesson from young Samuel.
 
-**3. Décrivez les jeunes en tant qu'apprenants et expliquez comment Paul a traité Timothée comme le modèle.**  
+**3. Décrivez l'apprenant d'environ douze à vingt ans et expliquez ce que Paul attendait de Timothée (1 Timothée 4:12).**  
 Mots-clés : idéalist / idealist · abstrait · timoth · mépris / mepris · exemple / modèle / modele · sens de / vocation / raison d · question · jeunes / jeunesse  
 Modèle : Les jeunes sont des apprenants idéalistes. Leur pensée devient abstraite ; ils posent de vraies questions sur le mal, sur Dieu, sur la Bible et sur le sens de leur vie. Ils voient le monde en couleurs morales tranchées et veulent donner leur vie pour ce qui compte. Paul n'a pas dit à Timothée d'attendre d'être plus âgé ; il lui a écrit : « Que personne ne méprise ta jeunesse ; mais sois un modèle pour les fidèles. » Il a traité ce jeune homme comme un dirigeant capable de montrer l'exemple.
 
 > EN: Describe youth as learners and explain how Paul treated Timothy as the example.
 
-**4. Décrivez les adultes en tant qu'apprenants et dites ce qu'Aquilas et Priscille ont fait pour Apollos en Actes 18.**  
+**4. Décrivez l'apprenant adulte et dites comment le couple d'Actes 18:24-26 a aidé un enseignant venu d'Alexandrie.**  
 Mots-clés : pratique / appli · vécu / vecu / la vie / sa vie · expérien / experien · apollos · aquila · priscill · expos · adulte  
 Modèle : L'adulte est l'apprenant pratique : il arrive avec toute une vie, des blessures, des déceptions et une longue expérience, et il veut que la Parole touche les problèmes réels de sa semaine. Apollos, Juif éloquent d'Alexandrie et versé dans les Écritures, ne connaissait que le baptême de Jean. Aquilas et Priscille ne l'ont pas humilié en public ; ils le prirent avec eux et lui exposèrent plus exactement la voie de Dieu. L'adulte part rarement de zéro : il faut parfois clarifier une coupe à moitié pleine.
 
 > EN: Describe adults as learners and tell what Aquila and Priscilla did for Apollos in Acts 18.
 
-**5. Expliquez pourquoi l'enseignant doit connaître l'apprenant individuel au sein du groupe, en citant la règle de Paul en 1 Corinthiens 9.**  
+**5. Expliquez pourquoi l'enseignant doit connaître chaque élève de sa classe, et pas seulement le groupe, en citant la règle de l'apôtre en 1 Corinthiens 9:22.**  
 Mots-clés : paul · tout à tous / tout a tous / chacun · sauver · sauvés / sauves / salut · quelques · individu · différ / differ · apprenant  
 Modèle : Dans chaque groupe d'âge, chaque apprenant est un individu : il n'y en a pas deux pareils, et des apprenants différents apprennent différemment — par les yeux, les oreilles, les mains, le silence ou la conversation. L'enseignant qui les traite tous de la même façon n'enseigne bien à personne. Paul en a fait sa règle : « Je me suis fait tout à tous, afin d'en sauver de toute manière quelques-uns. » Il ne changeait pas l'Évangile, mais la manière de le porter, pour qu'il atteigne chaque apprenant là où il vivait.
 
@@ -607,7 +613,7 @@ Modèle : Dans la parabole du semeur (Matthieu 13), la même semence tombe sur q
 > EN: Explain the parable of the sower as Andi applies it to the Christian Education teacher.
 
 **10. Expliquez pourquoi l'Unité 4 suit l'Unité 3 dans ce cours et ce que cette transition dit à l'enseignant.**  
-Mots-clés : maître / maitre · apprenant · aimer / aimé / amour · personne · gérer / gerer · problème / probleme · passe / tourn · enseignant  
+Mots-clés : maître / maitre · apprenant · aimer / aimé / aime / amour · personne · gérer / gerer · problème / probleme · passe / tourn · enseignant  
 Modèle : L'Unité 3 présentait le Maître par excellence ; l'Unité 4 passe de lui aux apprenants eux-mêmes, enfants, jeunes et adultes. Cette transition rappelle à l'enseignant qu'un apprenant n'est pas un problème à gérer mais une personne à aimer. L'éducation chrétienne qui ne commence pas par l'apprenant finit par le programme ; celle qui commence par l'apprenant finit par une vie transformée. Pour enseigner comme le Maître, il faut connaître ceux qu'on enseigne.
 
 > EN: Explain why Unit 4 follows Unit 3 in this course and what the transition tells the teacher.

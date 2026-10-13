@@ -16,6 +16,15 @@ Counts: 84 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 6. Following the Spanish edition, the reader's language 'English' became « français » (b008 title « L'enfant qui ne parlait pas français », b013, b015, b036, b055, b057). The King James words 'created / made / formed' (b024, MC18) stay in English, with a short French gloss in brackets added for Congolese readers. Please confirm both.
 7. b060 notebook sentence: 'Let there be or, and there was or' became « Que or soit ! Et or fut. » with no article, because « l'or » would read as 'gold' in French. Please confirm.
 
+## Problems in the English source
+
+- SA2: English prompt passes its own keywords
+- SA4: English prompt passes its own keywords
+- SA5: English prompt passes its own keywords
+- SA6: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -375,7 +384,7 @@ Examen de l'Unité 4
 > EN: Unit 4 Examination
 
 **b062**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -390,12 +399,12 @@ Certificat de ministère — seules les 20 questions à choix multiples comptent
 > EN: Certificate of Ministry — only the 20 multiple-choice count (need 18/20).
 
 **b065**  
-Master of Theology — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
+Th.M. — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
 
 > EN: Master of Theology — 20 multiple-choice (18/20) and 10 short-answer (9/10).
 
 **b066**  
-Master of Divinity — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
+M.Div. — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
 
 > EN: Master of Divinity — 20 multiple-choice (18/20) and 10 short-answer (9/10).
 
@@ -632,7 +641,7 @@ _Pourquoi :_ Adam (Strong H120) apparaît plus de 500 fois dans l'Ancien Testame
 > EN: Approximately how many times does the Hebrew word 'adam' appear in the Old Testament? — ✓ Over 500 times
 
 **17. Quels sont les six mots hébreux de Genèse 1 enseignés dans cette unité ?**  
-· A. Yahweh, Adonaï, Elohim, El Shaddaï, El Elyon, El Olam  
+· A. Yahvé (l'Éternel), Adonaï, Elohim, El Shaddaï, El Elyon, El Olam  
 ✓ B. Bereshit, Bara, Elohim, Ruach, Or, Adam  
 · C. Shalom, Chesed, Torah, Berit, Qadosh, Kavod  
 · D. Logos, Pneuma, Theos, Zoè, Phos, Sarx  
@@ -717,8 +726,8 @@ Modèle : En 1881, Eliezer Ben-Yehuda, un jeune Juif lituanien, s'installa à J�
 
 > EN: Tell the story of Eliezer Ben-Yehuda and explain why this unit opens with it.
 
-**2. Expliquez le sens de « Bereshit » et ce que sa racine nous apprend sur la manière de lire le premier mot de la Bible.**  
-Mots-clés : bereshit · reshit · rosh · tête / tete · commencement · premi · prémices / premices · premier né / premier ne · bereshit · reshit · rosh · tête / tete · commencement · premi · prémices / premices · premier né / premier ne  
+**2. Expliquez le sens de « Bereshit » et ce que sa racine nous apprend sur la manière de lire le mot d'ouverture de la Bible.**  
+Mots-clés : bereshit · reshit · rosh · tête / tete · commencement · premi · prémices / premices · premier né / premier ne · sagesse · importance · rosh · tête / tete · commencement · premi · prémices / premices · premier né / premier ne  
 Modèle : Bereshit signifie « au commencement ». Le mot est formé de be- (dans, en) et de reshit (commencement, premier, principal, meilleure part), lui-même bâti sur la racine rosh, « tête ». Le reshit est la chose-tête d'une série : le premier-né est le reshit de la vigueur d'un homme (Genèse 49:3), les prémices apportées au Temple sont appelées reshit (Exode 23:19), et la crainte de l'Éternel est le reshit de la sagesse (Proverbes 9:10). Bereshit ne veut donc pas seulement dire « il était une fois » : il désigne le point-tête, ce qui est premier dans le temps et premier en importance. La création est la tête de l'histoire de Dieu, le moment qui ordonne tout ce qui suit.
 
 > EN: Explain the meaning of 'Bereshit' and what its root tells you about how the Bible's opening word should be read.
@@ -729,31 +738,31 @@ Modèle : Bara est le seul verbe hébreu signifiant « faire » dont le sujet, d
 
 > EN: Explain what makes the Hebrew verb 'bara' theologically unique, and contrast it with three other Hebrew verbs for 'make.'
 
-**4. Expliquez le paradoxe grammatical pluriel-singulier d'« Elohim » en Genèse 1:1, et ce que les commentateurs juifs et chrétiens y ont entendu.**  
+**4. Expliquez le paradoxe grammatical que présente « Elohim » en Genèse 1:1, et ce que les commentateurs juifs et chrétiens y ont entendu.**  
 Mots-clés : elohim · pluriel · singulier · verbe · majesté / majeste · trinité / trinite · un seul / unique · trois · nom pluriel / substantif · elohim · pluriel · singulier · verbe · majesté / majeste · trinité / trinite · un seul / unique · trois · nom pluriel / substantif  
 Modèle : Elohim porte la terminaison -im du pluriel hébreu (le singulier serait Eloah) : c'est un nom pluriel par la forme. Pourtant, en Genèse 1:1, le verbe bara est au singulier : littéralement « Au commencement Dieux il-créa les cieux et la terre ». Cette construction est délibérée. Les commentateurs juifs y voient le « pluriel de majesté », qui exprime la plénitude, la grandeur et le poids de Dieu, comme le « nous » royal. Les commentateurs chrétiens y entendent en plus un murmure discret de la Trinité : un seul Dieu, mais pluriel d'une manière que le Nouveau Testament rendra explicite — le Père, le Fils et le Saint-Esprit, trois personnes. Genèse 1:26 (« Faisons l'homme à notre image ») met même le pluriel dans les mots que Dieu emploie pour lui-même. Le verbe dit un ; le nom dit davantage.
 
 > EN: Explain the plural-singular grammatical paradox of 'Elohim' in Genesis 1:1, and what Jewish and Christian commentators have heard in it.
 
-**5. Expliquez les trois sens de « ruach » et ce que l'image de la mère aigle en Genèse 1:2 révèle au sujet du Saint-Esprit.**  
-Mots-clés : ruach · esprit · le vent / du vent / de vent / au vent · souffle · planer / planait / voltig / mouvait · aigle · merachefet · deutéronome / deuteronome · genèse / genese · ruach · esprit · le vent / du vent / de vent / au vent · souffle · planer / planait / voltig / mouvait · aigle · merachefet · deutéronome / deuteronome · genèse / genese  
+**5. Expliquez les trois sens de « ruach » et ce que l'image maternelle de Genèse 1:2 révèle au sujet du Saint-Esprit.**  
+Mots-clés : ruach · esprit · le vent / du vent / de vent / au vent · souffle · planer / planait / voltig / mouvait · aigle · merachefet · deutéronome / deuteronome · pneuma · prophète / prophete · protèg / proteg · le vent / du vent / de vent / au vent · souffle · planer / planait / voltig / mouvait · aigle · merachefet · deutéronome / deuteronome · jean 3  
 Modèle : Ruach signifie à la fois esprit, vent et souffle. Là où le français a besoin de trois mots, l'hébreu n'en a qu'un, car il voit là une seule réalité invisible, mouvante et vivifiante qui vient de Dieu : le vent qui chasse les feuilles, le souffle de la bouche, l'Esprit qui descendait sur les prophètes. En Genèse 1:2, le Ruach Elohim est merachefet : il plane, il voltige (LSG : « se mouvait ») au-dessus des eaux. Ce verbe rare revient en Deutéronome 32:11 pour l'aigle qui voltige au-dessus de ses petits. La première image du Saint-Esprit dans la Bible n'est donc pas celle d'une force lointaine, mais celle d'une mère aigle qui couve et protège la nouvelle création. En Jean 3, le grec pneuma est le jumeau de ruach.
 
 > EN: Explain the three meanings of 'ruach' and what the mother-eagle picture in Genesis 1:2 reveals about the Holy Spirit.
 
-**6. Expliquez ce qui est théologiquement distinctif dans « or » (lumière), la première chose que Dieu a appelée à l'existence par sa parole en Genèse 1:3.**  
-Mots-clés : mot or / hébreu or / hebreu or · lumière / lumiere · premi · parol / parl / prononc · soleil · quatrième jour / quatrieme jour · éclat / eclat / clarté / clarte · dieu · mot or / hébreu or / hebreu or · lumière / lumiere · premi · parol / parl / prononc · soleil · quatrième jour / quatrieme jour · éclat / eclat / clarté / clarte · dieu  
+**6. Expliquez ce qu'a de théologiquement distinctif « or » (lumière), la première chose appelée à l'existence en Genèse 1:3.**  
+Mots-clés : mot or / hébreu or / hebreu or · lumière / lumiere · premi · parol / parl / prononc · soleil · quatrième jour / quatrieme jour · éclat / eclat / clarté / clarte · dieu · mot or / hébreu or / hebreu or · primordial · lumière du monde / lumiere du monde / jean 8 · parol / parl / prononc · soleil · quatrième jour / quatrieme jour · éclat / eclat / clarté / clarte · dieu  
 Modèle : Le mot hébreu or (Aleph-Vav-Resh, Strong H216) signifie « lumière ». C'est la première chose que Dieu a prononcée : « Dieu dit: Que la lumière soit! Et la lumière fut » (vayomer Elohim, yehi or, vayehi or). Cette lumière existe avant le soleil, qui n'est créé que le quatrième jour, avant toute cause naturelle de clarté : c'est une lumière primordiale, créée par la parole directe de Dieu. Sa première action envers sa création est de lui donner son propre éclat, avant tout réceptacle et avant toute autre chose ; ensuite seulement il façonne le reste. Le mot or ouvre toute une théologie : « L'Éternel est ma lumière et mon salut » (Psaume 27:1), « la lumière des nations » (Ésaïe 49:6), jusqu'à Jésus, « la lumière du monde » (Jean 8:12).
 
 > EN: Explain what is theologically distinctive about 'or' (light) as the first thing God spoke into being in Genesis 1:3.
 
 **7. Expliquez le lien linguistique et théologique entre « adam » et « adamah » en hébreu.**  
-Mots-clés : adam · adamah · le sol / du sol / au sol · terre / glaise / boue · poussière / poussiere · terre · genèse / genese · image · adam · adamah · terre · poussière / poussiere · le sol / du sol / au sol · genèse / genese · image  
+Mots-clés : adam · adamah · le sol / du sol / au sol · terre / glaise / boue · poussière / poussiere · terre · genèse / genese · image · humus / latin · humble / humilit · terre · poussière / poussiere · le sol / du sol / au sol · genèse / genese · image  
 Modèle : Adam (« homme, humanité, être humain ») est bâti sur adamah, le mot hébreu pour « sol » ou « terre ». En Genèse 2:7, Dieu forme le premier adam de la poussière de l'adamah : le jeu de mots est dans l'original. L'être humain est une créature du sol, une créature de terre, un terrien ; son nom même annonce qu'il vient de la poussière de la bonne terre de Dieu (le mot « humain » vient d'ailleurs du latin humus, « sol »). Mais en Genèse 1:27, cette créature de terre est faite betselem Elohim, « à l'image de Dieu ». Matière terrestre plus sceau céleste : l'homme est humble par son origine et digne par l'image qu'il porte.
 
 > EN: Explain the linguistic and theological connection between 'adam' and 'adamah' in Hebrew.
 
-**8. Expliquez la doctrine théologique du « tselem Elohim » (l'image de Dieu) et donnez un exemple historique de sa puissance à changer le monde.**  
+**8. Expliquez la doctrine du « tselem Elohim » et donnez un exemple historique de sa puissance à changer le monde.**  
 Mots-clés : tselem · image · dieu · wilberforce · esclav · teresa / thérèse / therese · dignit · égal / egal · tselem · image · dieu · wilberforce · esclav · teresa / thérèse / therese · dignit · égal / egal  
 Modèle : Tselem signifie image, ressemblance, statue ; betselem Elohim veut dire « à l'image de Dieu » (Genèse 1:27). L'adam, créature de terre, est unique dans la création parce qu'il est façonné pour porter l'image du Créateur : matière terrestre plus sceau céleste. Chaque être humain a donc une dignité égale, quelle que soit sa condition. Exemple : William Wilberforce mena pendant vingt ans le combat pour abolir la traite britannique des esclaves, parce que chaque esclave africain portait l'image de Dieu et que l'esclavage traitait comme un bien un être fait pour porter sa ressemblance. De même, Mère Teresa soignait les mendiants mourants de Calcutta comme des porteurs de l'image du Tout-Puissant. Quand un croyant comprend cela, sa manière de traiter les autres change.
 
@@ -766,7 +775,7 @@ Modèle : Bereshit (H7225) : « au commencement », le moment-tête de toutes ch
 > EN: List all six Hebrew words taught in this unit with their meanings and Strong's numbers.
 
 **10. Décrivez l'Activité du cahier de l'Unité 4 et la phrase que l'étudiant écrit à la fin.**  
-Mots-clés : cahier · tableau · six mots / six lignes · strong · translitt · phrase · genèse / genese · elohim · bara · ruach · cahier · tableau · six mots / six lignes · strong · translitt · phrase · genèse / genese  
+Mots-clés : cahier · tableau · six mots / six lignes · strong · translitt · phrase · genèse / genese · elohim · bara · ruach · colonne · tableau · six mots / six lignes · strong · translitt · voix haute · genèse / genese  
 Modèle : Sur une page vierge de son cahier, l'étudiant écrit en haut « Unité 4 — Six mots de Genèse 1 », puis trace un tableau de six lignes avec cinq colonnes : mot hébreu, translittération, numéro Strong, sens en une phrase et verset clé. Il le remplit pour les six mots : Bereshit (Gn 1:1), Bara (Gn 1:1), Elohim (Gn 1:1), Ruach (Gn 1:2), Or (Gn 1:3) et Adam (Gn 1:27). Sous le tableau, il écrit la phrase : « Au commencement, Elohim bara les shamayim et l'eretz, et le Ruach Elohim se mouvait au-dessus des eaux. Il dit : Que or soit ! Et or fut. Et le sixième jour, il bara l'adam à son image. » Puis il la lit à voix haute : avec six mots hébreux mêlés au français, il vient d'énoncer la moitié de la doctrine de la création.
 
 > EN: Describe the Notebook Activity for Unit 4 and the sentence the student writes at the end of it.

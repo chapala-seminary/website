@@ -45,7 +45,7 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
 - **Genèse 8:1** — « Dieu se souvint de Noé, de tous les animaux et de tout le bétail qui étaient avec lui dans l’arche; et Dieu fit passer un vent sur la terre, et les eaux s’apaisèrent. »  
   _Bloc b030, QCM 13. L’anglais « Then God remembered Noah » n’a pas de « alors » en LSG ; citation LSG sans ce mot. Vérifié en ligne (bible.com, LSG)._
 - **Genèse 8:21 (allusion)** — « car les pensées du cœur de l’homme sont mauvaises dès sa jeunesse »  
-  _Bloc b032, QCM 14 : paraphrase non citée (« le penchant du cœur humain reste mauvais »). Cette partie du verset n’a pas pu être vérifiée en ligne (seul le début du verset a été lu)._
+  _Bloc b032, QCM 14 : paraphrase non citée (« le penchant du cœur humain reste mauvais »). Revérifié avec l'outil LSG hors ligne (12 oct. 2026)._
 - **Genèse 9:6 (allusion)** — « Si quelqu’un verse le sang de l’homme, par l’homme son sang sera versé; car Dieu a fait l’homme à son image. »  
   _Bloc b036, QCM 16 : allusion. Vérifié en ligne (bible.com, LSG)._
 - **Genèse 9:11-13 (allusion)** — « aucune chair ne sera plus exterminée par les eaux du déluge … j’ai placé mon arc dans la nue, et il servira de signe d’alliance entre moi et la terre. »  

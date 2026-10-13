@@ -18,7 +18,7 @@ Counts: 55 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
 
 - **⚠** **Genèse 50:20** — « Vous aviez médité de me faire du mal: Dieu l'a changé en bien, pour accomplir ce qui arrive aujourd'hui, pour sauver la vie à un peuple nombreux. »  
-  _Cité en b002, b034, fill 6 ; paraphrasé en b035, b052. Vérifié sur biblestudytools.com (LSG). L'anglais (NKJV) dit « God meant it for good » (Dieu l'a voulu/projeté pour le bien), alors que LSG dit « Dieu l'a changé en bien ». La nuance compte pour la leçon (b035-b036, mc 16, sa 7) : « meant » souligne l'intention de Dieu ; « changé » peut suggérer une réaction de Dieu après coup. Le titre b035 suit LSG ; b036 et mc 16 gardent l'idée de dessein (« avait en vue »)._
+  _Cité en b002, b034, fill 6 ; paraphrasé en b035, b052. Vérifié sur biblestudytools.com (LSG). L'anglais (NKJV) dit « God meant it for good » (Dieu l'a voulu/projeté pour le bien), alors que LSG dit « Dieu l'a changé en bien ». La nuance compte pour la leçon (b035-b036, mc 16, sa 7) : « meant » souligne l'intention de Dieu ; « changé » peut suggérer une réaction de Dieu après coup. Le titre b035 suit LSG ; b036 et mc 16 gardent l'idée de dessein (« avait en vue »). Convention 1 : b034 ajoute que l'hébreu emploie le même verbe (« pensé ») pour les frères et pour Dieu. Vérifié avec l'outil LSG hors ligne._
 - **Genèse 45:4** — « Il dit: Je suis Joseph, votre frère, que vous avez vendu pour être mené en Egypte. »  
   _Utilisé en b014 et fill 3 pour rendre « you sold me here » (NKJV 45:5). LSG 45:5 dit « de m'avoir vendu pour être conduit ici », formule peu citable seule ; 45:4 exprime la même responsabilité. Vérifié sur biblestudytools.com._
 - **Genèse 45:5, 7** — « car c'est pour vous sauver la vie que Dieu m'a envoyé devant vous. / Dieu m'a envoyé devant vous pour vous faire subsister dans le pays... »  
@@ -212,7 +212,7 @@ Genèse 50:20 — Le mal appelé mal
 > EN: Genesis 50:20 — Evil Named as Evil
 
 **b034**  
-Après la mort de Jacob, les frères craignent que Joseph ne se venge enfin. Joseph répond par la parole qui résume toute son histoire : « Vous aviez médité de me faire du mal : Dieu l’a changé en bien. » Il ne faut pas affaiblir la première moitié. Joseph qualifie leur intention de mauvaise. La providence ne rebaptise pas la cruauté en bonté et n’excuse pas ceux qui l’ont commise.
+Après la mort de Jacob, les frères craignent que Joseph ne se venge enfin. Joseph répond par la parole qui résume toute son histoire : « Vous aviez médité de me faire du mal : Dieu l’a changé en bien. » Le texte hébreu emploie le même verbe pour les deux intentions : littéralement, vous aviez pensé le mal contre moi, Dieu l’a pensé en bien. Il ne faut pas affaiblir la première moitié. Joseph qualifie leur intention de mauvaise. La providence ne rebaptise pas la cruauté en bonté et n’excuse pas ceux qui l’ont commise.
 
 > EN: After Jacob’s death the brothers fear that Joseph may finally retaliate. Joseph responds with the statement that summarizes his story: “you meant evil against me; but God meant it for good.” The first half must not be weakened. Joseph calls their intention evil. Providence does not rename cruelty as goodness or excuse the perpetrators.
 

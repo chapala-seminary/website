@@ -14,6 +14,11 @@ Counts: 54 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 4. The source's short-answer items have no model answers; French model answers were written from the lesson text so the grader check passes. Please have the reviewer read them as new content.
 5. [check] Unit 3 body text writes « éducation chrétienne » in lower case (« l'enseignant en éducation chrétienne »), while Units 1–2 use « l'Éducation chrétienne » with a capital É. Standardise one way across the course?
 
+## Problems in the English source
+
+- SA2: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -305,7 +310,7 @@ Examen de l'Unité 3
 > EN: Unit 3 Examination
 
 **b050**  
-Parcours Certificat : 20 questions à choix multiples ; 90 % (18 sur 20) pour réussir. Master of Theology & Master of Divinity : 20 questions à choix multiples + 10 questions à réponse courte, chaque partie à 90 %, de façon indépendante. Chaque question à choix multiples est notée dès que vous cliquez. Il faut réussir les questions à choix multiples avant que les réponses courtes ne comptent. Un échec verrouille la partie concernée pendant 15 minutes ; si vous avez déjà réussi les questions à choix multiples, seule la partie à réponse courte est verrouillée après un échec à cette partie.
+Parcours Certificat : 20 questions à choix multiples ; 90 % (18 sur 20) pour réussir. Th.M. & M.Div. : 20 questions à choix multiples + 10 questions à réponse courte, chaque partie à 90 %, de façon indépendante. Chaque question à choix multiples est notée dès que vous cliquez. Il faut réussir les questions à choix multiples avant que les réponses courtes ne comptent. Un échec verrouille la partie concernée pendant 15 minutes ; si vous avez déjà réussi les questions à choix multiples, seule la partie à réponse courte est verrouillée après un échec à cette partie.
 
 > EN: Certificate of Ministry: 20 multiple-choice questions, 90% (18 of 20) to pass. Master of Theology & Master of Divinity: 20 MC + 10 short-answer, both at 90% independently. Each MC scores immediately when you click. MC must be passed before SA scores count. A failure locks the relevant section for 15 minutes; if you have already passed MC, only SA locks after an SA fail.
 
@@ -557,14 +562,14 @@ Modèle : Jésus était (1) un homme de Dieu, rempli par trente ans de communion
 
 > EN: List the six characteristics of Jesus presented in Unit 3 (parallel to the six in Unit 2).
 
-**2. Décrivez Jésus à douze ans dans le temple (Luc 2:46-49) et expliquez ce que cela enseigne sur la préparation au ministère d'enseignement.**  
+**2. Décrivez Jésus enfant dans le temple (Luc 2:46-49) et expliquez ce que cela montre sur la façon de se former au ministère d'enseignement.**  
 Mots-clés : douze / 12 ans · temple · docteur · question / interrog · père / pere · prépar / prepar · trente / 30 ans · écout / ecout  
 Modèle : À douze ans, Jésus resta dans le temple à Jérusalem après la Pâque. Trois jours plus tard, ses parents le trouvèrent assis au milieu des docteurs, les écoutant et les interrogeant, et il leur dit qu'il fallait qu'il s'occupe des affaires de son Père. Il a ensuite attendu dix-huit ans de plus : trente ans de vie cachée et de communion avec le Père avant d'enseigner en public. La leçon est que la préparation ne se saute pas : l'enseignant doit remplir sa coupe avant de verser dans celle des autres, sinon il sera à sec en quelques mois.
 
 > EN: Describe Jesus at age twelve in the temple (Luke 2:46-49) and explain what it teaches about preparation for the teaching ministry.
 
-**3. Expliquez comment la réponse de Jésus aux tentations du désert sert de modèle pour la relation de l'enseignant avec l'Écriture.**  
-Mots-clés : écrit / ecrit · deutéronome / deuteronome · mémoris / memoris / par cœur / par coeur · citation / citations · citait / citant / citer / a cité / a cite · parole · écriture / ecriture · tentation / tentateur / tenter / tenté  
+**3. Expliquez comment la réponse de Jésus aux tentations du désert sert de modèle pour la relation de l'enseignant avec la Bible.**  
+Mots-clés : écrit / ecrit · deutéronome / deuteronome · mémoris / memoris / par cœur / par coeur · citation / citations · citait / citant / citer / a cité / a cite · parole · écriture / ecriture · tentation / tentateur / tenter / tenté / tente  
 Modèle : À chacune des trois tentations, Jésus répondit par « Il est écrit », et chaque citation venait du Deutéronome. Il n'a pas discuté ni improvisé ; il a puisé dans l'Écriture mémorisée et intériorisée, en citant ce que Dieu avait déjà dit. Toute sa vie, il a cité l'Écriture pour enseigner, reprendre et défendre son ministère. L'enseignant doit donc connaître la Parole si bien que, face à une tentation, à une question difficile ou à une hérésie, sa première réponse soit : « Il est écrit ».
 
 > EN: Explain how Jesus's response to the wilderness temptations models the teacher's relationship with Scripture.
@@ -605,7 +610,7 @@ Modèle : Pendant que Marthe était affairée au service, Marie s'était assise 
 
 > EN: Explain Mary of Bethany's posture in Luke 10:39 and what it teaches the Christian Education teacher.
 
-**10. Expliquez pourquoi l'Unité 3 suit l'Unité 2 dans ce cours et quel est le rapport entre Jésus et les six caractéristiques.**  
+**10. Expliquez pourquoi l'Unité 3 suit l'Unité 2 dans ce cours et quel rapport existe entre le Christ et les qualités de l'enseignant étudiées dans l'Unité 2.**  
 Mots-clés : les six / six caract · exemple · parfait · modèle / modele · caractéristi / caracteristi · incarn · portrait · jésus / jesus  
 Modèle : L'Unité 2 présentait les six caractéristiques de l'enseignant en éducation chrétienne ; l'Unité 3 montre que ces six caractéristiques ne sont pas de la théorie, mais un portrait de Jésus. Il est le seul Maître qui les ait toutes possédées sans exception : il les a parfaitement incarnées. Il est notre modèle et notre exemple, car il enseigne par ce qu'il est, et l'enseignant apprend à enseigner en s'asseyant à ses pieds.
 

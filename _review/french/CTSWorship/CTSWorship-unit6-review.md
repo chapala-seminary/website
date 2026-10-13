@@ -12,14 +12,25 @@ Counts: 25 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 2. For church hymns, Congolese Protestants often say « cantiques » rather than « hymnes ». I used « hymnes » to keep LSG's three categories (psaumes, hymnes, cantiques spirituels) distinct. Is that acceptable?
 3. There is no standard French term for 'blended worship'. I used « culte mixte » (it is a fill-in answer). Do you or the reviewer prefer another term?
 
+## Problems in the English source
+
+- SA2: English prompt passes its own keywords
+- SA3: English prompt passes its own keywords
+- SA4: English prompt passes its own keywords
+- SA5: English prompt passes its own keywords
+- SA6: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
 
 - **Colossiens 3:16** — « Que la parole de Christ habite parmi vous abondamment; instruisez-vous et exhortez-vous les uns les autres en toute sagesse, par des psaumes, par des hymnes, par des cantiques spirituels, chantant à Dieu dans vos coeurs sous l'inspiration de la grâce. »  
-  _Cited as a paraphrase (b017, mc2, fill1, sa1), not quoted; rendered without quotation marks using LSG's three terms « psaumes, hymnes, cantiques spirituels ». LSG has « chantant à Dieu ... sous l'inspiration de la grâce » where the English paraphrase says 'with grace in our hearts to the Lord'; paraphrase kept. Checked online (BibleGateway LSG) except the final words « sous l'inspiration de la grâce », supplied from memory._
+  _Cited as a paraphrase (b017, mc2, fill1, sa1), not quoted; rendered without quotation marks using LSG's three terms « psaumes, hymnes, cantiques spirituels ». LSG has « chantant à Dieu dans vos coeurs sous l'inspiration de la grâce » where the English paraphrase says 'with grace in our hearts to the Lord'; paraphrase kept. Checked against the offline LSG text._
 - **Éphésiens 5:19** — « entretenez-vous par des psaumes, par des hymnes, et par des cantiques spirituels, chantant et célébrant de tout votre coeur les louanges du Seigneur; »  
-  _Cited as a paraphrase together with Colossians 3:16, not quoted. First half checked online (levangile.com LSG); second half « chantant et célébrant ... du Seigneur » not checked online (from memory)._
+  _Cited as a paraphrase together with Colossians 3:16, not quoted. Checked against the offline LSG text._
 
 ## 3. Terms for the reviewer to confirm
 
@@ -128,7 +139,7 @@ Examen final de l'Unité 6
 > EN: Unit 6 Final Exam
 
 **b030**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les questions à choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les questions à choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -354,43 +365,43 @@ Réponse : **progressivement** · aussi acceptées : graduellement, petit à pet
 
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
-**1. Pourquoi la musique est-elle au cœur du culte ? Appuyez-vous sur Colossiens 3:16 et Éphésiens 5:19.**  
+**1. Pourquoi la musique occupe-t-elle une place centrale dans le culte ? Appuyez-vous sur Colossiens 3:16 et Éphésiens 5:19.**  
 Mots-clés : musiq · chant · psaume · hymne · spirituel · colossien · cœur / coeur · command / ordonn  
 Modèle : La musique est au cœur du culte parce que Dieu ordonne à son peuple de chanter : Colossiens 3:16 et Éphésiens 5:19 nous disent de chanter des psaumes, des hymnes et des cantiques spirituels, avec la grâce dans nos cœurs, pour le Seigneur. Le chant n'est pas une décoration facultative qu'on ajoute quand on a le temps ; c'est un acte d'adoration commandé, qui engage à la fois l'intelligence et le cœur et fait descendre la vérité de l'Évangile jusque dans les affections, où elle peut s'enraciner et demeurer.
 
 > EN: Why is music central to worship? Use Colossians 3:16 and Ephesians 5:19.
 
-**2. Expliquez les trois catégories bibliques de chants : les psaumes, les hymnes et les cantiques spirituels.**  
+**2. Expliquez les trois sortes de chants que nomme l'apôtre Paul, et ce que chacune apporte au culte.**  
 Mots-clés : psaume · hymne · spirituel · cantique / chant · catégor / categor · biblique · trois · éphésien / ephesien  
 Modèle : Les psaumes sont le recueil de chants inspiré de l'Ancien Testament ; ils offrent un modèle donné par Dieu pour l'adoration chantée. Les hymnes sont des chants de louange composés, comme le grand fragment d'hymne de Philippiens 2. Les cantiques spirituels forment une catégorie plus large de chants suscités par l'Esprit. Ces trois catégories sont bibliques, et une assemblée en bonne santé chante les trois au lieu de n'en privilégier qu'une seule.
 
 > EN: Explain the three biblical categories of song: psalms, hymns, and spiritual songs.
 
-**3. Expliquez en quoi le chant de l'assemblée est la voix du peuple, et le danger historique d'une musique qui le réduit au silence.**  
+**3. Expliquez pourquoi le chant de toute l'assemblée est essentiel, et quel danger l'histoire révèle lorsque la musique fait taire les fidèles.**  
 Mots-clés : congrég / congreg / assemblée / assemblee · chant · voix · peuple · particip · chœur / choeur / chorale · ensemble · exprim / express  
 Modèle : Le chant de l'assemblée est la voix du peuple dans le culte : une participation, non un spectacle, où le corps tout entier élève ensemble sa louange d'une seule voix. Historiquement, cela n'a pas toujours été préservé : avant l'an 900 environ, l'assemblée et le chœur chantaient tous deux, mais à mesure que la musique devenait plus recherchée, l'assemblée s'est peu à peu tue, jusqu'à ce qu'à la fin du Moyen Âge seuls le chœur et le clergé chantent. Cette histoire avertit que, lorsque la musique devient trop complexe ou trop un spectacle, l'assemblée cesse de chanter, et le responsable de la louange doit s'en garder.
 
 > EN: Explain congregational singing as the voice of the people, and the historical danger of music that silences them.
 
-**4. Expliquez le clivage entre générations dans la musique du culte et comment les années 1960 ont tout changé.**  
+**4. Expliquez le fossé entre les âges dans la musique du culte et le bouleversement apporté par les années 1960.**  
 Mots-clés : soixante · 1960 · chang · hymne · chants de louange / chants courts / refrain · contemporain · générat / generat · préfèr / préfér / prefer  
 Modèle : Ceux qui ont grandi avant les années 1960 préfèrent généralement les hymnes anciens, avec leur profondeur doctrinale et leur harmonie à quatre voix, tandis que les années 1960 ont tout changé en faisant entrer dans l'église les guitares, les chants de louange courts et les styles contemporains. Des années 1970 jusqu'aux années 1990, la plupart des assemblées réunissaient les deux générations sur les mêmes bancs, chacune aimant la musique qui avait formé sa propre foi, ce qui créait une tension réelle et souvent délicate entre la génération des hymnes et la génération des chants de louange.
 
 > EN: Explain the generational divide in worship music and how the 1960s changed everything.
 
-**5. Expliquez le culte mixte et la tâche du pasteur dans les guerres de la louange, en vous appuyant sur Allen et Borror.**  
+**5. Expliquez la réponse que proposent Allen et Borror aux guerres de la louange, et la tâche du pasteur dans ces conflits.**  
 Mots-clés : équilibr / equilibr · mixte / mélang / melang · ancien · nouve · allen · borror · tradition · contemporain  
 Modèle : Le culte mixte est l'application pratique du principe d'Allen et Borror selon lequel l'Église doit équilibrer les expressions musicales contemporaines et les précieuses traditions du passé, en honorant à la fois la profondeur doctrinale des hymnes anciens et le caractère direct des chants nouveaux. Dans les guerres de la louange, la tâche du pasteur n'est pas de prendre parti, mais de conduire une assemblée où chaque génération peut adorer Dieu de tout son cœur, afin que personne n'ait le sentiment qu'on lui a enlevé la musique de son cœur.
 
 > EN: Explain blended worship and the pastor's task in the worship wars, using Allen and Borror.
 
-**6. Expliquez le rôle qui convient au chœur, à la musique spéciale et aux instruments dans le culte.**  
+**6. Quel rôle doivent jouer dans le culte le chœur, les chants présentés par un soliste ou un groupe, et les instruments ?**  
 Mots-clés : chœur / choeur / chorale · spécial / special · instrument · condui / dirig · souten / soutien · congrég / congreg / assemblée / assemblee · minist · musiq  
 Modèle : Le chœur, la musique spéciale et les instruments ont tous une place légitime dans le culte, mais leur but est de conduire et de soutenir l'assemblée, jamais de la remplacer ni de se produire en spectacle devant elle. Un chœur peut conduire le peuple dans la louange, la musique spéciale peut préparer les cœurs et les instruments peuvent porter le chant ; mais dès l'instant où l'un d'eux attire l'attention sur lui-même plutôt que sur Dieu, il a cessé d'être un ministère pour devenir un spectacle.
 
 > EN: Explain the proper role of the choir, special music, and instruments in worship.
 
-**7. Expliquez pourquoi la théologie de la musique est importante, puisqu'une assemblée apprend la doctrine à partir de ce qu'elle chante.**  
+**7. Expliquez pourquoi ce que l'assemblée chante est une question de théologie, puisqu'elle apprend sa foi à travers ses chants.**  
 Mots-clés : théolog / theolog · musiq · porte / véhicul / vehicul · vérité / verite · doctrine · cœur / coeur · texte · paroles / parole  
 Modèle : La théologie de la musique est importante parce qu'une assemblée retient souvent plus de théologie de ce qu'elle chante que de ce qu'elle entend prêcher : les chants sont répétés et appris par cœur, ils s'enracinent dans le cœur et façonnent ce que les gens finissent par croire. Parce que les paroles chantées portent la doctrine de manière si profonde et si durable, le responsable de la louange doit veiller sur les paroles que le peuple chante aussi soigneusement que sur les paroles qui sont prêchées.
 
@@ -402,13 +413,13 @@ Modèle : Avant l'an 900 environ, en Occident, l'assemblée et le chœur chantai
 
 > EN: Trace briefly the history of church music from the early church through the Reformation.
 
-**9. Que faut-il pour bien conduire le chant de l'assemblée ? Parlez de la préparation et de l'introduction de nouveaux chants.**  
+**9. Que doit faire un bon responsable de la louange avant le culte, et comment doit-il faire apprendre aux fidèles des cantiques qu'ils ne savent pas encore ?**  
 Mots-clés : condui / dirig · chant / cantique · tempo · prépar / prepar · répét / repet / exerc / pratiqu · congrég / congreg / assemblée / assemblee · familier / connu · nouve  
 Modèle : Bien conduire le chant de l'assemblée demande une vraie préparation : le conducteur de chants doit choisir des chants que le peuple peut réellement chanter, fixer un tempo approprié et répéter à l'avance. Il ne faut jamais imposer à l'improviste un nouveau chant à l'assemblée pendant un moment crucial comme l'appel à la fin du message, car les gens ont besoin de ce qui leur est familier pour adorer librement ; les nouveaux chants doivent plutôt être introduits progressivement, ajoutés lentement à un répertoire connu au lieu de le remplacer d'un seul coup.
 
 > EN: What does it take to lead congregational music well? Address preparation and the introduction of new songs.
 
-**10. La direction musicale était autrefois enseignée dans ce cours. Expliquez pourquoi elle s'apprend mieux en personne qu'à partir de notes.**  
+**10. Ce cours enseignait autrefois la direction musicale (battre la mesure). Expliquez pourquoi on la maîtrise mieux avec quelqu'un qui vous observe qu'à partir d'un texte.**  
 Mots-clés : direction / dirig · histor · en personne / présentiel / presentiel / face à face / face a face · instructeur / professeur / formateur · apprend / appris / apprent · savoir-faire / compétence / competence / habileté / habilete · notes / écrit / ecrit · musiq  
 Modèle : La direction musicale s'apprend mieux en personne, car c'est un savoir-faire pratique qui comporte des schémas de battue de la mesure et des signes physiques, ce qui exige un instructeur capable d'observer la main de l'étudiant et de la corriger sur le moment. Une explication écrite, si soignée soit-elle, ne peut pas à elle seule bien enseigner ces gestes ; c'est pourquoi l'étudiant qui souhaite apprendre la direction est encouragé à trouver un instructeur qualifié et à l'apprendre en face à face.
 

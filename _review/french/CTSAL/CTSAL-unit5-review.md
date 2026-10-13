@@ -12,6 +12,11 @@ Counts: 35 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 2. 1 Timothée 3:3: NKJV 'not greedy for money' is not in Louis Segond 1910, which has only « désintéressé ». The French quotes « désintéressé ». OK?
 3. Currency: 'peso' is rendered « franc » (Congolese franc) in b007, b014 and two short-answer prompts/models, for Kinshasa readers. Keep « franc », or keep « peso »?
 
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -41,7 +46,7 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
 - **1 Timothée 5:17-18** — « Que les anciens qui dirigent bien soient jugés dignes d'un double honneur, surtout ceux qui travaillent à la prédication et à l'enseignement. Car l'Écriture dit: Tu n'emmuselleras point le bœuf quand il foule le grain. Et l'ouvrier mérite son salaire. »  
   _Verified on bible.com (LSG). NKJV 'labor in the word and doctrine' = LSG 'travaillent à la prédication et à l'enseignement'; 'is worthy of his wages' = 'mérite son salaire' (heading b030 uses this). Quoted in b031, b033, fill 9 (answer « salaire »); echoed in MC17, SA6._
 - **1 Thessaloniciens 5:22 (allusion in b021)** — « abstenez-vous de toute espèce de mal. »  
-  _Not quoted, only alluded to ('avoid even the appearance of evil', KJV wording). Translated as the author's paraphrase without quotation marks: « évitez même l'apparence du mal ». LSG wording (from memory, not checked online) differs; no exam item depends on it._
+  _Not quoted, only alluded to ('avoid even the appearance of evil', KJV wording). Translated as the author's paraphrase without quotation marks: « évitez même l'apparence du mal ». LSG wording (checked with the offline Segond) differs; no exam item depends on it._
 
 ## 3. Terms for the reviewer to confirm
 
@@ -221,7 +226,7 @@ Examen final de l'Unité 5
 > EN: Unit 5 Final Exam
 
 **b035**  
-Parcours Certificat : les 20 questions à choix multiple. Associé : les questions à choix multiple et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiple, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiple. Parcours Associé en divinité : les questions à choix multiple et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiple, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -447,7 +452,7 @@ Réponse : **salaire** · aussi acceptées : salaires, paie, rémunération, ré
 
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
-**1. Pourquoi la manière dont une église gère l'argent est-elle une affaire spirituelle, et comment Jésus a-t-il traité ce sujet ?**  
+**1. Pourquoi la manière dont une église gère ses finances est-elle une affaire spirituelle, et comment le Christ a-t-il traité ce sujet ?**  
 Mots-clés : argent · cœur / coeur · spirituel · jésus / jesus · épreuve / epreuve / examen · maître / maitre · servi · trésor / tresor  
 Modèle : La manière dont une église gère l'argent est une affaire spirituelle, car le portefeuille d'un homme est directement relié à son cœur ; Jésus a dit qu'on ne peut servir Dieu et Mamon, de sorte que l'argent n'est jamais neutre mais révèle ce qui est notre trésor. Loin de le considérer comme indigne du dirigeant spirituel, Jésus parlait constamment de l'argent, plus qu'il ne parlait du ciel ou de la prière, et il l'a appelé une épreuve : celui qui est fidèle dans les moindres choses l'est aussi dans les grandes. L'argent est un merveilleux serviteur et un maître terrible, et Dieu observe comment un homme le gère pour décider s'il peut lui confier les richesses éternelles que sont les âmes.
 
@@ -489,7 +494,7 @@ Modèle : « Tu n'emmuselleras point le bœuf quand il foule le grain » exige q
 
 > EN: What does 'do not muzzle the ox' (1 Timothy 5:17-18) require of a church?
 
-**8. Décrivez le « bel équilibre » que l'Unité 5 établit entre le dirigeant et l'église au sujet de l'argent.**  
+**8. Décrivez le « bel équilibre » que l'Unité 5 établit, au sujet de l'argent, entre celui qui conduit l'assemblée et la communauté qu'il sert.**  
 Mots-clés : dirigeant / leader / responsable · cupid / avidit · église / eglise · avare / mesquin / radin / pingre · légère / legere / détach / detach · généreu / genereu / généros / generos · équilibre / equilibre · ouvrier / travailleur  
 Modèle : Le bel équilibre, c'est que le dirigeant lui-même ne doit pas être cupide : il tient l'argent d'une main légère, comme un serviteur, pour son propre bien spirituel ; tandis que l'église ne doit pas être avare envers lui, mais prendre soin de lui généreusement, pour son bien à lui. Ces deux vérités se protègent l'une l'autre : un dirigeant qui garde son cœur contre l'amour de l'argent ne cherche pas à saisir toujours plus, et une église qui obéit au commandement de ne pas emmuseler le bœuf pourvoit équitablement aux besoins de ses ouvriers. La même unité qui met le dirigeant en garde contre la cupidité met donc l'église en garde contre l'avarice. Il laisse l'argent à sa place de serviteur, et l'église pourvoit avec justice aux besoins de ceux qui travaillent, de sorte que l'argent ne devient l'idole de personne et ne laisse aucun ouvrier fidèle dans le besoin.
 

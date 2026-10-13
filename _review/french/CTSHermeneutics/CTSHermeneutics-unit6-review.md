@@ -16,6 +16,16 @@ Counts: 59 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 6. The Nouwen quotation (b047, MC 18) was translated from the English; the published French edition of Nouwen's « Le retour de l'enfant prodigue » may word it differently. Should we use the published French wording if the reviewer can find it?
 7. Pronouns for God are lowercase (il/lui/sa) per the current rule, pending your decision.
 
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+- SA3: English prompt passes its own keywords
+- SA4: English prompt passes its own keywords
+- SA5: English prompt passes its own keywords
+- SA6: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -75,17 +85,17 @@ Choisissez votre parcours
 > EN: Choose your track
 
 **b006**  
-Certificat de ministère : vingt questions à choix multiples par unité. Il faut 18 bonnes réponses sur 20 (90 %) pour réussir.
+Parcours Certificat : vingt questions à choix multiples par unité. Il faut 18 bonnes réponses sur 20 (90 %) pour réussir.
 
 > EN: Certificate of Ministry: Twenty multiple-choice questions per unit. Pass at 18 of 20 (90%).
 
 **b007**  
-Master of Divinity : les mêmes vingt questions à choix multiples, plus dix questions à réponse courte. Il faut 18 sur 20 aux choix multiples et 9 sur 10 aux réponses courtes pour réussir, chaque partie étant notée séparément.
+M.Div. : les mêmes vingt questions à choix multiples, plus dix questions à réponse courte. Il faut 18 sur 20 aux choix multiples et 9 sur 10 aux réponses courtes pour réussir, chaque partie étant notée séparément.
 
 > EN: Master of Divinity: Same twenty multiple-choice questions, plus ten short-answer questions. Pass at 18 of 20 multiple-choice and 9 of 10 short-answer, scored independently.
 
 **b008**  
-Master of Theology : noté exactement comme le Master of Divinity — les mêmes vingt questions à choix multiples plus dix questions à réponse courte ; il faut 18 sur 20 aux choix multiples et 9 sur 10 aux réponses courtes pour réussir, chaque partie étant notée séparément.
+Th.M. : noté exactement comme le M.Div. — les mêmes vingt questions à choix multiples plus dix questions à réponse courte ; il faut 18 sur 20 aux choix multiples et 9 sur 10 aux réponses courtes pour réussir, chaque partie étant notée séparément.
 
 > EN: Master of Theology: Graded exactly like the Master of Divinity — the same twenty multiple-choice questions plus ten short-answer questions, passing at 18 of 20 multiple-choice and 9 of 10 short-answer, scored independently.
 
@@ -160,7 +170,7 @@ Une parabole fait une seule comparaison. Une allégorie en fait beaucoup. Dans u
 > EN: A parable makes one comparison. An allegory makes many. In an allegory, every detail stands for something else: this character is virtue, that character is vice, the road is life, the river is baptism, the trees are nations. Pilgrim’s Progress is an allegory; Bunyan tells us so. Christ’s parables are not.
 
 **b023**  
-Pendant plus de mille ans, de fidèles enseignants chrétiens ont traité les paraboles de Jésus comme des allégories, avec des résultats désastreux. La lecture que fait Augustin du bon Samaritain en est l'exemple classique. Il prit chaque détail et lui attribua un symbole. Le voyageur était Adam. Jérusalem était le paradis. Jéricho était la lune — qui représentait la condition mortelle. Les brigands étaient Satan et ses anges. Les blessures étaient le péché. Le prêtre était la loi de Moïse. Le Lévite était les prophètes de l'Ancien Testament. Le Samaritain était le Christ lui-même. L'âne était le corps du Christ. L'hôtellerie était l'Église. L'hôtelier était l'apôtre Paul. Les deux pièces d'argent étaient les deux Testaments. La promesse du Samaritain de revenir était le retour du Christ.
+Pendant plus de mille ans, de fidèles enseignants chrétiens ont traité les paraboles de Jésus comme des allégories, avec des résultats désastreux. La lecture que fait Augustin du bon Samaritain en est l'exemple classique. Il prit chaque détail et lui attribua un symbole. Le voyageur était Adam. Jérusalem était le paradis. Jéricho était la lune — qui représentait la condition mortelle. Les brigands étaient Satan et ses anges. Les blessures étaient le péché. Le sacrificateur était la loi de Moïse. Le Lévite était les prophètes de l'Ancien Testament. Le Samaritain était le Christ lui-même. L'âne était le corps du Christ. L'hôtellerie était l'Église. L'hôtelier était l'apôtre Paul. Les deux pièces d'argent étaient les deux Testaments. La promesse du Samaritain de revenir était le retour du Christ.
 
 > EN: For more than a thousand years, faithful Christian teachers treated Jesus’ parables as allegories, with disastrous results. Augustine’s reading of the Good Samaritan is the classic case. He took every detail and assigned it a symbol. The traveler was Adam. Jerusalem was paradise. Jericho was the moon — standing for mortality. The robbers were Satan and his angels. The wounds were sin. The priest was the Mosaic law. The Levite was the Old Testament prophets. The Samaritan was Christ Himself. The donkey was Christ’s body. The inn was the church. The innkeeper was the apostle Paul. The two coins were the two testaments. The Samaritan’s promise to return was the Second Coming.
 
@@ -556,7 +566,7 @@ Réponse : **prière** · aussi acceptées : prières
 
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
-**1. Racontez l'histoire de l'artiste chinois et la correction que le missionnaire apporta à son premier tableau du fils prodigue. Expliquez ce qu'elle enseigne sur la lecture des paraboles.**  
+**1. Racontez l'histoire du missionnaire qui corrigea le premier tableau qu'un artiste chinois avait fait de la parabole du fils qui dilapida son héritage (Luc 15). Expliquez ce qu'elle enseigne sur la lecture des paraboles.**  
 Mots-clés : chinois · artiste · prodigue · père / pere · courant / courir / courut / course · central · point · peint / peindre  
 Modèle : Un missionnaire dit à un artiste chinois qui voulait peindre la foi chrétienne de peindre la parabole du fils prodigue. Quand l'artiste réussit enfin, le personnage central était le Père qui court à la rencontre de son fils, les vêtements flottant au vent, plein de joie. L'histoire enseigne qu'une parabole a un seul point central — ici, le Père qui court pour accueillir — et non une douzaine de symboles épars à peindre.
 
@@ -568,37 +578,37 @@ Modèle : La plupart des paraboles font une seule comparaison centrale, le reste
 
 > EN: Define a parable in your own words and contrast it with an allegory. Why does this distinction matter for the pastor?
 
-**3. Décrivez la lecture allégorique du bon Samaritain par Augustin et expliquez pourquoi cette leçon la présente comme un exemple de mise en garde.**  
+**3. Décrivez comment Augustin lisait la parabole du bon Samaritain et expliquez pourquoi cette leçon présente sa lecture comme un exemple à ne pas suivre.**  
 Mots-clés : augustin · samaritain · hôtel / hotel / auberge · pièce / piece / denier · symbol · détail / detail · allégor / allegor · garde / avertiss / prudence  
 Modèle : Augustin a lu le bon Samaritain comme une allégorie, en attribuant un symbole à chaque détail — l'hôtellerie devenait l'Église, l'hôtelier Paul, les deux pièces d'argent les deux Testaments, le Samaritain le Christ. La leçon présente cela comme un exemple de mise en garde, parce qu'une fois que chaque détail est un symbole, c'est l'interprète, et non Jésus, qui contrôle le sens, et le vrai point de la parabole est enfoui.
 
 > EN: Describe Augustine's allegorical reading of the Good Samaritan and explain why this lesson treats it as a cautionary example.
 
-**4. La leçon nomme trois signaux qui aident à identifier le point central d'une parabole. Nommez et expliquez brièvement chacun de ces signaux.**  
+**4. La leçon nomme trois repères qui aident à trouver le point central d'une parabole. Nommez et expliquez brièvement chacun de ces repères.**  
 Mots-clés : question · auditoire / auditeur / public · culminant / apogée / apogee · central · signa / indice · point · histoire / récit / recit · suscit / provoqu / occasion  
 Modèle : Trois signaux aident à trouver le point central d'une parabole. Premièrement, la question ou la situation qui a suscité la parabole. Deuxièmement, l'auditoire auquel Jésus s'adressait. Troisièmement, le point culminant de l'histoire, là où tombe le poids. Lire ces signaux ensemble garde l'interprète sur le seul point central au lieu de s'égarer dans le décor.
 
 > EN: The lesson names three signals that help identify a parable's central point. Name and briefly explain each signal.
 
-**5. Racontez l'histoire bouddhiste du fils prodigue (tirée du Lotus de la Bonne Loi) et expliquez comment elle a la même intrigue que la parabole de Jésus mais un point central opposé.**  
+**5. Racontez l'histoire bouddhiste du fils prodigue (tirée du Lotus de la Bonne Loi) et expliquez comment elle a la même intrigue que la parabole de Jésus mais un message central inverse.**  
 Mots-clés : bouddh · lotus · mérit / merit / gagner · digne · grâce / grace · précède / precede / précéd / preced · père / pere · opposé / oppose / contraire  
 Modèle : Le prodigue bouddhiste du Lotus de la Bonne Loi a la même intrigue que la parabole de Jésus, mais un point central opposé : le fils doit travailler pendant des années pour mériter son retour et se montrer digne avant que le père le reçoive. Dans la parabole de Jésus, c'est le Père qui sort le premier en courant — la grâce précède la dignité du fils. Même histoire, évangile opposé.
 
 > EN: Tell the Buddhist Prodigal Son story (from the Lotus of Perfect Law) and explain how it has the same plot as Jesus' parable but the opposite central point.
 
-**6. Énoncez en une seule phrase le point central de la parabole du semeur (Marc 4), et expliquez pourquoi les quatre terrains sont du décor plutôt que quatre doctrines séparées.**  
+**6. Énoncez en une seule phrase le point central de la parabole du semeur (Marc 4), et expliquez pourquoi les quatre sortes de sol sont un simple arrière-plan plutôt que quatre doctrines séparées.**  
 Mots-clés : semeur · semence / graine / grain · parole · cœur / coeur · reçoi / recoi / recev / accueil · terrain / terre · décor / decor · central  
 Modèle : Le point central de la parabole du semeur est que la même semence — la Parole de Dieu — rencontre des cœurs différents, et que seul le cœur qui la reçoit porte du fruit. Les quatre terrains sont le décor qui sert ce seul point, et non quatre doctrines séparées à exploiter une par une. Lue comme quatre doctrines, la parabole perd son message unique sur la manière dont le cœur reçoit la Parole.
 
 > EN: State in one sentence the central point of the Parable of the Sower (Mark 4), and explain why the four soils are scenery rather than four separate doctrines.
 
-**7. Énoncez le point central de la parabole des ouvriers de la vigne (Matthieu 20) et expliquez pourquoi cette parabole NE parle PAS d'économie du travail.**  
+**7. Énoncez le point central de la parabole des ouvriers de la vigne (Matthieu 20) et expliquez pourquoi cette parabole n'est PAS une leçon sur les salaires et le marché du travail.**  
 Mots-clés : vigne · ouvrier · généros / generos · grâce / grace · égal / egal / même salaire / meme salaire · tardi / dernière heure / derniere heure / embauchés tard / embauches tard · maître / maitre / propriétaire / proprietaire · économi / economi  
 Modèle : Le point central des ouvriers de la vigne est la générosité du maître, et non l'économie du travail. Il paie le même salaire à ceux qui ont été embauchés tard qu'à ceux qui ont été embauchés tôt, et quand ils murmurent, il répond qu'il lui est permis de faire de son bien ce qu'il veut. La parabole parle de la grâce — la générosité égale et imméritée de Dieu — et non d'une leçon sur les salaires équitables.
 
 > EN: State the central point of the Parable of the Vineyard Workers (Matthew 20) and explain why this parable is NOT about labor economics.
 
-**8. Énoncez le point central de la parabole de la veuve persévérante (Luc 18) et expliquez pourquoi le juge est un CONTRASTE avec Dieu, et non un symbole de Dieu.**  
+**8. Énoncez le point central de la parabole de la veuve et du juge (Luc 18) et expliquez pourquoi ce juge représente l'INVERSE du Seigneur, et non une image de lui.**  
 Mots-clés : veuve · juge · injust / inique · contraste / oppos · persév / persev / insist · prier / prière / priere · dieu · symbol  
 Modèle : Le point central de la veuve persévérante est qu'il faut toujours prier, et ne point se relâcher. Le juge injuste est un contraste avec Dieu, et non un symbole de Dieu : si même un juge corrompu finit par répondre à une veuve persévérante, combien plus le Dieu juste répondra-t-il aux siens. Lire le juge comme un symbole du Père renverse le sens de la parabole.
 

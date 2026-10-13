@@ -12,6 +12,16 @@ Counts: 65 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 2. Colossiens 2.16 : l'anglais dit « a Sabbath day », LSG dit « des sabbats ». J'ai suivi LSG dans la leçon et la QCM n° 10. Cela vous convient-il ?
 3. Toutes les explications de QCM (« why ») sont vides (null) dans la source pour cette unité ; je les ai laissées vides. Faut-il en rédiger ?
 
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+- SA4: English prompt passes its own keywords
+- SA6: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -73,7 +83,7 @@ Le culte de l'Ancien Testament s'est d'abord centré sur le tabernacle, puis sur
 > EN: Old Testament worship centered first on the tabernacle and later on the temple. Even in the time of Moses, God made detailed provision for worship, and much of the Pentateuch concerns the tabernacle and the priesthood. When Solomon built the temple, the offering of sacrifices became its most important feature. The blood of bulls and goats could never take away sin, but it pointed forward to the Lamb who would. The Psalms were sung, chanted, and recited in the temple, and we still sing the Psalms in our praise today, a direct line from Solomon's temple to your congregation on Sunday morning.
 
 **b019**  
-Pendant la captivité de Babylone, alors que le temple était en ruine et que le peuple se trouvait loin de Jérusalem, une institution nouvelle apparut : la synagogue. Elle servait deux buts à la fois : l'enseignement et le culte. Le culte de la synagogue était simple et sans formalisme, dirigé par le chef de la synagogue. On y lisait les Écritures, on priait, on donnait une exhortation, on récitait le Shema, et l'assemblée répondait par des « Amen ». C'est le culte que Jésus connaissait. Luc 4.16 nous dit qu'il entra dans la synagogue « selon sa coutume ». La lecture de l'Écriture et son explication, qui marquent nos cultes aujourd'hui, viennent tout droit de la synagogue.
+Pendant la captivité de Babylone, alors que le temple était en ruine et que le peuple se trouvait loin de Jérusalem, une institution nouvelle apparut : la synagogue. Elle servait deux buts à la fois : l'enseignement et le culte. Le culte de la synagogue était simple et sans formalisme, dirigé par le chef de la synagogue. On y lisait les Écritures, on priait, on donnait une exhortation, on récitait le Shema, et l'assemblée répondait par des « Amen ». C'est le culte que Jésus connaissait. Luc 4:16 nous dit qu'il entra dans la synagogue « selon sa coutume ». La lecture de l'Écriture et son explication, qui marquent nos cultes aujourd'hui, viennent tout droit de la synagogue.
 
 > EN: During the Babylonian captivity, when the temple lay in ruins and the people were far from Jerusalem, a new institution arose: the synagogue. It served two purposes at once, teaching and worship. The synagogue service was informal, led by the ruler of the synagogue. They read the Scriptures, prayed, gave exhortation, recited the Shema, and answered with Amens. This is the worship Jesus knew. Luke 4:16 tells us He went into the synagogue "as His custom was." The reading of Scripture and the exposition that mark our services today come straight from the synagogue.
 
@@ -113,7 +123,7 @@ Examen final de l'Unité 3
 > EN: Unit 3 Final Exam
 
 **b027**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -415,7 +425,7 @@ El Tabernáculo — el modelo del culto del Antiguo Testamento.
 · D. le commerce  
 > EN: Synagogue worship served two purposes: worship and: — ✓ teaching
 
-**8. Luc 4.16 montre que Jésus fréquentait la synagogue :**  
+**8. Luc 4:16 montre que Jésus fréquentait la synagogue :**  
 · A. une seule fois  
 · B. en secret  
 · C. à contrecœur  
@@ -522,7 +532,7 @@ Réponse : **sacrifices** · aussi acceptées : sacrifice, sacrifices d'animaux
 Réponse : **synagogue** · aussi acceptées : synagogues  
 > EN: During the Babylonian captivity a new institution arose for teaching and worship: the ____. — **synagogue**
 
-**4.** Luc 4.16 nous dit que Jésus entra dans la synagogue « selon sa ____ ».  
+**4.** Luc 4:16 nous dit que Jésus entra dans la synagogue « selon sa ____ ».  
 Réponse : **coutume** · aussi acceptées : habitude  
 > EN: Luke 4:16 tells us Jesus went into the synagogue "as His ____ was." — **custom**
 
@@ -555,7 +565,7 @@ Réponse : **libre** · aussi acceptées : libres
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
 **1. Le culte se trouve dans toutes les cultures. Expliquez la différence entre le culte païen et le culte biblique, en vous appuyant sur Segler.**  
-Mots-clés : révél / revel · païen / paien · différ / differ · nature · objet · segler · biblique · créa / crea / créé / cree / invent  
+Mots-clés : révél / revel · païen / paien · devin / parlé le premier / parle le premier · nature · objet · segler · soleil / orage / fleuve / montagne · créa / crea / créé / cree / invent  
 Modèle : Segler résume en un seul mot la différence entre le culte païen et le culte biblique : la révélation. Le culte païen s'élève vers le ciel et devine ; il invente un dieu à partir de la nature et de l'imagination, et tire son objet de choses comme le soleil, l'orage, le fleuve ou la montagne. Le culte biblique, au contraire, répond à un Dieu qui s'est avancé et qui s'est révélé lui-même ; il répond à un Dieu qui a parlé le premier, et non à un dieu inventé par l'humanité.
 
 > EN: Worship is found in every culture. Explain the difference between pagan worship and biblical worship, using Segler.
@@ -568,11 +578,11 @@ Modèle : Le culte de l'Ancien Testament s'est d'abord centré sur le tabernacle
 
 **3. Expliquez l'origine et le caractère du culte de la synagogue, et la relation de Jésus avec ce culte.**  
 Mots-clés : synagogue · captivit · enseign · lectur / lisai / lire l · écritur / ecritur · shema / chema · jésus / jesus · développ / developp / apparu / naquit  
-Modèle : La synagogue est apparue pendant la captivité de Babylone, quand le temple était en ruine et que le peuple se trouvait loin de Jérusalem ; elle servait deux buts à la fois : l'enseignement et le culte. Son culte simple comprenait la lecture des Écritures, la prière, l'exhortation et le Shema, sous la direction du chef de la synagogue. Jésus connaissait bien ce culte : Luc 4.16 nous dit qu'il entra dans la synagogue « selon sa coutume », et une grande partie de notre lecture et de notre explication de l'Écriture aujourd'hui remonte à la synagogue.
+Modèle : La synagogue est apparue pendant la captivité de Babylone, quand le temple était en ruine et que le peuple se trouvait loin de Jérusalem ; elle servait deux buts à la fois : l'enseignement et le culte. Son culte simple comprenait la lecture des Écritures, la prière, l'exhortation et le Shema, sous la direction du chef de la synagogue. Jésus connaissait bien ce culte : Luc 4:16 nous dit qu'il entra dans la synagogue « selon sa coutume », et une grande partie de notre lecture et de notre explication de l'Écriture aujourd'hui remonte à la synagogue.
 
 > EN: Explain the origin and character of synagogue worship, and how Jesus related to it.
 
-**4. Pourquoi les chrétiens ont-ils déplacé leur culte du sabbat au dimanche, le premier jour de la semaine ?**  
+**4. Pourquoi les chrétiens ont-ils changé de jour pour leur culte, et quel jour ont-ils choisi ?**  
 Mots-clés : dimanche · premier · jour du / jour de / premier jour · résurrect / resurrect / ressusc · sabbat · semaine · christ / jésus / jesus · souven / rappel / commémor / commemor / mémoire / memoire  
 Modèle : Les chrétiens ont déplacé leur culte du sabbat au dimanche, le premier jour de la semaine, pour se souvenir de la résurrection du Christ, qui avait eu lieu ce jour-là. Ce jour fut appelé le jour du Seigneur. Ce changement était déjà contesté à l'époque apostolique, puisque Paul, en Colossiens 2, dut dire aux croyants de ne laisser personne les juger au sujet des sabbats.
 
@@ -585,31 +595,31 @@ Modèle : Le culte du Nouveau Testament comprenait plusieurs éléments reconnai
 > EN: List and explain the elements of New Testament worship.
 
 **6. Décrivez le culte que Justin Martyr présente dans son Apologie vers l'an 140 apr. J.-C.**  
-Mots-clés : justin · martyr · apolog · dimanche · description / esquisse / schéma / schema / aperçu / apercu · d'ensemble / d ensemble / général / general / grandes lignes · 140 · mémoire / memoire  
+Mots-clés : justin · diacre · apolog · dimanche · description / esquisse / schéma / schema / aperçu / apercu · d'ensemble / d ensemble / général / general / grandes lignes · prophète / prophete / apôtre / apotre · mémoire / memoire  
 Modèle : Justin Martyr, qui écrivait vers l'an 140 apr. J.-C., décrit l'assemblée du dimanche : on lit les mémoires des apôtres et les écrits des prophètes, celui qui préside prononce un discours, tous se lèvent et prient, on apporte le pain et le vin, le peuple dit « Amen », et les diacres en portent une part aux absents. C'est l'une des plus anciennes descriptions d'ensemble d'un culte chrétien, simple et reconnaissable.
 
 > EN: Describe the worship service Justin Martyr outlines in his Apology around AD 140.
 
 **7. Expliquez comment la légalisation du christianisme par Constantin au IVe siècle a affecté le culte.**  
-Mots-clés : constantin · légal / legal · quatrième / quatrieme / ive siècle / ive siecle · païen / paien · régénér / regener / inconverti · somptu / élabor / elabor / fastu · bâtiment / batiment / édifice / edifice / basilique · automatiq  
+Mots-clés : constantin · légal / legal · clergé / clerge / habit · païen / paien · régénér / regener / inconverti · somptu / élabor / elabor / fastu · bâtiment / batiment / édifice / edifice / basilique · automatiq  
 Modèle : La légalisation du christianisme par Constantin au IVe siècle eut un effet mitigé sur le culte. Les foules entrèrent dans l'Église automatiquement, y compris des païens non régénérés, baptisés sans conversion ; de somptueuses basiliques remplacèrent les humbles maisons ; le clergé commença à porter un habit distinctif ; et la culture environnante se mit à façonner l'Église au lieu que l'Église façonne la culture.
 
 > EN: Explain how Constantine's legalization of Christianity in the fourth century affected worship.
 
 **8. Comment l'eucharistie et la prédication ont-elles changé aux IVe et Ve siècles ?**  
-Mots-clés : eucharist · crainte / peur · révérenc / reverenc / respect / effroi · joie / joyeu · chang / transform / passa · rituel / cérémon / ceremon · prédic / predic / prêch / prech · ornement / décor / decor  
+Mots-clés : eucharist · crainte / peur · révérenc / reverenc / respect / effroi · joie / joyeu · tradition / écriture / ecriture · rituel / cérémon / ceremon · prédic / predic / prêch / prech · ornement / décor / decor  
 Modèle : Aux IVe et Ve siècles, l'eucharistie passa de la joie à la crainte et à la révérence, et l'ornementation se multiplia autour d'elle. La prédication, quant à elle, s'effondra dès le Ve siècle, tandis que la tradition était élevée au-dessus de l'Écriture, ce qui marquait un éloignement important du culte simple, centré sur la Parole, de l'Église des premiers temps.
 
 > EN: How did the Eucharist and preaching change in the fourth and fifth centuries?
 
-**9. Expliquez les trois évolutions clés qui ont corrompu l'Église : sacramentalisée, cléricalisée et institutionnalisée.**  
+**9. Expliquez les trois évolutions clés qui ont corrompu l'Église après qu'elle eut obtenu la faveur impériale.**  
 Mots-clés : sacrement / sacramental · cléric / cleric · institution · prêtre / pretre / sacerdo · salut / salvat · mérite / merite · organis · perdu / perte / perdi  
 Modèle : Trois corruptions suivirent l'accession de l'Église à la faveur impériale : elle fut sacramentalisée, enseignant le salut par sept sacrements et une réserve de mérites plutôt que par la grâce au moyen de la foi seule ; cléricalisée, le sacerdoce de tous les croyants étant perdu au profit d'une classe sacerdotale à part ; et institutionnalisée, un corps vivant s'étant durci en une organisation rigide au lieu d'une communauté vivante conduite par l'Esprit.
 
 > EN: Explain the three key developments that corrupted the church: sacramentalized, clericalized, and institutionalized.
 
 **10. Expliquez la tradition de l'Église libre et en quoi elle diffère d'une liturgie fixe.**  
-Mots-clés : libre · église / eglise · baptiste · fixe / prescrit · liturg · latitude / liberté / liberte · aucun / sans / pas de · tradition  
+Mots-clés : libre · apostoliq · baptiste · l'esprit / l esprit / assemblée locale / assemblee locale · liturg · latitude / liberté / liberte · aucun / sans / pas de · common prayer / prière commune / priere commune  
 Modèle : La tradition de l'Église libre n'a aucune liturgie fixe comme le Book of Common Prayer, mais conserve la latitude de l'Église apostolique, où aucun ordre fixe n'est même apparu avant l'an 215 environ. Elle diffère d'une liturgie fixe, qui prescrit des paroles et des formes déterminées pour chaque culte ; la tradition de l'Église libre laisse davantage de place à l'assemblée locale et à la conduite de l'Esprit pour façonner la forme du culte.
 
 > EN: Explain the free church tradition and how it differs from a fixed liturgy.

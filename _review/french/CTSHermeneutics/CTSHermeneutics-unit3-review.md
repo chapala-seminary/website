@@ -12,7 +12,16 @@ Counts: 61 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 2. b026 says Satan quotes Psalm 91 'word for word'. In Louis Segond the wording in Matthew 4:6 differs visibly from Psalm 91:11, and Satan leaves out « de te garder dans toutes tes voies ». Keep « mot pour mot », or say « presque mot pour mot » — and perhaps point out that omission, which supports your point about the condition of obedience?
 3. b016 keeps 'a small church in Mexico' (« une petite église du Mexique »), and b048 keeps 'the Word of Wayne'. For pastors in Kinshasa, keep these, or change Mexico to « chez nous » / Kinshasa?
 4. b002 is the language switch ('Español'). I left it as « Español ». Should the French page show a different switch (e.g. « English / Español »)?
-5. [check] Units 1–3 are inconsistent with each other: the language switch b002 reads « English » in unit 1 but « Español » in units 2 and 3, and the Certificate track label is « Parcours Certificat » (unit 1), « Parcours Certificat de ministère » (unit 2) and « Certificat de ministère » (unit 3). Please pick one form for each so the whole course matches.
+5. [check] Units 1–3 are inconsistent with each other: the language switch b002 reads « English » in unit 1 but « Español » in units 2 and 3. Please pick one form so the whole course matches. (The track labels are now settled: « Parcours Certificat », « M.Div. », « Th.M. », as in the rest of the edition.)
+
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+- SA2: English prompt passes its own keywords
+- SA3: English prompt passes its own keywords
+- SA4: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
 
 ## 2. Bible quotations (Louis Segond 1910)
 
@@ -77,7 +86,7 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
 - **Faust bargain** → pacte de Faust — « Pacte faustien » is also common; « pacte de Faust » keeps the name for fill 7.
 - **That is not pastoring. That is replacing.** → Ce n'est pas faire œuvre de pasteur. C'est de la substitution. — « Remplacer » alone reads oddly in French; « substitution » keeps the idea (the pastor's word put in place of God's) without adding an object. Reviewer may prefer another phrasing.
 - **theological hobby** → dada théologique — Informal French; « marotte théologique » is an alternative.
-- **Certificate of Ministry** → Certificat de ministère — Other French units use « Parcours Certificat »; this unit's English says 'Certificate of Ministry' explicitly.
+- **Certificate of Ministry** → Parcours Certificat — Settled edition-wide (convention 9): the track is « Parcours Certificat »; « Certificat de ministère » is reserved for the 12-course certificate.
 
 ## 4. Lesson
 
@@ -109,17 +118,17 @@ Choisissez votre parcours
 > EN: Choose your track
 
 **b006**  
-Certificat de ministère : Vingt questions à choix multiples par unité. Réussite à 18 sur 20 (90 %).
+Parcours Certificat : Vingt questions à choix multiples par unité. Réussite à 18 sur 20 (90 %).
 
 > EN: Certificate of Ministry: Twenty multiple-choice questions per unit. Pass at 18 of 20 (90%).
 
 **b007**  
-Master of Divinity : Les mêmes vingt questions à choix multiples, plus dix questions à réponse courte. Réussite à 18 sur 20 aux choix multiples et 9 sur 10 aux réponses courtes, notées séparément.
+M.Div. : Les mêmes vingt questions à choix multiples, plus dix questions à réponse courte. Réussite à 18 sur 20 aux choix multiples et 9 sur 10 aux réponses courtes, notées séparément.
 
 > EN: Master of Divinity: Same twenty multiple-choice questions, plus ten short-answer questions. Pass at 18 of 20 multiple-choice and 9 of 10 short-answer, scored independently.
 
 **b008**  
-Master of Theology : Noté exactement comme le Master of Divinity — les mêmes vingt questions à choix multiples plus dix questions à réponse courte, avec réussite à 18 sur 20 aux choix multiples et 9 sur 10 aux réponses courtes, notées séparément.
+Th.M. : Noté exactement comme le M.Div. — les mêmes vingt questions à choix multiples plus dix questions à réponse courte, avec réussite à 18 sur 20 aux choix multiples et 9 sur 10 aux réponses courtes, notées séparément.
 
 > EN: Master of Theology: Graded exactly like the Master of Divinity — the same twenty multiple-choice questions plus ten short-answer questions, passing at 18 of 20 multiple-choice and 9 of 10 short-answer, scored independently.
 
@@ -129,12 +138,12 @@ Certificat
 > EN: Certificate
 
 **b010**  
-M.Div
+M.Div.
 
 > EN: M.Div
 
 **b011**  
-Th.M
+Th.M.
 
 > EN: Th.M
 
@@ -600,13 +609,13 @@ Réponse : **parallèles** · aussi acceptées : parallèle
 
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
-**1. Définissez l'exégèse et l'eiségèse, et expliquez pourquoi chaque pasteur fait face à ce choix chaque lundi matin.**  
+**1. Définissez l'exégèse et l'eiségèse, et expliquez pourquoi chaque pasteur doit trancher entre les deux au début de chaque semaine.**  
 Mots-clés : exégèse / exegese · eiségèse / eisegese · sens / signification · tirer / extrai / faire sortir · lire / lecture / lisant · lundi · choix / choisi · auteur  
 Modèle : L'exégèse consiste à tirer le sens hors du texte — à laisser l'intention de l'auteur gouverner. L'eiségèse consiste à lire son propre sens dans le texte. Chaque pasteur fait face à ce choix chaque lundi matin, lorsqu'il prépare sa prédication ; et s'il refuse de choisir l'exégèse, il choisit l'eiségèse par défaut.
 
 > EN: Define exegesis and eisegesis, and explain why every pastor faces this choice every Monday morning.
 
-**2. Expliquez Néhémie 8:8 (« ils en donnaient le sens ») et décrivez en quoi ce verset sert de portrait de la description de poste du pasteur.**  
+**2. Expliquez Néhémie 8:8 et décrivez en quoi ce verset dresse le portrait de la tâche du pasteur.**  
 Mots-clés : néhémie / nehemie · esdras · lisai / lire / lecture / lisant · sens · comprend / compris · lévite / levite · distinct · expliqu / explication  
 Modèle : En Néhémie 8:8, Esdras et les Lévites lisaient distinctement dans le livre de la loi de Dieu et en donnaient le sens, pour faire comprendre au peuple ce qu'ils avaient lu. Voilà la description de poste du pasteur : non pas seulement lire les mots à haute voix, mais en expliquer le sens pour que les auditeurs comprennent vraiment ce que Dieu a dit.
 
@@ -618,7 +627,7 @@ Modèle : Au temple, Satan a cité le Psaume 91 à Jésus, arrachant la promesse
 
 > EN: In Matthew 4, Satan quotes Psalm 91 at Jesus. Explain how this is an example of eisegesis weaponized, and how Jesus responds.
 
-**4. La leçon identifie trois eiségèses qui correspondent aux trois tentations de Satan. Nommez et décrivez brièvement chacune (pain / temple / royaumes).**  
+**4. La leçon relève trois eiségèses qui correspondent aux trois épreuves que Satan imposa à Jésus au désert. Nommez et décrivez brièvement chacune.**  
 Mots-clés : pain · temple · royaume · prospér / prosper · présompt / presompt · pouvoir / puissance · ambition · tentation  
 Modèle : Les trois eiségèses correspondent aux trois tentations de Satan. L'eiségèse du pain transforme les promesses spirituelles en prospérité matérielle. L'eiségèse du temple est la présomption — vouloir forcer Dieu à agir en détournant une promesse. L'eiségèse des royaumes cherche le pouvoir et assouvit l'ambition par un raccourci que Christ a refusé. Chacune tord un texte pour servir un désir charnel.
 
@@ -630,20 +639,20 @@ Modèle : L'eiségèse du pain lit un pain physique et matériel là où Dieu pa
 
 > EN: Explain the "bread eisegesis" with at least one example of a Bible verse commonly misused this way and why the misuse fails.
 
-**6. Jésus a répondu à chacune des trois tentations de Satan par une citation du Deutéronome. Identifiez chaque passage du Deutéronome et dites ce qui fait de l'usage que Jésus en fait un modèle d'exégèse respectueuse du contexte.**  
+**6. Jésus a répondu à chacune des trois tentations de Satan par un passage du Deutéronome. Identifiez chacun de ces passages et dites ce qui fait de l'usage que Jésus en fait un modèle d'exégèse qui respecte le cadre du passage.**  
 Mots-clés : deutéronome / deuteronome · moïse / moise · désert / desert · contexte · original / origine · israël / israel · citat / citant / cita / citer · tordre / tordu / déform / deform  
 Modèle : Jésus a répondu à chaque tentation par une citation du Deutéronome, le livre que Moïse a donné à Israël dans le désert : « L'homme ne vivra pas de pain seulement », « Tu ne tenteras point le Seigneur » et « Tu adoreras le Seigneur… et tu le serviras lui seul ». Chaque citation garde son sens d'origine dans son contexte et refuse d'être tordue — voilà le modèle de l'exégèse respectueuse du contexte.
 
 > EN: Jesus answered each of Satan's three temptations with a quotation from Deuteronomy. Identify each Deuteronomy passage and what makes Jesus' use of it a model of contextual exegesis.
 
-**7. Racontez avec vos propres mots la légende de Faust et expliquez comment elle illustre le prix à payer quand on tord l'Écriture pour un gain personnel.**  
+**7. Racontez avec vos propres mots la légende de Faust et expliquez comment elle illustre le prix à payer quand on manipule l'Écriture par intérêt.**  
 Mots-clés : faust · contrat · son âme / son ame / âmes / ames · satan / diable · gagner / gain / profit · tord / déform / deform · sang · marché / marche / pacte  
 Modèle : Le docteur Johann Faust a signé un contrat de son propre sang : Satan le servirait vingt-quatre ans, puis posséderait son âme. Il a obtenu tout ce qu'il voulait, et à la fin le diable a emporté son âme. L'eiségèse est un pacte de Faust — le pasteur qui tord l'Écriture pour un gain, des foules plus nombreuses ou une doctrine flatteuse, signe un contrat dont la dernière clause se paie en âmes.
 
 > EN: Tell the Faust legend in your own words and explain how it illustrates the cost of twisting Scripture for personal gain.
 
-**8. Racontez l'histoire d'Alexandre le Grand et du déserteur, et expliquez comment elle s'applique au pasteur qui se dit ministre de la Parole.**  
-Mots-clés : alexandre · déserteur / deserteur · de nom / son nom / le nom / ton nom · change · conduite / comportement · ministre / serviteur · parole · soldat  
+**8. Racontez l'histoire d'Alexandre le Grand et de l'homme qui avait abandonné l'armée, et expliquez comment elle s'applique au pasteur qui se dit ministre de la Parole.**  
+Mots-clés : alexandre · déserteur / deserteur · de nom / son nom / le nom / ton nom · change · conduite / comportement · digne / dignité / dignite · parole · soldat  
 Modèle : Un déserteur amené devant Alexandre le Grand portait le même nom que le général. Alexandre lui dit : « Ou bien change de nom, ou bien change de conduite. » Le pasteur qui se dit ministre de la Parole porte un grand nom. Il doit en être digne — manier fidèlement la Parole — ou cesser de revendiquer ce nom ; il ne peut pas garder le nom tout en désertant l'appel, comme ce soldat.
 
 > EN: Tell the Alexander-the-Great-and-the-deserter story and explain its application to the pastor who calls himself a minister of the Word.

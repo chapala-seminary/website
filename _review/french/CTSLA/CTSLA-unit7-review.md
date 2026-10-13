@@ -15,6 +15,15 @@ Counts: 142 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 5. b099 says 'Eighteen Greek words', but John 1:1 has 17 Greek words (5 + 7 + 5). Translated as written (« Dix-huit »); please correct in both languages if you agree.
 6. Light adaptations for French readers (following the Spanish edition's practice): 'English' letters became « français » (b016, b017, b033, MC2 '26 letters', MC3, MC4, MC16); Chi's 'ch as in church' became « ch de chat »; example words changed to French ones (axe/taxi, porte, rose, laps/psaume, rhétorique/rhinocéros/rhume/Rhodes, téléphone/Philippe/phosphore, archaïque/archéologie). 'Xmas' is explained as an English abbreviation, since French does not use it. The Tyndale long-s example stays English. Please confirm.
 
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+- SA2: English prompt passes its own keywords
+- SA3: English prompt passes its own keywords
+- SA6: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -39,6 +48,8 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
   _Verified on biblestudytools (LSG). b043: English 'rules them with a rod of iron' = LSG « les paîtra avec une verge de fer ». rhabdos glossed « verge » to match LSG. Not tested._
 - **1 Jean 2:1 (and 2:12, 2:18, 2:28)** — « Mes petits enfants, je vous écris ces choses, »  
   _Verified on biblestudytools (LSG). b045: 'little children' = « petits enfants »._
+- **Jean 14:6** — « Jésus lui dit: Je suis le chemin, la vérité, et la vie. Nul ne vient au Père que par moi. »  
+  _Checked with offline LSG tool. MC13 option D (distractor); comma restored to match LSG._
 
 ## 3. Terms for the reviewer to confirm
 
@@ -610,7 +621,7 @@ Examen de l'Unité 7
 > EN: Unit 7 Examination
 
 **b114**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -625,12 +636,12 @@ Certificat de ministère — seules les 20 questions à choix multiples comptent
 > EN: Certificate of Ministry — only the 20 multiple-choice count (need 18/20).
 
 **b117**  
-Master of Theology — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
+Th.M. — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
 
 > EN: Master of Theology — 20 multiple-choice (18/20) and 10 short-answer (9/10).
 
 **b118**  
-Master of Divinity — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
+M.Div. — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
 
 > EN: Master of Divinity — 20 multiple-choice (18/20) and 10 short-answer (9/10).
 
@@ -868,7 +879,7 @@ _Pourquoi :_ Pros (πρός) signifie plus que « avec » — il signifie « ver
 ✓ A. « Jésus-Christ, Fils de Dieu, Sauveur » — Ἰησοῦς Χριστός Θεοῦ Υἱός Σωτήρ  
 · B. « Dieu est amour » — Θεος Εστιν Αγαπη  
 · C. « Le commencement et la fin » — He Arche Kai To Telos  
-· D. « Je suis le chemin, la vérité et la vie » — Ego Eimi He Hodos  
+· D. « Je suis le chemin, la vérité, et la vie » — Ego Eimi He Hodos  
 _Pourquoi :_ ΙΧΘΥΣ (Iota-Khi-Thêta-Upsilon-Sigma) signifie « poisson » en grec, mais chaque lettre représente un mot : Ἰησοῦς (Jésus), Χριστός (Christ), Θεοῦ (de Dieu), Υἱός (Fils), Σωτήρ (Sauveur). « Jésus-Christ, Fils de Dieu, Sauveur. » Pendant les persécutions romaines, les premiers chrétiens traçaient un demi-poisson dans la poussière comme signe de reconnaissance ; si l'inconnu complétait le poisson, c'était un frère.  
 > EN: The Greek word ΙΧΘΥΣ (ichthus) means 'fish,' but early Christians used it as a secret sign because each letter stands for a word. What do the five letters spell out? — ✓ 'Jesus Christ, God's Son, Savior' — Ἰησοῦς Χριστός Θεοῦ Υἱός Σωτήρ
 
@@ -976,20 +987,20 @@ Réponse : **poisson**
 
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
-**1. Racontez l'histoire de l'apôtre Jean à Patmos et expliquez pourquoi l'Unité 7 commence par elle.**  
-Mots-clés : jean · patmos · domitien · exil · apocalypse · alpha · oméga / omega · dernier / dernière / derniere · apôtre / apotre · ressuscit · christ · jean · patmos · domitien · exil · apocalypse · alpha · oméga / omega · dernier / dernière / derniere · apôtre / apotre · ressuscit · christ  
+**1. Racontez l'histoire de Jean à Patmos et expliquez pourquoi l'Unité 7 commence par elle.**  
+Mots-clés : jean · patmos · domitien · exil · apocalypse · alpha · oméga / omega · dernier / dernière / derniere · apôtre / apotre · ressuscit · christ · chandelier · survivant / douze · domitien · exil · apocalypse · alpha · oméga / omega · dernier / dernière / derniere · césar / cesar / empereur · ressuscit · christ  
 Modèle : Vers l'an 95 apr. J.-C., Jean, le dernier survivant des Douze, très âgé, fut envoyé en exil par l'empereur Domitien sur Patmos, une petite île-carrière de la mer Égée, parce qu'il prêchait que Jésus est Seigneur et que César ne l'est pas. Pierre, Jacques et Paul étaient déjà morts. Domitien pensait avoir réduit au silence le dernier apôtre. Mais au jour du Seigneur, le Christ ressuscité lui apparut au milieu de sept chandeliers d'or et se présenta par l'alphabet grec : « Je suis l'alpha et l'oméga. » Il lui dicta alors l'Apocalypse, le dernier livre de la Bible. L'Unité 7 commence par cette histoire parce qu'elle enseigne la dernière lettre, Oméga : avec l'Alpha de l'Unité 6, l'étudiant connaît maintenant tout le titre que le Christ s'est donné. Le même Jean a ouvert son Évangile par le Logos (Lambda) et clos l'Apocalypse par l'Oméga.
 
 > EN: Tell the story of the apostle John on Patmos and explain why Unit 7 opens with it.
 
 **2. Expliquez les trois plus grands « faux amis » de l'alphabet grec, ces lettres qui risquent de tromper un débutant.**  
-Mots-clés : le nu / nu ν / ν · rhô / rho · khi / χ · faux · faux ami · ressembl · prononc / le son / un son / sonne · différ / differ · un n / le n / son n · un r / le r / son r · kh / guttur · un v / le v / pas v · un p / le p / pas p · français / francais · latin / latine · le nu / nu ν / ν · rhô / rho · khi / χ · faux · faux ami · ressembl · prononc / le son / un son / sonne · différ / differ · un n / le n / son n · un r / le r / son r · guttur / kh · un v / le v / pas v · un p / le p / pas p · français / francais  
+Mots-clés : le nu / nu ν / ν · rhô / rho · khi / χ · faux · faux ami · ressembl · prononc / le son / un son / sonne · différ / differ · un n / le n / son n · un r / le r / son r · kh / guttur · un v / le v / pas v · un p / le p / pas p · français / francais · latin / latine · le nu / nu ν / ν · rhô / rho · khi / χ · piège / piege · minuscule / majuscule · ressembl · prononc / le son / un son / sonne · différ / differ · un n / le n / son n · un r / le r / son r · guttur / kh · un v / le v / pas v · un p / le p / pas p · français / francais  
 Modèle : Un faux ami est une lettre qui ressemble à une lettre française ou latine mais qui fait un son différent. Le premier est le nu (ν) : la minuscule ressemble à un v, mais elle se prononce comme un n. Le deuxième, le plus grand piège, est le rhô (ρ, Ρ) : il ressemble à un p, mais c'est un r ; les mots français en « rh » (rhétorique, rhinocéros) en gardent le souvenir. Le troisième est le khi (χ, Χ) : il ressemble à un X, mais il ne se prononce ni comme le x ni comme le « ch » de « chat » ; c'est un son guttural kh, comme dans « Bach ». Connaître ces trois pièges d'avance évite les erreurs de neuf débutants sur dix.
 
 > EN: Explain the three biggest 'false friend' letters in the Greek alphabet that a beginner must learn to avoid being fooled by.
 
-**3. Expliquez pourquoi le sigma minuscule grec a deux formes (σ et ς) et donnez la règle d'emploi de chacune.**  
-Mots-clés : sigma · deux · formes · final · début / debut / commencement · milieu · la fin / fin du mot / fin d un mot · d un mot / du mot / mots · christos · s long / s-long · tyndale · sigma · deux · formes · final · début / debut / commencement · milieu · la fin / fin du mot / fin d un mot · d un mot / du mot / mots · christos · s long / s-long · tyndale  
+**3. Expliquez pourquoi le sigma minuscule grec s'écrit de deux manières (σ et ς) et donnez la règle d'emploi de chacune.**  
+Mots-clés : sigma · deux · formes · final · début / debut / commencement · milieu · la fin / fin du mot / fin d un mot · d un mot / du mot / mots · christos · s long / s-long · tyndale · même son / meme son / le son · jésus / jesus / ἰησοῦς · majuscule · final · début / debut / commencement · milieu · la fin / fin du mot / fin d un mot · d un mot / du mot / mots · christos · s long / s-long · tyndale  
 Modèle : Le sigma est le S grec, et il a deux formes minuscules qui font le même son « s ». La forme σ s'emploie au début ou au milieu d'un mot. La forme ς, appelée sigma final, s'emploie seulement à la toute fin d'un mot. On le voit dans Ἰησοῦς (Jésus) et dans Χριστός (Christos), où le ς ferme le mot. L'anglais avait autrefois un système semblable avec le s long (ſ), qu'on trouve encore dans les vieilles Bibles de l'époque de Tyndale, jusque vers 1800 ; le grec, lui, a gardé ses deux formes. La majuscule est Σ.
 
 > EN: Explain why the Greek lowercase sigma has two forms (σ and ς) and give the rule for using each.
@@ -1001,19 +1012,19 @@ Modèle : Logos (Λόγος) signifie « parole ». Pour l'esprit grec, il porta
 > EN: What does the Greek word 'Logos' mean, and where does it appear most famously in the New Testament?
 
 **5. Lisez à voix haute le grec de Jean 1:1 (Ἐν ἀρχῇ ἦν ὁ Λόγος, καὶ ὁ Λόγος ἦν πρὸς τὸν Θεόν, καὶ Θεὸς ἦν ὁ Λόγος) et traduisez-le en français.**  
-Mots-clés : en arch / ἐν ἀρχ · archê / arche / archē / ἀρχῇ · ên ho / en ho / ēn ho / ἦν ὁ · ho logos / ὁ λόγος · logos · kai ho / kai theos / καὶ · pros ton / πρὸς · ton theon / τὸν θεόν · theon · theos · commencement · parole / verbe · dieu · commencement / principe · parole / verbe · dieu · avec dieu  
+Mots-clés : en arch · archê / arche / archē · ên ho / en ho / ēn ho · ho logos · logos · kai ho / kai theos · pros ton · ton theon · theon · theos · commencement · parole / verbe · dieu · commencement / principe · parole / verbe · dieu · avec dieu  
 Modèle : En archê ên ho Logos, kai ho Logos ên pros ton Theon, kai Theos ên ho Logos. Traduction : « Au commencement était la Parole, et la Parole était avec Dieu, et la Parole était Dieu. » Mot à mot : en archê = au commencement ; ên = était ; ho Logos = la Parole ; kai = et ; pros ton Theon = avec (face à face avec) Dieu ; Theos ên ho Logos = Dieu était la Parole, c'est-à-dire la Parole était Dieu.
 
 > EN: Read aloud the Greek of John 1:1 (Ἐν ἀρχῇ ἦν ὁ Λόγος, καὶ ὁ Λόγος ἦν πρὸς τὸν Θεόν, καὶ Θεὸς ἦν ὁ Λόγος) and translate it into English or Spanish.
 
-**6. Expliquez pourquoi l'abréviation anglaise « Xmas » n'est pas une laïcisation moderne de Christmas (Noël), et ce que la lettre grecque Khi a signifié pour les chrétiens depuis l'Église primitive.**  
-Mots-clés : khi / χ · christos · monogramme · christ · catacombes · constantin · khi-rhô / khi rhô / khi-rho / khi rho / chi-rho / chi rho / chrisme · xmas · ancien / antique · chrétien / chretien · symbole · khi / χ · christos · monogramme · christ · catacombes · constantin · khi-rhô / khi rhô / khi-rho / khi rho / chi-rho / chi rho / chrisme · xmas · ancien / antique · chrétien / chretien · symbole  
+**6. Expliquez pourquoi l'abréviation anglaise « Xmas » n'est pas une laïcisation moderne de Noël, et ce que cette lettre grecque a signifié pour les croyants depuis l'Église primitive.**  
+Mots-clés : khi / χ · christos · monogramme · christ · catacombes · constantin · khi-rhô / khi rhô / khi-rho / khi rho / chi-rho / chi rho / chrisme · xmas · ancien / antique · chrétien / chretien · symbole · khi / χ · christos · monogramme · christ · catacombes · constantin · khi-rhô / khi rhô / khi-rho / khi rho / chi-rho / chi rho / chrisme · l oint / l'oint / messie · ancien / antique · chrétien / chretien · symbole  
 Modèle : Le X de « Xmas » n'est pas la lettre latine X, mais la lettre grecque Khi (Χ), première lettre de Christos (Χριστός), « l'Oint ». Depuis les premiers siècles de l'Église, les chrétiens emploient Χ comme monogramme d'une lettre pour désigner le Christ ; « Xmas » est donc une abréviation chrétienne, et non une tentative moderne de retirer le Christ de Noël. Le monogramme Khi-Rhô ☧ (Χ et Ρ superposés) se trouve sur des tombes des catacombes romaines et sur d'anciennes bagues-sceaux, et l'empereur Constantin aurait vu ce signe dans le ciel en 312. C'est le plus ancien symbole de la foi chrétienne.
 
 > EN: Explain why the abbreviation 'Xmas' is not a modern secularization of Christmas, and what the Greek letter Chi has meant to Christians since the early church.
 
 **7. Comparez Omicron et Oméga : que signifie chaque nom, et en quoi leurs sons diffèrent-ils ?**  
-Mots-clés : omicron · petit · petit · bref / brève / breve / court · oméga / omega · grand · grand · o long / longue · o bref / o long / o court · voyelle · prononc / le son / un son / sonne · paire / couple / pendant · omicron · petit · bref / brève / breve / court · oméga / omega · grand · o long / longue · o bref / o long / o court · voyelle · prononc / le son / un son / sonne · paire / couple / pendant  
+Mots-clés : omicron · petit · petit · bref / brève / breve / court · oméga / omega · grand · grand · o long / longue · o bref / o long / o court · voyelle · prononc / le son / un son / sonne · paire / couple / pendant · quinzi · petit · bref / brève / breve / court · dernière / derniere / vingt quatri / vingt-quatri · grand · o long / longue · o bref / o long / o court · voyelle · prononc / le son / un son / sonne · paire / couple / pendant  
 Modèle : Omicron et Oméga forment une paire : ce sont les deux voyelles o du grec. Omicron (o-micron) signifie « petit o » ; il représente le son o bref, comme dans « porte » ; c'est la quinzième lettre. Oméga (ô-mega) signifie « grand o » ; il représente le son o long, comme dans « rose » ; c'est la vingt-quatrième et dernière lettre. Leur forme aussi diffère : Omicron ressemble au O ordinaire, tandis que la majuscule Ω d'Oméga ressemble à un fer à cheval et la minuscule ω à deux petites vagues.
 
 > EN: Compare Omicron and Omega — what does each name mean, and how do they differ in sound?
@@ -1031,7 +1042,7 @@ Modèle : Ichthus (ΙΧΘΥΣ) est le mot grec pour « poisson ». Chacune de se
 > EN: Explain the ichthus (ΙΧΘΥΣ) symbol — what each letter stands for and how early Christians used it.
 
 **10. Décrivez l'Activité du cahier de l'Unité 7 et expliquez pourquoi il est important d'écrire à la main Jean 1:1 et ΙΧΘΥΣ.**  
-Mots-clés : cahier · tableau · douze · lettres · jean · 1:1 · ichthus · trois · faux · faux ami / faux amis · le nu / nu ν / ν · rhô / rho · khi / χ · étoile / etoile · rouge · main · mémoire / memoire / mémoris / memoris / retenir · cahier · tableau · douze · lettres · jean · 1:1 · ichthus · trois · faux · faux ami / faux amis · le nu / nu ν / ν · rhô / rho · khi / χ · étoile / etoile / astérisque / asterisque · rouge · main · mémoire / memoire / mémoris / memoris / retenir  
+Mots-clés : cahier · tableau · douze · lettres · majuscule / minuscule · translit · ichthus · trois · faux · faux ami / faux amis · le nu / nu ν / ν · rhô / rho · khi · étoile / etoile · rouge · main · mémoire / memoire / mémoris / memoris / retenir · colonne · tableau · douze · lettres · traduction / tradui · vingt quatre / vingt-quatre · ichthus · trois · faux · faux ami / faux amis · le nu / nu ν / ν · rhô / rho · khi · étoile / etoile / astérisque / asterisque · rouge · œil / oeil · mémoire / memoire / mémoris / memoris / retenir  
 Modèle : Dans son cahier, l'étudiant fait un tableau de cinq colonnes (majuscule, minuscule, nom, son, héritière en français) et y inscrit dans l'ordre les douze lettres, de Nu à Oméga. Il marque d'une étoile rouge les trois faux amis : le nu (n et non v), le rhô (r et non p) et le khi (kh et non « ch »). Puis il écrit Jean 1:1 en grec à la main, avec la translittération et la traduction française, écrit ΙΧΘΥΣ (ichthus) avec les cinq mots grecs à côté, et recopie deux fois les vingt-quatre lettres. Écrire à la main compte, parce que la main enseigne l'œil : le geste grave les lettres dans la mémoire, et l'étudiant écrit lui-même la phrase la plus célèbre du Nouveau Testament et la confession de foi des premiers chrétiens.
 
 > EN: Describe the Notebook Activity for Unit 7 and explain why writing John 1:1 and ΙΧΘΥΣ by hand matters.

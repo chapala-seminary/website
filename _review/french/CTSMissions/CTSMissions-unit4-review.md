@@ -12,6 +12,13 @@ Counts: 32 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 2. Acts 10:34-35 in Segond says « Dieu ne fait point acception de personnes » and « lui est agréable » (not 'shows no partiality' / 'is accepted'). I kept Segond and added a short gloss in the SA 6 model. Is that acceptable?
 3. The conclusion (b036) and SA 10 mention 'the believer in Mexico' and 'the Mexican church'. For pastors in Kinshasa, should these become the Congo / the Congolese church? I kept Mexico, but SA 10 also accepts « Congo » as a keyword so a student who applies it locally is not marked wrong.
 
+## Problems in the English source
+
+- SA6: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -178,7 +185,7 @@ Examen final de l'Unité 4
 > EN: Unit 4 Final Exam
 
 **b038**  
-Parcours Certificat : les 20 questions à choix multiple. Associé : les questions à choix multiple et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiple, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiple. Parcours Associé en divinité : les questions à choix multiple et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiple, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -429,31 +436,31 @@ Modèle : « Dispersés, c'est-à-dire semés » renvoie à Actes 8:4, où le ve
 
 > EN: Explain the phrase 'scattered means sown,' including the Greek picture behind it.
 
-**6. Comment la barrière entre Juifs et païens est-elle tombée ? Appuyez-vous sur Pierre et Corneille.**  
+**6. Comment la barrière entre le peuple juif et les autres peuples est-elle tombée ? Appuyez-vous sur Pierre et Corneille.**  
 Mots-clés : pierre · corneille / cornelius · païen / paien / non juif · partialit / acception · vision · nation · agréable / agreable / accepte / accueill · esprit  
 Modèle : La barrière entre Juifs et païens est tombée lorsque Dieu donna à Pierre une vision sur un toit, à Joppé, puis l'envoya dans la maison de Corneille, un centenier romain. Là, Pierre déclara que Dieu ne fait point acception de personnes — il ne montre aucune partialité — mais qu'en toute nation celui qui le craint et qui pratique la justice lui est agréable (Actes 10:34-35). Et quand le Saint-Esprit descendit sur les païens comme à la Pentecôte, la question fut réglée : l'Évangile était pour toutes les nations.
 
 > EN: How did the barrier between Jew and Gentile fall? Use Peter and Cornelius.
 
 **7. Pourquoi Antioche est-elle appelée la première Église qui envoie ? Décrivez ce qui s'est passé en Actes 13.**  
-Mots-clés : antioche · envoy · barnabas · saul · jeûn / jeun · prier / prié / pria / prièrent / prierent / prière / priere · mains · esprit  
+Mots-clés : antioche · envoy · barnabas · saul · jeûn / jeun · prier / prié / pria / prièrent / prierent / prière / priere / prie · mains · esprit  
 Modèle : Antioche est appelée la première Église qui envoie à cause de ce qui s'est passé en Actes 13 : pendant que cinq responsables jeûnaient et servaient le Seigneur, l'Esprit dit : « Mettez-moi à part Barnabas et Saul pour l'œuvre à laquelle je les ai appelés. » L'Église jeûna alors, pria, leur imposa les mains et les laissa partir — c'est le premier envoi de missionnaires par une assemblée locale que rapporte l'Écriture.
 
 > EN: Why is Antioch called the first sending church? Describe what happened in Acts 13.
 
-**8. La leçon dit : « Antioche les envoya ; le Saint-Esprit les envoya ; les deux sont vrais. » Expliquez ce que cela signifie pour l'envoi des missionnaires.**  
+**8. Selon la leçon, Barnabas et Saul ont été envoyés à la fois par une assemblée locale et par Dieu lui-même (Actes 13:3-4). Expliquez ce que cela signifie pour l'envoi des ouvriers de l'Évangile.**  
 Mots-clés : antioche · esprit · envoy · église / eglise · appel · missionnair · les deux / à la fois / a la fois / tous deux · vrai / vérit / verit  
 Modèle : La déclaration « Antioche les envoya ; le Saint-Esprit les envoya ; les deux sont vrais » signifie que l'envoi missionnaire est à la fois un acte humain et un acte divin. Luc décrit l'Église qui leur impose les mains et les laisse partir, et aussitôt après il dit qu'ils furent envoyés par le Saint-Esprit — l'obéissance de l'Église ne fait pas concurrence à l'appel souverain de l'Esprit ; elle est le moyen même par lequel il l'accomplit.
 
 > EN: The lesson says 'Antioch sent them; the Holy Spirit sent them; both are true.' Explain what this means for missionary sending.
 
-**9. Suivez les trois cercles d'Actes 1:8 à travers le livre — Jérusalem, la Judée et la Samarie, les extrémités de la terre — en donnant un événement pour chacun.**  
+**9. Suivez les trois cercles d'Actes 1:8 à travers le livre, en donnant un événement pour chacun.**  
 Mots-clés : jérusalem / jerusalem · judée / judee · samarie · terre · pentecôte / pentecote · dispers · antioche · païen / paien / non juif  
 Modèle : On peut suivre les trois cercles d'Actes 1:8 à travers le livre : Jérusalem est remplie par les événements de la Pentecôte, où l'Esprit vint et où trois mille personnes furent sauvées (Actes 2) ; la Judée et la Samarie sont remplies par la dispersion qui suivit le martyre d'Étienne, quand Philippe prêcha dans une ville de Samarie (Actes 8) ; et les extrémités de la terre sont atteintes par l'envoi de Barnabas et Saul depuis Antioche, qui portèrent l'Évangile au monde païen (Actes 13).
 
 > EN: Trace the three rings of Acts 1:8 through the book — Jerusalem, Judea and Samaria, the end of the earth — giving one event from each.
 
-**10. Que signifie le fait que le croyant d'aujourd'hui « écrit le chapitre 29 des Actes » ? Appliquez-le à l'Église mexicaine et à vous-même.**  
+**10. Que signifie le fait que le croyant « écrit le chapitre 29 des Actes » ? Appliquez-le aux chrétiens du Mexique et à vous-même.**  
 Mots-clés : actes · continu / poursui · répand / repand / propag · évangile / evangile / bonne nouvelle · église / eglise · mexique / mexicain / congo · envoy · aujourd / de nos jours  
 Modèle : Dire que le croyant d'aujourd'hui « écrit le chapitre 29 des Actes » signifie que l'histoire de l'Évangile qui se répand ne s'est pas terminée quand Luc a cessé d'écrire — le même Esprit, les mêmes cercles qui s'élargissent et la même mission sont toujours à l'œuvre, et chaque croyant aujourd'hui, y compris l'Église mexicaine, poursuit cette histoire inachevée. Pour l'étudiant lui-même, cela signifie reconnaître que ses propres choix d'aller, d'envoyer ou de prier sont les prochaines lignes de ce même récit qui continue.
 

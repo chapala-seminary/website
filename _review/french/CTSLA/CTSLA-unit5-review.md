@@ -12,16 +12,24 @@ Counts: 94 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 2. The English short answers have no model answers (all 'model' fields are null). The French model answers were written from the lesson; please check them. As in Unit 1, the keyword lists mix English and Spanish words in separate slots; the French repeats each concept for the Spanish half, so one French word can count twice.
 3. YHWH / small caps (b028, b031, b063, b083): Louis Segond prints YHWH as « l'Éternel », not as small-caps 'LORD'. Following the Spanish edition (which points to « Jehová »), the French points to « l'Éternel » and keeps one sentence on English small caps because MC6 asks about English Bibles. Do you approve? (You may prefer MC6 to ask about « l'Éternel » in French Bibles instead.)
 4. Chesed (b036, b039, MC10): like the Spanish edition, I added that Louis Segond mostly says « miséricorde », « bonté » or « grâce », and gave French examples (« sa miséricorde dure à toujours ») in place of English Bible examples. MC10's option B says 'no single English (or Spanish) word' — French says 'no single English word (nor French)'. Please confirm. Also, the English says chesed holds many facets 'in one syllable', but chesed has two syllables; the French says « en un seul mot ».
-5. Isaiah 9:6 is Ésaïe 9:5 in Louis Segond 1910. b047 says « Ésaïe 9:5 (9:6 dans certaines Bibles) »; Fill 8 says « Ésaïe 9:5 ». Is that OK?
+5. [Resolved by convention 11] Isaiah 9:6 is now cited as « Ésaïe 9:6 » (NKJV numbering) in b047, Fill 8 and SA6.
 6. The Last Supper words in b059 and MC18 ('This is the new covenant in My blood, which is shed for many') combine Luke 22:20 and Mark 14:24, so the French gives them as indirect speech rather than as an LSG quotation. MC18's option uses LSG Luke 22:20.
 7. Minor points, translated as written: b067 says 'with thirteen Hebrew words mixed into the sentence', but the notebook sentence contains about eight; MC19's 'why' says 'most theology students with full seminary degrees' do not know these 13 words, which is stronger than the lesson's 'there are theology students with doctorates who do not' (b062); b074 says 'all 30 questions' while the exam has 40.
+
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+- SA2: English prompt passes its own keywords
+- SA3: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
 
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
 
 - **Ésaïe 6:3** — « Ils criaient l'un à l'autre, et disaient: Saint, saint, saint est l'Éternel des armées! toute la terre est pleine de sa gloire! »  
-  _Verified on BibleGateway (LSG). b006, b007, b022 (partial, with kavod substituted for « gloire », as the English does with 'glory'), b063 (« saint, saint, saint »)._
+  _Verified on BibleGateway (LSG). b006, b007, b022 (partial, with kavod substituted for « gloire », as the English does with 'glory'), b063 (« saint, saint, saint »). Catch-up: b022 and SA3 model now quote LSG « pleine de sa gloire » and add the Hebrew sense (« de son kavod »); b023 paraphrases without quotation marks._
 - **Ésaïe 6:4** — « Les portes furent ébranlées dans leurs fondements par la voix qui retentissait, et la maison se remplit de fumée. »  
   _Verified on BibleGateway (LSG). b007; '(NKJV)' changed to '(LSG)'. NKJV 'posts of the door' = LSG « portes ... dans leurs fondements »; nothing depends on it._
 - **⚠** **Ésaïe 6:5** — « Alors je dis: Malheur à moi! je suis perdu, car je suis un homme dont les lèvres sont impures, j'habite au milieu d'un peuple dont les lèvres sont impures, et mes yeux ont vu le Roi, l'Éternel des armées. »  
@@ -31,13 +39,13 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
 - **2 Corinthiens 4:17** — « Car nos légères afflictions du moment présent produisent pour nous, au delà de toute mesure, un poids éternel de gloire, »  
   _Verified on biblestudytools (LSG). Only « un poids éternel de gloire » quoted (b024, MC4 why, SA3 model) — LSG keeps the word 'weight' (« poids »), so the lesson's point stands._
 - **⚠** **Psaume 136:1 (refrain)** — « Louez l'Éternel, car il est bon, Car sa miséricorde dure à toujours! »  
-  _Verified on levangile.com (LSG). LSG renders chesed « miséricorde ». The lesson quotes the refrain with chesed in place of the English noun (b038, MC11) — kept that way (« car son chesed dure à toujours »), and b039/b063 quote the LSG form « car sa miséricorde dure à toujours ». b036 and b039 adapted from 'English Bible' examples to French renderings; see questions_for_wayne._
+  _Checked with the offline LSG tool. LSG renders chesed « miséricorde ». Catch-up: b038, MC11 stem and SA5 model now quote LSG « Car sa miséricorde dure à toujours » and say that « miséricorde » translates chesed; the Hebrew ki l'olam chasdo is glossed « le texte hébreu dit littéralement : car son amour d'alliance dure à toujours ». b039 no longer cites 'other versions'; it names Segond's other renderings (« bonté », « grâce »)._
 - **Psaume 119:97** — « Combien j'aime ta loi! Elle est tout le jour l'objet de ma méditation. »  
-  _Verified on levangile.com (LSG). b053 quotes it with « torah » in place of « loi », exactly as the English substitutes 'torah' for 'law'; rest is LSG wording._
+  _Checked with the offline LSG tool. Catch-up: b053 and SA7 model now quote LSG « Combien j'aime ta loi ! » and add that the Hebrew says « ta torah »._
 - **Nombres 6:24-26** — « Que l'Éternel te bénisse, et qu'il te garde! Que l'Éternel fasse luire sa face sur toi, et qu'il t'accorde sa grâce! Que l'Éternel tourne sa face vers toi, et qu'il te donne la paix! »  
-  _Verified on biblestudytools (LSG). b046 quotes v.24 and v.26 with « shalom » in place of « la paix », as the English does. 'shine and be gracious' = LSG « fasse luire sa face ... accorde sa grâce »._
-- **⚠** **Ésaïe 9:5 (LSG) = Isaiah 9:6 (English)** — « Car un enfant nous est né, un fils nous est donné, Et la domination reposera sur son épaule; On l'appellera Admirable, Conseiller, Dieu puissant, Père éternel, Prince de la paix. »  
-  _Verified on levangile.com (LSG 1910 numbering: 9:5). biblestudytools prints the same verse as 9:6 (English numbering). b047 says « Ésaïe 9:5 (9:6 dans certaines Bibles) »; Fill 8 says « Ésaïe 9:5 ». 'Prince of Peace' = « Prince de la paix » (Fill 8 answer « Prince » unchanged)._
+  _Checked with the offline LSG tool. Catch-up: b046 now quotes v.24 and v.26 verbatim (« et qu'il te donne la paix ! ») and adds that « la paix » translates shalom._
+- **Ésaïe 9:6** — « Car un enfant nous est né, un fils nous est donné, Et la domination reposera sur son épaule; On l'appellera Admirable, Conseiller, Dieu puissant, Père éternel, Prince de la paix. »  
+  _Checked with the offline LSG tool (NKJV numbering, convention 11). b047, Fill 8 and SA6 model cite Ésaïe 9:6. 'Prince of Peace' = « Prince de la paix » (Fill 8 answer « Prince » unchanged)._
 - **Jean 14:27** — « Je vous laisse la paix, je vous donne ma paix. Je ne vous donne pas comme le monde donne. »  
   _Verified on biblestudytools (LSG); first part of the verse only, as in the English (b048, MC13 why)._
 - **Luc 22:20** — « Cette coupe est la nouvelle alliance en mon sang, qui est répandu pour vous. »  
@@ -165,12 +173,12 @@ C'est le seul attribut de Dieu, dans toute l'Écriture, qui soit répété trois
 > EN: "Glory / weight / honor"
 
 **b022**  
-Observez ce qui se passe à la fin d'Ésaïe 6:3. Après avoir crié qadosh, qadosh, qadosh, les séraphins achèvent la phrase : « m'lo kol-ha'aretz kevodo » — « toute la terre est pleine de son kavod ». Et voici ce que les traductions françaises ne parviennent pas tout à fait à rendre. Le mot hébreu kavod ne signifie pas « gloire » au sens où une oreille française entend « gloire » — un éclat lumineux et abstrait. La racine hébraïque signifie « être lourd ».
+Observez ce qui se passe à la fin d'Ésaïe 6:3. Après avoir crié qadosh, qadosh, qadosh, les séraphins achèvent la phrase : « m'lo kol-ha'aretz kevodo » — « toute la terre est pleine de sa gloire » ; le texte hébreu dit littéralement « de son kavod ». Et voici ce que les traductions françaises ne parviennent pas tout à fait à rendre. Le mot hébreu kavod ne signifie pas « gloire » au sens où une oreille française entend « gloire » — un éclat lumineux et abstrait. La racine hébraïque signifie « être lourd ».
 
 > EN: Watch what happens at the end of Isaiah 6:3. After the seraphim cry qadosh, qadosh, qadosh, they finish the sentence: "m'lo kol-ha'aretz kevodo" — "the whole earth is full of His kavod." And here is what English translations cannot quite carry. The Hebrew word kavod does not mean "glory" the way English ears hear "glory" — some abstract shining brightness. The Hebrew root means "to be heavy."
 
 **b023**  
-Le kavod de Dieu, c'est son poids. Sa densité. Sa masse. Sa substance insoutenable. Dire que « toute la terre est pleine de son kavod », c'est dire que la création est dense de Dieu, lestée de Dieu, lourde de la présence de Dieu. Quand Moïse demanda à voir le kavod de Dieu en Exode 33, il demandait à voir, sans intermédiaire, le poids de l'être divin lui-même. Quand le kavod se posa sur le tabernacle dans une nuée en Exode 40, le peuple appela ce poids venu se poser par un mot apparenté, la Shekinah, le poids de Dieu qui demeure.
+Le kavod de Dieu, c'est son poids. Sa densité. Sa masse. Sa substance insoutenable. Dire que toute la terre est pleine de son kavod, c'est dire que la création est dense de Dieu, lestée de Dieu, lourde de la présence de Dieu. Quand Moïse demanda à voir le kavod de Dieu en Exode 33, il demandait à voir, sans intermédiaire, le poids de l'être divin lui-même. Quand le kavod se posa sur le tabernacle dans une nuée en Exode 40, le peuple appela ce poids venu se poser par un mot apparenté, la Shekinah, le poids de Dieu qui demeure.
 
 > EN: The kavod of God is His weight. His density. His mass. His unbearable substance. To say "the whole earth is full of His kavod" is to say creation is dense with God, weighted with God, heavy with the presence of God. When Moses asked to see the kavod of God in Exodus 33, what he was asking to see was the unmediated weight of the divine self. When the kavod settled on the tabernacle in a cloud in Exodus 40, the people called the settled-down weight by a related word, the Shekinah, the dwelling-weight of God.
 
@@ -245,12 +253,12 @@ Au fond, chesed est cette sorte d'amour qui agit à l'intérieur d'une relation 
 > EN: At its heart, chesed is the kind of love that operates inside a covenant relationship and will not quit. It is not romance and it is not affection alone. It is love that has bound itself to another by promise, and that keeps the promise even when the other party fails to keep their side. Chesed is what makes covenant survive sin. It is what makes a husband forgive a wife who has broken her vows. It is what makes God send Hosea after Gomer. It is what makes God send His prophets to a faithless Israel century after century.
 
 **b038**  
-Le Psaume 136 est le grand psaume du chesed. Vingt-six fois en vingt-six versets, le refrain revient : « car son chesed dure à toujours ». Quoi qu'il arrive — la création, les plaies, la mer Rouge, le désert, la conquête, les rois —, le refrain répond : ki l'olam chasdo. « Car son amour d'alliance dure à toujours. » C'est l'une des expressions les plus répétées de tout l'Ancien Testament hébreu. L'hébreu choisit d'enfoncer ce mot comme un clou.
+Le Psaume 136 est le grand psaume du chesed. Vingt-six fois en vingt-six versets, le refrain revient : « Car sa miséricorde dure à toujours ! » Le mot traduit « miséricorde » est chesed. Quoi qu'il arrive — la création, les plaies, la mer Rouge, le désert, la conquête, les rois —, le refrain répond : ki l'olam chasdo. Le texte hébreu dit littéralement : « Car son amour d'alliance dure à toujours. » C'est l'une des expressions les plus répétées de tout l'Ancien Testament hébreu. L'hébreu choisit d'enfoncer ce mot comme un clou.
 
 > EN: Psalm 136 is the great chesed Psalm. Twenty-six times in twenty-six verses the refrain returns: "for His chesed endures forever." Whatever happens — creation, plagues, Red Sea, wilderness, conquest, kings — the refrain answers: ki l'olam chasdo. "For His covenant love endures forever." It is one of the most repeated phrases in the entire Hebrew Old Testament. Hebrew chooses to drive this word in like a nail.
 
 **b039**  
-Strong H2617. La prochaine fois que vous lirez dans votre Bible française « car sa miséricorde dure à toujours », ou dans une autre version « sa bonté dure à toujours » ou « son amour dure à toujours », vous lirez chesed — le mot qui dit que l'amour de Dieu est de ceux qui n'abandonnent pas.
+Strong H2617. La prochaine fois que vous lirez dans votre Bible française « car sa miséricorde dure à toujours », ou ailleurs « bonté » ou « grâce », vous lirez chesed — le mot qui dit que l'amour de Dieu est de ceux qui n'abandonnent pas.
 
 > EN: Strong's H2617. The next time you read in your English Bible "His lovingkindness endures forever," or "His steadfast love endures forever," or "His mercy endures forever," you are reading chesed — the word that says God's love is the kind that does not give up.
 
@@ -285,12 +293,12 @@ La salutation « Shalom » signifie donc bien plus que « bonjour ». Elle signi
 > EN: The greeting "Shalom" therefore means much more than "hi." It means "may all-rightness be on you." When Israeli friends meet, they sometimes ask "Mah shlomkha?" — literally "What is your shalom?" The question is not "Are you calm?" The question is "How is the whole of your well-being?"
 
 **b046**  
-La grande bénédiction d'Aaron, en Nombres 6:24–26, se termine par ce mot : « Que l'Éternel te bénisse, et qu'il te garde !... Que l'Éternel tourne sa face vers toi, et qu'il te donne shalom ! » La bénédiction monte de « bénir et garder » à « faire luire sa face et accorder sa grâce », puis à « donner shalom ». Le shalom est le don le plus élevé de la bénédiction sacerdotale — la plénitude qui contient tout le reste.
+La grande bénédiction d'Aaron, en Nombres 6:24–26, se termine par ce mot : « Que l'Éternel te bénisse, et qu'il te garde !... Que l'Éternel tourne sa face vers toi, et qu'il te donne la paix ! » Le mot hébreu traduit « la paix » est shalom. La bénédiction monte de « bénir et garder » à « faire luire sa face et accorder sa grâce », puis à « donner shalom ». Le shalom est le don le plus élevé de la bénédiction sacerdotale — la plénitude qui contient tout le reste.
 
 > EN: The great Aaronic blessing in Numbers 6:24–26 ends with this word: "The LORD bless you and keep you... The LORD lift up His countenance upon you, and give you shalom." The blessing climbs from "bless and keep" to "shine and be gracious" to "give shalom." Shalom is the highest gift in the priestly benediction — the wholeness that holds everything else.
 
 **b047**  
-Puis vient le grand titre messianique : Ésaïe 9:5 (9:6 dans certaines Bibles) annonce que l'Enfant à venir sera appelé Sar Shalom, « Prince de la paix ». Pas seulement le prince du cessez-le-feu. Le Prince du « chaque-pièce-à-sa-juste-place ». Celui qui rassemble les morceaux d'un monde brisé.
+Puis vient le grand titre messianique : Ésaïe 9:6 annonce que l'Enfant à venir sera appelé Sar Shalom, « Prince de la paix ». Pas seulement le prince du cessez-le-feu. Le Prince du « chaque-pièce-à-sa-juste-place ». Celui qui rassemble les morceaux d'un monde brisé.
 
 > EN: And then the great Messianic title: Isaiah 9:6 announces that the coming Child will be called Sar Shalom, "Prince of Peace." Not just the prince of cease-fire. The Prince of every-piece-in-its-right-place. The One who reassembles a fractured world.
 
@@ -320,7 +328,7 @@ Au sens étroit, « la Torah » désigne les cinq premiers livres de la Bible �
 > EN: In a narrow sense, "the Torah" refers to the first five books of the Bible — Genesis, Exodus, Leviticus, Numbers, Deuteronomy — the books Moses gave Israel as the foundation of life with God. In a wider sense, torah is all the instruction of God: His commands, His warnings, His promises, His teaching through psalmist and prophet. The whole Old Testament was sometimes called torah in shorthand.
 
 **b053**  
-La plus grande célébration biblique de la torah est le Psaume 119 — le plus long chapitre de la Bible, cent soixante-seize versets, construit en acrostiche alphabétique. Huit versets pour chacune des vingt-deux lettres hébraïques que vous avez apprises dans les Unités 2 et 3. Tous les versets sauf deux mentionnent la torah de Dieu ou l'un de ses synonymes (statuts, commandements, préceptes, jugements). Ce psaume n'est pas la diatribe d'un homme enchaîné par la loi. C'est le chant d'amour d'un homme captivé par l'instruction. « Combien j'aime ta torah ! Elle est tout le jour l'objet de ma méditation » (Psaume 119:97). Voilà comment sonne la torah quand une Bible française vous a induit en erreur en ne vous faisant entendre que « loi ».
+La plus grande célébration biblique de la torah est le Psaume 119 — le plus long chapitre de la Bible, cent soixante-seize versets, construit en acrostiche alphabétique. Huit versets pour chacune des vingt-deux lettres hébraïques que vous avez apprises dans les Unités 2 et 3. Tous les versets sauf deux mentionnent la torah de Dieu ou l'un de ses synonymes (statuts, commandements, préceptes, jugements). Ce psaume n'est pas la diatribe d'un homme enchaîné par la loi. C'est le chant d'amour d'un homme captivé par l'instruction. « Combien j'aime ta loi ! Elle est tout le jour l'objet de ma méditation » (Psaume 119:97). Le texte hébreu dit littéralement « ta torah ». Voilà comment sonne la torah quand le seul mot « loi » ne vous induit plus en erreur.
 
 > EN: The towering biblical celebration of torah is Psalm 119 — the longest chapter in the Bible, one hundred and seventy-six verses, structured as an alphabetic acrostic. Eight verses for each of the twenty-two Hebrew letters you learned in Units 2 and 3. Every verse but two mentions God's torah or one of its synonyms (statutes, commandments, precepts, judgments). The Psalm is not the rant of a man bound by law. It is the love song of a man captivated by instruction. "Oh, how I love your torah! It is my meditation all the day" (Psalm 119:97). That is what torah sounds like when an English Bible has misled you into hearing only "law."
 
@@ -400,7 +408,7 @@ Examen de l'Unité 5
 > EN: Unit 5 Examination
 
 **b069**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -415,12 +423,12 @@ Certificat de ministère — seules les 20 questions à choix multiples comptent
 > EN: Certificate of Ministry — only the 20 multiple-choice count (need 18/20).
 
 **b072**  
-Master of Theology — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
+Th.M. — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
 
 > EN: Master of Theology — 20 multiple-choice (18/20) and 10 short-answer (9/10).
 
 **b073**  
-Master of Divinity — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
+M.Div. — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
 
 > EN: Master of Divinity — 20 multiple-choice (18/20) and 10 short-answer (9/10).
 
@@ -623,7 +631,7 @@ _Pourquoi :_ Le chesed (Strong H2617) est l'un des mots hébreux les plus intrad
 _Pourquoi :_ Le chesed réunit en un seul mot la fidélité, la miséricorde, la loyauté et l'amour lié par l'alliance. Les traducteurs de la King James ont forgé « lovingkindness » parce qu'aucun mot anglais unique ne suffisait. Les traductions modernes choisissent des facettes différentes : « steadfast love » (ESV), « faithful love » (HCSB), « mercy » (King James au Psaume 136), « unfailing love ». Les traductions françaises varient de même : miséricorde, bonté, grâce, amour.  
 > EN: Why did the King James translators coin the English compound word 'lovingkindness'? — ✓ Because no single English (or Spanish) word can capture the multiple facets of Hebrew 'chesed' (faithfulness, mercy, loyalty, and love within covenant)
 
-**11. Quel psaume répète 26 fois, en 26 versets, le refrain « car son chesed dure à toujours » ?**  
+**11. Quel psaume répète 26 fois, en 26 versets, le refrain « car sa miséricorde dure à toujours », où « miséricorde » traduit le chesed ?**  
 · A. Psaume 23  
 · B. Psaume 119  
 ✓ C. Psaume 136  
@@ -735,7 +743,7 @@ Réponse : **alliance** · aussi acceptées : alliances, pacte
 Réponse : **shalem** · aussi acceptées : shalam, chalem  
 > EN: Shalom is built on the root ____, which means "complete, whole, sound, undamaged." — **shalem**
 
-**8.** Ésaïe 9:5 annonce que l'Enfant à venir sera appelé Sar Shalom, « ____ de la paix ».  
+**8.** Ésaïe 9:6 annonce que l'Enfant à venir sera appelé Sar Shalom, « ____ de la paix ».  
 Réponse : **Prince**  
 > EN: Isaiah 9:6 announces that the coming Child will be called Sar Shalom, "____ of Peace." — **Prince**
 
@@ -752,20 +760,20 @@ Réponse : **couper** · aussi acceptées : trancher, tailler
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
 **1. Racontez l'histoire de la nuit de feu de Pascal et expliquez pourquoi cette unité commence par elle.**  
-Mots-clés : pascal · feu · novembre · 1654 · manteau · mémorial / memorial · cousu / cousit / coudre · ésaïe / esaie · saint · pascal · feu · novembre · 1654 · manteau · mémorial / memorial · cousu / cousit / coudre · ésaïe / esaie · saint  
+Mots-clés : pascal · feu · novembre · 1654 · manteau · mémorial / memorial · cousu / cousit / coudre · ésaïe / esaie · saint · parchemin · certitude · novembre · 1654 · manteau · mémorial / memorial · cousu / cousit / coudre · ésaïe / esaie · saint  
 Modèle : Dans la nuit du 23 novembre 1654, à Paris, Blaise Pascal, brillant mathématicien de 31 ans, vécut pendant environ deux heures une rencontre avec Dieu. Il écrivit en haut d'un parchemin le mot « FEU », puis : « Certitude. Certitude. Sentiment. Joie. Paix. » Il cousit ce Mémorial dans la doublure de son manteau et le porta chaque jour pendant huit ans, sans en parler ; on ne le découvrit qu'à sa mort, en 1662. L'unité commence par ce récit parce qu'Ésaïe, vers 740 av. J.-C., a vécu la même rencontre avec le Dieu saint : les séraphins, les « brûlants », criaient qadosh, qadosh, qadosh. Le feu, la sainteté, la présence de Dieu.
 
 > EN: Tell the story of Pascal's Night of Fire and explain why this unit opens with it.
 
 **2. Expliquez le sens de « qadosh » et pourquoi Ésaïe 6:3 le répète trois fois.**  
-Mots-clés : qadosh · saint · coupé / coupe / retranch · sépar / separ · mis à part / mis a part · superlati · répét / repet · trois · trinit · qadosh · saint · coupé / coupe / retranch · mis à part / mis a part / sépar / separ · superlati · répét / repet · trois · trinit  
+Mots-clés : qadosh · saint · coupé / coupe / retranch · sépar / separ · mis à part / mis a part · superlati · répét / repet · trois · trinit · cantique / cieux · saint · coupé / coupe / retranch · mis à part / mis a part / sépar / separ · superlati · répét / repet · attribut · trinit  
 Modèle : Qadosh (Strong H6918) signifie « saint ». Sa racine veut dire « être coupé, être mis à part, être séparé » : est saint ce que Dieu a retranché de l'ordinaire pour se le consacrer. L'hébreu n'a pas de forme grammaticale pour le superlatif ; il exprime le superlatif absolu par la répétition (« cantique des cantiques », « ciel des cieux »). Crier qadosh trois fois, c'est dire le maximum de sainteté que la langue puisse exprimer. C'est le seul attribut de Dieu répété trois fois dans l'Écriture, et la tradition chrétienne y a entendu un reflet de la Trinité.
 
 > EN: Explain the meaning of 'qadosh' and why Isaiah 6:3 repeats it three times.
 
 **3. Expliquez le mot hébreu « kavod » et pourquoi le mot français « gloire » ne le rend pas pleinement.**  
-Mots-clés : kavod · gloire · poids · lourd · masse · densité / densite / dense · shekinah / shekina / chekina · paul · corinth · kavod · gloire · poids · lourd · masse · densité / densite / dense · shekinah / shekina / chekina · paul · corinth  
-Modèle : Kavod (Strong H3519) est traduit par « gloire », mais sa racine hébraïque signifie « être lourd ». Pour nous, « gloire » évoque un éclat lumineux et abstrait ; le kavod de Dieu est plutôt son poids, sa densité, sa masse, sa substance insoutenable. Dire que « toute la terre est pleine de son kavod » (Ésaïe 6:3), c'est dire que la création est lourde de la présence de Dieu. Moïse demanda à voir ce kavod (Exode 33) ; posé sur le tabernacle, il fut appelé plus tard la Shekinah. Paul garde l'image en 2 Corinthiens 4:17 : « un poids éternel de gloire ».
+Mots-clés : kavod · gloire · poids · lourd · masse · densité / densite / dense · shekinah / shekina / chekina · paul · corinth · éclat / eclat · tabernacle · poids · lourd · masse · densité / densite / dense · shekinah / shekina / chekina · paul · corinth  
+Modèle : Kavod (Strong H3519) est traduit par « gloire », mais sa racine hébraïque signifie « être lourd ». Pour nous, « gloire » évoque un éclat lumineux et abstrait ; le kavod de Dieu est plutôt son poids, sa densité, sa masse, sa substance insoutenable. Quand Ésaïe 6:3 dit « toute la terre est pleine de sa gloire », l'hébreu dit : pleine de son kavod ; c'est dire que la création est lourde de la présence de Dieu. Moïse demanda à voir ce kavod (Exode 33) ; posé sur le tabernacle, il fut appelé plus tard la Shekinah. Paul garde l'image en 2 Corinthiens 4:17 : « un poids éternel de gloire ».
 
 > EN: Explain the Hebrew word 'kavod' and why English 'glory' does not fully capture it.
 
@@ -777,24 +785,24 @@ Modèle : YHWH est le nom personnel de Dieu, le Tétragramme, c'est-à-dire « l
 
 **5. Expliquez le « chesed » et la difficulté de le traduire en anglais ou en français.**  
 Mots-clés : chesed · alliance · amour · lovingkindness / bonté / bonte · inébranlable / inebranlable / constant / steadfast · fidèle / fidele / fidélité / fidelite · promesse · psaume 136 · intraduisible · chesed · alliance · amour · miséricorde / misericorde · inébranlable / inebranlable / constant / steadfast · fidèle / fidele / fidélité / fidelite · promesse · psaume 136 · intraduisible  
-Modèle : Le chesed (Strong H2617) est l'amour d'alliance : un amour qui s'est lié à l'autre par une promesse et qui ne renonce pas, même quand l'autre partie est infidèle (Dieu envoyant Osée chercher Gomer). C'est l'un des mots les plus intraduisibles de la Bible hébraïque, présent environ 250 fois. Aucun mot unique ne suffit : la King James a forgé « lovingkindness » ; les versions anglaises modernes disent « steadfast love » (amour inébranlable), « faithful love » (amour fidèle), « mercy » ; en français, la Louis Segond dit surtout « miséricorde » ou « bonté ». Le Psaume 136 répète 26 fois : « car son chesed dure à toujours ».
+Modèle : Le chesed (Strong H2617) est l'amour d'alliance : un amour qui s'est lié à l'autre par une promesse et qui ne renonce pas, même quand l'autre partie est infidèle (Dieu envoyant Osée chercher Gomer). C'est l'un des mots les plus intraduisibles de la Bible hébraïque, présent environ 250 fois. Aucun mot unique ne suffit : la King James a forgé « lovingkindness » ; les versions anglaises modernes disent « steadfast love » (amour inébranlable), « faithful love » (amour fidèle), « mercy » ; en français, la Louis Segond dit surtout « miséricorde » ou « bonté ». Le Psaume 136 répète 26 fois : « Car sa miséricorde dure à toujours ! », où « miséricorde » traduit chesed.
 
 > EN: Explain 'chesed' and the difficulty of translating it into English or Spanish.
 
 **6. Expliquez ce que « shalom » signifie pleinement et en quoi il diffère du mot français « paix ».**  
 Mots-clés : shalom · plénitude / plenitude / intégrité / integrite · complet / complèt / entier · bien-être / bien être / bienêtre / bien etre / bienetre · tout est bien / tout soit bien / juste place / en ordre · prince · aaron · jésus / jesus · jean 14 · shalom · plénitude / plenitude / intégrité / integrite · complet / complèt / entier · bien-être / bien être / bienêtre / bien etre / bienetre · tout est bien / tout soit bien / juste place / en ordre · prince · aaron · jésus / jesus · jean 14  
-Modèle : Le mot français « paix » est surtout négatif : l'absence de conflit, le calme. Shalom (Strong H7965), construit sur la racine shalem (« complet, entier, sain, intact »), est positif : la plénitude, le bien-être total, la présence d'un état où tout est bien — chaque pièce à sa juste place : corps guéri, famille réconciliée, justice rendue, âme en paix avec Dieu. La bénédiction d'Aaron culmine dans le don du shalom (Nombres 6:26). Le Messie est le « Prince de la paix », Sar Shalom (Ésaïe 9:5). En Jean 14:27, Jésus donne sa paix (eirênê) : non le cessez-le-feu romain, mais la plénitude hébraïque.
+Modèle : Le mot français « paix » est surtout négatif : l'absence de conflit, le calme. Shalom (Strong H7965), construit sur la racine shalem (« complet, entier, sain, intact »), est positif : la plénitude, le bien-être total, la présence d'un état où tout est bien — chaque pièce à sa juste place : corps guéri, famille réconciliée, justice rendue, âme en paix avec Dieu. La bénédiction d'Aaron culmine dans le don du shalom (Nombres 6:26). Le Messie est le « Prince de la paix », Sar Shalom (Ésaïe 9:6). En Jean 14:27, Jésus donne sa paix (eirênê) : non le cessez-le-feu romain, mais la plénitude hébraïque.
 
 > EN: Explain what 'shalom' fully means and how it differs from the English word 'peace.'
 
 **7. Expliquez pourquoi traduire « torah » par « loi » est trompeur, et ce que « torah » signifie vraiment.**  
 Mots-clés : torah · instruction · yarah · viser · tirer / décoch / decoch · direction · père / pere / paternel · psaume 119 · pentateuque · torah · instruction · yarah · viser · tirer / décoch / decoch · direction · père / pere / paternel · psaume 119 · pentateuque  
-Modèle : Le mot « loi » a une saveur de tribunal : des règles qu'un juge fait appliquer. Torah (Strong H8451) vient de la racine yarah, « tirer, viser, indiquer une direction », comme un archer qui décoche une flèche. La torah est donc une instruction, une direction donnée par un Père qui montre à son enfant comment vivre. Au sens étroit, la Torah est le Pentateuque, les cinq livres de Moïse ; au sens large, toute l'instruction de Dieu. Le Psaume 119 n'est pas la plainte d'un homme enchaîné par la loi, mais le chant d'amour d'un homme captivé par l'instruction : « Combien j'aime ta torah ! »
+Modèle : Le mot « loi » a une saveur de tribunal : des règles qu'un juge fait appliquer. Torah (Strong H8451) vient de la racine yarah, « tirer, viser, indiquer une direction », comme un archer qui décoche une flèche. La torah est donc une instruction, une direction donnée par un Père qui montre à son enfant comment vivre. Au sens étroit, la Torah est le Pentateuque, les cinq livres de Moïse ; au sens large, toute l'instruction de Dieu. Le Psaume 119 n'est pas la plainte d'un homme enchaîné par la loi, mais le chant d'amour d'un homme captivé par l'instruction : « Combien j'aime ta loi ! », où « loi » traduit torah.
 
 > EN: Explain why translating 'torah' as 'law' is misleading, and what 'torah' really means.
 
-**8. Expliquez ce qu'est la « berit » (alliance), le sens de l'expression « karat berit » et les cinq grandes alliances de l'Ancien Testament.**  
-Mots-clés : berit · alliance · karat · couper / coupé / coupe / trancher · sang · sacrifi · noé / noachique · abraham · moïse / moise / mosaïque / mosaique · david · nouvelle / nouveau · sainte cène / sainte cene / dernière cène / derniere cene / dernier repas · berit · alliance · karat · couper / coupé / coupe / trancher · sang · sacrifi · noé / noachique · abraham · moïse / moise / mosaïque / mosaique · david · nouvelle / nouveau · cène / cene / dernier repas  
+**8. Expliquez ce qu'est la « berit » (alliance), le sens du verbe hébreu employé pour la conclure, et les cinq grandes alliances de l'Ancien Testament.**  
+Mots-clés : berit · alliance · karat · couper / coupé / coupe / trancher · sang · sacrifi · noé / noe / noachique · abraham · moïse / moise / mosaïque / mosaique · david · nouvelle / nouveau · sainte cène / sainte cene / dernière cène / derniere cene / dernier repas · morceaux · sceau / scell · jérémie / jeremie · couper / coupé / coupe / trancher · sang · sacrifi · noé / noe / noachique · abraham · moïse / moise / mosaïque / mosaique · david · nouvelle / nouveau · cène / cene / dernier repas  
 Modèle : La berit (Strong H1285) est l'alliance, un accord qui engage deux parties ; c'est la charpente de toute la religion de l'Ancien Testament. On ne « fait » pas une alliance en hébreu : karat berit, c'est « couper une alliance », parce que les alliances étaient scellées par un sacrifice : on coupait des animaux en deux et l'on passait entre les morceaux sanglants. En Genèse 15, Dieu seul passe entre les morceaux pendant qu'Abram dort. Les cinq grandes alliances : avec Noé (Genèse 9), avec Abraham (Genèse 15, 17), avec Moïse au Sinaï (Exode 19–24), avec David (2 Samuel 7) et la nouvelle alliance (Jérémie 31). À la sainte cène, Jésus déclare la nouvelle alliance en son sang : il est le sacrifice coupé, et son sang en est le sceau.
 
 > EN: Explain what 'berit' (covenant) is, the meaning of the verb 'karat berit,' and the five great Old Testament covenants.
@@ -805,8 +813,8 @@ Modèle : Unité 4 : Bereshit (H7225), Bara (H1254), Elohim (H430), Ruach (H7307
 
 > EN: List all 13 Hebrew vocabulary words from Units 4 and 5 with their Strong's numbers.
 
-**10. Décrivez l'activité du cahier de l'Unité 5 et ce qu'accomplit la phrase de résumé finale.**  
-Mots-clés : cahier · tableau · sept · strong · ésaïe / esaie · phrase · résum / resum · ancien testament · théolog / theolog · cahier · tableau · sept · strong · ésaïe / esaie · phrase · résum / resum · ancien testament · théolog / theolog  
+**10. Décrivez l'activité du cahier de l'Unité 5 et ce qu'accomplit la phrase qui la conclut.**  
+Mots-clés : cahier · tableau · sept · strong · ésaïe / esaie · phrase · résum / resum · ancien testament · théolog / theolog · colonne · tableau · sept · strong · ésaïe / esaie · haute voix / voix haute · recopi / de votre main / à la main / a la main · ancien testament · théolog / theolog  
 Modèle : Sous le tableau des six mots de Genèse 1 (Unité 4), l'étudiant écrit le titre « Unité 5 — Sainteté et alliance : sept de plus » et dresse un second tableau avec les mêmes cinq colonnes : mot hébreu, translittération, numéro Strong, sens en une phrase, verset clé. Il le remplit pour les sept mots : qadosh et kavod (Ésaïe 6:3), YHWH (Exode 3:14, Ésaïe 6:5), chesed (Psaume 136:1), shalom (Nombres 6:26), torah (Psaume 119:97), berit (Genèse 15:18). Puis il recopie à la main la phrase « YHWH est qadosh, qadosh, qadosh... » et la lit à haute voix. Cette phrase, qui mêle les mots hébreux, est un résumé complet de la théologie de l'Ancien Testament.
 
 > EN: Describe the Notebook Activity for Unit 5 and what the final summary sentence accomplishes.

@@ -12,6 +12,13 @@ Counts: 28 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 2. 1 Peter 3:15 in LSG reads 'sanctifiez dans vos cœurs Christ le Seigneur' (not 'the Lord God') and 'avec douceur et respect' (not 'meekness and fear'). MC 3 option 4 and the fill-in answer ('douceur') follow LSG. Is that acceptable?
 3. SA 6 asks about the 'happiest and healthiest' point, but the lesson text never uses that phrase (b020 speaks of surrendered lives, forgiveness, steadiness). I translated the prompt as is; should it be reworded to match the lesson?
 
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+- SA3: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -151,7 +158,7 @@ On frappe à la porte
 > EN: The Knock at the Door
 
 **b024**  
-Ainsi nous terminons, comme nous avons terminé chaque unité, devant une porte, mais cette fois, c'est votre porte. Tout au long de ces semaines, nous avons parlé d'amener les autres jusqu'au seuil, mais le même Seigneur qui se tient prêt à recevoir celui qui cherche se tient, en ce moment même, à la porte de chaque cœur qui lit ces mots. « Voici, dit-il, je me tiens à la porte, et je frappe. Si quelqu'un entend ma voix et ouvre la porte, j'entrerai chez lui. » Remarquez où se trouve la poignée. Il frappe, mais il n'enfonce pas la porte ; le loquet est à l'intérieur, et vous seul pouvez le soulever. Toutes les preuves de ce cours ont été le bruit de ces coups, de plus en plus clairs d'unité en unité. Vous avez présenté, ou vous présenterez, cette défense raisonnée à d'autres. Mais celui que vous défendez vous pose la question la plus ancienne et la plus personnelle de toutes, la question autour de laquelle tout ce cours tourne depuis le début : non seulement de savoir si ses affirmations sont vraies, mais si vous ouvrirez la porte. Qui dites-vous qu'il est ? Et le laisserez-vous entrer ?
+Ainsi nous terminons, comme nous avons terminé chaque unité, devant une porte, mais cette fois, c'est votre porte. Tout au long de ces semaines, nous avons parlé d'amener les autres jusqu'au seuil, mais le même Seigneur qui se tient prêt à recevoir celui qui cherche se tient, en ce moment même, à la porte de chaque cœur qui lit ces mots. Il dit : « Voici, je me tiens à la porte, et je frappe. Si quelqu'un entend ma voix et ouvre la porte, j'entrerai chez lui. » Remarquez où se trouve la poignée. Il frappe, mais il n'enfonce pas la porte ; le loquet est à l'intérieur, et vous seul pouvez le soulever. Toutes les preuves de ce cours ont été le bruit de ces coups, de plus en plus clairs d'unité en unité. Vous avez présenté, ou vous présenterez, cette défense raisonnée à d'autres. Mais celui que vous défendez vous pose la question la plus ancienne et la plus personnelle de toutes, la question autour de laquelle tout ce cours tourne depuis le début : non seulement de savoir si ses affirmations sont vraies, mais si vous ouvrirez la porte. Qui dites-vous qu'il est ? Et le laisserez-vous entrer ?
 
 > EN: And so we end, as we have ended every unit, at a door, but now it is your door. Through all these weeks we have spoken of bringing others to the threshold, but the same Lord who stands ready to receive the seeker is standing, this moment, at the door of every heart that reads these words. "Behold," He says, "I stand at the door and knock. If anyone hears My voice and opens the door, I will come in." Notice where the handle is. He knocks, but He does not break the door down; the latch is on the inside, and only you can lift it. All the evidence of this course has been the sound of that knocking, growing clearer unit by unit. You have given, or will give, this reasoned defense to others. But the One you defend is asking you the oldest and most personal question of all, the question this whole course has been circling from the start: not merely whether His claims are true, but whether you will open the door. Who do you say that He is? And will you let Him in?
 
@@ -166,7 +173,7 @@ Examen final de l'unité 10
 > EN: Unit 10 Final Exam
 
 **b027**  
-Parcours Certificat : les 20 questions à choix multiple. Associé : les questions à choix multiple et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiple, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous échouez, l'examen impose un court délai avant une nouvelle tentative.
+Parcours Certificat : les 20 questions à choix multiple. Parcours Associé en divinité : les questions à choix multiple et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiple, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous échouez, l'examen impose un court délai avant une nouvelle tentative.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -393,8 +400,8 @@ Réponse : **frappe**
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
 **1. Pourquoi l'unité dit-elle que cette dernière unité porte sur l'archer et non sur les flèches, et comment revient-elle à 1 Pierre 3:15 ?**  
-Mots-clés : archer · flèche / fleche · pierre · défen / defen · douceur · raison · espéra / espera / espoir · caractère / caractere  
-Modèle : L'unité revient à 1 Pierre 3:15, le verset même qui a ouvert le cours, où Pierre nous exhorte à être toujours prêts à nous défendre, à rendre raison de l'espérance qui est en nous. Au fil de neuf unités, nous avons rempli notre carquois de flèches, c'est-à-dire de preuves, mais cette dernière unité porte sur l'archer plutôt que sur les flèches, autrement dit sur le caractère de celui qui présente la défense. La raison en est que Pierre ne s'est pas arrêté au fait d'être prêts à répondre ; il a ajouté cinq petits mots que la plupart des défenseurs oublient : avec douceur et respect. La manière dont nous présentons la défense compte autant que la défense elle-même. Ainsi, cette conclusion du cours déplace l'attention du contenu de nos arguments vers l'esprit et la vie de la personne qui les présente, car une vraie raison de l'espérance doit être portée par un cœur humble et aimant.
+Mots-clés : archer · flèche / fleche · respect · défen / defen · douceur · raison · espéra / espera / espoir · caractère / caractere  
+Modèle : L'unité revient à 1 Pierre 3:15, le verset même qui a ouvert le cours, où Pierre nous exhorte à être toujours prêts à nous défendre, à rendre raison de l'espérance qui est en nous. Au fil de neuf unités, nous avons rempli notre carquois de flèches, c'est-à-dire de preuves, mais cette dernière unité porte sur l'archer plutôt que sur les flèches, autrement dit sur le caractère de celui qui présente la défense. La raison en est que Pierre ne s'est pas arrêté au fait d'être prêts à répondre ; il a ajouté quatre petits mots que la plupart des défenseurs oublient : avec douceur et respect. La manière dont nous présentons la défense compte autant que la défense elle-même. Ainsi, cette conclusion du cours déplace l'attention du contenu de nos arguments vers l'esprit et la vie de la personne qui les présente, car une vraie raison de l'espérance doit être portée par un cœur humble et aimant.
 
 > EN: Why does the unit say this final unit is about the archer, not the arrows, and how does it return to 1 Peter 3:15?
 
@@ -404,7 +411,7 @@ Modèle : Les mots de Pierre « avec douceur » nous gardent d'un danger étrang
 
 > EN: Explain the danger Peter's words 'with meekness' guard against in apologetics.
 
-**3. Expliquez pourquoi l'unité dit que la vie même du défenseur est la première apologétique.**  
+**3. Expliquez pourquoi l'unité dit que la conduite du défenseur est sa première apologétique.**  
 Mots-clés : vie / vivre · premi · apologéti / apologeti · marche · parole · observ / regard · sourd · preuve  
 Modèle : L'unité dit que vous êtes vous-même la première apologétique que l'on rencontre, car bien avant qu'un voisin qui vous observe ne pèse vos arguments, il pèse votre vie. Il remarque si l'homme qui prêche l'amour est patient avec ses enfants, si la femme qui parle de joie est amère, et si l'espérance que vous décrivez vous a rendu plus bienveillant et plus stable. Le monde a entendu beaucoup de sermons et il est devenu sourd à la plupart d'entre eux, mais il n'est jamais devenu sourd à une vie. Comme le dit le vieux dicton, votre marche parle et votre parole parle, mais votre marche parle plus fort que votre parole. Ainsi, la preuve la plus forte que nous offrirons jamais n'est pas un fait que nous récitons, mais une vie qu'on ne peut expliquer sans Dieu, et nous devons veiller à ce que l'argument de notre manière de vivre ne contredise pas l'argument de nos lèvres.
 
@@ -428,15 +435,15 @@ Modèle : Pour que personne ne pense que parier sur Christ n'est qu'une issue de
 
 > EN: Explain the 'happiest and healthiest' point and the honest caveat the unit attaches to it.
 
-**7. Pourquoi l'unité souligne-t-elle que Pierre demande de rendre raison de l'« espérance », et non des règles ou de la religion héritée ?**  
+**7. Pourquoi l'unité souligne-t-elle que, selon Pierre, ce que nous devons justifier, c'est l'« espérance », et non les règles ou la religion héritée ?**  
 Mots-clés : espéra / espera / espoir · raison · règle / regle · syllogism · enfant · mort · jésus / jesus · un nom / le nom / son nom / ce nom  
 Modèle : L'unité souligne que Pierre demande de rendre raison de l'espérance qui est en nous, et non des règles qui nous lient ou de la religion dont nous avons hérité. Au fond de toutes nos preuves et de tous nos arguments se trouve non pas un syllogisme mais une espérance : que l'univers n'est pas froid et vide mais l'œuvre d'une Intelligence aimante, que nous ne sommes pas des orphelins mais des enfants, que la mort n'est pas un mur mais une porte, et que le Dieu qui nous a faits est descendu jusqu'au bout pour nous ramener à la maison. Chaque indice du cours a été un doigt pointé vers cette espérance, et cette espérance a un nom, et ce nom est Jésus. Ainsi, la défense n'a jamais été une fin en soi ; elle n'a été qu'un moyen de dégager le chemin pour qu'une personne puisse le voir clairement et, le voyant, le désirer.
 
 > EN: Why does the unit emphasize that Peter says to give a reason for the 'hope,' not the rules or the inherited religion?
 
-**8. Expliquez l'image d'Apocalypse 3:20, celle des coups frappés à la porte, et dites où se trouve le loquet.**  
+**8. Expliquez l'image d'Apocalypse 3:20 et dites de quel côté de la porte se trouve le loquet.**  
 Mots-clés : frapp · porte · loquet / verrou / poignée / poignee · intérieur / interieur / dedans · force · ouvr / ouvert · voix · invit  
-Modèle : L'unité se termine devant une porte, mais cette fois, c'est la porte du lecteur lui-même. Apocalypse 3:20 montre Christ qui dit : Voici, je me tiens à la porte, et je frappe ; si quelqu'un entend ma voix et ouvre la porte, j'entrerai chez lui. L'unité fait remarquer où se trouve la poignée : il frappe, mais il n'enfonce pas la porte, car le loquet est à l'intérieur, et seule la personne qui s'y trouve peut le soulever. Cela préserve cette vérité : l'invitation ne devient jamais contrainte ; Dieu n'entre pas de force. Toutes les preuves du cours ont été le bruit de ces coups, de plus en plus clairs d'unité en unité, mais l'ouverture doit se faire librement, de l'intérieur. Ainsi, celui que l'étudiant a appris à défendre lui pose maintenant la question la plus personnelle : non seulement de savoir si ses affirmations sont vraies, mais s'il entendra sa voix et ouvrira la porte.
+Modèle : L'unité se termine devant une porte, mais cette fois, c'est la porte du lecteur lui-même. Apocalypse 3:20 montre Christ qui dit : Voici, je me tiens à la porte, et je frappe. Si quelqu'un entend ma voix et ouvre la porte, j'entrerai chez lui. L'unité fait remarquer où se trouve la poignée : il frappe, mais il n'enfonce pas la porte, car le loquet est à l'intérieur, et seule la personne qui s'y trouve peut le soulever. Cela préserve cette vérité : l'invitation ne devient jamais contrainte ; Dieu n'entre pas de force. Toutes les preuves du cours ont été le bruit de ces coups, de plus en plus clairs d'unité en unité, mais l'ouverture doit se faire librement, de l'intérieur. Ainsi, celui que l'étudiant a appris à défendre lui pose maintenant la question la plus personnelle : non seulement de savoir si ses affirmations sont vraies, mais s'il entendra sa voix et ouvrira la porte.
 
 > EN: Explain the Revelation 3:20 image of the knock at the door and where the latch is.
 

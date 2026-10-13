@@ -14,6 +14,14 @@ Counts: 89 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 4. Derivative words were adapted to French, following the Spanish edition: charité, charisme, Eucharistie, gratitude, gratuit (b040, MC10, SA5) and pneumonie, pneumatique, pneu (b051, MC16, SA8). MC10 and MC16 now ask about French words. Is that OK?
 5. Possible factual slips in the English: (a) b020 puts the Incarnation 'into a teenage girl's womb in Bethlehem'; Luke 1:26–31 places the conception in Nazareth (the birth was in Bethlehem). (b) b045 / MC13: Newton commanded slave ships AFTER his 1748 conversion (c. 1750–1754), not before; and 'Amazing Grace' was written for New Year's Day 1773 (late 1772). (c) MC10 why: Latin caritas does not come from Greek charis (it comes from carus, 'dear'); the lesson's 'related word' is a loose claim. Translated as written.
 
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+- SA6: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -44,6 +52,8 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
   _Not checked online (BibleGateway rate-limited); not quoted, only referred to in MC7 why (« Romains 12:10 commande l'affection fraternelle »)._
 - **Romains 1:16-17, 1 Samuel 18, Cantique des cantiques (references only)** — «  »  
   _Referred to, not quoted (b071, MC6 why, b027, MC5)._
+- **Lévitique 19:18 / Matthieu 22:39** — « Tu aimeras ton prochain comme toi-même. »  
+  _Checked with offline LSG tool. b025 allusion « love your neighbor » now quoted as LSG « Tu aimeras ton prochain »._
 
 ## 3. Terms for the reviewer to confirm
 
@@ -175,7 +185,7 @@ amour qui se donne, sacrificiel, inconditionnel — l'amour que Dieu est
 > EN: self-giving, sacrificial, unconditional love — the love God is
 
 **b025**  
-Le grec a quatre mots là où l'anglais et le français n'en ont qu'un. En 1960, C.S. Lewis a écrit un petit livre intitulé Les quatre amours qui ouvre ce tiroir au lecteur moderne. Chacun des quatre mots grecs désigne une sorte d'amour différente, et apprendre ces quatre mots aiguise chaque passage du Nouveau Testament qui dit « aime ton prochain ».
+Le grec a quatre mots là où l'anglais et le français n'en ont qu'un. En 1960, C.S. Lewis a écrit un petit livre intitulé Les quatre amours qui ouvre ce tiroir au lecteur moderne. Chacun des quatre mots grecs désigne une sorte d'amour différente, et apprendre ces quatre mots aiguise chaque passage du Nouveau Testament qui dit « Tu aimeras ton prochain ».
 
 > EN: Greek has four words where English has one. C.S. Lewis wrote a small book in 1960 called The Four Loves that opens this drawer for the English reader. Each of the four Greek words names a different kind of love, and learning the four sharpens every "love your neighbor" passage in the New Testament.
 
@@ -415,7 +425,7 @@ Examen de l'Unité 8
 > EN: Unit 8 Examination
 
 **b073**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut 90 % de bonnes réponses dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen attend un court moment avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut 90 % de bonnes réponses dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen attend un court moment avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -430,12 +440,12 @@ Certificat de ministère — seules les 20 questions à choix multiples comptent
 > EN: Certificate of Ministry — only the 20 multiple-choice count (need 18/20).
 
 **b076**  
-Master of Theology — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
+Th.M. — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
 
 > EN: Master of Theology — 20 multiple-choice (18/20) and 10 short-answer (9/10).
 
 **b077**  
-Master of Divinity — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
+M.Div. — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
 
 > EN: Master of Divinity — 20 multiple-choice (18/20) and 10 short-answer (9/10).
 
@@ -721,7 +731,7 @@ Réponse : **Nicodème** · aussi acceptées : Nicodemus
 
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
-**1. Pourquoi les traducteurs de la King James, en 1611, ont-ils rendu le grec agapê de 1 Corinthiens 13 par « charity », et qu'est-ce que cela nous apprend sur toute traduction ?**  
+**1. En 1611, pourquoi la King James a-t-elle rendu agapê, en 1 Corinthiens 13, par « charity », et qu'est-ce que cela nous apprend sur toute Bible que nous lisons dans une autre langue que l'original ?**  
 Mots-clés : agap · caritas · latin · traduc · jérôme / jerome · charit · anglais · rétréci / retreci · rapetiss / réduit / reduit · grec  
 Modèle : Derrière « charity » se trouve le grec agapê. Vers l'an 400, Jérôme a traduit le Nouveau Testament en latin et a rendu agapê par caritas ; ce mot latin est passé en anglais sous la forme « charity ». En 1611, les traducteurs de la King James sentaient encore toute la plénitude de ce mot. Mais depuis, le mot anglais s'est rétréci et a rapetissé : aujourd'hui il désigne surtout des dons aux pauvres ou une organisation de bienfaisance. Le grec n'a pas changé ; c'est l'anglais qui a changé. Leçon : toute traduction perd quelque chose, car un mot grec contient plus qu'un seul mot anglais ou français ne peut porter. La seule manière de retrouver ce qui est perdu est d'apprendre le mot grec lui-même.
 
@@ -751,14 +761,14 @@ Modèle : 1) Charisme : un don spirituel que Dieu accorde par sa grâce ; de là
 
 > EN: List three English (or Spanish) words derived from the Greek charis and briefly explain what each one means.
 
-**6. Racontez avec vos propres mots l'histoire de John Newton et d'« Amazing Grace », et expliquez pourquoi charis est le mot grec qui convient à son témoignage.**  
+**6. Racontez avec vos propres mots l'histoire de John Newton et de son célèbre cantique, et expliquez pourquoi charis est le mot grec qui convient à son témoignage.**  
 Mots-clés : newton · esclav · navire / bateau · tempête / tempete · 1748 · 1772 · olney · amazing · grâce / grace · conver · capitaine · préserv / preserv · esclav · navire / bateau · tempête / tempete · olney · amazing · grâce / grace · conver · capitaine · préserv / preserv  
 Modèle : John Newton, né à Londres en 1725, était dans sa jeunesse capitaine d'un navire négrier : il faisait commerce d'esclaves et blasphémait le Christ. Le 21 mars 1748, une violente tempête au large de l'Irlande faillit le noyer ; terrifié, il cria à Dieu. Ce fut le début de sa conversion. Il quitta la traite des esclaves, devint pasteur anglican à Olney en 1764 et écrivit en 1772 le cantique « Amazing Grace ». Sur sa tombe, il écrivit qu'il avait été préservé, relevé et pardonné par la riche miséricorde du Christ. Charis est le mot juste : dans le monde grec, la charis créait une dette, mais Newton avait reçu de Dieu un don gratuit qu'il ne pourrait jamais rembourser. Il ne pouvait que le raconter.
 
 > EN: Tell the John Newton 'Amazing Grace' story in your own words and explain why charis is the right Greek word for his testimony.
 
-**7. Expliquez le jeu de mots sur pneuma dans l'entretien de Jésus avec Nicodème en Jean 3:8, et ce qu'il enseigne sur l'œuvre du Saint-Esprit.**  
-Mots-clés : pneuma · le vent / du vent / un vent · esprit · même / meme · le mot / même mot / meme mot / seul mot · invisible · effet · renai / naissance / né de nouveau / ne de nouveau · feuille · nicodème / nicodeme · le vent / du vent / un vent · esprit · même / meme · le mot / même mot / meme mot / seul mot · invisible · effet · renai / naissance / né de nouveau / ne de nouveau · feuille · nicodème / nicodeme  
+**7. Expliquez le jeu de mots sur pneuma dans les paroles de Jésus en Jean 3:8, et ce qu'il enseigne sur l'œuvre du Saint-Esprit.**  
+Mots-clés : pneuma · le vent / du vent / un vent · esprit · même / meme · le mot / même mot / meme mot / seul mot · invisible · effet · renai / naissance / né de nouveau / ne de nouveau · feuille · nicodème / nicodeme · le vent / du vent / un vent · souffle · même / meme · le mot / même mot / meme mot / seul mot · invisible · effet · renai / naissance / né de nouveau / ne de nouveau · feuille · nicodème / nicodeme  
 Modèle : En Jean 3:8, Jésus dit à Nicodème que le vent souffle où il veut et qu'il en est ainsi de tout homme né de l'Esprit. En français, nous avons deux mots, vent et Esprit, mais en grec Jésus emploie deux fois le même mot : pneuma. C'est un jeu de mots. Le vent est invisible, mais on voit ses effets : les feuilles bougent. De même, l'Esprit est invisible, mais on voit ses effets : le pécheur naît de nouveau. L'œuvre du Saint-Esprit dans la nouvelle naissance est réelle ; on ne la voit pas, mais on voit ce qu'elle fait.
 
 > EN: Explain the pneuma wordplay in Jesus's conversation with Nicodemus in John 3:8, and what it teaches about the work of the Holy Spirit.
@@ -770,13 +780,13 @@ Modèle : Pneuma signifie à la fois le vent, le souffle et l'esprit. Pour le ve
 > EN: What three meanings does the single Greek word pneuma carry, and give one English derivative for each.
 
 **9. Quels sont les DEUX des quatre mots grecs clés de l'Unité 8 qui apparaissent directement dans notre texte biblique, Jean 1:14 ? Citez le verset et identifiez les deux mots.**  
-Mots-clés : logos · charis · parole / verbe · grâce / grace · chair · vérité / verite · jean · 1:14 · parole / verbe · grâce / grace · chair · vérité / verite · jean  
+Mots-clés : logos · charis · parole / verbe · grâce / grace · chair · vérité / verite · jean · 1:14 · parole / verbe · grâce / grace · chair · vérité / verite · gloire  
 Modèle : Jean 1:14 : « Et la parole a été faite chair, et elle a habité parmi nous, pleine de grâce et de vérité; et nous avons contemplé sa gloire, une gloire comme la gloire du Fils unique venu du Père. » Les deux mots sont Logos (« la parole », qui a été faite chair) et charis (« la grâce », dans « pleine de grâce et de vérité »).
 
 > EN: Which TWO of the four key Greek words of Unit 8 appear directly in our unit scripture, John 1:14? Quote the verse and identify both words.
 
-**10. Activité du cahier : choisissez UN des quatre mots grecs de l'Unité 8 (Logos, Agapê, Charis ou Pneuma). Écrivez un court paragraphe décrivant comment la connaissance de ce mot grec changera désormais votre manière de lire un verset biblique précis.**  
-Mots-clés : logos · agap · charis · pneuma · verset · lecture / lire · chang · signifi · un don / le don / cadeau · personne · amour · esprit · verset · lecture / lire · chang · signifi · un don / le don / cadeau · personne · amour · esprit  
+**10. Activité du cahier : choisissez UN des quatre mots grecs de l'Unité 8 (Logos, Agapê, Charis ou Pneuma). Écrivez un court paragraphe décrivant comment la connaissance de ce mot grec transformera désormais votre compréhension d'un passage biblique précis.**  
+Mots-clés : logos / agap / charis / pneuma · éphés / ephes / jean / romain / corinth / matthieu / psaume / actes · ne lirai plus / maintenant / autrefois / plus comme · gratuit / sacrific / incarn / souffle / dette · verset · lecture / lire · chang · signifi · un don / le don / cadeau · personne · amour · esprit · verset · lecture / lire · chang · signifi · un don / le don / cadeau · personne · amour · esprit  
 Modèle : J'ai choisi charis. Désormais, quand je lirai le verset Éphésiens 2:8 (« c'est par la grâce que vous êtes sauvés »), ma lecture va changer. Je saurai que, dans le monde grec, la charis signifiait une faveur qui créait une dette à rembourser. Paul renverse ce sens : la grâce de Dieu est un don que personne ne peut rembourser, offert par amour. Je ne lirai plus « grâce » comme la faveur d'un Dieu qui aime les gens gentils, mais comme le don gratuit de Dieu à des pécheurs, qui exclut toute vantardise. Cela me pousse à la reconnaissance, et non à essayer de payer ma dette.
 
 > EN: Notebook activity: Pick ONE of the four Greek words from Unit 8 (Logos, Agapê, Charis, or Pneuma). Write a short paragraph describing how knowing this Greek word will change the way you read a specific Bible verse from now on.

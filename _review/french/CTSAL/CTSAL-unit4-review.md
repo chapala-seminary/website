@@ -12,6 +12,11 @@ Counts: 24 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 2. Ephesians 4:16 in LSG ends 'dans la charité' (not 'love'). Your prose and MC19 keep 'amour', with LSG noted. Is that acceptable?
 3. SA9 asks about 'the divine/human pattern' but the unit's lesson text never names it (probably from an earlier unit or the course frame). Translated as is; should a sentence be added, or the question kept?
 
+## Problems in the English source
+
+- SA5: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -148,7 +153,7 @@ Examen final de l'Unité 4
 > EN: Unit 4 Final Exam
 
 **b024**  
-Parcours Certificat : les 20 questions à choix multiple. Associé : les questions à choix multiple et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiple, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiple. Parcours Associé en divinité : les questions à choix multiple et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiple, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -398,7 +403,7 @@ Modèle : Paul dit à Timothée de confier ce qu'il a entendu à des hommes fid�
 
 > EN: According to 2 Timothy 2:2, to whom should ministry be entrusted, and why those qualities?
 
-**5. Pourquoi le courage de libérer les autres est-il un acte d'humilité et de foi ?**  
+**5. Pourquoi faut-il de l'humilité et de la foi pour avoir le courage de libérer les autres ?**  
 Mots-clés : libér / liber / lâch / lach · humilit · de foi / foi en · contrôl / control · doué / doue / dons / doté / dote / charisme · esprit · confiance · différ / differ / autrement  
 Modèle : Libérer les autres est un acte d'humilité, parce que cela signifie que l'œuvre sera faite autrement que le dirigeant ne l'aurait faite, et parfois moins bien au début ; le dirigeant doit renoncer au contrôle et accepter que sa manière de faire n'est pas la seule bonne. C'est un acte de foi, parce que cela fait confiance à Dieu, qui donne des dons à son peuple et se sert de lui, et pas seulement du dirigeant — le même Esprit qui a appelé le dirigeant et l'a doté de dons les a appelés et dotés, eux aussi. Un dirigeant qui ne sait pas libérer les autres les surveille sans cesse, annule leurs décisions et refait leur travail, enseignant ainsi à tous que leurs efforts ne comptent pas ; alors ils cessent d'essayer. Mais le dirigeant qui libère des personnes fidèles fait confiance à Dieu pour agir à travers le corps tout entier, et seule une telle libération permet à une Église de grandir au-delà de la taille d'un seul homme.
 
@@ -422,7 +427,7 @@ Modèle : Éphésiens 4:16 représente l'Église comme un corps qui grandit tout
 
 > EN: How does the body imagery of Ephesians 4:16 shape how a church should be organized?
 
-**9. Comment le modèle divin/humain apparaît-il dans l'équipement des saints et la délégation ?**  
+**9. Comment le modèle divin/humain apparaît-il quand le dirigeant forme les saints et leur confie le ministère ?**  
 Mots-clés : divin · humain · esprit · doué / doue / dons / doté / dote / charisme · équip / equip / perfection · œuvre / oeuvre / travail / labeur · dieu · membre  
 Modèle : Le modèle divin/humain apparaît en ce que Dieu accomplit son ministère par des membres humains doués, et non par le dirigeant seul. Il est divin parce que c'est le même Esprit qui donne des dons aux saints et les appelle, en distribuant des capacités dans tout le corps comme il le veut ; les dons sont l'œuvre de Dieu, non une invention du dirigeant. Il est humain parce que ces dons doivent être équipés, formés et libérés grâce au travail diligent du dirigeant, qui enseigne et confie des responsabilités. Le dirigeant ne fabrique pas les dons, mais il doit les développer et les mettre en œuvre. Ainsi, équiper les saints unit l'action de Dieu qui donne les dons et le labeur du dirigeant, exactement selon le modèle de l'Écriture : Dieu accomplit son dessein par des moyens humains préparés, et la tâche du dirigeant est de préparer et de libérer les personnes que Dieu a dotées de dons.
 

@@ -17,6 +17,13 @@ Counts: 129 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 7. Fact check: b035 says the Greek word for 'door' in John 10:9 (thura) came through Aramaic from Hebrew delet. Most lexicons treat thura as Indo-European (related to English 'door'), not Semitic. Translated as written; you may want to revise this.
 8. As in Unit 1: b110 says '30 questions', but the exam has 40 (20 MC + 10 fill-in + 10 short answer), and b107–b109 leave out the Associate track. Also b077 says Jesus spoke 'Abba' 'from the cross', but b080, b100 and the exam place it in Gethsemane (Mark 14:36). Translated as written (« sur la croix »); you may want to change it to Gethsemane.
 
+## Problems in the English source
+
+- SA2: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -438,7 +445,7 @@ Le mot araméen-hébreu Abba s'écrit avec trois lettres : Aleph, Bet, Aleph. So
 > EN: אבא
 
 **b080**  
-Lisez-le de droite à gauche : Aleph — Bet — Aleph. Prononcez-le : A-B-A. Avec la voyelle hébraïque « a » que porte l'Aleph muet : Abba. Le mot araméen-hébreu intime pour « père », celui qu'employaient les petits enfants. Le mot que Jésus a employé à Gethsémané quand il a prié : « Abba, Père, toutes choses te sont possibles, éloigne de moi cette coupe ! » (Marc 14:36). Le mot que, selon Paul, l'Esprit fait crier au croyant : « vous avez reçu un Esprit d'adoption, par lequel nous crions : Abba ! Père ! » (Romains 8:15).
+Lisez-le de droite à gauche : Aleph — Bet — Aleph. Prononcez-le : A-B-A. Avec la voyelle hébraïque « a » que porte l'Aleph muet : Abba. Le mot araméen-hébreu intime pour « père », celui qu'employaient les petits enfants. Le mot que Jésus a employé à Gethsémané quand il a prié : « Abba, Père, toutes choses te sont possibles, éloigne de moi cette coupe! » (Marc 14:36). Le mot que, selon Paul, l'Esprit fait crier au croyant : « vous avez reçu un Esprit d'adoption, par lequel nous crions: Abba! Père! » (Romains 8:15).
 
 > EN: Read it from right to left: Aleph — Bet — Aleph. Sound it out: A-B-A. With the Hebrew "ah" vowel that the silent Aleph carries: Abba. The intimate Aramaic-Hebrew word for "father" that little children used. The word Jesus used in Gethsemane when He prayed, "Abba, Father, all things are possible for You; take this cup away from Me" (Mark 14:36). The word Paul says the Spirit cries out within the believer: "You received the Spirit of adoption by whom we cry out, Abba, Father" (Romans 8:15).
 
@@ -563,7 +570,7 @@ Examen de l'Unité 2
 > EN: Unit 2 Examination
 
 **b105**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut 90 % dans chaque partie pour réussir. En cas d'échec, l'examen impose un court délai avant une nouvelle tentative.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut 90 % dans chaque partie pour réussir. En cas d'échec, l'examen impose un court délai avant une nouvelle tentative.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -578,12 +585,12 @@ Certificat de ministère — seules les 20 questions à choix multiples comptent
 > EN: Certificate of Ministry — only the 20 multiple-choice count (need 18/20).
 
 **b108**  
-Master of Theology — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
+Th.M. — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
 
 > EN: Master of Theology — 20 multiple-choice (18/20) and 10 short-answer (9/10).
 
 **b109**  
-Master of Divinity — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
+M.Div. — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
 
 > EN: Master of Divinity — 20 multiple-choice (18/20) and 10 short-answer (9/10).
 
@@ -916,7 +923,7 @@ Modèle : Les cinq premières lettres hébraïques, dans l'ordre, sont : 1) Alep
 > EN: List the first five Hebrew letters in order, with their names.
 
 **2. Racontez comment Champollion a déchiffré les hiéroglyphes et expliquez pourquoi cette unité commence par cette histoire.**  
-Mots-clés : champollion · rosette / rosetta · hiéroglyph / hieroglyph · égypt / egypt · lettre · les sons / des sons / un son · champollion · rosette / rosetta · hiéroglyph / hieroglyph · égypt / egypt · lettre · les sons / des sons / un son  
+Mots-clés : champollion · rosette / rosetta · hiéroglyph / hieroglyph · égypt / egypt · lettre · les sons / des sons / un son · 1822 · rosette / rosetta · ramsès / ramses · égypt / egypt · lettre · les sons / des sons / un son  
 Modèle : Le 14 septembre 1822, le Français Jean-François Champollion, qui travaillait depuis plus de dix ans sur les hiéroglyphes égyptiens, étudiait la pierre de Rosette, où le même texte figure en grec, en démotique et en hiéroglyphes. Dans un cartouche, il a lu R-M-S-S : Ramsès. Il a compris que ces images étaient aussi des lettres qui notaient des sons. Il a couru jusqu'au bureau de son frère, a crié « Je tiens l'affaire ! » et s'est évanoui. L'unité commence par lui parce qu'il illustre le but du cours : sans être Égyptien de naissance, avec quelques outils et beaucoup de patience, il est devenu un lecteur. Nous ne deviendrons pas Moïse, mais nous deviendrons des lecteurs, et nous découvrons nous aussi que les images, les lettres et les sons de l'alphabet hébreu ne font qu'un : ces signes étranges sont des portes.
 
 > EN: Tell the story of Champollion deciphering hieroglyphs and explain why this unit opens with it.
@@ -929,12 +936,12 @@ Modèle : Vers 1700 av. J.-C., dans le Sinaï et en Canaan, des peuples de langu
 
 **4. Lisez le mot hébreu אבא et expliquez ce qu'il signifie, qui l'a prié dans le Nouveau Testament, et quelles lettres il contient.**  
 Mots-clés : abba · père / pere · jésus / jesus · gethsém / gethsem · aleph · bet · abba · père / pere · jésus / jesus · gethsém / gethsem · aleph · bet  
-Modèle : אבא se lit de droite à gauche : Aleph — Bet — Aleph, A-B-A, c'est-à-dire Abba. C'est le mot araméen-hébreu intime pour « père », celui qu'employaient les petits enfants. Jésus l'a prié à Gethsémané : « Abba, Père, toutes choses te sont possibles, éloigne de moi cette coupe ! » (Marc 14:36). Paul dit aussi que, par l'Esprit d'adoption, nous crions « Abba ! Père ! » (Romains 8:15).
+Modèle : אבא se lit de droite à gauche : Aleph — Bet — Aleph, A-B-A, c'est-à-dire Abba. C'est le mot araméen-hébreu intime pour « père », celui qu'employaient les petits enfants. Jésus l'a prié à Gethsémané : « Abba, Père, toutes choses te sont possibles, éloigne de moi cette coupe! » (Marc 14:36). Paul dit aussi que, par l'Esprit d'adoption, nous crions « Abba! Père! » (Romains 8:15).
 
 > EN: Read the Hebrew word אבא and explain what it means, who prayed it in the New Testament, and which letters it contains.
 
-**5. Expliquez ce que Jésus voulait dire en Matthieu 5:18 quand il a déclaré qu'il ne disparaîtrait pas de la loi « un seul iota ou un seul trait de lettre ».**  
-Mots-clés : yod · plus petit · lettre · trait · la loi / de la loi · accompli / arrivé / arrive · hébreu / hebreu / hébraïque / hebraique · yod · plus petit · lettre · trait · la loi / de la loi · accompli / arrivé / arrive · hébreu / hebreu / hébraïque / hebraique  
+**5. Expliquez ce que Jésus voulait dire en Matthieu 5:18 quand il a parlé d'« un seul iota ou un seul trait de lettre ».**  
+Mots-clés : yod · plus petit · lettre · trait · la loi / de la loi · accompli / arrivé / arrive · hébreu / hebreu / hébraïque / hebraique · yod · plus petit · inspir · distingu · la loi / de la loi · accompli / arrivé / arrive · hébreu / hebreu / hébraïque / hebraique  
 Modèle : L'« iota » (en anglais « jot ») est le nom grec du Yod, la plus petite lettre de l'alphabet hébreu, un simple petit trait. Le « trait de lettre » est le minuscule trait qui distingue une lettre hébraïque d'une autre presque identique, comme Bet et Kaf. Jésus affirme donc que ni la plus petite lettre, ni même la plus petite partie de la plus petite lettre de la loi ne disparaîtra avant que tout soit arrivé, c'est-à-dire accompli. Il prenait le texte hébreu très au sérieux : c'est la doctrine de l'inspiration dans la bouche du Christ lui-même.
 
 > EN: Explain what Jesus meant in Matthew 5:18 when He said 'not one jot or one tittle' will pass from the law.
@@ -945,14 +952,14 @@ Modèle : Les vingt-deux lettres de l'alphabet hébreu sont toutes des consonnes
 
 > EN: Explain why the Hebrew alphabet has no vowel letters and how ancient Hebrew readers handled this.
 
-**7. Racontez comment le mot français « alphabet » prouve à lui seul que l'hébreu est le parent de l'écriture occidentale.**  
-Mots-clés : alpha · bêta / beta · aleph · bet · grec · hébreu / hebreu / hébraïque / hebraique · phénici / phenici · alpha · bêta / beta · aleph · bet · grec · hébreu / hebreu / hébraïque / hebraique · phénici / phenici  
+**7. Racontez comment le mot français « alphabet » prouve à lui seul que la langue de l'Ancien Testament est la mère de l'écriture occidentale.**  
+Mots-clés : alpha · bêta / beta · aleph · bet · grec · hébreu / hebreu / hébraïque / hebraique · phénici / phenici · premières / premieres · bêta / beta · aleph · appris / apprend · grec · hébreu / hebreu / hébraïque / hebraique · phénici / phenici  
 Modèle : Le mot « alphabet » vient des deux premières lettres grecques, alpha et bêta. Or celles-ci viennent des deux premières lettres hébraïques, aleph et bet. Les Grecs ont appris à écrire auprès des Phéniciens, dont la langue était presque identique à l'hébreu et dont les lettres étaient des lettres hébraïques. Chaque fois que nous disons « alphabet », nous citons donc les deux premières lettres de l'Ancien Testament hébreu : l'hébreu est l'écriture mère de tous les alphabets occidentaux.
 
 > EN: Tell the story of how the English word 'alphabet' itself proves that Hebrew is the parent of Western writing.
 
-**8. Pourquoi la Bible commence-t-elle par Bet (la deuxième lettre) au lieu d'Aleph (la première lettre) ? Quelle en est la portée, et quel est le premier mot de la Genèse ?**  
-Mots-clés : bereshit · commencement · bet · genèse / genese · aleph · muet / silen · bereshit · commencement · bet · genèse / genese · aleph · muet / silen  
+**8. Pourquoi la Bible commence-t-elle par Bet (la deuxième lettre) au lieu d'Aleph (la première lettre) ? Quelle en est la portée, et quel est le premier mot du texte hébreu ?**  
+Mots-clés : bereshit · commencement · bet · genèse / genese · aleph · muet / silen · bereshit · commencement · maison · genèse / genese · parle · muet / silen  
 Modèle : Le premier mot de la Genèse est Bereshit, « Au commencement » (Genèse 1:1). Il commence par Bet, la deuxième lettre de l'alphabet, et non par Aleph, la première. La tradition juive l'a remarqué depuis longtemps et s'est demandé pourquoi Dieu n'avait pas commencé par la première lettre. La leçon donne une piste : Aleph est la lettre muette, et l'alphabet commence par le silence, car avant que Dieu parle, il n'y a pas de création. La Bible s'ouvre donc au moment où Dieu parle, avec Bet, la lettre qui est elle-même l'image d'une maison.
 
 > EN: Why does the Bible begin with Bet (the second letter) instead of Aleph (the first letter)? What is the significance, and what is the first word of Genesis?
@@ -963,8 +970,8 @@ Modèle : Chet commence trois mots importants : chai, « la vie » ; chokmah, «
 
 > EN: Name three Hebrew words from this unit that begin with the letter Chet, and explain why these are important words.
 
-**10. Décrivez l'Activité du cahier de l'Unité 2 et expliquez pourquoi il est important d'écrire les lettres à la main.**  
-Mots-clés : cahier · tableau · lettre · le nom / les noms / son nom · le son / les sons / un son · image / dessin · mémoire / memoire / mémoris / memoris · la main / une main · l œil / l oeil / les yeux · cahier · tableau · lettre · le nom / les noms / son nom · le son / les sons / un son · image / dessin · mémoire / memoire / mémoris / memoris · la main / une main · l œil / l oeil / les yeux  
+**10. Décrivez l'Activité du cahier de l'Unité 2 et expliquez pourquoi il est important de tracer soi-même les caractères hébreux.**  
+Mots-clés : cahier · tableau · lettre · le nom / les noms / son nom · le son / les sons / un son · image / dessin · mémoire / memoire / mémoris / memoris · la main / une main · l œil / l oeil / les yeux · calligraph · tableau · lettre · le nom / les noms / son nom · le son / les sons / un son · image / dessin · mémoire / memoire / mémoris / memoris · la main / une main · l œil / l oeil / les yeux  
 Modèle : Sur une nouvelle page du cahier, on écrit « Unité 2 : d'Aleph à Yod » et on trace un tableau de cinq colonnes : la lettre, le nom, le son, l'image et le mot-mémoire. On le remplit pour les dix lettres de l'unité (par exemple Bet — bayit, la maison ; Yod — yad, la main). Puis on écrit chaque lettre hébraïque encore cinq fois de suite, lentement. Écrire à la main compte parce que la main enseigne l'œil : on ne forme pas un calligraphe mais un lecteur, et à la fin de la page la main sait ce que l'œil a appris.
 
 > EN: Describe the Notebook Activity for Unit 2 and explain why writing the letters by hand matters.

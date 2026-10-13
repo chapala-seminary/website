@@ -12,17 +12,23 @@ Counts: 30 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 2. General revelation « is enough to convict, but not to convert »: I wrote « convaincre de péché » because « convaincre » alone means « persuade ». Is that wording acceptable?
 3. The lesson cites Jean 14:9, but Philip's request « montre-nous le Père » is in 14:8. Keep 14:9 as in the English, or cite 14:8-9?
 
+## Problems in the English source
+
+- SA3: English prompt passes its own keywords
+- SA6: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
 
 - **Romains 8:16** — « L'Esprit lui-même rend témoignage à notre esprit que nous sommes enfants de Dieu. »  
   _Checked online (biblestudytools.com /lsg/). Used in b004, b006, b018, b026 (allusion), MC 1, fill 8, SA 4. « bears witness » = « rend témoignage »; fill 8 expects « témoignage »._
-- **Psaume 19:2 (= Psalm 19:1 in English Bibles)** — « Les cieux racontent la gloire de Dieu, Et l'étendue manifeste l'œuvre de ses mains. »  
-  _Checked online in Unit 2 (info-bible.org). LSG numbers it 19:2; reference changed to Psaume 19:2 in b010 (as in Unit 2). « firmament » = « l'étendue », « handiwork » = « l'œuvre de ses mains », reused in b013 and fill 5 (« montre l'œuvre de ses mains ... son visage »)._
+- **Psaume 19:1** — « Les cieux racontent la gloire de Dieu, Et l'étendue manifeste l'œuvre de ses mains. »  
+  _Checked against the offline LSG (12 Oct 2026). Verse numbering follows the English/NKJV numbering (convention 11): Psaume 19:1 in b010; quoted verbatim with Segond's capital « Et ». « firmament » = « l'étendue », « handiwork » = « l'œuvre de ses mains », reused in b013 and fill 5 (« montre l'œuvre de ses mains ... son visage »)._
 - **Romains 2:15 (paraphrase)** — « … leur conscience en rendant témoignage, et leurs pensées s'accusant ou se défendant tour à tour. »  
   _Checked online (biblestudytools.com /lsg/). The English paraphrases (« our thoughts accuse or excuse us »); French paraphrase « nos pensées nous accusent ou nous défendent » follows LSG wording, not in quotation marks. b010, fill 2, SA 1._
-- **Romains 1:20** — « … Ils sont donc inexcusables. »  
+- **Romains 1:20** — « … Ils sont donc inexcusables, »  
   _Checked online (biblestudytools.com /lsg/). Only the end of the verse is cited: « without excuse » = « inexcusables » (b010, MC 3, SA 1)._
 - **Hébreux 1:1-2** — « Après avoir autrefois, à plusieurs reprises et de plusieurs manières, parlé à nos pères par les prophètes, Dieu, dans ces derniers temps, nous a parlé par le Fils, qu'il a établi héritier de toutes choses, par lequel il a aussi créé le monde, »  
   _Checked online (biblestudytools.com /lsg/). LSG says « par le Fils » (not « his Son »); MC 6 option is « Le Fils ». No exam impact._
@@ -92,7 +98,7 @@ La révélation générale : le témoignage que tous possèdent
 > EN: General Revelation: The Witness Everyone Has
 
 **b010**  
-Dieu ne s'est pas caché. Il a parlé d'abord dans un langage que tout homme peut lire, quels que soient sa langue ou son pays. Il a parlé dans la création : « Les cieux racontent la gloire de Dieu, et l'étendue manifeste l'œuvre de ses mains » (Psaume 19:2). Et il a parlé dans la conscience, ce tribunal intérieur où, comme le dit Paul, nos pensées nous accusent ou nous défendent (Romains 2:15). Le ciel prêche du dehors ; la conscience prêche du dedans ; et tous deux disent, assez clairement, que Dieu existe et que nous avons des comptes à lui rendre. Voilà pourquoi Paul conclut que les hommes sont « inexcusables » (Romains 1:20). Personne ne se tiendra devant Dieu pour dire honnêtement : « On ne me l'a jamais dit. »
+Dieu ne s'est pas caché. Il a parlé d'abord dans un langage que tout homme peut lire, quels que soient sa langue ou son pays. Il a parlé dans la création : « Les cieux racontent la gloire de Dieu, Et l'étendue manifeste l'œuvre de ses mains » (Psaume 19:1). Et il a parlé dans la conscience, ce tribunal intérieur où, comme le dit Paul, nos pensées nous accusent ou nous défendent (Romains 2:15). Le ciel prêche du dehors ; la conscience prêche du dedans ; et tous deux disent, assez clairement, que Dieu existe et que nous avons des comptes à lui rendre. Voilà pourquoi Paul conclut que les hommes sont « inexcusables » (Romains 1:20). Personne ne se tiendra devant Dieu pour dire honnêtement : « On ne me l'a jamais dit. »
 
 > EN: God has not hidden Himself. He has spoken first in a language every man can read, whatever his tongue or country. He has spoken in the creation: "The heavens declare the glory of God; and the firmament shows His handiwork" (Psalm 19:1). And He has spoken in the conscience, that inner courtroom where, as Paul says, our thoughts accuse or excuse us (Romans 2:15). The sky preaches from without; the conscience preaches from within; and both say, plainly enough, that God is and that we are accountable to Him. This is why Paul concludes that men are "without excuse" (Romans 1:20). No one will stand before God and honestly say, "I was never told."
 
@@ -187,7 +193,7 @@ Examen final de l'Unité 3
 > EN: Unit 3 Final Exam
 
 **b029**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -425,13 +431,13 @@ Modèle : La révélation spéciale, c'est Dieu qui parle de manière directe et
 
 > EN: Explain special revelation and the ways the unit says God has spoken.
 
-**3. Expliquez l'illustration de la chambre d'hôtel et ce qu'elle enseigne sur l'illumination.**  
+**3. Expliquez l'illustration de l'hôtel et ce qu'elle enseigne sur l'illumination.**  
 Mots-clés : hôtel / hotel · lumière / lumiere · chambre · chang · illumin · esprit · aperçoi / apercoi / aperçu / apercu / discern / voir la vérité / voir la verite · faible / tamis  
 Modèle : L'unité dépeint un homme qui arrive à un hôtel la nuit et qui, à la lueur d'une faible lampe, aperçoit une chambre qui semble propre. Au matin, le soleil entre à flots et il voit la poussière, les taches et les miettes qui étaient là depuis toujours. Rien n'avait changé dans la chambre ; seule la lumière avait changé. Cela illustre l'illumination, l'œuvre de l'Esprit qui donne à une personne la lumière pour voir la vérité, présente depuis toujours. Les preuves dans les cieux, dans la conscience et dans l'Écriture sont là pour tous, mais une personne peut tout regarder sans rien voir tant que l'Esprit n'a pas allumé la lumière. Voilà pourquoi deux personnes peuvent entendre le même sermon ou peser le même argument, et l'une reste insensible tandis que l'autre est transformée. Ce n'était jamais la chambre ; c'était la lumière.
 
 > EN: Explain the Hotel Room illustration and what it teaches about illumination.
 
-**4. Qu'est-ce que le témoignage intérieur de l'Esprit décrit en Romains 8:16, et pourquoi est-il important ?**  
+**4. Qu'est-ce que le témoignage de l'Esprit décrit en Romains 8:16, et pourquoi est-il important ?**  
 Mots-clés : témoign / temoign · esprit · habiter en / habite en / vivre en / vit en / au-dedans / au dedans · assur · enfants · intérieur / interieur / intime · raison · l âme / l ame / son âme / son ame  
 Modèle : Le témoignage intérieur de l'Esprit est la preuve la plus profonde de toutes, et on ne peut pas la mesurer sur une table. Romains 8:16 dit que l'Esprit lui-même rend témoignage à notre esprit que nous sommes enfants de Dieu. Quand une personne vient à Christ, Dieu ne la laisse pas s'appuyer uniquement sur des arguments, comme si la foi était une conclusion à défendre chaque matin. Dieu donne plutôt une assurance intérieure, plus profonde que le raisonnement, par laquelle l'âme sait tout simplement qu'elle est aimée, qu'elle appartient à Dieu et qu'elle est chez elle. La raison a conduit la personne jusqu'à la porte ; ce témoignage intérieur, c'est le Père qui l'ouvre de l'intérieur. Les arguments sont vrais et utiles, mais personne ne repose finalement tout son poids sur un syllogisme au-dedans de lui-même ; il le repose sur Celui qui est venu habiter en lui.
 
@@ -443,7 +449,7 @@ Modèle : Paul donne au témoignage intérieur un nom tiré du marché : en Éph
 
 > EN: Explain the seal of the Spirit and the meaning of the word 'arrhabōn.'
 
-**6. Pourquoi l'unité dit-elle que le sceau est un changement dans la trajectoire d'une vie, et non simplement un sentiment ?**  
+**6. Pourquoi l'unité dit-elle que le sceau est une nouvelle trajectoire de l'existence, et non simplement une émotion ?**  
 Mots-clés : traject · chang · sentiment · sa vie / une vie / la vie / d une vie · appétit / appetit · sainteté / saintete · tourn · véritable / veritable / réelle / reelle / réellement / reellement  
 Modèle : L'unité insiste : le sceau de l'Esprit n'est pas un sentiment que nous devons fabriquer, mais un véritable changement dans la trajectoire d'une vie. Il se manifeste par des appétits remis en ordre, une tendresse nouvelle pour la sainteté, et de l'amour là où régnait autrefois l'indifférence. La preuve n'est pas une émotion passagère, mais une route qui a réellement tourné. Une personne honnête peut regarder en arrière sur les années et voir que la direction de sa vie a changé, et que ce n'est pas elle qui l'a fait tourner. Voilà pourquoi l'assurance ne dépend pas de ce qu'une personne ressent un matin donné. Le sceau de l'Esprit se démontre dans une vie changée et réorientée, ce qui est un terrain bien plus solide que le sentiment.
 
@@ -461,7 +467,7 @@ Modèle : En Éphésiens 1:18, Paul a prié pour que Dieu illumine les yeux du c
 
 > EN: Explain 'the eyes of the heart' (Ephesians 1:18) and how it is the end of the journey.
 
-**9. Expliquez l'illustration de « l'air et des poumons » au sujet de l'union du croyant avec Christ.**  
+**9. Expliquez l'illustration « de l'air et des poumons » qui décrit l'union du croyant avec son Seigneur.**  
 Mots-clés : l air / de l air / dans l air · poumon · christ · en lui / en nous / au-dedans / au dedans / habite · atmosph · respir / souffle · esprit · la vie / sa vie / vivre / vivifi  
 Modèle : L'unité utilise l'image de l'air et des poumons pour décrire l'union du croyant avec Christ. Vous êtes dans l'air, et l'air est en vous, et vous ne sauriez dire où l'un s'arrête et où l'autre commence. De la même manière, le croyant est en Christ et Christ est dans le croyant, et l'Esprit est l'atmosphère même de sa vie. Voilà pourquoi la présence de l'Esprit qui habite en nous n'est pas un arrangement lointain, mais une présence constante et vivifiante, aussi nécessaire et aussi proche que l'air que nous respirons. Cela enseigne que la vie chrétienne ne consiste pas seulement à croire à distance des faits au sujet de Dieu, mais à vivre en lui pendant qu'il vit en nous.
 

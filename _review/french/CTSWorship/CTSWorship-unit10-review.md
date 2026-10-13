@@ -12,16 +12,28 @@ Counts: 22 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 2. Your prison titles (Chaplain, Assistant Warden, Deputy Warden) are rendered « aumônier, directeur adjoint et sous-directeur ». Please confirm which title was the higher rank so the French order and wording are right.
 3. All 20 MC items have no 'why' explanation in the source, so none was translated. Is that intended?
 
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+- SA2: English prompt passes its own keywords
+- SA3: English prompt passes its own keywords
+- SA4: English prompt passes its own keywords
+- SA5: English prompt passes its own keywords
+- SA6: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
 
 - **Ésaïe 6:1** — « L'année de la mort du roi Ozias, je vis le Seigneur assis sur un trône très élevé, et les pans de sa robe remplissaient le temple. »  
-  _Allusion only (b019, mc7, sa3: 'the Lord high and lifted up'), not quoted. Rendered with LSG's « assis sur un trône très élevé ». First half checked online (BibleGateway LSG); second half from memory._
+  _Allusion only (b019, mc7, sa3: 'the Lord high and lifted up'), not quoted. Rendered with LSG's « assis sur un trône très élevé ». Checked with the offline LSG tool._
 - **Jean 4:24** — « Dieu est Esprit, et il faut que ceux qui l'adorent l'adorent en esprit et en vérité. »  
   _Referenced (b020, sa5: 'the truth-half of John 4:24'), not quoted; rendered « la moitié « en vérité » de Jean 4:24 » to match LSG. Checked online (BibleGateway LSG)._
-- **Psaume 100** — « Poussez vers l'Éternel des cris de joie, Vous tous, habitants de la terre! Servez l'Éternel avec joie, Venez avec allégresse en sa présence! »  
-  _Cited by number only (b020, mc7, mc15, sa6). Verses 1-2 not checked online (BibleGateway rate-limited; biblestudytools failed); from memory._
+- **Psaume 100** — « Psaume de louange. Poussez vers l'Éternel des cris de joie, Vous tous, habitants de la terre! Servez l'Éternel, avec joie, Venez avec allégresse en sa présence! »  
+  _Cited by number only (b020, mc7, mc15, sa6). Verses 1-2 checked with the offline LSG tool (12 Oct 2026)._
 - **2 Samuel 6:14** — « David dansait de toute sa force devant l'Éternel, et il était ceint d'un éphod de lin. »  
   _Allusion (b020, mc15, sa6: 'David dancing before the ark'), not quoted. Checked online (BibleGateway LSG)._
 
@@ -123,7 +135,7 @@ Examen final de l'Unité 10
 > EN: Unit 10 Final Exam
 
 **b028**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous échouez, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous échouez, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -344,50 +356,50 @@ Réponse : **l'Écriture** · aussi acceptées : les Écritures, la Parole, la P
 
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
-**1. Expliquez le principe selon lequel « la salle prêche ». Comment la disposition d'un sanctuaire enseigne-t-elle la théologie ?**  
+**1. Expliquez le principe « la salle prêche » : de quelle manière un sanctuaire communique-t-il ce qu'une Église croit ?**  
 Mots-clés : salle · prêch / prech / prédic / predic · dispos / aménag / amenag / agenc · théolog / theolog · centr · symbol · enseign · bâtiment / batiment / édifice / edifice / lieu de culte  
 Modèle : Le principe selon lequel « la salle prêche » signifie que la disposition d'un sanctuaire enseigne la théologie avant même qu'un seul mot soit prononcé : la chaire, la table, le baptistère, les fenêtres et les symboles enseignent tous ce que le peuple croit. L'objet qui se trouve au centre d'un lieu de culte, quel qu'il soit, déclare silencieusement où cette tradition croit que se trouvent le salut et la présence de Dieu, et il façonne les adorateurs semaine après semaine, qu'ils s'en aperçoivent ou non.
 
 > EN: Explain the principle that 'the room preaches.' How does the arrangement of a sanctuary teach theology?
 
-**2. Expliquez le contraste « deux salles, deux évangiles » entre l'autel catholique et la chaire protestante.**  
+**2. Expliquez le contraste « deux salles, deux évangiles » entre le sanctuaire catholique et le sanctuaire protestant : quel meuble domine chaque salle, et que dit-il ?**  
 Mots-clés : autel · chaire · centr · euchar · parole · sacrement · protestant · catholi  
 Modèle : Dans une église catholique, l'autel se dresse à l'avant, au centre, avec l'eucharistie comme acte central et la chaire placée sur le côté, et la salle dit : le salut vient par le sacrement ; venez le recevoir. Dans un sanctuaire protestant, la chaire est centrée et surélevée, avec la table de communion en dessous, et la salle dit : le salut vient par la Parole prêchée ; venez l'entendre. Aucune de ces dispositions n'est le fruit du hasard : le mobilier lui-même prêche où chaque tradition croit que le salut se trouve.
 
 > EN: Explain the 'two rooms, two gospels' contrast between the Catholic altar and the Protestant pulpit.
 
-**3. Comment les vitraux et l'architecture de la cathédrale cultivent-ils le sentiment de crainte révérencielle dans le culte catholique ?**  
+**3. Comment les vitraux et l'architecture des grandes églises catholiques cultivent-ils le sentiment de crainte révérencielle ?**  
 Mots-clés : vitra · verre / coloré / colore · crainte révérencielle / crainte reverencielle / révérence / reverence / émerveill / emerveill · cathédrale / cathedrale · voûte / voute · orgue · ésaïe / esaie · très élevé / tres eleve / trône / trone  
 Modèle : Les vitraux aux verres colorés, les hautes voûtes et l'orgue à tuyaux élèvent tous le regard et submergent les sens, produisant exactement le sentiment qu'Ésaïe décrit lorsqu'il vit le Seigneur assis sur un trône très élevé. La grandeur physique de la cathédrale est délibérément conçue pour que les adorateurs se sentent petits devant quelque chose d'immense et de saint, cultivant la crainte révérencielle par l'architecture et pas seulement par les paroles.
 
 > EN: How does stained glass and cathedral architecture cultivate the feeling of awe in Catholic worship?
 
-**4. Chaque tradition cultive un sentiment vrai. Comparez la crainte révérencielle catholique, le mystère orthodoxe et l'endurance copte.**  
-Mots-clés : crainte révérencielle / crainte reverencielle / révérence / reverence / émerveill / emerveill · mystère / mystere · endurance / persévér / persever · orthodoxe · copte · catholi · iconostase · jeûn / jours de jeune  
+**4. Chaque tradition cultive un sentiment vrai. Quel sentiment cultivent respectivement le culte catholique, le culte orthodoxe et le culte copte, et par quels moyens ?**  
+Mots-clés : crainte révérencielle / crainte reverencielle / révérence / reverence / émerveill / emerveill · mystère / mystere · endurance / persévér / persever · encens · seize siècles / seize siecles / ancien / antiq · architect / grandeur · iconostase · jeûn / jeun  
 Modèle : Le culte catholique cultive la crainte révérencielle par une architecture élancée et une grandeur qui submergent les sens devant l'immensité de Dieu. Le culte orthodoxe cultive le mystère, avec l'iconostase qui masque l'autel, l'encens et la longue Divine Liturgie chantée, qui créent le sentiment du ciel descendu sur la terre. Le culte copte orthodoxe cultive l'endurance et la révérence, avec des liturgies vieilles de seize siècles et plus de deux cents jours de jeûne par an, enseignant aux adorateurs une dévotion soutenue et disciplinée.
 
 > EN: Each tradition cultivates a true feeling. Contrast Catholic awe, Orthodox mystery, and Coptic endurance.
 
 **5. Comparez le caractère du culte réformé, luthérien et anglican.**  
-Mots-clés : réformé / reforme · luthér / luther · anglican · intelligence / intellect / raison · parole · sacrement · beauté / beaute · ordre  
+Mots-clés : sermon · les deux / ensemble / équilibr / equilibr · prière commune / priere commune · intelligence / intellect / raison · parole · sacrement · beauté / beaute · ordre  
 Modèle : La tradition réformée cultive l'intelligence, avec la chaire au centre et le sermon soigné et raisonné, honorant la moitié « en vérité » de Jean 4:24. La tradition luthérienne équilibre la Parole et le sacrement, tenant les deux ensemble au lieu de choisir l'un plutôt que l'autre. La tradition anglicane cultive la beauté et l'ordre par les formes structurées du Livre de la prière commune ; chaque tradition met en valeur une valeur authentiquement biblique.
 
 > EN: Contrast the Reformed, Lutheran, and Anglican worship characters.
 
-**6. Comparez la joie charismatique et pentecôtiste avec l'attention évangélique centrée sur la Parole prêchée.**  
-Mots-clés : charismat · pentec · joie / allégresse / allegresse · évangél / evangel · parole · psaume · mains lev / lèvent les mains / levent les mains · prêch / prech / prédic / predic  
+**6. Comparez le sentiment que cultive le culte charismatique et pentecôtiste avec celui que cultive le culte évangélique.**  
+Mots-clés : spontan · david / danse / dansa · joie / allégresse / allegresse · évangél / evangel · parole · psaume · mains lev / lèvent les mains / levent les mains · prêch / prech / prédic / predic  
 Modèle : Le culte charismatique et pentecôtiste cultive la joie, avec les mains levées et la louange spontanée, héritier du Psaume 100 et de David dansant devant l'arche. Les évangéliques cultivent l'attention centrée sur la Parole prêchée, faisant de l'Écriture proclamée et appliquée le centre du culte. Ces deux sentiments sont bibliques quelque part, et l'adorateur mûr apprend des deux au lieu de prendre l'un ou l'autre, à lui seul, pour la totalité du culte.
 
 > EN: Contrast charismatic and Pentecostal joy with evangelical focus on the preached Word.
 
-**7. Décrivez le culte de l'Église afro-américaine comme une participation de l'assemblée au plus haut niveau, y compris l'appel-réponse et la cadence chantante.**  
+**7. Décrivez le culte de l'Église afro-américaine : en quoi l'assemblée y prend-elle part plus que partout ailleurs, et comment sonne la prédication ?**  
 Mots-clés : afro / noir · interpell / appel · répon / repon · cadence · particip · prédicateur / predicateur · joie / allégresse / allegresse · fratern  
 Modèle : Le culte de l'Église afro-américaine présente une participation de l'assemblée au plus haut niveau que l'on trouve où que ce soit : l'assemblée interpelle le prédicateur par des « Amen ! », des « Prêche ! » et des « Dis-le ! », de sorte que le prédicateur et le peuple sont en dialogue vivant plutôt que dans une communication à sens unique. La prédication a souvent une cadence chantante, la voix montant et descendant comme une musique, et toute cette tradition porte une joie et une fraternité forgées dans la souffrance et pourtant débordantes d'allégresse.
 
 > EN: Describe Black church worship as congregational participation at the highest level, including call-and-response and sing-song cadence.
 
-**8. Wayne a servi comme aumônier dans les prisons de la Louisiane. Résumez ce qu'il a lui-même observé du culte afro-américain dans ce cadre.**  
-Mots-clés : prison · louisiane · aumônier / aumonier · de toutes leurs forces / toute leur force / de toute leur force · joie / allégresse / allegresse · brisé / brise · culte / adora · fratern  
+**8. Wayne a servi comme aumônier dans les prisons de la Louisiane. Résumez ce qu'il a lui-même observé, dans ce cadre, chez les croyants afro-américains.**  
+Mots-clés : prison · perdu · aumônier / aumonier · de toutes leurs forces / toute leur force / de toute leur force · joie / allégresse / allegresse · brisé / brise · culte / adora · fratern  
 Modèle : Wayne a servi comme aumônier, directeur adjoint et sous-directeur dans le système pénitentiaire de la Louisiane, assistant là-bas aux cultes afro-américains semaine après semaine, année après année. Il a vu des hommes qui avaient perdu tout ce que le monde tient pour précieux adorer de toutes leurs forces, chanter, prier et répondre au prédicateur, et il a trouvé dans ces chapelles une joie et une fraternité entre hommes brisés qui, dit-il, lui ont appris davantage sur le culte que bien des beaux sanctuaires.
 
 > EN: Wayne served as Chaplain in Louisiana prisons. Summarize his firsthand observation of Black worship in that setting.
@@ -398,7 +410,7 @@ Modèle : Les quatre symboles principaux d'une Église qui pratique le baptême 
 
 > EN: List the four main symbols of a believer's-baptism church and explain what each placement teaches.
 
-**10. Pourquoi un pasteur doit-il savoir ce que dit sa salle, et comment cela doit-il orienter sa façon d'aménager le lieu de culte ?**  
+**10. Pourquoi un pasteur doit-il comprendre le message silencieux de son lieu de culte, et quelles conséquences cela a-t-il pour l'emplacement du mobilier ?**  
 Mots-clés : pasteur · salle · ce que dit / ce que la salle / ce que sa salle · dispos / aménag / amenag / agenc · façonn / faconn / former / formen · peuple / fidèles / fideles · délibér / deliber / intention · prêch / prech / prédic / predic  
 Modèle : Un pasteur doit savoir ce que dit sa salle, car le mobilier enseigne le peuple chaque semaine, même en silence : si la table est placée sous la chaire, le peuple apprend à estimer la Parole au-dessus de tout ; si la table est placée devant la chaire comme un autel, il apprend à estimer le sacrement. Le pasteur doit donc aménager le lieu de culte de manière délibérée, car la salle enseigne la théologie, qu'il parle ou non.
 

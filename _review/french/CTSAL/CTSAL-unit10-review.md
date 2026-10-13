@@ -13,6 +13,12 @@ Counts: 33 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 3. Minor LSG wording differences that now drive fill-in answers: Psaumes 78:72 « un cœur intègre » (answer « intègre »), Proverbes 16:18 « ruine » (answer « ruine »), Matthieu 25:21 « C'est bien » for 'Well done' (also used as section VI title). Please confirm.
 4. 'Gold, glory, and girls' is rendered « l'or, la gloire et les femmes » (like the Spanish edition); the alliteration is lost. Acceptable?
 
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+- SA5: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -217,7 +223,7 @@ Examen final de l'Unité 10
 > EN: Unit 10 Final Exam
 
 **b033**  
-Parcours Certificat : les 20 questions à choix multiple. Associé : les questions à choix multiple et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiple, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiple. Parcours Associé en divinité : les questions à choix multiple et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiple, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -443,7 +449,7 @@ Réponse : **fidèle**
 
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
-**1. Expliquez ce que signifie « l'intégrité » dans cette unité et pourquoi le cœur compte plus que la compétence.**  
+**1. Expliquez ce que signifie « l'intégrité » dans cette unité et pourquoi le cœur compte plus que le savoir-faire.**  
 Mots-clés : intégr / integr · une seule / un seul · vivre / une vie / vie publique / vie privée / vie privee / seule vie · cœur / coeur · compéten / competen / habileté / habilete / habile · divis · secret · entier / entière / entiere  
 Modèle : L'intégrité signifie l'intégration — être une seule personne entière, le même homme en public et en secret, et non une vie divisée entre un saint en public et un étranger en privé. L'unité la fonde sur Psaumes 78:72, où David dirigea avec un cœur intègre avant de conduire avec des mains intelligentes. Le cœur compte plus que la compétence, parce qu'une main habile attachée à un cœur divisé ne fait, au bout du compte, que plus de dégâts ; ce qu'un dirigeant est en secret, c'est ce qu'il est vraiment, si bien qu'une seule vie vécue tout entière est le fondement sur lequel repose la compétence.
 
@@ -467,7 +473,7 @@ Modèle : Jésus a dit que celui qui demeure en lui porte beaucoup de fruit, car
 
 > EN: Using John 15:5, explain why the inner life must stay larger than the public ministry.
 
-**5. Que signifie le fait que la vie chrétienne soit une course courue avec persévérance, et quel est le vrai danger ?**  
+**5. Que signifie le fait que la vie chrétienne soit une course courue avec persévérance, et quel en est le vrai péril ?**  
 Mots-clés : course · persévér / persever / endurance · finir / finissent / arrivée / arrivee · dériv / deriv · danger · milieu · fidèle / fidele / la foi · courir / courent / courons / coureur  
 Modèle : Hébreux 12:1 présente la vie de foi comme une course que l'on court avec persévérance, et ce n'est pas un sprint, mais une longue et éprouvante course de fond. Le vrai danger n'est pas un mauvais départ, mais un lent abandon au milieu des kilomètres épuisants — dériver, s'épuiser, devenir cynique ou ralentir jusqu'à l'arrêt. Beaucoup commencent avec feu, mais l'honneur revient à ceux qui courent encore et restent sensibles envers Dieu à la fin. Bien finir est le fruit de mille choix quotidiens pour garder le cœur et continuer à courir ; le dirigeant doit donc tourner résolument son visage vers la persévérance jusqu'à la ligne d'arrivée.
 
@@ -491,8 +497,8 @@ Modèle : Cette unité de synthèse dit que la dernière chose est l'essentiel :
 
 > EN: How does this capstone unit tie the leader's heart back to the rest of the course?
 
-**9. Pourquoi un dirigeant doit-il se garder de penser qu'il est l'exception qui ne peut pas tomber ?**  
-Mots-clés : exception · invulnérab / invulnerab / immunis / à l'abri · debout · prenne garde / prendre garde / prend garde · tomb / chute · ses dons / doué / doue / talents · garde fou / garde-fou / veill / garder / surveill · humble / humilité / humilite  
+**9. Pourquoi un dirigeant doit-il se méfier de l'idée qu'il est l'exception qui ne peut pas tomber ?**  
+Mots-clés : exception · invulnérab / invulnerab / immunis / à l'abri / a l'abri · debout · prenne garde / prendre garde / prend garde · tomb / chute · ses dons / doué / doue / talents · garde fou / garde-fou / veill / garder / surveill · humble / humilité / humilite  
 Modèle : Le dirigeant qui croit que ses dons ou son appel le rendent invulnérable est déjà à mi-chemin de la chute, car celui qui croit être debout doit prendre garde de tomber. Se croire l'exception, c'est relâcher la garde sur le cœur précisément au moment où elle est le plus nécessaire, puisque le sentiment d'invulnérabilité est lui-même le danger. Le dirigeant reste donc humble et met en place de vrais garde-fous pendant qu'il est encore fort — rendre des comptes, être honnête au sujet de ses points faibles, et garder une sainte crainte qui ne se croit jamais tout à fait hors d'atteinte de la chute — en traitant son propre cœur comme quelque chose qu'il faut surveiller, et non comme quelque chose à quoi l'on peut se fier.
 
 > EN: Why must a leader guard against thinking he is the exception who cannot fall?

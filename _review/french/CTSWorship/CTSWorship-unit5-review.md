@@ -14,18 +14,29 @@ Counts: 21 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 4. SA 10's English keywords include 'rostrum', which the lesson never mentions; French keyword uses 'estrade/chaire/pupitre'. Consider replacing it in both languages.
 5. The source MC items have no 'why' explanations; French 'why' left empty.
 
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+- SA2: English prompt passes its own keywords
+- SA4: English prompt passes its own keywords
+- SA5: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
 
 - **Ésaïe 6:1** — « L'année de la mort du roi Ozias, je vis le Seigneur assis sur un trône très élevé »  
-  _Allusion, not a quotation (b018, Fill 1, SA 2). English 'high and lifted up' (KJV/NKJV) rendered with LSG wording 'assis sur un trône très élevé', no quotation marks. Checked on biblestudytools.com (LSG)._
+  _Allusion, not a quotation (b018, Fill 1, SA 2). English 'high and lifted up' (KJV/NKJV) rendered with LSG wording 'assis sur un trône très élevé', no quotation marks. Checked against the offline LSG text._
 - **Ésaïe 6:5** — « Alors je dis: Malheur à moi! je suis perdu, car je suis un homme dont les lèvres sont impures »  
-  _Alluded to only (Isaiah's confession, b019, SA 4); not quoted. Checked on biblestudytools.com (LSG)._
+  _Alluded to only (Isaiah's confession, b019, SA 4); not quoted. Checked against the offline LSG text._
 - **1 Jean 1:9** — « Si nous confessons nos péchés, il est fidèle et juste pour nous les pardonner, et pour nous purifier de toute iniquité. »  
-  _Cited only (b019, SA 4); not quoted. 'Cleansing' rendered 'purifiés' to match LSG 'purifier'. Checked on biblestudytools.com (LSG)._
-- **Psaume 51:6 (LSG numbering; 51:4 in English Bibles)** — « J'ai péché contre toi seul »  
-  _Implied by 'David understood that any sin is finally a sin against God' (b019, SA 4); not quoted or cited by reference. Not checked online (fetch failed); note LSG verse numbering is one higher than English._
+  _Cited only (b019, SA 4); not quoted. 'Cleansing' rendered 'purifiés' to match LSG 'purifier'. Checked against the offline LSG text._
+- **Psaume 51:4** — « J'ai péché contre toi seul, Et j'ai fait ce qui est mal à tes yeux »  
+  _Implied by 'David understood that any sin is finally a sin against God' (b019, SA 4); not quoted or cited by reference. Checked against the offline LSG text, which follows the English verse numbering (convention 11)._
 
 ## 3. Terms for the reviewer to confirm
 
@@ -120,7 +131,7 @@ Examen final de l'Unité 5
 > EN: Unit 5 Final Exam
 
 **b027**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les questions à choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les questions à choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -341,13 +352,13 @@ Réponse : **le point culminant** · aussi acceptées : apogée, sommet, climax,
 
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
-**1. Le culte se planifie autour de cinq ambiances ou motifs. Expliquez ce que cela signifie pour la structure d'un culte.**  
-Mots-clés : ambianc · motif · cinq · planifi · structur · culte · autour · construi / progress  
+**1. La leçon enseigne qu'il faut bâtir chaque rassemblement d'adoration en suivant cinq « ambiances ». Expliquez ce que cela implique concrètement.**  
+Mots-clés : ambianc · motif · cinq · planifi · structur · louange / confession / illumination / dédicace / dedicace · autour · construi / progress  
 Modèle : Planifier un culte autour de cinq ambiances ou motifs signifie que celui qui dirige le culte décide délibérément comment et où utiliser chaque ambiance — la reconnaissance, la louange, la confession, l'illumination et la dédicace — afin que le culte se construise et avance, au lieu d'être un amas désordonné de chants, de prières et d'annonces rassemblés à la hâte. Un culte ainsi structuré possède unité et progression, et fait vivre à l'adorateur un parcours voulu au lieu d'errer sans but.
 
 > EN: Worship is planned around five moods or motifs. Explain what this means for structuring a service.
 
-**2. Expliquez la première ambiance, la reconnaissance (adoration), à l'aide d'Ésaïe 6. Comment se réalise-t-elle dans un culte ?**  
+**2. Expliquez la première ambiance, la reconnaissance, à l'aide d'Ésaïe 6. Comment se réalise-t-elle dans un culte ?**  
 Mots-clés : reconnai · adorat · vision · ésaïe / esaie / esaïe / ésaie · appel · invocat · dieu · silence  
 Modèle : La reconnaissance, parfois appelée adoration ou vision, est avant tout la reconnaissance que Dieu nous accorde — comme l'illustre Ésaïe 6, où le prophète voit le Seigneur assis sur un trône très élevé. Dans un culte, elle se réalise par le silence et la méditation, par un appel à l'adoration et par une invocation ; elle constitue le véritable point de départ, où le culte s'ouvre dans la crainte respectueuse devant le Dieu saint.
 
@@ -359,13 +370,13 @@ Modèle : La louange ou l'action de grâces s'exprime par les cantiques, les pri
 
 > EN: Explain the second mood, praise or thanksgiving, and how it is expressed in the service.
 
-**4. Expliquez la troisième ambiance, la confession, à l'aide d'Ésaïe et de David. Pourquoi la confession doit-elle être précise ?**  
+**4. Expliquez la troisième ambiance, la confession, à l'aide des deux exemples bibliques donnés dans la leçon (un prophète et un roi). Pourquoi la confession ne doit-elle pas rester générale ?**  
 Mots-clés : confess · péché / peche / pécheur / pecheur · purifi · ésaïe / esaie / esaïe / ésaie · précis / precis / spécifi / specifi · voyons / regard · avouer / avouons / reconnai · david  
 Modèle : Dans la confession, nous nous voyons comme Dieu nous voit et nous sommes d'accord avec lui au sujet de notre péché, comme l'enseigne 1 Jean 1:9, en aspirant à être purifiés. Ésaïe n'a confessé son péché qu'après avoir vu la sainteté de Dieu, ce qui montre que la reconnaissance conduit naturellement à la confession. La confession doit être précise plutôt que générale, parce que David avait compris que tout péché, si petit qu'il paraisse, est en fin de compte un péché contre Dieu lui-même ; cela exige une repentance honnête, qui nomme le péché, plutôt qu'un aveu vague.
 
 > EN: Explain the third mood, confession, using Isaiah and David. Why should confession be specific?
 
-**5. Expliquez la quatrième ambiance, l'illumination ou proclamation. En quoi la prédication diffère-t-elle de l'enseignement ?**  
+**5. Expliquez la quatrième ambiance, l'illumination ou proclamation. En quoi le sermon diffère-t-il de l'enseignement ?**  
 Mots-clés : illumin · proclam · prédica / predica / prêch / prech · écritur / ecritur · touche / ébranl / ebranl / mouvement · intelligence / esprit · cœur / coeur · volonté / volonte  
 Modèle : L'illumination ou proclamation est le moment où Dieu nous touche ; elle se réalise avant tout par la lecture de l'Écriture et par la prédication, bien que le théâtre, le message pour les enfants et le témoignage puissent aussi y contribuer. La prédication diffère de l'enseignement parce que l'enseignement touche l'intelligence, alors que la prédication touche l'intelligence, le cœur et la volonté : l'illumination a pour but de mettre en mouvement la personne tout entière, et non seulement de l'informer.
 
@@ -377,25 +388,25 @@ Modèle : La dédicace ou consécration est le moment où nous rendons à Dieu, 
 
 > EN: Explain the fifth mood, dedication or consecration, and the two places it normally occurs.
 
-**7. Expliquez les deux extrêmes dans la planification d'un culte et pourquoi l'équilibre est nécessaire.**  
+**7. Quels sont les deux excès à éviter quand on prépare un culte, et pourquoi faut-il tenir le juste milieu ?**  
 Mots-clés : extrême / extreme · formalis · spontan · rigid · planifi · dignit · équilibr / equilibr · structur  
 Modèle : Les deux extrêmes à éviter sont le formalisme rigide, une structure pesante qui éteint l'Esprit, et la pure spontanéité sans aucun ordre, qui laisse les gens sans savoir par où aller. L'équilibre est nécessaire parce que le culte exige à la fois de la dignité et de la planification : trop de structure tue la vie, et trop peu de structure crée la confusion ; la sagesse consiste donc à tenir les deux ensemble.
 
 > EN: Explain the two extremes in planning a worship service and why balance is needed.
 
-**8. Donnez les conseils pour planifier le culte, notamment impliquer les fidèles et apporter de la variété.**  
+**8. Quels conseils pratiques la leçon donne-t-elle pour préparer le culte ? Incluez la place de l'assemblée et le besoin de renouvellement.**  
 Mots-clés : conseil · impliqu / associ · peuple / fidèles / fideles / gens · saison / calendrier / temps forts · variét / variet · prêts / prêtes / prets / pretes / préparé / prepare · particip · familier / habitu  
 Modèle : Les conseils pour planifier le culte sont les suivants : impliquez vos fidèles dans la musique, le message et la planification ; tirez parti des temps forts de l'année sans devenir esclave du calendrier ; apportez de la variété, mais changez progressivement, car les gens ont besoin de ce qui leur est familier ; et assurez-vous que tous les locaux et toutes les personnes sont prêts avant que le culte ne commence.
 
 > EN: Give the counsels for planning worship, including involving the people and providing variety.
 
-**9. Expliquez les cinq principes de la planification : l'unité, l'ordre, la proportion, le mouvement et le point culminant.**  
+**9. Nommez et expliquez les cinq principes qui guident la préparation d'un culte (le premier est l'unité).**  
 Mots-clés : unité / unite · ordre · proport · mouvement · culmin / apogée / apogee / climax · princip · construi / progress / avance · accord / harmoni  
 Modèle : L'unité signifie que tout le culte forme un seul ensemble et que chaque élément s'accorde avec les autres ; l'ordre signifie une véritable structure, réalisée grâce à un programme du culte ; la proportion signifie donner à chaque partie la durée qui lui convient ; le mouvement signifie que le culte avance et progresse vers un but ; et le point culminant signifie que le culte atteint un sommet, idéalement l'invitation. Ensemble, ces cinq principes empêchent un culte de paraître décousu ou sans but.
 
 > EN: Explain the five principles of planning: unity, order, proportion, movement, and climax.
 
-**10. Comment celui qui dirige le culte doit-il se préparer et se comporter lorsqu'il conduit le culte ?**  
+**10. Comment celui qui dirige le culte doit-il s'y apprêter, et quelle attitude doit-il avoir en le menant ?**  
 Mots-clés : dirig / conduc / conduit · prépar / prepar · spirituel · habill / tenue / vêtu / vetu / vêtement / vetement · comport / conduire · estrade / chaire / pupitre · enthousias · adore / adorat / culte  
 Modèle : Celui qui dirige le culte doit se préparer spirituellement et émotionnellement, prier à l'avance, et venir avec enthousiasme et joie afin que l'assemblée gagne cet esprit. Il doit s'habiller de façon convenable et laisser l'assemblée le voir adorer sincèrement au lieu de simplement gérer un programme, car les gens ne suivront pas un conducteur qui se contente d'accomplir des gestes sans être réellement engagé avec Dieu.
 

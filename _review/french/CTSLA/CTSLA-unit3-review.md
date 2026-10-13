@@ -14,6 +14,14 @@ Counts: 169 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 4. Sounds adapted for French readers: 'sh' is written « ch » (Shin), the Hebrew 'u' is written « ou » (Qubuts, Shureq), and the examples 'father', 'they', 'bed', 'go', 'boots' became « papa », « été », « mère », « dos », « tsé-tsé ». 'English and Spanish' speakers became « le français et l'anglais » (b031, MC5, MC18), following Unit 1. Please confirm.
 5. John 1:1: LSG « la Parole » again (as in Unit 1). Also, 'the same three words' ('In the beginning') is two words in French, so b114 and MC20 say « les mêmes mots ». OK?
 
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+- SA2: English prompt passes its own keywords
+- SA6: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -26,7 +34,7 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
   _Verified on levangile.com (LSG). First half quoted in b030. 'upholds' = « soutient », which matches the lesson's gloss of samakh (« s'appuyer sur, soutenir »)._
 - **⚠** **Matthieu 5:18** — « Car, je vous le dis en vérité, tant que le ciel et la terre ne passeront point, il ne disparaîtra pas de la loi un seul iota ou un seul trait de lettre, jusqu'à ce que tout soit arrivé. »  
   _Verified on biblestudytools (LSG). Alluded to in b045 and quoted in the SA8 model. LSG 'jot … tittle' = « iota … trait de lettre », so b045 says « trait de lettre » for 'tittle'. 'till all is fulfilled' = LSG « jusqu'à ce que tout soit arrivé »; the SA8 keyword slots for 'fulfilled'/'cumplir' accept « arrivé » and « accompli »._
-- **Ézéchiel 9:4** — « L'Éternel lui dit: Passe au milieu de la ville, au milieu de Jérusalem, et fais une marque sur le front des hommes qui soupirent et qui gémissent ... »  
+- **Ézéchiel 9:4** — « L'Éternel lui dit: Passe au milieu de la ville, au milieu de Jérusalem, et fais une marque sur le front des hommes qui soupirent et qui gémissent à cause de toutes les abominations qui s'y commettent. »  
   _Opening checked on levangile.com (LSG); the rest of the verse could not be shown in full by the tool. Not quoted in the lesson, only paraphrased (b047, MC9 why, Fill 6); the paraphrase uses LSG vocabulary (« passer au milieu de Jérusalem », « une marque sur le front », « gémissent »)._
 - **⚠** **Jean 1:1, 3** — « Au commencement était la Parole, et la Parole était avec Dieu, et la Parole était Dieu. … Toutes choses ont été faites par elle, et rien de ce qui a été fait n'a été fait sans elle. »  
   _Verified on biblestudytools (LSG). Quoted in b114 and SA10 model; paraphrased in MC20 option and why. As in Unit 1, LSG says « la Parole » (feminine, « par elle »), not « le Verbe » (Spanish « el Verbo »); 'through Him' becomes « par elle » inside the quotation. Also 'the same three words as Genesis' ('In the beginning') is only two words in French (« Au commencement »), so b114 and MC20 why say « les mêmes mots »._
@@ -639,7 +647,7 @@ Examen de l'Unité 3
 > EN: Unit 3 Examination
 
 **b120**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -654,12 +662,12 @@ Certificat de ministère — seules les 20 questions à choix multiples comptent
 > EN: Certificate of Ministry — only the 20 multiple-choice count (need 18/20).
 
 **b123**  
-Master of Theology — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
+Th.M. — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
 
 > EN: Master of Theology — 20 multiple-choice (18/20) and 10 short-answer (9/10).
 
 **b124**  
-Master of Divinity — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
+M.Div. — 20 questions à choix multiples (18/20) et 10 questions à réponse courte (9/10).
 
 > EN: Master of Divinity — 20 multiple-choice (18/20) and 10 short-answer (9/10).
 
@@ -1031,7 +1039,7 @@ _Pourquoi :_ Bara (H1254) est le verbe « créer ». Dans l'Ancien Testament, so
 > EN: In Genesis 1:1, the verb "created" — used in Hebrew almost only of God's action — is which word? — ✓ Bara
 
 **17. Quel est le nom de Dieu en Genèse 1:1 — une forme plurielle qui prend un verbe au singulier ?**  
-· A. Yahvé  
+· A. Yahvé (l'Éternel)  
 · B. Adonaï  
 · C. El Shaddaï  
 ✓ D. Elohim  
@@ -1111,19 +1119,19 @@ Réponse : **bara**
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
 **1. Racontez l'histoire de la découverte des manuscrits de la mer Morte et expliquez ce qu'elle montre au sujet du texte hébreu que nous apprenons à lire.**  
-Mots-clés : morte · la mer / mer morte · rouleau · qumrân / qumran · berger · grotte / caverne · ésaïe / esaie / esaïe / ésaie / isaïe / isaie · massor / masor · mille · préserv / preserv / conserv · lettre · lettres · identique · morte · la mer / mer morte · rouleau · qumrân / qumran · berger · grotte / caverne · ésaïe / esaie / esaïe / ésaie / isaïe / isaie · ésaïe / esaie / esaïe / ésaie / isaïe / isaie · massor / masor · massor / masor · mille · préserv / preserv / conserv · lettre · lettres · identique · identique  
+Mots-clés : morte · 1947 · rouleau · qumrân / qumran · berger · grotte / caverne · ésaïe / esaie / esaïe / ésaie / isaïe / isaie · massor / masor · mille · préserv / preserv / conserv · lettre · lettres · identique · bédouin / bedouin · jarre / poterie · rouleau · qumrân / qumran · berger · grotte / caverne · ésaïe / esaie / esaïe / ésaie / isaïe / isaie · ésaïe / esaie / esaïe / ésaie / isaïe / isaie · massor / masor · massor / masor · mille · préserv / preserv / conserv · lettre · lettres · identique · identique  
 Modèle : En 1947, un jeune berger bédouin, Muhammed edh-Dhib, cherchait une chèvre dans les falaises au-dessus de la mer Morte, près de Qumrân. Il lança une pierre dans une grotte et entendit une poterie se briser : à l'intérieur, des jarres contenaient d'anciens rouleaux de cuir. Dans onze grottes, on trouva environ neuf cents rouleaux, dont le Grand Rouleau d'Ésaïe, presque complet, écrit plus de cent ans avant Christ. Il était plus ancien de mille ans que les copies massorétiques (vers l'an 1000 apr. J.-C.). Comparés lettre par lettre, les deux textes étaient pour l'essentiel identiques : seules quelques orthographes différaient. Cela montre que le texte hébreu a été fidèlement préservé ; Dieu a veillé sur sa parole, et les lettres que nous apprenons sont celles que les scribes ont gardées.
 
 > EN: Tell the story of the discovery of the Dead Sea Scrolls and explain what it shows about the Hebrew text we are learning to read.
 
-**2. Nommez les cinq lettres hébraïques qui prennent une forme finale particulière, et expliquez ce qu'est une forme finale (sofit).**  
-Mots-clés : cinq · final · sofit / sophit · kaf · mem · nun · nun pe / nun pé / pe et ts / pé et ts / lettre pe / lettre pé · tsadé / tsade / tsadi · fin du mot / fin d un mot / à la fin / a la fin · un mot / du mot / le mot / mots · forme · queue · cinq · final · sofit / sophit · kaf · mem · nun · nun pe / nun pé / pe et ts / pé et ts / lettre pe / lettre pé · tsadé / tsade / tsadi · fin du mot / fin d un mot / à la fin / a la fin · un mot / du mot / le mot / mots · forme · queue  
+**2. Quelles cinq lettres hébraïques s'écrivent autrement en dernière position, et que veut dire le terme « sofit » ?**  
+Mots-clés : cinq · final · sofit / sophit · kaf · mem · nun · nun pe / nun pé / pe et ts / pé et ts / lettre pe / lettre pé · tsadé / tsade / tsadi · fin du mot / fin d un mot / à la fin / a la fin · un mot / du mot / le mot / mots · forme · queue · kamnapets · ligne · majuscule / minuscule · kaf · mem · nun · nun pe / nun pé / pe et ts / pé et ts / lettre pe / lettre pé · tsadé / tsade / tsadi · fin du mot / fin d un mot / à la fin / a la fin · un mot / du mot / le mot / mots · le son / même son / meme son · queue  
 Modèle : Les cinq lettres sont Kaf, Mem, Nun, Pé et Tsadé (moyen mnémotechnique : « kamnapets »). Une forme finale, appelée en hébreu sofit (« finale »), est la forme particulière que prend l'une de ces lettres lorsqu'elle tombe à la fin d'un mot. En général, la queue, qui s'enroule ou repose sur la ligne au milieu du mot, descend tout droit sous la ligne. La lettre et le son restent les mêmes ; seule la forme change, un peu comme nos majuscules et nos minuscules. Exemple : ha'arets, « la terre », en Genèse 1:1, se termine par un Tsadé final (ץ).
 
 > EN: Name the five Hebrew letters that take a special final form, and explain what a final (sofit) form is.
 
 **3. Expliquez pourquoi l'hébreu n'a pas de lettres-voyelles et comment les lecteurs anciens savaient quelles voyelles ajouter.**  
-Mots-clés : consonnes · consonne · voyelles · voyelle · aucune / aucun / pas de · contexte · racine · tête / tete / par cœur / par coeur / mémoire / memoire · vingt · massor / masor · points · consonnes · consonne · voyelles · voyelle · aucune / aucun / pas de · contexte · racine · racine · tête / tete / par cœur / par coeur / mémoire / memoire · massor / masor · points  
+Mots-clés : consonnes · consonne · parlée / parlee / parlait / langue vivante · voyelle · aucune / aucun / pas de · contexte · racine · tête / tete / par cœur / par coeur / mémoire / memoire · vingt · massor / masor · points · consonnes · consonne · voix haute · prononc · sens · contexte · racine · racine · tête / tete / par cœur / par coeur / mémoire / memoire · massor / masor · points  
 Modèle : L'alphabet hébreu ne compte aucune lettre-voyelle : ses vingt-deux lettres sont toutes des consonnes. Ce système d'écriture est né pour une langue vivante que chacun parlait ; la consonne portait l'essentiel, et la racine consonantique d'un mot (souvent trois consonnes) en donnait le sens de base. Le lecteur savait de tête quelles voyelles ajouter, parce qu'il connaissait la langue parlée, les mots et le contexte de la phrase, et parce que les textes sacrés étaient lus à voix haute et appris par cœur. Plus tard, quand l'hébreu ne fut plus parlé au quotidien, les Massorètes ajoutèrent des points-voyelles au-dessus et au-dessous des consonnes pour préserver la prononciation.
 
 > EN: Explain why Hebrew has no vowel letters and how ancient readers knew which vowels to supply.
@@ -1140,32 +1148,32 @@ Modèle : De droite à gauche : Bereshit, « au commencement » ; bara, « créa
 
 > EN: Read Genesis 1:1 in Hebrew: give the words in order from the beginning and what each one means.
 
-**6. Expliquez le sens du verbe hébreu « bara » et pourquoi les traducteurs lui réservent le mot « créer ».**  
-Mots-clés : bara · créa / crea / créé / cree / créer / creer · dieu · divin · réserv / reserv · seul · sujet · asah · faire / fait · néant / neant / rien · bara · créa / crea / créé / cree / créer / creer · créa / crea / créé / cree / créer / creer · dieu · divin · réserv / reserv · seul · sujet · asah · faire / fait · néant / neant / rien  
+**6. Quel est le sens du verbe hébreu « bara », et pourquoi les traducteurs lui attribuent-ils un mot français à part ?**  
+Mots-clés : bara · créa / crea / créé / cree / créer / creer · dieu · divin · réserv / reserv · seul · sujet · asah · faire / fait · néant / neant / rien · yatsar · banah · exist · dieu · divin · humain / homme · seul · sujet · asah · faire / fait · néant / neant / rien  
 Modèle : Bara (H1254) est le verbe traduit par « créa » en Genèse 1:1. Dans l'Ancien Testament, son sujet est presque toujours Dieu seul : c'est le verbe réservé à l'acte divin de faire exister ce qui n'existait pas, comme à partir de rien. D'autres verbes, comme asah (faire), yatsar (former) ou banah (bâtir), s'emploient aussi pour des humains qui fabriquent quelque chose à partir d'une matière existante. Les traducteurs réservent donc le mot « créer » à bara, parce que c'est le mot propre à Dieu.
 
 > EN: Explain the meaning of the Hebrew verb 'bara' and why translators reserve the word 'created' for it.
 
-**7. Que signifie « Elohim », et qu'y a-t-il de remarquable dans le fait que cette forme plurielle prenne un verbe au singulier ?**  
-Mots-clés : elohim · dieu · pluriel · singulier · verbe · majesté / majeste · plénitude / plenitude · un seul / unique · trinité / trinite · bara · elohim · dieu · pluriel · singulier · verbe · majesté / majeste · plénitude / plenitude · un seul / unique · trinité / trinite · bara  
+**7. Que signifie « Elohim », et qu'y a-t-il de remarquable dans le verbe qui l'accompagne en Genèse 1:1 ?**  
+Mots-clés : elohim · dieu · pluriel · singulier · verbe · majesté / majeste · plénitude / plenitude · un seul / unique · trinité / trinite · bara · plusieurs dieux / polythé / polythe · dieu · pluriel · singulier · nouveau testament · majesté / majeste · plénitude / plenitude · un seul / unique · trinité / trinite · bara  
 Modèle : Elohim (H430) est le mot pour « Dieu » en Genèse 1:1. Il est grammaticalement pluriel, mais il prend un verbe au singulier : bara, « il créa ». Dieu est donc un seul Dieu, unique, et non plusieurs dieux. Beaucoup voient dans cette grammaire une discrète allusion à la plénitude et à la majesté du Dieu unique, que le Nouveau Testament dévoilera dans la Trinité.
 
 > EN: What does 'Elohim' mean, and what is significant about its plural form taking a singular verb?
 
-**8. Pourquoi le coin arrondi de Resh est-il important (Resh par rapport à Dalet), et qu'a dit Jésus en Matthieu 5:18 au sujet du plus petit trait d'une lettre ?**  
-Mots-clés : resh · dalet · coin / angle · arrondi · carré / carre / anguleu · trait de lettre / tilde · iota · trait / plus petit · matthieu · arrivé / arrive / accompli · lettre · resh · dalet · coin / angle · arrondi · trait de lettre / tilde · iota · trait / plus petit · matthieu · arrivé / arrive / accompli · arrivé / arrive / accompli · lettre  
+**8. Quelle petite différence de forme distingue Resh de Dalet, pourquoi compte-t-elle, et qu'a dit Jésus en Matthieu 5:18 sur les moindres détails de la loi ?**  
+Mots-clés : resh · dalet · coin / angle · arrondi · carré / carre / anguleu · trait de lettre / tilde · iota · trait / plus petit · disparaîtr / disparaitr · arrivé / arrive / accompli · lettre · jumel · deux mots / mots différents / mots differents · coin / angle · arrondi · trait de lettre / tilde · iota · trait / plus petit · passeront · arrivé / arrive / accompli · arrivé / arrive / accompli · lettre  
 Modèle : Resh et Dalet sont presque jumelles : Resh a un coin supérieur arrondi, Dalet un coin carré et vif. Ce minuscule coin fait toute la différence entre les deux lettres, et donc entre deux mots différents. C'est exactement le genre de « trait de lettre » dont Jésus a parlé en Matthieu 5:18 : « tant que le ciel et la terre ne passeront point, il ne disparaîtra pas de la loi un seul iota ou un seul trait de lettre, jusqu'à ce que tout soit arrivé. » Même le plus petit trait de l'Écriture compte.
 
 > EN: Why does the rounded corner of Resh matter (Resh versus Dalet), and what did Jesus say in Matthew 5:18 about the smallest stroke of a letter?
 
-**9. Décrivez avec vos propres mots l'activité du cahier de l'Unité 3.**  
+**9. Expliquez avec vos propres mots ce que vous faites dans l'activité du cahier de l'Unité 3.**  
 Mots-clés : cahier · douze · lettres · final · voyelles · genèse / genese · copi · écri / ecri · hébreu / hebreu · verset · tableau · cahier · douze · lettres · final · voyelles · genèse / genese · genèse / genese · copi · écri / ecri · hébreu / hebreu · verset · verset · tableau  
 Modèle : Sur une nouvelle page de mon cahier, j'écris « Unité 3 : de Kaf à Tav ». J'écris chacune des douze nouvelles lettres trois fois, en disant son nom, son son et son image. Je dessine les cinq formes finales à côté des formes normales et j'écris « kamnapets ». Je fais un petit tableau des points-voyelles : le signe, son nom et son son. Enfin, je recopie lentement Genèse 1:1 en hébreu, de droite à gauche, avec la translittération et le sens, puis je relis le verset à voix haute.
 
 > EN: Describe the Notebook Activity for Unit 3 in your own words.
 
 **10. Maintenant que vous savez lire Genèse 1:1, reliez ce verset à Jean 1:1 et au thème centré sur Christ de tout ce cours.**  
-Mots-clés : jean · parole · logos · christ · création / creation · parl · commencement · héros / heros · histoire · lumière / lumiere · faites / fait · jean · parole · logos · christ · création / creation · création / creation · parl · parl · commencement · héros / heros · héros / heros · histoire · lumière / lumiere  
+Mots-clés : jean · parole · logos · christ · création / creation · parl · commencement · héros / heros · histoire · lumière / lumiere · faites / fait · toutes choses · parole · logos · sauv · création / creation · création / creation · parl · parl · commencement · héros / heros · héros / heros · histoire · lumière / lumiere  
 Modèle : Genèse 1:1 dit qu'au commencement Dieu créa les cieux et la terre, et Dieu a créé en parlant : « Dieu dit: Que la lumière soit! » Jean 1:1 commence délibérément par les mêmes mots, « Au commencement », et nomme cette parole créatrice : « Au commencement était la Parole, et la Parole était avec Dieu, et la Parole était Dieu… Toutes choses ont été faites par elle. » La Parole, le Logos, c'est Christ. Le Dieu qui a parlé dans la création est le même Seigneur Jésus par qui toutes choses ont été faites. Toute la Bible est un seul Livre, un seul Héros, une seule Histoire, et le Héros, c'est Jésus ; dès le premier verset, nous rencontrons le Créateur qui entrera dans sa création pour la sauver.
 
 > EN: Now that you can read Genesis 1:1, connect it to John 1:1 and the Christ-centered theme of this whole course.

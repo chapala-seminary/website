@@ -11,7 +11,15 @@ Counts: 61 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 1. Mark 2:10: the exam (mc5, mc6, sa4) says 'authority to forgive sins', but Louis Segond says « pouvoir » (power), as does the NKJV quotation in the lesson. The French uses « pouvoir » everywhere, and the sa4 keyword accepts « pouvoir » or « autorité ». OK?
 2. Title term: 'enacted sign / enacted parable' is translated « signe en action / parabole en action » (the Spanish edition has « señales representadas »). Do you prefer this, or another wording such as « parabole agie »?
 3. b013 says Jesus 'says four words: Lazarus, come out.' Louis Segond has three words (« Lazare, sors ! »), so the French says « trois mots ». OK?
-4. [check] Track name in b006 is not consistent across the French course: units 6, 7, 10 say « Parcours Certificat », units 3, 4, 5, 8, 11 say « Certificat de ministère », units 2 and 9 say « Parcours Certificat de ministère ». The 📚 Catalogue button also varies (« Catalogue » vs « Catalogue / Catálogo »). Pick one wording for all units?
+
+## Problems in the English source
+
+- SA2: English prompt passes its own keywords
+- SA3: English prompt passes its own keywords
+- SA4: English prompt passes its own keywords
+- SA6: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
 
 ## 2. Bible quotations (Louis Segond 1910)
 
@@ -52,7 +60,7 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
 
 - **enacted sign / enacted parable** → signe en action / parabole en action — Spanish edition uses « señales representadas ». « en action » is clearer to a Congolese reader than « représenté » or « mis en scène » (which suggests theatre or pretending). Alternative: « parabole agie ».
 - **graveclothes** → bandes funéraires — Follows LSG Jean 11:44 « liés de bandes »; « bandelettes » is also common.
-- **the four Ts (Tragedy, Trial, Tears, Triumph)** → tragédie, épreuve, larmes, triomphe — The English alliteration cannot be kept in French; the sa3 prompt mentions the English 'four T' name in passing.
+- **the four Ts (Tragedy, Trial, Tears, Triumph)** → tragédie, épreuve, larmes, triomphe — The English alliteration cannot be kept in French; the sa3 prompt says « quatre mouvements » without naming them.
 - **spectacle error / thrill** → erreur du spectacle / sensation forte — « sensation forte » for 'thrill'; « frisson » is an alternative.
 - **naturalistic error** → erreur naturaliste
 - **treadmill stress test** → épreuve d'effort sur tapis roulant — Standard medical French.
@@ -92,12 +100,12 @@ Parcours Certificat : vingt questions à choix multiples par unité. Réussite a
 > EN: Certificate of Ministry: Twenty multiple-choice questions per unit. Pass at 18 of 20 (90%).
 
 **b007**  
-Master of Divinity : les mêmes vingt questions à choix multiples, plus dix questions à réponse courte. Réussite avec 18 sur 20 aux choix multiples et 9 sur 10 aux réponses courtes, notés séparément.
+M.Div. : les mêmes vingt questions à choix multiples, plus dix questions à réponse courte. Réussite avec 18 sur 20 aux choix multiples et 9 sur 10 aux réponses courtes, notés séparément.
 
 > EN: Master of Divinity: Same twenty multiple-choice questions, plus ten short-answer questions. Pass at 18 of 20 multiple-choice and 9 of 10 short-answer, scored independently.
 
 **b008**  
-Master of Theology : noté exactement comme le Master of Divinity — les mêmes vingt questions à choix multiples plus dix questions à réponse courte, avec réussite à 18 sur 20 aux choix multiples et 9 sur 10 aux réponses courtes, notés séparément.
+Th.M. : noté exactement comme le M.Div. — les mêmes vingt questions à choix multiples plus dix questions à réponse courte, avec réussite à 18 sur 20 aux choix multiples et 9 sur 10 aux réponses courtes, notés séparément.
 
 > EN: Master of Theology: Graded exactly like the Master of Divinity — the same twenty multiple-choice questions plus ten short-answer questions, passing at 18 of 20 multiple-choice and 9 of 10 short-answer, scored independently.
 
@@ -107,12 +115,12 @@ Certificat
 > EN: Certificate
 
 **b010**  
-M.Div
+M.Div.
 
 > EN: M.Div
 
 **b011**  
-Th.M
+Th.M.
 
 > EN: Th.M
 
@@ -584,19 +592,19 @@ Modèle : À Béthanie, quatre jours après l'ensevelissement de Lazare, Jésus 
 
 > EN: Tell the story of Lazarus (John 11) in your own words and explain why the lesson calls this miracle an "enacted parable."
 
-**2. Définissez le mot grec sêmeion et expliquez pourquoi le choix de ce terme par Jean pour désigner les miracles de Jésus enseigne le principe central de cette unité.**  
+**2. Définissez le terme sêmeion et expliquez pourquoi, en l'employant pour les miracles de Jésus, l'évangéliste enseigne le principe central de cette unité.**  
 Mots-clés : sêmeion / semeion / sēmeion · signe · pointe / renvoie / indique / désigne / designe · au-delà / au delà / audelà / au-dela / au dela / audela · miracle · vérité / verite · Jean · grec  
 Modèle : Pour les miracles de Jésus, Jean a choisi le mot grec sêmeion, qui signifie « signe », plutôt qu'un mot désignant un simple prodige. Un signe n'est pas la destination ; il pointe au-delà de lui-même vers une vérité. En appelant les miracles des signes, Jean enseigne le principe central de l'unité : chaque miracle pointe au-delà de l'événement visible vers une vérité invisible au sujet du Christ.
 
 > EN: Define the Greek word sêmeion and explain why John's choice of this term for Jesus' miracles teaches the central principle of this unit.
 
-**3. Retracez la structure en quatre temps du récit de Lazare (tragédie, épreuve, larmes, triomphe ; en anglais, les « quatre T ») et expliquez ce que chaque mouvement apporte à la parabole en action.**  
+**3. Retracez les quatre mouvements du récit de Lazare et expliquez ce que chacun apporte à la parabole en action.**  
 Mots-clés : tragédie / tragedie · épreuve / epreuve · larmes / pleur · triomphe · mort · retard / attente / attend / tarde · gloire · Lazare  
 Modèle : Le récit de Lazare passe par quatre mouvements. La tragédie : Lazare tombe malade et meurt. L'épreuve : Jésus tarde exprès, et les sœurs attendent dans le chagrin. Les larmes : Jésus pleure au tombeau. Le triomphe : il appelle Lazare, qui sort vivant. Chaque mouvement fait partie d'un seul sermon, qui transforme la mort et le retard en gloire de Dieu.
 
 > EN: Trace the four-T structure of the Lazarus story (Tragedy, Trial, Tears, Triumph) and explain what each movement contributes to the enacted parable.
 
-**4. Expliquez pourquoi Marc 2:9-11 (le paralytique de Capernaüm) est l'exemple type le plus clair d'un miracle accompli pour prêcher une vérité invisible.**  
+**4. Expliquez pourquoi Marc 2:9-11 (le paralytique de Capernaüm) est l'exemple type le plus clair d'un miracle accompli pour prêcher une vérité spirituelle.**  
 Mots-clés : Marc · paralyt / paralys · pardon · pouvoir / autorit · Fils · visible · guéri / gueri · invisible  
 Modèle : En Marc 2, lorsque quatre amis descendirent un paralytique jusqu'à Jésus, il dit d'abord : « Tes péchés sont pardonnés. » Puis, « afin que vous sachiez que le Fils de l'homme a sur la terre le pouvoir de pardonner les péchés », il guérit l'homme. La guérison visible fut accomplie pour prêcher la vérité invisible : Jésus a le pouvoir de pardonner. C'est l'exemple type le plus clair d'un miracle qui met un sermon en action.
 
@@ -608,7 +616,7 @@ Modèle : Avant de prêcher un texte de miracle, le pasteur se pose quatre quest
 
 > EN: List the four questions the lesson recommends a pastor ask before preaching any miracle text, and briefly explain each.
 
-**6. Racontez l'histoire de Maurice Rawlings (le cardiologue de Chattanooga et le patient aux trois crises cardiaques) et expliquez en quoi elle fonctionne comme une parabole en action moderne.**  
+**6. Racontez l'histoire de Maurice Rawlings et expliquez en quoi elle fonctionne comme une parabole en action moderne.**  
 Mots-clés : Rawlings · Chattanooga · cardiolog · patient · cœur / coeur / cardiaque · sauvé / sauve / salut · parabole · mort  
 Modèle : Le Dr Maurice Rawlings, cardiologue à Chattanooga, n'était chrétien que de nom lorsqu'un patient fit plusieurs crises cardiaques pendant une épreuve d'effort, hurlant de terreur entre deux réanimations. Rawlings le conduisit au Christ grâce à un verset appris à l'école du dimanche. L'homme revint de la mort physique afin d'être sauvé une fois pour toutes de la mort spirituelle — une parabole en action, où le corps est la toile et l'âme le tableau.
 
@@ -620,13 +628,13 @@ Modèle : Trois erreurs minent la prédication des textes de miracles. L'erreur 
 
 > EN: Name and briefly describe the three common errors pastors make when preaching miracle texts.
 
-**8. Expliquez pourquoi la leçon rejette l'explication naturaliste des miracles (par ex. « en réalité, la foule a simplement partagé les repas qu'elle avait cachés ») et ce qui est perdu lorsqu'un pasteur adopte cette lecture.**  
+**8. Pourquoi la leçon rejette-t-elle la lecture naturaliste des miracles (par ex. « en réalité, la foule a simplement partagé les repas qu'elle avait cachés ») ? Qu'est-ce qui disparaît lorsqu'un pasteur adopte cette lecture ?**  
 Mots-clés : naturalis · expliqu · moderni · miracle · prêch / prech · plus rien / rien à prêcher / rien a precher · puissance / pouvoir · perdu / perte / perd  
 Modèle : La leçon rejette la lecture naturaliste — selon laquelle la multiplication des pains pour les cinq mille n'aurait été que le partage de repas cachés. Expliquer le miracle pour le faire disparaître est la démarche moderniste, et elle ne laisse plus rien à prêcher : un Christ qui n'aurait fait qu'inspirer le partage n'a aucune puissance pour sauver. Quand le miracle est ainsi évacué, la puissance de l'Évangile qu'il contient est perdue.
 
 > EN: Explain why the lesson rejects the naturalistic explanation of miracles (e.g. "the crowd really just shared their hidden lunches"), and what is lost when a pastor adopts that reading.
 
-**9. Racontez l'illustration « s'endormir sur le canapé » et expliquez son lien avec la résurrection de Lazare.**  
+**9. Racontez l'illustration de l'enfant sur le canapé et expliquez son lien avec la résurrection de Lazare.**  
 Mots-clés : endor / endort · canapé / canape · père / pere / papa · porte / emporte · son lit / propre lit / le lit · mort · sommeil / dort · Lazare  
 Modèle : Un enfant qui s'endort sur le canapé est porté par son père jusqu'à son propre lit, et il s'y réveille le matin. C'est une image de la mort pour le chrétien : nous nous endormons ici, et le Père nous porte, et nous nous réveillons dans sa maison. Cela rejoint Lazare, dont Jésus a dit : « Lazare, notre ami, dort » — pour le croyant, la mort n'est qu'un sommeil dont le Christ nous ressuscite.
 

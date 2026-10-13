@@ -12,6 +12,14 @@ Counts: 30 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 2. MC 4 and SA 2 say Jews began to « worship on » the first day (« switched » to it), while the revised lesson text (b010) more cautiously says they began to give it « special significance » while many still kept synagogue and temple life. I translated each as written; do you want MC 4 / SA 2 softened to match b010 in all language editions?
 3. MC 12 says West and Lyttelton set out to « destroy Christianity », and MC 13 says « both became believers », while the lesson (b018) only says each expected to expose the claim as false and was persuaded of it. Translated as written; should the questions be aligned with the lesson?
 
+## Problems in the English source
+
+- SA3: English prompt passes its own keywords
+- SA4: English prompt passes its own keywords
+- SA5: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -179,7 +187,7 @@ Examen final de l'Unité 7
 > EN: Unit 7 Final Exam
 
 **b029**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -229,7 +237,7 @@ _Pourquoi :_ Elle a commencé à Jérusalem, où produire le corps l'aurait écr
 _Pourquoi :_ Après quinze siècles de sabbat, ils passèrent au jour de la résurrection.  
 > EN: Part of the 'sociological earthquake' was that Jews began to worship on: — ✓ The first day of the week, the day He rose
 
-**5. Thomas le Sceptique est passé de « je ne croirai pas » à :**  
+**5. Thomas le Sceptique est passé de « je ne croirai point » à :**  
 · A. Je ne suis toujours pas sûr  
 · B. Laissez-moi réfléchir encore  
 ✓ C. Mon Seigneur et mon Dieu  
@@ -417,19 +425,19 @@ Modèle : L'unité énumère des faits que même la plupart des historiens scept
 
 > EN: What facts must any honest explanation of the first Easter account for?
 
-**3. Expliquez les trois témoins réticents — Thomas, Paul et Jacques — et pourquoi les témoins hostiles ont de l'importance.**  
+**3. Présentez les trois témoins qui ne voulaient pas croire à la résurrection, et expliquez pourquoi un témoin défavorable pèse plus lourd.**  
 Mots-clés : réticen / reticen · thomas · sceptique · paul · ennemi · jacques · frère / frere · hostile  
 Modèle : Le cœur du dossier, ce sont les témoins qui ne voulaient pas que ce soit vrai, car le droit a toujours su que le témoin hostile compte le plus. Le premier est Thomas le Sceptique, qui refusa de croire les autres et exigea de toucher les plaies, puis rencontra le Christ ressuscité et s'écria : mon Seigneur et mon Dieu. Le deuxième est Paul l'Ennemi, Saul de Tarse, le principal persécuteur de l'Église, qui avait tout à perdre à s'y joindre ; le Christ ressuscité l'arrêta sur le chemin de Damas et fit de l'ennemi un apôtre qui souffrit et mourut pour le nom. Le troisième est Jacques, le frère de Jésus, qui ne croyait pas du vivant de Jésus, mais qui, après la résurrection, dirigea l'Église de Jérusalem et mourut pour lui. Ces témoins réticents et hostiles sont puissants précisément parce qu'ils avaient toutes les raisons de dire non, et qu'ils n'ont été convaincus qu'en le voyant ressuscité.
 
 > EN: Explain the three reluctant witnesses — Thomas, Paul, and James — and why hostile witnesses matter.
 
-**4. Expliquez la formule « on ne meurt pas pour un mensonge qu'on sait être un mensonge », et pourquoi la mort des apôtres a valeur de preuve.**  
-Mots-clés : mourir / meurt / mourra / mouru · mensonge · vrai / vérité / verite · apôtre / apotre · savai / savent / savoir / connai / sachant · rétract / retract / renier / renié · tromp · preuve / probant  
+**4. Expliquez le principe selon lequel personne ne donne sa vie pour une imposture qu'il a lui-même inventée, et dites pourquoi le martyre des Douze pèse dans le dossier.**  
+Mots-clés : mourir / meurt / mourra / mouru · mensonge · vrai / vérité / verite · apôtre / apotre · savai / savent / savoir / connai / sachant · rétract / retract / renier / renié / renie · tromp · preuve / probant  
 Modèle : L'unité répond avec prudence que des gens meurent bel et bien pour de fausses croyances, mais seulement quand ils les croient sincèrement vraies ; on peut mourir pour un mensonge qu'on croit vrai, mais on ne mourra pas pour un mensonge qu'on sait être un mensonge. Les apôtres n'étaient pas des disciples trompés, loin des événements ; ils étaient les hommes mêmes qui auraient su, sans aucune erreur possible, s'ils avaient vu le Seigneur ressuscité ou s'ils avaient volé le corps et inventé l'histoire. Alors qu'on leur offrait toutes les occasions de sauver leur vie en se rétractant, ils sont allés en prison, sous le fouet et jusqu'au bourreau, en affirmant toujours ce qu'ils avaient vu et touché. Voilà pourquoi leur mort a une valeur de preuve que le martyre ordinaire n'a pas : les menteurs font de piètres martyrs quand vient l'heure de mourir, et leur refus de se rétracter est donc une forte preuve qu'ils disaient la vérité.
 
 > EN: Explain 'you will not die for a lie you know is a lie,' and why the apostles' deaths carry evidential weight.
 
-**5. Expliquez l'argument de Charles Colson sur les conspirations, tiré du Watergate.**  
+**5. Quelle leçon Charles Colson a-t-il tirée du scandale du Watergate pour la thèse d'un corps volé ?**  
 Mots-clés : colson · watergate · puissant · conspiration / complot · pression · effondr / éclat / eclat · douze · secret  
 Modèle : Charles Colson, qui se trouvait près du sommet du pouvoir à la Maison-Blanche sous Nixon, a proposé cela comme une analogie tirée d'une amère expérience personnelle, non comme une preuve de la résurrection, mais comme une manière de mettre à l'épreuve nos intuitions sur les conspirations. Une douzaine des hommes les plus puissants du monde, disait-il, n'ont pas pu maintenir un simple mensonge ne serait-ce que quelques semaines, dès que leur propre peau était en jeu ; sous la pression de l'enquête, la conspiration du Watergate a volé en éclats presque aussitôt, chacun se démenant pour se sauver lui-même. Colson demandait alors comment douze pêcheurs et collecteurs d'impôts effrayés auraient pu garder un secret bien plus grand pendant des décennies, à travers les coups, les prisons et les exécutions, sans qu'un seul ne craque pour acheter sa liberté par un aveu. L'analogie ne prouve pas la résurrection ; elle vérifie si la théorie du vol et de la dissimulation est psychologiquement crédible, compte tenu de la façon dont les conspirations ordinaires se comportent réellement sous la pression, et à cette épreuve la théorie paraît faible, tandis que l'explication des apôtres eux-mêmes paraît solide.
 
@@ -441,13 +449,13 @@ Modèle : Au dix-huitième siècle, deux Anglais érudits, Gilbert West et Lord 
 
 > EN: Tell the story of West and Lyttelton and explain what it shows.
 
-**7. Expliquez le schéma des sceptiques qui ont enquêté pour réfuter la résurrection (comme Frank Morison).**  
+**7. Que montre l'exemple de Frank Morison et d'autres sceptiques qui ont voulu prouver que la résurrection n'avait pas eu lieu ?**  
 Mots-clés : morison · livre · réfuter / refuter / réfute / refute / démontrer / demontrer · preuve / éléments / elements · enquêt / enquet / investig · persuad / convaincu · thomas · honnête / honnete  
 Modèle : L'unité souligne un schéma récurrent chez ceux qui ont étudié la résurrection dans l'intention de la réfuter. Frank Morison, pseudonyme d'un écrivain anglais, se mit à écrire un livre qui allait réfuter la résurrection une fois pour toutes, mais après avoir suivi les preuves, le livre qu'il écrivit réellement soutenait qu'elle avait eu lieu, et il intitula son premier chapitre « le livre qui refusait d'être écrit ». De nos jours, d'autres enquêteurs sceptiques ont renouvelé la même expérience : ils se sont assis pour réfuter l'affirmation et se sont relevés persuadés par ce qu'ils avaient trouvé. Ce schéma est l'écho moderne de Thomas : un esprit honnête qui examine longuement et sérieusement le témoignage est souvent amené, contre ses intentions premières, jusqu'au point où le cœur s'incline. L'unité considère donc l'enquête sérieuse non comme une menace pour la foi, mais comme un chemin qui a conduit beaucoup de gens droit vers elle.
 
 > EN: Explain the pattern of skeptics who investigated to disprove the resurrection (such as Frank Morison).
 
-**8. Expliquez la distinction honnête entre les témoins apostoliques et les martyrs ultérieurs comme Wurmbrand.**  
+**8. Qu'est-ce qui sépare, selon l'unité, les premiers disciples des croyants persécutés des siècles suivants, comme Richard Wurmbrand ?**  
 Mots-clés : apôtre / apotre · preuve / témoign / temoign · directement / première main / premiere main / personnellement · martyr · wurmbrand · puissance · vivant · distinction  
 Modèle : L'unité maintient une distinction soigneuse qui compte. Les apôtres constituent une preuve d'une manière qu'aucun martyr ultérieur ne peut égaler, parce que les apôtres étaient en position de savoir directement si la résurrection était réelle, alors que les martyrs ultérieurs ne l'étaient pas. Richard Wurmbrand, un athée juif venu au Christ, qui a enduré quatorze ans de prison et de torture sous le communisme, n'a pas vu le tombeau vide. Ainsi, le long cortège des martyrs à travers les siècles ne prouve pas l'événement lui-même ; ce qu'il prouve, c'est sa puissance vivante : dix-neuf siècles après que la pierre a été roulée, le Christ ressuscité est encore si réel que des gens souffriront tout plutôt que de le renier. Les apôtres témoignent que cela s'est produit ; les martyrs ultérieurs témoignent qu'il est toujours vivant pour façonner de telles personnes. Confondre les deux affaiblirait l'argument ; c'est pourquoi l'unité maintient cette distinction.
 

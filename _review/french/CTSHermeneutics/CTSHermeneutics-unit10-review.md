@@ -15,6 +15,10 @@ Counts: 57 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 5. Two English short-answer models disagree with the lesson (translated as written): SA 3 says Jesus 'had no place of His own and had promised to be with him always' (the lesson says Jesus asked Misha whether HE had a place); SA 5 says the miners 'built a cradle' (the lesson says they sent a man to buy one). Correct the English?
 6. MC 13 and MC 18 explanations add images the lesson does not contain ('a paradise beyond, a Father waiting with outstretched arms'; 'The place of the skull has become a throne'). Translated as written; keep?
 
+## Problems in the English source
+
+- SA2, SA3, SA4, SA5, SA7, SA9, SA10: English prompt passes its own keywords (SA2 hits 5 of 8, SA3 4, SA4 6, SA5 4, SA7 6, SA9 5, SA10 6). French prompts reworded so each reaches at most 2 groups (convention 10); in SA5 the keyword 'Camp' (a repeat of the title) was replaced by « mineur/minière » (the miners).
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -77,12 +81,12 @@ Parcours Certificat : vingt questions à choix multiples par unité. Réussite �
 > EN: Certificate of Ministry: Twenty multiple-choice questions per unit. Pass at 18 of 20 (90%).
 
 **b007**  
-Master of Divinity : les mêmes vingt questions à choix multiples, plus dix questions à réponse courte. Réussite à 18 sur 20 aux choix multiples et à 9 sur 10 aux réponses courtes, notées séparément.
+Parcours M.Div. : les mêmes vingt questions à choix multiples, plus dix questions à réponse courte. Réussite à 18 sur 20 aux choix multiples et à 9 sur 10 aux réponses courtes, notées séparément.
 
 > EN: Master of Divinity: Same twenty multiple-choice questions, plus ten short-answer questions. Pass at 18 of 20 multiple-choice and 9 of 10 short-answer, scored independently.
 
 **b008**  
-Master of Theology : noté exactement comme le Master of Divinity — les mêmes vingt questions à choix multiples plus dix questions à réponse courte, avec réussite à 18 sur 20 aux choix multiples et à 9 sur 10 aux réponses courtes, notées séparément.
+Parcours Th.M. : noté exactement comme le parcours M.Div. — les mêmes vingt questions à choix multiples plus dix questions à réponse courte, avec réussite à 18 sur 20 aux choix multiples et à 9 sur 10 aux réponses courtes, notées séparément.
 
 > EN: Master of Theology: Graded exactly like the Master of Divinity — the same twenty multiple-choice questions plus ten short-answer questions, passing at 18 of 20 multiple-choice and 9 of 10 short-answer, scored independently.
 
@@ -92,12 +96,12 @@ Certificat
 > EN: Certificate
 
 **b010**  
-M.Div
+M.Div.
 
 > EN: M.Div
 
 **b011**  
-Th.M
+Th.M.
 
 > EN: Th.M
 
@@ -549,26 +553,26 @@ Modèle : La thèse centrale est que le but de toute interprétation est la tran
 
 > EN: State the central thesis of this unit in your own words, and explain why all the interpretive machinery taught in the prior nine units exists to serve this single end.
 
-**2. Expliquez l'avertissement de Jacques 1:22 au sujet de celui qui écoute la parole sans la mettre en pratique. Qu'implique le mot grec paralogizomenoi (de paralogizomai) au sujet de la tromperie de soi-même ?**  
+**2. Expliquez l'avertissement de Jacques 1:22 sur celui qui reçoit la parole sans agir. Qu'implique le mot grec paralogizomenoi (de paralogizomai) ?**  
 Mots-clés : Jacques · pratiqu · écout / ecout / entend · tromp / séduit / seduit / illusion · paralogiz · raisonn · soi même / soi meme / lui même / lui meme / vous mêmes / vous memes · obéi / obei  
 Modèle : Jacques avertit que celui qui écoute la Parole sans la mettre en pratique se trompe lui-même. Le mot grec qu'il emploie, paralogizomenoi, de paralogizomai, signifie égarer par un faux raisonnement : l'auditeur se persuade qu'écouter équivaut à obéir, et il se trompe ainsi lui-même.
 
 > EN: Explain the warning of James 1:22 about the hearer who is not a doer. What does the Greek word paralogizomenoi (from paralogizomai) imply about self-deception?
 
-**3. Racontez l'histoire de Misha, l'orphelin russe, et de la crèche aux deux bébés, puis expliquez comment cette histoire illustre le but de l'herméneutique.**  
+**3. Racontez l'histoire de Misha et des deux bébés, puis expliquez comment elle illustre le but de l'herméneutique.**  
 Mots-clés : Misha · russe / russie · orphelin · crèche / creche / mangeoire · chaud / réchauff / rechauff · Jésus / Jesus · toujours · accueil  
 Modèle : Misha, un orphelin russe, entend l'histoire de Noël et monte lui-même dans la crèche pour garder l'enfant Jésus au chaud, parce que Jésus n'avait pas d'endroit à lui et avait promis d'être avec lui pour toujours. L'histoire montre le but de l'herméneutique : non pas seulement comprendre le texte, mais accueillir Christ, être réchauffé et changé par lui.
 
 > EN: Tell the story of Misha the Russian orphan and the manger with two babies, and explain how this story illustrates the goal of hermeneutics.
 
-**4. Décrivez l'illustration de la fresque de Reni dans la coupole et expliquez comment Christ est le miroir dans lequel le caractère du Père devient clair.**  
+**4. Décrivez l'illustration de la peinture de Reni et expliquez comment Christ nous permet de voir le caractère de Dieu.**  
 Mots-clés : Reni · coupole / dôme / dome · miroir · Christ · Père / Pere · clair / nette / netteté / nettete · flou / brum / brouill · refle  
 Modèle : La peinture de Reni dans la coupole était trop haute pour être vue nettement, mais un miroir placé en dessous en reflétait l'image avec clarté. De même, le Père reste flou et loin au-dessus de nous jusqu'à ce que nous regardions en Christ, le miroir dans lequel son caractère se reflète. Celui qui a vu Christ a vu clairement le Père.
 
 > EN: Describe the Reni dome painting illustration and explain how Christ functions as the mirror in which the Father's character becomes clear.
 
-**5. Racontez l'histoire de « La Chance de Roaring Camp » et expliquez comment la transformation en cascade de la ville minière correspond à ce qui se passe quand Christ est accueilli dans une vie ou dans une assemblée.**  
-Mots-clés : Roaring · Camp · bébé / bebe / enfant · berceau · cascade / chaîne / chaine / de proche en proche · accueil · transform · propre / nettoy / frott  
+**5. Racontez l'histoire de « La Chance de Roaring Camp » et expliquez ce qu'elle montre de ce qui se passe quand Christ entre dans une vie ou dans une assemblée.**  
+Mots-clés : Roaring · mineur / minière / miniere · bébé / bebe / enfant · berceau · cascade / chaîne / chaine / de proche en proche · accueil · transform · propre / nettoy / frott  
 Modèle : Quand un bébé fut accueilli dans la rude ville minière de Roaring Camp, les mineurs endurcis se mirent à nettoyer, construisirent un berceau, et changèrent tout le camp par une cascade de petites réformes pour le rendre digne de l'enfant. De même, quand Christ est accueilli dans une vie ou une assemblée, sa présence se répand en cascade et transforme tout ce qui l'entoure.
 
 > EN: Tell the story of "The Luck of Roaring Camp" and explain how the cascading transformation of the mining town parallels what happens when Christ is welcomed into a life or a congregation.
@@ -579,7 +583,7 @@ Modèle : La première erreur est l'information sans la transformation — le ph
 
 > EN: Identify and describe the two errors that stop transformation, and explain why both fail to deliver what the goal of hermeneutics requires.
 
-**7. Expliquez pourquoi la propre vie du pasteur doit être la PREMIÈRE herméneutique, et ce qui arrive lorsqu'un pasteur prêche un texte qui ne l'a pas d'abord changé.**  
+**7. Expliquez pourquoi la propre existence du ministre doit être la PREMIÈRE herméneutique, et ce qui arrive lorsqu'il annonce un texte qui ne l'a pas d'abord transformé lui-même.**  
 Mots-clés : pasteur · sa vie / propre vie / la vie · premi · herméneutique / hermeneutique · chang · touch / boulevers / remu · puissance / force · prêch / prech / prédica / predica  
 Modèle : La propre vie du pasteur est la première herméneutique : le texte doit le changer avant de pouvoir changer qui que ce soit par lui. Quand un pasteur prêche un passage qui n'a pas d'abord touché et changé sa propre vie, le sermon n'a aucune puissance — c'est un vent qui n'a jamais remué le prédicateur, et il ne remue donc personne d'autre.
 
@@ -591,14 +595,14 @@ Modèle : Trois règles gouvernent la lecture qui transforme. Premièrement, lis
 
 > EN: List and briefly explain the three rules for transformational reading given in this unit.
 
-**9. Expliquez comment la résurrection de Christ (illustrée par la devise Plus Ultra et l'histoire du bourdon) rend PERMANENTE la transformation commencée dans cette vie.**  
+**9. Expliquez comment la résurrection (illustrée par la devise de l'Espagne et par l'histoire de l'insecte dans la voiture) rend définitive la transformation commencée dans cette vie.**  
 Mots-clés : résurrection / resurrection / ressuscit · permanen · Ultra · bourdon · aiguillon / dard / piqûre / piqure · mort · Christ · au delà / au dela  
 Modèle : Grâce à la résurrection, la transformation commencée dans cette vie est permanente — la mort ne peut pas la défaire. La devise Plus Ultra signifie « encore au-delà » : il y a quelque chose au-delà du tombeau. Comme le père qui attrapa le bourdon et en reçut l'aiguillon dans sa propre main, Christ a pris en lui-même l'aiguillon de la mort, si bien que pour nous la mort a perdu son aiguillon pour toujours.
 
 > EN: Explain how the resurrection of Christ (illustrated by the Plus Ultra motto and the bumblebee story) makes the transformation begun in this life PERMANENT.
 
-**10. Expliquez l'image finale de cette unité : la réaction « Super génial ! » de l'enfant de maternelle de Swindoll, et ce qu'elle représente quant au but de l'herméneutique pastorale.**  
-Mots-clés : Swindoll · maternelle / cinq ans / tout petits / petit garçon · super · génial / genial · résurrection / resurrection / ressuscit · émerveill / emerveill · réaction / reaction / réponse / reponse · admiration / stupeur / saisissement  
+**10. Expliquez l'image finale de cette unité, l'histoire racontée par Swindoll, et ce qu'elle représente quant au but de l'herméneutique pastorale.**  
+Mots-clés : Swindoll · maternelle / cinq ans / tout petits / petit garçon / petit garcon · super · génial / genial · résurrection / resurrection / ressuscit · émerveill / emerveill · réaction / reaction / réponse / reponse · admiration / stupeur / saisissement  
 Modèle : Chuck Swindoll raconte qu'un garçon de cinq ans, à l'école du dimanche, en apprenant que Jésus était ressuscité des morts, s'écria : « Super génial ! » Cet émerveillement d'enfant est la bonne réaction à la résurrection. Le but de l'herméneutique pastorale est finalement de conduire les gens à cette admiration — non seulement les informer, mais les laisser émerveillés devant le Christ ressuscité.
 
 > EN: Explain the closing image of this unit: the Swindoll kindergartener's "Totally awesome!" response and what it represents about the goal of pastoral hermeneutics.

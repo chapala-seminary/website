@@ -12,6 +12,12 @@ Counts: 26 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 2. 2 Timothy 2:9 in LSG says the word of God « n'est pas liée » (bound), not 'chained'; fill-in 2 now expects « liée ». OK?
 3. The bilingual 'Catalog / Catálogo' button: French-only « Catalogue », or a trilingual label?
 
+## Problems in the English source
+
+- SA2: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -135,7 +141,7 @@ Examen final de l'Unité 6
 > EN: Unit 6 Final Exam
 
 **b032**  
-Parcours Certificat : les 20 questions à choix multiple. Associé : les questions à choix multiple et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiple, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous échouez, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiple. Parcours Associé en divinité : les questions à choix multiple et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiple, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous échouez, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -357,12 +363,12 @@ Réponse : **jésuites** · aussi acceptées : jésuite, Compagnie de Jésus, or
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
 **1. Comment l'Évangile s'est-il répandu durant les trois premiers siècles malgré la persécution ? Utilisez la célèbre parole de Tertullien.**  
-Mots-clés : le sang / du sang / leur sang · martyr · semence / graine · église / eglise · persécut / persecut · répand / repand / propag / progress / étendu / etendu · exécut / execut / mise à mort / mis à mort · païen / paien  
+Mots-clés : le sang / du sang / leur sang · martyr · semence / graine · église / eglise · persécut / persecut · répand / repand / propag / progress / étendu / etendu · exécut / execut / mise à mort / mise a mort / mis à mort / mis a mort · païen / paien  
 Modèle : Durant les trois premiers siècles, l'Évangile s'est répandu en grande partie par la mort des martyrs — non pas malgré la persécution, mais souvent à travers elle. Vers l'an 200, Tertullien a écrit que « le sang des martyrs est la semence de l'Église » : des foules païennes qui regardaient des chrétiens mourir avec courage et pardon en étaient parfois si stupéfaites qu'elles rentraient chez elles converties.
 
 > EN: How did the gospel spread in the first three centuries despite persecution? Use Tertullian's famous saying.
 
-**2. Expliquez pourquoi un empire christianisé fut à la fois un bienfait et un danger pour les missions.**  
+**2. Expliquez en quoi la christianisation de l'Empire romain fut, pour les missions, à double tranchant : ce qu'elle apporta de bon et ce qu'elle mit en péril.**  
 Mots-clés : constantin · empire · nominal / de nom · cultur · converti / conversion · baptis · danger · bienfait / cadeau / bénédiction / benediction  
 Modèle : Un empire christianisé sous Constantin fut un bienfait parce qu'on pouvait bâtir des églises ouvertement, copier librement les Écritures et prêcher l'Évangile sans crainte. Mais ce fut aussi un danger, car lorsque être chrétien devint respectable et même avantageux, les églises se remplirent de gens baptisés mais jamais vraiment convertis — un christianisme de nom. Une culture christianisée n'est pas la même chose qu'un peuple converti, et les missionnaires doivent toujours se souvenir de cette différence.
 
@@ -392,13 +398,13 @@ Modèle : La Réforme a retrouvé l'Évangile de la justification par la grâce,
 
 > EN: What gospel did the Reformation recover, and why was that essential for missions?
 
-**7. Pourquoi la leçon dit-elle qu'« on ne peut pas envoyer un Évangile qu'on a perdu » ?**  
+**7. Pourquoi la leçon affirme-t-elle qu'une Église ne peut pas transmettre aux nations un message qu'elle ne possède plus ?**  
 Mots-clés : évangile / evangile · perdu · envoy · retrouv / recouvr / redécouv / redecouv · fondement / fondation · réforme / reforme · grâce / grace · mission  
 Modèle : La leçon dit qu'« on ne peut pas envoyer un Évangile qu'on a perdu » parce qu'à la fin du Moyen Âge, le simple Évangile de la grâce avait été enseveli sous des couches de tradition humaine, d'œuvres et de superstition. Avant que la Réforme ne retrouve la justification par la grâce, par le moyen de la foi, l'Église ne possédait plus clairement le message même qu'elle devait envoyer aux nations — il fallait retrouver l'Évangile avant de l'envoyer.
 
 > EN: Why does the lesson say 'you cannot send out a gospel you have lost'?
 
-**8. Expliquez le retard missionnaire de la Réforme et donnez-en une raison.**  
+**8. Expliquez pourquoi les Églises nées de la Réforme tardèrent tant à porter l'Évangile au loin, et donnez-en une raison.**  
 Mots-clés : réforme / reforme · lente / lenteur / retard / tardi · mission · apôtre / apotre · commission · chez elle / chez eux / sur place / chez soi · réform / reform · surviv / survécu / survecu  
 Modèle : La Réforme fut étrangement lente à s'engager dans les missions à l'étranger, absorbée qu'elle était par la réforme de l'Église chez elle et par la simple survie face à une opposition farouche. L'une des raisons de ce retard est que certains Réformateurs enseignaient que la Grande Commission n'avait obligé que les apôtres d'origine, qui avaient déjà porté l'Évangile dans le monde connu de leur temps ; le monde protestant dut ainsi attendre près de deux siècles encore avant que la Commission soit rouverte à toute l'Église.
 
@@ -410,7 +416,7 @@ Modèle : La leçon note que, pendant que les protestants tardaient à s'engager
 
 > EN: How does the lesson treat Catholic missions of the Reformation era? Give an example.
 
-**10. L'Évangile « a voyagé quinze siècles pour arriver ici ». Qu'est-ce que cela dit de votre dette et de votre part dans les missions ?**  
+**10. L'Évangile « a voyagé quinze siècles pour arriver ici ». Qu'est-ce que cela dit de ce que vous devez aux générations passées et de votre part dans les missions ?**  
 Mots-clés : siècle / siecle · martyr · moine · réformateur / reformateur · porté / porte / transmis · débit / debit / dette · héritier / heritier · évangile / evangile  
 Modèle : Le fait que l'Évangile ait voyagé quinze siècles — porté par des martyrs qui sont morts pour lui, des moines qui ont franchi des frontières culturelles pour lui et des Réformateurs qui l'ont retrouvé — signifie que nous qui l'avons reçu sommes les héritiers et les débiteurs de tous ceux qui ont porté cette lumière avant nous, à grand prix. Notre part dans les missions aujourd'hui est de porter plus loin, quel qu'en soit le prix, ce même Évangile que tant d'autres se sont sacrifiés pour nous transmettre.
 

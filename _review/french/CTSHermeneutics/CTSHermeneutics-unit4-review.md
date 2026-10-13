@@ -14,6 +14,14 @@ Counts: 59 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 4. b045: 'a small church in Mexico' kept as « une petite Église du Mexique ». For Kinshasa readers, adapt to « une petite Église de Kinshasa / du Congo », as the Spanish edition kept the author's local setting?
 5. b002 language-switch label 'Español' left unchanged (it links to the Spanish edition); b059 'Catalog / Catálogo' rendered « Catalogue / Catálogo ». Confirm UI labels for the French site.
 
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+- SA3: English prompt passes its own keywords
+- SA4: English prompt passes its own keywords
+- SA5: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -72,17 +80,17 @@ Choisissez votre parcours
 > EN: Choose your track
 
 **b006**  
-Certificat de ministère : vingt questions à choix multiples par unité. Réussite à 18 sur 20 (90 %).
+Parcours Certificat : vingt questions à choix multiples par unité. Réussite à 18 sur 20 (90 %).
 
 > EN: Certificate of Ministry: Twenty multiple-choice questions per unit. Pass at 18 of 20 (90%).
 
 **b007**  
-Master of Divinity : les mêmes vingt questions à choix multiples, plus dix questions à réponse courte. Réussite à 18 sur 20 aux choix multiples et 9 sur 10 aux réponses courtes, notés séparément.
+M.Div. : les mêmes vingt questions à choix multiples, plus dix questions à réponse courte. Réussite à 18 sur 20 aux choix multiples et 9 sur 10 aux réponses courtes, notés séparément.
 
 > EN: Master of Divinity: Same twenty multiple-choice questions, plus ten short-answer questions. Pass at 18 of 20 multiple-choice and 9 of 10 short-answer, scored independently.
 
 **b008**  
-Master of Theology : noté exactement comme le Master of Divinity — les mêmes vingt questions à choix multiples plus dix questions à réponse courte, avec réussite à 18 sur 20 aux choix multiples et 9 sur 10 aux réponses courtes, notés séparément.
+Th.M. : noté exactement comme le M.Div. — les mêmes vingt questions à choix multiples plus dix questions à réponse courte, avec réussite à 18 sur 20 aux choix multiples et 9 sur 10 aux réponses courtes, notés séparément.
 
 > EN: Master of Theology: Graded exactly like the Master of Divinity — the same twenty multiple-choice questions plus ten short-answer questions, passing at 18 of 20 multiple-choice and 9 of 10 short-answer, scored independently.
 
@@ -177,7 +185,7 @@ Le deuxième cadre, c'est le livre entier dans lequel se trouve le verset. Chaqu
 > EN: The second frame is the entire book in which the verse lives. Every book of the Bible has a main theme, a controlling argument, a purpose. Romans is not Psalms. Proverbs is not Revelation. Hebrews is not Job. Before you preach any verse, ask: What is the writer doing in this book? What problem is he trying to solve? What truth is he driving home?
 
 **b027**  
-Prenez le livre d'Esther. Le nom de Dieu n'y est jamais mentionné. Pas une seule fois. Aucune prière rapportée, aucun temple, aucun prêtre, aucun sacrifice. Lu isolément, il ressemble à un roman d'intrigues de cour. Lu comme un livre entier, on voit ce que fait Esther — il enseigne au peuple dispersé de Dieu que leur Dieu silencieux est toujours leur Dieu providentiel. Tout l'enjeu du livre, c'est ce que Dieu fait quand il ne dit rien. Passez à côté, et chaque chapitre devient une fable morale. Saisissez-le, et le livre se prêche de lui-même.
+Prenez le livre d'Esther. Le nom de Dieu n'y est jamais mentionné. Pas une seule fois. Aucune prière rapportée, aucun temple, aucun sacrificateur, aucun sacrifice. Lu isolément, il ressemble à un roman d'intrigues de cour. Lu comme un livre entier, on voit ce que fait Esther — il enseigne au peuple dispersé de Dieu que leur Dieu silencieux est toujours leur Dieu providentiel. Tout l'enjeu du livre, c'est ce que Dieu fait quand il ne dit rien. Passez à côté, et chaque chapitre devient une fable morale. Saisissez-le, et le livre se prêche de lui-même.
 
 > EN: Consider the book of Esther. The name of God is never mentioned. Not once. There is no prayer recorded, no temple, no priest, no sacrifice. Read in isolation, it looks like a court-intrigue novel. Read as a whole book, you see what Esther is doing — teaching God’s scattered people that their silent God is still their providential God. The whole point of the book is what God does when He says nothing. Miss that, and every chapter becomes a moral fable. Catch it, and the book preaches itself.
 
@@ -390,7 +398,7 @@ _Pourquoi :_ Exact. Deux versets plus haut, Dieu dit aux exilés, par Jérémie,
 · B. C'est le seul livre qui a deux fins  
 ✓ C. Le nom de Dieu n'y est jamais mentionné  
 · D. C'est le livre le plus court de l'Ancien Testament  
-_Pourquoi :_ Exact. Le nom de Dieu n'apparaît nulle part dans Esther. Aucune prière, aucun temple, aucun prêtre, aucun sacrifice. Le livre entier enseigne ce que Dieu fait quand il ne dit rien — sa providence silencieuse en coulisse. C'est le message qui ressort du contexte du livre.  
+_Pourquoi :_ Exact. Le nom de Dieu n'apparaît nulle part dans Esther. Aucune prière, aucun temple, aucun sacrificateur, aucun sacrifice. Le livre entier enseigne ce que Dieu fait quand il ne dit rien — sa providence silencieuse en coulisse. C'est le message qui ressort du contexte du livre.  
 > EN: The lesson says the book of Esther is unusual because: — ✓ The name of God is never mentioned in it
 
 **7. Lu au niveau du contexte du livre, Esther révèle comme thème principal :**  
@@ -553,7 +561,7 @@ Réponse : **projection** · aussi acceptées : projections
 
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
-**1. Racontez avec vos propres mots l'histoire de la fuite de gaz à l'Église baptiste West Side (Beatrice, Nebraska, 1950) et expliquez ce qu'elle illustre au sujet de la lecture de la Bible dans son contexte.**  
+**1. Racontez avec vos propres mots l'histoire de l'Église baptiste West Side (Beatrice, Nebraska, 1950) et expliquez ce qu'elle enseigne sur la bonne manière de lire un verset de la Bible.**  
 Mots-clés : chorale / chœur / choeur / choristes · retard · gaz / explos · fuite · providen · contexte · ensemble · quinze / 15  
 Modèle : Le 1er mars 1950, les quinze membres de la chorale de l'Église baptiste West Side, à Beatrice, étaient tous en retard pour quinze raisons sans lien entre elles, et la tribune vide fut épargnée quand une fuite de gaz fit exploser l'église quelques minutes plus tard. Chaque retard pris seul ne signifiait rien ; lus ensemble, ils révèlent la providence de Dieu. Il en va de même pour l'Écriture : un verset arraché à son cadre peut signifier n'importe quoi, mais lu dans son contexte, il dit ce que son Auteur a voulu dire.
 
@@ -565,25 +573,25 @@ Modèle : Le pasteur doit respecter cinq cadres de contexte avant de prêcher : 
 
 > EN: Name the five layers of context the pastor must honor before preaching, and briefly explain what each layer is.
 
-**3. Prenez Jérémie 29:11 comme exemple. Expliquez comment la lecture de l'évangile de la prospérité viole le contexte immédiat, et ce que le verset signifiait réellement pour ses premiers lecteurs.**  
+**3. Prenez Jérémie 29:11 comme exemple. Expliquez comment la lecture qu'en fait l'évangile de la prospérité ignore les versets qui entourent ce texte, et ce que le verset signifiait réellement pour ses premiers lecteurs.**  
 Mots-clés : jérémie / jeremie · exil · babylon · soixante / 70 · prospérit / prosperit · contexte · immédiat / immediat · captivit  
 Modèle : La lecture de la prospérité arrache Jérémie 29:11 à son contexte immédiat, où les versets qui suivent juste après parlent de soixante-dix ans à Babylone. La promesse a été donnée à des exilés face à une longue captivité, non pour garantir une réussite personnelle aujourd'hui. Respecter le contexte immédiat montre que le verset parle de la fidélité de Dieu à travers l'épreuve, et non d'un chèque en blanc pour la prospérité.
 
 > EN: Take Jeremiah 29:11 as your example. Explain how the prosperity-gospel misreading violates immediate context, and what the verse actually meant to its original readers.
 
-**4. Expliquez pourquoi l'absence du nom de Dieu dans le livre d'Esther est elle-même la clé de lecture du livre — donnez l'interprétation fondée sur le contexte du livre.**  
+**4. Expliquez pourquoi le fait que le nom divin n'apparaisse nulle part dans Esther est lui-même la clé de lecture de cet ouvrage — donnez l'interprétation fondée sur l'ouvrage pris dans son ensemble.**  
 Mots-clés : esther · nom de dieu / mentionn / nommé / nomme · dieu · absen · providen · livre · caché / cache / dissimul · coulisse / scène / scene  
 Modèle : Le nom de Dieu n'est jamais mentionné dans Esther, et ce silence est lui-même la clé du livre. Cette absence est voulue : Dieu est caché mais présent, et il exerce sa providence derrière chaque scène — l'insomnie, le festin, le moment choisi. Lu au niveau du livre, Esther enseigne que le Dieu qu'on ne nomme pas règne même quand il semble absent.
 
 > EN: Explain why the absence of God's name in the book of Esther is itself the key to reading the book — give the book-context interpretation.
 
-**5. Décrivez le contexte historique du livre d'Esther — l'Empire perse, les Juifs en exil, Haman l'Amalécite — et expliquez comment cet arrière-plan change notre manière de lire l'histoire.**  
+**5. Décrivez l'arrière-plan historique d'Esther — l'empire où vivaient les Juifs déportés et l'origine de leur adversaire, Haman — et expliquez comment cet arrière-plan change notre manière de lire le récit.**  
 Mots-clés : perse · xerxès / xerxes / assuérus / assuerus · exil · haman · amalé / amale · ancien / antique · histoire / histori · ennemi  
 Modèle : Esther se déroule vers 480 av. J.-C. dans l'Empire perse, sous Xerxès (Assuérus), alors que les Juifs sont dispersés en exil dans 127 provinces. Haman est un Amalécite, descendant de l'ancien ennemi d'Israël depuis le Sinaï. Quand on connaît cette histoire, son complot pour détruire les Juifs n'est pas une méchanceté gratuite, mais un chapitre de plus dans une guerre de mille ans — et le danger devient palpable.
 
 > EN: Describe the historical context of the book of Esther — Persian Empire, Jews in exile, Haman as an Amalekite — and explain how this background changes the way we read the story.
 
-**6. Donnez un exemple tiré du livre d'Esther où la compréhension du contexte culturel perse change le sens d'une scène que le lecteur moderne pourrait autrement manquer.**  
+**6. Donnez un exemple tiré d'Esther où la connaissance des mœurs de la cour perse change le sens d'un épisode que le lecteur moderne pourrait autrement manquer.**  
 Mots-clés : perse · sceptre · le roi / du roi / au roi · coutume / usage · culture · scène / scene · providen · sommeil / dormir / insomni  
 Modèle : Dans la culture perse, personne, pas même la reine, ne pouvait s'approcher du roi sans être invité ; si le roi ne tendait pas son sceptre d'or, le visiteur était mis à mort — si bien que le « si je dois périr, je périrai » d'Esther était littéral, et non dramatique. Et un roi qui se faisait lire les chroniques quand il ne trouvait pas le sommeil suivait une coutume normale, pas une bizarrerie ; cette nuit-là, elle devint providence pour Mardochée. Le contexte culturel rend à chaque scène son poids.
 
@@ -595,8 +603,8 @@ Modèle : La promesse qui court sous Esther est l'alliance que Dieu a faite avec
 
 > EN: Identify the canonical-context promise that drives the book of Esther from underneath, and show how it is fulfilled in the story.
 
-**8. Expliquez la distinction entre « l'histoire d'en bas » et « l'histoire d'en haut » en prenant Esther comme exemple, et décrivez ce qui se passe quand un pasteur ne prêche que l'une ou l'autre.**  
-Mots-clés : d en bas / inférieur / inferieur · d en haut / supérieur / superieur · histoire / récit / recit · palais · dieu · moralis · abstraction / abstrait · prêch / prech / prédic / predic  
+**8. Expliquez la distinction entre « l'histoire d'en bas » et « l'histoire d'en haut » en prenant Esther comme exemple, et décrivez ce qui arrive quand un pasteur, en chaire, s'en tient à l'une ou à l'autre.**  
+Mots-clés : d en bas / inférieur / inferieur · d en haut / supérieur / superieur · alliance / messie / lignée / lignee · palais · dieu · moralis · abstraction / abstrait · prêch / prech / prédic / predic  
 Modèle : Chaque texte a une histoire d'en bas et une histoire d'en haut. Dans Esther, l'histoire d'en bas est ce que voit le palais — un roi insomniaque, une reine courageuse, un courtisan ambitieux. L'histoire d'en haut est ce que Dieu seul voit — son alliance qui se maintient elle-même et la lignée du Messie préservée. Ne prêchez que l'histoire d'en bas, et vous obtenez du moralisme ; ne prêchez que celle d'en haut, et vous obtenez de l'abstraction. L'exégète doit voir les deux.
 
 > EN: Explain the distinction between the "lower story" and the "upper story" using Esther as your example, and describe what happens when a pastor preaches only one or the other.

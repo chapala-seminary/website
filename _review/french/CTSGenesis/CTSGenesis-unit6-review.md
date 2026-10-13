@@ -26,11 +26,13 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
 - **Genèse 14:23** — « afin que tu ne dises pas: J'ai enrichi Abram. »  
   _Block b032, fill 8 (answer 'enrichi' instead of 'rich'). Verified online (info-bible.org LSG)._
 - **⚠** **Genèse 15:6** — « Abram eut confiance en l'Éternel, qui le lui imputa à justice. »  
-  _Blocks b034, MC 16, fill 9, SA 8. NKJV 'believed in the LORD ... accounted it to him for righteousness'; LSG 'eut confiance ... imputa à justice'. The lesson's word 'believed' becomes 'eut confiance' in the quotation; teaching prose keeps 'il croit Dieu' (cf. Romains 4:3 LSG 'Abraham crut à Dieu'). Verified online (info-bible.org LSG)._
+  _Blocks b034, MC 16, fill 9, SA 8. NKJV 'believed in the LORD ... accounted it to him for righteousness'; LSG 'eut confiance ... imputa à justice'. The lesson's word 'believed' becomes 'eut confiance' in the quotation; teaching prose keeps 'il croit Dieu' (cf. Romains 4:3 LSG 'Abraham crut à Dieu'). Verified online (info-bible.org LSG). Convention 1 applied: b034 now adds one sentence on the Hebrew sense ('croire / se fier') and quotes Romains 4:3 LSG 'Abraham crut à Dieu' (checked with the offline LSG tool)._
 - **⚠** **Genèse 15:17** — « et voici, ce fut une fournaise fumante, et des flammes passèrent entre les animaux partagés. »  
   _Not quoted in English; allusion in b036 and fill 10. NKJV 'burning torch ... between those pieces'; LSG 'des flammes ... entre les animaux partagés'. French prose uses 'flammes' and 'morceaux des animaux partagés' so the fill answer 'morceaux' still works. Verified online (info-bible.org LSG)._
 - **Galates 3:8** — « Aussi l'Écriture, prévoyant que Dieu justifierait les païens par la foi, a d'avance annoncé cette bonne nouvelle à Abraham: Toutes les nations seront bénies en toi! »  
   _Block b038. NKJV 'preached the gospel to Abraham beforehand'; LSG 'a d'avance annoncé cette bonne nouvelle'. 'Bonne nouvelle' = gospel, so the 'trajectoire de l'Évangile' teaching still holds. Verified online (info-bible.org LSG)._
+- **Romains 4:3** — « Abraham crut à Dieu, et cela lui fut imputé à justice. »  
+  _Block b034 (partial quote 'Abraham crut à Dieu'), added for convention 1. Checked with the offline LSG tool._
 
 ## 3. Terms for the reviewer to confirm
 
@@ -211,7 +213,7 @@ Genèse 15:6 — La justice par la foi
 > EN: Genesis 15:6 — Righteousness by Faith
 
 **b034**  
-Alors qu’Abram est aux prises avec l’absence d’héritier, Dieu lui adresse de nouveau une promesse et l’oriente vers une descendance qu’il ne pourrait pas compter. La Genèse dit alors : « Abram eut confiance en l’Éternel, qui le lui imputa à justice ». Ce verset devient fondamental en Romains 4 et en Galates 3. La juste position d’Abraham devant Dieu n’est pas présentée comme un salaire gagné par une conduite irréprochable. Il croit Dieu, et la justice lui est imputée ; le salut est par la grâce, au moyen de la foi.
+Alors qu’Abram est aux prises avec l’absence d’héritier, Dieu lui adresse de nouveau une promesse et l’oriente vers une descendance qu’il ne pourrait pas compter. La Genèse dit alors : « Abram eut confiance en l’Éternel, qui le lui imputa à justice ». Le verbe hébreu signifie à la fois « croire » et « se fier » ; Paul cite d’ailleurs : « Abraham crut à Dieu » (Romains 4:3). Ce verset devient fondamental en Romains 4 et en Galates 3. La juste position d’Abraham devant Dieu n’est pas présentée comme un salaire gagné par une conduite irréprochable. Il croit Dieu, et la justice lui est imputée ; le salut est par la grâce, au moyen de la foi.
 
 > EN: When Abram struggles with the absence of an heir, God again speaks promise and points him toward descendants beyond his ability to count. Genesis then says, “And he believed in the LORD, and He accounted it to him for righteousness.” This verse becomes foundational in Romans 4 and Galatians 3. Abraham’s right standing with God is not presented as a wage earned by flawless performance. He believes God, and righteousness is credited to him; salvation is by grace through faith.
 

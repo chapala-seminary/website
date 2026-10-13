@@ -21,7 +21,7 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
 - **Genèse 39:2, 21, 23** — « L'Éternel fut avec lui / L'Éternel fut avec Joseph / l'Éternel était avec lui »  
   _The repeated phrase 'The LORD was with Joseph' (b013, b014, b025, b026, b046, b048, MC 5) is rendered with LSG 39:21 wording « L'Éternel fut avec Joseph »._
 - **⚠** **Genèse 41:16** — « Ce n'est pas moi! c'est Dieu qui donnera une réponse favorable à Pharaon. »  
-  _b032, MC 14, fill 8. NKJV 'an answer of peace' vs LSG 'une réponse favorable'. Fill 8 answer changed from 'peace' to 'favorable' (accepting 'de paix', 'paisible'). MC 14 option shortened from LSG._
+  _b032, MC 14, fill 8. NKJV 'an answer of peace' vs LSG 'une réponse favorable'. Fill 8 answer changed from 'peace' to 'favorable' (accepting 'de paix', 'paisible'). MC 14 option now a verbatim LSG excerpt (« Ce n'est pas moi ! c'est Dieu qui donnera une réponse »)._
 - **⚠** **Genèse 39:9** — « Comment ferais-je un aussi grand mal et pécherais-je contre Dieu? »  
   _Not quoted, paraphrased in b018 and fill 5 ('a great sin against God'). LSG says 'grand mal' + 'pécherais'; fill 5 answer 'péché' also accepts 'mal' / 'grand mal'._
 - **Genèse 37:24** — « Ils le prirent, et le jetèrent dans la citerne. »  
@@ -407,10 +407,10 @@ _Pourquoi :_ Deux ans.
 
 **14. Que dit Joseph avant d'expliquer le songe de Pharaon ?**  
 · A. C'est ma sagesse qui donnera la réponse  
-✓ B. Ce n'est pas moi ! c'est Dieu qui répondra  
+✓ B. Ce n'est pas moi ! c'est Dieu qui donnera une réponse  
 · C. Demande à tes magiciens ; ils répondront  
 · D. Libère-moi, et je répondrai  
-_Pourquoi :_ Ce n'est pas moi ! c'est Dieu qui répondra.  
+_Pourquoi :_ Ce n'est pas moi ! c'est Dieu qui donnera une réponse.  
 > EN: What does Joseph say before interpreting Pharaoh’s dream? — ✓ It is not in me; God will answer
 
 **15. Quelle mesure pratique Joseph recommande-t-il ?**  

@@ -13,6 +13,10 @@ Counts: 29 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 3. Ex 18:21 'men of truth' = LSG « hommes intègres ». b016 and MC 6 follow LSG. Is that OK?
 4. Jethro as 'a Gentile' is translated « un non-Juif » rather than « païen ». Is that OK?
 
+## Problems in the English source
+
+- SA4: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -91,7 +95,7 @@ Imaginez le camp au lever du soleil. Des tentes jusqu'à l'horizon dans toutes l
 > EN: Picture the camp at sunrise. Tents to the horizon in every direction, smoke from a thousand cooking fires rising straight in the still morning air, and already the line is forming. Before Moses has finished his bread, they are standing before him — a man whose ox has gored his neighbor's ox, two brothers quarreling over a strip of land, a widow cheated of her wages. Moses sits, and the people stand about him from the morning unto the evening. One case, then the next, then the next. The line does not shorten. It only changes faces. The sun climbs and the sun falls, and Moses is still there, judging alone, telling each man the statutes of God and making them know His laws.
 
 **b011**  
-Or il y a un visiteur dans le camp. Jéthro, le prêtre de Madian, le beau-père de Moïse, est venu au désert pour ramener à Moïse sa femme et ses fils. Et ce jour-là, Jéthro observe. Il ne dit rien pendant que le soleil monte. Il observe toute la longue journée — la patience de Moïse, oui, mais aussi la lassitude, les épaules qui s'affaissent, la file qui ne finit jamais. Et le soir, quand tout est enfin terminé, le vieux prêtre prend la parole : « Que fais-tu là avec ce peuple ? Pourquoi sièges-tu seul, et tout le peuple se tient-il devant toi, depuis le matin jusqu'au soir ? »
+Or il y a un visiteur dans le camp. Jéthro, le sacrificateur de Madian, le beau-père de Moïse, est venu au désert pour ramener à Moïse sa femme et ses fils. Et ce jour-là, Jéthro observe. Il ne dit rien pendant que le soleil monte. Il observe toute la longue journée — la patience de Moïse, oui, mais aussi la lassitude, les épaules qui s'affaissent, la file qui ne finit jamais. Et le soir, quand tout est enfin terminé, le vieux sacrificateur prend la parole : « Que fais-tu là avec ce peuple ? Pourquoi sièges-tu seul, et tout le peuple se tient-il devant toi, depuis le matin jusqu'au soir ? »
 
 > EN: Now there is a visitor in the camp. Jethro, the priest of Midian, Moses' father-in-law, has come out to the wilderness to bring Moses his wife and sons. And on this day Jethro watches. He says nothing while the sun climbs. He watches the whole long day — the patience of Moses, yes, but also the weariness, the slumping shoulders, the line that never ends. And in the evening, when it is finally over, the old priest speaks: “What is this thing that thou doest to the people? Why sittest thou thyself alone, and all the people stand by thee from morning unto even?”
 
@@ -126,7 +130,7 @@ Et puis la structure elle-même : chefs de dix, de cinquante, de cent, de mille.
 > EN: And then the structure itself: rulers of tens, fifties, hundreds, thousands. A ladder of shared responsibility, so that the small matter is settled near the people who brought it, and only the great matter, the hard matter, climbs all the way up to Moses. “Every great matter they shall bring unto thee, but every small matter they shall judge.” The leader is not removed from the work; he is freed for the work that only he can do.
 
 **b018**  
-Voici quelque chose qui mérite qu'on s'y arrête. D'où venait ce modèle ? Pas du Sinaï. Pas, à ce moment-là, de la nuée, ni du feu, ni de la voix qui appelait du buisson. Il est venu de la bouche de Jéthro — un non-Juif, un prêtre de Madian, un homme étranger à l'alliance, le beau-père de Moïse. Dieu était-il moins présent dans ce conseil parce qu'il l'avait envoyé par un homme inattendu ? Je ne le crois pas. Le texte dit simplement : « Moïse écouta la voix de son beau-père, et fit tout ce qu'il avait dit. » Moïse, qui parlait avec Dieu face à face comme un homme parle à son ami, a incliné la tête devant une sagesse venue par le père de sa femme. Il y a là une humilité que nous ne devrions pas survoler trop vite. Dieu n'est pas trop fier pour mettre de l'ordre dans sa maison par quelque instrument qu'il choisisse. Et l'ordre de sa maison n'est pas indigne de l'attention de son Esprit. L'administration, bien comprise, ne détourne pas de l'œuvre sainte. Elle en fait partie. C'est un don.
+Voici quelque chose qui mérite qu'on s'y arrête. D'où venait ce modèle ? Pas du Sinaï. Pas, à ce moment-là, de la nuée, ni du feu, ni de la voix qui appelait du buisson. Il est venu de la bouche de Jéthro — un non-Juif, un sacrificateur de Madian, un homme étranger à l'alliance, le beau-père de Moïse. Dieu était-il moins présent dans ce conseil parce qu'il l'avait envoyé par un homme inattendu ? Je ne le crois pas. Le texte dit simplement : « Moïse écouta la voix de son beau-père, et fit tout ce qu'il avait dit. » Moïse, qui parlait avec Dieu face à face comme un homme parle à son ami, a incliné la tête devant une sagesse venue par le père de sa femme. Il y a là une humilité que nous ne devrions pas survoler trop vite. Dieu n'est pas trop fier pour mettre de l'ordre dans sa maison par quelque instrument qu'il choisisse. Et l'ordre de sa maison n'est pas indigne de l'attention de son Esprit. L'administration, bien comprise, ne détourne pas de l'œuvre sainte. Elle en fait partie. C'est un don.
 
 > EN: Here is something worth stopping over. Where did this pattern come from? Not from Sinai. Not, in this moment, from the cloud or the fire or the voice that called from the bush. It came from the mouth of Jethro — a Gentile, a priest of Midian, a man outside the covenant, Moses' father-in-law. Was God any less in the counsel because He sent it through an unexpected man? I do not believe He was. The text says simply, “So Moses hearkened to the voice of his father in law, and did all that he had said.” Moses, who spoke with God face to face as a man speaks with his friend, bowed his head to wisdom that came through his wife's father. There is a humility in that we should not rush past. God is not too proud to order His house through whatever vessel He chooses. And the ordering of His house is not beneath the notice of His Spirit. Administration, rightly seen, is not a distraction from the holy work. It is part of it. It is a gift.
 
@@ -262,7 +266,7 @@ _Pourquoi :_ Chefs de mille, chefs de cent, chefs de cinquante et chefs de dix (
 
 **8. Selon le plan de Jéthro, les affaires importantes ou difficiles étaient portées devant —**  
 · A. les anciens  
-· B. les prêtres  
+· B. les sacrificateurs  
 ✓ C. Moïse  
 · D. le peuple  
 _Pourquoi :_ « Qu'ils portent devant toi toutes les affaires importantes. »  
@@ -276,7 +280,7 @@ _Pourquoi :_ « Qu'ils portent devant toi toutes les affaires importantes. »
 _Pourquoi :_ « Qu'ils prononcent eux-mêmes sur les petites causes. »  
 > EN: The small matters were to be judged — — ✓ by the appointed rulers
 
-**10. Que ce sage conseil soit venu par Jéthro, un prêtre non-juif, montre que —**  
+**10. Que ce sage conseil soit venu par Jéthro, un sacrificateur non-juif, montre que —**  
 · A. Moïse n'était pas spirituel  
 · B. la loi venait des non-Juifs  
 · C. Israël n'avait pas de dirigeants  
@@ -368,7 +372,7 @@ _Pourquoi :_ La capacité et le caractère sont tous deux nécessaires, mais le 
 
 Grading ignores accents, capitals and one leading article (le/la/les/l'/un/une/des).
 
-**1.** Le conseil qui a transformé la manière de diriger de Moïse est venu de Jéthro, le prêtre de ____, un homme étranger à l'alliance.  
+**1.** Le conseil qui a transformé la manière de diriger de Moïse est venu de Jéthro, le sacrificateur de ____, un homme étranger à l'alliance.  
 Réponse : **Madian** · aussi acceptées : Midian, pays de Madian  
 > EN: The counsel that reshaped Moses' leadership came from Jethro, the priest of ____, a man outside the covenant. — **Midian**
 
@@ -430,7 +434,7 @@ Modèle : Jéthro proposa d'établir des chefs de mille, chefs de cent, chefs de
 
 > EN: Describe the structure Jethro proposed and how matters were handled within it.
 
-**4. Pourquoi est-il significatif que ce conseil soit venu par Jéthro, un prêtre non-juif, étranger à l'alliance ?**  
+**4. Pourquoi est-il significatif que ce conseil vienne de Jéthro, un sacrificateur païen qui n'appartenait pas à l'alliance ?**  
 Mots-clés : non-juif / non juif / païen / paien · inattendu · sagesse · étranger / etranger / en dehors / hors de · dieu · écout / ecout · intermédiaire / intermediaire / entremise / venu par / venue par / passer par · humbl / humilit  
 Modèle : Cela montre que Dieu peut envoyer la sagesse nécessaire pour mettre en ordre sa maison par l'intermédiaire d'une personne inattendue, même un non-Juif étranger à l'alliance. Moïse, bien qu'il parlât avec Dieu, écouta humblement, car un bon conseil est un don de Dieu, d'où qu'il vienne.
 

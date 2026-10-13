@@ -11,6 +11,14 @@ Counts: 23 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 1. The intro calls the 19th century 'the Great Century'. In French « le Grand Siècle » normally means the age of Louis XIV (17th century). Keep it, or say « le grand siècle des missions »?
 2. No MC 'why' explanations exist in the source for this unit (all null); left null.
 
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+- SA3: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -131,7 +139,7 @@ Examen final de l'Unité 8
 > EN: Unit 8 Final Exam
 
 **b029**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les questions à choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez essayer de nouveau.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les questions à choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez essayer de nouveau.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -352,7 +360,7 @@ Réponse : **blé** · aussi acceptées : froment
 
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
-**1. Racontez l'histoire d'Adoniram Judson, en parlant de sa patience et de son don à la Birmanie.**  
+**1. Racontez l'histoire d'Adoniram Judson : ce que sa vie enseigne sur la persévérance et ce qu'il a laissé au peuple qu'il a servi.**  
 Mots-clés : judson · améric / americ · birmanie / myanmar · sept ans / sept longues · converti / conversion · bible · birmane / birmans · patien  
 Modèle : Adoniram Judson, le premier missionnaire protestant américain envoyé à l'étranger, partit pour la Birmanie avec sa femme Ann en 1812 et prêcha sept longues années sans un seul converti avant que le premier croyant birman soit baptisé en 1819. Il connut la prison et la torture, et enterra sa femme et ses enfants sur le champ de mission, mais il persévéra et acheva en 1840 une traduction de la Bible entière en langue birmane, encore utilisée aujourd'hui — sa patience montre que ceux qui sèment avec larmes peuvent encore moissonner avec chants d'allégresse.
 
@@ -364,7 +372,7 @@ Modèle : David Livingstone était un médecin et pasteur écossais, à la fois 
 
 > EN: Who was David Livingstone, and what did he give his life to?
 
-**3. Décrivez la stratégie de Hudson Taylor et la Mission à l'intérieur de la Chine.**  
+**3. Décrivez la stratégie de Hudson Taylor et l'œuvre qu'il fonda en 1865.**  
 Mots-clés : taylor · chine · mission · intérieur / interieur · chinois · vêtement / vetement / costume / habillé / habille · la foi / de foi / confiance · fonds / financ / argent  
 Modèle : Alors que la plupart des missions de son époque restaient en sécurité dans les ports côtiers de la Chine ouverts par les traités, la stratégie de Hudson Taylor consistait à s'avancer dans l'immense intérieur non évangélisé. Il adopta le vêtement chinois et vécut parmi le peuple pour ôter tout obstacle inutile entre les Chinois et Christ, et en 1865 il fonda la Mission à l'intérieur de la Chine, qui, en cinquante ans, comptait plus de mille missionnaires dans toutes les provinces de la Chine.
 
@@ -395,18 +403,18 @@ Modèle : En 1956, cinq jeunes missionnaires américains, dont Jim Elliot, parti
 > EN: Tell the story of Jim Elliot and the five missionaries in Ecuador, including what happened afterward.
 
 **8. Expliquez la parole de Jim Elliot : « Il n'est pas fou, celui qui donne ce qu'il ne peut garder pour gagner ce qu'il ne peut perdre. »**  
-Mots-clés : pas fou / un fou / folie / insens · donn · garde / conserv · gagn · perdr / perdu · étern / etern · sacrifi · la vie / sa vie / vie terrestre  
+Mots-clés : tempor / périss / periss · donn · sagesse / avisé / avise · gagn · récompens / recompens · étern / etern · sacrifi · la vie / sa vie / vie terrestre  
 Modèle : La parole de Jim Elliot signifie que renoncer à quelque chose de temporaire et de périssable — comme la vie terrestre ou la sécurité — pour gagner quelque chose d'éternel et d'impérissable n'est pas une folie mais de la sagesse, quelle que soit l'apparence aux yeux du monde. Il n'était pas fou de risquer sa vie pour les Huaorani, car ce qu'il gagnait, la récompense éternelle et des âmes amenées à Christ, ne pourrait jamais lui être enlevé, tandis que ce qu'il donnait, sa vie terrestre, il n'aurait de toute façon jamais pu le garder pour toujours.
 
 > EN: Explain Jim Elliot's saying, 'He is no fool who gives what he cannot keep to gain what he cannot lose.'
 
-**9. Comment la leçon utilise-t-elle l'image du grain de blé (Jean 12:24) pour expliquer la mort des martyrs ?**  
+**9. Comment la leçon utilise-t-elle l'image de Jean 12:24 pour expliquer la mort des martyrs ?**  
 Mots-clés : grain · de blé / de ble · meur / mourir / mort · fruit · martyr · semence / graine · église / eglise · moisson / récolte / recolte  
 Modèle : La leçon utilise Jean 12:24, où Jésus dit que le grain de blé doit tomber en terre et mourir pour porter beaucoup de fruit, afin d'expliquer que la mort des martyrs ne fut pas un gaspillage. De même qu'une seule semence doit être enterrée et sembler perdue pour se multiplier en une moisson, la mort de Jim Elliot et de ses compagnons devint la semence à partir de laquelle beaucoup de Huaorani, y compris leurs anciens meurtriers, furent plus tard amenés à la foi.
 
 > EN: How does the lesson use the picture of the grain of wheat (John 12:24) to explain the martyrs' deaths?
 
-**10. Parmi ces cinq vies — la patience de Judson, la compassion de Livingstone, la foi de Taylor, le courage de Slessor, le sacrifice d'Elliot — laquelle vous parle le plus, et pourquoi ?**  
+**10. Parmi les cinq vies étudiées dans cette unité — Judson, Livingstone, Taylor, Slessor, Elliot — et la qualité qui marque chacune, laquelle vous parle le plus, et pourquoi ?**  
 Mots-clés : patience · compassion · la foi / de foi · courag · sacrifi · missionnai · suivre / imiter / exemple · tâche / tache / œuvre / oeuvre  
 Modèle : Cette question de réflexion personnelle invite l'étudiant à dire laquelle des cinq qualités — la patience de Judson, la compassion de Livingstone, la foi de Taylor, le courage de Slessor ou le sacrifice d'Elliot — parle le plus directement à sa propre vie et à son appel en ce moment. Une réponse réfléchie nomme une qualité précise et la relie honnêtement à un domaine réel de sa propre marche avec Dieu.
 

@@ -13,6 +13,19 @@ Counts: 32 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 3. Exodus 4:31 in LSG says the LORD « avait visité » the Israelites ('was concerned about them') and they « s'inclinèrent et se prosternèrent » ('bowed down and worshipped'). I kept LSG and adjusted MC 6. OK?
 4. Exam questions refer to 'Wayne'; I wrote « Wayne Cook ». Would you prefer « le Dr. Cook » for French readers?
 
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+- SA2: English prompt passes its own keywords
+- SA3: English prompt passes its own keywords
+- SA4: English prompt passes its own keywords
+- SA5: English prompt passes its own keywords
+- SA6: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -25,7 +38,7 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
   _b023, SA 5. 'LORD Almighty' = « l'Éternel des armées ». « gloire » present as needed. Checked online._
 - **Jean 4:24** — « Dieu est Esprit, et il faut que ceux qui l'adorent l'adorent en esprit et en vérité. »  
   _b025, b027, MC 11, fill 6, SA 6. Checked online._
-- **⚠** **Actes 13:2** — « Pendant qu'ils servaient le Seigneur dans leur ministère et qu'ils jeûnaient, le Saint-Esprit dit: Mettez-moi à part Barnabas et Saul pour l'œuvre à laquelle je les ai appelés. »  
+- **⚠** **Actes 13:2** — « Pendant qu'ils servaient le Seigneur dans leur ministère et qu'ils jeûnaient, le Saint-Esprit dit: Mettez-moi à part Barnabas et Saul pour l'oeuvre à laquelle je les ai appelés. »  
   _b025, SA 7. English 'while they were worshipping the Lord' = LSG « pendant qu'ils servaient le Seigneur dans leur ministère » (Greek leitourgounton). The word 'worship' disappears, but LSG actually supports the lesson's point that leiturgia = ministry/service. LSG wording used in lesson and SA 7 prompt. Checked online._
 - **Michée 6:8** — « On t'a fait connaître, ô homme, ce qui est bien; Et ce que l'Éternel demande de toi, C'est que tu pratiques la justice, Que tu aimes la miséricorde, Et que tu marches humblement avec ton Dieu. »  
   _b033, fill 9: the three verbs are given as an unquoted paraphrase in LSG vocabulary (pratiquer la justice, aimer la miséricorde, marcher humblement). 'mercy' = « miséricorde » (fill answer). Checked online._
@@ -179,7 +192,7 @@ Examen final de l'unité 1
 > EN: Unit 1 Final Exam
 
 **b038**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -401,12 +414,12 @@ Réponse : **l'initiative** · aussi acceptées : les devants, le premier pas
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
 **1. Énoncez avec vos propres mots la définition théologique de l'adoration. Pourquoi Luther dit-il qu'« avoir Dieu, c'est l'adorer », et que se passe-t-il lorsque nous adorons un Dieu que nous avons inventé nous-mêmes ?**  
-Mots-clés : dieu · luther · répon / repon · faux · objet · révél / revel · vrai / véritable / veritable · avoir / possède / possede  
+Mots-clés : idol · luther · répon / repon · faux · objet · révél / revel · vrai / véritable / veritable · avoir / possède / possede  
 Modèle : La définition théologique de l'adoration est simplement : Dieu. L'objet de l'adoration est Dieu, et l'adoration est notre réponse à ce que Dieu est et à ce qu'il a fait. Luther a dit qu'« avoir Dieu, c'est l'adorer », parce que l'adoration n'est pas une chose dont nous prenons l'initiative, mais une réponse à un Dieu réel qui s'est révélé ; si nous adorons un Dieu inventé dans notre propre tête au lieu du vrai Dieu, aussi sincères que soient nos sentiments, nous adorons un faux dieu et notre adoration se pose sur une idole plutôt que sur le vrai Dieu.
 
 > EN: State the theological definition of worship in your own words. Why does Luther say that 'to have God is to worship Him,' and what happens when we worship a God we have invented ourselves?
 
-**2. Wayne Cook énumère cinq caractéristiques du Dieu que nous adorons : personnel, transcendant, immanent, digne de confiance et trinitaire. Expliquez pourquoi chacune est importante pour une adoration authentique.**  
+**2. Wayne Cook énumère cinq caractéristiques du Dieu que nous adorons. Nommez-les et expliquez pourquoi chacune est importante pour une adoration authentique.**  
 Mots-clés : personn · transcend · immanen / immanent · confiance / fidèle / fidele · trinit / trois personnes · proche / proximit · au-dessus / au dessus · relation  
 Modèle : Dieu est personnel : nous entrons donc en relation avec lui, et non avec une abstraction. Il est transcendant, au-dessus de nous : nous l'approchons donc avec révérence et non avec désinvolture. Il est immanent : sa présence constante et proche façonne notre conduite et notre prière. Il est digne de confiance : notre adoration repose sur sa fidélité immuable et non sur des sentiments changeants. Et il est trinitaire : notre adoration s'adresse au seul vrai Dieu en trois Personnes, et non à une divinité inférieure ou inventée. Chaque caractéristique façonne la manière dont l'adoration authentique s'approche de lui.
 
@@ -418,43 +431,43 @@ Modèle : Le mot anglais « worship » vient du vieil anglais « worth-ship », 
 
 > EN: Discuss the etymology of the English word 'worship' from the Old English 'worth-ship.' What does this teach about how worship is connected to what we value most highly?
 
-**4. Définissez le mot hébreu shachah et expliquez son double sens. Servez-vous d'Exode 4:31 pour illustrer le lien entre la foi et la prosternation de l'adoration.**  
+**4. Définissez le mot hébreu shachah et expliquez son double sens. Servez-vous d'Exode 4:31 pour illustrer le lien entre la foi et le geste extérieur de l'adoration.**  
 Mots-clés : shachah · inclin / courber · prostern / tomber · le roi / du roi / au roi · révéren / reveren / crainte · obéiss / obeiss · exode · crurent / croy / croire / le peuple crut  
 Modèle : Shachah signifie tomber devant le roi — se prosterner et baiser le sol ou la main d'un supérieur ; il exprime à la fois la crainte révérencielle et le service obéissant. Exode 4:31 illustre le lien avec la foi : lorsque le peuple apprit que l'Éternel avait vu sa souffrance, d'abord « le peuple crut », puis ils s'inclinèrent et se prosternèrent. La foi produit la prosternation : l'adoration, c'est le corps et la volonté qui répondent à ce que le cœur en est venu à croire.
 
 > EN: Define the Hebrew word shachah and explain its dual meaning. Use Exodus 4:31 to illustrate the connection between belief and the bowing of worship.
 
 **5. Expliquez le mot hébreu kabod, sa traduction, et la manière dont Ésaïe 6:3 illustre son sens. Pourquoi « gloire » et « adoration » se traduisent-ils à partir de la même racine ?**  
-Mots-clés : kabod · gloire · honneur / honor · ésaïe / esaie / esaïe / ésaie · saint · digne · louange / louer · plein / rempli  
+Mots-clés : kabod · séraphin / seraphin · honneur / honor · ésaïe / esaie / esaïe / ésaie · saint · digne · louange / louer · plein / rempli  
 Modèle : Kabod se traduit soit par adoration, soit par gloire, et exprime l'honneur dû à Dieu. Ésaïe 6:3 montre les séraphins qui crient : « Saint, saint, saint est l'Éternel des armées! toute la terre est pleine de sa gloire! » La gloire et l'adoration partagent la même racine hébraïque parce que rendre gloire à Dieu, c'est l'adorer ; il est digne de louange, d'honneur et de service obéissant, et kabod réunit tout cela en un seul mot.
 
 > EN: Discuss the Hebrew word kabod, its translation, and how Isaiah 6:3 illustrates its meaning. Why are 'glory' and 'worship' translated from the same root?
 
-**6. Définissez proskuneo et commentez Jean 4:24 (« Dieu est Esprit, et il faut que ceux qui l'adorent l'adorent en esprit et en vérité »). Que signifie adorer en esprit et en vérité ?**  
+**6. Définissez proskuneo et commentez Jean 4:24, où Jésus dit comment le Père veut être adoré. Que signifient pour l'adorateur les deux termes clés de ce verset ?**  
 Mots-clés : proskuneo · prostern · esprit · vérité / verite · jean · réel / reel / véritable / veritable · cœur / coeur · forme / extérieur / exterieur  
 Modèle : Proskuneo signifie se prosterner devant un autre ; c'est l'équivalent grec de l'hébreu shachah. Jésus l'emploie en Jean 4:24 : « Dieu est Esprit, et il faut que ceux qui l'adorent l'adorent en esprit et en vérité. » Adorer en esprit et en vérité, c'est engager à la fois l'affection vivante du cœur (l'esprit), et non une simple forme extérieure, et l'intelligence solidement fondée sur qui Dieu est réellement (la vérité). C'est offrir à Dieu une réponse humaine réelle et entière, plutôt qu'un sentiment vide ou un intellect aride.
 
 > EN: Define proskuneo and discuss John 4:24 ('God is spirit, and his worshippers must worship in spirit and in truth'). What does it mean to worship in spirit and in truth?
 
-**7. Définissez leiturgia et expliquez son rapport avec l'adoration et le service. Comment Actes 13:2 (« pendant qu'ils servaient le Seigneur dans leur ministère et qu'ils jeûnaient ») illustre-t-il l'adoration comme ministère ?**  
+**7. Définissez leiturgia et précisez ce que ce mot nous apprend sur la nature de l'adoration. Comment Actes 13:2 montre-t-il que l'adoration conduit à l'action ?**  
 Mots-clés : leitur / leitour · service / servir / servaient · minist · liturgie · actes · antioche · obéi / obei · jeûn / jeun  
 Modèle : Leiturgia se traduit par ministère, service ou culte, et c'est la racine de notre mot « liturgie ». Il désigne l'action du peuple dans le culte ou un ministère accompli pour le Seigneur ; l'adoration n'est donc jamais un simple sentiment privé. Actes 13:2 l'illustre : à Antioche, « pendant qu'ils servaient le Seigneur dans leur ministère et qu'ils jeûnaient », le Saint-Esprit mit à part Barnabas et Saul pour l'œuvre missionnaire — l'adoration a débordé directement en un service obéissant et en mission.
 
 > EN: Define leiturgia and discuss its relationship to worship and service. How does Acts 13:2 ('while they were worshipping the Lord and fasting') illustrate worship as ministry?
 
-**8. Commentez la définition de Franklin Segler : « L'adoration chrétienne est la réponse aimante de l'homme, dans la foi personnelle, à la révélation personnelle que Dieu fait de lui-même en Jésus-Christ. » Sur quels trois éléments cette définition insiste-t-elle ?**  
+**8. Commentez la définition de l'adoration chrétienne donnée par Franklin Segler. Sur quels trois éléments cette définition insiste-t-elle ?**  
 Mots-clés : segler · répon / repon · foi personnelle / dans la foi / par la foi · révél / revel · christ · personnel · amour / aimant · lui-même / lui-meme / soi-même / soi-meme  
 Modèle : La définition de Segler, « L'adoration chrétienne est la réponse aimante de l'homme, dans la foi personnelle, à la révélation personnelle que Dieu fait de lui-même en Jésus-Christ », insiste sur trois éléments : l'adoration est une réponse, ce qui signifie que Dieu agit le premier ; elle se fait dans la foi personnelle, et non dans une croyance abstraite ; et elle s'adresse à la révélation de Dieu en Jésus-Christ, ce qui signifie que l'adoration chrétienne est centrée sur Christ et non sur une divinité vague.
 
 > EN: Discuss Franklin Segler's definition: 'Christian worship is man's loving response in personal faith to God's personal revelation of himself in Jesus Christ.' What three elements does this definition emphasize?
 
-**9. William Temple a défini l'adoration par cinq actions parallèles : vivifier la conscience par la sainteté de Dieu, nourrir l'intelligence de la vérité de Dieu, purifier l'imagination par la beauté de Dieu, ouvrir le cœur à l'amour de Dieu et consacrer la volonté au dessein de Dieu. Expliquez pourquoi cette définition est si complète.**  
+**9. William Temple a défini l'adoration par cinq actions parallèles. Rappelez-les brièvement et expliquez pourquoi cette définition est si complète.**  
 Mots-clés : temple · conscien · intelligence / pensée / pensee / esprit · imagin · cœur / coeur · volonté / volonte · saint · dessein / propos  
 Modèle : La définition de Temple est si complète parce qu'elle atteint toutes les facultés de la personne humaine — la conscience, l'intelligence, l'imagination, le cœur et la volonté — et associe chacune à un attribut de Dieu : sa sainteté, sa vérité, sa beauté, son amour et son dessein. Rien chez l'adorateur ne reste inactif ; c'est la personne tout entière, et non seulement une partie comme les sentiments ou l'intellect, qui est engagée et offerte à Dieu.
 
 > EN: William Temple defined worship as five parallel actions: to quicken the conscience by the holiness of God, to feed the mind with the truth of God, to purge the imagination by the beauty of God, to open the heart to the love of God, and to devote the will to the purpose of God. Discuss why this definition is so comprehensive.
 
-**10. En prenant toutes les définitions ensemble, faites la synthèse de la nature de l'adoration chrétienne. Que signifie le fait que Dieu prend l'initiative et que l'homme répond, à la fois à cause de ce que Dieu est et à cause de ce que Dieu a fait ?**  
+**10. En rassemblant toutes les définitions étudiées, décrivez la nature de l'adoration chrétienne. Qui agit le premier dans l'adoration, qui répond, et pour quels motifs ?**  
 Mots-clés : initiative · répon / repon · son être / son etre / ce qu'il est / ce que dieu est · son œuvre / son oeuvre / ce qu'il a fait / ce que dieu a fait · dieu · révél / revel · homme / humain · synth / ensemble  
 Modèle : En prenant toutes les définitions ensemble, un seul schéma apparaît : Dieu prend toujours l'initiative, et l'homme répond. Cette réponse est motivée à la fois par ce que Dieu est (son être) et par ce que Dieu a fait (son œuvre). L'adoration, ce n'est jamais nous qui nous élevons pour trouver un Dieu lointain ; c'est nous qui répondons, de tout notre être, au Dieu qui s'est déjà abaissé jusqu'à nous pour se révéler.
 

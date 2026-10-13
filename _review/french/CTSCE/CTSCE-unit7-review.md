@@ -12,12 +12,17 @@ Counts: 55 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 2. Proverbes 25:11 in LSG reads « ciselures d'argent » (engraved silver), not a bowl or setting. I kept Andi's 'silver bowl' image as « coupe d'argent ciselée » in the teaching and used LSG's « ciselures d'argent » wherever the verse is echoed. Is that acceptable?
 3. b037 says Jesus's second question is 'Six words'; in LSG it is seven (« Et vous, qui dites-vous que je suis ? »), so the French says « Quelques mots ». OK?
 
+## Problems in the English source
+
+- SA5: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
 
 - **⚠** **Proverbes 25:11** — « Comme des pommes d'or sur des ciselures d'argent, Ainsi est une parole dite à propos. »  
-  _LSG « ciselures d'argent » (engraved silver work) where NKJV has 'settings' and KJV 'pictures' of silver; the lesson's 'silver bowl/setting' image is rendered « coupe d'argent ciselée » / « écrin » in the teaching and « ciselures d'argent » where the verse is echoed (b044, b048, fill 1). Fill 1 answer 'argent' unaffected._
+  _LSG « ciselures d'argent » (engraved silver work) where NKJV has 'settings' and KJV 'pictures' of silver; the lesson's 'silver bowl/setting' image is rendered « coupe d'argent ciselée » / « écrin » in the teaching and « ciselures d'argent » where the verse is echoed (b044, b048, fill 1). Fill 1 answer 'argent' unaffected. Quotations now keep Segond's capital « Ainsi » (verbatim)._
 - **Actes 7:52** — « Lequel des prophètes vos pères n'ont-ils pas persécuté? Ils ont tué ceux qui annonçaient d'avance la venue du Juste, que vous avez livré maintenant, et dont vous avez été les meurtriers, »
 - **Luc 24:17** — « Il leur dit: De quoi vous entretenez-vous en marchant, pour que vous soyez tout tristes? »  
   _Also quoted in MC 6 and 7 and SA 4 model._
@@ -52,7 +57,7 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
 - **question and answer** → les questions-réponses
 - **tool kit** → boîte à outils
 - **settings/pictures of silver; bowl** → ciselures d'argent (LSG); coupe d'argent ciselée, écrin — LSG image is engraving, not a bowl; author's 'bowl' kept as « coupe ».
-- **Certificate of Ministry** → Certificat de ministère — Other French courses use « Parcours Certificat »; this exam block names the track differently in English.
+- **Certificate of Ministry** → Parcours Certificat — Edition-wide convention 9: track label « Parcours Certificat » (« Certificat de ministère » only for the 12-course certificate). Master of Theology / Master of Divinity → « Th.M. » / « M.Div. ».
 - **senior saints** → les aînés dans la foi
 
 ## 4. Lesson
@@ -80,12 +85,12 @@ Les méthodes — L'exposé et la discussion
 > EN: Methods — Lecture and Discussion
 
 **b007**  
-« Comme des pommes d'or sur des ciselures d'argent, ainsi est une parole dite à propos. »
+« Comme des pommes d'or sur des ciselures d'argent, Ainsi est une parole dite à propos. »
 
 > EN: "A word fitly spoken is like apples of gold in settings of silver."
 
 **b008**  
-Texte biblique de l'unité : « Comme des pommes d'or sur des ciselures d'argent, ainsi est une parole dite à propos. » — Proverbes 25:11 (LSG)
+Texte biblique de l'unité : « Comme des pommes d'or sur des ciselures d'argent, Ainsi est une parole dite à propos. » — Proverbes 25:11 (LSG)
 
 > EN: Unit Scripture: "A word fitly spoken is like apples of gold in settings of silver." — Proverbs 25:11 (NKJV)
 
@@ -150,7 +155,7 @@ L'exposé est la méthode la plus ancienne et la plus critiquée de l'éducation
 > EN: The lecture is the oldest and most criticized method in Christian Education. Done badly, it is the worst method in the world: a teacher droning into the air while the learners count ceiling tiles. Done well, it is one of the most powerful methods ever used. Stephen's defense in Acts 7 is the longest single speech in the book of Acts, and it is a textbook lecture from beginning to end.
 
 **b021**  
-La scène se passait au sanhédrin. Étienne avait été arrêté sur de fausses accusations. Le grand prêtre lui donna l'occasion de répondre, et Étienne la saisit. Il commença par l'appel d'Abraham à Ur (Actes 7:2). Il passa à Joseph en Égypte (Actes 7:9). Il raconta Moïse et le buisson ardent (Actes 7:30). Il évoqua le désert, le tabernacle, David, le temple de Salomon. Il prêcha toute l'histoire d'Israël comme un seul argument : Dieu a toujours envoyé des libérateurs ; Israël les a toujours rejetés. Au verset 51, il avait tendu le piège. Au verset 52, il le referma : « Lequel des prophètes vos pères n'ont-ils pas persécuté ? Ils ont tué ceux qui annonçaient d'avance la venue du Juste, que vous avez livré maintenant, et dont vous avez été les meurtriers » (Actes 7:52). L'exposé avait porté les auditeurs de la Mésopotamie jusqu'à la croix, et cela sans une seule interruption.
+La scène se passait au sanhédrin. Étienne avait été arrêté sur de fausses accusations. Le souverain sacrificateur lui donna l'occasion de répondre, et Étienne la saisit. Il commença par l'appel d'Abraham à Ur (Actes 7:2). Il passa à Joseph en Égypte (Actes 7:9). Il raconta Moïse et le buisson ardent (Actes 7:30). Il évoqua le désert, le tabernacle, David, le temple de Salomon. Il prêcha toute l'histoire d'Israël comme un seul argument : Dieu a toujours envoyé des libérateurs ; Israël les a toujours rejetés. Au verset 51, il avait tendu le piège. Au verset 52, il le referma : « Lequel des prophètes vos pères n'ont-ils pas persécuté ? Ils ont tué ceux qui annonçaient d'avance la venue du Juste, que vous avez livré maintenant, et dont vous avez été les meurtriers » (Actes 7:52). L'exposé avait porté les auditeurs de la Mésopotamie jusqu'à la croix, et cela sans une seule interruption.
 
 > EN: The setting was the Sanhedrin. Stephen had been arrested on false charges. The high priest gave him the chance to answer, and Stephen took it. He began with Abraham's call from Ur (Acts 7:2). He moved to Joseph in Egypt (Acts 7:9). He told of Moses and the burning bush (Acts 7:30). He named the wilderness, the tabernacle, David, Solomon's temple. He preached the entire history of Israel as a single argument: God has always sent deliverers; Israel has always rejected them. By verse 51 he had laid the trap. By verse 52 he sprung it: "Which of the prophets have not your fathers persecuted? and they have slain them which shewed before of the coming of the Just One; of whom ye have been now the betrayers and murderers" (Acts 7:52). The lecture had carried the listeners from Mesopotamia to the cross, and it had done so without a single interruption.
 
@@ -300,7 +305,7 @@ Examen de l'Unité 7
 > EN: Unit 7 Examination
 
 **b051**  
-Certificat de ministère : 20 questions à choix multiples, 90 % (18 sur 20) pour réussir. Master of Theology & Master of Divinity : 20 questions à choix multiples + 10 questions à réponse courte, 90 % exigés dans chacune des deux parties séparément. Chaque question à choix multiples est notée dès que vous cliquez. Il faut réussir les choix multiples avant que les réponses courtes ne comptent. Un échec verrouille la partie concernée pendant 15 minutes ; si vous avez déjà réussi les choix multiples, seule la partie à réponse courte est verrouillée après un échec à cette partie.
+Parcours Certificat : 20 questions à choix multiples, 90 % (18 sur 20) pour réussir. Th.M. & M.Div. : 20 questions à choix multiples + 10 questions à réponse courte, 90 % exigés dans chacune des deux parties séparément. Chaque question à choix multiples est notée dès que vous cliquez. Il faut réussir les choix multiples avant que les réponses courtes ne comptent. Un échec verrouille la partie concernée pendant 15 minutes ; si vous avez déjà réussi les choix multiples, seule la partie à réponse courte est verrouillée après un échec à cette partie.
 
 > EN: Certificate of Ministry: 20 multiple-choice questions, 90% (18 of 20) to pass. Master of Theology & Master of Divinity: 20 MC + 10 short-answer, both at 90% independently. Each MC scores immediately when you click. MC must be passed before SA scores count. A failure locks the relevant section for 15 minutes; if you have already passed MC, only SA locks after an SA fail.
 
@@ -502,7 +507,7 @@ _Pourquoi :_ L'Unité 8 poursuit avec trois autres méthodes qui s'appuient sur 
 
 Grading ignores accents, capitals and one leading article (le/la/les/l'/un/une/des).
 
-**1.** Le texte biblique de l'unité dit : « Comme des pommes d'or sur des ciselures d'____, ainsi est une parole dite à propos. »  
+**1.** Le texte biblique de l'unité dit : « Comme des pommes d'or sur des ciselures d'____, Ainsi est une parole dite à propos. »  
 Réponse : **argent**  
 > EN: The unit Scripture says: "A word fitly spoken is like apples of gold in pictures of ____." — **silver**
 
@@ -548,29 +553,29 @@ Keywords are matched as word-parts; accents count, so accented words also list a
 
 **1. Expliquez comment Proverbes 25:11 présente la relation entre la vérité et la méthode.**  
 Mots-clés : pomme · pomme d or / pommes d or · argent · parole · à propos / a propos / convien · fruit · coupe / ciselure / écrin / ecrin · méthode / methode  
-Modèle : Proverbes 25:11 dit : « Comme des pommes d'or sur des ciselures d'argent, ainsi est une parole dite à propos. » Le fruit, la pomme d'or, c'est la vérité elle-même ; la coupe d'argent ciselée, c'est la méthode, la forme sous laquelle la vérité est transmise. Sans la coupe, la pomme n'a pas d'écrin ; sans la pomme, la coupe est vide. Les deux sont faites l'une pour l'autre : une parole qui convient à son cadre marque deux fois plus les esprits.
+Modèle : Proverbes 25:11 dit : « Comme des pommes d'or sur des ciselures d'argent, Ainsi est une parole dite à propos. » Le fruit, la pomme d'or, c'est la vérité elle-même ; la coupe d'argent ciselée, c'est la méthode, la forme sous laquelle la vérité est transmise. Sans la coupe, la pomme n'a pas d'écrin ; sans la pomme, la coupe est vide. Les deux sont faites l'une pour l'autre : une parole qui convient à son cadre marque deux fois plus les esprits.
 
 > EN: Explain how Proverbs 25:11 frames the relationship between truth and method.
 
 **2. Énumérez les trois raisons qu'Andi donne pour expliquer pourquoi les méthodes comptent.**  
-Mots-clés : leçon / lecon · apprenant / élève / eleve · attention · variété / variete / varier / varié · portes / la porte / une porte · différ / differ · méthode / methode · atteind / atteint / rejoind / touch  
+Mots-clés : leçon / lecon · apprenant / élève / eleve · attention · variété / variete / varier / varié / varie · portes / la porte / une porte · différ / differ · méthode / methode · atteind / atteint / rejoind / touch  
 Modèle : Premièrement, des leçons différentes demandent des méthodes différentes : on n'enseigne pas la Trinité comme l'histoire de David et Goliath. Deuxièmement, des apprenants différents reçoivent la vérité par des portes différentes : certains en écoutant, d'autres en voyant, d'autres en faisant. Troisièmement, la variété retient l'attention : changer de méthode toutes les dix ou quinze minutes permet d'atteindre l'apprenant selon le fonctionnement réel de l'attention humaine.
 
 > EN: List Andi's three reasons why methods matter at all.
 
 **3. Dites ce qui a rendu efficace l'exposé d'Étienne en Actes 7 et ce qu'il enseigne sur l'art de l'exposé.**  
-Mots-clés : étienne / etienne · thèse / these · écritur / ecritur · sanhédrin / sanhedrin · applica / appliqu · exposé / expose · clair · construi / bâti / batir  
+Mots-clés : étienne / etienne · thèse / these · écritur / ecritur · sanhédrin / sanhedrin · applica / appliqu · exposé / expose · clair · construi / bâti / bati / batir  
 Modèle : Devant le sanhédrin, Étienne a prêché toute l'histoire d'Israël comme un seul argument. Son exposé avait une thèse claire (Dieu envoie des libérateurs, Israël les rejette), il était enraciné dans l'Écriture, il avançait dans l'ordre chronologique, il construisait vers un point précis et il se terminait par une application tranchante. L'enseignant doit donc choisir une seule thèse, la bâtir à partir de l'Écriture, la faire avancer et la faire aboutir dans la vie de l'auditeur.
 
 > EN: Tell what made Stephen's lecture in Acts 7 effective and what it teaches about lecturing.
 
-**4. Racontez l'épisode du chemin d'Emmaüs et expliquez ce qu'il enseigne sur la discussion comme méthode.**  
+**4. Racontez ce qui s'est passé sur la route d'Emmaüs et expliquez ce que cet épisode enseigne sur l'enseignement par l'échange.**  
 Mots-clés : emmaüs / emmaus · question · écout / ecout · écritur / ecritur · cœur / coeur · marchant / marche / chemin · discu · demand / interrog / posa  
 Modèle : Deux disciples marchaient de Jérusalem à Emmaüs, tristes. Jésus ressuscité les rejoignit et, au lieu de faire un discours, leur posa une question : « De quoi vous entretenez-vous en marchant ? » Il les laissa parler et les écouta. Ensuite seulement, commençant par Moïse et par tous les prophètes, il leur expliqua les Écritures. Leur cœur brûlait. La discussion, c'est enseigner en écoutant : l'enseignant guide, interroge, attend, puis parle au bon moment.
 
 > EN: Tell the story of the Emmaus road and explain what it teaches about discussion as a method.
 
-**5. Racontez la parabole de Nathan à David et expliquez pourquoi la méthode du récit contourne les défenses.**  
+**5. Racontez ce que Nathan dit à David après son péché avec Bath-Schéba, et expliquez pourquoi cette manière d'enseigner fait tomber la garde de l'auditeur.**  
 Mots-clés : nathan · brebis / agneau · riche · pauvre · spectat · récit / recit / histoire / parabole · david · défense / defense / résistance / resistance  
 Modèle : Après le péché de David avec Bath-Schéba et le meurtre d'Urie, Nathan raconta l'histoire d'un riche qui avait de nombreux troupeaux et qui prit l'unique petite brebis d'un pauvre pour son hôte. David, en colère, déclara que cet homme méritait la mort. Nathan dit : « Tu es cet homme-là ! » Le récit contourne les défenses parce que l'auditeur y entre en spectateur, et non en accusé ; il ne sait pas encore qu'il doit se défendre.
 
@@ -583,12 +588,12 @@ Modèle : À Césarée de Philippe, Jésus demanda d'abord : « Qui dit-on que j
 > EN: Describe Jesus's two questions at Caesarea Philippi and what they teach about the question method.
 
 **7. Énumérez les trois facteurs qui doivent déterminer le choix de méthode de l'enseignant, avec un bref commentaire pour chacun.**  
-Mots-clés : leçon / lecon · apprenant / élève / eleve · moment · texte · âge / adolesc / enfant · chois / choix · méthode / methode · adapt / convien / correspond  
+Mots-clés : leçon / lecon · apprenant / élève / eleve · moment · texte · l âge / l age / un âge / un age / adolesc / enfant · chois / choix · méthode / methode · adapt / convien / correspond  
 Modèle : La leçon : accordez la forme de l'enseignement à la forme du texte (doctrine par l'exposé, histoire par le récit). L'apprenant : la méthode qui convient à un âge peut échouer avec un autre ; les adolescents aiment la discussion, les enfants apprennent par les récits. Le moment : l'ouverture appelle une question ou un récit, le corps un exposé ou une discussion guidée, la conclusion un défi personnel. Choisir la méthode, c'est l'adapter à ces trois facteurs.
 
 > EN: List the three factors that should shape the teacher's choice of method, with a brief comment on each.
 
-**8. Expliquez pourquoi Andi appelle l'ensemble des méthodes du Maître par excellence « une boîte à outils, pas un marteau ».**  
+**8. Expliquez pourquoi Andi dit que le Maître par excellence avait « une boîte à outils, pas un marteau ».**  
 Mots-clés : outil · marteau · montagne · semeur · pieds · plusieurs / nombreu / variété / variete · méthode / methode · jésus / jesus  
 Modèle : Jésus n'avait pas une seule méthode ; il avait une boîte à outils. Le Sermon sur la montagne est un exposé, la parabole du semeur un récit, la conversation avec le jeune homme riche une question, le lavement des pieds une démonstration, la visite à Béthanie une discussion. Il employait plusieurs méthodes et prenait l'outil qui convenait au travail. L'enseignant qui n'a qu'un marteau voit des clous partout.
 

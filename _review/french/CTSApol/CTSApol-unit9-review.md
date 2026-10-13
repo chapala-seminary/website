@@ -12,6 +12,10 @@ Counts: 24 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 2. The SA 4 model answer (New Atheist) still says the atheist 'borrows' a moral law from the Christian's house and that on his view there is 'no real good or evil' — but the revised lesson text (b014) is more nuanced, granting that some atheist philosophers ground moral facts without God, and never uses the word 'borrow'. Likewise SA 10 keyword 'borrow'. Translated as is; do you want the model and keywords updated to match the lesson?
 3. MC 10 'why' and MC 11 ('every other faith says do; the gospel says done') state the contrast absolutely, while the lesson (b016) carefully calls it a matter of emphasis and never uses 'do/done'. Translated as is; should these be softened or the do/done line added to the lesson?
 
+## Problems in the English source
+
+- SA6: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -62,7 +66,7 @@ Texte : Jean 14:6
 > EN: Text: John 14:6
 
 **b006**  
-« Jésus lui dit : Je suis le chemin, la vérité, et la vie. Nul ne vient au Père que par moi. » — Jean 14:6
+« Jésus lui dit: Je suis le chemin, la vérité, et la vie. Nul ne vient au Père que par moi. » — Jean 14:6
 
 > EN: "Jesus said to him, 'I am the way, the truth, and the life. No one comes to the Father except through Me.'" — John 14:6
 
@@ -137,7 +141,7 @@ Nous tenons donc ferme le verset difficile, mais nous le tenons comme notre Seig
 > EN: So we hold the hard verse, but we hold it the way our Lord held it. His exclusiveness was never the cold sneer of a club that keeps people out; it was the urgency of a rescuer who knows there is one rope and means for everyone to reach it. He did not say "I am one of the ways" and leave the drowning to choose among currents; He said "I am the way" and threw the only line that reaches the water. The narrowness of the door is the measure of how desperately He wants you through it. And the wonder is that the door, though it is only one, stands wide open, and the welcome on the other side is wider still — wide enough for the woman who could not say the word father, wide enough, should he ever turn back, for the one who walked away. There is one Way, and His arms are open on it. Who do you say that He is?
 
 **b021**  
-« Il n'y a de salut en aucun autre ; car il n'y a sous le ciel aucun autre nom qui ait été donné parmi les hommes, par lequel nous devions être sauvés. » — Actes 4:12
+« Il n'y a de salut en aucun autre; car il n'y a sous le ciel aucun autre nom qui ait été donné parmi les hommes, par lequel nous devions être sauvés. » — Actes 4:12
 
 > EN: "Nor is there salvation in any other, for there is no other name under heaven given among men by which we must be saved." — Acts 4:12
 
@@ -147,7 +151,7 @@ Examen final de l'Unité 9
 > EN: Unit 9 Final Exam
 
 **b023**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -168,7 +172,7 @@ Réinitialiser l'unité
 **1. En Jean 14:6, quand Thomas demanda comment connaître le chemin, Jésus répondit :**  
 · A. Il y a beaucoup de portes  
 · B. Suivez les sages de toutes les nations  
-✓ C. Je suis le chemin, la vérité, et la vie ; nul ne vient au Père que par moi  
+✓ C. Je suis le chemin, la vérité, et la vie. Nul ne vient au Père que par moi  
 · D. Choisissez sincèrement n'importe quelle route  
 _Pourquoi :_ Jésus a affirmé être le seul chemin vers le Père, et non un sentier parmi beaucoup d'autres.  
 > EN: In John 14:6, when Thomas asked how to know the way, Jesus answered: — ✓ I am the way, the truth, and the life; no one comes to the Father except through Me
@@ -314,7 +318,7 @@ _Pourquoi :_ Une seule porte, mais grande ouverte, avec un accueil plus large en
 · B. Dans l'effort sincère  
 ✓ C. En aucun autre nom sous le ciel que celui de Jésus  
 · D. Dans l'observation de la loi  
-_Pourquoi :_ Il n'y a aucun autre nom qui ait été donné parmi les hommes, par lequel nous devions être sauvés.  
+_Pourquoi :_ Il n'y a sous le ciel aucun autre nom qui ait été donné parmi les hommes, par lequel nous devions être sauvés.  
 > EN: Acts 4:12 declares that salvation is found: — ✓ In no other name under heaven but Jesus
 
 **20. L'unité tient ensemble le verset difficile et un large accueil, et se termine par la question du cours :**  
@@ -375,7 +379,7 @@ Keywords are matched as word-parts; accents count, so accented words also list a
 
 **1. Expliquez Jean 14:6 et pourquoi l'unité l'appelle le verset le plus choquant.**  
 Mots-clés : chemin · vérité / verite · père / pere · exclusi · seul · tolérance / tolerance · porte · thomas  
-Modèle : En Jean 14:6, quand Thomas demanda comment connaître le chemin, Jésus ne donna pas de carte, mais dit : Je suis le chemin, la vérité, et la vie ; nul ne vient au Père que par moi. L'unité appelle ce verset le plus choquant parce que, dans un monde qui place la tolérance au-dessus de tout, cette affirmation exclusive fait couler le sang. Jésus n'offre pas un sentier parmi beaucoup d'autres pour gravir la même montagne ; il affirme être la seule porte vers Dieu. Beaucoup de croyants, sentant la chaleur monter dans la salle, laissent discrètement tomber cette affirmation, et même certains qui portent le nom de Christ haussent les épaules et disent que toutes les religions se valent. L'unité insiste donc pour que nous réfléchissions clairement ici, en tenant la vérité exclusive de Christ avec à la fois fermeté et bonté, car c'est le point sur lequel le cœur moderne trébuche le plus.
+Modèle : En Jean 14:6, quand Thomas demanda comment connaître le chemin, Jésus ne donna pas de carte, mais dit : Je suis le chemin, la vérité, et la vie. Nul ne vient au Père que par moi. L'unité appelle ce verset le plus choquant parce que, dans un monde qui place la tolérance au-dessus de tout, cette affirmation exclusive fait couler le sang. Jésus n'offre pas un sentier parmi beaucoup d'autres pour gravir la même montagne ; il affirme être la seule porte vers Dieu. Beaucoup de croyants, sentant la chaleur monter dans la salle, laissent discrètement tomber cette affirmation, et même certains qui portent le nom de Christ haussent les épaules et disent que toutes les religions se valent. L'unité insiste donc pour que nous réfléchissions clairement ici, en tenant la vérité exclusive de Christ avec à la fois fermeté et bonté, car c'est le point sur lequel le cœur moderne trébuche le plus.
 
 > EN: Explain John 14:6 and why the unit calls it the most offensive verse.
 
@@ -403,7 +407,7 @@ Modèle : L'unité dit que la réponse la plus profonde à l'idée que tous les 
 
 > EN: Explain the unit's central contrast: the one religion that 'runs backward.'
 
-**6. En vous appuyant sur les témoignages, expliquez pourquoi l'unité dit que l'incrédulité est souvent une blessure plutôt qu'un argument.**  
+**6. En vous appuyant sur les témoignages, expliquez pourquoi, selon l'unité, le refus de croire vient souvent d'une blessure plutôt que d'un raisonnement.**  
 Mots-clés : incrédul / incredul / incroyance · bless · père / pere · argument · cicatri · chien · douceur · souffr / meurtri / fait du mal  
 Modèle : L'unité avertit l'apologète de ne pas traiter l'incrédulité comme un simple échec de la logique à guérir par un meilleur syllogisme, car elle est souvent bien plus sensible. Un observateur avisé a remarqué que derrière beaucoup d'athéisme se trouve non pas un argument mais une blessure, très souvent en forme de père. L'unité donne deux exemples vus de près. Une femme ne supportait pas d'appeler Dieu Père, parce que, lorsqu'elle était petite fille, son propre père, par cruauté, avait tué son petit chien sous ses yeux ; son incrédulité n'était pas une conclusion mais une cicatrice, même si, par la miséricorde de Dieu, elle est enfin venue au baptême. Un autre jeune, à qui un parent dur et religieux avait interdit une joie ordinaire, s'est éloigné de la foi et s'éloigne encore, non parce que les arguments avaient échoué, mais parce que le foyer avait échoué. La leçon est que la personne qui dit qu'il n'y a pas de Dieu n'est peut-être pas un débatteur mais un enfant qui a été blessé et qui a souffert ; la douceur que Pierre a commandée fait donc plus que n'importe quel argument.
 
@@ -423,7 +427,7 @@ Modèle : L'unité dit que nous devons tenir le verset difficile comme notre Sei
 
 **9. Comment Actes 4:12 encadre-t-il la conclusion de l'unité ?**  
 Mots-clés : salut · aucun autre nom / seul nom / le nom / nom de · ciel / cieux · sauvé / sauve · jésus / jesus · seul · exclusi · sauvet / secour / corde  
-Modèle : Actes 4:12 déclare qu'il n'y a de salut en aucun autre, car il n'y a sous le ciel aucun autre nom qui ait été donné parmi les hommes, par lequel nous devions être sauvés. Ce verset encadre la conclusion de l'unité en affirmant clairement que l'exclusivité de Christ n'est pas un ajout sévère, mais l'Évangile apostolique lui-même : le salut ne se trouve que dans le nom de Jésus. L'unité tient cette affirmation exclusive ensemble avec un large accueil, en présentant l'unique Chemin non comme un club qui ferme la porte aux gens, mais comme la seule corde lancée à ceux qui se noient. Ainsi, la porte étroite et les bras ouverts vont ensemble. Actes 4:12 conclut le dossier de la même manière que Jean 14:6 l'a ouvert, avec un seul Sauveur et un seul nom, et il ramène le lecteur à la question du cours, qui est Jésus, en l'exhortant à recevoir le seul nom qui sauve plutôt qu'à simplement en débattre.
+Modèle : Actes 4:12 déclare qu'il n'y a de salut en aucun autre; car il n'y a sous le ciel aucun autre nom qui ait été donné parmi les hommes, par lequel nous devions être sauvés. Ce verset encadre la conclusion de l'unité en affirmant clairement que l'exclusivité de Christ n'est pas un ajout sévère, mais l'Évangile apostolique lui-même : le salut ne se trouve que dans le nom de Jésus. L'unité tient cette affirmation exclusive ensemble avec un large accueil, en présentant l'unique Chemin non comme un club qui ferme la porte aux gens, mais comme la seule corde lancée à ceux qui se noient. Ainsi, la porte étroite et les bras ouverts vont ensemble. Actes 4:12 conclut le dossier de la même manière que Jean 14:6 l'a ouvert, avec un seul Sauveur et un seul nom, et il ramène le lecteur à la question du cours, qui est Jésus, en l'exhortant à recevoir le seul nom qui sauve plutôt qu'à simplement en débattre.
 
 > EN: How does Acts 4:12 frame the unit's conclusion?
 

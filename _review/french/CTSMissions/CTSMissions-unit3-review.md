@@ -13,6 +13,14 @@ Counts: 30 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 3. The opening American-football illustration (every fall, carrying the ball a yard) was lightly adapted to « chaque saison » and « un seul mètre » so it also fits soccer. OK?
 4. 'Missionary Magna Charta' is rendered « Grande Charte missionnaire » (fill 1 also accepts « Magna Carta »). Would you prefer the Latin form in the text?
 
+## Problems in the English source
+
+- SA3: English prompt passes its own keywords
+- SA4: English prompt passes its own keywords
+- SA6: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -107,7 +115,7 @@ Deuxièmement, Jésus a mis le mouvement dans nos pieds. Les disciples avaient d
 > EN: Second, Jesus put movement in our feet. The disciples already had the message and the blessings of their Lord. They could have quietly returned to their villages and fished for a living again. They could have taught and preached only to those curious enough to seek them out. But with one word, Jesus put movement in their feet. He said, "Go." The gospel does not wait for men to seek it out; it goes to where the people are. Jesus does not give waiting orders. He gives marching orders.
 
 **b024**  
-Il y a peu de temps, un homme que je connais était affecté à une base militaire au Texas. Il attendait sans cesse de nouveaux ordres pour être muté au Colorado. Il savait que le Colorado serait sa prochaine affectation, mais il ne pouvait pas partir tant qu'il n'avait pas les ordres en main. Dans la Grande Commission, nous avons reçu nos ordres de marche, et avec eux Jésus a mis le mouvement dans nos pieds. Paul a dit la même chose dans l'épître aux Romains : « Qu'ils sont beaux les pieds de ceux qui annoncent la paix, de ceux qui annoncent de bonnes nouvelles ! » (Romains 10:15, LSG). Considérez un instant les pieds d'hommes comme Paul et Pierre — sales, rugueux, crevassés et couverts d'ampoules. Pourtant, ils étaient beaux, parce qu'ils portaient la bonne nouvelle de Jésus-Christ. Pour ceux qui reçoivent l'Évangile, les pieds de nos missionnaires sont vraiment beaux. Et nous devons aller partout en prêchant l'Évangile — non seulement dans notre propre ville, non seulement dans notre propre région, non seulement dans notre propre pays, mais jusqu'aux extrémités de la terre.
+Il y a peu de temps, un homme que je connais était affecté à une base militaire au Texas. Il attendait sans cesse de nouveaux ordres pour être muté au Colorado. Il savait que le Colorado serait sa prochaine affectation, mais il ne pouvait pas partir tant qu'il n'avait pas les ordres en main. Dans la Grande Commission, nous avons reçu nos ordres de marche, et avec eux Jésus a mis le mouvement dans nos pieds. Paul a dit la même chose dans l'épître aux Romains : « Qu'ils sont beaux Les pieds de ceux qui annoncent la paix, De ceux qui annoncent de bonnes nouvelles ! » (Romains 10:15, LSG). Considérez un instant les pieds d'hommes comme Paul et Pierre — sales, rugueux, crevassés et couverts d'ampoules. Pourtant, ils étaient beaux, parce qu'ils portaient la bonne nouvelle de Jésus-Christ. Pour ceux qui reçoivent l'Évangile, les pieds de nos missionnaires sont vraiment beaux. Et nous devons aller partout en prêchant l'Évangile — non seulement dans notre propre ville, non seulement dans notre propre région, non seulement dans notre propre pays, mais jusqu'aux extrémités de la terre.
 
 > EN: A short while ago a man I know was stationed in the service in Texas. He kept waiting for new orders to send him on to Colorado. He knew Colorado was his next station, but he could not leave until he had the orders in hand. In the Great Commission we have received our marching orders, and with them Jesus put movement in our feet. Paul made the same point in the book of Romans: "How beautiful are the feet of those who preach the gospel of peace, who bring glad tidings of good things!" (Romans 10:15, NKJV). Consider for a moment the feet of men like Paul and Peter — dirty, rough, cracked, and blistered. Yet they were beautiful, because they bore the good news of Jesus Christ. To those who receive the gospel, the feet of our missionaries are beautiful indeed. And we are to go everywhere preaching the gospel — not only in our own town, not only in our own region, not only in our own country, but to the uttermost parts of the earth.
 
@@ -167,7 +175,7 @@ Examen final de l'Unité 3
 > EN: Unit 3 Final Exam
 
 **b036**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -400,15 +408,15 @@ Modèle : Jésus a donné à ceux qui le suivaient deux méthodes : prêcher et 
 
 > EN: Jesus put the words on our lips by giving both a message and a method. Describe the method, including the picture of the herald.
 
-**3. Que signifie le fait que Jésus donne des ordres de marche plutôt que des ordres d'attente ? Appuyez-vous sur l'enseignement de la leçon concernant le mot « Allez ».**  
+**3. Que signifie le fait que Jésus donne des ordres de marche plutôt que des ordres d'attente ? Appuyez-vous sur l'enseignement de la leçon concernant le premier mot de l'ordre de Jésus.**  
 Mots-clés : allez / aller · marche · attend / attente · évangile / evangile / bonne nouvelle · les gens / peuple / personnes · envoy / envoi · mouvement / bouge · pieds  
 Modèle : Jésus donne des ordres de marche plutôt que des ordres d'attente parce qu'il a dit « Allez » — l'Évangile n'attend pas que les gens viennent le chercher, mais il va activement là où ils se trouvent. Les disciples auraient pu rester chez eux et n'enseigner que ceux qui venaient les chercher, mais d'un seul mot Jésus a mis le mouvement dans leurs pieds, envoyant le message au loin au lieu d'attendre qu'un auditoire se présente.
 
 > EN: What does it mean that Jesus gives marching orders rather than waiting orders? Use the lesson's teaching on the word 'Go.'
 
-**4. Expliquez Romains 10:15 et dites pourquoi les pieds de ceux qui apportent l'Évangile sont qualifiés de beaux.**  
+**4. Expliquez Romains 10:15 : pourquoi l'apôtre trouve-t-il beaux les pieds de ces messagers ?**  
 Mots-clés : pieds · beaux / beauté / beaute · évangile / evangile / bonne nouvelle / bonnes nouvelles · paix · apport / annonc · bonne · nouvelle · missionnaire / mission  
-Modèle : Romains 10:15 dit : « Qu'ils sont beaux les pieds de ceux qui annoncent la paix, de ceux qui annoncent de bonnes nouvelles ! » Les pieds de ceux qui portent l'Évangile sont appelés beaux non parce qu'ils sont physiquement attrayants — ils sont souvent sales, rugueux et couverts d'ampoules — mais à cause de ce qu'ils apportent : pour ceux qui reçoivent la bonne nouvelle, les pieds qui la leur ont apportée sont précieux et beaux.
+Modèle : Romains 10:15 dit : « Qu'ils sont beaux Les pieds de ceux qui annoncent la paix, De ceux qui annoncent de bonnes nouvelles ! » Les pieds de ceux qui portent l'Évangile sont appelés beaux non parce qu'ils sont physiquement attrayants — ils sont souvent sales, rugueux et couverts d'ampoules — mais à cause de ce qu'ils apportent : pour ceux qui reçoivent la bonne nouvelle, les pieds qui la leur ont apportée sont précieux et beaux.
 
 > EN: Explain Romans 10:15 and why the feet of those who bring the gospel are called beautiful.
 
@@ -418,13 +426,13 @@ Modèle : Jésus a mis dans notre tête la vision de tout genou fléchissant et 
 
 > EN: Describe the vision Jesus put in our head. Who is included in it, and why?
 
-**6. Jésus a mis un fardeau sur notre cœur. Selon la leçon, quelles sont les trois responsabilités de ceux qui envoient des missionnaires ?**  
+**6. Jésus a mis un fardeau sur notre cœur. Selon la leçon, quels sont les trois devoirs de ceux qui envoient des messagers de l'Évangile ?**  
 Mots-clés : envoy / envoi · identifi · prier / prière / priere / prions · soutien / souten · financ · mission · responsab · aller / allez / partir  
 Modèle : Selon la leçon, ceux qui envoient des missionnaires partagent la responsabilité de s'identifier à eux, de prier pour eux et de les soutenir — que ce soutien soit financier ou d'une autre nature. Tout le monde n'est pas appelé à partir, mais ceux qui envoient portent eux aussi de réelles responsabilités, puisque les missionnaires ne peuvent pas s'envoyer eux-mêmes.
 
 > EN: Jesus put a burden on our heart. According to the lesson, what three responsibilities belong to those who send missionaries?
 
-**7. Pourquoi les missionnaires doivent-ils être envoyés, et qu'enseigne Actes 13 au sujet de l'Église qui envoie ?**  
+**7. Pourquoi un missionnaire ne peut-il pas simplement partir de lui-même, et qu'enseigne Actes 13 sur le rôle de l'assemblée locale ?**  
 Mots-clés : envoyé / envoye · envoy / envoi · actes · jeûn / jeun · prière / priere / prier · les mains / imposé / impose / imposa / imposèrent / imposerent · église / eglise / assemblée / assemblee · commission / culte d'envoi / culte d envoi / mandat / consécr / consecr  
 Modèle : Les missionnaires doivent être envoyés parce qu'ils ne peuvent pas se mandater eux-mêmes ; l'envoi requiert la reconnaissance, la prière et la bénédiction de l'Église. Actes 13 rapporte le premier culte d'envoi : l'assemblée jeûna et pria, imposa les mains à Barnabas et à Saul, et les laissa partir — ce qui montre que l'envoi est un acte délibéré et communautaire de toute l'Église, et non une décision privée prise seul.
 
@@ -442,7 +450,7 @@ Modèle : La leçon dit que l'Église « n'a pas suivi le rythme » parce que le
 
 > EN: The lesson says the church 'has not kept pace.' Explain this concern and what it says we lack.
 
-**10. Jésus a dit : « Comme le Père m'a envoyé, moi aussi je vous envoie. » Quelle part prendrez-vous dans la Grande Commission — partir, envoyer ou prier ? Soyez précis.**  
+**10. D'après Jean 20:21, quel rôle prendrez-vous dans l'ordre missionnaire de Jésus : partir vous-même, participer à l'envoi d'autres ouvriers, ou intercéder ? Soyez précis.**  
 Mots-clés : aller / allez / partir · envoy / envoi · prier / prière / priere · le père / le pere / du père / du pere · envoyé / envoye · ma part / votre part / quelle part / la part · commission · œuvre / oeuvre / travail  
 Modèle : Cette question appelle une réponse personnelle : l'étudiant y précise la part qu'il prendra lui-même dans la Grande Commission — soit partir lui-même vers un champ de mission précis, soit envoyer et soutenir d'autres personnes financièrement ou concrètement, soit s'engager dans une prière régulière et ciblée pour les peuples non atteints. Une réponse réfléchie nomme un engagement précis plutôt qu'une intention vague et générale.
 

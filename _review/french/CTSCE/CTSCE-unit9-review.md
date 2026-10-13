@@ -17,6 +17,13 @@ Counts: 51 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 7. [check] 'Capstone' is « couronnement » in this unit (b046, b049, MC 20, SA 10) but « synthèse finale » in Unit 8 (b049) and Unit 10 (title, b005, b013, MC 17). Pick one term for the course; meanwhile SA 10 here also accepts « synthèse ».
 8. [check] Item numbers in the notes above were corrected (they were off by one: fill 9/10, MC 7/9/12, SA 7/10).
 
+## Problems in the English source
+
+- SA2: English prompt passes its own keywords
+- SA6: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords (and its keyword list repeats 'capstone')
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -86,7 +93,7 @@ Les activités d'apprentissage biblique
 > EN: "When your children ask in time to come, saying, What mean these stones?"
 
 **b008**  
-Texte biblique de l'unité : « Afin que cela soit un signe au milieu de vous. Lorsque vos enfants demanderont un jour : Que signifient pour vous ces pierres ? vous leur direz : Les eaux du Jourdain ont été coupées devant l'arche de l'alliance de l'Eternel ; lorsqu'elle passa le Jourdain, les eaux du Jourdain ont été coupées, et ces pierres seront à jamais un souvenir pour les enfants d'Israël. » — Josué 4:6-7 (LSG)
+Texte biblique de l'unité : « Afin que cela soit un signe au milieu de vous. Lorsque vos enfants demanderont un jour : Que signifient pour vous ces pierres ? vous leur direz : Les eaux du Jourdain ont été coupées devant l'arche de l'alliance de l'Éternel ; lorsqu'elle passa le Jourdain, les eaux du Jourdain ont été coupées, et ces pierres seront à jamais un souvenir pour les enfants d'Israël. » — Josué 4:6-7 (LSG)
 
 > EN: Unit Scripture: "That this may be a sign among you when your children ask in time to come, saying, 'What do these stones mean to you?' Then you shall answer them that the waters of the Jordan were cut off before the ark of the covenant of the LORD; when it crossed over the Jordan, the waters of the Jordan were cut off. And these stones shall be for a memorial to the children of Israel forever." — Joshua 4:6–7 (NKJV)
 
@@ -146,12 +153,12 @@ II. La leçon de choses : les douze pierres du Jourdain
 > EN: II. The Object Lesson: The Twelve Stones at Jordan
 
 **b020**  
-Josué 4 contient la plus belle leçon de choses de l'Ancien Testament. Les Israélites venaient de traverser le Jourdain à pied sec. Les eaux s'étaient amoncelées pendant que les prêtres qui portaient l'arche se tenaient dans le lit du fleuve. Au moment où le dernier enfant posait le pied sur la rive occidentale, l'Éternel parla à Josué : « Prenez douze hommes parmi le peuple, un homme de chaque tribu. Donnez-leur cet ordre : Enlevez d'ici, du milieu du Jourdain, de la place où les sacrificateurs se sont arrêtés de pied ferme, douze pierres, que vous emporterez avec vous, et que vous déposerez dans le lieu où vous passerez cette nuit » (Josué 4:2-3).
+Josué 4 contient la plus belle leçon de choses de l'Ancien Testament. Les Israélites venaient de traverser le Jourdain à pied sec. Les eaux s'étaient amoncelées pendant que les sacrificateurs qui portaient l'arche se tenaient dans le lit du fleuve. Au moment où le dernier enfant posait le pied sur la rive occidentale, l'Éternel parla à Josué : « Prenez douze hommes parmi le peuple, un homme de chaque tribu. Donnez-leur cet ordre : Enlevez d'ici, du milieu du Jourdain, de la place où les sacrificateurs se sont arrêtés de pied ferme, douze pierres, que vous emporterez avec vous, et que vous déposerez dans le lieu où vous passerez cette nuit » (Josué 4:2-3).
 
 > EN: Joshua 4 contains the most beautiful object lesson in the Old Testament. The Israelites had just crossed the Jordan on dry ground. The waters had heaped up while the priests carrying the ark stood in the riverbed. As the last child stepped onto the western shore, the LORD spoke to Joshua: "Take you twelve men out of the people, out of every tribe a man, and command ye them, saying, Take you hence out of the midst of Jordan, out of the place where the priests' feet stood firm, twelve stones, and ye shall carry them over with you, and leave them in the lodging place, where ye shall lodge this night" (Joshua 4:2–3).
 
 **b021**  
-Josué choisit les douze hommes, et ils obéirent. Chaque tribu était représentée par une pierre. Chaque homme se pencha dans le lit mouillé du fleuve, saisit une pierre et la porta sur son épaule jusqu'à Guilgal, où les pierres furent dressées en mémorial. Puis l'Éternel prononça la parole qui a façonné l'éducation chrétienne depuis lors : « Afin que cela soit un signe au milieu de vous. Lorsque vos enfants demanderont un jour : Que signifient pour vous ces pierres ? vous leur direz : Les eaux du Jourdain ont été coupées devant l'arche de l'alliance de l'Eternel » (Josué 4:6-7).
+Josué choisit les douze hommes, et ils obéirent. Chaque tribu était représentée par une pierre. Chaque homme se pencha dans le lit mouillé du fleuve, saisit une pierre et la porta sur son épaule jusqu'à Guilgal, où les pierres furent dressées en mémorial. Puis l'Éternel prononça la parole qui a façonné l'éducation chrétienne depuis lors : « Afin que cela soit un signe au milieu de vous. Lorsque vos enfants demanderont un jour : Que signifient pour vous ces pierres ? vous leur direz : Les eaux du Jourdain ont été coupées devant l'arche de l'alliance de l'Éternel » (Josué 4:6-7).
 
 > EN: Joshua picked the twelve men and they obeyed. Each tribe was represented by a stone. Each man bent down in the wet riverbed, reached for a stone, and carried it on his shoulder to Gilgal, where they were piled in a memorial. Then the LORD spoke the line that has shaped Christian Education ever since: "That this may be a sign among you, that when your children ask their fathers in time to come, saying, What mean these stones? Then ye shall answer them, That the waters of Jordan were cut off before the ark of the covenant of the LORD" (Joshua 4:6–7).
 
@@ -176,7 +183,7 @@ Certaines leçons ne peuvent pas être racontées. Il faut les vivre. Le repas d
 > EN: Some lessons cannot be told. They have to be done. The Passover meal is the longest-running, most carefully designed Bible learning activity in the history of God's people. Exodus 12 records its institution on the night God's people came out of Egypt. They roasted the lamb. They put blood on the doorposts. They ate standing up, with their loins girt, their shoes on their feet, their staves in their hands — ready to leave. They ate unleavened bread because they had no time to let the bread rise. They ate bitter herbs because their lives in Egypt had been bitter. Every action of the meal carried a meaning. Every meaning was tied to a moment in the salvation God had just performed.
 
 **b026**  
-Puis Dieu fit la chose la plus frappante de toutes. Il ordonna que le repas soit répété chaque année, à perpétuité, avec les mêmes éléments, dans le même ordre, à la même date du calendrier, jusqu'à la fin des temps. « Et lorsque vos enfants vous diront : Que signifie pour vous cet usage ? vous répondrez : C'est le sacrifice de Pâque en l'honneur de l'Eternel, qui a passé par-dessus les maisons des enfants d'Israël en Egypte » (Exode 12:26-27). La même phrase qu'en Josué 4. Les enfants demanderaient. Les parents répondraient. Le repas lui-même serait la question qui ouvrirait la réponse.
+Puis Dieu fit la chose la plus frappante de toutes. Il ordonna que le repas soit répété chaque année, à perpétuité, avec les mêmes éléments, dans le même ordre, à la même date du calendrier, jusqu'à la fin des temps. « Et lorsque vos enfants vous diront : Que signifie pour vous cet usage ? vous répondrez : C'est le sacrifice de Pâque en l'honneur de l'Éternel, qui a passé par-dessus les maisons des enfants d'Israël en Égypte » (Exode 12:26-27). La même phrase qu'en Josué 4. Les enfants demanderaient. Les parents répondraient. Le repas lui-même serait la question qui ouvrirait la réponse.
 
 > EN: And then God did the most striking thing of all. He commanded that the meal be repeated every year, forever, with the same elements, in the same order, on the same calendar date, until the end of the age. "And it shall come to pass, when your children shall say unto you, What mean ye by this service? That ye shall say, It is the sacrifice of the LORD'S passover, who passed over the houses of the children of Israel in Egypt" (Exodus 12:26–27). The same line as Joshua 4. The children would ask. The parents would answer. The meal itself would be the question that opened the answer.
 
@@ -196,7 +203,7 @@ IV. La musique et la mémorisation : le cantique de Moïse
 > EN: IV. Music and Memorization: The Song of Moses
 
 **b030**  
-De toutes les méthodes d'enseignement que Dieu a utilisées avec son peuple, celle qui est restée le plus longtemps dans la mémoire humaine, c'est le chant. Les mots seuls s'effacent. Les mots mis en musique durent des générations. Le tout premier sermon jamais prêché à la louange de l'Éternel, le jour où l'armée de Pharaon fut engloutie, fut un sermon chanté. « Alors Moïse et les enfants d'Israël chantèrent ce cantique à l'Eternel. Ils dirent : Je chanterai à l'Eternel, car il a fait éclater sa gloire ; Il a précipité dans la mer le cheval et son cavalier » (Exode 15:1). Tout Israël chanta. Marie, la prophétesse, sœur d'Aaron, conduisit les femmes avec des tambourins et des danses. La délivrance fut prêchée de la seule manière dont on puisse prêcher une délivrance nationale — par la nation entière, d'une seule voix, en mélodie.
+De toutes les méthodes d'enseignement que Dieu a utilisées avec son peuple, celle qui est restée le plus longtemps dans la mémoire humaine, c'est le chant. Les mots seuls s'effacent. Les mots mis en musique durent des générations. Le tout premier sermon jamais prêché à la louange de l'Éternel, le jour où l'armée de Pharaon fut engloutie, fut un sermon chanté. « Alors Moïse et les enfants d'Israël chantèrent ce cantique à l'Éternel. Ils dirent : Je chanterai à l'Éternel, car il a fait éclater sa gloire ; Il a précipité dans la mer le cheval et son cavalier » (Exode 15:1). Tout Israël chanta. Marie, la prophétesse, sœur d'Aaron, conduisit les femmes avec des tambourins et des danses. La délivrance fut prêchée de la seule manière dont on puisse prêcher une délivrance nationale — par la nation entière, d'une seule voix, en mélodie.
 
 > EN: Of all the methods of teaching God has used with his people, the one that has stuck longest in human memory is the song. Words alone fade. Words set to music last for generations. The first sermon ever preached in praise of the LORD, on the day Pharaoh's army drowned, was a sung sermon. "Then sang Moses and the children of Israel this song unto the LORD, and spake, saying, I will sing unto the LORD, for he hath triumphed gloriously: the horse and his rider hath he thrown into the sea" (Exodus 15:1). All Israel sang. Miriam led the women with timbrels and dances. The deliverance was preached the only way a national deliverance can be preached — by the whole nation, in unison, with melody.
 
@@ -306,7 +313,7 @@ Examen de l'Unité 9
 > EN: Unit 9 Examination
 
 **b052**  
-Certificat de ministère : 20 questions à choix multiples, 90 % (18 sur 20) pour réussir. Master of Theology & Master of Divinity : 20 questions à choix multiples + 10 questions à réponse courte, 90 % exigés dans chacune des deux parties séparément. Cliquez sur une réponse pour savoir aussitôt si elle est juste. Pour les questions à réponse courte, tapez votre réponse et cliquez sur « Vérifier la réponse ». Un échec verrouille la partie concernée pendant 15 minutes.
+Parcours Certificat : 20 questions à choix multiples, 90 % (18 sur 20) pour réussir. Th.M. & M.Div. : 20 questions à choix multiples + 10 questions à réponse courte, 90 % exigés dans chacune des deux parties séparément. Cliquez sur une réponse pour savoir aussitôt si elle est juste. Pour les questions à réponse courte, tapez votre réponse et cliquez sur « Vérifier la réponse ». Un échec verrouille la partie concernée pendant 15 minutes.
 
 > EN: Certificate of Ministry: 20 multiple-choice questions, 90% (18 of 20) to pass. Master of Theology & Master of Divinity: 20 MC + 10 short-answer, both at 90% independently. Click an answer for instant feedback. For short-answer questions, type and click Check Answer. A failure locks the relevant section for 15 minutes.
 
@@ -356,12 +363,12 @@ _Pourquoi :_ Les activités sont surtout pour les enfants, mais les adultes appr
 ✓ B. Douze, une pour chaque tribu  
 · C. Sept, pour les jours de la création  
 · D. Quarante, pour les années au désert  
-_Pourquoi :_ Josué 4:2-3. Douze hommes, un de chaque tribu, chacun portant une pierre tirée du lit du fleuve, là où les prêtres s'étaient tenus. Les pierres furent dressées à Guilgal en mémorial.  
+_Pourquoi :_ Josué 4:2-3. Douze hommes, un de chaque tribu, chacun portant une pierre tirée du lit du fleuve, là où les sacrificateurs s'étaient tenus. Les pierres furent dressées à Guilgal en mémorial.  
 > EN: In Joshua 4, how many stones were taken from the Jordan, and what did they represent? — ✓ Twelve, one from each tribe
 
 **6. Quels quatre éléments Andi relève-t-elle dans la leçon de choses de Josué 4 ?**  
 ✓ A. Objet, visibilité, question, réponse précise  
-· B. Pierre, eau, prêtre, arche  
+· B. Pierre, eau, sacrificateur, arche  
 · C. Passé, présent, avenir, éternité  
 · D. Douze hommes, douze pierres, douze tribus, douze nuits  
 _Pourquoi :_ L'objet était réel (de vraies pierres) ; visible (dressé à Guilgal, où tout enfant le verrait) ; il suscitait une question (« Que signifient ces pierres ? ») ; il recevait une réponse historique précise (les eaux furent coupées devant l'arche de l'Éternel). Les quatre ensemble font une parfaite leçon de choses.  
@@ -528,14 +535,14 @@ Réponse : **schémas** · aussi acceptées : schéma, motifs, structures
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
 **1. Expliquez pourquoi Andi dit qu'un enseignant qui n'enseigne qu'avec des mots n'enseigne qu'une partie de l'apprenant.**  
-Mots-clés : corps · cerveau · canal / canaux · mains / la main · œil / oeil / yeux · des mots / les mots / paroles · oreille · écoute / ecoute · activit · mémoi / memoi  
+Mots-clés : corps · cerveau · canal / canaux · mains / la main · l œil / l oeil / oeil / yeux · des mots / les mots / paroles · oreille · écoute / ecoute · activit · mémoi / memoi  
 Modèle : Andi explique que les méthodes des Unités 7 et 8 passent toutes par le même canal : les mots. Mais l'apprenant est un corps, et non un cerveau dans un bocal ; Dieu a fait une personne entière. Celui qui n'enseigne qu'avec des mots n'atteint que l'oreille, la partie de l'apprenant qui écoute. Une activité fait entrer la leçon dans les mains, dans l'œil, dans la voix qui chante et dans l'objet fabriqué. Dieu lui-même a enseigné Israël par des pierres, des repas et des cantiques, et la mémoire a de nombreuses portes : ce qui passe par plusieurs canaux reste plus longtemps.
 
 > EN: Explain why Andi says a teacher who teaches only with words is teaching only part of the learner.
 
-**2. Racontez l'histoire des douze pierres du Jourdain et énumérez les quatre éléments d'une parfaite leçon de choses qu'Andi en tire.**  
+**2. Racontez l'histoire des pierres de Josué 4 et énumérez les quatre éléments d'une parfaite leçon de choses qu'Andi en tire.**  
 Mots-clés : douze · pierre · jourdain · question · réponse / reponse / répond / repond · guilgal / gilgal · visib · objet · tribu · l arche / arche de  
-Modèle : Après la traversée du Jourdain à pied sec, l'Éternel ordonna à Josué de prendre douze hommes, un de chaque tribu. Chacun prit une pierre au milieu du Jourdain, là où les prêtres se tenaient avec l'arche, et la porta sur son épaule jusqu'à Guilgal, où les douze pierres furent dressées en mémorial. Ainsi, quand les enfants demanderaient : « Que signifient ces pierres ? », les parents répondraient que les eaux du Jourdain avaient été coupées devant l'arche de l'alliance de l'Éternel. Andi en tire les quatre éléments d'une parfaite leçon de choses : un objet réel, un objet visible, un objet qui suscite une question, et une réponse précise et historique.
+Modèle : Après la traversée du Jourdain à pied sec, l'Éternel ordonna à Josué de prendre douze hommes, un de chaque tribu. Chacun prit une pierre au milieu du Jourdain, là où les sacrificateurs se tenaient avec l'arche, et la porta sur son épaule jusqu'à Guilgal, où les douze pierres furent dressées en mémorial. Ainsi, quand les enfants demanderaient : « Que signifient ces pierres ? », les parents répondraient que les eaux du Jourdain avaient été coupées devant l'arche de l'alliance de l'Éternel. Andi en tire les quatre éléments d'une parfaite leçon de choses : un objet réel, un objet visible, un objet qui suscite une question, et une réponse précise et historique.
 
 > EN: Tell the story of the twelve stones at the Jordan and list the four elements of a perfect object lesson Andi draws from it.
 
@@ -551,13 +558,13 @@ Modèle : En Deutéronome 31:19, l'Éternel dit à Moïse : « Maintenant, écri
 
 > EN: Tell what the LORD told Moses to do with the Song of Moses in Deuteronomy 31:19, and why.
 
-**5. Expliquez pourquoi Andi présente la mémorisation comme une méthode qui ne coûte presque rien mais qui survit à toutes les activités ingénieuses.**  
+**5. Expliquez pourquoi Andi présente la mémorisation comme une méthode très bon marché qui l'emporte pourtant sur toutes les activités ingénieuses.**  
 Mots-clés : verset · enfance · soixante · cœur / coeur · survi / durer / durable · mémoris / memoris · presque rien / coûte / coute · chant · unisson · perdre / perdu  
 Modèle : Le verset appris par cœur dans l'enfance est celui qui remonte au cœur à soixante ans, quand la vie est la plus dure et qu'aucune Bible n'est dans la pièce. Mémoriser ne coûte presque rien : un verset par semaine, récité avec des gestes, chanté ou répété à l'unisson par toute la classe. Pourtant ce verset ne peut plus être perdu, et il survivra à toutes les activités ingénieuses que l'enseignant pourrait concevoir. Le chant y aide aussi : le verset appris en chantant revient à l'esprit vingt ans plus tard.
 
 > EN: Explain why Andi calls memorization a method that costs almost nothing but outlasts every clever activity.
 
-**6. Décrivez le dessin, les cartes, les tableaux et les travaux manuels comme la quatrième famille d'activités, avec un exemple pour chacun.**  
+**6. Décrivez la quatrième famille d'activités, les activités manuelles, en nommant ses quatre formes et en donnant un exemple pour chacune.**  
 Mots-clés : dessin · carte · tableau / tableaux · travaux manuels / travail manuel / bricolage / maquette · mains · tempête / tempete · missionnaire · rois d israël / rois d israel / rois de juda / chronolog · tabernacle · imagin  
 Modèle : La quatrième famille est celle des mains à l'ouvrage. Le dessin : un enfant qui dessine Jésus calmant la tempête doit imaginer la barque, les vagues et les visages des disciples. Les cartes : l'enfant qui trace sa propre carte des voyages missionnaires de Paul se souvient d'Antioche, d'Icone, de Lystre et de Derbe. Les tableaux : un tableau des rois d'Israël et de Juda côte à côte, ou une frise chronologique des prophètes, donne à l'œil un schéma à voir. Les travaux manuels : construire un petit tabernacle en argile, ou recopier un verset sur une carte à afficher dans la cuisine. Dans chaque cas, faire, c'est apprendre.
 
@@ -569,19 +576,19 @@ Modèle : Les activités sont surtout pour les enfants, parce qu'ils apprennent 
 
 > EN: Explain why Andi says activities are mostly for children but not only for children.
 
-**8. Expliquez comment l'enseignant choisit parmi les activités selon la leçon, l'apprenant et le moment.**  
+**8. Expliquez les trois critères qui guident l'enseignant dans le choix d'une activité ; le premier est la leçon elle-même.**  
 Mots-clés : leçon / lecon · apprenant · moment · texte · dignité / dignite · ouverture / début / debut / commencement · conclusion / clôture / cloture · enfant · adulte · jeune  
 Modèle : D'abord la leçon : la forme du texte suggère la forme de l'activité — une carte pour la conquête de Canaan, un cantique pour un passage de louange, un tabernacle en argile pour le temple. Ensuite l'apprenant : les enfants aiment tout, les jeunes refusent ce qu'ils trouvent puéril, et les adultes accueillent des activités choisies dans le respect de leur dignité. Enfin le moment : un cantique ou une leçon de choses pour l'ouverture, une carte, un tableau ou un jeu dramatique pour le corps de la leçon, et un verset mémorisé ou un petit travail manuel pour la conclusion.
 
 > EN: Explain how the teacher chooses among activities by lesson, learner, and moment.
 
 **9. Expliquez la mise en garde d'Andi : une activité mal faite est pire que pas d'activité du tout.**  
-Mots-clés : travaux manuels / travail manuel / bricolage · temps · bêtise / betise / sottise / ridicule · divert · leçon / lecon · prépar / prepar · bible · volé / vole la / enterr / gaspill · cantique / chant · trente  
+Mots-clés : travaux manuels / travail manuel / bricolage · temps · bêtise / betise / sottise / ridicule · divert · leçon / lecon · prépar / prepar · bible · volé / vole / enterr / gaspill · cantique / chant · trente  
 Modèle : Une activité mal faite vole, enterre ou gaspille la leçon. Le travail manuel qui prend trente minutes et ne laisse pas de temps pour la Bible a volé la leçon. Le jeu dramatique qui tourne à la bêtise et ne revient jamais à la vérité l'a enterrée. Le cantique choisi pour divertir plutôt que pour instruire l'a gaspillée. C'est pourquoi l'enseignant doit préparer l'activité avec le même soin que le plan de leçon, car l'activité fait partie de ce plan.
 
 > EN: Explain Andi's warning that an activity badly done is worse than no activity at all.
 
-**10. Expliquez comment l'Unité 9 prépare l'Unité 10 (le sermon pour enfants, couronnement du cours).**  
+**10. Expliquez comment l'Unité 9 prépare la dernière unité du cours, consacrée au sermon pour enfants.**  
 Mots-clés : carquois · plein · couronnement / aboutissement / synthèse / synthese · cinq · enfant · sermon · méthode / methode · activit · flèche / fleche · unité 10 / unite 10  
 Modèle : Après neuf unités, le carquois de l'enseignant est plein : il contient les flèches de chaque méthode — exposé, discussion, récit, question, questions-réponses, étude de cas, apprentissage par l'expérience — et de chaque activité : objet, jeu dramatique, chant, travail manuel. L'Unité 10 est le couronnement du cours : le sermon pour enfants, cinq minutes adressées aux plus petits apprenants. Il est assez court pour mettre à l'épreuve chaque méthode et chaque activité, et l'Unité 9 fournit les outils dont l'enseignant aura besoin pour bien le prêcher.
 

@@ -17,6 +17,16 @@ Counts: 90 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 7. Adaptations for French readers, following your Spanish edition: 'Modern English' → « Le français moderne » (b017, MC2); 'English Bible' → « Bible française » (b020, b044); the 'English derivatives' sections (b029, b043) → « Les dérivés en français », with French words (sotériologie, justice, justifier, théodicée). I kept the Spanish examples (« Salvador mío », señor/Señor) and the b054 heading 'in English and Spanish', adding only « comme le français » for Kyrie eleison in b055. Would you rather use a French hymn line in place of « Salvador mío »?
 8. LSG renders YHWH as « l'Éternel », not « le Seigneur ». Readers in Kinshasa may notice that the 'Kyrios = YHWH' argument does not match their Old Testament wording. Should a sentence about « l'Éternel » be added?
 
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+- SA2: English prompt passes its own keywords
+- SA4: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA9: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -190,7 +200,7 @@ Demandez au chrétien moyen ce que signifie « sauvé », et la réponse est pre
 > EN: Ask the average Christian what "saved" means, and the answer is almost always: "saved from hell, going to heaven." That is true, but it is one-quarter true. The Greek verb sôzô is much bigger than that. It is one of the most flexible verbs in the New Testament, and it shows up in some surprising places.
 
 **b027**  
-Sôzô signifie arracher à un danger, quel qu'il soit. Il peut arracher à la noyade (Matthieu 14:30, quand Pierre, en train de s'enfoncer, s'écrie « Seigneur, sauve-moi ! » — kyrie sôson me). Il peut arracher à la maladie (Marc 5:34, quand Jésus dit à la femme atteinte d'une perte de sang : « ta foi t'a sauvée » — hê pistis sou sesôken se ; Louis Segond garde ici le sens littéral, là où d'autres versions disent « ta foi t'a guérie »). Il peut arracher à la mort (Marc 5:23, quand Jaïrus supplie Jésus de venir guérir sa fille « afin qu'elle soit sauvée et qu'elle vive »). Il peut arracher à un navire en perdition (Actes 27:31). Et il peut arracher au péché et au jugement (Actes 16:31, quand Paul dit au geôlier de Philippes : « Crois au Seigneur Jésus, et tu seras sauvé »).
+Sôzô signifie arracher à un danger, quel qu'il soit. Il peut arracher à la noyade (Matthieu 14:30, quand Pierre, en train de s'enfoncer, s'écrie « Seigneur, sauve-moi! » — kyrie sôson me). Il peut arracher à la maladie (Marc 5:34, quand Jésus dit à la femme atteinte d'une perte de sang : « ta foi t'a sauvée » — hê pistis sou sesôken se ; Louis Segond garde ici le sens littéral : le verbe grec est bien « sauver », même s'il s'agit d'une guérison). Il peut arracher à la mort (Marc 5:23, quand Jaïrus supplie Jésus de venir guérir sa fille « afin qu'elle soit sauvée et qu'elle vive »). Il peut arracher à un navire en perdition (Actes 27:31). Et il peut arracher au péché et au jugement (Actes 16:31, quand Paul dit au geôlier de Philippes : « Crois au Seigneur Jésus, et tu seras sauvé »).
 
 > EN: Sôzô means to rescue from danger, in any sense. It can rescue from drowning (Matthew 14:30, when Peter cries "Lord, save me" as he sinks — kyrie sôson me). It can rescue from disease (Mark 5:34, when Jesus tells the woman with the issue of blood, "your faith has made you whole" — hê pistis sou sesôken se; literally "your faith has saved you"). It can rescue from death (Mark 5:23, when Jairus begs Jesus to come heal his daughter "that she may be saved and live"). It can rescue from a sinking ship (Acts 27:31). And it can rescue from sin and judgment (Acts 16:31, when Paul tells the Philippian jailer, "Believe on the Lord Jesus Christ, and thou shalt be saved").
 
@@ -250,7 +260,7 @@ Ce que Paul fait de ce mot
 > EN: What Paul does with the word
 
 **b039**  
-Et puis Paul prend ce mot et lui fait exactement ce qu'il a fait à charis. Il le retourne. En Romains 3, il annonce que « sans la loi est manifestée la dikaiosynê de Dieu … dikaiosynê de Dieu par la foi en Jésus-Christ pour tous ceux qui croient ». Chez Paul, la dikaiosynê n'est plus l'excellence morale que vous devez atteindre. La dikaiosynê est le statut de juste que Dieu donne en cadeau à ceux qui se confient en Christ. Le verbe dikaioô est un verbe de tribunal : il signifie « déclarer juste », prononcer du haut du tribunal un verdict de « non coupable ». Quand Dieu justifie le pécheur qui se confie en Christ, il ne fait pas semblant que le pécheur est bon. Il transfère la justice parfaite de Christ sur le compte du pécheur et prononce le verdict juridique : juste.
+Et puis Paul prend ce mot et lui fait exactement ce qu'il a fait à charis. Il le retourne. En Romains 3, il annonce que « sans la loi est manifestée la justice de Dieu … justice de Dieu par la foi en Jésus-Christ pour tous ceux qui croient » ; chaque fois, le mot grec traduit par « justice » est dikaiosynê. Chez Paul, la dikaiosynê n'est plus l'excellence morale que vous devez atteindre. La dikaiosynê est le statut de juste que Dieu donne en cadeau à ceux qui se confient en Christ. Le verbe dikaioô est un verbe de tribunal : il signifie « déclarer juste », prononcer du haut du tribunal un verdict de « non coupable ». Quand Dieu justifie le pécheur qui se confie en Christ, il ne fait pas semblant que le pécheur est bon. Il transfère la justice parfaite de Christ sur le compte du pécheur et prononce le verdict juridique : juste.
 
 > EN: And then Paul takes the word and does to it exactly what he did to charis. He flips it. In Romans 3 he announces "the dikaiosynê of God revealed apart from law … even the dikaiosynê of God by faith of Jesus Christ unto all and upon all them that believe." Dikaiosynê in Paul is no longer the moral excellence you have to achieve. Dikaiosynê is the right standing God gives as a gift to those who trust in Christ. The verb dikaioô is a courtroom verb: it means "to declare righteous," to issue a verdict of "not guilty" from the bench. When God justifies the sinner who trusts Christ, He is not pretending the sinner is good. He is transferring Christ's perfect righteousness to the sinner's account and declaring the legal verdict: righteous.
 
@@ -320,7 +330,7 @@ L'hymne de Philippiens 2
 > EN: The Philippians 2 hymn
 
 **b053**  
-Philippiens 2:9–11 contient l'emploi chrétien culminant de ce mot. Paul, citant ce qui pourrait être un hymne chrétien primitif, écrit : « C'est pourquoi aussi Dieu l'a souverainement élevé, et lui a donné le nom qui est au-dessus de tout nom, afin qu'au nom de Jésus tout genou fléchisse dans les cieux, sur la terre et sous la terre, et que toute langue confesse que Jésus-Christ est Seigneur (Kyrios Iêsous Christos), à la gloire de Dieu le Père. » Cette expression — Kyrios Iêsous Christos — est le credo fondateur de la foi chrétienne. Le mot grec kyrios en est le mur porteur. Quand vous confessez Jésus comme Seigneur, vous ne dites pas seulement qu'il est votre conseiller personnel. Vous dites qu'il est YHWH, le Souverain de l'univers, celui dont le Nom est au-dessus de tout nom.
+Philippiens 2:9–11 contient l'emploi chrétien culminant de ce mot. Paul, citant ce qui pourrait être un hymne chrétien primitif, écrit : « C'est pourquoi aussi Dieu l'a souverainement élevé, et lui a donné le nom qui est au-dessus de tout nom, afin qu'au nom de Jésus tout genou fléchisse dans les cieux, sur la terre et sous la terre, et que toute langue confesse que Jésus-Christ est Seigneur, à la gloire de Dieu le Père. » Dans le grec de Paul, « Jésus-Christ est Seigneur » se dit Kyrios Iêsous Christos. Cette expression — Kyrios Iêsous Christos — est le credo fondateur de la foi chrétienne. Le mot grec kyrios en est le mur porteur. Quand vous confessez Jésus comme Seigneur, vous ne dites pas seulement qu'il est votre conseiller personnel. Vous dites qu'il est YHWH, le Souverain de l'univers, celui dont le Nom est au-dessus de tout nom.
 
 > EN: Philippians 2:9–11 contains the climactic Christian use of the word. Paul, quoting what may be an early Christian hymn, writes: "Wherefore God also hath highly exalted him, and given him a name which is above every name: that at the name of Jesus every knee should bow, of things in heaven, and things in earth, and things under the earth; and that every tongue should confess that Jesus Christ is Lord (Kyrios Iêsous Christos), to the glory of God the Father." That phrase — Kyrios Iêsous Christos — is the foundation creed of the Christian faith. The Greek word kyrios is the load-bearing wall. When you confess Jesus as Lord, you are not just saying He is your personal advisor. You are saying He is YHWH, the Sovereign of the universe, the One whose Name is above every name.
 
@@ -390,7 +400,7 @@ Ce que Luther a vu
 > EN: What Luther saw
 
 **b067**  
-Lisez-le maintenant avec les yeux de Luther. La dikaiosynê de Dieu est révélée — non pas la norme que Dieu exige, mais le don que Dieu fait. Par la foi et pour la foi (ek pisteôs eis pistin, littéralement « de foi pour foi ») — le salut commence dans la foi, continue dans la foi, s'achève dans la foi : la foi du début à la fin. Le juste vivra par la foi — la citation d'Habakuk 2:4 qui parcourt Romains, Galates et Hébreux comme la ligne de basse de tout le Nouveau Testament. Le juste vit par la pistis. Pas par les œuvres. Pas en montant des escaliers à Rome sur des genoux en sang. Par la pistis. Par la confiance dans le Kyrios.
+Lisez-le maintenant avec les yeux de Luther. En lui est révélée la justice de Dieu — la dikaiosynê de Dieu : non pas la norme que Dieu exige, mais le don que Dieu fait. Par la foi et pour la foi (ek pisteôs eis pistin, littéralement « de foi pour foi ») — le salut commence dans la foi, continue dans la foi, s'achève dans la foi : la foi du début à la fin. Le juste vivra par la foi — la citation d'Habakuk 2:4 qui parcourt Romains, Galates et Hébreux comme la ligne de basse de tout le Nouveau Testament. Le juste vit par la pistis. Pas par les œuvres. Pas en montant des escaliers à Rome sur des genoux en sang. Par la pistis. Par la confiance dans le Kyrios.
 
 > EN: Now read it with Luther's eyes. The dikaiosynê of God is being revealed — not the standard God demands, but the gift God gives. From faith to faith (ek pisteôs eis pistin) — salvation begins in faith, continues in faith, ends in faith, faith from start to finish. The just shall live by faith — the Habakkuk 2:4 quotation that runs through Romans, Galatians, and Hebrews like the bass line of the entire New Testament. The just live by pistis. Not by works. Not by climbing stairs in Rome on bleeding knees. By pistis. By trust in the Kyrios.
 
@@ -440,12 +450,12 @@ Certificat de ministère — seules les 20 questions à choix multiple comptent 
 > EN: Certificate of Ministry — only the 20 multiple-choice count (need 18/20).
 
 **b077**  
-Master of Theology — 20 questions à choix multiple (18/20) et 10 questions à réponse courte (9/10).
+Th.M. — 20 questions à choix multiple (18/20) et 10 questions à réponse courte (9/10).
 
 > EN: Master of Theology — 20 multiple-choice (18/20) and 10 short-answer (9/10).
 
 **b078**  
-Master of Divinity — 20 questions à choix multiple (18/20) et 10 questions à réponse courte (9/10).
+M.Div. — 20 questions à choix multiple (18/20) et 10 questions à réponse courte (9/10).
 
 > EN: Master of Divinity — 20 multiple-choice (18/20) and 10 short-answer (9/10).
 
@@ -632,7 +642,7 @@ _Pourquoi :_ Le culte de l'empereur exigeait la confession en trois mots Kyrios 
 · B. Genèse 1:1  
 · C. Psaume 23  
 · D. Apocalypse 22:21  
-_Pourquoi :_ Philippiens 2:9–11 est le grand sommet christologique : « Dieu … lui a donné le nom qui est au-dessus de tout nom, afin qu'au nom de Jésus tout genou fléchisse … et que toute langue confesse que Jésus-Christ est Seigneur (Kyrios Iêsous Christos), à la gloire de Dieu le Père. » Paul cite peut-être un hymne chrétien encore plus ancien. L'expression Kyrios Iêsous Christos est le credo fondateur de l'Église.  
+_Pourquoi :_ Philippiens 2:9–11 est le grand sommet christologique : « Dieu … lui a donné le nom qui est au-dessus de tout nom, afin qu'au nom de Jésus tout genou fléchisse … et que toute langue confesse que Jésus-Christ est Seigneur, à la gloire de Dieu le Père. » En grec : Kyrios Iêsous Christos. Paul cite peut-être un hymne chrétien encore plus ancien. L'expression Kyrios Iêsous Christos est le credo fondateur de l'Église.  
 > EN: In which New Testament passage does Paul include the climactic confession 'Kyrios Iêsous Christos' (Jesus Christ is Lord), declaring that every knee will bow and every tongue confess this name? — ✓ Philippians 2:9–11
 
 **15. Notre texte de l'unité, Romains 1:16–17, contient combien des quatre mots grecs étudiés dans l'Unité 9 (pistis, sôzô/sôtêria, dikaiosynê, kyrios) ?**  
@@ -731,13 +741,13 @@ Réponse : **Habakuk** · aussi acceptées : Habacuc, Habaquq, Habakkuk
 
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
-**1. Racontez avec vos propres mots l'histoire de Luther dans la tour de Wittenberg. Pourquoi le mot grec dikaiosynê a-t-il tout changé pour lui ?**  
-Mots-clés : luther · wittenberg · romains · 1516 · 1517 · érasme / erasme · grec · justice · un don / le don / cadeau / gratuit · la foi / par la foi / de foi / sa foi / en la foi / notre foi / ma foi · réforme / reforme · luther · wittenberg · romains · grec · justice · un don / le don / cadeau / gratuit · la foi / par la foi / de foi / sa foi / en la foi / notre foi / ma foi · réforme / reforme  
+**1. Racontez avec vos propres mots ce que Luther a vécu dans sa tour d'étude. Pourquoi le mot dikaiosynê a-t-il tout changé pour lui ?**  
+Mots-clés : luther · wittenberg · romains · 1516 · 1517 · érasme / erasme · grec · justice · un don / le don / cadeau / gratuit · la foi / par la foi / de foi / sa foi / en la foi / notre foi / ma foi · réforme / reforme · moine · wittenberg · romains · grec · justice · un don / le don / cadeau / gratuit · la foi / par la foi / de foi / sa foi / en la foi / notre foi / ma foi · réforme / reforme  
 Modèle : En 1515, Martin Luther, jeune moine augustin, préparait dans la tour du Cloître noir de Wittenberg des cours sur l'épître aux Romains. Il avait tout essayé pour mériter le salut — jeûnes, montée à genoux de la Scala Sancta, confessions interminables — et Romains 1:17 le tourmentait, car il lisait justitia Dei comme la norme par laquelle Dieu le condamnerait. En 1516, Érasme publia le Nouveau Testament grec. Luther y lut dikaiosynê theou et comprit que cette justice n'est pas la norme que Dieu exige, mais le don gratuit que Dieu fait à ceux qui croient : « Le juste vivra par la foi », non par les œuvres. Il se sentit renaître, comme s'il entrait au paradis par des portes ouvertes. Ce seul mot grec alluma la Réforme, et les quatre-vingt-quinze thèses suivirent en 1517.
 
 > EN: Tell the story of Luther in the Wittenberg tower in your own words. Why did the Greek word dikaiosynê change everything for him?
 
-**2. Définissez la pistis telle que le Nouveau Testament l'emploie, et expliquez pourquoi la foi se mesure toujours à son OBJET, et non à son intensité.**  
+**2. Définissez la pistis telle que le Nouveau Testament l'emploie, et expliquez pourquoi la valeur d'une foi dépend toujours de CELUI ou de CE en qui l'on se confie, et non de la force avec laquelle on croit.**  
 Mots-clés : pistis · confiance · objet · digne de confiance · christ · la foi / par la foi / de foi / sa foi / en la foi / notre foi / ma foi · mesure · intensité / intensite · chaise · souhait / désir / desir · confiance · objet · digne · christ · la foi / par la foi / de foi / sa foi / en la foi / notre foi / ma foi · mesure · chaise · souhait / désir / desir  
 Modèle : Dans le Nouveau Testament, la pistis est une confiance placée en quelqu'un ou en quelque chose de digne de confiance. Elle n'est jamais un simple souhait ou un optimisme sans objet : le grec demande toujours « confiance en qui ? ». La foi se mesure donc à son objet, non à son intensité. Une chaise bien construite me porte même si je m'y assois avec peu de foi ; une chaise de bois pourri s'effondre quelle que soit l'intensité de ma foi. La pistis n'est pas la puissance qui fait tenir la chaise, c'est l'acte de s'asseoir sur une chaise qui tient déjà. La plus petite foi placée en Christ sauve ; la plus grande foi placée dans le mauvais objet condamne. Le christianisme n'est pas la foi en la foi, mais la foi en Christ.
 
@@ -745,47 +755,47 @@ Modèle : Dans le Nouveau Testament, la pistis est une confiance placée en quel
 
 **3. Citez quatre sortes de sauvetage différentes que décrit le verbe grec sôzô dans le Nouveau Testament, avec un exemple biblique pour chacune.**  
 Mots-clés : noyade / noyer · maladie · la mort / de la mort / mourir / mourante · naufrage · péché / peche · pierre · femme · jaïrus / jairus · navire / bateau · geôlier / geolier / gardien de prison · noyade / noyer · maladie · la mort / de la mort / mourir / mourante · naufrage · péché / peche · pierre · femme · jaïrus / jairus · navire / bateau · geôlier / geolier / gardien de prison  
-Modèle : Le verbe sôzô désigne toute sorte de sauvetage. 1) La noyade : Pierre s'enfonce dans les flots et s'écrie « Seigneur, sauve-moi ! » (Matthieu 14:30). 2) La maladie : Jésus dit à la femme atteinte d'une perte de sang « ta foi t'a sauvée » (Marc 5:34). 3) La mort : Jaïrus supplie Jésus pour sa fille mourante, « afin qu'elle soit sauvée et qu'elle vive » (Marc 5:23). 4) Le naufrage : Paul et les passagers du navire pris dans la tempête (Actes 27:31). 5) Le péché et le jugement : Paul dit au geôlier de Philippes « Crois au Seigneur Jésus, et tu seras sauvé » (Actes 16:31). Le grec ne sépare pas le physique du spirituel : le salut est total.
+Modèle : Le verbe sôzô désigne toute sorte de sauvetage. 1) La noyade : Pierre s'enfonce dans les flots et s'écrie « Seigneur, sauve-moi! » (Matthieu 14:30). 2) La maladie : Jésus dit à la femme atteinte d'une perte de sang « ta foi t'a sauvée » (Marc 5:34). 3) La mort : Jaïrus supplie Jésus pour sa fille mourante, « afin qu'elle soit sauvée et qu'elle vive » (Marc 5:23). 4) Le naufrage : Paul et les passagers du navire pris dans la tempête (Actes 27:31). 5) Le péché et le jugement : Paul dit au geôlier de Philippes « Crois au Seigneur Jésus, et tu seras sauvé » (Actes 16:31). Le grec ne sépare pas le physique du spirituel : le salut est total.
 
 > EN: List four different kinds of rescue described by the Greek verb sôzô in the New Testament, citing one biblical example for each.
 
-**4. Expliquez les trois temps du salut (passé, présent, futur) et rattachez chacun à une étape de la vie chrétienne.**  
+**4. Expliquez les trois temps du salut et rattachez chacun à une étape de la vie chrétienne.**  
 Mots-clés : justification · sanctification · glorification · peine · puissance · présence / presence · passé / passe · présent / present · futur · sauvé / sauve · justification · sanctification · glorification · peine · puissance · présence / presence · passé / passe · présent / present · futur · sauvé / sauve  
 Modèle : Le salut a trois temps, et tous trois sont exprimés par le même verbe sôzô. Au passé : j'ai été sauvé de la peine du péché — c'est la justification, quand Dieu me déclare juste par la foi en Christ. Au présent : je suis en train d'être sauvé de la puissance du péché — c'est la sanctification, la croissance quotidienne du croyant. Au futur : je serai sauvé de la présence même du péché — c'est la glorification, à la résurrection, quand toute larme sera essuyée. Un seul verbe, trois temps, un seul salut.
 
 > EN: Explain the three tenses of salvation (past, present, future) and connect each one to a stage of the Christian life.
 
 **5. Expliquez « le grand échange » en lien avec la dikaiosynê, en citant 2 Corinthiens 5:21 ou un verset semblable.**  
-Mots-clés : échange / echange · péché / peche · justice · christ · croix · la foi / par la foi / de foi / sa foi / en la foi / notre foi / ma foi · transf · verdict · non coupable / non-coupable · 2 corinthiens / corinthiens 5 · échange / echange · péché / peche · justice · christ · croix · la foi / par la foi / de foi / sa foi / en la foi / notre foi / ma foi · transf · verdict · corinthiens  
+Mots-clés : échange / echange · péché / peche · justice · christ · croix · la foi / par la foi / de foi / sa foi / en la foi / notre foi / ma foi · transf · verdict · non coupable / non-coupable · 2 corinthiens / corinthiens 5 · compte · péché / peche · justice · christ · croix · la foi / par la foi / de foi / sa foi / en la foi / notre foi / ma foi · transf · verdict · parfait  
 Modèle : Le « grand échange » est le cœur de l'Évangile. Sur la croix, Christ a pris notre péché ; par la foi, nous recevons sa dikaiosynê, sa justice parfaite. « Celui qui n'a point connu le péché, il l'a fait devenir péché pour nous, afin que nous devenions en lui justice de Dieu » (2 Corinthiens 5:21). Mon péché sur lui, sa justice sur moi. Dieu transfère la justice de Christ sur le compte du pécheur et prononce le verdict : non coupable, juste. Toute la transaction repose sur ce mot grec.
 
 > EN: Explain 'the great exchange' as it relates to dikaiosynê, citing 2 Corinthians 5:21 or a similar verse.
 
-**6. Expliquez pourquoi dikaioô est un verbe de TRIBUNAL et non un verbe de TRANSFORMATION, et pourquoi cette distinction est importante pour la doctrine de la justification.**  
-Mots-clés : tribunal · verdict · déclar / declar · juridique / légal / legal · justifi · transformation · sanctification · étrangère / etrangere / extérieure / exterieure · imput · christ · dossier / casier · tribunal · verdict · déclar / declar · juridique / légal / legal · justifi · transformation · sanctification · étrangère / etrangere / extérieure / exterieure · imput · christ · dossier / casier  
+**6. Expliquez pourquoi dikaioô est un verbe de TRIBUNAL et non un verbe de CHANGEMENT intérieur, et pourquoi cette distinction est importante pour la doctrine de la justification.**  
+Mots-clés : tribunal · verdict · déclar / declar · juridique / légal / legal · justifi · transformation · sanctification · étrangère / etrangere / extérieure / exterieure · imput · christ · dossier / casier · coupable · verdict · déclar / declar · juridique / légal / legal · foi seule / seule foi / sola fide · transformation · sanctification · étrangère / etrangere / extérieure / exterieure · imput · christ · dossier / casier  
 Modèle : Dikaioô est un verbe de tribunal : il signifie déclarer juste, prononcer un verdict juridique de « non coupable ». Ce n'est pas un verbe de transformation : justifier ne veut pas dire rendre le pécheur moralement parfait. Quand Dieu justifie celui qui se confie en Christ, il ne fait pas semblant que le pécheur est bon ; il lui impute une justice étrangère, celle de Christ, et transfère le dossier parfait de Christ sur son compte. La distinction est capitale : si la justification dépendait de notre transformation, nous ne serions jamais sûrs d'être acceptés. La transformation intérieure suit, par la sanctification, mais le verdict est déjà prononcé. C'est le fondement de la justification par la foi seule.
 
 > EN: Explain why dikaioô is a COURTROOM verb and not a TRANSFORMATION verb, and why this distinction matters for the doctrine of justification.
 
-**7. Expliquez pourquoi les premiers chrétiens ne pouvaient pas affirmer « Kyrios Kaisar » (César est Seigneur) dans le culte impérial romain, et pourquoi ils ont accepté le martyre plutôt que de le faire.**  
-Mots-clés : kyrios · césar / cesar · jésus / jesus · seigneur · yhwh · septante · exclusi · martyr · polycarpe · encens · césar / cesar · jésus / jesus · seigneur · yhwh · septante · exclusi · martyr · polycarpe · encens  
+**7. Expliquez pourquoi les premiers chrétiens ne pouvaient pas dire « Kyrios Kaisar » (« l'empereur est Seigneur ») dans le culte impérial romain, et pourquoi ils ont préféré mourir plutôt que de prononcer cette formule.**  
+Mots-clés : kyrios · césar / cesar · jésus / jesus · seigneur · yhwh · septante · exclusi · martyr · polycarpe · encens · césar / cesar · jésus / jesus · perpétue / perpetue / ignace · yhwh · septante · exclusi · martyr · polycarpe · encens  
 Modèle : Dans le culte impérial, on demandait de jeter une pincée d'encens sur l'autel et de dire « Kyrios Kaisar », César est Seigneur. Pour la plupart des Romains, ce n'était qu'un rite civique. Mais les chrétiens avaient déjà confessé « Kyrios Iêsous », Jésus est Seigneur. Or la Septante avait employé Kyrios pour traduire YHWH, le Nom de l'alliance de Dieu. Dire que Jésus est Kyrios, c'était dire que Jésus est YHWH. Ce titre exigeait une réponse exclusive : le même mot ne pouvait appartenir à deux seigneurs. C'est pourquoi des chrétiens comme Polycarpe, Perpétue ou Ignace ont préféré le martyre et les lions plutôt que l'encens.
 
 > EN: Tell why the early Christians could not affirm 'Kyrios Kaisar' (Caesar is Lord) in the Roman imperial cult, and why they went to martyrdom over it.
 
-**8. Lisez Romains 1:16–17 (qui contient pistis, sôtêria et dikaiosynê) et expliquez comment les quatre mots de l'unité s'unissent pour former l'Évangile de la Réforme.**  
+**8. Lisez Romains 1:16–17 (qui contient pistis, sôtêria et dikaiosynê) et expliquez comment les quatre mots de l'unité s'unissent pour former le message central que les Réformateurs ont redécouvert au XVIe siècle.**  
 Mots-clés : la foi / par la foi / de foi / sa foi / en la foi / notre foi / ma foi · salut · justice · seigneur · un don / le don / cadeau / gratuit · évangile / evangile · réforme / reforme · luther · habakuk / habacuc · le juste / un juste · la foi / par la foi / de foi / sa foi / en la foi / notre foi / ma foi · salut · justice · seigneur · un don / le don / cadeau / gratuit · évangile / evangile · réforme / reforme · luther · habakuk / habacuc · le juste / un juste  
 Modèle : Romains 1:16–17 rassemble les mots du salut. Paul n'a pas honte de l'Évangile, car il est la puissance de Dieu pour le salut (sôtêria) de quiconque croit (pisteuô). En lui est révélée la justice de Dieu (dikaiosynê) — non la norme que Dieu exige, mais le don qu'il fait — par la foi et pour la foi (pistis), selon Habakuk 2:4 : « Le juste vivra par la foi. » Kyrios n'y est pas écrit, mais le Christ de l'Évangile est le Seigneur en qui nous plaçons notre confiance. Voilà ce que Luther a vu : le salut est un don reçu par la foi seule, du début à la fin. C'est l'Évangile de la Réforme.
 
 > EN: Read Romans 1:16–17 (which contains pistis, sôtêria, and dikaiosynê) and explain how the four unit words connect to form the Reformation gospel.
 
-**9. En reprenant les huit mots grecs (Logos, Agapê, Charis, Pneuma, Pistis, Sôzô, Dikaiosynê, Kyrios), résumez l'Évangile en un seul paragraphe qui emploie les huit termes.**  
+**9. En reprenant les huit mots grecs étudiés dans les unités 6 à 9, résumez l'Évangile en un seul paragraphe qui emploie les huit termes.**  
 Mots-clés : logos · agapê / agape · charis · pneuma · pistis · sôzô / sozo · dikaiosynê / dikaiosyne · kyrios · évangile / evangile · salut · christ · évangile / evangile · salut · christ  
 Modèle : Voici l'Évangile : le Logos, la Parole éternelle, s'est fait chair en Christ. Par agapê, l'amour qui donne, le Père l'a envoyé ; par charis, la grâce imméritée, il nous offre le salut ; par le Pneuma, l'Esprit, il nous fait naître de nouveau. Nous le recevons par pistis, la confiance placée en celui qui est digne de confiance. Ainsi il nous sauve — c'est sôzô — du péché, de la mort et de toute ruine. Il nous donne sa dikaiosynê, le statut de juste que nous ne pouvions mériter. Et nous confessons qu'il est Kyrios, le Seigneur, YHWH lui-même, à la gloire de Dieu le Père.
 
 > EN: Looking back at all eight Greek words (Logos, Agapê, Charis, Pneuma, Pistis, Sôzô, Dikaiosynê, Kyrios), summarize the gospel in a single paragraph using all eight terms.
 
-**10. Activité dans votre cahier (Unité 9) : choisissez UN des quatre mots grecs de l'Unité 9 (Pistis, Sôzô, Dikaiosynê ou Kyrios) et écrivez un court paragraphe décrivant comment la connaissance de ce mot grec changera désormais votre façon de lire un verset biblique précis.**  
+**10. Activité dans votre cahier (Unité 9) : choisissez UN des quatre mots grecs de l'Unité 9 et écrivez un court paragraphe décrivant comment la connaissance de ce mot transformera votre façon de lire un verset biblique précis.**  
 Mots-clés : pistis · sôzô / sozo · dikaiosynê / dikaiosyne · kyrios · verset · lecture / lirai / je lis · change · signifi · la foi / par la foi / de foi / sa foi / en la foi / notre foi / ma foi · sauvé / sauve · justice · seigneur · verset · lecture / lirai / je lis · change · signifi · la foi / par la foi / de foi / sa foi / en la foi / notre foi / ma foi · sauvé / sauve · justice · seigneur  
 Modèle : Je choisis sôzô. Désormais, quand je lirai Marc 5:34, où Jésus dit à la femme malade « ta foi t'a sauvée », je ne verrai plus seulement une guérison du corps. Le verbe grec signifie arracher à tout danger, et il unit le physique et le spirituel. Ma lecture de ce verset change : Christ ne sauve pas seulement l'âme pour le ciel, il sauve la personne entière. Le même verbe couvre le pardon que je reçois par la foi, quand Dieu me donne la justice de Christ, et l'œuvre future du Seigneur dans mon corps à la résurrection. Ce verset me rappelle que le salut est total.
 

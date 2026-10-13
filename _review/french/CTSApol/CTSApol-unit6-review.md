@@ -12,6 +12,15 @@ Counts: 27 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 2. Ésaïe 7:14: LSG says « la jeune fille », not « la vierge ». I quoted LSG and added Matthieu 1:23 (« la vierge ») in full in b017, and adjusted MC 13, fill 6 and SA 7. Is that acceptable, or would you like a note explaining that Matthew interprets Isaiah's word as « vierge »?
 3. The transfiguration quotation has no reference in the English; I used Marc 9:7 (« mon Fils bien-aimé: écoutez-le! »). OK?
 
+## Problems in the English source
+
+- SA1: English prompt passes its own keywords
+- SA3: English prompt passes its own keywords
+- SA5: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -32,9 +41,9 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
   _Checked online (biblestudytools.com). The English (« This is My Son; listen to Him ») gives no reference; Marc 9:7 was chosen because it also matches MC 17 option A (« beloved Son; listen to Him »). Luc 9:35 LSG reads « Celui-ci est mon Fils élu: écoutez-le! ». Used in b021, MC 17, SA 9._
 - **⚠** **1 Timothée 3:16** — « Et, sans contredit, le mystère de la piété est grand: celui qui a été manifesté en chair, justifié par l'Esprit, … »  
   _Checked online (biblestudytools.com). LSG follows the Greek reading « celui qui » (hos) where the English (KJV/NKJV) reads « God was manifest in the flesh » (Theos). The French in b024 keeps LSG wording and so loses the explicit word « Dieu » that makes this closing verse a statement of Christ's deity. No exam item depends on it. See question for Wayne._
-- **Michée 5:1 (= Micah 5:2 in English Bibles)** — « Et toi, Bethléhem Éphrata, Petite entre les milliers de Juda, De toi sortira pour moi Celui qui dominera sur Israël… »  
-  _Checked online (bible.com, LSG). Not quoted; MC 7 explanation reference changed from 5:2 to Michée 5:1 to match LSG numbering. LSG spelling « Bethléhem » used throughout; fill 3 also accepts « Bethléem »._
-- **Psaume 22:17, 19 (allusion)** — « Ils ont percé mes mains et mes pieds… Ils tirent au sort ma tunique. »  
+- **Michée 5:2** — « Et toi, Bethléhem Éphrata, Petite entre les milliers de Juda, De toi sortira pour moi Celui qui dominera sur Israël… »  
+  _Checked online (bible.com, LSG). Not quoted; MC 7 explanation uses Michée 5:2 (English/NKJV numbering, per convention 11; printed LSG editions number it 5:1). LSG spelling « Bethléhem » used throughout; fill 3 also accepts « Bethléem »._
+- **Psaume 22:16, 18 (allusion)** — « Ils ont percé mes mains et mes pieds… Ils tirent au sort ma tunique. »  
   _Allusion only, not quoted (b012, MC 8, SA 4). LSG wording not checked online._
 - **Jean 10:30; 14:9; 4:10–14; 6:35; 11:43 (allusions)** — «  »  
   _Paraphrased allusions only (« lui et le Père étaient un », « le voir, c'était voir le Père », eau vive, pain de vie, appeler le mort à sortir); not in quotation marks; not checked online._
@@ -173,7 +182,7 @@ Examen final de l'Unité 6
 > EN: Unit 6 Final Exam
 
 **b026**  
-Parcours Certificat : les 20 questions à choix multiples. Associé : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les questions à choix multiples et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiples, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -244,7 +253,7 @@ _Pourquoi :_ S'il croyait à tort être Dieu, il était un fou, et non un sage e
 · B. Le nom de sa mère  
 · C. Le jour de la semaine  
 ✓ D. Le village de sa naissance, Bethléhem  
-_Pourquoi :_ Michée 5:1 a nommé Bethléhem des siècles à l'avance.  
+_Pourquoi :_ Michée 5:2 a nommé Bethléhem des siècles à l'avance.  
 > EN: Micah named which detail of the Messiah's life seven hundred years early? — ✓ The village of His birth, Bethlehem
 
 **8. Le Psaume 22 a décrit une mort avec les mains et les pieds percés — ce qui est remarquable, car il a été écrit :**  
@@ -399,13 +408,13 @@ Réponse : **natures** · aussi acceptées : nature
 
 Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
 
-**1. Quelle est la question que Jésus impose en Matthieu 16:15, et pourquoi l'option « simplement un bon enseignant » n'est-elle pas une option sûre ?**  
+**1. Qu'est-ce que Jésus oblige chacun à trancher en Matthieu 16:15, et pourquoi le ranger simplement parmi les bons maîtres de morale n'est-il pas sans danger ?**  
 Mots-clés : question · enseignant / maître / maitre / docteur · affirm / revendi / prétend / pretend · divin · pardonn · adora / adoré / adore / culte · option / choix · esquiv / éluder / eluder / échapp / echapp / éviter / eviter / dérober / derober  
 Modèle : En Matthieu 16:15, Jésus impose la question : « qui dites-vous que je suis? », et il a disposé les choses de telle sorte que personne ne puisse l'esquiver par une demi-réponse polie. Le monde aimerait bien le ranger simplement parmi les grands enseignants moraux, mais cette option confortable n'est pas sûre, car un grand enseignant ne dit pas les choses que cet Homme a dites. Il a pardonné des péchés qui n'avaient pas été commis contre lui, il a accepté une adoration qu'aucun prophète n'a jamais osé accepter, et il a revendiqué la divinité en prenant sur ses lèvres le saint nom « Je suis » et en disant que lui et le Père étaient un. Un simple professeur de morale ne parle pas ainsi. Ses propres affirmations ferment donc la porte à cette étiquette facile, et il ne reste que ce choix : soit il ment, soit il est dans l'illusion, soit il dit la vérité.
 
 > EN: What is the question Jesus forces in Matthew 16:15, and why is 'merely a good teacher' not a safe option?
 
-**2. Décrivez les affirmations du Christ qui équivalent à une revendication de divinité.**  
+**2. Décrivez les paroles et les actes par lesquels le Christ s'est placé à l'égal de Dieu.**  
 Mots-clés : divinité / divinite · pardonn · adora / adoré / adore / culte · abraham · le père / le pere / du père / du pere / au père / au pere · le nom / son nom / saint nom / nom divin / nom de dieu · affirm / revendi / prétend / pretend · divin  
 Modèle : L'unité énumère plusieurs affirmations qui, ensemble, équivalent à une revendication de divinité. Jésus a pardonné des péchés qui n'avaient pas été commis contre lui, ce que Dieu seul peut faire, et il a accepté une adoration qu'aucun prophète honnête ne recevrait jamais. Il a dit : « Avant qu'Abraham fût, je suis », prenant délibérément sur ses lèvres le nom divin que Dieu avait révélé à Moïse. Il a dit aux hommes que lui et le Père étaient un, et que celui qui l'avait vu avait vu le Père. Aucune de ces paroles n'est celle d'un humble enseignant moral ; chacune affirme directement qu'il est Dieu. Prises ensemble, elles montrent que Jésus a revendiqué la pleine divinité, et c'est précisément pourquoi nous devons décider si cette affirmation est un mensonge, une illusion ou la vérité.
 
@@ -423,7 +432,7 @@ Modèle : L'empreinte de la prophétie est ce que l'unité appelle la biographie
 
 > EN: Explain the 'fingerprint of prophecy' and give examples of its precision.
 
-**5. Expliquez le calcul de probabilité de Stoner et l'illustration des dollars d'argent du Texas.**  
+**5. Expliquez le calcul de Stoner sur les prophéties messianiques et son illustration des pièces d'un dollar répandues sur tout un État.**  
 Mots-clés : stoner · probabilit · huit · texas · argent · marqué / marque · hasard / chance · accompli  
 Modèle : Le mathématicien Peter Stoner a estimé la probabilité qu'un seul homme accomplisse par hasard huit seulement des prophéties messianiques à une chance sur dix puissance dix-sept, un nombre trop grand pour que l'esprit le ressente. L'unité lui donne donc une forme avec l'illustration des dollars d'argent du Texas. Imaginez que l'on recouvre tout l'État du Texas de pièces d'un dollar en argent sur soixante centimètres d'épaisseur, qu'on en marque une seule avec de la peinture rouge et qu'on les mélange toutes. Puis un homme aux yeux bandés, lâché n'importe où dans l'État, doit se baisser une seule fois et ramasser la pièce marquée du premier coup. C'est à peu près la chance qu'un homme accomplisse huit prophéties par accident. Le calcul suppose que la probabilité de chaque prophétie est indépendante, une méthode que certains statisticiens ont contestée ; le chiffre sert donc mieux d'illustration frappante de l'improbabilité d'une coïncidence que de preuve précise et incontestée — et la tradition considère que Jésus a accompli non pas huit prophéties, mais plusieurs centaines de plus.
 
@@ -435,13 +444,13 @@ Modèle : La mosaïque du Messie est une illustration inventée que le Dr Cook p
 
 > EN: Explain the Mosaic of the Messiah illustration and how Dr. Cook labels it.
 
-**7. Expliquez le fil d'Emmanuel, d'Ésaïe 7:14 à Matthieu 1:23.**  
+**7. Expliquez comment le nom « Dieu avec nous » relie Ésaïe 7:14 à Matthieu 1:23.**  
 Mots-clés : emmanuel / immanuel · ésaïe / esaie / isaïe / isaie · vierge / jeune fille · signe · matthieu · signifi / tradui · proche / approch / près de / pres de · peuple  
 Modèle : Le fil d'Emmanuel va de la prophétie à son accomplissement. Bien avant Bethléhem, Ésaïe a déclaré à un roi infidèle que Dieu lui-même donnerait un signe : « Voici, la jeune fille deviendra enceinte, elle enfantera un fils, Et elle lui donnera le nom d'Emmanuel », en Ésaïe 7:14. Lorsque l'ange est venu vers Joseph, Matthieu nous dit que c'en était l'accomplissement : « Voici, la vierge sera enceinte […] et on lui donnera le nom d'Emmanuel, ce qui signifie Dieu avec nous », en Matthieu 1:23. Ce nom est le cœur de toute l'affaire. Ce n'est pas Dieu au-dessus de nous, qui observe de loin, ni Dieu contre nous, armé et en colère, mais Dieu avec nous, le Tout-Puissant venu assez proche pour être tenu dans les bras d'une jeune paysanne et couché dans une mangeoire. Les affirmations et les prophéties convergent vers cette vérité étonnante : en cet Homme, Dieu lui-même est descendu pour être avec son peuple.
 
 > EN: Explain the Immanuel thread from Isaiah 7:14 to Matthew 1:23.
 
-**8. Expliquez comment l'Agneau et le Lion répondent à l'objection « Jésus n'a pas apporté la paix mondiale ».**  
+**8. Comment la double image de l'Agneau et du Lion répond-elle à l'objection selon laquelle Jésus n'a pas mis fin aux guerres du monde ?**  
 Mots-clés : agneau · lion · venue / avènement / avenement · messie · péché / peche · paix · sacrifi · royaume / règne / regne / régner / regner / le roi / du roi / un roi  
 Modèle : L'objecteur juif demande, à juste titre, où est la paix mondiale si Jésus est le Messie promis. L'unité répond que les prophètes ont annoncé non pas une venue, mais deux, un Messie à la double mission. Il vient d'abord comme l'Agneau, celui dont Ésaïe a dit qu'il était blessé pour nos péchés et brisé pour nos iniquités, et qui doit d'abord régler le problème le plus profond de tous, le péché humain. Il revient comme le Lion, le Roi conquérant qui apporte la paix à toute la terre lors de son second avènement. Rejeter l'Agneau parce qu'il n'est pas encore le Lion, c'est refuser le sacrifice même qui rend une personne apte à vivre sous le règne du Roi. Le berceau et la croix devaient venir avant la couronne ; il est venu une fois comme l'Agneau immolé, et il revient comme le Lion qui règne.
 
@@ -453,7 +462,7 @@ Modèle : Un témoin digne de foi doit avoir un caractère qui correspond à ses
 
 > EN: How does Jesus' character match His claim, and how was it certified?
 
-**10. Expliquez le Dieu-Homme : comment Jésus est pleinement Dieu et pleinement homme.**  
+**10. Expliquez le Dieu-Homme : comment Jésus peut-il être à la fois entièrement divin et entièrement humain ?**  
 Mots-clés : pleinement · dieu · homme · nature · personne · fatigu · tempête / tempete · mystère / mystere  
 Modèle : Le Dieu-Homme est le mystère le plus profond et le réconfort le plus sûr de la foi : Jésus est pleinement Dieu et pleinement homme, les deux natures étant unies en une seule Personne. L'unité le montre par des phrases en parallèle. Comme homme, il était fatigué près du puits, mais comme Dieu, il était l'eau vive. Comme homme, il dormait dans la barque, mais comme Dieu, il s'est levé et a calmé la tempête. Comme homme, il a pleuré au tombeau de son ami, mais comme Dieu, il a appelé le mort à sortir. Comme homme, il a eu faim, mais comme Dieu, il est le pain de vie. Comme homme, il est mort sur la croix, mais comme Dieu, il est sorti du tombeau le troisième jour. Voici celui que les prophètes ont annoncé et dont les affirmations séparent le menteur du Seigneur : pleinement Dieu et pleinement homme en une seule Personne, celui dont le nom est Dieu avec nous.
 

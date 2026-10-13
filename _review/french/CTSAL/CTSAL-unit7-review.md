@@ -22,13 +22,13 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
 - **Matthieu 18:16** — « Mais, s'il ne t'écoute pas, prends avec toi une ou deux personnes, afin que toute l'affaire se règle sur la déclaration de deux ou de trois témoins. »  
   _Verified on biblestudytools.com (LSG). LSG 'toute l'affaire se règle sur la déclaration' vs NKJV 'every word may be established'; fill 4 asks for 'témoins', same in both. Quoted in b016, fill 4._
 - **Matthieu 18:17** — « S'il refuse de les écouter, dis-le à l'Église; et s'il refuse aussi d'écouter l'Église, qu'il soit pour toi comme un païen et un publicain. »  
-  _Verified on biblestudytools.com (LSG; site prints 'Eglise', modern accent used). 'heathen and tax collector' = 'païen et publicain'; prose and MC9 use 'publicain' accordingly. Quoted in b016, b019, MC9._
+  _Verified on biblestudytools.com (LSG; site prints 'Eglise', modern accent used). 'heathen and tax collector' = 'païen et publicain'; prose and MC9 use 'publicain' accordingly. Quoted in b016, b019, MC9. b019 and MC9 echo the full Segond phrase « comme un païen et un publicain »._
 - **⚠** **Matthieu 18:21-22** — « Jésus lui dit: Je ne te dis pas jusqu'à sept fois, mais jusqu'à septante fois sept fois. »  
   _Verified on biblestudytools.com (LSG). LSG 'septante fois sept fois' (NKJV 'seventy times seven'). Fill 10 answer 'septante'; accepts 'soixante-dix' (also 'soixante dix' via punctuation folding), '70' because many Congolese readers say soixante-dix. Quoted in b034, MC18, fill 10._
 - **⚠** **2 Corinthiens 2:7-8** — « en sorte que vous devez bien plutôt lui pardonner et le consoler, de peur qu'il ne soit accablé par une tristesse excessive. Je vous exhorte donc à faire acte de charité envers lui; »  
   _Verified on biblestudytools.com (LSG). NKJV 'reaffirm your love to him' = LSG 'faire acte de charité envers lui'. The lesson, MC10 and SA4 depend on 'reaffirm love'. b020 quotes LSG and adds a one-clause bridge ('réaffirmer votre amour envers lui'); MC10 why and SA4 model cite the LSG phrase; SA4 keyword slot accepts 'amour' or 'charit'. Fill 5 'consoler' (NKJV 'comfort') matches._
 - **Lamentations 3:33** — « Car ce n'est pas volontiers qu'il humilie Et qu'il afflige les enfants des hommes. »  
-  _Verified on biblestudytools.com (LSG). Short excerpt in b020 rendered « n'afflige pas volontiers » — a condensed form of LSG's 'ce n'est pas volontiers qu'il ... afflige'; reviewer may prefer the full LSG clause._
+  _Verified with the offline Segond. b020 now quotes the full LSG verse (« ce n'est pas volontiers qu'il humilie et qu'il afflige les enfants des hommes »), poetic line capital « Et » lowercased mid-sentence; the SA model paraphrases it without quotation marks._
 - **1 Corinthiens 5:5** — « qu'un tel homme soit livré à Satan pour la destruction de la chair, afin que l'esprit soit sauvé au jour du Seigneur Jésus. »  
   _Verified on biblestudytools.com (LSG). LSG 'l'esprit' where NKJV has 'his spirit'; meaning unchanged in context. Quoted in b022, b023, b024, MC11, SA5 model._
 - **1 Corinthiens 5:6** — « C'est bien à tort que vous vous glorifiez. Ne savez-vous pas qu'un peu de levain fait lever toute la pâte? »  
@@ -137,12 +137,12 @@ III. Le but est toujours la restauration
 > EN: III. The Goal Is Always Restoration
 
 **b019**  
-Gardez fermement le but en vue, car tout, dans Matthieu 18, est tendu vers lui : gagner votre frère. Même la dernière étape, la plus douloureuse — « qu'il soit pour toi comme un païen et un publicain » (Matthieu 18:17) — n'est pas une vengeance de l'Église. C'est la reconnaissance attristée qu'un homme a préféré son péché à son Sauveur et à la communion fraternelle, une mise à l'écart destinée à le réveiller, non à le rejeter. Et souvenez-vous de celui qui a prononcé ces paroles : c'est le même Jésus qui mangeait avec les publicains et les pécheurs, qui allait à leur recherche. Même être « comme un publicain », dans sa bouche, ce n'est pas la fin de la poursuite, mais une autre forme de celle-ci.
+Gardez fermement le but en vue, car tout, dans Matthieu 18, est tendu vers lui : gagner votre frère. Même la dernière étape, la plus douloureuse — « qu'il soit pour toi comme un païen et un publicain » (Matthieu 18:17) — n'est pas une vengeance de l'Église. C'est la reconnaissance attristée qu'un homme a préféré son péché à son Sauveur et à la communion fraternelle, une mise à l'écart destinée à le réveiller, non à le rejeter. Et souvenez-vous de celui qui a prononcé ces paroles : c'est le même Jésus qui mangeait avec les publicains et les pécheurs, qui allait à leur recherche. Même être « comme un païen et un publicain », dans sa bouche, ce n'est pas la fin de la poursuite, mais une autre forme de celle-ci.
 
 > EN: Hold on to the purpose, because everything in Matthew 18 is bent toward it: to gain your brother. Even the final, painful step — "let him be to you like a heathen and a tax collector" (Matthew 18:17) — is not the church taking vengeance. It is the sorrowful recognition that a man has chosen his sin over his Savior and his fellowship, a removal designed to wake him up, not to throw him away. And remember who said it: this is the same Jesus who ate with tax collectors and sinners, who went looking for them. Even being "like a tax collector" is, in His mouth, not the end of pursuit but a different form of it.
 
 **b020**  
-Paul nous montre la restauration accomplie. À Corinthe, un homme sous discipline s'était repenti, et Paul écrit : « vous devez bien plutôt lui pardonner et le consoler, de peur qu'il ne soit accablé par une tristesse excessive. Je vous exhorte donc à faire acte de charité envers lui » (2 Corinthiens 2:7-8). Voilà tout l'enjeu en une phrase : réaffirmer votre amour envers lui. La discipline qui a accompli son œuvre ne se termine pas par un exil permanent, mais par le pardon, la consolation et la réaffirmation publique de l'amour. Le dirigeant qui exerce la discipline sans aspirer à ces retrouvailles est passé à côté du cœur de Dieu, lui qui « n'afflige pas volontiers » (Lamentations 3:33) et qui discipline ceux qu'il aime précisément afin de pouvoir les restaurer.
+Paul nous montre la restauration accomplie. À Corinthe, un homme sous discipline s'était repenti, et Paul écrit : « vous devez bien plutôt lui pardonner et le consoler, de peur qu'il ne soit accablé par une tristesse excessive. Je vous exhorte donc à faire acte de charité envers lui » (2 Corinthiens 2:7-8). Voilà tout l'enjeu en une phrase : réaffirmer votre amour envers lui. La discipline qui a accompli son œuvre ne se termine pas par un exil permanent, mais par le pardon, la consolation et la réaffirmation publique de l'amour. Le dirigeant qui exerce la discipline sans aspirer à ces retrouvailles est passé à côté du cœur de Dieu, dont il est écrit : « ce n'est pas volontiers qu'il humilie et qu'il afflige les enfants des hommes » (Lamentations 3:33), et qui discipline ceux qu'il aime précisément afin de pouvoir les restaurer.
 
 > EN: Paul shows us the restoration completed. In Corinth a man under discipline had repented, and Paul writes: "you ought rather to forgive and comfort him, lest perhaps such a one be swallowed up with too much sorrow... reaffirm your love to him" (2 Corinthians 2:7-8). There is the whole point in one line. Discipline that has done its work ends not in permanent exile but in forgiveness, comfort, and the public reaffirming of love. The leader who disciplines without yearning for that reunion has missed the heart of God, who "does not afflict willingly" (Lamentations 3:33) and who disciplines those He loves precisely so He may restore them.
 
@@ -222,7 +222,7 @@ Examen final de l'Unité 7
 > EN: Unit 7 Final Exam
 
 **b036**  
-Parcours Certificat : les 20 questions à choix multiple. Associé : les questions à choix multiple et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiple, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiple. Parcours Associé en divinité : les questions à choix multiple et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiple, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -304,7 +304,7 @@ _Pourquoi :_ Elle commence de la manière la plus restreinte et la plus privée 
 _Pourquoi :_ Une ou deux personnes, pour confirmer et pour aider — un nouvel appel prudent et plein d'amour, pas une foule.  
 > EN: Bringing one or two others (Matt 18:16) is meant to provide: — ✓ Confirmation by witnesses and another loving appeal
 
-**9. Traiter quelqu'un « comme un publicain » (Matt 18:17), dans la bouche de Jésus, signifie :**  
+**9. Traiter quelqu'un « comme un païen et un publicain » (Matt 18:17), dans la bouche de Jésus, signifie :**  
 · A. Une punition légale  
 · B. De la haine envers la personne  
 · C. Un rejet définitif  

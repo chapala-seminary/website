@@ -15,7 +15,15 @@ Counts: 108 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 5. SA 3 asks for the five things Paul says about Scripture, but the English model answer lists holy / salvation / inspired / profitable / equips, while the lesson's five are teachable / holy / salvation / inspired / valuable. The model leaves out 'teachable'. Translated as is — do you want the model brought into line with the lesson?
 6. Two illustrations a careful reviewer may question: Voltaire's room/house later used as a Bible depot is often said to be legend; and the law against Bible-reading is usually dated to Henry V's reign (the 1414 anti-Lollard act). Kept as written; let me know if you want softer wording.
 7. Diagram (b077–b114): following the earlier decision, the bilingual lines are French / English (the Spanish lines are replaced by the English). b002 language switch set to 'English'. Correct?
-8. [check] Units 1–3 are inconsistent with each other: the language switch b002 reads « English » in unit 1 but « Español » in units 2 and 3, and the Certificate track label is « Parcours Certificat » (unit 1), « Parcours Certificat de ministère » (unit 2) and « Certificat de ministère » (unit 3). Please pick one form for each so the whole course matches.
+8. [check] Units 1–3 are inconsistent with each other: the language switch b002 reads « English » in unit 1 but « Español » in units 2 and 3. Please pick one form so the whole course matches. (The track labels are now settled: « Parcours Certificat », « M.Div. », « Th.M. », as in the rest of the edition.)
+
+## Problems in the English source
+
+- SA2: English prompt passes its own keywords
+- SA6: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+- SA10: English prompt passes its own keywords
 
 ## 2. Bible quotations (Louis Segond 1910)
 
@@ -25,8 +33,8 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
   _Checked online (BibleGateway LSG; also verified in earlier units). NKJV 'rightly dividing' = LSG 'dispense droitement'. The lesson (b028), MC 1, fill 1 and SA 2 all build on 'dividing / cutting straight'. LSG wording kept; b028 now says the two words at the centre are « dispense droitement » and keeps the Greek 'cut a straight line' teaching. SA 2 keywords use 'dispens' and 'droit'._
 - **Esdras 7:10** — « Car Esdras avait appliqué son coeur à étudier et à mettre en pratique la loi de l'Éternel, et à enseigner au milieu d'Israël les lois et les ordonnances. »  
   _Checked online (BibleGateway LSG). NKJV 'seek the Law ... do it ... teach' = LSG 'étudier ... mettre en pratique ... enseigner'. LSG actually matches the lesson's 'Study. Do. Teach.' even more directly. 'Do' rendered « pratiquer » throughout the lesson; 'prepared his heart' = LSG 'appliqué son cœur' (fill 2 blank = cœur)._
-- **2 Timothée 3:15** — « dès ton enfance, tu connais les saintes lettres, qui peuvent te rendre sage à salut par la foi en Jésus Christ. »  
-  _Checked online (BibleGateway LSG). Quoted in b036 and b038. LSG 'saintes lettres' matches the lesson's remark that the Greek says 'sacred letters' (b037). Hyphen 'Jésus-Christ' per modern French spelling._
+- **2 Timothée 3:15** — « dès ton enfance, tu connais les saintes lettres, qui peuvent te rendre sage à salut par la foi en Jésus-Christ. »  
+  _Checked online (BibleGateway LSG). Quoted in b036 and b038. LSG 'saintes lettres' matches the lesson's remark that the Greek says 'sacred letters' (b037). Rechecked against the offline Segond (12 Oct 2026): it writes « Jésus-Christ » with the hyphen._
 - **⚠** **2 Timothée 3:16** — « Toute Écriture est inspirée de Dieu, et utile pour enseigner, pour convaincre, pour corriger, pour instruire dans la justice, »  
   _Verified in earlier units (biblestudytools.com LSG). (1) NKJV/lesson 'God-breathed' = LSG 'inspirée de Dieu'. MC 8 and SA 5 quote 'God-breathed', and SA 3/5 keywords include 'breath'. LSG wording kept, with the gloss « littéralement soufflée par Dieu » added in b039, MC 8 and SA 5 so the 'breathed' teaching survives. (2) 'rebuking' = LSG 'convaincre' (MC 10 option D and its why use LSG verbs; 'profitable/valuable' = 'utile')._
 - **2 Timothée 3:17 (SA 3 model)** — « afin que l'homme de Dieu soit accompli et propre à toute bonne oeuvre. »  
@@ -93,12 +101,12 @@ Parcours Certificat : vingt questions à choix multiples par unité. Réussite �
 > EN: Certificate of Ministry: Twenty multiple-choice questions per unit. Pass at 18 of 20 (90%).
 
 **b013**  
-Master of Divinity : les mêmes vingt questions à choix multiples, plus dix questions à réponse courte. Réussite à 18 sur 20 pour le choix multiple et à 9 sur 10 pour les réponses courtes, notés séparément.
+M.Div. : les mêmes vingt questions à choix multiples, plus dix questions à réponse courte. Réussite à 18 sur 20 pour le choix multiple et à 9 sur 10 pour les réponses courtes, notés séparément.
 
 > EN: Master of Divinity: Same twenty multiple-choice questions, plus ten short-answer questions. Pass at 18 of 20 multiple-choice and 9 of 10 short-answer, scored independently.
 
 **b014**  
-Master of Theology : noté exactement comme le Master of Divinity — les mêmes vingt questions à choix multiples plus dix questions à réponse courte, avec réussite à 18 sur 20 pour le choix multiple et à 9 sur 10 pour les réponses courtes, notés séparément.
+Th.M. : noté exactement comme le M.Div. — les mêmes vingt questions à choix multiples plus dix questions à réponse courte, avec réussite à 18 sur 20 pour le choix multiple et à 9 sur 10 pour les réponses courtes, notés séparément.
 
 > EN: Master of Theology: Graded exactly like the Master of Divinity — the same twenty multiple-choice questions plus ten short-answer questions, passing at 18 of 20 multiple-choice and 9 of 10 short-answer, scored independently.
 
@@ -108,12 +116,12 @@ Certificat
 > EN: Certificate
 
 **b016**  
-M.Div
+M.Div.
 
 > EN: M.Div
 
 **b017**  
-Th.M
+Th.M.
 
 > EN: Th.M
 
@@ -178,7 +186,7 @@ Au centre de ce verset se trouvent deux mots : dispense droitement. Le mot grec 
 > EN: 4. Ezra’s Heart — Study, Do, Teach
 
 **b030**  
-Six cents ans avant que Timothée reçoive sa lettre, un prêtre nommé Esdras revint de Babylone dans une Jérusalem en ruine. Le temple avait été rebâti, mais le peuple avait oublié la Loi. Esdras entra dans ce désordre en portant un rouleau. Et au chapitre sept, verset dix, l'Écriture nous dit comment il s'y prit :
+Six cents ans avant que Timothée reçoive sa lettre, un sacrificateur nommé Esdras revint de Babylone dans une Jérusalem en ruine. Le temple avait été rebâti, mais le peuple avait oublié la Loi. Esdras entra dans ce désordre en portant un rouleau. Et au chapitre sept, verset dix, l'Écriture nous dit comment il s'y prit :
 
 > EN: Six hundred years before Timothy received his letter, a priest named Ezra came back from Babylon to a ruined Jerusalem. The temple was rebuilt but the people had forgotten the Law. Ezra walked into that mess carrying a scroll. And in chapter seven verse ten the Scripture tells us how he did it:
 
@@ -313,7 +321,7 @@ Soyez un soldat — c'est le dévouement. Pas d'activité à côté. Une seule m
 > EN: Be a soldier — that is dedication. No sideline. One mission. You cannot follow Christ while pursuing five other aims.
 
 **b057**  
-Soyez un athlète — c'est la discipline. Pas de raccourcis, pas de travail bâclé, pas d'infraction aux règles. L'athlète n'est pas couronné s'il n'a combattu suivant les règles.
+Soyez un athlète — c'est la discipline. Pas de raccourcis, pas de travail bâclé, pas d'infraction aux règles. L'athlète n'est pas couronné, s'il n'a combattu suivant les règles.
 
 > EN: Be an athlete — that is discipline. No shortcuts, no cutting corners, no breaking the rules. An athlete is not crowned unless he competes according to the rules.
 
@@ -738,7 +746,7 @@ _Pourquoi :_ Correct. Jérémie écrivait à des Juifs qui avaient encore soixan
 · A. Berger, pêcheur, bâtisseur  
 · B. Père, enseignant, serviteur  
 ✓ C. Soldat, athlète, agriculteur  
-· D. Prêtre, prophète, roi  
+· D. Sacrificateur, prophète, roi  
 _Pourquoi :_ Correct. Le soldat (dévouement), l'athlète (discipline), l'agriculteur (diligence). Associées aux trois actions d'Esdras — étudier, pratiquer, enseigner —, elles forment la vie de travail du pasteur fidèle.  
 > EN: The three pictures Paul gives Timothy of the faithful pastor are: — ✓ Soldier, athlete, farmer
 
@@ -820,7 +828,7 @@ Modèle : Esdras avait appliqué son cœur à étudier la loi, à la mettre en p
 
 > EN: According to Ezra 7:10, what three actions did Ezra set his heart to do, and why does the order matter for the pastor?
 
-**2. Expliquez ce que Paul veut dire par « dispense droitement la parole de la vérité » en 2 Timothée 2:15, et pourquoi ce commandement est fondamental pour le ministère pastoral.**  
+**2. Expliquez ce que Paul demande à Timothée en 2 Timothée 2:15 au sujet de la manière de traiter l'Écriture, et pourquoi ce commandement est fondamental pour le ministère pastoral.**  
 Mots-clés : dispens · droit · manier / manie la / manipul · exactitude / exactement · vérité / verite · ajout · parole · ligne  
 Modèle : Paul demande à Timothée de manier la parole de la vérité droitement, comme un charpentier qui taille en ligne droite. Le pasteur n'y ajoute rien et n'en retranche rien ; il la dispense avec exactitude et la transmet telle qu'elle est.
 
@@ -838,25 +846,25 @@ Modèle : Les gens réagissent de cinq façons à la Parole. Certains la contest
 
 > EN: The lesson lists five reactions people have to the Word of God (the Five C's). Name them and briefly describe each.
 
-**5. Expliquez ce que signifie « Toute Écriture est inspirée de Dieu » (2 Tim 3:16 ; littéralement « soufflée par Dieu »), et pourquoi cette doctrine compte pour la manière dont un pasteur manie la Bible.**  
+**5. Expliquez ce que signifie « Toute Écriture est inspirée de Dieu » (2 Timothée 3:16), et pourquoi cette doctrine compte pour la manière dont un pasteur manie la Bible.**  
 Mots-clés : inspir · souffl · autorit · dieu · parole · divin · confiance / fiable / digne de foi · bouche  
 Modèle : « Inspirée de Dieu », littéralement « soufflée par Dieu », signifie que les paroles mêmes de l'Écriture sont sorties de la bouche de Dieu lui-même. Leur origine est divine ; elles portent donc l'autorité même de Dieu. C'est pourquoi le pasteur manie la Bible comme la Parole de Dieu, digne de confiance et inspirée, et non comme les opinions des hommes.
 
 > EN: Explain what "All Scripture is God-breathed" (2 Tim 3:16) means, and why this doctrine matters for how a pastor handles the Bible.
 
-**6. Décrivez l'usage abusif de Jérémie 29:11 par l'enseignement de la prospérité et expliquez comment le contexte correct le corrige.**  
+**6. Décrivez comment certains prédicateurs détournent Jérémie 29:11 pour promettre la santé et la richesse, et expliquez comment la lecture du verset dans son cadre historique corrige cette erreur.**  
 Mots-clés : jérémie / jeremie · exil · babylon · contexte · prospér / prosper · souffr · fidél / fidel · soixante-dix / soixante dix / septante  
 Modèle : Le prédicateur de la prospérité utilise Jérémie 29:11 pour promettre la santé et la richesse, mais ce verset a été écrit à des Juifs en exil à Babylone, qui avaient encore soixante-dix ans de captivité devant eux. Lu dans son contexte, il ne promet pas une vie facile ; il promet que Dieu reste fidèle à travers la souffrance. Le contexte corrige l'abus.
 
 > EN: Describe the prosperity-teaching misuse of Jeremiah 29:11 and explain how proper context corrects it.
 
-**7. Paul donne à Timothée trois images du pasteur fidèle : le soldat, l'athlète et l'agriculteur. Expliquez ce que chacune enseigne au pasteur.**  
+**7. Paul donne à Timothée trois images du pasteur fidèle, tirées de la vie de tous les jours. Nommez-les et expliquez ce que chacune enseigne au pasteur.**  
 Mots-clés : soldat · athlète / athlete · agricult / laboureur / cultivat · dévou / devou / consécration / consecration · disciplin · diligen · règles / regles · moisson / récolte / recolte  
 Modèle : Paul donne à Timothée trois images. Le soldat enseigne le dévouement — une seule mission, aucune activité à côté. L'athlète enseigne la discipline — pas de raccourcis, combattre suivant les règles. L'agriculteur enseigne la diligence — un travail patient qui attend la récolte et la récompense.
 
 > EN: Paul gives Timothy three pictures of the faithful pastor: soldier, athlete, and farmer. Explain what each one teaches the pastor.
 
-**8. Charles Spurgeon a dit : « Défendre la Bible ? J'aimerais autant défendre un lion. » Expliquez ce que cela signifie pour la manière dont un pasteur manie la Parole.**  
+**8. Expliquez la célèbre parole de Charles Spurgeon qui compare la Bible à un lion, et ce qu'elle signifie pour la manière dont un pasteur manie la Parole.**  
 Mots-clés : spurgeon · un lion / le lion · défend / defend · lâcher / lacher / lâchez / lachez / libre cours · proclam · prêch / prech · hardi / audac / courag · protég / proteg / protection  
 Modèle : Spurgeon a dit qu'il aimerait autant défendre un lion que défendre la Bible. Le sens est que la Parole n'a pas besoin de notre protection ; comme un lion, il suffit de la lâcher et elle se défend elle-même. La tâche du pasteur n'est donc pas de garder la vérité, mais de la proclamer et de la prêcher avec hardiesse.
 
@@ -868,7 +876,7 @@ Modèle : Les sept principes sont : l'exégèse avant l'application — tirer le
 
 > EN: List at least five of the seven principles of interpretation introduced in this unit, and briefly explain why each matters for the pastor.
 
-**10. Pourquoi l'herméneutique — l'art d'interpréter la Bible — est-elle une préoccupation pastorale et pas seulement universitaire ? Servez-vous dans votre réponse de l'illustration qui ouvre la leçon.**  
+**10. Pourquoi l'herméneutique — l'art d'interpréter la Bible — concerne-t-elle la vie d'une Église, et pas seulement la salle de cours ? Appuyez-vous sur l'illustration qui ouvre la leçon.**  
 Mots-clés : pasteur / pastoral · troupeau · âmes / ames · réponse / reponse · parole · la foi / par la foi · nourri · académi / academi / universit  
 Modèle : L'herméneutique est pastorale parce qu'une vraie femme dont le fils est malade se tient devant le pasteur et demande si la foi le guérira, et trente-cinq âmes croiront tout ce qu'il dira ensuite. Il ne peut pas donner une conférence universitaire ; il doit donner une vraie réponse tirée de la Parole de Dieu. Interpréter correctement la Bible, c'est ainsi que le pasteur protège et nourrit son troupeau.
 

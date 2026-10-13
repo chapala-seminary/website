@@ -13,6 +13,12 @@ Counts: 55 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 3. LSG Jacques 1:22 has no words for 'doers' and 'hearers' (« Mettez en pratique la parole, et ne vous bornez pas à l'écouter »). I used « celui qui met en pratique / celui qui écoute » in the teaching and rebuilt fill-in 1 so the answer is « pratique ». Is that acceptable?
 4. Following the brief, 'the LORD' in Andi's prose (b038, b045, b049) is « l'Éternel ». In a New Testament setting « le Seigneur » might read more naturally; which do you prefer?
 
+## Problems in the English source
+
+- SA2: English prompt passes its own keywords
+- SA7: English prompt passes its own keywords
+- SA8: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -47,6 +53,8 @@ Items marked **⚠** differ from the English (NKJV) wording in a way the lesson 
   _Also MC 16 option. Checked online._
 - **Marc 6:31** — « Jésus leur dit: Venez à l'écart dans un lieu désert, et reposez-vous un peu. »  
   _b045. Checked online._
+- **Luc 10:31** — « Un sacrificateur, qui par hasard descendait par le même chemin, ayant vu cet homme, passa outre. »  
+  _Paraphrased in b022; 'priest' rendered with Segond's « sacrificateur » (convention 4)._
 
 ## 3. Terms for the reviewer to confirm
 
@@ -162,7 +170,7 @@ Remarquez le mouvement. Le docteur de la loi voulait que Jésus fasse le travail
 > EN: Notice the move. The lawyer wanted Jesus to do the work of answering. Jesus turned the question back. He sent the lawyer to the Scripture the lawyer himself was supposed to know. The lawyer answered correctly: "Thou shalt love the Lord thy God with all thy heart, and with all thy soul, and with all thy strength, and with all thy mind; and thy neighbour as thyself" (Luke 10:27). Jesus said, "Thou hast answered right: this do, and thou shalt live" (Luke 10:28). The lesson could have ended there. The lawyer had given the answer. Jesus had affirmed it.
 
 **b022**  
-Mais le docteur de la loi était mal à l'aise. Il voulait paraître meilleur que la simple obéissance qu'on venait de lui demander. Il posa donc une autre question, conçue celle-là pour se dérober : « Et qui est mon prochain ? » (Luc 10:29). Jésus ne répondit pas non plus à cette question. Il raconta une histoire — la parabole du bon Samaritain. Un homme descendait de Jérusalem à Jéricho. Des brigands le frappèrent. Un prêtre passa outre. Un Lévite passa outre. Un Samaritain s'arrêta, banda les plaies, paya l'hôtelier. Quand l'histoire fut finie, Jésus ne tira pas la morale. Il renvoya la question une fois de plus : « Lequel de ces trois te semble avoir été le prochain de celui qui était tombé au milieu des brigands ? » (Luc 10:36).
+Mais le docteur de la loi était mal à l'aise. Il voulait paraître meilleur que la simple obéissance qu'on venait de lui demander. Il posa donc une autre question, conçue celle-là pour se dérober : « Et qui est mon prochain ? » (Luc 10:29). Jésus ne répondit pas non plus à cette question. Il raconta une histoire — la parabole du bon Samaritain. Un homme descendait de Jérusalem à Jéricho. Des brigands le frappèrent. Un sacrificateur passa outre. Un Lévite passa outre. Un Samaritain s'arrêta, banda les plaies, paya l'hôtelier. Quand l'histoire fut finie, Jésus ne tira pas la morale. Il renvoya la question une fois de plus : « Lequel de ces trois te semble avoir été le prochain de celui qui était tombé au milieu des brigands ? » (Luc 10:36).
 
 > EN: But the lawyer was uncomfortable. He wanted to look better than the simple obedience he had just been told to perform. So he asked another question, this one designed to wriggle out: "And who is my neighbour?" (Luke 10:29). Jesus did not answer that question either. He told a story — the parable of the Good Samaritan. A man went down from Jerusalem to Jericho. Robbers beat him. A priest passed by. A Levite passed by. A Samaritan stopped, bound up the wounds, paid the innkeeper. When the story ended, Jesus did not draw the moral. He turned the question back one more time: "Which now of these three, thinkest thou, was neighbour unto him that fell among the thieves?" (Luke 10:36).
 
@@ -307,7 +315,7 @@ Examen de l'Unité 8
 > EN: Unit 8 Examination
 
 **b051**  
-Certificat de ministère : 20 questions à choix multiples, 90 % (18 sur 20) pour réussir. Master of Theology & Master of Divinity : 20 questions à choix multiples + 10 questions à réponse courte, 90 % exigés dans chacune des deux parties séparément. Chaque question à choix multiples est notée dès que vous cliquez. Il faut réussir les choix multiples avant que les réponses courtes ne comptent. Un échec verrouille la partie concernée pendant 15 minutes ; si vous avez déjà réussi les choix multiples, seule la partie à réponse courte est verrouillée après un échec à cette partie.
+Parcours Certificat : 20 questions à choix multiples, 90 % (18 sur 20) pour réussir. Th.M. & M.Div. : 20 questions à choix multiples + 10 questions à réponse courte, 90 % exigés dans chacune des deux parties séparément. Chaque question à choix multiples est notée dès que vous cliquez. Il faut réussir les choix multiples avant que les réponses courtes ne comptent. Un échec verrouille la partie concernée pendant 15 minutes ; si vous avez déjà réussi les choix multiples, seule la partie à réponse courte est verrouillée après un échec à cette partie.
 
 > EN: Certificate of Ministry: 20 multiple-choice questions, 90% (18 of 20) to pass. Master of Theology & Master of Divinity: 20 MC + 10 short-answer, both at 90% independently. Each MC scores immediately when you click. MC must be passed before SA scores count. A failure locks the relevant section for 15 minutes; if you have already passed MC, only SA locks after an SA fail.
 
@@ -555,19 +563,19 @@ Keywords are matched as word-parts; accents count, so accented words also list a
 
 **1. Expliquez comment Jacques 1:22 sert de cadre aux trois méthodes de l'Unité 8.**  
 Mots-clés : pratique · écout / ecout / auditeur · tromp · répon / repon · action / agir · parole · seulement / bornez · trois  
-Modèle : Jacques 1:22 dit : « Mettez en pratique la parole, et ne vous bornez pas à l'écouter, en vous trompant vous-mêmes. » Celui qui écoute seulement, sans mettre en pratique, se trompe lui-même. Les trois méthodes de l'Unité 8 poussent l'apprenant au-delà de l'écoute : les questions-réponses l'obligent à donner une réponse, l'étude de cas l'oblige à porter un jugement, et l'apprentissage par l'expérience l'oblige à passer à l'action. Chaque étape l'éloigne de la chaise et le rapproche de la route, si bien qu'il est plus difficile à tromper.
+Modèle : Jacques 1:22 dit : « Mettez en pratique la parole, et ne vous bornez pas à l'écouter, en vous trompant vous-mêmes par de faux raisonnements. » Celui qui écoute seulement, sans mettre en pratique, se trompe lui-même. Les trois méthodes de l'Unité 8 poussent l'apprenant au-delà de l'écoute : les questions-réponses l'obligent à donner une réponse, l'étude de cas l'oblige à porter un jugement, et l'apprentissage par l'expérience l'oblige à passer à l'action. Chaque étape l'éloigne de la chaise et le rapproche de la route, si bien qu'il est plus difficile à tromper.
 
 > EN: Explain how James 1:22 frames the three methods of Unit 8.
 
-**2. Distinguez les questions fermées des questions ouvertes, et les questions orientées des questions d'approfondissement, en donnant des exemples.**  
+**2. Nommez et expliquez les deux paires de types de questions que la leçon distingue, avec un exemple de chaque type.**  
 Mots-clés : fermé / ferme · ouvert · orienté / oriente · approfondi · répon / repon · question · réflexion / reflexion / réfléchi / reflechi · bonne réponse / bonne reponse / juste  
 Modèle : Une question fermée a une seule bonne réponse et vérifie les faits : « Où Jésus est-il né ? » Une question ouverte invite à la réflexion et développe la pensée : « Pourquoi Dieu a-t-il choisi Bethléhem plutôt que Jérusalem ? » L'enseignant mélange les deux délibérément. Une question orientée conduit l'apprenant vers une réponse fixée d'avance : « N'êtes-vous pas d'accord que Paul avait raison ? » Une question d'approfondissement ouvre le sujet à sa propre réflexion : « Que suppose ici le raisonnement de Paul sur la nature de l'Église ? » Ne poser que des questions orientées, c'est faire de la ventriloquie.
 
 > EN: Distinguish closed from open questions, and leading from probing questions, with examples.
 
-**3. Racontez l'échange entre Jésus et le docteur de la loi en Luc 10:25-37 et expliquez ce qu'il enseigne sur les questions-réponses.**  
+**3. Racontez l'échange entre Jésus et l'homme qui voulait l'éprouver en Luc 10:25-37, et expliquez ce qu'il enseigne sur la méthode des questions-réponses.**  
 Mots-clés : docteur de la loi / docteur · éternel / eternel · prochain · samaritain · fais de même / fais de meme / de même / de meme · question · retourn / renvo · répon / repon  
-Modèle : Un docteur de la loi demanda à Jésus, pour l'éprouver : « Que dois-je faire pour hériter la vie éternelle ? » Jésus ne répondit pas ; il lui renvoya la question : « Qu'est-il écrit dans la loi ? » L'homme récita le commandement d'aimer Dieu et son prochain. Voulant se dérober, il demanda : « Et qui est mon prochain ? » Jésus raconta la parabole du bon Samaritain, puis renvoya encore la question : lequel des trois a été le prochain ? Le docteur dut répondre lui-même : « Celui qui a exercé la miséricorde. » Jésus dit : « Va, et toi, fais de même. » Leçon : l'enseignant ne donne pas la réponse ; il dispose la question pour que l'apprenant n'aboutisse qu'à la vérité, prononcée par sa propre bouche.
+Modèle : Un docteur de la loi demanda à Jésus, pour l'éprouver : « Que dois-je faire pour hériter la vie éternelle ? » Jésus ne répondit pas ; il lui renvoya la question : « Qu'est-il écrit dans la loi ? » L'homme récita le commandement d'aimer Dieu et son prochain. Voulant se dérober, il demanda : « Et qui est mon prochain ? » Jésus raconta la parabole du bon Samaritain, puis renvoya encore la question : lequel des trois a été le prochain ? Le docteur dut répondre lui-même : « C'est celui qui a exercé la miséricorde envers lui. » Jésus dit : « Va, et toi, fais de même. » Leçon : l'enseignant ne donne pas la réponse ; il dispose la question pour que l'apprenant n'aboutisse qu'à la vérité, prononcée par sa propre bouche.
 
 > EN: Tell the exchange between Jesus and the lawyer in Luke 10:25-37 and explain what it teaches about Q&A.
 
@@ -589,13 +597,13 @@ Modèle : Première règle : le devoir doit être précis et clair. « Essayez d
 
 > EN: Explain the three rules for an experiential learning assignment.
 
-**7. Racontez ce que fit Jésus lorsqu'il envoya les Douze en Marc 6, et ce que cela enseigne sur l'apprentissage par l'expérience.**  
+**7. Décrivez la mission confiée par Jésus aux Douze en Marc 6, et ce qu'elle enseigne sur l'apprentissage par l'expérience.**  
 Mots-clés : douze · deux à deux / deux a deux / deux · bâton / baton · provision · racont / rapport / compte rendu · envoy · pouvoir · expérien / experien  
 Modèle : Jésus appela les Douze et les envoya deux à deux, en leur donnant pouvoir sur les esprits impurs. Ils ne devaient rien prendre pour le voyage qu'un bâton : ni pain, ni sac, ni monnaie, aucune provision. Ils prêchèrent la repentance, chassèrent des démons et oignirent les malades. À leur retour, ils racontèrent à Jésus tout ce qu'ils avaient fait et enseigné. Cela enseigne que l'apprentissage par l'expérience exige un devoir précis, réalisable et suivi : en faisant eux-mêmes, ils ont appris ce que l'observation seule ne pouvait leur apprendre.
 
 > EN: Tell what Jesus did when he sent the Twelve out in Mark 6, and what it teaches about experiential learning.
 
-**8. Expliquez pourquoi Andi appelle l'échec l'atelier de l'apprentissage par l'expérience plutôt que son ennemi.**  
+**8. Selon Andi, quelle place l'échec occupe-t-il dans la méthode par l'expérience, et pourquoi faut-il le voir comme un atelier plutôt que comme un adversaire ?**  
 Mots-clés : échec / echec · atelier · essay · revenu / revient / revenir · retour · appren / appris · ennemi · grandi / progress / croissance  
 Modèle : L'apprentissage par l'expérience échouera parfois : l'apprenant qui partage l'Évangile sera repoussé, celui qui mémorise des versets sur la patience perdra patience. Mais l'échec n'est pas l'ennemi de la méthode ; c'est son atelier, le lieu où l'on façonne l'apprenant. L'enseignant doit être prêt à se servir des réussites comme des échecs pour enseigner davantage. L'apprenant qui a essayé, échoué et qui est revenu faire son retour a appris davantage et a grandi plus que celui qui n'a jamais essayé.
 

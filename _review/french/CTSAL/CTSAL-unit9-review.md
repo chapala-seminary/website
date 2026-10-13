@@ -11,6 +11,10 @@ Counts: 31 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
 1. Acts 13:3: LSG says 'les laissèrent partir' (let them go), not 'sent them away'. I kept LSG and introduced it with 'Et l'Église les envoya :' in b014. Is that acceptable, or would you rather also cite Acts 13:4 ('envoyés par le Saint-Esprit')?
 2. Section VI: I used LSG's 'Il faut qu'il croisse, et que je diminue' for the title and the ending ('Il faut que nous diminuions'). OK to use 'croître/diminuer' throughout instead of more modern words?
 
+## Problems in the English source
+
+- SA10: English prompt passes its own keywords
+
 ## 2. Bible quotations (Louis Segond 1910)
 
 Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
@@ -192,7 +196,7 @@ Examen final de l'Unité 9
 > EN: Unit 9 Final Exam
 
 **b031**  
-Parcours Certificat : les 20 questions à choix multiple. Associé : les questions à choix multiple et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiple, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+Parcours Certificat : les 20 questions à choix multiple. Parcours Associé en divinité : les questions à choix multiple et les 10 phrases à compléter. M.Div. et Th.M. : les questions à choix multiple, les phrases à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
 
 > EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
 
@@ -431,7 +435,7 @@ Modèle : Le Seigneur nous a ordonné de faire des disciples, et non simplement 
 > EN: Explain how the Great Commission has multiplication built into it.
 
 **3. Qu'enseigne l'exemple d'Antioche (Actes 13) au sujet d'une Église qui envoie ?**  
-Mots-clés : antioche · envoi / envoy · meilleur · barnabas · coût / coûte / prix / sacrifice · garder / retenir / accapar / thésauris / thesauris · ouverte / ouvert · évangile / evangile  
+Mots-clés : antioche · envoi / envoy · meilleur · barnabas · coût / coûte / cout / coute / prix / sacrifice · garder / retenir / accapar / thésauris / thesauris · ouverte / ouvert · évangile / evangile  
 Modèle : L'Esprit dit à l'Église forte d'Antioche de mettre à part Barnabas et Saul — non pas les hommes dont elle pouvait le plus facilement se passer, mais ses deux meilleurs enseignants. Une Église en bonne santé est une Église qui envoie, et envoyer coûte toujours ; il faut vaincre l'instinct de garder et d'accaparer nos meilleurs éléments. Antioche a donné ses meilleurs et n'en a pas été affaiblie, mais elle est devenue le point de départ de l'Évangile à travers le monde. La leçon est de tenir nos meilleurs éléments d'une main ouverte, car ceux qu'il nous coûte le plus d'envoyer sont généralement précisément ceux que Dieu veut envoyer.
 
 > EN: What does the example of Antioch (Acts 13) teach about a sending church?
@@ -472,7 +476,7 @@ Modèle : Quand vient le jour où l'œuvre prospère entre des mains plus jeunes
 
 > EN: Why is a leader's 'decreasing' described as a ministry's crowning success rather than its failure?
 
-**10. Faites la synthèse de cette unité : comment la reproduction, l'envoi, la remise de l'œuvre, la mort du grain et la succession expriment-elles un seul et même cœur ?**  
+**10. Faites la synthèse de cette unité : comment la reproduction, l'envoi, la remise de l'œuvre, la mort du grain et la préparation de la relève expriment-elles un seul et même cœur ?**  
 Mots-clés : multipl · envoi / envoy · confi · grain · succession / successeur · au delà / au dela / dépass / depass · diminu · survi  
 Modèle : Tout cela découle d'un seul cœur : celui d'un dirigeant qui a réglé que l'œuvre ne tourne pas autour de lui, et qui pense donc au-delà de lui-même, de sa propre vie et de sa propre Église. Faire des disciples qui font des disciples, c'est multiplier ; envoyer ses meilleurs coûte, mais répand l'Évangile ; implanter puis confier suscite des Églises qui se gouvernent elles-mêmes ; tomber comme le grain, c'est renoncer à être indispensable et au contrôle ; et préparer un successeur permet à l'œuvre de survivre à l'ouvrier. Chacun de ces gestes est le même abandon — la volonté de diminuer afin que Christ, le royaume et les autres croissent — et ensemble, ils ne sont pas l'échec d'un ministère mais le couronnement de son succès.
 
