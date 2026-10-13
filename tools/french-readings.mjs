@@ -27,10 +27,9 @@
  * Where things are stored: tools/french-readings-lib.mjs. */
 import fs from 'node:fs';
 import path from 'node:path';
-import { execFileSync } from 'node:child_process';
 import { parse } from 'node-html-parser';
 import {
-  hash, STORE, DIGEST, CHROME_ROOMS, storeFile, loadStore, leaves, translatable, leafKey, markupSegments,
+  hash, STORE, DIGEST, storeFile, loadStore, leaves, translatable, leafKey, markupSegments,
   bodyLeaves, frenchBody, tagProblem, normText, frenchSpaces,
 } from './french-readings-lib.mjs';
 import { translationPlan } from './translation-plan.mjs';
@@ -90,16 +89,12 @@ const byId = (id) => {
 
 /* ---- the interface dictionary (the page frame's, not ours) ------------------ */
 
-function chromeDictionary() {
-  if (fs.existsSync(CHROME_ROOMS)) return json(CHROME_ROOMS);
-  // Packets made before the frame's French is merged still leave its strings out.
-  for (const ref of [process.env.CTS_CHROME_REF, 'claude/fr-chrome'].filter(Boolean)) {
-    try { return JSON.parse(execFileSync('git', ['show', `${ref}:${CHROME_ROOMS}`], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] })); } catch {}
-  }
-  return {};
-}
 let chromeKeysCache = null;
-const chromeKeys = () => (chromeKeysCache ??= new Set(Object.keys(chromeDictionary())));
+/* Packets carry every English passage of a room, its interface boxes too
+   (Robert, 13 Oct 2026: the rooms are to be wholly French). Where the frame's
+   dictionary already translates one, the build uses the frame's French
+   (tools/french-readings-lib.mjs augmentHtml) and ours stays unused. */
+const chromeKeys = () => (chromeKeysCache ??= new Set());
 
 let digestKeysCache = null;
 function digestKeys() {
