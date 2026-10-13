@@ -103,3 +103,16 @@ export function frCompletionNames(): Record<string, string> {
   }
   return out;
 }
+
+/* English card text -> French, for the home page's course and textbook cards. */
+let cards: Record<string, string> | null = null;
+export function catalogCards(): Record<string, string> {
+  if (cards) return cards;
+  cards = {};
+  for (const c of dir('src/content/courses') as any[]) {
+    cards[c.title.en] = c.title.fr; cards[c.description.en] = c.description.fr;
+    cards[`For ${c.title.en}`] = `Pour le cours ${c.title.fr}`;
+  }
+  for (const r of data().readings.values()) cards[r.title.en] = frReadingsTitle(r.course);
+  return cards;
+}

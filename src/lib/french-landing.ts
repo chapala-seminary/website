@@ -1,6 +1,6 @@
 import { parse, type HTMLElement } from 'node-html-parser';
 import copy from '../data/french-landing.json' with { type: 'json' };
-import { frenchCourseEntries } from './french-titles.ts';
+import { frenchCourseEntries, catalogCards } from './french-titles.ts';
 
 const translations: Record<string, string> = copy;
 const formCopy: Record<string, string> = {
@@ -31,16 +31,22 @@ export const FRENCH_HOME_MESSAGES: Record<string, string> = {
 /** Landing copy is keyed by exact source markup: a changed source must be
  * translated again rather than silently retaining stale French. Course lessons
  * and answer keys are deliberately outside this page-specific dictionary. */
+/* The catalog and textbook cards: French from the course collection, keyed
+   by the card's English (title, description, "For <course>", reading title). */
+function catalogFrench(node: HTMLElement): string | null {
+  if (!node.closest('#catalog a.course, #textbooks a.textbook')) return null;
+  return catalogCards()[node.text.trim()] ?? null;
+}
 export function frenchLanding(root: HTMLElement) {
   const used = new Set<string>();
   for (const node of root.querySelectorAll('.en')) {
     if (node.closest('[data-cts-legacy-control]') || node.parentNode?.closest('.en')) continue;
-    // Course names and descriptions come with their French from src/content/courses.
-    if (node.parentNode?.childNodes.some(n => (n as HTMLElement).classList?.contains('fr'))) continue;
+    // Course names and descriptions take their French from src/content/courses.
+    const card = catalogFrench(node);
     const key = node.innerHTML in translations ? node.innerHTML : node.text;
-    const text = translations[key];
+    const text = card ?? translations[key];
     if (text == null) throw new Error(`Missing French landing translation: ${node.innerHTML}`);
-    used.add(key);
+    if (card == null) used.add(key);
     node.insertAdjacentHTML('afterend', `<${node.rawTagName} class="fr">${text}</${node.rawTagName}>`);
   }
   const unused = Object.keys(translations).filter(k => !used.has(k));

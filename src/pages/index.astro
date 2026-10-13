@@ -12,7 +12,6 @@ import groups from '../data/catalog-groups.json';
 import intro from '../data/catalog-intro.json';
 import catalog from '../../worker/catalog.json';
 import { requiredTests } from '../lib/required-tests.ts';
-import { frReadingsTitle } from '../lib/french-titles.ts';
 
 const head = (await import('../body/index/head.html?raw')).default;
 const tail = (await import('../body/index/tail.html?raw')).default;
@@ -86,7 +85,7 @@ const recordJson = JSON.stringify(recordable).replace(/</g, '\\u003c');
       <h3><span class="en">{g.title.en}</span><span class="es">{g.title.es}</span></h3>
       <div class="grid">
         {g.courses.map((c) => (
-        <a class="course" href={c.entry}><div class="c-title"><span class="en">{c.title.en}</span><span class="es">{c.title.es}</span><span class="fr">{c.title.fr}</span></div><div class="c-desc"><span class="en">{c.description.en}</span><span class="es">{c.description.es}</span><span class="fr">{c.description.fr}</span></div><span class="c-go"><span class="en">Begin →</span><span class="es">Comenzar →</span></span></a>
+        <a class="course" href={c.entry}><div class="c-title"><span class="en">{c.title.en}</span><span class="es">{c.title.es}</span></div><div class="c-desc"><span class="en">{c.description.en}</span><span class="es">{c.description.es}</span></div><span class="c-go"><span class="en">Begin →</span><span class="es">Comenzar →</span></span></a>
         ))}
       </div>
     </div>
@@ -107,14 +106,14 @@ const recordJson = JSON.stringify(recordable).replace(/</g, '\\u003c');
     <span class="es">Cada uno de nuestros 45 cursos tiene un libro de texto y un examen separado de lecturas requeridas. Ambos exámenes son obligatorios para nuevas finalizaciones M.Div. y Th.M. después de su activación; las finalizaciones de maestría válidas anteriores siguen siendo válidas. Los libros y exámenes están abiertos a todos y son opcionales para estudiantes de Certificado y Asociado.</span></p>
     <div class="tb-grid">
       {textbooks.map((t) => (
-        <a class="textbook" href={`${t.page}.html`}><div class="tb-title"><span class="en">{t.title.en}</span><span class="es">{t.title.es}</span></div><div class="tb-for"><span class="en">For {cardOf.get(t.course)!.title.en}</span><span class="es">Para {cardOf.get(t.course)!.title.es}</span><span class="fr">Pour le cours {cardOf.get(t.course)!.title.fr}</span></div><span class="tb-go"><span class="en">Read →</span><span class="es">Leer →</span></span></a>
+        <a class="textbook" href={`${t.page}.html`}><div class="tb-title"><span class="en">{t.title.en}</span><span class="es">{t.title.es}</span></div><div class="tb-for"><span class="en">For {cardOf.get(t.course)!.title.en}</span><span class="es">Para {cardOf.get(t.course)!.title.es}</span></div><span class="tb-go"><span class="en">Read →</span><span class="es">Leer →</span></span></a>
       ))}
     </div>
     <h3 style="margin-top:26px"><span class="en">Required Readings</span><span class="es">Lecturas Requeridas</span></h3>
     <p><span class="en">All 45 courses have assigned readings with their own test, separate from the textbook test. Pass each test separately. The optional honors reading attestation is a different activity.</span><span class="es">Los 45 cursos tienen lecturas asignadas con su propio examen, separado del examen del libro. Apruebe cada examen por separado. La constancia opcional de lectura para honores es una actividad distinta.</span></p>
     <div class="tb-grid" id="required-readings">
       {readings.map((r) => (
-        <a class="textbook reading" href={`${r.page}.html`}><div class="tb-title"><span class="en">{r.title.en}</span><span class="es">{r.title.es}</span><span class="fr">{frReadingsTitle(r.course)}</span></div><div class="tb-for"><span class="en">For {cardOf.get(r.course)!.title.en}</span><span class="es">Para {cardOf.get(r.course)!.title.es}</span><span class="fr">Pour le cours {cardOf.get(r.course)!.title.fr}</span></div><span class="tb-go"><span class="en">Read →</span><span class="es">Leer →</span></span></a>
+        <a class="textbook reading" href={`${r.page}.html`}><div class="tb-title"><span class="en">{r.title.en}</span><span class="es">{r.title.es}</span></div><div class="tb-for"><span class="en">For {cardOf.get(r.course)!.title.en}</span><span class="es">Para {cardOf.get(r.course)!.title.es}</span></div><span class="tb-go"><span class="en">Read →</span><span class="es">Leer →</span></span></a>
       ))}
     </div>
   </section>
