@@ -33,6 +33,10 @@ decisions Dr. Cook needs to make for the whole French edition.
 | `CTS1Peter` | Cours intensif sur 1 Pierre (1 Peter Intensive) | 1–12 |
 | `CTSGalatians` | Cours intensif sur Galates (Galatians Intensive) | 1–12 |
 | `CTSRev` | Cours intensif sur l'Apocalypse (Revelation Intensive) | 1–15 |
+| `CTSRE` | Ruth et Esther (Ruth and Esther) | 1–9 |
+| `CTSGenesis` | Cours intensif sur la Genèse (Genesis Intensive) | 1–12 |
+| `CTSBibleCharacters` | Personnages de la Bible (Bible Characters) | 1–12 |
+| `CTSBibleCharacters2` | Personnages de la Bible II (Bible Characters II) | 1–11 |
 
 Each unit has three files:
 
@@ -116,3 +120,9 @@ its own keywords. These checks do not establish French theological approval.
 Life of Christ, 1 Peter, Galatians and Revelation (49 units), made and checked the same way.
 Start with **BATCH3-FINDINGS.md**. Life of Christ had no Spanish on the site; its French was made
 from the English alone.
+
+## Batch 4 (12 Oct 2026)
+
+Ruth and Esther, Genesis, Bible Characters I and II (44 units). Start with **BATCH4-FINDINGS.md**.
+The English Genesis short answers have no keywords (any answer passes); the French Genesis
+drafts have 8 keyword groups and a real model answer for each, written from the lesson.
