@@ -408,11 +408,16 @@
   }
 
   // A certificate page unlocks after its own script runs; wait for it.
+  function checkButton() {
+    var at = anchor();
+    if (at) { addButton(at); return true; }
+    return false;
+  }
+  // Let the textbook gate's MutationObserver finish before inspecting visibility.
+  document.addEventListener('cts-sync-applied', function () { setTimeout(checkButton, 0); });
   var tries = 0;
   var iv = setInterval(function () {
-    var at = anchor();
-    if (at) { clearInterval(iv); addButton(at); }
-    else if (++tries > 40) clearInterval(iv);
+    if (checkButton() || ++tries > 40) clearInterval(iv);
   }, 250);
 
   // for tests: build the PDF without saving it
