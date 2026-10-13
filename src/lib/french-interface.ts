@@ -10,6 +10,13 @@ import type { HTMLElement } from 'node-html-parser';
 export const FRENCH_INTERFACE: Record<string, string> = {
   '📚 Catalog / Catálogo': '📚 Catalogue',
 };
+/* Frame text inside the lesson body (src/lib/partials.ts), where a lang-fr
+   span would change the lesson text that tools/prose-baseline.mjs records. */
+export const FRENCH_FRAME: Record<string, string> = {
+  'Honors Readings': 'Lectures pour la mention',
+  'This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.': 'Ce cours propose cinq lectures complètes &mdash; lisez-en trois en entier pour l’obtenir <b>avec mention</b>.',
+  'Open the Reading Room &rarr;': 'Ouvrir la salle de lecture &rarr;',
+};
 
 export function frenchInterface(root: HTMLElement, file = '') {
   // Older pages (certificates, single-page courses) carry a bilingual
@@ -22,6 +29,10 @@ export function frenchInterface(root: HTMLElement, file = '') {
   for (const option of root.querySelectorAll('#regTrack option[data-fr]')) {
     option.setAttribute('data-en', option.text);
     option.set_content(option.getAttribute('data-fr')!);
+  }
+  for (const node of root.querySelectorAll('[data-cts-chrome] .cts-reading[data-cts-fallback]')) {
+    const fr = FRENCH_FRAME[node.innerHTML.replace(/\s+/g, ' ').trim()];
+    if (fr) { node.set_content(fr); node.setAttribute('lang', 'fr'); node.removeAttribute('data-cts-fallback'); }
   }
   const missing = root.querySelectorAll('[data-cts-chrome] .cts-reading[data-cts-fallback], .cts-reading[data-cts-chrome][data-cts-fallback]')
     .filter(node => !node.closest('[data-cts-legacy-control]'));
