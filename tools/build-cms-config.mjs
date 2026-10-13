@@ -219,7 +219,18 @@ const unitsCollection = (langs) => ({
   ],
 });
 
-const coursesCollection = () => ({
+/* The catalog's languages come from the cards themselves: a title in a new
+   language must be editable, or the next save deletes it. */
+const courseLangs = () => {
+  const found = new Set(['en', 'es']);
+  for (const f of fs.readdirSync(COURSES).filter(f => f.endsWith('.json'))) {
+    const card = JSON.parse(fs.readFileSync(path.join(COURSES, f), 'utf8'));
+    for (const l of Object.keys(card.title || {})) found.add(l);
+  }
+  return [...found];
+};
+
+const coursesCollection = (langs = courseLangs()) => ({
   name: 'courses',
   label: 'Course catalog',
   label_singular: 'Course',
@@ -236,8 +247,8 @@ const coursesCollection = () => ({
     { label: 'Runs on the exam engine', name: 'engine', widget: 'boolean' },
     { label: 'Group', name: 'group', widget: 'string' },
     { label: 'Order within the group', name: 'order', widget: 'number', value_type: 'int', min: 1 },
-    named('title', 'Title'),
-    named('description', 'Description', 'text'),
+    named('title', 'Title', undefined, langs),
+    named('description', 'Description', 'text', langs),
   ],
 });
 
