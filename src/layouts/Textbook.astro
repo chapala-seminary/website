@@ -9,7 +9,7 @@
  */
 import { version } from '../lib/version';
 
-interface Bi { en: string; es: string }
+interface Bi { en: string; es: string; fr?: string }
 interface Book { slug: string; page: string; course: string; title: Bi; subtitle?: Bi; credits?: Bi; edition: string }
 interface Card { entry: string; title: Bi }
 interface Props {
@@ -42,17 +42,18 @@ const reading = kind === 'reading-test';
   </head>
   <body class="lang-en" data-course={accent ?? undefined} data-textbook={book.slug} data-textbook-page={kind} data-textbook-kind={reading ? 'reading' : 'textbook'}>
     <script is:inline src={version('/cts-lang.js')}></script>
-    <a class="btn skip" href="#content" style="position:absolute;left:-9999px">
-      <span class="lang-en">Skip to the content</span><span class="lang-es">Saltar al contenido</span>
+    <a class="btn skip" href="#content" style="position:absolute;left:-9999px" data-cts-chrome>
+      <span class="lang-en">Skip to the content</span><span class="lang-es">Saltar al contenido</span><span class="lang-fr">Aller au contenu</span>
     </a>
 
     <header class="cts-masthead">
       <div class="wrap">
-        <div class="eyebrow">
+        <div class="eyebrow" data-cts-chrome>
           <span class="lang-en">{kind === 'book' ? "Master's textbook" : reading ? 'Required readings · test' : "Master's textbook · test"}</span>
           <span class="lang-es">{kind === 'book' ? 'Libro de texto de maestría' : reading ? 'Lecturas requeridas · examen' : 'Libro de texto de maestría · examen'}</span>
+          <span class="lang-fr">{kind === 'book' ? 'Manuel de master' : reading ? 'Lectures obligatoires · examen' : 'Manuel de master · examen'}</span>
         </div>
-        <h1>{reading ? '📖' : '📘'} <span class="lang-en">{book.title.en}</span><span class="lang-es">{book.title.es}</span></h1>
+        <h1 data-cts-chrome>{reading ? '📖' : '📘'} <span class="lang-en">{book.title.en}</span><span class="lang-es">{book.title.es}</span><span class="lang-fr">{book.title.fr}</span></h1>
         {book.subtitle && (book.subtitle.en || book.subtitle.es) && (
           <h2><span class="lang-en">{book.subtitle.en}</span><span class="lang-es">{book.subtitle.es}</span></h2>
         )}
@@ -62,16 +63,16 @@ const reading = kind === 'reading-test';
       </div>
     </header>
 
-    <nav class="cts-nav" aria-label="Textbook">
+    <nav class="cts-nav" aria-label="Textbook" data-cts-chrome>
       <div class="wrap">
         <div class="cts-navmain">
           <div class="cts-steps">
-            <a class="btn" href={`/${course.entry}`}>← <span class="lang-en">Course: {course.title.en}</span><span class="lang-es">Curso: {course.title.es}</span></a>
+            <a class="btn" href={`/${course.entry}`}>← <span class="lang-en">Course: {course.title.en}</span><span class="lang-es">Curso: {course.title.es}</span><span class="lang-fr">Cours : {course.title.fr}</span></a>
             {kind === 'book'
-              ? <a class="btn solid" href={`/${book.page}Test.html`}><span class="lang-en">Textbook test</span><span class="lang-es">Examen del libro</span> →</a>
+              ? <a class="btn solid" href={`/${book.page}Test.html`}><span class="lang-en">Textbook test</span><span class="lang-es">Examen del libro</span><span class="lang-fr">Examen du manuel</span> →</a>
               : reading
-              ? <a class="btn solid" href={`/${book.page}.html`}>← <span class="lang-en">The readings</span><span class="lang-es">Las lecturas</span></a>
-              : <a class="btn solid" href={`/${book.page}.html`}>← <span class="lang-en">Read the textbook</span><span class="lang-es">Leer el libro</span></a>}
+              ? <a class="btn solid" href={`/${book.page}.html`}>← <span class="lang-en">The readings</span><span class="lang-es">Las lecturas</span><span class="lang-fr">Les lectures</span></a>
+              : <a class="btn solid" href={`/${book.page}.html`}>← <span class="lang-en">Read the textbook</span><span class="lang-es">Leer el libro</span><span class="lang-fr">Lire le manuel</span></a>}
           </div>
         </div>
         <div class="cts-seg" role="group" aria-label="Language / Idioma">
@@ -86,18 +87,19 @@ const reading = kind === 'reading-test';
       <slot />
     </main>
 
-    <footer class="cts-foot">
+    <footer class="cts-foot" data-cts-chrome>
       <div class="wrap">
         <span>
           <span class="lang-en">Chapala Theological Seminary · Free, bilingual theological training.</span>
           <span class="lang-es">Seminario Teológico de Chapala · Formación teológica gratuita y bilingüe.</span>
+          <span class="lang-fr">Séminaire théologique de Chapala · Formation théologique gratuite en plusieurs langues.</span>
         </span>
         <span>
-          <a href="/index.html#textbooks"><span class="lang-en">All textbooks</span><span class="lang-es">Todos los libros de texto</span></a>
+          <a href="/index.html#textbooks"><span class="lang-en">All textbooks</span><span class="lang-es">Todos los libros de texto</span><span class="lang-fr">Tous les manuels</span></a>
           &nbsp;·&nbsp;
-          <a href="/index.html#catalog"><span class="lang-en">All courses</span><span class="lang-es">Todos los cursos</span></a>
+          <a href="/index.html#catalog"><span class="lang-en">All courses</span><span class="lang-es">Todos los cursos</span><span class="lang-fr">Tous les cours</span></a>
           &nbsp;·&nbsp;
-          <a href="/CTSPrivacy.html"><span class="lang-en">Your information</span><span class="lang-es">Su información</span></a>
+          <a href="/CTSPrivacy.html"><span class="lang-en">Your information</span><span class="lang-es">Su información</span><span class="lang-fr">Vos informations</span></a>
         </span>
       </div>
     </footer>

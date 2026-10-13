@@ -10,6 +10,8 @@ import { LANGUAGES, NAMES, localeHref, localizeMarkup, renderLanguageLesson } fr
 import { frenchLanding } from '../src/lib/french-landing.ts';
 import { frenchWiseSpeak } from './french-wisespeak.mjs';
 import { frenchInterface } from '../src/lib/french-interface.ts';
+import { frenchPage, fallbackNotice, frenchTypography } from '../src/lib/french-pages.ts';
+import { frenchTitle } from '../src/lib/french-titles.ts';
 
 const SITE = 'https://chapalaseminary.org';
 export const REFERENCE = '.astro/language-base';
@@ -62,15 +64,20 @@ export function buildLanguagePages(dir) {
         if (header && rendered.masthead) header.set_content(rendered.masthead);
       }
       if (lang === 'fr' && file === 'index.html') frenchLanding(root);
+      // A static page with its own French dictionary (src/data/french-pages).
+      const frenchStatic = lang === 'fr' && !lesson && frenchPage(root, file);
       root = parse(localizeMarkup(root.toString(), lang, sourceLang), { comment: true, parseNoneClosedTags: true });
       const b = root.querySelector('body'), h = root.querySelector('head');
       // Translated registration labels do not mean the course lesson is translated.
+      // Interface text marked data-cts-chrome is translated with the frame; it
+      // does not make the page's own content French.
+      const content = (el) => !el.closest('[data-cts-chrome]');
       const translated = lang === sourceLang || (lesson
         ? lesson.blocks.some(block => !!block.text[lang])
-        : !!root.querySelector(`.cts-reading[lang="${lang}"]:not([data-cts-fallback])`));
+        : root.querySelectorAll(`.cts-reading[lang="${lang}"]:not([data-cts-fallback])`).some(content));
       const complete = lang === sourceLang || (lesson
         ? lesson.blocks.filter(block => block.text[sourceLang]).every(block => !!block.text[lang])
-        : !root.querySelector('[data-cts-fallback]'));
+        : !root.querySelectorAll('[data-cts-fallback]').some(content));
       root.querySelector('html').setAttribute('lang', lang);
       b.setAttribute('data-page-lang', lang); b.setAttribute('data-source-lang', sourceLang);
       b.setAttribute('data-language-page', file);
@@ -84,11 +91,14 @@ export function buildLanguagePages(dir) {
         }
       }
       rewriteLinks(root, file, lang, fileSet);
-      if (lang === 'fr') frenchInterface(root);
+      if (lang === 'fr') { frenchInterface(root, file); frenchTitle(root, file, lesson, translated); }
       for (const node of h.querySelectorAll('link[rel="alternate"][hreflang], link[rel="canonical"]')) node.remove();
-      h.insertAdjacentHTML('beforeend', LANGUAGES.map(l => `<link rel="alternate" hreflang="${l}" href="${SITE}${localeHref(file, l)}">`).join('') + `<link rel="canonical" href="${SITE}${localeHref(file, lang)}"><link rel="stylesheet" href="/assets/css/cts-languages.css">`);
+      h.insertAdjacentHTML('beforeend', LANGUAGES.map(l => `<link rel="alternate" hreflang="${l}" href="${SITE}${localeHref(file, l)}">`).join('') + `<link rel="alternate" hreflang="x-default" href="${SITE}${localeHref(file, 'en')}">` + `<link rel="canonical" href="${SITE}${localeHref(file, lang)}"><link rel="stylesheet" href="/assets/css/cts-languages.css">`);
       if (lang === 'fr' && (!translated || !complete)) h.insertAdjacentHTML('beforeend', '<meta name="robots" content="noindex,follow">');
-      const notice = lang !== sourceLang && !translated ? `<aside class="cts-translation-pending" lang="en">${NAMES[lang]} translation is not available yet. Showing ${NAMES[sourceLang] || sourceLang}.</aside>` : '';
+      // Said in the reader's language. Where the page asks questions, a French
+      // reader is told which language the answers are marked in.
+      const asks = !!root.querySelector('#questionsContainer, #tb-questions, script[src*="cts-fill.js"], script[src*="cts-engine.js"]');
+      const notice = lang !== sourceLang && !translated ? fallbackNotice(lang, sourceLang, asks) : '';
       const controls = control(file, lang, sourceLang, translated);
       const brandRow = root.querySelector('.topbar .wrap');
       const nav = root.querySelector('.cts-nav .wrap');
@@ -96,27 +106,31 @@ export function buildLanguagePages(dir) {
         brandRow.classList.add('cts-language-header');
         brandRow.insertAdjacentHTML('beforeend', controls);
       } else if (nav) nav.insertAdjacentHTML('beforeend', controls); else b.insertAdjacentHTML('afterbegin', controls);
-      const draftFrench = lang === 'fr' && (file === 'CTS_WiseSpeak_Preaching.html' || !!lesson?.blocks.some(block => block.tr?.fr?.status === 'machine'));
+      const draftFrench = lang === 'fr' && (file === 'CTS_WiseSpeak_Preaching.html' || frenchStatic || !!lesson?.blocks.some(block => block.tr?.fr?.status === 'machine'));
       if (draftFrench) {
-        h.insertAdjacentHTML('beforeend', '<meta name="robots" content="noindex,follow">');
-        b.insertAdjacentHTML('afterbegin', '<aside class="cts-translation-pending" lang="fr">Traduction provisoire publiée pour relecture. Des corrections peuvent encore être apportées ; vous pouvez afficher le texte anglais de référence.</aside>');
+        if (!h.querySelector('meta[name="robots"]')) h.insertAdjacentHTML('beforeend', '<meta name="robots" content="noindex,follow">');
+        b.insertAdjacentHTML('afterbegin', '<aside class="cts-translation-pending" lang="fr">Traduction provisoire publiée pour relecture. Des corrections peuvent encore être apportées ; cochez « Afficher l’anglais » pour voir le texte de référence.' + (asks ? ' Vos réponses sont acceptées en français ou en anglais.' : '') + '</aside>');
       }
       if (notice) { const main = root.querySelector('main'); if (main) main.insertAdjacentHTML('afterbegin', notice); else b.insertAdjacentHTML('afterbegin', notice); }
       // Language script must run before any legacy page initialization.
       for (const script of root.querySelectorAll('script[src]')) if (/\/cts-lang\.js(?:\?|$)|^cts-lang\.js(?:\?|$)/.test(script.getAttribute('src'))) script.remove();
       b.insertAdjacentHTML('afterbegin', '<script src="/cts-lang.js"></script>');
+      if (lang === 'fr') frenchTypography(root);
       const target = path.join(dir, lang === 'en' ? '' : lang, file);
       fs.mkdirSync(path.dirname(target), { recursive: true });
       fs.writeFileSync(target, root.toString());
     }
   }
-  // Spanish aliases follow the existing inclusion policy. Untranslated French
-  // scaffolds are not indexed; approved French content can be added later.
+  // Spanish aliases follow the existing inclusion policy. Untranslated and
+  // draft French pages are not indexed; only the French home page is listed.
   const map = path.join(dir, 'sitemap.xml');
   if (fs.existsSync(map)) {
     let xml = fs.readFileSync(map, 'utf8');
     const additions = [...xml.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(m => `<url>${m[1].replace(/<loc>https:\/\/chapalaseminary\.org\/([^<]*)<\/loc>/, (_m, page) => `<loc>${SITE}/es/${page || 'index.html'}</loc>`)}</url>`).join('\n');
-    xml = xml.replace('</urlset>', additions + '\n</urlset>');
+    // The French home page is the one French page meant to be found: it is
+    // indexable, and says which courses have a French draft.
+    const french = `<url>\n    <loc>${SITE}/fr/index.html</loc>\n    <priority>0.9</priority>\n  </url>`;
+    xml = xml.replace('</urlset>', additions + '\n' + french + '\n</urlset>');
     fs.writeFileSync(map, xml);
   }
   return files.length;
