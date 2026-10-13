@@ -1,8 +1,8 @@
 # French drafts — beta publication and review packets
 
-Machine drafts of twenty-six courses (301 packets, including the WiseSpeak page frame) in French, for pastors in Kinshasa (DR Congo).
-The first ten courses (115 packets) are published on beta. The sixteen Batch 2–5 courses
-(186 packets) remain review-only drafts and are not imported or displayed on the site.
+Machine drafts of forty-one courses (464 packets, including the WiseSpeak and Counseling Situations page frames) in French, for pastors in Kinshasa (DR Congo).
+The first ten courses (115 packets) are published on beta. The remaining thirty-one courses
+(349 packets) remain review-only drafts and are not imported or displayed on the site.
 Old Testament Survey was drafted separately as the pilot (see `docs/french-pilot.md`).
 Robert authorized beta publication of the first ten courses on 12 October. Nine courses
 are imported into canonical `src/content`; WiseSpeak uses these packets in its
@@ -41,6 +41,21 @@ decisions Dr. Cook needs to make for the whole French edition.
 | `CTSHS` | La doctrine du Saint-Esprit (The Doctrine of the Holy Spirit) | 1–10 |
 | `CTSPentecostal` | Le pentecôtisme et le mouvement charismatique | 1–12 |
 | `CTSApol` | Apologétique (Apologetics) | 1–10 |
+| `CTSHermeneutics` | Herméneutique (Hermeneutics) | 1–11 |
+| `CTSLA` | Initiation aux langues bibliques (Language Appreciation) | 1–11 |
+| `CTSAL` | Administration et leadership de l'Église | 1–10 |
+| `CTSWorship` | Le culte (Worship) | 1–11 |
+| `CTSCE` | Éducation chrétienne (Christian Education) | 1–10 |
+| `CTSMissions` | Missions mondiales (World Missions) | 1–10 |
+| `CTSCults` | Sectes et religions du monde (Cults) | 1–10 |
+| `CTSPT` | Théologie pratique (Practical Theology) | 1–10 |
+| `CTSDP` | Prédication doctrinale (Doctrinal Preaching) | 1–10 |
+| `CTSEvanPreach` | Prédication d'évangélisation (Evangelistic Preaching) | 1–10 |
+| `CTSDeaconFamilyMinistry` | Plan de ministère familial des diacres | 1–10 |
+| `CTSCS` | Situations de relation d'aide (Counseling Situations) | 0 (page frame), 1–12 |
+| `CTSCG` | Croissance de l'Église (Church Growth) | 1–12 |
+| `CTSRadical` | Le christianisme radical (Radical Christianity) | 1–13 |
+| `CTSWR` | Les religions du monde (World Religions) | 1–12 |
 
 Each unit has three files:
 
@@ -49,8 +64,9 @@ Each unit has three files:
   multiple choice (✓ = keyed answer), fill-ins and short answers, French above the English.
 - `…-fr.json`: the French data for import (lesson blocks by id; `mc`, `fill`, `sa` in
   source order; `notes`).
-- `…-source.json`: the English source used, taken from commit `2887884` (plus the Spanish
-  text for reference).
+- `…-source.json`: the English source used (plus Spanish text where supplied).
+  Original commits are recorded in the packet reviews. The consolidation manifest
+  records the new packets' provenance and subsequent MC alignment.
 
 ## How the drafts were made and checked
 
@@ -85,7 +101,7 @@ fix). Do not edit the files directly.
 - Review by a French-speaking reader with theological training.
 - Human review of the published beta drafts and subsequent corrections.
   Collection imports are marked `machine` with source hashes; the CMS config is regenerated.
-- Review and a separate import/publication change for the sixteen Batch 2–5 courses.
+- Review and a separate import/publication change for the thirty-one review-only courses.
 - WiseSpeak is still the single-page `public/CTS_WiseSpeak_Preaching.html`, so its block ids
   are sequence numbers within this packet, not lesson-data ids.
 
@@ -115,7 +131,7 @@ Both packet formats can be checked with either entry point:
 
 Both return a nonzero exit status on an error. All 115 packets passed after the validator repair. This checks structure and grading, not theological accuracy. The English corrections in PR #65 postdate the source packets. The beta importer applies explicit corrections to the published NT Survey and Evangelism fields while retaining the original packets as review history. See `docs/beta-staging-review-2026-10-12.md`.
 
-All 301 packets, including the 186 Batch 2–5 units, pass the repaired validator.
+All 464 packets, including the 349 review-only packets, pass the repaired validator.
 It supports both original list-form blocks and newer block dictionaries, and
 both English keyword field names. Genesis requires eight French keyword groups
 when the source has none. WiseSpeak retains its legacy empty packet keywords;
@@ -142,5 +158,20 @@ drafts have 8 keyword groups and a real model answer for each, written from the 
 ## Batch 5 (13 Oct 2026)
 
 Parables, Holy Spirit, Pentecostalism and Apologetics (47 units). Start with **BATCH5-FINDINGS.md**.
-Holy Spirit units 7–10 have scrambled English answer keys; the fix is pull request #83. The French
+Holy Spirit units 7–10 had scrambled English answer keys; the fix is merged pull request #83. The French
 options are in the same order, so the corrected keys serve the French too.
+
+## Consolidated new courses (13 Oct 2026)
+
+163 packets from PRs #76, #79 and #80 add fifteen courses. PR #81 adds no new
+course coverage. See **CONSOLIDATION-2026-10-13.md** for the selection and
+**CONSOLIDATION-2026-10-13.json** for immutable source commits and MC alignment.
+The alternate translations of existing courses were excluded; existing packets,
+including the repaired Genesis keyword groups, are retained.
+
+**SUMMARY-batch2.md** through **SUMMARY-batch5.md** preserve the original
+reports from all four PRs, including findings on duplicate courses. These are
+historical reports: claims of validation and unresolved answer-key problems
+must be read with the consolidation status. The 195 Language Appreciation / Holy
+Spirit keys and Church Growth 11 MC19 were corrected through #83; Revelation
+12 MC19 through #82. Other source-content and theological findings still need review.
