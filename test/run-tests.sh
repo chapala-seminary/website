@@ -237,6 +237,9 @@ curl -sf "http://127.0.0.1:$PORT/__scheduled?cron=0+15+*+*+*" >/dev/null && slee
 if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{};p.chromium.launch(o).then(b=>b.close()).catch(()=>process.exit(1))" 2>/dev/null; then
   node test/engine-languages.mjs
   node test/french-drafts.test.mjs
+  # Every delivered French packet imported, stamped against the current English;
+  # a pasted French question fails wherever the English one does.
+  node test/french-import.test.mjs
 node test/published-models.test.mjs
   # Short answers in John, Matthew, Acts and Romans (French Batch 2 review):
   # a copied question never passes, correct answers do, known wrong ones fail.
