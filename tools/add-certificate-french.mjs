@@ -1,4 +1,4 @@
-// French on the certificate pages of the French courses, the degree pages and
+// French on every certificate page: each course, the degree pages and
 // Christian Ethics (French review, 13 Oct 2026).
 //
 //   node tools/add-certificate-french.mjs          write the French into public/
@@ -21,21 +21,11 @@ import { parse } from 'node-html-parser';
 import { markedLanguage } from '../src/lib/language-content.ts';
 import { CERTIFICATE_FR } from './data/certificate-fr.mjs';
 
-// The ten French courses (src/content/courses with a French draft), their
-// M.Div. and Th.M. certificates, the degree pages and Christian Ethics.
-export const PAGES = [
-  'CTSNTCertificate.html', 'CTSNTMDivCertificate.html', 'CTSNTThMCertificate.html',
-  'CTSSTCertificate.html',
-  'CTSEvangelismCertificate.html', 'CTSEvangelismMDivCertificate.html', 'CTSEvangelismThMCertificate.html',
-  'CTSPMCertificate.html', 'CTSPMMDivCertificate.html', 'CTSPMThMCertificate.html',
-  'CTSCHCertificate.html', 'CTSCHMDivCertificate.html', 'CTSCHThMCertificate.html',
-  'CTSBibleCertificate.html', 'CTSPentCertificate.html',
-  'CTSJoshCertificate.html', 'CTSJoshMDivCertificate.html', 'CTSJoshThMCertificate.html',
-  'CTSPsalmsCertificate.html', 'CTSPsalmsMDivCertificate.html', 'CTSPsalmsThMCertificate.html',
-  'CTSPreachingCertificate.html',
-  'CTSCertificateOfMinistry.html', 'CTSAssociateCertificate.html', 'CTSMDivCertificate.html', 'CTSThMCertificate.html',
-  'ethics_certificate.html',
-];
+// Every certificate page: each course's (with its M.Div. and Th.M. pages),
+// the degree pages and Christian Ethics.
+export const PAGES = fs.readdirSync('public')
+  .filter((f) => /Certificate\.html$/.test(f) || f === 'ethics_certificate.html' || f === 'CTSCertificateOfMinistry.html')
+  .sort();
 
 // Unmarked wording: [exact source, French]. English and Spanish keep the source.
 const UNMARKED = [
@@ -47,6 +37,23 @@ const UNMARKED = [
   ['Acts 20:28 &middot; Hechos 20:28', 'Actes 20:28'],
   ['Psalm 1:1&ndash;2 &middot; Salmo 1:1&ndash;2', 'Psaume 1:1&ndash;2'],
   ['Chapala Theological Seminary', 'Séminaire théologique de Chapala'],
+  ['Dr. Wayne Cook', 'Dr Wayne Cook'],
+  ['Dr. Ted Rogers', 'Dr Ted Rogers'],
+  // pages written in English only (Church Growth) or with English headings
+  ['Certificate of Completion', 'Certificat de réussite'],
+  ['This certifies that', 'Le présent document atteste que'],
+  ['Student Name', 'Nom de l’étudiant(e)'],
+  ['has faithfully completed all twelve units of the course of study', 'a fidèlement accompli les douze unités du programme d’études'],
+  ['Church Growth', 'Croissance de l’Église'],
+  ['Certificate Track', 'Parcours Certificat'],
+  ['&ldquo;I will build My church, and the gates of Hades shall not prevail against it.&rdquo; &mdash; Matthew 16:18', '&laquo;&nbsp;Je bâtirai mon Église, et les portes du séjour des morts ne prévaudront point contre elle.&nbsp;&raquo; &mdash; Matthieu 16:18'],
+  ['Author &amp; Instructor', 'Auteur et enseignant'],
+  ['Director', 'Directeur'],
+  ['Cook<br>Theological<br>Seminary', 'Séminaire<br>théologique<br>Cook'],
+  ['Print / Save as PDF', 'Imprimer / enregistrer en PDF'],
+  ['Enter Name', 'Saisir le nom'],
+  ['Ruth and Esther', 'Ruth et Esther'],
+  ['The Art of the Story Sermon', 'L’art du sermon-récit'],
 ];
 
 const norm = (s) => s.replace(/\s+/g, ' ').trim();
@@ -70,7 +77,8 @@ function markUnmarked(src) {
     src = src.replace(re, (m, a, b, at) => {
       // not inside an element that already names its language
       const tag = src.slice(src.lastIndexOf('<', at), at + 1);
-      if (/^<(?:title|option|script|style)\b/i.test(tag)) return m;
+      // only as an element's own text: not after a closing tag, never in a title
+      if (/^<(?:\/|title|option|script|style)\b/i.test(tag)) return m;
       return /\bclass="[^"]*\b(?:en-only|lang-en|en|english|es-only|lang-es|es|spanish)\b/.test(tag) ? m : a + wrapped + b;
     });
   }

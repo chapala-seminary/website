@@ -350,7 +350,16 @@
   var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   var MOIS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
   var DATE = new RegExp('\\b(' + MONTHS.join('|') + ') (\\d{1,2}), (\\d{4})\\b', 'g');
-  var ATTRS = { 'Full Name / Nombre Completo': 'Nom complet', 'e.g., John Wesley': 'ex. : Jean Dupont' };
+  var ATTRS = { 'Full Name / Nombre Completo': 'Nom complet', 'e.g., John Wesley': 'ex.\u00a0: Jean Dupont', 'Name / Nombre': 'Nom', 'Type your name…': 'Saisissez votre nom…' };
+  // Unit titles and progress lines the page scripts write in English
+  // (assets/js/cts-cert-fr.js), loaded on French pages only.
+  function words(text) {
+    var F = window.CTS_CERT_FR, t = text.trim();
+    if (!F || !t) return text;
+    var fr = Object.prototype.hasOwnProperty.call(F.exact, t) ? F.exact[t] : null;
+    for (var i = 0; fr == null && i < F.patterns.length; i++) if (F.patterns[i][0].test(t)) fr = t.replace(F.patterns[i][0], F.patterns[i][1]);
+    return fr == null || fr === t ? text : text.replace(t, fr);
+  }
   function frenchDate(text) {
     return text.replace(DATE, function (_m, month, day, year) {
       return (day === '1' ? '1er' : day) + ' ' + MOIS[MONTHS.indexOf(month)] + ' ' + year;
@@ -358,8 +367,13 @@
   }
   function fix(root) {
     if (root.nodeType === 3) {
-      if (DATE.test(root.nodeValue) && !(root.parentNode && root.parentNode.closest('.cts-source, .lang-en, .en-only'))) root.nodeValue = frenchDate(root.nodeValue);
-      DATE.lastIndex = 0;
+      var el = root.parentNode;
+      if (!el || !el.closest || el.closest('.cts-source, script, style')) return;
+      // English with a French twin beside it is hidden; English alone is shown, so translate it.
+      var en = el.closest('.lang-en, .en-only');
+      for (var sib = en && en.nextElementSibling; sib; sib = sib.nextElementSibling) if (sib.matches('.lang-fr, .fr-only')) return;
+      var v = frenchDate(words(root.nodeValue));
+      if (v !== root.nodeValue) root.nodeValue = v;
       return;
     }
     if (root.nodeType !== 1) return;
@@ -374,6 +388,10 @@
     });
   }
   fix(body);
+  var data = document.createElement('script');
+  data.src = '/assets/js/cts-cert-fr.js';
+  data.onload = function () { fix(body); };
+  document.head.appendChild(data);
   new MutationObserver(function (records) {
     records.forEach(function (r) {
       if (r.type === 'characterData') fix(r.target);

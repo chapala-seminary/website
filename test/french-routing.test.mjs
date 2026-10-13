@@ -101,8 +101,9 @@ try {
     });
     assert.ok(pdf.ok); assert.equal(pdf.names.fr, 'Survol du Nouveau Testament');
     checks += 7;
-    // Every French certificate page of a French course: no English left in what shows.
-    for (const file of ['CTSPsalmsCertificate.html', 'CTSJoshCertificate.html', 'CTSSTCertificate.html', 'CTSMDivCertificate.html', 'CTSThMCertificate.html', 'CTSCertificateOfMinistry.html', 'ethics_certificate.html']) {
+        // Every certificate page (tools/add-certificate-french.mjs), as a student who has not finished it sees it.
+    const { PAGES } = await import('../tools/add-certificate-french.mjs');
+    for (const file of PAGES) {
       await page.goto(`${base}/fr/${file}`); await settle(page); await page.waitForTimeout(200);
       text = await page.locator('body').innerText();
       assert.ok(!ENGLISH.test(text), `English on /fr/${file}: ` + (text.match(ENGLISH) || [])[0]); checks++;
