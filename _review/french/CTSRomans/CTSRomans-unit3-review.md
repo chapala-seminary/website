@@ -1,3 +1,11 @@
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **R2, b014**: « soixante-six versets » → « soixante-quatre versets »
+- **R3, b037**: « — en grec <em>logizomai</em> — » → « — dans le grec de Paul, <em>logizomai</em> — »
+- **R3, Fill 8 prompt**: « « Imputé », en Genèse 15:6 tel que Paul le cite, est… » → « « Imputé », tel que Paul cite Genèse 15:6 en Romains 4:3, est… » (answer unchanged)
+
 # CTSRomans Unit 3 — French draft review
 
 ## Questions for Wayne
@@ -18,9 +26,9 @@
 
 ## Problems in the English source
 
-1. **b014**: "after sixty-six verses of indictment". Romans 1:18–3:20 has 64 verses (15 + 29 + 20). Translated as written.
+1. **b014**: "after sixty-six verses of indictment". Romans 1:18–3:20 has 64 verses (15 + 29 + 20). Translated as written. **Updated 12 Oct 2026:** now « soixante-quatre ».
 2. **b014**: the quotation of Romans 3:21-22 mixes KJV wording ("by faith of Jesus Christ unto all and upon all") with NKJV wording, and differs from the NKJV text in b017. The French uses Segond in both places.
-3. **b037 / Fill 8**: the lesson calls *logizomai* the Greek word "in Genesis 15:6". Genesis is in Hebrew (*chashab*). *Logizomai* is the Greek of the Septuagint and of Paul's citation. In Fill 8 I wrote "en Genèse 15:6 tel que Paul le cite".
+3. **b037 / Fill 8**: the lesson calls *logizomai* the Greek word "in Genesis 15:6". Genesis is in Hebrew (*chashab*). *Logizomai* is the Greek of the Septuagint and of Paul's citation. In Fill 8 I wrote "en Genèse 15:6 tel que Paul le cite". **Updated 12 Oct 2026:** the English is now corrected; b037 reads « dans le grec de Paul » and Fill 8 « tel que Paul cite Genèse 15:6 en Romains 4:3 ».
 4. **MC4 / SA2**: the term *dikaioō* is never given in the lesson. The question is still answerable.
 5. **SA4**: the keyword "instrum" and the model's statement that "faith is the instrument" are not taught in the lesson. Kept.
 6. **SA prompts that pass their own keywords.** In the English, SA4 (grace / redemption / faith), SA5 ("Abraham") and SA6 ("Genesis") put keywords in the prompt. The French SA4 prompt keeps the English wording (grâce, rédemption, foi); it reaches only 2 hits because the faith group needs a phrase such as "par la foi". In SA5 I replaced the "Abraham" group with "païen". No French prompt passes its own keywords.

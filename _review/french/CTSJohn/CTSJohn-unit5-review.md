@@ -1,3 +1,9 @@
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **F2.1, b013** (new sentence listing the seven I AM sayings): « (Jean 8:12). C'est à la fois » → « (Jean 8:12). C'est la deuxième des sept grandes paroles « JE SUIS » de Jean — le pain de … »
+
 ## Questions for Wayne
 
 1. **Sun/Son wordplay (b013)** — The pun does not work in French ("soleil" / "Fils"). I kept the sentence and added one short parenthesis explaining that the two words sound alike in English. Alternatively it could simply be dropped.

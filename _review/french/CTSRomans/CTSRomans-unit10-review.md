@@ -1,3 +1,10 @@
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **R10, b028**: « Les croyants juifs de Jérusalem souffraient de la famine et de la pauvreté. » → « Les croyants juifs de Jérusalem étaient pauvres — « les pauvres parmi les saints de Jérusalem » (15:26). » (LSG)
+- **F2.12, b050** (new outline sentence for SA 10): + « Regardez le chemin parcouru par la lettre : les chapitres 1 à 3 ont montré Juifs et non-Juifs tous sous le péché ; les chapitres 3 à 5… ; et les chapitres 12 à 16, l'Évangile vécu dans le corps de Christ. »
+
 # CTSRomans Unit 10 — French draft review
 
 ## Questions for Wayne
@@ -21,7 +28,7 @@
 2. **SA10** tests the structure of the whole letter (chs. 1–3, 3–5, 6–8, 9–11, 12–16; civil authority). This unit does not teach that structure. It depends on earlier units.
 3. **SA6**: the English keyword "solo" never appears in the English model ("lone-ranger"). **SA9**: the keyword "worship" never appears in the English model ("praise"). The French models hit all 8 groups.
 4. **Fill7** says "a body of many members, as in chapter 12". This unit says only "it produces a body". The blank is still answerable.
-5. **b028** says the Jerusalem believers "were facing famine". Romans 15 speaks only of "the poor". The famine of Acts 11:28 was about ten years earlier. Consider softening this to "poverty".
+5. **b028** says the Jerusalem believers "were facing famine". Romans 15 speaks only of "the poor". The famine of Acts 11:28 was about ten years earlier. Consider softening this to "poverty". **Updated 12 Oct 2026:** done in the English; the French now reads « étaient pauvres » with Romans 15:26.
 6. **b049** quotes "for obedience to the faith among all nations" as if it were one phrase. In the doxology as quoted in b048, those words are not next to each other.
 
 ## Adaptations

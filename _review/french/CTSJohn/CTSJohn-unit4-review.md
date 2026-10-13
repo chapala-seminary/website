@@ -1,3 +1,13 @@
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **J4, b017** (Gospels say Jesus felt compassion at least 8 times): « Six fois, les Évangiles disent » → « Au moins huit fois, les Évangiles disent »
+- **J4, MC 6 why** (same count fix): « six fois les Évangiles disent » → « au moins huit fois les Évangiles disent »
+- **J4, Fill 4 prompt** (same count fix): « Six fois, les Évangiles disent » → « Au moins huit fois, les Évangiles disent »
+- **J4, SA 3 model** (same count fix): « six fois les Évangiles disent » → « au moins huit fois les Évangiles disent »
+- **J4, SA 3 keywords** (keyword group carried the wrong count): « ["six fois"] » → « ["huit fois"] »
+
 ## Questions for Wayne
 
 1. **John 6:26 "signs"** — Segond has "non parce que vous avez vu des miracles". b027 and MC16 use "miracles" (Segond); b027 adds one sentence: "(Le texte grec dit littéralement « des signes ».)" SA8 accepts "miracle" or "non pour les signes".

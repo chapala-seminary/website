@@ -2,6 +2,12 @@
 
 Checker re-verified every quotation against the offline LSG (Jean 1:1, 1:3, 1:6–8, 1:11–15, 1:18, 3:7, 3:30, 20:31; allusions to Genèse 1:1, Matthieu 11:11, Hébreux 1:3, Apocalypse 1:18): all match Segond exactly; no corrections needed.
 
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **F2.32, MC 20 option A** (stray distractor replaced, as in English): « s'attacher aux calendriers des événements à venir » → « mettre le mystère de côté comme sans importance »
+
 ## Questions for Wayne
 
 1. **"The Word" and the pronouns for it.** I used "la Parole", following settled convention 6. LSG refers to the Word with feminine pronouns ("par elle", "sans elle", "Elle est venue chez les siens… ne l'ont point reçue", "à tous ceux qui l'ont reçue… elle a donné"). Quotations and the headings taken from them (II, V) therefore say "elle". When the prose speaks of the Person of Christ, it uses "il". In MC 9–11 the options are in the feminine form so that they match LSG ("reçue", "méritée", "gagnée").
@@ -16,7 +22,7 @@ Checker re-verified every quotation against the offline LSG (Jean 1:1, 1:3, 1:6�
 
 ## Problems in the English source
 
-1. **MC 20.** The distractor "keep the schemes of timing" looks as if it was copied from an eschatology unit. It has nothing to do with this lesson. I translated it as "s'attacher aux calendriers des événements à venir". The answer key (1) is correct.
+1. **MC 20.** The distractor "keep the schemes of timing" looks as if it was copied from an eschatology unit. It has nothing to do with this lesson. I translated it as "s'attacher aux calendriers des événements à venir". The answer key (1) is correct. *(Updated 12 Oct 2026 after the English correction; see "Updated after English corrections" above.)*
 2. **b026.** It quotes "He must increase, but I must decrease" without a reference. I added "(Jean 3:30)".
 3. **b019 and b022.** They borrow wording from outside John without saying so: "upholds all things by the word of His power" comes from Hebrews 1:3, and "the keys of death" from Revelation 1:18. These are fine as allusions. In French I followed the LSG wording ("par sa parole puissante", "les clefs de la mort").
 4. No wrong answer keys were found. Every SA item has a model answer.

@@ -1,3 +1,12 @@
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **A3a, b021** ('four hundred years' -> 'centuries'): « avait passé quatre cents ans à enfermer » → « avait passé des siècles à enfermer »
+- **A3b, b028** ('seven months into' -> 'so early in'): « sept mois après le début de son ministère » → « si tôt dans son ministère »
+- **F2.6, b040** (Lesson now teaches 'found at Azotus' (MC 19)): « L'Esprit enleva Philippe. » → « L'Esprit enleva Philippe, qui se trouva dans Azot (Actes 8:39-40). »
+- **F2.6, MC 19**: unchanged (English unchanged); b040 now teaches its answer.
+
 # CTSActs Unit 3 — French draft review
 
 ## Questions for Wayne
@@ -13,9 +22,9 @@
 
 ## Problems in the English source
 
-1. **MC19**: the correct option says Philip was "found at Azotus". The lesson says only that "the Spirit caught Philip away" and never mentions Azotus. The answer is still guessable, but the lesson does not teach it.
-2. **b021**: "The Sanhedrin had spent four hundred years putting God in a box". The figure does not fit any temple date: Solomon's temple was about 950 years before Stephen, and the second temple about 550 years before him. Translated as written. Should it be corrected or made vague?
-3. **b028**: "Why does God let Stephen die seven months into his ministry?" Acts gives no length for Stephen's ministry. Translated as written. Consider removing "seven months".
+1. **MC19**: the correct option says Philip was "found at Azotus". The lesson says only that "the Spirit caught Philip away" and never mentions Azotus. The answer is still guessable, but the lesson does not teach it. **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
+2. **b021**: "The Sanhedrin had spent four hundred years putting God in a box". The figure does not fit any temple date: Solomon's temple was about 950 years before Stephen, and the second temple about 550 years before him. Translated as written. Should it be corrected or made vague? **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
+3. **b028**: "Why does God let Stephen die seven months into his ministry?" Acts gives no length for Stephen's ministry. Translated as written. Consider removing "seven months". **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
 4. **SA3 keywords_en** (son / man / right / hand) are four pieces of one phrase, and two of them ("man", "hand") are very weak. Following convention 10, the French uses 8 distinct ideas: martyr, honneur, accueil, recevoir, serviteur, œuvre, achevée, couronnement.
 5. **SA6 / SA7**: the English keywords "simon" and "philip"/"eunuch" also appear in the prompts. I reworded the French prompts and replaced those groups (sorcier/magicien; ange, désert), so the prompt alone does not score.
 

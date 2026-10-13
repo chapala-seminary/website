@@ -2,6 +2,17 @@
 
 Checker re-verified every quotation against the offline LSG tool (Jean 1:12, 10:18, 18:4-6, 18:11, 19:2-5, 19:15, 19:19, 19:22, 19:30, 20:1, 20:16, 20:25, 20:28-29, 20:31, 21:15-17, Luc 23:35, Job 14:14, 1 Corinthiens 15:6): all match Segond 1910.
 
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **J12b, b019** (right painting (The Raising of the Cross), Rembrandt in the centre): « null » → « <strong>Le peintre près de la croix.</strong> Dans le tableau de Rembrandt « L'Élévation … »
+- **J12a, b021** (tetelestai is John's Greek, not Jesus' spoken language): « Dans la langue que parlait Jésus, c'était un seul mot » → « Dans le grec de l'Évangile de Jean, c'est un seul mot »
+- **J12a, Fill 5 prompt** (names the language): « « Tout est accompli », est ____, » → « « Tout est accompli », est, en grec, ____, »
+- **J12a, SA 4 model** (names the language): « C'était un seul mot, tetelestai » → « Dans le grec de l'Évangile de Jean, c'est un seul mot, tetelestai »
+- **J12c, b027** (Georg Schmidt story corrected): « un missionnaire morave nommé George Smith travailla en Afrique, ne gagna au Christ qu'une… » → « un missionnaire morave nommé Georg Schmidt travailla parmi les Khoïkhoï d'Afrique du Sud,… »
+- b019: the English puts the painting's title in italics (<em>); the French uses « … » instead, because the source snapshot has no <em> in this block and the tag check compares with it. Problems 2 and 3 below are now fixed in the English and the French.
+
 ## Questions for Wayne
 
 1. **"It is finished" (19:30).** LSG says "Tout est accompli". I used this wording for the unit title, the b020 heading, b021 and the closing line of b028. In b021 the contrast "He did not say, 'I am finished'" became « C'en est fini de moi ».
@@ -24,9 +35,9 @@ Checker re-verified every quotation against the offline LSG tool (Jean 1:12, 10:
 
 ## Problems in the English source
 
-1. **b021 and Fill 5.** The lesson says "In the language Jesus spoke, the word was one syllable — tetelestai". Tetelestai is Greek, the language John wrote in, and it has four syllables; Jesus probably spoke Aramaic on the cross. I translated it as "un seul mot" (one word), as the Spanish edition does. The claim about "the language Jesus spoke" is unchanged.
-2. **b019.** In the Rembrandt painting where the artist put himself in the scene, he appears in *The Raising of the Cross* (1633). The lesson says the painting of the three crosses. The illustration was translated as written.
-3. **b027 (George Smith).** The Moravian missionary was Georg Schmidt, in South Africa from 1737. Popular accounts of his story vary: he baptized several converts, and he died in Germany. The lesson's details may be the sermon-illustration version of the story. It was translated as written.
+1. **b021 and Fill 5.** The lesson says "In the language Jesus spoke, the word was one syllable — tetelestai". Tetelestai is Greek, the language John wrote in, and it has four syllables; Jesus probably spoke Aramaic on the cross. I translated it as "un seul mot" (one word), as the Spanish edition does. The claim about "the language Jesus spoke" is unchanged. *(Updated 12 Oct 2026 after the English correction; see "Updated after English corrections" above.)*
+2. **b019.** In the Rembrandt painting where the artist put himself in the scene, he appears in *The Raising of the Cross* (1633). The lesson says the painting of the three crosses. The illustration was translated as written. *(Updated 12 Oct 2026 after the English correction; see "Updated after English corrections" above.)*
+3. **b027 (George Smith).** The Moravian missionary was Georg Schmidt, in South Africa from 1737. Popular accounts of his story vary: he baptized several converts, and he died in Germany. The lesson's details may be the sermon-illustration version of the story. It was translated as written. *(Updated 12 Oct 2026 after the English correction; see "Updated after English corrections" above.)*
 4. **MC 1** says "In Gethsemane", but John 18:1 only says "a garden". The name comes from Matthew and Mark. This is minor.
 5. **SA 6 model** adds that the eyewitness testimony "authenticates" the resurrection "like an eyewitness in court". The lesson does not say this in b024, though b028's courtroom theme supports it. It was translated as written.
 6. I found no wrong answer keys. Every SA item has a model answer.

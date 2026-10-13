@@ -1,3 +1,12 @@
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **A5a, b036** ('autumn of 1904' -> 'February 1904'): « À l'automne 1904, » → « En février 1904, »
+- **F2.7, b041** (Two sentences added (teaches SA 8 contrast)): « Finalement, ils ouvrirent la porte et furent étonnés. » → « Finalement, ils ouvrirent la porte et furent étonnés. Un apôtre tué, un apôtre libéré, dans le même chapitre. Luc ne nous dit pas pourquoi ; le Seigne… »
+- **A5b, b042** ('only book on the planet' removed): « Le livre des Actes est le seul livre au monde qui rapporte ce qui arriva ensuite. » → « Les Actes nous disent ce qui arriva ensuite, et pourquoi. »
+- **A5b, b042** (Same-day claim removed): « qui avait tué un apôtre le matin, était dévoré par les vers avant le coucher du soleil. » → « qui avait fait mourir un apôtre par l'épée, était à présent lui-même rongé des vers. »
+
 # CTSActs Unit 5 — French draft review
 
 ## Questions for Wayne
@@ -15,9 +24,9 @@
 
 ## Problems in the English source
 
-1. **b042**: "Acts is the only book on the planet that records what happened next." The next sentence says Josephus records the same death. Translated as written. Suggest "the only book that records it from heaven's side".
-2. **b042**: "had killed an apostle in the morning… consumed by maggots before sundown." James's death (Acts 12:2) came well before Herod's death at Caesarea, not on the same day. Translated as written.
-3. **b036**: Florrie (usually spelled "Florrie", not "Flory") Evans spoke at New Quay in **February** 1904, not "the autumn of 1904". I kept the English date. Wayne may want to check both the spelling and the date.
+1. **b042**: "Acts is the only book on the planet that records what happened next." The next sentence says Josephus records the same death. Translated as written. Suggest "the only book that records it from heaven's side". **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
+2. **b042**: "had killed an apostle in the morning… consumed by maggots before sundown." James's death (Acts 12:2) came well before Herod's death at Caesarea, not on the same day. Translated as written. **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
+3. **b036**: Florrie (usually spelled "Florrie", not "Flory") Evans spoke at New Quay in **February** 1904, not "the autumn of 1904". I kept the English date. Wayne may want to check both the spelling and the date. **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
 4. **b018**: "*Tabitha cumi* — two syllables off from *Talitha cumi*." The two phrases differ by one letter, not two syllables. I rendered it as "presque le même son".
 5. **b027**: "The Andrew Principle" is used without explanation, and this unit never defines it. I translated it as "le principe d'André". Is it taught in an earlier unit?
 6. **SA8**: the lesson tells the stories of James's death and Peter's release, but it never teaches the providence/sovereignty contrast that the model answer develops. The question goes beyond the lesson.

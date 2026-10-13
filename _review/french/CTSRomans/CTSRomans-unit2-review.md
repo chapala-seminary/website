@@ -1,3 +1,12 @@
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **F2.10, b022** (new sentence, Romans 1:21): + « Cela commence par l'ingratitude : « ayant connu Dieu, ils ne l'ont point glorifié comme Dieu, et ne lui ont point rendu grâces » (Romains 1:21). » (LSG)
+- **F2.10, b026** (new clause, Romans 1:32): + « — et cela, alors même que ces hommes « connaissent le jugement de Dieu, déclarant dignes de mort ceux qui commettent de telles choses » (1:32). » (LSG; NKJV "righteous judgment", Segond "jugement")
+- **F2.10, MC 4 why / MC 19 why**: no change; the French already quoted Segond.
+- **R2, b041**: « soixante-six versets » → « soixante-quatre versets »
+
 # CTSRomans Unit 2 — French draft review notes
 
 Checker re-verified every quotation (blocks, MC stems/options/why, fills, SA models) against the offline LSG: Romains 1:18-32, 2:1-29, 3:1-23, Jacques 2:10, Matthieu 5:48, Galates 3:24. All match Segond exactly; none needed correction.
@@ -19,7 +28,7 @@ Checker re-verified every quotation (blocks, MC stems/options/why, fills, SA mod
 
 ## Problems in the English source
 
-1. **b041, "sixty-six verses".** Romans 1:18–3:20 is 15 + 29 + 20 = 64 verses. I translated it as written ("soixante-six").
+1. **b041, "sixty-six verses".** Romans 1:18–3:20 is 15 + 29 + 20 = 64 verses. I translated it as written ("soixante-six"). **Updated 12 Oct 2026:** now « soixante-quatre », matching the corrected English.
 2. **b037, "Can we sin so that grace may abound?"** This wording is Romans 6:1. The objection in chapter 3 is 3:8, "do evil that good may come". I translated it as written.
 3. **b020, b022, b026, b027 and b029.** These quote an NIV-style wording, while the scripture blocks are labeled NKJV. This makes no difference in French, where everything is LSG.
 4. **MC 4 (Rom 1:21, thankfulness).** The lesson never teaches this point.

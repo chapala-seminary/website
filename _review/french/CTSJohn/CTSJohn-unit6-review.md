@@ -2,6 +2,16 @@
 
 Checker re-verified every quotation against the offline LSG (tools/lsg.py): Jean 20:31; Deutéronome 19:15; Jean 5:18, 5:35, 5:36, 5:37, 5:39, 5:40, 5:45–46; 1:29; 8:13, 8:14, 8:18; 15:26; 4:29, 4:53; 9:23, 9:25, 9:34; 20:18; Actes 1:8, 9:2, 19:23. All verbatim; 1 corrected (MC 1, option D, Jean 20:31).
 
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **J6, b028** (John 9:13: brought to the Pharisees): « traîné devant les autorités » → « amené devant les pharisiens »
+- **J6, b031** (John 9:15, 24-28: questioned twice, reviled): « Les autorités l'ont averti, puis menacé, et enfin » → « Les pharisiens l'ont interrogé deux fois, l'ont injurié, et enfin »
+- **J6, Fill 7 prompt** (council -> Pharisees): « Pressé par les autorités, » → « Pressé par les pharisiens, »
+- **J6, SA 7 model** (council -> Pharisees): « traîné devant les autorités » → « amené devant les pharisiens »
+- John 9:28 LSG says « Ils l'injurièrent » (reviled); the French "l'ont injurié" follows it. The parents' fear of "les autorités" (b031) is unchanged, as in the English.
+
 ## Questions for Wayne
 
 1. **John 20:18, "I have seen the Lord!"** LSG gives this in indirect speech: "Marie de Magdala alla annoncer aux disciples qu'elle avait vu le Seigneur". In b028 I quoted LSG and added one sentence: "Le texte grec rapporte ses paroles mêmes… « J'ai vu le Seigneur ! »". MC 17 keeps the direct cry « J'ai vu le Seigneur ! » as option A.
@@ -15,7 +25,7 @@ Checker re-verified every quotation against the offline LSG (tools/lsg.py): Jean
 
 ## Problems in the English source
 
-1. **b028 and SA 7 say the blind man was "hauled before the council".** In John 9:13 he is brought to the Pharisees, not the Sanhedrin. In French I used "les autorités", which is neutral, and did not write "le sanhédrin".
+1. **b028 and SA 7 say the blind man was "hauled before the council".** In John 9:13 he is brought to the Pharisees, not the Sanhedrin. In French I used "les autorités", which is neutral, and did not write "le sanhédrin". *(Updated 12 Oct 2026 after the English correction; see "Updated after English corrections" above.)*
 2. **b031 says "The council warned him, then threatened him".** John 9 shows him being questioned, reviled (9:28) and cast out (9:34). It records no warning followed by a threat. I translated it faithfully.
 3. **MC 11 and the SA 4 model.** Both rely on "if you believed Moses, you would believe Me" (5:46a). The lesson (b022) quotes only "for he wrote about Me". The answer itself, "wrote", is taught.
 4. **SA 10.** The keyword "spirit" and the model's line "the Spirit testifies through such witness" do not appear in the verdict section (b033–b034). The Spirit is taught only in b023.

@@ -1,3 +1,12 @@
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **F1.7, b019** ('living room' -> 'house'): « L'Église d'Europe est née dans le salon de Lydie. » → « L'Église d'Europe est née dans la maison de Lydie. »
+- **A7a, b033** (Quip attributed to Petronius (Italy)): « Pline l'Ancien disait qu'à Athènes il était plus facile de rencontrer un dieu qu'un homme. » → « Le satiriste romain Pétrone plaisantait en disant que son propre coin d'Italie était si plein de dieux qu'il était plus facile d'y rencontrer un dieu… »
+- **A7b, b038** ('Thousand cult prostitutes' attributed to old Greek Corinth per Strabo): « une ville de marins, un lieu célèbre pour son temple d'Aphrodite et ses mille prostituées sacrées. » → « une ville de marins, héritière d'une vieille réputation : la Corinthe grecque, détruite par Rome deux siècles plus tôt, avait été célèbre, selon Strab… »
+- **F2.18, SA 6 model** ('quoting their own poets to the philosophers'): « il cite leurs propres poètes et philosophes avant » → « il cite aux philosophes leurs propres poètes avant »
+
 # CTSActs Unit 7 — French draft review
 
 All quotations were checked against the offline LSG tool (draft, then independently re-checked by the checker; all match Segond 1910): Actes 16:6-7, 16:9-10, 16:14, 16:17-18, 16:25, 16:28, 16:30-31, 16:37, 17:6, 17:11, 17:16, 17:18, 17:22-23, 17:32, 18:9-10, 20:34.
@@ -21,9 +30,9 @@ All quotations were checked against the offline LSG tool (draft, then independen
 ## Problems in the English source
 
 1. **b023–b025, the Perlman story.** This widely circulated account (1995, Avery Fisher Hall, the quoted remark) has never been confirmed by Perlman. It is generally treated as unverified. I translated it as written. Consider adding "as the story is told".
-2. **b033, Pliny the Elder.** The line "easier to meet a god than a man" comes from Petronius (*Satyricon* 17), and it is not about Athens. Mars and Bacchus are also the Roman names; the Greek gods would be Ares and Dionysus. I translated it as written.
-3. **b038, "thousand cult prostitutes".** This comes from Strabo and refers to the old Greek Corinth destroyed in 146 BC, not to Paul's Roman Corinth. Scholars dispute it.
-4. **SA6 model** says Paul quoted "their own philosophers". The lesson (and Acts 17:28) says *poets*. In French I wrote "poètes et philosophes" so the model fits the lesson. Please confirm.
+2. **b033, Pliny the Elder.** The line "easier to meet a god than a man" comes from Petronius (*Satyricon* 17), and it is not about Athens. Mars and Bacchus are also the Roman names; the Greek gods would be Ares and Dionysus. I translated it as written. **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
+3. **b038, "thousand cult prostitutes".** This comes from Strabo and refers to the old Greek Corinth destroyed in 146 BC, not to Paul's Roman Corinth. Scholars dispute it. **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
+4. **SA6 model** says Paul quoted "their own philosophers". The lesson (and Acts 17:28) says *poets*. In French I wrote "poètes et philosophes" so the model fits the lesson. Please confirm. **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
 5. **SA4 model** says the audience "realized the music that remained mattered more than the string", and it describes Paul and Silas as "chained". The lesson says neither (they were in stocks). This is minor, and I translated it faithfully.
 6. **SA7 model** says "most" gave the polite delay and that some believed "immediately". The lesson does not quantify either. **SA8 model** says Paul "could have insisted on his right to full compensation" (1 Corinthians 9). The lesson does not teach this.
 7. **SA prompts.** Several English prompts contain their own keywords (SA1 "closed/door/spirit/forbid"; SA4 "perlman/string/jail/silas"; SA5 "berea"; SA6 "mars/hill/unknown/altar"; SA9 "many/people"). I reworded the French prompts so that none passes its own keywords (convention 10).

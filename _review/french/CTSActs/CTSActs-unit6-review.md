@@ -1,3 +1,14 @@
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **A6b, b020** ('official' -> 'governor'): « Le premier haut fonctionnaire romain converti » → « Le premier gouverneur romain converti »
+- **F1.3, b021** (Name change at 13:13; Paul usually, not always, first): « Remarquez qu'à partir d'Actes 13:13 Luc cesse de dire « Barnabas et Saul » et commence à dire « Paul et ses compagnons ». » → « Remarquez qu'en Actes 13:13 Luc cesse de dire « Barnabas et Saul » et dit « Paul et ses compagnons ». Désormais, il nomme le plus souvent Paul en prem… »
+- **A6a, b036** (Not 'first ecumenical council'): « est le premier concile œcuménique de l'histoire de l'Église. » → « est le premier concile de l'Église connu de l'histoire, près de trois siècles avant celui de Nicée, le premier des conciles œcuméniques. »
+- **F1.3, MC 6 stem** (Stem asks what Luke calls the team at 13:13): « À partir d'Actes 13:13, Luc change la manière de nommer l'équipe. À partir de la Pamphylie, on les appelle : » → « En Actes 13:13, Luc nomme l'équipe d'une manière nouvelle, avec Paul à sa tête. Il les appelle : »
+- **F2.17, SA 10 model** ('first journey' moved to the Cyprus clause): « Bar-Jésus tente d'arrêter le message à Chypre et il est frappé » → « Bar-Jésus tente d'arrêter le message à Chypre, pendant le premier voyage, et il est frappé »
+- **F2.17, SA 10 model** (Split placed as the second journey began): « en produisant deux équipes au lieu d'une, sur ce premier voyage et au-delà. » → « en produisant deux équipes au lieu d'une au début du deuxième voyage. »
+
 # CTSActs Unit 6 — French draft review
 
 All quotations were checked against the offline LSG tool, and re-checked independently by the checker (all 21 quoted passages match Segond verbatim): Actes 13:1-13, 13:38-39, 13:46-48, 14:8-15, 14:18-23, 14:27, 15:1-2, 15:10-11, 15:19-20, 15:37-41, 16:1-5, 2 Timothée 4:11 (and 2 Timothée 1:5 for Loïs/Eunice).
@@ -21,9 +32,9 @@ All quotations were checked against the offline LSG tool, and re-checked indepen
 
 1. **SA keyword counts.** Eight of the ten SA items (all except SA6 and SA10) have only 5 `keywords_en` groups. Settled convention 10 asks for 8, but the validator errors if the French count differs from the English. I kept 5 distinct groups for each; the checker replaced generic groups (e.g. "paul", "église", "mission", "appel") with more distinctive ones. Robert: the English needs 8 groups (or the validator needs to allow it) before the French can follow convention 10.
 2. **SA self-hits.** In the English, the prompt alone passes its own keywords in SA1, 3, 5, 6, 7, 8, 9 and 10. I reworded the French prompts so that none scores 3 hits (SA4 scores 1).
-3. **b021.** "From Acts 13:13 onward Luke… starts calling them 'Paul and his party.'" This is overstated: Luke still says "Barnabas and Paul" at 14:12, 14:14, 15:12 and 15:25. MC6 depends on this claim.
-4. **b036.** It calls the Jerusalem Council "the first ecumenical council in the history of the church". That title normally belongs to Nicaea (325).
-5. **b020.** It calls Sergius Paulus "the first Roman official to convert in the Acts narrative". Cornelius the centurion (Acts 10) came earlier, though "official" can be read narrowly.
+3. **b021.** "From Acts 13:13 onward Luke… starts calling them 'Paul and his party.'" This is overstated: Luke still says "Barnabas and Paul" at 14:12, 14:14, 15:12 and 15:25. MC6 depends on this claim. **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
+4. **b036.** It calls the Jerusalem Council "the first ecumenical council in the history of the church". That title normally belongs to Nicaea (325). **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
+5. **b020.** It calls Sergius Paulus "the first Roman official to convert in the Acts narrative". Cornelius the centurion (Acts 10) came earlier, though "official" can be read narrowly. **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
 6. **b037.** "Old Camel Knees" and James "praying for Israel" come from Hegesippus (via Eusebius), not Scripture. "Senior pastor" is anachronistic. Translated as written.
 7. **b024.** "Dying for the Lord" (Mark's martyrdom) is tradition, but the lesson states it as fact.
 8. **b035.** It glosses *stásis* as "a riot". In Acts 15:2 the word means dissension.

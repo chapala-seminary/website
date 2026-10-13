@@ -1,5 +1,12 @@
 # CTSMatt Unit 12 — French draft review notes
 
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **M12, b027** (veil plus graded courts): « bâti pour séparer : ses parvis, de degré en degré, » → « bâti pour séparer : son voile et ses parvis, de degré en degré, »
+- **M12, SA 9 model** (veil plus graded courts): « ce sont les parvis du temple qui séparaient » → « ce sont le voile et les parvis du temple qui séparaient »
+
 ## Questions for Wayne
 
 1. **Matthew 26:28, "new covenant."** Segond follows the shorter Greek text: "le sang de l'alliance" (no "nouvelle"). The lesson (b013), MC3, fill 3 and SA2 rely on "new covenant." Segond is quoted exactly, followed by one sentence: several Greek manuscripts of Matthew read "the blood of the new covenant," and Luke 22:20 (Segond) says "la nouvelle alliance en mon sang." This is a text-critical note, not an "other versions say" note. Acceptable? (Unit 6 raised the same question for Matthew 9:13.)

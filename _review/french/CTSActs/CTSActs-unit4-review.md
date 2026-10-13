@@ -1,3 +1,12 @@
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **A4, b030** ('within weeks' -> Luke's 'after many days' (LSG + Greek sense, convention 1)): « En quelques semaines, l'accueil de la synagogue passa de l'étonnement à l'hostilité. » → « L'accueil de la synagogue passa de l'étonnement à l'hostilité — Luc dit que ce fut « au bout d'un certain temps » (Actes 9:23) ; le texte grec dit lit… »
+- **F2.33, MC 18 stem** (MC 18 replaced (Ananias's first response, b024)): « L'expression « respirant encore la menace et le meurtre » (Actes 9:1) veut montrer que Saul : » → « Quand le Seigneur l'envoya vers Saul, Ananias commença par : »
+- **F2.33, MC 18 options** (MC 18 new options; answer index 3 unchanged): « N'était en colère que de temps en temps | Portait des armes | Souffrait d'une maladie respiratoire | Vivait et respirait dans un climat d'intimidation… » → « Refuser et s'enfuir de Damas | Demander la permission aux apôtres de Jérusalem | Y aller aussitôt sans dire un mot | Objecter que Saul avait fait beau… »
+- **F2.16, SA 6 model**: no change; the French already read « accueillir » (the English had a stray Spanish word).
+
 # CTSActs Unit 4 — French draft review
 
 ## Questions for Wayne
@@ -14,12 +23,12 @@
 
 ## Problems in the English source
 
-1. **b030 / SA7, "within weeks".** Acts 9:23 says "after many days". Galatians 1:17–18 (cited in b032) puts the stay in Arabia and the return to Damascus *before* the escape (2 Cor 11:32–33). That could mean up to about three years. "Within weeks" is hard to defend. I translated it as written.
+1. **b030 / SA7, "within weeks".** Acts 9:23 says "after many days". Galatians 1:17–18 (cited in b032) puts the stay in Arabia and the return to Damascus *before* the escape (2 Cor 11:32–33). That could mean up to about three years. "Within weeks" is hard to defend. I translated it as written. **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
 2. **b032, "perhaps three years" in Arabia.** Galatians 1:18 counts the three years from his conversion, not from the time in Arabia, and the time includes his return to Damascus. Consider rewording.
 3. **b025, "beatings, shipwrecks, and stonings".** 2 Corinthians 11:25 mentions only one stoning ("une fois j'ai été lapidé"). The French uses the singular, "la lapidation". Is that acceptable?
 4. **MC1 and MC18** test the same point, "breathing threats" meaning that intimidation was the air he breathed. Consider replacing one of them.
 5. **SA5 model** says "two syllables", but the lesson says "two words". The French says "deux mots".
-6. **SA6 model** contains a stray Spanish word: "the unglamorous pastoral work of *acoger*". I translated it as "accueillir".
+6. **SA6 model** contains a stray Spanish word: "the unglamorous pastoral work of *acoger*". I translated it as "accueillir". **Updated 12 Oct 2026:** corrected in the English (beta PR) and in the French; see the update section at the top.
 7. **SA keywords_en are weak in several items.** SA1 has "against" and "god". SA2 has "me", only 2 letters, which matches almost any answer. SA4 has "name" and "show". SA5 has "first", "word" and "saul". SA3 has "lay". Several English prompts also contain their own keywords: SA2, SA5, SA6, SA8, SA9 and SA10. Following convention 10, each French item has 8 distinct ideas. I reworded the SA4, SA5, SA6, SA9 and SA10 prompts so they do not name the key terms, and no French prompt reaches 3 hits. Note: SA10 (English and French) still lets an answer that merely names Saul, Ananias and Barnabas reach 3 hits.
 8. **b030 "fish-basket".** The Greek *spyris* means a large woven basket. Acts does not call it a fishing basket. I translated it as written.
 

@@ -1,3 +1,10 @@
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **M3, b041** (Damien: sixteen years): « pendant dix-neuf ans » → « pendant seize ans »
+- **M3, b041** (adds the point of the story): « de l'eau bouillante sur son pied. » → « de l'eau bouillante sur son pied et ne sentit aucune douleur. »
+
 ## Questions for Wayne
 
 1. **"Blessed" vs. LSG "Heureux".** LSG has "Heureux" in every Beatitude. I used "heureux" wherever the lesson says "blessed / what the world calls blessed", and "bénédiction" where it says "blessing". The play on "blessed" in b011 and b035 therefore reads as a play on "heureux / bonheur".
@@ -13,7 +20,7 @@
 
 ## Problems in the English source
 
-1. **b041 (Father Damien).** The story leaves out its point. Damien knew he had leprosy because he felt *no pain* from the boiling water, but the English never says so. He also served on Molokai about 16 years (1873-1889), not nineteen. I translated it as written.
+1. **b041 (Father Damien).** The story leaves out its point. Damien knew he had leprosy because he felt *no pain* from the boiling water, but the English never says so. He also served on Molokai about 16 years (1873-1889), not nineteen. I translated it as written. *(Updated 12 Oct 2026 after the English correction; see "Updated after English corrections" above.)*
 2. **b025 (Christ of the Andes).** The dispute was settled in 1902, and the statue was erected in 1904. The statement that it was cast from melted cannons is a popular tradition that historians doubt. I translated it as written.
 3. **b017 (Churchill).** The claim that his blindness to his faults "eventually cost him the trust of his people" has no source and is doubtful as history. I translated it as written.
 4. **b048** is unclear in English ("reject his people as he saw them rejecting him"). I translated it as literally as French allows.

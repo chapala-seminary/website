@@ -1,3 +1,13 @@
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **R6, b034**: « L'expression « corps de mort » était employée dans le monde antique pour le cadavre auquel on enchaînait parfois un meurtrier… » → « Les prédicateurs illustrent souvent l'expression « corps de mort » par un cruel châtiment que le poète romain Virgile attribue à un ancien tyran : des hommes vivants enchaînés à des cadavres… On ne sait pas si Paul pensait à ce récit, mais l'image convient. »
+- **R6, MC 13 why**: « L'image évoque le cadavre auquel on enchaînait un meurtrier… » → « On illustre souvent l'image par un récit ancien d'hommes vivants enchaînés à des cadavres… » (answer unchanged)
+- **R6, Fill 9 prompt**: « …employée dans le monde antique pour le ____ auquel on enchaînait parfois un meurtrier… » → « Les prédicateurs illustrent souvent le « corps de mort » par un récit ancien, rapporté par Virgile, d'hommes vivants enchaînés à un ____ en guise de châtiment. » Answer « cadavre » unchanged; dropped the alternate « corps de la victime » (no victim any more).
+- **R6, SA 7 model**: « Dans le monde antique, on enchaînait parfois un meurtrier au cadavre de sa victime… » → « On illustre souvent l'expression par un châtiment que Virgile attribue à un ancien tyran : des hommes vivants enchaînés à des cadavres… (on ne sait pas si Paul y pensait). »
+- **R6, SA 7 keywords**: group « meurtr / assassin » → « virgile / tyran / vivants » (the model no longer mentions a murderer). Model hits 8 of 8; prompt 0.
+
 # CTSRomans Unit 6 — French draft review notes
 
 Checker re-verified every Scripture quotation against the offline LSG tool (Romains 7:6, 7:7, 7:8, 7:12, 7:13, 7:15, 7:17, 7:21, 7:22-23, 7:24, 7:25, 8:1, 8:39, plus partial quotes in MC/fill/SA items): all match Segond 1910 exactly; no corrections needed.

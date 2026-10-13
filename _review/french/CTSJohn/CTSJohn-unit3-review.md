@@ -2,6 +2,14 @@
 
 Checker re-verified every quotation against the offline LSG (tools/lsg.py): Jean 4:7, 4:10, 4:11, 4:13–14, 4:16–18, 4:24, 4:26, 4:28–29, 4:34–36, 4:39, 4:42, Philippiens 2:13, Actes 4:36. All match; one quotation (Philippiens 2:13) had a stray capitalized "Car" at the start, now dropped.
 
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **J3, b025** (not three years yet (John 4 is early in the ministry)): « des hommes formés, trois ans auprès du Seigneur lui-même, » → « des hommes en formation auprès du Seigneur lui-même, »
+- **J3, SA 8 model** (same fix in the model answer): « c'étaient des hommes formés, qui avaient passé trois ans avec le Seigneur, les évangélist… » → « c'étaient des hommes que le Seigneur lui-même était en train de former, les évangélistes »
+- **J3, SA 8 keywords** (keyword group 'trois ans' carried the error; now the 'in training' idea): « trois ans » → « ["formés", "formes", "formation", "former", "formait", "formaient"] »
+
 ## Questions for Wayne
 
 1. **John 4:42, "the Christ, the Savior of the world".** LSG follows the critical Greek text and reads only "il est vraiment le Sauveur du monde", without "le Christ". In b024 I quoted LSG and added one sentence: "Une partie des manuscrits grecs porte ici : « vraiment le Christ, le Sauveur du monde »." MC 15 keeps "le Christ, le Sauveur du monde" as the correct option, because the woman already asks "ne serait-ce point le Christ ?" (4:29). Its `why` quotes 4:42 as LSG has it and adds 4:29. Fill 9 uses LSG and has the answer "Sauveur" (the checker removed "Rédempteur" from the accepted answers, as it is not the verse's word).

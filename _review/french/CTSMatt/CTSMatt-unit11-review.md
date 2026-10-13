@@ -1,3 +1,13 @@
+## Updated after English corrections (12 Oct 2026)
+
+The English source was corrected in the beta PR. The matching French changes are below. The source snapshot (`-source.json`) was not updated; the corrected English is in the beta PR.
+
+- **M11, b023** (Luke 24:42-43: broiled fish before them): « il a mangé du poisson au bord du lac, » → « il a mangé du poisson rôti devant eux (Luc 24:42–43), »
+- **F2.4, b025** (new sentence: field and mill, not seeing it coming, Are you ready?): « se termine dans l'émerveillement. Et le chapitre 25 » → « se termine dans l'émerveillement. Au lieu d'une date, Jésus a donné des images de vigilan… »
+- **F2.4, b025** (adds 'the bridegroom was delayed'): « être prêts : cinq avaient de l'huile » → « être prêts : l'époux a tardé, cinq avaient de l'huile »
+- **F2.14, SA 5 model** (bed image (Luke 17:34) removed): « deux personnes dorment dans un même lit, deux travaillent » → « deux travaillent »
+- Scripture in the new French: Matthieu 24:40 (« l'un sera pris et l'autre laissé ») and Luc 24:42–43 (« poisson rôti », « il mangea devant eux ») checked word for word against Louis Segond 1910 on Bible Gateway (version LSG).
+
 ## Questions for Wayne
 
 1. **Matthew 24:3, "end of the age" (NKJV) vs. LSG "la fin du monde".** I quoted LSG in b011 and added « Le texte grec dit littéralement "l'achèvement de l'âge" ». MC2 and SA1 use "fin du monde". The SA1 keyword also accepts "fin de l'âge" and "fin des temps".
@@ -13,9 +23,9 @@
 ## Problems in the English source
 
 1. **MC9, MC10 (why), SA4 (last sentence), SA5.** These rely on material the lesson never teaches. The lesson does not say that Jesus "gave parables and images instead of a date". It does not cover "one taken, one left", the "ordinary circumstances" point, the delayed bridegroom, or "He answered the question they should have asked". The lesson's b025 mentions the ten virgins only briefly. I translated them faithfully.
-2. **SA5 model, "two are sleeping in a bed".** That image comes from Luke 17:34, not Matthew 24, which has only the field and the mill (24:40-41). I kept it.
+2. **SA5 model, "two are sleeping in a bed".** That image comes from Luke 17:34, not Matthew 24, which has only the field and the mill (24:40-41). I kept it. *(Updated 12 Oct 2026 after the English correction; see "Updated after English corrections" above.)*
 3. **MC4 why** ("social order collapsed… the only priority") is not in the lesson. It is harmless.
-4. **b023, "He ate fish on the shore".** In Scripture Jesus ate fish in the room (Luke 24:42-43). On the shore (John 21:13) he gave the fish to the disciples. I translated as written ("au bord du lac").
+4. **b023, "He ate fish on the shore".** In Scripture Jesus ate fish in the room (Luke 24:42-43). On the shore (John 21:13) he gave the fish to the disciples. I translated as written ("au bord du lac"). *(Updated 12 Oct 2026 after the English correction; see "Updated after English corrections" above.)*
 5. **b021, C. S. Lewis attribution** (history split into before and after the second coming, the present age as "preface"). I could not verify the wording. Please check the source.
 
 ## Adaptations
