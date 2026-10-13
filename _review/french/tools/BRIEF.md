@@ -138,3 +138,5 @@ Questions for Wayne, number of English-source problems. Nothing more.
    placeholder model answer: write 8 French keyword groups in `keywords` and a real
    model answer from the lesson, and note it once in the review file. (Never use a
    separate `keywords_proposed` field.)
+13. "Master's track" = "Parcours Master" (not "parcours de maîtrise"/"de master"), matching
+   "Parcours Certificat".

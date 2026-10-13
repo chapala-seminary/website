@@ -37,6 +37,10 @@ decisions Dr. Cook needs to make for the whole French edition.
 | `CTSGenesis` | Cours intensif sur la Genèse (Genesis Intensive) | 1–12 |
 | `CTSBibleCharacters` | Personnages de la Bible (Bible Characters) | 1–12 |
 | `CTSBibleCharacters2` | Personnages de la Bible II (Bible Characters II) | 1–11 |
+| `CTSParables` | Les paraboles de la Bible (Parables of the Bible) | 1–15 |
+| `CTSHS` | La doctrine du Saint-Esprit (The Doctrine of the Holy Spirit) | 1–10 |
+| `CTSPentecostal` | Le pentecôtisme et le mouvement charismatique | 1–12 |
+| `CTSApol` | Apologétique (Apologetics) | 1–10 |
 
 Each unit has three files:
 
@@ -126,3 +130,9 @@ from the English alone.
 Ruth and Esther, Genesis, Bible Characters I and II (44 units). Start with **BATCH4-FINDINGS.md**.
 The English Genesis short answers have no keywords (any answer passes); the French Genesis
 drafts have 8 keyword groups and a real model answer for each, written from the lesson.
+
+## Batch 5 (13 Oct 2026)
+
+Parables, Holy Spirit, Pentecostalism and Apologetics (47 units). Start with **BATCH5-FINDINGS.md**.
+Holy Spirit units 7–10 have scrambled English answer keys; the fix is pull request #83. The French
+options are in the same order, so the corrected keys serve the French too.
