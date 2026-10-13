@@ -165,9 +165,9 @@
   function load() {
     if (!ready) {
       ready = Promise.all([
-        window.jspdf ? null : script('assets/vendor/jspdf.umd.min.js'),
-        window.CTS_CERT_NAMES ? null : script('assets/js/cts-cert-names.js'),
-        image('assets/img/sig-cook.png'), image('assets/img/sig-rogers.png')
+        window.jspdf ? null : script('/assets/vendor/jspdf.umd.min.js'),
+        window.CTS_CERT_NAMES ? null : script('/assets/js/cts-cert-names.js'),
+        image('/assets/img/sig-cook.png'), image('/assets/img/sig-rogers.png')
       ]).then(function (r) { return { cook: r[2], rogers: r[3] }; });
       ready.catch(function () { ready = null; });
     }
