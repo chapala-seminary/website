@@ -26,6 +26,9 @@ try {
   await page.reload();
   check(await page.locator('body').innerText(), 'Unité 1 réussie');
   check(await page.locator('body').innerText(), 'Votre progression est enregistrée');
+  // Old Testament Survey is a French draft (13 Oct 2026): the review notice, in French, replaces the old "not available yet" fallback.
   assert.equal(await page.locator('.cts-translation-pending').count(),1);checks++;
-  console.log(`${checks} French interface checks — PASS; course fallback stays explicit.`);
+  assert.equal(await page.locator('.cts-translation-pending').getAttribute('lang'),'fr');checks++;
+  check(await page.locator('.cts-translation-pending').innerText(), 'Traduction provisoire');
+  console.log(`${checks} French interface checks — PASS; the French draft notice is shown.`);
 } finally { await browser.close(); }

@@ -1,6 +1,8 @@
 # French pilot: preparation and review
 
 Pilot: Old Testament Survey (`CTS`, progress slug `ots`), starting with Unit 1.
+All 13 units now have machine French drafts on beta (13 Oct 2026); see
+`docs/french-beta-publication.md`.
 Wayne's Markdown draft remains separate from the canonical course JSON. No
 lesson translations or student records are changed by this preparation PR.
 
