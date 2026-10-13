@@ -329,6 +329,12 @@ export function applyPacket(file) {
     }
     applyQuestions(rec.test.questions, frOf, report);
     if (item.type === 'textbook' && !rec.files.html) warnings.push(...answerWarnings(rec.test.questions, rec.body.fr, item.id));
+    if (item.type === 'textbook' && rec.files.html) {
+      // a commentary read on its own page: its French is in its chapters, applied one by one
+      const chapters = Object.values(chapterStore(rec.slug).chapters);
+      const text = chapters.flatMap((c) => c.parts.map((p) => p.fr)).join(' ');
+      if (text) warnings.push(...answerWarnings(rec.test.questions, text, item.id).map((w) => `${w} (${chapters.length} chapter part(s) in French so far)`));
+    }
     if (item.type === 'reading') {
       const { memory } = loadStore();
       const text = [...memory.values()].filter((e) => /^src\/data\/french-readings\/(digest|room)\//.test(e.file)).map((e) => e.fr).join(' ');
