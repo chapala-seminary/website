@@ -274,6 +274,11 @@ node test/published-models.test.mjs
   # Counseling, Narrative and WiseSpeak Preaching, and Ethics.
   node tools/verify-fill-single.mjs "http://127.0.0.1:$PORT"
   node tools/verify-french-wisespeak.mjs "http://127.0.0.1:$PORT"
+  # Narrative Preaching, Counseling and Ethics French drafts: packets match the
+  # pages, French models meet their keywords, /fr/ pages grade and read in French.
+  node tools/french-static-courses.mjs --check
+  node tools/verify-french-static-packets.mjs
+  node tools/verify-french-static.mjs "http://127.0.0.1:$PORT"
   node tools/verify-single-completion.mjs "http://127.0.0.1:$PORT"
   # The textbook tests (Oct 2026): twenty drawn from forty, eighteen to pass,
   # locked after a failure, a fresh draw after the wait -- as a student
