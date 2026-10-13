@@ -180,6 +180,10 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
             </label>
             <input id="regName" type="text" autocomplete="name" />
           </div>
+          <div class="full">
+            <label for="regEmail"><span class="lang-en">Email (required)</span><span class="lang-es">Correo electrónico (obligatorio)</span><span class="lang-fr">Adresse courriel (obligatoire)</span></label>
+            <input id="regEmail" type="email" autocomplete="email" required />
+          </div>
           <div>
             <label for="regCountry"><span class="lang-en">Country</span><span class="lang-es">País</span></label>
             <input id="regCountry" type="text" autocomplete="country-name" />
@@ -199,6 +203,7 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
             </button>
           </div>
         </div>
+        <p id="regError" role="alert" hidden></p>
         <p class="small" style="margin-bottom:0">
           <span class="lang-en">The Certificate track answers the multiple choice. The Associate adds the fill-in-the-blank questions; M.Div. and Th.M. add those and the short-answer questions. 90% of each part is required to pass.</span>
           <span class="lang-es">El trayecto de Certificado responde la opción múltiple. El Asociado añade las preguntas de completar el espacio en blanco; M.Div. y Th.M. añaden esas y las preguntas de desarrollo. Se requiere 90% en cada parte para aprobar.</span>
@@ -211,7 +216,7 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
           <span>
             <strong><span class="lang-en">Required readings for this course</span><span class="lang-es">Lecturas requeridas de este curso</span></strong>
             {t.requiredFrom === null
-              ? <Fragment><span class="lang-en"> — a test on all five readings, being introduced for the M.Div. and Th.M. tracks and not yet required; open to every student: </span><span class="lang-es"> — un examen sobre las cinco lecturas, que se está introduciendo para los trayectos M.Div. y Th.M. y aún no es obligatorio; abierto a todos los estudiantes: </span></Fragment>
+              ? <Fragment><span class="lang-en"> — a separate test on all five readings for M.Div. and Th.M. after activation; see the test page; open to every student: </span><span class="lang-es"> — un examen separado sobre las cinco lecturas para M.Div. y Th.M. después de su activación; consulte la página del examen; abierto a todos los estudiantes: </span></Fragment>
               : <Fragment><span class="lang-en"> — required on the M.Div. and Th.M. tracks, open to every student: </span><span class="lang-es"> — obligatorias en los trayectos M.Div. y Th.M., abiertas a todos los estudiantes: </span></Fragment>}
             <a href={`/${t.page}.html`}><span class="lang-en">{t.title.en}</span><span class="lang-es">{t.title.es}</span></a>
             &nbsp;·&nbsp;
@@ -224,7 +229,7 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
           <span>
             <strong><span class="lang-en">Textbook for this course</span><span class="lang-es">Libro de texto de este curso</span></strong>
             {t.requiredFrom === null ? (
-              <><span class="lang-en"> — optional test, not yet a Master's requirement: </span><span class="lang-es"> — examen opcional, todavía no obligatorio para maestría: </span></>
+              <><span class="lang-en"> — Master’s test after activation; see the test page: </span><span class="lang-es"> — examen de maestría después de su activación; consulte la página del examen: </span></>
             ) : (
               <><span class="lang-en"> — required reading on the M.Div. and Th.M. tracks: </span><span class="lang-es"> — lectura obligatoria en los trayectos M.Div. y Th.M.: </span></>
             )}

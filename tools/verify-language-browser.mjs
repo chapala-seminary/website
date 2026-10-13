@@ -32,6 +32,12 @@ async function worker() {
         if (await page.evaluate(() => document.body.dataset.showSource) !== 'true') fails.push(`${label}: source switch did not enable source display`);
       }
       await page.evaluate(() => {for (const d of document.querySelectorAll('details')) d.open = true;});
+      // Measure the completed layout, including font/layout changes queued by
+      // the source switch. The visibility and position assertions stay strict.
+      await page.evaluate(async () => {
+        await document.fonts.ready;
+        await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+      });
       const state = await page.evaluate(() => {
         const visible = el => !!el && el.checkVisibility({checkVisibilityCSS:true});
         const pairs = [...document.querySelectorAll('#lesson .cts-text-pair, main .cts-text-pair')].filter(e => e.querySelector(':scope > .cts-source') && visible(e));

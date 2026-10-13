@@ -68,7 +68,7 @@ body.lang-es .lang-en { display: none; } body.lang-es .lang-es { display: inline
 </div>
 
 <div class="cts-textbook-link" style="max-width:1100px;margin:12px auto 0;padding:10px 14px;background:#fbf6ea;border:1px solid #d8c8a8;border-radius:10px;font:15px/1.5 Georgia,serif">
-  📘 <strong><span class="lang-en">Textbook for this course</span><span class="lang-es">Libro de texto de este curso</span></strong><span class="lang-en"> — optional test, not yet a Master's requirement: </span><span class="lang-es"> — examen opcional, todavía no obligatorio para maestría: </span><a href="CTSTextbookChristianEthics.html"><span class="lang-en">Alexander, Christianity and Ethics (assigned excerpts)</span><span class="lang-es">Cristianismo y ética, de Alexander (fragmentos asignados)</span></a> &nbsp;·&nbsp; <a href="CTSTextbookChristianEthicsTest.html"><span class="lang-en">Textbook test</span><span class="lang-es">Examen del libro</span></a>
+  📘 <strong><span class="lang-en">Textbook for this course</span><span class="lang-es">Libro de texto de este curso</span></strong><span class="lang-en"> — Master’s test after activation; see the test page: </span><span class="lang-es"> — examen de maestría después de su activación; consulte la página del examen: </span><a href="CTSTextbookChristianEthics.html"><span class="lang-en">Alexander, Christianity and Ethics (assigned excerpts)</span><span class="lang-es">Cristianismo y ética, de Alexander (fragmentos asignados)</span></a> &nbsp;·&nbsp; <a href="CTSTextbookChristianEthicsTest.html"><span class="lang-en">Textbook test</span><span class="lang-es">Examen del libro</span></a>
 </div>
 
 <div class="card reg-form" id="regCard">
@@ -230,7 +230,7 @@ document.getElementById('regBtn').onclick = function() {
     const name = document.getElementById('regName').value.trim();
     const email = document.getElementById('regEmail').value.trim();
     const track = document.getElementById('regTrack').value;
-    if (!name || !email) {
+    if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         document.getElementById('regStatus').innerHTML = "<span style='color:red'>Please fill all fields.</span>";
         return;
     }
@@ -765,5 +765,6 @@ checkLockouts();
   <script src="cts-curriculum.js?v=20260915a" defer></script>
 
 <div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1"><div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 Honors Readings &middot; Lecturas con Honores</div><div style="font-size:14px;line-height:1.5;margin-bottom:14px;">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.<br><span style="font-size:13px;">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div><a href="CTSEthicsReadings.html" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;">Open the Reading Room &rarr;<br><span style="font-size:12px;font-weight:400;">Abrir la Sala de Lecturas</span></a></div>
+<script src="/assets/js/cts-sync.js" defer></script>
 </body>
 </html>

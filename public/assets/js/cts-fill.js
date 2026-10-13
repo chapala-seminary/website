@@ -24,12 +24,9 @@
  *                  set its lock
  *   f.reset();              clear the answers
  *
- * A question may instead be multiple choice (the newer textbook exams, Dr.
- * Cook 11 Oct 2026): it carries options: { en: [four], es: [four] }, the same
- * choices in the same order in both languages, the answer among them. A click
- * on a choice is marked at once, like Check on a fill-in, and a wrong choice
- * shows the right answer. The choice is saved as its English text, so the
- * same fillRight() marks it.
+ * The widget retains compatibility with saved multiple-choice attempts, whose
+ * selected answer text is checked by the same fillRight(). Canonical textbook
+ * and assigned-reading banks use typed fill-ins.
  *
  * normalise(), bare() and fillRight() are cts-engine.js's own, word for word:
  * tools/verify-fill-single.mjs fails if they drift apart.
@@ -143,7 +140,11 @@
       qs.forEach(function (q, i) {
         var given = review ? review[i] : st.fillAnswers[i];
         var done = !!review || st.fillChecked[i] || passed;
-        out += '<div class="cts-fill-q" data-cts-fill="' + i + '"><p>' + bi({ en: (i + 1) + ". " + esc(q.prompt.en), es: (i + 1) + ". " + esc(q.prompt.es), fr: (i + 1) + ". " + esc(q.prompt.fr || q.prompt.en) }) + "</p>";
+        var prompt = { en: (i + 1) + ". " + esc(q.prompt.en), es: (i + 1) + ". " + esc(q.prompt.es) };
+        // An English fallback is source text, not a French translation.
+        // Omit the missing target so CTSLanguage does not duplicate it.
+        if (q.prompt.fr) prompt.fr = (i + 1) + ". " + esc(q.prompt.fr);
+        out += '<div class="cts-fill-q" data-cts-fill="' + i + '"><p>' + bi(prompt) + "</p>";
         if (q.options) {
           q.options.en.forEach(function (opt, k) {
             var chosen = done && given === opt, right = fillRight(q, opt, fillCodes());
