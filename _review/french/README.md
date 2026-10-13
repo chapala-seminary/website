@@ -1,8 +1,8 @@
 # French drafts — beta publication and review packets
 
-Machine drafts of fourteen courses (161 packets, including the WiseSpeak page frame) in French, for pastors in Kinshasa (DR Congo).
-The first ten courses (115 packets) are published on beta. The four Batch 2 courses
-(46 packets) remain review-only drafts and are not imported or displayed on the site.
+Machine drafts of twenty-six courses (301 packets, including the WiseSpeak page frame) in French, for pastors in Kinshasa (DR Congo).
+The first ten courses (115 packets) are published on beta. The sixteen Batch 2–5 courses
+(186 packets) remain review-only drafts and are not imported or displayed on the site.
 Old Testament Survey was drafted separately as the pilot (see `docs/french-pilot.md`).
 Robert authorized beta publication of the first ten courses on 12 October. Nine courses
 are imported into canonical `src/content`; WiseSpeak uses these packets in its
@@ -85,7 +85,7 @@ fix). Do not edit the files directly.
 - Review by a French-speaking reader with theological training.
 - Human review of the published beta drafts and subsequent corrections.
   Collection imports are marked `machine` with source hashes; the CMS config is regenerated.
-- Review and a separate import/publication change for the four Batch 2 courses.
+- Review and a separate import/publication change for the sixteen Batch 2–5 courses.
 - WiseSpeak is still the single-page `public/CTS_WiseSpeak_Preaching.html`, so its block ids
   are sequence numbers within this packet, not lesson-data ids.
 
@@ -115,9 +115,17 @@ Both packet formats can be checked with either entry point:
 
 Both return a nonzero exit status on an error. All 115 packets passed after the validator repair. This checks structure and grading, not theological accuracy. The English corrections in PR #65 postdate the source packets. The beta importer applies explicit corrections to the published NT Survey and Evangelism fields while retaining the original packets as review history. See `docs/beta-staging-review-2026-10-12.md`.
 
-The additional 46 Batch 2 packets also pass the repaired `tools/validate.py`
-validator with 27 warnings and no errors. No French short-answer prompt passes
-its own keywords. These checks do not establish French theological approval.
+All 301 packets, including the 186 Batch 2–5 units, pass the repaired validator.
+It supports both original list-form blocks and newer block dictionaries, and
+both English keyword field names. Genesis requires eight French keyword groups
+when the source has none. WiseSpeak retains its legacy empty packet keywords;
+its French build supplies grading keys from `tools/data/french-wisespeak-keywords.json`.
+No Batch 2–5 French short-answer prompt passes its own keywords. These checks
+do not establish French theological approval.
+
+Run the compatibility and packet regression checks with:
+
+    python3 _review/french/tools/test_validate.py
 
 ## Batch 3 (12 Oct 2026)
 

@@ -47,9 +47,15 @@ def tags(s):
     return Counter(m.group(0) if m.group(1).lower() in ('a', 'img') else '<' + ('/' if m.group(0)[1] == '/' else '') + m.group(1).lower() + '>' for m in TAG.finditer(s or ''))
 
 def main(srcp, frp):
-    S = json.load(open(srcp)); F = json.load(open(frp))
+    with open(srcp, encoding="utf-8") as source_file, open(frp, encoding="utf-8") as draft_file:
+        S = json.load(source_file)
+        F = json.load(draft_file)
     err, warn = [], []
     fb = F.get('blocks', {})
+    if isinstance(fb, list):
+        ids = [b.get('id') for b in fb]
+        if len(set(ids)) != len(ids): err.append('duplicate French block ids')
+        fb = {b.get('id'): b.get('fr') for b in fb}
     for b in S['blocks']:
         t = fb.get(b['id'])
         if not isinstance(t, str) or not t.strip():
@@ -84,10 +90,15 @@ def main(srcp, frp):
             warn.append(f'fill{i}: answer appears elsewhere in the prompt')
     for i, (s, f) in enumerate(zip(S['sa'], F.get('sa', [])), 1):
         ks, m = f.get('keywords') or [], f.get('model') or ''
-        if s['keywords_en'] and len(ks) != len(s['keywords_en']):
-            err.append(f"sa{i}: {len(ks)} keyword groups, English has {len(s['keywords_en'])}")
-        if not s['keywords_en'] and len(ks) != 8:
-            err.append(f"sa{i}: English has no keywords; French needs 8 groups (has {len(ks)})")
+        source_keywords = s.get('keywords_en', s.get('keywords', [])) or []
+        if source_keywords and len(ks) != len(source_keywords):
+            err.append(f"sa{i}: {len(ks)} keyword groups, English has {len(source_keywords)}")
+        # WiseSpeak packets omit the page's grading keys; its build supplies
+        # those from tools/data/french-wisespeak-keywords.json. Preserve the
+        # packet's empty groups rather than applying the Genesis draft rule.
+        expected = 0 if S.get('course') == 'WiseSpeak' else 8
+        if not source_keywords and len(ks) != expected:
+            err.append(f"sa{i}: English has no keywords; French needs {expected} groups (has {len(ks)})")
         for k in ks:
             for form in (k if isinstance(k, list) else [k]):
                 n = normalise(form).strip()
