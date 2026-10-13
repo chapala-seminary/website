@@ -9,7 +9,7 @@ try{
  const email=await request('/api/email/start','POST',{code,email:'language-test@example.test',lang:'fr'});assert.equal(email.sent,true);assert.ok(email.devCode,'local fixture must not send a real email');s=await request('/api/student/'+code);assert.equal(s.student.lang,'fr');
  // The French link opens the French page, and names the choice so a device that remembers English does not redirect it.
  assert.match(email.devLink,/\/fr\/cts-confirm-email\.html\?cts_lang=fr#token=[0-9a-f]{64}$/);
- code2=(await request('/api/register','POST',{name:'Language Preference Test EN',track:'cert',lang:'en'})).code;
+ code2=(await request('/api/register','POST',{name:'Language Preference Test EN',email:'language-test-en@example.test',track:'cert',lang:'en'})).code;
  const english=await request('/api/email/start','POST',{code:code2,email:'language-test-en@example.test'});
  assert.match(english.devLink,/\/cts-confirm-email\.html#token=/);assert.ok(!english.devLink.includes('cts_lang'));
  // The French verification page: French only, and its form stays French.

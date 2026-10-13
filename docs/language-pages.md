@@ -22,7 +22,10 @@ remains outside the language label or quotation.
 If storage rejects the write, the explicit URL choice is retained for reloads. Other parameters and
 the fragment survive. Language links use that override even without script.
 A remembered language redirects old English links to the matching language
-page. `cts_show_source` stores the independent source visibility preference.
+page. A `/es/` or `/fr/` address is itself an explicit choice: it is never
+redirected away (a French email link opens in French on a device that
+remembers English) and becomes the remembered choice. Spanish and French
+email links also carry `?cts_lang=`. `cts_show_source` stores the independent source visibility preference.
 A stored `cts_lang=both` migrates to Spanish with source on. Old controls that
 never stored their Both mode left no preference that can be recovered.
 
