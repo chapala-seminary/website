@@ -34,6 +34,37 @@ ok(/jsPDF/.test(fs.readFileSync('public/assets/vendor/jspdf.umd.min.js', 'utf8')
 // ---- building PDFs ------------------------------------------------------------------
 const browser = await chromium.launch(CHROME ? { executablePath: CHROME } : {});
 
+// The full-width PDF controls must wrap below the NT certificate, not force
+// the non-wrapping flex row off screen. Check all three awards and languages.
+for (const width of [1280, 390]) {
+  for (const lang of ['en', 'es', 'fr']) {
+    const ctx = await browser.newContext({ viewport: { width, height: 900 } });
+    await ctx.addInitScript(() => {
+      localStorage.setItem('cts_student', JSON.stringify({ name: 'Certificate Layout Test', track: 'cert' }));
+      localStorage.setItem('cts_track', 'cert');
+      localStorage.setItem('cts_nt_progress', JSON.stringify(Object.fromEntries(
+        Array.from({ length: 12 }, (_, i) => ['unit' + (i + 1), true]))));
+    });
+    const p = await ctx.newPage();
+    for (const name of ['CTSNTCertificate.html', 'CTSNTMDivCertificate.html', 'CTSNTThMCertificate.html']) {
+      await p.goto(`${BASE}/${lang === 'en' ? '' : lang + '/'}${name}`, { waitUntil: 'load' });
+      await p.waitForSelector('#cts-cert-pdf');
+      const geometry = await p.evaluate(async () => {
+        await document.fonts.ready;
+        const c = document.querySelector('.certificate').getBoundingClientRect();
+        const controls = document.querySelector('#cts-cert-pdf').getBoundingClientRect();
+        return { left: c.left, right: c.right, bottom: c.bottom, controlsTop: controls.top,
+          scroll: document.documentElement.scrollWidth, width: innerWidth };
+      });
+      ok(geometry.left >= -1 && geometry.right <= width + 1 && geometry.scroll <= width + 1,
+        `${name}/${lang}/${width}: certificate remains inside viewport`, JSON.stringify(geometry));
+      ok(geometry.controlsTop >= geometry.bottom - 1,
+        `${name}/${lang}/${width}: PDF controls appear below certificate`, JSON.stringify(geometry));
+    }
+    await ctx.close();
+  }
+}
+
 /* Open a certificate page with a student in storage and build its PDF through
    the page's own code, catching the bytes instead of saving a file. */
 async function build(page, lang, seed, verify) {

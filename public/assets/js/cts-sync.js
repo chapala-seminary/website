@@ -5,7 +5,7 @@
  * someone's degree. It is deliberately incapable of making the site worse:
  *
  *   - it never removes anything from localStorage, only adds
- *   - every call is wrapped; a failed request is dropped, never surfaced
+ *   - every call is wrapped; failed registration offers a clear retry
  *   - if the API is unreachable, unconfigured, or slow, nothing on the page
  *     waits for it and nothing changes
  *   - it sends only what the student already stored in their own browser
@@ -195,7 +195,24 @@
   }
 
   // ---- writing the server's view back, additively only --------------------
+  function applyPolicy(state) {
+    if (!state || !state.requiredFrom) return;
+    var dates = {};
+    Object.keys(state.requiredFrom).forEach(function (slug) {
+      var date = state.requiredFrom[slug];
+      if (typeof date === 'string' && !isNaN(Date.parse(date))) dates[slug] = date;
+    });
+    set('cts_required_from', JSON.stringify(dates));
+    var notice = document.getElementById('cts-master-requirements');
+    if (Object.keys(dates).length) {
+      if (!notice) { notice = document.createElement('aside'); notice.id = 'cts-master-requirements'; notice.className = 'card'; document.body.prepend(notice); }
+      var words = { en: 'M.Div. and Th.M.: complete the course units, the textbook test and the separate required-reading test. Each test needs 18 correct answers out of 20. Valid master’s completions recorded before activation remain valid. Certificate and Associate students do not need either test. Honors reading is optional and does not replace the tests.', es: 'M.Div. y Th.M.: complete las unidades, el examen del libro y el examen separado de lecturas requeridas. Cada examen exige 18 respuestas correctas de 20. Las finalizaciones de maestría válidas registradas antes de la activación siguen siendo válidas. Certificado y Asociado no necesitan estos exámenes. La lectura para honores es opcional y no sustituye los exámenes.', fr: 'M.Div. et Th.M. : terminez les unités, le test du manuel et le test distinct des lectures obligatoires. Chaque test exige 18 réponses correctes sur 20. Les validations de maîtrise valides enregistrées avant l’activation restent valides. Les parcours Certificat et Associate n’exigent pas ces tests. La lecture pour la mention d’honneur est facultative et ne remplace pas les tests.' };
+      notice.innerHTML = window.CTSLanguage ? window.CTSLanguage.bi(words) : words.en;
+    } else if (notice) notice.remove();
+    document.dispatchEvent(new CustomEvent('cts-sync-applied'));
+  }
   function apply(state) {
+    applyPolicy(state);
     if (!state || !state.student) return;
     var local = parse(get('cts_student'), {}) || {};
     // The server's copy fills gaps; it does not overwrite what this browser
@@ -361,8 +378,9 @@
         }),
       }).then(function (r) {
         if (r.status === 409) { set(EXISTING_KEY, who(snap.student)); showExisting(); return null; }
-        return r.ok ? r.json().catch(function () { return null; }) : null;
-      }, function () { return null; }).then(function (r) {
+        if (!r.ok) throw new Error('registration');
+        return r.json();
+      }).then(function (r) {
         if (!r || !r.code) return null;
         set(CODE_KEY, r.code);
         try { localStorage.removeItem(EXISTING_KEY); localStorage.removeItem(SEPARATE_KEY); } catch (e) {}
@@ -374,10 +392,46 @@
       return send('/sync', { code: c, student: snap.student, progress: snap.progress,
                              doneCodes: snap.doneCodes, completionTracks: snap.completionTracks, lang: snap.lang });
     }).then(function (state) {
-      if (state) { apply(state); lastDigest = digest(snapshot()); }
+      if (state) {
+        apply(state); lastDigest = digest(snapshot());
+        var problem = document.getElementById('cts-registration-problem');
+        if (problem) problem.remove();
+      }
       return state;
-    }).catch(function () { return null; })
+    }).catch(function () { showRegistrationProblem(snap.student); return null; })
       .then(function (r) { inFlight = false; return r; });
+  }
+
+  function showRegistrationProblem(student) {
+    if (!document.body || document.getElementById('cts-registration-problem')) return;
+    var note = document.createElement('section');
+    note.id = 'cts-registration-problem'; note.className = 'card';
+    note.setAttribute('role', 'alert');
+    var missing = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(student.email || '');
+    var words = missing
+      ? { en: 'Add a valid email address to keep your progress with the seminary and receive your student code. Your work in this browser is still saved.', es: 'Añada un correo válido para guardar su progreso en el seminario y recibir su código de estudiante. Su trabajo en este navegador sigue guardado.', fr: 'Ajoutez une adresse courriel valide pour conserver votre progression au séminaire et recevoir votre code étudiant. Votre travail dans ce navigateur reste enregistré.' }
+      : { en: 'We could not save your registration with the seminary. Your work is saved in this browser. Please try again.', es: 'No pudimos guardar su registro en el seminario. Su trabajo está guardado en este navegador. Inténtelo de nuevo.', fr: 'Nous n’avons pas pu enregistrer votre inscription au séminaire. Votre travail est enregistré dans ce navigateur. Réessayez.' };
+    var text = window.CTSLanguage ? window.CTSLanguage.bi(words) : words.en;
+    note.innerHTML = '<p>' + text + '</p>';
+    if (missing) {
+      var input = document.createElement('input');
+      input.type = 'email'; input.autocomplete = 'email'; input.required = true;
+      input.setAttribute('aria-label', window.CTSLanguage?.lang === 'fr' ? 'Adresse courriel' : window.CTSLanguage?.lang === 'es' ? 'Correo electrónico' : 'Email');
+      note.appendChild(input);
+    }
+    var retry = document.createElement('button'); retry.type = 'button'; retry.className = 'btn';
+    var labels = { en: missing ? 'Save email and retry' : 'Try again', es: missing ? 'Guardar correo y reintentar' : 'Reintentar', fr: missing ? 'Enregistrer et réessayer' : 'Réessayer' };
+    retry.innerHTML = window.CTSLanguage ? window.CTSLanguage.bi(labels) : labels.en;
+    retry.addEventListener('click', function () {
+      var input = note.querySelector('input');
+      if (input) {
+        if (!input.reportValidity()) return;
+        var st = parse(get('cts_student'), {}); st.email = input.value.trim();
+        set('cts_student', JSON.stringify(st));
+      }
+      note.remove(); syncOnce(true);
+    });
+    note.appendChild(retry); document.body.prepend(note);
   }
 
   /* Restore a record onto this device from a student code. This is the whole
@@ -481,6 +535,7 @@
 
   // ---- when to sync --------------------------------------------------------
   function schedule() {
+    fetch(API + '/health', { credentials: 'omit' }).then(function (r) { return r.ok ? r.json() : null; }).then(applyPolicy).catch(function () {});
     syncOnce(true);
     setInterval(function () { if (!document.hidden) syncOnce(false); }, POLL_MS);
     // A student who passes a unit and immediately closes the tab is exactly

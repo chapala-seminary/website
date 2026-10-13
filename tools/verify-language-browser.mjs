@@ -32,6 +32,12 @@ async function worker() {
         if (await page.evaluate(() => document.body.dataset.showSource) !== 'true') fails.push(`${label}: source switch did not enable source display`);
       }
       await page.evaluate(() => {for (const d of document.querySelectorAll('details')) d.open = true;});
+      // Measure the completed layout, including font/layout changes queued by
+      // the source switch. The visibility and position assertions stay strict.
+      await page.evaluate(async () => {
+        await document.fonts.ready;
+        await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+      });
       const state = await page.evaluate(() => {
         const visible = el => !!el && el.checkVisibility({checkVisibilityCSS:true});
         const pairs = [...document.querySelectorAll('#lesson .cts-text-pair, main .cts-text-pair')].filter(e => e.querySelector(':scope > .cts-source') && visible(e));
@@ -39,7 +45,7 @@ async function worker() {
         const a = pair?.querySelector(':scope > .cts-reading')?.getBoundingClientRect();
         const b = pair?.querySelector(':scope > .cts-source')?.getBoundingClientRect();
         const exam = !!pair?.closest('.question, #kwContainer, .cts-fill-q');
-        return {showSource:document.body.dataset.showSource === "true", lang:document.documentElement.lang, wide:document.documentElement.scrollWidth-innerWidth,
+        return {bodyVisible:visible(document.body) && document.body.getBoundingClientRect().height > 0, showSource:document.body.dataset.showSource === "true", lang:document.documentElement.lang, wide:document.documentElement.scrollWidth-innerWidth,
           badExamSources:pairs.filter(e => e.closest('.question, #kwContainer, .cts-fill-q')).filter(e => {
             const reader = e.querySelector(':scope > .cts-reading').getBoundingClientRect(), source = e.querySelector(':scope > .cts-source').getBoundingClientRect();
             return source.top < reader.bottom-1;
@@ -48,6 +54,7 @@ async function worker() {
           below:!a || !b || b.top >= a.bottom-1, beside:!a || !b || b.left >= a.right-1, exam, controls:document.querySelectorAll('[data-cts-lang]').length,
           wrong:[...document.querySelectorAll('.cts-reading')].filter(e=>visible(e)&&![document.body.dataset.sourceLang,document.body.dataset.pageLang].includes(e.getAttribute('lang'))).length};
       });
+      if (!state.bodyVisible) fails.push(`${label}: page body is hidden or empty`);
       if (state.lang !== lang || state.controls !== 3) fails.push(`${label}: language or controls ${JSON.stringify(state)}`);
       if (state.wide > 1) fails.push(`${label}: sideways scroll ${state.wide}px`);
       // Fallback pages can have translated dynamic controls but a disabled

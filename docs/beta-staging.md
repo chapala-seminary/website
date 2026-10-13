@@ -28,3 +28,7 @@ Then open a separate PR from `beta` to `main`. Review the complete change and re
 ## October 12 integration
 
 See [the PR review record](beta-staging-review-2026-10-12.md) for all 31 original heads, repairs, content-review boundaries and validation evidence.
+
+## Master’s requirements after the 12 October audit
+
+[Beta activation](beta-master-test-activation.md) records the cutoff in beta when the repaired release is deployed, preserving earlier valid master’s completions. The guarded deploy prepares only the activation metadata migration, then checks all 79 newly activated requirements. Production needs a separately chosen date before promotion.
