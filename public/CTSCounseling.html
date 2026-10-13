@@ -2208,13 +2208,21 @@ document.getElementById('saveRegBtn').addEventListener('click',()=>{
   const email = document.getElementById('studentEmail').value.trim();
   const country = document.getElementById('studentCountry').value.trim();
   const track = document.getElementById('programTrack').value;
-  if(!name||!email||!country){
+  if(!name||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||!country){
     alert(document.body.classList.contains('spanish')?'Por favor complete todos los campos':'Please complete all fields');
     return;
   }
   const trackChanged = state.registration && state.registration.track !== track;
   state.registration = {name,email,country,track};
   saveState();
+  // Keep this legacy form connected to the shared recoverable student record.
+  try {
+    const shared = JSON.parse(localStorage.getItem('cts_student') || 'null') || {};
+    const sharedTrack = track === 'mtheol' ? 'thm' : track;
+    localStorage.setItem('cts_student', JSON.stringify({...shared, name, email, country, track: sharedTrack}));
+    localStorage.setItem('cts_track', sharedTrack);
+    if(window.CTS_SYNC) window.CTS_SYNC.sync();
+  } catch(e) {}
   renderRegStatus();
   // If the track changed (or first-time registration), re-render each quiz so essay
   // visibility matches the new track without requiring a page reload.
@@ -2700,5 +2708,6 @@ updateProgress();
 </script>
   <script src="cts-track.js" defer></script>
   <script src="cts-curriculum.js?v=20260915a" defer></script>
+<script src="/assets/js/cts-sync.js" defer></script>
 </body>
 </html>

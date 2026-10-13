@@ -1,8 +1,10 @@
-# French drafts — staging publication
+# French drafts — beta publication and review packets
 
-Machine drafts of ten courses (115 packets, including the WiseSpeak page frame) in French, for pastors in Kinshasa (DR Congo).
-Old Testament Survey, the seventh, was drafted earlier as the pilot (see `docs/french-pilot.md`).
-Robert authorized beta publication of these drafts on 12 October. Nine courses
+Machine drafts of twenty-six courses (301 packets, including the WiseSpeak page frame) in French, for pastors in Kinshasa (DR Congo).
+The first ten courses (115 packets) are published on beta. The sixteen Batch 2–5 courses
+(186 packets) remain review-only drafts and are not imported or displayed on the site.
+Old Testament Survey was drafted separately as the pilot (see `docs/french-pilot.md`).
+Robert authorized beta publication of the first ten courses on 12 October. Nine courses
 are imported into canonical `src/content`; WiseSpeak uses these packets in its
 French build. See `docs/french-beta-publication.md` for editing and provenance.
 
@@ -23,6 +25,22 @@ decisions Dr. Cook needs to make for the whole French edition.
 | `CTSPent` | Le Pentateuque (Pentateuch) | 1–12 |
 | `CTSJosh` | Cours intensif sur Josué (Joshua Intensive) | 1–10 |
 | `CTSPsalms` | Le livre des Psaumes (Psalms) | 1–12 |
+| `CTSJohn` | L'Évangile de Jean (Gospel of John) | 1–12 |
+| `CTSMatt` | Cours intensif sur Matthieu (Matthew Intensive) | 1–13 |
+| `CTSActs` | Cours intensif sur les Actes (Acts Intensive) | 1–11 |
+| `CTSRomans` | L'Épître aux Romains (Romans) | 1–10 |
+| `CTSLOC` | La vie du Christ (Life of Christ) | 1–10 |
+| `CTS1Peter` | Cours intensif sur 1 Pierre (1 Peter Intensive) | 1–12 |
+| `CTSGalatians` | Cours intensif sur Galates (Galatians Intensive) | 1–12 |
+| `CTSRev` | Cours intensif sur l'Apocalypse (Revelation Intensive) | 1–15 |
+| `CTSRE` | Ruth et Esther (Ruth and Esther) | 1–9 |
+| `CTSGenesis` | Cours intensif sur la Genèse (Genesis Intensive) | 1–12 |
+| `CTSBibleCharacters` | Personnages de la Bible (Bible Characters) | 1–12 |
+| `CTSBibleCharacters2` | Personnages de la Bible II (Bible Characters II) | 1–11 |
+| `CTSParables` | Les paraboles de la Bible (Parables of the Bible) | 1–15 |
+| `CTSHS` | La doctrine du Saint-Esprit (The Doctrine of the Holy Spirit) | 1–10 |
+| `CTSPentecostal` | Le pentecôtisme et le mouvement charismatique | 1–12 |
+| `CTSApol` | Apologétique (Apologetics) | 1–10 |
 
 Each unit has three files:
 
@@ -67,6 +85,7 @@ fix). Do not edit the files directly.
 - Review by a French-speaking reader with theological training.
 - Human review of the published beta drafts and subsequent corrections.
   Collection imports are marked `machine` with source hashes; the CMS config is regenerated.
+- Review and a separate import/publication change for the sixteen Batch 2–5 courses.
 - WiseSpeak is still the single-page `public/CTS_WiseSpeak_Preaching.html`, so its block ids
   are sequence numbers within this packet, not lesson-data ids.
 
@@ -80,6 +99,13 @@ text itself is not committed, see the script). Each unit passes `tools/validate.
 own keywords), then had an independent second check. `tools/BRIEF.md` holds the
 translation rules and the edition-wide conventions Dr. Cook settled on 12 Oct.
 
+## Batch 2 (12 Oct 2026)
+
+John, Matthew, Acts and Romans (46 units), made and checked the same way as batch 1.
+Start with **BATCH2-FINDINGS.md**. These are new translations of existing courses.
+The Batch 2 PR does not change the earlier Batch 1 packets. These four courses
+remain review-only until a separate import/publication change.
+
 ## Technical staging review (12 October)
 
 Both packet formats can be checked with either entry point:
@@ -88,3 +114,33 @@ Both packet formats can be checked with either entry point:
     python3 _review/french/check_french.py COURSE-unitN-source.json COURSE-unitN-fr.json
 
 Both return a nonzero exit status on an error. All 115 packets passed after the validator repair. This checks structure and grading, not theological accuracy. The English corrections in PR #65 postdate the source packets. The beta importer applies explicit corrections to the published NT Survey and Evangelism fields while retaining the original packets as review history. See `docs/beta-staging-review-2026-10-12.md`.
+
+All 301 packets, including the 186 Batch 2–5 units, pass the repaired validator.
+It supports both original list-form blocks and newer block dictionaries, and
+both English keyword field names. Genesis requires eight French keyword groups
+when the source has none. WiseSpeak retains its legacy empty packet keywords;
+its French build supplies grading keys from `tools/data/french-wisespeak-keywords.json`.
+No Batch 2–5 French short-answer prompt passes its own keywords. These checks
+do not establish French theological approval.
+
+Run the compatibility and packet regression checks with:
+
+    python3 _review/french/tools/test_validate.py
+
+## Batch 3 (12 Oct 2026)
+
+Life of Christ, 1 Peter, Galatians and Revelation (49 units), made and checked the same way.
+Start with **BATCH3-FINDINGS.md**. Life of Christ had no Spanish on the site; its French was made
+from the English alone.
+
+## Batch 4 (12 Oct 2026)
+
+Ruth and Esther, Genesis, Bible Characters I and II (44 units). Start with **BATCH4-FINDINGS.md**.
+The English Genesis short answers have no keywords (any answer passes); the French Genesis
+drafts have 8 keyword groups and a real model answer for each, written from the lesson.
+
+## Batch 5 (13 Oct 2026)
+
+Parables, Holy Spirit, Pentecostalism and Apologetics (47 units). Start with **BATCH5-FINDINGS.md**.
+Holy Spirit units 7–10 have scrambled English answer keys; the fix is pull request #83. The French
+options are in the same order, so the corrected keys serve the French too.

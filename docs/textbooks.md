@@ -54,12 +54,15 @@ master's completion the record held before it (`docs/reading-rooms.md`,
 
 Joshua (Blaikie), Galatians (Findlay), Romans (Moule), Evangelism (Torrey),
 1 Peter, John and Ruth–Esther have public-domain textbooks with a
-forty-question test each. Their tests are **multiple choice** (four choices,
-in both languages; marked the moment one is clicked, with the right answer
-shown when it is wrong): each question carries `options {en, es}`, and
-`src/content.config.ts` refuses a question whose answer is not among its
-choices at the same place in both languages. The nine original textbooks and
-the reading tests stay fill-in-the-blank (Dr. Cook: adjust only the new ones).
+forty-question typed fill-in-the-blank test each. The 12 October beta audit
+repairs convert all 36 newer banks to the same typed format as the original
+nine: twenty drawn, eighteen to pass, immediate checking, and the existing
+wait after failure. The schema rejects multiple-choice fields in textbook
+and reading banks. Prompts, bilingual primary keys, chapter grouping and
+stored pass identifiers are preserved. Existing valid passes stay valid.
+Capitalization, accents, punctuation and leading articles are handled by the
+shared grader; explicit accepted synonyms remain editable per question.
+
 
 Where the reading is: Joshua, Galatians and Romans link the full English book
 and the CTS Spanish assigned chapters (`files.html`); Evangelism (five
@@ -73,7 +76,7 @@ Claude): Acts (Stokes, five excerpts, Spanish newly translated in full where
 the package had a condensed adaptation), Revelation (Milligan, ten short
 excerpts -- the opening of ten chapters -- two questions drawn from each) and
 Psalms (Maclaren, five selections with the Psalm in his own rendering). Same
-standard: multiple choice, assigned readings on the book page. The
+standard: typed fill-in-the-blank, assigned readings on the book page. The
 Pentateuch textbook (`CTSTextbookPentateuch`, five excerpts from the
 Expositor's Bible on each book) is installed with two changes Dr. Cook asked
 for on 11 Oct, so as not to offend readers who take a very conservative
@@ -254,3 +257,7 @@ slug, page name, the course's catalog card, the bank file, the two titles).
 - Dr. Cook's changelog notes the Spanish books are not word-for-word
   translations of the English (sentences omitted in places) and recommends a
   parity review.
+
+## October beta audit conversion
+
+The 36 later banks now use typed fill-ins, with their chapter draws, answer keys and saved-pass identifiers preserved. Every supplied key and accepted variant is checked. Normalization also accepts changes in capitalization, punctuation, Latin accents and one leading article, preserving ñ. Five questions have explicit English/Spanish paraphrase or number variants added after reviewing their prompts; avoid inventing synonyms solely to reach an arbitrary variant count. Further content alternatives remain faculty-review work. Browser checks cover immediate feedback, reload, 17/20 failure, retake wait, 18/20 pass and preservation of older dated multiple-choice passes.

@@ -85,7 +85,10 @@ for (const file of files) {
       if (source) ok((reader?.querySelectorAll('h2').length || 0) <= 1, `${route}: source follows a whole digest instead of its paragraphs`);
     }
     if (lang === (lesson?.sourceLang || original.querySelector('body')?.getAttribute('data-source-lang') || 'en')) ok(!root.querySelector('#cts-show-source'), `${route}: no source switch on source page`);
-    if (lang === 'fr' && !root.querySelector('.cts-reading[lang="fr"]')) {
+    const translatedTeaching = lesson
+      ? root.querySelector('#lesson .cts-reading[lang="fr"][data-cts-block], #lesson [data-cts-block] .cts-reading[lang="fr"]')
+      : root.querySelector('.cts-reading[lang="fr"]');
+    if (lang === 'fr' && !translatedTeaching) {
       ok(!!root.querySelector('.cts-translation-pending'), `${route}: missing fallback notice`);
       ok(!!root.querySelector('meta[name="robots"][content="noindex,follow"]'), `${route}: untranslated fallback indexable`);
     }

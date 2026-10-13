@@ -134,3 +134,9 @@ Questions for Wayne, number of English-source problems. Nothing more.
    is weaker.
 11. Verse numbers follow the English/NKJV numbering (the offline Segond uses it too),
    including Psalm titles.
+12. If the English short answer has NO keywords (keywords_en null, as in Genesis) or a
+   placeholder model answer: write 8 French keyword groups in `keywords` and a real
+   model answer from the lesson, and note it once in the review file. (Never use a
+   separate `keywords_proposed` field.)
+13. "Master's track" = "Parcours Master" (not "parcours de maîtrise"/"de master"), matching
+   "Parcours Certificat".

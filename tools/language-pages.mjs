@@ -64,7 +64,10 @@ export function buildLanguagePages(dir) {
       if (lang === 'fr' && file === 'index.html') frenchLanding(root);
       root = parse(localizeMarkup(root.toString(), lang, sourceLang), { comment: true, parseNoneClosedTags: true });
       const b = root.querySelector('body'), h = root.querySelector('head');
-      const translated = lang === sourceLang || !!root.querySelector(`.cts-reading[lang="${lang}"]:not([data-cts-fallback])`);
+      // Translated registration labels do not mean the course lesson is translated.
+      const translated = lang === sourceLang || (lesson
+        ? lesson.blocks.some(block => !!block.text[lang])
+        : !!root.querySelector(`.cts-reading[lang="${lang}"]:not([data-cts-fallback])`));
       const complete = lang === sourceLang || (lesson
         ? lesson.blocks.filter(block => block.text[sourceLang]).every(block => !!block.text[lang])
         : !root.querySelector('[data-cts-fallback]'));

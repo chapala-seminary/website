@@ -77,6 +77,9 @@ for (const [name, c] of [['production', prod], ['beta', prod.env?.beta]]) {
   ok((c.triggers?.crons || []).length === 1, `${name}: one daily scheduled run, for the notes to students`,
     `found ${JSON.stringify(c.triggers?.crons)}`);
 }
+ok(prod.env?.beta?.vars?.MASTER_TESTS_ACTIVATION === 'beta', 'beta records the new master test activation cutoff once');
+ok(prod.vars?.MASTER_TESTS_ACTIVATION !== 'beta', 'production never takes the beta activation cutoff');
+ok(!prod.vars?.MASTER_TESTS_ACTIVATION || !Number.isNaN(Date.parse(prod.vars.MASTER_TESTS_ACTIVATION)), 'production activation is unset or a separate valid date');
 /* Beta answers at beta.chapalaseminary.org, the address the staff pages'
    Access rule covers; production takes no address from this file until the
    cutover changes that on purpose (docs/cutover.md, step 7). */

@@ -179,7 +179,8 @@
        completion the record held before it was. Only said; the test can
        still be taken, and a pass is kept as any pass is. */
     function standing() {
-      if ("requiredFrom" in T && T.requiredFrom == null)
+      var active = {}; try { active = JSON.parse(lsGet("cts_required_from") || "{}"); } catch (e) {}
+      if ("requiredFrom" in T && T.requiredFrom == null && !active[slug])
         return bi({ en: "This test is being introduced and is not yet required on any track.",
                     es: "Este examen se está introduciendo y aún no es obligatorio en ningún trayecto." });
       if (lsGet("cts_textbook_" + slug + "_exempt"))
@@ -275,6 +276,7 @@
     el("tb-submit").addEventListener("click", submit);
     el("tb-reset").addEventListener("click", reset);
     mount();
+    document.addEventListener("cts-sync-applied", renderStatus);
 
     window.CTS_TEXTBOOK = { submit: submit, reset: reset, state: function () { return state; }, draw: function () { return state.draw.slice(); } };
   }

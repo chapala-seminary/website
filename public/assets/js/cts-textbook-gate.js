@@ -41,8 +41,10 @@
   function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function counts(t) {
     if (!("requiredFrom" in t)) return true;
-    if (t.requiredFrom == null) return false;
-    var from = Date.parse(t.requiredFrom);
+    var dates = {}; try { dates = JSON.parse(get("cts_required_from") || "{}"); } catch (e) {}
+    var raw = dates[t.slug] || t.requiredFrom;
+    if (raw == null) return false;
+    var from = Date.parse(raw);
     if (isNaN(from) || Date.now() < from) return false;
     return !get("cts_textbook_" + t.slug + "_exempt");
   }
