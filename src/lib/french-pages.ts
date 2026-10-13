@@ -35,8 +35,10 @@ export function frenchPageUnits(root: HTMLElement) {
     if (node.closest('script,style,[data-cts-legacy-control],.langbtn,#langToggle')) continue;
     const lang = markedLanguage(node);
     if (lang === 'en' && !hasMarkedAncestor(node)) {
-      const next = node.nextElementSibling;
-      if (next && markedLanguage(next) === 'fr') continue;
+      // Already French beside it (a layout's own lang-fr)?
+      let sib = node.nextElementSibling, hasFr = false;
+      while (sib && markedLanguage(sib) !== 'en') { if (markedLanguage(sib) === 'fr') { hasFr = true; break; } sib = sib.nextElementSibling; }
+      if (hasFr) continue;
       const key = norm(node.innerHTML);
       if (key && /[A-Za-z]/.test(node.text)) units.push({ node, key, kind: 'marked' });
     } else if (!lang && !hasMarkedAncestor(node)) {

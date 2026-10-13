@@ -11,7 +11,7 @@ import { frenchLanding } from '../src/lib/french-landing.ts';
 import { frenchWiseSpeak } from './french-wisespeak.mjs';
 import { frenchInterface } from '../src/lib/french-interface.ts';
 import { frenchPage, fallbackNotice, frenchTypography } from '../src/lib/french-pages.ts';
-import { frenchTitle } from '../src/lib/french-titles.ts';
+import { frenchTitle, frCompletionNames } from '../src/lib/french-titles.ts';
 
 const SITE = 'https://chapalaseminary.org';
 export const REFERENCE = '.astro/language-base';
@@ -115,6 +115,9 @@ export function buildLanguagePages(dir) {
       // Language script must run before any legacy page initialization.
       for (const script of root.querySelectorAll('script[src]')) if (/\/cts-lang\.js(?:\?|$)|^cts-lang\.js(?:\?|$)/.test(script.getAttribute('src'))) script.remove();
       b.insertAdjacentHTML('afterbegin', '<script src="/cts-lang.js"></script>');
+      // The degree pages list courses by completion code; give them French names.
+      if (lang === 'fr' && root.querySelector('script[src*="cts-cert-names"]'))
+        b.insertAdjacentHTML('afterbegin', `<script>window.CTS_COURSE_NAMES_FR=${JSON.stringify(frCompletionNames()).replace(/</g, '\\u003c')};</script>`);
       if (lang === 'fr') frenchTypography(root);
       const target = path.join(dir, lang === 'en' ? '' : lang, file);
       fs.mkdirSync(path.dirname(target), { recursive: true });

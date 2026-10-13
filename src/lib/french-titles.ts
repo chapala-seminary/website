@@ -91,3 +91,15 @@ export function frenchCourseEntries(): Set<string> {
   }
   return out;
 }
+
+/* French course names by completion code (worker/catalog.json), for the
+   degree pages' lists of courses (CTS_COURSE_NAMES has English and Spanish). */
+const CERT_COURSE: Record<string, string> = { CTSOTS: 'CTS', CTSNarrativePreaching: 'CTS_Narrative_Preaching', CTSPreaching: 'CTS_WiseSpeak_Preaching', ethics_certificate: 'ethics_unit01' };
+export function frCompletionNames(): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const [code, c] of Object.entries(json('worker/catalog.json').completions as Record<string, { page: string }>)) {
+    const base = c.page === 'ethics_certificate.html' ? 'ethics_certificate' : c.page.replace(/(MDiv|ThM)?Certificate\.html$/, '');
+    out[code] = frCourse(CERT_COURSE[base] || base);
+  }
+  return out;
+}
