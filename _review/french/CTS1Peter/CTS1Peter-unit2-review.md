@@ -1,0 +1,510 @@
+# French review draft — Cours intensif sur 1 Pierre (1 Peter Intensive), Unit 2
+
+English source: CTS 1 Peter Intensive — Unit 2  
+Source: chapala-seminary/website at commit `0597da9` (src/content/lessons/CTS1Peter/2.json, src/content/units/CTS1Peter/2.json)  
+Status: **machine draft, checked by a second pass — NOT yet reviewed by a French theological reader.** Do not publish.
+
+Counts: 29 lesson blocks · 20 multiple choice · 10 fill-in · 10 short answer
+
+## 1. Questions for Wayne
+
+1. 1 Pierre 1:3: NKJV 'has begotten us again' is LSG « nous a régénérés ». I quoted LSG and added one sentence: the Greek means literally 'to beget again, to cause to be born a second time' (b011). MC 1 stem reads « nous a régénérés (fait naître de nouveau) ». OK?
+2. 1 Pierre 1:7: NKJV 'the genuineness of your faith' is LSG « l'épreuve de votre foi », and LSG orders the result « la louange, la gloire et l'honneur » (NKJV praise, honor, glory). I added a sentence on the Greek sense (what has been tested and proven genuine) and used the LSG order in MC 15. OK?
+3. 1 Pierre 1:9: NKJV 'receiving the end of your faith' is LSG « vous obtiendrez le salut de vos âmes pour prix de votre foi ». The lesson and MC 17 explain the word 'end'; I added « le texte grec dit littéralement : la fin de votre foi », and MC 17's stem mentions both « prix » and « fin ». OK?
+4. 1 Pierre 1:16: NKJV 'Be holy' is LSG future « Vous serez saints ». I added « Ce futur a ici la force d'un ordre : soyez saints. » OK?
+5. Philippiens 2:12: LSG « travaillez à votre salut » can sound like 'work to earn your salvation', the opposite of the lesson's point. I added that the Greek verb means « mettre en œuvre, mener à son terme » and used « mettre en œuvre » for 'work out' in b024 and MC 18. Is this acceptable theologically and pastorally?
+6. 1 Pierre 1:5 / b017: 'Their security does not rest on their own strength, but on His power' is rendered literally (« Leur sécurité ne repose pas sur leur propre force, mais sur sa puissance »), likewise SA 9 'secure no matter what the world does'. I did not strengthen or soften it, given that perseverance is an open question at CTS. Confirm the wording is acceptable.
+7. 'I am being saved' is rendered « je suis en train d'être sauvé ». It is clear but a little heavy; alternative « je suis sauvé jour après jour ». Preference?
+
+## Problems in the English source
+
+- SA 1, 4, 5, 6, 8 and 9: the English prompt by itself passes its own keywords (e.g. SA 1 'born', 'living', 'hope'; SA 6 'sanctif', 'holy', 'grace', 'effort'; SA 9 'hope', 'suffer', 'past', 'present', 'future'). The French prompts were reworded so they do not (convention 10).
+- MC 3, MC 6, SA 1 and SA 2 use the term 'Regeneration' (MC 6 and SA 2 as the name of the first picture), but the lesson never uses the word; it calls the first picture 'New birth'. In French LSG's « nous a régénérés » (1 Pierre 1:3) makes the link visible, and MC 6 reads « la régénération (la nouvelle naissance) ».
+- b015: 'It is Saul on the road to Damascus' is followed directly by Acts 3:19, which is Peter's sermon in Jerusalem, not Saul's conversion. A student may think the quotation is about Saul. Translated as is.
+- Fill 2 begins 'Like the forms of a verb', a comparison the lesson never makes (it only says 'three tenses'). Harmless; translated as « Comme un verbe que l'on conjugue ».
+- SA 8 model says the future salvation 'is the inheritance reserved in heaven'; the lesson does not equate the two (it links glorification to the 'salvation ready to be revealed' of v. 5). Minor; translated as is.
+
+## Adaptations for Congolese readers
+
+- 'highway' rendered « grande route » rather than a motorway image; fill 5 drops 'freeway' and accepts « route », « chemin », « autoroute », « grand chemin ».
+- 'maternity room' rendered « la maternité » (the hospital ward Congolese readers know).
+- Fill 3 blanks the whole phrase « marché aux esclaves » (French cannot blank 'slave' alone as an adjective); « esclaves » is also accepted.
+- Section heading b010 'Born Again to a Living Hope' rendered « Régénérés pour une espérance vivante » to echo LSG 1 Pierre 1:3.
+
+## 2. Bible quotations (Louis Segond 1910)
+
+Items marked **⚠** differ from the English (NKJV) wording in a way the lesson or exam depends on.
+
+- **⚠** **1 Pierre 1:3** — « Béni soit Dieu, le Père de notre Seigneur Jésus-Christ, qui, selon sa grande miséricorde, nous a régénérés, pour une espérance vivante, par la résurrection de Jésus-Christ d'entre les morts, »  
+  _b004, b009, b011, MC 1, SA 1. NKJV 'has begotten us again' = LSG « nous a régénérés ». Per convention 1, b011 adds that the Greek means literally 'to beget again / cause to be born a second time'. Final comma replaced by a period where the quotation ends (b004). Section heading b010 'Born Again to a Living Hope' rendered « Régénérés pour une espérance vivante » to echo LSG._
+- **⚠** **1 Pierre 1:4-5** — « pour un héritage qui ne se peut ni corrompre, ni souiller, ni flétrir, lequel vous est réservé dans les cieux, vous qui, par la puissance de Dieu, êtes gardés par la foi pour le salut prêt à être révélé dans les derniers temps! »  
+  _b009, b017, b028, MC 11-12, fill 6, SA 3. LSG uses verbs (« ne se peut ni corrompre, ni souiller, ni flétrir ») where NKJV has adjectives; b017 explains them with the adjectives « incorruptible », « sans souillure », « ne se flétrit pas ». 'last time' = « derniers temps »._
+- **⚠** **1 Pierre 1:6-7** — « C'est là ce qui fait votre joie, quoique maintenant, puisqu'il le faut, vous soyez attristés pour un peu de temps par diverses épreuves, afin que l'épreuve de votre foi, plus précieuse que l'or périssable qui cependant est éprouvé par le feu, ait pour résultat la louange, la gloire et l'honneur, lorsque Jésus-Christ apparaîtra, »  
+  _b019 (quoted from « vous soyez attristés… »), b020, MC 13-15, SA 4. NKJV 'genuineness of your faith' = LSG « l'épreuve de votre foi »; b020 adds one sentence on the Greek sense (tested and proven genuine). LSG order is « la louange, la gloire et l'honneur » (NKJV: praise, honor, glory); MC 15 uses LSG order. 'revelation of Jesus Christ' = « lorsque Jésus-Christ apparaîtra »._
+- **1 Pierre 1:8** — « lui que vous aimez sans l'avoir vu, en qui vous croyez sans le voir encore, vous réjouissant d'une joie ineffable et glorieuse, »  
+  _b022, MC 16, SA 5._
+- **⚠** **1 Pierre 1:9** — « parce que vous obtiendrez le salut de vos âmes pour prix de votre foi. »  
+  _b022, b029, MC 17, SA 5. NKJV 'receiving the end of your faith' = LSG « pour prix de votre foi ». The lesson explains the word 'end' (goal, outcome); b022 and MC 17 add « le texte grec dit littéralement : la fin de votre foi »._
+- **⚠** **1 Pierre 1:10-12** — « Les prophètes, qui ont prophétisé touchant la grâce qui vous était réservée, ont fait de ce salut l'objet de leurs recherches et de leurs investigations, voulant sonder l'époque et les circonstances marquées par l'Esprit de Christ qui était en eux, et qui attestait d'avance les souffrances de Christ et la gloire dont elles seraient suivies. Il leur fut révélé que ce n'était pas pour eux-mêmes, mais pour vous, qu'ils étaient les dispensateurs de ces choses, que vous ont annoncées maintenant ceux qui vous ont prêché l'Évangile par le Saint-Esprit envoyé du ciel, et dans lesquelles les anges désirent plonger leurs regards. »  
+  _b026, MC 19-20, fill 9, SA 7. 'searched and inquired carefully' = « l'objet de leurs recherches et de leurs investigations »; 'the glories' (plural) = « la gloire » (singular); 'serving' = « dispensateurs »; 'angels desire to look into' = « les anges désirent plonger leurs regards ». None changes the lesson's point._
+- **⚠** **1 Pierre 1:16** — « selon qu'il est écrit: Vous serez saints, car je suis saint. »  
+  _b024, SA 6. NKJV imperative 'Be holy' = LSG future « Vous serez saints ». b024 adds: « Ce futur a ici la force d'un ordre : soyez saints. »_
+- **Jean 3:3** — « Jésus lui répondit: En vérité, en vérité, je te le dis, si un homme ne naît de nouveau, il ne peut voir le royaume de Dieu. »  
+  _b011, b015, SA 1._
+- **2 Corinthiens 5:19** — « Car Dieu était en Christ, réconciliant le monde avec lui-même, en n'imputant point aux hommes leurs offenses, et il a mis en nous la parole de la réconciliation. »  
+  _b015, SA 2._
+- **Romains 3:24** — « et ils sont gratuitement justifiés par sa grâce, par le moyen de la rédemption qui est en Jésus-Christ. »  
+  _b015._
+- **Romains 4:5** — « et à celui qui ne fait point d'oeuvre, mais qui croit en celui qui justifie l'impie, sa foi lui est imputée à justice. »  
+  _b015 cites it only as a reference for 'declares the guilty not guilty'; not quoted._
+- **Actes 3:19** — « Repentez-vous donc et convertissez-vous, pour que vos péchés soient effacés, afin que des temps de rafraîchissement viennent de la part du Seigneur, »  
+  _b015 (first part quoted)._
+- **⚠** **Philippiens 2:12** — « Ainsi, mes bien-aimés, comme vous avez toujours obéi, travaillez à votre salut avec crainte et tremblement, non seulement comme en ma présence, mais bien plus encore maintenant que je suis absent; »  
+  _b024, MC 18, SA 6. The lesson's argument plays on 'work OUT' (not work FOR) salvation. LSG « travaillez à votre salut » could sound like working to earn it, so b024 adds that the Greek verb means « mettre en œuvre, mener à son terme », and the lesson and MC 18 then use « mettre en œuvre »._
+- **Éphésiens 2:8-9** — « Car c'est par la grâce que vous êtes sauvés, par le moyen de la foi. Et cela ne vient pas de vous, c'est le don de Dieu. Ce n'est point par les oeuvres, afin que personne ne se glorifie. »  
+  _b024, SA 6. Quoted in full (the English elides part of v. 8)._
+- **Romains 8:30** — « Et ceux qu'il a prédestinés, il les a aussi appelés; et ceux qu'il a appelés, il les a aussi justifiés; et ceux qu'il a justifiés, il les a aussi glorifiés. »  
+  _b028, SA 8._
+- **⚠** **1 Jean 3:2** — « Bien-aimés, nous sommes maintenant enfants de Dieu, et ce que nous serons n'a pas encore été manifesté; mais nous savons que, lorsque cela sera manifesté, nous serons semblables à lui, parce que nous le verrons tel qu'il est. »  
+  _b028, SA 8. NKJV 'when He is revealed' = LSG « lorsque cela sera manifesté » (it, not He). The lesson does not build on this; left as is._
+
+## 3. Terms for the reviewer to confirm
+
+- **begotten us again / born again** → nous a régénérés (LSG) / naître de nouveau — LSG uses « régénérer » in 1 Pierre 1:3 but « naître de nouveau » in Jean 3:3; the lesson uses both, plus « nouvelle naissance » for the picture.
+- **regeneration** → la régénération — Used only in exam items (MC 3, 4, 6, 18; SA 1-2), as in the English; it matches LSG's « régénérés » in 1 Pierre 1:3.
+- **refined (faith)** → purifiée — « affinée » is the metallurgical term but sounds odd for faith; chose « purifiée » in title and text.
+- **genuineness of faith** → l'épreuve de votre foi (LSG) / foi authentique — LSG wording differs; see scripture note.
+- **maternity room** → la maternité — Natural in Kinshasa (hospital maternity ward).
+- **highway** → une grande route — « autoroute » is too specific; « grande route » is general. Fill 5 accepts route, chemin, autoroute, grand chemin.
+- **courtroom** → le tribunal
+- **slave market** → le marché aux esclaves
+- **work out (your salvation)** → mettre en œuvre (LSG: travaillez à votre salut) — See Philippiens 2:12 note.
+- **three tenses of salvation** → trois temps du salut — « temps » covers both grammatical tense and time, which suits the lesson.
+- **I am being saved** → je suis en train d'être sauvé — Slightly heavy but unambiguous; « je suis sauvé progressivement » was the alternative.
+- **sanctification / glorification** → la sanctification / la glorification
+
+## 4. Lesson
+
+Each block: French first, English source underneath.
+
+**b002**  
+📖 Cours intensif sur 1 Pierre — Unité 2 : Espérance vivante et foi purifiée
+
+> EN: 📖 1 Peter Intensive — Unit 2: Living Hope and Refined Faith
+
+**b003**  
+Professeur : Dr Wayne Cook | Directeur : Dr Ted Rogers
+
+> EN: Professor: Dr. Wayne Cook | Director: Dr. Ted Rogers
+
+**b004**  
+« Béni soit Dieu, le Père de notre Seigneur Jésus-Christ, qui, selon sa grande miséricorde, nous a régénérés, pour une espérance vivante, par la résurrection de Jésus-Christ d'entre les morts. » — 1 Pierre 1:3 (LSG)
+
+> EN: "Blessed be the God and Father of our Lord Jesus Christ, who according to His abundant mercy has begotten us again to a living hope through the resurrection of Jesus Christ from the dead." — 1 Peter 1:3 (NKJV)
+
+**b008**  
+Texte : 1 Pierre 1:3-12
+
+> EN: Text: 1 Peter 1:3-12
+
+**b009**  
+« Béni soit Dieu, le Père de notre Seigneur Jésus-Christ, qui, selon sa grande miséricorde, nous a régénérés, pour une espérance vivante, par la résurrection de Jésus-Christ d'entre les morts, pour un héritage qui ne se peut ni corrompre, ni souiller, ni flétrir, lequel vous est réservé dans les cieux, vous qui, par la puissance de Dieu, êtes gardés par la foi pour le salut prêt à être révélé dans les derniers temps! » — 1 Pierre 1:3-5 (LSG)
+
+> EN: "Blessed be the God and Father of our Lord Jesus Christ, who according to His abundant mercy has begotten us again to a living hope through the resurrection of Jesus Christ from the dead, to an inheritance incorruptible and undefiled and that does not fade away, reserved in heaven for you, who are kept by the power of God through faith for salvation ready to be revealed in the last time." — 1 Peter 1:3-5 (NKJV)
+
+**b010**  
+Régénérés pour une espérance vivante
+
+> EN: Born Again to a Living Hope
+
+**b011**  
+Après avoir rappelé à l'Église dispersée qui elle est, Pierre éclate en louange : « Béni soit Dieu, le Père de notre Seigneur Jésus-Christ. » Pourquoi une telle louange ? À cause de ce que Dieu a fait pour eux. Selon sa grande miséricorde, il nous a régénérés — il nous a donné une seconde naissance — pour une espérance vivante. Le mot grec signifie littéralement « engendrer de nouveau », « faire naître une seconde fois ». Le cadre de la nouvelle naissance, c'est la maternité. Comme le Seigneur l'a dit à Nicodème : « si un homme ne naît de nouveau, il ne peut voir le royaume de Dieu » (Jean 3:3). La première naissance est selon la chair ; la seconde est de l'Esprit. Et l'espérance que produit cette nouvelle naissance n'est ni un souhait ni une supposition. C'est une espérance vivante, parce qu'elle repose sur un fait vivant : la résurrection de Jésus-Christ d'entre les morts. Christ est ressuscité ; c'est pourquoi l'espérance du croyant ne peut jamais mourir pour de bon.
+
+> EN: Having told the scattered church who they are, Peter now bursts into praise: "Blessed be the God and Father of our Lord Jesus Christ." Why such praise? Because of what God has done for them. According to His abundant mercy, He has begotten us again — given us a second birth — into a living hope. The setting of the new birth is a maternity room. As the Lord told Nicodemus, "unless one is born again, he cannot see the kingdom of God" (John 3:3). The first birth is of the flesh; the second is of the Spirit. And the hope this new birth produces is not a wish or a guess. It is a living hope, because it stands on a living fact: the resurrection of Jesus Christ from the dead. Christ is risen, and so the believer's hope can never finally die.
+
+**b012**  
+Il est utile de voir que la Bible parle du salut à trois temps. Au passé, j'ai été sauvé — au moment où je suis venu à Christ pour la première fois. Au présent, je suis en train d'être sauvé — Dieu est maintenant en train de me rendre saint. Et au futur, je serai sauvé — un jour je serai rendu semblable à Christ lui-même. Tout ce passage parcourt ces trois temps, et la leçon les suivra : la nouvelle naissance, la croissance, et la gloire encore à venir.
+
+> EN: It helps to see that the Bible speaks of salvation in three tenses. In the past, I have been saved — the moment I first came to Christ. In the present, I am being saved — God is now making me holy. And in the future, I will be saved — one day I shall be made like Christ Himself. This whole passage moves through those three tenses, and the lesson will follow them: the new birth, the growth, and the glory yet to come.
+
+**b013**  
+Cinq images de la nouvelle naissance
+
+> EN: Five Pictures of the New Birth
+
+**b014**  
+L'Écriture est si riche qu'elle nous donne plus d'une image pour décrire ce qui s'est passé quand nous sommes nés de nouveau. Chacune vient d'un domaine différent de la vie, et chacune montre une autre face du même grand sauvetage.
+
+> EN: Scripture is so rich that it gives us more than one picture for what happened when we were born again. Each comes from a different corner of life, and each shows another side of the same great rescue.
+
+**b015**  
+La nouvelle naissance — le cadre est la maternité. Nous naissons une seconde fois, de l'Esprit (Jean 3:3). La réconciliation — le cadre est un mariage, ou plus exactement un mariage brisé que l'on guérit. « Dieu était en Christ, réconciliant le monde avec lui-même » (2 Corinthiens 5:19). Ce n'est jamais Dieu qui s'est éloigné de nous ; c'est nous qui nous sommes éloignés de lui, et nous avons besoin d'être ramenés. La rédemption — le cadre est le marché aux esclaves. Nous sommes esclaves du péché, et Christ intervient et paie le prix ; nous sommes « gratuitement justifiés par sa grâce, par le moyen de la rédemption qui est en Jésus-Christ » (Romains 3:24). La justification — le cadre est le tribunal. Nous avons commis une faute ; Dieu est le Juge, et en Christ il déclare le coupable « non coupable » (Romains 4:5). La conversion — le cadre est une grande route. Nous allons dans une direction ; nous nous arrêtons, nous voyons que nous allons dans le mauvais sens, nous faisons demi-tour et nous prenons une autre direction. C'est Saul sur le chemin de Damas : « Repentez-vous donc et convertissez-vous, pour que vos péchés soient effacés » (Actes 3:19). Cinq images, une seule nouvelle naissance.
+
+> EN: New birth — the setting is the maternity room. We are born a second time, of the Spirit (John 3:3). Reconciliation — the setting is a marriage, or more exactly a broken one being healed. "God was in Christ reconciling the world to Himself" (2 Corinthians 5:19). God is never out of alignment with us; we are out of alignment with Him, and we need to be brought back. Redemption — the setting is the slave market. We are slaves to sin, and Christ steps in and pays the price; we are "justified freely by His grace through the redemption that is in Christ Jesus" (Romans 3:24). Justification — the setting is the courtroom. We have committed an offense; God is the Judge, and in Christ He declares the guilty "not guilty" (Romans 4:5). Conversion — the setting is a highway. We are traveling in one direction; we stop, see that we are going the wrong way, turn, and go another. It is Saul on the road to Damascus: "Repent therefore and be converted, that your sins may be blotted out" (Acts 3:19). Five pictures, one new birth.
+
+**b016**  
+Un héritage réservé dans les cieux
+
+> EN: An Inheritance Reserved in Heaven
+
+**b017**  
+La nouvelle naissance apporte un héritage, et Pierre accumule les mots pour le décrire (v. 4-5). Il est incorruptible — il ne peut ni pourrir ni se gâter. Il est sans souillure — rien ne peut le tacher ni l'abîmer. Il ne se flétrit pas — contrairement aux fleurs de ce monde, il ne perd jamais sa gloire. Et il est réservé dans les cieux pour le croyant, gardé en sûreté bien loin de la teigne, de la rouille et du voleur. Pour une Église qui affronte la perte et la persécution, c'est une merveilleuse nouvelle : quoi que le monde leur arrache ici-bas, leur véritable héritage est intouchable, mis en réserve là où aucun ennemi ne peut venir. Et ce n'est pas seulement l'héritage qui est gardé pour eux ; eux aussi sont gardés pour lui. Pierre leur dit : « vous qui, par la puissance de Dieu, êtes gardés par la foi pour le salut prêt à être révélé dans les derniers temps ». Le même Dieu qui garde l'héritage dans le ciel garde les héritiers sur la terre. Leur sécurité ne repose pas sur leur propre force, mais sur sa puissance.
+
+> EN: The new birth brings an inheritance, and Peter piles up words to describe it (vv. 4-5). It is incorruptible — it cannot rot or decay. It is undefiled — nothing can stain or spoil it. It does not fade away — unlike the flowers of this world, it never loses its glory. And it is reserved in heaven for the believer, kept safe far beyond the reach of moth, rust, or thief. To a church facing loss and persecution, this is wonderful news: whatever the world strips from them here, their true inheritance is untouchable, laid up where no enemy can come. And not only is the inheritance kept for them; they are kept for it. They "are kept by the power of God through faith for salvation ready to be revealed in the last time." The same God who guards the inheritance in heaven guards the heirs on earth. Their security does not rest on their own strength, but on His power.
+
+**b018**  
+Une foi purifiée comme l'or
+
+> EN: Faith Refined Like Gold
+
+**b019**  
+« …vous soyez attristés pour un peu de temps par diverses épreuves, afin que l'épreuve de votre foi, plus précieuse que l'or périssable qui cependant est éprouvé par le feu, ait pour résultat la louange, la gloire et l'honneur, lorsque Jésus-Christ apparaîtra. » — 1 Pierre 1:6-7 (LSG)
+
+> EN: "...you have been grieved by various trials, that the genuineness of your faith, being much more precious than gold that perishes, though it is tested by fire, may be found to praise, honor, and glory at the revelation of Jesus Christ." — 1 Peter 1:6-7 (NKJV)
+
+**b020**  
+Pierre ne prétend pas que le chemin est facile. Pour un peu de temps, dit-il, les croyants ont été attristés par diverses épreuves. Mais il place ces épreuves sous une lumière surprenante. On passe l'or au feu non pour le détruire, mais pour le purifier — pour brûler ce qui est faux et ne laisser que le métal pur. Il en est de même de la foi. Les épreuves sont la fournaise, et elles montrent que la foi des croyants est authentique : de l'or véritable, et non une contrefaçon. (Le mot grec traduit par « l'épreuve de votre foi » désigne ce qui a été éprouvé et reconnu authentique.) Et Pierre dit que cette foi éprouvée vaut bien plus que l'or, car l'or périt, et la foi ne périt pas. Quand Christ apparaîtra au dernier jour, une foi qui a traversé le feu aura pour résultat « la louange, la gloire et l'honneur ». Voici, en germe, le cœur de toute la lettre : la souffrance n'est pas l'ennemie de la foi, mais la fournaise qui la purifie.
+
+> EN: Peter does not pretend the road is easy. For a little while, he says, the believers have been grieved by various trials. But he sets those trials in a surprising light. Fire is poured over gold not to destroy it but to purify it — to burn away what is false and leave the pure metal behind. So it is with faith. The trials are the furnace, and they prove the believers' faith to be genuine, real gold and not counterfeit. And Peter says this tested faith is worth far more than gold, for gold perishes and faith does not. When Christ is revealed at the last day, a faith that has come through the fire will be found "to praise, honor, and glory." This is the heart of the whole letter in seed: suffering is not the enemy of faith but the furnace that refines it.
+
+**b021**  
+Aimer le Christ que vous n'avez pas vu
+
+> EN: Loving the Christ You Have Not Seen
+
+**b022**  
+Puis Pierre dit une chose pleine de tendresse au sujet de ces croyants (v. 8-9). Ils n'avaient jamais vu Jésus de leurs yeux, comme Pierre l'avait vu. « Lui que vous aimez sans l'avoir vu, en qui vous croyez sans le voir encore, vous réjouissant d'une joie ineffable et glorieuse. » Voici la merveille de la vraie foi : elle aime un Christ qu'elle n'a jamais vu, et elle déborde d'une joie trop profonde pour les mots. Et cette foi mène quelque part. « Vous obtiendrez le salut de vos âmes pour prix de votre foi. » Le texte grec dit littéralement : « la fin de votre foi », c'est-à-dire son but, son aboutissement. Tout ce croire et cet amour ne sont pas vains ; ils aboutissent au salut de l'âme, cela même que Dieu voulait dès le commencement.
+
+> EN: Then Peter says a tender thing about these believers (vv. 8-9). They had never laid eyes on Jesus, as Peter had. "Whom having not seen you love. Though now you do not see Him, yet believing, you rejoice with joy inexpressible and full of glory." Here is the wonder of true faith: it loves a Christ it has never seen, and it overflows with a joy too deep for words. And this faith is going somewhere. It is "receiving the end of your faith — the salvation of your souls." The word end means the goal, the outcome. All this believing and loving is not in vain; it arrives at the saving of the soul, the very thing God intended from the start.
+
+**b023**  
+Être rendu saint
+
+> EN: Being Made Holy
+
+**b024**  
+Nous rencontrons ici le présent du salut : je suis en train d'être sauvé. La sanctification est le processus par lequel nous sommes rendus saints, par lequel nous devenons de plus en plus semblables à Christ. Pierre le dira clairement quelques versets plus loin : « Vous serez saints, car je suis saint » (1 Pierre 1:16). Ce futur a ici la force d'un ordre : soyez saints. Or il y a ici un équilibre à garder. Paul écrit : « travaillez à votre salut avec crainte et tremblement » (Philippiens 2:12). Le verbe grec signifie « mettre en œuvre, mener à son terme ». De toute évidence, nous ne pouvons pas mettre en œuvre notre conversion — c'est un don de Dieu : « c'est par la grâce que vous êtes sauvés, par le moyen de la foi. Et cela ne vient pas de vous, c'est le don de Dieu. Ce n'est point par les oeuvres, afin que personne ne se glorifie » (Éphésiens 2:8-9). Personne ne naît de nouveau à force d'efforts. Mais une fois que nous sommes à lui, nous pouvons et nous devons mettre en œuvre la sainteté qu'il a placée en nous, en grandissant jour après jour à la ressemblance de notre Seigneur. La nouvelle naissance est l'œuvre de Dieu ; la croissance est le travail joyeux du croyant, sous la grâce.
+
+> EN: Here we meet the present tense of salvation: I am being saved. Sanctification is the process of being made holy, of becoming more and more like Christ. Peter will say it plainly a few verses on: "Be holy, for I am holy" (1 Peter 1:16). Now there is a balance to keep here. Paul writes, "Work out your own salvation with fear and trembling" (Philippians 2:12). We obviously cannot work out our conversion — that is God's gift, "by grace you have been saved, through faith, and that not of yourselves... not of works, lest anyone should boast" (Ephesians 2:8-9). No one is born again by trying hard. But once we are His, we can and must work out the holiness He has put within, growing day by day into the likeness of our Lord. The new birth is God's doing; the growing is the believer's glad labor under grace.
+
+**b025**  
+Ce que les prophètes ont cherché et que les anges désirent voir
+
+> EN: What Prophets Sought and Angels Long to See
+
+**b026**  
+Pierre termine ce grand paragraphe en élevant nos regards vers la grandeur du salut qui nous a été donné (v. 10-12). Les prophètes d'autrefois, dit-il, ont fait de ce salut « l'objet de leurs recherches et de leurs investigations ». L'Esprit de Christ était en eux, et il « attestait d'avance les souffrances de Christ et la gloire dont elles seraient suivies ». Ils s'efforçaient de comprendre ce qu'ils écrivaient, et il leur fut révélé que ce n'était pas eux-mêmes qu'ils servaient, mais nous — ils mettaient en réserve un trésor pour une génération qu'ils ne verraient jamais. Puis Pierre ajoute la parole la plus frappante de toutes : ce sont des choses « dans lesquelles les anges désirent plonger leurs regards ». Le salut que l'Église dispersée et souffrante tient entre ses mains est si grand que les prophètes ont désiré le saisir, et que les anges mêmes du ciel se penchent pour le contempler avec émerveillement. Ce que les croyants pourraient être tentés de considérer comme allant de soi, le ciel le tient pour une merveille.
+
+> EN: Peter ends this great paragraph by lifting our eyes to the sheer grandeur of the salvation we have been given (vv. 10-12). The prophets of old, he says, searched and inquired carefully about this salvation. The Spirit of Christ was in them, testifying beforehand "the sufferings of Christ and the glories that would follow." They strained to understand what they were writing, and it was revealed to them that they were serving not themselves but us — they were laying up treasure for a generation they would never see. And then Peter adds the most striking line of all: these are "things which angels desire to look into." The salvation the scattered, suffering church holds in its hands is so great that the prophets longed to grasp it and the very angels of heaven lean over to gaze at it in wonder. What the believers may be tempted to take for granted, heaven counts a marvel.
+
+**b027**  
+La gloire encore à venir
+
+> EN: Glory Yet to Come
+
+**b028**  
+Enfin, le futur : je serai sauvé. C'est la glorification, le dernier stade, quand l'œuvre que Dieu a commencée sera achevée et que le croyant sera rendu semblable à Christ. Paul retrace la chaîne ininterrompue : « Et ceux qu'il a prédestinés, il les a aussi appelés ; et ceux qu'il a appelés, il les a aussi justifiés ; et ceux qu'il a justifiés, il les a aussi glorifiés » (Romains 8:30). Et Jean nous donne l'espérance elle-même : « Bien-aimés, nous sommes maintenant enfants de Dieu, et ce que nous serons n'a pas encore été manifesté ; mais nous savons que, lorsque cela sera manifesté, nous serons semblables à lui, parce que nous le verrons tel qu'il est » (1 Jean 3:2). C'est là « le salut prêt à être révélé dans les derniers temps » dont Pierre a parlé au verset 5. L'espérance vivante née en nous à la nouvelle naissance ne décevra pas ; elle aboutit à la gloire. Ainsi une Église entourée d'épreuves est ancrée en tout point : née de nouveau dans le passé, gardée et rendue sainte dans le présent, et en route vers la gloire dans le temps à venir.
+
+> EN: Finally the future tense: I will be saved. This is glorification, the last stage, when the work God began is finished and the believer is made like Christ. Paul traces the unbroken chain: "Whom He predestined, these He also called; whom He called, these He also justified; and whom He justified, these He also glorified" (Romans 8:30). And John gives us the hope itself: "Beloved, now we are children of God; and it has not yet been revealed what we shall be, but we know that when He is revealed, we shall be like Him, for we shall see Him as He is" (1 John 3:2). This is the "salvation ready to be revealed in the last time" that Peter named back in verse 5. The living hope born in us at the new birth will not disappoint; it ends in glory. So a church surrounded by trial is anchored at every point — born again in the past, kept and made holy in the present, and bound for glory in the time to come.
+
+**b029**  
+« …vous obtiendrez le salut de vos âmes pour prix de votre foi. » — 1 Pierre 1:9 (LSG)
+
+> EN: "...receiving the end of your faith — the salvation of your souls." — 1 Peter 1:9 (NKJV)
+
+**b030**  
+Examen final de l'Unité 2
+
+> EN: Unit 2 Final Exam
+
+**b031**  
+Parcours Certificat : les 20 questions à choix multiples. Parcours Associé en divinité : les choix multiples et les 10 questions à compléter. M.Div. et Th.M. : les choix multiples, les questions à compléter et les 10 questions à réponse courte. Il faut obtenir 90 % dans chaque partie pour réussir. Si vous ne réussissez pas, l'examen impose un court délai avant que vous puissiez réessayer.
+
+> EN: Certificate track: the 20 multiple-choice questions. Associate: multiple choice and the 10 fill-in-the-blank questions. M.Div. and Th.M.: multiple choice, fill-ins and the 10 short-answer questions. 90% of each part is required to pass. If you do not pass, the exam waits a short time before you can try again.
+
+**b032**  
+Soumettre l'examen & vérifier la réussite
+
+> EN: Submit Exam & Check Pass
+
+**b033**  
+Réinitialiser l'unité
+
+> EN: Reset Unit
+
+## 5. Multiple choice
+
+✓ marks the keyed answer (same position in all languages).
+
+**1. Selon 1 Pierre 1:3, Dieu nous a régénérés (fait naître de nouveau) pour :**  
+✓ A. Une espérance vivante  
+· B. Un nouvel ensemble de lois  
+· C. Des richesses terrestres  
+· D. La liberté politique  
+_Pourquoi :_ Il nous a régénérés pour une espérance vivante (v. 3).  
+> EN: According to 1 Peter 1:3, God has begotten us again (caused us to be born again) to: — ✓ A living hope
+
+**2. L'espérance vivante du verset 3 repose sur :**  
+· A. Des visions d'anges  
+· B. Nos propres bonnes œuvres  
+· C. Le temple de Jérusalem  
+✓ D. La résurrection de Jésus-Christ  
+_Pourquoi :_ C'est une espérance vivante parce que Christ est ressuscité des morts.  
+> EN: The living hope of verse 3 rests upon: — ✓ The resurrection of Jesus Christ
+
+**3. La leçon présente le salut à trois temps. « J'ai été sauvé » renvoie à :**  
+· A. La réincarnation  
+· B. La sanctification  
+✓ C. La régénération (la nouvelle naissance)  
+· D. La glorification  
+_Pourquoi :_ « J'ai été sauvé » désigne l'événement passé de la nouvelle naissance.  
+> EN: The lesson describes salvation in three tenses. 'I have been saved' refers to: — ✓ Regeneration (the new birth)
+
+**4. « Je suis en train d'être sauvé » — l'œuvre présente et continue par laquelle nous sommes rendus saints — renvoie à :**  
+· A. La régénération  
+✓ B. La sanctification  
+· C. La justification  
+· D. La glorification  
+_Pourquoi :_ La sanctification est le processus présent par lequel nous sommes rendus saints.  
+> EN: 'I am being saved' — the present, ongoing work of being made holy — refers to: — ✓ Sanctification
+
+**5. « Je serai sauvé » — l'achèvement futur, quand nous serons rendus semblables à Christ — renvoie à :**  
+· A. La rédemption  
+· B. La conversion  
+✓ C. La glorification  
+· D. La réconciliation  
+_Pourquoi :_ La glorification est le stade futur où nous serons rendus semblables à Christ.  
+> EN: 'I will be saved' — the future completion when we are made like Christ — refers to: — ✓ Glorification
+
+**6. La leçon illustre la régénération (la nouvelle naissance) par le cadre :**  
+· A. D'un champ de bataille  
+· B. D'un marché  
+✓ C. D'une maternité (une nouvelle naissance)  
+· D. D'un tribunal  
+_Pourquoi :_ La régénération est illustrée par la maternité : une seconde naissance.  
+> EN: The lesson pictures Regeneration with the setting of a: — ✓ Maternity room (new birth)
+
+**7. L'image de la rédemption a pour cadre :**  
+✓ A. Un marché aux esclaves (Christ paie le prix)  
+· B. Une grande route  
+· C. Un tribunal  
+· D. Une maternité  
+_Pourquoi :_ La rédemption, c'est le marché aux esclaves : Christ paie le prix pour des esclaves du péché.  
+> EN: The picture of Redemption is set in a: — ✓ Slave market (Christ pays the price)
+
+**8. L'image de la justification a pour cadre :**  
+· A. Une maternité  
+✓ B. Un tribunal (Dieu nous déclare « non coupables »)  
+· C. Un marché aux esclaves  
+· D. Une grande route  
+_Pourquoi :_ La justification, c'est le tribunal : le Juge déclare le coupable « non coupable ».  
+> EN: The picture of Justification is set in a: — ✓ Courtroom (God declares us 'not guilty')
+
+**9. L'image de la conversion a pour cadre :**  
+· A. Un champ de bataille  
+· B. Une salle du trône  
+✓ C. Une grande route (nous faisons demi-tour et prenons une nouvelle direction)  
+· D. Un tribunal  
+_Pourquoi :_ La conversion, c'est la grande route : nous quittons le mauvais chemin pour prendre le bon.  
+> EN: The picture of Conversion is set on a: — ✓ Highway (we turn and go a new direction)
+
+**10. L'image de la réconciliation se situe dans le cadre :**  
+· A. D'un champ de moisson  
+· B. D'un marché aux esclaves  
+· C. D'un tribunal  
+✓ D. D'un mariage (une relation brisée que l'on guérit)  
+_Pourquoi :_ La réconciliation illustre une relation brisée qui est restaurée : Dieu nous réconcilie avec lui-même.  
+> EN: The picture of Reconciliation is set in the context of: — ✓ A marriage (a broken relationship being healed)
+
+**11. Aux versets 4-5, l'héritage du croyant est incorruptible, sans souillure et ne se flétrit pas, et il est :**  
+· A. Gagné par les œuvres  
+✓ B. Réservé (gardé) dans les cieux  
+· C. Conservé dans le temple  
+· D. Donné seulement aux apôtres  
+_Pourquoi :_ L'héritage est réservé dans les cieux, hors de portée de toute dégradation et de tout mal.  
+> EN: In verses 4-5 the believer's inheritance is incorruptible, undefiled, and unfading, and it is: — ✓ Reserved (kept) in heaven
+
+**12. Selon le verset 5, les croyants eux-mêmes sont gardés pour ce salut :**  
+· A. Par la loi romaine  
+✓ B. Par la puissance de Dieu, par la foi  
+· C. Par la synagogue  
+· D. Par leur propre force  
+_Pourquoi :_ Ils sont gardés par la puissance de Dieu, par la foi (v. 5).  
+> EN: According to verse 5, believers themselves are kept (guarded) for this salvation by: — ✓ The power of God through faith
+
+**13. Aux versets 6-7, Pierre dit que l'épreuve de la foi des croyants est plus précieuse que :**  
+· A. Les couronnes royales  
+· B. Les pièces d'argent  
+· C. Le fin lin  
+✓ D. L'or éprouvé par le feu  
+_Pourquoi :_ La foi éprouvée est plus précieuse que l'or périssable.  
+> EN: In verses 6-7 Peter says the genuineness of the believers' faith is more precious than: — ✓ Gold tested by fire
+
+**14. Les « diverses épreuves » du verset 6 sont comparées à un feu. Que fait ce feu à la foi ?**  
+✓ A. Il l'éprouve et la purifie, et montre qu'elle est authentique  
+· B. Il la détruit  
+· C. Il la remplace par les œuvres  
+· D. Il n'a aucun effet  
+_Pourquoi :_ Le feu purifie l'or ; les épreuves purifient la foi et montrent qu'elle est authentique.  
+> EN: The 'various trials' of verse 6 are pictured as a fire that does what to faith? — ✓ Tests and refines it, proving it genuine
+
+**15. Selon les versets 6-7, lorsque Jésus-Christ apparaîtra, la foi éprouvée aura pour résultat :**  
+✓ A. La louange, la gloire et l'honneur  
+· B. Le fait d'échapper à la mort  
+· C. Le pouvoir politique  
+· D. Une récompense terrestre  
+_Pourquoi :_ Elle aura pour résultat la louange, la gloire et l'honneur quand Christ apparaîtra.  
+> EN: The tested faith of verses 6-7 will result, at the revelation of Jesus Christ, in: — ✓ Praise, honor, and glory
+
+**16. Aux versets 8-9, Pierre dit que les croyants, bien qu'ils n'aient pas vu Christ :**  
+· A. L'oublient  
+· B. Doutent de lui  
+✓ C. L'aiment et se réjouissent d'une joie ineffable  
+· D. Le craignent seulement  
+_Pourquoi :_ Sans l'avoir vu, ils l'aiment et se réjouissent d'une joie ineffable et glorieuse.  
+> EN: In verses 8-9, Peter says that though the believers have not seen Christ, they: — ✓ Love Him and rejoice with joy inexpressible
+
+**17. Selon le verset 9, le « prix » de la foi des croyants (littéralement sa « fin » : son but, son aboutissement) est :**  
+· A. La richesse terrestre  
+✓ B. Le salut de leurs âmes  
+· C. La victoire politique  
+· D. Une longue vie  
+_Pourquoi :_ Ils obtiennent le salut de leurs âmes pour prix de leur foi.  
+> EN: According to verse 9, the 'end' (goal or outcome) of the believers' faith is: — ✓ The salvation of their souls
+
+**18. La leçon enseigne que nous ne pouvons pas « mettre en œuvre » notre conversion, mais que nous pouvons, par la grâce, mettre en œuvre notre :**  
+✓ A. Croissance dans la sainteté (sanctification)  
+· B. Justification  
+· C. Élection  
+· D. Régénération  
+_Pourquoi :_ La conversion est un don de Dieu ; la sanctification est la sainteté que nous mettons en œuvre par la grâce.  
+> EN: The lesson teaches that we cannot 'work out' our conversion, but we can, by grace, work out our: — ✓ Growth in holiness (sanctification)
+
+**19. Selon les versets 10-12, qui a fait de ce salut, à l'avance, l'objet de ses recherches et de ses investigations ?**  
+· A. Les anges seuls  
+· B. Les empereurs romains  
+· C. Les pharisiens  
+✓ D. Les prophètes  
+_Pourquoi :_ Les prophètes ont fait de ce salut l'objet de leurs recherches et de leurs investigations (v. 10-11).  
+> EN: In verses 10-12, who searched and inquired carefully about this salvation beforehand? — ✓ The prophets
+
+**20. Le verset 12 dit que ce grand salut comprend des choses dans lesquelles même les ____ désirent plonger leurs regards.**  
+· A. Rois  
+· B. Philosophes  
+· C. Sacrificateurs  
+✓ D. Anges  
+_Pourquoi :_ Ce sont des choses dans lesquelles les anges désirent plonger leurs regards (v. 12).  
+> EN: Verse 12 says this great salvation is something into which even ____ desire to look. — ✓ Angels
+
+## 6. Fill in the blank
+
+Grading ignores accents, capitals and one leading article (le/la/les/l'/un/une/des).
+
+**1.** L'espérance du croyant est une espérance vivante parce qu'elle repose sur un fait vivant : la ____ de Jésus-Christ d'entre les morts.  
+Réponse : **résurrection** · aussi acceptées : resurection  
+> EN: The believer's hope is a living hope because it stands on a living fact: the ____ of Jesus Christ from the dead. — **resurrection**
+
+**2.** Comme un verbe que l'on conjugue, la Bible parle du salut à trois ____ : j'ai été sauvé, je suis en train d'être sauvé, et je serai sauvé.  
+Réponse : **temps** · aussi acceptées : étapes, phases, stades  
+> EN: Like the forms of a verb, the Bible speaks of salvation in three ____: I have been saved, I am being saved, and I will be saved. — **tenses**
+
+**3.** Dans l'image de la rédemption, le cadre est le ____, où Christ intervient et paie le prix.  
+Réponse : **marché aux esclaves** · aussi acceptées : marché des esclaves, marché d'esclaves, esclaves  
+> EN: In the picture of redemption, the setting is the ____ market, where Christ steps in and pays the price. — **slave**
+
+**4.** Dans l'image de la justification, le cadre est le ____, où Dieu, le Juge, déclare le coupable « non coupable ».  
+Réponse : **tribunal** · aussi acceptées : cour, cour de justice, salle d'audience, prétoire  
+> EN: In the picture of justification, the setting is the ____, where God the Judge declares the guilty "not guilty." — **courtroom**
+
+**5.** Dans l'image de la conversion, le cadre est une ____ : nous voyons que nous allons dans le mauvais sens, nous faisons demi-tour et nous prenons une autre direction.  
+Réponse : **grande route** · aussi acceptées : route, chemin, autoroute, grand chemin  
+> EN: In the picture of conversion, the setting is a ____: we see we are going the wrong way, turn, and go another. — **highway**
+
+**6.** L'héritage du croyant est ____, c'est-à-dire qu'il ne peut ni pourrir ni se gâter.  
+Réponse : **incorruptible** · aussi acceptées : impérissable, inaltérable, incorrompu  
+> EN: The believer's inheritance is ____, meaning it cannot rot or decay. — **incorruptible**
+
+**7.** Comme le feu qui passe sur l'or, la souffrance n'est pas l'ennemie de la foi, mais la ____ qui la purifie.  
+Réponse : **fournaise** · aussi acceptées : creuset, four, fourneau  
+> EN: Like fire poured over gold, suffering is not the enemy of faith but the ____ that refines it. — **furnace**
+
+**8.** La sanctification, le présent du salut, est le processus par lequel nous sommes rendus ____.  
+Réponse : **saints** · aussi acceptées : saint, sainte, sanctifiés, sanctifié  
+> EN: Sanctification, the present tense of salvation, is the process of being made ____. — **holy**
+
+**9.** Pierre dit que ce salut comprend des choses « dans lesquelles les ____ désirent plonger leurs regards ».  
+Réponse : **anges** · aussi acceptées : ange, saints anges  
+> EN: Peter says the things of this salvation are "things which ____ desire to look into." — **angels**
+
+**10.** Le futur du salut, le dernier stade où le croyant est rendu semblable à Christ, s'appelle la ____.  
+Réponse : **glorification** · aussi acceptées : glorification finale, glorification future  
+> EN: The future tense of salvation, the last stage when the believer is made like Christ, is called ____. — **glorification**
+
+## 7. Short answer
+
+Keywords are matched as word-parts; accents count, so accented words also list an unaccented form. An answer passes with at least 3 keyword groups (or all, if fewer).
+
+**1. Expliquez ce que Pierre dit au verset 3 : que signifie être « régénéré » par Dieu, et quelle espérance en découle ?**  
+Mots-clés : naissance / naître / naitre · vivant · espéran / esperan · résurrect / resurrect · miséricord / misericord · régénér / regener · esprit · nicodème / nicodeme  
+Modèle : Selon sa grande miséricorde, Dieu a régénéré les croyants : il leur a donné une seconde naissance, pour une espérance vivante. Le cadre est la maternité : comme Jésus l'a dit à Nicodème, si un homme ne naît de nouveau, il ne peut voir le royaume de Dieu. La première naissance est selon la chair, la seconde est de l'Esprit, et cette nouvelle naissance est entièrement l'œuvre de la miséricorde de Dieu, non de l'effort humain. L'espérance qu'elle produit est appelée vivante parce qu'elle ne repose pas sur un souhait mais sur un fait : la résurrection de Jésus-Christ d'entre les morts. Parce que Christ est ressuscité et vivant, l'espérance du croyant est vivante elle aussi et ne peut jamais mourir pour de bon. C'est le premier temps du salut, le moment où l'on peut dire : j'ai été sauvé.
+
+> EN: Explain the new birth ('born again') in verse 3 and the living hope it produces.
+
+**2. Décrivez les cinq images que la leçon utilise pour la nouvelle naissance, et le cadre de chacune.**  
+Mots-clés : maternit / régénér / regener · réconcili / reconcili · rédempt / redempt · justifi · conversion / convert · esclave · tribunal / cour de justice · route / chemin  
+Modèle : La leçon présente cinq images de la nouvelle naissance, chacune tirée d'un domaine différent de la vie. La nouvelle naissance a pour cadre la maternité : nous naissons une seconde fois, de l'Esprit. La réconciliation a pour cadre un mariage, une relation brisée que l'on guérit : Dieu était en Christ, réconciliant le monde avec lui-même, et il nous ramène vers lui. La rédemption a pour cadre le marché aux esclaves : nous sommes esclaves du péché, et Christ intervient et paie le prix pour nous libérer. La justification a pour cadre le tribunal : nous avons commis une faute, et Dieu, le Juge, déclare le coupable non coupable en Christ. La conversion a pour cadre une grande route : nous allons dans le mauvais sens, nous nous arrêtons, nous faisons demi-tour et prenons une nouvelle direction, comme Saul sur le chemin de Damas. Cinq images, mais une seule nouvelle naissance, chacune montrant une autre face du même sauvetage.
+
+> EN: Describe the five pictures the lesson uses for the new birth and the setting of each.
+
+**3. Que nous enseigne l'héritage des versets 4-5, et comment les croyants sont-ils gardés pour lui ?**  
+Mots-clés : hérit / herit · corromp / corrupt · ciel / cieux · réserv / reserv · gardé / garde · puissance · leur foi / notre foi / votre foi / sa foi / de la foi / par la foi · flétri / fletri / faner / fanent  
+Modèle : La nouvelle naissance apporte un héritage, et Pierre accumule les mots pour le décrire. Il est incorruptible, il ne peut ni pourrir ni se gâter ; il est sans souillure, rien ne peut le tacher ; et il ne se flétrit pas comme les fleurs de ce monde. Surtout, il est réservé dans les cieux pour le croyant, en sûreté loin de la teigne, de la rouille et du voleur. Pour une Église qui affronte la perte et la persécution, c'est une merveilleuse nouvelle : quoi que le monde leur arrache, leur véritable héritage est intouchable. Et il y a une seconde consolation : l'héritage est gardé pour eux, mais eux aussi sont gardés pour lui. Ils sont gardés par la puissance de Dieu, par la foi, pour le salut prêt à être révélé dans les derniers temps. Leur sécurité ne repose pas sur leur propre force, mais sur la puissance de Dieu, qui garde l'héritage en haut et les héritiers ici-bas.
+
+> EN: What does the inheritance of verses 4-5 teach, and how are believers kept for it?
+
+**4. Que disent les versets 6-7 sur ce que les difficultés produisent dans la vie du croyant ? Expliquez l'image employée par Pierre.**  
+Mots-clés : épreuve / epreuve · leur foi / notre foi / votre foi / sa foi / de la foi / par la foi · métal / metal / précieu / precieu · fournaise / flamme / le feu / du feu / au feu · éprouv / eprouv · purifi / affin / raffin · authenti / contrefa / véritable / veritable · gloire / louange  
+Modèle : Pierre reconnaît que, pour un peu de temps, les croyants ont été attristés par diverses épreuves, mais il place ces épreuves sous une lumière surprenante. On passe l'or au feu non pour le détruire mais pour le purifier, en brûlant ce qui est faux et en laissant le métal pur. Il en est de même de la foi : les épreuves sont la fournaise, et elles montrent que leur foi est authentique, de l'or véritable et non une contrefaçon. Pierre dit que cette foi éprouvée est bien plus précieuse que l'or, car l'or périt et la foi ne périt pas. Et quand Christ apparaîtra au dernier jour, une foi qui a traversé le feu aura pour résultat la louange, la gloire et l'honneur. C'est en germe le cœur de toute la lettre : la souffrance n'est pas l'ennemie de la foi, mais la fournaise qui la purifie ; c'est pourquoi l'Église peut même se réjouir dans les épreuves, sachant ce qu'elles produisent.
+
+> EN: Explain the refining of faith in verses 6-7 — the role of trials and the image of gold tested by fire.
+
+**5. Que disent les versets 8-9 au sujet de l'attachement des croyants à un Christ qu'ils ne connaissent pas de vue, et du but de leur foi ?**  
+Mots-clés : aime / amour · l'avoir vu / jamais vu / sans le voir / pas vu / vu jésus / vu jesus · joie / joyeu · réjoui / rejoui · leur foi / notre foi / votre foi / sa foi / de la foi / par la foi · l'âme / l'ame / âmes / ames · salut · ineffable / inexprimable / indicible  
+Modèle : Pierre dit une chose pleine de tendresse au sujet de ces croyants : contrairement à lui, ils n'avaient jamais vu Jésus de leurs yeux, et pourtant ils l'aiment. Sans le voir encore, ils croient en lui et se réjouissent d'une joie ineffable et glorieuse. Voici la merveille de la vraie foi : elle aime un Christ qu'elle n'a jamais vu et déborde d'une joie trop profonde pour les mots, une joie qui ne dépend pas de la vue. Et cette foi mène quelque part : ils obtiennent le salut de leurs âmes pour prix de leur foi. Le texte grec parle de la fin de leur foi, c'est-à-dire de son but, de son aboutissement ; tout ce croire et cet amour ne sont donc pas vains, ils aboutissent au salut de l'âme, cela même que Dieu voulait dès le commencement. Un Christ invisible, une joie indicible et un but certain : voilà la foi qui porte une Église qui souffre.
+
+> EN: What do verses 8-9 say about loving and rejoicing in a Christ we have not seen, and the goal of our faith?
+
+**6. Comment la leçon présente-t-elle le présent du salut (« je suis en train d'être sauvé ») ? Quelle part revient à Dieu, et quelle part au croyant ?**  
+Mots-clés : sanctif · saint · christ · grâce / grace · travaill / oeuvre / œuvre · effort · leur foi / notre foi / votre foi / sa foi / de la foi / par la foi · don de dieu / un don / le don / cadeau / gratuit  
+Modèle : La sanctification est le présent du salut, le temps où le croyant peut dire : je suis en train d'être sauvé. C'est le processus par lequel il est rendu saint et devient de plus en plus semblable à Christ, et Pierre en donne clairement le but : vous serez saints, car je suis saint. Il y a ici un équilibre à garder. Paul dit : travaillez à votre salut avec crainte et tremblement ; pourtant personne ne peut mettre en œuvre sa propre conversion, car elle est le don de Dieu, par la grâce, par le moyen de la foi, et non par les œuvres, afin que personne ne se glorifie. Personne ne naît de nouveau à force d'efforts. Mais une fois qu'il appartient à Dieu, le croyant peut et doit mettre en œuvre la sainteté que Dieu a placée en lui, en grandissant jour après jour à la ressemblance de son Seigneur. La nouvelle naissance est entièrement l'œuvre de Dieu, tandis que la croissance dans la sainteté est le travail joyeux du croyant, accompli sous la grâce et rendu possible par elle.
+
+> EN: Explain the doctrine of sanctification as the lesson presents it — being made holy, and the place of effort and grace.
+
+**7. Selon les versets 10-12, que cherchaient les prophètes, et que leur a-t-il été révélé au sujet de ce salut ?**  
+Mots-clés : prophè / prophé / prophe · recherch / investig / sonde / sonder · esprit · souffr · gloire · révél / revel · servi / dispensat · d'avance / à l'avance / a l'avance / annonc / attest  
+Modèle : Pierre élève nos regards vers la grandeur de ce salut en nous disant combien les prophètes d'autrefois l'ont désiré. Ils en ont fait l'objet de leurs recherches et de leurs investigations, au sujet de la grâce qui devait venir, et ils s'efforçaient de comprendre ce qu'ils écrivaient eux-mêmes. L'Esprit de Christ était en eux et attestait d'avance les souffrances de Christ et la gloire dont elles seraient suivies. Il leur fut révélé que ce n'était pas eux-mêmes qu'ils servaient, mais nous, une génération qu'ils ne verraient jamais, pour qui ils mettaient en réserve un trésor. Et Pierre ajoute la parole la plus frappante : ce sont des choses dans lesquelles même les anges désirent plonger leurs regards. Le salut que l'Église dispersée et souffrante tient entre ses mains est si grand que les prophètes l'ont cherché et que les anges se penchent pour le contempler. Ce que les croyants pourraient considérer comme allant de soi, le ciel lui-même le tient pour une merveille.
+
+> EN: According to verses 10-12, what did the prophets seek, and what was revealed to them about this salvation?
+
+**8. Que nous enseigne la leçon sur l'avenir du salut, c'est-à-dire sur son dernier stade ?**  
+Mots-clés : glorif · futur / avenir · christ · semblable / ressembl / comme lui · révél / revel / manifest · salut · ciel / cieux · prédestin / predestin  
+Modèle : La glorification est le futur du salut, le temps où le croyant peut dire : je serai sauvé. C'est le dernier stade, quand l'œuvre que Dieu a commencée sera achevée et que le croyant sera enfin rendu semblable à Christ. Paul retrace la chaîne ininterrompue : ceux que Dieu a prédestinés, il les a aussi appelés ; ceux qu'il a appelés, il les a aussi justifiés ; et ceux qu'il a justifiés, il les a aussi glorifiés. Jean nous donne l'espérance elle-même : nous sommes maintenant enfants de Dieu, et ce que nous serons n'a pas encore été manifesté, mais nous savons que nous serons semblables à lui, parce que nous le verrons tel qu'il est. C'est le salut prêt à être révélé dans les derniers temps dont Pierre a parlé au verset 5, et c'est l'héritage réservé dans les cieux. L'espérance vivante née en nous à la nouvelle naissance ne décevra pas ; elle aboutit à la gloire.
+
+> EN: What does the lesson teach about glorification — the future of salvation?
+
+**9. Pourquoi Pierre fonde-t-il l'espérance de l'Église souffrante sur ce que Dieu a fait, fait et fera ?**  
+Mots-clés : espéran / esperan · souffr / épreuve / epreuve · passé / passe · présent / present · futur / avenir · salut · sécurité / securite / assur / inébranl / inebranl · christ  
+Modèle : Une Église dispersée et souffrante a besoin d'une espérance qui ne monte et ne descend pas avec les circonstances, et Pierre lui donne exactement cela en ancrant son salut dans tous les temps. Dans le passé, les croyants ont été régénérés pour une espérance vivante par la résurrection de Christ : cette œuvre est accomplie et ne peut être défaite. Dans le présent, ils sont gardés par la puissance de Dieu et rendus saints : Dieu agit en eux maintenant, même dans la fournaise de l'épreuve. Dans le futur, ils seront glorifiés, rendus semblables à Christ, et recevront un héritage réservé dans les cieux. Parce que leur salut repose sur ce que Dieu a fait, fait et fera, il est en sécurité quoi que le monde leur fasse. Leur espérance n'est pas ancrée dans une vie paisible, mais dans un Dieu fidèle ; c'est pourquoi elle tient quand tout le reste est ébranlé.
+
+> EN: Why does Peter ground the suffering church's hope in what God has done past, present, and future?
+
+**10. Résumez le message central de l'Unité 2 (1 Pierre 1:3-12).**  
+Mots-clés : espéran / esperan · naissance / régénér / regener · hérit / herit · leur foi / notre foi / votre foi / sa foi / de la foi / par la foi · épreuve / epreuve · salut · gloire · christ  
+Modèle : L'Unité 2 est un grand chant de louange pour le salut. Selon sa grande miséricorde, Dieu a régénéré les croyants pour une espérance vivante, par la résurrection de Jésus-Christ, et pour un héritage incorruptible, sans souillure et qui ne se flétrit pas, réservé dans les cieux pour eux, tandis qu'ils sont gardés par la puissance de Dieu. Leur foi, purifiée comme l'or dans le feu de diverses épreuves, se montre authentique et aura pour résultat la louange et la gloire quand Christ apparaîtra. Sans l'avoir vu, ils l'aiment et se réjouissent d'une joie ineffable, et ils obtiennent le salut de leurs âmes. La leçon suit le salut à travers trois temps — nés de nouveau dans le passé, rendus saints dans le présent, glorifiés dans le futur — un salut si grand que les prophètes l'ont cherché et que les anges désirent y plonger leurs regards. Telle est l'espérance inébranlable qui soutient une Église qui souffre.
+
+> EN: Summarize the central message of Unit 2 (1 Peter 1:3-12).
+
+## 8. For Robert
+
+Import data: `CTS1Peter-unit2-fr.json` (same folder). `blocks[].id` matches the lesson block ids; `mc`/`fill`/`sa` are in source order. Import as `machine` status with the source hash, per docs/french-pilot.md.
+Keyword groups may have grown from a string to an array (unaccented twins); slot count is unchanged.
