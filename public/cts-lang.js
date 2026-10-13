@@ -11,7 +11,11 @@
   var url = new URL(location.href), explicit = url.searchParams.get("cts_lang");
   var stored = get("cts_lang");
   if (stored === "both") { stored = "es"; set("cts_show_source", "true"); }
-  var want = codes.includes(explicit) ? explicit : codes.includes(stored) ? stored : current;
+  // A language route (/es/…, /fr/…) is itself an explicit choice: a link from
+  // an email, a bookmark or a message opens in the language it names. Only
+  // the bare English addresses follow the remembered choice (7 Oct decision),
+  // so a reader whose choice is Spanish still goes from an English link to /es/.
+  var want = codes.includes(explicit) ? explicit : current !== "en" ? current : codes.includes(stored) ? stored : current;
   if (!explicit && !stored && current === "en") {
     var browser = (navigator.language || "en").split("-")[0].toLowerCase();
     // French is selectable now, but not a default until the reviewed pilot exists.
@@ -127,7 +131,7 @@
 
   function resolve() {
     var s = lsGet(KEY);
-    if (s === 'es' || s === 'en') return s;              // an explicit prior choice wins
+    if (s === 'es' || s === 'en' || s === 'fr') return s; // an explicit prior choice wins (French is kept, not reset)
     var n = (navigator.language || navigator.userLanguage || '').toLowerCase();
     return n.indexOf('es') === 0 ? 'es' : 'en';          // else default by browser language
   }
