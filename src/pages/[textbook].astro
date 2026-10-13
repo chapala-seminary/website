@@ -27,7 +27,7 @@ const { book, course, accent } = Astro.props;
 const toc = (html: string) =>
   [...html.matchAll(/<(h2|h3) id="([^"]+)">([\s\S]*?)<\/\1>/g)]
     .map((m) => ({ level: m[1], id: m[2], text: m[3].replace(/<[^>]+>/g, '') }));
-const contents = { en: toc(book.body.en), es: toc(book.body.es) };
+const contents = { en: toc(book.body.en), es: toc(book.body.es), fr: book.body.fr ? toc(book.body.fr) : null };
 const web = ('html' in book.files ? book.files.html : undefined);
 const pdf = ('pdf' in book.files ? book.files.pdf : undefined);
 // assigned readings (excerpts or whole chapters): the body of this page, in both languages
@@ -54,7 +54,7 @@ const excerpts = ('excerpts' in book.files);
       {web ? (
         <>
           <a class="btn" href={`/${web.en}`}><span class="lang-en">Full book (English)</span><span class="lang-es">Libro completo (inglés)</span></a>
-          <a class="btn" href={`/${web.es}`}><span class="lang-en">Assigned chapters (Spanish)</span><span class="lang-es">Capítulos asignados (español)</span></a>
+          <a class="btn" href={`/${web.es}`}><span class="lang-en">Assigned chapters (Spanish)</span><span class="lang-es">Capítulos asignados (español)</span></a>{web.fr && <a class="btn lang-fr" href={`/${web.fr}`}>Chapitres assignés (français)</a>}
         </>
       ) : excerpts ? null : (
         <>
@@ -73,11 +73,13 @@ const excerpts = ('excerpts' in book.files);
     </ol>
     <ol class="lang-es">
       {contents.es.map((c) => <li class={c.level === 'h3' ? 'l3' : 'l2'}><a href={`#${c.id}`}>{c.text}</a></li>)}
-    </ol>
+    </ol>{contents.fr && <ol class="lang-fr">
+      {contents.fr.map((c) => <li class={c.level === 'h3' ? 'l3' : 'l2'}><a href={`#${c.id}`}>{c.text}</a></li>)}
+    </ol>}
   </nav>
 
   <article class="card tb-book lang-en" lang="en" set:html={book.body.en} />
-  <article class="card tb-book lang-es" lang="es" set:html={book.body.es} />
+  <article class="card tb-book lang-es" lang="es" set:html={book.body.es} />{book.body.fr && <article class="card tb-book lang-fr" lang="fr" set:html={book.body.fr} />}
 
   <p class="small muted tb-edition">
       {excerpts ? <><span class="lang-en">Assigned readings from a historical public-domain edition ({book.edition}); the Spanish is a CTS translation.</span><span class="lang-es">Lecturas asignadas de una edición histórica de dominio público ({book.edition}); el español es una traducción del STC.</span></> : web ? <><span class="lang-en">Historical public-domain edition; the CTS Spanish assigned chapters are linked above.</span><span class="lang-es">Edición histórica de dominio público; arriba se enlazan los capítulos asignados traducidos por el STC.</span></> : <><span class="lang-en">CTS Textbook Edition {book.edition}. The Word file is the master; this page was made from it.</span><span class="lang-es">Edición de libro de texto CTS {book.edition}. El archivo de Word es el original; esta página se hizo a partir de él.</span></>}

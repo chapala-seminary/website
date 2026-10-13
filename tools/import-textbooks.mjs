@@ -46,6 +46,7 @@ import { execFileSync } from 'node:child_process';
 import mammoth from 'mammoth';
 import { parse } from 'node-html-parser';
 import { applyCorrections } from './textbook-corrections.mjs';
+import { carryFrench } from './french-readings-lib.mjs';
 
 const args = process.argv.slice(2);
 const WRITE = args.includes('--write');
@@ -277,7 +278,9 @@ if (!WRITE) { console.log('\nread-only run; add --write to write the files'); pr
 for (const d of [OUT, MASTERS, PDFS]) fs.mkdirSync(d, { recursive: true });
 for (const r of results) {
   const { _copy, ...data } = r;
-  fs.writeFileSync(path.join(OUT, `${r.slug}.json`), JSON.stringify(data, null, 1) + '\n');
+  // French added since (tools/french-readings.mjs) is kept wherever its English is unchanged.
+  const old = path.join(OUT, `${r.slug}.json`);
+  fs.writeFileSync(old, JSON.stringify(carryFrench(fs.existsSync(old) ? JSON.parse(fs.readFileSync(old, 'utf8')) : null, data), null, 1) + '\n');
   for (const lang of ['en', 'es']) {
     fs.copyFileSync(_copy.docx[lang], path.join(MASTERS, `${r.slug}-${lang}.docx`));
     fs.copyFileSync(_copy.pdf[lang], path.join(PDFS, `${r.slug}-${lang}.pdf`));

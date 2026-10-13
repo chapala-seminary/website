@@ -127,6 +127,10 @@ node tools/verify-sitemap.mjs dist
 # accepts is one the grader marks right, and no staff-only answer file is
 # published.
 node tools/verify-textbooks.mjs dist
+# French reading material (tools/french-readings.mjs): stored with
+# provenance, every French and English key graded right on the French page,
+# draft French pages marked, the English and Spanish pages unchanged.
+node test/french-readings.test.mjs
 
 # A course with two required tests -- its textbook and its five readings
 # (9 Oct 2026, piloted on Pentecostalism) -- and the protection of master's
@@ -280,6 +284,8 @@ node test/published-models.test.mjs
   # would use the page.
   node tools/verify-textbook-test.mjs "http://127.0.0.1:$PORT"
   node tools/verify-textbook-mc.mjs "http://127.0.0.1:$PORT"
+  # ...and a French test page: French questions, French and English answers.
+  node test/french-readings.test.mjs "http://127.0.0.1:$PORT"
   # ...and the Master's five-reading test beside a textbook's: four from each
   # reading, 90%, retakes, the certificate waiting for whichever is left.
   node tools/verify-required-tests.mjs "http://127.0.0.1:$PORT"
