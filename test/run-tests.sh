@@ -244,6 +244,7 @@ curl -sf "http://127.0.0.1:$PORT/__scheduled?cron=0+15+*+*+*" >/dev/null && slee
 if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{};p.chromium.launch(o).then(b=>b.close()).catch(()=>process.exit(1))" 2>/dev/null; then
   node test/engine-languages.mjs
   node test/french-drafts.test.mjs
+  node test/editorial-perspectives.test.mjs
   # Every delivered French packet imported, stamped against the current English;
   # a pasted French question fails wherever the English one does.
   node test/french-import.test.mjs
@@ -294,6 +295,7 @@ node test/published-models.test.mjs
   # locked after a failure, a fresh draw after the wait -- as a student
   # would use the page.
   node tools/verify-textbook-test.mjs "http://127.0.0.1:$PORT"
+  node test/assigned-reading-corrections.test.mjs "http://127.0.0.1:$PORT"
   node tools/verify-textbook-mc.mjs "http://127.0.0.1:$PORT"
   # ...and a French test page: French questions, French and English answers.
   node test/french-readings.test.mjs "http://127.0.0.1:$PORT"

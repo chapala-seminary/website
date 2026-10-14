@@ -156,7 +156,12 @@
     }
     /* the attempt in hand, or a new one: after a failed attempt's wait, if
        nothing usable is saved, or if it was begun on another revision of the bank */
-    if (!drawOK(state.draw) || (REV && state.rev !== REV) || (state.redrawAt && Date.now() >= state.redrawAt && !lockRemaining())) startAttempt();
+    var changedRevision = REV && state.rev !== REV;
+    var hadOldAttempt = changedRevision && Array.isArray(state.draw) && state.draw.length > 0;
+    // A corrected bank must not retain a failed-attempt wait from its old questions.
+    // The independent pass key and server completion record are never cleared.
+    if (changedRevision && T.resetWaitOnRevision) lsDel(KEY.lock);
+    if (!drawOK(state.draw) || changedRevision || (state.redrawAt && Date.now() >= state.redrawAt && !lockRemaining())) startAttempt();
 
     var host = el("tb-questions"), status = el("tb-status"), result = el("tb-result");
     var fill = null, unlockTimer = null;
@@ -194,6 +199,15 @@
     function renderStatus() {
       var when = passedOn(), m = lockRemaining(), h = "";
       var st = standing();
+      if (hadOldAttempt && T.resetWaitOnRevision) h += '<p class="small" id="tb-revised">' + bi(when ? {
+        en: "These questions have been updated to match the assigned reading. Your previous pass is still valid. You may try the updated questions for practice.",
+        es: "Estas preguntas se han actualizado para ajustarse a la lectura asignada. Su aprobación anterior sigue siendo válida. Puede intentar las preguntas actualizadas para practicar.",
+        fr: "Ces questions ont été actualisées pour correspondre à la lecture assignée. Votre réussite antérieure reste valable. Vous pouvez essayer les nouvelles questions pour vous exercer."
+      } : {
+        en: "These questions have been updated to match the assigned reading. Your unfinished attempt has restarted and its waiting period has been removed. Any previous pass is kept.",
+        es: "Estas preguntas se han actualizado para ajustarse a la lectura asignada. Su intento pendiente se ha reiniciado y se ha eliminado su período de espera. Se conserva toda aprobación anterior.",
+        fr: "Ces questions ont été actualisées pour correspondre à la lecture assignée. Votre tentative inachevée a recommencé et son délai d’attente a été supprimé. Toute réussite antérieure est conservée."
+      }) + '</p>';
       if (st && !when) h += '<p class="small muted" id="tb-standing">' + st + "</p>";
       if (when && !practice) {
         h += '<div class="cts-passed"><p class="cts-passed-title">&#10003; ' + bi(W.passed) + "</p>" +

@@ -296,6 +296,8 @@ const textbooks = defineCollection({
       draw: z.number().int().positive(),
       pass: z.number().int().positive(),
       perChapter: z.number().int().positive().optional(),
+      revision: z.string().min(1).optional(),
+      resetWaitOnRevision: z.boolean().optional(),
       questions: z.array(textbookFill).min(20),
     }).refine((t) => t.pass <= t.draw && t.draw <= t.questions.length, {
       message: 'pass <= draw <= number of questions',
@@ -346,6 +348,7 @@ const readings = defineCollection({
       perReading: z.number().int().positive().optional(),
       perGroup: z.number().int().positive().optional(),
       revision: z.string().min(1).optional(),
+      resetWaitOnRevision: z.boolean().optional(),
       questions: z.array(readingFill).min(20),
     }).refine((t) => t.pass <= t.draw && t.draw <= t.questions.length, {
       message: 'pass <= draw <= number of questions',

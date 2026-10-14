@@ -1,5 +1,12 @@
 # French pilot: preparation and review
 
+**14 October update:** Wayne's latest French review report supersedes the
+older Unit 1 drafting request below. French course and reading drafts are
+already on beta and remain in review; answer keys come first, then Scripture
+and theological terminology. Use the [current reconciliation](wayne-reconciliation-2026-10-14.md)
+for directions and outstanding choices. The following retains the pilot's
+preparation history.
+
 Pilot: Old Testament Survey (`CTS`, progress slug `ots`), starting with Unit 1.
 All 13 units now have machine French drafts on beta (13 Oct 2026); see
 `docs/french-beta-publication.md`.

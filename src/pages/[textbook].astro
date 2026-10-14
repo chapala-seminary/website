@@ -7,6 +7,7 @@
 import { getCollection } from 'astro:content';
 import Textbook from '../layouts/Textbook.astro';
 import { frBookTitle } from '../lib/french-titles.ts';
+import EditorialNotice from '../components/EditorialNotice.astro';
 
 export async function getStaticPaths() {
   const books = await getCollection('textbooks');
@@ -35,6 +36,7 @@ const pdf = ('pdf' in book.files ? book.files.pdf : undefined);
 const excerpts = ('excerpts' in book.files);
 ---
 <Textbook kind="book" book={{ ...book, title: { ...book.title, fr: frBookTitle(book.title.en) } }} course={course} accent={accent}>
+  {book.slug === 'joshua' && <EditorialNotice kind="blaikie" />}
   <section class="card tb-about" data-cts-chrome>
     <h2><span class="lang-en">About this textbook</span><span class="lang-es">Sobre este libro de texto</span><span class="lang-fr">À propos de ce manuel</span></h2>
     <p hidden={!!web || excerpts}>

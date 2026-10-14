@@ -1,0 +1,13 @@
+---
+import notices from '../data/editorial-notices.json';
+interface Props { kind: keyof typeof notices }
+const { kind } = Astro.props;
+const notice = notices[kind];
+---
+<div class="notice" data-cts-chrome data-cts-editorial={kind}>
+  <p>
+    <span class="lang-en"><strong>{notice.title.en}.</strong> {notice.body.en}</span>
+    <span class="lang-es"><strong>{notice.title.es}.</strong> {notice.body.es}</span>
+    <span class="lang-fr"><strong>{notice.title.fr}.</strong> {notice.body.fr}</span>
+  </p>
+</div>
