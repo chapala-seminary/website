@@ -16,8 +16,11 @@ Robert authorized publishing Wayne's French drafts on beta on 12 October 2026, w
 | Joshua Intensive | /fr/CTSJoshUnit1.html | 10 |
 | Psalms | /fr/CTSPsalmsUnit1.html | 12 |
 | WiseSpeak Preaching | /fr/CTS_WiseSpeak_Preaching.html | 10 on one page |
+| Old Testament Survey | /fr/CTSUnit1.html | 13 |
 
-104 collection-based units plus the ten-unit WiseSpeak page are translated. Old Testament Survey is not part of these ten delivered course drafts. Reading rooms and textbooks retain their existing translations/fallbacks.
+117 collection-based units plus the ten-unit WiseSpeak page are translated. Reading rooms and textbooks retain their existing translations/fallbacks.
+
+Old Testament Survey is not one of Wayne's delivered drafts. Claude drafted its 13 units on 13 October 2026 at Robert's request, directly in the canonical `src/content/lessons/CTS` and `src/content/units/CTS` French fields, marked `machine` with source hashes like the other courses. It awaits French theological review. Scripture follows Louis Segond 1910 (with Segond verse numbering where it differs, e.g. Micah 5:1, Hosea 14:5, Isaiah 9:5); a few answer keys follow Segond's wording (for example Daniel 3:25 « un fils des dieux »). Points for the French reviewer, and English-source problems found while translating, were reported to Robert and Wayne on 13 October 2026; the English was not changed. The French pages are graded by the shipped `cts-engine.js`, like every other unit page; `cts-genesis-engine.js` is used only by the Genesis certificate page.
 
 ## Provenance and editing
 
