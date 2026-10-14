@@ -1159,7 +1159,7 @@
     if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       if (error) {
         error.hidden = false;
-        error.innerHTML = bi({ en: "Enter your name and a valid email address to save your registration.", es: "Escriba su nombre y una dirección de correo válida para guardar su registro.", fr: "Saisissez votre nom et une adresse courriel valide pour enregistrer votre inscription." });
+        error.innerHTML = bi({ en: "Enter your name and a valid email address to save your registration.", es: "Escriba su nombre y una dirección de correo válida para guardar su registro.", fr: "Saisissez votre nom et une adresse e-mail valide pour enregistrer votre inscription." });
       }
       var invalid = el(!name ? "regName" : "regEmail");
       if (invalid) { invalid.focus(); invalid.setAttribute("aria-invalid", "true"); }

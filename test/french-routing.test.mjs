@@ -71,7 +71,7 @@ try {
     page.on('response', (r) => { if (r.status() === 404 && new URL(r.url()).origin === base) missing.push(r.url()); });
     await page.goto(`${base}/fr/cts-confirm-email.html`); await settle(page);
     let text = await page.locator('main').innerText();
-    assert.match(text, /Confirmez votre adresse courriel/); assert.ok(!ENGLISH.test(text), 'English on /fr/cts-confirm-email.html: ' + (text.match(ENGLISH) || [])[0]);
+    assert.match(text, /Confirmez votre adresse e-mail/); assert.ok(!ENGLISH.test(text), 'English on /fr/cts-confirm-email.html: ' + (text.match(ENGLISH) || [])[0]);
     await page.click('#email-send');
     assert.match(await page.locator('#email-note').innerText(), /Saisissez d’abord votre code d’étudiant/); checks += 3;
     await page.goto(`${base}/fr/cts-backup.html`); await settle(page);

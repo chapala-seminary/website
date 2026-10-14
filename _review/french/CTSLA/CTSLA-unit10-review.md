@@ -485,7 +485,7 @@ _Pourquoi :_ Orthotomeô est formé de orthos (« droit ») + tomê (« coupe »
 ✓ A. Trouver votre verset dans la concordance principale sous un mot significatif ; repérer votre verset dans la liste de ce mot ; noter le numéro de Strong ; se reporter au dictionnaire hébreu ou grec à la fin pour lire l'entrée lexicale  
 · B. Réciter le Symbole des apôtres, puis chanter un cantique, puis lire votre verset, puis prier  
 · C. Apprendre par cœur l'alphabet hébreu, puis l'alphabet grec, puis traduire le verset mot à mot  
-· D. Envoyer un courriel à un professeur de séminaire et attendre qu'il réponde en donnant le sens grec  
+· D. Envoyer un e-mail à un professeur de séminaire et attendre qu'il réponde en donnant le sens grec  
 _Pourquoi :_ Les quatre étapes : (1) trouver votre verset dans la concordance alphabétique principale sous un mot significatif, (2) repérer votre verset précis dans la liste des occurrences, (3) noter le numéro de Strong imprimé à côté, (4) se reporter au dictionnaire hébreu ou grec à la fin et lire l'entrée lexicale. Une fois le rythme acquis, toute l'opération prend environ quatre-vingt-dix secondes sur papier, dix secondes sur un téléphone.  
 > EN: What is the four-step lookup process for using a paper Strong's concordance? — ✓ Find your verse in the main concordance under a meaningful word; locate your verse in that word's list; note the Strong's number; flip to the Hebrew or Greek dictionary at the back to read the lexical entry
 
@@ -589,7 +589,7 @@ _Pourquoi :_ Chaque mot grec a son propre numéro de Strong : pistis G4102 (foi)
 ✓ A. (1) Lire votre verset et choisir un mot significatif ; (2) chercher le numéro de Strong ; (3) lire l'entrée du lexique ; (4) chercher toutes les autres occurrences du même numéro de Strong ; (5) lire 5 à 10 de ces versets en notant comment le contexte façonne le sens ; (6) revenir au verset de départ et le relire en ayant à l'esprit l'éventail des sens du mot  
 · B. Prier, chanter un cantique, réciter le credo, prendre la sainte cène, jeûner 40 jours, puis deviner le sens  
 · C. Apprendre par cœur toute la concordance du début à la fin  
-· D. Envoyer un courriel à un professeur de grec et attendre trois semaines sa réponse  
+· D. Envoyer un e-mail à un professeur de grec et attendre trois semaines sa réponse  
 _Pourquoi :_ La démarche complète d'étude de mot : (1) lire votre verset et choisir un mot, (2) trouver le numéro de Strong, (3) lire l'entrée du lexique, (4) cliquer sur « toutes les occurrences » du même numéro de Strong, (5) lire plusieurs de ces versets pour voir le mot dans des contextes différents, (6) revenir au verset de départ et le relire en ayant désormais à l'esprit tout l'éventail des sens du mot. Toute l'opération prend environ quinze minutes dans Blue Letter Bible. Autrefois, il fallait un diplôme de séminaire.  
 > EN: What is the proper six-step workflow for a complete Strong's-based word study, as you will apply it in Unit 11? — ✓ (1) Read your verse and pick a meaningful word; (2) look up the Strong's number; (3) read the lexicon entry; (4) look up every other occurrence of the same Strong's number; (5) read 5&ndash;10 of those verses noting how context shapes meaning; (6) return to your original verse and reread with the word's range in mind
 

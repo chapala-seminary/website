@@ -5,13 +5,13 @@ import { frenchCourseEntries, catalogCards } from './french-titles.ts';
 const translations: Record<string, string> = copy;
 const formCopy: Record<string, string> = {
   'Full name': 'Nom complet',
-  'Email (required)': 'Courriel (obligatoire)',
+  'Email (required)': 'E-mail (obligatoire)',
   'Country — select': 'Pays — sélectionnez',
   'How did you hear about CTS? (optional)': 'Comment avez-vous découvert CTS ? (facultatif)',
 };
 export const FRENCH_HOME_MESSAGES: Record<string, string> = {
   'Please enter your name': 'Veuillez saisir votre nom',
-  'Please enter a valid email address to register': 'Veuillez saisir une adresse courriel valide pour vous inscrire',
+  'Please enter a valid email address to register': 'Veuillez saisir une adresse e-mail valide pour vous inscrire',
   'Please select your country': 'Veuillez sélectionner votre pays',
   'Could not save — enable storage': 'Enregistrement impossible — autorisez le stockage dans le navigateur',
   'Certificate of Ministry': 'Certificat de ministère',
@@ -22,8 +22,8 @@ export const FRENCH_HOME_MESSAGES: Record<string, string> = {
   'Already registered on this device.': 'Vous êtes déjà inscrit sur cet appareil.',
   'Sent. Check that inbox (and its spam folder), then enter the code below.': 'Envoyé. Consultez votre boîte de réception et le dossier des courriers indésirables, puis saisissez le code ci-dessous.',
   'Too many requests today. Try again tomorrow.': 'Trop de demandes aujourd’hui. Réessayez demain.',
-  'The email could not be sent. Try again later.': 'Le courriel n’a pas pu être envoyé. Réessayez plus tard.',
-  'Enter the code from the email first.': 'Saisissez d’abord le code reçu par courriel.',
+  'The email could not be sent. Try again later.': 'L’e-mail n’a pas pu être envoyé. Réessayez plus tard.',
+  'Enter the code from the email first.': 'Saisissez d’abord le code reçu par e-mail.',
   'No record found for that code. Check it and try again.': 'Aucun dossier ne correspond à ce code. Vérifiez-le et réessayez.',
   'Copied ✓': 'Copié ✓', 'Copy': 'Copier',
 };
@@ -92,7 +92,7 @@ export function frenchLanding(root: HTMLElement) {
     option.setAttribute('data-en', option.text); option.setAttribute('data-es', option.text);
     option.setAttribute('data-fr', text); option.set_content(text);
   }
-  const labels: Record<string,string> = {'reg-name':'Nom complet','reg-email':'Adresse courriel','reg-country':'Pays','reg-heard':'Comment avez-vous découvert CTS ?','reg-track':'Parcours d’études','reg-existing-code':'Code étudiant'};
+  const labels: Record<string,string> = {'reg-name':'Nom complet','reg-email':'Adresse e-mail','reg-country':'Pays','reg-heard':'Comment avez-vous découvert CTS ?','reg-track':'Parcours d’études','reg-existing-code':'Code étudiant'};
   for (const [id,label] of Object.entries(labels)) root.querySelector('#'+id)?.setAttribute('aria-label',label);
   root.querySelector('img[alt="Chapala Theological Seminary seal"]')?.setAttribute('alt','Sceau du Séminaire théologique de Chapala');
   const title = 'Séminaire en ligne gratuit | Séminaire théologique de Chapala';

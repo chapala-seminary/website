@@ -410,14 +410,14 @@
     note.setAttribute('role', 'alert');
     var missing = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(student.email || '');
     var words = missing
-      ? { en: 'Add a valid email address to keep your progress with the seminary and receive your student code. Your work in this browser is still saved.', es: 'Añada un correo válido para guardar su progreso en el seminario y recibir su código de estudiante. Su trabajo en este navegador sigue guardado.', fr: 'Ajoutez une adresse courriel valide pour conserver votre progression au séminaire et recevoir votre code étudiant. Votre travail dans ce navigateur reste enregistré.' }
+      ? { en: 'Add a valid email address to keep your progress with the seminary and receive your student code. Your work in this browser is still saved.', es: 'Añada un correo válido para guardar su progreso en el seminario y recibir su código de estudiante. Su trabajo en este navegador sigue guardado.', fr: 'Ajoutez une adresse e-mail valide pour conserver votre progression au séminaire et recevoir votre code étudiant. Votre travail dans ce navigateur reste enregistré.' }
       : { en: 'We could not save your registration with the seminary. Your work is saved in this browser. Please try again.', es: 'No pudimos guardar su registro en el seminario. Su trabajo está guardado en este navegador. Inténtelo de nuevo.', fr: 'Nous n’avons pas pu enregistrer votre inscription au séminaire. Votre travail est enregistré dans ce navigateur. Réessayez.' };
     var text = window.CTSLanguage ? window.CTSLanguage.bi(words) : words.en;
     note.innerHTML = '<p>' + text + '</p>';
     if (missing) {
       var input = document.createElement('input');
       input.type = 'email'; input.autocomplete = 'email'; input.required = true;
-      input.setAttribute('aria-label', window.CTSLanguage?.lang === 'fr' ? 'Adresse courriel' : window.CTSLanguage?.lang === 'es' ? 'Correo electrónico' : 'Email');
+      input.setAttribute('aria-label', window.CTSLanguage?.lang === 'fr' ? 'Adresse e-mail' : window.CTSLanguage?.lang === 'es' ? 'Correo electrónico' : 'Email');
       note.appendChild(input);
     }
     var retry = document.createElement('button'); retry.type = 'button'; retry.className = 'btn';
@@ -531,7 +531,7 @@
     var words = {
       en: 'You already have a student record under this name and email. ' + link('Continue with it') + ' so this progress is kept with it.',
       es: 'Ya tiene un registro de estudiante con este nombre y correo. ' + link('Contin\u00fae con \u00e9l') + ' para que este progreso se guarde en \u00e9l.',
-      fr: 'Un dossier \u00e9tudiant existe d\u00e9j\u00e0 sous ce nom et cette adresse courriel. ' + link('Continuez avec ce dossier') + ' pour que cette progression y soit conserv\u00e9e.'
+      fr: 'Un dossier \u00e9tudiant existe d\u00e9j\u00e0 sous ce nom et cette adresse e-mail. ' + link('Continuez avec ce dossier') + ' pour que cette progression y soit conserv\u00e9e.'
     };
     d.innerHTML = window.CTSLanguage ? window.CTSLanguage.bi(words)
       : '<span class="lang-en en en-only">' + words.en + '</span><span class="lang-es es es-only">' + words.es + '</span>';

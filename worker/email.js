@@ -132,7 +132,7 @@ export function verificationEmail(code, link, language) {
   const messages = {
     en: { subject: `Verification code ${code}`, text: `Your Chapala Theological Seminary verification code is ${code}\nEnter it on the email confirmation or certificate page. It expires in 15 minutes.\n${link ? "Or open this link and press Confirm email:\n" + link + "\n\n" : "\n"}If you did not ask for this, ignore this message.` },
     es: { subject: `Código de verificación ${code}`, text: `Su código de verificación del Seminario Teológico de Chapala es ${code}\nEscríbalo en la página de confirmación del correo o del certificado. Vence en 15 minutos.\n${link ? "O abra este enlace y pulse Confirmar correo:\n" + link + "\n\n" : "\n"}Si no lo solicitó, ignore este mensaje.` },
-    fr: { subject: `Code de vérification ${code}`, text: `Votre code de vérification du Séminaire théologique de Chapala est ${code}\nSaisissez-le sur la page de confirmation de l’adresse courriel ou sur la page du certificat. Il expire dans 15 minutes.\n${link ? "Vous pouvez aussi ouvrir ce lien et appuyer sur « Confirmer l’adresse courriel » :\n" + link + "\n\n" : "\n"}Si vous n’avez pas fait cette demande, ignorez ce message.` },
+    fr: { subject: `Code de vérification ${code}`, text: `Votre code de vérification du Séminaire théologique de Chapala est ${code}\nSaisissez-le sur la page de confirmation de l’adresse e-mail ou sur la page du certificat. Il expire dans 15 minutes.\n${link ? "Vous pouvez aussi ouvrir ce lien et appuyer sur « Confirmer l’adresse e-mail » :\n" + link + "\n\n" : "\n"}Si vous n’avez pas fait cette demande, ignorez ce message.` },
   };
   return messages[emailLanguage(language)];
 }

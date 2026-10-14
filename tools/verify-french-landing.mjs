@@ -73,7 +73,7 @@ try {
     assert.equal(dialog, 'Veuillez saisir votre nom');
     await page.locator('#reg-name').fill('French landing fixture');
     await page.locator('#reg-save').click();
-    assert.equal(dialog, 'Veuillez saisir une adresse courriel valide pour vous inscrire');
+    assert.equal(dialog, 'Veuillez saisir une adresse e-mail valide pour vous inscrire');
     await page.locator('#reg-email').fill('french-landing-fixture@example.invalid');
     await page.locator('#reg-save').click();
     assert.equal(dialog, 'Veuillez sélectionner votre pays');

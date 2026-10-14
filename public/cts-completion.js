@@ -92,7 +92,7 @@
           btn: "Notificar al seminario",
           done: "Registrado \u2014 gracias." },
     fr: { reg: "Signaler votre r\u00e9ussite au s\u00e9minaire",
-          ph: "Votre adresse courriel (facultatif)",
+          ph: "Votre adresse e-mail (facultatif)",
           btn: "Pr\u00e9venir le s\u00e9minaire",
           done: "Enregistr\u00e9 \u2014 merci." }
   };
