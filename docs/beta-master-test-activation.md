@@ -8,7 +8,7 @@ Beta alone has `MASTER_TESTS_ACTIVATION: beta`. The guarded beta deployment crea
 
 The server applies this cutoff only to the 79 catalog entries whose `requiredFrom` is null. A valid master’s completion the server already recorded before the cutoff remains valid, with exemptions restored to other devices. Earlier Certificate/Associate completions, unfinished courses and work only reported after activation do not bypass new master’s requirements. Existing textbook/reading passes are kept.
 
-Production has no activation date set. Before production promotion, Robert must choose a separate ISO UTC date and set production’s `MASTER_TESTS_ACTIVATION` to that date. Production must never use the literal `beta`; configuration checks enforce that separation. No production migration or deployment is authorized by this PR.
+Production has no activation date set. At the separately authorized production release, set production’s `MASTER_TESTS_ACTIVATION` to that release’s ISO UTC timestamp so the requirements take effect immediately. Keep that cutoff for later deployments. Never use the literal `beta` or copy its October 13 cutoff. The production deployment guard refuses an unset or non-UTC timestamp; `npm run deploy` now applies pending production D1 migrations before publishing, including `0012_email_links.sql` and `0013_test_activation.sql`. Preparing this change does not authorize executing production migrations or deployment.
 
 ## Student notices
 

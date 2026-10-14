@@ -7,7 +7,15 @@ Production: https://chapalaseminary.org — branch `main`, Worker `chapala-semin
 
 Start from the latest beta branch and open PRs with base `beta`. Review the change, run `npm run build && npm test` on the Mac, fix failures and merge to beta. Keep related drafts and dependencies identifiable; do not import unreviewed French text into published content.
 
-The beta Actions workflow runs a fresh build and the complete suite on each push, then deploys with `npm run deploy:beta`. A failed build or test prevents publication. The final public health probe runs after publication, so its failure can leave a published Worker while marking the workflow failed. Check the live `/version.txt` and deployment version before retrying; the probe reports its HTTP status and Cloudflare request ID when available. It needs repository Actions secret `CTS_BETA_CLOUDFLARE_API_TOKEN`, a deployment token limited to the CTS account `119b0919229edb3185b69f1c6bd04b66`, including Workers deployment/routes, account/zone read and D1 access needed by Wrangler. Set it through GitHub's secret settings; do not put the value in files, PR descriptions or chat.
+The beta Actions workflow runs a fresh build and the complete suite on each push, then uses the guarded publication step of `npm run deploy:beta`. A failed build or test prevents publication. The final public health probe runs after publication, so its failure can leave a published Worker while marking the workflow failed. Check the live `/version.txt` and deployment version before retrying; the probe reports its HTTP status and Cloudflare challenge state. It needs repository Actions secret `CTS_BETA_CLOUDFLARE_API_TOKEN`, a deployment token limited to the CTS account `119b0919229edb3185b69f1c6bd04b66`, including Workers deployment/routes, account/zone read and D1 access needed by Wrangler. Set it through GitHub's secret settings; do not put the value in files, PR descriptions or chat.
+
+Publication and post-deploy verification now have separate Actions steps. CI uses
+the guarded `deploy:beta:publish` part of `deploy:beta`, then verifies the exact
+build stamp and all 79 activation dates. A challenged or unreachable custom
+domain can be checked on the same Worker's direct hostname, with an explicit
+warning that custom-domain browser acceptance remains pending. A wrong release,
+bad activation policy or HTTP 500 still fails verification. The deployment and
+probe outcomes are visible separately; check them before retrying a red run.
 
 For a manual staging deployment, use a clean checkout of the exact published beta commit:
 

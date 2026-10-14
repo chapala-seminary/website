@@ -8,8 +8,9 @@
     "preview": "astro preview",
     "check": "astro check",
     "test": "test/run-tests.sh",
-    "deploy": "node tools/verify-worker-config.mjs --deploy && node tools/gen-worker-catalog.mjs --check && npm run build && wrangler deploy",
-    "deploy:beta": "node tools/verify-beta-branch.mjs && node tools/verify-worker-config.mjs --deploy --env beta && node tools/gen-worker-catalog.mjs --check && node tools/prepare-beta-activation.mjs && npm run build && wrangler deploy --env beta && node tools/check-beta-activation.mjs"
+    "deploy": "node tools/verify-worker-config.mjs --deploy && node tools/gen-worker-catalog.mjs --check && npm run build && node tools/prepare-production-migrations.mjs && wrangler deploy",
+    "deploy:beta": "npm run deploy:beta:publish && node tools/check-beta-activation.mjs",
+    "deploy:beta:publish": "node tools/verify-beta-branch.mjs && node tools/verify-worker-config.mjs --deploy --env beta && node tools/gen-worker-catalog.mjs --check && node tools/prepare-beta-activation.mjs && npm run build && wrangler deploy --env beta"
   },
   "dependencies": {
     "astro": "^7.3.3",

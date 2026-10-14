@@ -71,6 +71,11 @@ done
 npx wrangler d1 execute chapala-students --local --persist-to "$STATE" \
   --config "$CONFIG" --file test/fixtures/legacy-no-email.sql >/dev/null
 
+# Install counting triggers before serving requests: schema changes can reload
+# workerd on Linux. Leave them in this disposable database for the whole run.
+npx wrangler d1 execute chapala-students --local --persist-to "$STATE" \
+  --config "$CONFIG" --file test/fixtures/sync-write-counts.sql >/dev/null
+
 # Nothing else may be on this port. A dev server left behind by an earlier run
 # answers /api/health perfectly well while pointing at a database directory
 # this run has just deleted -- so the suite comes up green on the parts that do
@@ -111,6 +116,7 @@ node tools/verify-worker-routing.mjs "http://127.0.0.1:$PORT"
 # And that the config the suite just tested still matches the one that gets
 # deployed, on every field that changes how a request is answered.
 node tools/verify-worker-config.mjs
+node test/beta-probe.test.mjs
 # outgoing email: Cloudflare first, Resend as the fallback (worker/email.js)
 node tools/verify-email.mjs
 node test/email-language.test.mjs
@@ -243,6 +249,7 @@ curl -sf "http://127.0.0.1:$PORT/__scheduled?cron=0+15+*+*+*" >/dev/null && slee
 # a suite ends up proving nothing.
 if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{};p.chromium.launch(o).then(b=>b.close()).catch(()=>process.exit(1))" 2>/dev/null; then
   node test/engine-languages.mjs
+  node test/missing-sa-grading.test.mjs
   node test/french-drafts.test.mjs
   # Every delivered French packet imported, stamped against the current English;
   # a pasted French question fails wherever the English one does.
@@ -320,6 +327,7 @@ node test/published-models.test.mjs
   # completion, and shows nothing to a student who passed nothing. Ruth and
   # Esther sent finished students back to Unit 1 until this existed.
   node tools/verify-certificate-unlock.mjs "http://127.0.0.1:$PORT"
+  node tools/verify-certificate-sync.mjs "http://127.0.0.1:$PORT"
   # The certificate as a sharp PDF, in English or Spanish, built in the browser.
   node tools/verify-cert-pdf.mjs "http://127.0.0.1:$PORT"
   # Credential boundaries: each course counts toward a degree only at the level

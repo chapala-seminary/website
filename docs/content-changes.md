@@ -1320,6 +1320,16 @@ disposition of every finding is in `docs/batch2-findings-disposition.md`.
 
 Content, prose and lesson-render baselines re-recorded for these edits.
 
+## Missing Genesis short-answer grading (14 Oct 2026)
+
+Missing or empty short-answer keys no longer count as correct. Master's exams
+with incomplete criteria show an unavailability notice and refuse submission
+without losing answers, awarding progress or starting a retake lock. Genesis's
+120 questions still need reviewed grading criteria; this safeguard contains the
+automatic-pass path while that work is pending. Earlier progress and the
+Certificate/Associate assessment rules are preserved. See
+[the safeguard and release limits](genesis-grading-safeguard.md).
+
 ## How to check any of this yourself
 
 ```

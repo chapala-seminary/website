@@ -29,13 +29,13 @@ try {
         for (const code of ['en', 'es', 'fr']) {
           if (!question.model?.[code]) continue;
           language(code);
-          if (!engine.shortAnswerRight(question, question.model[code])) failures.push(`${unit.course}/${unit.unit} SA ${i + 1}: ${code} model`);
+          const lists = Array.isArray(question.keywords) ? [question.keywords] : [question.keywords?.[code], question.keywords?.en];
+          const hasKeys = lists.some(list => Array.isArray(list) && list.length > 0);
+          if (engine.shortAnswerRight(question, question.model[code]) !== hasKeys) failures.push(`${unit.course}/${unit.unit} SA ${i + 1}: ${code} model or missing-key safeguard`);
           count++;
         }
         language('en');
-        // Questions without keywords retain their existing grading rule.
-        const keys = Array.isArray(question.keywords) ? question.keywords : question.keywords?.en;
-        if (keys?.length && engine.shortAnswerRight(question, '')) failures.push(`${unit.course}/${unit.unit} SA ${i + 1}: empty passes`);
+        if (engine.shortAnswerRight(question, '')) failures.push(`${unit.course}/${unit.unit} SA ${i + 1}: empty passes`);
         count++;
       }
       language('fr');
