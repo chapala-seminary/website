@@ -38765,6 +38765,37 @@ collections:
             value_type: int
             min: 1
             required: false
+          - label: Grading rubric
+            name: rubric
+            widget: object
+            required: false
+            collapsed: true
+            hint: The 2-4 points a correct answer must make. Change a point and raise the version by one.
+            fields:
+              - label: Version
+                name: v
+                widget: number
+                value_type: int
+                min: 1
+                default: 1
+              - label: Points
+                name: points
+                widget: list
+                label_singular: Point
+                min: 2
+                max: 4
+                summary: "{{fields.en}}"
+                fields:
+                  - label: "Id (a, b, c or d)"
+                    name: id
+                    widget: string
+                  - label: "Essential (a correct answer must make it)"
+                    name: essential
+                    widget: boolean
+                    default: false
+                  - label: "Point (English)"
+                    name: en
+                    widget: string
       - label: Fill in the blank
         name: fill
         widget: list
