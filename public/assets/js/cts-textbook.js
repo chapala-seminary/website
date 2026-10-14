@@ -84,7 +84,8 @@
     if (!when) return;
     note.hidden = false;
     note.innerHTML = bi({ en: "&#10003; You passed this textbook's test on " + esc(when) + ".",
-                          es: "&#10003; Aprobó el examen de este libro el " + esc(when) + "." });
+                          es: "&#10003; Aprobó el examen de este libro el " + esc(when) + ".",
+                          fr: "&#10003; Vous avez réussi l\u2019examen de ce manuel le " + esc(when) + "." });
   }
 
   // ---- the test page -----------------------------------------------------------
@@ -93,8 +94,8 @@
     if (!T || !window.CTSFill) return;
     var slug = T.slug, n = T.questions.length, reading = T.kind === "reading";
     var W = reading
-      ? { passed: { en: "Required-reading test passed", es: "Examen de lecturas requeridas aprobado" }, review: { en: "Go back to the readings", es: "Vuelva a las lecturas" } }
-      : { passed: { en: "Textbook test passed", es: "Examen del libro aprobado" }, review: { en: "Review the book", es: "Repase el libro" } };
+      ? { passed: { en: "Required-reading test passed", es: "Examen de lecturas requeridas aprobado", fr: "Examen des lectures obligatoires réussi" }, review: { en: "Go back to the readings", es: "Vuelva a las lecturas", fr: "Relisez les lectures" } }
+      : { passed: { en: "Textbook test passed", es: "Examen del libro aprobado", fr: "Examen du manuel réussi" }, review: { en: "Review the book", es: "Repase el libro", fr: "Relisez le manuel" } };
     var KEY = { state: "cts_textbook_" + slug + "_state", lock: "cts_textbook_" + slug + "_lock", passed: "cts_textbook_" + slug + "_passed" };
     var LOCK_MASTERS_MIN = 15, LOCK_CERT_MIN = 2;
     function track() { var s = jget("cts_student", null); return String(lsGet("cts_track") || (s && s.track) || "cert").toLowerCase(); }
@@ -182,10 +183,12 @@
       var active = {}; try { active = JSON.parse(lsGet("cts_required_from") || "{}"); } catch (e) {}
       if ("requiredFrom" in T && T.requiredFrom == null && !active[slug])
         return bi({ en: "This test is being introduced and is not yet required on any track.",
-                    es: "Este examen se está introduciendo y aún no es obligatorio en ningún trayecto." });
+                    es: "Este examen se está introduciendo y aún no es obligatorio en ningún trayecto.",
+                    fr: "Cet examen est en cours d\u2019introduction et n\u2019est encore obligatoire dans aucun parcours." });
       if (lsGet("cts_textbook_" + slug + "_exempt"))
         return bi({ en: "Your record already held this course as a master's completion before this test began to count, so it is not required of you for this course. You may still take it.",
-                    es: "Su registro ya tenía este curso como finalización de maestría antes de que este examen empezara a contar, así que no se le exige para este curso. Aun así puede presentarlo." });
+                    es: "Su registro ya tenía este curso como finalización de maestría antes de que este examen empezara a contar, así que no se le exige para este curso. Aun así puede presentarlo.",
+                    fr: "Votre dossier comptait déjà ce cours comme validé au niveau master avant que cet examen ne commence à compter\u202f; il n\u2019est donc pas exigé de vous pour ce cours. Vous pouvez tout de même le passer." });
       return "";
     }
     function renderStatus() {
@@ -194,11 +197,12 @@
       if (st && !when) h += '<p class="small muted" id="tb-standing">' + st + "</p>";
       if (when && !practice) {
         h += '<div class="cts-passed"><p class="cts-passed-title">&#10003; ' + bi(W.passed) + "</p>" +
-             "<p>" + bi({ en: "Passed on " + esc(when) + ". It is saved in this browser.", es: "Aprobado el " + esc(when) + ". Quedó guardado en este navegador." }) + "</p>" +
-             '<button type="button" class="btn" id="tb-practice">' + bi({ en: "Try another twenty, for practice", es: "Otras veinte, para practicar" }) + "</button></div>";
+             "<p>" + bi({ en: "Passed on " + esc(when) + ". It is saved in this browser.", es: "Aprobado el " + esc(when) + ". Quedó guardado en este navegador.", fr: "Réussi le " + esc(when) + ". Ce résultat est enregistré dans ce navigateur." }) + "</p>" +
+             '<button type="button" class="btn" id="tb-practice">' + bi({ en: "Try another twenty, for practice", es: "Otras veinte, para practicar", fr: "Vingt autres questions, pour vous exercer" }) + "</button></div>";
       } else if (m) {
         h += '<div class="exam-status fail">' + bi({ en: "Locked after a failed attempt. " + W.review.en + " and try again in " + m + " minute(s); the next attempt draws a fresh twenty.",
-                                                     es: "Bloqueado tras un intento fallido. " + W.review.es + " e inténtelo de nuevo en " + m + " minuto(s); el siguiente intento toma otras veinte." }) + "</div>";
+                                                     es: "Bloqueado tras un intento fallido. " + W.review.es + " e inténtelo de nuevo en " + m + " minuto(s); el siguiente intento toma otras veinte.",
+                                                     fr: "Examen bloqué après une tentative non réussie. " + W.review.fr + " et réessayez dans " + m + " minute(s)\u202f; la tentative suivante tire vingt nouvelles questions." }) + "</div>";
       }
       status.innerHTML = h;
       var pb = el("tb-practice");
@@ -224,8 +228,8 @@
         left = left.filter(function (t) { return t.slug !== slug; });
         if (!left.length) return "";
         var t = left[0], rd = t.kind === "reading";
-        return " " + bi({ en: "The course also needs its " + (rd ? "required-reading test" : "textbook test") + ": ", es: "El curso también necesita su " + (rd ? "examen de lecturas requeridas" : "examen del libro de texto") + ": " })
-          + '<a href="/' + esc(t.page) + 'Test.html">' + bi({ en: "take it", es: "preséntelo" }) + "</a>.";
+        return " " + bi({ en: "The course also needs its " + (rd ? "required-reading test" : "textbook test") + ": ", es: "El curso también necesita su " + (rd ? "examen de lecturas requeridas" : "examen del libro de texto") + ": ", fr: "Le cours exige aussi " + (rd ? "l\u2019examen des lectures obligatoires" : "l\u2019examen du manuel") + "\u00a0: " })
+          + '<a href="/' + esc(t.page) + 'Test.html">' + bi({ en: "take it", es: "preséntelo", fr: "passez-le" }) + "</a>.";
       } catch (e) { return ""; }
     }
     function say(msg, colour) { result.innerHTML = msg ? '<span style="color:' + (colour || "#000") + '">' + msg + "</span>" : ""; }
@@ -252,8 +256,9 @@
           } catch (e) {}
         }
         say(bi({ en: "&#10003; Passed: " + r.score + " of " + r.n + " right (" + T.pass + " needed)." + (completedNow === "new" ? " That completes the course: " : ""),
-                 es: "&#10003; Aprobado: " + r.score + " de " + r.n + " correctas (se necesitan " + T.pass + ")." + (completedNow === "new" ? " Con esto el curso queda completo: " : "") })
-            + (completedNow === "new" && T.completion.page ? '<a href="/' + esc(T.completion.page) + '">' + bi({ en: "your certificate", es: "su certificado" }) + "</a>" : "")
+                 es: "&#10003; Aprobado: " + r.score + " de " + r.n + " correctas (se necesitan " + T.pass + ")." + (completedNow === "new" ? " Con esto el curso queda completo: " : ""),
+                 fr: "&#10003; Réussi\u00a0: " + r.score + " bonnes réponses sur " + r.n + " (" + T.pass + " requises)." + (completedNow === "new" ? " Le cours est ainsi terminé\u00a0: " : "") })
+            + (completedNow === "new" && T.completion.page ? '<a href="/' + esc(T.completion.page) + '">' + bi({ en: "your certificate", es: "su certificado", fr: "votre certificat" }) + "</a>" : "")
             + stillToPass(), "#1f6b3b");
         practice = false;
       } else {
@@ -262,7 +267,8 @@
         lsSet(KEY.lock, String(until));
         state.redrawAt = until; save();
         say(bi({ en: "Not yet: " + r.score + " of " + r.n + " right, " + T.pass + " needed. " + W.review.en + " and try again in " + mins + " minute(s).",
-                 es: "Aún no: " + r.score + " de " + r.n + " correctas; se necesitan " + T.pass + ". " + W.review.es + " e inténtelo de nuevo en " + mins + " minuto(s)." }), "#8a1f1f");
+                 es: "Aún no: " + r.score + " de " + r.n + " correctas; se necesitan " + T.pass + ". " + W.review.es + " e inténtelo de nuevo en " + mins + " minuto(s).",
+                 fr: "Pas encore\u00a0: " + r.score + " bonnes réponses sur " + r.n + "\u202f; il en faut " + T.pass + ". " + W.review.fr + " et réessayez dans " + mins + " minute(s)." }), "#8a1f1f");
       }
       fill.render();
       renderStatus();

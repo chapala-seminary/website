@@ -45,7 +45,8 @@ for (const f of fs.readdirSync('public').filter((f) => /certificate/i.test(f) &&
   const c = courses[key];
   if (!c) { problems.push(`${f}: no catalog entry for "${base}"`); continue; }
   const m = byCatalog[key];
-  names[f.toLowerCase()] = m ? { en: m.en, es: m.es, authors: m.authors } : { en: c.title.en, es: c.title.es, authors: ['cook'] };
+  // French: the catalog's name (the Certificate Maker has no French yet).
+  names[f.toLowerCase()] = m ? { en: m.en, es: m.es, fr: c.title.fr, authors: m.authors } : { en: c.title.en, es: c.title.es, fr: c.title.fr, authors: ['cook'] };
 }
 if (problems.length) { problems.forEach((p) => console.error('  ' + p)); process.exit(1); }
 
@@ -58,12 +59,13 @@ for (const [code, c] of Object.entries(cat.completions)) {
   const single = { WISESPEAK: 'wisespeak', COUNSELING: 'counseling', STORYTEL: 'narrative', ETHICS: 'ethics' }[code];
   const m = MAKER[slug] || MAKER[single];
   const fallback = Object.values(courses).find((x) => (x.code || '').toUpperCase() === code || `CTS${(x.code || '').toUpperCase().replace(/^CTS/, '')}` === code);
-  byCode[code] = m ? { en: m.en, es: m.es }
-    : fallback ? { en: fallback.title.en, es: fallback.title.es }
-    : { en: c.name.replace(/\s*\|\s*$/, ''), es: c.name.replace(/\s*\|\s*$/, '') };
+  const fr = c.title?.fr || fallback?.title.fr;
+  byCode[code] = m ? { en: m.en, es: m.es, ...(fr ? { fr } : {}) }
+    : fallback ? { en: fallback.title.en, es: fallback.title.es, ...(fr ? { fr } : {}) }
+    : { en: c.name.replace(/\s*\|\s*$/, ''), es: c.name.replace(/\s*\|\s*$/, ''), ...(fr ? { fr } : {}) };
 }
 
-const text = '/* The course name on each course certificate, English and Spanish, and its\n' +
+const text = '/* The course name on each course certificate, English, Spanish and French, and its\n' +
   '   author(s), for the downloadable PDF (cts-cert-pdf.js). Written by\n' +
   '   tools/build-cert-names.mjs from src/data/certificate-courses.json (the\n' +
   '   Certificate Maker\'s list) -- change that and re-run it. */\n' +

@@ -26,6 +26,7 @@ import { courseShortfall, textbookShortfall, exemptionsFor, degreeShortfall, res
 import catalog from './catalog.json';
 import { emailConfigured, emailLogOnly, sendEmail, verificationEmail, certificateEmail, codeEmail } from './email.js';
 import { notify, notifyBatch, retryFailed } from './notify.js';
+import { awardTitle } from './award-names.js';
 
 const MAX = { name: 120, email: 160, country: 80, track: 24, goal: 400, heard: 40, title: 200, course: 64, code: 40 };
 const TRACKS = new Set(['cert', 'certificate', 'associate', 'thm', 'mdiv']);
@@ -469,7 +470,8 @@ async function issueCertificate(request, env) {
       let emailed = false;
       try {
         await sendEmail(env, { to: student.email, ...certificateEmail({
-          name: student.name, award: title, code: vc, page, origin: new URL(request.url).origin, lang: lang(b.lang) || student.lang }) });
+          name: student.name, award: awardTitle({ level, course, title }, lang(b.lang) || student.lang), code: vc, page,
+          origin: new URL(request.url).origin, lang: lang(b.lang) || student.lang }) });
         emailed = true;
       } catch (e) { console.error('certificate email failed', e && e.message); }
       return json({ verifyCode: vc, reissued: false, emailed,
@@ -569,6 +571,9 @@ async function emailStart(request, env) {
   const linkHash = await hashCode('email-link', token);
   const preferredLanguage = lang(b.lang) || student.lang || 'en';
   const link = new URL((preferredLanguage === 'en' ? '/' : '/' + preferredLanguage + '/') + 'cts-confirm-email.html', request.url);
+  // The language route and the explicit choice, so a device that remembers
+  // another language still opens the page in this one (public/cts-lang.js).
+  if (preferredLanguage !== 'en') link.searchParams.set('cts_lang', preferredLanguage);
   // A fragment is never sent to the server or included in referrer headers.
   link.hash = 'token=' + token;
   const expires = new Date(t.getTime() + CHALLENGE.ttlMin * 60000).toISOString();
@@ -678,7 +683,47 @@ async function deleteStudent(env, rawCode) {
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
-function verifyPage(cert, typed) {
+/* /verify is English with Spanish beneath it, as it always was. /fr/verify
+ * is French only: the certificate email a French student receives links
+ * there (worker/email.js), and a French reader is never shown a bilingual
+ * English/Spanish page (French review, 13 Oct 2026). */
+const FR_MONTHS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+function frenchDate(iso) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(iso || ''));
+  return m ? `${+m[3] === 1 ? '1er' : +m[3]} ${FR_MONTHS[+m[2] - 1]} ${m[1]}` : String(iso || '').slice(0, 10);
+}
+function verifyPageFr(cert, typed) {
+  const lookup = typed === undefined;
+  const ok = cert && !cert.revoked_at;
+  const title = lookup ? 'Vérifier un certificat' : ok ? 'Certificat vérifié'
+    : cert ? 'Certificat retiré' : 'Certificat introuvable';
+  const rows = lookup ? `
+      <p>Saisissez le code de vérification du certificat.</p>
+      <form action="/fr/verify" method="get">
+        <label for="verify-code">Code de vérification</label>
+        <input id="verify-code" name="code" required maxlength="32" autocomplete="off" spellcheck="false">
+        <button type="submit">Vérifier</button>
+      </form>` : ok ? `
+      <dl>
+        <dt>Décerné à</dt><dd>${esc(cert.student_name)}</dd>
+        <dt>Titre</dt><dd>${esc(awardTitle(cert, 'fr'))}</dd>
+        <dt>Délivré le</dt><dd>${esc(frenchDate(cert.issued_at))}</dd>
+        <dt>Code</dt><dd class="code">${esc(cert.verify_code)}</dd>
+      </dl>` : `
+      <p class="muted">Aucun certificat n’a été délivré avec le code
+        <span class="code">${esc(typed || '')}</span>.</p>`;
+  return verifyShell('fr', `${title} · Séminaire théologique de Chapala`, `
+  ${lookup ? '' : `<div class="status ${ok ? 'ok' : 'no'}">${ok ? '✓ Vérifié' : '· Non vérifié'}</div>`}
+  <h1>Séminaire théologique de Chapala</h1>
+  ${rows}
+  <footer>
+    Cette page confirme que le séminaire a délivré ce certificat. Le Séminaire
+    théologique de Chapala n’est pas un établissement accrédité.
+    <br><a href="/fr/index.html">chapalaseminary.org</a>
+  </footer>`);
+}
+function verifyPage(cert, typed, lang) {
+  if (lang === 'fr') return verifyPageFr(cert, typed);
   const lookup = typed === undefined;
   const ok = cert && !cert.revoked_at;
   const title = lookup ? 'Verify a certificate · Verificar un certificado' : ok ? 'Certificate verified · Certificado verificado'
@@ -700,11 +745,26 @@ function verifyPage(cert, typed) {
       <p class="muted">No certificate has been issued with the code
         <span class="code">${esc(typed || '')}</span>.
         <br><span lang="es">No se ha emitido ningún certificado con ese código.</span></p>`;
+  return verifyShell('en', `${title} · Chapala Theological Seminary`, `
+  ${lookup ? '' : `<div class="status ${ok ? 'ok' : 'no'}">${ok ? '✓ Verified · Verificado' : '· Not verified · No verificado'}</div>`}
+  <h1>Chapala Theological Seminary</h1>
+  ${rows}
+  <footer>
+    This page confirms that the seminary issued this certificate. Chapala
+    Theological Seminary is not an accredited institution.
+    <br><span lang="es">Esta página confirma que el seminario emitió este
+    certificado. El Seminario Teológico de Chapala no es una institución
+    acreditada.</span>
+    <br><a href="/">chapalaseminary.org</a>
+  </footer>
+`);
+}
+function verifyShell(lang, title, card) {
   return `<!doctype html>
-<html lang="en"><head>
+<html lang="${lang}"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
-<title>${esc(title)} · Chapala Theological Seminary</title>
+<title>${esc(title)}</title>
 <style>
   :root{--ink:#2b2320;--muted:#6b615c;--line:#e2d8c8;--gold:#9c7c38;--oxblood:#6b2333;--ok:#1f6b3b}
   body{margin:0;background:#fbf6ea;color:var(--ink);font:16px/1.55 Georgia,"Times New Roman",serif}
@@ -723,19 +783,7 @@ function verifyPage(cert, typed) {
   label{display:block} input,button{box-sizing:border-box;max-width:100%;font:inherit;padding:10px;margin-top:8px}
   input{width:100%;border:1px solid var(--muted);border-radius:4px} button{background:var(--oxblood);color:#fff;border:0;border-radius:4px;cursor:pointer}
 </style></head>
-<body><main><div class="card">
-  ${lookup ? '' : `<div class="status ${ok ? 'ok' : 'no'}">${ok ? '✓ Verified · Verificado' : '· Not verified · No verificado'}</div>`}
-  <h1>Chapala Theological Seminary</h1>
-  ${rows}
-  <footer>
-    This page confirms that the seminary issued this certificate. Chapala
-    Theological Seminary is not an accredited institution.
-    <br><span lang="es">Esta página confirma que el seminario emitió este
-    certificado. El Seminario Teológico de Chapala no es una institución
-    acreditada.</span>
-    <br><a href="/">chapalaseminary.org</a>
-  </footer>
-</div></main></body></html>`;
+<body><main><div class="card">${card}</div></main></body></html>`;
 }
 
 /* ---- dispatch ------------------------------------------------------------- */
@@ -814,12 +862,18 @@ export async function handle(request, env) {
   const method = request.method.toUpperCase();
 
   try {
-    if (path === '/verify' && method === 'GET') {
+    // /fr/verify and /fr/verify/<code> are the French page (verifyPageFr).
+    // /es/verify keeps the bilingual page every Spanish link already uses.
+    const routed = /^\/(es|fr)(\/verify(?:\/.*)?)$/.exec(path);
+    const verifyPath = routed ? routed[2] : path;
+    const verifyLang = routed ? routed[1] : null;
+    const verifyBase = verifyLang === 'fr' ? '/fr/verify' : '/verify';
+    if (verifyPath === '/verify' && method === 'GET') {
       const code = (url.searchParams.get('code') || '').trim();
       if (code) return new Response(null, { status: 303, headers: {
-        location: '/verify/' + encodeURIComponent(code.slice(0, 32)), 'cache-control': 'no-store',
+        location: verifyBase + '/' + encodeURIComponent(code.slice(0, 32)), 'cache-control': 'no-store',
       } });
-      return new Response(verifyPage(null), { headers: {
+      return new Response(verifyPage(null, undefined, verifyLang), { headers: {
         'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store',
       } });
     }
@@ -862,11 +916,11 @@ export async function handle(request, env) {
           : json({ valid: false }, cert ? 200 : 404);
       });
     }
-    if ((m = /^\/verify\/([^/]+)$/.exec(path)) && method === 'GET') {
+    if ((m = /^\/verify\/([^/]+)$/.exec(verifyPath)) && method === 'GET') {
       return await guarded(request, env, 'verify', async () => {
       const typed = decodeURIComponent(m[1]);
       const cert = await lookupCertificate(env, typed);
-      return new Response(verifyPage(cert, typed), {
+      return new Response(verifyPage(cert, typed, verifyLang), {
         status: cert ? 200 : 404,
         headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store' },
       });

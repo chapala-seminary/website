@@ -4,6 +4,10 @@ import type { Lesson } from './lesson.ts';
 
 export const LANGUAGES = ['en', 'es', 'fr'];
 export const NAMES: Record<string, string> = { en: 'English', es: 'Español', fr: 'Français' };
+/* A block whose text in a language is exactly this is left out of that
+   language's page: e.g. the Spanish half of an old two-language caption that
+   was stored as "English" and has no place on a French page. */
+export const OMIT = '<!--cts:omit-->';
 export const localeHref = (file: string, lang: string) => `/${lang === 'en' ? '' : lang + '/'}${file}`;
 const MARKERS: Record<string, string[]> = {
   en: ['lang-en', 'en-only', 'block-en', 'teach-en', 'en-lbl', 'en', 'english'],
@@ -77,6 +81,7 @@ export function renderLanguageLesson(lesson: Lesson, lang: string): string {
     if (!b) throw new Error(`unknown lesson block ${lesson.course}/${lesson.unit}/${id}`);
     if (anchors.get(id) !== slot || seen.has(id)) return '';
     seen.add(id);
+    if (b.text[lang] === OMIT) return '';
     return pairText(b.text[lang], b.text[lesson.sourceLang], lang, lesson.sourceLang, id);
   });
   if (seen.size !== blocks.size) throw new Error(`orphan lesson blocks in ${lesson.course}/${lesson.unit}`);

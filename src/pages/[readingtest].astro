@@ -13,6 +13,7 @@ import { getCollection } from 'astro:content';
 import Textbook from '../layouts/Textbook.astro';
 import catalog from '../../worker/catalog.json';
 import { testsOfCourseWith, unitCourseWith } from '../lib/required-tests.ts';
+import { frReadingsTitle, frReadingsRoom } from '../lib/french-titles.ts';
 
 export async function getStaticPaths() {
   const tests = await getCollection('readings');
@@ -48,45 +49,51 @@ const dated = tests.length > 1 || tests.some((t) => 'requiredFrom' in t);
 const completion = unitCourse
   ? { slug: unitCourse[0], code: tb.code, name: done.name, page: done.page, units: unitCourse[1].units, textbook: reading.slug, textbookKind: 'reading', textbookPage: reading.page, ...(dated ? { tests } : {}) }
   : { single: true, code: tb.code, name: done.name, page: done.page, textbook: reading.slug, textbookKind: 'reading', textbookPage: reading.page, ...(dated ? { tests } : {}) };
-const book = { slug: reading.slug, page: reading.page, course: reading.course, title: reading.title, edition: 'readings' };
+const book = { slug: reading.slug, page: reading.page, course: reading.course, title: { ...reading.title, fr: frReadingsTitle(reading.course) }, edition: 'readings' };
+const roomFr = frReadingsRoom(reading.course, reading.page);
 const perReading = reading.test.perReading ?? null;
 const pending = 'requiredFrom' in reading && reading.requiredFrom == null;
 const from = reading.requiredFrom ? new Date(reading.requiredFrom) : null;
 const fromText = from ? { en: from.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }),
-                          es: from.toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }) } : null;
+                          es: from.toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }),
+                          fr: from.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }) } : null;
 const data = JSON.stringify({ slug: reading.slug, page: reading.page, kind: 'reading', title: reading.title, draw, pass, questions, completion,
   ...(perGroup ? { perGroup, revision } : {}), ...(perReading ? { perReading } : {}), ...('requiredFrom' in reading ? { requiredFrom: reading.requiredFrom ?? null } : {}) }).replace(/</g, '\\u003c');
 ---
 <Textbook kind="reading-test" book={book} course={course} accent={accent} scripts={['/assets/js/cts-fill.js', '/assets/js/cts-required-tests.js', '/assets/js/cts-record.js']} sync={true}>
-  <section class="card tb-about">
-    <h2><span class="lang-en">Required-reading test</span><span class="lang-es">Examen de lecturas requeridas</span></h2>
+  <section class="card tb-about" data-cts-chrome>
+    <h2><span class="lang-en">Required-reading test</span><span class="lang-es">Examen de lecturas requeridas</span><span class="lang-fr">Examen des lectures obligatoires</span></h2>
     <p>
       <span class="lang-en">Twenty fill-in-the-blank questions, drawn at random from forty{(perReading || perGroup) ? ` — ${perReading || perGroup} from each of the five readings —` : ','} on {reading.room.en}. You need {pass} of {draw} to pass. Type the missing word or phrase and press Check (or Enter): each answer is marked at once. Capitals, accents and punctuation do not matter; you may answer in English or Spanish. If you fall short, go back to the readings and try again after a short wait; the next attempt draws a fresh twenty.</span>
       <span class="lang-es">Veinte preguntas para completar, tomadas al azar de cuarenta{(perReading || perGroup) ? ` — ${perReading || perGroup} de cada una de las cinco lecturas —` : ','} sobre {reading.room.es}. Necesita {pass} de {draw} para aprobar. Escriba la palabra o frase que falta y pulse Comprobar (o Intro): cada respuesta se califica en seguida. No importan las mayúsculas, los acentos ni la puntuación; puede responder en inglés o en español. Si no alcanza la nota, vuelva a las lecturas e inténtelo de nuevo tras una breve espera; el siguiente intento toma otras veinte.</span>
+      <span class="lang-fr">Vingt questions à compléter, tirées au hasard parmi quarante{(perReading || perGroup) ? ` — ${perReading || perGroup} pour chacune des cinq lectures —` : ','} sur {roomFr}. Il faut {pass} bonnes réponses sur {draw} pour réussir. Saisissez le mot ou l’expression qui manque, puis appuyez sur Vérifier (ou Entrée) : chaque réponse est corrigée aussitôt. Les majuscules, les accents et la ponctuation ne comptent pas. Vous pouvez répondre en français lorsque la question existe en français ; une question encore en anglais attend une réponse en anglais. Si vous n’atteignez pas le score requis, relisez les lectures et réessayez après une courte attente ; la tentative suivante tire vingt nouvelles questions.</span>
     </p>
     {pending ? (
     <p>
       <span class="lang-en">This test is being introduced for the M.Div. and Th.M. tracks and is not yet required: the seminary will announce when it begins to count. Until then any student may take it; a pass is kept in your record and will count when it does.</span>
       <span class="lang-es">Este examen se está introduciendo para los trayectos M.Div. y Th.M. y aún no es obligatorio: el seminario anunciará cuándo empieza a contar. Mientras tanto cualquier estudiante puede presentarlo; la aprobación queda en su registro y contará cuando así sea.</span>
+      <span class="lang-fr">Cet examen est en cours d’introduction pour les parcours M.Div. et Th.M. et n’est pas encore obligatoire : le séminaire annoncera le moment où il commencera à compter. D’ici là, tout étudiant peut le passer ; une réussite est conservée dans votre dossier et comptera le moment venu.</span>
     </p>
     ) : (
     <p>
       <span class="lang-en">On the M.Div. and Th.M. tracks this test is required: the course is complete when its units{tests.length > 1 ? ', its textbook test' : ''} and this test are passed.{fromText ? ` It counts from ${fromText.en}; a master's completion of the course already in your record before then stands as it is.` : ''} Certificate and Associate students may take it too, as a learning opportunity; nothing of theirs depends on it.</span>
       <span class="lang-es">En los trayectos M.Div. y Th.M. este examen es obligatorio: el curso se completa cuando se aprueban sus unidades{tests.length > 1 ? ', el examen del libro de texto' : ''} y este examen.{fromText ? ` Cuenta desde el ${fromText.es}; una finalización de maestría del curso que ya estaba en su registro antes de esa fecha queda como está.` : ''} Los estudiantes de Certificado y Asociado también pueden presentarlo, como oportunidad de aprendizaje; nada de lo suyo depende de él.</span>
+      <span class="lang-fr">Pour les parcours M.Div. et Th.M., cet examen est obligatoire : le cours est terminé lorsque ses unités{tests.length > 1 ? ', l’examen du manuel' : ''} et cet examen sont réussis.{fromText ? ` Il compte à partir du ${fromText.fr} ; une validation de niveau master déjà inscrite dans votre dossier avant cette date reste acquise.` : ''} Les étudiants des parcours Certificat et diplôme associé peuvent aussi le passer, pour apprendre ; rien de leur parcours n’en dépend.</span>
     </p>
     )}
     <p class="small muted">
       <span class="lang-en">The readings are not on this page: <a href={`/${reading.page}.html`}>read them first</a>, then come back.</span>
       <span class="lang-es">Las lecturas no están en esta página: <a href={`/${reading.page}.html`}>léalas primero</a> y luego vuelva.</span>
+      <span class="lang-fr">Les lectures ne sont pas sur cette page : <a href={`/${reading.page}.html`}>lisez-les d’abord</a>, puis revenez.</span>
     </p>
   </section>
 
   <section class="card tb-test" id="tb-test">
     <div id="tb-status" role="status"></div>
     <div id="tb-questions"></div>
-    <div class="actions">
-      <button type="button" class="btn solid" id="tb-submit"><span class="lang-en">Submit the test</span><span class="lang-es">Enviar el examen</span></button>
-      <button type="button" class="btn secondary" id="tb-reset"><span class="lang-en">Clear my answers</span><span class="lang-es">Borrar mis respuestas</span></button>
+    <div class="actions" data-cts-chrome>
+      <button type="button" class="btn solid" id="tb-submit"><span class="lang-en">Submit the test</span><span class="lang-es">Enviar el examen</span><span class="lang-fr">Envoyer l’examen et voir le résultat</span></button>
+      <button type="button" class="btn secondary" id="tb-reset"><span class="lang-en">Clear my answers</span><span class="lang-es">Borrar mis respuestas</span><span class="lang-fr">Recommencer l’examen</span></button>
     </div>
     <div id="tb-result" style="margin-top:15px;font-weight:bold;"></div>
   </section>

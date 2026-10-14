@@ -115,6 +115,9 @@ node tools/verify-worker-config.mjs
 node tools/verify-email.mjs
 node test/email-language.test.mjs
 node tools/gen-worker-catalog.mjs --check
+# The French on the certificate pages of the French courses (French review,
+# 13 Oct 2026): written beside the Spanish, never edited by hand.
+node tools/add-certificate-french.mjs --check
 node tools/verify-legacy-table.mjs
 
 # A staging host must not be indexable, and must not change the real site.
@@ -241,6 +244,9 @@ curl -sf "http://127.0.0.1:$PORT/__scheduled?cron=0+15+*+*+*" >/dev/null && slee
 if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{};p.chromium.launch(o).then(b=>b.close()).catch(()=>process.exit(1))" 2>/dev/null; then
   node test/engine-languages.mjs
   node test/french-drafts.test.mjs
+  # Every delivered French packet imported, stamped against the current English;
+  # a pasted French question fails wherever the English one does.
+  node test/french-import.test.mjs
 node test/published-models.test.mjs
   # Short answers in John, Matthew, Acts and Romans (French Batch 2 review):
   # a copied question never passes, correct answers do, known wrong ones fail.
@@ -278,6 +284,11 @@ node test/published-models.test.mjs
   # Counseling, Narrative and WiseSpeak Preaching, and Ethics.
   node tools/verify-fill-single.mjs "http://127.0.0.1:$PORT"
   node tools/verify-french-wisespeak.mjs "http://127.0.0.1:$PORT"
+  # Narrative Preaching, Counseling and Ethics French drafts: packets match the
+  # pages, French models meet their keywords, /fr/ pages grade and read in French.
+  node tools/french-static-courses.mjs --check
+  node tools/verify-french-static-packets.mjs
+  node tools/verify-french-static.mjs "http://127.0.0.1:$PORT"
   node tools/verify-single-completion.mjs "http://127.0.0.1:$PORT"
   # The textbook tests (Oct 2026): twenty drawn from forty, eighteen to pass,
   # locked after a failure, a fresh draw after the wait -- as a student
@@ -334,6 +345,8 @@ node test/published-models.test.mjs
   # Every generated language page, on desktop and phone, including source text.
   node tools/verify-language-browser.mjs "http://127.0.0.1:$PORT"
   node test/french-exam-fallback.test.mjs "http://127.0.0.1:$PORT"
+  # French links stay French, and the pages French emails open are French.
+  node test/french-routing.test.mjs "http://127.0.0.1:$PORT"
 
   # The page that shows a student what is held about them and deletes it.
   # Driven in a browser against the real Worker, because a privacy page whose

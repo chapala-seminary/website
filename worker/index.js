@@ -89,6 +89,8 @@ async function route(request, env) {
   const path = new URL(request.url).pathname;
   if (path === '/api' || path.startsWith('/api/')) return await handle(request, env);
   if (path === '/verify' || path.startsWith('/verify/')) return await handle(request, env);
+  // The verification page in a reader's language: /fr/verify (worker/api.js).
+  if (/^\/(?:es|fr)\/verify(?:\/|$)/.test(path)) return await handle(request, env);
   if (path === '/staff' || path.startsWith('/staff/')) return await handleStaff(request, env);
   let m;
   if ((m = /^\/stop-notes\/([^/]+)$/.exec(path)) && env.DB) return await stopNotes(request, env, decodeURIComponent(m[1]));

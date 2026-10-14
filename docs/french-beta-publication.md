@@ -4,24 +4,26 @@ Robert authorized publishing Wayne's French drafts on beta on 12 October 2026, w
 
 ## Courses
 
-| Course | French entry | Units |
-|---|---|---:|
-| New Testament Survey | /fr/CTSNTUnit1.html | 12 |
-| Systematic Theology | /fr/CTSSTUnit1.html | 13 |
-| Evangelism | /fr/CTSEvangelismUnit1.html | 13 |
-| Pastoral Ministries | /fr/CTSPMUnit1.html | 12 |
-| Church History | /fr/CTSCHUnit1.html | 10 |
-| How We Got the Bible | /fr/CTSBibleUnit1.html | 10 |
-| Pentateuch | /fr/CTSPentUnit1.html | 12 |
-| Joshua Intensive | /fr/CTSJoshUnit1.html | 10 |
-| Psalms | /fr/CTSPsalmsUnit1.html | 12 |
-| WiseSpeak Preaching | /fr/CTS_WiseSpeak_Preaching.html | 10 on one page |
+Status on 13 October 2026: every course on the site has a French machine draft on beta.
 
-104 collection-based units plus the ten-unit WiseSpeak page are translated. Old Testament Survey is not part of these ten delivered course drafts. Reading rooms and textbooks retain their existing translations/fallbacks.
+- **All 41 content courses** from Wayne's packets (`_review/french`, 464 packets): 40 lesson-collection courses imported into canonical `src/content/lessons` and `src/content/units` by `tools/import-french-drafts.mjs`, plus WiseSpeak Preaching (one static page, `tools/french-wisespeak.mjs`).
+- **Old Testament Survey** (13 units, drafted by Claude; see below).
+- **Narrative Preaching, Counseling and Ethics**, the three static-page courses, built by `tools/french-static-courses.mjs` from `_review/french/NarrativePreaching`, `Counseling` and `Ethics`.
+- **The French interface**: landing page, catalog, about, privacy, before-you-begin, resources, reading-room frames, registration, backup and email confirmation, certificate pages and /fr/verify.
+- **Emails** in French (verification, recovery, certificate, reminders) for students whose saved language is fr.
+- **Certificates** for every course and degree, with French course names.
+
+In all, 466 lesson-collection units (41 collections) plus the WiseSpeak, Narrative Preaching, Counseling and Ethics pages. French entry pages are `/fr/<same file name>`, e.g. /fr/CTSActsUnit1.html, /fr/CTSUnit1.html.
+
+**Textbooks and required readings follow separately.** Their pages keep their existing English/Spanish text with a French interface frame until a later change.
+
+French wording conventions settled on 13 October: « adresse e-mail » / « e-mail » (not « courriel »); exam vocabulary « examen », « tentative », « Envoyer l'examen et voir le résultat », « Recommencer l'examen ».
+
+Old Testament Survey is not one of Wayne's delivered drafts. Claude drafted its 13 units on 13 October 2026 at Robert's request, directly in the canonical `src/content/lessons/CTS` and `src/content/units/CTS` French fields, marked `machine` with source hashes like the other courses. It awaits French theological review. Scripture follows Louis Segond 1910 (with Segond verse numbering where it differs, e.g. Micah 5:1, Hosea 14:5, Isaiah 9:5); a few answer keys follow Segond's wording (for example Daniel 3:25 « un fils des dieux »). Points for the French reviewer, and English-source problems found while translating, were reported to Robert and Wayne on 13 October 2026; the English was not changed. The French pages are graded by the shipped `cts-engine.js`, like every other unit page; `cts-genesis-engine.js` is used only by the Genesis certificate page.
 
 ## Provenance and editing
 
-The nine collection-based courses use canonical `src/content/lessons` and `src/content/units` French fields, marked `machine` with source hashes. Edit those fields in the CMS or on a branch; mark actual reviewed corrections `machine-edited` or `human`. `tools/import-french-drafts.mjs --write` is an initial import tool and refuses to overwrite reviewed work. It validates source correspondence, preserves MC answer indexes and maps option order/explanations to the corrected English banks. Specific updates are in `tools/data/french-beta-corrections.json`.
+The collection-based courses use canonical `src/content/lessons` and `src/content/units` French fields, marked `machine` with source hashes. Edit those fields in the CMS or on a branch; mark actual reviewed corrections `machine-edited` or `human`. `tools/import-french-drafts.mjs --write` is an initial import tool and refuses to overwrite reviewed work. It validates source correspondence, preserves MC answer indexes and maps option order/explanations to the corrected English banks. Specific updates are in `tools/data/french-beta-corrections.json`.
 
 Church History's source has no model answers; its delivered French model answers are imported without inventing English or Spanish models. Optional model fields can exist in one language, and the engine shows a model only when one exists for the reader/source language.
 
