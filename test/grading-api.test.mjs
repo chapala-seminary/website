@@ -561,6 +561,9 @@ const progressOf = async (code) => (await get(`/api/student/${code}`)).body;
   ok((await post('/api/shadow', { code, scope: SCOPE(1), answers: 'no' })).status === 400, 'a bad shadow body is refused');
 }
 
+// These students are not people to write to: leave the daily notes (a capped run) to the suites about them.
+db("UPDATE students SET contact_opt_out_at = strftime('%Y-%m-%dT%H:%M:%fZ', 'now') WHERE email LIKE 'grading-%@example.test'");
+
 console.log(`${checks} assertions on AI grading and server-written credit`);
 if (!fails.length) console.log('PASS — the server grades, and the server records.');
 else { console.log(`FAIL — ${fails.length}:`); fails.forEach((f) => console.log('  ' + f)); process.exitCode = 1; }
