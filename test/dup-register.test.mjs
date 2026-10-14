@@ -22,7 +22,7 @@ let checks = 0;
 const fails = [];
 const ok = (c, label, detail) => { checks++; if (!c) fails.push(label + (detail ? `\n        ${detail}` : '')); };
 const jpost = async (p, b) => {
-  const r = await fetch(BASE + p, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b) });
+  const r = await fetch(BASE + p, { method: 'POST', headers: { 'content-type': 'application/json', 'x-test-grading-mode': 'shadow' }, body: JSON.stringify(b) });
   return { status: r.status, body: await r.json().catch(() => null) };
 };
 const tag = () => crypto.randomBytes(4).toString('hex');

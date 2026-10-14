@@ -18,6 +18,10 @@ STATE=.wrangler-local
 CONFIG=test/wrangler.local.jsonc
 
 node test/single-completion.test.mjs
+# The grading rules with no server: the fill-in text rules against the browser
+# engine's own functions, copied questions, the pass rules per track, which
+# text is held for a person, what the model's reply must satisfy.
+node test/grading-unit.test.mjs
 node test/single-page-readings.test.mjs
 node tools/verify-staged-readings.mjs
 
@@ -70,6 +74,10 @@ done
 
 npx wrangler d1 execute chapala-students --local --persist-to "$STATE" \
   --config "$CONFIG" --file test/fixtures/legacy-no-email.sql >/dev/null
+
+# The answer keys the pages no longer carry (docs/ai-grading.md, section 4):
+# every graded question into grading_keys, as a deploy puts them.
+node tools/sync-grading-keys.mjs --env local --state "$STATE"
 
 # Nothing else may be on this port. A dev server left behind by an earlier run
 # answers /api/health perfectly well while pointing at a database directory
@@ -212,6 +220,13 @@ API_BASE="http://127.0.0.1:$PORT" node test/beta-activation.test.mjs
 # this run's database), Certificate and Associate unchanged.
 API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/required-tests.api.mjs
 
+# AI grading and server-written credit (docs/ai-grading.md): attempts, multiple
+# choice, written answers graded by the fake model, track rules, lockouts, the
+# pending queue run by the 15-minute cron, appeals, the hourly cap, course
+# completion, /api/sync in live mode, and the shadow trial. The old-rules suites
+# above and below ask for the old /api/sync with x-test-grading-mode: shadow.
+API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/grading-api.test.mjs
+
 # The student tracker: the staff roster behind Cloudflare Access, and the notes
 # to students who have gone quiet (worker/staff.js, worker/outreach.js).
 API_BASE="http://127.0.0.1:$PORT" node test/staff.test.mjs
@@ -236,6 +251,13 @@ curl -sf "http://127.0.0.1:$PORT/__scheduled?cron=0+15+*+*+*" >/dev/null && slee
   && grep -q '^outreach {' "$STATE/dev.log" \
   && echo "PASS — the daily run for the notes to students completes." \
   || { echo "FAIL — the daily scheduled run failed:"; grep -E "outreach|digest" "$STATE/dev.log" | tail -5; exit 1; }
+
+# ...and the 15-minute run of the grading queue completes without an error.
+curl -sf "http://127.0.0.1:$PORT/__scheduled?cron=*%2F15+*+*+*+*" >/dev/null && sleep 2 \
+  && ! grep -q "grading queue error" "$STATE/dev.log" \
+  && grep -q '^grading queue {' "$STATE/dev.log" \
+  && echo "PASS — the 15-minute grading queue run completes." \
+  || { echo "FAIL — the grading queue run failed:"; grep -E "grading queue" "$STATE/dev.log" | tail -5; exit 1; }
 
 # Some environments (the sandboxed Linux VM the desktop app runs commands in,
 # for one) have node and wrangler but not the shared libraries Chromium needs.

@@ -149,8 +149,8 @@ async function gradeAnswers(request, env, h) {
   let graded = [];
   if (fresh.length) {
     const keys = await loadKeys(env, fresh.map((a) => a.qid));
+    if (fresh.some((a) => !keys.get(a.qid))) throw new h.HttpError(409, 'the answer key is not on the server');
     const entries = fresh.map((a) => ({ qid: a.qid, kind: a.kind, answer: a.answer, key: keys.get(a.qid).key, rubricVersion: keys.get(a.qid).rubricVersion }));
-    if (entries.some((e) => !e.key)) throw new h.HttpError(409, 'the answer key is not on the server');
     graded = await gradeWritten(env, attempt, entries);
   }
   const byQid = new Map(graded.map((g) => [g.qid, g]));

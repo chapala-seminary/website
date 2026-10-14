@@ -18,7 +18,9 @@ function ok(cond, label, detail) {
   if (!cond) fails.push(label + (detail ? `\n        ${detail}` : ''));
 }
 const post = (p, b, init = {}) => fetch(BASE + p, {
-  method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b), ...init });
+  // This file tests the records API under the rules it had before AI grading;
+  // the server grades in live mode (test/grading-api.test.mjs), the old rules are asked for.
+  method: 'POST', headers: { 'content-type': 'application/json', 'x-test-grading-mode': 'shadow' }, body: JSON.stringify(b), ...init });
 const get = p => fetch(BASE + p);
 
 async function jget(p) { const r = await get(p); return { status: r.status, body: await r.json().catch(() => null) }; }

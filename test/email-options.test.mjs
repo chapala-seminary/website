@@ -8,7 +8,7 @@ const STATE = process.env.EMAIL_TEST_STATE || '.wrangler-local';
 let checks = 0;
 function ok(value, message) { assert.ok(value, message); checks++; }
 async function post(path, body) {
-  const res = await fetch(BASE + path, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
+  const res = await fetch(BASE + path, { method: 'POST', headers: { 'content-type': 'application/json', 'x-test-grading-mode': 'shadow' }, body: JSON.stringify(body) });
   return { status: res.status, body: await res.json() };
 }
 async function student(label) {
