@@ -42,6 +42,11 @@ export function frenchInterface(root: HTMLElement, file = '') {
     const fr = FRENCH_FRAME[node.innerHTML.replace(/\s+/g, ' ').trim()];
     if (fr) { node.set_content(fr); node.setAttribute('lang', 'fr'); node.removeAttribute('data-cts-fallback'); }
   }
+  // The older segmented switcher (hidden on language pages) keeps a bilingual label elsewhere.
+  for (const node of root.querySelectorAll('.cts-seg[aria-label="Language / Idioma"]')) node.setAttribute('aria-label', 'Langue');
+  // The certificates' seal gives the initials in English and Spanish; in French they are STC.
+  for (const node of root.querySelectorAll('.seal')) if (node.innerHTML.trim() === 'CTS &middot; STC') node.set_content('STC');
+  for (const node of root.querySelectorAll('.cert-seal > div')) if (node.innerHTML.trim() === 'CTS') node.set_content('STC');
   const unlabelled: string[] = [];
   for (const node of root.querySelectorAll('.cts-nav[aria-label], .tb-toc[aria-label]')) {
     const fr = FRENCH_LABELS[node.getAttribute('aria-label')!];

@@ -74,7 +74,7 @@ export function frenchPageTitle(root: HTMLElement, file: string, translated: boo
   const digest = /^(.*) — CTS Reading \/ Lectura CTS$/.exec(root.querySelector('title')?.text.trim() ?? '');
   if (digest) {
     const h1 = root.querySelector('h1 .cts-reading[lang="fr"]:not([data-cts-fallback])');
-    return `${h1 ? h1.text.replace(/\s+/g, ' ').trim() : digest[1]} — Lecture CTS`;
+    return `${h1 ? h1.text.replace(/\s+/g, ' ').trim() : digest[1]} — Lecture STC`;
   }
   return null;
 }
