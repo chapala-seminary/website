@@ -19,7 +19,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import { parse } from 'node-html-parser';
-import { bodyLeaves, translatable, tagProblem, loadStore, DIGEST } from '../tools/french-readings-lib.mjs';
+import { bodyLeaves, translatable, tagProblem, loadStore, DIGEST, roomKey, chromeRoomKeys } from '../tools/french-readings-lib.mjs';
 import { status } from '../tools/french-readings.mjs';
 
 const BASE = process.argv[2];
@@ -77,8 +77,9 @@ if (!BASE) {
     for (const { data } of files) {
       const id = data.item.split(':')[1];
       const page = data.item.startsWith('digest:') ? `${id}.html` : data.item.startsWith('room:') ? `${id}.html` : null;
-      // A book title kept in English is the same on every page: not a sample.
-      if (page) pages.set(page, Object.values(data.entries).filter((e) => parse(e.fr).text.trim() !== parse(e.en).text.trim())
+      // A book title kept in English is the same on every page: not a sample;
+      // nor is a room's interface, which its own dictionary (_rooms.json) translates.
+      if (page) pages.set(page, Object.values(data.entries).filter((e) => parse(e.fr).text.trim() !== parse(e.en).text.trim() && !chromeRoomKeys().has(roomKey(e.en)))
         .map((e) => parse(e.fr).text.trim()).filter((t) => t.length > 40).slice(0, 3));
     }
     // A digest's French also appears in the room that shows it.
