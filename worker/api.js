@@ -23,6 +23,9 @@ import { loadThmStudyPlan } from './study-plans.js';
  */
 
 import { activationEnvironment, activatedTests } from './test-activation.js';
+import { testContext } from './test-context.js';
+import { gradingRoute } from './grading/routes.js';
+import { isLive } from './grading/mode.js';
 import { courseShortfall, textbookShortfall, exemptionsFor, degreeShortfall, resolveCourse, studentLevel, canonicalCode, certificateLevel, DEGREES } from './awards.js';
 import catalog from './catalog.json';
 import { emailConfigured, emailLogOnly, sendEmail, verificationEmail, certificateEmail, codeEmail } from './email.js';
@@ -109,23 +112,6 @@ async function body(request) {
 }
 
 /* ---- reading and merging a student's state ------------------------------ */
-
-/* The activation date of a required-reading test comes from worker/catalog.json
- * (worker/awards.js testCounts). The test suite needs to see the rule both
- * before and after a date, so its configuration -- and only its: EMAIL_MODE
- * "log" with no Resend key, the same condition that lets the suite see the
- * notices it would send -- may set TEST_REQUIRED_FROM, a JSON map
- * { slug: ISO time }. tools/verify-worker-config.mjs refuses the variable in
- * the deployed configuration. */
-function testRequiredFrom(env) {
-  if (env.EMAIL_MODE !== 'log' || env.RESEND_API_KEY || !env.TEST_REQUIRED_FROM) return undefined;
-  try { const m = JSON.parse(env.TEST_REQUIRED_FROM); return m && typeof m === 'object' ? m : undefined; } catch { return undefined; }
-}
-/* What testCounts needs: the completions the record holds now, with the time
- * and level the server wrote, and the server's clock. */
-function testContext(env, completions) {
-  return { completions: completions || [], now: now(), requiredFrom: { ...activatedTests(env), ...testRequiredFrom(env) } };
-}
 
 async function loadState(env, id) {
   const student = await env.DB.prepare(
@@ -311,14 +297,20 @@ async function sync(request, env) {
   // Browsers resend their full record. D1 counts an UPDATE as a write even
   // when the value stays the same, so conflict handlers only update a pass
   // whose date is earlier, or a completion whose earned level rises.
-  for (const row of progressRows(id, b.progress))
+  /* GRADING_MODE=live (docs/ai-grading.md section 7): the server is the grader of
+     record. A browser's report of what it passed is not credit, so nothing
+     below is written from it. The student's details above are still kept, and
+     the reply carries the server's own records. In shadow mode, and in a Worker
+     with no GRADING_MODE, this is exactly what it always was. */
+  const live = isLive(env, request);
+  for (const row of live ? [] : progressRows(id, b.progress))
     statements.push(env.DB.prepare(
       `INSERT INTO unit_progress (student_id, course, unit, completed_at) VALUES (?, ?, ?, ?)
        ON CONFLICT(student_id, course, unit) DO UPDATE SET completed_at = excluded.completed_at
        WHERE excluded.completed_at < unit_progress.completed_at`)
       .bind(...row));
 
-  const textbookRowsNow = textbookRows(id, b.textbooks);
+  const textbookRowsNow = live ? [] : textbookRows(id, b.textbooks);
   for (const row of textbookRowsNow)
     statements.push(env.DB.prepare(
       `INSERT INTO textbook_results (student_id, textbook, passed_at) VALUES (?, ?, ?)
@@ -331,7 +323,7 @@ async function sync(request, env) {
   // device reports it done at a higher level (the student did the further
   // work). A stale device reporting a lower level changes nothing.
   const trackNow = (s && typeof s === 'object' && String(s.track || '').toLowerCase()) || exists.track;
-  let completions = completionRows(id, b.doneCodes, b.completionTracks, trackNow);
+  let completions = live ? [] : completionRows(id, b.doneCodes, b.completionTracks, trackNow);
   /* A master's-level completion of a course with a textbook is not recorded
      until the record holds a pass on its textbook test (Dr. Cook, 4 Oct
      2026). The browser reports its completions on every sync, so the course
@@ -861,7 +853,7 @@ async function guarded(request, env, kind, run) {
   return res;
 }
 
-export async function handle(request, env) {
+export async function handle(request, env, ctx) {
   const url = new URL(request.url);
   const path = url.pathname.replace(/\/+$/, '') || '/';
   const method = request.method.toUpperCase();
@@ -932,6 +924,14 @@ export async function handle(request, env) {
       });
     }
     if (path === '/api/health') return json({ ok: true, requiredFrom: activatedTests(env) });
+
+    // AI grading: attempts, multiple choice, written answers, appeals, the shadow trial.
+    if (path === '/api/attempt' || path.startsWith('/api/attempt/') || path === '/api/mc' || path === '/api/grade'
+        || path === '/api/appeal' || path === '/api/shadow') {
+      const res = await gradingRoute(path, method, request, env, ctx, { json, fail, HttpError, body, str, resolveCode, guarded });
+      if (res) return res;
+      return fail(405, 'method not allowed');
+    }
 
     return fail(404, 'no such endpoint');
   } catch (e) {
