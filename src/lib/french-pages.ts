@@ -170,10 +170,23 @@ export function frenchRoom(root: HTMLElement, bookTitle: (en: string) => string)
     // Interface, not the room's content: the room still shows its English notice.
     node.setAttribute('data-cts-chrome', '');
   }
+  // Interface elements a room writes in English with no language marking
+  // (the further-study buttons, the bylines of some rooms): whole elements,
+  // listed under "@plain" so they never match marked English above.
+  const plain = (dict['@plain'] ?? {}) as unknown as Record<string, string>;
+  for (const node of root.querySelector('#content')?.querySelectorAll('*') ?? []) {
+    if (node.closest('script,style,[data-cts-legacy-control]') || markedLanguage(node) || hasMarkedAncestor(node)) continue;
+    const key = norm(node.innerHTML);
+    if (!(key in plain)) continue;
+    ROOM_USED.add('@plain:' + key);
+    node.set_content(`<span class="en">${node.innerHTML}</span><span class="fr">${plain[key]}</span>`);
+    node.setAttribute('data-cts-chrome', '');
+  }
 }
 /** After every room is built: a room entry no room uses is stale. */
 export function checkRoomDictionary() {
   if (!roomDict) return;
-  const stale = Object.keys(roomDict).filter(k => !k.startsWith('@') && !ROOM_USED.has(k));
+  const plain = Object.keys((roomDict['@plain'] ?? {}) as unknown as Record<string, string>).map(k => '@plain:' + k);
+  const stale = [...Object.keys(roomDict).filter(k => !k.startsWith('@')), ...plain].filter(k => !ROOM_USED.has(k));
   if (stale.length) throw new Error(`Unused French in ${DIR}/_rooms.json (the English changed?):\n` + stale.slice(0, 20).map(k => '  ' + JSON.stringify(k)).join('\n'));
 }
