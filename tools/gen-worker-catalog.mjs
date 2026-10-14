@@ -105,20 +105,32 @@ for (const [slug, c] of Object.entries(courses)) {
   if (!completions[code]) { console.error(`${slug}: no certificate page writes completion code ${code}`); process.exit(2); }
   c.code = code;
 }
-// The course's title in both languages, from the catalog the front page is
+// The course's title in each language, from the catalog the front page is
 // built from (src/content/courses), matched by its first unit page. The
-// notes the seminary sends students name the course they stopped in, in the
-// student's language (worker/outreach.js).
+// notes the seminary sends students name the course they stopped in, and a
+// French certificate email or /fr/verify names the award, in the student's
+// language (worker/outreach.js, worker/award-names.js). A course with no
+// French title would put an English name in a French sentence, so all three
+// are required.
 {
   const titles = {};
   for (const f of fs.readdirSync('src/content/courses')) {
     const j = JSON.parse(fs.readFileSync(path.join('src/content/courses', f), 'utf8'));
     if (j.entry && j.title) titles[j.entry] = j.title;
   }
+  const both = (t) => ({ en: t.en, es: t.es, fr: t.fr });
   for (const [slug, c] of Object.entries(courses)) {
     const t = titles[`${c.pages}Unit${c.units[0]}.html`];
-    if (!t?.en || !t?.es) { console.error(`${slug}: no English and Spanish title in src/content/courses for ${c.pages}Unit${c.units[0]}.html`); process.exit(2); }
-    c.title = { en: t.en, es: t.es };
+    if (!t?.en || !t?.es || !t?.fr) { console.error(`${slug}: no English, Spanish and French title in src/content/courses for ${c.pages}Unit${c.units[0]}.html`); process.exit(2); }
+    c.title = both(t);
+    completions[c.code].title = both(t);
+  }
+  // The single-page courses, by the code their certificate page names.
+  const PAGES = { COUNSELING: 'CTSCounseling.html', STORYTEL: 'CTS_Narrative_Preaching.html', WISESPEAK: 'CTS_WiseSpeak_Preaching.html', ETHICS: 'ethics_unit01.html' };
+  for (const [code, entry] of Object.entries(PAGES)) {
+    const t = titles[entry];
+    if (!completions[code] || !t?.en || !t?.es || !t?.fr) { console.error(`${code}: no completion code or no English, Spanish and French title for ${entry}`); process.exit(2); }
+    completions[code].title = both(t);
   }
 }
 // And every course a degree requires must be one a page can actually record,

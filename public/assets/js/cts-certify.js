@@ -49,23 +49,26 @@
   function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function parse(s, fb) { try { var v = JSON.parse(s); return v == null ? fb : v; } catch (e) { return fb; } }
   function student() { return parse(get('cts_student'), null) || {}; }
-  function isEs() {
+  // The page's language: a generated language page says so (data-page-lang);
+  // an older page by its body class or its lang.
+  function lang() {
     var b = document.body;
-    if (!b) return false;
-    if (b.classList.contains('es') || b.classList.contains('lang-es')) return true;
-    var l = b.getAttribute('data-lang') || document.documentElement.lang || 'en';
-    return l.slice(0, 2) === 'es';
+    if (!b) return 'en';
+    if (b.dataset.pageLang) return b.dataset.pageLang;
+    if (b.classList.contains('es') || b.classList.contains('lang-es')) return 'es';
+    var l = (b.getAttribute('data-lang') || document.documentElement.lang || 'en').slice(0, 2);
+    return l === 'es' || l === 'fr' ? l : 'en';
   }
-  function t(o) { return isEs() ? o.es : o.en; }
+  function t(o) { return o[lang()] || o.en; }
 
   function trackLabel() {
     var s = student();
     var v = String(get('cts_track') || s.track || s.program || '').toLowerCase();
-    if (v === 'mdiv' || /master of divinity|m\.div/.test(v)) return { en: 'Master of Divinity', es: 'Maestría en Divinidad' };
-    if (v === 'thm' || v === 'mth' || /master of theology|m\.th|th\.m/.test(v)) return { en: 'Master of Theology', es: 'Maestría en Teología' };
+    if (v === 'mdiv' || /master of divinity|m\.div/.test(v)) return { en: 'Master of Divinity', es: 'Maestría en Divinidad', fr: 'Master en théologie pastorale (M.Div.)' };
+    if (v === 'thm' || v === 'mth' || /master of theology|m\.th|th\.m/.test(v)) return { en: 'Master of Theology', es: 'Maestría en Teología', fr: 'Master en théologie (Th.M.)' };
     var g = String(get('cts_goal') || s.goal || '').toLowerCase();
-    if (g === 'assoc' || v === 'ad' || v === 'associate') return { en: 'Associate of Divinity', es: 'Asociado en Divinidad' };
-    return { en: 'Certificate of Ministry', es: 'Certificado de Ministerio' };
+    if (g === 'assoc' || v === 'ad' || v === 'associate') return { en: 'Associate of Divinity', es: 'Asociado en Divinidad', fr: 'Diplôme associé en théologie' };
+    return { en: 'Certificate of Ministry', es: 'Certificado de Ministerio', fr: 'Certificat de ministère' };
   }
   // The title the record keeps: the page's own name for the award, which is
   // what the student sees printed, plus the track for a course certificate.
@@ -103,39 +106,43 @@
 
   // ---- the panel ----------------------------------------------------------
   var S = {
-    head:     { en: 'Register this certificate with the seminary', es: 'Registre este certificado ante el seminario' },
+    head:     { en: 'Register this certificate with the seminary', es: 'Registre este certificado ante el seminario', fr: 'Enregistrer ce certificat auprès du séminaire' },
     why:      { en: 'A registered certificate gets a verification code that anyone can check at chapalaseminary.org/verify. The seminary needs a confirmed email address first, so it can reach you and send you a copy.',
-                es: 'Un certificado registrado recibe un código de verificación que cualquiera puede comprobar en chapalaseminary.org/verify. El seminario necesita primero un correo confirmado, para poder contactarle y enviarle una copia.' },
-    email:    { en: 'Your email address', es: 'Su correo electrónico' },
-    send:     { en: 'Send confirmation email', es: 'Enviar correo de confirmación' },
-    methods:  { en: 'The email also contains a confirmation link. After using it, reload this certificate page.', es: 'El correo también contiene un enlace de confirmación. Después de usarlo, vuelva a cargar esta página del certificado.' },
-    general:  { en: 'Confirm your email before certificate time', es: 'Confirme su correo antes de solicitar un certificado' },
-    sent:     { en: 'We sent a 6-digit code to', es: 'Enviamos un código de 6 dígitos a' },
-    codePh:   { en: '6-digit code', es: 'código de 6 dígitos' },
-    confirm:  { en: 'Confirm', es: 'Confirmar' },
-    change:   { en: 'Use a different email', es: 'Usar otro correo' },
-    working:  { en: 'One moment…', es: 'Un momento…' },
-    verified: { en: 'Email confirmed. Registering your certificate…', es: 'Correo confirmado. Registrando su certificado…' },
-    done:     { en: 'Registered with the seminary. Verification code:', es: 'Registrado ante el seminario. Código de verificación:' },
-    doneSub:  { en: 'It is printed on your certificate. Anyone can check it at', es: 'Está impreso en su certificado. Cualquiera puede comprobarlo en' },
-    mailed:   { en: 'A copy has been emailed to', es: 'Se ha enviado una copia por correo a' },
+                es: 'Un certificado registrado recibe un código de verificación que cualquiera puede comprobar en chapalaseminary.org/verify. El seminario necesita primero un correo confirmado, para poder contactarle y enviarle una copia.',
+                fr: 'Un certificat enregistré reçoit un code de vérification que chacun peut contrôler sur chapalaseminary.org/fr/verify. Le séminaire a d’abord besoin d’une adresse courriel confirmée, pour pouvoir vous joindre et vous en envoyer une copie.' },
+    email:    { en: 'Your email address', es: 'Su correo electrónico', fr: 'Votre adresse courriel' },
+    send:     { en: 'Send confirmation email', es: 'Enviar correo de confirmación', fr: 'Envoyer le courriel de confirmation' },
+    methods:  { en: 'The email also contains a confirmation link. After using it, reload this certificate page.', es: 'El correo también contiene un enlace de confirmación. Después de usarlo, vuelva a cargar esta página del certificado.', fr: 'Le courriel contient aussi un lien de confirmation. Après l’avoir utilisé, rechargez cette page du certificat.' },
+    general:  { en: 'Confirm your email before certificate time', es: 'Confirme su correo antes de solicitar un certificado', fr: 'Confirmez votre adresse courriel avant de demander un certificat' },
+    sent:     { en: 'We sent a 6-digit code to', es: 'Enviamos un código de 6 dígitos a', fr: 'Nous avons envoyé un code à 6 chiffres à' },
+    codePh:   { en: '6-digit code', es: 'código de 6 dígitos', fr: 'code à 6 chiffres' },
+    confirm:  { en: 'Confirm', es: 'Confirmar', fr: 'Confirmer' },
+    change:   { en: 'Use a different email', es: 'Usar otro correo', fr: 'Utiliser une autre adresse' },
+    working:  { en: 'One moment…', es: 'Un momento…', fr: 'Un instant…' },
+    verified: { en: 'Email confirmed. Registering your certificate…', es: 'Correo confirmado. Registrando su certificado…', fr: 'Adresse courriel confirmée. Enregistrement de votre certificat…' },
+    done:     { en: 'Registered with the seminary. Verification code:', es: 'Registrado ante el seminario. Código de verificación:', fr: 'Enregistré auprès du séminaire. Code de vérification :' },
+    doneSub:  { en: 'It is printed on your certificate. Anyone can check it at', es: 'Está impreso en su certificado. Cualquiera puede comprobarlo en', fr: 'Il est imprimé sur votre certificat. Chacun peut le vérifier sur' },
+    mailed:   { en: 'A copy has been emailed to', es: 'Se ha enviado una copia por correo a', fr: 'Une copie a été envoyée par courriel à' },
     notYet:   { en: 'The seminary’s record does not yet show every part of this award. Your progress syncs on its own; give it a moment and try again.',
-                es: 'El registro del seminario aún no muestra todas las partes de este título. Su progreso se sincroniza solo; espere un momento e inténtelo de nuevo.' },
-    retry:    { en: 'Try again', es: 'Intentar de nuevo' },
-    bad:      { en: 'That does not look like an email address.', es: 'Eso no parece un correo electrónico.' },
-    wrong:    { en: 'That code is not right.', es: 'Ese código no es correcto.' },
-    expired:  { en: 'That code has expired. Ask for a new one.', es: 'Ese código venció. Pida uno nuevo.' },
-    wait:     { en: 'Please wait a moment before asking for another code.', es: 'Espere un momento antes de pedir otro código.' },
+                es: 'El registro del seminario aún no muestra todas las partes de este título. Su progreso se sincroniza solo; espere un momento e inténtelo de nuevo.',
+                fr: 'Le dossier du séminaire n’indique pas encore toutes les parties de ce titre. Votre progression se synchronise d’elle-même ; patientez un instant et réessayez.' },
+    retry:    { en: 'Try again', es: 'Intentar de nuevo', fr: 'Réessayer' },
+    bad:      { en: 'That does not look like an email address.', es: 'Eso no parece un correo electrónico.', fr: 'Cette adresse courriel ne semble pas valide.' },
+    wrong:    { en: 'That code is not right.', es: 'Ese código no es correcto.', fr: 'Ce code n’est pas correct.' },
+    expired:  { en: 'That code has expired. Ask for a new one.', es: 'Ese código venció. Pida uno nuevo.', fr: 'Ce code a expiré. Demandez-en un nouveau.' },
+    wait:     { en: 'Please wait a moment before asking for another code.', es: 'Espere un momento antes de pedir otro código.', fr: 'Veuillez patienter un instant avant de demander un autre code.' },
     noMail:   { en: 'Email is not set up on the seminary’s side yet. Your certificate is still yours to print; come back later to register it.',
-                es: 'El correo aún no está configurado en el seminario. Su certificado sigue siendo suyo para imprimir; vuelva más tarde para registrarlo.' },
-    offline:  { en: 'Could not reach the seminary. Check your connection and try again.', es: 'No se pudo contactar al seminario. Revise su conexión e inténtelo de nuevo.' },
-    verifyLine: { en: 'Verification', es: 'Verificación' }
+                es: 'El correo aún no está configurado en el seminario. Su certificado sigue siendo suyo para imprimir; vuelva más tarde para registrarlo.',
+                fr: 'Le courriel n’est pas encore configuré du côté du séminaire. Votre certificat reste à vous et vous pouvez l’imprimer ; revenez plus tard pour l’enregistrer.' },
+    offline:  { en: 'Could not reach the seminary. Check your connection and try again.', es: 'No se pudo contactar al seminario. Revise su conexión e inténtelo de nuevo.', fr: 'Impossible de joindre le séminaire. Vérifiez votre connexion et réessayez.' },
+    verifyLine: { en: 'Verification', es: 'Verificación', fr: 'Vérification' }
   };
 
   var root, a, code, state = { step: 'email', email: '', verifyCode: null, emailed: false, msg: null, busy: false };
 
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-  function verifyUrl(vc) { return location.origin + '/verify/' + encodeURIComponent(vc); }
+  // A French page links to the French verification page (worker/api.js).
+  function verifyUrl(vc) { return location.origin + (lang() === 'fr' ? '/fr/verify/' : '/verify/') + encodeURIComponent(vc); }
 
   function render() {
     if (!root) return;
@@ -160,7 +167,7 @@
       h += '<div class="cc-head">' + t(S.head) + '</div><div class="cc-sub">' + t(S.why) + '</div>' +
            '<div><input id="cts-cert-email" type="email" autocomplete="email" placeholder="' + t(S.email) + '" value="' + esc(state.email) + '">' +
            '<button type="button" data-act="send">' + t(S.send) + '</button></div>' +
-           '<div class="cc-sub"><a href="/cts-confirm-email.html">' + t(S.general) + '</a></div>';
+           '<div class="cc-sub"><a href="' + (lang() === 'en' ? '/' : '/' + lang() + '/') + 'cts-confirm-email.html">' + t(S.general) + '</a></div>';
     }
     if (state.msg) h += '<div class="cc-msg' + (state.msg.err ? ' err' : '') + '">' + t(state.msg) + '</div>';
     root.innerHTML = h;
@@ -173,12 +180,14 @@
     if (!dip || document.getElementById('cts-cert-verify')) return;
     var line = document.createElement('div');
     line.id = 'cts-cert-verify';
-    line.innerHTML = '<span class="lang-en">' + S.verifyLine.en + '</span><span class="lang-es">' + S.verifyLine.es + '</span>: ' +
+    // A generated language page prints its own language; an older page both.
+    line.innerHTML = (document.body.dataset.pageLang ? t(S.verifyLine) + (lang() === 'fr' ? '\u00a0' : '')
+      : '<span class="lang-en">' + S.verifyLine.en + '</span><span class="lang-es">' + S.verifyLine.es + '</span>') + ': ' +
       esc(vc) + ' · ' + esc(verifyUrl(vc).replace(/^https?:\/\//, ''));
     dip.appendChild(line);
   }
 
-  function say(msg, err) { state.msg = msg ? { en: msg.en, es: msg.es, err: !!err } : null; render(); }
+  function say(msg, err) { state.msg = msg ? { en: msg.en, es: msg.es, fr: msg.fr, err: !!err } : null; render(); }
   function busy(on) { state.busy = on; render(); }
   function errorFor(r) {
     if (!r) return S.offline;
@@ -315,4 +324,78 @@
   window.CTS_CERTIFY = { award: award, state: function () { return state; } };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
   else start();
+})();
+
+/* French certificate pages (/fr/…Certificate.html).
+ *
+ * The build makes each page's fixed wording French from the French written
+ * beside it (tools/add-certificate-french.mjs). The page scripts write some
+ * wording as they run, in an English and a Spanish span and, on the pages
+ * with French, a French one; this shows the reader's language only. What a
+ * script writes in English alone -- a date, a placeholder -- is put in French
+ * here, on French pages only. English and Spanish pages are unchanged. */
+(function () {
+  'use strict';
+  var body = document.body;
+  if (!body || !body.dataset.pageLang || window.CTS_CERT_FRENCH) return;
+  window.CTS_CERT_FRENCH = true;
+  var lang = body.dataset.pageLang;
+  var st = document.createElement('style');
+  st.textContent = lang === 'fr'
+    ? 'body[data-page-lang="fr"] :is(.lang-en,.en-only):has(~ :is(.lang-fr,.fr-only)){display:none!important}'
+    : 'body[data-page-lang="' + lang + '"] :is(.lang-fr,.fr-only){display:none!important}';
+  document.head.appendChild(st);
+  if (lang !== 'fr') return;
+
+  var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  var MOIS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+  var DATE = new RegExp('\\b(' + MONTHS.join('|') + ') (\\d{1,2}), (\\d{4})\\b', 'g');
+  var ATTRS = { 'Full Name / Nombre Completo': 'Nom complet', 'e.g., John Wesley': 'ex.\u00a0: Jean Dupont', 'Name / Nombre': 'Nom', 'Type your name…': 'Saisissez votre nom…' };
+  // Unit titles and progress lines the page scripts write in English
+  // (assets/js/cts-cert-fr.js), loaded on French pages only.
+  function words(text) {
+    var F = window.CTS_CERT_FR, t = text.trim();
+    if (!F || !t) return text;
+    var fr = Object.prototype.hasOwnProperty.call(F.exact, t) ? F.exact[t] : null;
+    for (var i = 0; fr == null && i < F.patterns.length; i++) if (F.patterns[i][0].test(t)) fr = t.replace(F.patterns[i][0], F.patterns[i][1]);
+    return fr == null || fr === t ? text : text.replace(t, fr);
+  }
+  function frenchDate(text) {
+    return text.replace(DATE, function (_m, month, day, year) {
+      return (day === '1' ? '1er' : day) + ' ' + MOIS[MONTHS.indexOf(month)] + ' ' + year;
+    });
+  }
+  function fix(root) {
+    if (root.nodeType === 3) {
+      var el = root.parentNode;
+      if (!el || !el.closest || el.closest('.cts-source, script, style')) return;
+      // English with a French twin beside it is hidden; English alone is shown, so translate it.
+      var en = el.closest('.lang-en, .en-only');
+      for (var sib = en && en.nextElementSibling; sib; sib = sib.nextElementSibling) if (sib.matches('.lang-fr, .fr-only')) return;
+      var v = frenchDate(words(root.nodeValue));
+      if (v !== root.nodeValue) root.nodeValue = v;
+      return;
+    }
+    if (root.nodeType !== 1) return;
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), n, found = [];
+    while ((n = w.nextNode())) found.push(n);
+    found.forEach(fix);
+    [root].concat([].slice.call(root.querySelectorAll('[placeholder], [aria-label]'))).forEach(function (el) {
+      ['placeholder', 'aria-label'].forEach(function (a) {
+        var v = el.getAttribute && el.getAttribute(a);
+        if (v && ATTRS[v]) el.setAttribute(a, ATTRS[v]);
+      });
+    });
+  }
+  fix(body);
+  var data = document.createElement('script');
+  data.src = '/assets/js/cts-cert-fr.js';
+  data.onload = function () { fix(body); };
+  document.head.appendChild(data);
+  new MutationObserver(function (records) {
+    records.forEach(function (r) {
+      if (r.type === 'characterData') fix(r.target);
+      else for (var i = 0; i < r.addedNodes.length; i++) fix(r.addedNodes[i]);
+    });
+  }).observe(body, { childList: true, subtree: true, characterData: true });
 })();

@@ -115,6 +115,9 @@ node tools/verify-worker-config.mjs
 node tools/verify-email.mjs
 node test/email-language.test.mjs
 node tools/gen-worker-catalog.mjs --check
+# The French on the certificate pages of the French courses (French review,
+# 13 Oct 2026): written beside the Spanish, never edited by hand.
+node tools/add-certificate-french.mjs --check
 node tools/verify-legacy-table.mjs
 
 # A staging host must not be indexable, and must not change the real site.
@@ -336,6 +339,8 @@ node test/published-models.test.mjs
   # Every generated language page, on desktop and phone, including source text.
   node tools/verify-language-browser.mjs "http://127.0.0.1:$PORT"
   node test/french-exam-fallback.test.mjs "http://127.0.0.1:$PORT"
+  # French links stay French, and the pages French emails open are French.
+  node test/french-routing.test.mjs "http://127.0.0.1:$PORT"
 
   # The page that shows a student what is held about them and deletes it.
   # Driven in a browser against the real Worker, because a privacy page whose
