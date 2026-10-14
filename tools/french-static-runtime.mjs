@@ -38,4 +38,16 @@ export function replaceOnce(code, from, to, label) {
 export function pageChrome(root, title) {
   const t = root.querySelector('title'); if (t && title) t.set_content(title.replaceAll('&', '&amp;'));
   for (const a of root.querySelectorAll('a')) if (a.innerHTML.trim() === '📚 Catalog / Catálogo') a.set_content('📚 Catalogue');
+  // Ethics still carries the old bilingual honours box (English over Spanish,
+  // unmarked). Give it the shared box's language marking (src/lib/partials.ts
+  // honoursBox) so the French interface pass translates it like every unit page.
+  for (const box of root.querySelectorAll('[data-cts-rrbox]:not([data-cts-chrome])')) {
+    const href = box.querySelector('a')?.getAttribute('href');
+    if (!href) continue;
+    box.setAttribute('data-cts-chrome', '');
+    box.set_content('<div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 <span class="lang-en">Honors Readings</span><span class="lang-es">Lecturas con Honores</span></div>'
+      + '<div style="font-size:14px;line-height:1.5;margin-bottom:14px;"><span class="lang-en">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.</span>'
+      + '<span class="lang-es">Esta clase tiene cinco lecturas completas &mdash; lea tres completas para obtenerla <b>con Honores</b>.</span></div>'
+      + `<a href="${href}" style="display:inline-block;background:#b08324;color:#3a1a1a;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:26px;font-size:16px;line-height:1.25;"><span class="lang-en">Open the Reading Room &rarr;</span><span class="lang-es">Abrir la Sala de Lecturas &rarr;</span></a>`);
+  }
 }
