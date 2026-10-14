@@ -77,7 +77,9 @@ if (!BASE) {
     for (const { data } of files) {
       const id = data.item.split(':')[1];
       const page = data.item.startsWith('digest:') ? `${id}.html` : data.item.startsWith('room:') ? `${id}.html` : null;
-      if (page) pages.set(page, Object.values(data.entries).map((e) => parse(e.fr).text.trim()).filter((t) => t.length > 40).slice(0, 3));
+      // A book title kept in English is the same on every page: not a sample.
+      if (page) pages.set(page, Object.values(data.entries).filter((e) => parse(e.fr).text.trim() !== parse(e.en).text.trim())
+        .map((e) => parse(e.fr).text.trim()).filter((t) => t.length > 40).slice(0, 3));
     }
     // A digest's French also appears in the room that shows it.
     for (const f of fs.readdirSync('dist').filter((f) => /Readings\.html$/.test(f)))
@@ -99,9 +101,12 @@ if (!BASE) {
       }
     }
     // the test stands apart from the book in French too (the browser's Find)
-    for (const r of books.filter((b) => b.body.fr)) {
+    for (const r of books.filter((b) => b.body.fr && !b.files?.html)) { // a book read on its own page has no body text here
       const test = fs.readFileSync(path.join('dist/fr', `${r.page}Test.html`), 'utf8');
-      const sample = bodyLeaves(r.body.fr).list.filter((l) => l.tagName === 'P' && l.text.length > 200).map((l) => l.text.trim().slice(0, 80));
+      // as tools/verify-textbooks.mjs does for EN/ES: a question may quote one of
+      // the book's sentences; a whole paragraph is the book itself
+      const sample = bodyLeaves(r.body.fr).list.filter((l) => l.tagName === 'P' && l.text.trim().length > 220)
+        .filter((_, i) => i % 5 === 0).map((l) => l.text.trim().slice(0, 160));
       ok(sample.length && !sample.some((t) => test.includes(t)), `fr/${r.page}Test.html carries the French book's text`);
     }
     console.log(`  ${pages.size} French reading page(s) checked`);
