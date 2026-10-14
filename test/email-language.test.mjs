@@ -17,7 +17,7 @@ for(const [slug,c] of Object.entries(catalog.courses)){for(const l of ['en','es'
 const enTitles=Object.values(catalog.courses).map(c=>c.title.en).filter(t=>!Object.values(catalog.courses).some(o=>o.title.fr===t));
 for(const lang of ['en','es','fr']){
  const messages=[verificationEmail('123456',`${site}/${lang==='en'?'':lang+'/'}cts-confirm-email.html#test`,lang),codeEmail({students:[{name:'Test',id:'TEST-CODE'}],origin:site,lang}),certificateEmail({name:'Test',award:'Test course',code:'TEST',page:'CTSNTCertificate.html',origin:site,lang})];
- const foreign={en:['Su código','Votre code','Estimado/a','Bonjour','cts_lang'],es:['Your Chapala','Votre code','Dear Test','Bonjour'],fr:['Your Chapala','Su código','Dear Test','Estimado/a','appareil de travail','vérifier à','e-mail']}[lang];
+ const foreign={en:['Su código','Votre code','Estimado/a','Bonjour','cts_lang'],es:['Your Chapala','Votre code','Dear Test','Bonjour'],fr:['Your Chapala','Su código','Dear Test','Estimado/a','appareil de travail','vérifier à','courriel']}[lang];
  for(const m of messages){assert.ok(m.subject&&m.text);assert.ok(!m.text.includes('----'));for(const term of foreign)assert.ok(!m.text.includes(term),`${lang}: mixed email ${term}`);checks++;}
  const prefix=lang==='en'?'':lang+'/';const query=lang==='en'?'':'?cts_lang='+lang;
  assert.ok(messages[1].text.includes('/'+prefix+'cts-backup.html'+query));assert.ok(messages[2].text.includes('/'+prefix+'CTSNTCertificate.html'+query));
