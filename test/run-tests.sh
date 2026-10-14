@@ -325,6 +325,7 @@ node test/published-models.test.mjs
   # Credential boundaries: each course counts toward a degree only at the level
   # it was completed on (Dr. Cook's review, 29 Sept), in the browser and the Worker.
   node tools/verify-degrees.mjs "http://127.0.0.1:$PORT"
+  API_BASE="http://127.0.0.1:$PORT" node test/thm-study-plans.api.mjs
   # The lesson and its exam are never on screen together, on any unit page, so
   # the browser's Find cannot search the lesson for an answer (29 Sept).
   node tools/verify-exam-view.mjs "http://127.0.0.1:$PORT"

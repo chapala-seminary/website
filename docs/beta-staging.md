@@ -21,6 +21,13 @@ The beta deploy command verifies branch, published commit, clean working tree an
 
 ## Review and promotion
 
+For the Th.M., use the [15-course verification and promotion checklist](thm-15-course-audit.md).
+Promote the complete browser/server requirement change and preserve valid prior
+completions. The [individual substitution workflow](thm-study-plans.md) supports faculty-approved
+plans across access, progress and issuance. It retains 15 actual CTS courses,
+Systematic Theology, Preaching and the required exams. Configure the actual
+applicant’s plan only after faculty supplies the five replacement choices.
+
 Wayne and Robert check the beta site, including English/Spanish exams, completion, certificates and readings. Faculty approve content and a qualified French theological reader approves French text before import. New requirements marked as drafts stay optional. Choose activation dates after the production deploy that carries them.
 
 Then open a separate PR from `beta` to `main`. Review the complete change and rerun build/tests before promotion. Robert authorizes merging to main and production publishing. From the reviewed main commit, deploy only with `npm run deploy`; production has no automatic push-to-main deployment workflow.

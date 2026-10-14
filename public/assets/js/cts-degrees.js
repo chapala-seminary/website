@@ -74,6 +74,15 @@
     return out;
   }
 
+  // A cache for offline display, bound to the recovered student code. The
+  // Worker independently checks its private approval record before issuance.
+  function studyPlan() {
+    try {
+      var cached = JSON.parse(get("cts_thm_study_plan") || "null");
+      return cached && cached.studentId === get("cts_student_code") && cached.plan ? cached.plan.substitutions : null;
+    } catch (e) { return null; }
+  }
+
   /* Where a student stands on one degree: the courses that count, the
      required ones still missing, and whether it is earned. */
   function status(degree) {
@@ -81,16 +90,18 @@
     if (!d) return null;
     var lv = levels(), have = {}, count = 0;
     Object.keys(lv).forEach(function (c) { if (d.levels.indexOf(lv[c]) !== -1) { have[c] = true; count++; } });
-    var missing = d.core.filter(function (c) { return !have[c]; });
+    var plan = degree === "thm" ? studyPlan() : null;
+    var core = d.core.map(function (c) { return plan && plan[c] || c; });
+    var missing = core.filter(function (c) { return !have[c]; });
     return {
       degree: degree, count: count, required: d.courses, have: have,
-      core: d.core, coreDone: d.core.length - missing.length, missing: missing,
+      core: core, coreDone: core.length - missing.length, missing: missing,
       earned: count >= d.courses && missing.length === 0
     };
   }
 
   window.CTSDegrees = {
     FOUNDATION: FOUNDATION, MDIV_CORE: MDIV_CORE, DEGREES: DEGREES,
-    grandfather: grandfather, levels: levels, status: status, goalIsAssoc: goalIsAssoc
+    studyPlan: studyPlan, grandfather: grandfather, levels: levels, status: status, goalIsAssoc: goalIsAssoc
   };
 })();

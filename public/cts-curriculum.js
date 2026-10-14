@@ -79,6 +79,16 @@
     return true;
   }
 
+  function approvedThmPlan() {
+    try {
+      var cached = JSON.parse(localStorage.getItem("cts_thm_study_plan") || "null");
+      var student = JSON.parse(localStorage.getItem("cts_student") || "{}");
+      var track = localStorage.getItem("cts_track") || student.track;
+      return track === "thm" && cached && cached.studentId === localStorage.getItem("cts_student_code") && cached.plan;
+    } catch (e) { return false; }
+  }
+  function catalogOpen() { return coreComplete() || !!approvedThmPlan() || testActive(); }
+
   // ---- tester override -------------------------------------------------
   // Unlocks the whole catalog regardless of progress, for course testers.
   // Turn on : visit any page with  ?ctstest=<the tester key>  (persists across the site)
@@ -321,9 +331,10 @@
   function gateCatalog() {
     var cards = document.querySelectorAll("a.course");
     if (!cards.length) return false;
-    var open = coreComplete() || testActive();
+    var open = catalogOpen();
 
     var st = document.createElement("style");
+    st.id = "cts-catalog-lock-style";
     st.textContent =
       "a.course.cts-locked{opacity:.55;filter:grayscale(.65)}" +
       "a.course.cts-locked .cts-lk-wrap{position:absolute;top:8px;right:8px;z-index:2}" +
@@ -334,6 +345,8 @@
     cards.forEach(function (a) {
       var href = (a.getAttribute("href") || "").split(/[?#]/)[0].split("/").pop().toLowerCase();
       if (OPEN_ENTRY[href] || open) return;          // always-open, or foundation finished
+      a.dataset.ctsOriginalHref = a.getAttribute("href");
+      a.dataset.ctsOriginalTitle = a.getAttribute("title") || "";
       a.classList.add("cts-locked");
       if (getComputedStyle(a).position === "static") a.style.position = "relative";
       var wrap = document.createElement("span");
@@ -380,7 +393,7 @@
     if (prefix === f && !/unit\d+$/.test(f)) {         // not a recognizable course unit page — leave alone
       // (allows misc/non-course pages through)
     }
-    if (coreComplete() || testActive()) return;        // foundation done (or tester override) — everything open
+    if (catalogOpen()) return;        // foundation done (or tester override) — everything open
 
     // locked: cover the page
     var ov = document.createElement("div");
@@ -458,9 +471,18 @@
   }
 
   function run() {
+    document.querySelectorAll("a.course.cts-locked").forEach(function (a) {
+      a.setAttribute("href", a.dataset.ctsOriginalHref);
+      a.setAttribute("title", a.dataset.ctsOriginalTitle);
+      a.classList.remove("cts-locked");
+    });
+    document.querySelectorAll(".cts-lk-wrap,.cts-lock-legend,#cts-catalog-lock-style").forEach(function (el) { el.remove(); });
+    var overlay = document.getElementById("cts-lock-overlay");
+    if (overlay) { overlay.remove(); document.body.style.overflow = ""; }
     if (testActive()) showTestBar();
     if (!gateCatalog()) gateCoursePage();
   }
+  document.addEventListener("cts-sync-applied", run);
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
   else run();
 })();

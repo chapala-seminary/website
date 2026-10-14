@@ -1,3 +1,4 @@
+import { loadThmStudyPlan } from './study-plans.js';
 /* Keeping students going (Wayne, 27 Sept 2026).
  *
  * "If a student goes about three weeks without making progress, we can
@@ -205,7 +206,8 @@ export async function candidates(env, asOf = new Date()) {
     if (st.last_quiet_note && st.last_quiet_note >= st.last_progress_at) continue;      // already written to this spell
     const done = (await env.DB.prepare('SELECT code, track FROM course_completions WHERE student_id = ?')
       .bind(st.student_id).all()).results ?? [];
-    if (degreeShortfall(programLevel(st.track, st.goal), done, studentLevel(st.track, st.goal)) === null) continue;   // program finished
+    const plan = programLevel(st.track, st.goal) === 'thm' ? await loadThmStudyPlan(env, st.student_id) : null;
+    if (degreeShortfall(programLevel(st.track, st.goal), done, studentLevel(st.track, st.goal), plan?.substitutions) === null) continue;   // program finished
     out.push({ kind: 'quiet', st });
   }
   return out;
