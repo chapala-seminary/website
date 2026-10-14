@@ -51,7 +51,7 @@ export function frenchLanding(root: HTMLElement) {
   }
   const unused = Object.keys(translations).filter(k => !used.has(k));
   if (unused.length) throw new Error(`Unused French landing translations (the English changed?):\n` + unused.slice(0, 20).map(k => '  ' + JSON.stringify(k)).join('\n'));
-  // The ten courses a French reader can study in French (draft translations).
+  // Every course a French reader can study in French (draft translations), from the content.
   const french = frenchCourseEntries();
   for (const card of root.querySelectorAll('#catalog a.course')) {
     if (french.has((card.getAttribute('href') || '').split('/').pop()!)) card.querySelector('.c-title')?.insertAdjacentHTML('afterend', '<span class="c-fr">Français (provisoire)</span>');
@@ -96,7 +96,7 @@ export function frenchLanding(root: HTMLElement) {
   for (const [id,label] of Object.entries(labels)) root.querySelector('#'+id)?.setAttribute('aria-label',label);
   root.querySelector('img[alt="Chapala Theological Seminary seal"]')?.setAttribute('alt','Sceau du Séminaire théologique de Chapala');
   const title = 'Séminaire en ligne gratuit | Séminaire théologique de Chapala';
-  const description = 'Formation théologique gratuite à votre rythme : Bible, théologie, prédication et ministère pastoral. Cours en anglais et en espagnol ; dix cours en traduction française provisoire.';
+  const description = 'Formation théologique gratuite à votre rythme : Bible, théologie, prédication et ministère pastoral. Cours en anglais, en espagnol et en français (traduction provisoire en cours de relecture).';
   root.querySelector('title')!.set_content(title);
   root.querySelector('.topbar .mark')?.set_content('Séminaire théologique de Chapala');
   for (const selector of ['meta[name="description"]','meta[property="og:description"]','meta[name="twitter:description"]']) root.querySelector(selector)?.setAttribute('content',description);

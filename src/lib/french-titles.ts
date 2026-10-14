@@ -5,6 +5,7 @@
  * names a translated unit. */
 import fs from 'node:fs';
 import type { HTMLElement } from 'node-html-parser';
+import { COURSES as STATIC_COURSES } from '../../tools/french-static-courses.mjs';
 
 const json = (p: string) => JSON.parse(fs.readFileSync(p, 'utf8'));
 const dir = (d: string) => fs.readdirSync(d).filter(f => f.endsWith('.json')).map(f => json(`${d}/${f}`));
@@ -89,7 +90,14 @@ export function frenchTitle(root: HTMLElement, file: string, _lesson: unknown, t
    a unit course whose first lesson has French, and WiseSpeak, whose French
    is built onto its own page (tools/french-wisespeak.mjs). */
 export function frenchCourseEntries(): Set<string> {
-  const out = new Set<string>(['CTS_WiseSpeak_Preaching.html']);
+  const out = new Set<string>();
+  // A static course has French when its review folder holds French drafts
+  // (the same test the /fr/ page build uses in tools/french-static-courses.mjs).
+  const drafted = (folder: string) => fs.existsSync(`_review/french/${folder}`)
+    && fs.readdirSync(`_review/french/${folder}`).some((f) => f.endsWith('-fr.json'));
+  if (drafted('WiseSpeak')) out.add('CTS_WiseSpeak_Preaching.html');
+  for (const c of Object.values(STATIC_COURSES) as { folder: string; pages: string[] }[])
+    if (drafted(c.folder)) c.pages.forEach((p) => out.add(p));
   for (const c of dir('src/content/courses') as any[]) {
     const m = /^(.*)Unit(\d+)\.html$/.exec(c.entry);
     const p = m && `src/content/lessons/${m[1]}/${m[2]}.json`;

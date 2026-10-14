@@ -12,7 +12,9 @@ assert.equal(root.querySelectorAll('.cts-translation-pending').length, 0);
 assert.ok(root.querySelectorAll('.cts-reading').every(n=>n.getAttribute('lang') === 'fr'));
 assert.equal(root.querySelectorAll('#catalog a.course').length, 45);
 assert.equal(root.querySelectorAll('#textbooks a.textbook').length, 11);
-assert.ok(root.querySelector('#catalog').text.includes('traduction française provisoire pour relecture'));
+assert.ok(root.querySelector('#catalog').text.includes('traduction française provisoire, en cours de relecture'));
+// Every course has a French draft, so every card carries the badge.
+assert.equal(root.querySelectorAll('#catalog a.course .c-fr').length, 45);
 assert.ok(root.querySelector('#programs')?.text.includes('15 cours') || root.text.includes('Niveau master · 15 cours'));
 for (const link of root.querySelectorAll('#catalog a.course, #textbooks a.textbook')) assert.ok(link.getAttribute('href').startsWith('/fr/'));
 for (const node of root.querySelectorAll('script[type="application/ld+json"]')) {
