@@ -21,7 +21,7 @@ try {
   check(await q.innerText(), 'Correct');
   await page.evaluate(() => localStorage.setItem('cts_ots_u1_full_lock', String(Date.now() + 120000)));
   await page.reload();
-  check(await page.locator('body').innerText(), 'Votre dernier essai a échoué');
+  check(await page.locator('body').innerText(), 'Votre dernière tentative a échoué');
   await page.evaluate(() => {localStorage.removeItem('cts_ots_u1_full_lock');localStorage.setItem('cts_ots_progress',JSON.stringify({unit1:true}));});
   await page.reload();
   check(await page.locator('body').innerText(), 'Unité 1 réussie');

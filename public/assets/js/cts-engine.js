@@ -467,7 +467,7 @@
     var tbBoth = tbHold && pending.length > 1;
     var go = tbHold ? { href: first.page + "Test.html",
                         en: tbReading ? "Take the required-reading test" : "Take the textbook test",
-                        es: tbReading ? "Presentar el examen de lecturas requeridas" : "Presentar el examen del libro", fr: tbReading ? "Passer le test des lectures obligatoires" : "Passer le test du manuel" }
+                        es: tbReading ? "Presentar el examen de lecturas requeridas" : "Presentar el examen del libro", fr: tbReading ? "Passer l'examen des lectures obligatoires" : "Passer l'examen du manuel" }
       : all && cert ? { href: cert, en: "Go to your course certificate", es: "Ir a su certificado del curso", fr: "Accéder au certificat du cours" }
       : nextIsUnit ? { href: U.nextHref, en: "Go to " + nextWhere().en, es: "Ir a la " + nextWhere().es, fr: "Aller à " + nextWhere().fr }
       : cert ? { href: cert, en: "See your progress in this course", es: "Ver su progreso en este curso", fr: "Voir votre progression dans ce cours" } : null;
@@ -477,12 +477,12 @@
                    es: "Quedó guardada en su progreso" + (total ? ": " + n + " de " + total + " unidades de este curso aprobadas." : "."), fr: "Votre progression est enregistrée" + (total ? " : " + n + " unités réussies sur " + total + "." : ".") }) + "</p>";
     if (tbBoth) h += "<p>" + bi({ en: "On the M.Div. and Th.M. tracks the course is complete when the textbook test and the required-reading test are both passed as well.",
                                   es: "En los trayectos M.Div. y Th.M. el curso se completa cuando también se aprueban el examen del libro de texto y el examen de lecturas requeridas.",
-                                  fr: "Pour les parcours M.Div. et Th.M., il faut aussi réussir le test du manuel et le test des lectures obligatoires pour terminer le cours." }) + "</p>";
+                                  fr: "Pour les parcours M.Div. et Th.M., il faut aussi réussir l'examen du manuel et l'examen des lectures obligatoires pour terminer le cours." }) + "</p>";
     else if (tbHold) h += "<p>" + bi(tbReading
       ? { en: "On the M.Div. and Th.M. tracks the course is complete when the required-reading test is passed as well.",
-          es: "En los trayectos M.Div. y Th.M. el curso se completa cuando también se aprueba el examen de lecturas requeridas.", fr: "Pour les parcours M.Div. et Th.M., il faut aussi réussir le test des lectures obligatoires pour terminer le cours." }
+          es: "En los trayectos M.Div. y Th.M. el curso se completa cuando también se aprueba el examen de lecturas requeridas.", fr: "Pour les parcours M.Div. et Th.M., il faut aussi réussir l'examen des lectures obligatoires pour terminer le cours." }
       : { en: "On the M.Div. and Th.M. tracks the course is complete when the textbook test is passed as well.",
-          es: "En los trayectos M.Div. y Th.M. el curso se completa cuando también se aprueba el examen del libro de texto.", fr: "Pour les parcours M.Div. et Th.M., il faut aussi réussir le test du manuel pour terminer le cours." }) + "</p>";
+          es: "En los trayectos M.Div. y Th.M. el curso se completa cuando también se aprueba el examen del libro de texto.", fr: "Pour les parcours M.Div. et Th.M., il faut aussi réussir l'examen du manuel pour terminer le cours." }) + "</p>";
     if (go) h += '<a class="btn solid" href="' + attr(go.href) + '">' + bi({ en: go.en, es: go.es, fr: go.fr }) + " &rarr;</a>";
     if (cert && go && go.href !== cert)
       h += ' <a class="btn" href="' + attr(cert) + '">' + bi({ en: "Progress in this course", es: "Progreso en este curso", fr: "Progression dans ce cours" }) + "</a>";
@@ -714,13 +714,13 @@
     if (!m) return null;
     return lockRemaining(KEY.fullLock)
       ? { en: "Your last attempt did not pass. The exam opens again in " + m + " minute(s), with every question empty. Review the lesson in the meantime.",
-          es: "Su último intento no aprobó. El examen se abre de nuevo en " + m + " minuto(s), con todas las preguntas vacías. Mientras tanto, repase la lección.", fr: "Votre dernier essai a échoué. Le test sera de nouveau disponible dans " + m + " minute(s), avec les réponses effacées. Révisez la leçon en attendant." }
+          es: "Su último intento no aprobó. El examen se abre de nuevo en " + m + " minuto(s), con todas las preguntas vacías. Mientras tanto, repase la lección.", fr: "Votre dernière tentative a échoué. L'examen sera de nouveau disponible dans " + m + " minute(s), avec les réponses effacées. Révisez la leçon en attendant." }
       : { en: "Your last attempt did not pass. Your multiple choice is passed and kept; the fill-in and short-answer part opens again in " + m + " minute(s). Review the lesson in the meantime.",
-          es: "Su último intento no aprobó. Su opción múltiple está aprobada y se conserva; la parte de completar y respuesta corta se abre de nuevo en " + m + " minuto(s). Mientras tanto, repase la lección.", fr: "Votre dernier essai a échoué. Votre réussite au choix multiple est conservée. La partie écrite sera de nouveau disponible dans " + m + " minute(s). Révisez la leçon en attendant." };
+          es: "Su último intento no aprobó. Su opción múltiple está aprobada y se conserva; la parte de completar y respuesta corta se abre de nuevo en " + m + " minuto(s). Mientras tanto, repase la lección.", fr: "Votre dernière tentative a échoué. Votre réussite au choix multiple est conservée. La partie écrite sera de nouveau disponible dans " + m + " minute(s). Révisez la leçon en attendant." };
   }
   function cannotPassMessage(c) {
     return { en: "This attempt cannot pass now (" + c.en + "). You may finish the questions for practice. Then press Submit to record the attempt: after a " + lockMinutes() + "-minute wait the exam opens again, empty, and you can retake it.",
-             es: "Este intento ya no puede aprobar (" + c.es + "). Puede terminar las preguntas como práctica. Luego pulse Enviar para registrar el intento: después de una espera de " + lockMinutes() + " minuto(s) el examen se abre de nuevo, vacío, y puede volver a presentarlo.", fr: "Cet essai ne peut plus réussir (" + c.fr + "). Vous pouvez terminer les questions pour vous exercer. Appuyez ensuite sur Envoyer pour enregistrer cet essai. Après " + lockMinutes() + " minute(s), le test sera de nouveau disponible avec les réponses effacées." };
+             es: "Este intento ya no puede aprobar (" + c.es + "). Puede terminar las preguntas como práctica. Luego pulse Enviar para registrar el intento: después de una espera de " + lockMinutes() + " minuto(s) el examen se abre de nuevo, vacío, y puede volver a presentarlo.", fr: "Cette tentative ne peut plus réussir (" + c.fr + "). Vous pouvez terminer les questions pour vous exercer. Appuyez ensuite sur Envoyer pour enregistrer cette tentative. Après " + lockMinutes() + " minute(s), l'examen sera de nouveau disponible avec les réponses effacées." };
   }
   function notice(msg) {
     return '<p class="cts-exam-status" style="margin:0 0 16px;padding:12px 16px;border-left:4px solid #8a1f1f;background:rgba(138,31,31,.06);color:#8a1f1f;font-weight:600;">' + bi(msg) + "</p>";
@@ -846,7 +846,7 @@
     if (full || saOnly) {
       var m = full || saOnly;
       say(bi({ en: "Locked. Review the lesson and try again in " + m + " minute(s).",
-               es: "Bloqueado. Repase la lección e inténtelo de nuevo en " + m + " minuto(s).", fr: "Test bloqué. Révisez la leçon et réessayez dans " + m + " minute(s)." }), "#8a1f1f");
+               es: "Bloqueado. Repase la lección e inténtelo de nuevo en " + m + " minuto(s).", fr: "Examen bloqué. Révisez la leçon et réessayez dans " + m + " minute(s)." }), "#8a1f1f");
       return;
     }
 
