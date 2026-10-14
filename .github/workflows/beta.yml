@@ -31,4 +31,6 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: '119b0919229edb3185b69f1c6bd04b66'
         run: |
           test -n "$CLOUDFLARE_API_TOKEN" || { echo "Set CTS_BETA_CLOUDFLARE_API_TOKEN in repository Actions secrets."; exit 1; }
-          npm run deploy:beta
+          npm run deploy:beta:publish
+      - name: Verify published beta release and activation
+        run: node tools/check-beta-activation.mjs
