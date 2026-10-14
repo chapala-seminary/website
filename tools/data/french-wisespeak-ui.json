@@ -1,0 +1,408 @@
+{
+ "note": "Interface French for the WiseSpeak page (machine draft, 13 Oct 2026). Keys are the page's exact English wording; ${...} expressions are the page's own variables. Shown only on /fr/.",
+ "spans": {
+  "Registered: <strong>${state.registration.name}</strong> · ${state.registration.country} · ${t.en}": "Inscrit : <strong>${state.registration.name}</strong> · ${state.registration.country} · ${t.fr||t.en}",
+  "Step ${i}": "Étape ${i}",
+  "Short-Essay Scenarios — required for Th.M. &amp; M.Div.; optional for Certificate and Associate": "Mises en situation à courte dissertation — obligatoires pour Th.M. et M.Div. ; facultatives pour Certificat et Associé",
+  "These short-essay scenarios are optional for Certificate of Ministry students. You are welcome to attempt them, but they do not count toward your Certificate pass/fail — the Certificate is earned on the multiple-choice questions alone.": "Ces mises en situation sont facultatives pour les étudiants du Certificat de ministère. Vous pouvez les faire, mais elles ne comptent pas pour la réussite du Certificat — le Certificat s’obtient uniquement avec les questions à choix multiple.",
+  "Check Answer": "Vérifier la réponse",
+  "✓ Correct": "✓ Exact",
+  "✗ Incorrect — correct answer: ${right}": "✗ Inexact — bonne réponse : ${right}",
+  "Write your own answer — a few sentences — and check again to see the model answer.": "Rédigez votre propre réponse — quelques phrases — puis vérifiez de nouveau pour voir la réponse modèle.",
+  "✓ Sufficient — key concepts present.": "✓ Suffisant — les notions clés sont présentes.",
+  "✗ Incomplete — your answer was missing key concepts${missEn?': '+missEn:''}. ${ans.length<ESSAY_MIN_CHARS?'(Answer too short.) ':''}Compare with the model answer below.": "✗ Incomplet — il manque des notions clés dans votre réponse${missFr?' : '+missFr:''}. ${ans.length<ESSAY_MIN_CHARS?'(Réponse trop courte.) ':''}Comparez avec la réponse modèle ci-dessous.",
+  "Model answer / rubric:": "Réponse modèle / critères :",
+  "Locked. Please wait ${mins} more minute(s) before retrying this unit.": "Bloqué. Veuillez attendre encore ${mins} minute(s) avant de reprendre cette unité.",
+  "Not answered": "Sans réponse",
+  "Correct": "Exact",
+  "Incorrect (correct: ${right})": "Inexact (bonne réponse : ${right})",
+  "✓ Passed. Multiple choice ${correct}/${mcTotal} (${mcPct}%) and essays ${essayCorrect}/${essayTotal} (${essayPct}%)${fr&&fr.counted&&fr.n?'; '+fillLine(fr,false):''}. All met the requirement.": "✓ Réussi. Choix multiple ${correct}/${mcTotal} (${mcPct} %) et dissertations ${essayCorrect}/${essayTotal} (${essayPct} %)${fr&&fr.counted&&fr.n?' ; '+fillLineFr(fr):''}. Toutes les exigences sont remplies.",
+  "✓ Passed: ${correct}/${mcTotal} (${mcPct}%) on multiple choice${fr&&fr.counted&&fr.n?'; '+fillLine(fr,false):''}. Review explanations above.": "✓ Réussi : ${correct}/${mcTotal} (${mcPct} %) aux questions à choix multiple${fr&&fr.counted&&fr.n?' ; '+fillLineFr(fr):''}. Relisez les explications ci-dessus.",
+  "A 15-minute wait applies before you may retry this unit.": "Un délai de 15 minutes s’applique avant de pouvoir reprendre cette unité.",
+  "Not yet passed. ${parts_en.join('; ')}. Review the explanations and model answers above, then try again.": "Pas encore réussi. Choix multiple ${correct}/${mcTotal} (${mcPct} %)${mcPassed?' ✓':' — 90 % requis'} ; dissertations ${essayCorrect}/${essayTotal} (${essayPct} %)${essayPassed?' ✓':' — '+essayNeeded+' sur '+essayTotal+' requises'}${fillLineFr(fr)?' ; '+fillLineFr(fr):''}. Relisez les explications et les réponses modèles ci-dessus, puis réessayez.",
+  "Not yet passed. Multiple choice ${correct}/${mcTotal} (${mcPct}%)${mcPassed?' ✓':' — 90% required'}; ${fillLine(fr,false)}. Review the explanations and answers above, then try again.": "Pas encore réussi. Choix multiple ${correct}/${mcTotal} (${mcPct} %)${mcPassed?' ✓':' — 90 % requis'} ; ${fillLineFr(fr)}. Relisez les explications et les réponses ci-dessus, puis réessayez.",
+  "Score: ${correct}/${mcTotal} (${mcPct}%). 90% required. Review explanations and try again.": "Résultat : ${correct}/${mcTotal} (${mcPct} %). 90 % requis. Relisez les explications et réessayez.",
+  "${passed} of ${UNIT_COUNT} units completed": "${passed} unité(s) terminée(s) sur ${UNIT_COUNT}",
+  "✓ Correct. Preferred answer: <b>${item.en}</b>.": "✓ Exact. Réponse préférée : <b>${item.fr||item.en}</b>.",
+  "✗ Incorrect. Correct answer: <b>${item.en}</b>.": "✗ Inexact. Bonne réponse : <b>${item.fr||item.en}</b>."
+ },
+ "literals": {
+  "'Please complete all fields'": "'Veuillez remplir tous les champs.'",
+  "'Please register first'": "'Veuillez d’abord vous inscrire.'",
+  "alert('Register first')": "alert('Veuillez d’abord vous inscrire.')",
+  "'Write your response...'": "'Rédigez votre réponse…'",
+  "aria-label=\"Short answer\"": "aria-label=\"Réponse courte\"",
+  "`Fill in the blank ${fr.score}/${fr.n}${fr.ok?' ✓':' — '+fr.need+' of '+fr.n+' required'}`;": "`Fill in the blank ${fr.score}/${fr.n}${fr.ok?' ✓':' — '+fr.need+' of '+fr.n+' required'}`;\n}\nfunction fillLineFr(fr){\n  if(!fr || !fr.n || !fr.counted) return '';\n  return `phrases à compléter ${fr.score}/${fr.n}${fr.ok?' ✓':' — '+fr.need+' sur '+fr.n+' requises'}`;"
+ },
+ "extraBlocks": {
+  "To record this course toward your Master’s degree, pass the required-reading test. Your certificate follows.": "Pour faire compter ce cours dans votre master, <a href=\"CTSPreachingReadingsTest.html\" style=\"color:#2c3e36;font-weight:bold;text-decoration:underline\">réussissez le test des lectures obligatoires</a>. Votre certificat suivra."
+ },
+ "registration": {
+  "placeholders": {
+   "studentName": "Nom complet",
+   "studentEmail": "Adresse courriel",
+   "studentCountry": "Pays"
+  },
+  "tracks": {
+   "cert": "Certificat de ministère",
+   "mtheol": "Master en théologie",
+   "mdiv": "Master en théologie pastorale (M.Div.)"
+  }
+ },
+ "figure": {
+  "A Method for Building the Sermon Outline": "Une méthode pour construire le plan du sermon",
+  "Un método para construir el bosquejo del sermón": "A Method for Building the Sermon Outline",
+  "© 1993 Wayne Cook  ·  Chapala Theological Seminary / Seminario Teológico de Chapala": "© 1993 Wayne Cook  ·  Chapala Theological Seminary",
+  "STEP 1 / PASO 1": "ÉTAPE 1 / STEP 1",
+  "STEP 2 / PASO 2": "ÉTAPE 2 / STEP 2",
+  "STEP 3 / PASO 3": "ÉTAPE 3 / STEP 3",
+  "STEP 4 / PASO 4": "ÉTAPE 4 / STEP 4",
+  "STEP 5 / PASO 5  ·  THE HINGE OF UNITY / EL EJE DE LA UNIDAD": "ÉTAPE 5 / STEP 5  ·  LE PIVOT DE L’UNITÉ / THE HINGE OF UNITY",
+  "STEP 6 / PASO 6": "ÉTAPE 6 / STEP 6",
+  "SUBJECT": "SUJET",
+  "El Tema": "Subject",
+  "The theme — what you preach about.": "Le thème — ce dont vous prêchez.",
+  "El tema — sobre qué predicas.": "The theme — what you preach about.",
+  "TEXT": "TEXTE",
+  "El Texto": "Text",
+  "The Scripture passage preached.": "Le passage de l’Écriture prêché.",
+  "El pasaje bíblico que se predica.": "The Scripture passage preached.",
+  "PROPOSITION": "PROPOSITION",
+  "La Proposición": "Proposition",
+  "The one timeless truth, stated in a single declarative sentence.": "L’unique vérité intemporelle, énoncée en une seule phrase affirmative.",
+  "La única verdad eterna, en una sola oración declarativa.": "The one timeless truth, stated in a single declarative sentence.",
+  "INTERROGATIVE": "INTERROGATIF",
+  "El Interrogante": "Interrogative",
+  "The probing question:  Why?  How?  What?  Where?  When?  Who?": "La question exploratoire :  Pourquoi ?  Comment ?  Quoi ?  Où ?  Quand ?  Qui ?",
+  "La pregunta que sondea:  ¿Por qué?  ¿Cómo?  ¿Qué?  ¿Dónde?  ¿Cuándo?  ¿Quién?": "The probing question:  Why?  How?  What?  Where?  When?  Who?",
+  "KEYWORD": "MOT-CLÉ",
+  "La Palabra Clave": "Keyword",
+  "A plural noun that answers the interrogative and classifies every main division.": "Un nom au pluriel qui répond à l’interrogatif et classe chaque division principale.",
+  "Un sustantivo plural que responde al interrogante y clasifica cada división.": "A plural noun that answers the interrogative and classifies every main division.",
+  "TRANSITIONAL SENTENCE": "PHRASE DE TRANSITION",
+  "La Oración de Transición": "Transitional sentence",
+  "Bridges proposition, interrogative, and keyword into the body of the sermon.": "Relie la proposition, l’interrogatif et le mot-clé au corps du sermon.",
+  "Enlaza la proposición, el interrogante y la palabra clave con el cuerpo.": "Bridges proposition, interrogative, and keyword into the body of the sermon.",
+  "MAIN DIVISIONS  /  LAS DIVISIONES PRINCIPALES": "DIVISIONS PRINCIPALES  /  MAIN DIVISIONS",
+  "Parallel — each one a member of the keyword.  ·  Paralelas — cada una, un miembro de la palabra clave.": "Parallèles — chacune est un membre du mot-clé.  ·  Parallel — each one a member of the keyword.",
+  "Division One": "Division I",
+  "Division Two": "Division II",
+  "Division Three": "Division III",
+  "Unity is the chief mark of a good outline — the keyword is its tool.": "L’unité est la marque principale d’un bon plan — le mot-clé en est l’outil.",
+  "La unidad es la marca principal de un buen bosquejo — la palabra clave es su herramienta.": "Unity is the chief mark of a good outline — the keyword is its tool.",
+  "A WORKED EXAMPLE  ·  UN EJEMPLO": "UN EXEMPLE  ·  A WORKED EXAMPLE",
+  "Subject: Prayer   ·   Proposition: “The believer should pray with confidence.”": "Sujet : la prière   ·   Proposition : « Le croyant doit prier avec assurance. »",
+  "Interrogative: Why?   ·   Keyword: Reasons  (a plural noun)": "Interrogatif : Pourquoi ?   ·   Mot-clé : raisons  (un nom au pluriel)",
+  "Divisions  →   I. God hears     II. God loves     III. God answers     (each one a reason)": "Divisions  →   I. Dieu entend     II. Dieu aime     III. Dieu répond     (chacune est une raison)",
+  "Tema: La oración   ·   Proposición: «El creyente debe orar con confianza.»": "Subject: Prayer   ·   Proposition: “The believer should pray with confidence.”",
+  "Interrogante: ¿Por qué?   ·   Palabra clave: Razones  (un sustantivo plural)": "Interrogative: Why?   ·   Keyword: Reasons  (a plural noun)",
+  "Divisiones  →   I. Dios oye     II. Dios ama     III. Dios responde     (cada una, una razón)": "Divisions  →   I. God hears     II. God loves     III. God answers     (each one a reason)",
+  "The WiseSpeak outline at a glance — from subject to parallel divisions.": "Le plan WiseSpeak en un coup d’œil — du sujet aux divisions parallèles.",
+  "El bosquejo WiseSpeak de un vistazo — del tema a las divisiones paralelas.": "The WiseSpeak outline at a glance — from subject to parallel divisions."
+ },
+ "practice": [
+  [
+   "^All six correct! Excellent — you can match Scripture passages to text-selection methods\\.$",
+   "Les six réponses sont justes${N}! Excellent — vous savez associer les passages de l’Écriture aux méthodes de choix du texte."
+  ],
+  [
+   "^(\\d+) of 6 correct\\. Review the seven methods in section 1\\.5 and try the missed ones again\\.$",
+   "$1 sur 6 justes. Revoyez les sept méthodes de la section 1.5 et reprenez celles que vous avez manquées."
+  ],
+  [
+   "^(\\d+) of 6 correct\\. Re-read section 1\\.5 carefully — .*$",
+   "$1 sur 6 justes. Relisez attentivement la section 1.5 — les sept méthodes sont : livre, chapitre, thème, mot, parabole/miracle, personnage, prédication suivie."
+  ],
+  [
+   "^Please enter an idea \\(one or two words\\)\\.$",
+   "Veuillez saisir une idée (un ou deux mots)."
+  ],
+  [
+   "^That looks longer than an idea — .*$",
+   "Cela semble plus long qu’une idée — une idée tient en un ou deux mots. Vous avez peut-être déjà un sujet. Essayez seulement le mot central : par exemple « foi » au lieu de « l’importance de la foi »."
+  ],
+  [
+   "^Good\\. Your idea is recorded\\. .*$",
+   "Bien. Votre idée est notée. Servez-vous-en maintenant pour formuler une question exploratoire à l’étape 2."
+  ],
+  [
+   "^Please write a complete question\\.$",
+   "Veuillez écrire une question complète."
+  ],
+  [
+   "^No interrogative detected .*$",
+   "Aucun interrogatif détecté (utilisez l’un de ceux-ci : qui, quel, que, pourquoi, quand, où, comment, combien)."
+  ],
+  [
+   "^Missing question mark — .*$",
+   "Il manque le point d’interrogation — rédigez-la sous forme de question."
+  ],
+  [
+   "^Your question does not seem to contain your idea word \\(\"(.*)\"\\)\\.$",
+   "Votre question ne semble pas contenir le mot de votre idée (« $1 »)."
+  ],
+  [
+   "^Looks good — interrogative present, .*$",
+   "C’est bien — l’interrogatif est présent, la phrase est une question et votre idée y figure. Dégagez maintenant le mot-clé à l’étape 3."
+  ],
+  [
+   "^Please enter a keyword\\.$",
+   "Veuillez saisir un mot-clé."
+  ],
+  [
+   "^A keyword should be one word\\. .*$",
+   "Un mot-clé doit être un seul mot. Vous avez peut-être écrit une expression ou un sujet par erreur — ne gardez que le nom."
+  ],
+  [
+   "^\"(.*)\" is too generic\\. .*$",
+   "« $1 » est trop général. Choisissez un nom au pluriel précis, comme raisons, manières, exemples, dangers, qualités, bénédictions ou étapes."
+  ],
+  [
+   "^Your keyword \"(.*)\" does not appear to be plural\\. .*$",
+   "Votre mot-clé « $1 » ne semble pas être au pluriel. Le mot-clé doit être au pluriel (presque toujours terminé par -s ou -x). Essayez « $1s » ou repensez le mot — par exemple « manière » → « manières », « raison » → « raisons »."
+  ],
+  [
+   "^Good — \"(.*)\" is plural and specific\\. .*$",
+   "Bien — « $1 » est au pluriel et précis. Construisez maintenant le sujet à l’étape 4."
+  ],
+  [
+   "^Please enter a subject\\.$",
+   "Veuillez saisir un sujet."
+  ],
+  [
+   "^Your subject does not contain your keyword \"(.*)\"\\. .*$",
+   "Votre sujet ne contient pas votre mot-clé « $1 ». Le sujet est formé du mot-clé et d’un complément ; le mot-clé doit y figurer."
+  ],
+  [
+   "^A subject is keyword \\+ modifier — .*$",
+   "Un sujet, c’est le mot-clé plus un complément — il doit compter au moins deux mots. Ajoutez un adjectif, un complément prépositionnel ou une proposition subordonnée."
+  ],
+  [
+   "^Good — your subject contains the keyword and a modifier\\. .*$",
+   "Bien — votre sujet contient le mot-clé et un complément. Rédigez maintenant l’objectif à l’étape 5."
+  ],
+  [
+   "^Please enter an objective\\.$",
+   "Veuillez saisir un objectif."
+  ],
+  [
+   "^Consider starting with \"People will…\" .*$",
+   "Pensez à commencer par « Les auditeurs vont… » pour rendre l’objectif concret."
+  ],
+  [
+   "^Your objective uses a belief/attitude word\\. .*$",
+   "Votre objectif emploie un mot de croyance ou d’attitude. L’objectif doit être une ACTION (faire, choisir, mettre de côté, parler, donner, écrire)."
+  ],
+  [
+   "^Excellent — your objective is phrased as an action\\. .*$",
+   "Excellent — votre objectif est formulé comme une action. Vous avez parcouru toute la démarche du mot-clé ! Vous avez maintenant les cinq outils (idée, question exploratoire, mot-clé, sujet, objectif) pour construire des plans à partir de l’unité 3."
+  ],
+  [
+   "^No subject entered\\.$",
+   "Aucun sujet saisi."
+  ],
+  [
+   "^You need three points\\.$",
+   "Il vous faut trois points."
+  ],
+  [
+   "^(\\d+) point\\(s\\) appear to use passive voice\\. .*$",
+   "$1 point(s) semble(nt) être à la voix passive. Reformulez à la voix active — par exemple « ils furent guéris » → « Il les guérit »."
+  ],
+  [
+   "^All three points begin with the same word — strong parallelism\\.$",
+   "Les trois points commencent par le même mot — bon parallélisme."
+  ],
+  [
+   "^Your points vary widely in length\\. .*$",
+   "Vos points sont de longueurs très différentes. Essayez de les garder à peu près égaux, par souci de proportion."
+  ],
+  [
+   "^Strong outline: three points, no obvious passive voice, and reasonably balanced\\.$",
+   "Plan solide : trois points, pas de voix passive évidente, et un équilibre raisonnable."
+  ],
+  [
+   "^(\\d+) of (\\d+) correct\\. Well done\\.$",
+   "$1 sur $2 justes. Bravo."
+  ],
+  [
+   "^(\\d+) of (\\d+) correct\\. Review the items marked incorrect\\.$",
+   "$1 sur $2 justes. Revoyez les réponses marquées comme inexactes."
+  ]
+ ],
+ "practiceWords": {
+  "interrogatives": [
+   "qui",
+   "quel",
+   "quelle",
+   "quels",
+   "quelles",
+   "quoi",
+   "pourquoi",
+   "quand",
+   "où",
+   "comment",
+   "combien",
+   "lequel",
+   "laquelle",
+   "lesquels",
+   "lesquelles"
+  ],
+  "generic": [
+   "choses",
+   "trucs",
+   "éléments"
+  ],
+  "belief": [
+   "comprendre",
+   "savoir",
+   "croire",
+   "ressentir",
+   "réaliser",
+   "apprécier",
+   "saisir"
+  ],
+  "people": [
+   "les gens",
+   "les auditeurs",
+   "l’assemblée",
+   "l'assemblée",
+   "les fidèles"
+  ],
+  "match": {
+   "p1_q1": [
+    "chapitre"
+   ],
+   "p1_q2": [
+    "livre"
+   ],
+   "p1_q3": [
+    "mot"
+   ],
+   "p1_q4": [
+    "personnage"
+   ],
+   "p1_q5": [
+    "parabole",
+    "miracle"
+   ],
+   "p1_q6": [
+    "thème",
+    "theme"
+   ]
+  }
+ },
+ "u7": [
+  {
+   "fr": "phrases",
+   "accept": [
+    "phrases",
+    "mots",
+    "paroles",
+    "formulation",
+    "formulations",
+    "texte mot à mot"
+   ]
+  },
+  {
+   "fr": "index",
+   "accept": [
+    "index",
+    "repère",
+    "indice",
+    "guide",
+    "aide-mémoire",
+    "signal"
+   ]
+  },
+  {
+   "fr": "développe",
+   "accept": [
+    "développe",
+    "construit",
+    "élabore",
+    "prépare",
+    "forme",
+    "rédige"
+   ]
+  },
+  {
+   "fr": "retrouve",
+   "accept": [
+    "retrouve",
+    "récupère",
+    "se rappelle",
+    "rappelle",
+    "évoque",
+    "ravive"
+   ]
+  },
+  {
+   "fr": "localisation",
+   "accept": [
+    "localisation",
+    "place",
+    "position",
+    "emplacement",
+    "carte",
+    "repère"
+   ]
+  },
+  {
+   "fr": "pensée",
+   "accept": [
+    "pensée",
+    "réflexion",
+    "idées",
+    "sens",
+    "contenu",
+    "concept"
+   ]
+  },
+  {
+   "fr": "ancres",
+   "accept": [
+    "ancres",
+    "repères",
+    "crochets",
+    "points d’ancrage",
+    "points d'ancrage",
+    "déclencheurs",
+    "appuis"
+   ]
+  },
+  {
+   "fr": "structure",
+   "accept": [
+    "structure",
+    "organisation",
+    "charpente",
+    "plan",
+    "forme",
+    "architecture"
+   ]
+  },
+  {
+   "fr": "préparation",
+   "accept": [
+    "préparation",
+    "étude",
+    "planification",
+    "travail",
+    "recherche",
+    "élaboration"
+   ]
+  },
+  {
+   "fr": "ensuite",
+   "accept": [
+    "ensuite",
+    "après",
+    "par la suite",
+    "puis",
+    "la suite",
+    "plus tard"
+   ]
+  }
+ ]
+}

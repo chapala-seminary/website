@@ -9,6 +9,7 @@ import { LANGUAGES, NAMES, localeHref, localizeMarkup, renderLanguageLesson } fr
 
 import { frenchLanding } from '../src/lib/french-landing.ts';
 import { frenchWiseSpeak } from './french-wisespeak.mjs';
+import { frenchStaticCourse } from './french-static-courses.mjs';
 import { frenchInterface } from '../src/lib/french-interface.ts';
 
 const SITE = 'https://chapalaseminary.org';
@@ -47,6 +48,8 @@ export function buildLanguagePages(dir) {
     for (const lang of LANGUAGES) {
       let root = parse(canonical, { comment: true, parseNoneClosedTags: true });
       if (lang === 'fr' && file === 'CTS_WiseSpeak_Preaching.html') frenchWiseSpeak(root);
+      // Narrative Preaching, Counseling and Ethics: French machine drafts (tools/french-static-courses.mjs).
+      const staticDraft = lang === 'fr' && frenchStaticCourse(root, file);
       const html = root.querySelector('html'), body = root.querySelector('body'), head = root.querySelector('head');
       if (!html || !body || !head) continue;
       // The legacy controls stay as hidden hooks for old inline scripts. All
@@ -96,7 +99,7 @@ export function buildLanguagePages(dir) {
         brandRow.classList.add('cts-language-header');
         brandRow.insertAdjacentHTML('beforeend', controls);
       } else if (nav) nav.insertAdjacentHTML('beforeend', controls); else b.insertAdjacentHTML('afterbegin', controls);
-      const draftFrench = lang === 'fr' && (file === 'CTS_WiseSpeak_Preaching.html' || !!lesson?.blocks.some(block => block.tr?.fr?.status === 'machine'));
+      const draftFrench = lang === 'fr' && (file === 'CTS_WiseSpeak_Preaching.html' || staticDraft || !!lesson?.blocks.some(block => block.tr?.fr?.status === 'machine'));
       if (draftFrench) {
         h.insertAdjacentHTML('beforeend', '<meta name="robots" content="noindex,follow">');
         b.insertAdjacentHTML('afterbegin', '<aside class="cts-translation-pending" lang="fr">Traduction provisoire publiée pour relecture. Des corrections peuvent encore être apportées ; vous pouvez afficher le texte anglais de référence.</aside>');

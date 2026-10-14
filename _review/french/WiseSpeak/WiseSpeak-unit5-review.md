@@ -318,8 +318,8 @@ _Pourquoi :_ Illustrer, c'est jeter de la lumière sur — rendre la vérité cl
 · A. Trop courte  
 · B. Trop biblique  
 · C. Trop rare  
-✓ D. La maîtresse  
-_Pourquoi :_ Quand l'histoire devient maîtresse, le sermon s'effondre en divertissement avec peu de Bible.  
+✓ D. Celle qui commande (la maîtresse)  
+_Pourquoi :_ Quand l'histoire prend le commandement, le sermon s'effondre en divertissement avec peu de Bible.  
 > EN: Wayne calls the illustration 'the servant of all,' which warns against letting it become: — ✓ The master
 
 ## 6. Fill in the blank
