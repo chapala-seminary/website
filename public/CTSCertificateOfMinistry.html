@@ -183,6 +183,14 @@ img.cts-sig { max-height:50px; width:auto; max-width:92%; display:block; margin:
 <script>
 (function () {
   "use strict";
+  // The page's language (cts-lang.js); the old two-span form is the fallback.
+  function say(en, es, fr) {
+    return window.CTSLanguage ? window.CTSLanguage.bi({ en: en, es: es, fr: fr })
+      : '<span class="lang-en">' + en + '</span><span class="lang-es">' + es + '</span>';
+  }
+  function esc(t) { return String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+  // French course names, added to French pages by the build (language-pages.mjs).
+  var FR_NAMES = window.CTS_COURSE_NAMES_FR || {};
   var REQUIRED = 12;
   var ENDPOINT = "https://script.google.com/macros/s/AKfycbzJxatN3_7Dl6WwyZHWDRqO_EiLNY7SGQaZPFECY9QiVyqmoAe7qDVqiPzQo2R2S0IrAg/exec";
   var NOTIFY_EMAIL = "info@chapalaseminary.org";
@@ -196,7 +204,7 @@ img.cts-sig { max-height:50px; width:auto; max-width:92%; display:block; margin:
   // Worker's). Until 29 Sept 2026 this counted course names of any level.
   var st = window.CTSDegrees.status("certificate");
   var NAMES = window.CTS_COURSE_NAMES || {};
-  var courses = Object.keys(st.have).map(function(c){ return NAMES[c] || { en: c, es: c }; });
+  var courses = Object.keys(st.have).map(function(c){ var n = NAMES[c] || { en: c, es: c }; return { en: n.en, es: n.es, fr: FR_NAMES[c] || n.fr || n.en }; });
   var count = st.count;
   var FOUNDATION = st.core;
   var foundationDone = st.coreDone;
@@ -209,7 +217,8 @@ img.cts-sig { max-height:50px; width:auto; max-width:92%; display:block; margin:
   function fmtDate(){
     var d = new Date();
     return { en: d.toLocaleDateString("en-US", { year:"numeric", month:"long", day:"numeric" }),
-             es: d.toLocaleDateString("es-MX", { year:"numeric", month:"long", day:"numeric" }) };
+             es: d.toLocaleDateString("es-MX", { year:"numeric", month:"long", day:"numeric" }),
+             fr: d.toLocaleDateString("fr-FR", { year:"numeric", month:"long", day:"numeric" }) };
   }
   function show(id){ var e = document.getElementById(id); if (e) e.style.display = "block"; }
   function hide(id){ var e = document.getElementById(id); if (e) e.style.display = "none"; }
@@ -231,13 +240,13 @@ img.cts-sig { max-height:50px; width:auto; max-width:92%; display:block; margin:
     hide("progressCard"); show("certCard");
     document.getElementById("certName").textContent = name || "\u2014";
     var dt = fmtDate();
-    document.getElementById("certDate").innerHTML =
-      '<span class="lang-en">' + dt.en + '</span><span class="lang-es">' + dt.es + '</span>';
+    document.getElementById("certDate").innerHTML = say(dt.en, dt.es, dt.fr);
     if (!name) {
       var note = document.createElement("div");
       note.className = "locked-msg"; note.style.maxWidth = "640px"; note.style.margin = "14px auto 0";
-      note.innerHTML = '<span class="lang-en">Tip: set your name on any course page so it appears on your diploma.</span>' +
-                       '<span class="lang-es">Sugerencia: registre su nombre en cualquier p&aacute;gina de curso para que aparezca en su diploma.</span>';
+      note.innerHTML = say('Tip: set your name on any course page so it appears on your diploma.',
+                           'Sugerencia: registre su nombre en cualquier p&aacute;gina de curso para que aparezca en su diploma.',
+                           'Conseil\u00a0: enregistrez votre nom sur n\u2019importe quelle page de cours pour qu\u2019il figure sur votre diplôme.');
       var card = document.getElementById("certCard");
       card.insertBefore(note, card.querySelector(".btn-row"));
     }
@@ -249,24 +258,24 @@ img.cts-sig { max-height:50px; width:auto; max-width:92%; display:block; margin:
     bar.style.width = pct + "%";
     bar.textContent = count + " / " + REQUIRED;
     document.getElementById("countLine").innerHTML =
-      '<span class="lang-en">' + count + ' of ' + REQUIRED + ' courses completed</span>' +
-      '<span class="lang-es">' + count + ' de ' + REQUIRED + ' cursos completados</span>';
+      say(count + ' of ' + REQUIRED + ' courses completed', count + ' de ' + REQUIRED + ' cursos completados',
+          count + ' cours terminé' + (count > 1 ? 's' : '') + ' sur ' + REQUIRED);
     var remain = Math.max(REQUIRED - count, 0);
     var foundationLeft = FOUNDATION.length - foundationDone;
     var msEn = remain + " more course" + (remain===1?"":"s") + " needed" +
       (foundationLeft ? " (including " + foundationLeft + " more foundation course" + (foundationLeft===1?"":"s") + ")" : "") + ".";
     var msEs = remain + " curso" + (remain===1?"":"s") + " m\u00e1s necesario" + (remain===1?"":"s") +
       (foundationLeft ? " (incluidos " + foundationLeft + " curso" + (foundationLeft===1?"":"s") + " de fundamento m\u00e1s)" : "") + ".";
-    document.getElementById("milestone").innerHTML =
-      '<span class="lang-en">' + msEn + '</span><span class="lang-es">' + msEs + '</span>';
+    var msFr = remain + " cours encore nécessaire" + (remain > 1 ? "s" : "") +
+      (foundationLeft ? " (dont " + foundationLeft + " cours fondamenta" + (foundationLeft > 1 ? "ux" : "l") + ")" : "") + ".";
+    document.getElementById("milestone").innerHTML = say(msEn, msEs, msFr);
     if (count > 0) {
       show("courseListWrap");
       var ul = document.getElementById("courseList");
       courses.sort(function(a,b){ return a.en.localeCompare(b.en); });
       for (var j = 0; j < courses.length; j++) {
         var li = document.createElement("li");
-        li.innerHTML = '<span class="lang-en"></span><span class="lang-es"></span>';
-        li.firstChild.textContent = courses[j].en; li.lastChild.textContent = courses[j].es;
+        li.innerHTML = say(esc(courses[j].en), esc(courses[j].es), esc(courses[j].fr));
         ul.appendChild(li);
       }
     } else {
@@ -280,7 +289,7 @@ img.cts-sig { max-height:50px; width:auto; max-width:92%; display:block; margin:
     var body = "Name: " + (name || "(not provided)") + "\nCertificate: Certificate of Ministry\nCourses completed: " + count +
                "\nDate: " + new Date().toISOString().slice(0,10);
     var st = document.getElementById("notifyStatus");
-    if (st) st.innerHTML = '<span class="lang-en">Opening your email\u2026</span><span class="lang-es">Abriendo su correo\u2026</span>';
+    if (st) st.innerHTML = say('Opening your email\u2026', 'Abriendo su correo\u2026', 'Ouverture de votre messagerie\u2026');
     location.href = "mailto:" + NOTIFY_EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
   });
 

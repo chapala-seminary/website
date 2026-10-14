@@ -128,15 +128,18 @@
       var lock = locked(), passed = o.passed(), counts = o.counts();
       if (review && !lock) review = null;          // the lock is over: start again
       var mc = qs.every(function (q) { return !!q.options; });
-      var out = '<div class="cts-fill"><h3>' + (mc ? bi({ en: "Multiple Choice", es: "Opción múltiple", fr: "Choix multiple" }) : bi({ en: "Fill in the Blank", es: "Complete el espacio en blanco", fr: "Complétez le blanc" })) + "</h3>";
+      var out = '<div class="cts-fill"><h3>' + (mc ? bi({ en: "Multiple Choice", es: "Opción múltiple", fr: "Choix multiple" }) : bi({ en: "Fill in the Blank", es: "Complete el espacio en blanco", fr: "Questions à compléter" })) + "</h3>";
       out += '<p class="cts-fill-note">' + (mc
         ? bi({ en: "Choose the answer that completes each statement: each choice is marked at once, and a wrong choice shows the right answer. You need " + need(n) + " of " + n + " to pass.",
-               es: "Elija la respuesta que completa cada enunciado: cada elección se califica en seguida y, si es incorrecta, se muestra la respuesta correcta. Necesita " + need(n) + " de " + n + " para aprobar." })
+               es: "Elija la respuesta que completa cada enunciado: cada elección se califica en seguida y, si es incorrecta, se muestra la respuesta correcta. Necesita " + need(n) + " de " + n + " para aprobar.",
+               fr: "Choisissez la réponse qui complète chaque phrase\u00a0: chaque choix est corrigé aussitôt et, s\u2019il est faux, la bonne réponse s\u2019affiche. Il faut " + need(n) + " bonnes réponses sur " + n + " pour réussir." })
         : counts
         ? bi({ en: "Type the missing word or phrase and press Check (or Enter) to see at once whether it is right. You need " + need(n) + " of " + n + " to pass.",
-               es: "Escriba la palabra o frase que falta y pulse Comprobar (o Intro) para ver en seguida si es correcta. Necesita " + need(n) + " de " + n + " para aprobar." })
+               es: "Escriba la palabra o frase que falta y pulse Comprobar (o Intro) para ver en seguida si es correcta. Necesita " + need(n) + " de " + n + " para aprobar.",
+               fr: "Saisissez le mot ou l\u2019expression qui manque, puis appuyez sur Vérifier (ou Entrée) pour savoir aussitôt si votre réponse est juste. Il faut " + need(n) + " bonnes réponses sur " + n + " pour réussir." })
         : bi({ en: "For your own review: these do not count on the Certificate track. Press Check (or Enter) to see whether your answer is right.",
-               es: "Para su propio repaso: no cuentan en el trayecto de Certificado. Pulse Comprobar (o Intro) para ver si su respuesta es correcta." })) + "</p>";
+               es: "Para su propio repaso: no cuentan en el trayecto de Certificado. Pulse Comprobar (o Intro) para ver si su respuesta es correcta.",
+               fr: "Pour vous exercer\u00a0: ces questions ne comptent pas pour le parcours Certificat. Appuyez sur Vérifier (ou Entrée) pour savoir si votre réponse est juste." })) + "</p>";
       qs.forEach(function (q, i) {
         var given = review ? review[i] : st.fillAnswers[i];
         var done = !!review || st.fillChecked[i] || passed;
@@ -154,15 +157,15 @@
           });
         } else
         out += '<input type="text" data-cts-fill="' + i + '" autocomplete="off" autocapitalize="off" spellcheck="false"' +
-               ' aria-label="' + (isEs() ? "Respuesta " : "Answer ") + (i + 1) + '"' +
+               ' aria-label="' + (isEs() ? "Respuesta " : window.CTSLanguage && window.CTSLanguage.lang === "fr" ? "Réponse " : "Answer ") + (i + 1) + '"' +
                ((done || lock) ? " disabled" : "") + ' value="' + esc(given) + '" />';
         if (!done && !lock && !q.options) out += '<button type="button" data-cts-fill-check="' + i + '">' + bi({ en: "Check", es: "Comprobar", fr: "Vérifier" }) + "</button>";
         if (done) {
           var some = String(given || "").trim();
           out += fillRight(q, given, fillCodes())
-            ? '<div class="cts-fill-ok">' + bi({ en: "&#10003; Correct!", es: "&#10003; ¡Correcto!", fr: "&#10003; Correct !" }) + "</div>"
+            ? '<div class="cts-fill-ok">' + bi({ en: "&#10003; Correct!", es: "&#10003; ¡Correcto!", fr: "&#10003; Correct\u202f!" }) + "</div>"
             : '<div class="cts-fill-bad">' + bi({ en: (some ? "&#10007; Incorrect. " : "") + "Answer: " + esc(q.answer.en),
-                                                 es: (some ? "&#10007; Incorrecto. " : "") + "Respuesta: " + esc(q.answer.es), fr: (some ? "&#10007; Incorrect. " : "") + "Réponse : " + esc(q.answer.fr || q.answer.en) }) + "</div>";
+                                                 es: (some ? "&#10007; Incorrecto. " : "") + "Respuesta: " + esc(q.answer.es), fr: (some ? "&#10007; Incorrect. " : "") + "Réponse\u00a0: " + esc(q.answer.fr || q.answer.en) }) + "</div>";
         }
         out += "</div>";
       });

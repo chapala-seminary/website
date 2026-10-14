@@ -1,0 +1,172 @@
+/* French for the wording certificate-page scripts write in English as they
+ * run: unit titles, progress lines, locks. Loaded by cts-certify.js on
+ * /fr/ certificate pages only, which puts each matching text in French.
+ * The pages' fixed wording is French already (tools/add-certificate-french.mjs).
+ * Machine translation for the French beta, to be reviewed with the courses. */
+window.CTS_CERT_FR = {
+  exact: {
+    // messages
+    'Register your name on Unit 1 first.': 'Inscrivez d’abord votre nom à l’unité 1.',
+    'Date': 'Date',
+    'Please register on Unit 1 / Regístrese en la Unidad 1': 'Inscrivez-vous d’abord à l’unité 1',
+    'Unit 1 / Unidad 1 →': 'Unité 1 →',
+    'No student registration was found on this device. If you registered on another device, enter your student code on the': 'Aucune inscription d’étudiant n’a été trouvée sur cet appareil. Si vous vous êtes inscrit(e) sur un autre appareil, saisissez votre code d’étudiant sur la',
+    'to bring your work here.': 'pour récupérer votre travail ici.',
+    'Save & Restore page': 'page Sauvegarder et restaurer',
+    'backup page': 'page de sauvegarde',
+    '• Not yet passed': '• Pas encore réussie',
+    '✓ Passed': '✓ Réussie',
+    'Not yet': 'Pas encore',
+    'Passed': 'Réussie',
+    'Go to Unit 1 →': 'Aller à l’unité 1 →',
+    'Certificate Locked': 'Certificat verrouillé',
+    'The following units have not yet been passed. Complete each one before earning the certificate:': 'Les unités suivantes ne sont pas encore réussies. Terminez-les toutes pour obtenir le certificat :',
+    '[Enter your name above]': '[Saisissez votre nom ci-dessus]',
+    '[Student Name]': '[Nom de l’étudiant(e)]',
+    'Finish the units below, then return here to enter your name.': 'Terminez les unités ci-dessous, puis revenez ici pour saisir votre nom.',
+    'Certificate / Certificado': 'Certificat',
+    'Certificate track: each unit requires passing the multiple choice; short answer is practice.': 'Parcours Certificat : chaque unité exige de réussir les questions à choix multiples ; les réponses courtes servent d’entraînement.',
+    'Masters track: each unit requires passing both the multiple choice and the short answers.': 'Parcours master : chaque unité exige de réussir les questions à choix multiples et les réponses courtes.',
+    'Complete every unit on the selected track to unlock the certificate (on the M.Div. and Th.M. tracks, and the required-reading test).': 'Terminez toutes les unités du parcours choisi pour débloquer le certificat (sur les parcours M.Div. et Th.M., ainsi que l’examen des lectures obligatoires).',
+    'The textbook test is still to pass.': 'L’examen du manuel reste à réussir.',
+    'The required-reading test is still to pass.': 'L’examen des lectures obligatoires reste à réussir.',
+    'On the M.Div. and Th.M. tracks this course is complete, and its certificate issued, when the textbook test is passed as well.': 'Sur les parcours M.Div. et Th.M., ce cours est terminé, et son certificat délivré, lorsque l’examen du manuel est aussi réussi.',
+    'On the M.Div. and Th.M. tracks this course is complete, and its certificate issued, when the required-reading test is passed as well.': 'Sur les parcours M.Div. et Th.M., ce cours est terminé, et son certificat délivré, lorsque l’examen des lectures obligatoires est aussi réussi.',
+    'Take the textbook test': 'Passer l’examen du manuel',
+    'Take the test': 'Passer le test',
+    'Read the textbook': 'Lire le manuel',
+    'Track: Certificate': 'Parcours : Certificat',
+    'Vía: Certificate': 'Parcours : Certificat',
+    'Track: M.Div.': 'Parcours : M.Div.',
+    'Track: Th.M.': 'Parcours : Th.M.',
+    'Track: Associate': 'Parcours : Diplôme associé',
+    'Certificate of Ministry': 'Certificat de ministère',
+    'Associate of Divinity': 'Diplôme associé en théologie',
+    'Master of Divinity': 'Master en théologie pastorale (M.Div.)',
+    'Master of Theology': 'Master en théologie (Th.M.)',
+    'Certificate Track': 'Parcours Certificat',
+    'Master of Divinity Track': 'Parcours Master en théologie pastorale (M.Div.)',
+    'Master of Theology Track': 'Parcours Master en théologie (Th.M.)',
+    'Master of Divinity Track (M.Div.)': 'Parcours Master en théologie pastorale (M.Div.)',
+    'Master of Theology Track (Th.M.)': 'Parcours Master en théologie (Th.M.)',
+    'Master of Theology (Th.M.) Track': 'Parcours Master en théologie (Th.M.)',
+    'Certificate of Completion': 'Certificat de réussite',
+    'Master of Divinity (M.Div.) Level': 'Niveau Master en théologie pastorale (M.Div.)',
+    'Master of Theology (Th.M.) Level': 'Niveau Master en théologie (Th.M.)',
+    'M.Div. Track': 'Parcours M.Div.',
+    'Th.M. Track': 'Parcours Th.M.',
+    'The Doctrine of the Holy Spirit': 'La doctrine du Saint-Esprit',
+    'The Life of Christ': 'La vie du Christ',
+    // 1 Peter
+    'The Exile Salutation': 'La salutation aux exilés', 'Living Hope and Refined Faith': 'Une espérance vivante et une foi éprouvée',
+    'Be Holy; Redeemed by the Blood': 'Soyez saints ; rachetés par le sang', 'Living Stones and a Royal Priesthood': 'Des pierres vivantes et un sacerdoce royal',
+    'Sojourner Conduct and Submission': 'La conduite des étrangers et la soumission', 'Christ, the Suffering Example': 'Christ, l’exemple dans la souffrance',
+    'Wives and Husbands': 'Femmes et maris', 'Make Your Defense': 'Toujours prêts à vous défendre', 'Spirits in Prison and Baptism': 'Les esprits en prison et le baptême',
+    'Stewards of Grace': 'Dispensateurs de la grâce', 'The Fiery Trial': 'La fournaise de l’épreuve', 'Shepherds and the Roaring Lion': 'Les bergers et le lion rugissant',
+    // Church Administration & Leadership
+    'The Biblical Call to Lead God\'s House': 'L’appel biblique à diriger la maison de Dieu', 'Financial Stewardship and Budgeting': 'Gestion financière et budget',
+    'Personnel and Volunteer Management': 'Gestion du personnel et des bénévoles', 'Conflict Resolution and Church Discipline': 'Résolution des conflits et discipline d’Église',
+    'Facilities, Legal Matters, and Risk Management': 'Locaux, questions juridiques et gestion des risques', 'Multiplication, Church Planting, and Succession': 'Multiplication, implantation d’Églises et succession',
+    'The Leader\'s Heart: Integrity, Rest, and Finishing Well': 'Le cœur du responsable : intégrité, repos et bien finir',
+    // Apologetics
+    'The Reason for the Hope': 'La raison de l’espérance', 'The Design of the Heavens': 'Le dessein des cieux', 'Revelation and the Witness Within': 'La révélation et le témoignage intérieur',
+    'The Problem of Evil and Suffering': 'Le problème du mal et de la souffrance', 'The Reliability of Scripture': 'La fiabilité de l’Écriture', 'The Person and Claims of Christ': 'La personne et les affirmations du Christ',
+    'The Resurrection and the Changed Skeptics': 'La résurrection et les sceptiques transformés', 'Science, Chance, and the Limits of Naturalism': 'La science, le hasard et les limites du naturalisme',
+    'Other Religions and Worldviews': 'Les autres religions et visions du monde', 'Apologetics in Practice': 'L’apologétique en pratique',
+    // Cults & World Religions
+    'What Is a Cult? The Biblical Test': 'Qu’est-ce qu’une secte ? Le critère biblique', 'The Trinity and the Deity of Christ': 'La Trinité et la divinité du Christ',
+    'Jehovah\'s Witnesses': 'Les Témoins de Jéhovah', 'The Latter-day Saints': 'Les saints des derniers jours (mormons)', 'The Prosperity Gospel': 'L’Évangile de la prospérité',
+    'Progressive Revelation: Islam and Baha\'i': 'La révélation progressive : l’islam et le bahaïsme', 'Eastern Religions: Hinduism and Buddhism': 'Les religions orientales : hindouisme et bouddhisme',
+    'Roman Catholicism': 'Le catholicisme romain', 'Folk Religion: Santa Muerte, Spiritism and Syncretism': 'La religion populaire : Santa Muerte, spiritisme et syncrétisme',
+    'Witnessing to a Cult Member or Person of Another Faith': 'Témoigner auprès d’un membre de secte ou d’une personne d’une autre religion',
+    // Doctrinal Preaching
+    'Preaching the Doctrine of Revelation': 'Prêcher la doctrine de la Révélation', 'Preaching the Doctrine of God': 'Prêcher la doctrine de Dieu',
+    'Preaching the Doctrine of Man': 'Prêcher la doctrine de l’homme', 'Preaching the Life and Work of Christ': 'Prêcher la vie et l’œuvre du Christ',
+    'Preaching the Holy Spirit': 'Prêcher le Saint-Esprit', 'Preaching the Doctrine of Salvation': 'Prêcher la doctrine du salut',
+    'Preaching the Doctrine of the Church': 'Prêcher la doctrine de l’Église', 'Preaching the Doctrine of Last Things': 'Prêcher la doctrine des fins dernières',
+    // Evangelistic Preaching
+    'Heart and Purpose of Evangelistic Preaching': 'Le cœur et le but de la prédication d’évangélisation', 'Biblical Foundations and the Keyword Approach': 'Fondements bibliques et méthode du mot-clé',
+    'Characteristics of Effective Evangelistic Preaching': 'Les caractéristiques d’une prédication d’évangélisation efficace',
+    'Planning Evangelistic Sermons — The Word Method': 'Préparer des sermons d’évangélisation — la méthode du mot',
+    'Planning Evangelistic Sermons — The Question Method': 'Préparer des sermons d’évangélisation — la méthode des questions',
+    'Planning Evangelistic Sermons — The Interview Method': 'Préparer des sermons d’évangélisation — la méthode de l’entretien',
+    'Planning Evangelistic Sermons — Textual and Expository Approaches': 'Préparer des sermons d’évangélisation — approches textuelle et expositive',
+    'Crafting the Invitation and Appeal': 'Formuler l’invitation et l’appel', 'Great Evangelistic Preachers and What We Learn from Them': 'Les grands prédicateurs évangélistes et ce qu’ils nous apprennent',
+    'Modern Applications and Common Challenges': 'Applications actuelles et difficultés courantes',
+    // Galatians
+    'No Other Gospel (Galatians 1:1-10)': 'Pas d’autre Évangile (Galates 1:1-10)', 'Paul Defends the Gospel (Galatians 1:11-2:10)': 'Paul défend l’Évangile (Galates 1:11-2:10)',
+    'I Do Not Set Aside Grace (Galatians 2:11-21)': 'Je ne rejette pas la grâce (Galates 2:11-21)', 'Faith, Not Works of the Law (Galatians 3:1-29)': 'La foi, non les œuvres de la loi (Galates 3:1-29)',
+    'From Slaves to Sons (Galatians 4:1-31)': 'D’esclaves à fils (Galates 4:1-31)', 'Freedom and the Fruit of the Spirit (Galatians 5:1-26)': 'La liberté et le fruit de l’Esprit (Galates 5:1-26)',
+    'Glory Only in the Cross (Galatians 6:1-18)': 'Se glorifier seulement de la croix (Galates 6:1-18)', 'The Whole of Grace: Root and Fruit': 'Toute la grâce : la racine et le fruit',
+    'Another Gospel: Jehovah\'s Witnesses': 'Un autre Évangile : les Témoins de Jéhovah', 'Another Gospel: The Latter-day Saints': 'Un autre Évangile : les saints des derniers jours',
+    'Another Gospel: The Prosperity Gospel': 'Un autre Évangile : l’Évangile de la prospérité', 'Brothers in the Core: Seventh-day Adventists': 'Frères sur l’essentiel : les adventistes du septième jour',
+    // Genesis
+    'The Book of Beginnings': 'Le livre des commencements', 'Creation — God, Humanity, Work and the Image of God': 'La création — Dieu, l’humanité, le travail et l’image de Dieu',
+    'The Fall — Sin, Separation and God’s Covering': 'La chute — le péché, la séparation et la couverture de Dieu', 'Sin Spreads — Cain, the Generations and the Flood': 'Le péché se répand — Caïn, les générations et le déluge',
+    'Walking With God and the Nations — Enoch, Noah and Babel': 'Marcher avec Dieu, et les nations — Hénoc, Noé et Babel', 'Abraham — Faith, Waiting and the God of the Impossible': 'Abraham — la foi, l’attente et le Dieu de l’impossible',
+    'Abraham — Tested Faith and God’s Provision': 'Abraham — la foi éprouvée et la provision de Dieu', 'Isaac — Inheriting the Promise and Digging the Wells Again': 'Isaac — hériter la promesse et recreuser les puits',
+    'Jacob — Striving, Surrender and Back to Bethel': 'Jacob — la lutte, l’abandon et le retour à Béthel', 'Joseph — Dreams, Integrity, Temptation and Suffering': 'Joseph — les rêves, l’intégrité, la tentation et la souffrance',
+    'Joseph — Providence, Forgiveness and the Purpose of Genesis': 'Joseph — la providence, le pardon et le but de la Genèse',
+    // Hermeneutics
+    'Why Hermeneutics Matters for Pastors': 'Pourquoi l’herméneutique importe aux pasteurs', 'The Holy Spirit, Prayer, and the Heart': 'Le Saint-Esprit, la prière et le cœur',
+    'Exegesis, Eisegesis, and the First Principle': 'Exégèse, eiségèse et le premier principe', 'Context — The Heart of Interpretation': 'Le contexte — le cœur de l’interprétation',
+    'Scripture Interprets Scripture': 'L’Écriture interprète l’Écriture', 'Parables Are Not Allegories': 'Les paraboles ne sont pas des allégories',
+    'Miracles Are Enacted Parables': 'Les miracles sont des paraboles en action', 'Genre Determines Interpretation': 'Le genre détermine l’interprétation',
+    'Literal Is Not Literalistic': 'Littéral ne veut pas dire littéraliste', 'The Goal Is Transformation': 'Le but est la transformation', 'Tracking Christ Through the Whole Bible': 'Suivre le Christ à travers toute la Bible',
+    // Matthew
+    'The King\'s Origins': 'Les origines du Roi', 'The King Presented': 'Le Roi présenté', 'Sermon on the Mount I: Character': 'Le sermon sur la montagne I : le caractère',
+    'Sermon on the Mount II': 'Le sermon sur la montagne II', 'The Lord\'s Prayer': 'L’oraison dominicale', 'The King\'s Authority: Miracles': 'L’autorité du Roi : les miracles',
+    'Mission and Rising Opposition': 'La mission et l’opposition croissante', 'Parables of the Kingdom': 'Les paraboles du Royaume', 'The King and His Church': 'Le Roi et son Église',
+    'The Road to Jerusalem': 'La route de Jérusalem', 'The Olivet Discourse': 'Le discours sur le mont des Oliviers', 'The Passion': 'La Passion',
+    'Resurrection and the Great Commission': 'La résurrection et le grand mandat',
+    // Pentecostalism
+    'Why Study the Movement?': 'Pourquoi étudier ce mouvement ?', 'The Holy Spirit in Biblical Perspective': 'Le Saint-Esprit dans une perspective biblique',
+    'Pentecost: The Birth of the Spirit-Empowered Church': 'La Pentecôte : la naissance de l’Église revêtue de l’Esprit', 'The Gift of Tongues in the Book of Acts': 'Le don des langues dans le livre des Actes',
+    'The Gifts of the Spirit in Paul\'s Letters': 'Les dons de l’Esprit dans les lettres de Paul', 'The Rise of Pentecostalism, 1901-1910s': 'L’essor du pentecôtisme, de 1901 aux années 1910',
+    'The Charismatic Renewal and the Third Wave': 'Le renouveau charismatique et la troisième vague', 'What Is the Baptism in the Holy Spirit?': 'Qu’est-ce que le baptême dans le Saint-Esprit ?',
+    'Healing, Miracles, and Spiritual Warfare': 'Guérison, miracles et combat spirituel', 'Prophecy, Tongues, and Revelation Today': 'Prophétie, langues et révélation aujourd’hui',
+    'The Prosperity Gospel and Other Excesses': 'L’Évangile de la prospérité et d’autres excès', 'A Biblical Assessment of the Movement': 'Une évaluation biblique du mouvement',
+    // Revelation
+    'How to Read Revelation': 'Comment lire l’Apocalypse', 'Son of Man Among the Lampstands': 'Le Fils de l’homme au milieu des chandeliers',
+    'Seven Churches I: Ephesus to Thyatira': 'Les sept Églises I : d’Éphèse à Thyatire', 'Seven Churches II: Sardis to Laodicea': 'Les sept Églises II : de Sardes à Laodicée',
+    'The Throne and the Lamb': 'Le trône et l’Agneau', 'The Seven Seals': 'Les sept sceaux', 'The Seven Trumpets': 'Les sept trompettes',
+    'The Woman, the Dragon, and the Beasts': 'La femme, le dragon et les bêtes', 'The Harvest and the Seven Bowls': 'La moisson et les sept coupes', 'The Fall of Babylon': 'La chute de Babylone',
+    'The Return of Christ, the Millennium, and Judgment': 'Le retour du Christ, le millénium et le jugement', 'The Millennial Views: Postmillennialism': 'Les vues sur le millénium : le postmillénarisme',
+    'The Millennial Views: Premillennialism': 'Les vues sur le millénium : le prémillénarisme', 'The Millennial Views: Amillennialism': 'Les vues sur le millénium : l’amillénarisme',
+    'The New Heaven and the New Earth': 'Le nouveau ciel et la nouvelle terre',
+    // Systematic Theology, Ethics (titles shown alone)
+    'The Doctrine of Revelation': 'La doctrine de la révélation', 'The Doctrine of God': 'La doctrine de Dieu', 'The Doctrine of Christ': 'La doctrine du Christ',
+    'The Doctrine of Man': 'La doctrine de l’homme', 'Denominations and the Gospel': 'Les dénominations et l’Évangile', 'The Kingdom of God': 'Le Royaume de Dieu',
+    'Church, State, and Nationalism': 'L’Église, l’État et le nationalisme',
+    'Introduction to Christian Ethics': 'Introduction à l’éthique chrétienne', 'Biblical and Theological Foundations': 'Fondements bibliques et théologiques',
+    'Pastoral Vocation: Calling and Character': 'La vocation pastorale : appel et caractère', 'Family Responsibilities and Personal Integrity': 'Responsabilités familiales et intégrité personnelle',
+    'Professional Ethics and Boundaries': 'Éthique professionnelle et limites', 'Ethics in Preaching, Leadership, and Speech': 'L’éthique dans la prédication, le leadership et la parole',
+    'Sanctity of Life and Bioethics': 'Le caractère sacré de la vie et la bioéthique', 'Sexual Ethics, Purity, and Gender': 'Éthique sexuelle, pureté et identité sexuelle',
+    'Money, Stewardship, and the Poor': 'L’argent, la gestion fidèle et les pauvres', 'Judgment, Restoration, and Capstone': 'Jugement, restauration et synthèse finale'
+  },
+  // [pattern, French]: numbers and lists vary.
+  patterns: [
+    [/^Units still to complete: (.*)$/, 'Unités restant à terminer : $1'],
+    [/^Progress: (\d+) of (\d+) units completed\.$/, 'Progression : $1 unités terminées sur $2.'],
+    [/^(\d+) of (\d+) units passed\.$/, '$1 unités réussies sur $2.'],
+    [/^(\d+) of (\d+) units passed — keep going!$/, '$1 unités réussies sur $2 — continuez !'],
+    [/^(\d+) of (\d+) situations completed$/, '$1 situations terminées sur $2'],
+    [/^(\d+) of (\d+) courses completed$/, '$1 cours terminés sur $2'],
+    [/^Go to Unit (\d+) →$/, 'Aller à l’unité $1 →'],
+    [/^Continue with Unit (\d+) →$/, 'Continuer avec l’unité $1 →'],
+    [/^Your certificate will be issued once all (\w+) units are complete( \(on the M\.Div\. and Th\.M\. tracks, and the textbook test\))?\. Units still to finish: (.*)$/,
+      function (_m, n, tb, list) { return 'Votre certificat sera délivré une fois toutes les unités terminées' + (tb ? ' (sur les parcours M.Div. et Th.M., ainsi que l’examen du manuel)' : '') + '. Unités restant à terminer : ' + list; }],
+    [/^to bring your work here\. Otherwise, please begin with Unit 1 and complete all (\w+) units; your certificate will appear here automatically once every unit is passed\.$/,
+      'pour récupérer votre travail ici. Sinon, commencez par l’unité 1 et terminez toutes les unités ; votre certificat apparaîtra ici automatiquement dès que toutes les unités seront réussies.'],
+    [/^Not yet eligible: (\d+) more master’s-level courses? needed( and (\d+) required core courses? still missing)?\.$/,
+      function (_m, n, more, k) { return 'Pas encore admissible : encore ' + n + ' cours de niveau master à terminer' + (more ? ', et ' + k + ' cours obligatoire(s) du tronc commun manquant(s)' : '') + '.'; }],
+    [/^(\d+) more to earn the Associate of Divinity\.(.*)$/, function (_m, n, rest) {
+      return 'Encore ' + n + ' cours pour obtenir le Diplôme associé en théologie.' + rest.replace(' Foundation courses still needed: ', ' Cours fondamentaux encore nécessaires : '); }],
+    // "Unit 3 - Title", "Unit 3 — Title", "Unit 3: Title", "Unit 3. Title", "Unit 3"
+    [/^Unit (\d+)(?:(\s*[-—:]\s*|\.\s+)(.*))?$/, function (_m, n, sep, title) {
+      if (sep == null) return 'Unité ' + n;
+      var fr = window.CTS_CERT_FR.exact[title];
+      return 'Unité ' + n + (sep.trim() === ':' ? '\u00a0: ' : sep) + (fr || title);
+    }]
+  ]
+};

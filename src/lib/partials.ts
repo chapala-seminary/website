@@ -75,11 +75,13 @@ export const READING_ROOM: Record<string, string> = {
 /* The honours-readings box. It showed English and Spanish together, English
    first and larger; a Spanish reader took it for English (Dr. Cook's beta
    pass, 30 Sept 2026). It now follows the page's language switch, like the
-   rest of the unit, and shows both only in the "Both" view. */
+   rest of the unit, and shows both only in the "Both" view. Its French is
+   added on French pages (src/lib/french-interface.ts): a third language here
+   would change the lesson text the prose baseline records. */
 export const honoursBox = ({ course }: PartialContext): string => {
   const href = READING_ROOM[course];
   if (!href) throw new Error(`no reading room is recorded for ${course}, so the honours box cannot be rendered`);
-  return `<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1">`
+  return `<div style="max-width:820px;margin:30px auto 18px;padding:18px 20px;background:#5a1f1f;border:3px solid #b08324;border-radius:12px;text-align:center;font-family:Georgia,serif;color:#f0e0b8;" data-cts-rrbox="1" data-cts-chrome>`
   + `<div style="font-size:19px;font-weight:700;margin-bottom:8px;">📖 <span class="lang-en">Honors Readings</span><span class="lang-es">Lecturas con Honores</span></div>`
   + `<div style="font-size:14px;line-height:1.5;margin-bottom:14px;">`
   + `<span class="lang-en">This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.</span>`

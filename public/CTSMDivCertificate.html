@@ -44,28 +44,30 @@ main{max-width:940px;margin:0 auto;padding:28px 18px 56px}.nav{display:flex;just
 <script>
 (function(){
   "use strict";
+  // The page's language (cts-lang.js); the old two-span form is the fallback.
+  function say(en,es,fr){return window.CTSLanguage?window.CTSLanguage.bi({en:en,es:es,fr:fr}):'<span class="lang-en">'+en+'</span><span class="lang-es">'+es+'</span>'}
   var TOTAL_REQUIRED=30;
   var CORE=[
-    ["CTSOTS","Old Testament Survey","Panorama del Antiguo Testamento"],
-    ["CTSNT","New Testament Survey","Panorama del Nuevo Testamento"],
-    ["CTSST","Systematic Theology","Teología Sistemática"],
-    ["CTSEVANGELISM","Evangelism","Evangelismo"],
-    ["CTSPM","Pastoral Ministries","Ministerio Pastoral"],
-    ["CTSCH","Church History","Historia de la Iglesia"],
-    ["WISESPEAK","Preaching","Predicación"],
-    ["CTSHERMENEUTICS","Hermeneutics","Hermenéutica"],
-    ["CTSLA","Language Appreciation","Apreciación de los Idiomas Bíblicos"],
-    ["CTSGENESIS","Genesis Intensive","Génesis: Curso Intensivo"],
-    ["CTSPSALMS","Psalms","Salmos"],
-    ["CTSMATT","Matthew Intensive","Mateo: Curso Intensivo"],
-    ["CTSROMANS","Romans","Romanos"],
-    ["CTSACTS","Acts","Hechos: Curso Intensivo"],
-    ["CTSAPOL","Apologetics","Apologética"],
-    ["COUNSELING","Counseling","Consejería"],
-    ["CTSAL","Administration & Leadership","Administración y Liderazgo de la Iglesia"],
-    ["CTSWORSHIP","Worship","Adoración Cristiana"],
-    ["CTSCE","Christian Education","Educación Cristiana"],
-    ["CTSMISSIONS","World Missions","Misiones Mundiales"]
+    ["CTSOTS","Old Testament Survey","Panorama del Antiguo Testamento","Survol de l’Ancien Testament"],
+    ["CTSNT","New Testament Survey","Panorama del Nuevo Testamento","Survol du Nouveau Testament"],
+    ["CTSST","Systematic Theology","Teología Sistemática","Théologie systématique"],
+    ["CTSEVANGELISM","Evangelism","Evangelismo","Évangélisation"],
+    ["CTSPM","Pastoral Ministries","Ministerio Pastoral","Ministères pastoraux"],
+    ["CTSCH","Church History","Historia de la Iglesia","Histoire de l’Église"],
+    ["WISESPEAK","Preaching","Predicación","Prédication"],
+    ["CTSHERMENEUTICS","Hermeneutics","Hermenéutica","Herméneutique"],
+    ["CTSLA","Language Appreciation","Apreciación de los Idiomas Bíblicos","Initiation aux langues bibliques"],
+    ["CTSGENESIS","Genesis Intensive","Génesis: Curso Intensivo","Cours intensif sur la Genèse"],
+    ["CTSPSALMS","Psalms","Salmos","Le livre des Psaumes"],
+    ["CTSMATT","Matthew Intensive","Mateo: Curso Intensivo","Cours intensif sur Matthieu"],
+    ["CTSROMANS","Romans","Romanos","L’Épître aux Romains"],
+    ["CTSACTS","Acts","Hechos: Curso Intensivo","Cours intensif sur les Actes"],
+    ["CTSAPOL","Apologetics","Apologética","Apologétique"],
+    ["COUNSELING","Counseling","Consejería","Relation d’aide"],
+    ["CTSAL","Administration & Leadership","Administración y Liderazgo de la Iglesia","Administration et leadership de l’Église"],
+    ["CTSWORSHIP","Worship","Adoración Cristiana","Le culte"],
+    ["CTSCE","Christian Education","Educación Cristiana","Éducation chrétienne"],
+    ["CTSMISSIONS","World Missions","Misiones Mundiales","Missions mondiales"]
   ];
   function getArr(k){try{var a=JSON.parse(localStorage.getItem(k)||"[]");return Array.isArray(a)?a:[]}catch(e){return[]}}
   function saveArr(k,a){try{localStorage.setItem(k,JSON.stringify(a))}catch(e){}}
@@ -83,18 +85,18 @@ main{max-width:940px;margin:0 auto;padding:28px 18px 56px}.nav{display:flex;just
   var total=st.count;
   var earned=st.earned;
   var grid=document.getElementById("reqGrid");
-  CORE.forEach(function(x){var d=document.createElement("div");d.className="req"+(have[x[0]]?" done":"");d.innerHTML=(have[x[0]]?"✓ ":"○ ")+'<span class="lang-en">'+x[1]+'</span><span class="lang-es">'+x[2]+'</span>';grid.appendChild(d)});
+  CORE.forEach(function(x){var d=document.createElement("div");d.className="req"+(have[x[0]]?" done":"");d.innerHTML=(have[x[0]]?"✓ ":"○ ")+say(x[1],x[2],x[3]);grid.appendChild(d)});
   document.getElementById("totalNum").textContent=total+" / "+TOTAL_REQUIRED;
   document.getElementById("coreNum").textContent=coreDone+" / "+CORE.length;
   document.getElementById("totalFill").style.width=Math.min(100,total/TOTAL_REQUIRED*100)+"%";
   document.getElementById("coreFill").style.width=Math.min(100,coreDone/CORE.length*100)+"%";
   var missing=CORE.filter(function(x){return !have[x[0]]});
   var status=document.getElementById("status");
-  if(earned){status.className="status eligible";status.innerHTML='<span class="lang-en">Degree requirements complete. The M.Div. degree is ready to print.</span><span class="lang-es">Requisitos del título completados. La M.Div. está lista para imprimir.</span>';document.getElementById("printBtn").disabled=false}
-  else {status.className="status missing";var left=Math.max(0,TOTAL_REQUIRED-total);status.innerHTML='<span class="lang-en">Not yet eligible: '+left+' more master’s-level course'+(left===1?'':'s')+' needed'+(missing.length?' and '+missing.length+' required core course'+(missing.length===1?'':'s')+' still missing':'')+'.</span><span class="lang-es">Aún no elegible: faltan '+left+' curso'+(left===1?'':'s')+' al nivel de maestría'+(missing.length?' y '+missing.length+' curso'+(missing.length===1?'':'s')+' obligatorio'+(missing.length===1?'':'s')+' del núcleo':'')+'.</span>'}
+  if(earned){status.className="status eligible";status.innerHTML=say('Degree requirements complete. The M.Div. degree is ready to print.','Requisitos del título completados. La M.Div. está lista para imprimir.','Les conditions du diplôme sont remplies. Le diplôme de M.Div. est prêt à être imprimé.');document.getElementById("printBtn").disabled=false}
+  else {status.className="status missing";var left=Math.max(0,TOTAL_REQUIRED-total);status.innerHTML=say('Not yet eligible: '+left+' more master’s-level course'+(left===1?'':'s')+' needed'+(missing.length?' and '+missing.length+' required core course'+(missing.length===1?'':'s')+' still missing':'')+'.','Aún no elegible: faltan '+left+' curso'+(left===1?'':'s')+' al nivel de maestría'+(missing.length?' y '+missing.length+' curso'+(missing.length===1?'':'s')+' obligatorio'+(missing.length===1?'':'s')+' del núcleo':'')+'.','Pas encore admissible : '+left+' cours de niveau master manquant'+(left>1?'s':'')+(missing.length?' et '+missing.length+' cours obligatoire'+(missing.length>1?'s':'')+' du tronc commun encore à suivre':'')+'.')}
   var student=null;try{student=JSON.parse(localStorage.getItem("cts_student")||"null")}catch(e){}
   var nm=student&&student.name?String(student.name).trim():"";document.getElementById("certName").textContent=nm||"—";
-  var dt=new Date();document.getElementById("certDate").innerHTML='<span class="lang-en">'+dt.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"})+'</span><span class="lang-es">'+dt.toLocaleDateString("es-MX",{year:"numeric",month:"long",day:"numeric"})+'</span>';
+  var dt=new Date();document.getElementById("certDate").innerHTML=say(dt.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"}),dt.toLocaleDateString("es-MX",{year:"numeric",month:"long",day:"numeric"}),dt.toLocaleDateString("fr-FR",{year:"numeric",month:"long",day:"numeric"}));
   document.getElementById("printBtn").addEventListener("click",function(){if(earned)window.print()});
   document.getElementById("langBtn").addEventListener("click",function(){document.body.classList.toggle("es")});
 })();

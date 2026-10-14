@@ -1,33 +1,41 @@
-/* Interface drafts only. Never translate lesson or answer-key text here. */
+/* The French page frame. Interface text is written beside its English and
+ * Spanish in the layouts (a `lang-fr` span); every element of the frame is
+ * marked `data-cts-chrome`. On a French page nothing in the frame may fall
+ * back to English: the build stops and names the text, as the French landing
+ * does, instead of quietly showing English. Lessons and answer keys are never
+ * translated here. */
+import type { HTMLElement } from 'node-html-parser';
+
+/* Interface text that older pages write themselves, outside the layouts. */
 export const FRENCH_INTERFACE: Record<string, string> = {
-  'Skip to the lesson': 'Aller à la leçon',
-  'Previous': 'Précédent', 'Next': 'Suivant',
-  'Register once, for every course': 'Une seule inscription pour tous les cours',
-  'Full name — as it should appear on your certificate': 'Nom complet — tel qu’il doit apparaître sur votre certificat',
-  'Certificate of Ministry': 'Certificat de ministère',
-  'Associate of Divinity': 'Diplôme associé en théologie',
-  'Master of Divinity': 'Master en théologie pastorale (M.Div.)',
-  'Master of Theology (Th.M.)': 'Master en théologie (Th.M.)',
-  'Country': 'Pays', 'Study track': 'Parcours d’études',
-  'Save registration': 'Enregistrer l’inscription',
-  'All courses': 'Tous les cours', 'Save my progress': 'Enregistrer ma progression',
-  'Your information': 'Vos informations',
-  'Chapala Theological Seminary · Free, bilingual theological training.': 'Chapala Theological Seminary · Formation théologique gratuite en plusieurs langues.',
-  'Required readings for this course': 'Lectures obligatoires pour ce cours',
-  'Required-reading test': 'Test des lectures obligatoires',
-  'Textbook for this course': 'Manuel pour ce cours', 'Textbook test': 'Test du manuel',
-  ' — required on the M.Div. and Th.M. tracks, open to every student: ': ' — obligatoire pour les parcours M.Div. et Th.M., accessible à tous : ',
-  ' — required reading on the M.Div. and Th.M. tracks: ': ' — lecture obligatoire pour les parcours M.Div. et Th.M. : ',
-  'The Certificate track answers the multiple choice. The Associate adds the fill-in-the-blank questions; M.Div. and Th.M. add those and the short-answer questions. 90% of each part is required to pass.': 'Le parcours Certificat comprend les questions à choix multiple. Le diplôme associé ajoute les textes à compléter ; les parcours M.Div. et Th.M. ajoutent aussi les réponses courtes. Il faut réussir 90 % de chaque partie requise.',
-  'Your progress is saved in this browser as you study, and kept with the seminary under your student code, so you can continue on any device. Keep the code private, like a password. A confirmed email is needed only to receive a certificate. <a href="/fr/CTSPrivacy.html">What we keep</a>.': 'Votre progression est enregistrée dans ce navigateur et conservée par le séminaire sous votre code étudiant, pour continuer sur tout appareil. Gardez ce code privé, comme un mot de passe. Une adresse courriel confirmée est nécessaire uniquement pour recevoir un certificat. <a href="/fr/CTSPrivacy.html">Les informations conservées</a>.',
+  '📚 Catalog / Catálogo': '📚 Catalogue',
 };
-export function frenchInterface(root: any) {
-  for (const option of root.querySelectorAll('#regTrack option')) {
-    const translated = FRENCH_INTERFACE[option.text];
-    if (translated) { option.setAttribute('data-en', option.text); option.setAttribute('data-fr', translated); option.set_content(translated); }
+/* Frame text inside the lesson body (src/lib/partials.ts), where a lang-fr
+   span would change the lesson text that tools/prose-baseline.mjs records. */
+export const FRENCH_FRAME: Record<string, string> = {
+  'Honors Readings': 'Lectures pour la mention',
+  'This class has five full readings &mdash; read any three in full to earn it <b>With Honors</b>.': 'Ce cours propose cinq lectures complètes &mdash; lisez-en trois en entier pour l’obtenir <b>avec mention</b>.',
+  'Open the Reading Room &rarr;': 'Ouvrir la salle de lecture &rarr;',
+};
+
+export function frenchInterface(root: HTMLElement, file = '') {
+  // Older pages (certificates, single-page courses) carry a bilingual
+  // "Catalog / Catálogo" link of their own; French pages say it once.
+  // (Lesson text is the lesson's own and is corrected in the lesson.)
+  for (const node of root.querySelectorAll('body a')) {
+    const text = node.text.replace(/\s+/g, ' ').trim();
+    if (FRENCH_INTERFACE[text] && !node.querySelector('*') && !node.closest('.cts-text-pair')) node.set_content(FRENCH_INTERFACE[text]);
   }
-  for (const node of root.querySelectorAll('.cts-nav .cts-reading, #cts-register .cts-reading, #cts-textbook .cts-reading, footer .cts-reading')) {
-    const translated = FRENCH_INTERFACE[node.innerHTML];
-    if (translated) { node.set_content(translated); node.setAttribute('lang', 'fr'); }
+  for (const option of root.querySelectorAll('#regTrack option[data-fr]')) {
+    option.setAttribute('data-en', option.text);
+    option.set_content(option.getAttribute('data-fr')!);
   }
+  for (const node of root.querySelectorAll('[data-cts-chrome] .cts-reading[data-cts-fallback]')) {
+    const fr = FRENCH_FRAME[node.innerHTML.replace(/\s+/g, ' ').trim()];
+    if (fr) { node.set_content(fr); node.setAttribute('lang', 'fr'); node.removeAttribute('data-cts-fallback'); }
+  }
+  const missing = root.querySelectorAll('[data-cts-chrome] .cts-reading[data-cts-fallback], .cts-reading[data-cts-chrome][data-cts-fallback]')
+    .filter(node => !node.closest('[data-cts-legacy-control]'));
+  if (missing.length) throw new Error(`Missing French interface text on fr/${file} (add a lang-fr version beside it):\n`
+    + [...new Set(missing.map(n => '  ' + n.text.replace(/\s+/g, ' ').trim()))].slice(0, 20).join('\n'));
 }

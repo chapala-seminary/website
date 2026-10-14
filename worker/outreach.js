@@ -65,12 +65,9 @@ export function programLevel(track, goal) {
   if (String(goal || '').toLowerCase() === 'assoc' || t === 'associate') return 'associate';
   return 'certificate';
 }
-export const PROGRAM_NAMES = {
-  certificate: { en: 'Certificate of Ministry', es: 'Certificado de Ministerio' },
-  associate: { en: 'Associate of Divinity', es: 'Asociado en Divinidad' },
-  thm: { en: 'Master of Theology (Th.M.)', es: 'Maestría en Teología (Th.M.)' },
-  mdiv: { en: 'Master of Divinity (M.Div.)', es: 'Maestría en Divinidad (M.Div.)' },
-};
+// The program names, in each language, live with the award names.
+export { PROGRAM_NAMES } from './award-names.js';
+import { PROGRAM_NAMES } from './award-names.js';
 
 /* "1peter 3" (student_activity.last_unit) -> the course's name and the page to
  * go on with: the next unit, or the course's first page if that was the last. */
@@ -79,19 +76,30 @@ export function whereTheyWere(lastUnit, lang) {
   const c = m && catalog.courses[m[1]];
   if (!c) return null;
   const n = +m[2];
-  const name = c.title?.[lang === 'es' ? 'es' : 'en'] || catalog.completions[c.code]?.name?.replace(/\s*\|\s*$/, '') || m[1];
+  const name = c.title?.[['es', 'fr'].includes(lang) ? lang : 'en'] || catalog.completions[c.code]?.name?.replace(/\s*\|\s*$/, '') || m[1];
   const next = c.units.find((u) => u > n);
   return { course: name, unit: n, page: `${c.pages}Unit${next ?? c.units[0]}.html`, finished: next === undefined };
 }
 
 const firstName = (name) => String(name || '').trim().split(/\s+/)[0] || '';
 
+/* A link into the site in the student's language: the language route, and
+ * the explicit choice (?cts_lang=) so a device that remembers another
+ * language still opens it in this one (public/cts-lang.js). */
+function siteLink(site, page, lang) {
+  if (lang !== 'es' && lang !== 'fr') return `${site}/${page}`;
+  const [path, hash] = page.split('#');
+  return `${site}/${lang}/${path}?cts_lang=${lang}${hash ? '#' + hash : ''}`;
+}
+
 /* The notes themselves. Plain text, short, in the student's language; both
  * languages, English first, when the language is not known. */
 export function note(kind, st, { stopUrl, site }) {
-  const where = whereTheyWere(st.last_unit, 'en');
-  const donde = whereTheyWere(st.last_unit, 'es');
-  const go = where && !where.finished ? `${site}/${where.page}` : `${site}/index.html#catalog`;
+  const lang = ['es', 'fr'].includes(st.lang) ? st.lang : 'en';
+  const where = whereTheyWere(st.last_unit, lang);
+  const goPage = where && !where.finished ? where.page : 'index.html#catalog';
+  const go = siteLink(site, goPage, lang);
+  const first = siteLink(site, 'CTSUnit1.html', lang);
   const n = firstName(st.name);
   const en = kind === 'quiet' ? [
     `Dear ${n},`,
@@ -110,15 +118,15 @@ export function note(kind, st, { stopUrl, site }) {
     'Thank you for registering with Chapala Theological Seminary. I wanted to make sure you were able to get started.',
     'Most students begin with Old Testament Survey, one of the seven foundation courses:',
     '',
-    `  ${site}/CTSUnit1.html`,
+    `  ${first}`,
     '',
     'If something got in your way -- the site would not load, a course was locked, you were not sure where to begin -- please reply to this email and tell me. We read every reply.',
   ];
   const es = kind === 'quiet' ? [
     `Estimado/a ${n}:`,
     '',
-    donde
-      ? `Han pasado algunas semanas desde su última unidad (${donde.course}, Unidad ${donde.unit}), y quería saber cómo está.`
+    where
+      ? `Han pasado algunas semanas desde su última unidad (${where.course}, Unidad ${where.unit}), y quería saber cómo está.`
       : 'Han pasado algunas semanas desde su último avance en los cursos, y quería saber cómo está.',
     'No hay fecha límite ni prisa. Cuando esté listo/a, puede continuar exactamente donde se quedó:',
     '',
@@ -131,35 +139,46 @@ export function note(kind, st, { stopUrl, site }) {
     'Gracias por inscribirse en el Seminario Teológico de Chapala. Quería asegurarme de que pudo comenzar.',
     'La mayoría de los estudiantes empiezan con Panorama del Antiguo Testamento, uno de los siete cursos de fundamento:',
     '',
-    `  ${site}/CTSUnit1.html`,
+    `  ${first}`,
     '',
     'Si algo le impidió comenzar -- el sitio no cargaba, un curso estaba bloqueado, no sabía por dónde empezar --, por favor responda a este correo y cuéntenos. Leemos cada respuesta.',
   ];
+  // French typography: a no-break space before « : », a narrow one before « ? ».
+  const fr = kind === 'quiet' ? [
+    `Bonjour ${n},`,
+    '',
+    where
+      ? `Quelques semaines se sont écoulées depuis votre dernière unité (${where.course}, unité ${where.unit}). Je voulais prendre de vos nouvelles.`
+      : 'Quelques semaines se sont écoulées depuis vos derniers progrès dans les cours. Je voulais prendre de vos nouvelles.',
+    'Il n’y a ni date limite ni pression. Quand vous le souhaiterez, vous pourrez reprendre là où vous en étiez :',
+    '',
+    `  ${go}`,
+    '',
+    'Si quelque chose sur le site a freiné vos progrès — une page qui ne s’ouvre pas, un examen qui n’est pas corrigé, un cours qui reste verrouillé —, répondez simplement à ce message. Nous lisons chaque réponse, et cela nous aide à améliorer le site pour tous.',
+  ] : [
+    `Bonjour ${n},`,
+    '',
+    'Merci de votre inscription au Séminaire théologique de Chapala. Je voulais m’assurer que vous avez pu commencer.',
+    'La plupart des étudiants commencent par le Survol de l’Ancien Testament, l’un des sept cours fondamentaux :',
+    '',
+    `  ${first}`,
+    '',
+    'Si vous avez rencontré une difficulté — site inaccessible, cours verrouillé, doute sur le point de départ —, répondez simplement à ce message. Nous lisons chaque réponse.',
+  ];
+  const host = site.replace(/^https?:\/\//, '');
   const sign = { en: ['', 'With warm regards,', 'Wayne Cook', 'Chapala Theological Seminary'],
-                 es: ['', 'Con un cordial saludo,', 'Wayne Cook', 'Seminario Teológico de Chapala'] };
+                 es: ['', 'Con un cordial saludo,', 'Wayne Cook', 'Seminario Teológico de Chapala'],
+                 fr: ['', 'Bien cordialement,', 'Wayne Cook', 'Séminaire théologique de Chapala'] };
   const stop = {
-    en: ['', '--', `You are receiving this because you registered at ${site.replace(/^https?:\/\//, '')}. To stop notes about your progress: ${stopUrl}`],
-    es: ['', '--', `Recibe este mensaje porque se inscribió en ${site.replace(/^https?:\/\//, '')}. Para no recibir más mensajes sobre su progreso: ${stopUrl}`],
+    en: ['', '--', `You are receiving this because you registered at ${host}. To stop notes about your progress: ${stopUrl}`],
+    es: ['', '--', `Recibe este mensaje porque se inscribió en ${host}. Para no recibir más mensajes sobre su progreso: ${stopUrl}`],
+    fr: ['', '--', `Vous recevez ce message parce que vous avez créé un dossier d’étudiant sur ${host}. Pour ne plus recevoir de messages sur votre progression : ${stopUrl}`],
   };
   const subject = kind === 'quiet'
-    ? { en: 'How is your study going?', es: '¿Cómo van sus estudios?' }
-    : { en: 'Getting started at Chapala Theological Seminary', es: 'Para comenzar en el Seminario Teológico de Chapala' };
-  if (st.lang === 'fr') {
-    const goFr = go.replace(site + '/', site + '/fr/');
-    const fr = kind === 'quiet' ? [
-      `Bonjour ${n},`, '',
-      where ? `Quelques semaines se sont écoulées depuis votre dernière unité (${where.course}, unité ${where.unit}). Je souhaitais prendre de vos nouvelles.` : 'Quelques semaines se sont écoulées depuis votre dernière progression dans les cours. Je souhaitais prendre de vos nouvelles.',
-      "Il n'y a ni date limite ni pression. Quand vous serez prêt, vous pourrez reprendre là où vous vous êtes arrêté :", '', `  ${goFr}`, '',
-      "Si une difficulté sur le site vous a empêché d'avancer — une page qui ne s'ouvre pas, un examen qui ne se corrige pas ou un cours qui reste bloqué —, répondez à ce message. Nous lisons chaque réponse et cela nous aide à améliorer le site.",
-    ] : [
-      `Bonjour ${n},`, '', "Merci de votre inscription au Séminaire théologique de Chapala. Je voulais m'assurer que vous avez pu commencer.",
-      "La plupart des étudiants commencent par le Survol de l'Ancien Testament, l'un des sept cours fondamentaux :", '', `  ${site}/fr/CTSUnit1.html`, '',
-      "Si vous avez rencontré une difficulté — site inaccessible, cours bloqué ou incertitude sur le point de départ —, répondez à ce message. Nous lisons chaque réponse.",
-    ];
-    return { subject: kind === 'quiet' ? 'Comment avancent vos études ?' : 'Commencer vos études au Séminaire théologique de Chapala', text: [...fr, '', 'Bien cordialement,', 'Wayne Cook', 'Séminaire théologique de Chapala', '', '--', `Vous recevez ce message parce que vous vous êtes inscrit sur ${site.replace(/^https?:\/\//, '')}. Pour ne plus recevoir de messages sur votre progression : ${stopUrl}`].join('\n') };
-  }
-  if (st.lang === 'es') return { subject: subject.es, text: [...es.map(line => line.replaceAll(site + '/', site + '/es/')), ...sign.es, ...stop.es].join('\n') };
-  return { subject: subject.en, text: [...en, ...sign.en, ...stop.en].join('\n') };
+    ? { en: 'How is your study going?', es: '¿Cómo van sus estudios?', fr: 'Comment avancent vos études ?' }
+    : { en: 'Getting started at Chapala Theological Seminary', es: 'Para comenzar en el Seminario Teológico de Chapala', fr: 'Commencer vos études au Séminaire théologique de Chapala' };
+  const body = { en, es, fr }[lang];
+  return { subject: subject[lang], text: [...body, ...sign[lang], ...stop[lang]].join('\n') };
 }
 
 /* Who would be written to today, and why. Pure reading: nothing is sent or
@@ -300,8 +319,8 @@ export async function scheduled(event, env) {
 /* ---- "don't write to me about my progress" --------------------------------- */
 
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-function page(title, body) {
-  return new Response(`<!doctype html><html lang="en"><head><meta charset="utf-8">
+function page(title, body, lang = 'en') {
+  return new Response(`<!doctype html><html lang="${lang}"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
 <title>${esc(title)}</title>
 <style>body{font-family:Georgia,serif;background:#f6f1f4;color:#3a2233;margin:0;padding:40px 16px}
@@ -314,22 +333,36 @@ button{background:#4A1E3A;color:#fff;border:0;border-radius:24px;padding:11px 22
   });
 }
 
+/* French students read one language only (12 Oct decision); everyone else
+ * keeps the English page with its Spanish block, as before. A link nobody
+ * recognises cannot say whose language it is, so that page adds French. */
+const STOP_FR = {
+  done: ['Messages arrêtés', `<h1>C’est fait</h1><p>Vous ne recevrez plus de messages sur votre progression. Vos cours et votre dossier ne changent pas.</p>`],
+  ask: ['Ne plus recevoir de messages sur votre progression', `<form method="post">
+<h1>Ne plus recevoir de messages sur votre progression ?</h1><p>Le séminaire ne vous écrira plus au sujet de l’avancement de vos cours. Vos cours et votre dossier ne sont pas touchés.</p>
+<p><button type="submit">Arrêter les messages</button></p></form>`],
+};
+
 export async function stopNotes(request, env, token) {
   const row = /^[A-Za-z0-9_-]{8,64}$/.test(token)
     // a link sent to a record since merged stops notes on the record it joined
-    ? await env.DB.prepare(`SELECT s.id, s.contact_opt_out_at FROM contact_tokens t JOIN students m ON m.id = t.student_id
+    ? await env.DB.prepare(`SELECT s.id, s.contact_opt_out_at, s.lang FROM contact_tokens t JOIN students m ON m.id = t.student_id
         JOIN students s ON s.id = COALESCE(m.merged_into, m.id) WHERE t.token = ?`)
       .bind(token).first()
     : null;
+  const fr = (key) => page(STOP_FR[key][0], STOP_FR[key][1], 'fr');
   if (!row) return page('Link not recognised', `<h1>This link is not recognised</h1>
 <p>It may have been copied incompletely. To stop notes about your progress, reply to any note and say so.</p>
-<div class="es"><h1>Enlace no reconocido</h1><p>Puede que se haya copiado incompleto. Para no recibir más mensajes sobre su progreso, responda a cualquiera de ellos y díganoslo.</p></div>`);
+<div class="es"><h1>Enlace no reconocido</h1><p>Puede que se haya copiado incompleto. Para no recibir más mensajes sobre su progreso, responda a cualquiera de ellos y díganoslo.</p></div>
+<div class="es" lang="fr"><h1>Lien non reconnu</h1><p>Il a peut-être été copié de façon incomplète. Pour ne plus recevoir de messages sur votre progression, répondez à l’un d’eux et dites-le-nous.</p></div>`);
   if (request.method === 'POST' || row.contact_opt_out_at) {
     if (!row.contact_opt_out_at)
       await env.DB.prepare('UPDATE students SET contact_opt_out_at = ? WHERE id = ?').bind(new Date().toISOString(), row.id).run();
+    if (row.lang === 'fr') return fr('done');
     return page('Notes stopped', `<h1>Done</h1><p>You will not receive any more notes about your progress. Your courses and your record are unchanged.</p>
 <div class="es"><h1>Listo</h1><p>No recibirá más mensajes sobre su progreso. Sus cursos y su registro no cambian.</p></div>`);
   }
+  if (row.lang === 'fr') return fr('ask');
   return page('Stop notes about your progress', `<form method="post">
 <h1>Stop notes about your progress?</h1><p>The seminary will not write to you again about how your courses are going. Your courses and your record are not affected.</p>
 <p><button type="submit">Stop the notes · Detener los mensajes</button></p>

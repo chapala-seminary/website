@@ -57,7 +57,7 @@ for (const file of files) {
           ok(fs.existsSync(path.join(dir, local === '/' ? 'index.html' : local.slice(1))), `${route}: missing ${href}`);
       }
     }
-    if (lesson) for (const b of lesson.blocks.filter(b => wanted.has(b.id))) {
+    if (lesson) for (const b of lesson.blocks.filter(b => wanted.has(b.id) && b.text[lang] !== '<!--cts:omit-->')) {
       const rendered = root.querySelectorAll(`[data-cts-block="${b.id}"]`);
       ok(rendered.length === 1, `${route}: block ${b.id} appears ${rendered.length} times`);
       const reading = rendered[0]?.querySelectorAll('.cts-reading').map(el=>el.innerHTML).join('') || '';

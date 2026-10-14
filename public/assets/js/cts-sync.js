@@ -206,7 +206,7 @@
     var notice = document.getElementById('cts-master-requirements');
     if (Object.keys(dates).length) {
       if (!notice) { notice = document.createElement('aside'); notice.id = 'cts-master-requirements'; notice.className = 'card'; document.body.prepend(notice); }
-      var words = { en: 'M.Div. and Th.M.: complete the course units, the textbook test and the separate required-reading test. Each test needs 18 correct answers out of 20. Valid master’s completions recorded before activation remain valid. Certificate and Associate students do not need either test. Honors reading is optional and does not replace the tests.', es: 'M.Div. y Th.M.: complete las unidades, el examen del libro y el examen separado de lecturas requeridas. Cada examen exige 18 respuestas correctas de 20. Las finalizaciones de maestría válidas registradas antes de la activación siguen siendo válidas. Certificado y Asociado no necesitan estos exámenes. La lectura para honores es opcional y no sustituye los exámenes.', fr: 'M.Div. et Th.M. : terminez les unités, le test du manuel et le test distinct des lectures obligatoires. Chaque test exige 18 réponses correctes sur 20. Les validations de maîtrise valides enregistrées avant l’activation restent valides. Les parcours Certificat et Associate n’exigent pas ces tests. La lecture pour la mention d’honneur est facultative et ne remplace pas les tests.' };
+      var words = { en: 'M.Div. and Th.M.: complete the course units, the textbook test and the separate required-reading test. Each test needs 18 correct answers out of 20. Valid master’s completions recorded before activation remain valid. Certificate and Associate students do not need either test. Honors reading is optional and does not replace the tests.', es: 'M.Div. y Th.M.: complete las unidades, el examen del libro y el examen separado de lecturas requeridas. Cada examen exige 18 respuestas correctas de 20. Las finalizaciones de maestría válidas registradas antes de la activación siguen siendo válidas. Certificado y Asociado no necesitan estos exámenes. La lectura para honores es opcional y no sustituye los exámenes.', fr: 'M.Div. et Th.M.\u00a0: terminez les unités du cours, l’examen du manuel et l’examen distinct des lectures obligatoires. Chaque examen exige 18 bonnes réponses sur 20. Les validations de niveau master enregistrées avant l’activation restent acquises. Les parcours Certificat et diplôme associé n’exigent pas ces examens. La lecture pour la mention est facultative et ne remplace pas les examens.' };
       notice.innerHTML = window.CTSLanguage ? window.CTSLanguage.bi(words) : words.en;
     } else if (notice) notice.remove();
     document.dispatchEvent(new CustomEvent('cts-sync-applied'));
@@ -410,14 +410,14 @@
     note.setAttribute('role', 'alert');
     var missing = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(student.email || '');
     var words = missing
-      ? { en: 'Add a valid email address to keep your progress with the seminary and receive your student code. Your work in this browser is still saved.', es: 'Añada un correo válido para guardar su progreso en el seminario y recibir su código de estudiante. Su trabajo en este navegador sigue guardado.', fr: 'Ajoutez une adresse courriel valide pour conserver votre progression au séminaire et recevoir votre code étudiant. Votre travail dans ce navigateur reste enregistré.' }
+      ? { en: 'Add a valid email address to keep your progress with the seminary and receive your student code. Your work in this browser is still saved.', es: 'Añada un correo válido para guardar su progreso en el seminario y recibir su código de estudiante. Su trabajo en este navegador sigue guardado.', fr: 'Ajoutez une adresse e-mail valide pour conserver votre progression au séminaire et recevoir votre code étudiant. Votre travail dans ce navigateur reste enregistré.' }
       : { en: 'We could not save your registration with the seminary. Your work is saved in this browser. Please try again.', es: 'No pudimos guardar su registro en el seminario. Su trabajo está guardado en este navegador. Inténtelo de nuevo.', fr: 'Nous n’avons pas pu enregistrer votre inscription au séminaire. Votre travail est enregistré dans ce navigateur. Réessayez.' };
     var text = window.CTSLanguage ? window.CTSLanguage.bi(words) : words.en;
     note.innerHTML = '<p>' + text + '</p>';
     if (missing) {
       var input = document.createElement('input');
       input.type = 'email'; input.autocomplete = 'email'; input.required = true;
-      input.setAttribute('aria-label', window.CTSLanguage?.lang === 'fr' ? 'Adresse courriel' : window.CTSLanguage?.lang === 'es' ? 'Correo electrónico' : 'Email');
+      input.setAttribute('aria-label', window.CTSLanguage?.lang === 'fr' ? 'Adresse e-mail' : window.CTSLanguage?.lang === 'es' ? 'Correo electrónico' : 'Email');
       note.appendChild(input);
     }
     var retry = document.createElement('button'); retry.type = 'button'; retry.className = 'btn';
@@ -527,10 +527,14 @@
     d.id = 'cts-existing-note';
     d.setAttribute('role', 'status');
     d.style.cssText = 'margin:0;padding:10px 16px;background:#fbf6ea;color:#2a241d;border-bottom:2px solid #b08324;font:15px/1.5 Georgia,serif;text-align:center';
-    d.innerHTML = '<span class="lang-en en en-only">You already have a student record under this name and email. ' +
-      '<a href="/cts-backup.html" style="color:#6d2233;font-weight:700">Continue with it</a> so this progress is kept with it.</span>' +
-      '<span class="lang-es es es-only">Ya tiene un registro de estudiante con este nombre y correo. ' +
-      '<a href="/cts-backup.html" style="color:#6d2233;font-weight:700">Contin\u00fae con \u00e9l</a> para que este progreso se guarde en \u00e9l.</span>';
+    var link = function (t) { return '<a href="/cts-backup.html" style="color:#6d2233;font-weight:700">' + t + '</a>'; };
+    var words = {
+      en: 'You already have a student record under this name and email. ' + link('Continue with it') + ' so this progress is kept with it.',
+      es: 'Ya tiene un registro de estudiante con este nombre y correo. ' + link('Contin\u00fae con \u00e9l') + ' para que este progreso se guarde en \u00e9l.',
+      fr: 'Un dossier \u00e9tudiant existe d\u00e9j\u00e0 sous ce nom et cette adresse e-mail. ' + link('Continuez avec ce dossier') + ' pour que cette progression y soit conserv\u00e9e.'
+    };
+    d.innerHTML = window.CTSLanguage ? window.CTSLanguage.bi(words)
+      : '<span class="lang-en en en-only">' + words.en + '</span><span class="lang-es es es-only">' + words.es + '</span>';
     document.body.insertBefore(d, document.body.firstChild);
   }
 

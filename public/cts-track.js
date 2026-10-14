@@ -41,19 +41,21 @@
     return "thm";
   }
 
-  function isEs() {
-    var c = document.body && document.body.classList;
-    if (c && (c.contains("lang-es") || c.contains("show-es") || c.contains("spanish"))) return true;
-    if (c && (c.contains("lang-en") || c.contains("lang-both") || c.contains("show-en"))) return false;
-    var l = (document.body && document.body.getAttribute("data-lang")) ||
-            document.documentElement.lang || "en";
-    return l.slice(0, 2) === "es";
+  function pageLang() {
+    var b = document.body, c = b && b.classList;
+    var p = b && b.getAttribute("data-page-lang");
+    if (p) return p.slice(0, 2);
+    if (c && (c.contains("lang-es") || c.contains("show-es") || c.contains("spanish"))) return "es";
+    if (c && (c.contains("lang-en") || c.contains("lang-both") || c.contains("show-en"))) return "en";
+    var l = (b && b.getAttribute("data-lang")) || document.documentElement.lang || "en";
+    return l.slice(0, 2);
   }
-  function labels() {
-    return isEs()
-      ? { tg: "Cambiar plan", cert: "Certificado de Ministerio", assoc: "Asociado en Divinidad", mdiv: "Maestr\u00eda en Divinidad", thm: "Maestr\u00eda en Teolog\u00eda" }
-      : { tg: "Change track", cert: "Certificate of Ministry", assoc: "Associate of Divinity", mdiv: "Master of Divinity", thm: "Master of Theology" };
-  }
+  var LABELS = {
+    es: { tg: "Cambiar plan", cert: "Certificado de Ministerio", assoc: "Asociado en Divinidad", mdiv: "Maestr\u00eda en Divinidad", thm: "Maestr\u00eda en Teolog\u00eda" },
+    fr: { tg: "Changer de parcours", cert: "Certificat de minist\u00e8re", assoc: "Dipl\u00f4me associ\u00e9 en th\u00e9ologie", mdiv: "Master en th\u00e9ologie pastorale (M.Div.)", thm: "Master en th\u00e9ologie (Th.M.)" },
+    en: { tg: "Change track", cert: "Certificate of Ministry", assoc: "Associate of Divinity", mdiv: "Master of Divinity", thm: "Master of Theology" }
+  };
+  function labels() { return LABELS[pageLang()] || LABELS.en; }
   /* The labels follow the page's language switch; they were fixed at load, so
      "Change track" stayed English on a page switched to Spanish (Dr. Cook's
      beta pass, 30 Sept 2026). */

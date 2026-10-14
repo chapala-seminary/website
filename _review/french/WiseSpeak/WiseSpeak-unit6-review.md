@@ -8,7 +8,7 @@ Counts: 22 lesson blocks · 20 multiple choice · 10 fill-in · 10 essays
 
 ## 1. Questions for Wayne
 
-1. Luke 15 revised outline: the English G-verbs (Grants/Gives/Gains) cannot alliterate in French. As in your Spanish edition (C-verbs), I adapted to 'Elle Confère le Pardon / Elle Consacre le Privilège / Elle Confirme la Position' (P-nouns kept). MC 4 and SA 2 were adjusted to match. Is this acceptable?
+1. Luke 15 revised outline: the English G-verbs (Grants/Gives/Gains) cannot alliterate in French. As in your Spanish edition (C-verbs), I adapted to 'Elle confère le pardon / Elle consacre le privilège / Elle confirme la position' (P-nouns kept). MC 4 and SA 2 were adjusted to match. Is this acceptable?
 2. MC 2 (Hebrews 11): 'Voir l'invisible / Croire l'incroyable / Faire l'impossible' keeps the in-/im- parallelism; the 'why' was lightly adapted (no longer 'three words per point'). OK?
 3. Several exam items refer to examples not in this unit's lesson text (Hebrews 11 outline, Romans 13 'Wake up! Smell the coffee!', Ephesians 1 analysis, Ingersoll details, Matthew 14). Translated as is; please confirm students see these examples elsewhere.
 4. MC 5 option 'Only allowed in English, never in Spanish': keep as is, or change to French for the French edition?
@@ -80,7 +80,7 @@ Peaufiner « Les fruits de la repentance » (Luc 15:21-22) :
 > EN: Refining "Results of Repentance" (Luke 15:21-22):
 
 **ws6-009**  
-Premier jet :1. Elle a couvert leur honte2. Le privilège leur est accordé3. Leur position est restauréeVersion révisée : (allitération en « p » ; voix active partout ; temps présent ; verbes allitérant en « c »)1. Elle Confère le Pardon.2. Elle Consacre le Privilège.3. Elle Confirme la Position.
+Premier jet :1. Elle a couvert leur honte2. Le privilège leur est accordé3. Leur position est restauréeVersion révisée : (allitération en « p » ; voix active partout ; temps présent ; verbes allitérant en « c »)1. Elle confère le pardon.2. Elle consacre le privilège.3. Elle confirme la position.
 
 > EN: Rough draft:1. It covered their shame2. They are given privilege3. Their position is restoredRevised: (alliterate with "p"; active voice throughout; present tense; verbs alliterate with "g")1. It Grants Pardon.2. It Gives Privilege.3. It Gains Position.
 
@@ -178,7 +178,7 @@ _Pourquoi :_ Voix active : le sujet agit. Voix passive : le sujet subit l'action
 > EN: In grammar, the active voice means: — ✓ The subject of the sentence is doing the action expressed by the verb
 
 **4. Dans le plan de Luc 15 (la repentance), Wayne révise « Elle a couvert leur honte / Le privilège leur est accordé / Leur position est restaurée » en :**  
-✓ A. Elle Confère le Pardon / Elle Consacre le Privilège / Elle Confirme la Position  
+✓ A. Elle confère le pardon / Elle consacre le privilège / Elle confirme la position  
 · B. Restauré / Renouvelé / Rafraîchi  
 · C. Perdu / Retrouvé / Embrassé  
 · D. Honte / Privilège / Position  
@@ -365,7 +365,7 @@ Modèle : (1) La brièveté — des points de cinq mots ou moins se retiennent p
 > EN: List the three primary ingredients of 'beauty' in an outline, according to Wayne. For each, give a brief explanation and a Biblical example.
 
 **2. Prenez le plan de Wayne sur Luc 15 (« Elle a couvert leur honte / Le privilège leur est accordé / Leur position est restaurée ») et suivez pas à pas sa révision. Quels changements fait-il, et quel principe chaque changement illustre-t-il ?**  
-Modèle : Étape 1 : remplacer « honte » (point 1) par « pardon » pour allitérer avec privilège et position — cela illustre l'ALLITÉRATION par des noms en P. Étape 2 : réécrire les points 2 et 3 à la voix active et au présent (« Elle consacre le privilège / Elle confirme la position ») — cela illustre la VOIX ACTIVE et la cohérence du TEMPS PRÉSENT. Étape 3 : aligner les trois points sur des verbes en C (Confère / Consacre / Confirme) — cela illustre le PARALLÉLISME PROLONGÉ à la place du verbe. Plan final : « Elle Confère le Pardon / Elle Consacre le Privilège / Elle Confirme la Position ». Le principe plus large de Wayne : la révision est normale — les premiers jets sont bruts, la beauté vient d'un remaniement intentionnel qui ne change pas le sens du texte.
+Modèle : Étape 1 : remplacer « honte » (point 1) par « pardon » pour allitérer avec privilège et position — cela illustre l'ALLITÉRATION par des noms en P. Étape 2 : réécrire les points 2 et 3 à la voix active et au présent (« Elle consacre le privilège / Elle confirme la position ») — cela illustre la VOIX ACTIVE et la cohérence du TEMPS PRÉSENT. Étape 3 : aligner les trois points sur des verbes en C (Confère / Consacre / Confirme) — cela illustre le PARALLÉLISME PROLONGÉ à la place du verbe. Plan final : « Elle confère le pardon / Elle consacre le privilège / Elle confirme la position ». Le principe plus large de Wayne : la révision est normale — les premiers jets sont bruts, la beauté vient d'un remaniement intentionnel qui ne change pas le sens du texte.
 
 > EN: Take Wayne's Luke 15 outline ('It covered their shame / They are given privilege / Their position is restored') and walk through his revision step by step. What changes does he make, and what principle does each change illustrate?
 

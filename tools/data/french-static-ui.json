@@ -1,0 +1,255 @@
+{
+ "note": "Interface French for the single-page courses Narrative Preaching, Biblical Counseling and Pastoral & Christian Ethics (machine draft, 13 Oct 2026). Keys are the page's exact English wording; ${...} are the page's own variables. Used on /fr/ only by tools/french-static-courses.mjs.",
+ "tracks": {
+  "cert": "Certificat de ministère",
+  "mtheol": "Master en théologie",
+  "mdiv": "Master en théologie pastorale (M.Div.)"
+ },
+ "spans": {
+  "Registered: <strong>${state.registration.name}</strong> · ${state.registration.country} · ${t.en}": "Inscrit : <strong>${state.registration.name}</strong> · ${state.registration.country} · ${t.fr||t.en}",
+  "Short-Essay Scenarios — required for Th.M. &amp; M.Div.; optional for Certificate and Associate": "Mises en situation à courte dissertation — obligatoires pour Th.M. et M.Div. ; facultatives pour Certificat et Associé",
+  "These short-essay scenarios are optional for Certificate of Ministry students. You are welcome to attempt them, but they do not count toward your Certificate pass/fail — the Certificate is earned on the multiple-choice questions alone.": "Ces mises en situation sont facultatives pour les étudiants du Certificat de ministère. Vous pouvez les faire, mais elles ne comptent pas pour la réussite du Certificat — le Certificat s’obtient uniquement avec les questions à choix multiple.",
+  "Check Answer": "Vérifier la réponse",
+  "✓ Correct": "✓ Exact",
+  "✗ Incorrect — correct answer: ${right}": "✗ Inexact — bonne réponse : ${right}",
+  "Write your own answer — a few sentences — and check again to see the model answer.": "Rédigez votre propre réponse — quelques phrases — puis vérifiez de nouveau pour voir la réponse modèle.",
+  "✓ Sufficient — key concepts present.": "✓ Suffisant — les notions clés sont présentes.",
+  "✗ Incomplete — your answer was missing key concepts${missEn?': '+missEn:''}. ${ans.length<ESSAY_MIN_CHARS?'(Answer too short.) ':''}Compare with the model answer below.": "✗ Incomplet — il manque des notions clés dans votre réponse${missFr?' : '+missFr:''}. ${ans.length<ESSAY_MIN_CHARS?'(Réponse trop courte.) ':''}Comparez avec la réponse modèle ci-dessous.",
+  "Model answer / rubric:": "Réponse modèle / critères :",
+  "Locked. Please wait ${mins} more minute(s) before retrying this unit.": "Bloqué. Veuillez attendre encore ${mins} minute(s) avant de reprendre cette unité.",
+  "Not answered": "Sans réponse",
+  "Correct": "Exact",
+  "Incorrect (correct: ${right})": "Inexact (bonne réponse : ${right})",
+  "✓ Passed. Multiple choice ${correct}/${mcTotal} (${mcPct}%) and essays ${essayCorrect}/${essayTotal} (${essayPct}%)${fr&&fr.counted&&fr.n?'; '+fillLine(fr,false):''}. All met the requirement.": "✓ Réussi. Choix multiple ${correct}/${mcTotal} (${mcPct} %) et dissertations ${essayCorrect}/${essayTotal} (${essayPct} %)${fr&&fr.counted&&fr.n?' ; '+fillLineFr(fr):''}. Toutes les exigences sont remplies.",
+  "✓ Passed: ${correct}/${mcTotal} (${mcPct}%) on multiple choice${fr&&fr.counted&&fr.n?'; '+fillLine(fr,false):''}. Review explanations above.": "✓ Réussi : ${correct}/${mcTotal} (${mcPct} %) aux questions à choix multiple${fr&&fr.counted&&fr.n?' ; '+fillLineFr(fr):''}. Relisez les explications ci-dessus.",
+  "A 15-minute wait applies before you may retry this unit.": "Un délai de 15 minutes s’applique avant de pouvoir reprendre cette unité.",
+  "Not yet passed. ${parts_en.join('; ')}. Review the explanations and model answers above, then try again.": "Pas encore réussi. Choix multiple ${correct}/${mcTotal} (${mcPct} %)${mcPassed?' ✓':' — 90 % requis'} ; dissertations ${essayCorrect}/${essayTotal} (${essayPct} %)${essayPassed?' ✓':' — '+essayNeeded+' sur '+essayTotal+' requises'}${fillLineFr(fr)?' ; '+fillLineFr(fr):''}. Relisez les explications et les réponses modèles ci-dessus, puis réessayez.",
+  "Not yet passed. Multiple choice ${correct}/${mcTotal} (${mcPct}%)${mcPassed?' ✓':' — 90% required'}; ${fillLine(fr,false)}. Review the explanations and answers above, then try again.": "Pas encore réussi. Choix multiple ${correct}/${mcTotal} (${mcPct} %)${mcPassed?' ✓':' — 90 % requis'} ; ${fillLineFr(fr)}. Relisez les explications et les réponses ci-dessus, puis réessayez.",
+  "Score: ${correct}/${mcTotal} (${mcPct}%). 90% required. Review explanations and try again.": "Résultat : ${correct}/${mcTotal} (${mcPct} %). 90 % requis. Relisez les explications et réessayez."
+ },
+ "narrative": {
+  "title": "Chapala Theological Seminary — La prédication narrative : l’art du sermon-récit",
+  "spans": {
+   "Unit ${i}": "Unité ${i}",
+   "${passed} of ${TOTAL_UNITS} units completed": "${passed} unité(s) terminée(s) sur ${TOTAL_UNITS}"
+  },
+  "literals": {
+   "'Please complete all fields'": "'Veuillez remplir tous les champs.'",
+   "'Please register first'": "'Veuillez d’abord vous inscrire.'",
+   "alert('Register first')": "alert('Veuillez d’abord vous inscrire.')",
+   "'Write your response...'": "'Rédigez votre réponse…'",
+   "aria-label=\"Short answer\"": "aria-label=\"Réponse courte\"",
+   "`Fill in the blank ${fr.score}/${fr.n}${fr.ok?' ✓':' — '+fr.need+' of '+fr.n+' required'}`;": "`Fill in the blank ${fr.score}/${fr.n}${fr.ok?' ✓':' — '+fr.need+' of '+fr.n+' required'}`;\n}\nfunction fillLineFr(fr){\n  if(!fr || !fr.n || !fr.counted) return '';\n  return `phrases à compléter ${fr.score}/${fr.n}${fr.ok?' ✓':' — '+fr.need+' sur '+fr.n+' requises'}`;"
+  },
+  "registration": {
+   "placeholders": {
+    "#studentName": "Nom complet",
+    "#studentEmail": "Adresse e-mail",
+    "#studentCountry": "Pays"
+   },
+   "options": {
+    "#programTrack": {
+     "cert": "Certificat de ministère",
+     "mtheol": "Master en théologie",
+     "mdiv": "Master en théologie pastorale (M.Div.)"
+    }
+   }
+  }
+ },
+ "counseling": {
+  "title": "Chapala Theological Seminary — La relation d’aide biblique : les dix étapes de Drakeford",
+  "spans": {
+   "Introduction": "Introduction",
+   "Foundation": "Fondement",
+   "Step ${i}": "Étape ${i}",
+   "<strong>Written questions:</strong> These ten written questions are open to every student. Your answers are checked gently against the lesson's key ideas — this is a teaching exercise, not a test to fear. They are required for the Master of Theology and Master of Divinity tracks and are optional (they do not affect your score) for the Certificate of Ministry and the Associate of Divinity. Register above to have your track recorded.": "<strong>Questions écrites :</strong> ces dix questions écrites sont ouvertes à tous les étudiants. Vos réponses sont vérifiées avec bienveillance par rapport aux idées clés de la leçon — c’est un exercice d’apprentissage, non un examen à redouter. Elles sont obligatoires pour le Master en théologie et le Master en théologie pastorale (M.Div.), et facultatives (elles n’entrent pas dans votre résultat) pour le Certificat de ministère et le Diplôme associé en théologie. Inscrivez-vous ci-dessus pour que votre parcours soit enregistré.",
+   "<strong>Optional for Certificate of Ministry and Associate of Divinity students:</strong> These ten written questions are reflection items. You may complete them for your own learning, but they are not required for your track and do not count toward your passing score. Master of Theology and Master of Divinity students must complete this section.": "<strong>Facultatif pour les étudiants du Certificat de ministère et du Diplôme associé en théologie :</strong> ces dix questions écrites sont des exercices de réflexion. Vous pouvez y répondre pour votre propre apprentissage, mais elles ne sont pas exigées pour votre parcours et ne comptent pas pour votre réussite. Les étudiants du Master en théologie et du Master en théologie pastorale (M.Div.) doivent compléter cette section.",
+   "<strong>Required for your track:</strong> These ten written questions are required for the Master of Theology and Master of Divinity. Answers are checked gently against the lesson's key ideas, and the model answer is shown so you can study it. Aim to touch at least three of the key ideas in each answer.": "<strong>Obligatoire pour votre parcours :</strong> ces dix questions écrites sont exigées pour le Master en théologie et le Master en théologie pastorale (M.Div.). Les réponses sont vérifiées avec bienveillance par rapport aux idées clés de la leçon, et la réponse modèle s’affiche pour que vous puissiez l’étudier. Cherchez à aborder au moins trois des idées clés dans chaque réponse.",
+   "Model answer — study this:": "Réponse modèle — étudiez-la :",
+   "✗ Please write a more complete answer (at least one full sentence).": "✗ Veuillez écrire une réponse plus complète (au moins une phrase entière).",
+   "✓ Well done — your answer touches ${matched.length} of the lesson's key ideas. Study the model answer below to deepen it.": "✓ Bien — votre réponse aborde ${matched.length} des idées clés de la leçon. Étudiez la réponse modèle ci-dessous pour l’approfondir.",
+   "Good start — your answer touches ${matched.length} of the key ideas; aim for at least ${SA_MIN_HITS}. Read the model answer below and notice the ideas you might add.": "Bon début — votre réponse aborde ${matched.length} des idées clés ; visez-en au moins ${SA_MIN_HITS}. Lisez la réponse modèle ci-dessous et repérez les idées que vous pourriez ajouter.",
+   "Review the lesson and the fill-in answers above; you can try again in ${lockLeft} minute(s).": "Relisez la leçon et les réponses des phrases à compléter ci-dessus ; vous pourrez réessayer dans ${lockLeft} minute(s).",
+   "✓ Well done — your answer touches ${matched.length} of the lesson's key ideas. Study the model answer below.": "✓ Bien — votre réponse aborde ${matched.length} des idées clés de la leçon. Étudiez la réponse modèle ci-dessous.",
+   "Good start — ${matched.length} of the key ideas; aim for at least ${SA_MIN_HITS}. Read the model answer below and notice the ideas you might add.": "Bon début — ${matched.length} des idées clés ; visez-en au moins ${SA_MIN_HITS}. Lisez la réponse modèle ci-dessous et repérez les idées que vous pourriez ajouter.",
+   "✗ Not answered (need at least one full sentence).": "✗ Sans réponse (il faut au moins une phrase entière).",
+   "Written: ${saCorrect}/${sa.length} (${saPct}%)": "Questions écrites : ${saCorrect}/${sa.length} (${saPct} %)",
+   "Fill in the blank: ${fr.score}/${fr.n}${fr.ok?'':' ('+fr.need+' needed)'}": "Phrases à compléter : ${fr.score}/${fr.n}${fr.ok?'':' ('+fr.need+' requises)'}",
+   "✓ Passed. Multiple choice: ${correct}/${total} (${mcPct}%)${saInfo}": "✓ Réussi. Choix multiple : ${correct}/${total} (${mcPct} %)${saInfo}",
+   "Multiple choice: ${correct}/${total} (${mcPct}%)${saInfo}. ${reqEn}. Review feedback and try again.${waitEn}": "Choix multiple : ${correct}/${total} (${mcPct} %)${saInfo}. ${(isCert && !fillInfo) ? '90 % requis à la section à choix multiple' : '90 % requis dans chaque section'}. Relisez les corrections et réessayez.${left ? ' Les phrases à compléter pourront être reprises dans '+left+' minute(s).' : ''}",
+   "${passed} of 11 units completed": "${passed} unité(s) terminée(s) sur 11"
+  },
+  "literals": {
+   "'Please complete all fields'": "'Veuillez remplir tous les champs.'",
+   "'Please register first'": "'Veuillez d’abord vous inscrire.'",
+   "'Register first')": "'Veuillez d’abord vous inscrire.')",
+   "'Write your response (at least one sentence)...'": "'Rédigez votre réponse (au moins une phrase)…'",
+   "'Write your response...'": "'Rédigez votre réponse…'",
+   "aria-label=\"Short answer\"": "aria-label=\"Réponse courte\"",
+   "document.getElementById('certDateEn').textContent = `${monthsEn[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;": "document.getElementById('certDateEn').textContent = `${now.getDate()} ${['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'][now.getMonth()]} ${now.getFullYear()}`;"
+  },
+  "registration": {
+   "placeholders": {
+    "#studentName": "Nom complet",
+    "#studentEmail": "Adresse e-mail",
+    "#studentCountry": "Pays"
+   },
+   "options": {
+    "#programTrack": {
+     "cert": "Certificat de ministère",
+     "mtheol": "Master en théologie",
+     "mdiv": "Master en théologie pastorale (M.Div.)"
+    }
+   }
+  }
+ },
+ "ethics": {
+  "unitTitles": [
+   "Unité 1 - Introduction à l’éthique chrétienne",
+   "Unité 2 - Fondements bibliques et théologiques",
+   "Unité 3 - La vocation pastorale : appel et caractère",
+   "Unité 4 - Responsabilités familiales et intégrité personnelle",
+   "Unité 5 - Éthique professionnelle et limites",
+   "Unité 6 - L’éthique dans la prédication, la direction et la parole",
+   "Unité 7 - Le caractère sacré de la vie et la bioéthique",
+   "Unité 8 - Éthique sexuelle, pureté et identité sexuelle",
+   "Unité 9 - L’argent, la gestion et les pauvres",
+   "Unité 10 - Jugement, restauration et synthèse finale"
+  ],
+  "literals": [
+   [
+    "\"<span style='color:green'>\\u2713 Unit already passed! Click Unit (\\d+) above.</span>\"",
+    "\"<span style='color:green'>\\u2713 Unité déjà réussie ! Cliquez sur Unité $1 ci-dessus.</span>\""
+   ],
+   [
+    "\"<span style='color:green'>\\u2713 Unit already passed! Click Certificate above.</span>\"",
+    "\"<span style='color:green'>\\u2713 Unité déjà réussie ! Cliquez sur Certificat ci-dessus.</span>\""
+   ],
+   [
+    "`<span style='color:#8a1f1f'>\\u{1F4D6} Take a few minutes to review the lesson above, then try again. You can retry in ${m} minute(s) \\u2014 you've got this!</span>`",
+    "`<span style='color:#8a1f1f'>\\u{1F4D6} Prenez quelques minutes pour relire la leçon ci-dessus, puis réessayez. Vous pourrez recommencer dans ${m} minute(s) — vous pouvez y arriver !</span>`"
+   ],
+   [
+    "`<span style='color:#8a1f1f'>\\u{1F4D6} Multiple-choice passed and saved. Review the lesson and the answers, then retry the written part (fill in the blank / short answer) in ${m} minute(s). Keep going!</span>`",
+    "`<span style='color:#8a1f1f'>\\u{1F4D6} Choix multiple réussi et enregistré. Relisez la leçon et les réponses, puis reprenez la partie écrite (phrases à compléter / réponses courtes) dans ${m} minute(s). Courage !</span>`"
+   ],
+   [
+    "\"\\u2713 MC already passed and banked. Only the written part needs resubmitting (fill in the blank / short answer, 9/10 each).\"",
+    "\"\\u2713 Choix multiple déjà réussi et enregistré. Seule la partie écrite doit être soumise de nouveau (phrases à compléter / réponses courtes, 9/10 pour chacune).\""
+   ],
+   [
+    "'Multiple Choice (Questions 1\\u201320)'",
+    "'Choix multiple (questions 1–20)'"
+   ],
+   [
+    "'\\u2713 Multiple-choice section previously passed. Your answers are preserved below for reference; you may proceed directly to the short-answer section.'",
+    "'\\u2713 Section à choix multiple déjà réussie. Vos réponses sont conservées ci-dessous pour référence ; vous pouvez passer directement à la section des réponses courtes.'"
+   ],
+   [
+    "'✓ Correct! '",
+    "'✓ Exact ! '"
+   ],
+   [
+    "`✗ Incorrect. Correct answer: ${correctLetter}. `",
+    "`✗ Inexact. Bonne réponse : ${correctLetter}. `"
+   ],
+   [
+    "`Not answered. Correct answer: ${correctLetter}. `",
+    "`Sans réponse. Bonne réponse : ${correctLetter}. `"
+   ],
+   [
+    "'Short Answer (21\\u201330) \\u2014 M.Div. / Th.M. Track'",
+    "'Réponses courtes (21–30) — parcours M.Div. / Th.M.'"
+   ],
+   [
+    "'Type your answer...'",
+    "'Rédigez votre réponse…'"
+   ],
+   [
+    "'Check Answer'",
+    "'Vérifier la réponse'"
+   ],
+   [
+    "'Please write your own answer first (at least 20 characters), then check it against the model answer below.'",
+    "'Rédigez d’abord votre propre réponse (quelques phrases), puis comparez-la avec la réponse modèle ci-dessous.'"
+   ],
+   [
+    "`\\u2713 Well done \\u2014 your answer touches ${hits.length} of the lesson's key ideas. Now compare it with the model answer below to deepen your understanding.`",
+    "`\\u2713 Bien — votre réponse aborde ${hits.length} des idées clés de la leçon. Comparez-la maintenant avec la réponse modèle ci-dessous pour approfondir votre compréhension.`"
+   ],
+   [
+    "`Good effort \\u2014 you have begun the answer. Read the model answer below and notice the key ideas you might add. This is how we learn; there is no penalty.`",
+    "`Bon effort — vous avez commencé la réponse. Lisez la réponse modèle ci-dessous et repérez les idées clés que vous pourriez ajouter. C’est ainsi qu’on apprend ; il n’y a aucune pénalité.`"
+   ],
+   [
+    "'<strong>Model answer \\u2014 study this:</strong> '",
+    "'<strong>Réponse modèle — étudiez-la :</strong> '"
+   ],
+   [
+    "\"<span style='color:red'>Please fill all fields.</span>\"",
+    "\"<span style='color:red'>Veuillez remplir tous les champs.</span>\""
+   ],
+   [
+    "\"<span style='color:green'>\\u2713 Registered successfully!</span>\"",
+    "\"<span style='color:green'>\\u2713 Inscription réussie !</span>\""
+   ],
+   [
+    "'Please register first.'",
+    "'Veuillez d’abord vous inscrire.'"
+   ],
+   [
+    "` + fill-in ${fr.score}/${fr.n}${fr.ok ? '' : ' (need ' + fr.need + ')'}`",
+    "` + phrases à compléter ${fr.score}/${fr.n}${fr.ok ? '' : ' (' + fr.need + ' requises)'}`"
+   ],
+   [
+    "`<span style='color:#8a1f1f'>Multiple choice ${mcScore}/20 \\u2713 passed and saved. Fill in the blank: ${fr.score}/${fr.n} (${fr.need} needed). Review the lesson and the answers below, then try the fill-ins again in ${lockMinutes()} minute(s).</span>`",
+    "`<span style='color:#8a1f1f'>Choix multiple ${mcScore}/20 \\u2713 réussi et enregistré. Phrases à compléter : ${fr.score}/${fr.n} (${fr.need} requises). Relisez la leçon et les réponses ci-dessous, puis reprenez les phrases à compléter dans ${lockMinutes()} minute(s).</span>`"
+   ],
+   [
+    "`<span style='color:green'>\\u2713 PASSED! ${mcScore}/20${fillLine(fr, false)}. Your answers are marked below. Review them, then use the button at the top to continue.</span>`",
+    "`<span style='color:green'>\\u2713 RÉUSSI ! ${mcScore}/20${fillLine(fr, false)}. Vos réponses sont corrigées ci-dessous. Relisez-les, puis utilisez le bouton en haut de la page pour continuer.</span>`"
+   ],
+   [
+    "`<span style='color:#8a1f1f'>You scored ${mcScore}/20 (18 needed to pass)${fillLine(fr, false)}. You're close \\u2014 don't be discouraged! Review the lesson above, then try again in ${lockMinutes()} minute(s). The answer explanations below show what to study.</span>`",
+    "`<span style='color:#8a1f1f'>Vous avez obtenu ${mcScore}/20 (18 requis pour réussir)${fillLine(fr, false)}. Vous y êtes presque — ne vous découragez pas ! Relisez la leçon ci-dessus, puis réessayez dans ${lockMinutes()} minute(s). Les explications ci-dessous montrent ce qu’il faut étudier.</span>`"
+   ],
+   [
+    "`<span style='color:green'>\\u2713 PASSED! MC \\u2713 banked + SA ${saScore}/10${fillLine(fr, false)}. Your answers are marked below. Review them, then use the button at the top to continue.</span>`",
+    "`<span style='color:green'>\\u2713 RÉUSSI ! Choix multiple \\u2713 enregistré + réponses courtes ${saScore}/10${fillLine(fr, false)}. Vos réponses sont corrigées ci-dessous. Relisez-les, puis utilisez le bouton en haut de la page pour continuer.</span>`"
+   ],
+   [
+    "`<span style='color:#8a1f1f'>Your multiple-choice pass is safe. Short answer: ${saScore}/10 (9 needed)${fillLine(fr, false)}. Good effort \\u2014 review the lesson and the model answers below, then try the short-answer section again in ${lockMinutes()} minute(s).</span>`",
+    "`<span style='color:#8a1f1f'>Votre réussite au choix multiple est acquise. Réponses courtes : ${saScore}/10 (9 requises)${fillLine(fr, false)}. Bon effort — relisez la leçon et les réponses modèles ci-dessous, puis reprenez la section des réponses courtes dans ${lockMinutes()} minute(s).</span>`"
+   ],
+   [
+    "`<span style='color:green'>\\u2713 PASSED! MC ${mcScore}/20 + SA ${saScore}/10${fillLine(fr, false)}. Your answers are marked below. Review them, then use the button at the top to continue.</span>`",
+    "`<span style='color:green'>\\u2713 RÉUSSI ! Choix multiple ${mcScore}/20 + réponses courtes ${saScore}/10${fillLine(fr, false)}. Vos réponses sont corrigées ci-dessous. Relisez-les, puis utilisez le bouton en haut de la page pour continuer.</span>`"
+   ],
+   [
+    "`<span style='color:#8a1f1f'>MC ${mcScore}/20 \\u2713 passed and banked. SA ${saScore}/10 (need 9)${fillLine(fr, false)}. SA section locked ${lockMinutes()} min. When unlocked, resubmit SA only \\u2014 MC stays passed.</span>`",
+    "`<span style='color:#8a1f1f'>Choix multiple ${mcScore}/20 \\u2713 réussi et enregistré. Réponses courtes ${saScore}/10 (9 requises)${fillLine(fr, false)}. Section des réponses courtes bloquée pendant ${lockMinutes()} min. Ensuite, soumettez de nouveau seulement les réponses courtes — le choix multiple reste acquis.</span>`"
+   ],
+   [
+    "`<span style='color:#8a1f1f'>\\u2717 Failed: MC ${mcScore}/20 + SA ${saScore}/10${fillLine(fr, false)} (need 18 and 9). Unit locked ${lockMinutes()} minutes.</span>`",
+    "`<span style='color:#8a1f1f'>\\u2717 Échec : choix multiple ${mcScore}/20 + réponses courtes ${saScore}/10${fillLine(fr, false)} (18 et 9 requis). Unité bloquée pendant ${lockMinutes()} minutes.</span>`"
+   ],
+   [
+    "'Reset this unit?\\n\\nThis will clear: in-progress answers, MC-passed state, all lockouts, and this unit\\'s pass flag.\\n\\nTeaching content stays. This cannot be undone.'",
+    "'Réinitialiser cette unité ?\\n\\nCela effacera : les réponses en cours, la réussite enregistrée au choix multiple, tous les blocages et l’indication de réussite de cette unité.\\n\\nLe contenu de la leçon reste. Cette action est irréversible.'"
+   ]
+  ],
+  "registration": {
+   "placeholders": {
+    "#regName": "Nom complet",
+    "#regEmail": "Adresse e-mail"
+   },
+   "options": {
+    "#regTrack": {
+     "certificate": "Parcours Certificat de ministère",
+     "mdiv": "Parcours Master en théologie pastorale (M.Div.)",
+     "thm": "Parcours Master en théologie (Th.M.)"
+    }
+   }
+  }
+ }
+}
