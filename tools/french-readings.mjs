@@ -33,6 +33,7 @@ import {
   bodyLeaves, frenchBody, tagProblem, normText, frenchSpaces,
 } from './french-readings-lib.mjs';
 import { translationPlan } from './translation-plan.mjs';
+import { readerEditorialNotice } from './editorial-notices.mjs';
 
 const BLANK = '____';
 const PROTECTED = new Set(['human', 'machine-edited']);
@@ -284,7 +285,7 @@ ${head.replace(/<title>[\s\S]*?<\/title>/, `<title>${title} — chapitres assign
 <h1>${title}</h1>
 <p class="by">${by}</p>
 </header>
-<div class="note"><p><b>Traduction provisoire.</b> Traduction automatique publiée pour relecture, paragraphe par paragraphe, des chapitres assignés pour l’examen du manuel de master. Elle conserve les opinions et la terminologie de l’auteur et de son époque, que le STC ne partage pas nécessairement. Les citations bibliques suivent la Bible Louis Segond 1910 lorsque le passage est clairement le même. Les chapitres portent la numérotation de l’édition anglaise.</p></div>
+${readerEditorialNotice(book.slug, 'fr')}<div class="note"><p><b>Traduction provisoire.</b> Traduction automatique publiée pour relecture, paragraphe par paragraphe, des chapitres assignés pour l’examen du manuel de master. Elle conserve les opinions et la terminologie de l’auteur et de son époque, que le STC ne partage pas nécessairement. Les citations bibliques suivent la Bible Louis Segond 1910 lorsque le passage est clairement le même. Les chapitres portent la numérotation de l’édition anglaise.</p></div>
 <nav class="toc"><b>Chapitres assignés</b><ol>${chapters.map((c) => `<li><a href="#chapter-${c.n}">${c.heading}</a>${c.group ? ` <span class="grp">· groupe ${c.group}</span>` : ''}</li>`).join('')}</ol></nav>
 ${chapters.map((c) => `<section id="chapter-${c.n}">\n<h2>${c.heading}</h2>\n${c.body}\n</section>`).join('\n')}
 <footer class="doc">Traduction française provisoire du Séminaire théologique de Chapala (Chapala Theological Seminary), 2026, de l’œuvre originale anglaise, qui est du domaine public. <a href="${room.replace(/^\.\.\//, '../fr/')}">Retour à la salle de lecture</a></footer>

@@ -220,9 +220,10 @@ function build(t, name) {
     for (let g = 1; g <= k; g++) if ((sizes[g] || 0) < per) problems++;
     if (per * k !== out.test.draw || !f.revision) problems++;
     out.test.perGroup = per;
-    out.test.revision = String(f.revision);
     out.source.file = `${dir}/${name}.bank.json`;
   }
+  if (f.revision) out.test.revision = String(f.revision);
+  if (f.reset_wait_on_revision === true) out.test.resetWaitOnRevision = true;
   return out;
 }
 for (const t of TESTS) {
