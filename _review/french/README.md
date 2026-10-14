@@ -1,12 +1,18 @@
 # French drafts — beta publication and review packets
 
 Machine drafts of forty-one courses (464 packets, including the WiseSpeak and Counseling Situations page frames) in French, for pastors in Kinshasa (DR Congo).
-The first ten courses (115 packets) are published on beta. The remaining thirty-one courses
-(349 packets) remain review-only drafts and are not imported or displayed on the site.
-Old Testament Survey was drafted separately as the pilot (see `docs/french-pilot.md`).
-Robert authorized beta publication of the first ten courses on 12 October. Nine courses
-are imported into canonical `src/content`; WiseSpeak uses these packets in its
-French build. See `docs/french-beta-publication.md` for editing and provenance.
+
+**Status, 13 October 2026: all forty-one courses are published on beta as French machine drafts**
+(review notice shown, pages noindex), together with Old Testament Survey (drafted separately,
+see `docs/french-pilot.md`), Narrative Preaching, Counseling and Ethics (folders
+`NarrativePreaching`, `Counseling`, `Ethics`), the French interface, French emails and
+certificates. Textbooks and required readings follow separately. Robert authorized beta
+publication on 12 October. The forty lesson-collection courses are imported into canonical
+`src/content`; WiseSpeak uses its packets in its French build. Corrections now go in the
+canonical fields (CMS or a branch), not in these packets, except for WiseSpeak and the three
+static-page courses, whose French builds read from here. See `docs/french-beta-publication.md`
+for editing and provenance. The batch notes below record how the drafts were made; their
+"review-only" wording is historical.
 
 Start with **SUMMARY.md**: what was done, problems found in the English site, and the
 decisions Dr. Cook needs to make for the whole French edition.
@@ -101,7 +107,6 @@ fix). Do not edit the files directly.
 - Review by a French-speaking reader with theological training.
 - Human review of the published beta drafts and subsequent corrections.
   Collection imports are marked `machine` with source hashes; the CMS config is regenerated.
-- Review and a separate import/publication change for the thirty-one review-only courses.
 - WiseSpeak is still the single-page `public/CTS_WiseSpeak_Preaching.html`, so its block ids
   are sequence numbers within this packet, not lesson-data ids.
 
