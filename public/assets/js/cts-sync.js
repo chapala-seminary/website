@@ -214,6 +214,8 @@
   function apply(state) {
     applyPolicy(state);
     if (!state || !state.student) return;
+    // Server-owned approval cache: replace or clear it; never send it in snapshot().
+    set('cts_thm_study_plan', JSON.stringify({ studentId: state.student.id, plan: state.thmStudyPlan || null }));
     var local = parse(get('cts_student'), {}) || {};
     // The server's copy fills gaps; it does not overwrite what this browser
     // has, because this browser is where the student is typing right now.
@@ -445,8 +447,8 @@
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (state) {
         if (!state) return { ok: false, error: 'no record for that code' };
-        apply(state);
         set(CODE_KEY, state.student.id);
+        apply(state);
         try { localStorage.removeItem(EXISTING_KEY); localStorage.removeItem(SEPARATE_KEY); } catch (e) {}
         var note = document.getElementById('cts-existing-note'); if (note) note.remove();
         // A successful restore is proof the API is there, whatever an earlier

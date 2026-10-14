@@ -218,7 +218,7 @@ export function textbookShortfall(code, level, textbooks, ctx) {
 /** completions: [{code, track}] (a bare code string is taken as track
  *  unknown); track: the student's level now (studentLevel), used where a
  *  completion's own level is unknown. null when the record supports the award. */
-export function degreeShortfall(level, completions, track) {
+export function degreeShortfall(level, completions, track, substitutions) {
   const d = DEGREES[level];
   if (!d) return 'unknown award';
   const own = studentLevel(track);
@@ -232,7 +232,23 @@ export function degreeShortfall(level, completions, track) {
   const level_ = level === 'thm' || level === 'mdiv' ? "master's-level " : level === 'associate' ? 'Associate-level ' : '';
   const problems = [];
   if (have.size < d.courses) problems.push(`${have.size} of ${d.courses} ${level_}courses recorded`);
-  const core = d.core.filter((c) => !have.has(c));
+  const core = (level === 'thm' ? thmFoundation(substitutions) : d.core).filter((c) => !have.has(c));
   if (core.length) problems.push(`required ${level_}courses not recorded: ${core.join(', ')}`);
   return problems.length ? problems.join('; ') : null;
+}
+
+/** Exactly five faculty-approved replacements, never credits or exam waivers.
+ * Invalid plans leave the normal foundation intact. The public sync endpoint
+ * never writes plans; only authenticated staff can approve them. */
+export function validThmSubstitutions(value) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
+  const keys = Object.keys(value);
+  const replaceable = FOUNDATION.filter(c => c !== 'CTSST' && c !== 'WISESPEAK');
+  return keys.length === 5 && replaceable.every(c => keys.includes(c))
+    && new Set(Object.values(value)).size === 5
+    && Object.values(value).every(c => typeof c === 'string' && Object.prototype.hasOwnProperty.call(catalog.completions, c) && !FOUNDATION.includes(c));
+}
+
+export function thmFoundation(substitutions) {
+  return validThmSubstitutions(substitutions) ? FOUNDATION.map(c => substitutions[c] || c) : FOUNDATION;
 }

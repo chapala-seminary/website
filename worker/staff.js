@@ -1,3 +1,5 @@
+import { loadThmStudyPlan, handleThmStudyPlan } from './study-plans.js';
+import { thmFoundation } from './awards.js';
 /* The seminary's own view of its students: /staff/...
  *
  * Wayne's CTS Student Tracker was fed from completion emails, which arrived
@@ -97,8 +99,14 @@ async function roster(env, asOf = new Date()) {
      FROM student_activity a JOIN students s ON s.id = a.student_id JOIN degree_progress d ON d.student_id = a.student_id
      WHERE lower(COALESCE(a.email, '')) <> 'tester@chapalaseminary.org'
      ORDER BY a.last_progress_at DESC`).all()).results ?? [];
-  return rows.map((r) => {
+  return Promise.all(rows.map(async (r) => {
     const level = programLevel(r.track, r.goal);
+    const plan = level === 'thm' ? await loadThmStudyPlan(env, r.student_id) : null;
+    if (plan) {
+      const done = (await env.DB.prepare("SELECT code FROM course_completions WHERE student_id = ? AND COALESCE(track, ?) IN ('thm','mdiv')").bind(r.student_id, r.track).all()).results || [];
+      const have = new Set(done.map(c => c.code));
+      r.foundation_done = thmFoundation(plan.substitutions).filter(c => have.has(c)).length;
+    }
     const counted = level === 'thm' || level === 'mdiv' ? r.masters_done : level === 'associate' ? r.assoc_done : r.courses_done;
     const days = Math.floor((asOf.getTime() - Date.parse(r.last_progress_at)) / DAY);
     const m = /^(\S+) (\d+)$/.exec(r.last_unit || '');
@@ -115,12 +123,12 @@ async function roster(env, asOf = new Date()) {
       notes: r.contact_opt_out_at ? 'stopped' : 'on', last_note: String(r.last_contacted_at || '').slice(0, 10),
       registered: String(r.created_at).slice(0, 10), heard: r.heard || '',
     };
-  });
+  }));
 }
 
 const COLUMNS = [
   ['name', 'Name'], ['email', 'Email'], ['country', 'Country'], ['lang', 'Language'], ['program', 'Program'],
-  ['program_progress', 'Toward program'], ['foundation', 'Foundation'], ['courses_done', 'Courses'],
+  ['program_progress', 'Toward program'], ['foundation', 'Foundation / plan'], ['courses_done', 'Courses'],
   ['notices', 'Notices'], ['units_passed', 'Units'], ['last_unit', 'Last unit'], ['last_progress', 'Last progress'],
   ['days_since_progress', 'Days since'], ['status', 'Status'], ['last_note', 'Last note'], ['notes', 'Notes'],
   ['registered', 'Registered'], ['heard', 'Found us by'],
@@ -162,7 +170,7 @@ Signed in as ${esc(user)}. <a href="/staff/students.csv">Download CSV</a> · <a 
 ${list.map((r) => `<tr class="${r.status.replace(' ', '-')}">${COLUMNS.map(([k]) => k === 'notes'
     ? `<td><form method="post" action="/staff/students/${r.n}/notes" style="margin:0">${r.notes === 'on' ? 'on' : 'stopped'}
        <input type="hidden" name="stop" value="${r.notes === 'on' ? 1 : 0}"><button>${r.notes === 'on' ? 'stop' : 'resume'}</button></form></td>`
-    : `<td>${esc(r[k])}</td>`).join('')}</tr>`).join('\n')}
+    : k === 'name' ? `<td><a href="/staff/students/${r.n}/thm-plan">${esc(r[k])}</a></td>` : `<td>${esc(r[k])}</td>`).join('')}</tr>`).join('\n')}
 </tbody></table></div></body></html>`);
 }
 
@@ -216,6 +224,8 @@ export async function handleStaff(request, env) {
     const from = request.headers.get('origin');
     if (from && from !== url.origin) return html('<p>Refused: the request did not come from this site.</p>', 403);
   }
+  if ((method === 'GET' || method === 'POST') && (m = /^\/staff\/students\/(\d+)\/thm-plan$/.exec(path)))
+    return handleThmStudyPlan(request, env, +m[1], user);
   if (method === 'POST' && (m = /^\/staff\/students\/(\d+)\/notes$/.exec(path))) {
     const form = await request.formData().catch(() => null);
     const stop = String(form?.get('stop') ?? url.searchParams.get('stop') ?? '1') === '1';

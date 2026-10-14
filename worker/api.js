@@ -1,3 +1,4 @@
+import { loadThmStudyPlan } from './study-plans.js';
 /* Chapala Theological Seminary — student records API.
  *
  * A plain fetch handler with no framework and no dependencies, so it runs
@@ -145,10 +146,12 @@ async function loadState(env, id) {
   const done = (completions.results ?? []).map(r => ({
     code: r.code, track: r.track ?? null, name: catalog.completions[r.code]?.name ?? null, completed_at: r.completed_at,
   }));
+  const thmStudyPlan = await loadThmStudyPlan(env, id);
   const degrees = {};
-  for (const level of Object.keys(DEGREES)) degrees[level] = degreeShortfall(level, done, studentLevel(student.track, student.goal)) === null;
+  for (const level of Object.keys(DEGREES)) degrees[level] = degreeShortfall(level, done, studentLevel(student.track, student.goal), thmStudyPlan?.substitutions) === null;
   return {
     student,
+    thmStudyPlan,
     requiredFrom: activatedTests(env),
     progress: progress.results ?? [],
     doneCodes: done.map(d => d.code),
@@ -441,7 +444,8 @@ async function issueCertificate(request, env) {
   } else {
     const rows = await env.DB.prepare(
       'SELECT code, track FROM course_completions WHERE student_id = ?').bind(id).all();
-    const why = degreeShortfall(level, rows.results ?? [], studentLevel(student.track, student.goal));
+    const plan = level === 'thm' ? await loadThmStudyPlan(env, id) : null;
+    const why = degreeShortfall(level, rows.results ?? [], studentLevel(student.track, student.goal), plan?.substitutions);
     if (why) return fail(409, why);
   }
 
@@ -666,6 +670,7 @@ async function deleteStudent(env, rawCode) {
   await env.DB.batch([
     ...merged.map((m) => env.DB.prepare('DELETE FROM students WHERE id = ?').bind(m)),
     ...gone.flatMap((g) => [
+      env.DB.prepare('DELETE FROM thm_study_plans WHERE student_id = ?').bind(g),
       env.DB.prepare('DELETE FROM unit_progress WHERE student_id = ?').bind(g),
       env.DB.prepare('DELETE FROM course_completions WHERE student_id = ?').bind(g),
       env.DB.prepare('DELETE FROM textbook_results WHERE student_id = ?').bind(g),
