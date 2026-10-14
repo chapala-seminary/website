@@ -114,6 +114,10 @@ export function loadHumanGrades(who, dir = EVAL_DIR) {
   const p = path.join(dir, 'human', `${who}.json`);
   return fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, 'utf8')) : null;
 }
+export function listHumanGraders(dir = EVAL_DIR) {
+  const d = path.join(dir, 'human');
+  return fs.existsSync(d) ? fs.readdirSync(d).filter(f => f.endsWith('.json')).map(f => f.replace(/\.json$/, '')).sort() : [];
+}
 const SA_EXPECT = new Set(['met', 'not_met', 'partly', 'pending']);
 const FILL_EXPECT = new Set(['right', 'wrong']);
 export function validateItem(it) {
@@ -128,3 +132,4 @@ export function validateItem(it) {
   return errs;
 }
 export function positive(expected) { return expected === 'met' || expected === 'right'; }
+export const isPosGrade = positive;
