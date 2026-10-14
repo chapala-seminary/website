@@ -22,9 +22,12 @@ import { markedLanguage } from '../src/lib/language-content.ts';
 import { CERTIFICATE_FR } from './data/certificate-fr.mjs';
 
 // Every certificate page: each course's (with its M.Div. and Th.M. pages),
-// the degree pages and Christian Ethics.
+// the degree pages and Christian Ethics -- except the pages that have their
+// own French dictionary in src/data/french-pages (the four degree pages),
+// which tools/language-pages.mjs translates at build time. One mechanism per page.
 export const PAGES = fs.readdirSync('public')
   .filter((f) => /Certificate\.html$/.test(f) || f === 'ethics_certificate.html' || f === 'CTSCertificateOfMinistry.html')
+  .filter((f) => !fs.existsSync(path.join('src/data/french-pages', f.replace(/\.html$/, '.json'))))
   .sort();
 
 // Unmarked wording: [exact source, French]. English and Spanish keep the source.

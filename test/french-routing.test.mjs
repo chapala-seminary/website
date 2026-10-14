@@ -102,8 +102,11 @@ try {
     assert.ok(pdf.ok); assert.equal(pdf.names.fr, 'Survol du Nouveau Testament');
     checks += 7;
         // Every certificate page (tools/add-certificate-french.mjs), as a student who has not finished it sees it.
+    // ...and the degree pages it leaves to their src/data/french-pages dictionaries.
     const { PAGES } = await import('../tools/add-certificate-french.mjs');
-    for (const file of PAGES) {
+    const { readdirSync } = await import('node:fs');
+    const DICT = readdirSync('src/data/french-pages').filter(f => /Certificate|CertificateOfMinistry/.test(f)).map(f => f.replace(/\.json$/, '.html'));
+    for (const file of [...PAGES, ...DICT]) {
       await page.goto(`${base}/fr/${file}`); await settle(page); await page.waitForTimeout(200);
       text = await page.locator('body').innerText();
       assert.ok(!ENGLISH.test(text), `English on /fr/${file}: ` + (text.match(ENGLISH) || [])[0]); checks++;
