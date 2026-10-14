@@ -8,6 +8,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { translationPlan } from './translation-plan.mjs';
+// Static-page courses (Narrative Preaching, Counseling, Ethics) have their own builder.
+import { COURSES as STATIC_COURSES } from './french-static-courses.mjs';
+const staticFolders=new Set(Object.values(STATIC_COURSES).map(c=>c.folder));
 const root='_review/french', write=process.argv.includes('--write');
 const only=process.argv.find(a=>a.startsWith('--course='))?.slice(9).split(',');
 const corrections={};
@@ -17,7 +20,7 @@ for(const file of fs.readdirSync('tools/data').filter(f=>/^french-.*-corrections
  }
 const used=new Set(),seen=new Set(),writes=[];let count=0,skipped=0;
 const correct=key=>{used.add(key);return corrections[key];};
-for(const course of fs.readdirSync(root).filter(c=>fs.statSync(path.join(root,c)).isDirectory()&&c!=='tools'&&c!=='WiseSpeak')){
+for(const course of fs.readdirSync(root).filter(c=>fs.statSync(path.join(root,c)).isDirectory()&&c!=='tools'&&c!=='WiseSpeak'&&!staticFolders.has(c))){
  if(only&&!only.includes(course))continue;
  for(const name of fs.readdirSync(path.join(root,course)).filter(n=>n.endsWith('-source.json'))){
   const source=JSON.parse(fs.readFileSync(path.join(root,course,name),'utf8'));
