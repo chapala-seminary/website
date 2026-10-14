@@ -103,6 +103,9 @@ const ADDED = [
 const COUNT = [
   ["Forty-four courses", "Forty-five courses"],
   ["Cuarenta y cuatro cursos", "Cuarenta y cinco cursos"],
+  /* 13 Oct 2026: the site is in three languages, so the lead no longer says "bilingual". */
+  ["each complete and bilingual.", "each complete, in English and Spanish, with French in draft."],
+  ["cada uno completo y bilingüe.", "cada uno completo, en inglés y español, con francés en borrador."],
 ];
 
 const [origFile = REF, builtFile = 'dist/index.html'] = process.argv.slice(2);
