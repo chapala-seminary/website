@@ -58,7 +58,8 @@ const fromText = from ? { en: from.toLocaleDateString('en-US', { year: 'numeric'
                           es: from.toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }),
                           fr: from.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }) } : null;
 const data = JSON.stringify({ slug: reading.slug, page: reading.page, kind: 'reading', title: reading.title, draw, pass, questions, completion,
-  ...(perGroup ? { perGroup, revision } : {}), ...(perReading ? { perReading } : {}), ...('requiredFrom' in reading ? { requiredFrom: reading.requiredFrom ?? null } : {}) }).replace(/</g, '\\u003c');
+  ...(reading.test.resetWaitOnRevision ? { resetWaitOnRevision: true } : {}),
+  ...(perGroup ? { perGroup } : {}), ...(revision ? { revision } : {}), ...(perReading ? { perReading } : {}), ...('requiredFrom' in reading ? { requiredFrom: reading.requiredFrom ?? null } : {}) }).replace(/</g, '\\u003c');
 ---
 <Textbook kind="reading-test" book={book} course={course} accent={accent} scripts={['/assets/js/cts-fill.js', '/assets/js/cts-required-tests.js', '/assets/js/cts-record.js']} sync={true}>
   <section class="card tb-about" data-cts-chrome>

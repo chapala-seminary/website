@@ -1346,3 +1346,25 @@ commits are the audit trail: `git log -- src/content/lessons` shows each one,
 and every change here was proved to alter only what it claims to — the page
 was re-rendered with the change backed out and compared against the previous
 reference, element for element.
+
+## 14 October 2026 — Wayne's editorial reconciliation
+
+Reading rooms distinguish historical authors' perspectives from settled CTS
+doctrine. Three Wesley shelf descriptions now attribute Arminian views to
+Wesley; Acts 6/7 lessons and model answers accommodate supported Reformed and
+Arminian readings. Blaikie's Joshua readers and entry pages carry a notice on
+historical racial and colonial language. French uses « Grande Commission »
+and ordinary « séculier », retaining non-sacred « profane » and supplied
+Scripture quotations for review. Old Testament Survey's Fido anecdote,
+daily-funeral estimate and Meribah chronology are corrected against sources.
+Pentecostal Q24/Q31 and World Religions Q27 now ask only what their assigned
+texts support. Revised unfinished attempts restart without retaining old
+failure waits; valid prior passes remain saved.
+Details, source links and remaining requirements:
+[Wayne reconciliation](wayne-reconciliation-2026-10-14.md).
+
+Completion keys, MC answer indexes and grading thresholds are preserved.
+Regression expectations are updated only for the deliberately changed
+paragraphs, keyword fingerprint and affected rendered elements, with the
+previous beta build used as the comparison. This does not implement server
+grading or authorize production publication; French remains in review.

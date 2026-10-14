@@ -42,6 +42,8 @@ const completion = unitCourse
   : { single: true, code: tb.code, name: done.name, page: done.page, textbook: book.slug, ...(tests.length > 1 ? { tests } : {}) };
 const data = JSON.stringify({ slug: book.slug, page: book.page, title: book.title, draw, pass, questions, completion,
   ...(book.test.perChapter ? { perChapter: book.test.perChapter } : {}),
+  ...(book.test.revision ? { revision: book.test.revision } : {}),
+  ...(book.test.resetWaitOnRevision ? { resetWaitOnRevision: true } : {}),
   ...('requiredFrom' in book ? { requiredFrom: book.requiredFrom } : {}) }).replace(/</g, '\\u003c');
 ---
 <Textbook kind="test" book={{ ...book, title: { ...book.title, fr: frBookTitle(book.title.en) } }} course={course} accent={accent} scripts={['/assets/js/cts-fill.js', '/assets/js/cts-required-tests.js', '/assets/js/cts-record.js']} sync={true}>

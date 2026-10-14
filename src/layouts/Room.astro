@@ -9,6 +9,7 @@
  * showed English and Spanish at once with no way to choose.
  */
 import { version } from '../lib/version';
+import EditorialNotice from '../components/EditorialNotice.astro';
 
 interface Bi { en: string; es: string; fr?: string }
 interface Props {
@@ -83,6 +84,8 @@ const { page, kind, title, heading, tagline = null, course = null, accent = null
     </nav>
 
     <main class="wrap" id="content">
+      {kind !== 'honors' && <EditorialNotice kind="perspectives" />}
+      {page === 'CTSJoshReadings' && <EditorialNotice kind="blaikie" />}
       <Fragment set:html={body} />
     </main>
 

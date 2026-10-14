@@ -14,6 +14,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { readerEditorialNotice } from './editorial-notices.mjs';
 
 const WRITE = process.argv.includes('--write'), STRICT = process.argv.includes('--strict');
 const BOOKS = [
@@ -91,7 +92,7 @@ function page(b, parts, missing) {
 <h1>${esc(b.title)}</h1>
 <p class="by">${esc(b.author)} · ${esc(b.series)} · ${esc(b.year)}</p>
 </header>
-<div class="note"><p><b>Nota de CTS.</b> Traducción íntegra y fiel, párrafo por párrafo, de los capítulos asignados para el examen del libro de texto de maestría. Conserva las opiniones y la terminología del autor y de su época, que CTS no necesariamente comparte. Las citas bíblicas siguen la Reina-Valera 1960 cuando el pasaje es claramente el mismo. Los capítulos llevan la numeración de la edición inglesa (Project Gutenberg n.º ${b.gutenberg}).</p></div>
+${readerEditorialNotice(b.key, 'es')}<div class="note"><p><b>Nota de CTS.</b> Traducción íntegra y fiel, párrafo por párrafo, de los capítulos asignados para el examen del libro de texto de maestría. Conserva las opiniones y la terminología del autor y de su época, que CTS no necesariamente comparte. Las citas bíblicas siguen la Reina-Valera 1960 cuando el pasaje es claramente el mismo. Los capítulos llevan la numeración de la edición inglesa (Project Gutenberg n.º ${b.gutenberg}).</p></div>
 ${toc}
 ${body}
 <footer class="doc">Traducción al español de Chapala Theological Seminary (Seminario Teológico de Chapala), 2026, de la obra original en inglés de ${esc(b.author)}, que es de dominio público. <a href="../${b.room}">Volver a la sala de lecturas</a></footer>

@@ -31,6 +31,11 @@ export function applyCorrections(rec, edits = JSON.parse(fs.readFileSync(FILE, '
   }
   for (const q of rec.test.questions) if ((q.prompt.en.match(/____/g) || []).length !== 1 || (q.prompt.es.match(/____/g) || []).length !== 1)
     report.stale.push(`${rec.slug}: a corrected prompt does not have exactly one blank`);
+  // A source correction changes an unfinished attempt, never a recorded pass.
+  const revisions = [...new Set(edits.filter(e => e.slug === rec.slug && e.revision).map(e => e.revision))];
+  if (revisions.length > 1) report.stale.push(`${rec.slug}: conflicting attempt revisions`);
+  else if (revisions.length === 1 && !report.stale.length) rec.test.revision = revisions[0];
+  if (revisions.length === 1 && !report.stale.length && edits.some(e => e.slug === rec.slug && e.revision === revisions[0] && e.resetWaitOnRevision)) rec.test.resetWaitOnRevision = true;
   return report;
 }
 

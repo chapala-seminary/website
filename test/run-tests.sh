@@ -251,6 +251,7 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   node test/engine-languages.mjs
   node test/missing-sa-grading.test.mjs
   node test/french-drafts.test.mjs
+  node test/editorial-perspectives.test.mjs
   # Every delivered French packet imported, stamped against the current English;
   # a pasted French question fails wherever the English one does.
   node test/french-import.test.mjs
@@ -301,6 +302,7 @@ node test/published-models.test.mjs
   # locked after a failure, a fresh draw after the wait -- as a student
   # would use the page.
   node tools/verify-textbook-test.mjs "http://127.0.0.1:$PORT"
+  node test/assigned-reading-corrections.test.mjs "http://127.0.0.1:$PORT"
   node tools/verify-textbook-mc.mjs "http://127.0.0.1:$PORT"
   # ...and a French test page: French questions, French and English answers.
   node test/french-readings.test.mjs "http://127.0.0.1:$PORT"
@@ -333,6 +335,7 @@ node test/published-models.test.mjs
   # Credential boundaries: each course counts toward a degree only at the level
   # it was completed on (Dr. Cook's review, 29 Sept), in the browser and the Worker.
   node tools/verify-degrees.mjs "http://127.0.0.1:$PORT"
+  API_BASE="http://127.0.0.1:$PORT" node test/thm-study-plans.api.mjs
   # The lesson and its exam are never on screen together, on any unit page, so
   # the browser's Find cannot search the lesson for an answer (29 Sept).
   node tools/verify-exam-view.mjs "http://127.0.0.1:$PORT"

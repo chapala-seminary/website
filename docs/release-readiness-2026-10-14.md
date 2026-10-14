@@ -1,6 +1,7 @@
 # Release readiness — 14 October 2026
 
-Release remains held. This candidate starts from beta `af4cb3d3` and reconciles
+Release remains held. This candidate starts from beta `af4cb3d3`, integrates
+current beta `71f9d0ad` (#92/#93), and reconciles
 production main `70d2fa61` (including #84, `d4d7bf92`). The previous production
 deployment still publicly reports `2026-10-06 431b826`; promotion carries all
 changes since that deployed version, not just the beta additions.
@@ -18,6 +19,9 @@ changes since that deployed version, not just the beta additions.
   The reported missing `0012` and `0013` are in that migration set. A read-only
   production ledger check here returned Cloudflare authorization error `7403`;
   the actual ledger and schema must be verified with CTS-authorized credentials.
+  The later `0014_thm_study_plans.sql` from #92 is also included. The existing
+  study-plan preparation step is retained after migrations; it creates no
+  faculty approval or earned completion.
 - Production deployment refuses an unset or non-UTC activation timestamp.
   Set `MASTER_TESTS_ACTIVATION` to the actual authorized production release's
   ISO UTC timestamp, effective immediately, and retain it on later deployments.
@@ -35,21 +39,23 @@ changes since that deployed version, not just the beta additions.
   prior awards and saved honors records are not rewritten.
 - Romans identifies eternal security as a perspective to weigh, rather than
   CTS's required position, with a matching machine-drafted French correction.
-  Systematic Theology and related theological edits remain
-  in the separate active editorial worktree and must be reviewed independently.
+  Systematic Theology and related theological edits merged separately in #93
+  and are retained in this integrated candidate. The other worktree is untouched.
 - Six Joshua/Language Appreciation certificate pages now use Chapala, Jalisco.
 
 ## Local validation
 
 `npm run build` passed: 963 pages in each of English, Spanish and French.
-The complete `PORT=19743 test/run-tests.sh` run passed (exit 0), with no
-browser checks skipped, including all 5,778 desktop/phone language renders.
+After the #92/#93 integration, the complete
+`PORT=19743 test/run-tests.sh` run passed (exit 0), with no browser checks
+skipped, including all 5,778 desktop/phone language renders.
 Checks include 979 missing-grading checks, 42,855 French/source grading checks,
 38,173 published model/source checks, 3,726 assessment-policy assertions,
 601 certificate eligibility assertions, 90 certificate-sync checks and 158
 PDF assertions. Local registration, cross-browser recovery, textbook/reading
 recovery, email link/code handling and certificate registration passed.
-The local email mode sends no real messages.
+The integrated run also passed 60 editorial/alternative-answer checks and 36
+Th.M. study-plan API/browser checks. The local email mode sends no real messages.
 
 ## Acceptance still required
 
