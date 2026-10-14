@@ -9,6 +9,10 @@ const bilingual = z.object({ en: z.string(), es: z.string() }).catchall(z.string
 const translationState = z.record(z.string(), z.object({
   status: z.enum(['human', 'machine', 'machine-edited']), from: z.string().length(12),
 }));
+/* Provenance of a record's whole-field translations (a textbook's body,
+   subtitle, credits): field -> language -> state, `from` hashing the field's
+   English (src/lib/lesson.ts hash). Questions keep their own `tr`. */
+const fieldTranslations = z.record(z.string(), translationState);
 
 const completeQuestionLanguages = (question: Record<string, any>, ctx: any) => {
   const fields = ['stem', 'prompt', 'options', 'why', 'answer', 'accept', 'keywords', 'model']
@@ -285,7 +289,9 @@ const textbooks = defineCollection({
     // course completion is held by it. Omitted means old mandatory textbook.
     requiredFrom: z.string().refine((v) => /^\d{4}-\d{2}-\d{2}T/.test(v) && !Number.isNaN(Date.parse(v)),
       { message: 'requiredFrom must be an ISO date/time' }).nullable().optional(),
-    body: z.object({ en: bookHtml, es: bookHtml }),
+    // a further language (fr) is the English markup with its words translated
+    body: z.object({ en: bookHtml, es: bookHtml }).catchall(bookHtml),
+    tr: fieldTranslations.optional(),
     test: z.object({
       draw: z.number().int().positive(),
       pass: z.number().int().positive(),
@@ -326,6 +332,7 @@ const readings = defineCollection({
     kind: z.literal('reading'),
     title: bilingual,
     room: bilingual,                  // what the student reads first, in a sentence
+    tr: fieldTranslations.optional(),
     /* When the test begins to count toward a master's completion (the
        Master's five-reading tests, 9 Oct 2026): null until Robert activates
        it, then the moment he did. Absent on Genesis and World Religions,

@@ -34,6 +34,8 @@ for (const file of files) {
   const original = parse(fs.readFileSync(path.join('.astro/language-base', file), 'utf8'), {parseNoneClosedTags: true});
   const sourceDigests = original.querySelectorAll('.dg-block.lang-en');
   const spanishDigests = original.querySelectorAll('.dg-block.lang-es');
+  // A digest translated into French has its French beside it (tools/french-readings-pages.mjs).
+  const frenchDigests = sourceDigests.map(d => { for (let s = d.nextElementSibling; s && !s.classList.contains('lang-en'); s = s.nextElementSibling) if (s.classList.contains('lang-fr')) return s; return null; });
   for (const lang of languages) {
     const route = (lang === 'en' ? '' : lang + '/') + file;
     const root = parse(fs.readFileSync(path.join(dir, route), 'utf8'), {parseNoneClosedTags: true});
@@ -69,9 +71,9 @@ for (const file of files) {
       const digests = root.querySelectorAll('.dg-block').filter(el => !el.hasAttribute('hidden'));
       ok(digests.length === sourceDigests.length, `${route}: digests lost or duplicated`);
       for (const [i, digest] of digests.entries()) {
-        const wanted = lang === 'es' ? spanishDigests[i] : sourceDigests[i];
+        const wanted = lang === 'es' ? spanishDigests[i] : lang === 'fr' && frenchDigests[i] ? frenchDigests[i] : sourceDigests[i];
         ok(digestWords(digest.querySelectorAll('.cts-reading').map(el => el.innerHTML).join(' ')) === digestWords(wanted?.innerHTML), `${route}: digest ${i + 1} reader wording differs`);
-        if (lang === 'es') ok(digestWords(digest.querySelectorAll('.cts-source').map(el => el.innerHTML).join(' ')) === digestWords(sourceDigests[i]?.innerHTML), `${route}: digest ${i + 1} source wording differs`);
+        if (lang === 'es' || (lang === 'fr' && frenchDigests[i])) ok(digestWords(digest.querySelectorAll('.cts-source').map(el => el.innerHTML).join(' ')) === digestWords(sourceDigests[i]?.innerHTML), `${route}: digest ${i + 1} source wording differs`);
       }
     }
     const room = shelf[file.replace(/\.html$/, '')];

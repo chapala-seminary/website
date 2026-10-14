@@ -36,6 +36,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { carryFrench } from './french-readings-lib.mjs';
 
 const SRC = 'src/data/readings', OUT = 'src/content/readings';
 const WRITE = process.argv.includes('--write');
@@ -232,6 +233,8 @@ if (optionalMissing) console.log(`${optionalMissing} answer(s) with no accepted 
 if (problems) { console.error(`${problems} problem(s); nothing written`); process.exit(1); }
 /* Written only when every test is sound, so a bank with a problem never
    leaves half its tests updated. */
-if (WRITE) for (const out of outputs) { fs.mkdirSync(OUT, { recursive: true }); fs.writeFileSync(path.join(OUT, `${out.slug}.json`), JSON.stringify(out, null, 1) + '\n'); console.log(`  wrote ${OUT}/${out.slug}.json`); }
+// French added since (tools/french-readings.mjs) is kept wherever its English is unchanged.
+const previous = (slug) => { const f = path.join(OUT, `${slug}.json`); return fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')) : null; };
+if (WRITE) for (const out of outputs) { fs.mkdirSync(OUT, { recursive: true }); fs.writeFileSync(path.join(OUT, `${out.slug}.json`), JSON.stringify(carryFrench(previous(out.slug), out), null, 1) + '\n'); console.log(`  wrote ${OUT}/${out.slug}.json`); }
 
 if (NEXT_OUT) for (const out of nextOutputs) { fs.mkdirSync(NEXT_OUT, { recursive: true }); fs.writeFileSync(path.join(NEXT_OUT, `${out.slug}.json`), JSON.stringify(out, null, 1) + "\n"); }

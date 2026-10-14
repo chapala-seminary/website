@@ -10,6 +10,14 @@ import type { HTMLElement } from 'node-html-parser';
 export const FRENCH_INTERFACE: Record<string, string> = {
   '📚 Catalog / Catálogo': '📚 Catalogue',
 };
+/* The frame's accessible names (aria-label on its navigation). */
+export const FRENCH_LABELS: Record<string, string> = {
+  'Textbook': 'Manuel',
+  'Reading room': 'Salle de lecture',
+  'Reading With Honors': 'Lecture avec mention',
+  'Course units': 'Unités du cours',
+  'Contents': 'Sommaire',
+};
 /* Frame text inside the lesson body (src/lib/partials.ts), where a lang-fr
    span would change the lesson text that tools/prose-baseline.mjs records. */
 export const FRENCH_FRAME: Record<string, string> = {
@@ -34,6 +42,17 @@ export function frenchInterface(root: HTMLElement, file = '') {
     const fr = FRENCH_FRAME[node.innerHTML.replace(/\s+/g, ' ').trim()];
     if (fr) { node.set_content(fr); node.setAttribute('lang', 'fr'); node.removeAttribute('data-cts-fallback'); }
   }
+  // The older segmented switcher (hidden on language pages) keeps a bilingual label elsewhere.
+  for (const node of root.querySelectorAll('.cts-seg[aria-label="Language / Idioma"]')) node.setAttribute('aria-label', 'Langue');
+  // The certificates' seal gives the initials in English and Spanish; in French they are STC.
+  for (const node of root.querySelectorAll('.seal')) if (node.innerHTML.trim() === 'CTS &middot; STC') node.set_content('STC');
+  for (const node of root.querySelectorAll('.cert-seal > div')) if (node.innerHTML.trim() === 'CTS') node.set_content('STC');
+  const unlabelled: string[] = [];
+  for (const node of root.querySelectorAll('.cts-nav[aria-label], .tb-toc[aria-label]')) {
+    const fr = FRENCH_LABELS[node.getAttribute('aria-label')!];
+    if (fr) node.setAttribute('aria-label', fr); else unlabelled.push(node.getAttribute('aria-label')!);
+  }
+  if (unlabelled.length) throw new Error(`Missing French label on fr/${file} (add it to FRENCH_LABELS in src/lib/french-interface.ts):\n` + unlabelled.map(l => '  ' + l).join('\n'));
   const missing = root.querySelectorAll('[data-cts-chrome] .cts-reading[data-cts-fallback], .cts-reading[data-cts-chrome][data-cts-fallback]')
     .filter(node => !node.closest('[data-cts-legacy-control]'));
   if (missing.length) throw new Error(`Missing French interface text on fr/${file} (add a lang-fr version beside it):\n`

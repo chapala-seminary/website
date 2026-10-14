@@ -29,4 +29,14 @@ assert.ok(collections.lessons.schema.safeParse(lesson).success);checks++;
 // Adding a new language must not excuse deleting an original language slot.
 lesson.template=lesson.template.replace(/<!--cts:[\w-]+:es-->/,'');
 assert.ok(!collections.lessons.schema.safeParse(lesson).success);checks++;
+// A textbook keeps a French body, with field provenance; questions keep theirs.
+const book=JSON.parse(fs.readFileSync('src/content/textbooks/cults.json'));
+book.body.fr=book.body.en;book.tr={body:{fr:{status:'machine',from:'0123456789ab'}}};
+assert.equal(collections.textbooks.schema.parse(book).body.fr,book.body.en);checks++;
+book.tr.body.fr.status='guessed';assert.ok(!collections.textbooks.schema.safeParse(book).success);checks++;
+const reading=JSON.parse(fs.readFileSync('src/content/readings/genesisreadings.json'));
+const rq=reading.test.questions[0];rq.prompt.fr='Sans blanc';rq.answer.fr='x';rq.accept.fr=[];
+assert.ok(!collections.readings.schema.safeParse(reading).success);checks++;
+rq.prompt.fr='Un ____.';assert.ok(collections.readings.schema.safeParse(reading).success);checks++;
+delete rq.answer.fr;assert.ok(!collections.readings.schema.safeParse(reading).success);checks++;
 console.log(`${checks} French schema checks — PASS; translated fields survive and incomplete keys fail.`);

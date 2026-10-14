@@ -70,6 +70,12 @@ export function frenchPageTitle(root: HTMLElement, file: string, translated: boo
     if (room.kind === 'required') return `${frCourse(room.course)} — Lectures obligatoires pour l’examen de master`;
     return `${frCourse(room.course)} — ${/Honors/.test(room.heading.en) ? 'Salle de lecture pour la mention' : 'Salle de lecture complémentaire'}`;
   }
+  // A digest (public/CTS_*_digest.html): "<title> — CTS Reading / Lectura CTS".
+  const digest = /^(.*) — CTS Reading \/ Lectura CTS$/.exec(root.querySelector('title')?.text.trim() ?? '');
+  if (digest) {
+    const h1 = root.querySelector('h1 .cts-reading[lang="fr"]:not([data-cts-fallback])');
+    return `${h1 ? h1.text.replace(/\s+/g, ' ').trim() : digest[1]} — Lecture STC`;
+  }
   return null;
 }
 export function frenchTitle(root: HTMLElement, file: string, _lesson: unknown, translated: boolean) {

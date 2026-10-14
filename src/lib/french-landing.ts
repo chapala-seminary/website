@@ -7,7 +7,7 @@ const formCopy: Record<string, string> = {
   'Full name': 'Nom complet',
   'Email (required)': 'E-mail (obligatoire)',
   'Country — select': 'Pays — sélectionnez',
-  'How did you hear about CTS? (optional)': 'Comment avez-vous découvert CTS ? (facultatif)',
+  'How did you hear about CTS? (optional)': 'Comment avez-vous découvert le STC ? (facultatif)',
 };
 export const FRENCH_HOME_MESSAGES: Record<string, string> = {
   'Please enter your name': 'Veuillez saisir votre nom',
@@ -92,7 +92,7 @@ export function frenchLanding(root: HTMLElement) {
     option.setAttribute('data-en', option.text); option.setAttribute('data-es', option.text);
     option.setAttribute('data-fr', text); option.set_content(text);
   }
-  const labels: Record<string,string> = {'reg-name':'Nom complet','reg-email':'Adresse e-mail','reg-country':'Pays','reg-heard':'Comment avez-vous découvert CTS ?','reg-track':'Parcours d’études','reg-existing-code':'Code étudiant'};
+  const labels: Record<string,string> = {'reg-name':'Nom complet','reg-email':'Adresse e-mail','reg-country':'Pays','reg-heard':'Comment avez-vous découvert le STC ?','reg-track':'Parcours d’études','reg-existing-code':'Code étudiant'};
   for (const [id,label] of Object.entries(labels)) root.querySelector('#'+id)?.setAttribute('aria-label',label);
   root.querySelector('img[alt="Chapala Theological Seminary seal"]')?.setAttribute('alt','Sceau du Séminaire théologique de Chapala');
   const title = 'Séminaire en ligne gratuit | Séminaire théologique de Chapala';

@@ -55,10 +55,10 @@ const reading = kind === 'reading-test';
         </div>
         <h1 data-cts-chrome>{reading ? '📖' : '📘'} <span class="lang-en">{book.title.en}</span><span class="lang-es">{book.title.es}</span><span class="lang-fr">{book.title.fr}</span></h1>
         {book.subtitle && (book.subtitle.en || book.subtitle.es) && (
-          <h2><span class="lang-en">{book.subtitle.en}</span><span class="lang-es">{book.subtitle.es}</span></h2>
+          <h2><span class="lang-en">{book.subtitle.en}</span><span class="lang-es">{book.subtitle.es}</span>{book.subtitle.fr && <span class="lang-fr">{book.subtitle.fr}</span>}</h2>
         )}
         {book.credits && (book.credits.en || book.credits.es) && (
-          <p class="credits"><span class="lang-en">{book.credits.en}</span><span class="lang-es">{book.credits.es}</span></p>
+          <p class="credits"><span class="lang-en">{book.credits.en}</span><span class="lang-es">{book.credits.es}</span>{book.credits.fr && <span class="lang-fr">{book.credits.fr}</span>}</p>
         )}
       </div>
     </header>
