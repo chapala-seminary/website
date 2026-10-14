@@ -171,6 +171,8 @@ function setLang(l){
 (function(){ try{ var l=localStorage.getItem('cts_lang'); if(l==='es') setLang('es'); }catch(e){} })();
 
 var ES = function(){ return document.body.className === 'lang-es'; };
+/* The page's language from the generated language page (English, Spanish or French). */
+function w(en, es, fr){ var l = (window.CTSLanguage && window.CTSLanguage.lang) || (ES() ? 'es' : 'en'); return l === 'fr' ? fr : l === 'es' ? es : en; }
 function say(el, text, kind){ el.textContent = text; el.className = 'note ' + (kind || 'ok'); }
 function show(id, on){ document.getElementById(id).style.display = on ? '' : 'none'; }
 
@@ -209,17 +211,17 @@ document.getElementById('show-held').addEventListener('click', function(){
   fetch(api + '/student/' + encodeURIComponent(window.CTS_SYNC.code()), { credentials:'omit' })
     .then(function(r){ return r.ok ? r.json() : null; })
     .then(function(state){
-      if (!state) { say(note, ES() ? 'No se encontró ningún registro para este código.' : 'No record was found for this code.', 'warn'); return; }
+      if (!state) { say(note, w('No record was found for this code.', 'No se encontró ningún registro para este código.', 'Aucun dossier ne correspond à ce code.'), 'warn'); return; }
       var s = state.student || {}, prog = state.progress || [], certs = state.certificates || [], tests = state.textbooks || [];
       var rows = [
-        [ES()?'Nombre':'Name', s.name || (ES()?'(ninguno)':'(none)')],
-        [ES()?'Correo':'Email', s.email || (ES()?'(ninguno)':'(none)')],
-        [ES()?'País':'Country', s.country || (ES()?'(ninguno)':'(none)')],
-        [ES()?'Programa':'Programme', s.track || (ES()?'(ninguno)':'(none)')],
-        [ES()?'Meta':'Goal', s.goal || (ES()?'(ninguna)':'(none)')],
-        [ES()?'Unidades aprobadas':'Units passed', String(prog.length)],
-        [ES()?'Exámenes de libro y lecturas aprobados':'Textbook and reading tests passed', String(tests.length)],
-        [ES()?'Certificados':'Certificates', String(certs.length)]
+        [w('Name', 'Nombre', 'Nom'), s.name || (w('(none)', '(ninguno)', '(aucun)'))],
+        [w('Email', 'Correo', 'Adresse courriel'), s.email || (w('(none)', '(ninguno)', '(aucun)'))],
+        [w('Country', 'País', 'Pays'), s.country || (w('(none)', '(ninguno)', '(aucun)'))],
+        [w('Programme', 'Programa', 'Parcours'), s.track || (w('(none)', '(ninguno)', '(aucun)'))],
+        [w('Goal', 'Meta', 'Objectif'), s.goal || (w('(none)', '(ninguna)', '(aucun)'))],
+        [w('Units passed', 'Unidades aprobadas', 'Unités réussies'), String(prog.length)],
+        [w('Textbook and reading tests passed', 'Exámenes de libro y lecturas aprobados', 'Examens du manuel et des lectures réussis'), String(tests.length)],
+        [w('Certificates', 'Certificados', 'Certificats'), String(certs.length)]
       ];
       var dl = document.createElement('dl');
       rows.forEach(function(r){
@@ -230,7 +232,7 @@ document.getElementById('show-held').addEventListener('click', function(){
       box.textContent = ''; box.appendChild(dl); box.style.display = '';
       note.className = 'note';
     })
-    .catch(function(){ say(note, ES() ? 'No se pudo contactar al seminario.' : 'Could not reach the seminary.', 'warn'); });
+    .catch(function(){ say(note, w('Could not reach the seminary.', 'No se pudo contactar al seminario.', 'Impossible de joindre le séminaire.'), 'warn'); });
 });
 
 /* Delete. Two presses, because this is not recoverable and a mis-tap on a
@@ -240,30 +242,26 @@ document.getElementById('delete-btn').addEventListener('click', function(){
   var btn = this, note = document.getElementById('delete-note');
   if (!armed) {
     armed = true;
-    btn.textContent = ES() ? 'Pulse de nuevo para borrar definitivamente' : 'Press again to delete permanently';
-    say(note, ES() ? 'Esto no se puede deshacer.' : 'This cannot be undone.', 'warn');
+    btn.textContent = w('Press again to delete permanently', 'Pulse de nuevo para borrar definitivamente', 'Appuyez de nouveau pour supprimer définitivement');
+    say(note, w('This cannot be undone.', 'Esto no se puede deshacer.', 'Cette action est irréversible.'), 'warn');
     return;
   }
   btn.disabled = true;
   window.CTS_SYNC.forget().then(function(r){
     if (!r.ok) {
       btn.disabled = false; armed = false;
-      btn.textContent = ES() ? 'Borrar mi registro' : 'Delete my record';
-      say(note, r.error || (ES() ? 'No se pudo borrar.' : 'It could not be deleted.'), 'warn');
+      btn.textContent = w('Delete my record', 'Borrar mi registro', 'Supprimer mon dossier');
+      say(note, r.error || (w('It could not be deleted.', 'No se pudo borrar.', 'La suppression a échoué.')), 'warn');
       return;
     }
-    say(note, ES()
-      ? 'Su registro fue borrado. El seminario ya no guarda nada sobre usted, y este navegador no enviará nada más.'
-      : 'Your record was deleted. The seminary no longer holds anything about you, and this browser will not send anything further.', 'ok');
+    say(note, w('Your record was deleted. The seminary no longer holds anything about you, and this browser will not send anything further.', 'Su registro fue borrado. El seminario ya no guarda nada sobre usted, y este navegador no enviará nada más.', 'Votre dossier a été supprimé. Le séminaire ne conserve plus rien à votre sujet, et ce navigateur n’enverra plus rien.'), 'ok');
     paint();
   });
 });
 
 document.getElementById('rejoin-btn').addEventListener('click', function(){
   window.CTS_SYNC.rejoin();
-  say(document.getElementById('rejoin-note'), ES()
-    ? 'Listo. Su trabajo se resguardará de nuevo a partir de la próxima unidad que apruebe.'
-    : 'Done. Your work will be kept safe again from the next unit you pass.', 'ok');
+  say(document.getElementById('rejoin-note'), w('Done. Your work will be kept safe again from the next unit you pass.', 'Listo. Su trabajo se resguardará de nuevo a partir de la próxima unidad que apruebe.', 'C’est fait. Votre travail sera de nouveau conservé à partir de la prochaine unité que vous réussirez.'), 'ok');
   this.disabled = true;
   setTimeout(paint, 400);
 });
@@ -275,16 +273,14 @@ document.getElementById('wipe-btn').addEventListener('click', function(){
   var btn = this, note = document.getElementById('wipe-note');
   if (!wipeArmed) {
     wipeArmed = true;
-    btn.textContent = ES() ? 'Pulse de nuevo para borrar todo' : 'Press again to erase everything';
-    say(note, ES() ? 'Esto no se puede deshacer y nadie puede recuperarlo.' : 'This cannot be undone and nobody can recover it.', 'warn');
+    btn.textContent = w('Press again to erase everything', 'Pulse de nuevo para borrar todo', 'Appuyez de nouveau pour tout effacer');
+    say(note, w('This cannot be undone and nobody can recover it.', 'Esto no se puede deshacer y nadie puede recuperarlo.', 'Cette action est irréversible et personne ne pourra récupérer ces données.'), 'warn');
     return;
   }
   try { localStorage.clear(); } catch(e) {}
   try { sessionStorage.clear(); } catch(e) {}
   btn.disabled = true;
-  say(note, ES()
-    ? 'Se borró todo en este navegador.'
-    : 'Everything in this browser has been erased.', 'ok');
+  say(note, w('Everything in this browser has been erased.', 'Se borró todo en este navegador.', 'Tout a été effacé dans ce navigateur.'), 'ok');
 });
 </script>
 </body>

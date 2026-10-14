@@ -34,7 +34,7 @@ interface Props {
      both (9 Oct 2026). A box under the greeting on every unit for each, with
      the book or the readings and the test. `requiredFrom` null: a reading
      test not yet in force. */
-  tests?: { page: string; title: { en: string; es: string }; kind: 'textbook' | 'reading'; requiredFrom?: string | null }[];
+  tests?: { page: string; title: { en: string; es: string; fr: string }; kind: 'textbook' | 'reading'; requiredFrom?: string | null }[];
 }
 const { title, bodyClass, styles, scripts, unit, body, pagePrefix, unitNumbers, tests = [] } = Astro.props;
 
@@ -113,15 +113,15 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
         student had chosen (Dr. Cook's beta pass, 30 Sept). Every unit loads
         it here now, once. */}
     <script is:inline src={version('/cts-lang.js')}></script>
-    <a class="btn skip" href="#lesson" style="position:absolute;left:-9999px">
-      <span class="lang-en">Skip to the lesson</span><span class="lang-es">Saltar a la lección</span>
+    <a class="btn skip" href="#lesson" style="position:absolute;left:-9999px" data-cts-chrome>
+      <span class="lang-en">Skip to the lesson</span><span class="lang-es">Saltar a la lección</span><span class="lang-fr">Aller à la leçon</span>
     </a>
 
     <header class="cts-masthead">
       <div class="wrap" set:html={masthead || `<h1>${title}</h1>`} />
     </header>
 
-    <nav class="cts-nav" aria-label="Course units">
+    <nav class="cts-nav" aria-label="Course units" data-cts-chrome>
       <div class="wrap">
         <div class="cts-navmain">
           <ul class="cts-units" id="cts-units">
@@ -138,14 +138,14 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
           </ul>
           <div class="cts-steps">
             {unit.prevHref ? (
-              <a class="btn" href={unit.prevHref}>← <span class="lang-en">Previous</span><span class="lang-es">Anterior</span></a>
+              <a class="btn" href={unit.prevHref}>← <span class="lang-en">Previous</span><span class="lang-es">Anterior</span><span class="lang-fr">Précédent</span></a>
             ) : (
-              <span class="btn" aria-disabled="true" style="opacity:.4">← <span class="lang-en">Previous</span><span class="lang-es">Anterior</span></span>
+              <span class="btn" aria-disabled="true" style="opacity:.4">← <span class="lang-en">Previous</span><span class="lang-es">Anterior</span><span class="lang-fr">Précédent</span></span>
             )}
             {unit.nextHref ? (
-              <a class="btn solid" id="cts-next" href={unit.nextHref}><span class="lang-en">Next</span><span class="lang-es">Siguiente</span> →</a>
+              <a class="btn solid" id="cts-next" href={unit.nextHref}><span class="lang-en">Next</span><span class="lang-es">Siguiente</span><span class="lang-fr">Suivant</span> →</a>
             ) : (
-              <span class="btn solid" aria-disabled="true" style="opacity:.4"><span class="lang-en">Next</span><span class="lang-es">Siguiente</span> →</span>
+              <span class="btn solid" aria-disabled="true" style="opacity:.4"><span class="lang-en">Next</span><span class="lang-es">Siguiente</span><span class="lang-fr">Suivant</span> →</span>
             )}
           </div>
         </div>
@@ -163,20 +163,23 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
           forty-four sets of field names -- which is why cts-engine.js still
           reads five spellings of "name". The engine hides this once a student
           is registered; a student registers once, in any course, for all. */}
-      <section class="reg-form" id="cts-register" hidden>
+      <section class="reg-form" id="cts-register" hidden data-cts-chrome>
         <h2>
           <span class="lang-en">Register once, for every course</span>
           <span class="lang-es">Regístrese una vez, para todos los cursos</span>
+          <span class="lang-fr">Une seule inscription pour tous les cours</span>
         </h2>
         <p>
           <span class="lang-en">Your progress is saved in this browser as you study, and kept with the seminary under your student code, so you can continue on any device. Keep the code private, like a password. A confirmed email is needed only to receive a certificate. <a href="/CTSPrivacy.html">What we keep</a>.</span>
           <span class="lang-es">Su progreso se guarda en este navegador mientras estudia, y en el seminario bajo su código de estudiante, para que pueda continuar en cualquier dispositivo. Mantenga el código en privado, como una contraseña. Solo se necesita un correo confirmado para recibir un certificado. <a href="/CTSPrivacy.html">Lo que guardamos</a>.</span>
+          <span class="lang-fr">Votre progression est enregistrée dans ce navigateur et conservée par le séminaire sous votre code étudiant, pour continuer sur tout appareil. Gardez ce code privé, comme un mot de passe. Une adresse courriel confirmée est nécessaire uniquement pour recevoir un certificat. <a href="/CTSPrivacy.html">Les informations conservées</a>.</span>
         </p>
         <div class="registration-fields">
           <div class="full">
             <label for="regName">
               <span class="lang-en">Full name — as it should appear on your certificate</span>
               <span class="lang-es">Nombre completo — como debe aparecer en su certificado</span>
+              <span class="lang-fr">Nom complet — tel qu’il doit apparaître sur votre certificat</span>
             </label>
             <input id="regName" type="text" autocomplete="name" />
           </div>
@@ -185,21 +188,21 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
             <input id="regEmail" type="email" autocomplete="email" required />
           </div>
           <div>
-            <label for="regCountry"><span class="lang-en">Country</span><span class="lang-es">País</span></label>
+            <label for="regCountry"><span class="lang-en">Country</span><span class="lang-es">País</span><span class="lang-fr">Pays</span></label>
             <input id="regCountry" type="text" autocomplete="country-name" />
           </div>
           <div>
-            <label for="regTrack"><span class="lang-en">Study track</span><span class="lang-es">Trayecto de estudio</span></label>
+            <label for="regTrack"><span class="lang-en">Study track</span><span class="lang-es">Trayecto de estudio</span><span class="lang-fr">Parcours d’études</span></label>
             <select id="regTrack">
-              <option value="cert" data-es="Certificado de Ministerio">Certificate of Ministry</option>
-              <option value="ad" data-es="Asociado en Divinidad">Associate of Divinity</option>
-              <option value="mdiv" data-es="Maestría en Divinidad (M.Div.)">Master of Divinity</option>
-              <option value="thm" data-es="Maestría en Teología (Th.M.)">Master of Theology (Th.M.)</option>
+              <option value="cert" data-es="Certificado de Ministerio" data-fr="Certificat de ministère">Certificate of Ministry</option>
+              <option value="ad" data-es="Asociado en Divinidad" data-fr="Diplôme associé en théologie">Associate of Divinity</option>
+              <option value="mdiv" data-es="Maestría en Divinidad (M.Div.)" data-fr="Master en théologie pastorale (M.Div.)">Master of Divinity</option>
+              <option value="thm" data-es="Maestría en Teología (Th.M.)" data-fr="Master en théologie (Th.M.)">Master of Theology (Th.M.)</option>
             </select>
           </div>
           <div class="full">
             <button class="btn solid" type="button" id="regSave">
-              <span class="lang-en">Save registration</span><span class="lang-es">Guardar registro</span>
+              <span class="lang-en">Save registration</span><span class="lang-es">Guardar registro</span><span class="lang-fr">Enregistrer l’inscription</span>
             </button>
           </div>
         </div>
@@ -207,35 +210,36 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
         <p class="small" style="margin-bottom:0">
           <span class="lang-en">The Certificate track answers the multiple choice. The Associate adds the fill-in-the-blank questions; M.Div. and Th.M. add those and the short-answer questions. 90% of each part is required to pass.</span>
           <span class="lang-es">El trayecto de Certificado responde la opción múltiple. El Asociado añade las preguntas de completar el espacio en blanco; M.Div. y Th.M. añaden esas y las preguntas de desarrollo. Se requiere 90% en cada parte para aprobar.</span>
+          <span class="lang-fr">Le parcours Certificat comprend les questions à choix multiple. Le diplôme associé ajoute les questions à compléter ; les parcours M.Div. et Th.M. ajoutent aussi les questions à réponse courte. Il faut 90 % dans chaque partie pour réussir.</span>
         </p>
       </section>
       <p id="greeting" class="muted" style="margin-top:0"></p>
       {tests.map((t, i) => t.kind === 'reading' ? (
-        <aside class="cts-textbook" id={i === 0 ? 'cts-textbook' : 'cts-required-readings'} data-kind="reading">
+        <aside class="cts-textbook" id={i === 0 ? 'cts-textbook' : 'cts-required-readings'} data-kind="reading" data-cts-chrome>
           <span class="cts-textbook-mark" aria-hidden="true">📖</span>
           <span>
-            <strong><span class="lang-en">Required readings for this course</span><span class="lang-es">Lecturas requeridas de este curso</span></strong>
+            <strong><span class="lang-en">Required readings for this course</span><span class="lang-es">Lecturas requeridas de este curso</span><span class="lang-fr">Lectures obligatoires pour ce cours</span></strong>
             {t.requiredFrom === null
-              ? <Fragment><span class="lang-en"> — a separate test on all five readings for M.Div. and Th.M. after activation; see the test page; open to every student: </span><span class="lang-es"> — un examen separado sobre las cinco lecturas para M.Div. y Th.M. después de su activación; consulte la página del examen; abierto a todos los estudiantes: </span></Fragment>
-              : <Fragment><span class="lang-en"> — required on the M.Div. and Th.M. tracks, open to every student: </span><span class="lang-es"> — obligatorias en los trayectos M.Div. y Th.M., abiertas a todos los estudiantes: </span></Fragment>}
-            <a href={`/${t.page}.html`}><span class="lang-en">{t.title.en}</span><span class="lang-es">{t.title.es}</span></a>
+              ? <Fragment><span class="lang-en"> — a separate test on all five readings for M.Div. and Th.M. after activation; see the test page; open to every student: </span><span class="lang-es"> — un examen separado sobre las cinco lecturas para M.Div. y Th.M. después de su activación; consulte la página del examen; abierto a todos los estudiantes: </span><span class="lang-fr"> — un examen distinct sur les cinq lectures, pour les parcours M.Div. et Th.M., après son activation ; voir la page de l’examen ; ouvert à tous les étudiants : </span></Fragment>
+              : <Fragment><span class="lang-en"> — required on the M.Div. and Th.M. tracks, open to every student: </span><span class="lang-es"> — obligatorias en los trayectos M.Div. y Th.M., abiertas a todos los estudiantes: </span><span class="lang-fr"> — obligatoires pour les parcours M.Div. et Th.M., ouvertes à tous les étudiants : </span></Fragment>}
+            <a href={`/${t.page}.html`}><span class="lang-en">{t.title.en}</span><span class="lang-es">{t.title.es}</span><span class="lang-fr">{t.title.fr}</span></a>
             &nbsp;·&nbsp;
-            <a href={`/${t.page}Test.html`}><span class="lang-en">Required-reading test</span><span class="lang-es">Examen de lecturas requeridas</span></a>
+            <a href={`/${t.page}Test.html`}><span class="lang-en">Required-reading test</span><span class="lang-es">Examen de lecturas requeridas</span><span class="lang-fr">Examen des lectures obligatoires</span></a>
           </span>
         </aside>
       ) : (
-        <aside class="cts-textbook" id={i === 0 ? 'cts-textbook' : 'cts-textbook-2'}>
+        <aside class="cts-textbook" id={i === 0 ? 'cts-textbook' : 'cts-textbook-2'} data-cts-chrome>
           <span class="cts-textbook-mark" aria-hidden="true">📘</span>
           <span>
-            <strong><span class="lang-en">Textbook for this course</span><span class="lang-es">Libro de texto de este curso</span></strong>
+            <strong><span class="lang-en">Textbook for this course</span><span class="lang-es">Libro de texto de este curso</span><span class="lang-fr">Manuel pour ce cours</span></strong>
             {t.requiredFrom === null ? (
-              <><span class="lang-en"> — Master’s test after activation; see the test page: </span><span class="lang-es"> — examen de maestría después de su activación; consulte la página del examen: </span></>
+              <><span class="lang-en"> — Master’s test after activation; see the test page: </span><span class="lang-es"> — examen de maestría después de su activación; consulte la página del examen: </span><span class="lang-fr"> — examen de master après son activation ; voir la page de l’examen : </span></>
             ) : (
-              <><span class="lang-en"> — required reading on the M.Div. and Th.M. tracks: </span><span class="lang-es"> — lectura obligatoria en los trayectos M.Div. y Th.M.: </span></>
+              <><span class="lang-en"> — required reading on the M.Div. and Th.M. tracks: </span><span class="lang-es"> — lectura obligatoria en los trayectos M.Div. y Th.M.: </span><span class="lang-fr"> — lecture obligatoire pour les parcours M.Div. et Th.M. : </span></>
             )}
-            <a href={`/${t.page}.html`}><span class="lang-en">{t.title.en}</span><span class="lang-es">{t.title.es}</span></a>
+            <a href={`/${t.page}.html`}><span class="lang-en">{t.title.en}</span><span class="lang-es">{t.title.es}</span><span class="lang-fr">{t.title.fr}</span></a>
             &nbsp;·&nbsp;
-            <a href={`/${t.page}Test.html`}><span class="lang-en">Textbook test</span><span class="lang-es">Examen del libro</span></a>
+            <a href={`/${t.page}Test.html`}><span class="lang-en">Textbook test</span><span class="lang-es">Examen del libro</span><span class="lang-fr">Examen du manuel</span></a>
           </span>
         </aside>
       ))}
@@ -243,18 +247,19 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
       <Fragment set:html={content} />
     </main>
 
-    <footer class="cts-foot">
+    <footer class="cts-foot" data-cts-chrome>
       <div class="wrap">
         <span>
           <span class="lang-en">Chapala Theological Seminary · Free, bilingual theological training.</span>
           <span class="lang-es">Seminario Teológico de Chapala · Formación teológica gratuita y bilingüe.</span>
+          <span class="lang-fr">Séminaire théologique de Chapala · Formation théologique gratuite en plusieurs langues.</span>
         </span>
         <span>
-          <a href="/index.html#catalog"><span class="lang-en">All courses</span><span class="lang-es">Todos los cursos</span></a>
+          <a href="/index.html#catalog"><span class="lang-en">All courses</span><span class="lang-es">Todos los cursos</span><span class="lang-fr">Tous les cours</span></a>
           &nbsp;·&nbsp;
-          <a href="/cts-backup.html"><span class="lang-en">Save my progress</span><span class="lang-es">Guardar mi progreso</span></a>
+          <a href="/cts-backup.html"><span class="lang-en">Save my progress</span><span class="lang-es">Guardar mi progreso</span><span class="lang-fr">Enregistrer ma progression</span></a>
           &nbsp;&middot;&nbsp;
-          <a href="/CTSPrivacy.html"><span class="lang-en">Your information</span><span class="lang-es">Su información</span></a>
+          <a href="/CTSPrivacy.html"><span class="lang-en">Your information</span><span class="lang-es">Su información</span><span class="lang-fr">Vos informations</span></a>
         </span>
       </div>
     </footer>

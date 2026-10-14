@@ -20,7 +20,10 @@ body[data-page-lang]{display:block!important}
    generated page language remains authoritative, including French fallback. */
 body[data-page-lang="en"] :is(.lang-es,.es-only,.block-es,.teach-es,.es-lbl){display:none!important}
 body[data-page-lang="es"] :is(.lang-en,.en-only,.block-en,.teach-en,.en-lbl){display:none!important}
-body[data-page-lang="fr"] :is(.lang-es,.es-only,.block-es,.teach-es,.es-lbl){display:none!important}
+/* Scripts still write some Spanish beside the English (class="es"); a French
+   reader sees the English until that script has French of its own. */
+body[data-page-lang="fr"] :is(.lang-es,.es-only,.block-es,.teach-es,.es-lbl,.pane.es,span.es,div.es,section.es,p.es,
+  #teach-es,#sa-note-es,#sa-badge-es,#titleEs,#t-title-es){display:none!important}
 
 /* Question sources belong directly below the translated wording. */
 [data-show-source="true"] .question .cts-text-pair:has(>.cts-source),

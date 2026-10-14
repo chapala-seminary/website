@@ -6,6 +6,7 @@
  * page, so this one can be searched freely. */
 import { getCollection } from 'astro:content';
 import Textbook from '../layouts/Textbook.astro';
+import { frBookTitle } from '../lib/french-titles.ts';
 
 export async function getStaticPaths() {
   const books = await getCollection('textbooks');
@@ -33,33 +34,34 @@ const pdf = ('pdf' in book.files ? book.files.pdf : undefined);
 // assigned readings (excerpts or whole chapters): the body of this page, in both languages
 const excerpts = ('excerpts' in book.files);
 ---
-<Textbook kind="book" book={book} course={course} accent={accent}>
-  <section class="card tb-about">
-    <h2><span class="lang-en">About this textbook</span><span class="lang-es">Sobre este libro de texto</span></h2>
+<Textbook kind="book" book={{ ...book, title: { ...book.title, fr: frBookTitle(book.title.en) } }} course={course} accent={accent}>
+  <section class="card tb-about" data-cts-chrome>
+    <h2><span class="lang-en">About this textbook</span><span class="lang-es">Sobre este libro de texto</span><span class="lang-fr">À propos de ce manuel</span></h2>
     <p hidden={!!web || excerpts}>
       <span class="lang-en">This is the textbook for <a href={`/${course.entry}`}>{course.title.en}</a>. It is required reading for students on the M.Div. and Th.M. tracks, and open to everyone. Read it here in English or Spanish, or download it as a PDF. When you have read it, take the textbook test: twenty fill-in-the-blank questions, drawn from forty, on a page of its own.</span>
       <span class="lang-es">Este es el libro de texto del curso <a href={`/${course.entry}`}>{course.title.es}</a>. Es lectura obligatoria para los estudiantes de los trayectos M.Div. y Th.M., y está abierto a todos. Léalo aquí en inglés o en español, o descárguelo en PDF. Cuando lo haya leído, presente el examen del libro: veinte preguntas para completar, tomadas de cuarenta, en una página aparte.</span>
+      <span class="lang-fr">Voici le manuel du cours <a href={`/${course.entry}`}>{course.title.fr}</a>. Sa lecture est obligatoire pour les étudiants des parcours M.Div. et Th.M., et il est ouvert à tous. Lisez-le ici en anglais ou en espagnol, ou téléchargez-le au format PDF. Après l’avoir lu, passez l’examen du manuel : vingt questions à compléter, tirées parmi quarante, sur une page à part.</span>
     </p>
     {(web || excerpts) && <p>
       {web
-        ? <><span class="lang-en">Read the original English book or the CTS Spanish translation of the assigned chapters on the seminary website.</span><span class="lang-es">Lea el libro original completo en inglés o la traducción del STC de los capítulos asignados en español dentro del sitio del seminario.</span></>
-        : <><span class="lang-en">The assigned readings from this book are on this page, in English and in a CTS Spanish translation.</span><span class="lang-es">Las lecturas asignadas de este libro están en esta página, en inglés y en una traducción al español del STC.</span></>}
+        ? <><span class="lang-en">Read the original English book or the CTS Spanish translation of the assigned chapters on the seminary website.</span><span class="lang-es">Lea el libro original completo en inglés o la traducción del STC de los capítulos asignados en español dentro del sitio del seminario.</span><span class="lang-fr">Lisez sur le site du séminaire le livre original complet en anglais, ou la traduction espagnole des chapitres assignés réalisée par CTS.</span></>
+        : <><span class="lang-en">The assigned readings from this book are on this page, in English and in a CTS Spanish translation.</span><span class="lang-es">Las lecturas asignadas de este libro están en esta página, en inglés y en una traducción al español del STC.</span><span class="lang-fr">Les lectures assignées de ce livre se trouvent sur cette page, en anglais et dans une traduction espagnole réalisée par CTS.</span></>}
       {' '}
       {book.requiredFrom
-        ? <><span class="lang-en">Students on the M.Div. and Th.M. tracks must read them and pass the textbook test (twenty multiple-choice questions) to complete the course; it is open to everyone.</span><span class="lang-es">Los estudiantes de los trayectos M.Div. y Th.M. deben leerlas y aprobar el examen del libro (veinte preguntas de opción múltiple) para completar el curso; está abierto a todos.</span></>
-        : <><span class="lang-en">This textbook examination is optional for now; it does not delay course completion.</span><span class="lang-es">Este examen es opcional por ahora y no retrasa la finalización del curso.</span></>}
+        ? <><span class="lang-en">Students on the M.Div. and Th.M. tracks must read them and pass the textbook test (twenty multiple-choice questions) to complete the course; it is open to everyone.</span><span class="lang-es">Los estudiantes de los trayectos M.Div. y Th.M. deben leerlas y aprobar el examen del libro (veinte preguntas de opción múltiple) para completar el curso; está abierto a todos.</span><span class="lang-fr">Les étudiants des parcours M.Div. et Th.M. doivent les lire et réussir l’examen du manuel (vingt questions à choix multiple) pour terminer le cours ; il est ouvert à tous.</span></>
+        : <><span class="lang-en">This textbook examination is optional for now; it does not delay course completion.</span><span class="lang-es">Este examen es opcional por ahora y no retrasa la finalización del curso.</span><span class="lang-fr">Cet examen du manuel est facultatif pour le moment ; il ne retarde pas la fin du cours.</span></>}
     </p>}
     <div class="actions tb-actions">
-      <a class="btn solid" href={`/${book.page}Test.html`}><span class="lang-en">Take the textbook test</span><span class="lang-es">Presentar el examen del libro</span> →</a>
+      <a class="btn solid" href={`/${book.page}Test.html`}><span class="lang-en">Take the textbook test</span><span class="lang-es">Presentar el examen del libro</span><span class="lang-fr">Passer l’examen du manuel</span> →</a>
       {web ? (
         <>
-          <a class="btn" href={`/${web.en}`}><span class="lang-en">Full book (English)</span><span class="lang-es">Libro completo (inglés)</span></a>
-          <a class="btn" href={`/${web.es}`}><span class="lang-en">Assigned chapters (Spanish)</span><span class="lang-es">Capítulos asignados (español)</span></a>
+          <a class="btn" href={`/${web.en}`}><span class="lang-en">Full book (English)</span><span class="lang-es">Libro completo (inglés)</span><span class="lang-fr">Livre complet (anglais)</span></a>
+          <a class="btn" href={`/${web.es}`}><span class="lang-en">Assigned chapters (Spanish)</span><span class="lang-es">Capítulos asignados (español)</span><span class="lang-fr">Chapitres assignés (espagnol)</span></a>
         </>
       ) : excerpts ? null : (
         <>
-          <a class="btn" href={`/${pdf?.en}`} download><span class="lang-en">PDF (English)</span><span class="lang-es">PDF (inglés)</span></a>
-          <a class="btn" href={`/${pdf?.es}`} download><span class="lang-en">PDF (Spanish)</span><span class="lang-es">PDF (español)</span></a>
+          <a class="btn" href={`/${pdf?.en}`} download><span class="lang-en">PDF (English)</span><span class="lang-es">PDF (inglés)</span><span class="lang-fr">PDF (anglais)</span></a>
+          <a class="btn" href={`/${pdf?.es}`} download><span class="lang-en">PDF (Spanish)</span><span class="lang-es">PDF (español)</span><span class="lang-fr">PDF (espagnol)</span></a>
         </>
       )}
     </div>
@@ -67,7 +69,7 @@ const excerpts = ('excerpts' in book.files);
   </section>
 
   <nav class="card tb-toc" aria-label="Contents">
-    <h2><span class="lang-en">Contents</span><span class="lang-es">Contenido</span></h2>
+    <h2 data-cts-chrome><span class="lang-en">Contents</span><span class="lang-es">Contenido</span><span class="lang-fr">Sommaire</span></h2>
     <ol class="lang-en">
       {contents.en.map((c) => <li class={c.level === 'h3' ? 'l3' : 'l2'}><a href={`#${c.id}`}>{c.text}</a></li>)}
     </ol>
@@ -79,7 +81,7 @@ const excerpts = ('excerpts' in book.files);
   <article class="card tb-book lang-en" lang="en" set:html={book.body.en} />
   <article class="card tb-book lang-es" lang="es" set:html={book.body.es} />
 
-  <p class="small muted tb-edition">
-      {excerpts ? <><span class="lang-en">Assigned readings from a historical public-domain edition ({book.edition}); the Spanish is a CTS translation.</span><span class="lang-es">Lecturas asignadas de una edición histórica de dominio público ({book.edition}); el español es una traducción del STC.</span></> : web ? <><span class="lang-en">Historical public-domain edition; the CTS Spanish assigned chapters are linked above.</span><span class="lang-es">Edición histórica de dominio público; arriba se enlazan los capítulos asignados traducidos por el STC.</span></> : <><span class="lang-en">CTS Textbook Edition {book.edition}. The Word file is the master; this page was made from it.</span><span class="lang-es">Edición de libro de texto CTS {book.edition}. El archivo de Word es el original; esta página se hizo a partir de él.</span></>}
+  <p class="small muted tb-edition" data-cts-chrome>
+      {excerpts ? <><span class="lang-en">Assigned readings from a historical public-domain edition ({book.edition}); the Spanish is a CTS translation.</span><span class="lang-es">Lecturas asignadas de una edición histórica de dominio público ({book.edition}); el español es una traducción del STC.</span><span class="lang-fr">Lectures assignées tirées d’une édition historique du domaine public ({book.edition}) ; l’espagnol est une traduction de CTS.</span></> : web ? <><span class="lang-en">Historical public-domain edition; the CTS Spanish assigned chapters are linked above.</span><span class="lang-es">Edición histórica de dominio público; arriba se enlazan los capítulos asignados traducidos por el STC.</span><span class="lang-fr">Édition historique du domaine public ; les chapitres assignés traduits en espagnol par CTS sont indiqués ci-dessus.</span></> : <><span class="lang-en">CTS Textbook Edition {book.edition}. The Word file is the master; this page was made from it.</span><span class="lang-es">Edición de libro de texto CTS {book.edition}. El archivo de Word es el original; esta página se hizo a partir de él.</span><span class="lang-fr">Édition CTS du manuel {book.edition}. Le fichier Word fait foi ; cette page a été produite à partir de lui.</span></>}
   </p>
 </Textbook>
