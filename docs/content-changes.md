@@ -1368,3 +1368,12 @@ Regression expectations are updated only for the deliberately changed
 paragraphs, keyword fingerprint and affected rendered elements, with the
 previous beta build used as the comparison. This does not implement server
 grading or authorize production publication; French remains in review.
+
+
+## 15 October 2026 — Home header navigation
+
+At Robert's request, Course Catalog now sits in the sticky home header beside
+the language selectors, with a wrapping layout on phones. The student-sync
+script no longer inserts the master's requirements paragraph above every page.
+Requirement dates still load and completion checks are unchanged; program and
+course pages retain their existing requirement explanations.

@@ -203,12 +203,6 @@
       if (typeof date === 'string' && !isNaN(Date.parse(date))) dates[slug] = date;
     });
     set('cts_required_from', JSON.stringify(dates));
-    var notice = document.getElementById('cts-master-requirements');
-    if (Object.keys(dates).length) {
-      if (!notice) { notice = document.createElement('aside'); notice.id = 'cts-master-requirements'; notice.className = 'card'; document.body.prepend(notice); }
-      var words = { en: 'M.Div. and Th.M.: complete the course units, the textbook test and the separate required-reading test. Each test needs 18 correct answers out of 20. Valid master’s completions recorded before activation remain valid. Certificate and Associate students do not need either test. Honors reading is optional and does not replace the tests.', es: 'M.Div. y Th.M.: complete las unidades, el examen del libro y el examen separado de lecturas requeridas. Cada examen exige 18 respuestas correctas de 20. Las finalizaciones de maestría válidas registradas antes de la activación siguen siendo válidas. Certificado y Asociado no necesitan estos exámenes. La lectura para honores es opcional y no sustituye los exámenes.', fr: 'M.Div. et Th.M.\u00a0: terminez les unités du cours, l’examen du manuel et l’examen distinct des lectures obligatoires. Chaque examen exige 18 bonnes réponses sur 20. Les validations de niveau master enregistrées avant l’activation restent acquises. Les parcours Certificat et diplôme associé n’exigent pas ces examens. La lecture pour la mention est facultative et ne remplace pas les examens.' };
-      notice.innerHTML = window.CTSLanguage ? window.CTSLanguage.bi(words) : words.en;
-    } else if (notice) notice.remove();
     document.dispatchEvent(new CustomEvent('cts-sync-applied'));
   }
   function apply(state) {

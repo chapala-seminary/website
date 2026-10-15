@@ -66,7 +66,7 @@ try{
  browser=await chromium.launch(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{});
  const page=await browser.newPage();await page.goto(base+'/CTSUnit1.html?cts_lang=en');
  await page.waitForFunction(()=>Object.keys(JSON.parse(localStorage.getItem('cts_required_from')||'{}')).length===79);
- check(await page.locator('#cts-master-requirements').isVisible(),'unregistered reader sees the activated requirement notice');
+ check(await page.locator('#cts-master-requirements').count()===0,'activation policy loads without injecting a page-top notice');
  await page.evaluate(()=>window.CTS_SYNC.restore('CTS-TEST-0000-0011'));
  check(await page.evaluate(()=>!!localStorage.getItem('cts_textbook_otsreadings_exempt')),'older exemption follows recovery to another browser');
  await browser.close();browser=null;
