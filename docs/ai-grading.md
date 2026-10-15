@@ -48,7 +48,7 @@ Indexes are 0-based, in array order.
 | Unit files `src/content/units/<Prefix>/<n>.json` | `u:<Prefix>/<n>/<mc\|fill\|sa>/<i>` |
 | Textbook banks `src/content/textbooks/<slug>.json` | `tb:<slug>/<kind>/<i>` |
 | Reading banks `src/content/readings/<slug>.json` | `rd:<slug>/<kind>/<i>` |
-| Single-page courses | `sp:<page>/<kind>/<i>`, where `<page>` is the HTML file name without `.html` |
+| Single-page courses | `sp:<page>/<kind>/<i>`; `<page>` is chosen per graded section (section 15) |
 
 A qid is stable for as long as the source array is not reordered. The sync
 (§4) records `content_hash`, so a changed question gets a new hash.
@@ -103,10 +103,7 @@ Every short-answer item gets:
     `tb:<slug>/meta/0` (`rd:` likewise): `{draw, pass, perReading, perChapter,
     n, code, kind, page}`. Its fill rows carry `group` (the reading or
     chapter number) in `data_json`, which the draw uses. A single-page course
-    gets `sp:<page>/meta/0` with `{code}`, the completion code its page
-    records; `worker/grading/attempts.js` `creditPass()` and the
-    `singlePageRows()` extension point in the sync tool are where the
-    single-page agent plugs in.
+    gets `sp:<page>/meta/0` (section 15 says what is in it).
 - **Build check:** `tools/verify-no-keys.mjs` fails a `live` build if any page
   in `dist/` contains:
   - an MC `answer` index;
@@ -585,9 +582,8 @@ that breaks the agreement fails the suite.
   `/api/shadow`. Browser tests written for the old engine run against
   `dist-shadow/` (`npm run build:shadow`, served beside the Worker by
   `test/shadow-server.mjs`).
-- **Not yet converted** (plan step 6): the single-page courses still load their
-  keys from `public/assets/js/fill/`; `cts-fill.js` already has the live mode
-  they will use (`mount({ live: { attemptId } })`).
+- **The single-page courses** (Counseling, Narrative and WiseSpeak Preaching,
+  Ethics) are converted: section 15.
 
 ## 13. Running the eval
 
@@ -686,3 +682,91 @@ gpt-oss rows as a floor. The report of a real run uses the token counts the API
 returns, not these estimates. Re-check the prices at
 developers.cloudflare.com/workers-ai/platform/pricing before relying on the
 dollar figure.
+
+## 15. The courses on engines of their own (plan step 6)
+
+Four courses are not unit-engine courses: **Counseling**, **Narrative
+Preaching**, **WiseSpeak Preaching** (one page each, a test per unit section)
+and **Pastoral & Christian Ethics** (a page per unit). Their questions, keys and
+grading are inline in the pages in `public/`, so they follow the rules of this
+contract in a different way. The **Genesis Intensive is not one of them**: its
+twelve units are unit-engine pages (`CTSGenesisUnitN.html`, `u:CTSGenesis/N`,
+rubrics in `src/content/units`). `public/cts-genesis-engine.js` is loaded only by
+`CTSGenesisCertificate.html` and reads progress; it grades nothing and holds no
+question.
+
+**Scopes and ids.** One scope per graded section, `sp:<page>`:
+
+| Course | `<page>` | Sections |
+|---|---|---|
+| Ethics | `ethics_unit01` ... `ethics_unit10` | one per page |
+| Counseling | `CTSCounseling-u0` ... `-u10` | 11 units on `CTSCounseling.html` |
+| Narrative Preaching | `CTS_Narrative_Preaching-u1` ... `-u8` | 8 units on `CTS_Narrative_Preaching.html` |
+| WiseSpeak Preaching | `CTS_WiseSpeak_Preaching-u1` ... `-u10` | 10 units on `CTS_WiseSpeak_Preaching.html` |
+
+Every section has 20 multiple-choice questions, 10 fill-ins and 10 short answers
+(essays), ids `sp:<page>/mc|fill|sa/<i>` in page order, plus a meta row
+`sp:<page>/meta/0` = `{code, course, unit, units, page, file, lockMinutes?}`.
+The keys are read from the pages as they are (`tools/single-pages-lib.mjs`), the
+French from the drafts in `_review/french`, so the data was not moved and shadow
+pages are unchanged. The course table (`code`, the name its units are recorded
+under, the unit numbers, any lock rule) is one file, `worker/grading/singles.js`:
+
+| Code | Recorded as (`unit_progress.course`) | Units | Browser state key |
+|---|---|---|---|
+| `COUNSELING` | `counseling` | 0-10 | `cts_drakeford_state` |
+| `STORYTEL` | `storytel` | 1-8 | `cts_storytel_state` |
+| `WISESPEAK` | `wisespeak` | 1-10 | `cts_wisespeak_state` |
+| `ETHICS` | `ethics` | 1-10 | `cts_ethics_progress` |
+
+`cts-sync.js` now sends the first three's passed units too (its `LEGACY` table),
+so progress made before the switch is on the server when it comes.
+
+**Rubrics.** `src/data/single-rubrics/<course>/<unit>.json`, an array of ten
+rubrics in section order (counts: Counseling 110, Narrative 80, WiseSpeak 100,
+Ethics 100), written by `tools/rubric-guidelines.md` from each lesson.
+`tools/verify-rubrics.mjs` checks them with the unit courses'. `tools/single-rubric-dump.mjs <course> <unit>`
+prints a unit's lesson, questions and model answers for whoever revises them.
+For Narrative and WiseSpeak the page's `rubricEn` text (what a strong answer
+holds) is the model answer.
+
+**Thresholds** are the engines' own, and are the server's: multiple choice
+90% (18 of 20), fill-ins 9 of 10, short answers 9 of 10; Certificate: multiple
+choice; Associate: and fill-ins; Th.M./M.Div.: and short answers. What changes is
+how a short answer is judged: at least 15 words (was 100 or 120 characters) and
+the AI against the rubric (was 3 keywords). Lock after a failed unit: 15 minutes
+on the master's tracks and 2 elsewhere (Counseling, Ethics, the site's rule),
+**15 minutes on every track** for Narrative and WiseSpeak (their own
+`LOCKOUT_MINUTES`, kept as `meta.lockMinutes`). Differences from the old
+engines, accepted as the unit engine's rules: a multiple-choice pass is banked
+across attempts on every course (Counseling, Narrative and WiseSpeak locked and
+redid everything); the first answer to a question stands in an attempt.
+
+**Credit.** A pass writes `unit_progress` (`source = 'server'`) under the
+course's name above. The course completes when all its units are recorded and,
+on the master's tracks, its required tests (`textbook_results`); the completion is
+`course_completions` (`source = 'server'`, the track). A textbook or reading test
+passed after the last unit completes it (`completeCourseIfDone` ->
+`completeSingleIfDone`). `catalog.json` does not list these courses (they have
+no `units` there) and is unchanged.
+
+**The pages.** `tools/single-pages.mjs` runs when the build finishes, after the
+language pages, on `X.html`, `es/X.html` and `fr/X.html` of the 13 pages:
+
+- *live*: the unit data in each page keeps only wording (a question, its
+  options); the French draft literals lose `why`, `model`, `kw`, `answer`,
+  `accept`; `assets/js/fill/<course>.js` is rewritten with sentences and ids and
+  no answer; `cts-grading.js` and `cts-single-live.js` take the place of the
+  page's grading. Everything else on the page, and every localStorage key, is
+  the page's own; the live script mirrors the server's outcome into them. The
+  attempt starts on first use of a section, not at page load. Ethics units 2-10
+  gain `cts-sync.js`, which only unit 1 loaded.
+- *shadow*: the page is untouched; `cts-shadow.js` and `cts-shadow-single.js`
+  post each submitted unit (`sp:` ids) to `/api/shadow`.
+
+`tools/verify-no-keys.mjs` fails a live build if any of the 39 pages (or the fill
+data) carries a key field, a French key, or a model answer or explanation of 40
+characters or more in a script. Left on the pages on purpose: the WiseSpeak
+practice exercises (`U1_ANSWERS`, `U7_FILL`), which never count for credit.
+`test/single-live.test.mjs` runs Genesis, Ethics, Counseling, Narrative and
+WiseSpeak against the real Worker; `test/shadow-mode.test.mjs` the shadow pages.

@@ -23,9 +23,10 @@
  * columns, so it is not safe to run twice; with --apply-migration this tool
  * applies it only if the grading_keys table is missing (deploy:beta does).
  *
- * EXTENSION POINT: the single-page courses (Counseling, Narrative Preaching,
- * WiseSpeak Preaching, Ethics) are `sp:<page>/<kind>/<i>`; their keys would be
- * added in tools/grading-keys-lib.mjs. None yet.
+ * The single-page courses (Counseling, Narrative Preaching, WiseSpeak
+ * Preaching, Ethics) are `sp:<page>/<kind>/<i>` and a meta row
+ * `sp:<page>/meta/0`; tools/grading-keys-lib.mjs reads them from the pages
+ * (tools/single-pages-lib.mjs) and the rubrics from src/data/single-rubrics.
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -41,7 +42,7 @@ const opt = (n, d) => { const i = argv.indexOf(n); return i >= 0 ? argv[i + 1] :
 const ENV = opt('--env', 'local');
 const DRY = flag('--dry-run');
 const STATE = opt('--state', '.wrangler-local');
-const MANAGED = ['u:', 'tb:', 'rd:'];
+const MANAGED = ['u:', 'tb:', 'rd:', 'sp:'];
 const CHUNK_BYTES = 3 * 1024 * 1024;
 
 const jsonc = (f) => JSON.parse(fs.readFileSync(f, 'utf8').replace(/^\s*\/\/.*$/gm, ''));
@@ -51,10 +52,6 @@ const sql = (v) => (v == null ? 'NULL' : typeof v === 'number' ? String(v) : `'$
 /* ---- the questions -------------------------------------------------------- */
 
 const rows = buildKeyRows({ root: '.', warn: (m) => console.warn(m) });   // tools/grading-keys-lib.mjs, shared with the grader eval
-/* EXTENSION POINT (the single-page agent): keys for sp:<page>/<kind>/<i> and a
-   meta row sp:<page>/meta/0 with { code } (the completion the page records).
-   worker/grading/attempts.js creditPass() reads that meta. Add them to buildKeyRows() in
-   tools/grading-keys-lib.mjs. */
 console.log(`${rows.size} questions in the content`);
 
 /* ---- the database --------------------------------------------------------- */

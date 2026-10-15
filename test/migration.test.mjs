@@ -48,7 +48,9 @@ function oldBrowser({ name, track, goal, recorded, unrecorded, mdiv = [] }) {
   for (const code of [...recorded, ...unrecorded]) {
     if (code === 'WISESPEAK') {                        // Preaching as it was: nine units, before unit 7 was added
       const ws = {}; for (let i = 1; i <= 9; i++) ws[i] = { passed: true };
-      seed.cts_wisespeak_state = JSON.stringify(ws); continue;
+      seed.cts_wisespeak_state = JSON.stringify(ws);
+      units.wisespeak = 9;                             // its state map is synced as units now (cts-sync.js LEGACY)
+      continue;
     }
     const slug = slugOf[code]; if (!slug) continue;    // a single-page course: its code is the record
     const pr = {}; for (const u of catalog.courses[slug].units) pr[`unit${u}`] = true;

@@ -14,6 +14,7 @@ import { exactFill, normAnswer, wordCount, copiedOnly } from './text.js';
 import { counts, requirements, evaluate, lockKind, lockMinutes, need, looksLikeInstruction,
   MIN_SA_WORDS, MAX_FILL_CHARS, MAX_SA_CHARS, HOURLY_CAP } from './rules.js';
 import { gradeBatch, modelsOf } from './model.js';
+import { SINGLES } from './singles.js';
 
 export const nowIso = () => new Date().toISOString();
 import { pickText } from './prompt.js';
@@ -191,6 +192,9 @@ export async function standing(env, attempt, scope) {
  *  the course is complete and whether this call made it so. */
 export async function completeCourseIfDone(env, student, code, level) {
   const c = resolveCourse(code);
+  // A single-page course (Counseling, Narrative and WiseSpeak Preaching, Ethics) keeps its
+  // units under its own name in unit_progress and has no entry in catalog.courses
+  if (c && !c.units && SINGLES[c.code]) return await completeSingleIfDone(env, student, c.code, level);
   if (!c || !c.units) return { done: false, newly: false };
   const units = ((await env.DB.prepare('SELECT unit FROM unit_progress WHERE student_id = ? AND course = ?').bind(student.id, c.slug).all()).results ?? []).map((r) => r.unit);
   const tbs = ((await env.DB.prepare('SELECT textbook FROM textbook_results WHERE student_id = ?').bind(student.id).all()).results ?? []).map((r) => r.textbook);
@@ -199,6 +203,19 @@ export async function completeCourseIfDone(env, student, code, level) {
     return { done: held.some((r) => r.code === c.code), newly: false };
   }
   return await writeCompletion(env, student, c.code, level, held);
+}
+
+/** The same check for a single-page course: every one of its units passed (unit_progress
+ *  under the course's own name) and, on the master's tracks, its required tests. */
+export async function completeSingleIfDone(env, student, code, level) {
+  const s = SINGLES[code];
+  const units = ((await env.DB.prepare('SELECT unit FROM unit_progress WHERE student_id = ? AND course = ?').bind(student.id, s.course).all()).results ?? []).map((r) => r.unit);
+  const held = (await env.DB.prepare('SELECT code, track, completed_at FROM course_completions WHERE student_id = ?').bind(student.id).all()).results ?? [];
+  const have = new Set(units.map(Number));
+  if (s.units.some((u) => !have.has(u))) return { done: held.some((r) => r.code === code), newly: false };
+  const tbs = ((await env.DB.prepare('SELECT textbook FROM textbook_results WHERE student_id = ?').bind(student.id).all()).results ?? []).map((r) => r.textbook);
+  if (textbookShortfall(code, level, tbs, testContext(env, held))) return { done: held.some((r) => r.code === code), newly: false };
+  return await writeCompletion(env, student, code, level, held);
 }
 
 export async function writeCompletion(env, student, code, level, held) {
@@ -237,16 +254,18 @@ async function creditPass(env, attempt, scope) {
     return { unitDone: true, courseDone: c.done, courseNew: c.newly };
   }
   if (scope.type === 'sp') {
-    // Single-page courses keep no units: passing the page completes the course.
-    // EXTENSION POINT (the single-page agent): the page's completion code is in
-    // its meta row (sp:<page>/meta/0, { code }).
-    const code = scope.meta && scope.meta.code;
-    if (!code) return { unitDone: true, courseDone: false };
-    const held = (await env.DB.prepare('SELECT code, track, completed_at FROM course_completions WHERE student_id = ?').bind(student.id).all()).results ?? [];
-    const tbs = ((await env.DB.prepare('SELECT textbook FROM textbook_results WHERE student_id = ?').bind(student.id).all()).results ?? []).map((r) => r.textbook);
-    if (textbookShortfall(code, attempt.track, tbs, testContext(env, held))) return { unitDone: true, courseDone: false };
-    const c = await writeCompletion(env, student, code, attempt.track, held);
-    return { unitDone: true, courseDone: true, courseNew: c.newly };
+    // A single-page course: each unit is a scope of its own. A pass is recorded in unit_progress
+    // under the course's name, and the course completes when its last unit (and, on the master's
+    // tracks, its required tests) is in. The meta row (sp:<page>/meta/0) names the code and unit.
+    const m = scope.meta || {};
+    if (m.course && m.unit != null) {
+      await env.DB.prepare(
+        `INSERT INTO unit_progress (student_id, course, unit, completed_at, source) VALUES (?, ?, ?, ?, 'server')
+         ON CONFLICT(student_id, course, unit) DO NOTHING`).bind(student.id, m.course, m.unit, t).run();
+    }
+    if (!m.code) return { unitDone: true, courseDone: false };
+    const c = SINGLES[m.code] ? await completeSingleIfDone(env, student, m.code, attempt.track) : { done: false, newly: false };
+    return { unitDone: true, courseDone: c.done, courseNew: c.newly };
   }
   return { unitDone: false, courseDone: false };
 }
@@ -256,6 +275,8 @@ async function alreadyCredited(env, attempt, scope) {
     return !!(await env.DB.prepare('SELECT 1 FROM unit_progress WHERE student_id = ? AND course = ? AND unit = ?').bind(attempt.student_id, scope.slug, scope.unit).first());
   if (scope.type === 'tb' || scope.type === 'rd')
     return !!(await env.DB.prepare('SELECT 1 FROM textbook_results WHERE student_id = ? AND textbook = ?').bind(attempt.student_id, scope.testSlug).first());
+  if (scope.type === 'sp' && scope.meta && scope.meta.course && scope.meta.unit != null)
+    return !!(await env.DB.prepare('SELECT 1 FROM unit_progress WHERE student_id = ? AND course = ? AND unit = ?').bind(attempt.student_id, scope.meta.course, scope.meta.unit).first());
   if (scope.type === 'sp' && scope.meta && scope.meta.code)
     return !!(await env.DB.prepare('SELECT 1 FROM course_completions WHERE student_id = ? AND code = ?').bind(attempt.student_id, scope.meta.code).first());
   return false;
@@ -297,8 +318,10 @@ export async function settle(env, attemptId, { submitting = false } = {}) {
       // Practising a test already passed never locks anyone out.
       if (!(await alreadyCredited(env, attempt, scope))) {
         const from = submitting ? Date.parse(t) : Date.parse(attempt.submitted_at || t);
-        lockedUntil = new Date(from + lockMinutes(attempt.track) * 60000).toISOString();
-        lockK = scope.type === 'unit' ? lockKind(st.verdict.mcOK) : 'full';
+        // a single-page course may set its own wait (Narrative and WiseSpeak Preaching: 15 minutes on every track)
+        const wait = scope.type === 'sp' && scope.meta?.lockMinutes ? scope.meta.lockMinutes : lockMinutes(attempt.track);
+        lockedUntil = new Date(from + wait * 60000).toISOString();
+        lockK = scope.type === 'unit' || scope.type === 'sp' ? lockKind(st.verdict.mcOK) : 'full';
       }
     }
   }

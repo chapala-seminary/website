@@ -258,6 +258,7 @@
         if (!it || !it.qid || !it.verdict) return;
         for (var i = 0; i < n; i++) if (qs[i].qid === it.qid) {
           st.fillChecked[i] = true;
+          if (it.answerText != null && !String(st.fillAnswers[i] || "").trim()) st.fillAnswers[i] = it.answerText;
           res[it.qid] = { verdict: it.verdict, feedback: it.feedback || "", gradeId: it.gradeId != null ? it.gradeId : it.grade_id != null ? it.grade_id : null,
                           by: it.gradedBy || it.graded_by || null, answer: it.correctAnswer != null ? it.correctAnswer : null };
         }
@@ -265,6 +266,14 @@
     }
     function liveCheck(i, value) {
       var q = qs[i];
+      /* A page that starts its attempt on first use (the single-page courses) gives `ensure`:
+         the attempt first, then the check. */
+      if (LV.ensure && !LV.attemptId() && !busy[q.qid]) {
+        if (!String(value || "").trim()) return;
+        busy[q.qid] = true; st.fillAnswers[i] = value; o.save(); render();
+        LV.ensure().then(function (ok) { delete busy[q.qid]; if (ok) liveCheck(i, value); else render(); });
+        return;
+      }
       if (st.fillChecked[i] || o.passed() || locked() || busy[q.qid]) return;
       if (!String(value || "").trim()) {
         var empty = o.host.querySelector('input[data-cts-fill="' + i + '"]');

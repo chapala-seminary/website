@@ -6,10 +6,15 @@
  * The shape is docs/ai-grading.md section 3: {v, points:[{id, essential, en}]}
  * with v an integer >= 1, 2-4 points, ids a-d unique and in order, at least
  * one essential, and each en a non-empty string of at most 200 characters.
- * Not yet part of the build: it will be wired in once every course has rubrics.
+ * The single-page courses (Counseling, Narrative and WiseSpeak Preaching,
+ * Ethics) keep theirs in src/data/single-rubrics/<course>/<unit>.json, an array
+ * with one rubric per short answer of that section, in page order. They are
+ * checked here too, under the course names counseling, narrative, wisespeak and
+ * ethics, and `--course <name>` limits a run to one course (or one `ethics:3` unit).
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { singleSections, singleRubrics } from './single-pages-lib.mjs';
 
 const UNITS = 'src/content/units';
 const MAX_EN = 200;
@@ -47,6 +52,26 @@ for (const course of fs.readdirSync(UNITS).sort()) {
     }
   }
 }
+
+/* The single-page courses */
+const only = process.argv.includes('--course') ? process.argv[process.argv.indexOf('--course') + 1] : null;
+{
+  const [oc, ou] = only ? only.split(':') : [null, null];
+  const rubrics = singleRubrics('.');
+  for (const sec of singleSections({ root: '.', only: oc })) {
+    if (ou != null && Number(ou) !== sec.unit) continue;
+    const s = (stats[sec.course] ||= { total: 0, ok: 0 });
+    const list = rubrics[sec.scope];
+    if (list && (!Array.isArray(list) || list.length !== sec.sa.length)) offenders.push(`${sec.course}/${sec.page}: the rubric file must be an array of ${sec.sa.length} rubrics, one per short answer`);
+    sec.sa.forEach((q, i) => {
+      s.total++;
+      const why = rubricProblem(list && Array.isArray(list) ? list[i] : null);
+      if (why) offenders.push(`${sec.course}/${sec.page} sa[${i + 1}]: ${why}`);
+      else s.ok++;
+    });
+  }
+}
+if (only) for (const k of Object.keys(stats)) if (!['counseling', 'narrative', 'wisespeak', 'ethics'].includes(k)) delete stats[k];
 
 const total = Object.values(stats).reduce((a, s) => a + s.total, 0);
 const ok = Object.values(stats).reduce((a, s) => a + s.ok, 0);

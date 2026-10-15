@@ -6,6 +6,7 @@
 // data_json the server reads. Pure file reading: no network, no database.
 import fs from 'node:fs';
 import path from 'node:path';
+import { singleSections, singleRubrics } from './single-pages-lib.mjs';
 
 const readJson = (f) => JSON.parse(fs.readFileSync(f, 'utf8'));
 /* Some units carry one generic sentence as the model answer for every
@@ -40,6 +41,7 @@ export function buildKeyRows({ root = '.', warn = () => {} } = {}) {
   const catalog = readJson(path.join(root, 'worker/catalog.json'));
   addTestRows(root, catalog, 'src/content/textbooks', 'tb', 'textbook', add, warn);
   addTestRows(root, catalog, 'src/content/readings', 'rd', 'reading', add, warn);
+  addSingleRows(root, add);
   return rows;
 }
 
@@ -84,5 +86,29 @@ function addTestRows(root, catalog, rel, tag, source, add, warn) {
     });
     qs.forEach((q, i) => add(`${base}/fill/${i}`, 'fill', source,
       { ...keepOnly(q, ['prompt', 'answer', 'accept']), group: q.reading ?? q.chapter ?? null }));
+  }
+}
+
+/* The single-page courses (Counseling, Narrative and WiseSpeak Preaching,
+ * Ethics): `sp:<page>/<kind>/<i>`, one scope per graded section, and a meta row
+ * `sp:<page>/meta/0` with what a pass records. The questions are read from the
+ * pages as they are (tools/single-pages-lib.mjs); the rubrics from
+ * src/data/single-rubrics. The key shapes are the unit rows' own. */
+function addSingleRows(root, add) {
+  const rubrics = singleRubrics(root);
+  for (const sec of singleSections({ root })) {
+    const base = sec.scope;
+    add(`${base}/meta/0`, 'meta', 'single', {
+      code: sec.code, course: sec.courseSlug, unit: sec.unit, units: sec.units, page: sec.page, file: sec.file,
+      ...(sec.lockMinutes ? { lockMinutes: sec.lockMinutes } : {}),
+    });
+    sec.mc.forEach((q, i) => add(`${base}/mc/${i}`, 'mc', 'single', { prompt: q.stem, options: q.options, answer: q.answer, why: q.why ?? null }));
+    sec.fill.forEach((q, i) => add(`${base}/fill/${i}`, 'fill', 'single', keepOnly(q, ['prompt', 'answer', 'accept'])));
+    const generic = placeholderModels(sec.sa);
+    sec.sa.forEach((q, i) => {
+      const rubric = rubrics[base]?.[i] ?? null;
+      add(`${base}/sa/${i}`, 'sa', 'single',
+        { ...keepOnly({ ...q, model: dropLangs(q.model, generic) }, ['prompt', 'model', 'keywords']), rubric }, rubric?.v ?? null);
+    });
   }
 }
