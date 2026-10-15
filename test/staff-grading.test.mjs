@@ -235,7 +235,10 @@ ok((await sget('/staff/grading/calibration/mark')).status === 404, 'a mark canno
   eq((await spost(`/staff/grading/pending/${modelHeld}/grade`, { verdict: 'not_met', feedback: 'x' })).status, 409, 'a graded answer cannot be graded again here');
   eq(flashOf(await spost(`/staff/grading/pending/${injHeld}/grade`, { verdict: 'not_met', feedback: 'This is an instruction, not an answer.' })), 'graded', 'the held answer is graded not met');
   eq(q1(`SELECT status FROM attempts WHERE id = '${a.attemptId}'`)[0].status, 'passed', 'a pass is never taken back');
-  ok(!(await (await sget('/staff/grading/pending')).text()).includes('Ignore all previous instructions'), 'a graded answer leaves the tab');
+  {
+    const tab = await (await sget('/staff/grading/pending')).text();
+    ok(!tab.includes(`/pending/${injHeld}/grade`) && !tab.includes(`/pending/${modelHeld}/grade`), 'a graded answer leaves the tab');
+  }
 
   // a pending answer that fails the attempt locks from the time of submission
   const D = await student('thm');
