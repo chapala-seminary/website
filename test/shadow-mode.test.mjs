@@ -8,6 +8,7 @@
  */
 import { chromium } from 'playwright';
 import { bankOf } from './lib/grading-stub.mjs';
+import { singleSections } from '../tools/single-pages-lib.mjs';
 
 const BASE = process.argv[2] || 'http://127.0.0.1:8813';
 const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
@@ -65,6 +66,49 @@ async function open(path) {
   await p.waitForTimeout(400);
   ok(posts.length === 1 && posts[0].scope === 'tb:cults' && posts[0].answers.some((a) => a.qid === `tb:cults/fill/${d[0]}`), 'a textbook test also posts to /api/shadow, by bank position', JSON.stringify(posts[0] || null).slice(0, 200));
   await ctx.close();
+}
+/* The single-page courses: the page and its own grading as they were, the hook posts the unit. */
+{
+  const sections = singleSections({ root: '.' });
+  // Ethics: a page per unit
+  const e = sections.find((x) => x.course === 'ethics' && x.unit === 1);
+  {
+    const { ctx, p, posts } = await open('/ethics_unit01.html');
+    ok(await p.evaluate(() => mcQuestions[0].correct === 1 && typeof kwQuestions[0].modelEn === 'string' && !window.CTSSingleLive), 'a shadow Ethics page keeps its keys and its own engine');
+    ok(await p.locator('script[src*="cts-shadow-single.js"]').count() === 1 && await p.locator('script[src*="cts-single-live.js"]').count() === 0, 'it carries the shadow hook and not the live engine');
+    await p.waitForSelector('#questionsContainer .question');
+    for (let i = 0; i < e.mc.length; i++) await p.locator('#questionsContainer .question').nth(i).locator('button.option').nth(e.mc[i].answer).click();
+    await p.locator('.cts-fill-q input').first().fill(e.fill[0].answer.en);
+    await p.locator('textarea.kw-answer').first().fill('x '.repeat(60) + 'god glory standard');
+    await p.locator('#submitExamBtn').click();
+    await p.waitForTimeout(500);
+    ok(posts.length === 1 && posts[0].scope === 'sp:ethics_unit01' && posts[0].lang === 'en', 'Ethics: one POST /api/shadow per submit, for its scope', JSON.stringify(posts.map((x) => x.scope)));
+    const a = posts[0]?.answers || [];
+    ok(a.some((x) => x.qid === 'sp:ethics_unit01/mc/0' && x.choice === e.mc[0].answer) && a.some((x) => x.qid === 'sp:ethics_unit01/fill/0' && x.answer === e.fill[0].answer.en) && a.some((x) => x.qid === 'sp:ethics_unit01/sa/0' && /god glory/.test(x.answer)), 'the answers go with the contract question ids');
+    ok(posts[0]?.clientResult?.mc?.right === 20 && posts[0].clientResult.mc.total === 20, 'and what this browser decided', JSON.stringify(posts[0]?.clientResult));
+    await ctx.close();
+  }
+  // Counseling: a unit of one page
+  const c = sections.find((x) => x.course === 'counseling' && x.unit === 1);
+  {
+    const { ctx, p, posts } = await open('/CTSCounseling.html');
+    await p.waitForSelector('#mcq_1 .question-card');
+    for (let i = 0; i < c.mc.length; i++) await p.locator(`#mcq_1 input[name="u1q${i}"][value="${c.mc[i].answer}"]`).check({ force: true });
+    await p.locator('#fill_1 .cts-fill-q input').first().fill(c.fill[0].answer.en);
+    await p.locator('#essay_1 textarea').first().fill('y '.repeat(60));
+    await p.locator('button.submit-btn[onclick="submitUnit(1)"]').click();
+    await p.waitForTimeout(500);
+    ok(posts.length === 1 && posts[0].scope === 'sp:CTSCounseling-u1', 'Counseling: the unit posts to /api/shadow with its own scope', JSON.stringify(posts.map((x) => x.scope)));
+    const a = posts[0]?.answers || [];
+    ok(a.filter((x) => x.qid.startsWith('sp:CTSCounseling-u1/mc/')).length === 20 && a.some((x) => x.qid === 'sp:CTSCounseling-u1/fill/0' && x.answer === c.fill[0].answer.en) && a.some((x) => x.qid === 'sp:CTSCounseling-u1/sa/0'), 'with every answer under its question id');
+    ok(posts[0]?.clientResult?.mc?.right === 20, 'and the browser\'s own result', JSON.stringify(posts[0]?.clientResult));
+    await ctx.close();
+  }
+  // Narrative and WiseSpeak share the template: the hook is on their pages too
+  for (const f of ['/CTS_Narrative_Preaching.html', '/fr/CTS_WiseSpeak_Preaching.html', '/es/ethics_unit05.html']) {
+    const html = await (await fetch(BASE + f)).text();
+    ok(html.includes('cts-shadow-single.js') && html.includes('CTS_SHADOW_SINGLE'), `${f}: carries the shadow hook`);
+  }
 }
 await browser.close();
 if (fails.length) { console.error(`FAIL — ${fails.length} of ${checks}:`); fails.forEach((f) => console.error('  ✗ ' + f)); process.exit(1); }
