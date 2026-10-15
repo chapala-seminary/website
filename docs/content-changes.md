@@ -1368,3 +1368,15 @@ Regression expectations are updated only for the deliberately changed
 paragraphs, keyword fingerprint and affected rendered elements, with the
 previous beta build used as the comparison. This does not implement server
 grading or authorize production publication; French remains in review.
+
+### Content fixes found while drafting grading rubrics (15 Oct 2026)
+
+Robert asked for these to go to production ahead of AI grading. They are AI-written corrections, not yet reviewed by faculty. Every change, with before and after, is in `docs/content-fixes-2026-10-15/` (one file per batch) for Dr. Cook's review.
+
+* **Model answers written** where only French existed (CTSCE, CTSCH, CTSLA; 310 questions) or where English and Spanish were placeholders (CTSGenesis; 100 questions). CTSLA's English and Spanish keyword lists were separated; they had been one mixed list.
+* **Model answers corrected** where they contradicted their lesson or stated what the lesson does not support, across about 30 courses and the single-page courses (Counseling, Narrative and WiseSpeak Preaching, Ethics).
+* **Questions reworded** where the lesson does not cover them or miscounts (for example "four titles" → "five", "three rules" → "four"), including Ruth and Esther unit 6 and Systematic Theology units 4–6.
+* **Typos**: "imminent" → "immanent" (Worship 1), "Conable" → "Constable" (Ruth and Esther 5), literal `&mdash;` and other entities (CTSAL, Psalms).
+* **CTSLA lessons** (approved by Robert): the unit 11 summary table, the unit 10 and unit 11 summaries, Romans 1:16–17 and the Luther and Erasmus dates in unit 9 (`la-lessons.md`).
+* **Not changed (for Dr. Cook)**: contested doctrine; the lesson that misquotes 1 John 1:7 (CTSPT 2); the "four titles" sentence in the CTS unit 9 lesson; "a dozen words" in CTSLA unit 11.
+* Spanish and French were changed with each English change, and are marked machine-written (`tr.*.status = machine`, `from` = the new source). Every model answer passes its keywords in every language, and no changed question passes as its own answer. The content, prose and lesson-render baselines were re-recorded for these pages only.
