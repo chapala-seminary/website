@@ -16,3 +16,15 @@ en/es/fr; no prompt that failed as its own answer before passes now.
 - **12 Q3 (postmillennialism crisis), model and one keyword group.** Before: "the world was steadily getting better … shattered that optimism … remained vital for those emphasizing the Church's present authority". After: restates the lesson's careful wording (b015): influential among nineteenth-century theologians and missionaries, confidence weakened by the twentieth-century catastrophes, renewed interest in other frameworks, but the biblical question not settled. Keyword "shattered" → "confidence" (es confianza, fr confiance).
 
 Left alone: NT 3 Q9 and unit 9 (contested, for Wayne).
+
+## CTSBible
+
+- **3 Q6 (two things the unit does not claim), model and keywords.** Before: second item was a "fixed first-century Alexandrian canon" and "set a believer up to stumble" — neither is a claim the lesson says it avoids. After: the two things the lesson says it does not do (b027, b029): claim that Jesus explicitly refuted the Apocrypha ("straining a gnat"), and pretend the question was never open (an old, real disagreement, not the same as doubting the gospel). Keyword groups "alexandr/alejandr" became "disagreement/desacuerdo" (fr désaccord).
+
+Left alone: Bible 3 and 6 stance on the Apocrypha and Received Text (the lesson takes a CTS position; for Wayne).
+
+## CTSWorship
+
+- **1 Q2, prompt, model, keyword.** English "imminent" → "immanent" in the question and the model (Spanish and French already said immanent); English keyword "immin" → "imman" so the corrected model still scores. French `tr` hash refreshed (French text unchanged, already correct).
+
+Left alone: Worship 3, 4, 9, 10 (Baptist/anti-Catholic stance; wording softening is a faculty decision).
