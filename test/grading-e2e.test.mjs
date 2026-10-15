@@ -252,6 +252,19 @@ await d1.ctx.close();
 /* ====================================================================== */
 /* 5. A master's student: short answers, a fail, the lockout, the cron      */
 /* ====================================================================== */
+// A blank remains the one allowed missed response; there is no new 100% rule.
+{
+  const d = await device({ student: { name: `E2E Blank ${RUN}`, email: `e2e-blank-${RUN}@example.test`, track: 'thm' } });
+  await d.p.goto(`${BASE}/CTSJohnUnit1.html`, { waitUntil: 'load' }); await ready(d.p);
+  await mcAll(d.p, john1); await fillAll(d.p, john1);
+  for (let i = 0; i < 9; i++) await d.p.locator(`textarea[data-sa="${i}"]`).fill(essay('[[met]]'));
+  await d.p.locator('#submitExamBtn').click();
+  ok(await waitText(d.p, 'Unit 1 passed', 60000), 'nine met responses and one blank pass through the real browser');
+  const code = await codeOf(d.p);
+  const result = q1(`SELECT status, sa_met, sa_total, locked_until FROM attempts WHERE student_id = '${code}'`)[0];
+  ok(result.status === 'passed' && result.sa_met === 9 && result.sa_total === 10 && !result.locked_until, 'blank response preserves the 90% threshold and records no lock');
+  await d.ctx.close();
+}
 const thm = { name: `E2E Masters ${RUN}`, email: `e2e-thm-${RUN}@example.test`, track: 'thm' };
 const dm = await device({ student: thm });
 const m = dm.p;
@@ -267,6 +280,11 @@ await m.locator('textarea[data-sa="0"]').fill('Jesus is God.');
 await m.locator('#submitExamBtn').click();
 ok(await waitText(m, 'Your answer is too short to evaluate.'), 'short response requests expansion in the browser');
 ok(await m.locator('textarea[data-sa="0"]').getAttribute('readonly') === null, 'returned answer remains editable');
+ok(await m.locator('textarea[data-sa="0"]').evaluate((field) => document.activeElement === field && field.getAttribute('aria-invalid') === 'true' && document.getElementById(field.getAttribute('aria-describedby')).textContent.includes('too short')), 'short answer is focused and has accessible inline guidance');
+await m.locator('textarea[data-sa="0"]').fill('An edited draft');
+ok(await m.locator('textarea[data-sa="0"]').getAttribute('aria-invalid') === null && await m.locator('.cts-sa-too-short').count() === 0, 'editing clears the field error');
+await m.locator('textarea[data-sa="0"]').fill('Jesus is God.');
+
 ok(q1(`SELECT COUNT(*) AS n FROM answer_grades WHERE student_id = '${codeM}' AND kind = 'sa'`)[0].n === 0, 'no failed short-answer grade is recorded');
 const sitting = q1(`SELECT id, status, submitted_at, locked_until FROM attempts WHERE student_id = '${codeM}'`)[0];
 ok(sitting.status === 'open' && !sitting.submitted_at && !sitting.locked_until, 'no failed examination or lock is recorded');

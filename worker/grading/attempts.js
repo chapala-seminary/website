@@ -297,12 +297,6 @@ export async function settle(env, attemptId, { submitting = false } = {}) {
   if (!scope) return null;
   const was = attempt.status;
   const st = await standing(env, attempt, scope);
-  // Queue/faculty callbacks may arrive while a student is still expanding
-  // another answer. They must not close that open sitting either.
-  if (!attempt.shadow && was === 'open' && st.req.sa.need && st.items.sa.some((qid) =>
-    !st.banked.sa.includes(qid) && !st.rows.some((r) => r.qid === qid))) {
-    return { was, status: 'open', attempt, result: await resultOf(env, attempt, scope, st), credit: { unitDone: false, courseDone: false } };
-  }
   const t = nowIso();
   let status = st.verdict.status;
   if (was === 'passed') status = 'passed';          // a pass stays
@@ -505,6 +499,7 @@ export async function gradeWritten(env, attempt, entries) {
       toModel.fill.push(i);
       return;
     }
+    if (!text.trim()) { out[i] = { verdict: 'not_met', by: 'rule', feedback: canned('blank', lang) }; return; }
     // short answer, in the order the contract sets: cheap rules, then injection, then the model
     const prompt = pick(e.key.prompt, lang);
     if (wordCount(text) < MIN_SA_WORDS) { out[i] = { verdict: 'needs_expansion', by: 'rule', feedback: canned('short', lang) }; return; }

@@ -205,10 +205,8 @@ const progressOf = async (code) => (await get(`/api/student/${code}`)).body;
   const thm = await student('thm');
   const t = (await post('/api/attempt', { code: thm, scope: SCOPE(2), lang: 'en', track: 'cert' })).body;
   eq([t.track, t.needs], ['thm', { mc: 18, fill: 9, sa: 9 }], 'the track is the record\'s, not the request\'s');
-  // Missing required responses remain open for expansion, rather than failing.
+  // Blank responses retain the existing grading policy.
   await doMC(thm, t);
-  eq((await submit(thm, t)).status, 422, 'Th.M.: multiple choice alone asks for the required responses without a failed sitting');
-  await doSA(thm, t, Array(10).fill('not_met'));
   const sub2 = (await submit(thm, t)).body;
   eq([sub2.status, sub2.lock?.kind], ['failed', 'sa'], 'Th.M.: substantively wrong written answers fail and lock the written part');
   const mins = (Date.parse(sub2.lock.until) - Date.now()) / 60000;
@@ -301,7 +299,6 @@ const progressOf = async (code) => (await get(`/api/student/${code}`)).body;
   eq((await post('/api/grade', { code, attemptId: a.attemptId, items: [{ qid: sa[0], answer: Array(14).fill('idea').join(' ') }] })).status, 422, 'exactly 14 words is returned for expansion');
   eq(short.body.error, 'Your answer is too short to evaluate. Please expand your response to explain your understanding of the question.', 'no numerical minimum in student feedback');
   eq(q1(`SELECT COUNT(*) AS n FROM answer_grades WHERE attempt_id = '${a.attemptId}'`)[0].n, 0, 'length rejection writes no failed answer');
-  eq((await post(`/api/attempt/${a.attemptId}/submit`, { code })).status, 422, 'cannot turn a length rejection into a failed examination');
   const open = q1(`SELECT status, locked_until, submitted_at FROM attempts WHERE id = '${a.attemptId}'`)[0];
   eq(open, { status: 'open', locked_until: null, submitted_at: null }, 'same sitting stays open without a lock or submitted attempt');
 
@@ -334,6 +331,19 @@ const progressOf = async (code) => (await get(`/api/student/${code}`)).body;
   eq(q1(`SELECT g.rubric_version AS got, k.rubric_version AS want FROM answer_grades g JOIN grading_keys k ON k.qid = g.qid WHERE g.id = ${v[3].gradeId}`).map((r) => r.got === r.want && r.got >= 1)[0], true, 'the grade records the rubric version it was graded against');
   const again = await post('/api/grade', { code, attemptId: a.attemptId, items: [{ qid: sa[3], answer: essay('not_met') }] });
   eq(again.body.items[0].verdict, 'met', 'the first grade of a short answer stands within an attempt');
+}
+
+// A blank can be the one missed response under the existing 90% rule.
+for (const explicitBlank of [false, true]) {
+  const code = await student('thm'), a = (await start(code)).body;
+  await doMC(code, a); await doFill(code, a);
+  const items = a.items.sa.slice(0, 9).map((qid) => ({ qid, answer: essay('met') }));
+  if (explicitBlank) items.push({ qid: a.items.sa[9], answer: '   ' });
+  const graded = await post('/api/grade', { code, attemptId: a.attemptId, items });
+  eq(graded.status, 200, 'blank response does not trigger length validation');
+  if (explicitBlank) eq(graded.body.items[9].verdict, 'not_met', 'an explicitly submitted blank is an ordinary missed response');
+  const result = (await submit(code, a)).body;
+  eq([result.status, result.scores.sa.right, result.lock], ['passed', 9, null], 'nine met and one blank passes without a lock');
 }
 
 // The length policy is the same on each language page.

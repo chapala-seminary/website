@@ -115,6 +115,13 @@ async function takeUnit(p, s, { wrongMc = 0, fills = true, written = true, tag =
   if (written) for (let i = 0; i < s.sa.length; i++) await p.locator(u.sa(i)).fill(hint(i, tag));
   await p.locator(u.submit).click();
 }
+async function checkExpansion(p, field, submit) {
+  await p.locator(field).fill('A short draft'); await p.locator(submit).click();
+  ok(await waitFor(async () => await p.locator('.cts-sa-too-short').count() > 0), 'single-page short response receives inline guidance');
+  ok(await p.locator(field).evaluate((el) => document.activeElement === el && el.getAttribute('aria-invalid') === 'true' && !!el.getAttribute('aria-describedby')), 'single-page invalid response is focused and described');
+  await p.locator(field).fill(hint(0));
+  ok(await p.locator(field).getAttribute('aria-invalid') === null, 'editing clears single-page field feedback');
+}
 const pageText = (p) => p.locator('body').innerText();
 const waitText = (p, text, timeout = 20000) => p.waitForFunction((t) => document.body.innerText.includes(t), text, { timeout }).then(() => true, () => false);
 
@@ -177,6 +184,7 @@ db('DELETE FROM grade_overrides; DELETE FROM grade_cache; DELETE FROM grade_queu
     await inp.fill(s.fill[i].answer.en); await inp.press('Enter');
     await p.waitForSelector(`.cts-fill-q[data-cts-fill="${i}"] .cts-fill-ok`, { timeout: 15000 });
   }
+  await checkExpansion(p, 'textarea[data-live-sa="0"]', '#submitExamBtn');
   for (let i = 0; i < s.sa.length; i++) await p.locator(`textarea[data-live-sa="${i}"]`).fill(hint(i));
   ok(await p.locator('.model-answer').count() === 0, 'no model answer is on screen before the attempt is over');
   await p.locator('#submitExamBtn').click();
@@ -225,6 +233,7 @@ db('DELETE FROM grade_overrides; DELETE FROM grade_cache; DELETE FROM grade_queu
   const mcode = await codeOf(m.p);
   db(`INSERT INTO unit_progress (student_id, course, unit, completed_at, source) VALUES ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => `('${mcode}', 'counseling', ${n}, '2026-10-01T00:00:00Z', 'server')`).join(',')}`);
   const s0 = sec('counseling', 0);
+  await checkExpansion(m.p, U(s0.unit).sa(0), U(s0.unit).submit);
   await takeUnit(m.p, s0);
   ok(await waitText(m.p, 'Passed. This unit is recorded.'), 'Counseling unit 0, master\'s track (with the ten written answers): passed');
   ok(q1(`SELECT COUNT(*) AS n FROM course_completions WHERE student_id = '${mcode}'`)[0].n === 0, 'every unit is on record, but the course waits for its textbook test on the master\'s tracks');

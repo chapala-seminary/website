@@ -288,6 +288,37 @@
         ' <button type="button" class="btn" data-cts-retry' + (attrs ? " " + attrs : "") + ">" + bi(S.retry) + "</button>") + "</div>";
   }
 
+  // Use the server's question IDs; the browser does not duplicate word rules.
+  var expansionSerial = 0;
+  function clearExpansion(field) {
+    var note = field._ctsExpansionNote;
+    if (!note) return;
+    field.removeAttribute("aria-invalid");
+    var ids = (field.getAttribute("aria-describedby") || "").split(/\s+/).filter(function (id) { return id && id !== note.id; });
+    if (ids.length) field.setAttribute("aria-describedby", ids.join(" ")); else field.removeAttribute("aria-describedby");
+    note.remove(); field._ctsExpansionNote = null;
+  }
+  function showExpansion(reply, fields) {
+    var wanted = reply && reply.data && reply.data.needsExpansion;
+    if (!Array.isArray(wanted)) return;
+    var first = null;
+    fields.forEach(function (entry) {
+      var field = entry.field;
+      if (!field || wanted.indexOf(entry.qid) < 0) return;
+      clearExpansion(field);
+      var note = document.createElement("p");
+      note.id = "cts-sa-expansion-" + (++expansionSerial);
+      note.className = "small cts-sa-too-short";
+      note.setAttribute("role", "alert"); note.textContent = S.expansion[(document.documentElement.lang || "en").split("-")[0]] || S.expansion.en;
+      field.setAttribute("aria-invalid", "true");
+      field.setAttribute("aria-describedby", ((field.getAttribute("aria-describedby") || "") + " " + note.id).trim());
+      field.insertAdjacentElement("afterend", note); field._ctsExpansionNote = note;
+      field.addEventListener("input", function clear() { clearExpansion(field); field.removeEventListener("input", clear); });
+      if (!first) first = field;
+    });
+    if (first) first.focus();
+  }
+
   function esc(v) { return String(v == null ? "" : v).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;"); }
 
   /* The registration prompt, for a visitor with no student record. Pages that
@@ -357,6 +388,7 @@
     lockOf: lockOf, scoreOf: scoreOf, verdictsOf: verdictsOf,
     poll: poll,
     S: S, plain: plain, esc: esc,
+    showExpansion: showExpansion, clearExpansion: clearExpansion,
     troubleHtml: troubleHtml, troubleKey: troubleKey, registerHtml: registerHtml,
     appeal: { html: appealHtml, remember: appealRemember, onChange: function (fn) { redraw = fn; } }
   };

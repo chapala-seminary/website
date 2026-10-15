@@ -147,7 +147,7 @@ async function gradeAnswers(request, env, h) {
   const fresh = asked.filter((a) => !done.has(a.qid) && !(a.kind === 'sa' && banked.sa.includes(a.qid)));
   // Validate the whole batch before grading any item. Students may expand and
   // resend in this same open sitting; no failed grade or lockout is written.
-  const short = fresh.filter((a) => a.kind === 'sa' && wordCount(a.answer) < MIN_SA_WORDS);
+  const short = fresh.filter((a) => a.kind === 'sa' && a.answer.trim() && wordCount(a.answer) < MIN_SA_WORDS);
   if (short.length) return h.json({ error: canned('short', attempt.lang), needsExpansion: short.map((a) => a.qid) }, 422);
   if (fresh.length && (await gradedThisHour(env, student.id)) + fresh.length > HOURLY_CAP)
     return h.json({ error: 'too many answers graded this hour. Wait a while and try again.' }, 429, { 'retry-after': '600' });
@@ -183,12 +183,6 @@ async function submit(request, env, h, attemptId) {
   const attempt = await ownAttempt(env, h, student, attemptId);
   if (!attempt) return h.fail(404, 'no such attempt');
   if (attempt.status !== 'open') return h.json(await view(env, attempt));
-  const scope = await loadScope(env, attempt.scope);
-  const st = await standing(env, attempt, scope);
-  // An ungraded required response is still editable, including after a reload
-  // or a direct API submit following a length-check rejection.
-  const missing = st.req.sa.need ? st.items.sa.filter((qid) => !st.banked.sa.includes(qid) && !st.rows.some((r) => r.qid === qid)) : [];
-  if (missing.length) return h.json({ error: canned('short', attempt.lang), needsExpansion: missing }, 422);
   const r = await settle(env, attempt.id, { submitting: true });
   return h.json(r.result);
 }

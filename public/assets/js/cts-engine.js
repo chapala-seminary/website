@@ -1141,7 +1141,10 @@
     });
   }
 
-  function trouble(r, retry) { live.working = ""; live.trouble = { r: r, retry: retry }; renderQuestions(); }
+  function trouble(r, retry) {
+    live.working = ""; live.trouble = { r: r, retry: retry }; renderQuestions();
+    if (G) G.showExpansion(r, sa.map(function (q, i) { return { qid: q.qid, field: document.querySelector('textarea[data-sa="' + i + '"]') }; }));
+  }
 
   function liveStart() {
     if (live.stopPoll) { live.stopPoll(); live.stopPoll = null; }

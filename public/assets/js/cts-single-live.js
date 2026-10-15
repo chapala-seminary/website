@@ -136,7 +136,12 @@
       cfg.save();
     }
 
-    function trouble(r, retry) { c.working = ""; c.trouble = { r: r, retry: retry }; cfg.draw(); }
+    function trouble(r, retry) {
+      c.working = ""; c.trouble = { r: r, retry: retry }; cfg.draw();
+      var fields = [];
+      for (var i = 0; i < cfg.n.sa; i++) fields.push({ qid: qid("sa", i), field: cfg.saField(i) });
+      if (G) G.showExpansion(r, fields);
+    }
 
     c.start = function () {
       if (c.stopPoll) { c.stopPoll(); c.stopPoll = null; }
@@ -391,6 +396,7 @@
         clearLock: function () { st(n).lockedUntil = 0; },
         getMc: function (i) { var v = st(n).mcq[i]; return v === undefined ? null : v; },
         setMc: function (i, j) { st(n).mcq[i] = j; },
+        saField: function (i) { return document.querySelector('#essay_' + n + ' textarea[data-live-sa="' + i + '"]'); },
         getSa: function (i) { return (st(n)[o.saKey] || [])[i] || ""; },
         setSa: function (i, t) { if (!st(n)[o.saKey]) st(n)[o.saKey] = []; st(n)[o.saKey][i] = t; },
         resetAnswers: function () {
@@ -545,6 +551,7 @@
       clearLock: function () { lsDel(SA_LOCK_KEY); lsDel(FULL_LOCK_KEY); },
       getMc: function (i) { var v = mcAnswers[i]; return v ? v.charCodeAt(0) - 65 : null; },
       setMc: function (i, j) { mcAnswers[i] = letter(j); },
+      saField: function (i) { return document.querySelector('#cts-live-sa textarea[data-live-sa="' + i + '"]'); },
       getSa: function (i) { return kwAnswers[i] || ""; },
       setSa: function (i, t) { kwAnswers[i] = t; },
       resetAnswers: function () { mcAnswers = new Array(mcQuestions.length).fill(null); var k = cfg.n.fill; fillState.fillAnswers = new Array(k).fill(""); fillState.fillChecked = new Array(k).fill(false); },

@@ -891,8 +891,10 @@ question.” The API returns 422 with `needsExpansion` question IDs, before any
 item in that batch is graded. No answer grade, model call, grading quota use,
 failed exam, submission timestamp or lockout is recorded for that rejection.
 The open sitting and saved typing remain available for revision and resubmission.
-A required short-answer section with missing ungraded responses cannot be submitted;
-this also protects reloads and direct API requests. Existing completed grades stand.
+Blank responses retain the existing grading policy: nine met responses out of ten
+can pass with one blank. A nonempty short response stops the browser before exam
+submission, is focused and receives accessible inline guidance. Editing clears
+the field error. Existing completed grades stand.
 Clearing the length check still requires the substantive rubric to pass.
 
 Beta acceptance: test short responses in EN/ES/FR; revise and resubmit in the
@@ -900,3 +902,14 @@ same sitting, including after reloading; check no failed grade or examination
 was recorded. Test the exact 14/15-word boundary, a substantive one-sentence
 answer, and a long but substantively wrong answer. Repeat on unit and
 single-page course engines. Production stays unchanged pending separate approval.
+
+
+### PR #100 behaviors retained (15 October 2026)
+
+Adapted the focused, accessible field feedback from #100 to both live exam
+engines, using the server's rejected question IDs rather than a second word
+counter in the browser. Blank answers remain ordinary missed responses under
+the existing 90% threshold; only nonempty answers below the internal length
+floor request expansion. Certificate/Associate reflection remains optional.
+Robert authorized publication to beta and closure of #100 after this replacement.
+Production promotion and deployment remain separate.

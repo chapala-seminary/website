@@ -70,6 +70,7 @@ export function cheapCheck({ kind, key, answer, lang }) {
     if (exactFill(key, text, lang)) return { verdict: 'right', via: 'exact', graded_by: 'exact' };
     return null;
   }
+  if (!text.trim()) return { verdict: 'not_met', via: 'rule:blank', graded_by: 'rule' };
   if (wordCount(text) < MIN_SA_WORDS) return { verdict: 'needs_expansion', via: 'rule:short', graded_by: 'rule' };
   if (copiedOnly(pick(key.prompt, lang), text) || copiedOnly(pick(key.prompt, 'en'), text)) return { verdict: 'not_met', via: 'rule:copied', graded_by: 'rule' };
   if (looksLikeInstruction(text)) return { verdict: 'pending', via: 'rule:injection', graded_by: 'rule' };
