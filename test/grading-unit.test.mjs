@@ -154,6 +154,11 @@ let v = validate('sa', { items: [good('q1'), good('q2')] }, items);
 ok(v.ok.size === 2 && !v.wholeBad, 'a valid reply is accepted');
 v = validate('sa', { items: [good('q1', 'met', [pt('a', true, 'words never written'), pt('b', true), pt('c', false)]), good('q2')] }, items);
 ok(!v.ok.has('q1') && v.ok.has('q2'), 'a point "made" with a quote the student did not write is refused');
+// a quote that starts or ends in punctuation is still the student's words (it used to be refused)
+v = validate('sa', { items: [good('q1', 'met', [pt('a', true, 'The Word was with God from the beginning,'), pt('b', true, '"is himself fully God, not a creature."'), pt('c', false)]), good('q2')] }, items);
+ok(v.ok.has('q1'), 'a quote with punctuation at its ends is accepted');
+v = validate('sa', { items: [good('q1', 'met', [pt('a', true, 'Word was with Go'), pt('b', true), pt('c', false)]), good('q2')] }, items);
+ok(!v.ok.has('q1'), 'a quote that cuts a word in half is refused');
 v = validate('sa', { items: [good('q1', 'met', [pt('a', true), pt('b', false), pt('c', true)]), good('q2')] }, items);
 ok(!v.ok.has('q1'), '"met" with an essential point not made is refused');
 v = validate('sa', { items: [good('q1', 'partly', [pt('a', true), pt('b', false), pt('c', false)]), good('q2')] }, items);
