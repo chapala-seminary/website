@@ -124,8 +124,9 @@ const PREVIEW = fs.readFileSync('tools/merge-duplicate-students-preview.sql', 'u
 /* ---- 2. what the student sees, against the Worker ----------------------- */
 const BASE = process.env.API_BASE;
 if (BASE && process.env.MERGE_STATE && process.env.MERGE_CONFIG) {
-  const jpost = async (p, b) => { const r = await fetch(BASE + p, { method: 'POST', headers: { 'content-type': 'application/json', 'x-test-grading-mode': 'shadow' }, body: JSON.stringify(b) }); return { status: r.status, body: await r.json().catch(() => null) }; };
-  const jget = async (p, init) => { const r = await fetch(BASE + p, init); return { status: r.status, body: await r.json().catch(() => null) }; };
+  // D1 CLI work below can outlast the dev server's idle HTTP connection.
+  const jpost = async (p, b) => { const r = await fetch(BASE + p, { method: 'POST', headers: { 'content-type': 'application/json', 'x-test-grading-mode': 'shadow', connection: 'close' }, body: JSON.stringify(b) }); return { status: r.status, body: await r.json().catch(() => null) }; };
+  const jget = async (p, init = {}) => { const r = await fetch(BASE + p, { ...init, headers: { ...init.headers, connection: 'close' } }); return { status: r.status, body: await r.json().catch(() => null) }; };
   const tag = crypto.randomBytes(4).toString('hex');
   const email = `merge-${tag}@example.org`;
   const first = (await jpost('/api/register', { name: `Merge Test ${tag}`, email, track: 'cert' })).body.code;

@@ -86,6 +86,13 @@ const { page, kind, title, heading, tagline = null, course = null, accent = null
     <main class="wrap" id="content">
       {kind !== 'honors' && <EditorialNotice kind="perspectives" />}
       {page === 'CTSJoshReadings' && <EditorialNotice kind="blaikie" />}
+      {kind !== 'honors' && <section class="card" data-cts-chrome>
+        <h2><span class="lang-en">Master’s Assigned Readings (all five)</span><span class="lang-es">Lecturas asignadas de maestría (las cinco)</span><span class="lang-fr">Lectures assignées du master (les cinq)</span></h2>
+        <p><span class="lang-en">M.Div. and Th.M. students read all five assigned selections and take their separate exam after activation. The test page states the current rule; valid earlier completions remain valid.</span><span class="lang-es">Los estudiantes M.Div. y Th.M. leen las cinco selecciones asignadas y presentan su examen separado después de su activación. La página del examen indica la regla vigente; las finalizaciones válidas anteriores siguen siendo válidas.</span><span class="lang-fr">Les étudiants M.Div. et Th.M. lisent les cinq textes assignés et passent leur examen distinct après son activation. La page de l’examen indique la règle en vigueur ; les validations antérieures restent acquises.</span></p>
+        {page === 'CTSWRReadings' && <p><a href="/CTSWRRequired.html"><span class="lang-en">World Religions: open the separate assigned readings</span><span class="lang-es">Religiones del Mundo: abrir las lecturas asignadas separadas</span><span class="lang-fr">Religions du monde : ouvrir les lectures assignées distinctes</span></a></p>}
+        <h3><span class="lang-en">Optional Honors (choose three)</span><span class="lang-es">Honores opcionales (elija tres)</span><span class="lang-fr">Mention facultative (choisissez trois textes)</span></h3>
+        <p><span class="lang-en">Honors is optional on every track. Certificate and Associate students may read three honors selections without a required-reading exam. Honors does not replace either master’s exam.</span><span class="lang-es">Los honores son opcionales en todos los trayectos. Los estudiantes de Certificado y Asociado pueden leer tres selecciones para honores sin un examen de lecturas obligatorias. Los honores no sustituyen ninguno de los exámenes de maestría.</span><span class="lang-fr">La mention est facultative pour tous les parcours. Les étudiants du Certificat et du diplôme associé peuvent lire trois textes pour la mention sans examen des lectures obligatoires. La mention ne remplace aucun des examens du master.</span></p>
+      </section>}
       <Fragment set:html={body} />
     </main>
 

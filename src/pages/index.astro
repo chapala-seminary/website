@@ -22,9 +22,8 @@ const courses = (await getCollection('courses'))
 
 // The Master's textbooks (src/content/textbooks), listed after the courses.
 // Each must belong to a course on this page, or its card has nowhere to point.
-// Pilot textbooks are available from their course, not advertised as mandatory.
+// Resource availability is independent of activation; test pages explain the current rule.
 const textbooks = (await getCollection('textbooks')).map((e) => e.data)
-  .filter((t) => !('requiredFrom' in t) || t.requiredFrom != null)
   .sort((a, b) => a.number - b.number);
 const cardOf = new Map(courses.map((c) => [c.code, c]));
 for (const t of textbooks)
@@ -32,10 +31,8 @@ for (const t of textbooks)
     throw new Error(`textbook ${t.slug} belongs to course "${t.course}", which has no catalog card`);
 // The required readings (src/content/readings), listed with the textbooks:
 // the same rule on the master's tracks, open to every student.
-// A reading test not yet in force (requiredFrom null, 9 Oct 2026) is not listed
-// here until it is: it is reached from its course's units and reading room.
+// Include staged tests too: students need the assigned readings before activation.
 const readings = (await getCollection('readings')).map((e) => e.data)
-  .filter((r) => !('requiredFrom' in r) || r.requiredFrom != null)
   .sort((a, b) => a.title.en.localeCompare(b.title.en));
 for (const r of readings)
   if (!cardOf.has(r.course))
@@ -98,6 +95,9 @@ const recordJson = JSON.stringify(recordable).replace(/</g, '\\u003c');
       #textbooks a.textbook:hover{border-color:var(--gold,#b08324)}
       #textbooks .tb-title{font-family:"Cormorant Garamond",serif;font-size:1.3rem;color:var(--oxblood,#6d2233);line-height:1.12}
       #textbooks .tb-for{font-size:.88rem;color:var(--muted,#6b5b4d);margin-top:5px;line-height:1.45}
+      #textbooks .tb-resource{display:flex;flex-direction:column}
+      #textbooks .tb-resource>a.textbook{flex:1}
+      #textbooks .tb-test-link{padding:10px 16px;color:var(--oxblood,#5a1f1f);font-weight:bold}
       #textbooks .tb-go{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted,#6b5b4d);margin-top:11px;display:inline-block}
     </style>
     <div class="kicker"><span class="en">Required Reading</span><span class="es">Lecturas Obligatorias</span></div>
@@ -106,14 +106,14 @@ const recordJson = JSON.stringify(recordable).replace(/</g, '\\u003c');
     <span class="es">Cada uno de nuestros 45 cursos tiene un libro de texto y un examen separado de lecturas requeridas. Ambos exámenes son obligatorios para nuevas finalizaciones M.Div. y Th.M. después de su activación; las finalizaciones de maestría válidas anteriores siguen siendo válidas. Los libros y exámenes están abiertos a todos y son opcionales para estudiantes de Certificado y Asociado.</span></p>
     <div class="tb-grid">
       {textbooks.map((t) => (
-        <a class="textbook" href={`${t.page}.html`}><div class="tb-title"><span class="en">{t.title.en}</span><span class="es">{t.title.es}</span></div><div class="tb-for"><span class="en">For {cardOf.get(t.course)!.title.en}</span><span class="es">Para {cardOf.get(t.course)!.title.es}</span></div><span class="tb-go"><span class="en">Read →</span><span class="es">Leer →</span></span></a>
+        <div class="tb-resource"><a class="textbook" href={`${t.page}.html`}><div class="tb-title"><span class="en">{t.title.en}</span><span class="es">{t.title.es}</span></div><div class="tb-for"><span class="en">For {cardOf.get(t.course)!.title.en}</span><span class="es">Para {cardOf.get(t.course)!.title.es}</span></div><span class="tb-go"><span class="en">Read →</span><span class="es">Leer →</span></span></a><a class="tb-test-link" href={`${t.page}Test.html`}><span class="lang-en">Textbook test →</span><span class="lang-es">Examen del libro →</span><span class="lang-fr">Examen du manuel →</span></a></div>
       ))}
     </div>
     <h3 style="margin-top:26px"><span class="en">Required Readings</span><span class="es">Lecturas Requeridas</span></h3>
     <p><span class="en">All 45 courses have assigned readings with their own test, separate from the textbook test. Pass each test separately. The optional honors reading attestation is a different activity.</span><span class="es">Los 45 cursos tienen lecturas asignadas con su propio examen, separado del examen del libro. Apruebe cada examen por separado. La constancia opcional de lectura para honores es una actividad distinta.</span></p>
     <div class="tb-grid" id="required-readings">
       {readings.map((r) => (
-        <a class="textbook reading" href={`${r.page}.html`}><div class="tb-title"><span class="en">{r.title.en}</span><span class="es">{r.title.es}</span></div><div class="tb-for"><span class="en">For {cardOf.get(r.course)!.title.en}</span><span class="es">Para {cardOf.get(r.course)!.title.es}</span></div><span class="tb-go"><span class="en">Read →</span><span class="es">Leer →</span></span></a>
+        <div class="tb-resource"><a class="textbook reading" href={`${r.page}.html`}><div class="tb-title"><span class="en">{r.title.en}</span><span class="es">{r.title.es}</span></div><div class="tb-for"><span class="en">For {cardOf.get(r.course)!.title.en}</span><span class="es">Para {cardOf.get(r.course)!.title.es}</span></div><span class="tb-go"><span class="en">Read →</span><span class="es">Leer →</span></span></a><a class="tb-test-link" href={`${r.page}Test.html`}><span class="lang-en">Required-reading test →</span><span class="lang-es">Examen de lecturas obligatorias →</span><span class="lang-fr">Examen des lectures obligatoires →</span></a></div>
       ))}
     </div>
   </section>

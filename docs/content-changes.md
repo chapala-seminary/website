@@ -1388,3 +1388,13 @@ the language selectors, with a wrapping layout on phones. The student-sync
 script no longer inserts the master's requirements paragraph above every page.
 Requirement dates still load and completion checks are unchanged; program and
 course pages retain their existing requirement explanations.
+
+
+## Wayne’s reading and examination review — 15 October 2026
+
+All textbook and required-reading exams now give correctness feedback during an
+attempt and source-linked teaching explanations for missed questions after
+submission. Available readings and tests are easier to find; course boxes
+distinguish optional honors from master’s assigned readings, and Torrey’s page
+clearly labels the five excerpts. Native language controls and fully translated
+pages resist browser retranslation. See [the change and verification record](wayne-feedback-2026-10-15.md).

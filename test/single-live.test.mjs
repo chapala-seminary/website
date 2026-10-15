@@ -50,6 +50,9 @@ function db(command) {
 const q1 = (command) => db(command)[0];
 const sections = singleSections({ root: '.' });
 const sec = (course, unit) => sections.find((s) => s.course === course && s.unit === unit);
+// D1 CLI edits pause this test between requests. Do not reuse an idle Node
+// connection that the local dev server may already have closed.
+const freshFetch = (url, options = {}) => fetch(url, { ...options, headers: { ...options.headers, connection: 'close' } });
 
 const sent = [];
 async function device({ student }) {
@@ -132,7 +135,7 @@ db('DELETE FROM grade_overrides; DELETE FROM grade_cache; DELETE FROM grade_queu
 /* ====================================================================== */
 {
   const engine = fs.readFileSync('dist/cts-genesis-engine.js', 'utf8');
-  const cert = await (await fetch(`${BASE}/CTSGenesisCertificate.html`)).text();
+  const cert = await (await freshFetch(`${BASE}/CTSGenesisCertificate.html`)).text();
   ok(cert.includes('cts-genesis-engine.js') && !/CTS_UNIT|const mcQuestions|UNITS\[|"correct"|kw_en/.test(cert + engine), 'the Genesis certificate page and its engine file carry no questions: Genesis is graded on the unit pages');
   const g2 = JSON.parse(fs.readFileSync('src/content/units/CTSGenesis/2.json', 'utf8'));
   const d = await device({ student: student('associate', 'gen') });
@@ -140,7 +143,7 @@ db('DELETE FROM grade_overrides; DELETE FROM grade_cache; DELETE FROM grade_queu
   await p.goto(`${BASE}/CTSGenesisUnit2.html`, { waitUntil: 'load' });
   await p.waitForSelector('.question[data-mc]', { timeout: 15000 });
   const code = await codeOf(p);
-  const html = await (await fetch(`${BASE}/CTSGenesisUnit2.html`)).text();
+  const html = await (await freshFetch(`${BASE}/CTSGenesisUnit2.html`)).text();
   ok(html.includes('"grading":"live"') && !/"(answer|accept|keywords|rubric|model)"/.test(html.slice(html.indexOf('window.CTS_UNIT'), html.indexOf('window.CTS_UNIT') + 60000)), 'a Genesis unit page is a live unit page with no key');
   for (let i = 0; i < g2.mc.length; i++) { await p.locator(`button.option[data-mc="${i}"][data-opt="${g2.mc[i].answer}"]`).click(); await p.waitForSelector(`.question[data-mc="${i}"] .feedback-text`, { timeout: 15000 }); }
   for (let i = 0; i < g2.fill.length; i++) {
@@ -166,10 +169,10 @@ db('DELETE FROM grade_overrides; DELETE FROM grade_cache; DELETE FROM grade_queu
   // the other nine units are on record, so this one completes the course
   db(`INSERT INTO unit_progress (student_id, course, unit, completed_at, source) VALUES ${[2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => `('${code}', 'ethics', ${n}, '2026-10-01T00:00:00Z', 'server')`).join(',')}`);
 
-  const html = await (await fetch(`${BASE}/ethics_unit01.html`)).text();
+  const html = await (await freshFetch(`${BASE}/ethics_unit01.html`)).text();
   ok(!/correct\s*:\s*\d\s*[,}]/.test(html), 'the Ethics page carries no answer index');
   ok(JSON.stringify(await p.evaluate(() => [Object.keys(mcQuestions[0]), Object.keys(kwQuestions[0])])) === '[["textEn","textEs","optionsEn","optionsEs"],["textEn","textEs"]]', 'a question in the page is its wording and nothing else');
-  const fillData = await (await fetch(`${BASE}/assets/js/fill/ethics.js`)).text();
+  const fillData = await (await freshFetch(`${BASE}/assets/js/fill/ethics.js`)).text();
   ok(!fillData.includes(s.fill[0].answer.en + '"') && !/"accept"|"answer"/.test(fillData), 'and the fill-in data file carries no answer');
 
   // multiple choice: the first one wrong, the server says what is right
@@ -213,7 +216,7 @@ db('DELETE FROM grade_overrides; DELETE FROM grade_cache; DELETE FROM grade_queu
   await p.waitForSelector('.question-card', { timeout: 15000 });
   const code = await codeOf(p);
   db(`INSERT INTO unit_progress (student_id, course, unit, completed_at, source) VALUES ${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => `('${code}', 'counseling', ${n}, '2026-10-01T00:00:00Z', 'server')`).join(',')}`);
-  const html = await (await fetch(`${BASE}/CTSCounseling.html`)).text();
+  const html = await (await freshFetch(`${BASE}/CTSCounseling.html`)).text();
   ok(!/correct\s*:\s*\d\s*[,}]/.test(html), 'the Counseling page carries no answer index');
   ok(JSON.stringify(await p.evaluate(() => [Object.keys(UNITS[1].mcq[0]), Object.keys(UNITS[1].shortAnswer[0]), Object.keys(UNITS[1].mcq[0].options[0])])) === '[["textEn","textEs","options"],["textEn","textEs"],["en","es"]]', 'a question in the page is its wording and nothing else');
   await takeUnit(p, s10, { written: false });
@@ -239,7 +242,7 @@ db('DELETE FROM grade_overrides; DELETE FROM grade_cache; DELETE FROM grade_queu
   ok(q1(`SELECT COUNT(*) AS n FROM course_completions WHERE student_id = '${mcode}'`)[0].n === 0, 'every unit is on record, but the course waits for its textbook test on the master\'s tracks');
   // pass the textbook test through the API, the way the test page does
   const tb = JSON.parse(fs.readFileSync('src/content/textbooks/counseling.json', 'utf8'));
-  const post = async (path, body) => (await fetch(BASE + path, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ code: mcode, ...body }) })).json();
+  const post = async (path, body) => (await freshFetch(BASE + path, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ code: mcode, ...body }) })).json();
   const att = await post('/api/attempt', { scope: 'tb:counseling', lang: 'en' });
   const items = att.items.fill.map((qid) => ({ qid, answer: tb.test.questions[Number(qid.split('/').pop())].answer.en }));
   for (let i = 0; i < items.length; i += 10) await post('/api/grade', { attemptId: att.attemptId, items: items.slice(i, i + 10) });
