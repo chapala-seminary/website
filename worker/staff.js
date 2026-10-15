@@ -92,6 +92,32 @@ const json = (v, status = 200) => new Response(JSON.stringify(v, null, 1), { sta
 
 const NEED = { certificate: 12, associate: 25, thm: 15, mdiv: 30 };
 
+/* How students say they found the seminary (the registration form's reg-heard
+   select; stored as these keys in students.heard). Wayne asked (14 Oct 2026,
+   website#95) to see the counts, not just the column: is the U.S. enrollment
+   arriving through AI assistants or ordinary search? The form wrote an em dash
+   when the question was skipped, and records from before migration 0003 have
+   nothing at all; both count as "not answered". */
+const HEARD = {
+  ai: 'AI assistant (ChatGPT, Gemini, etc.)', search: 'Google or other web search', referral: 'Pastor or friend',
+  church: 'Church or study group', social: 'Social media', other: 'Other',
+};
+const NOT_ANSWERED = 'not answered';
+const heardKey = (v) => { const s = String(v ?? '').trim(); return !s || s === '\u2014' || s === '-' ? '' : s; };
+const heardLabel = (v) => { const k = heardKey(v); return k ? HEARD[k] || k : ''; };
+
+/** Counts per answer, overall and for the United States against everywhere else. */
+export function heardSummary(rows) {
+  const total = rows.length;
+  const keys = [...Object.keys(HEARD), ...new Set(rows.map((r) => heardKey(r.heard)).filter((k) => k && !HEARD[k])), ''];
+  return keys.map((k) => {
+    const mine = rows.filter((r) => heardKey(r.heard) === k);
+    const us = mine.filter((r) => r.country === 'US').length;
+    return { answer: k || NOT_ANSWERED, label: k ? HEARD[k] || k : NOT_ANSWERED, students: mine.length,
+      share: total ? Math.round((mine.length / total) * 100) : 0, us, elsewhere: mine.length - us };
+  }).filter((x) => x.students > 0 || HEARD[x.answer]);
+}
+
 /* One row per student, everything the roster shows, computed once. */
 async function roster(env, asOf = new Date()) {
   const rows = (await env.DB.prepare(
@@ -148,7 +174,8 @@ function csv(rows) {
 const STYLE = `body{font-family:system-ui,sans-serif;margin:0;padding:16px;background:#faf8f9;color:#2b1d27}
 h1{font-size:1.3rem;color:#4A1E3A;margin:0 0 4px}p{margin:6px 0 12px;max-width:900px}
 nav a{margin-right:14px;color:#4A1E3A}nav a.on{font-weight:bold;text-decoration:none}
-.wrap{overflow-x:auto;border:1px solid #e7d8e4;border-radius:8px;background:#fff}
+.wrap{overflow-x:auto;border:1px solid #e7d8e4;border-radius:8px;background:#fff}.wrap.narrow{display:inline-block;min-width:0;margin:6px 0}
+details{margin:0 0 12px}summary{cursor:pointer;color:#4A1E3A}.narrow table{min-width:0}
 table{border-collapse:collapse;font-size:.85rem;min-width:100%}th,td{padding:6px 8px;border-bottom:1px solid #f0e6ee;text-align:left;white-space:nowrap}
 th{background:#f6eef4;position:sticky;top:0}tr.quiet td{background:#fff7e6}tr.not-started td{background:#fdeeee}
 button{font:inherit;font-size:.8rem;padding:2px 8px;border-radius:12px;border:1px solid #c8b6c2;background:#fff;cursor:pointer}
@@ -165,12 +192,18 @@ function rosterPage(rows, show, user) {
 <p>${rows.length} students: ${count('active')} active in the last ${QUIET_DAYS} days, ${count('quiet')} quiet, ${count('not started')} not started, ${count('new')} registered this week.
 Signed in as ${esc(user)}. <a href="/staff/students.csv">Download CSV</a> · <a href="/staff/notes">Notes to students</a></p>
 <p><small>"Last progress" is the last unit passed or course completed. A returning student's history from the old site arrives dated the day of their first visit to the new one, so their clock starts then.</small></p>
+<details><summary>How students found the seminary (${rows.filter((r) => heardKey(r.heard)).length} of ${rows.length} answered)</summary>
+<div class="wrap narrow"><table><thead><tr><th>Answer</th><th>Students</th><th>Share</th><th>United States</th><th>Elsewhere</th></tr></thead><tbody>
+${heardSummary(rows).map((h) => `<tr><td>${esc(h.label)}</td><td>${h.students}</td><td>${h.share}%</td><td>${h.us}</td><td>${h.elsewhere}</td></tr>`).join('\n')}
+</tbody></table></div>
+<p><small>Asked once, optionally, at registration. Students registered before the answer was kept on the server (before October 2026) show as not answered. Also at <a href="/staff/heard.json">/staff/heard.json</a>.</small></p></details>
 <nav>${tab('all', 'All')}${tab('quiet', `Quiet (${count('quiet')})`)}${tab('not_started', `Not started (${count('not started')})`)}</nav>
 <div class="wrap"><table><thead><tr>${COLUMNS.map(([, h]) => `<th>${h}</th>`).join('')}</tr></thead><tbody>
 ${list.map((r) => `<tr class="${r.status.replace(' ', '-')}">${COLUMNS.map(([k]) => k === 'notes'
     ? `<td><form method="post" action="/staff/students/${r.n}/notes" style="margin:0">${r.notes === 'on' ? 'on' : 'stopped'}
        <input type="hidden" name="stop" value="${r.notes === 'on' ? 1 : 0}"><button>${r.notes === 'on' ? 'stop' : 'resume'}</button></form></td>`
-    : k === 'name' ? `<td><a href="/staff/students/${r.n}/thm-plan">${esc(r[k])}</a></td>` : `<td>${esc(r[k])}</td>`).join('')}</tr>`).join('\n')}
+    : k === 'name' ? `<td><a href="/staff/students/${r.n}/thm-plan">${esc(r[k])}</a></td>`
+    : k === 'heard' ? `<td>${esc(heardLabel(r[k]))}</td>` : `<td>${esc(r[k])}</td>`).join('')}</tr>`).join('\n')}
 </tbody></table></div></body></html>`);
 }
 
@@ -216,6 +249,7 @@ export async function handleStaff(request, env) {
     return new Response(csv(await roster(env)), { headers: { 'content-type': 'text/csv; charset=utf-8',
       'content-disposition': `attachment; filename="cts-students-${new Date().toISOString().slice(0, 10)}.csv"`, ...NOSTORE } });
   if (method === 'GET' && path === '/staff/students.json') return json(await roster(env));
+  if (method === 'GET' && path === '/staff/heard.json') return json(heardSummary(await roster(env)));
   if (method === 'GET' && path === '/staff/notes') return notesPage(env, user);
 
   let m;
