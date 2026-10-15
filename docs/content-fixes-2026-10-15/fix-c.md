@@ -58,3 +58,11 @@ Rule applied: a question that asks about something the lesson never teaches was 
 Attributions checked against the lesson (left as the lesson states them; for faculty to verify): Peter Stoner's 1 in 10^17 (unit 11 b019, already hedged in the lesson); Chuck Colson on the Watergate cover-up (unit 11 b025); the Scofield Reference Bible (1909) (unit 10 b022). The models agree with the lessons. "Voltaire's house" is not in any ST lesson (it is in CTS 12, CTSHermeneutics 1 and CTSCE 1, see below).
 
 Left alone: ST 9, 10, 12, 13 and DP/ST "Absolute Authority" wording (contested; for Wayne).
+
+## CTSJosh
+
+- **3 Q10 (personal Gilgal), model.** Before: described the Gilgal stones and never composed a personal Gilgal. After: a labelled sample answer with four personal memorial stones (using the lesson's own examples: the night one should have died, the temptation, the financial collapse, plus conversion), how each provokes the question, and the answer ("Son, let me tell you what God did for our family", b023, b040).
+- **5 Q7 (Achan's name), model.** Before: never explained the name. After: the valley's name comes from the same Hebrew root as Achan, meaning trouble (b035); then Hosea 2:15.
+- **9 Q5 (bird and hymn), prompt and model.** Before: "John Wesley". The lesson (b036) says Charles Wesley. After: Charles in the question and the model; the model adds his severe trials from the lesson.
+- **10 Q5 (seven faith-motifs), model.** Before: garbled ("trusting the I have given", "the long obedience of made war a long time") and a list that did not match the lesson. After: the lesson's seven (b049–b063).
+- **10 Q10 (doctrinal summary), model.** Before: mapped the motifs to justification, sanctification and consecration (not in the lesson). After: the lesson's "doctrinal trellis" and the daily shape of the choosing (b064, b074).
