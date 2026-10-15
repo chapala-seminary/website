@@ -411,12 +411,60 @@ ok((await fetch(BASE + `/api/student/${CODE}`, { method: 'PUT' })).status === 40
 
 /* ---- deletion ------------------------------------------------------------- */
 
+/* Written answers (docs/ai-grading.md, section 10): a student who asks to be
+   forgotten takes their attempts, answers, appeals, queue entries and the
+   faculty's calibration marks on those answers with them. These need the
+   database itself to look at, so they run when the suite hands it over. */
+const STATE = process.env.STATE, CONFIG = process.env.CONFIG || 'test/wrangler.local.jsonc';
+let rowsOf = null;
+if (STATE) {
+  const { execFileSync } = await import('node:child_process');
+  const q = (command) => JSON.parse((s => s.slice(s.indexOf('[')))(execFileSync('npx',
+    ['wrangler', 'd1', 'execute', 'chapala-students', '--local', '--persist-to', STATE, '--config', CONFIG, '--json', '--command', command],
+    { stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 64 * 1024 * 1024 }).toString()))[0].results;
+  const count = (sql) => q(`SELECT COUNT(*) AS n FROM (${sql})`)[0].n;
+  /* wrangler takes seconds and blocks this process; the connections the Worker closed meanwhile are
+     noticed only once the event loop turns, so give it a moment before the next request. */
+  rowsOf = async (id) => {
+    const out = {
+      attempts: count(`SELECT 1 FROM attempts WHERE student_id = '${id}'`),
+      answer_grades: count(`SELECT 1 FROM answer_grades WHERE student_id = '${id}'`),
+      appeals: count(`SELECT 1 FROM appeals WHERE student_id = '${id}'`),
+      calibration: count(`SELECT 1 FROM calibration WHERE grade_id IN (SELECT id FROM answer_grades WHERE student_id = '${id}')`),
+      grade_queue: count(`SELECT 1 FROM grade_queue WHERE grade_id IN (SELECT id FROM answer_grades WHERE student_id = '${id}')`),
+    };
+    await new Promise((r) => setTimeout(r, 500));
+    return out;
+  };
+  const live = (p, b) => fetch(BASE + p, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b) }).then(async (r) => ({ status: r.status, body: await r.json().catch(() => null) }));
+  const a = await live('/api/attempt', { code: CODE, scope: 'u:CTSJohn/1', lang: 'en' });
+  ok(a.status === 200 && a.body?.attemptId, 'a student can open an attempt, for the deletion check', JSON.stringify(a));
+  const words = 'here is my own careful explanation of what the passage teaches and why it matters for the church today';
+  const g = await live('/api/grade', { code: CODE, attemptId: a.body?.attemptId, items: [
+    { qid: a.body?.items?.sa?.[0], answer: `one ${words} [[not_met]]` },
+    { qid: a.body?.items?.fill?.[0], answer: 'zzz nothing' }] });
+  const g2 = await live('/api/grade', { code: CODE, attemptId: a.body?.attemptId, items: [{ qid: a.body?.items?.sa?.[1], answer: `two ${words} [[error]]` }] });
+  ok(g.status === 200 && g.body?.items?.length === 2 && g2.status === 200, 'and have written answers graded, one of them waiting for the model', JSON.stringify([g, g2]));
+  const gradeId = g.body?.items?.[0]?.gradeId;
+  ok((await live('/api/appeal', { code: CODE, gradeId, note: 'please look again' })).status === 200, 'and ask for one to be reviewed');
+  await new Promise((r) => setTimeout(r, 500));
+  q(`INSERT INTO calibration (grade_id, marked_by, human_verdict, marked_at, week) VALUES (${Number(gradeId)}, 'deletion-test@example.test', 'met', '2026-01-01T00:00:00Z', '2026-W01')`);
+  await new Promise((r) => setTimeout(r, 500));
+  const before = await rowsOf(CODE);
+  ok(before.attempts >= 1 && before.answer_grades === 3 && before.appeals === 1 && before.calibration === 1 && before.grade_queue >= 1,
+    'the record holds attempts, answers, an appeal, a calibration mark and a queued answer', JSON.stringify(before));
+}
+
 const del = await fetch(BASE + `/api/student/${CODE}`, { method: 'DELETE' });
 ok(del.status === 200, `delete returned ${del.status}`);
 ok((await jget(`/api/student/${CODE}`)).status === 404, 'the record is gone after deletion');
 ok((await jget(`/api/verify/${VC}`)).status === 404, 'and so are the certificates issued from it');
 ok((await fetch(BASE + `/api/student/${CODE}`, { method: 'DELETE' })).status === 404,
   'deleting twice is a 404, not an error');
+if (rowsOf) {
+  const after = await rowsOf(CODE);
+  ok(Object.values(after).every((n) => n === 0), 'deleting the record deletes their attempts, written answers, appeals, calibration marks and queued answers', JSON.stringify(after));
+}
 
 /* -------------------------------------------------------------------------- */
 

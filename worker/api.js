@@ -671,6 +671,12 @@ async function deleteStudent(env, rawCode) {
       env.DB.prepare('DELETE FROM notifications WHERE student_id = ?').bind(g),
       env.DB.prepare('DELETE FROM outreach WHERE student_id = ?').bind(g),
       env.DB.prepare('DELETE FROM contact_tokens WHERE student_id = ?').bind(g),
+      // Written answers and everything that hangs on them (docs/ai-grading.md, section 10).
+      env.DB.prepare('DELETE FROM calibration WHERE grade_id IN (SELECT id FROM answer_grades WHERE student_id = ?)').bind(g),
+      env.DB.prepare('DELETE FROM grade_queue WHERE grade_id IN (SELECT id FROM answer_grades WHERE student_id = ?)').bind(g),
+      env.DB.prepare('DELETE FROM appeals WHERE student_id = ? OR grade_id IN (SELECT id FROM answer_grades WHERE student_id = ?)').bind(g, g),
+      env.DB.prepare('DELETE FROM answer_grades WHERE student_id = ?').bind(g),
+      env.DB.prepare('DELETE FROM attempts WHERE student_id = ?').bind(g),
     ]),
   ]);
   return json({ deleted: true });
