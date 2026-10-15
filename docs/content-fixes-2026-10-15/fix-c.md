@@ -66,3 +66,14 @@ Left alone: ST 9, 10, 12, 13 and DP/ST "Absolute Authority" wording (contested; 
 - **9 Q5 (bird and hymn), prompt and model.** Before: "John Wesley". The lesson (b036) says Charles Wesley. After: Charles in the question and the model; the model adds his severe trials from the lesson.
 - **10 Q5 (seven faith-motifs), model.** Before: garbled ("trusting the I have given", "the long obedience of made war a long time") and a list that did not match the lesson. After: the lesson's seven (b049–b063).
 - **10 Q10 (doctrinal summary), model.** Before: mapped the motifs to justification, sanctification and consecration (not in the lesson). After: the lesson's "doctrinal trellis" and the daily shape of the choosing (b064, b074).
+
+## CTSHermeneutics
+
+- **1 Q3 (five things about the Scriptures), model.** Before: four items, not the lesson's list. After: the lesson's five (b036–b040): teachable, holy, lead to salvation, inspired by God, valuable.
+- **2 Q9 (Moses' excuses), model.** Before: "Who am I? What is Your name? They will not believe me. I am slow of speech" (Exodus' own four) and "God supplies the mouth". After: the lesson's four (no body/presence/position, no authority, no credentials, no ability), and God's answer to the fourth, "Who made the mouth?" (b056).
+- **4 Q10 (weekly schedule), model.** Before: collapsed Tuesday to Friday into one clause. After: the lesson's day-by-day schedule, Monday to Saturday (b048–b049).
+- **8 Q7 (Prodigal Son and Hosea), model.** Before: the difference was "cost shown" and the father "runs in welcoming grace" (not in the lesson). After: the lesson's difference (b033): the Prodigal repented, Gomer never says she is sorry; redemption through the sinner's return versus the husband's pursuit.
+- **11 Q5 (four roads), model.** Before: "image of His character", and "none has none" — the lesson says some passages have none directly (b025). After: the lesson's promise/type/image/presence with examples, and that some passages simply serve the story.
+- **11 Q7 (three errors), model.** Before: forcing "by allegory", ignoring = "refusing to track Christ at all", skipping = "leaping to Christ too fast" (the last is nearly the opposite of the lesson). After: forcing every detail, ignoring the connections the Bible itself makes, skipping the Old Testament entirely (b034–b036).
+
+Attribution for faculty: Hermeneutics 1 (b037) states that Voltaire predicted the Bible would be forgotten in a hundred years and that "the very room in which he spoke those words is now used as a Bible storehouse" (CTS 12 says "house"; CTSCE 1 also mentions Voltaire). The same paragraph says Henry V of England made Bible-reading a capital crime. These are the lesson's claims; the models agree with them, and they are left for faculty to verify.
