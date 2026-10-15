@@ -96,7 +96,7 @@ export async function runQueue(env, { limit = 40 } = {}) {
             env.DB.prepare(
               `UPDATE answer_grades SET verdict = ?, feedback = ?, points_json = ?, graded_by = 'ai', model = ?, prompt_version = ?,
                  rubric_version = ?, graded_at = ? WHERE id = ? AND verdict = 'pending'`)
-              .bind(r.verdict, held ? null : r.feedback || null, held ? JSON.stringify({ held: 'model' }) : r.points?.length ? JSON.stringify(r.points) : null,
+              .bind(r.verdict, held ? null : r.feedback || null, held ? JSON.stringify({ held: 'model' }) : r.record ? JSON.stringify(r.record) : r.points?.length ? JSON.stringify(r.points) : null,
                 r.model, r.version, keys.get(d.qid)?.rubricVersion ?? null, nowIso(), d.grade_id),
             env.DB.prepare('DELETE FROM grade_queue WHERE grade_id = ?').bind(d.grade_id),
           ]);

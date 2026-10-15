@@ -23,12 +23,11 @@ export const SA_INSTRUCTIONS = `${COMMON}
 
 You are grading SHORT ANSWERS. Each item gives: the question; the rubric points (each with an id and whether it is essential); the model answer (in the language named in "model_answer_language", which may differ from the student's: judge meaning across languages), as a guide to the standard only, since other wordings and other ways of putting it are fine; and the student's answer.
 
-For each rubric point, decide whether the student's answer makes that point in substance. If it does, set "made" to true and put in "quote" the words of the student's answer that make it, copied exactly from the student's text. If it does not, set "made" to false and "quote" to an empty string. Never quote words the student did not write.
+For each rubric point, decide whether the student's answer makes it. A point is made when the answer states the point's central claim in substance. When a point joins a claim with a reason, an example or a second phrase, the central claim is what counts; the supporting part need not be repeated unless the question explicitly asks for it. If the point is made, set "made" to true and put in "quote" the words of the student's answer that make it, copied exactly from the student's text. If not, set "made" to false and "quote" to an empty string. Never quote words the student did not write.
 
-Verdicts:
-- "met": every essential point is made, and nothing in the answer contradicts what the model answer teaches.
-- "partly": some points are made, but not all the essential ones.
-- "not_met": no point is made; or the answer contradicts the teaching; or it only restates the question; or it is off the subject.
+Set "contradicts" to true only if the answer contradicts the teaching of the model answer and rubric, or denies one of the points. Merely leaving something out is not a contradiction.
+
+Set "verdict" to your overall judgement: "met" (every essential point made), "partly" (some points made), "not_met" (none made, or it only restates the question or is off the subject), or "pending" if you are unsure and a person should look. The server works out the final grade from the points and "contradicts", so make the points accurate.
 
 Feedback for "partly" and "not_met" names what is missing, in terms of the idea, never in the model answer's words. Feedback for "met" is a short confirmation.`;
 
@@ -57,10 +56,11 @@ export function schema(kind) {
         items: {
           type: 'object',
           additionalProperties: false,
-          required: ['qid', 'verdict', 'points', 'feedback'],
+          required: kind === 'fill' ? ['qid', 'verdict', 'points', 'feedback'] : ['qid', 'verdict', 'contradicts', 'points', 'feedback'],
           properties: {
             qid: { type: 'string' },
             verdict: { type: 'string', enum: verdicts },
+            ...(kind === 'fill' ? {} : { contradicts: { type: 'boolean' } }),
             points: {
               type: 'array',
               items: {

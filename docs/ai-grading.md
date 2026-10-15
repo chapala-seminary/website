@@ -166,8 +166,20 @@ The rules:
   passes (or cannot pass) whatever the pending items turn out to be, it is
   settled at once.
 
-  **met** needs every essential point made and no contradiction. "partly"
-  counts as not met. Passing is 9 of 10 met. A "met" answer is banked
+  **The server derives the verdict; the model does not decide it.** The model
+  reports, per rubric point, whether it is made (with a quote), and a boolean
+  `contradicts` (the answer contradicts the teaching of the model answer and
+  rubric, or denies a point). Its own `verdict` counts only when it is
+  "pending". The rule, in order:
+  1. the model said "pending": pending;
+  2. `contradicts`: not met;
+  3. every essential point made: **met**;
+  4. any point made: partly;
+  5. otherwise: not met.
+
+  A point is "made" when the answer states its central claim in substance;
+  if the point joins a claim with a reason or example, the central claim
+  counts. "partly" counts as not met. Passing is 9 of 10 met. A "met" answer is banked
   across attempts, so a retake asks only for the rest.
 - **What each track must pass:**
 
@@ -341,7 +353,7 @@ Notes on the routes (as built):
 - **Models** (variables):
   - `GRADER_MODEL` = `@cf/meta/llama-3.3-70b-instruct-fp8-fast`;
   - `GRADER_MODEL_FALLBACK` = `@cf/openai/gpt-oss-120b`;
-  - `GRADER_PROMPT_VERSION` = `2026-10-14.1`.
+  - `GRADER_PROMPT_VERSION` = `2026-10-15.1`.
 - **Call:**
   `env.AI.run(model, { messages, response_format: { type: 'json_schema', json_schema }, max_tokens, temperature: 0 })`.
 - **Validation:** the reply must parse, match the schema, and cover exactly
@@ -349,9 +361,14 @@ Notes on the routes (as built):
   - every point made must quote text found in the student's answer, compared
     after `normalise` as whole words (punctuation at the ends of the quote is
     ignored; before 14 Oct 2026 a quote ending in a full stop was refused);
-  - "met" must be consistent with the essential points.
+  - a point with a quote that is not found in the answer is treated as **not
+    made**; if more than half of the quotes the model claimed for an item are
+    not found, the item's reply is invalid;
+  - the verdict is **derived** from the validated points (section 5): the
+    model's own verdict is used only when it is "pending". `points_json`
+    stores `{ points, model_verdict, contradicts }` for audit.
 
-  On failure, retry once, then try the fallback model. If that fails too, the
+  On an invalid reply, retry once, then try the fallback model. If that fails too, the
   item is pending and goes into `grade_queue`.
 - **Errors:** AI error codes 3036, 3040 and 3007 make the item pending at
   once (no retry, no fallback). The cron `*/15 * * * *` retries the queue,

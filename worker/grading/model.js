@@ -18,7 +18,7 @@ import { fakeAIRun } from './fake-ai.js';
 
 export const DEFAULT_MODEL = '@cf/meta/llama-3.3-70b-instruct-fp8-fast';
 export const DEFAULT_FALLBACK = '@cf/openai/gpt-oss-120b';
-export const DEFAULT_VERSION = '2026-10-14.1';
+export const DEFAULT_VERSION = '2026-10-15.1';
 const CAPACITY = /\b(3036|3040|3007)\b/;
 const TIMEOUT_MS = 25000;
 
@@ -79,6 +79,17 @@ async function call(env, model, kind, lang, items, version) {
   try { return await Promise.race([run, timeout]); } finally { clearTimeout(timer); }
 }
 
+/** The short-answer verdict, derived from the validated points (docs/ai-grading.md, section 5).
+ *  The model's own verdict counts only when it is "pending". */
+export function deriveVerdict(rubricPoints, points, contradicts) {
+  if (contradicts) return 'not_met';
+  const made = new Set(points.filter((p) => p.made).map((p) => p.id));
+  // (a rubric with no essential point needs at least one point made)
+  const essentials = rubricPoints.filter((x) => x.essential);
+  if (essentials.length ? essentials.every((x) => made.has(x.id)) : made.size > 0) return 'met';
+  return made.size ? 'partly' : 'not_met';
+}
+
 /** Check a reply against what was sent. Returns { ok: Map qid->result, wholeBad: bool }. */
 export function validate(kind, parsed, items) {
   const ok = new Map();
@@ -97,27 +108,29 @@ export function validate(kind, parsed, items) {
     if (r.verdict === 'pending') { ok.set(r.qid, { verdict: 'pending', feedback: '', points: [], held: true }); continue; }
     if (kind === 'fill') { ok.set(r.qid, { verdict: r.verdict, feedback, points: [] }); continue; }
 
-    // Short answers: every point made must quote the student's own words,
-    // and "met" needs every essential point.
+    // Short answers: a point counts as made only with a quote that is the
+    // student's own words. The verdict is derived here, not taken from the model.
     const rub = rubricOf(it.key);
     const hay = normalise(it.answer);
     const byId = new Map();
-    let bad = !Array.isArray(r.points);
+    let bad = !Array.isArray(r.points), claimed = 0, invalid = 0;
     for (const p of Array.isArray(r.points) ? r.points : []) {
       if (!p || typeof p.id !== 'string' || typeof p.made !== 'boolean' || byId.has(p.id) || !rub.points.some((x) => x.id === p.id)) { bad = true; break; }
-      if (p.made) {
+      let made = p.made;
+      if (made) {
+        claimed++;
         /* normalise() puts a space at each end, and a quote that begins or ends in punctuation
            ("...in his name.") gets a second one; compare the words, whole words only. */
         const q = normalise(p.quote || '').trim();
-        if (q.length < 2 || !hay.includes(` ${q} `)) { bad = true; break; }
+        if (q.length < 2 || !hay.includes(` ${q} `)) { made = false; invalid++; }
       }
-      byId.set(p.id, { id: p.id, made: p.made, quote: p.made ? String(p.quote).slice(0, 300) : '' });
+      byId.set(p.id, { id: p.id, made, quote: made ? String(p.quote).slice(0, 300) : '' });
     }
-    if (bad) continue;
+    if (bad || invalid * 2 > claimed) continue;   // more than half the quotes invalid: the reply is not trusted
     const points = rub.points.map((x) => byId.get(x.id) || { id: x.id, made: false, quote: '' });
-    const essentialsMade = rub.points.every((x) => !x.essential || points.find((p) => p.id === x.id).made);
-    if (r.verdict === 'met' && !essentialsMade) continue;
-    ok.set(r.qid, { verdict: r.verdict, feedback, points });
+    const contradicts = r.contradicts === true;
+    const verdict = deriveVerdict(rub.points, points, contradicts);
+    ok.set(r.qid, { verdict, feedback: verdict === r.verdict ? feedback : '', points, record: { points, model_verdict: r.verdict, contradicts } });
   }
   return { ok, wholeBad: false };
 }

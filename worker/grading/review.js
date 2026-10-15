@@ -49,6 +49,7 @@ export function aiRecord(row) {
   const pj = parse(row.points_json);
   const aiVerdict = row.graded_by === 'ai' && row.verdict !== 'pending' ? row.verdict : null;
   if (Array.isArray(pj)) return { verdict: aiVerdict, points: pj, held: null };
+  if (pj && Array.isArray(pj.points)) return { verdict: aiVerdict, points: pj.points, held: null };   // { points, model_verdict, contradicts }
   if (pj && typeof pj === 'object') {
     return { verdict: pj.ai_verdict ?? (pj.held ? null : aiVerdict), points: pj.ai_points ?? null, held: pj.held ?? null };
   }

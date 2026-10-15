@@ -8,6 +8,7 @@
  *   [[met]] [[partly]] [[not_met]]   short answers
  *   [[right]] [[wrong]]              fill-ins
  *   [[pending]]                      the model is unsure
+ *   (the reply also carries "contradicts": true for [[not_met]]; the server derives the final verdict from the points)
  *   [[error]]                        the call throws (any other hint in the same text is the verdict it would give)
  *   [[error:3040]]                   the call throws a capacity error (3040, 3036, 3007)
  *   [[primary-error]]                throws on GRADER_MODEL only; the fallback answers
@@ -56,13 +57,16 @@ export function fakeAIRun(env, model, params) {
       return;
     }
     const verdict = v === 'met' || h === 'bad-quote' ? 'met' : v === 'partly' ? 'partly' : v === 'pending' ? 'pending' : 'not_met';
+    /* "partly": the first essential point is missed, every other point is made (the server
+       derives the verdict from the points, so a rubric of one point cannot come out "partly"). */
+    const missed = verdict === 'partly' ? it.rubric.findIndex((p) => p.essential) : -1;
     const points = it.rubric.map((p, k) => ({
       id: p.id,
-      made: verdict === 'met' || (verdict === 'partly' && k === 0 ? false : verdict === 'partly'),
+      made: verdict === 'met' || (verdict === 'partly' && k !== missed),
       quote: '',
     }));
     for (const p of points) if (p.made) p.quote = h === 'bad-quote' ? 'words the student never wrote' : quote;
-    items.push({ qid: it.qid, verdict, points,
+    items.push({ qid: it.qid, verdict, contradicts: verdict === 'not_met' && v === 'not_met', points,
       feedback: verdict === 'met' ? 'This makes the points the question asks for.'
         : verdict === 'partly' ? 'Some of it is there, but an essential idea is missing.'
           : verdict === 'pending' ? '' : 'This does not yet make the main point of the question.' });

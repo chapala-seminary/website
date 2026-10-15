@@ -15,7 +15,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { normalise, fold, bare, exactFill, copiedOnly, wordCount, ownWords } from '../worker/grading/text.js';
 import { requirements, evaluate, need, lockMinutes, lockKind, looksLikeInstruction, counts } from '../worker/grading/rules.js';
-import { validate } from '../worker/grading/model.js';
+import { validate, deriveVerdict } from '../worker/grading/model.js';
 import { buildMessages, pickText } from '../worker/grading/prompt.js';
 import { fakeAIRun } from '../worker/grading/fake-ai.js';
 
@@ -149,18 +149,18 @@ const key = { prompt: { en: 'Q' }, model: { en: 'M' }, rubric: { v: 2, points: [
 const ANS = 'The Word was with God from the beginning and is himself fully God, not a creature.';
 const items = [{ qid: 'q1', key, answer: ANS }, { qid: 'q2', key, answer: ANS }];
 const pt = (id, made, quote = 'was with God') => ({ id, made, quote: made ? quote : '' });
-const good = (qid, verdict = 'met', points = [pt('a', true), pt('b', true), pt('c', false)]) => ({ qid, verdict, points, feedback: 'ok' });
+const good = (qid, verdict = 'met', points = [pt('a', true), pt('b', true), pt('c', false)], contradicts = false) => ({ qid, verdict, contradicts, points, feedback: 'ok' });
 let v = validate('sa', { items: [good('q1'), good('q2')] }, items);
 ok(v.ok.size === 2 && !v.wholeBad, 'a valid reply is accepted');
 v = validate('sa', { items: [good('q1', 'met', [pt('a', true, 'words never written'), pt('b', true), pt('c', false)]), good('q2')] }, items);
-ok(!v.ok.has('q1') && v.ok.has('q2'), 'a point "made" with a quote the student did not write is refused');
+ok(v.ok.get('q1')?.verdict === 'partly' && v.ok.get('q1').points[0].made === false, 'a point "made" with a quote the student did not write is not made (1 of 2 claimed invalid: kept)');
 // a quote that starts or ends in punctuation is still the student's words (it used to be refused)
 v = validate('sa', { items: [good('q1', 'met', [pt('a', true, 'The Word was with God from the beginning,'), pt('b', true, '"is himself fully God, not a creature."'), pt('c', false)]), good('q2')] }, items);
 ok(v.ok.has('q1'), 'a quote with punctuation at its ends is accepted');
 v = validate('sa', { items: [good('q1', 'met', [pt('a', true, 'Word was with Go'), pt('b', true), pt('c', false)]), good('q2')] }, items);
-ok(!v.ok.has('q1'), 'a quote that cuts a word in half is refused');
+ok(v.ok.get('q1')?.points[0].made === false, 'a quote that cuts a word in half does not make the point');
 v = validate('sa', { items: [good('q1', 'met', [pt('a', true), pt('b', false), pt('c', true)]), good('q2')] }, items);
-ok(!v.ok.has('q1'), '"met" with an essential point not made is refused');
+ok(v.ok.get('q1')?.verdict === 'partly', 'the model says "met" but an essential point is not made: partly');
 v = validate('sa', { items: [good('q1', 'partly', [pt('a', true), pt('b', false), pt('c', false)]), good('q2')] }, items);
 ok(v.ok.get('q1')?.verdict === 'partly', '"partly" with one essential point made is accepted');
 v = validate('sa', { items: [good('q1'), good('q1')] }, items);
@@ -171,6 +171,24 @@ v = validate('sa', { items: [good('q1')] }, items);
 ok(v.ok.size === 1 && !v.ok.has('q2') && !v.wholeBad, 'an item left out stays unresolved, the rest is kept');
 v = validate('sa', { items: [good('q1', 'excellent'), good('q2')] }, items);
 ok(!v.ok.has('q1'), 'a verdict outside the list is refused');
+// the verdict is derived from the points (docs/ai-grading.md section 5)
+const dv = (mv, pts, contradicts = false) => validate('sa', { items: [good('q1', mv, pts, contradicts), good('q2')] }, items).ok.get('q1');
+eq(dv('partly', [pt('a', true), pt('b', true), pt('c', false)])?.verdict, 'met', 'model says partly but both essentials made: met');
+eq(dv('not_met', [pt('a', true), pt('b', true), pt('c', false)])?.verdict, 'met', 'model says not_met but both essentials made: met');
+eq(dv('met', [pt('a', true), pt('b', true), pt('c', true)], true)?.verdict, 'not_met', 'contradicts beats all points made');
+eq(dv('met', [pt('a', true), pt('b', false), pt('c', false)])?.verdict, 'partly', 'some points made, an essential missing: partly');
+eq(dv('met', [pt('a', false), pt('b', false), pt('c', true)])?.verdict, 'partly', 'only the non-essential point made: partly');
+eq(dv('met', [pt('a', false), pt('b', false), pt('c', false)])?.verdict, 'not_met', 'no point made: not_met');
+eq(dv('pending', [pt('a', true), pt('b', true), pt('c', false)])?.held, true, 'the model saying pending is honoured even with every point made');
+eq(dv('met', [pt('a', true), pt('b', true), pt('c', false)], true)?.record, { points: dv('met', [pt('a', true), pt('b', true), pt('c', false)], true).points, model_verdict: 'met', contradicts: true }, 'the model\'s own verdict and contradicts are recorded');
+eq(dv('met', [pt('a', true), pt('b', true), pt('c', false)])?.feedback, 'ok', 'feedback kept when the model and the server agree');
+eq(dv('partly', [pt('a', true), pt('b', true), pt('c', false)])?.feedback, '', 'feedback dropped when the server overrules the model');
+eq(deriveVerdict([{ id: 'a', essential: false }, { id: 'b', essential: false }], [{ id: 'a', made: true }, { id: 'b', made: false }], false), 'met', 'a rubric with no essential point: any point made is met');
+// some invalid quotes: those points are not made; more than half invalid: the reply is refused
+eq(dv('met', [pt('a', true), pt('b', true, 'words never written'), pt('c', false)])?.points.map((p) => p.made), [true, false, false], 'an invalid quote leaves that point not made');
+eq(dv('met', [pt('a', true), pt('b', true, 'words never written'), pt('c', false)])?.verdict, 'partly', 'with one of two essentials lost to a bad quote: partly');
+eq(validate('sa', { items: [good('q1', 'met', [pt('a', true, 'nope nope'), pt('b', true, 'also nope'), pt('c', true)]), good('q2')] }, items).ok.has('q1'), false, 'more than half the quotes invalid: the item is refused');
+eq(validate('sa', { items: [good('q1', 'met', [pt('a', true, 'nope nope'), pt('b', true), pt('c', false)]), good('q2')] }, items).ok.has('q1'), true, 'exactly half invalid is kept');
 v = validate('sa', { items: [good('q1', 'met', [pt('a', true), pt('b', true), pt('zz', false)]), good('q2')] }, items);
 ok(!v.ok.has('q1'), 'a point id that is not in the rubric is refused');
 v = validate('sa', { items: [{ qid: 'q1', verdict: 'pending', points: [], feedback: '' }, good('q2')] }, items);

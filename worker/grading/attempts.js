@@ -523,7 +523,7 @@ export async function gradeWritten(env, attempt, entries) {
       const r = batch.results.get(entries[i].qid);
       if (!r) { out[i] = { verdict: 'pending', by: 'ai', feedback: canned('waiting', lang), queue: batch.error || 'unresolved' }; continue; }
       if (r.verdict === 'pending') { out[i] = { verdict: 'pending', by: 'ai', feedback: canned('held', lang), held: 'model', model: r.model, version: r.version }; continue; }
-      out[i] = { verdict: r.verdict, by: 'ai', feedback: r.feedback, points: r.points, model: r.model, version: r.version };
+      out[i] = { verdict: r.verdict, by: 'ai', feedback: r.feedback, points: r.points, record: r.record, model: r.model, version: r.version };
       if (kind === 'fill') await cacheDecision(env, entries[i].qid, lang, normAnswer(entries[i].answer), r.verdict, r.feedback, r.model, r.version);
     }
   }
@@ -538,7 +538,7 @@ export async function gradeWritten(env, attempt, entries) {
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
        ON CONFLICT(attempt_id, qid) DO NOTHING RETURNING id`)
       .bind(attempt.id, attempt.student_id, e.qid, e.kind, lang, String(e.answer ?? '').slice(0, MAX_SA_CHARS), r.verdict, r.feedback || null,
-        r.points ? JSON.stringify(r.points) : r.held ? JSON.stringify({ held: r.held }) : null, r.by,
+        r.record ? JSON.stringify(r.record) : r.points ? JSON.stringify(r.points) : r.held ? JSON.stringify({ held: r.held }) : null, r.by,
         r.model || null, r.version || (r.by === 'ai' ? version : null), e.kind === 'sa' ? (e.rubricVersion ?? null) : null, t, pending ? null : t).first();
     if (!res) {
       // A simultaneous request wrote this answer first: its grade stands.
