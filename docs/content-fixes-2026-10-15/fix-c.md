@@ -77,3 +77,8 @@ Left alone: ST 9, 10, 12, 13 and DP/ST "Absolute Authority" wording (contested; 
 - **11 Q7 (three errors), model.** Before: forcing "by allegory", ignoring = "refusing to track Christ at all", skipping = "leaping to Christ too fast" (the last is nearly the opposite of the lesson). After: forcing every detail, ignoring the connections the Bible itself makes, skipping the Old Testament entirely (b034–b036).
 
 Attribution for faculty: Hermeneutics 1 (b037) states that Voltaire predicted the Bible would be forgotten in a hundred years and that "the very room in which he spoke those words is now used as a Bible storehouse" (CTS 12 says "house"; CTSCE 1 also mentions Voltaire). The same paragraph says Henry V of England made Bible-reading a capital crime. These are the lesson's claims; the models agree with them, and they are left for faculty to verify.
+
+## CTSCG
+
+- **2 Q3 (1 Corinthians 3:6-7), model.** Before: reversed — "lose the divine half and you get fatalism; lose the human half and you get technique". The lesson (b012) says lose the human half and you get fatalism; lose the divine half and you get the franchise (technique without the Spirit). After: corrected, all three languages.
+- **12 Q3 (six-to-eight-week window), prompt, model, keywords.** Before: described a newcomer's first six to eight weeks. The lesson (b014, b021) says people give a church six to eight weeks to notice they are gone, and a dropout who is not reached in that window reinvests elsewhere. After: question and model describe that window; keyword groups that no longer fit (connect, first, assimilation, new) were replaced (notice, gone, reinvest, drop).
