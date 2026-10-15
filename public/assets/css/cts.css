@@ -219,6 +219,9 @@ figcaption,.illustration .caption{font-size:.85rem;color:var(--muted);
 .course-complete{margin-top:var(--s2);color:var(--ok-ink);font-weight:600}
 
 /* ── Registration ───────────────────────────────────────────────────────── */
+/* A returning student is marked on <html> before the first paint, so the
+   card is never drawn and then removed. A new student sees it in the HTML. */
+html.cts-registered #cts-register{display:none!important}
 .reg-form,.registration-panel,.registration-card,.registration-section,
 .register{background:var(--card);border:1px solid var(--rule);
   border-top:4px solid var(--gold);border-radius:var(--r);

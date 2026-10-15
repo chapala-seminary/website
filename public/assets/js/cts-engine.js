@@ -423,6 +423,7 @@
     var s = student();
     var done = !!(s && s.name);
     card.hidden = done;
+    document.documentElement.classList.toggle("cts-registered", done);
     if (done) return;
     var t = el("regTrack");
     if (t) t.value = track() || "cert";

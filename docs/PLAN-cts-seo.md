@@ -45,8 +45,10 @@ student code in a public URL; never imply accreditation.
 | Home page | Still the original half-megabyte of inline CSS and inlined images, with a generated catalog in the middle. Rewriting it is not a Phase 1 job. |
 | CI | `.github/workflows/beta.yml` builds, tests, and deploys **only** on push to `beta`. There is no Lighthouse job and no SEO assertion suite. |
 
-French is a draft language: untranslated and machine-draft `/fr/` pages are
-already `noindex,follow`. That stays.
+Public copy names the seminary in English, Spanish, and French (Dr. Cook,
+15 Oct 2026). Do not call French a draft in titles, descriptions, `llms.txt`,
+or the catalog. Machine-translated `/fr/` lesson pages stay `noindex,follow`
+with the existing review notice until that notice is taken down.
 
 ---
 
@@ -169,8 +171,10 @@ Safe in this PR:
 - A real `404.html` served with status 404.
 - Course landings: static HTML, existing `cts.css`, no extra webfont request,
   seal image with width, height, and `loading="lazy"`.
-- Unit pages: breadcrumbs in the chrome; existing Google Fonts left as they
-  are (changing them site-wide is a visual review).
+- Unit, textbook, and reading-room pages no longer request Google Fonts.
+  The named families still fall through to Georgia, which is what a lesson
+  paints. A webfont on that text was the lesson's LCP and its layout shift.
+  The home page still loads its own Google Fonts stylesheet.
 
 Not in this PR: rewriting the home page. It is the LCP problem. See
 “Lighthouse” below.

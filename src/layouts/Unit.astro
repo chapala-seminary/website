@@ -99,12 +99,12 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap"
-    />
+    <script is:inline>
+      try {
+        var ctsStudent = JSON.parse(localStorage.getItem("cts_student") || "null");
+        if (ctsStudent && ctsStudent.name) document.documentElement.classList.add("cts-registered");
+      } catch (e) {}
+    </script>
     <link rel="stylesheet" href={version('/assets/css/cts.css')} />
     {/* The 102 per-page stylesheets are gone; `styles` is kept in the schema
         only so a course with a genuinely special need can opt back in, and
@@ -175,7 +175,7 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
           forty-four sets of field names -- which is why cts-engine.js still
           reads five spellings of "name". The engine hides this once a student
           is registered; a student registers once, in any course, for all. */}
-      <section class="reg-form" id="cts-register" hidden data-cts-chrome>
+      <section class="reg-form" id="cts-register" data-cts-chrome>
         <h2>
           <span class="lang-en">Register once, for every course</span>
           <span class="lang-es">Regístrese una vez, para todos los cursos</span>
@@ -279,14 +279,14 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
     </footer>
 
     <script is:inline set:html={`window.CTS_UNIT = ${unitJson};`} />
-    <script is:inline src={version('/assets/js/cts-record.js')}></script>
-    {live && <script is:inline src={version('/assets/js/cts-grading.js')}></script>}
-    <script is:inline src={version('/assets/js/cts-engine.js')}></script>
-    {scripts.filter((src) => !/(^|\/)cts-lang\.js$/.test(src)).map((src) => <script is:inline src={version(src)}></script>)}
+    <script is:inline src={version('/assets/js/cts-record.js')} defer></script>
+    {live && <script is:inline src={version('/assets/js/cts-grading.js')} defer></script>}
+    <script is:inline src={version('/assets/js/cts-engine.js')} defer></script>
+    {scripts.filter((src) => !/(^|\/)cts-lang\.js$/.test(src)).map((src) => <script is:inline src={version(src)} defer></script>)}
     {/* The lesson and the exam are never shown together, so the browser's
         Find cannot search the lesson for an answer (Dr. Cook's review, 29 Sept). */}
-    <script is:inline src={version('/assets/js/cts-exam-view.js')}></script>
-    <script is:inline src={version('/assets/js/cts-fields-lang.js')}></script>
+    <script is:inline src={version('/assets/js/cts-exam-view.js')} defer></script>
+    <script is:inline src={version('/assets/js/cts-fields-lang.js')} defer></script>
     {/* Mirrors this browser's progress to the seminary's database so a cleared
         browser or a new phone is no longer the end of someone's degree. It is
         dormant until the API exists: one probe per tab, then silence. See

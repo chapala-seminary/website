@@ -133,15 +133,15 @@ export const PAGE_META: Record<string, Record<Lang, Copy>> = {
   'index.html': {
     en: {
       title: 'Free Online Seminary | CTS',
-      description: 'Free self-study Bible and theology courses in English and Spanish. Study on your phone; earn a class certificate. A ministry in Ajijic, Mexico.',
+      description: 'Free self-study Bible and theology courses in English, Spanish, and French. Study on your phone and earn a class certificate.',
     },
     es: {
       title: 'Seminario teológico gratis | STC',
-      description: 'Cursos bíblicos y teológicos gratis en español e inglés. Estudie en su teléfono y obtenga un certificado de clase. Ministerio en Ajijic, México.',
+      description: 'Cursos bíblicos y teológicos gratis en español, inglés y francés. Estudie en su teléfono y obtenga un certificado de clase.',
     },
     fr: {
       title: 'Séminaire en ligne gratuit | STC',
-      description: 'Cours de Bible et de théologie gratuits, à votre rythme. Anglais et espagnol ; français en brouillon. Ministère à Ajijic, Mexique.',
+      description: 'Cours de Bible et de théologie gratuits en français, en anglais et en espagnol. Étudiez à votre rythme. Ministère à Ajijic.',
     },
   },
   'CTSAbout.html': {
@@ -161,15 +161,15 @@ export const PAGE_META: Record<string, Record<Lang, Copy>> = {
   'CTSCatalog.html': {
     en: {
       title: '45 free Bible courses | CTS',
-      description: 'Browse 45 free online Bible and theology courses in English and Spanish. Foundation courses, M.Div. core, and electives.',
+      description: 'Browse 45 free Bible and theology courses in English, Spanish, and French. Foundation courses, M.Div. core, and electives.',
     },
     es: {
       title: '45 cursos bíblicos gratis | STC',
-      description: '45 cursos bíblicos y teológicos gratis en español e inglés. Fundamento, núcleo del M.Div. y electivos.',
+      description: '45 cursos bíblicos y teológicos gratis en español, inglés y francés. Fundamento, núcleo del M.Div. y electivos.',
     },
     fr: {
       title: '45 cours de Bible gratuits | STC',
-      description: '45 cours de Bible et de théologie gratuits en anglais et en espagnol. Fondements, tronc du M.Div. et cours à option.',
+      description: '45 cours de Bible et de théologie gratuits en français, en anglais et en espagnol. Fondements et cours à option.',
     },
   },
   'CTSBeforeYouBegin.html': {
@@ -251,7 +251,7 @@ export function organizationJsonLd(lang: Lang) {
     email: 'info@chapalaseminary.org',
     description: PAGE_META['index.html'][lang].description,
     areaServed: 'Worldwide',
-    inLanguage: lang === 'fr' ? ['fr', 'en', 'es'] : ['en', 'es'],
+    inLanguage: ['en', 'es', 'fr'],
     isAccessibleForFree: true,
     parentOrganization: PARENT_ORG,
     founder: { '@type': 'Person', name: 'Wayne Cook', honorificPrefix: 'Dr.', honorificSuffix: 'Th.D.' },

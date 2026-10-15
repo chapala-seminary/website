@@ -1,5 +1,9 @@
 # Facts the seminary must confirm
 
+Dr. Wayne Cook confirmed this list on 15 October 2026. The public wording
+stands, with one change: the seminary is in English, Spanish, and French.
+Do not describe French as a draft.
+
 Phase 1 JSON-LD, `/llms.txt`, and course landings use only facts already on
 the About page, `docs/curriculum.md`, or the course catalog. Anything below
 is either used with that existing wording or left out until a director
@@ -20,7 +24,7 @@ Mark each row when you have checked it.
 | Additional authors: Dr. Ted Rogers (Pentateuch), the late Andi Cook (Christian Education), Glenda Rogers (Ruth & Esther) | Yes, on those three landings | Confirm no other course has a different author |
 | Non-denominational evangelical; not Baptist | Yes, in llms.txt | |
 | Not accredited; pursuing formal recognition in Mexico | Yes; no schema.org accreditation | Confirm whether any filing with SEP / RVOE has started |
-| Scripture: English NKJV, Spanish RVG, French Louis Segond 1910 (draft) | llms-full.txt | Confirm these are the editions students should be told |
+| Scripture: English NKJV, Spanish RVG, French Louis Segond 1910 | llms-full.txt | Confirmed. French is a language of the seminary, not a draft |
 
 ## Programs (do not change the rules; confirm the public wording)
 
@@ -41,7 +45,7 @@ Mark each row when you have checked it.
 | Fact | Confirm? |
 |---|---|
 | Built for pastors and lay leaders without seminary access, including Cuba, Mexico, and Latin America; open to anyone | |
-| English and Spanish are offered now; French is a draft and must not be advertised as finished | |
+| English, Spanish, and French are offered. Do not call French a draft | Confirmed by Dr. Cook, 15 Oct 2026 |
 | Progress is stored in the browser and under a private student code | Already on the privacy and registration copy |
 
 ## Do not publish until confirmed
