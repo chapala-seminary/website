@@ -45,21 +45,11 @@ function expectWrites(inserts, updates, label) {
     table_name, inserts: inserts[table_name] || 0, updates: updates[table_name] || 0,
   })), label);
 }
-const cleanup = TABLES.flatMap(table => ['INSERT', 'UPDATE'].map(event =>
-  `DROP TRIGGER IF EXISTS _sync_write_${table}_${event};`
-)).join('\n') + '\nDROP TABLE IF EXISTS _sync_write_counts;';
-
 try {
-  sql(cleanup + `
-    CREATE TABLE _sync_write_counts (table_name TEXT PRIMARY KEY, inserts INTEGER NOT NULL, updates INTEGER NOT NULL);
-    ${TABLES.map(table => `
-      INSERT INTO _sync_write_counts VALUES ('${table}', 0, 0);
-      CREATE TRIGGER _sync_write_${table}_INSERT AFTER INSERT ON ${table}
-      BEGIN UPDATE _sync_write_counts SET inserts = inserts + 1 WHERE table_name = '${table}'; END;
-      CREATE TRIGGER _sync_write_${table}_UPDATE AFTER UPDATE ON ${table}
-      BEGIN UPDATE _sync_write_counts SET updates = updates + 1 WHERE table_name = '${table}'; END;
-    `).join('\n')}
-  `);
+  // Schema instrumentation is installed before the Worker starts. Changing
+  // triggers while it serves requests can reload workerd and cancel a POST.
+  assert.equal(counts().length, TABLES.length, 'run the suite fixture setup before this check');
+  reset();
   const reg = await post('/api/register', {
     name: 'Sync Write Regression', email: `sync-write-${crypto.randomUUID()}@example.test`, track: 'cert',
   });
@@ -123,5 +113,5 @@ try {
   expectWrites({}, {}, 'populated legacy completion is unchanged on replay');
   console.log(`PASS — ${checks} assertions: unchanged snapshots skip D1 progress writes; earlier dates and higher levels still merge.`);
 } finally {
-  try { sql(cleanup); } finally { fs.rmSync(scratch, { recursive: true, force: true }); }
+  fs.rmSync(scratch, { recursive: true, force: true });
 }

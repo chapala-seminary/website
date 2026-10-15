@@ -14,7 +14,7 @@
     line-height: 1.6;
   }
   .lang-en { display: inline; }
-  .lang-es { display: none; }
+  .lang-es:not(body) { display: none; }
   body.lang-es .lang-en { display: none; }
   body.lang-es .lang-es { display: inline; }
 
@@ -254,7 +254,7 @@
 }
 </style>
 </head>
-<body>
+<body data-course="Hermeneutics">
 <script src="cts-lang.js"></script>
 <a href="index.html#catalog" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif"><span class="en-only">📚 Catalog / Catálogo</span><span class="es-only">📚 Catalog / Catálogo</span><span class="fr-only">📚 Catalogue</span></a>
 
@@ -280,8 +280,8 @@
       <span class="lang-es">El Certificado Aún No Está Disponible</span><span class="lang-fr">Certificat pas encore disponible</span>
     </h2>
     <p>
-      <span class="lang-en">The certificate of completion for the Hermeneutics course will be issued once you have passed all twelve units. Below is your current progress. Click any unit name to return to it.</span>
-      <span class="lang-es">El certificado de finalización del curso de Hermenéutica se emitirá una vez que haya aprobado las doce unidades. A continuación se muestra su progreso actual. Haga clic en el nombre de cualquier unidad para regresar a ella.</span><span class="lang-fr">Le certificat de réussite du cours Herméneutique sera délivré une fois les douze unités réussies. Votre progression actuelle est indiquée ci-dessous. Cliquez sur le nom d’une unité pour y retourner.</span>
+      <span class="lang-en">The certificate of completion for the Hermeneutics course will be issued once you have passed all eleven units. Below is your current progress. Click any unit name to return to it.</span>
+      <span class="lang-es">El certificado de finalización del curso de Hermenéutica se emitirá una vez que haya aprobado las once unidades. A continuación se muestra su progreso actual. Haga clic en el nombre de cualquier unidad para regresar a ella.</span><span class="lang-fr">Le certificat de réussite du cours Herméneutique sera délivré une fois les onze unités réussies. Votre progression actuelle est indiquée ci-dessous. Cliquez sur le nom d’une unité pour y retourner.</span>
     </p>
 
     <div class="missing-list">
@@ -320,12 +320,12 @@
 
       <p class="cert-statement">
         <span class="lang-en">
-          for the successful completion of all twelve units of study in the course
+          for the successful completion of all eleven units of study in the course
         </span>
         <span class="lang-es">
-          por la finalización exitosa de las doce unidades de estudio del curso
+          por la finalización exitosa de las once unidades de estudio del curso
         </span><span class="lang-fr">
-          pour la réussite des douze unités d’étude du cours
+          pour la réussite des onze unités d’étude du cours
         </span>
       </p>
 
@@ -553,10 +553,14 @@
   // ============================================================
   //  Boot
   // ============================================================
-  (function init() {
+  function renderCompletion() {
     const student = getStudentInfo();
     const { passed, missing } = getProgress();
 
+    document.getElementById('locked-view').style.display = missing.length ? 'block' : 'none';
+    document.getElementById('cert-view').style.display = 'none';
+    document.getElementById('post-actions').style.display = 'none';
+    document.getElementById('print-btn').style.display = 'none';
     if (missing.length === 0) {
       // ALL 11 UNITS PASSED — show certificate
       document.getElementById('cert-view').style.display = 'block';
@@ -568,7 +572,9 @@
       document.getElementById('locked-view').style.display = 'block';
       renderProgressList(passed, missing);
     }
-  })();
+  }
+  document.addEventListener('cts-sync-applied', renderCompletion);
+  renderCompletion();
 </script>
 
   <script src="cts-completion.js" defer></script>

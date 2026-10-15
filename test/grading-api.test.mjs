@@ -6,7 +6,7 @@
  *
  * The Worker must have been started with --test-scheduled (the pending queue
  * is run the way Cloudflare runs it, by firing the 15-minute cron), and
- * migrations/0014_grading.sql and tools/sync-grading-keys.mjs applied to the
+ * migrations/0015_grading.sql and tools/sync-grading-keys.mjs applied to the
  * same database (test/run-tests.sh does both).
  *
  * Nothing here is student text: every name is made up and every answer is

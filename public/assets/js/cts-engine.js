@@ -756,7 +756,7 @@
     var top = el("cts-exam-status");
     if (unitPassed) { if (top) top.innerHTML = ""; return; }
     var lockMsg = lockMessage(), c = cannotPass();
-    var msg = lockMsg || (c && cannotPassMessage(c));
+    var msg = gradingUnavailableMessage() || lockMsg || (c && cannotPassMessage(c));
     if (top) top.innerHTML = msg ? notice(msg) : "";
     if (graded) return;
     if (msg) say(bi(msg), "#8a1f1f");
@@ -785,7 +785,7 @@
       .replace(/[^\p{L}\p{N}\s]/gu, " ").replace(/\s+/g, " ") + " ";
   }
   function keywordPass(ks, answer, minHits) {
-    if (!ks.length) return true; // unchanged for questions with no keywords
+    if (!usableKeywords(ks)) return false;
     var a = normalise(fold(answer)), hits = 0;
     ks.forEach(function (k) {
       var forms = Array.isArray(k) ? k : [k];
@@ -806,6 +806,28 @@
     return lists.length > 0 && lists.some(function (list) {
       return keywordPass(list, answer, q.minHits);
     });
+  }
+  function usableKeywords(ks) {
+    return Array.isArray(ks) && ks.length > 0 && ks.every(function (k) {
+      return (Array.isArray(k) ? k : [k]).some(function (form) {
+        return typeof form === "string" && normalise(fold(form)).trim().length > 0;
+      });
+    });
+  }
+  function hasShortAnswerGrading(q) {
+    if (Array.isArray(q.keywords)) return usableKeywords(q.keywords);
+    return !!q.keywords && [readerLang(), sourceLang()].some(function (lang) {
+      return usableKeywords(q.keywords[lang]);
+    });
+  }
+  function gradingUnavailableMessage() {
+    // Live pages carry no keywords: the server grades, so nothing here is missing.
+    if (LIVE || !saCounts() || !sa.some(function (q) { return !hasShortAnswerGrading(q); })) return null;
+    return {
+      en: "This master's exam is temporarily unavailable because its short-answer grading criteria are incomplete. Your saved work is kept. Please contact info@chapalaseminary.org.",
+      es: "Este examen de maestría no está disponible temporalmente porque los criterios de calificación de las respuestas cortas están incompletos. Se conserva su trabajo guardado. Contacte a info@chapalaseminary.org.",
+      fr: "Cet examen de master est temporairement indisponible car les critères de notation des réponses courtes sont incomplets. Votre travail enregistré est conservé. Contactez info@chapalaseminary.org."
+    };
   }
   function gradeSA() {
     return sa.filter(function (q, i) { return shortAnswerRight(q, saAnswers[i]); }).length;
@@ -884,6 +906,8 @@
 
   function submit() {
     if (LIVE) return liveSubmit();
+    var unavailable = gradingUnavailableMessage();
+    if (unavailable) { say(bi(unavailable), "#8a1f1f"); return; }
     var full = lockRemaining(KEY.fullLock), saOnly = lockRemaining(KEY.saLock);
     if (full || saOnly) {
       var m = full || saOnly;

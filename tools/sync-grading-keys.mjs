@@ -19,7 +19,7 @@
  * test suite's database (test/wrangler.local.jsonc, --state, default
  * .wrangler-local) and touches no account.
  *
- * MIGRATION. migrations/0014_grading.sql must have been applied. It adds
+ * MIGRATION. migrations/0015_grading.sql must have been applied. It adds
  * columns, so it is not safe to run twice; with --apply-migration this tool
  * applies it only if the grading_keys table is missing (deploy:beta does).
  *
@@ -95,12 +95,12 @@ try { existing = new Map(query('SELECT qid, content_hash FROM grading_keys').map
 catch (e) {
   if (!/no such table/i.test(e.message)) throw e;
   if (!flag('--apply-migration')) {
-    console.error('The grading_keys table is not there. Apply migrations/0014_grading.sql first (it is not safe to run twice):');
+    console.error('The grading_keys table is not there. Apply migrations/0015_grading.sql first (it is not safe to run twice):');
     console.error('  npx wrangler d1 migrations apply <database> [--env beta] --remote');
     process.exit(1);
   }
-  console.log('applying migrations/0014_grading.sql (the grading tables are missing)');
-  if (!DRY) execFile(fs.readFileSync('migrations/0014_grading.sql', 'utf8'));
+  console.log('applying migrations/0015_grading.sql (the grading tables are missing)');
+  if (!DRY) execFile(fs.readFileSync('migrations/0015_grading.sql', 'utf8'));
   existing = new Map();
 }
 

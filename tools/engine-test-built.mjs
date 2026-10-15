@@ -103,11 +103,10 @@ async function session(course, unit, track, nCorrect, fillSA = false, fillN = 0)
   // the unit as the STUDENT'S browser has it, not as the source tree has it
   const U = await page.evaluate(() => {
     const u = window.CTS_UNIT;
-    // sa counts only the short-answer questions the engine can grade: one
-    // with no keywords is credited as written (Genesis has none), so a blank
-    // answer cannot fail there and the SA rule is not testable on that unit.
+    // Missing criteria now contain the exam; do not mistake automatic credit
+    // for evidence that the master's assessment policy is working.
     const hasKw = q => { const k = q.keywords; return Array.isArray(k) ? k.length > 0 : !!(k && ((k.en || []).length || (k.es || []).length)); };
-    return u && { course: u.course, unit: u.unit, mc: (u.mc || []).map(q => q.answer), sa: (u.sa || []).filter(hasKw).length,
+    return u && { course: u.course, unit: u.unit, mc: (u.mc || []).map(q => q.answer), sa: (u.sa || []).length, gradingReady: (u.sa || []).every(hasKw),
                   fill: (u.fill || []).length, synthetic: !!u._syntheticFill };
   });
   const rendered = await page.evaluate(() => document.querySelectorAll('.question[data-mc]').length);
@@ -209,7 +208,7 @@ async function checkSample([course, unit]) {
   const mdiv = await session(course, unit, 'mdiv', need - 1);
   ok(mdiv.verdicts === nMc, `${label}: mdiv track showed ${mdiv.verdicts} of ${nMc} per-question verdicts`);
   ok(mdiv.revealed === nMc, `${label}: mdiv track marked ${mdiv.revealed} of ${nMc} correct options`);
-  ok(/\b15 minute|15 minuto/.test(mdiv.result), `${label}: mdiv lock not 15 minutes — "${mdiv.result.slice(0, 80)}"`);
+  ok(probe.U.gradingReady ? /\b15 minute|15 minuto/.test(mdiv.result) : /temporarily unavailable/.test(mdiv.result), `${label}: mdiv lock not 15 minutes — "${mdiv.result.slice(0, 80)}"`);
 
   // 5. short answer counts on the master's track: MC and fill-ins at the
   //    mark with SA blank fails (where the unit has SA); with SA written it
@@ -218,9 +217,9 @@ async function checkSample([course, unit]) {
     const mdivNoSA = await session(course, unit, 'mdiv', need, false, nFill);
     ok(!/passed|aprobada/i.test(mdivNoSA.result), `${label}: mdiv passed with short answer blank`);
     ok(!prog(mdivNoSA), `${label}: mdiv recorded the unit as passed with short answer blank`);
-    ok(/short answer|respuesta corta/i.test(mdivNoSA.result), `${label}: mdiv SA failure did not name short answer — "${mdivNoSA.result.slice(0, 80)}"`);
-    ok(mdivNoSA.ls[`cts_${slug}_u${unit}_mc_passed`] === '1', `${label}: mdiv MC pass not banked when SA failed`);
-    ok(Object.keys(mdivNoSA.ls).some(k => /_sa_lock$/.test(k)), `${label}: mdiv SA failure did not apply an SA-only lock`);
+    ok(/short[- ]answer|respuesta corta/i.test(mdivNoSA.result), `${label}: mdiv SA failure did not name short answer — "${mdivNoSA.result.slice(0, 80)}"`);
+    ok((mdivNoSA.ls[`cts_${slug}_u${unit}_mc_passed`] === '1') === probe.U.gradingReady, `${label}: mdiv MC pass not banked when SA failed`);
+    ok(Object.keys(mdivNoSA.ls).some(k => /_sa_lock$/.test(k)) === probe.U.gradingReady, `${label}: mdiv SA failure did not apply an SA-only lock`);
   }
   // 5b. the Associate: MC plus fill-ins, no short answer (Wayne's rule,
   //     25 Sept 2026). MC and fill-ins at the mark pass with short answer
@@ -246,21 +245,21 @@ async function checkSample([course, unit]) {
   ok(!/passed|aprobada/i.test(assocBelow.result), `${label}: associate passed below the MC mark`);
   ok(/\b2 minute|2 minuto/.test(assocBelow.result), `${label}: associate lock not 2 minutes — "${assocBelow.result.slice(0, 80)}"`);
   const mdivSA = await session(course, unit, 'mdiv', need, true, needF);
-  ok(/passed|aprobada/i.test(mdivSA.result), `${label}: mdiv did not pass with MC and fill-ins at the mark and SA written — "${mdivSA.result.slice(0, 80)}"`);
-  ok(prog(mdivSA), `${label}: mdiv pass did not record progress`);
+  ok(probe.U.gradingReady ? /passed|aprobada/i.test(mdivSA.result) : /temporarily unavailable/.test(mdivSA.result), `${label}: mdiv did not pass with MC and fill-ins at the mark and SA written — "${mdivSA.result.slice(0, 80)}"`);
+  ok(prog(mdivSA) === probe.U.gradingReady, `${label}: mdiv pass did not record progress`);
 
   // 5c. fill-ins count on both master's tracks too: everything else right
   //     and the fill-ins blank fails, with no progress written
   for (const t of ['mdiv', 'thm']) {
     const noFill = await session(course, unit, t, need, true, 0);
     ok(!/passed|aprobada/i.test(noFill.result), `${label}: ${t} passed with the fill-ins blank`);
-    ok(/fill in the blank|complete el espacio/i.test(noFill.result), `${label}: ${t} fill-in failure did not name the fill-ins`);
+    ok(probe.U.gradingReady ? /fill in the blank|complete el espacio/i.test(noFill.result) : /temporarily unavailable/.test(noFill.result), `${label}: ${t} fill-in failure did not name the fill-ins`);
     ok(!prog(noFill), `${label}: ${t} recorded the unit as passed with the fill-ins blank`);
-    ok(noFill.ls[`cts_${slug}_u${unit}_mc_passed`] === '1', `${label}: ${t} MC pass not banked when fill-ins failed`);
+    ok((noFill.ls[`cts_${slug}_u${unit}_mc_passed`] === '1') === probe.U.gradingReady, `${label}: ${t} MC pass not banked when fill-ins failed`);
   }
 
   // 6. a failed attempt records a lock
-  ok(Object.keys(mdiv.ls).some(k => /_(sa|full)_lock$/.test(k)), `${label}: failed attempt recorded no lockout`);
+  ok(Object.keys(mdiv.ls).some(k => /_(sa|full)_lock$/.test(k)) === probe.U.gradingReady, `${label}: failed attempt recorded no lockout`);
 
   // 7. passing MC banks it
   ok(atMark.ls[`cts_${slug}_u${unit}_mc_passed`] === '1', `${label}: MC pass not banked`);

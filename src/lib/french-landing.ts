@@ -85,7 +85,7 @@ export function frenchLanding(root: HTMLElement) {
   }
   for (const [selector, labels] of Object.entries({
     '#reg-track': {cert:'Certificat de ministère',assoc:'Diplôme associé en théologie',thm:'Master en théologie (Th.M.)',mdiv:'Master en théologie pastorale (M.Div.)'},
-    '#reg-heard': {search:'Google / Moteur de recherche',ai:'ChatGPT / IA',referral:'Ami ou pasteur',church:'Église / Ministère',social:'Réseaux sociaux',other:'Autre'},
+    '#reg-heard': {ai:'Assistant IA (ChatGPT, Gemini, etc.)',search:'Google ou autre moteur de recherche',referral:'Pasteur ou ami',church:'Église ou groupe d’étude',social:'Réseaux sociaux',other:'Autre'},
   })) for (const option of root.querySelectorAll(`${selector} option`)) {
     const text = (labels as Record<string,string>)[option.getAttribute('value') || ''];
     if (!text) continue;

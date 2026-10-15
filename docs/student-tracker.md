@@ -23,6 +23,10 @@ progress, status (`active`, `quiet`, `not started`, `new`), the last note sent,
 whether notes are on, when they registered and how they found the seminary.
 Tabs show only the quiet students, or only those who have not started. A
 **stop / resume** button on each row turns notes off or on for that student.
+A fold-out above the table counts how students found the seminary (AI
+assistant, web search, pastor or friend, church or study group, social media,
+other, not answered), overall and for the United States against everywhere
+else; `/staff/heard.json` is the same for a program.
 
 - `/staff/students.csv` is the same table for a spreadsheet, or for the CTS
   Student Tracker to read instead of the inbox.

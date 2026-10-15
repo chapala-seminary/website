@@ -93,7 +93,7 @@ Every short-answer item gets:
   - It uses the same pinned-account wrangler wrapper those scripts already
     use (the config's `account_id` must be the Chapala account; an
     environment `CLOUDFLARE_ACCOUNT_ID` naming another is refused).
-    `--apply-migration` runs `0014_grading.sql` first if, and only if, the
+    `--apply-migration` runs `0015_grading.sql` first if, and only if, the
     `grading_keys` table is missing; both deploy scripts pass it, as
     `prepare-study-plans.mjs` and `prepare-beta-activation.mjs` do for theirs.
   - It also deletes rows for questions that no longer exist (among `u:`,
@@ -191,7 +191,7 @@ The rules:
   - Textbook and reading tests: 18 of the 20 drawn (the bank's `pass`) on
     every track, one lock kind (`full`), 15 or 2 minutes by track.
 
-## 6. Migration `0014_grading.sql`
+## 6. Migration `0015_grading.sql`
 
 ```sql
 CREATE TABLE grading_keys (qid TEXT PRIMARY KEY, kind TEXT NOT NULL, source TEXT NOT NULL,
@@ -256,7 +256,7 @@ As built, the migration differs from the SQL above in three small ways:
 
 The migration adds columns, so it cannot be applied twice. `sync-grading-keys
 --apply-migration` applies it only when `grading_keys` does not exist; the
-file is named `0014_grading.sql` and sorts before `0014_thm_study_plans.sql`.
+file is named `0015_grading.sql` and sorts before `0014_thm_study_plans.sql`.
 
 ## 7. API
 

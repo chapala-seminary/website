@@ -61,7 +61,7 @@ try {
     await page.locator('#reg-name').waitFor();
     assert.equal(await page.locator('#reg-name').getAttribute('placeholder'), 'Nom complet');
     assert.equal(await page.locator('#reg-country option[value="MX"]').textContent(), 'Mexique');
-    assert.equal(await page.locator('#reg-heard option[value="referral"]').textContent(), 'Ami ou pasteur');
+    assert.equal(await page.locator('#reg-heard option[value="referral"]').textContent(), 'Pasteur ou ami');
     assert.equal(await page.locator('#reg-track option[value="mdiv"]').textContent(), 'Master en théologie pastorale (M.Div.)');
     assert.equal(await page.locator('.cts-language-choices').getAttribute('aria-label'), 'Langue');
     assert.ok(await page.locator('.cts-source-control').innerText().then(t=>t.includes('Afficher l’anglais')));

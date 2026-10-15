@@ -13,6 +13,8 @@ import { execFileSync } from 'node:child_process';
 
 /* Comments are legal in a .jsonc and JSON.parse does not know that. */
 const read = (f) => JSON.parse(fs.readFileSync(f, 'utf8').replace(/^\s*\/\/.*$/gm, ''));
+const isoUTC = value => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/.test(value)
+  && !Number.isNaN(Date.parse(value)) && new Date(value).toISOString() === value.replace(/Z$/, value.includes('.') ? 'Z' : '.000Z');
 
 const prod = read('wrangler.jsonc');
 const local = read('test/wrangler.local.jsonc');
@@ -98,7 +100,7 @@ ok(prod.env?.beta?.vars?.GRADING_MODE === 'live', 'beta grades live');
 ok(prod.vars?.GRADING_MODE === 'shadow', 'production stays in shadow mode until the switch date is approved');
 ok(prod.env?.beta?.vars?.MASTER_TESTS_ACTIVATION === 'beta', 'beta records the new master test activation cutoff once');
 ok(prod.vars?.MASTER_TESTS_ACTIVATION !== 'beta', 'production never takes the beta activation cutoff');
-ok(!prod.vars?.MASTER_TESTS_ACTIVATION || !Number.isNaN(Date.parse(prod.vars.MASTER_TESTS_ACTIVATION)), 'production activation is unset or a separate valid date');
+ok(!prod.vars?.MASTER_TESTS_ACTIVATION || isoUTC(prod.vars.MASTER_TESTS_ACTIVATION), 'production activation is unset or a separate ISO UTC timestamp');
 /* Beta answers at beta.chapalaseminary.org, the address the staff pages'
    Access rule covers; production takes no address from this file until the
    cutover changes that on purpose (docs/cutover.md, step 7). */
@@ -122,6 +124,10 @@ const envAt = process.argv.indexOf('--env');
 const ENV = envAt >= 0 ? process.argv[envAt + 1] : null;
 const target = ENV ? prod.env?.[ENV] : prod;
 const targetName = ENV || 'production';
+if (DEPLOY && !ENV && !isoUTC(prod.vars?.MASTER_TESTS_ACTIVATION)) {
+  console.error('REFUSING TO DEPLOY — set production MASTER_TESTS_ACTIVATION to the approved production release ISO UTC timestamp. Never copy beta or its cutoff.');
+  process.exit(1);
+}
 if (DEPLOY && !target) {
   console.error(`REFUSING TO DEPLOY — wrangler.jsonc has no environment called "${ENV}".`);
   process.exit(1);

@@ -140,7 +140,7 @@ body.lang-both .en-only{border-bottom:1px dashed #d7cec1;padding-bottom:6px;marg
 }
 </style>
 </head>
-<body class="lang-en">
+<body data-course="World Missions" class="lang-en">
 <script src="cts-lang.js"></script>
 <a href="index.html#catalog" style="display:inline-block;margin:6px 10px;padding:6px 11px;background:#2f4f2f;color:#fff;border-radius:4px;text-decoration:none;font:13px Georgia,serif"><span class="en-only">📚 Catalog / Catálogo</span><span class="es-only">📚 Catalog / Catálogo</span><span class="fr-only">📚 Catalogue</span></a>
 
@@ -262,6 +262,7 @@ body.lang-both .en-only{border-bottom:1px dashed #d7cec1;padding-bottom:6px;marg
     });
   });
 
+  function renderCompletion() {
   let progress = {};
   try { progress = JSON.parse(localStorage.getItem('cts_missions_progress') || '{}'); } catch(e) { progress = {}; }
   const lockEl = document.getElementById('lock');
@@ -280,8 +281,6 @@ body.lang-both .en-only{border-bottom:1px dashed #d7cec1;padding-bottom:6px;marg
                         '<span class="es-only">Unidades por completar: ' + missing.join(', ') + '</span>' +
                         '<span class=\"fr-only\">Unités restant à terminer&nbsp;: ' + missing.join(', ') + '</span>';
     }
-    document.getElementById('back-btn').addEventListener('click', () => { window.location.href = 'CTSMissionsUnit10.html'; });
-    document.getElementById('print-btn').addEventListener('click', () => { window.print(); });
     return;
   }
   lockEl.style.display = 'none';
@@ -355,8 +354,12 @@ body.lang-both .en-only{border-bottom:1px dashed #d7cec1;padding-bottom:6px;marg
   }
   document.getElementById('cert-id').textContent = certId;
 
-  document.getElementById('print-btn').addEventListener('click', () => { window.print(); });
+
+  }
+  document.getElementById('print-btn').addEventListener('click', () => window.print());
   document.getElementById('back-btn').addEventListener('click', () => { window.location.href = 'CTSMissionsUnit10.html'; });
+  document.addEventListener('cts-sync-applied', renderCompletion);
+  renderCompletion();
 })();
 </script>
 <script>
