@@ -82,3 +82,22 @@ Attribution for faculty: Hermeneutics 1 (b037) states that Voltaire predicted th
 
 - **2 Q3 (1 Corinthians 3:6-7), model.** Before: reversed — "lose the divine half and you get fatalism; lose the human half and you get technique". The lesson (b012) says lose the human half and you get fatalism; lose the divine half and you get the franchise (technique without the Spirit). After: corrected, all three languages.
 - **12 Q3 (six-to-eight-week window), prompt, model, keywords.** Before: described a newcomer's first six to eight weeks. The lesson (b014, b021) says people give a church six to eight weeks to notice they are gone, and a dropout who is not reached in that window reinvests elsewhere. After: question and model describe that window; keyword groups that no longer fit (connect, first, assimilation, new) were replaced (notice, gone, reinvest, drop).
+
+## CTSBibleCharacters
+
+- **10 Q2 (Samuel's call), checked, left alone.** The current lesson (unit 10, b015) already says Samuel's calling was a unique prophetic commission and that God does not call every believer to receive new revelation that way, so the model's caveat is now in the lesson.
+
+## Courses in scope with nothing to fix
+
+CTSDeaconFamilyMinistry (2 Q6 women deacons; 3 Q4–Q5 apostles/pastor-elder-bishop: the lesson states both sides, doctrinal), CTSCS (no finding named), CTSPentecostal (3, 5, 8, 10 open questions; unit 4 follows the course's own stance), CTSDP (4 Q7, 9 election; 3 "Absolute Authority" wording: contested), CTSRadical (no finding named). No change made in these.
+
+## Checks run
+
+- Per-question grading with the shipped engine (`public/assets/js/cts-engine.js`, the setup of `test/sa-keywords.test.mjs`) over all 14 courses, English/Spanish/French: every model passes; no prompt that failed as its own answer before passes now (several prompts that passed as their own answer before now fail because the rewritten questions no longer repeat the keywords). Prompts that already passed before in unchanged questions are the existing keyword backlog described in `docs/short-answer-keyword-repairs.md`.
+- `test/published-models.test.mjs`: PASS (38,173 model/source grading checks, 466 units).
+- `test/french-schema.mjs`: PASS. `test/french-import.test.mjs`: PASS (provenance current for all 466 French units).
+- `tr.fr.from` recomputed with `tools/translation-plan.mjs`'s formula for every changed question; 0 stale stamps across all 4,660 short-answer items.
+
+## For faculty (attributions the lessons assert)
+
+Peter Stoner's odds (ST 11), Chuck Colson on Watergate (ST 11), the Scofield Reference Bible (ST 10), Voltaire's room and Henry V (Hermeneutics 1). Also: the NKJV text of 1 John 1:7 reads "with one another" while the CTSPT 2 lesson says "with Him".
