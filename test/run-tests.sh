@@ -159,6 +159,9 @@ node tools/verify-legacy-table.mjs
 node tools/verify-staging.mjs "http://127.0.0.1:$PORT"
 
 node tools/verify-sitemap.mjs dist
+node tools/verify-seo.mjs dist
+node tools/verify-seo-links.mjs dist
+node tools/verify-seo-html.mjs dist
 
 # The Master's textbooks (Oct 2026): each belongs to a course that links to
 # it, its test stands on a page apart from the book, every answer the bank
