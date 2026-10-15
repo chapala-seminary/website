@@ -16,6 +16,9 @@ import { thmFoundation } from './awards.js';
  *   POST /staff/students/<n>/notes  stop=1 | stop=0: stop or resume notes to one student
  *   POST /staff/notes/run           run today's notes now (as the daily run would)
  *   POST /staff/digest              the weekly summary (?send=1 also emails it)
+ *   /staff/grading/...              the faculty's grading pages (worker/staff-grading.js):
+ *                                   appeals, pending answers, calibration, fill-in rulings,
+ *                                   possible copying, AI usage
  *
  * WHO CAN SEE IT
  *
@@ -40,6 +43,7 @@ import { thmFoundation } from './awards.js';
  *                 a deployed config that sets it.
  */
 import catalog from './catalog.json';
+import { handleGrading } from './staff-grading.js';
 import { candidates, runOutreach, digest, sendDigest, note, programLevel, PROGRAM_NAMES, QUIET_DAYS, NOT_STARTED_DAYS } from './outreach.js';
 
 const DAY = 86400000;
@@ -224,6 +228,8 @@ export async function handleStaff(request, env) {
     const from = request.headers.get('origin');
     if (from && from !== url.origin) return html('<p>Refused: the request did not come from this site.</p>', 403);
   }
+  if (path === '/staff/grading' || path.startsWith('/staff/grading/'))
+    return await handleGrading(request, env, user, url, path, { esc, html, json, STYLE });
   if ((method === 'GET' || method === 'POST') && (m = /^\/staff\/students\/(\d+)\/thm-plan$/.exec(path)))
     return handleThmStudyPlan(request, env, +m[1], user);
   if (method === 'POST' && (m = /^\/staff\/students\/(\d+)\/notes$/.exec(path))) {
