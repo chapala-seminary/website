@@ -127,6 +127,40 @@ if (DEPLOY && !target) {
   process.exit(1);
 }
 
+/* The mode the pages are built in (CTS_GRADING_MODE) and the mode the Worker
+   grades in (GRADING_MODE) must be the same thing, or the pages post to routes
+   the Worker does not serve, or carry keys the Worker has stopped honouring
+   (docs/ai-grading.md, section 1). The deploy scripts say which mode they build
+   with: `--mode shadow|live`, and this refuses if the environment disagrees.
+   Without --deploy the same agreement is checked from package.json itself. */
+const modeAt = process.argv.indexOf('--mode');
+const MODE = modeAt >= 0 ? process.argv[modeAt + 1] : null;
+const envMode = target?.vars?.GRADING_MODE;
+if (DEPLOY) {
+  if (!['live', 'shadow'].includes(MODE)) {
+    console.error('REFUSING TO DEPLOY — say which grading mode the build uses: --mode live|shadow (the deploy script passes it).');
+    process.exit(1);
+  }
+  if (MODE !== envMode) {
+    console.error(`REFUSING TO DEPLOY — the pages would be built in grading mode "${MODE}" but ${targetName} runs GRADING_MODE "${envMode}" (wrangler.jsonc).`);
+    console.error('The two must agree: change the deploy script or the environment, not just one of them.');
+    process.exit(1);
+  }
+  console.log(`  grading mode ${MODE}: the build and ${targetName} agree`);
+}
+{
+  const scripts = JSON.parse(fs.readFileSync('package.json', 'utf8')).scripts || {};
+  for (const [script, name, c] of [['deploy', 'production', prod], ['deploy:beta', 'beta', prod.env?.beta]]) {
+    const cmd = scripts[script] || '';
+    const flag = /--mode\s+(live|shadow)/.exec(cmd)?.[1];
+    const builds = [...cmd.matchAll(/CTS_GRADING_MODE=(\w+)/g)].map((m) => m[1]);
+    ok(!!flag, `npm run ${script} passes --mode to this check`);
+    ok(flag === c?.vars?.GRADING_MODE, `npm run ${script} builds in the mode ${name} grades in`, `--mode ${flag}, GRADING_MODE ${c?.vars?.GRADING_MODE}`);
+    ok(builds.length > 0 && builds.every((m) => m === flag), `every CTS_GRADING_MODE in npm run ${script} is the --mode it passes`, `${builds.join(',')} vs ${flag}`);
+    ok(/verify-no-keys\.mjs/.test(cmd), `npm run ${script} checks the built pages for keys`);
+  }
+}
+
 const bad = (v) => !v || /PUT-THE|REPLACE/i.test(String(v));
 const unset = [];
 if (bad(target?.account_id)) unset.push(`${targetName}: account_id`);

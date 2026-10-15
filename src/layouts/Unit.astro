@@ -10,6 +10,7 @@
 import { shell } from '../lib/shell';
 import { version } from '../lib/version';
 import catalog from '../../worker/catalog.json';
+import { live, liveUnit, unitScope } from '../lib/grading-mode';
 
 interface Unit {
   course: string;
@@ -68,7 +69,11 @@ const tbMap = catalog.textbooks as Record<string, { page: string; kind: string; 
 const required = (cat.tests ?? []).map((slug) => ({ slug, page: tbMap[slug].page, kind: tbMap[slug].kind,
   ...('requiredFrom' in tbMap[slug] ? { requiredFrom: tbMap[slug].requiredFrom } : {}) }));
 const first = cat.tests?.[0] ?? null;
-const unitJson = JSON.stringify({ ...unit,
+/* Live mode (docs/ai-grading.md): the page carries no answers, accept lists,
+   model answers, keywords, rubrics or multiple-choice keys, and every
+   question has its id. Shadow mode: the unit exactly as it was. */
+const unitData = live ? liveUnit(unit, unitScope(pagePrefix, unit.unit)) : unit;
+const unitJson = JSON.stringify({ ...unitData,
   completion: { slug: unit.course, code: cat.code, name: done.name, page: done.page, units: cat.units,
                 // the course's Master's textbook, which the master's tracks must pass the test of
                 textbook: first,
@@ -266,6 +271,7 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
 
     <script is:inline set:html={`window.CTS_UNIT = ${unitJson};`} />
     <script is:inline src={version('/assets/js/cts-record.js')}></script>
+    {live && <script is:inline src={version('/assets/js/cts-grading.js')}></script>}
     <script is:inline src={version('/assets/js/cts-engine.js')}></script>
     {scripts.filter((src) => !/(^|\/)cts-lang\.js$/.test(src)).map((src) => <script is:inline src={version(src)}></script>)}
     {/* The lesson and the exam are never shown together, so the browser's
@@ -277,5 +283,8 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
         dormant until the API exists: one probe per tab, then silence. See
         docs/student-records.md. */}
     <script is:inline src={version('/assets/js/cts-sync.js')} defer></script>
+    {/* Shadow mode only: posts each submitted unit to /api/shadow, so the AI
+        can grade real answers before the switch. Students see nothing. */}
+    {!live && <script is:inline src={version('/assets/js/cts-shadow.js')} defer></script>}
   </body>
 </html>

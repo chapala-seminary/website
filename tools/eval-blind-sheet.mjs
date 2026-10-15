@@ -32,8 +32,8 @@ export const SA_GRADES = ['met', 'partly', 'not_met'];
 export const FILL_GRADES = ['right', 'wrong'];
 const PLACEHOLDER = /strong answer integrates|a strong answer/i;
 
-export function referenceFor(key, lang) {
-  if (key.kind === 'fill') {
+export function referenceFor(key, lang, kind) {
+  if (kind === 'fill') {
     const answer = key.answer?.[lang] ?? key.answer?.en;
     const alts = [...(key.accept?.[lang] || [])];
     return `Official answer: ${answer}${alts.length ? `\nAlso accepted: ${alts.join('; ')}` : ''}`;
@@ -57,7 +57,7 @@ export function buildSheet({ items, seed, n, includeAll, kinds }) {
     return {
       sheet_id: `S${String(k + 1).padStart(3, '0')}`, itemId: it.id, kind: it.kind, lang: it.lang,
       course_unit: `${course} unit ${unit}`, type: it.kind === 'sa' ? 'Short answer' : 'Fill-in',
-      question: (key.prompt && (key.prompt[it.lang] || key.prompt.en)) || '', reference: referenceFor(key, it.lang),
+      question: (key.prompt && (key.prompt[it.lang] || key.prompt.en)) || '', reference: referenceFor(key, it.lang, it.kind),
       answer: it.answer, allowed: (it.kind === 'sa' ? SA_GRADES : FILL_GRADES).join(' / '),
     };
   });

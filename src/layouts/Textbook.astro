@@ -8,6 +8,7 @@
  * pages (3 Oct 2026).
  */
 import { version } from '../lib/version';
+import { live } from '../lib/grading-mode';
 
 interface Bi { en: string; es: string; fr?: string }
 interface Book { slug: string; page: string; course: string; title: Bi; subtitle?: Bi; credits?: Bi; edition: string }
@@ -104,8 +105,10 @@ const reading = kind === 'reading-test';
       </div>
     </footer>
 
+    {live && sync && <script is:inline src={version('/assets/js/cts-grading.js')}></script>}
     {scripts.map((src) => <script is:inline src={version(src)}></script>)}
     <script is:inline src={version('/assets/js/cts-textbook.js')}></script>
     {sync && <script is:inline src={version('/assets/js/cts-sync.js')} defer></script>}
+    {!live && sync && <script is:inline src={version('/assets/js/cts-shadow.js')} defer></script>}
   </body>
 </html>
