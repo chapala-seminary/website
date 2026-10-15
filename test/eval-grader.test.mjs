@@ -12,6 +12,7 @@ import {
 } from '../tools/eval-lib.mjs';
 import { summarise, formatReport, BAR, PRICE_PER_M, PRICES_AS_OF, estimateCost, estimateRun } from '../tools/eval-summary.mjs';
 import { buildKeyRows } from '../tools/grading-keys-lib.mjs';
+import { buildMessages, pickText, LANG_NAMES, MIN_MODEL_CHARS } from '../worker/grading/prompt.js';
 import { makeEnv, makeUsageTally, cheapCheck, gradeOne, capturePrompt } from '../tools/eval-adapter.mjs';
 import { makeRestAI, readAccountId, checkQuotaGate } from '../tools/eval-ai-shim.mjs';
 import { buildSheet, toCsv, toHtml } from '../tools/eval-blind-sheet.mjs';
@@ -209,14 +210,31 @@ const items = readItemFiles();
     assert.equal(u.feedback_language, { en: 'English', es: 'Spanish', fr: 'French' }[l]);
     assert.equal(u.items[0].sentence_language, { en: 'English', es: 'Spanish', fr: 'French' }[l], `fill sentence follows the student's language (${l})`);
   }
-  // CTSCH: French-only model answers; an English or Spanish student's prompt carries the French model, labelled
-  u = userJson(pp(S.chSa, 'en')); assert.equal(u.items[0].model_answer_language, 'French'); assert.equal(u.items[0].question_language, 'English');
-  u = userJson(pp(S.chSa, 'fr')); assert.equal(u.items[0].model_answer_language, 'French');
-  u = userJson(pp(S.chFill, 'fr')); assert.equal(u.items[0].expected_language, 'French');
-  // CTSGenesis unit 1: English and Spanish models are generic placeholders. The key leaves them out
-  // (tools/grading-keys-lib.mjs placeholderModels), so the grader gets the real French one, labelled.
+  // Fallback labelling, data-driven (content changes as courses get real EN/ES models). Find a unit SA
+  // question whose key has no usable en/es model (missing, or a dropped placeholder: tools/grading-keys-lib.mjs
+  // placeholderModels); if none exists any more, test the same behaviour on a synthetic key.
+  const usable = (m, l) => typeof m?.[l] === 'string' && m[l].trim().length >= MIN_MODEL_CHARS;
+  const allRows = buildKeyRows({ root: ROOT });
+  const frOnly = [...allRows.keys()].find(q => q.startsWith('u:') && allRows.get(q).kind === 'sa' && (() => { const m = JSON.parse(allRows.get(q).data).model; return usable(m, 'fr') && !usable(m, 'en') && !usable(m, 'es'); })());
+  if (frOnly) {
+    out = pp(frOnly, 'en'); assert.doesNotMatch(out, /WARNING:.*placeholder/);
+    u = userJson(out); assert.equal(u.items[0].model_answer_language, 'French'); assert.equal(u.items[0].question_language, 'English');
+    assert.equal(userJson(pp(frOnly, 'fr')).items[0].model_answer_language, 'French');
+  } else {
+    const key = { prompt: { en: 'What is grace?', es: '¿Qué es la gracia?', fr: 'Qu\'est-ce que la grâce ?' }, model: { fr: 'La grâce est la faveur imméritée de Dieu envers les pécheurs.' } };
+    const msg = (lang) => JSON.parse(buildMessages('sa', lang, [{ qid: 'u:X/1/sa/0', key, answer: 'a b c' }], 1)[1].content).items[0];
+    assert.equal(msg('en').model_answer_language, 'French'); assert.equal(msg('en').question_language, 'English');
+    assert.equal(msg('es').model_answer_language, 'French'); assert.equal(msg('fr').model_answer_language, 'French');
+    // a too-short (placeholder-like) en model still falls through to the real French one
+    key.model.en = 'Short.'; assert.equal(msg('en').model_answer_language, 'French');
+  }
+  // fill questions: the expected answer is labelled with whichever language pickText chose for this key
+  for (const l of ['en', 'fr']) {
+    const k = JSON.parse(allRows.get(S.chFill).data), exp = pickText(k.answer, l);
+    assert.equal(userJson(pp(S.chFill, l)).items[0].expected_language, LANG_NAMES[exp.lang]);
+  }
   out = pp(S.genSa, 'en'); assert.doesNotMatch(out, /WARNING:.*placeholder/);
-  assert.equal(userJson(out).items[0].model_answer_language, 'French');
+  assert.equal(userJson(out).items[0].model_answer_language, LANG_NAMES[pickText(JSON.parse(allRows.get(S.genSa).data).model, 'en', MIN_MODEL_CHARS).lang]);
   assert.doesNotMatch(pp(S.genSa, 'fr'), /WARNING:.*placeholder/);
   assert.equal(userJson(pp(S.fillFr, 'fr')).items[0].sentence_language, 'French');
   // an answer given on the command line replaces the sample, and a rule-settled one is flagged but still printed
