@@ -394,6 +394,83 @@ action records the Access email.
 The Monday digest gains one line: open appeals, pending count, and
 calibration agreement.
 
+As built (`worker/staff-grading.js`, `worker/grading/review.js`,
+`worker/grading/appeal-email.js`; routed from `handleStaff` after its Access and
+same-origin checks). The pages are `/staff/grading/{appeals,pending,calibration,
+rulings,copying,usage}`, plus `/staff/grading/calibration.json` (the agreement
+figures, no answer text) and `/staff/grading/synonyms.json`. Where the build
+adds to or differs from the table above:
+
+- **Students are shown as "student n"** (the roster's row number) and a name,
+  never a student code. Every page is `no-store`, `noindex`, and no answer text
+  is logged.
+- **Appeals.** A grader must take (claim) an appeal before ruling on it;
+  ruling on an unclaimed one takes it. Only the person who took it can decide
+  or release it. The ruling needs an internal note (kept in `appeals.ruling_note`,
+  never sent to the student) and, optionally, a sentence of feedback for the
+  student. An overturn picks the new verdict (it must differ from the current
+  one). It updates the `answer_grades` row (`graded_by='human'`,
+  `grader_email`) and calls `settle()` only if the attempt was submitted
+  (`failed` or `pending`); an attempt still `open` is scored when the student
+  submits. **The student is emailed on an uphold as well as an overturn** (the
+  contract named only the overturn): the student asked, and would otherwise
+  never hear. Only if their email is confirmed; wording in
+  `worker/grading/appeal-email.js`, EN/ES/FR by the student's language.
+- **What the AI said is kept.** A human grade writes
+  `points_json = {"ai_verdict", "ai_points", "held"}` (it was the AI's point
+  array or `{"held": ...}`), so the verdict column can change without the
+  calibration figures forgetting what the AI decided. `aiRecord()` in
+  `review.js` reads either shape.
+- **Pending** lists exactly the answers with no `grade_queue` row (recorded
+  deviation in section 5). Grading one runs `settle()` for a submitted attempt
+  and, when the attempt leaves `pending`, emails the student through the same
+  `tellStudent()` the cron uses. Feedback is required.
+- **Calibration sample.** 20 answers: short answers graded by the AI in a live
+  attempt (`graded_by='ai'`, or a human regrade that kept `ai_verdict`), picked
+  by a hash of the ISO week and the grade id. The pool is what was graded
+  before Monday 00:00 UTC of the week, so it stops moving; while that holds
+  fewer than 20, the pool is everything so far (the first weeks). Answers
+  already marked this week always stay in the sample. Blind: an unmarked
+  answer shows the question, rubric, model answer and the student's words
+  only; no AI verdict, per-point result, feedback or other mark, and no student
+  identity. A mark is final (one per grader and answer); after marking, the AI's
+  verdict and the other graders' marks for that answer appear. The agreement
+  table is aggregate and is shown to everyone.
+- **Agreement** is over the current and the three previous ISO weeks.
+  "Same result" counts met against not met ("partly" counts as not met, as it
+  does for credit); "exactly the same" also needs the same one of met, partly,
+  not met. Shown as a percentage with the counts, for the AI against all
+  graders together, the AI against each grader, and each pair of graders on the
+  answers both marked.
+- **Fill-in rulings** read the `grade_cache` rows the AI marked right. Keep
+  writes a `grade_overrides` row `right`, Reject a row `wrong`, and either
+  can be flipped later. A ruling applies to later answers only (the override is
+  checked before the cache). The tab shows the student's own spelling (from
+  `answer_grades`), the cache holding only the normalised form.
+  **"Download approved synonyms"** is `{version, exportedAt, exportedBy,
+  approved: [{qid, lang, text}]}` for every kept answer.
+  **`tools/apply-accepts.mjs <file> [--content DIR] [--dry-run]`** adds each to
+  the `accept` list (in that language, placed right after `answer`) of the unit,
+  textbook or reading fill-in the qid names. It is idempotent (an answer the item
+  already accepts, compared as the grader compares, is skipped), writes only
+  files that change, in their existing layout (unit files and reading banks are
+  `JSON.stringify(x, null, 1)`, textbook banks are a mix of 1 and 2 spaces; the
+  tool detects which), and refuses a file it cannot reproduce byte for byte.
+  Run `node tools/content-baseline.mjs --write` afterwards: the baseline hashes
+  accept lists.
+- **Possible copying** looks at the 20,000 most recent live short answers of 60
+  or more characters and groups identical `normalise`d text of 12 or more words.
+- **Usage** prices tokens per million: Llama 3.3 70B fp8-fast $0.293 in / $2.253
+  out; gpt-oss-120b $0.35 in / $0.75 out (Cloudflare's published Workers AI
+  prices; the plan's section 5 gave only per-call figures, which these
+  reproduce: 3,500 in and 1,200 out is about $0.004). A model with no listed
+  price is priced as Llama and flagged. Queue size and ages come from
+  `grade_queue` and from the pending answers with no queue row.
+- **The Monday digest line** (`gradingDigestLine`): "WRITTEN-ANSWER GRADING: n
+  open appeals, m answers with faculty, AI and faculty agree on p% of N marked
+  answers over 4 weeks", with "BELOW 85%: Robert decides whether to pause AI
+  grading" appended when p is under 85, or "no calibration marks yet".
+
 ## 10. Privacy
 
 - `public/CTSPrivacy.html` (EN, ES, FR) changes, in this sense: written
@@ -405,8 +482,32 @@ calibration agreement.
   - `calibration` rows for their grades;
   - `grade_queue` rows for their grades.
 
+As built:
+
+- `public/CTSPrivacy.html` is written in English and Spanish (`en-only` /
+  `es-only` spans). French is not in the page: it comes from the page's
+  dictionary `src/data/french-pages/CTSPrivacy.json`, keyed by the English
+  text, and the build stops on a changed English sentence with no French. The
+  change is one new paragraph, one new line in "That copy holds", the old promise
+  ("Your answers to individual questions are not sent") removed from the
+  paragraph about the student code, and "every written answer with its result"
+  added to the Delete card. English, Spanish and French all changed together;
+  the French is a faithful draft for Wayne's review like the page's other
+  French.
+- `deleteStudent` deletes in one batch, for the student and any record merged
+  into it: `calibration` and `grade_queue` (through their grades), `appeals`,
+  `answer_grades`, `attempts`. `test/api.test.mjs` checks every one of them
+  (it needs `STATE`, which `test/run-tests.sh` passes).
+
 ## 11. Tests
 
+- `test/staff-grading.test.mjs` covers the faculty pages: Access required, a
+  cross-origin POST refused, each tab, an appeal overturn that passes a unit
+  and writes server credit, uphold, no email without a confirmed address,
+  pending grades settling an attempt, blind calibration and the agreement
+  arithmetic against marks worked out in the test, rulings changing later
+  `/api/grade` results, the export and `tools/apply-accepts.mjs` on a temporary
+  copy of the content, possible copying, usage cost and the digest line.
 - `test/run-tests.sh` stays the single entry point. The local Worker uses
   `AI_FAKE=1` and `GRADING_MODE=live`.
 - The live-mode build is what is tested. A separate small check builds with
