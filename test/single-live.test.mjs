@@ -94,8 +94,19 @@ async function takeUnit(p, s, { wrongMc = 0, fills = true, written = true, tag =
   const u = U(s.unit);
   for (let i = 0; i < s.mc.length; i++) {
     const j = i < wrongMc ? (s.mc[i].answer + 1) % 4 : s.mc[i].answer;
-    await p.locator(u.mc(i, j)).check({ force: true });
-    await p.waitForSelector(`#fb_${s.unit}_${i}.show`, { timeout: 15000 });
+    // While the server is answering, the page shows the click as "Checking..."
+    // with the radios disabled and none of them ticked (the choice is only
+    // recorded when the server has marked it). check() re-reads the radio after
+    // clicking and, if that happens inside those few milliseconds, reports that
+    // the click "did not change its state" although it landed. So the click is
+    // made, whatever check() then says of it, and the evidence that it took is
+    // the page's feedback. A click that lands as the page redraws its questions
+    // is really lost, and is made again.
+    for (let tries = 0; ; tries++) {
+      await p.locator(u.mc(i, j)).check({ force: true, timeout: 3000 }).catch(() => {});
+      try { await p.waitForSelector(`#fb_${s.unit}_${i}.show`, { timeout: 10000 }); break; }
+      catch (e) { if (tries >= 3) throw e; }
+    }
   }
   if (fills) for (let i = 0; i < s.fill.length; i++) {
     await p.locator(u.fillIn(i)).fill(s.fill[i].answer.en); await p.locator(u.fillIn(i)).press('Enter');
