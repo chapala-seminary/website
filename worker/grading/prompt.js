@@ -23,11 +23,13 @@ export const SA_INSTRUCTIONS = `${COMMON}
 
 You are grading SHORT ANSWERS. Each item gives: the question; the rubric points (each with an id and whether it is essential); the model answer (in the language named in "model_answer_language", which may differ from the student's: judge meaning across languages), as a guide to the standard only, since other wordings and other ways of putting it are fine; and the student's answer.
 
-For each rubric point, decide whether the student's answer makes it. A point is made when the answer states the point's central claim in substance. When a point joins a claim with a reason, an example or a second phrase, the central claim is what counts; the supporting part need not be repeated unless the question explicitly asks for it. If the point is made, set "made" to true and put in "quote" the words of the student's answer that make it, copied exactly from the student's text. If not, set "made" to false and "quote" to an empty string. Never quote words the student did not write.
+For each rubric point, decide whether the student's answer makes it. A point is made when the answer states the point's central claim, even briefly, in the student's own general words. When a point joins a claim with a reason, an example or a second phrase, the central claim is what counts; the supporting part need not be repeated unless the question explicitly asks for it. A missing example, name, date, number, Bible reference or reason is not grounds for "not made" unless the rubric point itself is that item. Several points may be made by the same sentence. The student's language may differ from the rubric: compare meaning, and quote the student's words in their own language.
+
+If the point is made, set "made" to true and put in "quote" ONE short phrase (at most 15 words) copied letter for letter from a single place in the student's answer, with its own accents and punctuation. Choose the shortest phrase that carries the point. Never join two passages, never use "...", never translate or tidy the words, and never quote the rubric or the model answer. If you cannot find such a phrase, set "made" to false and "quote" to an empty string.
 
 Set "contradicts" to true only if the answer contradicts the teaching of the model answer and rubric, or denies one of the points. Merely leaving something out is not a contradiction.
 
-Set "verdict" to your overall judgement: "met" (every essential point made), "partly" (some points made), "not_met" (none made, or it only restates the question or is off the subject), or "pending" if you are unsure and a person should look. The server works out the final grade from the points and "contradicts", so make the points accurate.
+Fill in "points" first, then "verdict", so that the verdict follows the evidence. Set "verdict" to your overall judgement: "met" (every essential point made), "partly" (some points made), "not_met" (none made, or it only restates the question or is off the subject), or "pending" if you are unsure and a person should look. The server works out the final grade from the points and "contradicts", so make the points accurate.
 
 Feedback for "partly" and "not_met" names what is missing, in terms of the idea, never in the model answer's words. Feedback for "met" is a short confirmation.`;
 
@@ -35,9 +37,12 @@ export const FILL_INSTRUCTIONS = `${COMMON}
 
 You are grading FILL-IN-THE-BLANK answers. Each item gives: the sentence with a blank (____); the expected answer and its accepted alternatives; and the student's answer, which is only the words for the blank.
 
+Write "reason" first (one short line: what the student's words name, and whether that is the expected thing), then "verdict".
+
 Verdicts:
-- "right": the student's words name the same thing as the expected answer: a synonym, another standard name for it, the same term in English, Spanish or French, or a misspelling that leaves no doubt which word was meant.
-- "wrong": the student's words name something else, even something related; or are vaguer than the blank requires; or are a longer phrase that does not clearly name the expected thing.
+- "right": the student's words name the same thing as the expected answer: a synonym, another standard name for it, the same term in English, Spanish or French, the same thing named with extra words from the sentence around the blank, a surname alone where the person is clear from the sentence, a numeral for a number word, another common spelling or transliteration, or a clear one-letter typo or misspelling that leaves no doubt which word was meant (decide which word the student meant first; a misspelling is right when it is closest to the expected word and is not itself a different common word).
+- "wrong": the student's words name something else, even something related, or are vaguer than the blank requires.
+These are NOT reasons for "wrong": a singular or plural form, an added article or adjective, words already in the sentence repeated, digits for a number word, another common spelling, a surname for a person already identified by the sentence, or a longer phrase that clearly contains the expected word. Your feedback must agree with your verdict.
 
 Points are not used for fill-ins: return an empty "points" array. Feedback for "wrong" says in general terms what kind of answer the blank asks for, without giving the expected answer.`;
 
@@ -56,11 +61,10 @@ export function schema(kind) {
         items: {
           type: 'object',
           additionalProperties: false,
-          required: kind === 'fill' ? ['qid', 'verdict', 'points', 'feedback'] : ['qid', 'verdict', 'contradicts', 'points', 'feedback'],
+          required: kind === 'fill' ? ['qid', 'reason', 'verdict', 'points', 'feedback'] : ['qid', 'contradicts', 'points', 'verdict', 'feedback'],
           properties: {
             qid: { type: 'string' },
-            verdict: { type: 'string', enum: verdicts },
-            ...(kind === 'fill' ? {} : { contradicts: { type: 'boolean' } }),
+            ...(kind === 'fill' ? { reason: { type: 'string' } } : { contradicts: { type: 'boolean' } }),
             points: {
               type: 'array',
               items: {
@@ -70,12 +74,22 @@ export function schema(kind) {
                 properties: { id: { type: 'string' }, made: { type: 'boolean' }, quote: { type: 'string' } },
               },
             },
+            verdict: { type: 'string', enum: verdicts },
             feedback: { type: 'string' },
           },
         },
       },
     },
   };
+}
+
+/** The message that asks for one repair of quotes that are not the student's words (model.js, section 8).
+ *  failed: [{ qid, point_ids }] */
+export function repairMessage(failed) {
+  return JSON.stringify({
+    repair: 'The quote for these points was not found, letter for letter, in the student\'s answer. Reply again in the same JSON shape, for ONLY these items. For each listed point give ONE exact contiguous quote of at most 15 words copied letter for letter from a single place in the student\'s answer, or set "made" to false. Do not join passages and do not use "...".',
+    failed,
+  });
 }
 
 /* The rubric a question is graded against. A question with none yet (the

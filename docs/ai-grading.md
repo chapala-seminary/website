@@ -136,7 +136,11 @@ The rules:
   - right if `exactFill` matches (today's `bare()` logic, against `answer`
     and `accept` in the reader's language and the source language);
   - otherwise, look up `grade_overrides`, then `grade_cache`;
-  - otherwise, ask the model.
+  - otherwise, ask the model. The prompt (from `2026-10-15.2`) accepts the
+    same thing named with extra sentence words, a surname alone where the
+    sentence makes the person clear, a numeral for a number word, another
+    common spelling or transliteration, singular or plural, and a clear
+    one-letter typo; it rejects a different thing, even a related one.
 
   Passing is 9 of 10.
 - **Short answer**, checked in this order:
@@ -177,9 +181,13 @@ The rules:
   4. any point made: partly;
   5. otherwise: not met.
 
-  A point is "made" when the answer states its central claim in substance;
-  if the point joins a claim with a reason or example, the central claim
-  counts. "partly" counts as not met. Passing is 9 of 10 met. A "met" answer is banked
+  A point is "made" when the answer states its central claim in substance,
+  even briefly and in general words; if the point joins a claim with a
+  reason or example, the central claim counts. A missing example, name,
+  date, number or reason is not grounds for "not made" unless the rubric
+  point itself is that item. The model must back each point it claims with
+  one short contiguous quote (at most 15 words) of the student's own words;
+  how the server checks it, and the one repair call, are in section 8. "partly" counts as not met. Passing is 9 of 10 met. A "met" answer is banked
   across attempts, so a retake asks only for the rest.
 - **What each track must pass:**
 
@@ -353,22 +361,53 @@ Notes on the routes (as built):
 - **Models** (variables):
   - `GRADER_MODEL` = `@cf/meta/llama-3.3-70b-instruct-fp8-fast`;
   - `GRADER_MODEL_FALLBACK` = `@cf/openai/gpt-oss-120b`;
-  - `GRADER_PROMPT_VERSION` = `2026-10-15.1`.
+  - `GRADER_PROMPT_VERSION` = `2026-10-15.2`.
 - **Call:**
   `env.AI.run(model, { messages, response_format: { type: 'json_schema', json_schema }, max_tokens, temperature: 0 })`.
 - **Validation:** the reply must parse, match the schema, and cover exactly
   the item ids sent. For short answers:
-  - every point made must quote text found in the student's answer, compared
-    after `normalise` as whole words (punctuation at the ends of the quote is
-    ignored; before 14 Oct 2026 a quote ending in a full stop was refused);
-  - a point with a quote that is not found in the answer is treated as **not
-    made**; if more than half of the quotes the model claimed for an item are
-    not found, the item's reply is invalid;
+  - every point made must quote text found in the student's answer. Both
+    sides go through `normalise` and `fold` (case, punctuation and accents
+    are ignored, so a model that drops an accent while copying is not
+    penalised, in Spanish and French as much as English). A quote is found if
+    (1) it is a contiguous run of the answer's words; or (2) it is segments
+    joined by `...` or `…`, each segment at least 3 words and found in order;
+    or (3) it has at least 4 words, at least 90% of them appear in the answer
+    in the same order (longest common subsequence), and no word it adds is a
+    negation ("not", "no", "nunca", "pas" ...). A quote whose words are not
+    the student's matches none of these, so the model can never credit words
+    the student did not write. (Before 15 Oct 2026, prompt `.2`, only (1)
+    existed and without folding; the loss of one point to a stitched or
+    accent-altered quote was the main cause of false rejects in the eval of
+    15 Oct.);
+  - **one repair call.** If the model claims a point with a quote that is not
+    found, the server does not silently downgrade it. It makes ONE more call
+    on the same model (the original messages, the model's reply, then a short
+    message listing the failed point ids per item) asking for an exact
+    contiguous quote of at most 15 words, or `made: false`. Repairs for a
+    whole batch go in one call. The call is counted in `ai_usage` like any
+    other. A point whose quote still fails is treated as **not made**, but
+    only if the rest of the reply is valid; if more than half of the quotes
+    the model claimed for an item are still not found, or the repair reply is
+    malformed, the item's reply is invalid (see below). A repair call that
+    errors changes nothing except the count;
   - the verdict is **derived** from the validated points (section 5): the
     model's own verdict is used only when it is "pending". `points_json`
-    stores `{ points, model_verdict, contradicts }` for audit.
+    stores `{ points, model_verdict, contradicts }` for audit, plus, when
+    they apply: `dropped` (the claimed quotes that were not found, with their
+    point ids), `repaired` (ids saved by the repair call), `first_failed`
+    (what failed before it), and `quote_dropped: true` when the derived
+    verdict differs from the model's own because of dropped quotes (the
+    model's feedback is then not kept, because it describes a different
+    verdict). Staff can filter on `quote_dropped` to find grades the server
+    changed.
+  - **Reply shape.** Short answers: `qid`, `contradicts`, `points`, `verdict`,
+    `feedback`, in that order, so the verdict follows the evidence. Fill-ins:
+    `qid`, `reason`, `verdict`, `points` (empty), `feedback`. `reason` is one
+    line the model writes before it decides; the server ignores it (it is
+    never shown or stored).
 
-  On an invalid reply, retry once, then try the fallback model. If that fails too, the
+  On an invalid reply, retry once (with its own repair call if quotes fail), then try the fallback model. If that fails too, the
   item is pending and goes into `grade_queue`.
 - **Errors:** AI error codes 3036, 3040 and 3007 make the item pending at
   once (no retry, no fallback). The cron `*/15 * * * *` retries the queue,
@@ -623,6 +662,24 @@ not have is the database: no `grade_cache`, no `grade_overrides`, no attempts, s
 nothing but the model answers for the model. Only the model call is swapped:
 `env.AI` is `tools/eval-ai-shim.mjs`, which posts to the Cloudflare REST API on
 the Chapala account pinned in `wrangler.jsonc`.
+
+**What the results file records (prompt `2026-10-15.2`).** Each short-answer
+item that reached the model has `quotes`: `model_verdict` (what the model
+said itself), `claimed` (every quote the model gave, with `dropped: true` on
+those the server did not find in the student's answer), `dropped` (point
+ids), and, when a repair call ran, `repaired` and `first_failed`;
+`quote_dropped: true` marks an item whose verdict the server changed by
+dropping a quote. Use it to see whether a false reject is a judgement or a
+dropped quote. A repair call counts as a call in the usage and cost figures.
+
+**Item labels.** An item may carry `"relabelled": "<date> <reason>"` where a
+review of the 15 Oct 2026 run showed the first label was wrong (the answer
+omits an essential point, or the fill-in synonym is not clearly the same
+word). A fill-in whose label is genuinely arguable has `expected: "debatable"`:
+it is graded and shown in the report (`debatable` section: how many the model
+accepted and rejected) but is **excluded from the bar**. Hand-written files
+are edited in place; the generated files (`gen-*.json`) are changed through
+`tools/eval-build.mjs`, so `node tools/eval-build.mjs --check` stays green.
 
 **See the prompt first (no network).**
 

@@ -14,7 +14,8 @@
  *   [[primary-error]]                throws on GRADER_MODEL only; the fallback answers
  *   [[bad-json]]                     replies with text that is not JSON
  *   [[primary-bad-json]]             the same, on GRADER_MODEL only
- *   [[bad-quote]]                    "met", but quotes words the student never wrote
+ *   [[bad-quote]]                    "met", but quotes words the student never wrote (also when asked to repair them)
+ *   [[bad-quote-once]]               the same, but the repair call (a third message) gets it right
  *   [[missing-item]]                 leaves the item out of the reply
  *
  * Without a hint a short answer is not_met and a fill-in is wrong, so a test
@@ -31,6 +32,7 @@ export function fakeAIRun(env, model, params) {
   const payload = JSON.parse(params.messages.find((m) => m.role === 'user').content);
   const fill = payload.kind === 'fill';
   const primary = model === env.GRADER_MODEL;
+  const repairing = params.messages.length > 2;                                     // the repair call (model.js) adds two messages
   const all = payload.items.map((it) => hintsOf(it.student_answer));
   const hints = all.map((hs) => hs.find((h) => !VERDICTS.has(h)) || '');          // how the call goes wrong
   const said = all.map((hs) => hs.find((h) => VERDICTS.has(h)) || '');            // what it says when it works
@@ -52,11 +54,11 @@ export function fakeAIRun(env, model, params) {
     const quote = stripped.split(/\s+/).slice(0, 6).join(' ');
     if (fill) {
       const verdict = v === 'right' ? 'right' : v === 'pending' ? 'pending' : 'wrong';
-      items.push({ qid: it.qid, verdict, points: [],
+      items.push({ qid: it.qid, reason: verdict === 'right' ? 'It names the same thing.' : 'It names something else.', verdict, points: [],
         feedback: verdict === 'right' ? 'Accepted: it names the same thing.' : verdict === 'wrong' ? 'Not quite: look again at what the blank asks for.' : '' });
       return;
     }
-    const verdict = v === 'met' || h === 'bad-quote' ? 'met' : v === 'partly' ? 'partly' : v === 'pending' ? 'pending' : 'not_met';
+    const verdict = v === 'met' || (h === 'bad-quote' || h === 'bad-quote-once') ? 'met' : v === 'partly' ? 'partly' : v === 'pending' ? 'pending' : 'not_met';
     /* "partly": the first essential point is missed, every other point is made (the server
        derives the verdict from the points, so a rubric of one point cannot come out "partly"). */
     const missed = verdict === 'partly' ? it.rubric.findIndex((p) => p.essential) : -1;
@@ -65,8 +67,9 @@ export function fakeAIRun(env, model, params) {
       made: verdict === 'met' || (verdict === 'partly' && k !== missed),
       quote: '',
     }));
-    for (const p of points) if (p.made) p.quote = h === 'bad-quote' ? 'words the student never wrote' : quote;
-    items.push({ qid: it.qid, verdict, contradicts: verdict === 'not_met' && v === 'not_met', points,
+    const bq = h === 'bad-quote' || (h === 'bad-quote-once' && !repairing);
+    for (const p of points) if (p.made) p.quote = bq ? 'words the student never wrote' : quote;
+    items.push({ qid: it.qid, contradicts: verdict === 'not_met' && v === 'not_met', points, verdict,
       feedback: verdict === 'met' ? 'This makes the points the question asks for.'
         : verdict === 'partly' ? 'Some of it is there, but an essential idea is missing.'
           : verdict === 'pending' ? '' : 'This does not yet make the main point of the question.' });

@@ -16,7 +16,7 @@ import { makeEnv, makeUsageTally, cheapCheck, gradeOne, capturePrompt } from '..
 import { makeRestAI, readAccountId, checkQuotaGate } from '../tools/eval-ai-shim.mjs';
 import { buildSheet, toCsv, toHtml } from '../tools/eval-blind-sheet.mjs';
 import { importGrades, parseCsv } from '../tools/eval-import-human.mjs';
-import { selectItems } from '../tools/eval-grader.mjs';
+import { selectItems, quotesOf } from '../tools/eval-grader.mjs';
 import { budgetAI, worstCase, usageOf, BUDGET_TAG } from '../tools/eval-budget.mjs';
 import { readTokenFile } from '../tools/eval-ai-shim.mjs';
 
@@ -164,7 +164,7 @@ const items = readItemFiles();
 
   let { env, tally } = mk(() => reply(quote));
   let r = await gradeOne({ item: answer, key: skey, env });
-  assert.equal(r.verdict, 'met'); assert.equal(r.via, 'ai'); assert.equal(r.model, '@cf/meta/llama-3.3-70b-instruct-fp8-fast'); assert.equal(r.prompt_version, '2026-10-15.1');
+  assert.equal(r.verdict, 'met'); assert.equal(r.via, 'ai'); assert.equal(r.model, '@cf/meta/llama-3.3-70b-instruct-fp8-fast'); assert.equal(r.prompt_version, '2026-10-15.2');
   assert.equal(calls.length, 1); assert.equal(calls[0].p.temperature, 0); assert.equal(calls[0].p.response_format.type, 'json_schema'); assert.equal(calls[0].p.messages[0].role, 'system');
   assert.equal(tally.input_tokens, 900); assert.equal(tally.output_tokens, 80); assert.equal(tally.byModel['@cf/meta/llama-3.3-70b-instruct-fp8-fast'].calls, 1);
 
@@ -172,8 +172,16 @@ const items = readItemFiles();
   calls.length = 0;
   ({ env, tally } = mk((m) => (m.includes('gpt-oss') ? reply(quote) : reply('words the student never wrote'))));
   r = await gradeOne({ item: answer, key: skey, env });
-  assert.deepEqual(calls.map(c => c.m), ['@cf/meta/llama-3.3-70b-instruct-fp8-fast', '@cf/meta/llama-3.3-70b-instruct-fp8-fast', '@cf/openai/gpt-oss-120b']);
+  // (each bad reply gets one repair call on the same model first)
+  const P = '@cf/meta/llama-3.3-70b-instruct-fp8-fast';
+  assert.deepEqual(calls.map(c => c.m), [P, P, P, P, '@cf/openai/gpt-oss-120b']);
   assert.equal(r.verdict, 'met'); assert.equal(r.model, '@cf/openai/gpt-oss-120b');
+
+  // the result keeps what the model claimed and what the server dropped
+  calls.length = 0;
+  ({ env } = mk(() => reply('words the student never wrote and so on')));
+  const rec = quotesOf({ model_verdict: 'met', points: [{ id: 'a', made: true, quote: 'x y' }, { id: 'b', made: false, quote: '' }], dropped: [{ id: 'b', quote: 'q q' }], quote_dropped: true });
+  assert.deepEqual(rec, { model_verdict: 'met', claimed: [{ id: 'a', quote: 'x y', dropped: false }, { id: 'b', quote: 'q q', dropped: true }], dropped: ['b'], quote_dropped: true });
 
   // a capacity error stops at once and leaves the item pending (counted as ungraded by the eval)
   calls.length = 0;

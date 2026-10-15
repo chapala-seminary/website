@@ -15,7 +15,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { normalise, fold, bare, exactFill, copiedOnly, wordCount, ownWords } from '../worker/grading/text.js';
 import { requirements, evaluate, need, lockMinutes, lockKind, looksLikeInstruction, counts } from '../worker/grading/rules.js';
-import { validate, deriveVerdict } from '../worker/grading/model.js';
+import { validate, deriveVerdict, quoteFound, gradeBatch } from '../worker/grading/model.js';
 import { buildMessages, pickText } from '../worker/grading/prompt.js';
 import { fakeAIRun } from '../worker/grading/fake-ai.js';
 
@@ -202,6 +202,83 @@ ok(v.ok.get('q1')?.verdict === 'met', 'a question with no rubric is graded again
 v = validate('fill', { items: [{ qid: 'f1', verdict: 'right', points: [], feedback: 'ok' }, { qid: 'f2', verdict: 'maybe', points: [], feedback: '' }] },
   [{ qid: 'f1', key: {}, answer: 'x' }, { qid: 'f2', key: {}, answer: 'y' }]);
 ok(v.ok.get('f1')?.verdict === 'right' && !v.ok.has('f2'), 'fill-in verdicts are right, wrong or pending');
+
+/* quote matching (docs/ai-grading.md section 8): accents folded on both sides, "..." joins, 90% in order */
+const hayOf = (s) => normalise(fold(s)).trim().split(' ').filter(Boolean);
+const qf = (quote, answer) => quoteFound(quote, hayOf(answer)).ok;
+const ES = 'Él nos santificó por completo; la fe viene por el oír, y el oír por la palabra de Cristo. La orientación constante de la vida diaria nace de la dependencia continua de Él.';
+const FR = 'Dieu est amour. Le Seigneur nous a sauvés par sa grâce, et non par nos œuvres, afin que personne ne se glorifie.';
+ok(qf('El nos santifico por completo', ES), 'quote: the model drops accents while copying Spanish: accepted (accents folded on both sides)');
+ok(qf('Él nos santificó por completo', ES.normalize('NFD')), 'quote: an answer typed with combining accents still matches');
+ok(qf('Le Seigneur nous a sauves par sa grace', FR), 'quote: French without accents is accepted');
+ok(qf('la fe viene por el oír ... la palabra de Cristo', ES), 'quote: segments joined by "..." are accepted when each is found in order');
+ok(qf('la orientación constante de la vida diaria … dependencia continua de Él', ES), 'quote: segments joined by the ellipsis character');
+ok(qf('[...] la palabra de Cristo', ES), 'quote: a leading [...] is ignored');
+ok(!qf('la palabra de Cristo ... la fe viene por el oír', ES), 'quote: segments out of order are refused');
+ok(quoteFound('la fe viene ... Cristo', hayOf(ES)).how === 'fuzzy', 'quote: a segment of fewer than 3 words does not pass as segments; only the in-order 90% rule can rescue it');
+ok(!qf('la fe viene ... Cristo mismo', ES), 'quote: ... and a word the student never wrote (4 of 5 words) is refused');
+ok(qf('Dieu est amour le Seigneur nous a sauvés par sa grâce et non par nos œuvres', FR), 'quote: two sentences run together (90%+ in order) are accepted');
+ok(qf('The Word was with God from the beginning and so is himself fully God, not a creature.', ANS), 'quote: one bridging word in a 15-word quote (93% in order) is accepted');
+ok(!qf('The Word was merely with God', ANS), 'quote: a short quote with an invented word is refused (a 6-word quote needs all six)');
+ok(!qf('Jesus is merely a prophet and was never divine', ANS), 'adversarial: a quote the model invented is refused');
+ok(!qf('Jesus is merely a prophet and was never divine, the Word was with God', ANS), 'adversarial: a true tail does not carry an invented head');
+ok(!qf('Jesús es solamente un profeta y nunca fue divino', ES), 'adversarial: an invented Spanish quote is refused');
+ok(!qf('Jésus est seulement un prophète et non Dieu', FR), 'adversarial: an invented French quote is refused');
+ok(!qf('The Word was with God from the beginning and is not himself fully God, not a creature.', ANS), 'adversarial: an inserted "not" is never covered by the 90% tolerance');
+ok(!qf('a b c d e f g h i j', ANS), 'adversarial: words that are nowhere in the answer');
+ok(!qf('', ANS) && !qf('...', ANS), 'quote: empty is refused');
+// the same checks through validate(): a made point stands only on a good quote
+v = validate('sa', { items: [good('q1', 'met', [pt('a', true, 'The Word was with God ... himself fully God'), pt('b', true, 'the word was with god from the beginning and is himself fully god not a creature'), pt('c', false)]), good('q2')] }, items);
+eq(v.ok.get('q1')?.verdict, 'met', 'validate: "..." quote and a full-sentence quote both stand');
+v = validate('sa', { items: [good('q1', 'met', [pt('a', true, 'Jesus is merely a prophet'), pt('b', true), pt('c', false)]), good('q2')] }, items);
+eq(v.ok.get('q1')?.verdict, 'partly', 'validate: an invented quote loses its point');
+eq(v.ok.get('q1')?.record?.dropped, [{ id: 'a', quote: 'Jesus is merely a prophet' }], 'validate: the dropped quote is recorded');
+eq(v.ok.get('q1')?.record?.quote_dropped, true, 'validate: quote_dropped is set when the verdict differs from the model\'s because of it');
+eq(v.ok.get('q1')?.feedback, '', 'validate: the model\'s feedback is kept out then');
+v = validate('sa', { items: [good('q1', 'partly', [pt('a', true, 'Jesus is merely a prophet'), pt('b', true), pt('c', false)]), good('q2')] }, items);
+eq([v.ok.get('q1')?.verdict, v.ok.get('q1')?.record?.quote_dropped], ['partly', undefined], 'validate: no flag when the derived verdict is the model\'s own');
+
+/* the repair call: ONE more call on the same model for the failed points */
+{
+  const mkEnv = (replies) => {
+    const calls = [], usage = [];
+    return { calls, usage, env: { AI: { run: async (m, p) => { calls.push({ m, n: p.messages.length, last: p.messages[p.messages.length - 1] }); const r = replies.shift(); return typeof r === 'function' ? r(p) : r; } },
+      GRADER_MODEL: 'p', GRADER_MODEL_FALLBACK: 'f', GRADER_PROMPT_VERSION: 't',
+      DB: { prepare: () => ({ bind: (...a) => ({ run: async () => { usage.push({ model: a[1], calls: a[2], errors: a[5] }); } }) }) } } };
+  };
+  const reply = (...its) => ({ response: JSON.stringify({ items: its }), usage: { prompt_tokens: 10, completion_tokens: 5 } });
+  const one = [{ qid: 'q1', key, answer: ANS }];
+  // a bad quote, then a good one on the repair call: the point is kept, the verdict is the model's
+  let t = mkEnv([reply(good('q1', 'met', [pt('a', true, 'stitched words never written'), pt('b', true), pt('c', false)])),
+    reply(good('q1', 'met', [pt('a', true, 'The Word was with God'), pt('b', true), pt('c', false)]))]);
+  let r = await gradeBatch(t.env, 'sa', 'en', one);
+  eq([t.calls.length, t.calls[1]?.n, r.results.get('q1')?.verdict, r.results.get('q1')?.record.repaired], [2, 4, 'met', ['a']], 'repair: one extra call on the same model, the point is saved');
+  ok(/"point_ids":\["a"\]/.test(t.calls[1].last.content) && t.calls.every((c) => c.m === 'p'), 'repair: the message names the failed point; same model');
+  eq(t.usage.reduce((n, u) => n + u.calls, 0), 2, 'repair: both calls are counted in ai_usage');
+  // the repair fails too: the point is dropped, the rest stands, no third call
+  t = mkEnv([reply(good('q1', 'met', [pt('a', true, 'stitched words never written'), pt('b', true), pt('c', false)])),
+    reply(good('q1', 'met', [pt('a', true, 'still never written'), pt('b', true), pt('c', false)]))]);
+  r = await gradeBatch(t.env, 'sa', 'en', one);
+  eq([t.calls.length, r.results.get('q1')?.verdict, r.results.get('q1')?.record.quote_dropped], [2, 'partly', true], 'repair: still failing is dropped, once, flagged quote_dropped');
+  // the model withdraws the claim on repair
+  t = mkEnv([reply(good('q1', 'met', [pt('a', true, 'stitched words never written'), pt('b', true), pt('c', false)])),
+    reply(good('q1', 'partly', [pt('a', false), pt('b', true), pt('c', false)]))]);
+  r = await gradeBatch(t.env, 'sa', 'en', one);
+  eq([r.results.get('q1')?.verdict, r.results.get('q1')?.feedback], ['partly', 'ok'], 'repair: made:false on repair is the model\'s decision; its feedback stands');
+  // a repair call that throws changes nothing but the count
+  t = mkEnv([reply(good('q1', 'met', [pt('a', true, 'stitched words never written'), pt('b', true), pt('c', false)])), () => { throw new Error('boom'); }]);
+  r = await gradeBatch(t.env, 'sa', 'en', one);
+  eq([t.calls.length, r.results.get('q1')?.verdict], [2, 'partly'], 'repair: a failed repair call leaves the dropped-point result');
+  // all quotes invalid even after repair: refused, then the normal retry
+  t = mkEnv([reply(good('q1', 'met', [pt('a', true, 'nope nope'), pt('b', true, 'nor this'), pt('c', false)])), reply(good('q1', 'met', [pt('a', true, 'nope nope'), pt('b', true, 'nor this'), pt('c', false)])),
+    reply(good('q1', 'met', [pt('a', true), pt('b', true), pt('c', false)]))]);
+  r = await gradeBatch(t.env, 'sa', 'en', one);
+  eq([t.calls.length, r.results.get('q1')?.verdict], [3, 'met'], 'repair: more than half still invalid goes to the ordinary retry');
+  // a good reply costs no repair call
+  t = mkEnv([reply(good('q1'))]);
+  r = await gradeBatch(t.env, 'sa', 'en', one);
+  eq(t.calls.length, 1, 'repair: no repair call when every quote is the student\'s');
+}
 
 // the fake model answers from hints and keeps to the schema the validator checks
 const fakeEnv = { GRADER_MODEL: 'p', GRADER_MODEL_FALLBACK: 'f' };
