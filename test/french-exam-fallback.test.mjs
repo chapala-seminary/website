@@ -8,7 +8,7 @@ const browser=await chromium.launch(process.env.CHROME_PATH?{executablePath:proc
 let checks=0;
 try {
  for(const width of [1280,375]){
-  const context=await browser.newContext({viewport:{width,height:900}});
+  const context=await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' }, viewport:{width,height:900}});
   try{
    await context.addInitScript(()=>localStorage.setItem('cts_show_source','true'));
    const page=await context.newPage();

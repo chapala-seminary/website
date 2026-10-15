@@ -21,6 +21,13 @@
 import { handle } from './api.js';
 import { handleStaff } from './staff.js';
 import { scheduled, stopNotes } from './outreach.js';
+import { runQueue } from './grading/queue.js';
+
+const GRADING_CRON = '*/15 * * * *';
+async function gradingRun(env) {
+  try { console.log('grading queue', JSON.stringify(await runQueue(env))); }
+  catch (e) { console.error('grading queue error', e && e.stack || e); }
+}
 
 /* The addresses that ARE the seminary. Everything else -- beta, a preview
    deployment, *.workers.dev -- is staging. See guard() below. */
@@ -85,9 +92,9 @@ async function asset(request, env) {
 }
 
 /* One route table, one place that decides what answers a request. */
-async function route(request, env) {
+async function route(request, env, ctx) {
   const path = new URL(request.url).pathname;
-  if (path === '/api' || path.startsWith('/api/')) return await handle(request, env);
+  if (path === '/api' || path.startsWith('/api/')) return await handle(request, env, ctx);
   if (path === '/verify' || path.startsWith('/verify/')) return await handle(request, env);
   // The verification page in a reader's language: /fr/verify (worker/api.js).
   if (/^\/(?:es|fr)\/verify(?:\/|$)/.test(path)) return await handle(request, env);
@@ -98,11 +105,14 @@ async function route(request, env) {
 }
 
 export default {
-  // Once a day: notes to students who have gone quiet, and on Mondays the
-  // seminary's weekly summary (worker/outreach.js).
-  scheduled: (event, env, ctx) => ctx.waitUntil(scheduled(event, env)),
+  // Two schedules (wrangler.jsonc triggers.crons):
+  //   every 15 minutes   the pending-grade queue (worker/grading/queue.js)
+  //   once a day         notes to students who have gone quiet, and on Mondays
+  //                      the seminary's weekly summary (worker/outreach.js)
+  // An event with no cron (a manual trigger) is the daily run, as it always was.
+  scheduled: (event, env, ctx) => ctx.waitUntil(event.cron === GRADING_CRON ? gradingRun(env) : scheduled(event, env)),
 
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
     const canonical = isCanonical(request);
 
@@ -115,7 +125,7 @@ export default {
         },
       });
 
-    const res = await route(request, env);
+    const res = await route(request, env, ctx);
     if (canonical) return res;
 
     /* Every response, not only the pages. The first version of this marked

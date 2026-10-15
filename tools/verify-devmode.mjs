@@ -38,7 +38,7 @@ const ok = (c, label, detail) => {
    pages is half of what is being tested: the flag is set by a query parameter
    on one page and has to still be on for the next. */
 async function session(steps) {
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   const page = await ctx.newPage();
   const errs = [];
   page.on('pageerror', (e) => errs.push(e.message));
@@ -90,7 +90,7 @@ async function session(steps) {
   const { out: [t] } = await session(['index.html?test=on']);
   ok(t.flag === null && t.locked > 0, 'test=on: tester mode turned on without the key');
   // the console route needs the key too
-  const ctx = await browser.newContext(); const page = await ctx.newPage();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } }); const page = await ctx.newPage();
   await page.goto(`${BASE}/index.html`, { waitUntil: 'load' });
   const r = await page.evaluate(async () => [await window.CTSCurriculum.testMode(true), await window.CTSCurriculum.testMode('on'), localStorage.getItem('cts_test_mode')]);
   ok(r[0] === false && r[1] === false && r[2] === null, 'CTSCurriculum.testMode() turned tester mode on without the key');
@@ -147,7 +147,7 @@ async function session(steps) {
 /* 4b. Tester mode does not stay on (Dr. Cook's review, 29 Sept 2026): twelve
       hours after the key is given it turns itself off, as ?ctstest=off does. */
 {
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   const page = await ctx.newPage();
   const api = [];
   page.on('request', (r) => { if (/\/api\/(register|sync|student)/.test(r.url())) api.push(r.url()); });
@@ -183,7 +183,7 @@ async function session(steps) {
       re-gradable for the placeholder tester; it must recognise a real student
       and leave them alone. */
 {
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   const page = await ctx.newPage();
   await page.goto(`${BASE}/index.html`, { waitUntil: 'load' });
   await page.evaluate((core) => {

@@ -40,7 +40,7 @@ const ok = (c, m, d) => { checks++; if (!c) fails.push(m + (d !== undefined ? `\
 /* The page to test: the built one if the bank is in force, else a copy of it. */
 let PAGE = 'CTSWRRequiredTest.html', harness = null;
 {
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   const p = await ctx.newPage();
   const r = await p.goto(`${BASE}/${PAGE}`, { waitUntil: 'load' }).catch(() => null);
   const live = r && r.ok() ? await p.evaluate(() => window.CTS_TEXTBOOK_TEST && window.CTS_TEXTBOOK_TEST.perGroup) : null;
@@ -66,7 +66,7 @@ let PAGE = 'CTSWRRequiredTest.html', harness = null;
 
 const KEY = (k) => `cts_textbook_wrreadings_${k}`;
 async function open(seed = {}) {
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   if (harness) await ctx.route(`${BASE}/${PAGE}`, (route) => route.fulfill({ status: 200, contentType: 'text/html; charset=utf-8', body: harness }));
   const p = await ctx.newPage();
   const errs = [];
@@ -210,7 +210,7 @@ async function answer(p, right, form = () => (q) => q.answer.en) {
 
 // 6. a bank not drawn by reading draws as before (the built site only: Genesis's page is generated)
 {
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   const p = await ctx.newPage();
   const r = await p.goto(`${BASE}/CTSGenesisReadingsTest.html`, { waitUntil: 'load' }).catch(() => null);
   if (r && r.ok()) {

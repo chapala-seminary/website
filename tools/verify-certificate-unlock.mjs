@@ -42,7 +42,7 @@ const browser = await chromium.launch(CHROME ? { executablePath: CHROME } : {});
 // keys the certificate page reads on every unit-page load. Then the
 // certificate page is opened in the same browser.
 async function open(file, unitPage, seed) {
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   const page = await ctx.newPage();
   const errs = [];
   page.on('pageerror', (e) => errs.push(e.message));
@@ -145,7 +145,7 @@ const degreeSeed = (codes, level) => ({
   cts_mdiv_done_codes: JSON.stringify(level === 'masters' ? codes : []), cts_thm_done_codes: JSON.stringify(level === 'masters' ? codes : []),
 });
 async function openDegree(file, seed) {
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   const page = await ctx.newPage();
   const errs = [];
   page.on('pageerror', (e) => errs.push(e.message));

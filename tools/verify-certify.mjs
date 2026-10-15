@@ -31,7 +31,7 @@ const without = pages.filter((f) => !/cts-certify\.js/.test(fs.readFileSync(`dis
 ok(without.length === 0, `${without.length} certificate page(s) do not load cts-certify.js`, without.slice(0, 6).join(' '));
 
 async function device() {
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   const page = await ctx.newPage();
   const errors = [];
   page.on('pageerror', (e) => errors.push(e.message));

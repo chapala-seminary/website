@@ -74,9 +74,28 @@ for (const [name, c] of [['production', prod], ['beta', prod.env?.beta]]) {
   // "A, B <x@y>" is two addresses to a mail server; a name with a comma must be quoted
   for (const k of ['EMAIL_FROM', 'OUTREACH_FROM'])
     ok(!/^[^"]*,[^"]*</.test(c.vars?.[k] || ''), `${name}: ${k} has no unquoted comma in the sender's name`, c.vars?.[k]);
-  ok((c.triggers?.crons || []).length === 1, `${name}: one daily scheduled run, for the notes to students`,
+  /* Two schedules, and these two: the daily notes to students, and the
+     fifteen-minute run of the pending-grade queue (worker/index.js routes by
+     event.cron). */
+  ok(JSON.stringify([...(c.triggers?.crons || [])].sort()) === JSON.stringify(['*/15 * * * *', '0 15 * * *']),
+    `${name}: two scheduled runs -- daily for the notes to students, every 15 minutes for the grading queue`,
     `found ${JSON.stringify(c.triggers?.crons)}`);
+  /* AI grading (worker/grading/): Workers AI is bound as AI, and the fake model
+     the suite uses is for test/wrangler.local.jsonc alone. */
+  ok(c.ai?.binding === 'AI', `${name}: the Workers AI binding is called AI, which is what the grader reads`, JSON.stringify(c.ai));
+  ok(!c.vars?.AI_FAKE, `${name}: AI_FAKE is not set (it replaces the model with a fake, for the test suite only)`);
+  ok(['live', 'shadow'].includes(c.vars?.GRADING_MODE), `${name}: GRADING_MODE is "live" or "shadow" (there is no "off")`, JSON.stringify(c.vars?.GRADING_MODE));
+  for (const k of ['GRADER_MODEL', 'GRADER_MODEL_FALLBACK', 'GRADER_PROMPT_VERSION'])
+    ok(!!c.vars?.[k], `${name}: ${k} is set`);
+  ok(c.vars?.GRADER_MODEL !== c.vars?.GRADER_MODEL_FALLBACK, `${name}: the fallback model is a different model`);
 }
+/* The test harness: the fake model, the live mode, both schedules. */
+ok(!!local.vars?.AI_FAKE && local.vars?.GRADING_MODE === 'live', 'the test harness grades with the fake model in live mode');
+ok(JSON.stringify([...(local.triggers?.crons || [])].sort()) === JSON.stringify(['*/15 * * * *', '0 15 * * *']),
+  'the test harness has both schedules', JSON.stringify(local.triggers?.crons));
+/* The AI grader is live on beta and a trial on production until Robert approves the switch. */
+ok(prod.env?.beta?.vars?.GRADING_MODE === 'live', 'beta grades live');
+ok(prod.vars?.GRADING_MODE === 'shadow', 'production stays in shadow mode until the switch date is approved');
 ok(prod.env?.beta?.vars?.MASTER_TESTS_ACTIVATION === 'beta', 'beta records the new master test activation cutoff once');
 ok(prod.vars?.MASTER_TESTS_ACTIVATION !== 'beta', 'production never takes the beta activation cutoff');
 ok(!prod.vars?.MASTER_TESTS_ACTIVATION || !Number.isNaN(Date.parse(prod.vars.MASTER_TESTS_ACTIVATION)), 'production activation is unset or a separate valid date');

@@ -115,7 +115,7 @@ function seedFor(list, track = 'cert', goal) {
 }
 const PAGE = { certificate: 'CTSCertificateOfMinistry.html', associate: 'CTSAssociateCertificate.html', thm: 'CTSThMCertificate.html', mdiv: 'CTSMDivCertificate.html' };
 async function open(page, seed) {
-  const ctx = await browser.newContext(); const p = await ctx.newPage();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } }); const p = await ctx.newPage();
   const errs = []; p.on('pageerror', (e) => errs.push(e.message));
   await p.goto(`${BASE}/${page}`); await p.evaluate((s) => { localStorage.clear(); for (const [k, v] of Object.entries(s)) localStorage.setItem(k, v); }, seed);
   await p.reload({ waitUntil: 'load' }); await p.waitForTimeout(300);

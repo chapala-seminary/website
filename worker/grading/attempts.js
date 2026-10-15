@@ -1,0 +1,502 @@
+/* Attempts: the lifecycle of one sitting of one test, the grades written to
+ * D1, and the credit that follows (docs/ai-grading.md, sections 5-7).
+ *
+ * The server is the grader of record. Nothing a browser says about its own
+ * result is read here: the track comes from the stored student record, the
+ * keys from grading_keys, and credit (unit_progress, textbook_results,
+ * course_completions, all source = 'server') is written only by settle().
+ */
+import catalog from '../catalog.json';
+import { courseShortfall, textbookShortfall, resolveCourse, studentLevel } from '../awards.js';
+import { testContext } from '../test-context.js';
+import { notifyBatch } from '../notify.js';
+import { exactFill, normAnswer, wordCount, copiedOnly } from './text.js';
+import { counts, requirements, evaluate, lockKind, lockMinutes, need, looksLikeInstruction,
+  MIN_SA_WORDS, MAX_FILL_CHARS, MAX_SA_CHARS, HOURLY_CAP } from './rules.js';
+import { gradeBatch, modelsOf } from './model.js';
+
+export const nowIso = () => new Date().toISOString();
+import { pickText } from './prompt.js';
+const pick = (obj, lang) => pickText(obj, lang).text;
+const slugOfPages = new Map(Object.entries(catalog.courses).map(([slug, c]) => [c.pages, slug]));
+
+/* ---- scopes and keys ------------------------------------------------------ */
+
+/** What a scope string names, or null. */
+export function parseScope(scope) {
+  let m;
+  if ((m = /^u:([A-Za-z0-9_]{1,40})\/(\d{1,3})$/.exec(scope))) {
+    const slug = slugOfPages.get(m[1]);
+    return slug ? { type: 'unit', prefix: `u:${m[1]}/${m[2]}/`, pages: m[1], unit: Number(m[2]), slug } : null;
+  }
+  if ((m = /^(tb|rd):([a-z0-9]{2,60})$/.exec(scope))) {
+    const t = catalog.textbooks[m[2]];
+    return t && (m[1] === 'rd') === (t.kind === 'reading') ? { type: m[1], prefix: `${m[1]}:${m[2]}/`, testSlug: m[2], code: t.code } : null;
+  }
+  if ((m = /^sp:([A-Za-z0-9_-]{1,60})$/.exec(scope))) return { type: 'sp', prefix: `sp:${m[1]}/`, page: m[1] };
+  return null;
+}
+
+/* The upper bound of every qid beginning with `prefix` (which ends in "/"):
+   the "/" becomes the next character. A range, not LIKE, since "_" is a
+   wildcard in LIKE and appears in qids. */
+const upper = (prefix) => prefix.slice(0, -1) + String.fromCharCode(prefix.charCodeAt(prefix.length - 1) + 1);
+const indexOf = (qid) => Number(qid.slice(qid.lastIndexOf('/') + 1));
+
+/** The questions a scope holds: { qids: {mc, fill, sa}, meta }. Null when the
+ *  keys have not been synced (tools/sync-grading-keys.mjs). */
+export async function loadScope(env, scope) {
+  const info = parseScope(scope);
+  if (!info) return null;
+  // Only the test's meta row and a textbook's fill rows (for their group) need their JSON read here;
+  // a unit's 40 keys are most of its weight and are fetched one at a time when a question is answered.
+  const rows = (await env.DB.prepare(
+    `SELECT qid, kind, CASE WHEN kind = 'meta' OR (kind = 'fill' AND source != 'unit') THEN data_json END AS data_json
+     FROM grading_keys WHERE qid >= ? AND qid < ?`).bind(info.prefix, upper(info.prefix)).all()).results ?? [];
+  const qids = { mc: [], fill: [], sa: [] };
+  let meta = null;
+  const groups = {};
+  for (const r of rows) {
+    if (r.kind === 'meta') { meta = JSON.parse(r.data_json); continue; }
+    if (qids[r.kind]) {
+      qids[r.kind].push(r.qid);
+      if (r.kind === 'fill' && r.data_json) groups[r.qid] = JSON.parse(r.data_json).group ?? null;
+    }
+  }
+  for (const k of Object.keys(qids)) qids[k].sort((a, b) => indexOf(a) - indexOf(b));
+  if (!qids.mc.length && !qids.fill.length && !qids.sa.length) return null;
+  return { ...info, scope, qids, meta, groups };
+}
+
+export async function loadKeys(env, qids) {
+  const out = new Map();
+  for (let i = 0; i < qids.length; i += 50) {
+    const part = qids.slice(i, i + 50);
+    const rows = (await env.DB.prepare(`SELECT qid, kind, data_json, rubric_version FROM grading_keys WHERE qid IN (${part.map(() => '?').join(',')})`)
+      .bind(...part).all()).results ?? [];
+    for (const r of rows) out.set(r.qid, { qid: r.qid, kind: r.kind, key: JSON.parse(r.data_json), rubricVersion: r.rubric_version });
+  }
+  return out;
+}
+
+/* ---- the draw of a textbook or reading test --------------------------------
+   Twenty from forty, the same way the page used to draw them
+   (public/assets/js/cts-textbook.js newDraw): by group when the bank says
+   how many to take from each reading or chapter. Seeded by the attempt id, so
+   the draw is a function of the attempt and needs no column of its own. */
+function seeded(text) {
+  let h = 2166136261;
+  for (let i = 0; i < text.length; i++) { h ^= text.charCodeAt(i); h = Math.imul(h, 16777619); }
+  return () => {
+    h = (h + 0x6D2B79F5) | 0;
+    let t = Math.imul(h ^ (h >>> 15), 1 | h);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function shuffled(list, rnd) {
+  const a = list.slice();
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+export function drawFor(scope, attemptId) {
+  const all = scope.qids.fill;
+  const meta = scope.meta;
+  if (!meta || !meta.draw) return all;
+  const rnd = seeded(`${attemptId}|${scope.scope}`);
+  const per = meta.perReading || meta.perChapter;
+  const take = Math.min(meta.draw, all.length);
+  if (per) {
+    const groups = new Map();
+    for (const q of all) { const g = scope.groups[q]; if (!groups.has(g)) groups.set(g, []); groups.get(g).push(q); }
+    let picked = [];
+    for (const g of [...groups.keys()].sort((a, b) => a - b)) picked = picked.concat(shuffled(groups.get(g), rnd).slice(0, per));
+    return shuffled(picked, rnd).slice(0, take);
+  }
+  return shuffled(all, rnd).slice(0, take);
+}
+
+/* ---- students and attempts --------------------------------------------------- */
+
+export async function loadStudent(env, id) {
+  return await env.DB.prepare('SELECT id, name, email, email_verified_at, country, track, goal, lang FROM students WHERE id = ?').bind(id).first();
+}
+export const trackOf = (student) => studentLevel(student.track, student.goal);
+
+export async function loadAttempt(env, id) {
+  return await env.DB.prepare('SELECT * FROM attempts WHERE id = ?').bind(String(id || '')).first();
+}
+
+/** The questions an attempt shows, in the order the page renders them.
+ *  `full` ignores what is banked (used for the totals the rules count against). */
+export function itemsOf(scope, attempt, rows) {
+  if (attempt.shadow && (scope.type === 'tb' || scope.type === 'rd'))
+    return { mc: [], fill: [...new Set(rows.filter((r) => r.kind === 'fill').map((r) => r.qid))], sa: [] };
+  return { mc: scope.qids.mc, fill: scope.type === 'tb' || scope.type === 'rd' ? drawFor(scope, attempt.id) : scope.qids.fill, sa: scope.qids.sa };
+}
+
+async function gradesOf(env, attemptId) {
+  return (await env.DB.prepare('SELECT * FROM answer_grades WHERE attempt_id = ? ORDER BY id').bind(attemptId).all()).results ?? [];
+}
+
+/** Earlier work that still counts: a multiple-choice pass, and the short
+ *  answers already met. Real attempts only (the shadow trial banks nothing),
+ *  and only attempts before this one and after the last pass: once a unit is
+ *  passed, another attempt at it is practice and starts from nothing. */
+export async function bankedFor(env, studentId, scope, attemptId) {
+  const prior = (await env.DB.prepare(
+    `SELECT id, status, mc_right, mc_total FROM attempts
+     WHERE student_id = ? AND scope = ? AND shadow = 0 AND rowid < COALESCE((SELECT rowid FROM attempts WHERE id = ?), 9223372036854775807)
+     ORDER BY rowid DESC`).bind(studentId, scope, attemptId || '').all()).results ?? [];
+  const ids = [];
+  let mc = false;
+  for (const a of prior) {
+    if (a.status === 'passed') break;
+    ids.push(a.id);
+    if (a.mc_total > 0 && a.mc_right * 10 >= a.mc_total * 9) mc = true;
+  }
+  if (!ids.length) return { mc, sa: [] };
+  const sa = (await env.DB.prepare(
+    `SELECT DISTINCT qid FROM answer_grades WHERE kind = 'sa' AND verdict = 'met' AND attempt_id IN (${ids.map(() => '?').join(',')})`)
+    .bind(...ids).all()).results ?? [];
+  return { mc, sa: sa.map((r) => r.qid) };
+}
+
+/** Where the student stands on this attempt, by the rules for their track. */
+export async function standing(env, attempt, scope) {
+  const rows = await gradesOf(env, attempt.id);
+  const items = itemsOf(scope, attempt, rows);
+  const banked = attempt.shadow ? { mc: false, sa: [] } : await bankedFor(env, attempt.student_id, attempt.scope, attempt.id);
+  const meta = scope.type === 'tb' || scope.type === 'rd' ? (scope.meta || { pass: items.fill.length }) : null;
+  const totals = { mc: scope.type === 'tb' || scope.type === 'rd' ? 0 : items.mc.length, fill: items.fill.length, sa: items.sa.length };
+  const req = requirements(attempt.track, totals, meta);
+  const mine = (kind, v) => rows.filter((r) => r.kind === kind && r.verdict === v).length;
+  const saMetSet = new Set([...banked.sa, ...rows.filter((r) => r.kind === 'sa' && r.verdict === 'met').map((r) => r.qid)]);
+  const saPending = rows.filter((r) => r.kind === 'sa' && r.verdict === 'pending' && !saMetSet.has(r.qid)).length;
+  const state = {
+    mcRight: mine('mc', 'right'), mcBanked: banked.mc, mcPending: 0,
+    fillRight: mine('fill', 'right'), fillPending: mine('fill', 'pending'),
+    saMet: saMetSet.size, saPending,
+  };
+  return { rows, items, banked, totals, req, state, verdict: evaluate(req, state) };
+}
+
+/* ---- credit ------------------------------------------------------------------- */
+
+/** Record the course as complete when the record now supports it: every unit,
+ *  and on the master's tracks every test the course requires. Returns whether
+ *  the course is complete and whether this call made it so. */
+export async function completeCourseIfDone(env, student, code, level) {
+  const c = resolveCourse(code);
+  if (!c || !c.units) return { done: false, newly: false };
+  const units = ((await env.DB.prepare('SELECT unit FROM unit_progress WHERE student_id = ? AND course = ?').bind(student.id, c.slug).all()).results ?? []).map((r) => r.unit);
+  const tbs = ((await env.DB.prepare('SELECT textbook FROM textbook_results WHERE student_id = ?').bind(student.id).all()).results ?? []).map((r) => r.textbook);
+  const held = (await env.DB.prepare('SELECT code, track, completed_at FROM course_completions WHERE student_id = ?').bind(student.id).all()).results ?? [];
+  if (courseShortfall(c.slug, units, level, tbs, testContext(env, held))) {
+    return { done: held.some((r) => r.code === c.code), newly: false };
+  }
+  return await writeCompletion(env, student, c.code, level, held);
+}
+
+export async function writeCompletion(env, student, code, level, held) {
+  held = held || (await env.DB.prepare('SELECT code, track, completed_at FROM course_completions WHERE student_id = ?').bind(student.id).all()).results || [];
+  const had = held.some((r) => r.code === code);
+  // A completion's level only rises (the same rule as /api/sync).
+  await env.DB.prepare(
+    `INSERT INTO course_completions (student_id, code, track, completed_at, source) VALUES (?, ?, ?, ?, 'server')
+     ON CONFLICT(student_id, code) DO UPDATE SET track = excluded.track, source = 'server'
+     WHERE (course_completions.track IS NULL AND excluded.track IS NOT NULL)
+        OR (course_completions.track = 'cert' AND excluded.track IN ('assoc', 'thm', 'mdiv'))
+        OR (course_completions.track = 'assoc' AND excluded.track IN ('thm', 'mdiv'))`)
+    .bind(student.id, code, level, nowIso()).run();
+  if (!had) await notifyBatch(env, student, [{ kind: 'course', code, track: level }]);
+  return { done: true, newly: !had };
+}
+
+/* A pass is credit. Idempotent: an earlier pass (a legacy row, or the same
+   attempt settled twice) keeps its own time and source. */
+async function creditPass(env, attempt, scope) {
+  const student = await loadStudent(env, attempt.student_id);
+  if (!student) return { unitDone: false, courseDone: false };
+  const t = nowIso();
+  if (scope.type === 'unit') {
+    await env.DB.prepare(
+      `INSERT INTO unit_progress (student_id, course, unit, completed_at, source) VALUES (?, ?, ?, ?, 'server')
+       ON CONFLICT(student_id, course, unit) DO NOTHING`).bind(student.id, scope.slug, scope.unit, t).run();
+    const c = await completeCourseIfDone(env, student, scope.slug, attempt.track);
+    return { unitDone: true, courseDone: c.done, courseNew: c.newly };
+  }
+  if (scope.type === 'tb' || scope.type === 'rd') {
+    await env.DB.prepare(
+      `INSERT INTO textbook_results (student_id, textbook, passed_at, source) VALUES (?, ?, ?, 'server')
+       ON CONFLICT(student_id, textbook) DO NOTHING`).bind(student.id, scope.testSlug, t).run();
+    const c = await completeCourseIfDone(env, student, scope.code, attempt.track);
+    return { unitDone: true, courseDone: c.done, courseNew: c.newly };
+  }
+  if (scope.type === 'sp') {
+    // Single-page courses keep no units: passing the page completes the course.
+    // EXTENSION POINT (the single-page agent): the page's completion code is in
+    // its meta row (sp:<page>/meta/0, { code }).
+    const code = scope.meta && scope.meta.code;
+    if (!code) return { unitDone: true, courseDone: false };
+    const held = (await env.DB.prepare('SELECT code, track, completed_at FROM course_completions WHERE student_id = ?').bind(student.id).all()).results ?? [];
+    const tbs = ((await env.DB.prepare('SELECT textbook FROM textbook_results WHERE student_id = ?').bind(student.id).all()).results ?? []).map((r) => r.textbook);
+    if (textbookShortfall(code, attempt.track, tbs, testContext(env, held))) return { unitDone: true, courseDone: false };
+    const c = await writeCompletion(env, student, code, attempt.track, held);
+    return { unitDone: true, courseDone: true, courseNew: c.newly };
+  }
+  return { unitDone: false, courseDone: false };
+}
+
+async function alreadyCredited(env, attempt, scope) {
+  if (scope.type === 'unit')
+    return !!(await env.DB.prepare('SELECT 1 FROM unit_progress WHERE student_id = ? AND course = ? AND unit = ?').bind(attempt.student_id, scope.slug, scope.unit).first());
+  if (scope.type === 'tb' || scope.type === 'rd')
+    return !!(await env.DB.prepare('SELECT 1 FROM textbook_results WHERE student_id = ? AND textbook = ?').bind(attempt.student_id, scope.testSlug).first());
+  if (scope.type === 'sp' && scope.meta && scope.meta.code)
+    return !!(await env.DB.prepare('SELECT 1 FROM course_completions WHERE student_id = ? AND code = ?').bind(attempt.student_id, scope.meta.code).first());
+  return false;
+}
+
+/* ---- settling an attempt --------------------------------------------------------- */
+
+/** Work out where an attempt stands and write what follows: credit on a pass,
+ *  the lockout on a fail, nothing while an item is still pending. Used by
+ *  Submit, by the queue when a pending item is graded, and by the faculty pages
+ *  after a human grade or an appeal (which may turn a fail into a pass).
+ *  Never takes credit away. A shadow attempt is only measured.
+ *  Returns the reply the API gives for a submit. */
+export async function settle(env, attemptId, { submitting = false } = {}) {
+  const attempt = await loadAttempt(env, attemptId);
+  if (!attempt) return null;
+  const scope = await loadScope(env, attempt.scope);
+  if (!scope) return null;
+  const was = attempt.status;
+  const st = await standing(env, attempt, scope);
+  const t = nowIso();
+  let status = st.verdict.status;
+  if (was === 'passed') status = 'passed';          // a pass stays
+
+  const s = st.state, tot = st.totals;
+  const scores = {
+    mc_right: st.banked.mc ? null : s.mcRight, mc_total: st.banked.mc || !tot.mc ? null : tot.mc,
+    fill_right: s.fillRight, fill_total: tot.fill || null,
+    sa_met: s.saMet, sa_total: tot.sa || null,
+  };
+  let lockedUntil = attempt.locked_until, lockK = attempt.lock_kind;
+  let credit = { unitDone: false, courseDone: false };
+
+  if (status === 'passed') {
+    lockedUntil = null; lockK = null;
+    if (!attempt.shadow && was !== 'passed') credit = await creditPass(env, attempt, scope);
+  } else if (status === 'failed') {
+    if (!attempt.shadow && was !== 'failed') {
+      // Practising a test already passed never locks anyone out.
+      if (!(await alreadyCredited(env, attempt, scope))) {
+        const from = submitting ? Date.parse(t) : Date.parse(attempt.submitted_at || t);
+        lockedUntil = new Date(from + lockMinutes(attempt.track) * 60000).toISOString();
+        lockK = scope.type === 'unit' ? lockKind(st.verdict.mcOK) : 'full';
+      }
+    }
+  }
+  await env.DB.prepare(
+    `UPDATE attempts SET status = ?, mc_right = ?, mc_total = ?, fill_right = ?, fill_total = ?, sa_met = ?, sa_total = ?,
+       locked_until = ?, lock_kind = ?, submitted_at = COALESCE(submitted_at, ?), graded_at = ? WHERE id = ?`)
+    .bind(status, scores.mc_right, scores.mc_total, scores.fill_right, scores.fill_total, scores.sa_met, scores.sa_total,
+      lockedUntil, lockK, t, status === 'pending' ? attempt.graded_at : (attempt.graded_at || t), attempt.id).run();
+
+  return {
+    was, status, attempt: { ...attempt, status, locked_until: lockedUntil, lock_kind: lockK },
+    result: await resultOf(env, { ...attempt, status, locked_until: lockedUntil, lock_kind: lockK }, scope, st),
+    credit,
+  };
+}
+
+/* ---- what the API says about an attempt ------------------------------------------- */
+
+const lockOf = (a) => (a.locked_until && Date.parse(a.locked_until) > Date.now() ? { until: a.locked_until, kind: a.lock_kind } : null);
+
+export function answeredOf(rows, banked, lang) {
+  const out = {};
+  for (const q of banked.sa) out[q] = { verdict: 'met', feedback: null, banked: true };
+  for (const r of rows) {
+    out[r.qid] = { gradeId: r.id, verdict: r.verdict, feedback: r.feedback || null, ...(r.kind === 'mc' ? { choice: Number(r.answer_text) } : {}) };
+  }
+  return out;
+}
+
+export async function resultOf(env, attempt, scope, st) {
+  st = st || await standing(env, attempt, scope);
+  const part = (name, right) => ({ right, total: st.req[name].total, need: st.req[name].need });
+  const unitDone = attempt.status === 'passed' || await alreadyCredited(env, attempt, scope);
+  let courseDone = false;
+  const code = scope.type === 'unit' ? resolveCourse(scope.slug)?.code : scope.type === 'sp' ? scope.meta?.code : scope.code;
+  if (code) courseDone = !!(await env.DB.prepare('SELECT 1 FROM course_completions WHERE student_id = ? AND code = ?').bind(attempt.student_id, code).first());
+  return {
+    attemptId: attempt.id, scope: attempt.scope, status: attempt.status,
+    scores: { mc: { ...part('mc', st.state.mcRight), banked: st.banked.mc }, fill: part('fill', st.state.fillRight), sa: part('sa', st.state.saMet) },
+    lock: lockOf(attempt), unitDone, courseDone,
+    answered: answeredOf(st.rows, st.banked, attempt.lang),
+  };
+}
+
+/** The reply to POST /api/attempt. */
+export async function attemptView(env, attempt, scope, keys) {
+  const st = await standing(env, attempt, scope);
+  const answered = answeredOf(st.rows, st.banked, attempt.lang);
+  const mcAsked = st.banked.mc ? [] : st.items.mc;
+  const whys = new Map();
+  const mcDone = mcAsked.filter((q) => answered[q]);
+  if (mcDone.length) {
+    const ks = keys || await loadKeys(env, mcDone);
+    for (const q of mcDone) whys.set(q, pick(ks.get(q)?.key.why, attempt.lang) || undefined);
+  }
+  return {
+    attemptId: attempt.id, scope: attempt.scope, status: attempt.status, track: attempt.track, lang: attempt.lang,
+    needs: { mc: st.req.mc.need, fill: st.req.fill.need, sa: st.req.sa.need },
+    totals: { mc: st.req.mc.total, fill: st.req.fill.total, sa: st.req.sa.total },
+    banked: { mc: st.banked.mc, fill: [], sa: st.banked.sa },
+    answered,
+    lock: lockOf(attempt),
+    items: {
+      mc: mcAsked.map((q) => (whys.get(q) ? { qid: q, why: whys.get(q) } : { qid: q })),
+      fill: st.items.fill,
+      sa: st.items.sa.filter((q) => !st.banked.sa.includes(q)),
+    },
+  };
+}
+
+/** A written answer the model could not grade yet: the 15-minute run tries again (queue.js). */
+export async function enqueue(env, gradeId, error) {
+  const t = nowIso();
+  await env.DB.prepare('INSERT OR REPLACE INTO grade_queue (grade_id, attempts, next_try_at, last_error, created_at) VALUES (?, 0, ?, ?, ?)')
+    .bind(gradeId, t, String(error || '').slice(0, 300), t).run();
+}
+
+/* ---- grading written answers ---------------------------------------------------------- */
+
+const CANNED = {
+  short: {
+    en: `This answer is too short to assess. Write at least ${MIN_SA_WORDS} words that explain the idea in your own words.`,
+    es: `Esta respuesta es demasiado corta para evaluarla. Escriba al menos ${MIN_SA_WORDS} palabras que expliquen la idea con sus propias palabras.`,
+    fr: `Cette réponse est trop courte pour être évaluée. Écrivez au moins ${MIN_SA_WORDS} mots qui expliquent l’idée avec vos propres mots.`,
+  },
+  copied: {
+    en: 'This answer mostly repeats the question. Explain the idea in your own words.',
+    es: 'Esta respuesta repite en su mayor parte la pregunta. Explique la idea con sus propias palabras.',
+    fr: 'Cette réponse reprend surtout la question. Expliquez l’idée avec vos propres mots.',
+  },
+  held: {
+    en: 'This answer has been sent to a faculty grader. You will see the result when it has been reviewed.',
+    es: 'Esta respuesta se ha enviado a un profesor para su revisión. Verá el resultado cuando haya sido revisada.',
+    fr: 'Cette réponse a été transmise à un correcteur de la faculté. Vous verrez le résultat une fois qu’elle aura été examinée.',
+  },
+  blank: { en: 'No answer was given.', es: 'No se dio ninguna respuesta.', fr: 'Aucune réponse n’a été donnée.' },
+  waiting: {
+    en: 'Saved. It will be graded shortly.', es: 'Guardada. Se calificará en breve.', fr: 'Enregistrée. Elle sera corrigée sous peu.',
+  },
+};
+const canned = (name, lang) => CANNED[name][lang] || CANNED[name].en;
+
+/** Written items graded in the count of the last hour, for the per-student cap. */
+export async function gradedThisHour(env, studentId) {
+  const since = new Date(Date.now() - 3600 * 1000).toISOString();
+  return (await env.DB.prepare(
+    `SELECT COUNT(*) AS n FROM answer_grades WHERE student_id = ? AND kind IN ('fill','sa') AND created_at >= ?`).bind(studentId, since).first())?.n || 0;
+}
+
+async function lookupDecided(env, qid, lang, norm) {
+  const o = await env.DB.prepare('SELECT verdict FROM grade_overrides WHERE qid = ? AND lang = ? AND norm_answer = ?').bind(qid, lang, norm).first();
+  if (o) return { by: 'override', verdict: o.verdict, feedback: null };
+  const c = await env.DB.prepare('SELECT verdict, feedback FROM grade_cache WHERE qid = ? AND lang = ? AND norm_answer = ?').bind(qid, lang, norm).first();
+  if (c) {
+    await env.DB.prepare('UPDATE grade_cache SET seen_count = seen_count + 1, last_seen = ? WHERE qid = ? AND lang = ? AND norm_answer = ?')
+      .bind(nowIso(), qid, lang, norm).run();
+    return { by: 'cache', verdict: c.verdict, feedback: c.feedback };
+  }
+  return null;
+}
+
+export async function cacheDecision(env, qid, lang, norm, verdict, feedback, model, version) {
+  const t = nowIso();
+  await env.DB.prepare(
+    `INSERT INTO grade_cache (qid, lang, norm_answer, verdict, feedback, model, prompt_version, seen_count, first_seen, last_seen)
+     VALUES (?, ?, ?, ?, ?, ?, ?, 1, ?, ?)
+     ON CONFLICT(qid, lang, norm_answer) DO UPDATE SET seen_count = seen_count + 1, last_seen = excluded.last_seen`)
+    .bind(qid, lang, norm, verdict, feedback || null, model || null, version || null, t, t).run();
+}
+
+/** Grade written answers and write the rows. entries: [{ qid, kind, answer, key, rubricVersion }].
+ *  The caller has checked ownership, lengths and that none is already graded.
+ *  Returns one reply item per entry, in order. */
+export async function gradeWritten(env, attempt, entries) {
+  const lang = attempt.lang;
+  const { version } = modelsOf(env);
+  const out = new Array(entries.length);
+  const toModel = { fill: [], sa: [] };
+
+  entries.forEach((e, i) => {
+    const text = String(e.answer ?? '');
+    if (e.kind === 'fill') {
+      if (!normAnswer(text)) { out[i] = { verdict: 'wrong', by: 'rule', feedback: canned('blank', lang) }; return; }
+      if (exactFill(e.key, text, lang)) { out[i] = { verdict: 'right', by: 'exact', feedback: null }; return; }
+      toModel.fill.push(i);
+      return;
+    }
+    // short answer, in the order the contract sets: cheap rules, then injection, then the model
+    const prompt = pick(e.key.prompt, lang);
+    if (wordCount(text) < MIN_SA_WORDS) { out[i] = { verdict: 'not_met', by: 'rule', feedback: canned('short', lang) }; return; }
+    if (copiedOnly(prompt, text) || copiedOnly(pick(e.key.prompt, 'en'), text)) { out[i] = { verdict: 'not_met', by: 'rule', feedback: canned('copied', lang) }; return; }
+    if (looksLikeInstruction(text)) { out[i] = { verdict: 'pending', by: 'rule', feedback: canned('held', lang), held: 'injection' }; return; }
+    toModel.sa.push(i);
+  });
+
+  // Fill-ins an exact match did not settle: a faculty ruling, then a saved decision, then the model.
+  const fillAsk = [];
+  for (const i of toModel.fill) {
+    const e = entries[i];
+    const norm = normAnswer(e.answer);
+    const known = await lookupDecided(env, e.qid, lang, norm);
+    if (known) out[i] = { verdict: known.verdict, by: known.by, feedback: known.feedback };
+    else fillAsk.push(i);
+  }
+  for (const [kind, idx] of [['fill', fillAsk], ['sa', toModel.sa]]) {
+    if (!idx.length) continue;
+    const batch = await gradeBatch(env, kind, lang, idx.map((i) => ({ qid: entries[i].qid, key: entries[i].key, answer: String(entries[i].answer) })));
+    for (const i of idx) {
+      const r = batch.results.get(entries[i].qid);
+      if (!r) { out[i] = { verdict: 'pending', by: 'ai', feedback: canned('waiting', lang), queue: batch.error || 'unresolved' }; continue; }
+      if (r.verdict === 'pending') { out[i] = { verdict: 'pending', by: 'ai', feedback: canned('held', lang), held: 'model', model: r.model, version: r.version }; continue; }
+      out[i] = { verdict: r.verdict, by: 'ai', feedback: r.feedback, points: r.points, model: r.model, version: r.version };
+      if (kind === 'fill') await cacheDecision(env, entries[i].qid, lang, normAnswer(entries[i].answer), r.verdict, r.feedback, r.model, r.version);
+    }
+  }
+
+  const t = nowIso();
+  for (let i = 0; i < entries.length; i++) {
+    const e = entries[i], r = out[i];
+    const pending = r.verdict === 'pending';
+    const res = await env.DB.prepare(
+      `INSERT INTO answer_grades (attempt_id, student_id, qid, kind, lang, answer_text, verdict, feedback, points_json, graded_by,
+         model, prompt_version, rubric_version, created_at, graded_at)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+       ON CONFLICT(attempt_id, qid) DO NOTHING RETURNING id`)
+      .bind(attempt.id, attempt.student_id, e.qid, e.kind, lang, String(e.answer ?? '').slice(0, MAX_SA_CHARS), r.verdict, r.feedback || null,
+        r.points ? JSON.stringify(r.points) : r.held ? JSON.stringify({ held: r.held }) : null, r.by,
+        r.model || null, r.version || (r.by === 'ai' ? version : null), e.kind === 'sa' ? (e.rubricVersion ?? null) : null, t, pending ? null : t).first();
+    if (!res) {
+      // A simultaneous request wrote this answer first: its grade stands.
+      const was = await env.DB.prepare('SELECT * FROM answer_grades WHERE attempt_id = ? AND qid = ?').bind(attempt.id, e.qid).first();
+      out[i] = { verdict: was.verdict, feedback: was.feedback, gradeId: was.id };
+      continue;
+    }
+    r.gradeId = res.id;
+    if (r.queue) await enqueue(env, res.id, r.queue);
+  }
+  return out.map((r, i) => ({
+    qid: entries[i].qid, gradeId: r.gradeId, verdict: r.verdict, feedback: r.feedback || null,
+    ...(r.points ? { points: r.points.map((p) => ({ id: p.id, made: p.made })) } : {}),
+  }));
+}
+
+export { MAX_FILL_CHARS, MAX_SA_CHARS, HOURLY_CAP, counts, need };

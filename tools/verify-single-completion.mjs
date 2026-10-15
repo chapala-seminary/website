@@ -12,7 +12,7 @@ const courses = [
   { code: 'STORYTEL', slug: 'narrative', state: 'cts_storytel_state', reg: 'cts_storytel_reg', page: 'CTS_Narrative_Preaching.html', cert: 'CTSNarrativePreachingCertificate.html', units: Array.from({length:8}, (_,i)=>i+1) }
 ];
 async function open(c, track, count, textbook=false, existing=false, assoc=false) {
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   const seed = {
     cts_student: JSON.stringify({name:'Synthetic Completion Test', country:'Test', track, goal:assoc?'assoc':''}),
     cts_track: track,

@@ -41,7 +41,7 @@ const downloads = fs.mkdtempSync(path.join(os.tmpdir(), 'cts-pdf-check-'));
 // the non-wrapping flex row off screen. Check all three awards and languages.
 for (const width of [1280, 390]) {
   for (const lang of ['en', 'es', 'fr']) {
-    const ctx = await browser.newContext({ viewport: { width, height: 900 } });
+    const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' },  viewport: { width, height: 900 } });
     await ctx.addInitScript(() => {
       localStorage.setItem('cts_student', JSON.stringify({ name: 'Certificate Layout Test', track: 'cert' }));
       localStorage.setItem('cts_track', 'cert');
@@ -87,7 +87,7 @@ for (const width of [1280, 390]) {
 /* Open a certificate page with a student in storage and build its PDF through
    the page's own code, catching the bytes instead of saving a file. */
 async function build(page, lang, seed, verify) {
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   const p = await ctx.newPage();
   const errs = [];
   p.on('pageerror', (e) => errs.push(e.message));

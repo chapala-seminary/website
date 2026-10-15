@@ -48,7 +48,7 @@ try {
     await page.close();
   }
   for (const width of [1280, 390]) {
-    const context = await browser.newContext({viewport:{width,height:900},locale:'fr-FR'});
+    const context = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' }, viewport:{width,height:900},locale:'fr-FR'});
     const page = await context.newPage();
     const errors=[]; page.on('pageerror', e=>errors.push(e.message));
     // Isolate presentation checks from database state and external resources.

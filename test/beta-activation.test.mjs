@@ -13,7 +13,7 @@ const config='test/wrangler.local.jsonc';
 const sql=file=>execFileSync('npx',['wrangler','d1','execute','chapala-students','--local','--persist-to',dir,'--config',config,'--file',file],{stdio:'pipe'});
 let worker,log,browser,checks=0;
 const check=(value,label)=>{assert.ok(value,label);checks++;};
-const post=async(route,body)=>{const r=await fetch(base+route,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)});return{status:r.status,body:await r.json()};};
+const post=async(route,body)=>{const r=await fetch(base+route,{method:'POST',headers:{'content-type':'application/json','x-test-grading-mode':'shadow'},body:JSON.stringify(body)});return{status:r.status,body:await r.json()};};
 const get=async(route)=>(await (await fetch(base+route)).json());
 async function start(){
  log=fs.openSync(path.join(dir,'dev.log'),'a');

@@ -19,7 +19,7 @@ try {
   for (const key of wanted) {
     const c = COURSES[key];
     for (const file of c.pages) {
-      const ctx = await browser.newContext();
+      const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
       await ctx.addInitScript(() => { localStorage.setItem('cts_lang', 'fr'); localStorage.setItem('cts_student', JSON.stringify({ name: 'French Test', email: 'french-test@example.invalid', track: 'mdiv', country: 'RDC' })); localStorage.setItem('cts_track', 'mdiv'); });
       const page = await ctx.newPage(); const errors = []; page.on('pageerror', e => errors.push(e.message));
       await page.goto(`${base}/fr/${file}?cts_lang=fr`, { waitUntil: 'load' });

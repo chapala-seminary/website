@@ -23,7 +23,7 @@ for (const file of fs.readdirSync('src/content/textbooks')) {
 const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
 try {
   // Check every standalone textbook test, including source-language fallback pages.
-  const catalogContext = await browser.newContext();
+  const catalogContext = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   try {
     await catalogContext.route('**/*', r => new URL(r.request().url()).origin === new URL(BASE).origin ? r.continue() : r.abort());
     const page = await catalogContext.newPage();
@@ -39,7 +39,7 @@ try {
   } finally { await catalogContext.close(); }
   for (const slug of ['joshua', 'revelationmilligan']) for (const lang of ['en', 'es']) {
     const book = JSON.parse(fs.readFileSync(`src/content/textbooks/${slug}.json`, 'utf8'));
-    const prior = await browser.newContext();
+    const prior = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
     try {
       await prior.route('**/*', r => new URL(r.request().url()).origin === new URL(BASE).origin ? r.continue() : r.abort());
       await prior.addInitScript(({slug, date}) => {
@@ -52,7 +52,7 @@ try {
       ok(await page.evaluate(s => localStorage.getItem(`cts_textbook_${s}_passed`), slug) === '2026-10-01', `${slug}/${lang}: original pass date preserved`);
       ok(await page.locator('#tb-submit:disabled').count() === 1, `${slug}/${lang}: previous pass does not require another exam`);
     } finally { await prior.close(); }
-    const ctx = await browser.newContext(), errors = [];
+    const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } }), errors = [];
     try {
       await ctx.route('**/*', r => new URL(r.request().url()).origin === new URL(BASE).origin ? r.continue() : r.abort());
       await ctx.addInitScript(() => {

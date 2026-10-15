@@ -51,7 +51,7 @@ const activeMap = (() => { const w = {}; new Function('window', shipped)(w); con
 ok(activeMap[CODE].length === 2, 'the generated requirements give Pentecostalism two tests', activeMap[CODE]);
 
 async function context({ active = false } = {}) {
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   if (active) {
     const js = `window.CTS_REQUIRED_TESTS = ${JSON.stringify(activeMap)};`;
     await ctx.addInitScript(js);

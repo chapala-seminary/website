@@ -34,7 +34,7 @@ const visible = (page, id) => page.evaluate(
 /* A student who has registered and passed something, made the way a student
    makes one: through the page, not through the API. */
 async function studentDevice() {
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   const page = await ctx.newPage();
   await page.goto(`${BASE}/synctest.html`, { waitUntil: 'domcontentloaded' });
   await page.waitForTimeout(400);
@@ -117,7 +117,7 @@ ok(await a.page.evaluate(() => window.CTS_SYNC.optedOut()) === false,
   'a student who changes their mind can take part again');
 
 /* ---- the page, with nothing to show -------------------------------------- */
-const fresh = await browser.newContext();
+const fresh = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
 const f = await fresh.newPage();
 /* Not networkidle: the sync client polls on a timer, so the network never
    goes quiet and the wait times out on a page that loaded perfectly. */

@@ -49,7 +49,7 @@ let checks = 0;
 const ok = (c, label, detail) => { checks++; if (!c) fails.push(label + (detail ? `\n        ${detail}` : '')); };
 
 async function state(page_, done) {
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   const p = await ctx.newPage();
   const errs = [];
   p.on('pageerror', e => errs.push(e.message));
@@ -120,7 +120,7 @@ for (const [label, done] of [['a student who has finished nothing', []], ['a stu
    completed the foundation. That pins the requirement at all seven, whatever
    order the list is in. */
 {
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   const p = await ctx.newPage();
   await p.goto(`${BASE}/index.html`, { waitUntil: 'load' });
   const r = await p.evaluate((core) => {

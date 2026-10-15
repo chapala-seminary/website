@@ -77,7 +77,7 @@ async function visit(ctx, path = '/index.html') {
 
 async function run(label, spec, expect) {
   const { seed, units } = oldBrowser(spec);
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   await ctx.addInitScript((s) => {
     if (localStorage.getItem('cts_student')) return;   // seeded once per browser, not per tab
     for (const [k, v] of Object.entries(s)) localStorage.setItem(k, v);
