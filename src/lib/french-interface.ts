@@ -17,6 +17,7 @@ export const FRENCH_LABELS: Record<string, string> = {
   'Reading With Honors': 'Lecture avec mention',
   'Course units': 'Unités du cours',
   'Contents': 'Sommaire',
+  'Breadcrumb': 'Fil d’Ariane',
 };
 /* Frame text inside the lesson body (src/lib/partials.ts), where a lang-fr
    span would change the lesson text that tools/prose-baseline.mjs records. */

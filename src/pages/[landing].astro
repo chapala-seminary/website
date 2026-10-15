@@ -1,0 +1,230 @@
+---
+/* One crawlable overview per course. The first unit (or one-page course)
+ * keeps the URL it has always had; this page is extra. */
+import { getCollection } from 'astro:content';
+import fs from 'node:fs';
+import {
+  landingFile, pagePrefix, completionCode, courseStatus, tracksFor, authorOf,
+  OPEN_BEFORE_FOUNDATION, courseLandingMeta, courseJsonLd, breadcrumbJsonLd,
+  localeUrl, SITE, SITE_NAME, statusLabel,
+} from '../lib/seo';
+import { frBookTitle, frReadingsTitle } from '../lib/french-titles';
+
+export async function getStaticPaths() {
+  const courses = (await getCollection('courses')).map((e) => e.data);
+  const units = await getCollection('units');
+  const textbooks = await getCollection('textbooks');
+  const readings = await getCollection('readings');
+  const byPrefix = new Map<string, typeof units>();
+  for (const u of units) {
+    const list = byPrefix.get(u.data.pagePrefix) ?? [];
+    list.push(u);
+    byPrefix.set(u.data.pagePrefix, list);
+  }
+  return courses.map((course) => {
+    const prefix = pagePrefix(course.entry);
+    const unitEntries = (byPrefix.get(prefix) ?? []).slice().sort((a, b) => a.data.unit - b.data.unit);
+    const titles = unitEntries[0]?.data.unitTitles;
+    const first = unitEntries[0]?.data.unit ?? 1;
+    let unitList = unitEntries.map((u) => {
+      const i = u.data.unit - first;
+      const fallback = u.data.title.replace(/^.*?(?:Unit|Unidad)\s*\d+\s*[—–:-]\s*/i, '').trim() || `Unit ${u.data.unit}`;
+      return {
+        n: u.data.unit,
+        href: `${u.data.pagePrefix}Unit${u.data.unit}.html`,
+        en: titles?.en?.[i] || fallback,
+        es: titles?.es?.[i] && titles.es[i] !== titles.en?.[i] ? titles.es[i] : fallback,
+      };
+    });
+    if (!unitList.length && /^ethics_unit/i.test(course.entry)) {
+      unitList = fs.readdirSync('public').filter((f) => /^ethics_unit\d+\.html$/i.test(f)).sort()
+        .map((f) => {
+          const n = Number(/(\d+)/.exec(f)?.[1] || 0);
+          return { n, href: f, en: `Unit ${n}`, es: `Unidad ${n}` };
+        });
+    }
+    if (!unitList.length) unitList = [{ n: 1, href: course.entry, en: course.title.en, es: course.title.es }];
+    const code = completionCode(course);
+    const book = textbooks.map((t) => t.data).find((t) => t.course === course.code);
+    const reading = readings.map((r) => r.data).find((r) => r.course === course.code);
+    return {
+      params: { landing: landingFile(course.entry).replace(/\.html$/, '') },
+      props: { course, code, unitList, book, reading },
+    };
+  });
+}
+
+const { course, code, unitList, book, reading } = Astro.props;
+const status = courseStatus(code);
+const author = authorOf(code);
+const tracks = tracksFor(code);
+const open = OPEN_BEFORE_FOUNDATION.includes(code);
+const start = course.entry;
+const file = landingFile(course.entry);
+const meta = courseLandingMeta(course.title, course.description, 'en');
+const languages = ['en', 'es'] as string[];
+const jsonLd = [
+  courseJsonLd({
+    lang: 'en',
+    name: course.title.en,
+    description: course.description.en,
+    url: localeUrl(file, 'en'),
+    startUrl: localeUrl(start, 'en'),
+    languages,
+    author: author.en,
+  }),
+  breadcrumbJsonLd([
+    { name: SITE_NAME.en, url: `${SITE}/` },
+    { name: course.title.en, url: localeUrl(file, 'en') },
+  ]),
+];
+const bookTitle = book ? { en: book.title.en, es: book.title.es, fr: frBookTitle(book.title.en) } : null;
+const readingTitle = reading ? { en: reading.title.en, es: reading.title.es, fr: frReadingsTitle(course.code) } : null;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{meta.title}</title>
+    <meta name="description" content={meta.description} />
+    <link rel="canonical" href={localeUrl(file, 'en')} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_NAME.en} />
+    <meta property="og:url" content={localeUrl(file, 'en')} />
+    <meta property="og:title" content={meta.title} />
+    <meta property="og:description" content={meta.description} />
+    <meta property="og:image" content={`${SITE}/cts-share.png`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Chapala Theological Seminary seal" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={meta.title} />
+    <meta name="twitter:description" content={meta.description} />
+    <meta name="twitter:image" content={`${SITE}/cts-share.png`} />
+    {jsonLd.map((data) => (
+      <script type="application/ld+json" set:html={JSON.stringify(data).replace(/</g, '\\u003c')} />
+    ))}
+    <style>
+      :root{--paper:#f4ecda;--ink:#2a241d;--muted:#6f6556;--oxblood:#6d2233;--gold:#a9842c;--line:#d8c8a8}
+      *{box-sizing:border-box}
+      body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.55}
+      .wrap{max-width:42rem;margin:0 auto;padding:1.25rem 1.1rem 3rem}
+      header,.crumbs,footer{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center;justify-content:space-between}
+      .crumbs{font-size:.95rem;margin:0 0 1rem}
+      a{color:var(--oxblood)}
+      h1{color:var(--oxblood);font-size:1.85rem;line-height:1.15;margin:.15em 0 .4em}
+      h2{color:var(--oxblood);font-size:1.2rem;margin:1.6rem 0 .5rem}
+      .kicker{letter-spacing:.16em;text-transform:uppercase;font-size:.72rem;color:var(--gold);font-weight:700}
+      .lead{color:var(--muted);font-size:1.05rem}
+      .facts{list-style:none;margin:1rem 0;padding:0}
+      .facts li{border-top:1px solid var(--line);padding:.55rem 0}
+      .start{display:inline-block;margin:.8rem 0 0;background:var(--oxblood);color:#fff;text-decoration:none;padding:.65rem 1.1rem;border-radius:2px;font-weight:700}
+      .units{padding-left:1.2rem}
+      .units li{margin:.35rem 0}
+      footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.95rem}
+      img{display:block}
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header data-cts-chrome>
+        <a href="/index.html"><span class="lang-en">Chapala Theological Seminary</span><span class="lang-es">Seminario Teológico de Chapala</span><span class="lang-fr">Séminaire théologique de Chapala</span></a>
+        <a href="/CTSCatalog.html"><span class="lang-en">All courses</span><span class="lang-es">Todos los cursos</span><span class="lang-fr">Tous les cours</span></a>
+      </header>
+      <nav class="crumbs" aria-label="Breadcrumb" data-cts-chrome>
+        <span>
+          <a href="/index.html"><span class="lang-en">Home</span><span class="lang-es">Inicio</span><span class="lang-fr">Accueil</span></a>
+          ·
+          <span class="lang-en">{course.title.en}</span><span class="lang-es">{course.title.es}</span><span class="lang-fr">{course.title.fr}</span>
+        </span>
+      </nav>
+      <p class="kicker">
+        <span class="lang-en">{statusLabel(status, 'en')}{open ? ' · Open before the foundation' : ''}</span>
+        <span class="lang-es">{statusLabel(status, 'es')}{open ? ' · Abierto antes del fundamento' : ''}</span>
+        <span class="lang-fr">{statusLabel(status, 'fr')}{open ? ' · Ouvert avant les fondements' : ''}</span>
+      </p>
+      <h1>
+        <span class="lang-en">{course.title.en}</span>
+        <span class="lang-es">{course.title.es}</span>
+        <span class="lang-fr">{course.title.fr}</span>
+      </h1>
+      <p class="lead">
+        <span class="lang-en">{course.description.en}</span>
+        <span class="lang-es">{course.description.es}</span>
+        <span class="lang-fr">{course.description.fr}</span>
+      </p>
+      <p>
+        <a class="start" href={`/${start}`}>
+          <span class="lang-en">Start this course</span>
+          <span class="lang-es">Comenzar este curso</span>
+          <span class="lang-fr">Commencer ce cours</span>
+        </a>
+      </p>
+      <h2>
+        <span class="lang-en">About the course</span>
+        <span class="lang-es">Sobre el curso</span>
+        <span class="lang-fr">À propos du cours</span>
+      </h2>
+      <ul class="facts">
+        <li>
+          <span class="lang-en">Author: {author.en}</span>
+          <span class="lang-es">Autor: {author.es}</span>
+          <span class="lang-fr">Auteur : {author.fr}</span>
+        </li>
+        <li>
+          <span class="lang-en">Languages: English and Spanish. French is a draft.</span>
+          <span class="lang-es">Idiomas: español e inglés. El francés es un borrador.</span>
+          <span class="lang-fr">Langues : anglais et espagnol. Le français est un brouillon.</span>
+        </li>
+        <li>
+          <span class="lang-en">Units: {unitList.length}</span>
+          <span class="lang-es">Unidades: {unitList.length}</span>
+          <span class="lang-fr">Unités : {unitList.length}</span>
+        </li>
+        <li>
+          <span class="lang-en">Counts toward: {tracks.map((t) => t.en).join('; ')}. These are internal ministry recognitions, not official degrees.</span>
+          <span class="lang-es">Cuenta para: {tracks.map((t) => t.es).join('; ')}. Son reconocimientos internos de ministerio, no grados oficiales.</span>
+          <span class="lang-fr">Compte pour : {tracks.map((t) => t.fr).join('; ')}. Ce sont des reconnaissances internes, pas des diplômes officiels.</span>
+        </li>
+        {bookTitle && (
+          <li>
+            <span class="lang-en">Textbook: </span><span class="lang-es">Libro de texto: </span><span class="lang-fr">Manuel : </span>
+            <a href={`/${book!.page}.html`}><span class="lang-en">{bookTitle.en}</span><span class="lang-es">{bookTitle.es}</span><span class="lang-fr">{bookTitle.fr}</span></a>
+          </li>
+        )}
+        {readingTitle && (
+          <li>
+            <span class="lang-en">Required readings: </span><span class="lang-es">Lecturas requeridas: </span><span class="lang-fr">Lectures obligatoires : </span>
+            <a href={`/${reading!.page}.html`}><span class="lang-en">{readingTitle.en}</span><span class="lang-es">{readingTitle.es}</span><span class="lang-fr">{readingTitle.fr}</span></a>
+          </li>
+        )}
+      </ul>
+      <h2>
+        <span class="lang-en">Units</span>
+        <span class="lang-es">Unidades</span>
+        <span class="lang-fr">Unités</span>
+      </h2>
+      <ol class="units">
+        {unitList.map((u) => (
+          <li>
+            <a href={`/${u.href}`}>
+              <span class="lang-en">{u.n}. {u.en}</span>
+              <span class="lang-es">{u.n}. {u.es}</span>
+              <span class="lang-fr">{u.n}. {u.en}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+      <footer data-cts-chrome>
+        <span>
+          <span class="lang-en">Free theological training. The seminary is not accredited.</span>
+          <span class="lang-es">Formación teológica gratuita. El seminario no está acreditado.</span>
+          <span class="lang-fr">Formation théologique gratuite. Le séminaire n’est pas accrédité.</span>
+        </span>
+        <a href="mailto:info@chapalaseminary.org">info@chapalaseminary.org</a>
+      </footer>
+    </div>
+  </body>
+</html>

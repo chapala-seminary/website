@@ -125,6 +125,13 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
     <header class="cts-masthead">
       <div class="wrap" set:html={masthead || `<h1>${title}</h1>`} />
     </header>
+    <nav class="cts-crumbs wrap" aria-label="Breadcrumb" data-cts-chrome>
+      <a href="/index.html"><span class="lang-en">Home</span><span class="lang-es">Inicio</span><span class="lang-fr">Accueil</span></a>
+      {' · '}
+      <a href={`/${pagePrefix}Course.html`}><span class="lang-en">Course</span><span class="lang-es">Curso</span><span class="lang-fr">Cours</span></a>
+      {' · '}
+      <span class="lang-en">Unit {unit.unit}</span><span class="lang-es">Unidad {unit.unit}</span><span class="lang-fr">Unité {unit.unit}</span>
+    </nav>
 
     <nav class="cts-nav" aria-label="Course units" data-cts-chrome>
       <div class="wrap">
@@ -260,6 +267,8 @@ const lang = /lang-es/.test(bodyClass) ? 'es' : 'en';
           <span class="lang-fr">Séminaire théologique de Chapala · Formation théologique gratuite en anglais, en espagnol et en français.</span>
         </span>
         <span>
+          <a href={`/${pagePrefix}Course.html`}><span class="lang-en">Course overview</span><span class="lang-es">Resumen del curso</span><span class="lang-fr">Présentation du cours</span></a>
+          &nbsp;·&nbsp;
           <a href="/index.html#catalog"><span class="lang-en">All courses</span><span class="lang-es">Todos los cursos</span><span class="lang-fr">Tous les cours</span></a>
           &nbsp;·&nbsp;
           <a href="/cts-backup.html"><span class="lang-en">Save my progress</span><span class="lang-es">Guardar mi progreso</span><span class="lang-fr">Enregistrer ma progression</span></a>
