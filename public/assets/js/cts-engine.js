@@ -1466,7 +1466,7 @@
         else block += '<textarea data-sa="' + i + '" rows="4" style="width:100%;"' + (closed ? " readonly" : "") + (banked ? " aria-readonly=\"true\"" : "") + ">" +
                  txt.replace(/</g, "&lt;") + "</textarea>";
         if (res) block += verdictLine("sa", res, q);
-        if (live.models && live.models[q.qid]) block += '<div class="model-answer">' + bi(live.models[q.qid]) + "</div>";
+        if (live.models && live.models[q.qid] && txt.trim()) block += '<div class="model-answer">' + bi(live.models[q.qid]) + "</div>";
         block += "</div>";
       });
       if (split) outSa = block; else out += block;

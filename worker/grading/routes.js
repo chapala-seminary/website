@@ -154,11 +154,17 @@ async function gradeAnswers(request, env, h) {
     graded = await gradeWritten(env, attempt, entries);
   }
   const byQid = new Map(graded.map((g) => [g.qid, g]));
+  // an item answered earlier that was a wrong fill-in: it is final, so the answer wanted may come with it
+  const wrongBefore = asked.filter((a) => !byQid.has(a.qid) && a.kind === 'fill' && done.get(a.qid)?.verdict === 'wrong').map((a) => a.qid);
+  const wantedKeys = wrongBefore.length ? await loadKeys(env, wrongBefore) : new Map();
   return h.json({
     items: asked.map((a) => {
       if (byQid.has(a.qid)) return byQid.get(a.qid);
       const was = done.get(a.qid);
-      if (was) return { qid: a.qid, gradeId: was.id, verdict: was.verdict, feedback: was.feedback || null };
+      if (was) {
+        const wanted = wrongBefore.includes(a.qid) ? pick(wantedKeys.get(a.qid)?.key.answer, attempt.lang) : '';
+        return { qid: a.qid, gradeId: was.id, verdict: was.verdict, feedback: was.feedback || null, gradedBy: was.graded_by, ...(wanted ? { correctAnswer: wanted } : {}) };
+      }
       return { qid: a.qid, verdict: 'met', feedback: null, banked: true };
     }),
   });
@@ -201,7 +207,11 @@ async function appeal(request, env, h) {
   const b = await h.body(request);
   const student = await studentFor(env, h, b.code);
   if (!student) return noStudent(h);
-  const gradeId = Number(b.gradeId);
+  let gradeId = Number(b.gradeId);
+  if (!Number.isInteger(gradeId) && typeof b.attemptId === 'string' && typeof b.qid === 'string') {
+    // the page may name the answer by its attempt and question instead
+    gradeId = (await env.DB.prepare('SELECT id FROM answer_grades WHERE attempt_id = ? AND qid = ? AND student_id = ?').bind(b.attemptId, b.qid, student.id).first())?.id;
+  }
   if (!Number.isInteger(gradeId)) throw new h.HttpError(400, 'gradeId is required');
   const note = h.str(b.note, 1000, { field: 'note' });
   const g = await env.DB.prepare(
