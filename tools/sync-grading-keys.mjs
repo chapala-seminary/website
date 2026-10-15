@@ -24,14 +24,15 @@
  * applies it only if the grading_keys table is missing (deploy:beta does).
  *
  * EXTENSION POINT: the single-page courses (Counseling, Narrative Preaching,
- * WiseSpeak Preaching, Ethics) are `sp:<page>/<kind>/<i>`. singlePageRows()
- * below is where their keys are read; it returns nothing yet.
+ * WiseSpeak Preaching, Ethics) are `sp:<page>/<kind>/<i>`; their keys would be
+ * added in tools/grading-keys-lib.mjs. None yet.
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import os from 'node:os';
 import { spawnSync } from 'node:child_process';
+import { buildKeyRows } from './grading-keys-lib.mjs';
 
 const ACCOUNT = '119b0919229edb3185b69f1c6bd04b66';          // the Chapala account (wrangler.jsonc)
 const argv = process.argv.slice(2);
@@ -43,62 +44,17 @@ const STATE = opt('--state', '.wrangler-local');
 const MANAGED = ['u:', 'tb:', 'rd:'];
 const CHUNK_BYTES = 3 * 1024 * 1024;
 
-const readJson = (f) => JSON.parse(fs.readFileSync(f, 'utf8'));
 const jsonc = (f) => JSON.parse(fs.readFileSync(f, 'utf8').replace(/^\s*\/\/.*$/gm, ''));
-const catalog = readJson('worker/catalog.json');
 const hash = (text) => crypto.createHash('sha256').update(text).digest('hex').slice(0, 32);
 const sql = (v) => (v == null ? 'NULL' : typeof v === 'number' ? String(v) : `'${String(v).replace(/'/g, "''")}'`);
 
 /* ---- the questions -------------------------------------------------------- */
 
-const rows = new Map();     // qid -> { qid, kind, source, data, rubricVersion }
-function add(qid, kind, source, data, rubricVersion = null) {
-  if (rows.has(qid)) throw new Error(`duplicate question id ${qid}`);
-  rows.set(qid, { qid, kind, source, data: JSON.stringify(data), rubricVersion });
-}
-const keepOnly = (obj, fields) => Object.fromEntries(fields.filter((f) => obj[f] !== undefined).map((f) => [f, obj[f]]));
-
-function unitRows() {
-  const root = 'src/content/units';
-  for (const prefix of fs.readdirSync(root).sort()) {
-    if (!fs.statSync(path.join(root, prefix)).isDirectory()) continue;
-    for (const f of fs.readdirSync(path.join(root, prefix)).filter((x) => /^\d+\.json$/.test(x))) {
-      const n = Number(f.replace('.json', ''));
-      const u = readJson(path.join(root, prefix, f));
-      const base = `u:${prefix}/${n}`;
-      (u.mc || []).forEach((q, i) => add(`${base}/mc/${i}`, 'mc', 'unit', { prompt: q.stem, options: q.options, answer: q.answer, why: q.why ?? null }));
-      (u.fill || []).forEach((q, i) => add(`${base}/fill/${i}`, 'fill', 'unit', keepOnly(q, ['prompt', 'answer', 'accept'])));
-      (u.sa || []).forEach((q, i) => add(`${base}/sa/${i}`, 'sa', 'unit',
-        { ...keepOnly(q, ['prompt', 'model', 'keywords']), rubric: q.rubric ?? null }, q.rubric?.v ?? null));
-    }
-  }
-}
-
-function testRows(dir, tag, source) {
-  for (const f of fs.readdirSync(dir).filter((x) => x.endsWith('.json')).sort()) {
-    const b = readJson(path.join(dir, f));
-    const t = catalog.textbooks[b.slug];
-    if (!t || !b.test) { console.warn(`  skipped ${f}: not a test in worker/catalog.json`); continue; }
-    const base = `${tag}:${b.slug}`;
-    const qs = b.test.questions || [];
-    add(`${base}/meta/0`, 'meta', source, {
-      draw: b.test.draw ?? null, pass: b.test.pass ?? null, perReading: b.test.perReading ?? null, perChapter: b.test.perChapter ?? null,
-      n: qs.length, code: t.code, kind: t.kind, page: t.page,
-    });
-    qs.forEach((q, i) => add(`${base}/fill/${i}`, 'fill', source,
-      { ...keepOnly(q, ['prompt', 'answer', 'accept']), group: q.reading ?? q.chapter ?? null }));
-  }
-}
-
+const rows = buildKeyRows({ root: '.', warn: (m) => console.warn(m) });   // tools/grading-keys-lib.mjs, shared with the grader eval
 /* EXTENSION POINT (the single-page agent): keys for sp:<page>/<kind>/<i> and a
    meta row sp:<page>/meta/0 with { code } (the completion the page records).
-   worker/grading/attempts.js creditPass() reads that meta. */
-function singlePageRows() { return; }
-
-unitRows();
-testRows('src/content/textbooks', 'tb', 'textbook');
-testRows('src/content/readings', 'rd', 'reading');
-singlePageRows();
+   worker/grading/attempts.js creditPass() reads that meta. Add them to buildKeyRows() in
+   tools/grading-keys-lib.mjs. */
 console.log(`${rows.size} questions in the content`);
 
 /* ---- the database --------------------------------------------------------- */

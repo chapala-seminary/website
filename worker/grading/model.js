@@ -106,8 +106,10 @@ export function validate(kind, parsed, items) {
     for (const p of Array.isArray(r.points) ? r.points : []) {
       if (!p || typeof p.id !== 'string' || typeof p.made !== 'boolean' || byId.has(p.id) || !rub.points.some((x) => x.id === p.id)) { bad = true; break; }
       if (p.made) {
-        const q = normalise(p.quote || '');
-        if (q.trim().length < 2 || !hay.includes(q)) { bad = true; break; }
+        /* normalise() puts a space at each end, and a quote that begins or ends in punctuation
+           ("...in his name.") gets a second one; compare the words, whole words only. */
+        const q = normalise(p.quote || '').trim();
+        if (q.length < 2 || !hay.includes(` ${q} `)) { bad = true; break; }
       }
       byId.set(p.id, { id: p.id, made: p.made, quote: p.made ? String(p.quote).slice(0, 300) : '' });
     }

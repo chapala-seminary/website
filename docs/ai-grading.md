@@ -351,7 +351,8 @@ Notes on the routes (as built):
 - **Validation:** the reply must parse, match the schema, and cover exactly
   the item ids sent. For short answers:
   - every point made must quote text found in the student's answer, compared
-    after `normalise`;
+    after `normalise` as whole words (punctuation at the ends of the quote is
+    ignored; before 14 Oct 2026 a quote ending in a full stop was refused);
   - "met" must be consistent with the essential points.
 
   On failure, retry once, then try the fallback model. If that fails too, the
@@ -465,3 +466,101 @@ should send these, or this section should change in the same commit.
 - **Not yet converted** (plan step 6): the single-page courses still load their
   keys from `public/assets/js/fill/`; `cts-fill.js` already has the live mode
   they will use (`mount({ live: { attemptId } })`).
+
+## 13. Running the eval
+
+The eval (`tools/eval-grader.mjs`) is the check that must pass before the AI
+grades real students (plan section 6.2). It grades 2,346 answers written by
+agents (`test/eval/*.json`) through **the same code the server runs**:
+
+1. the cheap checks, in the order of `attempts.js` `gradeWritten()`: blank or
+   exact fill-in; fewer than 15 words; `copiedOnly` against the question in the
+   student's language and in English; instruction-like text, which is held for
+   faculty;
+2. `prompt.js` builds the messages (including the language fallback
+   `pickText`, so a French-only model answer is sent as French);
+3. `model.js` `gradeBatch()` makes the call, checks the reply, retries once and
+   falls back to `GRADER_MODEL_FALLBACK`.
+
+The keys it reads are built by `tools/grading-keys-lib.mjs`, the same code
+`tools/sync-grading-keys.mjs` uses to write `grading_keys`. What the eval does
+not have is the database: no `grade_cache`, no `grade_overrides`, no attempts, so
+nothing but the model answers for the model. Only the model call is swapped:
+`env.AI` is `tools/eval-ai-shim.mjs`, which posts to the Cloudflare REST API on
+the Chapala account pinned in `wrangler.jsonc`.
+
+**See the prompt first (no network).**
+
+    node tools/eval-grader.mjs --print-prompt "u:CTSJohn/1/sa/9" --lang es
+    node tools/eval-grader.mjs --print-prompt "u:CTSCH/9/fill/4" --lang fr
+
+It prints the system message, the user message (the JSON the model reads), the
+JSON schema, `max_tokens` and `temperature`, for a sample answer to that
+question (`--answer "..."` to try your own). It says so when the server would
+settle that answer without the model, and warns when the model answer sent is a
+generic placeholder.
+
+**Dry run (no network, no quota, exit 0).**
+
+    node tools/eval-grader.mjs --dry-run            # all 2,346 items, under a second
+
+The "model" is `worker/grading/fake-ai.js`, which answers `not_met` or `wrong`
+to everything without a `[[hint]]`. The report says in capitals that no real
+model was asked and that the bar result is meaningless. What it is for: checking
+the harness, the cheap rules (how many answers never reach the model), the
+prompts, and the estimate of what a real run costs.
+
+**The real run.** Prerequisites:
+
+- A Cloudflare API token that has the **Workers AI** permission on the Chapala
+  account, put in the environment **by Robert in his own shell**. No agent sets
+  it, and the tool never prints, logs or writes it:
+
+      export CLOUDFLARE_API_TOKEN=...        # in Robert's terminal only
+
+  The account id comes from `wrangler.jsonc`. If `CLOUDFLARE_ACCOUNT_ID` is set
+  to a different account, the tool refuses (two accounts are reachable from this
+  machine).
+- Workers AI usage is billed in neurons. **Workers Paid is not needed to
+  run it, but it uses real quota**: the free allowance is 10,000 neurons a day,
+  and the full run below is about 90,000 neurons (at $0.011 per 1,000 neurons, $1
+  is about 91,000). On the free plan a full run stops at a capacity error
+  (3036) about a tenth of the way through, and the rest of the items come back
+  `pending`. Either run it on Workers Paid, or run it in slices with `--limit`
+  over several days. Check the neuron count on the Workers AI page of the
+  dashboard before and after.
+- The rubrics are all in (check: `node tools/verify-rubrics.mjs`); the eval
+  refuses a real run if a short-answer question in it has none.
+
+The command (the flag is the signature that you know it spends quota):
+
+    CLOUDFLARE_API_TOKEN=... node tools/eval-grader.mjs \
+        --i-understand-this-uses-quota --repeat 2 --concurrency 4
+
+`--repeat 2` grades 100 of the model-routed answers a second time; without it
+the repeatability check of the bar is "not evaluated" and the bar is not
+established. `--model`, `--fallback-model`, `--truth wayne|ted`, `--limit`,
+`--category` and `--lang` narrow or change the run (see the top of the file).
+It writes `test/eval-results/<date>-<model>.json` (answers, verdicts, feedback;
+this is agent-written text, not student data) and exits 0 only if the bar passes
+and there was no harness error.
+
+**What it costs.** The dry run works the cost out from the exact prompts. Of
+the 2,346 items about 1,640 reach the model (the rest are settled by the cheap
+rules). That is about 1.58 million input tokens (prompt characters / 4, with a
+15% margin) and about 236,000 output tokens (typical reply: 200 tokens for a
+short answer, 50 for a fill-in; the ceiling is `max_tokens`, 550 an item). At
+list prices as of 14 Oct 2026:
+
+| Model | $ per M tokens in / out | Typical | Ceiling |
+|---|---|---|---|
+| `@cf/meta/llama-3.3-70b-instruct-fp8-fast` (primary) | 0.293 / 2.253 | $1.00 | $2.50 |
+| `@cf/openai/gpt-oss-120b` (fallback) | 0.35 / 0.75 | $0.73 | $1.23 |
+| `@cf/openai/gpt-oss-20b` | 0.20 / 0.30 | $0.39 | $0.59 |
+
+`--repeat 2` adds about 6%. The gpt-oss models are reasoning models; their
+reasoning tokens bill as output and are not in these figures, so treat the
+gpt-oss rows as a floor. The report of a real run uses the token counts the API
+returns, not these estimates. Re-check the prices at
+developers.cloudflare.com/workers-ai/platform/pricing before relying on the
+dollar figure.
