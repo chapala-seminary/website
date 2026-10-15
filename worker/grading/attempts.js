@@ -155,18 +155,21 @@ export async function bankedFor(env, studentId, scope, attemptId) {
     ids.push(a.id);
     if (a.mc_total > 0 && a.mc_right * 10 >= a.mc_total * 9) mc = true;
   }
-  if (!ids.length) return { mc, sa: [] };
+  if (!ids.length) return { mc, sa: [], saText: {} };
   const sa = (await env.DB.prepare(
-    `SELECT DISTINCT qid FROM answer_grades WHERE kind = 'sa' AND verdict = 'met' AND attempt_id IN (${ids.map(() => '?').join(',')})`)
+    `SELECT qid, answer_text FROM answer_grades WHERE kind = 'sa' AND verdict = 'met' AND attempt_id IN (${ids.map(() => '?').join(',')}) ORDER BY id`)
     .bind(...ids).all()).results ?? [];
-  return { mc, sa: sa.map((r) => r.qid) };
+  // the student's own words that met the standard (the latest, if more than one attempt got there)
+  const saText = {};
+  for (const r of sa) saText[r.qid] = r.answer_text;
+  return { mc, sa: Object.keys(saText), saText };
 }
 
 /** Where the student stands on this attempt, by the rules for their track. */
 export async function standing(env, attempt, scope) {
   const rows = await gradesOf(env, attempt.id);
   const items = itemsOf(scope, attempt, rows);
-  const banked = attempt.shadow ? { mc: false, sa: [] } : await bankedFor(env, attempt.student_id, attempt.scope, attempt.id);
+  const banked = attempt.shadow ? { mc: false, sa: [], saText: {} } : await bankedFor(env, attempt.student_id, attempt.scope, attempt.id);
   const meta = scope.type === 'tb' || scope.type === 'rd' ? (scope.meta || { pass: items.fill.length }) : null;
   const totals = { mc: scope.type === 'tb' || scope.type === 'rd' ? 0 : items.mc.length, fill: items.fill.length, sa: items.sa.length };
   const req = requirements(attempt.track, totals, meta);
@@ -316,13 +319,45 @@ export async function settle(env, attemptId, { submitting = false } = {}) {
 
 const lockOf = (a) => (a.locked_until && Date.parse(a.locked_until) > Date.now() ? { until: a.locked_until, kind: a.lock_kind } : null);
 
-export function answeredOf(rows, banked, lang) {
+/* What the student has done in an attempt, as the page reads it (docs/ai-grading.md section 12).
+   Only things that student already knows or has earned the right to see:
+   - multiple choice: the choice, and the right option and explanation (the
+     click that answered it already returned both);
+   - fill-in and short answer: the student's own text, who graded it
+     (`gradedBy`), and, for a fill-in graded wrong, the answer that was
+     wanted (a graded item is final: the first answer stands);
+   - a banked short answer: met, with the text that met it. */
+export async function answeredOf(env, rows, banked, lang) {
+  const need = rows.filter((r) => r.kind === 'mc' || (r.kind === 'fill' && r.verdict === 'wrong')).map((r) => r.qid);
+  const keys = need.length ? await loadKeys(env, need) : new Map();
   const out = {};
-  for (const q of banked.sa) out[q] = { verdict: 'met', feedback: null, banked: true };
+  for (const q of banked.sa) out[q] = { verdict: 'met', feedback: null, banked: true, ...(banked.saText && banked.saText[q] ? { answerText: banked.saText[q] } : {}) };
   for (const r of rows) {
-    out[r.qid] = { gradeId: r.id, verdict: r.verdict, feedback: r.feedback || null, ...(r.kind === 'mc' ? { choice: Number(r.answer_text) } : {}) };
+    const a = { gradeId: r.id, verdict: r.verdict, feedback: r.feedback || null, gradedBy: r.graded_by };
+    if (r.kind === 'mc') {
+      const k = keys.get(r.qid)?.key;
+      a.choice = Number(r.answer_text);
+      if (k) { a.answer = k.answer; a.why = pick(k.why, lang) || null; }
+    } else {
+      a.answerText = r.answer_text;
+      if (r.kind === 'fill' && r.verdict === 'wrong') { const k = keys.get(r.qid)?.key; if (k) a.correctAnswer = pick(k.answer, lang) || undefined; }
+    }
+    out[r.qid] = a;
   }
   return out;
+}
+
+/* The model answers of the short answers on a track where they are for
+   reflection and not graded, once the attempt is submitted -- and only then.
+   (On a track where written answers count, a model answer shown after a
+   failed attempt would be copied into the retake.) The page shows each beside
+   a short answer the student wrote. */
+async function modelsOf(env, attempt, scope, st) {
+  if (attempt.status === 'open' || attempt.shadow || st.req.sa.need || !st.items.sa.length) return undefined;
+  const keys = await loadKeys(env, st.items.sa);
+  const out = {};
+  for (const q of st.items.sa) { const m = keys.get(q)?.key.model; if (m && typeof m === 'object') out[q] = m; }
+  return Object.keys(out).length ? out : undefined;
 }
 
 export async function resultOf(env, attempt, scope, st) {
@@ -336,21 +371,18 @@ export async function resultOf(env, attempt, scope, st) {
     attemptId: attempt.id, scope: attempt.scope, status: attempt.status,
     scores: { mc: { ...part('mc', st.state.mcRight), banked: st.banked.mc }, fill: part('fill', st.state.fillRight), sa: part('sa', st.state.saMet) },
     lock: lockOf(attempt), unitDone, courseDone,
-    answered: answeredOf(st.rows, st.banked, attempt.lang),
+    answered: await answeredOf(env, st.rows, st.banked, attempt.lang),
+    ...(await modelsOf(env, attempt, scope, st).then((m) => (m ? { models: m } : {}))),
   };
 }
 
 /** The reply to POST /api/attempt. */
 export async function attemptView(env, attempt, scope, keys) {
   const st = await standing(env, attempt, scope);
-  const answered = answeredOf(st.rows, st.banked, attempt.lang);
+  const answered = await answeredOf(env, st.rows, st.banked, attempt.lang);
   const mcAsked = st.banked.mc ? [] : st.items.mc;
   const whys = new Map();
-  const mcDone = mcAsked.filter((q) => answered[q]);
-  if (mcDone.length) {
-    const ks = keys || await loadKeys(env, mcDone);
-    for (const q of mcDone) whys.set(q, pick(ks.get(q)?.key.why, attempt.lang) || undefined);
-  }
+  for (const q of mcAsked) if (answered[q] && answered[q].why) whys.set(q, answered[q].why);
   return {
     attemptId: attempt.id, scope: attempt.scope, status: attempt.status, track: attempt.track, lang: attempt.lang,
     needs: { mc: st.req.mc.need, fill: st.req.fill.need, sa: st.req.sa.need },
@@ -358,6 +390,7 @@ export async function attemptView(env, attempt, scope, keys) {
     banked: { mc: st.banked.mc, fill: [], sa: st.banked.sa },
     answered,
     lock: lockOf(attempt),
+    ...(await modelsOf(env, attempt, scope, st).then((m) => (m ? { models: m } : {}))),
     items: {
       mc: mcAsked.map((q) => (whys.get(q) ? { qid: q, why: whys.get(q) } : { qid: q })),
       fill: st.items.fill,
@@ -487,14 +520,15 @@ export async function gradeWritten(env, attempt, entries) {
     if (!res) {
       // A simultaneous request wrote this answer first: its grade stands.
       const was = await env.DB.prepare('SELECT * FROM answer_grades WHERE attempt_id = ? AND qid = ?').bind(attempt.id, e.qid).first();
-      out[i] = { verdict: was.verdict, feedback: was.feedback, gradeId: was.id };
+      out[i] = { verdict: was.verdict, feedback: was.feedback, gradeId: was.id, by: was.graded_by };
       continue;
     }
     r.gradeId = res.id;
     if (r.queue) await enqueue(env, res.id, r.queue);
   }
   return out.map((r, i) => ({
-    qid: entries[i].qid, gradeId: r.gradeId, verdict: r.verdict, feedback: r.feedback || null,
+    qid: entries[i].qid, gradeId: r.gradeId, verdict: r.verdict, feedback: r.feedback || null, gradedBy: r.by || 'ai',
+    ...(entries[i].kind === 'fill' && r.verdict === 'wrong' && pick(entries[i].key.answer, lang) ? { correctAnswer: pick(entries[i].key.answer, lang) } : {}),
     ...(r.points ? { points: r.points.map((p) => ({ id: p.id, made: p.made })) } : {}),
   }));
 }
