@@ -69,6 +69,7 @@ export function programLevel(track, goal) {
 // The program names, in each language, live with the award names.
 export { PROGRAM_NAMES } from './award-names.js';
 import { PROGRAM_NAMES } from './award-names.js';
+import { gradingDigestLine } from './grading/review.js';
 
 /* "1peter 3" (student_activity.last_unit) -> the course's name and the page to
  * go on with: the next unit, or the course's first page if that was the last. */
@@ -274,10 +275,12 @@ export async function digest(env, asOf = new Date()) {
   const courseName = (code) => (catalog.completions[code]?.name || code).replace(/\s*\|\s*$/, '');
   const byStudent = {};
   for (const f of finished) (byStudent[f.name] ??= []).push(courseName(f.code));
+  const gradingLine = await gradingDigestLine(env, asOf);
   const KIND = { quiet: 'quiet 3 weeks', not_started: 'not started after a week' };
   const lines = [
     `The week to ${day(asOf.toISOString())}`,
     `${total} students; ${active} made progress in the last ${QUIET_DAYS} days.`,
+    ...(gradingLine ? [gradingLine] : []),
     '',
     `NOTES SENT TO STUDENTS (${notes.length})`,
     ...(notes.length ? notes.map((n) => `  ${day(n.sent_at)}  ${n.name} <${n.email}>  ${KIND[n.kind] || n.kind}, ${n.lang || 'English (default)'}` +
