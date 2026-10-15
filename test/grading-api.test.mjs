@@ -320,7 +320,8 @@ const progressOf = async (code) => (await get(`/api/student/${code}`)).body;
   ok(/injection/.test(rows[2].points_json), 'the held answer is marked as held for injection');
   eq(q1(`SELECT COUNT(*) AS n FROM grade_queue WHERE grade_id = ${v[2].gradeId}`)[0].n, 0, 'and is not in the queue: a person grades it');
   ok(JSON.stringify(v[3]).indexOf('quote') === -1, 'the reply carries points made, not the quotes');
-  eq(q1(`SELECT rubric_version FROM answer_grades WHERE id = ${v[3].gradeId}`)[0].rubric_version, null, 'no rubric yet: graded against the model answer, rubric_version NULL');
+  // every short answer now has a rubric (tools/verify-rubrics.mjs): the grade records the version of the key it was graded against
+  eq(q1(`SELECT g.rubric_version AS got, k.rubric_version AS want FROM answer_grades g JOIN grading_keys k ON k.qid = g.qid WHERE g.id = ${v[3].gradeId}`).map((r) => r.got === r.want && r.got >= 1)[0], true, 'the grade records the rubric version it was graded against');
   const again = await post('/api/grade', { code, attemptId: a.attemptId, items: [{ qid: sa[3], answer: essay('not_met') }] });
   eq(again.body.items[0].verdict, 'met', 'the first grade of a short answer stands within an attempt');
 }
