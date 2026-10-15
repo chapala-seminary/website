@@ -112,3 +112,31 @@ Other problems:
 - WiseSpeak U6 Q10: the model lists "direct appeal"; the lesson's fourth method is the prayer conclusion.
 - Ethics U7 Q22 (personhood "from the beginning"): the lesson says believers differ, so the point is not essential.
 - Short answers in these courses now need at least 15 words plus the AI's judgement, not 100–120 characters plus 3 keywords as before.
+
+## Fill-in accept entries to review
+From the grader eval of 15 Oct 2026 (llama-3.3-70b, prompt `2026-10-15.1`). The model
+rejected each entry below when it was held out of the key, and on reading, the model
+may be right. These entries are in the **live** accept lists, so the site accepts them
+today by exact match. Nothing was changed. A faculty reader should decide whether each
+stays. In the eval their items are labelled `debatable` (graded and shown, left out of
+the bar).
+
+| Unit question (language) | Sentence blank | Expected | Entry in the accept list | Concern |
+|---|---|---|---|---|
+| CTSCS 8, fill 3 (fr) | "un ____ qui est le commencement du remède à la peur" | émerveillement | frayeur | Fear is not the cure for fear. |
+| CTSPM 6, fill 9 (es) | "la ____ del pastor es demasiado valiosa" | reputación | nombre | "la nombre": gender clash. |
+| CTSParables 10, fill 6 (es) | "combustible, oxígeno y ____" | calor | temperatura | Fire needs heat, not "temperature". |
+| CTSRev 4, fill 3 (fr) | "du livre de ____" | vie | vies | Number clash with the fixed phrase. |
+| CTSST 12, fill 2 (fr) | "repose uniquement sur les ____" | œuvres | œuvre | Singular after "les". |
+| CTSEvanPreach 9, fill 8 (fr) | "le ____ des âmes inquiètes" | banc | bancs | Plural after "le". |
+| CTSDeaconFamilyMinistry 8, fill 3 (fr) | "le Dieu de toute ____" | consolation | réconforts | Plural after "toute". |
+| CTSCS 1, fill 10 (fr) | "marcher avec les ____" (the bereaved) | endeuillés | survivants | "Survivors" is not "the bereaved". |
+| CTSDeaconFamilyMinistry 8, fill 9 (fr) | "le grand nombre des ____" | conseillers | conseils | "Advice" is not "counsellors". |
+| CTSCG 12, fill 5 (fr) | "six à huit ____" | semaines | sem | An abbreviation in running text. |
+
+(Question numbers are 1-based, as the lesson shows them; the eval ids are 0-based:
+`syn.CTSCS.8.2.fr` and so on.)
+
+Two generated misspelling items are also labelled `debatable`: `typo.CTSLA.1.7.fr`
+("nance" for "nuance") and `typo.CTSRE.4.6.fr` ("Prets" for "Pérets", which is also the
+word "prêts"), as is the hand-written `typowrong.22.en` ("agog" for "Agag").

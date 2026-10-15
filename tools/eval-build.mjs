@@ -80,6 +80,25 @@ function buildCopied() {
 }
 
 // ---- fill -----------------------------------------------------------------
+// Items whose label is arguable (review of the 15 Oct 2026 run, docs/rubric-review-notes.md,
+// "Fill-in accept entries to review"). They stay in the set and are graded, but carry
+// expected: 'debatable', so the bar leaves them out and the report shows them apart.
+const RELABELLED = '2026-10-15';
+const DEBATABLE = {
+  'syn.CTSCS.8.2.fr': 'a masculine "frayeur" in a sentence that wants the cure for fear, not fear',
+  'syn.CTSPM.6.8.es': 'number and gender clash with the sentence ("la nombre")',
+  'syn.CTSParables.10.5.es': '"temperatura" is not what the sentence says fire needs (heat)',
+  'syn.CTSRev.4.2.fr': 'number clashes with "le/les/toute" in the sentence',
+  'syn.CTSST.12.1.fr': 'number clashes with the sentence',
+  'syn.CTSEvanPreach.9.7.fr': 'number clashes with the sentence',
+  'syn.CTSDeaconFamilyMinistry.8.2.fr': 'number clashes with the sentence',
+  'syn.CTSCS.1.9.fr': '"survivants" is not "bereaved"',
+  'syn.CTSDeaconFamilyMinistry.8.8.fr': '"conseils" is not "counsellors"',
+  'syn.CTSCG.12.4.fr': '"sem" is not clearly the expected name in this sentence',
+  'typo.CTSLA.1.7.fr': '"nance" for "nuance" is more than a one-letter slip a reader can decode',
+  'typo.CTSRE.4.6.fr': '"Prets" for "Pérets" is also the common word "prêts"',
+};
+const debatable = it => (DEBATABLE[it.id] ? { ...it, expected: 'debatable', relabelled: `${RELABELLED} ${DEBATABLE[it.id]}` } : it);
 function allFill() {
   const out = [];
   for (const c of listCourses()) for (const n of listUnits(c)) {
@@ -120,7 +139,7 @@ function buildFillSynonym(fills) {
     const hold = c.good[Math.floor(r() * c.good.length)];
     chosen.push(mk(`syn.${c.f.course}.${c.f.unit}.${c.f.i}.${l}`, c.f.qid, 'fill', l, hold, 'right', 'fill_synonym', 'derived', { holdout: hold }));
   }
-  return chosen.sort((a, b) => a.id.localeCompare(b.id, 'en', { numeric: true }));
+  return chosen.map(debatable).sort((a, b) => a.id.localeCompare(b.id, 'en', { numeric: true }));
 }
 
 const shape = s => (/\d/.test(s) ? 'num' : 'alpha') + ':' + Math.min(3, (s.match(/\S+/g) || []).length) + ':' + (/^\p{Lu}/u.test(s) ? 'cap' : 'low');
@@ -173,7 +192,7 @@ function buildMisspelling(fills) {
     quota[lang]--;
     out.push(mk(`typo.${f.course}.${f.unit}.${f.i}.${lang}`, f.qid, 'fill', lang, t, 'right', 'fill_misspelling', 'derived', { note: `one-letter typo of "${ans}"` }));
   }
-  return out.sort((a, b) => a.id.localeCompare(b.id, 'en', { numeric: true }));
+  return out.map(debatable).sort((a, b) => a.id.localeCompare(b.id, 'en', { numeric: true }));
 }
 
 // ---- main -------------------------------------------------------------------

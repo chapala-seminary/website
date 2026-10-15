@@ -10,7 +10,7 @@ import { spawnSync } from 'node:child_process';
 import {
   ROOT, readItemFiles, validateItem, keyFor, applyHoldout, bare, wordCount,
 } from '../tools/eval-lib.mjs';
-import { summarise, BAR, PRICE_PER_M, PRICES_AS_OF, estimateCost, estimateRun } from '../tools/eval-summary.mjs';
+import { summarise, formatReport, BAR, PRICE_PER_M, PRICES_AS_OF, estimateCost, estimateRun } from '../tools/eval-summary.mjs';
 import { buildKeyRows } from '../tools/grading-keys-lib.mjs';
 import { makeEnv, makeUsageTally, cheapCheck, gradeOne, capturePrompt } from '../tools/eval-adapter.mjs';
 import { makeRestAI, readAccountId, checkQuotaGate } from '../tools/eval-ai-shim.mjs';
@@ -281,6 +281,13 @@ const items = readItemFiles();
   // pending counts against agreement but is neither a false accept nor a false reject
   const withPending = [...rs, mkr('x', 'half', 'sa', 'en', 'not_met', 'pending')];
   assert.equal(summarise(withPending, {}).summary.sa.ungraded, 1);
+  // debatable fill-ins are graded and reported, but never count towards the bar
+  const deb = [...rs, mkr('d1', 'fill_synonym', 'fill', 'fr', 'debatable', 'wrong'), mkr('d2', 'fill_synonym', 'fill', 'fr', 'debatable', 'right')];
+  const ds = summarise(deb, {});
+  assert.equal(ds.summary.fill.n, 0); assert.equal(ds.summary.fill.falseRejects, 0);
+  assert.deepEqual([ds.summary.debatable.n, ds.summary.debatable.accepted, ds.summary.debatable.rejected], [2, 1, 1]);
+  assert.equal(ds.summary.counts.items, deb.length);
+  assert.ok(formatReport({ summary: ds.summary, bar: ds.bar, meta: { dryRun: true, model: 'm', truth: 'agent', grading_path: 'x' } }).includes('debatable (label arguable'));
   // es gap: translated items are compared with their English originals
   const pairsRs = [mkr('o1', 'half', 'sa', 'en', 'not_met', 'not_met'), mkr('o2', 'half', 'sa', 'en', 'not_met', 'not_met'),
     mkr('o1.es', 'translated', 'sa', 'es', 'not_met', 'met', { of: 'o1', base_category: 'half' }), mkr('o2.es', 'translated', 'sa', 'es', 'not_met', 'not_met', { of: 'o2', base_category: 'half' })];

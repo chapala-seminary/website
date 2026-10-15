@@ -4,8 +4,9 @@
 //
 // An eval item is
 //   { id, qid, kind: 'sa'|'fill', lang: 'en'|'es'|'fr', answer,
-//     expected: 'met'|'not_met'|'partly'|'pending' (sa) | 'right'|'wrong' (fill),
+//     expected: 'met'|'not_met'|'partly'|'pending' (sa) | 'right'|'wrong'|'debatable' (fill),
 //     category, source: 'agent'|'fixture'|'derived', expected_by: 'agent',
+//     relabelled?: string (a review changed the label; says when and why),
 //     holdout?: string, of?: string, base_category?: string, note?: string }
 // `holdout` (fill_synonym only) names an accept entry that the grader must NOT
 // be given: the key is built from the content file and then that entry is
@@ -122,7 +123,7 @@ export function listHumanGraders(dir = EVAL_DIR) {
   return fs.existsSync(d) ? fs.readdirSync(d).filter(f => f.endsWith('.json')).map(f => f.replace(/\.json$/, '')).sort() : [];
 }
 const SA_EXPECT = new Set(['met', 'not_met', 'partly', 'pending']);
-const FILL_EXPECT = new Set(['right', 'wrong']);
+const FILL_EXPECT = new Set(['right', 'wrong', 'debatable']);   // 'debatable': graded and reported, left out of the bar
 export function validateItem(it) {
   const errs = [];
   for (const f of ['id', 'qid', 'kind', 'lang', 'answer', 'expected', 'category', 'source', 'expected_by']) if (it[f] === undefined || it[f] === '') errs.push(`missing ${f}`);

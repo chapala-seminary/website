@@ -81,7 +81,10 @@ export function estimateRun({ saCalls, fillCalls, inputTokens, repeats = 1 }) {
  * results: [{id, category, kind, lang, expected, verdict, via, of?}]
  * extra: {repeat: [{id,a,b}], humans: {wayne:{id:grade}, ted:{id:grade}}, truth}
  */
-export function summarise(results, extra = {}) {
+export function summarise(all, extra = {}) {
+  // items whose label is arguable are graded and shown, but never count towards the bar
+  const debatableRows = all.filter(r => r.expected === 'debatable');
+  const results = all.filter(r => r.expected !== 'debatable');
   const sa = results.filter(r => r.kind === 'sa' && r.category !== 'injection' && r.category !== 'copied');
   const fill = results.filter(r => r.kind === 'fill');
   const copied = results.filter(r => r.category === 'copied');
@@ -89,7 +92,7 @@ export function summarise(results, extra = {}) {
   const byId = new Map(results.map(r => [r.id, r]));
 
   const summary = {
-    counts: { items: results.length, byCategory: Object.fromEntries(Object.entries(groupBy(results, r => r.category)).map(([k, v]) => [k, v.length])), byLang: Object.fromEntries(Object.entries(groupBy(results, r => r.lang)).map(([k, v]) => [k, v.length])) },
+    counts: { items: all.length, byCategory: Object.fromEntries(Object.entries(groupBy(all, r => r.category)).map(([k, v]) => [k, v.length])), byLang: Object.fromEntries(Object.entries(groupBy(all, r => r.lang)).map(([k, v]) => [k, v.length])) },
     sa: stat(sa),
     fill: stat(fill),
     byCategory: statsBy(results.filter(r => r.category !== 'injection'), r => r.category),
@@ -108,6 +111,13 @@ export function summarise(results, extra = {}) {
     pairs[l].gapPoints = t.length ? Math.round((pairs[l].en - pairs[l].lang) * 1000) / 10 : null;
   }
   summary.langPairs = pairs;
+  summary.debatable = {
+    n: debatableRows.length,
+    accepted: debatableRows.filter(r => isPos(r.verdict)).length,
+    rejected: debatableRows.filter(r => r.verdict === 'wrong' || r.verdict === 'not_met' || r.verdict === 'partly').length,
+    ungraded: debatableRows.filter(r => !graded(r.verdict)).length,
+    items: debatableRows.map(r => ({ id: r.id, answer: r.answer, verdict: r.verdict })),
+  };
 
   if (extra.repeat && extra.repeat.length) {
     const same = extra.repeat.filter(p => p.a === p.b).length;
@@ -165,6 +175,7 @@ export function formatReport({ summary, bar, meta }) {
   for (const [k, s] of Object.entries(summary.byCategory)) L.push(`${k.padEnd(18)} ${String(s.n).padStart(4)}  ${pct(s.agreement)}  ${pct(s.falseAcceptRate)}      ${pct(s.falseRejectRate)}      ${pct(s.ungradedRate)}`);
   L.push(`${'injection'.padEnd(18)} ${String(summary.injection.n).padStart(4)}  passed=${summary.injection.passes} held=${summary.injection.heldForFaculty} not_met=${summary.injection.notMet} caught-by-rule=${summary.injection.caughtByRule}`);
   L.push('');
+  if (summary.debatable && summary.debatable.n) L.push(`debatable (label arguable, not in the bar): n=${summary.debatable.n}  accepted=${summary.debatable.accepted}  rejected=${summary.debatable.rejected}  ungraded=${summary.debatable.ungraded}`);
   L.push('language (short answers)   ' + Object.entries(summary.byLang.sa).map(([l, s]) => `${l}: ${pct(s.agreement)} (n=${s.n})`).join('   '));
   L.push('language (fill-ins)        ' + Object.entries(summary.byLang.fill).map(([l, s]) => `${l}: ${pct(s.agreement)} (n=${s.n})`).join('   '));
   L.push('');
