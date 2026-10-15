@@ -20,6 +20,7 @@ CONFIG=test/wrangler.local.jsonc
 node test/single-completion.test.mjs
 node test/single-page-readings.test.mjs
 node tools/verify-staged-readings.mjs
+node tools/verify-rubrics.mjs
 node test/eval-grader.test.mjs
 
 # A fresh database every run. The suite used to keep whatever the last run
