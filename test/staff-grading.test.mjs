@@ -260,7 +260,8 @@ ok((await sget('/staff/grading/calibration/mark')).status === 404, 'a mark canno
   for (const [s, text] of [[E, sameText], [F, sameText], [G, `${sameText} but with some other ending words added here`]]) {
     const a = (await start(s.code, 5)).body;
     qids.push(a.items.sa[0]);
-    await post('/api/grade', { code: s.code, attemptId: a.attemptId, items: [{ qid: a.items.sa[0], answer: text }, { qid: a.items.sa[1], answer: shortSame }] });
+    await post('/api/grade', { code: s.code, attemptId: a.attemptId, items: [{ qid: a.items.sa[0], answer: text }] });
+    eq((await post('/api/grade', { code: s.code, attemptId: a.attemptId, items: [{ qid: a.items.sa[1], answer: shortSame }] })).status, 422, 'short copying fixture is returned for expansion, not stored as a grade');
   }
   const page = await (await sget('/staff/grading/copying')).text();
   ok(page.includes(`Copying check ${RUN}`) && (page.match(new RegExp(`Copying check ${RUN}`, 'g')) || []).length === 1, 'identical answers from different students are listed once');

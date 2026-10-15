@@ -6,7 +6,7 @@
 // nothing but the model ever answers for the model):
 //
 //   fill-in      blank -> wrong; exactFill (text.js) -> right; else the model
-//   short answer fewer than 15 words -> not met; copiedOnly against the prompt
+//   short answer fewer than 15 words -> needs expansion (ungraded); copiedOnly against the prompt
 //                in the student's language or in English (prompt text chosen by
 //                prompt.js pickText, the same language fallback the prompt uses)
 //                -> not met; looksLikeInstruction (rules.js) -> pending, held
@@ -70,7 +70,7 @@ export function cheapCheck({ kind, key, answer, lang }) {
     if (exactFill(key, text, lang)) return { verdict: 'right', via: 'exact', graded_by: 'exact' };
     return null;
   }
-  if (wordCount(text) < MIN_SA_WORDS) return { verdict: 'not_met', via: 'rule:short', graded_by: 'rule' };
+  if (wordCount(text) < MIN_SA_WORDS) return { verdict: 'needs_expansion', via: 'rule:short', graded_by: 'rule' };
   if (copiedOnly(pick(key.prompt, lang), text) || copiedOnly(pick(key.prompt, 'en'), text)) return { verdict: 'not_met', via: 'rule:copied', graded_by: 'rule' };
   if (looksLikeInstruction(text)) return { verdict: 'pending', via: 'rule:injection', graded_by: 'rule' };
   return null;

@@ -54,7 +54,7 @@ const items = readItemFiles();
   for (const l of ['en', 'es', 'fr']) assert.ok(items.some(i => i.category === 'translated' && i.lang === l || i.category === 'injection' && i.lang === l), `no ${l} coverage`);
   ok('category sizes match the plan');
 
-  // a short answer under 15 words is failed by rule before the model sees it, so
+  // a short answer under 15 words is returned for expansion before the model sees it, so
   // an item meant to test the model must be at least 15 words
   const tooShort = items.filter(i => i.kind === 'sa' && !['copied', 'fixture'].includes(i.category) && wordCount(i.answer) < 15);
   assert.deepEqual(tooShort.map(i => i.id), [], 'model-path short answers need 15+ words');
@@ -194,7 +194,7 @@ const items = readItemFiles();
   calls.length = 0;
   ({ env } = mk(() => reply(quote)));
   r = await gradeOne({ item: { ...answer, answer: 'far too short' }, key: skey, env });
-  assert.equal(r.verdict, 'not_met'); assert.equal(calls.length, 0);
+  assert.equal(r.verdict, 'needs_expansion'); assert.equal(calls.length, 0);
   ok('adapter: cheap checks in the server order; model path through model.js (validation, retry, fallback, capacity error)');
 
   // 3. --print-prompt: the exact request, no network
@@ -238,7 +238,7 @@ const items = readItemFiles();
   assert.doesNotMatch(pp(S.genSa, 'fr'), /WARNING:.*placeholder/);
   assert.equal(userJson(pp(S.fillFr, 'fr')).items[0].sentence_language, 'French');
   // an answer given on the command line replaces the sample, and a rule-settled one is flagged but still printed
-  out = pp(S.saEn, 'en', ['--answer', 'too short']); assert.match(out, /rule:short -> not_met/); assert.match(out, /too short/);
+  out = pp(S.saEn, 'en', ['--answer', 'too short']); assert.match(out, /rule:short -> needs_expansion/); assert.match(out, /too short/);
   let bad = node(['tools/eval-grader.mjs', '--print-prompt', 'u:Nope/1/sa/0']); assert.equal(bad.status, 2);
   ok('--print-prompt: SA and fill in en/es/fr, French-only CTSCH, placeholder CTSGenesis; no network');
 }

@@ -262,6 +262,18 @@ ok(await has(m, '.cts-ai-note', 'graded by an AI assistant'), "the master's page
 ok(q1(`SELECT track FROM students WHERE id = '${codeM}'`)[0]?.track === 'thm', "the server holds the student on the Th.M. track");
 await mcAll(m, john1);
 await fillAll(m, john1);
+ok(await has(m, '.cts-ai-note', 'Please answer each question in a short paragraph that demonstrates your understanding of the material.'), 'Wayne’s paragraph instruction is visible');
+await m.locator('textarea[data-sa="0"]').fill('Jesus is God.');
+await m.locator('#submitExamBtn').click();
+ok(await waitText(m, 'Your answer is too short to evaluate.'), 'short response requests expansion in the browser');
+ok(await m.locator('textarea[data-sa="0"]').getAttribute('readonly') === null, 'returned answer remains editable');
+ok(q1(`SELECT COUNT(*) AS n FROM answer_grades WHERE student_id = '${codeM}' AND kind = 'sa'`)[0].n === 0, 'no failed short-answer grade is recorded');
+const sitting = q1(`SELECT id, status, submitted_at, locked_until FROM attempts WHERE student_id = '${codeM}'`)[0];
+ok(sitting.status === 'open' && !sitting.submitted_at && !sitting.locked_until, 'no failed examination or lock is recorded');
+await m.reload({ waitUntil: 'load' });
+await ready(m);
+ok(await m.locator('textarea[data-sa="0"]').inputValue() === 'Jesus is God.', 'typing survives reload for revision');
+ok(q1(`SELECT id FROM attempts WHERE student_id = '${codeM}'`)[0].id === sitting.id, 'revision resumes the same sitting');
 const hints1 = ['[[met]]', '[[met]]', '[[met]]', '[[met]]', '[[met]]', '[[not_met]]', '[[not_met]]', '[[not_met]]', '[[not_met]]', '[[not_met]]'];
 for (let i = 0; i < 10; i++) await m.locator(`textarea[data-sa="${i}"]`).fill(essay(hints1[i]));
 const before = Date.now();

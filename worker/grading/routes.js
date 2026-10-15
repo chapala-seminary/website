@@ -13,8 +13,10 @@
  * are the ones every other route uses.
  */
 import { loadScope, loadKeys, loadStudent, loadAttempt, trackOf, nowIso, itemsOf, standing, bankedFor,
-  attemptView, resultOf, settle, gradeWritten, gradedThisHour } from './attempts.js';
-import { MAX_FILL_CHARS, MAX_SA_CHARS, HOURLY_CAP, OPEN_APPEALS_MAX } from './rules.js';
+  attemptView, resultOf, settle, gradeWritten, gradedThisHour, canned } from './attempts.js';
+import { MAX_FILL_CHARS, MAX_SA_CHARS, HOURLY_CAP, OPEN_APPEALS_MAX, MIN_SA_WORDS } from './rules.js';
+
+import { wordCount } from './text.js';
 
 const LANGS = ['en', 'es', 'fr'];
 const pick = (obj, lang) => (obj && (obj[lang] ?? obj.en ?? Object.values(obj)[0])) ?? '';
@@ -143,6 +145,10 @@ async function gradeAnswers(request, env, h) {
   // What is already settled: a banked short answer, or an answer given earlier in this attempt.
   const done = new Map((rows.results ?? []).map((r) => [r.qid, r]));
   const fresh = asked.filter((a) => !done.has(a.qid) && !(a.kind === 'sa' && banked.sa.includes(a.qid)));
+  // Validate the whole batch before grading any item. Students may expand and
+  // resend in this same open sitting; no failed grade or lockout is written.
+  const short = fresh.filter((a) => a.kind === 'sa' && wordCount(a.answer) < MIN_SA_WORDS);
+  if (short.length) return h.json({ error: canned('short', attempt.lang), needsExpansion: short.map((a) => a.qid) }, 422);
   if (fresh.length && (await gradedThisHour(env, student.id)) + fresh.length > HOURLY_CAP)
     return h.json({ error: 'too many answers graded this hour. Wait a while and try again.' }, 429, { 'retry-after': '600' });
 
@@ -177,6 +183,12 @@ async function submit(request, env, h, attemptId) {
   const attempt = await ownAttempt(env, h, student, attemptId);
   if (!attempt) return h.fail(404, 'no such attempt');
   if (attempt.status !== 'open') return h.json(await view(env, attempt));
+  const scope = await loadScope(env, attempt.scope);
+  const st = await standing(env, attempt, scope);
+  // An ungraded required response is still editable, including after a reload
+  // or a direct API submit following a length-check rejection.
+  const missing = st.req.sa.need ? st.items.sa.filter((qid) => !st.banked.sa.includes(qid) && !st.rows.some((r) => r.qid === qid)) : [];
+  if (missing.length) return h.json({ error: canned('short', attempt.lang), needsExpansion: missing }, 422);
   const r = await settle(env, attempt.id, { submitting: true });
   return h.json(r.result);
 }

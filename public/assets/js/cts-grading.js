@@ -164,6 +164,11 @@
 
   // ---- every sentence, in three languages ----------------------------------
   var S = {
+    expansion: {
+      en: "Your answer is too short to evaluate. Please expand your response to explain your understanding of the question.",
+      es: "Su respuesta es demasiado corta para evaluarla. Amplíe su respuesta para explicar su comprensión de la pregunta.",
+      fr: "Votre réponse est trop courte pour être évaluée. Veuillez la développer pour expliquer votre compréhension de la question."
+    },
     connecting: { en: "Connecting to the seminary…", es: "Conectando con el seminario…", fr: "Connexion au séminaire…" },
     checking: { en: "Checking…", es: "Comprobando…", fr: "Vérification…" },
     reviewing: { en: "Reviewing your written answers…", es: "Revisando sus respuestas escritas…", fr: "Correction de vos réponses écrites…" },
@@ -230,9 +235,9 @@
     },
     // the open statement about who grades
     aiNote: {
-      en: "Written answers are graded by an AI assistant against the course’s standards. You may ask for a human review of any result.",
-      es: "Un asistente de IA califica las respuestas escritas según los estándares del curso. Puede pedir una revisión humana de cualquier resultado.",
-      fr: "Les réponses écrites sont corrigées par un assistant d’IA selon les exigences du cours. Vous pouvez demander une révision par une personne pour n’importe quel résultat."
+      en: "Please answer each question in a short paragraph that demonstrates your understanding of the material. Written answers are graded by an AI assistant against the course’s standards. You may ask for a human review of any result.",
+      es: "Responda cada pregunta en un párrafo breve que demuestre su comprensión del material. Un asistente de IA califica las respuestas escritas según los estándares del curso. Puede pedir una revisión humana de cualquier resultado.",
+      fr: "Veuillez répondre à chaque question par un court paragraphe qui démontre votre compréhension du cours. Les réponses écrites sont corrigées par un assistant d’IA selon les exigences du cours. Vous pouvez demander une révision par une personne pour n’importe quel résultat."
     },
     notGraded: {
       en: "For your own reflection: written answers do not count on your track and are not graded.",
@@ -267,6 +272,7 @@
   /* What to say for a call that did not succeed, from { ok:false, ... }. */
   function troubleKey(r) {
     if (r.unregistered) return "register";
+    if (r.status === 422 && r.data && r.data.needsExpansion) return "expansion";
     if (r.offline) return "offline";
     if (r.status === 429) return "throttled";
     if (r.status === 404 || r.status === 401 || r.status === 403) return "unknownStudent";

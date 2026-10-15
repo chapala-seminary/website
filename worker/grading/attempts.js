@@ -297,6 +297,12 @@ export async function settle(env, attemptId, { submitting = false } = {}) {
   if (!scope) return null;
   const was = attempt.status;
   const st = await standing(env, attempt, scope);
+  // Queue/faculty callbacks may arrive while a student is still expanding
+  // another answer. They must not close that open sitting either.
+  if (!attempt.shadow && was === 'open' && st.req.sa.need && st.items.sa.some((qid) =>
+    !st.banked.sa.includes(qid) && !st.rows.some((r) => r.qid === qid))) {
+    return { was, status: 'open', attempt, result: await resultOf(env, attempt, scope, st), credit: { unitDone: false, courseDone: false } };
+  }
   const t = nowIso();
   let status = st.verdict.status;
   if (was === 'passed') status = 'passed';          // a pass stays
@@ -433,9 +439,9 @@ export async function enqueue(env, gradeId, error) {
 
 const CANNED = {
   short: {
-    en: `This answer is too short to assess. Write at least ${MIN_SA_WORDS} words that explain the idea in your own words.`,
-    es: `Esta respuesta es demasiado corta para evaluarla. Escriba al menos ${MIN_SA_WORDS} palabras que expliquen la idea con sus propias palabras.`,
-    fr: `Cette réponse est trop courte pour être évaluée. Écrivez au moins ${MIN_SA_WORDS} mots qui expliquent l’idée avec vos propres mots.`,
+    en: `Your answer is too short to evaluate. Please expand your response to explain your understanding of the question.`,
+    es: `Su respuesta es demasiado corta para evaluarla. Amplíe su respuesta para explicar su comprensión de la pregunta.`,
+    fr: `Votre réponse est trop courte pour être évaluée. Veuillez la développer pour expliquer votre compréhension de la question.`,
   },
   copied: {
     en: 'This answer mostly repeats the question. Explain the idea in your own words.',
@@ -452,7 +458,7 @@ const CANNED = {
     en: 'Saved. It will be graded shortly.', es: 'Guardada. Se calificará en breve.', fr: 'Enregistrée. Elle sera corrigée sous peu.',
   },
 };
-const canned = (name, lang) => CANNED[name][lang] || CANNED[name].en;
+export const canned = (name, lang) => CANNED[name][lang] || CANNED[name].en;
 
 /** Written items graded in the count of the last hour, for the per-student cap. */
 export async function gradedThisHour(env, studentId) {
@@ -501,7 +507,7 @@ export async function gradeWritten(env, attempt, entries) {
     }
     // short answer, in the order the contract sets: cheap rules, then injection, then the model
     const prompt = pick(e.key.prompt, lang);
-    if (wordCount(text) < MIN_SA_WORDS) { out[i] = { verdict: 'not_met', by: 'rule', feedback: canned('short', lang) }; return; }
+    if (wordCount(text) < MIN_SA_WORDS) { out[i] = { verdict: 'needs_expansion', by: 'rule', feedback: canned('short', lang) }; return; }
     if (copiedOnly(prompt, text) || copiedOnly(pick(e.key.prompt, 'en'), text)) { out[i] = { verdict: 'not_met', by: 'rule', feedback: canned('copied', lang) }; return; }
     if (looksLikeInstruction(text)) { out[i] = { verdict: 'pending', by: 'rule', feedback: canned('held', lang), held: 'injection' }; return; }
     toModel.sa.push(i);
@@ -531,6 +537,7 @@ export async function gradeWritten(env, attempt, entries) {
   const t = nowIso();
   for (let i = 0; i < entries.length; i++) {
     const e = entries[i], r = out[i];
+    if (r.verdict === 'needs_expansion') continue; // revision request, never a grade
     const pending = r.verdict === 'pending';
     const res = await env.DB.prepare(
       `INSERT INTO answer_grades (attempt_id, student_id, qid, kind, lang, answer_text, verdict, feedback, points_json, graded_by,

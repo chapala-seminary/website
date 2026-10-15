@@ -25,7 +25,7 @@ export const PRICE_PER_M = {
 export const priceLabel = m => { const p = PRICE_PER_M[m]; return p ? `$${p[0]}/M in, $${p[1]}/M out` : 'unpriced'; };
 
 export const isPos = v => v === 'met' || v === 'right';
-const graded = v => v && v !== 'pending' && v !== 'error';
+const graded = v => v && v !== 'pending' && v !== 'error' && v !== 'needs_expansion';
 
 function stat(rows) {
   const n = rows.length;

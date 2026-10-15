@@ -144,7 +144,7 @@ The rules:
 
   Passing is 9 of 10.
 - **Short answer**, checked in this order:
-  1. `copiedOnly`, or fewer than 15 words: **not met**, with no model call.
+  1. Fewer than 15 words: **returned for expansion, ungraded**, with no model call or grade record. Otherwise `copiedOnly`: **not met**, with no model call.
   2. Instruction-like text: **pending**, sent to faculty, no model call. The
      patterns are in `worker/grading/rules.js` (`looksLikeInstruction`) in
      English, Spanish and French. They are narrower than the bare words
@@ -875,3 +875,28 @@ characters or more in a script. Left on the pages on purpose: the WiseSpeak
 practice exercises (`U1_ANSWERS`, `U7_FILL`), which never count for credit.
 `test/single-live.test.mjs` runs Genesis, Ethics, Counseling, Narrative and
 WiseSpeak against the real Worker; `test/shadow-mode.test.mjs` the shadow pages.
+
+
+## Wayne’s pilot length policy — 15 October 2026
+
+Requested by Robert from Wayne’s note; for consideration and beta testing in
+[PR #98](https://github.com/chapala-seminary/website/pull/98). No production deployment or promotion is authorized.
+
+Student instruction: “Please answer each question in a short paragraph that demonstrates your understanding of the material.”
+
+The internal minimum remains 15 words; do not show a numerical word count or
+require three sentences. Below the minimum, return: “Your answer is too short
+to evaluate. Please expand your response to explain your understanding of the
+question.” The API returns 422 with `needsExpansion` question IDs, before any
+item in that batch is graded. No answer grade, model call, grading quota use,
+failed exam, submission timestamp or lockout is recorded for that rejection.
+The open sitting and saved typing remain available for revision and resubmission.
+A required short-answer section with missing ungraded responses cannot be submitted;
+this also protects reloads and direct API requests. Existing completed grades stand.
+Clearing the length check still requires the substantive rubric to pass.
+
+Beta acceptance: test short responses in EN/ES/FR; revise and resubmit in the
+same sitting, including after reloading; check no failed grade or examination
+was recorded. Test the exact 14/15-word boundary, a substantive one-sentence
+answer, and a long but substantively wrong answer. Repeat on unit and
+single-page course engines. Production stays unchanged pending separate approval.
