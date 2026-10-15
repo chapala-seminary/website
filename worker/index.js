@@ -29,12 +29,10 @@ async function gradingRun(env) {
   catch (e) { console.error('grading queue error', e && e.stack || e); }
 }
 
-/* The addresses that ARE the seminary. Everything else -- beta, a preview
-   deployment, *.workers.dev -- is staging. See guard() below. */
-const CANONICAL = new Set([
-  'chapalaseminary.org',
-  'www.chapalaseminary.org',
-]);
+/* The address that IS the seminary. www 301s here. Everything else -- beta,
+   a preview deployment, *.workers.dev -- is staging. See guard() below. */
+const APEX = 'chapalaseminary.org';
+const CANONICAL = new Set([APEX]);
 
 const STAGING_ROBOTS = `# This is not the seminary.
 #
@@ -64,6 +62,37 @@ Disallow: /
 const isCanonical = (request) =>
   CANONICAL.has(new URL(request.url).hostname.toLowerCase());
 
+const PRIVATE_PATH = /^(?:\/(?:es|fr))?\/(?:admin|verify|staff)(?:\/|$)|(?:\/(?:es|fr))?\/(?:cts-backup|cts-confirm-email)\.html$|Certificate\.html$/i;
+const isPrivatePath = (path) => PRIVATE_PATH.test(path);
+
+const SECURITY = {
+  'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+  'x-content-type-options': 'nosniff',
+  'referrer-policy': 'strict-origin-when-cross-origin',
+  'x-frame-options': 'SAMEORIGIN',
+  'permissions-policy': 'camera=(), microphone=(), geolocation=()',
+};
+
+function cacheControl(path) {
+  if (isPrivatePath(path) || path === '/api' || path.startsWith('/api/') || path.startsWith('/staff') || path.startsWith('/verify'))
+    return 'no-store';
+  if (/^\/assets\/.+\.(?:js|css|png|jpe?g|webp|woff2)$/i.test(path)) return 'public, max-age=86400';
+  if (path === '/' || path.endsWith('.html') || path.endsWith('/')
+      || path === '/robots.txt' || path === '/sitemap.xml'
+      || path === '/llms.txt' || path === '/llms-full.txt')
+    return 'public, max-age=300, must-revalidate';
+  return null;
+}
+
+function decorate(res, path, { staging }) {
+  const out = new Response(res.body, res);
+  for (const [k, v] of Object.entries(SECURITY)) out.headers.set(k, v);
+  const cache = cacheControl(path);
+  if (cache) out.headers.set('cache-control', cache);
+  if (staging || isPrivatePath(path)) out.headers.set('x-robots-tag', 'noindex, nofollow');
+  return out;
+}
+
 /* Fetch a static asset, resolving a directory to its index.html.
  *
  * `html_handling` is "none", so the assets service does no rewriting at all:
@@ -85,10 +114,21 @@ async function asset(request, env) {
     return await env.ASSETS.fetch(new Request(new URL(path + 'index.html', url), request));
 
   const res = await env.ASSETS.fetch(request);
-  if (res.status !== 404 || /\.[A-Za-z0-9]+$/.test(path)) return res;
+  if (res.status !== 404) return res;
 
-  const dir = await env.ASSETS.fetch(new Request(new URL(path + '/index.html', url), request));
-  return dir.status === 404 ? res : dir;
+  if (!/\.[A-Za-z0-9]+$/.test(path)) {
+    const dir = await env.ASSETS.fetch(new Request(new URL(path + '/index.html', url), request));
+    if (dir.status !== 404) return dir;
+  }
+
+  /* A real HTML miss gets the seminary's 404 page and status 404. Assets
+     keep the empty 404 so a missing stylesheet is not a web page. */
+  if (path.endsWith('.html') || !/\.[A-Za-z0-9]+$/.test(path)) {
+    const page = await env.ASSETS.fetch(new Request(new URL('/404.html', url), request));
+    if (page.status === 200)
+      return new Response(page.body, { status: 404, headers: { 'content-type': 'text/html; charset=utf-8' } });
+  }
+  return res;
 }
 
 /* One route table, one place that decides what answers a request. */
@@ -114,30 +154,28 @@ export default {
 
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    const host = url.hostname.toLowerCase();
+
+    if (host === 'www.' + APEX) {
+      url.hostname = APEX;
+      url.protocol = 'https:';
+      return Response.redirect(url.toString(), 301);
+    }
+
     const canonical = isCanonical(request);
+    if (canonical && (url.pathname === '/en' || url.pathname === '/en/' || url.pathname.startsWith('/en/'))) {
+      const rest = url.pathname === '/en' || url.pathname === '/en/' ? '/' : url.pathname.slice(3);
+      return Response.redirect(`https://${APEX}${rest}${url.search}`, 301);
+    }
 
     if (!canonical && url.pathname === '/robots.txt')
-      return new Response(STAGING_ROBOTS, {
-        headers: {
-          'content-type': 'text/plain; charset=utf-8',
-          'x-robots-tag': 'noindex, nofollow',
-          'cache-control': 'no-store',
-        },
-      });
+      return decorate(new Response(STAGING_ROBOTS, {
+        headers: { 'content-type': 'text/plain; charset=utf-8', 'cache-control': 'no-store' },
+      }), url.pathname, { staging: true });
 
     const res = await route(request, env, ctx);
-    if (canonical) return res;
-
-    /* Every response, not only the pages. The first version of this marked
-       assets and let the API through, which left /verify/<code> -- an HTML
-       page, and the one API route a search engine would actually follow --
-       indexable on staging. Headers from the assets service are immutable, so
-       the response is rebuilt around the same body. Not one byte of the body
-       changes: every check in this repository measures the built page, and a
-       staging copy that differed from production would make all of them
-       describe something nobody is going to deploy. */
-    const out = new Response(res.body, res);
-    out.headers.set('x-robots-tag', 'noindex, nofollow');
-    return out;
+    /* Headers change; the body does not. Staging and production must stay
+       byte-identical so every page check still describes what is deployed. */
+    return decorate(res, url.pathname, { staging: !canonical });
   },
 };
