@@ -294,6 +294,10 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   # fails, is locked, retakes and has a pending answer finished by the cron; an
   # appeal; a second device; what went over the wire (docs/ai-grading.md, section 12).
   STATE="$STATE" CONFIG="$CONFIG" node test/grading-e2e.test.mjs "http://127.0.0.1:$PORT"
+  # ...and the courses that grade on engines of their own (Genesis's unit pages, Ethics,
+  # Counseling, Narrative and WiseSpeak Preaching) the same way: the server is the grader
+  # of record, the pages carry no key, the credit is the server's (docs/ai-grading.md, section 15).
+  STATE="$STATE" CONFIG="$CONFIG" node test/single-live.test.mjs "http://127.0.0.1:$PORT"
   # ...and the shadow build still posts each submitted unit to /api/shadow, with
   # the keys in its pages and the old engine unchanged.
   node test/shadow-mode.test.mjs "$SHADOW"

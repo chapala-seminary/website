@@ -3,6 +3,7 @@ import langIntegration from './tools/inject-lang.mjs';
 import versionIntegration from './tools/write-version.mjs';
 import iconIntegration from './tools/inject-icon.mjs';
 import languagePagesIntegration from './tools/language-pages.mjs';
+import singlePagesIntegration from './tools/single-pages.mjs';
 import { frenchReadingsIntegrations } from './tools/french-readings-pages.mjs';
 
 const [frenchReadings, frenchReadingDrafts] = frenchReadingsIntegrations();
@@ -20,5 +21,5 @@ export default defineConfig({
   // French reading content goes in beside the English before the language
   // pages are made, and its French pages are marked drafts after them
   // (tools/french-readings-pages.mjs)
-  integrations: [langIntegration(), versionIntegration(), iconIntegration(), frenchReadings, languagePagesIntegration(), frenchReadingDrafts],
+  integrations: [langIntegration(), versionIntegration(), iconIntegration(), frenchReadings, languagePagesIntegration(), singlePagesIntegration(), frenchReadingDrafts],
 });
