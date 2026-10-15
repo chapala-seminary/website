@@ -156,8 +156,15 @@ if (DEPLOY) {
 }
 {
   const scripts = JSON.parse(fs.readFileSync('package.json', 'utf8')).scripts || {};
-  for (const [script, name, c] of [['deploy', 'production', prod], ['deploy:beta', 'beta', prod.env?.beta]]) {
-    const cmd = scripts[script] || '';
+  // Beta publishes through deploy:beta:publish (also what the beta workflow runs);
+  // deploy:beta wraps it, so the checks follow `npm run <script>` into it.
+  const expand = (script, seen = new Set()) => {
+    if (seen.has(script)) return '';
+    seen.add(script);
+    return (scripts[script] || '').replace(/npm run ([\w:-]+)/g, (m, s) => (s === 'build' ? m : `${m} ${expand(s, seen)}`));
+  };
+  for (const [script, name, c] of [['deploy', 'production', prod], ['deploy:beta', 'beta', prod.env?.beta], ['deploy:beta:publish', 'beta', prod.env?.beta]]) {
+    const cmd = expand(script);
     const flag = /--mode\s+(live|shadow)/.exec(cmd)?.[1];
     const builds = [...cmd.matchAll(/CTS_GRADING_MODE=(\w+)/g)].map((m) => m[1]);
     ok(!!flag, `npm run ${script} passes --mode to this check`);
