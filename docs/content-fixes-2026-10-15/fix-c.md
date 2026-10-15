@@ -28,3 +28,9 @@ Left alone: Bible 3 and 6 stance on the Apocrypha and Received Text (the lesson 
 - **1 Q2, prompt, model, keyword.** English "imminent" → "immanent" in the question and the model (Spanish and French already said immanent); English keyword "immin" → "imman" so the corrected model still scores. French `tr` hash refreshed (French text unchanged, already correct).
 
 Left alone: Worship 3, 4, 9, 10 (Baptist/anti-Catholic stance; wording softening is a faculty decision).
+
+## CTSPT
+
+- **2 Q4 (1 John 1:7), model.** Before: English and Spanish said "fellowship with one another"; French said "mutuellement" and added "the blood of Jesus cleanses us from all sin" — the lesson (unit 2, section II, in all three languages) says "fellowship with Him". After: all three say fellowship with Him and no longer add the blood clause. **For faculty:** the NKJV verse itself reads "fellowship with one another"; the lesson's paraphrase is "with Him". The model follows the lesson, as instructed; faculty may want to correct the lesson text instead.
+- **2, 3, 4 Q10 (personal reflection), model.** Before: "This is a personal reflection question…" (a description, not an answer). After: a short, labelled sample answer ("Sample answer / Respuesta de ejemplo / Exemple de réponse") with an honest self-assessment and one concrete step, built from each lesson: unit 2 (continual fellowship, abiding, small daily steps), unit 3 (set time, quiet place, the Word, prayer journal, "come back to the table"), unit 4 (listening and praise; the Lord's Prayer order). Keyword lists untouched; all three models pass.
+- **1 Q10.** Already has a real model on main (not a placeholder). Only the French "Cela compte pour moi" was made impersonal to match the English (English unchanged, hash unchanged).
