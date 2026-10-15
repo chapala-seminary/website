@@ -99,3 +99,16 @@ Written by the agents that drafted the short-answer rubrics (14 Oct 2026), for W
 - 5 Q5, Q10: model answers include points not in the lesson (removed). 5 Q7: "Conable" should be "Constable".
 - Unit 6 Q3–Q7: several questions are taught in lesson 7 or in neither lesson (Q3, Q7). The questions need re-homing or rewriting.
 - 9 Q5 ("orthodox Zoroastrian", Bel Marduk) and 9 Q7: the lesson asserts what the model hedges; historically shaky.
+
+## Single-page courses (Counseling, Narrative Preaching, WiseSpeak Preaching, Ethics)
+These model answers go beyond the lesson; the rubrics follow the lesson.
+- Counseling: U1 Q4, Q6, Q9, Q10; U2 Q10; U3 Q4, Q7, Q9; U4 Q5, Q7; U5 Q3, Q5, Q8, Q9; U6 Q4, Q6, Q7; U7 Q3, Q6, Q7, Q8, Q10; U8 Q3, Q4, Q6, Q8; U9 Q3, Q5, Q7, Q8; U10 Q3–Q9.
+- WiseSpeak: U1 Q4, Q6–Q9; U3 Q5–Q7, Q9; U4 Q7, Q8, Q10; U5 Q2, Q5, Q7, Q8, Q10; U6 Q1, Q3, Q7, Q8, Q10; U7 Q3, Q5, Q7; U8 Q2, Q4–Q8; U9 Q4–Q6.
+- Narrative: U2 Q8, Q9; U3 Q1; U4 Q4, Q5; U7 Q4, Q9; U8 Q5.
+- Ethics: U3 Q23; U4 Q22, Q24; U5 Q30; U7 Q22, Q26; U8 Q25, Q28; U10 Q28, Q29.
+
+Other problems:
+- WiseSpeak U8: the question and model say "seven body topics" and "Day 5"; the lesson has six elements.
+- WiseSpeak U6 Q10: the model lists "direct appeal"; the lesson's fourth method is the prayer conclusion.
+- Ethics U7 Q22 (personhood "from the beginning"): the lesson says believers differ, so the point is not essential.
+- Short answers in these courses now need at least 15 words plus the AI's judgement, not 100–120 characters plus 3 keywords as before.
