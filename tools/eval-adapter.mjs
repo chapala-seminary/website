@@ -1,167 +1,103 @@
-// The ONE file that knows how the eval reaches the server's grading code.
+// How the eval reaches the server's grading code.
 //
-// tools/eval-grader.mjs asks this adapter for a verdict on one item and
-// nothing else. Everything the eval assumes about worker/grading/* is written
-// here; when the real modules land (branch aig/server, contract §5 and §8) and
-// a signature differs from the guess below, change this file and only this file.
+// tools/eval-grader.mjs asks this adapter for a verdict on one answer. The
+// adapter runs the same steps worker/grading/attempts.js gradeWritten() runs,
+// minus the database (no grade_cache, grade_overrides, attempts or queue, so
+// nothing but the model ever answers for the model):
 //
-// WHAT IS ASSUMED (contract docs/ai-grading.md §5, §8)
+//   fill-in      blank -> wrong; exactFill (text.js) -> right; else the model
+//   short answer fewer than 15 words -> not met; copiedOnly against the prompt
+//                in the student's language or in English (prompt text chosen by
+//                prompt.js pickText, the same language fallback the prompt uses)
+//                -> not met; looksLikeInstruction (rules.js) -> pending, held
+//                for faculty; else the model
 //
-//   worker/grading/text.js
-//     exactFill(key, answer, lang)  -> boolean   today's bare() match against
-//                                                key.answer / key.accept
-//     copiedOnly(prompt, answer)    -> boolean   `prompt` is the prompt STRING in
-//                                                the student's language
-//     wordCount(text)               -> number
-//   worker/grading/rules.js
-//     isInstructionLike(text)       -> boolean   the §5 step-2 pattern, EN/ES/FR
-//                                                (aliases tried: looksLikeInstruction,
-//                                                injectionLike, isInjection)
-//   worker/grading/model.js
-//     gradeShortAnswer(env, {key, answer, lang}) -> Promise<Result>
-//     gradeFill(env, {key, answer, lang})        -> Promise<Result>
-//       Result = {verdict, feedback?, points?, model?, prompt_version?, usage?}
-//       verdict: met|partly|not_met|pending (sa)  right|wrong|pending (fill)
-//       `env` carries AI, GRADER_MODEL, GRADER_MODEL_FALLBACK, GRADER_PROMPT_VERSION
-//       and, in a dry run, AI_FAKE=1 (contract §8). The model call itself is
-//       env.AI.run(model, {messages, response_format, max_tokens, temperature:0}).
-//       A single export `gradeWritten(env, {kind, key, answer, lang})` is also tried.
-//   worker/grading/fake-ai.js          used by the module itself when env.AI_FAKE
-//
-// WHAT IS NOT ASSUMED: D1, grade_cache, grade_overrides, attempts. The eval
-// grades one answer at a time with no database, so cache and overrides never
-// answer for the model.
-//
-// When worker/grading/ does not exist yet, --dry-run falls back to the small
-// stand-in at the bottom of this file so the harness can be tested. A real run
-// refuses to start without the real modules.
-import fs from 'node:fs';
-import path from 'node:path';
-import { pathToFileURL } from 'node:url';
-import { ROOT, bare, wordCount as localWordCount } from './eval-lib.mjs';
+// "The model" is gradeBatch() in model.js, untouched: prompt.js builds the
+// messages, model.js makes the call, validates the reply (quotes must be the
+// student's words, "met" needs every essential point), retries once and falls
+// back to GRADER_MODEL_FALLBACK. The only things supplied from outside are
+//   env.AI      the REST shim (real run) or nothing (dry run)
+//   env.AI_FAKE '1' in a dry run, which makes model.js use fake-ai.js
+//   env.DB      a stub that only tallies the ai_usage rows model.js writes
+// The cheap-check order above is a copy of gradeWritten()'s (it cannot be
+// called without a database); test/eval-grader.test.mjs pins it against the
+// server modules so a change there shows up here.
+import { exactFill, normAnswer, wordCount, copiedOnly } from '../worker/grading/text.js';
+import { looksLikeInstruction, MIN_SA_WORDS } from '../worker/grading/rules.js';
+import { pickText } from '../worker/grading/prompt.js';
+import { gradeBatch, DEFAULT_MODEL, DEFAULT_FALLBACK, DEFAULT_VERSION } from '../worker/grading/model.js';
 
-export const SA_MIN_WORDS = 15;     // contract §5, step 1
-export const DEFAULTS = {
-  GRADER_MODEL: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
-  GRADER_MODEL_FALLBACK: '@cf/openai/gpt-oss-120b',
-  GRADER_PROMPT_VERSION: '2026-10-14.1',
-};
+export { MIN_SA_WORDS };
+export const DEFAULTS = { GRADER_MODEL: DEFAULT_MODEL, GRADER_MODEL_FALLBACK: DEFAULT_FALLBACK, GRADER_PROMPT_VERSION: DEFAULT_VERSION };
 
-async function tryImport(file, root) {
-  const p = path.join(root, 'worker', 'grading', file);
-  if (!fs.existsSync(p)) return null;
-  return import(pathToFileURL(p).href);
+/** A stand-in for env.DB that records what model.js would write to ai_usage. */
+export function makeUsageTally() {
+  const t = { calls: 0, input_tokens: 0, output_tokens: 0, errors: 0, byModel: {} };
+  const DB = {
+    prepare: (sql) => ({
+      bind: (...a) => ({
+        run: async () => {
+          if (!/INSERT INTO ai_usage/.test(sql)) throw new Error(`eval DB stub only takes ai_usage writes, got: ${sql.slice(0, 60)}`);
+          const [, model, calls, input, output, errors] = a;
+          const m = (t.byModel[model] ||= { calls: 0, input_tokens: 0, output_tokens: 0, errors: 0 });
+          for (const o of [t, m]) { o.calls += calls; o.input_tokens += input; o.output_tokens += output; o.errors += errors; }
+        },
+      }),
+    }),
+  };
+  return { DB, tally: t };
 }
 
-/** Load the server grading modules. `real` is false if any is missing. */
-export async function loadGrading({ root = ROOT } = {}) {
-  const [text, rules, model, prompt] = await Promise.all(['text.js', 'rules.js', 'model.js', 'prompt.js'].map(f => tryImport(f, root)));
-  const missing = [['text.js', text], ['rules.js', rules], ['model.js', model], ['prompt.js', prompt]].filter(([, m]) => !m).map(([f]) => f);
-  const problems = [];
-  if (text) for (const fn of ['exactFill', 'copiedOnly', 'wordCount']) if (typeof text[fn] !== 'function') problems.push(`text.js does not export ${fn}`);
-  if (model && !(typeof model.gradeShortAnswer === 'function' && typeof model.gradeFill === 'function') && typeof model.gradeWritten !== 'function') {
-    problems.push('model.js exports none of gradeShortAnswer+gradeFill / gradeWritten');
-  }
-  const injectionFn = rules && (rules.isInstructionLike || rules.looksLikeInstruction || rules.injectionLike || rules.isInjection);
-  return { real: missing.length === 0 && problems.length === 0, missing, problems, text, rules, model, prompt, injectionFn };
-}
-
-/** What the grading path needs to know about the environment. */
-export function makeEnv({ ai, dryRun, model, fallbackModel }) {
+/** What model.js reads from the environment. */
+export function makeEnv({ ai, dryRun, model, fallbackModel, DB }) {
   return {
     ...(dryRun ? { AI_FAKE: '1' } : {}),
     AI: ai || null,
+    DB,
     GRADER_MODEL: model || DEFAULTS.GRADER_MODEL,
     GRADER_MODEL_FALLBACK: fallbackModel || DEFAULTS.GRADER_MODEL_FALLBACK,
     GRADER_PROMPT_VERSION: DEFAULTS.GRADER_PROMPT_VERSION,
-    GRADING_MODE: 'live',
   };
 }
 
-const promptIn = (key, lang) => String((key.prompt && (key.prompt[lang] || key.prompt.en)) || '');
+const pick = (obj, lang) => pickText(obj, lang).text;
 
-/** Grade one item exactly as the server would, minus the database. */
-export async function gradeOne({ item, key, env, grading }) {
-  const lang = item.lang;
-  if (!grading.real) return fallbackGrade({ item, key });   // dry run only; the caller refuses otherwise
-  const { text, model } = grading;
-  if (item.kind === 'fill') {
-    if (text.exactFill(key, item.answer, lang)) return { verdict: 'right', via: 'exact', graded_by: 'exact' };
-    const r = typeof model.gradeFill === 'function'
-      ? await model.gradeFill(env, { key, answer: item.answer, lang })
-      : await model.gradeWritten(env, { kind: 'fill', key, answer: item.answer, lang });
-    return normaliseResult(r, 'ai');
+/** The checks that settle an answer without the model. Returns a result or null. */
+export function cheapCheck({ kind, key, answer, lang }) {
+  const text = String(answer ?? '');
+  if (kind === 'fill') {
+    if (!normAnswer(text)) return { verdict: 'wrong', via: 'rule:blank', graded_by: 'rule' };
+    if (exactFill(key, text, lang)) return { verdict: 'right', via: 'exact', graded_by: 'exact' };
+    return null;
   }
-  // short answer, contract §5 order
-  if (text.copiedOnly(promptIn(key, lang), item.answer) || text.wordCount(item.answer) < SA_MIN_WORDS) {
-    return { verdict: 'not_met', via: 'rule:copied-or-short', graded_by: 'rule' };
-  }
-  if ((grading.injectionFn || injectionLike)(item.answer)) return { verdict: 'pending', via: 'rule:injection', graded_by: 'rule' };
-  const r = typeof model.gradeShortAnswer === 'function'
-    ? await model.gradeShortAnswer(env, { key, answer: item.answer, lang })
-    : await model.gradeWritten(env, { kind: 'sa', key, answer: item.answer, lang });
-  return normaliseResult(r, 'ai');
+  if (wordCount(text) < MIN_SA_WORDS) return { verdict: 'not_met', via: 'rule:short', graded_by: 'rule' };
+  if (copiedOnly(pick(key.prompt, lang), text) || copiedOnly(pick(key.prompt, 'en'), text)) return { verdict: 'not_met', via: 'rule:copied', graded_by: 'rule' };
+  if (looksLikeInstruction(text)) return { verdict: 'pending', via: 'rule:injection', graded_by: 'rule' };
+  return null;
 }
 
-function normaliseResult(r, via) {
-  if (!r || typeof r !== 'object') throw new Error('grading module returned no result object');
-  return { verdict: r.verdict, feedback: r.feedback, points: r.points, model: r.model, prompt_version: r.prompt_version, usage: r.usage, via, graded_by: r.graded_by || 'ai', error: r.error };
+/** Grade one eval item as the server would. `qid` is only a label inside the call. */
+export async function gradeOne({ item, key, env }) {
+  const rule = cheapCheck({ kind: item.kind, key, answer: item.answer, lang: item.lang });
+  if (rule) return rule;
+  const batch = await gradeBatch(env, item.kind, item.lang, [{ qid: item.qid, key, answer: String(item.answer) }]);
+  const r = batch.results.get(item.qid);
+  if (!r) return { verdict: 'pending', via: 'ai', graded_by: 'ai', error: batch.error || 'unresolved' };
+  if (r.verdict === 'pending') return { verdict: 'pending', via: 'ai', graded_by: 'ai', held: 'model', model: r.model, prompt_version: r.version };
+  return { verdict: r.verdict, via: 'ai', graded_by: 'ai', feedback: r.feedback, points: r.points, model: r.model, prompt_version: r.version };
+}
+
+/** The exact request gradeBatch would send for one answer, with no network.
+ *  Runs the real gradeBatch against a stand-in AI that records the request and
+ *  answers with a capacity error (3036), which makes model.js stop at once. */
+export async function capturePrompt({ item, key, env }) {
+  const sent = [];
+  const probe = { run: async (model, params) => { sent.push({ model, params }); throw Object.assign(new Error('AiError: 3036: print-prompt probe, nothing was sent'), { code: 3036 }); } };
+  const { DB } = makeUsageTally();
+  await gradeBatch({ ...env, AI: probe, AI_FAKE: undefined, DB }, item.kind, item.lang, [{ qid: item.qid, key, answer: String(item.answer) }]);
+  if (!sent.length) throw new Error('model.js made no call');
+  return sent[0];                       // { model, params: { messages, response_format, max_tokens, temperature } }
 }
 
 /** Does the key give the model a rubric? (contract §3) */
 export const hasRubric = key => !!(key.rubric && Array.isArray(key.rubric.points) && key.rubric.points.length);
-
-// ---------------------------------------------------------------------------
-// Stand-in used only by --dry-run when worker/grading/ is absent. It mirrors
-// the CONTRACT's order and regex so the harness, summary and bar logic can be
-// exercised, but it is not evidence about the real grader and the results file
-// says so (meta.grading_path = "internal-fallback").
-// ---------------------------------------------------------------------------
-const INJECTION = new RegExp([
-  'ignore (all|previous|the)', 'instructions?', 'mark (this|it|me) (as )?(correct|right)', 'system prompt',
-  'you are (an|a) (ai|grader)',
-  // Spanish and French equivalents (contract §5 says "plus the same in ES and FR")
-  'ignora(r)? (todas|las|lo|el)', 'instrucciones', 'marca(r|lo|me)? (esta|esto|lo|me)? ?(como )?(correct[oa]|bien)', 'prompt del sistema', 'eres (una|un) (ia|calificador)',
-  'ignore[rz]? (toutes|les|le|l\')', 'marque(r|z)? (ceci|cette|le|la|moi)? ?(comme )?(correct|juste|bon)', 'prompt syst[eè]me', '(tu es|vous [eê]tes) (une|un) (ia|correcteur)',
-].join('|'), 'i');
-export function injectionLike(text) { return INJECTION.test(String(text)); }
-
-const fold = s => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
-const toks = s => fold(s).replace(/[^\p{L}\p{N}]+/gu, ' ').trim().split(' ').filter(Boolean);
-function copiedFallback(prompt, answer) {
-  const p = toks(prompt), a = toks(answer);
-  if (!a.length) return true;
-  const ps = new Set(p);
-  const inPrompt = a.filter(w => ps.has(w)).length;
-  return inPrompt / a.length >= 0.85 && a.length <= p.length + 6;
-}
-function lev1(a, b) {
-  if (a === b) return true;
-  if (Math.abs(a.length - b.length) > 1) return false;
-  let i = 0; while (i < a.length && i < b.length && a[i] === b[i]) i++;
-  if (a.length === b.length) return a.slice(i + 1) === b.slice(i + 1) || (a[i] === b[i + 1] && a[i + 1] === b[i] && a.slice(i + 2) === b.slice(i + 2));
-  return a.length > b.length ? a.slice(i + 1) === b.slice(i) : b.slice(i + 1) === a.slice(i);
-}
-function hint(answer) { const m = /\[\[(met|not_met|partly|pending|right|wrong|error|bad-json)\]\]/.exec(answer); return m && m[1]; }
-
-export function fallbackGrade({ item, key }) {
-  const lang = item.lang, h = hint(item.answer);
-  const usage = { input_tokens: Math.ceil((promptIn(key, lang).length + item.answer.length + 900) / 4), output_tokens: 60, synthetic: true };
-  if (h === 'error' || h === 'bad-json') return { verdict: 'pending', via: 'ai', graded_by: 'ai', error: h, usage };
-  if (item.kind === 'fill') {
-    const forms = [key.answer?.[lang], key.answer?.[key.sourceLang || 'en'], ...(key.accept?.[lang] || []), ...(key.accept?.[key.sourceLang || 'en'] || [])].filter(Boolean).map(bare);
-    const b = bare(item.answer);
-    if (forms.includes(b)) return { verdict: 'right', via: 'exact', graded_by: 'exact' };
-    if (h === 'right' || h === 'wrong') return { verdict: h, via: 'ai', graded_by: 'ai', usage };
-    // stand-in "model": forgives a one-letter slip in a word of 6+ letters
-    return { verdict: forms.some(f => f.length >= 6 && lev1(f, b)) ? 'right' : 'wrong', via: 'ai', graded_by: 'ai', usage };
-  }
-  if (copiedFallback(promptIn(key, lang), item.answer) || localWordCount(item.answer) < SA_MIN_WORDS) return { verdict: 'not_met', via: 'rule:copied-or-short', graded_by: 'rule' };
-  if (injectionLike(item.answer)) return { verdict: 'pending', via: 'rule:injection', graded_by: 'rule' };
-  if (h) return { verdict: h, via: 'ai', graded_by: 'ai', usage };
-  const groups = key.keywords?.[lang] || key.keywords?.en || [];
-  const text = fold(item.answer);
-  const hit = groups.filter(g => [].concat(g).some(f => text.includes(fold(f)))).length;
-  const share = groups.length ? hit / groups.length : 0;
-  return { verdict: share >= 0.5 ? 'met' : share >= 0.3 ? 'partly' : 'not_met', via: 'ai', graded_by: 'ai', usage, feedback: 'internal stand-in' };
-}

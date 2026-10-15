@@ -13,6 +13,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { buildUnitKeyRows } from './grading-keys-lib.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const EVAL_DIR = path.join(ROOT, 'test', 'eval');
@@ -75,19 +76,21 @@ export function parseQid(qid) {
   return { course: m[1], unit: +m[2], kind: m[3], index: +m[4] };
 }
 
-// The grading key for a qid, in the shape contract §6 gives for
-// grading_keys.data_json: {prompt, answer, accept, options?, why?, model,
-// keywords, rubric}. The sync tool will produce the same shape from the same
-// files; keep this function and that one in step.
+// The grading key for a qid: the parsed grading_keys.data_json, built by the same
+// code tools/sync-grading-keys.mjs uses (tools/grading-keys-lib.mjs), so the model
+// is handed exactly what the server would read from D1. Units only.
+const keyRowCache = new Map();
 export function keyFor(qid, root = ROOT) {
-  const { course, unit, kind, index } = parseQid(qid);
-  const u = loadUnit(course, unit, root);
-  const q = (u[kind] || [])[index];
-  if (!q) throw new Error(`no such question: ${qid}`);
-  const key = { qid, kind, prompt: q.prompt || q.stem };
-  for (const f of ['answer', 'accept', 'options', 'why', 'model', 'keywords', 'rubric', 'sourceLang']) if (q[f] !== undefined) key[f] = q[f];
-  key.sourceLang = u.sourceLang || 'en';
-  return key;
+  parseQid(qid);                                                   // units only
+  if (!keyRowCache.has(root)) keyRowCache.set(root, buildUnitKeyRows({ root }));
+  const row = keyRowCache.get(root).get(qid);
+  if (!row) throw new Error(`no such question: ${qid}`);
+  return JSON.parse(row.data);
+}
+// The rubric version a key row carries (grading_keys.rubric_version).
+export function rubricVersionFor(qid, root = ROOT) {
+  keyFor(qid, root);
+  return keyRowCache.get(root).get(qid).rubricVersion;
 }
 // Apply an item's holdout: remove every accept/answer entry that folds to the
 // same text, in every language, so the answer cannot be found by lookup.

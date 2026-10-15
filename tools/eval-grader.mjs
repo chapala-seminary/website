@@ -3,8 +3,12 @@
 // grading path the server uses (worker/grading/*, via tools/eval-adapter.mjs)
 // and the verdicts are scored against the bar in plan section 6.2.
 //
-//   # no network, no quota: tests the harness (used by test/eval-grader.test.mjs)
+//   # no network, no quota: tests the harness (used by test/eval-grader.test.mjs).
+//   # The "model" is worker/grading/fake-ai.js: the bar result means nothing.
 //   node tools/eval-grader.mjs --dry-run --limit 100
+//
+//   # see the exact prompt for one question, no network at all
+//   node tools/eval-grader.mjs --print-prompt "u:CTSJohn/1/sa/9" [--lang es] [--answer "text"]
 //
 //   # the real thing: spends Workers AI quota on the Chapala account
 //   CLOUDFLARE_API_TOKEN=... node tools/eval-grader.mjs --i-understand-this-uses-quota \
@@ -25,8 +29,11 @@
 //   --seed S              seed for --limit and --repeat sampling
 //   --out FILE            results file (default test/eval-results/<date>-<model>.json;
 //                         a dry run defaults to the OS temp dir)
-//   --dry-run             no network. Uses worker/grading/fake-ai.js if the server modules
-//                         exist, else the adapter's stand-in. Never fails the bar.
+//   --dry-run             no network. The model call is worker/grading/fake-ai.js. Verdicts
+//                         are fake, the bar result is meaningless, exit status is 0.
+//   --print-prompt QID    print the messages, JSON schema and call settings model.js would
+//                         send for one sample answer to QID (an eval item for that question;
+//                         --lang picks the language, --answer replaces the answer). No network.
 //   --allow-missing-rubric   run even if short-answer questions have no rubric yet
 //   --no-exit-code        report the bar but always exit 0
 //   --i-understand-this-uses-quota   REQUIRED for any run that calls Cloudflare
@@ -37,9 +44,9 @@ import os from 'node:os';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { ROOT, EVAL_DIR, readItemFiles, validateItem, keyFor, applyHoldout, loadHumanGrades, listHumanGraders, rng, shuffle } from './eval-lib.mjs';
-import { loadGrading, makeEnv, gradeOne, hasRubric, DEFAULTS } from './eval-adapter.mjs';
+import { makeEnv, makeUsageTally, gradeOne, cheapCheck, capturePrompt, hasRubric, DEFAULTS } from './eval-adapter.mjs';
 import { checkQuotaGate, makeRestAI, readAccountId } from './eval-ai-shim.mjs';
-import { summarise, formatReport, estimateCost } from './eval-summary.mjs';
+import { summarise, formatReport, estimateCost, estimateRun } from './eval-summary.mjs';
 
 const argv = process.argv.slice(2);
 const flag = n => argv.includes(`--${n}`);
@@ -80,7 +87,43 @@ export function withPairs(selected, all) {
   return [...selected, ...new Map(extra.map(i => [i.id, i])).values()];
 }
 
+
+/** --print-prompt: what would be sent for one sample answer. No network, no quota. */
+function printPrompt(qid) {
+  const all = readItemFiles(opt('items', EVAL_DIR)).filter(i => i.qid === qid);
+  if (!all.length) { console.error(`no eval item for ${qid}. Use a unit question id such as u:CTSJohn/1/sa/9.`); process.exit(2); }
+  const wantLang = opt('lang', null);
+  const rank = i => (['fixture', 'half', 'fill_synonym', 'fill_near_miss', 'fill_misspelling'].indexOf(i.category) + 1 || 9);
+  const ordered = [...all].sort((a, b) => rank(a) - rank(b) || a.id.localeCompare(b.id));
+  const base = (wantLang && ordered.find(i => i.lang === wantLang)) || ordered[0];
+  const item = { ...base, lang: wantLang || base.lang, ...(opt('answer', null) !== null ? { answer: opt('answer') } : {}) };
+  const key = applyHoldout(keyFor(qid), item.holdout);
+  const env = makeEnv({ dryRun: false, model: opt('model', DEFAULTS.GRADER_MODEL), fallbackModel: opt('fallback-model'), DB: makeUsageTally().DB });
+  const rule = cheapCheck({ kind: item.kind, key, answer: item.answer, lang: item.lang });
+  return capturePrompt({ item, key, env }).then(({ model, params }) => {
+    const out = [];
+    out.push(`question:     ${qid}   (${item.kind === 'sa' ? 'short answer' : 'fill-in'}, student language: ${item.lang})`);
+    out.push(`sample item:  ${base.id} (category ${base.category}, expected ${base.expected})${item.lang !== base.lang ? `; language set to ${item.lang} by --lang, the answer text is unchanged` : ''}`);
+    out.push(`answer text:  ${JSON.stringify(item.answer)}`);
+    out.push(rule ? `NOTE:        the server would settle this answer WITHOUT the model (${rule.via} -> ${rule.verdict}). The prompt below is what it would be if it did reach the model.` : 'cheap checks: none settles it, so the server sends it to the model');
+    out.push(`rubric:       ${hasRubric(key) ? `${key.rubric.points.length} points, version ${key.rubric.v ?? 'none'}` : (item.kind === 'sa' ? 'NONE (model.js uses its one-point fallback rubric)' : 'n/a for fill-ins')}`);
+    const sent = JSON.parse(params.messages.find(m => m.role === 'user').content).items[0];
+    if (sent.model_answer && /a strong answer|una respuesta s[oó]lida/i.test(sent.model_answer))
+      out.push(`WARNING:     the model answer sent (${sent.model_answer_language}) is a generic placeholder, not a real model answer. Only the rubric carries the content for this question.`);
+    out.push('');
+    out.push(`call:         env.AI.run("${model}", { messages, response_format, max_tokens: ${params.max_tokens}, temperature: ${params.temperature} })`);
+    out.push(`fallback:     retry once on ${model}, then ${env.GRADER_MODEL_FALLBACK}; prompt_version ${env.GRADER_PROMPT_VERSION}`);
+    for (const m of params.messages) {
+      out.push('', `----- message: ${m.role} -----`);
+      if (m.role === 'user') { try { out.push(JSON.stringify(JSON.parse(m.content), null, 2)); } catch { out.push(m.content); } } else out.push(m.content);
+    }
+    out.push('', '----- response_format.json_schema -----', JSON.stringify(params.response_format.json_schema, null, 2));
+    console.log(out.join('\n'));
+  });
+}
+
 async function main() {
+  if (flag('print-prompt')) { await printPrompt(opt('print-prompt', '')); process.exit(0); }
   const dryRun = flag('dry-run');
   const model = opt('model', DEFAULTS.GRADER_MODEL);
   const seed = opt('seed', 'cts-eval-run-1');
@@ -95,14 +138,9 @@ async function main() {
     accountId = gate.accountId;
   }
 
-  const grading = await loadGrading();
-  if (!grading.real && !dryRun) {
-    console.error(`worker/grading is not complete (missing: ${grading.missing.join(', ') || 'none'}${grading.problems.length ? '; ' + grading.problems.join('; ') : ''}).`);
-    console.error('The eval grades through the server code. Merge aig/server first, or fix tools/eval-adapter.mjs if a signature differs.');
-    process.exit(2);
-  }
   if (!dryRun) ai = makeRestAI({ accountId, token: process.env.CLOUDFLARE_API_TOKEN });
-  const env = makeEnv({ ai, dryRun, model, fallbackModel: opt('fallback-model') });
+  const { DB, tally } = makeUsageTally();
+  const env = makeEnv({ ai, dryRun, model, fallbackModel: opt('fallback-model'), DB });
 
   // ---- items
   let items = readItemFiles(opt('items', EVAL_DIR));
@@ -135,13 +173,11 @@ async function main() {
   // ---- run
   const results = new Array(items.length);
   const t0 = Date.now(); let done = 0, errors = 0;
-  const syntheticUsage = { input_tokens: 0, output_tokens: 0, synthetic: true };
   const gradeItem = async it => {
     const started = Date.now();
     try {
-      const r = await gradeOne({ item: it, key: keys.get(it.id), env, grading });
-      if (r.usage && r.usage.synthetic) { syntheticUsage.input_tokens += r.usage.input_tokens; syntheticUsage.output_tokens += r.usage.output_tokens; }
-      return { verdict: r.verdict, via: r.via, graded_by: r.graded_by, feedback: r.feedback, points: r.points, model: r.model, prompt_version: r.prompt_version, error: r.error, ms: Date.now() - started };
+      const r = await gradeOne({ item: it, key: keys.get(it.id), env });
+      return { verdict: r.verdict, via: r.via, graded_by: r.graded_by, feedback: r.feedback, points: r.points, model: r.model, prompt_version: r.prompt_version, error: r.error, held: r.held, ms: Date.now() - started };
     } catch (e) {
       errors++;
       return { verdict: 'error', via: 'ai', error: String(e.message || e).slice(0, 300), code: e.code, ms: Date.now() - started };
@@ -169,24 +205,33 @@ async function main() {
 
   // ---- score
   const { summary, bar } = summarise(results, { repeat, humans: humanMaps });
-  const usage = ai ? { input_tokens: ai.stats.input_tokens, output_tokens: ai.stats.output_tokens, calls: ai.stats.calls, retries: ai.stats.retries, errors: ai.stats.errors, byModel: ai.stats.byModel } : { ...syntheticUsage, calls: results.filter(r => r.via === 'ai').length };
-  const cost = ai ? estimateCost(ai.stats.byModel) : estimateCost({ [model]: syntheticUsage });
+  // Usage is what model.js wrote to ai_usage (the stub DB): the real API's token counts in a real run,
+  // the fake model's made-up counts in a dry run.
+  const usage = { input_tokens: tally.input_tokens, output_tokens: tally.output_tokens, calls: tally.calls, errors: tally.errors, byModel: tally.byModel, ...(ai ? { retries: ai.stats.retries, http_errors: ai.stats.errors } : { synthetic: true }) };
+  const cost = estimateCost(tally.byModel);
+  // What a real run of these same items costs: the prompts are exact; reply sizes are typical.
+  const viaAi = results.filter(r => r.via === 'ai' && r.verdict !== 'error');
+  const saCalls = viaAi.filter(r => r.kind === 'sa').length, fillCalls = viaAi.filter(r => r.kind === 'fill').length;
+  const avgIn = tally.calls ? tally.input_tokens / tally.calls : 0;
+  const extraRepeat = repeat.length;                        // each repeat re-asks one item
+  const estimate = estimateRun({ saCalls: saCalls + repeat.filter(p => items.find(i => i.id === p.id)?.kind === 'sa').length, fillCalls: fillCalls + repeat.filter(p => items.find(i => i.id === p.id)?.kind === 'fill').length, inputTokens: avgIn * (saCalls + fillCalls + extraRepeat) });
   let sha = null; try { sha = execFileSync('git', ['rev-parse', '--short', 'HEAD'], { cwd: ROOT, encoding: 'utf8' }).trim(); } catch { /* not a checkout */ }
   const date = new Date().toISOString().slice(0, 10);
   const meta = {
     date, model, fallback_model: env.GRADER_MODEL_FALLBACK, prompt_version: env.GRADER_PROMPT_VERSION, git: sha, dryRun, truth,
-    grading_path: grading.real ? 'worker/grading' : 'internal-fallback', account_id: accountId ? `${accountId.slice(0, 4)}…` : null,
+    grading_path: 'worker/grading', fake_model: dryRun, account_id: accountId ? `${accountId.slice(0, 4)}…` : null,
     missing_rubrics: noRubric.size, flags: { limit: opt('limit', null), category: cats, lang: langs, concurrency, repeat: times, seed },
-    seconds: Math.round((Date.now() - t0) / 1000), harness_errors: errors, usage, cost,
+    seconds: Math.round((Date.now() - t0) / 1000), harness_errors: errors, usage, cost, estimate,
   };
   const slug = model.replace(/^@/, '').replace(/[^A-Za-z0-9.]+/g, '-');
   const out = opt('out', dryRun ? path.join(os.tmpdir(), `cts-eval-${date}-dry-run.json`) : path.join(ROOT, 'test', 'eval-results', `${date}-${slug}.json`));
   fs.mkdirSync(path.dirname(out), { recursive: true });
   fs.writeFileSync(out, JSON.stringify({ meta, summary, bar, items: results }, null, 1) + '\n');
 
-  console.log(formatReport({ summary, bar, meta: { ...meta, usage } }));
+  console.log(formatReport({ summary, bar, meta }));
   console.log(`\nResults: ${out}`);
-  if (dryRun || flag('no-exit-code')) process.exit(0);
+  if (dryRun) { console.log('\nDRY RUN: exit 0 whatever the bar says.'); process.exit(0); }
+  if (flag('no-exit-code')) process.exit(0);
   if (errors) { console.error(`${errors} items hit a harness error (see "error" in the results file).`); }
   process.exit(bar.passed && errors === 0 ? 0 : 1);
 }
