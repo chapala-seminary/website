@@ -21,7 +21,7 @@ Rules that never change:
 
 export const SA_INSTRUCTIONS = `${COMMON}
 
-You are grading SHORT ANSWERS. Each item gives: the question; the rubric points (each with an id and whether it is essential); the model answer, as a guide to the standard only, since other wordings and other ways of putting it are fine; and the student's answer.
+You are grading SHORT ANSWERS. Each item gives: the question; the rubric points (each with an id and whether it is essential); the model answer (in the language named in "model_answer_language", which may differ from the student's: judge meaning across languages), as a guide to the standard only, since other wordings and other ways of putting it are fine; and the student's answer.
 
 For each rubric point, decide whether the student's answer makes that point in substance. If it does, set "made" to true and put in "quote" the words of the student's answer that make it, copied exactly from the student's text. If it does not, set "made" to false and "quote" to an empty string. Never quote words the student did not write.
 
@@ -92,7 +92,21 @@ export function rubricOf(key) {
   return { version: null, points: FALLBACK_RUBRIC };
 }
 
-const pick = (obj, lang) => (obj && (obj[lang] ?? obj.en ?? Object.values(obj)[0])) ?? '';
+/* The text in the student's language when it is there and says something; else English,
+   Spanish, French, whichever exists. Some courses have a model answer in one language only,
+   and some English models are placeholders, so a short model text does not count as there.
+   Returns { text, lang } so the prompt can say which language the text is in. */
+export const MIN_MODEL_CHARS = 15;
+export function pickText(obj, lang, minChars = 1) {
+  const order = [lang, 'en', 'es', 'fr'];
+  for (const l of order) {
+    const t = obj && typeof obj[l] === 'string' ? obj[l].trim() : '';
+    if (t.length >= minChars) return { text: t, lang: l };
+  }
+  for (const l of order) { const t = obj && typeof obj[l] === 'string' ? obj[l].trim() : ''; if (t) return { text: t, lang: l }; }
+  return { text: '', lang };
+}
+const name = (l) => LANG_NAMES[l] || l;
 
 /** The messages for one call. items: [{ qid, key, answer }] (key is the parsed
  *  grading_keys data_json). The model answer goes in the student's language. */
@@ -104,21 +118,23 @@ export function buildMessages(kind, lang, items, version) {
     items: items.map(({ qid, key, answer }) => {
       if (kind === 'fill') {
         const acc = key.accept || {};
+        const sentence = pickText(key.prompt, lang), expected = pickText(key.answer, lang);
         return {
           qid,
-          sentence: pick(key.prompt, lang),
-          expected: pick(key.answer, lang),
-          also_accepted: [...(acc[lang] || []), ...(acc.en || [])],
+          sentence: sentence.text, sentence_language: name(sentence.lang),
+          expected: expected.text, expected_language: name(expected.lang),
+          also_accepted: [...(acc[lang] || []), ...(acc.en || []), ...(acc.es || []), ...(acc.fr || [])],
           other_languages: key.answer || {},
           student_answer: String(answer),
         };
       }
       const rub = rubricOf(key);
+      const q = pickText(key.prompt, lang), model = pickText(key.model, lang, MIN_MODEL_CHARS);
       return {
         qid,
-        question: pick(key.prompt, lang),
+        question: q.text, question_language: name(q.lang),
         rubric: rub.points.map((p) => ({ id: p.id, essential: !!p.essential, point: p.en })),
-        model_answer: pick(key.model, lang),
+        model_answer: model.text, model_answer_language: name(model.lang),
         student_answer: String(answer),
       };
     }),

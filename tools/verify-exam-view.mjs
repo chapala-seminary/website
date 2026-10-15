@@ -39,7 +39,7 @@ const snapshot = () => {
 
 const browser = await chromium.launch(CHROME ? { executablePath: CHROME } : {});
 async function check(file) {
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   await ctx.addInitScript(() => {
     if (!localStorage.getItem('cts_student')) {
       localStorage.setItem('cts_student', JSON.stringify({ name: 'View Test', track: 'mdiv' }));

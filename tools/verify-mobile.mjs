@@ -55,7 +55,7 @@ const queue = pages.slice();
 async function worker() {
   while (queue.length) {
     const f = queue.shift();
-    const ctx = await browser.newContext({ viewport: { width: WIDTH, height: 844 } });
+    const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' },  viewport: { width: WIDTH, height: 844 } });
     const page = await ctx.newPage();
     try {
       await page.goto(`${BASE}/${f}`, { waitUntil: 'load', timeout: 20000 });

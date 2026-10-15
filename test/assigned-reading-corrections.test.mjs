@@ -11,7 +11,7 @@ const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath
 let checks = 0;
 try {
   for (const book of books) for (const lang of ['en', 'es', 'fr']) for (const scenario of ['unfinished', 'passed', 'current']) {
-    const context = await browser.newContext();
+    const context = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
     const passed = scenario === 'passed' ? '2026-10-01' : null;
     const revision = scenario === 'current' ? book.test.revision : 'old-assignment';
     await context.addInitScript(({ slug, revision, passed, lang }) => {

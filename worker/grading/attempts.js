@@ -16,7 +16,8 @@ import { counts, requirements, evaluate, lockKind, lockMinutes, need, looksLikeI
 import { gradeBatch, modelsOf } from './model.js';
 
 export const nowIso = () => new Date().toISOString();
-const pick = (obj, lang) => (obj && (obj[lang] ?? obj.en ?? Object.values(obj)[0])) ?? '';
+import { pickText } from './prompt.js';
+const pick = (obj, lang) => pickText(obj, lang).text;
 const slugOfPages = new Map(Object.entries(catalog.courses).map(([slug, c]) => [c.pages, slug]));
 
 /* ---- scopes and keys ------------------------------------------------------ */

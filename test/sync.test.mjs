@@ -18,7 +18,7 @@ const browser = await chromium.launch(CHROME ? { executablePath: CHROME } : {});
 
 // Each context is a separate device: its own localStorage, its own everything.
 async function device(page_ = 'synctest.html') {
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   const page = await ctx.newPage();
   const errors = [];
   page.on('pageerror', e => errors.push(e.message));

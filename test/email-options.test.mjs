@@ -76,7 +76,7 @@ ok(results.filter(r => r.status === 200).length === 1, 'simultaneous link/code c
 const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
 try {
   for (const lang of ['en', 'es']) {
-    const s = await student('browser-' + lang), ctx = await browser.newContext();
+    const s = await student('browser-' + lang), ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
     await ctx.addInitScript(s => {
       localStorage.setItem('cts_student_code', s.code);
       localStorage.setItem('cts_student', JSON.stringify({ name: 'Email Options', email: s.email, track: 'cert' }));
@@ -96,7 +96,7 @@ try {
     await ctx.close();
   }
   const recipient = await student('recipient'), other = await student('other-device'), ch = await challenge(recipient);
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   await ctx.addInitScript(s => {
     localStorage.setItem('cts_student_code', s.code);
     localStorage.setItem('cts_student', JSON.stringify({ name: 'Other Student', email: s.email, track: 'cert' }));

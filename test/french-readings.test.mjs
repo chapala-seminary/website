@@ -119,7 +119,7 @@ if (!BASE) {
   const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
   try {
     for (const r of french.filter((r) => r.test.questions.some((q) => q.prompt.fr)).slice(0, 4)) {
-      const ctx = await browser.newContext();
+      const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
       await ctx.route('**/*', (route) => (route.request().url().startsWith(BASE) ? route.continue() : route.abort()));
       const p = await ctx.newPage();
       const errors = [];

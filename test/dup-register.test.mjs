@@ -70,7 +70,7 @@ ok(fourth.status === 429, 'a fourth request for one address in a day is refused'
 /* ---- the student's way through, in a browser ------------------------------ */
 const browser = await chromium.launch(CHROME ? { executablePath: CHROME } : {});
 async function frontPage() {
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   const page = await ctx.newPage();
   const errors = [];
   page.on('pageerror', (e) => errors.push(e.message));

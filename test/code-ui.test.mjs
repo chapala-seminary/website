@@ -19,7 +19,7 @@ const browser = await chromium.launch(CHROME ? { executablePath: CHROME } : {});
 const CODE_RE = /^CTS-[0-9A-HJKMNP-TV-Z]{4}-[0-9A-HJKMNP-TV-Z]{4}-[0-9A-HJKMNP-TV-Z]{4}$/;
 
 async function device(page_ = '') {
-  const ctx = await browser.newContext({ permissions: ['clipboard-read', 'clipboard-write'] });
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' },  permissions: ['clipboard-read', 'clipboard-write'], extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   const page = await ctx.newPage();
   const errors = [];
   page.on('pageerror', (e) => errors.push(e.message));

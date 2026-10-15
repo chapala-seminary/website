@@ -27,7 +27,7 @@ const ok = (c, m) => { checks++; if (!c) fails.push(m); };
 const browser = await chromium.launch(CHROME ? { executablePath: CHROME } : {});
 
 async function open(track) {
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   await ctx.addInitScript(() => { try { sessionStorage.setItem('cts_exam_view:' + location.pathname, '1'); } catch (e) {} });
   const page = await ctx.newPage();
   const errs = [];

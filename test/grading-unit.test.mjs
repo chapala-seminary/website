@@ -16,6 +16,7 @@ import path from 'node:path';
 import { normalise, fold, bare, exactFill, copiedOnly, wordCount, ownWords } from '../worker/grading/text.js';
 import { requirements, evaluate, need, lockMinutes, lockKind, looksLikeInstruction, counts } from '../worker/grading/rules.js';
 import { validate } from '../worker/grading/model.js';
+import { buildMessages, pickText } from '../worker/grading/prompt.js';
 import { fakeAIRun } from '../worker/grading/fake-ai.js';
 
 let checks = 0;
@@ -187,6 +188,17 @@ eq(asObj(fakeAIRun(fakeEnv, 'p', { messages: msgs('Something long enough [[met]]
 eq(asObj(fakeAIRun(fakeEnv, 'p', { messages: msgs('Nothing in particular') })).items[0].verdict, 'not_met', 'fake model: no hint is not_met');
 let threw = false; try { fakeAIRun(fakeEnv, 'p', { messages: msgs('[[primary-error]]') }); } catch { threw = true; }
 ok(threw && !!fakeAIRun(fakeEnv, 'f', { messages: msgs('[[primary-error]] x') }), 'fake model: [[primary-error]] fails the primary model only');
+
+// languages: the student's if it says something, else en, es, fr; and the prompt says which
+eq(pickText({ en: 'x', es: 'Una respuesta modelo completa y larga.' }, 'es', 15), { text: 'Una respuesta modelo completa y larga.', lang: 'es' }, 'the model answer in the student\'s language');
+eq(pickText({ en: 'TBD', fr: 'Une réponse modèle complète et longue.' }, 'es', 15).lang, 'fr', 'an English placeholder is skipped for the one real model answer');
+eq(pickText({ es: 'Respuesta larga y completa aquí.', fr: 'Réponse longue et complète ici.' }, 'en', 15).lang, 'es', 'no English: Spanish before French');
+eq(pickText({ en: 'ok' }, 'fr', 15).lang, 'en', 'only a short one: better than nothing');
+const one = { prompt: { fr: 'Question en français ?' }, model: { fr: 'Une réponse modèle complète et longue.' }, answer: { fr: 'Genèse' } };
+const m1 = JSON.parse(buildMessages('sa', 'es', [{ qid: 'q', key: one, answer: 'texto' }], 'v')[1].content).items[0];
+eq([m1.model_answer_language, m1.question_language, m1.model_answer.startsWith('Une')], ['French', 'French', true], 'the grader is told which language the model answer is in');
+const m2 = JSON.parse(buildMessages('fill', 'en', [{ qid: 'q', key: one, answer: 'x' }], 'v')[1].content).items[0];
+eq([m2.expected, m2.expected_language], ['Genèse', 'French'], 'fill-in: the expected answer falls back too');
 
 console.log(`${checks} assertions on the grading rules`);
 if (!fails.length) console.log('PASS — the grading rules hold.');

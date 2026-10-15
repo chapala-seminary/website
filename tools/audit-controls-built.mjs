@@ -55,7 +55,7 @@ const queue = pages.slice();
 async function work(){
   while(queue.length){
     const f = queue.shift();
-    const c = await b.newContext(); const p = await c.newPage();
+    const c = await b.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } }); const p = await c.newPage();
     const errs=[]; p.on('pageerror',e=>errs.push(e.message));
     // Record every element given a click listener, so the audit can tell a
     // control the engine bound from one that only carries an inline onclick.

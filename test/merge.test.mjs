@@ -34,7 +34,7 @@ const PREVIEW = fs.readFileSync('tools/merge-duplicate-students-preview.sql', 'u
     `INSERT INTO students (id, name, email, track, goal, country, lang, email_verified_at, contact_opt_out_at, created_at, updated_at)
      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`).run(id, name, email, track, extra.goal ?? null, extra.country ?? null,
     extra.lang ?? null, extra.verified ?? null, extra.optOut ?? null, created, created);
-  const unit = (id, course, n, at) => db.prepare('INSERT INTO unit_progress VALUES (?, ?, ?, ?)').run(id, course, n, at);
+  const unit = (id, course, n, at) => db.prepare('INSERT INTO unit_progress (student_id, course, unit, completed_at) VALUES (?, ?, ?, ?)').run(id, course, n, at);
   const done = (id, code, track, at) => db.prepare('INSERT INTO course_completions (student_id, code, completed_at, track) VALUES (?, ?, ?, ?)').run(id, code, at, track);
 
   // One person, twice: Certificate first, Th.M. later, overlapping work.
@@ -43,7 +43,7 @@ const PREVIEW = fs.readFileSync('tools/merge-duplicate-students-preview.sql', 'u
   unit('A1', 'st', 1, T('3-05')); unit('A2', 'st', 1, T('3-01')); unit('A2', 'st', 2, T('3-02'));
   done('A1', 'CTSOTS', 'cert', T('4-01')); done('A2', 'CTSOTS', 'thm', T('4-02')); done('A2', 'CTSNT', 'thm', T('4-03'));
   db.prepare("INSERT INTO certificates (verify_code, student_id, student_name, level, course, title, issued_at) VALUES ('V1', 'A2', 'Ana Ruiz', 'course', 'CTSNT', 'NT', ?)").run(T('4-04'));
-  db.prepare("INSERT INTO textbook_results VALUES ('A2', 'cults', ?)").run(T('4-05'));
+  db.prepare("INSERT INTO textbook_results (student_id, textbook, passed_at) VALUES ('A2', 'cults', ?)").run(T('4-05'));
   for (const id of ['A1', 'A2'])   // the same notice on both records: one survives
     db.prepare("INSERT INTO notifications (student_id, kind, code, status, attempts, created_at) VALUES (?, 'course', 'CTSOTS', 'sent', 1, ?)").run(id, T('4-01'));
   db.prepare("INSERT INTO notifications (student_id, kind, code, status, attempts, created_at) VALUES ('A2', 'course', 'CTSNT', 'sent', 1, ?)").run(T('4-03'));

@@ -47,7 +47,7 @@ function passages() {
   return out;
 }
 
-const ctx = await browser.newContext();
+const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
 const page = await ctx.newPage();
 const errors = [];
 page.on('pageerror', (e) => errors.push(`${page.url()}: ${e.message}`));
@@ -79,7 +79,7 @@ await Promise.all([page.waitForURL(url=>url.pathname === `/${ROOMS[1]}.html`), p
 ok(await page.evaluate(()=>document.documentElement.lang === 'en'), `${ROOMS[1]}: English did not override memory`);
 
 // on a phone: no sideways scroll, the bar stays put
-const phone = await browser.newContext({ viewport: { width: 375, height: 760 }, isMobile: true });
+const phone = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' },  viewport: { width: 375, height: 760 }, isMobile: true });
 const pp = await phone.newPage();
 for (const room of ROOMS) {
   await pp.goto(`${BASE}/${room}.html`, { waitUntil: 'load' });
