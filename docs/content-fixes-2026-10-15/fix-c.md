@@ -31,7 +31,7 @@ Left alone: Worship 3, 4, 9, 10 (Baptist/anti-Catholic stance; wording softening
 
 ## CTSPT
 
-- **2 Q4 (1 John 1:7), model.** Before: English and Spanish said "fellowship with one another"; French said "mutuellement" and added "the blood of Jesus cleanses us from all sin" — the lesson (unit 2, section II, in all three languages) says "fellowship with Him". After: all three say fellowship with Him and no longer add the blood clause. **For faculty:** the NKJV verse itself reads "fellowship with one another"; the lesson's paraphrase is "with Him". The model follows the lesson, as instructed; faculty may want to correct the lesson text instead.
+- **2 Q4 (1 John 1:7): reverted by the orchestrator, no change.** The model's "fellowship with one another" is what the verse says (NKJV), so the model stays as it was on main. The lesson (unit 2, section II) paraphrases the verse as "fellowship with Him". **For faculty:** correct the lesson text.
 - **2, 3, 4 Q10 (personal reflection), model.** Before: "This is a personal reflection question…" (a description, not an answer). After: a short, labelled sample answer ("Sample answer / Respuesta de ejemplo / Exemple de réponse") with an honest self-assessment and one concrete step, built from each lesson: unit 2 (continual fellowship, abiding, small daily steps), unit 3 (set time, quiet place, the Word, prayer journal, "come back to the table"), unit 4 (listening and praise; the Lord's Prayer order). Keyword lists untouched; all three models pass.
 - **1 Q10.** Already has a real model on main (not a placeholder). Only the French "Cela compte pour moi" was made impersonal to match the English (English unchanged, hash unchanged).
 
