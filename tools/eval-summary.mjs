@@ -12,13 +12,17 @@ export const BAR = {
   ungraded: 0.02,         // added: answers left pending/error among model-routed ones
 };
 
-// USD per million tokens, [input, output]. ESTIMATES from Cloudflare's published
-// list prices as last known to the author; check developers.cloudflare.com/workers-ai/platform/pricing
-// before relying on the dollar figure. Token counts are exact (from the API).
+// USD per million tokens, [input, output]: Workers AI list prices as of 14 Oct 2026
+// (the plan's per-token prices). Token counts from a real run are exact (the API
+// reports them); the dollar figure is only as current as these prices. Check
+// developers.cloudflare.com/workers-ai/platform/pricing before relying on it.
+export const PRICES_AS_OF = '14 Oct 2026';
 export const PRICE_PER_M = {
   '@cf/meta/llama-3.3-70b-instruct-fp8-fast': [0.293, 2.253],
   '@cf/openai/gpt-oss-120b': [0.35, 0.75],
+  '@cf/openai/gpt-oss-20b': [0.20, 0.30],
 };
+export const priceLabel = m => { const p = PRICE_PER_M[m]; return p ? `$${p[0]}/M in, $${p[1]}/M out` : 'unpriced'; };
 
 export const isPos = v => v === 'met' || v === 'right';
 const graded = v => v && v !== 'pending' && v !== 'error';
@@ -49,7 +53,28 @@ export function estimateCost(byModel) {
     if (!p) { known = false; continue; }
     usd += (u.input_tokens * p[0] + u.output_tokens * p[1]) / 1e6;
   }
-  return { usd: Math.round(usd * 10000) / 10000, allModelsPriced: known, rates: PRICE_PER_M };
+  return { usd: Math.round(usd * 10000) / 10000, allModelsPriced: known, rates: PRICE_PER_M, prices_as_of: PRICES_AS_OF };
+}
+
+// What a real run would cost, worked out from a dry run's prompts. The dry run
+// builds the exact messages, so input tokens are known to within the tokenizer
+// (chars / 4, plus a margin because Spanish and French text and JSON punctuation
+// run to more tokens per character). Output tokens are a typical size per reply,
+// plus a ceiling (model.js sends max_tokens = 250 + 300 for a single answer).
+export const OUT_TOKENS = { sa: 200, fill: 50 };           // typical reply: a verdict, a few quoted points, one or two sentences
+export const OUT_TOKENS_CEILING = 550;                      // max_tokens in model.js for one item
+export const INPUT_MARGIN = 1.15;
+export function estimateRun({ saCalls, fillCalls, inputTokens, repeats = 1 }) {
+  const calls = (saCalls + fillCalls) * repeats;
+  const inTok = Math.round(inputTokens * INPUT_MARGIN * repeats);
+  const outTyp = (saCalls * OUT_TOKENS.sa + fillCalls * OUT_TOKENS.fill) * repeats;
+  const outMax = calls * OUT_TOKENS_CEILING;
+  const perModel = {};
+  for (const [m, [pin, pout]] of Object.entries(PRICE_PER_M)) {
+    const usd = (o) => Math.round(((inTok * pin + o * pout) / 1e6) * 100) / 100;
+    perModel[m] = { typical_usd: usd(outTyp), ceiling_usd: usd(outMax) };
+  }
+  return { calls, input_tokens: inTok, output_tokens_typical: outTyp, output_tokens_ceiling: outMax, prices_as_of: PRICES_AS_OF, perModel };
 }
 
 /**
@@ -127,7 +152,14 @@ export function summarise(results, extra = {}) {
 const pct = v => (v === null || v === undefined ? '  n/a ' : `${(v * 100).toFixed(1).padStart(5)}%`);
 export function formatReport({ summary, bar, meta }) {
   const L = [];
-  L.push(`${meta.dryRun ? 'DRY RUN (not evidence about the real grader)' : 'EVAL RESULT'}  model=${meta.model}  items=${summary.counts.items}  truth=${meta.truth}  grading_path=${meta.grading_path}`);
+  if (meta.dryRun) {
+    L.push('*** DRY RUN: NO REAL MODEL WAS ASKED. ***');
+    L.push('Every model verdict below comes from worker/grading/fake-ai.js, which says "not_met" (short answer) or "wrong" (fill-in) unless the answer carries a');
+    L.push('[[hint]]. So the agreement figures and the BAR result are MEANINGLESS here. What a dry run does check: the harness, the cheap rules (copied, too short,');
+    L.push('instruction-like, exact fill-in), the prompts and the cost arithmetic.');
+    L.push('');
+  }
+  L.push(`${meta.dryRun ? 'DRY RUN' : 'EVAL RESULT'}  model=${meta.model}  items=${summary.counts.items}  truth=${meta.truth}  grading_path=${meta.grading_path}`);
   L.push('');
   L.push('category            n    agree   false-accept  false-reject  ungraded');
   for (const [k, s] of Object.entries(summary.byCategory)) L.push(`${k.padEnd(18)} ${String(s.n).padStart(4)}  ${pct(s.agreement)}  ${pct(s.falseAcceptRate)}      ${pct(s.falseRejectRate)}      ${pct(s.ungradedRate)}`);
@@ -136,14 +168,21 @@ export function formatReport({ summary, bar, meta }) {
   L.push('language (short answers)   ' + Object.entries(summary.byLang.sa).map(([l, s]) => `${l}: ${pct(s.agreement)} (n=${s.n})`).join('   '));
   L.push('language (fill-ins)        ' + Object.entries(summary.byLang.fill).map(([l, s]) => `${l}: ${pct(s.agreement)} (n=${s.n})`).join('   '));
   L.push('');
-  L.push('THE BAR');
+  L.push(meta.dryRun ? 'THE BAR (MEANINGLESS IN A DRY RUN: fake model verdicts)' : 'THE BAR');
   for (const c of bar.checks) {
     const v = c.value === null || c.value === undefined ? 'n/a' : (c.id.startsWith('gap_') ? `${c.value} pts` : (c.id.includes('passes') ? String(c.value) : pct(c.value).trim()));
     const t = c.id.startsWith('gap_') ? `${c.threshold} pts` : (c.id.includes('passes') ? String(c.threshold) : pct(c.threshold).trim());
     L.push(`  [${c.status.toUpperCase().padEnd(4)}] ${c.label}: ${v} (need ${c.op} ${t})${c.blocking ? '' : '  [advisory]'}`);
   }
   L.push('');
-  L.push(bar.passed ? (bar.complete ? 'BAR PASSED.' : `No check failed, but the bar is NOT established: not evaluated -> ${bar.notEvaluated.join(', ')}`) : `BAR FAILED: ${bar.failed.join(', ')}`);
-  if (meta.usage) L.push(`Tokens: ${meta.usage.input_tokens} in / ${meta.usage.output_tokens} out${meta.usage.synthetic ? ' (SYNTHETIC)' : ''}; estimated cost $${meta.cost.usd}${meta.cost.allModelsPriced ? '' : ' (some models unpriced)'}`);
+  if (meta.dryRun) L.push('DRY RUN: ignore the bar result. Nothing here measures the real grader.');
+  else L.push(bar.passed ? (bar.complete ? 'BAR PASSED.' : `No check failed, but the bar is NOT established: not evaluated -> ${bar.notEvaluated.join(', ')}`) : `BAR FAILED: ${bar.failed.join(', ')}`);
+  if (meta.usage) L.push(`Tokens: ${meta.usage.input_tokens} in / ${meta.usage.output_tokens} out${meta.dryRun ? ' (SYNTHETIC: from the fake model, not a real count)' : ''}; ${meta.dryRun ? 'cost at the run model' : 'estimated cost'} $${meta.cost.usd}${meta.cost.allModelsPriced ? '' : ' (some models unpriced)'}  [list prices as of ${PRICES_AS_OF}: ${priceLabel(meta.model)}]`);
+  if (meta.estimate) {
+    const e = meta.estimate;
+    L.push('');
+    L.push(`ESTIMATE FOR A REAL RUN of these items (list prices as of ${e.prices_as_of}): ${e.calls} model calls, about ${e.input_tokens} input tokens, ${e.output_tokens_typical} output tokens (ceiling ${e.output_tokens_ceiling}).`);
+    for (const [m, c] of Object.entries(e.perModel)) L.push(`  ${m.padEnd(44)} typical $${c.typical_usd.toFixed(2)}   ceiling $${c.ceiling_usd.toFixed(2)}   (${priceLabel(m)})`);
+  }
   return L.join('\n');
 }
