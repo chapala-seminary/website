@@ -95,13 +95,40 @@ A "|" in a table row below separates the Unit column from the "What you gained" 
 **Spanish and French:** changed to match.
 
 
+## 7. Unit 10, "Why this unit matters" paragraph (block b015)
+
+**Before (English):**
+
+> Units 1 through 9 gave you a map of the territory: the textual story (Units 1–2), the Hebrew alphabet (Units 3–4), the Hebrew word treasures (Unit 5), the Greek alphabet (Units 6–7), and eight great Greek words for salvation (Units 8–9). You have seen what is possible. Unit 10 hands you the tool that lets you do this for yourself, for any word in any verse, for the rest of your life. By the end of this lesson you will know how to use Strong's numbers in three forms: on paper (the original concordance), on a phone (the modern apps), and on the full internet (Bible study websites). Unit 11 will then turn you loose on your first real word study. You are almost at the finish.
+
+**After (English):**
+
+> Units 1 through 9 gave you a map of the territory: why the original languages matter and the first ten Hebrew letters (Units 1–2), the rest of the Hebrew alphabet and six Hebrew words from Genesis 1 (Units 3–4), seven Hebrew word treasures from Isaiah 6 (Unit 5), the Greek alphabet (Units 6–7), and eight great Greek words for salvation (Units 8–9). You have seen what is possible. Unit 10 hands you the tool that lets you do this for yourself, for any word in any verse, for the rest of your life. By the end of this lesson you will know how to use Strong's numbers in three forms: on paper (the original concordance), on a phone (the modern apps), and on the full internet (Bible study websites). Unit 11 will then turn you loose on your first real word study. You are almost at the finish.
+
+**Why:** Same wrong summary as the Unit 11 table: Units 1–2 are not "the textual story", Units 3–4 are not only the alphabet, and Unit 5 is not the whole of the Hebrew word treasures.
+
+**Spanish and French:** changed to match.
+
+## 8. Unit 11, opening paragraph (block b009)
+
+**Before (English):**
+
+> You have arrived at the last unit. Eleven units, two alphabets, a dozen Greek and Hebrew words, the Strong's number system, the textual story from Sinai to your phone. You came in not able to read either alphabet. You are leaving able to read both, look up any word in any verse, and trace it through every other place it appears in the Bible. The journey is almost over. One assignment stands between you and the certificate of completion: your first real word study.
+
+**After (English):**
+
+> You have arrived at the last unit. Eleven units, two alphabets, a dozen Greek and Hebrew words, the Strong's number system, Genesis 1:1 and John 1:1 read in their own languages. You came in not able to read either alphabet. You are leaving able to read both, look up any word in any verse, and trace it through every other place it appears in the Bible. The journey is almost over. One assignment stands between you and the certificate of completion: your first real word study.
+
+**Why:** The course does not teach a "textual story from Sinai to your phone"; what it does is take you to read the first verses of the Old and New Testaments in the original.
+
+**Spanish and French:** changed to match.
+
 ## What I checked and left alone
 
 - Unit 11 table rows for Units 6–7, 8, 9, 10 and 11: they already match what those units teach, so they are unchanged.
 - Unit 9 question 1 (the year Luther read Erasmus's Greek Testament, answer 1516), fill-in 1 (Erasmus published in 1516), fill-in 0 ("In 1515 Luther was preparing lectures on Romans…") and the short-answer model and keywords: still true under the corrected chronology, so unchanged.
 - Unit 9 multiple-choice question 15 ("how many of the four words does Romans 1:16–17 contain?", answer "three explicitly") and short-answer question 8: already say kyrios is not in the verses, so they now agree with the lesson.
 
-## Noticed but not changed (outside the three approved fixes)
+## Noticed and left alone
 
-- Unit 10, "Why this unit matters" paragraph (block b015), repeats the same wrong summary of Units 1–5 ("the textual story (Units 1–2), the Hebrew alphabet (Units 3–4), the Hebrew word treasures (Unit 5)").
-- Unit 11, opening paragraph (block b009), says the course covered "the textual story from Sinai to your phone", which is loose for the same reason.
+- Unit 11 (blocks b009 and b072) says "a dozen" Greek and Hebrew words; the course teaches 21 (13 Hebrew, 8 Greek). Not part of the approved fixes.
