@@ -297,7 +297,6 @@ export function courseJsonLd(opts: {
     hasCourseInstance: {
       '@type': 'CourseInstance',
       courseMode: 'online',
-      courseWorkload: 'PT0H',
       url: opts.startUrl,
     },
   };
