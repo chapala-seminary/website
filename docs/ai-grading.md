@@ -631,11 +631,15 @@ prompts, and the estimate of what a real run costs.
 **The real run.** Prerequisites:
 
 - A Cloudflare API token that has the **Workers AI** permission on the Chapala
-  account, put in the environment **by Robert in his own shell**. No agent sets
-  it, and the tool never prints, logs or writes it:
+  account, kept in a file that **Robert creates in his own terminal** with
+  mode 600 (`chmod 600 ~/.config/cts/workers-ai-token`). No agent writes it,
+  and the tool never prints, logs or writes the token or its length:
 
-      export CLOUDFLARE_API_TOKEN=...        # in Robert's terminal only
+      node tools/eval-grader.mjs --token-file ~/.config/cts/workers-ai-token ...
 
+  `--token-file` refuses a file that is missing, empty, or readable by group or
+  others (exit 2). `CLOUDFLARE_API_TOKEN` in the environment still works; if
+  both are given, the file wins.
   The account id comes from `wrangler.jsonc`. If `CLOUDFLARE_ACCOUNT_ID` is set
   to a different account, the tool refuses (two accounts are reachable from this
   machine).
@@ -650,10 +654,37 @@ prompts, and the estimate of what a real run costs.
 - The rubrics are all in (check: `node tools/verify-rubrics.mjs`); the eval
   refuses a real run if a short-answer question in it has none.
 
-The command (the flag is the signature that you know it spends quota):
+**The spending cap.** A real run must carry `--max-cost <usd>`; without it the
+tool refuses to start (exit 2) before any network call. Before each model call
+(including the retry and the fallback model that `model.js` makes on its own)
+the tool adds up what has been spent so far, counted from the **real token
+counts the API returns** at the list prices above (a call whose reply has no
+usage is counted at its ceiling, `max_tokens` as output plus the input
+estimate), plus the worst case of calls still in flight and of the next call.
+If that would pass the cap, the call is not sent. The tool lets calls already
+in flight finish, marks the items it did not reach `not run (budget)`, writes
+the results file, prints how much it spent and how many items ran, and exits
+**3**. (1 stays "the bar failed".) Before starting it prints the estimated
+typical and ceiling cost of the selected items, and refuses (exit 2) if the
+ceiling is more than 3 times the cap; use `--limit` to run a slice.
 
-    CLOUDFLARE_API_TOKEN=... node tools/eval-grader.mjs \
-        --i-understand-this-uses-quota --repeat 2 --concurrency 4
+A run stopped by the cap is **partial**. The report says so in capitals, and
+the bar is **not evaluated** on it, unless every category in the run still has
+at least 30 graded items; then the bar is evaluated but labelled partial. A
+partial run never establishes the bar. Failed calls (HTTP errors) are not
+billed, so they cost nothing against the cap. A dry run can exercise the cap
+with `--dry-run --max-cost N`; add `--fake-usage-scale 5` so the fake model's
+tiny token counts cost something (a dry run's spend is synthetic).
+
+The command (the flag is the signature that you know it spends quota). The
+recommended one, on the primary model, with a $2.40 cap:
+
+    node tools/eval-grader.mjs --i-understand-this-uses-quota --token-file ~/.config/cts/workers-ai-token --model @cf/meta/llama-3.3-70b-instruct-fp8-fast --max-cost 2.40
+
+For the full 2,346 items the tool estimates about $1.11 typical and $2.61 ceiling
+on that model (its input estimate includes the JSON schema, so it sits a little
+above the table below). The ceiling is under 3 times the cap, so it starts; the
+cap stops the run if real spending approaches $2.40.
 
 `--repeat 2` grades 100 of the model-routed answers a second time; without it
 the repeatability check of the bar is "not evaluated" and the bar is not

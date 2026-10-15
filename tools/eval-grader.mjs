@@ -11,8 +11,8 @@
 //   node tools/eval-grader.mjs --print-prompt "u:CTSJohn/1/sa/9" [--lang es] [--answer "text"]
 //
 //   # the real thing: spends Workers AI quota on the Chapala account
-//   CLOUDFLARE_API_TOKEN=... node tools/eval-grader.mjs --i-understand-this-uses-quota \
-//       [--model @cf/meta/llama-3.3-70b-instruct-fp8-fast] [--concurrency 4] [--repeat 2]
+//   node tools/eval-grader.mjs --i-understand-this-uses-quota --token-file ~/.config/cts/workers-ai-token \
+//       --model @cf/meta/llama-3.3-70b-instruct-fp8-fast --max-cost 2.40 [--concurrency 4] [--repeat 2]
 //
 // Options
 //   --model M             grader model (default: contract GRADER_MODEL)
@@ -37,8 +37,20 @@
 //   --allow-missing-rubric   run even if short-answer questions have no rubric yet
 //   --no-exit-code        report the bar but always exit 0
 //   --i-understand-this-uses-quota   REQUIRED for any run that calls Cloudflare
+//   --token-file PATH     read the Cloudflare API token from this file instead of CLOUDFLARE_API_TOKEN
+//                         (the file wins if both are given). Refused if missing, empty, or readable by
+//                         group/others (chmod 600). The token and its length are never printed.
+//   --max-cost USD        HARD spending cap, REQUIRED on a real run. Before every model call the tool adds
+//                         the real cost so far (token counts the API returned) and the worst case of the
+//                         call (max_tokens as output + input estimate); if that would pass the cap the call
+//                         is not sent. Items not reached are "not run (budget)"; the run is PARTIAL and
+//                         exits 3. The bar is not evaluated on a partial run unless every category still
+//                         has at least 30 graded items. Refuses to start (exit 2) if the estimated ceiling
+//                         for the selected items is over 3x the cap (use --limit).
+//   --fake-usage-scale N  dry run only: multiply the fake model's token counts by N (tests the cap)
 //
-// Exit status: 0 bar passed (or dry run); 1 bar failed; 2 refused / bad usage; 3 harness error.
+// Exit status: 0 bar passed (or dry run); 1 bar failed; 2 refused / bad usage; 3 stopped by the --max-cost cap
+// (partial run) or a harness error (stderr says which).
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -46,7 +58,9 @@ import { execFileSync } from 'node:child_process';
 import { ROOT, EVAL_DIR, readItemFiles, validateItem, keyFor, applyHoldout, loadHumanGrades, listHumanGraders, rng, shuffle } from './eval-lib.mjs';
 import { makeEnv, makeUsageTally, gradeOne, cheapCheck, capturePrompt, hasRubric, DEFAULTS } from './eval-adapter.mjs';
 import { checkQuotaGate, makeRestAI, readAccountId } from './eval-ai-shim.mjs';
-import { summarise, formatReport, estimateCost, estimateRun } from './eval-summary.mjs';
+import { budgetAI, inputEstimate, usd, BUDGET_TAG } from './eval-budget.mjs';
+import { fakeAIRun } from '../worker/grading/fake-ai.js';
+import { summarise, formatReport, estimateCost, estimateRun, OUT_TOKENS_CEILING } from './eval-summary.mjs';
 
 const argv = process.argv.slice(2);
 const flag = n => argv.includes(`--${n}`);
@@ -131,16 +145,29 @@ async function main() {
   const truth = opt('truth', 'agent');
 
   // ---- gate: nothing below this line may touch the network without the flag
-  let ai = null, accountId = null;
+  let ai = null, accountId = null, token = null;
   if (!dryRun) {
     const gate = checkQuotaGate({ argv, env: process.env });
     if (!gate.ok) { console.error(gate.reason); process.exit(2); }
-    accountId = gate.accountId;
+    accountId = gate.accountId; token = gate.token;
   }
+  // the spending cap: a real run must carry one, and it is checked before any network call
+  const capRaw = opt('max-cost', null);
+  const capUsd = capRaw === null ? null : Number(capRaw);
+  if (capRaw !== null && !(Number.isFinite(capUsd) && capUsd > 0)) { console.error('--max-cost needs a positive number of US dollars, e.g. --max-cost 2.40'); process.exit(2); }
+  if (!dryRun && capUsd === null) { console.error('refusing to start: a real run must carry a hard spending cap. Add --max-cost <usd> (see docs/ai-grading.md section 13).'); process.exit(2); }
+  if (flag('fake-usage-scale') && !dryRun) { console.error('--fake-usage-scale is for --dry-run only.'); process.exit(2); }
+  const fakeScale = Number(opt('fake-usage-scale', '1')) || 1;
 
-  if (!dryRun) ai = makeRestAI({ accountId, token: process.env.CLOUDFLARE_API_TOKEN });
+  if (!dryRun) ai = makeRestAI({ accountId, token });
   const { DB, tally } = makeUsageTally();
   const env = makeEnv({ ai, dryRun, model, fallbackModel: opt('fallback-model'), DB });
+  // every model call goes through the cap's gate: the REST shim in a real run, the fake model in a dry run
+  let gated = null;
+  if (capUsd !== null) {
+    gated = budgetAI({ capUsd, inner: dryRun ? { run: async (m, params) => fakeAIRun(env, m, params) } : ai, scaleUsage: dryRun ? fakeScale : 1 });
+    env.AI = gated; delete env.AI_FAKE;
+  }
 
   // ---- items
   let items = readItemFiles(opt('items', EVAL_DIR));
@@ -170,6 +197,26 @@ async function main() {
     process.exit(2);
   }
 
+  // ---- estimate and refuse, before anything is sent
+  if (capUsd !== null) {
+    let inTok = 0, sa = 0, fill = 0;
+    for (const it of items) {
+      if (cheapCheck({ kind: it.kind, key: keys.get(it.id), answer: it.answer, lang: it.lang })) continue;
+      const { params } = await capturePrompt({ item: it, key: keys.get(it.id), env });
+      inTok += inputEstimate(params); if (it.kind === 'sa') sa++; else fill++;
+    }
+    const routed = sa + fill, times = parseInt(opt('repeat', '1'), 10);
+    const extra = times > 1 ? Math.min(parseInt(opt('repeat-sample', '100'), 10), routed) * (times - 1) : 0;
+    const f = routed ? 1 + extra / routed : 1;
+    const calls = Math.round(routed * f), outTyp = Math.round((sa * 200 + fill * 50) * f), inAll = Math.round(inTok * f);
+    const typical = usd(model, inAll, outTyp), ceiling = usd(model, inAll, calls * OUT_TOKENS_CEILING);
+    console.log(`Estimate for the ${items.length} selected items (${calls} model calls, list prices): typical $${typical.toFixed(2)}, ceiling $${ceiling.toFixed(2)}. Cap: $${capUsd.toFixed(2)}.`);
+    if (ceiling > 3 * capUsd) {
+      console.error(`refusing to start: the estimated ceiling $${ceiling.toFixed(2)} is more than 3x the cap $${capUsd.toFixed(2)}. Run fewer items (--limit N, --category) or raise --max-cost.`);
+      process.exit(2);
+    }
+  }
+
   // ---- run
   const results = new Array(items.length);
   const t0 = Date.now(); let done = 0, errors = 0;
@@ -177,6 +224,7 @@ async function main() {
     const started = Date.now();
     try {
       const r = await gradeOne({ item: it, key: keys.get(it.id), env });
+      if (r.error && String(r.error).includes(BUDGET_TAG)) return { verdict: 'not_run', via: 'budget', error: 'not run (budget)', ms: 0 };
       return { verdict: r.verdict, via: r.via, graded_by: r.graded_by, feedback: r.feedback, points: r.points, model: r.model, prompt_version: r.prompt_version, error: r.error, held: r.held, ms: Date.now() - started };
     } catch (e) {
       errors++;
@@ -198,13 +246,27 @@ async function main() {
     for (let k = 1; k < times; k++) {
       await pool(pick, concurrency, async ({ r, i }) => {
         const again = await gradeItem(items[i]);
+        if (again.verdict === 'not_run') return;
         repeat.push({ id: r.id, a: r.verdict, b: again.verdict });
       });
     }
   }
 
   // ---- score
-  const { summary, bar } = summarise(results, { repeat, humans: humanMaps });
+  const ran = results.filter(r => r.verdict !== 'not_run');
+  const notRun = results.length - ran.length;
+  const partial = notRun > 0;
+  let { summary, bar } = summarise(ran, { repeat, humans: humanMaps });
+  let budgetMeta = null;
+  if (gated) {
+    const b = gated.budget;
+    const gradedBy = {};
+    for (const r of results) gradedBy[r.category] = (gradedBy[r.category] || 0) + (r.verdict !== 'error' && r.verdict !== 'not_run' ? 1 : 0);
+    const thin = Object.entries(gradedBy).filter(([, n]) => n < 30).map(([c]) => c).sort();
+    const barEvaluated = !partial || thin.length === 0;
+    budgetMeta = { cap_usd: capUsd, spent_usd: Math.round(b.spentUsd * 1e6) / 1e6, calls_sent: b.sent, calls_refused: b.refused, calls_without_usage_charged_at_ceiling: b.usageMissing, items_total: results.length, items_run: ran.length, items_not_run: notRun, partial, bar_evaluated: barEvaluated, categories_under_30_graded: partial ? thin : [] };
+    if (!barEvaluated) bar = { checks: [], failed: [], notEvaluated: ['partial run'], passed: false, complete: false, evaluated: false };
+  }
   // Usage is what model.js wrote to ai_usage (the stub DB): the real API's token counts in a real run,
   // the fake model's made-up counts in a dry run.
   const usage = { input_tokens: tally.input_tokens, output_tokens: tally.output_tokens, calls: tally.calls, errors: tally.errors, byModel: tally.byModel, ...(ai ? { retries: ai.stats.retries, http_errors: ai.stats.errors } : { synthetic: true }) };
@@ -221,7 +283,7 @@ async function main() {
     date, model, fallback_model: env.GRADER_MODEL_FALLBACK, prompt_version: env.GRADER_PROMPT_VERSION, git: sha, dryRun, truth,
     grading_path: 'worker/grading', fake_model: dryRun, account_id: accountId ? `${accountId.slice(0, 4)}…` : null,
     missing_rubrics: noRubric.size, flags: { limit: opt('limit', null), category: cats, lang: langs, concurrency, repeat: times, seed },
-    seconds: Math.round((Date.now() - t0) / 1000), harness_errors: errors, usage, cost, estimate,
+    seconds: Math.round((Date.now() - t0) / 1000), harness_errors: errors, usage, cost, estimate, ...(budgetMeta ? { budget: budgetMeta } : {}),
   };
   const slug = model.replace(/^@/, '').replace(/[^A-Za-z0-9.]+/g, '-');
   const out = opt('out', dryRun ? path.join(os.tmpdir(), `cts-eval-${date}-dry-run.json`) : path.join(ROOT, 'test', 'eval-results', `${date}-${slug}.json`));
@@ -230,6 +292,13 @@ async function main() {
 
   console.log(formatReport({ summary, bar, meta }));
   console.log(`\nResults: ${out}`);
+  if (budgetMeta) {
+    console.log(`Spent $${budgetMeta.spent_usd.toFixed(4)} of the $${capUsd.toFixed(2)} cap${dryRun ? ' (SYNTHETIC: fake token counts)' : ''}; ${budgetMeta.items_run} of ${budgetMeta.items_total} items ran.`);
+    if (partial) {
+      console.log(`PARTIAL RUN: stopped by the spending cap. ${notRun} items are "not run (budget)". ${budgetMeta.bar_evaluated ? 'Every category still has 30 or more graded items, so the bar was evaluated, but it is a PARTIAL result.' : `The bar is NOT evaluated on a partial run (categories under 30 graded items: ${budgetMeta.categories_under_30_graded.join(', ')}).`}`);
+      process.exit(3);
+    }
+  }
   if (dryRun) { console.log('\nDRY RUN: exit 0 whatever the bar says.'); process.exit(0); }
   if (flag('no-exit-code')) process.exit(0);
   if (errors) { console.error(`${errors} items hit a harness error (see "error" in the results file).`); }

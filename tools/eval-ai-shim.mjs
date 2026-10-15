@@ -10,7 +10,8 @@
 // - The account id is read from wrangler.jsonc (the pinned Chapala account).
 //   If CLOUDFLARE_ACCOUNT_ID is set to a different account the shim refuses:
 //   this machine can reach two Cloudflare accounts (see AGENTS.md).
-// - The token is CLOUDFLARE_API_TOKEN from the environment; it is never
+// - The token is read from --token-file (mode 600 or stricter) or, failing that,
+//   CLOUDFLARE_API_TOKEN from the environment; it is never
 //   printed, logged or written to a results file.
 // - run(model, input) resolves to the REST `result` object, which is what the
 //   binding returns. Failures throw an Error with .code (Cloudflare's numeric
@@ -24,6 +25,22 @@ export function readAccountId(root = ROOT) {
   const m = /^\s*"account_id"\s*:\s*"([0-9a-f]{32})"/m.exec(text);
   if (!m) throw new Error('no top-level "account_id" found in wrangler.jsonc');
   return m[1];
+}
+
+/** Read the API token from a file (--token-file). Refuses a missing or empty file, or one other users can read.
+ *  Never returns, prints or logs the token except in `token`; messages never include it or its length. */
+export function readTokenFile(file) {
+  if (!file) return { ok: false, reason: '--token-file needs a path.' };
+  const p = file === '~' || file.startsWith('~/') ? path.join(process.env.HOME || '', file.slice(1)) : file;
+  let st;
+  try { st = fs.statSync(p); } catch { return { ok: false, reason: `token file not found or not readable: ${file}` }; }
+  if (!st.isFile()) return { ok: false, reason: `token file is not a regular file: ${file}` };
+  if (st.mode & 0o077) return { ok: false, reason: `token file ${file} is readable by other users (mode ${(st.mode & 0o777).toString(8)}). Run: chmod 600 ${file}` };
+  let text;
+  try { text = fs.readFileSync(p, 'utf8'); } catch { return { ok: false, reason: `token file not readable: ${file}` }; }
+  const token = text.trim();
+  if (!token) return { ok: false, reason: `token file is empty: ${file}` };
+  return { ok: true, token };
 }
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -73,8 +90,15 @@ export function makeRestAI({ accountId, token, fetchImpl = globalThis.fetch, ret
 /** The quota gate. Returns {ok, reason}; the eval refuses to touch the network unless ok. */
 export function checkQuotaGate({ argv, env, root = ROOT }) {
   if (!argv.includes('--i-understand-this-uses-quota')) return { ok: false, reason: 'refusing to call Cloudflare: this run spends Workers AI quota. Pass --i-understand-this-uses-quota to proceed (or --dry-run to test without the network).' };
-  if (!env.CLOUDFLARE_API_TOKEN) return { ok: false, reason: 'CLOUDFLARE_API_TOKEN is not set in the environment.' };
+  let token = env.CLOUDFLARE_API_TOKEN;
+  const ti = argv.indexOf('--token-file');
+  if (ti >= 0) {                                               // the file wins over the environment
+    const t = readTokenFile(argv[ti + 1]);
+    if (!t.ok) return { ok: false, reason: t.reason };
+    token = t.token;
+  }
+  if (!token) return { ok: false, reason: 'no API token: pass --token-file <path> or set CLOUDFLARE_API_TOKEN in the environment.' };
   const pinned = readAccountId(root);
   if (env.CLOUDFLARE_ACCOUNT_ID && env.CLOUDFLARE_ACCOUNT_ID !== pinned) return { ok: false, reason: 'CLOUDFLARE_ACCOUNT_ID differs from the account pinned in wrangler.jsonc; refusing (two accounts are reachable from this machine).' };
-  return { ok: true, accountId: pinned };
+  return { ok: true, accountId: pinned, token };
 }

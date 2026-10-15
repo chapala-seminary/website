@@ -168,14 +168,18 @@ export function formatReport({ summary, bar, meta }) {
   L.push('language (short answers)   ' + Object.entries(summary.byLang.sa).map(([l, s]) => `${l}: ${pct(s.agreement)} (n=${s.n})`).join('   '));
   L.push('language (fill-ins)        ' + Object.entries(summary.byLang.fill).map(([l, s]) => `${l}: ${pct(s.agreement)} (n=${s.n})`).join('   '));
   L.push('');
-  L.push(meta.dryRun ? 'THE BAR (MEANINGLESS IN A DRY RUN: fake model verdicts)' : 'THE BAR');
+  const bd = meta.budget && meta.budget.partial ? meta.budget : null;
+  if (bd) L.push(`*** PARTIAL RUN: stopped by the spending cap; ${bd.items_not_run} of ${bd.items_total} items are "not run (budget)". Figures below cover only the ${bd.items_run} items that ran. ***`, '');
+  if (bd && !bd.bar_evaluated) L.push(`THE BAR: NOT EVALUATED (partial run; categories with fewer than 30 graded items: ${bd.categories_under_30_graded.join(', ')})`);
+  else L.push((meta.dryRun ? 'THE BAR (MEANINGLESS IN A DRY RUN: fake model verdicts)' : 'THE BAR') + (bd ? ' (PARTIAL RUN: every category has 30 or more graded items, but not all items ran)' : ''));
   for (const c of bar.checks) {
     const v = c.value === null || c.value === undefined ? 'n/a' : (c.id.startsWith('gap_') ? `${c.value} pts` : (c.id.includes('passes') ? String(c.value) : pct(c.value).trim()));
     const t = c.id.startsWith('gap_') ? `${c.threshold} pts` : (c.id.includes('passes') ? String(c.threshold) : pct(c.threshold).trim());
     L.push(`  [${c.status.toUpperCase().padEnd(4)}] ${c.label}: ${v} (need ${c.op} ${t})${c.blocking ? '' : '  [advisory]'}`);
   }
   L.push('');
-  if (meta.dryRun) L.push('DRY RUN: ignore the bar result. Nothing here measures the real grader.');
+  if (bd && !bd.bar_evaluated) L.push('No bar result: a partial run does not establish or fail the bar.');
+  else if (meta.dryRun) L.push('DRY RUN: ignore the bar result. Nothing here measures the real grader.');
   else L.push(bar.passed ? (bar.complete ? 'BAR PASSED.' : `No check failed, but the bar is NOT established: not evaluated -> ${bar.notEvaluated.join(', ')}`) : `BAR FAILED: ${bar.failed.join(', ')}`);
   if (meta.usage) L.push(`Tokens: ${meta.usage.input_tokens} in / ${meta.usage.output_tokens} out${meta.dryRun ? ' (SYNTHETIC: from the fake model, not a real count)' : ''}; ${meta.dryRun ? 'cost at the run model' : 'estimated cost'} $${meta.cost.usd}${meta.cost.allModelsPriced ? '' : ' (some models unpriced)'}  [list prices as of ${PRICES_AS_OF}: ${priceLabel(meta.model)}]`);
   if (meta.estimate) {

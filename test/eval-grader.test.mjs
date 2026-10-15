@@ -17,6 +17,8 @@ import { makeRestAI, readAccountId, checkQuotaGate } from '../tools/eval-ai-shim
 import { buildSheet, toCsv, toHtml } from '../tools/eval-blind-sheet.mjs';
 import { importGrades, parseCsv } from '../tools/eval-import-human.mjs';
 import { selectItems } from '../tools/eval-grader.mjs';
+import { budgetAI, worstCase, usageOf, BUDGET_TAG } from '../tools/eval-budget.mjs';
+import { readTokenFile } from '../tools/eval-ai-shim.mjs';
 
 const node = (args, env = {}) => spawnSync(process.execPath, args, { cwd: ROOT, encoding: 'utf8', env: { ...process.env, CLOUDFLARE_API_TOKEN: '', ...env } });
 let n = 0; const ok = (name) => { n++; console.log(`  ok  ${name}`); };
@@ -313,5 +315,86 @@ const items = readItemFiles();
   assert.equal(a.length, 100); assert.deepEqual(a.map(i => i.id), b.map(i => i.id));
   assert.ok(new Set(a.map(i => i.category)).size >= 10, 'spread over categories');
   ok('--limit is seeded and spread across categories');
+}
+
+// ---- --token-file and --max-cost ---------------------------------------------
+{
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'cts-eval-tok-'));
+  const SECRET = 'cts-test-token-NOT-REAL-7f3a91';
+  const mk = (name, text, mode) => { const f = path.join(dir, name); fs.writeFileSync(f, text); fs.chmodSync(f, mode); return f; };
+  const good = mk('good', `  ${SECRET}\n`, 0o600), open644 = mk('open644', SECRET, 0o644), group640 = mk('g640', SECRET, 0o640), empty = mk('empty', ' \n', 0o600);
+
+  // permission, missing and empty refusals; the token never appears in a message
+  for (const [f, re] of [[open644, /readable by other users[\s\S]*chmod 600/], [group640, /readable by other users/], [empty, /empty/], [path.join(dir, 'nope'), /not found/]]) {
+    const t = readTokenFile(f); assert.equal(t.ok, false); assert.match(t.reason, re); assert.ok(!t.reason.includes(SECRET));
+    const r = node(['tools/eval-grader.mjs', '--i-understand-this-uses-quota', '--token-file', f, '--max-cost', '1', '--limit', '5']);
+    assert.equal(r.status, 2); assert.match(r.stderr, re); assert.ok(!(r.stdout + r.stderr).includes(SECRET));
+  }
+  assert.deepEqual(readTokenFile(good), { ok: true, token: SECRET }, 'whitespace trimmed');
+  // the file wins over the environment
+  assert.equal(checkQuotaGate({ argv: ['--i-understand-this-uses-quota', '--token-file', good], env: { CLOUDFLARE_API_TOKEN: 'from-env' } }).token, SECRET);
+  assert.equal(checkQuotaGate({ argv: ['--i-understand-this-uses-quota', '--token-file', open644], env: { CLOUDFLARE_API_TOKEN: 'from-env' } }).ok, false, 'a bad file is refused even when the env has a token');
+  ok('--token-file: refuses group/world-readable, missing, empty; trims; wins over the environment; token never printed');
+
+  // a real run with no --max-cost refuses before any network call (fetch is stubbed to leave a marker and throw)
+  const marker = path.join(dir, 'fetch-called');
+  const stub = path.join(dir, 'stub-fetch.mjs');
+  fs.writeFileSync(stub, `import fs from 'node:fs'; globalThis.fetch = async () => { fs.writeFileSync(${JSON.stringify(marker)}, 'x'); throw new Error('network is forbidden in tests'); };\n`);
+  const withStub = args => node(['--import', stub, 'tools/eval-grader.mjs', ...args]);
+  let r = withStub(['--i-understand-this-uses-quota', '--token-file', good, '--limit', '5']);
+  assert.equal(r.status, 2); assert.match(r.stderr, /must carry a hard spending cap[\s\S]*--max-cost/);
+  assert.ok(!fs.existsSync(marker), 'no fetch before the refusal'); assert.ok(!(r.stdout + r.stderr).includes(SECRET));
+  r = withStub(['--i-understand-this-uses-quota', '--token-file', good, '--max-cost', 'abc']);
+  assert.equal(r.status, 2); assert.match(r.stderr, /positive number/);
+  // ceiling over 3x the cap: refused before any call, with the --limit hint
+  r = withStub(['--i-understand-this-uses-quota', '--token-file', good, '--max-cost', '0.01']);
+  assert.equal(r.status, 2); assert.match(r.stderr, /more than 3x the cap[\s\S]*--limit/); assert.match(r.stdout, /Estimate for the \d+ selected items[\s\S]*typical \$[\d.]+, ceiling \$[\d.]+/);
+  assert.ok(!fs.existsSync(marker), 'no fetch before the 3x refusal');
+  ok('real run: no cap -> exit 2, ceiling over 3x cap -> exit 2, both before any network call');
+
+  // the cap, in a dry run with the fake model's usage scaled up so it costs something
+  const out = path.join(dir, 'cap.json');
+  r = node(['tools/eval-grader.mjs', '--dry-run', '--limit', '300', '--max-cost', '0.13', '--fake-usage-scale', '5', '--concurrency', '1', '--out', out]);
+  assert.equal(r.status, 3, r.stdout + r.stderr);
+  const res = JSON.parse(fs.readFileSync(out, 'utf8')), b = res.meta.budget;
+  assert.equal(b.partial, true); assert.equal(b.bar_evaluated, false); assert.ok(b.items_not_run > 0 && b.items_run > 0);
+  assert.equal(res.items.filter(i => i.verdict === 'not_run').length, b.items_not_run);
+  assert.ok(res.items.filter(i => i.verdict === 'not_run').every(i => i.via === 'budget' && i.error === 'not run (budget)'));
+  assert.ok(res.items.some(i => i.via.startsWith('rule:')), 'items settled by rules (free) still ran');
+  assert.ok(b.spent_usd > 0.05 && b.spent_usd < 0.14 && b.calls_refused > 0);
+  assert.equal(res.bar.evaluated, false); assert.equal(res.bar.passed, false);
+  assert.match(r.stdout, /PARTIAL RUN[\s\S]*not run \(budget\)/); assert.match(r.stdout, /THE BAR: NOT EVALUATED/); assert.match(r.stdout, /Spent \$0\.\d+ of the \$0\.13 cap/);
+  assert.ok(Object.keys(res.summary.counts.byCategory).length > 0 && res.summary.counts.items === b.items_run, 'the summary covers only items that ran');
+  // one category with >= 30 graded items: the bar is evaluated, and labelled partial
+  const out2 = path.join(dir, 'cap2.json');
+  r = node(['tools/eval-grader.mjs', '--dry-run', '--category', 'fixture', '--limit', '150', '--max-cost', '0.09', '--fake-usage-scale', '5', '--concurrency', '1', '--out', out2]);
+  assert.equal(r.status, 3, r.stdout + r.stderr);
+  const b2 = JSON.parse(fs.readFileSync(out2, 'utf8')).meta.budget;
+  assert.equal(b2.partial, true); assert.equal(b2.bar_evaluated, true);
+  assert.match(r.stdout, /PARTIAL RUN: every category has 30 or more graded items/); assert.match(r.stdout, /it is a PARTIAL result/);
+  // a cap that is not reached: complete run, exit 0, spend reported, not partial
+  r = node(['tools/eval-grader.mjs', '--dry-run', '--limit', '60', '--max-cost', '5', '--out', path.join(dir, 'cap3.json')]);
+  assert.equal(r.status, 0, r.stdout + r.stderr); assert.match(r.stdout, /Spent \$[\d.]+ of the \$5\.00 cap[\s\S]*items ran/); assert.doesNotMatch(r.stdout, /PARTIAL RUN/);
+  ok('--max-cost: stops sending, marks "not run (budget)", writes results, exit 3, partial labelling; under cap -> exit 0');
+
+  // the gate itself: real usage counted, missing usage charged at the ceiling, in-flight calls reserved, stop is sticky
+  const params = { messages: [{ role: 'user', content: 'x'.repeat(4000) }], max_tokens: 550 };
+  const model = '@cf/meta/llama-3.3-70b-instruct-fp8-fast';
+  const worst = worstCase(model, params);
+  const real = { usage: { prompt_tokens: 1000, completion_tokens: 100 } };
+  let g = budgetAI({ capUsd: 1, inner: { run: async () => real } });
+  await g.run(model, params);
+  assert.ok(Math.abs(g.budget.spentUsd - (1000 * 0.293 + 100 * 2.253) / 1e6) < 1e-12, 'cost from the real usage tokens');
+  g = budgetAI({ capUsd: 1, inner: { run: async () => ({ response: '{}' }) } });
+  await g.run(model, params);
+  assert.equal(g.budget.spentUsd, worst); assert.equal(g.budget.usageMissing, 1); assert.equal(usageOf({ response: 'x' }), null);
+  let release; const gate = new Promise(r => { release = r; });
+  g = budgetAI({ capUsd: worst * 1.5, inner: { run: async () => { await gate; return real; } } });
+  const first = g.run(model, params);                                          // in flight, reserved at its worst case
+  await assert.rejects(() => g.run(model, params), e => e.code === 'BUDGET' && e.message.startsWith(BUDGET_TAG));
+  release(); await first;
+  await assert.rejects(() => g.run(model, { ...params, max_tokens: 1 }), e => e.code === 'BUDGET', 'once stopped, no later call is sent, even a small one');
+  assert.equal(g.budget.sent, 1); assert.equal(g.budget.stopped, true);
+  ok('budget gate: real usage priced, missing usage charged at ceiling, in-flight reserved, stop is sticky');
 }
 console.log(`eval-grader tests: ${n} groups passed`);
