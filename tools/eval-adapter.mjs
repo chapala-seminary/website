@@ -84,7 +84,7 @@ export async function gradeOne({ item, key, env }) {
   const r = batch.results.get(item.qid);
   if (!r) return { verdict: 'pending', via: 'ai', graded_by: 'ai', error: batch.error || 'unresolved' };
   if (r.verdict === 'pending') return { verdict: 'pending', via: 'ai', graded_by: 'ai', held: 'model', model: r.model, prompt_version: r.version };
-  return { verdict: r.verdict, via: 'ai', graded_by: 'ai', feedback: r.feedback, points: r.points, model: r.model, prompt_version: r.version };
+  return { verdict: r.verdict, via: 'ai', graded_by: 'ai', feedback: r.feedback, points: r.points, record: r.record, model: r.model, prompt_version: r.version };
 }
 
 /** The exact request gradeBatch would send for one answer, with no network.

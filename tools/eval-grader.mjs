@@ -67,6 +67,20 @@ const flag = n => argv.includes(`--${n}`);
 const opt = (n, d) => { const i = argv.indexOf(`--${n}`); return i >= 0 && argv[i + 1] !== undefined ? argv[i + 1] : d; };
 const list = n => (opt(n, '') ? opt(n, '').split(',').filter(Boolean) : null);
 
+/** What the model claimed and what the server kept: per point, the quote and whether it was dropped.
+ *  `model_verdict` is what the model said itself; `quote_dropped` is set when dropping changed the verdict. */
+export function quotesOf(rec) {
+  const dropped = new Map((rec.dropped || []).map(d => [d.id, d.quote]));
+  const kept = (rec.points || []).filter(p => p.made).map(p => ({ id: p.id, quote: p.quote, dropped: false }));
+  return {
+    model_verdict: rec.model_verdict,
+    claimed: [...kept, ...[...dropped].map(([id, quote]) => ({ id, quote, dropped: true }))].sort((a, b) => a.id.localeCompare(b.id)),
+    dropped: [...dropped.keys()],
+    ...(rec.repaired ? { repaired: rec.repaired, first_failed: rec.first_failed } : {}),
+    ...(rec.quote_dropped ? { quote_dropped: true } : {}),
+  };
+}
+
 async function pool(items, n, fn) {
   let next = 0;
   await Promise.all(Array.from({ length: Math.min(n, items.length) }, async () => {
@@ -225,7 +239,7 @@ async function main() {
     try {
       const r = await gradeOne({ item: it, key: keys.get(it.id), env });
       if (r.error && String(r.error).includes(BUDGET_TAG)) return { verdict: 'not_run', via: 'budget', error: 'not run (budget)', ms: 0 };
-      return { verdict: r.verdict, via: r.via, graded_by: r.graded_by, feedback: r.feedback, points: r.points, model: r.model, prompt_version: r.prompt_version, error: r.error, held: r.held, ms: Date.now() - started };
+      return { verdict: r.verdict, via: r.via, graded_by: r.graded_by, feedback: r.feedback, points: r.points, ...(r.record ? { quotes: quotesOf(r.record) } : {}), model: r.model, prompt_version: r.prompt_version, error: r.error, held: r.held, ms: Date.now() - started };
     } catch (e) {
       errors++;
       return { verdict: 'error', via: 'ai', error: String(e.message || e).slice(0, 300), code: e.code, ms: Date.now() - started };
