@@ -8,8 +8,9 @@
     "preview": "astro preview",
     "check": "astro check",
     "test": "test/run-tests.sh",
-    "deploy": "node tools/verify-worker-config.mjs --deploy && node tools/gen-worker-catalog.mjs --check && npm run build && node tools/prepare-study-plans.mjs && wrangler deploy",
-    "deploy:beta": "node tools/verify-beta-branch.mjs && node tools/verify-worker-config.mjs --deploy --env beta && node tools/gen-worker-catalog.mjs --check && node tools/prepare-beta-activation.mjs && npm run build && wrangler deploy --env beta && node tools/check-beta-activation.mjs"
+    "deploy": "node tools/verify-worker-config.mjs --deploy && node tools/gen-worker-catalog.mjs --check && npm run build && node tools/verify-no-keys.mjs dist && node tools/prepare-study-plans.mjs && wrangler deploy",
+    "deploy:beta": "node tools/verify-beta-branch.mjs && node tools/verify-worker-config.mjs --deploy --env beta && node tools/gen-worker-catalog.mjs --check && node tools/prepare-beta-activation.mjs && npm run build && node tools/verify-no-keys.mjs dist && wrangler deploy --env beta && node tools/check-beta-activation.mjs",
+    "build:shadow": "CTS_GRADING_MODE=shadow astro build --outDir dist-shadow"
   },
   "dependencies": {
     "astro": "^7.3.3",
