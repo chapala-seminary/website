@@ -352,7 +352,7 @@ export async function answeredOf(env, rows, banked, lang) {
    (On a track where written answers count, a model answer shown after a
    failed attempt would be copied into the retake.) The page shows each beside
    a short answer the student wrote. */
-async function modelsOf(env, attempt, scope, st) {
+async function modelAnswersOf(env, attempt, scope, st) {
   if (attempt.status === 'open' || attempt.shadow || st.req.sa.need || !st.items.sa.length) return undefined;
   const keys = await loadKeys(env, st.items.sa);
   const out = {};
@@ -372,7 +372,7 @@ export async function resultOf(env, attempt, scope, st) {
     scores: { mc: { ...part('mc', st.state.mcRight), banked: st.banked.mc }, fill: part('fill', st.state.fillRight), sa: part('sa', st.state.saMet) },
     lock: lockOf(attempt), unitDone, courseDone,
     answered: await answeredOf(env, st.rows, st.banked, attempt.lang),
-    ...(await modelsOf(env, attempt, scope, st).then((m) => (m ? { models: m } : {}))),
+    ...(await modelAnswersOf(env, attempt, scope, st).then((m) => (m ? { models: m } : {}))),
   };
 }
 
@@ -390,7 +390,7 @@ export async function attemptView(env, attempt, scope, keys) {
     banked: { mc: st.banked.mc, fill: [], sa: st.banked.sa },
     answered,
     lock: lockOf(attempt),
-    ...(await modelsOf(env, attempt, scope, st).then((m) => (m ? { models: m } : {}))),
+    ...(await modelAnswersOf(env, attempt, scope, st).then((m) => (m ? { models: m } : {}))),
     items: {
       mc: mcAsked.map((q) => (whys.get(q) ? { qid: q, why: whys.get(q) } : { qid: q })),
       fill: st.items.fill,

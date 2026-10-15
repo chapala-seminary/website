@@ -284,8 +284,7 @@ Notes on the routes (as built):
   and **`totals`** the number asked. `banked.fill` is always `[]`: only
   multiple choice and short answers bank. `status` is also in the reply
   (`open`, or `pending` when the student comes back to an attempt that is
-  waiting). `answered[qid]` carries `gradeId` (what `/api/appeal` takes) and,
-  for a banked short answer, `banked: true`.
+  waiting). `answered[qid]` is described in section 12.
 - **Locked:** `POST /api/attempt` answers 423 with
   `{error, lock: {until, kind}, track}`; `lock` in a normal reply is null.
 - **`/api/grade`** items are `{qid, gradeId, verdict, feedback, points?}`
@@ -414,55 +413,77 @@ calibration agreement.
   `CTS_GRADING_MODE=shadow` and confirms the pages still carry keys and post
   to `/api/shadow`.
 
-## 12. Browser expectations (what the pages need from section 7)
+## 12. The shapes the pages and the Worker agree on
 
-Section 7 leaves some shapes open. The browser (`cts-grading.js`, `cts-engine.js`,
-`cts-fill.js`, `cts-textbook.js`) was built to read the following; the server
-should send these, or this section should change in the same commit.
+Section 7 gives the routes; this section is the exact shape of each reply, as
+the browser (`cts-grading.js`, `cts-engine.js`, `cts-fill.js`,
+`cts-textbook.js`) reads it and `worker/grading/routes.js` sends it.
+`test/grading-e2e.test.mjs` drives the two together, so a change to either side
+that breaks the agreement fails the suite.
 
 - **Page data (live build).** `window.CTS_UNIT` / `CTS_TEXTBOOK_TEST` carry
   `grading: "live"`, `scope` (`u:<Prefix>/<n>`, `tb:<slug>`, `rd:<slug>`) and,
   per item, `qid` plus only what a student reads (`stem`, `prompt`, `options`,
   and `group` / `chapter` / `reading` on a test bank). A textbook or reading
-  bank ships all forty prompts; the server draws.
-- **`POST /api/attempt`**: `items.fill` names the drawn bank questions for a
-  textbook/reading test. `answered[qid]` holds `{ verdict, feedback, gradeId,
-  choice? }` (and may hold `answer` text, `why`, `answer` index for MC). Banked
-  short answers appear in `banked.sa` and, if the server has the text, in
-  `answered[qid].answerText` (otherwise the browser's own saved text is shown,
-  or "on record"). Optional `status` (`pending` / `passed`) tells a browser on a
-  new device that the latest attempt is already submitted; without it the
-  browser only knows from its own `cts_<course>_u<N>_pending`.
-- **Locked refusal**: any 4xx carrying `{ error, lock: { until, kind } }`.
-  `until` is an ISO date or epoch; `kind` starting `sa`/`written` locks the
-  written part (`_sa_lock`), anything else the whole unit (`_full_lock`).
-- **`POST /api/mc`** `answer` is the 0-based index of the right option; `why`
-  is a `{en,es,fr}` map, a string, or null (null means "none", absent means
-  "ask again"; the browser re-posts the same click to recover it after a
-  reload).
-- **`POST /api/grade`** items carry `gradeId` (the appeal needs it) and
-  optionally `gradedBy` (`exact` and `rule` get no appeal link) and
-  `correctAnswer` (shown only if sent).
+  bank ships all forty prompts; the server draws, and `items.fill` of the
+  attempt names the twenty.
+- **`POST /api/attempt`** replies with `attemptId`, `status` (`open` or
+  `pending`), `track`, `lang`, `needs`, `totals`, `banked`, `answered`, `lock`
+  (null) and `items`. A browser on a new device learns that the latest attempt
+  is already submitted from `status: "pending"`.
+- **`answered[qid]`** (in the attempt, submit and GET replies alike) holds, for
+  what the student has already done and nothing else:
+  - always `gradeId`, `verdict`, `feedback`, `gradedBy` (`exact`, `cache`,
+    `override`, `rule`, `ai` or `human`; the page offers an appeal only on a
+    fill-in not graded `exact` or `rule`);
+  - multiple choice: `choice`, and `answer` (index of the right option) and
+    `why` (a string in the attempt's language, or null), which the click that
+    answered it already returned;
+  - fill-in and short answer: `answerText`, the student's own words;
+  - a fill-in graded `wrong`: `correctAnswer`, a string in the attempt's
+    language. A graded item is final (the first answer to a question stands),
+    so this is sent once the item is graded and never before; a pending
+    fill-in carries none;
+  - a banked short answer: `{ verdict: "met", banked: true, answerText }`, the
+    text being the latest answer that met the standard.
+- **Locked refusal**: `POST /api/attempt` answers 423 with
+  `{ error, lock: { until, kind }, track }`. The browser accepts any 4xx
+  carrying `lock`. `until` is an ISO date; `kind` `sa` locks the written part
+  (mirrored into `_sa_lock`), `full` the whole unit (`_full_lock`).
+- **`POST /api/mc`** replies `{ right, answer, why, choice }`; `answer` is the
+  0-based index of the right option; `why` is a string in the attempt's
+  language or null (null means "none", absent means "ask again").
+- **`POST /api/grade`** items are `{ qid, gradeId, verdict, feedback, gradedBy,
+  points?, correctAnswer? }` (`correctAnswer` as above, for a fill-in graded
+  wrong). A banked short answer comes back `{ verdict: "met", banked: true }`.
 - **Submit / `GET /api/attempt/<id>`**: `status` `passed|failed|pending`;
-  `scores` as `{ mc: {right,total}, fill: {...}, sa: {...} }` (or flat
-  `mc_right`/`mc_total`...); `lock`; `courseDone`; and the verdicts as
-  `answered` (same shape as above). `courseDone: true` is what makes the
-  browser write `cts_done_codes` (via `cts-record.js`); `unitDone` is not read.
-- **`POST /api/appeal`** also receives `attemptId` and `qid` beside `gradeId`
-  and `note`; 429 means three are open.
-- **Not in live mode.** Model answers are not shown to students on tracks where
-  short answers do not count (nothing on the page can carry them); if a submit
-  reply has `models: { qid: {en,es,fr} }` the browser shows them. There is no
-  practice set after a textbook-test pass (a second draw is a second attempt).
-  The old exam-view hiding (`cts-exam-view.js`) is unchanged.
+  `scores` as `{ mc: {right,total,need,banked}, fill: {...}, sa: {...} }`;
+  `lock`; `unitDone`; `courseDone` (true is what makes the browser write
+  `cts_done_codes` through `cts-record.js`; `unitDone` is not read); `answered`.
+- **`models`** in a submit or GET reply: `{ qid: {en,es,fr} }` for the short
+  answers of the attempt, sent only once the attempt is no longer open and only
+  on a track where written answers do not count (Certificate, Associate). On a
+  track where they count, no model answer is ever sent, because one shown after
+  a failed attempt would be copied into the retake. The page shows a model
+  answer beside a short answer the student wrote, and not beside one left empty.
+- **`POST /api/appeal`** is sent `{ code, gradeId, attemptId, qid, note }`. The
+  Worker acts on `gradeId`, and finds the answer from `attemptId` + `qid` if
+  `gradeId` is missing. 429 means three are open.
+- **Not in live mode.** There is no practice set after a textbook-test pass (a
+  second draw is a second attempt). The old exam-view hiding
+  (`cts-exam-view.js`) is unchanged.
 - **Mode check.** `tools/verify-no-keys.mjs` fails a live build with any key;
   `--expect-keys` (or `CTS_GRADING_MODE=shadow`) checks the shadow build. Both
-  run in `test/run-tests.sh`, and `npm run deploy[:beta]` runs the live check.
-  Shadow pages are byte-for-byte the old pages plus one
-  `<script src="/assets/js/cts-shadow.js" defer>`; the engine announces each
-  submit as a `cts:submitted` event which that script posts to `/api/shadow`.
-  Browser tests written for the old engine run against `dist-shadow/`
-  (`npm run build:shadow`, served beside the Worker by `test/shadow-server.mjs`).
+  run in `test/run-tests.sh`, and `npm run deploy[:beta]` runs the check for its
+  mode. `tools/verify-worker-config.mjs --deploy --mode live|shadow` (passed by
+  both deploy scripts) refuses a deploy whose build mode differs from the
+  environment's `GRADING_MODE`, and the same agreement is checked from
+  `package.json` in every run of the suite. Shadow pages are byte-for-byte the
+  old pages plus one `<script src="/assets/js/cts-shadow.js" defer>`; the engine
+  announces each submit as a `cts:submitted` event which that script posts to
+  `/api/shadow`. Browser tests written for the old engine run against
+  `dist-shadow/` (`npm run build:shadow`, served beside the Worker by
+  `test/shadow-server.mjs`).
 - **Not yet converted** (plan step 6): the single-page courses still load their
   keys from `public/assets/js/fill/`; `cts-fill.js` already has the live mode
   they will use (`mount({ live: { attemptId } })`).
