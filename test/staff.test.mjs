@@ -104,6 +104,25 @@ await reg({ name: SHOUT, email: `shout-${tag}@example.test`, track: 'thm' });
   ok(csv.includes(`"'=HYPERLINK(""x"") ${tag}"`), 'a name a spreadsheet would run as a formula is defused in the CSV',
     csv.split('\n').find((l) => l.includes('HYPERLINK')));
   ok(!csv.includes(quietCode), 'the CSV never has a student code');
+
+  // How students found the seminary, counted (website#95). The form sends an
+  // em dash when the question is skipped; that and nothing at all are "not answered".
+  const H = { ai: `Heard AI ${tag}`, search: `Heard Search ${tag}`, dash: `Heard Dash ${tag}` };
+  await reg({ name: H.ai, track: 'cert', country: 'US', heard: 'ai' });
+  await reg({ name: H.search, track: 'cert', country: 'MX', heard: 'search' });
+  await reg({ name: H.dash, track: 'cert', country: 'US', heard: '\u2014' });
+  const hj = await (await staff('/staff/heard.json')).json();
+  const by = Object.fromEntries(hj.map((h) => [h.answer, h]));
+  ok(by.ai?.us >= 1 && by.ai.label === 'AI assistant (ChatGPT, Gemini, etc.)', 'an AI answer from the U.S. is counted there', JSON.stringify(by.ai));
+  ok(by.search?.elsewhere >= 1, 'a search answer from Mexico is counted as elsewhere', JSON.stringify(by.search));
+  ok(by['not answered']?.students >= 1 && by['not answered'].us >= 1, 'a skipped question (em dash) is "not answered"', JSON.stringify(by['not answered']));
+  ok(hj.every((h) => h.students >= 0 && h.us + h.elsewhere === h.students && h.share >= 0 && h.share <= 100), 'every row adds up');
+  ok(!JSON.stringify(hj).includes(tag) && !JSON.stringify(hj).includes('@'), 'the counts carry no names or emails');
+  const hp = await (await staff('/staff/students')).text();
+  ok(hp.includes('How students found the seminary') && hp.includes('Google or other web search') && hp.includes('United States'),
+    'the roster page shows the counts by answer, with a U.S. column');
+  const hrow = (await (await staff('/staff/students.json')).json()).find((x) => x.name === H.ai);
+  ok(hrow?.heard === 'ai', 'the JSON keeps the stored key', JSON.stringify(hrow?.heard));
 }
 
 /* ---- who gets a note, and when ------------------------------------------------ */
