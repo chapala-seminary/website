@@ -11,7 +11,7 @@ import {
   ROOT, readItemFiles, validateItem, keyFor, applyHoldout, bare, wordCount,
 } from '../tools/eval-lib.mjs';
 import { summarise, formatReport, BAR, PRICE_PER_M, PRICES_AS_OF, estimateCost, estimateRun } from '../tools/eval-summary.mjs';
-import { buildKeyRows } from '../tools/grading-keys-lib.mjs';
+import { buildKeyRows, buildUnitKeyRows } from '../tools/grading-keys-lib.mjs';
 import { buildMessages, pickText, LANG_NAMES, MIN_MODEL_CHARS } from '../worker/grading/prompt.js';
 import { makeEnv, makeUsageTally, cheapCheck, gradeOne, capturePrompt } from '../tools/eval-adapter.mjs';
 import { makeRestAI, readAccountId, checkQuotaGate } from '../tools/eval-ai-shim.mjs';
@@ -41,6 +41,32 @@ const items = readItemFiles();
   const rows = buildKeyRows({ root: ROOT });
   for (const q of new Set(items.map(i => i.qid))) assert.deepEqual(keyFor(q), JSON.parse(rows.get(q).data), `${q}: eval key differs from the grading_keys row`);
   ok('eval keys are the grading_keys data_json (tools/grading-keys-lib.mjs)');
+
+  // The 15 Oct replacement models must survive the legacy placeholder filter.
+  const genesis = [...rows.values()].filter(r => r.qid.startsWith('u:CTSGenesis/') && r.kind === 'sa');
+  assert.equal(genesis.length, 120);
+  for (const row of genesis) {
+    const [, unit, , index] = row.qid.split('/');
+    const source = JSON.parse(fs.readFileSync(path.join(ROOT, `src/content/units/CTSGenesis/${unit}.json`)));
+    assert.deepEqual(JSON.parse(row.data).model, source.sa[Number(index)].model, `${row.qid}: a real model language was dropped`);
+    for (const lang of ['en', 'es', 'fr']) assert.ok(usableModel(JSON.parse(row.data).model[lang]), `${row.qid}: missing ${lang} model`);
+  }
+  function usableModel(text) { return typeof text === 'string' && text.trim().length >= MIN_MODEL_CHARS; }
+  const fixtureRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'cts-placeholder-'));
+  try {
+    const dir = path.join(fixtureRoot, 'src/content/units/Synthetic');
+    fs.mkdirSync(dir, { recursive: true });
+    const sa = Array.from({ length: 3 }, (_, i) => ({
+      prompt: { en: `Synthetic question ${i}` },
+      model: { en: 'One generic placeholder repeated for every question.', es: 'Una respuesta genérica repetida para cada pregunta.', fr: `Une vraie réponse distincte pour la question ${i}.` },
+    }));
+    fs.writeFileSync(path.join(dir, '1.json'), JSON.stringify({ sa }));
+    for (const row of buildUnitKeyRows({ root: fixtureRoot }).values()) {
+      const i = Number(row.qid.split('/').at(-1));
+      assert.deepEqual(JSON.parse(row.data).model, { fr: sa[i].model.fr });
+    }
+  } finally { fs.rmSync(fixtureRoot, { recursive: true, force: true }); }
+  ok('Genesis keeps all real model languages; repeated legacy placeholders still fall back to French');
 
   const count = (cat, f = () => true) => items.filter(i => i.category === cat && f(i)).length;
   assert.ok(count('fixture') >= 460, 'fixture: the 460 right answers plus wrong ones');

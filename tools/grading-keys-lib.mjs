@@ -9,9 +9,9 @@ import path from 'node:path';
 import { singleSections, singleRubrics } from './single-pages-lib.mjs';
 
 const readJson = (f) => JSON.parse(fs.readFileSync(f, 'utf8'));
-/* Some units carry one generic sentence as the model answer for every
- * question in a language (CTSGenesis English and Spanish: "A strong answer
- * integrates the unit's biblical concepts..."). Sent to the grader it reads as
+/* Legacy or newly imported units may carry one generic sentence as the model
+ * answer for every question in a language. The original Genesis placeholders
+ * were replaced on 15 Oct 2026. Sent to the grader a placeholder reads as
  * a real model answer. A language whose model text repeats on three or more
  * of a unit's questions is left out of the key, so the grader falls back to a
  * language with a real model answer (worker/grading/prompt.js pickText). */
