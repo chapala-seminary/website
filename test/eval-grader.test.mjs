@@ -203,8 +203,10 @@ const items = readItemFiles();
   u = userJson(pp(S.chSa, 'en')); assert.equal(u.items[0].model_answer_language, 'French'); assert.equal(u.items[0].question_language, 'English');
   u = userJson(pp(S.chSa, 'fr')); assert.equal(u.items[0].model_answer_language, 'French');
   u = userJson(pp(S.chFill, 'fr')); assert.equal(u.items[0].expected_language, 'French');
-  // CTSGenesis unit 1: English and Spanish models are generic placeholders; the French one is real. The printout warns.
-  out = pp(S.genSa, 'en'); assert.match(out, /WARNING:.*generic placeholder/);
+  // CTSGenesis unit 1: English and Spanish models are generic placeholders. The key leaves them out
+  // (tools/grading-keys-lib.mjs placeholderModels), so the grader gets the real French one, labelled.
+  out = pp(S.genSa, 'en'); assert.doesNotMatch(out, /WARNING:.*placeholder/);
+  assert.equal(userJson(out).items[0].model_answer_language, 'French');
   assert.doesNotMatch(pp(S.genSa, 'fr'), /WARNING:.*placeholder/);
   assert.equal(userJson(pp(S.fillFr, 'fr')).items[0].sentence_language, 'French');
   // an answer given on the command line replaces the sample, and a rule-settled one is flagged but still printed
