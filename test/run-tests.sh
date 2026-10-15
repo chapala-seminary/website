@@ -210,7 +210,7 @@ node tools/verify-editable.mjs
 # a course using the honours box with no reading room recorded for it.
 node tools/verify-partials.mjs
 
-API_BASE="http://127.0.0.1:$PORT" node test/api.test.mjs
+API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/api.test.mjs
 API_BASE="http://127.0.0.1:$PORT" SYNC_WRITE_STATE="$STATE" node test/sync-writes.test.mjs
 API_BASE="http://127.0.0.1:$PORT" EMAIL_TEST_STATE="$STATE" node test/email-options.test.mjs
 API_BASE="http://127.0.0.1:$PORT" node test/student-language.test.mjs
@@ -228,6 +228,12 @@ API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/requ
 # completion, /api/sync in live mode, and the shadow trial. The old-rules suites
 # above and below ask for the old /api/sync with x-test-grading-mode: shadow.
 API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/grading-api.test.mjs
+
+# The faculty's grading pages (/staff/grading, worker/staff-grading.js):
+# appeals that pass a unit, pending answers, blind calibration and its
+# agreement figures, fill-in rulings and tools/apply-accepts.mjs, possible
+# copying, usage, the Monday digest line, and what deleting a student removes.
+API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/staff-grading.test.mjs
 
 # The student tracker: the staff roster behind Cloudflare Access, and the notes
 # to students who have gone quiet (worker/staff.js, worker/outreach.js).
