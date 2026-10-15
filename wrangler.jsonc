@@ -51,6 +51,8 @@
 	//   npx wrangler secret put RESEND_API_KEY --env beta (beta)
 	"send_email": [{ "name": "EMAIL" }],
 	"vars": {
+		// Production release cutoff: preserve this date on later deployments.
+		"MASTER_TESTS_ACTIVATION": "2026-10-15T05:17:56.813Z",
 		"EMAIL_FROM": "Chapala Theological Seminary <certificates@chapalaseminary.org>",
 		"EMAIL_REPLY_TO": "info@chapalaseminary.org",
 		// where the seminary is told of completions and certificates (worker/notify.js)
