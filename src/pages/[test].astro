@@ -11,6 +11,7 @@ import Textbook from '../layouts/Textbook.astro';
 import catalog from '../../worker/catalog.json';
 import { testsOfCourseWith, unitCourseWith } from '../lib/required-tests.ts';
 import { frBookTitle } from '../lib/french-titles.ts';
+import { live, liveBank } from '../lib/grading-mode';
 
 export async function getStaticPaths() {
   const books = await getCollection('textbooks');
@@ -40,7 +41,11 @@ const tests = testsOfCourseWith(book.slug);
 const completion = unitCourse
   ? { slug: unitCourse[0], code: tb.code, name: done.name, page: done.page, units: unitCourse[1].units, textbook: book.slug, ...(tests.length > 1 ? { tests } : {}) }
   : { single: true, code: tb.code, name: done.name, page: done.page, textbook: book.slug, ...(tests.length > 1 ? { tests } : {}) };
-const data = JSON.stringify({ slug: book.slug, page: book.page, title: book.title, draw, pass, questions, completion,
+/* Live mode: the bank carries prompts and ids only; the server draws the
+   twenty and grades them (docs/ai-grading.md). */
+const shown = live ? liveBank({ slug: book.slug, questions }) : null;
+const data = JSON.stringify({ slug: book.slug, page: book.page, title: book.title, draw, pass, questions: shown ? shown.questions : questions, completion,
+  ...(shown ? { grading: 'live', scope: shown.scope } : {}),
   ...(book.test.perChapter ? { perChapter: book.test.perChapter } : {}),
   ...(book.test.revision ? { revision: book.test.revision } : {}),
   ...(book.test.resetWaitOnRevision ? { resetWaitOnRevision: true } : {}),

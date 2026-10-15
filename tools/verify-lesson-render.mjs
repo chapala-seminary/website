@@ -63,6 +63,13 @@ const walk = (root) => {
     for (const el of node.childNodes) {
       if (!el.tagName) continue;
       const tag = el.tagName.toLowerCase();
+      /* The grading mode's own script (docs/ai-grading.md): cts-grading.js on a
+         live page, cts-shadow.js on a shadow one. Not part of any lesson. */
+      if (tag === 'script' && /\/cts-(grading|shadow)\.js/.test(el.getAttribute('src') || '')) continue;
+      /* The unit's questions, inlined. A live page carries them without their
+         keys (docs/ai-grading.md); tools/content-baseline.mjs checks every
+         question against the content, and tools/verify-no-keys.mjs the page. */
+      if (tag === 'script' && el.text.startsWith('window.CTS_UNIT =')) continue;
       const repaired = repairedAncestor || REPAIRED.has(tag);
       /* The <br> that separated two always-visible language lines has nothing
          left to separate once the toggle shows one at a time. Skipped on both
