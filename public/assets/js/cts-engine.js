@@ -230,6 +230,20 @@
      six words was too easy to satisfy). This decides only what is shown; it
      grades nothing. */
   var SA_MIN_WORDS = 10, SA_MIN_CHARS = 50;
+  // A paragraph is the student-facing standard; the floor is not disclosed.
+  // Check only attempted master's answers so a blank remains the permitted
+  // one missed answer under the existing 90% pass rule.
+  var SA_SUBMIT_MIN_WORDS = 15;
+  function shortAnswerWordCount(text) {
+    var words = String(text || "").match(/[\p{L}\p{N}]+(?:['’\-][\p{L}\p{N}]+)*/gu);
+    return words ? words.length : 0;
+  }
+  function firstTooShortShortAnswerIndex(answers) {
+    if (!saCounts()) return -1;
+    return answers.findIndex(function (answer) {
+      return !!String(answer || "").trim() && shortAnswerWordCount(answer) < SA_SUBMIT_MIN_WORDS;
+    });
+  }
   function attempted(text) {
     var t = String(text || "").trim().replace(/\s+/g, " ");
     return t.length >= SA_MIN_CHARS && t.split(" ").length >= SA_MIN_WORDS;
@@ -592,6 +606,11 @@
       var target = split ? "outSa" : "out";
       var block = "";
       if (!split) block += "<h3>" + bi({ en: "Short Answer", es: "Respuesta Corta", fr: "Réponse courte" }) + "</h3>";
+      block += '<p class="small cts-sa-length-guidance">' + bi({
+        en: "For each short-answer response, please write at least a paragraph.",
+        es: "Para cada respuesta de desarrollo, escriba al menos un párrafo.",
+        fr: "Pour chaque réponse courte, rédigez au moins un paragraphe."
+      }) + "</p>";
       sa.forEach(function (q, i) {
         block += '<div class="question" data-sa="' + i + '">';
         block += '<p style="font-weight:bold;">' + (i + 1) + ". " + bi(q.prompt || q.stem) + "</p>";
@@ -631,7 +650,13 @@
       });
     });
     node.querySelectorAll("textarea[data-sa]").forEach(function (t) {
-      t.addEventListener("input", function () { saAnswers[+t.dataset.sa] = t.value; saveState(); });
+      t.addEventListener("input", function () {
+        saAnswers[+t.dataset.sa] = t.value;
+        t.removeAttribute("aria-invalid");
+        var note = t.parentElement.querySelector(".cts-sa-too-short");
+        if (note) note.remove();
+        saveState();
+      });
     });
     node.querySelectorAll("input[data-fill]").forEach(function (t) {
       t.addEventListener("input", function () {
@@ -873,6 +898,30 @@
       return;
     }
 
+    // Give the student an opportunity to expand a short answer without
+    // scoring an attempt or starting the master's 15-minute retry lockout.
+    var shortIndex = firstTooShortShortAnswerIndex(saAnswers);
+    if (shortIndex >= 0) {
+      var advice = {
+        en: "Answer " + (shortIndex + 1) + " is too short to assess. Please write at least a paragraph and submit again.",
+        es: "La respuesta " + (shortIndex + 1) + " es demasiado breve para evaluarla. Escriba al menos un párrafo y vuelva a enviar.",
+        fr: "La réponse " + (shortIndex + 1) + " est trop courte pour être évaluée. Rédigez au moins un paragraphe, puis soumettez à nouveau."
+      };
+      say(bi(advice), "#8a1f1f");
+      document.querySelectorAll(".cts-sa-too-short").forEach(function (n) { n.remove(); });
+      var field = document.querySelector('textarea[data-sa="' + shortIndex + '"]');
+      if (field) {
+        field.setAttribute("aria-invalid", "true");
+        var note = document.createElement("p");
+        note.className = "small cts-sa-too-short";
+        note.setAttribute("role", "alert");
+        note.innerHTML = bi(advice);
+        field.insertAdjacentElement("afterend", note);
+        field.focus();
+      }
+      return;
+    }
+
     graded = true;
     // submitting marks every fill-in, answered or not, as Check would
     for (var fi = 0; fi < fill.length; fi++) fillChecked[fi] = true;
@@ -1053,6 +1102,8 @@
     // the grader itself, so tools/add-fill-ins.mjs's promise -- every drafted
     // answer passes -- can be checked against the page and not a copy
     fillRight: unitFillRight, shortAnswerRight: shortAnswerRight, normalise: normalise,
+    shortAnswerWordCount: shortAnswerWordCount,
+    firstTooShortShortAnswerIndex: firstTooShortShortAnswerIndex,
     policy: { passRatio: PASS_RATIO, lockMasters: LOCK_MASTERS_MIN, lockCert: LOCK_CERT_MIN }
   };
 
