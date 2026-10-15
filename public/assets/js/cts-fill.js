@@ -149,6 +149,7 @@
         : bi({ en: "For your own review: these do not count on the Certificate track. Press Check (or Enter) to see whether your answer is right.",
                es: "Para su propio repaso: no cuentan en el trayecto de Certificado. Pulse Comprobar (o Intro) para ver si su respuesta es correcta.",
                fr: "Pour vous exercer\u00a0: ces questions ne comptent pas pour le parcours Certificat. Appuyez sur Vérifier (ou Entrée) pour savoir si votre réponse est juste." })) + "</p>";
+      if (o.hideAnswers) out += '<p class="cts-fill-note">' + bi({en:"Checking shows Correct or Incorrect and fixes your response for this attempt. Submit the test to read an explanation of each missed question.",es:"Al comprobar verá Correcto o Incorrecto y su respuesta quedará fija en este intento. Envíe el examen para leer una explicación de cada pregunta que no acertó.",fr:"La vérification indique Correct ou Incorrect et fixe votre réponse pour cette tentative. Envoyez l’examen pour lire une explication de chaque question manquée."}) + '</p>';
       qs.forEach(function (q, i) {
         var given = review ? review[i] : st.fillAnswers[i];
         var done = !!review || st.fillChecked[i] || passed;
@@ -161,7 +162,7 @@
         if (q.options) {
           q.options.en.forEach(function (opt, k) {
             var chosen = done && given === opt, right = LV ? !!(res[q.qid] && res[q.qid].verdict === "right") : fillRight(q, opt, fillCodes());
-            var cls = "cts-mc" + (chosen ? (right ? " picked-ok" : " picked-bad") : (!LV && done && right ? " right" : ""));
+            var cls = "cts-mc" + (chosen ? (right ? " picked-ok" : " picked-bad") : (!LV && done && right && !o.hideAnswers ? " right" : ""));
             out += '<button type="button" class="' + cls + '" data-cts-mc="' + i + '" data-cts-opt="' + k + '"' + ((done || lock || working) ? " disabled" : "") + ">" +
                    String.fromCharCode(65 + k) + ". " + bi({ en: esc(opt), es: esc(q.options.es[k]) }) + "</button>";
           });
@@ -176,6 +177,8 @@
           var some = String(given || "").trim();
           out += fillRight(q, given, fillCodes())
             ? '<div class="cts-fill-ok">' + bi({ en: "&#10003; Correct!", es: "&#10003; ¡Correcto!", fr: "&#10003; Correct\u202f!" }) + "</div>"
+            : o.hideAnswers
+            ? '<div class="cts-fill-bad">' + bi({en:"&#10007; Incorrect.",es:"&#10007; Incorrecto.",fr:"&#10007; Incorrect."}) + '</div>'
             : '<div class="cts-fill-bad">' + bi({ en: (some ? "&#10007; Incorrect. " : "") + "Answer: " + esc(q.answer.en),
                                                  es: (some ? "&#10007; Incorrecto. " : "") + "Respuesta: " + esc(q.answer.es), fr: (some ? "&#10007; Incorrect. " : "") + "Réponse\u00a0: " + esc(q.answer.fr || q.answer.en) }) + "</div>";
         }
@@ -244,8 +247,8 @@
       if (v === "right") h = '<div class="cts-fill-ok">' + bi({ en: "&#10003; Correct!", es: "&#10003; ¡Correcto!", fr: "&#10003; Correct\u202f!" }) + "</div>";
       else if (v === "wrong") h = '<div class="cts-fill-bad">' + bi({ en: "&#10007; Incorrect.", es: "&#10007; Incorrecto.", fr: "&#10007; Incorrect." }) + "</div>";
       else h = '<div class="cts-fill-bad" style="color:#8a5a00">' + bi(G.S.savedPending) + "</div>";
-      if (r.feedback) h += '<p class="small cts-grade-feedback">' + esc(r.feedback) + "</p>";
-      if (v === "wrong" && r.answer != null) h += '<p class="small">' + bi({ en: "Answer: ", es: "Respuesta: ", fr: "Réponse\u00a0: " }) + esc(typeof r.answer === "object" ? (r.answer.en || "") : r.answer) + "</p>";
+      if (r.feedback && !o.hideAnswers) h += '<p class="small cts-grade-feedback">' + esc(r.feedback) + "</p>";
+      if (v === "wrong" && r.answer != null && !o.hideAnswers) h += '<p class="small">' + bi({ en: "Answer: ", es: "Respuesta: ", fr: "Réponse\u00a0: " }) + esc(typeof r.answer === "object" ? (r.answer.en || "") : r.answer) + "</p>";
       if (v === "wrong" && r.by !== "exact" && r.by !== "rule") {
         var ap = { gradeId: r.gradeId, attemptId: LV.attemptId(), qid: q.qid };
         G.appeal.remember(ap);

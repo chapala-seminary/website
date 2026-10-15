@@ -82,13 +82,13 @@ ok(/(^|\D)2(\D|$)/.test(held), 'and how many units are recorded',
 /* ---- the delete --------------------------------------------------------- */
 await a.page.click('#delete-btn');                 // arms
 await a.page.waitForTimeout(150);
-const stillThere = await (await fetch(`${BASE}/api/student/${encodeURIComponent(a.code)}`)).ok;
+const stillThere = await (await fetch(`${BASE}/api/student/${encodeURIComponent(a.code)}`, { headers: { connection: 'close' } })).ok;
 ok(stillThere, 'one press does not delete anything — a mis-tap costs nothing');
 
 await a.page.click('#delete-btn');                 // confirms
 await a.page.waitForTimeout(900);
 
-const after = await fetch(`${BASE}/api/student/${encodeURIComponent(a.code)}`);
+const after = await fetch(`${BASE}/api/student/${encodeURIComponent(a.code)}`, { headers: { connection: 'close' } });
 ok(after.status === 404, 'pressing again really removes the record from the seminary',
   `GET /api/student/<code> returned ${after.status}`);
 ok(await a.page.evaluate(() => window.CTS_SYNC.code()) === null,

@@ -11,7 +11,9 @@ assert.equal(root.querySelectorAll('[data-cts-fallback]').length, 0);
 assert.equal(root.querySelectorAll('.cts-translation-pending').length, 0);
 assert.ok(root.querySelectorAll('.cts-reading').every(n=>n.getAttribute('lang') === 'fr'));
 assert.equal(root.querySelectorAll('#catalog a.course').length, 45);
-assert.equal(root.querySelectorAll('#textbooks a.textbook').length, 11);
+assert.equal(root.querySelectorAll('#textbooks a.textbook:not(.reading)').length, 45);
+assert.equal(root.querySelectorAll('#required-readings a.textbook.reading').length, 45);
+assert.equal(root.querySelectorAll('#textbooks a.tb-test-link').length, 90);
 assert.ok(root.querySelector('#catalog').text.includes('traduction française provisoire, en cours de relecture'));
 // Every course has a French draft, so every card carries the badge.
 assert.equal(root.querySelectorAll('#catalog a.course .c-fr').length, 45);
@@ -103,5 +105,5 @@ try {
     assert.deepEqual(errors,[]);
     await context.close();
   }
-  console.log('French landing: complete copy, 45 courses, 11 readings, metadata, mobile layout, source toggle and registration states — PASS');
+  console.log('French landing: complete copy, 45 courses, 45 textbooks and 45 reading sets, metadata, mobile layout, source toggle and registration states — PASS');
 } finally { await browser.close(); }

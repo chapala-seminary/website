@@ -183,7 +183,7 @@
     function mount() {
       var qs = (Array.isArray(state.draw) ? state.draw : []).map(function (i) { return T.questions[i]; });
       fill = window.CTSFill.mount({
-        host: host, questions: qs, state: state,
+        host: host, questions: qs, state: state, hideAnswers: true,
         counts: function () { return true; },
         lockedUntil: lockUntil,
         passed: function () { return !!passedOn() && !practice; },
@@ -193,6 +193,7 @@
       fill.render();
       renderStatus();
       scheduleUnlock();
+      renderReview();
     }
 
     /* What the seminary's record says about this test for this student
@@ -264,13 +265,51 @@
     }
     function say(msg, colour) { result.innerHTML = msg ? '<span style="color:' + (colour || "#000") + '">' + msg + "</span>" : ""; }
 
+    // Review is generated from assigned teaching paragraphs, not answer keys.
+    // It is deliberately separate from CTSFill's per-item correctness display.
+    function renderReview() {
+      var reviewHost = el("tb-review");
+      if (!reviewHost) {
+        reviewHost = document.createElement("section"); reviewHost.id = "tb-review";
+        reviewHost.className = "tb-review";
+        result.parentNode.appendChild(reviewHost);
+      }
+      var snapshot = state.review, bank = window.CTS_EXAM_REVIEW;
+      reviewHost.innerHTML = "";
+      if (!snapshot || !Array.isArray(snapshot.draw) || (!Array.isArray(snapshot.answers) && !Array.isArray(snapshot.missed))) return;
+      if (LIVE && !snapshot.missed) return;
+      var codes = snapshot.codes || (window.CTSLanguage && window.CTSLanguage.lang === "fr" ? ["fr", "en"] : ["en", "es"]);
+      var items = "";
+      snapshot.draw.forEach(function (index, position) {
+        var q = T.questions[index];
+        if (!q || (snapshot.missed ? !snapshot.missed[position] : window.CTSFill.fillRight(q, snapshot.answers[position], codes))) return;
+        var passage = bank && bank.slug === slug && bank.questions[index];
+        items += '<article class="tb-review-item"><h3>' + bi({en:"Question " + (position+1),es:"Pregunta " + (position+1),fr:"Question " + (position+1)}) + '</h3><p>' + bi({en:esc(q.prompt.en),es:esc(q.prompt.es),fr:q.prompt.fr ? esc(q.prompt.fr) : undefined}) + '</p>';
+        if (passage) {
+          items += '<p>' + bi(passage.kind === 'lesson' ? {en:"The course lesson explains this question’s principle or context:",es:"La lección del curso explica el principio o contexto de esta pregunta:",fr:"La leçon du cours explique le principe ou le contexte de cette question :"} : {en:"The assigned reading explains this question’s principle or context:",es:"La lectura asignada explica el principio o contexto de esta pregunta:",fr:"La lecture assignée explique le principe ou le contexte de cette question :"}) + '</p><blockquote lang="' + esc(passage.lang) + '">';
+          passage.paragraphs.forEach(function (paragraph) { items += '<p>' + esc(paragraph) + '</p>'; });
+          items += '</blockquote><p><a href="' + esc(passage.href) + '">' + bi({en:"Read in context: ",es:"Leer en contexto: ",fr:"Lire dans son contexte : "}) + esc(passage.heading) + '</a></p>';
+        } else {
+          items += '<p><a href="/' + esc(T.page) + '.html">' + bi(W.review) + '</a></p>';
+        }
+        items += '</article>';
+      });
+      if (!items) return;
+      reviewHost.innerHTML = '<h2>' + bi({en:"Learn from the questions you missed",es:"Aprenda de las preguntas que no acertó",fr:"Apprenez des questions manquées"}) + '</h2><p>' + bi({en:"Read each explanation, then revisit its assigned section before another attempt. These passages retain the reading author’s perspective.",es:"Lea cada explicación y vuelva a su sección asignada antes de otro intento. Estos pasajes conservan la perspectiva del autor de la lectura.",fr:"Lisez chaque explication, puis revenez à la section assignée avant une nouvelle tentative. Ces passages conservent le point de vue de l’auteur de la lecture."}) + '</p>' + items;
+    }
+
     function submit() {
       if (LIVE) return liveSubmit();
       if (lockRemaining()) { renderStatus(); return; }
       if (passedOn() && !practice) return;
       var sentAnswers = state.draw.map(function (bi, k) { return { qid: (reading ? "rd:" : "tb:") + slug + "/fill/" + bi, answer: state.fillAnswers[k] }; })
         .filter(function (a) { return String(a.answer || "").trim(); });
+      var submittedAnswers = state.fillAnswers.slice();
       var r = fill.submit();
+      var reviewCodes = window.CTSLanguage && window.CTSLanguage.lang === "fr" ? ["fr", "en"] : ["en", "es"];
+      state.review = { draw: state.draw.slice(), answers: submittedAnswers, codes: reviewCodes,
+        missed: state.draw.map(function (index,position) { return !window.CTSFill.fillRight(T.questions[index],submittedAnswers[position],reviewCodes); }) };
+      save();
       var ok = r.score >= T.pass, completedNow = false;
       /* Shadow mode: cts-shadow.js posts what was submitted to /api/shadow.
          Grades nothing; no listener, no effect. */
@@ -309,12 +348,13 @@
       }
       fill.render();
       renderStatus();
+      renderReview();
       scheduleUnlock();
     }
     function reset() {
       if (LIVE) return liveReset();
       if (lockRemaining() || (passedOn() && !practice)) return;
-      fill.reset(); save(); say(""); fill.render();
+      delete state.review; fill.reset(); save(); say(""); fill.render(); renderReview();
     }
 
     /* ---- LIVE MODE: the server draws, grades and decides -------------------- */
@@ -397,7 +437,7 @@
           var idx = (((S.items || {}).fill) || []).map(bankIndex).filter(function (i) { return i >= 0; });
           if (!idx.length) { L.status = "ready"; return liveTrouble({ status: 500 }, liveStart); }
           L.S = S; L.attemptId = S.attemptId;
-          if (state.attemptId !== S.attemptId) { state.fillAnswers = []; state.fillChecked = []; }
+          if (state.attemptId !== S.attemptId) { state.fillAnswers = []; state.fillChecked = []; delete state.review; }
           state.draw = idx; state.attemptId = S.attemptId;
           setLock(S.lock);
           L.status = "ready";
@@ -435,7 +475,17 @@
       var sc = G.scoreOf(R && R.scores, "fill"), right = sc ? sc.right : fill.liveScore(), total = sc ? sc.total : state.draw.length;
       return { right: right, total: total };
     }
+    function captureLiveReview(R) {
+      var verdicts = G.verdictsOf(R), draw = (state.draw || []).slice();
+      if (!draw.length) return;
+      state.review = { draw: draw, missed: draw.map(function (index) {
+        var grade = verdicts[T.questions[index].qid];
+        return !grade || grade.verdict === "wrong";
+      }) };
+      save(); renderReview();
+    }
     function livePass(R) {
+      captureLiveReview(R);
       var d = new Date(), when = d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
       lsSet(KEY.passed, when); lsDel(KEY.pending);
       var all = jget("cts_textbooks_passed", []); if (all.indexOf(slug) === -1) { all.push(slug); lsSet("cts_textbooks_passed", JSON.stringify(all)); }
@@ -458,6 +508,7 @@
       renderStatus();
     }
     function liveFail(R) {
+      captureLiveReview(R);
       lsDel(KEY.pending);
       if (L.stopPoll) { L.stopPoll(); L.stopPoll = null; }
       var l = G.lockOf(R.lock), mins = isMasters() ? LOCK_MASTERS_MIN : LOCK_CERT_MIN;

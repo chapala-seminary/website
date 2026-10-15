@@ -42,7 +42,7 @@ export function frenchLanding(root: HTMLElement) {
   for (const node of root.querySelectorAll('.en')) {
     if (node.closest('[data-cts-legacy-control]') || node.parentNode?.closest('.en')) continue;
     // Course names and descriptions take their French from src/content/courses.
-    const card = catalogFrench(node);
+    const card = node.innerHTML in translations || node.text in translations ? null : catalogFrench(node);
     const key = node.innerHTML in translations ? node.innerHTML : node.text;
     const text = card ?? translations[key];
     if (text == null) throw new Error(`Missing French landing translation: ${node.innerHTML}`);

@@ -9,7 +9,7 @@
  *   - says it is not yet required;
  *   - draws twenty distinct questions, four from each of the five readings,
  *     and a fresh attempt draws differently;
- *   - marks each answer at once, showing the right answer to a wrong one;
+ *   - marks each answer at once, withholding the key for a wrong one;
  *   - eighteen right (90%) passes, in English or in Spanish; seventeen fails
  *     and locks the page for the master's wait (15 minutes); after the wait a
  *     fresh twenty are drawn and a pass is kept; a practice round after a
@@ -121,7 +121,7 @@ async function answer(p, right, lang = 'en') {
   await p.locator('input[data-cts-fill="0"]').fill('xyzzy wrong');
   await p.locator('button[data-cts-fill-check="0"]').click();
   const fb = await p.locator('.cts-fill-bad').first().innerText().catch(() => '');
-  ok(fb.includes(q0.answer.en) || fb.includes(q0.answer.es), 'a wrong answer is marked at once and shows the right answer', fb);
+  ok(/Incorrect/i.test(fb) && !fb.includes(q0.answer.en) && !fb.includes(q0.answer.es), 'a wrong answer is marked without revealing the key', fb);
   ok(errs.length === 0, 'page errors on the reading test', errs[0]);
   await ctx.close();
 }

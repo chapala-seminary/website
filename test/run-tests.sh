@@ -165,6 +165,7 @@ node tools/verify-sitemap.mjs dist
 # accepts is one the grader marks right, and no staff-only answer file is
 # published.
 node tools/verify-textbooks.mjs dist
+node test/wayne-feedback.test.mjs --static
 # French reading material (tools/french-readings.mjs): stored with
 # provenance, every French and English key graded right on the French page,
 # draft French pages marked, the English and Spanish pages unchanged.
@@ -301,6 +302,7 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   # MC, fill-ins, written answers, pending, lockout, retake, offline, appeal,
   # the textbook draw, a visitor who has not registered. dist/ is the live build.
   node test/grading-ui.test.mjs "http://127.0.0.1:$PORT"
+  node test/wayne-live-feedback.test.mjs "http://127.0.0.1:$PORT"
   # ...and the same pages against the real Worker, with no stub: a student takes
   # a unit, a textbook test and the last unit of a course; a master's student
   # fails, is locked, retakes and has a pending answer finished by the cron; an
@@ -371,6 +373,7 @@ node test/published-models.test.mjs
   node tools/verify-textbook-test.mjs "$SHADOW"
   node test/assigned-reading-corrections.test.mjs "$SHADOW"
   node tools/verify-textbook-mc.mjs "$SHADOW"
+  node test/wayne-feedback.test.mjs "$SHADOW"
   # ...and a French test page: French questions, French and English answers.
   node test/french-readings.test.mjs "$SHADOW"
   # ...and the Master's five-reading test beside a textbook's: four from each

@@ -36,7 +36,7 @@ function token({ email = 'wayne@example.test', key = crypto.createPrivateKey({ k
   return `${head}.${body}.${crypto.sign('sha256', Buffer.from(`${head}.${body}`), key).toString('base64url')}`;
 }
 const WAYNE = 'wayne@example.test', TED = 'ted@example.test';
-const as = (email) => ({ 'cf-access-jwt-assertion': token({ email }) });
+const as = (email) => ({ 'cf-access-jwt-assertion': token({ email }), connection: 'close' });
 const sget = (p, email = WAYNE) => fetch(BASE + p, { headers: as(email), redirect: 'manual' });
 const spost = (p, fields, email = WAYNE, extra = {}) => fetch(BASE + p, { method: 'POST', redirect: 'manual',
   headers: { ...as(email), 'content-type': 'application/x-www-form-urlencoded', ...extra }, body: new URLSearchParams(fields) });

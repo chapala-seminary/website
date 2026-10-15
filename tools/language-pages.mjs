@@ -4,6 +4,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { parse } from 'node-html-parser';
+import { courseReadingsBox, READING_ROOM } from '../src/lib/partials.ts';
 import { shell } from '../src/lib/shell.ts';
 import { LANGUAGES, NAMES, localeHref, localizeMarkup, renderLanguageLesson } from '../src/lib/language-content.ts';
 
@@ -31,7 +32,7 @@ function rewriteLinks(root, file, lang, files) {
   }
 }
 function control(file, lang, sourceLang, translated) {
-  const choices = LANGUAGES.map(l => `<a class="cts-language-choice${l === lang ? ' active' : ''}" data-cts-lang="${l}" aria-current="${l === lang ? 'page' : 'false'}" href="${localeHref(file, l)}?cts_lang=${l}">${NAMES[l]}</a>`).join('');
+  const choices = LANGUAGES.map(l => `<a class="cts-language-choice${l === lang ? ' active' : ''}" translate="no" lang="${l}" data-cts-lang="${l}" aria-current="${l === lang ? 'page' : 'false'}" href="${localeHref(file, l)}?cts_lang=${l}">${NAMES[l]}</a>`).join('');
   const label = lang === 'es' ? `Mostrar ${NAMES[sourceLang] || sourceLang}` : lang === 'fr' ? `Afficher ${sourceLang === 'en' ? 'l’anglais' : NAMES[sourceLang] || sourceLang}` : `Show ${NAMES[sourceLang] || sourceLang}`;
   return `<div class="cts-language-controls"><div class="cts-language-choices" role="group" aria-label="${lang === 'fr' ? 'Langue' : lang === 'es' ? 'Idioma' : 'Language'}">${choices}</div>${lang !== sourceLang ? `<label class="cts-source-control"><input type="checkbox" id="cts-show-source"${translated ? '' : ' disabled'}> ${label}</label>` : ''}</div>`;
 }
@@ -67,6 +68,17 @@ export function buildLanguagePages(dir) {
         const header = root.querySelector('.cts-masthead .wrap');
         if (header && rendered.masthead) header.set_content(rendered.masthead);
       }
+      // Older single-page courses have a literal copy instead of a lesson partial.
+      for (const box of root.querySelectorAll('[data-cts-rrbox]')) {
+        if (!box.text.includes('Honors Readings')) continue;
+        const link = box.querySelector('a[href]')?.getAttribute('href');
+        const room = link?.replace(/^\//, '').replace(/\.html.*$/, '');
+        const course = roomsData.rooms[room]?.course;
+        if (room && course) box.replaceWith(courseReadingsBox(`${room}.html`, course));
+      }
+      if (lesson && !root.querySelector('[data-cts-rrbox]') && READING_ROOM[lesson.course]) {
+        root.querySelector('#lesson')?.insertAdjacentHTML('beforeend',courseReadingsBox(READING_ROOM[lesson.course],lesson.course));
+      }
       if (lang === 'fr' && file === 'index.html') frenchLanding(root);
       // A static page with its own French dictionary (src/data/french-pages).
       const frenchStatic = lang === 'fr' && !lesson && frenchPage(root, file);
@@ -85,6 +97,10 @@ export function buildLanguagePages(dir) {
         ? lesson.blocks.filter(block => block.text[sourceLang]).every(block => !!block.text[lang])
         : !root.querySelectorAll('[data-cts-fallback]').some(content));
       root.querySelector('html').setAttribute('lang', lang);
+      // Native CTS translations should stay in the language the student chose.
+      // Browser auto-translation can otherwise translate French back to English
+      // (including exam wording). Leave fallback pages translatable.
+      if (complete) root.querySelector('html').setAttribute('translate', 'no');
       b.setAttribute('data-page-lang', lang); b.setAttribute('data-source-lang', sourceLang);
       b.setAttribute('data-language-page', file);
       b.setAttribute('data-lang', lang);
