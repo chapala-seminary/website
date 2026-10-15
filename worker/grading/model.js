@@ -19,7 +19,7 @@ import { fakeAIRun } from './fake-ai.js';
 
 export const DEFAULT_MODEL = '@cf/meta/llama-3.3-70b-instruct-fp8-fast';
 export const DEFAULT_FALLBACK = '@cf/openai/gpt-oss-120b';
-export const DEFAULT_VERSION = '2026-10-15.2';
+export const DEFAULT_VERSION = '2026-10-15.3';
 const CAPACITY = /\b(3036|3040|3007)\b/;
 const TIMEOUT_MS = 25000;
 

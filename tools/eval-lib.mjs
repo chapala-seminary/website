@@ -4,7 +4,7 @@
 //
 // An eval item is
 //   { id, qid, kind: 'sa'|'fill', lang: 'en'|'es'|'fr', answer,
-//     expected: 'met'|'not_met'|'partly'|'pending' (sa) | 'right'|'wrong'|'debatable' (fill),
+//     expected: 'met'|'not_met'|'partly'|'pending'|'debatable' (sa) | 'right'|'wrong'|'debatable' (fill),
 //     category, source: 'agent'|'fixture'|'derived', expected_by: 'agent',
 //     relabelled?: string (a review changed the label; says when and why),
 //     holdout?: string, of?: string, base_category?: string, note?: string }
@@ -122,7 +122,7 @@ export function listHumanGraders(dir = EVAL_DIR) {
   const d = path.join(dir, 'human');
   return fs.existsSync(d) ? fs.readdirSync(d).filter(f => f.endsWith('.json')).map(f => f.replace(/\.json$/, '')).sort() : [];
 }
-const SA_EXPECT = new Set(['met', 'not_met', 'partly', 'pending']);
+const SA_EXPECT = new Set(['met', 'not_met', 'partly', 'pending', 'debatable']);   // 'debatable': graded and reported, left out of the bar
 const FILL_EXPECT = new Set(['right', 'wrong', 'debatable']);   // 'debatable': graded and reported, left out of the bar
 export function validateItem(it) {
   const errs = [];

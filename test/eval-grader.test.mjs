@@ -164,7 +164,7 @@ const items = readItemFiles();
 
   let { env, tally } = mk(() => reply(quote));
   let r = await gradeOne({ item: answer, key: skey, env });
-  assert.equal(r.verdict, 'met'); assert.equal(r.via, 'ai'); assert.equal(r.model, '@cf/meta/llama-3.3-70b-instruct-fp8-fast'); assert.equal(r.prompt_version, '2026-10-15.2');
+  assert.equal(r.verdict, 'met'); assert.equal(r.via, 'ai'); assert.equal(r.model, '@cf/meta/llama-3.3-70b-instruct-fp8-fast'); assert.equal(r.prompt_version, '2026-10-15.3');
   assert.equal(calls.length, 1); assert.equal(calls[0].p.temperature, 0); assert.equal(calls[0].p.response_format.type, 'json_schema'); assert.equal(calls[0].p.messages[0].role, 'system');
   assert.equal(tally.input_tokens, 900); assert.equal(tally.output_tokens, 80); assert.equal(tally.byModel['@cf/meta/llama-3.3-70b-instruct-fp8-fast'].calls, 1);
 
