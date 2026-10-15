@@ -78,7 +78,12 @@
     "romans":               { flag: function (n) { return "cts_romans_unit" + n + "_passed"; },  value: "true" },
     "re":                   { flag: function (n) { return "re_unit" + n + "_passed"; },          value: "1" },
     "cs":                   { state: "cts_cs_state" },                 // {n: {passed: true}}
-    "genesis":              { completion: "genesis" }                  // cts_genesis_uN_completion[_track]
+    "genesis":              { completion: "genesis" },                 // cts_genesis_uN_completion[_track]
+    // the single-page courses: one page, a state map per unit ({n: {passed: true}}); Ethics has
+    // a page per unit and writes cts_ethics_progress like the unit courses
+    "counseling":           { state: "cts_drakeford_state" },
+    "storytel":             { state: "cts_storytel_state" },
+    "wisespeak":            { state: "cts_wisespeak_state" }
   };
   var LEGACY_SLUG = {};                 // old slug -> engine slug
   Object.keys(LEGACY).forEach(function (c) { if (LEGACY[c].slug) LEGACY_SLUG[LEGACY[c].slug] = c; });

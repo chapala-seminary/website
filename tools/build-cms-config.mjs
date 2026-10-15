@@ -198,6 +198,20 @@ const unitsCollection = (langs) => ({
         { label: 'Keywords', name: 'keywords', widget: 'hidden', required: false },
         { ...named('model', 'Model answer', 'text', langs), required: false },
         { label: 'Keywords needed to pass', name: 'minHits', widget: 'number', value_type: 'int', min: 1, required: false },
+        /* The AI grader's rubric (docs/ai-grading.md section 3). English only.
+           Declared so a save does not drop it. */
+        { label: 'Grading rubric', name: 'rubric', widget: 'object', required: false, collapsed: true,
+          hint: 'The 2-4 points a correct answer must make. Change a point and raise the version by one.',
+          fields: [
+            { label: 'Version', name: 'v', widget: 'number', value_type: 'int', min: 1, default: 1 },
+            { label: 'Points', name: 'points', widget: 'list', label_singular: 'Point', min: 2, max: 4,
+              summary: '{{fields.en}}',
+              fields: [
+                { label: 'Id (a, b, c or d)', name: 'id', widget: 'string' },
+                { label: 'Essential (a correct answer must make it)', name: 'essential', widget: 'boolean', default: false },
+                { label: 'Point (English)', name: 'en', widget: 'string' },
+              ] },
+          ] },
       ] },
     /* Ten per unit where present (the build refuses any other number), so
        adding or deleting one here fails the build until it is ten again. */

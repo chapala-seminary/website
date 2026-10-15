@@ -28,7 +28,7 @@ const units = fs.readdirSync('dist').filter((f) => f.endsWith('.html') && html(f
 
 const browser = await chromium.launch(CHROME ? { executablePath: CHROME } : {});
 async function context(seed) {
-  const ctx = await browser.newContext({ locale: 'en-US' });
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' },  locale: 'en-US' });
   await ctx.addInitScript((s) => {
     if (sessionStorage.getItem('seeded')) return;
     for (const [k, v] of Object.entries(s)) localStorage.setItem(k, v);

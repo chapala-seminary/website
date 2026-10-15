@@ -11,7 +11,15 @@
   "main": "../worker/index.js",
   "compatibility_date": "2026-09-01",
   // Nothing is emailed in tests: /api/email/start returns the code instead.
+  // AI grading in the suite: a fake model that answers from hints in the
+  // student's text (worker/grading/fake-ai.js), and the live mode the pages are
+  // built for. AI_FAKE is for this file alone: tools/verify-worker-config.mjs
+  // refuses it in any deployed configuration. The suites for the old rules ask
+  // for the old behaviour per request (worker/grading/mode.js).
+  "triggers": { "crons": ["0 15 * * *", "*/15 * * * *"] },
   "vars": {
+    "AI_FAKE": "1", "GRADING_MODE": "live",
+    "GRADER_MODEL": "@cf/test/primary", "GRADER_MODEL_FALLBACK": "@cf/test/fallback", "GRADER_PROMPT_VERSION": "test.1",
     "EMAIL_MODE": "log", "NOTIFY_TO": "info@example.test",
     // The staff pages, checked against the suite's own signing key instead of
     // Cloudflare Access's (test/fixtures/access-test-key.json holds the private

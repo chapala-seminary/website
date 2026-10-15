@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 const base=process.env.API_BASE||'http://127.0.0.1:8908';
-async function request(path,method='GET',body){const r=await fetch(base+path,{method,headers:{'content-type':'application/json'},body:body?JSON.stringify(body):undefined});assert.ok(r.ok,`${path}: ${r.status}`);return r.json();}
+async function request(path,method='GET',body){const r=await fetch(base+path,{method,headers:{'content-type':'application/json','x-test-grading-mode':'shadow'},body:body?JSON.stringify(body):undefined});assert.ok(r.ok,`${path}: ${r.status}`);return r.json();}
 const record=await request('/api/register','POST',{name:'Language Preference Test',email:'language-test@example.test',track:'cert',lang:'fr'});const code=record.code;let code2=null;
 try{
  let s=await request('/api/student/'+code);assert.equal(s.student.lang,'fr');

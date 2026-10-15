@@ -14,6 +14,7 @@ import Textbook from '../layouts/Textbook.astro';
 import catalog from '../../worker/catalog.json';
 import { testsOfCourseWith, unitCourseWith } from '../lib/required-tests.ts';
 import { frReadingsTitle, frReadingsRoom } from '../lib/french-titles.ts';
+import { live, liveBank } from '../lib/grading-mode';
 
 export async function getStaticPaths() {
   const tests = await getCollection('readings');
@@ -57,7 +58,9 @@ const from = reading.requiredFrom ? new Date(reading.requiredFrom) : null;
 const fromText = from ? { en: from.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }),
                           es: from.toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }),
                           fr: from.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }) } : null;
-const data = JSON.stringify({ slug: reading.slug, page: reading.page, kind: 'reading', title: reading.title, draw, pass, questions, completion,
+const shown = live ? liveBank({ slug: reading.slug, kind: 'reading', questions }) : null;
+const data = JSON.stringify({ slug: reading.slug, page: reading.page, kind: 'reading', title: reading.title, draw, pass, questions: shown ? shown.questions : questions, completion,
+  ...(shown ? { grading: 'live', scope: shown.scope } : {}),
   ...(reading.test.resetWaitOnRevision ? { resetWaitOnRevision: true } : {}),
   ...(perGroup ? { perGroup } : {}), ...(revision ? { revision } : {}), ...(perReading ? { perReading } : {}), ...('requiredFrom' in reading ? { requiredFrom: reading.requiredFrom ?? null } : {}) }).replace(/</g, '\\u003c');
 ---

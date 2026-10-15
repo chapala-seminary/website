@@ -79,7 +79,7 @@ function injectFill(synth) {
 }
 
 async function session(course, unit, track, nCorrect, fillSA = false, fillN = 0) {
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   await examOpen(ctx);
   await ctx.addInitScript(injectFill, SYNTH_FILL);
   const page = await ctx.newPage();
@@ -276,7 +276,7 @@ await Promise.all(Array.from({length:4},sampleWorker));
 //    attempt starts fresh rather than showing a locked, fully-answered form
 {
   const [course, unit] = SAMPLES[0];
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   await examOpen(ctx);
   const page = await ctx.newPage();
   await page.goto(`${BASE}/${course}Unit${unit}.html`, { waitUntil: 'load' });
@@ -311,7 +311,7 @@ await Promise.all(Array.from({length:4},sampleWorker));
 for (const t of ['cert', 'assoc', 'mdiv']) {
   const [course, unit] = SAMPLES.find(([c]) => c === 'CTS1Peter') || SAMPLES[0];
   const label = `${course} u${unit} (${t}, check)`;
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   await examOpen(ctx);
   await ctx.addInitScript(injectFill, SYNTH_FILL);
   const page = await ctx.newPage();
@@ -368,7 +368,7 @@ for (const t of ['cert', 'assoc', 'mdiv']) {
 {
   const [course, unit] = SAMPLES.find(([c]) => c === 'CTS1Peter') || SAMPLES[0];
   const label = `${course} u${unit} (lock)`;
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   await examOpen(ctx);
   await ctx.addInitScript(injectFill, SYNTH_FILL);
   const page = await ctx.newPage();

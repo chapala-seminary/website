@@ -128,7 +128,7 @@ const DRIVERS = [
 const browser = await chromium.launch(CHROME ? { executablePath: CHROME } : {});
 
 async function open(d, track, prepare) {
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   const p = await ctx.newPage();
   const errs = [];
   p.on('pageerror', (e) => errs.push(e.message));

@@ -18,8 +18,14 @@ STATE=.wrangler-local
 CONFIG=test/wrangler.local.jsonc
 
 node test/single-completion.test.mjs
+# The grading rules with no server: the fill-in text rules against the browser
+# engine's own functions, copied questions, the pass rules per track, which
+# text is held for a person, what the model's reply must satisfy.
+node test/grading-unit.test.mjs
 node test/single-page-readings.test.mjs
 node tools/verify-staged-readings.mjs
+node tools/verify-rubrics.mjs
+node test/eval-grader.test.mjs
 
 # A fresh database every run. The suite used to keep whatever the last run
 # left behind, which is fine until something in the schema counts -- the
@@ -29,6 +35,21 @@ node tools/verify-staged-readings.mjs
 rm -rf "$STATE"
 mkdir -p "$STATE"
 [ -d dist ] || { echo "run 'npm run build' first"; exit 2; }
+# AI grading (docs/ai-grading.md). dist/ is the live build: it must carry no
+# answer key. The browser tests written for the engine as it was -- the page
+# holds the keys and grades -- run against a shadow-mode build (dist-shadow/,
+# served by test/shadow-server.mjs beside the Worker), where that engine still
+# is. SKIP_SHADOW_BUILD=1 reuses an existing dist-shadow/.
+node tools/verify-no-keys.mjs dist
+if [ -z "${SKIP_SHADOW_BUILD:-}" ] || [ ! -d dist-shadow ]; then
+  # the shadow build rewrites .astro/language-base, which the prose and render
+  # checks read as the live build's: put it back
+  rm -rf "$STATE/language-base-live"; cp -R .astro/language-base "$STATE/language-base-live"
+  npm run build:shadow >/dev/null
+  rm -rf .astro/language-base; mv "$STATE/language-base-live" .astro/language-base
+fi
+node tools/verify-no-keys.mjs --expect-keys dist-shadow
+SHADOW_PORT=$((PORT + 1))
 # Copied in for the run and removed again on the way out: a fixture page left
 # behind in dist/ would be uploaded with the next deploy. The reference index
 # is the hand-written front page as it stood before the catalog was generated,
@@ -76,6 +97,10 @@ npx wrangler d1 execute chapala-students --local --persist-to "$STATE" \
 npx wrangler d1 execute chapala-students --local --persist-to "$STATE" \
   --config "$CONFIG" --file test/fixtures/sync-write-counts.sql >/dev/null
 
+# The answer keys the pages no longer carry (docs/ai-grading.md, section 4):
+# every graded question into grading_keys, as a deploy puts them.
+node tools/sync-grading-keys.mjs --env local --state "$STATE"
+
 # Nothing else may be on this port. A dev server left behind by an earlier run
 # answers /api/health perfectly well while pointing at a database directory
 # this run has just deleted -- so the suite comes up green on the parts that do
@@ -100,7 +125,9 @@ fi
 npx wrangler dev --config "$CONFIG" --port "$PORT" --persist-to "$STATE" --test-scheduled \
   > "$STATE/dev.log" 2>&1 &
 DEV=$!
-trap 'kill $DEV 2>/dev/null || true; rm -f dist/synctest.html dist/syncdown.html dist/_reference-index.html ./_reference-index.html' EXIT
+node test/shadow-server.mjs "$SHADOW_PORT" "$PORT" dist-shadow > "$STATE/shadow.log" 2>&1 &
+SHADOW_PID=$!
+trap 'kill $DEV $SHADOW_PID 2>/dev/null || true; rm -f dist/synctest.html dist/syncdown.html dist/_reference-index.html ./_reference-index.html' EXIT
 
 for i in $(seq 1 60); do
   sleep 1
@@ -111,6 +138,8 @@ done
 # How every URL is answered. This is what the decision not to use Cloudflare
 # Pages rests on: .html served rather than redirected, and "/" resolved to
 # index.html by the Worker, since html_handling "none" stops doing it.
+SHADOW="http://127.0.0.1:$SHADOW_PORT"
+for i in $(seq 1 20); do curl -sf "$SHADOW/api/health" >/dev/null && break; sleep 0.5; done
 node tools/verify-worker-routing.mjs "http://127.0.0.1:$PORT"
 
 # And that the config the suite just tested still matches the one that gets
@@ -206,7 +235,7 @@ node tools/verify-editable.mjs
 # a course using the honours box with no reading room recorded for it.
 node tools/verify-partials.mjs
 
-API_BASE="http://127.0.0.1:$PORT" node test/api.test.mjs
+API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/api.test.mjs
 API_BASE="http://127.0.0.1:$PORT" SYNC_WRITE_STATE="$STATE" node test/sync-writes.test.mjs
 API_BASE="http://127.0.0.1:$PORT" EMAIL_TEST_STATE="$STATE" node test/email-options.test.mjs
 API_BASE="http://127.0.0.1:$PORT" node test/student-language.test.mjs
@@ -217,6 +246,19 @@ API_BASE="http://127.0.0.1:$PORT" node test/beta-activation.test.mjs
 # record cases (a completion from before activation is written straight into
 # this run's database), Certificate and Associate unchanged.
 API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/required-tests.api.mjs
+
+# AI grading and server-written credit (docs/ai-grading.md): attempts, multiple
+# choice, written answers graded by the fake model, track rules, lockouts, the
+# pending queue run by the 15-minute cron, appeals, the hourly cap, course
+# completion, /api/sync in live mode, and the shadow trial. The old-rules suites
+# above and below ask for the old /api/sync with x-test-grading-mode: shadow.
+API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/grading-api.test.mjs
+
+# The faculty's grading pages (/staff/grading, worker/staff-grading.js):
+# appeals that pass a unit, pending answers, blind calibration and its
+# agreement figures, fill-in rulings and tools/apply-accepts.mjs, possible
+# copying, usage, the Monday digest line, and what deleting a student removes.
+API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/staff-grading.test.mjs
 
 # The student tracker: the staff roster behind Cloudflare Access, and the notes
 # to students who have gone quiet (worker/staff.js, worker/outreach.js).
@@ -243,11 +285,34 @@ curl -sf "http://127.0.0.1:$PORT/__scheduled?cron=0+15+*+*+*" >/dev/null && slee
   && echo "PASS — the daily run for the notes to students completes." \
   || { echo "FAIL — the daily scheduled run failed:"; grep -E "outreach|digest" "$STATE/dev.log" | tail -5; exit 1; }
 
+# ...and the 15-minute run of the grading queue completes without an error.
+curl -sf "http://127.0.0.1:$PORT/__scheduled?cron=*%2F15+*+*+*+*" >/dev/null && sleep 2 \
+  && ! grep -q "grading queue error" "$STATE/dev.log" \
+  && grep -q '^grading queue {' "$STATE/dev.log" \
+  && echo "PASS — the 15-minute grading queue run completes." \
+  || { echo "FAIL — the grading queue run failed:"; grep -E "grading queue" "$STATE/dev.log" | tail -5; exit 1; }
+
 # Some environments (the sandboxed Linux VM the desktop app runs commands in,
 # for one) have node and wrangler but not the shared libraries Chromium needs.
 # A skip is reported loudly and names what went unverified: a quiet skip is how
 # a suite ends up proving nothing.
 if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{};p.chromium.launch(o).then(b=>b.close()).catch(()=>process.exit(1))" 2>/dev/null; then
+  # The live-mode browser (docs/ai-grading.md) against a stubbed grading API:
+  # MC, fill-ins, written answers, pending, lockout, retake, offline, appeal,
+  # the textbook draw, a visitor who has not registered. dist/ is the live build.
+  node test/grading-ui.test.mjs "http://127.0.0.1:$PORT"
+  # ...and the same pages against the real Worker, with no stub: a student takes
+  # a unit, a textbook test and the last unit of a course; a master's student
+  # fails, is locked, retakes and has a pending answer finished by the cron; an
+  # appeal; a second device; what went over the wire (docs/ai-grading.md, section 12).
+  STATE="$STATE" CONFIG="$CONFIG" node test/grading-e2e.test.mjs "http://127.0.0.1:$PORT"
+  # ...and the courses that grade on engines of their own (Genesis's unit pages, Ethics,
+  # Counseling, Narrative and WiseSpeak Preaching) the same way: the server is the grader
+  # of record, the pages carry no key, the credit is the server's (docs/ai-grading.md, section 15).
+  STATE="$STATE" CONFIG="$CONFIG" node test/single-live.test.mjs "http://127.0.0.1:$PORT"
+  # ...and the shadow build still posts each submitted unit to /api/shadow, with
+  # the keys in its pages and the old engine unchanged.
+  node test/shadow-mode.test.mjs "$SHADOW"
   node test/engine-languages.mjs
   node test/missing-sa-grading.test.mjs
   node test/french-drafts.test.mjs
@@ -259,7 +324,7 @@ node test/published-models.test.mjs
   # Short answers in John, Matthew, Acts and Romans (French Batch 2 review):
   # a copied question never passes, correct answers do, known wrong ones fail.
   node test/sa-keywords.test.mjs
-  node tools/verify-french-interface.mjs "http://127.0.0.1:$PORT"
+  node tools/verify-french-interface.mjs "$SHADOW"
   node tools/verify-french-landing.mjs "http://127.0.0.1:$PORT"
   SYNC_BASE="http://127.0.0.1:$PORT" node test/sync.test.mjs
   SYNC_BASE="http://127.0.0.1:$PORT" node test/textbook-sync.test.mjs
@@ -272,7 +337,7 @@ node test/published-models.test.mjs
   fi
   node tools/verify-mobile.mjs "http://127.0.0.1:$PORT" dist 390
   node tools/verify-language.mjs "http://127.0.0.1:$PORT" dist
-  node tools/audit-controls-built.mjs "http://127.0.0.1:$PORT"
+  node tools/audit-controls-built.mjs "$SHADOW"
   node tools/verify-devmode.mjs "http://127.0.0.1:$PORT"
   node tools/verify-certificates.mjs "http://127.0.0.1:$PORT"
   # Registering a certificate from the page: email confirmed once, a
@@ -280,35 +345,37 @@ node test/published-models.test.mjs
   node tools/verify-certify.mjs "http://127.0.0.1:$PORT"
   # A course completes when its last unit is passed, never when its
   # certificate page is opened; the seminary hears about it once.
-  node tools/verify-completion.mjs "http://127.0.0.1:$PORT"
+  node tools/verify-completion.mjs "$SHADOW"
   node tools/verify-cms-loads.mjs "http://127.0.0.1:$PORT"
   # 948 assertions that the built site implements the agreed assessment policy
   # -- pass mark, lockouts, track rules. Also never run by this suite before.
-  node tools/engine-test-built.mjs "http://127.0.0.1:$PORT"
+  node tools/engine-test-built.mjs "$SHADOW"
   # A failed attempt always says how to retake: Submit when it cannot pass,
   # the time left when the page opens during the wait (Wayne, 5 Oct 2026).
-  node tools/verify-retake.mjs "http://127.0.0.1:$PORT"
+  node tools/verify-retake.mjs "$SHADOW"
+  # (These three drive the one-page courses' own engines and read their keys: they run on the
+  # shadow build, where those engines are as they were; the live build is test/single-live.test.mjs.)
   # The same fill-in rules on the four courses the engine does not run:
   # Counseling, Narrative and WiseSpeak Preaching, and Ethics.
-  node tools/verify-fill-single.mjs "http://127.0.0.1:$PORT"
-  node tools/verify-french-wisespeak.mjs "http://127.0.0.1:$PORT"
+  node tools/verify-fill-single.mjs "$SHADOW"
+  node tools/verify-french-wisespeak.mjs "$SHADOW"
   # Narrative Preaching, Counseling and Ethics French drafts: packets match the
   # pages, French models meet their keywords, /fr/ pages grade and read in French.
   node tools/french-static-courses.mjs --check
   node tools/verify-french-static-packets.mjs
-  node tools/verify-french-static.mjs "http://127.0.0.1:$PORT"
-  node tools/verify-single-completion.mjs "http://127.0.0.1:$PORT"
+  node tools/verify-french-static.mjs "$SHADOW"
+  node tools/verify-single-completion.mjs "$SHADOW"
   # The textbook tests (Oct 2026): twenty drawn from forty, eighteen to pass,
   # locked after a failure, a fresh draw after the wait -- as a student
   # would use the page.
-  node tools/verify-textbook-test.mjs "http://127.0.0.1:$PORT"
-  node test/assigned-reading-corrections.test.mjs "http://127.0.0.1:$PORT"
-  node tools/verify-textbook-mc.mjs "http://127.0.0.1:$PORT"
+  node tools/verify-textbook-test.mjs "$SHADOW"
+  node test/assigned-reading-corrections.test.mjs "$SHADOW"
+  node tools/verify-textbook-mc.mjs "$SHADOW"
   # ...and a French test page: French questions, French and English answers.
-  node test/french-readings.test.mjs "http://127.0.0.1:$PORT"
+  node test/french-readings.test.mjs "$SHADOW"
   # ...and the Master's five-reading test beside a textbook's: four from each
   # reading, 90%, retakes, the certificate waiting for whichever is left.
-  node tools/verify-required-tests.mjs "http://127.0.0.1:$PORT"
+  node tools/verify-required-tests.mjs "$SHADOW"
   # A required-reading test drawn by reading (World Religions, revised Oct
   # 2026): four from each of the five readings, and an attempt begun on other
   # questions set aside, the pass and any lock kept. Until the revised bank is
@@ -316,11 +383,11 @@ node test/published-models.test.mjs
   # page with the site's scripts, from the bank the importer would write.
   NEXT_READINGS=$(mktemp -d)
   node tools/import-readings.mjs --next-out "$NEXT_READINGS"
-  node tools/verify-grouped-reading-test.mjs "http://127.0.0.1:$PORT" "$NEXT_READINGS/wrreadings.json"
+  node tools/verify-grouped-reading-test.mjs "$SHADOW" "$NEXT_READINGS/wrreadings.json"
   rm -rf "$NEXT_READINGS"
   # The reading rooms in a browser: the shelf shows, the attestation records
   # under the code the certificate reads, in each family of room.
-  node tools/verify-reading-rooms.mjs "http://127.0.0.1:$PORT"
+  node tools/verify-reading-rooms.mjs "$SHADOW"
   # ...and on the unit design (Oct 2026): English shows no Spanish, Spanish
   # no English, and the source option shows both in every room and on the honors page.
   node tools/verify-room-language.mjs "http://127.0.0.1:$PORT"
@@ -334,15 +401,15 @@ node test/published-models.test.mjs
   node tools/verify-cert-pdf.mjs "http://127.0.0.1:$PORT"
   # Credential boundaries: each course counts toward a degree only at the level
   # it was completed on (Dr. Cook's review, 29 Sept), in the browser and the Worker.
-  node tools/verify-degrees.mjs "http://127.0.0.1:$PORT"
+  node tools/verify-degrees.mjs "$SHADOW"
   API_BASE="http://127.0.0.1:$PORT" node test/thm-study-plans.api.mjs
   # The lesson and its exam are never on screen together, on any unit page, so
   # the browser's Find cannot search the lesson for an answer (29 Sept).
-  node tools/verify-exam-view.mjs "http://127.0.0.1:$PORT"
+  node tools/verify-exam-view.mjs "$SHADOW"
   # Dr. Cook's real-device beta pass (30 Sept): Spanish carries through,
   # fill-ins ignore accents, model answers wait for a real answer, a passed
   # unit says so, and the catalog link reaches the course list.
-  node tools/verify-beta-pass.mjs "http://127.0.0.1:$PORT"
+  node tools/verify-beta-pass.mjs "$SHADOW"
   if [ -n "$HAVE_REFERENCE" ]; then
     node tools/verify-catalog.mjs ./_reference-index.html .astro/language-base/index.html
   else
@@ -354,8 +421,8 @@ node test/published-models.test.mjs
   # code by email; "not me" registers separately (Wayne, 5 Oct 2026).
   API_BASE="http://127.0.0.1:$PORT" DEV_LOG="$STATE/dev.log" node test/dup-register.test.mjs
   # Every generated language page, on desktop and phone, including source text.
-  node tools/verify-language-browser.mjs "http://127.0.0.1:$PORT"
-  node test/french-exam-fallback.test.mjs "http://127.0.0.1:$PORT"
+  node tools/verify-language-browser.mjs "$SHADOW"
+  node test/french-exam-fallback.test.mjs "$SHADOW"
   # French links stay French, and the pages French emails open are French.
   node test/french-routing.test.mjs "http://127.0.0.1:$PORT"
 

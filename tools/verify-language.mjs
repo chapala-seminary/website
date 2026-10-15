@@ -31,7 +31,7 @@ const queue = pages.slice();
 async function worker() {
   while (queue.length) {
     const f = queue.shift();
-    const ctx = await browser.newContext();
+    const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
     await ctx.addInitScript(() => localStorage.setItem('cts_done_codes', JSON.stringify(['CTSOTS','CTSNT','CTSST','CTSEVANGELISM','CTSPM','CTSCH','WISESPEAK'])));
     const page = await ctx.newPage();
     const errs = [];

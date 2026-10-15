@@ -7,7 +7,7 @@ assert(['localhost','127.0.0.1'].includes(new URL(BASE).hostname),'local Worker 
 const browser=await chromium.launch(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{});
 let code;
 try {
- const first=await browser.newContext(),page=await first.newPage();
+ const first=await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } }),page=await first.newPage();
  await page.goto(BASE+'/synctest.html');
  const suffix=crypto.randomUUID();
  await page.evaluate(s=>{
@@ -24,7 +24,7 @@ try {
  assert.deepEqual(state.textbooks.map(x=>[x.textbook,x.passed_at]).sort(),[
   ['newtestament','2026-10-01T12:00:00.000Z'],['ntreadings','2026-10-02T12:00:00.000Z']
  ]);
- const second=await browser.newContext(),restored=await second.newPage();await restored.goto(BASE+'/synctest.html');
+ const second=await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } }),restored=await second.newPage();await restored.goto(BASE+'/synctest.html');
  assert((await restored.evaluate(c=>window.CTS_SYNC.restore(c),code)).ok);
  assert.deepEqual(await restored.evaluate(()=>[
   localStorage.getItem('cts_textbook_newtestament_passed'),localStorage.getItem('cts_textbook_ntreadings_passed')

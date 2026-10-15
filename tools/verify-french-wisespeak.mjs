@@ -6,7 +6,7 @@ const WORDS=new Set(['but','idée','lien','coût','coup','mort','huit','égal','
 const base=process.argv[2]||'http://127.0.0.1:8910';
 const browser=await chromium.launch(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{});
 try{
- const ctx=await browser.newContext();await ctx.addInitScript(()=>{localStorage.setItem('cts_lang','fr');localStorage.setItem('cts_student',JSON.stringify({name:'French Test',email:'french-test@example.invalid',track:'mdiv'}));localStorage.setItem('cts_track','mdiv');localStorage.setItem('cts_done_codes',JSON.stringify(['CTSOTS','CTSNT','CTSST','CTSEVANGELISM','CTSPM','CTSCH','WISESPEAK']));});
+ const ctx=await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });await ctx.addInitScript(()=>{localStorage.setItem('cts_lang','fr');localStorage.setItem('cts_student',JSON.stringify({name:'French Test',email:'french-test@example.invalid',track:'mdiv'}));localStorage.setItem('cts_track','mdiv');localStorage.setItem('cts_done_codes',JSON.stringify(['CTSOTS','CTSNT','CTSST','CTSEVANGELISM','CTSPM','CTSCH','WISESPEAK']));});
  const page=await ctx.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto(base+'/fr/CTS_WiseSpeak_Preaching.html?cts_lang=fr',{waitUntil:'load'});
  await page.waitForSelector('#mcq_1 .question-card');
