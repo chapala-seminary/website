@@ -340,15 +340,17 @@ node test/published-models.test.mjs
   # A failed attempt always says how to retake: Submit when it cannot pass,
   # the time left when the page opens during the wait (Wayne, 5 Oct 2026).
   node tools/verify-retake.mjs "$SHADOW"
+  # (These three drive the one-page courses' own engines and read their keys: they run on the
+  # shadow build, where those engines are as they were; the live build is test/single-live.test.mjs.)
   # The same fill-in rules on the four courses the engine does not run:
   # Counseling, Narrative and WiseSpeak Preaching, and Ethics.
-  node tools/verify-fill-single.mjs "http://127.0.0.1:$PORT"
-  node tools/verify-french-wisespeak.mjs "http://127.0.0.1:$PORT"
+  node tools/verify-fill-single.mjs "$SHADOW"
+  node tools/verify-french-wisespeak.mjs "$SHADOW"
   # Narrative Preaching, Counseling and Ethics French drafts: packets match the
   # pages, French models meet their keywords, /fr/ pages grade and read in French.
   node tools/french-static-courses.mjs --check
   node tools/verify-french-static-packets.mjs
-  node tools/verify-french-static.mjs "http://127.0.0.1:$PORT"
+  node tools/verify-french-static.mjs "$SHADOW"
   node tools/verify-single-completion.mjs "$SHADOW"
   # The textbook tests (Oct 2026): twenty drawn from forty, eighteen to pass,
   # locked after a failure, a fresh draw after the wait -- as a student
