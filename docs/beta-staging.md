@@ -64,11 +64,12 @@ remains identical. New HTML reader templates, links or markup require Robert;
 pure Markdown readings and offline review packets can be added as content. Content does not
 include changing the grading engine; changing academic answer keys is content.
 
-Technical and mixed PRs need Robert's approval of the exact commit as well as
-Wayne's. GitHub Code Owners require Robert for technical paths and Wayne for
-academic paths. A PR changing both needs both owners. Robert cannot approve his
-own PR as a Code Owner: have the agent open technical PRs when Robert is the
-required reviewer. An agent must never impersonate a human reviewer.
+For Wayne/agent PRs, technical and mixed changes need Robert's exact-commit
+approval as well as Wayne's. Code Owners cover technical and academic paths.
+Robert's `satoshisound` account has a named PR-review bypass, and his own
+same-repository PRs are exempt from the faculty/AI approval gate. Build and test
+checks still apply. Wayne and the AI have no bypass. An agent must never
+impersonate a human reviewer.
 
 The agent opens a separate PR from current `beta` to `main` after that exact
 commit's beta deployment and live verification are green. Wayne reviews beta,

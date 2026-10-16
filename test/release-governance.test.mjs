@@ -151,6 +151,11 @@ test('governance API flow requires exact human approvals and tested beta promoti
     assert.notEqual(run({ pr: mainPR, runs: { workflow_runs: [{ head_sha: sha, status: 'completed', conclusion: 'failure' }] } }).status, 0);
     assert.notEqual(run({ pr: mainPR, beta: { object: { sha: 'new-beta' } } }).status, 0);
     assert.notEqual(run({ pr: { ...mainPR, head: { ...mainPR.head, ref: 'unreviewed-feature' } } }).status, 0);
+    const ownPR = { ...mainPR, user: { login: 'satoshisound' }, body: '', head: { ...mainPR.head, ref: 'robert-code' } };
+    assert.equal(run({ pr: ownPR, ...tech, reviews: [] }).status, 0);
+    for (const login of ['ChapalaTheological1', 'chapalatheological-ai'])
+      assert.notEqual(run({ pr: { ...ownPR, user: { login } }, ...tech, reviews: [] }).status, 0);
+    assert.notEqual(run({ pr: { ...ownPR, head: { ...ownPR.head, repo: { full_name: 'other/fork' } } }, reviews: [] }).status, 0);
     const published = run({}, true);
     assert.equal(published.status, 0, published.stderr);
     assert.match(published.stdout, new RegExp(`status:pending:${sha}`));
