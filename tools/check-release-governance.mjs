@@ -22,6 +22,12 @@ const pr = await api(`${prefix}/pulls/${number}`);
 if (pr.state !== 'open') { console.log('Pull request is closed; no merge to authorize.'); process.exit(0); }
 if (!['beta', 'main'].includes(pr.base.ref)) throw new Error('Only beta and main use this release policy.');
 if (pr.draft) throw new Error('Mark the pull request ready for review first.');
+// Robert's own same-repository PRs are exempt from the faculty approval process.
+// Use the authenticated GitHub PR author, never commit metadata or body text.
+if (pr.user?.login?.toLowerCase() === ROBERT.toLowerCase() && pr.head.repo?.full_name === repository) {
+  console.log('Robert-authored PR: faculty approval gate does not apply; build/test checks remain required.');
+  process.exit(0);
+}
 const sha = pr.head.sha;
 if (!reviewEvidence(pr.body, sha)) throw new Error(`PR body must record Review commit: ${sha}, ChatGPT review: https://..., and Claude review: https://... . These are review evidence, not proof of AI identity.`);
 const files = await pages(`${prefix}/pulls/${number}/files`);

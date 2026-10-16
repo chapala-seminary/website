@@ -24,6 +24,10 @@ to the brain's `main`. The rules are in `../brain/AGENT_RULES.md`.
 
 ## Staging and release
 
+Robert’s `satoshisound` account has a named PR-review bypass. His own
+same-repository PRs are exempt from the faculty/AI approval gate; build and test
+checks still apply. Wayne and the AI have no bypass.
+
 New work goes through a PR to `beta`. Record ChatGPT's academic review and
 Claude's check of the exact commit in the PR; Wayne approves it. The separate
 `chapalatheological-ai` account may merge content-only PRs to beta after the

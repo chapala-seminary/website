@@ -7,7 +7,9 @@ dismiss stale approvals, resolved review conversations, and no force pushes or
 deletion, including for administrators. Required checks are `CTS build and tests`
 and `CTS release approval`. Main allows merges only by `satoshisound` and
 `ChapalaTheological1`; beta additionally allows `chapalatheological-ai` once it
-has Write access. There are no agent bypass permissions.
+has Write access. Only `satoshisound` has a named PR-review bypass. His own same-repository PRs
+are exempt from the faculty/AI approval check, while build/test checks still
+apply. `ChapalaTheological1` and `chapalatheological-ai` have no bypass.
 
 The governance workflow reads policy from the trusted base branch, never runs
 PR code with its token, checks the entire file list and publishes its status on
@@ -73,8 +75,7 @@ node tools/configure-release-protection.mjs --apply --checks
  The script refuses
 to require the checks until the policy files exist on both branches. Running
 without `--apply` previews the settings. `--apply` without `--checks` installs
-the initial human-review protections only. The initial setup PRs use those native
-human reviews; the base branch has no governance script yet, so its setup step
+the initial human-review protections with Robert’s named exception. The initial setup PRs use native reviews with Robert’s named bypass; the base branch has no governance script yet, so its setup step
 issues no `CTS release approval` status. Full enforcement starts after both PRs
 are installed and the administrator activates the required checks. The initial main
 installation is a narrowly scoped technical setup PR, not a promotion of all
