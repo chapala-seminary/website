@@ -3,6 +3,13 @@
 Staging: https://beta.chapalaseminary.org — branch `beta`, Worker `chapala-seminary-beta`, database `chapala-students-beta`.
 Production: https://chapalaseminary.org — branch `main`, Worker `chapala-seminary`, database `chapala-students`.
 
+The full test harness keeps its historical catalog reference in
+`.wrangler-local/ref.html` and serves a temporary copy from `dist/`. It must
+leave the tracked root `_reference-index.html` unchanged, including on failure;
+the deployment guard checks that the tested checkout is clean. The beta job
+allows 60 minutes because the complete browser suite can take over 40 minutes
+before publication begins.
+
 ## New work
 
 Start from the latest beta branch and open PRs with base `beta`. Review the change, run `npm run build && npm test` on the Mac, fix failures and merge to beta. Keep related drafts and dependencies identifiable; do not import unreviewed French text into published content.

@@ -100,7 +100,10 @@ async function mcAll(p, bank, wrong = 0) {
 }
 async function fillOne(p, i, text) {
   await p.locator(`input[data-fill="${i}"]`).fill(text);
-  await p.locator(`input[data-fill="${i}"]`).press('Enter');
+  // The live engine replaces the question DOM as server replies arrive.
+  // Click re-resolves the Check control instead of depending on retained focus
+  // between fill() and a keyboard event. Enter is covered by grading-ui.
+  await p.locator(`button[data-fill-check="${i}"]`).click();
   await p.waitForSelector(`.question[data-fill="${i}"] .feedback-text`, { timeout: 30000 });
 }
 async function fillAll(p, bank, { from = 0, special = {} } = {}) {
