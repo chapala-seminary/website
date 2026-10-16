@@ -1,0 +1,40 @@
+name: Test and deploy production
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: cts-production-deploy
+  cancel-in-progress: false
+jobs:
+  production:
+    # Enable only after main matches the approved production baseline and its token is installed.
+    if: github.ref == 'refs/heads/main' && vars.CTS_PRODUCTION_AUTODEPLOY_ENABLED == 'true'
+    environment: production
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - run: npm test
+      - name: Refuse an outdated or dirty production checkout
+        run: node tools/verify-production-branch.mjs
+      - name: Deploy the tested main commit
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CTS_PRODUCTION_CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: '119b0919229edb3185b69f1c6bd04b66'
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN" || { echo "Set CTS_PRODUCTION_CLOUDFLARE_API_TOKEN in the production environment secrets."; exit 1; }
+          npm run deploy
+      - name: Verify the published production release
+        run: node tools/check-production-release.mjs
