@@ -456,7 +456,10 @@
   var OFFER_KEY = 'cts_email_offer';
   function sessionGet(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } }
   function sessionSet(k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} }
-  function words(set) { return window.CTSLanguage ? window.CTSLanguage.bi(set) : set.en; }
+  function words(set) {
+    var lang = window.CTSLanguage && window.CTSLanguage.lang;
+    return (lang && set[lang]) || set.en;
+  }
   function validEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email || ''); }
   function postJson(path, payload) {
     return fetch(API + path, {

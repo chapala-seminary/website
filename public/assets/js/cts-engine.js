@@ -1618,6 +1618,8 @@
     syncLangControls(langNow());
   }
 
+  var LANG_TOGGLE_IDS = ["langToggleBtn", "langToggle", "langBtn", "btnLang", "lang-toggle"];
+
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
 
@@ -1670,7 +1672,6 @@
      of pages carrying an inline onclick, and bound nothing on the rest: pressing
      Español did nothing at all on roughly 440 of the 451 unit pages. It also
      never implemented "both", which those three-button groups depend on. */
-  var LANG_TOGGLE_IDS = ["langToggleBtn", "langToggle", "langBtn", "btnLang", "lang-toggle"];
 
   function langNow() {
     if (document.body.classList.contains("lang-both")) return "both";
