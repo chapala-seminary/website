@@ -114,6 +114,7 @@
         // the other choices set their own rigor and clear the goal.
         var newGoal = (sel === "assoc") ? "assoc" : "";
         var newTrack = (sel === "assoc") ? "cert" : (sel === "thm" ? mthToken() : sel);
+        var oldTrack = localStorage.getItem(KEY), oldGoal = localStorage.getItem('cts_goal');
         localStorage.setItem(KEY, newTrack);
         localStorage.setItem("cts_goal", newGoal);
         // Some courses (Joshua, Matthew, Pentateuch) read the track from the
@@ -121,12 +122,33 @@
         try {
           var s = JSON.parse(localStorage.getItem("cts_student") || "null");
           if (s && typeof s === "object") {
+            var oldStudentTrack = s.track, oldStudentGoal = s.goal;
             s.track = newTrack;
             s.goal = newGoal;
             localStorage.setItem("cts_student", JSON.stringify(s));
           }
         } catch (e) {}
-        location.reload();
+        // Persist the profile before the new page resumes its server sitting.
+        // Reloading first raced the periodic sync and retained the old rigor.
+        var sync = window.CTS_SYNC && window.CTS_SYNC.sync;
+        Array.prototype.forEach.call(wrap.querySelectorAll('button'), function (button) { button.disabled = true; });
+        function failed() {
+          if (oldTrack === null) localStorage.removeItem(KEY); else localStorage.setItem(KEY, oldTrack);
+          if (oldGoal === null) localStorage.removeItem('cts_goal'); else localStorage.setItem('cts_goal', oldGoal);
+          var current = JSON.parse(localStorage.getItem('cts_student') || 'null');
+          if (current && s) { current.track = oldStudentTrack; current.goal = oldStudentGoal; localStorage.setItem('cts_student', JSON.stringify(current)); }
+          Array.prototype.forEach.call(wrap.querySelectorAll('button'), function (button) { button.disabled = false; });
+          menu.style.display = 'none';
+          var note = wrap.querySelector('[role="alert"]');
+          if (!note) { note = document.createElement('p'); note.setAttribute('role', 'alert'); wrap.appendChild(note); }
+          note.textContent = pageLang() === 'es' ? 'No se pudo guardar el cambio de plan. Revise su conexión e inténtelo de nuevo. Sus respuestas se conservan.'
+            : pageLang() === 'fr' ? 'Le changement de parcours n’a pas pu être enregistré. Vérifiez votre connexion et réessayez. Vos réponses sont conservées.'
+            : 'The track change could not be saved. Check your connection and try again. Your answers are kept.';
+        }
+        Promise.resolve(sync ? sync() : null).then(function (state) {
+          if (window.CTSGrading && (!state || !state.student || state.student.track !== newTrack || (state.student.goal || '') !== newGoal)) return failed();
+          location.reload();
+        }, failed);
       });
     });
   }

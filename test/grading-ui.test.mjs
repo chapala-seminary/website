@@ -265,14 +265,14 @@ if (want(5)) {
   await ctx.close();
 }
 
-// 6. Offline: a clear message, nothing graded, then retry
+// 6. Offline: an unconfirmed result, preserved typing, then retry
 if (want(6)) {
   const stub = new GradingStub();
   const { ctx, p } = await open(stub);
   await ready(p);
   stub.offline = true;
   await mcAnswer(p, 0, bank.mc[0].answer);
-  ok(await waitText(p, 'We could not reach the grading service, so nothing was graded.'), 'a multiple-choice click with no network says nothing was graded');
+  ok(await waitText(p, 'We could not confirm the grading result.'), 'a multiple-choice click with no network reports an unconfirmed result');
   ok(await p.locator('.question[data-mc="0"] .option.correct, .question[data-mc="0"] .option.wrong').count() === 0, 'and marks nothing: the page grades nothing itself');
   stub.offline = false;
   await p.locator('[data-cts-retry]').click();
@@ -281,7 +281,7 @@ if (want(6)) {
   stub.offline = true;
   await p.locator('input[data-fill="0"]').fill(bank.fill[0].answer.en);
   await p.locator('button[data-fill-check="0"]').click();
-  ok(await waitText(p, 'nothing was graded'), 'a fill-in Check with no network fails the same way');
+  ok(await waitText(p, 'Your answers are saved'), 'a fill-in Check with no network fails the same way');
   ok(await p.locator('.question[data-fill="0"] .feedback-text').count() === 0 && await p.locator('input[data-fill="0"]').inputValue() === bank.fill[0].answer.en, 'no verdict is shown, and the typing is kept');
   stub.offline = false;
   await p.locator('[data-cts-retry]').click();
@@ -289,7 +289,7 @@ if (want(6)) {
   ok(true, 'a fill-in retry is graded by the server');
   stub.failNext = 503;
   await p.locator('input[data-fill="1"]').fill('x'); await p.locator('input[data-fill="1"]').press('Enter');
-  ok(await waitText(p, 'The grading service had a problem, so nothing was graded.'), 'a server error is said as such');
+  ok(await waitText(p, 'The grading service had a problem.'), 'a server error is said as such');
   stub.failNext = 429;
   await p.locator('[data-cts-retry]').click();
   ok(await waitText(p, 'Too many answers were checked in a short time.'), 'a throttle is said as such');
@@ -298,7 +298,7 @@ if (want(6)) {
   await saAll(p, []);
   stub.offline = true;
   await p.locator('#submitExamBtn').click();
-  ok(await waitText(p, 'nothing was graded'), 'Submit with no network says nothing was graded');
+  ok(await waitText(p, 'Your answers are saved'), 'Submit with no network confirms the answers are saved');
   ok(await p.locator('textarea[data-sa="0"]').inputValue().then((v) => v.includes('My answer to 1')) && await p.locator('textarea[data-sa="0"]').getAttribute('readonly') === null, 'the written answers are kept, and still open');
   ok(await p.locator('#submitExamBtn').isEnabled(), 'Submit works again for a retry');
   ok(JSON.parse((await ls(p, KEYS.progress)) || '{}').unit1 !== true, 'no credit from a failed call');
@@ -392,8 +392,8 @@ if (want(10)) {
 // 11. Spanish and French
 if (want(11)) {
   const words = {
-    es: { path: '/es' + UNIT, appeal: 'Pedir una revisión humana', note: 'Un asistente de IA califica las respuestas escritas según los estándares del curso. Puede pedir una revisión humana de cualquier resultado.', checking: 'Comprobando…', wrong: 'Incorrecto', met: 'Cumple el estándar', saved: 'Guardada: se calificará en breve.', pending: 'Enviado: calificación pendiente.', offline: 'No pudimos comunicarnos con el servicio de calificación', retry: 'Reintentar' },
-    fr: { path: '/fr' + UNIT, appeal: 'Demander une révision par une personne', note: 'Les réponses écrites sont corrigées par un assistant d’IA selon les exigences du cours. Vous pouvez demander une révision par une personne pour n’importe quel résultat.', checking: 'Vérification…', wrong: 'Incorrect', met: 'Répond à l’exigence', saved: 'Enregistrée : elle sera corrigée sous peu.', pending: 'Envoyé : correction en attente.', offline: 'Nous n’avons pas pu joindre le service de correction', retry: 'Réessayer' },
+    es: { path: '/es' + UNIT, appeal: 'Pedir una revisión humana', note: 'Un asistente de IA califica las respuestas escritas según los estándares del curso. Puede pedir una revisión humana de cualquier resultado.', checking: 'Comprobando…', wrong: 'Incorrecto', met: 'Cumple el estándar', saved: 'Guardada: se calificará en breve.', pending: 'Enviado: calificación pendiente.', offline: 'No pudimos confirmar el resultado de la calificación', retry: 'Reintentar' },
+    fr: { path: '/fr' + UNIT, appeal: 'Demander une révision par une personne', note: 'Les réponses écrites sont corrigées par un assistant d’IA selon les exigences du cours. Vous pouvez demander une révision par une personne pour n’importe quel résultat.', checking: 'Vérification…', wrong: 'Incorrect', met: 'Répond à l’exigence', saved: 'Enregistrée : elle sera corrigée sous peu.', pending: 'Envoyé : correction en attente.', offline: 'Nous n’avons pas pu confirmer le résultat de la correction', retry: 'Réessayer' },
   };
   for (const [lang, w] of Object.entries(words)) {
     const stub = new GradingStub(); stub.delay['/grade'] = 400;

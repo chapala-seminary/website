@@ -13,7 +13,7 @@ import { notifyBatch } from '../notify.js';
 import { exactFill, normAnswer, wordCount, copiedOnly } from './text.js';
 import { counts, requirements, evaluate, lockKind, lockMinutes, need, looksLikeInstruction,
   MIN_SA_WORDS, MAX_FILL_CHARS, MAX_SA_CHARS, HOURLY_CAP } from './rules.js';
-import { gradeBatch, modelsOf } from './model.js';
+import { gradeBatch, modelsOf, GRADING_BUDGET_MS } from './model.js';
 import { SINGLES } from './singles.js';
 
 export const nowIso = () => new Date().toISOString();
@@ -486,6 +486,7 @@ export async function cacheDecision(env, qid, lang, norm, verdict, feedback, mod
  *  The caller has checked ownership, lengths and that none is already graded.
  *  Returns one reply item per entry, in order. */
 export async function gradeWritten(env, attempt, entries) {
+  const deadline = Date.now() + GRADING_BUDGET_MS;
   const lang = attempt.lang;
   const { version } = modelsOf(env);
   const out = new Array(entries.length);
@@ -519,7 +520,7 @@ export async function gradeWritten(env, attempt, entries) {
   }
   for (const [kind, idx] of [['fill', fillAsk], ['sa', toModel.sa]]) {
     if (!idx.length) continue;
-    const batch = await gradeBatch(env, kind, lang, idx.map((i) => ({ qid: entries[i].qid, key: entries[i].key, answer: String(entries[i].answer) })));
+    const batch = await gradeBatch(env, kind, lang, idx.map((i) => ({ qid: entries[i].qid, key: entries[i].key, answer: String(entries[i].answer) })), { deadline });
     for (const i of idx) {
       const r = batch.results.get(entries[i].qid);
       if (!r) { out[i] = { verdict: 'pending', by: 'ai', feedback: canned('waiting', lang), queue: batch.error || 'unresolved' }; continue; }
