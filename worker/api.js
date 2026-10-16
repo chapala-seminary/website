@@ -1,4 +1,5 @@
 import { loadThmStudyPlan } from './study-plans.js';
+import { canonicalCountry } from '../src/lib/countries.mjs';
 /* Chapala Theological Seminary — student records API.
  *
  * A plain fetch handler with no framework and no dependencies, so it runs
@@ -254,7 +255,7 @@ async function register(request, env) {
     const res = await env.DB.prepare(
       `INSERT INTO students (id, name, email, country, track, goal, heard, lang, created_at, updated_at)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO NOTHING`)
-      .bind(id, name, email, str(b.country, MAX.country, { field: 'country' }),
+      .bind(id, name, email, canonicalCountry(str(b.country, MAX.country, { field: 'country' })),
         track, str(b.goal, MAX.goal, { field: 'goal' }), str(b.heard, MAX.heard, { field: 'heard' }), lang(b.lang), t, t).run();
     if (res.meta?.changes) return json({ code: id, student: (await loadState(env, id)).student }, 201);
   }
@@ -290,7 +291,7 @@ async function sync(request, env) {
          email = CASE WHEN email_verified_at IS NULL THEN COALESCE(?, email) ELSE email END,
          country = COALESCE(?, country), track = COALESCE(?, track),
          goal = COALESCE(?, goal), heard = COALESCE(?, heard), lang = COALESCE(?, lang), updated_at = ? WHERE id = ?`)
-      .bind(name, str(s.email, MAX.email, { field: 'email' }), str(s.country, MAX.country, { field: 'country' }),
+      .bind(name, str(s.email, MAX.email, { field: 'email' }), canonicalCountry(str(s.country, MAX.country, { field: 'country' })),
         track, str(s.goal, MAX.goal, { field: 'goal' }), str(s.heard, MAX.heard, { field: 'heard' }), lang(b.lang), now(), id));
   }
 

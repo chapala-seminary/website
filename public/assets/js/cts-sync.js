@@ -221,7 +221,14 @@
     ['name', 'email', 'country', 'track', 'goal', 'heard'].forEach(function (f) {
       if (!local[f] && state.student[f]) local[f] = state.student[f];
     });
+    // Confirmation is recorded only by the email challenge. Copy it when the
+    // server has it. A payload that omits it must not wipe a local flag.
+    if (state.student.email_verified_at) local.email_verified_at = state.student.email_verified_at;
     set('cts_student', JSON.stringify(local));
+    if (local.email_verified_at) {
+      var confirmed = document.getElementById('cts-email-confirm');
+      if (confirmed) confirmed.remove();
+    }
     if (!get('cts_track') && state.student.track) set('cts_track', state.student.track);
 
     var done = parse(get('cts_done_codes'), []);
@@ -364,6 +371,7 @@
     inFlight = true;
     var code = get(CODE_KEY);
     var separate = get(SEPARATE_KEY) === who(snap.student);
+    var fresh = false;
 
     var start = code
       ? Promise.resolve(code)
@@ -384,6 +392,7 @@
       }).then(function (r) {
         if (!r || !r.code) return null;
         set(CODE_KEY, r.code);
+        fresh = true;
         try { localStorage.removeItem(EXISTING_KEY); localStorage.removeItem(SEPARATE_KEY); } catch (e) {}
         return r.code;
       });
@@ -392,14 +401,17 @@
       if (!c) return null;
       return send('/sync', { code: c, student: snap.student, progress: snap.progress,
                              doneCodes: snap.doneCodes, completionTracks: snap.completionTracks,
-                             textbooks: snap.textbooks, lang: snap.lang });
-    }).then(function (state) {
-      if (state) {
-        apply(state); lastDigest = digest(snapshot());
+                             textbooks: snap.textbooks, lang: snap.lang })
+        .then(function (state) { return { state: state, code: c }; });
+    }).then(function (packed) {
+      if (!packed) return null;
+      if (packed.state) {
+        apply(packed.state); lastDigest = digest(snapshot());
         var problem = document.getElementById('cts-registration-problem');
         if (problem) problem.remove();
       }
-      return state;
+      try { offerEmail(packed.code, snap, packed.state, fresh); } catch (e) {}
+      return packed.state;
     }).catch(function () { showRegistrationProblem(snap.student); return null; })
       .then(function (r) { inFlight = false; return r; });
   }
@@ -434,6 +446,143 @@
       note.remove(); syncOnce(true);
     });
     note.appendChild(retry); document.body.prepend(note);
+  }
+
+  /* Confirming an email returns a lost code, sends reminders, and unlocks a
+     certificate. It does not gate study. The note is sent once, when the code
+     is first issued. A student who already has a code sees the same note and
+     chooses when to send it, so opening a lesson does not mail everyone who
+     has not confirmed. A failed send leaves the lesson usable. */
+  var OFFER_KEY = 'cts_email_offer';
+  function sessionGet(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } }
+  function sessionSet(k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} }
+  function words(set) { return window.CTSLanguage ? window.CTSLanguage.bi(set) : set.en; }
+  function validEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email || ''); }
+  function postJson(path, payload) {
+    return fetch(API + path, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(payload),
+      credentials: 'omit',
+    }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (body) { return { ok: r.ok, status: r.status, body: body }; });
+    }).catch(function () { return { ok: false, status: 0, body: {} }; });
+  }
+  function offerEmail(code, snap, state, fresh) {
+    if (!code || typeof document === 'undefined' || !document.body) return;
+    var email = (snap.student && snap.student.email) || '';
+    if (!validEmail(email)) return;
+    var verified = (state && state.student && state.student.email_verified_at) || (parse(get('cts_student'), {}) || {}).email_verified_at;
+    var existing = document.getElementById('cts-email-confirm');
+    if (verified) { if (existing) existing.remove(); return; }
+    if (sessionGet('cts_email_dismiss') === code) return;
+    var box = existing || buildEmailBanner(code);
+    if (fresh && get(OFFER_KEY) !== code) {
+      set(OFFER_KEY, code);
+      sendConfirmation(code, email, box);
+    }
+  }
+  function buildEmailBanner(code) {
+    var note = document.createElement('section');
+    note.id = 'cts-email-confirm';
+    note.setAttribute('role', 'status');
+    note.style.cssText = 'position:fixed;left:12px;right:12px;bottom:12px;z-index:40;margin:0 auto;max-width:720px;padding:12px 14px;background:#fbf6ea;color:#2a241d;border:2px solid #b08324;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.18);font:16px/1.45 Georgia,serif';
+    var p = document.createElement('p');
+    p.style.margin = '0 0 8px';
+    p.textContent = words({
+      en: 'Confirm your email so we can return your student code, send reminders, and deliver a certificate. You can keep studying if the message is slow to arrive.',
+      es: 'Confirme su correo para que podamos devolverle su código de estudiante, enviarle recordatorios y entregarle el certificado. Puede seguir estudiando si el mensaje tarda en llegar.',
+      fr: 'Confirmez votre adresse e-mail afin que nous puissions vous renvoyer votre code étudiant, vous envoyer des rappels et vous remettre un certificat. Vous pouvez continuer à étudier si le message tarde à arriver.'
+    });
+    var status = document.createElement('p');
+    status.className = 'cts-email-status';
+    status.style.margin = '0 0 8px';
+    var input = document.createElement('input');
+    input.type = 'text';
+    input.inputMode = 'numeric';
+    input.autocomplete = 'one-time-code';
+    input.maxLength = 6;
+    input.style.cssText = 'width:8em;margin:0 8px 8px 0;padding:6px 8px;font:16px Georgia,serif';
+    input.setAttribute('aria-label', words({ en: 'Six-digit code', es: 'Código de seis dígitos', fr: 'Code à six chiffres' }));
+    function button(label, primary) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = label;
+      b.style.cssText = 'margin:0 8px 8px 0;padding:6px 10px;font:15px Georgia,serif;cursor:pointer;border-radius:8px;border:1px solid #6d2233;background:' + (primary ? '#6d2233' : '#fff') + ';color:' + (primary ? '#fff' : '#6d2233');
+      return b;
+    }
+    var sendBtn = button(words({ en: 'Send confirmation', es: 'Enviar confirmación', fr: 'Envoyer la confirmation' }), true);
+    var confirmBtn = button(words({ en: 'Enter code', es: 'Introducir código', fr: 'Saisir le code' }), false);
+    var keep = button(words({ en: 'Keep studying', es: 'Seguir estudiando', fr: 'Continuer à étudier' }), false);
+    var link = document.createElement('a');
+    link.href = '/cts-confirm-email.html';
+    link.style.color = '#6d2233';
+    link.textContent = words({ en: 'Open the confirmation page', es: 'Abrir la página de confirmación', fr: 'Ouvrir la page de confirmation' });
+    sendBtn.addEventListener('click', function () {
+      var local = parse(get('cts_student'), {}) || {};
+      sendConfirmation(code, local.email || '', note);
+    });
+    confirmBtn.addEventListener('click', function () {
+      var typed = String(input.value || '').replace(/\D/g, '');
+      if (typed.length !== 6) {
+        status.textContent = words({
+          en: 'Enter the six-digit code from the email.',
+          es: 'Escriba el código de seis dígitos del correo.',
+          fr: 'Saisissez le code à six chiffres reçu par e-mail.'
+        });
+        return;
+      }
+      postJson('/email/confirm', { code: code, verification: typed }).then(function (r) {
+        if (r.ok && r.body && r.body.verified) {
+          var local = parse(get('cts_student'), {}) || {};
+          local.email_verified_at = new Date().toISOString();
+          if (r.body.email) local.email = r.body.email;
+          set('cts_student', JSON.stringify(local));
+          note.remove();
+          return;
+        }
+        status.textContent = words({
+          en: 'That code was not accepted. You can ask for another, or keep studying and try later.',
+          es: 'Ese código no fue aceptado. Puede pedir otro, o seguir estudiando e intentarlo más tarde.',
+          fr: 'Ce code n’a pas été accepté. Vous pouvez en demander un autre, ou continuer à étudier et réessayer plus tard.'
+        });
+      });
+    });
+    keep.addEventListener('click', function () { sessionSet('cts_email_dismiss', code); note.remove(); });
+    note.appendChild(p);
+    note.appendChild(status);
+    note.appendChild(input);
+    note.appendChild(sendBtn);
+    note.appendChild(confirmBtn);
+    note.appendChild(keep);
+    note.appendChild(link);
+    document.body.appendChild(note);
+    return note;
+  }
+  function sendConfirmation(code, email, note) {
+    var status = note.querySelector('.cts-email-status');
+    if (!validEmail(email)) {
+      status.textContent = words({
+        en: 'Add a valid email address on your registration, then send the confirmation. Your study in this browser is saved.',
+        es: 'Añada un correo válido en su registro y luego envíe la confirmación. Su estudio en este navegador está guardado.',
+        fr: 'Ajoutez une adresse e-mail valide à votre inscription, puis envoyez la confirmation. Votre étude dans ce navigateur est enregistrée.'
+      });
+      return Promise.resolve();
+    }
+    status.textContent = words({ en: 'Sending the confirmation…', es: 'Enviando la confirmación…', fr: 'Envoi de la confirmation…' });
+    return postJson('/email/start', { code: code, email: email, lang: get('cts_lang') }).then(function (r) {
+      status.textContent = r.ok
+        ? words({
+          en: 'We sent a six-digit code. Enter it here. Check the spam folder if it is not in your inbox. You can keep studying while you wait.',
+          es: 'Enviamos un código de seis dígitos. Escríbalo aquí. Revise la carpeta de correo no deseado si no está en su bandeja. Puede seguir estudiando mientras espera.',
+          fr: 'Nous avons envoyé un code à six chiffres. Saisissez-le ici. Vérifiez le dossier des indésirables s’il n’est pas dans votre boîte. Vous pouvez continuer à étudier en attendant.'
+        })
+        : words({
+          en: 'We could not send the confirmation just now. You can keep studying and confirm later from the confirmation page.',
+          es: 'No pudimos enviar la confirmación en este momento. Puede seguir estudiando y confirmar más tarde en la página de confirmación.',
+          fr: 'Nous n’avons pas pu envoyer la confirmation pour le moment. Vous pouvez continuer à étudier et confirmer plus tard sur la page de confirmation.'
+        });
+    });
   }
 
   /* Restore a record onto this device from a student code. This is the whole

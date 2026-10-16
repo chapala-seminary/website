@@ -17,6 +17,7 @@ PORT=${PORT:-8798}
 STATE=.wrangler-local
 CONFIG=test/wrangler.local.jsonc
 
+node test/countries.test.mjs
 node test/reference-fixture.test.mjs
 node test/single-completion.test.mjs
 # The grading rules with no server: the fill-in text rules against the browser

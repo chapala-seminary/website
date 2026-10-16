@@ -1756,12 +1756,21 @@
     var name = val("regName", "reg-name", "studentName", "m-name", "student-name");
     var email = val("regEmail", "reg-email", "studentEmail", "student-email");
     var error = el("regError");
-    if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    function present(ids) {
+      for (var i = 0; i < ids.length; i++) if (el(ids[i])) return el(ids[i]);
+      return null;
+    }
+    var countryEl = present(["regCountry", "reg-country", "studentCountry"]);
+    var countryMissing = !!(countryEl && !countryEl.value.trim());
+    var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (!name || !emailOk || countryMissing) {
       if (error) {
         error.hidden = false;
-        error.innerHTML = bi({ en: "Enter your name and a valid email address to save your registration.", es: "Escriba su nombre y una dirección de correo válida para guardar su registro.", fr: "Saisissez votre nom et une adresse e-mail valide pour enregistrer votre inscription." });
+        error.innerHTML = (!name || !emailOk)
+          ? bi({ en: "Enter your name and a valid email address to save your registration.", es: "Escriba su nombre y una dirección de correo válida para guardar su registro.", fr: "Saisissez votre nom et une adresse e-mail valide pour enregistrer votre inscription." })
+          : bi({ en: "Select your country. Choose Other if you prefer not to say.", es: "Seleccione su país. Elija Otro si prefiere no decirlo.", fr: "Choisissez votre pays. Choisissez Autre si vous préférez ne pas le dire." });
       }
-      var invalid = el(!name ? "regName" : "regEmail");
+      var invalid = el(!name ? "regName" : (!emailOk ? "regEmail" : (countryEl && countryEl.id)));
       if (invalid) { invalid.focus(); invalid.setAttribute("aria-invalid", "true"); }
       return false;
     }

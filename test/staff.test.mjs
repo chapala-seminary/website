@@ -100,7 +100,7 @@ await reg({ name: SHOUT, email: `shout-${tag}@example.test`, track: 'thm' });
     ok(e && e.program_progress === want && e.courses_done === 0, `a ${k} student with nothing done shows ${want}`, JSON.stringify(e && { p: e.program_progress, c: e.courses_done }));
   }
   const csv = await (await staff('/staff/students.csv')).text();
-  ok(/^Name,Email,Country,Language,Program/.test(csv), 'the CSV has a header row');
+  ok(/^Name,Email,Email confirmed,Country,Language,Program/.test(csv), 'the CSV has a header row');
   ok(csv.includes(`"'=HYPERLINK(""x"") ${tag}"`), 'a name a spreadsheet would run as a formula is defused in the CSV',
     csv.split('\n').find((l) => l.includes('HYPERLINK')));
   ok(!csv.includes(quietCode), 'the CSV never has a student code');

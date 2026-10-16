@@ -53,6 +53,22 @@ ok(/^CTS-[0-9A-HJKMNP-TV-Z]{4}-[0-9A-HJKMNP-TV-Z]{4}-[0-9A-HJKMNP-TV-Z]{4}$/.tes
 ok(reg.body?.student?.name === 'María de la Cruz', 'the name survives a round trip with its accents');
 ok(reg.body?.student?.heard === 'referral' && reg.body?.student?.country === 'MX', 'country and how they heard of the seminary are kept');
 
+for (const [typed, stored] of [['EEUU', 'US'], ['Estados Unidos', 'US'], ['México', 'MX'], ['Narnia', 'Narnia'], ['America', 'America']]) {
+  const email = `country-alias-${checks}-${typed.length}@example.test`;
+  const alias = await jpost('/api/register', { name: `Country Alias ${checks}`, email, country: typed, track: 'cert' });
+  ok(alias.status === 201 && alias.body?.student?.country === stored, `${typed} is stored as ${stored}`, `got ${alias.body?.student?.country}`);
+  if (alias.body?.code) await fetch(BASE + '/api/student/' + alias.body.code, { method: 'DELETE' });
+}
+const syncAlias = await jpost('/api/register', {
+  name: 'Country Sync Alias', email: 'country-sync-alias@example.test', country: 'Narnia', track: 'cert',
+});
+const syncedCountry = await jpost('/api/sync', {
+  code: syncAlias.body?.code,
+  student: { name: 'Country Sync Alias', email: 'country-sync-alias@example.test', country: 'EEUU', track: 'cert' },
+});
+ok(syncedCountry.status === 200 && syncedCountry.body?.student?.country === 'US', 'a later sync maps EEUU to US', `got ${syncedCountry.body?.student?.country}`);
+if (syncAlias.body?.code) await fetch(BASE + '/api/student/' + syncAlias.body.code, { method: 'DELETE' });
+
 const second = await jpost('/api/register', { name: 'Someone Else', email: 'someone-else@example.org', track: 'cert' });
 ok(second.body?.code && second.body.code !== CODE, 'two registrations get different codes');
 

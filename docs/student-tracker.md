@@ -16,7 +16,7 @@ Nothing below reaches a real student until the live site is the new one
 ## What Wayne gets
 
 **The roster**, at `/staff/students`, for signed-in staff only: one row per
-student with name, email, country, language, program, progress toward the
+student with name, email, whether that email is confirmed, country, language, program, progress toward the
 program (for example `9/12`), foundation courses (`5/7`), courses completed,
 completion notices received, units passed, the last unit and when, days since
 progress, status (`active`, `quiet`, `not started`, `new`), the last note sent,
@@ -36,6 +36,18 @@ else; `/staff/heard.json` is the same for a program.
 
 No student code appears on any of these. The code is the key to a student's
 whole record.
+
+The roster states how many students have confirmed their email. That count is
+the number who opened the link or entered the six-digit code. An address
+without that step is unconfirmed. Country is shown as an ISO code, so USA,
+EEUU, and Estados Unidos count as one country. To store those codes on the
+rows already in the database, run this on beta and then on production. It is
+safe to run again, and it leaves an unrecognized value unchanged:
+
+```
+npx wrangler d1 execute chapala-students-beta --remote --env beta --file migrations/0016_country_codes.sql
+npx wrangler d1 execute chapala-students --remote --file migrations/0016_country_codes.sql
+```
 
 **Notes to students**, sent by the site once a day at 15:00 UTC (9:00 in
 Mexico City), signed by Wayne, from `certificates@chapalaseminary.org`. A
