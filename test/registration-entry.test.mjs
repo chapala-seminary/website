@@ -30,7 +30,13 @@ try {
    }
    await page.locator(emailField).fill(email);
    if(await page.locator('#reg-country').count()) await page.locator('#reg-country').selectOption('MX');
-   for(const field of ['#studentCountry','#regCountry']) if(await page.locator(field).count())await page.locator(field).fill('Test');
+   for(const field of ['#studentCountry','#regCountry']) {
+    const country=page.locator(field);
+    if(await country.count()){
+     if((await country.evaluate(el=>el.tagName))==='SELECT') await country.selectOption('MX');
+     else await country.fill('MX');
+    }
+   }
    await page.locator(save).click();
    assert.equal(await page.evaluate(()=>!!window.CTS_SYNC),true,`${lang}/${file}: sync client loaded`);checks++;
    await page.evaluate(()=>window.CTS_SYNC.sync());
