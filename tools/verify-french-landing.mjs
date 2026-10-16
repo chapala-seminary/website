@@ -14,7 +14,7 @@ assert.equal(root.querySelectorAll('#catalog a.course').length, 45);
 assert.equal(root.querySelectorAll('#textbooks a.textbook:not(.reading)').length, 45);
 assert.equal(root.querySelectorAll('#required-readings a.textbook.reading').length, 45);
 assert.equal(root.querySelectorAll('#textbooks a.tb-test-link').length, 90);
-assert.ok(root.querySelector('#catalog').text.includes('traduction française provisoire, en cours de relecture'));
+assert.ok(root.querySelector('#catalog').text.includes('en anglais, en espagnol et en français'));
 // Every course has a French draft, so every card carries the badge.
 assert.equal(root.querySelectorAll('#catalog a.course .c-fr').length, 45);
 assert.ok(root.querySelector('#programs')?.text.includes('15 cours') || root.text.includes('Niveau master · 15 cours'));

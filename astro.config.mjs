@@ -6,6 +6,7 @@ import examReviewIntegration from './tools/exam-review.mjs';
 import languagePagesIntegration from './tools/language-pages.mjs';
 import singlePagesIntegration from './tools/single-pages.mjs';
 import { frenchReadingsIntegrations } from './tools/french-readings-pages.mjs';
+import seoIntegration from './tools/inject-seo.mjs';
 
 const [frenchReadings, frenchReadingDrafts] = frenchReadingsIntegrations();
 
@@ -22,5 +23,5 @@ export default defineConfig({
   // French reading content goes in beside the English before the language
   // pages are made, and its French pages are marked drafts after them
   // (tools/french-readings-pages.mjs)
-  integrations: [langIntegration(), versionIntegration(), iconIntegration(), frenchReadings, languagePagesIntegration(), singlePagesIntegration(), frenchReadingDrafts, examReviewIntegration()],
+  integrations: [langIntegration(), versionIntegration(), iconIntegration(), frenchReadings, languagePagesIntegration(), singlePagesIntegration(), frenchReadingDrafts, examReviewIntegration(), seoIntegration()],
 });

@@ -63,6 +63,7 @@ const PATHS = [
   '/assets/css/cts.css', '/assets/js/cts-engine.js', '/sitemap.xml',
   '/admin/index.html', '/api/health',
 ];
+const PRIVATE = new Set(['/cts-backup.html', '/admin/index.html']);
 
 const STAGING = 'beta.chapalaseminary.org';
 const REAL = 'chapalaseminary.org';
@@ -75,8 +76,13 @@ for (const p of PATHS) {
 
 for (const p of PATHS) {
   const r = await as(REAL, p);
-  ok(!r.header('x-robots-tag'),
-    `the real site: ${p} carries no such header`, `status ${r.status}, x-robots-tag: ${r.header('x-robots-tag')}`);
+  if (PRIVATE.has(p)) {
+    ok((r.header('x-robots-tag') || '').includes('noindex'),
+      `the real site: ${p} is private and carries noindex`, `status ${r.status}, x-robots-tag: ${r.header('x-robots-tag')}`);
+  } else {
+    ok(!r.header('x-robots-tag'),
+      `the real site: ${p} carries no such header`, `status ${r.status}, x-robots-tag: ${r.header('x-robots-tag')}`);
+  }
 }
 
 /* robots.txt is the one thing that differs in its body. */
