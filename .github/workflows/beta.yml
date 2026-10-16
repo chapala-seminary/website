@@ -11,8 +11,10 @@ concurrency:
 jobs:
   beta:
     if: github.ref == 'refs/heads/beta'
+    environment: beta
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    # The full suite can take over 40 minutes; leave time for build and publish.
+    timeout-minutes: 75
     steps:
       - uses: actions/checkout@v4
         with:

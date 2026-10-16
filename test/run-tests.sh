@@ -17,6 +17,7 @@ PORT=${PORT:-8798}
 STATE=.wrangler-local
 CONFIG=test/wrangler.local.jsonc
 
+node --test test/release-governance.test.mjs
 node test/single-completion.test.mjs
 node test/single-page-readings.test.mjs
 node tools/verify-staged-readings.mjs

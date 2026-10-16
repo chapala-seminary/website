@@ -24,10 +24,22 @@ to the brain's `main`. The rules are in `../brain/AGENT_RULES.md`.
 
 ## Staging and release
 
-New website work goes through a PR targeting `beta` first. `beta.chapalaseminary.org`
-publishes the tested `beta` branch with its own database. `main` is production;
-promotion to main and production deployment are separate steps authorized by Robert.
-Read `docs/beta-staging.md`. A staging merge does not replace faculty or translation review.
+New work goes through a PR to `beta`. Record ChatGPT's academic review and
+Claude's check of the exact commit in the PR; Wayne approves it. The separate
+`chapalatheological-ai` account may merge content-only PRs to beta after the
+required checks and Wayne's review. Technical or mixed changes also require
+Robert's review: this includes the engine, Worker, database, registration,
+grading behavior, email, deployment and review policy. Unknown paths and changes
+to JSON wiring count as technical. A translation that needs new language code
+needs technical review too.
+
+The AI opens `beta` -> `main` after the exact beta commit has passed deployment
+and live verification. Wayne checks beta, approves, then merges using his human
+`ChapalaTheological1` account. After the initial baseline/token setup, main
+deploys automatically through Actions using the production environment secret; a routine release does not need Robert's
+Mac. Never use Wayne's administrator login for an agent. Read
+`docs/beta-staging.md` for safeguards, setup and the initial rollout boundary.
+A staging merge does not replace faculty or translation review.
 
 ## Rules for this repo
 
