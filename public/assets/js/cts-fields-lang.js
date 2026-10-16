@@ -17,6 +17,7 @@
     if (document.body.dataset.pageLang) return document.body.dataset.pageLang;
     var c = document.body.classList;
     if (c.contains("lang-both")) return "both";
+    if (c.contains("lang-fr")) return "fr";
     return c.contains("lang-es") || c.contains("es") ? "es" : "en";
   }
   function pick(en, es, l) { return l === "es" ? es : l === "both" ? en + " · " + es : en; }
