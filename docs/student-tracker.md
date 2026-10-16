@@ -41,12 +41,24 @@ The roster states how many students have confirmed their email. That count is
 the number who opened the link or entered the six-digit code. An address
 without that step is unconfirmed. Country is shown as an ISO code, so USA,
 EEUU, and Estados Unidos count as one country. To store those codes on the
-rows already in the database, run this on beta and then on production. It is
-safe to run again, and it leaves an unrecognized value unchanged:
+rows already in the database, apply `migrations/0016_country_codes.sql` on
+beta and then on production. It is safe to run again, and it leaves an
+unrecognized value unchanged.
+
+Wrangler reads that file from the checkout you are standing in. Until the
+registration pull request is merged, a checkout of `beta` or `main` does not
+have it. Fetch it first, then run beta:
 
 ```
-npx wrangler d1 execute chapala-students-beta --remote --env beta --file migrations/0016_country_codes.sql
-npx wrangler d1 execute chapala-students --remote --file migrations/0016_country_codes.sql
+git fetch origin cursor/registration-email-country-0f18
+git show origin/cursor/registration-email-country-0f18:migrations/0016_country_codes.sql > /tmp/0016_country_codes.sql
+npx wrangler d1 execute chapala-students-beta --remote --env beta --file /tmp/0016_country_codes.sql
+```
+
+Production is a separate step, after beta looks right:
+
+```
+npx wrangler d1 execute chapala-students --remote --file /tmp/0016_country_codes.sql
 ```
 
 **Notes to students**, sent by the site once a day at 15:00 UTC (9:00 in
