@@ -22,6 +22,9 @@ export const DEFAULT_FALLBACK = '@cf/openai/gpt-oss-120b';
 export const DEFAULT_VERSION = '2026-10-15.3';
 const CAPACITY = /\b(3036|3040|3007)\b/;
 const TIMEOUT_MS = 25000;
+// Leave the browser's 60-second request deadline time for database writes.
+// Retries and quote repairs share this budget rather than each consuming it.
+export const GRADING_BUDGET_MS = 40000;
 
 export const modelsOf = (env) => ({
   primary: env.GRADER_MODEL || DEFAULT_MODEL,
@@ -67,7 +70,9 @@ async function addUsage(env, model, { calls = 0, input = 0, output = 0, errors =
   } catch (e) { console.error('ai_usage error', e && e.message); }
 }
 
-async function call(env, model, kind, lang, items, version, more = []) {
+async function call(env, model, kind, lang, items, version, more = [], deadline = Date.now() + GRADING_BUDGET_MS) {
+  const remaining = deadline - Date.now();
+  if (remaining <= 0) throw new Error('grading request time budget reached');
   const params = {
     messages: [...buildMessages(kind, lang, items, version), ...more],
     response_format: { type: 'json_schema', json_schema: schema(kind) },
@@ -76,7 +81,7 @@ async function call(env, model, kind, lang, items, version, more = []) {
   };
   const run = env.AI_FAKE ? Promise.resolve().then(() => fakeAIRun(env, model, params)) : env.AI.run(model, params);
   let timer;
-  const timeout = new Promise((_, rej) => { timer = setTimeout(() => rej(new Error('the model took too long')), TIMEOUT_MS); });
+  const timeout = new Promise((_, rej) => { timer = setTimeout(() => rej(new Error('the model took too long')), Math.min(TIMEOUT_MS, remaining)); });
   try { return await Promise.race([run, timeout]); } finally { clearTimeout(timer); }
 }
 
@@ -228,14 +233,14 @@ export function validate(kind, parsed, items) {
    the model is told which points and asked for an exact contiguous quote of at most 15 words, or made:false.
    Whatever comes back, each item is finished here: a point still without a good quote is dropped,
    provided the rest of the reply is sound. A failed repair call changes nothing but the count. */
-async function repair(env, model, kind, lang, items, version, parsed0, repairs, ok) {
+async function repair(env, model, kind, lang, items, version, parsed0, repairs, ok, deadline) {
   const sent = repairs.map((x) => items.find((i) => i.qid === x.qid));
   let again = new Map();
   try {
     const res = await call(env, model, kind, lang, items, version, [
       { role: 'assistant', content: JSON.stringify(parsed0) },
       { role: 'user', content: repairMessage(repairs.map((x) => ({ qid: x.qid, point_ids: x.ids }))) },
-    ]);
+    ], deadline);
     const usage = res && res.usage || {};
     const parsed = parseJson(replyText(res));
     const got = parsed && Array.isArray(parsed.items) ? parsed.items.filter((r) => r && repairs.some((x) => x.qid === r.qid)) : [];
@@ -263,7 +268,7 @@ async function repair(env, model, kind, lang, items, version, parsed0, repairs, 
   });
 }
 
-export async function gradeBatch(env, kind, lang, items) {
+export async function gradeBatch(env, kind, lang, items, { deadline = Date.now() + GRADING_BUDGET_MS } = {}) {
   const { primary, fallback, version } = modelsOf(env);
   const results = new Map();
   let remaining = items.slice();
@@ -272,8 +277,9 @@ export async function gradeBatch(env, kind, lang, items) {
 
   for (const model of [primary, primary, fallback]) {
     if (!remaining.length) break;
+    if (Date.now() >= deadline) { error = 'grading request time budget reached'; break; }
     let res;
-    try { res = await call(env, model, kind, lang, remaining, version); }
+    try { res = await call(env, model, kind, lang, remaining, version, [], deadline); }
     catch (e) {
       const msg = String((e && e.message) || e);
       error = msg.slice(0, 300);
@@ -288,7 +294,7 @@ export async function gradeBatch(env, kind, lang, items) {
       calls: 1, errors: wholeBad ? 1 : 0,
       input: Number(usage.prompt_tokens ?? usage.input_tokens) || 0, output: Number(usage.completion_tokens ?? usage.output_tokens) || 0,
     });
-    if (repairs.length) await repair(env, model, kind, lang, remaining, version, parsed, repairs, ok);
+    if (repairs.length) await repair(env, model, kind, lang, remaining, version, parsed, repairs, ok, deadline);
     for (const [qid, r] of ok) results.set(qid, { ...r, model, version });
     if (!ok.size && wholeBad) error = 'the model did not give a valid answer';
     remaining = remaining.filter((i) => !ok.has(i.qid));

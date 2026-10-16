@@ -219,7 +219,7 @@
     // The server's copy fills gaps; it does not overwrite what this browser
     // has, because this browser is where the student is typing right now.
     ['name', 'email', 'country', 'track', 'goal', 'heard'].forEach(function (f) {
-      if (!local[f] && state.student[f]) local[f] = state.student[f];
+      if ((f === 'goal' ? local[f] == null : !local[f]) && state.student[f]) local[f] = state.student[f];
     });
     // Confirmation is recorded only by the email challenge. Copy it when the
     // server has it. A payload that omits it must not wipe a local flag.
@@ -339,10 +339,12 @@
   }
 
   var lastDigest = null;
-  var inFlight = false;
+  var inFlight = null;
 
   function syncOnce(force) {
-    if (inFlight || !available() || optedOut()) return Promise.resolve(null);
+    // A track change must wait for an older snapshot, then send the new one.
+    if (inFlight) return inFlight.then(function () { return syncOnce(force); });
+    if (!available() || optedOut()) return Promise.resolve(null);
     var snap = snapshot();
     // Nothing to sync until the student has registered in this browser.
     if (!snap.student || !snap.student.name) return Promise.resolve(null);
@@ -365,10 +367,9 @@
   }
 
   function push(snap, d) {
-    if (inFlight) return Promise.resolve(null);
+    if (inFlight) return inFlight.then(function () { return syncOnce(true); });
     // paused: wait for the student's choice rather than asking again every poll
     if (paused(snap)) { showExisting(); return Promise.resolve(null); }
-    inFlight = true;
     var code = get(CODE_KEY);
     var separate = get(SEPARATE_KEY) === who(snap.student);
     var fresh = false;
@@ -397,7 +398,7 @@
         return r.code;
       });
 
-    return start.then(function (c) {
+    inFlight = start.then(function (c) {
       if (!c) return null;
       return send('/sync', { code: c, student: snap.student, progress: snap.progress,
                              doneCodes: snap.doneCodes, completionTracks: snap.completionTracks,
@@ -413,7 +414,8 @@
       try { offerEmail(packed.code, snap, packed.state, fresh); } catch (e) {}
       return packed.state;
     }).catch(function () { showRegistrationProblem(snap.student); return null; })
-      .then(function (r) { inFlight = false; return r; });
+      .then(function (r) { inFlight = null; return r; });
+    return inFlight;
   }
 
   function showRegistrationProblem(student) {

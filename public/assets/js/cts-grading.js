@@ -28,6 +28,13 @@
 
   var API = (window.CTS_SYNC_API) || "/api";
   var TEST = window.CTS_GRADING_TEST || {};
+  // Deferred scripts run while readyState is interactive, before later
+  // deferred dependencies (including cts-sync.js) have executed.
+  var pageReady = new Promise(function (resolve) {
+    if (document.readyState === 'loading' || (document.readyState === 'interactive' && document.currentScript && document.currentScript.defer))
+      document.addEventListener('DOMContentLoaded', resolve, { once: true });
+    else resolve();
+  });
 
   // ---- storage, tolerant of blocked localStorage -------------------------
   var mem = {};
@@ -47,7 +54,8 @@
      visitor who has not registered at all is sent to register: rejected with
      kind "unregistered", which each screen answers with the site's own
      registration prompt. */
-  function ensureCode() {
+  function ensureCode() { return pageReady.then(readyCode); }
+  function readyCode() {
     var c = code();
     if (c) return Promise.resolve(c);
     if (!registered()) return Promise.reject(fail("unregistered"));
@@ -193,16 +201,16 @@
     },
     registerHome: { en: "Register", es: "Registrarse", fr: "S’inscrire" },
     registerRestore: { en: "Restore my record", es: "Recuperar mi registro", fr: "Retrouver mon dossier" },
-    // the three kinds of trouble, each saying that nothing was graded
+    // A lost response does not establish whether the server saved a grade.
     offline: {
-      en: "We could not reach the grading service, so nothing was graded. Check your connection and try again. Your typing is kept.",
-      es: "No pudimos comunicarnos con el servicio de calificación, así que no se calificó nada. Revise su conexión e inténtelo de nuevo. Lo que escribió se conserva.",
-      fr: "Nous n’avons pas pu joindre le service de correction, donc rien n’a été corrigé. Vérifiez votre connexion et réessayez. Votre texte est conservé."
+      en: "We could not confirm the grading result. Check your connection and try again. Your answers are saved.",
+      es: "No pudimos confirmar el resultado de la calificación. Revise su conexión e inténtelo de nuevo. Sus respuestas están guardadas.",
+      fr: "Nous n’avons pas pu confirmer le résultat de la correction. Vérifiez votre connexion et réessayez. Vos réponses sont conservées."
     },
     serverError: {
-      en: "The grading service had a problem, so nothing was graded. Please try again in a moment. Your typing is kept.",
-      es: "El servicio de calificación tuvo un problema, así que no se calificó nada. Inténtelo de nuevo en un momento. Lo que escribió se conserva.",
-      fr: "Le service de correction a rencontré un problème, donc rien n’a été corrigé. Réessayez dans un instant. Votre texte est conservé."
+      en: "The grading service had a problem. Your answers are saved; please try again to check the result.",
+      es: "El servicio de calificación tuvo un problema. Sus respuestas están guardadas; inténtelo de nuevo para comprobar el resultado.",
+      fr: "Le service de correction a rencontré un problème. Vos réponses sont conservées ; réessayez pour vérifier le résultat."
     },
     throttled: {
       en: "Too many answers were checked in a short time. Please wait a few minutes and try again.",

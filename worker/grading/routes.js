@@ -70,9 +70,14 @@ async function startAttempt(request, env, h) {
   let attempt = open || pending;
   if (!attempt && locked)
     return h.json({ error: 'locked after a failed attempt', lock: { until: locked.locked_until, kind: locked.lock_kind }, track: locked.track }, 423);
-  if (attempt && attempt.lang !== lang && attempt.status === 'open') {
-    await env.DB.prepare('UPDATE attempts SET lang = ? WHERE id = ?').bind(lang, attempt.id).run();
-    attempt = { ...attempt, lang };
+  // An open sitting follows a deliberate profile change. Submitted/pending
+  // attempts keep the level at which they were submitted.
+  const track = trackOf(student);
+  if (attempt && attempt.status === 'open' && (attempt.lang !== lang || attempt.track !== track)) {
+    await env.DB.prepare("UPDATE attempts SET lang = ?, track = ? WHERE id = ? AND status = 'open'").bind(lang, track, attempt.id).run();
+    // A simultaneous submission may have closed it while the profile loaded.
+    attempt = await loadAttempt(env, attempt.id);
+    if (!attempt) return h.fail(404, 'no such attempt');
   }
   if (!attempt) {
     const id = crypto.randomUUID();

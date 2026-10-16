@@ -290,9 +290,9 @@ async function sync(request, env) {
       `UPDATE students SET name = COALESCE(?, name),
          email = CASE WHEN email_verified_at IS NULL THEN COALESCE(?, email) ELSE email END,
          country = COALESCE(?, country), track = COALESCE(?, track),
-         goal = COALESCE(?, goal), heard = COALESCE(?, heard), lang = COALESCE(?, lang), updated_at = ? WHERE id = ?`)
+         goal = CASE WHEN ? THEN ? ELSE goal END, heard = COALESCE(?, heard), lang = COALESCE(?, lang), updated_at = ? WHERE id = ?`)
       .bind(name, str(s.email, MAX.email, { field: 'email' }), canonicalCountry(str(s.country, MAX.country, { field: 'country' })),
-        track, str(s.goal, MAX.goal, { field: 'goal' }), str(s.heard, MAX.heard, { field: 'heard' }), lang(b.lang), now(), id));
+        track, Object.hasOwn(s, 'goal') ? 1 : 0, str(s.goal, MAX.goal, { field: 'goal' }) || '', str(s.heard, MAX.heard, { field: 'heard' }), lang(b.lang), now(), id));
   }
 
   // Browsers resend their full record. D1 counts an UPDATE as a write even

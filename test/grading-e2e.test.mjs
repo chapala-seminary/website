@@ -370,6 +370,35 @@ ok(JSON.parse(await ls(m, 'cts_john_progress') || '{}').unit1 === true && await 
 ok(dm.errs.length === 0, "no page errors for the master's student", dm.errs[0]);
 await dm.ctx.close();
 
+/* Track changes must update an open sitting, not just its banner. */
+{
+  const changed = await device({ student: { name: 'Synthetic Track Reviewer', email: `track-${RUN}@example.test`, track: 'cert', goal: 'assoc' } });
+  const p = changed.p;
+  await p.goto(BASE + '/CTSGenesisUnit1.html');
+  await p.waitForFunction(() => window.CTS_ENGINE?.live()?.status === 'ready');
+  ok(await has(p, '.cts-ai-note', 'not graded'), 'track change: Associate written answers begin as reflection');
+  const id = await p.evaluate(() => CTS_ENGINE.live().attemptId);
+  await p.locator('textarea[data-sa="3"]').fill('Synthetic short response');
+  await changed.ctx.route('**/api/sync', route => route.abort('failed'));
+  await p.locator('#cts-track-ctl .tg').click();
+  await p.locator('#cts-track-ctl [data-t="mdiv"]').click();
+  ok(await waitText(p, 'The track change could not be saved.'), 'track change: failed profile save is shown without changing the exam');
+  ok(await p.evaluate(() => localStorage.getItem('cts_track') === 'cert' && JSON.parse(localStorage.getItem('cts_student')).goal === 'assoc'), 'track change: failed save restores the old profile');
+  ok(await p.locator('textarea[data-sa="3"]').inputValue() === 'Synthetic short response', 'track change: a failed save keeps typing');
+  await changed.ctx.unroute('**/api/sync');
+  await p.locator('#cts-track-ctl .tg').click();
+  await Promise.all([p.waitForEvent('load'), p.locator('#cts-track-ctl [data-t="mdiv"]').click()]);
+  await p.waitForFunction(() => window.CTS_ENGINE?.live()?.status === 'ready');
+  ok(await p.evaluate(id => CTS_ENGINE.live().attemptId === id && CTS_ENGINE.live().S.track === 'mdiv' && CTS_ENGINE.live().S.needs.sa === 9, id), 'track change: server resumes the same sitting with master’s requirements');
+  ok(!(await has(p, '.cts-ai-note', 'not graded')), 'track change: reflection notice disappears');
+  ok(await p.locator('textarea[data-sa="3"]').inputValue() === 'Synthetic short response', 'track change: saved written answer survives the reload');
+  await p.locator('#submitExamBtn').click();
+  ok(await waitText(p, 'Your answer is too short to evaluate.'), 'track change: short response cannot bypass revision on the new track');
+  ok(await p.locator('.model-answer').count() === 0, 'track change: no model answer is revealed');
+  ok(changed.errs.length === 0, 'track change: no browser exceptions', changed.errs);
+  await changed.ctx.close();
+}
+
 /* ====================================================================== */
 /* 6. What went over the wire                                               */
 /* ====================================================================== */
