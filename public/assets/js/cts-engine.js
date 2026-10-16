@@ -1618,9 +1618,6 @@
     syncLangControls(langNow());
   }
 
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
-  else boot();
-
   window.CTS_ENGINE = {
     submit: submit, reset: reset, render: renderQuestions,
     // exposed so tests drive the same controls the student does, rather than
@@ -1779,4 +1776,10 @@
   }
   define("saveRegistration", readReg);
   define("saveReg", readReg);
+  // Initialize compatibility maps before boot, including when this script is
+  // deferred and readyState is already interactive. Wait for later deferred
+  // page dependencies too, as the original DOMContentLoaded startup did.
+  if (document.readyState === 'loading' || (document.readyState === 'interactive' && document.currentScript && document.currentScript.defer))
+    document.addEventListener('DOMContentLoaded', boot);
+  else boot();
 })();

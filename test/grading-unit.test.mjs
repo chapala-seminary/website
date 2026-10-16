@@ -278,6 +278,15 @@ eq([v.ok.get('q1')?.verdict, v.ok.get('q1')?.record?.quote_dropped], ['partly', 
   t = mkEnv([reply(good('q1'))]);
   r = await gradeBatch(t.env, 'sa', 'en', one);
   eq(t.calls.length, 1, 'repair: no repair call when every quote is the student\'s');
+  // A slow provider cannot consume three independent 25-second deadlines.
+  t = mkEnv([() => new Promise(() => {})]);
+  const started = Date.now();
+  r = await gradeBatch(t.env, 'sa', 'en', one, { deadline: started + 50 });
+  eq([t.calls.length, r.results.size, r.unresolved.length], [1, 0, 1], 'deadline: unresolved answer goes back for queueing without another model call');
+  ok(Date.now() - started < 1000, 'deadline: the batch returns within its shared request budget');
+  t = mkEnv([]);
+  r = await gradeBatch(t.env, 'sa', 'en', one, { deadline: Date.now() - 1 });
+  eq([t.calls.length, r.unresolved.length], [0, 1], 'deadline: an exhausted mixed-kind request starts no new AI call');
 }
 
 // the fake model answers from hints and keeps to the schema the validator checks

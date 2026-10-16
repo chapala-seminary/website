@@ -186,6 +186,23 @@ const progressOf = async (code) => (await get(`/api/student/${code}`)).body;
 
 /* ---- the three tracks ---------------------------------------------------------------- */
 {
+  const code = await student('cert', { goal: 'assoc' });
+  const before = (await start(code, 'u:CTSGenesis/1')).body;
+  eq([before.track, before.needs.sa], ['assoc', 0], 'track change: Associate starts with reflection only');
+  await post('/api/mc', { code, attemptId: before.attemptId, qid: 'u:CTSGenesis/1/mc/0', choice: unitFile('CTSGenesis',1).mc[0].answer });
+  await post('/api/sync', { code, student: { track: 'mdiv', goal: '' } });
+  const after = (await start(code, 'u:CTSGenesis/1')).body;
+  eq([after.attemptId, after.track, after.needs.sa], [before.attemptId, 'mdiv', 9], 'track change: same open sitting now requires master’s written answers');
+  ok(!!after.answered['u:CTSGenesis/1/mc/0'], 'track change: existing answers are retained');
+  ok(!after.models, 'track change: no model answer is exposed in the master’s sitting');
+  const short = await post('/api/grade', { code, attemptId: after.attemptId, items: [{ qid: 'u:CTSGenesis/1/sa/3', answer: 'Synthetic short response' }] });
+  eq(short.status, 422, 'track change: a short response requests expansion');
+  await doMC(code, after);
+  await doFill(code, after);
+  const result = (await submit(code, after)).body;
+  eq([result.status, result.unitDone], ['failed', false], 'track change: objective answers alone cannot earn a master’s pass');
+}
+{
   // Associate: multiple choice and fill-in, not short answer.
   const assoc = await student('cert', { goal: 'assoc' });
   let a = (await start(assoc)).body;

@@ -430,6 +430,33 @@ Notes on the routes (as built):
 - **Crons:** `worker/index.js` runs the queue when `event.cron` is
   `*/15 * * * *` and the daily job otherwise.
 
+### Beta review corrections — 16 October 2026
+
+Changing track saves the profile before reloading. If its previous sync is
+still running, the new snapshot waits and then sends. On resume, an open
+sitting takes the track from the current server profile and keeps its answers;
+submitted and pending sittings retain their original track. An explicit empty
+degree goal clears the earlier Associate goal instead of restoring it.
+
+AI calls, retries and quote repairs within one written-answer request share a
+40-second budget (each individual call still has its 25-second limit). The
+remaining time before the browser's 60-second deadline is for storing grades
+and returning a response. Valid results are kept; unresolved answers are saved
+as pending and use the existing grading queue. The budget covers both fill-in
+and short-answer work when they arrive together. It does not change the
+substantive grading standard.
+
+The grading client also waits until deferred page scripts have loaded before
+asking the sync client for a new student code. This preserves first-visit
+registration when the shared scripts are deferred by the SEO build.
+
+Wayne's Genesis review after a track switch did not test AI fairness: its
+written section was still reflection-only. His Systematic Theology service
+error likewise leaves grading fairness unverified. Controlled synthetic beta
+probes on 16 October succeeded (one answer about 3 seconds; ten unrelated
+paragraphs about 24 seconds), so they establish current connectivity, not the
+cause of that earlier error or faculty acceptance.
+
 ## 9. Faculty pages (`/staff/grading`)
 
 These sit behind Cloudflare Access, rendered like `worker/staff.js`. Every
