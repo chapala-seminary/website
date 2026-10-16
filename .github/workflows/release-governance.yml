@@ -1,0 +1,57 @@
+name: Release governance
+on:
+  pull_request_target:
+    branches: [beta, main]
+    types: [opened, reopened, synchronize, edited, ready_for_review]
+  pull_request_review:
+    types: [submitted, dismissed]
+  issue_comment:
+    types: [created, edited, deleted]
+  workflow_dispatch:
+    inputs:
+      pull_request:
+        description: Pull request number to recheck after review
+        required: true
+concurrency:
+  group: cts-release-approval-${{ github.event.pull_request.number || github.event.issue.number || inputs.pull_request }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+  pull-requests: read
+  actions: read
+  statuses: write
+jobs:
+  governance:
+    name: Check release approval
+    if: github.event_name == 'workflow_dispatch' || github.event.issue.pull_request || (github.event.pull_request && contains(fromJSON('["beta","main"]'), github.event.pull_request.base.ref))
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      # Resolve the PR base even for comments/manual rechecks, whose default
+      # event ref is main. Never execute scripts from the proposed PR branch.
+      - name: Resolve trusted policy commit
+        id: policy
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CTS_PR_NUMBER: ${{ github.event.pull_request.number || github.event.issue.number || inputs.pull_request }}
+        run: |
+          [[ "$CTS_PR_NUMBER" =~ ^[0-9]+$ ]] || { echo "A numeric PR number is required."; exit 1; }
+          CTS_POLICY="$(gh api "repos/$GITHUB_REPOSITORY/pulls/$CTS_PR_NUMBER" --jq '[.base.ref, .base.sha] | @tsv')"
+          IFS=$'\t' read -r CTS_POLICY_BRANCH CTS_POLICY_REF <<< "$CTS_POLICY"
+          case "$CTS_POLICY_BRANCH" in beta|main) ;; *) echo "Only protected beta/main policy is trusted."; exit 1;; esac
+          [[ "$CTS_POLICY_REF" =~ ^[0-9a-f]{40}$ ]] || { echo "Cannot resolve trusted base commit."; exit 1; }
+          echo "ref=$CTS_POLICY_REF" >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.policy.outputs.ref }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Initial setup boundary
+        if: hashFiles('tools/publish-release-governance.mjs') == ''
+        run: echo "The trusted base has no policy yet. Human review installs it; no release approval status is issued."
+      - run: node tools/publish-release-governance.mjs
+        if: hashFiles('tools/publish-release-governance.mjs') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
