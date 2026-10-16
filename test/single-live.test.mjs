@@ -147,7 +147,9 @@ db('DELETE FROM grade_overrides; DELETE FROM grade_cache; DELETE FROM grade_queu
   ok(html.includes('"grading":"live"') && !/"(answer|accept|keywords|rubric|model)"/.test(html.slice(html.indexOf('window.CTS_UNIT'), html.indexOf('window.CTS_UNIT') + 60000)), 'a Genesis unit page is a live unit page with no key');
   for (let i = 0; i < g2.mc.length; i++) { await p.locator(`button.option[data-mc="${i}"][data-opt="${g2.mc[i].answer}"]`).click(); await p.waitForSelector(`.question[data-mc="${i}"] .feedback-text`, { timeout: 15000 }); }
   for (let i = 0; i < g2.fill.length; i++) {
-    await p.locator(`input[data-fill="${i}"]`).fill(g2.fill[i].answer.en); await p.locator(`input[data-fill="${i}"]`).press('Enter');
+    // Resolve the Check button after any live-engine redraw; grading-ui covers Enter.
+    await p.locator(`input[data-fill="${i}"]`).fill(g2.fill[i].answer.en);
+    await p.locator(`button[data-fill-check="${i}"]`).click();
     await p.waitForSelector(`.question[data-fill="${i}"] .feedback-text`, { timeout: 30000 });
   }
   await p.locator('#submitExamBtn').click();

@@ -17,6 +17,7 @@ PORT=${PORT:-8798}
 STATE=.wrangler-local
 CONFIG=test/wrangler.local.jsonc
 
+node test/reference-fixture.test.mjs
 node test/single-completion.test.mjs
 # The grading rules with no server: the fill-in text rules against the browser
 # engine's own functions, copied questions, the pass rules per track, which
@@ -60,7 +61,8 @@ cp test/fixtures/synctest.html test/fixtures/syncdown.html dist/
 # a tarball export or a shallow clone without that commit has no reference --
 # in which case that one check is skipped, loudly, instead of aborting the run.
 # verify-gating.mjs loads it over HTTP, so it has to be in dist/;
-# verify-catalog.mjs reads it from the working directory. Both, or neither.
+# verify-catalog.mjs reads the temporary copy in $STATE. Both, or neither.
+# The tracked root _reference-index.html is never written or removed.
 # Written to a temporary file first. `git show ... > file` creates the file
 # BEFORE git runs, so a checkout that cannot reach that commit used to leave a
 # zero-byte reference behind -- and if a run was interrupted before its trap
@@ -70,12 +72,10 @@ HAVE_REFERENCE=
 if git show c257ea2:public/index.html > "$STATE/ref.html" 2>/dev/null \
    && [ -s "$STATE/ref.html" ]; then
   cp "$STATE/ref.html" dist/_reference-index.html
-  cp "$STATE/ref.html" ./_reference-index.html
   HAVE_REFERENCE=1
 fi
-rm -f "$STATE/ref.html"
-[ -n "$HAVE_REFERENCE" ] || rm -f dist/_reference-index.html ./_reference-index.html
-trap 'rm -f dist/synctest.html dist/syncdown.html dist/_reference-index.html ./_reference-index.html' EXIT
+[ -n "$HAVE_REFERENCE" ] || rm -f dist/_reference-index.html
+trap 'rm -f dist/synctest.html dist/syncdown.html dist/_reference-index.html' EXIT
 
 # The local database is keyed by the database_id in $CONFIG, which is also the
 # config `wrangler dev` runs from -- that is the only way the schema applied
@@ -127,7 +127,7 @@ npx wrangler dev --config "$CONFIG" --port "$PORT" --persist-to "$STATE" --test-
 DEV=$!
 node test/shadow-server.mjs "$SHADOW_PORT" "$PORT" dist-shadow > "$STATE/shadow.log" 2>&1 &
 SHADOW_PID=$!
-trap 'kill $DEV $SHADOW_PID 2>/dev/null || true; rm -f dist/synctest.html dist/syncdown.html dist/_reference-index.html ./_reference-index.html' EXIT
+trap 'kill $DEV $SHADOW_PID 2>/dev/null || true; rm -f dist/synctest.html dist/syncdown.html dist/_reference-index.html' EXIT
 
 for i in $(seq 1 60); do
   sleep 1
@@ -414,7 +414,7 @@ node test/published-models.test.mjs
   # unit says so, and the catalog link reaches the course list.
   node tools/verify-beta-pass.mjs "$SHADOW"
   if [ -n "$HAVE_REFERENCE" ]; then
-    node tools/verify-catalog.mjs ./_reference-index.html .astro/language-base/index.html
+    node tools/verify-catalog.mjs "$STATE/ref.html" .astro/language-base/index.html
   else
     echo "  SKIPPED: tools/verify-catalog.mjs — no reference front page in this"
     echo "           checkout to compare the generated catalog against."
