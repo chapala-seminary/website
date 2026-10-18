@@ -41,7 +41,11 @@ The AI opens `beta` -> `main` after the exact beta commit has passed deployment
 and live verification. Wayne checks beta, approves, then merges using his human
 `ChapalaTheological1` account. After the initial baseline/token setup, main
 deploys automatically through Actions using the production environment secret; a routine release does not need Robert's
-Mac. Never use Wayne's administrator login for an agent. Read
+Mac. Never use Wayne's administrator login for an agent, with one recorded
+exception: on 18 Oct 2026 Wayne authorized Claude, until separate agent
+accounts exist, to push branches and open PRs to `beta` with his
+ChapalaTheological1 login -- never to approve, merge, change settings or
+bypass review. Every such PR says so in its description. Read
 `docs/beta-staging.md` for safeguards, setup and the initial rollout boundary.
 A staging merge does not replace faculty or translation review.
 
