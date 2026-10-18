@@ -58,10 +58,11 @@ ok(JSON.stringify(catalog.courses.pentecostal.tests) === JSON.stringify([BOOK, R
 
 /* ---- as shipped: the reading test is not in force ----------------------- */
 
-ok(A.textbookShortfall(CODE, 'mdiv', [BOOK]) === null, 'not yet activated: an M.Div. completion needs the textbook test only');
-ok(/textbook test/.test(A.textbookShortfall(CODE, 'mdiv', [READ]) || ''), 'not yet activated: a reading pass does not stand in for the textbook test');
+const shippedOff = { requiredFrom: { [BOOK]: null, [READ]: null }, now: after, completions: [] }; // stated explicitly: production activated both on 15 Oct 2026
+ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], shippedOff) === null, 'not yet activated: an M.Div. completion needs the textbook test only');
+ok(/textbook test/.test(A.textbookShortfall(CODE, 'mdiv', [READ], { requiredFrom: { [READ]: null }, now: after, completions: [] }) || ''), 'not yet activated: a reading pass does not stand in for the textbook test');
 ok(A.textbookShortfall('CTSGENESIS', 'thm', []) !== null, 'Genesis is held without its reading test, as before');
-ok(A.textbookShortfall('CTSGENESIS', 'thm', ['genesisreadings']) === null, 'and complete with it');
+ok(A.textbookShortfall('CTSGENESIS', 'thm', ['genesisdods', 'genesisreadings']) === null, 'and complete with it (its textbook test, genesisdods, counts since 15 Oct 2026)');
 
 /* ---- in force: both tests, each on its own ------------------------------ */
 
@@ -75,7 +76,7 @@ ok(A.textbookShortfall(CODE, 'thm', [], active()) !== null, 'neither passed: hel
 for (const level of ['cert', 'associate', null])
   ok(A.textbookShortfall(CODE, level, [], active()) === null, `${level || 'no'} level: Certificate and Associate requirements unchanged -- no test needed`);
 ok(A.textbookShortfall(CODE, 'mdiv', [BOOK], active([], before)) === null, 'before the activation moment the reading test does not count yet');
-ok(A.textbookShortfall('CTSGENESIS', 'mdiv', ['genesisreadings'], active()) === null, 'an activation date on one test changes nothing about another course');
+ok(A.textbookShortfall('CTSGENESIS', 'mdiv', ['genesisdods', 'genesisreadings'], active()) === null, 'an activation date on one test changes nothing about another course');
 
 const units = catalog.courses.pentecostal.units;
 ok(/units not recorded/.test(A.courseShortfall('pentecostal', units.slice(1), 'mdiv', [BOOK, READ], active()) || ''), 'units are still required first');
