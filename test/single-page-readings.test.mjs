@@ -80,9 +80,11 @@ const active = (completions = [], now = late) => ({ requiredFrom: { broadus: nul
 ok(JSON.stringify(A.testsFor('WISESPEAK')) === JSON.stringify(['broadus', WS]), 'Preaching lists its textbook (Broadus, 12 Oct 2026, inactive) and then its reading test');
 ok(A.testsFor('CTSNOSUCHCOURSE').length === 0, 'a course with no test still requires none');
 
-// inactive, as staged
+// inactive, as staged (stated explicitly: the catalog itself now carries the
+// 15 Oct 2026 production activation moment for broadus)
+const inactive = { requiredFrom: { broadus: null, [WS]: null }, now: late, completions: [] };
 for (const level of ['cert', 'associate', 'thm', 'mdiv', null])
-  ok(A.textbookShortfall('WISESPEAK', level, []) === null, `inactive test: ${level || 'no'} level needs nothing new`);
+  ok(A.textbookShortfall('WISESPEAK', level, [], inactive) === null, `inactive test: ${level || 'no'} level needs nothing new`);
 
 // active (a date Robert would set)
 for (const level of ['cert', 'associate', null])
