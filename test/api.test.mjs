@@ -146,7 +146,7 @@ ok(told(repeat.body).length === 0, `re-reporting both courses from another devic
   const st = await jpost('/api/sync', { code: r.body.code, progress: [],
     doneCodes: ['COUNSELING', 'CTSCOUNSELING', 'CTSPREACHING', 'OTS', 'CTSOTS', 'CTS', 'CTSASSOCIATE',
       'CTSBIBLECERTIFICATE', 'CTSPSALMS', 'CTSPSALMSMDIVCERTIFICATE', 'ETHICS_CERTIFICATE'],
-    completionTracks: { CTSCOUNSELING: 'assoc' } });
+    completionTracks: { CTSCOUNSELING: 'assoc' }, textbooks: passes(['CTSPSALMS']) });
   const got = st.body.completions.map((c) => `${c.code}:${c.track}`).sort().join(',');
   ok(got === 'COUNSELING:assoc,CTSBIBLE:cert,CTSOTS:cert,CTSPSALMS:mdiv,ETHICS:cert,WISESPEAK:cert',
     `old and current codes for one course are held once, non-course codes not at all (${got})`);
@@ -259,7 +259,7 @@ for (const level of ['certificate', 'associate', 'thm', 'mdiv'])
     `a ${level} award with no completed courses is refused`);
 
 // Pass the rest of 1 Peter and the certificate is supported.
-await jpost('/api/sync', { code: CODE, progress: Array.from({ length: 12 }, (_, i) => ({ course: '1peter', unit: i + 1, completedAt: T_LATE })) });
+await jpost('/api/sync', { code: CODE, progress: Array.from({ length: 12 }, (_, i) => ({ course: '1peter', unit: i + 1, completedAt: T_LATE })), textbooks: passes(['CTS1PETER']) });
 const cert = await jpost('/api/certificate', { code: CODE, level: 'course', course: '1peter', title: '1 Peter Intensive', page: 'CTS1PeterCertificate.html' });
 ok(cert.status === 201, `issuing a certificate returned ${cert.status}`);
 const VC = cert.body?.verifyCode;
