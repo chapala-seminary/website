@@ -155,7 +155,8 @@ if (want(3)) {
   ok(await p.locator('.question[data-fill="0"] .feedback-text').first().innerText().then((t) => /Correct/.test(t)), 'an exact answer shows Correct');
   stub.delay['/grade'] = 0;
   await p.locator('input[data-fill="1"]').fill('tri-unity [[ai-accept]]'); await p.locator('input[data-fill="1"]').press('Enter');
-  ok(await waitText(p, 'Accepted: that is another name for the same thing.'), 'an answer the model accepts shows Correct with its line of feedback');
+  ok(await p.waitForSelector('.question[data-fill="1"] .feedback-text.correct').then(() => true, () => false) && !(await has(p, '.question[data-fill="1"]', 'another name for the same thing')),
+    'an answer the model accepts shows Correct; the model\'s own words wait for a pass (#124)');
   await p.locator('input[data-fill="2"]').fill('banana'); await p.locator('input[data-fill="2"]').press('Enter');
   ok(await has(p, '.question[data-fill="2"] .feedback-text', 'Incorrect') || (await p.waitForSelector('.question[data-fill="2"] .feedback-text.incorrect').then(() => true, () => false)), 'a rejected answer is marked Incorrect');
   ok(!(await body(p)).includes('Not quite: that is not what the blank asks for.') && !(await has(p, '.question[data-fill="2"]', 'Answer: ')), 'and, while the attempt is open, neither the model\'s comment nor the answer wanted');
@@ -187,7 +188,7 @@ if (want(4)) {
   // the answer-disclosure policy: what the model said is missing waits for a pass
   ok(await has(p, '.question[data-sa="1"] .feedback-text', 'Partly') && !(await has(p, '.question[data-sa="1"]', 'You named the covenant but did not say what God promised.')), 'partly: the verdict, and not what is missing');
   ok(await has(p, '.question[data-sa="2"] .feedback-text', 'Does not meet the standard') && !(await has(p, '.question[data-sa="2"]', 'You did not make the main point.')), 'not met: the verdict only');
-  ok(await has(p, '.question[data-sa="0"]', 'You made every essential point.'), 'met: its line of feedback is still shown');
+  ok(!(await has(p, '.question[data-sa="0"]', 'You made every essential point.')), 'met: the verdict only; the model\'s line waits for a pass (#124)');
   ok(await has(p, '.question[data-sa="3"] .feedback-text', 'Pending'), 'pending: "Pending"');
   ok(await has(p, '.question[data-sa="1"]', 'Request a human review') && await has(p, '.question[data-sa="2"]', 'Request a human review') && !(await has(p, '.question[data-sa="0"]', 'Request a human review')) && !(await has(p, '.question[data-sa="3"]', 'Request a human review')), 'the appeal link sits by partly and not met only');
   ok(!(await body(p)).includes(bank.sa[0].model.en.slice(0, 30)), 'the model answer is never shown');

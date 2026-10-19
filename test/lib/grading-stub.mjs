@@ -146,10 +146,11 @@ export class GradingStub {
     }
     return out;
   }
-  /* AI feedback on an answer that was not right is held back until a pass. */
+  /* As worker/grading/attempts.js feedbackFor (#124, Wayne 18 Oct 2026): before
+     a pass, only the seminary's own fixed sentences go out, whatever the grader
+     or verdict. This stub never writes one, so before a pass nothing does. */
   feedbackOut(r, review) {
-    if (review || !r.feedback || r.by !== 'ai' || ['right', 'met', 'pending'].includes(r.verdict)) return r.feedback;
-    return null;
+    return review ? (r.feedback || null) : null;
   }
 
   // ---- POST /api/mc ----
