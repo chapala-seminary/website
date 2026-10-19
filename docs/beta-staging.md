@@ -23,7 +23,11 @@ The beta Actions workflow runs a fresh build and the complete suite on each push
 
 Publication and post-deploy verification now have separate Actions steps. CI uses
 the guarded `deploy:beta:publish` part of `deploy:beta`, then verifies the exact
-build stamp and all 79 activation dates. A challenged or unreachable custom
+build stamp and all 71 activation dates (79 staged tests less the eight awaiting faculty review, Wayne 18 Oct 2026). The beta configuration explicitly enables
+`workers_dev` for this fallback and disables unused version preview URLs.
+Wrangler otherwise disables workers.dev when the custom route is present.
+The Worker still verifies signed Access tokens on staff endpoints. Probe
+errors identify the failing hostname, including a fallback failure. A challenged or unreachable custom
 domain can be checked on the same Worker's direct hostname, with an explicit
 warning that custom-domain browser acceptance remains pending. A wrong release,
 bad activation policy or HTTP 500 still fails verification. The deployment and
@@ -53,7 +57,10 @@ content follow the same staging process; no Robert review is required for
 promotion. The production check requires Wayne's approval of the exact current
 beta commit and a successful beta test/deployment/verification run. Pasted AI
 review links are optional context, not a merge requirement. Code Owners are
-advisory. Robert's existing account review exception remains.
+advisory. Robert's exact-commit approval authorizes any PR, including feature/fork PRs.
+His own PRs need no other reviewer. Native PR approval count is zero; the
+required release check enforces the account-specific approval policy, with
+build/test checks still required.
 
 The agent opens a separate PR from current `beta` to `main` after that exact
 commit's beta deployment and live verification are green. Wayne reviews beta,
@@ -79,4 +86,4 @@ See [the PR review record](beta-staging-review-2026-10-12.md) for all 31 origina
 
 ## Master’s requirements after the 12 October audit
 
-[Beta activation](beta-master-test-activation.md) records the cutoff in beta when the repaired release is deployed, preserving earlier valid master’s completions. The guarded deploy prepares only the activation metadata migration, then checks all 79 newly activated requirements. Production needs a separately chosen date before promotion.
+[Beta activation](beta-master-test-activation.md) records the cutoff in beta when the repaired release is deployed, preserving earlier valid master’s completions. The guarded deploy prepares only the activation metadata migration, then checks all 71 newly activated requirements (the eight awaiting faculty review stay optional). Production needs a separately chosen date before promotion.

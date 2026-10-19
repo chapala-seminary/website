@@ -10,7 +10,7 @@ export async function probeBeta(base, expected, request = fetch) {
   const version = await request(`${base}/version.txt?release=${expected}`, { signal: AbortSignal.timeout(5000) });
   const requireOK = response => {
     if (response.ok) return;
-    const error = new Error(`beta probe returned HTTP ${response.status}${response.headers.get('cf-mitigated') === 'challenge' ? '; Cloudflare challenge' : ''}`);
+    const error = new Error(`beta probe ${response.url || base} returned HTTP ${response.status}${response.headers.get('cf-mitigated') === 'challenge' ? '; Cloudflare challenge' : ''}`);
     error.challenge = response.headers.get('cf-mitigated') === 'challenge';
     throw error;
   };
@@ -33,6 +33,7 @@ export async function checkBeta(expected, request = fetch, pause = ms => new Pro
       catch (error) {
         // Only transport/challenge failures permit the alternate entry point.
         if (!error.challenge && !(error instanceof TypeError) && error.name !== 'TimeoutError') throw error;
+        console.warn(`Custom-domain probe failed: ${error.message}; trying the direct Worker hostname.`);
         date = await probeBeta('https://chapala-seminary-beta.chapalatheological.workers.dev', expected, request);
         console.warn('Custom-domain probe was challenged or unreachable; exact beta release and activation verified on the direct Worker hostname. Custom-domain browser acceptance remains required.');
       }

@@ -118,6 +118,10 @@
 		// leave a row in the real students' table.
 		"beta": {
 			"name": "chapala-seminary-beta",
+			// Keep the direct hostname used by the post-deploy health fallback.
+			// Routes otherwise make Wrangler default workers_dev to false.
+			"workers_dev": true,
+			"preview_urls": false,
 			"account_id": "119b0919229edb3185b69f1c6bd04b66",
 			// Its own address. A custom domain: `npm run deploy:beta` attaches it,
 			// and Cloudflare makes the DNS record and the certificate, since the
