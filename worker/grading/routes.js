@@ -13,7 +13,7 @@
  * are the ones every other route uses.
  */
 import { loadScope, loadKeys, loadStudent, loadAttempt, trackOf, nowIso, itemsOf, standing, bankedFor,
-  attemptView, resultOf, settle, gradeWritten, gradedThisHour, canned } from './attempts.js';
+  attemptView, resultOf, settle, gradeWritten, gradedThisHour, canned, disclosureOf, feedbackFor } from './attempts.js';
 import { MAX_FILL_CHARS, MAX_SA_CHARS, HOURLY_CAP, OPEN_APPEALS_MAX, MIN_SA_WORDS } from './rules.js';
 
 import { wordCount } from './text.js';
@@ -114,9 +114,13 @@ async function answerMC(request, env, h) {
     `INSERT INTO answer_grades (attempt_id, student_id, qid, kind, lang, answer_text, verdict, graded_by, created_at, graded_at)
      VALUES (?, ?, ?, 'mc', ?, ?, ?, 'exact', ?, ?) ON CONFLICT(attempt_id, qid) DO NOTHING`)
     .bind(attempt.id, student.id, qid, attempt.lang, String(choice), right ? 'right' : 'wrong', t, t).run();
-  // The first answer stands, whoever wrote it: read back what is stored.
+  // The first answer stands, whoever wrote it: read back what is stored, and
+  // say which choice that was -- a retried click whose first reply was lost
+  // may name another option, and the page must show the one recorded.
+  // The attempt is open, so the reply is the verdict only (disclosureOf):
+  // never the right option or its explanation.
   const stored = await env.DB.prepare('SELECT verdict, answer_text FROM answer_grades WHERE attempt_id = ? AND qid = ?').bind(attempt.id, qid).first();
-  return h.json({ right: stored.verdict === 'right', answer: key.key.answer, why: pick(key.key.why, attempt.lang) || null, choice: Number(stored.answer_text) });
+  return h.json({ right: stored.verdict === 'right', choice: Number(stored.answer_text) });
 }
 
 async function gradeAnswers(request, env, h) {
@@ -165,17 +169,14 @@ async function gradeAnswers(request, env, h) {
     graded = await gradeWritten(env, attempt, entries);
   }
   const byQid = new Map(graded.map((g) => [g.qid, g]));
-  // an item answered earlier that was a wrong fill-in: it is final, so the answer wanted may come with it
-  const wrongBefore = asked.filter((a) => !byQid.has(a.qid) && a.kind === 'fill' && done.get(a.qid)?.verdict === 'wrong').map((a) => a.qid);
-  const wantedKeys = wrongBefore.length ? await loadKeys(env, wrongBefore) : new Map();
+  // An item answered earlier keeps its first grade. The attempt is open, so
+  // the reply is the verdict only (disclosureOf): never the answer wanted.
+  const disclosure = disclosureOf(attempt);
   return h.json({
     items: asked.map((a) => {
       if (byQid.has(a.qid)) return byQid.get(a.qid);
       const was = done.get(a.qid);
-      if (was) {
-        const wanted = wrongBefore.includes(a.qid) ? pick(wantedKeys.get(a.qid)?.key.answer, attempt.lang) : '';
-        return { qid: a.qid, gradeId: was.id, verdict: was.verdict, feedback: was.feedback || null, gradedBy: was.graded_by, ...(wanted ? { correctAnswer: wanted } : {}) };
-      }
+      if (was) return { qid: a.qid, gradeId: was.id, verdict: was.verdict, feedback: feedbackFor(was, disclosure), gradedBy: was.graded_by };
       return { qid: a.qid, verdict: 'met', feedback: null, banked: true };
     }),
   });

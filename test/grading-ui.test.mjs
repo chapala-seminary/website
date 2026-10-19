@@ -114,23 +114,29 @@ if (want(2)) {
   ok(await has(p, '.question[data-mc="0"]', 'Checking…'), '"Checking…" shows while waiting');
   ok(await p.locator('.question[data-mc="0"] .option.correct').count() === 0, 'nothing is marked before the server answers');
   await p.waitForSelector('.question[data-mc="0"] .feedback-text.correct');
-  ok(await p.locator(`.question[data-mc="0"] .option.correct[data-opt="${bank.mc[0].answer}"]`).count() === 1, 'the right option is marked');
-  ok(await has(p, '.question[data-mc="0"] .feedback', 'John echoes Genesis'), 'the explanation (why) comes with the answer');
+  ok(await p.locator(`.question[data-mc="0"] .option.correct[data-opt="${bank.mc[0].answer}"]`).count() === 1, 'the right option chosen is marked right');
+  // the answer-disclosure policy (Wayne, 18 Oct 2026): no explanation while the attempt is open
+  ok(await p.locator('.question[data-mc="0"] .feedback').count() === 0, 'no explanation (why) while the attempt is open');
   const wrong = (bank.mc[1].answer + 1) % bank.mc[1].options.en.length;
   await mcAnswer(p, 1, wrong);
   await p.waitForSelector('.question[data-mc="1"] .feedback-text.incorrect');
-  ok(await p.locator(`.question[data-mc="1"] .option.wrong[data-opt="${wrong}"]`).count() === 1 && await p.locator(`.question[data-mc="1"] .option.correct[data-opt="${bank.mc[1].answer}"]`).count() === 1, 'a wrong click marks it wrong and shows the right one');
-  ok(await has(p, '.question[data-mc="1"] .feedback-text', 'Correct answer: ' + 'ABCDEFGH'[bank.mc[1].answer]), 'the correct letter is named');
+  ok(await p.locator(`.question[data-mc="1"] .option.wrong[data-opt="${wrong}"]`).count() === 1 && await p.locator('.question[data-mc="1"] .option.correct').count() === 0, 'a wrong click marks it wrong and does not show the right one');
+  ok(!(await has(p, '.question[data-mc="1"] .feedback-text', 'Correct answer')) && (await p.locator('.question[data-mc="1"] .feedback-text').innerText()).trim() === '✗ Incorrect.', 'no letter is named: "Incorrect." and nothing more');
   const n = stub.calls('/mc').length;
   await mcAnswer(p, 1, bank.mc[1].answer);
   await sleep(700);
   ok(stub.calls('/mc').length === n, 'a second click on an answered question sends nothing');
   const b = stub.calls('/mc')[0].body;
   ok(b.qid === `${SCOPE}/mc/0` && b.choice === bank.mc[0].answer && b.attemptId && b.code === STUB_CODE, 'POST /api/mc carries code, attemptId, qid and choice');
-  // a reload brings the answered questions back from the server, with right and why
+  // a reload brings the answered questions back from the server, verdicts only
+  const before = stub.calls('/mc').length;
   await p.reload({ waitUntil: 'load' }); await ready(p);
-  await waitText(p, 'John echoes Genesis');
-  ok(await p.locator('.question[data-mc="1"] .option.wrong').count() === 1 && await has(p, '.question[data-mc="0"] .feedback', 'John echoes Genesis'), 'a reload restores answered multiple choice, with the right answer and why');
+  await p.waitForSelector('.question[data-mc="1"] .option.wrong');
+  await sleep(500);
+  ok(await p.locator('.question[data-mc="1"] .option.wrong').count() === 1 && await p.locator('.question[data-mc="0"] .option.correct').count() === 1 && await p.locator('.question[data-mc="1"] .option.correct').count() === 0,
+    'a reload restores answered multiple choice: the choices and verdicts, no right option for the wrong one');
+  ok(await p.locator('.feedback').count() === 0 && !/undefined/.test(await p.locator('#questionsContainer').innerText()), 'no explanation, and nothing reads "undefined"');
+  ok(stub.calls('/mc').length === before, 'the page does not ask again for answers the server withholds');
   await ctx.close();
 }
 
@@ -151,8 +157,8 @@ if (want(3)) {
   await p.locator('input[data-fill="1"]').fill('tri-unity [[ai-accept]]'); await p.locator('input[data-fill="1"]').press('Enter');
   ok(await waitText(p, 'Accepted: that is another name for the same thing.'), 'an answer the model accepts shows Correct with its line of feedback');
   await p.locator('input[data-fill="2"]').fill('banana'); await p.locator('input[data-fill="2"]').press('Enter');
-  ok(await waitText(p, 'Not quite: that is not what the blank asks for.'), 'a rejected answer shows its feedback');
-  ok(await has(p, '.question[data-fill="2"] .feedback-text', 'Incorrect'), 'a rejected answer is marked Incorrect');
+  ok(await has(p, '.question[data-fill="2"] .feedback-text', 'Incorrect') || (await p.waitForSelector('.question[data-fill="2"] .feedback-text.incorrect').then(() => true, () => false)), 'a rejected answer is marked Incorrect');
+  ok(!(await body(p)).includes('Not quite: that is not what the blank asks for.') && !(await has(p, '.question[data-fill="2"]', 'Answer: ')), 'and, while the attempt is open, neither the model\'s comment nor the answer wanted');
   ok(await has(p, '.question[data-fill="2"]', 'Request a human review'), 'a rejected answer offers "Request a human review"');
   ok(!(await has(p, '.question[data-fill="0"]', 'Request a human review')), 'a right answer offers no appeal');
   await p.locator('input[data-fill="3"]').fill('something [[pending]]'); await p.locator('input[data-fill="3"]').press('Enter');
@@ -178,8 +184,10 @@ if (want(4)) {
   const sa = stub.calls('/grade').slice(before);
   ok(sa.length === 1 && sa[0].body.items.length === 10 && sa[0].body.items.every((x) => x.qid.includes('/sa/')), 'all ten written answers go in one /api/grade call');
   ok(await has(p, '.question[data-sa="0"] .feedback-text', 'Meets the standard'), 'met: "Meets the standard"');
-  ok(await has(p, '.question[data-sa="1"] .feedback-text', 'Partly') && await has(p, '.question[data-sa="1"]', 'You named the covenant but did not say what God promised.'), 'partly: the verdict and what is missing');
-  ok(await has(p, '.question[data-sa="2"] .feedback-text', 'Does not meet the standard') && await has(p, '.question[data-sa="2"]', 'You did not make the main point.'), 'not met: the verdict and why');
+  // the answer-disclosure policy: what the model said is missing waits for a pass
+  ok(await has(p, '.question[data-sa="1"] .feedback-text', 'Partly') && !(await has(p, '.question[data-sa="1"]', 'You named the covenant but did not say what God promised.')), 'partly: the verdict, and not what is missing');
+  ok(await has(p, '.question[data-sa="2"] .feedback-text', 'Does not meet the standard') && !(await has(p, '.question[data-sa="2"]', 'You did not make the main point.')), 'not met: the verdict only');
+  ok(await has(p, '.question[data-sa="0"]', 'You made every essential point.'), 'met: its line of feedback is still shown');
   ok(await has(p, '.question[data-sa="3"] .feedback-text', 'Pending'), 'pending: "Pending"');
   ok(await has(p, '.question[data-sa="1"]', 'Request a human review') && await has(p, '.question[data-sa="2"]', 'Request a human review') && !(await has(p, '.question[data-sa="0"]', 'Request a human review')) && !(await has(p, '.question[data-sa="3"]', 'Request a human review')), 'the appeal link sits by partly and not met only');
   ok(!(await body(p)).includes(bank.sa[0].model.en.slice(0, 30)), 'the model answer is never shown');

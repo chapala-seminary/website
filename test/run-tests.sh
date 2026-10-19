@@ -260,6 +260,13 @@ API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/requ
 # above and below ask for the old /api/sync with x-test-grading-mode: shadow.
 API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/grading-api.test.mjs
 
+# The answer-disclosure policy (Wayne, 18 Oct 2026): while an attempt is open,
+# and after one that failed, right or wrong only -- no right option,
+# explanation, answer wanted, model answer, teaching passage or AI feedback on
+# a wrong answer, in any reply; a lost MC reply retried returns the stored
+# choice; a pass opens the review (worker/grading/attempts.js disclosureOf).
+API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/answer-disclosure.test.mjs
+
 # The faculty's grading pages (/staff/grading, worker/staff-grading.js):
 # appeals that pass a unit, pending answers, blind calibration and its
 # agreement figures, fill-in rulings and tools/apply-accepts.mjs, possible
@@ -317,6 +324,9 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   # Counseling, Narrative and WiseSpeak Preaching) the same way: the server is the grader
   # of record, the pages carry no key, the credit is the server's (docs/ai-grading.md, section 15).
   STATE="$STATE" CONFIG="$CONFIG" node test/single-live.test.mjs "http://127.0.0.1:$PORT"
+  # ...and the same policy in the live pages: "Incorrect." and nothing more while
+  # open, the choice the server stored after a lost reply, the review after a pass.
+  STATE="$STATE" CONFIG="$CONFIG" node test/answer-disclosure-ui.test.mjs "http://127.0.0.1:$PORT"
   # ...and the shadow build still posts each submitted unit to /api/shadow, with
   # the keys in its pages and the old engine unchanged.
   node test/shadow-mode.test.mjs "$SHADOW"

@@ -17,10 +17,15 @@ const normal=s=>s.replace(/\s+/g,' ').trim();
 for(const bank of books) for(const lang of langs) {
   const file=`${lang==='en'?'':lang+'/'}${bank.page}Test.html`;
   const doc=documentFor(file);
+  // A live build keeps the passages off the test page, as JSON only the Worker
+  // sends after a pass (answer-disclosure policy, 18 Oct 2026); a shadow build
+  // loads them on the page as before.
   const asset=doc.querySelector('script[src^="/assets/exam-review/"]')?.getAttribute('src');
-  ok(asset,`${bank.slug}/${lang} has a review asset`);
-  const window={};vm.runInNewContext(fs.readFileSync(`dist${asset}`,'utf8'),{window});
-  const review=window.CTS_EXAM_REVIEW;
+  const kept=`dist/assets/exam-review/${bank.slug}.${lang}.json`;
+  ok(asset || fs.existsSync(kept),`${bank.slug}/${lang} has a review asset`);
+  let review;
+  if(asset){const window={};vm.runInNewContext(fs.readFileSync(`dist${asset}`,'utf8'),{window});review=window.CTS_EXAM_REVIEW;}
+  else review=JSON.parse(fs.readFileSync(kept,'utf8'));
   ok(review.slug===bank.slug && review.questions.length===40,`${bank.slug}/${lang}: all forty questions have explanations`);
   for(const [index,item] of review.questions.entries()) {
     ok(item.paragraphs.length>=1&&item.paragraphs.length<=2,`${bank.slug}/${lang}/${index}: one or two paragraphs`);

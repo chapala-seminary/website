@@ -124,6 +124,21 @@ for (const file of walk(dir)) {
     }
   }
   if (!liveScriptOk(html)) note(`${rel}: a live page without cts-grading.js`);
+  // The teaching passages of the missed-question review hold the answers
+  // (tools/exam-review.mjs): a live page never loads them before a pass.
+  if (/\/assets\/exam-review\//.test(html) || html.includes('CTS_EXAM_REVIEW =')) note(`${rel}: a live page loads the review passages, which hold the answers`);
+}
+/* ...and the passages are not a script a browser could load: in a live build
+   they are JSON the Worker alone reads, after a passed attempt (answer-
+   disclosure policy, Wayne, 18 Oct 2026; worker/index.js refuses the path). */
+let reviewFiles = 0;
+if (!expectKeys) {
+  const rd = path.join(dir, 'assets', 'exam-review');
+  for (const f of fs.existsSync(rd) ? fs.readdirSync(rd) : []) {
+    if (f.endsWith('.json')) reviewFiles++;
+    else note(`assets/exam-review/${f}: review passages published as something other than the Worker's JSON`);
+  }
+  if (testPages && !reviewFiles) note('assets/exam-review has no review passages for the Worker to send after a pass');
 }
 function liveScriptOk(html) { return /\/assets\/js\/cts-grading\.js/.test(html); }
 
@@ -209,4 +224,4 @@ if (problems.length) {
 }
 console.log(expectKeys
   ? `PASS — shadow build: ${unitPages} unit pages and ${testPages} test pages keep their keys (${withKeys} with keys) and post to /api/shadow (${shadowHook} carry the hook); ${singlePages} single-page course pages keep theirs and carry the hook.`
-  : `PASS — live build: ${unitPages} unit pages and ${testPages} test pages carry no answer key, accept list, model answer, keyword, rubric or explanation; nor do the ${singlePages} single-page course pages (Counseling, Narrative and WiseSpeak Preaching, Ethics) or their fill-in data.`);
+  : `PASS — live build: ${unitPages} unit pages and ${testPages} test pages carry no answer key, accept list, model answer, keyword, rubric, explanation or review passage (${reviewFiles} passage files kept for the Worker); nor do the ${singlePages} single-page course pages (Counseling, Narrative and WiseSpeak Preaching, Ethics) or their fill-in data.`);

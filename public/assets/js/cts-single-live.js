@@ -95,7 +95,7 @@
         if (!a || a.choice == null) continue;
         var right = a.verdict ? a.verdict === "right" : !!a.right;
         cfg.setMc(i, +a.choice);
-        c.mcRes[qid("mc", i)] = { right: right, answer: a.answer != null ? idxOf(a.answer) : (right ? +a.choice : -1), why: a.why };
+        c.mcRes[qid("mc", i)] = { right: right, answer: a.answer != null ? idxOf(a.answer) : (right ? +a.choice : -1), why: a.why == null ? null : a.why };
       }
       for (var f = 0; f < cfg.n.fill; f++) {
         var fa = ans[qid("fill", f)];
@@ -198,9 +198,12 @@
         G.calls.mc(c.attemptId, q, j).then(function (r) {
           delete c.busy[q];
           if (!r.ok || !r.data) return trouble(r, function () { c.trouble = null; c.mc(i, j); });
-          cfg.setMc(i, j);
+          // the server keeps the first answer: show the choice it recorded, not this click
+          var stored = Number.isInteger(r.data.choice) ? r.data.choice : j;
+          cfg.setMc(i, stored);
           var right = !!r.data.right;
-          c.mcRes[q] = { right: right, answer: r.data.answer != null ? idxOf(r.data.answer) : (right ? j : -1), why: r.data.why === undefined ? null : r.data.why };
+          // while the attempt is open the reply is right or wrong only (answer-disclosure policy)
+          c.mcRes[q] = { right: right, answer: r.data.answer != null ? idxOf(r.data.answer) : (right ? stored : -1), why: r.data.why == null ? null : r.data.why };
           cfg.save(); cfg.draw();
         });
       });

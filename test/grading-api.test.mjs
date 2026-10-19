@@ -129,12 +129,13 @@ const progressOf = async (code) => (await get(`/api/student/${code}`)).body;
 
   const first = john1.mc[0], right = first.answer, wrong = (right + 1) % first.options.en.length;
   const r1 = await post('/api/mc', { code, attemptId: a.attemptId, qid: a.items.mc[0].qid, choice: wrong });
-  ok(r1.status === 200 && r1.body.right === false && r1.body.answer === right && !!r1.body.why, 'a wrong click says so, with the right answer and why', r1);
+  // the answer-disclosure policy (Wayne, 18 Oct 2026; test/answer-disclosure.test.mjs has the rest)
+  ok(r1.status === 200 && r1.body.right === false && r1.body.choice === wrong && !('answer' in r1.body) && !('why' in r1.body), 'a wrong click says so, and not what was right', r1);
   const r2 = await post('/api/mc', { code, attemptId: a.attemptId, qid: a.items.mc[0].qid, choice: right });
   ok(r2.body.right === false && r2.body.choice === wrong, 'the first answer stands: a second click returns the first result', r2.body);
   const view = (await start(code)).body;
   eq(view.answered[a.items.mc[0].qid].choice, wrong, 'the attempt remembers the choice');
-  ok(!!view.items.mc[0].why, 'and now carries the "why" for that question');
+  ok(!view.items.mc[0].why && !('answer' in view.answered[a.items.mc[0].qid]), 'and, while it is open, no "why" or right answer for that question');
 
   ok((await post('/api/mc', { code, attemptId: a.attemptId, qid: a.items.mc[1].qid, choice: 99 })).status === 400, 'a choice that is not an option is refused');
   ok((await post('/api/mc', { code, attemptId: a.attemptId, qid: a.items.mc[1].qid, choice: 'a' })).status === 400, 'a choice that is not a number is refused');
