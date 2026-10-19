@@ -67,13 +67,15 @@ certificates, verification, tests, grading, staff and records never do.
 Pure Markdown readings and offline review packets can be added as content. Content does not
 include changing the grading engine; changing academic answer keys is content.
 
-Technical and mixed changes need two separate AI reviews of the exact commit
-(Claude and ChatGPT, two different review links in the PR body) and Wayne's
+Technical and mixed changes need a technical-scope review record from Claude
+and one from ChatGPT for the exact commit (PR comments in the format in
+`.github/pull_request_template.md`, read by the release check) and Wayne's
 exact-commit approval in GitHub (Wayne, 18 Oct 2026). Robert's approval is
 accepted in place of the AI reviews but is no longer required. Code Owners
 cover every path through Wayne's account. Robert's `satoshisound` account keeps
-its named PR-review bypass, and his own same-repository PRs are exempt from the
-faculty/AI approval gate. Build and test checks still apply. Wayne and the AI
+its named PR-review bypass, and his own same-repository PRs to beta are exempt
+from the faculty/AI approval gate; PRs to main never are. Build and test checks
+still apply. Wayne and the AI
 have no bypass. An agent must never impersonate a human reviewer or the other
 assistant.
 

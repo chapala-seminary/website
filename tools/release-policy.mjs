@@ -37,7 +37,29 @@ export function readingStructure(html) {
   const tags = remaining.match(/<!--[\s\S]*?-->|<![^>]*>|<\/?[a-zA-Z](?:"[^"]*"|'[^']*'|[^'">])*>/g) || [];
   return JSON.stringify([protectedBlocks, tags]);
 }
-const unsafeMarkup = /<\s*\/?\s*(?:script|style|iframe|object|embed|base|meta|link|form|input|button|svg|math)\b|\bon[a-z]+\s*=|(?:javascript|vbscript)\s*:|data\s*:\s*(?:text\/html|image\/svg)/i;
+const unsafeMarkup = /<\s*\/?\s*(?:script|style|iframe|object|embed|base|meta|link|form|input|button|svg|math|frame|frameset|template|portal)\b|\bon[a-z]+\s*=|\b(?:srcdoc|formaction|xlink:href)\s*=|(?:javascript|vbscript|livescript)\s*:|data\s*:\s*(?:text\/html|image\/svg|application\/(?:xhtml|xml))/i;
+/* Browsers decode character references in attribute values and drop tab,
+   newline and other control characters inside a URL scheme, so
+   "&#106;avascript:" and "java&#9;script:" both run. Check the text as the
+   browser will read it, as well as the text as written. Encoded angle
+   brackets (&lt;) are not decoded: they display as text and never run. */
+const NAMED = { colon: ':', tab: '\t', newline: '\n', lpar: '(', rpar: ')', sol: '/', period: '.', comma: ',', quot: '"', apos: "'", equals: '=', num: '#', amp: '&' };
+function decoded(text) {
+  let out = String(text || '');
+  for (let pass = 0; pass < 3; pass++) {
+    const next = out
+      .replace(/&#x([0-9a-f]+);?/gi, (m, hex) => { const c = parseInt(hex, 16); return c === 60 || c === 62 ? m : String.fromCodePoint(c); })
+      .replace(/&#(\d+);?/g, (m, dec) => { const c = Number(dec); return c === 60 || c === 62 ? m : String.fromCodePoint(c); })
+      .replace(/&(colon|tab|newline|lpar|rpar|sol|period|comma|quot|apos|equals|num|amp);/gi, (m, name) => NAMED[name.toLowerCase()]);
+    if (next === out) break;
+    out = next;
+  }
+  return out;
+}
+export function isUnsafe(text) {
+  const plain = decoded(text);
+  return unsafeMarkup.test(String(text || '')) || unsafeMarkup.test(plain) || unsafeMarkup.test(plain.replace(/[\u0000-\u001f\u007f]/g, ''));
+}
 export function isContentChange(file) {
   const rule = contentRule(file.filename);
   if (!rule || ['removed', 'renamed'].includes(file.status)) return false;
@@ -59,7 +81,7 @@ export function isContentChange(file) {
     const before = blocks(file.before), after = blocks(file.after);
     if (JSON.stringify(before) !== JSON.stringify(after) || after.some((block) => block.endsWith(' (invalid JSON)'))) return false;
     const outside = (html) => html.replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, '');
-    const controls = (html) => (outside(html).match(/<!--[\s\S]*?-->|<![^>]*>|<\/?[a-zA-Z](?:"[^"]*"|'[^']*'|[^'">])*>/g) || []).filter((tag) => unsafeMarkup.test(tag)).join('\n');
+    const controls = (html) => (outside(html).match(/<!--[\s\S]*?-->|<![^>]*>|<\/?[a-zA-Z](?:"[^"]*"|'[^']*'|[^'">])*>/g) || []).filter((tag) => isUnsafe(tag)).join('\n');
     // The page's existing controls (a registration form, say) may stay; the
     // list of them must not change.
     return controls(file.after) === controls(file.before);
@@ -69,13 +91,13 @@ export function isContentChange(file) {
     // list or nested control can ride along. Markup is checked below.
     try {
       const after = JSON.parse(file.after);
-      if (!file.before || unsafeMarkup.test(file.after)) return false;
+      if (!file.before || isUnsafe(file.after)) return false;
       return Boolean(after && typeof after === 'object' && !Array.isArray(after)
         && Object.values(after).every((value) => typeof value === 'string'));
     } catch { return false; }
   }
   if (rule === 'review') return true; // Offline faculty packets, not imported or served.
-  if (unsafeMarkup.test(file.after || '')) return false;
+  if (isUnsafe(file.after || '')) return false;
   if (rule === 'prose') return true;
   if (rule === 'answers') {
     try {
@@ -110,27 +132,50 @@ export function approvedBy(reviews, login, sha) {
   return latest?.state === 'APPROVED' && latest.commit_id === sha;
 }
 
-// Both review links, separately: one review cannot stand in for the other.
-export function separateReviews(body) {
-  const link = (label) => String(body || '').split(/\r?\n/).map((line) => line.trim())
-    .find((line) => line.startsWith(label))?.slice(label.length).trim().replace(/[#?].*$/, '').replace(/\/+$/, '');
-  const chatgpt = link('ChatGPT review:'), claude = link('Claude review:');
-  return Boolean(chatgpt && claude && chatgpt !== claude);
+/* AI reviews are recorded as PR comments, one per review, in this exact form:
+     CTS review: reviewer=Claude verdict=approve scope=technical head=<40-hex commit>
+   reviewer is Claude or ChatGPT; verdict approve or changes; scope content or
+   technical. Only comments by accounts with access to the repository count
+   (OWNER, MEMBER, COLLABORATOR); a public commenter cannot add one. The
+   checker reads the comments itself; a link is never taken as proof. Both
+   assistants may post from the same AI account, so a record shows what each
+   assistant concluded about which commit, not who typed it; Wayne's own
+   GitHub approval remains the human check. */
+const RECORD = /^CTS review:\s*reviewer=(Claude|ChatGPT)\s+verdict=(approve|changes)\s+scope=(content|technical)\s+head=([0-9a-f]{40})\s*$/im;
+const TRUSTED = ['OWNER', 'MEMBER', 'COLLABORATOR'];
+export function reviewRecords(comments) {
+  return (comments || []).flatMap((comment) => {
+    if (!TRUSTED.includes(String(comment.author_association || '').toUpperCase())) return [];
+    const m = String(comment.body || '').match(RECORD);
+    return m ? [{ id: comment.id, reviewer: m[1], verdict: m[2], scope: m[3], head: m[4] }] : [];
+  });
+}
+/* Each assistant's LATEST record decides: it must be for this exact head and
+   approve it; a later record for another commit, or a later "changes", makes
+   it stale or negative. A technical PR needs technical-scope records. */
+export function aiReviewStatus(comments, sha, technical) {
+  const records = reviewRecords(comments);
+  const problems = [];
+  for (const reviewer of ['Claude', 'ChatGPT']) {
+    const latest = records.filter((r) => r.reviewer === reviewer).sort((a, b) => a.id - b.id).at(-1);
+    if (!latest) problems.push(`no ${reviewer} review record`);
+    else if (latest.head !== sha) problems.push(`${reviewer}'s latest review is for another commit (${latest.head.slice(0, 8)})`);
+    else if (latest.verdict !== 'approve') problems.push(`${reviewer} requested changes`);
+    else if (technical && latest.scope !== 'technical') problems.push(`${reviewer}'s review is content-scope; this PR is technical`);
+  }
+  return { ok: problems.length === 0, problems };
 }
 
 /* The merge decision for one PR, from facts the checker has already read:
    pr (GitHub PR JSON), technical (paths that are not content), reviews (all
-   GitHub reviews). AI review evidence is text in the PR body; only a GitHub
-   review by Wayne's own account counts as human approval, and only for the
-   exact head commit (a new push makes every earlier approval and evidence
-   line stale). Returns { ok, kind, reason }. */
-export function decide({ pr, technical, reviews }) {
+   GitHub reviews) and comments (all PR comments). Returns { ok, kind, reason }. */
+export function decide({ pr, technical, reviews, comments }) {
   const sha = pr.head.sha;
   if (pr.draft) return { ok: false, reason: 'Mark the pull request ready for review first.' };
-  if (!reviewEvidence(pr.body, sha)) return { ok: false, reason: `PR body must record Review commit: ${sha}, ChatGPT review: https://..., and Claude review: https://... . These are review evidence, not proof of AI identity.` };
   const robert = approvedBy(reviews, ROBERT, sha);
-  if (technical.length && !robert && !separateReviews(pr.body))
-    return { ok: false, reason: `Technical changes need two separate reviews of this exact commit (different ChatGPT and Claude review links): ${technical.join(', ')}` };
-  if (!approvedBy(reviews, WAYNE, sha)) return { ok: false, reason: 'Wayne must approve this exact commit in GitHub before it is merged. AI review evidence never replaces his approval.' };
+  // Robert's approval, when given, stands in for the technical scope of the AI reviews.
+  const ai = aiReviewStatus(comments, sha, technical.length > 0 && !robert);
+  if (!ai.ok) return { ok: false, reason: `Claude and ChatGPT must each record a review of this exact commit (${sha}) as a PR comment: ${ai.problems.join('; ')}.` };
+  if (!approvedBy(reviews, WAYNE, sha)) return { ok: false, reason: 'Wayne must approve this exact commit in GitHub before it is merged. AI reviews never replace his approval.' };
   return { ok: true, kind: technical.length ? (robert ? 'technical (Robert approved)' : 'technical (Claude and ChatGPT reviewed)') : 'content-only' };
 }

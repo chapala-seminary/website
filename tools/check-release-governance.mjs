@@ -24,7 +24,9 @@ if (!['beta', 'main'].includes(pr.base.ref)) throw new Error('Only beta and main
 if (pr.draft) throw new Error('Mark the pull request ready for review first.');
 // Robert's own same-repository PRs are exempt from the faculty approval process.
 // Use the authenticated GitHub PR author, never commit metadata or body text.
-if (pr.user?.login?.toLowerCase() === ROBERT.toLowerCase() && pr.head.repo?.full_name === repository) {
+// Since 18 Oct 2026 the exemption covers beta only: every main PR, his too,
+// needs the production checks and Wayne's approval.
+if (pr.base.ref === 'beta' && pr.user?.login?.toLowerCase() === ROBERT.toLowerCase() && pr.head.repo?.full_name === repository) {
   console.log('Robert-authored PR: faculty approval gate does not apply; build/test checks remain required.');
   process.exit(0);
 }
@@ -52,7 +54,8 @@ for (const file of robertApproved ? [] : files) {
   }
   if (!isContentChange(file)) technical.push(file.filename);
 }
-const verdict = decide({ pr, technical, reviews });
+const comments = await pages(`${prefix}/issues/${number}/comments`);
+const verdict = decide({ pr, technical, reviews, comments });
 if (!verdict.ok) throw new Error(verdict.reason);
 if (pr.base.ref === 'main') {
   if (pr.head.repo?.full_name !== repository || pr.head.ref !== 'beta') throw new Error('Production promotion must be a beta-to-main PR.');
@@ -62,4 +65,4 @@ if (pr.base.ref === 'main') {
   const run = runs.workflow_runs.find(run => run.head_sha === sha);
   if (!run || run.status !== 'completed' || run.conclusion !== 'success') throw new Error('The exact beta commit must finish its test, deployment and live verification successfully before promotion.');
 }
-console.log(`${verdict.kind} PR #${number}, ${sha}: Wayne approved this exact commit. AI review evidence is recorded; reviewers verify its authenticity.`);
+console.log(`${verdict.kind} PR #${number}, ${sha}: Wayne approved this exact commit. Claude and ChatGPT review records are for this commit.`);

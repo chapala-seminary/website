@@ -10,9 +10,10 @@ and `CTS release approval`. Main allows merges only by `satoshisound` and
 has Write access. Only `satoshisound` has a named PR-review bypass. His own same-repository PRs
 are exempt from the faculty/AI approval check, while build/test checks still
 apply. `ChapalaTheological1` and `chapalatheological-ai` have no bypass.
-Since 18 Oct 2026 the approval check passes technical PRs on two separate AI
-reviews of the exact commit plus Wayne's approval; Robert is no longer a
-required approver (see AGENTS.md).
+Since 18 Oct 2026 the approval check passes technical PRs on technical-scope
+review records from Claude and ChatGPT for the exact commit (PR comments the
+check reads itself) plus Wayne's approval; Robert is no longer a required
+approver, and his own-PR exemption covers beta only (see AGENTS.md).
 
 The governance workflow reads policy from the trusted base branch, never runs
 PR code with its token, checks the entire file list and publishes its status on
@@ -23,9 +24,10 @@ production promotion, synchronize main back into beta through a reviewed PR
 before the next change so strict branch checks remain up to date. For main, it
 also requires the exact beta SHA's successful deployment workflow.
 
-GitHub can check named human approvals, file ownership, tests, and recorded
-review links. It cannot prove that ChatGPT and Claude actually performed the
-reviews or agreed. Wayne checks the linked evidence. This is an operational
+GitHub can check named human approvals, file ownership, tests, and the
+review-record comments (exact commit, verdict, scope, posted by an account with
+repository access). It cannot prove which assistant typed a record, since both
+may post from the same AI account. Wayne's own approval is the human check. This is an operational
 review gate, not isolation from a malicious repository writer: a writer can
 create other Actions workflows/statuses, and org administrators can change
 settings. Keep the agent's account and credentials separate, grant no admin
