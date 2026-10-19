@@ -34,7 +34,9 @@ The agent opens `beta` -> `main` after the exact beta commit's deployment and
 live verification pass. Wayne approves that commit and merges using his human
 `ChapalaTheological1` account. Robert's approval is not required. A new beta
 commit needs fresh testing and Wayne approval. The AI cannot push or merge main.
-Robert's `satoshisound` review exception remains; build/test checks still apply.
+Robert's `satoshisound` account may approve any PR at its current commit,
+regardless of author or source branch. His own PRs need no second reviewer;
+GitHub cannot formally self-approve. Build/test checks still apply.
 Keep human and AI accounts separate. Main deployment uses Actions once its
 existing production baseline/token/enablement setup is complete. Read
 `docs/beta-staging.md` and `docs/content-release-workflow.md`.

@@ -26,15 +26,21 @@ if (pr.base.ref === 'beta') {
   process.exit(0);
 }
 if (pr.draft) throw new Error('Mark the pull request ready for review first.');
-// Robert's own same-repository PRs are exempt from the faculty approval process.
+// Robert's own PRs never need another reviewer, including PRs from forks.
 // Use the authenticated GitHub PR author, never commit metadata or body text.
-if (pr.user?.login?.toLowerCase() === ROBERT.toLowerCase() && pr.head.repo?.full_name === repository) {
+if (pr.user?.login?.toLowerCase() === ROBERT.toLowerCase()) {
   console.log('Robert-authored PR: faculty approval gate does not apply; build/test checks remain required.');
   process.exit(0);
 }
 const sha = pr.head.sha;
 const reviews = await pages(`${prefix}/pulls/${number}/reviews`);
-if (!approvedBy(reviews, WAYNE, sha)) throw new Error('Wayne must approve this exact commit before it is merged. Have the AI open the PR so Wayne can review it.');
+// His exact-commit approval authorizes any PR; Wayne's independent beta-to-main
+// process remains available without requiring Robert.
+if (approvedBy(reviews, ROBERT, sha)) {
+  console.log(`Robert approved PR #${number}, ${sha}; build/test checks remain required.`);
+  process.exit(0);
+}
+if (!approvedBy(reviews, WAYNE, sha)) throw new Error('Wayne or Robert must approve this exact commit before it is merged. Have the AI open the PR so Wayne can review it.');
 if (pr.base.ref === 'main') {
   if (pr.head.repo?.full_name !== repository || pr.head.ref !== 'beta') throw new Error('Production promotion must be a beta-to-main PR.');
   const beta = await api(`${prefix}/git/ref/heads/beta`);
