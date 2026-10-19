@@ -1419,5 +1419,6 @@ each language stay as they are.
 Reading-room digests were already in French. The honors list a script builds
 after the page loads was not: it showed the English title, and two checks
 (“enter your name”, “check the box”) had no French. Each shelf title now has
-a French title, the list uses it, and those checks speak French. The record
-kept in this browser is still the English title.
+a French title, the list uses it, and those checks speak French. So does the
+note that appears once three readings are chosen. The record kept in this
+browser is still the English title.
