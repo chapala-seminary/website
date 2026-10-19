@@ -132,8 +132,19 @@ const mine = (res) => res.results.filter((x) => x.student.includes(tag) || x.stu
   const none = mine(await run(3));
   ok(!none.length, `three days in, nobody is written to (${none.map((x) => x.student)})`);
 
-  const first = await run(22);
-  const got = Object.fromEntries(mine(first).map((x) => [x.student, x]));
+  // The run sends at most DAILY_CAP (40) notes a day (worker/outreach.js), and the suites
+  // before this one leave many eligible students in the database, so the fixtures may
+  // fall past the cap. Run again on the same day until they are reached: each note
+  // sent is recorded, so a second run moves on to the rest.
+  const first = { results: [] };
+  let got = {};
+  for (let batch = 0; batch < 20; batch++) {
+    const page = await run(22);
+    first.results.push(...page.results);
+    got = Object.fromEntries(mine(first).map((x) => [x.student, x]));
+    if ((got[QUIET] && got[FRESH]) || !page.capped) break;
+  }
+  ok(got[QUIET] && got[FRESH], 'the fixtures are reached even when other students fill the daily cap');
   ok(got[QUIET]?.kind === 'quiet' && got[QUIET].status === 'sent', 'three weeks quiet: a note', JSON.stringify(got[QUIET]));
   ok(got[QUIET]?.lang === 'es' && /Estimado\/a Quiet/.test(got[QUIET]?.message?.text || '') && !/Dear /.test(got[QUIET]?.message?.text || ''),
     'in the student\'s language only');
@@ -156,7 +167,7 @@ const mine = (res) => res.results.filter((x) => x.student.includes(tag) || x.stu
   ok(mine(await run(52)).some((x) => x.student === QUIET && x.kind === 'quiet'), 'quiet three weeks again: a second note');
 
   // the student's own "stop" link: a page with a button, and only the button acts
-  const stopUrl = (/stop-notes\/([A-Za-z0-9_-]+)/.exec(got[QUIET].message.text) || [])[1];
+  const stopUrl = (/stop-notes\/([A-Za-z0-9_-]+)/.exec(got[QUIET]?.message?.text || '') || [])[1];
   const view = await fetch(`${BASE}/stop-notes/${stopUrl}`);
   ok(view.status === 200 && /<form method="post">/.test(await view.text()), 'the stop link shows a button');
   let rows = await (await staff('/staff/students.json')).json();
