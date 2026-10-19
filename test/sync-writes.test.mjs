@@ -58,11 +58,13 @@ try {
   const snapshot = {
     code: reg.code, student: { name: 'Sync Write Regression', track: 'cert' },
     progress: Array.from({ length: 100 }, (_, unit) => ({ course: 'ots', unit: unit + 1, completedAt: firstDate })),
-    textbooks: [{ slug: 'cults', passedAt: firstDate }],
+    // oldtestament: since 15 Oct 2026 raising CTSOTS to a master's level needs
+    // its textbook pass (src/data/required-from.json)
+    textbooks: [{ slug: 'cults', passedAt: firstDate }, { slug: 'oldtestament', passedAt: firstDate }],
     doneCodes: ['CTSOTS'], completionTracks: { CTSOTS: 'cert' },
   };
   const first = await post('/api/sync', snapshot);
-  expectWrites({ unit_progress: 100, textbook_results: 1, course_completions: 1 }, {}, 'new progress is inserted');
+  expectWrites({ unit_progress: 100, textbook_results: 2, course_completions: 1 }, {}, 'new progress is inserted');
   reset();
   const repeat = await post('/api/sync', snapshot);
   expectWrites({}, {}, 'an identical full snapshot performs no progress, textbook or completion writes');
