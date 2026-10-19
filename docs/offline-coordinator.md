@@ -12,20 +12,21 @@ change and does not specify it again._
 
 ## The smallest thing that keeps the records honest
 
-Pilot **one coordinator, one group, one course, on beta**, before Haiti and
-before production.
+Start with **one coordinator, one group, and one course on the production
+site**, with active learners. Their records, passes, and certificates are the
+real ones.
 
 | | |
 |---|---|
 | Place | Liberia. Six B.Th. leaders are already helping a group. One of them holds the coordinator sign-in. The others teach from paper and do not get accounts. |
 | Course | New Testament Survey (`CTSNT`), twelve units. |
-| Track | Certificate. On that track the server requires multiple choice only: 18 of 20 right on each unit (`worker/grading/rules.js`). Fill-in and short answer stay on the page for students who are online; they are not required for this pilot and nobody transcribes them. |
-| Size | A handful of named learners, enough to see enrollment, a paper exam, a later entry, a failure, and one completion. |
-| Where it runs | `beta.chapalaseminary.org` and the beta database `chapala-students-beta`. Production stays as it is until Wayne has used the beta group. |
+| Track | Certificate. On that track the server requires multiple choice only: 18 of 20 right on each unit (`worker/grading/rules.js`). Fill-in and short answer stay on the page for students who are online; they are not required for this first group and nobody transcribes them. |
+| Size | The learners already studying with those leaders. Enrollment, a paper exam, a later entry, a failure, and a completion are all real student records. |
+| Where it runs | `chapalaseminary.org` and the production database `chapala-students`. Grading is live: a submitted sheet writes credit the same way an online attempt does. |
 
-Haiti waits. The site has French pages. It does not have Haitian Creole. A
-second coordinator is a copy of this pilot after the first group has finished
-a unit, not a second design.
+Haiti is the next group on the same production path, once a coordinator and a
+language are named. The site has French pages. It does not have Haitian
+Creole. A second coordinator is another production group, not a second design.
 
 No new paid service. Sign-in is the Cloudflare Access gate the staff pages
 already use. Access is free for up to 50 people (`docs/student-tracker.md`).
@@ -44,12 +45,12 @@ The database is the D1 database the site already has.
 | An appeal | A learner can appeal a written verdict. Faculty rule on it at `/staff/grading`. At most three appeals are open at once. |
 | A certificate | `POST /api/certificate` refuses an award the record does not support. It also refuses until `email_verified_at` is set, so the seminary can reach the person. The public page `/verify/<code>` shows the name, the award and the date. It shows neither the student code nor an email. The PDF prints the verification code, not the student code. |
 
-## The five requests, and the pilot's answer
+## The five requests, and the production answer
 
 ### 1. Enrollment without email
 
 Each learner gets their own `students` row and their own code. The enroll form
-asks for the name they use, country (`LR` for this pilot), and language. It
+asks for the name they use, country (`LR` for the Liberia group), and language. It
 has no email field. The coordinator's address lives only on the group, in
 `study_groups.coordinator_email`.
 
@@ -60,8 +61,9 @@ The other change has to keep two rules while it makes email optional:
 
 ### 2. One coordinator, one group
 
-A new sign-in at `/coord`, a second Access application on beta, with a policy
-of one email address. The Worker checks that signed-in address itself, the
+A new sign-in at `/coord`, a second Access application on
+`chapalaseminary.org`, with a policy of the coordinator's email. The Worker
+checks that signed-in address itself, the
 same way `/staff` checks Access (`worker/staff.js`), and loads only the group
 whose `coordinator_email` is that address.
 
@@ -111,9 +113,9 @@ The coordinator prints, on a day when a connection is available:
 - each unit's exam page.
 
 Live pages do not contain the answer key (`tools/verify-no-keys.mjs`). Printing
-them does not hand the key to the room. This pilot does not add a separate
-answer-key packet. A key on paper in a church office is how answers leak, and
-it would throw away the server grading that is just landing.
+them does not hand the key to the room. The first version does not add a
+separate answer-key packet. A key on paper in a church office is how answers
+leak, and it would throw away the server grading already used for credit.
 
 Each exam is an answer sheet of twenty letters, A–D, with the learner's name
 and code written on it. The coordinator keeps the sheets, supervises the
@@ -122,9 +124,8 @@ at a time, not the prose of the short answers.
 
 New Testament Survey is 12 units × 20 multiple-choice items. One learner is
 240 letters. Eight learners are 1,920 letters, entered as twenty choices per
-unit. That is the work this pilot accepts. Scanning a bubble sheet is a later
-version, after a real group has shown that the sheet and the lock rules are
-right.
+unit. That is the work the first group does on the live site. Scanning a
+bubble sheet can wait until these learners have used the letter sheet.
 
 ### 4. The same academic rules, with an audit
 
@@ -141,7 +142,7 @@ A multiple-choice item is objective, so the appeal that matters here is "the
 sheet was typed in wrong." The coordinator does not edit the attempt. They
 tell Wayne. Wayne voids that attempt with a note, and the coordinator enters
 the sheet again. Written-answer appeals stay on `/staff/grading` and are
-outside this pilot, because the Certificate track does not require them.
+outside this first group, because the Certificate track does not require them.
 
 A certificate is not "the coordinator says the group attended." It is still
 refused until every unit of the course is in `unit_progress` from those
@@ -158,7 +159,7 @@ typing the code, as any student does. When they later have an email of their
 own, they confirm that email on their own record. That address is theirs.
 It is not the coordinator's.
 
-Certificates for this pilot are issued by Wayne or Robert, on beta, from a
+Certificates are issued by Wayne or Robert on the production staff pages, from a
 staff action that:
 
 - requires the same completed record as `/api/certificate`;
@@ -173,16 +174,16 @@ omits the student code.
 
 ## What this costs
 
-Nothing new to buy. Beta Worker, beta D1, and one Access seat for one
-coordinator email. Staff time is printing twelve lessons, holding the
+Nothing new to buy. The production Worker, the production D1 database, and one
+Access seat for one coordinator email. Staff time is printing twelve lessons, holding the
 sittings, and entering twenty letters per unit per learner. Faculty time is
 a void-and-reenter when a sheet was mistyped, and the usual certificate
 check when the twelve units are on the record.
 
 ## Decisions needed before the code
 
-1. The one coordinator's name and email, for the beta Access policy.
-2. Confirm the pilot course is New Testament Survey on the Certificate track,
+1. The one coordinator's name and email, for the production Access policy.
+2. Confirm the first course is New Testament Survey on the Certificate track,
    so only multiple choice counts.
 3. Confirm a learner is identified by the name they give, country, and the
    group. No phone number and no government identity number.
@@ -196,12 +197,16 @@ check when the twelve units are on the record.
 
 ## Left for a later version
 
-- Haiti, and any language the site does not already teach in.
+- Haiti, and any language the site does not already teach in. Same production
+  path, another coordinator, once the language of the printed packet is chosen.
 - Associate fill-in, and master's short answers, including server-side AI
   grading of transcribed prose. The grading path can take that text later.
-  The pilot does not collect it.
+  This first group does not collect it.
 - A scannable sheet.
 - Prison facilities, where the same paper path may apply and the facility's
   own rules on what may be stored still have to be answered (issue 96).
-- Production. Beta first, after the email-optional registration change is on
-  beta and this note's six decisions are answered.
+
+The email-optional registration change has to be on production before a
+coordinator enrolls the first learner. The six decisions above are still
+needed. After that, the group is created on `chapalaseminary.org` and their
+work counts.
