@@ -328,6 +328,21 @@ async function creditPass(env, attempt, scope) {
   return { unitDone: false, courseDone: false };
 }
 
+/* The completion check for the course an attempt belongs to, read from the
+   record as it stands (this attempt already marked passed). */
+async function reconcileCourse(env, attempt, scope) {
+  const none = { done: false, newly: false };
+  const student = await loadStudent(env, attempt.student_id);
+  if (!student) return none;
+  if (scope.type === 'unit') return await completeCourseIfDone(env, student, scope.slug, attempt.track);
+  if (scope.type === 'tb' || scope.type === 'rd') return await completeCourseIfDone(env, student, scope.code, attempt.track);
+  if (scope.type === 'sp') {
+    const code = scope.meta?.code || Object.keys(SINGLES).find((k) => SINGLES[k].course === scope.meta?.course);
+    return code && SINGLES[code] ? await completeSingleIfDone(env, student, code, attempt.track) : none;
+  }
+  return none;
+}
+
 async function alreadyCredited(env, attempt, scope) {
   if (scope.type === 'unit')
     return !!(await env.DB.prepare('SELECT 1 FROM unit_progress WHERE student_id = ? AND course = ? AND unit = ?').bind(attempt.student_id, scope.slug, scope.unit).first());
@@ -388,6 +403,18 @@ export async function settle(env, attemptId, { submitting = false } = {}) {
        locked_until = ?, lock_kind = ?, submitted_at = COALESCE(submitted_at, ?), graded_at = ? WHERE id = ?`)
     .bind(status, scores.mc_right, scores.mc_total, scores.fill_right, scores.fill_total, scores.sa_met, scores.sa_total,
       lockedUntil, lockK, t, status === 'pending' ? attempt.graded_at : (attempt.graded_at || t), attempt.id).run();
+
+  // Reconcile the course once this pass is on record (ChatGPT's review of #125,
+  // 19 Oct 2026). creditPass runs before the attempt is marked passed, so two
+  // last units settling together could each see only its own pass and write
+  // the completion below the level both earned. Checked again now, whichever
+  // settles last sees every pass; and a pass whose reconcile was interrupted
+  // is checked again the next time it is settled. Idempotent, and a level
+  // only rises (writeCompletion).
+  if (status === 'passed' && !attempt.shadow) {
+    const again = await reconcileCourse(env, attempt, scope);
+    if (again.done) credit = { ...credit, courseDone: true, courseNew: credit.courseNew || again.newly };
+  }
 
   return {
     was, status, attempt: { ...attempt, status, locked_until: lockedUntil, lock_kind: lockK },

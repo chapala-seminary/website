@@ -10,6 +10,7 @@
  */
 import fs from 'node:fs';
 import { execFileSync } from 'node:child_process';
+import { singleSections } from '../tools/single-pages-lib.mjs';
 
 const BASE = process.env.API_BASE || 'http://127.0.0.1:8798';
 const STATE = process.env.STATE || '.wrangler-local';
@@ -80,6 +81,60 @@ const submit = (code, a) => post(`/api/attempt/${a.attemptId}/submit`, { code })
   eq(levelOf(c), 'thm', 'master\'s-level unit passes and the textbook test raise the completion to master\'s');
 }
 
+
+/* ---- the last two units settle at once (ChatGPT's review of #125): the completion is still master's ---- */
+let salt = 0;
+const essay = () => `${++salt}. Here is my own careful explanation of what the passage teaches and why it matters for the church today [[met]]`;
+// Answer every question of a live attempt correctly. `keyOf(kind, qid)` gives the right answer.
+async function answerAll(code, a, keyOf) {
+  for (const m of a.items.mc) await post('/api/mc', { code, attemptId: a.attemptId, qid: m.qid, choice: keyOf('mc', m.qid) });
+  for (let i = 0; i < a.items.fill.length; i += 10)
+    await post('/api/grade', { code, attemptId: a.attemptId, items: a.items.fill.slice(i, i + 10).map((qid) => ({ qid, answer: keyOf('fill', qid) })) });
+  for (let i = 0; i < a.items.sa.length; i += 10)
+    await post('/api/grade', { code, attemptId: a.attemptId, items: a.items.sa.slice(i, i + 10).map((qid) => ({ qid, answer: essay() })) });
+}
+const seedLive = (code, rows) => db(
+  `INSERT INTO attempts (id, student_id, scope, track, lang, shadow, status, started_at, submitted_at, graded_at) VALUES ${rows.map(([scope], i) =>
+    `('seed-${code}-${i}', '${code}', '${scope}', 'thm', 'en', 0, 'passed', '2026-10-01T00:00:00Z', '2026-10-01T00:00:00Z', '2026-10-01T00:00:00Z')`).join(', ')};
+   INSERT INTO unit_progress (student_id, course, unit, completed_at, source) VALUES ${rows.map(([, course, unit]) =>
+    `('${code}', '${course}', ${unit}, '2026-10-01T00:00:00Z', 'server')`).join(', ')}`);
+{
+  // Cults on the Th.M.: units 1-8 already passed live at master's level, the textbook test passed
+  // through the API, then units 9 and 10 answered and both submitted at the same moment.
+  const code = await student('thm');
+  seedLive(code, Array.from({ length: 8 }, (_, i) => [`u:CTSCults/${i + 1}`, 'cults', i + 1]));
+  const bank = JSON.parse(fs.readFileSync('src/content/textbooks/cults.json', 'utf8')).test.questions;
+  const tb = (await start(code, 'tb:cults')).body;
+  for (let i = 0; i < 20; i += 10)
+    await post('/api/grade', { code, attemptId: tb.attemptId, items: tb.items.fill.slice(i, i + 10).map((qid) => ({ qid, answer: bank[idx(qid)].answer.en })) });
+  eq((await submit(code, tb)).body?.status, 'passed', 'concurrent: the Cults textbook test passes first');
+  const unit = (n) => JSON.parse(fs.readFileSync(`src/content/units/CTSCults/${n}.json`, 'utf8'));
+  const keyOf = (kind, qid) => { const u = unit(qid.split('/')[1]); return kind === 'mc' ? u.mc[idx(qid)].answer : u.fill[idx(qid)].answer.en; };
+  const a9 = (await start(code, 'u:CTSCults/9')).body, a10 = (await start(code, 'u:CTSCults/10')).body;
+  await answerAll(code, a9, keyOf); await answerAll(code, a10, keyOf);
+  const [s9, s10] = await Promise.all([submit(code, a9), submit(code, a10)]);
+  eq([s9.body?.status, s10.body?.status], ['passed', 'passed'], 'concurrent: both last units pass, submitted together');
+  eq(q1(`SELECT track FROM course_completions WHERE student_id = '${code}' AND code = 'CTSCULTS'`)[0]?.track, 'thm',
+    'concurrent: the stored completion is master\'s, not Certificate');
+}
+{
+  // Ethics (a single-page course) on the Th.M.: units 1-8 passed live, then 9 and 10 together.
+  const code = await student('thm');
+  const secs = singleSections({ root: '.' }).filter((x) => x.course === 'ethics');
+  const sec = (n) => secs.find((x) => x.unit === n);
+  seedLive(code, Array.from({ length: 8 }, (_, i) => [sec(i + 1).scope, 'ethics', i + 1]));
+  const keyFor = (n) => (kind, qid) => (kind === 'mc' ? sec(n).mc[idx(qid)].answer : sec(n).fill[idx(qid)].answer.en);
+  const a9 = (await start(code, sec(9).scope)).body, a10 = (await start(code, sec(10).scope)).body;
+  await answerAll(code, a9, keyFor(9)); await answerAll(code, a10, keyFor(10));
+  const [s9, s10] = await Promise.all([submit(code, a9), submit(code, a10)]);
+  eq([s9.body?.status, s10.body?.status], ['passed', 'passed'], 'single-page: both last Ethics units pass, submitted together');
+  eq(q1(`SELECT track FROM course_completions WHERE student_id = '${code}' AND code = 'ETHICS'`)[0]?.track, 'thm',
+    'single-page: the stored Ethics completion is master\'s');
+  db(`UPDATE students SET email_verified_at = '2026-10-01T00:00:00Z' WHERE id = '${code}'`);
+  const cert = await post('/api/certificate', { code, level: 'course', course: 'ETHICS', title: 'x' });
+  ok(cert.status === 201 && / — Master of Theology$/.test(q1(`SELECT title FROM certificates WHERE verify_code = '${cert.body?.verifyCode}'`)[0]?.title || ''),
+    'single-page: and its certificate is a Master of Theology award', cert);
+}
 
 console.log(`${checks} earned-level assertions against a live Worker and D1`);
 if (fails.length) { console.log(`FAIL — ${fails.length}:`); for (const f of fails) console.log('  ✗ ' + f); process.exit(1); }
