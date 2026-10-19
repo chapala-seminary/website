@@ -621,11 +621,13 @@ that breaks the agreement fails the suite.
   about an attempt carries its result as `disclosure`:
   - `"verdict"` -- the attempt is open, pending or failed (and every shadow
     attempt): right or wrong, the student's own choice and words, scores and
-    locks. No right option, `why`, `correctAnswer`, `models` or `reviews`, and
-    no feedback the model wrote about an answer that was not right (it may
-    name what was wanted). The seminary's fixed sentences (a blank answer, a
-    copied question, held for a person, waiting) and a faculty member's words
-    are still shown, as is feedback on an answer that was right or met.
+    locks. No right option, `why`, `correctAnswer`, `models`, `reviews` or
+    rubric `points`, and no free-form feedback of any kind -- from the model,
+    the cache, an override or a faculty member, on a right, met, pending or
+    wrong answer -- since any of it may name what was wanted. Only the
+    seminary's own fixed sentences (a blank answer, too short, a copied
+    question, held for a person, waiting) are shown, matched exactly
+    (`feedbackFor`). This is Wayne's rule as approved: right or wrong only.
   - `"review"` -- the attempt passed: everything below, for review.
   A failed attempt stays `"verdict"` for good, so a retake can never be
   answered from the failed one.

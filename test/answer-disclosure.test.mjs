@@ -224,7 +224,10 @@ const essay = (hint) => `${++salt}. In my own words, this passage shows who Jesu
   eq(sa.status, 200, '4: the written answers are graded');
   const nm = sa.body.items[0];
   eq([nm.verdict, nm.feedback], ['not_met', null], '4: the AI\'s feedback on an answer not met is held back while the attempt is open', nm);
-  ok(sa.body.items[2].verdict === 'met' && sa.body.items[2].feedback, '4: feedback on an answer met is still shown');
+  // ChatGPT's review of #124: feedback on a met answer can name what another
+  // item wants, so it too waits for a pass; the seminary's fixed sentences stay.
+  eq([sa.body.items[2].verdict, sa.body.items[2].feedback], ['met', null], '4: the AI\'s feedback on an answer met is also held back while the attempt is open');
+  ok(sa.body.items[1].verdict !== 'pending' || /faculty grader|graded shortly/.test(sa.body.items[1].feedback || ''), '4: a pending answer keeps the fixed sentence saying it is waiting or with a person', sa.body.items[1]);
   none(sa.body, S, '4: no model answer in the reply');
   const sub = (await submit(code, a.attemptId)).body;
   eq([sub.status, sub.disclosure], ['pending', 'verdict'], '4: a pending answer leaves the attempt pending, verdicts only');
@@ -264,6 +267,38 @@ const essay = (hint) => `${++salt}. In my own words, this passage shows who Jesu
   const later = (await view(code, b.attemptId)).body;
   ok(later.reviews && later.reviews[miss], '5: the review is there when the passed attempt is asked for again');
   none((await view(code, a.attemptId)).body, S, '5: the failed attempt still reveals nothing');
+}
+
+/* ---- 7. free-form feedback of every kind waits for a pass --------------------------------------------------
+   ChatGPT's review of #124 (18 Oct 2026): feedback on right, met and pending
+   answers, and anything a faculty member, the cache or an override wrote, can
+   carry the answer. Plant answer-bearing feedback on every graded row of an
+   open attempt, then ask for the attempt every way a page does: none of it may
+   come back until the attempt has passed, and then all of it may. */
+{
+  const code = await student('thm');
+  const a = (await start(code, 'u:CTSJohn/5')).body;
+  const bank = john(5);
+  for (const m of a.items.mc) await post('/api/mc', { code, attemptId: a.attemptId, qid: m.qid, choice: rightOf(bank, m.qid) });
+  await post('/api/grade', { code, attemptId: a.attemptId, items: a.items.fill.map((qid) => ({ qid, answer: fillOf(bank, qid) })) });
+  await post('/api/grade', { code, attemptId: a.attemptId, items: a.items.sa.map((qid, i) => ({ qid, answer: essay(i % 3 === 0 ? 'met' : i % 3 === 1 ? 'pending' : 'not_met') })) });
+  const SENTINEL = `ANSWER-BEARING-${RUN}`;
+  const sources = ['ai', 'cache', 'override', 'human', 'rule', 'exact'];
+  const verdicts = ['right', 'wrong', 'met', 'partly', 'not_met', 'pending'];
+  const rows = db(`SELECT id FROM answer_grades WHERE attempt_id = '${a.attemptId}' ORDER BY id`)[0];
+  ok(rows.length >= 12, '7: the attempt has graded rows to plant feedback in', rows.length);
+  rows.forEach((r, i) => db(`UPDATE answer_grades SET feedback = 'The correct answer is ${SENTINEL}-${i}.', graded_by = '${sources[i % sources.length]}', verdict = '${verdicts[i % verdicts.length]}' WHERE id = ${r.id}`));
+  const has = (reply) => JSON.stringify(reply).includes(SENTINEL);
+  ok(!has((await view(code, a.attemptId)).body), '7: viewing the open attempt shows no planted feedback');
+  ok(!has((await start(code, 'u:CTSJohn/5')).body), '7: resuming the open attempt shows none');
+  db(`UPDATE attempts SET status = 'failed' WHERE id = '${a.attemptId}'`);
+  ok(!has((await view(code, a.attemptId)).body), '7: a failed attempt shows none');
+  unlock(code);
+  const retake = (await start(code, 'u:CTSJohn/5')).body;
+  ok(!has(retake), '7: the retake after a failure shows none');
+  db(`UPDATE attempts SET status = 'passed' WHERE id = '${a.attemptId}'`);
+  const passed = (await view(code, a.attemptId)).body;
+  ok(has(passed), '7: after a pass the feedback is shown for review', Object.values(passed.answered || {}).slice(0, 2));
 }
 
 /* ---- 6. the passages are not served to a browser ----------------------------------------------------------- */

@@ -354,16 +354,20 @@ export function disclosureOf(attempt) {
   return attempt && !attempt.shadow && attempt.status === 'passed' ? 'review' : 'verdict';
 }
 /* Feedback on a written answer that may be shown while only the verdict is
-   disclosed: the seminary's own fixed sentences (a blank, a copied question,
-   held for a person, waiting), what a faculty member wrote, and anything said
-   about an answer that was right or met. Feedback the model wrote about an
-   answer that was not right is held back until a pass. */
+   disclosed: ONLY the seminary's own fixed sentences (CANNED: a blank, too
+   short, a copied question, held for a person, waiting), matched exactly,
+   whoever graded the item. Anything written in free form -- by the model, the
+   grading cache or a faculty member, about a right, met, pending or wrong
+   answer -- can name what was wanted, so it is held back until the attempt has
+   passed (Wayne, 18 Oct 2026: right or wrong only before a pass; ChatGPT's
+   review of #124 found AI feedback on a met answer and human feedback on a
+   wrong one passing through). */
+let FIXED;
 export function feedbackFor(row, disclosure) {
   const fb = row.feedback || null;
   if (!fb || disclosure === 'review') return fb;
-  const by = row.graded_by ?? row.gradedBy ?? row.by;
-  if (by === 'rule' || by === 'human') return fb;
-  return ['right', 'met', 'pending'].includes(row.verdict) ? fb : null;
+  FIXED ??= new Set(Object.values(CANNED).flatMap((byLang) => Object.values(byLang)));
+  return FIXED.has(fb) ? fb : null;
 }
 
 /* What the student has done in an attempt, as the page reads it (docs/ai-grading.md section 12).
@@ -607,7 +611,9 @@ export async function gradeWritten(env, attempt, entries) {
   // The attempt is open (the caller checked): the reply says only what disclosureOf allows for it.
   return out.map((r, i) => ({
     qid: entries[i].qid, gradeId: r.gradeId, verdict: r.verdict, feedback: feedbackFor(r, disclosureOf(attempt)), gradedBy: r.by || 'ai',
-    ...(r.points ? { points: r.points.map((p) => ({ id: p.id, made: p.made })) } : {}),
+    // Rubric point ids can be words from the rubric; the page does not use
+    // them, so they are sent only for review after a pass.
+    ...(r.points && disclosureOf(attempt) === 'review' ? { points: r.points.map((p) => ({ id: p.id, made: p.made })) } : {}),
   }));
 }
 
