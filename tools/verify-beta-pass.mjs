@@ -16,6 +16,7 @@
  */
 import fs from 'node:fs';
 import { chromium } from 'playwright';
+import { waitForCatalogLanding } from './lib/catalog-landing.mjs';
 
 const BASE = process.argv[2] || 'http://127.0.0.1:8798';
 const CHROME = process.env.CHROME_PATH;
@@ -171,19 +172,18 @@ async function spanishPage(page, file) {
 
 /* 7. the catalog link */
 {
-  const ctx = await context(student('cert'));
+  // This is a navigation fixture, not an attempted registration without an
+  // email. Keep background sync from inserting a registration warning above
+  // the catalog after the browser has followed its anchor.
+  const ctx = await context({ ...student('cert'), cts_student: JSON.stringify({ name: 'Catalog Tester', track: 'cert', _tester: true }) });
   const p = await ctx.newPage();
   await p.goto(`${BASE}/CTSOTSCertificate.html`, { waitUntil: 'load' });
   await p.click('a[href="/index.html#catalog"]');
-  // The front page scrolls smoothly (html{scroll-behavior:smooth}). On a busy
-  // machine that scroll is still moving two seconds later, so wait until the
-  // course list has arrived instead of pausing for a fixed time.
-  const landed = await p.waitForFunction(() => {
-    const el = document.getElementById('catalog');
-    return !!(el && location.hash === '#catalog' && Math.abs(el.getBoundingClientRect().top) < 200);
-  }, null, { timeout: 8000 }).then(() => true).catch(() => false);
-  const r = await p.evaluate(() => ({ url: location.pathname + location.hash, top: Math.round(document.getElementById('catalog').getBoundingClientRect().top) }));
-  ok(landed && r.url === '/index.html#catalog' && Math.abs(r.top) < 200, `the catalog link from a certificate lands at ${r.url}, the course list ${r.top}px from the top`);
+  // Smooth scrolling and late layout changes can move the catalog between a
+  // successful wait and a separate geometry read. Require a settled position
+  // and return the URL/position from that same observation.
+  const r = await waitForCatalogLanding(p);
+  ok(r.landed, `the catalog link from a certificate lands at ${r.url}, the course list ${r.top === null ? 'missing' : Math.round(r.top)}px from the top`);
   await ctx.close();
 }
 
