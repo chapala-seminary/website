@@ -23,7 +23,11 @@ The beta Actions workflow runs a fresh build and the complete suite on each push
 
 Publication and post-deploy verification now have separate Actions steps. CI uses
 the guarded `deploy:beta:publish` part of `deploy:beta`, then verifies the exact
-build stamp and all 79 activation dates. A challenged or unreachable custom
+build stamp and all 79 activation dates. The beta configuration explicitly enables
+`workers_dev` for this fallback and disables unused version preview URLs.
+Wrangler otherwise disables workers.dev when the custom route is present.
+The Worker still verifies signed Access tokens on staff endpoints. Probe
+errors identify the failing hostname, including a fallback failure. A challenged or unreachable custom
 domain can be checked on the same Worker's direct hostname, with an explicit
 warning that custom-domain browser acceptance remains pending. A wrong release,
 bad activation policy or HTTP 500 still fails verification. The deployment and
