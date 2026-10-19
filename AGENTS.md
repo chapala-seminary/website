@@ -59,3 +59,21 @@ A staging merge does not replace faculty or translation review.
 - Before committing: `npm run build && test/run-tests.sh`. Build on the Mac —
   `node_modules` are macOS binaries.
 - Plain language: define a term or don't use it.
+
+## Cursor Cloud specific instructions
+
+GitHub Actions and Cloud Agents use Node 24 (pinned in the environment install
+at 24.22.0). The VM image also has Node 22, and that binary is earlier on
+`PATH` than `/usr/local/bin`. The install therefore uses nvm and links `node`,
+`npm`, `npx`, and `corepack` from `/usr/local/cargo/bin`, which is already
+ahead of the image Node. `node -v` should print `v24.22.0`.
+
+- `npm ci`, then `npx playwright install --with-deps chromium`. The suite
+  launches Playwright's Chromium.
+- The dev server started on boot is `npm run dev -- --host 0.0.0.0 --port 4321`.
+- The site students use is the built Worker and a local D1 database, not the
+  Astro dev server. `npm run build`, apply `migrations/*.sql` with
+  `npx wrangler d1 execute` against `test/wrangler.local.jsonc`, then
+  `npx wrangler dev --config test/wrangler.local.jsonc`. `npm test` does this
+  on port 8798 and deletes `.wrangler-local` at the start.
+- Do not run `npm run deploy` or `npm run deploy:beta` from a Cloud Agent.
