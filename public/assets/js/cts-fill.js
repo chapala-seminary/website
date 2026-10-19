@@ -303,7 +303,9 @@
     function sendUnchecked() {
       // Retry and Submit can both arrive while this batch is being graded.
       // Join the same work so answers and the eventual submit are not repeated.
-      if (uncheckedFlight) return uncheckedFlight;
+      // A joiner may include answers typed into previously blank fields.
+      // After the shared batch finishes, grade those before final submission.
+      if (uncheckedFlight) return uncheckedFlight.then(function (ok) { return ok ? sendUnchecked() : false; });
       var items = [];
       qs.forEach(function (q, i) { if (!st.fillChecked[i] && String(st.fillAnswers[i] || "").trim()) items.push({ qid: q.qid, answer: st.fillAnswers[i] }); });
       var chunks = []; while (items.length) chunks.push(items.splice(0, 10));

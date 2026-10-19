@@ -130,3 +130,27 @@ Consult PR127 for the repaired exact-commit review, its coverage and the final
 validation results. The required full suite was rerun after these repairs and
 still stops at the same 466-page lesson-render baseline mismatch. The full-suite
 and faculty evaluation gates above remain separate from code review.
+
+
+### Late answer during Retry
+
+Claude's follow-up confirmed both prior repairs and found one further edge:
+a Submit joining a retry could omit an answer typed into a previously blank
+field while that retry ran. The joiner now waits for the shared batch and
+then grades any newly typed answers before returning to submission. The new
+17-correct-plus-one-late-correct regression fails before this change and passes
+afterward. Together with the EN/ES/FR concurrent Retry/Submit cases, all 36
+focused recovery checks pass. The additional pass sends only answers that are
+still unchecked, preserving the duplicate-request repair.
+
+The 97 real-Worker end-to-end and 75 course/language checks were repeated and
+passed on `c3c281df`. The final delta changes only the concurrent join branch;
+its focused and full stubbed-UI results and final exact-commit review are
+recorded in PR127. No publication or human release approval follows from these
+local checks.
+
+Final local build passes. All 171 stubbed browser checks pass on the final
+retry repair. The first full UI attempt timed out in the unchanged unit-engine
+Enter-key case after 28 checks; an uninterrupted rerun passed without changing
+that test. The required full suite again stops at the existing 466-page render
+baseline mismatch. No baseline or academic expectation was changed.

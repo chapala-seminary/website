@@ -523,6 +523,33 @@ if (want(14)) {
   }
 }
 
+// 15. A late answer typed into a blank during Retry must count before Submit.
+if (want(15)) {
+  const stub = new GradingStub();
+  const tb = bankOf('tb:cults');
+  const { ctx, p, errs } = await open(stub, { path: TB });
+  await p.waitForSelector('input[data-cts-fill]');
+  const id = [...stub.attempts.keys()][0];
+  const drawn = await p.evaluate(() => window.CTS_TEXTBOOK.draw());
+  for (let k = 0; k < 19; k++) await p.locator(`input[data-cts-fill="${k}"]`).fill(k < 17 ? tb.fill[drawn[k]].answer.en : 'zzz');
+  stub.failNext = 503;
+  await p.locator('#tb-submit').click();
+  await p.waitForSelector('.cts-grade-trouble');
+  stub.delay['/grade'] = 600;
+  await p.locator('[data-cts-retry]').click();
+  await p.locator('input[data-cts-fill="19"]').fill(tb.fill[drawn[19]].answer.en);
+  await p.locator('#tb-submit').click();
+  ok(await waitText(p, 'Passed: 18 of 20 right', 8000), 'the late answer supplies the eighteenth point before the sitting is submitted');
+  const lateQid = 'tb:cults/fill/' + drawn[19];
+  const graded = stub.calls('/grade').flatMap((c) => c.body.items);
+  ok(graded.filter((it) => it.qid === lateQid).length === 1, 'the answer typed during Retry is sent for grading exactly once');
+  ok(stub.calls('/grade').length === 4, 'two original batches and the one new answer follow the failed request without duplicates');
+  ok(stub.calls('/attempt/' + id + '/submit').length === 1, 'the sitting is finalized once after the late answer is graded');
+  ok(await ls(p, 'cts_textbook_cults_lock') === null, 'including the late answer avoids an unwarranted failed-exam lock');
+  ok(errs.length === 0, 'no browser errors while grading the late answer', errs[0]);
+  await ctx.close();
+}
+
 await browser.close();
 if (fails.length) {
   console.error(`FAIL — ${fails.length} of ${checks} checks:`);
