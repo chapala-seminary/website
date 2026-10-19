@@ -16,10 +16,11 @@
 import { normalise, fold } from './text.js';
 import { buildMessages, schema, rubricOf, repairMessage } from './prompt.js';
 import { fakeAIRun } from './fake-ai.js';
+import { shortAnswerFeedback } from './feedback.js';
 
 export const DEFAULT_MODEL = '@cf/meta/llama-3.3-70b-instruct-fp8-fast';
 export const DEFAULT_FALLBACK = '@cf/openai/gpt-oss-120b';
-export const DEFAULT_VERSION = '2026-10-15.3';
+export const DEFAULT_VERSION = '2026-10-19.1';
 const CAPACITY = /\b(3036|3040|3007)\b/;
 const TIMEOUT_MS = 25000;
 // Leave the browser's 60-second request deadline time for database writes.
@@ -81,7 +82,16 @@ async function call(env, model, kind, lang, items, version, more = [], deadline 
   };
   const run = env.AI_FAKE ? Promise.resolve().then(() => fakeAIRun(env, model, params)) : env.AI.run(model, params);
   let timer;
-  const timeout = new Promise((_, rej) => { timer = setTimeout(() => rej(new Error('the model took too long')), Math.min(TIMEOUT_MS, remaining)); });
+  const timeout = new Promise((_, rej) => {
+    timer = setTimeout(() => {
+      const error = new Error(remaining <= TIMEOUT_MS ? 'grading request time budget reached' : 'the model took too long');
+      // Timers can fire just before Date.now() reaches the absolute deadline.
+      // Once the shared-budget timer fires, its budget is spent regardless of
+      // that rounding; do not start another provider call in the remaining ms.
+      if (remaining <= TIMEOUT_MS) error.code = 'GRADING_DEADLINE';
+      rej(error);
+    }, Math.min(TIMEOUT_MS, remaining));
+  });
   try { return await Promise.race([run, timeout]); } finally { clearTimeout(timer); }
 }
 
@@ -284,7 +294,7 @@ export async function gradeBatch(env, kind, lang, items, { deadline = Date.now()
       const msg = String((e && e.message) || e);
       error = msg.slice(0, 300);
       await addUsage(env, model, { calls: 1, errors: 1 });
-      if (CAPACITY.test(msg) || CAPACITY.test(String(e && e.code))) break;
+      if (e?.code === 'GRADING_DEADLINE' || CAPACITY.test(msg) || CAPACITY.test(String(e && e.code))) break;
       continue;
     }
     const usage = res && res.usage || {};
@@ -295,7 +305,10 @@ export async function gradeBatch(env, kind, lang, items, { deadline = Date.now()
       input: Number(usage.prompt_tokens ?? usage.input_tokens) || 0, output: Number(usage.completion_tokens ?? usage.output_tokens) || 0,
     });
     if (repairs.length) await repair(env, model, kind, lang, remaining, version, parsed, repairs, ok, deadline);
-    for (const [qid, r] of ok) results.set(qid, { ...r, model, version });
+    for (const [qid, r] of ok) {
+      const feedback = kind === 'sa' ? shortAnswerFeedback(r, remaining.find((i) => i.qid === qid).answer, lang) : r.feedback;
+      results.set(qid, { ...r, feedback, model, version });
+    }
     if (!ok.size && wholeBad) error = 'the model did not give a valid answer';
     remaining = remaining.filter((i) => !ok.has(i.qid));
     if (remaining.length && !wholeBad && !error) error = 'the model left items out or broke the rules';

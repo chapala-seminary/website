@@ -26,17 +26,39 @@ function ok(cond, label, detail) {
   checks++;
   if (!cond) fails.push(label + (detail !== undefined ? `\n        ${typeof detail === 'string' ? detail : JSON.stringify(detail)}` : ''));
 }
+process.on('exit', (code) => {
+  if (code && fails.length) {
+    console.log(`${checks} assertions run before the crash; failures so far:`);
+    fails.forEach((f) => console.log('  ' + f));
+  }
+});
 const eq = (a, b, label) => ok(JSON.stringify(a) === JSON.stringify(b), label, `got ${JSON.stringify(a)}, want ${JSON.stringify(b)}`);
 
+async function readBody(r) {
+  const text = await r.text();
+  if (!text) return null;
+  try { return JSON.parse(text); }
+  catch { return text.slice(0, 400); }
+}
+function devTail() {
+  try { return '\n' + fs.readFileSync(`${STATE}/dev.log`, 'utf8').trim().split('\n').slice(-25).join('\n'); }
+  catch { return ''; }
+}
 async function call(method, p, b, headers = {}) {
   /* After a slow step (a wrangler command takes seconds) the server may have closed
-     the idle connection this process would reuse: that fails before anything is
-     sent, so one more try is the same request, not a second one. */
+     the idle connection this process would reuse, or be restarting and answer
+     500, 502 or 503 with an empty or HTML body. That happens before the Worker
+     runs, so another try is the same request, not a second one. A JSON error is
+     the Worker's own answer and is not tried again. */
+  let last;
   for (let tries = 0; ; tries++) {
     try {
       const r = await fetch(BASE + p, { method, headers: { 'content-type': 'application/json', connection: 'close', ...headers }, body: b === undefined ? undefined : JSON.stringify(b) });
-      return { status: r.status, body: await r.json().catch(() => null) };
-    } catch (e) { if (tries >= 2) throw e; await sleep(300); }
+      last = { status: r.status, body: await readBody(r) };
+      const bounced = last.status >= 500 && last.status <= 503 && (last.body === null || typeof last.body === 'string');
+      if (!bounced || tries >= 3) return last;
+    } catch (e) { if (tries >= 3) throw e; }
+    await sleep(400 * (tries + 1));
   }
 }
 const post = (p, b, h) => call('POST', p, b, h);
@@ -67,7 +89,7 @@ const RUN = Date.now().toString(36);
 let n = 0;
 async function student(track, extra = {}) {
   const r = await post('/api/register', { name: `Grading Tester ${RUN} ${++n} ${track}`, email: `grading-${RUN}-${n}-${track}@example.test`, track, ...extra });
-  if (r.status !== 201) throw new Error(`register returned ${r.status}: ${JSON.stringify(r.body)}`);
+  if (r.status !== 201) throw new Error(`register returned ${r.status}: ${typeof r.body === 'string' ? r.body : JSON.stringify(r.body)}${devTail()}`);
   return r.body.code;
 }
 const start = (code, scope = SCOPE(1), lang = 'en') => post('/api/attempt', { code, scope, lang });
@@ -129,12 +151,13 @@ const progressOf = async (code) => (await get(`/api/student/${code}`)).body;
 
   const first = john1.mc[0], right = first.answer, wrong = (right + 1) % first.options.en.length;
   const r1 = await post('/api/mc', { code, attemptId: a.attemptId, qid: a.items.mc[0].qid, choice: wrong });
-  ok(r1.status === 200 && r1.body.right === false && r1.body.answer === right && !!r1.body.why, 'a wrong click says so, with the right answer and why', r1);
+  // the answer-disclosure policy (Wayne, 18 Oct 2026; test/answer-disclosure.test.mjs has the rest)
+  ok(r1.status === 200 && r1.body.right === false && r1.body.choice === wrong && !('answer' in r1.body) && !('why' in r1.body), 'a wrong click says so, and not what was right', r1);
   const r2 = await post('/api/mc', { code, attemptId: a.attemptId, qid: a.items.mc[0].qid, choice: right });
   ok(r2.body.right === false && r2.body.choice === wrong, 'the first answer stands: a second click returns the first result', r2.body);
   const view = (await start(code)).body;
   eq(view.answered[a.items.mc[0].qid].choice, wrong, 'the attempt remembers the choice');
-  ok(!!view.items.mc[0].why, 'and now carries the "why" for that question');
+  ok(!view.items.mc[0].why && !('answer' in view.answered[a.items.mc[0].qid]), 'and, while it is open, no "why" or right answer for that question');
 
   ok((await post('/api/mc', { code, attemptId: a.attemptId, qid: a.items.mc[1].qid, choice: 99 })).status === 400, 'a choice that is not an option is refused');
   ok((await post('/api/mc', { code, attemptId: a.attemptId, qid: a.items.mc[1].qid, choice: 'a' })).status === 400, 'a choice that is not a number is refused');
@@ -247,7 +270,8 @@ const progressOf = async (code) => (await get(`/api/student/${code}`)).body;
   const calls0 = q1("SELECT COALESCE(SUM(calls), 0) AS n FROM ai_usage")[0].n;
   const syn = await post('/api/grade', { code, attemptId: a.attemptId, items: [{ qid: f1, answer: 'a perfectly good synonym [[right]]' }] });
   eq(syn.body.items[0].verdict, 'right', 'a synonym the key does not list goes to the model, which accepts it');
-  ok(!!syn.body.items[0].feedback, 'with a line of feedback');
+  ok(syn.body.items[0].feedback == null, 'the model\'s own feedback is withheld while the attempt is open (#124)', syn.body.items[0]);
+  ok(!!q1(`SELECT feedback FROM answer_grades WHERE id = ${syn.body.items[0].gradeId}`)[0].feedback, '...but kept in the record for review after a pass');
   eq(q1("SELECT COALESCE(SUM(calls), 0) AS n FROM ai_usage")[0].n, calls0 + 1, 'and the call is counted in ai_usage');
   const row = q1(`SELECT graded_by, model, prompt_version FROM answer_grades WHERE id = ${syn.body.items[0].gradeId}`)[0];
   eq(row, { graded_by: 'ai', model: '@cf/test/primary', prompt_version: 'test.1' }, 'the grade records the model and the prompt version');
@@ -336,12 +360,13 @@ const progressOf = async (code) => (await get(`/api/student/${code}`)).body;
   eq(v[2].verdict, 'pending', 'instruction-like text is held for a person');
   eq(v[3].verdict, 'met', 'met');
   eq(v[4].verdict, 'partly', 'partly');
-  ok(v[4].points?.some((p) => p.made === false), '...with the points made and missed', v[4].points);
+  ok(v[4].points == null, '...without rubric points while the attempt is open (#124)', v[4].points);
   eq(v[5].verdict, 'not_met', 'exactly 15 words clears length but still fails the substantive rubric');
   eq(v[6].verdict, 'not_met', 'no hint: the fake model does not pass by accident');
   const rows = q1(`SELECT id, graded_by, points_json FROM answer_grades WHERE attempt_id = '${a.attemptId}' ORDER BY id`);
   eq(rows.slice(1, 3).map((x) => x.graded_by), ['rule', 'rule'], 'copied and instruction-like answers never reached the model');
   ok(/injection/.test(rows[2].points_json), 'the held answer is marked as held for injection');
+  ok(/"made":\s*false/.test(rows[4]?.points_json || ''), 'the record keeps the points made and missed', rows[4]);
   eq(q1(`SELECT COUNT(*) AS n FROM grade_queue WHERE grade_id = ${v[2].gradeId}`)[0].n, 0, 'and is not in the queue: a person grades it');
   ok(JSON.stringify(v[3]).indexOf('quote') === -1, 'the reply carries points made, not the quotes');
   // every short answer now has a rubric (tools/verify-rubrics.mjs): the grade records the version of the key it was graded against

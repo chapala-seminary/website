@@ -39,7 +39,7 @@ const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath
 const fails = [];
 let checks = 0;
 const ok = (c, m, d) => { checks++; if (!c) fails.push(m + (d !== undefined ? `\n        ${typeof d === 'string' ? d : JSON.stringify(d)}` : '')); };
-process.on('uncaughtException', (e) => { console.error(`CRASH after ${checks} checks:`, e.stack.split('\n').slice(0, 5).join('\n')); for (const f of fails) console.error('  ✗ ' + f); process.exit(1); });
+process.on('uncaughtException', (e) => { console.error(`CRASH after ${checks} checks:`, e.stack); for (const f of fails) console.error('  ✗ ' + f); process.exit(1); });
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 function db(command) {
@@ -93,6 +93,13 @@ const U = (unit) => ({
   submit: `button.submit-btn[onclick="submitUnit(${unit})"]`,
   result: `#result_${unit}`,
 });
+async function clickSubmit(p, selector) {
+  // Use the student's visible option to continue without confirming email.
+  // The fixed notice can otherwise cover Submit on a long single-page course.
+  const keep = p.locator('#cts-email-confirm').getByRole('button', { name: /^(Keep studying|Seguir estudiando|Continuer à étudier)$/ });
+  if (await keep.isVisible()) await keep.click();
+  await p.locator(selector).click();
+}
 async function takeUnit(p, s, { wrongMc = 0, fills = true, written = true, tag = 'met' } = {}) {
   const u = U(s.unit);
   for (let i = 0; i < s.mc.length; i++) {
@@ -116,10 +123,10 @@ async function takeUnit(p, s, { wrongMc = 0, fills = true, written = true, tag =
     await p.waitForSelector(`#fill_${s.unit} .cts-fill-q[data-cts-fill="${i}"] .cts-fill-ok`, { timeout: 15000 });
   }
   if (written) for (let i = 0; i < s.sa.length; i++) await p.locator(u.sa(i)).fill(hint(i, tag));
-  await p.locator(u.submit).click();
+  await clickSubmit(p, u.submit);
 }
 async function checkExpansion(p, field, submit) {
-  await p.locator(field).fill('A short draft'); await p.locator(submit).click();
+  await p.locator(field).fill('A short draft'); await clickSubmit(p, submit);
   ok(await waitFor(async () => await p.locator('.cts-sa-too-short').count() > 0), 'single-page short response receives inline guidance');
   ok(await p.locator(field).evaluate((el) => document.activeElement === el && el.getAttribute('aria-invalid') === 'true' && !!el.getAttribute('aria-describedby')), 'single-page invalid response is focused and described');
   await p.locator(field).fill(hint(0));
@@ -152,7 +159,7 @@ db('DELETE FROM grade_overrides; DELETE FROM grade_cache; DELETE FROM grade_queu
     await p.locator(`button[data-fill-check="${i}"]`).click();
     await p.waitForSelector(`.question[data-fill="${i}"] .feedback-text`, { timeout: 30000 });
   }
-  await p.locator('#submitExamBtn').click();
+  await clickSubmit(p, '#submitExamBtn');
   ok(await waitFor(() => q1(`SELECT 1 AS x FROM unit_progress WHERE student_id = '${code}' AND course = 'genesis' AND unit = 2 AND source = 'server'`).length === 1), "Genesis unit 2: the server writes the credit (unit_progress.source = 'server')");
   ok(JSON.parse(await ls(p, 'cts_genesis_progress') || '{}').unit2 === true, 'and the page mirrors it into cts_genesis_progress');
   await d.ctx.close();
@@ -169,7 +176,9 @@ db('DELETE FROM grade_overrides; DELETE FROM grade_cache; DELETE FROM grade_queu
   await p.waitForSelector('.question', { timeout: 15000 });
   const code = await codeOf(p);
   // the other nine units are on record, so this one completes the course
-  db(`INSERT INTO unit_progress (student_id, course, unit, completed_at, source) VALUES ${[2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => `('${code}', 'ethics', ${n}, '2026-10-01T00:00:00Z', 'server')`).join(',')}`);
+  // Earlier credit the record already holds ('legacy': credited before live grading). A unit
+  // marked 'server' would also need the passed attempt the server writes with it (attempts.js earnedLevel).
+  db(`INSERT INTO unit_progress (student_id, course, unit, completed_at, source) VALUES ${[2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => `('${code}', 'ethics', ${n}, '2026-10-01T00:00:00Z', 'legacy')`).join(',')}`);
 
   const html = await (await freshFetch(`${BASE}/ethics_unit01.html`)).text();
   ok(!/correct\s*:\s*\d\s*[,}]/.test(html), 'the Ethics page carries no answer index');
@@ -181,7 +190,8 @@ db('DELETE FROM grade_overrides; DELETE FROM grade_cache; DELETE FROM grade_queu
   const wrong = (s.mc[0].answer + 1) % 4;
   await p.locator(`button[data-live-mc="0,${wrong}"]`).click();
   ok(await waitFor(async () => (await p.locator('.question .feedback-text.incorrect').count()) === 1), 'a wrong click is marked wrong');
-  ok((await pageText(p)).includes('correct answer: ' + 'ABCD'[s.mc[0].answer]), 'and the server names the right letter');
+  // the answer-disclosure policy (Wayne, 18 Oct 2026): no right letter while the attempt is open
+  ok(!(await pageText(p)).includes('correct answer: ') && !/undefined/.test(await pageText(p)), 'and, while the attempt is open, no right letter is named');
   for (let i = 1; i < s.mc.length; i++) await p.locator(`button[data-live-mc="${i},${s.mc[i].answer}"]`).click();
   ok(await waitFor(async () => (await p.locator('.question .feedback-text.correct').count()) === 19), 'the other nineteen are marked right');
   for (let i = 0; i < s.fill.length; i++) {
@@ -192,8 +202,9 @@ db('DELETE FROM grade_overrides; DELETE FROM grade_cache; DELETE FROM grade_queu
   await checkExpansion(p, 'textarea[data-live-sa="0"]', '#submitExamBtn');
   for (let i = 0; i < s.sa.length; i++) await p.locator(`textarea[data-live-sa="${i}"]`).fill(hint(i));
   ok(await p.locator('.model-answer').count() === 0, 'no model answer is on screen before the attempt is over');
-  await p.locator('#submitExamBtn').click();
+  await clickSubmit(p, '#submitExamBtn');
   ok(await waitText(p, 'Passed. This unit is recorded.'), 'Submit: the server passes the unit (19/20, 10/10, 10/10)', (await p.locator('#examResult').innerText()));
+  ok(await waitFor(async () => (await pageText(p)).includes('correct answer: ' + 'ABCD'[s.mc[0].answer])), 'after the pass the missed question names the right letter, for review');
   ok(JSON.parse(await ls(p, 'cts_ethics_progress') || '{}').unit1 === true, 'cts_ethics_progress holds the pass, where the certificate page reads it');
   ok(await waitFor(() => q1(`SELECT source FROM unit_progress WHERE student_id = '${code}' AND course = 'ethics' AND unit = 1`)[0]?.source === 'server'), "D1: unit_progress holds the pass with source = 'server'");
   const comp = q1(`SELECT code, track, source FROM course_completions WHERE student_id = '${code}'`);
@@ -217,7 +228,9 @@ db('DELETE FROM grade_overrides; DELETE FROM grade_cache; DELETE FROM grade_queu
   await p.goto(`${BASE}/CTSCounseling.html`, { waitUntil: 'load' });
   await p.waitForSelector('.question-card', { timeout: 15000 });
   const code = await codeOf(p);
-  db(`INSERT INTO unit_progress (student_id, course, unit, completed_at, source) VALUES ${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => `('${code}', 'counseling', ${n}, '2026-10-01T00:00:00Z', 'server')`).join(',')}`);
+  // Earlier credit the record already holds ('legacy': credited before live grading). A unit
+  // marked 'server' would also need the passed attempt the server writes with it (attempts.js earnedLevel).
+  db(`INSERT INTO unit_progress (student_id, course, unit, completed_at, source) VALUES ${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => `('${code}', 'counseling', ${n}, '2026-10-01T00:00:00Z', 'legacy')`).join(',')}`);
   const html = await (await freshFetch(`${BASE}/CTSCounseling.html`)).text();
   ok(!/correct\s*:\s*\d\s*[,}]/.test(html), 'the Counseling page carries no answer index');
   ok(JSON.stringify(await p.evaluate(() => [Object.keys(UNITS[1].mcq[0]), Object.keys(UNITS[1].shortAnswer[0]), Object.keys(UNITS[1].mcq[0].options[0])])) === '[["textEn","textEs","options"],["textEn","textEs"],["en","es"]]', 'a question in the page is its wording and nothing else');
@@ -236,7 +249,9 @@ db('DELETE FROM grade_overrides; DELETE FROM grade_cache; DELETE FROM grade_queu
   await m.p.goto(`${BASE}/CTSCounseling.html`, { waitUntil: 'load' });
   await m.p.waitForSelector('.question-card', { timeout: 15000 });
   const mcode = await codeOf(m.p);
-  db(`INSERT INTO unit_progress (student_id, course, unit, completed_at, source) VALUES ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => `('${mcode}', 'counseling', ${n}, '2026-10-01T00:00:00Z', 'server')`).join(',')}`);
+  // Earlier credit the record already holds ('legacy': credited before live grading). A unit
+  // marked 'server' would also need the passed attempt the server writes with it (attempts.js earnedLevel).
+  db(`INSERT INTO unit_progress (student_id, course, unit, completed_at, source) VALUES ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => `('${mcode}', 'counseling', ${n}, '2026-10-01T00:00:00Z', 'legacy')`).join(',')}`);
   const s0 = sec('counseling', 0);
   await checkExpansion(m.p, U(s0.unit).sa(0), U(s0.unit).submit);
   await takeUnit(m.p, s0);
@@ -282,24 +297,33 @@ for (const [course, unit, file, minutes, stateKey] of [['counseling', 1, 'CTSCou
 /* ====================================================================== */
 /* 5. Spanish and French pages grade the same                                */
 /* ====================================================================== */
-for (const [lang, file, course, unit, marker] of [['fr', 'CTS_WiseSpeak_Preaching.html', 'wisespeak', 2, 'Réussi'], ['es', 'ethics_unit02.html', 'ethics', 2, 'Aprobado']]) {
+const languageCases = ['en', 'es', 'fr'].flatMap((lang) => [
+  [lang, 'CTSCounseling.html', 'counseling', 2, { en: 'Passed', es: 'Aprobado', fr: 'Réussi' }[lang]],
+  [lang, 'CTS_WiseSpeak_Preaching.html', 'wisespeak', 2, { en: 'Passed', es: 'Aprobado', fr: 'Réussi' }[lang]],
+]);
+languageCases.push(['es', 'ethics_unit02.html', 'ethics', 2, 'Aprobado']);
+for (const [lang, file, course, unit, marker] of languageCases) {
   const s = sec(course, unit);
-  const d = await device({ student: student('thm', 'lang-' + lang) });
+  const d = await device({ student: student('thm', 'lang-' + lang + '-' + course) });
   const { p, errs } = d;
-  await p.goto(`${BASE}/${lang}/${file}`, { waitUntil: 'load' });
+  await p.goto(`${BASE}/${lang === 'en' ? '' : lang + '/'}${file}`, { waitUntil: 'load' });
   await p.waitForSelector('.question-card, .question', { timeout: 15000 });
   const code = await codeOf(p);
-  if (course === 'wisespeak') await takeUnit(p, s);
+  if (course !== 'ethics') await takeUnit(p, s);
   else {
     for (let i = 0; i < s.mc.length; i++) await p.locator(`button[data-live-mc="${i},${s.mc[i].answer}"]`).click();
     for (let i = 0; i < s.fill.length; i++) { const inp = p.locator(`.cts-fill-q[data-cts-fill="${i}"] input`); await inp.fill((s.fill[i].answer.es || s.fill[i].answer.en)); await inp.press('Enter'); await p.waitForSelector(`.cts-fill-q[data-cts-fill="${i}"] .cts-fill-ok`, { timeout: 15000 }); }
     for (let i = 0; i < s.sa.length; i++) await p.locator(`textarea[data-live-sa="${i}"]`).fill(hint(i));
-    await p.locator('#submitExamBtn').click();
+    await clickSubmit(p, '#submitExamBtn');
   }
-  ok(await waitText(p, marker, 25000), `${lang}: ${course} unit ${unit} is passed on the ${lang} page and says so in ${lang}`, (await p.locator('body').innerText()).slice(0, 200));
-  const c = course === 'wisespeak' ? 'wisespeak' : 'ethics';
+  // The course page can mention passing elsewhere. Wait for this unit's
+  // result before checking credit or closing the context during submission.
+  const result = course === 'ethics' ? '#examResult' : U(unit).result;
+  const passed = await p.locator(result).filter({ hasText: marker }).waitFor({ state: 'visible', timeout: 25000 }).then(() => true, () => false);
+  ok(passed, `${lang}: ${course} unit ${unit} is passed on the ${lang} page and says so in ${lang}`, await p.locator(result).innerText());
+  const c = course;
   ok(await waitFor(() => q1(`SELECT lang FROM attempts WHERE student_id = '${code}' AND scope = '${s.scope}'`)[0]?.lang === lang), `${lang}: the attempt is recorded in ${lang}, so feedback comes in ${lang}`);
-  ok(q1(`SELECT COUNT(*) AS n FROM unit_progress WHERE student_id = '${code}' AND course = '${c === 'wisespeak' ? 'wisespeak' : 'ethics'}' AND unit = ${unit}`)[0].n === 1, `${lang}: the server holds the pass`);
+  ok(q1(`SELECT COUNT(*) AS n FROM unit_progress WHERE student_id = '${code}' AND course = '${c}' AND unit = ${unit}`)[0].n === 1, `${lang}: the server holds the pass`);
   ok(errs.length === 0, `${lang}: no page error`, errs);
   await d.ctx.close();
 }

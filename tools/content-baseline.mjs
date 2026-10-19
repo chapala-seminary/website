@@ -69,9 +69,10 @@ function unitFingerprint(U) {
   };
 }
 
-/* Multiple-choice counts that are not twenty, and are meant not to be: the
-   courses as written. A course or unit not listed here must have twenty. */
-const MC_COUNT = { CTSPentecostal: 7, CTSCS: 10, 'CTSRE/1': 18 };
+/* Multiple-choice counts that are not twenty, and are meant not to be.
+   A course or unit not listed here must have twenty. Pentecostal, Counseling
+   Situations, and Ruth unit 1 were brought up to twenty in October 2026. */
+const MC_COUNT = {};
 
 /* The engine's own fill-in grader, read out of cts-engine.js rather than
    copied, so a stored answer the page would mark wrong fails here. */

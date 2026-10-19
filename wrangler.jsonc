@@ -61,7 +61,7 @@
 		"GRADING_MODE": "shadow",
 		"GRADER_MODEL": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
 		"GRADER_MODEL_FALLBACK": "@cf/openai/gpt-oss-120b",
-		"GRADER_PROMPT_VERSION": "2026-10-15.3",
+		"GRADER_PROMPT_VERSION": "2026-10-19.1",
 		// Production release cutoff: preserve this date on later deployments.
 		"MASTER_TESTS_ACTIVATION": "2026-10-15T05:17:56.813Z",
 		"EMAIL_FROM": "Chapala Theological Seminary <certificates@chapalaseminary.org>",
@@ -118,6 +118,10 @@
 		// leave a row in the real students' table.
 		"beta": {
 			"name": "chapala-seminary-beta",
+			// Keep the direct hostname used by the post-deploy health fallback.
+			// Routes otherwise make Wrangler default workers_dev to false.
+			"workers_dev": true,
+			"preview_urls": false,
 			"account_id": "119b0919229edb3185b69f1c6bd04b66",
 			// Its own address. A custom domain: `npm run deploy:beta` attaches it,
 			// and Cloudflare makes the DNS record and the certificate, since the
@@ -140,7 +144,7 @@
 				"GRADING_MODE": "live",
 				"GRADER_MODEL": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
 				"GRADER_MODEL_FALLBACK": "@cf/openai/gpt-oss-120b",
-				"GRADER_PROMPT_VERSION": "2026-10-15.3",
+				"GRADER_PROMPT_VERSION": "2026-10-19.1",
 				"MASTER_TESTS_ACTIVATION": "beta",
 				"EMAIL_FROM": "Chapala Theological Seminary <certificates@chapalaseminary.org>",
 				"EMAIL_REPLY_TO": "info@chapalaseminary.org",

@@ -114,23 +114,29 @@ if (want(2)) {
   ok(await has(p, '.question[data-mc="0"]', 'Checking…'), '"Checking…" shows while waiting');
   ok(await p.locator('.question[data-mc="0"] .option.correct').count() === 0, 'nothing is marked before the server answers');
   await p.waitForSelector('.question[data-mc="0"] .feedback-text.correct');
-  ok(await p.locator(`.question[data-mc="0"] .option.correct[data-opt="${bank.mc[0].answer}"]`).count() === 1, 'the right option is marked');
-  ok(await has(p, '.question[data-mc="0"] .feedback', 'John echoes Genesis'), 'the explanation (why) comes with the answer');
+  ok(await p.locator(`.question[data-mc="0"] .option.correct[data-opt="${bank.mc[0].answer}"]`).count() === 1, 'the right option chosen is marked right');
+  // the answer-disclosure policy (Wayne, 18 Oct 2026): no explanation while the attempt is open
+  ok(await p.locator('.question[data-mc="0"] .feedback').count() === 0, 'no explanation (why) while the attempt is open');
   const wrong = (bank.mc[1].answer + 1) % bank.mc[1].options.en.length;
   await mcAnswer(p, 1, wrong);
   await p.waitForSelector('.question[data-mc="1"] .feedback-text.incorrect');
-  ok(await p.locator(`.question[data-mc="1"] .option.wrong[data-opt="${wrong}"]`).count() === 1 && await p.locator(`.question[data-mc="1"] .option.correct[data-opt="${bank.mc[1].answer}"]`).count() === 1, 'a wrong click marks it wrong and shows the right one');
-  ok(await has(p, '.question[data-mc="1"] .feedback-text', 'Correct answer: ' + 'ABCDEFGH'[bank.mc[1].answer]), 'the correct letter is named');
+  ok(await p.locator(`.question[data-mc="1"] .option.wrong[data-opt="${wrong}"]`).count() === 1 && await p.locator('.question[data-mc="1"] .option.correct').count() === 0, 'a wrong click marks it wrong and does not show the right one');
+  ok(!(await has(p, '.question[data-mc="1"] .feedback-text', 'Correct answer')) && (await p.locator('.question[data-mc="1"] .feedback-text').innerText()).trim() === '✗ Incorrect.', 'no letter is named: "Incorrect." and nothing more');
   const n = stub.calls('/mc').length;
   await mcAnswer(p, 1, bank.mc[1].answer);
   await sleep(700);
   ok(stub.calls('/mc').length === n, 'a second click on an answered question sends nothing');
   const b = stub.calls('/mc')[0].body;
   ok(b.qid === `${SCOPE}/mc/0` && b.choice === bank.mc[0].answer && b.attemptId && b.code === STUB_CODE, 'POST /api/mc carries code, attemptId, qid and choice');
-  // a reload brings the answered questions back from the server, with right and why
+  // a reload brings the answered questions back from the server, verdicts only
+  const before = stub.calls('/mc').length;
   await p.reload({ waitUntil: 'load' }); await ready(p);
-  await waitText(p, 'John echoes Genesis');
-  ok(await p.locator('.question[data-mc="1"] .option.wrong').count() === 1 && await has(p, '.question[data-mc="0"] .feedback', 'John echoes Genesis'), 'a reload restores answered multiple choice, with the right answer and why');
+  await p.waitForSelector('.question[data-mc="1"] .option.wrong');
+  await sleep(500);
+  ok(await p.locator('.question[data-mc="1"] .option.wrong').count() === 1 && await p.locator('.question[data-mc="0"] .option.correct').count() === 1 && await p.locator('.question[data-mc="1"] .option.correct').count() === 0,
+    'a reload restores answered multiple choice: the choices and verdicts, no right option for the wrong one');
+  ok(await p.locator('.feedback').count() === 0 && !/undefined/.test(await p.locator('#questionsContainer').innerText()), 'no explanation, and nothing reads "undefined"');
+  ok(stub.calls('/mc').length === before, 'the page does not ask again for answers the server withholds');
   await ctx.close();
 }
 
@@ -149,10 +155,11 @@ if (want(3)) {
   ok(await p.locator('.question[data-fill="0"] .feedback-text').first().innerText().then((t) => /Correct/.test(t)), 'an exact answer shows Correct');
   stub.delay['/grade'] = 0;
   await p.locator('input[data-fill="1"]').fill('tri-unity [[ai-accept]]'); await p.locator('input[data-fill="1"]').press('Enter');
-  ok(await waitText(p, 'Accepted: that is another name for the same thing.'), 'an answer the model accepts shows Correct with its line of feedback');
+  ok(await p.waitForSelector('.question[data-fill="1"] .feedback-text.correct').then(() => true, () => false) && !(await has(p, '.question[data-fill="1"]', 'another name for the same thing')),
+    'an answer the model accepts shows Correct; the model\'s own words wait for a pass (#124)');
   await p.locator('input[data-fill="2"]').fill('banana'); await p.locator('input[data-fill="2"]').press('Enter');
-  ok(await waitText(p, 'Not quite: that is not what the blank asks for.'), 'a rejected answer shows its feedback');
-  ok(await has(p, '.question[data-fill="2"] .feedback-text', 'Incorrect'), 'a rejected answer is marked Incorrect');
+  ok(await has(p, '.question[data-fill="2"] .feedback-text', 'Incorrect') || (await p.waitForSelector('.question[data-fill="2"] .feedback-text.incorrect').then(() => true, () => false)), 'a rejected answer is marked Incorrect');
+  ok(!(await body(p)).includes('Not quite: that is not what the blank asks for.') && !(await has(p, '.question[data-fill="2"]', 'Answer: ')), 'and, while the attempt is open, neither the model\'s comment nor the answer wanted');
   ok(await has(p, '.question[data-fill="2"]', 'Request a human review'), 'a rejected answer offers "Request a human review"');
   ok(!(await has(p, '.question[data-fill="0"]', 'Request a human review')), 'a right answer offers no appeal');
   await p.locator('input[data-fill="3"]').fill('something [[pending]]'); await p.locator('input[data-fill="3"]').press('Enter');
@@ -178,8 +185,10 @@ if (want(4)) {
   const sa = stub.calls('/grade').slice(before);
   ok(sa.length === 1 && sa[0].body.items.length === 10 && sa[0].body.items.every((x) => x.qid.includes('/sa/')), 'all ten written answers go in one /api/grade call');
   ok(await has(p, '.question[data-sa="0"] .feedback-text', 'Meets the standard'), 'met: "Meets the standard"');
-  ok(await has(p, '.question[data-sa="1"] .feedback-text', 'Partly') && await has(p, '.question[data-sa="1"]', 'You named the covenant but did not say what God promised.'), 'partly: the verdict and what is missing');
-  ok(await has(p, '.question[data-sa="2"] .feedback-text', 'Does not meet the standard') && await has(p, '.question[data-sa="2"]', 'You did not make the main point.'), 'not met: the verdict and why');
+  // the answer-disclosure policy: what the model said is missing waits for a pass
+  ok(await has(p, '.question[data-sa="1"] .feedback-text', 'Partly') && !(await has(p, '.question[data-sa="1"]', 'You named the covenant but did not say what God promised.')), 'partly: the verdict, and not what is missing');
+  ok(await has(p, '.question[data-sa="2"] .feedback-text', 'Does not meet the standard') && !(await has(p, '.question[data-sa="2"]', 'You did not make the main point.')), 'not met: the verdict only');
+  ok(!(await has(p, '.question[data-sa="0"]', 'You made every essential point.')), 'met: the verdict only; the model\'s line waits for a pass (#124)');
   ok(await has(p, '.question[data-sa="3"] .feedback-text', 'Pending'), 'pending: "Pending"');
   ok(await has(p, '.question[data-sa="1"]', 'Request a human review') && await has(p, '.question[data-sa="2"]', 'Request a human review') && !(await has(p, '.question[data-sa="0"]', 'Request a human review')) && !(await has(p, '.question[data-sa="3"]', 'Request a human review')), 'the appeal link sits by partly and not met only');
   ok(!(await body(p)).includes(bank.sa[0].model.en.slice(0, 30)), 'the model answer is never shown');
@@ -361,8 +370,15 @@ if (want(9)) {
   ok(await has(p, '.cts-grade-register', 'you need a student record') && await p.locator('.cts-grade-register a[href="/cts-backup.html"]').count() === 1, 'the questions are held back with a prompt to register or restore');
   ok(await p.locator('.question').count() === 0, 'no question is shown');
   ok(attemptCalls(stub).length === 0 && stub.calls('/mc').length === 0, 'no grading call is made');
-  // registering brings the questions
+  // registering brings the questions -- once every required field is filled.
+  // Country is required (Unit.astro select#regCountry); without it Save
+  // stores nothing, shows the error and makes no grading call.
   await p.locator('#regName').fill('Stub Student'); await p.locator('#regEmail').fill('stub@example.test');
+  await p.locator('#regSave').click();
+  await sleep(300);
+  ok(attemptCalls(stub).length === 0 && await p.locator('.question').count() === 0, 'a registration without a country is refused and sends nothing');
+  ok(await p.locator('#regError').isVisible().catch(() => false) || await p.locator('#regCountry:invalid').count() === 1, 'and says the country is needed');
+  await p.locator('#regCountry').selectOption('MX');
   await p.locator('#regSave').click();
   ok(await ready(p), 'after registering the questions appear');
   ok(attemptCalls(stub)[0].body.code === STUB_CODE, 'the first attempt uses the code the registration produced');
@@ -484,6 +500,68 @@ if (want(13)) {
   const a = attemptCalls(stub)[0];
   ok(a && /^rd:/.test(a.body.scope), 'a required-reading test asks for an rd: attempt', a && a.body.scope);
   ok(await p.locator('input[data-cts-fill]').count() === 20, 'and shows the server\'s twenty');
+  await ctx.close();
+}
+
+// 14. Textbook service failures preserve typing and resume the same sitting.
+// Fault injection is local to the stub, never used against a deployed site.
+if (want(14)) {
+  for (const lang of ['en', 'es', 'fr']) {
+    const stub = new GradingStub();
+    const path = (lang === 'en' ? '' : '/' + lang) + TB;
+    const { ctx, p, errs } = await open(stub, { path, lang });
+    await p.waitForSelector('input[data-cts-fill]');
+    const id = [...stub.attempts.keys()][0];
+    const tb = bankOf('tb:cults');
+    const drawn = await p.evaluate(() => window.CTS_TEXTBOOK.draw());
+    const first = tb.fill[drawn[0]].answer.en;
+    // Type every answer without checking individually, then submit in batches.
+    for (let k = 0; k < 20; k++) await p.locator(`input[data-cts-fill="${k}"]`).fill(tb.fill[drawn[k]].answer.en);
+    stub.failNext = 503;
+    await p.locator('#tb-submit').click();
+    await p.waitForSelector('.cts-grade-trouble');
+    ok(await p.locator('.cts-grade-trouble').count() === 1, `${lang}: one service warning, without a second misleading connection warning`);
+    ok(await p.locator('input[data-cts-fill="0"]').inputValue() === first, `${lang}: a batch failure keeps the typed answer`);
+    ok(stub.calls('/attempt/' + id + '/submit').length === 0 && await ls(p, 'cts_textbook_cults_lock') === null, `${lang}: a failed grade request does not submit or lock the exam`);
+    stub.delay['/grade'] = 600;
+    await p.locator('[data-cts-retry]').first().click();
+    await p.locator('#tb-submit').click();
+    ok(await waitText(p, { en: 'Passed:', es: 'Aprobado:', fr: 'Réussi' }[lang]), `${lang}: retry completes grading and submission`);
+    ok(attemptCalls(stub).length === 1 && [...stub.attempts.keys()][0] === id, `${lang}: retry keeps the same sitting`);
+    ok(stub.calls('/grade').length === 3, `${lang}: Submit during retry shares its two grading batches instead of duplicating them`);
+    ok(stub.calls('/attempt/' + id + '/submit').length === 1, `${lang}: concurrent retry and Submit finalize the sitting once`);
+    ok(await p.locator('.cts-grade-trouble').count() === 0, `${lang}: the warning clears on recovery`);
+    await p.reload({ waitUntil: 'load' });
+    ok(await waitText(p, { en: 'Passed on', es: 'Aprobado el', fr: 'Réussi le' }[lang]), `${lang}: the pass survives reload`);
+    ok(errs.length === 0, `${lang}: no browser errors during textbook recovery`, errs[0]);
+    await ctx.close();
+  }
+}
+
+// 15. A late answer typed into a blank during Retry must count before Submit.
+if (want(15)) {
+  const stub = new GradingStub();
+  const tb = bankOf('tb:cults');
+  const { ctx, p, errs } = await open(stub, { path: TB });
+  await p.waitForSelector('input[data-cts-fill]');
+  const id = [...stub.attempts.keys()][0];
+  const drawn = await p.evaluate(() => window.CTS_TEXTBOOK.draw());
+  for (let k = 0; k < 19; k++) await p.locator(`input[data-cts-fill="${k}"]`).fill(k < 17 ? tb.fill[drawn[k]].answer.en : 'zzz');
+  stub.failNext = 503;
+  await p.locator('#tb-submit').click();
+  await p.waitForSelector('.cts-grade-trouble');
+  stub.delay['/grade'] = 600;
+  await p.locator('[data-cts-retry]').click();
+  await p.locator('input[data-cts-fill="19"]').fill(tb.fill[drawn[19]].answer.en);
+  await p.locator('#tb-submit').click();
+  ok(await waitText(p, 'Passed: 18 of 20 right', 8000), 'the late answer supplies the eighteenth point before the sitting is submitted');
+  const lateQid = 'tb:cults/fill/' + drawn[19];
+  const graded = stub.calls('/grade').flatMap((c) => c.body.items);
+  ok(graded.filter((it) => it.qid === lateQid).length === 1, 'the answer typed during Retry is sent for grading exactly once');
+  ok(stub.calls('/grade').length === 4, 'two original batches and the one new answer follow the failed request without duplicates');
+  ok(stub.calls('/attempt/' + id + '/submit').length === 1, 'the sitting is finalized once after the late answer is graded');
+  ok(await ls(p, 'cts_textbook_cults_lock') === null, 'including the late answer avoids an unwarranted failed-exam lock');
+  ok(errs.length === 0, 'no browser errors while grading the late answer', errs[0]);
   await ctx.close();
 }
 

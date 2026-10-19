@@ -65,7 +65,7 @@
 </div>
 <p class="limit-note no-print" id="limitNote"></p>
 <!-- 1 -->
-<article class="entry" data-id="1" data-title-en="The Story of the Old Testament — a CTS survey (Edersheim)" data-title-es="La Historia del Antiguo Testamento — un estudio del STC (Edersheim)">
+<article class="entry" data-id="1" data-title-en="The Story of the Old Testament — a CTS survey (Edersheim)" data-title-es="La Historia del Antiguo Testamento — un estudio del STC (Edersheim)" data-title-fr="L’histoire de l’Ancien Testament — une étude du STC (Edersheim)">
 <div class="locus">
 <span class="lang-en">The Whole Story · Creation to Christ</span>
 <span class="lang-es">La historia completa · de la Creación a Cristo</span>
@@ -155,7 +155,7 @@
 <label class="pick"><input data-pick="1" type="checkbox"><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
 </div>
 </article>
-<article class="entry" data-id="2" data-title-en="The Divine Library: What the Old Testament Is — a CTS survey (Kirkpatrick)" data-title-es="La Biblioteca Divina: Qué es el Antiguo Testamento — un estudio del STC (Kirkpatrick)">
+<article class="entry" data-id="2" data-title-en="The Divine Library: What the Old Testament Is — a CTS survey (Kirkpatrick)" data-title-es="La Biblioteca Divina: Qué es el Antiguo Testamento — un estudio del STC (Kirkpatrick)" data-title-fr="La bibliothèque divine : ce qu’est l’Ancien Testament — une étude du STC (Kirkpatrick)">
 <div class="locus">
 <span class="lang-en">What the OT Is · Canon &amp; Inspiration</span>
 <span class="lang-es">Qué es el AT · Canon e inspiración</span>
@@ -248,7 +248,7 @@
 <label class="pick"><input data-pick="2" type="checkbox"><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
 </div>
 </article>
-<article class="entry" data-id="3" data-title-en="The Wisdom of the Old Testament — a CTS survey (Arnot)" data-title-es="La Sabiduría del Antiguo Testamento — un estudio del STC (Arnot)">
+<article class="entry" data-id="3" data-title-en="The Wisdom of the Old Testament — a CTS survey (Arnot)" data-title-es="La Sabiduría del Antiguo Testamento — un estudio del STC (Arnot)" data-title-fr="La sagesse de l’Ancien Testament — une étude du STC (Arnot)">
 <div class="locus">
 <span class="lang-en">Wisdom Literature · Proverbs, Job, Ecclesiastes</span>
 <span class="lang-es">Literatura sapiencial · Proverbios, Job, Eclesiastés</span>
@@ -341,7 +341,7 @@
 <label class="pick"><input data-pick="3" type="checkbox"><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
 </div>
 </article>
-<article class="entry" data-id="4" data-title-en="Isaiah and the Prophets — a CTS survey (Robinson)" data-title-es="Isaías y los Profetas — un estudio del STC (Robinson)">
+<article class="entry" data-id="4" data-title-en="Isaiah and the Prophets — a CTS survey (Robinson)" data-title-es="Isaías y los Profetas — un estudio del STC (Robinson)" data-title-fr="Ésaïe et les prophètes — une étude du STC (Robinson)">
 <div class="locus">
 <span class="lang-en">The Prophets · Judgment and Hope</span>
 <span class="lang-es">Los Profetas · Juicio y esperanza</span>
@@ -437,7 +437,7 @@
 <label class="pick"><input data-pick="4" type="checkbox"><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
 </div>
 </article>
-<article class="entry" data-id="5" data-title-en="Christ in the Old Testament — a CTS survey (Baron)" data-title-es="Cristo en el Antiguo Testamento — un estudio del STC (Baron)">
+<article class="entry" data-id="5" data-title-en="Christ in the Old Testament — a CTS survey (Baron)" data-title-es="Cristo en el Antiguo Testamento — un estudio del STC (Baron)" data-title-fr="Christ dans l’Ancien Testament — une étude du STC (Baron)">
 <div class="locus">
 <span class="lang-en">Christ in All the Scriptures · the Capstone</span>
 <span class="lang-es">Cristo en todas las Escrituras · la culminación</span>
@@ -678,7 +678,8 @@
     var note = document.getElementById('limitNote');
     if(full){
       note.innerHTML = "<span class='lang-en'>Three chosen. Uncheck one to change your selection.</span>" +
-                       "<span class='lang-es'>Tres elegidas. Desmarque una para cambiar su selección.</span>";
+                       "<span class='lang-es'>Tres elegidas. Desmarque una para cambiar su selección.</span>" +
+                       "<span class='lang-fr'>Trois choisies. Décochez-en une pour changer votre sélection.</span>";
     } else {
       note.textContent = "";
     }
@@ -696,17 +697,20 @@
 
     if(chosen.length !== MAX){
       msg.innerHTML = "<span class='lang-en'>Choose exactly three readings above to record them.</span>" +
-                      "<span class='lang-es'>Elija exactamente tres lecturas arriba para registrarlas.</span>";
+                      "<span class='lang-es'>Elija exactamente tres lecturas arriba para registrarlas.</span>" +
+                      "<span class='lang-fr'>Choisissez exactement trois lectures ci-dessus pour les attester.</span>";
       return;
     }
     if(!name){
       msg.innerHTML = "<span class='lang-en'>Enter your name to record your reading.</span>" +
-                      "<span class='lang-es'>Escriba su nombre para registrar su lectura.</span>";
+                      "<span class='lang-es'>Escriba su nombre para registrar su lectura.</span>" +
+                      "<span class='lang-fr'>Saisissez votre nom pour attester votre lecture.</span>";
       return;
     }
     if(!oath){
       msg.innerHTML = "<span class='lang-en'>Check the box to affirm you have read all three.</span>" +
-                      "<span class='lang-es'>Marque la casilla para afirmar que ha leído las tres.</span>";
+                      "<span class='lang-es'>Marque la casilla para afirmar que ha leído las tres.</span>" +
+                      "<span class='lang-fr'>Cochez la case pour attester que vous avez lu les trois.</span>";
       return;
     }
     msg.textContent = "";
@@ -724,7 +728,8 @@
       var art = b.closest('.entry');
       var li = document.createElement('li');
       li.innerHTML = "<span class='lang-en'>" + art.getAttribute('data-title-en') + "</span>" +
-                     "<span class='lang-es'>" + art.getAttribute('data-title-es') + "</span>";
+                     "<span class='lang-es'>" + art.getAttribute('data-title-es') + "</span>" +
+                     "<span class='lang-fr'>" + art.getAttribute('data-title-fr') + "</span>";
       ul.appendChild(li);
     });
 

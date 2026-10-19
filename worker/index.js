@@ -139,6 +139,14 @@ async function route(request, env, ctx) {
   // The verification page in a reader's language: /fr/verify (worker/api.js).
   if (/^\/(?:es|fr)\/verify(?:\/|$)/.test(path)) return await handle(request, env);
   if (path === '/staff' || path.startsWith('/staff/')) return await handleStaff(request, env);
+  // The teaching passages a live build keeps for the review after a passed
+  // attempt (tools/exam-review.mjs): each was chosen because it holds a
+  // question's answer, so only the grading API reads them (env.ASSETS, which
+  // does not come through here). A browser asking is told nothing is there.
+  // Read decoded, so /assets/exam%2Dreview/... or a doubled slash is refused too.
+  let plain = path;
+  try { plain = decodeURIComponent(path); } catch { /* a malformed escape: keep it as written */ }
+  if (/\/exam-review\//i.test(plain.replace(/\/{2,}/g, '/'))) return new Response('', { status: 404 });
   let m;
   if ((m = /^\/stop-notes\/([^/]+)$/.exec(path)) && env.DB) return await stopNotes(request, env, decodeURIComponent(m[1]));
   return await asset(request, env);

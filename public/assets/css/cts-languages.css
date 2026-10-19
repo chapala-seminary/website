@@ -18,12 +18,13 @@ body[data-page-lang]{display:block!important}
 @media(max-width:700px){[data-show-source="true"] .cts-text-pair:has(>.cts-source){display:inline-block;width:auto;max-width:100%}[data-show-source="true"] .cts-source{margin-top:.4rem;border-left:2px solid currentColor;padding-left:.6rem}}
 /* Legacy page scripts can still render language-marked interface text. The
    generated page language remains authoritative, including French fallback. */
-body[data-page-lang="en"] :is(.lang-es,.es-only,.block-es,.teach-es,.es-lbl){display:none!important}
-body[data-page-lang="es"] :is(.lang-en,.en-only,.block-en,.teach-en,.en-lbl){display:none!important}
-/* Scripts still write some Spanish beside the English (class="es"); a French
-   reader sees the English until that script has French of its own. */
+body[data-page-lang="en"] :is(.lang-es,.es-only,.block-es,.teach-es,.es-lbl,.lang-fr,.fr-only,.block-fr,.teach-fr,.fr-lbl){display:none!important}
+body[data-page-lang="es"] :is(.lang-en,.en-only,.block-en,.teach-en,.en-lbl,.lang-fr,.fr-only,.block-fr,.teach-fr,.fr-lbl){display:none!important}
+/* A script that writes English, Spanish, and French shows only the French
+   line. A script that has not been given French still shows its English. */
 body[data-page-lang="fr"] :is(.lang-es,.es-only,.block-es,.teach-es,.es-lbl,.pane.es,span.es,div.es,section.es,p.es,
   #teach-es,#sa-note-es,#sa-badge-es,#titleEs,#t-title-es){display:none!important}
+body[data-page-lang="fr"] :is(.lang-en,.en-only,.block-en,.teach-en,.en-lbl):has(~ .lang-fr){display:none!important}
 
 /* Question sources belong directly below the translated wording. */
 [data-show-source="true"] .question .cts-text-pair:has(>.cts-source),

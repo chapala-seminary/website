@@ -17,8 +17,10 @@
    enabled and its environment token is installed. Preserve approved activation
    dates, grading modes and prior student progress.
 
-Keep Robert's `satoshisound` native PR-review bypass and own-PR approval-check
-exception. Build/test checks still apply. Wayne and the AI have no production
+Robert's `satoshisound` account can approve any PR at its exact current commit,
+including technical changes from feature branches or forks. His own PRs need no
+second reviewer, regardless of source repository. GitHub does not allow formal
+self-approval. Keep his native PR bypass; build/test checks still apply. Wayne and the AI have no production
 review bypass. Have the agent open promotions: GitHub does not allow Wayne to
 approve a PR authored by his own account.
 
@@ -27,8 +29,10 @@ approve a PR authored by his own account.
 Beta allows Robert, Wayne and the Write-enabled AI to push, with no required
 PR reviews or pre-push status checks. Its push workflow performs tests before
 publication. Force pushes/deletion remain disabled. Production allows only
-Robert/Wayne to merge, requires one approval and resolved conversations, and
-dismisses stale approvals. Code Owner approval is not required. The trusted-base
+Robert/Wayne to merge, requires a PR and resolved conversations, and dismisses stale approvals.
+Native approval count is zero: the required release-status check enforces
+Wayne/Robert approval with Robert's own-PR exception. A generic one-approval
+rule creates a misleading self-review blocker and must not be restored. Code Owner approval is not required. The trusted-base
 release checker requires Wayne's exact-commit approval and the current beta's
 successful deployment run; it does not require Robert or AI-review links.
 

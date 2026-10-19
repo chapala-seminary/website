@@ -54,6 +54,13 @@ for (const [name, c] of [['production', prod], ['beta', prod.env?.beta]]) {
     `found ${JSON.stringify(list[0]?.binding)}`);
 }
 
+/* CI falls back to the direct hostname when Cloudflare challenges its runner.
+   A custom route otherwise disables workers.dev by default. */
+ok(prod.env?.beta?.workers_dev === true,
+  'beta keeps its workers.dev hostname enabled for exact-release verification');
+ok(prod.env?.beta?.preview_urls === false,
+  'beta does not expose unused per-version preview URLs');
+
 /* Beta must not write to the students' table. */
 const db = (c) => c?.d1_databases?.[0]?.database_name;
 ok(db(prod) && db(prod.env?.beta) && db(prod) !== db(prod.env.beta),
