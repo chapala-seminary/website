@@ -220,7 +220,7 @@ node tools/verify-language-pages.mjs dist
 # the page it replaced, element for element, and that automatic translation
 # will not overwrite work a person did.
 node tools/verify-question-counts.mjs dist
-node tools/verify-lesson-render.mjs
+node tools/verify-lesson-source.mjs
 node test/lesson-translation.mjs
 node test/french-schema.mjs
 node test/french-cms.mjs
