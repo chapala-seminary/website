@@ -363,6 +363,7 @@ if (want(9)) {
   ok(attemptCalls(stub).length === 0 && stub.calls('/mc').length === 0, 'no grading call is made');
   // registering brings the questions
   await p.locator('#regName').fill('Stub Student'); await p.locator('#regEmail').fill('stub@example.test');
+  await p.locator('#regCountry').selectOption('MX');
   await p.locator('#regSave').click();
   ok(await ready(p), 'after registering the questions appear');
   ok(attemptCalls(stub)[0].body.code === STUB_CODE, 'the first attempt uses the code the registration produced');

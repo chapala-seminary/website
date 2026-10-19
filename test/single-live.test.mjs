@@ -39,7 +39,7 @@ const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath
 const fails = [];
 let checks = 0;
 const ok = (c, m, d) => { checks++; if (!c) fails.push(m + (d !== undefined ? `\n        ${typeof d === 'string' ? d : JSON.stringify(d)}` : '')); };
-process.on('uncaughtException', (e) => { console.error(`CRASH after ${checks} checks:`, e.stack.split('\n').slice(0, 5).join('\n')); for (const f of fails) console.error('  ✗ ' + f); process.exit(1); });
+process.on('uncaughtException', (e) => { console.error(`CRASH after ${checks} checks:`, e.stack); for (const f of fails) console.error('  ✗ ' + f); process.exit(1); });
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 function db(command) {
@@ -93,6 +93,13 @@ const U = (unit) => ({
   submit: `button.submit-btn[onclick="submitUnit(${unit})"]`,
   result: `#result_${unit}`,
 });
+async function submit(p, selector) {
+  // Newly registered students choose whether to confirm now or keep studying.
+  // Exercise the latter through the UI before clicking controls behind the banner.
+  const keep = p.locator('#cts-email-confirm').getByRole('button', { name: 'Keep studying', exact: true });
+  if (await keep.isVisible()) await keep.click();
+  await p.locator(selector).click();
+}
 async function takeUnit(p, s, { wrongMc = 0, fills = true, written = true, tag = 'met' } = {}) {
   const u = U(s.unit);
   for (let i = 0; i < s.mc.length; i++) {
@@ -116,10 +123,13 @@ async function takeUnit(p, s, { wrongMc = 0, fills = true, written = true, tag =
     await p.waitForSelector(`#fill_${s.unit} .cts-fill-q[data-cts-fill="${i}"] .cts-fill-ok`, { timeout: 15000 });
   }
   if (written) for (let i = 0; i < s.sa.length; i++) await p.locator(u.sa(i)).fill(hint(i, tag));
-  await p.locator(u.submit).click();
+  await submit(p, u.submit);
 }
 async function checkExpansion(p, field, submit) {
-  await p.locator(field).fill('A short draft'); await p.locator(submit).click();
+  await p.locator(field).fill('A short draft');
+  const keep = p.locator('#cts-email-confirm').getByRole('button', { name: 'Keep studying', exact: true });
+  if (await keep.isVisible()) await keep.click();
+  await p.locator(submit).click();
   ok(await waitFor(async () => await p.locator('.cts-sa-too-short').count() > 0), 'single-page short response receives inline guidance');
   ok(await p.locator(field).evaluate((el) => document.activeElement === el && el.getAttribute('aria-invalid') === 'true' && !!el.getAttribute('aria-describedby')), 'single-page invalid response is focused and described');
   await p.locator(field).fill(hint(0));
