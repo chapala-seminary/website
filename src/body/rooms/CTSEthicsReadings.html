@@ -65,7 +65,7 @@
 </div>
 <p class="limit-note no-print" id="limitNote"></p>
 <!-- 1 -->
-<article class="entry" data-id="1" data-title-en="The Foundation of Christian Ethics: Grace, Not Mere Rules — CTS digest" data-title-es="El Fundamento de la Ética Cristiana: Gracia, No Meras Reglas — resumen STC">
+<article class="entry" data-id="1" data-title-en="The Foundation of Christian Ethics: Grace, Not Mere Rules — CTS digest" data-title-es="El Fundamento de la Ética Cristiana: Gracia, No Meras Reglas — resumen STC" data-title-fr="Le fondement de l’éthique chrétienne : la grâce, et non de simples règles — résumé du STC">
 <div class="locus">
 <span class="lang-en">The Foundation · Grace, Not Rules</span>
 <span class="lang-es">El Fundamento · Gracia, No Reglas</span>
@@ -146,7 +146,7 @@
 </div>
 </article>
 <!-- 2 -->
-<article class="entry" data-id="2" data-title-en="The Two Great Commandments: Love God and Love Neighbor — CTS digest" data-title-es="Los Dos Grandes Mandamientos: Amar a Dios y Amar al Prójimo — resumen STC">
+<article class="entry" data-id="2" data-title-en="The Two Great Commandments: Love God and Love Neighbor — CTS digest" data-title-es="Los Dos Grandes Mandamientos: Amar a Dios y Amar al Prójimo — resumen STC" data-title-fr="Les deux grands commandements : aimer Dieu et aimer son prochain — résumé du STC">
 <div class="locus">
 <span class="lang-en">The Heart of Ethics · Love</span>
 <span class="lang-es">El Corazón de la Ética · Amor</span>
@@ -227,7 +227,7 @@
 </div>
 </article>
 <!-- 3 -->
-<article class="entry" data-id="3" data-title-en="The Christian Character: Holiness in Heart and Life — CTS digest" data-title-es="El Carácter Cristiano: Santidad en el Corazón y en la Vida — resumen STC">
+<article class="entry" data-id="3" data-title-en="The Christian Character: Holiness in Heart and Life — CTS digest" data-title-es="El Carácter Cristiano: Santidad en el Corazón y en la Vida — resumen STC" data-title-fr="Le caractère chrétien : la sainteté dans le cœur et dans la vie — résumé du STC">
 <div class="locus">
 <span class="lang-en">Christian Character · Holiness</span>
 <span class="lang-es">El Carácter Cristiano · Santidad</span>
@@ -308,7 +308,7 @@
 </div>
 </article>
 <!-- 4 -->
-<article class="entry" data-id="4" data-title-en="Ethics in the Everyday: Money, Home, and Daily Life — CTS digest" data-title-es="La Ética en lo Cotidiano: Dinero, Hogar, y Vida Diaria — resumen STC">
+<article class="entry" data-id="4" data-title-en="Ethics in the Everyday: Money, Home, and Daily Life — CTS digest" data-title-es="La Ética en lo Cotidiano: Dinero, Hogar, y Vida Diaria — resumen STC" data-title-fr="L’éthique au quotidien : l’argent, le foyer et la vie de tous les jours — résumé du STC">
 <div class="locus">
 <span class="lang-en">The Ordinary Round · Money, Home, Work</span>
 <span class="lang-es">La Rutina Ordinaria · Dinero, Hogar, Trabajo</span>
@@ -389,7 +389,7 @@
 </div>
 </article>
 <!-- 5 -->
-<article class="entry" data-id="5" data-title-en="The Pastor’s Ethics, and the Christian in the World — CTS digest" data-title-es="La Ética del Pastor, y el Cristiano en el Mundo — resumen STC">
+<article class="entry" data-id="5" data-title-en="The Pastor’s Ethics, and the Christian in the World — CTS digest" data-title-es="La Ética del Pastor, y el Cristiano en el Mundo — resumen STC" data-title-fr="L’éthique du pasteur, et le chrétien dans le monde — résumé du STC">
 <div class="locus">
 <span class="lang-en">Pastor and World · Capstone</span>
 <span class="lang-es">Pastor y Mundo · Culminación</span>
@@ -620,7 +620,8 @@
     var note = document.getElementById('limitNote');
     if(full){
       note.innerHTML = "<span class='lang-en'>Three chosen. Uncheck one to change your selection.</span>" +
-                       "<span class='lang-es'>Tres elegidas. Desmarque una para cambiar su selección.</span>";
+                       "<span class='lang-es'>Tres elegidas. Desmarque una para cambiar su selección.</span>" +
+                       "<span class='lang-fr'>Trois choisies. Décochez-en une pour changer votre sélection.</span>";
     } else {
       note.textContent = "";
     }
@@ -638,17 +639,20 @@
 
     if(chosen.length !== MAX){
       msg.innerHTML = "<span class='lang-en'>Choose exactly three readings above to record them.</span>" +
-                      "<span class='lang-es'>Elija exactamente tres lecturas arriba para registrarlas.</span>";
+                      "<span class='lang-es'>Elija exactamente tres lecturas arriba para registrarlas.</span>" +
+                      "<span class='lang-fr'>Choisissez exactement trois lectures ci-dessus pour les attester.</span>";
       return;
     }
     if(!name){
       msg.innerHTML = "<span class='lang-en'>Enter your name to record your reading.</span>" +
-                      "<span class='lang-es'>Escriba su nombre para registrar su lectura.</span>";
+                      "<span class='lang-es'>Escriba su nombre para registrar su lectura.</span>" +
+                      "<span class='lang-fr'>Saisissez votre nom pour attester votre lecture.</span>";
       return;
     }
     if(!oath){
       msg.innerHTML = "<span class='lang-en'>Check the box to affirm you have read all three.</span>" +
-                      "<span class='lang-es'>Marque la casilla para afirmar que ha leído las tres.</span>";
+                      "<span class='lang-es'>Marque la casilla para afirmar que ha leído las tres.</span>" +
+                      "<span class='lang-fr'>Cochez la case pour attester que vous avez lu les trois.</span>";
       return;
     }
     msg.textContent = "";
@@ -666,7 +670,8 @@
       var art = b.closest('.entry');
       var li = document.createElement('li');
       li.innerHTML = "<span class='lang-en'>" + art.getAttribute('data-title-en') + "</span>" +
-                     "<span class='lang-es'>" + art.getAttribute('data-title-es') + "</span>";
+                     "<span class='lang-es'>" + art.getAttribute('data-title-es') + "</span>" +
+                     "<span class='lang-fr'>" + art.getAttribute('data-title-fr') + "</span>";
       ul.appendChild(li);
     });
 

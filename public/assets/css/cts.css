@@ -308,9 +308,13 @@ textarea{min-height:120px;line-height:1.6;resize:vertical}
    than a class (#teach-en, #sa-note-es). Leaving those out is how a page ends
    up showing both languages at once while every class-based check passes. */
 body.lang-en :is(.lang-es,.es-only,.block-es,.es-lbl,.pane.es,.teach-es,span.es,div.es,section.es,
+                 .lang-fr,.fr-only,.block-fr,.fr-lbl,
                  #teach-es,#sa-note-es,#sa-badge-es,#titleEs,#t-title-es){display:none}
 body.lang-es :is(.lang-en,.en-only,.block-en,.en-lbl,.pane.en,.teach-en,span.en,div.en,section.en,
+                 .lang-fr,.fr-only,.block-fr,.fr-lbl,
                  #teach-en,#sa-note-en,#sa-badge-en,#titleEn,#t-title-en){display:none}
+body.lang-fr :is(.lang-es,.es-only,.block-es,.es-lbl,.pane.es,.teach-es,span.es,div.es,section.es){display:none}
+body.lang-fr :is(.lang-en,.en-only,.block-en,.en-lbl):has(~ .lang-fr){display:none}
 body.lang-both :is(.lang-es,.es-only,.block-es,.pane.es,.teach-es,div.es,section.es,
                    #teach-es,#sa-note-es){
   display:block;color:var(--muted);margin-top:var(--s1)}

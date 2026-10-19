@@ -49,12 +49,25 @@ function db(command) {
   return JSON.parse(out.slice(out.indexOf('['))).map((r) => r.results);
 }
 const q1 = (c) => db(c)[0];
+async function readBody(r) {
+  const text = await r.text();
+  if (!text) return null;
+  try { return JSON.parse(text); }
+  catch { return text.slice(0, 400); }
+}
 async function call(method, p, b) {
+  /* Same recovery as test/grading-api.test.mjs: a restarting dev server answers
+     500, 502 or 503 with an empty or HTML body, and another try is the same
+     request. A JSON error is the Worker's own answer and is not tried again. */
+  let last;
   for (let tries = 0; ; tries++) {
     try {
       const r = await fetch(BASE + p, { method, headers: { 'content-type': 'application/json', connection: 'close' }, body: b === undefined ? undefined : JSON.stringify(b) });
-      return { status: r.status, body: await r.json().catch(() => null) };
-    } catch (e) { if (tries >= 2) throw e; await sleep(300); }
+      last = { status: r.status, body: await readBody(r) };
+      const bounced = last.status >= 500 && last.status <= 503 && (last.body === null || typeof last.body === 'string');
+      if (!bounced || tries >= 3) return last;
+    } catch (e) { if (tries >= 3) throw e; }
+    await sleep(400 * (tries + 1));
   }
 }
 const post = (p, b) => call('POST', p, b);
@@ -70,7 +83,7 @@ let n = 0, salt = 0;
 async function student(track, { goal, lang = 'en', confirmed = false } = {}) {
   const email = `staffgrading-${RUN}-${++n}@example.test`;
   const r = await post('/api/register', { name: `Staff Grading Tester ${RUN} ${n}`, email, track, lang, ...(goal ? { goal } : {}) });
-  if (r.status !== 201) throw new Error(`register returned ${r.status}: ${JSON.stringify(r.body)}`);
+  if (r.status !== 201) throw new Error(`register returned ${r.status}: ${typeof r.body === 'string' ? r.body : JSON.stringify(r.body)}\n${emailLog().trim().split('\n').slice(-25).join('\n')}`);
   const code = r.body.code;
   if (confirmed) {
     const ch = await post('/api/email/start', { code, email });

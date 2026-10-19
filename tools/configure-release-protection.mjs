@@ -1,6 +1,6 @@
 // One-time administrator setup, not part of deployment. Preview by default.
-// --apply: require human review now, without depending on uninstalled checks.
-// --apply --checks: activate required checks after policy is on both branches.
+// --apply: open beta to agents; keep native production review.
+// --apply --checks: additionally require production tests and release approval.
 import { execFileSync } from 'node:child_process';
 import { ROBERT, WAYNE, BOT } from './release-policy.mjs';
 const repo = 'chapala-seminary/website';
@@ -23,10 +23,10 @@ if (checks) {
 for (const branch of ['beta', 'main']) {
   const users = [ROBERT, WAYNE, ...(branch === 'beta' && botCanPush ? [BOT] : [])];
   const config = {
-    required_status_checks: required,
+    required_status_checks: branch === 'main' ? required : null,
     enforce_admins: true,
-    required_pull_request_reviews: {
-      dismiss_stale_reviews: true, require_code_owner_reviews: true,
+    required_pull_request_reviews: branch === 'beta' ? null : {
+      dismiss_stale_reviews: true, require_code_owner_reviews: false,
       required_approving_review_count: 1,
       dismissal_restrictions: { users: [ROBERT, WAYNE], teams: [] },
       bypass_pull_request_allowances: { users: [ROBERT], teams: [], apps: [] },
@@ -35,18 +35,24 @@ for (const branch of ['beta', 'main']) {
     required_linear_history: false, allow_force_pushes: false, allow_deletions: false,
     required_conversation_resolution: true,
   };
-  console.log(`${apply ? 'Applying' : 'Preview'} ${branch}: human PR/Code Owner review (Robert has a named review bypass), stale approvals dismissed, push/merge restricted to ${users.join(', ')}; ${checks ? 'both release checks required' : 'bootstrap: no required check names yet'}.`);
+  console.log(`${apply ? 'Applying' : 'Preview'} ${branch}: ${branch === 'beta' ? 'agent pushes, no review gate; tests run before publication' : 'Wayne production review, Robert review bypass; ' + (checks ? 'build and release checks required' : 'required checks not activated')}; allowed: ${users.join(', ')}.`);
   if (apply) {
     api(`repos/${repo}/branches/${branch}/protection`, config);
     const actual = api(`repos/${repo}/branches/${branch}/protection`);
-    if (!actual.enforce_admins?.enabled || actual.required_pull_request_reviews?.required_approving_review_count !== 1 || !actual.required_pull_request_reviews?.require_code_owner_reviews || actual.allow_force_pushes?.enabled || actual.allow_deletions?.enabled)
+    if (!actual.enforce_admins?.enabled || actual.allow_force_pushes?.enabled || actual.allow_deletions?.enabled)
       throw new Error(`Protection verification failed on ${branch}.`);
-    if (!actual.required_pull_request_reviews?.dismiss_stale_reviews || !actual.required_conversation_resolution?.enabled)
-      throw new Error(`Stale-review/conversation protection verification failed on ${branch}.`);
-    if (actual.required_pull_request_reviews?.bypass_pull_request_allowances?.users?.map(user => user.login.toLowerCase()).join(',') !== ROBERT.toLowerCase())
-      throw new Error(`Robert-only review bypass verification failed on ${branch}.`);
-    if (checks && (!actual.required_status_checks?.strict || actual.required_status_checks.checks.map(check => `${check.context}:${check.app_id}`).sort().join(',') !== required.checks.map(check => `${check.context}:${check.app_id}`).sort().join(',')))
-      throw new Error(`Required-check verification failed on ${branch}.`);
+    if (branch === 'beta') {
+      if (actual.required_pull_request_reviews || actual.required_status_checks)
+        throw new Error('Beta must allow agent pushes without PR approval or pre-push checks.');
+    } else {
+      const review = actual.required_pull_request_reviews;
+      if (review?.required_approving_review_count !== 1 || review.require_code_owner_reviews || !review.dismiss_stale_reviews)
+        throw new Error('Production review verification failed.');
+      if (review.bypass_pull_request_allowances?.users?.map(user => user.login.toLowerCase()).join(',') !== ROBERT.toLowerCase())
+        throw new Error('Robert-only review bypass verification failed.');
+      if (checks && (!actual.required_status_checks?.strict || actual.required_status_checks.checks.map(check => `${check.context}:${check.app_id}`).sort().join(',') !== required.checks.map(check => `${check.context}:${check.app_id}`).sort().join(',')))
+        throw new Error('Production required-check verification failed.');
+    }
     if (actual.restrictions.users.map(user => user.login.toLowerCase()).sort().join(',') !== users.map(user => user.toLowerCase()).sort().join(','))
       throw new Error(`Push restriction verification failed on ${branch}.`);
   }
