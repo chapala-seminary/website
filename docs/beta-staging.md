@@ -12,12 +12,15 @@ before publication begins.
 
 ## New work
 
-Start from current beta and open a PR with base `beta`. ChatGPT reviews the
-academic content, Claude checks it and prepares the change, and Wayne approves
-the exact commit. Put the full head SHA and links to both reviews in the PR
-using its template. Each new push requires fresh human approval and matching
-review evidence. Run `npm run build && npm test`; GitHub also runs a fresh suite.
-The agent account may merge content-only PRs after all required checks pass.
+Start from current beta and open a PR with base `beta` from the
+`chapalatheological-ai` account. Claude and ChatGPT each review the exact
+commit and record it as a PR comment in the template's one-line form
+(`CTS review: reviewer=… verdict=… scope=… head=…`); links are not review
+evidence. Wayne approves the exact commit in GitHub. Each new push makes the
+records and approvals stale. Run `npm run build && npm test`; GitHub also runs
+a fresh suite. Once the required checks pass, the agent account may merge a
+content-only PR to beta; a technical or mixed PR additionally needs both
+records to be technical scope.
 Keep related drafts and dependencies identifiable. Language drafts still need
 the relevant qualified theological reviewer before production.
 

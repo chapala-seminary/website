@@ -8,8 +8,9 @@ deletion, including for administrators. Required checks are `CTS build and tests
 and `CTS release approval`. Main allows merges only by `satoshisound` and
 `ChapalaTheological1`; beta additionally allows `chapalatheological-ai` once it
 has Write access. Only `satoshisound` has a named PR-review bypass. His own same-repository PRs
-are exempt from the faculty/AI approval check, while build/test checks still
-apply. `ChapalaTheological1` and `chapalatheological-ai` have no bypass.
+to beta are exempt from the faculty/AI approval check (never PRs to main),
+while build/test checks still apply. `ChapalaTheological1` and
+`chapalatheological-ai` have no bypass.
 Since 18 Oct 2026 the approval check passes technical PRs on technical-scope
 review records from Claude and ChatGPT for the exact commit (PR comments the
 check reads itself) plus Wayne's approval; Robert is no longer a required
@@ -84,8 +85,18 @@ node tools/configure-release-protection.mjs --apply --checks
  The script refuses
 to require the checks until the policy files exist on both branches. Running
 without `--apply` previews the settings. `--apply` without `--checks` installs
-the initial human-review protections with Robert’s named exception. The initial setup PRs use native reviews with Robert’s named bypass; the base branch has no governance script yet, so its setup step
-issues no `CTS release approval` status. Full enforcement starts after both PRs
+the initial human-review protections with Robert’s named exception.
+
+**The 18 Oct 2026 transition.** Beta already runs the earlier gate, which
+requires Robert for technical changes, and the gate always judges a PR by the
+policy on its base branch, so the PR that installs the new policy cannot
+approve itself. The controlled step: Claude and ChatGPT review that exact
+commit, CI passes, Wayne approves it in GitHub, and Wayne merges it once as
+administrator (or Robert approves it once). From then on every PR is judged
+by the new policy. This is a single, recorded exception, not a bypass to
+reuse. (When this workflow was first installed, the base branch had no
+governance script, so that setup step issued no `CTS release approval`
+status.) Full enforcement starts after both PRs
 are installed and the administrator activates the required checks. The initial main
 installation is a narrowly scoped technical setup PR, not a promotion of all
 pending beta work. During initial setup, enable only checks that already exist on
