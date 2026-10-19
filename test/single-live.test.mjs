@@ -39,7 +39,7 @@ const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath
 const fails = [];
 let checks = 0;
 const ok = (c, m, d) => { checks++; if (!c) fails.push(m + (d !== undefined ? `\n        ${typeof d === 'string' ? d : JSON.stringify(d)}` : '')); };
-process.on('uncaughtException', (e) => { console.error(`CRASH after ${checks} checks:`, e.stack.split('\n').slice(0, 5).join('\n')); for (const f of fails) console.error('  ✗ ' + f); process.exit(1); });
+process.on('uncaughtException', (e) => { console.error(`CRASH after ${checks} checks:`, e.stack); for (const f of fails) console.error('  ✗ ' + f); process.exit(1); });
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 function db(command) {

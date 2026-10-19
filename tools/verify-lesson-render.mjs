@@ -61,6 +61,22 @@ const sig = (el) => {
 };
 
 const walk = (root) => {
+  // PR #110 changes shared registration, not lesson content. Normalize only
+  // its exact approved copy and country control; keep all lesson words strict.
+  const registration = root.querySelector('#cts-register');
+  if (registration) {
+    const copy = JSON.parse(fs.readFileSync('test/fixtures/registration-copy.json', 'utf8'));
+    for (const pair of copy) {
+      for (const span of registration.querySelectorAll('p > span')) {
+        if (span.outerHTML === pair.after) span.replaceWith(parse(pair.before).firstChild);
+      }
+    }
+    const country = registration.querySelector('select#regCountry');
+    if (country) {
+      country.parentNode.removeAttribute('class');
+      country.replaceWith(parse('<input id="regCountry" type="text" autocomplete="country-name">').firstChild);
+    }
+  }
   // The same SEO change initially hides registration with CSS and adds a
   // course-overview link to the shared footer. Reconstruct the old frame for
   // this lesson comparison; registration and overview links have UI/SEO checks.
