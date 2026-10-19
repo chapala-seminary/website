@@ -75,6 +75,20 @@
      catalog gets shorter, and the smooth scroll overshoots. Once the fonts are
      in, scroll to the hash again (found 3 Oct 2026 by tools/verify-beta-pass.mjs). */
   try{ if(location.hash&&document.fonts&&document.fonts.ready){document.fonts.ready.then(function(){var el=document.getElementById(location.hash.slice(1));if(el)el.scrollIntoView();});} }catch(e){}
+  /* The same link could also stop short: a notice put above the catalog while
+     the page was already scrolling (cts-sync.js, e.g. "add a valid email")
+     moved the course list down by its own height (171px; 19 Oct 2026, again
+     found by tools/verify-beta-pass.mjs). For three seconds after arriving at
+     a hash, keep that element in place when the page above it changes size;
+     the first scroll, touch or key of the reader's own ends it. */
+  try{ if(location.hash&&window.ResizeObserver){(function(){
+    var el=document.getElementById(location.hash.slice(1)); if(!el)return;
+    var done=false, stop=function(){ if(done)return; done=true; ro.disconnect(); ['wheel','touchstart','keydown','mousedown'].forEach(function(t){removeEventListener(t,stop,true);}); };
+    var ro=new ResizeObserver(function(){ if(!done) el.scrollIntoView(); });
+    ro.observe(document.body);
+    ['wheel','touchstart','keydown','mousedown'].forEach(function(t){addEventListener(t,stop,{capture:true,passive:true});});
+    setTimeout(stop,3000);
+  })();} }catch(e){}
 </script>
 <script src="cts-curriculum.js?v=20260915a" defer></script>
 <!-- Mirrors this browser's progress to the seminary's database and issues the
