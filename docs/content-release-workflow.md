@@ -14,6 +14,10 @@ Since 18 Oct 2026 the approval check passes technical PRs on technical-scope
 review records from Claude and ChatGPT for the exact commit (PR comments the
 check reads itself) plus Wayne's approval; Robert is no longer a required
 approver, and his own-PR exemption covers beta only (see AGENTS.md).
+His branch-protection review bypass (`tools/configure-release-protection.mjs`)
+skips only the native PR-review requirement, not required status checks: once
+`--checks` is applied, every main merge, his included, still needs a passing
+`CTS release approval`, which requires Wayne's exact-commit approval.
 
 The governance workflow reads policy from the trusted base branch, never runs
 PR code with its token, checks the entire file list and publishes its status on
