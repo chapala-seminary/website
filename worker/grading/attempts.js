@@ -342,78 +342,130 @@ export async function settle(env, attemptId, { submitting = false } = {}) {
 
 const lockOf = (a) => (a.locked_until && Date.parse(a.locked_until) > Date.now() ? { until: a.locked_until, kind: a.lock_kind } : null);
 
+/* ---- what the student may see: the answer-disclosure policy ----------------------
+   Wayne Cook, 18 Oct 2026 (it replaces showing the right answer at once):
+   while an attempt is open -- and after it is submitted, unless it passed --
+   the student is told right or wrong and nothing more: no right option, no
+   explanation, no answer wanted, no model answer, no teaching passage, and no
+   feedback the AI wrote about a wrong answer (it may name what was wanted).
+   Once the attempt has PASSED, all of it may be shown for review.
+   Every reply that says anything about an attempt asks this one function. */
+export function disclosureOf(attempt) {
+  return attempt && !attempt.shadow && attempt.status === 'passed' ? 'review' : 'verdict';
+}
+/* Feedback on a written answer that may be shown while only the verdict is
+   disclosed: the seminary's own fixed sentences (a blank, a copied question,
+   held for a person, waiting), what a faculty member wrote, and anything said
+   about an answer that was right or met. Feedback the model wrote about an
+   answer that was not right is held back until a pass. */
+export function feedbackFor(row, disclosure) {
+  const fb = row.feedback || null;
+  if (!fb || disclosure === 'review') return fb;
+  const by = row.graded_by ?? row.gradedBy ?? row.by;
+  if (by === 'rule' || by === 'human') return fb;
+  return ['right', 'met', 'pending'].includes(row.verdict) ? fb : null;
+}
+
 /* What the student has done in an attempt, as the page reads it (docs/ai-grading.md section 12).
-   Only things that student already knows or has earned the right to see:
-   - multiple choice: the choice, and the right option and explanation (the
-     click that answered it already returned both);
-   - fill-in and short answer: the student's own text, who graded it
-     (`gradedBy`), and, for a fill-in graded wrong, the answer that was
-     wanted (a graded item is final: the first answer stands);
-   - a banked short answer: met, with the text that met it. */
-export async function answeredOf(env, rows, banked, lang) {
-  const need = rows.filter((r) => r.kind === 'mc' || (r.kind === 'fill' && r.verdict === 'wrong')).map((r) => r.qid);
+   Always: the multiple-choice choice and verdict, the student's own text, who
+   graded it (`gradedBy`), feedback as feedbackFor allows, and a banked short
+   answer (met, with the text that met it). Only with disclosure 'review' (a
+   passed attempt): the right option and explanation of each multiple choice,
+   and the answer wanted for a fill-in graded wrong. */
+export async function answeredOf(env, rows, banked, lang, disclosure = 'verdict') {
+  const review = disclosure === 'review';
+  const need = review ? rows.filter((r) => r.kind === 'mc' || (r.kind === 'fill' && r.verdict === 'wrong')).map((r) => r.qid) : [];
   const keys = need.length ? await loadKeys(env, need) : new Map();
   const out = {};
   for (const q of banked.sa) out[q] = { verdict: 'met', feedback: null, banked: true, ...(banked.saText && banked.saText[q] ? { answerText: banked.saText[q] } : {}) };
   for (const r of rows) {
-    const a = { gradeId: r.id, verdict: r.verdict, feedback: r.feedback || null, gradedBy: r.graded_by };
+    const a = { gradeId: r.id, verdict: r.verdict, feedback: feedbackFor(r, disclosure), gradedBy: r.graded_by };
     if (r.kind === 'mc') {
-      const k = keys.get(r.qid)?.key;
       a.choice = Number(r.answer_text);
+      const k = review ? keys.get(r.qid)?.key : null;
       if (k) { a.answer = k.answer; a.why = pick(k.why, lang) || null; }
     } else {
       a.answerText = r.answer_text;
-      if (r.kind === 'fill' && r.verdict === 'wrong') { const k = keys.get(r.qid)?.key; if (k) a.correctAnswer = pick(k.answer, lang) || undefined; }
+      if (review && r.kind === 'fill' && r.verdict === 'wrong') { const k = keys.get(r.qid)?.key; if (k) a.correctAnswer = pick(k.answer, lang) || undefined; }
     }
     out[r.qid] = a;
   }
   return out;
 }
 
-/* The model answers of the short answers on a track where they are for
-   reflection and not graded, once the attempt is submitted -- and only then.
-   (On a track where written answers count, a model answer shown after a
-   failed attempt would be copied into the retake.) The page shows each beside
-   a short answer the student wrote. */
+/* The model answers of the short answers, for review once the attempt has
+   passed -- never while it is open and never after a failure, when they would
+   be copied into the retake -- and, as before, only on a track where short
+   answers are for reflection and not graded. The page shows each beside a
+   short answer the student wrote. */
 async function modelAnswersOf(env, attempt, scope, st) {
-  if (attempt.status === 'open' || attempt.shadow || st.req.sa.need || !st.items.sa.length) return undefined;
+  if (disclosureOf(attempt) !== 'review' || st.req.sa.need || !st.items.sa.length) return undefined;
   const keys = await loadKeys(env, st.items.sa);
   const out = {};
   for (const q of st.items.sa) { const m = keys.get(q)?.key.model; if (m && typeof m === 'object') out[q] = m; }
   return Object.keys(out).length ? out : undefined;
 }
 
+/* The teaching passages for the questions of a textbook or reading test the
+   student missed, once the attempt has passed (tools/exam-review.mjs). They are
+   chosen because they contain the answer, so a live build does not put them on
+   the page: they sit in the static assets as /assets/exam-review/<test>.<lang>.json,
+   which worker/index.js refuses to serve, and only this reads them. */
+async function reviewPassagesOf(env, attempt, scope, st) {
+  if (disclosureOf(attempt) !== 'review' || (scope.type !== 'tb' && scope.type !== 'rd') || !env.ASSETS) return undefined;
+  const right = new Set(st.rows.filter((r) => r.kind === 'fill' && r.verdict === 'right').map((r) => r.qid));
+  const missed = st.items.fill.filter((q) => !right.has(q));
+  if (!missed.length) return undefined;
+  let bank = null;
+  for (const lang of [attempt.lang, 'en']) {
+    try {
+      const res = await env.ASSETS.fetch(new Request(`https://assets.local/assets/exam-review/${scope.testSlug}.${lang}.json`));
+      if (res.ok) { bank = await res.json(); break; }
+    } catch { /* no passages: the page links to the book instead */ }
+  }
+  if (!bank || bank.slug !== scope.testSlug || !Array.isArray(bank.questions)) return undefined;
+  const out = {};
+  for (const q of missed) { const p = bank.questions[indexOf(q)]; if (p) out[q] = p; }
+  return Object.keys(out).length ? out : undefined;
+}
+
 export async function resultOf(env, attempt, scope, st) {
   st = st || await standing(env, attempt, scope);
+  const disclosure = disclosureOf(attempt);
   const part = (name, right) => ({ right, total: st.req[name].total, need: st.req[name].need });
   const unitDone = attempt.status === 'passed' || await alreadyCredited(env, attempt, scope);
   let courseDone = false;
   const code = scope.type === 'unit' ? resolveCourse(scope.slug)?.code : scope.type === 'sp' ? scope.meta?.code : scope.code;
   if (code) courseDone = !!(await env.DB.prepare('SELECT 1 FROM course_completions WHERE student_id = ? AND code = ?').bind(attempt.student_id, code).first());
+  const models = await modelAnswersOf(env, attempt, scope, st);
+  const reviews = await reviewPassagesOf(env, attempt, scope, st);
   return {
-    attemptId: attempt.id, scope: attempt.scope, status: attempt.status,
+    attemptId: attempt.id, scope: attempt.scope, status: attempt.status, disclosure,
     scores: { mc: { ...part('mc', st.state.mcRight), banked: st.banked.mc }, fill: part('fill', st.state.fillRight), sa: part('sa', st.state.saMet) },
     lock: lockOf(attempt), unitDone, courseDone,
-    answered: await answeredOf(env, st.rows, st.banked, attempt.lang),
-    ...(await modelAnswersOf(env, attempt, scope, st).then((m) => (m ? { models: m } : {}))),
+    answered: await answeredOf(env, st.rows, st.banked, attempt.lang, disclosure),
+    ...(models ? { models } : {}),
+    ...(reviews ? { reviews } : {}),
   };
 }
 
 /** The reply to POST /api/attempt. */
 export async function attemptView(env, attempt, scope, keys) {
   const st = await standing(env, attempt, scope);
-  const answered = await answeredOf(env, st.rows, st.banked, attempt.lang);
+  const disclosure = disclosureOf(attempt);
+  const answered = await answeredOf(env, st.rows, st.banked, attempt.lang, disclosure);
   const mcAsked = st.banked.mc ? [] : st.items.mc;
   const whys = new Map();
   for (const q of mcAsked) if (answered[q] && answered[q].why) whys.set(q, answered[q].why);
+  const models = await modelAnswersOf(env, attempt, scope, st);
   return {
-    attemptId: attempt.id, scope: attempt.scope, status: attempt.status, track: attempt.track, lang: attempt.lang,
+    attemptId: attempt.id, scope: attempt.scope, status: attempt.status, track: attempt.track, lang: attempt.lang, disclosure,
     needs: { mc: st.req.mc.need, fill: st.req.fill.need, sa: st.req.sa.need },
     totals: { mc: st.req.mc.total, fill: st.req.fill.total, sa: st.req.sa.total },
     banked: { mc: st.banked.mc, fill: [], sa: st.banked.sa },
     answered,
     lock: lockOf(attempt),
-    ...(await modelAnswersOf(env, attempt, scope, st).then((m) => (m ? { models: m } : {}))),
+    ...(models ? { models } : {}),
     items: {
       mc: mcAsked.map((q) => (whys.get(q) ? { qid: q, why: whys.get(q) } : { qid: q })),
       fill: st.items.fill,
@@ -552,9 +604,9 @@ export async function gradeWritten(env, attempt, entries) {
     r.gradeId = res.id;
     if (r.queue) await enqueue(env, res.id, r.queue);
   }
+  // The attempt is open (the caller checked): the reply says only what disclosureOf allows for it.
   return out.map((r, i) => ({
-    qid: entries[i].qid, gradeId: r.gradeId, verdict: r.verdict, feedback: r.feedback || null, gradedBy: r.by || 'ai',
-    ...(entries[i].kind === 'fill' && r.verdict === 'wrong' && pick(entries[i].key.answer, lang) ? { correctAnswer: pick(entries[i].key.answer, lang) } : {}),
+    qid: entries[i].qid, gradeId: r.gradeId, verdict: r.verdict, feedback: feedbackFor(r, disclosureOf(attempt)), gradedBy: r.by || 'ai',
     ...(r.points ? { points: r.points.map((p) => ({ id: p.id, made: p.made })) } : {}),
   }));
 }

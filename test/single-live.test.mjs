@@ -181,7 +181,8 @@ db('DELETE FROM grade_overrides; DELETE FROM grade_cache; DELETE FROM grade_queu
   const wrong = (s.mc[0].answer + 1) % 4;
   await p.locator(`button[data-live-mc="0,${wrong}"]`).click();
   ok(await waitFor(async () => (await p.locator('.question .feedback-text.incorrect').count()) === 1), 'a wrong click is marked wrong');
-  ok((await pageText(p)).includes('correct answer: ' + 'ABCD'[s.mc[0].answer]), 'and the server names the right letter');
+  // the answer-disclosure policy (Wayne, 18 Oct 2026): no right letter while the attempt is open
+  ok(!(await pageText(p)).includes('correct answer: ') && !/undefined/.test(await pageText(p)), 'and, while the attempt is open, no right letter is named');
   for (let i = 1; i < s.mc.length; i++) await p.locator(`button[data-live-mc="${i},${s.mc[i].answer}"]`).click();
   ok(await waitFor(async () => (await p.locator('.question .feedback-text.correct').count()) === 19), 'the other nineteen are marked right');
   for (let i = 0; i < s.fill.length; i++) {
@@ -194,6 +195,7 @@ db('DELETE FROM grade_overrides; DELETE FROM grade_cache; DELETE FROM grade_queu
   ok(await p.locator('.model-answer').count() === 0, 'no model answer is on screen before the attempt is over');
   await p.locator('#submitExamBtn').click();
   ok(await waitText(p, 'Passed. This unit is recorded.'), 'Submit: the server passes the unit (19/20, 10/10, 10/10)', (await p.locator('#examResult').innerText()));
+  ok(await waitFor(async () => (await pageText(p)).includes('correct answer: ' + 'ABCD'[s.mc[0].answer])), 'after the pass the missed question names the right letter, for review');
   ok(JSON.parse(await ls(p, 'cts_ethics_progress') || '{}').unit1 === true, 'cts_ethics_progress holds the pass, where the certificate page reads it');
   ok(await waitFor(() => q1(`SELECT source FROM unit_progress WHERE student_id = '${code}' AND course = 'ethics' AND unit = 1`)[0]?.source === 'server'), "D1: unit_progress holds the pass with source = 'server'");
   const comp = q1(`SELECT code, track, source FROM course_completions WHERE student_id = '${code}'`);

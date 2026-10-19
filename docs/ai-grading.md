@@ -26,8 +26,11 @@ Terms:
 The modes:
 
 - **`live`** (the default on branch `ai-grader`). The pages carry **no**
-  answers, `accept` lists, model answers, keywords, rubrics or MC `answer`
-  indexes, and `why` texts are fetched only after answering. The browser
+  answers, `accept` lists, model answers, keywords, rubrics, MC `answer`
+  indexes or review passages. While an attempt is open, and after one that
+  failed, the server says right or wrong and nothing more; the right answers,
+  `why` texts, model answers and review passages come only with an attempt
+  that passed (see "Answer disclosure" below). The browser
   grades nothing: every MC click, fill-in and short answer goes to the API.
   Credit is written only by the server.
 - **`shadow`**: used only for the production trial before the switch date.
@@ -286,8 +289,8 @@ like `/api/sync`, plus a per-student cap of 150 graded items an hour (429).
 
 | Route | Body | Reply |
 |---|---|---|
-| `POST /api/attempt` | `{ code, scope, lang }` | `{ attemptId, track, needs: {mc, fill, sa}, banked: { mc: bool, fill: [qid], sa: [qid] }, answered: {qid: {verdict, feedback, choice?}}, lock: {until, kind} \| null, items: { mc: [{qid, why?}], fill: [qid], sa: [qid] } }` |
-| `POST /api/mc` | `{ code, attemptId, qid, choice }` | `{ right, answer, why }` |
+| `POST /api/attempt` | `{ code, scope, lang }` | `{ attemptId, track, needs: {mc, fill, sa}, banked: { mc: bool, fill: [qid], sa: [qid] }, answered: {qid: {verdict, feedback, choice?}}, lock: {until, kind} \| null, items: { mc: [{qid, why?}], fill: [qid], sa: [qid] }, disclosure } }` (`why` only when `disclosure` is `review`) |
+| `POST /api/mc` | `{ code, attemptId, qid, choice }` | `{ right, choice }` (the stored choice; no key while the attempt is open) |
 | `POST /api/grade` | `{ code, attemptId, items: [{qid, answer}] }` | `{ items: [{ qid, verdict, feedback, points? }] }` |
 | `POST /api/attempt/<id>/submit` | `{ code }` | `{ status: passed\|failed\|pending, scores: {...}, lock, unitDone: bool, courseDone: bool }` |
 | `GET /api/attempt/<id>?code=` | — | Same as the submit reply, plus the current verdicts, so pending results can be collected |
@@ -612,41 +615,64 @@ that breaks the agreement fails the suite.
   `pending`), `track`, `lang`, `needs`, `totals`, `banked`, `answered`, `lock`
   (null) and `items`. A browser on a new device learns that the latest attempt
   is already submitted from `status: "pending"`.
+- **Answer disclosure** (Wayne Cook, 18 Oct 2026; it replaces showing the
+  right answer at once). One function decides it,
+  `disclosureOf(attempt)` in `worker/grading/attempts.js`, and every reply
+  about an attempt carries its result as `disclosure`:
+  - `"verdict"` -- the attempt is open, pending or failed (and every shadow
+    attempt): right or wrong, the student's own choice and words, scores and
+    locks. No right option, `why`, `correctAnswer`, `models` or `reviews`, and
+    no feedback the model wrote about an answer that was not right (it may
+    name what was wanted). The seminary's fixed sentences (a blank answer, a
+    copied question, held for a person, waiting) and a faculty member's words
+    are still shown, as is feedback on an answer that was right or met.
+  - `"review"` -- the attempt passed: everything below, for review.
+  A failed attempt stays `"verdict"` for good, so a retake can never be
+  answered from the failed one.
 - **`answered[qid]`** (in the attempt, submit and GET replies alike) holds, for
   what the student has already done and nothing else:
-  - always `gradeId`, `verdict`, `feedback`, `gradedBy` (`exact`, `cache`,
-    `override`, `rule`, `ai` or `human`; the page offers an appeal only on a
-    fill-in not graded `exact` or `rule`);
-  - multiple choice: `choice`, and `answer` (index of the right option) and
-    `why` (a string in the attempt's language, or null), which the click that
-    answered it already returned;
+  - always `gradeId`, `verdict`, `feedback` (as the disclosure allows),
+    `gradedBy` (`exact`, `cache`, `override`, `rule`, `ai` or `human`; the page
+    offers an appeal only on a fill-in not graded `exact` or `rule`);
+  - multiple choice: `choice`; with `"review"`, also `answer` (index of the
+    right option) and `why` (a string in the attempt's language, or null);
   - fill-in and short answer: `answerText`, the student's own words;
-  - a fill-in graded `wrong`: `correctAnswer`, a string in the attempt's
-    language. A graded item is final (the first answer to a question stands),
-    so this is sent once the item is graded and never before; a pending
-    fill-in carries none;
+  - with `"review"`, a fill-in graded `wrong`: `correctAnswer`, a string in the
+    attempt's language;
   - a banked short answer: `{ verdict: "met", banked: true, answerText }`, the
     text being the latest answer that met the standard.
 - **Locked refusal**: `POST /api/attempt` answers 423 with
   `{ error, lock: { until, kind }, track }`. The browser accepts any 4xx
   carrying `lock`. `until` is an ISO date; `kind` `sa` locks the written part
   (mirrored into `_sa_lock`), `full` the whole unit (`_full_lock`).
-- **`POST /api/mc`** replies `{ right, answer, why, choice }`; `answer` is the
-  0-based index of the right option; `why` is a string in the attempt's
-  language or null (null means "none", absent means "ask again").
+- **`POST /api/mc`** replies `{ right, choice }` -- the attempt is open, so
+  never the right option or its explanation. `choice` is the choice the server
+  recorded: the first answer to a question stands, so when a click's reply was
+  lost and the student then clicked another option, the page shows `choice`,
+  not the later click.
 - **`POST /api/grade`** items are `{ qid, gradeId, verdict, feedback, gradedBy,
-  points?, correctAnswer? }` (`correctAnswer` as above, for a fill-in graded
-  wrong). A banked short answer comes back `{ verdict: "met", banked: true }`.
+  points? }`, `feedback` as the disclosure allows; never `correctAnswer`. A
+  banked short answer comes back `{ verdict: "met", banked: true }`.
 - **Submit / `GET /api/attempt/<id>`**: `status` `passed|failed|pending`;
   `scores` as `{ mc: {right,total,need,banked}, fill: {...}, sa: {...} }`;
   `lock`; `unitDone`; `courseDone` (true is what makes the browser write
   `cts_done_codes` through `cts-record.js`; `unitDone` is not read); `answered`.
 - **`models`** in a submit or GET reply: `{ qid: {en,es,fr} }` for the short
-  answers of the attempt, sent only once the attempt is no longer open and only
-  on a track where written answers do not count (Certificate, Associate). On a
-  track where they count, no model answer is ever sent, because one shown after
-  a failed attempt would be copied into the retake. The page shows a model
-  answer beside a short answer the student wrote, and not beside one left empty.
+  answers of the attempt, sent only once the attempt has PASSED, and only on a
+  track where written answers do not count (Certificate, Associate). Never after
+  a failed attempt, whose model answers would be copied into the retake. The
+  page shows a model answer beside a short answer the student wrote, and not
+  beside one left empty.
+- **`reviews`** in a submit or GET reply of a textbook or reading test that
+  passed: `{ qid: { paragraphs, kind, heading, href, lang } }`, the teaching
+  passage for each question missed (`tools/exam-review.mjs`). A live build
+  keeps them out of the test page -- they were chosen because they hold the
+  answer -- as `/assets/exam-review/<test>.<lang>.json`, which the Worker reads
+  through `env.ASSETS` and refuses to a browser (`worker/index.js`). After a
+  failed attempt the page lists the questions missed with a link to the book,
+  and no passage. A shadow build keeps the old per-page script.
+- **A unit already passed, opened again** asks `GET /api/attempt/<id>` for the
+  attempt that passed it, and shows its review.
 - **`POST /api/appeal`** is sent `{ code, gradeId, attemptId, qid, note }`. The
   Worker acts on `gradeId`, and finds the answer from `attemptId` + `qid` if
   `gradeId` is missing. 429 means three are open.

@@ -139,10 +139,12 @@ ok(q1(`SELECT track FROM students WHERE id = '${codeA}'`)[0]?.track === 'associa
 
 // multiple choice: 19 right, the first wrong
 await mcAll(p, john1, 1);
-ok(await p.locator('.question[data-mc="0"] .option.wrong').count() === 1 && await p.locator(`.question[data-mc="0"] .option.correct[data-opt="${john1.mc[0].answer}"]`).count() === 1,
-  'a wrong click marks it wrong and shows the right option (from the server)');
-ok(!john1.mc[0].why?.en || await has(p, '.question[data-mc="0"] .feedback', john1.mc[0].why.en.slice(0, 25)), 'and the explanation arrives with it');
-ok(await has(p, '.question[data-mc="0"] .feedback-text', 'Correct answer: ' + 'ABCDEFGH'[john1.mc[0].answer]), 'the right letter is named');
+// The answer-disclosure policy (Wayne, 18 Oct 2026): while the attempt is open, right or wrong only.
+ok(await p.locator('.question[data-mc="0"] .option.wrong').count() === 1 && await p.locator('.question[data-mc="0"] .option.correct').count() === 0,
+  'a wrong click marks it wrong and does not show the right option while the attempt is open');
+{ const t = await p.locator('#questionsContainer').innerText(), at = t.indexOf('John echoes Genesis to tell us');
+  ok(await p.locator('.question[data-mc="0"] .feedback').count() === 0 && at < 0, 'and no explanation', at < 0 ? '' : t.slice(Math.max(0, at - 200), at + 80)); }
+ok(!(await has(p, '.question[data-mc="0"] .feedback-text', 'Correct answer')) && !/undefined/.test(await p.locator('.question[data-mc="0"]').innerText()), 'no letter is named, and nothing reads "undefined"');
 
 // fill-ins: exact, accepted by the model, wrong
 await fillOne(p, 0, john1.fill[0].answer.en.toUpperCase());               // exact, whatever the capitals
@@ -151,7 +153,7 @@ ok(await has(p, '.question[data-fill="1"]', 'Accepted: it names the same thing.'
   'an answer the model accepts shows Correct with its line of feedback');
 await fillOne(p, 2, 'zzzz nothing');
 ok(await has(p, '.question[data-fill="2"] .feedback-text', 'Incorrect'), 'a wrong fill-in is marked Incorrect');
-ok(await has(p, '.question[data-fill="2"]', 'Answer: ' + john1.fill[2].answer.en), 'and, now that it is graded, the answer wanted is shown', (await p.locator('.question[data-fill="2"]').innerText()).slice(0, 200));
+ok(!(await has(p, '.question[data-fill="2"]', 'Answer: ')) && !(await has(p, '.question[data-fill="2"]', 'Not quite: look again')), 'and, while the attempt is open, neither the answer wanted nor the model\'s comment on it is shown', (await p.locator('.question[data-fill="2"]').innerText()).slice(0, 300));
 ok(await has(p, '.question[data-fill="2"]', 'Request a human review') && !(await has(p, '.question[data-fill="0"]', 'Request a human review')),
   'a wrong fill-in offers a human review; an exact one does not');
 for (let i = 3; i < john1.fill.length; i++) await fillOne(p, i, john1.fill[i].answer.en);
@@ -171,6 +173,11 @@ await p.locator('#submitExamBtn').click();
 ok(await waitText(p, 'Unit 1 passed'), 'Submit: the server passes the unit (19/20 multiple choice, 10/10 fill-in)', (await body(p)).slice(0, 300));
 ok(await has(p, '.question[data-sa="0"] .model-answer', john1.sa[0].model.en.slice(0, 30)) && await p.locator('.question[data-sa="2"] .model-answer').count() === 0,
   'model answers appear after Submit, beside a short answer the student wrote and not beside one they left empty');
+// ...and the pass opens the review: the right option and explanation, the answer wanted
+ok(await p.locator(`.question[data-mc="0"] .option.correct[data-opt="${john1.mc[0].answer}"]`).count() === 1 && await has(p, '.question[data-mc="0"] .feedback-text', 'Correct answer: ' + 'ABCDEFGH'[john1.mc[0].answer]),
+  'after the pass the missed question shows the right option');
+ok(await has(p, '.question[data-mc="0"] .feedback', john1.mc[0].why.en.slice(0, 25)), 'and its explanation');
+ok(await has(p, '.question[data-fill="2"]', 'Answer: ' + john1.fill[2].answer.en), 'and the wrong fill-in the answer wanted');
 ok(JSON.parse(await ls(p, 'cts_john_progress') || '{}').unit1 === true && await ls(p, 'cts_john_u1_mc_passed') === '1', 'the pass is mirrored into the keys the certificate pages read');
 {
   const rows = q1(`SELECT source FROM unit_progress WHERE student_id = '${codeA}' AND course = 'john' AND unit = 1`);
@@ -183,6 +190,7 @@ ok(JSON.parse(await ls(p, 'cts_john_progress') || '{}').unit1 === true && await 
 // a reload: the pass is the server's, with nothing asked again
 await p.reload({ waitUntil: 'load' });
 ok(await waitText(p, 'Unit 1 passed'), 'a reload shows the pass');
+ok(await waitText(p, john1.mc[0].why.en.slice(0, 25)), 'and the passed attempt can still be reviewed');
 
 /* ====================================================================== */
 /* 2. The same student: a textbook test                                    */
@@ -207,6 +215,10 @@ for (let k = 0; k < 20; k++) {
 }
 await p.locator('#tb-submit').click();
 ok(await waitText(p, 'Passed: '), 'the server passes the textbook test at 18 of 20');
+// the pass opens the review: the two missed questions, each with its teaching passage from the server
+ok(await p.waitForSelector('#tb-review article blockquote', { timeout: 15000 }).then(() => true, () => false) && await p.locator('#tb-review article').count() === 2,
+  'after the pass the two missed questions are explained with their teaching passages', await p.locator('#tb-review').innerText().catch(() => ''));
+ok(await p.evaluate(() => typeof window.CTS_EXAM_REVIEW === 'undefined'), 'the page never had the passages before the server sent them');
 {
   const rows = q1(`SELECT source FROM textbook_results WHERE student_id = '${codeA}' AND textbook = 'cults'`);
   ok(rows.length === 1 && rows[0].source === 'server', "D1: textbook_results holds the pass with source = 'server'", rows);
@@ -307,7 +319,9 @@ ok(/short answer 5\/10, need 9/.test(await body(m)), "the page's score line come
   ok(await ls(m, 'cts_john_u1_full_lock') === null, 'and not into the full lock');
 }
 ok(await has(m, '.question[data-sa="0"] .feedback-text', 'Meets the standard') && await has(m, '.question[data-sa="5"] .feedback-text', 'Does not meet the standard'), 'each short answer shows the verdict the server gave');
-ok(await has(m, '.question[data-sa="5"]', 'This does not yet make the main point of the question.'), "and the model's feedback");
+// the answer-disclosure policy (Wayne, 18 Oct 2026): what the model says is missing may name the answer, so it waits for a pass
+ok(!(await has(m, '.question[data-sa="5"]', 'This does not yet make the main point of the question.')) && await has(m, '.question[data-sa="0"]', 'This makes the points the question asks for.'),
+  "the model's feedback on an answer not met is held back after a failed attempt; on an answer met it is shown");
 ok(!(await body(m)).includes(john1.sa[0].model.en.slice(0, 30)), "a failed master's attempt shows no model answer (it would be copied into the retake)");
 await m.locator('.question[data-sa="5"] [data-cts-appeal-open]').click();
 await m.locator('.question[data-sa="5"] [data-cts-appeal-send]').click();

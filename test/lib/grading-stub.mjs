@@ -15,6 +15,12 @@
  *   short     [[met]] [[partly]] [[not_met]] [[pending]]; anything else not_met
  *   any       [[error]]                   -> 503
  *
+ * What it discloses follows the server (worker/grading/attempts.js
+ * disclosureOf, Wayne Cook, 18 Oct 2026): while an attempt is open or after it
+ * failed, right or wrong only -- no right option, explanation, answer wanted,
+ * model answer, or AI feedback on an answer that was not right; once it has
+ * passed, all of it.
+ *
  * Switches a test sets: offline (every call fails as with no network),
  * delay (ms per route), lockMs (how long a failed attempt locks), track,
  * courseDone (what a pass reports), failNext (one status for the next call).
@@ -130,9 +136,20 @@ export class GradingStub {
   mcBanked(scope) { return this.mcPassedScopes?.has(scope) || false; }
   lockOut(l) { return { until: new Date(l.until).toISOString(), kind: l.kind }; }
   answeredOut(a) {
-    const out = {};
-    for (const [qid, r] of Object.entries(a.answered)) out[qid] = { verdict: r.verdict, feedback: r.feedback, gradeId: r.gradeId, ...(r.choice != null ? { choice: r.choice } : {}) };
+    const review = a.status === 'passed', out = {};
+    for (const [qid, r] of Object.entries(a.answered)) {
+      const o = { verdict: r.verdict, feedback: this.feedbackOut(r, review), gradeId: r.gradeId, ...(r.choice != null ? { choice: r.choice } : {}) };
+      const q = parseQid(qid);
+      if (review && r.kind === 'mc') { const k = a.bank.mc[q.i]; o.answer = k.answer; o.why = k.why ?? null; }
+      if (review && r.kind === 'fill' && r.verdict === 'wrong') o.correctAnswer = a.bank.fill[q.i].answer?.en ?? null;
+      out[qid] = o;
+    }
     return out;
+  }
+  /* AI feedback on an answer that was not right is held back until a pass. */
+  feedbackOut(r, review) {
+    if (review || !r.feedback || r.by !== 'ai' || ['right', 'met', 'pending'].includes(r.verdict)) return r.feedback;
+    return null;
   }
 
   // ---- POST /api/mc ----
@@ -143,7 +160,8 @@ export class GradingStub {
     const item = a.bank.mc[q.i];
     if (!first) a.answered[qid] = { verdict: choice === item.answer ? 'right' : 'wrong', feedback: '', gradeId: ++this.gradeSeq, choice, kind: 'mc' };
     const r = a.answered[qid];
-    return { json: { right: r.verdict === 'right', answer: item.answer, why: item.why ?? null } };
+    // the first answer stands; the reply names it, and nothing about the right option
+    return { json: { right: r.verdict === 'right', choice: r.choice } };
   }
 
   // ---- POST /api/grade ----
@@ -170,7 +188,7 @@ export class GradingStub {
         g = { verdict, by: 'ai', feedback: { met: 'You made every essential point.', partly: 'You named the covenant but did not say what God promised.', not_met: 'You did not make the main point.', pending: '' }[verdict] };
       }
       a.answered[it.qid] = { ...g, gradeId: ++this.gradeSeq, kind: q.kind, text };
-      out.push({ qid: it.qid, verdict: g.verdict, feedback: g.feedback, gradeId: a.answered[it.qid].gradeId, gradedBy: g.by });
+      out.push({ qid: it.qid, verdict: g.verdict, feedback: this.feedbackOut(g, false), gradeId: a.answered[it.qid].gradeId, gradedBy: g.by });
     }
     return { json: { items: out } };
   }
@@ -203,7 +221,10 @@ export class GradingStub {
       scores: { mc: { right: e.c.mc, total: e.total.mc }, fill: { right: e.c.fill, total: e.total.fill }, sa: { right: e.c.sa, total: e.total.sa } },
       lock: a.status === 'failed' && lock ? this.lockOut(lock) : null,
       unitDone: a.status === 'passed', courseDone: a.status === 'passed' && this.courseDone,
+      disclosure: a.status === 'passed' ? 'review' : 'verdict',
       answered: this.answeredOut(a),
+      ...(a.status === 'passed' && a.bank.sa.length && !/^(thm|mdiv)$/.test(this.track)
+        ? { models: Object.fromEntries(a.bank.sa.map((q, i) => [qidOf(a.scope, 'sa', i), q.model]).filter(([, m]) => m)) } : {}),
     };
   }
   submit(id) {
