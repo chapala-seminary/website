@@ -150,7 +150,11 @@ test('beta accepts agent work; production requires Wayne and the exact successfu
     assert.equal(run({ pr: mainPR, ...tech }).status, 0);
     assert.equal(run({ pr: { ...mainPR, body: '' }, ...tech }).status, 0);
     assert.notEqual(run({ pr: mainPR, reviews: [] }).status, 0);
-    assert.notEqual(run({ pr: mainPR, reviews: [review('satoshisound')] }).status, 0);
+    assert.equal(run({ pr: mainPR, reviews: [review('satoshisound')] }).status, 0);
+    const featurePR = { ...mainPR, user: { login: 'chapalatheological-ai' }, head: { ...mainPR.head, ref: 'technical-feature', repo: { full_name: 'other/fork' } } };
+    assert.equal(run({ pr: featurePR, reviews: [review('satoshisound')] }).status, 0);
+    assert.notEqual(run({ pr: featurePR, reviews: [{ ...review('satoshisound'), commit_id: 'old' }] }).status, 0);
+    assert.notEqual(run({ pr: featurePR, reviews: [review('ChapalaTheological1')] }).status, 0);
     assert.notEqual(run({ pr: mainPR, reviews: [{ ...review('ChapalaTheological1'), commit_id: 'old' }] }).status, 0);
     assert.notEqual(run({ pr: mainPR, runs: { workflow_runs: [{ head_sha: sha, status: 'completed', conclusion: 'failure' }] } }).status, 0);
     assert.notEqual(run({ pr: mainPR, beta: { object: { sha: 'new-beta' } } }).status, 0);
@@ -159,7 +163,7 @@ test('beta accepts agent work; production requires Wayne and the exact successfu
     assert.equal(run({ pr: ownPR, ...tech, reviews: [] }).status, 0);
     for (const login of ['ChapalaTheological1', 'chapalatheological-ai'])
       assert.notEqual(run({ pr: { ...ownPR, user: { login } }, ...tech, reviews: [] }).status, 0);
-    assert.notEqual(run({ pr: { ...ownPR, head: { ...ownPR.head, repo: { full_name: 'other/fork' } } }, reviews: [] }).status, 0);
+    assert.equal(run({ pr: { ...ownPR, head: { ...ownPR.head, repo: { full_name: 'other/fork' } } }, reviews: [] }).status, 0);
     const published = run({}, true);
     assert.equal(published.status, 0, published.stderr);
     assert.match(published.stdout, new RegExp(`status:pending:${sha}`));

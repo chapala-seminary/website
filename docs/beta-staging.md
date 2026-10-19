@@ -57,7 +57,10 @@ content follow the same staging process; no Robert review is required for
 promotion. The production check requires Wayne's approval of the exact current
 beta commit and a successful beta test/deployment/verification run. Pasted AI
 review links are optional context, not a merge requirement. Code Owners are
-advisory. Robert's existing account review exception remains.
+advisory. Robert's exact-commit approval authorizes any PR, including feature/fork PRs.
+His own PRs need no other reviewer. Native PR approval count is zero; the
+required release check enforces the account-specific approval policy, with
+build/test checks still required.
 
 The agent opens a separate PR from current `beta` to `main` after that exact
 commit's beta deployment and live verification are green. Wayne reviews beta,

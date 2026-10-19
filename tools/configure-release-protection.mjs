@@ -27,7 +27,9 @@ for (const branch of ['beta', 'main']) {
     enforce_admins: true,
     required_pull_request_reviews: branch === 'beta' ? null : {
       dismiss_stale_reviews: true, require_code_owner_reviews: false,
-      required_approving_review_count: 1,
+      // Keep the PR requirement; the required status enforces actor-specific
+      // approval. A generic one-review rule incorrectly blocks Robert's own PRs.
+      required_approving_review_count: 0,
       dismissal_restrictions: { users: [ROBERT, WAYNE], teams: [] },
       bypass_pull_request_allowances: { users: [ROBERT], teams: [], apps: [] },
     },
@@ -35,7 +37,7 @@ for (const branch of ['beta', 'main']) {
     required_linear_history: false, allow_force_pushes: false, allow_deletions: false,
     required_conversation_resolution: true,
   };
-  console.log(`${apply ? 'Applying' : 'Preview'} ${branch}: ${branch === 'beta' ? 'agent pushes, no review gate; tests run before publication' : 'Wayne production review, Robert review bypass; ' + (checks ? 'build and release checks required' : 'required checks not activated')}; allowed: ${users.join(', ')}.`);
+  console.log(`${apply ? 'Applying' : 'Preview'} ${branch}: ${branch === 'beta' ? 'agent pushes, no review gate; tests run before publication' : 'PR required; actor-specific approval via release check; Robert review bypass; ' + (checks ? 'build and release checks required' : 'required checks not activated')}; allowed: ${users.join(', ')}.`);
   if (apply) {
     api(`repos/${repo}/branches/${branch}/protection`, config);
     const actual = api(`repos/${repo}/branches/${branch}/protection`);
@@ -46,7 +48,7 @@ for (const branch of ['beta', 'main']) {
         throw new Error('Beta must allow agent pushes without PR approval or pre-push checks.');
     } else {
       const review = actual.required_pull_request_reviews;
-      if (review?.required_approving_review_count !== 1 || review.require_code_owner_reviews || !review.dismiss_stale_reviews)
+      if (review?.required_approving_review_count !== 0 || review.require_code_owner_reviews || !review.dismiss_stale_reviews)
         throw new Error('Production review verification failed.');
       if (review.bypass_pull_request_allowances?.users?.map(user => user.login.toLowerCase()).join(',') !== ROBERT.toLowerCase())
         throw new Error('Robert-only review bypass verification failed.');
