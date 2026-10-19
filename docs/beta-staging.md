@@ -1,5 +1,16 @@
 # Beta staging and production promotion
 
+## Temporary CI unblock — Robert, 19 October 2026
+
+Robert requested promotion and a deployment attempt before the remaining CI
+repairs. The `CTS build and tests` merge check is temporarily advisory on main;
+`CTS release approval` and human-only main access remain required. Repository
+variable `CTS_PRODUCTION_SKIP_TESTS=true` skips only the production Action's
+full test suite. Build, clean/current-main guard, guarded deployment and public
+release verification still run. PR and beta CI continue to report test results.
+After CI repairs, set that variable to `false` (or delete it) and restore the
+required build/test merge check with the governance setup script.
+
 Staging: https://beta.chapalaseminary.org — branch `beta`, Worker `chapala-seminary-beta`, database `chapala-students-beta`.
 Production: https://chapalaseminary.org — branch `main`, Worker `chapala-seminary`, database `chapala-students`.
 
