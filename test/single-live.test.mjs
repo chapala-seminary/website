@@ -93,6 +93,13 @@ const U = (unit) => ({
   submit: `button.submit-btn[onclick="submitUnit(${unit})"]`,
   result: `#result_${unit}`,
 });
+async function clickSubmit(p, selector) {
+  // Use the student's visible option to continue without confirming email.
+  // The fixed notice can otherwise cover Submit on a long single-page course.
+  const keep = p.locator('#cts-email-confirm').getByRole('button', { name: /^(Keep studying|Seguir estudiando|Continuer à étudier)$/ });
+  if (await keep.isVisible()) await keep.click();
+  await p.locator(selector).click();
+}
 async function takeUnit(p, s, { wrongMc = 0, fills = true, written = true, tag = 'met' } = {}) {
   const u = U(s.unit);
   for (let i = 0; i < s.mc.length; i++) {
@@ -116,10 +123,10 @@ async function takeUnit(p, s, { wrongMc = 0, fills = true, written = true, tag =
     await p.waitForSelector(`#fill_${s.unit} .cts-fill-q[data-cts-fill="${i}"] .cts-fill-ok`, { timeout: 15000 });
   }
   if (written) for (let i = 0; i < s.sa.length; i++) await p.locator(u.sa(i)).fill(hint(i, tag));
-  await p.locator(u.submit).click();
+  await clickSubmit(p, u.submit);
 }
 async function checkExpansion(p, field, submit) {
-  await p.locator(field).fill('A short draft'); await p.locator(submit).click();
+  await p.locator(field).fill('A short draft'); await clickSubmit(p, submit);
   ok(await waitFor(async () => await p.locator('.cts-sa-too-short').count() > 0), 'single-page short response receives inline guidance');
   ok(await p.locator(field).evaluate((el) => document.activeElement === el && el.getAttribute('aria-invalid') === 'true' && !!el.getAttribute('aria-describedby')), 'single-page invalid response is focused and described');
   await p.locator(field).fill(hint(0));
@@ -152,7 +159,7 @@ db('DELETE FROM grade_overrides; DELETE FROM grade_cache; DELETE FROM grade_queu
     await p.locator(`button[data-fill-check="${i}"]`).click();
     await p.waitForSelector(`.question[data-fill="${i}"] .feedback-text`, { timeout: 30000 });
   }
-  await p.locator('#submitExamBtn').click();
+  await clickSubmit(p, '#submitExamBtn');
   ok(await waitFor(() => q1(`SELECT 1 AS x FROM unit_progress WHERE student_id = '${code}' AND course = 'genesis' AND unit = 2 AND source = 'server'`).length === 1), "Genesis unit 2: the server writes the credit (unit_progress.source = 'server')");
   ok(JSON.parse(await ls(p, 'cts_genesis_progress') || '{}').unit2 === true, 'and the page mirrors it into cts_genesis_progress');
   await d.ctx.close();
@@ -192,7 +199,7 @@ db('DELETE FROM grade_overrides; DELETE FROM grade_cache; DELETE FROM grade_queu
   await checkExpansion(p, 'textarea[data-live-sa="0"]', '#submitExamBtn');
   for (let i = 0; i < s.sa.length; i++) await p.locator(`textarea[data-live-sa="${i}"]`).fill(hint(i));
   ok(await p.locator('.model-answer').count() === 0, 'no model answer is on screen before the attempt is over');
-  await p.locator('#submitExamBtn').click();
+  await clickSubmit(p, '#submitExamBtn');
   ok(await waitText(p, 'Passed. This unit is recorded.'), 'Submit: the server passes the unit (19/20, 10/10, 10/10)', (await p.locator('#examResult').innerText()));
   ok(JSON.parse(await ls(p, 'cts_ethics_progress') || '{}').unit1 === true, 'cts_ethics_progress holds the pass, where the certificate page reads it');
   ok(await waitFor(() => q1(`SELECT source FROM unit_progress WHERE student_id = '${code}' AND course = 'ethics' AND unit = 1`)[0]?.source === 'server'), "D1: unit_progress holds the pass with source = 'server'");
@@ -282,24 +289,33 @@ for (const [course, unit, file, minutes, stateKey] of [['counseling', 1, 'CTSCou
 /* ====================================================================== */
 /* 5. Spanish and French pages grade the same                                */
 /* ====================================================================== */
-for (const [lang, file, course, unit, marker] of [['fr', 'CTS_WiseSpeak_Preaching.html', 'wisespeak', 2, 'Réussi'], ['es', 'ethics_unit02.html', 'ethics', 2, 'Aprobado']]) {
+const languageCases = ['en', 'es', 'fr'].flatMap((lang) => [
+  [lang, 'CTSCounseling.html', 'counseling', 2, { en: 'Passed', es: 'Aprobado', fr: 'Réussi' }[lang]],
+  [lang, 'CTS_WiseSpeak_Preaching.html', 'wisespeak', 2, { en: 'Passed', es: 'Aprobado', fr: 'Réussi' }[lang]],
+]);
+languageCases.push(['es', 'ethics_unit02.html', 'ethics', 2, 'Aprobado']);
+for (const [lang, file, course, unit, marker] of languageCases) {
   const s = sec(course, unit);
-  const d = await device({ student: student('thm', 'lang-' + lang) });
+  const d = await device({ student: student('thm', 'lang-' + lang + '-' + course) });
   const { p, errs } = d;
-  await p.goto(`${BASE}/${lang}/${file}`, { waitUntil: 'load' });
+  await p.goto(`${BASE}/${lang === 'en' ? '' : lang + '/'}${file}`, { waitUntil: 'load' });
   await p.waitForSelector('.question-card, .question', { timeout: 15000 });
   const code = await codeOf(p);
-  if (course === 'wisespeak') await takeUnit(p, s);
+  if (course !== 'ethics') await takeUnit(p, s);
   else {
     for (let i = 0; i < s.mc.length; i++) await p.locator(`button[data-live-mc="${i},${s.mc[i].answer}"]`).click();
     for (let i = 0; i < s.fill.length; i++) { const inp = p.locator(`.cts-fill-q[data-cts-fill="${i}"] input`); await inp.fill((s.fill[i].answer.es || s.fill[i].answer.en)); await inp.press('Enter'); await p.waitForSelector(`.cts-fill-q[data-cts-fill="${i}"] .cts-fill-ok`, { timeout: 15000 }); }
     for (let i = 0; i < s.sa.length; i++) await p.locator(`textarea[data-live-sa="${i}"]`).fill(hint(i));
-    await p.locator('#submitExamBtn').click();
+    await clickSubmit(p, '#submitExamBtn');
   }
-  ok(await waitText(p, marker, 25000), `${lang}: ${course} unit ${unit} is passed on the ${lang} page and says so in ${lang}`, (await p.locator('body').innerText()).slice(0, 200));
-  const c = course === 'wisespeak' ? 'wisespeak' : 'ethics';
+  // The course page can mention passing elsewhere. Wait for this unit's
+  // result before checking credit or closing the context during submission.
+  const result = course === 'ethics' ? '#examResult' : U(unit).result;
+  const passed = await p.locator(result).filter({ hasText: marker }).waitFor({ state: 'visible', timeout: 25000 }).then(() => true, () => false);
+  ok(passed, `${lang}: ${course} unit ${unit} is passed on the ${lang} page and says so in ${lang}`, await p.locator(result).innerText());
+  const c = course;
   ok(await waitFor(() => q1(`SELECT lang FROM attempts WHERE student_id = '${code}' AND scope = '${s.scope}'`)[0]?.lang === lang), `${lang}: the attempt is recorded in ${lang}, so feedback comes in ${lang}`);
-  ok(q1(`SELECT COUNT(*) AS n FROM unit_progress WHERE student_id = '${code}' AND course = '${c === 'wisespeak' ? 'wisespeak' : 'ethics'}' AND unit = ${unit}`)[0].n === 1, `${lang}: the server holds the pass`);
+  ok(q1(`SELECT COUNT(*) AS n FROM unit_progress WHERE student_id = '${code}' AND course = '${c}' AND unit = ${unit}`)[0].n === 1, `${lang}: the server holds the pass`);
   ok(errs.length === 0, `${lang}: no page error`, errs);
   await d.ctx.close();
 }
