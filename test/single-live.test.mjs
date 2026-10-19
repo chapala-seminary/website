@@ -282,14 +282,19 @@ for (const [course, unit, file, minutes, stateKey] of [['counseling', 1, 'CTSCou
 /* ====================================================================== */
 /* 5. Spanish and French pages grade the same                                */
 /* ====================================================================== */
-for (const [lang, file, course, unit, marker] of [['fr', 'CTS_WiseSpeak_Preaching.html', 'wisespeak', 2, 'Réussi'], ['es', 'ethics_unit02.html', 'ethics', 2, 'Aprobado']]) {
+const languageCases = ['en', 'es', 'fr'].flatMap((lang) => [
+  [lang, 'CTSCounseling.html', 'counseling', 2, { en: 'Passed', es: 'Aprobado', fr: 'Réussi' }[lang]],
+  [lang, 'CTS_WiseSpeak_Preaching.html', 'wisespeak', 2, { en: 'Passed', es: 'Aprobado', fr: 'Réussi' }[lang]],
+]);
+languageCases.push(['es', 'ethics_unit02.html', 'ethics', 2, 'Aprobado']);
+for (const [lang, file, course, unit, marker] of languageCases) {
   const s = sec(course, unit);
-  const d = await device({ student: student('thm', 'lang-' + lang) });
+  const d = await device({ student: student('thm', 'lang-' + lang + '-' + course) });
   const { p, errs } = d;
-  await p.goto(`${BASE}/${lang}/${file}`, { waitUntil: 'load' });
+  await p.goto(`${BASE}/${lang === 'en' ? '' : lang + '/'}${file}`, { waitUntil: 'load' });
   await p.waitForSelector('.question-card, .question', { timeout: 15000 });
   const code = await codeOf(p);
-  if (course === 'wisespeak') await takeUnit(p, s);
+  if (course !== 'ethics') await takeUnit(p, s);
   else {
     for (let i = 0; i < s.mc.length; i++) await p.locator(`button[data-live-mc="${i},${s.mc[i].answer}"]`).click();
     for (let i = 0; i < s.fill.length; i++) { const inp = p.locator(`.cts-fill-q[data-cts-fill="${i}"] input`); await inp.fill((s.fill[i].answer.es || s.fill[i].answer.en)); await inp.press('Enter'); await p.waitForSelector(`.cts-fill-q[data-cts-fill="${i}"] .cts-fill-ok`, { timeout: 15000 }); }
@@ -297,9 +302,9 @@ for (const [lang, file, course, unit, marker] of [['fr', 'CTS_WiseSpeak_Preachin
     await p.locator('#submitExamBtn').click();
   }
   ok(await waitText(p, marker, 25000), `${lang}: ${course} unit ${unit} is passed on the ${lang} page and says so in ${lang}`, (await p.locator('body').innerText()).slice(0, 200));
-  const c = course === 'wisespeak' ? 'wisespeak' : 'ethics';
+  const c = course;
   ok(await waitFor(() => q1(`SELECT lang FROM attempts WHERE student_id = '${code}' AND scope = '${s.scope}'`)[0]?.lang === lang), `${lang}: the attempt is recorded in ${lang}, so feedback comes in ${lang}`);
-  ok(q1(`SELECT COUNT(*) AS n FROM unit_progress WHERE student_id = '${code}' AND course = '${c === 'wisespeak' ? 'wisespeak' : 'ethics'}' AND unit = ${unit}`)[0].n === 1, `${lang}: the server holds the pass`);
+  ok(q1(`SELECT COUNT(*) AS n FROM unit_progress WHERE student_id = '${code}' AND course = '${c}' AND unit = ${unit}`)[0].n === 1, `${lang}: the server holds the pass`);
   ok(errs.length === 0, `${lang}: no page error`, errs);
   await d.ctx.close();
 }

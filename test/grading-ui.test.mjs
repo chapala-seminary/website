@@ -363,6 +363,7 @@ if (want(9)) {
   ok(attemptCalls(stub).length === 0 && stub.calls('/mc').length === 0, 'no grading call is made');
   // registering brings the questions
   await p.locator('#regName').fill('Stub Student'); await p.locator('#regEmail').fill('stub@example.test');
+  await p.locator('#regCountry').selectOption('MX');
   await p.locator('#regSave').click();
   ok(await ready(p), 'after registering the questions appear');
   ok(attemptCalls(stub)[0].body.code === STUB_CODE, 'the first attempt uses the code the registration produced');
@@ -485,6 +486,37 @@ if (want(13)) {
   ok(a && /^rd:/.test(a.body.scope), 'a required-reading test asks for an rd: attempt', a && a.body.scope);
   ok(await p.locator('input[data-cts-fill]').count() === 20, 'and shows the server\'s twenty');
   await ctx.close();
+}
+
+// 14. Textbook service failures preserve typing and resume the same sitting.
+// Fault injection is local to the stub, never used against a deployed site.
+if (want(14)) {
+  for (const lang of ['en', 'es', 'fr']) {
+    const stub = new GradingStub();
+    const path = (lang === 'en' ? '' : '/' + lang) + TB;
+    const { ctx, p, errs } = await open(stub, { path, lang });
+    await p.waitForSelector('input[data-cts-fill]');
+    const id = [...stub.attempts.keys()][0];
+    const tb = bankOf('tb:cults');
+    const drawn = await p.evaluate(() => window.CTS_TEXTBOOK.draw());
+    const first = tb.fill[drawn[0]].answer.en;
+    // Type every answer without checking individually, then submit in batches.
+    for (let k = 0; k < 20; k++) await p.locator(`input[data-cts-fill="${k}"]`).fill(tb.fill[drawn[k]].answer.en);
+    stub.failNext = 503;
+    await p.locator('#tb-submit').click();
+    await p.waitForSelector('.cts-grade-trouble');
+    ok(await p.locator('.cts-grade-trouble').count() === 1, `${lang}: one service warning, without a second misleading connection warning`);
+    ok(await p.locator('input[data-cts-fill="0"]').inputValue() === first, `${lang}: a batch failure keeps the typed answer`);
+    ok(stub.calls('/submit').length === 0 && await ls(p, 'cts_textbook_cults_lock') === null, `${lang}: a failed grade request does not submit or lock the exam`);
+    await p.locator('[data-cts-retry]').first().click();
+    ok(await waitText(p, { en: 'Passed:', es: 'Aprobado:', fr: 'Réussi' }[lang]), `${lang}: retry completes grading and submission`);
+    ok(attemptCalls(stub).length === 1 && [...stub.attempts.keys()][0] === id, `${lang}: retry keeps the same sitting`);
+    ok(await p.locator('.cts-grade-trouble').count() === 0, `${lang}: the warning clears on recovery`);
+    await p.reload({ waitUntil: 'load' });
+    ok(await waitText(p, { en: 'Passed on', es: 'Aprobado el', fr: 'Réussi le' }[lang]), `${lang}: the pass survives reload`);
+    ok(errs.length === 0, `${lang}: no browser errors during textbook recovery`, errs[0]);
+    await ctx.close();
+  }
 }
 
 await browser.close();

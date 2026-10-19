@@ -191,7 +191,7 @@ const items = readItemFiles();
 
   let { env, tally } = mk(() => reply(quote));
   let r = await gradeOne({ item: answer, key: skey, env });
-  assert.equal(r.verdict, 'met'); assert.equal(r.via, 'ai'); assert.equal(r.model, '@cf/meta/llama-3.3-70b-instruct-fp8-fast'); assert.equal(r.prompt_version, '2026-10-15.3');
+  assert.equal(r.verdict, 'met'); assert.equal(r.via, 'ai'); assert.equal(r.model, '@cf/meta/llama-3.3-70b-instruct-fp8-fast'); assert.equal(r.prompt_version, '2026-10-19.1');
   assert.equal(calls.length, 1); assert.equal(calls[0].p.temperature, 0); assert.equal(calls[0].p.response_format.type, 'json_schema'); assert.equal(calls[0].p.messages[0].role, 'system');
   assert.equal(tally.input_tokens, 900); assert.equal(tally.output_tokens, 80); assert.equal(tally.byModel['@cf/meta/llama-3.3-70b-instruct-fp8-fast'].calls, 1);
 
@@ -426,7 +426,7 @@ const items = readItemFiles();
   assert.ok(Object.keys(res.summary.counts.byCategory).length > 0 && res.summary.counts.items === b.items_run, 'the summary covers only items that ran');
   // one category with >= 30 graded items: the bar is evaluated, and labelled partial
   const out2 = path.join(dir, 'cap2.json');
-  r = node(['tools/eval-grader.mjs', '--dry-run', '--category', 'fixture', '--limit', '150', '--max-cost', '0.09', '--fake-usage-scale', '5', '--concurrency', '1', '--out', out2]);
+  r = node(['tools/eval-grader.mjs', '--dry-run', '--category', 'fixture', '--limit', '150', '--max-cost', '0.10', '--fake-usage-scale', '5', '--concurrency', '1', '--out', out2]);
   assert.equal(r.status, 3, r.stdout + r.stderr);
   const b2 = JSON.parse(fs.readFileSync(out2, 'utf8')).meta.budget;
   assert.equal(b2.partial, true); assert.equal(b2.bar_evaluated, true);

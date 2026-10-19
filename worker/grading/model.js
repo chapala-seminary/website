@@ -16,10 +16,11 @@
 import { normalise, fold } from './text.js';
 import { buildMessages, schema, rubricOf, repairMessage } from './prompt.js';
 import { fakeAIRun } from './fake-ai.js';
+import { shortAnswerFeedback } from './feedback.js';
 
 export const DEFAULT_MODEL = '@cf/meta/llama-3.3-70b-instruct-fp8-fast';
 export const DEFAULT_FALLBACK = '@cf/openai/gpt-oss-120b';
-export const DEFAULT_VERSION = '2026-10-15.3';
+export const DEFAULT_VERSION = '2026-10-19.1';
 const CAPACITY = /\b(3036|3040|3007)\b/;
 const TIMEOUT_MS = 25000;
 // Leave the browser's 60-second request deadline time for database writes.
@@ -295,7 +296,10 @@ export async function gradeBatch(env, kind, lang, items, { deadline = Date.now()
       input: Number(usage.prompt_tokens ?? usage.input_tokens) || 0, output: Number(usage.completion_tokens ?? usage.output_tokens) || 0,
     });
     if (repairs.length) await repair(env, model, kind, lang, remaining, version, parsed, repairs, ok, deadline);
-    for (const [qid, r] of ok) results.set(qid, { ...r, model, version });
+    for (const [qid, r] of ok) {
+      const feedback = kind === 'sa' ? shortAnswerFeedback(r, remaining.find((i) => i.qid === qid).answer, lang) : r.feedback;
+      results.set(qid, { ...r, feedback, model, version });
+    }
     if (!ok.size && wholeBad) error = 'the model did not give a valid answer';
     remaining = remaining.filter((i) => !ok.has(i.qid));
     if (remaining.length && !wholeBad && !error) error = 'the model left items out or broke the rules';

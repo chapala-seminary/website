@@ -31,7 +31,7 @@ Set "contradicts" to true only if the answer contradicts the teaching of the mod
 
 Fill in "points" first, then "verdict", so that the verdict follows the evidence. Set "verdict" to your overall judgement: "met" (every essential point made), "partly" (some points made), "not_met" (none made, or it only restates the question or is off the subject), or "pending" if you are unsure and a person should look. The server works out the final grade from the points and "contradicts", so make the points accurate.
 
-Feedback for "partly" and "not_met" names what is missing, in terms of the idea, never in the model answer's words. Feedback for "met" is a short confirmation.`;
+Feedback must teach rather than repeat the student's answer. Keep the evidence quotes in "points"; do not use them as feedback. For "partly" and "not_met", identify the gap or misconception in general terms and give one useful next step without supplying the missing answer. For "met", briefly explain what the student demonstrated correctly in your own words. If the central claims meet the standard but supporting explanation could be stronger, confirm acceptance and suggest adding support from the assigned passage or course material; make clear this is advice for development, not a new condition for passing. Do not invent missing requirements or penalize omitted support that the question did not request.`;
 
 export const FILL_INSTRUCTIONS = `${COMMON}
 
