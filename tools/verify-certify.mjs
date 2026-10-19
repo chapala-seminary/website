@@ -43,7 +43,7 @@ async function device() {
    loaded first because that is where the engine writes the old keys the
    certificate page reads (verify-certificate-unlock.mjs says why). */
 const course = catalog.courses['1peter'];
-const seed = { name: 'Certify Test', track: 'cert', email: 'certify-signup@example.org' };
+const seed = { name: 'Certify Test', track: 'cert', email: `certify-signup-${Date.now().toString(36)}@example.org` };
 async function finishedStudent(d, extra = {}) {
   await d.page.goto(`${BASE}/CTS1PeterUnit1.html`, { waitUntil: 'load' });
   await d.page.evaluate(([s, units, extra]) => {
@@ -80,6 +80,9 @@ const waitFor = (page, fn, ms = 15000) => page.waitForFunction(fn, null, { timeo
 /* ---- device one: the whole flow ------------------------------------------ */
 const one = await device();
 const CODE = await finishedStudent(one);
+// Signing up sends its own confirmation email (956ea6be), and the Worker
+// allows one code a minute per student, so the certificate's request waits.
+await one.page.waitForTimeout(61000);
 ok(/^CTS-/.test(CODE || ''), 'the finished student has a student code', `got ${CODE}`);
 
 let devCode = null, startStatus = null;
