@@ -37,27 +37,38 @@ try{
  `);
  sql(migration);await start();
  const policy=(await get('/api/health')).requiredFrom;
- check(Object.keys(policy).length===79,'all 79 staged requirements activate');
+ const EIGHT=['otsreadings','ntreadings','streadings','evangelismreadings','pmreadings','chreadings','wisespeakreadings','hermeneuticsreadings'];
+ check(Object.keys(policy).length===71,'71 staged requirements activate (79 less the eight awaiting faculty review)');
+ check(EIGHT.every(slug=>!(slug in policy)),'the eight reading tests awaiting faculty review stay optional (Wayne, 18 Oct 2026)');
  check(new Set(Object.values(policy)).size===1,'one cutoff for the cohort');
  const date=Object.values(policy)[0];check(!Number.isNaN(Date.parse(date)),'server records a real cutoff');
  const old=await get('/api/student/CTS-TEST-0000-0011');
- check(old.exemptions.includes('oldtestament') && old.exemptions.includes('otsreadings'),'older master completion exempts both new tests');
+ check(old.exemptions.includes('oldtestament'),'older master completion exempts the required textbook test');
  const cert=await get('/api/student/CTS-TEST-0000-0012');
- check(!cert.exemptions.includes('otsreadings'),'earlier Certificate work cannot exempt master work');
- const ots=catalog.courses.ots;const tests=ots.tests;
- const progress=ots.units.map(unit=>({course:'ots',unit,completedAt:new Date().toISOString()}));
+ check(!cert.exemptions.includes('oldtestament'),'earlier Certificate work cannot exempt master work');
+ // Old Testament Survey: its reading test is one of the eight, so the textbook alone completes it.
+ // Cults keeps both tests required, so the both-test gate is still exercised.
+ for(const [course,code0,bothRequired] of [['ots','CTSOTS',false],['cults','CTSCULTS',true]]){
+ const c=catalog.courses[course];const tests=c.tests;
+ const progress=c.units.map(unit=>({course,unit,completedAt:new Date().toISOString()}));
  for(const track of ['mdiv','thm','cert','assoc']){
   const reg=await post('/api/register',{name:'Synthetic Activation '+crypto.randomUUID(),email:`activation-${crypto.randomUUID()}@example.test`,track:track==='assoc'?'cert':track,...(track==='assoc'?{goal:'assoc'}:{})});
   check(reg.status===201,'synthetic student registers');const code=reg.body.code;
-  const submit=async(passes)=>post('/api/sync',{code,progress,textbooks:passes.map(slug=>({slug,passedAt:new Date().toISOString()})),doneCodes:['CTSOTS'],completionTracks:{CTSOTS:track}});
+  const submit=async(passes)=>post('/api/sync',{code,progress,textbooks:passes.map(slug=>({slug,passedAt:new Date().toISOString()})),doneCodes:[code0],completionTracks:{[code0]:track}});
   let result=await submit([]);
   if(['mdiv','thm'].includes(track)){
-   check(!result.body.doneCodes.includes('CTSOTS'),track+': units alone do not complete');
-   result=await submit([tests[0]]);check(!result.body.doneCodes.includes('CTSOTS'),track+': book alone does not complete');
-   result=await submit([tests[1]]);check(result.body.doneCodes.includes('CTSOTS'),track+': both passes complete');
-  }else check(result.body.doneCodes.includes('CTSOTS'),track+': tests remain optional');
+   check(!result.body.doneCodes.includes(code0),course+' '+track+': units alone do not complete');
+   result=await submit([tests[0]]);
+   if(bothRequired){
+    check(!result.body.doneCodes.includes(code0),course+' '+track+': book alone does not complete');
+    result=await submit([tests[1]]);check(result.body.doneCodes.includes(code0),course+' '+track+': both passes complete');
+   }else check(result.body.doneCodes.includes(code0),course+' '+track+': the book completes; the reading test is optional for now');
+  }else check(result.body.doneCodes.includes(code0),course+' '+track+': tests remain optional');
   await fetch(base+'/api/student/'+code,{method:'DELETE'});
  }
+ }
+ const ots=catalog.courses.ots;const tests=ots.tests;
+ const progress=ots.units.map(unit=>({course:'ots',unit,completedAt:new Date().toISOString()}));
  // Reading alone must also be insufficient; monotonic merges above tested book first.
  const reg=await post('/api/register',{name:'Synthetic Reading Only',email:'activation-reading-only@example.test',track:'mdiv'});
  const reading=await post('/api/sync',{code:reg.body.code,progress,textbooks:[{slug:tests[1],passedAt:new Date().toISOString()}],doneCodes:['CTSOTS'],completionTracks:{CTSOTS:'mdiv'}});
@@ -65,13 +76,13 @@ try{
  await fetch(base+'/api/student/'+reg.body.code,{method:'DELETE'});
  browser=await chromium.launch(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{});
  const page=await browser.newPage();await page.goto(base+'/CTSUnit1.html?cts_lang=en');
- await page.waitForFunction(()=>Object.keys(JSON.parse(localStorage.getItem('cts_required_from')||'{}')).length===79);
+ await page.waitForFunction(()=>Object.keys(JSON.parse(localStorage.getItem('cts_required_from')||'{}')).length===71);
  check(await page.locator('#cts-master-requirements').count()===0,'activation policy loads without injecting a page-top notice');
  await page.evaluate(()=>window.CTS_SYNC.restore('CTS-TEST-0000-0011'));
  check(await page.evaluate(()=>!!localStorage.getItem('cts_textbook_otsreadings_exempt')),'older exemption follows recovery to another browser');
  await browser.close();browser=null;
  await stop();await start();check((await get('/api/health')).requiredFrom.otsreadings===date,'later deployment/restart retains the original cutoff');
- console.log(`PASS — ${checks} actual beta-activation checks: 79 tests, both-test gates, earlier completions, recovery and stable cutoff.`);
+ console.log(`PASS — ${checks} actual beta-activation checks: 71 tests (eight optional pending review), both-test gates, earlier completions, recovery and stable cutoff.`);
 }finally{
  if(browser)await browser.close();await stop();fs.rmSync(dir,{recursive:true,force:true});
 }

@@ -12,8 +12,19 @@ export async function activationEnvironment(env) {
   })().catch(error => { betaActivation = null; throw error; });
   return {...env, MASTER_TESTS_ACTIVE_FROM: await betaActivation};
 }
+/* Wayne, 18 Oct 2026: the eight five-reading tests still awaiting faculty
+   review (src/data/readings/staged/academic_manifest.json; 299 of their 320
+   questions have no accepted alternate answers yet) are optional for now.
+   The activation date of every other test is unchanged. Nothing earned is
+   taken away: an optional test holds no completion. Remove a slug here once
+   faculty approve its bank; test/eight-optional.test.mjs keeps this list equal
+   to the manifest. */
+export const PENDING_FACULTY_REVIEW = new Set(['otsreadings', 'ntreadings', 'streadings', 'evangelismreadings',
+  'pmreadings', 'chreadings', 'wisespeakreadings', 'hermeneuticsreadings']);
 export function activatedTests(env) {
   const date = env.MASTER_TESTS_ACTIVE_FROM || env.MASTER_TESTS_ACTIVATION;
   if (!date || Number.isNaN(Date.parse(date)) || Date.parse(date) > Date.now()) return {};
-  return Object.fromEntries(Object.entries(catalog.textbooks).filter(([,t]) => t.requiredFrom === null).map(([slug]) => [slug,date]));
+  return Object.fromEntries(Object.entries(catalog.textbooks)
+    .filter(([slug, t]) => t.requiredFrom === null && !PENDING_FACULTY_REVIEW.has(slug))
+    .map(([slug]) => [slug, date]));
 }
