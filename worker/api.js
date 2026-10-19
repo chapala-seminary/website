@@ -35,6 +35,11 @@ import { awardTitle } from './award-names.js';
 
 const MAX = { name: 120, email: 160, country: 80, track: 24, goal: 400, heard: 40, title: 200, course: 64, code: 40 };
 const TRACKS = new Set(['cert', 'certificate', 'associate', 'thm', 'mdiv']);
+// Older pages store some tracks under short names (the unit-page sign-up saves
+// Associate as "ad"). Accept them and record the full name, so those students
+// still reach the seminary record instead of being refused.
+const TRACK_ALIAS = { ad: 'associate', assoc: 'associate', mth: 'thm' };
+const trackName = (t) => TRACK_ALIAS[t] || t;
 // The language a student reads in, from the language switch (cts_lang). Anything
 // else is dropped rather than refused: it is a preference, not a record.
 const lang = (v) => (['en', 'es', 'fr'].includes(v) ? v : null);
@@ -227,7 +232,7 @@ function completionRows(id, raw, tracks, studentTrack) {
 async function register(request, env) {
   const b = await body(request);
   const name = str(b.name, MAX.name, { required: true, field: 'name' });
-  const track = (str(b.track, MAX.track, { required: true, field: 'track' }) || '').toLowerCase();
+  const track = trackName((str(b.track, MAX.track, { required: true, field: 'track' }) || '').toLowerCase());
   if (!TRACKS.has(track)) throw new HttpError(400, 'track must be one of: ' + [...TRACKS].join(', '));
 
   /* Registering twice (Wayne, 5 Oct 2026: six students had two records).
@@ -284,7 +289,7 @@ async function sync(request, env) {
     // changes it, so a stale device cannot swap it for an address nobody
     // confirmed.
     const name = str(s.name, MAX.name, { field: 'name' });
-    const track = (str(s.track, MAX.track, { field: 'track' }) || '').toLowerCase() || null;
+    const track = trackName((str(s.track, MAX.track, { field: 'track' }) || '').toLowerCase()) || null;
     if (track && !TRACKS.has(track)) throw new HttpError(400, 'unknown track: ' + track);
     statements.push(env.DB.prepare(
       `UPDATE students SET name = COALESCE(?, name),

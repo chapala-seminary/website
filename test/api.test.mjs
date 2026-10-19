@@ -69,6 +69,18 @@ const syncedCountry = await jpost('/api/sync', {
 ok(syncedCountry.status === 200 && syncedCountry.body?.student?.country === 'US', 'a later sync maps EEUU to US', `got ${syncedCountry.body?.student?.country}`);
 if (syncAlias.body?.code) await fetch(BASE + '/api/student/' + syncAlias.body.code, { method: 'DELETE' });
 
+// The unit-page sign-up stores Associate as "ad"; the server must accept it and
+// record "associate", on registration and on a later sync, or those students
+// never reach the seminary record.
+for (const [typed, stored] of [['ad', 'associate'], ['assoc', 'associate'], ['mth', 'thm']]) {
+  const email = `track-alias-${typed}-${checks}@example.test`;
+  const r = await jpost('/api/register', { name: `Track Alias ${typed}`, email, track: typed });
+  ok(r.status === 201 && r.body?.student?.track === stored, `register with track ${typed} is stored as ${stored}`, `got ${r.status} ${r.body?.student?.track}`);
+  const s = await jpost('/api/sync', { code: r.body?.code, student: { name: `Track Alias ${typed}`, email, track: typed } });
+  ok(s.status === 200 && s.body?.student?.track === stored, `sync with track ${typed} is accepted as ${stored}`, `got ${s.status} ${s.body?.student?.track}`);
+  if (r.body?.code) await fetch(BASE + '/api/student/' + r.body.code, { method: 'DELETE' });
+}
+
 const second = await jpost('/api/register', { name: 'Someone Else', email: 'someone-else@example.org', track: 'cert' });
 ok(second.body?.code && second.body.code !== CODE, 'two registrations get different codes');
 
