@@ -210,7 +210,27 @@
     set('cts_required_from', JSON.stringify(dates));
     document.dispatchEvent(new CustomEvent('cts-sync-applied'));
   }
+  // Most certificate pages draw themselves once, from this browser's copy of
+  // the record, as the page loads. When the server's copy arrives later and
+  // adds progress, those pages would keep showing "not finished" until the
+  // student reloaded by hand (18 Oct 2026 audit: 69 of 74 certificate pages).
+  // So: if applying the record changed what this browser holds, a certificate
+  // page reloads itself -- once a minute at most, so it can never loop.
+  function fingerprint() {
+    return keys().filter(function (k) { return k.indexOf('cts_') === 0; }).sort()
+      .map(function (k) { return k + '=' + get(k); }).join('\n');
+  }
+  function reloadCertificateIfChanged(before) {
+    if (!/Certificate\.html$/i.test(location.pathname || '')) return;
+    if (fingerprint() === before) return;
+    var flag = 'cts_cert_reload:' + location.pathname, now = Date.now(), last = 0;
+    try { last = parseInt(sessionStorage.getItem(flag) || '0', 10) || 0; } catch (e) { return; }
+    if (now - last < 60000) return;
+    try { sessionStorage.setItem(flag, String(now)); } catch (e) { return; }
+    location.reload();
+  }
   function apply(state) {
+    var before = fingerprint();
     applyPolicy(state);
     if (!state || !state.student) return;
     // Server-owned approval cache: replace or clear it; never send it in snapshot().
@@ -282,6 +302,7 @@
     });
     // pages that show something by these keys (the certificate's gate) look again
     try { document.dispatchEvent(new CustomEvent('cts-sync-applied')); } catch (e) {}
+    reloadCertificateIfChanged(before);
   }
 
   // ---- the network, which is always allowed to fail ------------------------
