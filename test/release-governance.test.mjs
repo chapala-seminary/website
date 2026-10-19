@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isContentChange, reviewEvidence, approvedBy } from '../tools/release-policy.mjs';
+import { isContentChange, reviewEvidence, approvedBy, decide, aiReviewStatus, isUnsafe, WAYNE, ROBERT, BOT } from '../tools/release-policy.mjs';
+import fs from 'node:fs';
 import { checkProduction } from '../tools/check-production-release.mjs';
 const jsonChange = (before, after, filename = 'src/content/units/CTS/1.json') => ({ filename, status: 'modified', before: JSON.stringify(before), after: JSON.stringify(after) });
 test('question edits are content; JSON scripts, pass rules, unknown fields and new course wiring are technical', () => {
@@ -118,6 +119,7 @@ test('governance API flow requires exact human approvals and tested beta promoti
         pr: { merge_commit_sha: 'b'.repeat(40), state: 'open', draft: false, changed_files: 1, body: evidence, base: { ref: 'beta', sha: 'base' }, head: { sha, ref: 'content-edit', repo: { full_name: repo } } },
         files: [{ filename: 'docs/readers/example.md', status: 'modified' }],
         reviews: [review('ChapalaTheological1')],
+        comments: ['Claude', 'ChatGPT'].map((reviewer, i) => ({ id: i + 1, author_association: 'OWNER', body: `CTS review: reviewer=${reviewer} verdict=approve scope=technical head=${sha}` })),
         beta: { object: { sha } },
         runs: { workflow_runs: [{ head_sha: sha, status: 'completed', conclusion: 'success' }] },
         ...change,
@@ -129,6 +131,7 @@ test('governance API flow requires exact human approvals and tested beta promoti
           if (path.includes('/statuses/')) { const status = JSON.parse(options.body); console.log('status:' + status.state + ':' + path.split('/').at(-1)); data = {}; }
           else if (path.endsWith('/pulls/23/files')) data = fixture.files;
           else if (path.endsWith('/pulls/23/reviews')) data = fixture.reviews;
+          else if (path.endsWith('/issues/23/comments')) data = fixture.comments;
           else if (path.endsWith('/pulls/23')) data = fixture.pr;
           else if (path.includes('/contents/')) data = { type: 'file', encoding: 'base64', size: 16, content: Buffer.from('Academic prose').toString('base64') };
           else if (path.endsWith('/git/ref/heads/beta')) data = fixture.beta;
@@ -144,7 +147,12 @@ test('governance API flow requires exact human approvals and tested beta promoti
     const content = run(); assert.equal(content.status, 0, content.stderr);
     assert.notEqual(run({ reviews: [] }).status, 0);
     const tech = { files: [{ filename: 'worker/api.js', status: 'modified' }] };
-    assert.notEqual(run(tech).status, 0);
+    // Wayne, 18 Oct 2026: technical-scope review records from both assistants
+    // for this exact commit plus his approval suffice; links do not.
+    assert.equal(run(tech).status, 0, 'technical: Claude and ChatGPT records + Wayne');
+    assert.notEqual(run({ ...tech, comments: [{ id: 1, author_association: 'OWNER', body: 'ChatGPT review: https://chatgpt.com/share/review' }] }).status, 0, 'links are not review records');
+    assert.notEqual(run({ ...tech, comments: [] }).status, 0, 'no review records');
+    assert.notEqual(run({ ...tech, reviews: [] }).status, 0, 'technical still needs Wayne');
     assert.equal(run({ ...tech, reviews: [review('ChapalaTheological1'), review('satoshisound')] }).status, 0);
     const mainPR = { merge_commit_sha: 'b'.repeat(40), state: 'open', draft: false, changed_files: 1, body: evidence, base: { ref: 'main', sha: 'base' }, head: { sha, ref: 'beta', repo: { full_name: repo } } };
     assert.equal(run({ pr: mainPR }).status, 0);
@@ -152,7 +160,10 @@ test('governance API flow requires exact human approvals and tested beta promoti
     assert.notEqual(run({ pr: mainPR, beta: { object: { sha: 'new-beta' } } }).status, 0);
     assert.notEqual(run({ pr: { ...mainPR, head: { ...mainPR.head, ref: 'unreviewed-feature' } } }).status, 0);
     const ownPR = { ...mainPR, user: { login: 'satoshisound' }, body: '', head: { ...mainPR.head, ref: 'robert-code' } };
-    assert.equal(run({ pr: ownPR, ...tech, reviews: [] }).status, 0);
+    // Robert's exemption is beta-only since 18 Oct 2026: his main PR needs
+    // the production checks and Wayne like any other.
+    assert.notEqual(run({ pr: ownPR, ...tech, reviews: [] }).status, 0, 'no main PR skips Wayne');
+    assert.equal(run({ pr: { ...ownPR, base: { ref: 'beta', sha: 'base' } }, ...tech, reviews: [], comments: [] }).status, 0, 'his own beta PR keeps its exemption');
     for (const login of ['ChapalaTheological1', 'chapalatheological-ai'])
       assert.notEqual(run({ pr: { ...ownPR, user: { login } }, ...tech, reviews: [] }).status, 0);
     assert.notEqual(run({ pr: { ...ownPR, head: { ...ownPR.head, repo: { full_name: 'other/fork' } } }, reviews: [] }).status, 0);
@@ -198,4 +209,98 @@ test('the actual workflow resolver refuses policy from an unprotected PR base be
     assert.notEqual(run('main', 'not-a-commit').status, 0);
     assert.notEqual(run('main', 'a'.repeat(40), '23; echo unsafe').status, 0);
   } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+test('site page wording and translation tables are content; record, grading and certificate pages are not (Wayne, 18 Oct 2026)', () => {
+  const page = '<section id="faq"><script>boot()</script><h3><span class="en">Is CTS accredited?</span></h3><p><span class="en">Old answer.</span></p></section>';
+  for (const filename of ['src/body/index/tail.html', 'public/CTSAbout.html']) {
+    assert.equal(isContentChange({ filename, status: 'modified', before: page, after: page.replace('Old answer.', 'No. CTS is not accredited.') }), true);
+    assert.equal(isContentChange({ filename, status: 'modified', before: page, after: page.replace('</section>', '<section id="start-group" style="background:#007C83"><h2>Start a Study Group</h2><a href="mailto:info@chapalaseminary.org">Write</a></section></section>') }), true, 'a plain new card is content');
+    for (const after of [page.replace('boot()', 'other()'), page.replace('<p>', '<p onclick="run()">'), page.replace('</section>', '<form><input></form></section>'),
+      page.replace('</section>', '<button>Go</button></section>'), page.replace('</section>', '<script>x()</script></section>'), page.replace('</section>', '<a href="javascript:run()">x</a></section>')])
+      assert.equal(isContentChange({ filename, status: 'modified', before: page, after }), false, 'scripts, styles, controls and handlers stay frozen');
+    assert.equal(isContentChange({ filename, status: 'added', after: page }), false, 'a new page needs technical review');
+  }
+  const form = '<div><button id="reg-save" onclick="ctsRegister()">Save</button><p>Old answer.</p></div>';
+  assert.equal(isContentChange({ filename: 'src/body/index/head.html', status: 'modified', before: form, after: form.replace('Old answer.', 'New answer.') }), true, 'an existing control may stay');
+  assert.equal(isContentChange({ filename: 'src/body/index/head.html', status: 'modified', before: form, after: form.replace('ctsRegister()', 'other()') }), false, 'an existing handler cannot be rewritten');
+  assert.equal(isContentChange({ filename: 'src/body/index/head.html', status: 'modified', before: form, after: form.replace('<p>', '<p title=">" onclick="run()">') }), false, 'a quoted > cannot hide a handler');
+  const faq = '<script type="application/ld+json">{"text": "Old answer."}</script><script>boot()</script><p>Old answer.</p>';
+  assert.equal(isContentChange({ filename: 'src/body/index/head.html', status: 'modified', before: faq, after: faq.replaceAll('Old answer.', 'No. CTS is not accredited.') }), true, 'search-engine FAQ data may change with the wording');
+  assert.equal(isContentChange({ filename: 'src/body/index/head.html', status: 'modified', before: faq, after: faq.replace('{"text": "Old answer."}', '{"text": broken') }), false, 'it must still be valid JSON');
+  assert.equal(isContentChange({ filename: 'src/body/index/head.html', status: 'modified', before: faq, after: faq.replace('application/ld+json">', 'application/ld+json">x()</script><script>') }), false, 'it cannot open a script block');
+  for (const filename of ['public/CTSThMCertificate.html', 'public/CTSAssociateCertificate.html', 'public/ethics_certificate.html', 'public/verify.html',
+    'public/CTSTextbookTeachingTest.html', 'public/cts-link-manager.html', 'src/body/rooms/CTSExam.html', 'src/data/french-pages/CTSThMCertificate.json'])
+    assert.equal(isContentChange({ filename, status: 'modified', before: page, after: page.replace('Old answer.', 'New answer.') }), false, `${filename} keeps independent review`);
+
+  const dict = { 'Is CTS accredited?': 'Le STC est-il accrédité ?', 'Old answer.': 'Ancienne réponse.' };
+  for (const filename of ['src/data/french-landing.json', 'src/data/french-pages/CTSAbout.json']) {
+    assert.equal(isContentChange(jsonChange(dict, { ...dict, 'No. CTS is not accredited.': 'Non. Le STC n’est pas accrédité.' }, filename)), true);
+    for (const after of [{ ...dict, pass: 50 }, { ...dict, nested: { x: 'y' } }, { ...dict, list: ['a'] }, { ...dict, 'x': '<script>run()</script>' }, { ...dict, 'y': '<a onclick="run()">z</a>' }])
+      assert.equal(isContentChange(jsonChange(dict, after, filename)), false, 'translation tables hold strings only, without executable markup');
+    assert.equal(isContentChange({ filename, status: 'added', after: JSON.stringify(dict) }), false, 'a new table needs technical review');
+  }
+});
+
+test('merge decision: assistants own technical review, Wayne approves every exact commit (18 Oct 2026)', () => {
+  const sha = 'b'.repeat(40), old = 'a'.repeat(40);
+  let id = 0;
+  const rec = (reviewer, verdict = 'approve', scope = 'technical', head = sha, author_association = 'OWNER') =>
+    ({ id: ++id, author_association, body: `Looked at it.\nCTS review: reviewer=${reviewer} verdict=${verdict} scope=${scope} head=${head}` });
+  const both = (scope = 'technical') => [rec('Claude', 'approve', scope), rec('ChatGPT', 'approve', scope)];
+  const pr = (over = {}) => ({ draft: false, body: '', head: { sha }, ...over });
+  const review = (login, state, commit_id = sha, rid = 1) => ({ id: rid, user: { login }, state, commit_id });
+  const wayne = [review(WAYNE, 'APPROVED')];
+  const run = (comments, technical = ['worker/api.js'], reviews = wayne, over = {}) => decide({ pr: pr(over), technical, reviews, comments });
+
+  assert.equal(run(both('content'), []).ok, true, 'content: both AI records + Wayne');
+  const tech = run(both());
+  assert.equal(tech.ok, true, 'technical: both technical AI records + Wayne, no Robert');
+  assert.match(tech.kind, /Claude and ChatGPT/);
+
+  assert.equal(run([rec('Claude')]).ok, false, 'a missing ChatGPT record');
+  assert.equal(run([rec('Claude'), rec('Claude')]).ok, false, 'one assistant twice is not two reviews');
+  assert.equal(run(both('content')).ok, false, 'content-scope records do not cover a technical PR');
+  assert.equal(run([rec('Claude'), rec('ChatGPT', 'approve', 'technical', old)]).ok, false, 'stale: approved an older commit');
+  assert.equal(run([...both(), rec('ChatGPT', 'approve', 'technical', old)]).ok, false, 'stale: a later record for another commit supersedes');
+  assert.equal(run([...both(), rec('Claude', 'changes')]).ok, false, 'negative: a later request for changes');
+  assert.equal(run([rec('Claude', 'changes'), ...both()]).ok, true, 'a later approval after changes were made counts');
+  assert.equal(run([rec('Claude'), rec('ChatGPT', 'approve', 'technical', sha, 'NONE')]).ok, false, 'a public commenter cannot add a review record');
+  assert.equal(run([rec('Claude'), { id: ++id, author_association: 'OWNER', body: 'ChatGPT review: https://docs.google.com/document/d/unrelated/edit' }]).ok, false, 'a link is not a review record');
+  assert.equal(run([rec('Claude'), { id: ++id, author_association: 'OWNER', body: `I think CTS review: reviewer=ChatGPT verdict=approve scope=technical head=${sha} would be nice` }]).ok, false, 'the record must be a line of its own');
+  assert.equal(aiReviewStatus(both(), sha, true).ok, true);
+
+  assert.equal(run(both('content'), ['worker/api.js'], [...wayne, review(ROBERT, 'APPROVED', sha, 2)]).ok, true, 'Robert may approve in place of the technical AI reviews');
+  assert.equal(run(both(), [], [review(WAYNE, 'APPROVED', old)]).ok, false, 'Wayne approved an older commit');
+  assert.equal(run(both(), [], [review(WAYNE, 'APPROVED', sha, 1), review(WAYNE, 'CHANGES_REQUESTED', sha, 2)]).ok, false, 'his latest review requests changes');
+  assert.equal(run(both(), [], [review(WAYNE, 'APPROVED', sha, 1), review(WAYNE, 'DISMISSED', sha, 2)]).ok, false, 'a dismissed approval does not count');
+  assert.equal(run(both(), [], []).ok, false, 'no human approval');
+  for (const login of [BOT, ROBERT, 'someone-else'])
+    assert.equal(run(both(), [], [review(login, 'APPROVED')]).ok, false, `${login} cannot stand in for Wayne`);
+  assert.equal(run(both(), [], wayne, { draft: true }).ok, false, 'drafts are not merged');
+});
+
+test('disguised script links and frames are never content', () => {
+  for (const after of ['<a href="&#106;avascript:alert(1)">go</a>', '<a href="java&#9;script:alert(1)">go</a>', '<a href="java&#x09;script:alert(1)">go</a>',
+    '<a href="javascript&colon;alert(1)">go</a>', '<a href="java\tscript:alert(1)">go</a>', '<a href="java\nscript:alert(1)">go</a>', '<a href="&#x6A;&#x61;vascript:x">go</a>',
+    '<a href="jav&amp;#97;script:x">go</a>', '<iframe srcdoc="x"></iframe>', '<p srcdoc="x">', '<svg><a xlink:href="x"></a></svg>', '<math href="x">', '<button formaction="x">',
+    '<a href="data:text/html,x">', '<object data="x">'])
+    assert.equal(isUnsafe(after), true, after);
+  for (const safe of ['<a href="https://example.org/a?b=c&amp;d=e">link</a>', '<p>Use &lt;script&gt; tags carefully</p>', '<p>Javascript is a language: notes</p>', '<a href="mailto:info@chapalaseminary.org">x</a>'])
+    assert.equal(isUnsafe(safe), false, safe);
+  const before = '<p>Hello</p>';
+  for (const filename of ['public/CTSAbout.html', 'src/body/index/tail.html'])
+    for (const tail of ['<a href="&#106;avascript:alert(1)">go</a>', '<a href="java&#9;script:alert(1)">go</a>', '<iframe srcdoc="x"></iframe>'])
+      assert.equal(isContentChange({ filename, status: 'modified', before, after: before + tail }), false, `${filename}: ${tail}`);
+  const dict = { a: 'b' };
+  assert.equal(isContentChange({ filename: 'src/data/french-landing.json', status: 'modified', before: JSON.stringify(dict), after: JSON.stringify({ ...dict, c: '<a href="&#106;avascript:x">y</a>' }) }), false);
+});
+
+test('the gate runs trusted base-branch policy, never code from the proposed branch', () => {
+  const workflow = fs.readFileSync('.github/workflows/release-governance.yml', 'utf8');
+  assert.match(workflow, /pull_request_target:/, 'runs in the base repository context');
+  assert.match(workflow, /ref: \$\{\{ steps\.policy\.outputs\.ref \}\}/, 'checks out the PR base commit, so a PR cannot loosen the policy that judges it');
+  assert.match(workflow, /persist-credentials: false/);
+  for (const type of ['synchronize', 'edited']) assert.match(workflow, new RegExp(`types: \\[[^\\]]*${type}`), `rechecked on ${type}`);
+  assert.match(workflow, /pull_request_review:/, 'rechecked when a review is submitted or dismissed');
 });

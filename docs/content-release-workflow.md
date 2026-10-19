@@ -10,6 +10,14 @@ and `CTS release approval`. Main allows merges only by `satoshisound` and
 has Write access. Only `satoshisound` has a named PR-review bypass. His own same-repository PRs
 are exempt from the faculty/AI approval check, while build/test checks still
 apply. `ChapalaTheological1` and `chapalatheological-ai` have no bypass.
+Since 18 Oct 2026 the approval check passes technical PRs on technical-scope
+review records from Claude and ChatGPT for the exact commit (PR comments the
+check reads itself) plus Wayne's approval; Robert is no longer a required
+approver, and his own-PR exemption covers beta only (see AGENTS.md).
+His branch-protection review bypass (`tools/configure-release-protection.mjs`)
+skips only the native PR-review requirement, not required status checks: once
+`--checks` is applied, every main merge, his included, still needs a passing
+`CTS release approval`, which requires Wayne's exact-commit approval.
 
 The governance workflow reads policy from the trusted base branch, never runs
 PR code with its token, checks the entire file list and publishes its status on
@@ -20,9 +28,10 @@ production promotion, synchronize main back into beta through a reviewed PR
 before the next change so strict branch checks remain up to date. For main, it
 also requires the exact beta SHA's successful deployment workflow.
 
-GitHub can check named human approvals, file ownership, tests, and recorded
-review links. It cannot prove that ChatGPT and Claude actually performed the
-reviews or agreed. Wayne checks the linked evidence. This is an operational
+GitHub can check named human approvals, file ownership, tests, and the
+review-record comments (exact commit, verdict, scope, posted by an account with
+repository access). It cannot prove which assistant typed a record, since both
+may post from the same AI account. Wayne's own approval is the human check. This is an operational
 review gate, not isolation from a malicious repository writer: a writer can
 create other Actions workflows/statuses, and org administrators can change
 settings. Keep the agent's account and credentials separate, grant no admin
@@ -83,8 +92,8 @@ pending beta work. During initial setup, enable only checks that already exist o
 the protected branch; then add both required check names after installation.
 Production auto-deployment starts disabled (`CTS_PRODUCTION_AUTODEPLOY_ENABLED`
 repository variable is `false`). Current main is behind beta and must not be
-published merely to install this workflow. After Robert approves and installs
-the current production baseline on main, preserves its approved activation date,
+published merely to install this workflow. After the current production
+baseline is reviewed (two AI technical reviews and Wayne) and installed on main, preserves its approved activation date,
 and the production environment token is set, an administrator sets this variable
 to `true` in Settings -> Secrets and variables -> Actions -> Variables. Future
 main merges deploy automatically. Until then, the production job is skipped.
@@ -92,7 +101,7 @@ The existing beta repository secret remains usable during token migration; the
 environment secret takes precedence once installed.
 The Swahili pilot branch currently holds offline reviewer packets. Its eventual
 site integration needs a fresh PR from current beta, with human language review;
-any required new language engine wiring comes to Robert.
+any required new language engine wiring is technical (two AI reviews and Wayne).
 
 GitHub references: [required-check behavior](https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/troubleshooting-required-status-checks),
 [deployment environments](https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments),
