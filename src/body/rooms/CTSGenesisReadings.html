@@ -70,21 +70,24 @@
   // the five digests' own checkboxes, whatever the page calls them
   function boxes(){ var m=document.querySelector('main')||document; return Array.prototype.slice.call(m.querySelectorAll('article input[type=checkbox]')); }
   // the reading's English title, which is what the record has always kept
-  function titleOf(box){ var a=box.closest('article'); var h=a&&a.querySelector('h3'); if(!h) return ''; var c=h.cloneNode(true); Array.prototype.forEach.call(c.querySelectorAll('.lang-es'),function(s){ s.parentNode.removeChild(s); }); return c.textContent.replace(/\s+/g,' ').trim(); }
-  function say(en,es){ el('cts-att-msg').innerHTML=en?'<span class="lang-en">'+en+'</span><span class="lang-es">'+es+'</span>':''; }
+  function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function pageLang(){ return document.body.getAttribute('data-page-lang') || (document.body.classList.contains('lang-es')?'es':document.body.classList.contains('lang-fr')?'fr':'en'); }
+  function titleOf(box){ var a=box.closest('article'); var h=a&&a.querySelector('h3'); if(!h) return ''; var en=h.querySelector('.lang-en, .cts-source'); if(en) return en.textContent.replace(/\s+/g,' ').trim(); var read=h.querySelector('.cts-reading'); if(read && (read.getAttribute('lang')||'').slice(0,2)==='en') return read.textContent.replace(/\s+/g,' ').trim(); var c=h.cloneNode(true); Array.prototype.forEach.call(c.querySelectorAll('.lang-es,.lang-fr,.cts-reading'),function(s){ s.parentNode.removeChild(s); }); return c.textContent.replace(/\s+/g,' ').trim(); }
+  function showTitle(box){ var a=box.closest('article'); var h=a&&a.querySelector('h3'); if(!h) return {en:'',es:'',fr:''}; function t(sel){ var n=h.querySelector(sel); return n?n.textContent.replace(/\s+/g,' ').trim():''; } var en=t('.lang-en')||t('.cts-source'), es=t('.lang-es'), fr=t('.lang-fr'); var read=h.querySelector('.cts-reading'); var shown=read?read.textContent.replace(/\s+/g,' ').trim():''; var page=pageLang(); if(!en && page==='en') en=shown; if(page==='es' && !es) es=shown; if(page==='fr' && !fr) fr=shown; return {en:en,es:es,fr:fr}; }
+  function say(en,es,fr){ el('cts-att-msg').innerHTML=en?'<span class="lang-en">'+esc(en)+'</span><span class="lang-es">'+esc(es)+'</span><span class="lang-fr">'+esc(fr)+'</span>':''; }
   function showDone(on){ el('cts-att-done').style.display=on?'block':'none'; }
   function record(){
     var chosen=boxes().filter(function(b){ return b.checked; });
     var name=el('cts-att-name').value.trim(), oath=el('cts-att-oath').checked;
-    if(chosen.length!==MAX){ say('Choose exactly three readings above to record them.','Elija exactamente tres lecturas arriba para registrarlas.'); return; }
-    if(!name){ say('Enter your name to record your reading.','Escriba su nombre para registrar su lectura.'); return; }
-    if(!oath){ say('Check the box to affirm you have read all three.','Marque la casilla para afirmar que ha leído las tres.'); return; }
+    if(chosen.length!==MAX){ say('Choose exactly three readings above to record them.','Elija exactamente tres lecturas arriba para registrarlas.','Choisissez exactement trois lectures ci-dessus pour les attester.'); return; }
+    if(!name){ say('Enter your name to record your reading.','Escriba su nombre para registrar su lectura.','Saisissez votre nom pour attester votre lecture.'); return; }
+    if(!oath){ say('Check the box to affirm you have read all three.','Marque la casilla para afirmar que ha leído las tres.','Cochez la case pour attester que vous avez lu les trois.'); return; }
     say('');
     var now=new Date(), en=now.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
     var es; try{ es=now.toLocaleDateString('es-MX',{year:'numeric',month:'long',day:'numeric'}); }catch(e){ es=en; }
     var works=chosen.map(titleOf);
     el('cts-att-rec-name').textContent=name; el('cts-att-rec-date').textContent=en; el('cts-att-rec-date-es').textContent=es;
-    var ul=el('cts-att-rec-list'); ul.innerHTML=''; works.forEach(function(w){ var li=document.createElement('li'); li.textContent=w; ul.appendChild(li); });
+    var ul=el('cts-att-rec-list'); ul.innerHTML=''; chosen.forEach(function(box){ var t=showTitle(box); var li=document.createElement('li'); li.innerHTML='<span class="lang-en">'+esc(t.en)+'</span><span class="lang-es">'+esc(t.es)+'</span><span class="lang-fr">'+esc(t.fr)+'</span>'; ul.appendChild(li); });
     set('cts_honors_name_v1', name);
     set(KEY, JSON.stringify({name:name,date:en,course:COURSE,works:works}));
     showDone(true);

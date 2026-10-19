@@ -65,7 +65,7 @@
 </div>
 <p class="limit-note no-print" id="limitNote"></p>
 <!-- 1 -->
-<article class="entry" data-id="1" data-title-en="The Doctrine of God — a CTS survey (Paley &amp; Orr)" data-title-es="La Doctrina de Dios — un estudio del STC (Paley y Orr)">
+<article class="entry" data-id="1" data-title-en="The Doctrine of God — a CTS survey (Paley &amp; Orr)" data-title-es="La Doctrina de Dios — un estudio del STC (Paley y Orr)" data-title-fr="La doctrine de Dieu — une étude du STC (Paley et Orr)">
 <div class="locus">
 <span class="lang-en">Theology Proper · God and the Trinity</span>
 <span class="lang-es">Teología propia · Dios y la Trinidad</span>
@@ -147,7 +147,7 @@
 <label class="pick"><input data-pick="1" type="checkbox"><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
 </div>
 </article>
-<article class="entry" data-id="2" data-title-en="The Person and Work of Christ — a CTS survey (Athanasius &amp; Greenleaf)" data-title-es="La Persona y la Obra de Cristo — un estudio del STC (Atanasio y Greenleaf)">
+<article class="entry" data-id="2" data-title-en="The Person and Work of Christ — a CTS survey (Athanasius &amp; Greenleaf)" data-title-es="La Persona y la Obra de Cristo — un estudio del STC (Atanasio y Greenleaf)" data-title-fr="La personne et l’œuvre de Christ — une étude du STC (Athanasius et Greenleaf)">
 <div class="locus">
 <span class="lang-en">Christology · Incarnation, Atonement, Resurrection</span>
 <span class="lang-es">Cristología · Encarnación, expiación, resurrección</span>
@@ -237,7 +237,7 @@
 <label class="pick"><input data-pick="2" type="checkbox"><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
 </div>
 </article>
-<article class="entry" data-id="3" data-title-en="Sin and Salvation: Grace and Faith — a CTS survey (Wesley &amp; Spurgeon)" data-title-es="Pecado y Salvación: Gracia y Fe — un estudio del STC (Wesley y Spurgeon)">
+<article class="entry" data-id="3" data-title-en="Sin and Salvation: Grace and Faith — a CTS survey (Wesley &amp; Spurgeon)" data-title-es="Pecado y Salvación: Gracia y Fe — un estudio del STC (Wesley y Spurgeon)" data-title-fr="Le péché et le salut : la grâce et la foi — une étude du STC (Wesley et Spurgeon)">
 <div class="locus">
 <span class="lang-en">Soteriology · Reformed and Arminian, fairly</span>
 <span class="lang-es">Soteriología · Reformada y arminiana, con justicia</span>
@@ -336,7 +336,7 @@
 <label class="pick"><input data-pick="3" type="checkbox"><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
 </div>
 </article>
-<article class="entry" data-id="4" data-title-en="The Holy Spirit — a CTS survey (Torrey)" data-title-es="El Espíritu Santo — un estudio del STC (Torrey)">
+<article class="entry" data-id="4" data-title-en="The Holy Spirit — a CTS survey (Torrey)" data-title-es="El Espíritu Santo — un estudio del STC (Torrey)" data-title-fr="Le Saint-Esprit — une étude du STC (Torrey)">
 <div class="locus">
 <span class="lang-en">Pneumatology · The Spirit’s Person and Work</span>
 <span class="lang-es">Pneumatología · La persona y obra del Espíritu</span>
@@ -421,7 +421,7 @@
 <label class="pick"><input data-pick="4" type="checkbox"><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
 </div>
 </article>
-<article class="entry" data-id="5" data-title-en="The Last Things — a CTS survey (non-partisan)" data-title-es="Las Últimas Cosas — un estudio del STC (no partidista)">
+<article class="entry" data-id="5" data-title-en="The Last Things — a CTS survey (non-partisan)" data-title-es="Las Últimas Cosas — un estudio del STC (no partidista)" data-title-fr="Les fins dernières — une étude du STC (non partisan)">
 <div class="locus">
 <span class="lang-en">Eschatology · The Church’s Hope · the Capstone</span>
 <span class="lang-es">Escatología · La esperanza de la iglesia · la culminación</span>
@@ -720,17 +720,20 @@
 
     if(chosen.length !== MAX){
       msg.innerHTML = "<span class='lang-en'>Choose exactly three readings above to record them.</span>" +
-                      "<span class='lang-es'>Elija exactamente tres lecturas arriba para registrarlas.</span>";
+                      "<span class='lang-es'>Elija exactamente tres lecturas arriba para registrarlas.</span>" +
+                      "<span class='lang-fr'>Choisissez exactement trois lectures ci-dessus pour les attester.</span>";
       return;
     }
     if(!name){
       msg.innerHTML = "<span class='lang-en'>Enter your name to record your reading.</span>" +
-                      "<span class='lang-es'>Escriba su nombre para registrar su lectura.</span>";
+                      "<span class='lang-es'>Escriba su nombre para registrar su lectura.</span>" +
+                      "<span class='lang-fr'>Saisissez votre nom pour attester votre lecture.</span>";
       return;
     }
     if(!oath){
       msg.innerHTML = "<span class='lang-en'>Check the box to affirm you have read all three.</span>" +
-                      "<span class='lang-es'>Marque la casilla para afirmar que ha leído las tres.</span>";
+                      "<span class='lang-es'>Marque la casilla para afirmar que ha leído las tres.</span>" +
+                      "<span class='lang-fr'>Cochez la case pour attester que vous avez lu les trois.</span>";
       return;
     }
     msg.textContent = "";
@@ -748,7 +751,8 @@
       var art = b.closest('.entry');
       var li = document.createElement('li');
       li.innerHTML = "<span class='lang-en'>" + art.getAttribute('data-title-en') + "</span>" +
-                     "<span class='lang-es'>" + art.getAttribute('data-title-es') + "</span>";
+                     "<span class='lang-es'>" + art.getAttribute('data-title-es') + "</span>" +
+                     "<span class='lang-fr'>" + art.getAttribute('data-title-fr') + "</span>";
       ul.appendChild(li);
     });
 

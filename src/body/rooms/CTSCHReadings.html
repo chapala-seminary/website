@@ -65,7 +65,7 @@
 </div>
 <p class="limit-note no-print" id="limitNote"></p>
 <!-- 1 -->
-<article class="entry" data-id="1" data-title-en="The Martyrdom of Polycarp — the Church of Smyrna (c. 155)" data-title-es="El Martirio de Policarpo — la Iglesia de Esmirna (c. 155)">
+<article class="entry" data-id="1" data-title-en="The Martyrdom of Polycarp — the Church of Smyrna (c. 155)" data-title-es="El Martirio de Policarpo — la Iglesia de Esmirna (c. 155)" data-title-fr="Le martyre de Polycarpe — l'Église de Smyrne (v. 155)">
 <div class="locus">
 <span class="lang-en">Early Church · Martyrdom</span>
 <span class="lang-es">Iglesia primitiva · Martirio</span>
@@ -157,7 +157,7 @@
 <label class="pick"><input data-pick="1" type="checkbox"><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
 </div>
 </article>
-<article class="entry" data-id="2" data-title-en="Nicaea and Athanasius: The Deity of Christ — 4th century" data-title-es="Nicea y Atanasio: la deidad de Cristo — siglo IV">
+<article class="entry" data-id="2" data-title-en="Nicaea and Athanasius: The Deity of Christ — 4th century" data-title-es="Nicea y Atanasio: la deidad de Cristo — siglo IV" data-title-fr="Nicée et Athanase : La divinité du Christ — IVe siècle">
 <div class="locus">
 <span class="lang-en">Early Church · The Deity of Christ</span>
 <span class="lang-es">Iglesia primitiva · La deidad de Cristo</span>
@@ -244,7 +244,7 @@
 <label class="pick"><input data-pick="2" type="checkbox"><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
 </div>
 </article>
-<article class="entry" data-id="3" data-title-en="On Loving God — Bernard of Clairvaux (c. 1130)" data-title-es="Sobre el Amor a Dios — Bernardo de Claraval (c. 1130)">
+<article class="entry" data-id="3" data-title-en="On Loving God — Bernard of Clairvaux (c. 1130)" data-title-es="Sobre el Amor a Dios — Bernardo de Claraval (c. 1130)" data-title-fr="De l’amour de Dieu — Bernard de Clairvaux (v. 1130)">
 <div class="locus">
 <span class="lang-en">Medieval Church · Devotion</span>
 <span class="lang-es">Iglesia medieval · Devoción</span>
@@ -336,7 +336,7 @@
 <label class="pick"><input data-pick="3" type="checkbox"><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
 </div>
 </article>
-<article class="entry" data-id="4" data-title-en="Why Were Our Reformers Burned? — J. C. Ryle" data-title-es="¿Por qué fueron quemados nuestros Reformadores? — J. C. Ryle">
+<article class="entry" data-id="4" data-title-en="Why Were Our Reformers Burned? — J. C. Ryle" data-title-es="¿Por qué fueron quemados nuestros Reformadores? — J. C. Ryle" data-title-fr="Pourquoi nos Réformateurs furent-ils brûlés ? — J. C. Ryle">
 <div class="locus">
 <span class="lang-en">The Reformation · The English Martyrs</span>
 <span class="lang-es">La Reforma · Los mártires ingleses</span>
@@ -457,7 +457,7 @@
 <label class="pick"><input data-pick="4" type="checkbox"><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
 </div>
 </article>
-<article class="entry" data-id="5" data-title-en="William Carey and the Modern Missionary Movement (1761—1834)" data-title-es="William Carey y el Movimiento Misionero Moderno (1761—1834)">
+<article class="entry" data-id="5" data-title-en="William Carey and the Modern Missionary Movement (1761—1834)" data-title-es="William Carey y el Movimiento Misionero Moderno (1761—1834)" data-title-fr="William Carey et le mouvement missionnaire moderne (1761—1834)">
 <div class="locus">
 <span class="lang-en">The Modern Church · Missions</span>
 <span class="lang-es">La iglesia moderna · Misiones</span>
@@ -750,17 +750,20 @@
 
     if(chosen.length !== MAX){
       msg.innerHTML = "<span class='lang-en'>Choose exactly three readings above to record them.</span>" +
-                      "<span class='lang-es'>Elija exactamente tres lecturas arriba para registrarlas.</span>";
+                      "<span class='lang-es'>Elija exactamente tres lecturas arriba para registrarlas.</span>" +
+                      "<span class='lang-fr'>Choisissez exactement trois lectures ci-dessus pour les attester.</span>";
       return;
     }
     if(!name){
       msg.innerHTML = "<span class='lang-en'>Enter your name to record your reading.</span>" +
-                      "<span class='lang-es'>Escriba su nombre para registrar su lectura.</span>";
+                      "<span class='lang-es'>Escriba su nombre para registrar su lectura.</span>" +
+                      "<span class='lang-fr'>Saisissez votre nom pour attester votre lecture.</span>";
       return;
     }
     if(!oath){
       msg.innerHTML = "<span class='lang-en'>Check the box to affirm you have read all three.</span>" +
-                      "<span class='lang-es'>Marque la casilla para afirmar que ha leído las tres.</span>";
+                      "<span class='lang-es'>Marque la casilla para afirmar que ha leído las tres.</span>" +
+                      "<span class='lang-fr'>Cochez la case pour attester que vous avez lu les trois.</span>";
       return;
     }
     msg.textContent = "";
@@ -778,7 +781,8 @@
       var art = b.closest('.entry');
       var li = document.createElement('li');
       li.innerHTML = "<span class='lang-en'>" + art.getAttribute('data-title-en') + "</span>" +
-                     "<span class='lang-es'>" + art.getAttribute('data-title-es') + "</span>";
+                     "<span class='lang-es'>" + art.getAttribute('data-title-es') + "</span>" +
+                     "<span class='lang-fr'>" + art.getAttribute('data-title-fr') + "</span>";
       ul.appendChild(li);
     });
 

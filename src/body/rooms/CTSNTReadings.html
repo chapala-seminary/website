@@ -73,7 +73,7 @@
   <p class="limit-note no-print" id="limitNote"></p>
 
   <!-- 1 -->
-  <article class="entry" data-id="1" data-title-en="The Four Gospels: One Christ in Four Portraits — a CTS survey (Stalker)" data-title-es="Los Cuatro Evangelios: Un Solo Cristo en Cuatro Retratos — un estudio del STC (Stalker)">
+  <article class="entry" data-id="1" data-title-en="The Four Gospels: One Christ in Four Portraits — a CTS survey (Stalker)" data-title-es="Los Cuatro Evangelios: Un Solo Cristo en Cuatro Retratos — un estudio del STC (Stalker)" data-title-fr="Les quatre Évangiles : un seul Christ en quatre portraits — une étude du STC (Stalker)">
 <div class="locus">
 <span class="lang-en">The Life of Christ · The Fourfold Gospel</span>
 <span class="lang-es">La vida de Cristo · El Evangelio cuádruple</span>
@@ -158,7 +158,7 @@
 <label class="pick"><input data-pick="1" type="checkbox"><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
 </div>
 </article>
-<article class="entry" data-id="2" data-title-en="Acts: The Church Is Born and the Gospel Spreads — a CTS survey" data-title-es="Hechos: Nace la Iglesia y se Extiende el Evangelio — un estudio del STC">
+<article class="entry" data-id="2" data-title-en="Acts: The Church Is Born and the Gospel Spreads — a CTS survey" data-title-es="Hechos: Nace la Iglesia y se Extiende el Evangelio — un estudio del STC" data-title-fr="Actes : l'Église naît et l'Évangile se répand — une étude du STC">
 <div class="locus">
 <span class="lang-en">The Early Church · Acts</span>
 <span class="lang-es">La iglesia primitiva · Hechos</span>
@@ -251,7 +251,7 @@
 <label class="pick"><input data-pick="2" type="checkbox"><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
 </div>
 </article>
-<article class="entry" data-id="3" data-title-en="Paul and His Letters — a CTS survey (Stalker)" data-title-es="Pablo y Sus Cartas — un estudio del STC (Stalker)">
+<article class="entry" data-id="3" data-title-en="Paul and His Letters — a CTS survey (Stalker)" data-title-es="Pablo y Sus Cartas — un estudio del STC (Stalker)" data-title-fr="Paul et ses lettres — une étude du STC (Stalker)">
 <div class="locus">
 <span class="lang-en">The Apostle Paul · The Epistles</span>
 <span class="lang-es">El apóstol Pablo · Las Epístolas</span>
@@ -344,7 +344,7 @@
 <label class="pick"><input data-pick="3" type="checkbox"><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
 </div>
 </article>
-<article class="entry" data-id="4" data-title-en="Hebrews and the General Letters — a CTS survey" data-title-es="Hebreos y las Cartas Generales — un estudio del STC">
+<article class="entry" data-id="4" data-title-en="Hebrews and the General Letters — a CTS survey" data-title-es="Hebreos y las Cartas Generales — un estudio del STC" data-title-fr="Hébreux et les épîtres générales — une étude du STC">
 <div class="locus">
 <span class="lang-en">Hebrews &amp; the General Epistles · Perseverance</span>
 <span class="lang-es">Hebreos y las epístolas generales · Perseverancia</span>
@@ -438,7 +438,7 @@
 <label class="pick"><input data-pick="4" type="checkbox"><span class="lang-en">Select for my three</span><span class="lang-es">Elegir para mis tres</span></label>
 </div>
 </article>
-<article class="entry" data-id="5" data-title-en="Revelation and the Hope of the Church — a CTS survey (non-partisan)" data-title-es="El Apocalipsis y la Esperanza de la Iglesia — un estudio del STC (no partidista)">
+<article class="entry" data-id="5" data-title-en="Revelation and the Hope of the Church — a CTS survey (non-partisan)" data-title-es="El Apocalipsis y la Esperanza de la Iglesia — un estudio del STC (no partidista)" data-title-fr="L’Apocalypse et l’espérance de l’Église — une étude du STC (non partisan)">
 <div class="locus">
 <span class="lang-en">Revelation · The Church’s Hope · the Capstone</span>
 <span class="lang-es">Apocalipsis · La esperanza de la iglesia · la culminación</span>
@@ -714,17 +714,20 @@
 
     if(chosen.length !== MAX){
       msg.innerHTML = "<span class='lang-en'>Choose exactly three readings above to record them.</span>" +
-                      "<span class='lang-es'>Elija exactamente tres lecturas arriba para registrarlas.</span>";
+                      "<span class='lang-es'>Elija exactamente tres lecturas arriba para registrarlas.</span>" +
+                      "<span class='lang-fr'>Choisissez exactement trois lectures ci-dessus pour les attester.</span>";
       return;
     }
     if(!name){
       msg.innerHTML = "<span class='lang-en'>Enter your name to record your reading.</span>" +
-                      "<span class='lang-es'>Escriba su nombre para registrar su lectura.</span>";
+                      "<span class='lang-es'>Escriba su nombre para registrar su lectura.</span>" +
+                      "<span class='lang-fr'>Saisissez votre nom pour attester votre lecture.</span>";
       return;
     }
     if(!oath){
       msg.innerHTML = "<span class='lang-en'>Check the box to affirm you have read all three.</span>" +
-                      "<span class='lang-es'>Marque la casilla para afirmar que ha leído las tres.</span>";
+                      "<span class='lang-es'>Marque la casilla para afirmar que ha leído las tres.</span>" +
+                      "<span class='lang-fr'>Cochez la case pour attester que vous avez lu les trois.</span>";
       return;
     }
     msg.textContent = "";
@@ -742,7 +745,8 @@
       var art = b.closest('.entry');
       var li = document.createElement('li');
       li.innerHTML = "<span class='lang-en'>" + art.getAttribute('data-title-en') + "</span>" +
-                     "<span class='lang-es'>" + art.getAttribute('data-title-es') + "</span>";
+                     "<span class='lang-es'>" + art.getAttribute('data-title-es') + "</span>" +
+                     "<span class='lang-fr'>" + art.getAttribute('data-title-fr') + "</span>";
       ul.appendChild(li);
     });
 

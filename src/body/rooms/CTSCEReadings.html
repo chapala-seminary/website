@@ -53,7 +53,7 @@
   <p class="limit-note no-print" id="limitNote"></p>
 
   <!-- 1 -->
-  <article class="entry" data-id="1" data-title-en="The Ministry of Teaching — CTS digest" data-title-es="El Ministerio de la Enseñanza — resumen STC">
+  <article class="entry" data-id="1" data-title-en="The Ministry of Teaching — CTS digest" data-title-es="El Ministerio de la Enseñanza — resumen STC" data-title-fr="Le ministère de l’enseignement — résumé du STC">
     <div class="locus"><span class="lang-en">The Calling · Teaching as a Ministry</span><span class="lang-es">El Llamado · La Enseñanza como Ministerio</span></div>
     <div class="title"><span class="num">1.</span><span class="lang-en">The Ministry of Teaching</span><span class="lang-es">El Ministerio de la Enseñanza</span><span class="kind classic lang-en">CTS digest</span><span class="kind classic lang-es">resumen STC</span></div>
     <div class="byline">A CTS digest · anchored in Scripture &amp; Comenius</div>
@@ -151,7 +151,7 @@
   </article>
 
   <!-- 2 -->
-  <article class="entry" data-id="2" data-title-en="Jesus the Master Teacher — CTS digest" data-title-es="Jesús, el Maestro por Excelencia — resumen STC">
+  <article class="entry" data-id="2" data-title-en="Jesus the Master Teacher — CTS digest" data-title-es="Jesús, el Maestro por Excelencia — resumen STC" data-title-fr="Jésus, le Maître enseignant — résumé du STC">
     <div class="locus"><span class="lang-en">The Model · Learning to Teach from Christ</span><span class="lang-es">El Modelo · Aprender a Enseñar de Cristo</span></div>
     <div class="title"><span class="num">2.</span><span class="lang-en">Jesus the Master Teacher</span><span class="lang-es">Jesús, el Maestro por Excelencia</span><span class="kind classic lang-en">CTS digest</span><span class="kind classic lang-es">resumen STC</span></div>
     <div class="byline">A CTS digest · anchored in Herman Harrell Horne</div>
@@ -249,7 +249,7 @@
   </article>
 
   <!-- 3 -->
-  <article class="entry" data-id="3" data-title-en="The Laws of Teaching — CTS digest" data-title-es="Las Leyes de la Enseñanza — resumen STC">
+  <article class="entry" data-id="3" data-title-en="The Laws of Teaching — CTS digest" data-title-es="Las Leyes de la Enseñanza — resumen STC" data-title-fr="Les lois de l’enseignement — résumé du STC">
     <div class="locus"><span class="lang-en">The Craft · Seven Laws That Make Teaching Work</span><span class="lang-es">El Oficio · Siete Leyes que Hacen Funcionar la Enseñanza</span></div>
     <div class="title"><span class="num">3.</span><span class="lang-en">The Laws of Teaching</span><span class="lang-es">Las Leyes de la Enseñanza</span><span class="kind classic lang-en">CTS digest</span><span class="kind classic lang-es">resumen STC</span></div>
     <div class="byline">A CTS digest · anchored in John Milton Gregory</div>
@@ -353,7 +353,7 @@
   </article>
 
   <!-- 4 -->
-  <article class="entry" data-id="4" data-title-en="Teaching the Faith: Catechizing and Nurture — CTS digest" data-title-es="Enseñar la Fe: La Catequesis y la Crianza — resumen STC">
+  <article class="entry" data-id="4" data-title-en="Teaching the Faith: Catechizing and Nurture — CTS digest" data-title-es="Enseñar la Fe: La Catequesis y la Crianza — resumen STC" data-title-fr="Enseigner la foi : la catéchèse et l’éducation des jeunes — résumé du STC">
     <div class="locus"><span class="lang-en">Beginners · Catechizing and Christian Nurture</span><span class="lang-es">Los Principiantes · La Catequesis y la Crianza</span></div>
     <div class="title"><span class="num">4.</span><span class="lang-en">Teaching the Faith: Catechizing and Nurture</span><span class="lang-es">Enseñar la Fe: La Catequesis y la Crianza</span><span class="kind classic lang-en">CTS digest</span><span class="kind classic lang-es">resumen STC</span></div>
     <div class="byline">A CTS digest · anchored in Augustine</div>
@@ -451,7 +451,7 @@
   </article>
 
   <!-- 5 -->
-  <article class="entry" data-id="5" data-title-en="Teaching That Transforms: The Aim of It All — CTS digest" data-title-es="Enseñar Que Transforma: El Fin de Todo — resumen STC">
+  <article class="entry" data-id="5" data-title-en="Teaching That Transforms: The Aim of It All — CTS digest" data-title-es="Enseñar Que Transforma: El Fin de Todo — resumen STC" data-title-fr="Un enseignement qui transforme : le but de l’ensemble — résumé du STC">
     <div class="locus"><span class="lang-en">The Aim · Transformed Lives, Not Just Information</span><span class="lang-es">El Fin · Vidas Transformadas, No Solo Información</span></div>
     <div class="title"><span class="num">5.</span><span class="lang-en">Teaching That Transforms: The Aim of It All</span><span class="lang-es">Enseñar Que Transforma: El Fin de Todo</span><span class="kind classic lang-en">CTS digest</span><span class="kind classic lang-es">resumen STC</span></div>
     <div class="byline">A CTS digest · anchored in Comenius &amp; Scripture</div>
@@ -699,15 +699,18 @@
     var msg = document.getElementById('attMsg');
     if(chosen.length !== MAX){
       msg.innerHTML = "<span class='lang-en'>Choose exactly three readings above to record them.</span>" +
-                      "<span class='lang-es'>Elija exactamente tres lecturas arriba para registrarlas.</span>"; return;
+                      "<span class='lang-es'>Elija exactamente tres lecturas arriba para registrarlas.</span>" +
+                      "<span class='lang-fr'>Choisissez exactement trois lectures ci-dessus pour les attester.</span>"; return;
     }
     if(!name){
       msg.innerHTML = "<span class='lang-en'>Enter your name to record your reading.</span>" +
-                      "<span class='lang-es'>Escriba su nombre para registrar su lectura.</span>"; return;
+                      "<span class='lang-es'>Escriba su nombre para registrar su lectura.</span>" +
+                      "<span class='lang-fr'>Saisissez votre nom pour attester votre lecture.</span>"; return;
     }
     if(!oath){
       msg.innerHTML = "<span class='lang-en'>Check the box to affirm you have read all three.</span>" +
-                      "<span class='lang-es'>Marque la casilla para afirmar que ha leído las tres.</span>"; return;
+                      "<span class='lang-es'>Marque la casilla para afirmar que ha leído las tres.</span>" +
+                      "<span class='lang-fr'>Cochez la case pour attester que vous avez lu les trois.</span>"; return;
     }
     msg.textContent = "";
     var now = new Date();
@@ -721,7 +724,8 @@
       var art = b.closest('.entry');
       var li = document.createElement('li');
       li.innerHTML = "<span class='lang-en'>" + art.getAttribute('data-title-en') + "</span>" +
-                     "<span class='lang-es'>" + art.getAttribute('data-title-es') + "</span>";
+                     "<span class='lang-es'>" + art.getAttribute('data-title-es') + "</span>" +
+                     "<span class='lang-fr'>" + art.getAttribute('data-title-fr') + "</span>";
       ul.appendChild(li);
     });
     try {

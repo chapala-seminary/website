@@ -1398,3 +1398,26 @@ submission. Available readings and tests are easier to find; course boxes
 distinguish optional honors from master’s assigned readings, and Torrey’s page
 clearly labels the five excerpts. Native language controls and fully translated
 pages resist browser retranslation. See [the change and verification record](wayne-feedback-2026-10-15.md).
+
+## 19 October 2026 — exam counts, French reading-room labels, chart languages
+
+Three exam banks were shorter than the rest of the seminary. Pentecostal units
+1–12 had 7 multiple-choice questions, Counseling Situations units 0–12 had 10,
+and Ruth and Esther unit 1 had 18. Each is now 20, with the fill-in and
+short-answer banks left at 10. A certificate still passes at 90 percent, which
+is 18 of 20. Ruth and Esther unit 1’s heading now says `(20 · 90%)`. The new
+questions are marked machine-written in French and want a reader’s check.
+
+Chart and timeline labels that were drawn twice — English on one line, Spanish
+on the next, with the French of the Spanish line copied from the English —
+are one label now. The page shows the reader’s language. Spanish that was
+already on the page is marked human. Spanish written for a label that had
+none, including dates (`c. 2000 BC` → `c. 2000 a. C.`), is marked machine.
+Hebrew and Greek letters, Strong’s numbers, and names that are the same in
+each language stay as they are.
+
+Reading-room digests were already in French. The honors list a script builds
+after the page loads was not: it showed the English title, and two checks
+(“enter your name”, “check the box”) had no French. Each shelf title now has
+a French title, the list uses it, and those checks speak French. The record
+kept in this browser is still the English title.
