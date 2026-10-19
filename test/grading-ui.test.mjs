@@ -369,8 +369,15 @@ if (want(9)) {
   ok(await has(p, '.cts-grade-register', 'you need a student record') && await p.locator('.cts-grade-register a[href="/cts-backup.html"]').count() === 1, 'the questions are held back with a prompt to register or restore');
   ok(await p.locator('.question').count() === 0, 'no question is shown');
   ok(attemptCalls(stub).length === 0 && stub.calls('/mc').length === 0, 'no grading call is made');
-  // registering brings the questions
+  // registering brings the questions -- once every required field is filled.
+  // Country is required (Unit.astro select#regCountry); without it Save
+  // stores nothing, shows the error and makes no grading call.
   await p.locator('#regName').fill('Stub Student'); await p.locator('#regEmail').fill('stub@example.test');
+  await p.locator('#regSave').click();
+  await sleep(300);
+  ok(attemptCalls(stub).length === 0 && await p.locator('.question').count() === 0, 'a registration without a country is refused and sends nothing');
+  ok(await p.locator('#regError').isVisible().catch(() => false) || await p.locator('#regCountry:invalid').count() === 1, 'and says the country is needed');
+  await p.locator('#regCountry').selectOption('MX');
   await p.locator('#regSave').click();
   ok(await ready(p), 'after registering the questions appear');
   ok(attemptCalls(stub)[0].body.code === STUB_CODE, 'the first attempt uses the code the registration produced');
