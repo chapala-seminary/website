@@ -374,7 +374,6 @@ if (want(9)) {
   // Country is required (Unit.astro select#regCountry); without it Save
   // stores nothing, shows the error and makes no grading call.
   await p.locator('#regName').fill('Stub Student'); await p.locator('#regEmail').fill('stub@example.test');
-  await p.locator('#regCountry').selectOption('MX');
   await p.locator('#regSave').click();
   await sleep(300);
   ok(attemptCalls(stub).length === 0 && await p.locator('.question').count() === 0, 'a registration without a country is refused and sends nothing');
