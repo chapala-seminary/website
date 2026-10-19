@@ -177,7 +177,9 @@ db('DELETE FROM grade_overrides; DELETE FROM grade_cache; DELETE FROM grade_queu
   await p.waitForSelector('.question', { timeout: 15000 });
   const code = await codeOf(p);
   // the other nine units are on record, so this one completes the course
-  db(`INSERT INTO unit_progress (student_id, course, unit, completed_at, source) VALUES ${[2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => `('${code}', 'ethics', ${n}, '2026-10-01T00:00:00Z', 'server')`).join(',')}`);
+  // Earlier credit the record already holds ('legacy': credited before live grading). A unit
+  // marked 'server' would also need the passed attempt the server writes with it (attempts.js earnedLevel).
+  db(`INSERT INTO unit_progress (student_id, course, unit, completed_at, source) VALUES ${[2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => `('${code}', 'ethics', ${n}, '2026-10-01T00:00:00Z', 'legacy')`).join(',')}`);
 
   const html = await (await freshFetch(`${BASE}/ethics_unit01.html`)).text();
   ok(!/correct\s*:\s*\d\s*[,}]/.test(html), 'the Ethics page carries no answer index');
@@ -227,7 +229,9 @@ db('DELETE FROM grade_overrides; DELETE FROM grade_cache; DELETE FROM grade_queu
   await p.goto(`${BASE}/CTSCounseling.html`, { waitUntil: 'load' });
   await p.waitForSelector('.question-card', { timeout: 15000 });
   const code = await codeOf(p);
-  db(`INSERT INTO unit_progress (student_id, course, unit, completed_at, source) VALUES ${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => `('${code}', 'counseling', ${n}, '2026-10-01T00:00:00Z', 'server')`).join(',')}`);
+  // Earlier credit the record already holds ('legacy': credited before live grading). A unit
+  // marked 'server' would also need the passed attempt the server writes with it (attempts.js earnedLevel).
+  db(`INSERT INTO unit_progress (student_id, course, unit, completed_at, source) VALUES ${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => `('${code}', 'counseling', ${n}, '2026-10-01T00:00:00Z', 'legacy')`).join(',')}`);
   const html = await (await freshFetch(`${BASE}/CTSCounseling.html`)).text();
   ok(!/correct\s*:\s*\d\s*[,}]/.test(html), 'the Counseling page carries no answer index');
   ok(JSON.stringify(await p.evaluate(() => [Object.keys(UNITS[1].mcq[0]), Object.keys(UNITS[1].shortAnswer[0]), Object.keys(UNITS[1].mcq[0].options[0])])) === '[["textEn","textEs","options"],["textEn","textEs"],["en","es"]]', 'a question in the page is its wording and nothing else');
@@ -246,7 +250,9 @@ db('DELETE FROM grade_overrides; DELETE FROM grade_cache; DELETE FROM grade_queu
   await m.p.goto(`${BASE}/CTSCounseling.html`, { waitUntil: 'load' });
   await m.p.waitForSelector('.question-card', { timeout: 15000 });
   const mcode = await codeOf(m.p);
-  db(`INSERT INTO unit_progress (student_id, course, unit, completed_at, source) VALUES ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => `('${mcode}', 'counseling', ${n}, '2026-10-01T00:00:00Z', 'server')`).join(',')}`);
+  // Earlier credit the record already holds ('legacy': credited before live grading). A unit
+  // marked 'server' would also need the passed attempt the server writes with it (attempts.js earnedLevel).
+  db(`INSERT INTO unit_progress (student_id, course, unit, completed_at, source) VALUES ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => `('${mcode}', 'counseling', ${n}, '2026-10-01T00:00:00Z', 'legacy')`).join(',')}`);
   const s0 = sec('counseling', 0);
   await checkExpansion(m.p, U(s0.unit).sa(0), U(s0.unit).submit);
   await takeUnit(m.p, s0);

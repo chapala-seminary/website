@@ -190,11 +190,11 @@ export async function standing(env, attempt, scope) {
 /** Record the course as complete when the record now supports it: every unit,
  *  and on the master's tracks every test the course requires. Returns whether
  *  the course is complete and whether this call made it so. */
-export async function completeCourseIfDone(env, student, code, level) {
+export async function completeCourseIfDone(env, student, code, level, current) {
   const c = resolveCourse(code);
   // A single-page course (Counseling, Narrative and WiseSpeak Preaching, Ethics) keeps its
   // units under its own name in unit_progress and has no entry in catalog.courses
-  if (c && !c.units && SINGLES[c.code]) return await completeSingleIfDone(env, student, c.code, level);
+  if (c && !c.units && SINGLES[c.code]) return await completeSingleIfDone(env, student, c.code, level, current);
   if (!c || !c.units) return { done: false, newly: false };
   const units = ((await env.DB.prepare('SELECT unit FROM unit_progress WHERE student_id = ? AND course = ?').bind(student.id, c.slug).all()).results ?? []).map((r) => r.unit);
   const tbs = ((await env.DB.prepare('SELECT textbook FROM textbook_results WHERE student_id = ?').bind(student.id).all()).results ?? []).map((r) => r.textbook);
@@ -202,12 +202,67 @@ export async function completeCourseIfDone(env, student, code, level) {
   if (courseShortfall(c.slug, units, level, tbs, testContext(env, held))) {
     return { done: held.some((r) => r.code === c.code), newly: false };
   }
-  return await writeCompletion(env, student, c.code, level, held);
+  const at = await earnedLevel(env, student, c.code, level, held, unitEvidence(env, student.id, c.slug, `u:${catalog.courses[c.slug].pages}/`, (scope) => Number(scope.slice(scope.lastIndexOf('/') + 1)), false, current));
+  return at ? await writeCompletion(env, student, c.code, at, held) : { done: held.some((r) => r.code === c.code), newly: false };
+}
+
+/* The level a completion may be written at (ChatGPT's review of #125, 19 Oct
+   2026). Units and the required tests are not enough to raise a completion: a
+   student who finished a course on the Certificate track and moved to the
+   Th.M. would otherwise become a master's completion by passing the reading
+   tests alone. So an Associate or master's completion needs, for each unit, a
+   passed live attempt at that level or above (attempts.track, the record's
+   level when the attempt began).
+   - A unit credited before live grading (unit_progress.source other than
+     'server') still counts towards a FIRST completion, as it always has: that
+     record holds no level, and earlier credit is kept.
+   - Raising an existing completion (cert -> assoc, assoc -> master's) counts
+     only live attempts: earlier credit never raises a level.
+   Returns the level to write: the one asked, or, when that is not earned, the
+   best level the units support; null when not even that may be written. */
+const RANK = { cert: 0, assoc: 1, thm: 2, mdiv: 2 };
+async function earnedLevel(env, student, code, level, held, evidence) {
+  const want = studentLevel(level);
+  if (RANK[want] === 0) return want;
+  const prior = held.find((r) => r.code === code);
+  const { units, best } = await evidence;          // best: unit -> highest live rank passed; units: unit -> source
+  const upgrade = !!prior;
+  const ok = (rank) => [...units.keys()].every((u) => (best.get(u) ?? -1) >= rank || (!upgrade && units.get(u) !== 'server'));
+  if (ok(RANK[want])) return want;
+  if (want !== 'assoc' && ok(RANK.assoc)) return 'assoc';
+  return prior ? null : 'cert';
+}
+
+/* For one course: the source of each unit's credit, and the highest level of a
+   passed live attempt on it. `prefix` is the attempts.scope prefix of its unit
+   scopes; `unitOf` reads the unit from a scope (null to skip it). */
+async function unitEvidence(env, studentId, course, prefix, unitOf, meta, current) {
+  const units = new Map(((await env.DB.prepare('SELECT unit, source FROM unit_progress WHERE student_id = ? AND course = ?').bind(studentId, course).all()).results ?? [])
+    .map((r) => [Number(r.unit), r.source]));
+  const rows = meta
+    ? ((await env.DB.prepare(
+        `SELECT a.scope, a.track, k.data_json FROM attempts a JOIN grading_keys k ON k.qid = a.scope || '/meta/0'
+         WHERE a.student_id = ? AND a.status = 'passed' AND a.shadow = 0 AND a.scope >= ? AND a.scope < ?`)
+        .bind(studentId, prefix, upper(prefix)).all()).results ?? [])
+    : ((await env.DB.prepare(
+        `SELECT scope, track FROM attempts WHERE student_id = ? AND status = 'passed' AND shadow = 0 AND scope >= ? AND scope < ?`)
+        .bind(studentId, prefix, upper(prefix)).all()).results ?? []);
+  // The attempt being credited now is marked passed only after its credit is
+  // written (creditPass), so it is counted here as the pass it is.
+  if (current && current.scope >= prefix && current.scope < upper(prefix)) rows.push(current);
+  const best = new Map();
+  for (const r of rows) {
+    const u = unitOf(r.scope, r.data_json);
+    if (u == null || Number.isNaN(u)) continue;
+    const rank = RANK[studentLevel(r.track)] ?? 0;
+    if (rank > (best.get(u) ?? -1)) best.set(u, rank);
+  }
+  return { units, best };
 }
 
 /** The same check for a single-page course: every one of its units passed (unit_progress
  *  under the course's own name) and, on the master's tracks, its required tests. */
-export async function completeSingleIfDone(env, student, code, level) {
+export async function completeSingleIfDone(env, student, code, level, current) {
   const s = SINGLES[code];
   const units = ((await env.DB.prepare('SELECT unit FROM unit_progress WHERE student_id = ? AND course = ?').bind(student.id, s.course).all()).results ?? []).map((r) => r.unit);
   const held = (await env.DB.prepare('SELECT code, track, completed_at FROM course_completions WHERE student_id = ?').bind(student.id).all()).results ?? [];
@@ -215,7 +270,10 @@ export async function completeSingleIfDone(env, student, code, level) {
   if (s.units.some((u) => !have.has(u))) return { done: held.some((r) => r.code === code), newly: false };
   const tbs = ((await env.DB.prepare('SELECT textbook FROM textbook_results WHERE student_id = ?').bind(student.id).all()).results ?? []).map((r) => r.textbook);
   if (textbookShortfall(code, level, tbs, testContext(env, held))) return { done: held.some((r) => r.code === code), newly: false };
-  return await writeCompletion(env, student, code, level, held);
+  const at = await earnedLevel(env, student, code, level, held, unitEvidence(env, student.id, s.course, 'sp:', (scope, data) => {
+    try { const m = JSON.parse(data || '{}'); return m.course === s.course && m.unit != null ? Number(m.unit) : null; } catch { return null; }
+  }, true, current));
+  return at ? await writeCompletion(env, student, code, at, held) : { done: held.some((r) => r.code === code), newly: false };
 }
 
 export async function writeCompletion(env, student, code, level, held) {
@@ -243,7 +301,7 @@ async function creditPass(env, attempt, scope) {
     await env.DB.prepare(
       `INSERT INTO unit_progress (student_id, course, unit, completed_at, source) VALUES (?, ?, ?, ?, 'server')
        ON CONFLICT(student_id, course, unit) DO NOTHING`).bind(student.id, scope.slug, scope.unit, t).run();
-    const c = await completeCourseIfDone(env, student, scope.slug, attempt.track);
+    const c = await completeCourseIfDone(env, student, scope.slug, attempt.track, { scope: attempt.scope, track: attempt.track });
     return { unitDone: true, courseDone: c.done, courseNew: c.newly };
   }
   if (scope.type === 'tb' || scope.type === 'rd') {
@@ -264,7 +322,7 @@ async function creditPass(env, attempt, scope) {
          ON CONFLICT(student_id, course, unit) DO NOTHING`).bind(student.id, m.course, m.unit, t).run();
     }
     if (!m.code) return { unitDone: true, courseDone: false };
-    const c = SINGLES[m.code] ? await completeSingleIfDone(env, student, m.code, attempt.track) : { done: false, newly: false };
+    const c = SINGLES[m.code] ? await completeSingleIfDone(env, student, m.code, attempt.track, { scope: attempt.scope, track: attempt.track, data_json: JSON.stringify(m) }) : { done: false, newly: false };
     return { unitDone: true, courseDone: c.done, courseNew: c.newly };
   }
   return { unitDone: false, courseDone: false };

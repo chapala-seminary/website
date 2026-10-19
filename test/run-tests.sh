@@ -275,6 +275,9 @@ API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/answ
 # agreement figures, fill-in rulings and tools/apply-accepts.mjs, possible
 # copying, usage, the Monday digest line, and what deleting a student removes.
 API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/staff-grading.test.mjs
+# A completion's level is earned (attempts.js earnedLevel). After staff-grading,
+# whose calibration sample is drawn from every AI-graded answer in the database.
+API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/earned-level.test.mjs
 
 # The student tracker: the staff roster behind Cloudflare Access, and the notes
 # to students who have gone quiet (worker/staff.js, worker/outreach.js).

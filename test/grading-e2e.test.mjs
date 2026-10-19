@@ -231,7 +231,9 @@ ok(/^\d{4}-\d{2}-\d{2}$/.test(await ls(p, 'cts_textbook_cults_passed') || '') &&
 /* 3. The same student: the last unit of a course                           */
 /* ====================================================================== */
 const al10 = unitBank('CTSAL', 10);
-db(`INSERT INTO unit_progress (student_id, course, unit, completed_at, source) VALUES ${[1, 2, 3, 4, 5, 6, 7, 8, 9].map((u) => `('${codeA}', 'al', ${u}, '2026-10-01T00:00:00Z', 'server')`).join(',')}`);
+// Earlier credit the record already holds ('legacy': credited before live grading). A unit
+// marked 'server' would also need the passed attempt the server writes with it (attempts.js earnedLevel).
+db(`INSERT INTO unit_progress (student_id, course, unit, completed_at, source) VALUES ${[1, 2, 3, 4, 5, 6, 7, 8, 9].map((u) => `('${codeA}', 'al', ${u}, '2026-10-01T00:00:00Z', 'legacy')`).join(',')}`);
 await p.evaluate(() => localStorage.setItem('cts_al_progress', JSON.stringify({ unit1: true, unit2: true, unit3: true, unit4: true, unit5: true, unit6: true, unit7: true, unit8: true, unit9: true })));
 await p.goto(`${BASE}/CTSALUnit10.html`, { waitUntil: 'load' });
 ok(await ready(p), 'the last unit of the course shows its questions');
