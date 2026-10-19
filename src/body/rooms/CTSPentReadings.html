@@ -75,7 +75,7 @@
   <p class="limit-note no-print" id="limitNote"></p>
 
   <!-- 1 -->
-<article class="entry" data-id="1" data-title-en="In the Beginning: Creation, Fall, and Flood — CTS digest" data-title-es="En el Principio: Creación, Caída, y Diluvio — resumen STC">
+<article class="entry" data-id="1" data-title-en="In the Beginning: Creation, Fall, and Flood — CTS digest" data-title-es="En el Principio: Creación, Caída, y Diluvio — resumen STC" data-title-fr="Au commencement : la création, la chute et le déluge — résumé du STC">
 <div class="locus"><span class="lang-en">Genesis 1–11 · a CTS digest, ~2,000 words per language</span><span class="lang-es">Génesis 1–11 · un resumen del STC, ~2,000 palabras por idioma</span></div>
 <div class="title"><span class="num">1.</span><span class="lang-en">In the Beginning: Creation, Fall, and Flood</span><span class="lang-es">En el Principio: Creación, Caída, y Diluvio</span></div>
 <div class="byline">A CTS digest</div>
@@ -157,7 +157,7 @@
 </div>
 </article>
 <!-- 2 -->
-<article class="entry" data-id="2" data-title-en="The God of the Fathers: Abraham to Joseph — CTS digest" data-title-es="El Dios de los Padres: De Abraham a José — resumen STC">
+<article class="entry" data-id="2" data-title-en="The God of the Fathers: Abraham to Joseph — CTS digest" data-title-es="El Dios de los Padres: De Abraham a José — resumen STC" data-title-fr="Le Dieu des pères : d’Abraham à Joseph — résumé du STC">
 <div class="locus"><span class="lang-en">Genesis 12–50 · a CTS digest, ~2,000 words per language</span><span class="lang-es">Génesis 12–50 · un resumen del STC, ~2,000 palabras por idioma</span></div>
 <div class="title"><span class="num">2.</span><span class="lang-en">The God of the Fathers: Abraham to Joseph</span><span class="lang-es">El Dios de los Padres: De Abraham a José</span></div>
 <div class="byline">A CTS digest</div>
@@ -239,7 +239,7 @@
 </div>
 </article>
 <!-- 3 -->
-<article class="entry" data-id="3" data-title-en="Redemption and the Exodus — CTS digest" data-title-es="Redención y el Éxodo — resumen STC">
+<article class="entry" data-id="3" data-title-en="Redemption and the Exodus — CTS digest" data-title-es="Redención y el Éxodo — resumen STC" data-title-fr="La rédemption et l’Exode — résumé du STC">
 <div class="locus"><span class="lang-en">The book of Exodus · a CTS digest, ~2,000 words per language</span><span class="lang-es">El libro de Éxodo · un resumen del STC, ~2,000 palabras por idioma</span></div>
 <div class="title"><span class="num">3.</span><span class="lang-en">Redemption and the Exodus</span><span class="lang-es">Redención y el Éxodo</span></div>
 <div class="byline">A CTS digest</div>
@@ -321,7 +321,7 @@
 </div>
 </article>
 <!-- 4 -->
-<article class="entry" data-id="4" data-title-en="Holiness and the Way to God — CTS digest" data-title-es="Santidad y el Camino a Dios — resumen STC">
+<article class="entry" data-id="4" data-title-en="Holiness and the Way to God — CTS digest" data-title-es="Santidad y el Camino a Dios — resumen STC" data-title-fr="La sainteté et le chemin vers Dieu — résumé du STC">
 <div class="locus"><span class="lang-en">Leviticus &amp; Numbers · a CTS digest, ~2,000 words per language</span><span class="lang-es">Levítico y Números · un resumen del STC, ~2,000 palabras por idioma</span></div>
 <div class="title"><span class="num">4.</span><span class="lang-en">Holiness and the Way to God</span><span class="lang-es">Santidad y el Camino a Dios</span></div>
 <div class="byline">A CTS digest</div>
@@ -403,7 +403,7 @@
 </div>
 </article>
 <!-- 5 -->
-<article class="entry" data-id="5" data-title-en="The Word from Moab: Deuteronomy — CTS digest" data-title-es="La Palabra desde Moab: Deuteronomio — resumen STC">
+<article class="entry" data-id="5" data-title-en="The Word from Moab: Deuteronomy — CTS digest" data-title-es="La Palabra desde Moab: Deuteronomio — resumen STC" data-title-fr="La parole de Moab : le Deutéronome — résumé du STC">
 <div class="locus"><span class="lang-en">The book of Deuteronomy · a CTS digest, ~2,000 words per language</span><span class="lang-es">El libro de Deuteronomio · un resumen del STC, ~2,000 palabras por idioma</span></div>
 <div class="title"><span class="num">5.</span><span class="lang-en">The Word from Moab: Deuteronomy</span><span class="lang-es">La Palabra desde Moab: Deuteronomio</span></div>
 <div class="byline">A CTS digest</div>
@@ -640,7 +640,8 @@
     var note = document.getElementById('limitNote');
     if(full){
       note.innerHTML = "<span class='lang-en'>Three chosen. Uncheck one to change your selection.</span>" +
-                       "<span class='lang-es'>Tres elegidas. Desmarque una para cambiar su selección.</span>";
+                       "<span class='lang-es'>Tres elegidas. Desmarque una para cambiar su selección.</span>" +
+                       "<span class='lang-fr'>Trois choisies. Décochez-en une pour changer votre sélection.</span>";
     } else {
       note.textContent = "";
     }
@@ -658,17 +659,20 @@
 
     if(chosen.length !== MAX){
       msg.innerHTML = "<span class='lang-en'>Choose exactly three readings above to record them.</span>" +
-                      "<span class='lang-es'>Elija exactamente tres lecturas arriba para registrarlas.</span>";
+                      "<span class='lang-es'>Elija exactamente tres lecturas arriba para registrarlas.</span>" +
+                      "<span class='lang-fr'>Choisissez exactement trois lectures ci-dessus pour les attester.</span>";
       return;
     }
     if(!name){
       msg.innerHTML = "<span class='lang-en'>Enter your name to record your reading.</span>" +
-                      "<span class='lang-es'>Escriba su nombre para registrar su lectura.</span>";
+                      "<span class='lang-es'>Escriba su nombre para registrar su lectura.</span>" +
+                      "<span class='lang-fr'>Saisissez votre nom pour attester votre lecture.</span>";
       return;
     }
     if(!oath){
       msg.innerHTML = "<span class='lang-en'>Check the box to affirm you have read all three.</span>" +
-                      "<span class='lang-es'>Marque la casilla para afirmar que ha leído las tres.</span>";
+                      "<span class='lang-es'>Marque la casilla para afirmar que ha leído las tres.</span>" +
+                      "<span class='lang-fr'>Cochez la case pour attester que vous avez lu les trois.</span>";
       return;
     }
     msg.textContent = "";
@@ -686,7 +690,8 @@
       var art = b.closest('.entry');
       var li = document.createElement('li');
       li.innerHTML = "<span class='lang-en'>" + art.getAttribute('data-title-en') + "</span>" +
-                     "<span class='lang-es'>" + art.getAttribute('data-title-es') + "</span>";
+                     "<span class='lang-es'>" + art.getAttribute('data-title-es') + "</span>" +
+                     "<span class='lang-fr'>" + art.getAttribute('data-title-fr') + "</span>";
       ul.appendChild(li);
     });
 

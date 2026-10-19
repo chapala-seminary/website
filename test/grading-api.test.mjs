@@ -26,17 +26,39 @@ function ok(cond, label, detail) {
   checks++;
   if (!cond) fails.push(label + (detail !== undefined ? `\n        ${typeof detail === 'string' ? detail : JSON.stringify(detail)}` : ''));
 }
+process.on('exit', (code) => {
+  if (code && fails.length) {
+    console.log(`${checks} assertions run before the crash; failures so far:`);
+    fails.forEach((f) => console.log('  ' + f));
+  }
+});
 const eq = (a, b, label) => ok(JSON.stringify(a) === JSON.stringify(b), label, `got ${JSON.stringify(a)}, want ${JSON.stringify(b)}`);
 
+async function readBody(r) {
+  const text = await r.text();
+  if (!text) return null;
+  try { return JSON.parse(text); }
+  catch { return text.slice(0, 400); }
+}
+function devTail() {
+  try { return '\n' + fs.readFileSync(`${STATE}/dev.log`, 'utf8').trim().split('\n').slice(-25).join('\n'); }
+  catch { return ''; }
+}
 async function call(method, p, b, headers = {}) {
   /* After a slow step (a wrangler command takes seconds) the server may have closed
-     the idle connection this process would reuse: that fails before anything is
-     sent, so one more try is the same request, not a second one. */
+     the idle connection this process would reuse, or be restarting and answer
+     500, 502 or 503 with an empty or HTML body. That happens before the Worker
+     runs, so another try is the same request, not a second one. A JSON error is
+     the Worker's own answer and is not tried again. */
+  let last;
   for (let tries = 0; ; tries++) {
     try {
       const r = await fetch(BASE + p, { method, headers: { 'content-type': 'application/json', connection: 'close', ...headers }, body: b === undefined ? undefined : JSON.stringify(b) });
-      return { status: r.status, body: await r.json().catch(() => null) };
-    } catch (e) { if (tries >= 2) throw e; await sleep(300); }
+      last = { status: r.status, body: await readBody(r) };
+      const bounced = last.status >= 500 && last.status <= 503 && (last.body === null || typeof last.body === 'string');
+      if (!bounced || tries >= 3) return last;
+    } catch (e) { if (tries >= 3) throw e; }
+    await sleep(400 * (tries + 1));
   }
 }
 const post = (p, b, h) => call('POST', p, b, h);
@@ -67,7 +89,7 @@ const RUN = Date.now().toString(36);
 let n = 0;
 async function student(track, extra = {}) {
   const r = await post('/api/register', { name: `Grading Tester ${RUN} ${++n} ${track}`, email: `grading-${RUN}-${n}-${track}@example.test`, track, ...extra });
-  if (r.status !== 201) throw new Error(`register returned ${r.status}: ${JSON.stringify(r.body)}`);
+  if (r.status !== 201) throw new Error(`register returned ${r.status}: ${typeof r.body === 'string' ? r.body : JSON.stringify(r.body)}${devTail()}`);
   return r.body.code;
 }
 const start = (code, scope = SCOPE(1), lang = 'en') => post('/api/attempt', { code, scope, lang });

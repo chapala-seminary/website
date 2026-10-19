@@ -65,7 +65,7 @@
 </div>
 <p class="limit-note no-print" id="limitNote"></p>
 <!-- 1 -->
-<article class="entry" data-id="1" data-title-en="The Unveiling of Jesus Christ — CTS digest" data-title-es="La Revelación de Jesucristo — resumen STC">
+<article class="entry" data-id="1" data-title-en="The Unveiling of Jesus Christ — CTS digest" data-title-es="La Revelación de Jesucristo — resumen STC" data-title-fr="La révélation de Jésus-Christ — résumé du STC">
 <div class="locus"><span class="lang-en">Revelation 1 · introduction · a CTS digest, ~2,000 words per language</span><span class="lang-es">Apocalipsis 1 · introducción · un resumen del STC, ~2,000 palabras por idioma</span></div>
 <div class="title"><span class="num">1.</span><span class="lang-en">The Unveiling of Jesus Christ</span><span class="lang-es">La Revelación de Jesucristo</span></div>
 <div class="byline">A CTS digest</div>
@@ -143,7 +143,7 @@
 </div>
 </article>
 <!-- 2 -->
-<article class="entry" data-id="2" data-title-en="How Christians Have Read Revelation — CTS digest" data-title-es="Cómo Han Leído los Cristianos Apocalipsis — resumen STC">
+<article class="entry" data-id="2" data-title-en="How Christians Have Read Revelation — CTS digest" data-title-es="Cómo Han Leído los Cristianos Apocalipsis — resumen STC" data-title-fr="Comment les chrétiens ont lu l’Apocalypse — résumé du STC">
 <div class="locus"><span class="lang-en">The four interpretive approaches · a CTS digest, ~2,000 words per language</span><span class="lang-es">Los cuatro enfoques interpretativos · un resumen del STC, ~2,000 palabras por idioma</span></div>
 <div class="title"><span class="num">2.</span><span class="lang-en">How Christians Have Read Revelation</span><span class="lang-es">Cómo Han Leído los Cristianos Apocalipsis</span></div>
 <div class="byline">A CTS digest</div>
@@ -225,7 +225,7 @@
 </div>
 </article>
 <!-- 3 -->
-<article class="entry" data-id="3" data-title-en="The Seven Churches and the Throne — CTS digest" data-title-es="Las Siete Iglesias y el Trono — resumen STC">
+<article class="entry" data-id="3" data-title-en="The Seven Churches and the Throne — CTS digest" data-title-es="Las Siete Iglesias y el Trono — resumen STC" data-title-fr="Les sept Églises et le trône — résumé du STC">
 <div class="locus"><span class="lang-en">Revelation 2–5 · a CTS digest, ~2,000 words per language</span><span class="lang-es">Apocalipsis 2–5 · un resumen del STC, ~2,000 palabras por idioma</span></div>
 <div class="title"><span class="num">3.</span><span class="lang-en">The Seven Churches and the Throne</span><span class="lang-es">Las Siete Iglesias y el Trono</span></div>
 <div class="byline">A CTS digest</div>
@@ -307,7 +307,7 @@
 </div>
 </article>
 <!-- 4 -->
-<article class="entry" data-id="4" data-title-en="Judgment, the Beast, and the Persevering Saints — CTS digest" data-title-es="Juicio, la Bestia, y los Santos que Perseveran — resumen STC">
+<article class="entry" data-id="4" data-title-en="Judgment, the Beast, and the Persevering Saints — CTS digest" data-title-es="Juicio, la Bestia, y los Santos que Perseveran — resumen STC" data-title-fr="Le jugement, la bête et les saints qui persévèrent — résumé du STC">
 <div class="locus"><span class="lang-en">Revelation 6–19 · a CTS digest, ~2,000 words per language</span><span class="lang-es">Apocalipsis 6–19 · un resumen del STC, ~2,000 palabras por idioma</span></div>
 <div class="title"><span class="num">4.</span><span class="lang-en">Judgment, the Beast, and the Persevering Saints</span><span class="lang-es">Juicio, la Bestia, y los Santos que Perseveran</span></div>
 <div class="byline">A CTS digest</div>
@@ -389,7 +389,7 @@
 </div>
 </article>
 <!-- 5 -->
-<article class="entry" data-id="5" data-title-en="The Millennium, and All Things New — CTS digest" data-title-es="El Milenio, y Todas las Cosas Nuevas — resumen STC">
+<article class="entry" data-id="5" data-title-en="The Millennium, and All Things New — CTS digest" data-title-es="El Milenio, y Todas las Cosas Nuevas — resumen STC" data-title-fr="Le millénium, et toutes choses nouvelles — résumé du STC">
 <div class="locus"><span class="lang-en">Revelation 20–22 · a CTS digest, ~2,000 words per language</span><span class="lang-es">Apocalipsis 20–22 · un resumen del STC, ~2,000 palabras por idioma</span></div>
 <div class="title"><span class="num">5.</span><span class="lang-en">The Millennium, and All Things New</span><span class="lang-es">El Milenio, y Todas las Cosas Nuevas</span></div>
 <div class="byline">A CTS digest</div>
@@ -655,7 +655,8 @@
     var note = document.getElementById('limitNote');
     if(full){
       note.innerHTML = "<span class='lang-en'>Three chosen. Uncheck one to change your selection.</span>" +
-                       "<span class='lang-es'>Tres elegidas. Desmarque una para cambiar su selección.</span>";
+                       "<span class='lang-es'>Tres elegidas. Desmarque una para cambiar su selección.</span>" +
+                       "<span class='lang-fr'>Trois choisies. Décochez-en une pour changer votre sélection.</span>";
     } else {
       note.textContent = "";
     }
@@ -673,17 +674,20 @@
 
     if(chosen.length !== MAX){
       msg.innerHTML = "<span class='lang-en'>Choose exactly three readings above to record them.</span>" +
-                      "<span class='lang-es'>Elija exactamente tres lecturas arriba para registrarlas.</span>";
+                      "<span class='lang-es'>Elija exactamente tres lecturas arriba para registrarlas.</span>" +
+                      "<span class='lang-fr'>Choisissez exactement trois lectures ci-dessus pour les attester.</span>";
       return;
     }
     if(!name){
       msg.innerHTML = "<span class='lang-en'>Enter your name to record your reading.</span>" +
-                      "<span class='lang-es'>Escriba su nombre para registrar su lectura.</span>";
+                      "<span class='lang-es'>Escriba su nombre para registrar su lectura.</span>" +
+                      "<span class='lang-fr'>Saisissez votre nom pour attester votre lecture.</span>";
       return;
     }
     if(!oath){
       msg.innerHTML = "<span class='lang-en'>Check the box to affirm you have read all three.</span>" +
-                      "<span class='lang-es'>Marque la casilla para afirmar que ha leído las tres.</span>";
+                      "<span class='lang-es'>Marque la casilla para afirmar que ha leído las tres.</span>" +
+                      "<span class='lang-fr'>Cochez la case pour attester que vous avez lu les trois.</span>";
       return;
     }
     msg.textContent = "";
@@ -701,7 +705,8 @@
       var art = b.closest('.entry');
       var li = document.createElement('li');
       li.innerHTML = "<span class='lang-en'>" + art.getAttribute('data-title-en') + "</span>" +
-                     "<span class='lang-es'>" + art.getAttribute('data-title-es') + "</span>";
+                     "<span class='lang-es'>" + art.getAttribute('data-title-es') + "</span>" +
+                     "<span class='lang-fr'>" + art.getAttribute('data-title-fr') + "</span>";
       ul.appendChild(li);
     });
 
