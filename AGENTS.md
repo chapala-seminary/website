@@ -24,24 +24,39 @@ to the brain's `main`. The rules are in `../brain/AGENT_RULES.md`.
 
 ## Staging and release
 
-Robert’s `satoshisound` account has a named PR-review bypass. His own
-same-repository PRs are exempt from the faculty/AI approval gate; build and test
-checks still apply. Wayne and the AI have no bypass.
+Wayne, 18 Oct 2026: Claude and ChatGPT own implementation, independent peer
+review, fixes and beta testing; Wayne keeps curriculum decisions and every
+approval; Robert is an occasional resource for an essential access problem or
+an issue the assistants cannot resolve, not a standing required approver.
 
-New work goes through a PR to `beta`. Record ChatGPT's academic review and
-Claude's check of the exact commit in the PR; Wayne approves it. The separate
-`chapalatheological-ai` account may merge content-only PRs to beta after the
-required checks and Wayne's review. Technical or mixed changes also require
-Robert's review: this includes the engine, Worker, database, registration,
-grading behavior, email, deployment and review policy. Unknown paths and changes
-to JSON wiring count as technical. A translation that needs new language code
-needs technical review too.
+New work goes through a PR to `beta`, opened from the separate
+`chapalatheological-ai` account. The PR body records the exact head commit and
+two review links (see `.github/pull_request_template.md`); a new push makes
+them stale. `tools/release-policy.mjs` classifies every file:
+
+- **Content** (lesson and exam text, readings, translation tables, and page
+  wording or plain markup where every script, style and control stays the
+  same): Wayne approves the exact commit in GitHub; the AI account may then
+  merge to beta after the required checks pass.
+- **Technical or mixed** (engine, Worker, database, registration, grading,
+  certificates, verification, email, deployment, review policy, unknown paths,
+  JSON wiring, new files): Claude and ChatGPT each review the exact commit
+  separately, with two different review links, then Wayne approves it in
+  GitHub. Robert's approval is accepted in place of the AI reviews but is not
+  required.
+
+AI review is evidence in the PR text. It never counts as a GitHub approval, and
+one assistant must never present itself as the other or as a human reviewer.
+Robert's `satoshisound` account keeps its named PR-review bypass for his own
+same-repository PRs; the assistants do not use it.
 
 The AI opens `beta` -> `main` after the exact beta commit has passed deployment
 and live verification. Wayne checks beta, approves, then merges using his human
-`ChapalaTheological1` account. After the initial baseline/token setup, main
-deploys automatically through Actions using the production environment secret; a routine release does not need Robert's
-Mac. Never use Wayne's administrator login for an agent. Read
+`ChapalaTheological1` account; nothing reaches production without that.
+After the initial baseline/token setup, main deploys automatically through
+Actions using the production environment secret. Never use Wayne's
+administrator login for an agent; his one-time authorization for interim pushes
+(18 Oct) ends once `chapalatheological-ai` has Write access. Read
 `docs/beta-staging.md` for safeguards, setup and the initial rollout boundary.
 A staging merge does not replace faculty or translation review.
 

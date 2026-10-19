@@ -1,5 +1,9 @@
 // Run only from the trusted base branch. Unknown paths and JSON control fields
-// require Robert's review; a .json suffix alone does not make a change content.
+// are technical; a .json suffix alone does not make a change content.
+// Wayne, 18 Oct 2026: Claude and ChatGPT own technical work. A technical or
+// mixed PR needs two separate AI reviews of the exact head commit plus Wayne's
+// own GitHub approval; Robert is an occasional resource, not a required
+// approver (his approval is still accepted in place of the AI reviews).
 export const ROBERT = 'satoshisound';
 export const WAYNE = 'ChapalaTheological1';
 export const BOT = 'chapalatheological-ai';
@@ -104,4 +108,29 @@ export function reviewEvidence(body, sha) {
 export function approvedBy(reviews, login, sha) {
   const latest = reviews.filter(review => review.user?.login?.toLowerCase() === login.toLowerCase() && ['APPROVED', 'CHANGES_REQUESTED', 'DISMISSED'].includes(review.state)).sort((a, b) => a.id - b.id).at(-1);
   return latest?.state === 'APPROVED' && latest.commit_id === sha;
+}
+
+// Both review links, separately: one review cannot stand in for the other.
+export function separateReviews(body) {
+  const link = (label) => String(body || '').split(/\r?\n/).map((line) => line.trim())
+    .find((line) => line.startsWith(label))?.slice(label.length).trim().replace(/[#?].*$/, '').replace(/\/+$/, '');
+  const chatgpt = link('ChatGPT review:'), claude = link('Claude review:');
+  return Boolean(chatgpt && claude && chatgpt !== claude);
+}
+
+/* The merge decision for one PR, from facts the checker has already read:
+   pr (GitHub PR JSON), technical (paths that are not content), reviews (all
+   GitHub reviews). AI review evidence is text in the PR body; only a GitHub
+   review by Wayne's own account counts as human approval, and only for the
+   exact head commit (a new push makes every earlier approval and evidence
+   line stale). Returns { ok, kind, reason }. */
+export function decide({ pr, technical, reviews }) {
+  const sha = pr.head.sha;
+  if (pr.draft) return { ok: false, reason: 'Mark the pull request ready for review first.' };
+  if (!reviewEvidence(pr.body, sha)) return { ok: false, reason: `PR body must record Review commit: ${sha}, ChatGPT review: https://..., and Claude review: https://... . These are review evidence, not proof of AI identity.` };
+  const robert = approvedBy(reviews, ROBERT, sha);
+  if (technical.length && !robert && !separateReviews(pr.body))
+    return { ok: false, reason: `Technical changes need two separate reviews of this exact commit (different ChatGPT and Claude review links): ${technical.join(', ')}` };
+  if (!approvedBy(reviews, WAYNE, sha)) return { ok: false, reason: 'Wayne must approve this exact commit in GitHub before it is merged. AI review evidence never replaces his approval.' };
+  return { ok: true, kind: technical.length ? (robert ? 'technical (Robert approved)' : 'technical (Claude and ChatGPT reviewed)') : 'content-only' };
 }

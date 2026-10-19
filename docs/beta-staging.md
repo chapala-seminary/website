@@ -56,20 +56,26 @@ translations, question/answer content and readings in the paths listed in
 templates, course wiring, pass thresholds, grading behavior, database changes,
 registration, email, configuration and deployment/review rules. New languages
 may require code even when their draft packets are content-only. Unknown,
-renamed, removed or structurally changed content files require Robert's review.
-The gate freezes JSON control fields and conservatively sends executable markup
-to Robert. New course/unit wiring needs his review as well. Existing legacy HTML readers
+renamed, removed or structurally changed content files are technical.
+The gate freezes JSON control fields and conservatively treats executable markup
+as technical. New course/unit wiring is technical as well. Existing legacy HTML readers
 allow text-only corrections while every tag, attribute and script/style body
-remains identical. New HTML reader templates, links or markup require Robert;
-pure Markdown readings and offline review packets can be added as content. Content does not
+remains identical. Other site pages (`src/body/**`, `public/*.html`) and the
+French translation tables also count as content when only wording or plain
+markup changes and every script, style and control stays the same; pages for
+certificates, verification, tests, grading, staff and records never do.
+Pure Markdown readings and offline review packets can be added as content. Content does not
 include changing the grading engine; changing academic answer keys is content.
 
-For Wayne/agent PRs, technical and mixed changes need Robert's exact-commit
-approval as well as Wayne's. Code Owners cover technical and academic paths.
-Robert's `satoshisound` account has a named PR-review bypass, and his own
-same-repository PRs are exempt from the faculty/AI approval gate. Build and test
-checks still apply. Wayne and the AI have no bypass. An agent must never
-impersonate a human reviewer.
+Technical and mixed changes need two separate AI reviews of the exact commit
+(Claude and ChatGPT, two different review links in the PR body) and Wayne's
+exact-commit approval in GitHub (Wayne, 18 Oct 2026). Robert's approval is
+accepted in place of the AI reviews but is no longer required. Code Owners
+cover every path through Wayne's account. Robert's `satoshisound` account keeps
+its named PR-review bypass, and his own same-repository PRs are exempt from the
+faculty/AI approval gate. Build and test checks still apply. Wayne and the AI
+have no bypass. An agent must never impersonate a human reviewer or the other
+assistant.
 
 The agent opens a separate PR from current `beta` to `main` after that exact
 commit's beta deployment and live verification are green. Wayne reviews beta,
@@ -83,7 +89,7 @@ failed. Inspect the two steps before retrying. The workflow preserves the checke
 it does not approve a grading-mode switch or reset activation dates.
 
 The current beta contains technical changes, so the first complete promotion
-still requires Robert's technical approval. New requirements marked as drafts
+needs the two AI technical reviews and Wayne's approval. New requirements marked as drafts
 stay optional. Preserve the approved production activation date on later releases.
 
 ## Access and enforcement setup

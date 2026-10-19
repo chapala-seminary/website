@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isContentChange, reviewEvidence, approvedBy } from '../tools/release-policy.mjs';
+import { isContentChange, reviewEvidence, approvedBy, decide, separateReviews, WAYNE, ROBERT, BOT } from '../tools/release-policy.mjs';
+import fs from 'node:fs';
 import { checkProduction } from '../tools/check-production-release.mjs';
 const jsonChange = (before, after, filename = 'src/content/units/CTS/1.json') => ({ filename, status: 'modified', before: JSON.stringify(before), after: JSON.stringify(after) });
 test('question edits are content; JSON scripts, pass rules, unknown fields and new course wiring are technical', () => {
@@ -144,7 +145,12 @@ test('governance API flow requires exact human approvals and tested beta promoti
     const content = run(); assert.equal(content.status, 0, content.stderr);
     assert.notEqual(run({ reviews: [] }).status, 0);
     const tech = { files: [{ filename: 'worker/api.js', status: 'modified' }] };
-    assert.notEqual(run(tech).status, 0);
+    // Wayne, 18 Oct 2026: two separate AI reviews of the exact commit plus his
+    // approval suffice for technical work; one review link reused does not.
+    assert.equal(run(tech).status, 0, 'technical: separate Claude and ChatGPT reviews + Wayne');
+    const oneReview = `Review commit: ${sha}\nChatGPT review: https://claude.ai/share/review\nClaude review: https://claude.ai/share/review`;
+    assert.notEqual(run({ ...tech, pr: { merge_commit_sha: 'b'.repeat(40), state: 'open', draft: false, changed_files: 1, body: oneReview, base: { ref: 'beta', sha: 'base' }, head: { sha, ref: 'content-edit', repo: { full_name: repo } } } }).status, 0);
+    assert.notEqual(run({ ...tech, reviews: [] }).status, 0, 'technical still needs Wayne');
     assert.equal(run({ ...tech, reviews: [review('ChapalaTheological1'), review('satoshisound')] }).status, 0);
     const mainPR = { merge_commit_sha: 'b'.repeat(40), state: 'open', draft: false, changed_files: 1, body: evidence, base: { ref: 'main', sha: 'base' }, head: { sha, ref: 'beta', repo: { full_name: repo } } };
     assert.equal(run({ pr: mainPR }).status, 0);
@@ -229,4 +235,43 @@ test('site page wording and translation tables are content; record, grading and 
       assert.equal(isContentChange(jsonChange(dict, after, filename)), false, 'translation tables hold strings only, without executable markup');
     assert.equal(isContentChange({ filename, status: 'added', after: JSON.stringify(dict) }), false, 'a new table needs technical review');
   }
+});
+
+test('merge decision: assistants own technical review, Wayne approves every exact commit (18 Oct 2026)', () => {
+  const sha = 'b'.repeat(40), old = 'a'.repeat(40);
+  const body = (commit = sha, chatgpt = 'https://docs.google.com/spreadsheets/d/tracker#row-1', claude = 'https://docs.google.com/document/d/claude-review') =>
+    `Change.\nReview commit: ${commit}\nChatGPT review: ${chatgpt}\nClaude review: ${claude}`;
+  const pr = (over = {}) => ({ draft: false, body: body(), head: { sha }, ...over });
+  const review = (login, state, commit_id = sha, id = 1) => ({ id, user: { login }, state, commit_id });
+  const wayne = [review(WAYNE, 'APPROVED')];
+
+  assert.equal(decide({ pr: pr(), technical: [], reviews: wayne }).ok, true, 'content: evidence + Wayne');
+  const tech = decide({ pr: pr(), technical: ['worker/api.js'], reviews: wayne });
+  assert.equal(tech.ok, true, 'technical: two separate AI reviews + Wayne, no Robert');
+  assert.match(tech.kind, /Claude and ChatGPT/);
+
+  const same = 'https://docs.google.com/document/d/one-review';
+  assert.equal(separateReviews(body(sha, same, same + '#again')), false, 'one link cannot count as both reviews');
+  assert.equal(decide({ pr: pr({ body: body(sha, same, same) }), technical: ['worker/api.js'], reviews: wayne }).ok, false, 'technical needs two separate reviews');
+  assert.equal(decide({ pr: pr({ body: body(sha, same, same) }), technical: [], reviews: wayne }).ok, true, 'content keeps the existing evidence rule');
+  assert.equal(decide({ pr: pr({ body: body(sha, same, same) }), technical: ['worker/api.js'], reviews: [...wayne, review(ROBERT, 'APPROVED', sha, 2)] }).ok, true, 'Robert may still approve instead of the AI reviews');
+
+  assert.equal(decide({ pr: pr({ body: body(old) }), technical: [], reviews: wayne }).ok, false, 'stale evidence after a new push');
+  assert.equal(decide({ pr: pr({ body: 'No evidence' }), technical: [], reviews: wayne }).ok, false, 'missing evidence');
+  assert.equal(decide({ pr: pr(), technical: [], reviews: [review(WAYNE, 'APPROVED', old)] }).ok, false, 'Wayne approved an older commit');
+  assert.equal(decide({ pr: pr(), technical: [], reviews: [review(WAYNE, 'APPROVED', sha, 1), review(WAYNE, 'CHANGES_REQUESTED', sha, 2)] }).ok, false, 'his latest review requests changes');
+  assert.equal(decide({ pr: pr(), technical: [], reviews: [review(WAYNE, 'APPROVED', sha, 1), review(WAYNE, 'DISMISSED', sha, 2)] }).ok, false, 'a dismissed approval does not count');
+  assert.equal(decide({ pr: pr(), technical: [], reviews: [] }).ok, false, 'no human approval');
+  for (const login of [BOT, ROBERT, 'someone-else'])
+    assert.equal(decide({ pr: pr(), technical: [], reviews: [review(login, 'APPROVED')] }).ok, false, `${login} cannot stand in for Wayne`);
+  assert.equal(decide({ pr: pr({ draft: true }), technical: [], reviews: wayne }).ok, false, 'drafts are not merged');
+});
+
+test('the gate runs trusted base-branch policy, never code from the proposed branch', () => {
+  const workflow = fs.readFileSync('.github/workflows/release-governance.yml', 'utf8');
+  assert.match(workflow, /pull_request_target:/, 'runs in the base repository context');
+  assert.match(workflow, /ref: \$\{\{ steps\.policy\.outputs\.ref \}\}/, 'checks out the PR base commit, so a PR cannot loosen the policy that judges it');
+  assert.match(workflow, /persist-credentials: false/);
+  for (const type of ['synchronize', 'edited']) assert.match(workflow, new RegExp(`types: \\[[^\\]]*${type}`), `rechecked on ${type}`);
+  assert.match(workflow, /pull_request_review:/, 'rechecked when a review is submitted or dismissed');
 });
