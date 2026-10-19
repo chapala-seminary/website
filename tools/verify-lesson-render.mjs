@@ -61,6 +61,14 @@ const sig = (el) => {
 };
 
 const walk = (root) => {
+  // The country menu is shared registration, not lesson content. A select with
+  // one option per country changes every unit page at once. Compare the slot,
+  // not the list.
+  const country = root.querySelector('#cts-register select#regCountry');
+  if (country) {
+    country.parentNode.removeAttribute('class');
+    country.replaceWith(parse('<input id="regCountry" type="text" autocomplete="country-name">').firstChild);
+  }
   // The same SEO change initially hides registration with CSS and adds a
   // course-overview link to the shared footer. Reconstruct the old frame for
   // this lesson comparison; registration and overview links have UI/SEO checks.
