@@ -17,6 +17,22 @@ export const PROGRAM_NAMES = {
   mdiv: { en: 'Master of Divinity (M.Div.)', es: 'Maestría en Divinidad (M.Div.)', fr: 'Master en théologie pastorale (M.Div.)' },
 };
 
+/* The title of record, built on the server from the award and the student's
+ * record (ChatGPT's final audit, item B, 18 Oct 2026): browser-supplied
+ * wording never reaches a certificate. Same form the pages have always sent
+ * (cts-certify.js title/trackLabel), so existing titles and the French and
+ * /verify rendering (programIn) are unchanged:
+ *   degree  -> "Master of Theology"
+ *   course  -> "1 Peter Intensive — Master of Theology" (the student's program)
+ * null when the course is unknown. */
+const PROGRAM_TITLE = { cert: 'Certificate of Ministry', assoc: 'Associate of Divinity', thm: 'Master of Theology', mdiv: 'Master of Divinity' };
+const DEGREE_TITLE = { certificate: 'Certificate of Ministry', associate: 'Associate of Divinity', thm: 'Master of Theology', mdiv: 'Master of Divinity' };
+export function officialTitle(level, course, program) {
+  if (level !== 'course') return DEGREE_TITLE[level] || null;
+  const name = courseTitle(course, 'en');
+  return name ? `${name} — ${PROGRAM_TITLE[program] || PROGRAM_TITLE.cert}` : null;
+}
+
 /* A course by unit slug ("nt") or completion code ("CTSNT", "WISESPEAK"). */
 export function courseTitle(course, lang) {
   const key = String(course || '');

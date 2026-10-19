@@ -259,7 +259,8 @@ for (const level of ['certificate', 'associate', 'thm', 'mdiv'])
 
 // Pass the rest of 1 Peter and the certificate is supported.
 await jpost('/api/sync', { code: CODE, progress: Array.from({ length: 12 }, (_, i) => ({ course: '1peter', unit: i + 1, completedAt: T_LATE })) });
-const cert = await jpost('/api/certificate', { code: CODE, level: 'course', course: '1peter', title: '1 Peter Intensive', page: 'CTS1PeterCertificate.html' });
+// The browser's title is ignored: the server names the award (ChatGPT's final audit, item B).
+const cert = await jpost('/api/certificate', { code: CODE, level: 'course', course: '1peter', title: 'Doctor of Divinity, honoris causa', page: 'CTS1PeterCertificate.html' });
 ok(cert.status === 201, `issuing a certificate returned ${cert.status}`);
 const VC = cert.body?.verifyCode;
 
@@ -319,6 +320,14 @@ ok(ws1.status === 201, `a single-page course certificate is issued once its comp
 const v = await jget(`/api/verify/${VC}`);
 ok(v.status === 200 && v.body?.valid === true && v.body?.name === 'María Cruz',
   'the verification API confirms a real certificate under the current name');
+ok(v.body?.title === '1 Peter Intensive — Master of Theology',
+  `the certificate carries the server's title, not the one the browser sent (${v.body?.title})`);
+const wsv = await jget(`/api/verify/${ws1.body?.verifyCode}`);
+ok(wsv.body?.title && !/^Preaching$/.test(wsv.body.title) && /— Master of Theology$/.test(wsv.body.title),
+  `a single-page course certificate is named by the server too (${wsv.body?.title})`);
+const degreeTitle = await jpost('/api/certificate', { code: CODE, level: 'thm', title: '<b>Doctorate</b>' });
+ok(degreeTitle.status !== 201 || (await jget(`/api/verify/${degreeTitle.body.verifyCode}`)).body?.title === 'Master of Theology',
+  'a degree is named by the server, never by the browser');
 ok((await jget('/api/verify/ZZZZZZZZZZ')).status === 404, 'an unknown verification code is not confirmed');
 
 const page = await get(`/verify/${VC}`);

@@ -31,7 +31,7 @@ import { courseShortfall, textbookShortfall, exemptionsFor, degreeShortfall, res
 import catalog from './catalog.json';
 import { emailConfigured, emailLogOnly, sendEmail, verificationEmail, certificateEmail, codeEmail } from './email.js';
 import { notify, notifyBatch, retryFailed } from './notify.js';
-import { awardTitle } from './award-names.js';
+import { awardTitle, officialTitle } from './award-names.js';
 
 const MAX = { name: 120, email: 160, country: 80, track: 24, goal: 400, heard: 40, title: 200, course: 64, code: 40 };
 const TRACKS = new Set(['cert', 'certificate', 'associate', 'thm', 'mdiv']);
@@ -407,7 +407,10 @@ async function issueCertificate(request, env) {
   const level = (str(b.level, 24, { required: true, field: 'level' }) || '').toLowerCase();
   if (!LEVELS.has(level)) throw new HttpError(400, 'level must be one of: ' + [...LEVELS].join(', '));
   let course = str(b.course, MAX.course, { required: level === 'course', field: 'course' });
-  const title = str(b.title, MAX.title, { required: true, field: 'title' });
+  // The page may still send a title (older pages do); it is checked for size
+  // and then ignored. The title of record is the server's (officialTitle,
+  // set below once the course is resolved).
+  str(b.title, MAX.title, { field: 'title' });
   // The page the student is on, for the link in their email. A filename only,
   // and only one this site serves; anything else is dropped, not echoed.
   const page = /^[A-Za-z0-9_]+\.html$/.test(String(b.page || '')) ? String(b.page) : null;
@@ -446,6 +449,9 @@ async function issueCertificate(request, env) {
     const why = degreeShortfall(level, rows.results ?? [], studentLevel(student.track, student.goal), plan?.substitutions);
     if (why) return fail(409, why);
   }
+
+  const title = officialTitle(level, course, studentLevel(student.track, student.goal));
+  if (!title) throw new HttpError(400, 'cannot name this award');
 
   // Re-issuing the same award returns the same code rather than a second one,
   // so a student who prints their certificate twice does not end up with two
