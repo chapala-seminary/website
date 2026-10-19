@@ -12,8 +12,17 @@ export function contentRule(path) {
   if (/^public\/CTS_[^/]+_digest\.html$/.test(path) || /^public\/CTS[^/]*(?:Lectura[^/]*|Readings)\.html$/.test(path)) return 'reading-html';
   if (/^docs\/readers\/.+\.md$/.test(path) || path === 'docs/content-changes.md') return 'prose';
   if (/^_review\/(?:[^/]+\/)*[^/]+\.(?:json|md|pdf|html)$/.test(path)) return 'review';
+  // Wayne, 18 Oct 2026: routine wording and translation on the site's pages
+  // is content. Pages that grade, certify, verify or hold records stay
+  // technical, and so does any change to a page's markup (text-only edits).
+  if (RECORD_PAGES.test(path)) return null;
+  if (/^src\/body\/(?:[^/]+\/)*[^/]+\.html$/.test(path) || /^public\/[^/]+\.html$/.test(path)) return 'page-text';
+  if (path === 'src/data/french-landing.json' || /^src\/data\/french-pages\/[^/]+\.json$/.test(path)) return 'dictionary';
   return null;
 }
+// Grading, certificates, verification, student records and tools: never
+// content, whatever the edit (Wayne's list of what keeps independent review).
+const RECORD_PAGES = /(?:certificate|verify|test|exam|grad|staff|admin|record|link-manager|tracker)[^/]*$/i;
 // Legacy readers mix prose with scripts. Only text-node edits can pass:
 // every tag/attribute, comment, and script/style body stays byte-identical.
 export function readingStructure(html) {
@@ -29,6 +38,38 @@ export function isContentChange(file) {
   const rule = contentRule(file.filename);
   if (!rule || ['removed', 'renamed'].includes(file.status)) return false;
   if (rule === 'reading-html') return Boolean(file.before && file.after && readingStructure(file.before) === readingStructure(file.after));
+  if (rule === 'page-text') {
+    // Wording and plain markup (a new paragraph, card or link) may change;
+    // every script and style block stays byte-identical, and nothing
+    // executable, no form control and no event handler may be added.
+    if (!file.before || !file.after) return false;
+    // Search-engine data (<script type="application/ld+json">) is text, not
+    // code: it may change if it still parses as JSON; every other script and
+    // style block stays byte-identical.
+    const ld = /^<script\s+type="application\/ld\+json">([\s\S]*)<\/script\s*>$/i;
+    const blocks = (html) => (html.match(/<(script|style)\b[^>]*>[\s\S]*?<\/\1\s*>/gi) || []).map((block) => {
+      const data = block.match(ld);
+      if (!data) return block;
+      try { JSON.parse(data[1]); return 'ld+json'; } catch { return block + ' (invalid JSON)'; }
+    });
+    const before = blocks(file.before), after = blocks(file.after);
+    if (JSON.stringify(before) !== JSON.stringify(after) || after.some((block) => block.endsWith(' (invalid JSON)'))) return false;
+    const outside = (html) => html.replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, '');
+    const controls = (html) => (outside(html).match(/<!--[\s\S]*?-->|<![^>]*>|<\/?[a-zA-Z](?:"[^"]*"|'[^']*'|[^'">])*>/g) || []).filter((tag) => unsafeMarkup.test(tag)).join('\n');
+    // The page's existing controls (a registration form, say) may stay; the
+    // list of them must not change.
+    return controls(file.after) === controls(file.before);
+  }
+  if (rule === 'dictionary') {
+    // A translation table: the same flat object of strings, so no setting,
+    // list or nested control can ride along. Markup is checked below.
+    try {
+      const after = JSON.parse(file.after);
+      if (!file.before || unsafeMarkup.test(file.after)) return false;
+      return Boolean(after && typeof after === 'object' && !Array.isArray(after)
+        && Object.values(after).every((value) => typeof value === 'string'));
+    } catch { return false; }
+  }
   if (rule === 'review') return true; // Offline faculty packets, not imported or served.
   if (unsafeMarkup.test(file.after || '')) return false;
   if (rule === 'prose') return true;

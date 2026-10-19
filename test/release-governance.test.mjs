@@ -199,3 +199,34 @@ test('the actual workflow resolver refuses policy from an unprotected PR base be
     assert.notEqual(run('main', 'a'.repeat(40), '23; echo unsafe').status, 0);
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
+
+test('site page wording and translation tables are content; record, grading and certificate pages are not (Wayne, 18 Oct 2026)', () => {
+  const page = '<section id="faq"><script>boot()</script><h3><span class="en">Is CTS accredited?</span></h3><p><span class="en">Old answer.</span></p></section>';
+  for (const filename of ['src/body/index/tail.html', 'public/CTSAbout.html']) {
+    assert.equal(isContentChange({ filename, status: 'modified', before: page, after: page.replace('Old answer.', 'No. CTS is not accredited.') }), true);
+    assert.equal(isContentChange({ filename, status: 'modified', before: page, after: page.replace('</section>', '<section id="start-group" style="background:#007C83"><h2>Start a Study Group</h2><a href="mailto:info@chapalaseminary.org">Write</a></section></section>') }), true, 'a plain new card is content');
+    for (const after of [page.replace('boot()', 'other()'), page.replace('<p>', '<p onclick="run()">'), page.replace('</section>', '<form><input></form></section>'),
+      page.replace('</section>', '<button>Go</button></section>'), page.replace('</section>', '<script>x()</script></section>'), page.replace('</section>', '<a href="javascript:run()">x</a></section>')])
+      assert.equal(isContentChange({ filename, status: 'modified', before: page, after }), false, 'scripts, styles, controls and handlers stay frozen');
+    assert.equal(isContentChange({ filename, status: 'added', after: page }), false, 'a new page needs technical review');
+  }
+  const form = '<div><button id="reg-save" onclick="ctsRegister()">Save</button><p>Old answer.</p></div>';
+  assert.equal(isContentChange({ filename: 'src/body/index/head.html', status: 'modified', before: form, after: form.replace('Old answer.', 'New answer.') }), true, 'an existing control may stay');
+  assert.equal(isContentChange({ filename: 'src/body/index/head.html', status: 'modified', before: form, after: form.replace('ctsRegister()', 'other()') }), false, 'an existing handler cannot be rewritten');
+  assert.equal(isContentChange({ filename: 'src/body/index/head.html', status: 'modified', before: form, after: form.replace('<p>', '<p title=">" onclick="run()">') }), false, 'a quoted > cannot hide a handler');
+  const faq = '<script type="application/ld+json">{"text": "Old answer."}</script><script>boot()</script><p>Old answer.</p>';
+  assert.equal(isContentChange({ filename: 'src/body/index/head.html', status: 'modified', before: faq, after: faq.replaceAll('Old answer.', 'No. CTS is not accredited.') }), true, 'search-engine FAQ data may change with the wording');
+  assert.equal(isContentChange({ filename: 'src/body/index/head.html', status: 'modified', before: faq, after: faq.replace('{"text": "Old answer."}', '{"text": broken') }), false, 'it must still be valid JSON');
+  assert.equal(isContentChange({ filename: 'src/body/index/head.html', status: 'modified', before: faq, after: faq.replace('application/ld+json">', 'application/ld+json">x()</script><script>') }), false, 'it cannot open a script block');
+  for (const filename of ['public/CTSThMCertificate.html', 'public/CTSAssociateCertificate.html', 'public/ethics_certificate.html', 'public/verify.html',
+    'public/CTSTextbookTeachingTest.html', 'public/cts-link-manager.html', 'src/body/rooms/CTSExam.html', 'src/data/french-pages/CTSThMCertificate.json'])
+    assert.equal(isContentChange({ filename, status: 'modified', before: page, after: page.replace('Old answer.', 'New answer.') }), false, `${filename} keeps independent review`);
+
+  const dict = { 'Is CTS accredited?': 'Le STC est-il accrédité ?', 'Old answer.': 'Ancienne réponse.' };
+  for (const filename of ['src/data/french-landing.json', 'src/data/french-pages/CTSAbout.json']) {
+    assert.equal(isContentChange(jsonChange(dict, { ...dict, 'No. CTS is not accredited.': 'Non. Le STC n’est pas accrédité.' }, filename)), true);
+    for (const after of [{ ...dict, pass: 50 }, { ...dict, nested: { x: 'y' } }, { ...dict, list: ['a'] }, { ...dict, 'x': '<script>run()</script>' }, { ...dict, 'y': '<a onclick="run()">z</a>' }])
+      assert.equal(isContentChange(jsonChange(dict, after, filename)), false, 'translation tables hold strings only, without executable markup');
+    assert.equal(isContentChange({ filename, status: 'added', after: JSON.stringify(dict) }), false, 'a new table needs technical review');
+  }
+});
