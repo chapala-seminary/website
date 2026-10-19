@@ -19,6 +19,7 @@ CONFIG=test/wrangler.local.jsonc
 
 node --test test/release-governance.test.mjs
 node test/eight-optional.test.mjs
+node test/grading-mode.test.mjs
 node test/countries.test.mjs
 node test/reference-fixture.test.mjs
 node test/single-completion.test.mjs
@@ -243,6 +244,7 @@ node tools/verify-editable.mjs
 node tools/verify-partials.mjs
 
 API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/api.test.mjs
+API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/track-history.test.mjs
 API_BASE="http://127.0.0.1:$PORT" SYNC_WRITE_STATE="$STATE" node test/sync-writes.test.mjs
 API_BASE="http://127.0.0.1:$PORT" EMAIL_TEST_STATE="$STATE" node test/email-options.test.mjs
 API_BASE="http://127.0.0.1:$PORT" node test/student-language.test.mjs
