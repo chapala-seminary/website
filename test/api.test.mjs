@@ -9,6 +9,8 @@
 // the record -- and behaviour an attacker probes, like whether a wrong code is
 // distinguishable from an unknown one.
 
+import fs from 'node:fs';
+
 const BASE = process.env.API_BASE || 'http://127.0.0.1:8799';
 
 let checks = 0;
@@ -81,17 +83,28 @@ ok((await jpost('/api/sync', { progress: [] })).status === 400, 'syncing with no
 const T_LATE = '2026-06-01T10:00:00.000Z';
 const T_EARLY = '2026-01-15T08:30:00.000Z';
 
+// Production made the Master's textbook and reading tests required on
+// 15 Oct 2026 (src/data/required-from.json), and this Worker runs at today's
+// date, so a master's-track completion now waits for its course's tests.
+// Scenarios that test something else (recording, notices, certificates,
+// degree counts) report the passes alongside the completions; the scenarios
+// about holding a completion still send none.
+const CATALOG = JSON.parse(fs.readFileSync('worker/catalog.json', 'utf8'));
+const passes = (codes) => Object.entries(CATALOG.textbooks || {})
+  .filter(([, t]) => codes.map((c) => String(c).toUpperCase()).includes(t.code))
+  .map(([slug]) => ({ slug, passedAt: T_LATE }));
+
 await jpost('/api/sync', {
   code: CODE,
   progress: [{ course: '1peter', unit: 1, completedAt: T_LATE }, { course: '1peter', unit: 2, completedAt: T_LATE }],
-  doneCodes: ['CTSOTS'],
+  doneCodes: ['CTSOTS'], textbooks: passes(['CTSOTS']),
 });
 
 // The same unit, completed earlier on another device. The earlier time must win.
 let s = await jpost('/api/sync', {
   code: CODE,
   progress: [{ course: '1peter', unit: 1, completedAt: T_EARLY }],
-  doneCodes: ['CTSNT'],
+  doneCodes: ['CTSNT'], textbooks: passes(['CTSNT']),
 });
 const find = (st, course, unit) => st.progress.find(p => p.course === course && p.unit === unit);
 ok(find(s.body, '1peter', 1)?.completed_at === T_EARLY, 'the earlier completion time wins');
@@ -115,7 +128,7 @@ ok(told(repeat.body).length === 0, `re-reporting both courses from another devic
   ok(lv(st) === 'assoc', `an Associate-level completion is recorded as such (${lv(st)})`);
   st = await jpost('/api/sync', { code: c, progress: [], doneCodes: ['CTSACTS'], completionTracks: {} });
   ok(lv(st) === 'assoc', `a device reporting it at Certificate level does not lower it (${lv(st)})`);
-  st = await jpost('/api/sync', { code: c, progress: [], doneCodes: ['CTSACTS'], completionTracks: { CTSACTS: 'mdiv' } });
+  st = await jpost('/api/sync', { code: c, progress: [], doneCodes: ['CTSACTS'], completionTracks: { CTSACTS: 'mdiv' }, textbooks: passes(['CTSACTS']) });
   ok(lv(st) === 'mdiv', `a master's-level report raises it (${lv(st)})`);
   const cert = await jpost('/api/register', { name: 'Cert Twentyfive', email: 'cert-twentyfive@example.org', track: 'cert' });
   const codes = Object.keys((await jget('/api/catalog')).body.completions).slice(0, 44);
@@ -296,11 +309,11 @@ for (const [course, slug] of [['COUNSELING', 'counseling'], ['STORYTEL', 'narrat
   const payload = { code: r.body.code, doneCodes: [course], completionTracks: { [course]: 'mdiv' } };
   const held = await jpost('/api/sync', payload);
   ok(!held.body.completions.some(c => c.code === course), `${course}: no official Master's completion before textbook pass`);
-  const released = await jpost('/api/sync', { ...payload, textbooks: [{ slug, passedAt: T_LATE }] });
+  const released = await jpost('/api/sync', { ...payload, textbooks: passes([course]) }); // its textbook, and its readings test where in force
   ok(released.body.completions.some(c => c.code === course && c.track === 'mdiv'), `${course}: textbook pass releases official Master's completion`);
 }
 
-await jpost('/api/sync', { code: CODE, doneCodes: ['WISESPEAK'] });
+await jpost('/api/sync', { code: CODE, doneCodes: ['WISESPEAK'], textbooks: passes(['WISESPEAK']) });
 const ws1 = await jpost('/api/certificate', { code: CODE, level: 'course', course: 'WISESPEAK', title: 'Preaching' });
 ok(ws1.status === 201, `a single-page course certificate is issued once its completion is recorded (${ws1.status}: ${ws1.body?.error})`);
 
@@ -345,13 +358,13 @@ const filler = (n) => ELECTIVES.slice(0, n);
 // 12 courses but not the foundation: no Certificate of Ministry. This
 // student is mdiv and sends no track list, so every completion counts as
 // earned on their track (the pre-0003 browser case).
-await jpost('/api/sync', { code: CODE, doneCodes: filler(12) });
+await jpost('/api/sync', { code: CODE, doneCodes: filler(12), textbooks: passes(filler(12)) });
 let d = await jpost('/api/certificate', { code: CODE, level: 'certificate', title: 'Certificate of Ministry' });
 ok(d.status === 409 && /required courses/.test(d.body?.error || ''),
   `12 electives without the foundation do not earn the Certificate of Ministry (${d.status}: ${d.body?.error})`);
 
 // foundation plus five: yes
-await jpost('/api/sync', { code: CODE, doneCodes: FOUNDATION });
+await jpost('/api/sync', { code: CODE, doneCodes: FOUNDATION, textbooks: passes(FOUNDATION) });
 d = await jpost('/api/certificate', { code: CODE, level: 'certificate', title: 'Certificate of Ministry' });
 ok(d.status === 201, `foundation + 5 electives earns the Certificate of Ministry (${d.status}: ${d.body?.error})`);
 d = await jpost('/api/certificate', { code: CODE, level: 'associate', title: 'Associate of Divinity' });
@@ -371,7 +384,7 @@ d = await jpost('/api/certificate', { code: CODE, level: 'mdiv', title: 'Master 
 ok(d.status === 409 && /CTSLA|COUNSELING|CTSWORSHIP|CTSGENESIS/.test(d.body?.error || ''),
   `without the textbook tests the core's textbook courses are held and the M.Div. refused (${d.status}: ${d.body?.error})`);
 await jpost('/api/sync', { code: CODE, doneCodes: [...MDIV_CORE, ...filler(10)],
-  textbooks: ['language', 'counseling', 'worship', 'genesisreadings'].map((slug) => ({ slug, passedAt: T_LATE })) });
+  textbooks: passes([...MDIV_CORE, ...filler(10)]) });
 d = await jpost('/api/certificate', { code: CODE, level: 'mdiv', title: 'Master of Divinity' });
 ok(d.status === 201, `the 20-course core + 10 electives earns the M.Div. (${d.status}: ${d.body?.error})`);
 
@@ -397,7 +410,7 @@ ok(d.status === 201, `but they earn the Certificate of Ministry (${d.status}: ${
 // ...and switching to the M.Div. afterwards does not turn certificate-track
 // completions into master's ones: the track a completion was earned on is
 // kept, and a completion sent with a master's track is counted there.
-await jpost('/api/sync', { code: certReg.body.code, student: { track: 'mdiv' }, doneCodes: [...MDIV_CORE, ...filler(10), 'CTSJOHN'], completionTracks: { CTSJOHN: 'mdiv' } });
+await jpost('/api/sync', { code: certReg.body.code, student: { track: 'mdiv' }, doneCodes: [...MDIV_CORE, ...filler(10), 'CTSJOHN'], completionTracks: { CTSJOHN: 'mdiv' }, textbooks: passes(['CTSJOHN']) });
 let st = await jget(`/api/student/${certReg.body.code}`);
 const byCode = Object.fromEntries((st.body?.completions || []).map(c => [c.code, c]));
 ok(byCode.CTSOTS?.track === 'cert' && byCode.CTSJOHN?.track === 'mdiv',
