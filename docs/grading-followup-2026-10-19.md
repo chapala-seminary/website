@@ -32,9 +32,9 @@ resumes submission in the same sitting, without losing typing or adding a lock.
 - New model-path regression tests cover Genesis 3:15 acceptance with optional
   support omitted, evidence preservation, quote-only/echo feedback, contradictions,
   missing essential points, pending, empty feedback, verdict correction and
-  unaffected fill-in feedback in English, Spanish and French: 16 tests pass.
+  unaffected fill-in feedback in English, Spanish and French: 19 tests pass.
 - New textbook recovery regression: **before**, three failures (duplicate
-  warning in each language); **after**, all 24 checks pass, including preserved
+  warning in each language); **after**, all 30 current recovery checks pass, including preserved
   input, no premature submit/lock, same sitting, retry and reload persistence.
   This uses a local API stub to inject a service failure safely.
 - Real Workers AI, synthetic answers: all 18 targeted verdict/feedback cases
@@ -68,7 +68,7 @@ resumes submission in the same sitting, without losing typing or adding a lock.
   or regenerate that baseline. Focused grading suites are recorded below.
 
 Focused grading suites: 202 API assertions, 199 faculty-grading assertions and
-159 browser checks against the stubbed grading API and 97 end-to-end browser
+165 browser checks against the stubbed grading API and 97 end-to-end browser
 checks against the real local Worker/D1 pass. The expanded single-page course
 matrix is recorded with the final PR validation results. The UI registration
 fixture now supplies the existing required country field; the separate
@@ -104,3 +104,29 @@ session/findings and fix-verification references. Synthetic local fixtures
 remain only in the disposable `.wrangler-local` database and browser context.
 Diagnostic output is under `/private/tmp/cts-grading-followup-*`; these paths
 are local, temporary evidence, not permanent CI or release artifacts.
+
+## Claude review repairs
+
+Robert authorized the private patch/context review. Claude reviewed
+`3aee016108ac6cd8571e7a25e8285ccb0bd56ee5` and identified a medium retry race:
+pressing Submit during a widget retry could grade the same batch twice. The
+widget now shares one in-flight promise between the two callers. The browser
+regression explicitly clicks Submit while the delayed retry is running, counts
+grading calls, and verifies a single final submission in EN/ES/FR.
+
+The accepted-answer fallback now gives confirmation when every rubric point is
+made. Optional support advice is offered only when an accepted answer omits
+another rubric point, and the wording explicitly says “you may.” This changes
+no verdict or passing requirement. Focused feedback coverage grows to 19 tests.
+
+Claude also noted that copied-word detection uses fixed thresholds. This is a
+bounded safeguard against answer echoes, not a semantic assessment of feedback
+quality: a genuine short confirmation can be replaced, and an echo with enough
+new wrapping can be retained. Useful explanations are preserved by the existing
+regressions; this limitation changes no academic grade and remains documented.
+
+The first Claude review disclosed gaps in startup and supporting-helper reads.
+Consult PR127 for the repaired exact-commit review, its coverage and the final
+validation results. The required full suite was rerun after these repairs and
+still stops at the same 466-page lesson-render baseline mismatch. The full-suite
+and faculty evaluation gates above remain separate from code review.

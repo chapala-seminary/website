@@ -3,7 +3,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { test } from 'node:test';
-import { echoesAnswer } from '../worker/grading/feedback.js';
+import { echoesAnswer, shortAnswerFeedback } from '../worker/grading/feedback.js';
 import { gradeBatch } from '../worker/grading/model.js';
 
 const unit = JSON.parse(fs.readFileSync('src/content/units/CTS/1.json'));
@@ -36,6 +36,13 @@ async function graded(lang, { verdict = 'met', feedback = answers[lang], contrad
 }
 
 for (const lang of ['en', 'es', 'fr']) {
+  test(`${lang}: an accepted answer with all points made receives confirmation without invented missing support`, () => {
+    const result = { verdict: 'met', feedback: answers[lang], points: key.rubric.points.map((p) => ({ id: p.id, made: true })) };
+    const feedback = shortAnswerFeedback(result, answers[lang], lang);
+    assert.equal(echoesAnswer(feedback, answers[lang]), false);
+    assert.doesNotMatch(feedback, /support|apoyo|appuyer/);
+    assert.match(feedback, { en: /understanding/, es: /comprensión/, fr: /compréhension/ }[lang]);
+  });
   test(`${lang}: accepted central answer with optional support omitted receives guidance, not an echo`, async () => {
     const r = await graded(lang);
     assert.equal(r.verdict, 'met');

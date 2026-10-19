@@ -507,10 +507,14 @@ if (want(14)) {
     await p.waitForSelector('.cts-grade-trouble');
     ok(await p.locator('.cts-grade-trouble').count() === 1, `${lang}: one service warning, without a second misleading connection warning`);
     ok(await p.locator('input[data-cts-fill="0"]').inputValue() === first, `${lang}: a batch failure keeps the typed answer`);
-    ok(stub.calls('/submit').length === 0 && await ls(p, 'cts_textbook_cults_lock') === null, `${lang}: a failed grade request does not submit or lock the exam`);
+    ok(stub.calls('/attempt/' + id + '/submit').length === 0 && await ls(p, 'cts_textbook_cults_lock') === null, `${lang}: a failed grade request does not submit or lock the exam`);
+    stub.delay['/grade'] = 600;
     await p.locator('[data-cts-retry]').first().click();
+    await p.locator('#tb-submit').click();
     ok(await waitText(p, { en: 'Passed:', es: 'Aprobado:', fr: 'Réussi' }[lang]), `${lang}: retry completes grading and submission`);
     ok(attemptCalls(stub).length === 1 && [...stub.attempts.keys()][0] === id, `${lang}: retry keeps the same sitting`);
+    ok(stub.calls('/grade').length === 3, `${lang}: Submit during retry shares its two grading batches instead of duplicating them`);
+    ok(stub.calls('/attempt/' + id + '/submit').length === 1, `${lang}: concurrent retry and Submit finalize the sitting once`);
     ok(await p.locator('.cts-grade-trouble').count() === 0, `${lang}: the warning clears on recovery`);
     await p.reload({ waitUntil: 'load' });
     ok(await waitText(p, { en: 'Passed on', es: 'Aprobado el', fr: 'Réussi le' }[lang]), `${lang}: the pass survives reload`);

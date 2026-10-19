@@ -299,12 +299,16 @@
     /* Submit marks every answer typed and not yet checked, as Check would, ten
        to a call (the server takes one to ten items). Resolves false if a call
        did not succeed -- the widget then shows the notice with its retry. */
+    var uncheckedFlight = null;
     function sendUnchecked() {
+      // Retry and Submit can both arrive while this batch is being graded.
+      // Join the same work so answers and the eventual submit are not repeated.
+      if (uncheckedFlight) return uncheckedFlight;
       var items = [];
       qs.forEach(function (q, i) { if (!st.fillChecked[i] && String(st.fillAnswers[i] || "").trim()) items.push({ qid: q.qid, answer: st.fillAnswers[i] }); });
       var chunks = []; while (items.length) chunks.push(items.splice(0, 10));
       trouble = null;
-      return chunks.reduce(function (p, chunk) {
+      var work = chunks.reduce(function (p, chunk) {
         return p.then(function (ok) {
           if (!ok) return false;
           chunk.forEach(function (c) { busy[c.qid] = true; }); render();
@@ -316,6 +320,8 @@
           });
         });
       }, Promise.resolve(true));
+      uncheckedFlight = work.then(function (ok) { uncheckedFlight = null; return ok; }, function (err) { uncheckedFlight = null; throw err; });
+      return uncheckedFlight;
     }
     function liveScore() { var c = 0; qs.forEach(function (q) { if (res[q.qid] && res[q.qid].verdict === "right") c++; }); return c; }
 

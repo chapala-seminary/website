@@ -17,9 +17,14 @@ export function echoesAnswer(feedback, answer) {
 
 const FALLBACK = {
   met: {
-    en: 'Your answer meets the required points. To develop your explanation further, add support from the assigned passage or course material.',
-    es: 'Su respuesta cumple los puntos requeridos. Para desarrollar más su explicación, añada apoyo del pasaje asignado o del material del curso.',
-    fr: 'Votre réponse satisfait aux points requis. Pour développer votre explication, appuyez-vous sur le passage indiqué ou le contenu du cours.',
+    en: 'Your answer meets the required points and demonstrates understanding of the question.',
+    es: 'Su respuesta cumple los puntos requeridos y demuestra comprensión de la pregunta.',
+    fr: 'Votre réponse satisfait aux points requis et montre votre compréhension de la question.',
+  },
+  metSupport: {
+    en: 'Your answer meets the required points. To develop your explanation further, you may add support from the assigned passage or course material.',
+    es: 'Su respuesta cumple los puntos requeridos. Para desarrollar más su explicación, puede añadir apoyo del pasaje asignado o del material del curso.',
+    fr: 'Votre réponse satisfait aux points requis. Pour développer votre explication, vous pouvez vous appuyer sur le passage indiqué ou le contenu du cours.',
   },
   partly: {
     en: 'Your answer addresses part of the question, but some required points are missing. Review the assigned material and explain how it supports your response.',
@@ -34,7 +39,10 @@ const FALLBACK = {
 };
 
 export function shortAnswerFeedback(result, answer, lang) {
-  const fallback = FALLBACK[result.verdict];
+  // A met verdict already satisfies every essential point. Offer optional
+  // development advice only when the validated result omits another point.
+  const offerSupport = result.verdict === 'met' && result.points?.some((p) => !p.made);
+  const fallback = offerSupport ? FALLBACK.metSupport : FALLBACK[result.verdict];
   if (!fallback) return result.feedback;
   if (result.feedback && !echoesAnswer(result.feedback, answer)) return result.feedback;
   return fallback[lang] || fallback.en;
