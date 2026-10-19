@@ -18,6 +18,8 @@ STATE=.wrangler-local
 CONFIG=test/wrangler.local.jsonc
 
 node --test test/release-governance.test.mjs
+node test/eight-optional.test.mjs
+node test/grading-mode.test.mjs
 node test/countries.test.mjs
 node test/reference-fixture.test.mjs
 node test/catalog-landing.test.mjs
@@ -222,7 +224,7 @@ node tools/verify-language-pages.mjs dist
 # the page it replaced, element for element, and that automatic translation
 # will not overwrite work a person did.
 node tools/verify-question-counts.mjs dist
-node tools/verify-lesson-render.mjs
+node tools/verify-lesson-source.mjs
 node test/lesson-translation.mjs
 node test/french-schema.mjs
 node test/french-cms.mjs
@@ -244,6 +246,7 @@ node tools/verify-editable.mjs
 node tools/verify-partials.mjs
 
 API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/api.test.mjs
+API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/track-history.test.mjs
 API_BASE="http://127.0.0.1:$PORT" SYNC_WRITE_STATE="$STATE" node test/sync-writes.test.mjs
 API_BASE="http://127.0.0.1:$PORT" EMAIL_TEST_STATE="$STATE" node test/email-options.test.mjs
 API_BASE="http://127.0.0.1:$PORT" node test/student-language.test.mjs
@@ -262,11 +265,21 @@ API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/requ
 # above and below ask for the old /api/sync with x-test-grading-mode: shadow.
 API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/grading-api.test.mjs
 
+# The answer-disclosure policy (Wayne, 18 Oct 2026): while an attempt is open,
+# and after one that failed, right or wrong only -- no right option,
+# explanation, answer wanted, model answer, teaching passage or AI feedback on
+# a wrong answer, in any reply; a lost MC reply retried returns the stored
+# choice; a pass opens the review (worker/grading/attempts.js disclosureOf).
+API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/answer-disclosure.test.mjs
+
 # The faculty's grading pages (/staff/grading, worker/staff-grading.js):
 # appeals that pass a unit, pending answers, blind calibration and its
 # agreement figures, fill-in rulings and tools/apply-accepts.mjs, possible
 # copying, usage, the Monday digest line, and what deleting a student removes.
 API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/staff-grading.test.mjs
+# A completion's level is earned (attempts.js earnedLevel). After staff-grading,
+# whose calibration sample is drawn from every AI-graded answer in the database.
+API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/earned-level.test.mjs
 
 # The student tracker: the staff roster behind Cloudflare Access, and the notes
 # to students who have gone quiet (worker/staff.js, worker/outreach.js).
@@ -319,6 +332,9 @@ if node -e "const p=require('playwright');const o=process.env.CHROME_PATH?{execu
   # Counseling, Narrative and WiseSpeak Preaching) the same way: the server is the grader
   # of record, the pages carry no key, the credit is the server's (docs/ai-grading.md, section 15).
   STATE="$STATE" CONFIG="$CONFIG" node test/single-live.test.mjs "http://127.0.0.1:$PORT"
+  # ...and the same policy in the live pages: "Incorrect." and nothing more while
+  # open, the choice the server stored after a lost reply, the review after a pass.
+  STATE="$STATE" CONFIG="$CONFIG" node test/answer-disclosure-ui.test.mjs "http://127.0.0.1:$PORT"
   # ...and the shadow build still posts each submitted unit to /api/shadow, with
   # the keys in its pages and the old engine unchanged.
   node test/shadow-mode.test.mjs "$SHADOW"

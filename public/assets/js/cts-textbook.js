@@ -286,7 +286,10 @@
       snapshot.draw.forEach(function (index, position) {
         var q = T.questions[index];
         if (!q || (snapshot.missed ? !snapshot.missed[position] : window.CTSFill.fillRight(q, snapshot.answers[position], codes))) return;
-        var passage = bank && bank.slug === slug && bank.questions[index];
+        // Live: the passages hold the answers, so the page has none of its own; the
+        // server sends them with an attempt that passed (snapshot.passages, by qid).
+        // A failed attempt lists what was missed, with the way back to the book.
+        var passage = LIVE ? (snapshot.passages && snapshot.passages[q.qid]) || null : bank && bank.slug === slug && bank.questions[index];
         items += '<article class="tb-review-item"><h3>' + bi({en:"Question " + (position+1),es:"Pregunta " + (position+1),fr:"Question " + (position+1)}) + '</h3><p>' + bi({en:esc(q.prompt.en),es:esc(q.prompt.es),fr:q.prompt.fr ? esc(q.prompt.fr) : undefined}) + '</p>';
         if (passage) {
           items += '<p>' + bi(passage.kind === 'lesson' ? {en:"The course lesson explains this question’s principle or context:",es:"La lección del curso explica el principio o contexto de esta pregunta:",fr:"La leçon du cours explique le principe ou le contexte de cette question :"} : {en:"The assigned reading explains this question’s principle or context:",es:"La lectura asignada explica el principio o contexto de esta pregunta:",fr:"La lecture assignée explique le principe ou le contexte de cette question :"}) + '</p><blockquote lang="' + esc(passage.lang) + '">';
@@ -298,6 +301,11 @@
         items += '</article>';
       });
       if (!items) return;
+      if (LIVE && !snapshot.passages) {
+        // a failed live attempt: the questions missed, and where to study them -- no passage, no answer
+        reviewHost.innerHTML = '<h2>' + bi({en:"Questions to review",es:"Preguntas para repasar",fr:"Questions à revoir"}) + '</h2><p>' + bi({en:"Study these in the assigned material before another attempt. The explanations are shown once the test is passed.",es:"Estúdielas en el material asignado antes de otro intento. Las explicaciones se muestran cuando se aprueba el examen.",fr:"Étudiez-les dans le matériel assigné avant une nouvelle tentative. Les explications s’affichent une fois l’examen réussi."}) + '</p>' + items;
+        return;
+      }
       reviewHost.innerHTML = '<h2>' + bi({en:"Learn from the questions you missed",es:"Aprenda de las preguntas que no acertó",fr:"Apprenez des questions manquées"}) + '</h2><p>' + bi({en:"Read each explanation, then revisit its assigned section before another attempt. These passages retain the reading author’s perspective.",es:"Lea cada explicación y vuelva a su sección asignada antes de otro intento. Estos pasajes conservan la perspectiva del autor de la lectura.",fr:"Lisez chaque explication, puis revenez à la section assignée avant une nouvelle tentative. Ces passages conservent le point de vue de l’auteur de la lecture."}) + '</p>' + items;
     }
 
@@ -487,6 +495,7 @@
         var grade = verdicts[T.questions[index].qid];
         return !grade || grade.verdict === "wrong";
       }) };
+      if (R && R.status === "passed" && R.reviews) state.review.passages = R.reviews;
       save(); renderReview();
     }
     function livePass(R) {

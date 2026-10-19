@@ -3,7 +3,10 @@
 import fs from 'node:fs';
 import { chromium } from 'playwright';
 const BASE = process.argv[2] || 'http://127.0.0.1:8897';
-const files = fs.readdirSync('.astro/language-base').filter(f => f.endsWith('.html') && !f.startsWith('_'));
+// Pages with no <body> (Google's site-verification file) get no language
+// versions (tools/language-pages.mjs), so there is nothing to check.
+const files = fs.readdirSync('.astro/language-base').filter(f => f.endsWith('.html') && !f.startsWith('_')
+  && /<body[\s>]/i.test(fs.readFileSync('.astro/language-base/' + f, 'utf8')));
 const browser = await chromium.launch(process.env.CHROME_PATH ? {executablePath:process.env.CHROME_PATH} : {});
 const fails = []; let done = 0;
 fails.push = function (...items) {if (this.length < 30) console.log("ISSUE", ...items); return Array.prototype.push.apply(this,items);};

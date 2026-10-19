@@ -1036,7 +1036,7 @@
     S: null,              // the last /api/attempt reply (needs, banked, track...)
     attemptId: null,
     status: "loading",    // loading connecting unregistered ready locked failed pending passed
-    mcRes: {},            // qid -> { right, answer (index), why }
+    mcRes: {},            // qid -> { right, answer (index, -1 when not disclosed), why }
     fillRes: {},          // qid -> { verdict right|wrong|pending, feedback, gradeId, by, answer }
     saRes: {},            // qid -> { verdict met|partly|not_met|pending, feedback, gradeId, banked }
     busy: {},             // qid -> true while a call for it is out
@@ -1069,7 +1069,7 @@
       if (!a || a.choice == null) return;
       var choice = +a.choice, right = a.verdict ? a.verdict === "right" : !!a.right;
       mcAnswers[i] = choice;
-      live.mcRes[q.qid] = { right: right, answer: a.answer != null ? idxOf(a.answer) : (right ? choice : -1), why: a.why };
+      live.mcRes[q.qid] = { right: right, answer: a.answer != null ? idxOf(a.answer) : (right ? choice : -1), why: a.why == null ? null : a.why };
     });
     fill.forEach(function (q, i) {
       var a = ans[q.qid];
@@ -1127,8 +1127,13 @@
   }
 
   /* A reply for a click answered earlier lacks the right answer or the
-     explanation: ask again. The server returns the first result for a qid. */
+     explanation: ask again. The server returns the first result for a qid.
+     Only for an attempt whose answers the server discloses (one that passed,
+     worker/grading/attempts.js disclosureOf): while an attempt is open the
+     server says right or wrong and nothing more, and asking again would only
+     repeat that (answer-disclosure policy, Wayne, 18 Oct 2026). */
   function fetchMissingMc() {
+    if (!live.S || live.S.disclosure !== "review") return;
     mc.forEach(function (q, i) {
       var r = live.mcRes[q.qid];
       if (!r || mcAnswers[i] == null) return;
@@ -1152,7 +1157,7 @@
     live.trouble = null; live.working = "";
     if (!G) { live.status = "ready"; return trouble({ offline: true }, liveStart); }
     if (!G.registered()) { live.status = "unregistered"; return renderQuestions(); }
-    if (unitPassed) { live.status = "passed"; return renderQuestions(); }
+    if (unitPassed) { live.status = "passed"; renderQuestions(); return liveReview(); }
     live.status = "connecting";
     renderQuestions();
     var pid = lsGet(KEY.pending);
@@ -1187,6 +1192,20 @@
     });
   }
 
+  /* A unit already passed, opened again: the attempt that passed it may be
+     reviewed -- its right answers, explanations and model answers, which the
+     server sends only for a passed attempt. Nothing is changed by asking; if
+     the server does not say "passed", nothing is shown. */
+  function liveReview() {
+    if (!savedAttempt || !G || !G.calls.status) return;
+    G.calls.status(savedAttempt).then(function (r) {
+      if (!r || !r.ok || !r.data || String(r.data.status || "") !== "passed" || r.data.disclosure !== "review") return;
+      absorb(G.verdictsOf(r.data));
+      if (r.data.models) live.models = r.data.models;
+      renderQuestions();
+    }, function () {});
+  }
+
   // the wait after a failed attempt is over: a fresh attempt, with the answers empty
   function liveAfterLock() {
     if (lockedMinutes()) { redrawAtUnlock(); return; }
@@ -1205,9 +1224,15 @@
     G.calls.mc(live.attemptId, q.qid, j).then(function (r) {
       delete live.busy[q.qid];
       if (!r.ok || !r.data) return trouble(r, function () { live.trouble = null; liveMC(i, j); });
-      mcAnswers[i] = j;
+      // The server keeps the first answer for a question. If an earlier click's
+      // reply was lost and this one named another option, the reply says which
+      // choice is recorded: show that one, never the last click.
+      var stored = Number.isInteger(r.data.choice) ? r.data.choice : j;
+      mcAnswers[i] = stored;
       var right = !!r.data.right;
-      live.mcRes[q.qid] = { right: right, answer: r.data.answer != null ? idxOf(r.data.answer) : (right ? j : -1), why: r.data.why === undefined ? null : r.data.why };
+      // While the attempt is open the reply is right or wrong only: no right
+      // option (-1) and no explanation (answer-disclosure policy).
+      live.mcRes[q.qid] = { right: right, answer: r.data.answer != null ? idxOf(r.data.answer) : (right ? stored : -1), why: r.data.why == null ? null : r.data.why };
       saveState();
       renderQuestions();
     });

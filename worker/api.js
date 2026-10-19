@@ -31,10 +31,15 @@ import { courseShortfall, textbookShortfall, exemptionsFor, degreeShortfall, res
 import catalog from './catalog.json';
 import { emailConfigured, emailLogOnly, sendEmail, verificationEmail, certificateEmail, codeEmail } from './email.js';
 import { notify, notifyBatch, retryFailed } from './notify.js';
-import { awardTitle } from './award-names.js';
+import { awardTitle, officialTitle } from './award-names.js';
 
 const MAX = { name: 120, email: 160, country: 80, track: 24, goal: 400, heard: 40, title: 200, course: 64, code: 40 };
 const TRACKS = new Set(['cert', 'certificate', 'associate', 'thm', 'mdiv']);
+// Older pages store some tracks under short names (the unit-page sign-up saves
+// Associate as "ad"). Accept them and record the full name, so those students
+// still reach the seminary record instead of being refused.
+const TRACK_ALIAS = { ad: 'associate', assoc: 'associate', mth: 'thm' };
+const trackName = (t) => TRACK_ALIAS[t] || t;
 // The language a student reads in, from the language switch (cts_lang). Anything
 // else is dropped rather than refused: it is a preference, not a record.
 const lang = (v) => (['en', 'es', 'fr'].includes(v) ? v : null);
@@ -227,7 +232,7 @@ function completionRows(id, raw, tracks, studentTrack) {
 async function register(request, env) {
   const b = await body(request);
   const name = str(b.name, MAX.name, { required: true, field: 'name' });
-  const track = (str(b.track, MAX.track, { required: true, field: 'track' }) || '').toLowerCase();
+  const track = trackName((str(b.track, MAX.track, { required: true, field: 'track' }) || '').toLowerCase());
   if (!TRACKS.has(track)) throw new HttpError(400, 'track must be one of: ' + [...TRACKS].join(', '));
 
   /* Registering twice (Wayne, 5 Oct 2026: six students had two records).
@@ -284,7 +289,7 @@ async function sync(request, env) {
     // changes it, so a stale device cannot swap it for an address nobody
     // confirmed.
     const name = str(s.name, MAX.name, { field: 'name' });
-    const track = (str(s.track, MAX.track, { field: 'track' }) || '').toLowerCase() || null;
+    const track = trackName((str(s.track, MAX.track, { field: 'track' }) || '').toLowerCase()) || null;
     if (track && !TRACKS.has(track)) throw new HttpError(400, 'unknown track: ' + track);
     statements.push(env.DB.prepare(
       `UPDATE students SET name = COALESCE(?, name),
@@ -402,7 +407,10 @@ async function issueCertificate(request, env) {
   const level = (str(b.level, 24, { required: true, field: 'level' }) || '').toLowerCase();
   if (!LEVELS.has(level)) throw new HttpError(400, 'level must be one of: ' + [...LEVELS].join(', '));
   let course = str(b.course, MAX.course, { required: level === 'course', field: 'course' });
-  const title = str(b.title, MAX.title, { required: true, field: 'title' });
+  // The page may still send a title (older pages do); it is checked for size
+  // and then ignored. The title of record is the server's (officialTitle,
+  // set below once the course is resolved).
+  str(b.title, MAX.title, { field: 'title' });
   // The page the student is on, for the link in their email. A filename only,
   // and only one this site serves; anything else is dropped, not echoed.
   const page = /^[A-Za-z0-9_]+\.html$/.test(String(b.page || '')) ? String(b.page) : null;
@@ -412,35 +420,49 @@ async function issueCertificate(request, env) {
   // for a course certificate, the course counts and required courses for a
   // degree (worker/awards.js). A fabricated certificate therefore needs a
   // fabricated complete record first.
+  // A course certificate names the level the course was EARNED at: the
+  // completion the record holds for it (written by the server, and only ever
+  // raised by work done at the higher level), not the student's current
+  // track. A Certificate-level course stays a Certificate-level award after a
+  // move to the Th.M. (ChatGPT's review of #125, 19 Oct 2026). A completion
+  // with no level (before migration 0003) counts at the student's own level,
+  // as degree_progress and degreeShortfall already count it. A unit course
+  // with no completion recorded (units reported by a browser-graded build,
+  // which record no level) is judged and named at the student's own level, as
+  // before: that record holds nothing better, and that level's required tests
+  // are enforced (courseShortfall).
+  const own = studentLevel(student.track, student.goal);
+  let awardLevel = own;
   if (level === 'course') {
     const c = resolveCourse(course);
     if (!c) throw new HttpError(400, 'unknown course: ' + course);
     // One stored name per course, so "ots" and "CTSOTS" are the same award.
     course = c.slug || c.code;
+    const tb = (await env.DB.prepare('SELECT textbook FROM textbook_results WHERE student_id = ?').bind(id).all()).results ?? [];
+    const done = (await env.DB.prepare('SELECT code, track, completed_at FROM course_completions WHERE student_id = ?').bind(id).all()).results ?? [];
+    const completion = done.find((r) => (canonicalCode(r.code) || String(r.code).toUpperCase()) === c.code);
+    if (completion) awardLevel = studentLevel(completion.track || own, completion.track ? null : student.goal);
     if (c.units) {
       const rows = await env.DB.prepare(
         'SELECT unit FROM unit_progress WHERE student_id = ? AND course = ?').bind(id, c.slug).all();
-      const tb = (await env.DB.prepare('SELECT textbook FROM textbook_results WHERE student_id = ?').bind(id).all()).results ?? [];
-      const done = (await env.DB.prepare('SELECT code, track, completed_at FROM course_completions WHERE student_id = ?').bind(id).all()).results ?? [];
-      const why = courseShortfall(c.slug, (rows.results ?? []).map((r) => r.unit), studentLevel(student.track, student.goal), tb, testContext(env, done));
+      const why = courseShortfall(c.slug, (rows.results ?? []).map((r) => r.unit), awardLevel, tb, testContext(env, done));
       if (why) return fail(409, why);
     } else {
       // A single-page course keeps no units; its completion code is the record.
-      const row = await env.DB.prepare(
-        'SELECT 1 FROM course_completions WHERE student_id = ? AND code = ?').bind(id, c.code).first();
-      if (!row) return fail(409, 'course completion not recorded: ' + c.code);
-      const tb = (await env.DB.prepare('SELECT textbook FROM textbook_results WHERE student_id = ?').bind(id).all()).results ?? [];
-      const done = (await env.DB.prepare('SELECT code, track, completed_at FROM course_completions WHERE student_id = ?').bind(id).all()).results ?? [];
-      const why = textbookShortfall(c.code, studentLevel(student.track, student.goal), tb, testContext(env, done));
+      if (!completion) return fail(409, 'course completion not recorded: ' + c.code);
+      const why = textbookShortfall(c.code, awardLevel, tb, testContext(env, done));
       if (why) return fail(409, why);
     }
   } else {
     const rows = await env.DB.prepare(
       'SELECT code, track FROM course_completions WHERE student_id = ?').bind(id).all();
     const plan = level === 'thm' ? await loadThmStudyPlan(env, id) : null;
-    const why = degreeShortfall(level, rows.results ?? [], studentLevel(student.track, student.goal), plan?.substitutions);
+    const why = degreeShortfall(level, rows.results ?? [], own, plan?.substitutions);
     if (why) return fail(409, why);
   }
+
+  const title = officialTitle(level, course, awardLevel);
+  if (!title) throw new HttpError(400, 'cannot name this award');
 
   // Re-issuing the same award returns the same code rather than a second one,
   // so a student who prints their certificate twice does not end up with two

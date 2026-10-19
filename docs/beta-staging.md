@@ -23,7 +23,7 @@ The beta Actions workflow runs a fresh build and the complete suite on each push
 
 Publication and post-deploy verification now have separate Actions steps. CI uses
 the guarded `deploy:beta:publish` part of `deploy:beta`, then verifies the exact
-build stamp and all 79 activation dates. The beta configuration explicitly enables
+build stamp and all 71 activation dates (79 staged tests less the eight awaiting faculty review, Wayne 18 Oct 2026). The beta configuration explicitly enables
 `workers_dev` for this fallback and disables unused version preview URLs.
 Wrangler otherwise disables workers.dev when the custom route is present.
 The Worker still verifies signed Access tokens on staff endpoints. Probe
@@ -86,4 +86,4 @@ See [the PR review record](beta-staging-review-2026-10-12.md) for all 31 origina
 
 ## Master’s requirements after the 12 October audit
 
-[Beta activation](beta-master-test-activation.md) records the cutoff in beta when the repaired release is deployed, preserving earlier valid master’s completions. The guarded deploy prepares only the activation metadata migration, then checks all 79 newly activated requirements. Production needs a separately chosen date before promotion.
+[Beta activation](beta-master-test-activation.md) records the cutoff in beta when the repaired release is deployed, preserving earlier valid master’s completions. The guarded deploy prepares only the activation metadata migration, then checks all 71 newly activated requirements (the eight awaiting faculty review stay optional). Production needs a separately chosen date before promotion.
