@@ -13,6 +13,7 @@ try {
   check(await page.locator('#regTrack option').first().textContent(), 'Certificat de ministère');
   await page.locator('#regName').fill('Interface Test');
   await page.locator('#regEmail').fill('interface-fixture@example.test');
+  await page.locator('#regCountry').selectOption('MX');   // country is required
   await page.locator('#regSave').click();
   check(await page.locator('#greeting').innerText(), 'Bienvenue,');
   await page.locator('#cts-exam-open').click();

@@ -149,8 +149,8 @@ ok(!(await has(p, '.question[data-mc="0"] .feedback-text', 'Correct answer')) &&
 // fill-ins: exact, accepted by the model, wrong
 await fillOne(p, 0, john1.fill[0].answer.en.toUpperCase());               // exact, whatever the capitals
 await fillOne(p, 1, 'something else entirely [[right]]');                   // not exact: the (fake) model accepts it
-ok(await has(p, '.question[data-fill="1"]', 'Accepted: it names the same thing.') && await has(p, '.question[data-fill="1"] .feedback-text', 'Correct'),
-  'an answer the model accepts shows Correct with its line of feedback');
+ok(await has(p, '.question[data-fill="1"] .feedback-text', 'Correct') && !(await has(p, '.question[data-fill="1"]', 'it names the same thing')),
+  'an answer the model accepts shows Correct; the model\'s own words wait for a pass (#124)');
 await fillOne(p, 2, 'zzzz nothing');
 ok(await has(p, '.question[data-fill="2"] .feedback-text', 'Incorrect'), 'a wrong fill-in is marked Incorrect');
 ok(!(await has(p, '.question[data-fill="2"]', 'Answer: ')) && !(await has(p, '.question[data-fill="2"]', 'Not quite: look again')), 'and, while the attempt is open, neither the answer wanted nor the model\'s comment on it is shown', (await p.locator('.question[data-fill="2"]').innerText()).slice(0, 300));
@@ -320,8 +320,8 @@ ok(/short answer 5\/10, need 9/.test(await body(m)), "the page's score line come
 }
 ok(await has(m, '.question[data-sa="0"] .feedback-text', 'Meets the standard') && await has(m, '.question[data-sa="5"] .feedback-text', 'Does not meet the standard'), 'each short answer shows the verdict the server gave');
 // the answer-disclosure policy (Wayne, 18 Oct 2026): what the model says is missing may name the answer, so it waits for a pass
-ok(!(await has(m, '.question[data-sa="5"]', 'This does not yet make the main point of the question.')) && await has(m, '.question[data-sa="0"]', 'This makes the points the question asks for.'),
-  "the model's feedback on an answer not met is held back after a failed attempt; on an answer met it is shown");
+ok(!(await has(m, '.question[data-sa="5"]', 'This does not yet make the main point of the question.')) && !(await has(m, '.question[data-sa="0"]', 'This makes the points the question asks for.')),
+  "after a failed attempt the model's feedback is held back on every answer, met or not (#124)");
 ok(!(await body(m)).includes(john1.sa[0].model.en.slice(0, 30)), "a failed master's attempt shows no model answer (it would be copied into the retake)");
 await m.locator('.question[data-sa="5"] [data-cts-appeal-open]').click();
 await m.locator('.question[data-sa="5"] [data-cts-appeal-send]').click();

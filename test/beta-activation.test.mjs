@@ -79,7 +79,7 @@ try{
  await page.waitForFunction(()=>Object.keys(JSON.parse(localStorage.getItem('cts_required_from')||'{}')).length===71);
  check(await page.locator('#cts-master-requirements').count()===0,'activation policy loads without injecting a page-top notice');
  await page.evaluate(()=>window.CTS_SYNC.restore('CTS-TEST-0000-0011'));
- check(await page.evaluate(()=>!!localStorage.getItem('cts_textbook_otsreadings_exempt')),'older exemption follows recovery to another browser');
+ check(await page.evaluate(()=>!!localStorage.getItem('cts_textbook_oldtestament_exempt')),'older exemption follows recovery to another browser');
  await browser.close();browser=null;
  await stop();await start();check((await get('/api/health')).requiredFrom.otsreadings===date,'later deployment/restart retains the original cutoff');
  console.log(`PASS — ${checks} actual beta-activation checks: 71 tests (eight optional pending review), both-test gates, earlier completions, recovery and stable cutoff.`);
