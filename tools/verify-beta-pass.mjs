@@ -175,9 +175,15 @@ async function spanishPage(page, file) {
   const p = await ctx.newPage();
   await p.goto(`${BASE}/CTSOTSCertificate.html`, { waitUntil: 'load' });
   await p.click('a[href="/index.html#catalog"]');
-  await p.waitForTimeout(2000);          // the front page scrolls smoothly
+  // The front page scrolls smoothly (html{scroll-behavior:smooth}). On a busy
+  // machine that scroll is still moving two seconds later, so wait until the
+  // course list has arrived instead of pausing for a fixed time.
+  const landed = await p.waitForFunction(() => {
+    const el = document.getElementById('catalog');
+    return !!(el && location.hash === '#catalog' && Math.abs(el.getBoundingClientRect().top) < 200);
+  }, null, { timeout: 8000 }).then(() => true).catch(() => false);
   const r = await p.evaluate(() => ({ url: location.pathname + location.hash, top: Math.round(document.getElementById('catalog').getBoundingClientRect().top) }));
-  ok(r.url === '/index.html#catalog' && Math.abs(r.top) < 200, `the catalog link from a certificate lands at ${r.url}, the course list ${r.top}px from the top`);
+  ok(landed && r.url === '/index.html#catalog' && Math.abs(r.top) < 200, `the catalog link from a certificate lands at ${r.url}, the course list ${r.top}px from the top`);
   await ctx.close();
 }
 
