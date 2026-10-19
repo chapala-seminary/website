@@ -24,7 +24,7 @@ function ok(cond, label, detail) {
   checks++;
   if (!cond) fails.push(label + (detail !== undefined ? `\n        ${typeof detail === 'string' ? detail : JSON.stringify(detail)}` : ''));
 }
-const jpost = async (p, b) => { const r = await fetch(BASE + p, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b) }); return { status: r.status, body: await r.json().catch(() => null) }; };
+const jpost = async (p, b) => { const r = await fetch(BASE + p, { method: 'POST', headers: { 'content-type': 'application/json', 'x-test-grading-mode': 'shadow' }, body: JSON.stringify(b) }); return { status: r.status, body: await r.json().catch(() => null) }; };
 const jget = async (p) => { const r = await fetch(BASE + p); return { status: r.status, body: await r.json().catch(() => null) }; };
 const sql = (command) => execFileSync('npx', ['wrangler', 'd1', 'execute', 'chapala-students', '--local', '--persist-to', STATE, '--config', CONFIG, '--command', command], { stdio: ['ignore', 'pipe', 'pipe'] }).toString();
 

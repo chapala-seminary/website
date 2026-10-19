@@ -29,7 +29,7 @@ const DATA = JSON.parse(fs.readFileSync('src/data/reading-shelf.json', 'utf8')).
 const want = (key) => { const r = DATA[key]; return r.entries.length + (r.panels || []).reduce((s, p) => s + p.entries.length, 0); };
 
 async function open(file, seed = {}) {
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   const p = await ctx.newPage();
   const errs = [];
   p.on('pageerror', (e) => errs.push(e.message));

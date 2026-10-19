@@ -127,6 +127,7 @@ export function catalogCards(): Record<string, string> {
     cards[c.title.en] = c.title.fr; cards[c.description.en] = c.description.fr;
     cards[`For ${c.title.en}`] = `Pour le cours ${c.title.fr}`;
   }
+  for (const b of data().books.values()) cards[b.title.en] = frBookTitle(b.title.en);
   for (const r of data().readings.values()) cards[r.title.en] = frReadingsTitle(r.course);
   return cards;
 }

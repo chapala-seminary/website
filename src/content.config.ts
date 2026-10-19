@@ -46,6 +46,11 @@ const shortAnswer = z.object({
   keywords: z.object({ en: z.array(keyword), es: z.array(keyword) }).catchall(z.array(keyword)).optional(),
   model: z.object({ en: z.string().optional(), es: z.string().optional() }).catchall(z.string()).optional(),
   minHits: z.number().int().positive().optional(),
+  // AI-grading rubric, English only (docs/ai-grading.md section 3)
+  rubric: z.object({
+    v: z.number().int().positive(),
+    points: z.array(z.object({ id: z.string(), essential: z.boolean(), en: z.string() })),
+  }).optional(),
   tr: translationState.optional(),
 }).superRefine(completeQuestionLanguages);
 

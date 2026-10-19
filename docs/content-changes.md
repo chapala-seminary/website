@@ -1380,3 +1380,21 @@ Robert asked for these to go to production ahead of AI grading. They are AI-writ
 * **CTSLA lessons** (approved by Robert): the unit 11 summary table, the unit 10 and unit 11 summaries, Romans 1:16–17 and the Luther and Erasmus dates in unit 9 (`la-lessons.md`).
 * **Not changed (for Dr. Cook)**: contested doctrine; the lesson that misquotes 1 John 1:7 (CTSPT 2); the "four titles" sentence in the CTS unit 9 lesson; "a dozen words" in CTSLA unit 11.
 * Spanish and French were changed with each English change, and are marked machine-written (`tr.*.status = machine`, `from` = the new source). Every model answer passes its keywords in every language, and no changed question passes as its own answer. The content, prose and lesson-render baselines were re-recorded for these pages only.
+
+## 15 October 2026 — Home header navigation
+
+At Robert's request, Course Catalog now sits in the sticky home header beside
+the language selectors, with a wrapping layout on phones. The student-sync
+script no longer inserts the master's requirements paragraph above every page.
+Requirement dates still load and completion checks are unchanged; program and
+course pages retain their existing requirement explanations.
+
+
+## Wayne’s reading and examination review — 15 October 2026
+
+All textbook and required-reading exams now give correctness feedback during an
+attempt and source-linked teaching explanations for missed questions after
+submission. Available readings and tests are easier to find; course boxes
+distinguish optional honors from master’s assigned readings, and Torrey’s page
+clearly labels the five excerpts. Native language controls and fully translated
+pages resist browser retranslation. See [the change and verification record](wayne-feedback-2026-10-15.md).

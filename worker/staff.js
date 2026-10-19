@@ -1,5 +1,6 @@
 import { loadThmStudyPlan, handleThmStudyPlan } from './study-plans.js';
 import { thmFoundation } from './awards.js';
+import { canonicalCountry } from '../src/lib/countries.mjs';
 /* The seminary's own view of its students: /staff/...
  *
  * Wayne's CTS Student Tracker was fed from completion emails, which arrived
@@ -16,6 +17,9 @@ import { thmFoundation } from './awards.js';
  *   POST /staff/students/<n>/notes  stop=1 | stop=0: stop or resume notes to one student
  *   POST /staff/notes/run           run today's notes now (as the daily run would)
  *   POST /staff/digest              the weekly summary (?send=1 also emails it)
+ *   /staff/grading/...              the faculty's grading pages (worker/staff-grading.js):
+ *                                   appeals, pending answers, calibration, fill-in rulings,
+ *                                   possible copying, AI usage
  *
  * WHO CAN SEE IT
  *
@@ -40,6 +44,7 @@ import { thmFoundation } from './awards.js';
  *                 a deployed config that sets it.
  */
 import catalog from './catalog.json';
+import { handleGrading } from './staff-grading.js';
 import { candidates, runOutreach, digest, sendDigest, note, programLevel, PROGRAM_NAMES, QUIET_DAYS, NOT_STARTED_DAYS } from './outreach.js';
 
 const DAY = 86400000;
@@ -139,7 +144,9 @@ async function roster(env, asOf = new Date()) {
     const c = m && catalog.courses[m[1]];
     const started = r.units_passed > 0 || r.courses_done > 0;
     return {
-      n: r.n, name: r.name, email: r.email || '', email_verified: !!r.email_verified_at, country: r.country || '',
+      n: r.n, name: r.name, email: r.email || '', email_verified: !!r.email_verified_at,
+      email_confirmed: r.email_verified_at ? 'yes' : 'no',
+      country: canonicalCountry(r.country) || '',
       lang: r.lang || '', program: PROGRAM_NAMES[level].en, courses_done: r.courses_done,
       program_progress: `${Math.min(counted, NEED[level])}/${NEED[level]}`, foundation: `${r.foundation_done}/7`,
       units_passed: r.units_passed, notices: r.notices_sent,
@@ -153,7 +160,7 @@ async function roster(env, asOf = new Date()) {
 }
 
 const COLUMNS = [
-  ['name', 'Name'], ['email', 'Email'], ['country', 'Country'], ['lang', 'Language'], ['program', 'Program'],
+  ['name', 'Name'], ['email', 'Email'], ['email_confirmed', 'Email confirmed'], ['country', 'Country'], ['lang', 'Language'], ['program', 'Program'],
   ['program_progress', 'Toward program'], ['foundation', 'Foundation / plan'], ['courses_done', 'Courses'],
   ['notices', 'Notices'], ['units_passed', 'Units'], ['last_unit', 'Last unit'], ['last_progress', 'Last progress'],
   ['days_since_progress', 'Days since'], ['status', 'Status'], ['last_note', 'Last note'], ['notes', 'Notes'],
@@ -190,7 +197,9 @@ function rosterPage(rows, show, user) {
 <meta name="robots" content="noindex"><title>CTS students</title><style>${STYLE}</style></head><body>
 <h1>CTS students</h1>
 <p>${rows.length} students: ${count('active')} active in the last ${QUIET_DAYS} days, ${count('quiet')} quiet, ${count('not started')} not started, ${count('new')} registered this week.
+${rows.filter((r) => r.email_verified).length} of ${rows.length} have confirmed their email (${rows.filter((r) => r.email && !r.email_verified).length} gave an address and have not confirmed it). Confirmation is recorded only when the student opens the link or enters the six-digit code. An unconfirmed address is a real address that was not confirmed, not a column the report failed to load.
 Signed in as ${esc(user)}. <a href="/staff/students.csv">Download CSV</a> · <a href="/staff/notes">Notes to students</a></p>
+<p><small>Country is an ISO code (US, MX, CU). Typed names such as USA, EEUU, and Estados Unidos are counted as the same country. OT is Other / prefer not to say.</small></p>
 <p><small>"Last progress" is the last unit passed or course completed. A returning student's history from the old site arrives dated the day of their first visit to the new one, so their clock starts then.</small></p>
 <details><summary>How students found the seminary (${rows.filter((r) => heardKey(r.heard)).length} of ${rows.length} answered)</summary>
 <div class="wrap narrow"><table><thead><tr><th>Answer</th><th>Students</th><th>Share</th><th>United States</th><th>Elsewhere</th></tr></thead><tbody>
@@ -258,6 +267,8 @@ export async function handleStaff(request, env) {
     const from = request.headers.get('origin');
     if (from && from !== url.origin) return html('<p>Refused: the request did not come from this site.</p>', 403);
   }
+  if (path === '/staff/grading' || path.startsWith('/staff/grading/'))
+    return await handleGrading(request, env, user, url, path, { esc, html, json, STYLE });
   if ((method === 'GET' || method === 'POST') && (m = /^\/staff\/students\/(\d+)\/thm-plan$/.exec(path)))
     return handleThmStudyPlan(request, env, +m[1], user);
   if (method === 'POST' && (m = /^\/staff\/students\/(\d+)\/notes$/.exec(path))) {

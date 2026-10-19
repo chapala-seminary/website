@@ -13,7 +13,7 @@ const config='test/wrangler.local.jsonc';
 const sql=file=>execFileSync('npx',['wrangler','d1','execute','chapala-students','--local','--persist-to',dir,'--config',config,'--file',file],{stdio:'pipe'});
 let worker,log,browser,checks=0;
 const check=(value,label)=>{assert.ok(value,label);checks++;};
-const post=async(route,body)=>{const r=await fetch(base+route,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)});return{status:r.status,body:await r.json()};};
+const post=async(route,body)=>{const r=await fetch(base+route,{method:'POST',headers:{'content-type':'application/json','x-test-grading-mode':'shadow'},body:JSON.stringify(body)});return{status:r.status,body:await r.json()};};
 const get=async(route)=>(await (await fetch(base+route)).json());
 async function start(){
  log=fs.openSync(path.join(dir,'dev.log'),'a');
@@ -66,7 +66,7 @@ try{
  browser=await chromium.launch(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{});
  const page=await browser.newPage();await page.goto(base+'/CTSUnit1.html?cts_lang=en');
  await page.waitForFunction(()=>Object.keys(JSON.parse(localStorage.getItem('cts_required_from')||'{}')).length===79);
- check(await page.locator('#cts-master-requirements').isVisible(),'unregistered reader sees the activated requirement notice');
+ check(await page.locator('#cts-master-requirements').count()===0,'activation policy loads without injecting a page-top notice');
  await page.evaluate(()=>window.CTS_SYNC.restore('CTS-TEST-0000-0011'));
  check(await page.evaluate(()=>!!localStorage.getItem('cts_textbook_otsreadings_exempt')),'older exemption follows recovery to another browser');
  await browser.close();browser=null;

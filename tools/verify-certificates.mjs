@@ -49,7 +49,7 @@ const sample = [
 
 const browser = await chromium.launch(CHROME ? { executablePath: CHROME } : {});
 for (const f of sample) {
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   const page = await ctx.newPage();
   const errs = [], api = [];
   let syncStatus = null;

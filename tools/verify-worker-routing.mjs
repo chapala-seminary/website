@@ -16,6 +16,9 @@
  *
  *   node tools/verify-worker-routing.mjs http://127.0.0.1:8821
  */
+import http from 'node:http';
+import { registerHooks } from 'node:module';
+
 const BASE = process.argv[2] || 'http://127.0.0.1:8821';
 
 let checks = 0;
@@ -48,7 +51,8 @@ ok((await hit('/admin')).status === 200, '/admin without the slash reaches the e
 
 /* Assets, which is what run_worker_first exists to keep in the Worker's path. */
 for (const p of ['/assets/css/cts.css', '/assets/js/cts-engine.js', '/assets/js/cts-sync.js',
-                 '/cts-curriculum.js', '/sitemap.xml', '/robots.txt']) {
+                 '/cts-curriculum.js', '/sitemap.xml', '/robots.txt', '/llms.txt', '/llms-full.txt',
+                 '/CTSNTCourse.html']) {
   const r = await hit(p);
   ok(r.status === 200 && !r.location, `${p} is served`, `status ${r.status}`);
 }
@@ -61,7 +65,48 @@ ok(missing.status === 404, 'an unknown API path is a 404 from the API, not from 
 /* And a real miss is still a miss. A not_found_handling that started serving
    a page for everything would make every broken link look fine. */
 for (const p of ['/nope.html', '/CTSActsUnit999.html', '/assets/css/nope.css']) {
-  ok((await hit(p)).status === 404, `${p} is a 404`, `status ${(await hit(p)).status}`);
+  const r = await hit(p);
+  ok(r.status === 404, `${p} is a 404`, `status ${r.status}`);
+}
+{
+  const r = await fetch(BASE + '/nope.html');
+  const body = await r.text();
+  ok(r.status === 404 && /not here|no está aquí|n’est pas ici/.test(body),
+    'an HTML miss serves the seminary 404 page', `status ${r.status}, ${body.slice(0, 80)}`);
+}
+
+const { hostname, port } = new URL(BASE);
+const once = (host, path) => new Promise((resolve, reject) => {
+  const req = http.request({ hostname, port, path, method: 'GET', headers: { Host: host } }, (res) => {
+    res.resume();
+    resolve({ status: res.statusCode, location: res.headers.location });
+  });
+  req.on('error', reject);
+  req.end();
+});
+const www = await once('www.chapalaseminary.org', '/CTSActsUnit3.html');
+ok(www.status === 301 && /https:\/\/chapalaseminary\.org\/CTSActsUnit3\.html$/.test(www.location || ''),
+  'www 301s to the apex host', `${www.status} ${www.location}`);
+const en = await once('chapalaseminary.org', '/en/CTSActsUnit3.html');
+// Miniflare rewrites a same-host Location to the local transport's scheme.
+// Check its status/host/path here, and the Worker's original HTTPS below.
+ok(en.status === 301 && /^https?:\/\/chapalaseminary\.org\/CTSActsUnit3\.html$/.test(en.location || ''),
+  '/en/ 301s to the English URL', `${en.status} ${en.location}`);
+
+// workerd accepts JSON imports without attributes; Node needs the attribute.
+// The temporary loader lets us execute the actual Worker without changing
+// production imports or accepting an HTTP canonical redirect in this check.
+const hooks = registerHooks({ load(url, context, next) {
+  return next(url, url.endsWith('.json') ? { ...context, importAttributes: { type: 'json' } } : context);
+} });
+let worker;
+try { worker = (await import('../worker/index.js')).default; }
+finally { hooks.deregister(); }
+for (const path of ['/en', '/en/', '/en/CTSActsUnit3.html?test=1']) {
+  const response = await worker.fetch(new Request(`http://chapalaseminary.org${path}`), {}, {});
+  const expected = path.startsWith('/en/CTS') ? 'https://chapalaseminary.org/CTSActsUnit3.html?test=1' : 'https://chapalaseminary.org/';
+  ok(response.status === 301 && response.headers.get('location') === expected,
+    `${path} redirects to HTTPS before local transport rewriting`, response.headers.get('location'));
 }
 
 console.log(`${checks} assertions on how URLs are answered`);

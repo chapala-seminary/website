@@ -53,16 +53,38 @@ const REPAIRED = new Set(['figcaption']);
 const unversioned = (k, v) => (k === 'src' || k === 'href') ? v.replace(/\?v=[0-9a-f]+$/, '') : v;
 
 const sig = (el) => {
-  const attrs = Object.entries(el.attributes || {}).map(([k, v]) => `${k}=${unversioned(k, v)}`).sort().join(' ');
+  // PR #108 defers external scripts; scheduling is checked separately from
+  // lesson fidelity. Keep each script path and every other attribute strict.
+  const attrs = Object.entries(el.attributes || {}).filter(([k]) => !(k === 'defer' && el.tagName.toLowerCase() === 'script' && el.getAttribute('src') && !/\/cts-sync\.js(?:\?|$)/.test(el.getAttribute('src'))))
+    .map(([k, v]) => `${k}=${unversioned(k, v)}`).sort().join(' ');
   return `${el.tagName.toLowerCase()}[${attrs}]`;
 };
 
 const walk = (root) => {
+  // The same SEO change initially hides registration with CSS and adds a
+  // course-overview link to the shared footer. Reconstruct the old frame for
+  // this lesson comparison; registration and overview links have UI/SEO checks.
+  root.querySelector('#cts-register')?.setAttribute('hidden', '');
+  for (const link of root.querySelectorAll('footer.cts-foot[data-cts-chrome] a[href$="Course.html"]')) {
+    if (link.text.trim() !== 'Course overviewResumen del cursoPrésentation du cours') continue;
+    const separator = link.nextSibling;
+    if (separator?.rawText === '&nbsp;·&nbsp;') separator.remove();
+    link.remove();
+  }
   const out = [];
   const go = (node, repairedAncestor) => {
     for (const el of node.childNodes) {
       if (!el.tagName) continue;
       const tag = el.tagName.toLowerCase();
+      // PR #108 adds this shared navigation beside the lesson, not in it.
+      if (tag === 'nav' && el.classList.contains('cts-crumbs') && el.hasAttribute('data-cts-chrome')) continue;
+      /* The grading mode's own script (docs/ai-grading.md): cts-grading.js on a
+         live page, cts-shadow.js on a shadow one. Not part of any lesson. */
+      if (tag === 'script' && /\/cts-(grading|shadow)\.js/.test(el.getAttribute('src') || '')) continue;
+      /* The unit's questions, inlined. A live page carries them without their
+         keys (docs/ai-grading.md); tools/content-baseline.mjs checks every
+         question against the content, and tools/verify-no-keys.mjs the page. */
+      if (tag === 'script' && el.text.startsWith('window.CTS_UNIT =')) continue;
       const repaired = repairedAncestor || REPAIRED.has(tag);
       /* The <br> that separated two always-visible language lines has nothing
          left to separate once the toggle shows one at a time. Skipped on both

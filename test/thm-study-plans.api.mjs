@@ -9,7 +9,7 @@ const BASE = process.env.API_BASE || 'http://127.0.0.1:8798';
 let checks = 0;
 const check = (condition, message) => { assert.ok(condition, message); checks++; };
 const post = async (path, body) => {
-  const r = await fetch(BASE + path, {method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify(body)});
+  const r = await fetch(BASE + path, {method:'POST', headers:{'content-type':'application/json','x-test-grading-mode':'shadow'}, body:JSON.stringify(body)});
   return {status:r.status, body:await r.json()};
 };
 const get = async path => (await fetch(BASE + path)).json();

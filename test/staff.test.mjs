@@ -48,8 +48,8 @@ for (const [why, headers] of [
 
 /* ---- students to find -------------------------------------------------------- */
 const tag = Math.random().toString(36).slice(2, 7);
-const reg = async (b) => (await (await fetch(BASE + '/api/register', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ email: `staff-fixture-${encodeURIComponent(b.name)}@example.test`, ...b }) })).json()).code;
-const sync = (b) => fetch(BASE + '/api/sync', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b) }).then((r) => r.json());
+const reg = async (b) => (await (await fetch(BASE + '/api/register', { method: 'POST', headers: { 'content-type': 'application/json', 'x-test-grading-mode': 'shadow' }, body: JSON.stringify({ email: `staff-fixture-${encodeURIComponent(b.name)}@example.test`, ...b }) })).json()).code;
+const sync = (b) => fetch(BASE + '/api/sync', { method: 'POST', headers: { 'content-type': 'application/json', 'x-test-grading-mode': 'shadow' }, body: JSON.stringify(b) }).then((r) => r.json());
 
 const QUIET = `Quiet ${tag}`, FRESH = `Fresh ${tag}`, NOMAIL = 'Legacy No Email', DONE = `Done ${tag}`, SHOUT = `=HYPERLINK("x") ${tag}`;
 const quietCode = await reg({ name: QUIET, email: `quiet-${tag}@example.test`, track: 'cert', country: 'MX', lang: 'es' });
@@ -82,7 +82,7 @@ await reg({ name: SHOUT, email: `shout-${tag}@example.test`, track: 'thm' });
   ok(d && d.program_progress === '12/12' && d.foundation === '7/7', 'a finished Certificate shows 12/12 and the foundation 7/7', JSON.stringify(d));
   ok(d && d.notices === 12, `and the 12 completion notices the seminary was sent (${d && d.notices})`);
   // confirming an email once wiped this record (worker/api.js, emailConfirm)
-  const post = (p, b) => fetch(BASE + p, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b) }).then((r) => r.json());
+  const post = (p, b) => fetch(BASE + p, { method: 'POST', headers: { 'content-type': 'application/json', 'x-test-grading-mode': 'shadow' }, body: JSON.stringify(b) }).then((r) => r.json());
   const ch = await post('/api/email/start', { code: doneCode, email: `done-${tag}@example.test` });
   await post('/api/email/confirm', { code: doneCode, verification: ch.devCode });
   const d2 = (await (await staff('/staff/students.json')).json()).find((x) => x.name === DONE);
@@ -100,7 +100,7 @@ await reg({ name: SHOUT, email: `shout-${tag}@example.test`, track: 'thm' });
     ok(e && e.program_progress === want && e.courses_done === 0, `a ${k} student with nothing done shows ${want}`, JSON.stringify(e && { p: e.program_progress, c: e.courses_done }));
   }
   const csv = await (await staff('/staff/students.csv')).text();
-  ok(/^Name,Email,Country,Language,Program/.test(csv), 'the CSV has a header row');
+  ok(/^Name,Email,Email confirmed,Country,Language,Program/.test(csv), 'the CSV has a header row');
   ok(csv.includes(`"'=HYPERLINK(""x"") ${tag}"`), 'a name a spreadsheet would run as a formula is defused in the CSV',
     csv.split('\n').find((l) => l.includes('HYPERLINK')));
   ok(!csv.includes(quietCode), 'the CSV never has a student code');

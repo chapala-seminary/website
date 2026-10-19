@@ -42,7 +42,7 @@ function ok(cond, label) { checks++; if (!cond) fails.push(label); }
 const browser = await chromium.launch({ executablePath: CHROME });
 
 async function session(course, slug, unit, track, answer, fillSA = false) {
-  const ctx = await browser.newContext();
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
   const page = await ctx.newPage();
   const errs = [];
   page.on('pageerror', e => errs.push(e.message));

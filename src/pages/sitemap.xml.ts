@@ -7,11 +7,10 @@
  *
  * Policy, decided deliberately rather than inferred from the old file:
  *
- *   in   every course unit, every certificate, every reading room, and the
- *        standalone pages a student would search for
- *   out  the 205 reading digests -- supporting material behind the reading
- *        rooms rather than pages anyone should land on cold -- and the
- *        utility pages listed in EXCLUDE below
+ *   in   every course unit, every course landing, every reading room, and
+ *        the standalone pages a student would search for
+ *   out  certificate-generation pages (they can show a student's name),
+ *        the 205 reading digests, and the utility pages in EXCLUDE below
  *
  * No <lastmod>. A git checkout gives every file the same mtime, so any date
  * here would be the build date dressed up as a content date. An absent
@@ -21,6 +20,7 @@ import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 import fs from 'node:fs';
 import rooms from '../data/rooms.json';
+import { landingFile } from '../lib/seo';
 
 const SITE = 'https://chapalaseminary.org';
 
@@ -32,6 +32,7 @@ const EXCLUDE = new Set([
   'START_HERE.html',            // internal note, not student-facing
   'Apologetics_Self_Contained_Unlocked_Preview.html', // ungated duplicate of the ethics course
   'Romans_Digest_01_Haldane_EN.html',                 // a reading digest under an older name
+  '404.html',                                         // the miss page; not a document to index
 ]);
 
 /** Standalone pages worth indexing, with the weight each carries. */
@@ -62,6 +63,9 @@ export const GET: APIRoute = async () => {
   // Generated course units, straight from the collection that builds them.
   for (const entry of await getCollection('units'))
     add(`${entry.data.pagePrefix}Unit${entry.data.unit}.html`, 0.8);
+  // One overview page per course. The first unit keeps its old URL.
+  for (const entry of await getCollection('courses'))
+    add(landingFile(entry.data.entry), 0.9);
   // The Master's textbooks and their tests, generated from the same collection
   // that builds them (src/pages/[textbook].astro, [test].astro).
   for (const entry of await getCollection('textbooks')) {
@@ -82,17 +86,25 @@ export const GET: APIRoute = async () => {
     if (EXCLUDE.has(f) || isDigest(f)) continue;
     if (f in STANDALONE) add(f, STANDALONE[f]);
     else if (isEthicsUnit(f)) add(f, 0.8);
-    else if (isCertificate(f)) add(f, 0.6);
+    else if (isCertificate(f)) continue; // student documents — noindex, not listed
     // anything unrecognised is left out on purpose: a new kind of page should
     // be classified here deliberately, not swept in by a catch-all
   }
 
+  const loc = (path: string, lang: 'en' | 'es' | 'fr') =>
+    `${SITE}/${lang === 'en' ? '' : lang + '/'}${path}`;
   const body =
     `<?xml version="1.0" encoding="UTF-8"?>\n` +
-    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n` +
     [...urls.entries()]
       .sort(([a], [b]) => a.localeCompare(b))
-      .map(([path, p]) => `  <url>\n    <loc>${SITE}/${path}</loc>\n    <priority>${p.toFixed(1)}</priority>\n  </url>`)
+      .map(([path, p]) => {
+        const page = path || 'index.html';
+        const fr = page === 'index.html'
+          ? `\n    <xhtml:link rel="alternate" hreflang="fr" href="${loc(page, 'fr')}"/>`
+          : '';
+        return `  <url>\n    <loc>${SITE}/${path}</loc>\n    <priority>${p.toFixed(1)}</priority>\n    <xhtml:link rel="alternate" hreflang="en" href="${loc(page, 'en')}"/>\n    <xhtml:link rel="alternate" hreflang="es" href="${loc(page, 'es')}"/>${fr}\n    <xhtml:link rel="alternate" hreflang="x-default" href="${loc(page, 'en')}"/>\n  </url>`;
+      })
       .join('\n') +
     `\n</urlset>\n`;
 

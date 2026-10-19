@@ -50,7 +50,20 @@
 	//   npx wrangler secret put RESEND_API_KEY            (production)
 	//   npx wrangler secret put RESEND_API_KEY --env beta (beta)
 	"send_email": [{ "name": "EMAIL" }],
+	// AI grading of written answers (worker/grading/, docs/ai-grading.md).
+	// Workers AI runs the models on Cloudflare's own machines; there is no key.
+	// Workers Paid is required (Robert, 14 Oct 2026): on the free plan grading
+	// would stop for the day once the daily allowance ran out.
+	"ai": { "binding": "AI" },
 	"vars": {
+		// "shadow": the production trial -- the AI grades and records, credit
+		// still comes from the old rules. "live" once Robert approves the switch.
+		"GRADING_MODE": "shadow",
+		"GRADER_MODEL": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+		"GRADER_MODEL_FALLBACK": "@cf/openai/gpt-oss-120b",
+		"GRADER_PROMPT_VERSION": "2026-10-15.3",
+		// Production release cutoff: preserve this date on later deployments.
+		"MASTER_TESTS_ACTIVATION": "2026-10-15T05:17:56.813Z",
 		"EMAIL_FROM": "Chapala Theological Seminary <certificates@chapalaseminary.org>",
 		"EMAIL_REPLY_TO": "info@chapalaseminary.org",
 		// where the seminary is told of completions and certificates (worker/notify.js)
@@ -71,9 +84,10 @@
 		"ACCESS_AUD": "debf55802de573c5790f05b163c141178b068b01ee8c84ef0ed14c26224bb25c"
 	},
 	// Once a day at 15:00 UTC (9:00 in Mexico City): notes to students who have
-	// gone quiet, and on Mondays the seminary's weekly summary.
+	// gone quiet, and on Mondays the seminary's weekly summary. And every 15
+	// minutes: the answers waiting to be graded (worker/grading/queue.js).
 	"triggers": {
-		"crons": ["0 15 * * *"]
+		"crons": ["0 15 * * *", "*/15 * * * *"]
 	},
 	"assets": {
 		"directory": "./dist",
@@ -120,7 +134,13 @@
 			},
 			// bindings and vars are not inherited by an environment, so they are repeated
 			"send_email": [{ "name": "EMAIL" }],
+			"ai": { "binding": "AI" },
 			"vars": {
+				// beta is where the AI grader is live (docs/ai-grading.md section 1)
+				"GRADING_MODE": "live",
+				"GRADER_MODEL": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+				"GRADER_MODEL_FALLBACK": "@cf/openai/gpt-oss-120b",
+				"GRADER_PROMPT_VERSION": "2026-10-15.3",
 				"MASTER_TESTS_ACTIVATION": "beta",
 				"EMAIL_FROM": "Chapala Theological Seminary <certificates@chapalaseminary.org>",
 				"EMAIL_REPLY_TO": "info@chapalaseminary.org",
@@ -138,7 +158,7 @@
 				"ACCESS_AUD": "debf55802de573c5790f05b163c141178b068b01ee8c84ef0ed14c26224bb25c"
 			},
 			"triggers": {
-				"crons": ["0 15 * * *"]
+				"crons": ["0 15 * * *", "*/15 * * * *"]
 			},
 			"assets": {
 				"directory": "./dist",

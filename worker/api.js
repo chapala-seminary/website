@@ -1,4 +1,5 @@
 import { loadThmStudyPlan } from './study-plans.js';
+import { canonicalCountry } from '../src/lib/countries.mjs';
 /* Chapala Theological Seminary — student records API.
  *
  * A plain fetch handler with no framework and no dependencies, so it runs
@@ -23,6 +24,9 @@ import { loadThmStudyPlan } from './study-plans.js';
  */
 
 import { activationEnvironment, activatedTests } from './test-activation.js';
+import { testContext } from './test-context.js';
+import { gradingRoute } from './grading/routes.js';
+import { isLive } from './grading/mode.js';
 import { courseShortfall, textbookShortfall, exemptionsFor, degreeShortfall, resolveCourse, studentLevel, canonicalCode, certificateLevel, DEGREES } from './awards.js';
 import catalog from './catalog.json';
 import { emailConfigured, emailLogOnly, sendEmail, verificationEmail, certificateEmail, codeEmail } from './email.js';
@@ -109,23 +113,6 @@ async function body(request) {
 }
 
 /* ---- reading and merging a student's state ------------------------------ */
-
-/* The activation date of a required-reading test comes from worker/catalog.json
- * (worker/awards.js testCounts). The test suite needs to see the rule both
- * before and after a date, so its configuration -- and only its: EMAIL_MODE
- * "log" with no Resend key, the same condition that lets the suite see the
- * notices it would send -- may set TEST_REQUIRED_FROM, a JSON map
- * { slug: ISO time }. tools/verify-worker-config.mjs refuses the variable in
- * the deployed configuration. */
-function testRequiredFrom(env) {
-  if (env.EMAIL_MODE !== 'log' || env.RESEND_API_KEY || !env.TEST_REQUIRED_FROM) return undefined;
-  try { const m = JSON.parse(env.TEST_REQUIRED_FROM); return m && typeof m === 'object' ? m : undefined; } catch { return undefined; }
-}
-/* What testCounts needs: the completions the record holds now, with the time
- * and level the server wrote, and the server's clock. */
-function testContext(env, completions) {
-  return { completions: completions || [], now: now(), requiredFrom: { ...activatedTests(env), ...testRequiredFrom(env) } };
-}
 
 async function loadState(env, id) {
   const student = await env.DB.prepare(
@@ -268,7 +255,7 @@ async function register(request, env) {
     const res = await env.DB.prepare(
       `INSERT INTO students (id, name, email, country, track, goal, heard, lang, created_at, updated_at)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO NOTHING`)
-      .bind(id, name, email, str(b.country, MAX.country, { field: 'country' }),
+      .bind(id, name, email, canonicalCountry(str(b.country, MAX.country, { field: 'country' })),
         track, str(b.goal, MAX.goal, { field: 'goal' }), str(b.heard, MAX.heard, { field: 'heard' }), lang(b.lang), t, t).run();
     if (res.meta?.changes) return json({ code: id, student: (await loadState(env, id)).student }, 201);
   }
@@ -303,22 +290,28 @@ async function sync(request, env) {
       `UPDATE students SET name = COALESCE(?, name),
          email = CASE WHEN email_verified_at IS NULL THEN COALESCE(?, email) ELSE email END,
          country = COALESCE(?, country), track = COALESCE(?, track),
-         goal = COALESCE(?, goal), heard = COALESCE(?, heard), lang = COALESCE(?, lang), updated_at = ? WHERE id = ?`)
-      .bind(name, str(s.email, MAX.email, { field: 'email' }), str(s.country, MAX.country, { field: 'country' }),
-        track, str(s.goal, MAX.goal, { field: 'goal' }), str(s.heard, MAX.heard, { field: 'heard' }), lang(b.lang), now(), id));
+         goal = CASE WHEN ? THEN ? ELSE goal END, heard = COALESCE(?, heard), lang = COALESCE(?, lang), updated_at = ? WHERE id = ?`)
+      .bind(name, str(s.email, MAX.email, { field: 'email' }), canonicalCountry(str(s.country, MAX.country, { field: 'country' })),
+        track, Object.hasOwn(s, 'goal') ? 1 : 0, str(s.goal, MAX.goal, { field: 'goal' }) || '', str(s.heard, MAX.heard, { field: 'heard' }), lang(b.lang), now(), id));
   }
 
   // Browsers resend their full record. D1 counts an UPDATE as a write even
   // when the value stays the same, so conflict handlers only update a pass
   // whose date is earlier, or a completion whose earned level rises.
-  for (const row of progressRows(id, b.progress))
+  /* GRADING_MODE=live (docs/ai-grading.md section 7): the server is the grader of
+     record. A browser's report of what it passed is not credit, so nothing
+     below is written from it. The student's details above are still kept, and
+     the reply carries the server's own records. In shadow mode, and in a Worker
+     with no GRADING_MODE, this is exactly what it always was. */
+  const live = isLive(env, request);
+  for (const row of live ? [] : progressRows(id, b.progress))
     statements.push(env.DB.prepare(
       `INSERT INTO unit_progress (student_id, course, unit, completed_at) VALUES (?, ?, ?, ?)
        ON CONFLICT(student_id, course, unit) DO UPDATE SET completed_at = excluded.completed_at
        WHERE excluded.completed_at < unit_progress.completed_at`)
       .bind(...row));
 
-  const textbookRowsNow = textbookRows(id, b.textbooks);
+  const textbookRowsNow = live ? [] : textbookRows(id, b.textbooks);
   for (const row of textbookRowsNow)
     statements.push(env.DB.prepare(
       `INSERT INTO textbook_results (student_id, textbook, passed_at) VALUES (?, ?, ?)
@@ -331,7 +324,7 @@ async function sync(request, env) {
   // device reports it done at a higher level (the student did the further
   // work). A stale device reporting a lower level changes nothing.
   const trackNow = (s && typeof s === 'object' && String(s.track || '').toLowerCase()) || exists.track;
-  let completions = completionRows(id, b.doneCodes, b.completionTracks, trackNow);
+  let completions = live ? [] : completionRows(id, b.doneCodes, b.completionTracks, trackNow);
   /* A master's-level completion of a course with a textbook is not recorded
      until the record holds a pass on its textbook test (Dr. Cook, 4 Oct
      2026). The browser reports its completions on every sync, so the course
@@ -679,6 +672,12 @@ async function deleteStudent(env, rawCode) {
       env.DB.prepare('DELETE FROM notifications WHERE student_id = ?').bind(g),
       env.DB.prepare('DELETE FROM outreach WHERE student_id = ?').bind(g),
       env.DB.prepare('DELETE FROM contact_tokens WHERE student_id = ?').bind(g),
+      // Written answers and everything that hangs on them (docs/ai-grading.md, section 10).
+      env.DB.prepare('DELETE FROM calibration WHERE grade_id IN (SELECT id FROM answer_grades WHERE student_id = ?)').bind(g),
+      env.DB.prepare('DELETE FROM grade_queue WHERE grade_id IN (SELECT id FROM answer_grades WHERE student_id = ?)').bind(g),
+      env.DB.prepare('DELETE FROM appeals WHERE student_id = ? OR grade_id IN (SELECT id FROM answer_grades WHERE student_id = ?)').bind(g, g),
+      env.DB.prepare('DELETE FROM answer_grades WHERE student_id = ?').bind(g),
+      env.DB.prepare('DELETE FROM attempts WHERE student_id = ?').bind(g),
     ]),
   ]);
   return json({ deleted: true });
@@ -861,7 +860,7 @@ async function guarded(request, env, kind, run) {
   return res;
 }
 
-export async function handle(request, env) {
+export async function handle(request, env, ctx) {
   const url = new URL(request.url);
   const path = url.pathname.replace(/\/+$/, '') || '/';
   const method = request.method.toUpperCase();
@@ -932,6 +931,14 @@ export async function handle(request, env) {
       });
     }
     if (path === '/api/health') return json({ ok: true, requiredFrom: activatedTests(env) });
+
+    // AI grading: attempts, multiple choice, written answers, appeals, the shadow trial.
+    if (path === '/api/attempt' || path.startsWith('/api/attempt/') || path === '/api/mc' || path === '/api/grade'
+        || path === '/api/appeal' || path === '/api/shadow') {
+      const res = await gradingRoute(path, method, request, env, ctx, { json, fail, HttpError, body, str, resolveCode, guarded });
+      if (res) return res;
+      return fail(405, 'method not allowed');
+    }
 
     return fail(404, 'no such endpoint');
   } catch (e) {

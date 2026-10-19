@@ -96,7 +96,10 @@ if (!BASE) {
       if (sample.length) ok(root.querySelectorAll('.cts-reading[lang="fr"] + .cts-source[lang="en"]').length > 0, `fr/${page}: the English source is not beside the French`);
       for (const lang of ['', 'es']) {
         const other = fs.readFileSync(path.join('dist', lang, page), 'utf8');
-        ok(!/(?<![a-z-])lang="fr"|class="[^"]*\blang-fr\b/.test(other.replace(/<script[\s\S]*?<\/script>/g, '')), `${lang || 'en'}/${page}: carries French markup`);
+        const contentOnly = parse(other);
+        // Language names declare their own language even on another edition.
+        for (const choice of contentOnly.querySelectorAll('[data-cts-lang]')) choice.remove();
+        ok(!/(?<![a-z-])lang="fr"|class="[^"]*\blang-fr\b/.test(contentOnly.toString().replace(/<script[\s\S]*?<\/script>/g, '')), `${lang || 'en'}/${page}: carries French teaching markup`);
         for (const s of sample) ok(!other.includes(s.slice(0, 60)), `${lang || 'en'}/${page}: shows French text`);
         ok(!/Traduction provisoire/.test(other), `${lang || 'en'}/${page}: shows the French draft notice`);
       }
@@ -119,7 +122,7 @@ if (!BASE) {
   const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
   try {
     for (const r of french.filter((r) => r.test.questions.some((q) => q.prompt.fr)).slice(0, 4)) {
-      const ctx = await browser.newContext();
+      const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' } });
       await ctx.route('**/*', (route) => (route.request().url().startsWith(BASE) ? route.continue() : route.abort()));
       const p = await ctx.newPage();
       const errors = [];
@@ -128,7 +131,7 @@ if (!BASE) {
       await p.evaluate(() => { localStorage.setItem('cts_student', JSON.stringify({ name: 'T', track: 'cert' })); });
       await p.reload({ waitUntil: 'load' });
       const T = await p.evaluate(() => window.CTS_TEXTBOOK_TEST), d = await p.evaluate(() => window.CTS_TEXTBOOK.draw());
-      const first = T.questions[d[0]], second = T.questions[d[1]], third = T.questions[d[2]];
+      const first = T.questions[d[0]], second = T.questions[d[1]];
       const q0 = await p.locator('[data-cts-fill="0"] .cts-reading').first().textContent();
       ok(q0.includes(first.prompt.fr.split('____')[0].trim().slice(0, 20)), `fr/${r.page}Test.html: the question is not shown in French: ${q0}`);
       const answer = async (i, text) => {
@@ -139,7 +142,8 @@ if (!BASE) {
       ok(/Correct/.test(await answer(0, first.answer.fr.toUpperCase())), `fr/${r.page}Test.html: the French answer is marked wrong`);
       ok(/Correct/.test(await answer(1, second.answer.en)), `fr/${r.page}Test.html: the English answer is marked wrong`);
       const wrong = await answer(2, 'xyzzy');
-      ok(!/Correct/.test(wrong) && wrong.includes(third.answer.fr), `fr/${r.page}Test.html: a wrong answer does not show the French key`);
+      const verdict = await p.locator('div[data-cts-fill="2"] .cts-fill-bad').innerText();
+      ok(verdict.trim() === '✗ Incorrect.' && !/Réponse\s*:/.test(wrong), `fr/${r.page}Test.html: a wrong answer must show correctness only`);
       ok(errors.length === 0, `fr/${r.page}Test.html: ${errors[0]}`);
       // the English page still asks in English, and still takes English answers
       await p.goto(`${BASE}/${r.page}Test.html?cts_lang=en`, { waitUntil: 'load' });

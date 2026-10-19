@@ -28,7 +28,7 @@ const units = fs.readdirSync('dist').filter((f) => f.endsWith('.html') && html(f
 
 const browser = await chromium.launch(CHROME ? { executablePath: CHROME } : {});
 async function context(seed) {
-  const ctx = await browser.newContext({ locale: 'en-US' });
+  const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' },  locale: 'en-US' });
   await ctx.addInitScript((s) => {
     if (sessionStorage.getItem('seeded')) return;
     for (const [k, v] of Object.entries(s)) localStorage.setItem(k, v);
@@ -103,8 +103,8 @@ async function spanishPage(page, file) {
   await spanishPage(p, 'CTSUnit2.html'); await p.waitForTimeout(200);
   const g = await p.evaluate(() => document.getElementById('greeting').textContent);
   ok(/Bienvenido, Ana Prueba — Certificado de Ministerio/.test(g), `the greeting in Spanish reads "${g}"`);
-  const box = await p.evaluate(() => [...document.querySelectorAll('[data-cts-rrbox] *')].filter((e) => e.offsetParent !== null && !e.children.length).map((e) => e.textContent.trim()).join(' | '));
-  ok(/Lecturas con Honores/.test(box) && !/Honors Readings|Open the Reading Room/.test(box), `the honours box in Spanish reads "${box}"`);
+  const box = await p.locator('[data-cts-rrbox]').innerText();
+  ok(/Lecturas del curso/.test(box) && /honores son opcionales/i.test(box) && !/Course Readings|Certificate and Associate|Honors Readings|Open the Reading Room/.test(box), `the honours box in Spanish reads "${box}"`);
   await ctx.close();
   const ctx2 = await context({ cts_lang: 'es' });
   const h = await ctx2.newPage();

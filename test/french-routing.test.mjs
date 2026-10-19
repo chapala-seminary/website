@@ -24,7 +24,7 @@ const ENGLISH = /(?<![\wÀ-ÿ])(Certificate|Print|Back to|Issued|Confirm your|Se
 try {
   // ---- routing ---------------------------------------------------------------
   {
-    const ctx = await browser.newContext({ locale: 'fr-FR' });
+    const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' },  locale: 'fr-FR' });
     const page = await ctx.newPage();
     await page.goto(`${base}/index.html`); await settle(page);
     assert.equal(await page.evaluate(() => localStorage.getItem('cts_lang')), 'en'); checks++;
@@ -49,7 +49,7 @@ try {
   }
   {
     // Spanish remembered: a bare English link goes to /es/, a French one stays.
-    const ctx = await browser.newContext({ locale: 'en-US' });
+    const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' },  locale: 'en-US' });
     const page = await ctx.newPage();
     await page.goto(`${base}/es/index.html?cts_lang=es`); await settle(page);
     await page.goto(`${base}/CTSNTUnit2.html?keep=1#lesson`);
@@ -65,7 +65,7 @@ try {
 
   // ---- French pages behind the email links ------------------------------------
   {
-    const ctx = await browser.newContext({ locale: 'fr-FR' });
+    const ctx = await browser.newContext({ extraHTTPHeaders: { 'x-test-grading-mode': 'shadow' },  locale: 'fr-FR' });
     const page = await ctx.newPage();
     const missing = [];
     page.on('response', (r) => { if (r.status() === 404 && new URL(r.url()).origin === base) missing.push(r.url()); });

@@ -28,6 +28,16 @@
  * attempt draws a fresh twenty. Reload mid-attempt and the same twenty come
  * back with the answers so far.
  *
+ * LIVE MODE (docs/ai-grading.md, a page that says grading: "live"). The page
+ * carries every question's words and id but no key, and no draw: the server
+ * draws the twenty (POST /api/attempt names them), grades each answer
+ * (CTSFill, live), and decides the pass on Submit. This browser then mirrors
+ * the outcome into the keys above. A pass shows only when the server says so;
+ * a result still being graded shows "Submitted -- grading pending" and is
+ * collected later (cts_textbook_<slug>_pending holds the attempt). There is no
+ * practice set after a pass: a draw is the server's to make, and a second
+ * attempt would be a second record.
+ *
  * A BANK DRAWN BY READING (World Religions, revised 10 Oct 2026). When the
  * bank says `perGroup` and each question its `group`, every attempt takes
  * perGroup questions from each group -- four from each of the five readings
@@ -92,11 +102,12 @@
   function testPage() {
     var T = window.CTS_TEXTBOOK_TEST;
     if (!T || !window.CTSFill) return;
+    var LIVE = T.grading === "live", G = window.CTSGrading;
     var slug = T.slug, n = T.questions.length, reading = T.kind === "reading";
     var W = reading
       ? { passed: { en: "Required-reading test passed", es: "Examen de lecturas requeridas aprobado", fr: "Examen des lectures obligatoires réussi" }, review: { en: "Go back to the readings", es: "Vuelva a las lecturas", fr: "Relisez les lectures" } }
       : { passed: { en: "Textbook test passed", es: "Examen del libro aprobado", fr: "Examen du manuel réussi" }, review: { en: "Review the book", es: "Repase el libro", fr: "Relisez le manuel" } };
-    var KEY = { state: "cts_textbook_" + slug + "_state", lock: "cts_textbook_" + slug + "_lock", passed: "cts_textbook_" + slug + "_passed" };
+    var KEY = { state: "cts_textbook_" + slug + "_state", lock: "cts_textbook_" + slug + "_lock", passed: "cts_textbook_" + slug + "_passed", pending: "cts_textbook_" + slug + "_pending" };
     var LOCK_MASTERS_MIN = 15, LOCK_CERT_MIN = 2;
     function track() { var s = jget("cts_student", null); return String(lsGet("cts_track") || (s && s.track) || "cert").toLowerCase(); }
     function isMasters() { var t = track(); return t === "mdiv" || t === "thm" || t === "mth"; }
@@ -156,28 +167,33 @@
     }
     /* the attempt in hand, or a new one: after a failed attempt's wait, if
        nothing usable is saved, or if it was begun on another revision of the bank */
-    var changedRevision = REV && state.rev !== REV;
-    var hadOldAttempt = changedRevision && Array.isArray(state.draw) && state.draw.length > 0;
-    // A corrected bank must not retain a failed-attempt wait from its old questions.
-    // The independent pass key and server completion record are never cleared.
-    if (changedRevision && T.resetWaitOnRevision) lsDel(KEY.lock);
-    if (!drawOK(state.draw) || changedRevision || (state.redrawAt && Date.now() >= state.redrawAt && !lockRemaining())) startAttempt();
+    var changedRevision = false, hadOldAttempt = false;
+    if (!LIVE) {
+      changedRevision = REV && state.rev !== REV;
+      hadOldAttempt = changedRevision && Array.isArray(state.draw) && state.draw.length > 0;
+      // A corrected bank must not retain a failed-attempt wait from its old questions.
+      // The independent pass key and server completion record are never cleared.
+      if (changedRevision && T.resetWaitOnRevision) lsDel(KEY.lock);
+      if (!drawOK(state.draw) || changedRevision || (state.redrawAt && Date.now() >= state.redrawAt && !lockRemaining())) startAttempt();
+    }
 
     var host = el("tb-questions"), status = el("tb-status"), result = el("tb-result");
     var fill = null, unlockTimer = null;
 
     function mount() {
-      var qs = state.draw.map(function (i) { return T.questions[i]; });
+      var qs = (Array.isArray(state.draw) ? state.draw : []).map(function (i) { return T.questions[i]; });
       fill = window.CTSFill.mount({
-        host: host, questions: qs, state: state,
+        host: host, questions: qs, state: state, hideAnswers: true,
         counts: function () { return true; },
         lockedUntil: lockUntil,
         passed: function () { return !!passedOn() && !practice; },
-        save: save
+        save: save,
+        live: LIVE ? { attemptId: function () { return L.attemptId; }, onChecked: function () { renderStatus(); } } : null
       });
       fill.render();
       renderStatus();
       scheduleUnlock();
+      renderReview();
     }
 
     /* What the seminary's record says about this test for this student
@@ -197,6 +213,7 @@
       return "";
     }
     function renderStatus() {
+      if (LIVE) return renderLiveStatus();
       var when = passedOn(), m = lockRemaining(), h = "";
       var st = standing();
       if (hadOldAttempt && T.resetWaitOnRevision) h += '<p class="small" id="tb-revised">' + bi(when ? {
@@ -231,7 +248,7 @@
     function scheduleUnlock() {
       if (unlockTimer) clearTimeout(unlockTimer);
       var until = lockUntil();
-      if (until > Date.now()) unlockTimer = setTimeout(function () { startAttempt(); say(""); mount(); }, until - Date.now() + 600);
+      if (until > Date.now()) unlockTimer = setTimeout(function () { if (LIVE) { say(""); liveStart(); return; } startAttempt(); say(""); mount(); }, until - Date.now() + 600);
     }
 
     /* After a pass, the course's other required test, if it is still to pass:
@@ -248,11 +265,56 @@
     }
     function say(msg, colour) { result.innerHTML = msg ? '<span style="color:' + (colour || "#000") + '">' + msg + "</span>" : ""; }
 
+    // Review is generated from assigned teaching paragraphs, not answer keys.
+    // It is deliberately separate from CTSFill's per-item correctness display.
+    function renderReview() {
+      var reviewHost = el("tb-review");
+      if (!reviewHost) {
+        reviewHost = document.createElement("section"); reviewHost.id = "tb-review";
+        reviewHost.className = "tb-review";
+        result.parentNode.appendChild(reviewHost);
+      }
+      var snapshot = state.review, bank = window.CTS_EXAM_REVIEW;
+      reviewHost.innerHTML = "";
+      if (!snapshot || !Array.isArray(snapshot.draw) || (!Array.isArray(snapshot.answers) && !Array.isArray(snapshot.missed))) return;
+      if (LIVE && !snapshot.missed) return;
+      var codes = snapshot.codes || (window.CTSLanguage && window.CTSLanguage.lang === "fr" ? ["fr", "en"] : ["en", "es"]);
+      var items = "";
+      snapshot.draw.forEach(function (index, position) {
+        var q = T.questions[index];
+        if (!q || (snapshot.missed ? !snapshot.missed[position] : window.CTSFill.fillRight(q, snapshot.answers[position], codes))) return;
+        var passage = bank && bank.slug === slug && bank.questions[index];
+        items += '<article class="tb-review-item"><h3>' + bi({en:"Question " + (position+1),es:"Pregunta " + (position+1),fr:"Question " + (position+1)}) + '</h3><p>' + bi({en:esc(q.prompt.en),es:esc(q.prompt.es),fr:q.prompt.fr ? esc(q.prompt.fr) : undefined}) + '</p>';
+        if (passage) {
+          items += '<p>' + bi(passage.kind === 'lesson' ? {en:"The course lesson explains this question’s principle or context:",es:"La lección del curso explica el principio o contexto de esta pregunta:",fr:"La leçon du cours explique le principe ou le contexte de cette question :"} : {en:"The assigned reading explains this question’s principle or context:",es:"La lectura asignada explica el principio o contexto de esta pregunta:",fr:"La lecture assignée explique le principe ou le contexte de cette question :"}) + '</p><blockquote lang="' + esc(passage.lang) + '">';
+          passage.paragraphs.forEach(function (paragraph) { items += '<p>' + esc(paragraph) + '</p>'; });
+          items += '</blockquote><p><a href="' + esc(passage.href) + '">' + bi({en:"Read in context: ",es:"Leer en contexto: ",fr:"Lire dans son contexte : "}) + esc(passage.heading) + '</a></p>';
+        } else {
+          items += '<p><a href="/' + esc(T.page) + '.html">' + bi(W.review) + '</a></p>';
+        }
+        items += '</article>';
+      });
+      if (!items) return;
+      reviewHost.innerHTML = '<h2>' + bi({en:"Learn from the questions you missed",es:"Aprenda de las preguntas que no acertó",fr:"Apprenez des questions manquées"}) + '</h2><p>' + bi({en:"Read each explanation, then revisit its assigned section before another attempt. These passages retain the reading author’s perspective.",es:"Lea cada explicación y vuelva a su sección asignada antes de otro intento. Estos pasajes conservan la perspectiva del autor de la lectura.",fr:"Lisez chaque explication, puis revenez à la section assignée avant une nouvelle tentative. Ces passages conservent le point de vue de l’auteur de la lecture."}) + '</p>' + items;
+    }
+
     function submit() {
+      if (LIVE) return liveSubmit();
       if (lockRemaining()) { renderStatus(); return; }
       if (passedOn() && !practice) return;
+      var sentAnswers = state.draw.map(function (bi, k) { return { qid: (reading ? "rd:" : "tb:") + slug + "/fill/" + bi, answer: state.fillAnswers[k] }; })
+        .filter(function (a) { return String(a.answer || "").trim(); });
+      var submittedAnswers = state.fillAnswers.slice();
       var r = fill.submit();
+      var reviewCodes = window.CTSLanguage && window.CTSLanguage.lang === "fr" ? ["fr", "en"] : ["en", "es"];
+      state.review = { draw: state.draw.slice(), answers: submittedAnswers, codes: reviewCodes,
+        missed: state.draw.map(function (index,position) { return !window.CTSFill.fillRight(T.questions[index],submittedAnswers[position],reviewCodes); }) };
+      save();
       var ok = r.score >= T.pass, completedNow = false;
+      /* Shadow mode: cts-shadow.js posts what was submitted to /api/shadow.
+         Grades nothing; no listener, no effect. */
+      try { document.dispatchEvent(new CustomEvent("cts:submitted", { detail: { scope: (reading ? "rd:" : "tb:") + slug, answers: sentAnswers,
+        clientResult: { passed: ok, fill: { right: r.score, total: r.n } } } })); } catch (e) {}
       if (ok) {
         if (!practice) {
           var d = new Date(), when = d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
@@ -286,16 +348,210 @@
       }
       fill.render();
       renderStatus();
+      renderReview();
       scheduleUnlock();
     }
     function reset() {
+      if (LIVE) return liveReset();
       if (lockRemaining() || (passedOn() && !practice)) return;
-      fill.reset(); save(); say(""); fill.render();
+      delete state.review; fill.reset(); save(); say(""); fill.render(); renderReview();
+    }
+
+    /* ---- LIVE MODE: the server draws, grades and decides -------------------- */
+    var L = { S: null, attemptId: null, status: "loading", trouble: null, working: "", stopPoll: null };
+    var STR = {
+      pendingTest: { en: "Your result will appear here when it is graded. You may leave this page: it is checked again the next time you open it.",
+                     es: "Su resultado aparecerá aquí cuando se califique. Puede salir de esta página: se vuelve a comprobar la próxima vez que la abra.",
+                     fr: "Votre résultat apparaîtra ici une fois corrigé. Vous pouvez quitter cette page : il est vérifié de nouveau à votre prochaine visite." }
+    };
+    function bankIndex(qid) {
+      var m = /\/fill\/(\d+)$/.exec(String(qid));
+      var i = m ? +m[1] : -1;
+      return i >= 0 && i < n && T.questions[i].qid === qid ? i : -1;
+    }
+    function itemsOf(S) {
+      var map = G.verdictsOf(S);
+      return Object.keys(map).map(function (qid) { return Object.assign({ qid: qid }, map[qid]); });
+    }
+    function setLock(lock) {
+      var l = G.lockOf(lock);
+      if (l && l.until > Date.now()) { lsSet(KEY.lock, String(l.until)); state.redrawAt = l.until; }
+      else { lsDel(KEY.lock); delete state.redrawAt; }
+      save();
+    }
+    function liveTrouble(r, retry) { L.working = ""; L.trouble = { r: r, retry: retry }; renderStatus(); }
+
+    function renderLiveStatus() {
+      var when = passedOn(), m = lockRemaining(), h = "";
+      var st = standing();
+      if (st && !when) h += '<p class="small muted" id="tb-standing">' + st + "</p>";
+      if (L.status === "unregistered") h += G.registerHtml(bi, true);
+      else if (L.status === "connecting" || L.status === "loading") h += '<p class="small" role="status">' + bi(G.S.connecting) + "</p>";
+      if (L.working) h += '<p class="small" role="status" style="font-weight:600">' + bi(L.working === "reviewing" ? G.S.reviewing : G.S.submitting) + "</p>";
+      if (L.trouble) h += G.troubleHtml(L.trouble.r, bi);
+      if (when) {
+        h += '<div class="cts-passed"><p class="cts-passed-title">&#10003; ' + bi(W.passed) + "</p>" +
+             "<p>" + bi({ en: "Passed on " + esc(when) + ". It is saved in your record.", es: "Aprobado el " + esc(when) + ". Quedó guardado en su registro.", fr: "Réussi le " + esc(when) + ". Ce résultat est enregistré dans votre dossier." }) + "</p></div>";
+      } else if (L.status === "pending") {
+        h += '<div class="exam-status" role="status"><p style="color:#8a5a00;font-weight:600">' + bi(G.S.submittedPending) + "</p><p class=\"small\">" + bi(STR.pendingTest) + "</p></div>";
+      } else if (m) {
+        h += '<div class="exam-status fail">' + bi({ en: "Locked after a failed attempt. " + W.review.en + " and try again in " + m + " minute(s); the next attempt draws a fresh twenty.",
+                                                     es: "Bloqueado tras un intento fallido. " + W.review.es + " e inténtelo de nuevo en " + m + " minuto(s); el siguiente intento toma otras veinte.",
+                                                     fr: "Examen bloqué après une tentative non réussie. " + W.review.fr + " et réessayez dans " + m + " minute(s) ; la tentative suivante tire vingt nouvelles questions." }) + "</div>";
+      }
+      if (L.status === "ready" || L.status === "pending") h += '<p class="small muted cts-ai-note">' + bi(G.S.aiNote) + "</p>";
+      status.innerHTML = h;
+      var rb = status.querySelector("[data-cts-retry]");
+      if (rb) rb.addEventListener("click", function () { var t = L.trouble; L.trouble = null; renderStatus(); if (t && t.retry) t.retry(); else liveStart(); });
+      var off = !!when || !!m || L.status !== "ready" || !!L.working;
+      var sb = el("tb-submit"), rs = el("tb-reset");
+      if (sb) sb.disabled = off;
+      if (rs) rs.disabled = off;
+    }
+
+    function liveStart() {
+      if (L.stopPoll) { L.stopPoll(); L.stopPoll = null; }
+      L.trouble = null; L.working = "";
+      if (!G.registered()) { L.status = "unregistered"; return renderStatus(); }
+      if (passedOn()) { L.status = "passed"; return renderStatus(); }
+      L.status = "connecting"; renderStatus();
+      var pid = lsGet(KEY.pending);
+      (pid ? G.calls.status(pid) : Promise.resolve(null)).then(function (pr) {
+        if (pr && pr.unregistered) { L.status = "unregistered"; return renderStatus(); }
+        if (pr && !pr.ok && (pr.offline || pr.status >= 500 || pr.status === 429)) { L.status = "ready"; return liveTrouble(pr, liveStart); }
+        if (pr && pr.ok && pr.data) {
+          var st = String(pr.data.status || "");
+          if (st === "pending") return livePending(pid, pr.data);
+          if (st === "passed") { lsDel(KEY.pending); return livePass(pr.data); }
+          if (st === "failed") { lsDel(KEY.pending); liveFail(pr.data); }
+        } else if (pid) lsDel(KEY.pending);
+        G.calls.attempt(T.scope, serverLang()).then(function (r) {
+          if (r.unregistered) { L.status = "unregistered"; return renderStatus(); }
+          if (!r.ok) {
+            var lk = r.data && r.data.lock;
+            if (lk) { setLock(lk); L.status = "ready"; mount(); renderStatus(); scheduleUnlock(); return; }
+            L.status = "ready"; return liveTrouble(r, liveStart);
+          }
+          var S = r.data || {};
+          if (S.status === "pending" && S.attemptId) return livePending(S.attemptId, S);
+          var idx = (((S.items || {}).fill) || []).map(bankIndex).filter(function (i) { return i >= 0; });
+          if (!idx.length) { L.status = "ready"; return liveTrouble({ status: 500 }, liveStart); }
+          L.S = S; L.attemptId = S.attemptId;
+          if (state.attemptId !== S.attemptId) { state.fillAnswers = []; state.fillChecked = []; delete state.review; }
+          state.draw = idx; state.attemptId = S.attemptId;
+          setLock(S.lock);
+          L.status = "ready";
+          mount();
+          fill.absorb(itemsOf(S));
+          save(); fill.render(); renderStatus(); scheduleUnlock();
+        });
+      });
+    }
+    function serverLang() { var l = document.documentElement.lang; return l === "es" || l === "fr" ? l : (document.body.classList.contains("lang-es") ? "es" : window.CTSLanguage && window.CTSLanguage.lang === "fr" ? "fr" : "en"); }
+
+    function liveSubmit() {
+      if (lockRemaining()) { renderStatus(); return; }
+      if (passedOn() || L.status !== "ready" || L.working) return;
+      L.trouble = null; L.working = "reviewing"; renderStatus();
+      function again() { L.trouble = null; liveSubmit(); }
+      fill.sendUnchecked().then(function (ok) {
+        if (!ok) { L.working = ""; return liveTrouble({ offline: true }, again); }
+        L.working = "submitting"; renderStatus();
+        return G.calls.submit(L.attemptId).then(function (r) {
+          if (!r.ok || !r.data) return liveTrouble(r, again);
+          L.working = "";
+          applyResult(r.data);
+        });
+      });
+    }
+    function applyResult(R) {
+      fill.absorb(itemsOf(R));
+      var st = String(R.status || "");
+      if (st === "passed") return livePass(R);
+      if (st === "failed") return liveFail(R);
+      return livePending(L.attemptId, R);
+    }
+    function scoreText(R) {
+      var sc = G.scoreOf(R && R.scores, "fill"), right = sc ? sc.right : fill.liveScore(), total = sc ? sc.total : state.draw.length;
+      return { right: right, total: total };
+    }
+    function captureLiveReview(R) {
+      var verdicts = G.verdictsOf(R), draw = (state.draw || []).slice();
+      if (!draw.length) return;
+      state.review = { draw: draw, missed: draw.map(function (index) {
+        var grade = verdicts[T.questions[index].qid];
+        return !grade || grade.verdict === "wrong";
+      }) };
+      save(); renderReview();
+    }
+    function livePass(R) {
+      captureLiveReview(R);
+      var d = new Date(), when = d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
+      lsSet(KEY.passed, when); lsDel(KEY.pending);
+      var all = jget("cts_textbooks_passed", []); if (all.indexOf(slug) === -1) { all.push(slug); lsSet("cts_textbooks_passed", JSON.stringify(all)); }
+      lsDel(KEY.lock); delete state.redrawAt; save();
+      L.status = "passed"; L.working = "";
+      if (L.stopPoll) { L.stopPoll(); L.stopPoll = null; }
+      var completedNow = false;
+      try {
+        var c = T.completion;
+        if (R && R.courseDone && window.CTSRecord && c && !c.single) completedNow = window.CTSRecord.course(c);
+        if (window.CTS_SYNC && window.CTS_SYNC.sync) window.CTS_SYNC.sync();
+      } catch (e) {}
+      var sc = scoreText(R);
+      say(bi({ en: "&#10003; Passed: " + sc.right + " of " + sc.total + " right (" + T.pass + " needed)." + (completedNow === "new" ? " That completes the course: " : ""),
+               es: "&#10003; Aprobado: " + sc.right + " de " + sc.total + " correctas (se necesitan " + T.pass + ")." + (completedNow === "new" ? " Con esto el curso queda completo: " : ""),
+               fr: "&#10003; Réussi : " + sc.right + " bonnes réponses sur " + sc.total + " (" + T.pass + " requises)." + (completedNow === "new" ? " Le cours est ainsi terminé : " : "") })
+          + (completedNow === "new" && T.completion.page ? '<a href="/' + esc(T.completion.page) + '">' + bi({ en: "your certificate", es: "su certificado", fr: "votre certificat" }) + "</a>" : "")
+          + stillToPass(), "#1f6b3b");
+      if (fill) fill.render();
+      renderStatus();
+    }
+    function liveFail(R) {
+      captureLiveReview(R);
+      lsDel(KEY.pending);
+      if (L.stopPoll) { L.stopPoll(); L.stopPoll = null; }
+      var l = G.lockOf(R.lock), mins = isMasters() ? LOCK_MASTERS_MIN : LOCK_CERT_MIN;
+      if (l) setLock(R.lock); else { var until = Date.now() + mins * 60000; lsSet(KEY.lock, String(until)); state.redrawAt = until; save(); }
+      mins = lockRemaining() || mins;
+      L.status = "ready"; L.working = "";
+      var sc = scoreText(R);
+      say(bi({ en: "Not yet: " + sc.right + " of " + sc.total + " right, " + T.pass + " needed. " + W.review.en + " and try again in " + mins + " minute(s).",
+               es: "Aún no: " + sc.right + " de " + sc.total + " correctas; se necesitan " + T.pass + ". " + W.review.es + " e inténtelo de nuevo en " + mins + " minuto(s).",
+               fr: "Pas encore : " + sc.right + " bonnes réponses sur " + sc.total + " ; il en faut " + T.pass + ". " + W.review.fr + " et réessayez dans " + mins + " minute(s)." }), "#8a1f1f");
+      if (fill) fill.render();
+      renderStatus(); scheduleUnlock();
+    }
+    function livePending(id, R) {
+      L.attemptId = id || L.attemptId; L.status = "pending"; L.working = "";
+      if (L.attemptId) lsSet(KEY.pending, L.attemptId);
+      if (R && fill && (R.answered || R.verdicts)) fill.absorb(itemsOf(R));
+      say(bi(G.S.submittedPending), "#8a5a00");
+      if (L.stopPoll) L.stopPoll();
+      L.stopPoll = G.poll(L.attemptId, function (reply) {
+        var st = String(reply.status || "");
+        if (st === "pending" || !st) { if (fill) { fill.absorb(itemsOf(reply)); fill.render(); } return false; }
+        L.stopPoll = null; lsDel(KEY.pending);
+        if (st === "passed") livePass(reply); else { L.status = "ready"; liveFail(reply); }
+        return true;
+      });
+      if (fill) fill.render();
+      renderStatus();
+    }
+    function liveReset() {
+      if (lockRemaining() || passedOn() || L.status !== "ready") return;
+      // checked answers are final for the attempt; what was typed and not checked can be cleared
+      for (var i = 0; i < state.draw.length; i++) if (!state.fillChecked[i]) state.fillAnswers[i] = "";
+      save(); say(""); fill.render();
     }
 
     el("tb-submit").addEventListener("click", submit);
     el("tb-reset").addEventListener("click", reset);
     mount();
+    if (LIVE) {
+      if (G) { G.appeal.onChange(function () { if (fill) fill.render(); }); liveStart(); }
+      else { L.status = "ready"; liveTrouble({ offline: true }, function () { location.reload(); }); }
+    }
     document.addEventListener("cts-sync-applied", renderStatus);
 
     window.CTS_TEXTBOOK = { submit: submit, reset: reset, state: function () { return state; }, draw: function () { return state.draw.slice(); } };
