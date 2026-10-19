@@ -274,7 +274,7 @@ ok(!tb.body.completions.some((c) => c.code === 'CTSCULTS'), "a master's completi
 const heldCert = await jpost('/api/certificate', { code: CODE, level: 'course', course: 'cults', title: 'Cults & World Religions' });
 ok(heldCert.status === 409 && /textbook test/.test(heldCert.body?.error || ''),
   `its certificate is refused and says why (${heldCert.status}: ${heldCert.body?.error})`);
-tb = await jpost('/api/sync', { code: CODE, textbooks: [{ slug: 'cults', passedAt: T_LATE }], doneCodes: ['CTSCULTS'], completionTracks: { CTSCULTS: 'thm' } });
+tb = await jpost('/api/sync', { code: CODE, textbooks: passes(['CTSCULTS']), doneCodes: ['CTSCULTS'], completionTracks: { CTSCULTS: 'thm' } }); // the textbook test and, since 15 Oct, the readings test
 ok(tb.body.textbooks.some((t) => t.textbook === 'cults' && t.passed_at === T_LATE), `the textbook pass is in the record (${JSON.stringify(tb.body.textbooks)})`);
 ok(tb.body.completions.some((c) => c.code === 'CTSCULTS' && c.track === 'thm'), 'and the course is recorded, at the master\'s level, by the sync that brought it');
 tb = await jpost('/api/sync', { code: CODE, textbooks: [{ slug: 'cults', passedAt: T_EARLY }] });
