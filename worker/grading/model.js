@@ -82,7 +82,16 @@ async function call(env, model, kind, lang, items, version, more = [], deadline 
   };
   const run = env.AI_FAKE ? Promise.resolve().then(() => fakeAIRun(env, model, params)) : env.AI.run(model, params);
   let timer;
-  const timeout = new Promise((_, rej) => { timer = setTimeout(() => rej(new Error('the model took too long')), Math.min(TIMEOUT_MS, remaining)); });
+  const timeout = new Promise((_, rej) => {
+    timer = setTimeout(() => {
+      const error = new Error(remaining <= TIMEOUT_MS ? 'grading request time budget reached' : 'the model took too long');
+      // Timers can fire just before Date.now() reaches the absolute deadline.
+      // Once the shared-budget timer fires, its budget is spent regardless of
+      // that rounding; do not start another provider call in the remaining ms.
+      if (remaining <= TIMEOUT_MS) error.code = 'GRADING_DEADLINE';
+      rej(error);
+    }, Math.min(TIMEOUT_MS, remaining));
+  });
   try { return await Promise.race([run, timeout]); } finally { clearTimeout(timer); }
 }
 
@@ -285,7 +294,7 @@ export async function gradeBatch(env, kind, lang, items, { deadline = Date.now()
       const msg = String((e && e.message) || e);
       error = msg.slice(0, 300);
       await addUsage(env, model, { calls: 1, errors: 1 });
-      if (CAPACITY.test(msg) || CAPACITY.test(String(e && e.code))) break;
+      if (e?.code === 'GRADING_DEADLINE' || CAPACITY.test(msg) || CAPACITY.test(String(e && e.code))) break;
       continue;
     }
     const usage = res && res.usage || {};

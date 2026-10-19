@@ -287,6 +287,26 @@ eq([v.ok.get('q1')?.verdict, v.ok.get('q1')?.record?.quote_dropped], ['partly', 
   t = mkEnv([]);
   r = await gradeBatch(t.env, 'sa', 'en', one, { deadline: Date.now() - 1 });
   eq([t.calls.length, r.unresolved.length], [0, 1], 'deadline: an exhausted mixed-kind request starts no new AI call');
+  // Reproduce a runtime timer firing before the wall-clock deadline. Do not
+  // depend on Linux timer rounding or machine load to hit this boundary.
+  const realSetTimeout = globalThis.setTimeout;
+  t = mkEnv([() => new Promise(() => {})]);
+  try {
+    globalThis.setTimeout = (fn, ms, ...args) => realSetTimeout(fn, ms <= 500 ? 0 : ms, ...args);
+    r = await gradeBatch(t.env, 'sa', 'en', one, { deadline: Date.now() + 500 });
+  } finally {
+    globalThis.setTimeout = realSetTimeout;
+  }
+  eq([t.calls.length, r.results.size, r.unresolved.length], [1, 0, 1], 'deadline: an early shared-budget timer still forbids retry/fallback calls');
+  eq(r.error, 'grading request time budget reached', 'deadline: shared-budget expiry is distinguished from a provider timeout');
+  t = mkEnv([() => new Promise(() => {}), reply(good('q1'))]);
+  try {
+    globalThis.setTimeout = (fn, ms, ...args) => realSetTimeout(fn, 0, ...args);
+    r = await gradeBatch(t.env, 'sa', 'en', one, { deadline: Date.now() + 60000 });
+  } finally {
+    globalThis.setTimeout = realSetTimeout;
+  }
+  eq([t.calls.length, r.results.get('q1')?.verdict], [2, 'met'], 'deadline: an ordinary provider timeout still retries when the shared budget remains');
 }
 
 // the fake model answers from hints and keeps to the schema the validator checks
