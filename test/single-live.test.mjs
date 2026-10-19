@@ -116,7 +116,15 @@ async function takeUnit(p, s, { wrongMc = 0, fills = true, written = true, tag =
     await p.waitForSelector(`#fill_${s.unit} .cts-fill-q[data-cts-fill="${i}"] .cts-fill-ok`, { timeout: 15000 });
   }
   if (written) for (let i = 0; i < s.sa.length; i++) await p.locator(u.sa(i)).fill(hint(i, tag));
+  await keepStudying(p);
   await p.locator(u.submit).click();
+}
+/* A new student is asked to confirm their email in a note fixed to the foot
+   of the screen (cts-sync.js buildEmailBanner), which can sit over a unit's
+   Submit button. A student taps "Keep studying"; so does the test. */
+async function keepStudying(p) {
+  const keep = p.locator('#cts-email-confirm button', { hasText: /Keep studying|Seguir estudiando|Continuer à étudier/ });
+  if (await keep.count()) await keep.first().click().catch(() => {});
 }
 async function checkExpansion(p, field, submit) {
   await p.locator(field).fill('A short draft'); await p.locator(submit).click();
