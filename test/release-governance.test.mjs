@@ -101,7 +101,7 @@ test('production guard rejects dirty, wrong-branch and outdated checkouts before
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 
-test('governance API flow requires exact human approvals and tested beta promotion; status targets PR head', async () => {
+test('beta accepts agent work; production requires Wayne and the exact successful beta; Robert exemption remains', async () => {
   const { mkdtempSync, writeFileSync, rmSync } = await import('node:fs');
   const { tmpdir } = await import('node:os');
   const { join } = await import('node:path');
@@ -142,12 +142,16 @@ test('governance API flow requires exact human approvals and tested beta promoti
       });
     };
     const content = run(); assert.equal(content.status, 0, content.stderr);
-    assert.notEqual(run({ reviews: [] }).status, 0);
+    assert.equal(run({ reviews: [] }).status, 0);
     const tech = { files: [{ filename: 'worker/api.js', status: 'modified' }] };
-    assert.notEqual(run(tech).status, 0);
+    assert.equal(run({ ...tech, reviews: [] }).status, 0);
     assert.equal(run({ ...tech, reviews: [review('ChapalaTheological1'), review('satoshisound')] }).status, 0);
     const mainPR = { merge_commit_sha: 'b'.repeat(40), state: 'open', draft: false, changed_files: 1, body: evidence, base: { ref: 'main', sha: 'base' }, head: { sha, ref: 'beta', repo: { full_name: repo } } };
-    assert.equal(run({ pr: mainPR }).status, 0);
+    assert.equal(run({ pr: mainPR, ...tech }).status, 0);
+    assert.equal(run({ pr: { ...mainPR, body: '' }, ...tech }).status, 0);
+    assert.notEqual(run({ pr: mainPR, reviews: [] }).status, 0);
+    assert.notEqual(run({ pr: mainPR, reviews: [review('satoshisound')] }).status, 0);
+    assert.notEqual(run({ pr: mainPR, reviews: [{ ...review('ChapalaTheological1'), commit_id: 'old' }] }).status, 0);
     assert.notEqual(run({ pr: mainPR, runs: { workflow_runs: [{ head_sha: sha, status: 'completed', conclusion: 'failure' }] } }).status, 0);
     assert.notEqual(run({ pr: mainPR, beta: { object: { sha: 'new-beta' } } }).status, 0);
     assert.notEqual(run({ pr: { ...mainPR, head: { ...mainPR.head, ref: 'unreviewed-feature' } } }).status, 0);
@@ -161,7 +165,7 @@ test('governance API flow requires exact human approvals and tested beta promoti
     assert.match(published.stdout, new RegExp(`status:pending:${sha}`));
     assert.match(published.stdout, new RegExp(`status:success:${sha}`));
     assert.match(published.stdout, new RegExp(`status:success:${'b'.repeat(40)}`));
-    const rejected = run({ reviews: [] }, true);
+    const rejected = run({ pr: mainPR, reviews: [] }, true);
     assert.notEqual(rejected.status, 0);
     assert.match(rejected.stdout, new RegExp(`status:failure:${sha}`));
   } finally { rmSync(root, { recursive: true, force: true }); }
