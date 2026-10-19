@@ -420,37 +420,48 @@ async function issueCertificate(request, env) {
   // for a course certificate, the course counts and required courses for a
   // degree (worker/awards.js). A fabricated certificate therefore needs a
   // fabricated complete record first.
+  // A course certificate names the level the course was EARNED at: the
+  // completion the record holds for it (written by the server, and only ever
+  // raised by work done at the higher level), not the student's current
+  // track. A Certificate-level course stays a Certificate-level award after a
+  // move to the Th.M. (ChatGPT's review of #125, 19 Oct 2026). A completion
+  // with no level (before migration 0003) counts at the student's own level,
+  // as degree_progress and degreeShortfall already count it. A unit course
+  // with no completion recorded (units reported by a browser-graded build,
+  // which record no level) is judged and named at the student's own level, as
+  // before: that record holds nothing better, and that level's required tests
+  // are enforced (courseShortfall).
+  const own = studentLevel(student.track, student.goal);
+  let awardLevel = own;
   if (level === 'course') {
     const c = resolveCourse(course);
     if (!c) throw new HttpError(400, 'unknown course: ' + course);
     // One stored name per course, so "ots" and "CTSOTS" are the same award.
     course = c.slug || c.code;
+    const tb = (await env.DB.prepare('SELECT textbook FROM textbook_results WHERE student_id = ?').bind(id).all()).results ?? [];
+    const done = (await env.DB.prepare('SELECT code, track, completed_at FROM course_completions WHERE student_id = ?').bind(id).all()).results ?? [];
+    const completion = done.find((r) => (canonicalCode(r.code) || String(r.code).toUpperCase()) === c.code);
+    if (completion) awardLevel = studentLevel(completion.track || own, completion.track ? null : student.goal);
     if (c.units) {
       const rows = await env.DB.prepare(
         'SELECT unit FROM unit_progress WHERE student_id = ? AND course = ?').bind(id, c.slug).all();
-      const tb = (await env.DB.prepare('SELECT textbook FROM textbook_results WHERE student_id = ?').bind(id).all()).results ?? [];
-      const done = (await env.DB.prepare('SELECT code, track, completed_at FROM course_completions WHERE student_id = ?').bind(id).all()).results ?? [];
-      const why = courseShortfall(c.slug, (rows.results ?? []).map((r) => r.unit), studentLevel(student.track, student.goal), tb, testContext(env, done));
+      const why = courseShortfall(c.slug, (rows.results ?? []).map((r) => r.unit), awardLevel, tb, testContext(env, done));
       if (why) return fail(409, why);
     } else {
       // A single-page course keeps no units; its completion code is the record.
-      const row = await env.DB.prepare(
-        'SELECT 1 FROM course_completions WHERE student_id = ? AND code = ?').bind(id, c.code).first();
-      if (!row) return fail(409, 'course completion not recorded: ' + c.code);
-      const tb = (await env.DB.prepare('SELECT textbook FROM textbook_results WHERE student_id = ?').bind(id).all()).results ?? [];
-      const done = (await env.DB.prepare('SELECT code, track, completed_at FROM course_completions WHERE student_id = ?').bind(id).all()).results ?? [];
-      const why = textbookShortfall(c.code, studentLevel(student.track, student.goal), tb, testContext(env, done));
+      if (!completion) return fail(409, 'course completion not recorded: ' + c.code);
+      const why = textbookShortfall(c.code, awardLevel, tb, testContext(env, done));
       if (why) return fail(409, why);
     }
   } else {
     const rows = await env.DB.prepare(
       'SELECT code, track FROM course_completions WHERE student_id = ?').bind(id).all();
     const plan = level === 'thm' ? await loadThmStudyPlan(env, id) : null;
-    const why = degreeShortfall(level, rows.results ?? [], studentLevel(student.track, student.goal), plan?.substitutions);
+    const why = degreeShortfall(level, rows.results ?? [], own, plan?.substitutions);
     if (why) return fail(409, why);
   }
 
-  const title = officialTitle(level, course, studentLevel(student.track, student.goal));
+  const title = officialTitle(level, course, awardLevel);
   if (!title) throw new HttpError(400, 'cannot name this award');
 
   // Re-issuing the same award returns the same code rather than a second one,

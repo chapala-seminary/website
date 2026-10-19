@@ -108,6 +108,56 @@ const levels = (code) => Object.fromEntries(db(`SELECT code, track FROM course_c
   ok(d.mdiv === false && d.associate === false, '5: so no degree follows from it', d);
 }
 
+/* 6. A course certificate names the level the course was EARNED at, not the
+      student's current track (ChatGPT's review of #125, 19 Oct 2026). */
+const UNITS_1PETER = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+async function finished(track, course, code, completionTrack, extra = {}) {
+  const s = await student(track, [], 'cert', extra);
+  db(`UPDATE students SET email_verified_at = '2026-09-01T00:00:00.000Z' WHERE id = '${s}'`);
+  db(`INSERT INTO unit_progress (student_id, course, unit, completed_at, source) VALUES ${UNITS_1PETER.map((u) =>
+    `('${s}', '${course}', ${u}, '2026-09-01T00:00:00.000Z', 'server')`).join(', ')}`);
+  if (completionTrack !== undefined) db(`INSERT INTO course_completions (student_id, code, track, completed_at, source) VALUES ('${s}', '${code}', ${completionTrack === null ? 'NULL' : `'${completionTrack}'`}, '2026-09-01T00:00:00.000Z', 'server')`);
+  return s;
+}
+const award = (code, course) => call('POST', '/api/certificate', { code, level: 'course', course, title: 'Doctor of Divinity, honoris causa' });
+const titleOf = (vc) => db(`SELECT title FROM certificates WHERE verify_code = '${vc}'`)[0][0]?.title;
+{
+  // Certificate-level work, then a move to the Th.M.: still a Certificate-level award
+  const a = await finished('cert', '1peter', 'CTS1PETER', 'cert');
+  await switchTo(a, { track: 'thm' });
+  const r = await award(a, '1peter');
+  ok(r.status === 201 && / — Certificate of Ministry$/.test(titleOf(r.body.verifyCode)), '6: Certificate -> Th.M.: the 1 Peter award stays "Certificate of Ministry"', [r.status, titleOf(r.body?.verifyCode)]);
+  // Associate-level work, then a move to the M.Div.: an Associate-level award
+  const b = await finished('cert', '1peter', 'CTS1PETER', 'assoc', { goal: 'assoc' });
+  await switchTo(b, { track: 'mdiv' });
+  const rb = await award(b, '1peter');
+  ok(rb.status === 201 && / — Associate of Divinity$/.test(titleOf(rb.body.verifyCode)), '6: Associate -> M.Div.: the award stays "Associate of Divinity"', [rb.status, titleOf(rb.body?.verifyCode)]);
+  // Master's-level work, then a move back to the Certificate: the earned level stands
+  const m = await finished('thm', '1peter', 'CTS1PETER', 'thm');
+  await switchTo(m, { track: 'cert' });
+  const rm = await award(m, '1peter');
+  ok(rm.status === 201 && / — Master of Theology$/.test(titleOf(rm.body.verifyCode)), '6: master\'s -> Certificate: the master\'s-level award is not taken away', [rm.status, titleOf(rm.body?.verifyCode)]);
+  // A Certificate-level completion stays Certificate-level even when the student's units are
+  // all there and their track now says master's (the completion is the record of the level)
+  const n = await finished('cert', '1peter', 'CTS1PETER', 'cert');
+  db(`UPDATE students SET track = 'mdiv' WHERE id = '${n}'`);
+  const rn = await award(n, '1peter');
+  ok(rn.status === 201 && / — Certificate of Ministry$/.test(titleOf(rn.body.verifyCode)), '6: a changed track alone never raises a recorded completion\'s level', [rn.status, titleOf(rn.body?.verifyCode)]);
+  // A master's completion whose required reading test is in force and not passed: refused
+  const p = await finished('thm', 'pentecostal', 'CTSPENTECOSTAL', 'thm');
+  const rp = await award(p, 'pentecostal');
+  ok(rp.status === 409, '6: a master\'s award whose required test is not passed is refused', [rp.status, rp.body]);
+  // Reissue: the same award gives back the same code, and the title it was issued with
+  await switchTo(a, { track: 'mdiv' });
+  const again = await award(a, '1peter');
+  ok(again.status === 200 && again.body?.reissued === true && again.body.verifyCode === r.body.verifyCode, '6: asking again returns the same verification code', [again.status, again.body]);
+  ok(/ — Certificate of Ministry$/.test(titleOf(r.body.verifyCode)) && db(`SELECT COUNT(*) AS n FROM certificates WHERE student_id = '${a}'`)[0][0].n === 1, '6: and the earlier award is kept unchanged, not duplicated');
+  // A completion with no level (before migration 0003) counts at the student's own level
+  const l = await finished('thm', '1peter', 'CTS1PETER', null);
+  const rl = await award(l, '1peter');
+  ok(rl.status === 201 && / — Master of Theology$/.test(titleOf(rl.body.verifyCode)), '6: a pre-0003 completion with no level counts at the student\'s own level', [rl.status, titleOf(rl.body?.verifyCode)]);
+}
+
 console.log(`${checks} track and earlier-credit assertions against a live Worker and D1`);
 if (fails.length) {
   console.log(`FAIL — ${fails.length}:`);
