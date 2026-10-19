@@ -188,7 +188,10 @@
         lockedUntil: lockUntil,
         passed: function () { return !!passedOn() && !practice; },
         save: save,
-        live: LIVE ? { attemptId: function () { return L.attemptId; }, onChecked: function () { renderStatus(); } } : null
+        live: LIVE ? { attemptId: function () { return L.attemptId; }, onChecked: function (resumingSubmit) {
+          renderStatus();
+          if (resumingSubmit) liveSubmit();
+        } } : null
       });
       fill.render();
       renderStatus();
@@ -463,7 +466,9 @@
       L.trouble = null; L.working = "reviewing"; renderStatus();
       function again() { L.trouble = null; liveSubmit(); }
       fill.sendUnchecked().then(function (ok) {
-        if (!ok) { L.working = ""; return liveTrouble({ offline: true }, again); }
+        // The fill widget already shows the actual error and owns its retry.
+        // Do not turn a service error or rate limit into a second offline notice.
+        if (!ok) { L.working = ""; renderStatus(); return; }
         L.working = "submitting"; renderStatus();
         return G.calls.submit(L.attemptId).then(function (r) {
           if (!r.ok || !r.data) return liveTrouble(r, again);

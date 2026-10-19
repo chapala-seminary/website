@@ -27,6 +27,7 @@ node test/single-completion.test.mjs
 # engine's own functions, copied questions, the pass rules per track, which
 # text is held for a person, what the model's reply must satisfy.
 node test/grading-unit.test.mjs
+node --test test/grading-feedback.test.mjs
 node test/single-page-readings.test.mjs
 node tools/verify-staged-readings.mjs
 node tools/verify-rubrics.mjs
