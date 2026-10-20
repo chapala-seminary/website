@@ -34,6 +34,8 @@ The modes:
   grades nothing: every MC click, fill-in and short answer goes to the API.
   Credit is written only by the server.
 - **`shadow`**: used only for the production trial before the switch date.
+  Production ran it from 19 Oct 2026 until Wayne approved the switch to
+  `live` the same evening; it stays available for the test suites.
   - Pages and browser grading are exactly as on `beta` today, and credit
     comes from today's rules (`/api/sync`).
   - The browser also posts each submitted unit to `POST /api/shadow`. The
@@ -354,6 +356,22 @@ Notes on the routes (as built):
   creates `unit_progress`, `course_completions` or `textbook_results` from the
   client, and it no longer sends completion notices from them. It returns the
   server's records, and the browser treats those as the truth.
+- **The production cutover window (`LEGACY_SYNC_UNTIL`, 20 Oct 2026):**
+  production went from shadow to live without the planned trial and notice,
+  so until this ISO time a live Worker still takes the browser's units and
+  textbook passes as legacy credit (`source='legacy'`), but only:
+  - for a record registered before `LEGACY_SYNC_COHORT_BEFORE` (the switch);
+    a record made later has nothing from the old rules to bring;
+  - for a unit or test the record has no live attempt on, so a live result,
+    passed or failed, is never replaced by a browser claim.
+  It takes no completion or level from the browser's lists: the server runs
+  its own completion check over the imported units, at the record's level, and
+  legacy units count only towards a first completion (`earnedLevel`), so no
+  held completion is raised. What remains trusted is the pre-switch record's
+  own word about units it has no live result for, as in shadow mode, for the
+  window only. Beta has no window. The suite opens it per request with
+  `x-test-legacy-sync-until` and `x-test-legacy-cohort-before` (AI_FAKE
+  Workers only); `test/legacy-sync-window.test.mjs`.
 - **Mode, per request, in the test suite only:** a request with the header
   `x-test-grading-mode: shadow` gets the old `/api/sync` rules from a Worker
   that holds `AI_FAKE` (worker/grading/mode.js). The suites written for the

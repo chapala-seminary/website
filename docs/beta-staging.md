@@ -15,14 +15,14 @@ without redeploying. Per-version preview URLs remain disabled.
 
 ## Temporary CI unblock — Robert, 19 October 2026
 
-Robert requested promotion and a deployment attempt before the remaining CI
-repairs. The `CTS build and tests` merge check is temporarily advisory on main;
-`CTS release approval` and human-only main access remain required. Repository
-variable `CTS_PRODUCTION_SKIP_TESTS=true` skips only the production Action's
-full test suite. Build, clean/current-main guard, guarded deployment and public
-release verification still run. PR and beta CI continue to report test results.
-After CI repairs, set that variable to `false` (or delete it) and restore the
-required build/test merge check with the governance setup script.
+On 19 Oct 2026 Robert promoted beta and deployed before the remaining CI
+repairs, with the `CTS build and tests` merge check temporarily advisory on
+main and a repository variable, `CTS_PRODUCTION_SKIP_TESTS`, that skipped the
+production Action's full test suite. That bypass is removed (20 Oct 2026): the
+production Action always runs `npm test` before it deploys, whatever the
+variable says. Restore the required build/test merge check on main with the
+governance setup script; `CTS release approval` and human-only main access
+remain required.
 
 Staging: https://beta.chapalaseminary.org — branch `beta`, Worker `chapala-seminary-beta`, database `chapala-students-beta`.
 Production: https://chapalaseminary.org — branch `main`, Worker `chapala-seminary`, database `chapala-students`.

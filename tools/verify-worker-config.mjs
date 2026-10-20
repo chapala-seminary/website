@@ -106,11 +106,16 @@ for (const [name, c] of [['production', prod], ['beta', prod.env?.beta]]) {
 ok(!!local.vars?.AI_FAKE && local.vars?.GRADING_MODE === 'live', 'the test harness grades with the fake model in live mode');
 ok(JSON.stringify([...(local.triggers?.crons || [])].sort()) === JSON.stringify(['*/15 * * * *', '0 15 * * *']),
   'the test harness has both schedules', JSON.stringify(local.triggers?.crons));
-/* The AI grader is live on beta and a trial on production until Robert approves the switch. */
+/* The AI grader is live on beta and, since Wayne approved the switch on 19 Oct 2026, on production. */
 ok(prod.env?.beta?.vars?.GRADING_MODE === 'live', 'beta grades live');
-ok(prod.vars?.GRADING_MODE === 'shadow', 'production stays in shadow mode until the switch date is approved');
+ok(prod.vars?.GRADING_MODE === 'live', 'production grades live (switch approved by Wayne, 19 Oct 2026)');
 ok(prod.env?.beta?.vars?.MASTER_TESTS_ACTIVATION === 'beta', 'beta records the new master test activation cutoff once');
 ok(prod.vars?.MASTER_TESTS_ACTIVATION !== 'beta', 'production never takes the beta activation cutoff');
+ok(!prod.vars?.LEGACY_SYNC_UNTIL || isoUTC(prod.vars.LEGACY_SYNC_UNTIL), 'the production cutover window, when set, ends at an ISO UTC time');
+ok(!prod.vars?.LEGACY_SYNC_UNTIL || (isoUTC(prod.vars.LEGACY_SYNC_COHORT_BEFORE) && prod.vars.LEGACY_SYNC_COHORT_BEFORE < prod.vars.LEGACY_SYNC_UNTIL),
+  'an open cutover window names the cohort it serves: records registered before an ISO UTC time earlier than its end', [prod.vars?.LEGACY_SYNC_COHORT_BEFORE, prod.vars?.LEGACY_SYNC_UNTIL]);
+ok(!prod.env?.beta?.vars?.LEGACY_SYNC_UNTIL && !prod.env?.beta?.vars?.LEGACY_SYNC_COHORT_BEFORE, 'beta takes no browser credit in live mode (no cutover window)');
+ok(!local.vars?.LEGACY_SYNC_UNTIL && !local.vars?.LEGACY_SYNC_COHORT_BEFORE, 'the test harness opens the cutover window only per request (x-test-legacy-sync-until, x-test-legacy-cohort-before)');
 ok(!prod.vars?.MASTER_TESTS_ACTIVATION || isoUTC(prod.vars.MASTER_TESTS_ACTIVATION), 'production activation is unset or a separate ISO UTC timestamp');
 /* Beta answers at beta.chapalaseminary.org, the address the staff pages'
    Access rule covers; production takes no address from this file until the
