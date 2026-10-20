@@ -106,9 +106,9 @@ for (const [name, c] of [['production', prod], ['beta', prod.env?.beta]]) {
 ok(!!local.vars?.AI_FAKE && local.vars?.GRADING_MODE === 'live', 'the test harness grades with the fake model in live mode');
 ok(JSON.stringify([...(local.triggers?.crons || [])].sort()) === JSON.stringify(['*/15 * * * *', '0 15 * * *']),
   'the test harness has both schedules', JSON.stringify(local.triggers?.crons));
-/* The AI grader is live on beta and a trial on production until Robert approves the switch. */
+/* The AI grader is live on beta and, since Wayne approved the switch on 19 Oct 2026, on production. */
 ok(prod.env?.beta?.vars?.GRADING_MODE === 'live', 'beta grades live');
-ok(prod.vars?.GRADING_MODE === 'shadow', 'production stays in shadow mode until the switch date is approved');
+ok(prod.vars?.GRADING_MODE === 'live', 'production grades live (switch approved by Wayne, 19 Oct 2026)');
 ok(prod.env?.beta?.vars?.MASTER_TESTS_ACTIVATION === 'beta', 'beta records the new master test activation cutoff once');
 ok(prod.vars?.MASTER_TESTS_ACTIVATION !== 'beta', 'production never takes the beta activation cutoff');
 ok(!prod.vars?.MASTER_TESTS_ACTIVATION || isoUTC(prod.vars.MASTER_TESTS_ACTIVATION), 'production activation is unset or a separate ISO UTC timestamp');
