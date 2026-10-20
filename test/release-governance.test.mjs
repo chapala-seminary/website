@@ -70,6 +70,37 @@ test('production verification accepts only the exact build stamp and healthy pub
     await assert.rejects(checkProduction(expected, invalid, async () => {}));
 });
 
+test('production fallback requires a real challenge/network failure and rechecks exact version and health', async () => {
+  const expected = '2026-10-19 abcdef12';
+  const primary = url => new URL(url).hostname === 'chapalaseminary.org';
+  const version = url => new URL(url).pathname === '/version.txt';
+  const good = url => new Response(version(url) ? expected : '{"ok":true}');
+  const requested = [];
+  await checkProduction(expected, async url => {
+    requested.push(url);
+    return primary(url) && !version(url) ? new Response('challenge', { status: 403, headers: { 'cf-mitigated': 'challenge' } }) : good(url);
+  }, async () => {});
+  assert.equal(requested.filter(url => !primary(url)).length, 2, 'fallback checks its own version AND health');
+  for (const url of requested) assert.equal(new URL(url).searchParams.get('release'), expected);
+  await checkProduction(expected, async url => { if (primary(url)) throw new TypeError('fetch failed'); return good(url); }, async () => {});
+  for (const status of [403, 404, 500]) {
+    let fallback = 0;
+    await assert.rejects(checkProduction(expected, async url => {
+      if (!primary(url)) { fallback++; return good(url); }
+      return new Response('real HTTP failure', { status });
+    }, async () => {}));
+    assert.equal(fallback, 0, `a genuine HTTP ${status} must not be hidden`);
+  }
+  for (const bad of ['version', 'health']) {
+    await assert.rejects(checkProduction(expected, async url => {
+      if (primary(url)) return new Response('challenge', { status: 403, headers: { 'cf-mitigated': 'challenge' } });
+      if (bad === 'version' && version(url)) return new Response('stale release');
+      if (bad === 'health' && !version(url)) return new Response('{"ok":false}');
+      return good(url);
+    }, async () => {}));
+  }
+});
+
 test('production guard rejects dirty, wrong-branch and outdated checkouts before deployment', async () => {
   const { mkdtempSync, writeFileSync, rmSync } = await import('node:fs');
   const { tmpdir } = await import('node:os');

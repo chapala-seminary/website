@@ -1,5 +1,18 @@
 # Beta staging and production promotion
 
+## Production verification and Bot Fight Mode
+
+Production already answers on
+`https://chapala-seminary.chapalatheological.workers.dev`. Cloudflare's free
+Bot Fight Mode can challenge GitHub's public-domain health request and cannot
+make path-specific exceptions. Keep that protection enabled. The production
+verifier may use the existing direct Worker hostname only after a confirmed
+Cloudflare challenge or a network failure. It rechecks both the exact release
+stamp and healthy JSON there; a real HTTP error, stale build or unhealthy
+response still fails. Check the custom domain from a normal browser too.
+The read-only **Diagnose production verification** Action can test the verifier
+without redeploying. Per-version preview URLs remain disabled.
+
 ## Temporary CI unblock — Robert, 19 October 2026
 
 Robert requested promotion and a deployment attempt before the remaining CI

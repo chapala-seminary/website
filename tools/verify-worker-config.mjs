@@ -56,6 +56,10 @@ for (const [name, c] of [['production', prod], ['beta', prod.env?.beta]]) {
 
 /* CI falls back to the direct hostname when Cloudflare challenges its runner.
    A custom route otherwise disables workers.dev by default. */
+ok(prod.workers_dev === true,
+  'production preserves its existing workers.dev hostname for exact-release verification');
+ok(prod.preview_urls === false,
+  'production does not expose unused per-version preview URLs');
 ok(prod.env?.beta?.workers_dev === true,
   'beta keeps its workers.dev hostname enabled for exact-release verification');
 ok(prod.env?.beta?.preview_urls === false,
