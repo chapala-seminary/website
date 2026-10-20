@@ -23,6 +23,7 @@ node test/grading-mode.test.mjs
 node test/countries.test.mjs
 node test/reference-fixture.test.mjs
 node test/catalog-landing.test.mjs
+node test/review-assets.test.mjs
 node test/single-completion.test.mjs
 # The grading rules with no server: the fill-in text rules against the browser
 # engine's own functions, copied questions, the pass rules per track, which
