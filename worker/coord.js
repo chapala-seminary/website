@@ -1,10 +1,13 @@
 /* Coordinator-led paper study: /coord (and /staff/groups for setting it up).
  *
- * Wayne Cook, 20 Oct 2026, on the design in docs/offline-coordinator.md:
- * pilot groups in Kenya and Liberia, Old Testament Survey, Certificate track
- * (multiple choice only), one coordinator per group who types in the paper
- * answer sheets. Learners with no email and no device still get their own
- * student record and code, and their passes are real credit.
+ * Wayne Cook, 20 Oct 2026 (docs/offline-coordinator.md). Where a learner can
+ * have an email, they register on the site as usual. Where they cannot, one
+ * coordinator enrolls many learners. Each learner has their own code. The
+ * coordinator's address stays on the group, not on every learner. Paper
+ * sheets are letters, graded by the server before any credit. The record
+ * keeps the score, the date, who entered it, and the coordinator's statement
+ * that the learner did the work. Staff see that record and can enter a sheet
+ * the same way. There is no cap on how many learners a group may have.
  *
  *   GET  /coord                          the group: enroll, members, units passed
  *   POST /coord/enroll                   a new learner (name, language)
@@ -14,8 +17,9 @@
  *   GET  /coord/members/<id>/sheet       the form for one answer sheet
  *   POST /coord/members/<id>/sheet       grade it: unit + the letters, in order
  *
- *   GET  /staff/groups                   staff: the groups, and a form for a new one
+ *   GET  /staff/groups                   staff: groups, paper results, forms
  *   POST /staff/groups                   staff: create a group (name, country, coordinator email)
+ *   POST /staff/groups/sheet             staff: enter one paper sheet, same rules as /coord
  *
  * WHO CAN SEE IT. A second Cloudflare Access application on /coord/*, whose
  * policy names the coordinators' emails. Its audience tag is COORD_ACCESS_AUD,
@@ -43,6 +47,11 @@ import { accessUser } from './staff.js';
 import { loadScope, loadKeys, loadStudent, trackOf, nowIso, settle } from './grading/attempts.js';
 import { isLive } from './grading/mode.js';
 import { canonicalCountry } from '../src/lib/countries.mjs';
+
+/* Printed on the exam and stored with the sheet. The coordinator signs it on
+   the paper; the person who types the sheet confirms it. Credit is refused
+   until that confirmation is present. */
+export const OWN_WORK = 'I confirm that this learner completed this exam as their own work.';
 
 const LETTERS = 'ABCDEFGHIJ';
 const LANGS = { en: 'English', es: 'Español', fr: 'Français' };
@@ -158,7 +167,8 @@ async function home(env, group, course, email) {
   return page(group.name, `<h1>${esc(group.name)}</h1>
 <p>Course: <b>${esc(title(course))}</b> · Certificate track · Signed in as ${esc(email)}</p>
 <div class="note">Each learner needs their own record. Write each new code in your book and on the learner's paper,
-and keep it private. A learner who passes a unit here has passed it on the seminary's own record.</div>
+and keep it private. A learner who passes a unit here has passed it on the seminary's own record.
+There is no limit on how many learners this group may enroll.</div>
 <h2>Learners (${members.length})</h2>
 ${members.length ? `<table><tr><th>Name</th><th>Units passed</th><th></th></tr>${rows}</table>` : '<p>No learners yet.</p>'}
 <h2>Enroll a learner</h2>
@@ -263,7 +273,9 @@ async function exam(env, course, unit, langRaw) {
 <ol>${items}</ol>
 <h2>Answer sheet — Unit ${unit} — exam version ${version}</h2>
 <p>Name: ______________________________ &nbsp; Student code: ______________________</p>
-<table style="width:auto"><tr>${grid}</tr></table>`);
+<table style="width:auto"><tr>${grid}</tr></table>
+<p style="margin-top:16px">${esc(OWN_WORK)}</p>
+<p>Coordinator signature: ______________________________ &nbsp; Date: ______________</p>`);
 }
 
 async function sheetForm(env, group, course, id, unitRaw, message = '') {
@@ -285,19 +297,20 @@ ${open.length ? `<form method="post">
  maxlength="80" style="width:100%;font-family:ui-monospace,monospace;letter-spacing:.1em"></label></p>
 <p><small>Type one letter per question, question 1 first. Spaces and commas are ignored. A question left blank on the paper
 is wrong: type the letter X for it.</small></p>
+<p><label><input type="checkbox" name="own_work" value="yes"> ${esc(OWN_WORK)}</label></p>
 <p><button>Grade this sheet</button></p></form>` : '<p class="ok">Every unit of this course is passed.</p>'}${back}`);
 }
 
 /* Grade one sheet. Exported for the tests' sake of naming; the route is the only caller. */
-export async function enterSheet(env, { group, course, member, unit, letters, version, enteredBy, live }) {
+export async function enterSheet(env, { group, course, member, unit, letters, version, ownWork, enteredBy, live }) {
   if (!live) return { error: 'Paper sheets open when the site grades exams on the server. Please try again later.', status: 409 };
   if (!(course.units || []).includes(unit)) return { error: 'No such unit.', status: 400 };
   const scope = await loadScope(env, `u:${course.pages}/${unit}`);
   if (!scope || !scope.qids.mc.length) return { error: 'This unit\'s exam is not on the server yet.', status: 409 };
   const student = await loadStudent(env, member.student_id);
   if (!student) return { error: 'No such learner.', status: 404 };
-  // The pilot is the Certificate track (multiple choice only). On another track a
-  // multiple-choice sheet could never pass, and would lock the unit for nothing.
+  // Paper sheets are the Certificate track (multiple choice only). On another
+  // track a multiple-choice sheet could never pass, and would lock the unit.
   if (trackOf(student) !== 'cert')
     return { error: `${student.name} is not on the Certificate track. For now, paper sheets count only on the Certificate track; this learner takes the exams on the website.`, status: 409 };
   if (await env.DB.prepare('SELECT 1 FROM unit_progress WHERE student_id = ? AND course = ? AND unit = ?').bind(student.id, course.slug, unit).first())
@@ -318,6 +331,8 @@ export async function enterSheet(env, { group, course, member, unit, letters, ve
   if (printed !== current)
     return { error: `This paper was printed from exam version ${printed}, but the exam for Unit ${unit} is now version ${current}. `
       + 'Print the current exam and have the learner sit it again. Nothing was recorded, and the unit is not locked.', status: 409 };
+  if (!ownWork)
+    return { error: `${OWN_WORK} Nothing was recorded, and the unit is not locked.`, status: 400 };
   const clean = String(letters || '').toUpperCase().replace(/[^A-Z]/g, '');
   const n = scope.qids.mc.length;
   if (clean.length !== n) return { error: `The sheet has ${clean.length} letters; this unit has ${n} questions.`, status: 400 };
@@ -346,8 +361,8 @@ export async function enterSheet(env, { group, course, member, unit, letters, ve
       .bind(id, student.id, qid, lang, String(choices[i] >= 0 ? choices[i] : ''), right ? 'right' : 'wrong', t, t));
   });
   stmts.push(env.DB.prepare(
-    'INSERT INTO paper_sheets (attempt_id, group_id, student_id, scope, letters, entered_by, entered_at) VALUES (?, ?, ?, ?, ?, ?, ?)')
-    .bind(id, group.id, student.id, scope.scope, clean, enteredBy, t));
+    'INSERT INTO paper_sheets (attempt_id, group_id, student_id, scope, letters, entered_by, entered_at, attestation) VALUES (?, ?, ?, ?, ?, ?, ?, ?)')
+    .bind(id, group.id, student.id, scope.scope, clean, enteredBy, t, OWN_WORK));
   await env.DB.batch(stmts);
   const r = await settle(env, id, { submitting: true });
   const a = r?.attempt || {};
@@ -360,7 +375,7 @@ async function sheetEntry(request, env, group, course, id, email) {
   if (!mb) return page('Not found', '<p>No such learner in this group.</p>' + back, 404);
   const form = await request.formData().catch(() => null);
   const unit = Number(form?.get('unit'));
-  const r = await enterSheet(env, { group, course, member: mb, unit, letters: form?.get('letters'), version: form?.get('version'), enteredBy: email, live: isLive(env, request) });
+  const r = await enterSheet(env, { group, course, member: mb, unit, letters: form?.get('letters'), version: form?.get('version'), ownWork: form?.get('own_work') === 'yes', enteredBy: email, live: isLive(env, request) });
   if (r.error) return sheetForm(env, group, course, id, String(unit), `<p class="no">${esc(r.error)}</p>`);
   const verdict = r.status === 'passed'
     ? `<p class="ok">Passed: ${r.right} of ${r.total} right.</p>${r.courseDone ? `<p class="ok">${esc(mb.name)} has now completed ${esc(title(course))}.</p>` : ''}`
@@ -372,8 +387,41 @@ async function sheetEntry(request, env, group, course, id, email) {
 
 /* ---- staff: setting up a group ---------------------------------------------------- */
 
+const unitLabel = (scope) => {
+  const m = /\/(\d+)$/.exec(String(scope || ''));
+  return m ? `Unit ${m[1]}` : String(scope || '');
+};
+
+/* Staff enter a sheet with the same rules as the coordinator. entered_by is
+   the staff member. The own-work statement is still required. */
+async function staffSheet(request, env, user, { e, html, S }) {
+  const form = await request.formData().catch(() => null);
+  const id = Number(form?.get('member'));
+  const row = await env.DB.prepare(
+    `SELECT m.id, m.student_id, m.group_id, s.name, g.course, g.name AS group_name, g.coordinator_email, g.closed_at
+     FROM study_group_members m JOIN students s ON s.id = m.student_id JOIN study_groups g ON g.id = m.group_id
+     WHERE m.id = ?`).bind(id).first();
+  if (!row || row.closed_at)
+    return html(`<style>${S}</style><p>No such learner in an open group.</p><p><a href="/staff/groups">Back</a></p>`, 404);
+  const group = { id: row.group_id, course: row.course, name: row.group_name, coordinator_email: row.coordinator_email };
+  const course = courseOf(group);
+  if (!course)
+    return html(`<style>${S}</style><p>This group's course is not on the site.</p><p><a href="/staff/groups">Back</a></p>`, 503);
+  const r = await enterSheet(env, {
+    group, course, member: row, unit: Number(form?.get('unit')), letters: form?.get('letters'),
+    version: form?.get('version'), ownWork: form?.get('own_work') === 'yes',
+    enteredBy: String(user).trim().toLowerCase(), live: isLive(env, request),
+  });
+  if (r.error) return html(`<style>${S}</style><p>${e(r.error)}</p><p><a href="/staff/groups">Back</a></p>`, r.status || 400);
+  const verdict = r.status === 'passed'
+    ? `Passed: ${r.right} of ${r.total} right.`
+    : `Not passed: ${r.right} of ${r.total} right (${Math.ceil(r.total * 0.9)} needed).`;
+  return html(`<style>${S}</style><h1>${e(row.name)}</h1><p>${e(verdict)}</p><p><a href="/staff/groups">Back to study groups</a></p>`);
+}
+
 export async function handleStaffGroups(request, env, user, url, path, { esc: e, html, STYLE: S }) {
   const method = request.method.toUpperCase();
+  if (method === 'POST' && path === '/staff/groups/sheet') return staffSheet(request, env, user, { e, html, S });
   if (method === 'POST' && path === '/staff/groups') {
     const form = await request.formData().catch(() => null);
     const name = String(form?.get('name') || '').trim();
@@ -398,11 +446,45 @@ export async function handleStaffGroups(request, env, user, url, path, { esc: e,
   const rows = groups.map((g) => `<tr><td>${e(g.name)}</td><td>${e(g.country || '')}</td><td>${e(g.coordinator_email)}</td>
     <td>${e(title(courseOf(g)))}</td><td>${g.members}</td><td>${g.sheets}</td><td>${g.closed_at ? 'closed' : 'open'}</td></tr>`).join('');
   const courses = Object.entries(catalog.courses).map(([slug, c]) => `<option value="${slug}"${slug === 'ots' ? ' selected' : ''}>${e(c.title?.en || slug)}</option>`).join('');
+  const members = (await env.DB.prepare(
+    `SELECT m.id, s.name, g.name AS group_name FROM study_group_members m
+     JOIN students s ON s.id = m.student_id JOIN study_groups g ON g.id = m.group_id
+     WHERE g.closed_at IS NULL ORDER BY g.name, s.name COLLATE NOCASE`).all()).results ?? [];
+  const memberOpts = members.map((m) => `<option value="${m.id}">${e(m.group_name)} — ${e(m.name)}</option>`).join('');
+  const sheets = (await env.DB.prepare(
+    `SELECT s.name, g.name AS group_name, a.status, a.mc_right, a.mc_total, a.submitted_at,
+            p.entered_by, p.entered_at, p.attestation, p.scope
+     FROM paper_sheets p
+     JOIN students s ON s.id = p.student_id
+     JOIN study_groups g ON g.id = p.group_id
+     JOIN attempts a ON a.id = p.attempt_id
+     ORDER BY p.entered_at DESC LIMIT 100`).all()).results ?? [];
+  const sheetRows = sheets.map((s) => {
+    const when = String(s.submitted_at || s.entered_at || '').slice(0, 16).replace('T', ' ');
+    const score = s.mc_total ? `${s.mc_right} of ${s.mc_total}` : '';
+    return `<tr><td>${e(s.name)}</td><td>${e(s.group_name)}</td><td>${e(unitLabel(s.scope))}</td>
+      <td>${e(score)}</td><td>${s.status === 'passed' ? 'Passed' : 'Not passed'}</td>
+      <td>${e(when)}</td><td>${e(s.entered_by)}</td><td>${s.attestation ? 'confirmed' : ''}</td></tr>`;
+  }).join('');
   return html(`<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Study groups</title><style>${S}</style>
 <h1>Study groups</h1><p><a href="/staff/students">Students</a></p>
 <p>Each group's coordinator signs in at <b>/coord</b>. Their email must also be added to the Cloudflare Access
-application for /coord (docs/coordinator-setup.md); adding it here alone does not let them in.</p>
+application for /coord (docs/coordinator-setup.md); adding it here alone does not let them in.
+There is no limit on how many learners a group may have.</p>
 ${groups.length ? `<table><tr><th>Group</th><th>Country</th><th>Coordinator</th><th>Course</th><th>Learners</th><th>Sheets</th><th></th></tr>${rows}</table>` : '<p>No groups yet.</p>'}
+<h2>Paper results</h2>
+<p>Credit is written only after the server grades the sheet. This list is the score, the date, and who entered it.
+It does not show the answer key or which items were wrong.</p>
+${sheets.length ? `<table><tr><th>Learner</th><th>Group</th><th>Unit</th><th>Score</th><th></th><th>Date</th><th>Entered by</th><th>Own work</th></tr>${sheetRows}</table>` : '<p>No paper sheets yet.</p>'}
+${members.length ? `<h2>Enter a paper sheet</h2>
+<p>The same rules as the coordinator's page. Use the exam printed from /coord, including its exam version.</p>
+<form method="post" action="/staff/groups/sheet">
+<p><label>Learner<br><select name="member">${memberOpts}</select></label></p>
+<p><label>Unit<br><input name="unit" required inputmode="numeric" maxlength="3" style="width:4em"></label></p>
+<p><label>Exam version<br><input name="version" required maxlength="12" autocomplete="off" autocapitalize="characters" spellcheck="false"></label></p>
+<p><label>Letters, in order<br><input name="letters" required maxlength="80" autocomplete="off" autocapitalize="characters" spellcheck="false" style="width:100%;font-family:ui-monospace,monospace"></label></p>
+<p><label><input type="checkbox" name="own_work" value="yes"> ${e(OWN_WORK)}</label></p>
+<p><button>Grade this sheet</button></p></form>` : ''}
 <h2>New group</h2>
 <form method="post" action="/staff/groups">
 <p><label>Name<br><input name="name" required maxlength="120"></label></p>
