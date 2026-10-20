@@ -248,6 +248,7 @@ node tools/verify-partials.mjs
 
 API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/api.test.mjs
 API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/track-history.test.mjs
+API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/legacy-sync-window.test.mjs
 API_BASE="http://127.0.0.1:$PORT" SYNC_WRITE_STATE="$STATE" node test/sync-writes.test.mjs
 API_BASE="http://127.0.0.1:$PORT" EMAIL_TEST_STATE="$STATE" node test/email-options.test.mjs
 API_BASE="http://127.0.0.1:$PORT" node test/student-language.test.mjs

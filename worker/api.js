@@ -26,7 +26,7 @@ import { canonicalCountry } from '../src/lib/countries.mjs';
 import { activationEnvironment, activatedTests } from './test-activation.js';
 import { testContext } from './test-context.js';
 import { gradingRoute } from './grading/routes.js';
-import { isLive } from './grading/mode.js';
+import { isLive, legacySyncOpen } from './grading/mode.js';
 import { courseShortfall, textbookShortfall, exemptionsFor, degreeShortfall, resolveCourse, studentLevel, canonicalCode, certificateLevel, DEGREES } from './awards.js';
 import catalog from './catalog.json';
 import { emailConfigured, emailLogOnly, sendEmail, verificationEmail, certificateEmail, codeEmail } from './email.js';
@@ -311,16 +311,22 @@ async function sync(request, env) {
      record. A browser's report of what it passed is not credit, so nothing
      below is written from it. The student's details above are still kept, and
      the reply carries the server's own records. In shadow mode, and in a Worker
-     with no GRADING_MODE, this is exactly what it always was. */
+     with no GRADING_MODE, this is exactly what it always was.
+     During the cutover window (LEGACY_SYNC_UNTIL, worker/grading/mode.js) a
+     live Worker still takes the browser's passes, as legacy credit: units and
+     textbook passes as before, and completions only for courses the record
+     does not hold yet -- never a higher level for one it does. */
   const live = isLive(env, request);
-  for (const row of live ? [] : progressRows(id, b.progress))
+  const legacy = live && legacySyncOpen(env, request);
+  const imports = !live || legacy;
+  for (const row of imports ? progressRows(id, b.progress) : [])
     statements.push(env.DB.prepare(
       `INSERT INTO unit_progress (student_id, course, unit, completed_at) VALUES (?, ?, ?, ?)
        ON CONFLICT(student_id, course, unit) DO UPDATE SET completed_at = excluded.completed_at
        WHERE excluded.completed_at < unit_progress.completed_at`)
       .bind(...row));
 
-  const textbookRowsNow = live ? [] : textbookRows(id, b.textbooks);
+  const textbookRowsNow = imports ? textbookRows(id, b.textbooks) : [];
   for (const row of textbookRowsNow)
     statements.push(env.DB.prepare(
       `INSERT INTO textbook_results (student_id, textbook, passed_at) VALUES (?, ?, ?)
@@ -333,7 +339,7 @@ async function sync(request, env) {
   // device reports it done at a higher level (the student did the further
   // work). A stale device reporting a lower level changes nothing.
   const trackNow = (s && typeof s === 'object' && String(s.track || '').toLowerCase()) || exists.track;
-  let completions = live ? [] : completionRows(id, b.doneCodes, b.completionTracks, trackNow);
+  let completions = imports ? completionRows(id, b.doneCodes, b.completionTracks, trackNow) : [];
   /* A master's-level completion of a course with a textbook is not recorded
      until the record holds a pass on its textbook test (Dr. Cook, 4 Oct
      2026). The browser reports its completions on every sync, so the course
@@ -358,8 +364,13 @@ async function sync(request, env) {
   const held = new Set(completions.length
     ? ((await env.DB.prepare('SELECT code FROM course_completions WHERE student_id = ?').bind(id).all()).results ?? []).map((r) => r.code)
     : []);
+  // The cutover window adds a course the record lacks, as legacy credit, and
+  // leaves every completion it holds exactly as it is.
+  if (legacy) completions = completions.filter(([, code]) => !held.has(code));
   for (const row of completions)
-    statements.push(env.DB.prepare(
+    statements.push(legacy ? env.DB.prepare(
+      `INSERT INTO course_completions (student_id, code, track, completed_at) VALUES (?, ?, ?, ?)
+       ON CONFLICT(student_id, code) DO NOTHING`).bind(...row) : env.DB.prepare(
       `INSERT INTO course_completions (student_id, code, track, completed_at) VALUES (?, ?, ?, ?)
        ON CONFLICT(student_id, code) DO UPDATE SET track = CASE
          WHEN course_completions.track IS NULL THEN excluded.track

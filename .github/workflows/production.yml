@@ -27,11 +27,7 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run build
       - name: Run the full test suite
-        if: vars.CTS_PRODUCTION_SKIP_TESTS != 'true'
         run: npm test
-      - name: Record the temporary test bypass
-        if: vars.CTS_PRODUCTION_SKIP_TESTS == 'true'
-        run: echo '::warning::Full tests bypassed by CTS_PRODUCTION_SKIP_TESTS. Build, deployment guards and published-release verification remain required.'
       - name: Refuse an outdated or dirty production checkout
         run: node tools/verify-production-branch.mjs
       - name: Deploy the tested main commit

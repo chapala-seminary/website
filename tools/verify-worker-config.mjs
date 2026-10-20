@@ -111,6 +111,9 @@ ok(prod.env?.beta?.vars?.GRADING_MODE === 'live', 'beta grades live');
 ok(prod.vars?.GRADING_MODE === 'live', 'production grades live (switch approved by Wayne, 19 Oct 2026)');
 ok(prod.env?.beta?.vars?.MASTER_TESTS_ACTIVATION === 'beta', 'beta records the new master test activation cutoff once');
 ok(prod.vars?.MASTER_TESTS_ACTIVATION !== 'beta', 'production never takes the beta activation cutoff');
+ok(!prod.vars?.LEGACY_SYNC_UNTIL || isoUTC(prod.vars.LEGACY_SYNC_UNTIL), 'the production cutover window, when set, ends at an ISO UTC time');
+ok(!prod.env?.beta?.vars?.LEGACY_SYNC_UNTIL, 'beta takes no browser credit in live mode (no cutover window)');
+ok(!local.vars?.LEGACY_SYNC_UNTIL, 'the test harness opens the cutover window only per request (x-test-legacy-sync-until)');
 ok(!prod.vars?.MASTER_TESTS_ACTIVATION || isoUTC(prod.vars.MASTER_TESTS_ACTIVATION), 'production activation is unset or a separate ISO UTC timestamp');
 /* Beta answers at beta.chapalaseminary.org, the address the staff pages'
    Access rule covers; production takes no address from this file until the

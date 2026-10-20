@@ -62,6 +62,11 @@
 		// "live": the server is the grader of record (docs/ai-grading.md section 1).
 		// Wayne approved switching production from the shadow trial on 19 Oct 2026.
 		"GRADING_MODE": "live",
+		// Until this time, passes still held only in a student's browser from
+		// before the switch are taken by /api/sync as legacy credit (first
+		// completions only, never a higher level): worker/grading/mode.js.
+		// Sixty days from the switch. Remove or leave in the past to close it.
+		"LEGACY_SYNC_UNTIL": "2026-12-20T00:00:00.000Z",
 		"GRADER_MODEL": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
 		"GRADER_MODEL_FALLBACK": "@cf/openai/gpt-oss-120b",
 		"GRADER_PROMPT_VERSION": "2026-10-19.1",
