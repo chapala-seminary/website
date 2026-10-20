@@ -189,7 +189,31 @@ ok(!sg.includes(code), 'the staff page shows no student code');
 const after = await (await go('/coord', {}, asCoord())).text();
 ok(after.includes(NAME) && /2 of 13 passed/.test(after), 'the coordinator\'s page shows the units passed');
 
-await fetch(`${BASE}/api/student/${code}`, { method: 'DELETE' });
+// Learners who registered on the website themselves (Haiti, 20 Oct 2026) are
+// added by their code. A non-Certificate learner can be in a group, but their
+// paper sheets are refused: multiple choice alone cannot pass a master's unit.
+const reg = async (track) => (await (await fetch(`${BASE}/api/register`, { method: 'POST', headers: { 'content-type': 'application/json', connection: 'close' },
+  body: JSON.stringify({ name: `Online ${track} ${tag}`, email: `online-${track}-${tag}@example.test`, track, lang: 'fr' }) })).json()).code;
+const certCode = await reg('cert'), mdivCode = await reg('mdiv');
+ok(/^CTS-/.test(certCode || '') && /^CTS-/.test(mdivCode || ''), 'two learners registered online', `${certCode} ${mdivCode}`);
+const typed = certCode.toLowerCase().replace(/-/g, ' ').replace(/0/g, 'o');
+const added = await go('/coord/add', form({ code: typed }), asCoord());
+ok(added.status === 201 && unesc(await added.text()).includes(`Online cert ${tag}`), 'a registered learner is added by code, as typed loosely', added.status);
+ok(db(`SELECT COUNT(*) AS n FROM study_group_members WHERE student_id = '${certCode}'`)[0][0].n === 1, 'the member row is written');
+ok((await go('/coord/add', form({ code: certCode }), asCoord())).status === 409, 'adding the same learner again is refused');
+ok((await go('/coord/add', form({ code: certCode }), asCoord(COORD2))).status === 409, 'a learner in one group cannot be added to another');
+ok((await go('/coord/add', form({ code: 'CTS-0000-0000-0000' }), asCoord())).status === 404, 'an unknown code is refused');
+ok((await go('/coord/add', form({ code: 'hello' }), asCoord())).status === 400, 'something that is not a code is refused');
+const addedM = await go('/coord/add', form({ code: mdivCode }), asCoord());
+ok(addedM.status === 201 && /not on the Certificate track/.test(unesc(await addedM.text())), 'adding a master\'s learner warns that paper sheets do not count for them');
+const mId = db(`SELECT id FROM study_group_members WHERE student_id = '${mdivCode}'`)[0][0].id;
+const mSheet = await go(`/coord/members/${mId}/sheet`, form({ unit: '4', letters: 'A'.repeat(20), version: await versionOf(4) }), asCoord());
+ok(/not on the Certificate track/.test(unesc(await mSheet.text())), 'a master\'s learner\'s paper sheet is refused', mSheet.status);
+ok(db(`SELECT COUNT(*) AS n FROM attempts WHERE student_id = '${mdivCode}'`)[0][0].n === 0, 'and no attempt is made for them');
+const home2 = unesc(await (await go('/coord', {}, asCoord())).text());
+ok(home2.includes('Add a learner who has already registered') && home2.includes(`Online cert ${tag}`), 'the home page has the add form and lists the added learner');
+
+for (const c of [code, certCode, mdivCode]) if (c) await fetch(`${BASE}/api/student/${c}`, { method: 'DELETE', headers: { connection: 'close' } });
 
 if (fails.length) { console.error(`coordinator pages: ${fails.length} of ${checks} checks failed`); for (const f of fails) console.error('  ✗ ' + f); process.exit(1); }
 console.log(`coordinator pages: ${checks} checks passed`);

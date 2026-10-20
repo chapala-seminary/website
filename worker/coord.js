@@ -8,6 +8,7 @@
  *
  *   GET  /coord                          the group: enroll, members, units passed
  *   POST /coord/enroll                   a new learner (name, language)
+ *   POST /coord/add                      a learner who already registered, by their student code
  *   GET  /coord/members/<id>/code        that member's student code, again
  *   GET  /coord/exam/<unit>?lang=xx      the printable exam for a unit, no answers
  *   GET  /coord/members/<id>/sheet       the form for one answer sheet
@@ -111,6 +112,7 @@ export async function handleCoord(request, env) {
   let m;
   if (method === 'GET' && path === '/coord') return home(env, group, course, email);
   if (method === 'POST' && path === '/coord/enroll') return enroll(request, env, group, course, email);
+  if (method === 'POST' && path === '/coord/add') return addExisting(request, env, group, email);
   if (method === 'GET' && (m = /^\/coord\/members\/(\d+)\/code$/.exec(path))) return showCode(env, group, +m[1]);
   if (method === 'GET' && (m = /^\/coord\/exam\/(\d{1,3})$/.exec(path))) return exam(env, course, +m[1], url.searchParams.get('lang'));
   if ((m = /^\/coord\/members\/(\d+)\/sheet$/.exec(path))) {
@@ -162,6 +164,12 @@ ${members.length ? `<table><tr><th>Name</th><th>Units passed</th><th></th></tr>$
 <p><label>Full name<br><input name="name" required maxlength="120" autocomplete="off"></label></p>
 <p><label>Language<br><select name="lang">${Object.entries(LANGS).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select></label></p>
 <p><button>Enroll</button></p></form>
+<h2>Add a learner who has already registered</h2>
+<p>If a learner registered on the website themselves, add them with their student code instead of enrolling them again.</p>
+<form method="post" action="/coord/add">
+<p><label>Student code<br><input name="code" required maxlength="40" autocomplete="off" autocapitalize="characters" spellcheck="false"
+ style="font-family:ui-monospace,monospace"></label></p>
+<p><button>Add to the group</button></p></form>
 <h2>Exams to print</h2>
 <p>Print the exam for the sitting from these links. The order of questions and of the choices A, B, C, D on these pages
 is the order the answer sheet is graded in, so use these pages, not another copy. They have no answers on them.</p>
@@ -191,6 +199,34 @@ async function enroll(request, env, group, course, email) {
 <p><a href="/coord/members/${memberId}/sheet">Enter a sheet for ${esc(name)}</a></p>${back}`, 201);
   }
   return page('Enroll', '<p class="no">Could not make a student code. Please try again.</p>' + back, 503);
+}
+
+/* A student code as typed: spaces, lower case, the wrong dashes, I/L/O/U for 1/1/0/V
+   (the same reading as worker/api.js normaliseCode). */
+function normaliseCode(raw) {
+  const t = String(raw || '').toUpperCase().replace(/[^0-9A-Z]/g, '')
+    .replace(/I/g, '1').replace(/L/g, '1').replace(/O/g, '0').replace(/U/g, 'V');
+  const m = /^CTS([0-9A-Z]{12})$/.exec(t);
+  return m ? `CTS-${m[1].slice(0, 4)}-${m[1].slice(4, 8)}-${m[1].slice(8)}` : null;
+}
+
+/* Wayne Cook, 20 Oct 2026: Haiti's learners registered on the website under the
+   coordinator's email before the group existed. The coordinator adds such a
+   learner by code (holding the code already opens the whole record). A merged
+   record is followed to the one it was merged into. */
+async function addExisting(request, env, group, email) {
+  const form = await request.formData().catch(() => null);
+  const typed = normaliseCode(form?.get('code'));
+  if (!typed) return page('Add', '<p class="no">That is not a student code (CTS-XXXX-XXXX-XXXX).</p>' + back, 400);
+  let st = await env.DB.prepare('SELECT id, name, track, goal, merged_into FROM students WHERE id = ?').bind(typed).first();
+  if (st?.merged_into) st = await env.DB.prepare('SELECT id, name, track, goal, merged_into FROM students WHERE id = ?').bind(st.merged_into).first();
+  if (!st) return page('Add', '<p class="no">No student has that code.</p>' + back, 404);
+  const have = await env.DB.prepare('SELECT group_id FROM study_group_members WHERE student_id = ?').bind(st.id).first();
+  if (have) return page('Add', `<p class="no">${have.group_id === group.id ? `${esc(st.name)} is already in this group.` : 'That learner already belongs to another study group.'}</p>` + back, 409);
+  await env.DB.prepare('INSERT INTO study_group_members (group_id, student_id, enrolled_at, enrolled_by) VALUES (?, ?, ?, ?)')
+    .bind(group.id, st.id, nowIso(), email).run();
+  const note = trackOf(st) === 'cert' ? '' : `<p>${esc(st.name)} is not on the Certificate track. For now, paper sheets count only on the Certificate track, so this learner takes the exams on the website.</p>`;
+  return page('Added', `<h1>Added</h1><p><b>${esc(st.name)}</b> is now in ${esc(group.name)}.</p>${note}${back}`, 201);
 }
 
 async function showCode(env, group, id) {
@@ -258,6 +294,10 @@ export async function enterSheet(env, { group, course, member, unit, letters, ve
   if (!scope || !scope.qids.mc.length) return { error: 'This unit\'s exam is not on the server yet.', status: 409 };
   const student = await loadStudent(env, member.student_id);
   if (!student) return { error: 'No such learner.', status: 404 };
+  // The pilot is the Certificate track (multiple choice only). On another track a
+  // multiple-choice sheet could never pass, and would lock the unit for nothing.
+  if (trackOf(student) !== 'cert')
+    return { error: `${student.name} is not on the Certificate track. For now, paper sheets count only on the Certificate track; this learner takes the exams on the website.`, status: 409 };
   if (await env.DB.prepare('SELECT 1 FROM unit_progress WHERE student_id = ? AND course = ? AND unit = ?').bind(student.id, course.slug, unit).first())
     return { error: `Unit ${unit} is already passed.`, status: 409 };
   const recent = (await env.DB.prepare(
