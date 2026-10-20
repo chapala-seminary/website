@@ -188,6 +188,12 @@ if (DEPLOY) {
     ok(builds.length > 0 && builds.every((m) => m === flag), `every CTS_GRADING_MODE in npm run ${script} is the --mode it passes`, `${builds.join(',')} vs ${flag}`);
     ok(/verify-no-keys\.mjs/.test(cmd), `npm run ${script} checks the built pages for keys`);
   }
+  ok(/prepare-production-migrations/.test(expand('deploy')), 'production deploy applies pending D1 migrations before it publishes');
+  ok(/prepare-beta-migrations/.test(expand('deploy:beta')), 'beta deploy applies pending D1 migrations before it publishes');
+}
+for (const [name, c] of [['production', prod], ['beta', prod.env?.beta]]) {
+  if (!c?.vars?.COORD_ACCESS_AUD) continue;
+  ok(c.vars.COORD_ACCESS_AUD !== c.vars.ACCESS_AUD, `${name}: the coordinator sign-in is a different Access application than the staff pages`);
 }
 
 const bad = (v) => !v || /PUT-THE|REPLACE/i.test(String(v));

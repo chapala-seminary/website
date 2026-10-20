@@ -112,13 +112,14 @@ ok(exText.indexOf(strip(unit1.mc[0].options.en[0]).slice(0, 30)) > -1 && exText.
 ok(!unit1.mc.some((q) => q.why && q.why.en && exText.includes(strip(q.why.en).slice(0, 40))), 'with no explanation (they name the answer)');
 const exFr = unesc(await (await go('/coord/exam/1?lang=fr', {}, asCoord())).text());
 ok(exFr.includes(strip(unit1.mc[0].stem.fr).slice(0, 25)), 'and in French when asked');
+ok(exText.includes('completed this exam as their own work'), 'the printout carries the statement the coordinator signs');
 
 /* ---- answer sheets ------------------------------------------------------------------------ */
 const allRight = unit1.mc.map((q) => L[q.answer]).join('');
 // The exam version printed at the top of each unit's exam (worker/coord.js examVersion).
 const versionOf = async (unit) => (/class="exam-version">([0-9A-Z]+)</.exec(await (await go(`/coord/exam/${unit}`, {}, asCoord())).text()) || [])[1];
-const sheet = async (unit, letters, extra = {}, version) => go(`/coord/members/${memberId}/sheet`,
-  { ...form({ unit: String(unit), letters, version: version ?? await versionOf(unit) }), headers: { 'content-type': 'application/x-www-form-urlencoded', ...extra } }, asCoord());
+const sheet = async (unit, letters, extra = {}, version, fields = {}) => go(`/coord/members/${memberId}/sheet`,
+  { ...form({ unit: String(unit), letters, version: version ?? await versionOf(unit), own_work: 'yes', ...fields }), headers: { 'content-type': 'application/x-www-form-urlencoded', ...extra } }, asCoord());
 const attemptsFor = (unit) => db(`SELECT COUNT(*) AS n FROM attempts WHERE student_id = '${code}' AND scope = 'u:CTS/${unit}'`)[0][0].n;
 
 const v1 = await versionOf(1);
@@ -149,6 +150,9 @@ const staleWording = unesc(await (await sheet(1, allRight, {}, v1)).text());
 ok(/Nothing was recorded, and the unit is not locked/.test(staleWording) && attemptsFor(1) === 0, 'and the old printout is refused with nothing written');
 db(`UPDATE grading_keys SET data_json = '${k0.data_json.replace(/'/g, "''")}' WHERE qid = 'u:CTS/1/mc/0'`);
 ok((await versionOf(1)) === v1, 'restored again, the printed version matches');
+const noOwn = unesc(await (await sheet(1, allRight, {}, v1, { own_work: '' })).text());
+ok(/completed this exam as their own work/.test(noOwn) && attemptsFor(1) === 0,
+  'a sheet without the own-work statement is refused and nothing is written', noOwn.slice(0, 240));
 
 const shadowTry = await sheet(1, allRight, { 'x-test-grading-mode': 'shadow' });
 ok(/open when the site grades exams on the server/.test(await shadowTry.text()), 'before the site grades on the server, sheets are refused');
@@ -163,9 +167,9 @@ ok(/Passed: 20 of 20 right/.test(pass), 'a correct sheet passes (spaces ignored)
 ok(!/[Rr]ight answer|correct answer|answer was/.test(pass), 'the result names no right answer');
 const [up] = db(`SELECT unit, source FROM unit_progress WHERE student_id = '${code}' AND course = 'ots'`)[0];
 ok(up && up.unit === 1 && up.source === 'server', 'the pass is on the learner\'s record, written by the server', JSON.stringify(up));
-const [att] = db(`SELECT a.status, a.mc_right, a.mc_total, a.track, p.entered_by, p.letters FROM attempts a JOIN paper_sheets p ON p.attempt_id = a.id WHERE a.student_id = '${code}' AND a.scope = 'u:CTS/1'`)[0];
-ok(att && att.status === 'passed' && att.mc_right === 20 && att.mc_total === 20 && att.track === 'cert' && att.entered_by === COORD && att.letters === allRight,
-  'an ordinary attempt, with who entered it and the letters kept', JSON.stringify(att));
+const [att] = db(`SELECT a.status, a.mc_right, a.mc_total, a.track, p.entered_by, p.letters, p.attestation FROM attempts a JOIN paper_sheets p ON p.attempt_id = a.id WHERE a.student_id = '${code}' AND a.scope = 'u:CTS/1'`)[0];
+ok(att && att.status === 'passed' && att.mc_right === 20 && att.mc_total === 20 && att.track === 'cert' && att.entered_by === COORD && att.letters === allRight && /own work/.test(att.attestation || ''),
+  'an ordinary attempt, with who entered it, the letters, and the own-work statement', JSON.stringify(att));
 ok(/already passed/.test(await (await sheet(1, allRight)).text()), 'a passed unit takes no second sheet');
 
 // 17 of 20: below the 18 needed on the Certificate track.
@@ -193,9 +197,26 @@ ok(g3 && g3.wrong === 2 && g3.blank === 2, 'the blanks are recorded as blank, wr
 const sg = await (await go('/staff/groups', {}, asStaff)).text();
 const row = sg.split('<tr>').find((r) => r.includes(`Kenya pilot ${tag}`)) || '';
 ok(/<td>1<\/td><td>3<\/td>/.test(row), 'the staff page counts the group\'s learners and sheets', row);
-ok(!sg.includes(code), 'the staff page shows no student code');
+ok(sg.includes(NAME) && /20 of 20/.test(sg) && sg.includes('confirmed') && sg.includes(COORD),
+  'staff see the score, the learner, and who entered the sheet');
+ok(!sg.includes(code) && !sg.includes(allRight), 'the staff page shows no student code and not the answer letters');
+const beforeStaff = await (await go('/coord', {}, asCoord())).text();
+ok(beforeStaff.includes(NAME) && /2 of 13 passed/.test(beforeStaff), 'the coordinator\'s page shows the units passed');
+
+const unit4 = JSON.parse(fs.readFileSync('src/content/units/CTS/4.json', 'utf8'));
+const staffPass = await go('/staff/groups/sheet', form({
+  member: String(memberId), unit: '4', letters: unit4.mc.map((q) => L[q.answer]).join(''),
+  version: await versionOf(4), own_work: 'yes',
+}), asStaff);
+const staffText = await staffPass.text();
+ok(staffPass.status === 200 && /Passed: 20 of 20 right/.test(staffText), 'staff enter a sheet under the same rules', staffText.slice(0, 240));
+const [staffAtt] = db(`SELECT a.mc_right, p.entered_by, p.attestation FROM attempts a JOIN paper_sheets p ON p.attempt_id = a.id WHERE a.student_id = '${code}' AND a.scope = 'u:CTS/4'`)[0];
+ok(staffAtt && staffAtt.mc_right === 20 && staffAtt.entered_by === 'staff@example.test' && /own work/.test(staffAtt.attestation || ''),
+  'that entry records the score, the staff member, and the statement', JSON.stringify(staffAtt));
+ok((await go('/staff/groups/sheet', form({ member: String(memberId), unit: '5', letters: 'AAAA', version: 'AAAAAA', own_work: 'yes' }), asCoord())).status === 403,
+  'a coordinator cannot enter a sheet through the staff page');
 const after = await (await go('/coord', {}, asCoord())).text();
-ok(after.includes(NAME) && /2 of 13 passed/.test(after), 'the coordinator\'s page shows the units passed');
+ok(after.includes(NAME) && /3 of 13 passed/.test(after), 'the staff entry is a pass on the learner\'s record, and the coordinator sees it');
 
 // Learners who registered on the website themselves (Haiti, 20 Oct 2026) are
 // added by their code. A non-Certificate learner can be in a group, but their
@@ -215,7 +236,7 @@ ok((await go('/coord/add', form({ code: 'hello' }), asCoord())).status === 400, 
 const addedM = await go('/coord/add', form({ code: mdivCode }), asCoord());
 ok(addedM.status === 201 && /not on the Certificate track/.test(unesc(await addedM.text())), 'adding a master\'s learner warns that paper sheets do not count for them');
 const mId = db(`SELECT id FROM study_group_members WHERE student_id = '${mdivCode}'`)[0][0].id;
-const mSheet = await go(`/coord/members/${mId}/sheet`, form({ unit: '4', letters: 'A'.repeat(20), version: await versionOf(4) }), asCoord());
+const mSheet = await go(`/coord/members/${mId}/sheet`, form({ unit: '5', letters: 'A'.repeat(20), version: await versionOf(5), own_work: 'yes' }), asCoord());
 ok(/not on the Certificate track/.test(unesc(await mSheet.text())), 'a master\'s learner\'s paper sheet is refused', mSheet.status);
 ok(db(`SELECT COUNT(*) AS n FROM attempts WHERE student_id = '${mdivCode}'`)[0][0].n === 0, 'and no attempt is made for them');
 const home2 = unesc(await (await go('/coord', {}, asCoord())).text());

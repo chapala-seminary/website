@@ -18,6 +18,7 @@ import { canonicalCountry } from '../src/lib/countries.mjs';
  *   POST /staff/notes/run           run today's notes now (as the daily run would)
  *   POST /staff/digest              the weekly summary (?send=1 also emails it)
  *   GET/POST /staff/groups          coordinator-led study groups (worker/coord.js)
+ *   POST /staff/groups/sheet        enter one paper sheet, the same rules as /coord
  *   /staff/grading/...              the faculty's grading pages (worker/staff-grading.js):
  *                                   appeals, pending answers, calibration, fill-in rulings,
  *                                   possible copying, AI usage
@@ -272,7 +273,7 @@ export async function handleStaff(request, env) {
     const from = request.headers.get('origin');
     if (from && from !== url.origin) return html('<p>Refused: the request did not come from this site.</p>', 403);
   }
-  if (path === '/staff/groups') {
+  if (path === '/staff/groups' || path === '/staff/groups/sheet') {
     const r = await handleStaffGroups(request, env, user, url, path, { esc, html, STYLE });
     if (r) return r;
   }
