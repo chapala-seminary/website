@@ -28,7 +28,11 @@ let checks = 0;
 const ok = (c, m, d) => { checks++; if (!c) fails.push(m + (d ? `\n        ${d}` : '')); };
 process.on('uncaughtException', (e) => { console.error(`CRASH after ${checks} checks:`, e.stack.split('\n').slice(0, 4).join('\n')); for (const f of fails) console.error('  ✗ ' + f); process.exit(1); });
 // ONLY=4,6 runs just those cases while iterating
-const want = (n) => !process.env.ONLY || process.env.ONLY.split(',').includes(String(n));
+const want = (n) => {
+  const run = !process.env.ONLY || process.env.ONLY.split(',').includes(String(n));
+  if (run) console.log(`Grading UI case ${n}`);
+  return run;
+};
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 /* A student's browser, opened on `path`, with the stub answering /api. */
@@ -77,7 +81,10 @@ async function mcAll(p, rightCount = bank.mc.length) {
 async function fillAll(p, rightCount = bank.fill.length, check = true) {
   for (let i = 0; i < bank.fill.length; i++) {
     await p.locator(`input[data-fill="${i}"]`).fill(i < rightCount ? bank.fill[i].answer.en : 'zzz wrong');
-    if (check) { await p.locator(`input[data-fill="${i}"]`).press('Enter'); await p.waitForSelector(`.question[data-fill="${i}"] .feedback-text`); }
+    // Bulk setup can overlap an asynchronous redraw from the previous answer.
+    // A locator click retries when its button is replaced; keyboard dispatch
+    // can instead land between renders. Dedicated cases below still test Enter.
+    if (check) { await p.locator(`button[data-fill-check="${i}"]`).click(); await p.waitForSelector(`.question[data-fill="${i}"] .feedback-text`); }
   }
 }
 async function saAll(p, hints) {

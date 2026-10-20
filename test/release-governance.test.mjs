@@ -61,10 +61,44 @@ test('human approvals must cover this SHA and cannot outlive a requested change 
 test('production verification accepts only the exact build stamp and healthy public site', async () => {
   const expected = '2026-10-16 abcdef1';
   const response = (body, status = 200) => new Response(body, { status });
-  const passing = async url => url.includes('/version.txt') ? response(expected) : response('{"ok":true}');
+  const requested = [];
+  const passing = async url => { requested.push(url); return url.includes('/version.txt') ? response(expected) : response('{"ok":true}'); };
   await checkProduction(expected, passing, async () => {});
-  for (const invalid of [async () => response('old release'), async () => response('challenge', 403), async url => url.includes('/version.txt') ? response(expected) : response('{"ok":false}')])
+  assert.equal(requested.length, 2);
+  for (const url of requested) assert.equal(new URL(url).searchParams.get('release'), expected, 'both public probes are scoped to the exact release');
+  for (const invalid of [async () => response('old release'), async () => response('challenge', 403), async url => url.includes('/version.txt') ? response(expected) : response('challenge', 403), async url => url.includes('/version.txt') ? response(expected) : response('{"ok":false}')])
     await assert.rejects(checkProduction(expected, invalid, async () => {}));
+});
+
+test('production fallback requires a real challenge/network failure and rechecks exact version and health', async () => {
+  const expected = '2026-10-19 abcdef12';
+  const primary = url => new URL(url).hostname === 'chapalaseminary.org';
+  const version = url => new URL(url).pathname === '/version.txt';
+  const good = url => new Response(version(url) ? expected : '{"ok":true}');
+  const requested = [];
+  await checkProduction(expected, async url => {
+    requested.push(url);
+    return primary(url) && !version(url) ? new Response('challenge', { status: 403, headers: { 'cf-mitigated': 'challenge' } }) : good(url);
+  }, async () => {});
+  assert.equal(requested.filter(url => !primary(url)).length, 2, 'fallback checks its own version AND health');
+  for (const url of requested) assert.equal(new URL(url).searchParams.get('release'), expected);
+  await checkProduction(expected, async url => { if (primary(url)) throw new TypeError('fetch failed'); return good(url); }, async () => {});
+  for (const status of [403, 404, 500]) {
+    let fallback = 0;
+    await assert.rejects(checkProduction(expected, async url => {
+      if (!primary(url)) { fallback++; return good(url); }
+      return new Response('real HTTP failure', { status });
+    }, async () => {}));
+    assert.equal(fallback, 0, `a genuine HTTP ${status} must not be hidden`);
+  }
+  for (const bad of ['version', 'health']) {
+    await assert.rejects(checkProduction(expected, async url => {
+      if (primary(url)) return new Response('challenge', { status: 403, headers: { 'cf-mitigated': 'challenge' } });
+      if (bad === 'version' && version(url)) return new Response('stale release');
+      if (bad === 'health' && !version(url)) return new Response('{"ok":false}');
+      return good(url);
+    }, async () => {}));
+  }
 });
 
 test('production guard rejects dirty, wrong-branch and outdated checkouts before deployment', async () => {

@@ -22,6 +22,7 @@ import { handle } from './api.js';
 import { handleStaff } from './staff.js';
 import { scheduled, stopNotes } from './outreach.js';
 import { runQueue } from './grading/queue.js';
+import { blocksReviewAsset } from './review-assets.js';
 
 const GRADING_CRON = '*/15 * * * *';
 async function gradingRun(env) {
@@ -144,9 +145,9 @@ async function route(request, env, ctx) {
   // question's answer, so only the grading API reads them (env.ASSETS, which
   // does not come through here). A browser asking is told nothing is there.
   // Read decoded, so /assets/exam%2Dreview/... or a doubled slash is refused too.
-  let plain = path;
-  try { plain = decodeURIComponent(path); } catch { /* a malformed escape: keep it as written */ }
-  if (/\/exam-review\//i.test(plain.replace(/\/{2,}/g, '/'))) return new Response('', { status: 404 });
+  // Production's shadow build still uses public JavaScript review passages;
+  // keep those working without exposing the live Worker's JSON banks.
+  if (blocksReviewAsset(request, env)) return new Response('', { status: 404 });
   let m;
   if ((m = /^\/stop-notes\/([^/]+)$/.exec(path)) && env.DB) return await stopNotes(request, env, decodeURIComponent(m[1]));
   return await asset(request, env);
