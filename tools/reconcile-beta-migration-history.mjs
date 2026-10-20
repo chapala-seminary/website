@@ -57,12 +57,12 @@ for (const [name,obj] of expected) {
   if (!actual.has(name) || normal(actual.get(name).sql) !== obj.sql)
     throw new Error('BETA SCHEMA DRIFT: '+name+' does not exactly match '+obj.filename+'; NO WRITE');
 }
-const emailCol = sql("SELECT name,type,notnull,dflt_value FROM pragma_table_info('email_challenges') WHERE name='link_hash'");
+const emailCol = sql("SELECT * FROM pragma_table_info('email_challenges') WHERE name='link_hash'");
 if (emailCol.length !== 1 || emailCol[0].type.toUpperCase() !== 'TEXT' ||
     Number(emailCol[0].notnull) !== 0 || emailCol[0].dflt_value !== null)
   throw new Error('link_hash column differs from migration 0012');
 for (const table of ['course_completions','unit_progress','textbook_results']) {
-  const col=sql("SELECT name,type,notnull,dflt_value FROM pragma_table_info('"+table+"') WHERE name='source'");
+  const col=sql("SELECT * FROM pragma_table_info('"+table+"') WHERE name='source'");
   if (col.length !== 1 || col[0].type.toUpperCase() !== 'TEXT' || Number(col[0].notnull)!==1 ||
     col[0].dflt_value !== "'legacy'") throw new Error('Source column differs from 0015 in '+table);
 }
