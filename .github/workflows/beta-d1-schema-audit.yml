@@ -1,0 +1,54 @@
+name: Inspect beta D1 migration history (read only)
+
+# Runs once when installed on beta, and may be dispatched again manually.
+# This does not invoke migration apply or deploy.
+on:
+  push:
+    branches: [beta]
+    paths:
+      - .github/workflows/beta-d1-schema-audit.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    if: github.ref == 'refs/heads/beta'
+    environment: beta
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: Read beta D1 migration state only
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CTS_BETA_CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: '119b0919229edb3185b69f1c6bd04b66'
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$CLOUDFLARE_API_TOKEN" || { echo "Missing beta Cloudflare API token"; exit 1; }
+          node tools/prepare-beta-migrations.mjs --check
+          # All Wrangler commands below are read-only. No student rows,
+          # grades, keys, or email addresses are queried or printed.
+          W=(npx wrangler d1 execute chapala-students-beta --remote --env beta --config wrangler.jsonc)
+          echo "=== Wrangler migration list (beta only) ==="
+          npx wrangler d1 migrations list chapala-students-beta --remote --env beta --config wrangler.jsonc
+          echo "=== Migration history schema ==="
+          "${W[@]}" --command "PRAGMA table_info(d1_migrations)"
+          echo "=== Migration history filenames ==="
+          "${W[@]}" --command "SELECT name FROM d1_migrations ORDER BY id"
+          echo "=== Relevant schema DDL; no table data ==="
+          "${W[@]}" --command "SELECT type,name,sql FROM sqlite_master WHERE name IN ('email_challenges','email_challenge_link','d1_migrations','test_activations','thm_study_plans','study_groups','study_group_members','paper_sheets') ORDER BY type,name"
+          for tbl in email_challenges paper_sheets course_completions unit_progress textbook_results; do
+            echo "=== Column list for $tbl ==="
+            "${W[@]}" --command "PRAGMA table_info($tbl)"
+          done
+          echo "=== Index list email_challenges ==="
+          "${W[@]}" --command "PRAGMA index_list(email_challenges)"
+          echo "=== Migration schema audit complete: NO WRITES ==="
