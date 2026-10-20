@@ -5,13 +5,13 @@ import { frenchCourseEntries, catalogCards } from './french-titles.ts';
 const translations: Record<string, string> = copy;
 const formCopy: Record<string, string> = {
   'Full name': 'Nom complet',
-  'Email (required)': 'E-mail (obligatoire)',
+  'Email (optional)': 'E-mail (facultatif)',
   'Country — select': 'Pays — sélectionnez',
   'How did you hear about CTS? (optional)': 'Comment avez-vous découvert le STC ? (facultatif)',
 };
 export const FRENCH_HOME_MESSAGES: Record<string, string> = {
   'Please enter your name': 'Veuillez saisir votre nom',
-  'Please enter a valid email address to register': 'Veuillez saisir une adresse e-mail valide pour vous inscrire',
+  'Leave email blank to enroll, or enter a valid address so we can return your code and deliver a certificate.': 'Laissez l’e-mail vide pour vous inscrire, ou saisissez une adresse valide afin de récupérer votre code et de recevoir le certificat.',
   'Please select your country': 'Veuillez sélectionner votre pays',
   'Could not save — enable storage': 'Enregistrement impossible — autorisez le stockage dans le navigateur',
   'Certificate of Ministry': 'Certificat de ministère',

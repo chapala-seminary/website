@@ -423,26 +423,29 @@
     var note = document.createElement('section');
     note.id = 'cts-registration-problem'; note.className = 'card';
     note.setAttribute('role', 'alert');
-    var missing = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(student.email || '');
-    var words = missing
-      ? { en: 'Add a valid email address to keep your progress with the seminary and receive your student code. Your work in this browser is still saved.', es: 'Añada un correo válido para guardar su progreso en el seminario y recibir su código de estudiante. Su trabajo en este navegador sigue guardado.', fr: 'Ajoutez une adresse e-mail valide pour conserver votre progression au séminaire et recevoir votre code étudiant. Votre travail dans ce navigateur reste enregistré.' }
+    // A blank email is a valid enrollment. This notice is for a failed save,
+    // or for an address that was typed but is not usable.
+    var malformed = !!(student && student.email) && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(student.email);
+    var words = malformed
+      ? { en: 'That email address is not valid. Correct it, or clear it and enroll without one. Your work in this browser is still saved.', es: 'Ese correo no es válido. Corríjalo, o bórrelo e inscríbase sin él. Su trabajo en este navegador sigue guardado.', fr: 'Cette adresse e-mail n’est pas valide. Corrigez-la, ou effacez-la et inscrivez-vous sans elle. Votre travail dans ce navigateur reste enregistré.' }
       : { en: 'We could not save your registration with the seminary. Your work is saved in this browser. Please try again.', es: 'No pudimos guardar su registro en el seminario. Su trabajo está guardado en este navegador. Inténtelo de nuevo.', fr: 'Nous n’avons pas pu enregistrer votre inscription au séminaire. Votre travail est enregistré dans ce navigateur. Réessayez.' };
     var text = window.CTSLanguage ? window.CTSLanguage.bi(words) : words.en;
     note.innerHTML = '<p>' + text + '</p>';
-    if (missing) {
+    if (malformed) {
       var input = document.createElement('input');
-      input.type = 'email'; input.autocomplete = 'email'; input.required = true;
+      input.type = 'email'; input.autocomplete = 'email'; input.value = student.email;
       input.setAttribute('aria-label', window.CTSLanguage?.lang === 'fr' ? 'Adresse e-mail' : window.CTSLanguage?.lang === 'es' ? 'Correo electrónico' : 'Email');
       note.appendChild(input);
     }
     var retry = document.createElement('button'); retry.type = 'button'; retry.className = 'btn';
-    var labels = { en: missing ? 'Save email and retry' : 'Try again', es: missing ? 'Guardar correo y reintentar' : 'Reintentar', fr: missing ? 'Enregistrer et réessayer' : 'Réessayer' };
+    var labels = { en: malformed ? 'Save and try again' : 'Try again', es: malformed ? 'Guardar y reintentar' : 'Reintentar', fr: malformed ? 'Enregistrer et réessayer' : 'Réessayer' };
     retry.innerHTML = window.CTSLanguage ? window.CTSLanguage.bi(labels) : labels.en;
     retry.addEventListener('click', function () {
       var input = note.querySelector('input');
       if (input) {
-        if (!input.reportValidity()) return;
-        var st = parse(get('cts_student'), {}); st.email = input.value.trim();
+        var value = input.value.trim();
+        if (value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) { input.reportValidity(); return; }
+        var st = parse(get('cts_student'), {}); st.email = value;
         set('cts_student', JSON.stringify(st));
       }
       note.remove(); syncOnce(true);
@@ -476,7 +479,7 @@
   function offerEmail(code, snap, state, fresh) {
     if (!code || typeof document === 'undefined' || !document.body) return;
     var email = (snap.student && snap.student.email) || '';
-    if (!validEmail(email)) return;
+    if (!validEmail(email)) { if (!email) encourageEmail(code); return; }
     var verified = (state && state.student && state.student.email_verified_at) || (parse(get('cts_student'), {}) || {}).email_verified_at;
     var existing = document.getElementById('cts-email-confirm');
     if (verified) { if (existing) existing.remove(); return; }
@@ -486,6 +489,58 @@
       set(OFFER_KEY, code);
       sendConfirmation(code, email, box);
     }
+  }
+  /* A student with no address is already enrolled. The note asks for one so a
+     lost code can be returned and a certificate delivered. Dismissing it
+     leaves study alone. */
+  function encourageEmail(code) {
+    if (sessionGet('cts_email_dismiss') === code) return;
+    if (document.getElementById('cts-email-confirm') || document.getElementById('cts-email-optional')) return;
+    var note = document.createElement('section');
+    note.id = 'cts-email-optional';
+    note.setAttribute('role', 'status');
+    note.style.cssText = 'position:fixed;left:12px;right:12px;bottom:12px;z-index:40;margin:0 auto;max-width:720px;padding:12px 14px;background:#fbf6ea;color:#2a241d;border:2px solid #b08324;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.18);font:16px/1.45 Georgia,serif';
+    var p = document.createElement('p');
+    p.style.margin = '0 0 8px';
+    p.textContent = words({
+      en: 'Email is optional. Add one so we can return your student code, send reminders, and deliver a certificate. You can enroll and keep studying without it.',
+      es: 'El correo es opcional. Añádalo para que podamos devolverle su código de estudiante, enviarle recordatorios y entregarle el certificado. Puede inscribirse y seguir estudiando sin él.',
+      fr: 'L’adresse e-mail est facultative. Ajoutez-la afin que nous puissions vous renvoyer votre code étudiant, vous envoyer des rappels et vous remettre un certificat. Vous pouvez vous inscrire et continuer à étudier sans elle.'
+    });
+    var status = document.createElement('p');
+    status.className = 'cts-email-status';
+    status.style.margin = '0 0 8px';
+    var input = document.createElement('input');
+    input.type = 'email'; input.autocomplete = 'email'; input.maxLength = 160;
+    input.style.cssText = 'width:16em;max-width:100%;margin:0 8px 8px 0;padding:6px 8px;font:16px Georgia,serif';
+    input.setAttribute('aria-label', words({ en: 'Email', es: 'Correo electrónico', fr: 'Adresse e-mail' }));
+    function button(label, primary) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.textContent = label;
+      b.style.cssText = 'margin:0 8px 8px 0;padding:6px 10px;font:15px Georgia,serif;cursor:pointer;border-radius:8px;border:1px solid #6d2233;background:' + (primary ? '#6d2233' : '#fff') + ';color:' + (primary ? '#fff' : '#6d2233');
+      return b;
+    }
+    var save = button(words({ en: 'Save email', es: 'Guardar correo', fr: 'Enregistrer l’e-mail' }), true);
+    var keep = button(words({ en: 'Keep studying', es: 'Seguir estudiando', fr: 'Continuer à étudier' }), false);
+    save.addEventListener('click', function () {
+      var value = input.value.trim();
+      if (!validEmail(value)) {
+        status.textContent = words({
+          en: 'Enter a valid email address, or choose Keep studying.',
+          es: 'Escriba un correo válido, o elija Seguir estudiando.',
+          fr: 'Saisissez une adresse e-mail valide, ou choisissez Continuer à étudier.'
+        });
+        return;
+      }
+      var local = parse(get('cts_student'), {}) || {};
+      local.email = value;
+      set('cts_student', JSON.stringify(local));
+      note.remove();
+      syncOnce(true);
+    });
+    keep.addEventListener('click', function () { sessionSet('cts_email_dismiss', code); note.remove(); });
+    note.appendChild(p); note.appendChild(status); note.appendChild(input); note.appendChild(save); note.appendChild(keep);
+    document.body.appendChild(note);
   }
   function buildEmailBanner(code) {
     var note = document.createElement('section');

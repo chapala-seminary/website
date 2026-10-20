@@ -384,10 +384,10 @@
       <section id="register" style="max-width:760px;margin:0 auto 8px;padding:22px;background:#5a1f1f;border:3px solid #b08324;border-radius:14px;color:#f0e0b8;">
         <div class="kicker" style="color:#e9c877"><span class="en">Register Once</span><span class="es">Reg&iacute;strese Una Vez</span></div>
         <h2 class="section" style="color:#fff;margin:4px 0 8px"><span class="en">Register Here &mdash; for Every Course</span><span class="es">Reg&iacute;strese Aqu&iacute; &mdash; para Todos los Cursos</span></h2>
-        <p style="margin:0 0 16px;font-size:15px;line-height:1.5"><span class="en">Enter your name and email address and choose your track &mdash; you only register once. Your progress is saved in this browser as you study, and kept with the seminary under your student code, so you can continue on any device. Your email is required. We send a confirmation so we can return your student code, send reminders, and deliver a certificate. You can keep studying if the message is slow to arrive.</span><span class="es">Escriba su nombre y correo electr&oacute;nico y elija su v&iacute;a &mdash; se registra una sola vez. Su progreso se guarda en este navegador mientras estudia, y en el seminario bajo su c&oacute;digo de estudiante, para que pueda continuar en cualquier dispositivo. Su correo es obligatorio. Enviamos una confirmaci&oacute;n para devolverle su c&oacute;digo de estudiante, enviarle recordatorios y entregarle el certificado. Puede seguir estudiando si el mensaje tarda en llegar.</span></p>
+        <p style="margin:0 0 16px;font-size:15px;line-height:1.5"><span class="en">Enter your name and choose your track &mdash; you only register once. Your progress is saved in this browser as you study, and kept with the seminary under your student code, so you can continue on any device. Email is optional. Add one so we can return your student code, send reminders, and deliver a certificate. You can enroll and keep studying without it.</span><span class="es">Escriba su nombre y elija su v&iacute;a &mdash; se registra una sola vez. Su progreso se guarda en este navegador mientras estudia, y en el seminario bajo su c&oacute;digo de estudiante, para que pueda continuar en cualquier dispositivo. El correo es opcional. A&ntilde;&aacute;dalo para que podamos devolverle su c&oacute;digo, enviarle recordatorios y entregarle el certificado. Puede inscribirse y seguir estudiando sin &eacute;l.</span></p>
         <div id="cts-reg-form" style="display:grid;gap:10px;">
           <input id="reg-name" type="text" placeholder="Full name / Nombre completo" data-en="Full name" data-es="Nombre completo" style="padding:11px;border-radius:7px;border:1px solid #b08324;font:15px Georgia,serif;">
-          <input id="reg-email" type="email" required maxlength="160" autocomplete="email" aria-label="Email / Correo" placeholder="Email (required) / Correo (obligatorio)" data-en="Email (required)" data-es="Correo (obligatorio)" style="padding:11px;border-radius:7px;border:1px solid #b08324;font:15px Georgia,serif;">
+          <input id="reg-email" type="email" maxlength="160" autocomplete="email" aria-label="Email / Correo" placeholder="Email (optional) / Correo (opcional)" data-en="Email (optional)" data-es="Correo (opcional)" style="padding:11px;border-radius:7px;border:1px solid #b08324;font:15px Georgia,serif;">
           <select id="reg-country" data-bilingual style="padding:11px;border-radius:7px;border:1px solid #b08324;font:15px Georgia,serif;background:#fff;">
             <option value="" data-en="Country — select" data-es="País — seleccione">Country / Pa&iacute;s &mdash; select / seleccione</option>
 <option value="AF">Afghanistan · Afganistán</option>
@@ -672,8 +672,8 @@
           var emailField=document.getElementById('reg-email');
           var email=(emailField.value||'').trim();
           emailField.value=email;
-          if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) || !emailField.checkValidity() || email.length>160){
-            alert(ctsHomeMessage(es?'Escriba un correo electr\u00f3nico v\u00e1lido para registrarse':'Please enter a valid email address to register'));
+          if(email && (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) || !emailField.checkValidity() || email.length>160)){
+            alert(ctsHomeMessage(es?'Deje el correo en blanco para inscribirse, o escriba una direcci\u00f3n v\u00e1lida para recuperar su c\u00f3digo y recibir el certificado.':'Leave email blank to enroll, or enter a valid address so we can return your code and deliver a certificate.'));
             emailField.focus(); return;
           }
           var country=document.getElementById('reg-country').value;
