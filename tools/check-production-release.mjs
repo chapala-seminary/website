@@ -8,8 +8,12 @@ export async function checkProduction(expected, request = fetch, pause = ms => n
       const version = await request(`https://chapalaseminary.org/version.txt?release=${encodeURIComponent(expected)}`, { signal: AbortSignal.timeout(10000) });
       if (!version.ok) throw new Error(`Production version probe returned HTTP ${version.status}`);
       if ((await version.text()).trim() !== expected) throw new Error('Production version does not match the deployed build stamp.');
-      const health = await request('https://chapalaseminary.org/api/health', { signal: AbortSignal.timeout(10000) });
-      if (!health.ok || !(await health.json()).ok) throw new Error(`Production health probe failed (HTTP ${health.status}).`);
+      // Scope both probes to this release, as the beta verifier already does.
+      // A shared bare health URL can receive an intermediary challenge/cache
+      // response unrelated to the release just published.
+      const health = await request(`https://chapalaseminary.org/api/health?release=${encodeURIComponent(expected)}`, { signal: AbortSignal.timeout(10000) });
+      if (!health.ok) throw new Error(`Production health probe failed (HTTP ${health.status}; cf-mitigated=${health.headers.get('cf-mitigated') || 'none'}; cf-ray=${health.headers.get('cf-ray') || 'none'}).`);
+      if (!(await health.json()).ok) throw new Error(`Production health probe failed (HTTP ${health.status}).`);
       console.log(`Production verified: ${expected}`);
       return;
     } catch (error) { last = error; console.warn(`Production probe ${attempt + 1}/10: ${error.message}`); }
