@@ -26,7 +26,9 @@ import { canonicalCountry } from '../src/lib/countries.mjs';
 import { activationEnvironment, activatedTests } from './test-activation.js';
 import { testContext } from './test-context.js';
 import { gradingRoute } from './grading/routes.js';
-import { isLive, legacySyncOpen } from './grading/mode.js';
+import { isLive, legacySyncOpen, legacyCohortMember } from './grading/mode.js';
+import { completeCourseIfDone, completeSingleIfDone, loadStudent } from './grading/attempts.js';
+import { SINGLES } from './grading/singles.js';
 import { courseShortfall, textbookShortfall, exemptionsFor, degreeShortfall, resolveCourse, studentLevel, canonicalCode, certificateLevel, DEGREES } from './awards.js';
 import catalog from './catalog.json';
 import { emailConfigured, emailLogOnly, sendEmail, verificationEmail, certificateEmail, codeEmail } from './email.js';
@@ -277,7 +279,7 @@ async function sync(request, env) {
   if (!id) throw new HttpError(400, 'a student code is required');
 
   const exists = await env.DB.prepare(
-    'SELECT id, name, email, email_verified_at, country, track, goal, lang FROM students WHERE id = ?').bind(id).first();
+    'SELECT id, name, email, email_verified_at, country, track, goal, lang, created_at FROM students WHERE id = ?').bind(id).first();
   if (!exists) return fail(404, 'no record for that student code');
 
   const statements = [];
@@ -313,20 +315,39 @@ async function sync(request, env) {
      the reply carries the server's own records. In shadow mode, and in a Worker
      with no GRADING_MODE, this is exactly what it always was.
      During the cutover window (LEGACY_SYNC_UNTIL, worker/grading/mode.js) a
-     live Worker still takes the browser's passes, as legacy credit: units and
-     textbook passes as before, and completions only for courses the record
-     does not hold yet -- never a higher level for one it does. */
+     live Worker still takes a pre-switch record's units and textbook passes
+     from the browser, as legacy credit -- but not one it has already sat a
+     live test for, so the window cannot undo a live result -- and works out
+     any completion from them itself; it takes no completion or level from
+     the browser's lists. */
   const live = isLive(env, request);
-  const legacy = live && legacySyncOpen(env, request);
+  const legacy = live && legacySyncOpen(env, request) && legacyCohortMember(env, request, exists.created_at);
   const imports = !live || legacy;
-  for (const row of imports ? progressRows(id, b.progress) : [])
+  let progressNow = imports ? progressRows(id, b.progress) : [];
+  let textbookClaims = imports ? textbookRows(id, b.textbooks) : [];
+  if (legacy && (progressNow.length || textbookClaims.length)) {
+    const sat = (await env.DB.prepare(
+      `SELECT a.scope, k.data_json FROM attempts a LEFT JOIN grading_keys k ON k.qid = a.scope || '/meta/0'
+       WHERE a.student_id = ? AND a.shadow = 0`).bind(id).all()).results ?? [];
+    const scopes = new Set(sat.map((r) => r.scope));
+    const singleUnits = new Set();
+    for (const r of sat) {
+      try { const m = r.data_json ? JSON.parse(r.data_json) : null; if (m && m.course && m.unit != null) singleUnits.add(`${m.course}\u0000${Number(m.unit)}`); } catch { /* not a single-page course */ }
+    }
+    progressNow = progressNow.filter(([, course, unit]) => {
+      const pages = catalog.courses[course]?.pages;
+      return !(pages && scopes.has(`u:${pages}/${unit}`)) && !singleUnits.has(`${course}\u0000${unit}`);
+    });
+    textbookClaims = textbookClaims.filter(([, slug]) => !scopes.has(`tb:${slug}`) && !scopes.has(`rd:${slug}`));
+  }
+  for (const row of progressNow)
     statements.push(env.DB.prepare(
       `INSERT INTO unit_progress (student_id, course, unit, completed_at) VALUES (?, ?, ?, ?)
        ON CONFLICT(student_id, course, unit) DO UPDATE SET completed_at = excluded.completed_at
        WHERE excluded.completed_at < unit_progress.completed_at`)
       .bind(...row));
 
-  const textbookRowsNow = imports ? textbookRows(id, b.textbooks) : [];
+  const textbookRowsNow = textbookClaims;
   for (const row of textbookRowsNow)
     statements.push(env.DB.prepare(
       `INSERT INTO textbook_results (student_id, textbook, passed_at) VALUES (?, ?, ?)
@@ -339,7 +360,7 @@ async function sync(request, env) {
   // device reports it done at a higher level (the student did the further
   // work). A stale device reporting a lower level changes nothing.
   const trackNow = (s && typeof s === 'object' && String(s.track || '').toLowerCase()) || exists.track;
-  let completions = imports ? completionRows(id, b.doneCodes, b.completionTracks, trackNow) : [];
+  let completions = imports && !legacy ? completionRows(id, b.doneCodes, b.completionTracks, trackNow) : [];
   /* A master's-level completion of a course with a textbook is not recorded
      until the record holds a pass on its textbook test (Dr. Cook, 4 Oct
      2026). The browser reports its completions on every sync, so the course
@@ -364,13 +385,8 @@ async function sync(request, env) {
   const held = new Set(completions.length
     ? ((await env.DB.prepare('SELECT code FROM course_completions WHERE student_id = ?').bind(id).all()).results ?? []).map((r) => r.code)
     : []);
-  // The cutover window adds a course the record lacks, as legacy credit, and
-  // leaves every completion it holds exactly as it is.
-  if (legacy) completions = completions.filter(([, code]) => !held.has(code));
   for (const row of completions)
-    statements.push(legacy ? env.DB.prepare(
-      `INSERT INTO course_completions (student_id, code, track, completed_at) VALUES (?, ?, ?, ?)
-       ON CONFLICT(student_id, code) DO NOTHING`).bind(...row) : env.DB.prepare(
+    statements.push(env.DB.prepare(
       `INSERT INTO course_completions (student_id, code, track, completed_at) VALUES (?, ?, ?, ?)
        ON CONFLICT(student_id, code) DO UPDATE SET track = CASE
          WHEN course_completions.track IS NULL THEN excluded.track
@@ -382,6 +398,26 @@ async function sync(request, env) {
           OR (course_completions.track = 'assoc' AND excluded.track IN ('thm', 'mdiv'))`).bind(...row));
 
   if (statements.length) await env.DB.batch(statements);
+
+  /* In the cutover window the server, not the browser, decides what the
+     imported units complete: the same check a live pass runs, at the
+     record's own level, with its textbook and reading requirements. Legacy
+     units count towards a first completion only (earnedLevel). */
+  if (legacy && (progressNow.length || textbookRowsNow.length)) {
+    const learner = await loadStudent(env, id);
+    const level = studentLevel(learner.track, learner.goal);
+    const courses = new Set(progressNow.map(([, course]) => course));
+    for (const slug of courses) {
+      const single = Object.keys(SINGLES).find((code) => SINGLES[code].course === slug);
+      if (single) await completeSingleIfDone(env, learner, single, level);
+      else if (catalog.courses[slug]) await completeCourseIfDone(env, learner, slug, level);
+    }
+    for (const [, testSlug] of textbookRowsNow) {
+      const code = catalog.textbooks[testSlug]?.code;
+      const slug = code && Object.keys(catalog.courses).find((s) => catalog.courses[s].code === code);
+      if (slug && !courses.has(slug)) await completeCourseIfDone(env, learner, slug, level);
+    }
+  }
 
   // The notice to the seminary, from the request that recorded the completion
   // (Wayne's audit item 5). One per course, kept in `notifications`; a failed
