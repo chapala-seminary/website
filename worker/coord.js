@@ -75,7 +75,9 @@ const studentCode = () => `CTS-${part()}-${part()}-${part()}`;
 async function examVersion(scope, keys) {
   const parts = scope.qids.mc.map((qid) => {
     const k = keys.get(qid)?.key || {};
-    return `${qid}|${k.answer}|${(k.options?.en || []).length}`;
+    // Every language's question and choices, not just the answer: a reworded
+    // choice can change what a printed letter means (ChatGPT review, 20 Oct).
+    return JSON.stringify({ qid, prompt: k.prompt ?? null, options: k.options ?? null, answer: k.answer ?? null });
   });
   const digest = new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(parts.join('\n'))));
   return [...digest.slice(0, 6)].map((b) => ALPHABET[b % 32]).join('');

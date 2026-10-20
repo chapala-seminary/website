@@ -141,6 +141,14 @@ ok(/printed from exam version .* is now version .* Nothing was recorded, and the
 ok(attemptsFor(1) === 0, 'and no attempt was made from it (no failure, no lock)');
 db(`UPDATE grading_keys SET data_json = '${k0.data_json.replace(/'/g, "''")}' WHERE qid = 'u:CTS/1/mc/0'`);
 ok((await versionOf(1)) === v1, 'the key restored, the version is the printed one again');
+// Only a choice's wording changes (answer and order the same): still a different exam.
+const reworded = JSON.parse(k0.data_json); reworded.options.en[0] = reworded.options.en[0] + ' (revised)';
+db(`UPDATE grading_keys SET data_json = '${JSON.stringify(reworded).replace(/'/g, "''")}' WHERE qid = 'u:CTS/1/mc/0'`);
+ok((await versionOf(1)) !== v1, 'rewording one choice changes the exam version');
+const staleWording = unesc(await (await sheet(1, allRight, {}, v1)).text());
+ok(/Nothing was recorded, and the unit is not locked/.test(staleWording) && attemptsFor(1) === 0, 'and the old printout is refused with nothing written');
+db(`UPDATE grading_keys SET data_json = '${k0.data_json.replace(/'/g, "''")}' WHERE qid = 'u:CTS/1/mc/0'`);
+ok((await versionOf(1)) === v1, 'restored again, the printed version matches');
 
 const shadowTry = await sheet(1, allRight, { 'x-test-grading-mode': 'shadow' });
 ok(/open when the site grades exams on the server/.test(await shadowTry.text()), 'before the site grades on the server, sheets are refused');
