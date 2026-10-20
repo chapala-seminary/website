@@ -34,6 +34,8 @@ The modes:
   grades nothing: every MC click, fill-in and short answer goes to the API.
   Credit is written only by the server.
 - **`shadow`**: used only for the production trial before the switch date.
+  Production ran it from 19 Oct 2026 until Wayne approved the switch to
+  `live` the same evening; it stays available for the test suites.
   - Pages and browser grading are exactly as on `beta` today, and credit
     comes from today's rules (`/api/sync`).
   - The browser also posts each submitted unit to `POST /api/shadow`. The
