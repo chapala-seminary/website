@@ -286,6 +286,8 @@ API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/earn
 # The student tracker: the staff roster behind Cloudflare Access, and the notes
 # to students who have gone quiet (worker/staff.js, worker/outreach.js).
 API_BASE="http://127.0.0.1:$PORT" node test/staff.test.mjs
+# A failed note is retried; a sent note is not repeated (worker/outreach.js).
+API_BASE="http://127.0.0.1:$PORT" STATE="$STATE" CONFIG="$CONFIG" node test/outreach-retry.test.mjs
 
 # Returning students from the old site (Dr. Cook's review, 29 Sept 2026):
 # three browsers as the old site left them, each opening the new site -- the

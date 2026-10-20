@@ -189,8 +189,10 @@ export async function candidates(env, asOf = new Date()) {
   const t = asOf.getTime();
   const iso = (ms) => new Date(ms).toISOString();
   const rows = (await env.DB.prepare(
-    `SELECT a.*, (SELECT MAX(o.sent_at) FROM outreach o WHERE o.student_id = a.student_id AND o.kind = 'quiet') AS last_quiet_note,
-            (SELECT COUNT(*) FROM outreach o WHERE o.student_id = a.student_id AND o.kind = 'not_started') AS not_started_notes
+    // Only notes that actually went out count. A failed send (status 'failed') must not
+    // stop the next day's run from trying that student again.
+    `SELECT a.*, (SELECT MAX(o.sent_at) FROM outreach o WHERE o.student_id = a.student_id AND o.kind = 'quiet' AND o.status = 'sent') AS last_quiet_note,
+            (SELECT COUNT(*) FROM outreach o WHERE o.student_id = a.student_id AND o.kind = 'not_started' AND o.status = 'sent') AS not_started_notes
      FROM student_activity a
      WHERE a.email IS NOT NULL AND a.email <> '' AND a.contact_opt_out_at IS NULL AND lower(a.email) <> ?
        AND a.last_progress_at <= ?`)
